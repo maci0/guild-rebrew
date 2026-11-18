@@ -15,7 +15,7 @@ typedef struct Ent {
 
 extern char* g_1015ea0;
 extern char g_1015f40[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern unsigned char g_773d75;
 extern float g_773d4c;
 extern unsigned short g_775340;
@@ -109,17 +109,17 @@ void __cdecl fcn_005d42e0(void)
 	n = (int) ((gfx.f[3] > g_662950 ? gfx.f[3] : g_662950) * g_662c38);
 	io_AppendText(0x1f22, n);
 	d2_SetForm(dlg, 3);
-	fcn_005d3d90((unsigned short) g_775340, gfx, g_772514);
+	fcn_005d3d90((unsigned short) g_775340, gfx, d2_CurrentWindowId);
 	d2_SetForm(dlg, 4);
 	cp = (char*) &colors[1];
 	row = 0;
 	for (i = 4; i < 0x9a; i += 0x1e) {
 		mask = (1 << row) & g_775340;
 		mask = mask != 0;
-		n = fcn_0046f740(5, i + 1, 2, g_772514);
+		n = fcn_0046f740(5, i + 1, 2, d2_CurrentWindowId);
 		items[row] = n;
 		io_FormatTextBuffer(buf, row + 0x1f25);
-		fcn_0046fac0(0x19, i, buf, g_772514);
+		fcn_0046fac0(0x19, i, buf, d2_CurrentWindowId);
 		((Ent*) g_1015ea0)[n].x5c = 1;
 		((Ent*) g_1015ea0)[n].x58 = 1;
 		fcn_00472380(n, mask);
@@ -127,8 +127,8 @@ void __cdecl fcn_005d42e0(void)
 		*(char*) &g = cp[0];
 		*(char*) &b = cp[1];
 		for (j = i + 5; j < i + 15; j++) {
-			fcn_00472c30(*(int*) (g_1015f40 + g_772514 * 0x3cc + 0xc) - 1, j,
-				*(int*) (g_1015f40 + g_772514 * 0x3cc + 0xc) - 0xb, j, r, g, b);
+			fcn_00472c30(*(int*) (g_1015f40 + d2_CurrentWindowId * 0x3cc + 0xc) - 1, j,
+				*(int*) (g_1015f40 + d2_CurrentWindowId * 0x3cc + 0xc) - 0xb, j, r, g, b);
 		}
 		row++;
 		cp += 3;
@@ -140,7 +140,7 @@ void __cdecl fcn_005d42e0(void)
 				g_775340 |= fcn_00471f80(items[i]) ? (1 << i) : 0;
 			}
 			d2_SetForm(dlg, 3);
-			fcn_005d3d90(g_775340, gfx, g_772514);
+			fcn_005d3d90(g_775340, gfx, d2_CurrentWindowId);
 		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

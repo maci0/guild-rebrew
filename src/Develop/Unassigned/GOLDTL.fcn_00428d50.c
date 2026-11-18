@@ -17,7 +17,7 @@ struct var_428d50 {
 };
 // SIZE 0x30
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern char g_14cb440[];
 
 void __cdecl fcn_00426680(int lex, struct tok_428d50* t);
@@ -32,13 +32,13 @@ int __cdecl fcn_00428d50(struct var_428d50* v)
 	int idx;
 
 	idx = 0;
-	fcn_00426680(*(int*) (g_6b7e98 + 0x118), &t);
+	fcn_00426680(*(int*) (evt_CurrentScript + 0x118), &t);
 	if (t.type != 1) {
 		goto done;
 	}
 	if (t.u.num == 0x1b) {
 		idx = fcn_00428800(idx);
-		fcn_00426680(*(int*) (g_6b7e98 + 0x118), &t);
+		fcn_00426680(*(int*) (evt_CurrentScript + 0x118), &t);
 	}
 	switch (t.u.num) {
 	case 2:

@@ -1,9 +1,9 @@
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern volatile int g_6b7fb8;
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 extern int g_7e4538;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -86,7 +86,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 				char names[3][64] = {"dummy_FAHNE", "dummy_RAUCH_0", "dummy_BRAND"};
 				float pos[3] = {-243.0f, -90.0f, 190.0f};
 				char text[0x400];
-				int v10 = g_6b8010;
+				int v10 = d3_CurrentContextIndex;
 
 				if (*(int *)(e + 0x61) != 0) {
 					fcn_004432d0(0, 1);
@@ -136,11 +136,11 @@ void __cdecl fcn_0056cfc0(char *a0)
 					*(int *)(a0 + 0x84) = fcn_004c5620(-1, (char *)a0);
 					return;
 				}
-				*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+				*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 
 
 
-				*(pos14_7f4c00*) (a0 + 0x60) = *(pos14_7f4c00*) &g_7f4c00;
+				*(pos14_7f4c00*) (a0 + 0x60) = *(pos14_7f4c00*) &gm_GameTime;
 
 
 
@@ -153,7 +153,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 			*(int *)(a0 + 0x70) = *(int *)(a0 + 0x70) + 1;
 		}
 		if (e == 0) {
-			*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+			*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 
 
 
@@ -220,11 +220,11 @@ void __cdecl fcn_0056cfc0(char *a0)
 						*(int *)(a0 + 0xfc) = g_6b7fb8;
 					}
 				}
-				*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+				*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 
 
 
-				*(pos14_7f4c00*) (a0 + 0x60) = *(pos14_7f4c00*) &g_7f4c00;
+				*(pos14_7f4c00*) (a0 + 0x60) = *(pos14_7f4c00*) &gm_GameTime;
 
 
 

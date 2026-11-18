@@ -42,7 +42,7 @@ typedef struct {
 	char pad8[0x214];
 } House;
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern char s_6acd1c[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -88,13 +88,13 @@ int __cdecl fcn_005d71f0(unsigned char* e)
 		m.f8 = *(int*) (e + 4);
 		m.fc = *(int*) (e + 4);
 		m.b36 = 2;
-		m.pos = g_7f4c00;
+		m.pos = gm_GameTime;
 		fcn_004c6ae0(*(int*) (e + 4), -4);
 		for (p = fcn_005463a0(1, 0, 0x18); p != 0; p = he_fn_Handlung()) {
 			if (p->fc4 == *(int*) (e + 4)) {
 				result |= 0x10;
-				p->pos52 = g_7f4c00;
-				p->posc8 = g_7f4c00;
+				p->pos52 = gm_GameTime;
+				p->posc8 = gm_GameTime;
 				fcn_004c5620(p->f70, p);
 				m.f70 = ((House*)g_7f4ca0)[p->w8].f4;
 				fcn_004c5530(&m);
@@ -112,7 +112,7 @@ int __cdecl fcn_005d71f0(unsigned char* e)
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == ok) {
+			if (d2_CurrentElementId == ok) {
 				if (fcn_00525f60(e, 4)) {
 					found = 0;
 					io_FormatTextBuffer(text, 0x1db8);
@@ -122,11 +122,11 @@ int __cdecl fcn_005d71f0(unsigned char* e)
 					m.f8 = *(int*) (e + 4);
 					m.fc = *(int*) (e + 4);
 					m.b36 = 2;
-					m.pos = g_7f4c00;
+					m.pos = gm_GameTime;
 					fcn_004c6ae0(*(int*) (e + 4), -4);
 					for (p = fcn_005463a0(1, 0, 0x18); p != 0; p = he_fn_Handlung()) {
 						if (p->fc4 == *(int*) (e + 4)) {
-							p->pos52 = g_7f4c00;
+							p->pos52 = gm_GameTime;
 							found |= 1;
 							fcn_004c5620(0, p);
 							m.f70 = ((House*)g_7f4ca0)[p->w8].f4;
@@ -141,7 +141,7 @@ int __cdecl fcn_005d71f0(unsigned char* e)
 					fcn_00526120(text, 0);
 					g_774654 = 1;
 				}
-			} else if (g_67d370 == cancel) {
+			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;
 			}
 		}

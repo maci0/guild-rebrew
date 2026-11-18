@@ -40,7 +40,7 @@ void __cdecl UsingGate(char* ev)
 	if (*(int*) (ev + 0xc) != 0) {
 		return;
 	}
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	room = fcn_00413190(*(int*) (obj + 0x88));
 	if (room == *(int*) (ev + 0x170)) {
 		ch_RemoveQueueEntry(ev);

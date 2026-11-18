@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6628a8;
 extern float g_1042a10;
@@ -30,15 +30,15 @@ int __cdecl fcn_004382e0(char* a0)
 	if (n == 1) {
 		entry = ext + 0xf4;
 	}
-	else if ((*(unsigned char*) (a0 + 0x217) & 0xc) != 0 || g_6b8014 == 0) {
+	else if ((*(unsigned char*) (a0 + 0x217) & 0xc) != 0 || d3_ActiveCamera == 0) {
 		max_idx = (((*(unsigned char*) (a0 + 0x217)) >> 2) & 3) - 1;
 		idx = __max(0, __min(n - 1, max_idx));
 		entry = ext + 0xf4 + idx * 0x4a4;
 	}
 	else {
-		dx = *(float*) (a0 + 0x4c) - *(float*) (g_6b8014 + 0x4c);
-		dy = *(float*) (a0 + 0x50) - *(float*) (g_6b8014 + 0x50);
-		dz = *(float*) (a0 + 0x54) - *(float*) (g_6b8014 + 0x54);
+		dx = *(float*) (a0 + 0x4c) - *(float*) (d3_ActiveCamera + 0x4c);
+		dy = *(float*) (a0 + 0x50) - *(float*) (d3_ActiveCamera + 0x50);
+		dz = *(float*) (a0 + 0x54) - *(float*) (d3_ActiveCamera + 0x54);
 		dist = sqrt(dz * dz + dy * dy + dx * dx);
 		dist = dist * n * g_1042a10;
 		idx = (int) dist;

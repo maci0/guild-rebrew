@@ -15,7 +15,7 @@ void __cdecl fcn_004f4830(int a, Stat* st);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 unsigned short __cdecl gm_RandomMod(int n);
 
@@ -27,7 +27,7 @@ int __cdecl fcn_00491270(Ent* e, int a2, int* out)
 	int d;
 
 	r = gm_MapEntityStatRange(e->job);
-	if ((*(int*)&g_7f4c00) < 4) {
+	if ((*(int*)&gm_GameTime) < 4) {
 		return 0;
 	}
 	fcn_004f4830(0xe, &st);

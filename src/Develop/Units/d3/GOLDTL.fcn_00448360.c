@@ -13,8 +13,8 @@ extern char* g_67a370;
 extern char g_1041d80[];
 extern char* g_6b8484;
 extern char* g_6b8300;
-extern char* g_1043254;
-extern char g_1042340[];
+extern char* d3_ObjectListHead;
+extern char d3_SceneObjectSentinel[];
 extern char* g_6b89e4;
 extern int g_6b89b0;
 
@@ -178,8 +178,8 @@ char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS pro
 		if (present != 0) {
 			g_6b8300 = fcn_00447e30(s, version);
 		}
-		obj = g_1043254;
-		while (obj != g_1042340) {
+		obj = d3_ObjectListHead;
+		while (obj != d3_SceneObjectSentinel) {
 			if (*(int*) (obj + 0x218) == 3 && _strcmpi(name, obj) == 0) {
 				g_6b8484 = obj;
 				if ((obj[0x214] & 0x40) != 0) {
@@ -201,8 +201,8 @@ char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS pro
 		CloseVfsStream(s);
 	}
 	if (version < 0x3a6c00b1 && g_6b8300 != 0) {
-		obj = g_1043254;
-		while (obj != g_1042340) {
+		obj = d3_ObjectListHead;
+		while (obj != d3_SceneObjectSentinel) {
 			if (*(int*) (obj + 0x218) == 7) {
 				clone = fcn_0043a140(obj);
 				clone[0x215] |= 4;

@@ -28,7 +28,7 @@ void __cdecl fcn_00414830(float* lo, float* hi, char* entity)
 		return;
 	}
 	if ((*(unsigned char*) (entity + 0x216) & 0x20) == 0) {
-		fcn_00438100(entity, g_6b8014, 0);
+		fcn_00438100(entity, d3_ActiveCamera, 0);
 	}
 	vt = (Vtbl414830*) (*(char**) (*(char**) (entity + 0x1cc) + 0x318));
 	p = vt->get(entity, *(char**) (entity + 0x1cc), *(char**) (entity + 0x1ec) + 8);

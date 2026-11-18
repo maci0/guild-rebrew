@@ -117,7 +117,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 	cur = *(int *) (*(int *) &g_67a370 + 0xb0);
 	fcn_004e4ec0();
 	if (*(int *) &g_6b8300 != 0) {
-		*(int *) (*(int *) &g_6b8010 * 0x3dc + 0x1043378) = *(int *) 0x1043378;
+		*(int *) (*(int *) &d3_CurrentContextIndex * 0x3dc + 0x1043378) = *(int *) 0x1043378;
 		g_6b89c0 = *(int *) 0x1043378;
 		fcn_00536bb0();
 		fcn_00459710(g_6b89c0, 1);
@@ -250,10 +250,10 @@ void __cdecl fcn_004d1ff0(void *arg)
 	}
 	fcn_00437ac0(*(int *) &g_67a370, 0, 0xc0, 0x4d1fd0);
 	base = *(int *) &g_67a370;
-	pp = (int **) &g_7e4260;
+	pp = (int **) &ch_ContextCharacters;
 	for (i = 0x20; i != 0; i--)
 		*pp++ = 0;
-	pp = (int **) &g_7e4260;
+	pp = (int **) &ch_ContextCharacters;
 	for (sp = (short *) 0x9b4a40; sp < (short *) 0x9b8dc0; sp += 0x10e) {
 		if (*sp != -1 && *(int *) (sp + 0xc2) != 0
 			&& *(int *) (*(int *) (sp + 0xc2) + 0x88) == base)

@@ -47,7 +47,7 @@ int __cdecl fcn_0052b230(void)
 		*(int*) 0x77473c = (int) *(short*) &g_14cf902;
 	}
 	i = g_14ce8e8;
-	p = g_6b8014;
+	p = d3_ActiveCamera;
 	if (g_14ce8d0 != 0 && p != 0) {
 		if (i != 0) {
 			if (g_14cf70f != 0) {
@@ -64,9 +64,9 @@ int __cdecl fcn_0052b230(void)
 				*(float*) 0x7e26f4 = (float) fmod(*(float*) 0x7e26f4, g_662958);
 			}
 			fcn_00438cb0(p, (float*) 0x7e26f0);
-			p = g_6b8014;
+			p = d3_ActiveCamera;
 			if (g_774650 == g_774658 && (*(int*) &g_7746c4 == 0 || *(int*) &g_7746c8 != 0)) {
-				*(int*) &g_7e3a50 = *(int*) (p + 0x84);
+				*(int*) &d3_CameraTargetRotation = *(int*) (p + 0x84);
 				*(int*) &g_7e3a54 = *(int*) (p + 0x88);
 				*(int*) &g_7e3a58 = *(int*) (p + 0x8c);
 				*(int*) &g_7e3a40 = *(int*) (p + 0x4c);
@@ -128,10 +128,10 @@ int __cdecl fcn_0052b230(void)
 	}
 	r = CompareVector3WithinTolerance((float*) 0x773e04, v, 0.1f);
 	if (r == 0) {
-		fcn_00438b40(g_6b8014, v);
+		fcn_00438b40(d3_ActiveCamera, v);
 		if (g_774650 == g_774658 && (*(int*) &g_7746c4 == 0 || *(int*) &g_7746c8 != 0)) {
-			p = g_6b8014;
-			*(int*) &g_7e3a50 = *(int*) (p + 0x84);
+			p = d3_ActiveCamera;
+			*(int*) &d3_CameraTargetRotation = *(int*) (p + 0x84);
 			*(int*) &g_7e3a54 = *(int*) (p + 0x88);
 			*(int*) &g_7e3a58 = *(int*) (p + 0x8c);
 			*(int*) &g_7e3a40 = *(int*) (p + 0x4c);

@@ -19,7 +19,7 @@ extern char s_6ad3a8[];
 extern char* g_7746c4;
 extern int g_14ce8e0;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -80,7 +80,7 @@ void __cdecl fcn_005e4e50(Ent* other)
 		if (g_14ce8e0 || g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-		if (g_100f1dc != -1 && g_67d370 == yes) {
+		if (g_100f1dc != -1 && d2_CurrentElementId == yes) {
 			if (found) {
 				for (i = 0; i < count; i++) {
 					fcn_004c58b0(list[i], ((Ent*)g_7f4ca0)[g_774970].handle);

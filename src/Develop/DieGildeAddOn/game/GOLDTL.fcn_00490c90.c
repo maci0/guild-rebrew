@@ -1,4 +1,4 @@
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern char g_773d75;
 
 int __cdecl gm_MapEntityStatRange(int);
@@ -24,7 +24,7 @@ int __cdecl fcn_00490c90(char* a0, int a1, int* a2)
 	int d;
 
 	mode = gm_MapEntityStatRange(*(unsigned char*) (a0 + 0x164));
-	if (g_7f4c00 >= 4) {
+	if (gm_GameTime >= 4) {
 		fcn_004f4830(9, v5);
 		f = fcn_004fbd40();
 		d = v5[2] - v5[1];

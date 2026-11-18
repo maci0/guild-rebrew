@@ -39,7 +39,7 @@ void __cdecl fcn_00469fd0(char* e)
 		} else {
 			y -= 0x10;
 		}
-		fcn_00472880(*(int*) (e + 0x1cc) != 0 ? *(int*) (e + 0x1cc) : g_67d398 + 1);
+		fcn_00472880(*(int*) (e + 0x1cc) != 0 ? *(int*) (e + 0x1cc) : d2_DefaultFont + 1);
 		if (*(int*) (e + 0x1d0) & 0x20) {
 			fcn_0047c560(0, 0, 0);
 			fcn_0047c9c0(*(int*) (e + 0x10), *(int*) (e + 0x14), *(int*) (e + 0x1d4), *(int*) (e + 0x1d8), *(int*) (g_77253c + 0x50), 0.5f);

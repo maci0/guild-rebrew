@@ -59,9 +59,9 @@ typedef struct Font {
 extern Win_1015f40 g_1015f40[0x60];
 extern Slot* g_1015ea0;
 extern char* g_772500;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_14a5adc[15];
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_14ce8d8;
@@ -97,12 +97,12 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 	dlg = fcn_00470820(0, 0, "privillegien\\CHOOSEPROFESSION2");
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	colw = (((Win*) g_1015f40)[g_772514].w - 0x40) / 5;
-	rowh = (((Win*) g_1015f40)[g_772514].h - 0x84) / 3;
+	colw = (((Win*) g_1015f40)[d2_CurrentWindowId].w - 0x40) / 5;
+	rowh = (((Win*) g_1015f40)[d2_CurrentWindowId].h - 0x84) / 3;
 	x0 = (colw - ((Font*) g_772500)->w) / 2;
 	io_AppendText(0x1a9a, (p->female != 0) + 0x1aa0, p->id, n);
 	for (i = 1; i <= 15; i++) {
-		id = fcn_0046f740((i - 1) % 5 * colw + x0 + 0x20, (i - 1) / 5 * rowh + x0 + 0x64, i - 1 + 0x5a2, g_772514);
+		id = fcn_0046f740((i - 1) % 5 * colw + x0 + 0x20, (i - 1) / 5 * rowh + x0 + 0x64, i - 1 + 0x5a2, d2_CurrentWindowId);
 		g_1015ea0[id].shown = 1;
 		g_1015ea0[id].style = 3;
 		s = g_14a5adc[i - 1];
@@ -114,7 +114,7 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 		g_1015ea0[id].color = 0x56;
 	}
 	result = 0;
-	while (fcn_005373e0(fcn_005db8e0, g_7e46ac) != 0) {
+	while (fcn_005373e0(fcn_005db8e0, main_LoopFlags) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_14ce8d8 != 0) {

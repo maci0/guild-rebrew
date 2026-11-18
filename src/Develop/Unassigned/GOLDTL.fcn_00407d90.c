@@ -12,7 +12,7 @@ int __cdecl fcn_00407d90(char* self, char** out)
 	char* n;
 
 	count = 0;
-	p = ((char**)g_14d0020);
+	p = ((char**)ch_CharacterSlots);
 	do {
 		if (count >= 16) {
 			break;
@@ -31,6 +31,6 @@ int __cdecl fcn_00407d90(char* self, char** out)
 			}
 		}
 		p++;
-	} while ((int) p < (int) (((char**)g_14d0020) + 0x300));
+	} while ((int) p < (int) (((char**)ch_CharacterSlots) + 0x300));
 	return count;
 }

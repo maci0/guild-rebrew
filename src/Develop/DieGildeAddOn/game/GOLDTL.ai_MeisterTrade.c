@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 #include <string.h>
-extern int g_7f4c00, g_7f4c04, g_7f4c08, g_772620; extern unsigned short g_7f4c0c;
+extern int gm_GameTime, g_7f4c04, g_7f4c08, g_772620; extern unsigned short g_7f4c0c;
 /* Request message, 0xf8 bytes. */
 typedef struct {
 	int f00;			/* +0x00 */
@@ -98,7 +98,7 @@ typedef struct {
 	char* xb4;
 } Stock;
 
-extern unsigned char g_773d75; extern int g_100b0a8, g_100b0ac;
+extern unsigned char g_773d75; extern int ai_ResourceCount, g_100b0ac;
 extern unsigned char* lpGebaeudePROT;
 typedef struct BuildingRow489a70 { unsigned char kind; char fields[0x24c]; } BuildingRow489a70;
 extern char* g_773d78;
@@ -167,7 +167,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 	}
 
 	/* 0x002d-0x00b0: producer records holding more than a third of demand */
-	for (i = 0; i < g_100b0a8; i++) {
+	for (i = 0; i < ai_ResourceCount; i++) {
 		pr = (Prod*) 0x100b0c0 + i;
 		if ((pr->flags & 6) != 0) {
 			continue;
@@ -312,7 +312,7 @@ dump_stock:
 	fcn_0050cce0(*(char**) (o + 0x16c), &v.s3, 0);
 
 	/* 0x03a7-0x0420: drop producer requests already being handled */
-	for (i = 0; i < g_100b0a8; i++) {
+	for (i = 0; i < ai_ResourceCount; i++) {
 		pr = (Prod*) 0x100b0c0 + i;
 		if ((pr->flags & 6) == 0) {
 			continue;
@@ -377,7 +377,7 @@ next_request:
 		v.m.type = 0x10;
 		v.m.state = *(int*) (0x7f4ca4 + slot * 0x21c);
 		v.m.f0c = *(int*) (tp + 1);
-		v.m.p28 = g_7f4c00;
+		v.m.p28 = gm_GameTime;
 		v.m.p2c = g_7f4c04;
 		v.m.p30 = g_7f4c08;
 		v.m.p34 = g_7f4c0c;
@@ -584,7 +584,7 @@ next_auto:
 		}
 		found = 0;
 		pr = (Prod*) 0x100b0c0;
-		for (j = 0; j < g_100b0a8; j++, pr++) {
+		for (j = 0; j < ai_ResourceCount; j++, pr++) {
 			if (pr->id == id) {
 				found = 1;
 				break;
@@ -641,7 +641,7 @@ next_auto:
 			}
 			found = 0;
 			pr = (Prod*) 0x100b0c0;
-			for (j = 0; j < g_100b0a8 && found == 0; j++, pr++) {
+			for (j = 0; j < ai_ResourceCount && found == 0; j++, pr++) {
 				if (pr->id == (unsigned short) id) {
 					found = 1;
 				}
@@ -719,7 +719,7 @@ next_auto:
 		}
 	}
 	if (cnt < 3) {
-		for (i = 0; i < g_100b0a8 && cnt < 3; i++) {
+		for (i = 0; i < ai_ResourceCount && cnt < 3; i++) {
 			pr = (Prod*) 0x100b0c0 + i;
 			if (pr->qty18 == 0) {
 				continue;
@@ -776,7 +776,7 @@ next_auto:
 	cnt = 0;
 	sent = 0;
 	n = 0;
-	for (i = 0, pr = (Prod*) 0x100b0c0; i < g_100b0a8 && n < 3;
+	for (i = 0, pr = (Prod*) 0x100b0c0; i < ai_ResourceCount && n < 3;
 	    i++, pr++) {
 		int* w = (int*) ((char*) pr + 0x14);
 
@@ -835,7 +835,7 @@ next_auto:
 			v.m.state = *(int*) (0x7f4ca0 +
 			    *(unsigned short*) (tpx + 0x27) * 0x21c + 4);
 			v.m.f0c = *(int*) (tpx + 1);
-			v.m.p28 = g_7f4c00;
+			v.m.p28 = gm_GameTime;
 			v.m.p2c = g_7f4c04;
 			v.m.p30 = g_7f4c08;
 			v.m.p34 = g_7f4c0c;

@@ -36,9 +36,9 @@ int __cdecl fcn_005a1130(char* a0, int window)
 	int y;
 
 	d2_SetForm(window, 2);
-	fcn_0046f2c0(*(int*) &g_772514, 1);
+	fcn_0046f2c0(*(int*) &d2_CurrentWindowId, 1);
 	d2_SetForm(window, 3);
-	fcn_0046f2c0(*(int*) &g_772514, 1);
+	fcn_0046f2c0(*(int*) &d2_CurrentWindowId, 1);
 	self = a0;
 
 	if (*(unsigned char*) (*(char**) (self + 0xc) + 2) == 6) {
@@ -48,7 +48,7 @@ int __cdecl fcn_005a1130(char* a0, int window)
 		x = 0x1c;
 		y = 0x1d;
 		while (i < *(unsigned char*) (self + 0x10)) {
-			fcn_0046f740(x, y, *(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &g_772514);
+			fcn_0046f740(x, y, *(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &d2_CurrentWindowId);
 			i++;
 			if (i % 8 == 0) x = 0; else x += 0x3a;
 			y = 0x1d + (i > 7 ? 0x29 : 0);
@@ -61,9 +61,9 @@ int __cdecl fcn_005a1130(char* a0, int window)
 		y = 0x1d;
 		while (i < *(unsigned char*) (self + 0x10)) {
 			if (*(int*) (self + 0x28) == 4) {
-				fcn_0046f740(x, y, 0x761, *(int*) &g_772514);
+				fcn_0046f740(x, y, 0x761, *(int*) &d2_CurrentWindowId);
 			} else {
-				fcn_0046f740(x, y, *(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &g_772514);
+				fcn_0046f740(x, y, *(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &d2_CurrentWindowId);
 			}
 			i++;
 			if (i % 8 == 0) x = 0; else x += 0x3a;
@@ -78,7 +78,7 @@ int __cdecl fcn_005a1130(char* a0, int window)
 		x = 0x1c;
 		y = 0x1d;
 		while (i < *(unsigned char*) (self + 0x34)) {
-			fcn_0046f740(x, y, *(unsigned char*) (self + 0x3c + i) + 0x75a, *(int*) &g_772514);
+			fcn_0046f740(x, y, *(unsigned char*) (self + 0x3c + i) + 0x75a, *(int*) &d2_CurrentWindowId);
 			i++;
 			if (i % 8 == 0) x = 0; else x += 0x3a;
 			y = 0x1d + (i > 7 ? 0x29 : 0);
@@ -91,9 +91,9 @@ int __cdecl fcn_005a1130(char* a0, int window)
 		y = 0x1d;
 		while (i < *(unsigned char*) (self + 0x34)) {
 			if (*(int*) (self + 0x28) == 4) {
-				fcn_0046f740(x, y, 0x761, *(int*) &g_772514);
+				fcn_0046f740(x, y, 0x761, *(int*) &d2_CurrentWindowId);
 			} else {
-				fcn_0046f740(x, y, *(unsigned char*) (self + 0x3c + i) + 0x75a, *(int*) &g_772514);
+				fcn_0046f740(x, y, *(unsigned char*) (self + 0x3c + i) + 0x75a, *(int*) &d2_CurrentWindowId);
 			}
 			i++;
 			if (i % 8 == 0) x = 0; else x += 0x3a;
@@ -102,7 +102,7 @@ int __cdecl fcn_005a1130(char* a0, int window)
 	}
 
 	d2_SetForm(window, 4);
-	fcn_0046f2c0(*(int*) &g_772514, 1);
+	fcn_0046f2c0(*(int*) &d2_CurrentWindowId, 1);
 	if ((*(int*) (self + 8) == 5 && *(unsigned char*) (*(char**) (self + 0xc) + 2) == 6)
 		|| (*(int*) (self + 8) == 6 && *(unsigned char*) (*(char**) (self + 0x30) + 2) == 6)) {
 		return io_AppendText(0x1887, *(int*) (self + 0x54));

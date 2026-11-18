@@ -8,7 +8,7 @@ typedef struct
 } fcn_00472fe0_Ctx;
 // SIZE 0x3c
 
-extern int g_772568;
+extern int d2_ResourceOffset;
 
 void* __cdecl d2_GetResourceData(int bild);
 void __cdecl fcn_0047a040(int a, int b, int c, int d);
@@ -21,5 +21,5 @@ void __cdecl fcn_00472fe0(int x, int y, int bild, fcn_00472fe0_Ctx* ctx)
 
 	font = (char*) d2_GetResourceData(bild);
 	fcn_0047a040(ctx->f02c, ctx->f030, ctx->f034, ctx->f038);
-	fcn_0047cba0(x, y, (int) ctx, font, g_772568);
+	fcn_0047cba0(x, y, (int) ctx, font, d2_ResourceOffset);
 }

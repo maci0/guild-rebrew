@@ -22,7 +22,7 @@ extern char* g_1015ea0;
 extern char* lpObjektePROT;
 extern int g_665f58[4];
 extern int g_665f84[4];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char g_6811b0[];
 
 void __cdecl d2_SetForm(int, int);
@@ -39,7 +39,7 @@ void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel)
 	d2_SetForm(dlg, mode);
 	io_AppendText((int) g_6811b0);
 	for (i = 0; i < 4; i++) {
-		ids[i] = fcn_0046f740(6 + i * 0x6c, 0, g_665f58[i], g_772514);
+		ids[i] = fcn_0046f740(6 + i * 0x6c, 0, g_665f58[i], d2_CurrentWindowId);
 		((struct gadget*)g_1015ea0)[ids[i]].visible = 1;
 		((struct gadget*)g_1015ea0)[ids[i]].mode = 3;
 		((struct gadget*)g_1015ea0)[ids[i]].image = (char*) &((struct icon*)lpObjektePROT)[g_665f84[i]];

@@ -32,7 +32,7 @@ char* __cdecl fcn_0044c310(int a, int b)
 			(*(int*) (t + 0x1e0))++;
 		}
 	}
-	if ((g_67ac90 & 0x7f) == 1) {
+	if ((d3_LODMode & 0x7f) == 1) {
 		for (i = 1; i < 3; i++) {
 			if (fcn_00449db0(a, b, i, key, val)) {
 				t = fcn_0044c0e0(key, val);

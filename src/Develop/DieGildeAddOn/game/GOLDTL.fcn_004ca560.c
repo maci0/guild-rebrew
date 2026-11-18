@@ -75,7 +75,7 @@ int __cdecl fcn_004ca560(char* x, char* out)
 		} else if (*(int*) (s + 0x61) != 0) {
 			r = fcn_0040c120(o, 0x33, 0, -1, -1);
 			if (r != 0) {
-				saved = g_6b8010;
+				saved = d3_CurrentContextIndex;
 				fcn_004432d0(0, 1);
 				m = fcn_00445600(*(int*) (s + 0x61), 0x100, 0, x + 0x1c);
 				if (m != 0) {

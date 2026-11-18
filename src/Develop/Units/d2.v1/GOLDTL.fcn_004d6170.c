@@ -14,7 +14,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_aed32c;
 extern char* g_14a79c0[];
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } Building4d6170;
@@ -372,13 +372,13 @@ reduce:
 				cur = gm_LookupEntityRecordIn32SlotTable(*id);
 				col = (i % 4) * 80 + 0x30;
 				line = (i / 4 + 1) * 100;
-				fcn_0046f740(col, line, 0x5db, g_772514);
-				fcn_0046f740(col + 2, line, *(int*) (cur + 0x18c), g_772514);
+				fcn_0046f740(col, line, 0x5db, d2_CurrentWindowId);
+				fcn_0046f740(col + 2, line, *(int*) (cur + 0x18c), d2_CurrentWindowId);
 				fcn_00534160(col, line + 0x3c, *(unsigned char*) (cur + 0x83), 0x4eb);
 				bonus = 0;
 				if (cur[8] == 0) {
 					bonus = (int) (*(unsigned char*) (cur + 0x83) * (1.0f / 42.0f) + 1.0f);
-					fcn_0046f740(col + 6, line + 6, 0x3b, g_772514);
+					fcn_0046f740(col + 6, line + 6, 0x3b, d2_CurrentWindowId);
 					bonus = fcn_0050b750(bonus * 40, g_773d75);
 				}
 				if (side == g_772e9c && cur[8] != 0) {
@@ -389,7 +389,7 @@ reduce:
 				}
 				io_FormatTextBuffer(small, (int) "%T", bonus);
 				if (bonus != 0) {
-					d2_ShowTxt(col, line + 0x50, small, g_772514);
+					d2_ShowTxt(col, line + 0x50, small, d2_CurrentWindowId);
 				}
 				sum += bonus;
 			}

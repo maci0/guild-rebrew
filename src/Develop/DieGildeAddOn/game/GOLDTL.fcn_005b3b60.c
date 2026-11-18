@@ -9,17 +9,17 @@ typedef struct Time5b3b60 {
 } Time5b3b60;
 #pragma pack(pop)
 
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/entity.h"
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern int g_14ce8e0;
 extern int g_774654;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_774954;
 extern char g_7f4ca0[];
 
@@ -69,7 +69,7 @@ void __cdecl fcn_005b3b60(void)
 		}
 		if (g_100f1dc != -1) {
 			memset(m, 0, sizeof(m));
-			k = g_67d370;
+			k = d2_CurrentElementId;
 			if (k == item[9]) {
 				*(char*) (m + 8) = 5;
 				*(char*) (m + 0x26) = 0x20;
@@ -109,7 +109,7 @@ void __cdecl fcn_005b3b60(void)
 					p += 0x21c;
 					i++;
 				}
-				*(Time5b3b60*) &m[0x18] = *(Time5b3b60*) &g_7f4c00;
+				*(Time5b3b60*) &m[0x18] = *(Time5b3b60*) &gm_GameTime;
 				fcn_00500bb0(m + 0x18, 0, 0x1e, 0);
 				fcn_004c5980(m);
 			} else if (k == item[2]) {
@@ -146,7 +146,7 @@ void __cdecl fcn_005b3b60(void)
 				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(int*) (m + 0x38) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
-				*(Time5b3b60*) &m[0x18] = *(Time5b3b60*) &g_7f4c00;
+				*(Time5b3b60*) &m[0x18] = *(Time5b3b60*) &gm_GameTime;
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
 				fcn_004e5a00(m);
@@ -173,16 +173,16 @@ void __cdecl fcn_005b3b60(void)
 					*(int*) (m + 0x80) = 0x3e80;
 					*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 					*(int*) (m + 0x7c) = *(int*) (r + 1);
-					*(Time5b3b60*) &m[0x18] = *(Time5b3b60*) &g_7f4c00;
+					*(Time5b3b60*) &m[0x18] = *(Time5b3b60*) &gm_GameTime;
 					fcn_00500bb0(m + 0x18, 0, 0x1e, 0);
 					fcn_004c5980(m);
 				}
 				g_774954 = 0;
 			} else if (k == item[0]) {
 				*(char*) (msg + 4) = 0x59;
-				*(int*) (msg + 8) = *(int*) (g_773da8 + 4);
+				*(int*) (msg + 8) = *(int*) (gm_CityEntity + 4);
 				*(int*) (msg + 0xc) = -1;
-				*(int*) (msg + 0x28) = g_7f4c00;
+				*(int*) (msg + 0x28) = gm_GameTime;
 				*(int*) (msg + 0x2c) = g_7f4c04;
 				*(int*) (msg + 0x30) = g_7f4c08;
 				*(unsigned short*) (msg + 0x34) = g_7f4c0c;
@@ -192,7 +192,7 @@ void __cdecl fcn_005b3b60(void)
 				*(int*) (msg + 0x58) = i * 3;
 				*(int*) (msg + 0x2c) = g_7f4c04;
 				*(int*) (msg + 0x2e) = 0;
-				*(int*) (msg + 0x28) = g_7f4c00;
+				*(int*) (msg + 0x28) = gm_GameTime;
 				*(unsigned short*) (msg + 0x34) = g_7f4c0c;
 				if ((unsigned short) g_7f4c04 >= 0x17) {
 					fcn_00500bb0(msg + 0x28, (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
@@ -202,9 +202,9 @@ void __cdecl fcn_005b3b60(void)
 				fcn_004c5530(msg);
 			} else if (k == item[1]) {
 				*(char*) (msg + 4) = 0x4e;
-				*(int*) (msg + 8) = *(int*) (g_773da8 + 4);
+				*(int*) (msg + 8) = *(int*) (gm_CityEntity + 4);
 				*(int*) (msg + 0xc) = -1;
-				*(int*) (msg + 0x28) = g_7f4c00;
+				*(int*) (msg + 0x28) = gm_GameTime;
 				*(int*) (msg + 0x2c) = g_7f4c04;
 				*(int*) (msg + 0x30) = g_7f4c08;
 				*(unsigned short*) (msg + 0x34) = g_7f4c0c;
@@ -220,14 +220,14 @@ void __cdecl fcn_005b3b60(void)
 				fcn_004c5530(msg);
 			} else if (k == item[3]) {
 				*(char*) (msg + 4) = 0x50;
-				*(int*) (msg + 8) = *(int*) (g_773da8 + 4);
+				*(int*) (msg + 8) = *(int*) (gm_CityEntity + 4);
 				*(int*) (msg + 0xc) = -1;
 				*(int*) (msg + 0x2c) = g_7f4c04;
 				*(int*) (msg + 0x30) = g_7f4c08;
 				*(char*) (msg + 0x36) = 2;
 				*(int*) (msg + 0x58) = -1;
 				*(int*) (msg + 0x9c) = 0x3e8;
-				*(int*) (msg + 0x28) = g_7f4c00;
+				*(int*) (msg + 0x28) = gm_GameTime;
 				*(unsigned short*) (msg + 0x34) = g_7f4c0c;
 				if ((unsigned short) g_7f4c04 >= 0x17) {
 					fcn_00500bb0(msg + 0x28, (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
@@ -257,7 +257,7 @@ void __cdecl fcn_005b3b60(void)
 					}
 					p += 0x21c;
 				}
-				*(Time5b3b60*) &m[0x18] = *(Time5b3b60*) &g_7f4c00;
+				*(Time5b3b60*) &m[0x18] = *(Time5b3b60*) &gm_GameTime;
 				*(char*) (m + 0x7c) = 0;
 				fcn_00500bb0(m + 0x18, 0, 0x1e, 0);
 				fcn_004c5980(m);

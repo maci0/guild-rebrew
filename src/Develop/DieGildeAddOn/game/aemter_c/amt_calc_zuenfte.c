@@ -4,11 +4,11 @@
 extern int g_6798d4;
 extern unsigned char* lpGebaeudePROT;
 extern int g_6b7fdc;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 
 int __cdecl fcn_0042f690(char* a, int b, int c, char* out);
 int __cdecl fcn_0050d200(int a, int b);
@@ -17,8 +17,8 @@ void __cdecl fcn_005986f0(char* a, int b);
 void __cdecl fcn_00598740(float* out, int obj);
 void __cdecl fcn_004c5530(int a1);
 
-extern int g_6b8010;
-extern char* g_773da8;
+extern int d3_CurrentContextIndex;
+extern char* gm_CityEntity;
 extern int g_6798d4;    
 extern char g_7e1ae0[]; 
 extern char g_67f0ac[]; 
@@ -142,7 +142,7 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 		if (total >= 3 && count != 0) {
 			t = gm_StartFilteredEntitySearch(1, 5, sel);
 			if (t == 0) {
-				found = (unsigned int) g_6b8010;
+				found = (unsigned int) d3_CurrentContextIndex;
 				fcn_004432d0(0, 1);
 				rowbase = (char*) (lpGebaeudePROT + row * 0x24d);
 				fcn_00597ff0(row, names);
@@ -172,14 +172,14 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 				strupr((char*) cand + 2);
 				sprintf(buf, g_67f0ac, g_7e1ae0, (char*) cand);
 				req[4] = 0xd;
-				*(int*) (req + 0x08) = *(int*) (g_773da8 + 4);
+				*(int*) (req + 0x08) = *(int*) (gm_CityEntity + 4);
 				*(int*) (req + 0x0c) = -1;
-				*(int*) (req + 0x28) = g_7f4c00;
+				*(int*) (req + 0x28) = gm_GameTime;
 				*(int*) (req + 0x2c) = g_7f4c04;
 				*(int*) (req + 0x30) = g_7f4c08;
 				*(unsigned short*) (req + 0x34) = g_7f4c0c;
 				req[0x36] = 2;
-				*(int*) (req + 0x58) = *(int*) (g_773da8 + 4);
+				*(int*) (req + 0x58) = *(int*) (gm_CityEntity + 4);
 				*(int*) (req + 0x5c) = row;
 				*(int*) (req + 0x60) = 0;
 				memcpy(req + 0x80, info.position, sizeof(info.position));

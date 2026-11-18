@@ -28,7 +28,7 @@ extern char s_6b5c60[];
 extern double g_662950;
 extern double g_6629c8;
 extern double g_6640e8;
-extern int g_7e1f80;
+extern int main_Instance;
 extern int ahm_PlayerPrototypeCount;
 extern unsigned char* g_772fdc;
 extern int g_772fe0;
@@ -50,7 +50,7 @@ unsigned int __cdecl fcn_004ed240(void)
 	int v;
 	double f;
 
-	GetModuleFileNameA((HMODULE) g_7e1f80, path, 0x104);
+	GetModuleFileNameA((HMODULE) main_Instance, path, 0x104);
 	p = strrchr(path, 0x5c);
 	p[1] = 0;
 	strcat(path, "alchemy_data.ini");

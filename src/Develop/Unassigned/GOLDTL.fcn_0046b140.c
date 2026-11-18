@@ -46,7 +46,7 @@ int __cdecl fcn_0046b140(int x, int y)
 			}
 			if (x >= s->x && x <= s->x + s->w && y >= s->y && y <= s->y + s->h && !hidden && y >= s->top && y <= s->bottom && !s->hidden4c && !s->hidden48) {
 				id = s->id;
-				g_67d370 = id;
+				d2_CurrentElementId = id;
 				if (((Slot*)g_1015ea0)[id].type == 0x40) {
 					g_67d388 = s->result;
 					return g_67d388;
@@ -58,6 +58,6 @@ int __cdecl fcn_0046b140(int x, int y)
 			}
 		}
 	}
-	g_67d370 = -1;
+	d2_CurrentElementId = -1;
 	return -1;
 }

@@ -127,7 +127,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		p = gm_NextEntityQueryMatch();
 	}
 
-	g_100b0a8 = 0;
+	ai_ResourceCount = 0;
 	for (k = 0; k < g_100b0ac; k++) {
 		for (j = 0; j != 4; j++) {
 			id = *(unsigned short*) (lpObjektePROT +
@@ -136,8 +136,8 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 			if (id == 0) {
 				continue;
 			}
-			if (g_100b0a8 >= 1) {
-				for (i = 0; i < g_100b0a8; i++) {
+			if (ai_ResourceCount >= 1) {
+				for (i = 0; i < ai_ResourceCount; i++) {
 					if (g_100b0c0[i].type == id) {
 						g_100d0c0[k].bld[j] = i;
 						break;
@@ -147,10 +147,10 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 			if (g_100d0c0[k].bld[j] != -1) {
 				continue;
 			}
-			if (g_100b0a8 >= 0x80) {
+			if (ai_ResourceCount >= 0x80) {
 				return;
 			}
-			segp = &g_100b0c0[g_100b0a8];
+			segp = &g_100b0c0[ai_ResourceCount];
 			segp->type = id;
 			segp->next = -1;
 			segp->owner = 0;
@@ -159,9 +159,9 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 			segp->f18 = 0;
 			segp->price = -1.0e10f;
 			segp->want = 0;
-			g_100d0c0[k].bld[j] = g_100b0a8;
+			g_100d0c0[k].bld[j] = ai_ResourceCount;
 			segp->stock = 0;
-			g_100b0a8++;
+			ai_ResourceCount++;
 			segp->f30 = 0x21;
 			segp->flags = 0;
 		}
@@ -169,8 +169,8 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 
 	kind = ((Lvl*) lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].kind;
 	if (kind == 0xe || kind == 8 || kind == 0x20) {
-		if (g_100b0a8 > 0) {
-			for (k = 0; k < g_100b0a8; k++) {
+		if (ai_ResourceCount > 0) {
+			for (k = 0; k < ai_ResourceCount; k++) {
 				type = g_100b0c0[k].type;
 				if (type == 0x1c7 || type == 0x1c4 ||
 				    type == 0x1c5 || type == 0x1c6 ||
@@ -229,8 +229,8 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 	}
 
 	kind = ((Lvl*) lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].kind;
-	if ((kind == 0x1d || kind == 0x1f) && g_100b0a8 > 0) {
-		for (k = 0; k < g_100b0a8; k++) {
+	if ((kind == 0x1d || kind == 0x1f) && ai_ResourceCount > 0) {
+		for (k = 0; k < ai_ResourceCount; k++) {
 			type = g_100b0c0[k].type;
 			if (type == 0x225 || type == 0x226 || type == 0x227 ||
 			    type == 0x293 || type == 0x294 || type == 0x295) {
@@ -261,7 +261,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		}
 	}
 
-	for (k = 0; k < g_100b0a8; k++) {
+	for (k = 0; k < ai_ResourceCount; k++) {
 		if (g_100b0ac > 0) {
 			for (i = 0; i < g_100b0ac; i++) {
 				if (g_100d0c0[i].f0 == g_100b0c0[k].type) {
@@ -285,7 +285,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		    gm_eval_SlotVoll(craft, g_100d0c0[i].f0, 0xf4240);
 	}
 
-	for (k = 0; k < g_100b0a8; k++) {
+	for (k = 0; k < ai_ResourceCount; k++) {
 		p = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, g_100b0c0[k].type);
 		if (p == 0) {
 			g_100b0c0[k].stock = 0;
@@ -327,7 +327,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 					g_100d0c0[j].f38 += st.x68[i];
 				}
 			}
-			for (j = 0; j < g_100b0a8; j++) {
+			for (j = 0; j < ai_ResourceCount; j++) {
 				if (id == g_100b0c0[j].type) {
 					g_100b0c0[j].want += st.x68[i];
 				}
@@ -343,7 +343,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 					g_100d0c0[i].f38 += ((int*) (e + 0xdc))[j];
 				}
 			}
-			for (i = 0; i < g_100b0a8; i++) {
+			for (i = 0; i < ai_ResourceCount; i++) {
 				if (id == g_100b0c0[i].type) {
 					g_100b0c0[i].want += ((int*) (e + 0xdc))[j];
 				}
@@ -357,7 +357,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		                     *(int*) (*(char**) (a + 0x16c) + 1));
 		     e != 0;
 		     e = he_fn_Handlung()) {
-			for (k = 0; k < g_100b0a8; k++) {
+			for (k = 0; k < ai_ResourceCount; k++) {
 				if (g_100b0c0[k].type !=
 				    (int) *(unsigned short*) (e + 0xae)) {
 					continue;
@@ -377,7 +377,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		                     *(int*) (*(char**) (a + 0x16c) + 1));
 		     e != 0;
 		     e = he_fn_Handlung()) {
-			for (k = 0; k < g_100b0a8; k++) {
+			for (k = 0; k < ai_ResourceCount; k++) {
 				if (g_100b0c0[k].type !=
 				    (int) *(unsigned short*) (e + 0xae)) {
 					continue;
@@ -397,7 +397,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		                     *(int*) (*(char**) (a + 0x16c) + 1));
 		     e != 0;
 		     e = he_fn_Handlung()) {
-			for (k = 0; k < g_100b0a8; k++) {
+			for (k = 0; k < ai_ResourceCount; k++) {
 				if (g_100b0c0[k].type !=
 				    (int) *(unsigned short*) (e + 0xac)) {
 					continue;
@@ -425,7 +425,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		}
 	}
 
-	for (k = 0; k < g_100b0a8; k++) {
+	for (k = 0; k < ai_ResourceCount; k++) {
 		if (g_100b0c0[k].next != -1) {
 			for (j = 0; j < g_100b0ac; j++) {
 				if (g_100b0c0[k].type == g_100d0c0[j].f0) {

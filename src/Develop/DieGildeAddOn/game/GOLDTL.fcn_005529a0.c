@@ -12,7 +12,7 @@ typedef struct {
 #pragma pack(pop)
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_00546190(char* p);
 void __cdecl fcn_00500bb0(Stamp* s, int a, int b, int c);
@@ -37,7 +37,7 @@ void __cdecl fcn_005529a0(char* p)
 		((int*) (p + 0xac))[i] = -1;
 	}
 	p[0xd2] = 0;
-	*(Stamp*) (p + 0xc4) = (*(Stamp*)&g_7f4c00);
-	*(Stamp*) (p + 0x52) = (*(Stamp*)&g_7f4c00);
+	*(Stamp*) (p + 0xc4) = (*(Stamp*)&gm_GameTime);
+	*(Stamp*) (p + 0x52) = (*(Stamp*)&gm_GameTime);
 	fcn_00500bb0((Stamp*) (p + 0x52), 0, 2, 0);
 }

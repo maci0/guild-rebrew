@@ -1,8 +1,8 @@
 extern unsigned char g_773d75;
 extern int g_100f1dc;
 extern char* g_77255c;
-extern int g_772514;
-extern int g_68bfb8;
+extern int d2_CurrentWindowId;
+extern int cut_EventLoopFlags;
 #include "client_dialog_state.h"
 
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -69,10 +69,10 @@ void __cdecl fcn_004e3de0(char* a, int* b)
 	io_AppendText(0x1aa7);
 	w = fcn_00472250(dlg, 0, t);
 	d2_SetElementValue(w, lo, hi, lo);
-	bar = fcn_004677e0((*(int*) (g_77255c + 0xc) - 0x12c) / 2 - 8, 8, 0x12c, 0, 100, 0x75, 0x42, g_772514);
+	bar = fcn_004677e0((*(int*) (g_77255c + 0xc) - 0x12c) / 2 - 8, 8, 0x12c, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(bar, 0x5dc, 1);
 	g_100f1dc = -1;
-	while (fcn_005373e0(fcn_004e3de0, g_68bfb8) != 0) {
+	while (fcn_005373e0(fcn_004e3de0, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(bar, 0, 0) == 0) {
 			g_774654 = 1;
 		} else {

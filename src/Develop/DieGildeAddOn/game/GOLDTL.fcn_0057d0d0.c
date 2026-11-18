@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int, int, int, char*);
@@ -77,7 +77,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 	}
 	if (found == 0) {
 		*(int*) (entity + 0x70) = -1;
-		*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 		return;
 	}
 	*(int*) (entity + 0xd0) = *(int*) (found + 1);
@@ -88,14 +88,14 @@ void __cdecl fcn_0057d0d0(char* entity)
 		fcn_004c5da0(*(int*) (o + 4), *(int*) (found + 1), mode, 0, flag, "Bettler");
 	}
 	*(int*) (entity + 0x70) = 1;
-	*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 	fcn_00500bb0(entity + 0x52, 0, 10, 0);
 		return;
 	}
 		gm_ResolveEntityById((void**) &found, 0, 0, *(int*) (entity + 0xd0));
 		if (found == 0) {
 			*(int*) (entity + 0x70) = -1;
-			*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 			return;
 		}
 		if (*(int*) (entity + 0x70) == 1) {
@@ -115,7 +115,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 			for (i = 0; i < n; i++) {
 				if (fcn_00529670((char*) objs[i], (char*) found) == 0) {
 					*(int*) (entity + 0x70) = 1;
-					*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
+					*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 					fcn_00500bb0(entity + 0x52, 0, 5, 0);
 					return;
 				}
@@ -126,10 +126,10 @@ void __cdecl fcn_0057d0d0(char* entity)
 				}
 				fcn_0057ceb0(entity);
 				*(int*) (entity + 0x70) = -1;
-				*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 				return;
 			}
-			*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 			fcn_00500bb0(entity + 0x52, 2, 0, 0);
 			*(int*) (entity + 0x70) = 2;
 			for (i = 0; i < n; i++) {
@@ -152,7 +152,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 			}
 			fcn_0057d830(entity, n);
 			*(int*) (entity + 0xb0) = *(int*) (entity + 0xb0) - 0x78;
-			*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 			*(int*) (entity + 0x70) = 0;
 		}
 }

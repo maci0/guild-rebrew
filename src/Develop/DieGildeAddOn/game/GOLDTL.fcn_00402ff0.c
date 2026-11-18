@@ -9,7 +9,7 @@ void __cdecl fcn_00402ff0(void)
 	void** p;
 	void* e;
 
-	p = g_14d0020;
+	p = ch_CharacterSlots;
 	do {
 		e = *p;
 		if (e != 0 && (*(unsigned char*) ((char*) e + 0x8c) & 1) != 0 &&
@@ -17,5 +17,5 @@ void __cdecl fcn_00402ff0(void)
 			fcn_00438c40(*(int*) ((char*) e + 0x34), (char*) e + 0x54);
 		}
 		p++;
-	} while ((int) p < (int) (g_14d0020 + 0x300));
+	} while ((int) p < (int) (ch_CharacterSlots + 0x300));
 }

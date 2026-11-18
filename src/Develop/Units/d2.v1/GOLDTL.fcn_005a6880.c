@@ -18,12 +18,12 @@ extern int g_10162e8;
 extern int g_10162ec;
 extern int g_10162f0;
 extern int g_10162f4;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 extern char* g_77255c;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14ab738;
 extern int g_14b5278;
 extern char g_6b5c60[];
@@ -97,7 +97,7 @@ void __cdecl fcn_005a6880(char* obj)
 	h = fcn_00470820(0, 0, g_6aac84);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_00533dc0(g_772514, 0x73b, 0x73f);
+	fcn_00533dc0(d2_CurrentWindowId, 0x73b, 0x73f);
 	w2 = fcn_00472250(h, 0, 2);
 	w3 = fcn_00472250(h, 0, 3);
 	w1 = fcn_00472250(h, 0, 1);
@@ -108,16 +108,16 @@ void __cdecl fcn_005a6880(char* obj)
 	cy = *(int*) (g_1015ea0 + w1 * 0x2f4 + 0x1c) -
 	     *(int*) (g_77255c + 8) + *(int*) (g_1015ea0 + w1 * 0x2f4 + 0x14) +
 	     2;
-	cb = fcn_0046fac0(cx, cy, g_6b5c60, g_772514);
+	cb = fcn_0046fac0(cx, cy, g_6b5c60, d2_CurrentWindowId);
 	cx = *(int*) (g_1015ea0 + w2 * 0x2f4 + 0x10) - *(int*) (g_77255c + 4) + 2;
 	cy = *(int*) (g_1015ea0 + w2 * 0x2f4 + 0x1c) -
 	     *(int*) (g_77255c + 8) + *(int*) (g_1015ea0 + w2 * 0x2f4 + 0x14) +
 	     2;
-	label2 = fcn_0046fac0(cx, cy, g_6b5c60, g_772514);
+	label2 = fcn_0046fac0(cx, cy, g_6b5c60, d2_CurrentWindowId);
 	*(int*) (g_1015ea0 + cb * 0x2f4 + 0x84) = 0x54;
 	*(int*) (g_1015ea0 + label2 * 0x2f4 + 0x84) = 0x54;
 	d2_SetForm(h, 0);
-	i = g_772514;
+	i = d2_CurrentWindowId;
 	*(int*) (0x10162e8 + i * 0x3cc) = 0xe;
 	*(int*) (0x10162ec + i * 0x3cc) = 0x18;
 	*(int*) (0x10162f0 + i * 0x3cc) = 0xe;
@@ -125,7 +125,7 @@ void __cdecl fcn_005a6880(char* obj)
 	d2_SetForm(h, 1);
 	io_AppendText(0x1900);
 	d2_SetForm(h, 3);
-	fcn_00533a60(g_772514, 0, buttons, 2, g_14ab738, g_14b5278);
+	fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, g_14ab738, g_14b5278);
 
 	d270 = fcn_0050d270(*(int*) (obj + 0x5d));
 	if (d270 <= 0) {
@@ -198,23 +198,23 @@ void __cdecl fcn_005a6880(char* obj)
 			fcn_0046f940(label2, text);
 		}
 		if (g_100f1dc == 3 || g_100f1dc == 4) {
-			cur = g_67d370;
+			cur = d2_CurrentElementId;
 			if (cur == w2) {
 				d2_SetForm(h, 4);
-				fcn_0046ed00(0, -0x4c, g_772514);
+				fcn_0046ed00(0, -0x4c, d2_CurrentWindowId);
 			} else if (cur == w3) {
 				d2_SetForm(h, 4);
-				fcn_0046ed00(0, 0x4c, g_772514);
+				fcn_0046ed00(0, 0x4c, d2_CurrentWindowId);
 			} else if (cur == w1) {
 				d2_SetForm(h, 5);
-				fcn_0046ed00(0, -0x4c, g_772514);
+				fcn_0046ed00(0, -0x4c, d2_CurrentWindowId);
 			} else if (cur == w0) {
 				d2_SetForm(h, 5);
-				fcn_0046ed00(0, 0x4c, g_772514);
+				fcn_0046ed00(0, 0x4c, d2_CurrentWindowId);
 			}
 		}
 		if (g_100f1dc == 2) {
-			cur = g_67d370;
+			cur = d2_CurrentElementId;
 			if (cur == buttons[0])
 				fcn_005a6570(obj);
 			else if (cur == buttons[1])

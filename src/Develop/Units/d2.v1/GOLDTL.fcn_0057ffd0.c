@@ -4,7 +4,7 @@
 extern int* g_665f08;
 extern char g_6a8354[];
 extern char g_6a2f5c[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 
 void __cdecl fcn_00545670(int, int, int, char*, int);
 void __cdecl fcn_00471d80(int, int);
@@ -34,7 +34,7 @@ int __cdecl fcn_0057ffd0(void)
 	fcn_00471d80(*(int*) (v + 8), 3);
 	fcn_00471b60(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8));
 	d2_SetForm(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8), 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8), 3);
 	g_665f08[8] = fcn_00472250(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8), 3, io_AppendText(g_6a2f5c, 0x7d));
 	return 0;

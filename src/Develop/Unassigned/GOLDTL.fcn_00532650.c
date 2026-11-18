@@ -2,7 +2,7 @@
 extern volatile int g_6b7fac;
 extern int g_67a370;
 extern int g_77250c;
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 
 // SIZE 0x10c
 struct s_7e6060 {
@@ -64,7 +64,7 @@ void __cdecl fcn_00532650(void)
 		if (((char*) s)[4] != 0) {
 			name = (char*) s + 4;
 		} else {
-			name = g_14a5320[((int*) s)[-2]];
+			name = txt_TextEntries[((int*) s)[-2]];
 		}
 		fcn_0046bd20(x, y, 0xa0, 0x60,
 			g_77250c, name, 0x28);

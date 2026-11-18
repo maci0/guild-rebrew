@@ -92,9 +92,9 @@ void __cdecl fcn_005e22a0(void)
 	} else if (g_776666 == 1) {
 		depth = 4;
 	}
-	if (depth != g_67ac90) {
-		saved = g_6b8010;
-		g_67ac90 = depth;
+	if (depth != d3_LODMode) {
+		saved = d3_CurrentContextIndex;
+		d3_LODMode = depth;
 		fcn_004432d0(0, 0);
 		fcn_0043ac00(0x40, 3, 0);
 		fcn_004432d0(saved, 0);
@@ -104,8 +104,8 @@ void __cdecl fcn_005e22a0(void)
 		g_67a964 = (float) (1.0 - (g_77666c & 0xff) * 0.01);
 	}
 	for (i = 0; i < 768; i++) {
-		if (((Node**)g_14d0020)[i] != 0 && ((Node**)g_14d0020)[i]->owner == &(*(char*)g_10432c0)) {
-			((Node**)g_14d0020)[i]->flags->mirror = g_6752a4;
+		if (((Node**)ch_CharacterSlots)[i] != 0 && ((Node**)ch_CharacterSlots)[i]->owner == &(*(char*)g_10432c0)) {
+			((Node**)ch_CharacterSlots)[i]->flags->mirror = g_6752a4;
 		}
 	}
 	fcn_00403330(g_77666b);
@@ -117,7 +117,7 @@ void __cdecl fcn_005e22a0(void)
 	if (g_6b8304 != g_776668) {
 		fcn_0043bbf0(g_776668);
 	}
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	fcn_00598510();
 	if ((*(unsigned char*)&g_776664) == 0) {

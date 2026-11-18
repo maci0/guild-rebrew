@@ -40,7 +40,7 @@ typedef struct {
 
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern char g_7f4ca0[];
 extern char g_6b5c60[];
 
@@ -115,7 +115,7 @@ void __cdecl fcn_0057aab0(Bld57aa* self, int mode, int who, int side)
 		} else {
 			lo = 1 << o->kind;
 		}
-		if (b->owner == 0xffff || b->owner == *((unsigned short*)g_773da8)) {
+		if (b->owner == 0xffff || b->owner == *((unsigned short*)gm_CityEntity)) {
 			continue;
 		}
 		bp = b->pos;

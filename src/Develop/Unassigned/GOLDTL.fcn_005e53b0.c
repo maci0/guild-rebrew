@@ -24,10 +24,10 @@ typedef char request_size_check[sizeof(REQUEST) == 0x50 ? 1 : -1];
 typedef char request_excluded_check[offsetof(REQUEST, excluded) == 0x1c ? 1 : -1];
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514, g_14b59e8, g_14b59ec;
+extern int d2_CurrentWindowId, g_14b59e8, g_14b59ec;
 extern int g_14b59fc, g_14b5a00, g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_100f1dc, g_67d370, g_666018, g_66601c;
+extern int g_100f1dc, d2_CurrentElementId, g_666018, g_66601c;
 extern volatile unsigned int g_6b7fac;
 extern char *g_772500, *g_1015ea0;
 extern char g_7f4ca0[], g_1015f4c[], g_6811b0[];
@@ -87,20 +87,20 @@ void __cdecl fcn_005e53b0(void *arg)
     d2_SetOverlayAnimation(0, 0);
     fcn_00471b60(window);
     d2_SetForm(window, 0);
-    fcn_005340f0(g_772514);
+    fcn_005340f0(d2_CurrentWindowId);
     d2_SetForm(window, 1);
     items[0].y = 30;
-    items[0].x = (*(int *)(g_1015f4c + g_772514 * 972) - *(short *)(g_772500 + 0x1ebd8)) / 2;
+    items[0].x = (*(int *)(g_1015f4c + d2_CurrentWindowId * 972) - *(short *)(g_772500 + 0x1ebd8)) / 2;
     items[1].y = 125;
-    items[1].x = (*(int *)(g_1015f4c + g_772514 * 972) - *(short *)(g_772500 + 0x1ebd8)) / 3 - 10;
+    items[1].x = (*(int *)(g_1015f4c + d2_CurrentWindowId * 972) - *(short *)(g_772500 + 0x1ebd8)) / 3 - 10;
     items[2].y = 125;
-    items[2].x = (*(int *)(g_1015f4c + g_772514 * 972) - *(short *)(g_772500 + 0x1ebd8)) * 2 / 3 + 10;
+    items[2].x = (*(int *)(g_1015f4c + d2_CurrentWindowId * 972) - *(short *)(g_772500 + 0x1ebd8)) * 2 / 3 + 10;
     items[3].y = 220;
-    items[3].x = (*(int *)(g_1015f4c + g_772514 * 972) - *(short *)(g_772500 + 0x1ebd8)) / 3 - 100;
+    items[3].x = (*(int *)(g_1015f4c + d2_CurrentWindowId * 972) - *(short *)(g_772500 + 0x1ebd8)) / 3 - 100;
     items[4].y = 220;
-    items[4].x = (*(int *)(g_1015f4c + g_772514 * 972) - *(short *)(g_772500 + 0x1ebd8)) * 2 / 3 + 100;
+    items[4].x = (*(int *)(g_1015f4c + d2_CurrentWindowId * 972) - *(short *)(g_772500 + 0x1ebd8)) * 2 / 3 + 100;
     d2_SetForm(window, 3);
-    fcn_00533a60(g_772514, 0, buttons, 2, g_14b59fc, g_14b5a00);
+    fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, g_14b59fc, g_14b5a00);
     do {
         if (refresh) {
             count = fcn_00510400((char *)arg) + 1;
@@ -113,7 +113,7 @@ void __cdecl fcn_005e53b0(void *arg)
             for (i = 0, item = items; i < 5; ++i, ++item) {
                 if (i >= count) { item->entity = 0; cache[i] = -1; }
                 fcn_005ca560(item);
-                fcn_005ca740(item->x, item->y, g_772514, 0x54, item, 1);
+                fcn_005ca740(item->x, item->y, d2_CurrentWindowId, 0x54, item, 1);
                 if (i < count) {
                     fcn_00472640(item->control, 1);
                     ui = g_1015ea0 + item->control * 756;
@@ -135,7 +135,7 @@ void __cdecl fcn_005e53b0(void *arg)
         }
         if (g_14ce8e0) g_774654 = 1;
         else if (g_100f1dc != -1) {
-            if (g_67d370 == buttons[0]) {
+            if (d2_CurrentElementId == buttons[0]) {
                 house = g_7f4ca0 + g_774970 * 0x21c;
                 if (fcn_00525f60(house, cost) == 1) {
                     p = items[0].entity;
@@ -155,9 +155,9 @@ void __cdecl fcn_005e53b0(void *arg)
                     fcn_00526120(text, 0);
                     g_774654 = 1;
                 }
-            } else if (g_67d370 == buttons[1]) g_774654 = 1;
+            } else if (d2_CurrentElementId == buttons[1]) g_774654 = 1;
             else {
-                for (i = 0; i < 5; ++i) if (g_67d370 == items[i].control) break;
+                for (i = 0; i < 5; ++i) if (d2_CurrentElementId == items[i].control) break;
                 if (i < 5) {
                     memset(&request, 0, sizeof(request));
                     n = 0;

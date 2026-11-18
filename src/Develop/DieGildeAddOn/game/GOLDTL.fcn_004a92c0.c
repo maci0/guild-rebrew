@@ -8,7 +8,7 @@ typedef struct Ent {
 
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl fcn_005463a0(int a, int b, int c);
@@ -25,7 +25,7 @@ int __cdecl fcn_004a92c0(int a1, char* e, int a3, int a4, char* out)
 	int n;
 	int kind;
 
-	if ((*(int*)&g_7f4c00) % 4 == (*(int*) (e + 4) & 3) && !gm_LookupEntityRecordById(*(int*) (e + 0x5c))) {
+	if ((*(int*)&gm_GameTime) % 4 == (*(int*) (e + 4) & 3) && !gm_LookupEntityRecordById(*(int*) (e + 0x5c))) {
 		for (p = fcn_005463a0(1, 0, 0x41); p; p = he_fn_Handlung()) {
 			if (*(int*) (p + 0xb0) == *(int*) (e + 4) || *(int*) (p + 0xac) == *(int*) (e + 4)) {
 				return 0;

@@ -14,13 +14,13 @@ void __cdecl fcn_005a0a40(int a)
 	int x;
 	int y;
 
-	fcn_0046f2c0(g_772514, 1);
+	fcn_0046f2c0(d2_CurrentWindowId, 1);
 	io_AppendText(g_6a9694, a);
 	i = 0;
 	x = 0x1c;
 	y = 0x1d;
 	while (i < 3) {
-		fcn_0046f740(x, y, gm_RandomMod(6) + 0x75b, g_772514);
+		fcn_0046f740(x, y, gm_RandomMod(6) + 0x75b, d2_CurrentWindowId);
 		i++;
 		if (i % 8 == 0) {
 			x = 0;

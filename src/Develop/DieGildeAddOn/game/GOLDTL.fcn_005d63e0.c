@@ -28,7 +28,7 @@ typedef struct {
 	int pad[15];
 } Req;
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern __int64 g_666018;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
@@ -61,7 +61,7 @@ int __cdecl fcn_005d63e0(unsigned char* obj, char* arg)
 			m.b4 = 0x4b;
 			m.f8 = *(int*) (obj + 4);
 			m.fc = *(int*) (obj + 4);
-			m.pos = g_7f4c00;
+			m.pos = gm_GameTime;
 			m.b36 = 2;
 			m.f5c = *(int*) (e + 4);
 			m.f58 = *(int*) (obj + 4);

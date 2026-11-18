@@ -32,7 +32,7 @@ typedef struct Dlg005ad000 {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 /* ADDRESS: GOLDTL 0x005ad000 */
 void __cdecl fcn_005ad000(void)
 {
@@ -75,7 +75,7 @@ void __cdecl fcn_005ad000(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		if (*(int*) &g_100f1dc != -1 && msg.ctl == g_67d370) {
+		if (*(int*) &g_100f1dc != -1 && msg.ctl == d2_CurrentElementId) {
 			*(int*) (msg.pkt + 0x20) = *(int*) (obj + 4);
 			*(char*) (msg.pkt + 0x1c) = 0x39;
 			*(int*) (msg.pkt + 0x24) = -1;

@@ -11,7 +11,7 @@ struct house {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -51,7 +51,7 @@ void __cdecl fcn_00578860(char* e)
 		return;
 	}
 	*(int*) (e + 0xbc) = 0;
-	*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
 	fcn_005100f0(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle, -*(int*) (e + 0xb8));
 	*(int*) (e + 0x70) = 0;

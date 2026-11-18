@@ -33,7 +33,7 @@ char* __cdecl fcn_004a48e0(char* u, int key)
 	int i;
 	int cnt;
 
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	if (fcn_00597ff0(key, text) != 0) {
 		memset(list, 0, sizeof(list));

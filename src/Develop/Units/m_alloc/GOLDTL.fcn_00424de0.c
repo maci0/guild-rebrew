@@ -1,6 +1,6 @@
 #pragma optimize("y", off)
 
-extern char* g_6b7d68;
+extern char* sbs_BankManager;
 
 void* __cdecl fopen(char*, char*);
 int __cdecl fscanf(void*, char*, ...);
@@ -32,22 +32,22 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 
 	tail = 0;
 	result = 0;
-	if (g_6b7d68 != 0) {
+	if (sbs_BankManager != 0) {
 		goto fail;
 	}
 	fp = fopen(a0, "rt");
 	if (fp == 0) {
 		goto fail;
 	}
-	g_6b7d68 = m_alloc(0x40, "sbs_Load");
+	sbs_BankManager = m_alloc(0x40, "sbs_Load");
 
-	if (g_6b7d68 == 0) {
+	if (sbs_BankManager == 0) {
 		result = -1;
 		goto done;
 	}
 	fn = 0x40;
 	__asm {
-		mov edi, g_6b7d68
+		mov edi, sbs_BankManager
 		mov ebx, fn
 		xor eax, eax
 		lea ecx, [edi+edi*2]
@@ -63,11 +63,11 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 		add ecx, ebx
 		rep stosb
 	}
-	if (fscanf(fp, "%s", g_6b7d68) == -1) {
+	if (fscanf(fp, "%s", sbs_BankManager) == -1) {
 		result = -1;
 		goto after_banks;
 	}
-	p = g_6b7d68;
+	p = sbs_BankManager;
 	for (;;) {
 		p = strstr(p, "~");
 		if (p == 0) {
@@ -88,7 +88,7 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 		if (tail != 0) {
 			*(void**) ((char*) tail + 0x104) = node;
 		} else {
-			*(void**) (g_6b7d68 + 0x38) = node;
+			*(void**) (sbs_BankManager + 0x38) = node;
 		}
 		tail = node;
 		if (node == 0) {
@@ -143,7 +143,7 @@ after_banks:
 		if (prev != 0) {
 			*(void**) ((char*) prev + 0x3c) = node;
 		} else {
-			*(void**) ((char*) g_6b7d68 + 0x3c) = node;
+			*(void**) ((char*) sbs_BankManager + 0x3c) = node;
 		}
 		hdr = node;
 		if (hdr == 0) {
@@ -221,7 +221,7 @@ after_banks:
 			}
 			*(int*) ((char*) node + 0x100) = fcn_00423920(buf);
 			if (*(int*) ((char*) node + 0x100) != 0) {
-				*(int*) ((char*) g_6b7d68 + 0x34) += *(int*) ((char*) node + 0x100);
+				*(int*) ((char*) sbs_BankManager + 0x34) += *(int*) ((char*) node + 0x100);
 				*(int*) ((char*) hdr + 0x34) += *(int*) ((char*) node + 0x100);
 			}
 		}

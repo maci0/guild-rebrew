@@ -44,7 +44,7 @@ void __cdecl fcn_005b3660(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		g_772514 = h;
+		d2_CurrentWindowId = h;
 		io_AppendText((int) "$C");
 		io_AppendText((int) s_6ab6b8, fcn_0042a030());
 		io_AppendText((int) s_6ab67c);

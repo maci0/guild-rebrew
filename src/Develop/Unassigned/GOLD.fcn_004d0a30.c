@@ -3,7 +3,7 @@
 
 extern int g_67a370;
 extern char g_930600[];
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 
 void __cdecl fcn_004da480(void)
 {
@@ -12,7 +12,7 @@ void __cdecl fcn_004da480(void)
     int i;
 
     self = g_67a370;
-    memset(g_7e4260, 0, sizeof(g_7e4260));
+    memset(ch_ContextCharacters, 0, sizeof(ch_ContextCharacters));
 
     n = 0;
     for (i = 0; i < 32; i++) {
@@ -21,7 +21,7 @@ void __cdecl fcn_004da480(void)
         }
         if (*(char**) (g_930600 + i * 0x21c + 0x184) != 0 &&
             *(int*) (*(char**) (g_930600 + i * 0x21c + 0x184) + 0x88) == self) {
-            g_7e4260[n] = g_930600 + i * 0x21c;
+            ch_ContextCharacters[n] = g_930600 + i * 0x21c;
             n++;
         }
     }

@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 // SIZE 0xf8
 struct msg {
@@ -29,11 +29,11 @@ void __cdecl fcn_0054e2d0(char* o)
 {
 	if (o[0x78] & 2) {
 		if (gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac)) == 0) {
-			*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
 			*(int*) (o + 0x84) = fcn_004c5620(-1, o);
 		}
-		*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
 		*(int*) (o + 0x84) = fcn_004c5620(0, o);
 	}

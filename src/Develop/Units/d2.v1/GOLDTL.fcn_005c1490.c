@@ -2,7 +2,7 @@
 
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
@@ -41,7 +41,7 @@ void __cdecl fcn_005c1490(void)
 	elem = (char*) fcn_005463a0(1, 0, 0x6b);
 	h = fcn_00470820(0, 0, "special\\barde");
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	fcn_00471b60(h);
 	d2_SetOverlayAnimation(0, 0);
 	g_100f1dc = -1;
@@ -106,16 +106,16 @@ void __cdecl fcn_005c1490(void)
 		fcn_00471e30(h);
 		h = fcn_00470820(0, 0, "special\\barde2");
 		d2_SetForm(h, 0);
-		fcn_005340f0(g_772514);
+		fcn_005340f0(d2_CurrentWindowId);
 		fcn_00471b60(h);
 		d2_SetOverlayAnimation(0, 0);
 		g_100f1dc = -1;
 		d2_SetForm(h, 1);
 		io_AppendText((int) *(unsigned short*) (rec + 0xc));
 		d2_SetForm(h, 2);
-		idx = g_772514;
+		idx = d2_CurrentWindowId;
 		d2_SetForm(h, 3);
-		fcn_0046e830(-1, -1, g_772514, idx, 0x767);
+		fcn_0046e830(-1, -1, d2_CurrentWindowId, idx, 0x767);
 		*(int*) (g_10161b4 + idx * 0x3cc) = 0x30;
 		d2_SetForm(h, 2);
 		io_AppendText((int) *(unsigned short*) (rec + 0xc) + 2);
@@ -133,7 +133,7 @@ void __cdecl fcn_005c1490(void)
 		io_AppendText(0x1e5c);
 		d2_SetForm(h, 2);
 		io_AppendText(g_6811b0);
-		*(int*) (g_1016198 + g_772514 * 0x3cc) = 0;
+		*(int*) (g_1016198 + d2_CurrentWindowId * 0x3cc) = 0;
 		if (*(int*) rec == 0) {
 			io_AppendText(0x1e5e, (int) *(unsigned short*) (rec + 4) + 0x16b7);
 		} else if (*(int*) rec == 1) {

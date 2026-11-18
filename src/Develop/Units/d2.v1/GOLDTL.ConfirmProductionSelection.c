@@ -35,7 +35,7 @@ extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14abc98;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char* g_7746c4;
@@ -91,7 +91,7 @@ int __cdecl ConfirmProductionSelection(int unused, char* a)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == btn1) {
+			if (d2_CurrentElementId == btn1) {
 				n = 0;
 				memset(pkt.ids, 0xff, sizeof(pkt.ids));
 				for (i = 0; i < 768; i++) {
@@ -118,7 +118,7 @@ int __cdecl ConfirmProductionSelection(int unused, char* a)
 				sv_ClearObjectSelection();
 				g_774654 = 2;
 			}
-			else if (g_67d370 == btn2) {
+			else if (d2_CurrentElementId == btn2) {
 				g_774654 = 1;
 			}
 		}

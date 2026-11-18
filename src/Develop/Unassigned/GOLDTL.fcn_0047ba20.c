@@ -41,24 +41,24 @@ int __cdecl fcn_0047ba20(int x, int y, char* a2, float scale)
 		return 0;
 	h = *(unsigned short*) (a2 + 6);
 	w = *(unsigned short*) (a2 + 2);
-	if (g_772604 >= 0x400) {
+	if (d2_QueuedQuadCount >= 0x400) {
 		fcn_0047c560(0, 0, 0);
-		if (g_772604 >= 0x400)
+		if (d2_QueuedQuadCount >= 0x400)
 			return 0;
 	}
-	base = g_772604 * 0xac;
+	base = d2_QueuedQuadCount * 0xac;
 	rec = (char*) (base + 0x1552020);
-	if (g_7725f8 > (float) w * scale + (float) x)
+	if (d2_ClipLeft > (float) w * scale + (float) x)
 		return 0;
-	if (x > g_67d964)
+	if (x > d2_ClipRight)
 		return 0;
 	if (g_7725fc > (float) h * scale + (float) y)
 		return 0;
-	if (y > g_67d968)
+	if (y > d2_ClipBottom)
 		return 0;
-	if (x < g_7725f8) {
-		ox = (float) (g_7725f8 - x);
-		x = g_7725f8;
+	if (x < d2_ClipLeft) {
+		ox = (float) (d2_ClipLeft - x);
+		x = d2_ClipLeft;
 		w = (int) ((float) w - ox);
 	}
 	if (y < g_7725fc) {
@@ -66,10 +66,10 @@ int __cdecl fcn_0047ba20(int x, int y, char* a2, float scale)
 		y = g_7725fc;
 		h = (int) ((float) *(unsigned short*) (a2 + 6) - oy);
 	}
-	if ((float) g_67d964 < (float) w * scale + (float) x)
-		w = g_67d964 - x;
-	if ((float) g_67d968 < (float) h * scale + (float) y)
-		h = (int) ((float) (g_67d968 - y) / scale);
+	if ((float) d2_ClipRight < (float) w * scale + (float) x)
+		w = d2_ClipRight - x;
+	if ((float) d2_ClipBottom < (float) h * scale + (float) y)
+		h = (int) ((float) (d2_ClipBottom - y) / scale);
 	if (w < 1 || h < 1)
 		return 0;
 	if (!fcn_0047b8b0(x, y, (int) ((float) w * scale + 0.5f),
@@ -84,7 +84,7 @@ int __cdecl fcn_0047ba20(int x, int y, char* a2, float scale)
 	inv = 1.0f / val;
 	ox = ox * inv;
 	oy = inv * oy;
-	term = (float) g_772608 * 0.001f;
+	term = (float) d2_DrawDepthIndex * 0.001f;
 	zt = 1.0f - term;
 	rho = term + 0.01f;
 	v = (Vtx47ba20*) rec;
@@ -127,7 +127,7 @@ int __cdecl fcn_0047ba20(int x, int y, char* a2, float scale)
 	tex = (float*) *(int**) (a2 + 0x30);
 	v[5].v = fh + tex[1] + oy;
 	fcn_0047b9a0(v, 200, 200, 200);
-	g_772604 = g_772604 + 1;
-	g_772608 = g_772608 + 1;
+	d2_QueuedQuadCount = d2_QueuedQuadCount + 1;
+	d2_DrawDepthIndex = d2_DrawDepthIndex + 1;
 	return (int) rec;
 }

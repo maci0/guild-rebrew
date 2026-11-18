@@ -1,14 +1,14 @@
 #include <string.h>
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 extern int g_100f1dc;
 extern int g_100f884;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_7746cc;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -98,14 +98,14 @@ int __cdecl fcn_0059ba40(char* a0)
 	fcn_00594340();
 	count = 0;
 	d2_SetForm(h, 0);
-	k = g_772514;
+	k = d2_CurrentWindowId;
 	m = k * 0x3cc;
 	*(int*) (m + 0x10162e8) = 0xe;
 	*(int*) (m + 0x10162ec) = 0xe;
 	*(int*) (m + 0x10162f0) = 0xe;
 	*(int*) (m + 0x10162f4) = 0xe;
 	fcn_00533dc0(k, 0x70b, 0x742);
-	fcn_00533f40(0x270, 0x15e, g_772514, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
+	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
 	*(unsigned int*) (g_1015ea0 + 0x84 + item * 0x2f4) = 0x54;
 	do {
 		d2_SetForm(h, 2);
@@ -132,7 +132,7 @@ int __cdecl fcn_0059ba40(char* a0)
 			} while (!any);
 			if (count > 0) {
 				for (k = 0; k < count; k++) {
-					if (g_67d370 == *(int*) (0x779194 + k * 0x58)) {
+					if (d2_CurrentElementId == *(int*) (0x779194 + k * 0x58)) {
 						if (!any) {
 							p = (int*) 0x7e30d0;
 							do {
@@ -158,7 +158,7 @@ int __cdecl fcn_0059ba40(char* a0)
 							req.flag36 = 1;
 							req.f8 = *(unsigned int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + 0x7f4ca4);
 							req.f12 = *(unsigned int*) (a0 + 1);
-							req.c28 = g_7f4c00;
+							req.c28 = gm_GameTime;
 							req.c2c = g_7f4c04;
 							req.c30 = g_7f4c08;
 							req.c34 = g_7f4c0c;

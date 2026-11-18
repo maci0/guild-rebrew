@@ -14,14 +14,14 @@ void __cdecl fcn_00473700(int key, int n)
 	int i;
 
 	for (i = 0; i < 6; i++) {
-		if (((struct fcn_00473700_slot*)DisplayCounters)[i].key == key)
+		if (((struct fcn_00473700_slot*)d2_DisplayCounters)[i].key == key)
 			break;
 	}
 	if (i != 6) {
-		((struct fcn_00473700_slot*)DisplayCounters)[i].count -= n;
-		if (((struct fcn_00473700_slot*)DisplayCounters)[i].count == 0) {
-			((struct fcn_00473700_slot*)DisplayCounters)[i].count = 0;
-			((struct fcn_00473700_slot*)DisplayCounters)[i].key = -1;
+		((struct fcn_00473700_slot*)d2_DisplayCounters)[i].count -= n;
+		if (((struct fcn_00473700_slot*)d2_DisplayCounters)[i].count == 0) {
+			((struct fcn_00473700_slot*)d2_DisplayCounters)[i].count = 0;
+			((struct fcn_00473700_slot*)d2_DisplayCounters)[i].key = -1;
 		}
 	}
 }

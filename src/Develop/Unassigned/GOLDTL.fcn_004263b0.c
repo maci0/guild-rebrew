@@ -1,11 +1,11 @@
 
 
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 
-#define POS (*(char**) (g_6b7e98 + 0x118))
-#define BASE (*(char**) (g_6b7e98 + 0x11c))
-#define LEN (*(int*) (g_6b7e98 + 0x120))
+#define POS (*(char**) (evt_CurrentScript + 0x118))
+#define BASE (*(char**) (evt_CurrentScript + 0x11c))
+#define LEN (*(int*) (evt_CurrentScript + 0x120))
 
 int __cdecl fcn_004263b0(char dir)
 {

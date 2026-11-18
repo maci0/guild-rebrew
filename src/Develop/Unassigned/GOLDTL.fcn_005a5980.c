@@ -2,7 +2,7 @@
 
 
 extern int g_14ce8d8;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 // SIZE 0x1c
 typedef struct {
@@ -16,7 +16,7 @@ int __cdecl fcn_005a5980(Slot* tbl)
 
 	if (g_14ce8d8 != 0) {
 		for (i = 0; i < 16; i++) {
-			if (tbl[i].id != -1 && g_67d370 == tbl[i].id) {
+			if (tbl[i].id != -1 && d2_CurrentElementId == tbl[i].id) {
 				return i;
 			}
 		}

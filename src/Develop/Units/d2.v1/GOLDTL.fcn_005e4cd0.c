@@ -1,6 +1,6 @@
 
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 extern int g_14ac660[];
 extern int g_14ce8e0;
@@ -31,7 +31,7 @@ void __cdecl fcn_005e4cd0(void)
 	fcn_00471b60(h);
 	d2_SetForm(h, 2);
 	for (i = 0; i < 9; i++) {
-		b = fcn_0046f740(8, i * 0x1c + 0xa, 0x605 + i, g_772514);
+		b = fcn_0046f740(8, i * 0x1c + 0xa, 0x605 + i, d2_CurrentWindowId);
 		btn[i] = b;
 		*(int*) (g_1015ea0 + b * 0x2f4 + 0x58) = 1;
 		*(int*) (g_1015ea0 + b * 0x2f4 + 0x5c) = 1;

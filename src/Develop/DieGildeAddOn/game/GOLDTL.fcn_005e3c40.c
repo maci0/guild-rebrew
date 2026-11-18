@@ -8,7 +8,7 @@ typedef struct {
 	int bottom;
 } Rect;
 
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -24,7 +24,7 @@ void __cdecl fcn_005e3c40(void)
 {
 	unsigned char* p;
 
-	p = fcn_004730c0(0, 0, g_1040494, g_1040490, g_67d67c, 0x1e, 1);
+	p = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x1e, 1);
 	while (!(*p & 4)) {
 		fcn_005373e0(0, 0x24087);
 	}
@@ -43,5 +43,5 @@ void __cdecl fcn_005e3c40(void)
 	fcn_00528fd0();
 	fcn_00533cf0(0);
 	fcn_00473150(p);
-	fcn_004730c0(0, 0, g_1040494, g_1040490, g_67d67c, 0x32, 0xa);
+	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x32, 0xa);
 }

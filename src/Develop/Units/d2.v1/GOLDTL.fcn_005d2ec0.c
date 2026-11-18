@@ -16,8 +16,8 @@ extern char* g_772500;
 extern char* g_77255c;
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514;
-extern int g_67d370;
+extern int d2_CurrentWindowId;
+extern int d2_CurrentElementId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_14ce8d8;
@@ -69,7 +69,7 @@ int __cdecl fcn_005d2ec0(char* a0)
 		fcn_005ca560(&items[i]);
 		items[i].val = fcn_005d2a40(*(int*) (g_7f4ca0 + g_774970 * 540 + 4), *(int*) (items[i].e + 4));
 		io_FormatTextBuffer(buf, 0x1ce4, items[i].val);
-		fcn_005ca740(items[i].x, items[i].y, g_772514, 0x56, &items[i], 1);
+		fcn_005ca740(items[i].x, items[i].y, d2_CurrentWindowId, 0x56, &items[i], 1);
 		fcn_005c9090((int) buf, items[i].x + *(short*) (g_772500 + 0x1ebd8) / 2,
 		             *(short*) (g_772500 + 0x1ebda) + items[i].y + 0x2b, 0xca, 0x56);
 	}
@@ -80,7 +80,7 @@ int __cdecl fcn_005d2ec0(char* a0)
 		}
 		else if (g_100f1dc != -1 && g_14ce8d8 != 0) {
 			for (i = 0; i < count; i++) {
-				if (items[i].btn == g_67d370) {
+				if (items[i].btn == d2_CurrentElementId) {
 					fcn_00471a30(dlg, 0);
 					if (fcn_005d2d30((unsigned short*) items[i].e) != 0) {
 						res = 0x92;

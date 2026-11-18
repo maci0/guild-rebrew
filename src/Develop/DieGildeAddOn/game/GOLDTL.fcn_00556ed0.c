@@ -22,7 +22,7 @@ typedef struct {
 	char pad174[0xa8];
 } Player;
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern Player g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 extern char g_6b5c60[];
@@ -72,7 +72,7 @@ void __cdecl fcn_00556ed0(char* s)
 		return;
 	}
 	io_FormatTextBuffer(buf, "-------> RunSimKrankheiten: calculating at <Day = %i Time = %i.2:%i.2>",
-	    ((Clock*) &g_7f4c00)->day, ((Clock*) &g_7f4c00)->hour, ((Clock*) &g_7f4c00)->minute);
+	    ((Clock*) &gm_GameTime)->day, ((Clock*) &gm_GameTime)->hour, ((Clock*) &gm_GameTime)->minute);
 	if (*(int*) (s + 0xb0) == 0) {
 		steps[0] = 1;
 		steps[1] = 3;

@@ -2,11 +2,11 @@ extern int g_677508;
 extern int g_773ddc;
 extern int g_6b8300;
 extern int g_6b5c80;
-extern int g_6772bc;
-extern int g_6772c0;
+extern int d2_MouseRightBoundary;
+extern int d2_MouseBottomBoundary;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_7747b0;
-extern int g_6b5c84;
+extern int d2_MouseTopBoundary;
 extern unsigned char g_772d10;
 extern char g_774964;
 extern int g_774950;
@@ -14,7 +14,7 @@ extern int g_7f4c04;
 extern int g_7f4e10;
 extern char g_7f4ca0[];
 extern char g_6b5c60[];
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_774650;
 extern int g_774658;
 extern int g_14ce8d4;
@@ -22,16 +22,16 @@ extern int g_14ce8e4;
 extern int g_7746b0;
 extern int d3_ActiveCameraAnimation;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_6a25dc;
 extern int g_7e2aa0;
 extern int g_14ce8dc;
 extern int g_14ce8cc;
 extern unsigned short g_7725c4;
-extern int g_7725c8;
+extern int d2_SuppressOverlay;
 extern int g_6772c4;
-extern int g_100f1e8;
-extern int g_100f1ec;
+extern int d2_MouseX;
+extern int d2_MouseY;
 extern int g_773d78;
 extern int g_7e2700;
 extern int g_7e2704;
@@ -87,17 +87,17 @@ void __cdecl fcn_0059a340(void)
 	char* v12;
 	char c;
 
-	v7 = fcn_00500e20((char*) &g_7f4c00);
+	v7 = fcn_00500e20((char*) &gm_GameTime);
 	g_677508 = -1;
 	fcn_00516f60();
 	if (g_773ddc) {
 		fcn_0043c2c0((int*) g_6b8300);
 		g_773ddc = 0;
 	}
-	v3 = g_6772bc;
-	v4 = g_6772c0;
+	v3 = d2_MouseRightBoundary;
+	v4 = d2_MouseBottomBoundary;
 	v5 = g_6b5c80;
-	v6 = g_6b5c84;
+	v6 = d2_MouseTopBoundary;
 	g_772d10 = 1;
 	g_774964 = 1;
 	v13 = g_774970;
@@ -139,13 +139,13 @@ void __cdecl fcn_0059a340(void)
 			fcn_00533a40(g_6b5c60);
 			fcn_00530510();
 			g_7725c4 = 0;
-			g_7725c8 = 0;
+			d2_SuppressOverlay = 0;
 			g_6772c4 = 1;
-			fcn_004125c0(g_100f1e8, g_100f1ec);
-			g_6772bc = v3;
-			g_6772c0 = v4;
+			fcn_004125c0(d2_MouseX, d2_MouseY);
+			d2_MouseRightBoundary = v3;
+			d2_MouseBottomBoundary = v4;
 			g_6b5c80 = v5;
-			g_6b5c84 = v6;
+			d2_MouseTopBoundary = v6;
 			fcn_005373e0(0, 0x67fff);
 			return;
 		}
@@ -202,7 +202,7 @@ void __cdecl fcn_0059a340(void)
 		fcn_0059a2a0();
 		if (g_14ce8d4 && !g_14ce8e4 && g_7746b0 && !d3_ActiveCameraAnimation)
 			fcn_0052cbb0(g_7746b0);
-		if (g_100f1dc != -1 && g_67d370 == g_6a25dc)
+		if (g_100f1dc != -1 && d2_CurrentElementId == g_6a25dc)
 			fcn_00599350();
 		if (g_7e2aa0) {
 			v10 = fcn_00506380(g_774970, g_7e2aa0, 0, 0);

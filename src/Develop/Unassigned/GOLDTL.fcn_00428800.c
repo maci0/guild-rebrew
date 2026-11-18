@@ -40,7 +40,7 @@ struct sym_428800 {
 	char* data;
 };
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern char* g_6b7eb8;
 extern char g_14cb440[];
 
@@ -66,13 +66,13 @@ int __cdecl fcn_00428800(char* pEnd)
 	char* g;
 	char* p;
 
-	g = g_6b7e98;
+	g = evt_CurrentScript;
 	value = 0; n = 0;
 	level = 2;
 	op = 2;
-	if ((*(unsigned char*) (g_6b7e98 + 0x124) & 1) != 0) {
+	if ((*(unsigned char*) (evt_CurrentScript + 0x124) & 1) != 0) {
 		for (;;) {
-			if (pEnd != 0 && *(char**) (g_6b7e98 + 0x118) >= pEnd - 1) {
+			if (pEnd != 0 && *(char**) (evt_CurrentScript + 0x118) >= pEnd - 1) {
 				break;
 			}
 			if (level == 0xb) {
@@ -82,18 +82,18 @@ int __cdecl fcn_00428800(char* pEnd)
 				break;
 			}
 			if (pEnd != 0) {
-				p = fcn_00426620(*(char**) (g_6b7e98 + 0x118), 0x679680, pEnd);
+				p = fcn_00426620(*(char**) (evt_CurrentScript + 0x118), 0x679680, pEnd);
 				if (p != 0 && p < pEnd) {
 					value = n = fcn_00428800(p);
 				}
 			} else {
-				p = fcn_00426620(*(char**) (g_6b7e98 + 0x118), 0x679680,
-						*(char**) (g_6b7e98 + 0x11c) + *(int*) (g_6b7e98 + 0x120));
+				p = fcn_00426620(*(char**) (evt_CurrentScript + 0x118), 0x679680,
+						*(char**) (evt_CurrentScript + 0x11c) + *(int*) (evt_CurrentScript + 0x120));
 				if (p != 0) {
 					value = n = fcn_00428800(p);
 				}
 			}
-			fcn_00426680(*(char**) (g_6b7e98 + 0x118), &t);
+			fcn_00426680(*(char**) (evt_CurrentScript + 0x118), &t);
 			level = 0;
 			if (t.type == 1) {
 				*(char**) &g_6b7eb8 = 0;
@@ -103,20 +103,20 @@ int __cdecl fcn_00428800(char* pEnd)
 			}
 			if (t.type == 2) {
 				struct sym_428800* sym = (struct sym_428800*) t.u.sym;
-				int pos = (int) *(char**) (g_6b7e98 + 0x118);
+				int pos = (int) *(char**) (evt_CurrentScript + 0x118);
 				int index;
 
-				fcn_00426680(*(char**) (g_6b7e98 + 0x118), &t);
+				fcn_00426680(*(char**) (evt_CurrentScript + 0x118), &t);
 				if (t.type == 1 && t.u.num == 0x1b) {
 					index = fcn_00428800(0);
 				} else {
-					*(int*) (g_6b7e98 + 0x118) = pos;
+					*(int*) (evt_CurrentScript + 0x118) = pos;
 					index = 0;
 				}
 				if (index > sym->count - 1 || index < 0) {
 					sprintf(msg, "Array index out of bounce: '%s'", (char*) sym + 4);
-					fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), msg);
-					fcn_00428720(g_6b7e98);
+					fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), msg);
+					fcn_00428720(evt_CurrentScript);
 					return 0;
 				}
 				switch (sym->kind) {
@@ -141,14 +141,14 @@ int __cdecl fcn_00428800(char* pEnd)
 				{ int i = 0; do { g_14cb440[i] = t.u.text[i]; } while (t.u.text[i++]); n = (int) g_14cb440; }
 			} else if (t.type == 0) {
 				sprintf(msg, "Unknown symbol: '%s'", t.u.text);
-				fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), msg);
-				fcn_00428720(g_6b7e98);
+				fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), msg);
+				fcn_00428720(evt_CurrentScript);
 				return 0;
 			} else if (t.type == 0xb) {
 				*(char**) &g_6b7eb8 = (char*) t.u.num;
 				level = 2;
 				op = 2;
-				(*(char**) (g_6b7e98 + 0x118))++;
+				(*(char**) (evt_CurrentScript + 0x118))++;
 			}
 			switch (level) {
 			case 1:
@@ -201,19 +201,19 @@ int __cdecl fcn_00428800(char* pEnd)
 			if (t.type == 0xc) {
 				break;
 			}
-			if ((*(unsigned char*) (g_6b7e98 + 0x124) & 1) == 0) {
+			if ((*(unsigned char*) (evt_CurrentScript + 0x124) & 1) == 0) {
 				break;
 			}
 		}
 	}
 	if (level == 0xa) {
-		struct frame_428800* fr = *(struct frame_428800**) (g_6b7e98 + 0xc28);
+		struct frame_428800* fr = *(struct frame_428800**) (evt_CurrentScript + 0xc28);
 		n = fr->count;
 		if (n > 1 && fr->loop[n - 1].pos != 0 && fr->loop[n - 1].skip != 0) {
 			fr->count = n - 1;
-			fr = *(struct frame_428800**) (g_6b7e98 + 0xc28);
+			fr = *(struct frame_428800**) (evt_CurrentScript + 0xc28);
 			if (fr->loop[fr->count].active == 1) {
-				*(int*) (g_6b7e98 + 0x118) = fr->loop[fr->count].pos;
+				*(int*) (evt_CurrentScript + 0x118) = fr->loop[fr->count].pos;
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -45,7 +45,7 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 			return 0;
 		}
 		*(int*) (msg + 8) = *(int*) (cmd + 4);
-		*(int*) (msg + 0x28) = g_7f4c00;
+		*(int*) (msg + 0x28) = gm_GameTime;
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(int*) (msg + 0x58) = *(int*) (esi + 1);
@@ -74,7 +74,7 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 		return 0;
 	}
 	*(int*) (msg + 8) = *(int*) (cmd + 4);
-	*(int*) (msg + 0x28) = g_7f4c00;
+	*(int*) (msg + 0x28) = gm_GameTime;
 	*(int*) (msg + 0x2c) = g_7f4c04;
 	*(int*) (msg + 0x30) = g_7f4c08;
 	*(int*) (msg + 0x58) = *(int*) (esi + 1);

@@ -7,7 +7,7 @@ typedef struct {
 // SIZE 0xe
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/Units/Error/error_message.h"
@@ -24,5 +24,5 @@ void __cdecl he_AllocDiePlayer(char* e)
 		return;
 	}
 	p[8] = 0;
-	*(Rec14*) (e + 0x52) = (*(Rec14*)&g_7f4c00);
+	*(Rec14*) (e + 0x52) = (*(Rec14*)&gm_GameTime);
 }

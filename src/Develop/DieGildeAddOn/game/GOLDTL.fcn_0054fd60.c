@@ -35,7 +35,7 @@ typedef struct {
 } Order_54fd60;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -79,7 +79,7 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
                 msg[0x30] = 2;
                 *(int*) (msg + 0xc) = *(int*) (g_7f4ca4 + (unsigned short) g_774970 * 0x21c);
                 *(int*) (msg + 0x38) = b->id;
-                *(int*) (msg + 0x18) = (*(int*) &g_7f4c00);
+                *(int*) (msg + 0x18) = (*(int*) &gm_GameTime);
                 msg[0x7c] = 0;
                 *(int*) (msg + 0x20) = g_7f4c08;
                 *(short*) (msg + 0x24) = g_7f4c0c;
@@ -91,7 +91,7 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
         if (b != 0) {
             fcn_004c5420(b->id, 0x1c8, 4, 0, 0x400);
         }
-        o->stamp = (*(Stamp_54fd60*) &g_7f4c00);
+        o->stamp = (*(Stamp_54fd60*) &gm_GameTime);
         fcn_00500bb0(&o->stamp, 0, 2, 0);
         o->event = fcn_004c5620(-1, o);
         return;
@@ -107,7 +107,7 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
         if (b != 0) {
             fcn_004c5420(b->id, 0x1c8, 4, 0, 0x400);
         }
-        o->stamp = (*(Stamp_54fd60*) &g_7f4c00);
+        o->stamp = (*(Stamp_54fd60*) &gm_GameTime);
         fcn_00500bb0(&o->stamp, 0, 2, 0);
         o->event = fcn_004c5620(-1, o);
         return;
@@ -122,7 +122,7 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
             if (b != 0) {
                 fcn_004c5420(b->id, 0x1c8, 4, 0, 0x400);
             }
-            o->stamp = (*(Stamp_54fd60*) &g_7f4c00);
+            o->stamp = (*(Stamp_54fd60*) &gm_GameTime);
             fcn_00500bb0(&o->stamp, 0, 2, 0);
             o->event = fcn_004c5620(-1, o);
         }

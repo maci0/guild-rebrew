@@ -10,7 +10,7 @@ typedef struct Slot {
 /* SIZE 0x124 */
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_7f4c00[];
+extern char gm_GameTime[];
 extern unsigned char g_776664;
 extern volatile unsigned int g_6b7fac;
 extern unsigned int g_7728f0;
@@ -44,8 +44,8 @@ void __cdecl fcn_004bbd70(void)
 	int lim;
 	Slot* s;
 
-	saved = g_6b8010;
-	r = fcn_00500e20(g_7f4c00);
+	saved = d3_CurrentContextIndex;
+	r = fcn_00500e20(gm_GameTime);
 	fcn_004432d0(0, 1);
 	if (g_776664 == 0) {
 		lim = 0;

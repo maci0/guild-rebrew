@@ -4,7 +4,7 @@
 
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 
-extern int g_6b5c24;
+extern int ch_UpdateTime;
 extern unsigned int g_67529c;
 
 float __cdecl fcn_00444700(char* obj, float* pos);
@@ -33,7 +33,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 			angle = v + *(float*) (o + 0x88);
 			*(int*) (obj + 0x108) = 0;
 		} else {
-			ticks = g_6b5c24 - g_67529c;
+			ticks = ch_UpdateTime - g_67529c;
 			t = ticks * 0.9090909f;
 			if (*(int*) (inst + 4) & 8) {
 				t *= 0.4f;
@@ -74,7 +74,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 			angle = v + *(float*) (o + 0x88);
 			*(int*) (obj + 0x108) = 0;
 		} else {
-			ticks = g_6b5c24 - g_67529c;
+			ticks = ch_UpdateTime - g_67529c;
 			t = ticks * 0.9090909f;
 			if (*(int*) (inst + 4) & 8) {
 				t *= 0.4f;

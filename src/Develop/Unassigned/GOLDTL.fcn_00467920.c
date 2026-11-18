@@ -32,15 +32,15 @@ extern float g_6628a0;			/* 0x006628a0 */
 extern float g_662cf8;			/* 0x00662cf8 */
 extern double g_662908;			/* 0x00662908 */
 extern double g_662950;			/* 0x00662950 */
-extern int g_1015ea4;			/* 0x01015ea4 */
-extern int g_67d370;			/* 0x0067d370 */
+extern int d2_FontHeight;			/* 0x01015ea4 */
+extern int d2_CurrentElementId;			/* 0x0067d370 */
 extern int d2_CurrentFont;			/* 0x0067d378 */
-extern int g_67d398;			/* 0x0067d398 */
+extern int d2_DefaultFont;			/* 0x0067d398 */
 extern int g_102d020;			/* 0x0102d020 */
 extern int g_102d024;			/* 0x0102d024 */
 extern int g_102d028;			/* 0x0102d028 */
-extern int g_100f1e8;			/* 0x0100f1e8 */
-extern int g_1040490;			/* 0x01040490 */
+extern int d2_MouseX;			/* 0x0100f1e8 */
+extern int d2_ScreenHeight;			/* 0x01040490 */
 extern int g_1040494;			/* 0x01040494 */
 
 typedef struct {
@@ -376,12 +376,12 @@ void __cdecl fcn_00467920(int a0, int a1)
 		}
 
 		/* 0x4681f0: icon hit test */
-		if (g_67d370 == e[0] && !(f.v20 & 0x40)) {
+		if (d2_CurrentElementId == e[0] && !(f.v20 & 0x40)) {
 			if (e[0x14] && FLD(e[0x14], 0x198)) {
 				n = g_102d028;
 			}
 			else {
-				n = g_100f1e8;
+				n = d2_MouseX;
 			}
 			if (f.v28) {
 				if (n >= e[4] && n < e[4] + GLYPH_W(H6)) {
@@ -462,22 +462,22 @@ void __cdecl fcn_00467920(int a0, int a1)
 			if (*(char*) ((char*) e + 0xe8)) {
 				fcn_00468c30(a0, f.v30, f.buf);
 				fcn_00472880(e[0x21] ? e[0x21]
-						     : g_67d398 + 1);
+						     : d2_DefaultFont + 1);
 				f.v2c = GLYPH_W(H3);
 				fcn_0046bd20(e[4] + GLYPH_W(h0) - f.v2c / 2
 					     + f.v28,
 					     e[5] + GLYPH_H(H3) / 2
-					     - g_1015ea4 / 2 + 1,
+					     - d2_FontHeight / 2 + 1,
 					     GLYPH_W(H3), GLYPH_H(H3), (int) b,
 					     (int) f.buf, 8);
 			}
 			else {
 				fcn_00472880(e[0x21] ? e[0x21]
-						     : g_67d398 + 1);
+						     : d2_DefaultFont + 1);
 				f.v2c = e[4] + GLYPH_W(h0)
 					- GLYPH_W(H3) / 2 + f.v28;
 				f.v28 = e[5] + GLYPH_H(H3) / 2
-					- g_1015ea4 / 2 + 2;
+					- d2_FontHeight / 2 + 2;
 				if (f.v20 & 0x1000) {
 					sprintf(f.buf, str_67d43c, f.v30);
 				}
@@ -500,15 +500,15 @@ void __cdecl fcn_00467920(int a0, int a1)
 			fcn_0047a040(0, 0, b[1], b[2]);
 			fcn_00472880(e[0x21] ? e[0x21]
 					     : (e[0x10] ? FLD(e[0x10], 0x28c)
-							: g_67d398 + 1));
+							: d2_DefaultFont + 1));
 			if (e[0x1d]) {
 				itoa(f.v30, f.v3c, 10);
-				fcn_0047a040(0, 0, g_1040494, g_1040490);
+				fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 				fcn_0046bbc0(e[4] + (int) f.v18, e[5] - 0x10,
 					     (int) b, f.v3c, 0);
 			}
 			sprintf(f.v3c, str_67d444, f.v38);
-			n = (g_1015ea4 - GLYPH_H(h0)) / 2 - 1;
+			n = (d2_FontHeight - GLYPH_H(h0)) / 2 - 1;
 			x = fcn_0046b520(f.v3c, d2_CurrentFont);
 			fcn_0046bbc0(e[4] - x - 4, e[5] - n,
 				     (int) b, f.v3c, 0);
@@ -521,12 +521,12 @@ void __cdecl fcn_00467920(int a0, int a1)
 		if (*(char*) ((char*) e + 0xa8)) {
 			fcn_0047a040(0, 0, FLD(b, 4), FLD(b, 8));
 			/* Four pending pushes make 0x46884f the v10 scratch, not flags. */
-			fcn_00472880(e[0x21] ? e[0x21] : g_67d398 + 1);
+			fcn_00472880(e[0x21] ? e[0x21] : d2_DefaultFont + 1);
 			x = e[4];
 			y = e[5] - 0xd;
 			n = 8;
 			if (f.v20 & 0x80) {
-				x = e[4] - fcn_0046b520((char*) e + 0xa8, g_67d398) - 0x18;
+				x = e[4] - fcn_0046b520((char*) e + 0xa8, d2_DefaultFont) - 0x18;
 				y = e[5];
 				n = 0x10;
 			}

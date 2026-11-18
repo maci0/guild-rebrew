@@ -55,17 +55,17 @@ extern unsigned char* lpGebaeudePROT;
 extern char g_7f4ca0[];
 extern unsigned short g_774970;
 extern int g_774654;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern signed char g_7747b0;
 extern unsigned char g_773d75;
 extern int g_14ab294;
 extern int g_774800;
 extern int g_14ce8e0;
 extern int g_100f1dc;
-extern int g_7725d0;
-extern int g_773da8;
+extern int tp_d2_SelectedControl;
+extern int gm_CityEntity;
 extern int g_aed32c;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -316,42 +316,42 @@ after_build:
 			else
 				fcn_00472640(v.h18, 1);
 		}
-		if (g_14ce8e0 != 0 && g_7725d0 == 0)
+		if (g_14ce8e0 != 0 && tp_d2_SelectedControl == 0)
 			g_774654 = 1;
 		if (*(int*) 0x100f1dc == -1)
 			goto loop_test;
-		if (g_67d370 == v.h34) {
+		if (d2_CurrentElementId == v.h34) {
 			fcn_00471af0(dlg, 0);
 			fcn_0059aa10((int) ent, 0xfd);
 			fcn_00471af0(dlg, 1);
 			goto loop_test;
 		}
-		if (g_67d370 == v.h1c && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h1c && g_7747b0 >= 0) {
 			fcn_00471af0(dlg, 0);
 			fcn_005c23b0((int) ent);
 			goto tail_on;
 		}
-		if (g_67d370 == v.h3c && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h3c && g_7747b0 >= 0) {
 			fcn_00471af0(dlg, 0);
 			fcn_005c2580((int) ent);
 			goto tail_on;
 		}
-		if (g_67d370 == v.h20 && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h20 && g_7747b0 >= 0) {
 			fcn_00471af0(dlg, 0);
 			fcn_005c35d0((int) ent);
 			goto tail_on;
 		}
-		if (g_67d370 == v.h44 && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h44 && g_7747b0 >= 0) {
 			fcn_00471af0(dlg, 0);
 			fcn_005c2910((int) ent);
 			goto tail_on;
 		}
-		if (g_67d370 == v.h28 && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h28 && g_7747b0 >= 0) {
 			fcn_00471af0(dlg, 0);
 			fcn_005c2a40((int) ent);
 			goto tail_on;
 		}
-		if (g_67d370 == v.h4c) {
+		if (d2_CurrentElementId == v.h4c) {
 			fcn_00471af0(dlg, 0);
 			fcn_004c6000(
 			    *(int*) ((char*) g_7f4ca0
@@ -360,12 +360,12 @@ after_build:
 			fcn_00471af0(dlg, 1);
 			goto tail_changed;
 		}
-		if (g_67d370 == v.h18 && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h18 && g_7747b0 >= 0) {
 			fcn_00471af0(dlg, 0);
 			fcn_005c30e0((int) ent);
 			goto tail_on;
 		}
-		if (g_67d370 == v.h30 && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h30 && g_7747b0 >= 0) {
 			io_FormatTextBuffer(text1, 0x17c7, (int) ent);
 			fcn_00471af0(dlg, 0);
 			if (fcn_00526120(text1, 1) != 0) {
@@ -374,7 +374,7 @@ after_build:
 				st.f08 = *(int*) ((char*) g_7f4ca0
 					+ (unsigned int) g_774970 * 0x21c + 4);
 				st.f0c = *(int*) (ent + 1);
-				st.f28 = g_7f4c00;
+				st.f28 = gm_GameTime;
 				st.f2c = g_7f4c04;
 				st.f30 = g_7f4c08;
 				st.f34 = g_7f4c0c;
@@ -386,7 +386,7 @@ after_build:
 			fcn_00471af0(dlg, 1);
 			goto tail_changed;
 		}
-		if (g_67d370 == v.h54 && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h54 && g_7747b0 >= 0) {
 			if (fcn_00504f30((unsigned char) ent[0],
 				g_774970) != 1) {
 				fcn_00526120((char*) g_14ab294, 0);
@@ -412,12 +412,12 @@ after_build:
 			fcn_00471af0(dlg, 1);
 			goto tail_changed;
 		}
-		if (g_67d370 == -1) {
+		if (d2_CurrentElementId == -1) {
 			fcn_00471af0(dlg, 0);
 			fcn_005c3820((int) ent);
 			goto tail_on;
 		}
-		if (g_67d370 == v.h5c) {
+		if (d2_CurrentElementId == v.h5c) {
 			fcn_004c5f60(*(int*) (ent + 1),
 			    *(int*) ((char*) g_7f4ca0
 				+ (unsigned int) g_774970 * 0x21c + 4),
@@ -425,7 +425,7 @@ after_build:
 				+ (unsigned int) g_774970 * 0x21c + 4));
 			goto tail_changed;
 		}
-		if (g_67d370 == v.h48) {
+		if (d2_CurrentElementId == v.h48) {
 			v.len = *(int*) (ent + 0x69)
 			    + *(int*) (ent + 0x65);
 			fcn_00471af0(dlg, 0);
@@ -437,8 +437,8 @@ after_build:
 					+ (unsigned int) g_774970 * 0x21c
 					+ 4), -1, g_773d75, v.len);
 				fcn_004c5f60(*(int*) (ent + 1),
-				    *(int*) (g_773da8 + 4),
-				    *(int*) (g_773da8 + 4));
+				    *(int*) (gm_CityEntity + 4),
+				    *(int*) (gm_CityEntity + 4));
 				fcn_004c4510(ent, *(int*) (ent + 1));
 				fcn_004c4700(4, 1,
 				    (int) ent - g_aed32c + 0x65, &v.len);
@@ -448,7 +448,7 @@ after_build:
 			fcn_00471af0(dlg, 1);
 			goto tail_changed;
 		}
-		if (g_67d370 == v.h58) {
+		if (d2_CurrentElementId == v.h58) {
 			fcn_00471af0(dlg, 0);
 			fcn_005c3cc0((int) ent);
 			goto tail_on;

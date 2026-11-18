@@ -17,12 +17,12 @@ void __cdecl fcn_004e4c90(int dur)
 	end = cut_CurrentTick;
 	if (g_772f3c != 0)
 		return;
-	if (fcn_005373e0(fcn_004e4c90, g_68bfb8 | 0x8000) == 0)
+	if (fcn_005373e0(fcn_004e4c90, cut_EventLoopFlags | 0x8000) == 0)
 		return;
 	do {
 		if (cut_CurrentTick >= end + dur)
 			g_774654 = 1;
 		fcn_004cfca0();
 		fcn_004e5140((*(int*)&cut_ActiveCutscene));
-	} while (fcn_005373e0(fcn_004e4c90, g_68bfb8 | 0x8000) != 0);
+	} while (fcn_005373e0(fcn_004e4c90, cut_EventLoopFlags | 0x8000) != 0);
 }

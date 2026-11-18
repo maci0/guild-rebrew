@@ -27,7 +27,7 @@ void __cdecl fcn_00450cb0(int ctx, unsigned char mask)
 {
 	int i;
 
-	for (i = 0; i < g_6b86fc; i++) {
+	for (i = 0; i < d3_MaxActiveLights; i++) {
 		((Light*)g_6b870c)[i].used = 0;
 	}
 	g_6b8700 = 0;

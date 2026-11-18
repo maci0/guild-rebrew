@@ -1,6 +1,6 @@
 #include <string.h>
-extern char* g_6b8014;
-extern int g_1040490;
+extern char* d3_ActiveCamera;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_10432a4;
 extern int g_10421a0;
@@ -13,17 +13,17 @@ extern char g_14cf950;
 #include "client_dialog_state.h"
 extern char* g_7746a0;
 extern char* g_7746a4;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_100f1dc;
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 extern char g_7e1d00[];
-extern int g_7e46ac;
-extern int g_68bfb8;
+extern int main_LoopFlags;
+extern int cut_EventLoopFlags;
 extern unsigned char g_6a375c;
 extern int g_6b7fdc;
 extern int g_14b5e50;
 extern int g_14b5e54;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 
 void __cdecl fcn_00533880(void);
 void __cdecl fcn_005338a0(void);
@@ -105,8 +105,8 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	fcn_00533880();
 	fcn_005338a0();
 	fcn_004432d0(0, 0);
-	fcn_00438b40(g_6b8014, (int*) (g_6b8014 + 0x5c));
-	fcn_00438cb0(g_6b8014, (int*) (g_6b8014 + 0x90));
+	fcn_00438b40(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x5c));
+	fcn_00438cb0(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x90));
 	fcn_00445f50(0, 0, 1.0f, 0);
 	if (network == 0) {
 		count = fcn_005dfa40((char*) 0x6a3778, (char*) 0x6a41b8, data.names);
@@ -131,7 +131,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 			_strupr(data.keybuf);
 			idx = fcn_0042dc90(data.keybuf);
 			if (idx != -1) {
-				strcpy(data.langName, g_14a5320[idx]);
+				strcpy(data.langName, txt_TextEntries[idx]);
 			} else {
 				strcpy(data.langName, data.hdr + 5);
 			}
@@ -156,20 +156,20 @@ int __cdecl fcn_0053ed60(int unused, int network)
 		fcn_00412f10(obj, (char*) 0x6a4080, 1);
 	}
 	fcn_00442c00(city, 0);
-	g_7e46ac = 0x12d6;
-	g_68bfb8 = 0x12d6;
+	main_LoopFlags = 0x12d6;
+	cut_EventLoopFlags = 0x12d6;
 	fcn_004e44f0(fcn_004e4470((char*) 0x6a4024));
 	win1 = fcn_00470820(0, 0, (char*) 0x6a3dd4);
 	fcn_00471d80(win1, 3);
 	fcn_00471db0(win1, 1);
 	d2_SetForm(win1, 0);
 	io_AppendText(0x1abb);
-	fcn_00438da0((float) g_1040494, (float) g_1040490, 0.0f, 0.0f, g_10529c8, g_10421a0, g_10432a4, g_1040494, g_1040490);
+	fcn_00438da0((float) g_1040494, (float) d2_ScreenHeight, 0.0f, 0.0f, g_10529c8, g_10421a0, g_10432a4, g_1040494, d2_ScreenHeight);
 	win2 = fcn_00470820(0, 0, (char*) 0x6a4194);
 	fcn_00471d80(win2, 3);
 	fcn_00471db0(win2, 1);
 	d2_SetForm(win2, 2);
-	fcn_00533a60(g_772514, 0, tmp_ids, 2, g_14b5e50, g_14b5e54);
+	fcn_00533a60(d2_CurrentWindowId, 0, tmp_ids, 2, g_14b5e50, g_14b5e54);
 	ok_id = tmp_ids[0];
 	info_id = tmp_ids[1];
 	while (fcn_005373e0((void*) fcn_0053ed60, 0x10d6) != 0) {
@@ -221,7 +221,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 			prev = sel;
 		}
 		if (g_100f1dc == 2) {
-			if (g_67d370 == info_id) {
+			if (d2_CurrentElementId == info_id) {
 				fcn_00471af0(win2, 0);
 				fcn_00471af0(win1, 0);
 				fcn_0053eb60(highlight);
@@ -231,7 +231,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 					goto not_checked;
 				}
 			}
-			if (g_67d370 == ok_id) {
+			if (d2_CurrentElementId == ok_id) {
 				goto accepted;
 			}
 		}

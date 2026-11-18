@@ -25,7 +25,7 @@ int __cdecl fcn_004ca0c0(int cmd, char* result)
 	int needs_create;
 	int saved;
 
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	status = '\x02';
 	found = (char*) 0x0;
 	needs_create = 0;

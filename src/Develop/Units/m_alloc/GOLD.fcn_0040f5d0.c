@@ -1,4 +1,4 @@
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 
 
 // SIZE 0x2
@@ -19,7 +19,7 @@ int __cdecl fcn_0040f5d0(char** a, int* s, unsigned char* k, unsigned char* b5, 
 
 	e = *a;
 	if (!m_is_tracked(e)) {
-		fcn_004273d0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "invalid object");
+		fcn_004273d0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 0;
 	}
 	*(float*) (e + 0xac) = *s * 0.01f;

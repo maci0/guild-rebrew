@@ -34,10 +34,10 @@ extern char g_7f4ca0[];
 extern char* g_7746c8;
 extern int g_14abc44;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern Name14 g_7f4c00;
+extern Name14 gm_GameTime;
 extern char s_6aa490[];
 
 int __cdecl fcn_00526120(int, int);
@@ -85,7 +85,7 @@ int __cdecl fcn_0059d060(int unused, char* param)
 		if (g_14ce8e0)
 			g_774654 = 1;
 		if (g_100f1dc != -1) {
-			if (g_67d370 == btn1) {
+			if (d2_CurrentElementId == btn1) {
 				dlg2 = fcn_005463a0(3, 0, 0x49, 2,
 					*(unsigned short*) (g_7746c8 + 0x27), 3,
 					*(int*) (g_7746c8 + 1));
@@ -99,7 +99,7 @@ int __cdecl fcn_0059d060(int unused, char* param)
 					slot = &((Player*) g_7f4ca0)[*(unsigned short*) (g_7746c8 + 0x27)];
 					pkt.x8 = slot->x4;
 					pkt.xc = *(int*) (g_7746c8 + 1);
-					pkt.name = g_7f4c00;
+					pkt.name = gm_GameTime;
 					pkt.x36 = 1;
 					pkt.x58 = *(int*) (param + 1);
 					pkt.x5c = *(int*) (g_7746c8 + 1);
@@ -145,7 +145,7 @@ int __cdecl fcn_0059d060(int unused, char* param)
 					}
 				}
 			}
-			else if (g_67d370 == btn2) {
+			else if (d2_CurrentElementId == btn2) {
 				g_774654 = 1;
 			}
 		}

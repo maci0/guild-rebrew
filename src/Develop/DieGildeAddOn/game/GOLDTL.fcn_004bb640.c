@@ -6,7 +6,7 @@ typedef struct {
 // SIZE 0xe
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00500d60(stamp14*, void*);
@@ -35,7 +35,7 @@ int __cdecl fcn_004bb640(int* a1)
 		return 1;
 	if (*(int*) (entity + 0x2c) == 0)
 		return 0x400;
-	st = (*(stamp14*)&g_7f4c00);
+	st = (*(stamp14*)&gm_GameTime);
 	fcn_00500d60(&st, &d);
 	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, fcn_004fe330(&d) + 0x4c);
 	fcn_00545d40(*(int*) (entity + 4), *(int*) (entity + 4), buf, strlen(buf) > 0x100, 0x603, 0);

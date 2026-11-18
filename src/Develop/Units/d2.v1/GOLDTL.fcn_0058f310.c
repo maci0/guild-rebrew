@@ -1,16 +1,16 @@
 #include "client_types.h"
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern int g_14b556c;
 extern int g_14b5574;
 extern int g_14b5588;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -75,7 +75,7 @@ int __cdecl fcn_0058f310(char* a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	n = io_AppendText(0x4098, 0x4097, *(unsigned short*) v, *(unsigned short*) v);
 	b1 = fcn_00472250(h, 1, n);
@@ -89,7 +89,7 @@ int __cdecl fcn_0058f310(char* a0)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == b2) {
+			if (d2_CurrentElementId == b2) {
 				flag = 0;
 				n = fcn_00471f80(b1);
 
@@ -114,7 +114,7 @@ int __cdecl fcn_0058f310(char* a0)
 					*(int*) (req + 0x64) = n;
 					*(int*) (req + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (a0 + 0x27) * 0x21c);
 					*(int*) (req + 0xc) = *(int*) (a0 + 1);
-					*(int*) (req + 0x28) = g_7f4c00;
+					*(int*) (req + 0x28) = gm_GameTime;
 					*(int*) (req + 0x2c) = g_7f4c04;
 					*(int*) (req + 0x30) = g_7f4c08;
 					*(short*) (req + 0x34) = g_7f4c0c;
@@ -137,11 +137,11 @@ int __cdecl fcn_0058f310(char* a0)
 							fcn_005373e0(0, 0x20007);
 						}
 					}
-					g_7e46ac = 0x677c7;
+					main_LoopFlags = 0x677c7;
 					g_774654 = 1;
 					fcn_00526120(g_14b5588, 0);
 				}
-			} else if (g_67d370 == b3) {
+			} else if (d2_CurrentElementId == b3) {
 				g_774654 = 1;
 			}
 		}

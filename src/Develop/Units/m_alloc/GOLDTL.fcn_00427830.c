@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern void __cdecl fcn_00426680(int stream, void *out);
 extern int __cdecl fcn_004260f0(int a0, char *text);
 extern int __cdecl fcn_00427740(int a0, unsigned int a1, int a2);
@@ -25,7 +25,7 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     char copiedChar;
     char *q; int record;
 
-    fcn_00426680(*(unsigned int *)(g_6b7e98 + 0x118), &tok.status);
+    fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     if (tok.status)
         return 1;
     v2 = 0;
@@ -35,7 +35,7 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
         name[v2] = copiedChar;
         v2++;
     } while (copiedChar);
-    fcn_00426680(*(unsigned int *)(g_6b7e98 + 0x118), &tok.status);
+    fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     v2 = a0;
     if (tok.status != 1)
         return 1;
@@ -58,7 +58,7 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
         } else {
             __asm { int 3 }
         }
-        fcn_00426680(*(unsigned int *)(g_6b7e98 + 0x118), &tok.status);
+        fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
         if (tok.status != 5)
             return 1;
         **(int **)(record + 0x2c) = tok.data[0];
@@ -66,7 +66,7 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     }
     if (tok.data[0] == 0xc)
     {
-        v4 = *(unsigned int *)(g_6b7e98 + 0x118);
+        v4 = *(unsigned int *)(evt_CurrentScript + 0x118);
         v3 = fcn_00427600(a0, tok.data);
         if (!v3)
             return 0;
@@ -81,12 +81,12 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
             *nameDest = copiedChar;
             nameDest++;
         } while (copiedChar);
-        *(unsigned int *)(g_6b7e98 + 0x118) = v4;
+        *(unsigned int *)(evt_CurrentScript + 0x118) = v4;
         return 1;
     }
     if (tok.data[0] != 0x1b)
         return 1;
-    fcn_00426680(*(unsigned int *)(g_6b7e98 + 0x118), &tok.status);
+    fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     v2 = a0;
     if (tok.status == 5)
         v3 = tok.data[0];
@@ -101,10 +101,10 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
         q = (char *)(v3 + 4);
         strcpy(q, name);
     }
-    fcn_00426680(*(unsigned int *)(g_6b7e98 + 0x118), &tok.status);
+    fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     if (tok.data[0] != 0x1c)
         fcn_00425bf0(v2, *(unsigned int *)(v2 + 0x118), (char *)0x679490);
-    fcn_00426680(*(unsigned int *)(g_6b7e98 + 0x118), &tok.status);
+    fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     if (tok.data[0] == 10)
         return 1;
     fcn_00425bf0(v2, *(unsigned int *)(v2 + 0x118), (char *)0x679480);

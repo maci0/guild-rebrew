@@ -2,7 +2,7 @@
 
 
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
 
@@ -56,7 +56,7 @@ int __cdecl fcn_005d8e30(char* e, char* o)
 		g_100f1dc = -1;
 		do {
 			if (g_100f1dc != -1) {
-				if (g_67d370 == ok) {
+				if (d2_CurrentElementId == ok) {
 					v = fcn_00471f80(sl);
 					if (fcn_00525f60(e, v) != 0) {
 						fcn_004c6ae0(*(int*) (e + 4), -v);
@@ -65,7 +65,7 @@ int __cdecl fcn_005d8e30(char* e, char* o)
 						r = 1;
 						g_774654 = 1;
 					}
-				} else if (g_67d370 == cancel) {
+				} else if (d2_CurrentElementId == cancel) {
 					g_774654 = 1;
 				}
 			}

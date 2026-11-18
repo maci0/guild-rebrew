@@ -9,11 +9,11 @@ typedef struct
 	char pad1d4[0x2f4 - 0x1d4];
 } Ctl;
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 extern char* g_14a5ad8[];
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern char g_7e23e3;
 #include "client_dialog_state.h"
 extern char s_6a3f8c[];
@@ -91,7 +91,7 @@ int __cdecl fcn_00593ff0(int a1)
 	grp = d2_CreateRadioGroup(0);
 	for (i = 0; i < 11; i++) {
 		t = types[i];
-		h = fcn_0046f740(i % 3 * 96 + 100, (i / 3 + 1) * 80, t + 0x5a1, g_772514);
+		h = fcn_0046f740(i % 3 * 96 + 100, (i / 3 + 1) * 80, t + 0x5a1, d2_CurrentWindowId);
 		btns[i] = h;
 		((Ctl*)g_1015ea0)[h].x5c = 1;
 		((Ctl*)g_1015ea0)[h].x1d0 = 3;
@@ -109,7 +109,7 @@ int __cdecl fcn_00593ff0(int a1)
 		d2_UpdateRadioGroup(grp);
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 11; i++) {
-				if (g_67d370 == btns[i]) {
+				if (d2_CurrentElementId == btns[i]) {
 					g_7e23e3 = fcn_00507400(types[i], 1);
 					g_774654 = 1;
 					r = 1;
@@ -136,7 +136,7 @@ void __cdecl fcn_005941e0(void)
 	last = -1;
 	e = fcn_004ce000();
 	d2_SetForm(g_6a9b9c, 5);
-	h = ((Win*)g_1015f40)[g_772514].x254;
+	h = ((Win*)g_1015f40)[d2_CurrentWindowId].x254;
 	io_AppendText((int) "$C");
 	g_774a3c = 0;
 	while (e != 0) {
@@ -157,11 +157,11 @@ void __cdecl fcn_005941e0(void)
 		last = io_AppendText((int) buf);
 		e = fcn_004ce040();
 	}
-	if (g_774a3c > g_774a38 && last >= 0 && h > ((Win*)g_1015f40)[g_772514].x10) {
+	if (g_774a3c > g_774a38 && last >= 0 && h > ((Win*)g_1015f40)[d2_CurrentWindowId].x10) {
 		g_774a38 = g_774a3c;
 		n = h + 0x18;
-		((Win*)g_1015f40)[g_772514].x254 = n;
-		((Win*)g_1015f40)[g_772514].x258 = n - ((Win*)g_1015f40)[g_772514].x10;
-		fcn_0046c310(g_772514);
+		((Win*)g_1015f40)[d2_CurrentWindowId].x254 = n;
+		((Win*)g_1015f40)[d2_CurrentWindowId].x258 = n - ((Win*)g_1015f40)[d2_CurrentWindowId].x10;
+		fcn_0046c310(d2_CurrentWindowId);
 	}
 }

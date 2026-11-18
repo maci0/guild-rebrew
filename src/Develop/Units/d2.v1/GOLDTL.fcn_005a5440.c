@@ -38,7 +38,7 @@ typedef struct {
 
 extern char* g_1015ea0;
 extern char* g_77255c;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char g_6b5c60[];
 extern int g_14a79c0[];
 extern char g_6aac70[];
@@ -88,9 +88,9 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 					r = &rows[j];
 					r->key = key;
 					d2_SetForm(a3, a4);
-					r->icon = fcn_00466ee0((((Screen*)g_77255c)->w - 0x30) >> 1, j * 76, r->key + 0xdf, 0x82, g_772514);
+					r->icon = fcn_00466ee0((((Screen*)g_77255c)->w - 0x30) >> 1, j * 76, r->key + 0xdf, 0x82, d2_CurrentWindowId);
 					((Ent*)g_1015ea0)[r->icon].f54 = 1;
-					r->label = d2_ShowTxt((((Screen*)g_77255c)->w - 0xbe) >> 1, j * 76 + 0x2e, g_6b5c60, g_772514);
+					r->label = d2_ShowTxt((((Screen*)g_77255c)->w - 0xbe) >> 1, j * 76 + 0x2e, g_6b5c60, d2_CurrentWindowId);
 					fcn_00472900(r->icon, 0x54);
 					fcn_00472900(r->label, 0x54);
 					((Ent*)g_1015ea0)[r->label].f6c = 1;

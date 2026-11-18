@@ -4,11 +4,11 @@
 extern int g_6798d4;
 extern unsigned char* lpGebaeudePROT;
 extern int g_6b7fdc;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 
 int __cdecl fcn_0042f690(char* a, int b, int c, char* out);
 int __cdecl fcn_0050d200(int a, int b);
@@ -17,8 +17,8 @@ void __cdecl fcn_005986f0(char* a, int b);
 void __cdecl fcn_00598740(float* out, int obj);
 void __cdecl fcn_004c5530(int a1);
 
-extern int g_6b8010;
-extern char* g_773da8;
+extern int d3_CurrentContextIndex;
+extern char* gm_CityEntity;
 extern int g_6798d4;    
 extern char g_7e1ae0[]; 
 extern char g_67f0ac[]; 

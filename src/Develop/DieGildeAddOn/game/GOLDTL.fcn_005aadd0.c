@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern int g_14abb84;
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 extern int g_7746a0;
 
 void __cdecl fcn_005338a0(void);
@@ -36,7 +36,7 @@ void __cdecl fcn_005aadd0(char* e)
 	while (fcn_005373e0((void*) fcn_005aad40, 0x67fff) != 0) {
 		a = fcn_005338d0("ob_ZUNFTKASSE", g_14abb84, 0x16);
 		if (fcn_004eb320(g_7f4ca0 + g_774970 * 540) != 0 && id != 0) {
-			b = fcn_005338d0("contact_ZUNFTLEVEL3", ((int*)g_14a5320)[id], 0x16);
+			b = fcn_005338d0("contact_ZUNFTLEVEL3", ((int*)txt_TextEntries)[id], 0x16);
 		}
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == a) {

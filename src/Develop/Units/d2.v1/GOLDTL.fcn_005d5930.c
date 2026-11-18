@@ -3,10 +3,10 @@
 #include "client_actions.h"
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
-extern int g_772514;
+extern int d2_CurrentElementId;
+extern int d2_CurrentWindowId;
 #include "client_dialog_state.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 // SIZE 0xf8
 typedef struct {
 	int f0;
@@ -88,18 +88,18 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 		if (b[0] >= gm_RandomMod(8)) {
 			Msg_5d5930 m;
 			pos14_7f4c00 pos;
-			pos = g_7f4c00;
+			pos = gm_GameTime;
 			fcn_00500bb0(&pos, 0x60, 0, 0);
 			memset(&m, 0, sizeof(m));
-			m.pos.a = g_7f4c00.a;
-			m.pos.b = g_7f4c00.b;
+			m.pos.a = gm_GameTime.a;
+			m.pos.b = gm_GameTime.b;
 			m.f8 = *(int*) (p + 4);
 			m.fc = *(int*) (p + 4);
-			m.pos.c = g_7f4c00.c;
+			m.pos.c = gm_GameTime.c;
 			m.f58 = *(int*) (p + 4);
 			m.b4 = 0x45;
 			m.b36 = 2;
-			m.pos.d = g_7f4c00.d;
+			m.pos.d = gm_GameTime.d;
 			m.f5c = *(int*) (e + 4);
 			fcn_004c5530(&m);
 			return 0x10;
@@ -112,9 +112,9 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1d55);	d2_SetForm(dlg, 2);
-	k = g_772514;
+	k = d2_CurrentWindowId;
 	d2_SetForm(dlg, 3);
-	fcn_0046e830(-1, -1, g_772514, k, 0x767);
+	fcn_0046e830(-1, -1, d2_CurrentWindowId, k, 0x767);
 	n = fcn_004f61c0(ids, b, c, *(unsigned short*) p);
 	cnt = i = 0;
 	for (; i < n; i++) {
@@ -138,8 +138,8 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 				io_FormatTextBuffer(text, (int) "%i (%i) %s", r->x2c, r->x34, (r->x2c != 1) + 0x1748);
 				r->x10 = 0x32;
 				r->x14 = y;
-				fcn_005ca740(0x32, y, g_772514, 0x56, r, 1);
-				fcn_005c9160(text, *(int*) (g_772514 * 0x3cc + 0x1015f4c) - 0xf, y + 0x2d, 200, 0x55);
+				fcn_005ca740(0x32, y, d2_CurrentWindowId, 0x56, r, 1);
+				fcn_005c9160(text, *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0xf, y + 0x2d, 200, 0x55);
 				r++;
 				y += 0x69;
 			} while (--k != 0);
@@ -152,7 +152,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 	do {
 		if (g_100f1dc != -1) {
 			for (i = 0, rp = (int*) recs; i < cnt; i++, rp += 0xe) {
-				if (g_67d370 == rp[1]) {
+				if (d2_CurrentElementId == rp[1]) {
 					if (fcn_00525f60(p, 2) != 0) {
 						if ((*(unsigned int*) (recs[i].p0 + 0x1c8) & 0x200) != 0) {
 							io_FormatTextBuffer(buf, 0x1d52, *(unsigned short*) recs[i].p0);

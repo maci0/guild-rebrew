@@ -16,9 +16,9 @@ typedef struct {
 	char pad_74[0x84];
 } Dlgs_0059dcf0;
 
-extern void* g_7e4260[];
+extern void* ch_ContextCharacters[];
 extern int g_7f4ca4[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl fcn_00525fb0(void*);
 void __cdecl fcn_0052a0c0(void*, int);
@@ -44,9 +44,9 @@ void __cdecl fcn_0059dcf0(void* entity)
 	fcn_0052a0c0(entity, 0);
 	if (fcn_00526120((void*) *(int*) 0x14abb7c, 1) != 0) {
 		for (i = 0; i < 0x20; i++) {
-			if (g_7e4260[i] != 0
-			    && *(unsigned char*) ((char*) g_7e4260[i] + 0x188) != 0) {
-				entry = g_7e4260[i];
+			if (ch_ContextCharacters[i] != 0
+			    && *(unsigned char*) ((char*) ch_ContextCharacters[i] + 0x188) != 0) {
+				entry = ch_ContextCharacters[i];
 				break;
 			}
 		}
@@ -55,7 +55,7 @@ void __cdecl fcn_0059dcf0(void* entity)
 		message.v36 = 1;
 		message.v08 = g_7f4ca4[idx * 0x87];
 		message.v0c = *(int*) ((char*) entity + 1);
-		message.v28 = g_7f4c00;
+		message.v28 = gm_GameTime;
 		selection = *(void**) g_7746cc;
 		message.v58 = *(int*) ((char*) entry + 4);
 		message.v70 = (selection != 0 && *(unsigned short*) selection != 0xfd) ? *(int*) ((char*) selection + 2) : -1;

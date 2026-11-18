@@ -1,10 +1,10 @@
 extern char g_68ce48[];
 extern unsigned short* g_772f24;
 extern char g_6b5c60[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern int g_68bfbc;
-extern int g_68bfb8;
+extern int cut_EventLoopFlags;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
 
@@ -17,7 +17,7 @@ int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 extern int g_772f2c;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -46,9 +46,9 @@ void __cdecl fcn_004e15c0(char* state)
 	io_AppendText(0x10de, *g_772f24);
 	state[0x94] = 0;
 	state[0x14] = (*(char*)g_6b5c60);
-	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, g_772514);
+	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(w, g_68bfbc * 75, 1);
-	while (fcn_005373e0(fcn_004e15c0, g_68bfb8) != 0) {
+	while (fcn_005373e0(fcn_004e15c0, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(w, 0, 0) == 0)
 			g_774654 = 1;
 		if (g_100f1dc == 2) {
@@ -90,16 +90,16 @@ void __cdecl fcn_004e16e0(char* state, int* event)
 	b2 = fcn_00472250(h, 0, t + 2);
 	state[0x94] = 4;
 	state[0x14] = (*(char*)g_6b5c60);
-	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, g_772514);
+	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(w, g_68bfbc * 75, 1);
-	while (fcn_005373e0(fcn_004e16e0, g_68bfb8) != 0) {
+	while (fcn_005373e0(fcn_004e16e0, cut_EventLoopFlags) != 0) {
 		fcn_004cfca0();
 		if (g_100f1dc != -1) {
-			if (g_67d370 == b0)
+			if (d2_CurrentElementId == b0)
 				state[0x94] = 2;
-			else if (g_67d370 == b1)
+			else if (d2_CurrentElementId == b1)
 				state[0x94] = 3;
-			else if (g_67d370 == b2)
+			else if (d2_CurrentElementId == b2)
 				state[0x94] = 4;
 			g_774654 = 1;
 		}

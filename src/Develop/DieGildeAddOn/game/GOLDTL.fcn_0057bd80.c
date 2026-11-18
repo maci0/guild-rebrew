@@ -8,7 +8,7 @@ struct house {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_004c4450(int);
@@ -33,7 +33,7 @@ void __cdecl fcn_0057bd80(char* u)
 			return;
 		}
 		*(int*) (u + 0x84) = -1;
-		*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 		h2 = gm_LookupEntityRecordById(*(int*) (u + 0xb0));
 		if (h2 == 0 || ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].id == 0xffff) {
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);

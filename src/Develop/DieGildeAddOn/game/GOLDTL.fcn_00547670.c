@@ -12,7 +12,7 @@ typedef struct {
 
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_7747b4;
 extern unsigned char g_773d75;
 
@@ -30,7 +30,7 @@ void __cdecl fcn_00547670(void)
 	int v;
 
 	h = -1;
-	if ((*(int*)&g_7f4c00) % ((*(int*)&g_7f4c00) / 10 + 1) == 0) {
+	if ((*(int*)&gm_GameTime) % ((*(int*)&gm_GameTime) / 10 + 1) == 0) {
 		limit = (g_7747b4 * 5 + 20) * 1600;
 		n = 0;
 		for (i = 0; i < 768; i++) {
@@ -41,7 +41,7 @@ void __cdecl fcn_00547670(void)
 					n++;
 				}
 			} else if (((Entity*)g_7f4ca0)[i].type == 4
-				|| (((Entity*)g_7f4ca0)[i].type == 2 && (*(int*)&g_7f4c00) % 4 == (((Entity*)g_7f4ca0)[i].id & 3))) {
+				|| (((Entity*)g_7f4ca0)[i].type == 2 && (*(int*)&gm_GameTime) % 4 == (((Entity*)g_7f4ca0)[i].id & 3))) {
 				v = gm_AccumulateTyped2(&((Entity*)g_7f4ca0)[i]);
 				if (v < limit) {
 					h = fcn_004c5150(((Entity*)g_7f4ca0)[i].id, -1, (*(char*)&g_773d75), limit - v);

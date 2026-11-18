@@ -13,7 +13,7 @@ typedef struct Blk24 {
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
@@ -42,7 +42,7 @@ int __cdecl ai_StartBaumeister(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	fr[1] = 0;
 	n[0] = 0;
 	n[1] = 0;
-	if (g_7f4c00.a < 4 || a3 != 0 || e[0x166] != 0xa || a1 != 0) {
+	if (gm_GameTime.a < 4 || a3 != 0 || e[0x166] != 0xa || a1 != 0) {
 		return 0;
 	}
 	q = fcn_0050e4a0(1);

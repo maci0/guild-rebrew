@@ -1,11 +1,11 @@
 #include "client_dialog_helpers.h"
 
-extern unsigned char g_772558;
-extern int g_772514;
+extern unsigned char d2_PlotRadius;
+extern int d2_CurrentWindowId;
 extern int g_1015f4c;
 extern int g_1015f50;
 extern unsigned char *g_1015ea0;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -54,16 +54,16 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	float y;
 
 	m = 0;
-	saved = g_772558;
+	saved = d2_PlotRadius;
 	fcn_00472e50();
 	fcn_0046f2c0(win, 1);
-	g_772558 = 1;
+	d2_PlotRadius = 1;
 	w = *(int *) ((char *) &g_1015f4c + win * 0x3cc);
 	h = *(int *) ((char *) &g_1015f50 + win * 0x3cc);
 	step = (w - 0x69) / 16;
 	if (flags & 1)
 		m = fcn_005d36f0(*(Arg *) &g, w - 1, h);
-	g_772558 = 1;
+	d2_PlotRadius = 1;
 	if (flags & 2)
 		fcn_005d3880(*(Arg *) &g, w - 1, h);
 	if (flags & 4)
@@ -72,7 +72,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		fcn_005d3980(*(Cur *) &g, w - 1, h);
 	if (flags & 0x10)
 		fcn_005d3ad0(*(Cur *) &g, w - 1, h);
-	g_772558 = 0;
+	d2_PlotRadius = 0;
 	fcn_00472c30(0x2d, 8, 0x2d, h - 0x13, 0x10, 0x10, 0x10);
 	fcn_00472c30(0x2d, h - 0x13, w - 0x3b, h - 0x13, 0x10, 0x10, 0x10);
 	y = (float) h - g_66293c;
@@ -82,7 +82,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	}
 	for (i = 0, n = 0x64; n > 0; i++, n -= 0x19) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x6acbec, n);
-		id = fcn_0046fac0(3, (int) ((float) i * g_6628bc * y + g_662a98), loc.buf, g_772514);
+		id = fcn_0046fac0(3, (int) ((float) i * g_6628bc * y + g_662a98), loc.buf, d2_CurrentWindowId);
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = 0x23;
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x70) = 1;
 	}
@@ -94,15 +94,15 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		fcn_00472c30(x2, (h - 0x1e) / 2 + 8, x1, (h - 0x1e) / 2 + 8, 0x10, 0x10, 0x10);
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m);
 		d = fcn_0046b520(loc.buf, 0x55) + 2;
-		id = fcn_0046fac0(x1, 5, loc.buf, g_772514);
+		id = fcn_0046fac0(x1, 5, loc.buf, d2_CurrentWindowId);
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x70) = 1;
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m / 2);
-		id = fcn_0046fac0(x1, (h - 0x1e) / 2 + 5, loc.buf, g_772514);
+		id = fcn_0046fac0(x1, (h - 0x1e) / 2 + 5, loc.buf, d2_CurrentWindowId);
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x70) = 1;
 	}
-	loc.src[0] = g_7f4c00;
+	loc.src[0] = gm_GameTime;
 	loc.src[1] = g_7f4c04;
 	loc.src[2] = g_7f4c08;
 	*(short *) ((char *) loc.src + 0xc) = g_7f4c0c;
@@ -110,7 +110,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	if (loc.out[1] == 1) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 		d = fcn_0046b520(loc.buf, 0x55);
-		id = fcn_0046fac0(step * 16 + 0x2d, h - 0xd, loc.buf, g_772514);
+		id = fcn_0046fac0(step * 16 + 0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
 	}
 	loc.src[0]--;
@@ -121,7 +121,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		if (loc.out[1] == 1) {
 			io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 			d = fcn_0046b520(loc.buf, 0x55);
-			id = fcn_0046fac0(n, h - 0xd, loc.buf, g_772514);
+			id = fcn_0046fac0(n, h - 0xd, loc.buf, d2_CurrentWindowId);
 			*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
 			fcn_00472c30(n, h - 0x13, n, h - 0xd, 0x10, 0x10, 0x10);
 		}
@@ -132,8 +132,8 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	if (loc.out[1] == 1) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 		d = fcn_0046b520(loc.buf, 0x55);
-		id = fcn_0046fac0(0x2d, h - 0xd, loc.buf, g_772514);
+		id = fcn_0046fac0(0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
 	}
-	g_772558 = saved;
+	d2_PlotRadius = saved;
 }

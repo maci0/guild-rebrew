@@ -2,7 +2,7 @@
 
 extern int g_6a9b9c;
 extern int g_6a9b94;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14b5d48;
 extern int g_14b5d4c;
 extern int g_14b5d50;
@@ -17,9 +17,9 @@ void __cdecl fcn_00533a60(int, int, char*, int, ...);
 void __cdecl fcn_00593110(void)
 {
 	d2_SetForm(g_6a9b9c, 4);
-	fcn_00533a60(g_772514, 0, g_6a9b90, 2, g_14b5d48, g_14b5d4c);
+	fcn_00533a60(d2_CurrentWindowId, 0, g_6a9b90, 2, g_14b5d48, g_14b5d4c);
 	d2_SetForm(g_6a9b9c, 8);
-	fcn_00533a60(g_772514, 0, g_6a9b98, 1, g_14b5d50);
+	fcn_00533a60(d2_CurrentWindowId, 0, g_6a9b98, 1, g_14b5d50);
 	if (g_9baadc == 0x7f) {
 		*(int*) (g_1015ea0 + g_6a9b94 * 756 + 0x4c) = 1;
 	}

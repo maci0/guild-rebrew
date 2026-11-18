@@ -11,7 +11,7 @@ struct job {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
@@ -33,7 +33,7 @@ void __cdecl fcn_00559e90(char* u)
 		if (*(int*) (u + 0x84) != -1 && fcn_004c4450(*(int*) (u + 0x84)) == 0) {
 			return;
 		}
-		*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
 		n = 0;
 		*(int*) (u + 0x84) = -1;
@@ -63,7 +63,7 @@ void __cdecl fcn_00559e90(char* u)
 		for (i = 0; i < 10; i++) {
 			*(int*) (u + 0x84) = fcn_00559760(&((struct job*) (u + 0xac))[i], n, 0);
 			if (*(int*) (u + 0x84) != -1) {
-				*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 				fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 				break;
 			}

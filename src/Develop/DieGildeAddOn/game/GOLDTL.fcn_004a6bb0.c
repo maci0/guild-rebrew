@@ -109,7 +109,7 @@ int __cdecl fcn_004a6bb0(char* owner, Game* game)
 				break;
 			}
 		} else {
-			strncpy(p->name, g_14a60d0[gm_RandomMod(0x70)], 0xf);
+			strncpy(p->name, gm_FemaleNames[gm_RandomMod(0x70)], 0xf);
 			switch (gm_RandomMod(4)) {
 			case 0:
 				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("buergerin_frau") + 0x639;

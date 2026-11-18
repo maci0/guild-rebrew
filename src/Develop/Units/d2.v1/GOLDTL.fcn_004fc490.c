@@ -4,7 +4,7 @@
 extern char g_696470[];
 extern char g_69645c[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_99f6a0[];
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
@@ -27,7 +27,7 @@ void __cdecl fcn_004fc490(void)
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
 	for (i = 0; i < 0x11; i++) {
-		io_AppendText(g_69645c, (*(int*)&g_7f4c00) + i - 0x10, ((int*)g_99f6a0)[i]);
+		io_AppendText(g_69645c, (*(int*)&gm_GameTime) + i - 0x10, ((int*)g_99f6a0)[i]);
 	}
 	do {
 		if (g_14ce8e0) {

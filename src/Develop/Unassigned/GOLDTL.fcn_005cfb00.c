@@ -1,5 +1,5 @@
 extern unsigned char* lpGebaeudePROT;
-extern short* g_773da8;
+extern short* gm_CityEntity;
 
 /* ADDRESS: GOLDTL 0x005cfb00 */
 unsigned int __cdecl fcn_005cfb00(short* a0, int* a1, unsigned char* a2)
@@ -75,7 +75,7 @@ unsigned int __cdecl fcn_005cfb00(short* a0, int* a1, unsigned char* a2)
 			other = (*(short*) (a2 + 0x27));
 			if (other == *a0)
 				goto zero;
-			a0 = g_773da8;
+			a0 = gm_CityEntity;
 		compare:
 			if (other != *a0 && other != -1) {
 				accept = 1;

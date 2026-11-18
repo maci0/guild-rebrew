@@ -75,7 +75,7 @@ void __cdecl fcn_005ada30(char* p)
 	fcn_00476b60();
 	d2_SetForm(d, 3);
 	back = fcn_00472250(d, 3, io_AppendText(0x1ba6));
-	fcn_0046e830(-1, -1, g_772514, fcn_00472830(d, 2), 0x767);
+	fcn_0046e830(-1, -1, d2_CurrentWindowId, fcn_00472830(d, 2), 0x767);
 	do {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
@@ -128,7 +128,7 @@ void __cdecl fcn_005ada30(char* p)
 			}
 			refresh = 0;
 		}
-		if (g_100f1dc != -1 && g_67d370 == back && grp != -1) {
+		if (g_100f1dc != -1 && d2_CurrentElementId == back && grp != -1) {
 			i = fcn_0046c690(grp);
 			if (i >= 0) {
 				r = fcn_004c5a60(*(int*) (p + 1), -1, *(int*) (carts[i] + 2));

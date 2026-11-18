@@ -54,7 +54,7 @@ int __cdecl fcn_005ae000(char* obj)
 		}
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				for (e = (char*) g_7e4260; (int) e < (int) (g_7e4260 + 32) && n < 6; e += 4) {
+				for (e = (char*) ch_ContextCharacters; (int) e < (int) (ch_ContextCharacters + 32) && n < 6; e += 4) {
 					char* p;
 
 					p = *(char**) e;
@@ -68,10 +68,10 @@ int __cdecl fcn_005ae000(char* obj)
 					*(char*) (packet + 4) = 0x61;
 					*(int*) (packet + 8) = *(int*) (g_7f4ca0 + idx * 0x21c + 4);
 					*(int*) (packet + 0xc) = *(int*) (obj + 1);
-					*(int*) (packet + 0x28) = g_7f4c00.a;
-					*(int*) (packet + 0x2c) = g_7f4c00.b;
-					*(int*) (packet + 0x30) = g_7f4c00.c;
-					*(unsigned short*) (packet + 0x34) = g_7f4c00.d;
+					*(int*) (packet + 0x28) = gm_GameTime.a;
+					*(int*) (packet + 0x2c) = gm_GameTime.b;
+					*(int*) (packet + 0x30) = gm_GameTime.c;
+					*(unsigned short*) (packet + 0x34) = gm_GameTime.d;
 					*(char*) (packet + 0x36) = 1;
 					*(int*) (packet + 0x80) = *(int*) (g_7f4ca0 + idx * 0x21c + 4);
 					fcn_004c5530((int) packet);

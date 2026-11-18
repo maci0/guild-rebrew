@@ -11,17 +11,17 @@ int __cdecl fcn_00418bc0(int a0)
 
 
 	result = 0;
-	if (g_6b5d08 == 0) {
+	if (tp_SoundSources == 0) {
 		if (a0 != 0)
 			d3snd_SourceCount = a0;
 		else
 			a0 = d3snd_SourceCount;
 		n = (unsigned int) a0 * 0x54;
-		g_6b5d08 = (SOUND_SOURCE*) m_alloc(n, (const char*) 0x677750);
-		if (g_6b5d08 != 0) {
+		tp_SoundSources = (SOUND_SOURCE*) m_alloc(n, (const char*) 0x677750);
+		if (tp_SoundSources != 0) {
 			a0 = d3snd_SourceCount * 0x54;
 	__asm {
-		mov edi, g_6b5d08
+		mov edi, tp_SoundSources
 		mov ebx, a0
 		xor eax, eax
 		lea ecx, [edi+edi*2]

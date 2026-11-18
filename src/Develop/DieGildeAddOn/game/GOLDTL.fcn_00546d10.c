@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern void (__cdecl* g_7dc440[])(unsigned char*);
 
 // SIZE 0x14c
@@ -30,7 +30,7 @@ void __cdecl fcn_00546d10(void)
 	for (i = 0; i <= he_LastEventSlot && i < 1024; i++) {
 		if (((struct s_77e980*)g_77e980)[i].b0 != 0 && (((struct s_77e980*)g_77e980)[i].b78 & 0x18) == 0) {
 			fcn_00546850(&((struct s_77e980*)g_77e980)[i]);
-			if (fcn_00500cb0(((char*)&g_7f4c00), ((struct s_77e980*)g_77e980)[i].f52) > 0 && ((struct s_77e980*)g_77e980)[i].b0 < 0xa7) {
+			if (fcn_00500cb0(((char*)&gm_GameTime), ((struct s_77e980*)g_77e980)[i].f52) > 0 && ((struct s_77e980*)g_77e980)[i].b0 < 0xa7) {
 				fcn_00546be0(&((struct s_77e980*)g_77e980)[i]);
 				g_7dc440[((struct s_77e980*)g_77e980)[i].b0](&((struct s_77e980*)g_77e980)[i].b0);
 			}

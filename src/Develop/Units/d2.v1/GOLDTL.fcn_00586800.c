@@ -13,10 +13,10 @@ struct house {
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_004ee160(char*);
@@ -65,7 +65,7 @@ int __cdecl fcn_00586800(char* e, int* unused)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	line = fcn_00472250(h, 1, io_AppendText(0x403a, 0x182, g_773d75));
 	d2_SetElementValue(line, fcn_0050b710(tenth, g_773d75), fcn_0050b710(n, g_773d75), fcn_0050b710(tenth, g_773d75));
@@ -85,7 +85,7 @@ int __cdecl fcn_00586800(char* e, int* unused)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == ok) {
+			if (d2_CurrentElementId == ok) {
 				c = fcn_0050b750(fcn_00471f80(line), g_773d75);
 				if (fcn_00526010(&((struct house*)g_7f4ca0)[g_774970], c, g_773d75) != 0) {
 					fcn_004eeb50(p, (float) c / n * f * 0.75f);
@@ -93,7 +93,7 @@ int __cdecl fcn_00586800(char* e, int* unused)
 					g_774654 = 1;
 					fcn_004c5150(*(int*) (p + 4), ((struct house*)g_7f4ca0)[g_774970].handle, g_773d75, c);
 				}
-			} else if (g_67d370 == cancel) {
+			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;
 			}
 		}

@@ -13,7 +13,7 @@ void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00533a60(int, int, int*, int, ...);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_005373e0(void*, int);
-extern int g_100f1dc; extern char * g_1015ea0; extern int g_772514; extern unsigned short g_774970; extern char g_7f4ca0[];
+extern int g_100f1dc; extern char * g_1015ea0; extern int d2_CurrentWindowId; extern unsigned short g_774970; extern char g_7f4ca0[];
 /* ADDRESS: GOLDTL 0x005aa480 */
 void __cdecl fcn_005aa480(void)
 {
@@ -49,13 +49,13 @@ void __cdecl fcn_005aa480(void)
 	fcn_00471b60(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
-	fcn_005340f0(*(int*) &g_772514);
+	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1643);
 	d2_SetForm(h, 2);
 	i = 0;
 	do {
-		n = fcn_0046f740(pos[i][0] - 0x28, pos[i][1] - 0x46, i + 0x5a2, *(int*) &g_772514);
+		n = fcn_0046f740(pos[i][0] - 0x28, pos[i][1] - 0x46, i + 0x5a2, *(int*) &d2_CurrentWindowId);
 		ids[i] = n;
 		i++;
 		*(int*) ((char*) *(void**) &g_1015ea0 + n * 0x2f4 + 0x5c) = 1;
@@ -71,7 +71,7 @@ void __cdecl fcn_005aa480(void)
 	}
 	io_AppendText(0x1644, n, 3, 0x1649);
 	d2_SetForm(h, 4);
-	fcn_00533a60(*(int*) &g_772514, 0, sel, 3,
+	fcn_00533a60(*(int*) &d2_CurrentWindowId, 0, sel, 3,
 	    *(char**) 0x14aac34, *(char**) 0x14aac38, *(char**) 0x14aac3c);
 	*(int*) &g_100f1dc = -1;
 	do {

@@ -10,7 +10,7 @@ typedef struct Ent {
 extern char g_7f4ca0[];
 extern int g_67e964;
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_772624;
 
 int __cdecl gm_StartFilteredEntitySearch(int a, int b, int c, int d, int id);
@@ -21,14 +21,14 @@ int __cdecl fcn_0048d610(Ent* e, int* out)
 	int i;
 	int r;
 
-	if (g_67e964 < (*(int*)&g_7f4c00)) {
+	if (g_67e964 < (*(int*)&gm_GameTime)) {
 		g_772624 = 0;
 		for (i = 0; i < 768; i++) {
 			if (((Ent*)g_7f4ca0)[i].kind == 6 || ((Ent*)g_7f4ca0)[i].kind == 7 || ((Ent*)g_7f4ca0)[i].kind == 5) {
 				g_772624++;
 			}
 		}
-		g_67e964 = (*(int*)&g_7f4c00);
+		g_67e964 = (*(int*)&gm_GameTime);
 	}
 	if (e->kind == 3) {
 		return 0;

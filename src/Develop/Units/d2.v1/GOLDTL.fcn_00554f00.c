@@ -1,6 +1,6 @@
 extern char g_7f4ca0[];
 extern char g_868080[];
-extern char g_7f4c00[];
+extern char gm_GameTime[];
 extern char g_6a5e78[];
 extern char g_6a5e60[];
 extern char g_6a5e40[];
@@ -58,7 +58,7 @@ void __cdecl fcn_00554f00(char* a0)
 		return;
 	}
 	name = a0 + 0x52;
-	if (fcn_00500cb0(name, g_7f4c00) == 1) {
+	if (fcn_00500cb0(name, gm_GameTime) == 1) {
 		return;
 	}
 	p = gm_LookupEntityRecordById(*(int*) (a0 + 0xb0));

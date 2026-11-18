@@ -19,7 +19,7 @@ typedef struct
 
 extern int* g_774a34;
 extern int g_6a9b9c;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 extern char* g_14a5774;
 extern char* g_14a579c;
@@ -50,12 +50,12 @@ void __cdecl fcn_00593550(void)
 	for (i = 0; i < 8; i++) {
 		p = fcn_004ce190(g_774a34[i + 1]);
 		if (p != 0) {
-			h = fcn_0046f740(5, y, *(int*) (p + 0xc) + 0x59a, g_772514);
+			h = fcn_0046f740(5, y, *(int*) (p + 0xc) + 0x59a, d2_CurrentWindowId);
 			sprintf(buf, "%s %s %s ", p[0x10] == 0 ? g_14a5774 : g_14a579c, p + 0x12, p + 0x22);
 			if (*(int*) (p + 4) != 0) {
 				strcat(buf, g_14b5d54);
 			}
-			d2_ShowTxt(((Ctl*)g_1015ea0)[h].x18 + 10, y, buf, g_772514);
+			d2_ShowTxt(((Ctl*)g_1015ea0)[h].x18 + 10, y, buf, d2_CurrentWindowId);
 			y = y + ((Ctl*)g_1015ea0)[h].x1c + 5;
 			g_779cc0[i] = h;
 			if (p == g_779cb8) {

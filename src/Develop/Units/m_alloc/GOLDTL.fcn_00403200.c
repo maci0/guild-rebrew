@@ -1,4 +1,4 @@
-extern void* g_14d0020[];
+extern void* ch_CharacterSlots[];
 extern char g_67536c[];
 extern char g_67534c[];
 
@@ -16,12 +16,12 @@ void* __cdecl ch_Create(void)
 
 	p = (void*) m_alloc(0x244, g_67536c);
 	memset(p, 0, 0x244);
-	if (g_14d0020[i] != 0) {
-		while (i < 0x300 && g_14d0020[++i] != 0) {
+	if (ch_CharacterSlots[i] != 0) {
+		while (i < 0x300 && ch_CharacterSlots[++i] != 0) {
 		}
 	}
 	if (i < 0x300) {
-		g_14d0020[i] = p;
+		ch_CharacterSlots[i] = p;
 		*(int*) p = i;
 		return p;
 	}

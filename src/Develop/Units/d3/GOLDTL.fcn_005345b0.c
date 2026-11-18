@@ -26,18 +26,18 @@ typedef float* (__cdecl* BoundsFn)(char*, char*, int);
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-extern int g_7e4300;
+extern int d3_SelectionBoxActive;
 extern int g_7e4304;
 extern int g_7e4308;
 extern int g_7e430c;
 extern int g_7e4310;
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 extern short g_14ce8c0;
 extern short g_14ce8c2;
 extern int g_1042570;
 extern int g_1042574;
-extern int g_1042578;
-extern int g_104257c;
+extern int d3_ViewportRight;
+extern int d3_ViewportBottom;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_67a370;
 #include "Develop/Units/d3/d3_camera.h"
@@ -65,15 +65,15 @@ void __cdecl fcn_005345b0(void)
 	float* p;
 	int i;
 
-	if (g_7e4300 != 0) {
-		g_7e430c = MIN(MAX(g_1042570, g_14ce8c0), g_1042578 - 1);
-		g_7e4310 = MIN(MAX(g_1042574, g_14ce8c2), g_104257c - 1);
+	if (d3_SelectionBoxActive != 0) {
+		g_7e430c = MIN(MAX(g_1042570, g_14ce8c0), d3_ViewportRight - 1);
+		g_7e4310 = MIN(MAX(g_1042574, g_14ce8c2), d3_ViewportBottom - 1);
 		x0 = MIN(g_7e4304, g_7e430c);
 		y0 = MIN(g_7e4308, g_7e4310);
 		x1 = MAX(g_7e4304, g_7e430c);
 		y1 = MAX(g_7e4308, g_7e4310);
 		for (k = 0; k < 32; k++) {
-			e = g_7e4260[k];
+			e = ch_ContextCharacters[k];
 			if (e == 0 || e[8] == 0) {
 				continue;
 			}
@@ -90,7 +90,7 @@ void __cdecl fcn_005345b0(void)
 			if (*(char**) (s + 0x1cc) == 0) {
 				continue;
 			}
-			fcn_00438100(s, g_6b8014, 0);
+			fcn_00438100(s, d3_ActiveCamera, 0);
 			sub = *(char**) (s + 0x1cc);
 			p = (*(BoundsFn*) (*(char**) (sub + 0x318) + 0x1f0))(s, sub, *(int*) (s + 0x1ec) + 0x48);
 			if (p == 0) {

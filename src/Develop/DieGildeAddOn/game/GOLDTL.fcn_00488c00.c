@@ -69,7 +69,7 @@ typedef struct Unit0488c00 {
 
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #pragma pack(push, 1)
 typedef struct Race0488c00 {
 	char kind;
@@ -112,7 +112,7 @@ void __cdecl fcn_00488c00(Unit0488c00* u)
 	m.type = 0x16;
 	m.seed = ((Ent0488c00*)g_7f4ca0)[*(unsigned short*)(u->info + 0x27)].seed;
 	m.id = *(int*)(u->info + 1);
-	m.pos = (*(Pos0488c00*)&g_7f4c00);
+	m.pos = (*(Pos0488c00*)&gm_GameTime);
 	m.flag = 1;
 	if (res != 0) {
 		m.from = *(int*)(res + 2);

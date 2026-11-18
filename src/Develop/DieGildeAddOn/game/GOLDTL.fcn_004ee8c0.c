@@ -17,7 +17,7 @@ int __cdecl fcn_004ee8c0(char* obj, char* tgt, char* src)
 		if (*(int*) (tgt + 0xc + i * 8) == 0) {
 			query = fcn_00502cd0(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
 			if (g_14cbca0 != -1) {
-				g_699364 = *(int*) (obj + 0x14);
+				gm_NextEntityId = *(int*) (obj + 0x14);
 			}
 			*(int*) (tgt + 0xc + i * 8) = *(int*) (obj + 8);
 			*(int*) (tgt + 0x10 + i * 8) = *(int*) (obj + 0x10);

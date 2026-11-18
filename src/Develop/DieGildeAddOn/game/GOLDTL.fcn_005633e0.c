@@ -19,7 +19,7 @@ struct house {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 extern char g_7f4ca0[];
 extern unsigned char g_773d75;
@@ -46,7 +46,7 @@ void __cdecl fcn_005633e0(char* u)
 	int v;
 
 	h = 0;
-	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), gm_RandomMod(3) + 4, 0, 0);
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (u + 0xac));
 	if (e != 0) {

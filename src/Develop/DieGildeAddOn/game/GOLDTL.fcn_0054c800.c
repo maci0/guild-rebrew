@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c4510(char*, int);
@@ -27,7 +27,7 @@ void __cdecl fcn_0054c800(char* e)
 	a = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 	b = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 	if (a == 0 || b == 0 || a[9] == b[9]) {
-		*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 		return;
@@ -49,13 +49,13 @@ void __cdecl fcn_0054c800(char* e)
 	f = fcn_005463a0(1, 0, 0x41);
 	for (; f != 0; f = he_fn_Handlung()) {
 		if (*(int*) (f + 0xb0) == *(int*) (a + 4)) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 			return;
 		}
 	}
-	*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0x18, 0, 0);
 	*(int*) (e + 0x58) = 0;
 	*(int*) (e + 0x70) = 0;

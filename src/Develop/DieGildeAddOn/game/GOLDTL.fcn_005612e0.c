@@ -2,7 +2,7 @@
 
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -12,7 +12,7 @@ void __cdecl fcn_005612e0(char* e)
 {
 	char* t;
 
-	*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
 	if (*(int*) (e + 0x10) == -1) {
 		t = gm_StartFilteredEntitySearch(1, 5, 0x16);

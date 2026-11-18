@@ -19,19 +19,19 @@ typedef struct
 
 extern Fld_102d140 g_102d140[];
 extern char* g_1015ea0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_67d374;
-extern int g_67d398;
+extern int d2_DefaultFont;
 extern int g_67d39c;
 extern int g_7725a0;
 extern int g_7725a4;
-extern int g_67d964;
-extern int g_67d968;
+extern int d2_ClipRight;
+extern int d2_ClipBottom;
 extern char* g_772500;
 extern int g_77250c;
-extern int g_772568;
-extern int g_7725d0;
-extern int g_7725f8;
+extern int d2_ResourceOffset;
+extern int tp_d2_SelectedControl;
+extern int d2_ClipLeft;
 extern int g_7725fc;
 extern float g_6628a8;
 extern double g_662908;
@@ -85,9 +85,9 @@ void __cdecl fcn_00466550(int idx, int surf)
 			}
 			f->w = v;
 		}
-		fcn_0047a040(0, 0, g_1040494, g_1040490);
+		fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 		*(int*) (g_1015ea0 + f->ent * 0x2f4 + 0x18) = f->w;
-		if (*(int*) (g_1015ea0 + f->ent * 0x2f4 + 0x3c) != 0 || g_67d370 == f->ent) {
+		if (*(int*) (g_1015ea0 + f->ent * 0x2f4 + 0x3c) != 0 || d2_CurrentElementId == f->ent) {
 			fcn_0046bbc0(f->x, f->y, surf, ((char*) f + 0x2c), 2);
 		} else {
 			fcn_0046bbc0(f->x, f->y, surf, ((char*) f + 0x2c), 0);
@@ -128,7 +128,7 @@ void __cdecl fcn_00466550(int idx, int surf)
 			fcn_0047cba0(f->x, e->i[0x14 / 4], surf, font, 0);
 			fcn_0047cba0(f->x + f->w - g1->w, e->i[0x14 / 4], surf, font, 1);
 			w0 = e->i[0x10 / 4] + g0->w;
-			fcn_0047a040(w0 - 1, g_7725fc, w0 + v, g_67d968);
+			fcn_0047a040(w0 - 1, g_7725fc, w0 + v, d2_ClipBottom);
 			i = 0;
 			if (g_662950 < (double) (v / g2->w) + g_662908) {
 				do {
@@ -137,7 +137,7 @@ void __cdecl fcn_00466550(int idx, int surf)
 					i++;
 				} while ((double) i < (double) (v / g2->w) + g_662908);
 			}
-			fcn_00472880(g_67d398);
+			fcn_00472880(d2_DefaultFont);
 			fcn_0046bd20(f->x, e->i[0x14 / 4] + 1, v, e->i[0x1c / 4],
 			    surf, buf, 0x10);
 		} else {
@@ -145,25 +145,25 @@ void __cdecl fcn_00466550(int idx, int surf)
 			e->i[0x1d4 / 4] = *(unsigned short*) (font + 6);
 			e->i[0x1d8 / 4] = *(unsigned short*) (font + 8);
 			if (e->i[0x60 / 4] != 0 && *(float*) ((char*) e + 0x1f4) == g_6628a8) {
-				fcn_0047cbf0(f->x, f->y, surf, font, g_772568);
+				fcn_0047cbf0(f->x, f->y, surf, font, d2_ResourceOffset);
 			} else {
-				fcn_0047cba0(f->x, f->y, surf, font, g_772568);
+				fcn_0047cba0(f->x, f->y, surf, font, d2_ResourceOffset);
 			}
 			if (*(float*) ((char*) e + 0x1f4) != g_6628a8) {
 				y = (int) ((*(double*) 0x6629c8 - *(float*) ((char*) e + 0x1f4))
 				    * e->i[0x1c / 4] + f->y);
-				if (y > g_67d968) {
-					y = g_67d968;
+				if (y > d2_ClipBottom) {
+					y = d2_ClipBottom;
 				}
-				fcn_0047a040(g_7725f8, g_7725fc, g_67d964, y);
-				fcn_0047cbf0(f->x, f->y, g_77250c, font, g_772568);
-				fcn_0047a040(g_7725f8, g_7725fc, g_67d964, g_67d968);
-				if (g_67d370 != e->i[0]) {
+				fcn_0047a040(d2_ClipLeft, g_7725fc, d2_ClipRight, y);
+				fcn_0047cbf0(f->x, f->y, g_77250c, font, d2_ResourceOffset);
+				fcn_0047a040(d2_ClipLeft, g_7725fc, d2_ClipRight, d2_ClipBottom);
+				if (d2_CurrentElementId != e->i[0]) {
 					width = (int) (((*(float*) (g_1015ea0 + f->ent * 0x2f4 + 0x1f4) > *(double*) 0x6629c8)
 					    ? *(double*) 0x6629c8
 					    : *(float*) (g_1015ea0 + f->ent * 0x2f4 + 0x1f4)) * *(double*) 0x662c38);
 					sprintf(buf3, (char*) 0x67d43c, width);
-					fcn_00472880(g_67d398 + 1);
+					fcn_00472880(d2_DefaultFont + 1);
 					fcn_0046bd20(f->x,
 					    e->i[0x14 / 4] + e->i[0x1c / 4] - 0xf,
 					    *(unsigned short*) (font + 6), f->h, surf,
@@ -189,7 +189,7 @@ void __cdecl fcn_00466550(int idx, int surf)
 	if (g_67d374 != -1
 	    && *(char*) (g_1015ea0 + f->ent * 0x2f4 + 0xcc) != 0
 	    && g_1015ea0 + g_67d374 * 0x2f4 == g_1015ea0 + f->ent * 0x2f4
-	    && g_7725d0 == 0) {
+	    && tp_d2_SelectedControl == 0) {
 		g_7725a4 = (int) (g_1015ea0 + f->ent * 0x2f4);
 		g_7725a0 = *(int*) (g_1015ea0 + f->ent * 0x2f4 + 0x40);
 	}

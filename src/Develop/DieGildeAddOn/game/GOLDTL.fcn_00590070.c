@@ -13,13 +13,13 @@ struct house {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern int g_774800;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_14b556c;
 
@@ -59,7 +59,7 @@ void __cdecl fcn_00590070(char* who)
 	int k;
 
 	hh = 0;
-	st = fcn_00500e20(&g_7f4c00);
+	st = fcn_00500e20(&gm_GameTime);
 	if (fcn_00525fb0(who) != 0) {
 		return;
 	}
@@ -79,7 +79,7 @@ void __cdecl fcn_00590070(char* who)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0x4138);
 	d2_SetForm(h, 3);
@@ -116,11 +116,11 @@ void __cdecl fcn_00590070(char* who)
 			}
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == b1) {
+			if (d2_CurrentElementId == b1) {
 				k = 1;
-			} else if (g_67d370 == b2) {
+			} else if (d2_CurrentElementId == b2) {
 				k = 2;
-			} else if (g_67d370 == b4) {
+			} else if (d2_CurrentElementId == b4) {
 				k = 4;
 			} else {
 				continue;

@@ -34,7 +34,7 @@ void __cdecl fcn_00536740(void)
 		}
 		if (g_14ce8e0 != 0) {
 			p = *(int*) (((char*)g_67a370) + 0xb0);
-			if (fcn_0045bad0(p, g_100f1e8, g_100f1ec, &b, &a) != 0 &&
+			if (fcn_0045bad0(p, d2_MouseX, d2_MouseY, &b, &a) != 0 &&
 			    fcn_0045b920(p, b, a, buf) != 0) {
 				fcn_004cf110(buf);
 			}

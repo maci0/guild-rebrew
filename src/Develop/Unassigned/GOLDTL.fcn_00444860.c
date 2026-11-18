@@ -136,7 +136,7 @@ unsigned char __cdecl fcn_00444860(float x, float y, int obj, int index,
 	fr.t1 = fr.e2y * fr.e1x;
 	fr.w1 = fr.e2x * fr.e1y;
 	n3 = fr.t1 - fr.w1;
-	fr.dx = x - g_1052bc0;
+	fr.dx = x - d3_ViewportCenterX;
 	fr.dy = -(y - g_1052bc8);
 	fr.dz = g_10432a4;
 	den = fr.dz * n3 + fr.dy * n2 + fr.dx * n1;

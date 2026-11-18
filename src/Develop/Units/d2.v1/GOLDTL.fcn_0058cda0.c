@@ -13,13 +13,13 @@ struct house {
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_665f78[];
-extern int g_7e46ac;
+extern int main_LoopFlags;
 
 int __cdecl fcn_004f4440(struct house*, int, int, int, int*);
 int __cdecl fcn_00470820(int, int, char*);
@@ -59,7 +59,7 @@ int __cdecl fcn_0058cda0(char* who, int k)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	if (*(unsigned short*) (who + 0x27) == g_774970) {
 		io_AppendText(0x410c, 0x4109, who, g_665f78[k]);
@@ -75,13 +75,13 @@ int __cdecl fcn_0058cda0(char* who, int k)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == ok) {
+			if (d2_CurrentElementId == ok) {
 				if (x == 0 || fcn_00526010(&((struct house*)g_7f4ca0)[g_774970], x, g_773d75) != 0) {
 					id = fcn_004f0430(&((struct house*)g_7f4ca0)[g_774970], who, k, 10, x);
 					while (id != -1 && fcn_004c4450(id) == 0) {
 						fcn_005373e0(0, 0x20007);
 					}
-					g_7e46ac = 0x677c7;
+					main_LoopFlags = 0x677c7;
 					if (fcn_004c4450(id) == 2) {
 						io_FormatTextBuffer(buf, 0x411b, (*(unsigned short*) (who + 0x27) == g_774970) + 0x4108,
 						    g_665f78[k]);
@@ -91,7 +91,7 @@ int __cdecl fcn_0058cda0(char* who, int k)
 						r = 1;
 					}
 				}
-			} else if (g_67d370 == cancel) {
+			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;
 			}
 		}

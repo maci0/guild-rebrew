@@ -38,7 +38,7 @@ found:
 	pool[i] = *(EntityStruct*) src;
 	*(int*) ((char*) g_9b4a40 + i * 0x21c + 0x1ac) = 0;
 	*(int*) ((char*) g_9b4a40 + i * 0x21c + 0x184) = 0;
-	fcn_004fe2e0(rec, g_6b8010, 0, 0, 0, (int*) a2);
+	fcn_004fe2e0(rec, d3_CurrentContextIndex, 0, 0, 0, (int*) a2);
 	obj = *(char**) ((char*) g_9b4a40 + i * 0x21c + 0x184);
 	*(unsigned char*) (obj + 0x240) = 4;
 	obj = *(char**) ((char*) g_9b4a40 + i * 0x21c + 0x184);

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 extern float g_6628a8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6629b0;
@@ -70,13 +70,13 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 	char msg[3][0x80];
 	int i;
 
-	cam = g_6b8014;
+	cam = d3_ActiveCamera;
 	
 	in[0] = self->x - *(float*) (cam + 0x84);
 	in[1] = self->y - *(float*) (cam + 0x88);
 	in[2] = self->z - *(float*) (cam + 0x8c);
 	fcn_00451900(in, out);
-	cam = g_6b8014; m = (float*) (cam + 0x18c);
+	cam = d3_ActiveCamera; m = (float*) (cam + 0x18c);
 	b0 = (out[4] + out[0]) * 0.0f + out[8] * g_6629b0;
 	self->x = *(float*) (cam + 0x84);
 	self->y = *(float*) (cam + 0x88);
@@ -97,8 +97,8 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 	u0 = (m[0] + m[8]) * 0.0f - m[4] * g_662a6c;
 	u1 = (m[1] + m[9]) * 0.0f - m[5] * g_662a6c;
 	u2 = (m[2] + m[10]) * 0.0f - m[6] * g_662a6c;
-	hw = (float) ((g_1042578 - g_1042570) >> 1);
-	hh = (float) ((g_104257c - g_1042574) >> 1);
+	hw = (float) ((d3_ViewportRight - g_1042570) >> 1);
+	hh = (float) ((d3_ViewportBottom - g_1042574) >> 1);
 	half = (hw > hh) ? hw : hh;
 	cx = (float) g_1042570 + hw;
 	cy = (float) g_1042574 + hh;

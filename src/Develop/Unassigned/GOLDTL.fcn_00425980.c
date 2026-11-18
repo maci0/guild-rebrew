@@ -20,9 +20,9 @@ int __cdecl fcn_00425980(char* lang)
 	char* s;
 	char* p;
 
-	if (g_6b7d68 != 0) {
+	if (sbs_BankManager != 0) {
 		s = fcn_00424760(name, 0x100);
-		*(int*) (g_6b7d68 + 0x34) = 0;
+		*(int*) (sbs_BankManager + 0x34) = 0;
 		while (s != 0) {
 			p = strstr(name, "%lang");
 			if (p != 0) {
@@ -34,7 +34,7 @@ int __cdecl fcn_00425980(char* lang)
 			if (*(int*) (s + 0x100) == 0) {
 				return -1;
 			}
-			*(int*) (g_6b7d68 + 0x34) += *(int*) (s + 0x100);
+			*(int*) (sbs_BankManager + 0x34) += *(int*) (s + 0x100);
 			s = fcn_00424790(s, name, 0x100);
 		}
 		for (v = fcn_00424810(vname, 0x100); v != 0; v = fcn_00424840(v, vname, 0x100)) {
@@ -51,7 +51,7 @@ int __cdecl fcn_00425980(char* lang)
 				if (*(int*) (s + 0x100) == 0) {
 					return -1;
 				}
-				*(int*) (g_6b7d68 + 0x34) += *(int*) (s + 0x100);
+				*(int*) (sbs_BankManager + 0x34) += *(int*) (s + 0x100);
 				*(int*) (v + 0x34) += *(int*) (s + 0x100);
 				s = fcn_00424790(s, name, 0x100);
 			}

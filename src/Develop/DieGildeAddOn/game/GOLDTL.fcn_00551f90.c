@@ -49,7 +49,7 @@ typedef struct {
 } Order_551f90;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -72,7 +72,7 @@ void __cdecl fcn_00551f90(Order_551f90* o)
 	Player_551f90* p;
 	int i;
 
-	o->stamp = (*(Stamp_551f90*)&g_7f4c00);
+	o->stamp = (*(Stamp_551f90*)&gm_GameTime);
 	n = 0x100;
 	i = gm_RandomMod(0x100);
 	do {
@@ -110,7 +110,7 @@ void __cdecl fcn_00551f90(Order_551f90* o)
 			*(int*) (m + 0xc) = -1;
 			m[4] = 0x78;
 			m[0x36] = 9;
-			*(Stamp_551f90*) (m + 0x28) = (*(Stamp_551f90*)&g_7f4c00);
+			*(Stamp_551f90*) (m + 0x28) = (*(Stamp_551f90*)&gm_GameTime);
 			for (i = 0; i < 0x300; i++) {
 				if (((Entity_551f90*)g_7f4ca0)[i].type == 6 || ((Entity_551f90*)g_7f4ca0)[i].type == 7) {
 					*(int*) (m + 8) = ((Entity_551f90*)g_7f4ca0)[i].id;

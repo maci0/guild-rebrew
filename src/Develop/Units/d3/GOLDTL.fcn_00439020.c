@@ -35,9 +35,9 @@ extern unsigned char g_1042557;
 extern unsigned char g_1043277;
 extern int g_1042fc0;
 extern char g_1043060;
-extern char g_1042340[];
+extern char d3_SceneObjectSentinel[];
 extern unsigned int g_14ce7e0;
-extern char* g_1043254;
+extern char* d3_ObjectListHead;
 extern char* g_1042538;
 #include "Develop/Units/d3/d3_camera.h"
 extern char* g_1042c38;
@@ -55,7 +55,7 @@ extern char g_10421c0[];
 extern int g_1041d08;
 extern int g_6b8008;
 extern int g_67a374;
-extern int g_6b805c;
+extern int d3_FogColor;
 extern unsigned char g_6b7ff8;
 extern char g_6b8018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -117,11 +117,11 @@ char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
 	g_1042557 |= 2;
 	g_1043277 |= 2;
 	fcn_00439e70(((char*)&g_1043060));
-	fcn_00439e70(g_1042340);
+	fcn_00439e70(d3_SceneObjectSentinel);
 	n = g_14ce7e0;
-	g_1043254 = g_1042340;
+	d3_ObjectListHead = d3_SceneObjectSentinel;
 	g_1042538 = ((char*)&g_1043060);
-	g_6b8014 = 0;
+	d3_ActiveCamera = 0;
 	g_1042c38 = g_1042d00;
 	g_1042ef8 = 0;
 	g_1042c3c = 0;
@@ -138,14 +138,14 @@ char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
 	fcn_0045bed0(g_10529e0.a18, g_10529e0.a1c);
 	fcn_00436aa0(&g_67a374);
 	fcn_00436f70(1);
-	g_6b805c = 0;
+	d3_FogColor = 0;
 	g_6b7ff8 = g_10529e0.b34;
 	fcn_0043bc00(g_10529e0.b30, g_10529e0.b28);
 	fcn_00456750(g_10529e0.bpp, 0x80, 0x100, 0x20, 0, 1, 0x20);
 	InitColorTable();
 	g_6b8018 = 1;
 	fcn_00438da0(g_10529e0.x, g_10529e0.y, g_10529e0.cw, g_10529e0.ch, g_10529e0.f4c, g_10529e0.f50, g_10529e0.f54, g_10529e0.w, g_10529e0.h);
-	g_6b8010 = 0;
+	d3_CurrentContextIndex = 0;
 	g_1052bc4 = (float) atan2(g_1052bbc, g_10432a4);
 	g_1052bb8 = (float) atan2(g_1052bb4, d3_ProjectionScaleY);
 	{

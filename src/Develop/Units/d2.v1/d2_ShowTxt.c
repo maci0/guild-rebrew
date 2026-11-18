@@ -75,7 +75,7 @@ typedef int D2_TEXT_COORD;
 
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
-extern int g_67d398;
+extern int d2_DefaultFont;
 extern char g_67d5bc[];
 extern char s_67d420[];
 
@@ -86,7 +86,7 @@ void __cdecl fcn_0046f650(int slot, D2_TEXT_WINDOW* parent);
 #define d2_TEXT_WINDOWS ((D2_TEXT_WINDOW*)g_1015f40)
 #define d2_TEXT_ENTRIES ((D2_TEXT_ENTRY*)g_1015ea0)
 #define d2_TEXT_ERROR s_67d420
-#define d2_TEXT_DEFAULT_FONT g_67d398
+#define d2_TEXT_DEFAULT_FONT d2_DefaultFont
 #define d2_TEXT_TAG g_67d5bc
 #define d2_TEXT_ALLOCATE_INDEX fcn_00469890
 #define d2_TEXT_MEASURE fcn_0046b520

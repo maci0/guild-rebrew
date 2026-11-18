@@ -3,7 +3,7 @@
 extern float g_6628cc;
 extern float g_662910;
 extern float g_665ef8;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -53,7 +53,7 @@ void __cdecl fcn_005797a0(char* a0)
 	float increment;
 	float v23;
 
-	handle = fcn_00500e20(&g_7f4c00);
+	handle = fcn_00500e20(&gm_GameTime);
 	search = 0;
 	row = 0;
 	param = 0;
@@ -112,11 +112,11 @@ void __cdecl fcn_005797a0(char* a0)
 			*(float*) (a0 + 0xb0) = v23;
 		}
 		*(int*) (a0 + 0xb4) = *(int*) (a0 + 0xb4) - value;
-		*(int*) (a0 + 0xb8) = g_7f4c00;
+		*(int*) (a0 + 0xb8) = gm_GameTime;
 		*(int*) (a0 + 0xbc) = g_7f4c04;
 		*(int*) (a0 + 0xc0) = g_7f4c08;
 		*(short*) (a0 + 0xc4) = g_7f4c0c;
-		*(int*) (a0 + 0x52) = g_7f4c00;
+		*(int*) (a0 + 0x52) = gm_GameTime;
 		*(int*) (a0 + 0x56) = g_7f4c04;
 		*(int*) (a0 + 0x5a) = g_7f4c08;
 		*(short*) (a0 + 0x5e) = g_7f4c0c;

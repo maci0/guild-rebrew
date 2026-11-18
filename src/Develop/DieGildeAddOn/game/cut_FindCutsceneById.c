@@ -8,9 +8,9 @@ char* __cdecl cut_FindCutsceneById(int a1)
 	int i;
 	int a;
 
-	for (i = 0, a = (int) g_9a9660; a < (int) g_9a9660 + 0x6780; a += 0x114, i++) {
+	for (i = 0, a = (int) cut_Cutscenes; a < (int) cut_Cutscenes + 0x6780; a += 0x114, i++) {
 		if (*(char*) (a + 0x30) != 0 && *(int*) a == a1) {
-			return (char*) ((int) g_9a9660 + i * 276);
+			return (char*) ((int) cut_Cutscenes + i * 276);
 		}
 	}
 	return 0;

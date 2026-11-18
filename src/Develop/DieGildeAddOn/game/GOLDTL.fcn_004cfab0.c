@@ -1,5 +1,5 @@
 extern int g_9ba2e0[0x20];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern double g_662c38;
 
 char __cdecl fcn_00443e10(int, int*);
@@ -36,11 +36,11 @@ void __cdecl fcn_004cfab0(int a0, int a1)
 		if (g_9ba2e0[slot] == -1) {
 			fcn_004ceac0(a0, a1);
 			g_9ba2e0[slot] = fcn_0046e940(x0, y0, w, h, 0x10);
-			fcn_0046f740(0, 0, 0x7b0, g_772514);
-			fcn_0046f740(w - 0x18, 0, 0x7b1, g_772514);
-			*(int*) (0x10161cc + g_772514 * 0x3cc) = 0x54;
+			fcn_0046f740(0, 0, 0x7b0, d2_CurrentWindowId);
+			fcn_0046f740(w - 0x18, 0, 0x7b1, d2_CurrentWindowId);
+			*(int*) (0x10161cc + d2_CurrentWindowId * 0x3cc) = 0x54;
 			fcn_00534160(4, 4, fcn_00507e30(a1, 3, 0x4df));
-			fcn_00472380(fcn_004677e0(0, 0xe, 0x40, 0, 0x64, 0x75, 0x442, g_772514), 0, 0x64,
+			fcn_00472380(fcn_004677e0(0, 0xe, 0x40, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId), 0, 0x64,
 			    (int) (fcn_004ff040(a1) * g_662c38));
 			return;
 		}

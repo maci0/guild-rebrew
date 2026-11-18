@@ -40,21 +40,21 @@ void __cdecl fcn_004e4910(void)
 	}
 	if (evt_LastGfxScriptId != -1) {
 		for (w = fcn_00426cc0(evt_LastGfxScriptId); w != 0 && (w[0x124] & 1) != 0; w = fcn_00426cc0(evt_LastGfxScriptId))
-			fcn_005373e0(0, g_68bfb8 | 0x80);
+			fcn_005373e0(0, cut_EventLoopFlags | 0x80);
 	}
 	fcn_004e4640();
 	fcn_004e4680();
 	if (g_68bfc4 != -1) {
 		for (w = fcn_00426cc0(g_68bfc4); w != 0 && (w[0x124] & 1) != 0; w = fcn_00426cc0(g_68bfc4))
-			fcn_005373e0(0, g_68bfb8 | 0x80);
+			fcn_005373e0(0, cut_EventLoopFlags | 0x80);
 	}
 	if (*(int*) (((char*)g_67a370) + 0xb0) != 0) {
 		gv_Free3Fields(*(int*) (((char*)g_67a370) + 0xb0));
 		*(int*) (((char*)g_67a370) + 0xb0) = 0;
 	}
-	fcn_00433780(g_6b8014);
+	fcn_00433780(d3_ActiveCamera);
 	d3_ActiveCameraAnimation = 0;
-	g_6b5cbc = 0;
+	d3_CameraAnimating = 0;
 	fcn_00442e30();
 	g_772f4c--;
 }

@@ -28,7 +28,7 @@ typedef struct {
 // SIZE 0xbc
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_00546190(Ent *);
 int __cdecl fcn_004c4450(int);
@@ -115,7 +115,7 @@ void __cdecl fcn_0055aca0(Ent *e)
 			n++;
 		}
 		if (n == 2) {
-			e->t = (*(Time*)&g_7f4c00);
+			e->t = (*(Time*)&gm_GameTime);
 			fcn_00500bb0(&e->t, 0, 5, 0);
 			e->wait = fcn_004c5620(0, e);
 			return;
@@ -124,6 +124,6 @@ void __cdecl fcn_0055aca0(Ent *e)
 	default:
 		return;
 	}
-	e->t = (*(Time*)&g_7f4c00);
+	e->t = (*(Time*)&gm_GameTime);
 	e->wait = fcn_004c5620(1, e);
 }

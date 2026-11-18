@@ -3,14 +3,14 @@
 #include <string.h>
 
 extern char* g_1015ea0;
-extern int g_1015ea4;
+extern int d2_FontHeight;
 extern char g_102d150[];
 extern char g_102d29c[];
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern char g_14cf950;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
-extern int g_7725d0;
+extern int tp_d2_SelectedControl;
 
 int __cdecl fcn_00467240(int, int, int, int, int);
 void __cdecl fcn_00472900(int, int);
@@ -27,20 +27,20 @@ int __cdecl fcn_005e0b40(int a, int b, char* text)
 	int h;
 
 	result = 0;
-	h = fcn_00467240(a, b, 0, g_1015ea4, 1);
+	h = fcn_00467240(a, b, 0, d2_FontHeight, 1);
 	fcn_00472900(h, 0x53);
 	d2_SetElementValue(h, text);
 	fcn_00474cf0(h);
 	*(int*) (g_102d150 + *(int*) (g_1015ea0 + h * 0x2f4 + 0x88) * 0x160) = 0x80;
 	*(int*) (g_102d29c + *(int*) (g_1015ea0 + h * 0x2f4 + 0x88) * 0x160) = 0x110;
 	d2_SetBildArgument(h, 0x1f);
-	while (fcn_005373e0(fcn_005e0b40, g_7e46ac) != 0) {
+	while (fcn_005373e0(fcn_005e0b40, main_LoopFlags) != 0) {
 		if ((*(unsigned char*)&g_14cf950) == 0x1c) {
 			strcpy(text, fcn_00471f80(h));
 			g_774654 = 1;
 			result = 1;
 		}
-		if (g_14ce8e0 != 0 || g_7725d0 == 0) {
+		if (g_14ce8e0 != 0 || tp_d2_SelectedControl == 0) {
 			g_774654 = 1;
 		}
 	}

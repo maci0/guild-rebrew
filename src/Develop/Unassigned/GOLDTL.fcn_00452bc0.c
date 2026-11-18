@@ -28,9 +28,9 @@ void __cdecl fcn_00452bc0(void)
 	char* next;
 
 	((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x8d, 1);
-	((IDev*)g_6b5de0)->v->SetStreamSource(((IDev*)g_6b5de0), 0, g_104095c, g_6b8714);
+	((IDev*)g_6b5de0)->v->SetStreamSource(((IDev*)g_6b5de0), 0, tp_d3_RenderVertexBuffer, g_6b8714);
 	((IDev*)g_6b5de0)->v->SetVertexShader(((IDev*)g_6b5de0), g_6b8710);
-	for (p = g_1040c74; p != g_1040640; p = next) {
+	for (p = d3_SceneRenderListHead; p != g_1040640; p = next) {
 		next = *(char**) (p + 0x314);
 		fcn_00452740(p);
 	}

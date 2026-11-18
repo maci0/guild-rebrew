@@ -17,9 +17,9 @@ typedef struct {
 
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char* g_773da8;
+extern char* gm_CityEntity;
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -44,7 +44,7 @@ void __cdecl fcn_005b54b0(char* p)
 		return;
 	}
 	do {
-		if (*(short*) (e + 0x27) != *(short*) g_773da8) {
+		if (*(short*) (e + 0x27) != *(short*) gm_CityEntity) {
 			break;
 		}
 		gm_FindNextFilteredEntity();
@@ -89,7 +89,7 @@ void __cdecl fcn_005b54b0(char* p)
 			n++;
 		}
 	}
-	*(int*) (msg + 0x18) = (*(int*)&g_7f4c00);
+	*(int*) (msg + 0x18) = (*(int*)&gm_GameTime);
 	*(int*) (msg + 0x1c) = (*(int*)&g_7f4c04);
 	*(int*) (msg + 0x20) = g_7f4c08;
 	*(short*) (msg + 0x24) = g_7f4c0c;

@@ -27,7 +27,7 @@ extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_6ac820[];
 extern char g_6811b0[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_772500;
 extern char* g_77255c;
 #include "client_types.h"
@@ -77,7 +77,7 @@ int __cdecl fcn_005c8400(void)
 	h = fcn_00470820(0, 0, g_6ac820);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 2);
 	io_AppendText(0x1f3e);
 	d2_SetForm(h, 4);
@@ -104,11 +104,11 @@ int __cdecl fcn_005c8400(void)
 	}
 	cy = *(short*) (g_772500 + 0x269d8);
 	d2_SetForm(h, 0);
-	fcn_00533f40(0x215, 0x16b, g_772514, fcn_00472830(h, 3), 0x6a, &id2, &id1, &id3);
+	fcn_00533f40(0x215, 0x16b, d2_CurrentWindowId, fcn_00472830(h, 3), 0x6a, &id2, &id1, &id3);
 	for (i = 0; i < n; i++) {
 		d2_SetForm(h, 3);
-		lines[i].btn = fcn_0046f740((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a, 0x75a, g_772514);
-		lines[i].bar = fcn_0046f100((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a + 4, cy, 0x62, 0x10, g_772514);
+		lines[i].btn = fcn_0046f740((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a, 0x75a, d2_CurrentWindowId);
+		lines[i].bar = fcn_0046f100((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a + 4, cy, 0x62, 0x10, d2_CurrentWindowId);
 		lines[i].e = list[i];
 		/* both fields through one symbol: c2 chains the two stores, which issues the bar store first */
 		*(int*) (((char*)g_1015f40) + lines[i].bar * 0x3cc + 0x28c) = 0x56;

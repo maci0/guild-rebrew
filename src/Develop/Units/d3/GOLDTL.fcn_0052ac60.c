@@ -26,7 +26,7 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/d3_camera.h"
-extern float g_774690;
+extern float d3_CameraHeightFraction;
 extern float g_774694;
 extern float g_6a2558;
 extern float g_6a255c;
@@ -35,7 +35,7 @@ extern float g_6a2564;
 extern float g_7e3a40[3];
 extern float g_7e3a44;
 extern float g_7e3a48;
-extern float g_7e3a50[3];
+extern float d3_CameraTargetRotation[3];
 extern float g_7e3a54;
 extern float g_7e3a58;
 
@@ -49,25 +49,25 @@ void __cdecl fcn_0052ac60(float t)
 	Vec4 p;
 	Vec3 r;
 
-	if (g_6b8010 == 0) {
-		g_774690 = t;
+	if (d3_CurrentContextIndex == 0) {
+		d3_CameraHeightFraction = t;
 		g_774694 = t;
-		h = fcn_00413d10(&((View*)g_6b8014)->pos);
-		p.x = ((View*)g_6b8014)->pos.x;
-		p.y = ((View*)g_6b8014)->pos.y;
-		p.z = ((View*)g_6b8014)->pos.z;
-		p.y = (g_6a2560 - g_6a2558) * g_774690 + g_6a2558 + h;
-		fcn_00438b40(((View*)g_6b8014), &p);
-		r.x = ((View*)g_6b8014)->rot.x;
-		r.y = ((View*)g_6b8014)->rot.y;
-		r.z = ((View*)g_6b8014)->rot.z;
+		h = fcn_00413d10(&((View*)d3_ActiveCamera)->pos);
+		p.x = ((View*)d3_ActiveCamera)->pos.x;
+		p.y = ((View*)d3_ActiveCamera)->pos.y;
+		p.z = ((View*)d3_ActiveCamera)->pos.z;
+		p.y = (g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558 + h;
+		fcn_00438b40(((View*)d3_ActiveCamera), &p);
+		r.x = ((View*)d3_ActiveCamera)->rot.x;
+		r.y = ((View*)d3_ActiveCamera)->rot.y;
+		r.z = ((View*)d3_ActiveCamera)->rot.z;
 		r.x = (g_6a2564 - g_6a255c) * g_774694 + g_6a255c;
-		fcn_00438cb0(((View*)g_6b8014), &r);
-		(*(float*)g_7e3a50) = ((View*)g_6b8014)->rot.x;
-		g_7e3a54 = ((View*)g_6b8014)->rot.y;
-		g_7e3a58 = ((View*)g_6b8014)->rot.z;
-		(*(float*)g_7e3a40) = ((View*)g_6b8014)->pos.x;
-		g_7e3a44 = ((View*)g_6b8014)->pos.y;
-		g_7e3a48 = ((View*)g_6b8014)->pos.z;
+		fcn_00438cb0(((View*)d3_ActiveCamera), &r);
+		(*(float*)d3_CameraTargetRotation) = ((View*)d3_ActiveCamera)->rot.x;
+		g_7e3a54 = ((View*)d3_ActiveCamera)->rot.y;
+		g_7e3a58 = ((View*)d3_ActiveCamera)->rot.z;
+		(*(float*)g_7e3a40) = ((View*)d3_ActiveCamera)->pos.x;
+		g_7e3a44 = ((View*)d3_ActiveCamera)->pos.y;
+		g_7e3a48 = ((View*)d3_ActiveCamera)->pos.z;
 	}
 }

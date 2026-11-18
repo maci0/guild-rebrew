@@ -10,7 +10,7 @@ typedef struct
 #pragma pack(pop)
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_6a5af4[];
 extern char g_6a5ae0[];
 
@@ -41,14 +41,14 @@ void __cdecl fcn_0054ee10(char* t)
 	int n;
 	int i;
 
-	*(fcn_0054ee10_Stamp*) (t + 0x52) = (*(fcn_0054ee10_Stamp*)&g_7f4c00);
+	*(fcn_0054ee10_Stamp*) (t + 0x52) = (*(fcn_0054ee10_Stamp*)&gm_GameTime);
 	*(int*) (t + 0x70) = 2;
 	if ((t[0x78] & 2) == 0)
 		return;
 	firstEntity = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 	secondEntity = gm_LookupEntityRecordById(*(int*) (t + 0xb0));
 	if (firstEntity == 0 || (*(int*) (firstEntity + 0x1c8) & 0x100) || secondEntity == 0 || (*(int*) (secondEntity + 0x1c8) & 0x200)) {
-		*(fcn_0054ee10_Stamp*) (t + 0x52) = (*(fcn_0054ee10_Stamp*)&g_7f4c00);
+		*(fcn_0054ee10_Stamp*) (t + 0x52) = (*(fcn_0054ee10_Stamp*)&gm_GameTime);
 		fcn_00500bb0((fcn_0054ee10_Stamp*) (t + 0x52), 0, 2, 0);
 		*(int*) (t + 0x84) = fcn_004c5620(-1, t);
 		return;

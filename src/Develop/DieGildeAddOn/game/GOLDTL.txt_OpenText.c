@@ -17,7 +17,7 @@ extern char g_13350d0[];
 extern char g_1053000[][0x50];
 extern char g_11cd000[][0x50];
 extern char g_1335120[][0x50];
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 extern int g_14b7320[];
 extern int g_14b731c[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -48,7 +48,7 @@ char* __cdecl fcn_00657a73(int value, char* buf, int radix);
 /* Reads the stdio EOF flag at FILE+0xc. */
 #define STREAM_FLAG(f) (*(int*) ((char*) (f) + 0xc))
 
-#define BANK(i) ((TextBank_42bf20*) g_149d120)[i]
+#define BANK(i) ((TextBank_42bf20*) txt_TextBanks)[i]
 
 /* ADDRESS: GOLDTL 0x0042bf20 */
 int __cdecl txt_OpenText(char* a1, char* a2)
@@ -97,16 +97,16 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 	v48 = 0;
 	v44 = 0;
 	v3c = 0;
-	g_6b7f98 = 0;
+	txt_EntryCount = 0;
 	v10 = 0x80;
-	p = (char*) g_149d120 + 0x68;
+	p = (char*) txt_TextBanks + 0x68;
 	do {
 		*(int*) p = 0;
 		p += 0x74;
-	} while ((int) p < (int) g_149d120 + 0x3a68);
+	} while ((int) p < (int) txt_TextBanks + 0x3a68);
 
 	p = m_alloc(0x4800000, "txt_txt_t:TextArray");
-	g_6b7fa0 = p;
+	txt_TextBuffer = p;
 	if (p == 0) {
 		MessageBoxA((HWND) 0, "Konnte speicher nicht reservieren!", "txt_OpenText", 0x30);
 		return 0;
@@ -115,11 +115,11 @@ int __cdecl txt_OpenText(char* a1, char* a2)
 	memset(p, 0, 0x4800000);
 	memset(g_1053000, 0, 0x168000);
 	memset(g_11cd000, 0, 0x168000);
-	memset(g_14a5320, 0, 0x12000);
-	memset(g_149d120, 0, 0x3a00);
+	memset(txt_TextEntries, 0, 0x12000);
+	memset(txt_TextBanks, 0, 0x3a00);
 	for (p = (char*) g_11bb000; p < (char*) (g_11bb000 + 0x4800); p += 4) *(int*) p = 0xff;
 
-	g_6b7f98 = 0;
+	txt_EntryCount = 0;
 	g_6b7fa4 = 0;
 	v18 = 0x4800;
 	p = (char*) fcn_0064d1a0(a1, '\\');
@@ -221,8 +221,8 @@ pass1_done:
 		if (fp == 0) {
 			fcn_0064d41a(msg, "Could not open TextFile: '%s' !", line);
 			MessageBoxA((HWND) 0, msg, "Error", 0x30);
-			m_FreeTracked(g_6b7fa0);
-			g_6b7fa0 = 0;
+			m_FreeTracked(txt_TextBuffer);
+			txt_TextBuffer = 0;
 			return 0;
 		}
 		v24 = 0;
@@ -297,22 +297,22 @@ pass1_done:
 							p = (char*) strstr(msg, "/*");
 						}
 						k = (int) strlen(msg);
-						if (strlen(&g_6b7fa0[g_6b7f98 * 0x1000]) + k > 0xfff) {
+						if (strlen(&txt_TextBuffer[txt_EntryCount * 0x1000]) + k > 0xfff) {
 							fcn_0064d41a(msg, "String too long in file %s in line %i", inc[v2c], v24);
-							m_FreeTracked(g_6b7fa0);
-							g_6b7fa0 = 0;
+							m_FreeTracked(txt_TextBuffer);
+							txt_TextBuffer = 0;
 							return 0;
 						}
-						strncat(&g_6b7fa0[g_6b7f98 * 0x1000], msg, k);
+						strncat(&txt_TextBuffer[txt_EntryCount * 0x1000], msg, k);
 					}
 					else {
-						if (strlen(&g_6b7fa0[g_6b7f98 * 0x1000]) + k > 0xfff) {
+						if (strlen(&txt_TextBuffer[txt_EntryCount * 0x1000]) + k > 0xfff) {
 							fcn_0064d41a(msg, "String too long in file %s in line %i", inc[v2c], v24);
-							m_FreeTracked(g_6b7fa0);
-							g_6b7fa0 = 0;
+							m_FreeTracked(txt_TextBuffer);
+							txt_TextBuffer = 0;
 							return 0;
 						}
-						strncat(&g_6b7fa0[g_6b7f98 * 0x1000], line + v10, k);
+						strncat(&txt_TextBuffer[txt_EntryCount * 0x1000], line + v10, k);
 						v10 += k;
 						v14 += k;
 					}
@@ -331,13 +331,13 @@ pass1_done:
 							}
 							msg[0] = '|';
 							strcpy(msg + 1, line + v10);
-							if (strlen(&g_6b7fa0[g_6b7f98 * 0x4800000]) + strlen(msg) > 0xfff) {
+							if (strlen(&txt_TextBuffer[txt_EntryCount * 0x4800000]) + strlen(msg) > 0xfff) {
 								fcn_0064d41a(msg, "String too long in file %s in line %i", inc[v2c], v24);
-								m_FreeTracked(g_6b7fa0);
-								g_6b7fa0 = 0;
+								m_FreeTracked(txt_TextBuffer);
+								txt_TextBuffer = 0;
 								return 0;
 							}
-							strncat(&g_6b7fa0[g_6b7f98 * 0x1000], msg, strlen(msg));
+							strncat(&txt_TextBuffer[txt_EntryCount * 0x1000], msg, strlen(msg));
 							g_6b7fa4 += (int) strlen(msg);
 							v10 += k + 1;
 							v14 += k + 1;
@@ -367,16 +367,16 @@ pass1_done:
 					}
 					break;
 				case ';':
-					strcpy(g_1053000[g_6b7f98], (char*) (0x13350d0 + v34));
-					strcat(g_1053000[g_6b7f98], "+");
-					fcn_00657a73(g_6b7f98 - g_14b731c[v2c], u140, 10);
-					strcat(g_1053000[g_6b7f98], u140);
+					strcpy(g_1053000[txt_EntryCount], (char*) (0x13350d0 + v34));
+					strcat(g_1053000[txt_EntryCount], "+");
+					fcn_00657a73(txt_EntryCount - g_14b731c[v2c], u140, 10);
+					strcat(g_1053000[txt_EntryCount], u140);
 					g_6b7fa4 = g_6b7fa4 + 1;
-					g_6b7f98 = g_6b7f98 + 1;
-					if (g_6b7f98 > 0x4800) {
+					txt_EntryCount = txt_EntryCount + 1;
+					if (txt_EntryCount > 0x4800) {
 						MessageBoxA((HWND) 0, "Zuviele Textenums!", "txt_OpenText", 0x30);
-						m_FreeTracked(g_6b7fa0);
-						g_6b7fa0 = 0;
+						m_FreeTracked(txt_TextBuffer);
+						txt_TextBuffer = 0;
 						fcn_0064e1fd(fp);
 						return 0;
 					}
@@ -387,12 +387,12 @@ pass1_done:
 					if (v44 != 0) {
 						fcn_0064d41a(msg, "Syntax error in file %s in line %i: missing ';'", line, v24);
 						MessageBoxA((HWND) 0, msg, "txt_OpenText", 0x30);
-						m_FreeTracked(g_6b7fa0);
-						g_6b7fa0 = 0;
+						m_FreeTracked(txt_TextBuffer);
+						txt_TextBuffer = 0;
 						fcn_0064e1fd(fp);
 						return 0;
 					}
-					g_14b7320[v18] = g_6b7f98;
+					g_14b7320[v18] = txt_EntryCount;
 					v3c = v10;
 					while (v3c < (int) strlen(line) && line[v3c] != 0xa && line[v3c] != 0x20 && line[v3c] != 9) {
 						v3c++;
@@ -430,8 +430,8 @@ pass1_done:
 						if (v18 > 0x4800) {
 							fcn_0064d41a(msg, "Zuviele Label! Zeile:%i", v24);
 							MessageBoxA((HWND) 0, msg, "txt_OpenText", 0x30);
-							m_FreeTracked(g_6b7fa0);
-							g_6b7fa0 = 0;
+							m_FreeTracked(txt_TextBuffer);
+							txt_TextBuffer = 0;
 							fcn_0064e1fd(fp);
 							return 0;
 						}
@@ -460,18 +460,18 @@ pass1_done:
 		}
 		memset(p, 0, k);
 		v38 = 0;
-		for (v10 = v40; v10 < g_6b7f98; v10++) {
-			memcpy(BANK(v2c).text + v38, &g_6b7fa0[v10 * 0x1000],
-				strlen(&g_6b7fa0[v10 * 0x1000]) + 1);
-			g_14a5320[v10] = BANK(v2c).text + v38;
-			v38 += (int) strlen(&g_6b7fa0[v10 * 0x1000]) + 1;
+		for (v10 = v40; v10 < txt_EntryCount; v10++) {
+			memcpy(BANK(v2c).text + v38, &txt_TextBuffer[v10 * 0x1000],
+				strlen(&txt_TextBuffer[v10 * 0x1000]) + 1);
+			txt_TextEntries[v10] = BANK(v2c).text + v38;
+			v38 += (int) strlen(&txt_TextBuffer[v10 * 0x1000]) + 1;
 			if (v38 > g_6b7fa4) {
 				ReportClientMessage("txt_OpenText():Zugriffsverletzung!");
 			}
-			len = (int) strlen(&g_6b7fa0[v10 * 0x1000]);
+			len = (int) strlen(&txt_TextBuffer[v10 * 0x1000]);
 			for (k = 0; k < len; k++) {
-				if (g_14a5320[v10][k] == '|') {
-					g_14a5320[v10][k] = 0;
+				if (txt_TextEntries[v10][k] == '|') {
+					txt_TextEntries[v10][k] = 0;
 				}
 			}
 		}
@@ -487,28 +487,28 @@ pass1_done:
 			*q = 0;
 		}
 		BANK(v2c).first = v40;
-		BANK(v2c).count = g_6b7f98 - 1;
+		BANK(v2c).count = txt_EntryCount - 1;
 		strcat(line, ".res");
 		fp = (FILE*) fcn_0064e2f9(line, "wb");
 		if (fp == 0) {
 			MessageBoxA((HWND) 0, "Could not write ResourceFile!", "txt_OpenText", 0x30);
-			m_FreeTracked(g_6b7fa0);
-			g_6b7fa0 = 0;
+			m_FreeTracked(txt_TextBuffer);
+			txt_TextBuffer = 0;
 			return 0;
 		}
 		fcn_0064e48f(fp, 0, 0);
-		v10 = g_6b7f98 - v40;
+		v10 = txt_EntryCount - v40;
 		fcn_0064ed28(&v10, 4, 1, fp);
 		fcn_0064ed28(&BANK(v2c).first, 4, 1, fp);
 		fcn_0064ed28(&BANK(v2c).count, 4, 1, fp);
-		for (v10 = v40; v10 < g_6b7f98; v10++) {
-			k = (int) (g_14a5320[v10] - BANK(v2c).text);
+		for (v10 = v40; v10 < txt_EntryCount; v10++) {
+			k = (int) (txt_TextEntries[v10] - BANK(v2c).text);
 			fcn_0064ed28(&k, 4, 1, fp);
 		}
-		for (v10 = v40; v10 < g_6b7f98; v10++) {
+		for (v10 = v40; v10 < txt_EntryCount; v10++) {
 			fcn_0064ed28(g_1053000[v10], 0x50, 1, fp);
 		}
-		for (v10 = v40; v10 < g_6b7f98; v10++) {
+		for (v10 = v40; v10 < txt_EntryCount; v10++) {
 			fcn_0064ed28(&g_11bb000[v10], 1, 1, fp);
 		}
 		fcn_0064ed28(&g_6b7fa4, 4, 1, fp);
@@ -516,7 +516,7 @@ pass1_done:
 		fcn_0064e1fd(fp);
 		g_6b7fa4 = 0;
 		fcn_0064d41a(msg, "txt_OpenText(): %s compiled!", p);
-		v40 = g_6b7f98;
+		v40 = txt_EntryCount;
 	}
 
 	/* Pass 3: write the C header for the compiled resources. */
@@ -549,22 +549,22 @@ pass1_done:
 	fcn_0064e1fd(fp);
 
 success:
-	if (g_6b7fa0 != 0) {
-		m_FreeTracked(g_6b7fa0);
-		g_6b7fa0 = 0;
+	if (txt_TextBuffer != 0) {
+		m_FreeTracked(txt_TextBuffer);
+		txt_TextBuffer = 0;
 	}
 	g_6b7f9c = v18;
 	g_1052de0 = 1;
 	return 1;
 
 fail_close:
-	m_FreeTracked(g_6b7fa0);
-	g_6b7fa0 = 0;
+	m_FreeTracked(txt_TextBuffer);
+	txt_TextBuffer = 0;
 	fcn_0064e1fd(fp);
 	return 0;
 
 fail_free:
-	m_FreeTracked(g_6b7fa0);
-	g_6b7fa0 = 0;
+	m_FreeTracked(txt_TextBuffer);
+	txt_TextBuffer = 0;
 	return 0;
 }

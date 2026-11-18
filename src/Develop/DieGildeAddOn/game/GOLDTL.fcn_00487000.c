@@ -17,7 +17,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -84,7 +84,7 @@ void __cdecl fcn_00487000(char* e)
 		*(int*) (m + 8) = *(int*) (g_7f4ca4
 		                           + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c);
 		*(int*) (m + 0xc) = *(int*) (*(char**) (e + 0x16c) + 1);
-		*(int*) (m + 0x28) = g_7f4c00.a;
+		*(int*) (m + 0x28) = gm_GameTime.a;
 		*(int*) (m + 0x2c) = g_7f4c04;
 		*(int*) (m + 0x30) = g_7f4c08;
 		m[0x36] = 2;
@@ -143,7 +143,7 @@ void __cdecl fcn_00487000(char* e)
 	*(int*) (m + 8) = *(int*) (g_7f4ca4
 	                           + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c);
 	*(int*) (m + 0xc) = *(int*) (*(char**) (e + 0x16c) + 1);
-	*(int*) (m + 0x28) = g_7f4c00.a;
+	*(int*) (m + 0x28) = gm_GameTime.a;
 	*(int*) (m + 0x2c) = g_7f4c04;
 	m[0x36] = 1;
 	*(int*) (m + 0x30) = g_7f4c08;

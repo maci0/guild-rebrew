@@ -21,7 +21,7 @@ typedef struct {
 	char pad165[0xb7];
 } Entity_4a5960;
 
-extern int g_664398[];
+extern int gm_RandomSearchSteps[];
 extern char g_7f4ca0[];
 
 unsigned short __cdecl gm_RandomMod(int);
@@ -46,7 +46,7 @@ unsigned int __cdecl fcn_004a5960(unsigned short* e, unsigned int max, int a2, f
 	unsigned char t;
 	unsigned char job;
 
-	step = g_664398[gm_RandomMod(0x10)];
+	step = gm_RandomSearchSteps[gm_RandomMod(0x10)];
 	ranged = 0;
 	memset(&q, 0, sizeof(q));
 	memset(q.name, 0xff, sizeof(q.name));

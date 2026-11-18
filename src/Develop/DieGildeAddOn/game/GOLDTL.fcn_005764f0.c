@@ -2,7 +2,7 @@
 
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern float g_696550[];
 extern float g_696540[];
 
@@ -27,7 +27,7 @@ void __cdecl fcn_005764f0(char* e)
 	int s;
 	float v;
 
-	k = (fcn_00500e20(&g_7f4c00) + 1) % 4;
+	k = (fcn_00500e20(&gm_GameTime) + 1) % 4;
 	o = gm_LookupEntityRecordById(*(int*) (e + 0xc));
 	if (*(int*) (e + 0x70) == -1 || *(int*) (e + 0x70) == -2) {
 		fcn_00546190(e);
@@ -41,7 +41,7 @@ void __cdecl fcn_005764f0(char* e)
 		return;
 	}
 	sp = *(char**) (*(char**) (o + 0x16c) + 0x65);
-	*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	((pos14_7f4c00*) (e + 0x52))->a++;
 	*(short*) (e + 0x56) = gm_RandomMod((int) (g_696550[k] - g_696540[k])) + (int) g_696540[k];
 	*(int*) (e + 0x58) = gm_RandomMod(4) * 15;

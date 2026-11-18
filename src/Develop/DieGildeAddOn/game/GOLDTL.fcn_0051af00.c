@@ -52,7 +52,7 @@
  */
 
 extern int g_1052de0;
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 extern int g_11bb000[];
 extern char* g_14a5400[];
 extern char* g_14a540c[];
@@ -61,7 +61,7 @@ extern char* g_14a5450[];
 extern char* g_14a79c0[];
 extern int g_6b25b0;
 extern int g_6b23a4;
-extern int g_6b7f98;
+extern int txt_EntryCount;
 extern char g_6a22d8[];
 extern char g_68b3f8[];
 extern char g_67d444[];
@@ -137,7 +137,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 	cursor = (char*) &format_selector + 4;
 	memset(text.buf, 0, 0x17d0);
 	if (format_selector < 0x4800) {
-		p = g_14a5320[format_selector];
+		p = txt_TextEntries[format_selector];
 		if (p == 0) {
 			return;
 		}
@@ -181,12 +181,12 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			j = (int) p;
 			if (j < 0x4800) {
 				kind = g_11bb000[j];
-				p = g_14a5320[j];
+				p = txt_TextEntries[j];
 			}
 			k = (r != -1) ? 3 : 2;
 			if (kind == 0xff) {
 				if (p == 0) {
-					p = g_14a5320[j];
+					p = txt_TextEntries[j];
 				}
 			} else {
 				if (r == -1) {
@@ -577,7 +577,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			j = j * 14 + 0x48e;
 			if (j <= 0x4800) {
 				kind = g_11bb000[j];
-				p = g_14a5320[j];
+				p = txt_TextEntries[j];
 			} else {
 				p = (char*) j;
 			}
@@ -589,7 +589,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			}
 			p = (char*) fcn_0042b2f0(p, r, 4);
 			if (p == 0) {
-				p = g_14a5320[j];
+				p = txt_TextEntries[j];
 			}
 			if (p[5] != 0) {
 				sprintf(slot98, g_6a2308, p, p + 5);
@@ -688,21 +688,21 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			fcn_0064d530((char*) tab78, text.buf + i + 3, e - i - 4);
 			j = fcn_0064eeec((char*) tab78);
 			r = format_selector;
-			while (r < g_6b7f98) {
+			while (r < txt_EntryCount) {
 				if (g_11bb000[r] == res) {
 					break;
 				}
 				r++;
 			}
-			if (r >= g_6b7f98) {
+			if (r >= txt_EntryCount) {
 				ReportClientMessage(g_6a2318);
 				break;
 			}
 			j = gm_RandomMod(j) & 0xffff;
-			if (g_14a5320[j + r] == 0) {
+			if (txt_TextEntries[j + r] == 0) {
 				break;
 			}
-			p = g_14a5320[j + r];
+			p = txt_TextEntries[j + r];
 			cp_src = p;
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + i - 1;

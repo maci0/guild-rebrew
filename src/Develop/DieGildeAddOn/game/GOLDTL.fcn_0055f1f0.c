@@ -3,7 +3,7 @@
 
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 
@@ -27,6 +27,6 @@ void __cdecl fcn_0055f1f0(char* e)
 		}
 		fcn_004c5420(*(int*) (r + 2), 0x13, 1, 0x20, 0);
 	}
-	*(pos14_7f4c00*) (e + 0x60) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x60) = gm_GameTime;
 	*(int*) (e + 0xb4) = r[0x12] + *(int*) (e + 0xb0) < 100 ? r[0x12] + *(int*) (e + 0xb0) : 100;
 }

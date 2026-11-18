@@ -9,13 +9,13 @@ typedef struct Slot21c {
 } Slot21c;
 /* SIZE 0x21c */
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern Slot21c g_7f4ca0[];
 extern int g_7747cc;
 extern char *g_7746c4;
 extern char *g_7746c8;
 extern unsigned char g_773d75;
-extern unsigned short *g_773da8;
+extern unsigned short *gm_CityEntity;
 extern int *g_7e453c;
 extern int *g_7e4538;
 extern float g_662cf8;
@@ -102,7 +102,7 @@ void __cdecl he_RunTransport(char *e)
 			break;
 		}
 		r = e + 0x52;
-		if (fcn_00500cb0(r, (int) &g_7f4c00) >= 0) {
+		if (fcn_00500cb0(r, (int) &gm_GameTime) >= 0) {
 			break;
 		}
 		n = *(int *)(e + 0xec);
@@ -127,9 +127,9 @@ void __cdecl he_RunTransport(char *e)
 			ReportClientMessage(g_6a63ec);
 		}
 		*(int *)(e + 0xd4) = *(int *)(e + 0xd4) + 1;
-		*(pos14_7f4c00 *)(e + 0x60) = g_7f4c00;
+		*(pos14_7f4c00 *)(e + 0x60) = gm_GameTime;
 		r = e + 0x52;
-		*(pos14_7f4c00 *)r = g_7f4c00;
+		*(pos14_7f4c00 *)r = gm_GameTime;
 		fcn_00500bb0(r, 0, 5, 0);
 		if (*(int *)(e + 0xd4) == 5) {
 			gm_ResolveEntityById(0, &q, 0, *(int *)(e + 0xac));
@@ -180,7 +180,7 @@ void __cdecl he_RunTransport(char *e)
 		if (n == -1 || fcn_004c4450(n)) {
 			*(int *)(e + 0xec) = -1;
 			gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
-			stamp = g_7f4c00;
+			stamp = gm_GameTime;
 			fcn_00500bb0((char *)&stamp, 0, 0, 1);
 			q = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
 			v = *(int *)(q + 1);
@@ -235,11 +235,11 @@ void __cdecl he_RunTransport(char *e)
 			return;
 		}
 		r = e + 0x52;
-		*(pos14_7f4c00 *)r = g_7f4c00;
+		*(pos14_7f4c00 *)r = gm_GameTime;
 		fcn_00500bb0(r, 0, 0xf, 0);
 		return;
 	case -2:
-		fcn_00549330(e, *g_773da8);
+		fcn_00549330(e, *gm_CityEntity);
 		if (*(int *)(e + 0xc4) == *(int *)(p44 + 1)) {
 			*(int *)(e + 0x84) = fcn_004c5620(1, e);
 			return;

@@ -38,7 +38,7 @@ extern float g_10529c8;
 extern float g_10421a0;
 extern float g_10432a4;
 extern int g_1040494;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_77250c;
 
 int __cdecl fcn_00539380(void);
@@ -66,7 +66,7 @@ int __cdecl fcn_00539490(void)
 			g_9baa70.info = g_7e2520;
 			g_9baa70.x = 0x3f;
 			fcn_00438da0((float) (g_6a376c - g_6a3764), (float) (g_6a3770 - g_6a3768), (float) g_6a3764,
-			    (float) g_6a3768, (*(int*)&g_10529c8), (*(int*)&g_10421a0), (*(int*)&g_10432a4), g_1040494, g_1040490);
+			    (float) g_6a3768, (*(int*)&g_10529c8), (*(int*)&g_10421a0), (*(int*)&g_10432a4), g_1040494, d2_ScreenHeight);
 			return 1;
 		}
 	}

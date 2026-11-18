@@ -12,7 +12,7 @@ void __cdecl fcn_004e6240(char*, char*, char*, char*);
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
-extern int g_7725d0;
+extern int tp_d2_SelectedControl;
 extern int g_7747f0;
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -98,8 +98,8 @@ void __cdecl fcn_004e2890(char* m)
 		fcn_004c4570(1, 1, 2, &v);
 		fcn_004c5360();
 	}
-	g_68bfb8 = 0x702c6;
-	g_7725c8 = 1;
+	cut_EventLoopFlags = 0x702c6;
+	d2_SuppressOverlay = 1;
 	snd = fcn_004e4ae0("GEBURT.sbf", 0);
 	fcn_004e4e90("cd2\\Geburt.mp3");
 	fcn_004e4730("Geburt.ed3");
@@ -133,13 +133,13 @@ void __cdecl fcn_004e2890(char* m)
 	d2_SetBildArgument(w, 0xf);
 	fcn_00474cf0(w);
 	for (;;) {
-		if (g_14cf950 == 0x1c || g_7725d0 == 0) {
+		if (g_14cf950 == 0x1c || tp_d2_SelectedControl == 0) {
 			strcpy(buf, fcn_00471f80(w));
 			if (buf[0] != 0)
 				break;
 			fcn_00474cf0(w);
 		}
-		if (fcn_005373e0(0, g_68bfb8) == 0 || g_7747f0 != 0)
+		if (fcn_005373e0(0, cut_EventLoopFlags) == 0 || g_7747f0 != 0)
 			break;
 	}
 	fcn_004c4510(b, *(int*) (b + 4));
@@ -154,7 +154,7 @@ void __cdecl fcn_004e2890(char* m)
 	g_772f54 = 0;
 	fcn_004e4910();
 	fcn_004e3640();
-	g_7725c8 = 0;
+	d2_SuppressOverlay = 0;
 }
 
 /* ADDRESS: GOLDTL 0x004e2b40 */

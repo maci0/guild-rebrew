@@ -56,7 +56,7 @@ void __cdecl fcn_0040aa00(char* obj)
 	v = fcn_00402610(*(char**) (obj + 0x14));
 	inst = *(char**) (obj + 0x14);
 	if (*(int*) (obj + 0x154) != -1) {
-		if (g_6b5c24 < *(int*) (obj + 0x154) + 200) {
+		if (ch_UpdateTime < *(int*) (obj + 0x154) + 200) {
 			return;
 		}
 		if (*(int*) (inst + 0x70) != 0) {
@@ -315,7 +315,7 @@ next:
 		d = fcn_00444700(o, (float*) (obj + 0x124));
 		*(float*) (obj + 0x108) = d;
 		if (d > 0.04 || d < -0.04) {
-			t = g_6b5c24 - g_67529c;
+			t = ch_UpdateTime - g_67529c;
 			f = t * 0.9090908765792847f;
 			if (*(int*) (inst + 4) & 8) {
 				f *= 0.4f;
@@ -351,7 +351,7 @@ next:
 		d = fcn_00444700(o, (float*) (obj + 0x124));
 		*(float*) (obj + 0x108) = d;
 		if (d > 0.04 || d < -0.04) {
-			t = g_6b5c24 - g_67529c;
+			t = ch_UpdateTime - g_67529c;
 			f = t * 0.9090908765792847f;
 			if (*(int*) (inst + 4) & 8) {
 				f *= 0.4f;

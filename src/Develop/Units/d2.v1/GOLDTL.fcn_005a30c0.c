@@ -1,6 +1,6 @@
 
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 
 int __cdecl fcn_0046f740(int, int, int, int);
@@ -21,7 +21,7 @@ int __cdecl fcn_005a30c0(int x, int y, int layer, int itemId, int a5)
 	*(int*) (g_1015ea0 + r * 756 + 0x5c) = 1;
 	f = fcn_0050bb50(itemId, a5);
 	fcn_0050bc10((int) f, a5, text);
-	w = d2_ShowTxt(x + 7, y + 0x3a, text, g_772514);
+	w = d2_ShowTxt(x + 7, y + 0x3a, text, d2_CurrentWindowId);
 	*(int*) (g_1015ea0 + w * 756 + 0x18) = 0x24;
 	*(int*) (g_1015ea0 + w * 756 + 0x84) = 0x54;
 	*(int*) (g_1015ea0 + w * 756 + 0x70) = 1;

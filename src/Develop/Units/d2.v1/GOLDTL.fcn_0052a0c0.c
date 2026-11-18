@@ -50,7 +50,7 @@ extern unsigned char g_77534c;
 extern int g_1040494;
 extern char g_6a2e94[];
 extern char g_6a2ea8[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
@@ -77,15 +77,15 @@ void __cdecl fcn_0052a0c0(int unused, char arg)
 			g_6a25b4 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2e94);
 		}
 		d2_SetForm(g_6a25b4, 1);
-		owner = g_772514;
+		owner = d2_CurrentWindowId;
 		d2_SetForm(g_6a25b4, 2);
 		id = fcn_00472250(g_6a25b4, 2, 0);
 		((Ent*)g_1015ea0)[id].f1d0 = 3;
-		((Slot*)g_1015f40)[g_772514].h0 = id;
+		((Slot*)g_1015f40)[d2_CurrentWindowId].h0 = id;
 		((Ent*)g_1015ea0)[id].owner = owner;
 		id = fcn_00472250(g_6a25b4, 2, 1);
 		((Ent*)g_1015ea0)[id].f1d0 = 3;
-		((Slot*)g_1015f40)[g_772514].h1 = id;
+		((Slot*)g_1015f40)[d2_CurrentWindowId].h1 = id;
 		((Ent*)g_1015ea0)[id].owner = owner;
 		((Slot*)g_1015f40)[owner].mode = 0x4e;
 		if (g_6a25b4 != -1) {
@@ -103,7 +103,7 @@ void __cdecl fcn_0052a0c0(int unused, char arg)
 				g_7e30c0[i].g = 0;
 			}
 			d2_SetForm(g_6a25b4, 2);
-			id = fcn_0046f7e0(0x11, 4, 0x51d, g_772514, -2);
+			id = fcn_0046f7e0(0x11, 4, 0x51d, d2_CurrentWindowId, -2);
 			((Ent*)g_1015ea0)[id].f5c = 1;
 			((Ent*)g_1015ea0)[id].f1d0 = 3;
 			for (i = 0; i < 768; i++) {

@@ -24,7 +24,7 @@ extern int g_1040484;
 extern int g_1040488;
 extern int g_104048c;
 extern int g_1040494;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1038140[];
 extern char g_102cbc0[];
 extern FILE* g_772564;
@@ -33,10 +33,10 @@ extern char g_1015da0[];
 extern int g_772504;
 extern int g_7725b0;
 extern char* g_7725ac;
-extern float g_67d368;
+extern float d2_UiScale;
 extern signed char g_772510;
-extern int g_1015eac;
-extern int g_1015ea8;
+extern int d2_CenterX;
+extern int d2_DialogCenterY;
 extern int g_77250c;
 extern void* g_6b5de0;
 extern int g_67dab8;
@@ -44,7 +44,7 @@ extern int g_77256c;
 extern char* g_77253c;
 extern int g_67d390;
 extern int g_67d394;
-extern int g_67d398;
+extern int d2_DefaultFont;
 extern int g_67d39c;
 extern int g_67d3a0;
 extern int g_67d3a4;
@@ -249,7 +249,7 @@ int __cdecl d2_Open(int a0, int a1, int a2, char* a3, char* a4)
 			d2_Show(i, 0);
 		}
 	}
-	g_67d368 = (float) a1 * g_664080;
+	d2_UiScale = (float) a1 * g_664080;
 	if (a1 == 0x320) {
 		g_772510 = 0;
 	} else if (a1 == 0x400) {
@@ -259,10 +259,10 @@ int __cdecl d2_Open(int a0, int a1, int a2, char* a3, char* a4)
 	}
 	g_1040494 = a1;
 	g_1015ce0 = a0;
-	g_1040490 = a2;
+	d2_ScreenHeight = a2;
 	fcn_0047a040(0, 0, a1, a2);
-	g_1015eac = (unsigned int) g_14ce860 >> 1;
-	g_1015ea8 = (unsigned int) g_14ce864 >> 1;
+	d2_CenterX = (unsigned int) g_14ce860 >> 1;
+	d2_DialogCenterY = (unsigned int) g_14ce864 >> 1;
 	for (i = 0; i < 0x17; i++) {
 		((int*) info)[i] = 0;
 	}
@@ -299,7 +299,7 @@ int __cdecl d2_Open(int a0, int a1, int a2, char* a3, char* a4)
 			}
 			g_67d390 = fcn_00465950(s_67d648);
 			g_67d394 = fcn_00465950(s_67d638);
-			g_67d398 = fcn_00465950(s_67d474);
+			d2_DefaultFont = fcn_00465950(s_67d474);
 			g_67d39c = fcn_00465950(s_67d624);
 			g_67d3a0 = fcn_00465950(s_67d618);
 			g_67d3a4 = fcn_00465950(s_67d604);

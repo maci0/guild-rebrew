@@ -13,7 +13,7 @@ typedef struct
 #pragma pack()
 // SIZE 0xe
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern short g_7f4c0c;
 
 int __cdecl fcn_004ae210(int);
@@ -29,7 +29,7 @@ int __cdecl fcn_004b19c0(void)
 	int sent;
 	int id;
 
-	stamp = *(stamp14*) &g_7f4c00;
+	stamp = *(stamp14*) &gm_GameTime;
 	stamp.b = 0xc;
 	stamp.c = 0;
 	sent = 0;

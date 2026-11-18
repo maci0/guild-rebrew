@@ -1,4 +1,4 @@
-extern char g_7f4c00[];
+extern char gm_GameTime[];
 extern double g_6629c8;
 #pragma pack(push, 2)
 typedef struct {
@@ -71,10 +71,10 @@ int __cdecl fcn_00578a10(char* a1)
 		}
 		r = *(char**) (p + 0x184);
 		if (*(int*) (r + 0x128) != 0) {
-			*(NAME14*) (a1 + 0x52) = *(NAME14*) g_7f4c00;
+			*(NAME14*) (a1 + 0x52) = *(NAME14*) gm_GameTime;
 			return fcn_00500bb0((int*) (a1 + 0x52), 0, 4, 0);
 		}
-		*(NAME14*) (a1 + 0x52) = *(NAME14*) g_7f4c00;
+		*(NAME14*) (a1 + 0x52) = *(NAME14*) gm_GameTime;
 		fcn_00500bb0((int*) (a1 + 0x52), 1, 0, 0);
 		n = gm_LookupEntityRecordById(*(int*) (a1 + 0xb0));
 		m = gm_LookupEntityRecordById(*(int*) (a1 + 0xb4));
@@ -108,7 +108,7 @@ int __cdecl fcn_00578a10(char* a1)
 		}
 		r = *(char**) (m + 0x184);
 		if (*(int*) (r + 0x128) != 0) {
-			*(NAME14*) (a1 + 0x52) = *(NAME14*) g_7f4c00;
+			*(NAME14*) (a1 + 0x52) = *(NAME14*) gm_GameTime;
 			return fcn_00500bb0((int*) (a1 + 0x52), 0, 4, 0);
 		}
 		gm_StartFilteredEntitySearch(1, 1, *(int*) (a1 + 0xac));

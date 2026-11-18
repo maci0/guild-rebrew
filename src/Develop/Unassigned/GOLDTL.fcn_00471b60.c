@@ -51,7 +51,7 @@ void __cdecl fcn_00471b60(int k)
 	for (i = 0; i < o->count; i++) {
 		w = &((Win*)g_1015f40)[o->wins[i]];
 		if (((Slot*)g_1015ea0)[w->slot].link == 0) {
-			fcn_00469c40(g_1015eac - w->width / 2, g_1015ea8 - w->height / 2, w->slot);
+			fcn_00469c40(d2_CenterX - w->width / 2, d2_DialogCenterY - w->height / 2, w->slot);
 		}
 	}
 }

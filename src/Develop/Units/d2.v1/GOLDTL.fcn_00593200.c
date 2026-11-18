@@ -4,7 +4,7 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 extern int g_6a9b9c; extern int g_9baadc; extern unsigned char g_9baa96;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 
 void __cdecl d2_SetForm(int, int);
@@ -40,9 +40,9 @@ void __cdecl fcn_00593200(void)
 	if (slot == -1) {
 		slot = fcn_00465950((char*) 0x6a2e24);
 	}
-	slot = fcn_0046f740(5, 5, slot, g_772514);
+	slot = fcn_0046f740(5, 5, slot, d2_CurrentWindowId);
 	x = *(int*) (g_1015ea0 + slot * 0x2f4 + 0x18) + 0xf;
-	row = d2_ShowTxt(x, 0x19, s2, g_772514);
+	row = d2_ShowTxt(x, 0x19, s2, d2_CurrentWindowId);
 	sprintf(s1, (char*) 0x6a9bb8, *(int*) 0x14b5d34, flag);
-	d2_ShowTxt(x, *(int*) (g_1015ea0 + row * 0x2f4 + 0x1c) + 0x1b, s1, g_772514);
+	d2_ShowTxt(x, *(int*) (g_1015ea0 + row * 0x2f4 + 0x1c) + 0x1b, s1, d2_CurrentWindowId);
 }

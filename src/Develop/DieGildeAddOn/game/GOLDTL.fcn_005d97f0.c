@@ -59,8 +59,8 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
     v4 = fcn_00470820(0, 0, (char*) 0x6ace10);
     fcn_00471b60(v4);
     d2_SetForm(v4, 0);
-    v15 = (*(int*) (g_772514 * 0x3cc + 0x1015f4c) - 0x40) / 5;
-    v7 = (*(int*) (g_772514 * 0x3cc + 0x1015f50) - 0x84) / 3;
+    v15 = (*(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0x40) / 5;
+    v7 = (*(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f50) - 0x84) / 3;
     v14 = (v15 - *(short*) ((int) g_772500 + 0x1d978)) / 2;
     io_AppendText(0x1d36);
     v18 = (unsigned int*) g_14a5adc;
@@ -71,7 +71,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
         v5 = gm_CheckStatLevel(*v11, v1);
         v6 = fcn_0046f740((v8 % 5) * v15 + 0x20 + v14,
                           (v8 / 5) * v7 + 100 + v14, v8 + 0x5a2,
-                          g_772514);
+                          d2_CurrentWindowId);
         v16 = v6 * 0x2f4;
         *(unsigned int*) (v16 + 0x5c + (int) g_1015ea0) = 1;
         *(unsigned int*) (v16 + 0x1d0 + (int) g_1015ea0) = 3;
@@ -80,7 +80,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
         *(unsigned int*) (v16 + 0x1dc + (int) g_1015ea0) = 0xffffffce;
         *(unsigned int*) (v16 + 0x1e0 + (int) g_1015ea0) = 0x44;
         if (v5) {
-            v3 = (unsigned int) g_14a5320[v5 + v10];
+            v3 = (unsigned int) txt_TextEntries[v5 + v10];
             sprintf(v12, (char*) *(unsigned int*) 0x14ac804,
                     gm_GetOppositeStatIndex(v5, v3));
         } else {
@@ -113,7 +113,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
         if (g_14ce8e0) {
             g_774654 = 1;
         }
-        if (g_14ce8d8 && g_67d370 != -1) {
+        if (g_14ce8d8 && d2_CurrentElementId != -1) {
             if (fcn_005463a0(2, 2, g_774970, 0, 0x26)) {
                 v7 = (unsigned int) g_774970 * 0x21c;
                 io_FormatTextBuffer(v12, 0x15bd, g_774970,

@@ -28,7 +28,7 @@ void __cdecl fcn_005e3fa0(char* name)
 		ls_ReadVfsDataChecked(buf, 0xe100, 1, fh);
 		for (y = 0; y < 120; y++) {
 			for (x = 0; x < 160; x++) {
-				g_7ea3c0[n] = fcn_0041bac0(buf[n * 3], buf[n * 3 + 1], buf[n * 3 + 2]);
+				ls_SavePreviewPixels[n] = fcn_0041bac0(buf[n * 3], buf[n * 3 + 1], buf[n * 3 + 2]);
 				n++;
 			}
 		}

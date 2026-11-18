@@ -8,7 +8,7 @@ struct job_4e8810 {
 // SIZE 0x18
 
 #include "client_types.h"
-extern Rec18_68da68 g_9a9220[42];
+extern Rec18_68da68 amt_OfficeSlots[42];
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005b2900(char*, char*, char*);
@@ -32,8 +32,8 @@ int __cdecl fcn_004e8810(unsigned char* request)
 		return 0;
 	p1 = 0;
 	for (i = 0; i < 30; i++) {
-		if (((struct job_4e8810*)g_9a9220)[i].key == request[4]) {
-			p1 = &((struct job_4e8810*)g_9a9220)[i];
+		if (((struct job_4e8810*)amt_OfficeSlots)[i].key == request[4]) {
+			p1 = &((struct job_4e8810*)amt_OfficeSlots)[i];
 			break;
 		}
 	}
@@ -44,8 +44,8 @@ int __cdecl fcn_004e8810(unsigned char* request)
 		return 0;
 	p2 = 0;
 	for (i = 0; i < 30; i++) {
-		if (((struct job_4e8810*)g_9a9220)[i].key == request[5]) {
-			p2 = &((struct job_4e8810*)g_9a9220)[i];
+		if (((struct job_4e8810*)amt_OfficeSlots)[i].key == request[5]) {
+			p2 = &((struct job_4e8810*)amt_OfficeSlots)[i];
 			break;
 		}
 	}

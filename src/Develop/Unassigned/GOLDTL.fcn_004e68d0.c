@@ -29,9 +29,9 @@ void* __cdecl fcn_004e68d0(void)
 
 	best = (unsigned int) -1;
 	for (i = 0; i < 96; i++) {
-		if (((Ent114*)g_9a9660)[i].active != 0 && ((Ent114*)g_9a9660)[i].id != -1 && (((Ent114*)g_9a9660)[i].flags & 1) != 0 &&
-		    best >= (unsigned int) ((Ent114*)g_9a9660)[i].id) {
-			best = ((Ent114*)g_9a9660)[i].id;
+		if (((Ent114*)cut_Cutscenes)[i].active != 0 && ((Ent114*)cut_Cutscenes)[i].id != -1 && (((Ent114*)cut_Cutscenes)[i].flags & 1) != 0 &&
+		    best >= (unsigned int) ((Ent114*)cut_Cutscenes)[i].id) {
+			best = ((Ent114*)cut_Cutscenes)[i].id;
 		}
 	}
 	if (best != (unsigned int) -1) {

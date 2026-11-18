@@ -8,7 +8,7 @@ extern char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 extern int g_100f1dc;
 extern int g_100f884;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern double g_662a08;
 extern float g_662910;
 

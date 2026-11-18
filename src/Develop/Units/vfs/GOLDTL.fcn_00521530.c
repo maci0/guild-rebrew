@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern char* g_aed324;
+extern char* cm_CommandQueueHead;
 extern char* g_aed200;
 extern int g_1005760;
 
@@ -34,8 +34,8 @@ int __cdecl fcn_00521530(void* fp)
 			return 0;
 		}
 	}
-	if ((unsigned int) g_aed324) {
-		index = ((unsigned int) g_aed324 - 0x9bade0) / 0x99;
+	if ((unsigned int) cm_CommandQueueHead) {
+		index = ((unsigned int) cm_CommandQueueHead - 0x9bade0) / 0x99;
 	} else {
 		index = 0xffffffff;
 	}

@@ -30,7 +30,7 @@ typedef struct ScrollSlot {
 #define g_town_flags(t) (((unsigned char*) (t))[4])
 #define g_town_dir(t) (*(int*) ((t) + 8))
 #define g_town_count(t) (*(int*) ((t) + 0x27a4))
-#define g_cur_dir g_772514
+#define g_cur_dir d2_CurrentWindowId
 #define g_cur_building g_77255c
 #define g_entity_type(t) ((unsigned char*) (g_7f4ca0 + (t) * 0x21c))
 
@@ -245,7 +245,7 @@ void __cdecl fcn_005b0230(char* town)
 	}
 
 	if (g_town_flags(town) & 4) {
-		mode = g_6b8010;
+		mode = d3_CurrentContextIndex;
 		fcn_004432d0(0, 1);
 		g_cur_dir = g_town_dir(town);
 		g_cur_building = (char*) &g_1015f40[g_town_dir(town)];
@@ -300,13 +300,13 @@ void __cdecl fcn_005b0230(char* town)
 	} else if ((int) g_7746c8) {
 		handle = *(int*) ((int) g_7746c8 + 0x61);
 	} else {
-		if ((int) g_6b8014 == 0) {
+		if ((int) d3_ActiveCamera == 0) {
 			return;
 		}
 		handle = 0;
 	}
 	if (handle == 0) {
-		handle = (int) g_6b8014;
+		handle = (int) d3_ActiveCamera;
 	}
 
 	fcn_00455350((char*) handle, (float*) (handle + 0x4c), pos);

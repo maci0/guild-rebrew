@@ -163,7 +163,7 @@ char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...)
     if (position == 0) {
         return 0;
     }
-    if (g_14d0c40[kind].handler == 0) {
+    if (ch_ActionDefinitions[kind].handler == 0) {
         original_kind = kind;
         kind = 0;
     }
@@ -181,12 +181,12 @@ char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...)
     } else {
         *(char**) (*(char**) (position + 0x14) + 0x128) = action;
     }
-    *(int*) action = g_14d0c40[kind].handler;
+    *(int*) action = ch_ActionDefinitions[kind].handler;
     *(char**) (action + 0x14) = object;
     action[9] = (char) kind;
     *(int*) (action + 0xc) = 0;
     va_start(arguments, kind);
-    for (i = 0; i < g_14d0c40[(unsigned char) action[9]].param; i++) {
+    for (i = 0; i < ch_ActionDefinitions[(unsigned char) action[9]].param; i++) {
         ((int*) (action + 0x30))[i] = va_arg(arguments, int);
     }
     va_end(arguments);

@@ -19,8 +19,8 @@ void __cdecl d3_RemoveObjectFromList(D3_OBJECT* object)
 {
     switch (object->art) {
     case 3:
-        if (g_6b8014 == (char*) object) {
-            g_6b8014 = 0;
+        if (d3_ActiveCamera == (char*) object) {
+            d3_ActiveCamera = 0;
         }
     case 1:
     case 2:

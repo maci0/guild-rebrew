@@ -2,11 +2,11 @@
  * table, picks the frame colour, draws the glyph runs and finally the label. */
 
 extern char* g_1015ea0;
-extern int g_1015ea4;
-extern int g_67d370;
-extern int g_7725d0;
+extern int d2_FontHeight;
+extern int d2_CurrentElementId;
+extern int tp_d2_SelectedControl;
 extern int g_7725fc;
-extern int g_67d968;
+extern int d2_ClipBottom;
 extern double g_662950;
 extern double g_662908;
 
@@ -39,8 +39,8 @@ void __cdecl fcn_00468e40(int slotIndex, int surface)
 
 	glyphBase = 0; color = 8; slot = g_1015ea0 + slotIndex * 0x2f4;
 	flags = *(int*) (slot + 0x1d0);
-	if ((flags & 2) && g_7725d0 == 0) {
-		if (!((g_1015ea0 + g_67d370 * 0x2f4 != slot) && *(int*) (slot + 0x38) == 0)
+	if ((flags & 2) && tp_d2_SelectedControl == 0) {
+		if (!((g_1015ea0 + d2_CurrentElementId * 0x2f4 != slot) && *(int*) (slot + 0x38) == 0)
 		    && *(int*) (slot + 0x4c) == 0) {
 			if (flags & 1) {
 				*(int*) (slot + 0x3c) = 1;
@@ -70,7 +70,7 @@ void __cdecl fcn_00468e40(int slotIndex, int surface)
 	fcn_0047cba0((*(int*) (slot + 0x18) - rightGlyph->w) + *(int*) (slot + 0x10),
 	    *(int*) (slot + 0x14), surface, font, glyphBase + 1);
 
-	fcn_0047a040(*(int*) (slot + 0x10) + leftGlyph->w - 1, g_7725fc, *(int*) (slot + 0x10) + leftGlyph->w + innerWidth, g_67d968);
+	fcn_0047a040(*(int*) (slot + 0x10) + leftGlyph->w - 1, g_7725fc, *(int*) (slot + 0x10) + leftGlyph->w + innerWidth, d2_ClipBottom);
 	i = 0;
 	if (g_662950 < (double) (innerWidth / middleGlyph->w) + g_662908) {
 		do {
@@ -80,6 +80,6 @@ void __cdecl fcn_00468e40(int slotIndex, int surface)
 		} while ((double) i < (double) (innerWidth / middleGlyph->w) + g_662908);
 	}
 	fcn_0046bd20(*(int*) (slot + 0x10),
-	    ((leftGlyph->h >> 1) - g_1015ea4 / 2) + 1 + *(int*) (slot + 0x14),
+	    ((leftGlyph->h >> 1) - d2_FontHeight / 2) + 1 + *(int*) (slot + 0x14),
 	    *(int*) (slot + 0x18), *(int*) (slot + 0x1c), surface, slot + 0x8c, color);
 }

@@ -53,7 +53,7 @@ void __cdecl fcn_00406410(char* ev)
 			(*(struct anim_406410**) (obj + 0x70))->looping = 1;
 		}
 	} else if (ch_FinishAnimation(ev) == -1) {
-		saved = g_6b8010;
+		saved = d3_CurrentContextIndex;
 		fcn_004432d0(fcn_00413190(*(char**) (obj + 0x88)), 1);
 		*(short*) (*(char**) (ev + 0x14) + 0x8c) |= 0x10;
 		*(short*) (*(char**) (ev + 0x14) + 0x8c) &= ~2;

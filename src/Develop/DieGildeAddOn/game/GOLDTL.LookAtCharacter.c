@@ -2,7 +2,7 @@
 
 
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 float __cdecl fcn_00444700(int h, char* pos);
 void __cdecl fcn_00451720(float* out, char* base, float* a, float* b);
 char* __cdecl fcn_0040c120(char* e, int kind, ...);
@@ -17,7 +17,7 @@ int __cdecl LookAtCharacter(char** a, char** b)
 	char* e;
 
 	if (*a == 0 || *b == 0) {
-		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "invalid object");
+		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 1;
 	}
 	d = fcn_00444700(*(int*) (*a + 0x34), *(char**) (*b + 0x34) + 0x4c);

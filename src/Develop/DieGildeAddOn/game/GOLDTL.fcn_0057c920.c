@@ -1,7 +1,7 @@
 extern int g_774800;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 
 
@@ -15,8 +15,8 @@ void __cdecl fcn_0057c920(char* o)
 	if (o[0x78] & 4) {
 		return;
 	}
-	*(pos14_7f4c00*) (o + 0x44) = g_7f4c00;
-	*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (o + 0x44) = gm_GameTime;
+	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 	if (g_774800 != 0) {
 		fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 1, 0, 0);
 	} else {

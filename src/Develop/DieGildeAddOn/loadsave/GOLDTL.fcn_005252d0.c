@@ -12,7 +12,7 @@ typedef struct node99_load {
 extern char g_9bade0[];
 extern node99_load g_aed740[0x8000];
 extern cell10_fb5760 g_fb5760[0x8000];
-extern char* g_aed324;
+extern char* cm_CommandQueueHead;
 extern char* g_aed200;
 extern int ls_SaveVersion;
 extern int g_1005760;
@@ -52,9 +52,9 @@ read_failed: return 0;
 	}
 	i = 0;
 	if (n == -1) {
-		g_aed324 = 0;
+		cm_CommandQueueHead = 0;
 	} else {
-		g_aed324 = (char*) &((node99_load*) g_9bade0)[n];
+		cm_CommandQueueHead = (char*) &((node99_load*) g_9bade0)[n];
 	}
 	if (!ls_ReadVfsDataChecked(&n, 4, 1, fp)) {
 		return 0;

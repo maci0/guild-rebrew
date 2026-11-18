@@ -26,7 +26,7 @@ int __cdecl fcn_00402610(char* obj)
 	int r;
 	char* p;
 
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	p = *(char**) (obj + 0x88);
 	flags = 0;
 	r = *(int*) (p + 0xb0);
@@ -64,7 +64,7 @@ int __cdecl fcn_004026f0(char* p)
 	int flags;
 	int saved;
 
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	flags = 0;
 	r = *(int*) (p + 0xb0);
 	if (r == 0) {

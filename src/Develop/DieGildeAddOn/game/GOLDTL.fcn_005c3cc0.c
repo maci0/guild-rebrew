@@ -62,12 +62,12 @@ void __cdecl fcn_005c3cc0(char* e)
 			g_774654 = 1;
 		}
 		if (g_100f1dc == 2) {
-			if (g_67d370 == h1) {
+			if (d2_CurrentElementId == h1) {
 				p = 0.2f;
-			} else if (g_67d370 == h2) {
+			} else if (d2_CurrentElementId == h2) {
 				p = 0.5f;
 				n = 2;
-			} else if (g_67d370 == h3) {
+			} else if (d2_CurrentElementId == h3) {
 				p = 0.8f;
 				n = 4;
 			} else {

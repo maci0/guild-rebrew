@@ -20,6 +20,6 @@ void __cdecl fcn_005358e0(char* name)
 	s = fcn_004c5790(0xe, buf);
 	while (fcn_004c4450(s) == 0) {
 		fcn_00533a40(name);
-		fcn_005373e0(0, g_68bfb8 | 0x210000);
+		fcn_005373e0(0, cut_EventLoopFlags | 0x210000);
 	}
 }

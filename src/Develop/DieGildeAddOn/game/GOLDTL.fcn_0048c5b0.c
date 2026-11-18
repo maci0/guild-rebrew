@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 extern float g_100b0e0;
-extern int g_100b0f4, g_100e74c, g_100b0a8, g_100b0ac;
+extern int g_100b0f4, g_100e74c, ai_ResourceCount, g_100b0ac;
 extern char* g_100dbc0[];
 typedef struct {
 	int x0;
@@ -48,7 +48,7 @@ typedef struct {
 } Msg; /* 0xf8 */
 extern int lpObjektePROT;
 extern unsigned char g_773d75;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -103,7 +103,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			m.state = *(int*) (0x7f4ca4
 			    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c);
 			m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
-			m.p28 = g_7f4c00;
+			m.p28 = gm_GameTime;
 			m.p2c = g_7f4c04;
 			m.p30 = g_7f4c08;
 			m.p34 = g_7f4c0c;
@@ -176,7 +176,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			n = 1;
 			i = 1;
 		}
-		for (; i < g_100b0a8; i++) {
+		for (; i < ai_ResourceCount; i++) {
 			if (!(*(float*) (0x100b0c0 + i * 0x40 + 0x20) <= 0.0f)) {
 				break;
 			}
@@ -284,7 +284,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 		m.state = *(int*) (0x7f4ca4
 		    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c);
 		m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
-		m.p28 = g_7f4c00;
+		m.p28 = gm_GameTime;
 		m.p2c = g_7f4c04;
 		m.p30 = g_7f4c08;
 		m.p34 = g_7f4c0c;

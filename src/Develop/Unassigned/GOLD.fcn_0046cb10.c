@@ -1,6 +1,6 @@
 #include "gold_gui.h"
 extern GuiEnt* g_00f8f080;
-extern char* g_772500; extern int g_772568;
+extern char* g_772500; extern int d2_ResourceOffset;
 int __cdecl fcn_0046c9e0(void);
 void __cdecl fcn_00469170(int, void**, int*);
 void __cdecl d2_AddRefcount(int);
@@ -61,7 +61,7 @@ int __cdecl fcn_0046cb10(int x, int y, int type)
 		return id;
 	case 5:
 	case 8:
-		s->bild_offset = g_772568;
+		s->bild_offset = d2_ResourceOffset;
 		resource = g_00f8f080[id].data;
 		shape = fcn_0047cb60(resource, (unsigned short) g_00f8f080[id].bild_offset);
 		s->w = *(short*) (shape + 6);

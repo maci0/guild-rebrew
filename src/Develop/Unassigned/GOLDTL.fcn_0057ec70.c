@@ -1,7 +1,7 @@
 
 
 
-extern int g_774a14;
+extern int d2_TutorialActive;
 extern int* g_665f08;
 extern volatile int g_6b7fc0;
 
@@ -9,7 +9,7 @@ int __cdecl fcn_0057ec70(int mask)
 {
 	char* p;
 
-	if (g_774a14 == 0) {
+	if (d2_TutorialActive == 0) {
 		return 1;
 	}
 	p = ((char*)g_665f08);

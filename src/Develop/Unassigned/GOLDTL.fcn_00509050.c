@@ -1,7 +1,7 @@
 #include "client_types.h"
 #include "client_actions.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 struct blk14_509050 {
 	int a;
@@ -34,7 +34,7 @@ void __cdecl fcn_00509050(char* entity, PACKED_TIME509050* out)
 	time.b = g_7f4c04;
 	time.c = g_7f4c08;
 	time.d = g_7f4c0c;
-	year = *(int*) &g_7f4c00;
+	year = *(int*) &gm_GameTime;
 	if (entity[8] == 0) {
 		year = *(short*) (entity + 0x28);
 	}

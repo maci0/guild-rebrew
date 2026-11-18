@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_00545780(char* a);
 void __cdecl fcn_00546190(char* a);

@@ -98,7 +98,7 @@ int __cdecl fcn_005d8af0(House* e)
 		g_100f1dc = -1;
 		do {
 			if (g_100f1dc != -1) {
-				if (g_67d370 == ok) {
+				if (d2_CurrentElementId == ok) {
 					n = 0;
 					rank = e->b84;
 					who = e->bc;
@@ -122,7 +122,7 @@ int __cdecl fcn_005d8af0(House* e)
 						result = 1;
 						g_774654 = 1;
 					}
-				} else if (g_67d370 == cancel) {
+				} else if (d2_CurrentElementId == cancel) {
 					g_774654 = 1;
 				}
 			}

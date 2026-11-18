@@ -15,7 +15,7 @@ extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -101,7 +101,7 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 				ev[0x36] = 2;
 				*(int*) (ev + 8) = ((Slot5c0d*)g_7f4ca0)[g_774970].f4;
 				*(int*) (ev + 0xc) = ((Slot5c0d*)g_7f4ca0)[g_774970].f4;
-				*(int*) (ev + 0x58) = (*(int*)&g_7f4c00);
+				*(int*) (ev + 0x58) = (*(int*)&gm_GameTime);
 				*(int*) (ev + 0x5c) = (*(int*)&g_7f4c04);
 				*(int*) (ev + 0x60) = g_7f4c08;
 				*(short*) (ev + 0x64) = g_7f4c0c;

@@ -2,11 +2,11 @@
  * the cutscene dialog and runs its message loop until the user leaves it. */
 
 extern char* g_77255c;
-extern int g_772514;
-extern int g_68bfb8;
+extern int d2_CurrentWindowId;
+extern int cut_EventLoopFlags;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 int __cdecl fcn_004e8af0(char*, void*);
 int __cdecl fcn_004e8b40(int, void*);
@@ -78,14 +78,14 @@ int __cdecl fcn_004dc3a0(char* a0, int a1, int* a2, int* a3)
 		handles[i] = -1;
 	}
 	n = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100,
-	    0x75, 0x42, g_772514);
+	    0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(n, 0x5dc, 1);
 	g_100f1dc = -1;
-	while (fcn_005373e0((void*) 0x4dc230, g_68bfb8) != 0) {
+	while (fcn_005373e0((void*) 0x4dc230, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(n, 0, 0) != 0) {
 			if (g_100f1dc != -1) {
 				for (i = 0; i < found; i++) {
-					if (g_67d370 == handles[i]) {
+					if (d2_CurrentElementId == handles[i]) {
 						result = *(int*) ((char*) ents[i] + 4);
 						goto setflag;
 					}

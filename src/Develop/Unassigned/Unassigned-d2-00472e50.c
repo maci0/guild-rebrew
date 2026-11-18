@@ -1,6 +1,6 @@
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 
 #include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_00476970(int a);
@@ -44,7 +44,7 @@ typedef struct
 	int i[0x3cc / 4];
 } fcn_00472f10_Win;
 
-extern int g_772568;
+extern int d2_ResourceOffset;
 extern char s_67d890[];
 extern char s_67d868[];
 
@@ -58,7 +58,7 @@ void __cdecl fcn_00472e50(void)
 {
 	char* m;
 
-	m = ((char*)g_1015f40) + g_772514 * 0x3cc;
+	m = ((char*)g_1015f40) + d2_CurrentWindowId * 0x3cc;
 	if (*(int*) (m + 0x290) == 0) {
 		ReportClientMessage((const char*) 0x67d844);
 		return;
@@ -75,7 +75,7 @@ void __cdecl fcn_00472ea0(int a, int b, int c, int d)
 {
 	Win* w;
 
-	w = &((Win*)g_1015f40)[g_772514];
+	w = &((Win*)g_1015f40)[d2_CurrentWindowId];
 	if (!w->used) {
 		ReportClientMessage(s_67d844);
 		return;
@@ -93,7 +93,7 @@ void __cdecl d2_DrawShape(int x, int y, int id)
 	fcn_00472f10_Win* w;
 	int src;
 
-	w = &((fcn_00472f10_Win*)g_1015f40)[g_772514];
+	w = &((fcn_00472f10_Win*)g_1015f40)[d2_CurrentWindowId];
 	if (w->i[0x290 / 4] == 0) {
 		ReportClientMessage(s_67d890);
 		return;
@@ -105,7 +105,7 @@ void __cdecl d2_DrawShape(int x, int y, int id)
 	src = d2_GetResourceData(id);
 	if (src != 0) {
 		fcn_00475fd0(w->i[0x38 / 4]);
-		fcn_0047cba0(x, y, w->i[0x38 / 4], src, g_772568);
+		fcn_0047cba0(x, y, w->i[0x38 / 4], src, d2_ResourceOffset);
 		fcn_00476060(w->i[0x38 / 4]);
 	}
 }

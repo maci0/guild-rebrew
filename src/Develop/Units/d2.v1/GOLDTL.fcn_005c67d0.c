@@ -16,14 +16,14 @@ typedef struct
 // SIZE 0x3cc
 
 extern int g_6abb00;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern Win_1015f40 g_1015f40[0x60];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern Btn_776c60 g_776c60[6];
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14a92bc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
@@ -60,21 +60,21 @@ void __cdecl fcn_005c67d0(void)
 		return;
 	}
 	fcn_0057e880(0x14, 0, 0, 0);
-	dlg = fcn_00470820(g_1040494 - 0x158, g_1040490 - 0x108, s_6ac77c);
+	dlg = fcn_00470820(g_1040494 - 0x158, d2_ScreenHeight - 0x108, s_6ac77c);
 	d2_SetForm(dlg, 0);
-	((Win*)g_1015f40)[g_772514].x3a8 = 0x18;
-	((Win*)g_1015f40)[g_772514].x3ac = 0x18;
-	((Win*)g_1015f40)[g_772514].x3b0 = 0x18;
-	((Win*)g_1015f40)[g_772514].x3b4 = 0x18;
+	((Win*)g_1015f40)[d2_CurrentWindowId].x3a8 = 0x18;
+	((Win*)g_1015f40)[d2_CurrentWindowId].x3ac = 0x18;
+	((Win*)g_1015f40)[d2_CurrentWindowId].x3b0 = 0x18;
+	((Win*)g_1015f40)[d2_CurrentWindowId].x3b4 = 0x18;
 	d2_SetForm(dlg, 0);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_005c5da0(g_772514, 0, 0, g_774970, 0x1f3b);
+	fcn_005c5da0(d2_CurrentWindowId, 0, 0, g_774970, 0x1f3b);
 	if (fcn_005373e0((void*) fcn_005c67d0, 0x657c7) != 0) {
 		do {
 			fcn_005c5e70();
 			if (g_100f1dc != -1 || CountDisplayCounters() != 0) {
 				for (i = 0; i < 6; i++) {
-					if (g_776c60[i].item != 0 && g_67d370 == g_776c60[i].btn) {
+					if (g_776c60[i].item != 0 && d2_CurrentElementId == g_776c60[i].btn) {
 						if (fcn_005c61e0(*(unsigned short*) g_776c60[i].item) != 0) {
 							fcn_00471af0(dlg, 0);
 							fcn_005c6540(g_776c60[i].item);

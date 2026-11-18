@@ -12,11 +12,11 @@ extern int g_14ac618;           /* 0x014ac618 */
 extern int g_14ac61c;           /* 0x014ac61c */
 extern int g_14ce8e0;           /* 0x014ce8e0 */
 extern char g_14cf950;          /* 0x014cf950 */
-extern int g_67d370;            /* 0x0067d370 */
+extern int d2_CurrentElementId;            /* 0x0067d370 */
 extern volatile unsigned int g_6b7fac;            /* 0x006b7fac */
 extern int g_6b7fdc;            /* 0x006b7fdc */
-extern int g_772514;            /* 0x00772514 */
-extern int g_7725c8;            /* 0x007725c8 */
+extern int d2_CurrentWindowId;            /* 0x00772514 */
+extern int d2_SuppressOverlay;            /* 0x007725c8 */
 #include "client_dialog_state.h"            /* 0x00774654 */
 extern unsigned char g_7747b0;  /* 0x007747b0 */
 extern int g_9badc0;            /* 0x009badc0 */
@@ -116,25 +116,25 @@ unsigned int __cdecl fcn_00539930(int a0)
 	fcn_00471db0(v5, 1);
 	fcn_00471d80(v5, 2);
 	d2_SetForm(v5, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(v5, 1);
 	io_AppendText(0x1ca5);
 	d2_SetForm(v5, 3);
-	fcn_00533a60(g_772514, 0, buttons, 3, g_14ac614, g_14ac618, g_14ac61c);
+	fcn_00533a60(d2_CurrentWindowId, 0, buttons, 3, g_14ac614, g_14ac618, g_14ac61c);
 	fcn_00472640(buttons[0], 0);
 	if (fcn_005373e0(0x539930, 0x24087) != 0) {
 		do {
 			if (g_6b7fac > v36 + 0x5dc || v4 != 0) {
 				int v6;
 				v4 = 1;
-				g_7725c8 = 1;
+				d2_SuppressOverlay = 1;
 				v6 = fcn_005268c0(g_14ac5e4, 0);
 				v36 = fcn_00402370(0x3039, 3000, ((char*) hosts), 8);
 				fcn_00471e30(v6);
 				v32 = 0;
-				g_7725c8 = 0;
+				d2_SuppressOverlay = 0;
 				d2_SetForm(v5, 2);
-				fcn_0046f2c0(g_772514, 1);
+				fcn_0046f2c0(d2_CurrentWindowId, 1);
 				if (v14 != -1) {
 					fcn_00469510(v14);
 				}
@@ -202,7 +202,7 @@ label_539ba4:
 								v32 = fcn_00465950(s_6a2e24);
 							}
 							d2_SetForm(v5, 2);
-							v32 = fcn_0046f740(8, v34, v32, g_772514);
+							v32 = fcn_0046f740(8, v34, v32, d2_CurrentWindowId);
 							*v31 = v32;
 							*(int*) (v32 * 0x2f4 + 0x5c + (int) g_1015ea0) = 1;
 							if (*(int*) ((int) ((int*) ((char*) hosts + 0x7c)) + v34) == 0x3f
@@ -211,9 +211,9 @@ label_539ba4:
 							}
 							*(int*) (v32 * 0x2f4 + 0x1d0 + (int) g_1015ea0) = 3;
 							fcn_00469470(v14, v32);
-							v32 = fcn_0046f100(0x88, v35, 400, 0x78, 0x10, g_772514);
+							v32 = fcn_0046f100(0x88, v35, 400, 0x78, 0x10, d2_CurrentWindowId);
 							v31[1] = v32;
-							fcn_00472900(*(int*) (g_772514 * 0x3cc + 0x10161bc), 0x53);
+							fcn_00472900(*(int*) (d2_CurrentWindowId * 0x3cc + 0x10161bc), 0x53);
 							io_AppendText(0x1cbc, &((char*) hosts)[v34], v8, ((unsigned char*) hosts + 0x36)[v34]);
 							v12 = v37;
 							v32 = v34;
@@ -241,9 +241,9 @@ label_539d27:
 				int v39b;
 				v40b = buttons[2];
 				v39b = buttons[1];
-				if (g_67d370 != buttons[0]) {
-					if (g_67d370 != v39b) {
-						if (g_67d370 == v40b) {
+				if (d2_CurrentElementId != buttons[0]) {
+					if (d2_CurrentElementId != v39b) {
+						if (d2_CurrentElementId == v40b) {
 							fcn_00471af0(v5, 0);
 							if (fcn_005397c0() != 0) {
 								g_774654 = 1;

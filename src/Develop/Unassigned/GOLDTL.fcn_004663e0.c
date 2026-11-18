@@ -18,7 +18,7 @@ typedef struct
 extern char* g_1015ea0;
 extern int g_67d394;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern short g_14ce8c2;
 extern int g_102d028;
@@ -52,7 +52,7 @@ void __cdecl fcn_004663e0(char* f, int surf)
 	g3 = fcn_0047b620(font, 3);
 	x = e->i[0x10 / 4] - 0x20;
 	y = *(int*) (f + 0x20) - g0->h - 0x64;
-	fcn_0047a040(0, 0, g_1040494, g_1040490);
+	fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 	fcn_0047cba0(x, y, surf, font, 0);
 	fcn_0047cba0(x, g0->h + y + 0x64, surf, font, 1);
 	fcn_0047cba0(x, g0->h + y, surf, font, 2);
@@ -62,7 +62,7 @@ void __cdecl fcn_004663e0(char* f, int surf)
 	g_102d028 = x;
 	g_102d02c = y;
 	if (*(int*) (f + 0x12c) < 100000 && *(int*) (f + 0x12c) > -100000) {
-		fcn_00472880(g_67d398 + 1);
+		fcn_00472880(d2_DefaultFont + 1);
 		_itoa(*(int*) (f + 0x12c), buf, 10);
 		fcn_0046bd20(x, y, g3->w, g3->h, surf, buf, 8);
 	}

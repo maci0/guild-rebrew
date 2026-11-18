@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char* g_6b7d68;
+extern char* sbs_BankManager;
 extern int g_6b7d6c;
 
 int __cdecl fcn_00424130(char* set, char* name);
@@ -18,12 +18,12 @@ int __cdecl fcn_00424040(char* name)
 
 		r = fcn_00424130(name, 0);
 		if (r == 0) {
-			for (e = *(char**) (g_6b7d68 + 0x3c); e != 0; e = *(char**) (e + 0x3c)) {
+			for (e = *(char**) (sbs_BankManager + 0x3c); e != 0; e = *(char**) (e + 0x3c)) {
 				if (strcmp(e, name) == 0) {
 					if (prev != 0) {
 						*(char**) (prev + 0x3c) = *(char**) (e + 0x3c);
 					} else {
-						*(char**) (g_6b7d68 + 0x3c) = *(char**) (e + 0x3c);
+						*(char**) (sbs_BankManager + 0x3c) = *(char**) (e + 0x3c);
 					}
 					m_FreeTracked(e);
 					g_6b7d6c++;
@@ -34,7 +34,7 @@ int __cdecl fcn_00424040(char* name)
 		}
 		return r;
 	}
-	for (e = *(char**) (g_6b7d68 + 0x3c); e != 0; e = *(char**) (g_6b7d68 + 0x3c)) {
+	for (e = *(char**) (sbs_BankManager + 0x3c); e != 0; e = *(char**) (sbs_BankManager + 0x3c)) {
 		if (fcn_00424040(e) != 0) {
 			return -1;
 		}

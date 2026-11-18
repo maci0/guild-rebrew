@@ -2,12 +2,12 @@ extern char* g_1015ea0;
 extern int g_14ce8e0;
 extern char g_14cf950;
 #include "GOLDTL.fcn_00533090_gconf.h"
-extern int g_67d370;
-extern int g_6b5cbc;
+extern int d2_CurrentElementId;
+extern int d3_CameraAnimating;
 int d3_ActiveCameraAnimation = 0;
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 extern float g_7e3a40[3];
-extern float g_7e3a50[3];
+extern float d3_CameraTargetRotation[3];
 extern int* g_7e2a9c;
 extern char* g_7e2aa0;
 extern int g_7ea360;
@@ -18,8 +18,8 @@ extern int g_774650;
 #include "client_dialog_state.h"
 extern int g_774658;
 extern int g_77465c;
-extern int g_774688;
-extern int g_77468c;
+extern int d3_CameraHorizontalIndex;
+extern int d3_CameraVerticalStep;
 extern char* g_7746a8;
 extern int g_7746b8;
 extern char* g_7746c4;
@@ -99,12 +99,12 @@ void __cdecl fcn_00533090(unsigned int a0)
 		g_14cf950 = 0;
 		return;
 	}
-	if (g_14ce8e0 != 0 && g_67d370 != -1) {
+	if (g_14ce8e0 != 0 && d2_CurrentElementId != -1) {
 		i = 0;
 		ip = (int*) 0x77e8c4;
 		do {
 			if (*ip != -1 && (ip - 1) != 0
-			    && g_67d370 == *(int*) (g_1015ea0 + *ip * 0x2f4)) {
+			    && d2_CurrentElementId == *(int*) (g_1015ea0 + *ip * 0x2f4)) {
 				*(int*) (*(int*) (i * 0xc + 0x77e8c0) + 0x70) = -1;
 				g_7749e8 = 0;
 				fcn_004116d0();
@@ -127,18 +127,18 @@ void __cdecl fcn_00533090(unsigned int a0)
 				fcn_004234e0((char*) g_7747c8, "RaumWechseln_s", 1, 0x3f, 0x7f, 0, 0);
 				*(unsigned short*) (g_7746c4 + 0x29) = *(unsigned short*) g_7746b8;
 				g_774654 = (g_774650 - g_774658) + 1;
-				fcn_00438b40(g_6b8014, g_7e3a40);
-				fcn_00438cb0(g_6b8014, g_7e3a50);
-				g_774688 = 0;
-				g_77468c = 0;
+				fcn_00438b40(d3_ActiveCamera, g_7e3a40);
+				fcn_00438cb0(d3_ActiveCamera, d3_CameraTargetRotation);
+				d3_CameraHorizontalIndex = 0;
+				d3_CameraVerticalStep = 0;
 			}
 		} else if (g_7746c8 != 0 && g_7746cc != 0 && g_7746b8 != 0
 		    && g_7746f0 == 0 && g_7746f4 == 0) {
 			g_774654 = (g_774650 - g_774658) + 1;
-			fcn_00438b40(g_6b8014, g_7e3a40);
-			fcn_00438cb0(g_6b8014, g_7e3a50);
-			g_774688 = 0;
-			g_77468c = 0;
+			fcn_00438b40(d3_ActiveCamera, g_7e3a40);
+			fcn_00438cb0(d3_ActiveCamera, d3_CameraTargetRotation);
+			d3_CameraHorizontalIndex = 0;
+			d3_CameraVerticalStep = 0;
 		}
 		if (g_14ce8e0 && (g_7746f4 != 0 || (g_7e2a9c != 0
 		    && g_item_def_table[*(unsigned short*) g_7e2a9c * 0x41] == 0x1d))) {
@@ -159,21 +159,21 @@ void __cdecl fcn_00533090(unsigned int a0)
 				goto done;
 			}
 			if (CompareVector3WithinTolerance(&g_14ce880, g_7e3a40, 0.1f)) {
-				fcn_00433780(g_6b8014);
+				fcn_00433780(d3_ActiveCamera);
 				d3_ActiveCameraAnimation = 0;
-				g_6b5cbc = 0;
+				d3_CameraAnimating = 0;
 				v2 = 1;
-				fcn_00438b40(g_6b8014, g_7e3a40);
-				fcn_00438cb0(g_6b8014, g_7e3a50);
+				fcn_00438b40(d3_ActiveCamera, g_7e3a40);
+				fcn_00438cb0(d3_ActiveCamera, d3_CameraTargetRotation);
 			} else {
-				fcn_00433780(g_6b8014);
+				fcn_00433780(d3_ActiveCamera);
 				d3_ActiveCameraAnimation = 0;
-				g_6b5cbc = 0;
+				d3_CameraAnimating = 0;
 			}
 		}
 		if (g_774650 <= g_774658 || v2) {
-			if (CompareVector3WithinTolerance((float*) (g_6b8014 + 0x84), g_7e3a50, 0.1f)
-			    || CompareVector3WithinTolerance((float*) (g_6b8014 + 0x4c), g_7e3a40, 0.1f) || v2) {
+			if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0x84), d3_CameraTargetRotation, 0.1f)
+			    || CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0x4c), g_7e3a40, 0.1f) || v2) {
 				if (g_7746c4 == 0 && g_7746c8 == 0 && g_7746cc == 0) {
 					if (g_774650 == g_774658 && g_7e2a9c) {
 						fcn_00530510();
@@ -212,10 +212,10 @@ void __cdecl fcn_00533090(unsigned int a0)
 				if (g_7746c4 != 0 && g_7746cc == 0) {
 					g_7746c4 = 0;
 				}
-				fcn_00438b40(g_6b8014, g_7e3a40);
-				fcn_00438cb0(g_6b8014, g_7e3a50);
-				g_774688 = 0;
-				g_77468c = 0;
+				fcn_00438b40(d3_ActiveCamera, g_7e3a40);
+				fcn_00438cb0(d3_ActiveCamera, d3_CameraTargetRotation);
+				d3_CameraHorizontalIndex = 0;
+				d3_CameraVerticalStep = 0;
 				goto done;
 			}
 			if (g_7746c4 != 0 || g_7746c8 != 0) {

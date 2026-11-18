@@ -47,7 +47,7 @@ typedef struct {
 } Order_5635b0;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 extern char g_7f4ca0[];
 
@@ -111,7 +111,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 					*(int*) (m + 0xc) = -1;
 					m[0x36] = 1;
 					*(int*) (m + 8) = ((Entity_5635b0*)g_7f4ca0)[o->ent].id;
-					*(Stamp_5635b0*) (m + 0x28) = (*(Stamp_5635b0*)&g_7f4c00);
+					*(Stamp_5635b0*) (m + 0x28) = (*(Stamp_5635b0*)&gm_GameTime);
 					*(int*) (m + 0x60) = o->who;
 					*(int*) (m + 0x68) = o->value;
 					fcn_004c5530(m);
@@ -122,7 +122,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 		}
 next:
 		o->tries = o->tries + 1;
-		o->stamp = (*(Stamp_5635b0*)&g_7f4c00);
+		o->stamp = (*(Stamp_5635b0*)&gm_GameTime);
 		fcn_00500bb0(&o->stamp, gm_RandomMod(3) + 4, 0, 0);
 		return;
 	case -2:

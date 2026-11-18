@@ -45,7 +45,7 @@ void __cdecl fcn_00489920(char* e)
 
 
 			*(char*) (s + 0x36) = 1;
-			*(pos14_7f4c00*) (s + 0x28) = g_7f4c00;
+			*(pos14_7f4c00*) (s + 0x28) = gm_GameTime;
 			fcn_00500bb0((SIM_CLOCK_489920*) (s + 0x28), 0, 0, 10);
 			*(int*) (s + 0x58) = *(int*) (q + 2);
 			*(int*) (s + 0x5c) = 100 - *(unsigned char*) (q + 0x12);

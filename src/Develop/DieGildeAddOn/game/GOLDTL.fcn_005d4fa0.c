@@ -72,7 +72,7 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == ok) {
+			if (d2_CurrentElementId == ok) {
 				if (fcn_00525f60(e, 2) && fcn_00526010(e, money, g_773d75)) {
 					fcn_004c6ae0(*(int*) (e + 4), -2);
 					io_FormatTextBuffer(text, 0x1d3c);
@@ -95,7 +95,7 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 					fcn_00526120(text, 0);
 					g_774654 = 1;
 				}
-			} else if (g_67d370 == cancel) {
+			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;
 			}
 		}

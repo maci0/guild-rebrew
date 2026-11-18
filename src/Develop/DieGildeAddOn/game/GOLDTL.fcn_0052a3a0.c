@@ -38,7 +38,7 @@ typedef struct {
 
 extern unsigned char g_773d75;
 extern char g_868060[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_7e43a0;
 extern int g_7e43a4;
 extern int g_7e4530;
@@ -139,7 +139,7 @@ void __cdecl fcn_0052a3a0(Stamp* now, int flag)
 			angle += gm_RandomFloat01() * step;
 		}
 	}
-	fcn_005e8870(mode, g_7f4c00.a, (Vec24*) &g_7e43a8.c, (Vec24*) &g_7e43a8.d);
+	fcn_005e8870(mode, gm_GameTime.a, (Vec24*) &g_7e43a8.c, (Vec24*) &g_7e43a8.d);
 	g_7e4468 = 0;
 	g_7e446c = 0;
 	g_7e4534 = -1;
@@ -194,7 +194,7 @@ void __cdecl fcn_0052a3a0(Stamp* now, int flag)
 	col.b = 0;
 	g_7e4540[2] = fcn_00459870(g_6b89c0, 0, (int) "sky_dunkel_01", col, g_6a28f0, 0, g_6a28f4, g_6a28f8);
 	fcn_00459940(g_6b89c0, g_7e4540[2], 0);
-	player = g_6b8010;
+	player = d3_CurrentContextIndex;
 	for (i = 0; i < 64; i++) {
 		if (((Slot_52a3a0*) g_1043340)[i].f2c != 0) {
 			fcn_004432d0(i, 1);

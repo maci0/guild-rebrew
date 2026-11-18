@@ -49,7 +49,7 @@ void __cdecl he_AllocGebaeudeBauen(char* u)
 		fcn_00546190(u);
 		return;
 	}
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	memset(list, 0, sizeof(list));
 	fcn_004432d0(0, 1);
 	n = fcn_00598150(text, list);

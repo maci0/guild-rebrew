@@ -10,7 +10,7 @@ struct good {
 #pragma pack()
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 extern int g_774800;
 
@@ -25,8 +25,8 @@ void __cdecl fcn_00563bb0(char* e)
 	char* g;
 	int d;
 
-	*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
-	*(pos14_7f4c00*) (e + 0x44) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
+	*(pos14_7f4c00*) (e + 0x44) = gm_GameTime;
 	t = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 	if (t == 0) {
 		fcn_00546190(e);

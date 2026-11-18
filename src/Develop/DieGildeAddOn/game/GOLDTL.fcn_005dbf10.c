@@ -33,7 +33,7 @@ typedef struct Desc {
 
 #include "client_packet_builder.h"
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c06;
 extern int g_7f4c0a;
@@ -98,7 +98,7 @@ int __cdecl fcn_005dbf10(Ent* ent, Cmd* cmd)
 			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x1c), &vc);
 			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x21), &v8);
 			fcn_004c4570(1, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x20), &one);
-			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x2d), &(*(int*)&g_7f4c00));
+			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x2d), &(*(int*)&gm_GameTime));
 			fcn_004c4570(2, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x31), &(*(short*)&g_7f4c04));
 			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x33), &g_7f4c06);
 			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x37), &g_7f4c0a);

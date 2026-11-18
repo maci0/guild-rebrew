@@ -74,11 +74,11 @@ typedef struct Ent {
 // SIZE 0x2f4
 
 extern char* g_1015ea0;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern int g_77259c;
 extern int g_67d390;
-extern int g_67d398;
+extern int d2_DefaultFont;
 extern int g_67d3a0;
 
 int __cdecl fcn_004770a0(int* p, int kind);
@@ -187,7 +187,7 @@ found:
 	rec->x27c = ei;
 	rec->x280 = 1;
 	rec->x398 = -1;
-	rec->x28c = g_67d398;
+	rec->x28c = d2_DefaultFont;
 	rec->x284 = -1;
 	rec->used = 1;
 	rec->x3bc = -1;
@@ -208,7 +208,7 @@ found:
 	if (a4 & 0x10) {
 		rec->x3c = m_alloc(0x17d0, "d2_t:w->txt");
 	}
-	g_772514 = i;
+	d2_CurrentWindowId = i;
 	g_77255c = (char*) rec;
 	return i;
 }

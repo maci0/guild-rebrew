@@ -1,6 +1,6 @@
 #pragma optimize("y", off)
-extern char* g_6b7d68;
-extern int g_6b7d74;
+extern char* sbs_BankManager;
+extern int MemUsed;
 extern char* g_6b7d78;
 extern char g_679010[]; /* %lang */
 extern char g_679018[]; /* sbs_Compile */
@@ -39,7 +39,7 @@ int __cdecl fcn_004248a0(char* name)
 	result = 0;
 	count = 0;
 	fcn_004230e0(0);
-	if (g_6b7d68 != 0) {
+	if (sbs_BankManager != 0) {
 		n1 = fcn_004246c0();
 		n2 = fcn_004246e0();
 		if (fcn_00425980(name) == -1) {
@@ -49,7 +49,7 @@ int __cdecl fcn_004248a0(char* name)
 		root = (int) m_alloc(text, g_679018);
 		if (root != 0) {
 	g_6b7d78 = (char*) root;
-	g_6b7d74 += (int) text;
+	MemUsed += (int) text;
 	step = 0x144;
 	/* Reviewed original operand-homed fill (inline fill/copy block). */
 	__asm {
@@ -69,13 +69,13 @@ int __cdecl fcn_004248a0(char* name)
 		add ecx, ebx
 		rep stosb
 	}
-	strncpy(g_6b7d78, g_6b7d68, 0x32);
+	strncpy(g_6b7d78, sbs_BankManager, 0x32);
 	offset = root + step;
 	*(int*) (g_6b7d78 + 0x134) = n1 + n2;
 	*(char**) (g_6b7d78 + 0x138) = (char*) offset;
 	offset = ((n1 + n2) << 6) + step;
 			if (n1 != 0) {
-				node = *(char**) (g_6b7d68 + 0x38);
+				node = *(char**) (sbs_BankManager + 0x38);
 				if (node != 0) {
 					i = 0;
 					if (result == 0) {
@@ -114,7 +114,7 @@ int __cdecl fcn_004248a0(char* name)
 				}
 			}
 			if (n2 != 0) {
-				node = *(char**) (g_6b7d68 + 0x3c);
+				node = *(char**) (sbs_BankManager + 0x3c);
 				if (node != 0) {
 					n2 = count << 6;
 					do {

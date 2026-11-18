@@ -8,7 +8,7 @@ int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_005c9090();
 int __cdecl fcn_005cf720();
 
-extern char * g_1015ea0; extern char * g_772500; extern int g_772514; extern unsigned short g_774970;
+extern char * g_1015ea0; extern char * g_772500; extern int d2_CurrentWindowId; extern unsigned short g_774970;
 /* ADDRESS: GOLDTL 0x005c9f10 */
 int __cdecl fcn_005c9f10(int a0, int a1, int a2, int a3, int a4, unsigned short* a5)
 {
@@ -77,25 +77,25 @@ label_5ca044:
 		v6 = v15[-2] + 0x65;
 		v10 = v15[-1] + 0x23;
 		v11 = v6 - (int) *(short*) ((int) g_772500 + 0x1ebd8) / 2;
-		v5 = fcn_0046f740(v11, v10, 0x5da, g_772514);
+		v5 = fcn_0046f740(v11, v10, 0x5da, d2_CurrentWindowId);
 		v15[-5] = v5;
 		v2 = v15[-6];
 		v15[-4] = -1;
 		if (v2) {
 			v1 = *(char*) (v2 + 2);
 			if (v1 == 6 || v1 == 7 || v1 == 5) {
-				fcn_0046f740(v11 - 0x20, v10, *(unsigned int*) (v2 + 0x54), g_772514);
+				fcn_0046f740(v11 - 0x20, v10, *(unsigned int*) (v2 + 0x54), d2_CurrentWindowId);
 			}
-			v5 = fcn_0046f740(((v6 - (int) *(short*) ((int) g_772500 + 0x50 + *(int*) (v15[-6] + 0x18c) * 0x54) / 2) - 3), v10 + 1, *(int*) (v15[-6] + 0x18c), g_772514);
+			v5 = fcn_0046f740(((v6 - (int) *(short*) ((int) g_772500 + 0x50 + *(int*) (v15[-6] + 0x18c) * 0x54) / 2) - 3), v10 + 1, *(int*) (v15[-6] + 0x18c), d2_CurrentWindowId);
 			*v15 = v5;
-			fcn_0046f740(v11 + 3, v10 + 3, v15[1], g_772514);
+			fcn_0046f740(v11 + 3, v10 + 3, v15[1], d2_CurrentWindowId);
 			if (v15[2]) {
-				fcn_0046f740(v11 + 3, (int) *(short*) ((int) g_772500 + 0x1ebda) + -0x13 + v10, v15[2], g_772514);
+				fcn_0046f740(v11 + 3, (int) *(short*) ((int) g_772500 + 0x1ebda) + -0x13 + v10, v15[2], d2_CurrentWindowId);
 			}
 			if (v15[3]) {
-				fcn_0046f740((int) *(short*) ((int) g_772500 + 0x1ebd8) + -0x10 + v11, v10 + 3, v15[3], g_772514);
+				fcn_0046f740((int) *(short*) ((int) g_772500 + 0x1ebd8) + -0x10 + v11, v10 + 3, v15[3], d2_CurrentWindowId);
 			}
-			fcn_0046f740((int) *(short*) ((int) g_772500 + 0x1ebd8) + -0x10 + v11, (int) *(short*) ((int) g_772500 + 0x1ebda) + -0x13 + v10, v15[4], g_772514);
+			fcn_0046f740((int) *(short*) ((int) g_772500 + 0x1ebd8) + -0x10 + v11, (int) *(short*) ((int) g_772500 + 0x1ebda) + -0x13 + v10, v15[4], d2_CurrentWindowId);
 			if (a1 == 8) {
 				v12 = *(int*) &((unsigned short*) v15[-6])[0xe6];
 				if (v12 & 0x1000) {
@@ -122,7 +122,7 @@ label_5ca044:
 			}
 			v3 = a5;
 			if ((unsigned short*) v15[-6] != a5 && *(char*) &((unsigned short*) v15[-6])[1] != 6) {
-				v5 = fcn_004677e0(v6 - 0x23, (int) *(short*) ((int) g_772500 + 0x1ebda) + 5 + v10, 0x40, 0, 100, 0x75, 0x442, g_772514);
+				v5 = fcn_004677e0(v6 - 0x23, (int) *(short*) ((int) g_772500 + 0x1ebda) + 5 + v10, 0x40, 0, 100, 0x75, 0x442, d2_CurrentWindowId);
 				v15[-4] = v5;
 				if (*(char*) &((unsigned short*) v15[-6])[1] != 7) {
 					v5 = (int) fcn_0050f980(*v3, *(unsigned short*) v15[-6], 1);
@@ -134,7 +134,7 @@ label_5ca044:
 				*(int*) ((int) g_1015ea0 + 0x5c + v15[-4] * 0x2f4) = 1;
 			}
 			if (v3 != 0 && *(char*) &v3[1] == 6 && *(int*) (v15[-6] + 0x210) == *(int*) &v3[2]) {
-				fcn_0046f740((int) *(short*) ((int) g_772500 + 0x1ebd8) + v11, v10, 0x6d3, g_772514);
+				fcn_0046f740((int) *(short*) ((int) g_772500 + 0x1ebd8) + v11, v10, 0x6d3, d2_CurrentWindowId);
 			}
 			if (a2 == 0 || fcn_005cf720(g_774970, *(unsigned short*) v15[-6], a2, 0) != 0) {
 				*(int*) ((int) g_1015ea0 + 0x5c + v15[-5] * 0x2f4) = 1;
@@ -142,7 +142,7 @@ label_5ca044:
 				*(int*) ((int) g_1015ea0 + 0x2f0 + v15[-5] * 0x2f4) = v15[-6];
 			}
 		} else {
-			fcn_0046f740((v6 - (int) *(short*) ((int) g_772500 + 0x1a2ac) / 2) - 3, v10 + 1, 0x4fb, g_772514);
+			fcn_0046f740((v6 - (int) *(short*) ((int) g_772500 + 0x1a2ac) / 2) - 3, v10 + 1, 0x4fb, d2_CurrentWindowId);
 			io_FormatTextBuffer(v13, g_679060, v15[-3] + 0x253);
 			fcn_005c9090(v13, v6, v15[-1], 0xca, 0x56);
 			*(int*) ((int) g_1015ea0 + 0x5c + v15[-5] * 0x2f4) = 1;

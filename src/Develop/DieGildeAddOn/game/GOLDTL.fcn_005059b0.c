@@ -73,7 +73,7 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned short* lpObjekteINST;
 extern char* lpObjektePROT;
 extern char g_7f4ca0[];
-extern char* g_773da8;
+extern char* gm_CityEntity;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_005b1c90(int);
@@ -140,7 +140,7 @@ void __cdecl fcn_005059b0(Estate* s, unsigned short owner, int slot)
 			if (q->link != 0) {
 				q->link->id = ((Entity*)g_7f4ca0)[slot].id;
 			}
-			saved = g_6b8010;
+			saved = d3_CurrentContextIndex;
 			m = q->model;
 			if (((Entity*)g_7f4ca0)[slot].scene != 0 && (((Entity*)g_7f4ca0)[slot].type == 5 || ((Entity*)g_7f4ca0)[slot].type == 6 || ((Entity*)g_7f4ca0)[slot].type == 7)) {
 				sc = ((Entity*)g_7f4ca0)[slot].scene - 0x599;
@@ -157,15 +157,15 @@ void __cdecl fcn_005059b0(Estate* s, unsigned short owner, int slot)
 		q++;
 	}
 	e = &((Entity*)g_7f4ca0)[slot];
-	if (e != ((Entity*)g_773da8) && s->placed != 0 && (e->type == 6 || e->type == 7 || e->type == 5)) {
-		saved = g_6b8010;
+	if (e != ((Entity*)gm_CityEntity) && s->placed != 0 && (e->type == 6 || e->type == 7 || e->type == 5)) {
+		saved = d3_CurrentContextIndex;
 		fcn_004432d0(0, 1);
 		fcn_0052dd80(s);
 		fcn_0052d9d0(s);
 		fcn_004432d0(saved, 1);
 		return;
 	}
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	fcn_0052dd80(s);
 	fcn_004432d0(saved, 1);

@@ -1,7 +1,7 @@
 #include "client_types.h"
 #include "client_dialog_helpers.h"
 
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -93,7 +93,7 @@ void __cdecl fcn_0054ac70(char* e)
 			io_FormatTextBuffer(text, 0x1bbe, *(unsigned short*) a);
 			fcn_00545d40(*(int*) (b + 4), *(int*) (b + 4), text, 0, 0x5f5, 0);
 		}
-		*(pos14_7f4c00*) (e + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+		*(pos14_7f4c00*) (e + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 		*(int*) (e + 0x58) = *(int*) (e + 0x58) + 2;
 		fcn_004c5620(-1, e);
 		return;
@@ -111,7 +111,7 @@ void __cdecl fcn_0054ac70(char* e)
 		*(unsigned char*) (m + 0x30) =
 			(unsigned char) ((*(int*) (e + 0xc0) != -1) + 5);
 		*(int*) (m + 0x40) = *(int*) (e + 0xb8);
-		*(int*) (m + 0x18) = g_7f4c00;
+		*(int*) (m + 0x18) = gm_GameTime;
 		*(unsigned char*) (m + 8) = 2;
 		*(unsigned char*) (m + 0x26) = 0xa2;
 		*(int*) (m + 0x14) = -1;

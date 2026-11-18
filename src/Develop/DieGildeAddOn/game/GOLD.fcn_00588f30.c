@@ -43,7 +43,7 @@ int __cdecl fcn_00588f30(char* w)
 	d2_SetForm(0, 4);
 	info.who = w;
 	if (fcn_005ca560(&info) != 0) {
-		fcn_005caaa0(0xa6, 5, g_772514, &info);
+		fcn_005caaa0(0xa6, 5, d2_CurrentWindowId, &info);
 	}
 	d2_SetForm(0, 2);
 	if (w[2] != 0x14) {
@@ -134,7 +134,7 @@ int __cdecl fcn_00588f30(char* w)
 	d2_SetForm(0, 3);
 	for (i = 0; i < 5; i++) {
 		io_FormatTextBuffer(buf, "%s:", i + 0x16b7);
-		d2_ShowTxt(0, i * 15, buf, g_772514);
+		d2_ShowTxt(0, i * 15, buf, d2_CurrentWindowId);
 		fcn_00534210(0x64, i * 15 + 2, w, i, 0x4df);
 	}
 	fcn_0057e880(7, w, 0, 0);

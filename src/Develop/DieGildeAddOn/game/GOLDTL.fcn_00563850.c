@@ -28,7 +28,7 @@ struct house {
 };
 
 extern char g_7f4ca0[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_00546190(struct unit*);
@@ -47,9 +47,9 @@ void __cdecl fcn_00563850(struct unit* u)
 	}
 	u->target = *(int*) (e + 1);
 	fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 4, 0);
-	u->p60 = g_7f4c00;
-	u->p52 = g_7f4c00;
-	u->p44 = g_7f4c00;
+	u->p60 = gm_GameTime;
+	u->p52 = gm_GameTime;
+	u->p44 = gm_GameTime;
 	fcn_00500bb0(&u->p52, 0, 10, 0);
 	u->pb8 = u->p52;
 	h = &((struct house*) g_7f4ca0)[u->house];

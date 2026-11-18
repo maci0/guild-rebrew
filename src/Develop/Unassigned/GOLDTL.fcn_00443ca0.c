@@ -32,7 +32,7 @@ Ctx* __cdecl fcn_00443ca0(float a, float b, int flags, int mask, int cam)
 	}
 	g_6b8318.cam = cam;
 	g_6b8318.mask = mask;
-	g_6b8318.x = g_1052bc0 - a;
+	g_6b8318.x = d3_ViewportCenterX - a;
 	g_6b8318.y = g_1052bc8 - b;
 	fcn_004379a0(g_67a370, 0, flags, fcn_00443b00, &g_6b8318);
 	return &g_6b8318;

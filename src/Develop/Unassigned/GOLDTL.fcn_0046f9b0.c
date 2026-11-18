@@ -27,7 +27,7 @@ void __cdecl fcn_0046f9b0(int idx, char* text)
 		c = e->i[0xc / 4];
 		p0 = fcn_0047b620(c, 0);
 		p1 = fcn_0047b620(c, 1);
-		w = fcn_0046b520(text, g_67d398) + *(unsigned short*) (p1 + 2) + *(unsigned short*) (p0 + 2) + 4;
+		w = fcn_0046b520(text, d2_DefaultFont) + *(unsigned short*) (p1 + 2) + *(unsigned short*) (p0 + 2) + 4;
 		fcn_0064d530((char*) e + 0x8c, text, 0x3f);
 		((fcn_0046f9b0_Ent*)g_1015ea0)[idx].i[0x18 / 4] = w;
 		return;

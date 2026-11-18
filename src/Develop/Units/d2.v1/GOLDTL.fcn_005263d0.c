@@ -23,8 +23,8 @@ typedef List8c_102cbc8 List8c;
 
 extern volatile int g_6b7fac;
 extern char g_77470d;
-extern int g_7e46ac;
-extern int g_772514;
+extern int main_LoopFlags;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern char* g_1015ea0;
 extern int g_100f1dc;
@@ -67,13 +67,13 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 	if (g_77470d != 0) {
 		return 0;
 	}
-	mode = g_7e46ac & ~0x38;
+	mode = main_LoopFlags & ~0x38;
 	h = fcn_00470820(0, 0, "misc\\MessageBoxGreen");
 	if (flags & 8) {
 		mode = 0x717c6;
 	}
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	if (title != 0) {
 		io_AppendText(title);
@@ -93,7 +93,7 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 	d2_SetForm(h, 0);
 	f80 = flags & 0x80;
 	if (f80) {
-		id = fcn_004677e0(0x1c, ((Screen*)g_77255c)->h - 0x18, ((Screen*)g_77255c)->w - 0x40, 0, 500, 0x83, 0x42, g_772514);
+		id = fcn_004677e0(0x1c, ((Screen*)g_77255c)->h - 0x18, ((Screen*)g_77255c)->w - 0x40, 0, 500, 0x83, 0x42, d2_CurrentWindowId);
 	}
 	while (fcn_005373e0(fcn_005263d0, mode) != 0) {
 		d2_UpdateRadioGroup(list);

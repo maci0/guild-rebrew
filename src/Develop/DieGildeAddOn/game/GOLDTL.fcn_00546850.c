@@ -67,7 +67,7 @@ void __cdecl fcn_00546850(unsigned char* p)
 		break;
 	case 0x35:
 		o = gm_LookupEntityRecordById(*(int*) (p + 0xbc));
-		if (o != 0 && *o == g_774970 && g_6b8010 == 0) {
+		if (o != 0 && *o == g_774970 && d3_CurrentContextIndex == 0) {
 			v = fcn_00445600(0, 0x40, 0, g_6a5804);
 			if (v != 0) {
 				he_CreateGfxInfo(p, g_6a57d8, v);
@@ -75,7 +75,7 @@ void __cdecl fcn_00546850(unsigned char* p)
 		}
 		break;
 	case 0x6b:
-		if (*(int*) (p + 0x70) == 2 && g_6b8010 == 0 && (g_7f4e68[g_774970 * 135] & 0x20000) == 0) {
+		if (*(int*) (p + 0x70) == 2 && d3_CurrentContextIndex == 0 && (g_7f4e68[g_774970 * 135] & 0x20000) == 0) {
 			v = fcn_00445600(0, 0x40, 0, g_6a57f8);
 			if (v != 0) {
 				he_CreateGfxInfo(p, g_6a57d8, v);

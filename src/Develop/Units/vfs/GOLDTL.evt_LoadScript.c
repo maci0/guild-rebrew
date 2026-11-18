@@ -103,7 +103,7 @@ Script *__cdecl evt_LoadScript(char *name)
 		m_FreeTracked(out);
 	}
 	sc->sp = sc->stack = m_alloc(0x400, "evt:stack");
-	sc->fc90 = g_6b8010;
+	sc->fc90 = d3_CurrentContextIndex;
 	sc->f104 = g_6791c8;
 	sc->fc60 = 0;
 	sc->fc5c = 0;

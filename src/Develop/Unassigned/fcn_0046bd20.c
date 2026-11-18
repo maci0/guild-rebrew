@@ -7,14 +7,14 @@ extern int g_772548;
 extern int g_77254c;
 extern int g_772550;
 extern int g_7725fc;
-extern int g_772608;
-extern int g_1015ea4;
-extern int g_1040490;
+extern int d2_DrawDepthIndex;
+extern int d2_FontHeight;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int d2_CurrentFont;
 extern int g_67d380;
 extern int g_67d384;
-extern int g_67d968;
+extern int d2_ClipBottom;
 
 int __cdecl fcn_00465950(char* name);
 void* __cdecl d2_GetResourceData(int handle);
@@ -68,7 +68,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
     g_772550 = y;
     if (!g_772524)
         g_772524 = (char*)d2_GetResourceData(fcn_00465950("_FONT"));
-    g_1015ea4 = *(unsigned short*)(g_772524 + 8);
+    d2_FontHeight = *(unsigned short*)(g_772524 + 8);
     memset(words, 0, sizeof(words));
     if (surface && (flags & 0xa0)) {
         visible = 1;
@@ -84,8 +84,8 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
                 origin_x = x;
                 g_77254c = x;
             }
-            if (bg_y + bg_height > g_1040490) {
-                bg_y = g_1040490 - bg_height;
+            if (bg_y + bg_height > d2_ScreenHeight) {
+                bg_y = d2_ScreenHeight - bg_height;
                 y = bg_y;
                 origin_y = bg_y;
                 g_772550 = bg_y;
@@ -93,14 +93,14 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
         }
         if (bg_y + bg_height < g_7725fc)
             visible = 0;
-        if (bg_y > g_67d968)
+        if (bg_y > d2_ClipBottom)
             visible = 0;
         if (bg_y < g_7725fc) {
             bg_height = g_7725fc - bg_y;
             bg_y = g_7725fc;
         }
-        if (bg_y + bg_height > g_67d968)
-            bg_height = g_67d968 - bg_y;
+        if (bg_y + bg_height > d2_ClipBottom)
+            bg_height = d2_ClipBottom - bg_y;
         if (visible)
             fcn_0047c9c0(bg_width, bg_y, bg_x, bg_height,
                          *(int*)(g_77253c + 0x50), 0.7f);
@@ -199,13 +199,13 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
                                     else if (flags & 1)
                                         fcn_0047cbf0(draw_x, draw_y, surface, g_772524, c);
                                     else if (draw(draw_x, draw_y, surface, g_772524, c))
-                                        g_772608--;
+                                        d2_DrawDepthIndex--;
                                 }
                                 draw_x += *(unsigned short*)(glyph + 0x15) + g_67d384;
                             }
                         }
                         if (draw_x > right + g_67d384) {
-                            draw_y += g_1015ea4;
+                            draw_y += d2_FontHeight;
                             draw_x = origin_x;
                         }
                     }
@@ -215,7 +215,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
                     word += 0x60;
                 }
                 x = origin_x;
-                y += g_1015ea4;
+                y += d2_FontHeight;
                 used_width = 0;
                 word_count = 0;
                 next_count = word_count;

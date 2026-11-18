@@ -136,7 +136,7 @@ done:;
 					if (fcn_00525f60((char*) &g_7f4ca0 + 0x21c
 					    * (unsigned int) *(unsigned short*) &g_774970, 2) != 0) {
 						*(pos14_7f4c00*) ((char*) o + 0x52) =
-						    *(pos14_7f4c00*) &g_7f4c00;
+						    *(pos14_7f4c00*) &gm_GameTime;
 						r = fcn_004c5620(-1, (char*) o);
 						if (r != -1) {
 							for (;;) {

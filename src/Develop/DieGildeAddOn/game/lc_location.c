@@ -6,7 +6,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_005338d0(char*, int, int);
 void __cdecl fcn_005aceb0(int);
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern volatile int g_6b7fc0;
 extern char g_774964;
 extern char g_14cf950;
@@ -38,7 +38,7 @@ void __cdecl fcn_005e4c50(void)
 {
 	int flags;
 
-	flags = (g_7e46ac & ~0x2000) | 0x100000;
+	flags = (main_LoopFlags & ~0x2000) | 0x100000;
 	g_6b7fc0 = 1;
 	fcn_00533a40(g_6a2e68);
 	(*(unsigned char*)&g_774964) = 0;

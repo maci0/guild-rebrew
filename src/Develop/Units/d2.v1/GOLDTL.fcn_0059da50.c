@@ -31,7 +31,7 @@ extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14abd04;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern unsigned char* g_7746c8;
@@ -85,7 +85,7 @@ void __cdecl fcn_0059da50(int unused, char* e)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == btn1) {
+			if (d2_CurrentElementId == btn1) {
 				pkt.type = 0x75;
 				pkt.x36 = 1;
 				n = 0;
@@ -111,7 +111,7 @@ void __cdecl fcn_0059da50(int unused, char* e)
 				}
 				g_774654 = 1;
 			}
-			else if (g_67d370 == btn2) {
+			else if (d2_CurrentElementId == btn2) {
 				g_774654 = 1;
 			}
 		}

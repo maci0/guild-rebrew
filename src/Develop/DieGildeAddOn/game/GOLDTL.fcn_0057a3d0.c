@@ -19,7 +19,7 @@ struct pos14 {
 };
 #pragma pack()
 
-extern struct pos14 g_7f4c00;
+extern struct pos14 gm_GameTime;
 extern struct house g_7f4ca0[];
 #include "client_packet_builder.h"
 extern char g_6b5c60[];
@@ -54,7 +54,7 @@ void __cdecl fcn_0057a3d0(char* e)
 	case 0:
 		who = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 		if (who != 0 && (unsigned char) who[*(int*) (e + 0xb0) + 0x80] < 252.0f
-		    && fcn_00500cb0(&g_7f4c00, (struct pos14*) (e + 0xb8)) < 0) {
+		    && fcn_00500cb0(&gm_GameTime, (struct pos14*) (e + 0xb8)) < 0) {
 			unsigned char add;
 			float skill;
 			double months;
@@ -63,7 +63,7 @@ void __cdecl fcn_0057a3d0(char* e)
 				break;
 			}
 			skill = (float) fcn_0050c710(q, 0xc, 1);
-			months = fcn_0050c830((struct pos14*) (e + 0x60), &g_7f4c00, q) * (1.0 / 30.0);
+			months = fcn_0050c830((struct pos14*) (e + 0x60), &gm_GameTime, q) * (1.0 / 30.0);
 			add = (unsigned char) ((months * 8.0) * (skill * 0.01 + 1.0));
 			p = (unsigned char*) &who[*(int*) (e + 0xb0) + 0x80];
 			add = (unsigned char) (add / (*p * (1.0f / 252.0f) + 1.0));
@@ -73,8 +73,8 @@ void __cdecl fcn_0057a3d0(char* e)
 			fcn_004c4510(who, *(int*) (who + 4));
 			fcn_004c4670(1, 1, (short) (who - g_aed32c + *(int*) (e + 0xb0) + 0x80), &add);
 			fcn_004c5360();
-			*(struct pos14*) (e + 0x52) = g_7f4c00;
-			*(struct pos14*) (e + 0x60) = g_7f4c00;
+			*(struct pos14*) (e + 0x52) = gm_GameTime;
+			*(struct pos14*) (e + 0x60) = gm_GameTime;
 			fcn_00500bb0((struct pos14*) (e + 0x52), 0, 0x1e, 0);
 			return;
 		}

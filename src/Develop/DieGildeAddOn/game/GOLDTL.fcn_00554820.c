@@ -28,7 +28,7 @@ typedef struct {
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 
 void __cdecl fcn_00546190(char* s);
@@ -59,8 +59,8 @@ void __cdecl fcn_00554820(char* s)
 		fcn_00546190(s);
 		return;
 	}
-	io_FormatTextBuffer(buf, "-------> RunSimUnfall: calculating at <Day = %i Time = %i.2:%i.2>", ((Clock*) &g_7f4c00)->day,
-		((Clock*) &g_7f4c00)->hour, ((Clock*) &g_7f4c00)->minute);
+	io_FormatTextBuffer(buf, "-------> RunSimUnfall: calculating at <Day = %i Time = %i.2:%i.2>", ((Clock*) &gm_GameTime)->day,
+		((Clock*) &gm_GameTime)->hour, ((Clock*) &gm_GameTime)->minute);
 	if (*(int*) (s + 0xb0) == 0) {
 		steps[0] = 1;
 		steps[1] = 3;

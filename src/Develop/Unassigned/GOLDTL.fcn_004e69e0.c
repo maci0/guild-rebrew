@@ -25,8 +25,8 @@ Ent114* __cdecl fcn_004e69e0(int type, int key)
 	int i;
 
 	for (i = 0; i < 96; i++) {
-		if (((Ent114*)g_9a9660)[i].active != 0 && ((Ent114*)g_9a9660)[i].type == type && ((Ent114*)g_9a9660)[i].key == key) {
-			return &((Ent114*)g_9a9660)[i];
+		if (((Ent114*)cut_Cutscenes)[i].active != 0 && ((Ent114*)cut_Cutscenes)[i].type == type && ((Ent114*)cut_Cutscenes)[i].key == key) {
+			return &((Ent114*)cut_Cutscenes)[i];
 		}
 	}
 	return 0;

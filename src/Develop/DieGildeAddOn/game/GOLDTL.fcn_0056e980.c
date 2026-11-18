@@ -14,18 +14,18 @@ void __cdecl fcn_0056e980(char* a0)
 	int w;
 
 
-	if (*(int*) &g_7f4c00 != *(int*) (a0 + 0x44)) {
+	if (*(int*) &gm_GameTime != *(int*) (a0 + 0x44)) {
 		fcn_00546190(a0);
 		return;
 	}
-	idx = fcn_00500e20((char*) &g_7f4c00);
+	idx = fcn_00500e20((char*) &gm_GameTime);
 	switch (*(int*) (a0 + 0x70)) {
 	case 0:
 		w = *(int*) &g_7f4c04 & 0xffff;
 
 		if (!((float) w >= *(float*) (idx * 4 + 0x696540)) || !((float) w < *(float*) (idx * 4 + 0x696540) + 1.0f)) {
-			*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
-			fcn_00500bb0((char*) &g_7f4c00, 0, 0, 1);
+			*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
+			fcn_00500bb0((char*) &gm_GameTime, 0, 0, 1);
 			return;
 		}
 		if (*(char*) &g_774964)
@@ -46,7 +46,7 @@ void __cdecl fcn_0056e980(char* a0)
 			if ((gm_RandomMod(10) & 0xffff) > 7)
 				fcn_004c30a0(*(int*) (a0 + 0xac), 0, (char*) 0x6a6c8c, -1, 0x3e8);
 		}
-		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 		*(unsigned short*) (a0 + 0x56) = (unsigned short) (int) *(float*) (idx * 4 + 0x696550);
 		*(int*) (a0 + 0x58) = 0;
 		*(int*) (a0 + 0x70) += 1;
@@ -55,8 +55,8 @@ void __cdecl fcn_0056e980(char* a0)
 		w = *(int*) &g_7f4c04 & 0xffff;
 
 		if (!((float) w >= *(float*) (idx * 4 + 0x696550)) || !((float) w < *(float*) (idx * 4 + 0x696550) + 1.0f)) {
-			*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
-			fcn_00500bb0((char*) &g_7f4c00, 0, 0, 1);
+			*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
+			fcn_00500bb0((char*) &gm_GameTime, 0, 0, 1);
 			return;
 		}
 		if (*(char*) &g_774964)
@@ -77,7 +77,7 @@ void __cdecl fcn_0056e980(char* a0)
 			if ((gm_RandomMod(10) & 0xffff) > 7)
 				fcn_004c30a0(*(int*) (a0 + 0xac), 0, (char*) 0x6a6be8, -1, 0x3e8);
 		}
-		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 		*(unsigned short*) (a0 + 0x56) = 0x16;
 		*(int*) (a0 + 0x58) = 0x1e;
 		*(int*) (a0 + 0x70) += 1;
@@ -85,8 +85,8 @@ void __cdecl fcn_0056e980(char* a0)
 	case 2:
 		if (*(unsigned short*) &g_7f4c04 < 0x16 || *(int*) 0x7f4c06 < 0x1e ||
 		    *(int*) 0x7f4c06 >= 0x32) {
-			*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
-			fcn_00500bb0((char*) &g_7f4c00, 0, 0, 1);
+			*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
+			fcn_00500bb0((char*) &gm_GameTime, 0, 0, 1);
 			return;
 		}
 		if (*(char*) &g_774964) {

@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern char g_6761c8[];
 
 
@@ -13,7 +13,7 @@ int __cdecl StopCharacter(void* actorRef)
 
 	actor = *(void**) actorRef;
 	if (actor == 0) {
-		fcn_00425bf0(((int*)g_6b7e98), *(int*) ((char*) ((int*)g_6b7e98) + 0x118), g_6761c8);
+		fcn_00425bf0(((int*)evt_CurrentScript), *(int*) ((char*) ((int*)evt_CurrentScript) + 0x118), g_6761c8);
 	} else {
 		ch_CancelActionQueue(actor);
 	}

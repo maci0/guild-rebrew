@@ -22,7 +22,7 @@ extern char g_7f4ca0[];
 extern char s_6a2f5c[];
 extern char s_6acd38[];
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
 
@@ -110,7 +110,7 @@ int __cdecl fcn_005d7640(Ent* ent, Cmd* cmd)
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == yes) {
+			if (d2_CurrentElementId == yes) {
 				if (fcn_00525f60(ent, 6)) {
 					if (fcn_005d75d0(ent, pb, pa)) {
 						io_FormatTextBuffer(text, 0x1dca);
@@ -120,7 +120,7 @@ int __cdecl fcn_005d7640(Ent* ent, Cmd* cmd)
 					fcn_00526120(text, 0);
 					g_774654 = 1;
 				}
-			} else if (g_67d370 == no) {
+			} else if (d2_CurrentElementId == no) {
 				g_774654 = 1;
 			}
 		}

@@ -30,7 +30,7 @@ typedef struct {
 extern Rec2d_9a3800 g_9a3800[512];
 #include "GOLDTL.fcn_005bfdf0_gconf.h"
 extern char g_6ac4c8[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
@@ -76,9 +76,9 @@ void __cdecl fcn_005bfdf0(unsigned short* who, unsigned short* e)
 	h = fcn_00470820(0, 0, g_6ac4c8);
 	fcn_00471b60(h);
 	d2_SetForm(h, 2);
-	w = g_772514;
+	w = d2_CurrentWindowId;
 	d2_SetForm(h, 4);
-	fcn_0046e830(-1, -1, g_772514, w, 0x767);
+	fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1742, *e);
@@ -87,7 +87,7 @@ void __cdecl fcn_005bfdf0(unsigned short* who, unsigned short* e)
 		fcn_005c91c0(g_14aa314[recs[k].kind].name, 10, k * 0x28 + 10, 0x13b, 0x55);
 		if (fcn_004f4830(recs[k].kind, &st) != 0 && st.count != 0) {
 			for (i = 0; i < st.count; i++) {
-				fcn_0046f740(i * 0x10 + 0x154, k * 0x28 + 10, 0x526, g_772514);
+				fcn_0046f740(i * 0x10 + 0x154, k * 0x28 + 10, 0x526, d2_CurrentWindowId);
 			}
 		}
 	}

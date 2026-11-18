@@ -2,7 +2,7 @@
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -74,7 +74,7 @@ void __cdecl fcn_0056caf0(char* a0)
 		} else {
 			*(int*) (a0 + 0xec) = -1;
 		}
-		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 		*(int*) (a0 + 0x70) += 1;
 		return;
 	case 2:
@@ -86,7 +86,7 @@ void __cdecl fcn_0056caf0(char* a0)
 				while (n < 0x10) {
 					if (*(int*) e == *(int*) (rec + 1)) {
 						*(int*) e = -1;
-						*(int*) (m + 0x28) = *(int*) &g_7f4c00;
+						*(int*) (m + 0x28) = *(int*) &gm_GameTime;
 						*(int*) (m + 0x30) = g_7f4c08;
 						m[4] = 0x4f;
 						m[0x36] = 2;
@@ -104,7 +104,7 @@ void __cdecl fcn_0056caf0(char* a0)
 					e += 4;
 				}
 			}
-			*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (a0 + 0x52), 0, 10, 0);
 			*(int*) (a0 + 0x70) = 1;
 			return;
@@ -121,7 +121,7 @@ void __cdecl fcn_0056caf0(char* a0)
 			fcn_00546190(a0);
 			return;
 		}
-		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (a0 + 0x52), 0, 10, 0);
 		return;
 	case -2:

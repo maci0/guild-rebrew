@@ -1,7 +1,7 @@
 #include <string.h>
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
@@ -40,7 +40,7 @@ int __cdecl fcn_00524fc0(void* fp)
 	if (count <= 0) {
 		return 1;
 	}
-	p = (slot_114*) g_9a9660;
+	p = (slot_114*) cut_Cutscenes;
 	for (; i < count; i++, p++) {
 		if (!ls_ReadVfsDataChecked(&p->pad0[0], 4, 1, fp)) {
 			return 0;
@@ -80,7 +80,7 @@ int __cdecl fcn_00524fc0(void* fp)
 				return 0;
 			}
 		} else {
-			*(pos14_7f4c00*) (&p->pad18[0]) = g_7f4c00;
+			*(pos14_7f4c00*) (&p->pad18[0]) = gm_GameTime;
 			fcn_00500bb0(&p->pad18[0], i + 1, 0, 0);
 		}
 		if (ls_SaveVersion >= 0x10040) {

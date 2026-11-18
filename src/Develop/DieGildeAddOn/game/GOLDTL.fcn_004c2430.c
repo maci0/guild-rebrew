@@ -36,7 +36,7 @@ void __cdecl fcn_004c2430(void)
 		sprintf((char*) 0x772910, "Resuming Outdoor-Track %s !", dst);
 		*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) + 0x1e);
 		*(char*) (0x68822a + idx) = 1;
-		g_772d1c = g_772d20 = (Chan_14cc460*) fcn_0041fd70(dst, 0);
+		tp_msx_CurrentTrack = g_772d20 = (Chan_14cc460*) fcn_0041fd70(dst, 0);
 		return;
 	}
 	do {
@@ -108,6 +108,6 @@ void __cdecl fcn_004c2430(void)
 	*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) + 0x1e);
 	g_772d58[0] = 0;
 	*(char*) (0x68822a + idx) = 1;
-	g_772d1c = g_772d20 = (Chan_14cc460*) fcn_0041fd70(dst, 0);
+	tp_msx_CurrentTrack = g_772d20 = (Chan_14cc460*) fcn_0041fd70(dst, 0);
 	return;
 }

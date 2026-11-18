@@ -5,7 +5,7 @@ extern int g_100dc20;
 extern int g_100dc24;
 extern int g_7747b4;
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 void *__cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_00485650(char *, char *);
 void __cdecl fcn_00486c40(char *, char *, int);
@@ -55,7 +55,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 	res = fcn_00502cd0(*(int *) (*(int *) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x2a);
 	if (res != 0) {
 		g_100b0ac = 0;
-		g_100b0a8 = 0;
+		ai_ResourceCount = 0;
 		fcn_00485650(meister, res);
 		fcn_00486c40(meister, res, *(int *) (*(int *) (meister + 0x16c) + 0x39));
 		fcn_00489010(meister, res);
@@ -68,8 +68,8 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 	fcn_00487470(meister);
 	fcn_004888a0(meister);
 	fcn_00488c00(meister);
-	if (((unsigned short) g_7f4c00.b <= 6)
-		|| ((*(int *) (meister + 4) + (unsigned int) (unsigned short) g_7f4c00.b) % 3 != 0)) {
+	if (((unsigned short) gm_GameTime.b <= 6)
+		|| ((*(int *) (meister + 4) + (unsigned int) (unsigned short) gm_GameTime.b) % 3 != 0)) {
 		*(unsigned int *) (meister + 0x1b4) &= 0xffffffdf;
 		return;
 	}
@@ -129,7 +129,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 		}
 	} else {
 		if (gm_RandomFloat01() > 0.85) {
-			if (count >= 3 && g_7f4c00.a >= 7 - g_7747b4) {
+			if (count >= 3 && gm_GameTime.a >= 7 - g_7747b4) {
 				cand = ai_CalcAngriff(meister, count);
 				if (cand != 0) {
 					goto umland;
@@ -199,10 +199,10 @@ city:
 	i = *(unsigned short *) (bld + 0x27);
 	*(int *) (msg + 8) = *(int *) (i * 0x21c + 0x7f4ca4);
 	*(int *) (msg + 0xc) = *(int *) (bld + 1);
-	*(int *) (msg + 0x28) = g_7f4c00.a;
-	*(int *) (msg + 0x2c) = g_7f4c00.b;
-	*(int *) (msg + 0x30) = g_7f4c00.c;
-	*(unsigned short *) (msg + 0x34) = (unsigned short) g_7f4c00.d;
+	*(int *) (msg + 0x28) = gm_GameTime.a;
+	*(int *) (msg + 0x2c) = gm_GameTime.b;
+	*(int *) (msg + 0x30) = gm_GameTime.c;
+	*(unsigned short *) (msg + 0x34) = (unsigned short) gm_GameTime.d;
 	msg[0x36] = 2;
 	*(int *) (msg + 0x58) = *(int *) (res + 1);
 	*(int *) (msg + 0x5c) = *(int *) (bld + 1);
@@ -294,10 +294,10 @@ check:
 		i = *(unsigned short *) (bld + 0x27);
 		*(int *) (msg + 8) = *(int *) (i * 0x21c + 0x7f4ca4);
 		*(int *) (msg + 0xc) = *(int *) (bld + 1);
-		*(int *) (msg + 0x28) = g_7f4c00.a;
-		*(int *) (msg + 0x2c) = g_7f4c00.b;
-		*(int *) (msg + 0x30) = g_7f4c00.c;
-		*(unsigned short *) (msg + 0x34) = (unsigned short) g_7f4c00.d;
+		*(int *) (msg + 0x28) = gm_GameTime.a;
+		*(int *) (msg + 0x2c) = gm_GameTime.b;
+		*(int *) (msg + 0x30) = gm_GameTime.c;
+		*(unsigned short *) (msg + 0x34) = (unsigned short) gm_GameTime.d;
 		msg[0x36] = 1;
 		*(int *) (msg + 0x5c) = *(int *) (res + 1);
 		*(int *) (msg + 0x60) = *(int *) (bld + 1);
@@ -342,10 +342,10 @@ umland:
 	i = *(unsigned short *) (bld + 0x27);
 	*(int *) (msg + 8) = *(int *) (i * 0x21c + 0x7f4ca4);
 	*(int *) (msg + 0xc) = *(int *) (bld + 1);
-	*(int *) (msg + 0x28) = g_7f4c00.a;
-	*(int *) (msg + 0x2c) = g_7f4c00.b;
-	*(int *) (msg + 0x30) = g_7f4c00.c;
-	*(unsigned short *) (msg + 0x34) = (unsigned short) g_7f4c00.d;
+	*(int *) (msg + 0x28) = gm_GameTime.a;
+	*(int *) (msg + 0x2c) = gm_GameTime.b;
+	*(int *) (msg + 0x30) = gm_GameTime.c;
+	*(unsigned short *) (msg + 0x34) = (unsigned short) gm_GameTime.d;
 	msg[0x36] = 2;
 	action = gm_RandomMod(8);
 	strcpy(msg + 0x58, (char *) 0x6a4770 + (action & 0xffff) * 0x20);

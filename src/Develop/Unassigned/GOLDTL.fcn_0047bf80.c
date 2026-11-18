@@ -25,12 +25,12 @@ typedef struct {
 	int bottom;
 } Rect47bf;
 
-extern int g_772604;
-extern int g_772608;
-extern int g_7725f8;
+extern int d2_QueuedQuadCount;
+extern int d2_DrawDepthIndex;
+extern int d2_ClipLeft;
 extern int g_7725fc;
-extern int g_67d964;
-extern int g_67d968;
+extern int d2_ClipRight;
+extern int d2_ClipBottom;
 extern Quad g_1552020[0x400];
 
 void __cdecl fcn_0047c560(int a, int b, int c);
@@ -65,20 +65,20 @@ Quad* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* src)
 		rw = src->right - src->left;
 		rh = src->bottom - src->top;
 	}
-	quadIndex = g_772604;
+	quadIndex = d2_QueuedQuadCount;
 	if (quadIndex >= 0x400) {
 		fcn_0047c560(0, 0, 0);
-		quadIndex = g_772604;
+		quadIndex = d2_QueuedQuadCount;
 		if (quadIndex >= 0x400) {
 			return 0;
 		}
 	}
-	if (x + w < g_7725f8 || x > g_67d964 || y + h < g_7725fc || y > g_67d968) {
+	if (x + w < d2_ClipLeft || x > d2_ClipRight || y + h < g_7725fc || y > d2_ClipBottom) {
 		return 0;
 	}
-	if (x < g_7725f8) {
-		fu = (float) (g_7725f8 - x);
-		x = g_7725f8;
+	if (x < d2_ClipLeft) {
+		fu = (float) (d2_ClipLeft - x);
+		x = d2_ClipLeft;
 		cw = (int) (w - fu);
 	}
 	if (y < g_7725fc) {
@@ -86,11 +86,11 @@ Quad* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* src)
 		y = g_7725fc;
 		ch = (int) (h - fv);
 	}
-	if (cw + x > g_67d964) {
-		cw = g_67d964 - x;
+	if (cw + x > d2_ClipRight) {
+		cw = d2_ClipRight - x;
 	}
-	if (ch + y > g_67d968) {
-		ch = g_67d968 - y;
+	if (ch + y > d2_ClipBottom) {
+		ch = d2_ClipBottom - y;
 	}
 	quad = &g_1552020[quadIndex];
 	if (fcn_0047b8b0(x, y, cw, ch, quad) == 0) {
@@ -113,13 +113,13 @@ Quad* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* src)
 	quad->v[4].v = v1;
 	quad->v[5].u = u0;
 	quad->v[5].v = v1;
-	depth = g_772608 * 0.001f;
+	depth = d2_DrawDepthIndex * 0.001f;
 	for (i = 0; i < 6; i++) {
 		quad->v[i].z = 1.0f - depth;
 		quad->v[i].rhw = depth + 0.01f;
 	}
-	g_772604 = quadIndex + 1;
-	g_772608++;
+	d2_QueuedQuadCount = quadIndex + 1;
+	d2_DrawDepthIndex++;
 	fcn_0047b9a0(quad, 200, 200, 200);
 	return quad;
 }

@@ -1,11 +1,11 @@
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_772500;
 extern char* g_77255c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_dialog_state.h"
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern char g_6b5c60[];
 extern char g_6811b0[];
 
@@ -61,7 +61,7 @@ void __cdecl fcn_005a2080(int a0, int a1)
 	win = fcn_00470820(0, 0, "locations\\Wirtshaus\\Stammtisch");
 	fcn_00471b60(win);
 	d2_SetForm(win, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	ip = (unsigned int*) (a1 + 0x1c);
 	for (;;) {
@@ -117,7 +117,7 @@ void __cdecl fcn_005a2080(int a0, int a1)
 		}
 		if (changed) {
 			d2_SetForm(win, 1);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			io_AppendText((char*) 0x188c, a0);
 			if (n == 0) {
 				io_AppendText((char*) 0x188e);
@@ -129,12 +129,12 @@ void __cdecl fcn_005a2080(int a0, int a1)
 					p[4] = (i % 2 + 1) * (x0 / 3) + -10 + (x0 % 3) / 2 + (*(short*) (g_772500 + 0x1ebd8) + 10) * (i % 2);
 					p[5] = (i / 2) * 0x82 + 100;
 					fcn_005ca560(p);
-					fcn_005ca740(p[4], p[5], g_772514, 0x54, p, 1);
+					fcn_005ca740(p[4], p[5], d2_CurrentWindowId, 0x54, p, 1);
 					p += 0xe;
 				}
 			}
 			d2_SetForm(win, 2);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			io_AppendText(g_6811b0);
 			btn = -1;
 			if (state != 2) {
@@ -158,7 +158,7 @@ void __cdecl fcn_005a2080(int a0, int a1)
 label_5a23ad:
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
-		} else if (g_100f1dc != -1 && g_67d370 == btn && state == 3) {
+		} else if (g_100f1dc != -1 && d2_CurrentElementId == btn && state == 3) {
 			char buf[0x200] = "";
 
 			if (g_100f1dc == 2) {

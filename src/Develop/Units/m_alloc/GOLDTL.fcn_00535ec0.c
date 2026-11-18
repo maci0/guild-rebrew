@@ -7,7 +7,7 @@ extern char* g_7e2aa0;
 extern char* g_7ea360;
 extern char g_7f4ca0[];
 extern unsigned char g_7f4e51[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_774664;
 extern char* g_7746c4;
 extern unsigned char* g_7746c8;
@@ -79,7 +79,7 @@ void __cdecl fcn_00535ec0(void)
 				break;
 			}
 		}
-		*(pos14_7f4c00*) (slot_buf + 0x18) = g_7f4c00;
+		*(pos14_7f4c00*) (slot_buf + 0x18) = gm_GameTime;
 		slot_buf[0x7c] = 0;
 		fcn_00500bb0((pos14_7f4c00*) (slot_buf + 0x18), 0, 0x1e, 0);
 		fcn_004c5980(slot_buf + 0x0c);
@@ -116,7 +116,7 @@ void __cdecl fcn_00535ec0(void)
 		*(int*) (act_buf + 0x0c) = -1;
 		act_buf[0x36] = 2;
 		*(int*) (act_buf + 8) = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
-		*(pos14_7f4c00*) (act_buf + 0x28) = g_7f4c00;
+		*(pos14_7f4c00*) (act_buf + 0x28) = gm_GameTime;
 		*(int*) (act_buf + 0x5c) = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
 		*(unsigned short*) (act_buf + 0x62) = 0x1d76;
 		*(unsigned short*) (act_buf + 0x60) = 0x1d6d;
@@ -196,7 +196,7 @@ void __cdecl fcn_00535ec0(void)
 		*(int*) (seat_buf + 0x0c) = -1;
 		seat_buf[0x36] = 2;
 		*(int*) (seat_buf + 8) = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
-		*(pos14_7f4c00*) (seat_buf + 0x28) = g_7f4c00;
+		*(pos14_7f4c00*) (seat_buf + 0x28) = gm_GameTime;
 		*(int*) (seat_buf + 0x5c) = *(int*) (g_7ea360 + 4);
 		fcn_004c5530(seat_buf);
 		return;
@@ -240,7 +240,7 @@ void __cdecl fcn_00535ec0(void)
 		*(int*) (slot_buf + 0x14) = -1;
 		slot_buf[0x30] = 2;
 		*(int*) (slot_buf + 0x38) = *(int*) (n * 0x21c + 0x7f4ca4);
-		*(pos14_7f4c00*) (slot_buf + 0x18) = g_7f4c00;
+		*(pos14_7f4c00*) (slot_buf + 0x18) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (slot_buf + 0x18), 0, 0x1e, 0);
 		fcn_004c5980(slot_buf + 0x0c);
 		return;

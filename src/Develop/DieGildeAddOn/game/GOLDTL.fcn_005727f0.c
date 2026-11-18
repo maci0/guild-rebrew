@@ -23,7 +23,7 @@ struct house {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern char* lpObjektePROT;
 extern unsigned char g_773d75;
@@ -53,7 +53,7 @@ void __cdecl fcn_005727f0(char* e)
 		if (*(int*) (e + 0x14) == 0 && *(int*) (e + 0x18) == 0) {
 			break;
 		}
-		if (fcn_00500cb0((pos14_7f4c00*) (e + 0x52), &g_7f4c00) >= 0) {
+		if (fcn_00500cb0((pos14_7f4c00*) (e + 0x52), &gm_GameTime) >= 0) {
 			return;
 		}
 		gm_ResolveEntityById((void**) (&r), 0, 0, *(int*) (e + 0xb0));

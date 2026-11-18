@@ -4,7 +4,7 @@
 typedef struct OBJECT_COLOR { unsigned char a, b, c, d; } OBJECT_COLOR;
 
 extern volatile int g_6b7fac;
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 extern float g_662cf8;
 extern double g_6640e8;
 
@@ -47,7 +47,7 @@ void __cdecl fcn_004cf000(void)
 	if (*(int*) ((*(char**) 0x6f0d74) + 4) == (*(int*) 0x60cb3c)) {
 		if ((unsigned int) g_6b7fac % 350 == 0) {
 			for (i = 0; i < 32; i++) {
-				e = g_7e4260[i];
+				e = ch_ContextCharacters[i];
 				if (e == 0) {
 					continue;
 				}
@@ -70,7 +70,7 @@ void __cdecl fcn_004cf000(void)
 		}
 	}
 	for (i = 0; i < 32; i++) {
-		e = g_7e4260[i];
+		e = ch_ContextCharacters[i];
 		if (e == 0) {
 			continue;
 		}
@@ -94,16 +94,16 @@ void __cdecl fcn_004cf000(void)
 				best = 999999.0f;
 				found = 0;
 				for (j = 0; j < 32; j++) {
-					if (g_7e4260[j] == 0) {
+					if (ch_ContextCharacters[j] == 0) {
 						continue;
 					}
-					if (fcn_004ce270(e, g_7e4260[j]) == 0) {
+					if (fcn_004ce270(e, ch_ContextCharacters[j]) == 0) {
 						continue;
 					}
-					if (*(char*) (g_7e4260[j] + 8) == 0) {
+					if (*(char*) (ch_ContextCharacters[j] + 8) == 0) {
 						continue;
 					}
-					v = fcn_004ce1b0(e, *(char**) (*(char**) (g_7e4260[j] + 0x184) + 0x34));
+					v = fcn_004ce1b0(e, *(char**) (*(char**) (ch_ContextCharacters[j] + 0x184) + 0x34));
 					if (v < g_662cf8) {
 						found = 1;
 						if (v < best) {

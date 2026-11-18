@@ -20,7 +20,7 @@ typedef struct {
 } Item5cbb;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
@@ -92,7 +92,7 @@ int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, i
 	}
 	for (t = fcn_005463a0(1, 0, 0x2c); t != 0; t = he_fn_Handlung()) {
 		found = 0;
-		if (*(int*) (t + 0xc5) - (*(Time5cbb*)&g_7f4c00).day > mindays) {
+		if (*(int*) (t + 0xc5) - (*(Time5cbb*)&gm_GameTime).day > mindays) {
 			continue;
 		}
 		if ((ps[0] = gm_LookupEntityRecordById(*(int*) (t + 0xac))) == 0) {
@@ -139,7 +139,7 @@ int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, i
 		if (!found) {
 			continue;
 		}
-		mindays = *(int*) (t + 0xc5) - (*(Time5cbb*)&g_7f4c00).day;
+		mindays = *(int*) (t + 0xc5) - (*(Time5cbb*)&gm_GameTime).day;
 		o = out;
 		for (i = 0, k = 0; i < 6 && (unsigned int) i < max; i++) {
 			if (ps[i] != 0) {

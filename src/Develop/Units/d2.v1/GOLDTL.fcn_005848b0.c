@@ -1,4 +1,4 @@
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include <string.h>
 
 extern unsigned char g_773d75;
@@ -73,12 +73,12 @@ void __cdecl fcn_005848b0(int a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(w);
 	d2_SetForm(w, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(w, 1);
 	d2_SetForm(w, 2);
-	keep = g_772514;
+	keep = d2_CurrentWindowId;
 	d2_SetForm(w, 3);
-	last = g_772514;
+	last = d2_CurrentWindowId;
 	d2_SetForm(w, 1);
 	io_AppendText(0x4039);
 	d2_SetForm(w, 2);

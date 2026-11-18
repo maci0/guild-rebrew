@@ -33,7 +33,7 @@ extern int g_7728d0;
 extern int g_664e10[];
 extern int g_664e34[];
 extern char g_7f4ca0[];
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -111,7 +111,7 @@ void __cdecl fcn_004ad6a0(void)
 	if (best != 0) {
 		fcn_004e8240((unsigned char) info[0], best, 0, 1, 0xff);
 		if (best[2] == 6 || best[2] == 7 || best[2] == 5) {
-			msg.year = g_7f4c00;
+			msg.year = gm_GameTime;
 			msg.month = g_7f4c04;
 			v = *(int*) (best + 4);
 			msg.day = g_7f4c08;

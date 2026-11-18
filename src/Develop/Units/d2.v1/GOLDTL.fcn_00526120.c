@@ -17,12 +17,12 @@ typedef struct Screen {
 
 extern volatile int g_6b7fac;
 extern char g_77470c;
-extern int g_7e46ac;
-extern int g_772514;
+extern int main_LoopFlags;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern char* g_1015ea0;
 extern int g_100f1dc;
-extern int g_100f894;
+extern int d2_HoveredWindow;
 #include "client_types.h"
 extern List8c_102cbc8 g_102cbc8[];
 extern char g_14cf950;
@@ -69,7 +69,7 @@ int __cdecl fcn_00526120(char* text, int flags)
 	if (g_77470c != 0) {
 		return 0;
 	}
-	wait = g_7e46ac & ~0x38;
+	wait = main_LoopFlags & ~0x38;
 	if (flags & 2) {
 		dlg = fcn_00470820(0, 0, "misc\\Messagebox_Autosize");
 	} else if (flags & 0x10) {
@@ -86,7 +86,7 @@ int __cdecl fcn_00526120(char* text, int flags)
 		wait = 0x717c6;
 	}
 	io_AppendText(text);
-	screen = g_772514;
+	screen = d2_CurrentWindowId;
 	fcn_00471b60(dlg);
 	g_77470c = 1;
 	list = d2_CreateRadioGroup(0);
@@ -100,17 +100,17 @@ int __cdecl fcn_00526120(char* text, int flags)
 	d2_SetForm(dlg, 0);
 	bar = flags & 0x80;
 	if (bar) {
-		timer = fcn_004677e0(0x1c, ((Screen*)g_77255c)->x10 - 0x18, ((Screen*)g_77255c)->xc - 0x40, 0, 0x1f4, 0x83, 0x42, g_772514);
+		timer = fcn_004677e0(0x1c, ((Screen*)g_77255c)->x10 - 0x18, ((Screen*)g_77255c)->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
 	}
 	while (fcn_005373e0((void*) fcn_00526120, wait) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
 			fcn_004707d0(dlg);
 		}
-		if (g_100f1dc == 2 && g_100f894 == screen) {
+		if (g_100f1dc == 2 && d2_HoveredWindow == screen) {
 			result = ((int*)g_102cbc8)[list * 35] + 1;
 			g_774654 = 1;
-		} else if ((g_100f1dc == 1 && g_100f894 == screen) || g_14cf950 == 1) {
+		} else if ((g_100f1dc == 1 && d2_HoveredWindow == screen) || g_14cf950 == 1) {
 			result = 0;
 			g_774654 = 1;
 		}

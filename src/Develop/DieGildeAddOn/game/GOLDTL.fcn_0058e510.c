@@ -61,7 +61,7 @@ void __cdecl fcn_0058e510(char* e, char* res)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	g_100f1dc = -1;
 	d2_SetForm(h, 1);
 	t = fcn_004c2db0(*(int*) (res + 0x14), *(int*) (res + 0x4c));

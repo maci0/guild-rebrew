@@ -18,12 +18,12 @@ int __cdecl fcn_005a7d10(char* w)
 	y = *(int*) (w + 0x248);
 	if (g_14ce8c0 <= g_6b5c80) {
 		x -= 10;
-	} else if (g_14ce8c0 >= g_6772bc) {
+	} else if (g_14ce8c0 >= d2_MouseRightBoundary) {
 		x += 10;
 	}
-	if (g_14ce8c2 <= g_6b5c84) {
+	if (g_14ce8c2 <= d2_MouseTopBoundary) {
 		y -= 10;
-	} else if (g_14ce8c2 >= g_6772c0) {
+	} else if (g_14ce8c2 >= d2_MouseBottomBoundary) {
 		y += 10;
 	}
 	if (g_14cf7c8 != 0) {

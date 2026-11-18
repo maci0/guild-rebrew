@@ -36,10 +36,10 @@ struct act {
 	int amt[3];
 };
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern float g_662910;
 extern float g_664150;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_data.h"
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_00470820(int, int, char*);
@@ -91,15 +91,15 @@ void __cdecl fcn_00589930(char* a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(*(int*) &g_772514);
+	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
-	i = fcn_0046fac0(0, 3, *(int*) 0x14b53a0, *(int*) &g_772514);
+	i = fcn_0046fac0(0, 3, *(int*) 0x14b53a0, *(int*) &d2_CurrentWindowId);
 	*(int*) (*(int*) &g_1015ea0 + i * 0x2f4 + 0x6c) = 1;
 	*(int*) (*(int*) &g_1015ea0 + i * 0x2f4 + 0x18) =
-	    *(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c);
+	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c);
 	fcn_00472900(i, 0x54);
 	lst = fcn_004677e0(0x57, 0x14, 200, 0, 100, 0x7b, 2,
-	                   *(int*) &g_772514);
+	                   *(int*) &d2_CurrentWindowId);
 	act.item = lst;
 	fcn_00472380(lst, 0, 2, 0, 1);
 	fcn_00468bb0(lst, 3, *(int*) 0x14b53a4, *(int*) 0x14b53a8,
@@ -119,7 +119,7 @@ void __cdecl fcn_00589930(char* a0)
 		if (*(int*) 0x14ce8e0) {
 			*(int*) 0x774654 = 1;
 		} else if (*(int*) &g_100f1dc != -1) {
-			if (g_67d370 == act.no) {
+			if (d2_CurrentElementId == act.no) {
 				if (fcn_00526010(
 				        (char*) ((unsigned long)&g_7f4ca0 +
 				                 (unsigned int) *(unsigned short*) &g_774970 *
@@ -149,7 +149,7 @@ void __cdecl fcn_00589930(char* a0)
 					m.f6c = j;
 					act.count = -1;
 					m.owner = ((struct house*) &g_7f4ca0)[*(unsigned short*) (a0 + 0x27)].owner;
-					m.when = g_7f4c00;
+					m.when = gm_GameTime;
 					m.target = *(int*) (a0 + 1);
 					m.f5c = *(int*) (a0 + 1);
 					fcn_004a5e60(
@@ -167,7 +167,7 @@ void __cdecl fcn_00589930(char* a0)
 					lst = act.item;
 					*(int*) 0x774654 = 1;
 				}
-			} else if (g_67d370 == act.yes) {
+			} else if (d2_CurrentElementId == act.yes) {
 				*(int*) 0x774654 = 1;
 			}
 		}

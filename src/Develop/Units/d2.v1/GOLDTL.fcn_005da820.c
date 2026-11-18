@@ -22,12 +22,12 @@ struct s_1015f4c {
 #include "client_types.h"
 
 extern s_1015f4c g_1015f4c[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004f63d0(int id, int* ids, short kind);
@@ -85,9 +85,9 @@ int __cdecl fcn_005da820(char* e, char* a2)
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x173f);
 	d2_SetForm(dlg, 2);
-	win = g_772514;
+	win = d2_CurrentWindowId;
 	d2_SetForm(dlg, 3);
-	fcn_0046e830(-1, -1, g_772514, win, 0x767);
+	fcn_0046e830(-1, -1, d2_CurrentWindowId, win, 0x767);
 	n = fcn_004f61c0(ids, b, c, *(short*) e);
 	for (i = 0, count = 0; i < n; i++) {
 		who = gm_LookupEntityRecordById(ids[i]);
@@ -106,8 +106,8 @@ int __cdecl fcn_005da820(char* e, char* a2)
 			io_FormatTextBuffer(text, "%i (%i) %s", rows[i].a, rows[i].b, (rows[i].a != 1) + 0x1748);
 			rows[i].x = 0x32;
 			rows[i].y = i * 0x69 + 10;
-			fcn_005ca740(0x32, i * 0x69 + 10, g_772514, 0x56, &rows[i], 1);
-			fcn_005c9160(text, ((struct s_1015f4c*) g_1015f4c)[g_772514].x - 0xf, i * 0x69 + 10 + 0x2d, 0xc8, 0x55);
+			fcn_005ca740(0x32, i * 0x69 + 10, d2_CurrentWindowId, 0x56, &rows[i], 1);
+			fcn_005c9160(text, ((struct s_1015f4c*) g_1015f4c)[d2_CurrentWindowId].x - 0xf, i * 0x69 + 10 + 0x2d, 0xc8, 0x55);
 		}
 	} else {
 		io_AppendText(0x1741, g_774970);
@@ -120,7 +120,7 @@ int __cdecl fcn_005da820(char* e, char* a2)
 		} else if (g_100f1dc != -1) {
 			sel = -1;
 			for (i = 0; i < count; i++) {
-				if (g_67d370 == rows[i].id) {
+				if (d2_CurrentElementId == rows[i].id) {
 					sel = i;
 					break;
 				}

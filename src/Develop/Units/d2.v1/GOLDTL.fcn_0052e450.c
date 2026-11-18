@@ -18,7 +18,7 @@ extern int g_6a25b8;
 extern int g_1040494;
 extern char g_6a2f80[];
 extern char g_6a2f74[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
@@ -51,16 +51,16 @@ void __cdecl fcn_0052e450(unsigned short* e)
 			d2_SetForm(g_6a25b8, 1);
 			io_AppendText(g_6a2f74, *parent, *e * 2 + 0x9a8);
 			d2_SetForm(g_6a25b8, 0);
-			x = ((((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1) - 1;
-			id = fcn_0046f740(x, 0x30, *e + 0xdf, g_772514);
+			x = ((((Slot*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1;
+			id = fcn_0046f740(x, 0x30, *e + 0xdf, d2_CurrentWindowId);
 			((Ent*)g_1015ea0)[id].f5c = 1;
 			if (*parent == g_774970) {
 				g_6a25e8 = fcn_0052dee0(x, 0xac, g_14b5e84);
 			}
-			d2_CurrentValueBar = fcn_004677e0(0x18, 0x66, 0x30, 0, 0x64, 0x75, 0x442, g_772514);
+			d2_CurrentValueBar = fcn_004677e0(0x18, 0x66, 0x30, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 			d2_SetElementValue(d2_CurrentValueBar, 0, 0x64, *((unsigned char*) e + 0x12));
 			d2_SetForm(g_6a25b8, 2);
-			g_6a25d4 = g_772514;
+			g_6a25d4 = d2_CurrentWindowId;
 			g_6b5c48 = *(int*) ((char*) e + 0x3b);
 		}
 	}

@@ -1,12 +1,12 @@
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern int g_772514;
-extern int g_7f4c00;
+extern int d2_CurrentWindowId;
+extern int gm_GameTime;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 /* Entity slot, stride 0x21c. */
 struct house {
@@ -72,9 +72,9 @@ void __cdecl fcn_005ab810(char* e, int unused)
 		d2_SetOverlayAnimation(0, 0);
 		fcn_00471b60((int) dlg);
 		d2_SetForm((int) dlg, 0);
-		fcn_005340f0(g_772514);
+		fcn_005340f0(d2_CurrentWindowId);
 		d2_SetForm((int) dlg, 1);
-		io_AppendText(0x1976, p->id, d, 2 * (0x75 <= g_7f4c00) + 0x197a + 1 - p->state);
+		io_AppendText(0x1976, p->id, d, 2 * (0x75 <= gm_GameTime) + 0x197a + 1 - p->state);
 		d2_SetForm((int) dlg, 2);
 		s = io_AppendText(0x1977);
 		v1 = fcn_00472250((int) dlg, 2, s);
@@ -85,7 +85,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 				g_774654 = 1;
 			}
 			if (g_100f1dc != -1) {
-				if (g_67d370 == v1) {
+				if (d2_CurrentElementId == v1) {
 					if (fcn_00526010(&((struct house*) g_7f4ca0)[g_774970], d, (char) g_773d75) != 0) {
 						x = 1 - p->state;
 						fcn_004c51a0(-1, p->handle, 0, d);
@@ -103,17 +103,17 @@ void __cdecl fcn_005ab810(char* e, int unused)
 								}
 							}
 						}
-						io_FormatTextBuffer(buf, 0x1978, p->id, e, 2 * (0x75 <= g_7f4c00) + 0x197a + x);
+						io_FormatTextBuffer(buf, 0x1978, p->id, e, 2 * (0x75 <= gm_GameTime) + 0x197a + x);
 						for (i = 0x7f4ca4; i < 0x85a0a4; i += 0x21c) {
 							if (*(int*) i != p->handle && (*(char*) (i - 2) == 6 || *(char*) (i - 2) == 7)) {
 								fcn_00545d40(*(int*) i, -1, buf, 0, 0x5fe, 0);
 							}
 						}
-						io_FormatTextBuffer(buf, 0x1979, 2 * (0x75 <= g_7f4c00) + 0x197a + x);
+						io_FormatTextBuffer(buf, 0x1979, 2 * (0x75 <= gm_GameTime) + 0x197a + x);
 						fcn_00526120(buf, 0);
 						g_774654 = 1;
 					}
-				} else if (g_67d370 == v2) {
+				} else if (d2_CurrentElementId == v2) {
 					g_774654 = 1;
 				}
 			}
@@ -133,9 +133,9 @@ void __cdecl fcn_005ab810(char* e, int unused)
 		d2_SetOverlayAnimation(0, 0);
 		fcn_00471b60((int) dlg);
 		d2_SetForm((int) dlg, 0);
-		fcn_005340f0(g_772514);
+		fcn_005340f0(d2_CurrentWindowId);
 		d2_SetForm((int) dlg, 1);
-		io_AppendText(0x1971, p->id, t, 2 * (0x75 <= g_7f4c00) + 0x197a + q->state);
+		io_AppendText(0x1971, p->id, t, 2 * (0x75 <= gm_GameTime) + 0x197a + q->state);
 		d2_SetForm((int) dlg, 2);
 		s = io_AppendText(0x1972);
 		v1 = fcn_00472250((int) dlg, 2, s);
@@ -146,7 +146,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 				g_774654 = 1;
 			}
 			if (g_100f1dc != -1) {
-				if (g_67d370 == v1) {
+				if (d2_CurrentElementId == v1) {
 					if (fcn_00526010(&((struct house*) g_7f4ca0)[g_774970], t, (char) g_773d75) != 0) {
 						x = q->state;
 						fcn_004c51a0(q->handle, p->handle, 0, t);
@@ -157,11 +157,11 @@ void __cdecl fcn_005ab810(char* e, int unused)
 							io_FormatTextBuffer(buf, 0x1974, p->id, t);
 							fcn_00545d40(q->handle, -1, buf, 0, 0x5ff, 0);
 						}
-						io_FormatTextBuffer(buf, 0x1973, 2 * (0x75 <= g_7f4c00) + 0x197a + q->state);
+						io_FormatTextBuffer(buf, 0x1973, 2 * (0x75 <= gm_GameTime) + 0x197a + q->state);
 						fcn_00526120(buf, 0);
 						g_774654 = 1;
 					}
-				} else if (g_67d370 == v2) {
+				} else if (d2_CurrentElementId == v2) {
 					g_774654 = 1;
 				}
 			}

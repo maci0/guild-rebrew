@@ -1,6 +1,6 @@
 #include <string.h>
 extern int g_6b7f90, g_6b7f94;
-extern int* g_6b7ed0[16];
+extern int* msx_WaveDrivers[16];
 extern int* g_6b7f10[16];
 extern int* g_6b7f50[16];
 
@@ -31,18 +31,18 @@ int __cdecl fcn_0042a120(int* out, int channels, int bits, int rate)
 		goto fail;
 	}
 	rec = m_alloc(0x1c, (char*) 0x679874);
-	g_6b7ed0[index] = (int*) rec;
-	*(short*) ((char*) g_6b7ed0[index] + 4) = 1;
-	*(short*) ((char*) g_6b7ed0[index] + 6) = (short) channels;
-	*(int*) ((char*) g_6b7ed0[index] + 8) = rate;
+	msx_WaveDrivers[index] = (int*) rec;
+	*(short*) ((char*) msx_WaveDrivers[index] + 4) = 1;
+	*(short*) ((char*) msx_WaveDrivers[index] + 6) = (short) channels;
+	*(int*) ((char*) msx_WaveDrivers[index] + 8) = rate;
 	block = (unsigned int) bits >> 3;
 	loaded = block * channels;
-	*(int*) ((char*) g_6b7ed0[index] + 0xc) = loaded * rate;
-	*(short*) ((char*) g_6b7ed0[index] + 0x10) = (short) loaded;
-	*(short*) ((char*) g_6b7ed0[index] + 0x12) = (short) bits;
-	if (AIL_waveOutOpen(g_6b7ed0[index], 0, 0, (char*) g_6b7ed0[index] + 4) != 0) {
-		m_FreeTracked(g_6b7ed0[index]);
-		g_6b7ed0[index] = 0;
+	*(int*) ((char*) msx_WaveDrivers[index] + 0xc) = loaded * rate;
+	*(short*) ((char*) msx_WaveDrivers[index] + 0x10) = (short) loaded;
+	*(short*) ((char*) msx_WaveDrivers[index] + 0x12) = (short) bits;
+	if (AIL_waveOutOpen(msx_WaveDrivers[index], 0, 0, (char*) msx_WaveDrivers[index] + 4) != 0) {
+		m_FreeTracked(msx_WaveDrivers[index]);
+		msx_WaveDrivers[index] = 0;
 fail:
 		return -1;
 	}
@@ -94,8 +94,8 @@ fail:
 			rep stosb
 		}
 	}
-	*(int*) ((char*) g_6b7ed0[index] + 0x18) = g_6b7f94;
-	*(int*) ((char*) g_6b7ed0[index] + 0x14) = 0;
-	*out = (int) g_6b7ed0[index];
+	*(int*) ((char*) msx_WaveDrivers[index] + 0x18) = g_6b7f94;
+	*(int*) ((char*) msx_WaveDrivers[index] + 0x14) = 0;
+	*out = (int) msx_WaveDrivers[index];
 	return 0;
 }

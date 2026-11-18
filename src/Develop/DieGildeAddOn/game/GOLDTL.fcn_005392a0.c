@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c06;
 
@@ -29,7 +29,7 @@ void __cdecl fcn_005392a0(char* name, int net)
 	} else {
 		sprintf(path, "%s/%s.CTY", "gamedata/cities", name);
 	}
-	(*(int*)&g_7f4c00) = 0;
+	(*(int*)&gm_GameTime) = 0;
 	(*(short*)&g_7f4c04) = 6;
 	g_7f4c06 = 0;
 	fcn_0051e080(path, "city", 2);

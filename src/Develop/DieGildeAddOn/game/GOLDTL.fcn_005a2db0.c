@@ -35,7 +35,7 @@ extern int g_774808;
 extern char g_14cf950;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca4[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
@@ -102,7 +102,7 @@ void __cdecl fcn_005a2db0(char* a0, char* a1)
 				m.type = 0x74;
 				m.seed = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
 				m.id = -1;
-				m.pos = *(Pos5a2db0*) &g_7f4c00;
+				m.pos = *(Pos5a2db0*) &gm_GameTime;
 				m.flag = 2;
 				m.target = *(int*) (a0 + 1);
 				m.from = *(int*) (a1 + 2);

@@ -34,12 +34,12 @@ typedef struct D2_GUI_ITEM {
     char pad8c[0x2f4 - 0x8c];
 } D2_GUI_ITEM;
 extern char* g_1015ea0;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 #endif
 
 extern char* g_772500;
-extern int g_772568;
+extern int d2_ResourceOffset;
 
 /* Inferred argument-slot view; complete backing allocation and owner unknown. */
 /* ADDRESS: GOLD 0x00fa6038 */

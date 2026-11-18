@@ -1,4 +1,4 @@
-extern char* g_773da8;
+extern char* gm_CityEntity;
 
 #pragma pack(2)
 // SIZE 0xe

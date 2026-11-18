@@ -59,13 +59,13 @@ typedef struct GOLDTL_Screen5cff {
 
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_772500;
 extern char* g_77255c;
 extern int g_1015ea0;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_100f1dc;
 extern char g_7f4ca0[];
 
@@ -175,15 +175,15 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 	}
 	if (n > 2) {
 		d2_SetForm(dlg, 2);
-		v = g_772514;
+		v = d2_CurrentWindowId;
 		d2_SetForm(dlg, 0);
-		fcn_0046e830(-1, -1, g_772514, v, 0x767);
+		fcn_0046e830(-1, -1, d2_CurrentWindowId, v, 0x767);
 	}
 	g_100f1dc = -1;
 	do {
 		if (flag) {
 			d2_SetForm(dlg, 2);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			width = *(short*) (g_772500 + 0x1ec2c);
 			dy = *(short*) (g_772500 + 0x1ec2e);
 			if (n != 0) {
@@ -198,7 +198,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 							continue;
 						}
 					}
-					btn = fcn_0046f740(0x96, y, 0x5db, g_772514);
+					btn = fcn_0046f740(0x96, y, 0x5db, d2_CurrentWindowId);
 					s->btn = btn;
 					if (shown) {
 						if (holder == -1) {
@@ -211,10 +211,10 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 					                              (unsigned short) s->id, 1);
 					s->label = fcn_0046f740(0x98, y + 1,
 					                        ((GOLDTL_House5cff*) g_7f4ca0)[s->id].f18c,
-					                        g_772514);
+					                        d2_CurrentWindowId);
 					io_FormatTextBuffer(text, 0x6a9680, s->id);
 					name = fcn_0046fac0(0x96 - (0xa0 - width) / 2,
-					                    dy + y - 0x46, text, g_772514);
+					                    dy + y - 0x46, text, d2_CurrentWindowId);
 					s->name = name;
 					*(int*) (g_1015ea0 + name * 0x2f4 + 0x6c) = 1;
 					*(int*) (g_1015ea0 + name * 0x2f4 + 0x18) = 0xa0;
@@ -222,7 +222,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 					*(int*) (g_1015ea0 + btn * 0x2f4 + 0x5c) = shown;
 					*(int*) (g_1015ea0 + btn * 0x2f4 + 0x60) = (shown == 0);
 					slider = fcn_004677e0(0x8c, dy + y + 4, 0x40, 0, 0x64,
-					                      0x75, 0x442, g_772514);
+					                      0x75, 0x442, d2_CurrentWindowId);
 					s->slider = slider;
 					fcn_00472380(slider, 0, 0x64, progress);
 					fcn_00472640(slider, 0);
@@ -241,7 +241,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 		}
 		if (g_100f1dc != -1 && n > 0) {
 			for (i = 0; i < n; i++) {
-				if (g_67d370 == slots[i].btn) {
+				if (d2_CurrentElementId == slots[i].btn) {
 					if (i >= 0) {
 						chosen = (int) &((GOLDTL_House5cff*) g_7f4ca0)[slots[i].id];
 						result = chosen;

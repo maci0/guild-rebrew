@@ -50,7 +50,7 @@ struct Device {
 	DeviceVtbl* vtbl;
 };
 
-extern int g_772608;
+extern int d2_DrawDepthIndex;
 extern int g_772614;
 extern void* g_6b5de0;
 
@@ -71,7 +71,7 @@ void __cdecl fcn_0047c9c0(int a1, int a2, int a3, int a4, int tex, float alpha)
 		return;
 	}
 	fcn_0047b9f0(&quad, (int) (alpha * 255.0f));
-	t = g_772608 * 0.001f;
+	t = d2_DrawDepthIndex * 0.001f;
 	for (i = 0; i < 6; i++) {
 		quad.vs.v[i].z = 1.0f - t;
 		quad.vs.v[i].w = t + 0.01f;
@@ -94,7 +94,7 @@ void __cdecl fcn_0047c9c0(int a1, int a2, int a3, int a4, int tex, float alpha)
 		((Device*)g_6b5de0)->vtbl->DrawPrimitive(((Device*)g_6b5de0), 4, 0, 2);
 		((Device*)g_6b5de0)->vtbl->EndScene(((Device*)g_6b5de0));
 	}
-	g_772608++;
+	d2_DrawDepthIndex++;
 	((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 7, 1);
 	((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x88, 1);
 }

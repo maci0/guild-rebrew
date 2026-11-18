@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-extern void* g_14d0020[];
+extern void* ch_CharacterSlots[];
 extern float g_6628a8;
 extern float g_6628b0;
 
@@ -41,7 +41,7 @@ void __cdecl fcn_00402d00(char* a0)
 	if (*(char**) (a0 + 0x128) != 0 && *(char*) (*(char**) (a0 + 0x128) + 9) == '-') {
 		limit = 100.0f;
 	}
-	p = g_14d0020;
+	p = ch_CharacterSlots;
 	do {
 		if (i >= 0xf) {
 			break;

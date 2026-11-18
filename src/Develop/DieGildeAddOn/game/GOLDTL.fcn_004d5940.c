@@ -248,7 +248,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 				answer = 0;
 			}
 			if (g_100f1dc != -1) {
-				clicked = g_67d370;
+				clicked = d2_CurrentElementId;
 				if (clicked == t4) {
 					g_774654 = 1;
 					answer = 1;

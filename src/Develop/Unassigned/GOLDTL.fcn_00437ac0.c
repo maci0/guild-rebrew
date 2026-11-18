@@ -32,12 +32,12 @@ char __cdecl fcn_00437ac0(char* scene, char* node, unsigned int flags, void (__c
 		} while (!(node[0x214] & 1));
 	} else {
 		if (scene == ((char*)g_67a370)) {
-			*(int*) (scene + 0x80) = (*(int*)&g_1043254);
+			*(int*) (scene + 0x80) = (*(int*)&d3_ObjectListHead);
 			*(int*) (scene + 0x84) = (*(int*)&g_1042538);
-			*(int*) (scene + 0xa4) = (*(int*)&g_1040c74);
+			*(int*) (scene + 0xa4) = (*(int*)&d3_SceneRenderListHead);
 			*(int*) (scene + 0xa8) = (*(int*)&g_1040958);
 		}
-		for (n = *(char**) (scene + 0x80); n != 0 && n != g_1042340; n = *(char**) (n + 0x1f4)) {
+		for (n = *(char**) (scene + 0x80); n != 0 && n != d3_SceneObjectSentinel; n = *(char**) (n + 0x1f4)) {
 			fcn_00437ac0(scene, n, flags, cb);
 		}
 	}

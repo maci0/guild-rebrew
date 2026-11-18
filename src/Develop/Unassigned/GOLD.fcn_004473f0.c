@@ -82,7 +82,7 @@ void __cdecl fcn_004473f0(void)
 	*(int*) 0x6338b8 = 0;
 	fcn_00448910();
 	*(int*) 0x63349c = 0;
-	offset = g_6b8010 * 0x3e0;
+	offset = d3_CurrentContextIndex * 0x3e0;
 	*(int*) 0x5fb5c0 = 4;
 	*(int*) 0x5fb5c4 = 0xf;
 	*(int*) (offset + 0xfd7c24) = 0;

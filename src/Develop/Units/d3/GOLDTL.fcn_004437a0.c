@@ -10,9 +10,9 @@ typedef struct {
 
 #include "client_types.h"
 extern Slot_1043340 g_1043340[64];
-extern char* g_1043254;
-extern char g_1042340[];
-extern char* g_1040c74;
+extern char* d3_ObjectListHead;
+extern char d3_SceneObjectSentinel[];
+extern char* d3_SceneRenderListHead;
 extern char g_1040640[];
 extern int g_6b8300;
 extern int g_6b89c0;
@@ -36,15 +36,15 @@ char __cdecl fcn_004437a0(int idx)
 
 	ok = 0;
 	if (idx >= 0 && idx < 0x40) {
-		if (idx != g_6b8010) {
+		if (idx != d3_CurrentContextIndex) {
 			if (((Slot*)g_1043340)[idx].used != 0) {
-				prev = g_6b8010;
+				prev = d3_CurrentContextIndex;
 				fcn_004432d0(idx, 1);
-				while (((void*)g_1043254) != &(*(char*)g_1042340)) {
-					d3_DisposeObject(((void*)g_1043254));
+				while (((void*)d3_ObjectListHead) != &(*(char*)d3_SceneObjectSentinel)) {
+					d3_DisposeObject(((void*)d3_ObjectListHead));
 				}
-				while (((void*)g_1040c74) != &(*(char*)g_1040640)) {
-					fcn_00452420(((void*)g_1040c74));
+				while (((void*)d3_SceneRenderListHead) != &(*(char*)g_1040640)) {
+					fcn_00452420(((void*)d3_SceneRenderListHead));
 				}
 				if (g_6b8300 != 0) {
 					fcn_0043bcf0(g_6b8300);
@@ -60,7 +60,7 @@ char __cdecl fcn_004437a0(int idx)
 				}
 				g_6b8058 = 0;
 				g_6b8484 = 0;
-				if (prev != g_6b8010) {
+				if (prev != d3_CurrentContextIndex) {
 					fcn_004432d0(prev, 1);
 				}
 			}

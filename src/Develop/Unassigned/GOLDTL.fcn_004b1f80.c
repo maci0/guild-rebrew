@@ -38,7 +38,7 @@ void __cdecl fcn_004b1f80(void)
 	}
 	fcn_0064d41a(buf, g_680890, g_868060 + g_773d75 * 0x2f4);
 	fcn_0042d670(buf);
-	g_67fca0 = -1;
+	hst_HistoryTextBase = -1;
 	g_67fca4 = -1;
 	g_67fca8 = -1;
 	g_67fcac = -1;

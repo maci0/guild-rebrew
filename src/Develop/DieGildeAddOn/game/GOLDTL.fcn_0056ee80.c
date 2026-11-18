@@ -3,7 +3,7 @@
 #pragma intrinsic(memcpy, memset, strcpy, strlen, strcat)
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 extern char g_6a58ec[];
@@ -103,7 +103,7 @@ void __cdecl fcn_0056ee80(char* a0)
 				}
 			}
 		}
-		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 		fcn_00500bb0(a0 + 0x52, 0, 4, 0);
 		*(int*) (a0 + 0x70) = 1;
 		return;
@@ -120,13 +120,13 @@ void __cdecl fcn_0056ee80(char* a0)
 			}
 			i++;
 			if (i >= 8) {
-				*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 				fcn_00500bb0(a0 + 0x52, 0, 0, 1);
 				*(int*) (a0 + 0x70) = 2;
 				return;
 			}
 		}
-		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 		fcn_00500bb0(a0 + 0x52, 0, 4, 0);
 		return;
 	case 2:
@@ -147,7 +147,7 @@ void __cdecl fcn_0056ee80(char* a0)
 			*(int*) (a0 + 0xb8) = *(int*) (h + 4);
 			*(int*) (a0 + 0xbc) = *(int*) (h + 0xb0);
 			*(int*) (a0 + 0x70) = 3;
-			*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 			return;
 		}
 label_1bc:
@@ -163,7 +163,7 @@ label_1bc:
 			}
 		}
 		*(int*) (a0 + 0x70) = 5;
-		*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 		fcn_00500bb0(a0 + 0x52, 0, 0xf, 0);
 		return;
 	case 3:

@@ -37,7 +37,7 @@ int __cdecl fcn_004cbde0(int cmd, char* result)
 
 	workplace_entity = (ushort*) 0;
 	if (g_14cbca0 != -1)
-		g_699364 = *(int*) (cmd + 0x1f);
+		gm_NextEntityId = *(int*) (cmd + 0x1f);
 	else
 		*(int*) (cmd + 0x23) = rand();
 	srv_SeedRandom(*(int*) (cmd + 0x23));

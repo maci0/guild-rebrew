@@ -1,8 +1,8 @@
 extern char* g_77255c;
 extern char* g_1015ea0;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
 
@@ -76,7 +76,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 	if (entry != 0) {
 		for (i = 0; table[i] != 0; i++) {
 			if (fcn_0050c7d0(a0[0], table[i]) != 0) {
-				label = fcn_0046f740(0, height, 2, g_772514);
+				label = fcn_0046f740(0, height, 2, d2_CurrentWindowId);
 				wins[i] = label;
 				*(int*) (g_1015ea0 + label * 0x2f4 + 0x1d0) = 3;
 				*(int*) (g_1015ea0 + label * 0x2f4 + 0x84) = 0x55;
@@ -92,7 +92,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 				else {
 					type = fcn_0050c7d0(a0[0], table[i]);
 				}
-				gauge = fcn_004677e0(0x140, height, 0x82, 0, type, 0x6f, 0x56, g_772514);
+				gauge = fcn_004677e0(0x140, height, 0x82, 0, type, 0x6f, 0x56, d2_CurrentWindowId);
 				elems[i] = gauge;
 				d2_SetElementValue(gauge, 0, type, 0, 0);
 				height += step;
@@ -111,12 +111,12 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		else if (g_100f1dc != -1 && elem == g_67d370) {
+		else if (g_100f1dc != -1 && elem == d2_CurrentElementId) {
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1 && entry != 0) {
 			for (i = 0; table[i] != 0; i++) {
-				if (wins[i] != -1 && g_67d370 == wins[i]) {
+				if (wins[i] != -1 && d2_CurrentElementId == wins[i]) {
 					io_FormatTextBuffer(buf, "$Z$[%s$]$N%s", table[i] * 2 + 0xf98,
 					    table[i] * 2 + 0xf99);
 					fcn_00471a30(window, 0);

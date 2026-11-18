@@ -14,7 +14,7 @@ typedef struct VfsEntry {
 
 extern char* g_772500;
 extern signed char g_772510;
-extern int g_772568;
+extern int d2_ResourceOffset;
 
 void __cdecl d2_Show(int resource_id, int arg);
 
@@ -23,7 +23,7 @@ void* __cdecl d2_GetResourceData(int resource_id)
 {
 	int original_resource_id;
 
-	g_772568 = 0;
+	d2_ResourceOffset = 0;
 	if (((VfsEntry*)g_772500)[resource_id].flags & 2) {
 		resource_id += g_772510;
 	}
@@ -33,7 +33,7 @@ void* __cdecl d2_GetResourceData(int resource_id)
 		}
 		original_resource_id = resource_id;
 		resource_id = ((VfsEntry*)g_772500)[resource_id].link;
-		g_772568 = original_resource_id - resource_id;
+		d2_ResourceOffset = original_resource_id - resource_id;
 	} else if (((VfsEntry*)g_772500)[resource_id].data == 0) {
 		d2_Show(resource_id, 0);
 	}

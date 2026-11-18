@@ -9,10 +9,10 @@
 extern float g_662d40[3];
 extern float g_6a2558;
 extern float g_6a2560;
-extern float g_774690;
+extern float d3_CameraHeightFraction;
 extern int g_6a256c;
 extern int d3_ActiveCameraAnimation;
-extern int g_6b5cbc;
+extern int d3_CameraAnimating;
 
 int __cdecl fcn_004133e0(char* e, float* lo, float* hi);
 float* __stdcall fcn_005ebbb9(float*, const float*);
@@ -43,7 +43,7 @@ void __cdecl fcn_0052d4c0(char* entity)
 	char* cam;
 
 	fcn_004133e0(entity, &lo, &hi);
-	fcn_005ebbb9(m, (float*) ((char*) g_6b8014 + 0x18c));
+	fcn_005ebbb9(m, (float*) ((char*) d3_ActiveCamera + 0x18c));
 	offsetX = g_662d40[0] * -600.0f;
 	offsetY = g_662d40[1] * -600.0f;
 	offsetZ = g_662d40[2] * -600.0f;
@@ -55,22 +55,22 @@ void __cdecl fcn_0052d4c0(char* entity)
 	w[1] = p[1] + r[1];
 	w[2] = p[2] + r[2];
 	h = fcn_00413d10(w);
-	w[1] = h + ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558);
+	w[1] = h + ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558);
 	dir[1] = w[1] - p[1];
 	fcn_004133e0(entity, &lo, &hi);
 	n = r[1] / ((hi - lo) * 0.5f + dir[1]);
 	w[0] = (float)(w[0] - (n * r[0] - r[0] * 1.8));
 	w[2] = (float)(w[2] - (n * r[2] - r[2] * 1.8));
-	cam = (char*) g_6b8014;
+	cam = (char*) d3_ActiveCamera;
 	t[0] = *(float*) (cam + 0x84);
 	t[1] = *(float*) (cam + 0x88);
 	t[2] = *(float*) (cam + 0x8c);
 	fcn_00433780(cam);
 	d3_ActiveCameraAnimation = 0;
-	g_6b5cbc = 0;
+	d3_CameraAnimating = 0;
 	h = fcn_00413d10(w);
-	w[1] = h + ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558);
-	cam = (char*) g_6b8014;
+	w[1] = h + ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558);
+	cam = (char*) d3_ActiveCamera;
 	dx = w[0] - *(float*) (cam + 0x4c);
 	dy = w[1] - *(float*) (cam + 0x50);
 	dz = w[2] - *(float*) (cam + 0x54);

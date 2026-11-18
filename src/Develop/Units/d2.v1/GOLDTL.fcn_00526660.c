@@ -17,8 +17,8 @@ typedef struct Screen {
 
 extern volatile int g_6b7fac;
 extern char g_77470e;
-extern int g_7e46ac;
-extern int g_772514;
+extern int main_LoopFlags;
+extern int d2_CurrentWindowId;
 extern Screen* g_77255c;
 extern char* g_1015ea0;
 extern int g_100f1dc;
@@ -61,7 +61,7 @@ int __cdecl fcn_00526660(int parent, int flags)
 	if (g_77470e != 0) {
 		return 0;
 	}
-	style = g_7e46ac & ~0x38;
+	style = main_LoopFlags & ~0x38;
 	if (flags & 2) {
 		dlg = fcn_00470820(0, 0, "misc\\Messagebox_Autosize");
 	} else if (flags & 0x10) {
@@ -87,7 +87,7 @@ int __cdecl fcn_00526660(int parent, int flags)
 	d2_SelectRadioGroup(list, 0);
 	d2_SetForm(dlg, 0);
 	if (flags & 0x80) {
-		h = fcn_004677e0(0x1c, g_77255c->x10 - 0x20, g_77255c->xc - 0x40, 0, 0x1f4, 0x83, 0x42, g_772514);
+		h = fcn_004677e0(0x1c, g_77255c->x10 - 0x20, g_77255c->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
 	}
 	while (fcn_005373e0((void*) fcn_00526660, style) != 0) {
 		d2_UpdateRadioGroup(list);

@@ -87,7 +87,7 @@ void __cdecl fcn_005aaf60(char* a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1986);
 	if (!ok) {
@@ -111,7 +111,7 @@ void __cdecl fcn_005aaf60(char* a0)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == a) {
+			if (d2_CurrentElementId == a) {
 				d = fcn_00471f80(c);
 				d = fcn_0050b750(d, g_773d75);
 				if (fcn_00526010((char*) (g_774970 * 0x21c + (int) g_7f4ca0), d,
@@ -145,7 +145,7 @@ void __cdecl fcn_005aaf60(char* a0)
 					fcn_00526120(buf, 0);
 					g_774654 = 1;
 				}
-			} else if (g_67d370 == b) {
+			} else if (d2_CurrentElementId == b) {
 				g_774654 = 1;
 			}
 		}

@@ -8,7 +8,7 @@ extern char g_14cf7c8;
 extern char g_14cf7cb;
 extern char g_14cf7cd;
 extern char g_14cf7d0;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern float g_6628a0;
 extern float g_6628a8;
@@ -47,7 +47,7 @@ void __cdecl fcn_005875c0(char* o, float dt)
 	else
 		*(float*) (o + 0x20) = g_6628a8;
 	if (g_14ce8d0 != 0) {
-		if (g_14ce8c2 < 0x50 || (int) g_14ce8c2 > g_1040490 - 0x50) {
+		if (g_14ce8c2 < 0x50 || (int) g_14ce8c2 > d2_ScreenHeight - 0x50) {
 			*(int*) (o + 0x88) = 0;
 			goto tail;
 		}
@@ -79,7 +79,7 @@ void __cdecl fcn_005875c0(char* o, float dt)
 no_track:
 	if (g_14cf7c8 != 0 || g_14ce8c2 <= 5)
 		v = 1;
-	if (g_14cf7d0 != 0 || (int) g_14ce8c2 >= g_1040490 - 5)
+	if (g_14cf7d0 != 0 || (int) g_14ce8c2 >= d2_ScreenHeight - 5)
 		v--;
 	if (g_14cf7cb != 0 || g_14ce8c0 <= 5)
 		h = 1;

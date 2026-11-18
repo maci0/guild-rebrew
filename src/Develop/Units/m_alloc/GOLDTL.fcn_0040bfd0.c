@@ -12,7 +12,7 @@ typedef struct {
 
 extern void* g_6b5c5c;
 unsigned int g_6b5c20 = 0;
-extern void* g_14d0020[];
+extern void* ch_CharacterSlots[];
 void __cdecl fcn_00408240(void* p);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_004030e0(char* e);
@@ -35,13 +35,13 @@ void __cdecl fcn_0040bfd0(void)
 			}
 		}
 	}
-	p = ((char**)g_14d0020);
+	p = ((char**)ch_CharacterSlots);
 	do {
 		if (*p != 0) {
 			fcn_004030e0(*p);
 		}
 		p++;
-	} while ((int) p < (int) &((char**)g_14d0020)[0x300]);
+	} while ((int) p < (int) &((char**)ch_CharacterSlots)[0x300]);
 	if ((*(Slot**)&g_6b5c20) != 0) {
 		m_FreeTracked((*(Slot**)&g_6b5c20));
 		(*(Slot**)&g_6b5c20) = 0;

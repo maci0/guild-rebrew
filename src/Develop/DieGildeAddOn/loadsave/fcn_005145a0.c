@@ -3,7 +3,7 @@
  * retries until the session exists, then hands the session to the game and
  * tears the scene down. Returns 1 when the city path check fails, 2 when the
  * network scene check fails, 0 after a completed startup. */
-extern signed char g_6a3440; extern unsigned char g_6a375c; extern int g_6b8010; extern int g_77250c; extern unsigned char g_773d75; extern int g_77494c; extern char g_868060[];
+extern signed char g_6a3440; extern unsigned char g_6a375c; extern int d3_CurrentContextIndex; extern int g_77250c; extern unsigned char g_773d75; extern int g_77494c; extern char g_868060[];
 #pragma intrinsic(strcpy)
 
 int __cdecl sprintf(char *buf, const char *fmt, ...);
@@ -82,7 +82,7 @@ int __cdecl fcn_005145a0(char *path)
     GetModuleFileNameA(*(void **) 0x7e1f80, file, 0x104);
     p = strrchr(file, '\\');
     strcpy(p, "\\game.INI");
-    engine = g_6b8010;
+    engine = d3_CurrentContextIndex;
     *(int *) 0x7725c8 = 0;
     fcn_004432d0(fcn_00413160(), 0);
     fcn_00448360("scenes/*network.ed3", 0, 0);
@@ -170,7 +170,7 @@ int __cdecl fcn_005145a0(char *path)
     }
     *(int *) 0x7725c8 = 0;
     if (*(signed char *) &g_6a3440 > -1 && *(signed char *) &g_6a3440 < 6) {
-        engine = g_6b8010;
+        engine = d3_CurrentContextIndex;
         fcn_004432d0(fcn_00413160(), 0);
         fcn_00448360("scenes/*network.ed3", 0, 0);
         fcn_004b54e0(*(int *) (handle + 4));

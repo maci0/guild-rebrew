@@ -1,5 +1,5 @@
 /* Owned (GOLDTL) by src/GOLDTL.fcn_004da4d0.c. */
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_772f1c;
 extern int g_772f18;
 extern int g_772f20;
@@ -25,15 +25,15 @@ void __cdecl fcn_004da510(int a1, int reset, int row)
 	int h;
 
 	if (reset != 0) {
-		fcn_0046f2c0(g_772514, 1);
+		fcn_0046f2c0(d2_CurrentWindowId, 1);
 		io_FormatTextBuffer(buf, 0x12d3);
-		h = d2_ShowTxt(0, 0x20, buf, g_772514);
+		h = d2_ShowTxt(0, 0x20, buf, d2_CurrentWindowId);
 		fcn_00472900(h, 0x54);
 		io_FormatTextBuffer(buf, 0x12d4);
-		h = d2_ShowTxt(0, 0x3e, buf, g_772514);
+		h = d2_ShowTxt(0, 0x3e, buf, d2_CurrentWindowId);
 		fcn_00472900(h, 0x54);
 		io_FormatTextBuffer(buf, 0x12d5);
-		h = d2_ShowTxt(0, 0x2f, buf, g_772514);
+		h = d2_ShowTxt(0, 0x2f, buf, d2_CurrentWindowId);
 		fcn_00472900(h, 0x54);
 		g_772f1c = 0;
 		g_772f18 = 0;
@@ -41,17 +41,17 @@ void __cdecl fcn_004da510(int a1, int reset, int row)
 		return;
 	}
 	if (row == 0) {
-		fcn_0046f740((short) ((g_772f1c * 5 + 40) * 2), 0x20, 0x4df, g_772514);
+		fcn_0046f740((short) ((g_772f1c * 5 + 40) * 2), 0x20, 0x4df, d2_CurrentWindowId);
 		g_772f1c++;
 		return;
 	}
 	if (row == 1) {
-		fcn_0046f740((short) ((g_772f18 * 5 + 40) * 2), 0x3e, 0x4df, g_772514);
+		fcn_0046f740((short) ((g_772f18 * 5 + 40) * 2), 0x3e, 0x4df, d2_CurrentWindowId);
 		g_772f18++;
 		return;
 	}
 	if (row == 2) {
-		fcn_0046f740((short) ((g_772f20 * 5 + 40) * 2), 0x2f, 0x4df, g_772514);
+		fcn_0046f740((short) ((g_772f20 * 5 + 40) * 2), 0x2f, 0x4df, d2_CurrentWindowId);
 		g_772f20++;
 	}
 }

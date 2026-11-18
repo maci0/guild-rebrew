@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 #include "Develop/Units/d3/d3_camera.h"
 char* __cdecl fcn_00412eb0(char* name, int kind);
 void __cdecl fcn_00438b40(char* h, char* pos);
@@ -19,11 +19,11 @@ int __cdecl SetCameraToDummy(char** name)
 
 	o = fcn_00412eb0(*name, 2);
 	if (o != 0) {
-		fcn_00438b40(g_6b8014, o + 0x5c);
-		fcn_00438cb0(g_6b8014, o + 0x90);
+		fcn_00438b40(d3_ActiveCamera, o + 0x5c);
+		fcn_00438cb0(d3_ActiveCamera, o + 0x90);
 		return 0;
 	}
 	sprintf(buf, "SetCameraToDummy(): Could not find Cameradummy '%s'!", *name);
-	fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), buf);
+	fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), buf);
 	return 0;
 }

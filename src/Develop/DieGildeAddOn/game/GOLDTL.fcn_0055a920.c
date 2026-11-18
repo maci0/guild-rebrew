@@ -2,7 +2,7 @@
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 
 
@@ -64,13 +64,13 @@ void __cdecl fcn_0055a920(char* rec)
 		si = (unsigned short) ((si + 1) % 0x300);
 	} while (--left);
 	if (cnt < want) {
-		*(pos14_7f4c00*) (rec + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (rec + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (rec + 0x52), 0, 5, 0);
 		*(int*) (rec + 0x84) = fcn_004c5620(-1, rec);
 	} else {
 		*(int*) (rec + 0xb0) = *(int*) (rec + 0xb0) - 1;
 		*(int*) (rec + 0xac) = *(int*) (rec + 0xac) - want;
-		*(pos14_7f4c00*) (rec + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (rec + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (rec + 0x52), 0x18, 0, 0);
 		*(int*) (rec + 0x84) = fcn_004c5620(0, rec);
 	}

@@ -8,7 +8,7 @@ typedef struct Node_4bf8e0 {
 } Node_4bf8e0;
 
 extern char s_681730[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14b5e9c;
 extern int g_14b5eac;
 extern int g_14b5ed8[];
@@ -19,7 +19,7 @@ extern int g_14b5ec0;
 extern int g_14b5ec4;
 extern int g_14ce8e0;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern Node_4bf8e0* g_772908;
 extern IdSlot10058a0 g_10058a0[8];
@@ -70,7 +70,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 	d2_SetForm(dlg, 4);
 	io_AppendText(*(unsigned char*) (p + 0x33) + 0x42ec);
 	d2_SetForm(dlg, 3);
-	fcn_00533a60(g_772514, 0, ids, 3, g_14b5e9c, g_14b5eac, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
+	fcn_00533a60(d2_CurrentWindowId, 0, ids, 3, g_14b5e9c, g_14b5eac, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
 	ok = ids[0];
 	clear = ids[1];
 	flip = ids[2];
@@ -79,13 +79,13 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 	fcn_00468cd0(list, 0x82);
 	fcn_00468bb0(list, 5, g_14b5eb4, g_14b5eb8, g_14b5ebc, g_14b5ec0, g_14b5ec4);
 	while (fcn_005373e0(fcn_004bf8e0, 0x657c7) != 0) {
-		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && g_67d370 == ok)) {
+		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == ok)) {
 			g_774654 = 1;
 		}
 		d2_SetForm(dlg, 4);
 		io_AppendText(*(unsigned char*) (p + 0x33) + 0x42ec);
 		fcn_0046f9b0(flip, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
-		if (g_100f1dc != -1 && g_67d370 == clear) {
+		if (g_100f1dc != -1 && d2_CurrentElementId == clear) {
 			if (g_772908 != 0) {
 				fcn_004be280((char*) g_772908);
 			}
@@ -103,7 +103,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 			d2_SelectRadioGroup(g_6816d8, 0);
 			g_774654 = 2;
 		}
-		if (g_100f1dc != -1 && g_67d370 == flip) {
+		if (g_100f1dc != -1 && d2_CurrentElementId == flip) {
 			unsigned char b;
 
 			b = *(unsigned char*) (p + 0x33) == 0;

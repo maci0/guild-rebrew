@@ -20,10 +20,10 @@ typedef struct {
 } Panel_5e5a50;                 /* SIZE 0xf8 */
 
 extern char g_6811b0[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern unsigned short g_774970;
 extern unsigned char g_773d75;
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 extern int g_100f1dc;
@@ -89,15 +89,15 @@ void __cdecl fcn_005e5a50(char* entity)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dialog);
 	d2_SetForm(dialog, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dialog, 2);
-	control = fcn_004677e0(0x57, 7, 200, 0, 100, 0x7b, 2, g_772514);
+	control = fcn_004677e0(0x57, 7, 200, 0, 100, 0x7b, 2, d2_CurrentWindowId);
 	d2_SetElementValue(control, 0, 5, 0, 1);
 	fcn_00468bb0(control, 6, *(int*) 0x14b5a48, *(int*) 0x14b5a4c,
 	             *(int*) 0x14b5a50, *(int*) 0x14b5a54,
 	             *(int*) 0x14b5a58, *(int*) 0x14b5a5c);
 	d2_SetForm(dialog, 3);
-	fcn_00533a60(g_772514, 0, ids, 2, *(int*) 0x14b5a80, *(int*) 0x14b5a84);
+	fcn_00533a60(d2_CurrentWindowId, 0, ids, 2, *(int*) 0x14b5a80, *(int*) 0x14b5a84);
 	do {
 		max_val = fcn_00510470(entity) - 1;
 		val = fcn_00471f80(control);
@@ -129,7 +129,7 @@ void __cdecl fcn_005e5a50(char* entity)
 					pkt.b36 = 2;
 					pkt.val = val;
 					pkt.f8 = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
-					pkt.pos = g_7f4c00;
+					pkt.pos = gm_GameTime;
 					pkt.target_id = *(int*) (target + 4);
 					fcn_004c5530(&pkt);
 					io_FormatTextBuffer(text, 0x41da, 0x41c1);

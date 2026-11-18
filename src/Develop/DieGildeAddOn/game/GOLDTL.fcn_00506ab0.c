@@ -85,7 +85,7 @@ void __cdecl gm_KillSpieler(int a0, int a1)
 	*(int*) (ent + 0x16c) = 0;
 	if (a1 != 0) {
 		if (*(unsigned short*) ent != 0xffff) {
-			g_773d70 -= 1;
+			gm_EntityCount -= 1;
 		}
 		v10 = (int*) 0x7f4cfc;
 		do {

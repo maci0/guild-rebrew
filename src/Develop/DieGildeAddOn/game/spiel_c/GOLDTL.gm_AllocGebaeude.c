@@ -6,7 +6,7 @@
  * client's prototype-name selection. */
 
 extern char* lpGebaeudePROT;
-extern int g_699364;
+extern int gm_NextEntityId;
 extern char g_14a6558[];
 extern char* lpGebaeudeINST;
 extern int lpObjektePROT;
@@ -78,9 +78,9 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	{
 	char buf[0x100];
 	char msg[0x200];
-	fcn_0064d41a(buf, s_699858, g_699364, (int) type);
-	*(int*) (geb + 1) = g_699364;
-	g_699364 = g_699364 + 1;
+	fcn_0064d41a(buf, s_699858, gm_NextEntityId, (int) type);
+	*(int*) (geb + 1) = gm_NextEntityId;
+	gm_NextEntityId = gm_NextEntityId + 1;
 	*(unsigned short*) (geb + 0x25) = owner;
 	*(unsigned short*) (geb + 0x27) = owner;
 	*(unsigned short*) (geb + 0x29) = 0;

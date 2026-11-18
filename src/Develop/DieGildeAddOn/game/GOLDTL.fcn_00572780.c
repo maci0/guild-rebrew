@@ -1,7 +1,7 @@
 unsigned short __cdecl gm_RandomMod(int);
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 
 

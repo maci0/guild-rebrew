@@ -7,7 +7,7 @@
 extern char g_7f4ca0[];
 extern int g_7f4ca4;
 extern unsigned char g_773d75;
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char s_675908[];
 extern char s_6a625c[];
 extern char s_6a5b54[];
@@ -54,7 +54,7 @@ void __cdecl fcn_0055c740(char* ctx)
 		*(int*) (ctx + 0x70) = state + 1;
 		return;
 	case 1:
-		if (fcn_00500cb0(ctx + 0x52, &g_7f4c00) >= 0) {
+		if (fcn_00500cb0(ctx + 0x52, &gm_GameTime) >= 0) {
 			return;
 		}
 		rec = gm_StartFilteredEntitySearch(1, 1, *(int*) (ctx + 0x10));
@@ -77,7 +77,7 @@ void __cdecl fcn_0055c740(char* ctx)
 				kind = *(unsigned char*) (ctx + 0xac);
 				*(int*) (ctx + 0xe4) = fcn_004c6090((unsigned char*) rec,
 				    0, kind, 0);
-				*(pos14_7f4c00*) (ctx + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (ctx + 0x52) = gm_GameTime;
 
 
 
@@ -117,7 +117,7 @@ void __cdecl fcn_0055c740(char* ctx)
 		cm_RequestChrMoveToUniverse(*(int*) (ctx + 0xe8), *(int*) (ctx + 0x10),
 		    *(int*) (ctx + 0xe0), s_675908);
 		*(int*) (ctx + 0x70) = 3;
-		*(pos14_7f4c00*) (ctx + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (ctx + 0x52) = gm_GameTime;
 
 
 
@@ -167,7 +167,7 @@ void __cdecl fcn_0055c740(char* ctx)
 			fcn_00546190(ctx);
 			return;
 		}
-		*(pos14_7f4c00*) (ctx + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (ctx + 0x52) = gm_GameTime;
 
 
 

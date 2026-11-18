@@ -2,11 +2,11 @@
 
 
 extern char g_6a93e0[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 char* __cdecl fcn_004ec7d0(char*);
 int __cdecl fcn_00470820(int, int, char*);
@@ -38,7 +38,7 @@ int __cdecl fcn_00586a80(char* a, int* unused)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0x403d, 0x182);
 	d2_SetForm(h, 2);
@@ -57,12 +57,12 @@ int __cdecl fcn_00586a80(char* a, int* unused)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == b1) {
+			if (d2_CurrentElementId == b1) {
 				result = 1;
 				fcn_004ed190(a);
 				fcn_004eec10(p);
 				g_774654 = 1;
-			} else if (g_67d370 == b2) {
+			} else if (d2_CurrentElementId == b2) {
 				g_774654 = 1;
 			}
 		}

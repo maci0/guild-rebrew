@@ -24,7 +24,7 @@ void __cdecl fcn_0043e200(unsigned int pass, int overlay)
     float density;
     if (g_6b86d4 < 0)
         g_6b86d4 = 0;
-    if (!*(unsigned char*) 0x633451 || g_6b86d4 || !g_6b8014)
+    if (!*(unsigned char*) 0x633451 || g_6b86d4 || !d3_ActiveCamera)
         return;
     c633450 = *(unsigned char*) 0x633450;
     g_6b86d4 = 1;
@@ -43,7 +43,7 @@ void __cdecl fcn_0043e200(unsigned int pass, int overlay)
     *(int*) (*(char**) (object + 0x1ec) + 0xfc) = 0;
     if ((void*) g_6b8300) {
         if (*(unsigned char*) 0x6334a4 && *(unsigned char*) 0x6334a5) {
-            object = g_6b8014;
+            object = d3_ActiveCamera;
             distance = fcn_00446990((void*) g_6b8300, object + 0x4c, object + 0x18c);
             if (distance < *(float*) 0xfc5340) {
                 density = (1.0f - (*(float*) 0xfc5340 - distance) / *(float*) 0xfc5340)

@@ -7,7 +7,7 @@ typedef struct {
 	char text[0x60];
 } Token;
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 void __cdecl fcn_00426680(char* pos, Token* t);
 char* __cdecl evt_LoadGfxScript(const char* name);
 void __cdecl fcn_00427f00(char* s);
@@ -20,23 +20,23 @@ void __cdecl fcn_00427480(void)
 	char* s;
 	int i;
 
-	fcn_00426680(*(char**) (g_6b7e98 + 0x118), &tok);
+	fcn_00426680(*(char**) (evt_CurrentScript + 0x118), &tok);
 	if (tok.type == 7) {
 		s = evt_LoadGfxScript(tok.text);
 		if (s != 0) {
 			fcn_00427f00(s);
 			for (i = 0; i < 8; i++) {
-				if (((char**) (g_6b7e98 + 0xc3c))[i] == 0) {
-					((char**) (g_6b7e98 + 0xc3c))[i] = s;
+				if (((char**) (evt_CurrentScript + 0xc3c))[i] == 0) {
+					((char**) (evt_CurrentScript + 0xc3c))[i] = s;
 					return;
 				}
 			}
 			return;
 		}
-		fcn_00425bf0(g_6b7e98, *(char**) (g_6b7e98 + 0x118), "Error including the script!");
-		fcn_00428720(g_6b7e98);
+		fcn_00425bf0(evt_CurrentScript, *(char**) (evt_CurrentScript + 0x118), "Error including the script!");
+		fcn_00428720(evt_CurrentScript);
 		return;
 	}
-	fcn_00425bf0(g_6b7e98, *(char**) (g_6b7e98 + 0x118), "Wrong include parameter!");
-	fcn_00428720(g_6b7e98);
+	fcn_00425bf0(evt_CurrentScript, *(char**) (evt_CurrentScript + 0x118), "Wrong include parameter!");
+	fcn_00428720(evt_CurrentScript);
 }

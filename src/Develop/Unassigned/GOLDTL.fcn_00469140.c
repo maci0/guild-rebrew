@@ -40,7 +40,7 @@ typedef struct {
 } Tile;
 
 extern char* g_1015ea0;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 
 int __cdecl fcn_00469890(void);
@@ -96,7 +96,7 @@ int __cdecl fcn_00469140(int a1, int a2, int w, int h, char* src)
 	((Tile*)g_1015ea0)[idx].x18 = w;
 	((Tile*)g_1015ea0)[idx].x08 = -1;
 	((Tile*)g_1015ea0)[idx].x30 = 0;
-	((Tile*)g_1015ea0)[idx].x34 = g_1040490;
+	((Tile*)g_1015ea0)[idx].x34 = d2_ScreenHeight;
 	((Tile*)g_1015ea0)[idx].x28 = 0;
 	((Tile*)g_1015ea0)[idx].x2c = g_1040494;
 	fill0((char*) &desc, 0x5c);

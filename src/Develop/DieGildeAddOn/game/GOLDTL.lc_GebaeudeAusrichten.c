@@ -62,7 +62,7 @@ extern unsigned char* lpGebaeudePROT;
 extern int g_67a370;
 extern int g_6798d4;
 extern int g_6b7fdc;
-extern int g_6b8014;
+extern int d3_ActiveCamera;
 extern int g_774a68;
 extern short g_774970;
 extern int g_774654;
@@ -75,7 +75,7 @@ extern int g_14ce8e0;
 extern int g_14ab2e0;
 extern int g_14ab2e4;
 extern int g_14ab2d0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_6a2590;
 extern int g_6a2594;
 extern char g_6b5c60;
@@ -214,9 +214,9 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		f.key.id = 0x80;
 		fcn_0043a3f0(pTemp, *(char**) (pTemp + 0x1cc), f.key);
 		fcn_00414c90(pTemp, 0xc0, 0xa0, 0x80);
-		dx = f.fPos[0] - *(float*) (g_6b8014 + 0x4c);
-		dy = f.fPos[1] - *(float*) (g_6b8014 + 0x50);
-		dz = f.fPos[2] - *(float*) (g_6b8014 + 0x54);
+		dx = f.fPos[0] - *(float*) (d3_ActiveCamera + 0x4c);
+		dy = f.fPos[1] - *(float*) (d3_ActiveCamera + 0x50);
+		dz = f.fPos[2] - *(float*) (d3_ActiveCamera + 0x54);
 		fDistanz = (float) sqrt(dx * dx + dy * dy + dz * dz);
 		if (fDistanz < f.fAbstand) {
 			f.fAbstand = fDistanz;
@@ -291,7 +291,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 			if (g_14ce8d8 == 0) {
 				goto platzieren;
 			}
-			if (g_67d370 != g_6a2590 && g_67d370 != g_6a2594) {
+			if (d2_CurrentElementId != g_6a2590 && d2_CurrentElementId != g_6a2594) {
 				goto platzieren;
 			}
 		}

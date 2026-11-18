@@ -1,6 +1,6 @@
 extern int g_6b7ec8;
 extern char* g_14c9320[0x20];
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern int evt_LastGfxScriptId;
 extern int g_6791c8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -21,21 +21,21 @@ void __cdecl fcn_00429670(char* s)
 	saved = -1;
 	evt_LastGfxScriptId = -1;
 	if (g_6b7ec8 < 0x20) {
-		g_14c9320[g_6b7ec8] = g_6b7e98;
+		g_14c9320[g_6b7ec8] = evt_CurrentScript;
 		g_6b7ec8++;
 	}
-	g_6b7e98 = s;
+	evt_CurrentScript = s;
 	if (*(int*) (s + 0x104) == -1 || *(int*) (s + 0x104) == g_6791c8 || *(int*) (s + 0xc8c) != 0 || (s[0x124] & 2) || *(int*) (s + 0x118) == 0) {
 		c = *(char**) (s + 0xc94);
 		if (c != 0 && *(int*) (c + 0x30) != *(int*) (s + 0x104) && *(int*) (c + 0x2c) != *(int*) (s + 0x104)) {
 			if (g_6b7ec8 > 0) {
-				g_6b7e98 = g_14c9320[--g_6b7ec8];
+				evt_CurrentScript = g_14c9320[--g_6b7ec8];
 				g_14c9320[g_6b7ec8] = 0;
 			}
 			return;
 		}
 		if (*(int*) (s + 0xc8c) != 0 || (s[0x124] & 2)) {
-			saved = g_6b8010;
+			saved = d3_CurrentContextIndex;
 			fcn_004432d0(*(int*) (s + 0xc90), 1);
 		}
 		if (*(int*) (s + 0xc60) != 0) {
@@ -51,7 +51,7 @@ void __cdecl fcn_00429670(char* s)
 		}
 	}
 	if (g_6b7ec8 > 0) {
-		g_6b7e98 = g_14c9320[--g_6b7ec8];
+		evt_CurrentScript = g_14c9320[--g_6b7ec8];
 		g_14c9320[g_6b7ec8] = 0;
 	}
 }

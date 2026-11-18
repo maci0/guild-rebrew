@@ -1,6 +1,6 @@
 extern int g_77e8a0;
-extern int g_772514;
-extern int g_1040490;
+extern int d2_CurrentWindowId;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_6a4768;
 extern int g_6a476c;
@@ -31,7 +31,7 @@ void __cdecl fcn_005459a0(int a)
 			}
 		}
 		d2_SetForm(g_77e8a0, 0);
-		fcn_00469c40(g_1040494 - 0x7d, g_1040490 - 0x21, g_1015f4c[g_772514].f270);
+		fcn_00469c40(g_1040494 - 0x7d, d2_ScreenHeight - 0x21, g_1015f4c[d2_CurrentWindowId].f270);
 		fcn_00471af0(g_77e8a0, 0);
 	}
 	if (a != 0xffff) {

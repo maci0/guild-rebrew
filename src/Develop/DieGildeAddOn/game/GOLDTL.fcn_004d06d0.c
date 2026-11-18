@@ -30,8 +30,8 @@ void __cdecl fcn_004d06d0(void)
 	*(int*) &g_7746a4 = 0;
 	g_7725c4 = 0;
 	if (*(short*) &g_14ce8c0 > 0 && *(short*) &g_14ce8c0 < g_1040494
-		&& *(short*) &g_14ce8c2 > 0 && *(short*) &g_14ce8c2 < g_1040490
-		&& g_67d370 == -1) {
+		&& *(short*) &g_14ce8c2 > 0 && *(short*) &g_14ce8c2 < d2_ScreenHeight
+		&& d2_CurrentElementId == -1) {
 		x = *(short*) &g_14ce8c0;
 		y = *(short*) &g_14ce8c2;
 		*(int*) &g_7746a4 = fcn_00443bf0((float) x, (float) y, 0x40, 1);
@@ -50,7 +50,7 @@ void __cdecl fcn_004d06d0(void)
 		}
 		if (*(int*) &g_7746a4 != 0) {
 			count = 0;
-			for (rec = (int*) &g_7e4260; rec < (int*) 0x7e42dc; rec++) {
+			for (rec = (int*) &ch_ContextCharacters; rec < (int*) 0x7e42dc; rec++) {
 				i = *rec;
 				if (i != 0 && *(char*) (i + 0x188) != 0) {
 					if ((fcn_004cef70(*g_772f24, i) & 0x800) != 0
@@ -77,7 +77,7 @@ void __cdecl fcn_004d06d0(void)
 			if (count > 1) {
 				code = 0x23;
 			}
-			if (*(int*) &g_7746a4 == 0 || g_67d370 != -1) {
+			if (*(int*) &g_7746a4 == 0 || d2_CurrentElementId != -1) {
 				g_7725c4 = 0;
 				return;
 			}

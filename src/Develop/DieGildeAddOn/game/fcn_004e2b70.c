@@ -62,7 +62,7 @@ void __cdecl fcn_004e2b70(void* arg)
 	w[4] = 0x12;
 	w[5] = 0x14;
 	state = 6;
-	g_68bfb8 = 0x702c6;
+	cut_EventLoopFlags = 0x702c6;
 	*(int*) 0x7725c8 = 1;
 	mask &= 0xffff;
 	while (i < 6) {
@@ -91,7 +91,7 @@ void __cdecl fcn_004e2b70(void* arg)
 		if (state == 0) {
 			start = *(int*) 0x6b7fac;
 			while (*(volatile unsigned int*) 0x6b7fac < (unsigned int) (start + 0x339) && state == 0) {
-				fcn_005373e0(0, g_68bfb8);
+				fcn_005373e0(0, cut_EventLoopFlags);
 				if (*(int*) 0x14ce8e0 != 0) {
 					state = 1;
 				}
@@ -118,7 +118,7 @@ void __cdecl fcn_004e2b70(void* arg)
 		io_FormatTextBuffer(buf1, 0x40fb, 0x40f5, idxval);
 		if (fcn_004e6eb0(buf1, 0x10) == 0) {
 		dialog_fallback:
-			fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, g_68bfb8);
+			fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, cut_EventLoopFlags);
 		} else {
 			int alo;
 			f10 = 100.0f;

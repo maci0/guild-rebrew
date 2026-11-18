@@ -26,14 +26,14 @@ typedef struct {
 	char pad[0x74];
 } Hello;
 
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern Peer g_7f3ac0[8];
 extern unsigned char g_7747b0;
 extern char* g_14ac60c;
 extern unsigned char g_6a375c;
 extern char g_7f4ca0[];
 extern char g_7e2480[];
-extern int g_774980;
+extern int cm_SaveRequestSlot;
 extern char g_773de8;
 typedef struct VFS_DIR VFS_DIR;
 extern VFS_DIR* g_6b7fdc;
@@ -63,12 +63,12 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 	int n;
 
 	crc = 0;
-	g_7e46ac |= 0x20000;
+	main_LoopFlags |= 0x20000;
 	for (i = 0; i < 8; i++) {
 		g_7f3ac0[i].id = -1;
 	}
 	if (g_7747b0 & 4) {
-		fcn_00535850(g_7e46ac, g_14ac60c);
+		fcn_00535850(main_LoopFlags, g_14ac60c);
 		g_6a375c = 0;
 		for (i = 0; i < 768; i++) {
 			if (((Ent*)g_7f4ca0)[i].id != 0xffff && (((Ent*)g_7f4ca0)[i].kind == 6 || ((Ent*)g_7f4ca0)[i].kind == 7)) {
@@ -76,7 +76,7 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 			}
 		}
 		strcpy(g_7e2480, title);
-		g_773de8 = (*(char *)&g_774980);
+		g_773de8 = (*(char *)&cm_SaveRequestSlot);
 		fcn_005e3fa0("Gamedata/cities/standard.scr");
 		sprintf(path, "Gamedata\\network\\%s.SAV", name);
 		f = vfs_Tfopen(path, "wb", g_6b7fdc);
@@ -104,7 +104,7 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 			}
 			fcn_00535960();
 		}
-		fcn_00535850(g_7e46ac, g_14ac60c);
+		fcn_00535850(main_LoopFlags, g_14ac60c);
 		sprintf(path, "Gamedata\\network\\%s.SRV", name);
 		fcn_0051e080(path, title, 6);
 		sprintf(path, "Gamedata\\network\\%s.SAV", name);

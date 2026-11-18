@@ -12,8 +12,8 @@ typedef struct {
   int text;
   unsigned char count;
 } Party5c18e0;
-extern pos14_7f4c00 g_7f4c00;
-extern int g_666018, g_66601c, g_772514, g_774654; extern unsigned short g_774970;
+extern pos14_7f4c00 gm_GameTime;
+extern int g_666018, g_66601c, d2_CurrentWindowId, g_774654; extern unsigned short g_774970;
 int __cdecl fcn_00433780();
 int __cdecl fcn_00438b40();
 int __cdecl fcn_00438cb0();
@@ -94,7 +94,7 @@ void __cdecl fcn_005c18e0(int a0,int a1)
   unsigned short *v7; 
   int v8; 
   unsigned int v9;
-  timer = g_7f4c00;
+  timer = gm_GameTime;
   memset(v15, 0, sizeof(v15));
   v29 = 6;
   v15[4] = 6;
@@ -140,7 +140,7 @@ label_5c221e:
     v9 = fcn_00470820(0,0,(char *)0x6ac5bc);
     v28 = v9;
     d2_SetForm(v9,0);
-    fcn_005340f0(g_772514);
+    fcn_005340f0(d2_CurrentWindowId);
     fcn_00471b60(v9);
     d2_SetOverlayAnimation(0,0);
     d2_SetForm(v9,1);
@@ -172,7 +172,7 @@ label_5c221e:
     v9 = fcn_00470820(0,0,(char *)0x6ac5bc);
     v28 = v9;
     d2_SetForm(v9,0);
-    fcn_005340f0(g_772514);
+    fcn_005340f0(d2_CurrentWindowId);
     fcn_00471b60(v9);
     d2_SetOverlayAnimation(0,0);
     (*(int *)0x100f1dc) = 0xffffffff;
@@ -277,7 +277,7 @@ label_5c221e:
         v9 = fcn_00470820(0,0,(char *)0x6ac58c);
         v28 = v9;
         d2_SetForm(v9,0);
-        fcn_005340f0(g_772514);
+        fcn_005340f0(d2_CurrentWindowId);
         fcn_00471b60(v9);
         d2_SetOverlayAnimation(0,0);
         (*(int *)0x100f1dc) = -1;
@@ -321,7 +321,7 @@ label_5c221e:
             io_AppendText(0x6811b0);
             io_FormatTextBuffer(v22,0x176c);
             io_FormatTextBuffer(v23,0x176d);
-            fcn_00533a60(g_772514,0,buttons,2,v22,v23);
+            fcn_00533a60(d2_CurrentWindowId,0,buttons,2,v22,v23);
             commit = buttons[0];
             v38 = buttons[1];
             if (!v10)

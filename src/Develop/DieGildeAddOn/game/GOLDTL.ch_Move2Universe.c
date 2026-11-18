@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern char g_10432c0[];
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 extern int g_67530c;
 extern int g_675310;
 
@@ -51,7 +51,7 @@ void __cdecl ch_Move2Universe(char* a0)
 		return;
 	}
 	{
-		int saved = g_6b8010;
+		int saved = d3_CurrentContextIndex;
 
 		fcn_004432d0(*(int*) (v4 + 0x30), 1);
 		if (*(int*) (v4 + 0x30) == 0) {

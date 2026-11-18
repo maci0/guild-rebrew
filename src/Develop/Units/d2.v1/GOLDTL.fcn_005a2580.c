@@ -32,13 +32,13 @@ typedef struct Rec {
 } Rec;
 /* SIZE 0xf8 */
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_772500;
 extern char* g_77255c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_dialog_state.h"
-extern int g_67d370;
-extern int g_7f4c00;
+extern int d2_CurrentElementId;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -102,7 +102,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 	h = fcn_00470820(0, 0, "locations\\Wirtshaus\\DUNKLEECKE");
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	memset(sel, 0, sizeof(sel));
 	changed = 1;
@@ -127,7 +127,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 		}
 		if (changed) {
 			d2_SetForm(h, 1);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			io_AppendText(0x18a3);
 			x = *(int*) (g_77255c + 0xc) / 2;
 			y = (x - *(short*) (g_772500 + 0x1ebd8)) - 0x28;
@@ -137,7 +137,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 				sel[j].x14 = line - 0x1e;
 				sel[j].used = (sel[j].who != 0);
 				fcn_005ca560(&sel[j]);
-				fcn_005ca740(sel[j].x10, sel[j].x14, g_772514, 0x54, &sel[j], 1);
+				fcn_005ca740(sel[j].x10, sel[j].x14, d2_CurrentWindowId, 0x54, &sel[j], 1);
 				if (seen[j] == -1) {
 					io_FormatTextBuffer(buf, 0x18a6);
 				} else {
@@ -159,12 +159,12 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 			io_AppendText(0x6811b0);
 			if (found) {
 				io_AppendText(0x18a8);
-			} else if (*(int*) (a2 + 0x28) < g_7f4c00) {
+			} else if (*(int*) (a2 + 0x28) < gm_GameTime) {
 				rc = fcn_00472250(h, 2, io_AppendText(0x18a7));
 				y = rc;
 			}
 		}
-		if (g_100f1dc != -1 && g_67d370 == y) {
+		if (g_100f1dc != -1 && d2_CurrentElementId == y) {
 			fillDst = (char*) &rec;
 			fillCount = sizeof(rec);
 			__asm {
@@ -188,7 +188,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 			rec.x36 = 2;
 			rec.x8 = *(int*) (g_7f4ca4 + (*(unsigned short*) &g_774970) * 540);
 			rec.xc = *(int*) (a0 + 1);
-			rec.x28 = g_7f4c00;
+			rec.x28 = gm_GameTime;
 			rec.x2c = g_7f4c04;
 			rec.x30 = g_7f4c08;
 			rec.x34 = g_7f4c0c;

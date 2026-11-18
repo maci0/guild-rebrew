@@ -65,49 +65,49 @@ void __cdecl fcn_00485650(char* a, char* b)
 	Stats st;
 
 	for (j = 0; g_100e760[j] != 0; j++) {
-		for (i = 0; i < g_100b0a8; i++) {
+		for (i = 0; i < ai_ResourceCount; i++) {
 			if (g_100b0c0[i].id == g_100e760[j]) {
 				break;
 			}
 		}
-		if (i >= g_100b0a8) {
-			g_100b0c0[g_100b0a8].id = g_100e760[j];
-			g_100b0c0[g_100b0a8].next = -1;
-			g_100b0c0[g_100b0a8].x8 = 0;
-			g_100b0c0[g_100b0a8].x10 = 0;
-			g_100b0c0[g_100b0a8].x14 = 0;
-			g_100b0c0[g_100b0a8].x18 = 0;
-			g_100b0c0[g_100b0a8].price = fcn_0050bb50(g_100e760[j], g_773d75);
-			g_100b0c0[g_100b0a8].stock = 0;
-			g_100b0c0[g_100b0a8].buy = 0;
-			g_100b0c0[g_100b0a8].flags = 0x81;
-			g_100b0c0[g_100b0a8].x3c = 0;
-			g_100b0c0[g_100b0a8].buy = fcn_0050dfa0(b, g_100e760[j]);
-			g_100b0c0[g_100b0a8].full = gm_eval_SlotVoll(b, g_100e760[j], 1000000);
-			g_100b0a8++;
+		if (i >= ai_ResourceCount) {
+			g_100b0c0[ai_ResourceCount].id = g_100e760[j];
+			g_100b0c0[ai_ResourceCount].next = -1;
+			g_100b0c0[ai_ResourceCount].x8 = 0;
+			g_100b0c0[ai_ResourceCount].x10 = 0;
+			g_100b0c0[ai_ResourceCount].x14 = 0;
+			g_100b0c0[ai_ResourceCount].x18 = 0;
+			g_100b0c0[ai_ResourceCount].price = fcn_0050bb50(g_100e760[j], g_773d75);
+			g_100b0c0[ai_ResourceCount].stock = 0;
+			g_100b0c0[ai_ResourceCount].buy = 0;
+			g_100b0c0[ai_ResourceCount].flags = 0x81;
+			g_100b0c0[ai_ResourceCount].x3c = 0;
+			g_100b0c0[ai_ResourceCount].buy = fcn_0050dfa0(b, g_100e760[j]);
+			g_100b0c0[ai_ResourceCount].full = gm_eval_SlotVoll(b, g_100e760[j], 1000000);
+			ai_ResourceCount++;
 		}
 	}
 	for (j = 0; g_100e720[j] != 0; j++) {
-		for (i = 0; i < g_100b0a8; i++) {
+		for (i = 0; i < ai_ResourceCount; i++) {
 			if (g_100b0c0[i].id == g_100e720[j]) {
 				break;
 			}
 		}
-		if (i >= g_100b0a8) {
-			g_100b0c0[g_100b0a8].id = g_100e720[j];
-			g_100b0c0[g_100b0a8].next = -1;
-			g_100b0c0[g_100b0a8].x8 = 0;
-			g_100b0c0[g_100b0a8].x10 = 0;
-			g_100b0c0[g_100b0a8].x14 = 0;
-			g_100b0c0[g_100b0a8].x18 = 0;
-			g_100b0c0[g_100b0a8].price = fcn_0050bb50(g_100e760[j], g_773d75);
-			g_100b0c0[g_100b0a8].stock = 0;
-			g_100b0c0[g_100b0a8].buy = 0;
-			g_100b0c0[g_100b0a8].flags = 0x81;
-			g_100b0c0[g_100b0a8].x3c = 0;
-			g_100b0c0[g_100b0a8].buy = fcn_0050dfa0(b, g_100e720[j]);
-			g_100b0c0[g_100b0a8].full = gm_eval_SlotVoll(b, g_100e720[j], 1000000);
-			g_100b0a8++;
+		if (i >= ai_ResourceCount) {
+			g_100b0c0[ai_ResourceCount].id = g_100e720[j];
+			g_100b0c0[ai_ResourceCount].next = -1;
+			g_100b0c0[ai_ResourceCount].x8 = 0;
+			g_100b0c0[ai_ResourceCount].x10 = 0;
+			g_100b0c0[ai_ResourceCount].x14 = 0;
+			g_100b0c0[ai_ResourceCount].x18 = 0;
+			g_100b0c0[ai_ResourceCount].price = fcn_0050bb50(g_100e760[j], g_773d75);
+			g_100b0c0[ai_ResourceCount].stock = 0;
+			g_100b0c0[ai_ResourceCount].buy = 0;
+			g_100b0c0[ai_ResourceCount].flags = 0x81;
+			g_100b0c0[ai_ResourceCount].x3c = 0;
+			g_100b0c0[ai_ResourceCount].buy = fcn_0050dfa0(b, g_100e720[j]);
+			g_100b0c0[ai_ResourceCount].full = gm_eval_SlotVoll(b, g_100e720[j], 1000000);
+			ai_ResourceCount++;
 		}
 	}
 	for (e = fcn_005463a0(2, 0, 0xb, 3, *(int*) (*(char**) (a + 0x16c) + 1)); e != 0; e = he_fn_Handlung()) {
@@ -128,7 +128,7 @@ void __cdecl fcn_00485650(char* a, char* b)
 				}
 			}
 			if (found == 0) {
-				for (i = 0; i < g_100b0a8; i++) {
+				for (i = 0; i < ai_ResourceCount; i++) {
 					if (id == g_100b0c0[i].id) {
 						g_100b0c0[i].stock += st.x68[k];
 					}
@@ -137,7 +137,7 @@ void __cdecl fcn_00485650(char* a, char* b)
 		}
 		for (m = 0; m < 3; m++) {
 			if (((unsigned short*) (e + 0xd6))[m] != 0) {
-				for (i = 0; i < g_100b0a8; i++) {
+				for (i = 0; i < ai_ResourceCount; i++) {
 					if (((unsigned short*) (e + 0xd6))[m] == g_100b0c0[i].id) {
 						g_100b0c0[i].stock += ((int*) (e + 0xdc))[m];
 					}

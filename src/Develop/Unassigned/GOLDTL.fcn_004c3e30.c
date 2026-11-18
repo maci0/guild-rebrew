@@ -40,7 +40,7 @@ void __cdecl fcn_004c3e30(void)
 			((struct node_4c3e30*)g_9bade0)[i].next = 0;
 	}
 	(*(struct node_4c3e30**)&g_aed200) = ((struct node_4c3e30*)g_9bade0);
-	(*(int*)&g_aed324) = 0;
+	(*(int*)&cm_CommandQueueHead) = 0;
 	g_1005780 = 0;
 	g_1005768 = 0;
 	g_1005760 = 0;

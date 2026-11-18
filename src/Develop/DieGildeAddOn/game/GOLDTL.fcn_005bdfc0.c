@@ -1,6 +1,6 @@
 extern char* lpGebaeudePROT;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
 
@@ -46,10 +46,10 @@ int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* building, int a2, in
 	io_AppendText(0x10f, 1);
 	do {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == x_dlg) {
+			if (d2_CurrentElementId == x_dlg) {
 				handled = 1;
 				g_774654 = 1;
-			} else if (g_67d370 == y_dlg) {
+			} else if (d2_CurrentElementId == y_dlg) {
 				handled = 2;
 				g_774654 = 1;
 			} else if (g_100f1dc == 1) {

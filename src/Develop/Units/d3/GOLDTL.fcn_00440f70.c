@@ -36,9 +36,9 @@ void __cdecl fcn_00440f70(char* o, char flag)
 	int a;
 	int b;
 
-	fcn_005ec410(m, *(float*) (o + 0x50) - *(float*) (((char*)g_6b8014) + 0x4c), *(float*) (o + 0x54) - *(float*) (((char*)g_6b8014) + 0x50),
-	             *(float*) (o + 0x58) - *(float*) (((char*)g_6b8014) + 0x54));
-	fcn_005eb970(m, m, (float*) (((char*)g_6b8014) + 0x18c));
+	fcn_005ec410(m, *(float*) (o + 0x50) - *(float*) (((char*)d3_ActiveCamera) + 0x4c), *(float*) (o + 0x54) - *(float*) (((char*)d3_ActiveCamera) + 0x50),
+	             *(float*) (o + 0x58) - *(float*) (((char*)d3_ActiveCamera) + 0x54));
+	fcn_005eb970(m, m, (float*) (((char*)d3_ActiveCamera) + 0x18c));
 	((IDev*)g_6b5de0)->v->SetTransform(((IDev*)g_6b5de0), 0x100, m);
 	if (flag != 0) {
 		fcn_00440670(g_6b7fac, *(unsigned char*) (o + 0x8035), *(int*) (o + 0x7da0));

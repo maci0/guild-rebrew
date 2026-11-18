@@ -17,7 +17,7 @@ int __cdecl fcn_004133e0(char* e, float* lo, float* hi)
 	*hi = 0.0f;
 	*lo = 0.0f;
 	if (*(int*) (e + 0x218) == 4) {
-		fcn_00438100(e, g_6b8014, 0);
+		fcn_00438100(e, d3_ActiveCamera, 0);
 		p = fcn_00455910(e, *(int*) (e + 0x1cc), *(char**) (e + 0x1ec) + 8);
 		if (p != 0) {
 			q = (float*) (p + 4);

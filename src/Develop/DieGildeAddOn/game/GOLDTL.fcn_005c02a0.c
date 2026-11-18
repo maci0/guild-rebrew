@@ -88,7 +88,7 @@ int __cdecl fcn_005c02a0(char* entity)
         if (g_14ce8e0 != 0)
             g_774654 = 1;
         if (g_100f1dc != -1) {
-            if (g_67d370 == accept) {
+            if (d2_CurrentElementId == accept) {
                 amount = fcn_00471f80(edit);
                 amount = fcn_0050b750(amount, g_773d75);
                 if (fcn_00526010(g_7f4ca0 + g_774970 * 0x21c, amount, g_773d75)) {
@@ -112,7 +112,7 @@ int __cdecl fcn_005c02a0(char* entity)
                     g_774654 = 1;
                     result = 1;
                 }
-            } else if (g_67d370 == cancel)
+            } else if (d2_CurrentElementId == cancel)
                 g_774654 = 1;
         }
     } while (fcn_005373e0((void*)fcn_005c02a0, 0x677c7));

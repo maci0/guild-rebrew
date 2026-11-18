@@ -17,8 +17,8 @@ extern void fcn_00420840(int handle);
 extern char *g_6b8300;
 extern unsigned char g_772d10;
 extern volatile int g_6b7fac;
-extern int g_6b8010;
-extern char *g_6b8014;
+extern int d3_CurrentContextIndex;
+extern char *d3_ActiveCamera;
 extern int g_772d4c;
 extern int *g_772d48;
 extern int *g_772d44;
@@ -87,8 +87,8 @@ int __cdecl fcn_004c16c0(void)
 				g_772d44 = 0;
 			}
 		}
-		f = (2000.0f - *(float *) (g_6b8014 + 0x50)
-		    - fcn_00413d10((float *) (g_6b8014 + 0x4c))) * flt_time_scale;
+		f = (2000.0f - *(float *) (d3_ActiveCamera + 0x50)
+		    - fcn_00413d10((float *) (d3_ActiveCamera + 0x4c))) * flt_time_scale;
 		if (g_7e4538 != 0) {
 			v5 = *g_7e4538;
 		}
@@ -274,7 +274,7 @@ join:
 				g_772d50 = i;
 				return i;
 			}
-			i = fcn_00402ba0(g_6b8010, 0) * 9;
+			i = fcn_00402ba0(d3_CurrentContextIndex, 0) * 9;
 			fv = flt_64 < (float) i ? flt_64 : (float) i;
 			return fcn_0041fc10(g_772d50, (int) fv);
 		}
@@ -282,7 +282,7 @@ join:
 			if (c != 7 || g_7746cc == 0 || *g_7746cc != 0xf7) {
 				goto label;
 			}
-			i = fcn_00402ba0(g_6b8010, 0) * 6;
+			i = fcn_00402ba0(d3_CurrentContextIndex, 0) * 6;
 			fv = flt_64 < (float) i ? flt_64 : (float) i;
 			if (g_772d50 == 0) {
 				i = fcn_00420780(s_689ddc, 5);
@@ -291,7 +291,7 @@ join:
 			}
 			return fcn_0041fc10(g_772d50, (int) fv);
 		}
-		i = fcn_00402ba0(g_6b8010, 0) * 6;
+		i = fcn_00402ba0(d3_CurrentContextIndex, 0) * 6;
 		fv = flt_64 < (float) i ? flt_64 : (float) i;
 		if (g_772d50 == 0) {
 			if (*(int *) ((char *) g_7746c4 + 0x95) == -1) {

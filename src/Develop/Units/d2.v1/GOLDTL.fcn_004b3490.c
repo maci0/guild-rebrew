@@ -11,7 +11,7 @@ typedef struct Win {
 
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
@@ -90,10 +90,10 @@ void __cdecl fcn_004b3490(void)
 	h = d2_CreateScrollPerga();
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 1);
-	w = g_772514;
+	w = d2_CurrentWindowId;
 	d2_SetForm(h, 2);
 	io_AppendText(0x10b0);
-	fcn_0046e830(-1, -1, g_772514, w, 0x767);
+	fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
 	((Win*)g_1015f40)[w].style = 0x18;
 	d2_SetForm(h, 1);
 	io_AppendText((int) "$C%s", text);
@@ -158,7 +158,7 @@ void __cdecl fcn_004b3490(void)
 			} else {
 				d2_SetForm(h, 2);
 				io_AppendText(0x10b0);
-				fcn_0046e830(-1, -1, g_772514, w, 0x767);
+				fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
 				((Win*)g_1015f40)[w].style = 0x18;
 				d2_SetForm(h, 1);
 				io_AppendText((int) "$C%s", text);

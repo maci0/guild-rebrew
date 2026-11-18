@@ -7,7 +7,7 @@ typedef struct FRAME_412B10 {
 	float rotation[3];
 	char unknown_020[0x58 - 0x20];
 } FRAME_412B10;
-extern int g_6b8014;
+extern int d3_ActiveCamera;
 int* __cdecl fcn_004339e0(char* a0, D3_ANIMATION_OPTIONS flags, int count, void* frames);
 void __cdecl fcn_00451720(void* a0, void* a1, void* a2, void* a3);
 void __cdecl fcn_00438cb0(void* a0, void* a1);
@@ -25,7 +25,7 @@ unsigned int __cdecl fcn_00412b10(char* a0, float a1, float a2, float a3, float 
 	void* fill_dst;
 	int fill_size;
 
-	if (*(int*) 0x6b5cbc != 0 && (char*) g_6b8014 == a0) {
+	if (*(int*) 0x6b5cbc != 0 && (char*) d3_ActiveCamera == a0) {
 		return 0;
 	}
 	fill_dst = &z;
@@ -63,7 +63,7 @@ unsigned int __cdecl fcn_00412b10(char* a0, float a1, float a2, float a3, float 
 		fcn_00451720(a0 + 0x84, rotation, v6, rotation);
 		fcn_00438cb0(a0, v6);
 	}
-	if (a0 == (char*) g_6b8014) {
+	if (a0 == (char*) d3_ActiveCamera) {
 		*(float*) 0x14ce890 = rotation[0];
 		*(float*) 0x14ce894 = rotation[1];
 		*(float*) 0x14ce898 = rotation[2];
@@ -82,7 +82,7 @@ unsigned int __cdecl fcn_00412b10(char* a0, float a1, float a2, float a3, float 
 	frames[1].rotation[1] = rotation[1];
 	frames[1].rotation[2] = rotation[2];
 	v3 = fcn_004339e0(a0, z, 2, frames);
-	if (a0 != (char*) g_6b8014) {
+	if (a0 != (char*) d3_ActiveCamera) {
 		return 1;
 	}
 	*(int*) 0x6b5cbc = 1;

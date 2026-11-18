@@ -2,7 +2,7 @@
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca4[];
 extern unsigned char g_773d75;
 extern char g_67e348[];
@@ -43,7 +43,7 @@ void __cdecl fcn_00487c00(char* a0, char* entity, int chance)
 	*(int*) (msg + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (entity + 0x16c) + 0x27) * 0x21c);
 	*(int*) (msg + 0xc) = *(int*) (*(char**) (entity + 0x16c) + 1);
 	msg[0x36] = 1;
-	*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
+	*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 	*(int*) (msg + 0x58) = *(int*) (a0 + 2);
 	*(int*) (msg + 0x5c) = 1;
 	*(int*) (msg + 0x64) = 1;

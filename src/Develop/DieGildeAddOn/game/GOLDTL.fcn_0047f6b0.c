@@ -93,12 +93,12 @@ extern Ent g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 extern char g_7f4ca4[];
-extern char g_7f4c00[];
+extern char gm_GameTime[];
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern int g_100b0ac;
-extern int g_100b0a8;
+extern int ai_ResourceCount;
 
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -163,7 +163,7 @@ int __cdecl fcn_0047f6b0(char* a)
 			for (i = 4; i != 0; i--) {
 				if (*(int*) q >= 0 && g_100b0c0[*(int*) q].parent >= 0) {
 					g_100d0c0[g_100b0c0[*(int*) q].parent].flags |= 4;
-					for (j = 0; j < g_100b0a8; j++) {
+					for (j = 0; j < ai_ResourceCount; j++) {
 						if (g_100d0c0[g_100b0c0[*(int*) q].parent].f0
 						    == g_100b0c0[j].type) {
 							g_100b0c0[j].flags |= 4;
@@ -205,7 +205,7 @@ int __cdecl fcn_0047f6b0(char* a)
 					*(int*) (m + 0xc) = *(int*) (h + 1);
 					*(int*) (m + 0x10) = 0;
 					*(int*) (m + 0x14) = 0;
-					*(int*) (m + 0x28) = *(int*) &g_7f4c00;
+					*(int*) (m + 0x28) = *(int*) &gm_GameTime;
 					*(int*) (m + 0x2c) = g_7f4c04;
 					*(int*) (m + 0x30) = g_7f4c08;
 					*(short*) (m + 0x34) = g_7f4c0c;

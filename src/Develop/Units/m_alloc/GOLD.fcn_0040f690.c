@@ -1,4 +1,4 @@
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern char g_676bfc[];
 
 
@@ -18,7 +18,7 @@ int __cdecl fcn_0040f690(S4105a0** object, char* flag)
 
 	p = *object;
 	if (m_is_tracked(p) == 0) {
-		fcn_00425bf0(g_6b7e98, *(int*) ((char*) g_6b7e98 + 0x118), g_676bfc);
+		fcn_00425bf0(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), g_676bfc);
 		return 0;
 	}
 	p->b5 = *flag;

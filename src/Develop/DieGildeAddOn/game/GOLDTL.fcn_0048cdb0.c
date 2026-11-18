@@ -49,7 +49,7 @@ typedef struct {
 
 extern int lpObjektePROT;
 extern unsigned char g_773d75;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -105,7 +105,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			m.flag2 = 1;
 			m.state = *(int*) (*(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c + 0x7f4ca4);
 			m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
-			m.p28 = g_7f4c00;
+			m.p28 = gm_GameTime;
 			m.p2c = g_7f4c04;
 			m.p30 = g_7f4c08;
 			m.p34 = g_7f4c0c;
@@ -222,7 +222,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			m.type = 0x0b;
 			m.state = *(int*) (*(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c + 0x7f4ca4);
 			m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
-			m.p28 = g_7f4c00;
+			m.p28 = gm_GameTime;
 			m.p2c = g_7f4c04;
 			m.p30 = g_7f4c08;
 			m.p34 = g_7f4c0c;

@@ -11,7 +11,7 @@ struct rec_4cc590 {
 
 extern char g_7f4ca0[];
 extern int g_14cbca0;
-extern int g_699364;
+extern int gm_NextEntityId;
 extern char cm_LastEntityId[];
 extern int(__stdcall* g_662318)(void);
 
@@ -33,7 +33,7 @@ int __cdecl fcn_004cc590(unsigned char* request, char* response)
 	int id;
 
 	if (g_14cbca0 != -1)
-		g_699364 = *(int*) (request + 0x10);
+		gm_NextEntityId = *(int*) (request + 0x10);
 	else
 		*(int*) (request + 0x22) = g_662318();
 	if (response != 0) {

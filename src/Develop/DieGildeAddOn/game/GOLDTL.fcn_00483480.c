@@ -291,7 +291,7 @@ tail:
 		int n;
 
 		pp = (int *) 0x100b0c4;
-		for (n = g_100b0a8; n > 0; n--) {
+		for (n = ai_ResourceCount; n > 0; n--) {
 			if ((pp[0xe] & 0x400) != 0 && (pp[0xe] & 0x10) != 0 && *pp >= 0) {
 				unsigned int *fl;
 

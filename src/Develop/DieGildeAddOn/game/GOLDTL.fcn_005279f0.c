@@ -18,7 +18,7 @@ typedef struct {
 	int* items;
 } fcn_0047cba0_set;
 
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 extern int g_6a2be4;
 extern int g_1040494;
 extern char* lpGebaeudePROT;
@@ -37,7 +37,7 @@ extern char* g_774680;
 extern unsigned char g_7f4e51[];
 extern int g_14ce8d8;
 extern int g_77250c;
-extern int g_772568;
+extern int d2_ResourceOffset;
 extern short g_14ce8c0;
 extern short g_14ce8c2;
 extern int g_7ea380[15];
@@ -87,7 +87,7 @@ void __cdecl fcn_005279f0(unsigned int a0)
 	char* d;
 	char c;
 
-	if (g_6b8010 != g_6a2be4 || g_7746cc != g_77471c
+	if (d3_CurrentContextIndex != g_6a2be4 || g_7746cc != g_77471c
 		|| g_7746c4 != g_774718 || g_774714 != 0) {
 		g_774718 = g_7746c4;
 		g_77471c = g_7746cc;
@@ -101,7 +101,7 @@ void __cdecl fcn_005279f0(unsigned int a0)
 		} while ((int) p < (int)(g_7ea380 + 15));
 		if (g_7746c4 || g_7746c8)
 			fcn_00527540();
-		g_6a2be4 = g_6b8010;
+		g_6a2be4 = d3_CurrentContextIndex;
 	}
 	if (!g_7746c4 && !g_7746c8) {
 		s = g_868060 + (unsigned int) g_773d75 * 0x2f4;
@@ -119,7 +119,7 @@ void __cdecl fcn_005279f0(unsigned int a0)
 			v6 = fcn_00465950("_STADTWAPPEN_BERLIN");
 		v7 = (int) d2_GetResourceData(v6);
 		fcn_0047cba0(g_1040494 - 0x6e, 0x5b, g_77250c,
-			(fcn_0047cba0_set*) v7, g_772568 + 1);
+			(fcn_0047cba0_set*) v7, d2_ResourceOffset + 1);
 		goto done;
 	}
 	if (g_774684) {

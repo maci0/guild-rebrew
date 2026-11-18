@@ -34,7 +34,7 @@ void __cdecl fcn_0052da70(int idx)
 	char* d;
 	int n;
 
-	save = g_6b8010;
+	save = d3_CurrentContextIndex;
 	r = &((struct s_7f4ca0*)g_7f4ca0)[idx];
 	fcn_004432d0(0, 1);
 	for (e = gm_StartFilteredEntitySearch(1, 4, idx); e != 0; e = gm_FindNextFilteredEntity()) {

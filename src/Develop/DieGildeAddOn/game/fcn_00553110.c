@@ -59,7 +59,7 @@ void __cdecl fcn_00553110(int dlg, int a1, int a2)
 	{
 		Pos14 t;
 
-		n = fcn_00500cb0(&g_7f4c00, (int*) (dlg + 0x52));
+		n = fcn_00500cb0(&gm_GameTime, (int*) (dlg + 0x52));
 		if (n > 0) {
 			fcn_00545780(dlg);
 			fcn_00546190(dlg);
@@ -69,7 +69,7 @@ void __cdecl fcn_00553110(int dlg, int a1, int a2)
 			return;
 		if (g_100f1dc == -1)
 			return;
-		t = *(Pos14*) &g_7f4c00;
+		t = *(Pos14*) &gm_GameTime;
 		if (g_14cbca0 == -1) {
 			t.b0 = 6;
 			t.b1c0 = 0;
@@ -119,8 +119,8 @@ open:
 		    (void*) msg, (void*) *(int*) (actor + 0xb4));
 		break;
 	}
-	*(Pos14*) (dlg + 0x44) = *(Pos14*) &g_7f4c00;
-	*(Pos14*) (dlg + 0x52) = *(Pos14*) &g_7f4c00;
+	*(Pos14*) (dlg + 0x44) = *(Pos14*) &gm_GameTime;
+	*(Pos14*) (dlg + 0x52) = *(Pos14*) &gm_GameTime;
 	fcn_00500bb0((int*) (dlg + 0x52), 3, 0, 0);
 	fcn_004c30a0(-7, 0, "_NACHRICHTEN_HS_34", 0, 0);
 	*(int*) (dlg + 0x70) = *(int*) (dlg + 0x70) + 1;

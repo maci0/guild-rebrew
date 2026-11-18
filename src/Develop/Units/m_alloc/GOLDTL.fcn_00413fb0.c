@@ -1,4 +1,4 @@
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 extern void* __cdecl m_alloc(unsigned int, const char*);
 extern void __cdecl m_FreeTracked(void*);
 extern int __cdecl fcn_00413e00(float*, float*, float*, float*, float*);
@@ -84,7 +84,7 @@ int __cdecl fcn_00413fb0(A* bounds, B* b)
             return r;
         }
         if ((b->flags & 0x20) == 0) {
-            fcn_00438100(b, g_6b8014, 0);
+            fcn_00438100(b, d3_ActiveCamera, 0);
         }
         v = (V*) b->obj->itf->getv(b, b->obj, b->mat->m);
         bmin.x = v->x;

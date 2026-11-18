@@ -25,7 +25,7 @@ int __cdecl fcn_0044c200(int a, int b)
 	if (fcn_00449db0(a, b, -1, key, val)) {
 		fcn_0044c0e0(key, val);
 	}
-	if ((g_67ac90 & 0x7f) == 1) {
+	if ((d3_LODMode & 0x7f) == 1) {
 		for (i = 1; i < 3; i++) {
 			if (fcn_00449db0(a, b, i, key, val)) {
 				fcn_0044c0e0(key, val);

@@ -9,10 +9,10 @@ typedef struct {
 	char pad4[0x14];
 } Cell99ef80;
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char* g_entity_type_table;
 extern unsigned char* g_entity_ptr;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 
@@ -95,7 +95,7 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 			if (*(unsigned char*) (p + 0x5a) & 1) {
 				continue;
 			}
-			if (*(unsigned short*) (p + 0x27) == *(unsigned short*) g_773da8) {
+			if (*(unsigned short*) (p + 0x27) == *(unsigned short*) gm_CityEntity) {
 				continue;
 			}
 			kind = ((unsigned char*) g_entity_type_table)[*(unsigned char*) p + *(unsigned char*) p * 0x24c];
@@ -162,10 +162,10 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 		msg[4] = 0x49;
 		*(int*) (msg + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (a1 + 0x16c) + 0x27) * 0x21c);
 		*(int*) (msg + 0xc) = *(int*) (*(char**) (a1 + 0x16c) + 1);
-		*(int*) (msg + 0x28) = *(int*) &g_7f4c00;
-		*(int*) (msg + 0x2c) = g_7f4c00.b;
-		*(int*) (msg + 0x30) = g_7f4c00.c;
-		*(short*) (msg + 0x34) = g_7f4c00.d;
+		*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
+		*(int*) (msg + 0x2c) = gm_GameTime.b;
+		*(int*) (msg + 0x30) = gm_GameTime.c;
+		*(short*) (msg + 0x34) = gm_GameTime.d;
 		msg[0x36] = 1;
 		*(int*) (msg + 0x58) = *(int*) (cand + 1);
 		*(int*) (msg + 0x5c) = *(int*) (*(char**) (a1 + 0x16c) + 1);
@@ -220,10 +220,10 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 	msg[4] = 0x40;
 	*(int*) (msg + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (a1 + 0x16c) + 0x27) * 0x21c);
 	*(int*) (msg + 0xc) = *(int*) (*(char**) (a1 + 0x16c) + 1);
-	*(int*) (msg + 0x28) = *(int*) &g_7f4c00;
-	*(int*) (msg + 0x2c) = g_7f4c00.b;
-	*(int*) (msg + 0x30) = g_7f4c00.c;
-	*(short*) (msg + 0x34) = g_7f4c00.d;
+	*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
+	*(int*) (msg + 0x2c) = gm_GameTime.b;
+	*(int*) (msg + 0x30) = gm_GameTime.c;
+	*(short*) (msg + 0x34) = gm_GameTime.d;
 	msg[0x36] = 1;
 	*(int*) (msg + 0x58) = *(int*) (cand + 1);
 	*(int*) (msg + 0x5c) = *(int*) (*(char**) (a1 + 0x16c) + 1);

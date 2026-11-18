@@ -12,7 +12,7 @@ void __cdecl fcn_00414ab0(float* a0, float* a1, char* ent)
 		return;
 	}
 	if (!(*(unsigned char*) (ent + 0x216) & 0x20)) {
-		fcn_00438100(ent, g_6b8014, 0);
+		fcn_00438100(ent, d3_ActiveCamera, 0);
 	}
 	p = (float*) ((float* (__cdecl*) (char*, char*, int))
 		*(int*) (*(int*) (*(int*) (ent + 0x1cc) + 0x318) + 0x1f0))

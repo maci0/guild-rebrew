@@ -15,7 +15,7 @@ typedef struct
 // SIZE 0x2f4
 
 extern char* g_1015ea0;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char s_6ac948[];
 extern char s_68be7c[];
 
@@ -50,11 +50,11 @@ int __cdecl fcn_005c9450(unsigned short* who, int n, int* arr)
 			continue;
 		}
 		v = fcn_0050cf50(e, e[0x5c]);
-		h = fcn_0046f740(0x20, y, (unsigned char) e[0] + 0x427, g_772514);
+		h = fcn_0046f740(0x20, y, (unsigned char) e[0] + 0x427, d2_CurrentWindowId);
 		io_FormatTextBuffer(buf, s_6ac948, e);
-		d2_ShowTxt(0x80, y, buf, g_772514);
+		d2_ShowTxt(0x80, y, buf, d2_CurrentWindowId);
 		io_FormatTextBuffer(buf, s_68be7c, v);
-		d2_ShowTxt(0x80, y + 0x1b, buf, g_772514);
+		d2_ShowTxt(0x80, y + 0x1b, buf, d2_CurrentWindowId);
 		if (flag == 1 && cnt < n) {
 			((Slot*)g_1015ea0)[h].x5c = 1;
 			((Slot*)g_1015ea0)[h].x1d0 = 3;

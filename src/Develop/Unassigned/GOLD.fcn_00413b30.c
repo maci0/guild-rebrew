@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
 extern volatile int g_6b7fac;
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 
 void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
@@ -34,13 +34,13 @@ int* __cdecl fcn_00413b30(int count)
 	info[13] = g_6b7fac;
 	info[14] = g_6b7fac;
 	info[15] = g_6b7fac;
-	if (g_6b8014 != 0) {
-		info[16] = *(int*) (g_6b8014 + 0x84);
-		info[17] = *(int*) (g_6b8014 + 0x88);
-		info[18] = *(int*) (g_6b8014 + 0x8c);
-		info[20] = *(int*) (g_6b8014 + 0x4c);
-		info[21] = *(int*) (g_6b8014 + 0x50);
-		info[22] = *(int*) (g_6b8014 + 0x54);
+	if (d3_ActiveCamera != 0) {
+		info[16] = *(int*) (d3_ActiveCamera + 0x84);
+		info[17] = *(int*) (d3_ActiveCamera + 0x88);
+		info[18] = *(int*) (d3_ActiveCamera + 0x8c);
+		info[20] = *(int*) (d3_ActiveCamera + 0x4c);
+		info[21] = *(int*) (d3_ActiveCamera + 0x50);
+		info[22] = *(int*) (d3_ActiveCamera + 0x54);
 	}
 	capacity = count;
 	if (capacity <= 0) {

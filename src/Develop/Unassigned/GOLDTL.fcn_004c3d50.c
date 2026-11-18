@@ -46,7 +46,7 @@ void __cdecl fcn_004c3d50(void)
 			((node99*)g_9bade0)[i].next = 0;
 	}
 	(*(node99**)&g_aed200) = ((node99*)g_9bade0);
-	(*(int*)&g_aed324) = 0;
+	(*(int*)&cm_CommandQueueHead) = 0;
 	g_1005780 = 0;
 	g_1005768 = 0;
 	g_1005760 = 0;

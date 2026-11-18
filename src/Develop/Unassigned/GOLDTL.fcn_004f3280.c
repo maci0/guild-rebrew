@@ -16,7 +16,7 @@ typedef struct
 // SIZE 0x1c
 #pragma pack(pop)
 
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern char g_7f4ca0[];
 
 void __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
@@ -26,7 +26,7 @@ int __cdecl fcn_004f3280(char* obj, int a2, int a3, int a4, int a5)
 {
 	Msg1c m;
 
-	if (*(unsigned short*) (obj + 0x27) == 0xffff || *(unsigned short*) (obj + 0x27) == *((unsigned short*)g_773da8) || a3 == -1) {
+	if (*(unsigned short*) (obj + 0x27) == 0xffff || *(unsigned short*) (obj + 0x27) == *((unsigned short*)gm_CityEntity) || a3 == -1) {
 		return -1;
 	}
 	m.id = *(int*) (obj + 1);

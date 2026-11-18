@@ -1,7 +1,7 @@
 
 
 extern char g_6a4144[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern char* g_14b5e38;
 extern int g_14b5e3c;
@@ -14,7 +14,7 @@ extern int g_14ce8e0;
 extern char g_14cf950;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern float g_6640cc;
 extern float g_66292c;
 
@@ -47,7 +47,7 @@ void __cdecl fcn_0053eb60(int n)
 	h = fcn_00470820(0, 0, g_6a4144);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0x42c5);
 	d2_SetForm(h, 3);
@@ -55,7 +55,7 @@ void __cdecl fcn_0053eb60(int n)
 	x = (*(int*) (g_77255c + 0x10) - w * n) / 2 + 0xe;
 	for (i = 0; i < n; i++) {
 		sprintf(buf, "%s %c", g_14b5e38, i + 0x41);
-		ids[i] = fcn_004677e0(0x80, x + i * w, 0xc8, 0, 0x64, 0x7b, 0x802, g_772514);
+		ids[i] = fcn_004677e0(0x80, x + i * w, 0xc8, 0, 0x64, 0x7b, 0x802, d2_CurrentWindowId);
 		d2_SetElementValue(ids[i], 0, 4, g_7e1fa0[i]);
 		fcn_00468cd0(ids[i], 0x82);
 		fcn_00468b80(ids[i], buf);
@@ -64,7 +64,7 @@ void __cdecl fcn_0053eb60(int n)
 	d2_SetForm(h, 2);
 	ok = fcn_00472250(h, 2, io_AppendText(0x7d));
 	while (fcn_005373e0(fcn_0053eb60, 0xc6) != 0) {
-		if (g_14ce8e0 != 0 || g_14cf950 == 1 || (g_100f1dc == 2 && g_67d370 == ok)) {
+		if (g_14ce8e0 != 0 || g_14cf950 == 1 || (g_100f1dc == 2 && d2_CurrentElementId == ok)) {
 			g_774654 = 1;
 		}
 	}

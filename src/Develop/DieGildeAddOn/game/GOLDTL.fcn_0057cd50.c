@@ -2,7 +2,7 @@
 
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00546190(char*);
@@ -22,8 +22,8 @@ void __cdecl fcn_0057cd50(char* u)
 	for (i = 0; i < 4; i++) {
 		h = gm_LookupEntityRecordById(*(int*) (u + 0x8c + i * 4));
 		if (h != 0 && *(char**) (h + 0x16c) != 0 && *(int*) (*(char**) (h + 0x16c) + 1) == *(int*) (u + 0x10)) {
-			*(pos14_7f4c00*) (u + 0x44) = g_7f4c00;
-			*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (u + 0x44) = gm_GameTime;
+			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 			fcn_00508cf0(4, pick);
 			*(short*) (u + 0xce) = 0;
 			*(short*) (u + 0xc0) = kinds[pick[0]];

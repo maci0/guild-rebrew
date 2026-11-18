@@ -3,8 +3,8 @@
 extern char g_6b5c60[];
 extern char g_1052f00[];
 extern int g_1052de0;
-extern int g_6b7f98;
-extern void* g_6b7fa0;
+extern int txt_EntryCount;
+extern void* txt_TextBuffer;
 
 char* __cdecl fcn_0064d1a0(char*, int);
 char* __cdecl fcn_0064e790(char*, int);
@@ -30,7 +30,7 @@ int __cdecl fcn_0042bd20(char* path)
 	int i;
 	int len;
 
-	g_6b7f98 = 0;
+	txt_EntryCount = 0;
 	p = fcn_0064d1a0(path, '\\');
 	if (p) {
 		len = (int) (p - path);
@@ -43,8 +43,8 @@ int __cdecl fcn_0042bd20(char* path)
 	n = 0;
 	if (!f) {
 		MessageBoxA(0, "Could not open Textfiledefinition!", "Error", 0x30);
-		m_FreeTracked(g_6b7fa0);
-		g_6b7fa0 = 0;
+		m_FreeTracked(txt_TextBuffer);
+		txt_TextBuffer = 0;
 		return 0;
 	}
 	do {
@@ -55,17 +55,17 @@ int __cdecl fcn_0042bd20(char* path)
 			if (inc) {
 				p = fcn_0064e790(inc, '"');
 				if (!p)
-					{ m_FreeTracked(g_6b7fa0); g_6b7fa0 = 0; return 0; }
+					{ m_FreeTracked(txt_TextBuffer); txt_TextBuffer = 0; return 0; }
 				p++; q = fcn_0064e790(p, '"');
 				if (!q)
-					{ m_FreeTracked(g_6b7fa0); g_6b7fa0 = 0; return 0; }
+					{ m_FreeTracked(txt_TextBuffer); txt_TextBuffer = 0; return 0; }
 				*q = 0;
 				r = fcn_0064d1a0(p, '.');
 				*r = 0;
 				strcpy(names[n], p);
 				n++;
 				if (n > 0x80)
-					{ m_FreeTracked(g_6b7fa0); g_6b7fa0 = 0; return 0; }
+					{ m_FreeTracked(txt_TextBuffer); txt_TextBuffer = 0; return 0; }
 			}
 		}
 	} while (!(f[0xc] & 0x10));

@@ -1,7 +1,7 @@
 
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6a5a10[];
 extern char g_6b5c60[];
@@ -28,7 +28,7 @@ void __cdecl fcn_00565100(char* u)
 	int text;
 	char* q;
 
-	if (fcn_00500cb0(&g_7f4c00, u + 0x52) < 0) {
+	if (fcn_00500cb0(&gm_GameTime, u + 0x52) < 0) {
 		return;
 	}
 	switch (*(int*) (u + 0x70)) {

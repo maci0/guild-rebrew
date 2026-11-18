@@ -75,16 +75,16 @@ int __cdecl TakeObjectScript(char** ch, char** ani, int* kind, char** dummy, uns
 
 	if (g_6b7ebc != 0 && *(int (__cdecl**)()) (g_6b7ebc + 0x44) == (int (__cdecl*)()) TakeObjectScript) {
 		if (*(int*) (*ch + 0x128) != 0) {
-			*(int (__cdecl**)()) (g_6b7e98 + 0xc60) = (int (__cdecl*)()) TakeObjectScript;
+			*(int (__cdecl**)()) (evt_CurrentScript + 0xc60) = (int (__cdecl*)()) TakeObjectScript;
 		}
 		return 0;
 	}
 	if (*ch == 0) {
-		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "TakeObjectScript(): Invalid character");
+		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "TakeObjectScript(): Invalid character");
 		return 1;
 	}
 	if (*dummy == 0) {
-		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "TakeObjectScript(): Invalid dummy");
+		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "TakeObjectScript(): Invalid dummy");
 		return 1;
 	}
 	task = fcn_0040c230(*ch, ch_RunAnimationScript, *level, 0x31, *kind);
@@ -96,8 +96,8 @@ int __cdecl TakeObjectScript(char** ch, char** ani, int* kind, char** dummy, uns
 		strcpy(task + 0x90, *func);
 		*(int*) (task + 0x17c) = g_6791c8;
 	}
-	if (*(int*) (g_6b7e98 + 0xc84) == 1) {
-		*(int (__cdecl**)()) (g_6b7e98 + 0xc60) = (int (__cdecl*)()) TakeObjectScript;
+	if (*(int*) (evt_CurrentScript + 0xc84) == 1) {
+		*(int (__cdecl**)()) (evt_CurrentScript + 0xc60) = (int (__cdecl*)()) TakeObjectScript;
 	}
 	return 0;
 }

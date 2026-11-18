@@ -24,7 +24,7 @@ int __cdecl fcn_004cc030(char* cmd, char* result)
 	o = gm_LookupEntityRecordById(*(int*) (cmd + 0x10));
 	if (o == 0 || *(char**) (o + 0x184) == 0)
 		return 1;
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	fcn_004432d0(fcn_00413190(*(int*) (*(char**) (o + 0x184) + 0x88)), 1);
 	{
 		float pos[4];

@@ -12,7 +12,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_664158;
 extern int g_773d48;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern float g_696444[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -70,7 +70,7 @@ void __cdecl fcn_004ff490(char* a0)
 			return;
 		}
 
-		t = *(Time*) &g_7f4c00;
+		t = *(Time*) &gm_GameTime;
 		extra = 2;
 		fcn_00500bb0(&t, 8, 0, 0);
 

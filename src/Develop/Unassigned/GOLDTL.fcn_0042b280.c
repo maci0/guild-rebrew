@@ -7,8 +7,8 @@ int __cdecl fcn_0042b280(int id)
 	int j;
 
 	for (i = 0; i < 16; i++) {
-		if (g_6b7ed0[i] != 0) {
-			for (j = 0; j < g_6b7ed0[i][6]; j++) {
+		if (msx_WaveDrivers[i] != 0) {
+			for (j = 0; j < msx_WaveDrivers[i][6]; j++) {
 				if (g_6b7f50[i][j] == id) {
 					return i;
 				}

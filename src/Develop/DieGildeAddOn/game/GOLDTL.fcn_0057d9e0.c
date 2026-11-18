@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_RandomMod(unsigned short n);
@@ -36,5 +36,5 @@ void __cdecl fcn_0057d9e0(char* a)
 	}
 	if (*(int*) (a + 0x70) <= 3)
 		return;
-	*(pos14_7f4c00*) (a + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (a + 0x52) = gm_GameTime;
 }

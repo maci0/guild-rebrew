@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -45,7 +45,7 @@ int __cdecl fcn_004aaa60(char* actor, int a2, char* x)
 	msg[0x36] = 2;
 	*(int*) (msg + 8) = *(int*) (actor + 4);
 	*(int*) (msg + 0xc) = *(int*) (actor + 4);
-	*(int*) (msg + 0x58) = (*(int*)&g_7f4c00);
+	*(int*) (msg + 0x58) = (*(int*)&gm_GameTime);
 	*(int*) (msg + 0x5c) = (*(int*)&g_7f4c04);
 	*(int*) (msg + 0x60) = g_7f4c08;
 	*(short*) (msg + 0x64) = g_7f4c0c;
@@ -96,7 +96,7 @@ int __cdecl fcn_004aac00(char* actor, int a2, char* x)
 	*(int*) (msg + 0x5c) = *(int*) (actor + 4);
 	*(int*) (msg + 0x58) = *(int*) (x + 4);
 	*(int*) (msg + 0x60) = *(int*) (x + 8);
-	*(int*) (msg + 0x28) = (*(int*)&g_7f4c00);
+	*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
 	msg[4] = 0x2f;
 	*(int*) (msg + 0xc) = -1;
 	msg[0x36] = 1;

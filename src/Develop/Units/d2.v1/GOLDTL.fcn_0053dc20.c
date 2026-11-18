@@ -26,12 +26,12 @@ extern int __cdecl fcn_0053c560(int a);
 extern char g_14cf950;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
-extern int g_7725c8;
+extern int d2_CurrentElementId;
+extern int d2_SuppressOverlay;
 extern int g_774654;
 extern int g_7e242c;
 extern int g_7e2468;
-extern int g_7e46ac;
+extern int main_LoopFlags;
 
 /* ADDRESS: GOLDTL 0x0053dc20 */
 int __cdecl fcn_0053dc20(void)
@@ -103,12 +103,12 @@ label_53dd68:
 			if (v2) {
 				goto label_53de5c;
 			}
-			if (g_67d370 != v10) {
-				if (g_67d370 == v12) {
+			if (d2_CurrentElementId != v10) {
+				if (d2_CurrentElementId == v12) {
 					mode = 2;
 					goto label_53de0b;
 				}
-				if (g_67d370 == v11 || g_14cf950 == 0x1c) {
+				if (d2_CurrentElementId == v11 || g_14cf950 == 0x1c) {
 					mode = 0;
 					fcn_004b20d0(mode);
 				}
@@ -138,19 +138,19 @@ label_53de5c:
 			if (v13 != 0xff || v2) {
 				g_7e242c = v13;
 				if (!v2) {
-					g_7e46ac = 0x12d6;
+					main_LoopFlags = 0x12d6;
 					fcn_004e44f0(fcn_004e4470((const char *) 0x6a4040));
 				}
 				v2 = 0;
 				again = fcn_0053d490(0xc6, 0);
 				if (again == 0) {
-					g_7e46ac = 0x12d6;
+					main_LoopFlags = 0x12d6;
 					fcn_004e44f0(fcn_004e4470((const char *) 0x6a4024));
 					retry = 1;
 				} else {
 					v4 = fcn_0053e8a0(0);
 					if (v4 == 1) {
-						g_7725c8 = v4;
+						d2_SuppressOverlay = v4;
 						*(int *) 0x6a37f8 = fcn_005268c0(*(int *) 0x14abf04, 0);
 						if (fcn_0053c560(0)) {
 label_53df85:

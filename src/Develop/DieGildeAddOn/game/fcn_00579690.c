@@ -7,7 +7,7 @@ void __cdecl fcn_00529160(int a, int b, int c, void* d);
 void __cdecl fcn_00546190(void* p);
 void __cdecl fcn_00500bb0(void* p, int a, int b, int c);
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x00579690 */
 void __cdecl fcn_00579690(char* event)
@@ -36,9 +36,9 @@ void __cdecl fcn_00579690(char* event)
 		return;
 	}
 	*(int*) (event + 0xb0) = 0;
-	*(pos14_7f4c00*) (event + 0xb8) = g_7f4c00;
+	*(pos14_7f4c00*) (event + 0xb8) = gm_GameTime;
 	*(int*) (event + 0xb4) = 0x168;
-	*(pos14_7f4c00*) (event + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (event + 0x52) = gm_GameTime;
 	*(int*) (event + 0x70) = 0;
 	fcn_00500bb0(event + 0x52, 0, 5, 0);
 }

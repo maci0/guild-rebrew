@@ -64,7 +64,7 @@ void __cdecl fcn_0059c9a0(char* e)
 				fcn_005c79a0(e);
 			}
 		}
-		if (g_100f1dc != -1 && g_67d370 == g_6a25f0) {
+		if (g_100f1dc != -1 && d2_CurrentElementId == g_6a25f0) {
 			ob_HandleBepflanzung(e);
 		}
 	}

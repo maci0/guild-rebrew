@@ -23,7 +23,7 @@ int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 	int v5;
 	char* v6;
 
-	v2 = g_6b8010;
+	v2 = d3_CurrentContextIndex;
 	def[0] = 0.0f;
 	def[1] = 0.0f;
 	def[2] = 0.0f;

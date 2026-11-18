@@ -14,7 +14,7 @@ extern int g_777ca0;
 extern int g_776c90;
 extern int g_775338;
 extern int g_774654;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 int __cdecl fcn_0057ec20(int); void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -73,9 +73,9 @@ void __cdecl fcn_005c8c40(void)
 	save = fcn_00470820(0, 0, (char*) 0x6ac890);
 	fcn_00471b60(save);
 	d2_SetForm(save, 0);
-	fcn_005340f0(*(int*) &g_772514);
+	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(save, 3);
-	fcn_00533a60(*(int*) &g_772514, 0, out, 3, *(int*) 0x14b5294, *(int*) 0x14b5298, *(int*) 0x14b529c);
+	fcn_00533a60(*(int*) &d2_CurrentWindowId, 0, out, 3, *(int*) 0x14b5294, *(int*) 0x14b5298, *(int*) 0x14b529c);
 	v2 = fcn_005c8400();
 	v3 = fcn_005c86b0();
 	v4 = fcn_005c89a0();
@@ -110,9 +110,9 @@ void __cdecl fcn_005c8c40(void)
 		}
 		if (v3 != -1 && *(int*) &g_100f1dc != -1) {
 			for (i = 0; i < g_775338; i++) {
-				if (g_67d370 == *(int*) (0x778900 + i * 4)) {
+				if (d2_CurrentElementId == *(int*) (0x778900 + i * 4)) {
 					fcn_00471a30(save, 0);
-					fcn_005c8770(*(int*) (*(int*) &g_1015ea0 + 0x2f0 + g_67d370 * 0x2f4));
+					fcn_005c8770(*(int*) (*(int*) &g_1015ea0 + 0x2f0 + d2_CurrentElementId * 0x2f4));
 					fcn_00471a30(save, 1);
 					break;
 				}
@@ -123,10 +123,10 @@ void __cdecl fcn_005c8c40(void)
 			if (*(int*) &g_100f1dc != -1) {
 				t1 = fcn_00472830(v4, 3);
 				t2 = fcn_00472830(v4, 2);
-				if (g_67d370 == g_776c90) {
+				if (d2_CurrentElementId == g_776c90) {
 					fcn_0046ed00(0, 0x3e, t1);
 					fcn_0046ed00(0, 0x3e, t2);
-				} else if (g_67d370 == g_777ca0) {
+				} else if (d2_CurrentElementId == g_777ca0) {
 					fcn_0046ed00(0, -0x3e, t1);
 					fcn_0046ed00(0, -0x3e, t2);
 				}

@@ -6,10 +6,10 @@
 extern char g_7f4ca0[];
 extern int g_666018; extern int g_66601c;
 extern char g_6811b0[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14ce8e0;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_005263d0(int, int, int);
@@ -66,12 +66,12 @@ void __cdecl fcn_005e6360(char* entity)
     d2_SetOverlayAnimation(0, 0);
     fcn_00471b60(dialog);
     d2_SetForm(dialog, 0);
-    fcn_005340f0(g_772514);
+    fcn_005340f0(d2_CurrentWindowId);
     d2_SetForm(dialog, 2);
-    control = fcn_004677e0(0x57, 7, 200, 0, 100, 0x7b, 2, g_772514);
+    control = fcn_004677e0(0x57, 7, 200, 0, 100, 0x7b, 2, d2_CurrentWindowId);
     d2_SetElementValue(control, 2, 8, 2, 1);
     d2_SetForm(dialog, 3);
-    fcn_00533a60(g_772514, 0, ids, 2, *(int*) 0x14b5b50, *(int*) 0x14b5b54);
+    fcn_00533a60(d2_CurrentWindowId, 0, ids, 2, *(int*) 0x14b5b50, *(int*) 0x14b5b54);
     do {
         amount = fcn_00471f80(control);
         d2_SetForm(dialog, 1);
@@ -80,7 +80,7 @@ void __cdecl fcn_005e6360(char* entity)
         if (g_14ce8e0 != 0) {
             g_774654 = 1;
         } else if (g_100f1dc != -1) {
-            if (g_67d370 == ids[0]) {
+            if (d2_CurrentElementId == ids[0]) {
                 if (fcn_00525f60(g_7f4ca0 + g_774970 * 0x21c, amount) == 1) {
                     fcn_004c5420(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 4), 0x1cc, 4, 0x20, 0);
                     fcn_005100f0(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 4), -amount);
@@ -91,7 +91,7 @@ void __cdecl fcn_005e6360(char* entity)
                     }
                     g_774654 = 1;
                 }
-            } else if (g_67d370 == ids[1]) {
+            } else if (d2_CurrentElementId == ids[1]) {
                 g_774654 = 1;
             }
         }

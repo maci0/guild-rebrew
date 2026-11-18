@@ -1,6 +1,6 @@
 extern int g_6a2bfc;
 extern int g_6a2c00;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -147,8 +147,8 @@ int __cdecl d2_CreateScrollPerga(void)
 		return g_6a2bf8;
 	}
 	d2_SetForm(g_6a2bf8, 0);
-	g_6a2bfc = fcn_0046f740(0, 0, 0x6e0, g_772514);
-	g_6a2c00 = fcn_0046f740(0, 0x1d1, 0x6e0, g_772514);
+	g_6a2bfc = fcn_0046f740(0, 0, 0x6e0, d2_CurrentWindowId);
+	g_6a2c00 = fcn_0046f740(0, 0x1d1, 0x6e0, d2_CurrentWindowId);
 	return g_6a2bf8;
 }
 

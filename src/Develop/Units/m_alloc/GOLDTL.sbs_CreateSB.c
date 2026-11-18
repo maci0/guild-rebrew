@@ -1,6 +1,6 @@
 
 
-extern char* g_6b7d68;
+extern char* sbs_BankManager;
 extern int g_6b7d6c;
 extern char g_678fd0[];
 void __cdecl fcn_00425810(void);
@@ -12,12 +12,12 @@ int __cdecl sbs_CreateSB(char* s)
 	int n;
 
 	fcn_00425810();
-	if (g_6b7d68 == 0 && s != 0) {
-		g_6b7d68 = m_alloc(0x40, g_678fd0);
-		if (g_6b7d68 != 0) {
+	if (sbs_BankManager == 0 && s != 0) {
+		sbs_BankManager = m_alloc(0x40, g_678fd0);
+		if (sbs_BankManager != 0) {
 			n = 0x40;
 			__asm {
-				mov edi, g_6b7d68
+				mov edi, sbs_BankManager
 				mov ebx, n
 				xor eax, eax
 				lea ecx, [edi+edi*2]
@@ -33,7 +33,7 @@ int __cdecl sbs_CreateSB(char* s)
 				add ecx, ebx
 				rep stosb
 			}
-			fcn_0064d530(g_6b7d68, s, 0x32);
+			fcn_0064d530(sbs_BankManager, s, 0x32);
 			g_6b7d6c++;
 			return 0;
 		}

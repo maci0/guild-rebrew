@@ -4,7 +4,7 @@ extern char* g_7ea360;
 extern char* g_7746a0;
 extern char* g_7746a4;
 extern char* g_7746a8;
-extern char* g_7746ac;
+extern char* sv_HoveredObjekt;
 extern char* g_7746b0;
 extern char* g_7746b4;
 extern int g_7746b8;
@@ -32,7 +32,7 @@ extern int g_6a3764;
 extern int g_6a376c;
 extern int g_6a3768;
 extern int g_6a3770;
-extern int g_100f894;
+extern int d2_HoveredWindow;
 extern int g_67d8d4;
 extern char* lpObjektePROT;
 extern char* g_77479c;
@@ -144,7 +144,7 @@ L744:
 	if (g_14ce8cc == 0 || d3_ActiveCameraAnimation != 0
 	    || g_14ce8c0 <= g_6a3764 || g_14ce8c0 >= g_6a376c
 	    || g_14ce8c2 <= g_6a3768 || g_14ce8c2 >= g_6a3770
-	    || g_100f894 != -1 || g_67d8d4 != -1) {
+	    || d2_HoveredWindow != -1 || g_67d8d4 != -1) {
 		if (created == 0) {
 			return;
 		}
@@ -156,7 +156,7 @@ L744:
 		fcn_00530510();
 		return;
 	}
-	list = g_7746ac;
+	list = sv_HoveredObjekt;
 	if (list != 0) {
 		p = lpObjektePROT + (unsigned int) (unsigned short) *(unsigned short*) list * 0x41;
 	} else {
@@ -170,7 +170,7 @@ L744:
 		match = 1;
 	}
 	g_7e4318 = (int) g_7746b0;
-	g_7e431c = g_7746ac;
+	g_7e431c = sv_HoveredObjekt;
 	g_7e4320 = g_7746b4;
 	g_7746b8 = g_7746bc;
 	g_7746a0 = v5;
@@ -186,7 +186,7 @@ L744:
 			}
 		}
 		g_77465c = g_774650;
-		list = g_7746ac;
+		list = sv_HoveredObjekt;
 	}
 	g_77479c = v5;
 	if (g_7746b4 != 0 && *(char*) (g_7746b4 + 8) != 0) {
@@ -204,13 +204,13 @@ L744:
 		}
 		g_6b5c48 = *(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) p * 0x21c + 0x184);
 		v5 = g_7746a4;
-		list = g_7746ac;
+		list = sv_HoveredObjekt;
 	}
 	if (g_7746f0 == 0 && g_7746f4 == 0 && g_7746b0 != 0 && g_7e2a9c == 0) {
 		g_7746c0 = v5;
 	}
 	g_7e2aa0 = g_7746b0;
-	g_7e2a9c = g_7746ac;
+	g_7e2a9c = sv_HoveredObjekt;
 	if (g_7746b0 != 0) {
 		g_7746c0 = v5;
 	}

@@ -13,7 +13,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl io_FormatTextBuffer(void*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern float g_662c30;
 extern const float g_662cf8;
 /* Fill and draw the eight trade-goods rows of the market window: compact the
@@ -172,9 +172,9 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
         io_AppendText((int) 0x6a9668, 0x4103, (int) v12);
         if (a3 == 1) {
             v6 = fcn_00468df0(
-                (*(int*) (g_772514 * 0x3cc + 0x1015f4c) - 0xb4) / 2,
-                *(int*) (g_772514 * 0x3cc + 0x1015f50) - 0x21, 0xbf,
-                *(int*) 0x14b5ee4, g_772514);
+                (*(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0xb4) / 2,
+                *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f50) - 0x21, 0xbf,
+                *(int*) 0x14b5ee4, d2_CurrentWindowId);
             v2[0x4e] = v6;
             fcn_00469110(v6, 0xb4);
         }

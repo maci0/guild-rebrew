@@ -1,5 +1,5 @@
 extern char* g_772500;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 
 
 
@@ -17,9 +17,9 @@ void __cdecl fcn_00534160(int x0, int y, int len, int t)
 	rem = n % 2;
 	n /= 2;
 	for (i = 0; i < n; i++) {
-		fcn_0046f740(x0 + i * w, y, t, g_772514);
+		fcn_0046f740(x0 + i * w, y, t, d2_CurrentWindowId);
 	}
 	if (rem != 0) {
-		fcn_0046f740(x0 + i * w, y, t + 1, g_772514);
+		fcn_0046f740(x0 + i * w, y, t + 1, d2_CurrentWindowId);
 	}
 }

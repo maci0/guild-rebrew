@@ -36,7 +36,7 @@ extern char s_6acc18[];
 extern char s_6acc08[];
 extern char s_6a9680[];
 extern char s_67d444[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
@@ -97,7 +97,7 @@ void __cdecl fcn_005c8440(void)
 	for (i = 0; i < count; i++) {
 		fl = (int) (list[i].f1c * 100.0f);
 		h = fcn_0046f740(0x28, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2),
-			((House*)g_7f4ca0)[list[i].id].f54, g_772514);
+			((House*)g_7f4ca0)[list[i].id].f54, d2_CurrentWindowId);
 		((Slot*)g_f8f080)[h].shown = 1;
 		((Slot*)g_f8f080)[h].style = 3;
 		((Slot*)g_f8f080)[h].house = &((House*)g_7f4ca0)[list[i].id];
@@ -105,7 +105,7 @@ void __cdecl fcn_005c8440(void)
 		fcn_005c9090(text, 0x36, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 0x22, 0x12c, 0x56);
 		v = MIN(MAX(((House*)g_7f4ca0)[list[i].id].f54 - 0x59a, 0), 7);
 		h = fcn_004677e0(0x5a, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 7, 0x12c, 0, 0x64,
-			cols[v], 0x42, g_772514);
+			cols[v], 0x42, d2_CurrentWindowId);
 		d2_SetElementValue(h, 0, 0x64, fl);
 		sprintf(text, s_67d444, list[i].f20);
 		fcn_005c9090(text, 0x1f4, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2), 0xc8, 0x55);

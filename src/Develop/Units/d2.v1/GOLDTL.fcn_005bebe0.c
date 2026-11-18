@@ -42,8 +42,8 @@ struct s_1015f4c
 
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514;
-extern int g_7725d0;
+extern int d2_CurrentWindowId;
+extern int tp_d2_SelectedControl;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
@@ -51,7 +51,7 @@ extern char* g_1015ea0;
 extern float g_662a98;
 extern float g_664168;
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern s_1015f4c g_1015f4c[];
 
 char* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
@@ -120,19 +120,19 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 	color = color + miss;
 	h = fcn_00470820(0, 0, (char*) 0x6ac484);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	fcn_00471b60(h);
 	d2_SetForm(h, 1);
 	d2_SetOverlayAnimation(0, 0);
 	io_AppendText(0x16af, a2 + 0x16b7);
 	io_AppendText(a2 + 0x16c3);
 	d2_SetForm(h, 2);
-	x = ((struct s_1015f4c*) g_1015f4c)[g_772514].x;
+	x = ((struct s_1015f4c*) g_1015f4c)[d2_CurrentWindowId].x;
 	f = (float) *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2) * g_664168;
 	if (!(f < g_662a98)) {
 		f = g_662a98;
 	}
-	found = fcn_0046f740(x / 2 - 0x18, 4, (int) ((float) yoff[a2] + f), g_772514);
+	found = fcn_0046f740(x / 2 - 0x18, 4, (int) ((float) yoff[a2] + f), d2_CurrentWindowId);
 	fcn_00534160(x / 2 - 0x23, 0x3c, *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2), 0x4df);
 	d2_SetForm(h, 3);
 	if (slot != 0) {
@@ -179,9 +179,9 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 			fcn_00500bb0(&t, 5, 0, 0);
 			dur = (float) fcn_00500d20(slot + 0x44, slot + 0x52);
 			*(float*) (g_1015ea0 + found * 0x2f4 + 500) =
-				(float) fcn_00500d20(slot + 0x44, (void*) &g_7f4c00) / dur;
+				(float) fcn_00500d20(slot + 0x44, (void*) &gm_GameTime) / dur;
 		}
-		if (g_14ce8e0 != 0 && g_7725d0 == 0) {
+		if (g_14ce8e0 != 0 && tp_d2_SelectedControl == 0) {
 			g_774654 = 1;
 		}
 		if (g_100f1dc == 2) {

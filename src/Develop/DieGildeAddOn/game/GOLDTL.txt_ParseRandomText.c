@@ -14,12 +14,12 @@ void __cdecl txt_ParseRandomText(char* s)
 	if (fcn_0064f170(s, g_67998c, 2) == 0) {
 		v = s[2] - '1';
 		if (v >= 0 && v <= 9) {
-			g_11bb000[g_6b7f98] = v + 9;
+			g_11bb000[txt_EntryCount] = v + 9;
 			return;
 		}
 		ReportClientMessage(g_679964);
-		g_11bb000[g_6b7f98] = *(int*) &s;
+		g_11bb000[txt_EntryCount] = *(int*) &s;
 		return;
 	}
-	g_11bb000[g_6b7f98] = *(int*) &s;
+	g_11bb000[txt_EntryCount] = *(int*) &s;
 }

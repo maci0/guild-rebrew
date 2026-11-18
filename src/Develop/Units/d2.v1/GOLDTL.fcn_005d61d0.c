@@ -28,7 +28,7 @@ typedef struct
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
@@ -71,12 +71,12 @@ int __cdecl fcn_005d61d0(unsigned short* a1)
 					pkt.type = 0x4b;
 					pkt.x8 = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
 					pkt.xc = pkt.x8;
-					pkt.name = (*(Name14*)&g_7f4c00);
+					pkt.name = (*(Name14*)&gm_GameTime);
 					pkt.x36 = 2;
 					pkt.x5c = *(int*) (a1 + 2);
 					pkt.x58 = pkt.x8;
 					fcn_004c5530(&pkt);
-					nm = (*(Name14*)&g_7f4c00);
+					nm = (*(Name14*)&gm_GameTime);
 					fcn_00500bb0(&nm, 0x18, 0, 0);
 					io_FormatTextBuffer(buf, 0x1d63, &nm, *a1);
 					fcn_00526120(buf, 0);

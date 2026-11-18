@@ -12,12 +12,12 @@ typedef struct Spin {
 } Spin;
 // SIZE 0x130
 
-extern int g_7725d0;
+extern int tp_d2_SelectedControl;
 extern int g_14ce8dc;
 extern int g_14ce8d0;
 extern int g_7725e8;
-extern int g_6b5c84;
-extern int g_6772c0;
+extern int d2_MouseTopBoundary;
+extern int d2_MouseBottomBoundary;
 extern int g_100f1e0;
 extern int g_100f1d8;
 extern short g_14ce8c0;
@@ -34,30 +34,30 @@ int __cdecl fcn_00474780(void)
 	int step;
 	Spin* p;
 
-	if ((*(Spin**)&g_7725d0) == 0 || !((*(Spin**)&g_7725d0)->flags & 2)) {
+	if ((*(Spin**)&tp_d2_SelectedControl) == 0 || !((*(Spin**)&tp_d2_SelectedControl)->flags & 2)) {
 		return 0;
 	}
-	if (g_14ce8dc != 0 && (*(Spin**)&g_7725d0)->value < (*(Spin**)&g_7725d0)->max) {
-		(*(Spin**)&g_7725d0)->value = (*(Spin**)&g_7725d0)->max;
+	if (g_14ce8dc != 0 && (*(Spin**)&tp_d2_SelectedControl)->value < (*(Spin**)&tp_d2_SelectedControl)->max) {
+		(*(Spin**)&tp_d2_SelectedControl)->value = (*(Spin**)&tp_d2_SelectedControl)->max;
 	}
-	if (g_14ce8d0 == 0 || (*(Spin**)&g_7725d0)->value == -1) {
+	if (g_14ce8d0 == 0 || (*(Spin**)&tp_d2_SelectedControl)->value == -1) {
 		return 0;
 	}
 	if (g_7725e8 == 0) {
-		step = d2_GetValueStep((char*) (*(Spin**)&g_7725d0));
+		step = d2_GetValueStep((char*) (*(Spin**)&tp_d2_SelectedControl));
 		g_7725e8 = 1;
-		g_100f1d8 = g_6772c0;
-		g_100f1e0 = g_6b5c84;
-		p = (*(Spin**)&g_7725d0);
+		g_100f1d8 = d2_MouseBottomBoundary;
+		g_100f1e0 = d2_MouseTopBoundary;
+		p = (*(Spin**)&tp_d2_SelectedControl);
 		g_7725b8 = p->value;
 		g_7725dc = g_14ce8c0;
 		g_7725e0 = g_14ce8c2;
 		if (p->flags & 0x80) {
-			g_6772c0 = (g_7725b8 - p->min) * 4 / step + g_7725e0;
-			g_6b5c84 = (g_7725b8 - p->max) * 4 / step + g_7725e0;
+			d2_MouseBottomBoundary = (g_7725b8 - p->min) * 4 / step + g_7725e0;
+			d2_MouseTopBoundary = (g_7725b8 - p->max) * 4 / step + g_7725e0;
 		}
 		p->pos = (g_7725b8 - p->min) * 4 / step + g_7725e0;
 	}
-	fcn_00473f50((*(Spin**)&g_7725d0), g_7725b8, g_7725e0, g_14ce8c2);
+	fcn_00473f50((*(Spin**)&tp_d2_SelectedControl), g_7725b8, g_7725e0, g_14ce8c2);
 	return 1;
 }

@@ -16,8 +16,8 @@ void __cdecl d2_SetElementImage(int element, int bild)
         d2_SubRefcount(eintrag->f08);
     }
     eintrag->data = d2_GetResourceData(bild);
-    eintrag->bild_offset = g_772568;
-    eintrag->f08 = g_772568 + bild;
+    eintrag->bild_offset = d2_ResourceOffset;
+    eintrag->f08 = d2_ResourceOffset + bild;
     eintrag->w = ((D2_BILD_GROESSE*) g_772500)[bild].breite;
     eintrag->f16 = ((D2_BILD_GROESSE*) g_772500)[bild].hoehe;
     eintrag->f22 = 0;
@@ -26,7 +26,7 @@ void __cdecl d2_SetElementImage(int element, int bild)
     eintrag->f1e = 0;
     eintrag->f20 = g_00fb9072;
 #else
-    eintrag->f24 = g_1040490;
+    eintrag->f24 = d2_ScreenHeight;
     eintrag->f1e = 0;
     eintrag->f20 = g_1040494;
 #endif

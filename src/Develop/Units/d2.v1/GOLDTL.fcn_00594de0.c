@@ -21,8 +21,8 @@ extern char* g_7746c4;
 extern unsigned char* g_7746c8;
 extern char* g_1015ea0;
 extern char* lpObjektePROT;
-extern int g_772514;
-extern char g_7f4c00[];
+extern int d2_CurrentWindowId;
+extern char gm_GameTime[];
 
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl fcn_0050cce0(char* o, void* out, int producers);
@@ -71,7 +71,7 @@ void __cdecl fcn_00594de0(int a0, int a1, int a2)
 	for (i = 0; i < a2; i++) {
 		p = (Panel*) (g_779160 + i * 0x58);
 		if (p->c[1] < 0) {
-			w = fcn_0046f100(p->x24, p->x28, 0xcd, 0x57, 0x10, g_772514);
+			w = fcn_0046f100(p->x24, p->x28, 0xcd, 0x57, 0x10, d2_CurrentWindowId);
 			p->c[1] = w;
 			*(int*) (0x10161cc + w * 0x3cc) = 0x54;
 			fcn_0046f740(0, 0, 0x749, w);
@@ -141,7 +141,7 @@ void __cdecl fcn_00594de0(int a0, int a1, int a2)
 			}
 			span = *(int*) ((char*) row + 0x18) + *(int*) ((char*) row + 0x14);
 			t1 = fcn_00500d20((void*) ((char*) row + 0x44), (void*) ((char*) row + 0x52));
-			t2 = fcn_00500d20((void*) ((char*) row + 0x44), (void*) g_7f4c00);
+			t2 = fcn_00500d20((void*) ((char*) row + 0x44), (void*) gm_GameTime);
 			*(float*) (g_1015ea0 + p->c[2] * 0x2f4 + 0x1f4) = (float) t2 / (float) t1;
 		} else {
 			if (p->c[3] != -1) {
@@ -154,10 +154,10 @@ void __cdecl fcn_00594de0(int a0, int a1, int a2)
 		}
 
 		if (i == 0) {
-			g_772514 = p->x4c;
+			d2_CurrentWindowId = p->x4c;
 			io_AppendText(0xc8, span, 0x51e);
 		} else {
-			g_772514 = p->x4c;
+			d2_CurrentWindowId = p->x4c;
 			io_AppendText(0xc9, span, 0x51e, p->x0 * 2 + 0x9a8);
 		}
 		d2_SetForm(a0, a1);

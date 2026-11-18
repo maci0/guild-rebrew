@@ -7,7 +7,7 @@ void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
 
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_773d48;
 
 /* Per-frame object tick: on every fourth frame, walks the object table and
@@ -25,7 +25,7 @@ void __cdecl fcn_004fd780(void)
 	int arg;
 	float now;
 
-	if ((g_7f4c00 % 4) != 0) {
+	if ((gm_GameTime % 4) != 0) {
 		return;
 	}
 	fcn_004f4830(2, info);

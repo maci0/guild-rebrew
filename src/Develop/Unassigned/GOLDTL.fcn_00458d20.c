@@ -32,7 +32,7 @@ void __cdecl fcn_00458d20(char* o)
 			((IDev*)g_6b5de0)->v->SetIndices(((IDev*)g_6b5de0), *(void**) (e + 0x84), 0);
 			((IDev*)g_6b5de0)->v->SetTexture(((IDev*)g_6b5de0), 0, *(void**) (*(char**) e + 0x50));
 			((IDev*)g_6b5de0)->v->DrawIndexedPrimitive(((IDev*)g_6b5de0), 4, 0, *(unsigned int*) (e + 0x94), 0, *(unsigned int*) (e + 0x90));
-			g_1052bac += *(int*) (e + 0x94);
+			d3_RenderedVertexCount += *(int*) (e + 0x94);
 			g_1042a08 += *(int*) (e + 0x90);
 		}
 	}

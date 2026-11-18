@@ -2,12 +2,12 @@
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern unsigned char* g_entity_ptr;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern char g_7f4ca4[];
 extern char g_677640[];
 
@@ -239,7 +239,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 			if (out.slot[i].type == 1) {
 				msg[4] = 0x4f;
 				if (*(unsigned short*) (p + 0x27) == 0xffff) {
-					*(int*) (msg + 8) = *(int*) (g_773da8 + 4);
+					*(int*) (msg + 8) = *(int*) (gm_CityEntity + 4);
 				} else {
 					*(int*) (msg + 8) =
 					    *(int*) (g_7f4ca4 +
@@ -247,7 +247,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 					              0xffff) * 0x21c);
 				}
 				*(int*) (msg + 0xc) = *(int*) (p + 1);
-				*(int*) (msg + 0x28) = *(int*) &g_7f4c00;
+				*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
 				*(int*) (msg + 0x2c) = g_7f4c04;
 				*(int*) (msg + 0x30) = g_7f4c08;
 				*(short*) (msg + 0x34) = g_7f4c0c;

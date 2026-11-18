@@ -28,7 +28,7 @@ typedef struct {
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short *lpObjekteINST;
 extern char *lpObjektePROT;
 extern int g_100e74c;
@@ -65,7 +65,7 @@ void __cdecl fcn_00482f20(char *a)
 	int i;
 	unsigned char lvl;
 
-	if ((*(unsigned int *) (a + 4) + (unsigned short) g_7f4c00.b) % 3 == 0) {
+	if ((*(unsigned int *) (a + 4) + (unsigned short) gm_GameTime.b) % 3 == 0) {
 		if (*(int *) (a + 0x1b4) & 0x20) {
 			return;
 		}
@@ -115,7 +115,7 @@ void __cdecl fcn_00482f20(char *a)
 			f = *(int *) (h + 0x39) * 3.90625e-06f;
 		}
 		f = f * 0.5f + 0.25f;
-		if (g_100b0a8 != 0) {
+		if (ai_ResourceCount != 0) {
 			if (g_100b0ac != 0) {
 				if (g_100b0f4 * g_100b0e0 * f > (1.0f - f) * g_100d10c * g_100d0f4) {
 					fcn_0048c5b0(a, t);
@@ -129,7 +129,7 @@ void __cdecl fcn_00482f20(char *a)
 			fcn_0048cdb0(a, t);
 		}
 		if (g_100dc20.owner == *(char **) (a + 0x16c)) {
-			for (i = 0; g_100dc20.count < 4 && i < g_100b0a8; i++) {
+			for (i = 0; g_100dc20.count < 4 && i < ai_ResourceCount; i++) {
 				g_100dc20.lights[g_100dc20.count] = g_100b0c0[i];
 				g_100dc20.count++;
 			}

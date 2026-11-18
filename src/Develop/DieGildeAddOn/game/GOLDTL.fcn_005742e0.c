@@ -55,7 +55,7 @@ char* __cdecl fcn_005742e0(float* rot, struct vec3* pos, unsigned char* kind, ch
 	if (!found) {
 		strcpy(name, g_6a6ee8[i].name);
 	}
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	h = fcn_004488e0(name, 0, 0);
 	if (h == 0) {

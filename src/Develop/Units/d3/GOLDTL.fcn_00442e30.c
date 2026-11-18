@@ -30,11 +30,11 @@ typedef struct {
 	int x3c8;
 } Cfg;
 
-extern char* g_1043254;
-extern char g_1042340[];
+extern char* d3_ObjectListHead;
+extern char d3_SceneObjectSentinel[];
 extern char* g_1042538;
 extern char g_1043060;
-extern char* g_1040c74;
+extern char* d3_SceneRenderListHead;
 extern char g_1040640[];
 extern int g_6b8300;
 extern int g_6b89c0;
@@ -68,11 +68,11 @@ void __cdecl fcn_00442e30(void)
 	char* d;
 	int n;
 
-	while ((*(void**)&g_1043254) != &(*(char*)g_1042340)) {
-		d3_DisposeObject((*(void**)&g_1043254));
+	while ((*(void**)&d3_ObjectListHead) != &(*(char*)d3_SceneObjectSentinel)) {
+		d3_DisposeObject((*(void**)&d3_ObjectListHead));
 	}
-	while (((void*)g_1040c74) != &(*(char*)g_1040640)) {
-		fcn_00452420(((void*)g_1040c74));
+	while (((void*)d3_SceneRenderListHead) != &(*(char*)g_1040640)) {
+		fcn_00452420(((void*)d3_SceneRenderListHead));
 	}
 	if (g_6b8300 != 0) {
 		fcn_0043bcf0(g_6b8300);
@@ -86,7 +86,7 @@ void __cdecl fcn_00442e30(void)
 		m_FreeTracked(((Cfg*)g_67a370)->x3c8);
 		((Cfg*)g_67a370)->x3c8 = 0;
 	}
-	(*(void**)&g_1043254) = &(*(char*)g_1042340);
+	(*(void**)&d3_ObjectListHead) = &(*(char*)d3_SceneObjectSentinel);
 	(*(void**)&g_1042538) = &g_1043060;
 	g_6b86c4.x = 0.0f;
 	g_6b86c4.y = 0.0f;
@@ -139,11 +139,11 @@ void __cdecl fcn_00442e30(void)
 	g_6b8058 = 0;
 	g_67a37c = 4;
 	g_67a380 = 0xf;
-	((Level*)g_10432c0)[g_6b8010].x84 = 0;
-	((Level*)g_10432c0)[g_6b8010].x80 = 0;
-	((Level*)g_10432c0)[g_6b8010].b3d5 = 0;
-	((Level*)g_10432c0)[g_6b8010].b3d4 = 0;
-	((Level*)g_10432c0)[g_6b8010].b0 = 0;
+	((Level*)g_10432c0)[d3_CurrentContextIndex].x84 = 0;
+	((Level*)g_10432c0)[d3_CurrentContextIndex].x80 = 0;
+	((Level*)g_10432c0)[d3_CurrentContextIndex].b3d5 = 0;
+	((Level*)g_10432c0)[d3_CurrentContextIndex].b3d4 = 0;
+	((Level*)g_10432c0)[d3_CurrentContextIndex].b0 = 0;
 }
 unsigned char _dpad_67b63c[1440] = {
     0x64, 0x33, 0x5f, 0x69, 0x6f, 0x5f, 0x61, 0x3a, 0x41, 0x47, 0x49, 0x50, 0x6f, 0x6c, 0x79, 0x42,

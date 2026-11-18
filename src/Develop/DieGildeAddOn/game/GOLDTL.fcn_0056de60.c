@@ -1,7 +1,7 @@
 extern unsigned char* lpGebaeudePROT;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 
 
@@ -40,5 +40,5 @@ void __cdecl fcn_0056de60(char* o)
 		x = fcn_00507400(gm_RandomMod(12) + 1, 1);
 		*(int*) (o + 0xac) = fcn_004c4fc0(2, -1, -1, gm_RandomMod(5) + 0x16, -1, x, 0, 2);
 	}
-	*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 }

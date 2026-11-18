@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
 char* __cdecl gm_AddObjekt(void);
@@ -48,5 +48,5 @@ void __cdecl fcn_0056d8c0(char* u)
 	}
 	*(int*) (u + 0x100) = 0;
 	*(int*) (u + 0x104) = 0;
-	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 }

@@ -139,7 +139,7 @@ int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
 		}
 		for (y = 0; y < 120; y++) {
 			for (x = 0; x < 160; x++) {
-				g_7ea3c0[n] = (unsigned short) fcn_0041bac0(buf[n * 3], buf[n * 3 + 1], buf[n * 3 + 2]);
+				ls_SavePreviewPixels[n] = (unsigned short) fcn_0041bac0(buf[n * 3], buf[n * 3 + 1], buf[n * 3 + 2]);
 				n++;
 			}
 		}

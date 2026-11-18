@@ -1,5 +1,5 @@
 #include <string.h>
-extern int g_102d028, g_102d02c, g_67d388, g_67d370; extern char* g_1015ea0;
+extern int g_102d028, g_102d02c, g_67d388, d2_CurrentElementId; extern char* g_1015ea0;
 char* __cdecl fcn_0045bde0(char*);
 char __cdecl fcn_00444860(float, float, int, char*, float*, float*);
 /* ADDRESS: GOLDTL 0x0046acf0 */
@@ -96,7 +96,7 @@ found:
 					g_67d388 = *(int*) (obj + 0x88);
 					continue;
 				}
-				g_67d370 = (*(int**) (t + 0x28))[j];
+				d2_CurrentElementId = (*(int**) (t + 0x28))[j];
 				if (*(int*) (obj + 0x40)) {
 					g_67d388 = **(int**) (obj + 0x40);
 				}
@@ -105,6 +105,6 @@ found:
 		}
 		p -= 4;
 	}
-	g_67d370 = -1;
+	d2_CurrentElementId = -1;
 	return -1;
 }

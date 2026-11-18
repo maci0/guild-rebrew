@@ -52,7 +52,7 @@ void __cdecl fcn_005d7cf0(void)
 	io_AppendText(0x2004);
 	(*(Player**)&g_77255c)->scroll = -g_fb9070;
 	i = 0;
-	g_7725c8 = 1;
+	d2_SuppressOverlay = 1;
 	while (fcn_005373e0(fcn_005d7cf0, 0x24087)) {
 		if (g_14ce8e0 || g_14cf950) {
 			g_774654 = 1;
@@ -93,5 +93,5 @@ void __cdecl fcn_005d7cf0(void)
 	fcn_00469e30(0x797);
 	fcn_00473150(fade);
 	fcn_004730c0(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 10);
-	g_7725c8 = 0;
+	d2_SuppressOverlay = 0;
 }

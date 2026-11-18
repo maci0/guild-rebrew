@@ -5,7 +5,7 @@
 typedef Rec18_68da68 Rec18;
 // SIZE 0x18
 
-extern Rec18_68da68 g_9a9220[42];
+extern Rec18_68da68 amt_OfficeSlots[42];
 extern Rec18_68da68 g_68da68[];
 
 int __cdecl fcn_004e8cb0(int all, int max, Rec18* out)
@@ -18,8 +18,8 @@ int __cdecl fcn_004e8cb0(int all, int max, Rec18* out)
 		if (n >= max) {
 			break;
 		}
-		if (g_68da68[g_9a9220[i].type].x4 == 7 && (all != 0 || g_9a9220[i].x4 != -1)) {
-			*out = g_9a9220[i];
+		if (g_68da68[amt_OfficeSlots[i].type].x4 == 7 && (all != 0 || amt_OfficeSlots[i].x4 != -1)) {
+			*out = amt_OfficeSlots[i];
 			n++;
 			out++;
 		}

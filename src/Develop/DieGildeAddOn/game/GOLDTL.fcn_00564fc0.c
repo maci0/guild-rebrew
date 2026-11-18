@@ -19,7 +19,7 @@ struct msg {
 	char pad5c[0x9c];
 };
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5530(struct msg*);
@@ -46,7 +46,7 @@ void __cdecl fcn_00564fc0(char* u)
 				m.target = -1;
 				m.code = 9;
 				m.owner = *(int*) (u + 0xac);
-				m.when = g_7f4c00;
+				m.when = gm_GameTime;
 				m.who = *(int*) (u + 0xac);
 				fcn_004c5530(&m);
 			}

@@ -33,7 +33,7 @@ typedef struct Req {
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_10069a0[];
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 extern signed char g_6a3440;
@@ -102,10 +102,10 @@ void __cdecl fcn_004b5df0(int flags)
 	mode = flags | 0x80;
 	do {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == b_ok) {
+			if (d2_CurrentElementId == b_ok) {
 				done = 1;
 				g_774654 = 1;
-			} else if (g_67d370 == b_back) {
+			} else if (d2_CurrentElementId == b_back) {
 				g_6a3440 = -1;
 				m1.id = ent->x4;
 				m1.x10 = 0;
@@ -114,7 +114,7 @@ void __cdecl fcn_004b5df0(int flags)
 					fcn_00535960();
 				}
 				g_774654 = 1;
-			} else if (g_67d370 == b_quit) {
+			} else if (d2_CurrentElementId == b_quit) {
 				g_6a3440 = -1;
 				m2.id = ent->x4;
 				cancel = 1;

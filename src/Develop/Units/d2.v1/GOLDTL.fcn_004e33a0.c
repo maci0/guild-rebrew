@@ -7,7 +7,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_772f3c;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern unsigned char* lpGebaeudePROT;
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } Building4e33a0;
 extern unsigned short g_774970;
@@ -265,8 +265,8 @@ void __cdecl fcn_004e33a0(int* arg)
 		if (arg[3] == *(int*) ((unsigned short) g_774970 * 0x21c
 		    + 0x7f4ca4)) {
 			fcn_004c5f60(*(int*) ((char*) building + 1),
-			    *(int*) (g_773da8 + 4),
-			    *(int*) (g_773da8 + 4));
+			    *(int*) (gm_CityEntity + 4),
+			    *(int*) (gm_CityEntity + 4));
 		}
 	} else {
 		fcn_004e4b40(result, bank_bids, "_VERSTEIGERUNG_GEBOTE", 6,
@@ -290,7 +290,7 @@ void __cdecl fcn_004e33a0(int* arg)
 			fcn_004c4570(4, 1, 0x6d, &cur);
 			fcn_004c5360();
 			fcn_004c5f60(*(int*) ((char*) building + 1),
-			    *(int*) (g_773da8 + 4),
+			    *(int*) (gm_CityEntity + 4),
 			    *(int*) ((char*) bidders[besti] + 4));
 			other = (int) fcn_0050e4a0(1);
 			other = fcn_00502cd0(*(int*) ((char*) other + 0x5d), 2, 6, 0, 0x115);

@@ -7,7 +7,7 @@ extern float g_696540[];
 extern float g_696550[];
 extern double g_6629c8;
 extern double g_662908;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern unsigned char g_773d75;
 
@@ -58,7 +58,7 @@ void __cdecl fcn_00560290(char* a0)
 	unsigned char* v9;
 	unsigned short* id;
 
-	win = fcn_00500e20(&g_7f4c00);
+	win = fcn_00500e20(&gm_GameTime);
 	value = g_7f4c04 & 0xffff;
 	sel = 0;
 	if (((g_696550[win] <= (float) value) || ((float) value < g_696540[win])) && (*(int*) (a0 + 0x70) != -1) && (*(int*) (a0 + 0x70) != -2)) {
@@ -196,7 +196,7 @@ void __cdecl fcn_00560290(char* a0)
 			if (!q) {
 				break;
 			}
-			win = fcn_00500e20(&g_7f4c00);
+			win = fcn_00500e20(&gm_GameTime);
 			if (((Building560290*) lpGebaeudePROT)[*v9].kind != 0x20) {
 				scale = (double) fcn_0050c710(v9, 0xb, 1) * *(double*) 0x665eb0 + g_6629c8;
 			} else {

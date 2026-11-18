@@ -1,7 +1,7 @@
 
 
 extern int d3_ActiveCameraAnimation;
-extern int g_6b5cbc;
+extern int d3_CameraAnimating;
 #include "Develop/Units/d3/d3_camera.h"
 extern char* g_6b5cf8;
 extern int g_67a370;
@@ -18,10 +18,10 @@ void __cdecl fcn_00418860(char*);
 void __cdecl fcn_00413380(void)
 {
 	if ((*(char**)&d3_ActiveCameraAnimation) != 0) {
-		g_6b5cbc = 1;
+		d3_CameraAnimating = 1;
 		if ((*(char**)&d3_ActiveCameraAnimation)[0x2d] & 0x20) {
-			fcn_00433780(g_6b8014);
-			g_6b5cbc = 0;
+			fcn_00433780(d3_ActiveCamera);
+			d3_CameraAnimating = 0;
 			(*(char**)&d3_ActiveCameraAnimation) = 0;
 		}
 	}

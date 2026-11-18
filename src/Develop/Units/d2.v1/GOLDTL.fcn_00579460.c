@@ -8,7 +8,7 @@ struct house {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f884;
@@ -63,7 +63,7 @@ void __cdecl fcn_00579460(char* u)
 		*(int*) (u + 0x70) = 1;
 		break;
 	case 1:
-		if (fcn_00500cb0(&g_7f4c00, u + 0x52) > 0) {
+		if (fcn_00500cb0(&gm_GameTime, u + 0x52) > 0) {
 			fcn_00579410(p, &((struct house*)g_7f4ca0)[g_774970]);
 			fcn_00545780(u);
 			fcn_00546190(u);

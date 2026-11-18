@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
-extern int g_7e46ac;
+extern int main_LoopFlags;
 
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl io_AppendText(char*, ...);
@@ -40,7 +40,7 @@ void __cdecl fcn_005b4660(char* e)
 	int d;
 	void* p;
 
-	flags = g_7e46ac;
+	flags = main_LoopFlags;
 	flags &= 0xffffffc7;
 	dialog = fcn_00470820(0, 0, "misc\\Messagebox_BIG");
 	io_AppendText("$Z$[%1N4$]$N$L", *(unsigned short*) e);
@@ -52,13 +52,13 @@ void __cdecl fcn_005b4660(char* e)
 	fcn_00471b60(dialog);
 	while (fcn_005373e0((void*) fcn_005b4660, flags) != 0) {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == hKill) {
+			if (d2_CurrentElementId == hKill) {
 				fcn_004ff210(*(unsigned short*) e, -2000);
 				g_774654 = 1;
-			} else if (g_67d370 == hShow) {
+			} else if (d2_CurrentElementId == hShow) {
 				fcn_00471af0(dialog, 0);
 				fcn_00471af0(dialog, 1);
-			} else if (g_67d370 == hMarriage) {
+			} else if (d2_CurrentElementId == hMarriage) {
 				fcn_00471af0(dialog, 0);
 				if (*(int*) (e + 0x5c) == -1) {
 					memset(buf, 0, 0x50);
@@ -78,7 +78,7 @@ void __cdecl fcn_005b4660(char* e)
 					}
 				}
 				fcn_00471af0(dialog, 1);
-			} else if (g_67d370 == hChild) {
+			} else if (d2_CurrentElementId == hChild) {
 				fcn_00471af0(dialog, 0);
 				if (*(int*) (e + 0x5c) != -1) {
 					for (i = 3; i < 8; i++) {

@@ -26,7 +26,7 @@ struct IDev {
 };
 
 extern void* g_6b5de0;
-extern int g_6b805c;
+extern int d3_FogColor;
 extern float g_10425fc;
 extern float g_104329c;
 
@@ -79,5 +79,5 @@ void __cdecl fcn_00438920(float a, float b, int c)
 		g_104329c = b;
 	}
 	g_6b8060 = on;
-	g_6b805c = c;
+	d3_FogColor = c;
 }

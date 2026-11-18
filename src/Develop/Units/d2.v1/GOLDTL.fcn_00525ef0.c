@@ -2,11 +2,11 @@
 extern char g_6b5c60[];
 extern int g_6772c4;
 extern int g_6b5c80;
-extern int g_6b5c84;
-extern int g_6772bc;
-extern int g_6772c0;
+extern int d2_MouseTopBoundary;
+extern int d2_MouseRightBoundary;
+extern int d2_MouseBottomBoundary;
 extern int g_1040494;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 
 
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -24,7 +24,7 @@ void __cdecl fcn_00525ef0(void)
 	fcn_00475220(g_6b5c60);
 	g_6772c4 = 1;
 	g_6b5c80 = 0;
-	g_6b5c84 = 0;
-	g_6772bc = g_1040494 - 8;
-	g_6772c0 = g_1040490;
+	d2_MouseTopBoundary = 0;
+	d2_MouseRightBoundary = g_1040494 - 8;
+	d2_MouseBottomBoundary = d2_ScreenHeight;
 }

@@ -10,7 +10,7 @@ void __cdecl fcn_005a0ad0(int a, unsigned char* p)
 {
 	int y, x, i;
 
-	fcn_0046f2c0(g_772514, 1);
+	fcn_0046f2c0(d2_CurrentWindowId, 1);
 	io_AppendText(g_6a9694, a);
 
 	if (*(char*) (*(int*) p + 2) == 6) {
@@ -18,7 +18,7 @@ void __cdecl fcn_005a0ad0(int a, unsigned char* p)
 		x = 0x1c;
 		y = 0x1d;
 		while (i < p[4]) {
-			fcn_0046f740(x, y, p[0xc + i] + 0x75a, g_772514);
+			fcn_0046f740(x, y, p[0xc + i] + 0x75a, d2_CurrentWindowId);
 			i++;
 			if (i % 8 == 0) {
 				x = 0;
@@ -28,14 +28,14 @@ void __cdecl fcn_005a0ad0(int a, unsigned char* p)
 			}
 			y = i > 7 ? 0x46 : 0x1d;
 		}
-		fcn_0046f740(x, y, gm_RandomMod(6) + 0x75b, g_772514);
+		fcn_0046f740(x, y, gm_RandomMod(6) + 0x75b, d2_CurrentWindowId);
 	}
 	else {
 		i = 0;
 		x = 0x1c;
 		y = 0x1d;
 		while (i < p[4]) {
-			fcn_0046f740(x, y, 0x761, g_772514);
+			fcn_0046f740(x, y, 0x761, d2_CurrentWindowId);
 			i++;
 			if (i % 8 == 0) {
 				x = 0;
@@ -45,6 +45,6 @@ void __cdecl fcn_005a0ad0(int a, unsigned char* p)
 			}
 			y = i > 7 ? 0x46 : 0x1d;
 		}
-		fcn_0046f740(x, y, gm_RandomMod(6) + 0x75b, g_772514);
+		fcn_0046f740(x, y, gm_RandomMod(6) + 0x75b, d2_CurrentWindowId);
 	}
 }

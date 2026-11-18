@@ -52,12 +52,12 @@ extern char* g_1015ea0;
 extern char s_6ace6c[];
 extern char s_679060[];
 extern char s_68be7c[];
-extern int g_772514;
-extern int g_7e46ac;
+extern int d2_CurrentWindowId;
+extern int main_LoopFlags;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 void __cdecl fcn_004942a0(House*, Share*);
 int __cdecl fcn_00470820(int, int, char*);
@@ -91,33 +91,33 @@ int __cdecl fcn_005dbb60(int unused, unsigned short* p)
 	io_AppendText(0x1a9d, (((unsigned char*) p)[9] != 0) + 0x1aa0, *p, 5);
 	d2_SetForm(dlg, 2);
 	for (i = 0; i < 3; i++) {
-		ids[i] = fcn_0046f740(0x14, i * 0x5a + 10, 0x4c6, g_772514);
+		ids[i] = fcn_0046f740(0x14, i * 0x5a + 10, 0x4c6, d2_CurrentWindowId);
 		((Slot*)g_1015ea0)[ids[i]].shown = 1;
 		((Slot*)g_1015ea0)[ids[i]].style = 3;
 		io_FormatTextBuffer(text, s_679060, ((Player*)g_868060)[i + 1].name);
-		d2_ShowTxt(0xbe, i * 0x5a + 10, text, g_772514);
+		d2_ShowTxt(0xbe, i * 0x5a + 10, text, d2_CurrentWindowId);
 		io_FormatTextBuffer(text, s_679060, shares[i].kind + 0x16b7);
-		d2_ShowTxt(0xbe, i * 0x5a + 10 + 0x14, text, g_772514);
+		d2_ShowTxt(0xbe, i * 0x5a + 10 + 0x14, text, d2_CurrentWindowId);
 		io_FormatTextBuffer(text, s_679060, shares[i].goal + 0x16b7);
-		d2_ShowTxt(0xbe, i * 0x5a + 10 + 0x28, text, g_772514);
+		d2_ShowTxt(0xbe, i * 0x5a + 10 + 0x28, text, d2_CurrentWindowId);
 		io_FormatTextBuffer(text, s_68be7c, shares[i].amount);
-		d2_ShowTxt(0xbe, i * 0x5a + 10 + 0x3c, text, g_772514);
+		d2_ShowTxt(0xbe, i * 0x5a + 10 + 0x3c, text, d2_CurrentWindowId);
 	}
 	d2_SetForm(dlg, 3);
 	ids[3] = fcn_00472250(dlg, 3, io_AppendText(0x1ba8));
 	d2_SetOverlayAnimation(0, 0);
 	g_100f1dc = -1;
 	result = 0;
-	while (fcn_005373e0((void*) fcn_005dbb60, g_7e46ac) != 0) {
+	while (fcn_005373e0((void*) fcn_005dbb60, main_LoopFlags) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == ids[3]) {
+			if (d2_CurrentElementId == ids[3]) {
 				g_774654 = 1;
 			} else {
 				for (i = 0; i < 3; i++) {
-					if (g_67d370 == ids[i]) {
+					if (d2_CurrentElementId == ids[i]) {
 						m.b36 = 0x12;
 						m.b4 = 0x5f;
 						m.f8 = *(int*) (p + 2);

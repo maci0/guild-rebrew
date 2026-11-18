@@ -4,7 +4,7 @@
 
 extern int g_6b86d4;
 extern float g_1040d00[0x400];
-extern int g_6b86fc;
+extern int d3_MaxActiveLights;
 extern int g_6b8700;
 extern void* g_6b870c;
 extern int g_6b8704;
@@ -23,7 +23,7 @@ void __cdecl fcn_00450a30(int nlist, int nactive)
 	for (i = 0; i < 0x400; i++) {
 		g_1040d00[i] = 1.0f - (float) acos(i * 0.0009765625f) * 0.63661975f;
 	}
-	g_6b86fc = nactive;
+	d3_MaxActiveLights = nactive;
 	g_6b8700 = 0;
 	g_6b870c = m_alloc(nactive * 12, g_67bc38);
 	g_6b8704 = nlist;

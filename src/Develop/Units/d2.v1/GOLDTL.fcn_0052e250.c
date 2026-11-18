@@ -22,7 +22,7 @@ extern char g_6a2f24[];
 extern char g_6a2f5c[];
 extern char* g_7746c4;
 extern unsigned char* g_7746c8;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
@@ -75,7 +75,7 @@ void __cdecl fcn_0052e250(unsigned short* item)
 		io_AppendText(g_6a2f5c, *item * 2 + 0x9a8);
 	}
 	d2_SetForm(g_6a25b8, 0);
-	id = fcn_0046f740(((((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1) - 1, 0x48, *item + 0xdf, g_772514);
+	id = fcn_0046f740(((((Slot*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1, 0x48, *item + 0xdf, d2_CurrentWindowId);
 	((Ent*)g_1015ea0)[id].f5c = 1;
 	rec = lpObjektePROT + *item * 0x41;
 	if (store != 0 && (*rec == 2 || *rec == 6)) {

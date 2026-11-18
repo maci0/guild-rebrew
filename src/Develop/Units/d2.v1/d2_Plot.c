@@ -12,7 +12,7 @@ typedef Obj_1038140 Obj;
 
 extern Obj_1038140 g_1038140[];
 extern int g_772534;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern char s_67d7d0[];
 
@@ -27,7 +27,7 @@ void __cdecl d2_Plot(int x, int y, unsigned char r, unsigned char g, unsigned ch
 {
 	D2_WIN* w;
 
-	w = &((D2_WIN*)g_1015f40)[g_772514];
+	w = &((D2_WIN*)g_1015f40)[d2_CurrentWindowId];
 	if (w->active == 0) {
 		return;
 	}
@@ -35,12 +35,12 @@ void __cdecl d2_Plot(int x, int y, unsigned char r, unsigned char g, unsigned ch
 		ReportClientMessage("d2_Plot:Window is not a paintbox!");
 		return;
 	}
-	if (x < (unsigned char) g_772558 || x > w->width - (unsigned char) g_772558
-	    || y < (unsigned char) g_772558 || y > w->height - (unsigned char) g_772558) {
+	if (x < (unsigned char) d2_PlotRadius || x > w->width - (unsigned char) d2_PlotRadius
+	    || y < (unsigned char) d2_PlotRadius || y > w->height - (unsigned char) d2_PlotRadius) {
 		return;
 	}
 	fcn_00475fd0(w->surf);
-	switch ((unsigned char) g_772558) {
+	switch ((unsigned char) d2_PlotRadius) {
 	case 0:
 		fcn_00476b10(x, y, r, g, b, w->surf);
 		break;

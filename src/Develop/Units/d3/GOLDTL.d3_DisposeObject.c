@@ -33,7 +33,7 @@ void __cdecl d3_DisposeObject(char* obj)
 	if (obj == 0) {
 		return;
 	}
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	u = *(char**) (obj + 0x20c);
 	idx = -1;
 	if (((char*)g_67a370) != u) {

@@ -18,7 +18,7 @@ typedef struct {
 
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern char g_77531c;
@@ -42,7 +42,7 @@ int __cdecl fcn_005b9df0(int idx, char* p, char* q, char* r)
 
 	res = 0;
 	for (e = fcn_005463a0(2, 3, *(int*) (p + 2), 0, 0x11); e != 0; e = he_fn_Handlung()) {
-		*(Stamp5b9d*) (e + 0x52) = (*(Stamp5b9d*)&g_7f4c00);
+		*(Stamp5b9d*) (e + 0x52) = (*(Stamp5b9d*)&gm_GameTime);
 		*(int*) (e + 0x70) = -1;
 	}
 	if (fcn_0057eba0(0x24, r, 0, 0) == 1) {
@@ -51,7 +51,7 @@ int __cdecl fcn_005b9df0(int idx, char* p, char* q, char* r)
 		*(int*) (msg + 8) = ((Ent5b9d*)g_7f4ca0)[idx].f4;
 		*(int*) (msg + 0xc) = -1;
 		msg[0x36] = 2;
-		*(Stamp5b9d*) (msg + 0x28) = (*(Stamp5b9d*)&g_7f4c00);
+		*(Stamp5b9d*) (msg + 0x28) = (*(Stamp5b9d*)&gm_GameTime);
 		fcn_00500bb0((Stamp5b9d*) (msg + 0x28), 0, 0, 1);
 		*(int*) (msg + 0x58) = *(int*) (p + 2);
 		*(int*) (msg + 0x5c) = *(int*) (q + 1);

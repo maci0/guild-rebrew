@@ -16,7 +16,7 @@ typedef struct
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern char s_67d420[];
 
@@ -44,18 +44,18 @@ int __cdecl fcn_0046fdf0(int x, int y, char* text, int win)
 	if (w->i[0x28c / 4] != 0) {
 		((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x84 / 4] = w->i[0x28c / 4];
 	} else {
-		((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x84 / 4] = g_67d398;
+		((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x84 / 4] = d2_DefaultFont;
 	}
 	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x20 / 4] = 0x46;
 	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x10 / 4] = w->i[0x4 / 4] + x;
 	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x14 / 4] = w->i[0x8 / 4] - w->i[0x258 / 4] + y;
 	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x18 / 4] = fcn_0046b520(text, ((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x84 / 4]) + 0x60;
-	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x1c / 4] = g_1015ea4;
+	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x1c / 4] = d2_FontHeight;
 	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x24 / 4] = 2;
 	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x40 / 4] = (int) w;
 	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0xc / 4] = (int) w;
 	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x30 / 4] = 0;
-	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x34 / 4] = g_1040490;
+	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x34 / 4] = d2_ScreenHeight;
 	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x28 / 4] = 0;
 	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x2c / 4] = g_1040494;
 	((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x50 / 4] = ((fcn_0046fdf0_Ent*)g_1015ea0)[w->i[0x27c / 4]].i[0x50 / 4];

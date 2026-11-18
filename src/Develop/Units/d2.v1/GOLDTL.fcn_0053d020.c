@@ -1,4 +1,4 @@
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
@@ -45,10 +45,10 @@ unsigned int __cdecl fcn_0053d020(int a0)
 	d2_SetForm(win, 1);
 	io_AppendText(0x1acf, (char*) 0x7e1d00);
 	d2_SetForm(win, 2);
-	n = (*(int*) (g_772514 * 0x3cc + 0x1015f4c) - 0x20) / 0x30;
+	n = (*(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0x20) / 0x30;
 	i = 0;
 	do {
-		slot = fcn_0046f740((i % n) * 0x30, (i / n) * 0x30, i + 0x59a, g_772514);
+		slot = fcn_0046f740((i % n) * 0x30, (i / n) * 0x30, i + 0x59a, d2_CurrentWindowId);
 		items[i] = slot;
 		v = slot * 0x2f4;
 		i++;

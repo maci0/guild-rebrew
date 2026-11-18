@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/entity.h"
 
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern char* lpObjektePROT;
 extern unsigned char* g_entity_ptr;
 
@@ -58,7 +58,7 @@ int __cdecl fcn_00509620(int a0, int a1)
 			kind = gm_GetBuildingTypeCategory(ep[0]);
 			if (kind == 2 && *(unsigned short*) (ep + 0x27) == p->entity_index)
 				kind = fcn_005059b0(ep,
-					*(unsigned short*) g_773da8, *(unsigned short*) g_773da8);
+					*(unsigned short*) gm_CityEntity, *(unsigned short*) gm_CityEntity);
 		}
 	}
 	p_slot = p->entity_index;

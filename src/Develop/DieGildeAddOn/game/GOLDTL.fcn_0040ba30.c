@@ -70,12 +70,12 @@ void __cdecl fcn_0040ba30(Fade* f)
 		if (*(char**) (e + 0x22c) != 0) {
 			fcn_0043a3f0(*(char**) (e + 0x22c), *(int*) (*(char**) (e + 0x22c) + 0x1cc), col);
 		}
-		f->start = (float) (g_6b5c24 - 1);
+		f->start = (float) (ch_UpdateTime - 1);
 		*(unsigned short*) (e + 0x8c) = (*(unsigned short*) (e + 0x8c) & 0xbfff) | 0x40;
 	}
 	alpha = f->fade_in == 0
-	    ? 1.0f - (g_6b5c24 - f->start) * 0.02f
-	    : (g_6b5c24 - f->start) * 0.02f;
+	    ? 1.0f - (ch_UpdateTime - f->start) * 0.02f
+	    : (ch_UpdateTime - f->start) * 0.02f;
 	if (!(alpha > 0.0f)) {
 		alpha = 0.0f;
 	} else if (!(alpha < 1.0f)) {
@@ -83,7 +83,7 @@ void __cdecl fcn_0040ba30(Fade* f)
 	}
 	if (*(int*) (e + 0x88) == g_67a370 && f->fade_in != 0 && (*(unsigned short*) (e + 0x8c) & 0x4000) == 0 &&
 	    alpha < 0.1 && fcn_00405d70(e, &hit.ent, 30.0f) != 0) {
-		f->start = (float) (g_6b5c24 - 1);
+		f->start = (float) (ch_UpdateTime - 1);
 		*(unsigned short*) (hit.ent + 0x8c) |= 0x4000;
 		ch_InsertAction(e, (char*) f, 0x3b, 0x4b);
 		return;

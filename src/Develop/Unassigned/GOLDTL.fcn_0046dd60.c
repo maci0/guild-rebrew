@@ -97,10 +97,10 @@ void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
 	else if (w->img != 0)
 		fcn_0047cb60(w->x - w->sx, w->y - w->sy, dst, w->img);
 	if (w->tex != -1 && (tex = d2_GetResourceData(w->tex)) != 0) {
-		s1 = g_7725f8;
+		s1 = d2_ClipLeft;
 		s2 = g_7725fc;
-		s3 = g_67d964;
-		s4 = g_67d968;
+		s3 = d2_ClipRight;
+		s4 = d2_ClipBottom;
 		fcn_0047a040(w->x, w->y, w->w + w->x, w->h + w->y);
 		d = &((fcn_0046dd60_Def*)g_772500)[w->tex];
 		if (w->sy >= 0)

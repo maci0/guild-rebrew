@@ -105,7 +105,7 @@ int __cdecl fcn_0046aee0(int x, int y)
 				}
 				if (y >= top && y <= bottom && x >= left && x <= right && !s->hidden48 && (s->f5c || s->f58 || s->type == 0x41 || s->f64)) {
 					if (!s->hidden4c) {
-						g_67d374 = g_67d370 = s->id;
+						g_67d374 = d2_CurrentElementId = s->id;
 						if (s->link) {
 							g_67d388 = *s->link;
 						}
@@ -117,14 +117,14 @@ int __cdecl fcn_0046aee0(int x, int y)
 					if (g_67d374 == -1) {
 						g_67d374 = s->id;
 					}
-					g_67d370 = -1;
+					d2_CurrentElementId = -1;
 				}
 			}
 		}
 	}
 	r = fcn_0046acf0(x, y);
 	if (r == -1) {
-		g_67d370 = -1;
+		d2_CurrentElementId = -1;
 		r = -1;
 	}
 	return r;

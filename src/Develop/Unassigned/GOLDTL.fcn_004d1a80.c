@@ -12,7 +12,7 @@ typedef struct
 
 extern int g_67a370;
 extern Ent21c g_9b4a40[32];
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 
 void __cdecl fcn_004d1a80(void)
 {
@@ -21,14 +21,14 @@ void __cdecl fcn_004d1a80(void)
 	int i;
 
 	self = g_67a370;
-	memset(((Ent21c**)g_7e4260), 0, sizeof(Ent21c*[32]));
+	memset(((Ent21c**)ch_ContextCharacters), 0, sizeof(Ent21c*[32]));
 	n = 0;
 	for (i = 0; i < 32; i++) {
 		if (n >= 31) {
 			break;
 		}
 		if (g_9b4a40[i].ref != 0 && *(int*) (g_9b4a40[i].ref + 0x88) == self) {
-			((Ent21c**)g_7e4260)[n] = &g_9b4a40[i];
+			((Ent21c**)ch_ContextCharacters)[n] = &g_9b4a40[i];
 			n++;
 		}
 	}

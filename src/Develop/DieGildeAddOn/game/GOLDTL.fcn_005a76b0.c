@@ -97,13 +97,13 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     g_6a2520 = 0;
     fcn_00530510();
     fcn_005305a0();
-    x = *(int*) &g_6b8010;
+    x = *(int*) &d3_CurrentContextIndex;
     *(int*) 0x7746d0 = 0;
     *(u16*) (o + 0x29) = (u16) p2;
     *(int*) &saved.pos[0] = *(int*) &g_7e3a40;
     *(int*) &saved.pos[1] = *(int*) &g_7e3a44;
     *(int*) &saved.pos[2] = *(int*) &g_7e3a48;
-    *(int*) &saved.rot[0] = *(int*) &g_7e3a50;
+    *(int*) &saved.rot[0] = *(int*) &d3_CameraTargetRotation;
     *(int*) &saved.rot[1] = *(int*) &g_7e3a54;
     *(int*) &saved.rot[2] = *(int*) &g_7e3a58;
     if (p2 == 0)
@@ -121,17 +121,17 @@ int __cdecl fcn_005a76b0(char* o, int p2)
         g_774658 = g_774650 + 1;
         msg = (char*) fcn_00502cd0(*(int*) (o + 0x5d), 1, 0, (int) *(u16*) (o + 0x29));
         if (msg != 0) {
-            c = ((u8*) &g_7f3b40)[*(u16*) msg];
+            c = ((u8*) &init_SceneContextIndices)[*(u16*) msg];
             if (c != 0xfe) {
                 if (c == 0xff ||
                     *(signed char*) (0x1043695 + 0x3dc * (int) (signed char) c) != 0) {
-                    g_7725c8 = 1;
+                    d2_SuppressOverlay = 1;
                     fcn_005373e0((void*) 0, 0x603c7);
                     fcn_005373e0((void*) 0, 0x603c7);
                     fcn_00510c90((int) *(u16*) msg);
-                    g_7725c8 = 0;
+                    d2_SuppressOverlay = 0;
                 }
-                if (*(int*) &g_6b8010 != 0)
+                if (*(int*) &d3_CurrentContextIndex != 0)
                     fcn_0043a9c0(3);
                 *(int*) &g_7746c4 = (int) o;
                 *(int*) &g_7746cc = (int) msg;
@@ -139,16 +139,16 @@ int __cdecl fcn_005a76b0(char* o, int p2)
                 g_67530c = *(int*) (o + 1);
                 g_675310 = *(int*) (msg + 2);
                 *(u16*) (o + 0x29) = *(u16*) msg;
-                fcn_004432d0((int) (signed char) ((u8*) &g_7f3b40)[*(u16*) msg], 0);
+                fcn_004432d0((int) (signed char) ((u8*) &init_SceneContextIndices)[*(u16*) msg], 0);
                 fcn_0043aa30(3);
                 fcn_00437ac0((void*) *(int*) &g_67a370, 0, 0xe0, (void*) 0x456df0);
                 fcn_005166a0(o);
                 t = *(int*) &g_7746c4;
                 fcn_005167c0((char*) t, (int) *(u16*) (t + 0x29));
                 fcn_00516c50((char*) *(int*) &g_7746c4, (char*) *(int*) &g_7746cc);
-                t = *(int*) &g_6b8014;
+                t = *(int*) &d3_ActiveCamera;
                 fcn_00438b40((void*) t, (char*) t + 0x5c);
-                t = *(int*) &g_6b8014;
+                t = *(int*) &d3_ActiveCamera;
                 fcn_00438cb0((void*) t, (char*) t + 0x90);
                 t = *(int*) &g_67a370;
                 if (t != 0) {
@@ -163,27 +163,27 @@ int __cdecl fcn_005a76b0(char* o, int p2)
                 if (*(u16*) (o + 0x27) != *(u16*) &g_774970) {
                     i = fcn_00504bd0((int) *(u8*) o);
                     if (i == 1 || i == 8) {
-                        if (CompareVector3WithinTolerance((char*) *(void**) &g_6b8014 + 0x114,
+                        if (CompareVector3WithinTolerance((char*) *(void**) &d3_ActiveCamera + 0x114,
                                          (void*) &g_662d70, 0.1f) == 0) {
-                            if (CompareVector3WithinTolerance((char*) *(void**) &g_6b8014 + 0x120,
+                            if (CompareVector3WithinTolerance((char*) *(void**) &d3_ActiveCamera + 0x120,
                                              (void*) &g_662d70, 0.1f) == 0) {
-                                t = *(int*) &g_6b8014;
+                                t = *(int*) &d3_ActiveCamera;
                                 fcn_00438b40((void*) t, (char*) t + 0x114);
-                                t = *(int*) &g_6b8014;
+                                t = *(int*) &d3_ActiveCamera;
                                 fcn_00438cb0((void*) t, (char*) t + 0x120);
                             }
                         }
                     }
                 }
-                t = *(int*) &g_6b8014;
+                t = *(int*) &d3_ActiveCamera;
                 *(int*) &g_7e3a40 = *(int*) (t + 0x4c);
                 *(int*) &g_7e3a44 = *(int*) (t + 0x50);
                 *(int*) &g_7e3a48 = *(int*) (t + 0x54);
-                *(int*) &g_7e3a50 = *(int*) (t + 0x84);
+                *(int*) &d3_CameraTargetRotation = *(int*) (t + 0x84);
                 *(int*) &g_7e3a54 = *(int*) (t + 0x88);
                 *(int*) &g_7e3a58 = *(int*) (t + 0x8c);
-                g_774688 = 0;
-                g_77468c = 0;
+                d3_CameraHorizontalIndex = 0;
+                d3_CameraVerticalStep = 0;
             }
             fcn_0057e880(0x19, msg, 0, 0);
             switch (*(u16*) msg) {
@@ -363,7 +363,7 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     *(int*) &g_7e3a40 = *(int*) &saved.pos[0];
     *(int*) &g_7e3a44 = *(int*) &saved.pos[1];
     *(int*) &g_7e3a48 = *(int*) &saved.pos[2];
-    *(int*) &g_7e3a50 = *(int*) &saved.rot[0];
+    *(int*) &d3_CameraTargetRotation = *(int*) &saved.rot[0];
     *(int*) &g_7e3a54 = *(int*) &saved.rot[1];
     *(int*) &g_7e3a58 = *(int*) &saved.rot[2];
     return fcn_004234e0(g_7747c8, (void*) 0x6aad8c, 1, 0x3f, 0x7f, 0, 0);

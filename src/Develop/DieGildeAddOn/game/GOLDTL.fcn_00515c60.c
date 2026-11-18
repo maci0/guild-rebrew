@@ -30,7 +30,7 @@ void __cdecl fcn_00515c60(unsigned char* a0, unsigned char* a1)
 	v9 = 0;
 	v8 = 0;
 	v3 = fcn_0050dc90(a0);
-	p = (int*) g_7e4260;
+	p = (int*) ch_ContextCharacters;
 loop:
 	if (v9) {
 		goto found;
@@ -40,7 +40,7 @@ loop:
 		v9 = v8;
 	}
 	p++;
-	if ((int) p < (int) (g_7e4260 + 32)) {
+	if ((int) p < (int) (ch_ContextCharacters + 32)) {
 		goto loop;
 	}
 	if (!v9) {

@@ -3,7 +3,7 @@
 
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 
@@ -26,7 +26,7 @@ void __cdecl fcn_00557fe0(char* u)
 		if (x == 0 || *(char**) (x + 0x61) == 0) {
 			goto kill;
 		}
-		t = g_6b8010;
+		t = d3_CurrentContextIndex;
 		fcn_004432d0(0, 1);
 		if (*(unsigned short*) (u + 0xc2) == 0x177) {
 			*(char**) (u + 0xb0) = fcn_00557f00(x);
@@ -37,7 +37,7 @@ void __cdecl fcn_00557fe0(char* u)
 		*(int*) (u + 0x70) = *(char**) (u + 0xb0) != 0 ? 1 : -1;
 		break;
 	case 1:
-		if (fcn_00500cb0(&g_7f4c00, u + 0xb4) == 1) {
+		if (fcn_00500cb0(&gm_GameTime, u + 0xb4) == 1) {
 			if (*(char**) (u + 0xb0) != 0 && m_is_tracked(*(char**) (u + 0xb0)) != 0) {
 				*(int*) (*(char**) (u + 0xb0) + 0x24) = 0;
 			}
@@ -55,7 +55,7 @@ void __cdecl fcn_00557fe0(char* u)
 	case -1:
 		gm_ResolveEntityById((void**) (&x), 0, 0, *(int*) (u + 0xac));
 		if (*(char**) (u + 0xb0) != 0 && m_is_tracked(*(char**) (u + 0xb0)) != 0) {
-			t = g_6b8010;
+			t = d3_CurrentContextIndex;
 			fcn_004432d0(0, 1);
 			fcn_00452420(*(char**) (u + 0xb0));
 			fcn_004432d0(t, 1);

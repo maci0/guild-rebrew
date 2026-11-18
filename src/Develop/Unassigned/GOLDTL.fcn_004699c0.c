@@ -1,4 +1,4 @@
-extern int g_772504,g_7725f8,g_67d964,g_7725fc,g_67d968,g_67d398,g_772568;
+extern int g_772504,d2_ClipLeft,d2_ClipRight,g_7725fc,d2_ClipBottom,d2_DefaultFont,d2_ResourceOffset;
 typedef struct { char b[0x2f4]; } Slot;
 int __cdecl fcn_00469890(void);
 int __cdecl fcn_00466260(int, int*, int*);
@@ -34,12 +34,12 @@ int __cdecl fcn_004699c0(unsigned int a0, int a1, int a2)
 	*(int*) (v1 + 0x20) = *(int*) (*(int*) &g_772500 + 0x3c + n * 0x54);
 	*(int*) (v1 + 0x10) = a0;
 	*(int*) (v1 + 0x14) = a1;
-	*(int*) (v1 + 0x28) = g_7725f8;
-	*(int*) (v1 + 0x2c) = g_67d964;
+	*(int*) (v1 + 0x28) = d2_ClipLeft;
+	*(int*) (v1 + 0x2c) = d2_ClipRight;
 	*(int*) (v1 + 0x30) = g_7725fc;
-	*(int*) (v1 + 0x34) = g_67d968;
+	*(int*) (v1 + 0x34) = d2_ClipBottom;
 	*(int*) (v1 + 0x24) = 2;
-	*(int*) (v1 + 0x84) = g_67d398;
+	*(int*) (v1 + 0x84) = d2_DefaultFont;
 	d2_AddRefcount(n);
 	kind = *(int*) (v1 + 0x20);
 	if (kind == 8) {
@@ -68,7 +68,7 @@ int __cdecl fcn_004699c0(unsigned int a0, int a1, int a2)
 		return idx;
 	case 5:
 	case 8:
-		*(int*) (v1 + 0x88) = g_772568;
+		*(int*) (v1 + 0x88) = d2_ResourceOffset;
 		tp = (char*) *(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0xc);
 		r = fcn_0047b620((int) tp, *(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0x88));
 		*(int*) (v1 + 0x18) = *(unsigned short*) (r + 2);

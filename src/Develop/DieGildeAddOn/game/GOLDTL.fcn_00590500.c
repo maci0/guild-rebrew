@@ -6,7 +6,7 @@ extern volatile int g_6b7fac;
 extern int g_774800;
 extern float g_664090;
 extern int g_67a370;
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 extern char s_6a99c4[];
 
 double __cdecl gm_RandomFloat01(void);
@@ -39,7 +39,7 @@ void __cdecl fcn_00590500(void)
 		return;
 	}
 	for (i = 0; i < 32; i++) {
-		e = g_7e4260[i];
+		e = ch_ContextCharacters[i];
 		if (e != 0 && e[2] == 0x14 && *(char**) (e + 0x184) != 0
 		    && *(int*) (*(char**) (e + 0x184) + 0x88) == g_67a370) {
 			list[n++] = e;

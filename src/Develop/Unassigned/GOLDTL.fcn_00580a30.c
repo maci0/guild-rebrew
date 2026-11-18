@@ -3,7 +3,7 @@
 
 typedef char* (__cdecl* pagefn)(void);
 
-extern int g_774a14;
+extern int d2_TutorialActive;
 extern int g_774a18;
 extern char* g_774a10;
 extern int g_6a81dc[5];
@@ -24,7 +24,7 @@ int __cdecl fcn_00580a30(void)
 	int n;
 	int i;
 
-	if (g_774a14 != 0) {
+	if (d2_TutorialActive != 0) {
 		return -3;
 	}
 	n = 0;
@@ -88,7 +88,7 @@ fail:
 	g_665f08[24] = -1;
 	g_665f08[26] = -1;
 	g_665f08[27] = -1;
-	g_774a14 = 1;
+	d2_TutorialActive = 1;
 	g_774a18 = 1;
 	return 0;
 }

@@ -25,12 +25,12 @@ typedef struct {
 typedef List8c_102cbc8 List8c;
 
 extern char g_772f74;
-extern int g_7e46ac;
-extern int g_772514;
+extern int main_LoopFlags;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern char* g_1015ea0;
 extern int g_100f1dc;
-extern int g_100f894;
+extern int d2_HoveredWindow;
 extern List8c_102cbc8 g_102cbc8[];
 extern char g_14cf950;
 extern int g_14ce8e0;
@@ -90,7 +90,7 @@ int __cdecl fcn_004e6eb0(char *text, unsigned int flags)
 	if (g_772f74 != 0) {
 		return 0;
 	}
-	mode = g_7e46ac & ~0x38;
+	mode = main_LoopFlags & ~0x38;
 	if (flags & 2) {
 		h = fcn_00470820(0, 0, "misc\\Messagebox_Autosize");
 	} else if (flags & 0x10) {
@@ -107,7 +107,7 @@ int __cdecl fcn_004e6eb0(char *text, unsigned int flags)
 		mode = 0x717c6;
 	}
 	io_AppendText(text);
-	me = g_772514;
+	me = d2_CurrentWindowId;
 	fcn_00471b60(h);
 	g_772f74 = 1;
 	list = d2_CreateRadioGroup(0);
@@ -121,17 +121,17 @@ int __cdecl fcn_004e6eb0(char *text, unsigned int flags)
 	d2_SetForm(h, 0);
 	f80 = flags & 0x80;
 	if (f80) {
-		id = fcn_004677e0(0x1c, ((Screen*)g_77255c)->h - 0x18, ((Screen*)g_77255c)->w - 0x40, 0, 500, 0x83, 0x42, g_772514);
+		id = fcn_004677e0(0x1c, ((Screen*)g_77255c)->h - 0x18, ((Screen*)g_77255c)->w - 0x40, 0, 500, 0x83, 0x42, d2_CurrentWindowId);
 	}
 	while (fcn_005373e0(fcn_004e6eb0, mode) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
 			fcn_004707d0(h);
 		}
-		if (g_100f1dc == 2 && g_100f894 == me) {
+		if (g_100f1dc == 2 && d2_HoveredWindow == me) {
 			result = g_102cbc8[list].n + 1;
 			g_774654 = 1;
-		} else if ((g_100f1dc == 1 && g_100f894 == me) || g_14cf950 == 1) {
+		} else if ((g_100f1dc == 1 && d2_HoveredWindow == me) || g_14cf950 == 1) {
 			result = 0;
 			g_774654 = 1;
 		}

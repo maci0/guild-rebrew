@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern char g_6795b4[];
 extern char g_6795a8[];
 extern char g_679584[];
@@ -32,11 +32,11 @@ int __cdecl fcn_00427f00(char* g)
 	*b = 0;
 	*(void**) (g + 0x108) = m_alloc(0x1800, g_6795a8);
 	*(void**) (g + 0x10c) = m_alloc(0x5300, g_6795b4);
-	saved = g_6b7e98;
-	g_6b7e98 = g;
+	saved = evt_CurrentScript;
+	evt_CurrentScript = g;
 	*(int*) (g + 0x118) = *(int*) (g + 0x11c);
 	for (;;) {
-		fcn_00426680(*(int*) (g_6b7e98 + 0x118), tok);
+		fcn_00426680(*(int*) (evt_CurrentScript + 0x118), tok);
 		if (tok[0] == 8 && depth == 0) {
 			if (fcn_00427830(g, tok[1]) == 0) {
 				m_FreeTracked(a);
@@ -104,7 +104,7 @@ int __cdecl fcn_00427f00(char* g)
 		m_FreeTracked(*(void**) (g + 0x10c));
 		*(void**) (g + 0x10c) = 0;
 	}
-	g_6b7e98 = saved;
+	evt_CurrentScript = saved;
 	m_FreeTracked(a);
 	m_FreeTracked(b);
 	return 1;

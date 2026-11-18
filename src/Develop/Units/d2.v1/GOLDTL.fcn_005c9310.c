@@ -27,7 +27,7 @@ typedef struct
 
 extern char* g_772500;
 extern char* g_77255c;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 
@@ -56,8 +56,8 @@ void __cdecl fcn_005c9310(unsigned short* who, int max, Row* rows, int dlg, int 
 	}
 	for (i = 0; i < cnt; i++) {
 		d2_SetForm(dlg, n);
-		rows[i].icon = fcn_0046f740((((Screen*)g_77255c)->width - w) >> 1, i * 0x80, 0x75a, g_772514);
-		rows[i].text = fcn_0046f100((((Screen*)g_77255c)->width - w) >> 1, i * 0x80 + 4, w, 0x72, 0x10, g_772514);
+		rows[i].icon = fcn_0046f740((((Screen*)g_77255c)->width - w) >> 1, i * 0x80, 0x75a, d2_CurrentWindowId);
+		rows[i].text = fcn_0046f100((((Screen*)g_77255c)->width - w) >> 1, i * 0x80 + 4, w, 0x72, 0x10, d2_CurrentWindowId);
 		rows[i].obj = list[i];
 		((Win*)g_1015f40)[rows[i].text].x28c = 0x56;
 		((Win*)g_1015f40)[rows[i].text].x18 = 0x10;

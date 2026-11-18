@@ -17,7 +17,7 @@ extern int g_100f1dc;
 extern int g_14ce8d8;
 extern int g_6b5c8c;
 extern volatile int g_6b7fc0;
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern Slot7f4ca2 g_7f4ca2[768];
 extern int g_7f4ca4;
 
@@ -129,8 +129,8 @@ done:
             memcpy(text, str, strlen(str) + 1);
             *(int*) (e + 0xec) = fcn_004c30a0(-7, 0, text, 0, 0x7d0);
         }
-        *(pos14_7f4c00*) (e + 0x44) = g_7f4c00;
-        *(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+        *(pos14_7f4c00*) (e + 0x44) = gm_GameTime;
+        *(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 
 
 
@@ -154,7 +154,7 @@ done:
                 *(int*) (e + 0x70) = state;
                 goto tail;
             }
-            if (fcn_00500cb0((void*) &g_7f4c00, rec + 0x18) <= 0)
+            if (fcn_00500cb0((void*) &gm_GameTime, rec + 0x18) <= 0)
                 goto tail;
             if (*(signed char*) (rec + 0x26) < 0) {
                 if (!((*(unsigned char*) (e + 0xf0) & 2)
@@ -170,7 +170,7 @@ done:
             }
             *(int*) (e + 0x70) = state;
             goto tail;
-        } else if (fcn_00500cb0((void*) &g_7f4c00, e + 0x52) > 0) {
+        } else if (fcn_00500cb0((void*) &gm_GameTime, e + 0x52) > 0) {
             goto exit_clear;
         }
 tail:

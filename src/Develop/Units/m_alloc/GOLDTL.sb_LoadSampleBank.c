@@ -29,7 +29,7 @@ typedef struct {
 } BankHeader;
 
 extern int g_6b7d7c;
-extern int g_6b7d74;
+extern int MemUsed;
 extern Bank* g_6b7d78;
 extern char g_6b7d88[];
 extern char g_14cb980[];
@@ -76,8 +76,8 @@ Bank* __cdecl sb_LoadSampleBank(char* name, int init)
 						} else {
 							g_6b7d78 = bank;
 						}
-						g_6b7d74 = g_6b7d74 + hdr.count * 0x40 + 0x144;
-						sprintf(g_14cbae0, "Samplebank %s loaded. MemUsed is now %d bytes.", name, g_6b7d74);
+						MemUsed = MemUsed + hdr.count * 0x40 + 0x144;
+						sprintf(g_14cbae0, "Samplebank %s loaded. MemUsed is now %d bytes.", name, MemUsed);
 						bank->loaded = 1;
 						if (init != 0) {
 							for (i = 0; i < hdr.count; i++) {

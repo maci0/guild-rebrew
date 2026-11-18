@@ -23,9 +23,9 @@ typedef struct SOUND_SOURCE {
 } SOUND_SOURCE;
 
 extern int d3snd_SourceCount;
-extern SOUND_SOURCE* g_6b5d08;
+extern SOUND_SOURCE* tp_SoundSources;
 extern Chan_14cc460* g_772efc;
-extern Chan_14cc460* g_772d1c;
+extern Chan_14cc460* tp_msx_CurrentTrack;
 extern Chan_14cc460* g_772d20;
 extern Chan_14cc460* g_772d24;
 

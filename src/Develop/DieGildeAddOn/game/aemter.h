@@ -3,7 +3,7 @@
 
 #include "../../game_structs.h"
 
-extern char* g_14a5c6c[];
+extern char* amt_OfficeNames[];
 
 int __cdecl srv_GetEntityOfficeSlot(unsigned char* entity, void* role_out, void* slot_out);
 int __cdecl srv_GetEntityCouncilSlot(unsigned char* entity, void* role_out, void* slot_out);

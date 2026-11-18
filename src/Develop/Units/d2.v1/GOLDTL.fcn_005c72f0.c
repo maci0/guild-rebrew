@@ -16,15 +16,15 @@ extern int g_14aba9c;          /* 0x014aba9c */
 extern int g_14abaa0;          /* 0x014abaa0 */
 extern int g_14ce8cc;          /* 0x014ce8cc */
 extern int g_14ce8e0;          /* 0x014ce8e0 */
-extern int g_100f894;          /* 0x0100f894 */
+extern int d2_HoveredWindow;          /* 0x0100f894 */
 extern int g_100f1dc;          /* 0x0100f1dc */
 extern int g_1015ea0;          /* 0x01015ea0 */
-extern int g_67d370;           /* 0x0067d370 */
-extern int g_772514;           /* 0x00772514 */
+extern int d2_CurrentElementId;           /* 0x0067d370 */
+extern int d2_CurrentWindowId;           /* 0x00772514 */
 extern unsigned char g_773d75; /* 0x00773d75 */
 #include "client_dialog_state.h"           /* 0x00774654 */
 extern int g_775334;           /* 0x00775334 */
-extern int g_7e46ac;           /* 0x007e46ac */
+extern int main_LoopFlags;           /* 0x007e46ac */
 extern char s_6ac7b0[];        /* 0x006ac7b0 */
 
 int __cdecl fcn_00525fb0(int);
@@ -100,7 +100,7 @@ int __cdecl fcn_005c72f0(int a0)
 	if (v15 != 0) {
 		return v15;
 	}
-	v18 = (g_7e46ac & 0x10000) != 0 ? 0x7d6c6 : 0x677c7;
+	v18 = (main_LoopFlags & 0x10000) != 0 ? 0x7d6c6 : 0x677c7;
 
 
 
@@ -121,8 +121,8 @@ int __cdecl fcn_005c72f0(int a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00594340();
 	d2_SetForm(win, 0);
-	fcn_00533dc0(g_772514, 0x72f, 0);
-	fcn_00533f40(0x270, 0x15c, g_772514,
+	fcn_00533dc0(d2_CurrentWindowId, 0x72f, 0);
+	fcn_00533f40(0x270, 0x15c, d2_CurrentWindowId,
 			fcn_00472830(win, 2, 0x78, v10, v9buf, &v8));
 	*(int*) (g_1015ea0 + 0x84 + v8 * 0x2f4) = 0x54;
 	def = g_item_def_table + (unsigned int) *p * 0x41;
@@ -142,7 +142,7 @@ label_5c7466:
 		v7 = 0;
 		p4 = (int*) ((int) g_7774a0 + 0x8);
 		for (;;) {
-			if (p4[-2] != 0 && *p4 == g_67d370) {
+			if (p4[-2] != 0 && *p4 == d2_CurrentElementId) {
 				selected = g_7774a0[v7].x0;
 				if (selected != 0) {
 					fcn_004c44a0();
@@ -233,7 +233,7 @@ label_5c7572:
 	fcn_004ce9e0(selected);
 label_5c76eb:
 	v7 = fcn_005c6a10(win, 2);
-	if (g_100f894 == g_1038140[win].wins[1] && v7 != 0 && g_14ce8cc != 0) {
+	if (d2_HoveredWindow == g_1038140[win].wins[1] && v7 != 0 && g_14ce8cc != 0) {
 		fcn_004c44a0();
 		p4 = (int*) ((int) g_7774a0 + 0x0);
 		do {

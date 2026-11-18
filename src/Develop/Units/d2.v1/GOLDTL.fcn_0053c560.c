@@ -14,12 +14,12 @@
 
 extern int evt_LastGfxScriptId;
 extern int g_67a370;
-extern int g_6b5cbc;
+extern int d3_CameraAnimating;
 extern int d3_ActiveCameraAnimation;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_14ce8e0;
-extern int g_7725c8;
+extern int d2_SuppressOverlay;
 extern int g_774654;
 extern int g_7746a0;
 
@@ -140,7 +140,7 @@ int __cdecl fcn_0053c560(void)
 		fcn_00471e30(*(int *) 0x6a37f8);
 		*(int *) 0x6a37f8 = -1;
 	}
-	g_7725c8 = 0;
+	d2_SuppressOverlay = 0;
 	if (fcn_005373e0((int) fcn_0053c560, 0x12d6) != 0) {
 		do {
 			if (flag) {
@@ -153,16 +153,16 @@ int __cdecl fcn_0053c560(void)
 					io_AppendText(0x6811b0);
 					io_AppendText(0x1ae6, i + 0x1aea);
 					if (i % 2) {
-						parentA = *(Vec3 *) (g_6b8014 + 0xfc);
-						parentB = *(Vec3 *) (g_6b8014 + 0x108);
+						parentA = *(Vec3 *) (d3_ActiveCamera + 0xfc);
+						parentB = *(Vec3 *) (d3_ActiveCamera + 0x108);
 					} else {
-						parentA = *(Vec3 *) (g_6b8014 + 0xe4);
-						parentB = *(Vec3 *) (g_6b8014 + 0xf0);
+						parentA = *(Vec3 *) (d3_ActiveCamera + 0xe4);
+						parentB = *(Vec3 *) (d3_ActiveCamera + 0xf0);
 					}
-					fcn_00433780(g_6b8014);
-					g_6b5cbc = 0;
+					fcn_00433780(d3_ActiveCamera);
+					d3_CameraAnimating = 0;
 					d3_ActiveCameraAnimation = 0;
-					fcn_00412cf0(g_6b8014, &parentA, &parentB, 0x50, 8);
+					fcn_00412cf0(d3_ActiveCamera, &parentA, &parentB, 0x50, 8);
 				}
 				flag = 0;
 			}
@@ -208,12 +208,12 @@ slot_found:
 				d2_SetForm(obj, 0);
 				io_AppendText(0x6811b0);
 				fcn_00471af0(obj, 0);
-				fcn_00433780(g_6b8014);
-				g_6b5cbc = 0;
+				fcn_00433780(d3_ActiveCamera);
+				d3_CameraAnimating = 0;
 				d3_ActiveCameraAnimation = 0;
-				fcn_00412cf0(g_6b8014,
-				    (Vec3 *) (g_6b8014 + 0x114),
-				    (Vec3 *) (g_6b8014 + 0x120), 0x50, 8);
+				fcn_00412cf0(d3_ActiveCamera,
+				    (Vec3 *) (d3_ActiveCamera + 0x114),
+				    (Vec3 *) (d3_ActiveCamera + 0x120), 0x50, 8);
 				if (fcn_0053b1b0()) {
 					if (fcn_0053cd40(0xc6) &&
 					    fcn_0053b6b0(*(unsigned char *) 0x7e23e3)) {
@@ -231,7 +231,7 @@ slot_found:
 		} while (fcn_005373e0((int) fcn_0053c560, 0x12d6) != 0);
 		if (ret == 1) {
 			spr = fcn_004730c0(0, 0, g_1040494,
-			    g_1040490, (char *) 0x67d67c, 0x5a, 1);
+			    d2_ScreenHeight, (char *) 0x67d67c, 0x5a, 1);
 			while ((*(unsigned char *) spr & 4) == 0)
 				fcn_005373e0(0, 0xc6);
 		}
@@ -276,8 +276,8 @@ slot_found:
 				fn(base, 5, sub + 0x298, 0);
 		}
 	}
-	fcn_00433780(g_6b8014);
-	g_6b5cbc = 0;
+	fcn_00433780(d3_ActiveCamera);
+	d3_CameraAnimating = 0;
 	d3_ActiveCameraAnimation = 0;
 	if (spr != 0)
 		fcn_00473150(spr);

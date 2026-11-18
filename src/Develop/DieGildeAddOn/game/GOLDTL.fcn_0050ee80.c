@@ -133,7 +133,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				fcn_0046f280(g_7f3f00[i].x2c);
 				g_7f3f00[i].x2c = -1;
 			}
-			h = g_772514;
+			h = d2_CurrentWindowId;
 			if (st == 0) {
 				v2 = fcn_0046f100(g_7f3f00[i].x10 - 4, g_7f3f00[i].x14 - 4, 0x36, 0x36, 0x400, v1);
 				g_7f3f00[i].x1c = v2;
@@ -151,7 +151,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				g_7f3f00[i].x24 = fcn_0046f740(3, 3, y, g_7f3f00[i].x1c);
 				*(int*) (g_1015ea0 + g_7f3f00[i].x24 * 0x2f4 + 0x64) = 1;
 				*(int*) (g_1015ea0 + g_7f3f00[i].x24 * 0x2f4 + 0x5c) = 1;
-				g_772514 = h;
+				d2_CurrentWindowId = h;
 				v2 = fcn_0046f100(g_7f3f00[i].x10 - 0x18, g_7f3f00[i].x14 + 0x32, 0x60, 0x11, 0x4510, v1);
 				g_7f3f00[i].x2c = v2;
 				*(int*) ((char*) g_1015f40 + v2 * 0x3cc + 0x28c) = 0x54;
@@ -171,7 +171,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				}
 				g_7f3f00[i].x24 = fcn_0046f740(3, 3, y, g_7f3f00[i].x1c);
 				*(int*) (g_1015ea0 + g_7f3f00[i].x24 * 0x2f4 + 0x5c) = 1;
-				g_772514 = h;
+				d2_CurrentWindowId = h;
 				v2 = fcn_0046f100(g_7f3f00[i].x10 - 0x18, g_7f3f00[i].x14 + 0x32, 0x60, 0x11, 0x4510, v1);
 				g_7f3f00[i].x2c = v2;
 				*(int*) ((char*) g_1015f40 + v2 * 0x3cc + 0x28c) = 0x54;
@@ -192,7 +192,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				}
 				g_7f3f00[i].x24 = fcn_0046f740(3, 3, y, g_7f3f00[i].x1c);
 				g_7f3f00[i].x28 = fcn_0046f740(3, 3, 0x4fc, g_7f3f00[i].x1c);
-				g_772514 = h;
+				d2_CurrentWindowId = h;
 				v2 = fcn_0046f100(g_7f3f00[i].x10 - 0x18, g_7f3f00[i].x14 + 0x32, 0x60, 0x11, 0x4510, v1);
 				g_7f3f00[i].x2c = v2;
 				*(int*) ((char*) g_1015f40 + v2 * 0x3cc + 0x28c) = 0x54;
@@ -203,7 +203,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				}
 				*(int*) (g_1015ea0 + g_7f3f00[i].x24 * 0x2f4 + 0x64) = 1;
 			}
-			g_772514 = h;
+			d2_CurrentWindowId = h;
 			g_7f3f00[i].x30 = st;
 		}
 		if (g_7f3f00[i].x30 == 3) {
@@ -229,7 +229,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 			goto next;
 fnd:
 			*(float*) (g_1015ea0 + g_7f3f00[i].x24 * 0x2f4 + 0x1f4) =
-				(float) fcn_00500d20(q + 0x44, (void*) &g_7f4c00) /
+				(float) fcn_00500d20(q + 0x44, (void*) &gm_GameTime) /
 				(float) fcn_00500d20(q + 0x44, q + 0x52);
 next:			;
 		}

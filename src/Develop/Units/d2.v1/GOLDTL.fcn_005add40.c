@@ -36,12 +36,12 @@ typedef struct
 // SIZE 0x21c
 
 extern char g_7f4ca0[];
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_14abc44;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char* g_7746c4;
@@ -88,7 +88,7 @@ int __cdecl fcn_005add40(int unused, char* e)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == btn1) {
+			if (d2_CurrentElementId == btn1) {
 				for (p = fcn_005463a0(3, 0, 0x49, 2, *(unsigned short*) (g_7746c4 + 0x27), 3, *(int*) (g_7746c4 + 1)); p != 0; p = he_fn_Handlung()) {
 					if (*(int*) (p + 0xac) == *(int*) (e + 1)) {
 						break;
@@ -98,7 +98,7 @@ int __cdecl fcn_005add40(int unused, char* e)
 					pkt.type = 0x49;
 					pkt.x8 = ((Player*)g_7f4ca0)[*(unsigned short*) (g_7746c4 + 0x27)].x4;
 					pkt.xc = *(int*) (g_7746c4 + 1);
-					pkt.name = (*(Name14*)&g_7f4c00);
+					pkt.name = (*(Name14*)&gm_GameTime);
 					pkt.x36 = 1;
 					pkt.x58 = *(int*) (e + 1);
 					pkt.x5c = *(int*) (g_7746c4 + 1);
@@ -110,8 +110,8 @@ int __cdecl fcn_005add40(int unused, char* e)
 						if (n >= 8) {
 							break;
 						}
-						if (((Player**)g_7e4260)[i] != 0 && ((Player**)g_7e4260)[i]->x188 != 0) {
-							pkt.ids[n] = ((Player**)g_7e4260)[i]->x4;
+						if (((Player**)ch_ContextCharacters)[i] != 0 && ((Player**)ch_ContextCharacters)[i]->x188 != 0) {
+							pkt.ids[n] = ((Player**)ch_ContextCharacters)[i]->x4;
 							n++;
 						}
 					}
@@ -129,13 +129,13 @@ int __cdecl fcn_005add40(int unused, char* e)
 					r = 1;
 					g_774654 = 2;
 					for (i = 0; i < 32; i++) {
-						if (((Player**)g_7e4260)[i] != 0 && ((Player**)g_7e4260)[i]->x188 != 0) {
-							fcn_00529160(0, 0, ((Player**)g_7e4260)[i]->x0, p);
+						if (((Player**)ch_ContextCharacters)[i] != 0 && ((Player**)ch_ContextCharacters)[i]->x188 != 0) {
+							fcn_00529160(0, 0, ((Player**)ch_ContextCharacters)[i]->x0, p);
 						}
 					}
 				}
 			}
-			else if (g_67d370 == btn2) {
+			else if (d2_CurrentElementId == btn2) {
 				g_774654 = 1;
 			}
 		}

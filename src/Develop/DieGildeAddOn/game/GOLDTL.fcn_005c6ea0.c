@@ -49,7 +49,7 @@ extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_14abc44;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
@@ -119,7 +119,7 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == btn1) {
+			if (d2_CurrentElementId == btn1) {
 				n = 0;
 				for (i = 0; i < 768; i++) {
 					if (n >= 3) {
@@ -130,7 +130,7 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 						pkt.type = 0x16;
 						pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
 						pkt.xc = *(int*) (obj + 1);
-						pkt.name = (*(Name14*)&g_7f4c00);
+						pkt.name = (*(Name14*)&gm_GameTime);
 						pkt.x36 = 1;
 						if (a1 != 0) {
 							pkt.x60 = *(int*) (a1 + 2);
@@ -156,7 +156,7 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 					g_774654 = 1;
 				}
 			}
-			else if (g_67d370 == btn2) {
+			else if (d2_CurrentElementId == btn2) {
 				g_774654 = 1;
 			}
 		}

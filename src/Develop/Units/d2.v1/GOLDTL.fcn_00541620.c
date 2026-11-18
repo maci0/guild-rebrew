@@ -5,21 +5,21 @@ extern int g_774968;
 extern int g_774978;
 #include "client_dialog_state.h"
 extern int g_7e2700;
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern int g_6a3420;
-extern int g_6b8014;
-extern int g_772514;
+extern int d3_ActiveCamera;
+extern int d2_CurrentWindowId;
 extern int g_77250c;
 extern int g_77255c;
 extern int g_1040480;
 extern int g_1040484;
 extern int g_1040488;
 extern int g_104048c;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_100f1dc;
 extern char g_14cf950;
-extern char g_7f4c00[];
+extern char gm_GameTime[];
 extern char g_7f4ca0[];
 extern double g_6640e8;
 
@@ -96,9 +96,9 @@ void __cdecl fcn_00541620(void)
 	e1ec = 0;
 	*(int*) (char*) &g_7e2700 = 0;
 	if (g_6a3420 != 0) {
-		win = (unsigned char*) fcn_004730c0(0, 0, g_1040494, g_1040490, "BLACK", 0x1e, 1);
+		win = (unsigned char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x1e, 1);
 		while ((*win & 4) == 0) {
-			fcn_005373e0(0, g_7e46ac);
+			fcn_005373e0(0, main_LoopFlags);
 		}
 		g1f4 = (int) win;
 	}
@@ -106,8 +106,8 @@ void __cdecl fcn_00541620(void)
 	sel = (int) fcn_00509570((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0);
 	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
 	*(int*) (sel + 0x3c) += *(int*) (k + 0x7f4e44) + *(int*) (k + 0x7f4e40);
-	fcn_00438b40((char*) g_6b8014, (int*) (sel + 0x8c));
-	fcn_00438cb0((char*) g_6b8014, (int*) (sel + 0x9c));
+	fcn_00438b40((char*) d3_ActiveCamera, (int*) (sel + 0x8c));
+	fcn_00438cb0((char*) d3_ActiveCamera, (int*) (sel + 0x9c));
 	if (g_6a3420 == 0) {
 		goto fold;
 	}
@@ -121,10 +121,10 @@ void __cdecl fcn_00541620(void)
 		fcn_00473150((unsigned char*) g1f4);
 		g1f4 = 0;
 	}
-	fcn_004730c0(0, 0, g_1040494, g_1040490, "BLACK", 0x1e, 10);
+	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x1e, 10);
 	d2_SetForm(dlg, 2);
 	io_AppendText(0x7d);
-	fcn_00500d60((void*) (char*) g_7f4c00, stamp);
+	fcn_00500d60((void*) (char*) gm_GameTime, stamp);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x2007);
 	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
@@ -302,12 +302,12 @@ void __cdecl fcn_00541620(void)
 	g_1040488 = 0;
 	g_1040480 = g_1040494;
 	g_1040484 = 0;
-	g_104048c = g_1040490;
+	g_104048c = d2_ScreenHeight;
 	d2_SetForm(dlg, 1);
-	k = g_772514;
+	k = d2_CurrentWindowId;
 	d2_SetForm(dlg, 2);
 	io_AppendText(0x7d);
-	fcn_0046e830(-1, -1, g_772514, k, 0x767);
+	fcn_0046e830(-1, -1, d2_CurrentWindowId, k, 0x767);
 	*(int*) (k * 0x3cc + 0x10161b4) = 0x18;
 	fcn_004234e0(0, "RollenKurz_s_01", 1, 0x3f, 0x7f, 0, 0);
 	i = fcn_005373e0((int) fcn_00541620, 0x24087);

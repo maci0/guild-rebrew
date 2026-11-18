@@ -2,7 +2,7 @@
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -87,7 +87,7 @@ void __cdecl fcn_0054e390(char* e)
 				p += 4;
 				i--;
 			} while (i != 0);
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 			*(int*) (e + 0x84) = fcn_004c5620(2, e);
 			return;
@@ -125,7 +125,7 @@ void __cdecl fcn_0054e390(char* e)
 				p += 4;
 				i--;
 			} while (i != 0);
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 			if (!n) {
 				*(int*) (e + 0x84) = fcn_004c5620(-1, e);
@@ -161,7 +161,7 @@ void __cdecl fcn_0054e390(char* e)
 			} while (1);
 			s = 0;
 label_54e6a1:
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 			if (s) {
 				*(int*) (e + 0x84) = fcn_004c5620(3, e);
@@ -248,10 +248,10 @@ label_54e6a1:
 					p += 4;
 				} while (k < 8);
 				if (m != 0 && i != 0) {
-					*(pos14_7f4c00*) (pkt + 0x18) = g_7f4c00;
+					*(pos14_7f4c00*) (pkt + 0x18) = gm_GameTime;
 					fcn_00500bb0((pos14_7f4c00*) (pkt + 0x18), 0, 0x1e, 0);
 					*(int*) (e + 0xb4) = fcn_004c5980(pkt);
-					*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+					*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 					fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
 					*(int*) (e + 0x70) = 4;
 					return;
@@ -271,7 +271,7 @@ label_54e6a1:
 					io_FormatTextBuffer(text, 0x1c55, *(unsigned short*) (own + 0x27), own, m);
 					fcn_00545d40(*(int*) (g_7f4ca4 + *(unsigned short*) (e + 8) * 0x21c), -1, text, 0, 0x5f0, 0);
 				}
-				*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 				fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
 				*(int*) (e + 0x70) = 1;
 				return;
@@ -292,18 +292,18 @@ label_54e6a1:
 	case 4:
 		if (fcn_004c4450(*(int*) (e + 0xb4))) {
 			*(int*) (e + 0xb8) = *(int*) fcn_004c4480(*(int*) (e + 0xb4));
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
 			*(int*) (e + 0x70) = 5;
 		}
 		return;
 	case 5:
 		if (cut_FindCutsceneById(*(int*) (e + 0xb8))) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 5, 0);
 			return;
 		}
-		*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
 		*(int*) (e + 0x70) = 1;
 		return;
@@ -343,7 +343,7 @@ label_54e6a1:
 	fcn_00546190(e);
 	return;
 label_54e513:
-	*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
 	*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 }

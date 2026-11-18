@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 extern unsigned char g_773d75;
 extern char g_868080[];
 
@@ -97,13 +97,13 @@ int __cdecl hst_ParseDate(int key, int flags, int* out, char* text)
 		if (g_1052de0 == 0) {
 			break;
 		}
-		if (g_67fca0 == -1) {
+		if (hst_HistoryTextBase == -1) {
 			break;
 		}
 		fill0(buf, 0x17d0);
 		fill0((char*) tmp, 0x10);
 		if (key < 0x4800) {
-			src = g_14a5320[key];
+			src = txt_TextEntries[key];
 			if (src == 0) {
 				break;
 			}
@@ -115,7 +115,7 @@ int __cdecl hst_ParseDate(int key, int flags, int* out, char* text)
 			strcpy(buf, (char*) key);
 		}
 		if (strlen(buf) != 0xa) {
-			sprintf(buf, (char*) 0x680b84, key - g_67fca0);
+			sprintf(buf, (char*) 0x680b84, key - hst_HistoryTextBase);
 			break;
 		}
 		copy0((char*) tmp, buf, 2);

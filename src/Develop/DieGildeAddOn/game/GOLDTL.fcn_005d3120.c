@@ -28,7 +28,7 @@ extern float g_6628a8;
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 
 /* ADDRESS: GOLDTL 0x005d3120 */
@@ -79,7 +79,7 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 			return 0x20;
 		}
 		memset(buf, 0, 0xf8);
-		*(pos14_7f4c00*) (buf + 0x28) = g_7f4c00;
+		*(pos14_7f4c00*) (buf + 0x28) = gm_GameTime;
 		*(int*) (buf + 0x08) = *(int*) (a0 + 4);
 		*(int*) (buf + 0x0c) = *(int*) (a0 + 4);
 		*(int*) (buf + 0x58) = *(int*) (a0 + 4);
@@ -136,7 +136,7 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 		}
 		if (g_100f1dc != -1 && mode == 4) {
 			for (i = 0; i < 4; i++) {
-				if (g_67d370 == ids[i]) {
+				if (d2_CurrentElementId == ids[i]) {
 					break;
 				}
 			}
@@ -174,7 +174,7 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 					io_FormatTextBuffer(buf2, 0x1cf9, *(unsigned short*) p, v);
 					*(char*) (e + 0xb8) += n;
 					if (*(char*) (e + 0xb8) >= *(char*) (e + 0xb9)) {
-						*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+						*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 						fcn_00500bb0(e + 0x52, 0, 1, 0);
 					}
 					*(char*) (e + 0xba) = 0;

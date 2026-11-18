@@ -20,8 +20,8 @@ void __cdecl fcn_004c5360(void);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl fcn_00545d40(int, int, int, int, int, char *);
 
-extern int g_773da8;
-extern int g_7f4c00;
+extern int gm_CityEntity;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -50,7 +50,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 	if (fcn_004f4650(arg1, &ent, &found)) {
 		fcn_004f22e0(arg1, ent, *(int *) found,
 					 fcn_004f1790(*(void **) ((char *) ent + 0x65), found));
-		if (arg2 != 0 && arg2 != (void *) g_773da8
+		if (arg2 != 0 && arg2 != (void *) gm_CityEntity
 			&& *(int *) ((char *) arg1 + 4) == *(int *) ((char *) found + 4)) {
 			fcn_004f2a10(arg2, ent, *(int *) found,
 						 fcn_004f1790(*(void **) ((char *) ent + 0x65), found));
@@ -60,16 +60,16 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 	while (ent != 0) {
 		type = gm_GetBuildingTypeCategory(*(unsigned char *) ent);
 		if (type == 2) {
-			fcn_004c5f60(*(int *) ((char *) ent + 1), *(int *) ((char *) g_773da8 + 4),
-						 *(int *) ((char *) g_773da8 + 4));
+			fcn_004c5f60(*(int *) ((char *) ent + 1), *(int *) ((char *) gm_CityEntity + 4),
+						 *(int *) ((char *) gm_CityEntity + 4));
 		} else {
 			fcn_004c5f60(*(int *) ((char *) ent + 1), *(int *) ((char *) arg2 + 4),
 						 *(int *) ((char *) arg2 + 4));
 			flag = 1;
 		}
-		if (arg2 == (void *) g_773da8 && type != 2 && (((unsigned char *) ent)[0x5a] & 1) == 0) {
+		if (arg2 == (void *) gm_CityEntity && type != 2 && (((unsigned char *) ent)[0x5a] & 1) == 0) {
 			pkt[4] = 0x1b;
-			*(int *) (pkt + 8) = *(int *) ((char *) g_773da8 + 4);
+			*(int *) (pkt + 8) = *(int *) ((char *) gm_CityEntity + 4);
 			*(int *) (pkt + 0xc) = -1;
 			pkt[0x36] = 2;
 			*(int *) (pkt + 0x58) = *(int *) ((char *) ent + 1);
@@ -81,9 +81,9 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 					if (*(void **) it != *(void **) ((char *) arg1 + 4)) {
 						memset(pkt, 0, 0xf8);
 						pkt[4] = 0x31;
-						*(int *) (pkt + 8) = *(int *) ((char *) g_773da8 + 4);
+						*(int *) (pkt + 8) = *(int *) ((char *) gm_CityEntity + 4);
 						*(int *) (pkt + 0xc) = *(int *) ((char *) ent + 1);
-						*(int *) (pkt + 0x28) = g_7f4c00;
+						*(int *) (pkt + 0x28) = gm_GameTime;
 						*(int *) (pkt + 0x2c) = g_7f4c04;
 						*(int *) (pkt + 0x30) = g_7f4c08;
 						*(unsigned short *) (pkt + 0x34) = g_7f4c0c;
@@ -99,7 +99,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 		cnt++;
 		ent = gm_FindNextFilteredEntity();
 	}
-	if (arg2 != (void *) g_773da8) {
+	if (arg2 != (void *) gm_CityEntity) {
 		val = gm_SumTreasury(arg1);
 		i = 4 + (*((unsigned char *) arg1 + 2) == 5);
 		fcn_004c5150(*(int *) ((char *) arg2 + 4), -1, g_773d75, val);
@@ -116,7 +116,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 	if (*((unsigned char *) arg2 + 2) != 6 && *((unsigned char *) arg2 + 2) != 7) {
 		if ((*((unsigned char *) arg1 + 2) == 5 || *((unsigned char *) arg1 + 2) == 6
 			 || *((unsigned char *) arg1 + 2) == 7)
-			&& arg2 == (void *) g_773da8) {
+			&& arg2 == (void *) gm_CityEntity) {
 			it = (void *) 0x7f4ca4;
 			do {
 				if ((*((unsigned char *) it - 2) == 6 || *((unsigned char *) it - 2) == 7)

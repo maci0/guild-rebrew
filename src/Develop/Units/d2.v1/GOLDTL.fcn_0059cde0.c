@@ -37,11 +37,11 @@ typedef struct
 // SIZE 0x21c
 
 extern char g_7f4ca0[];
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern unsigned char* g_7746c8;
@@ -90,7 +90,7 @@ int __cdecl fcn_0059cde0(char* name)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == btn1) {
+			if (d2_CurrentElementId == btn1) {
 				for (p = fcn_005463a0(3, 0, 0x48, 2, *(unsigned short*) (((char*)g_7746c8) + 0x27), 3, *(int*) (((char*)g_7746c8) + 1)); p != 0; p = he_fn_Handlung()) {
 					if (strcmp(p + 0xac, name) == 0) {
 						break;
@@ -100,7 +100,7 @@ int __cdecl fcn_0059cde0(char* name)
 					pkt.type = 0x48;
 					pkt.x8 = ((Player*)g_7f4ca0)[*(unsigned short*) (((char*)g_7746c8) + 0x27)].x4;
 					pkt.xc = *(int*) (((char*)g_7746c8) + 1);
-					pkt.name = (*(Name14*)&g_7f4c00);
+					pkt.name = (*(Name14*)&gm_GameTime);
 					pkt.x36 = 2;
 					strcpy(pkt.str, name);
 					for (i = 0; i < 8; i++) {
@@ -109,8 +109,8 @@ int __cdecl fcn_0059cde0(char* name)
 					cm_ExProdObjekt();
 					q = pkt.ids;
 					for (i = 0; i < 32; i++) {
-						if (((Player**)g_7e4260)[i] != 0 && ((Player**)g_7e4260)[i]->x188 != 0) {
-							*q = ((Player**)g_7e4260)[i]->x4;
+						if (((Player**)ch_ContextCharacters)[i] != 0 && ((Player**)ch_ContextCharacters)[i]->x188 != 0) {
+							*q = ((Player**)ch_ContextCharacters)[i]->x4;
 							q++;
 						}
 					}
@@ -120,7 +120,7 @@ int __cdecl fcn_0059cde0(char* name)
 				r = 1;
 				g_774654 = 1;
 			}
-			else if (g_67d370 == btn2) {
+			else if (d2_CurrentElementId == btn2) {
 				g_774654 = 1;
 			}
 		}

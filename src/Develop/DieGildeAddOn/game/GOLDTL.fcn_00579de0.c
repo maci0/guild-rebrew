@@ -28,7 +28,7 @@ typedef struct Place579 {
 	Pos14 posBC;             /* 0xbc */
 } Place579;
 
-extern Pos14 g_7f4c00;
+extern Pos14 gm_GameTime;
 extern char g_7f4ca0[];
 extern float g_696540[];
 extern float g_696550[];
@@ -66,12 +66,12 @@ void __cdecl fcn_00579de0(char* a0)
 	int row;
 	float f;
 
-	win = fcn_00500e20((int*) &g_7f4c00);
-	value = *(int*) &g_7f4c00.b & 0xffff;
+	win = fcn_00500e20((int*) &gm_GameTime);
+	value = *(int*) &gm_GameTime.b & 0xffff;
 	if (((float) value >= g_696550[win] || (float) value < g_696540[win])
 		&& ((Place579*) a0)->status != -1
 		&& ((Place579*) a0)->status != -2) {
-		((Place579*) a0)->posBC = g_7f4c00;
+		((Place579*) a0)->posBC = gm_GameTime;
 		fcn_00500bb0(&((Place579*) a0)->pos52, 0, 5, 0);
 		return;
 	}
@@ -94,18 +94,18 @@ void __cdecl fcn_00579de0(char* a0)
 		place->status = -1;
 	}
 	if (place->status == 0) {
-		v = fcn_00500d20(&place->posBC, &g_7f4c00);
+		v = fcn_00500d20(&place->posBC, &gm_GameTime);
 		f = (float) (4 - *(int*) slot) * v * *(float*) 0x662a3c;
 		if ((entity[0x165] == 0x1b || entity[0x165] == 0x1c)
 			&& (*(unsigned char*) (entity + 0x1b4) & 1)) {
 			f *= *(float*) 0x6628bc;
 		}
 		place->add += f;
-		place->pos52 = g_7f4c00;
+		place->pos52 = gm_GameTime;
 		fcn_00500bb0(&place->pos52, 0, 5, 0);
 		place->xb8 -= v;
 
-		place->posBC = g_7f4c00;
+		place->posBC = gm_GameTime;
 		if (place->xb8 <= 0) {
 			place->status = -1;
 		}

@@ -384,7 +384,7 @@ l_after:
 
 	if (f.v70 != 0) {
 		/* 0x5bad0e: four row ids through the shared layout helper */
-		fcn_00533a60(g_772514, 0, &f.v138, 4,
+		fcn_00533a60(d2_CurrentWindowId, 0, &f.v138, 4,
 			*(int*) 0x14a566c, *(int*) 0x14a5668,
 			*(int*) 0x14a5664, *(int*) 0x14a5670);
 		f.v6c = f.v140;
@@ -393,7 +393,7 @@ l_after:
 		f.v54 = f.v13C;
 	} else {
 		/* 0x5bad6d: one row id, then the entity's own selection field */
-		fcn_00533a60(g_772514, 0, &f.v138, 1, *(int*) 0x14a566c);
+		fcn_00533a60(d2_CurrentWindowId, 0, &f.v138, 1, *(int*) 0x14a566c);
 		f.v6c = -1;
 		f.v58 = -1;
 		f.v34 = *(int*) (f.v14 + 0x65);
@@ -436,7 +436,7 @@ l_after:
 
 	/* 0x5baec2: status-line message id for the current container state */
 	if (*(int*) 0x7746c4 == 0 && *(int*) 0x7746c8 == 0) {
-		fcn_00533dc0(g_772514, 0x70b, 0x73f);
+		fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x73f);
 	} else {
 		int msg;
 		unsigned char kind;
@@ -458,14 +458,14 @@ l_after:
 		}
 		/* the native arms push 0x73f when the trade flag is set */
 		if (f.v3c == 0) {
-			fcn_00533dc0(g_772514, msg, 0x741);
+			fcn_00533dc0(d2_CurrentWindowId, msg, 0x741);
 		} else {
-			fcn_00533dc0(g_772514, msg, 0x73f);
+			fcn_00533dc0(d2_CurrentWindowId, msg, 0x73f);
 		}
 	}
 
 	/* 0x5baf75: the item rectangle and its definition-table entry */
-	fcn_00533f40(0x270, 0x15c, g_772514,
+	fcn_00533f40(0x270, 0x15c, d2_CurrentWindowId,
 	             fcn_00472830(f.v2c, 2, 0x5e2, &f.v130, &f.v134, &f.vB4));
 	*(int*) ((int) g_00f8f080 + f.vB4 * 0x2f4 + 0x84) = 0x54;
 	d2_SetForm(f.v2c, 3);
@@ -487,17 +487,17 @@ l_after:
 	d2_SetForm(f.v2c, 0);
 
 	/* 0x5bb0ab: the two scroll-bar rows and the item table entry */
-	fcn_005c5da0(g_772514, 0x172, 0x64,
+	fcn_005c5da0(d2_CurrentWindowId, 0x172, 0x64,
 	             g_774970, 0x1f3c);
 	d2_SetForm(f.v2c, 0);
-	f.v78 = fcn_0046f740(0x261, 0xd2, 0x528, g_772514);
+	f.v78 = fcn_0046f740(0x261, 0xd2, 0x528, d2_CurrentWindowId);
 	{
 		int k;
 		k = f.v78 * 0x2f4;
 		*(int*) ((int) g_00f8f080 + k + 0x1d0) = 3;
 		*(int*) ((int) g_00f8f080 + k + 0x58) = 1;
 	}
-	f.vB0 = fcn_0046f740(0x261, 0x104, 0x527, g_772514);
+	f.vB0 = fcn_0046f740(0x261, 0x104, 0x527, d2_CurrentWindowId);
 	f.v9c = f.vB0 * 0x2f4;
 	*(int*) ((int) g_00f8f080 + f.v9c + 0x1d0) = 3;
 	fcn_00525ef0();
@@ -541,7 +541,7 @@ l_sel:
 	/* 0x5bb232: push the matching selection row into slot v88 */
 	if (f.v80 != 0 && g_100f1dc != -1) {
 		for (i = 0; i < 7; i++) {
-			if (g_67d370 == f.vD4[i]) {
+			if (d2_CurrentElementId == f.vD4[i]) {
 				f.v88 = (int) fcn_00502cd0(0, 2, 7, 0, f.vF0[i]);
 				g_774654 = 1;
 			}
@@ -653,10 +653,10 @@ l_next:
 		e->f00 = f.v20;
 		e->f0c = fcn_0046f740(0x10, j + 0x16,
 		                      0x4ae + (int) (*(unsigned short*) f.v20),
-		                      g_772514);
+		                      d2_CurrentWindowId);
 		f.v1c = j + 0x54;
-		e->f18 = fcn_0046f740(0x18, f.v1c, 0x5e8, g_772514);
-		e->f1c = fcn_0046f740(0xac, f.v1c, 0x5eb, g_772514);
+		e->f18 = fcn_0046f740(0x18, f.v1c, 0x5e8, d2_CurrentWindowId);
+		e->f1c = fcn_0046f740(0xac, f.v1c, 0x5eb, d2_CurrentWindowId);
 		f.v1c = e->f0c;
 		{
 			int k;
@@ -678,9 +678,9 @@ l_next:
 		}
 		fcn_00472900(e->f1c, 0x54);
 		e->f14 = fcn_004677e0(0x4b, j + 0x59, 0x50, 0, 0x64, 0x65, 0x2a,
-		                      g_772514);
+		                      d2_CurrentWindowId);
 		j += 0x26;
-		e->f10 = fcn_0046f100(0x10, j, 0xc8, 0x40, 0x10, g_772514);
+		e->f10 = fcn_0046f100(0x10, j, 0xc8, 0x40, 0x10, d2_CurrentWindowId);
 		fcn_00472900(*(int*) (0x10161bc + e->f10 * 0x3cc), 0x53);
 		*(int*) ((int) g_00f8f080 + f.v1c * 0x2f4 + 0x5c) = 1;
 		i = fcn_005463a0(2, 3, *(int*) (f.v20 + 2), 0, 0x11);
@@ -725,7 +725,7 @@ l_slot:
 	/* 0x5bb798: per-slot panel refresh, f.v28 is the slot byte offset */
 	e = (Ent5af320*) ((char*) f.v6D8 + f.v28);
 	if (e->f00 != -1) {
-		g_772514 = e->f00;
+		d2_CurrentWindowId = e->f00;
 		io_AppendText(0x6811b0);
 	}
 	idx = e->f00;
@@ -764,7 +764,7 @@ l_slot:
 	if (g_100f1dc == -1) {
 		goto l_slot_handles;
 	}
-	if (g_67d370 != e->f18) {
+	if (d2_CurrentElementId != e->f18) {
 		goto l_slot_handles;
 	}
 	if (!((*(char*) (idx + 0x20) & 1) != 0)) {
@@ -783,7 +783,7 @@ l_slot_handles:
 		fcn_0046f9b0(e->f1c, (*(char*) (idx + 0x33) != 0)
 		             ? *(int*) 0x14b5ecc : *(int*) 0x14b5ec8);
 	}
-	if (g_100f1dc != -1 && g_67d370 == e->f1c
+	if (g_100f1dc != -1 && d2_CurrentElementId == e->f1c
 	    && (*(char*) (idx + 0x20) & 1) == 0) {
 		fcn_00471af0(f.v2c, 0);
 		fcn_004bfe00(idx);
@@ -865,16 +865,16 @@ l_slot_handles:
 					f.v30 = fcn_0050dfd0(*(int*) (f.v15C + 0xb0),
 					                     (int) (*(unsigned short*) (f.v15C + 0x44 + f.v24 * 2)));
 					j = ((int*) &f.v10C[0])[3 * ((int) (*(short*) e->f00) - 0x134) + i];
-					j -= *(int*) (0x1015f44 + g_772514 * 0x3cc);
+					j -= *(int*) (0x1015f44 + d2_CurrentWindowId * 0x3cc);
 					j += *(int*) ((int) g_00f8f080 + e->f0c * 0x2f4 + 0x10);
 					f.v1c = ((int) (*(short*) (*(int*) 0x772500 + 0x1ee7a)) + 0x16) * f.v30 + 0x1e;
 					e->fE4[f.v10 + i] = fcn_004677e0(j - 8, f.v1c - 5, 0x2f, 0, f.v30,
-					                                 0x6a, 0x2d, g_772514);
+					                                 0x6a, 0x2d, d2_CurrentWindowId);
 					{
 						int d;
 						d = fcn_00466ee0(j, f.v1c,
 						                 (int) (*(unsigned short*) (f.v15C + 0x44 + f.v24 * 2)) + 0xdf,
-						                 0x8a, g_772514);
+						                 0x8a, d2_CurrentWindowId);
 						e->fD8[f.v10 + i] = d;
 						fcn_00472900(d, 0x54);
 					}
@@ -898,11 +898,11 @@ l_da9:
 				if (i != 0) {
 					fcn_00472170(*(int*) (0x10161bc + g_6abb00 * 0x3cc), 1);
 					d2_SetForm(f.v2c, 2);
-					fcn_00472170(*(int*) (0x10161bc + g_772514 * 0x3cc), 0);
+					fcn_00472170(*(int*) (0x10161bc + d2_CurrentWindowId * 0x3cc), 0);
 				} else {
 					fcn_00472170(*(int*) (0x10161bc + g_6abb00 * 0x3cc), 0);
 					d2_SetForm(f.v2c, 2);
-					fcn_00472170(*(int*) (0x10161bc + g_772514 * 0x3cc), 1);
+					fcn_00472170(*(int*) (0x10161bc + d2_CurrentWindowId * 0x3cc), 1);
 				}
 			}
 			f.v90 = i;
@@ -1060,7 +1060,7 @@ l_da9:
 	/* 0x5bc1a9: locate the slot bound to the current row id */
 	e = f.v6D8;
 	for (j = 0; j < 16; j++, e++) {
-		if (e->f00 != 0 && e->f0c == g_67d370) {
+		if (e->f00 != 0 && e->f0c == d2_CurrentElementId) {
 			goto l_5bc2f8;
 		}
 	}
@@ -1218,7 +1218,7 @@ l_5bc3fa:
 	}
 	e = f.v6D8;
 	for (j = 0x10; j != 0; j--, e++) {
-		if (e->f00 == 0 || e->f0c != g_67d370) {
+		if (e->f00 == 0 || e->f0c != d2_CurrentElementId) {
 			continue;
 		}
 		if (!((*(char*) (e->f00 + 0x20) & 1) != 0)) {
@@ -1319,7 +1319,7 @@ l_5bc700:
 	}
 	e = f.v6D8;
 	for (i = 0; i < 16; i++, e++) {
-		if (e->f00 == 0 || e->f0c != g_67d370) {
+		if (e->f00 == 0 || e->f0c != d2_CurrentElementId) {
 			continue;
 		}
 		if ((*(char*) (e->f00 + 0x20) & 1) != 0) {
@@ -1549,7 +1549,7 @@ l_5bcd9a:
 	case 2:
 l_5bcf9f:
 	/* 0x5bcf9f: the row record of the transport dialog */
-	f.vD0 = g_67d370;
+	f.vD0 = d2_CurrentElementId;
 	if (f.vD0 == f.vA0) {
 		memset(f.v210, 0, 0x50);
 		*(int*) (f.v210 + 4) = 0x400;
@@ -1774,11 +1774,11 @@ l_5bd632:
 	if (fcn_00471f80(f.v78) != 0) {
 		fcn_00472170(*(int*) (0x10161bc + g_6abb00 * 0x3cc), 1);
 		d2_SetForm(f.v2c, 2);
-		fcn_00472170(*(int*) (0x10161bc + g_772514 * 0x3cc), 0);
+		fcn_00472170(*(int*) (0x10161bc + d2_CurrentWindowId * 0x3cc), 0);
 	} else {
 		fcn_00472170(*(int*) (0x10161bc + g_6abb00 * 0x3cc), 0);
 		d2_SetForm(f.v2c, 2);
-		fcn_00472170(*(int*) (0x10161bc + g_772514 * 0x3cc), 1);
+		fcn_00472170(*(int*) (0x10161bc + d2_CurrentWindowId * 0x3cc), 1);
 	}
 	if (f.v3c != 0 && f.v38 != 0) {
 		fcn_005af160(f.v14, f.v50, a2);

@@ -4,7 +4,7 @@
 extern int* g_665f08;
 extern unsigned char** g_7749e4;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern char g_14cf950;
 
 int __cdecl fcn_00423460(int);
@@ -25,7 +25,7 @@ int __cdecl fcn_00580290(void)
 	p = *g_7749e4;
 	if (p != 0 && *p == 0x87) {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == g_665f08[8]) {
+			if (d2_CurrentElementId == g_665f08[8]) {
 				if (g_665f08[5] != 0) {
 					if (fcn_00423460(g_665f08[5]) != 0) {
 						fcn_004237f0(g_665f08[5], 0);

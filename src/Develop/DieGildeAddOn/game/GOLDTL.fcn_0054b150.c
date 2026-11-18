@@ -10,7 +10,7 @@ typedef struct {
 } SIM_CLOCK;
 #pragma pack(pop)
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl fcn_004c5620(char a1, unsigned char* e);
@@ -36,10 +36,10 @@ void __cdecl fcn_0054b150(char* entity)
 		return;
 	}
 	if (firstEntity == 0 || secondEntity == 0) {
-		*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 		fcn_004c5620(-1, (unsigned char*) entity);
 	}
-	*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 	fcn_00500bb0((SIM_CLOCK*) (entity + 0x52), 0x30, 0, 0);
 	fcn_004c5620(0, (unsigned char*) entity);
 	fcn_004c54c0(*(int*) (secondEntity + 4), *(int*) (firstEntity + 4), -0x14, 1);

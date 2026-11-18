@@ -1,5 +1,5 @@
 extern int g_14a5508;
-extern int g_7e46ac;
+extern int main_LoopFlags;
 
 
 
@@ -25,7 +25,7 @@ void __cdecl fcn_00535770(int flags)
 	memset(buf, 0, sizeof(buf));
 	strcpy(buf, "sv_NetworkSync");
 	s = fcn_004c5790(0xe, buf);
-	g_7e46ac = flags;
+	main_LoopFlags = flags;
 	flags |= 0x300000;
 	h = fcn_005268c0(g_14a5508, 0);
 	fcn_00471af0(h, 0);

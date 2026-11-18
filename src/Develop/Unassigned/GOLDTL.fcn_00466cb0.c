@@ -21,7 +21,7 @@ typedef struct
 extern Fld_102d140 g_102d140[];
 extern char* g_772500;
 extern char* g_1015ea0;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char s_67d47c[];
@@ -94,11 +94,11 @@ int __cdecl fcn_00466cb0(int x, int y, int def, unsigned char flags)
 	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x88 / 4] = i;
 	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x24 / 4] = 2;
 	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x30 / 4] = 0;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x34 / 4] = g_1040490;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x34 / 4] = d2_ScreenHeight;
 	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x28 / 4] = 0;
 	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x2c / 4] = g_1040494;
 	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0xc / 4] = (int) f;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x84 / 4] = g_67d398;
+	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x84 / 4] = d2_DefaultFont;
 	f->ent = id;
 	return id;
 }

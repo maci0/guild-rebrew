@@ -2,7 +2,7 @@
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -11,13 +11,13 @@ extern char* g_item_def_table;
 extern char* g_1015ea0;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_7747b4;
 extern double g_662ad8;
 extern double g_662908;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
@@ -134,7 +134,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 		cnt = fcn_00472830(han, 2, 0x3c, &coord_y, &coord_x, &child);
 		r = *(char**) 0x77255c;
 		fcn_00533f40(*(int*) (r + 0x10) - 0x4c, *(int*) (r + 0xc) - 0x20,
-		             g_772514, cnt);
+		             d2_CurrentWindowId, cnt);
 		*(int*) (g_1015ea0 + 0x84 + child * 0x2f4) = 0x56;
 	}
 	d2_SetForm(han, 2);
@@ -147,7 +147,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			scale = (float) ((double) g_7747b4 * g_662ad8 +
 			                 g_662908);
 			val = (int) (eval_ObjektPreis2Credits(id, 100) * scale);
-			handle = fcn_0046f740(0x10, cnt, (char*) (id + 0xdf), g_772514);
+			handle = fcn_0046f740(0x10, cnt, (char*) (id + 0xdf), d2_CurrentWindowId);
 			ep[1] = handle;
 			r = g_1015ea0 + handle * 0x2f4;
 			*(int*) (r + 0x5c) = 1;
@@ -157,7 +157,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			*(int*) (r + 0x1ec) = -2;
 			io_FormatTextBuffer(msg, 0x17d3,
 			             *(int*) (id * 8 + 0x14a79c0), val);
-			ep[2] = fcn_0046fac0(0x60, cnt + 10, msg, g_772514);
+			ep[2] = fcn_0046fac0(0x60, cnt + 10, msg, d2_CurrentWindowId);
 			cnt += 0x3c;
 			ep += 3;
 			k--;
@@ -177,7 +177,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			ep = slots + 1;
 			sel = 0;
 			do {
-				if (g_67d370 == *ep) {
+				if (d2_CurrentElementId == *ep) {
 					scale = (float) ((double) g_7747b4 * g_662ad8 +
 					                 g_662908);
 					val = (int) (eval_ObjektPreis2Credits(slots[sel * 3], 100) * scale);
@@ -193,7 +193,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 						    *(int*) (g_7f4ca4 +
 						             (int) g_774970 * 0x21c);
 						*(int*) (msg + 0xc) = *(int*) (a0 + 1);
-						*(int*) (msg + 0x28) = *(int*) &g_7f4c00;
+						*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
 						*(int*) (msg + 0x2c) = g_7f4c04;
 						*(int*) (msg + 0x30) = g_7f4c08;
 						*(short*) (msg + 0x34) = g_7f4c0c;

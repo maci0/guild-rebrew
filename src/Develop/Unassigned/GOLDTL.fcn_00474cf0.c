@@ -34,7 +34,7 @@ typedef struct Item0474cf0 {
 } Item0474cf0;
 
 extern int g_1015ea0;
-extern int g_7725d0;
+extern int tp_d2_SelectedControl;
 extern int g_100f1cc;
 extern int g_100f898;
 extern int g_100f89c;
@@ -54,16 +54,16 @@ void __cdecl fcn_00474cf0(int slot)
 
 	slots = *(Slot0474cf0**) &g_1015ea0;
 	it = slots[slot].item;
-	if (*(Item0474cf0**) &g_7725d0 == it) {
+	if (*(Item0474cf0**) &tp_d2_SelectedControl == it) {
 		return;
 	}
-	if (*(Item0474cf0**) &g_7725d0 != 0) {
-		slots[(*(Item0474cf0**) &g_7725d0)->slot].active = 0;
+	if (*(Item0474cf0**) &tp_d2_SelectedControl != 0) {
+		slots[(*(Item0474cf0**) &tp_d2_SelectedControl)->slot].active = 0;
 		slots = *(Slot0474cf0**) &g_1015ea0;
 	}
-	*(Item0474cf0**) &g_7725d0 = it;
+	*(Item0474cf0**) &tp_d2_SelectedControl = it;
 	slots[it->slot].active = 1;
-	selected = *(Item0474cf0**) &g_7725d0;
+	selected = *(Item0474cf0**) &tp_d2_SelectedControl;
 	list = (*(Slot0474cf0**) &g_1015ea0)[selected->slot].list;
 	i = 0;
 	while (list != 0 && i < list->count) {
@@ -79,18 +79,18 @@ void __cdecl fcn_00474cf0(int slot)
 	    CountDisplayCounters() == 0 &&
 	    it->x12c == 0) {
 		it->x12c = -1;
-		it = *(Item0474cf0**) &g_7725d0;
+		it = *(Item0474cf0**) &tp_d2_SelectedControl;
 	}
 	if ((it->flags & 2) &&
 	    it->x18 != 0) {
 		it->x12c = 1;
-		it = *(Item0474cf0**) &g_7725d0;
+		it = *(Item0474cf0**) &tp_d2_SelectedControl;
 	}
 	if ((it->flags & 1) != 0) {
 		g_100f898 =
 		    fcn_0046b520(it->text, it->font) +
-		    (*(Item0474cf0**) &g_7725d0)->x;
-		g_100f89c = (*(Item0474cf0**) &g_7725d0)->y;
+		    (*(Item0474cf0**) &tp_d2_SelectedControl)->x;
+		g_100f89c = (*(Item0474cf0**) &tp_d2_SelectedControl)->y;
 		y = g_100f89c - 7;
 		if (g_67d8ec == -1) {
 			g_67d8ec = fcn_00469c30(

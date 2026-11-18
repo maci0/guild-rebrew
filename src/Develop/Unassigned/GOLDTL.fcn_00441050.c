@@ -1,6 +1,6 @@
 #include <math.h>
 
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 
 extern float g_1042150;
 extern float g_1042154;
@@ -51,7 +51,7 @@ int __cdecl fcn_00441050(char* e)
 	int k;
 	unsigned char res;
 
-	m = (float*) g_6b8014;
+	m = (float*) d3_ActiveCamera;
 	dx = *(float*) (e + 0x50) - m[0x13];
 	dy = *(float*) (e + 0x54) - m[0x14];
 	dz = *(float*) (e + 0x58) - m[0x15];
@@ -113,7 +113,7 @@ int __cdecl fcn_00441050(char* e)
 			do {
 				if (v10[1] != 0) {
 					if (*(unsigned char*) (w + 0xe) > 0) {
-						g_1052bac += (*(Fn_441050*) ((char*) *(void**) v10[1] + 0x14))(v10[1]);
+						d3_RenderedVertexCount += (*(Fn_441050*) ((char*) *(void**) v10[1] + 0x14))(v10[1]);
 						g_1042a08 += (*(Fn_441050*) ((char*) *(void**) v10[1] + 0x10))(v10[1]);
 					}
 					g_10432a8 += (*(Fn_441050*) ((char*) *(void**) v10[1] + 0x10))(v10[1]);
@@ -121,7 +121,7 @@ int __cdecl fcn_00441050(char* e)
 				}
 				if (v10[0] != 0) {
 					if (*(unsigned char*) (w + 0xe) > 0) {
-						g_1052bac += (*(Fn_441050*) ((char*) *(void**) v10[0] + 0x14))(v10[0]);
+						d3_RenderedVertexCount += (*(Fn_441050*) ((char*) *(void**) v10[0] + 0x14))(v10[0]);
 						g_1042a08 += (*(Fn_441050*) ((char*) *(void**) v10[0] + 0x10))(v10[0]);
 					}
 					g_10432a8 += (*(Fn_441050*) ((char*) *(void**) v10[0] + 0x10))(v10[0]);

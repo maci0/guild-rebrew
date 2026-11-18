@@ -29,7 +29,7 @@ extern VFS_DIR* g_6b7fdc;
 extern char g_1008420[];
 extern AM_METHOD_DATA g_1008540[];
 extern char* g_77481c;
-extern int g_7e1f80;
+extern int main_Instance;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, VFS_DIR* root);
 unsigned int __cdecl vfs_fwrite(void* data, int size, int count, char* f);
@@ -56,7 +56,7 @@ int __cdecl fcn_00494820(void)
 	sig = 0x6144466e;
 	if (g_77481c != 0) {
 		nmeth = 0x49;
-		GetModuleFileNameA((HMODULE) g_7e1f80, g_1008420, 0x104);
+		GetModuleFileNameA((HMODULE) main_Instance, g_1008420, 0x104);
 		strrchr(g_1008420, '\\')[1] = 0;
 		strcat(g_1008420, "ai_method_addon.ini");
 		if (fcn_004a1130(g_77481c) == 0) {

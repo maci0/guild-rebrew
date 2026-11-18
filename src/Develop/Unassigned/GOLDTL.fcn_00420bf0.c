@@ -2,8 +2,8 @@
 
 #include <stdio.h>
 
-extern unsigned int g_6b7d58;
-extern unsigned int g_6b7d54;
+extern unsigned int nt_ReceivedPacketCount;
+extern unsigned int nt_ReceivedBytes;
 extern unsigned int g_6b7d60;
 extern unsigned int g_6b7d5c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -16,14 +16,14 @@ void __cdecl fcn_00420bf0(void)
 	char buf[256];
 	unsigned int* p;
 
-	sprintf(buf, (char*) 0x678aa4, g_6b7d58, g_6b7d54, g_6b7d60, g_6b7d5c);
+	sprintf(buf, (char*) 0x678aa4, nt_ReceivedPacketCount, nt_ReceivedBytes, g_6b7d60, g_6b7d5c);
 	p = (unsigned int*) 0x14cbcc0;
 	for (i = 0; i < 0x6a; i++, p += 4) {
 		sprintf(buf, (char*) 0x678a40, i,
 		        p[0],
-		        ((double) p[0] * g_662c38) / g_6b7d58,
+		        ((double) p[0] * g_662c38) / nt_ReceivedPacketCount,
 		        p[1],
-		        ((double) p[1] * g_662c38) / g_6b7d54,
+		        ((double) p[1] * g_662c38) / nt_ReceivedBytes,
 		        p[2],
 		        ((double) p[2] * g_662c38) / g_6b7d60,
 		        p[3],

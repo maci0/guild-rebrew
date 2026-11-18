@@ -15,12 +15,12 @@ typedef struct {
 } Ctl;
 
 extern volatile int g_6b7fac;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 extern char* g_14b58e8;
 extern char* g_14b58ec;
@@ -91,9 +91,9 @@ void __cdecl fcn_00585910(char* e)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(ids[0]);
 	d2_SetForm(ids[0], 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(ids[0], 2);
-	ids[1] = g_772514;
+	ids[1] = d2_CurrentWindowId;
 	d2_SetForm(ids[0], 1);
 	io_AppendText(0x4039);
 	d2_SetForm(ids[0], 2);
@@ -109,7 +109,7 @@ void __cdecl fcn_00585910(char* e)
 	}
 	fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
 	fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
-	ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, g_772514);
+	ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 	d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 	io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
 	item = d2_ShowTxt(0, 0, buf, ids[1]);
@@ -157,7 +157,7 @@ void __cdecl fcn_00585910(char* e)
 		d2_SetForm(ids[0], 4);
 		io_AppendText(0x6811b0);
 		if (sel != 0) {
-			ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, g_772514);
+			ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			if (sel == 1) {
 				io_FormatTextBuffer(text, (char*) 0x404b);
 			} else if (sel == 2) {
@@ -165,7 +165,7 @@ void __cdecl fcn_00585910(char* e)
 			} else if (sel == 3) {
 				io_FormatTextBuffer(text, (char*) 0x404d, owner + 0x4172);
 			}
-			item = d2_ShowTxt(0, 0, text, g_772514);
+			item = d2_ShowTxt(0, 0, text, d2_CurrentWindowId);
 			((Ctl*) g_1015ea0)[item].x18 = ((Screen*) g_77255c)->xc;
 			((Ctl*) g_1015ea0)[item].x6c = 1;
 			fcn_00472900(item, 0x54);
@@ -183,7 +183,7 @@ void __cdecl fcn_00585910(char* e)
 			io_AppendText(0x6811b0);
 			fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
 			fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
-			ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, g_772514);
+			ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 			io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
 			item = d2_ShowTxt(0, 0, buf, ids[1]);
@@ -229,18 +229,18 @@ void __cdecl fcn_00585910(char* e)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			for (p = &ids[5], i = 0; i < 4; p++, i++) {
-				if (*p == g_67d370) {
+				if (*p == d2_CurrentElementId) {
 					fcn_00471af0(ids[0], 0);
 					fcn_005865f0(e, src, i);
 					fcn_00471af0(ids[0], 1);
-					g_67d370 = -1;
+					d2_CurrentElementId = -1;
 				}
 			}
-			if (g_67d370 == ids[4]) {
+			if (d2_CurrentElementId == ids[4]) {
 				fcn_00471af0(ids[0], 0);
 				fcn_00586800(e, src);
 				fcn_00471af0(ids[0], 1);
-			} else if (g_67d370 == ids[3]) {
+			} else if (d2_CurrentElementId == ids[3]) {
 				fcn_00471af0(ids[0], 0);
 				if (fcn_00586a80(e, src) != 0) {
 					g_774654 = 1;

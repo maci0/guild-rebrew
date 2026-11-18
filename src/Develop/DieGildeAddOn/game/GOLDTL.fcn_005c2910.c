@@ -44,7 +44,7 @@ void __cdecl fcn_005c2910(char* e)
 			g_774654 = 1;
 		}
 		if (g_100f1dc == 2) {
-			if (g_67d370 == saved) {
+			if (d2_CurrentElementId == saved) {
 				fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 0, 2);
 				fcn_00546190(u);
 				g_774654 = 1;

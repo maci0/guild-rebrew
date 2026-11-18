@@ -11,7 +11,7 @@ typedef struct {
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_7747b0;
 extern char g_5438c0[];
@@ -66,8 +66,8 @@ void __cdecl fcn_004e3020(void* arg)
 	table[4] = 0x12;
 	table[5] = 0x14;
 	state = 6;
-	g_68bfb8 = 0x702c6;
-	g_7725c8 = 1;	mask &= 0xffff;
+	cut_EventLoopFlags = 0x702c6;
+	d2_SuppressOverlay = 1;	mask &= 0xffff;
 	while (i < 6) {
 		if ((int) mask < table[i]) {
 			state = i;
@@ -101,7 +101,7 @@ void __cdecl fcn_004e3020(void* arg)
 		}
 	}
 	flags = g_7747b0;
-	g_7725c8 = 0;
+	d2_SuppressOverlay = 0;
 	if ((flags & 4) != 0) {
 		io_FormatTextBuffer(f.msg, 0x3fda, *(unsigned short*) obj);
 	} else {

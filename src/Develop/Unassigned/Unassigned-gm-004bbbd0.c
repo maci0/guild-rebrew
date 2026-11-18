@@ -6,7 +6,7 @@ typedef struct {
 typedef int(__cdecl* fcn_004bbbd0_handler)(fcn_004bbbd0_msg*);
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern fcn_004bbbd0_handler g_6811b8[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -27,7 +27,7 @@ int __cdecl fcn_004bbbd0(fcn_004bbbd0_msg* msg)
 {
 	char* entity;
 
-	if ((*(int*)&g_7f4c00) < 8)
+	if ((*(int*)&gm_GameTime) < 8)
 		return 0;
 	if (msg == 0)
 		return -1;
@@ -53,7 +53,7 @@ int __cdecl fcn_004bbc30(int a1, int a2)
 	packet[4] = 0x42;
 	*(int*) (packet + 8) = a2;
 	*(int*) (packet + 0xc) = -1;
-	*(stamp14*) (packet + 0x28) = (*(stamp14*)&g_7f4c00);
+	*(stamp14*) (packet + 0x28) = (*(stamp14*)&gm_GameTime);
 	packet[0x36] = 1;
 	for (i = 0; i < count; i++) {
 		*(short*) (packet + 0x5c) = fcn_004bbce0(0x45);

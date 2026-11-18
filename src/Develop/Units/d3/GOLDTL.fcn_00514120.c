@@ -31,9 +31,9 @@ typedef struct {
 	int kind;
 } Device;
 
-extern int g_699364;
+extern int gm_NextEntityId;
 extern int g_67a370;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern unsigned char g_773d75;
 extern char g_868060[];
 extern int g_6b8300;
@@ -80,7 +80,7 @@ int __cdecl fcn_00514120(char* map)
 	int i;
 	void* s;
 
-	g_699364 = 1;
+	gm_NextEntityId = 1;
 	fcn_00517250(map, 0);
 	fcn_004432d0(0, 0);
 	if (fcn_00510b70(map) == 0) {
@@ -126,9 +126,9 @@ int __cdecl fcn_00514120(char* map)
 		ls_ID2Ptr();
 	}
 	fcn_004c44a0();
-	(*(Figure**)&g_773da8) = fcn_004c4480(h);
-	strcpy((*(Figure**)&g_773da8)->name, "STADT");
-	fcn_004c5150((*(Figure**)&g_773da8)->id, -1, (*(char*)&g_773d75), 200000000);
+	(*(Figure**)&gm_CityEntity) = fcn_004c4480(h);
+	strcpy((*(Figure**)&gm_CityEntity)->name, "STADT");
+	fcn_004c5150((*(Figure**)&gm_CityEntity)->id, -1, (*(char*)&g_773d75), 200000000);
 	while (fcn_004c44c0() == 0) {
 		fcn_004c3ff0();
 		fcn_004c4940();
@@ -137,7 +137,7 @@ int __cdecl fcn_00514120(char* map)
 	fcn_004c44b0();
 	for (i = 1; i < 4; i++) {
 		if (((Variant*)g_868060)[i].used != 0) {
-			fcn_004c5150((*(Figure**)&g_773da8)->id, -1, (char) i, 200000000);
+			fcn_004c5150((*(Figure**)&gm_CityEntity)->id, -1, (char) i, 200000000);
 		}
 	}
 	fcn_00512680();
@@ -148,7 +148,7 @@ int __cdecl fcn_00514120(char* map)
 		fcn_00535960();
 	}
 	for (s = gm_StartFilteredEntitySearch(1, 5, 0x1c); s != 0; s = gm_FindNextFilteredEntity()) {
-		fcn_005059b0(s, (*(Figure**)&g_773da8)->slot, (*(Figure**)&g_773da8)->slot);
+		fcn_005059b0(s, (*(Figure**)&gm_CityEntity)->slot, (*(Figure**)&gm_CityEntity)->slot);
 	}
 	fcn_005016c0();
 	for (i = 0; i < 4; i++) {

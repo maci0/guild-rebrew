@@ -68,9 +68,9 @@ void __cdecl fcn_005a8e20(void)
 	dlg = fcn_00470820(0, 0, s_6aade4);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 2);
-	w = g_772514;
+	w = d2_CurrentWindowId;
 	d2_SetForm(dlg, 0);
-	fcn_0046e830(-1, -1, g_772514, w, 0x767);
+	fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
 	d2_SetOverlayAnimation(0, 0);
 	((Win*)g_1015f40)[w].x274 = 0x5a;
 	do {
@@ -79,7 +79,7 @@ void __cdecl fcn_005a8e20(void)
 			io_AppendText(0x17f6);
 			d2_SetForm(dlg, 2);
 			io_AppendText((int) s_6811b0);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			n = 0;
 			for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
 				if (e[0x5a] & 2) {
@@ -109,7 +109,7 @@ void __cdecl fcn_005a8e20(void)
 		}
 		if (g_100f1dc != -1) {
 			for (i = 0; i < n; i++) {
-				if (g_67d370 == rows[i].btn && *(unsigned short*) (rows[i].obj + 0x27) != g_774970 &&
+				if (d2_CurrentElementId == rows[i].btn && *(unsigned short*) (rows[i].obj + 0x27) != g_774970 &&
 				    fcn_00526010(&((Player*)g_7f4ca0)[g_774970], *(int*) (rows[i].rel + 0xb0), (*(char*)&g_773d75)) != 0) {
 					fcn_00526920(rows[i].obj, -1, s_6b5c60);
 				}

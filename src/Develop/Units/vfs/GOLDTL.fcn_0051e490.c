@@ -5,7 +5,7 @@ extern char g_6a23b0[];
 extern int ls_SaveVersion;
 extern char g_868060[];
 extern char g_6a375c;
-extern char g_7f4c00[];
+extern char gm_GameTime[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];
@@ -13,7 +13,7 @@ extern char g_773de8;
 extern char g_7747b4[];
 extern char g_7e2480[];
 extern char g_7f3ac4[];
-extern unsigned short g_7ea3c0[];
+extern unsigned short ls_SavePreviewPixels[];
 extern char* g_7746c4;
 extern char* g_7746c8;
 extern char* g_7746cc;
@@ -97,7 +97,7 @@ int __cdecl fcn_0051e490(void* a0, int a1)
 	if (vfs_fwrite(&v15, 1, 1, a0) <= 0) {
 		goto fail;
 	}
-	if (vfs_fwrite(g_7f4c00, 0xe, 1, a0) <= 0) {
+	if (vfs_fwrite(gm_GameTime, 0xe, 1, a0) <= 0) {
 		goto fail;
 	}
 	if (g_774970 != 0xffff) {
@@ -176,7 +176,7 @@ fail:
 		p = buf + i * 3 + 1;
 		j = 0xa0;
 		do {
-			fcn_0041bb70((unsigned int) g_7ea3c0[i], p - 1, p, p + 1);
+			fcn_0041bb70((unsigned int) ls_SavePreviewPixels[i], p - 1, p, p + 1);
 			i = i + 1;
 			p = p + 3;
 			j = j - 1;

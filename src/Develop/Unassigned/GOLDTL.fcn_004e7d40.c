@@ -32,7 +32,7 @@ int __cdecl fcn_004e7d40(char* a0, int a1)
 		return -1;
 	}
 	for (i = 0; i < 0x1e; i++) {
-		if (g_9a9220[i].type == a1) {
+		if (amt_OfficeSlots[i].type == a1) {
 			break;
 		}
 	}
@@ -40,28 +40,28 @@ int __cdecl fcn_004e7d40(char* a0, int a1)
 		return -1;
 	}
 	info.id = (unsigned char) a1;
-	*(Blk4e7d40*) info.data = *(Blk4e7d40*) (g_68da68 + g_9a9220[i].type * 0x18);
+	*(Blk4e7d40*) info.data = *(Blk4e7d40*) (g_68da68 + amt_OfficeSlots[i].type * 0x18);
 	info.sel = 0xff;
 	info.alt = 0xff;
 	if (info.data[4] != 0) {
 		first = 0;
 		flag = 0;
-		if (g_9a9220[i].x4 == -1 && g_9a9220[i].x10 == 3 && g_9a9220[i].xc < 4) {
+		if (amt_OfficeSlots[i].x4 == -1 && amt_OfficeSlots[i].x10 == 3 && amt_OfficeSlots[i].xc < 4) {
 			info.owner = *(int*) (a0 + 4);
-			info.sel = g_9a9220[i].id;
+			info.sel = amt_OfficeSlots[i].id;
 			first = 1;
 			flag = 1;
 		}
 		for (i++; i < 0x1e; i++) {
-			if (g_9a9220[i].type == a1) {
+			if (amt_OfficeSlots[i].type == a1) {
 				break;
 			}
 		}
-		if (i < 0x1e && g_9a9220[i].x4 == -1 && g_9a9220[i].x10 == 3 && g_9a9220[i].xc < 4) {
+		if (i < 0x1e && amt_OfficeSlots[i].x4 == -1 && amt_OfficeSlots[i].x10 == 3 && amt_OfficeSlots[i].xc < 4) {
 			if (first) {
-				info.alt = g_9a9220[i].id;
+				info.alt = amt_OfficeSlots[i].id;
 			} else {
-				info.sel = g_9a9220[i].id;
+				info.sel = amt_OfficeSlots[i].id;
 				info.owner = *(int*) (a0 + 4);
 				fcn_004c4eb0((char*) 0x67eef4);
 				res = fcn_004c6360(&info);
@@ -76,16 +76,16 @@ int __cdecl fcn_004e7d40(char* a0, int a1)
 			return res;
 		}
 	}
-	if (g_9a9220[i].x4 != -1) {
+	if (amt_OfficeSlots[i].x4 != -1) {
 		return -1;
 	}
-	if (g_9a9220[i].x10 != 3) {
+	if (amt_OfficeSlots[i].x10 != 3) {
 		return -1;
 	}
-	if (g_9a9220[i].xc >= 4) {
+	if (amt_OfficeSlots[i].xc >= 4) {
 		return -1;
 	}
-	info.sel = g_9a9220[i].id;
+	info.sel = amt_OfficeSlots[i].id;
 	info.owner = *(int*) (a0 + 4);
 	fcn_004c4eb0((char*) 0x67eef4);
 	res = fcn_004c6360(&info);

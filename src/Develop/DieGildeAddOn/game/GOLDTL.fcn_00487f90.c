@@ -2,7 +2,7 @@
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -74,7 +74,7 @@ void __cdecl fcn_00487f90(int* a0)
 			*(int*) (m + 8) = *(int*) (g_7f4ca4 +
 			                           *(unsigned short*) (*(int*) (a0[1] + 0x16c) + 0x27) * 0x21c);
 			*(int*) (m + 0xc) = *(int*) (*(int*) (a0[1] + 0x16c) + 1);
-			*(int*) (m + 0x28) = *(int*) &g_7f4c00;
+			*(int*) (m + 0x28) = *(int*) &gm_GameTime;
 			*(int*) (m + 0x2c) = g_7f4c04;
 			*(int*) (m + 0x30) = g_7f4c08;
 			*(short*) (m + 0x34) = g_7f4c0c;
@@ -103,7 +103,7 @@ void __cdecl fcn_00487f90(int* a0)
 		*(int*) (m + 0xc) = *(int*) (*(int*) (a0[1] + 0x16c) + 1);
 		*(int*) (m + 0x10) = 0;
 		*(int*) (m + 0x14) = 0;
-		*(int*) (m + 0x28) = *(int*) &g_7f4c00;
+		*(int*) (m + 0x28) = *(int*) &gm_GameTime;
 		*(int*) (m + 0x2c) = g_7f4c04;
 		*(int*) (m + 0x30) = g_7f4c08;
 		*(short*) (m + 0x34) = g_7f4c0c;
@@ -157,7 +157,7 @@ void __cdecl fcn_00487f90(int* a0)
 		*(int*) (m + 0xc) = *(int*) (*(int*) (a0[1] + 0x16c) + 1);
 		*(int*) (m + 0x10) = 0;
 		*(int*) (m + 0x14) = 0;
-		*(int*) (m + 0x28) = *(int*) &g_7f4c00;
+		*(int*) (m + 0x28) = *(int*) &gm_GameTime;
 		*(int*) (m + 0x2c) = g_7f4c04;
 		*(int*) (m + 0x30) = g_7f4c08;
 		*(short*) (m + 0x34) = g_7f4c0c;
@@ -218,7 +218,7 @@ void __cdecl fcn_00487f90(int* a0)
 		*(int*) (m + 0xc) = *(int*) (*(int*) (a0[1] + 0x16c) + 1);
 		*(int*) (m + 0x10) = 0;
 		*(int*) (m + 0x14) = 0;
-		*(int*) (m + 0x28) = *(int*) &g_7f4c00;
+		*(int*) (m + 0x28) = *(int*) &gm_GameTime;
 		*(int*) (m + 0x2c) = g_7f4c04;
 		*(int*) (m + 0x30) = g_7f4c08;
 		*(short*) (m + 0x34) = g_7f4c0c;
@@ -277,7 +277,7 @@ void __cdecl fcn_00487f90(int* a0)
 		*(int*) (m + 8) = *(int*) (g_7f4ca4 +
 		                           *(unsigned short*) (*(int*) (a0[1] + 0x16c) + 0x27) * 0x21c);
 		*(int*) (m + 0xc) = *(int*) (*(int*) (a0[1] + 0x16c) + 1);
-		*(int*) (m + 0x28) = *(int*) &g_7f4c00;
+		*(int*) (m + 0x28) = *(int*) &gm_GameTime;
 		*(int*) (m + 0x2c) = g_7f4c04;
 		*(int*) (m + 0x30) = g_7f4c08;
 		*(int*) (m + 0x10) = 0;

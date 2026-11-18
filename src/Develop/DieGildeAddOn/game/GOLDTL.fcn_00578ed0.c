@@ -88,7 +88,7 @@ void __cdecl fcn_00578ed0(char* a0)
 					return;
 				}
 				if (*(int*) (*(int*) (e + 0x184) + 0x128) != 0) {
-					*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+					*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 
 
 
@@ -113,7 +113,7 @@ found_one:
 						msg.f0c = msg.f08;
 						msg.f60 = msg.f08;
 						msg.kind = 0x8b;
-						*(pos14_7f4c00*) &msg.f28 = g_7f4c00;
+						*(pos14_7f4c00*) &msg.f28 = gm_GameTime;
 
 
 
@@ -159,7 +159,7 @@ found_one:
 					*(int*) (a0 + 0x70) = -1;
 					return;
 				}
-				*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 
 
 

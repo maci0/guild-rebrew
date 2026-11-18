@@ -3,7 +3,7 @@
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -12,7 +12,7 @@ extern char g_7f4ca4[];
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 extern void* g_6b7fdc;
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_004bcc50(char*, int);
@@ -62,7 +62,7 @@ void __cdecl fcn_00565ab0(char* ev)
 						if (!fcn_004c4450(*(int*) (ev + 0xc0))) {
 							return;
 						}
-						if (g_6b8010 == fcn_005155e0((unsigned char*) v4)) {
+						if (d3_CurrentContextIndex == fcn_005155e0((unsigned char*) v4)) {
 							void* found;
 							char* ent = (char*) lpGebaeudePROT + (unsigned char) *v4 * 0x24d;
 
@@ -85,7 +85,7 @@ void __cdecl fcn_00565ab0(char* ev)
 						else {
 							*(int*) (ev + 0xc0) = -1;
 						}
-						*(pos14_7f4c00*) (ev + 0x52) = g_7f4c00;
+						*(pos14_7f4c00*) (ev + 0x52) = gm_GameTime;
 						fcn_00500bb0(ev + 0x52, 0, 0, 1);
 						*(int*) (ev + 0x70) = *(int*) (ev + 0x70) + 1;
 						return;
@@ -95,7 +95,7 @@ void __cdecl fcn_00565ab0(char* ev)
 							unsigned short type = *(unsigned short*) (v5 + 0xa);
 							char* def = lpObjektePROT + type * 0x41;
 
-							*(pos14_7f4c00*) (ev + 0x52) = g_7f4c00;
+							*(pos14_7f4c00*) (ev + 0x52) = gm_GameTime;
 							fcn_00500bb0(ev + 0x52, 0,
 							             (int) ((double) (*(char*) (v5 + 0xd) * *(unsigned int*) (def + 0x22)) * 0.25), 0);
 						}
@@ -105,7 +105,7 @@ void __cdecl fcn_00565ab0(char* ev)
 						if (*(int*) (ev + 0xb4) != -1) {
 							fcn_00428720(fcn_00426cc0(*(int*) (ev + 0xb4)));
 						}
-						if (g_6b8010 == fcn_005155e0((unsigned char*) v4)) {
+						if (d3_CurrentContextIndex == fcn_005155e0((unsigned char*) v4)) {
 							void* found;
 							char* ent = (char*) lpGebaeudePROT + (unsigned char) *v4 * 0x24d;
 
@@ -125,7 +125,7 @@ void __cdecl fcn_00565ab0(char* ev)
 								}
 							}
 						}
-						*(pos14_7f4c00*) (ev + 0x52) = g_7f4c00;
+						*(pos14_7f4c00*) (ev + 0x52) = gm_GameTime;
 						fcn_00500bb0(ev + 0x52, 0, 10, 0);
 						*(int*) (ev + 0x70) = *(int*) (ev + 0x70) + 1;
 						return;
@@ -165,10 +165,10 @@ void __cdecl fcn_00565ab0(char* ev)
 											*(int*) (pkt + 0x0c) = id;
 											*(int*) (pkt + 0x10) = 1;
 											*(int*) (pkt + 0x14) = 0;
-											*(int*) (pkt + 0x28) = g_7f4c00.a;
-											*(int*) (pkt + 0x2c) = g_7f4c00.b;
-											*(int*) (pkt + 0x30) = g_7f4c00.c;
-											*(short*) (pkt + 0x34) = g_7f4c00.d;
+											*(int*) (pkt + 0x28) = gm_GameTime.a;
+											*(int*) (pkt + 0x2c) = gm_GameTime.b;
+											*(int*) (pkt + 0x30) = gm_GameTime.c;
+											*(short*) (pkt + 0x34) = gm_GameTime.d;
 											pkt[0x36] = 1;
 											*(int*) (pkt + 0x58) = id;
 											*(int*) (pkt + 0x5c) = *(int*) (ev + 0xb0);

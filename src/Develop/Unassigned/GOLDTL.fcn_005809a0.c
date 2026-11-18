@@ -2,13 +2,13 @@
 
 
 extern int* g_665f08;
-extern int g_774a14;
+extern int d2_TutorialActive;
 
 int __cdecl fcn_005809a0(int a1)
 {
 	int* p;
 
-	if (*(int*) ((char*)&g_774a14) == 0) {
+	if (*(int*) ((char*)&d2_TutorialActive) == 0) {
 		return -4;
 	}
 	p = g_665f08;

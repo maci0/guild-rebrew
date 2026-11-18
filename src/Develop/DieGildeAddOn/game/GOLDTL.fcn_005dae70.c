@@ -52,11 +52,11 @@ int __cdecl fcn_005dae70(char* e)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == ok) {
+			if (d2_CurrentElementId == ok) {
 				fcn_004e8240(x.x0, 0, 0, g_7f4c04 > 13 ? 0xff : 3, 0xff);
 				r = 0x90;
 				g_774654 = 1;
-			} else if (g_67d370 == cancel) {
+			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;
 			}
 		}

@@ -41,10 +41,10 @@ typedef struct {
 	char pad3c[0x44];
 } MarktSlot;
 
-extern pos14m g_7f4c00;
+extern pos14m gm_GameTime;
 extern char* g_773d78;
 extern unsigned char g_773d75;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern char* lpObjektePROT;
 extern unsigned char g_7747b0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -103,28 +103,28 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 		fcn_00546190(a0);
 		return;
 	}
-	v = fcn_00500d20((void*) (a0 + 0x60), (void*) &g_7f4c00);
-	if (g_7f4c00.b > 0x14) {
+	v = fcn_00500d20((void*) (a0 + 0x60), (void*) &gm_GameTime);
+	if (gm_GameTime.b > 0x14) {
 		fcn_00546190(a0);
 		return;
 	}
 	if (v == 0) {
 		return;
 	}
-	*(pos14m*) (a0 + 0x60) = g_7f4c00;
+	*(pos14m*) (a0 + 0x60) = gm_GameTime;
 	if (*(int*) (a0 + 0x70) < -2) {
 		return;
 	}
 	if (*(int*) (a0 + 0x70) < 0) {
-		fcn_00549330(a0, *(unsigned short*) g_773da8);
+		fcn_00549330(a0, *(unsigned short*) gm_CityEntity);
 		*(int*) (a0 + 0x70) = 0;
 		return;
 	}
 	if (*(int*) (a0 + 0x70) != 0) {
 		return;
 	}
-	if (fcn_0050d320((int) g_773da8, g_773d75) < 0x4e2000) {
-		fcn_004c5150(*(int*) (g_773da8 + 4), -1, g_773d75, 0x4e2000);
+	if (fcn_0050d320((int) gm_CityEntity, g_773d75) < 0x4e2000) {
+		fcn_004c5150(*(int*) (gm_CityEntity + 4), -1, g_773d75, 0x4e2000);
 	}
 	/* pass 1: refill the player's own stock */
 	for (i = 0; i < 0x55; i++) {
@@ -189,7 +189,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 				rec.f24 = rec.f20 * 1.5f;
 			}
 		}
-		if ((unsigned short) gm_RandomMod(100) > 0xa || g_7f4c00.b == 0xc) {
+		if ((unsigned short) gm_RandomMod(100) > 0xa || gm_GameTime.b == 0xc) {
 			rec.f38 = fcn_005025a0(g_773d75, i);
 		}
 		fcn_004c61d0(&rec, g_773d75);
@@ -279,7 +279,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 				}
 			}
 		}
-		if ((unsigned short) gm_RandomMod(100) > 0xa || g_7f4c00.b == 0xc) {
+		if ((unsigned short) gm_RandomMod(100) > 0xa || gm_GameTime.b == 0xc) {
 			rec.f38 = fcn_005025a0(g_773d75, i);
 		}
 		fcn_004c61d0(&rec, g_773d75);
@@ -421,11 +421,11 @@ next_lager:
 		bar += 0x2f4;
 		lager += 0x2a90;
 	} while (bar < (char*) 0x868c30);
-	if (g_7f4c00.b >= 0x16) {
+	if (gm_GameTime.b >= 0x16) {
 		fcn_00546190(a0);
 		return;
 	}
-	*(pos14m*) (a0 + 0x52) = g_7f4c00;
+	*(pos14m*) (a0 + 0x52) = gm_GameTime;
 	fcn_00500bb0(a0 + 0x52, 1, 0, 0);
 	*(int*) (a0 + 0x70) = 0;
 }

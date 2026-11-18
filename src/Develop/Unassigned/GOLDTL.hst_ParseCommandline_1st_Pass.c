@@ -7,9 +7,9 @@ typedef struct Slot {
 // SIZE 0x44
 
 extern int g_1052de0;
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 extern char g_1007bc0[];
-extern int g_67fca0;
+extern int hst_HistoryTextBase;
 
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 int __cdecl atoi(const char* s);
@@ -80,7 +80,7 @@ Slot* __cdecl hst_ParseCommandline_1st_Pass(int id)
 		}
 	}
 	if (id < 0x4800) {
-		s = g_14a5320[id];
+		s = txt_TextEntries[id];
 		if (s == 0) {
 			return 0;
 		}
@@ -110,7 +110,7 @@ Slot* __cdecl hst_ParseCommandline_1st_Pass(int id)
 		return slot;
 	}
 	if (n >= 4) {
-		sprintf(msg, "hst_ParseCommandline_1st_Pass() failed: Wrong group index in Label %i", id - g_67fca0);
+		sprintf(msg, "hst_ParseCommandline_1st_Pass() failed: Wrong group index in Label %i", id - hst_HistoryTextBase);
 	}
 	return 0;
 }

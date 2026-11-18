@@ -3,7 +3,7 @@
 
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/aemter.h"
-extern Rec18_68da68 g_9a9220[42];
+extern Rec18_68da68 amt_OfficeSlots[42];
 extern Rec18_68da68 g_68da68[];
 
 int __cdecl fcn_004e8b80(int kind, int max, OFFICE_SLOT* out)
@@ -22,8 +22,8 @@ int __cdecl fcn_004e8b80(int kind, int max, OFFICE_SLOT* out)
 		return 0;
 	n = 0;
 	for (i = start - 1; i >= 0 && n < max; i--) {
-		if (((OFFICE_ROLE_TEMPLATE*)g_68da68)[((OFFICE_SLOT*)g_9a9220)[i].mamt].f4 == kind)
-			out[n++] = ((OFFICE_SLOT*)g_9a9220)[i];
+		if (((OFFICE_ROLE_TEMPLATE*)g_68da68)[((OFFICE_SLOT*)amt_OfficeSlots)[i].mamt].f4 == kind)
+			out[n++] = ((OFFICE_SLOT*)amt_OfficeSlots)[i];
 	}
 	return n;
 }

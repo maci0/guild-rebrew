@@ -9,7 +9,7 @@ struct house {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern char g_7f4ca0[];
 extern int g_7747f0;
@@ -61,7 +61,7 @@ void __cdecl fcn_005703b0(char* u)
 				fcn_00526920(p, -1, g_6b5c60);
 			}
 		}
-		*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 		*(short*) (u + 0x56) += gm_RandomMod(2);
 		*(int*) (u + 0x58) = gm_RandomMod(0x3c);
 		break;

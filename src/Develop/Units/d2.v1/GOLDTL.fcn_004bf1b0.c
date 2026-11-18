@@ -1,9 +1,9 @@
 extern char* g_1015ea0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct TradeProto { unsigned char kind; unsigned char rest[0x24c]; } TradeProto;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_772908;
 extern int g_772900;
 #include "client_dialog_state.h"
@@ -91,7 +91,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 	d2_SetForm(h, 1);
 	io_AppendText(s_68170c, *(unsigned short*) (tbl + 0x27), tbl);
 	d2_SetForm(h, 3);
-	fcn_00533a60(g_772514, 0, ids, 2, g_14b5e9c, g_14b5ea4);
+	fcn_00533a60(d2_CurrentWindowId, 0, ids, 2, g_14b5e9c, g_14b5ea4);
 	selA = ids[0];
 	selB = ids[1];
 	
@@ -137,7 +137,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 		}
 	}
 	while (fcn_005373e0(fcn_004bf1b0, 0x657c7) != 0) {
-		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && g_67d370 == selA)) {
+		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == selA)) {
 			g_774654 = 1;
 		}
 		if (g_772908 != 0 && selB != -1
@@ -179,14 +179,14 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 		}
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 3; i++) {
-				if (icons[i] != -1 && icons[i] == g_67d370) {
+				if (icons[i] != -1 && icons[i] == d2_CurrentElementId) {
 					cur = &a0[2 + i * 2];
 					node = &nodeA[i][0];
 					kind = 1;
 				}
 			}
 			for (i = 0; i < 3; i++) {
-				if (labels[i] != -1 && labels[i] == g_67d370) {
+				if (labels[i] != -1 && labels[i] == d2_CurrentElementId) {
 					cur = &a0[8 + i * 2];
 					node = &nodeB[i][0];
 					kind = 2;
@@ -213,7 +213,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 				fcn_00471a30(h, 1);
 				cur = 0;
 			}
-			if (g_67d370 == selB) {
+			if (d2_CurrentElementId == selB) {
 				k = fcn_004bf3e0(a0);
 				if (k != -1) {
 					fcn_004bfc70(k);

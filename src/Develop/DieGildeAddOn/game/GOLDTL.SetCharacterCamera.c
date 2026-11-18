@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #include <string.h>
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 
 void __cdecl fcn_00425bf0(char*, int, const char*);
 void __cdecl ch_SetCameraView(char*, int);
@@ -12,7 +12,7 @@ void __cdecl ch_SetCameraView(char*, int);
 int __cdecl SetCharacterCamera(char** ch, char** view)
 {
 	if (*ch == 0) {
-		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "SetCharacterCamera(): Invalid character");
+		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "SetCharacterCamera(): Invalid character");
 		return 1;
 	}
 	if (strcmp("CLOSEUP", *view) == 0) {

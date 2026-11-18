@@ -22,7 +22,7 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned 
 
 
 
-	step = g_664398[gm_RandomMod(0x10) & 0xffff]; idx = 0;
+	step = gm_RandomSearchSteps[gm_RandomMod(0x10) & 0xffff]; idx = 0;
 	memset(v12, 0, 0x50);
 	memset((char*) v12 + 0x1c, 0xff, 0x20);
 	*(int*) ((char*) v12 + 0x14) = 2; flag = 0;

@@ -23,7 +23,7 @@ typedef struct {
     char unbekannt_020[0x58 - 0x20];
 } D3_OBJ_ANIM_FRAME;
 
-extern int g_6b5cbc;
+extern int d3_CameraAnimating;
 extern int d3_ActiveCameraAnimation;
 #include "Develop/Units/d3/d3_camera.h"
 int __cdecl fcn_004339e0(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_FRAME*);
@@ -36,7 +36,7 @@ int __cdecl StartObjectTransformAnimation(char* objekt, float x, float y, float 
     D3_OBJ_ANIM_FLAGS flags;
     int ergebnis;
 
-    if (g_6b5cbc != 0 && objekt == g_6b8014) {
+    if (d3_CameraAnimating != 0 && objekt == d3_ActiveCamera) {
         return 0;
     }
     flags.bit_1_4 = 1;
@@ -58,8 +58,8 @@ int __cdecl StartObjectTransformAnimation(char* objekt, float x, float y, float 
     frames[0].position[1] = 0.0f;
     frames[0].position[2] = 0.0f;
     ergebnis = fcn_004339e0(objekt, flags, 2, frames);
-    if (objekt == g_6b8014) {
-        g_6b5cbc = 1;
+    if (objekt == d3_ActiveCamera) {
+        d3_CameraAnimating = 1;
         d3_ActiveCameraAnimation = ergebnis;
     }
     return 1;

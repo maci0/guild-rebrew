@@ -71,7 +71,7 @@ typedef struct {
 	unsigned char unknown_08[4];
 } DISPLAY_COUNTER;
 
-extern DISPLAY_COUNTER DisplayCounters[6];
+extern DISPLAY_COUNTER d2_DisplayCounters[6];
 void __cdecl ResetDisplayCounters(void);
 int __cdecl CountDisplayCounters(void);
 

@@ -13,10 +13,10 @@ typedef struct {
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 extern char g_7f4ca2[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern int g_7747b4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100dc20;
@@ -81,7 +81,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 	res = fcn_00502cd0(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x116);
 	if (res != 0) {
 		g_100b0ac = 0;
-		g_100b0a8 = 0;
+		ai_ResourceCount = 0;
 		fcn_00485650(meister, res);
 		fcn_00486c40(meister, res, *(int*) (*(char**) (meister + 0x16c) + 0x39));
 		fcn_00489010(meister, res);
@@ -94,7 +94,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 	fcn_00487470(meister);
 	fcn_004888a0(meister);
 	fcn_00488c00(meister);
-	if ((unsigned short) g_7f4c00.b > 6 && (*(unsigned int*) (meister + 4) + (unsigned short) g_7f4c00.b) % 3 == 0) {
+	if ((unsigned short) gm_GameTime.b > 6 && (*(unsigned int*) (meister + 4) + (unsigned short) gm_GameTime.b) % 3 == 0) {
 		if (*(int*) (meister + 0x1b4) & 0x20) {
 			return;
 		}
@@ -146,7 +146,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 		kind = *(unsigned char*) (g_7f4ca2 + *(unsigned short*) (bld + 0x27) * 0x21c);
 		if (kind != 6 && kind != 7) {
 			if (gm_RandomFloat01() > 0.85) {
-				if (freehits >= 3 && *(int*) &g_7f4c00 >= 7 - g_7747b4) {
+				if (freehits >= 3 && *(int*) &gm_GameTime >= 7 - g_7747b4) {
 					goto attack;
 				}
 			}
@@ -197,7 +197,7 @@ attack:
 				if (*(unsigned char*) (p + 0x5a) & 1) {
 					continue;
 				}
-				if (*(unsigned short*) (p + 0x27) == *(unsigned short*) g_773da8) {
+				if (*(unsigned short*) (p + 0x27) == *(unsigned short*) gm_CityEntity) {
 					continue;
 				}
 				if (gm_CheckEntityType((unsigned char*) p) != 0) {
@@ -234,10 +234,10 @@ attack:
 			idx = *(unsigned short*) (bld + 0x27);
 			*(int*) (msg + 8) = *(int*) (g_7f4ca4 + idx * 0x21c);
 			*(int*) (msg + 0xc) = *(int*) (bld + 1);
-			*(int*) (msg + 0x28) = *(int*) &g_7f4c00;
-			*(int*) (msg + 0x2c) = g_7f4c00.b;
-			*(int*) (msg + 0x30) = g_7f4c00.c;
-			*(short*) (msg + 0x34) = g_7f4c00.d;
+			*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
+			*(int*) (msg + 0x2c) = gm_GameTime.b;
+			*(int*) (msg + 0x30) = gm_GameTime.c;
+			*(short*) (msg + 0x34) = gm_GameTime.d;
 			msg[0x36] = 2;
 			*(int*) (msg + 0x58) = -1;
 			*(int*) (msg + 0x5c) = *(int*) (cand + 1);
@@ -275,10 +275,10 @@ send48:
 		idx = *(unsigned short*) (bld + 0x27);
 		*(int*) (msg + 8) = *(int*) (g_7f4ca4 + idx * 0x21c);
 		*(int*) (msg + 0xc) = *(int*) (bld + 1);
-		*(int*) (msg + 0x28) = *(int*) &g_7f4c00;
-		*(int*) (msg + 0x2c) = g_7f4c00.b;
-		*(int*) (msg + 0x30) = g_7f4c00.c;
-		*(short*) (msg + 0x34) = g_7f4c00.d;
+		*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
+		*(int*) (msg + 0x2c) = gm_GameTime.b;
+		*(int*) (msg + 0x30) = gm_GameTime.c;
+		*(short*) (msg + 0x34) = gm_GameTime.d;
 		msg[0x36] = 2;
 		r = gm_RandomMod(8);
 		strcpy(msg + 0x58, (char*) 0x6a4770 + r * 0x20);

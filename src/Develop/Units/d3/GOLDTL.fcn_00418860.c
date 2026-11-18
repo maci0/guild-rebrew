@@ -1,7 +1,7 @@
 #include <math.h>
 #include <string.h>
 /* Scene camera; inferred owner in d3_camera.h. */
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 /* Sun-ray state shared with sonnenstrahlen.c. */
 extern char* g_6b5cf8;
 extern int g_6b5cfc;
@@ -40,14 +40,14 @@ void __cdecl fcn_00418860(char* obj)
 	float result;
 	float a;
 
-	if (obj == 0 || *(int*) (obj + 0x1cc) == 0 || g_6b8014 == 0) {
+	if (obj == 0 || *(int*) (obj + 0x1cc) == 0 || d3_ActiveCamera == 0) {
 		return;
 	}
-	a = *(float*) (g_6b8014 + 0x4c);
+	a = *(float*) (d3_ActiveCamera + 0x4c);
 	vec[0] = a;
-	a = *(float*) (g_6b8014 + 0x50);
+	a = *(float*) (d3_ActiveCamera + 0x50);
 	vec[1] = a;
-	a = *(float*) (g_6b8014 + 0x54);
+	a = *(float*) (d3_ActiveCamera + 0x54);
 	vec[2] = a;
 	if (CompareVector3WithinTolerance(vec, (float*) (obj + 0x4c), 0.0001f) == 0) {
 		fcn_00438b40(obj, vec);
@@ -69,7 +69,7 @@ void __cdecl fcn_00418860(char* obj)
 	}
 	{
 		char* camera;
-		camera = g_6b8014;
+		camera = d3_ActiveCamera;
 		a = (float) fmod(*(float*) (obj + 0x88) - *(float*) (camera + 0x88), g_662958);
 		if (a < g_6628a8) {
 			a += 6.2831855f;

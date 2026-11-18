@@ -3,7 +3,7 @@
 #include "client_actions.h"
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 extern cell10_fb5760 g_fb5760[0x8000];
@@ -219,7 +219,7 @@ warten:
             e[0xd0] = 0;
         }
         letzte_zeit = (pos14_7f4c00*) (e + 0x60);
-        differenz = fcn_0050c830(letzte_zeit, &g_7f4c00, 0);
+        differenz = fcn_0050c830(letzte_zeit, &gm_GameTime, 0);
         if (differenz > 0) {
             e[0xd0] += differenz;
         }
@@ -273,7 +273,7 @@ warten:
                 *letzte_zeit = *(pos14_7f4c00*) (e + 0x52);
             }
             naechste_zeit = (pos14_7f4c00*) (e + 0x52);
-            if (fcn_00500cb0(naechste_zeit, &g_7f4c00) >= 0) {
+            if (fcn_00500cb0(naechste_zeit, &gm_GameTime) >= 0) {
                 return;
             }
             do {
@@ -299,7 +299,7 @@ warten:
 lager_done:
                 *letzte_zeit = *naechste_zeit;
                 fcn_00500bb0(naechste_zeit, 0, 1, 0);
-            } while (fcn_00500cb0(naechste_zeit, &g_7f4c00) < 0);
+            } while (fcn_00500cb0(naechste_zeit, &gm_GameTime) < 0);
             return;
         }
 mangel:

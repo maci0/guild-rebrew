@@ -23,7 +23,7 @@ void __cdecl fcn_005467e0(int);
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x00555d30 */
 void __cdecl fcn_00555d30(char* obj)
@@ -55,7 +55,7 @@ void __cdecl fcn_00555d30(char* obj)
 		*(short*) (obj + 0xac) = id;
 		*(short*) (obj + 0xae) = fcn_004ac290(id);
 		base = (int*) (obj + 0x52);
-		*(pos14_7f4c00*) base = g_7f4c00;
+		*(pos14_7f4c00*) base = gm_GameTime;
 		base[0] += gm_RandomMod(4) + 3;
 		*(unsigned short*) (obj + 0x56) = 10;
 		*(int*) (obj + 0x58) = 0;
@@ -82,7 +82,7 @@ void __cdecl fcn_00555d30(char* obj)
 		return;
 	case 2:
 		base = (int*) (obj + 0x52);
-		*(pos14_7f4c00*) base = g_7f4c00;
+		*(pos14_7f4c00*) base = gm_GameTime;
 		fcn_00500bb0((char*) base, 0, 5, 0);
 		e = fcn_00426cc0(*(int*) (obj + 0xb4));
 		if (*(unsigned short*) (obj + 0x56) < 0x14) {
@@ -128,7 +128,7 @@ void __cdecl fcn_00555d30(char* obj)
 				fcn_004c5420(*(int*) (j - 0x1c4), 0x1c8, 4, 0, 0x20000);
 			}
 		}
-		*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 		id = *(int*) (obj + 0x52) + 1;
 		*(unsigned short*) (obj + 0x56) = 6;
 		*(int*) (obj + 0x52) = id;

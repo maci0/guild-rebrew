@@ -24,12 +24,12 @@ int __cdecl fcn_004b1d10(int a1, int a2, char* s)
 		v = 10;
 	}
 	memset(buf, 0, 0xf8);
-	w = *(int*) (g_773da8 + 4);
+	w = *(int*) (gm_CityEntity + 4);
 	*(char*) (buf + 4) = 0x59;
 	*(int*) (buf + 0x58) = v;
 	*(int*) (buf + 0x2c) = g_7f4c04;
 	*(int*) (buf + 8) = w;
-	*(int*) (buf + 0x28) = g_7f4c00.a;
+	*(int*) (buf + 0x28) = gm_GameTime.a;
 	*(int*) (buf + 0x0c) = -1;
 	*(unsigned char*) (buf + 0x36) = 2;
 	*(int*) (buf + 0x30) = g_7f4c08;

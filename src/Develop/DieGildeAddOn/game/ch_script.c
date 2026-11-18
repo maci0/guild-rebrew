@@ -13,20 +13,20 @@ int __cdecl WalkToDummy(char** character, char** dummy)
 {
     if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) WalkToDummy) {
         if (*(void**) (*character + 0x128) != 0) {
-            *(void**) (g_6b7e98 + 0xc60) = (void*) WalkToDummy;
+            *(void**) (evt_CurrentScript + 0xc60) = (void*) WalkToDummy;
             return 0;
         }
     } else {
         if (*dummy != 0 && *character != 0) {
             if (m_is_tracked(*dummy) && m_is_tracked(*character)) {
                 ch_QueueWalkToDummy(*character, *dummy);
-                if (*(int*) (g_6b7e98 + 0xc84) == 1) {
-                    *(void**) (g_6b7e98 + 0xc60) = (void*) WalkToDummy;
+                if (*(int*) (evt_CurrentScript + 0xc84) == 1) {
+                    *(void**) (evt_CurrentScript + 0xc60) = (void*) WalkToDummy;
                 }
                 return 1;
             }
         } else {
-            fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118),
+            fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118),
                 "WalkToDummy(): invalid character or dummy");
         }
     }
@@ -37,7 +37,7 @@ int __cdecl WalkToDummy(char** character, char** dummy)
 int __cdecl MoveCharacterCamera(char** character, char** view, int* mode)
 {
     if (*character == 0) {
-        fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118),
+        fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118),
             "MoveCharacterCamera(): Invalid character");
         return 1;
     }

@@ -1,4 +1,4 @@
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 extern char* g_fc28f4;
 extern char g_fc2700[];
 extern int g_67a370;
@@ -9,7 +9,7 @@ void __cdecl fcn_00438cb0(char*, char*);
 /* ADDRESS: GOLD 0x0043ca20 */
 void __cdecl fcn_0043ca20(char* o)
 {
-	if (*(int*) (o + 0x218) == 3 && g_6b8014 == 0) {
+	if (*(int*) (o + 0x218) == 3 && d3_ActiveCamera == 0) {
 		fcn_00439c60(o);
 		fcn_00438cb0(o, o + 0x84);
 	}

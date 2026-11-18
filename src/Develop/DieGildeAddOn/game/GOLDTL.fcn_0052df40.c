@@ -36,12 +36,12 @@ extern char g_6a2f40[];
 extern char g_6a2f30[];
 extern char g_6a2f24[];
 extern char g_6a2f18[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern Win_1015f40 g_1015f40[0x60];
 
 extern House_52df40 g_7f4ca0[];
 extern Dyn_52df40 g_868060[];
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char* g_7746c8;
@@ -86,15 +86,15 @@ void __cdecl fcn_0052df40(unsigned char* s)
 		io_AppendText(g_6a2f24, 0x870, &g_868060[*(int*) (s + 0x65)]);
 	}
 	d2_SetForm(g_6a25b8, 0);
-	g_6a25bc = fcn_0046f740((((Slot_52df40*) g_1015f40)[g_772514].width - 0x30) >> 1, 0x48, *s + 0x427, g_772514);
+	g_6a25bc = fcn_0046f740((((Slot_52df40*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1, 0x48, *s + 0x427, d2_CurrentWindowId);
 	((Ctl_52df40*)g_1015ea0)[g_6a25bc].shown = 1;
-	if (*(unsigned short*) (s + 0x27) != 0xffff && *(unsigned short*) (s + 0x27) != *(unsigned short*) g_773da8) {
+	if (*(unsigned short*) (s + 0x27) != 0xffff && *(unsigned short*) (s + 0x27) != *(unsigned short*) gm_CityEntity) {
 		((Ctl_52df40*)g_1015ea0)[g_6a25bc].link = &g_7f4ca0[*(unsigned short*) (s + 0x27)];
 	}
 	if (*s == 0x47 || *s == 0x1d || *s == 0x57) {
 		d2_CurrentValueBar = -1;
 	} else {
-		d2_CurrentValueBar = fcn_004677e0(0x15, 0x7b, 0x38, 0, 0x64, 0x75, 0x442, g_772514);
+		d2_CurrentValueBar = fcn_004677e0(0x15, 0x7b, 0x38, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 		d2_SetElementValue(d2_CurrentValueBar, 0, 0x64, pct);
 	}
 	if ((s[0x5a] & 1) != 0 || *s == 0x47 || *s == 0x1d || *s == 0x57) {

@@ -18,7 +18,7 @@ typedef struct {
 } Msg;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -32,7 +32,7 @@ int __cdecl fcn_005df5a0(char* obj)
 	msg.kind = 0xa4;
 	msg.owner = *(int*) (obj + 4);
 	msg.entity = -1;
-	msg.a = (*(int*)&g_7f4c00);
+	msg.a = (*(int*)&gm_GameTime);
 	msg.b = (*(int*)&g_7f4c04);
 	msg.c = g_7f4c08;
 	msg.d = g_7f4c0c;

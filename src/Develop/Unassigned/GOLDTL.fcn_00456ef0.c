@@ -69,7 +69,7 @@ void __cdecl fcn_00456ef0(char* o)
 		return;
 	}
 	if (!(*(unsigned char*) (o + 0x216) & 0x20)) {
-		fcn_00438100(o, (*(unsigned char*) (o + 0x214) & 0x20) ? 0 : g_6b8014, 0);
+		fcn_00438100(o, (*(unsigned char*) (o + 0x214) & 0x20) ? 0 : d3_ActiveCamera, 0);
 	}
 	for (s = g_6b86e0; s != 0; s = *(char**) (s + 0x1f0)) {
 		ctx = *(char**) (o + 0x1cc);
@@ -98,13 +98,13 @@ void __cdecl fcn_00456ef0(char* o)
 				r.y = d.y * t + position.y;
 				r.z = d.z * t + position.z;
 			}
-			cam = (Cam456ef0*) g_6b8014;
+			cam = (Cam456ef0*) d3_ActiveCamera;
 			d.x = r.x - cam->x;
 			d.y = r.y - cam->y;
 			d.z = r.z - cam->z;
 			q[0] = d.z * cam->m20 + d.y * cam->m10 + d.x * cam->m00 + cam->tx;
-			cam = (Cam456ef0*) g_6b8014; q[1] = d.z * cam->m21 + d.y * cam->m11 + d.x * cam->m01 + cam->ty;
-			cam = (Cam456ef0*) g_6b8014; q[2] = d.z * cam->m22 + d.y * cam->m12 + d.x * cam->m02 + cam->tz;
+			cam = (Cam456ef0*) d3_ActiveCamera; q[1] = d.z * cam->m21 + d.y * cam->m11 + d.x * cam->m01 + cam->ty;
+			cam = (Cam456ef0*) d3_ActiveCamera; q[2] = d.z * cam->m22 + d.y * cam->m12 + d.x * cam->m02 + cam->tz;
 			q += 0x14;
 			i--;
 		} while (i != 0);

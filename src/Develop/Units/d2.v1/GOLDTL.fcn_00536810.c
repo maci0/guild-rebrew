@@ -32,13 +32,13 @@ extern char g_7f4ca0[];
 extern char* g_1015ea0;
 extern unsigned char g_6a2c14[8];
 extern int g_6a2c1c;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14ac628;
 extern int g_14ce8e0;
 extern char g_14cf950;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_6b5c60[];
 extern char g_7e3a60[];
@@ -84,14 +84,14 @@ void __cdecl fcn_00536810(void)
 	n = 0;
 	for (i = 0; i < 768; i++) {
 		if (((House*) g_7f4ca0)[i].kind == 7) {
-			ids[n] = fcn_0046f740(n * 0x30 + 0x64, 4, ((House*) g_7f4ca0)[i].f54, g_772514);
+			ids[n] = fcn_0046f740(n * 0x30 + 0x64, 4, ((House*) g_7f4ca0)[i].f54, d2_CurrentWindowId);
 			((Ctl*) g_1015ea0)[ids[n]].f58 = 1;
 			((Ctl*) g_1015ea0)[ids[n]].house = &((House*) g_7f4ca0)[i];
 			d2_SetElementValue(ids[n], g_6a2c14[n]);
 			n++;
 		}
 	}
-	win = fcn_00468df0(0, 0, 0xc5, g_14ac628, g_772514);
+	win = fcn_00468df0(0, 0, 0xc5, g_14ac628, d2_CurrentWindowId);
 	fcn_00472900(win, 0x54);
 	d2_SetForm(dlg, 2);
 	edit = fcn_00472250(dlg, 2, io_AppendText(0x1cc3, g_6b5c60));
@@ -104,7 +104,7 @@ void __cdecl fcn_00536810(void)
 			g_774654 = 1;
 		}
 		fcn_00474cf0(edit);
-		if ((g_100f1dc != -1 || g_14cf950 == 0x1c) && (g_67d370 == win || g_14cf950 == 0x1c)) {
+		if ((g_100f1dc != -1 || g_14cf950 == 0x1c) && (d2_CurrentElementId == win || g_14cf950 == 0x1c)) {
 			for (i = 0; i < 8; i++) {
 				if (ids[i] != -1 && fcn_00471f80(ids[i]) != 0) {
 					chat.names[i] = ((Ctl*) g_1015ea0)[ids[i]].house->f4;

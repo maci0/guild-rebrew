@@ -3,7 +3,7 @@
 // SIZE 0x2f4
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern trade_868080 g_868080[];
 extern unsigned char g_773d75;
 extern int g_100f884;
@@ -41,7 +41,7 @@ void __cdecl fcn_0055a3d0(char* u)
 			*(int*) (u + 0x70) = 1;
 			break;
 		case 1:
-			if (fcn_00500cb0(&g_7f4c00, u + 0x52) > 0) {
+			if (fcn_00500cb0(&gm_GameTime, u + 0x52) > 0) {
 				fcn_00545780(u);
 				fcn_00546190(u);
 				return;

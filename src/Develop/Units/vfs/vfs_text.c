@@ -1,4 +1,4 @@
-extern char g_149d120[][0x74];
+extern char txt_TextBanks[][0x74];
 
 int __cdecl fcn_0065f220(const char* a, const char* b);
 #include <stdio.h>
@@ -13,7 +13,7 @@ typedef struct {
 
 extern char g_1053000[][0x50];
 extern int g_11bb000[];
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 typedef struct VFS_DIR VFS_DIR;
 extern VFS_DIR* g_6b7fdc;
 
@@ -31,7 +31,7 @@ int __cdecl fcn_0042d630(const char* name)
 	int i;
 
 	for (i = 0; i < 128; i++) {
-		if (fcn_0065f220(g_149d120[i], name) == 0 && g_149d120[i][0] != 0) {
+		if (fcn_0065f220(txt_TextBanks[i], name) == 0 && txt_TextBanks[i][0] != 0) {
 			return i;
 		}
 	}
@@ -54,28 +54,28 @@ int __cdecl fcn_0042d6b0(const char* name)
 	if (idx == -1) {
 		return 0;
 	}
-	sprintf(path, "textbin_%s\\%s.res", "german", ((TextBank_42d6b0*)g_149d120)[idx].name);
+	sprintf(path, "textbin_%s\\%s.res", "german", ((TextBank_42d6b0*)txt_TextBanks)[idx].name);
 	f = vfs_Tfopen(path, "rb", g_6b7fdc);
 	if (f == 0) {
 		return 0;
 	}
 	vfs_fseek(f, 0, 0);
 	vfs_ReadData((char*)&n, 4, 1, f);
-	vfs_ReadData((char*)&((TextBank_42d6b0*)g_149d120)[idx].first, 4, 1, f);
-	vfs_ReadData((char*)&((TextBank_42d6b0*)g_149d120)[idx].count, 4, 1, f);
+	vfs_ReadData((char*)&((TextBank_42d6b0*)txt_TextBanks)[idx].first, 4, 1, f);
+	vfs_ReadData((char*)&((TextBank_42d6b0*)txt_TextBanks)[idx].count, 4, 1, f);
 	ofs = m_alloc(n * 4, "txt_txt:txt_ReloadTextFile:PointerTable");
 	vfs_ReadData((char*)ofs, n * 4, 1, f);
 	for (i = 0; i < n; i++) {
-		vfs_ReadData(g_1053000[((TextBank_42d6b0*)g_149d120)[idx].first + i], 0x50, 1, f);
+		vfs_ReadData(g_1053000[((TextBank_42d6b0*)txt_TextBanks)[idx].first + i], 0x50, 1, f);
 	}
 	for (i = 0; i < n; i++) {
-		vfs_ReadData((char*)&g_11bb000[((TextBank_42d6b0*)g_149d120)[idx].first + i], 1, 1, f);
+		vfs_ReadData((char*)&g_11bb000[((TextBank_42d6b0*)txt_TextBanks)[idx].first + i], 1, 1, f);
 	}
 	vfs_ReadData((char*)&size, 4, 1, f);
-	((TextBank_42d6b0*)g_149d120)[idx].text = (char*) m_alloc(size, "txt_txt:txt_ReloadTextFile:Pointer");
-	vfs_ReadData(((TextBank_42d6b0*)g_149d120)[idx].text, size, 1, f);
+	((TextBank_42d6b0*)txt_TextBanks)[idx].text = (char*) m_alloc(size, "txt_txt:txt_ReloadTextFile:Pointer");
+	vfs_ReadData(((TextBank_42d6b0*)txt_TextBanks)[idx].text, size, 1, f);
 	for (i = 0; i < n; i++) {
-		g_14a5320[((TextBank_42d6b0*)g_149d120)[idx].first + i] = ((TextBank_42d6b0*)g_149d120)[idx].text + ofs[i];
+		txt_TextEntries[((TextBank_42d6b0*)txt_TextBanks)[idx].first + i] = ((TextBank_42d6b0*)txt_TextBanks)[idx].text + ofs[i];
 	}
 	CloseVfsStream(f);
 	m_FreeTracked(ofs);

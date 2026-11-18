@@ -29,11 +29,11 @@ typedef struct {
 	void* surf;
 } Tex;
 
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_14ce86c;
 extern int g_77250c;
-extern unsigned short g_7ea3c0[];
+extern unsigned short ls_SavePreviewPixels[];
 
 Tex* __cdecl fcn_004770a0(TexDesc*, int);
 void __cdecl fcn_00476620(int, int, int, int, int, int, int, Tex*);
@@ -60,24 +60,24 @@ void __cdecl fcn_005e3d20(void)
 	small = fcn_004770a0(&d, 0);
 	memset(&d, 0, sizeof(d));
 	d.w = g_1040494;
-	d.h = g_1040490;
+	d.h = d2_ScreenHeight;
 	d.fmt = g_14ce86c;
 	big = fcn_004770a0(&d, 0);
 	src.left = 0;
 	src.top = 0x40;
 	src.right = g_1040494 - 0xa0;
-	src.bottom = g_1040490 - 0x40;
+	src.bottom = d2_ScreenHeight - 0x40;
 	dst.left = 0;
 	dst.right = 0xa0;
 	dst.top = 0;
 	dst.bottom = 0x78;
-	fcn_00476620(0, 0, g_1040494, g_1040490, g_77250c, 0, 0, big);
+	fcn_00476620(0, 0, g_1040494, d2_ScreenHeight, g_77250c, 0, 0, big);
 	fcn_006114ff(small->surf, 0, &dst, big->surf, 0, &src, 4, 0xff000000);
 	fcn_00475fd0(small);
 	k = 0;
 	for (y = 0; y < 0x78; y++) {
 		for (x = 0; x < 0xa0; x++) {
-			g_7ea3c0[k++] = small->bits[small->pitch * y + x];
+			ls_SavePreviewPixels[k++] = small->bits[small->pitch * y + x];
 		}
 	}
 	fcn_00476060(small);

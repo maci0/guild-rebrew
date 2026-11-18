@@ -2,7 +2,7 @@
 extern int g_772554;
 extern char* g_1015ea0;
 extern char* g_772500;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_67d3a0;
 extern int g_67d3a4;
@@ -192,5 +192,5 @@ void __cdecl fcn_0046dff0(int a0, int a1)
 	if (*(int*) (b + 0x280)) {
 		*(int*) (b + 0x280) = *(int*) (b + 0x280) - 1;
 	}
-	fcn_0047a040(0, 0, g_1040494, g_1040490);
+	fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 }

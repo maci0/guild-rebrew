@@ -21,7 +21,7 @@ typedef struct {
 	char x7c[0x98];
 } Rec;
 
-extern char g_9a9660[];
+extern char cut_Cutscenes[];
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, int f);
 
@@ -33,7 +33,7 @@ int __cdecl fcn_005212c0(int f)
 
 	count = 0;
 	for (i = 0; i < 96; i++) {
-		if (((Rec*)g_9a9660)[i].id != -1) {
+		if (((Rec*)cut_Cutscenes)[i].id != -1) {
 			count++;
 		}
 	}
@@ -41,7 +41,7 @@ int __cdecl fcn_005212c0(int f)
 		return 0;
 	}
 	for (i = 0; i < 96; i++) {
-		p = &((Rec*)g_9a9660)[i];
+		p = &((Rec*)cut_Cutscenes)[i];
 		if (p->id == -1) {
 			continue;
 		}

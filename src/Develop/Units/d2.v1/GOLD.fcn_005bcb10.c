@@ -25,7 +25,7 @@ extern char g_f8f368[];
 extern char* g_f8f080;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char g_6ac878[];
 extern char g_6ac870[];
 extern char g_68be7c[];
@@ -71,9 +71,9 @@ int __cdecl fcn_005bcb10(void)
 		g_777d00[k].value = 0;
 	}
 	d2_SetForm(h, 0);
-	fcn_00533f40(0x206, 0x167, g_772514, fcn_00472830(h, 2), 0x3e, &g_776c90, &g_777ca0, &g_778b00);
-	*(int*) (g_f8f368 + g_772514 * 0x3c4 + 0x160) = -1;
-	*(int*) (g_f8f368 + g_772514 * 0x3c4 + 0x164) = -1;
+	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, fcn_00472830(h, 2), 0x3e, &g_776c90, &g_777ca0, &g_778b00);
+	*(int*) (g_f8f368 + d2_CurrentWindowId * 0x3c4 + 0x160) = -1;
+	*(int*) (g_f8f368 + d2_CurrentWindowId * 0x3c4 + 0x164) = -1;
 	d2_SetForm(h, 3);
 	io_AppendText(0x1935);
 	d2_SetForm(h, 4);
@@ -85,14 +85,14 @@ int __cdecl fcn_005bcb10(void)
 			m = fcn_0050dc90(e);
 			if (m != 0 && *(unsigned short*) m != g_774970) {
 				d2_SetForm(h, 2);
-				g_777d00[n].btn = fcn_0046f740(0, n * 0x3e, *e + 0x427, g_772514);
+				g_777d00[n].btn = fcn_0046f740(0, n * 0x3e, *e + 0x427, d2_CurrentWindowId);
 				io_FormatTextBuffer(buf, g_6ac870, *e * 14 + 0x48e, e + 5);
-				g_777d00[n].name_text = d2_ShowTxt(0x40, n * 0x3e + 8, buf, g_772514);
+				g_777d00[n].name_text = d2_ShowTxt(0x40, n * 0x3e + 8, buf, d2_CurrentWindowId);
 				((Font5c89*)g_f8f080)[g_777d00[n].name_text].w = 0xa0;
 				fcn_004760a0(g_777d00[n].name_text, 0x54);
 				io_FormatTextBuffer(buf, g_68be7c, *(int*) (m + 0x1b8));
-				g_777d00[n].value_text = d2_ShowTxt(0x180, n * 0x3e + 0x14, buf, g_772514);
-				g_777d00[n].bar = fcn_00467480(0xea, n * 0x3e + 0x14, 0x40, 0x40, 0x82, g_772514);
+				g_777d00[n].value_text = d2_ShowTxt(0x180, n * 0x3e + 0x14, buf, d2_CurrentWindowId);
+				g_777d00[n].bar = fcn_00467480(0xea, n * 0x3e + 0x14, 0x40, 0x40, 0x82, d2_CurrentWindowId);
 				d2_SetElementValue(g_777d00[n].bar, 0x3e8, 0x2328, fcn_0050b710(*(int*) (e + 0x39), g_773d75));
 				g_777d00[n].value = fcn_00471f80(g_777d00[n].bar);
 				g_777d00[n].e = e;

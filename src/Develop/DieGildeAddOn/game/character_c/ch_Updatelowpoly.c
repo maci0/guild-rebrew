@@ -99,12 +99,12 @@ void __cdecl ch_Updatelowpoly(char* obj)
 			if (ch_LowPolyMode != 1) {
 				goto lowpoly_model;
 			}
-			if (g_6b8014 == 0) {
+			if (d3_ActiveCamera == 0) {
 				goto lowpoly_model;
 			}
-			dx = *(float*) (g_6b8014 + 0x4c) - *(float*) (*(char**) (obj + 0x34) + 0x4c);
-			dy = *(float*) (g_6b8014 + 0x50) - *(float*) (*(char**) (obj + 0x34) + 0x50);
-			dz = *(float*) (g_6b8014 + 0x54) - *(float*) (*(char**) (obj + 0x34) + 0x54);
+			dx = *(float*) (d3_ActiveCamera + 0x4c) - *(float*) (*(char**) (obj + 0x34) + 0x4c);
+			dy = *(float*) (d3_ActiveCamera + 0x50) - *(float*) (*(char**) (obj + 0x34) + 0x50);
+			dz = *(float*) (d3_ActiveCamera + 0x54) - *(float*) (*(char**) (obj + 0x34) + 0x54);
 			dz = (float) sqrt(dz * dz + dy * dy + dx * dx);
 			if (!(dz < 1500.0f)) {
 			lowpoly_model:

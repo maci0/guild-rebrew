@@ -2,7 +2,7 @@
 #include "client_dialog_state.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_14ce8e0, g_67d370, g_7e2468;
+extern int g_14ce8e0, d2_CurrentElementId, g_7e2468;
 extern char g_6b5c60[], g_7e23e8;
 void __cdecl ch_SetVisible(void* obj, int value);
 void __cdecl fcn_00402b00(void* obj, void* dev);
@@ -60,19 +60,19 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 		fcn_00455350(dev, (char*) dev + 0x4c, pos);
 	}
 
-	d = g_67d368;
+	d = d2_UiScale;
 	id1 = fcn_00469c30((int) (d * 150.0f + d * 330.0f),
 		(int) (d * 370.0f), 0x1a);
 	*(int*) ((char*) g_1015ea0 + id1 * 0x2f4 + 0x5c) = 1;
 	*(int*) ((char*) g_1015ea0 + id1 * 0x2f4 + 0x1d0) = 3;
 
-	d = g_67d368;
+	d = d2_UiScale;
 	id2 = fcn_00469c30((int) (d * 330.0f),
 		(int) (d * 370.0f), 0x1b);
 	*(int*) ((char*) g_1015ea0 + id2 * 0x2f4 + 0x5c) = 1;
 	*(int*) ((char*) g_1015ea0 + id2 * 0x2f4 + 0x1d0) = 3;
 
-	d = g_67d368;
+	d = d2_UiScale;
 	id3 = fcn_00469c30((int) (d * 70.0f + d * 330.0f),
 		(int) (d * 45.0f + d * 370.0f), 0x51b);
 	*(int*) ((char*) g_1015ea0 + id3 * 0x2f4 + 0x5c) = 1;
@@ -105,11 +105,11 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 			selected = 0;
 		}
 		if (g_14cf950 != 'N'
-			&& (g_100f1dc == -1 || g_67d370 != id1)) {
+			&& (g_100f1dc == -1 || d2_CurrentElementId != id1)) {
 			if (g_14cf950 != 'J'
-				&& (g_100f1dc == -1 || g_67d370 != id2)) {
+				&& (g_100f1dc == -1 || d2_CurrentElementId != id2)) {
 				if (g_14cf950 == 0x1c
-					|| (g_100f1dc != -1 && g_67d370 == id3)) {
+					|| (g_100f1dc != -1 && d2_CurrentElementId == id3)) {
 					g_774654 = 1;
 					selected = 1;
 				}
@@ -125,7 +125,7 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 		if (prev != idx) {
 			view = evt_LoadGfxScript("Effekte/choose_character.esc");
 			if (view != 0) {
-				d = g_67d368;
+				d = d2_UiScale;
 				fcn_00428340(view, 6,
 					(int) pos[0],
 					(int) pos[1] + 0x14,

@@ -17,7 +17,7 @@ typedef struct
 // SIZE 0x21c
 
 extern char g_7f4ca0[];
-extern int g_773d70;
+extern int gm_EntityCount;
 
 #pragma pack(push, 1)
 typedef struct
@@ -67,7 +67,7 @@ int __cdecl fcn_0050a710(unsigned char* p)
 			}
 		}
 	}
-	if (0x300 - g_773d70 < 0x20) {
+	if (0x300 - gm_EntityCount < 0x20) {
 		return 1;
 	}
 	for (i = 0; i < 512; i++) {

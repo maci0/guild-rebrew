@@ -1,4 +1,4 @@
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern char g_773d75;
 extern float g_664188, g_664160, g_66417c, g_664178;
 extern double g_664180;
@@ -29,7 +29,7 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* a2)
 
 	mode = gm_MapEntityStatRange(*(unsigned char*) (a0 + 0x164));
 	cnt = 0;
-	if (g_7f4c00 >= 10) {
+	if (gm_GameTime >= 10) {
 		if (gm_StartFilteredEntitySearch(1, 5, 0x17)) { cnt = 1; }
 		if (gm_StartFilteredEntitySearch(1, 5, 0x18)) {
 			cnt++;

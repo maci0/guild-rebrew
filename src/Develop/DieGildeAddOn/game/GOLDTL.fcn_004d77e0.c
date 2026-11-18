@@ -120,7 +120,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		if (*(int*) 0x774804 != 0) {
 			fcn_00445f50(2, 0, 1.0f, 1);
 		} else {
-			fcn_0052a960((void*) &g_7f4c00);
+			fcn_0052a960((void*) &gm_GameTime);
 		}
 		*(int*) &g_772ea4 = 0;
 		*(int*) &g_772ea8 = 0;

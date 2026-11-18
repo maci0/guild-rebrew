@@ -5,9 +5,9 @@
 typedef struct { unsigned char kind; unsigned char rest[0x24c]; } BuildingProto572ff0;
 extern char g_7f4ca0[];
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 extern double g_664108;
@@ -65,7 +65,7 @@ void __cdecl fcn_00572ff0(char* a)
 
 	if (*(int*) (a + 0x70) == -2) {
 		*(int*) (a + 0x70) = 0;
-		fcn_00549330(a, *(unsigned short*) g_773da8);
+		fcn_00549330(a, *(unsigned short*) gm_CityEntity);
 	}
 	if (*(int*) (a + 0xe8) != -1) {
 		if (!fcn_004c4450(*(int*) (a + 0xe8))) {
@@ -294,7 +294,7 @@ i2advance:
 	} while (--cnt != 0);
 done:
 	if (*(char*) (a + 0xf0) != 0 && flag != 0) {
-		if ((unsigned short) g_7f4c00.b >= 0x14) {
+		if ((unsigned short) gm_GameTime.b >= 0x14) {
 			fcn_00500bb0(a + 0x52, 0, 5, 0);
 			*(char*) (a + 0xf0) = 0;
 			return;
@@ -344,7 +344,7 @@ done:
 		return;
 	}
 	memset(msg, 0, sizeof(msg));
-	*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
+	*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 	msg[4] = 0x0f;
 	*(int*) (msg + 0xc) = -1;
 	msg[0x36] = 2;

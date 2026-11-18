@@ -1,6 +1,6 @@
 int g_6a9b9c = 0xffffffff;
 extern int g_6a9b9c;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 
 
 
@@ -16,9 +16,9 @@ void __cdecl fcn_005931a0(void)
 
 	if (g_6a9b9c != -1) {
 		d2_SetForm(g_6a9b9c, 5);
-		s = g_772514;
+		s = d2_CurrentWindowId;
 		d2_SetForm(g_6a9b9c, 6);
-		fcn_00533f40(0, 0, g_772514, s, 0x35, &c, &b, &a);
+		fcn_00533f40(0, 0, d2_CurrentWindowId, s, 0x35, &c, &b, &a);
 	}
 }
 unsigned char _dpad_6a9b9c[6272] = {

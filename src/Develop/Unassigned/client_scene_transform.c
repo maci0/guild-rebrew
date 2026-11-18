@@ -1,4 +1,4 @@
-extern void* g_14d0020[];
+extern void* ch_CharacterSlots[];
 
 int __cdecl fcn_0065f220(int, int);
 
@@ -11,7 +11,7 @@ void* __cdecl fcn_004032b0(int a1)
 
 	i = 0;
 	do {
-		e = g_14d0020[i];
+		e = ch_CharacterSlots[i];
 		if (e != 0) {
 			if (fcn_0065f220(*(int*) ((char*) e + 0x34), a1) == 0) {
 				break;
@@ -20,7 +20,7 @@ void* __cdecl fcn_004032b0(int a1)
 		i++;
 	} while (i < 0x300);
 	if (i < 0x300) {
-		return g_14d0020[i];
+		return ch_CharacterSlots[i];
 	}
 	return 0;
 }
@@ -33,9 +33,9 @@ void* __cdecl fcn_00403300(int key)
 	void* p;
 
 	for (i = 0; i < 0x300; i++) {
-		p = g_14d0020[i];
+		p = ch_CharacterSlots[i];
 		if (p != 0 && *(int*) ((char*) p + 0x34) == key) {
-			return g_14d0020[i];
+			return ch_CharacterSlots[i];
 		}
 	}
 	return 0;

@@ -1,5 +1,5 @@
 #include "client_dialog_state.h"
-extern int g_14ce8e0, g_100f1dc, g_67d370;
+extern int g_14ce8e0, g_100f1dc, d2_CurrentElementId;
 extern char g_14cf950;
 extern int g_6a81dc[5];
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -68,9 +68,9 @@ int __cdecl fcn_005845e0(void)
 				g_774654 = 1;
 			}
 			if (g_100f1dc != -1) {
-				if (g_67d370 == result2) {
+				if (d2_CurrentElementId == result2) {
 					g_774654 = 1;
-				} else if (g_67d370 == result) {
+				} else if (d2_CurrentElementId == result) {
 					g_774654 = 1;
 					n = 0;
 					for (k = 0; k < 5; k++) {

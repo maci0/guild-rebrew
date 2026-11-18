@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char* g_6b7d68;
+extern char* sbs_BankManager;
 extern int g_6b7d6c;
 
 char* __cdecl fcn_00423ac0(char* s);
@@ -16,7 +16,7 @@ int __cdecl fcn_00423e10(char* s)
 	char* fp;
 	int fn;
 
-	if (g_6b7d68 == 0 || fcn_00423ac0(s) != 0) {
+	if (sbs_BankManager == 0 || fcn_00423ac0(s) != 0) {
 		return -1;
 	}
 	list = (char*) fcn_004239b0();
@@ -77,7 +77,7 @@ int __cdecl fcn_00423e10(char* s)
 		rep stosb
 	}
 	strncpy(buf, s, 0x32);
-	*(char**) (g_6b7d68 + 0x3c) = buf;
+	*(char**) (sbs_BankManager + 0x3c) = buf;
 	g_6b7d6c++;
 	return 0;
 }

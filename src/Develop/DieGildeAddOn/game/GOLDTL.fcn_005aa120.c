@@ -27,10 +27,10 @@ extern unsigned char g_773d75;
 extern float g_662910;
 extern float g_664388;
 extern char g_6aaf58[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -64,7 +64,7 @@ int __cdecl fcn_005aa120(int unused, char* p)
 	fcn_00471b60(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0x165f);
 	d2_SetForm(h, 2);
@@ -82,13 +82,13 @@ int __cdecl fcn_005aa120(int unused, char* p)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == w1 && fcn_00526010(&((Ent5aa1*)g_7f4ca0)[g_774970], cost, g_773d75) != 0) {
+			if (d2_CurrentElementId == w1 && fcn_00526010(&((Ent5aa1*)g_7f4ca0)[g_774970], cost, g_773d75) != 0) {
 				req.kind = 2;
 				req.who = *(int*) (p + 1);
 				req.cost = cost;
 				fcn_004eb780(&((Ent5aa1*)g_7f4ca0)[g_774970], &req);
 				g_774654 = 2;
-			} else if (g_67d370 == w2) {
+			} else if (d2_CurrentElementId == w2) {
 				g_774654 = 1;
 			}
 		}

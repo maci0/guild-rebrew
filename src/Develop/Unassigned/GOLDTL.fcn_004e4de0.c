@@ -18,7 +18,7 @@ void __cdecl fcn_004e4de0(int secs)
 	start = (*(unsigned int*)&g_6b7fac);
 	if (g_772f3c != 0)
 		return;
-	if (fcn_005373e0(fcn_004e4de0, g_68bfb8 | 0x8000) == 0)
+	if (fcn_005373e0(fcn_004e4de0, cut_EventLoopFlags | 0x8000) == 0)
 		return;
 	end = secs * (1.0 / 14.0) + start;
 	do {
@@ -26,5 +26,5 @@ void __cdecl fcn_004e4de0(int secs)
 			g_774654 = 1;
 		fcn_004cfca0();
 		fcn_004e5140((*(int*)&cut_ActiveCutscene));
-	} while (fcn_005373e0(fcn_004e4de0, g_68bfb8 | 0x8000) != 0);
+	} while (fcn_005373e0(fcn_004e4de0, cut_EventLoopFlags | 0x8000) != 0);
 }

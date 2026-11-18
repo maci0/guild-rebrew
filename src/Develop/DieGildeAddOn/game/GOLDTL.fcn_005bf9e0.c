@@ -23,7 +23,7 @@ void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c5530(void*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_774654;
 /* ADDRESS: GOLDTL 0x005bf9e0 */
 int __cdecl fcn_005bf9e0(unsigned short* entity)
@@ -101,7 +101,7 @@ int __cdecl fcn_005bf9e0(unsigned short* entity)
 		if (g_14ce8e0 || *(int*) &g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-		if (*(int*) &g_100f1dc == 2 && idx != -1 && g_67d370 == idx) {
+		if (*(int*) &g_100f1dc == 2 && idx != -1 && d2_CurrentElementId == idx) {
 			*(unsigned char*) (evt + 4) = 0x1a;
 			*(unsigned int*) (evt + 8) = *(unsigned int*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
 			*(unsigned int*) (evt + 0x0c) = *(unsigned int*) (g_7746c4 + 1);

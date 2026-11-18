@@ -27,7 +27,7 @@ extern Slot21c g_7f4ca0[];
 extern int g_7e35c0[][2];
 extern int g_774650;
 extern char* g_7746c8;
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindRecordById(int);
@@ -61,7 +61,7 @@ void __cdecl fcn_0055dab0(char* e)
 	gm_StartFilteredEntitySearch(1, 0, 0x45);
 	b = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 	c = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb4));
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	r = gm_FindRecordById(*(int*) (e + 0xac));
 	if (r == 0) {
 		return;

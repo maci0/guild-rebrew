@@ -10,9 +10,9 @@ extern char g_6b8018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
 extern Slot_1043340 g_1043340[64];
-extern char* g_1043254;
-extern char g_1042340[];
-extern char* g_1040c74;
+extern char* d3_ObjectListHead;
+extern char d3_SceneObjectSentinel[];
+extern char* d3_SceneRenderListHead;
 extern char g_1040640[];
 extern int g_6b8484;
 extern int g_6b8300;
@@ -50,17 +50,17 @@ void __cdecl fcn_00439490(void)
 	if (g_6b8018 == 0) {
 		return;
 	}
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	g_6b8018 = 0;
 	for (i = 0; i < 64; i++) {
 		if (i != saved && ((Slot_439490*)g_1043340)[i].used != 0) {
 			fcn_004432d0(i, 1);
-			while (g_1043254 != g_1042340) {
-				d3_DisposeObject(g_1043254);
+			while (d3_ObjectListHead != d3_SceneObjectSentinel) {
+				d3_DisposeObject(d3_ObjectListHead);
 			}
 			g_6b8484 = 0;
-			while (g_1040c74 != g_1040640) {
-				fcn_00452420(g_1040c74);
+			while (d3_SceneRenderListHead != g_1040640) {
+				fcn_00452420(d3_SceneRenderListHead);
 			}
 			if (g_6b8300 != 0) {
 				fcn_0043bcf0(g_6b8300);
@@ -76,11 +76,11 @@ void __cdecl fcn_00439490(void)
 			}
 		}
 	}
-	if (saved != g_6b8010) {
+	if (saved != d3_CurrentContextIndex) {
 		fcn_004432d0(saved, 1);
 	}
-	while (g_1043254 != g_1042340) {
-		d3_DisposeObject(g_1043254);
+	while (d3_ObjectListHead != d3_SceneObjectSentinel) {
+		d3_DisposeObject(d3_ObjectListHead);
 	}
 	if (g_6b8300 != 0) {
 		fcn_0043bcf0(g_6b8300);

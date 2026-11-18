@@ -51,16 +51,16 @@ extern char* g_1015ea0;
 extern char s_6acfdc[];
 extern char s_6acff0[];
 extern char s_6a3a54[];
-extern int g_772514;
-extern int g_7e46ac;
+extern int d2_CurrentWindowId;
+extern int main_LoopFlags;
 extern int g_6b7fdc;
-extern int g_100f894;
+extern int d2_HoveredWindow;
 extern char* g_14ac64c;
 extern char* g_14ac604;
 extern int g_14ce8e0;
 extern int g_14ce8d8;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471db0(int, int);
@@ -99,17 +99,17 @@ int __cdecl fcn_005e0f90(void)
 	Rec recs[32];
 	int flag;
 
-	wait = g_7e46ac;
+	wait = main_LoopFlags;
 	dlg = fcn_00470820(0, 0, s_6acfdc);
 	fcn_00471db0(dlg, 1);
 	fcn_00471d80(dlg, 2);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(0, 2);
 	io_AppendText(0x1c58);
 	d2_SetForm(0, 0);
-	fcn_00533f40(0x214, 0x168, g_772514, fcn_00472830(dlg, 1), 0x82, &a, &b, &c);
+	fcn_00533f40(0x214, 0x168, d2_CurrentWindowId, fcn_00472830(dlg, 1), 0x82, &a, &b, &c);
 	fcn_005e0140(dlg, 1, slots, recs, s_6acff0, 1);
 	fcn_00472640(slots[0].h, 0);
 	sel = fcn_00472830(dlg, 1);
@@ -119,11 +119,11 @@ int __cdecl fcn_005e0f90(void)
 		}
 		if (g_14ce8d8 != 0 && ((Win*)g_1015f40)[sel].f260 == 0) {
 			for (i = 2; i < 16; i++) {
-				if (g_67d370 != slots[i].h && g_100f894 != slots[i].f8) {
-					if (g_100f894 == -1) {
+				if (d2_CurrentElementId != slots[i].h && d2_HoveredWindow != slots[i].f8) {
+					if (d2_HoveredWindow == -1) {
 						continue;
 					}
-					if (((Ctl*)g_1015ea0)[((Win*)g_1015f40)[g_100f894].f27c].f40 != &((Win*)g_1015f40)[slots[i].f8]) {
+					if (((Ctl*)g_1015ea0)[((Win*)g_1015f40)[d2_HoveredWindow].f27c].f40 != &((Win*)g_1015f40)[slots[i].f8]) {
 						continue;
 					}
 				}

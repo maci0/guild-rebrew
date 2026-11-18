@@ -18,7 +18,7 @@ void __cdecl fcn_004efcd0(void)
 	int i;
 	int j;
 
-	save = g_6b8010;
+	save = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 3; j++) {

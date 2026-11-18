@@ -15,7 +15,7 @@ extern int g_6b8300;
 /* ADDRESS: GOLD 0x00633b10 */
 extern int LightingUpdateCount;
 /* ADDRESS: GOLD 0x00633b14 */
-extern unsigned char LightingUpdatePending;
+extern unsigned char d3_LightingUpdatePending;
 /* Preserve the existing byte declaration's signedness. */
 /* ADDRESS: GOLD 0x00633438 */
 extern char g_633438;

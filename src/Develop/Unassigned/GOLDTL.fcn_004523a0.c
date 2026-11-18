@@ -25,7 +25,7 @@ void __cdecl fcn_004523a0(char* o)
 		*(char**) (*(char**) (o + 0x314) + 0x318) = *(char**) (o + 0x318);
 	}
 	if (owner == ((char*)g_67a370)) {
-		g_1040c74 = *(char**) (owner + 0xa4);
+		d3_SceneRenderListHead = *(char**) (owner + 0xa4);
 		g_1040958 = *(char**) (owner + 0xa8);
 	}
 }

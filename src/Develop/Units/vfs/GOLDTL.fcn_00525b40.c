@@ -16,16 +16,16 @@ extern char* cm_LoadBuf;
 extern unsigned int g_aed328;
 extern unsigned int g_1005820;
 extern int ls_SaveVersion;
-extern int g_699364;
+extern int gm_NextEntityId;
 extern int g_699368;
 extern int g_7749d0;
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern pos14_7f4c00 g_7e1f70;
 extern unsigned char g_773d75;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern int g_773d68;
 extern int g_773d6c;
-extern int g_773d70;
+extern int gm_EntityCount;
 extern int g_773d7c;
 extern int cm_LastCrimeId;
 extern int g_100dc00;
@@ -64,7 +64,7 @@ int __cdecl fcn_00525b40(void)
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	g_773da8 = 0;
+	gm_CityEntity = 0;
 	ls_LoadSavegameHeader(f, (char*) hdr);
 	if (!(hdr[1] & 2) || hdr[0] > 0x1005a) {
 		CloseVfsStream(f);
@@ -72,20 +72,20 @@ int __cdecl fcn_00525b40(void)
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (ls_ReadVfsDataChecked(&g_699364, 4, 1, f) == 0
+	if (ls_ReadVfsDataChecked(&gm_NextEntityId, 4, 1, f) == 0
 	    || ls_ReadVfsDataChecked(&g_7749d0, 4, 1, f) == 0
-	    || ls_ReadVfsDataChecked(&g_7f4c00, 0xe, 1, f) == 0
+	    || ls_ReadVfsDataChecked(&gm_GameTime, 0xe, 1, f) == 0
 	    || ls_ReadVfsDataChecked(&g_773d75, 1, 1, f) == 0
-	    || ls_ReadVfsDataChecked(&g_773da8, 4, 1, f) == 0
+	    || ls_ReadVfsDataChecked(&gm_CityEntity, 4, 1, f) == 0
 	    || ls_ReadVfsDataChecked(&g_773d68, 4, 1, f) == 0
 	    || ls_ReadVfsDataChecked(&g_773d6c, 4, 1, f) == 0
-	    || ls_ReadVfsDataChecked(&g_773d70, 4, 1, f) == 0) {
+	    || ls_ReadVfsDataChecked(&gm_EntityCount, 4, 1, f) == 0) {
 		CloseVfsStream(f);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	g_7e1f70 = g_7f4c00;
+	g_7e1f70 = gm_GameTime;
 	ls_ReadVfsDataChecked(&g_773d7c, 4, 1, f);
 	ls_ReadVfsDataChecked(&g_100dc00, 0x18, 1, f);
 	if (ls_SaveVersion >= 0x10030) {

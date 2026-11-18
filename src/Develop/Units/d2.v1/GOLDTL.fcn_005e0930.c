@@ -12,16 +12,16 @@ typedef struct {
 	char name[0x207];
 } SaveItem;
 
-extern int g_7e46ac;
-extern int g_772514;
+extern int main_LoopFlags;
+extern int d2_CurrentWindowId;
 extern int g_14ce8e0;
 extern int g_14ce8d8;
 #include "client_dialog_state.h"
-extern int g_100f894;
+extern int d2_HoveredWindow;
 extern char* g_1015ea0;
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern char g_774964;
 extern int g_14ac644;
 extern char g_7e21a0[];
@@ -53,17 +53,17 @@ int __cdecl fcn_005e0930(void)
 	int i;
 
 	result = 0;
-	style = g_7e46ac;
+	style = main_LoopFlags;
 	h = fcn_00470820(0, 0, "menu\\loadgame_new");
 	fcn_00471db0(h, 1);
 	fcn_00471d80(h, 2);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(0, 2);
 	io_AppendText(0x1c57);
 	d2_SetForm(0, 0);
-	fcn_00533f40(0x214, 0x168, g_772514, fcn_00472830(h, 1), 0x82, &a, &b, &c);
+	fcn_00533f40(0x214, 0x168, d2_CurrentWindowId, fcn_00472830(h, 1), 0x82, &a, &b, &c);
 	fcn_005e0140(h, 1, items, buf, "gamedata/network", 1);
 	while (fcn_005373e0(fcn_005e0930, style) != 0) {
 		if (g_14ce8e0 != 0) {
@@ -72,10 +72,10 @@ int __cdecl fcn_005e0930(void)
 		if (g_14ce8d8 != 0) {
 			for (i = 0; i < 16; i++) {
 				if (items[i].used != 0 && items[i].slot != -1
-				    && (g_67d370 == items[i].id || g_100f894 == items[i].slot
-				        || (g_100f894 != -1
+				    && (d2_CurrentElementId == items[i].id || d2_HoveredWindow == items[i].slot
+				        || (d2_HoveredWindow != -1
 				            && *(char**) (g_1015ea0
-				                   + *(int*) (((char*)g_1015f40) + g_100f894 * 0x3cc + 0x27c) * 0x2f4 + 0x40)
+				                   + *(int*) (((char*)g_1015f40) + d2_HoveredWindow * 0x3cc + 0x27c) * 0x2f4 + 0x40)
 				                == ((char*)g_1015f40) + items[i].slot * 0x3cc))) {
 					goto found;
 				}

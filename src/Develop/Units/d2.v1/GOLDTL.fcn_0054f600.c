@@ -16,9 +16,9 @@ typedef struct {
 	char* owner;
 } TILE_54f600;
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char* g_77255c;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 extern int g_100f884;
 extern int g_100f1dc;
@@ -61,7 +61,7 @@ void __cdecl fcn_0054f600(char* o)
 	if (state != -1 && state != -2 && entity != 0 && v6 != 0 && v4 != 0) {
 		switch (state) {
 		case 1:
-			if (fcn_00500cb0(&g_7f4c00, o + 0x52) > 0) {
+			if (fcn_00500cb0(&gm_GameTime, o + 0x52) > 0) {
 				fcn_0054f4a0(entity, v4, (unsigned char*) v6);
 				fcn_00545780(o);
 				fcn_00546190(o);
@@ -92,7 +92,7 @@ void __cdecl fcn_0054f600(char* o)
 				d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 2);
 				s.e = v4;
 				if (fcn_005ca560(&s) != 0) {
-					fcn_005caaa0(*(int*) (g_77255c + 0xc) / 2 - 0x28, 0, g_772514, &s);
+					fcn_005caaa0(*(int*) (g_77255c + 0xc) / 2 - 0x28, 0, d2_CurrentWindowId, &s);
 					((TILE_54f600*) (void*) g_1015ea0)[s.tile].f5c = 1;
 					((TILE_54f600*) (void*) g_1015ea0)[s.tile].f1d0 = 3;
 					((TILE_54f600*) (void*) g_1015ea0)[s.tile].owner = s.e;
@@ -101,8 +101,8 @@ void __cdecl fcn_0054f600(char* o)
 				io_AppendText(0x1d6b, (int) *(unsigned short*) (entity + 0xb4),
 				    (int) *(unsigned short*) v4, (int) *(unsigned short*) (entity + 0xb6),
 				    (int) *(unsigned short*) v4);
-				*(pos14_7f4c00*) (o + 0x44) = g_7f4c00;
-				*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (o + 0x44) = gm_GameTime;
+				*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 				fcn_00500bb0(o + 0x52, 2, 0, 0);
 				(*(int*) (o + 0x70))++;
 				return;
@@ -116,7 +116,7 @@ void __cdecl fcn_0054f600(char* o)
 			fcn_00545780(o);
 		}
 		if (entity != 0) {
-			*(pos14_7f4c00*) (entity + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 			fcn_004c5620(-1, entity);
 		}
 	}

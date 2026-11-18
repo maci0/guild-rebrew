@@ -12,7 +12,7 @@ struct search {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl fcn_005463a0(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
@@ -77,7 +77,7 @@ int __cdecl fcn_0055be70(struct search* s)
 		}
 	}
 	*(int*) (found + 0xd4) = *(int*) (s->house + 4);
-	*(pos14_7f4c00*) (found + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (found + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (found + 0x52), 0, 8, 0);
 	fcn_004c5620(0x400, found);
 	return 1;

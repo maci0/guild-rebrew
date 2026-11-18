@@ -3,7 +3,7 @@
 #include "client_types.h"
 #include "client_actions.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
@@ -44,7 +44,7 @@ void __cdecl fcn_005473a0(void)
 			msg.seed = *(int*) (slot + 4);
 			msg.id = *(int*) ((char*) h + 1);
 			msg.flag = 2;
-			msg.pos = *(pos14_7f4c00*) &g_7f4c00;
+			msg.pos = *(pos14_7f4c00*) &gm_GameTime;
 			fcn_004c5530(&msg);
 		}
 		h = gm_FindNextFilteredEntity();

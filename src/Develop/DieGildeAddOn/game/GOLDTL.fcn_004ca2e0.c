@@ -15,7 +15,7 @@ int __cdecl fcn_004ca2e0(char* x, char* out)
 	char* dst;
 
 	if (g_14cbca0 != -1)
-		g_699364 = *(int*) (x + 0x10);
+		gm_NextEntityId = *(int*) (x + 0x10);
 	*(int*) (x + 0x14) = fcn_004c4dc0(x, *(int*) (x + 0x14));
 	obj = gm_AllocObjekt(*(int*) (x + 0x14), 0x1b5, 1);
 	if (obj == 0)

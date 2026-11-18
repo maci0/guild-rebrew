@@ -1,7 +1,7 @@
 
 
 extern int g_7766a8;
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern char g_774660;
 extern float g_675308;
 extern char g_14cf950;
@@ -26,7 +26,7 @@ void __cdecl fcn_00537210(void)
 	int h;
 
 	saved = g_7766a8;
-	flags = g_7e46ac;
+	flags = main_LoopFlags;
 	if (fcn_0057ec20(8) != 0) {
 		fcn_0057e880(0xb, 0, 0, 0);
 		flags = (flags & 0xffffc3e7) | 0xc0;

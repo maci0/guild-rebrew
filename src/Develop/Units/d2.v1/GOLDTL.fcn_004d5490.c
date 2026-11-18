@@ -35,7 +35,7 @@ typedef struct Slot {
 
 extern char* g_772eb4;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char g_6b5c60[];
 extern char* g_1015ea0;
 extern char* g_14b52c0;
@@ -76,17 +76,17 @@ int __cdecl fcn_004d5490(int x, int y, int mode)
 			}
 			px = x + n % 5 * 0x78;
 			py = y + n / 5 * 0x60;
-			fcn_0046f740(px, py, 0x525, g_772514);
-			fcn_0046f740(px, py, e->id + 0xdf, g_772514);
+			fcn_0046f740(px, py, 0x525, d2_CurrentWindowId);
+			fcn_0046f740(px, py, e->id + 0xdf, d2_CurrentWindowId);
 			tx = px - 0x10;
-			lbl = d2_ShowTxt(tx, py - 0xf, &(*(char*)g_6b5c60), g_772514);
+			lbl = d2_ShowTxt(tx, py - 0xf, &(*(char*)g_6b5c60), d2_CurrentWindowId);
 			((Slot*)g_1015ea0)[lbl].color = 0x56;
 			((Slot*)g_1015ea0)[lbl].h = 0x50;
 			((Slot*)g_1015ea0)[lbl].centered = 1;
 			sprintf(text, "%i ", e->count);
 			strcat(text, g_14b52c0);
 			fcn_0046f940(lbl, text);
-			lbl = d2_ShowTxt(tx, py + 0x34, &(*(char*)g_6b5c60), g_772514);
+			lbl = d2_ShowTxt(tx, py + 0x34, &(*(char*)g_6b5c60), d2_CurrentWindowId);
 			((Slot*)g_1015ea0)[lbl].color = 0x56;
 			((Slot*)g_1015ea0)[lbl].h = 0x50;
 			((Slot*)g_1015ea0)[lbl].centered = 1;

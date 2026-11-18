@@ -1,10 +1,10 @@
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 extern float g_6628a0;
 extern int g_14ce860;
 extern int g_14ce864;
 extern float d3_ProjectionScaleY;
 extern float g_10432a4;
-extern float g_1052bc0;
+extern float d3_ViewportCenterX;
 extern float g_1052bc8;
 extern char g_1052be0[];
 extern float g_1052c00[];
@@ -75,7 +75,7 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 	view[10] = 1.0f;
 	view[5] = 1.0f;
 	view[0] = 1.0f;
-	fcn_00438100(a0, g_6b8014, 0);
+	fcn_00438100(a0, d3_ActiveCamera, 0);
 	total = *(int*) (model + 0x44);
 	verts = (float*) m_alloc(total * 0x18, "!d3:TransformedPoints");
 	if (*(char*) (*(int*) (a0 + 0x1cc) + 0x4a0) != 0
@@ -93,7 +93,7 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 				src[2] = *(unsigned int*) ((char*) bbox + i * 0x20 + 8);
 				f = verts + i * 6;
 				fcn_005eb225(f + 3, src, (void*) (*(int*) (a0 + 0x1ec) + 0x48));
-				f[0] = g_10432a4 * (g_6628a0 / f[5]) * f[3] + g_1052bc0;
+				f[0] = g_10432a4 * (g_6628a0 / f[5]) * f[3] + d3_ViewportCenterX;
 				f[1] = d3_ProjectionScaleY * f[4] * (g_6628a0 / f[5]) + g_1052bc8;
 			}
 		}

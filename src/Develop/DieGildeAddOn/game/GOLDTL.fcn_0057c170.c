@@ -33,7 +33,7 @@ struct house {
 	char pad170[0xac];
 };
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 
 void __cdecl fcn_004c5530(struct msg*);
@@ -65,7 +65,7 @@ void __cdecl fcn_0057c170(struct house* a, struct house* b)
 	m.kind = 0x33;
 	m.owner = b->owner;
 	m.target = *(int*) (h->site + 1);
-	m.when = g_7f4c00;
+	m.when = gm_GameTime;
 	m.code = 1;
 	m.who = h->owner;
 	fcn_004c5530(&m);

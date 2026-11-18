@@ -7,10 +7,10 @@
 extern int cut_CurrentTick;
 /* ADDRESS: GOLDTL 0x00772f34 */
 /* ADDRESS: GOLD 0x006f0d84 */
-extern int g_772f34;
+extern int cut_ClockDeadline;
 /* ADDRESS: GOLDTL 0x00772f38 */
 /* ADDRESS: GOLD 0x006f0d88 */
-extern int g_772f38;
+extern int cut_ClockExpired;
 
 void __cdecl fcn_004e4a60(void);
 

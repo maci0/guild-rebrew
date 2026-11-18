@@ -21,7 +21,7 @@ char __cdecl fcn_004379a0(char*, char*, unsigned int, char (__cdecl*)(char*, voi
 #define lc_RenderState fcn_004432d0
 #define lc_ScenePoint fcn_00455350
 #define lc_WalkScene fcn_004379a0
-#define lc_SavedRender g_6b8010
+#define lc_SavedRender d3_CurrentContextIndex
 #endif
 int __cdecl lc_GetGebaeudeBauplatz(LC_GEBAEUDE_BAUPLATZ* out, unsigned char* obj)
 {

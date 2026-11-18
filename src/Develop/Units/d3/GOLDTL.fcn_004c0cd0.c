@@ -7,7 +7,7 @@ extern char g_772d10;
 extern int g_772d3c;
 extern int g_772d40;
 extern volatile int g_6b7fac;
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 extern int* g_7e4538;
 extern int g_7747bc;
 extern int* g_1005854;
@@ -22,7 +22,7 @@ extern int g_1005844;
 extern int g_1005848;
 extern short g_100584c;
 extern unsigned short g_7f4c0c;
-extern int g_7f4c00, g_7f4c04, g_7f4c08;
+extern int gm_GameTime, g_7f4c04, g_7f4c08;
 float __cdecl fcn_00413d10(float* pos);
 int __cdecl fcn_00500e20(int* p);
 int* __cdecl fcn_004234e0(char* bank, char* name, int loop, int pan, int vol,
@@ -65,10 +65,10 @@ void __cdecl fcn_004c0cd0(void)
     if (g_6b8300 != 0 && g_772d10 != 0
         && g_772d3c == fcn_00500e20((int*) 0x7f4c00)) {
         scaled = 0;
-        d = *(float*) (g_6b8014 + 0x50)
-            - fcn_00413d10((float*) (g_6b8014 + 0x4c));
+        d = *(float*) (d3_ActiveCamera + 0x50)
+            - fcn_00413d10((float*) (d3_ActiveCamera + 0x4c));
         g_100584c = (short) g_7f4c0c;
-        g_1005840 = g_7f4c00;
+        g_1005840 = gm_GameTime;
         g_1005844 = g_7f4c04;
         g_1005848 = g_7f4c08;
         if (g_7e4538 != 0 && (count = *g_7e4538) != 0) {

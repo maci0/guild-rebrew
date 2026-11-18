@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_town.h"
 extern char g_868060[];
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 int sprintf(char* buf, const char* fmt, ...);
@@ -242,7 +242,7 @@ int __cdecl fcn_00524040(void* stream)
 		char c;
 
 		delta = (int)(g_868060 + 0x20);
-		s = g_14a5320[ptr];
+		s = txt_TextEntries[ptr];
 		delta = delta - (int)s;
 		do {
 			c = *s;

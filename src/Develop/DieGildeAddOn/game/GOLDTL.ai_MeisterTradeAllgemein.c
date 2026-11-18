@@ -96,7 +96,7 @@ typedef struct {          /* town record, 0x58 bytes */
 
 extern unsigned char g_773d75;
 extern char* g_773d78;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -306,7 +306,7 @@ next_request:
 			v.m.type = 0x10;
 			v.m.state = *(int*) (0x7f4ca0 + slot * 0x21c + 4);
 			v.m.f0c = *(int*) (tp + 1);
-			v.m.p28 = g_7f4c00;
+			v.m.p28 = gm_GameTime;
 			v.m.p2c = g_7f4c04;
 			v.m.p30 = g_7f4c08;
 			v.m.p34 = g_7f4c0c;
@@ -764,7 +764,7 @@ next_collect:
 				v.m.state = *(int*) (0x7f4ca0 +
 				    slot * 0x21c + 4);
 				v.m.f0c = *(int*) (tp + 1);
-				v.m.p28 = g_7f4c00;
+				v.m.p28 = gm_GameTime;
 				v.m.p2c = g_7f4c04;
 				v.m.p30 = g_7f4c08;
 				v.m.p34 = g_7f4c0c;

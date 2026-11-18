@@ -103,20 +103,20 @@ int __cdecl fcn_005936f0(int msg, int param)
 	second = fcn_00472250(h, 2, io_AppendText(0x1ad1, 0x1ad3));
 	d2_SetForm(h, 3);
 	io_AppendText(0x1ad4);
-	fcn_00533a60(g_772514, 0x1c, out, 2, g_14abe74, g_14abe78);
+	fcn_00533a60(d2_CurrentWindowId, 0x1c, out, 2, g_14abe74, g_14abe78);
 	sex0 = out[0];
 	sex1 = out[1];
 	d2_SetForm(h, 4);
 	io_AppendText(0x1ad7);
-	fcn_00533a60(g_772514, 0x1c, out, 2, g_14abe80, g_14abe84);
+	fcn_00533a60(d2_CurrentWindowId, 0x1c, out, 2, g_14abe80, g_14abe84);
 	faith1 = out[1];
 	faith0 = out[0];
 	d2_SetForm(h, 5);
 	io_AppendText(0x1adb);
-	cols = (*(int*) (g_772514 * 0x3cc + (int) g_1015f4c) - 0x20) / 0x30;
+	cols = (*(int*) (d2_CurrentWindowId * 0x3cc + (int) g_1015f4c) - 0x20) / 0x30;
 	group = d2_CreateRadioGroup(0);
 	for (i = 0; i < 8; i++) {
-		ids[i] = fcn_0046f740((i % cols) * 0x30 + 0x50, (i / cols) * 0x30 + 0x20, i + 0x59a, g_772514);
+		ids[i] = fcn_0046f740((i % cols) * 0x30 + 0x50, (i / cols) * 0x30 + 0x20, i + 0x59a, d2_CurrentWindowId);
 		*(int*) (g_1015ea0 + ids[i] * 0x2f4 + 0x58) = 1;
 		*(int*) (g_1015ea0 + ids[i] * 0x2f4 + 0x38) = 0;
 		*(int*) (g_1015ea0 + ids[i] * 0x2f4 + 0x3c) = 0;
@@ -184,7 +184,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 				}
 			}
 		}
-		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && g_67d370 == elem6) || g_14cf950 == 1) {
+		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == elem6) || g_14cf950 == 1) {
 			if (sel == 0) {
 				g_774654 = 1;
 				if (!redraw)
@@ -227,12 +227,12 @@ dispatch:
 		else if (sel == 2) {
 			d2_UpdateRadioGroup(w8);
 			if (g_100f1dc != -1) {
-				if (g_67d370 == sex0) {
+				if (d2_CurrentElementId == sex0) {
 					g_7e23e8 = 0;
 					sel = 3;
 					redraw = 1;
 				}
-				else if (g_67d370 == sex1) {
+				else if (d2_CurrentElementId == sex1) {
 					g_7e23e8 = 1;
 					sel = 3;
 					redraw = 1;
@@ -242,12 +242,12 @@ dispatch:
 		else if (sel == 3) {
 			d2_UpdateRadioGroup(w24);
 			if (g_100f1dc != -1) {
-				if (g_67d370 == faith0) {
+				if (d2_CurrentElementId == faith0) {
 					g_7e23e9 = 1;
 					sel = 4;
 					redraw = 1;
 				}
-				else if (g_67d370 == faith1) {
+				else if (d2_CurrentElementId == faith1) {
 					g_7e23e9 = 0;
 					sel = 4;
 					redraw = 1;

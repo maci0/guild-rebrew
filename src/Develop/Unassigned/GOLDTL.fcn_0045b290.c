@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 extern int g_67a370;
 
 typedef struct {
@@ -52,7 +52,7 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 		return;
 	if (m[10] == 0)
 		return;
-	if (!g_6b8014)
+	if (!d3_ActiveCamera)
 		return;
 	box.mn[0] = 1e10f;
 	box.mn[1] = 1e10f;

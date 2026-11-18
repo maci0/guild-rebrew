@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 extern char* lpObjektePROT;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* g_7746c8;
@@ -197,7 +197,7 @@ label_5a7a:
 label_5aab:
 	if (slot != 0 && (*(unsigned char*) (slot + 0x13) & 0xa0) != 0) {
 		if (*(int*) (record + 0x1ec) != 0) {
-			rc = fcn_00413680(record, g_6b8014, buf, &value);
+			rc = fcn_00413680(record, d3_ActiveCamera, buf, &value);
 			if (rc != 0) {
 				handle = evt_LoadGfxScript((char*) 0x6a1f3c);
 				if (handle != 0)

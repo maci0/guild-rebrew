@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -41,7 +41,7 @@ int __cdecl ai_RunBuergermeisterRathaus(unsigned char* rec, unsigned char* obj, 
 	msg[4] = 0x1e;
 	*(int*) (msg + 0xc) = *(int*) (out + 4);
 	msg[0x36] = 1;
-	*(int*) (msg + 0x28) = (*(int*)&g_7f4c00);
+	*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
 	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
 	*(int*) (msg + 0x30) = g_7f4c08;
 	*(short*) (msg + 0x34) = g_7f4c0c;

@@ -90,18 +90,18 @@ void __cdecl fcn_0058dbe0(int a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(v2);
 	d2_SetForm(v2, 0);
-	fcn_005340f0(*(int*) &g_772514);
+	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(v2, 1);
 	io_AppendText(0x40b7, 0x40b6, *(unsigned short*) (rec + 0x27), rec);
 	v3 = fcn_004677e0(100, 0xa0, 200, 0, 2, 0x7b, 0x82,
-	                  *(int*) &g_772514);
+	                  *(int*) &d2_CurrentWindowId);
 	fcn_00472380(v3, 0, 2, 0);
 	fcn_00468cd0(v3, 0x82);
 	fcn_00468b80(v3, *(int*) 0x14b561c);
 	fcn_00468bb0(v3, 3, *(int*) 0x14b5620, *(int*) 0x14b5624,
 	             *(int*) 0x14b5628);
 	v4 = fcn_004677e0(100, 0xbe, 200, 0, 2, 0x7b, 0x82,
-	                  *(int*) &g_772514);
+	                  *(int*) &d2_CurrentWindowId);
 	fcn_00472380(v4, 0, 2, 0);
 	fcn_00468cd0(v4, 0x82);
 	fcn_00468b80(v4, *(int*) 0x14b562c);
@@ -137,7 +137,7 @@ void __cdecl fcn_0058dbe0(int a0)
 					((char*) req)[0x36] = (char) 2;
 					*(int*) ((char*) req + 8) = *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
 					*(int*) ((char*) req + 0xc) = *(int*) (a0 + 1);
-					*(int*) ((char*) req + 0x28) = *(int*) &g_7f4c00;
+					*(int*) ((char*) req + 0x28) = *(int*) &gm_GameTime;
 					*(int*) ((char*) req + 0x2c) = *(int*) &g_7f4c04;
 					*(int*) ((char*) req + 0x30) = *(int*) 0x7f4c08;
 					*(unsigned short*) ((char*) req + 0x34) = *(unsigned short*) 0x7f4c0c;

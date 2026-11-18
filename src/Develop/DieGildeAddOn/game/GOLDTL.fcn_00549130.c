@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 // SIZE 0xf8
 struct msg {
@@ -49,6 +49,6 @@ void __cdecl fcn_00549130(void)
 	m.fc = -1;
 	m.b36 = 1;
 	m.f8 = ((struct s_7f4ca0*)g_7f4ca0)[g_774970].f4;
-	m.pos = g_7f4c00;
+	m.pos = gm_GameTime;
 	fcn_004c5530(&m);
 }

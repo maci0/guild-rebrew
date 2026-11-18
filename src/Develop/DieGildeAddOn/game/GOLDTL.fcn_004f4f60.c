@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004f4830(int idx, void* dst);
@@ -89,7 +89,7 @@ int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5)
 			goto fail;
 		}
 	}
-	msg.pos = g_7f4c00;
+	msg.pos = gm_GameTime;
 	msg.f = id;
 	msg.e = rec[0];
 	msg.b = a4;

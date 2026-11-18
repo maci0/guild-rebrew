@@ -17,7 +17,7 @@ struct msg58 {
 	int f58;
 	char pad5c[0x9c];
 };
-extern int g_14ce8e0, g_67d370;
+extern int g_14ce8e0, d2_CurrentElementId;
 void __cdecl fcn_0052a0c0(void* a1, int a2);
 int __cdecl fcn_00470820(int a1, int a2, char* path);
 void __cdecl d2_SetOverlayAnimation(int a1, int a2);
@@ -49,7 +49,7 @@ int __cdecl fcn_0058fbd0(char* a1)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	one = 1;
 	d2_SetForm(dlg, one);
 	io_AppendText(0x40f6, 0x40f5, 0x228);
@@ -62,7 +62,7 @@ int __cdecl fcn_0058fbd0(char* a1)
 		if (g_14ce8e0 != 0) {
 			g_774654 = one;
 		} else if (g_100f1dc != -1) {
-			sel = g_67d370;
+			sel = d2_CurrentElementId;
 			if (sel == id1) {
 				char* p;
 				char* h;
@@ -85,7 +85,7 @@ found:
 					m.b36 = 1;
 					m.f8 = *(int*) (*(unsigned short*) (a1 + 0x27) * 0x21c + 0x7f4ca4);
 					m.fc = *(int*) (a1 + 1);
-					m.stamp = g_7f4c00;
+					m.stamp = gm_GameTime;
 					m.f58 = *(int*) (h + 4);
 					m.f38 = *(int*) (h + 4);
 					fcn_004c5530(&m);

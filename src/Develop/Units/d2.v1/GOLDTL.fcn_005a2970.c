@@ -1,11 +1,11 @@
 #include <string.h>
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_772500;
 extern char* g_77255c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern unsigned char g_773d75;
@@ -76,7 +76,7 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 	handle = fcn_00470820(0, 0, "locations\\Wirtshaus\\DUNKLEECKE");
 	fcn_00471b60(handle);
 	d2_SetForm(handle, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	memset(sel, 0, sizeof(sel));
 	changed = 1;
@@ -99,7 +99,7 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 		}
 		if (changed) {
 			d2_SetForm(handle, 1);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			io_AppendText(0x18a3);
 			line = 0x46;
 			x = *(int*) (g_77255c + 0xc) / 2;
@@ -109,7 +109,7 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 				sel[j].x10 = (x - height) - 0x28;
 				sel[j].used = (sel[j].who != 0);
 				fcn_005ca560(&sel[j]);
-				fcn_005ca740(sel[j].x10, sel[j].x14, g_772514, 0x54, &sel[j], 1);
+				fcn_005ca740(sel[j].x10, sel[j].x14, d2_CurrentWindowId, 0x54, &sel[j], 1);
 				if (seen[j] != -1)
 					io_FormatTextBuffer(buf, 0x18a5, idx[j] * 5 + 0x13fd, vals[j]);
 				else
@@ -121,7 +121,7 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 		}
 		if (g_100f1dc != -1) {
 			for (j = 0; j < 3; j++) {
-				if (g_67d370 == *(int*) sel[j].pad4)
+				if (d2_CurrentElementId == *(int*) sel[j].pad4)
 					break;
 			}
 			if (3 > j) {

@@ -2,7 +2,7 @@
 
 
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
 
@@ -16,9 +16,9 @@ char* __cdecl CreateCharacter(char** a, float* b, float* c, float* d)
 	v[2] = *d;
 	o = ch_CreateAtPosition(*a, v);
 	if (o == 0) {
-		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "object not created");
+		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "object not created");
 	} else {
-		*(int*) (o + 0x30) = *(int*) (g_6b7e98 + 0x104);
+		*(int*) (o + 0x30) = *(int*) (evt_CurrentScript + 0x104);
 	}
 	return o;
 }

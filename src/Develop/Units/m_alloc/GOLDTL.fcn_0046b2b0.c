@@ -4,7 +4,7 @@
 extern char* g_1015ea0;
 extern void** g_772540;
 extern int g_772528;
-extern Fld_102d140* g_7725d0;
+extern Fld_102d140* tp_d2_SelectedControl;
 extern Fld_102d140 g_102d140[];
 
 void __cdecl m_FreeTracked(void* p);
@@ -47,8 +47,8 @@ void __cdecl fcn_0046b2b0(int id)
 		break;
 	case 0x41:
 		f = &g_102d140[*(int*) (e + 0x88)];
-		if (g_7725d0 == f) {
-			g_7725d0 = 0;
+		if (tp_d2_SelectedControl == f) {
+			tp_d2_SelectedControl = 0;
 		}
 		if (f->def != -1) {
 			d2_SubRefcount(f->def);

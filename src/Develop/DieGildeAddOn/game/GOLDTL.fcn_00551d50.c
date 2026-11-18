@@ -3,7 +3,7 @@
 
 
 
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -75,7 +75,7 @@ void __cdecl fcn_00551d50(char* a0)
 					rep stosb
 				}
 				*(int*) (packet + 8) = *(int*) (row + 4);
-				*(int*) (packet + 0x28) = g_7f4c00;
+				*(int*) (packet + 0x28) = gm_GameTime;
 				*(int*) (packet + 0x2c) = g_7f4c04;
 				*(int*) (packet + 0x30) = g_7f4c08;
 				*(short*) (packet + 0x34) = g_7f4c0c;

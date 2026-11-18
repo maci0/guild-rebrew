@@ -6,8 +6,8 @@ extern int g_14ce8e0;
 extern char g_14cf950;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
-extern int g_67d370;
-extern int g_7e46ac;
+extern int d2_CurrentElementId;
+extern int main_LoopFlags;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -57,14 +57,14 @@ int __cdecl fcn_004b41b0(void)
 	lst = d2_CreateRadioGroup(6, b0, b1, b2, b3, b4, b5);
 	d2_SelectRadioGroup(lst, 0);
 	fcn_00469470(lst, fcn_00472250(h, 0, io_AppendText(0x7e)));
-	while (fcn_005373e0(fcn_004b41b0, g_7e46ac) != 0) {
+	while (fcn_005373e0(fcn_004b41b0, main_LoopFlags) != 0) {
 		d2_UpdateRadioGroup(lst);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1 || g_100f1dc == 1) {
 			result = 0xff;
 			g_774654 = 1;
 		}
 		if (g_100f1dc == 2) {
-			x = g_67d370;
+			x = d2_CurrentElementId;
 			if (x == b0) {
 				g_6a3440 = -1;
 				result = 0;

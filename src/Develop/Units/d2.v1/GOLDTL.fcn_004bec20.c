@@ -1,5 +1,5 @@
-extern int g_67d370;
-extern int g_772514;
+extern int d2_CurrentElementId;
+extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 extern int g_100f1dc;
 extern int g_14ce8e0;
@@ -74,7 +74,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 	fcn_00476b60();
 	for (;;) {
 		n = k * 0x8c;
-		if (g_14ce8e0 != 0 || v17 != 0 || (g_100f1dc != -1 && g_67d370 == v4)) {
+		if (g_14ce8e0 != 0 || v17 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == v4)) {
 			g_774654 = 1;
 		}
 		if (*(int*) (0x102cbc8 + n) != v18 || v2) {
@@ -94,7 +94,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 			if (p != 0) {
 				p2 = fcn_00502cd0(*(unsigned int*) (p + 0x14), 1, 5, 0);
 				while (p2 != 0) {
-					v6 = fcn_0046f740((i % 4) * 0x40, (i / 4) * 0x40, *(unsigned short*) p2 + 0xdf, g_772514);
+					v6 = fcn_0046f740((i % 4) * 0x40, (i / 4) * 0x40, *(unsigned short*) p2 + 0xdf, d2_CurrentWindowId);
 					list[i] = v6;
 					*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x5c) = 1;
 					*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x1d0) = 3;
@@ -105,7 +105,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 				}
 			}
 			items[i] = 0;
-			v6 = fcn_0046f740((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527, g_772514);
+			v6 = fcn_0046f740((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527, d2_CurrentWindowId);
 			list[i] = v6;
 			v2 = 0;
 			*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x5c) = 1;
@@ -114,7 +114,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 		}
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 0x30; i++) {
-				if (g_67d370 == list[i]) {
+				if (d2_CurrentElementId == list[i]) {
 					v17 = items[i];
 					break;
 				}

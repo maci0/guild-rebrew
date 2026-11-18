@@ -14,7 +14,7 @@ typedef struct {
 // SIZE 0x18
 
 #include "client_types.h"
-extern Rec18_68da68 g_9a9220[42];
+extern Rec18_68da68 amt_OfficeSlots[42];
 
 int __cdecl fcn_004c63a0(char*);
 #include "Develop/DieGildeAddOn/game/aemter.h"
@@ -33,7 +33,7 @@ int __cdecl fcn_004e8240(unsigned char id, unsigned char* ea, unsigned char* eb,
 	if (eb != 0)
 		b = *(int*) (eb + 4);
 	for (i = 0; i < 42; i++) {
-		if (((rec18*)g_9a9220)[i].c0 == id)
+		if (((rec18*)amt_OfficeSlots)[i].c0 == id)
 			break;
 	}
 	if (i >= 42)

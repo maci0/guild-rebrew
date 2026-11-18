@@ -38,7 +38,7 @@ typedef struct {
 
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_6a375c;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -77,7 +77,7 @@ int __cdecl fcn_00499ad0(char* e)
 	fcn_004c4570(1, 1, 0xd, &ret);
 	fcn_004c5360();
 	fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0, 0x4000);
-	st = (*(Time499a*)&g_7f4c00);
+	st = (*(Time499a*)&gm_GameTime);
 	fcn_00500bb0(&st, gm_RandomMod(4) + 1, gm_RandomMod(8) * 7, 0);
 	if (e[2] == 5) {
 		i = 0;

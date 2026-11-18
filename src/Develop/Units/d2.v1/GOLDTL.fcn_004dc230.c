@@ -1,10 +1,10 @@
 extern char g_68c340[];
 extern char* g_77255c;
-extern int g_772514;
-extern int g_68bfb8;
+extern int d2_CurrentWindowId;
+extern int cut_EventLoopFlags;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
@@ -37,18 +37,18 @@ int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short*
 	b0 = fcn_00472250(h, 0, t);
 	fcn_00472250(h, 0, t + 1);
 	b2 = fcn_00472250(h, 0, t + 2);
-	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, g_772514);
+	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(w, 0x5dc, 1);
 	res = fcn_004aacb0(a1, a2, a3, &aux);
 	g_100f1dc = -1;
-	while (fcn_005373e0(fcn_004dc230, g_68bfb8) != 0) {
+	while (fcn_005373e0(fcn_004dc230, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(w, 0, 0) == 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			res = 0;
 			g_774654 = 1;
-			if (g_67d370 != b0)
-				res = (g_67d370 != b2) + 1;
+			if (d2_CurrentElementId != b0)
+				res = (d2_CurrentElementId != b2) + 1;
 		}
 	}
 	fcn_00471e30(h);

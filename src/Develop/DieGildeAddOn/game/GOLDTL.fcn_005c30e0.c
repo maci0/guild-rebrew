@@ -41,7 +41,7 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern double g_664e60;
 
@@ -136,10 +136,10 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 		msg.f8 = ((GOLDTL_House5c30*) g_7f4ca0)[g_774970].f4;
 		msg.fc = *(int*) (a1 + 1);
 		msg.f36 = 1;
-		msg.f28 = g_7f4c00.a;
-		msg.f2c = g_7f4c00.b;
-		msg.f30 = g_7f4c00.c;
-		msg.f34 = g_7f4c00.d;
+		msg.f28 = gm_GameTime.a;
+		msg.f2c = gm_GameTime.b;
+		msg.f30 = gm_GameTime.c;
+		msg.f34 = gm_GameTime.d;
 		msg.f58 = msg.fc;
 		fcn_004c4eb0(g_67e968);
 		fcn_004c5150(-1, ((GOLDTL_House5c30*) g_7f4ca0)[g_774970].f4,
@@ -170,13 +170,13 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 	memset(&msg, 0, sizeof msg);
 	msg.f4 = 0x1e;
 	msg.f58 = *(int*) (a1 + 1);
-	msg.f34 = g_7f4c00.d;
+	msg.f34 = gm_GameTime.d;
 	msg.f36 = 1;
 	msg.fc = *(int*) (a1 + 1);
 	msg.f8 = ((GOLDTL_House5c30*) g_7f4ca0)[g_774970].f4;
-	msg.f30 = g_7f4c00.c;
-	msg.f2c = g_7f4c00.b;
-	msg.f28 = g_7f4c00.a;
+	msg.f30 = gm_GameTime.c;
+	msg.f2c = gm_GameTime.b;
+	msg.f28 = gm_GameTime.a;
 	fcn_004c4eb0(g_67e968);
 	fcn_004c5150(-1, *(int*) (m + 2), (char) g_773d75, v);
 	fcn_004c5530((char*) &msg);

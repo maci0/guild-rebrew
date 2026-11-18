@@ -55,7 +55,7 @@ void __cdecl fcn_0055cc80(char* self)
 	state = *(int*) (self + 0x70);
 	switch (state) {
 	case 1:
-		if (fcn_00500cb0(self + 0x52, (char*) &g_7f4c00) >= 0) {
+		if (fcn_00500cb0(self + 0x52, (char*) &gm_GameTime) >= 0) {
 			return;
 		}
 		packet = (S55cc80Packet*) gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10));

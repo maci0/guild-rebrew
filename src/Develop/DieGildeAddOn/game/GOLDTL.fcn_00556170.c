@@ -3,7 +3,7 @@
 extern int lpGebaeudeINST;
 extern int lpGebaeudePROT;
 extern unsigned char g_773d75;
-extern char g_7f4c00[];
+extern char gm_GameTime[];
 
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_00500bb0(char*, int, int, int);
@@ -32,7 +32,7 @@ typedef struct {
 #pragma pack(pop)
 
 #define COPY_UI(q) \
-	*(UIPos*) ((q) + 0x52) = *(UIPos*) ((char*) g_7f4c00)
+	*(UIPos*) ((q) + 0x52) = *(UIPos*) ((char*) gm_GameTime)
 
 /* ADDRESS: GOLDTL 0x00556170 */
 void __cdecl fcn_00556170(char* p)
@@ -89,7 +89,7 @@ void __cdecl fcn_00556170(char* p)
 		*(short*) (p + 0x56) = 0xf;
 		goto anim7;
 	case 2:
-		if (*(unsigned short*) ((char*) g_7f4c00 + 4) >= 0x14) {
+		if (*(unsigned short*) ((char*) gm_GameTime + 4) >= 0x14) {
 			COPY_UI(p);
 			break;
 		}
@@ -159,7 +159,7 @@ void __cdecl fcn_00556170(char* p)
 		*(int*) (p + 0x84) = fcn_004c5620(1, p);
 		return;
 	case 6:
-		if (*(unsigned short*) ((char*) g_7f4c00 + 4) >= 0x14) {
+		if (*(unsigned short*) ((char*) gm_GameTime + 4) >= 0x14) {
 			COPY_UI(p);
 			break;
 		}

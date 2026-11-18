@@ -76,7 +76,7 @@ void __cdecl ch_UpdatePendingPositions(void)
 	float position[4];
 	float value;
 
-	p = (char**) g_14d0020;
+	p = (char**) ch_CharacterSlots;
 	do {
 		obj = *p;
 		if (obj != 0 && (obj[0x8c] & 1) != 0
@@ -98,5 +98,5 @@ void __cdecl ch_UpdatePendingPositions(void)
 			obj[0x8c] &= ~1;
 		}
 		p++;
-	} while ((int) p < (int) ((char**) g_14d0020 + 0x300));
+	} while ((int) p < (int) ((char**) ch_CharacterSlots + 0x300));
 }

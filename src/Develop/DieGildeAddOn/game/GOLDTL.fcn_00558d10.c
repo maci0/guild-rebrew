@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 
@@ -23,7 +23,7 @@ void __cdecl fcn_00558d10(char* e)
 
 	idx = *(int*) (e + 0xb8);
 	clock = (pos14_7f4c00*) (e + 0x52);
-	*clock = g_7f4c00;
+	*clock = gm_GameTime;
 	n = 0x100;
 	do {
 		p = lpGebaeudeINST + idx * 0xa9;

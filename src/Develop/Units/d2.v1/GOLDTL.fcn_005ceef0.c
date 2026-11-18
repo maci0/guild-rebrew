@@ -1,11 +1,11 @@
 #include <string.h>
 
 extern int g_775348;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char g_773d75;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8d0;
 extern int g_14ce8d8;
 extern int g_14ce8e0;
@@ -93,7 +93,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 	v5 = fcn_00470820(0, 0, (char*) 0x6aca84);
 	v28 = v5;
 	d2_SetForm(v5, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	fcn_00471b60(v5);
 	d2_SetOverlayAnimation(0, 0);
 	v15 = fcn_0050b710(*(unsigned int*) ((char*) v3 + 0x39), g_773d75);
@@ -115,7 +115,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 	}
 	if (v20) {
 		d2_SetForm(v28, 3);
-		fcn_00533a60(g_772514, 0, &v18[0], 2, g_14a90a0, g_14b5874);
+		fcn_00533a60(d2_CurrentWindowId, 0, &v18[0], 2, g_14a90a0, g_14b5874);
 		v29 = v18[0];
 		v30 = v18[1];
 	}
@@ -126,7 +126,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 		}
 		else if (g_14ce8d0) {
 			if (g_775348 != 1) {
-				if (!g_775348 && v13 != -1 && g_67d370 == v13) {
+				if (!g_775348 && v13 != -1 && d2_CurrentElementId == v13) {
 					v18[0] = fcn_00471f80(v13);
 					fcn_005b1ed0(v3, (float) v18[0] * g_662910);
 				}
@@ -134,7 +134,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 			else {
 				v23 = 0;
 				do {
-					if (g_67d370 == v12[v23]) {
+					if (d2_CurrentElementId == v12[v23]) {
 						if (v23 <= 6 && v12[v23] != -1) {
 							g_100f1dc = -1;
 							v5 = fcn_00471f80(v12[v23]);
@@ -159,13 +159,13 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 				} while (v23 < 7);
 			}
 		}
-		v23 = g_67d370;
-		if (g_14ce8d8 && g_67d370 != -1) {
+		v23 = d2_CurrentElementId;
+		if (g_14ce8d8 && d2_CurrentElementId != -1) {
 			v21 = (char*) (v8 + 5);
 			v8 = 0;
 			do {
 				v23 = *(int*) ((char*) v17 + v8);
-				if (g_67d370 == v23) {
+				if (d2_CurrentElementId == v23) {
 					v2 = *v21;
 					*v21 = (v2 == 0);
 					*(unsigned int*) (g_1015ea0 + 0x38
@@ -176,16 +176,16 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 				v8 += 4;
 				v21 = &v21[8];
 			} while (v8 < 0x1c);
-			v23 = g_67d370;
+			v23 = d2_CurrentElementId;
 			v8 = (int) v27;
 		}
 		if (g_100f1dc != -1) {
 			if (g_775348 != 1) {
 				if (!g_775348) {
 					v15 = fcn_00471f80(v16);
-					if (g_67d370 != v30) {
+					if (d2_CurrentElementId != v30) {
 						v24 = 0;
-						v23 = g_67d370;
+						v23 = d2_CurrentElementId;
 						do {
 							if (v23 == -1) {
 								break;
@@ -244,7 +244,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 									(unsigned char*) v3, *v4, v19, v32,
 									v33, v34, &v13, (int) v27);
 								v23 = -1;
-								g_67d370 = -1;
+								d2_CurrentElementId = -1;
 							}
 							v24 += 1;
 						} while ((int) v24 < 4);
@@ -252,7 +252,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 					else {
 						fcn_005ced80(v28, v27, v12, v17);
 						g_775348 = 1;
-						g_67d370 = -1;
+						d2_CurrentElementId = -1;
 					}
 				}
 			}
@@ -286,7 +286,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 					(unsigned char*) v3, *v4, v19, v32, v33, v34,
 					&v13, (int) v27);
 				g_775348 = 0;
-				g_67d370 = -1;
+				d2_CurrentElementId = -1;
 			}
 		}
 		v6 = fcn_005373e0((void*) fcn_005ceef0, 0x677c7);

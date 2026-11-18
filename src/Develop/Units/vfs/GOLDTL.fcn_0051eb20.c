@@ -12,7 +12,7 @@ int __cdecl fcn_0051eb20(int a)
 	int i;
 	char* e;
 
-	save = g_6b8010;
+	save = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	for (i = 0; i < 0x100; i++) {
 		if (((char*)lpGebaeudeINST)[i * 0xa9] != 0 && *(char**) (((char*)lpGebaeudeINST) + i * 0xa9 + 0x61) != 0) {

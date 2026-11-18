@@ -49,7 +49,7 @@ void __cdecl fcn_005b39c0(void)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-			g_772514 = idx;
+			d2_CurrentWindowId = idx;
 			io_AppendText(0x6811b0);
 			save = (char*) 0x85abac;
 			base = (char*) 0x868060;

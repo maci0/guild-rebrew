@@ -26,10 +26,10 @@ void __cdecl fcn_00510930(void)
 	}
 	fcn_00442e30();
 	for (i = 0; i < 0x2dc; i++) {
-		if (((signed char*)g_7f3b40)[i] > 0) {
-			fcn_004432d0(((signed char*)g_7f3b40)[i], 0);
+		if (((signed char*)init_SceneContextIndices)[i] > 0) {
+			fcn_004432d0(((signed char*)init_SceneContextIndices)[i], 0);
 			fcn_00442e30();
-			((signed char*)g_7f3b40)[i] = -1;
+			((signed char*)init_SceneContextIndices)[i] = -1;
 		}
 	}
 	for (i = 0; i < 0x22; i++) {

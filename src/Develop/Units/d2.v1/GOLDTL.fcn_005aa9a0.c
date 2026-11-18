@@ -8,7 +8,7 @@ typedef struct
 } Req;
 // SIZE 0x14
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern int g_14ce8e0;
@@ -36,7 +36,7 @@ void __cdecl fcn_005aa9a0(int a1)
 	fcn_00471b60(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x166a);
 	d2_SetForm(dlg, 2);

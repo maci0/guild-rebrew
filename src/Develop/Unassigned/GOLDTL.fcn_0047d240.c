@@ -1,7 +1,7 @@
 extern unsigned char g_6a375c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned int g_14cbcb4;
-extern unsigned int g_774948;
+extern unsigned int main_PlayerTurnIndex;
 
 int __cdecl fcn_0047d220(char* a);
 
@@ -27,7 +27,7 @@ int __cdecl fcn_0047d240(char* p)
 				return 0;
 			}
 		} else {
-			if (v % g_6a375c != g_774948) {
+			if (v % g_6a375c != main_PlayerTurnIndex) {
 				return 0;
 			}
 		}

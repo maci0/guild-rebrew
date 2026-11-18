@@ -59,7 +59,7 @@ void __cdecl fcn_00473df0(void)
 	d.h = 0x100;
 	g_100f840.tex = fcn_004770a0(&d, 3);
 	for (i = 0; i < 6; i++) {
-		((Tag*)DisplayCounters)[i].id = -1;
-		((Tag*)DisplayCounters)[i].val = 0;
+		((Tag*)d2_DisplayCounters)[i].id = -1;
+		((Tag*)d2_DisplayCounters)[i].val = 0;
 	}
 }

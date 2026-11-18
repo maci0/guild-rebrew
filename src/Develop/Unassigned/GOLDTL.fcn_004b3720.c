@@ -22,7 +22,7 @@ int __cdecl fcn_004b3720(int a0, char* a1, int a2)
 			g_7728d4 = 0;
 			return 4;
 		}
-		diff = g_7f4c00.a - slot[0];
+		diff = gm_GameTime.a - slot[0];
 		if (diff == 1) {
 			pos = fcn_004b2dd0(a1, g_67fca8, a2);
 			result = 1;

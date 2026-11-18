@@ -2,7 +2,7 @@
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern float g_662a94;
 extern float g_6628a8;
 extern float g_66444c;
@@ -74,7 +74,7 @@ double __cdecl fcn_004fe5f0(char* a0)
 			*(int*) (msg + 0xc) = -1;
 
 			msg[0x36] = 2;
-			*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
+			*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 
 
 			*(int*) (msg + 0x58) = *(int*) (a0 + 4);
@@ -191,7 +191,7 @@ double __cdecl fcn_004fe5f0(char* a0)
 
 
 			msg[0x36] = 2;
-			*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
+			*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 
 			*(int*) (msg + 0x58) = *(int*) (a0 + 4);
 			fcn_004c5530(msg);
@@ -258,7 +258,7 @@ double __cdecl fcn_004fe5f0(char* a0)
 		*(int*) (msg + 0xc) = -1;
 
 		msg[0x36] = 2;
-		*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
+		*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 
 
 		*(int*) (msg + 0x58) = *(int*) (a0 + 4);

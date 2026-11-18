@@ -1,6 +1,6 @@
 extern char* g_6b7ebc;
-extern char* g_6b7e98;
-extern int g_6b5cbc;
+extern char* evt_CurrentScript;
+extern int d3_CameraAnimating;
 extern int d3_ActiveCameraAnimation;
 
 void __cdecl fcn_00414d20(int, int, int, int, int, int, int, int);
@@ -12,14 +12,14 @@ void __cdecl fcn_00414d20(int, int, int, int, int, int, int, int);
 int __cdecl NewCameraFlight(int* a1, int* a2, int* a3, int* a4, int* a5, int* a6, int* a7)
 {
 	if (g_6b7ebc != 0 && *(int (__cdecl**)()) (g_6b7ebc + 0x44) == (int (__cdecl*)()) NewCameraFlight) {
-		if (g_6b5cbc == 0 && d3_ActiveCameraAnimation == 0) {
+		if (d3_CameraAnimating == 0 && d3_ActiveCameraAnimation == 0) {
 			return 0;
 		}
-		*(int (__cdecl**)()) (g_6b7e98 + 0xc60) = (int (__cdecl*)()) NewCameraFlight;
+		*(int (__cdecl**)()) (evt_CurrentScript + 0xc60) = (int (__cdecl*)()) NewCameraFlight;
 		return 0;
 	}
-	if (*(int*) (g_6b7e98 + 0xc84) == 1) {
-		*(int (__cdecl**)()) (g_6b7e98 + 0xc60) = (int (__cdecl*)()) NewCameraFlight;
+	if (*(int*) (evt_CurrentScript + 0xc84) == 1) {
+		*(int (__cdecl**)()) (evt_CurrentScript + 0xc60) = (int (__cdecl*)()) NewCameraFlight;
 	}
 	fcn_00414d20(*a1 / 14, 6, *a2, *a3, *a4, *a5, *a6, *a7);
 	return 1;

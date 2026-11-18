@@ -3,16 +3,16 @@ extern short g_14ce8c2;
 extern short g_14ce8c0;
 extern int g_7746c8;
 extern int g_7746c4;
-extern int g_6b8014;
+extern int d3_ActiveCamera;
 extern volatile int g_6b7fac;
 extern int d3_ActiveCameraAnimation;
-extern int g_6b5cbc;
-extern int g_6b5c84;
+extern int d3_CameraAnimating;
+extern int d2_MouseTopBoundary;
 extern int g_6b5c80;
 extern int g_67a370;
-extern int g_6772c0;
-extern int g_6772bc;
-extern float g_774690;
+extern int d2_MouseBottomBoundary;
+extern int d2_MouseRightBoundary;
+extern float d3_CameraHeightFraction;
 extern char g_14cf7d0;
 extern char g_14cf7cd;
 extern char g_14cf7cb;
@@ -45,7 +45,7 @@ int __cdecl fcn_0052b720(void)
 	if (mode >= 1 && mode <= 8) {
 		g_7725c4 = 0;
 	}
-	if (d3_ActiveCameraAnimation != 0 || g_6b5cbc != 0) {
+	if (d3_ActiveCameraAnimation != 0 || d3_CameraAnimating != 0) {
 		return 0;
 	}
 	if (*(int*) 0x774750 != 0) {
@@ -60,9 +60,9 @@ int __cdecl fcn_0052b720(void)
 	pos = g_14ce8c0;
 	*(int*) 0x774750 = g_6b7fac;
 	typ = g_14ce8c2;
-	if ((typ == g_6b5c84
+	if ((typ == d2_MouseTopBoundary
 	    && pos < g_6b5c80 + 0x40)
-	    || (typ < g_6b5c84 + 0x40
+	    || (typ < d2_MouseTopBoundary + 0x40
 	    && pos == g_6b5c80)) {
 		if (*(float*) 0x77474c == 0.0f) {
 			*(float*) 0x77474c = 10.0f;
@@ -79,10 +79,10 @@ int __cdecl fcn_0052b720(void)
 		g_7725c4 = 5;
 		goto done;
 	}
-	if ((typ == g_6b5c84
-	    && pos > g_6772bc - 0x40)
-	    || (typ < g_6b5c84 + 0x40
-	    && pos == g_6772bc)) {
+	if ((typ == d2_MouseTopBoundary
+	    && pos > d2_MouseRightBoundary - 0x40)
+	    || (typ < d2_MouseTopBoundary + 0x40
+	    && pos == d2_MouseRightBoundary)) {
 		if (*(float*) 0x77474c == 0.0f) {
 			*(float*) 0x77474c = 10.0f;
 		}
@@ -98,10 +98,10 @@ int __cdecl fcn_0052b720(void)
 		g_7725c4 = 6;
 		goto done;
 	}
-	if ((typ == g_6772c0
-	    && pos > g_6772bc - 0x40)
-	    || (typ > g_6772c0 - 0x40
-	    && pos == g_6772bc)) {
+	if ((typ == d2_MouseBottomBoundary
+	    && pos > d2_MouseRightBoundary - 0x40)
+	    || (typ > d2_MouseBottomBoundary - 0x40
+	    && pos == d2_MouseRightBoundary)) {
 		if (*(float*) 0x77474c == 0.0f) {
 			*(float*) 0x77474c = -10.0f;
 		}
@@ -117,9 +117,9 @@ int __cdecl fcn_0052b720(void)
 		g_7725c4 = 8;
 		goto done;
 	}
-	if ((typ == g_6772c0
+	if ((typ == d2_MouseBottomBoundary
 	    && pos < g_6b5c80 + 0x40)
-	    || (typ > g_6772c0 - 0x40
+	    || (typ > d2_MouseBottomBoundary - 0x40
 	    && pos == g_6b5c80)) {
 		if (*(float*) 0x77474c == 0.0f) {
 			*(float*) 0x77474c = -10.0f;
@@ -146,7 +146,7 @@ int __cdecl fcn_0052b720(void)
 		g_7725c4 = 4;
 		goto xdamp;
 	}
-	if (pos == g_6772bc || g_14cf7cd != 0) {
+	if (pos == d2_MouseRightBoundary || g_14cf7cd != 0) {
 		if (*(float*) 0x774744 == 0.0f) {
 			*(float*) 0x774744 = 10.0f;
 		}
@@ -156,7 +156,7 @@ int __cdecl fcn_0052b720(void)
 		g_7725c4 = 3;
 		goto xdamp;
 	}
-	if (typ == g_6772c0 || g_14cf7d0 != 0) {
+	if (typ == d2_MouseBottomBoundary || g_14cf7d0 != 0) {
 		if (*(float*) 0x77474c == 0.0f) {
 			*(float*) 0x77474c = -10.0f;
 		}
@@ -165,7 +165,7 @@ int __cdecl fcn_0052b720(void)
 		}
 		skipx = 1;
 		g_7725c4 = 1;
-	} else if (typ == g_6b5c84 || g_14cf7c8 != 0) {
+	} else if (typ == d2_MouseTopBoundary || g_14cf7c8 != 0) {
 		if (*(float*) 0x77474c == 0.0f) {
 			*(float*) 0x77474c = 10.0f;
 		}
@@ -202,7 +202,7 @@ xdamp:
 		}
 	}
 done:
-	if (g_6b8014 == 0) {
+	if (d3_ActiveCamera == 0) {
 		goto end;
 	}
 	if (*(float*) 0x774744 == 0.0f && *(float*) 0x77474c == 0.0f) {
@@ -214,8 +214,8 @@ done:
 		f = f * 0.25;
 	}
 	step = (float) (*(float*) 0x6a2570 * f
-	    * (g_774690 * 1.5 + 0.6));
-	fcn_005ebbb9(mat, (float*) ((char*) g_6b8014 + 0x18c));
+	    * (d3_CameraHeightFraction * 1.5 + 0.6));
+	fcn_005ebbb9(mat, (float*) ((char*) d3_ActiveCamera + 0x18c));
 	d[0] = *(float*) 0x774744 * step * 1.1;
 	d[1] = *(float*) 0x77474c * step * 1.1;
 	q[0] = mat[8] * *(float*) 0x662d48
@@ -237,9 +237,9 @@ done:
 		q[2] = d[1] * cos(-step) - d[0] * sin(-step);
 	}
 	q[1] = 0.0f;
-	v[0] = *(float*) (g_6b8014 + 0x4c) + q[0];
-	v[1] = *(float*) (g_6b8014 + 0x50);
-	v[2] = *(float*) (g_6b8014 + 0x54) + q[2];
+	v[0] = *(float*) (d3_ActiveCamera + 0x4c) + q[0];
+	v[1] = *(float*) (d3_ActiveCamera + 0x50);
+	v[2] = *(float*) (d3_ActiveCamera + 0x54) + q[2];
 	if (CompareVector3WithinTolerance((float*) 0x773e24, v, 0.1f) == 0) {
 		char* obj;
 		float t;
@@ -269,7 +269,7 @@ done:
 				v[2] = t;
 			}
 		}
-		fcn_00438b40((char*) g_6b8014, (int*) v);
+		fcn_00438b40((char*) d3_ActiveCamera, (int*) v);
 		ret = 1;
 	}
 	*(float*) 0x773e24 = q[0];

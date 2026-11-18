@@ -33,6 +33,6 @@ int __cdecl fcn_004e1ff0(int* x)
 	g_772f54 = 0;
 	fcn_004e4910();
 	fcn_004e3640();
-	g_7725c8 = 0;
+	d2_SuppressOverlay = 0;
 	return 1;
 }

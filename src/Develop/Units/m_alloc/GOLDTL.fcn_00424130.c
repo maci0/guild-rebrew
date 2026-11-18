@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char* g_6b7d68;
+extern char* sbs_BankManager;
 extern int g_6b7d6c;
 
 char* __cdecl fcn_00423ac0(char* name);
@@ -28,7 +28,7 @@ int __cdecl fcn_00424130(char* set, char* name)
 						*(char**) (scope + 0x38) = *(char**) (e + 0x104);
 					}
 					*(int*) (scope + 0x34) -= *(int*) (e + 0x100);
-					*(int*) (g_6b7d68 + 0x34) -= *(int*) (e + 0x100);
+					*(int*) (sbs_BankManager + 0x34) -= *(int*) (e + 0x100);
 					m_FreeTracked(e);
 					g_6b7d6c++;
 					break;
@@ -40,7 +40,7 @@ int __cdecl fcn_00424130(char* set, char* name)
 			while (e != 0) {
 				next = *(char**) (e + 0x104);
 				*(int*) (scope + 0x34) -= *(int*) (e + 0x100);
-				*(int*) (g_6b7d68 + 0x34) -= *(int*) (e + 0x100);
+				*(int*) (sbs_BankManager + 0x34) -= *(int*) (e + 0x100);
 				m_FreeTracked(e);
 				g_6b7d6c++;
 				e = next;

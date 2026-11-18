@@ -52,7 +52,7 @@ void __cdecl fcn_005918f0(char* w)
 	memset(&info, 0, sizeof(info));
 	info.who = w;
 	if (fcn_005ca560(&info) != 0) {
-		fcn_005caaa0(0xa6, 5, g_772514, &info);
+		fcn_005caaa0(0xa6, 5, d2_CurrentWindowId, &info);
 	}
 	d2_SetForm(0, 2);
 	if (w[2] != 0x14) {
@@ -105,7 +105,7 @@ void __cdecl fcn_005918f0(char* w)
 	d2_SetForm(0, 3);
 	for (i = 0, y = 0; y < 0x4b; i++, y += 0xf) {
 		io_FormatTextBuffer(buf, "%s:", i + 0x16b7);
-		d2_ShowTxt(0, y, buf, g_772514);
+		d2_ShowTxt(0, y, buf, d2_CurrentWindowId);
 		fcn_00534210(0x64, y + 2, w, i, 0x4df);
 	}
 	do {

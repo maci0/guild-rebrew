@@ -1,7 +1,7 @@
 
 
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 
 void __cdecl fcn_00426680(int, int*);
 void __cdecl fcn_004263b0(int);
@@ -13,7 +13,7 @@ int __cdecl fcn_004275a0(void)
 	char* g;
 	char* x;
 
-	g = g_6b7e98;
+	g = evt_CurrentScript;
 	x = *(char**) (g + 0xc28);
 	if (*(int*) (x + *(int*) (x + 8) * 16 + 0x44) != 0) {
 		fcn_00426680(*(int*) (g + 0x118), buf);

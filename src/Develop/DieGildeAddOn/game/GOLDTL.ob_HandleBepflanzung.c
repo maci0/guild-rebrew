@@ -3,15 +3,15 @@
 extern char* g_6b8300;
 extern int g_1040494;
 extern int g_6a25b8;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 extern short g_14ce8c0;
 extern short g_14ce8c2;
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 extern int g_14ce8cc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "game_player.h"
 extern char g_773d75;
 extern char g_14cf950;
@@ -156,7 +156,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 	if (1 <= v16) {
 		do {
 			v16 = fcn_0046f740(0x1a, v17 * 0x32, v7[v17 + 1] + 0xdf,
-				g_772514);
+				d2_CurrentWindowId);
 			v8[v17] = v16;
 			if (v24 == -1) {
 				v24 = d2_CreateRadioGroup(1, v16);
@@ -178,13 +178,13 @@ void __cdecl ob_HandleBepflanzung(int a0)
 			v16 = (int) v18 >> 0x10;
 			v34 = v19;
 			v37 = v16;
-			fcn_005ebbb9(matrix, (float*) (g_6b8014 + 0x18c));
+			fcn_005ebbb9(matrix, (float*) (d3_ActiveCamera + 0x18c));
 			world[0] = matrix[8] * pick[2] + matrix[4] * pick[1] + matrix[0] * pick[0];
 			world[1] = matrix[9] * pick[2] + matrix[5] * pick[1] + matrix[1] * pick[0];
 			world[2] = matrix[10] * pick[2] + matrix[6] * pick[1] + matrix[2] * pick[0];
-			world[0] += *(float*) (g_6b8014 + 0x4c);
-			world[1] += *(float*) (g_6b8014 + 0x50);
-			world[2] += *(float*) (g_6b8014 + 0x54);
+			world[0] += *(float*) (d3_ActiveCamera + 0x4c);
+			world[1] += *(float*) (d3_ActiveCamera + 0x50);
+			world[2] += *(float*) (d3_ActiveCamera + 0x54);
 			fcn_00438b40(v6, world);
 			if (*(unsigned char*) (*(int*) g_6b8300 * v16
 					+ *(int*) (g_6b8300 + 0x14) + v19) != v36
@@ -254,7 +254,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 			v17 = 0;
 			if (1 <= v16) {
 				do {
-					if (g_67d370 == v8[v17]) {
+					if (d2_CurrentElementId == v8[v17]) {
 						v23 = *(int*) (v35 * 4 + 0x102cbc8);
 						break;
 					}

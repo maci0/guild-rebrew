@@ -9,8 +9,8 @@ typedef struct {
 // SIZE 0xe
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
-extern char* g_773da8;
+extern pos14_7f4c00 gm_GameTime;
+extern char* gm_CityEntity;
 
 int __cdecl fcn_0064eeec(char*);
 void __cdecl fcn_004c5530(void*);
@@ -24,11 +24,11 @@ int __cdecl fcn_004aff10(int a1, int a2, char* arg)
 	if (fcn_0064eeec(arg + 1) > 0) {
 		memset(m, 0, sizeof(m));
 		m[4] = 0x53;
-		*(int*) (m + 8) = *(int*) (g_773da8 + 4);
+		*(int*) (m + 8) = *(int*) (gm_CityEntity + 4);
 		*(int*) (m + 0xc) = -1;
 		m[0x36] = 1;
 		m[0x58] = 0;
-		*(stamp14*) (m + 0x28) = (*(stamp14*)&g_7f4c00);
+		*(stamp14*) (m + 0x28) = (*(stamp14*)&gm_GameTime);
 		*(short*) (m + 0x2c) = 0xc;
 		*(int*) (m + 0x2e) = 0;
 		fcn_004c5530(m);

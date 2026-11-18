@@ -1,6 +1,6 @@
 typedef unsigned char u8;
-extern int g_100f1dc, g_1015ea0, g_1040480, g_1040484, g_1040488, g_104048c, g_1040490, g_1040494, g_14ce8e0,
-	g_67d370, g_6a3764, g_6a3768, g_6a376c, g_6a3770, g_6b7fac, g_6b8010, g_6b8014, g_6b89c0, g_77250c, g_774654, g_7e2700, g_7e46ac;
+extern int g_100f1dc, g_1015ea0, g_1040480, g_1040484, g_1040488, g_104048c, d2_ScreenHeight, g_1040494, g_14ce8e0,
+	d2_CurrentElementId, g_6a3764, g_6a3768, g_6a376c, g_6a3770, g_6b7fac, d3_CurrentContextIndex, d3_ActiveCamera, g_6b89c0, g_77250c, g_774654, g_7e2700, main_LoopFlags;
 extern int g_9a9200[8]; extern char g_77dda0[]; extern char* g_6b8300; extern char g_100f8c0[];
 
 void* __cdecl memset(void*, int, unsigned int);
@@ -73,7 +73,7 @@ void __cdecl fcn_00586c10(char* obj)
     int* g;
     float dt;
 
-    flags = g_7e46ac;
+    flags = main_LoopFlags;
     *(u8*) 0x14cf72f = 0;
     memset(S, 0, sizeof(S));
     flags |= 0x80;
@@ -95,7 +95,7 @@ void __cdecl fcn_00586c10(char* obj)
 
     fcn_004f0e40(*(int*) (obj + 1), (void*) 0x586bd0, (void*) 0x77de60);
     flags = (flags & 0xffffdef7) | 0x10000;
-    g = (int*) g_6b8014;
+    g = (int*) d3_ActiveCamera;
     p[0] = *(int*) ((char*) g + 0x4c);
     p[1] = *(int*) ((char*) g + 0x50);
     p[2] = *(int*) ((char*) g + 0x54);
@@ -106,7 +106,7 @@ void __cdecl fcn_00586c10(char* obj)
     s1 = g_1040484;
     s3 = g_104048c;
     s2 = g_1040488;
-    g28 = g_6b8010;
+    g28 = d3_CurrentContextIndex;
 
     d2_SetOverlayAnimation(0, 0);
     sv_ClearObjectSelection();
@@ -114,7 +114,7 @@ void __cdecl fcn_00586c10(char* obj)
     fcn_00525ef0();
     g_7e2700 = 0;
     g_100f8c0[0] = 0;
-    sp = (char*) fcn_004730c0(0, 0, g_1040494, g_1040490, 0x67d67c, 0x5a, 1);
+    sp = (char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 1);
     while (!(*(u8*) sp & 4))
         fcn_005373e0(0, flags | 0x100);
 
@@ -140,17 +140,17 @@ void __cdecl fcn_00586c10(char* obj)
     }
 
     fcn_00438da0((float) g_1040494,
-                 (float) g_1040490 - 150.0f,
+                 (float) d2_ScreenHeight - 150.0f,
                  0.0f, 75.0f,
                  *(float*) 0x10529c8, *(float*) 0x10421a0, *(float*) 0x10432a4,
-                 g_1040494, g_1040490);
+                 g_1040494, d2_ScreenHeight);
     i = 0;
     g_1040488 = 0;
     g_1040480 = g_1040494;
     g_1040484 = 0x4b;
-    g_104048c = g_1040490 - 0x4b;
+    g_104048c = d2_ScreenHeight - 0x4b;
     fcn_005270c0(0);
-    g = (int*) g_6b8014;
+    g = (int*) d3_ActiveCamera;
     p[0] = *(int*) ((char*) g + 0x4c);
     p[1] = *(int*) ((char*) g + 0x50);
     p[2] = *(int*) ((char*) g + 0x54);
@@ -200,7 +200,7 @@ void __cdecl fcn_00586c10(char* obj)
     fcn_00476970((void*) g_77250c);
     fcn_00473150(sp);
 
-    sp = (char*) fcn_004730c0(0, 0, g_1040494, g_1040490, 0x67d67c, 0x5a, 0xa);
+    sp = (char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 0xa);
     fcn_005893d0((int) S, (int) res);
     fcn_00588200(obj, (char*) S, res);
     if (*(int*) ((char*) S + 0xa0) > *(int*) ((char*) S + 0xdc))
@@ -223,7 +223,7 @@ void __cdecl fcn_00586c10(char* obj)
         if (*(int*) (res + 4) == 0
             && (g_14ce8e0 != 0
                 || (g_100f1dc != -1
-                    && g_67d370 == *(int*) ((char*) S + 0xbc)))) {
+                    && d2_CurrentElementId == *(int*) ((char*) S + 0xbc)))) {
             g_774654 = 1;
         } else {
             fcn_005875c0((char*) S, dt);
@@ -232,11 +232,11 @@ void __cdecl fcn_00586c10(char* obj)
             fcn_00588000((char*) S);
             if (*(int*) (res + 4) == 0) {
                 if (g_100f1dc != -1) {
-                    if (g_67d370 == *(int*) ((char*) S + 0xc8))
+                    if (d2_CurrentElementId == *(int*) ((char*) S + 0xc8))
                         fcn_00588710((int) obj, (int) S, (int) res, 0, 0x2656c7);
-                    else if (g_67d370 == *(int*) ((char*) S + 0xcc))
+                    else if (d2_CurrentElementId == *(int*) ((char*) S + 0xcc))
                         fcn_00588710((int) obj, (int) S, (int) res, 1, 0x2656c7);
-                    else if (g_67d370 == *(int*) ((char*) S + 0xd0))
+                    else if (d2_CurrentElementId == *(int*) ((char*) S + 0xd0))
                         fcn_00588710((int) obj, (int) S, (int) res, 2, 0x2656c7);
                 }
                 if (*(int*) (res + 4) == 0 && fcn_00587f90((char*) S)) {
@@ -251,7 +251,7 @@ void __cdecl fcn_00586c10(char* obj)
     }
 
     fcn_00533a40((char*) 0x6b5c60);
-    sp = (char*) fcn_004730c0(0, 0, g_1040494, g_1040490, 0x67d67c, 0x5a, 1);
+    sp = (char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 1);
     while (!(*(u8*) sp & 4))
         fcn_005373e0(0, flags);
     fcn_00471e30(*(int*) ((char*) S + 0xa4));
@@ -277,7 +277,7 @@ void __cdecl fcn_00586c10(char* obj)
                  (float) (g_6a3770 - g_6a3768),
                  (float) g_6a3764, (float) g_6a3768,
                  *(float*) 0x10529c8, *(float*) 0x10421a0, *(float*) 0x10432a4,
-                 g_1040494, g_1040490);
+                 g_1040494, d2_ScreenHeight);
     g_1040488 = s2;
     g_1040480 = s0;
     g_1040484 = s1;
@@ -287,12 +287,12 @@ void __cdecl fcn_00586c10(char* obj)
     fcn_004432d0(g28, 0);
     if (g_6b89c0 != 0)
         fcn_00459710((char*) g_6b89c0, 1);
-    g = (int*) g_6b8014;
+    g = (int*) d3_ActiveCamera;
     fcn_00438b40((char*) g, p);
     fcn_00438cb0((char*) g, v);
     fcn_00516de0(g_6b8300, 0);
     fcn_00443230(1);
     fcn_00473150(sp);
-    fcn_004730c0(0, 0, g_1040494, g_1040490, 0x67d67c, 0x5a, 0xa);
+    fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 0xa);
     fcn_004f0e40(*(int*) (obj + 1), 0, 0);
 }

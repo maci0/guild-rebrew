@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_00500bb0(char* sel, int a, int b, int c);
 int __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
@@ -31,7 +31,7 @@ void __cdecl fcn_0054f910(char* ent)
 	int tmp2[6];
 
 	*(int*) (ent + 0x84) = -1;
-	*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
@@ -47,7 +47,7 @@ void __cdecl fcn_0054f910(char* ent)
 	if (e1 == 0 || e2 == 0) {
 		if ((*(int*) (e1 + 0x1c8) & 0x400) != 0
 		    || (*(int*) (e2 + 0x1c8) & 0x400) != 0) {
-			*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
@@ -74,7 +74,7 @@ void __cdecl fcn_0054f910(char* ent)
 	if (f >= 1.0f) {
 		fcn_004c5420(*(int*) (e1 + 4), 0x1c8, 4, 0x400, 0);
 		fcn_004c5420(*(int*) (e2 + 4), 0x1c8, 4, 0x400, 0);
-		*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
@@ -115,7 +115,7 @@ void __cdecl fcn_0054f910(char* ent)
 	dmg -= fcn_0042e410(8) & 0xffff;
 	fcn_004ec2d0(e2, v, dmg);
 	fcn_004c54c0(*(int*) (e2 + 4), *(int*) (e1 + 4), -0x14, 1);
-	*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
@@ -135,7 +135,7 @@ big:
 	blk[0x16] = *(int*) (ent + 4);
 	fcn_00500de0((char*) &blk[10], *(unsigned short*) (e2), 6, 0, 0);
 	fcn_004c5530(blk);
-	*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 

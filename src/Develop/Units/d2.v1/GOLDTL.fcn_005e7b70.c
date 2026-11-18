@@ -55,8 +55,8 @@ extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern char* g_772500;
 extern char g_7f4ca0[];
-extern char* g_14a5320[];
-extern int g_772514;
+extern char* txt_TextEntries[];
+extern int d2_CurrentWindowId;
 extern unsigned short g_774970;
 extern short g_776658;
 extern int g_664454;
@@ -81,13 +81,13 @@ void __cdecl fcn_005e7b70(int row, int count, int* list)
 	int icon;
 	unsigned char* info;
 
-	g_772514 = g_6ad584[row].win;
+	d2_CurrentWindowId = g_6ad584[row].win;
 	io_AppendText((int) "$C");
-	w = ((Win_5e7b70*)g_1015f40)[g_772514].w;
-	h = ((Win_5e7b70*)g_1015f40)[g_772514].h;
+	w = ((Win_5e7b70*)g_1015f40)[d2_CurrentWindowId].w;
+	h = ((Win_5e7b70*)g_1015f40)[d2_CurrentWindowId].h;
 	x = (w - 0xc4) / 2;
 	info = g_7765a0[row].info;
-	sprintf(buf, "%s %s %s", g_14a5320[(info[9] ? 0x11e : 0x114) + info[0xd]], info + 0x30, info + 0x40);
+	sprintf(buf, "%s %s %s", txt_TextEntries[(info[9] ? 0x11e : 0x114) + info[0xd]], info + 0x30, info + 0x40);
 	c = d2_ShowTxt(0, 5, buf, g_6ad584[row].win);
 	((Ctl_5e7b70*)g_1015ea0)[c].w = w;
 	((Ctl_5e7b70*)g_1015ea0)[c].x6c = 1;

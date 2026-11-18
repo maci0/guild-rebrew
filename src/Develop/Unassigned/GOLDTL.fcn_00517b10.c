@@ -1,4 +1,4 @@
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 
 
 
@@ -17,7 +17,7 @@ int __cdecl fcn_00517b10(char* key, char* out)
 	_strupr(buf);
 	r = fcn_0042dc90(buf);
 	if (r != -1) {
-		strcpy(out, g_14a5320[r]);
+		strcpy(out, txt_TextEntries[r]);
 		return 1;
 	}
 	strcpy(out, key);

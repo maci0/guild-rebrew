@@ -26,8 +26,8 @@ void __cdecl srv_FormatStatIdentity(unsigned char* entity, char* out)
 void __cdecl srv_FormatStatAemter(unsigned char* entity, char* out)
 {
 	sprintf(out, "%s\t%s\t%s\t%s\t",
-	    g_14a5c6c[entity[0x166]], g_14a5c6c[entity[0x167]],
-	    g_14a5c6c[entity[0x168]], g_14a5c6c[entity[0x169]]);
+	    amt_OfficeNames[entity[0x166]], amt_OfficeNames[entity[0x167]],
+	    amt_OfficeNames[entity[0x168]], amt_OfficeNames[entity[0x169]]);
 }
 unsigned char _dpad_143a610[112] = {
     0x00,

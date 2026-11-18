@@ -100,7 +100,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 		pick = 0;
 		if (g_row_handle(row) < 0) {
 			idx = fcn_0046f100(g_row_arg0(row), g_row_arg1(row), 0xcd, 0x57, 0x10,
-			                   g_772514);
+			                   d2_CurrentWindowId);
 			g_row_handle(row) = idx;
 			*(int*) (idx * 0x3cc + 0x10161cc) = 0x54;
 			fcn_0046f740(0, 0, 0x74c, idx);
@@ -247,7 +247,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 
 		key = g_row_sel(row);
 		if (key <= -1) {
-			g_772514 = g_row_last(row);
+			d2_CurrentWindowId = g_row_last(row);
 			if (a4 != 0) {
 				if (a4 != 1) {
 					io_AppendText(0x6aa164, delta, 0x51e, 0xbb, g_row_type(row) * 2 + 0x9a8);
@@ -259,7 +259,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			}
 		} else if (pick != 0) {
 			*(int*) (g_object(g_row_item(row, key)) + 0x3c) = 1;
-			g_772514 = g_row_last(row);
+			d2_CurrentWindowId = g_row_last(row);
 			if (g_id_field(row, 0x36) == 1) {
 				switch (fcn_0051e070()) {
 				case 0:
@@ -297,7 +297,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 		} else {
 			pick = 1;
 			*(int*) (g_object(g_row_item(row, key)) + 0x3c) = 1;
-			g_772514 = g_row_last(row);
+			d2_CurrentWindowId = g_row_last(row);
 			if (g_id_field(row, 0x36) == 1) {
 				switch (fcn_0051e070()) {
 				case 0:

@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 int __cdecl gm_WalkEntityChain(int idx);
 
 /* ADDRESS: GOLDTL 0x004fd400 */
@@ -14,7 +14,7 @@ int __cdecl fcn_004fd400(short* out, int* value)
 	unsigned char* p;
 
 	rec = *(int**) 0x773d5c;
-	now = g_7f4c00.a;
+	now = gm_GameTime.a;
 	best = -100000;
 	limit = 0xffff;
 	if (rec == 0 || *(int*) 0x69643c < now || *(unsigned short*) rec == 0xffff || ((unsigned char*) rec)[8] == 0) {

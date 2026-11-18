@@ -12,7 +12,7 @@ typedef struct
 } fcn_00449f90_Mesh;
 // SIZE 0x1384
 
-extern int g_67ac90;
+extern int d3_LODMode;
 
 int __cdecl fcn_00449b60(char* s);
 void __cdecl fcn_00439fa0(char* o);
@@ -47,7 +47,7 @@ void __cdecl fcn_00449f90(char* o, void* part, char* name)
 	if (fcn_00449db0(name, 0, -1, buf, 0) && fcn_00449b60(buf) != 0) {
 		fcn_00449ba0(o, &(*(fcn_00449f90_Mesh**) (o + 0x1ec))->extra, buf);
 	}
-	if ((g_67ac90 & 0x7f) == 1) {
+	if ((d3_LODMode & 0x7f) == 1) {
 		n = 1;
 		for (i = 1; i < 3; i++) {
 			if (n >= 3) {

@@ -15,7 +15,7 @@ typedef struct Obj2f4 {
 
 extern volatile int g_6b7fac;
 extern char g_77534d;
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern char* g_77255c;
 extern char* g_1015ea0;
 extern int g_100f1dc;
@@ -54,7 +54,7 @@ int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 	if (g_77534d) {
 		return 0;
 	}
-	wflags = g_7e46ac & ~0x38;
+	wflags = main_LoopFlags & ~0x38;
 	if (flags & 2) {
 		h = fcn_00470820(0, 0, s_68d760);
 	} else if (flags & 0x10) {

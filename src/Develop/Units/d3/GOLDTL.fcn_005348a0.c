@@ -23,18 +23,18 @@ typedef struct {
 } Mat4;
 // SIZE 0x40
 
-extern int g_7e4300;
+extern int d3_SelectionBoxActive;
 extern int g_7e4304;
 extern int g_7e4308;
 extern int g_7e430c;
 extern int g_7e4310;
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 extern short g_14ce8c0;
 extern short g_14ce8c2;
 extern int g_1042570;
 extern int g_1042574;
-extern int g_1042578;
-extern int g_104257c;
+extern int d3_ViewportRight;
+extern int d3_ViewportBottom;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_67a370;
 #include "Develop/Units/d3/d3_camera.h"
@@ -65,17 +65,17 @@ void __cdecl fcn_005348a0(void)
 	Vec3* b;
 	int i;
 
-	if (g_7e4300 == 0) {
+	if (d3_SelectionBoxActive == 0) {
 		return;
 	}
-	g_7e430c = MINV(MAXV(g_1042570, g_14ce8c0), g_1042578 - 1);
-	g_7e4310 = MINV(MAXV(g_1042574, g_14ce8c2), g_104257c - 1);
+	g_7e430c = MINV(MAXV(g_1042570, g_14ce8c0), d3_ViewportRight - 1);
+	g_7e4310 = MINV(MAXV(g_1042574, g_14ce8c2), d3_ViewportBottom - 1);
 	x0 = MINV(g_7e4304, g_7e430c);
 	y0 = MINV(g_7e4308, g_7e4310);
 	x1 = MAXV(g_7e4304, g_7e430c);
 	y1 = MAXV(g_7e4308, g_7e4310);
 	for (k = 0; k < 32; k++) {
-		obj = g_7e4260[k];
+		obj = ch_ContextCharacters[k];
 		if (obj == 0 || obj[8] == 0) {
 			continue;
 		}
@@ -92,7 +92,7 @@ void __cdecl fcn_005348a0(void)
 		if (*(char**) (e + 0x1cc) == 0) {
 			continue;
 		}
-		fcn_00438100(e, g_6b8014, 0);
+		fcn_00438100(e, d3_ActiveCamera, 0);
 		b = (*(BoxFn*) (*(char**) (*(char**) (e + 0x1cc) + 0x318) + 0x1f0))(e, *(char**) (e + 0x1cc), *(int*) (e + 0x1ec) + 0x48);
 		if (b == 0) {
 			continue;

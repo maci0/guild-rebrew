@@ -3,9 +3,9 @@
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_774654;
 extern char* g_77255c;
 
@@ -50,7 +50,7 @@ int __cdecl fcn_005a02b0(void)
 	h = fcn_00470820(0, 0, (char*) 0x6aa80c);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	fcn_00525ef0();
 	grade = fcn_00507540(g_774970, info);
 	r = (int) fcn_005463a0(2, 2, g_774970, 0, 0x26);
@@ -92,7 +92,7 @@ int __cdecl fcn_005a02b0(void)
 			d = fcn_004677e0(0x1c,
 			    *(int*) (sc + 0x10) - 0x3c,
 			    *(int*) (sc + 0xc) - 0x40, 0, 0x64, 0x83,
-			    0x42, g_772514);
+			    0x42, d2_CurrentWindowId);
 			d2_SetElementValue(d, 0, 0x64, (int) (grade * 100.0f));
 		}
 	}
@@ -108,7 +108,7 @@ int __cdecl fcn_005a02b0(void)
 					memset(msg, 0, sizeof(msg));
 					*(int*) (msg + 8) = *(int*) (slot + 4);
 					*(int*) (msg + 0xc) = -1;
-					*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
+					*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 					msg[4] = 0x26;
 					msg[0x36] = 9;
 					*(int*) (msg + 0x58) = *(int*) (slot + 4);

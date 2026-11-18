@@ -31,7 +31,7 @@ extern int g_6b85ac;
 extern int g_6b8478;
 extern int g_6b847c;
 extern int g_6b8480;
-extern int g_6b8014;
+extern int d3_ActiveCamera;
 
 void __cdecl fcn_004127a0(int flag);
 void __cdecl fcn_004125c0(int x, int y);
@@ -183,7 +183,7 @@ int __cdecl fcn_00449130(void)
 		rotate[1] = (float) ((unsigned char) g_14cf70f * 0x28) + v19;
 	}
 	if (v14 != 0 || v15 != 0) {
-		v3 = fcn_00448cc0(g_1041d0c, rotate, motion, g_6b8014, v8, v7);
+		v3 = fcn_00448cc0(g_1041d0c, rotate, motion, d3_ActiveCamera, v8, v7);
 		v15 = (char) ((unsigned char) v3 >> 1);
 		v14 = v3 & 1;
 		if (v14 != 0)

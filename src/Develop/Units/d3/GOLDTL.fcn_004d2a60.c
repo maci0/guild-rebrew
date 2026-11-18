@@ -81,7 +81,7 @@ void __cdecl fcn_004d2a60(int a0)
 	v = g_6b8300;
 	*(float*) 0x6a2570 = 1.0f;
 	if (v) {
-		i = g_6b8010;
+		i = d3_CurrentContextIndex;
 		g_6b89c0 = 0;
 		*(int*) (0x1043378 + i * 0x3dc) = 0;
 	}

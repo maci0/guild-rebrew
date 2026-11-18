@@ -12,7 +12,7 @@ typedef struct {
 } Panel;
 
 extern int g_7747ac;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8cc;
 
 void __cdecl fcn_00471a30(int, int);
@@ -32,10 +32,10 @@ void __cdecl fcn_005350d0(Panel* p)
 			fcn_00471a30(p->items[i], 0);
 		}
 	}
-	if (p->owner1 != -1 && g_67d370 == p->owner1 && g_14ce8cc != 0) {
+	if (p->owner1 != -1 && d2_CurrentElementId == p->owner1 && g_14ce8cc != 0) {
 		fcn_00535560(p);
 	}
-	if (p->owner2 != -1 && g_67d370 == p->owner2 && g_14ce8cc != 0) {
+	if (p->owner2 != -1 && d2_CurrentElementId == p->owner2 && g_14ce8cc != 0) {
 		fcn_00535550(p);
 	}
 	for (i = p->first + (unsigned char) g_7747ac; i < p->count; i++) {

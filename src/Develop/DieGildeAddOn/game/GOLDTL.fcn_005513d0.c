@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern char g_7f4ca0[];
-extern int g_7f4c00;
+extern int gm_GameTime;
 #include "client_actions.h"
 
 
@@ -44,7 +44,7 @@ void __cdecl fcn_005513d0(char* a0)
 				rec_id = *(int*) (rec + 4); memset(msg, 0, sizeof(msg));
 				*(int*) (msg + 0xc) = *(int*) (entry + 4);
 				*(int*) (msg + 0x34) = *(int*) (entry + 4);
-				*(int*) (msg + 0x18) = g_7f4c00;
+				*(int*) (msg + 0x18) = gm_GameTime;
 				*(int*) (msg + 0x1c) = g_7f4c04;
 				*(int*) (msg + 0x38) = rec_id;
 				msg[8] = 7;

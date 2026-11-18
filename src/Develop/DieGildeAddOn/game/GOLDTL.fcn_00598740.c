@@ -13,7 +13,7 @@ void __cdecl fcn_00598740(float* out, int obj)
 	float v[3];
 	int save;
 
-	save = g_6b8010;
+	save = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	v[0] = 0;
 	v[1] = 0;

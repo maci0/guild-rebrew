@@ -34,7 +34,7 @@ typedef struct {
 	char pad60[0x2f4 - 0x60];
 } Control;
 
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_6a25a8;
 extern int g_6a2598;
@@ -78,7 +78,7 @@ void __cdecl fcn_00526db0(char* name)
 	char* data;
 	Surface* s;
 
-	fcn_0047a040(0, 0, g_1040494, g_1040490);
+	fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 	g_6a25a8 = fcn_00475290(g_1040494 - 0x50, 0x11, 0x30, 0x30, 0);
 	g_6a2598 = fcn_0046e940(4, 0xa, 0x288, 0x30, 0);
 	fcn_00471c80(g_6a2598, 1);

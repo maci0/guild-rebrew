@@ -48,7 +48,7 @@ void __cdecl ch_UpdateFades(void)
 	for (i = 0; i < 16; i++) {
 		obj = ((Fade_4027b0*)g_1551f40)[i].obj;
 		if (obj != 0) {
-			t = ((float) g_6b5c24 - ((Fade_4027b0*)g_1551f40)[i].start) * 0.02f;
+			t = ((float) ch_UpdateTime - ((Fade_4027b0*)g_1551f40)[i].start) * 0.02f;
 			if (!((Fade_4027b0*)g_1551f40)[i].fade_in) {
 				t = 1.0f - t;
 			}

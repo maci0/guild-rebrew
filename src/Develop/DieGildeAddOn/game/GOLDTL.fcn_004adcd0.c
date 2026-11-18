@@ -51,7 +51,7 @@ typedef struct {
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_004e8700(int);
 void __cdecl fcn_004e8730(int);
@@ -124,14 +124,14 @@ void __cdecl fcn_004adcd0(int mode, int unused, unsigned short owner, Guild4adc*
 	strcpy(g->name, p + 0xc);
 	strcpy(g->title, p + 0x1c);
 	if (mode == 0x15) {
-		if ((*(int*)&g_7f4c00) > 0 && k != 0xffff) {
+		if ((*(int*)&gm_GameTime) > 0 && k != 0xffff) {
 			io_FormatTextBuffer(buf, 0x42b3, g->id);
 			fcn_00545d40(((Ent4adc*)g_7f4ca0)[k].id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_01");
 		}
 		g->f18c = fcn_004ae040();
 		fcn_004adf80();
 	} else {
-		if ((*(int*)&g_7f4c00) > 0 && k != 0xffff) {
+		if ((*(int*)&gm_GameTime) > 0 && k != 0xffff) {
 			io_FormatTextBuffer(buf, 0x42b5, g->id);
 			fcn_00545d40(((Ent4adc*)g_7f4ca0)[k].id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_03");
 		}

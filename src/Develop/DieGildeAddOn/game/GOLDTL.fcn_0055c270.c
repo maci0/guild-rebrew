@@ -4,12 +4,12 @@
 #include "client_types.h"
 
 extern unsigned char g_773d75;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "game_data.h"
 typedef struct StateProto { unsigned char kind; unsigned char rest[0x24c]; } StateProto;
 extern char g_7f4ca0[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 typedef struct Msg55c270 {
 	char pad0[4];
@@ -118,7 +118,7 @@ void __cdecl fcn_0055c270(char* o)
                 rep stosb
             }
 			msg.kind = 0x2a;
-			msg.x8 = *(int*) (g_773da8 + 4);
+			msg.x8 = *(int*) (gm_CityEntity + 4);
 			msg.xc = *(int*) (e + 1);
 			msg.b36 = 2;
 			msg.x58 = *(int*) (e + 1);
@@ -167,7 +167,7 @@ void __cdecl fcn_0055c270(char* o)
 		{
 			Req55c270 m;
 
-			*(pos14_7f4c00*) &m = g_7f4c00;
+			*(pos14_7f4c00*) &m = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) &m, 0, 0, 1);
 			m.id = *(int*) (e + 1);
 			m.x4 = *(int*) (h + 2);

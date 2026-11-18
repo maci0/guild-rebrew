@@ -31,7 +31,7 @@ int __cdecl fcn_00558370(int a0)
     VEC rot;
     VEC dir;
 
-    v2 = g_6b8010;
+    v2 = d3_CurrentContextIndex;
     fcn_004432d0(0, 1);
     v3 = a0;
     gm_ResolveEntityById(&out, 0, 0, *(int *)(v3 + 0xb0));

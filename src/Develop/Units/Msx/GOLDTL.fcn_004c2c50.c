@@ -4,7 +4,7 @@
 
 
 
-extern int g_774930;
+extern int msx_MusicEnabled;
 extern float g_6819b0;
 extern float g_6628a8;
 extern int g_772d28;
@@ -20,11 +20,11 @@ void __cdecl fcn_004c2c50(char* snd)
 		*(char*) &g_772d10 = 0;
 		g_772d28 = 1;
 	}
-	if (g_774930 != 0 && g_6819b0 != g_6628a8) {
+	if (msx_MusicEnabled != 0 && g_6819b0 != g_6628a8) {
 		if (snd != 0) {
-			if (g_772d1c != 0)
-				fcn_00420120(g_772d1c, 1);
-			g_772d1c = g_772d24 = fcn_0041fd70(snd, 0);
+			if (tp_msx_CurrentTrack != 0)
+				fcn_00420120(tp_msx_CurrentTrack, 1);
+			tp_msx_CurrentTrack = g_772d24 = fcn_0041fd70(snd, 0);
 		} else {
 			fcn_004c24c0(0.4f, 2000);
 		}

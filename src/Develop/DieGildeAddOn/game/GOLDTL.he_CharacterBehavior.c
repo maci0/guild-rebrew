@@ -27,7 +27,7 @@ void __cdecl he_CharacterBehavior(char* u, int where)
 	int i;
 	float list[8][4];
 
-	if (g_6b8010 != 0) {
+	if (d3_CurrentContextIndex != 0) {
 		return;
 	}
 	p = (int*) (u + 0x8c);

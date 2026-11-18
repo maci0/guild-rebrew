@@ -1,9 +1,9 @@
 #include <string.h>
 
 extern char* lpGebaeudePROT;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern int g_6652f8[];
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern char g_7f4ca0[];
 
 void __cdecl gm_ResolveEntityById(void**, void**, void**, int);
@@ -33,7 +33,7 @@ int __cdecl fcn_004f2350(int e)
 
 	gm_ResolveEntityById((void**) &p, 0, 0, *(int*) (e + 8));
 	if (p == 0 || *(unsigned short*) (p + 0x27) == 0xffff
-		|| g_7f4ca0 + *(unsigned short*) (p + 0x27) * 0x21c == g_773da8) {
+		|| g_7f4ca0 + *(unsigned short*) (p + 0x27) * 0x21c == gm_CityEntity) {
 		return -1;
 	}
 	kind = *(unsigned char*) p;
@@ -83,7 +83,7 @@ int __cdecl fcn_004f2350(int e)
 	*(int*) ((char*) best + 0x30) = *(unsigned char*) (q + 0xd);
 	*(int*) ((char*) best + 0x34) = *(unsigned char*) (q + 0x164);
 	*(int*) ((char*) best + 0x38) = *(unsigned char*) (q + 9);
-	*(int*) ((char*) best + 0x40) = g_7f4c00;
+	*(int*) ((char*) best + 0x40) = gm_GameTime;
 	*(int*) ((char*) best + 0x3c) = *(int*) (q + 0x18c);
 	return 0;
 }

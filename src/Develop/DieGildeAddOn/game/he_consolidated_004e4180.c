@@ -18,10 +18,10 @@ extern unsigned char* g_772f50;
 extern unsigned char* lpGebaeudePROT;
 extern int g_6b8058;
 extern int g_772f48;
-extern char g_7f3b40[];
+extern char init_SceneContextIndices[];
 extern signed char g_7f3b00[];
 extern char g_1043695[];
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern char g_67d67c[];
 
@@ -84,18 +84,18 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 		if (g_772f50) {
 			fcn_00473150(g_772f50);
 			g_772f50 = 0;
-			fcn_004730c0(0, 0, g_1040494, g_1040490, g_67d67c, 0x5a, 0xa);
+			fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x5a, 0xa);
 		}
 	}
 	else {
 		if (fcn_00502cd0(*(int*) (entity + 0x5d), 1, 0, sceneId)) {
 			if (!fcn_00505370(entity)) {
-				if (g_7f3b40[sceneId] != -2) {
-					if (g_7f3b40[sceneId] == -1 ||
-					    g_1043695[g_7f3b40[sceneId] * 0x3dc]) {
+				if (init_SceneContextIndices[sceneId] != -2) {
+					if (init_SceneContextIndices[sceneId] == -1 ||
+					    g_1043695[init_SceneContextIndices[sceneId] * 0x3dc]) {
 						fcn_00510c90(sceneId);
 					}
-					fcn_004432d0(g_7f3b40[sceneId], 0);
+					fcn_004432d0(init_SceneContextIndices[sceneId], 0);
 					fcn_005167c0(entity, sceneId);
 				}
 			}
@@ -122,7 +122,7 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 		if (g_772f50) {
 			fcn_00473150(g_772f50);
 			g_772f50 = 0;
-			fcn_004730c0(0, 0, g_1040494, g_1040490, g_67d67c, 0x5a, 0xa);
+			fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x5a, 0xa);
 		}
 	}
 }

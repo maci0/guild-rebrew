@@ -37,7 +37,7 @@ void __cdecl ch_StartFade(char* e, char b)
 	}
 	((E402950*)g_1551f40)[i].e = e;
 	((E402950*)g_1551f40)[i].b = b;
-	((E402950*)g_1551f40)[i].c = g_6b5c24 - 1;
+	((E402950*)g_1551f40)[i].c = ch_UpdateTime - 1;
 	ch_SetVisible(e, 1);
 	*(int*) &v = 0;
 	v.r = 0xff;

@@ -102,7 +102,7 @@ int __cdecl fcn_005d86a0(unsigned char* e, unsigned char* a2)
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == ok) {
+			if (d2_CurrentElementId == ok) {
 				if (fcn_00525f60(e, 3)) {
 					a = gm_RandomMod(0x28) + 0xf;
 					b = gm_RandomMod(0x28) + 0xf;
@@ -122,7 +122,7 @@ int __cdecl fcn_005d86a0(unsigned char* e, unsigned char* a2)
 					g_774654 = 1;
 					result = 1;
 				}
-			} else if (g_67d370 == cancel) {
+			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;
 			}
 		}

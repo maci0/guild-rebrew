@@ -2,7 +2,7 @@
 
 struct VFS_DIR;
 extern struct VFS_DIR* g_6b7fdc;
-extern int g_6b7f98;
+extern int txt_EntryCount;
 
 extern int __cdecl CloseVfsStream(void* stream);
 extern int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
@@ -74,8 +74,8 @@ found:
 	if (a >= 1) { dst = (int*) ((*pc) * 4 + 0x14a5320); base = *(int*) (rec + 0x68); for (i = 0; i < a; i++, dst++)
 		*dst =
 		    ((int*) table)[i] + base; }
-	if (*pcount > g_6b7f98 + 1)
-		g_6b7f98 = *pcount + 1;
+	if (*pcount > txt_EntryCount + 1)
+		txt_EntryCount = *pcount + 1;
 	CloseVfsStream(stream);
 	m_FreeTracked(table);
 	return 1;

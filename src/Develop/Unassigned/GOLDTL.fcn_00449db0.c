@@ -11,7 +11,7 @@ char __cdecl fcn_00449db0(char* a, int b, int mode, char* key, char* val)
 	int i;
 
 	if (mode < 0) {
-		if ((*(unsigned char*) &g_67ac90 & 0x80) != 0) {
+		if ((*(unsigned char*) &d3_LODMode & 0x80) != 0) {
 			strcpy(key, a);
 			strcat(key, "_s");
 			if (b != 0 && val != 0) {
@@ -23,7 +23,7 @@ char __cdecl fcn_00449db0(char* a, int b, int mode, char* key, char* val)
 		return 0;
 	}
 	if (mode == 0) {
-		if ((g_67ac90 & 0x7f) == 2) {
+		if ((d3_LODMode & 0x7f) == 2) {
 			i = 2;
 			do {
 				if (i > 0) {
@@ -48,7 +48,7 @@ char __cdecl fcn_00449db0(char* a, int b, int mode, char* key, char* val)
 			strcpy(val, (char*) b);
 		}
 	} else {
-		if ((g_67ac90 & 0x7f) == 2) {
+		if ((d3_LODMode & 0x7f) == 2) {
 			i = 2 - mode;
 		} else {
 			i = mode;

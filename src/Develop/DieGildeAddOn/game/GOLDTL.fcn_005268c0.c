@@ -1,4 +1,4 @@
-extern int g_7e46ac;
+extern int main_LoopFlags;
 
 
 
@@ -20,6 +20,6 @@ int __cdecl fcn_005268c0(int a, char flags)
 	}
 	fcn_00471b60(h);
 	io_AppendText(a);
-	fcn_005373e0(0, g_7e46ac);
+	fcn_005373e0(0, main_LoopFlags);
 	return h;
 }

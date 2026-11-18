@@ -13,7 +13,7 @@ int __cdecl fcn_004a6160(char* a, float* pa, char* b, float* pb)
 	} v;
 	int saved;
 
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	if (!a || !b || !*(char**) (a + 0x61) || !*(char**) (b + 0x61) || a == b) {
 		return -1;
 	}

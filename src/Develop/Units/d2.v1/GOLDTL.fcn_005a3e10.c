@@ -12,7 +12,7 @@ extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern char* g_7746cc;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
@@ -50,7 +50,7 @@ void __cdecl fcn_005a3e10(void)
 	stock = fcn_0050d270(*(int*) (g_7746cc + 0x14));
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1a4c);
 	d2_SetForm(dlg, 2);

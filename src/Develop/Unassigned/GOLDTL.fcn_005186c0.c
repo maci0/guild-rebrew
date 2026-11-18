@@ -1,9 +1,9 @@
 extern char g_6b5c60[];
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 extern char* g_14a5770[];
 extern char* g_14a6544[];
 extern unsigned char g_773d75;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 
 #include <string.h>
 
@@ -38,7 +38,7 @@ int __cdecl fcn_005186c0(int a1, unsigned char a2, unsigned char a3, char* a4)
 		p = loc;
 		strcpy((char*) p + 0x30, g_14a5770[2]);
 	}
-	if (p == (unsigned char*) g_773da8) {
+	if (p == (unsigned char*) gm_CityEntity) {
 		strcpy(a4, (char*) 0x868060 + g_773d75 * 0x2f4);
 		if (a2 == 2) {
 			strcat(a4, "s");
@@ -61,7 +61,7 @@ int __cdecl fcn_005186c0(int a1, unsigned char a2, unsigned char a3, char* a4)
 		return 1;
 	case 2:
 		if (*(unsigned char*) (p + 0xd)) {
-			sprintf(a4, "%s$A%s", fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30);
+			sprintf(a4, "%s$A%s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30);
 		} else {
 			sprintf(a4, "%s", (char*) p + 0x30);
 		}
@@ -69,9 +69,9 @@ int __cdecl fcn_005186c0(int a1, unsigned char a2, unsigned char a3, char* a4)
 	case 3:
 		if (*(unsigned char*) (p + 0x166)) {
 			if (p[0x40]) {
-				sprintf(a4, "%s %s %s", fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4), (char*) p + 0x30, (char*) p + 0x40);
+				sprintf(a4, "%s %s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4), (char*) p + 0x30, (char*) p + 0x40);
 			} else {
-				sprintf(a4, "%s %s", fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4), (char*) p + 0x30);
+				sprintf(a4, "%s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4), (char*) p + 0x30);
 			}
 		} else if (p[0x40]) {
 			sprintf(a4, "%s %s", (char*) p + 0x30, (char*) p + 0x40);
@@ -89,9 +89,9 @@ int __cdecl fcn_005186c0(int a1, unsigned char a2, unsigned char a3, char* a4)
 		return 1;
 	case 4:
 		if (*(unsigned char*) (p + 0x164)) {
-			sprintf(a4, "%s$A%s", fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x18f : 0x130) + *(unsigned char*) (p + 0x164)], 1, 4), (char*) p + 0x30);
+			sprintf(a4, "%s$A%s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x18f : 0x130) + *(unsigned char*) (p + 0x164)], 1, 4), (char*) p + 0x30);
 		} else if (*(unsigned char*) (p + 0x165)) {
-			sprintf(a4, "%s$A%s", fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (p + 0x165)], 1, 4), (char*) p + 0x30);
+			sprintf(a4, "%s$A%s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (p + 0x165)], 1, 4), (char*) p + 0x30);
 		} else if (a2 == 2) {
 			if (ENDS_APOSTROPHE((char*) p + 0x30)) {
 				sprintf(a4, "%s'", (char*) p + 0x30);
@@ -111,7 +111,7 @@ int __cdecl fcn_005186c0(int a1, unsigned char a2, unsigned char a3, char* a4)
 		}
 		return 1;
 	case 5:
-		sprintf(a4, "%s", fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4));
+		sprintf(a4, "%s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4));
 		return 1;
 	case 6:
 		if (p[0x40]) {
@@ -141,10 +141,10 @@ int __cdecl fcn_005186c0(int a1, unsigned char a2, unsigned char a3, char* a4)
 		return 1;
 	case 8:
 		if (*(unsigned char*) (p + 0xd)) {
-			strcpy((char*) b3, fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4));
+			strcpy((char*) b3, fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4));
 		}
 		if (*(unsigned char*) (p + 0x166)) {
-			strcpy((char*) b2, fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4));
+			strcpy((char*) b2, fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4));
 		}
 		if (a2 == 2) {
 			if (ENDS_APOSTROPHE((char*) p + 0x30)) {
@@ -172,10 +172,10 @@ int __cdecl fcn_005186c0(int a1, unsigned char a2, unsigned char a3, char* a4)
 			i = *(unsigned char*) (p + 0x166);
 		}
 		if (*(unsigned char*) (p + 0xd)) {
-			strcpy((char*) b3, fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], a2, 4));
+			strcpy((char*) b3, fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], a2, 4));
 		}
 		if (i != 0) {
-			strcpy((char*) b2, fcn_0042b2f0(g_14a5320[(p[9] != 0 ? 0x27b : 0x253) + i], a2, 4));
+			strcpy((char*) b2, fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + i], a2, 4));
 		}
 		if (a2 == 2) {
 			if (ENDS_APOSTROPHE((char*) p + 0x30)) {

@@ -1,7 +1,7 @@
 unsigned short __cdecl gm_RandomMod(int);
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 
 
@@ -16,7 +16,7 @@ void __cdecl fcn_00576400(char* o)
 		return;
 	}
 	p = (pos14_7f4c00*) (o + 0x52);
-	*p = g_7f4c00;
+	*p = gm_GameTime;
 	if (*(unsigned short*) (o + 0x56) > 0x13) {
 		((pos14_7f4c00*) (o + 0x52))->a++;
 		*(short*) (o + 0x56) = 0xd;

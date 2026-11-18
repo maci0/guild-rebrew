@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 // SIZE 0xf8
 struct msg {
@@ -25,7 +25,7 @@ void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_0054f340(char* o)
 {
-	*(pos14_7f4c00*) (o + 0x44) = g_7f4c00;
-	*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (o + 0x44) = gm_GameTime;
+	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 2, 0, 0);
 }

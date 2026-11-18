@@ -23,9 +23,9 @@ typedef unsigned int u4;
 typedef struct { u8 kind; u8 unknown01[0x246]; u8 level; u8 unknown248[5]; } Building547770;
 extern u8* lpGebaeudePROT;
 extern char* lpGebaeudeINST;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern int g_7747b4;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern unsigned char g_773d75;
 
 extern void *__cdecl memset(void *p, int v, u32 n);
@@ -51,7 +51,7 @@ int __cdecl fcn_00547670();
 #define FIND_REC(T)                                                          \
     rp = (u8*) lpGebaeudeINST;                                                   \
     tb = lpGebaeudePROT;                                                   \
-    wp = (u2*) g_773da8;                                                   \
+    wp = (u2*) gm_CityEntity;                                                   \
     for (m = 0; m < 0x100; m++, rp += REC_SIZE) {                            \
         if (*rp != 0) {                                                      \
             q = (u8*) &((Building547770*) tb)[*rp];                                 \
@@ -102,7 +102,7 @@ void __cdecl fcn_00547770(void)
         wi = 4;
     else if (wi <= 0)
         wi = 0;
-    a = g_7f4c00 / 4 + 1;
+    a = gm_GameTime / 4 + 1;
     thr = (float)a / ((float)a + *(float *)(wi * 4 + 0x665e68));
     fcn_00547670();
     memset(cnt, 0, 0x84);
@@ -115,7 +115,7 @@ void __cdecl fcn_00547770(void)
             if (t < 0x21) {
                 cnt[t]++;
                 w = *(u2 *)(rp + 0x27);
-                if ((w == 0xffff) || (w == *(u2*) g_773da8)) {
+                if ((w == 0xffff) || (w == *(u2*) gm_CityEntity)) {
                     cnt2[t]++;
                 } else if (t == 7) {
                     if (*(u8 *)((u32)w * 0x21c + 0x7f4cac) == 0) {
@@ -127,7 +127,7 @@ void __cdecl fcn_00547770(void)
             }
         }
     }
-    sw = g_7f4c00 % 5;
+    sw = gm_GameTime % 5;
     if (sw == 1) {
         int msk = 0;
         int zer = 0;

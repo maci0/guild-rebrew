@@ -4,7 +4,7 @@
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471af0(int, int);
@@ -23,7 +23,7 @@ int __cdecl fcn_0058edc0(int a1, char* s, int a3)
 		}
 		else if (g_100f1dc != -1) {
 			for (i = 0; i < 8; i++) {
-				if (g_67d370 == *(int*) (s + 0x28 + i * 0xc)) {
+				if (d2_CurrentElementId == *(int*) (s + 0x28 + i * 0xc)) {
 					*(int*) (s + 0x88) = i;
 					fcn_00471af0(*(int*) s, 0);
 					r = fcn_0058dfb0(a1, s, a3);

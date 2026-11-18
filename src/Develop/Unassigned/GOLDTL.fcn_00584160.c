@@ -1,4 +1,4 @@
-extern int g_774a14;
+extern int d2_TutorialActive;
 extern char* g_665f08;
 extern int g_774650;
 extern volatile unsigned int g_6b7fac;
@@ -20,7 +20,7 @@ void __cdecl fcn_00584160(int a0)
 	int v;
 	int handle;
 
-	if (!g_774a14) {
+	if (!d2_TutorialActive) {
 		return;
 	}
 	o = g_665f08;

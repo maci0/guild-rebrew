@@ -1,13 +1,13 @@
 #include "client_types.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -79,13 +79,13 @@ void __cdecl fcn_0058a250(int a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
-	elem = d2_ShowTxt(0, 3, (char*) *(int*) 0x14b531c, g_772514);
+	elem = d2_ShowTxt(0, 3, (char*) *(int*) 0x14b531c, d2_CurrentWindowId);
 	*(int*) (elem * 0x2f4 + (int) g_1015ea0 + 0x6c) = 1;
-	*(int*) (elem * 0x2f4 + (int) g_1015ea0 + 0x18) = *(int*) (g_772514 * 0x3cc + 0x1015f4c);
+	*(int*) (elem * 0x2f4 + (int) g_1015ea0 + 0x18) = *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c);
 	fcn_00472900(elem, 0x54);
-	elem = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, g_772514);
+	elem = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, d2_CurrentWindowId);
 	d2_SetElementValue(elem, 0, 2, 0, 1);
 	fcn_00468bb0(elem, 3, *(int*) 0x14b5320, *(int*) 0x14b5324, *(int*) 0x14b5328);
 	d2_SetForm(dlg, 3);
@@ -102,7 +102,7 @@ void __cdecl fcn_0058a250(int a0)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == v22) {
+			if (d2_CurrentElementId == v22) {
 				if (fcn_00525f60(g_slot_table + g_774970 * 0x21c, cost) == 1 && fcn_005898f0((void*) a0) != 0) {
 					fcn_005100f0(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -cost);
 					for (i = 0; i < 0x3e; i++) {
@@ -114,7 +114,7 @@ void __cdecl fcn_0058a250(int a0)
 					*(int*) (req + 0x68) = 1;
 					*(int*) (req + 8) = *(int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + (int) g_7f4ca4);
 					*(int*) (req + 0x2c) = g_7f4c04;
-					*(int*) (req + 0x28) = g_7f4c00;
+					*(int*) (req + 0x28) = gm_GameTime;
 					*(int*) (req + 0xc) = *(int*) (a0 + 1);
 					*(int*) (req + 0x5c) = *(int*) (a0 + 1);
 					*(int*) (req + 0x30) = g_7f4c08;
@@ -139,7 +139,7 @@ void __cdecl fcn_0058a250(int a0)
 					}
 					fcn_004c3030(-7, 0, (char*) 0x6a9508, 0);
 				}
-			} else if (g_67d370 == v20) {
+			} else if (d2_CurrentElementId == v20) {
 				g_774654 = 1;
 			}
 		}

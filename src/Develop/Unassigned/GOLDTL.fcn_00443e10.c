@@ -1,6 +1,6 @@
 #include "Develop/Units/d3/d3_camera.h"
-extern float g_10432a4, d3_ProjectionScaleY, g_1052bc0, g_1052bc8;
-extern int g_1042570, g_1042574, g_1042578, g_104257c;
+extern float g_10432a4, d3_ProjectionScaleY, d3_ViewportCenterX, g_1052bc8;
+extern int g_1042570, g_1042574, d3_ViewportRight, d3_ViewportBottom;
 typedef struct Vec3 {
 	float x;
 	float y;
@@ -33,9 +33,9 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 		return 0;
 	}
 	if (*(int*) (obj + 0x218) == 0) {
-		fcn_00455450(obj, g_6b8014, (Vec3*) (obj + 0x4c), (Vec3*) p);
+		fcn_00455450(obj, d3_ActiveCamera, (Vec3*) (obj + 0x4c), (Vec3*) p);
 		t = 1.0f / p[2];
-		sx = p[0] * g_10432a4 * t + g_1052bc0;
+		sx = p[0] * g_10432a4 * t + d3_ViewportCenterX;
 		sy = p[1] * d3_ProjectionScaleY * t + g_1052bc8;
 		d = *(float*) (obj + 0x68) * g_10432a4 * 0.5f * t;
 		rc[0] = (int) (sx - d);
@@ -58,7 +58,7 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 		return 0;
 	}
 	b = *(unsigned char*) (obj + 0x214) & 0x20;
-	cam = b != 0 ? (char*) 0 : g_6b8014;
+	cam = b != 0 ? (char*) 0 : d3_ActiveCamera;
 	fcn_00438100(obj, cam, 0);
 	list = (char*) ((int (__cdecl*) (char*, char*, char*)) (*(int**) (sub + 0x318))[0x7c])(obj, sub, *(char**) (obj + 0x1ec) + 0x48);
 	rc[1] = 0x10000;
@@ -69,7 +69,7 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 	i = 8;
 	do {
 		t = 1.0f / rec[1];
-		ix = (int) (g_10432a4 * rec[-1] * t + g_1052bc0);
+		ix = (int) (g_10432a4 * rec[-1] * t + d3_ViewportCenterX);
 		rc[0] = rc[0] < ix ? rc[0] : ix;
 		rc[2] = rc[2] > ix ? rc[2] : ix;
 		iy = (int) (d3_ProjectionScaleY * rec[0] * t + g_1052bc8);
@@ -78,9 +78,9 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 		rec += 0x14;
 	} while (--i != 0);
 	rc[0] = g_1042570 < rc[0] ? rc[0] : g_1042570;
-	rc[2] = rc[2] < g_1042578 - 1 ? rc[2] : g_1042578 - 1;
+	rc[2] = rc[2] < d3_ViewportRight - 1 ? rc[2] : d3_ViewportRight - 1;
 	rc[1] = g_1042574 < rc[1] ? rc[1] : g_1042574;
-	rc[3] = rc[3] < g_104257c - 1 ? rc[3] : g_104257c - 1;
+	rc[3] = rc[3] < d3_ViewportBottom - 1 ? rc[3] : d3_ViewportBottom - 1;
 
 
 

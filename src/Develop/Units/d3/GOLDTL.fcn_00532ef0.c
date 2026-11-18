@@ -10,10 +10,10 @@ typedef struct {
 } View;
 
 extern int d3_ActiveCameraAnimation;
-extern int g_6b5cbc;
+extern int d3_CameraAnimating;
 extern float g_14ce880[3];
 extern float g_7e3a40[3];
-extern float g_7e3a50[3];
+extern float d3_CameraTargetRotation[3];
 #include "Develop/Units/d3/d3_camera.h"
 extern int g_774650;
 #include "client_dialog_state.h"
@@ -37,16 +37,16 @@ void __cdecl fcn_00532ef0(void)
 	done = 0;
 	if (d3_ActiveCameraAnimation != 0) {
 		if (CompareVector3WithinTolerance(g_14ce880, g_7e3a40, 0.1f)) {
-			fcn_00433780(((View*)g_6b8014));
+			fcn_00433780(((View*)d3_ActiveCamera));
 			d3_ActiveCameraAnimation = 0;
-			g_6b5cbc = 0;
+			d3_CameraAnimating = 0;
 			done = 1;
-			fcn_00438b40(((View*)g_6b8014), g_7e3a40);
-			fcn_00438cb0(((View*)g_6b8014), g_7e3a50);
+			fcn_00438b40(((View*)d3_ActiveCamera), g_7e3a40);
+			fcn_00438cb0(((View*)d3_ActiveCamera), d3_CameraTargetRotation);
 		} else {
-			fcn_00433780(((View*)g_6b8014));
+			fcn_00433780(((View*)d3_ActiveCamera));
 			d3_ActiveCameraAnimation = 0;
-			g_6b5cbc = 0;
+			d3_CameraAnimating = 0;
 		}
 	}
 	if (g_774650 > g_774658 && done == 0) {
@@ -64,7 +64,7 @@ void __cdecl fcn_00532ef0(void)
 				fcn_00530510();
 			}
 		}
-	} else if ((!CompareVector3WithinTolerance(((View*)g_6b8014)->rot, g_7e3a50, 0.1f) || !CompareVector3WithinTolerance(((View*)g_6b8014)->pos, g_7e3a40, 0.1f)) &&
+	} else if ((!CompareVector3WithinTolerance(((View*)d3_ActiveCamera)->rot, d3_CameraTargetRotation, 0.1f) || !CompareVector3WithinTolerance(((View*)d3_ActiveCamera)->pos, g_7e3a40, 0.1f)) &&
 		   done == 0) {
 		fcn_0052d820();
 		if (g_7746a8 != 0) {

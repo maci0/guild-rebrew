@@ -26,7 +26,7 @@ typedef struct Handler {
 // SIZE 8
 
 extern unsigned char* lpGebaeudePROT;
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 extern Slot21c g_7f4ca0[];
 extern int g_7e35c0[];
 extern int g_774650;
@@ -69,7 +69,7 @@ void __cdecl fcn_0055d770(char* e)
 	b = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 	lv = (Level*) (lpGebaeudePROT + *(unsigned char*) b * sizeof(Level));
 	c = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb4));
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	r = gm_FindRecordById(*(int*) (e + 0xac));
 	if (r == 0) {
 		return;

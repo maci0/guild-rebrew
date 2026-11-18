@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern unsigned char g_773d75;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_774654;
@@ -115,7 +115,7 @@ int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
 		if (g_14ce8e0 != 0 || g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-		if (g_100f1dc == 2 && evid != -1 && g_67d370 == evid) {
+		if (g_100f1dc == 2 && evid != -1 && d2_CurrentElementId == evid) {
 			ev[4] = 0x19;
 			*(int*) (ev + 8) = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
 			*(int*) (ev + 0xc) = *(int*) (g_7746c4 + 1);

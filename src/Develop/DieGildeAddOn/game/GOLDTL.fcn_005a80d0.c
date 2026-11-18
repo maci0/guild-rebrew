@@ -34,7 +34,7 @@ void __cdecl fcn_0059e390(int a0);
 void __cdecl fcn_0058f0a0(int a0);
 void __cdecl fcn_005e69f0(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_774658, g_774688, g_77468c, g_7725c8, g_67530c, g_675310;
+extern int g_774658, d3_CameraHorizontalIndex, d3_CameraVerticalStep, d2_SuppressOverlay, g_67530c, g_675310;
 /* ADDRESS: GOLDTL 0x005a80d0 */
 void __cdecl fcn_005a80d0(unsigned char* a0)
 {
@@ -62,14 +62,14 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 		return;
 	}
 	g_774658 = g_774650 + 1;
-	a0 = (unsigned char*) *(int*) &g_6b8010;
+	a0 = (unsigned char*) *(int*) &d3_CurrentContextIndex;
 	*(int*) 0x6a2520 = 0;
 	fcn_00530510();
 	sv_ClearObjectSelection();
 	s0 = *(int*) &g_7e3a40;
 	s1 = *(int*) &g_7e3a44;
 	s2 = *(int*) &g_7e3a48;
-	s3 = *(int*) &g_7e3a50;
+	s3 = *(int*) &d3_CameraTargetRotation;
 	s4 = *(int*) &g_7e3a54;
 	s5 = *(int*) &g_7e3a58;
 	*(int*) 0x6752a8 = *(int*) 0x6aada0;
@@ -81,11 +81,11 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	if (n != 0) {
 		fcn_004c3170(v7);
 		if (n == -1 || *(char*) (w + 0x1043695) != 0) {
-			g_7725c8 = 1;
+			d2_SuppressOverlay = 1;
 			fcn_005373e0(0, 0x603c7);
 			fcn_005373e0(0, 0x603c7);
 			init_LoadGebaeudeScene(*v7);
-			g_7725c8 = 0;
+			d2_SuppressOverlay = 0;
 		}
 		*(int*) &g_7746c8 = (int) v7;
 		*(int*) &g_6791c8 = *(int*) (v7 + 1);
@@ -114,9 +114,9 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 		}
 		id = *(int*) &evt_LastGfxScriptId;
 		if (*(unsigned short*) (v7 + 0x27) == *(unsigned short*) &g_774970) {
-			fcn_00438b40((char*) *(int*) &g_6b8014, (int*) (*(int*) &g_6b8014 + 0x5c));
-			v10 = *(int*) &g_6b8014 + 0x90;
-			v11 = *(int*) &g_6b8014;
+			fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x5c));
+			v10 = *(int*) &d3_ActiveCamera + 0x90;
+			v11 = *(int*) &d3_ActiveCamera;
 			fcn_00438cb0(v11, v10);
 		} else {
 			v10 = gm_GetBuildingTypeCategory(*v7);
@@ -124,30 +124,30 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 			rec = *(int*) &lpGebaeudePROT + c + c * 0x24c;
 			if (v10 != 2) {
 				if (*(char*) rec == 0x1c) {
-					fcn_00438b40((char*) *(int*) &g_6b8014, (int*) (*(int*) &g_6b8014 + 0x5c));
-					v10 = *(int*) &g_6b8014 + 0x90;
-					fcn_00438cb0(*(int*) &g_6b8014, v10);
-				} else if (CompareVector3WithinTolerance((float*) (*(int*) &g_6b8014 + 0x114), (float*) &g_662d70, 0.1f) == 0
-				           && CompareVector3WithinTolerance((float*) (*(int*) &g_6b8014 + 0x120), (float*) &g_662d70, 0.1f) == 0) {
-					fcn_00438b40((char*) *(int*) &g_6b8014, (int*) (*(int*) &g_6b8014 + 0x114));
-					v10 = *(int*) &g_6b8014 + 0x120;
-					fcn_00438cb0(*(int*) &g_6b8014, v10);
+					fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x5c));
+					v10 = *(int*) &d3_ActiveCamera + 0x90;
+					fcn_00438cb0(*(int*) &d3_ActiveCamera, v10);
+				} else if (CompareVector3WithinTolerance((float*) (*(int*) &d3_ActiveCamera + 0x114), (float*) &g_662d70, 0.1f) == 0
+				           && CompareVector3WithinTolerance((float*) (*(int*) &d3_ActiveCamera + 0x120), (float*) &g_662d70, 0.1f) == 0) {
+					fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x114));
+					v10 = *(int*) &d3_ActiveCamera + 0x120;
+					fcn_00438cb0(*(int*) &d3_ActiveCamera, v10);
 				}
-			} else if (CompareVector3WithinTolerance((float*) (*(int*) &g_6b8014 + 0x114), (float*) &g_662d70, 0.1f) == 0
-			           && CompareVector3WithinTolerance((float*) (*(int*) &g_6b8014 + 0x120), (float*) &g_662d70, 0.1f) == 0) {
-				fcn_00438b40((char*) *(int*) &g_6b8014, (int*) (*(int*) &g_6b8014 + 0x114));
-				v10 = *(int*) &g_6b8014 + 0x120;
-				fcn_00438cb0(*(int*) &g_6b8014, v10);
+			} else if (CompareVector3WithinTolerance((float*) (*(int*) &d3_ActiveCamera + 0x114), (float*) &g_662d70, 0.1f) == 0
+			           && CompareVector3WithinTolerance((float*) (*(int*) &d3_ActiveCamera + 0x120), (float*) &g_662d70, 0.1f) == 0) {
+				fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x114));
+				v10 = *(int*) &d3_ActiveCamera + 0x120;
+				fcn_00438cb0(*(int*) &d3_ActiveCamera, v10);
 			}
 		}
-		*(int*) &g_7e3a40 = *(int*) (*(int*) &g_6b8014 + 0x4c);
-		*(int*) &g_7e3a44 = *(int*) (*(int*) &g_6b8014 + 0x50);
-		*(int*) &g_7e3a48 = *(int*) (*(int*) &g_6b8014 + 0x54);
-		*(int*) &g_7e3a50 = *(int*) (*(int*) &g_6b8014 + 0x84);
-		*(int*) &g_7e3a54 = *(int*) (*(int*) &g_6b8014 + 0x88);
-		*(int*) &g_7e3a58 = *(int*) (*(int*) &g_6b8014 + 0x8c);
-		g_774688 = 0;
-		g_77468c = 0;
+		*(int*) &g_7e3a40 = *(int*) (*(int*) &d3_ActiveCamera + 0x4c);
+		*(int*) &g_7e3a44 = *(int*) (*(int*) &d3_ActiveCamera + 0x50);
+		*(int*) &g_7e3a48 = *(int*) (*(int*) &d3_ActiveCamera + 0x54);
+		*(int*) &d3_CameraTargetRotation = *(int*) (*(int*) &d3_ActiveCamera + 0x84);
+		*(int*) &g_7e3a54 = *(int*) (*(int*) &d3_ActiveCamera + 0x88);
+		*(int*) &g_7e3a58 = *(int*) (*(int*) &d3_ActiveCamera + 0x8c);
+		d3_CameraHorizontalIndex = 0;
+		d3_CameraVerticalStep = 0;
 	}
 	switch (*v7) {
 	case 0x1e:
@@ -186,8 +186,8 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	}
 	fcn_00530510();
 	sv_ClearObjectSelection();
-	g_774688 = 0;
-	g_77468c = 0;
+	d3_CameraHorizontalIndex = 0;
+	d3_CameraVerticalStep = 0;
 	if (id != -1) {
 		p = (unsigned char*) fcn_00426cc0(id);
 		if (p != 0) {
@@ -217,7 +217,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	*(int*) &g_7e3a40 = s0;
 	*(int*) &g_7e3a44 = s1;
 	*(int*) &g_7e3a48 = s2;
-	*(int*) &g_7e3a50 = s3;
+	*(int*) &d3_CameraTargetRotation = s3;
 	*(int*) &g_7e3a54 = s4;
 	*(int*) &g_7e3a58 = s5;
 }

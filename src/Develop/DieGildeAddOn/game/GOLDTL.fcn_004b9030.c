@@ -8,7 +8,7 @@ typedef struct {
 } Dyn;
 
 extern char g_868060[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char *__cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(char *, int);
@@ -80,7 +80,7 @@ int __cdecl fcn_004b9030(int *msg)
 
 		x = (char *) gm_NextEntityQueryMatch();
 	}
-	*(pos14_7f4c00 *) (e + 0x52) = g_7f4c00;
+	*(pos14_7f4c00 *) (e + 0x52) = gm_GameTime;
 	fcn_004c5a60(-1, -1, *(int *) (r + 2));
 	fcn_004c5620(-1, e);
 	gm_ResolveEntityById((void **) (&b), 0, 0, *(int *) (e + 0xb0));

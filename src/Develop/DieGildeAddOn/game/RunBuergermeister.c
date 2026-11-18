@@ -38,7 +38,7 @@ int __cdecl RunBuergermeister(char* objekt, char* ziel, char* aktion)
         return 0x2e;
     } else {
         fcn_004c4eb0("bau_arbeiter_unterk");
-        if (amt_ExecGebaeudeBauen(g_773da8, ziel, aktion)) {
+        if (amt_ExecGebaeudeBauen(gm_CityEntity, ziel, aktion)) {
             fcn_004c5150(-1, *(int*) (spieler + 2), (char) g_773d75,
                 fcn_0050d170(*(int*) (ziel + 4)));
             fcn_004c4ef0("bau_arbeiter_unterk");

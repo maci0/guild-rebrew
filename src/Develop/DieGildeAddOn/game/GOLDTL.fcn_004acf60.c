@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7f4ca0[];
 
@@ -32,7 +32,7 @@ void __cdecl fcn_004acf60(void)
 	int lim;
 	int i;
 
-	lim = (*(int*)&g_7f4c00) + 0x578;
+	lim = (*(int*)&gm_GameTime) + 0x578;
 	if (fcn_004e8a80(0x26, &a) == 0)
 		return;
 	if (fcn_004e8a80(0x27, &b) == 0)

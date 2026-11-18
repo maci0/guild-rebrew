@@ -2,7 +2,7 @@
 #include "client_types.h"
 
 extern char g_7f4ca0[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char* g_14b5304;
 
 int __cdecl fcn_004c4450(int);
@@ -59,13 +59,13 @@ void __cdecl fcn_00576c90(char* e)
 		}
 		*(int*) (e + 0xb8) = *(int*) (p + 4);
 		if (*(int*) (e + 0xbc) == 3) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(int*) (e + 0x84) = fcn_004c5620(6, e);
 			goto done;
 		}
 		r = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 		if (r == 0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		minus_one:
 			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 			goto done;
@@ -77,26 +77,26 @@ void __cdecl fcn_00576c90(char* e)
 		*(int*) (e + 0xcc) = -1;
 		p = gm_LookupEntityRecordById(*(int*) (e + 0xb8));
 		if (p == 0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			goto minus_one;
 		}
 		if (*(char**) (*(char**) (p + 0x184) + 0x128) != 0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 4, 0);
 			goto done;
 		}
 		if (gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac)) != 0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 1, 0, 0);
 			*(int*) (e + 0x84) = fcn_004c5620(3, e);
 			goto done;
 		}
-		*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		goto minus_one;
 	case 3:
 		p = gm_LookupEntityRecordById(*(int*) (e + 0xb8));
 		if (p == 0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			goto minus_one;
 		}
 		q = gm_LookupEntityRecordById(*(int*) (e + 0xb4));
@@ -126,7 +126,7 @@ void __cdecl fcn_00576c90(char* e)
 				}
 				break;
 			case 3:
-				*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 				*(int*) (e + 0xc4) = -1;
 				*(int*) (e + 0xc8) = 0;
 				*(int*) (e + 0x84) = fcn_004c5620(6, e);
@@ -141,7 +141,7 @@ void __cdecl fcn_00576c90(char* e)
 		goto done;
 	case 4:
 		p = gm_LookupEntityRecordById(*(int*) (e + 0xb8));
-		*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		if (p == 0) {
 			goto minus_one;
 		}
@@ -151,15 +151,15 @@ void __cdecl fcn_00576c90(char* e)
 	case 5:
 		p = gm_LookupEntityRecordById(*(int*) (e + 0xb8));
 		if (p == 0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			goto minus_one;
 		}
 		if (*(char**) (*(char**) (p + 0x184) + 0x128) != 0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 4, 0);
 			goto done;
 		}
-		n = fcn_00500d20(e + 0x44, (char*) &g_7f4c00);
+		n = fcn_00500d20(e + 0x44, (char*) &gm_GameTime);
 		switch (*(int*) (e + 0xbc)) {
 		case 2:
 			c = 0x21c;
@@ -175,21 +175,21 @@ void __cdecl fcn_00576c90(char* e)
 		if (n <= 5) {
 			n = 5;
 		}
-		*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), n / 60, n % 60, 0);
 		fcn_004c57e0(*(int*) (e + 0xb8), 1);
 		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 		goto done;
 	case 6:
-		n = fcn_00500d20(e + 0x44, (char*) &g_7f4c00);
+		n = fcn_00500d20(e + 0x44, (char*) &gm_GameTime);
 		if (n > 0x5a0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(int*) (e + 0x84) = fcn_004c5620(4, e);
 			goto done;
 		}
 		q = gm_LookupEntityRecordById(*(int*) (e + 0xb8));
 		if (q == 0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			goto minus_one;
 		}
 		r = fcn_00577d00(h, q, *(int*) (e + 0xc4));
@@ -199,7 +199,7 @@ void __cdecl fcn_00576c90(char* e)
 			*(int*) (e + 0xc8) = 1;
 			fcn_004c5c80(*(int*) (q + 4));
 			fcn_004c5da0(*(int*) (q + 4), *(int*) (e + 0xac), -1, 0, 1, (char*) 0x6a7e3c);
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 5, 0);
 			*(int*) (e + 0x84) = fcn_004c5620(7, e);
 			goto done;
@@ -209,31 +209,31 @@ void __cdecl fcn_00576c90(char* e)
 		*(int*) (e + 0xc8) = 0;
 		fcn_004c5c80(*(int*) (q + 4));
 		fcn_004c5da0(*(int*) (q + 4), *(int*) (e + 0xac), -1, 0, 1, (char*) 0x6a7e3c);
-		*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0xf, 0);
 		*(int*) (e + 0x84) = fcn_004c5620(6, e);
 		goto done;
 	case 7:
-		n = fcn_00500d20(e + 0x44, (char*) &g_7f4c00);
+		n = fcn_00500d20(e + 0x44, (char*) &gm_GameTime);
 		q = gm_LookupEntityRecordById(*(int*) (e + 0xb8));
 		if (q == 0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 			goto done;
 		}
 		if (n > 0x5a0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(int*) (e + 0x84) = fcn_004c5620(4, e);
 			goto done;
 		}
 		r = fcn_005463a0(2, 0, 0x18, 1, *(int*) (e + 0xc4));
 		if (fcn_00577e70(q, e, r) != 0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(int*) (e + 0x84) = fcn_004c5620(6, e);
 			goto done;
 		}
 		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 6, 0);
-		*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		*(int*) (e + 0x84) = fcn_004c5620(7, e);
 		goto done;
 	}

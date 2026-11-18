@@ -39,7 +39,7 @@ int __cdecl ch_Update(void)
 	float pos[4];
 	char* list[32];
 
-	g_6b5c24 = g_6b7fac;
+	ch_UpdateTime = g_6b7fac;
 	g_6b5c30 = 0;
 	if (g_67531c == 0) {
 		return 0;
@@ -49,12 +49,12 @@ int __cdecl ch_Update(void)
 			fcn_004058f0(*(char**) g_1043370);
 			g_6b5c54 = (char*) g_67a370;
 		}
-		if (g_67a370 != 0 && g_6b8010 != 0 && *(char**) ((char*) g_67a370 + 0xb0) != 0 && g_6b5c58 != (char*) g_67a370) {
+		if (g_67a370 != 0 && d3_CurrentContextIndex != 0 && *(char**) ((char*) g_67a370 + 0xb0) != 0 && g_6b5c58 != (char*) g_67a370) {
 			fcn_004058f0(*(char**) ((char*) g_67a370 + 0xb0));
 			g_6b5c58 = (char*) g_67a370;
 		}
 	}
-	for (p = (char**) g_14d0020; (int) p < (int) (g_14d0020 + 0x300); p++) {
+	for (p = (char**) ch_CharacterSlots; (int) p < (int) (ch_CharacterSlots + 0x300); p++) {
 		if (*p == 0 || (*(*p + 0x8c) & 4) != 0) {
 			continue;
 		}
@@ -73,7 +73,7 @@ int __cdecl ch_Update(void)
 				map = fcn_00402610(*p);
 				fcn_00405c70(*(char**) (*p + 0x34) + 0x4c, pos);
 				if (fcn_0045b990(map, pos, &col, &row, &height)) {
-					fcn_0040c120(*p, 0x2d, col, row, g_6b8010);
+					fcn_0040c120(*p, 0x2d, col, row, d3_CurrentContextIndex);
 				}
 			}
 		} else {
@@ -85,7 +85,7 @@ int __cdecl ch_Update(void)
 		if (*(int*) (*p + 0x22c) != 0) {
 			ch_Updatelowpoly(*p);
 		}
-		if (t == 0 && (char*) g_67a370 == *(char**) (*p + 0x88) && g_6b8010 != 0 && *(int*) (*p + 0x70) == 0) {
+		if (t == 0 && (char*) g_67a370 == *(char**) (*p + 0x88) && d3_CurrentContextIndex != 0 && *(int*) (*p + 0x70) == 0) {
 			f = *(unsigned short*) (*p + 0x8c);
 			if ((f & 0x1000) != 0 && (f & 2) == 0 &&
 			    (*(*(char**) (*(char**) (*p + 0x34) + 0x1ec) + 0x163d) & 0x40) == 0) {

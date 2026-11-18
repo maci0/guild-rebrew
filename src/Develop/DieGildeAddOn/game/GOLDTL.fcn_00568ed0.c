@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_6629c8;
@@ -97,7 +97,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			}
 			p += 4;
 		} while (--i != 0);
-		*(pos14_7f4c00*) (a1 + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (a1 + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (a1 + 0x52), 0, 0x1e, 0);
 		*(int*) (a1 + 0x70) = 1;
 		return;
@@ -119,12 +119,12 @@ void __cdecl fcn_00568ed0(char* a1)
 				goto used;
 			}
 		}
-		*(pos14_7f4c00*) (a1 + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (a1 + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (a1 + 0x52), 0, 0, 1);
 		*(int*) (a1 + 0x70) = 2;
 		return;
 	used:
-		*(pos14_7f4c00*) (a1 + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (a1 + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (a1 + 0x52), 0, 0xa, 0);
 		return;
 	case 2:
@@ -218,7 +218,7 @@ void __cdecl fcn_00568ed0(char* a1)
 				msg.kind = 0x3d;
 				msg.who = *(int*) (hs + 4);
 				msg.target = *(int*) (ent + 1);
-				msg.when = g_7f4c00;
+				msg.when = gm_GameTime;
 				msg.flag = 0x12;
 				msg.ent = *(int*) (obj + 4);
 				msg.house = *(int*) (ent + 1);

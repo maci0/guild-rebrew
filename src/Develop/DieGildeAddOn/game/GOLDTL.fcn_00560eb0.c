@@ -16,7 +16,7 @@ struct race {
 	char pad1[0x24c];
 };
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern struct house g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 extern char g_6b5c60[];
@@ -63,8 +63,8 @@ void __cdecl fcn_00560eb0(char* e)
 			if (q == 0) {
 				break;
 			}
-			if (fcn_00500cb0(&g_7f4c00, (pos14_7f4c00*) (e + 0xb8)) < 0) {
-				n = fcn_0050c830((pos14_7f4c00*) (e + 0x60), &g_7f4c00, q);
+			if (fcn_00500cb0(&gm_GameTime, (pos14_7f4c00*) (e + 0xb8)) < 0) {
+				n = fcn_0050c830((pos14_7f4c00*) (e + 0x60), &gm_GameTime, q);
 			} else {
 				n = fcn_0050c830((pos14_7f4c00*) (e + 0x60), (pos14_7f4c00*) (e + 0xb8), q);
 				*(int*) (e + 0x70) = 1;
@@ -80,8 +80,8 @@ void __cdecl fcn_00560eb0(char* e)
 			fcn_004c4510(who, *(int*) (who + 4));
 			fcn_004c4670(1, 1, (short) (who - g_aed32c + ((unsigned char*) e)[0xac] + 0x80), &add);
 			fcn_004c5360();
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
-			*(pos14_7f4c00*) (e + 0x60) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
+			*(pos14_7f4c00*) (e + 0x60) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0x1e, 0);
 			return;
 		}

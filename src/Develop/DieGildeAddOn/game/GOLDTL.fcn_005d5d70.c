@@ -28,7 +28,7 @@ typedef struct {
 	char pad8[0x214];
 } House;
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char s_6ac494[];
@@ -97,7 +97,7 @@ int __cdecl fcn_005d5d70(unsigned char* e)
 					b = gm_RandomMod(9) + 0x1d6d;
 					memset(&m, 0, sizeof(m));
 					m.f8 = ((House*)g_7f4ca0)[g_774970].f4;
-					m.pos = g_7f4c00;
+					m.pos = gm_GameTime;
 					m.b4 = 0x47;
 					m.b36 = 2;
 					m.w60 = b;

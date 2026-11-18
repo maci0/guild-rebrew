@@ -1,14 +1,14 @@
 #include <string.h>
 #include <stdio.h>
 
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 extern unsigned char g_7747b0;
 extern unsigned char* lpGebaeudePROT;
 extern char g_774964;
 extern int g_774670;
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern int g_1040494;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_67a370;
 extern char* g_6b8300;
 extern int g_7e2700;
@@ -56,7 +56,7 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 	int progress;
 	int flags;
 
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	progress = 0;
 	restore = 0;
 	if ((g_7747b0 & 8) != 0 && !fcn_0042df70((void*) 0x538060)) {
@@ -66,8 +66,8 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 	p = (char*) (((GebProt_5110d0*) lpGebaeudePROT)[a0].type + 0x7f3b00);
 	if (*p == (char) 0xff) {
 		if (g_774964 != 0 && (g_774670 <= 0 || g_7e2700 != 0)) {
-			flags = (g_7e46ac & 0xfffffff7) | 0x80;
-			mode = fcn_004730c0(0, 0, g_1040494, g_1040490, "BLACK", 0x32, 1);
+			flags = (main_LoopFlags & 0xfffffff7) | 0x80;
+			mode = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x32, 1);
 			while (!(*mode & 4)) {
 				fcn_005373e0(0, flags);
 			}
@@ -91,7 +91,7 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 		if (g_6b8300 != 0) {
 			fcn_00516de0(g_6b8300, 1);
 		}
-		fcn_004432d0(g_6b8010, 0);
+		fcn_004432d0(d3_CurrentContextIndex, 0);
 		fcn_00437ac0((char*) g_67a370, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
 		fcn_00437ac0((char*) g_67a370, 0, 6, (void (__cdecl*)(char*)) 0x510bd0);
 		*p = (char) v;
@@ -102,8 +102,8 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 		goto done;
 	}
 	if (g_774964 != 0 && g_774670 <= 0) {
-		flags = (g_7e46ac & 0xfffffff7) | 0x80;
-		mode = fcn_004730c0(0, 0, g_1040494, g_1040490, "BLACK", 0x32, 1);
+		flags = (main_LoopFlags & 0xfffffff7) | 0x80;
+		mode = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x32, 1);
 		while (!(*mode & 4)) {
 			fcn_005373e0(0, flags);
 		}
@@ -122,7 +122,7 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 	if (g_6b8300 != 0) {
 		fcn_00516de0(g_6b8300, 1);
 	}
-	fcn_004432d0(g_6b8010, 0);
+	fcn_004432d0(d3_CurrentContextIndex, 0);
 	gv_Free3Fields(*(int*) (g_67a370 + 0xb0));
 	*(int*) (g_67a370 + 0xb0) = 0;
 	fcn_004026f0((char*) g_67a370);

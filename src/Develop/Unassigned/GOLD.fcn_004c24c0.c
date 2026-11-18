@@ -5,7 +5,7 @@ void __cdecl FadeMasterVolume(float volume, int duration);
 /* ADDRESS: GOLD 0x004c24c0 */
 void __cdecl fcn_004c24c0(float volume, int duration)
 {
-    if (g_772d1c != 0) {
+    if (tp_msx_CurrentTrack != 0) {
         FadeMasterVolume(volume, duration);
     }
 }

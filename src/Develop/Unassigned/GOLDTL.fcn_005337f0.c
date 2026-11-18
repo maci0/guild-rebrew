@@ -1,7 +1,7 @@
 extern char g_7e5fc0[];
-extern int g_7e46ac;
-extern float g_67d368;
-extern int g_1015eac;
+extern int main_LoopFlags;
+extern float d2_UiScale;
+extern int d2_CenterX;
 extern int g_77250c;
 extern int g_6a251c;
 extern volatile int g_6b7fac;
@@ -18,12 +18,12 @@ void __cdecl fcn_005337f0(void)
 
 	if (g_7e5fc0[0] != 0) {
 		fcn_00472880(0x53);
-		if (g_7e46ac & 0x8000) {
-			x = g_1015eac - 0x12c;
-			y = (int) (g_67d368 * 505.0f);
+		if (main_LoopFlags & 0x8000) {
+			x = d2_CenterX - 0x12c;
+			y = (int) (d2_UiScale * 505.0f);
 		} else {
-			x = g_1015eac - 0x12c;
-			y = (int) (g_67d368 * 575.0f);
+			x = d2_CenterX - 0x12c;
+			y = (int) (d2_UiScale * 575.0f);
 		}
 		fcn_0046bd20(x, y, 0x258, 0x18, g_77250c, g_7e5fc0, 0x28);
 		if ((*(unsigned int*)&g_6b7fac) >= (unsigned int)(g_6a251c + 0x15e)) {

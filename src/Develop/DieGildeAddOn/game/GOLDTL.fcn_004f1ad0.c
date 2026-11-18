@@ -1,11 +1,11 @@
 #include <string.h>
 
 extern char* lpGebaeudePROT;
-extern int g_699364;
-extern int g_7f4c00;
+extern int gm_NextEntityId;
+extern int gm_GameTime;
 extern char* g_14a62d8[];
 extern char* g_14a5dbc[];
-extern char* g_14a60d0[];
+extern char* gm_FemaleNames[];
 
 int __cdecl gm_RandomMod(int n);
 char* __cdecl FindSlotEntryFiltered(int a0, void* a1, int a2, void* filter, int a4);
@@ -37,11 +37,11 @@ int __cdecl fcn_004f1ad0(void* building, int count)
 		if (hit == 0) {
 			return i;
 		}
-		*(int*) *(char**) (hit + 0x10) = g_699364;
-		g_699364 = g_699364 + 1;
+		*(int*) *(char**) (hit + 0x10) = gm_NextEntityId;
+		gm_NextEntityId = gm_NextEntityId + 1;
 		*(int*) (hit + 4) = *(int*) *(char**) (hit + 0x10);
 		*(unsigned short*) (hit + 8) = 0x7fff;
-		*(unsigned short*) (hit + 0xa) = (unsigned short) (g_7f4c00 + 5);
+		*(unsigned short*) (hit + 0xa) = (unsigned short) (gm_GameTime + 5);
 		*(unsigned char*) (hit + 0xc) = 0xff;
 		for (j = 0; j < 5; j++) {
 			*((char*) *(char**) (hit + 0x10) + j + 0x24) =
@@ -52,7 +52,7 @@ int __cdecl fcn_004f1ad0(void* building, int count)
 		*(int*) (*(char**) (hit + 0x10) + 0x30) = (gm_RandomMod(2) & 0xffff) + 1;
 		*(int*) (*(char**) (hit + 0x10) + 0x34) = (gm_RandomMod(0x5e) & 0xffff) + 1;
 		*(int*) (*(char**) (hit + 0x10) + 0x40) =
-		    g_7f4c00 - (gm_RandomMod(4) & 0xffff) - 1;
+		    gm_GameTime - (gm_RandomMod(4) & 0xffff) - 1;
 		*(int*) (*(char**) (hit + 0x10) + 0x38) = gm_RandomMod(2) & 0xffff;
 		strncpy(*(char**) (hit + 0x10) + 0x14,
 		    g_14a62d8[gm_RandomMod(0x95) & 0xffff], 0xf);
@@ -75,7 +75,7 @@ int __cdecl fcn_004f1ad0(void* building, int count)
 			    g_14a5dbc[gm_RandomMod(0xbf) & 0xffff], 0xf);
 		} else {
 			strncpy(*(char**) (hit + 0x10) + 4,
-			    g_14a60d0[gm_RandomMod(0x70) & 0xffff], 0xf);
+			    gm_FemaleNames[gm_RandomMod(0x70) & 0xffff], 0xf);
 		}
 	}
 	return i;

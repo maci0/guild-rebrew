@@ -1,4 +1,4 @@
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern char g_676724[];
 
 
@@ -15,6 +15,6 @@ int __cdecl ecmd_SetPos(char** objectRef, int* posX, int* posY, int* posZ)
 		fcn_00438b40(*objectRef, *objectRef + 0x4c);
 		return 0;
 	}
-		fcn_00425bf0(g_6b7e98, *(int*) ((char*) g_6b7e98 + 0x118), g_676724);
+		fcn_00425bf0(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), g_676724);
 	return 0;
 }

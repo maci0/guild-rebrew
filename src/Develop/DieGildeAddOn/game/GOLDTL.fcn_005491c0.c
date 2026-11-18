@@ -1,7 +1,7 @@
-extern char* g_773da8;
+extern char* gm_CityEntity;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 // SIZE 0xf8
 struct msg {
@@ -37,9 +37,9 @@ void __cdecl fcn_005491c0(void)
 		fcn_00546190(p);
 	}
 	m.b4 = 0x73;
-	m.f8 = *(int*) (g_773da8 + 4);
+	m.f8 = *(int*) (gm_CityEntity + 4);
 	m.fc = -1;
 	m.b36 = 1;
-	m.pos = g_7f4c00;
+	m.pos = gm_GameTime;
 	fcn_004c5530(&m);
 }

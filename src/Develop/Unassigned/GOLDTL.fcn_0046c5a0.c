@@ -2,19 +2,19 @@
 #include <string.h>
 
 extern int g_1015ea0;
-extern int g_1015ea4;
+extern int d2_FontHeight;
 extern int g_102d020;
 extern int g_102d024;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int d2_CurrentFont;
 extern int g_67d380;
 extern int g_67d390;
-extern int g_67d398;
+extern int d2_DefaultFont;
 extern int g_67d3a8;
 extern int g_67d3b4;
-extern int g_67d964;
-extern int g_67d968;
+extern int d2_ClipRight;
+extern int d2_ClipBottom;
 extern int g_6b23a4;
 extern int g_6b25b0;
 extern int g_772500;
@@ -22,9 +22,9 @@ extern char* g_772524;
 extern int g_772530;
 extern int g_772554;
 extern int g_7725b4;
-extern int g_7725f8;
+extern int d2_ClipLeft;
 extern int g_7725fc;
-extern int g_14a5320;
+extern int txt_TextEntries;
 
 int __cdecl fcn_00465950(char* name);
 void __cdecl fcn_00472880(int font);
@@ -123,11 +123,11 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 		yr = (*(int*) (slot + 0xc) + *(int*) (slot + 4)) - 0xc;
 	}
 	sv74 = g_7725fc;
-	sv78 = g_67d964;
-	sv68 = g_7725f8;
+	sv78 = d2_ClipRight;
+	sv68 = d2_ClipLeft;
 	g_102d024 = v38 - *(int*) (slot + 0x258);
-	sv70 = g_67d968;
-	g_1015ea4 = *(unsigned short*) (g_772524 + 8);
+	sv70 = d2_ClipBottom;
+	d2_FontHeight = *(unsigned short*) (g_772524 + 8);
 	g_102d020 = xr;
 	g_772530 = 0;
 	i = 0;
@@ -166,7 +166,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 			case 'A':
 				DRAW_RUN(1, g_102d020);
 				d = (short) (*(char*) (p - 1) - '0');
-				span = (d > 0 && d < 9) ? g_1015ea4 * d : g_1015ea4;
+				span = (d > 0 && d < 9) ? d2_FontHeight * d : d2_FontHeight;
 				if (extra) {
 					span = extra;
 					extra = 0;
@@ -182,7 +182,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					continue;
 				}
 				DRAW_RUN(1, g_102d020);
-				span = g_1015ea4 * 3 / 2;
+				span = d2_FontHeight * 3 / 2;
 				if (extra) {
 					span = extra;
 					extra = 0;
@@ -199,7 +199,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					continue;
 				}
 				DRAW_RUN(1, g_102d020);
-				span = g_1015ea4 / 2;
+				span = d2_FontHeight / 2;
 				if (extra) {
 					span = extra;
 					extra = 0;
@@ -280,7 +280,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				}
 				d = *(short*) (g_772500 + img * 84 + 0x50);
 				if (d + g_102d020 > yr) {
-					len += g_1015ea4;
+					len += d2_FontHeight;
 					e = (char*) xr;
 				} else {
 					e = (char*) tmp;
@@ -380,7 +380,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 						g_102d020 += 6;
 					}
 					img = fcn_00467480(g_102d020 - *(int*) (slot + 4),
-					    g_102d024 - *(int*) (slot + 8), 0x10, g_1015ea4, 0x82, a1);
+					    g_102d024 - *(int*) (slot + 8), 0x10, d2_FontHeight, 0x82, a1);
 					*(int*) (slot + nImg * 4 + 0x294) =
 					    *(int*) (g_1015ea0 + img * 0x2f4 + 0x88);
 					g_102d020 += *(int*) (img * 0x160 + 0x102d150) + 6;
@@ -393,7 +393,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					continue;
 				}
 				img = fcn_00467480(g_102d020 - *(int*) (slot + 4),
-				    g_102d024 - *(int*) (slot + 8), 8, g_1015ea4, 0x10, a1);
+				    g_102d024 - *(int*) (slot + 8), 8, d2_FontHeight, 0x10, a1);
 				*(int*) (g_1015ea0 + img * 0x2f4 + 0x78) = 1;
 				tmp = *(int*) (g_1015ea0 + img * 0x2f4 + 0x88);
 				*(int*) (tmp * 0x160 + 0x102d288) = *(int*) (slot + nImg * 4 + 0x294);
@@ -451,7 +451,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					g_102d020 += 6;
 				}
 				img = fcn_00467480(g_102d020 - *(int*) (slot + 4),
-				    g_102d024 - *(int*) (slot + 8), 0, g_1015ea4, 1, a1);
+				    g_102d024 - *(int*) (slot + 8), 0, d2_FontHeight, 1, a1);
 				tmp = *(int*) (g_1015ea0 + img * 0x2f4 + 0x88);
 				len = *(int*) (slot + nImg * 4 + 0x294);
 				s = (char*) (tmp * 0x160 + 0x102d16c);
@@ -483,7 +483,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				if (span > yr) {
 					DRAW_RUN(1, span);
 					g_102d020 = xr;
-					g_102d024 += g_1015ea4;
+					g_102d024 += d2_FontHeight;
 				}
 				tmp = g_772530;
 				*(unsigned short*) (tmp * 0x10c + 0x10119e0) = *(unsigned short*) 0x67d528;
@@ -519,7 +519,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				tailCh = *(char*) 0x67d526;
 			colon_run:
 				*(char*) (span + 0x10119e2) = tailCh;
-				len = (d2_CurrentFont - g_67d398) + g_67d3b4 * 2;
+				len = (d2_CurrentFont - d2_DefaultFont) + g_67d3b4 * 2;
 				tmp += 1;
 				len = len * 21;
 				*(int*) (span + 0x1011ae8) = *(short*) (g_772500 + len * 4 + 0x50);
@@ -552,7 +552,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				continue;
 			case 'F':
 				if (*(char*) (p + 1) != 'F') {
-					fcn_00472880(g_67d398 + d);
+					fcn_00472880(d2_DefaultFont + d);
 					i += 1;
 					continue;
 				}
@@ -685,7 +685,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 						strcpy(bufs.a, bufs.c);
 					}
 					DRAW_RUN(0, g_102d020);
-					g_102d024 += g_1015ea4;
+					g_102d024 += d2_FontHeight;
 					*(int*) (slot + 0x4c + (*(int*) (slot + 0x248) + nLine) * 4) = i;
 					nLine += 1;
 					if (len > 0) {
@@ -700,7 +700,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					fcn_0046eda0((short) ((short) g_1040494 - *(short*) (slot + 4)),
 					    *(short*) (slot + 0x10), a1);
 					DRAW_RUN(0, span + g_102d020);
-					g_102d024 += g_1015ea4;
+					g_102d024 += d2_FontHeight;
 					*(int*) (slot + 0x4c + (*(int*) (slot + 0x248) + nLine) * 4) = i;
 					nLine += 1;
 				}
@@ -722,7 +722,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					if (g_102d020 >= *(int*) (p + 0x10) + *(int*) (p + 0x18)) {
 						break;
 					}
-					if (g_102d024 + g_1015ea4 <= *(int*) (p + 0x14)) {
+					if (g_102d024 + d2_FontHeight <= *(int*) (p + 0x14)) {
 						break;
 					}
 					if (g_102d024 >= *(int*) (p + 0x14) + *(int*) (p + 0x1c)) {
@@ -732,7 +732,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					g_102d020 = tmp + 6;
 					if (span + g_102d020 > yr) {
 						DRAW_RUN(0, g_102d020);
-						g_102d024 += g_1015ea4;
+						g_102d024 += d2_FontHeight;
 						*(int*) (slot + 0x4c + (*(int*) (slot + 0x248) + nLine) * 4) = i;
 						nLine += 1;
 						g_102d020 = xr;
@@ -740,7 +740,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				}
 				tmp += 1;
 			}
-			span = g_1015ea4;
+			span = d2_FontHeight;
 			len = *(int*) (slot + 0x2c);
 			if ((g_67d380 - *(int*) (slot + 4)) + span + g_102d020 > maxW) {
 				maxW = (g_67d380 - *(int*) (slot + 4)) + span + g_102d020;
@@ -762,23 +762,23 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 	}
 	DRAW_RUN(1, g_102d020);
 	if (*(int*) (slot + 0x14) & 0x4000) {
-		if (g_1040490 < (int) ((g_1015ea4 - 8) + g_102d024)) {
+		if (d2_ScreenHeight < (int) ((d2_FontHeight - 8) + g_102d024)) {
 			tmp = *(int*) (slot + 0x27c);
 			p = *(char**) (g_1015ea0 + tmp * 0x2f4 + 0x40);
 			if (p) {
 				tmp = *(int*) (p + 0x27c);
-				len = ((*(int*) (p + 8) - g_1015ea4) - g_102d024) + 8 + g_1040490;
+				len = ((*(int*) (p + 8) - d2_FontHeight) - g_102d024) + 8 + d2_ScreenHeight;
 				span = *(int*) (p + 4);
 			} else {
-				len = ((g_1040490 - g_1015ea4) - g_102d024) + *(int*) (slot + 8) - 8;
+				len = ((d2_ScreenHeight - d2_FontHeight) - g_102d024) + *(int*) (slot + 8) - 8;
 				span = *(int*) (slot + 4);
 			}
 			fcn_00469c40(span, len, tmp);
 		}
 		fcn_0046eda0(*(short*) (slot + 0xc),
-		    (short) ((g_1015ea4 - *(short*) (slot + 8)) + g_102d024), a1);
+		    (short) ((d2_FontHeight - *(short*) (slot + 8)) + g_102d024), a1);
 	}
-	g_102d024 += g_1015ea4;
+	g_102d024 += d2_FontHeight;
 	if (*(int*) (slot + 0x14) & 0x2000) {
 		fcn_0046eda0((short) maxW, *(short*) (slot + 0x10), a1);
 	}

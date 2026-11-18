@@ -1,8 +1,8 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned int g_775344;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 extern int g_14ce8e8;
 #include "client_dialog_state.h"
@@ -90,18 +90,18 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 	h = fcn_00470820(0, 0, "panel\\geb_liste");
 	fcn_00471b60(h);
 	d2_SetForm(h, 2);
-	win = g_772514;
+	win = d2_CurrentWindowId;
 	d2_SetForm(h, 1);
 	io_AppendText(name);
 	d2_SetForm(h, 4);
-	rem = *(int*) ((unsigned long)&g_1015f40 + g_772514 * 0x3cc + 0x10) - 0x107;
+	rem = *(int*) ((unsigned long)&g_1015f40 + d2_CurrentWindowId * 0x3cc + 0x10) - 0x107;
 	step = rem / 7;
 	rem = rem % 7;
 	y = 0;
 	for (i = 0; i < 8;) {
 		g_6ac8a8[i].element = fcn_00468df0(
-				(*(int*) ((unsigned long)&g_1015f40 + g_772514 * 0x3cc + 0xc) - 0xb9) / 2, y, 0xbf,
-				*(int*) (0x14aad40 + g_6ac8a8[i].bild * 4), g_772514);
+				(*(int*) ((unsigned long)&g_1015f40 + d2_CurrentWindowId * 0x3cc + 0xc) - 0xb9) / 2, y, 0xbf,
+				*(int*) (0x14aad40 + g_6ac8a8[i].bild * 4), d2_CurrentWindowId);
 		fcn_00469110(g_6ac8a8[i].element, 0xb9);
 		i++;
 		y += 0x21 + step + (--rem >= 0);
@@ -184,7 +184,7 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 				result = 0;
 				cur = 0;
 				for (i = 0; i < g_6ac8a8[g_775344].count; i++) {
-					if (rows[i].key2 == g_67d370) {
+					if (rows[i].key2 == d2_CurrentElementId) {
 						break;
 					}
 				}
@@ -210,14 +210,14 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 	hit:
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 8; i++) {
-				if (g_6ac8a8[i].element == g_67d370) {
+				if (g_6ac8a8[i].element == d2_CurrentElementId) {
 					state = 1;
 					sel = i;
 					goto after;
 				}
 			}
 			for (i = 0; i < g_6ac8a8[g_775344].count; i++) {
-				if (rows[i].key1 == g_67d370) {
+				if (rows[i].key1 == d2_CurrentElementId) {
 					state = 2;
 					sel = i;
 					if (callback == 0) {

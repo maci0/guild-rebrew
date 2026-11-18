@@ -67,32 +67,32 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 	             (int) (*(float*) (a2 + 8 + *(int*) (panel + 0xa0) * 4) * 100.0f), 1);
 	d2_SetForm(*(int*) (panel + 0xc0), 2);
 	io_AppendText(0x6811b0);
-	rec = fcn_0046fac0(0, 0xf, *(char**) 0x14b54c0, *(int*) &g_772514);
+	rec = fcn_0046fac0(0, 0xf, *(char**) 0x14b54c0, *(int*) &d2_CurrentWindowId);
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
-	    *(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c) / 2;
+	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
 	fcn_00472900(rec, 0x54);
 	io_FormatTextBuffer(text, (char*) 0x6a9480, v2, v1);
-	rec = fcn_0046fac0(0, 0x23, text, *(int*) &g_772514);
+	rec = fcn_0046fac0(0, 0x23, text, *(int*) &d2_CurrentWindowId);
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
-	    *(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c) / 2;
+	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
 	fcn_00472900(rec, 0x54);
-	rec = fcn_0046fac0(*(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c) / 2,
-	                   0xf, *(char**) 0x14b54c4, *(int*) &g_772514);
+	rec = fcn_0046fac0(*(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2,
+	                   0xf, *(char**) 0x14b54c4, *(int*) &d2_CurrentWindowId);
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
-	    *(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c) / 2;
+	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
 	fcn_00472900(rec, 0x54);
 	io_FormatTextBuffer(text, (char*) 0x6a9480,
 	             fcn_0050d320((char*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0),
 	                          *(unsigned char*) &g_773d75),
 	             *(int*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0 + 0x194));
-	rec = fcn_0046fac0(*(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c) / 2,
-	                   0x23, text, *(int*) &g_772514);
+	rec = fcn_0046fac0(*(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2,
+	                   0x23, text, *(int*) &d2_CurrentWindowId);
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
-	    *(int*) (*(int*) &g_772514 * 0x3cc + (unsigned long)&g_1015f4c) / 2;
+	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
 	fcn_00472900(rec, 0x54);
 	*(int*) 0x9a9214 = level;
 	*(int*) 0x9a9218 = percent;

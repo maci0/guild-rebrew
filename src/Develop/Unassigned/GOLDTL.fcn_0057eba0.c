@@ -1,4 +1,4 @@
-extern int g_774a14;
+extern int d2_TutorialActive;
 extern volatile int g_6b7fc0;
 
 // SIZE 0x40
@@ -21,7 +21,7 @@ int __cdecl fcn_0057eba0(int a, int b, int c, int d)
 {
 	int buf[4];
 
-	if (g_774a14 == 0) {
+	if (d2_TutorialActive == 0) {
 		return 1;
 	}
 	if (((struct host_57eba0*)g_665f08)->cb == 0) {

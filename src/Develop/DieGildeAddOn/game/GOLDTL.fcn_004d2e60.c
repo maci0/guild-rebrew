@@ -2,9 +2,9 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_7e46ac;
+extern int main_LoopFlags;
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_68bd68[];
 extern char g_68bd54[];
 extern char g_68bd44[];
@@ -25,8 +25,8 @@ void __cdecl fcn_004d2e60(void)
 	int r;
 	char* p;
 
-	g_7725c8 = 1;
-	if (g_774930 != 0) {
+	d2_SuppressOverlay = 1;
+	if (msx_MusicEnabled != 0) {
 		r = gm_RandomMod(100);
 		if (r < 20)
 			fcn_004c2c50(g_68bd68);
@@ -39,13 +39,13 @@ void __cdecl fcn_004d2e60(void)
 		else
 			fcn_004c2c50(g_68bd14);
 	}
-	g_7e46ac = 0x7d6c6;
+	main_LoopFlags = 0x7d6c6;
 	fcn_00536bb0();
-	fcn_0052a960(((char*)&g_7f4c00));
+	fcn_0052a960(((char*)&gm_GameTime));
 	p = evt_LoadGfxScript(g_68bcec);
 	if (p != 0) {
 		evt_RunScript(p);
 		fcn_004cfa00(*(int*) (p + 0x100));
 	}
-	g_7725c8 = 0;
+	d2_SuppressOverlay = 0;
 }

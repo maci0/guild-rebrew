@@ -25,8 +25,8 @@ struct stats {
 	char pad1c[8];
 };
 
-extern pos14_7f4c00 g_7f4c00;
-extern char* g_773da8;
+extern pos14_7f4c00 gm_GameTime;
+extern char* gm_CityEntity;
 extern float g_662a3c;
 extern float g_6629c0;
 extern float g_6628cc;
@@ -53,7 +53,7 @@ void __cdecl fcn_00548d50(void)
 	int amount;
 	int idx;
 
-	if (g_7f4c00.a < 8) {
+	if (gm_GameTime.a < 8) {
 		return;
 	}
 	if (gm_RandomMod(4) != 0) {
@@ -66,13 +66,13 @@ void __cdecl fcn_00548d50(void)
 	b = gm_StartFilteredEntitySearch(1, 0, 0x1e);
 	c = gm_StartFilteredEntitySearch(1, 0, 0x1f);
 	n = 0;
-	if (a != 0 && *(short*) (a + 0x27) == *(short*) g_773da8) {
+	if (a != 0 && *(short*) (a + 0x27) == *(short*) gm_CityEntity) {
 		cand[n++] = a;
 	}
-	if (b != 0 && *(short*) (b + 0x27) == *(short*) g_773da8) {
+	if (b != 0 && *(short*) (b + 0x27) == *(short*) gm_CityEntity) {
 		cand[n++] = b;
 	}
-	if (c != 0 && *(short*) (c + 0x27) == *(short*) g_773da8) {
+	if (c != 0 && *(short*) (c + 0x27) == *(short*) gm_CityEntity) {
 		cand[n++] = c;
 	}
 	if (n == 0) {
@@ -83,8 +83,8 @@ void __cdecl fcn_00548d50(void)
 	pick = cand[idx];
 	amount = (int) ((*(int*) (pick + 0x65) + *(int*) (pick + 0x69)) * (((5 - info.level) * g_662a3c + g_6629c0) * g_6628cc));
 	m.kind = 0x67;
-	m.when = g_7f4c00;
-	m.player = *(int*) (g_773da8 + 4);
+	m.when = gm_GameTime;
+	m.player = *(int*) (gm_CityEntity + 4);
 	m.target = *(int*) (pick + 1);
 	m.who = *(int*) (pick + 1);
 	m.amount = *(int*) (pick + 0x69) + amount;

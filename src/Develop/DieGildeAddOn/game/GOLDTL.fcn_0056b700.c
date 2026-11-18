@@ -102,7 +102,7 @@ void __cdecl fcn_0056b700(char* obj)
 				return;
 			}
 		}
-		*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 0x1e, 0);
 		*(int*) (obj + 0x70) = *(int*) (obj + 0x70) + 1;
 		return;
@@ -114,7 +114,7 @@ void __cdecl fcn_0056b700(char* obj)
 		cur = fcn_004c4480(*(int*) (obj + 0xdc));
 		if (cur != 0) {
 			*(int*) (obj + 0xe0) = *(int*) cur;
-			*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 1, 0);
 			*(int*) (obj + 0x70) = 3;
 			return;
@@ -123,12 +123,12 @@ void __cdecl fcn_0056b700(char* obj)
 		return;
 	case 3:
 		if (!cut_FindCutsceneById(*(int*) (obj + 0xe0))) {
-			*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 0, 1);
 			*(int*) (obj + 0x70) = -1;
 			return;
 		}
-		*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 5, 0);
 		return;
 	case -2:
@@ -155,7 +155,7 @@ void __cdecl fcn_0056b700(char* obj)
 	}
 label_56b858:
 	if (*(unsigned char*) (obj + 0x78) & 2) {
-		saved = *(int*) &g_6b8010;
+		saved = *(int*) &d3_CurrentContextIndex;
 		nearby = 1;
 		door = 0;
 		prev = -1;
@@ -289,10 +289,10 @@ label_56b858:
 				*(int*) (buf.msg + 0x10c) = *(int*) (slot + 1);
 				for (i = 0; i < 8; i++)
 					*(int*) (buf.msg + 0xc0 + i * 4) = *(int*) (obj + 0x8c + i * 4);
-				*(pos14_7f4c00*) (buf.msg + 0x18) = g_7f4c00;
+				*(pos14_7f4c00*) (buf.msg + 0x18) = gm_GameTime;
 				fcn_00500bb0((pos14_7f4c00*) (buf.msg + 0x18), 0xf, 0, 0);
 				*(int*) (obj + 0xdc) = fcn_004c5980(buf.msg);
-				*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 				*(int*) (obj + 0x70) = 2;
 				return;
 			}
@@ -300,11 +300,11 @@ label_56b858:
 			return;
 		}
 	}
-	if (fcn_00500cb0((pos14_7f4c00*) &g_7f4c00, (pos14_7f4c00*) (obj + 0xcc)) >= 0) {
+	if (fcn_00500cb0((pos14_7f4c00*) &gm_GameTime, (pos14_7f4c00*) (obj + 0xcc)) >= 0) {
 		*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
 		return;
 	}
-	*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 	limit = (gm_RandomMod(5) & 0xffff) + 10;
 	fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, limit, 0);
 }

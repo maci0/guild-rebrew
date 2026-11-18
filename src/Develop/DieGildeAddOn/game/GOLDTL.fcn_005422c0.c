@@ -5,10 +5,10 @@
 
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
-extern unsigned short* g_773da8;
+extern unsigned short* gm_CityEntity;
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_664128;
 extern float g_665368;
@@ -116,7 +116,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					}
 				}
 				else if (v == 0xd || v == 0xc || v == 0xb) {
-					if (*(unsigned short*) (rec + 0x27) == g_773da8[0]) {
+					if (*(unsigned short*) (rec + 0x27) == gm_CityEntity[0]) {
 						obj = fcn_0050dc90(rec);
 						if (obj == 0) {
 							count++;
@@ -161,14 +161,14 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					obj = (unsigned char*) gm_NextEntityQueryMatch();
 				}
 			}
-			if (*(unsigned short*) (rec + 0x25) == g_773da8[0]
+			if (*(unsigned short*) (rec + 0x25) == gm_CityEntity[0]
 			    && (*(unsigned char*) (rec + 0x5a) & 3) == 0
 			    && *def != 1 && *def != 3 && *def != 6 && *def != 0xa
 			    && *def != 0xb && *def != 0xc && *def != 0xd && *def != 0xf
 			    && *def != 0x1c && *def != 0x1b && *def != 0x1a && *def != 0x19
 			    && *def != 0x18 && *def != 0x17) {
 				(msg + 0xf8)[4] = 0x1b;
-				*(int*) ((msg + 0xf8) + 8) = *(int*) (g_773da8 + 2);
+				*(int*) ((msg + 0xf8) + 8) = *(int*) (gm_CityEntity + 2);
 				*(int*) ((msg + 0xf8) + 0xc) = -1;
 				(msg + 0xf8)[0x36] = 2;
 				*(int*) ((msg + 0xf8) + 0x58) = *(int*) (rec + 1);
@@ -178,12 +178,12 @@ void __cdecl fcn_005422c0(unsigned int arg)
 			off = (arg & 0xffff) * 0x21c;
 			v = *(unsigned char*) (g_7f4ca0 + off + 2);
 			if (v == 0xd || v == 0 || *(int*) (g_7f4ca0 + off + 4) == -1) {
-				fcn_004c5f60(*(int*) (rec + 1), *(int*) (g_773da8 + 2), *(int*) (g_773da8 + 2));
+				fcn_004c5f60(*(int*) (rec + 1), *(int*) (gm_CityEntity + 2), *(int*) (gm_CityEntity + 2));
 				count++;
 				v = *def;
 				if (v != 0xd && v != 0xc && v != 0xb) {
 					msg[4] = 0x1b;
-					*(int*) (msg + 8) = *(int*) (g_773da8 + 2);
+					*(int*) (msg + 8) = *(int*) (gm_CityEntity + 2);
 					*(int*) (msg + 0xc) = -1;
 					msg[0x36] = 2;
 					*(int*) (msg + 0x58) = *(int*) (rec + 1);
@@ -196,8 +196,8 @@ void __cdecl fcn_005422c0(unsigned int arg)
 							memset(msg, 0, 0xf8);
 							msg[4] = 0x31;
 							*(int*) (msg + 0xc) = *(int*) (rec + 1);
-							*(int*) (msg + 8) = *(int*) (g_773da8 + 2);
-							*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
+							*(int*) (msg + 8) = *(int*) (gm_CityEntity + 2);
+							*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 							msg[0x36] = 1;
 							*(int*) (msg + 0x58) = *(int*) (slot + 4);
 							fcn_004c5530(msg);
@@ -321,7 +321,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 										(msg + 0x1f0)[4] = 0x33;
 										*(int*) ((msg + 0x1f0) + 8) = *(int*) (g_7f4ca0 + off + 4);
 										*(int*) ((msg + 0x1f0) + 0xc) = *(int*) (p + 1);
-										*(pos14_7f4c00*) ((msg + 0x1f0) + 0x28) = g_7f4c00;
+										*(pos14_7f4c00*) ((msg + 0x1f0) + 0x28) = gm_GameTime;
 										(msg + 0x1f0)[0x36] = 1;
 										*(int*) ((msg + 0x1f0) + 0x58) = *(int*) (tile2 + 4);
 										fcn_00500bb0((pos14_7f4c00*) ((msg + 0x1f0) + 0x28), (gm_RandomMod(6) & 0xffff) + 4, 0, 0);
@@ -333,7 +333,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 										(msg + 0xf8)[4] = 0x34;
 										*(int*) ((msg + 0xf8) + 8) = *(int*) (g_7f4ca0 + off + 4);
 										*(int*) ((msg + 0xf8) + 0xc) = *(int*) (p + 1);
-										*(pos14_7f4c00*) ((msg + 0xf8) + 0x28) = g_7f4c00;
+										*(pos14_7f4c00*) ((msg + 0xf8) + 0x28) = gm_GameTime;
 										(msg + 0xf8)[0x36] = 1;
 										*(int*) ((msg + 0xf8) + 0x58) = *(int*) (tile2 + 4);
 										fcn_00500bb0((pos14_7f4c00*) ((msg + 0xf8) + 0x28), (gm_RandomMod(6) & 0xffff) + 4, 0, 0);

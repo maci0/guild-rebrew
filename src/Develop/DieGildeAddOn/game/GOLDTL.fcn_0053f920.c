@@ -4,7 +4,7 @@
 extern int g_774714;
 extern int g_774950;
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774958;
 extern char g_774965;
@@ -44,7 +44,7 @@ void __cdecl fcn_0053f920(void)
 	fcn_00545430();
 	g_774714 = 1;
 	g_774950 = 1;
-	(*(int*)&g_7f4c00) = 2;
+	(*(int*)&gm_GameTime) = 2;
 	g_774954 = 0;
 	g_774958 = 0;
 	g_774965 = 0;

@@ -16,12 +16,12 @@ struct house {
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -81,7 +81,7 @@ void __cdecl fcn_0058e790(char* e, char* res)
 		ev[4] = (char) 0x8e;
 		*(int*) (ev + 8) = ((struct house*)g_7f4ca0)[g_774970].handle;
 		*(int*) (ev + 0xc) = *(int*) (e + 1);
-		*(int*) (ev + 0x28) = (*(int*)&g_7f4c00);
+		*(int*) (ev + 0x28) = (*(int*)&gm_GameTime);
 		*(int*) (ev + 0x2c) = (*(int*)&g_7f4c04);
 		*(int*) (ev + 0x30) = g_7f4c08;
 		*(short*) (ev + 0x34) = g_7f4c0c;
@@ -94,7 +94,7 @@ void __cdecl fcn_0058e790(char* e, char* res)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	g_100f1dc = -1;
 	d2_SetForm(h, 1);
 	if (mode == 0) {

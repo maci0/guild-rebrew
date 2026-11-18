@@ -50,7 +50,7 @@ void __cdecl fcn_00489010(char* e)
 			k = *(unsigned short*) n;
 			*(int*) (b - 4) = k;
 			if (k != 0) {
-				for (i = 0; !done && i < g_100b0a8; i++) {
+				for (i = 0; !done && i < ai_ResourceCount; i++) {
 					if (*(int*) (0x100b0c0 + i * 0x40) == *(int*) b) {
 						found = a;
 						done = 1;
@@ -66,7 +66,7 @@ void __cdecl fcn_00489010(char* e)
 				k = *(unsigned short*) n;
 				*(int*) (b - 4) = k;
 				if (k != 0) {
-					for (i = 0; !done && i < g_100b0a8; i++) {
+					for (i = 0; !done && i < ai_ResourceCount; i++) {
 						if (*(int*) (0x100b0c0 + i * 0x40) == *(int*) b) {
 							found = a;
 							done = 1;

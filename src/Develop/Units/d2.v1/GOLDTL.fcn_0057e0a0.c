@@ -1,7 +1,7 @@
-extern int g_774a14;
+extern int d2_TutorialActive;
 extern int *g_665f08;
 extern int g_7749e4;
-extern int g_6b5cbc;
+extern int d3_CameraAnimating;
 extern int d3_ActiveCameraAnimation;
 extern int g_7e2700;
 extern int g_774a18;
@@ -37,7 +37,7 @@ int __cdecl fcn_0057e0a0(void)
 {
 	void (__cdecl *cb)(int); int* cues; unsigned int deadline; int cue_ready;
 
-	if (g_774a14 == 0) {
+	if (d2_TutorialActive == 0) {
 		return -4;
 	}
 	if (g_665f08[6] == 0) {
@@ -47,7 +47,7 @@ int __cdecl fcn_0057e0a0(void)
 		return -4;
 	}
 	if (g_7749e4 == *(int *)((int)g_665f08[7] + 0x74) && g_665f08[0] != 2) {
-		if (g_6b5cbc != 0 || g_7e2700 != 0) {
+		if (d3_CameraAnimating != 0 || g_7e2700 != 0) {
 			goto ret0;
 		}
 		d2_SetOverlayAnimation(0, 0);
@@ -65,7 +65,7 @@ int __cdecl fcn_0057e0a0(void)
 		return 0;
 	}
 	fcn_00580610();
-	if (g_6b5cbc != 0) {
+	if (d3_CameraAnimating != 0) {
 		return 0;
 	}
 	if (g_7e2700 != 0) {

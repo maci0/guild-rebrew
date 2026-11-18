@@ -8,7 +8,7 @@ void __cdecl fcn_00455240(void* obj, int a2)
 {
 	char buf[0x40];
 
-	fcn_004557c0(obj, (*(unsigned char*) ((char*) obj + 0x214) & 0x20) ? 0 : g_6b8014,
+	fcn_004557c0(obj, (*(unsigned char*) ((char*) obj + 0x214) & 0x20) ? 0 : d3_ActiveCamera,
 	    1, buf);
 	fcn_004519d0(buf, a2);
 }

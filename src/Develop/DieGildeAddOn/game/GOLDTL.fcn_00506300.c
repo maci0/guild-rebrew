@@ -17,7 +17,7 @@ void __cdecl fcn_00506300(char* p)
 	char* r;
 	char* e;
 
-	save = g_6b8010;
+	save = d3_CurrentContextIndex;
 	q = *(char**) (p + 0x24);
 	if (q != 0 && (q[0x78] & 2)) {
 		*(int*) (q + 0x84) = fcn_004c5620(-1, q);

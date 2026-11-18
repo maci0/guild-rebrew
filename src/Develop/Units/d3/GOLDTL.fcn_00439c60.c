@@ -6,12 +6,12 @@ void __cdecl fcn_00438af0(unsigned char);
 
 void __cdecl fcn_00439c60(char* camera)
 {
-	if (camera == g_6b8014) {
+	if (camera == d3_ActiveCamera) {
 		return;
 	}
 	if (*(int*) (camera + 0x218) != 3) {
 		return;
 	}
-	g_6b8014 = camera;
+	d3_ActiveCamera = camera;
 	fcn_00438af0(0);
 }

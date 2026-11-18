@@ -24,7 +24,7 @@ extern void __cdecl fcn_004432d0(int, int);
 extern void __cdecl fcn_005290d0(char*);
 extern void __cdecl fcn_00573e10(char*);
 extern void __cdecl fcn_00510100(void);
-extern char *g_773da8, *g_773d78;
+extern char *gm_CityEntity, *g_773d78;
 extern int ls_SaveVersion, g_773d8c;
 /* Reload the whole world state after a new game starts.  Every master record
  * of the type table is released and reallocated, the entity list is relinked
@@ -47,8 +47,8 @@ unsigned int __cdecl fcn_00525670(void)
 	int v9;
 	unsigned char kind;
 
-	g_773da8 = (char*) gm_LookupEntityRecordById((int) g_773da8);
-	if (!g_773da8)
+	gm_CityEntity = (char*) gm_LookupEntityRecordById((int) gm_CityEntity);
+	if (!gm_CityEntity)
 		return 0;
 	g_773d78 = (char*) gm_StartFilteredEntitySearch(1, 5, 10);
 	if (ls_SaveVersion >= 0x10017) {
@@ -111,7 +111,7 @@ unsigned int __cdecl fcn_00525670(void)
 		}
 		v9++;
 	}
-	v3 = g_6b8010;
+	v3 = d3_CurrentContextIndex;
 	fcn_004432d0(0, 0);
 	for (p = (char*) 0x77e980; (int) p <= 0x7d197f; p += 0x14c) {
 		kind = *(unsigned char*) p;

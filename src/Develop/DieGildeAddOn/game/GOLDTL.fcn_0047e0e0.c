@@ -40,7 +40,7 @@ void __cdecl fcn_0047e0e0(int a1, char* pkt)
 	int want;
 	int i;
 
-	for (i = 0; i < g_100b0a8; i++) {
+	for (i = 0; i < ai_ResourceCount; i++) {
 		if ((g_100b0c0[i].flags & 0x20) == 0 && (g_100b0c0[i].flags & 0x200) == 0 && g_100b0c0[i].busy == 0 && g_100b0c0[i].stock < fcn_0050dfd0(pkt, g_100b0c0[i].id) / 4) {
 			ratio = fcn_0050bb50(g_100b0c0[i].id, g_773d75) / eval_ObjektPreis2Credits(g_100b0c0[i].id, 100);
 			if (ratio < 0.8f) {

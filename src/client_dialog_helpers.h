@@ -86,7 +86,7 @@ extern unsigned char g_773d75;
 extern char g_7f4ca0[];
 
 /* Current cursor or selection triple. Seen in row 0x00589d00. */
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 

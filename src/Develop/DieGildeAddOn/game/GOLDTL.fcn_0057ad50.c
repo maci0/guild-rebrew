@@ -1,7 +1,7 @@
 void __cdecl fcn_00546190(char*);
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 
 
@@ -23,7 +23,7 @@ void __cdecl fcn_0057ad50(char* o)
 		return;
 	}
 	p = (pos14_7f4c00*) (o + 0x52);
-	*p = g_7f4c00;
+	*p = gm_GameTime;
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac));
 	if (e == 0) {
 		fcn_004c5620(-1, o);

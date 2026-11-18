@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #include <string.h>
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern float g_662d40[3];
 
 void __cdecl fcn_00425bf0(char*, int, const char*);
@@ -24,7 +24,7 @@ char* __cdecl CreateCharacterAtDummy(char** file, char** dummy, char** name)
 	float pos[4];
 
 	if (*dummy == 0) {
-		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "CreateCharacterAtDummy(): invalid dummy");
+		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "CreateCharacterAtDummy(): invalid dummy");
 		return 0;
 	}
 	fcn_00455350(*dummy, *dummy + 0x4c, pos);
@@ -39,9 +39,9 @@ char* __cdecl CreateCharacterAtDummy(char** file, char** dummy, char** name)
 		rot[1] = fcn_00451380(g_662d40, dir);
 		fcn_00438cb0(*(void**) (ch + 0x34), rot);
 		fcn_00438b40(*(void**) (ch + 0x34), pos);
-		*(int*) (ch + 0x30) = *(int*) (g_6b7e98 + 0x104);
+		*(int*) (ch + 0x30) = *(int*) (evt_CurrentScript + 0x104);
 	} else {
-		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "CreateCharacterAtDummy(): Could not load character");
+		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "CreateCharacterAtDummy(): Could not load character");
 	}
 	return ch;
 }

@@ -13,7 +13,7 @@ typedef struct F8 {
 } F8;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern __int64 g_666018;
 
@@ -29,7 +29,7 @@ void __cdecl fcn_00562a60(char* e)
 	int found;
 
 	gm_LookupEntityRecordById(*(int*) (e + 0xb4));
-	*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	if (*(int*) (e + 0x10) == -1) {
 		t = gm_StartFilteredEntitySearch(1, 5, 0x16);
 		if (t != 0 || (t = gm_StartFilteredEntitySearch(1, 5, 0xf)) != 0) {

@@ -70,7 +70,7 @@ int __cdecl fcn_005de630(House* obj, int* arg)
 		}
 	}
 	start = gm_RandomMod(0x300);
-	step = g_664398[gm_RandomMod(0x10)];
+	step = gm_RandomSearchSteps[gm_RandomMod(0x10)];
 	n = 3;
 	do {
 		if (((House*)g_7f4ca0)[start].id != 0xffff && ((House*)g_7f4ca0)[start].b166 && &((House*)g_7f4ca0)[start] != obj &&

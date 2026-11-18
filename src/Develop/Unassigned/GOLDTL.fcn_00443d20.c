@@ -37,10 +37,10 @@ char* __cdecl fcn_00443d20(int cam, float a, float b, int flags)
 	ctx.mask = 0;
 	ctx.cam = cam;
 	if (g_6b85a0 != 0) {
-		ctx.x = (g_1042578 - g_1042570) * 0.5f - a;
-		ctx.y = (g_104257c - g_1042574) * 0.5f - b;
+		ctx.x = (d3_ViewportRight - g_1042570) * 0.5f - a;
+		ctx.y = (d3_ViewportBottom - g_1042574) * 0.5f - b;
 	} else {
-		ctx.x = g_1052bc0 - a;
+		ctx.x = d3_ViewportCenterX - a;
 		ctx.y = g_1052bc8 - b;
 	}
 	fcn_004379a0(g_67a370, 0, flags, fcn_00443b00, &ctx);

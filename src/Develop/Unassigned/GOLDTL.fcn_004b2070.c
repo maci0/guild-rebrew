@@ -34,7 +34,7 @@ void __cdecl fcn_004b2070(void)
 		}
 	}
 	for (i = 0; i < 128; i++) {
-		if (fcn_0065f2f0(((fcn_004b2070_rec*)g_149d120)[i].name, g_6808a4, 9) == 0)
-			fcn_0042d670(&((fcn_004b2070_rec*)g_149d120)[i]);
+		if (fcn_0065f2f0(((fcn_004b2070_rec*)txt_TextBanks)[i].name, g_6808a4, 9) == 0)
+			fcn_0042d670(&((fcn_004b2070_rec*)txt_TextBanks)[i]);
 	}
 }

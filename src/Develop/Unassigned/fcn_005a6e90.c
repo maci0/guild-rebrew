@@ -1,6 +1,6 @@
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 extern int g_774654;
 int __cdecl gm_WalkEntityChain(unsigned short);
@@ -51,7 +51,7 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
     esi = fcn_00470820(0, 0, 0x6aad0c);
     d2_SetForm(esi, 0);
 
-    g = g_772514;
+    g = d2_CurrentWindowId;
     *(int *)(0x10162e8 + g * 0x3cc) = 0xc;
     *(int *)(0x10162ec + g * 0x3cc) = 0x14;
     *(int *)(0x10162f0 + g * 0x3cc) = 0xc;
@@ -70,11 +70,11 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
     d2_SetForm(esi, 0);
 
     r = fcn_00472830(esi, 2, 0x100, (int)&s20, (int)&s24, (int)&s1c);
-    fcn_00533f40(0x206, 0x167, g_772514, r);
+    fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, r);
     fcn_00471b60(esi);
 
     g_100f1dc = -1;
-    g_67d370 = -1;
+    d2_CurrentElementId = -1;
 
     while (1)
     {
@@ -100,7 +100,7 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
 
         d2_SetForm(esi, 2);
         fcn_00472e50();
-        fcn_0046f2c0(g_772514, 1);
+        fcn_0046f2c0(d2_CurrentWindowId, 1);
 
         edi = s10;
         if (edi == 1)
@@ -119,7 +119,7 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
         edi = s10;
         if (g_100f1dc != -1)
         {
-            int eax = g_67d370;
+            int eax = d2_CurrentElementId;
             if (eax == q1)
             {
                 if (edi != 1)

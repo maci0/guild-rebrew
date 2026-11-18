@@ -13,14 +13,14 @@ extern int g_774a44;
 extern int g_774a54;
 extern int g_774a48;
 extern int g_6772c4;
-extern int g_6772bc;
-extern int g_6772c0;
+extern int d2_MouseRightBoundary;
+extern int d2_MouseBottomBoundary;
 extern int g_6b5c80;
-extern int g_6b5c84;
+extern int d2_MouseTopBoundary;
 extern int g_778d24;
 extern int g_778d20;
-extern int g_100f1e8;
-extern int g_100f1ec;
+extern int d2_MouseX;
+extern int d2_MouseY;
 
 void __cdecl fcn_004125c0(int x, int y);
 
@@ -48,15 +48,15 @@ int __cdecl fcn_005b0f00(char* w)
 			bx = *(int*) (w + 0x268);
 			g_774a5c = bx;
 			bp = *(int*) (w + 0x258);
-			g_774a50 = g_6772bc;
-			g_774a44 = g_6772c0;
+			g_774a50 = d2_MouseRightBoundary;
+			g_774a44 = d2_MouseBottomBoundary;
 			g_774a54 = g_6b5c80;
-			g_774a48 = g_6b5c84;
+			g_774a48 = d2_MouseTopBoundary;
 			g_6b5c80 = x - bx;
 			g_774a60 = bp;
-			g_6772bc = g_778d24 - bx - 0x200 + x;
-			g_6b5c84 = y - bp;
-			g_6772c0 = g_778d20 - bp - 0x168 + y;
+			d2_MouseRightBoundary = g_778d24 - bx - 0x200 + x;
+			d2_MouseTopBoundary = y - bp;
+			d2_MouseBottomBoundary = g_778d20 - bp - 0x168 + y;
 		} else {
 			x = g_774a6c;
 			y = g_774a70;
@@ -73,14 +73,14 @@ int __cdecl fcn_005b0f00(char* w)
 		*(int*) (w + 0x268) = bx + px;
 		*(int*) (w + 0x258) = g_774a60 + py;
 	} else if (g_774a74) {
-		g_6772c0 = g_774a44;
+		d2_MouseBottomBoundary = g_774a44;
 		g_6b5c80 = g_774a54;
-		g_6772bc = g_774a50;
+		d2_MouseRightBoundary = g_774a50;
 		g_774a6c = 0;
 		g_774a70 = 0;
-		g_6b5c84 = g_774a48;
+		d2_MouseTopBoundary = g_774a48;
 		g_6772c4 = 1;
-		fcn_004125c0(g_100f1e8, g_100f1ec);
+		fcn_004125c0(d2_MouseX, d2_MouseY);
 		g_774a74 = 0;
 	}
 	return r;

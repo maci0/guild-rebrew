@@ -27,7 +27,7 @@ struct house {
 };
 
 extern char g_7f4ca0[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_00546be0(struct unit* u)
 {
@@ -69,5 +69,5 @@ void __cdecl fcn_00546be0(struct unit* u)
 		}
 	}
 	u->state = -2;
-	u->dest = g_7f4c00;
+	u->dest = gm_GameTime;
 }

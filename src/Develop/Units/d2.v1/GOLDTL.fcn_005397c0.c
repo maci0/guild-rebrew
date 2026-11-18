@@ -11,7 +11,7 @@ extern int g_14ce8e0;
 extern char g_14cf950;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -46,7 +46,7 @@ int __cdecl fcn_005397c0(void)
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;
 		}
-		if ((g_100f1dc != -1 || g_14cf950 == 0x1c) && (g_67d370 == ok || g_14cf950 == 0x1c)) {
+		if ((g_100f1dc != -1 || g_14cf950 == 0x1c) && (d2_CurrentElementId == ok || g_14cf950 == 0x1c)) {
 			result = 1;
 			strcpy(buf, fcn_00471f80(e));
 			strcpy(g_7e2000, buf);

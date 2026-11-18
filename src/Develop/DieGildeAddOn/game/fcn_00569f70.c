@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
@@ -27,6 +27,6 @@ void __cdecl fcn_00569f70(char* ent)
 		}
 	}
 	q = (pos14_7f4c00*) (ent + 0x52);
-	*q = g_7f4c00;
+	*q = gm_GameTime;
 	fcn_00500bb0(q, 0, 0, 1);
 }

@@ -12,7 +12,7 @@ typedef Obj_1038140 Obj;
 
 extern Obj_1038140 g_1038140[];
 extern int g_772534;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern char s_67d7d0[];
 
@@ -34,7 +34,7 @@ int __cdecl d2_SetForm(int k, int i)
 		ReportClientMessage(s_67d7d0);
 		return 0;
 	}
-	g_772514 = g_1038140[k].wins[i];
-	(*(D2_WIN**)&g_77255c) = &((D2_WIN*)g_1015f40)[g_772514];
+	d2_CurrentWindowId = g_1038140[k].wins[i];
+	(*(D2_WIN**)&g_77255c) = &((D2_WIN*)g_1015f40)[d2_CurrentWindowId];
 	return 1;
 }

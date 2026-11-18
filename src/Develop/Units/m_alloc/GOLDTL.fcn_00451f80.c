@@ -46,7 +46,7 @@ typedef struct Node_451f80 {
 extern Dev_451f80* g_6b5de0;
 extern int g_6b8064;
 extern Node_451f80* g_6b8068;
-extern int g_1052bac;
+extern int d3_RenderedVertexCount;
 extern int g_1042a08;
 extern float g_1040c80[16];
 extern float g_1040cc0[16];
@@ -79,12 +79,12 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 		prev = 0;
 		set = 0;
 		if (!(e[0x216] & 0x20)) {
-			fcn_00438100(e, g_6b8014, 0);
+			fcn_00438100(e, d3_ActiveCamera, 0);
 		}
 		fcn_005eb970(*(char**) (e + 0x1ec) + 0x15fc, *(char**) (e + 0x1ec) + 8, parent);
-		fcn_005ec410(&t, -*(float*) (g_6b8014 + 0x4c), -*(float*) (g_6b8014 + 0x50), -*(float*) (g_6b8014 + 0x54));
+		fcn_005ec410(&t, -*(float*) (d3_ActiveCamera + 0x4c), -*(float*) (d3_ActiveCamera + 0x50), -*(float*) (d3_ActiveCamera + 0x54));
 		fcn_005eb970(*(char**) (e + 0x1ec) + 0x15fc, *(char**) (e + 0x1ec) + 0x15fc, &t);
-		fcn_005eb970(*(char**) (e + 0x1ec) + 0x15fc, *(char**) (e + 0x1ec) + 0x15fc, g_6b8014 + 0x18c);
+		fcn_005eb970(*(char**) (e + 0x1ec) + 0x15fc, *(char**) (e + 0x1ec) + 0x15fc, d3_ActiveCamera + 0x18c);
 		if (!(fcn_00438270(e, o, *(char**) (e + 0x1ec) + 0x15fc) & 0x40)) {
 			g = *(float*) (*(char**) (e + 0x1ec) + 0x15f8);
 			f += *(float*) (*(char**) (o + 0x318) + 0x1dc);
@@ -125,7 +125,7 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 			}
 		}
 	}
-	g_1052bac += *(int*) (o + 0x310);
+	d3_RenderedVertexCount += *(int*) (o + 0x310);
 	g_1042a08 += *(int*) (o + 0x314);
 	return 1;
 }

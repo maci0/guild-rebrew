@@ -8,11 +8,11 @@ int __cdecl fcn_00402c90(int a1, int a2)
 	void* e;
 
 	count = 0;
-	p = g_14d0020;
+	p = ch_CharacterSlots;
 	do {
 		e = *p;
 		if (e != 0 && *(int*) ((char*) e + 0x124) != 0) {
-			if (a1 == -1 || a1 == g_6b8010) {
+			if (a1 == -1 || a1 == d3_CurrentContextIndex) {
 				if (a2 != 0 ||
 				    *(int*) (*(int*) ((char*) e + 0x34) + 0x218) != 1 ||
 				    *(int*) ((char*) e + 0x128) != 0) {

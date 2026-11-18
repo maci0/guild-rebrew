@@ -26,13 +26,13 @@ int __cdecl fcn_005c86b0(void)
 	h = fcn_00470820(0, 0, (char*) 0x6ac834);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0xb2);
 	d2_SetForm(h, 2);
 	g_775338 = fcn_005c9450(p, 0x80, (int*) 0x778900);
 	d2_SetForm(h, 0);
-	fcn_00533f40(0x206, 0x167, g_772514,
+	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId,
 				 fcn_00472830(h, 2), 0x40, &c, &b, &a);
 	return h;
 }

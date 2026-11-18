@@ -20,7 +20,7 @@ typedef struct Race {
 extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -81,7 +81,7 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 	msg[4] = 0x12;
 	*(int*) (msg + 8) = ((Ent*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].handle;
 	*(int*) (msg + 0xc) = *(int*) (h + 1);
-	*(int*) (msg + 0x28) = (*(int*)&g_7f4c00);
+	*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
 	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
 	*(int*) (msg + 0x30) = g_7f4c08;
 	*(short*) (msg + 0x34) = g_7f4c0c;

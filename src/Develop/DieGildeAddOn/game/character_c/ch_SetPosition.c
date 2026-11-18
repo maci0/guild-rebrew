@@ -27,7 +27,7 @@ void __cdecl ch_RunAnimationScript();
 char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 
-extern void* g_14d0020[];
+extern void* ch_CharacterSlots[];
 #include <math.h>
 
 char* __cdecl fcn_00402610(char*);

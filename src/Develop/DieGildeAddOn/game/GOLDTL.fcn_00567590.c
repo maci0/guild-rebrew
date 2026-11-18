@@ -2,7 +2,7 @@
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -61,7 +61,7 @@ void __cdecl fcn_00567590(char* a0)
 
 	v18 = 0;
 	found = 0;
-	hour = fcn_00500e20((int*) &g_7f4c00);
+	hour = fcn_00500e20((int*) &gm_GameTime);
 	switch (*(int*) (a0 + 0x70)) {
 	case 0:
 		idx = 0;
@@ -119,7 +119,7 @@ next0:
 			idx += 1;
 		}
 		if (found != 0) {
-			*(int*) (a0 + 0x52) = *(int*) &g_7f4c00;
+			*(int*) (a0 + 0x52) = *(int*) &gm_GameTime;
 			*(int*) (a0 + 0x56) = g_7f4c04;
 			*(int*) (a0 + 0x5a) = g_7f4c08;
 			*(unsigned short*) (a0 + 0x5e) = g_7f4c0c;
@@ -142,7 +142,7 @@ next0:
 			}
 			p += 0x21c;
 		}
-		*(int*) (a0 + 0x52) = *(int*) &g_7f4c00;
+		*(int*) (a0 + 0x52) = *(int*) &gm_GameTime;
 		*(int*) (a0 + 0x56) = g_7f4c04;
 		*(int*) (a0 + 0x5a) = g_7f4c08;
 		*(unsigned short*) (a0 + 0x5e) = g_7f4c0c;
@@ -155,7 +155,7 @@ next0:
 			fcn_00546190(a0);
 			return;
 		}
-		if (*(int*) &g_7f4c00 != *(int*) (a0 + 0x44)) {
+		if (*(int*) &gm_GameTime != *(int*) (a0 + 0x44)) {
 			fcn_00546190(a0);
 			return;
 		}
@@ -253,7 +253,7 @@ after1:
 			idx += 1;
 		}
 		if (moved != 0) {
-			*(int*) (a0 + 0x52) = *(int*) &g_7f4c00;
+			*(int*) (a0 + 0x52) = *(int*) &gm_GameTime;
 			*(int*) (a0 + 0x56) = g_7f4c04;
 			*(int*) (a0 + 0x5a) = g_7f4c08;
 			*(unsigned short*) (a0 + 0x5e) = g_7f4c0c;

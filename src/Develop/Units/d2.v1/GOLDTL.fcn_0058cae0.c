@@ -1,11 +1,11 @@
 
 
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern char g_6a96f4[];
 extern char g_6a4078[];
 
@@ -39,7 +39,7 @@ int __cdecl fcn_0058cae0(char* p, int a1, int a2)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(d);
 	d2_SetForm(d, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(d, 1);
 	io_AppendText(0x4113, 0x4112);
 	fcn_0058c4f0(p, d, 2, ids, &sel);
@@ -52,7 +52,7 @@ int __cdecl fcn_0058cae0(char* p, int a1, int a2)
 			g_774654 = 1;
 		}
 		else if (g_100f1dc != -1) {
-			if (g_67d370 == back) {
+			if (d2_CurrentElementId == back) {
 				fcn_00471af0(d, 0);
 				if (fcn_0058c890(p, a1, a2, sel) == 1) {
 					res = 1;
@@ -62,7 +62,7 @@ int __cdecl fcn_0058cae0(char* p, int a1, int a2)
 			}
 			else {
 				for (i = 0; i < 4; i++) {
-					if (g_67d370 == ids[i] && i != sel) {
+					if (d2_CurrentElementId == ids[i] && i != sel) {
 						goto found;
 					}
 				}

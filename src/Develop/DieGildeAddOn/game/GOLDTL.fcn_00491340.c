@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 
 int __cdecl fcn_004f4830(int idx, void* dst);
@@ -21,7 +21,7 @@ int __cdecl fcn_00491340(char* a1, char* a2, int* out)
 	int t;
 	int lvl;
 
-	if ((*(int*)&g_7f4c00) < 4) {
+	if ((*(int*)&gm_GameTime) < 4) {
 		return 0;
 	}
 	fcn_004f4830(0xf, info);

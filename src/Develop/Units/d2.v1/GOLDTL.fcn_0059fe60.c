@@ -12,10 +12,10 @@ typedef struct {
 } Slot59fe;
 
 extern Slot59fe g_7f4ca0[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_666018;
 extern int g_66601c;
 
@@ -70,7 +70,7 @@ void __cdecl fcn_0059fe60(char *a0)
 	fcn_005338a0();
 	dlg = fcn_00470820(0, 0, "locations\\wohnsitz\\geliebte");
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	fcn_00471b60(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 2);
@@ -114,7 +114,7 @@ void __cdecl fcn_0059fe60(char *a0)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == item) {
+			if (d2_CurrentElementId == item) {
 				memset(box, 0, sizeof(box));
 				box[4] = 6;
 				box[2] = g_666018;
@@ -142,7 +142,7 @@ void __cdecl fcn_0059fe60(char *a0)
 				}
 			} else {
 				for (i = 0; i < 4; i++) {
-					if (g_67d370 == buttons[i]) {
+					if (d2_CurrentElementId == buttons[i]) {
 						ent = gm_LookupEntityRecordById(ids[i]);
 						act = fcn_005463a0(1, 1, acts[i]);
 						fcn_00471af0(dlg, 0);

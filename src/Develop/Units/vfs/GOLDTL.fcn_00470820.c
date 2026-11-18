@@ -4,7 +4,7 @@ extern char g_6b5c60;
 extern int g_772560;
 extern int g_1038580;
 extern int g_772528;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_772534;
 extern float g_6628a8;
 extern int g_67d3a0;
@@ -15,7 +15,7 @@ extern char s_67d268[];
 extern char s_67d774[];
 extern char s_67d474[];
 extern char s_67d798[];
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, int root);
 int __cdecl vfs_ReadData(char* buf, int size, int count, void* stream);
@@ -172,8 +172,8 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 					*v32 = v11;
 					if ((char) v36[0x1f])
 						d2_SetBackgroundTexture((char*) &v36[0x1f],
-							g_772514);
-					v11 = g_772514 * 0x3cc;
+							d2_CurrentWindowId);
+					v11 = d2_CurrentWindowId * 0x3cc;
 					if ((*(unsigned char*) (v11 + 0x1015f54) & 1)
 						&& *(float*) ((char*) v36 + 0xbc)
 						== g_6628a8)

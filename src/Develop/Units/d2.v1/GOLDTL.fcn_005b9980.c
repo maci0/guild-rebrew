@@ -1,10 +1,10 @@
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 extern int __cdecl fcn_0050c490(int a0, int a1);
 extern int __cdecl io_FormatTextBuffer(char *a0, char *a1, ...);
@@ -61,7 +61,7 @@ void __cdecl fcn_005b9980(int a0)
     v14[1] = fcn_00472250(h, 1, 1);
     v14[2] = fcn_00472250(h, 1, 2);
     d2_SetForm(h, 0);
-    fcn_00533dc0(g_772514, 0x70b, 0x741);
+    fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x741);
     d2_SetForm(h, 3);
     v5 = fcn_00472250(h, 3, io_AppendText(0xdb));
     v1 = d2_CreateRadioGroup(3, v14[0], v14[1], v14[2]);
@@ -73,13 +73,13 @@ void __cdecl fcn_005b9980(int a0)
         {
             for (i = 0; i < 3; i++)
             {
-                if (g_67d370 == v14[i])
+                if (d2_CurrentElementId == v14[i])
                     v17 = i;
             }
         }
         else if (g_100f1dc == 2)
         {
-            if (g_67d370 == v5)
+            if (d2_CurrentElementId == v5)
             {
                 v7 = (int) eval_ObjektPreis2Credits(v17 + 0x134, 100);
                 if (fcn_00526010((char *)(g_774970 * 0x21c + 0x7f4ca0), v7,

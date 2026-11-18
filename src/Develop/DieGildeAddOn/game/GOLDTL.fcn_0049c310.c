@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern unsigned char g_773d75;
 
@@ -30,7 +30,7 @@ int __cdecl ai_StartAblassKaufen(int unused, char* e, int busy, char* out, char*
 	char* t;
 	float f1;
 
-	if (busy == 0 && (*(unsigned int*) (e + 4) & 3) == (unsigned int)((*(int*)&g_7f4c00) % 4) &&
+	if (busy == 0 && (*(unsigned int*) (e + 4) & 3) == (unsigned int)((*(int*)&gm_GameTime) % 4) &&
 	    (*(unsigned int*) (e + 4) & 7) == (unsigned int)(((*(int*)&g_7f4c04) & 0xffff) % 8)) {
 		v1 = fcn_004f5dd0(*(int*) (e + 4));
 		v2 = fcn_004f39b0(*(int*) (e + 4));

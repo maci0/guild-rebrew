@@ -2,7 +2,7 @@
 extern char* g_1015ea0;
 extern int g_6a4768;
 extern int g_77e8a0;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern s_77e8c0 g_77e8c0[16];
 
 int __cdecl fcn_005455b0(void);
@@ -44,7 +44,7 @@ allocate_slot:
 	d2_SetForm(g_77e8a0, 0);
 	*(int*) (e + 0x74) = (int) &g_77e8c0[i];
 	*(int*) ((char*) *(int*) (e + 0x74)) = (int) e;
-	*(int*) ((char*) *(int*) (e + 0x74) + 4) = fcn_0046f740(i << 5, 0, a5, g_772514);
+	*(int*) ((char*) *(int*) (e + 0x74) + 4) = fcn_0046f740(i << 5, 0, a5, d2_CurrentWindowId);
 	v = *(int*) ((char*) *(int*) (e + 0x74) + 4);
 	*(int*) (g_1015ea0 + v * 0x2f4 + 0x58) = 1;
 	*(int*) ((char*) *(int*) (e + 0x74) + 8) = fcn_00470820(a2, a3, a4);

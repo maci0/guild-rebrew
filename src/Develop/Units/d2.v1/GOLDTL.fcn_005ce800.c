@@ -20,7 +20,7 @@ typedef struct fcn_005ce800_Source {
 
 extern char* g_entity_type_table; /* 0x868050, BSS pointer */
 extern unsigned char g_773d75;    /* 0x773d75, BSS */
-extern int g_772514;              /* 0x772514, BSS */
+extern int d2_CurrentWindowId;              /* 0x772514, BSS */
 extern float g_662cf8;            /* 0x662cf8, .rdata, 100.0f */
 
 int __cdecl d2_SetForm(int k, int i);
@@ -88,7 +88,7 @@ void __cdecl fcn_005ce800(int id, int* out, int* value, int* slots,
     if (*entry != 5 && source != 0) {
         io_AppendText(0x42c2);
         element = fcn_004677e0(100, 300, 200, 50, 150, 123, 0x1002,
-                               g_772514);
+                               d2_CurrentWindowId);
         *handle = element;
         f = source->value38;
         d2_SetElementValue(element, 50, 150, (int) (f * g_662cf8));

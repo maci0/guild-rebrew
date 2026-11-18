@@ -11,7 +11,7 @@ extern Slot5c06 g_7f4ca0[];
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern char g_6ac494[];
 
 double __cdecl gm_RandomFloat01(void);
@@ -91,7 +91,7 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == h1) {
+			if (d2_CurrentElementId == h1) {
 				fcn_004c6ae0(me->f4, -2);
 				f = fcn_00507e70(me, a0, 4);
 				if (gm_RandomFloat01() + f >= 1.0f) {
@@ -109,7 +109,7 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 				fcn_00526120(text, 0);
 				g_774654 = 1;
 				result = 1;
-			} else if (g_67d370 == h2) {
+			} else if (d2_CurrentElementId == h2) {
 				g_774654 = 1;
 			}
 		}

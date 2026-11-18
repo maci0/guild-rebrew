@@ -1,5 +1,5 @@
 extern int g_774654;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include <string.h>
 
@@ -44,11 +44,11 @@ typedef struct sel005ac2d0 {
 /* SIZE 0x38 */
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char* g_773da8;
-extern int g_772514;
+extern char* gm_CityEntity;
+extern int d2_CurrentWindowId;
 extern char* g_772500;
 extern char* g_77255c;
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 char g_6811b0[] = "$C";
@@ -145,10 +145,10 @@ void __cdecl fcn_005ac2d0(char* a0)
 	}
 	unit = fcn_005463a0(2, 0, 0x2b, 3, *(int*) (a0 + 1));
 	if (unit == 0) {
-		pkt.pos = g_7f4c00;
+		pkt.pos = gm_GameTime;
 		pkt.b4 = 0x2b;
 		pkt.b36 = 2;
-		pkt.f8 = *(int*) (g_773da8 + 4);
+		pkt.f8 = *(int*) (gm_CityEntity + 4);
 		pkt.fc = *(int*) (a0 + 1);
 		pkt.b5c = 0;
 		rc = fcn_004c5530(&pkt);
@@ -175,7 +175,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	flag = 1;
 	g_100f1dc = -1;
 	prev = g_6b7fac;
@@ -217,11 +217,11 @@ void __cdecl fcn_005ac2d0(char* a0)
 			btnCancel = fcn_00472250(dlg, 2, i + 1);
 		} else if (state == 1) {
 			d2_SetForm(dlg, 1);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			io_AppendText((int) g_6811b0);
 			io_AppendText(0x19a0, unit + 0x52);
 			d2_SetForm(dlg, 2);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			io_AppendText((int) g_6811b0);
 			i = io_AppendText(0x19a1);
 			btnState1 = fcn_00472250(dlg, 2, i);
@@ -233,7 +233,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 			}
 		} else if (state == 2) {
 			d2_SetForm(dlg, 1);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			io_AppendText((int) g_6811b0);
 			io_AppendText(0x198e, unit + 0x52, *(char*) (obj + 0x1c) + 0x1990,
 			    *(char*) (obj + 0x1d) + 0x1998, *(unsigned short*) info);
@@ -242,9 +242,9 @@ void __cdecl fcn_005ac2d0(char* a0)
 			sel.y = 0xc3;
 			sel.f30 = 1;
 			fcn_005ca560(&sel);
-			fcn_005ca740(sel.x, sel.y, g_772514, 0x54, &sel, 1);
+			fcn_005ca740(sel.x, sel.y, d2_CurrentWindowId, 0x54, &sel, 1);
 			d2_SetForm(dlg, 2);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			io_AppendText((int) g_6811b0);
 			i = io_AppendText(0x198f);
 			btnState2 = fcn_00472250(dlg, 2, i);
@@ -260,7 +260,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 		if (g_14ce8e0 != 0 || state == 3) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == btnState0) {
+			if (d2_CurrentElementId == btnState0) {
 				if (fcn_00525f60(g_7f4ca0 + g_774970 * 0x21c, 1) != 0) {
 					v12 = 1;
 					fcn_005100f0(*(int*) (g_7f4ca4 + g_774970 * 0x21c), -1);
@@ -275,7 +275,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 						}
 					}
 				}
-			} else if (g_67d370 == btnState1) {
+			} else if (d2_CurrentElementId == btnState1) {
 				memset(pkt2, 0, 0x50);
 				*(int*) (pkt2 + 4) = 0x400;
 				*(int*) (pkt2 + 0x10) = 6;
@@ -304,7 +304,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 						}
 					}
 				}
-			} else if (g_67d370 == btnState2) {
+			} else if (d2_CurrentElementId == btnState2) {
 				int id;
 
 				v12 = -1;
@@ -326,7 +326,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 						fcn_005373e0((void*) 0, 0x677c7);
 					}
 				}
-			} else if (g_67d370 == btnCancel) {
+			} else if (d2_CurrentElementId == btnCancel) {
 				g_774654 = 1;
 			}
 		}

@@ -40,7 +40,7 @@ extern char g_7f4ca4[];
 extern int g_77494c;
 extern unsigned char g_7747b0;
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_00500bb0(Time *, int, int, int);
 int __cdecl fcn_00500cb0(Time *, Time *);
@@ -55,54 +55,54 @@ int __cdecl cut_UpdateCutscenes(void)
 	int r;
 
 	for (i = 0; i < 96; i++) {
-		if (((Ent*)g_9a9660)[i].active != 0 && (((Ent*)g_9a9660)[i].flags & 5) == 0) {
-			t = ((Ent*)g_9a9660)[i].t;
+		if (((Ent*)cut_Cutscenes)[i].active != 0 && (((Ent*)cut_Cutscenes)[i].flags & 5) == 0) {
+			t = ((Ent*)cut_Cutscenes)[i].t;
 			fcn_00500bb0(&t, 0, -60, 0);
-			if (((Ent*)g_9a9660)[i].key == -1 && ((g_77494c & 8) != 0 || ((*(int*)&g_7747b0) & 8) != 0)) {
-				((Ent*)g_9a9660)[i].key = *(int *) (g_7f4ca4 + g_774970 * 0x21c);
+			if (((Ent*)cut_Cutscenes)[i].key == -1 && ((g_77494c & 8) != 0 || ((*(int*)&g_7747b0) & 8) != 0)) {
+				((Ent*)cut_Cutscenes)[i].key = *(int *) (g_7f4ca4 + g_774970 * 0x21c);
 			}
-			if (*(int *) (g_7f4ca4 + g_774970 * 0x21c) == ((Ent*)g_9a9660)[i].key && ((Ent*)g_9a9660)[i].busy == 0 &&
-			    fcn_00500cb0(&(*(Time*)&g_7f4c00), &t) > 0) {
-				r = cut_CutsceneReady((int*) &((Ent*)g_9a9660)[i]);
+			if (*(int *) (g_7f4ca4 + g_774970 * 0x21c) == ((Ent*)cut_Cutscenes)[i].key && ((Ent*)cut_Cutscenes)[i].busy == 0 &&
+			    fcn_00500cb0(&(*(Time*)&gm_GameTime), &t) > 0) {
+				r = cut_CutsceneReady((int*) &((Ent*)cut_Cutscenes)[i]);
 				if (r == -1) {
-					fcn_00500bb0(&((Ent*)g_9a9660)[i].t, 0, 5, 0);
-					if (((Ent*)g_9a9660)[i].t.hour >= 22) {
-						fcn_00500bb0(&((Ent*)g_9a9660)[i].t, 9, 0, 0);
+					fcn_00500bb0(&((Ent*)cut_Cutscenes)[i].t, 0, 5, 0);
+					if (((Ent*)cut_Cutscenes)[i].t.hour >= 22) {
+						fcn_00500bb0(&((Ent*)cut_Cutscenes)[i].t, 9, 0, 0);
 					}
 					continue;
 				}
 				if (r == 0) {
-					fcn_00500bb0(&((Ent*)g_9a9660)[i].t, 0, 30, 0);
-					if (((Ent*)g_9a9660)[i].t.hour >= 22) {
-						fcn_00500bb0(&((Ent*)g_9a9660)[i].t, 9, 0, 0);
+					fcn_00500bb0(&((Ent*)cut_Cutscenes)[i].t, 0, 30, 0);
+					if (((Ent*)cut_Cutscenes)[i].t.hour >= 22) {
+						fcn_00500bb0(&((Ent*)cut_Cutscenes)[i].t, 9, 0, 0);
 					}
 					continue;
 				}
-				if (((Kind*) (g_9b0840 + 0x10))[((Ent*)g_9a9660)[i].type].fn != 0 && ((Kind*) (g_9b0840 + 0x10))[((Ent*)g_9a9660)[i].type].fn((char*) &((Ent*)g_9a9660)[i]) == 0) {
-					fcn_004c6a70(((Ent*)g_9a9660)[i].id);
+				if (((Kind*) (g_9b0840 + 0x10))[((Ent*)cut_Cutscenes)[i].type].fn != 0 && ((Kind*) (g_9b0840 + 0x10))[((Ent*)cut_Cutscenes)[i].type].fn((char*) &((Ent*)cut_Cutscenes)[i]) == 0) {
+					fcn_004c6a70(((Ent*)cut_Cutscenes)[i].id);
 					continue;
 				}
 			}
-			if (((Kind*) (g_9b0840 + 0x10))[((Ent*)g_9a9660)[i].type].fn == 0 && fcn_00500cb0(&(*(Time*)&g_7f4c00), &((Ent*)g_9a9660)[i].t) > 0) {
-				((Ent*)g_9a9660)[i].done = 1;
+			if (((Kind*) (g_9b0840 + 0x10))[((Ent*)cut_Cutscenes)[i].type].fn == 0 && fcn_00500cb0(&(*(Time*)&gm_GameTime), &((Ent*)cut_Cutscenes)[i].t) > 0) {
+				((Ent*)cut_Cutscenes)[i].done = 1;
 			}
-			if (fcn_00500cb0(&(*(Time*)&g_7f4c00), &((Ent*)g_9a9660)[i].t) > 0 && ((Ent*)g_9a9660)[i].done == 0) {
-				if (cut_IsParticipant(*(int *) (g_7f4ca4 + g_774970 * 0x21c), (unsigned char*) &((Ent*)g_9a9660)[i]) != 0 &&
-				    (((Ent*)g_9a9660)[i].flags & 0x80) != 0) {
-					if (*(int *) (g_7f4ca4 + g_774970 * 0x21c + 0x208) == ((Ent*)g_9a9660)[i].id) {
-						((Ent*)g_9a9660)[i].done = 1;
+			if (fcn_00500cb0(&(*(Time*)&gm_GameTime), &((Ent*)cut_Cutscenes)[i].t) > 0 && ((Ent*)cut_Cutscenes)[i].done == 0) {
+				if (cut_IsParticipant(*(int *) (g_7f4ca4 + g_774970 * 0x21c), (unsigned char*) &((Ent*)cut_Cutscenes)[i]) != 0 &&
+				    (((Ent*)cut_Cutscenes)[i].flags & 0x80) != 0) {
+					if (*(int *) (g_7f4ca4 + g_774970 * 0x21c + 0x208) == ((Ent*)cut_Cutscenes)[i].id) {
+						((Ent*)cut_Cutscenes)[i].done = 1;
 					}
-				} else if (((Ent*)g_9a9660)[i].key == *(int *) (g_7f4ca4 + g_774970 * 0x21c) &&
-					   (((Ent*)g_9a9660)[i].flags & 2) != 0) {
-					((Ent*)g_9a9660)[i].done = 1;
+				} else if (((Ent*)cut_Cutscenes)[i].key == *(int *) (g_7f4ca4 + g_774970 * 0x21c) &&
+					   (((Ent*)cut_Cutscenes)[i].flags & 2) != 0) {
+					((Ent*)cut_Cutscenes)[i].done = 1;
 				} else {
-					cut_FreeCutscene(((Ent*)g_9a9660)[i].id);
+					cut_FreeCutscene(((Ent*)cut_Cutscenes)[i].id);
 				}
 			}
-			if (fcn_00500cb0(&(*(Time*)&g_7f4c00), &t) > 0 && ((Ent*)g_9a9660)[i].done != 0) {
+			if (fcn_00500cb0(&(*(Time*)&gm_GameTime), &t) > 0 && ((Ent*)cut_Cutscenes)[i].done != 0) {
 				g_7e2700 = 0;
-				fcn_004e5a00((int*) &((Ent*)g_9a9660)[i]);
-				cut_FreeCutscene(((Ent*)g_9a9660)[i].id);
+				fcn_004e5a00((int*) &((Ent*)cut_Cutscenes)[i]);
+				cut_FreeCutscene(((Ent*)cut_Cutscenes)[i].id);
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 extern unsigned char g_773d75;
-extern int g_6b8010;
-extern int g_7f4c00;
+extern int d3_CurrentContextIndex;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -122,7 +122,7 @@ void __cdecl fcn_00561380(void *a0)
 			}
 			if (*(int *)(*(int *)(r + 0x184) + 0x128) == 0)
 				goto label_561b4d;
-			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;
+			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&gm_GameTime;
 			fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
 			*(int *)(p + 0x70) = 2;
 			return;
@@ -147,7 +147,7 @@ void __cdecl fcn_00561380(void *a0)
 					*(int *)(p + 0xac));
 				*(int *)(q + 0x7a) = *(int *)(*(unsigned char **)(pos + 3) + 4);
 				*(int *)(q + 0x1e) = 7;
-				*(MSGCOLOR *)q = *(MSGCOLOR *)&g_7f4c00;
+				*(MSGCOLOR *)q = *(MSGCOLOR *)&gm_GameTime;
 				return;
 			}
 			fcn_004c5ed0(*(int *)(p + 0xc4), g_68bef4, 1);
@@ -190,7 +190,7 @@ void __cdecl fcn_00561380(void *a0)
 				return;
 			}
 			fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
-			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;
+			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&gm_GameTime;
 			fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
 			*(int *)(p + 0x70) = 6;
 			return;
@@ -205,7 +205,7 @@ void __cdecl fcn_00561380(void *a0)
 			unsigned char *v22;
 
 			q = (unsigned char *)(p + 0x52);
-			if (fcn_00500cb0(q, &g_7f4c00) >= 0)
+			if (fcn_00500cb0(q, &gm_GameTime) >= 0)
 				return;
 			*(unsigned char *)(p + 0xc2) = 0;
 			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
@@ -242,7 +242,7 @@ void __cdecl fcn_00561380(void *a0)
 				v22 = v22 + 0x87 * 4;
 			} while ((int)v22 < (int)0x85a0a4);
 			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
-			*(MSGCOLOR *)q = *(MSGCOLOR *)&g_7f4c00;
+			*(MSGCOLOR *)q = *(MSGCOLOR *)&gm_GameTime;
 			fcn_00500bb0(q, 0, 10, 0);
 			return;
 			}
@@ -302,11 +302,11 @@ void __cdecl fcn_00561380(void *a0)
 			pos[6] = 38.0f;
 			*(int *)(pos + 7) = 0;
 			v24 = 1.0f;
-			v10 = g_6b8010;
+			v10 = d3_CurrentContextIndex;
 			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
 			if (r == 0)
 				goto label_561d51;
-			if (*(unsigned char *)(p + 0xc2) == 0 && g_6b8010 == 0) {
+			if (*(unsigned char *)(p + 0xc2) == 0 && d3_CurrentContextIndex == 0) {
 				n = fcn_00422460(0, g_677640);
 				if (n != 0)
 					fcn_004193f0(n, *(int *)(r + 0x61), 0x6b, 0x463ea000);
@@ -327,7 +327,7 @@ void __cdecl fcn_00561380(void *a0)
 				*(unsigned char *)(msg + 4) = 0x4f;
 				*(int *)(msg + 8) = *(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4);
 				*(int *)(msg + 0xc) = -1;
-				*(int *)(msg + 0x28) = g_7f4c00;
+				*(int *)(msg + 0x28) = gm_GameTime;
 				*(int *)(msg + 0x2c) = g_7f4c04;
 				*(int *)(msg + 0x30) = g_7f4c08;
 				*(unsigned short *)(msg + 0x34) = g_7f4c0c;
@@ -355,7 +355,7 @@ void __cdecl fcn_00561380(void *a0)
 			fcn_00417d00(v10, pos, (int)(v24 * g_662c98), v24 * g_665ec0, v24 * g_662cf8,
 				20.0f, 60.0f, 0x50);
 		label_562049:
-			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;
+			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&gm_GameTime;
 			fcn_00500bb0((void *)(p + 0x52), 0, gm_RandomMod(2) & 0xffff, 0);
 			*(unsigned char *)(p + 0xc2) = *(unsigned char *)(p + 0xc2) + 1;
 			fcn_004432d0(v10, 1);
@@ -372,7 +372,7 @@ void __cdecl fcn_00561380(void *a0)
 				return;
 			}
 			if (*(int *)(*(int *)(r + 0x184) + 0x128) != 0) {
-				*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&g_7f4c00;
+				*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&gm_GameTime;
 				fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
 				goto label_56211d;
 			} else {

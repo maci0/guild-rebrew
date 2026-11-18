@@ -38,7 +38,7 @@ typedef struct Packet {
 
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -124,7 +124,7 @@ int __cdecl fcn_004ba080(Req* r)
 		memset(&msg, 0, sizeof(msg));
 		msg.x8 = *(int*) (o + 4);
 		msg.xc = *(int*) (building + 1);
-		msg.x28 = (*(int*)&g_7f4c00);
+		msg.x28 = (*(int*)&gm_GameTime);
 		msg.x2c = (*(int*)&g_7f4c04);
 		msg.x30 = g_7f4c08;
 		msg.type = 0x31;

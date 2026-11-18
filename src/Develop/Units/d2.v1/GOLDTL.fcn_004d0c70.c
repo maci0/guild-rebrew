@@ -39,9 +39,9 @@ typedef struct Game {
 } Game;
 
 extern GUI_ENTRY g_9b4840[6];
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 extern unsigned short* g_772f24;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char g_6b5c60[];
 extern char* g_1015ea0;
 #include "client_types.h"
@@ -79,15 +79,15 @@ void __cdecl fcn_004d0c70(void)
 		if (k >= 6) {
 			break;
 		}
-		unit = g_7e4260[i];
+		unit = ch_ContextCharacters[i];
 		if (unit != 0 && (fcn_004cef70(((Game*)g_772f24)->id, unit) & 0x800) != 0) {
 			g_9b4840[k].frame = fcn_00469c30(k * 0x80 + 0x18, 0xf, 0x5da);
 			g_9b4840[k].win = fcn_0046e940(k * 0x80, 0, 0x80, 0x4b, 0x110);
 			name = fcn_004ce610(unit);
 			if (name != 0 && *name != 0) {
-				g_9b4840[k].name = fcn_0046f740(0x54, 0xf, (int) (*name + 0xdf), g_772514);
+				g_9b4840[k].name = fcn_0046f740(0x54, 0xf, (int) (*name + 0xdf), d2_CurrentWindowId);
 				fcn_00472680(g_9b4840[k].name, -2);
-				g_9b4840[k].label = d2_ShowTxt(0x54, 0x26, &(*(char*)g_6b5c60), g_772514);
+				g_9b4840[k].label = d2_ShowTxt(0x54, 0x26, &(*(char*)g_6b5c60), d2_CurrentWindowId);
 				((Slot*)g_1015ea0)[g_9b4840[k].label].color = 0x54;
 				((Slot*)g_1015ea0)[g_9b4840[k].label].h = 0x18;
 				((Slot*)g_1015ea0)[g_9b4840[k].label].centered = 1;
@@ -95,9 +95,9 @@ void __cdecl fcn_004d0c70(void)
 			g_9b4840[k].unit = unit;
 			((Win*)g_1015f40)[g_9b4840[k].win].border = 0;
 			((Win*)g_1015f40)[g_9b4840[k].win].color = 0x54;
-			g_9b4840[k].icon = fcn_0046f740(0x28, 0x11, *(int*) (unit + 0x18c), g_772514);
+			g_9b4840[k].icon = fcn_0046f740(0x28, 0x11, *(int*) (unit + 0x18c), d2_CurrentWindowId);
 			((Slot*)g_1015ea0)[g_9b4840[k].icon].shadow = 1;
-			g_9b4840[k].text = d2_ShowTxt(0, 0, &(*(char*)g_6b5c60), g_772514);
+			g_9b4840[k].text = d2_ShowTxt(0, 0, &(*(char*)g_6b5c60), d2_CurrentWindowId);
 			((Slot*)g_1015ea0)[g_9b4840[k].text].color = 0x54;
 			((Slot*)g_1015ea0)[g_9b4840[k].text].h = 0x80;
 			((Slot*)g_1015ea0)[g_9b4840[k].text].centered = 1;

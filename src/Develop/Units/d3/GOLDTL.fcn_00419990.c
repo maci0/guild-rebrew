@@ -23,7 +23,7 @@ typedef struct Entry_419990 {
 } Entry_419990;
 
 extern int* g_6b8300;
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 extern unsigned char g_772d10;
 extern float* g_6b5d0c;
 char* g_6b5d10 = 0;
@@ -94,7 +94,7 @@ void __cdecl fcn_00419990(void)
 	Entry_419990 entries[2];
 	Voice_419990* voice;
 
-	if (g_6b8300 == 0 || g_6b5d0c == 0 || g_6b8014 == 0 || g_772d10 == 0) {
+	if (g_6b8300 == 0 || g_6b5d0c == 0 || d3_ActiveCamera == 0 || g_772d10 == 0) {
 		goto stop;
 	}
 	if (g_6b5dcc == 0) {
@@ -103,10 +103,10 @@ void __cdecl fcn_00419990(void)
 		g_6b5dcc = g_67a370;
 		goto stop;
 	}
-	center[0] = *(float*) (g_6b8014 + 0x4c);
-	center[1] = *(float*) (g_6b8014 + 0x50);
-	center[2] = *(float*) (g_6b8014 + 0x54);
-	hint = (int) (*(float*) (g_6b8014 + 0x50) - fcn_00413d10((float*) (g_6b8014 + 0x4c)));
+	center[0] = *(float*) (d3_ActiveCamera + 0x4c);
+	center[1] = *(float*) (d3_ActiveCamera + 0x50);
+	center[2] = *(float*) (d3_ActiveCamera + 0x54);
+	hint = (int) (*(float*) (d3_ActiveCamera + 0x50) - fcn_00413d10((float*) (d3_ActiveCamera + 0x4c)));
 	if (hint > 2000) {
 		hint = 2000;
 	}
@@ -117,7 +117,7 @@ void __cdecl fcn_00419990(void)
 	radius = 39.37f;
 	entries[0].id = entries[0].volume = entries[0].pan = 0;
 	entries[1].id = entries[1].volume = entries[1].pan = 0;
-	fcn_005ebbb9((float*) matrix, (float*) (g_6b8014 + 0x18c));
+	fcn_005ebbb9((float*) matrix, (float*) (d3_ActiveCamera + 0x18c));
 	dir[1] = 0.0f;
 	dir[0] = g_662d40[0] * matrix[0][0] + (g_662d40[1] * matrix[1][0] + g_662d40[2] * matrix[2][0]);
 	dir[2] = g_662d40[0] * matrix[0][2] + (g_662d40[1] * matrix[1][2] + g_662d40[2] * matrix[2][2]);

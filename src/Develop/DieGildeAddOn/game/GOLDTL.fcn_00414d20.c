@@ -25,9 +25,9 @@ typedef struct {
 	unsigned char pad9[3];
 } Flags4cf450;
 
-int g_6b5cbc = 0;
+int d3_CameraAnimating = 0;
 extern int d3_ActiveCameraAnimation;
-extern void* g_6b8014;
+extern void* d3_ActiveCamera;
 
 int __cdecl fcn_00445600(int a1, int a2, int a3, char* name);
 int __cdecl fcn_004339e0(char* obj, Flags4cf450 fl, int n, void* ents);
@@ -64,7 +64,7 @@ int __cdecl fcn_00414d20(int a1, int count, ...)
 	h[9] = 0;
 	h[10] = 0;
 	h[11] = 0;
-	if (g_6b5cbc != 0) {
+	if (d3_CameraAnimating != 0) {
 		return 0;
 	}
 	{
@@ -157,20 +157,20 @@ int __cdecl fcn_00414d20(int a1, int count, ...)
 				continue;
 			}
 			if ((*(unsigned char*) (e + 0x214) & 0x40) != 0) {
-				ents[m].pos[0] = *(float*) (e + 0x5c) - ((float*) g_6b8014)[0x13];
-				ents[m].pos[1] = *(float*) (e + 0x60) - ((float*) g_6b8014)[0x14];
-				ents[m].pos[2] = *(float*) (e + 0x64) - ((float*) g_6b8014)[0x15];
-				ents[m].rot[0] = *(float*) (e + 0x90) - ((float*) g_6b8014)[0x21];
-				ents[m].rot[1] = *(float*) (e + 0x94) - ((float*) g_6b8014)[0x22];
-				ents[m].rot[2] = *(float*) (e + 0x98) - ((float*) g_6b8014)[0x23];
+				ents[m].pos[0] = *(float*) (e + 0x5c) - ((float*) d3_ActiveCamera)[0x13];
+				ents[m].pos[1] = *(float*) (e + 0x60) - ((float*) d3_ActiveCamera)[0x14];
+				ents[m].pos[2] = *(float*) (e + 0x64) - ((float*) d3_ActiveCamera)[0x15];
+				ents[m].rot[0] = *(float*) (e + 0x90) - ((float*) d3_ActiveCamera)[0x21];
+				ents[m].rot[1] = *(float*) (e + 0x94) - ((float*) d3_ActiveCamera)[0x22];
+				ents[m].rot[2] = *(float*) (e + 0x98) - ((float*) d3_ActiveCamera)[0x23];
 			}
 			ents[m].type = quot;
 			m++;
 		}
 		ents[m].type = 0;
 	}
-	d3_ActiveCameraAnimation = fcn_004339e0((char*) g_6b8014, fl, n + 1, rec);
-	g_6b5cbc = 1;
+	d3_ActiveCameraAnimation = fcn_004339e0((char*) d3_ActiveCamera, fl, n + 1, rec);
+	d3_CameraAnimating = 1;
 	return 1;
 }
 /* Layout scaffolding: shifts the next source object to its reference

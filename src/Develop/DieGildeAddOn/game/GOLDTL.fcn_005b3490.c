@@ -54,7 +54,7 @@ void __cdecl fcn_005b3490(void)
 	io_AppendText(s_6ab5cc);
 	for (i = 0; i < g_775280; i++) {
 		memset(buf, 0, sizeof(buf));
-		g_772514 = w;
+		d2_CurrentWindowId = w;
 		map = *(char**) (((char*)g_67a370) + 0xb0);
 		e = g_778b20[i];
 		fcn_00455350(e, e + 0x4c, v);

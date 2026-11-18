@@ -2,10 +2,10 @@
 extern char g_779160[];
 extern char* g_1015ea0;
 extern char* g_item_def_table;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_100f884;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
 #include "game_player.h"
@@ -111,13 +111,13 @@ int __cdecl fcn_0059b260(char* a0)
 	*(int*) g_779160 = 0;
 	count = 1;
 	d2_SetForm(h, 0);
-	k = g_772514 * 0x3cc;
+	k = d2_CurrentWindowId * 0x3cc;
 	*(int*) (k + (int) g_1015f40 + 0x3a8) = 0xe;
 	*(int*) (k + (int) g_1015f40 + 0x3ac) = 0xe;
 	*(int*) (k + (int) g_1015f40 + 0x3b0) = 0xe;
 	*(int*) (k + (int) g_1015f40 + 0x3b4) = 0xe;
-	fcn_00533dc0(g_772514, 0x70b, 0x742);
-	fcn_00533f40(0x270, 0x15e, g_772514, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
+	fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x742);
+	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
 	*(int*) (g_1015ea0 + item * 0x2f4 + 0x84) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
 	do {
@@ -153,7 +153,7 @@ int __cdecl fcn_0059b260(char* a0)
 			if (count > 0) {
 				do {
 					e = (char*) ((int) g_779160 + i * 0x58);
-					if (g_67d370 == *(int*) (e + 0x34)) {
+					if (d2_CurrentElementId == *(int*) (e + 0x34)) {
 						if (hasAny == 0) {
 							q = (char*) 0x7e30d0;
 							do {
@@ -181,7 +181,7 @@ int __cdecl fcn_0059b260(char* a0)
 								p = fcn_005463a0(2, 0, 9, 3, *(int*) (a0 + 1));
 								if (p == 0) {
 									memset(&msg, 0, 0xf8);
-									msg.f28 = g_7f4c00.a;
+									msg.f28 = gm_GameTime.a;
 									msg.f30 = g_7f4c08;
 									msg.type = 9;
 									msg.f08 = *(int*) (g_7f4ca4 + (unsigned) g_774970 * 0x21c);
@@ -214,7 +214,7 @@ int __cdecl fcn_0059b260(char* a0)
 								}
 								if (p == 0) {
 									memset(&msg, 0, 0xf8);
-									msg.f28 = g_7f4c00.a;
+									msg.f28 = gm_GameTime.a;
 									msg.type = 8;
 									msg.f30 = g_7f4c08;
 									msg.f36 = 1;

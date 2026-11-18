@@ -30,11 +30,11 @@ void __cdecl fcn_00452280(void)
 	fvf = ((g_14ce7cc & 0x100000) | 0x210000) >> 15;
 	g_6b8710 = fvf;
 	stride = ((fvf & 0x20) | 0x80) >> 3;
-	g_1040c74 = g_1040640;
+	d3_SceneRenderListHead = g_1040640;
 	g_1040954 = 0;
 	g_1040c78 = 0;
 	g_1040958 = g_1040960;
 	g_6b8714 = stride;
-	((IDev*)g_6b5de0)->v->CreateVertexBuffer(((IDev*)g_6b5de0), g_67bc4c * stride, 0x248, fvf, 0, &g_104095c);
+	((IDev*)g_6b5de0)->v->CreateVertexBuffer(((IDev*)g_6b5de0), g_67bc4c * stride, 0x248, fvf, 0, &tp_d3_RenderVertexBuffer);
 	g_6b8718 = 0;
 }

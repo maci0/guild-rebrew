@@ -56,8 +56,8 @@ typedef struct {
 	int value2;                     /* 0x10 */
 } PickResult;                           /* SIZE 0x14 */
 
-extern int g_772514;
-extern int g_67d370;
+extern int d2_CurrentWindowId;
+extern int d2_CurrentElementId;
 extern volatile int g_6b7fac;
 extern int g_14ce8e0;
 extern int g_100f1dc;
@@ -106,23 +106,23 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(st.handle);
 	d2_SetForm(st.handle, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(st.handle, 1);
-	st.filter = g_772514;
+	st.filter = d2_CurrentWindowId;
 
 	io_AppendText((int) g_6a9694, a2);
 	d2_SetForm(st.handle, 2);
-	st.slot = g_772514;
+	st.slot = d2_CurrentWindowId;
 	d2_SetForm(st.handle, 3);
-	st.trade_form = g_772514;
+	st.trade_form = d2_CurrentWindowId;
 	d2_SetForm(st.handle, 6);
-	st.font = g_772514;
+	st.font = d2_CurrentWindowId;
 	d2_SetForm(st.handle, 4);
-	st.owner = g_772514;
+	st.owner = d2_CurrentWindowId;
 	d2_SetForm(st.handle, 5);
-	st.form5 = g_772514;
+	st.form5 = d2_CurrentWindowId;
 	d2_SetForm(st.handle, 7);
-	st.form7 = g_772514;
+	st.form7 = d2_CurrentWindowId;
 
 	st.type = 0; st.selected = 0;
 	fcn_0058b030(a1, (SelDlg*)&st);
@@ -144,7 +144,7 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			for (i = 0; i < 4; i++) {
-				if (st.ids[i] == g_67d370 && i != st.type) {
+				if (st.ids[i] == d2_CurrentElementId && i != st.type) {
 					selft = 0;
 					st.type = i; cur = -1;
 					st.selected = 0;
@@ -155,7 +155,7 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 			}
 			if (found == 0) {
 				for (i = 0; i < 16; i++) {
-					if (st.entries[i].btn == g_67d370 && i != cur) {
+					if (st.entries[i].btn == d2_CurrentElementId && i != cur) {
 						selft = i;
 						st.selected = i;
 						flags |= 3;
@@ -167,7 +167,7 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 			if (a3 == 0) {
 				if (found == 0) {
 					for (i = 0; i < 8; i++) {
-						if (st.rows[i][0] != g_67d370) {
+						if (st.rows[i][0] != d2_CurrentElementId) {
 							continue;
 						}
 						found = 1;
@@ -195,7 +195,7 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 						break;
 					}
 				}
-			} else if (a3 == 1 && st.button == g_67d370) {
+			} else if (a3 == 1 && st.button == d2_CurrentElementId) {
 				if (a0 != 0) {
 					a0->item = st.entries[selft].item;
 					a0->value = *(int*) a0->item;

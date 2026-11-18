@@ -26,9 +26,9 @@ typedef struct MsgCtx {
 
 extern int g_14ce8e0;
 extern int g_14ce8d8;
-extern int g_7725d0;
+extern int tp_d2_SelectedControl;
 extern int g_6ab3dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern char g_6b5c60[];
 extern char* g_1015ea0;
@@ -72,9 +72,9 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-			g_6ab3dc = (g_7725d0 == 0);
+			g_6ab3dc = (tp_d2_SelectedControl == 0);
 			fcn_005b11f0(&ctx);
-			id = g_67d370;
+			id = d2_CurrentElementId;
 			if (mode4) {
 				if (g_14ce8d8 != 0 && id != -1) {
 					for (i = 0; i < 0x10; i++) {
@@ -86,7 +86,7 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 								cb(v, v);
 								fcn_00471af0(ctx.dlg, 1);
 								fcn_00472170(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
-								id = g_67d370;
+								id = d2_CurrentElementId;
 							}
 							else {
 								g_774654 = 1;
@@ -121,7 +121,7 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 							v = fcn_005d0460((char*) ctx.queue[i].value, (int) state, (int) name, (int) cb);
 							fcn_00472170(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
 							fcn_00471af0(ctx.dlg, 1);
-							id = g_67d370;
+							id = d2_CurrentElementId;
 						}
 						if (v == 0) {
 							continue;

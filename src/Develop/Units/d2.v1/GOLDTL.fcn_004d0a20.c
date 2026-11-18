@@ -16,8 +16,8 @@ extern GUI_ENTRY g_9b4840[6];
 extern char g_10161bc[];
 extern char* g_1015ea0;
 extern int g_100f1dc;
-extern int g_67d370;
-extern int g_772514;
+extern int d2_CurrentElementId;
+extern int d2_CurrentWindowId;
 extern char g_6b5c60[];
 extern double g_662c38;
 extern char g_67d444[];
@@ -46,7 +46,7 @@ void __cdecl fcn_004d0a20(void)
 	if (g_100f1dc != -1) {
 		q = g_9b4840;
 		do {
-			if (q->win != -1 && g_67d370 == q->icon) {
+			if (q->win != -1 && d2_CurrentElementId == q->icon) {
 				if (*(int*) (g_1015ea0 + q->icon * 0x2f4 + 0x38) != 0) {
 					*(char*) ((int) q->unit + 0x188) = 1;
 				} else {
@@ -87,9 +87,9 @@ void __cdecl fcn_004d0a20(void)
 						}
 					} else {
 relabel:
-						g_772514 = q->win;
+						d2_CurrentWindowId = q->win;
 						fcn_00472680(q->name = fcn_0046f740(0x54, 0xf,
-							*r + 0xdf, g_772514), 0xfffffffe);
+							*r + 0xdf, d2_CurrentWindowId), 0xfffffffe);
 					}
 					if (q->label != -1) {
 						if (*(int*) (r + 0x16) == 1 || *(int*) (r + 0x16) == 2) {

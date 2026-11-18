@@ -4,16 +4,16 @@
 /* ADDRESS: GOLD 0x00417650 */
 int __cdecl fcn_00417650(int count)
 {
-    if (g_6b5d08 != 0)
+    if (tp_SoundSources != 0)
         goto fail;
     if (count != 0)
         d3snd_SourceCount = count;
-    g_6b5d08 = (SOUND_SOURCE*) m_alloc(d3snd_SourceCount * sizeof(SOUND_SOURCE), "d3snd_Init");
-    if (g_6b5d08 == 0)
+    tp_SoundSources = (SOUND_SOURCE*) m_alloc(d3snd_SourceCount * sizeof(SOUND_SOURCE), "d3snd_Init");
+    if (tp_SoundSources == 0)
         goto fail;
     count = d3snd_SourceCount * sizeof(SOUND_SOURCE);
     __asm {
-        mov edi, g_6b5d08
+        mov edi, tp_SoundSources
         mov ebx, count
         xor eax, eax
         lea ecx, [edi+edi*2]

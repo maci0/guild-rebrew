@@ -10,7 +10,7 @@ typedef struct {
     float location[3]; char unknown8c[4]; float rotation[3];
     char name[0x3f], unknowndb[0x1d];
 } BuildingMsg599b00;
-extern int g_7f4c00;
+extern int gm_GameTime;
 
 
 /* City construction dialog ("BAUEN\\STADT_BAUEN"). Builds the category
@@ -18,7 +18,7 @@ extern int g_7f4c00;
  * loop that reacts to the chosen building and to the close messages. */
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_7746f8;
@@ -31,7 +31,7 @@ extern int g_10162f4;
 extern unsigned char g_773d75;
 extern int g_68a2a8;
 extern int g_6b5c60;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 
 int __cdecl fcn_0050e4a0(int a);
@@ -88,7 +88,7 @@ void __cdecl fcn_00599b00(void)
 	fcn_00471b60(dlg);
 	g_7746f8 = 1;
 	d2_SetForm(dlg, 0);
-	i = g_772514 * 0x3cc;
+	i = d2_CurrentWindowId * 0x3cc;
 	*(int*) (i + 0x10162e8) = 0x18;
 	*(int*) (i + 0x10162ec) = 0x18;
 	*(int*) (i + 0x10162f0) = 0x18;
@@ -110,7 +110,7 @@ void __cdecl fcn_00599b00(void)
 		    + 0x7f4ca0), cat);
 		last = rec->kind;
 		raw = fcn_0046f740(ofs + 0x30, row - 0x30, cat + 0x427,
-		    g_772514);
+		    d2_CurrentWindowId);
 		raw *= 0x2f4;
 		*(int*) (raw + 0x5c + g_1015ea0) = 1;
 		*(int*) (raw + 0x1d0 + g_1015ea0) = 3;
@@ -122,7 +122,7 @@ void __cdecl fcn_00599b00(void)
 		} while (c != 0);
 		*(int*) (raw + 0x1cc + g_1015ea0) = 0x54;
 		fcn_0050bc10(cost, g_773d75, key);
-		ent = fcn_0046fac0(ofs + 2, row, 0x6b5c60, g_772514);
+		ent = fcn_0046fac0(ofs + 2, row, 0x6b5c60, d2_CurrentWindowId);
 		fcn_00472900(ent, 0x54);
 		fcn_0046f940(ent, key);
 		ofs += 0x60;
@@ -136,7 +136,7 @@ void __cdecl fcn_00599b00(void)
 				*(int*) (selected * 0x2f4 + 0x38 + g_1015ea0) = 0;
 				*(int*) (selected * 0x2f4 + 0x3c + g_1015ea0) = 0;
 			}
-			selected = g_67d370;
+			selected = d2_CurrentElementId;
 			ent = fcn_00526070(query, *(int*) (query + 0x14),
 			    fcn_0050d200((int)(g_7f4ca0 + g_774970 * 0x21c), i), g_773d75);
 			if (ent != 0) {
@@ -147,11 +147,11 @@ void __cdecl fcn_00599b00(void)
 					msg.mode = 2;
 					msg.actor = *(int*)(g_7f4ca0 + g_774970 * 0x21c + 4);
 					msg.target = msg.actor;
-					msg.pos.a = g_7f4c00;
+					msg.pos.a = gm_GameTime;
 					msg.pos.b = g_7f4c04;
 					msg.pos.c = g_7f4c08;
 					msg.pos.d = g_7f4c0c;
-					msg.owner = *(int*)(g_773da8 + 4);
+					msg.owner = *(int*)(gm_CityEntity + 4);
 					msg.category = i;
 					msg.cost = fcn_0050d200((int)(g_7f4ca0 + g_774970 * 0x21c), i);
 					fcn_00455350(ent, ent + 0x4c, msg.location);
@@ -172,10 +172,10 @@ void __cdecl fcn_00599b00(void)
 		}
 		if (g_100f1dc == 3) {
 			d2_SetForm(dlg, 3);
-			fcn_0046ed00(0, -0x46, g_772514);
+			fcn_0046ed00(0, -0x46, d2_CurrentWindowId);
 		} else if (g_100f1dc == 4) {
 			d2_SetForm(dlg, 3);
-			fcn_0046ed00(0, 0x46, g_772514);
+			fcn_0046ed00(0, 0x46, d2_CurrentWindowId);
 		}
 		if (g_14ce8e0 != 0)
 			g_774654 = 1;

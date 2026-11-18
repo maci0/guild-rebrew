@@ -27,7 +27,7 @@ void __cdecl fcn_0046bbc0(int x, int y, int surf, char* text, unsigned char flag
 	if (g_772524 == 0) {
 		g_772524 = d2_GetResourceData(fcn_00465950(s_67d474));
 	}
-	g_1015ea4 = *(unsigned short*) (g_772524 + 8);
+	d2_FontHeight = *(unsigned short*) (g_772524 + 8);
 	for (i = 0; i < (int) strlen(text); i++) {
 		c = text[i];
 		g = fcn_0047b620(g_772524, c);
@@ -50,6 +50,6 @@ void __cdecl fcn_0046bbc0(int x, int y, int surf, char* text, unsigned char flag
 			break;
 		}
 	}
-	g_772548 = g_1015ea4;
+	g_772548 = d2_FontHeight;
 	g_772544 = x - x0;
 }

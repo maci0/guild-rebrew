@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 
 
@@ -9,7 +9,7 @@ void __cdecl fcn_00515f60(const char*, int, int);
 
 void __cdecl fcn_00515fb0(unsigned char* e)
 {
-	fcn_00500e20(((char*)&g_7f4c00));
+	fcn_00500e20(((char*)&gm_GameTime));
 	if (e != 0 && gm_CheckEntityType(e) && *(short*) (e + 0x29) == 0xfd && *e == 0x1e) {
 		fcn_00515f60("AesteKnacken_s", 0x50, 0x1f40);
 	}

@@ -1,5 +1,5 @@
 extern char* g_6b8300;
-extern char g_7f4c00[];
+extern char gm_GameTime[];
 
 int __cdecl fcn_00500e20(char*);
 char* __cdecl strstr(char*, char*);
@@ -22,7 +22,7 @@ void __cdecl fcn_00516040(void)
 	unsigned int offset;
 	char byte;
 
-	mode = fcn_00500e20(g_7f4c00);
+	mode = fcn_00500e20(gm_GameTime);
 	if (g_6b8300 == 0) {
 		return;
 	}

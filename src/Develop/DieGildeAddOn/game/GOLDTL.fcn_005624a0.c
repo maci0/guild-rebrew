@@ -9,7 +9,7 @@ extern char g_7f4ca0[];
 #include "game_data.h"
 typedef struct SpyProto { unsigned char kind; unsigned char rest[0x24c]; } SpyProto;
 extern unsigned char g_773d75;
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char s_6a6578[];
 extern char s_67ed14[];
 
@@ -78,7 +78,7 @@ void __cdecl fcn_005624a0(char* ctx)
 			fcn_004c51a0(-1, *(int*) (g_7f4ca0
 			    + *(unsigned short*) (ctx + 8) * 0x21c + 4), g_773d75, *(int*) (ctx + 0xe4));
 			fcn_00529160(0, 0, *(unsigned short*) ent, ctx);
-			*(pos14_7f4c00*)(ctx + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*)(ctx + 0x52) = gm_GameTime;
 			*(int*) (ctx + 0x84) = fcn_004c5620(1, ctx);
 			return;
 		}
@@ -156,7 +156,7 @@ void __cdecl fcn_005624a0(char* ctx)
 		}
 		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
 		if (hit != 0 && *(unsigned short*) (hit + 0x27) != 0xffff) {
-			if (fcn_00500cb0(ctx + 0xc8, &g_7f4c00) == -1) {
+			if (fcn_00500cb0(ctx + 0xc8, &gm_GameTime) == -1) {
 				fcn_004c5c80(*(int*) (ent + 4));
 				fcn_004c5da0(*(int*) (ent + 4), *(int*) (hit + 1),
 				    -1, 0, 1, s_67ed14);

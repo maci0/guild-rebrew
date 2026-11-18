@@ -16,7 +16,7 @@ void __cdecl fcn_00516de0(char* a1, unsigned char a2)
 		return;
 	al = *(unsigned char*) (a1 + 0x8036);
 	oldmode = (al >> 2) & 7;
-	if (g_6b8010 == 0) {
+	if (d3_CurrentContextIndex == 0) {
 		if (*(int*) a1 == 0x40 || g_778d24 >= 0x780) {
 			al = (unsigned char) ((al & 0xe7) | 4);
 			*(unsigned char*) (a1 + 0x8036) = al;

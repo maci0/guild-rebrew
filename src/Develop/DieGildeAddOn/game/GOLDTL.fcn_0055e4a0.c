@@ -6,7 +6,7 @@ extern char s_6a6354[];
 extern char s_6a6368[];
 extern char s_68b1e0[];
 extern char g_868060[];
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 extern int g_774650;
 extern unsigned char* g_7746c8;
 extern int g_7e35c0[];
@@ -62,7 +62,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 	gm_StartFilteredEntitySearch(1, 0, 0x45);
 	v7 = (char*) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (ev + 0xb0));
 	v8 = (unsigned char*) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (ev + 0xb4));
-	v4 = g_6b8010;
+	v4 = d3_CurrentContextIndex;
 	e = gm_FindRecordById(*(int*) (ev + 0xac));
 	if (!e) {
 		return;

@@ -30,7 +30,7 @@ void __cdecl fcn_0040b7f0(char* ev)
 		return;
 	}
 	map = fcn_00402610(*(char**) (ev + 0x14));
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	room = fcn_00413190(*(int*) (*(char**) (ev + 0x14) + 0x88));
 	if (room != *(int*) (ev + 0x30)) {
 		ch_RemoveQueueEntry(ev);

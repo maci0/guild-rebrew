@@ -30,7 +30,7 @@ char* __cdecl fcn_004fe470(int id, int type, int sub, int x, int y)
 	int h;
 
 	q = 0;
-	old = g_6b8010;
+	old = d3_CurrentContextIndex;
 	o = gm_LookupEntityRecordById(id);
 	if (o == 0 || *(char**) (o + 0x184) != 0) {
 		return 0;

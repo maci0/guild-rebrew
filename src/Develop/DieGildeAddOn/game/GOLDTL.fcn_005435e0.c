@@ -104,7 +104,7 @@ void __cdecl fcn_005435e0(void)
 	child->look = p->look;
 	child->home = p->home;
 	child->parent = p->id;
-	strcpy(child->name, g_14a60d0[gm_RandomMod(0x70)]);
+	strcpy(child->name, gm_FemaleNames[gm_RandomMod(0x70)]);
 	fcn_004fda30(child->slot);
 	spouse->look = p->look;
 	spouse->home = p->home;

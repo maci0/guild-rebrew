@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 
 void __cdecl fcn_00438100(char* obj, char* cam, char force);
 int __cdecl fcn_00414830(void);
@@ -16,7 +16,7 @@ void __cdecl fcn_00414960(float* minBounds, float* maxBounds, char* obj)
 		return;
 	}
 	if ((*(unsigned char*) (obj + 0x216) & 0x20) == 0) {
-		fcn_00438100(obj, g_6b8014, 0);
+		fcn_00438100(obj, d3_ActiveCamera, 0);
 	}
 	p = (float*) (*(int (__cdecl**) (char*, int, int)) (*(int*) (*(int*) (obj + 0x1cc) + 0x318) + 0x1f0)) (obj, *(int*) (obj + 0x1cc), *(int*) (obj + 0x1ec) + 8);
 	if (p != 0) {

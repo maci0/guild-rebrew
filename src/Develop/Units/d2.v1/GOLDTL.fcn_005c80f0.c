@@ -24,7 +24,7 @@ typedef struct {
 extern Group_102cbc4 g_102cbc4[8];
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 #include "client_packet_builder.h"
@@ -69,13 +69,13 @@ void __cdecl fcn_005c80f0(void)
 	d = fcn_00470820(0, 0, g_6ac80c);
 	fcn_00471b60(d);
 	d2_SetForm(d, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(d, 1);
 	io_AppendText(0x85);
 	d2_SetForm(d, 2);
 	grp = d2_CreateRadioGroup(0);
 	for (i = 0; i < 8; i++) {
-		btn[i] = fcn_0046f740(i * 0x30 + 10, 0x78, i + DISTRICT0, g_772514);
+		btn[i] = fcn_0046f740(i * 0x30 + 10, 0x78, i + DISTRICT0, d2_CurrentWindowId);
 		fcn_00469470(grp, btn[i]);
 	}
 	for (i = 0; i < 8; i++) {

@@ -22,7 +22,7 @@ extern char g_6a3550[];
 #include "client_types.h"
 extern Page_1038144 g_1038144[];
 extern Win_1015f40 g_1015f40[0x60];
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern char g_7e25a0[];
 extern char* g_7747b8;
@@ -133,7 +133,7 @@ int __cdecl main_OpenEngine(void)
 	int screen;
 	unsigned char* fade;
 
-	g_7725c8 = 1;
+	d2_SuppressOverlay = 1;
 	if (g_774818 != 0) {
 		sprintf(path, "%s%s", g_6a3550, "die_gilde_add_on_text.def");
 		txt_OpenText(path, 0);
@@ -147,7 +147,7 @@ int __cdecl main_OpenEngine(void)
 	fcn_0046b4f0();
 	screen = fcn_00470820(0, 0, "Misc\\Loading_main");
 	fcn_00471c00(((Screen*)g_1038144)[screen].image, 3);
-	fcn_00469c40(0, g_1040490 - ((Window*)g_1015f40)[((Screen*)g_1038144)[screen].window].height - 0x30,
+	fcn_00469c40(0, d2_ScreenHeight - ((Window*)g_1015f40)[((Screen*)g_1038144)[screen].window].height - 0x30,
 		((Window*)g_1015f40)[((Screen*)g_1038144)[screen].window].id);
 	fcn_00471c00(((Screen*)g_1038144)[screen].window, 1);
 	io_AppendText(0x73, g_7e25a0);
@@ -170,7 +170,7 @@ int __cdecl main_OpenEngine(void)
 		msx_InitAIL();
 		if (sb_Init(10000000, 0x30, 2, 0x10, 44100) != 0) {
 			g_774934 = 0;
-			g_774930 = 0;
+			msx_MusicEnabled = 0;
 		}
 		fcn_00418bc0(0x40);
 		fcn_00419480(0x30);
@@ -180,7 +180,7 @@ int __cdecl main_OpenEngine(void)
 		sprintf(ini, "%s\\include_sfx.ini", g_7e2080);
 		main_PreloadSound(ini);
 	}
-	if (g_774930 != 0) {
+	if (msx_MusicEnabled != 0) {
 		fcn_0041fad0(2, 0x10, 44100);
 		sprintf(path, "%smsx\\", g_6a3550);
 		SetTrackPath(path);
@@ -199,7 +199,7 @@ int __cdecl main_OpenEngine(void)
 	fcn_004acbb0();
 	fcn_004d3800();
 	fcn_00471e30(screen);
-	fade = fcn_004730c0(0, 0, g_1040494, g_1040490, "BLACK", 0x5a, 1);
+	fade = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x5a, 1);
 	while ((*fade & 4) == 0) {
 		fcn_005373e0(0, 0x24087);
 	}

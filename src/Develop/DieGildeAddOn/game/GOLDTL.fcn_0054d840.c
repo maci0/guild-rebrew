@@ -5,7 +5,7 @@
 #include <string.h>
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_StartFilteredEntitySearch();
 char* __cdecl gm_AddObjekt(void);
@@ -34,7 +34,7 @@ void __cdecl fcn_0054d840(char* e)
 	if ((e[0x78] & 4) != 0) {
 		return;
 	}
-	*(pos14_7f4c00*) (e + 0x44) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x44) = gm_GameTime;
 	memset(cand, 0xff, sizeof(cand));
 	me = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 	for (o = gm_StartFilteredEntitySearch(1, 6); o != 0; o = gm_FindNextFilteredEntity()) {
@@ -64,7 +64,7 @@ void __cdecl fcn_0054d840(char* e)
 	}
 	fcn_0064d41a(buf, "STREIFE_INIT: Target: %i, Way: %i, %i, %i, %i, Start: %i", *(int*) (e + 0xac), *(int*) (e + 0xb4),
 	    *(int*) (e + 0xb8), *(int*) (e + 0xbc), *(int*) (e + 0xc0), *(int*) (e + 0xb0));
-	*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
 	*(int*) (e + 0xd8) = 0;
 	e[0xdc] = 0;

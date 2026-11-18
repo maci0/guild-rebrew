@@ -43,10 +43,10 @@ extern char g_7f4ca0[];
 extern Win_1015f40 g_1015f40[0x60];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern pos14_7f4c00 g_7f4c00;
-extern int g_772514;
+extern pos14_7f4c00 gm_GameTime;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6ac738[];
@@ -191,10 +191,10 @@ void __cdecl fcn_005c5b10(char* a)
 	dlg = fcn_00470820(0, 0, s_6ac738);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	((Win*)g_1015f40)[g_772514].x3a8 = 0xe;
-	((Win*)g_1015f40)[g_772514].x3ac = 0xe;
-	((Win*)g_1015f40)[g_772514].x3b0 = 0xe;
-	((Win*)g_1015f40)[g_772514].x3b4 = 0xe;
+	((Win*)g_1015f40)[d2_CurrentWindowId].x3a8 = 0xe;
+	((Win*)g_1015f40)[d2_CurrentWindowId].x3ac = 0xe;
+	((Win*)g_1015f40)[d2_CurrentWindowId].x3b0 = 0xe;
+	((Win*)g_1015f40)[d2_CurrentWindowId].x3b4 = 0xe;
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x19a9);
 	d2_SetForm(dlg, 2);
@@ -206,13 +206,13 @@ void __cdecl fcn_005c5b10(char* a)
 	if (fcn_005373e0((void*) fcn_005c5b10, 0x677c7) != 0) {
 		do {
 			if (g_100f1dc == 2) {
-				if (btn2 != -1 && g_67d370 == btn2) {
+				if (btn2 != -1 && d2_CurrentElementId == btn2) {
 					v = fcn_0050b750(fcn_00471f80(sl), g_773d75);
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 0x38;
 					pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
 					pkt.xc = *(int*) (a + 1);
-					pkt.name = (*(Name14*)&g_7f4c00);
+					pkt.name = (*(Name14*)&gm_GameTime);
 					pkt.x36 = 1;
 					pkt.x58 = v;
 					fcn_004c4eb0(s_6ac730);
@@ -247,8 +247,8 @@ void __cdecl fcn_005c5da0(int layer, int x, int y, unsigned short who, int text)
 		g_775318 = g_7f4ca0 + who * 540;
 		g_6abb00 = fcn_0046f100(x, y, 0xcd, 0xc4, 0x10, layer);
 		fcn_0046f740(0, 0, 0x587, g_6abb00);
-		fcn_0046f100(0, 0x2c, *(int*) (g_77255c + 0xc), 0x1e, 0x110, g_772514);
-		g_10161cc[g_772514 * 243] = 0x54;
+		fcn_0046f100(0, 0x2c, *(int*) (g_77255c + 0xc), 0x1e, 0x110, d2_CurrentWindowId);
+		g_10161cc[d2_CurrentWindowId * 243] = 0x54;
 		io_AppendText(text);
 	}
 }

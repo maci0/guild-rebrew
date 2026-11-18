@@ -15,10 +15,10 @@ struct gadget {
 
 extern char* g_1015ea0;
 extern char* g_14a5ad8[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char g_6a3f8c[];
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern char g_7e23e3;
 #include "client_dialog_state.h"
 
@@ -65,7 +65,7 @@ int __cdecl fcn_0053cd40(int flags)
 	list = d2_CreateRadioGroup(0);
 	for (i = 0; i < 11; i++) {
 		t = types[i];
-		id = fcn_0046f740((i % 3) * 0x60 + 0x64, (i / 3 * 5 + 5) * 0x10, t + 0x5a1, g_772514);
+		id = fcn_0046f740((i % 3) * 0x60 + 0x64, (i / 3 * 5 + 5) * 0x10, t + 0x5a1, d2_CurrentWindowId);
 		ids[i] = id;
 		((struct gadget*)g_1015ea0)[id].visible = 1;
 		((struct gadget*)g_1015ea0)[id].mode = 3;
@@ -78,7 +78,7 @@ int __cdecl fcn_0053cd40(int flags)
 		d2_UpdateRadioGroup(list);
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 11; i++) {
-				if (g_67d370 == ids[i]) {
+				if (d2_CurrentElementId == ids[i]) {
 					(*(unsigned char*)&g_7e23e3) = fcn_00507400(types[i], 1);
 					g_774654 = 1;
 					result = 1;

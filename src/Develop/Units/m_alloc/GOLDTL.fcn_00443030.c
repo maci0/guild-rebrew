@@ -57,7 +57,7 @@ typedef struct {
 	int x3d8;
 } Level;
 
-extern char g_1042340[];
+extern char d3_SceneObjectSentinel[];
 extern char g_1043060;
 extern char g_1040640[];
 extern char g_1040960[];
@@ -90,7 +90,7 @@ char __cdecl fcn_00443030(Level* lv)
 	fcn_00438cb0(e, &lv->rot);
 	e->level = lv;
 	e->flags |= 3;
-	e->next = &(*(char*)g_1042340);
+	e->next = &(*(char*)d3_SceneObjectSentinel);
 	e->prev = &g_1043060;
 	lv->amb.x = 200.0f;
 	lv->amb.y = 200.0f;

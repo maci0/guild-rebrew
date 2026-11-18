@@ -20,13 +20,13 @@ typedef struct F8 {
 // SIZE 0x8
 
 extern Slot58a6 g_7f4ca0[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 extern float g_6628ac;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 int __cdecl gm_WalkEntityChain(unsigned short);
 char *__cdecl fcn_005cd440(int *, int, int, int);
@@ -90,7 +90,7 @@ void __cdecl fcn_0058a6b0(char *a0)
     d2_SetOverlayAnimation(0, 0);
     fcn_00471b60(dlg);
     d2_SetForm(dlg, 0);
-    fcn_005340f0(g_772514);
+    fcn_005340f0(d2_CurrentWindowId);
     d2_SetForm(dlg, 1);
     io_AppendText("$C");
     io_AppendText(0x402e, 0x402b, price, *(unsigned short *) sel);
@@ -103,7 +103,7 @@ void __cdecl fcn_0058a6b0(char *a0)
         if (g_14ce8e0 != 0) {
             g_774654 = 1;
         } else if (g_100f1dc != -1) {
-            if (g_67d370 == h1) {
+            if (d2_CurrentElementId == h1) {
                 if (fcn_00526010(&g_7f4ca0[g_774970], price, g_773d75) != 0
                     && fcn_00525f60(&g_7f4ca0[g_774970], 0x10) == 1
                     && fcn_005898f0(a0) != 0) {
@@ -116,10 +116,10 @@ void __cdecl fcn_0058a6b0(char *a0)
                     msg[4] = (char) 0x99;
                     *(int *) (msg + 8) = g_7f4ca0[*(unsigned short *) (a0 + 0x27)].f4;
                     *(int *) (msg + 0xc) = *(int *) (a0 + 1);
-                    *(int *) (msg + 0x28) = g_7f4c00.a;
-                    *(int *) (msg + 0x2c) = g_7f4c00.b;
-                    *(int *) (msg + 0x30) = g_7f4c00.c;
-                    *(short *) (msg + 0x34) = g_7f4c00.d;
+                    *(int *) (msg + 0x28) = gm_GameTime.a;
+                    *(int *) (msg + 0x2c) = gm_GameTime.b;
+                    *(int *) (msg + 0x30) = gm_GameTime.c;
+                    *(short *) (msg + 0x34) = gm_GameTime.d;
                     msg[0x36] = 2;
                     *(int *) (msg + 0x5c) = *(int *) (a0 + 1);
                     *(int *) (msg + 0x60) = *(int *) (sel + 4);
@@ -143,7 +143,7 @@ void __cdecl fcn_0058a6b0(char *a0)
                     fcn_004c3030(-7, 0, "KOMMENTARE", -1);
                     g_774654 = 1;
                 }
-            } else if (g_67d370 == h2) {
+            } else if (d2_CurrentElementId == h2) {
                 g_774654 = 1;
             }
         }

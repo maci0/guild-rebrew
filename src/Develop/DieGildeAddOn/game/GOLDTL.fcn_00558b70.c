@@ -23,7 +23,7 @@ unsigned int __cdecl fcn_00558b70(char* a0)
 	char* ent;
 	char* view;
 
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 
 	view = *(char**) (a0 + 0xc8);

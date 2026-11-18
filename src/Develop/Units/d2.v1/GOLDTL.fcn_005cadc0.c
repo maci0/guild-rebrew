@@ -14,8 +14,8 @@ typedef struct Rec_5cadc0 {
 	int pad2c[3];		/* 0x2c */
 } Rec_5cadc0;
 
-extern int g_772514;
-extern int g_67d370;
+extern int d2_CurrentWindowId;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f1dc;
@@ -80,7 +80,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 			if (a2 || a3)
 				io_AppendText(a2 ? a2 : a3);
 			d2_SetForm(dlg, 1);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			for (i = 0; i < 8; i++) {
 				rec[i].ent = 0;
 				rec[i].h1 = -1;
@@ -174,10 +174,10 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 				}
 			}
 			if (a0 && (a0 != 7))
-				fcn_005c9f10(g_772514, a0, a1, count, (int) rec,
+				fcn_005c9f10(d2_CurrentWindowId, a0, a1, count, (int) rec,
 				    p ? p : (short*) (g_774970 * 0x21c + 0x7f4ca0));
 			else
-				fcn_005c99a0(g_772514, a0, a1, count, (int) rec,
+				fcn_005c99a0(d2_CurrentWindowId, a0, a1, count, (int) rec,
 				    (int) (p ? p : (short*) (g_774970 * 0x21c + 0x7f4ca0)));
 			again = 0;
 		}
@@ -199,7 +199,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 				j = 0;
 				if (count > 0) {
 					while (j < count) {
-						if (rec[j].h2 == g_67d370)
+						if (rec[j].h2 == d2_CurrentElementId)
 							break;
 						j++;
 					}
@@ -224,7 +224,7 @@ select:
 			if (count > 0) {
 				j = 0;
 				while (j < count) {
-					if (rec[j].h1 == g_67d370)
+					if (rec[j].h1 == d2_CurrentElementId)
 						break;
 					j++;
 				}

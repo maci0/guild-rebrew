@@ -6,7 +6,7 @@
 
 extern char* g_item_def_table; /* 0x0099ec10 */
 extern int g_1040494;          /* 0x01040494 */
-extern int g_772514;           /* 0x00772514 */
+extern int d2_CurrentWindowId;           /* 0x00772514 */
 extern unsigned char g_773d75; /* 0x00773d75 */
 extern int g_7746c4;           /* 0x007746c4 */
 extern int g_7746c8;           /* 0x007746c8 */
@@ -66,7 +66,7 @@ int __cdecl fcn_00590b80(int a0)
 				*(int*) ((char*) &g_1015f40[n] + 0x27c));
 	}
 	d2_SetForm(0, 2);
-	fcn_0046f740(0, 0, a0 + 0xdf, g_772514);
+	fcn_0046f740(0, 0, a0 + 0xdf, d2_CurrentWindowId);
 	io_AppendText(a0 * 2 + 0x9a9);
 	d2_SetForm(0, 1);
 	io_AppendText(a0 * 2 + 0x9a8);
@@ -116,7 +116,7 @@ int __cdecl fcn_00590b80(int a0)
 		v = *(unsigned short*) p;
 		val = *(unsigned short*) (p + 8);
 		if (val != 0) {
-			fcn_0046f7e0(0, item, val + 0xdf, g_772514, -2);
+			fcn_0046f7e0(0, item, val + 0xdf, d2_CurrentWindowId, -2);
 			io_AppendText((int) s_6a9a30, v, val * 2 + 0x9a8);
 			item += 0x16;
 		}
@@ -132,7 +132,7 @@ int __cdecl fcn_00590b80(int a0)
 			if (*(unsigned short*) p == a0 && a0 != 0x1cd) {
 				fcn_0046f7e0(6, val,
 						*(unsigned char*) (0x699058 + i) + 0x427,
-						g_772514, -2);
+						d2_CurrentWindowId, -2);
 				io_AppendText((int) s_6a9a28,
 						*(unsigned char*) (0x699058 + i) * 0xe + 0x48e);
 				slot++;
@@ -185,7 +185,7 @@ int __cdecl fcn_00590b80(int a0)
 		val = slot * 0x16 + 0x28;
 		for (count = 0; count < i; count++) {
 			item = arr[count];
-			fcn_0046f7e0(6, val, item + 0x427, g_772514, -2);
+			fcn_0046f7e0(6, val, item + 0x427, d2_CurrentWindowId, -2);
 			io_AppendText((int) s_6a9a28, item * 0xe + 0x48e);
 			val += 0x16;
 		}
@@ -195,7 +195,7 @@ int __cdecl fcn_00590b80(int a0)
 				&& a0 != 0x1c4 && a0 != 0x1c5 && a0 != 0x1c6
 				&& a0 != 0x2af && a0 != 0x2b0))
 			&& (def[0] == 0x17 || def[0] == 0x25)) {
-		fcn_0046f7e0(6, n * 0x16 + 0x28, 0x444, g_772514, -2);
+		fcn_0046f7e0(6, n * 0x16 + 0x28, 0x444, d2_CurrentWindowId, -2);
 		io_AppendText((int) s_6a9a28, 0x624);
 		n++;
 	}

@@ -1,7 +1,7 @@
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
 void __cdecl fcn_00471af0(int, int);
-extern int* g_665f08; extern char g_774a14[];
+extern int* g_665f08; extern char d2_TutorialActive[];
 
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00580a30();
@@ -36,7 +36,7 @@ void __cdecl fcn_005809d0(void)
 /* ADDRESS: GOLDTL 0x005809f0 */
 int __cdecl fcn_005809f0(void)
 {
-	return *(int*) &g_774a14 == 0;
+	return *(int*) &d2_TutorialActive == 0;
 }
 
 /* ADDRESS: GOLDTL 0x00580a00 */

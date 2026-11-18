@@ -1,7 +1,7 @@
 
 
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char g_6aa8d0[];
@@ -24,12 +24,12 @@ void __cdecl fcn_005a0960(void)
 	h = fcn_00470820(0, 0, g_6aa8d0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 2);
-	a = g_772514;
+	a = d2_CurrentWindowId;
 	d2_SetForm(h, 3);
-	fcn_0046e830(-1, -1, g_772514, a, 0x767);
+	fcn_0046e830(-1, -1, d2_CurrentWindowId, a, 0x767);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1889);
 	d2_SetForm(h, 2);

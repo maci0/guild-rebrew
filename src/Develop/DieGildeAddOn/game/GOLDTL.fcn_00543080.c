@@ -63,8 +63,8 @@ int __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 typedef struct ResetProto { unsigned char kind; unsigned char rest[0x24c]; } ResetProto;
-extern int g_6a3420; extern int g_774954; extern char g_774965; extern int g_14cbca0; extern int g_7725c8; extern double g_662cc0;
-extern int g_1040480; extern int g_1040484; extern int g_1040488; extern int g_104048c; extern int g_1040490; extern int g_1040494;
+extern int g_6a3420; extern int g_774954; extern char g_774965; extern int g_14cbca0; extern int d2_SuppressOverlay; extern double g_662cc0;
+extern int g_1040480; extern int g_1040484; extern int g_1040488; extern int g_104048c; extern int d2_ScreenHeight; extern int g_1040494;
 /* ADDRESS: GOLDTL 0x00543080 */
 void __cdecl fcn_00543080(void)
 {
@@ -100,8 +100,8 @@ void __cdecl fcn_00543080(void)
 	if (!(g_7747b0 & 4) && 7 <= (unsigned short) gm_RandomMod(10)) {
 		v11 = fcn_005435d0();
 		while (v11 != 1) {
-			g_7725c8 = 0;
-			*(int*) &g_7e46ac = 0x24087;
+			d2_SuppressOverlay = 0;
+			*(int*) &main_LoopFlags = 0x24087;
 			io_FormatTextBuffer(v6, 0x79);
 			if (!fcn_00526120(v6, 1)) {
 				g_774954 = 1;
@@ -113,7 +113,7 @@ void __cdecl fcn_00543080(void)
 			v11 = fcn_005435d0();
 		}
 	}
-	*(int*) &g_7e46ac = 0x24087;
+	*(int*) &main_LoopFlags = 0x24087;
 	if (g_7747b0 & 4) {
 		fcn_00535770(0x24087);
 	}
@@ -122,7 +122,7 @@ void __cdecl fcn_00543080(void)
 		g_1040488 = 0;
 		g_1040480 = g_1040494;
 		g_1040484 = 0;
-		g_104048c = g_1040490;
+		g_104048c = d2_ScreenHeight;
 		fcn_00476970(*(int*) &g_77250c);
 		fcn_00469e30(0x79d);
 	}
@@ -145,7 +145,7 @@ void __cdecl fcn_00543080(void)
 			}
 		} else {
 			v5 = fcn_005155e0(v3);
-			v2 = g_6b8010;
+			v2 = d3_CurrentContextIndex;
 			if (v5 != -1) {
 				fcn_004432d0((int) *(char*) (((ResetProto*)lpGebaeudePROT)[*v3].kind + (unsigned long)&g_7f3b00), 1);
 				fcn_0043aa30(3);

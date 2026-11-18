@@ -1,6 +1,6 @@
 #include <math.h>
 
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 extern char* g_6b5cf8;
 extern volatile int g_6b7fac;
 extern int SonnenstrahlenAktiv;
@@ -31,12 +31,12 @@ void __cdecl fcn_004172e0(char* object)
 	char* light;
 	char* camera;
 	SUNRAY_COLOR color;
-	if (object == 0 || *(int*) (object + 0x1cc) == 0 || g_6b8014 == 0) {
+	if (object == 0 || *(int*) (object + 0x1cc) == 0 || d3_ActiveCamera == 0) {
 		return;
 	}
-	position[0] = *(float*) (g_6b8014 + 0x4c);
-	position[1] = *(float*) (g_6b8014 + 0x50);
-	position[2] = *(float*) (g_6b8014 + 0x54);
+	position[0] = *(float*) (d3_ActiveCamera + 0x4c);
+	position[1] = *(float*) (d3_ActiveCamera + 0x50);
+	position[2] = *(float*) (d3_ActiveCamera + 0x54);
 	if (!CompareVector3WithinTolerance(position, (float*) (object + 0x4c), 0.0001f)) {
 		fcn_00438b40(object, position);
 	}
@@ -50,7 +50,7 @@ void __cdecl fcn_004172e0(char* object)
 			fcn_00438cb0(object, rotation);
 		}
 	}
-	camera = g_6b8014;
+	camera = d3_ActiveCamera;
 	value = fmod((double) *(float*) (object + 0x88) - *(float*) (camera + 0x88), 6.2831854820251465);
 	angle = (float) value;
 	if (value < 0.0) {

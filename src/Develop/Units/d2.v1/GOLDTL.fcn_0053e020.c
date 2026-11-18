@@ -1,12 +1,12 @@
 extern int g_7e2468;
 extern int g_7e2430;
 extern int g_774654;
-extern int g_7725c8;
-extern int g_68bfb8;
-extern int g_67d370;
+extern int d2_SuppressOverlay;
+extern int cut_EventLoopFlags;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 extern int g_1040494;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 int __cdecl fcn_004432d0();
 int __cdecl d2_CreateRadioGroup();
 int __cdecl fcn_00469470();
@@ -90,15 +90,15 @@ int __cdecl fcn_0053e020(void)
 		r = *(int*) &g_100f1dc;
 		if (r == 2 || v1) {
 			v1 = 0;
-			if (g_67d370 == v4) {
+			if (d2_CurrentElementId == v4) {
 				*(unsigned char*) &g_6a3440 = 0xff;
-			} else if (g_67d370 == v5) {
+			} else if (d2_CurrentElementId == v5) {
 				*(unsigned char*) &g_6a3440 = 1;
-			} else if (g_67d370 == v6) {
+			} else if (d2_CurrentElementId == v6) {
 				*(unsigned char*) &g_6a3440 = 2;
-			} else if (g_67d370 == v3) {
+			} else if (d2_CurrentElementId == v3) {
 				*(unsigned char*) &g_6a3440 = 3;
-			} else if (g_67d370 == v13) {
+			} else if (d2_CurrentElementId == v13) {
 				*(unsigned char*) &g_6a3440 = 5;
 			}
 			r = *(signed char*) &g_6a3440;
@@ -109,18 +109,18 @@ int __cdecl fcn_0053e020(void)
 				d2_SelectRadioGroup(v7, 0);
 			}
 			fcn_00471af0(v2, 0);
-			*(int*) &g_7e46ac = 0x12d6;
-			g_68bfb8 = 0x12d6;
+			*(int*) &main_LoopFlags = 0x12d6;
+			cut_EventLoopFlags = 0x12d6;
 			fcn_004e44f0(fcn_004e4470(0x6a4040));
 			v12 = fcn_0053d490(0xc6, 0);
 			if (v12 == 0) {
-				*(int*) &g_7e46ac = 0x12d6;
-				g_68bfb8 = 0x12d6;
+				*(int*) &main_LoopFlags = 0x12d6;
+				cut_EventLoopFlags = 0x12d6;
 				fcn_004e44f0(fcn_004e4470(0x6a4024));
 			} else {
 				r = fcn_0053e8a0(0);
 				if (r == 1) {
-					g_7725c8 = r;
+					d2_SuppressOverlay = r;
 					*(int*) 0x6a37f8 = fcn_005268c0(*(int*) 0x14abf04, 0);
 					if (fcn_0053c560(0) == 0) {
 						fcn_004432d0(0, 0);
@@ -160,17 +160,17 @@ int __cdecl fcn_0053e020(void)
 	fcn_00469510(v7);
 	fcn_00471e30(v2);
 	if (v12 != 0) {
-		v3 = fcn_004730c0(0, 0, g_1040494, g_1040490, 0x67d67c, 100, 1);
-		*(int*) &g_7e46ac = 0x12d6;
-		g_68bfb8 = 0x12d6;
+		v3 = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 100, 1);
+		*(int*) &main_LoopFlags = 0x12d6;
+		cut_EventLoopFlags = 0x12d6;
 		fcn_004e44f0(fcn_004e4470(0x6a4060));
 		if (v3 != 0) {
 			fcn_00473150(v3);
 			return v12;
 		}
 	} else {
-		*(int*) &g_7e46ac = 0x12d6;
-		g_68bfb8 = 0x12d6;
+		*(int*) &main_LoopFlags = 0x12d6;
+		cut_EventLoopFlags = 0x12d6;
 		fcn_004e44f0(fcn_004e4470(0x6a4024));
 	}
 	return v12;

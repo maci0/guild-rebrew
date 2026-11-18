@@ -13,7 +13,7 @@ typedef struct
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern char s_67d420[];
 
@@ -42,7 +42,7 @@ int __cdecl fcn_0046f7e0(int x, int y, int a3, int win, int a5)
 		fcn_0046f650(id, w);
 		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x40 / 4] = (int) w;
 		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x30 / 4] = 0;
-		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x34 / 4] = g_1040490;
+		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x34 / 4] = d2_ScreenHeight;
 		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x28 / 4] = 0;
 		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x2c / 4] = g_1040494;
 		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x50 / 4] = ((fcn_0046f7e0_Ent*)g_1015ea0)[w->i[0x27c / 4]].i[0x50 / 4];

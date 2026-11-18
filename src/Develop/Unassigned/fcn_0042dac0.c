@@ -5,10 +5,10 @@ extern void __cdecl sub_64ed28(void *, int, int, void *);
 extern void __cdecl sub_64e1fd(void *);
 extern void __cdecl sub_41ddd0(unsigned long);
 #include "GOLDTL.txt_OpenText_gconf.h"
-extern char g_149d120[][0x74];
+extern char txt_TextBanks[][0x74];
 extern char g_1052f00[];
 extern char g_1053000[][0x50];
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 extern int g_11bb000[];
 extern char g_6790b0[];
 extern char g_679888[];
@@ -24,15 +24,15 @@ int __cdecl fcn_0042dac0(int a)
     int *first, *last;
     char *row;
 
-    row = g_149d120[a];
+    row = txt_TextBanks[a];
     p = row + 0x60;
 
     sub_64d41a(buf, 0x679de4, (unsigned long) g_1052f00, (unsigned long) g_679888, (void*) row);
     f = sub_64e2f9(buf, (unsigned long) g_6790b0);
     if (f == 0) {
         MessageBoxA(0, "Could not write ResourceFile!", "txt_SaveTextFile", 0x30);
-        sub_41ddd0((unsigned long) g_6b7fa0);
-        g_6b7fa0 = 0;
+        sub_41ddd0((unsigned long) txt_TextBuffer);
+        txt_TextBuffer = 0;
         return 0;
     }
     sub_64e48f(f, 0, 0);
@@ -43,7 +43,7 @@ int __cdecl fcn_0042dac0(int a)
     sub_64ed28(first, 4, 1, f);
     sub_64ed28(last, 4, 1, f);
     for (n = *first; n < *last + 1; n++) {
-        v = (int) g_14a5320[n] - *(int *)(p + 8);
+        v = (int) txt_TextEntries[n] - *(int *)(p + 8);
         sub_64ed28(&v, 4, 1, f);
     }
     for (n = *first; n < *last + 1; n++) {

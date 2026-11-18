@@ -7,11 +7,11 @@ extern int g_774708;
 extern int g_774954;
 extern int g_774938;
 extern int g_774934;
-extern int g_774930;
+extern int msx_MusicEnabled;
 extern int g_7e35c0[];
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern int g_7e2700;
-extern int g_7e4300;
+extern int d3_SelectionBoxActive;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_7f4c04;
 extern char g_7f4ca0[];
@@ -23,9 +23,9 @@ extern char g_774964;
 extern char g_774660;
 extern char g_6a33f4[];
 extern int g_6a2c08;
-extern char g_7f4c00[];
-extern int g_6b8010;
-extern int g_6b8014;
+extern char gm_GameTime[];
+extern int d3_CurrentContextIndex;
+extern int d3_ActiveCamera;
 extern int g_6b8008;
 extern int g_773dd8;
 extern int g_7746c4;
@@ -36,13 +36,13 @@ extern int g_7e4534;
 extern int g_6b8300;
 extern int g_772f6c;
 extern int g_14ce8e8;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_1015ea0;
 extern int g_7746a4;
-extern int g_7746ac;
+extern int sv_HoveredObjekt;
 extern int g_774668;
 extern int d3_ActiveCameraAnimation;
-extern int g_7725c8;
+extern int d2_SuppressOverlay;
 extern int g_7749e4;
 extern int g_67d8dc;
 extern int g_6a99e8;
@@ -58,9 +58,9 @@ extern char g_7747b0;
 extern unsigned char g_14cf950;
 extern short g_14cf900;
 extern short g_14cf902;
-extern int g_100f1e8;
-extern int g_100f1ec;
-extern int g_7725d0;
+extern int d2_MouseX;
+extern int d2_MouseY;
+extern int tp_d2_SelectedControl;
 extern int g_14ce8cc;
 extern int g_67d8d4;
 extern int g_6a25a8;
@@ -81,7 +81,7 @@ extern int g_14a5524;
 extern int g_6a3760;
 extern char g_7747ad;
 extern char g_774988[];
-extern int g_774980;
+extern int cm_SaveRequestSlot;
 extern unsigned int g_772e84;
 extern int g_14ac5e8;
 #include "GOLDTL.fcn_005373e0_gconf.h"
@@ -203,7 +203,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 	int addr;
 
 	z = 0;
-	g_7e46ac = flags;
+	main_LoopFlags = flags;
 	fcn_005356e0();
 	fcn_412630();
 	if (a0 != 0) {
@@ -297,10 +297,10 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 		}
 		if (g_774670 == 0 && (flags & 0x40) && g_6a2c08 != 0) {
 			if (!(flags & 0x10000) && (flags & 0x40000)) {
-				fcn_0052a960(g_7f4c00);
+				fcn_0052a960(gm_GameTime);
 			}
-			if (g_6b8010 == 0) {
-				fcn_00454f80(g_773dd8, g_6b8014, g_6b8008);
+			if (d3_CurrentContextIndex == 0) {
+				fcn_00454f80(g_773dd8, d3_ActiveCamera, g_6b8008);
 			}
 			fcn_00413380();
 			fcn_00444190();
@@ -341,7 +341,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 		fcn_004c16c0();
 		fcn_004c0b40();
 	}
-	if (g_774930 != 0 && (flags & 0x40000)) {
+	if (msx_MusicEnabled != 0 && (flags & 0x40000)) {
 		fcn_004c2860();
 	}
 	if (g_774670 == 0) {
@@ -352,7 +352,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 			if ((flags & 0x10000) && g_772f6c != 0) {
 				fcn_00415d70(g_772f6c);
 			}
-			if (g_774670 == 0 && g_7e4300 != 0) {
+			if (g_774670 == 0 && d3_SelectionBoxActive != 0) {
 				if (z != 0) {
 					fcn_005348a0();
 				} else {
@@ -376,12 +376,12 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 		f = flags & 0x10;
 		if (f == 0) {
 			if (g_14ce8e8 == 0) {
-				if (g_67d370 == -1 ||
-					!(*(char *) (g_1015ea0 + g_67d370 * 756 + 0x1d0) & 0x40)) {
+				if (d2_CurrentElementId == -1 ||
+					!(*(char *) (g_1015ea0 + d2_CurrentElementId * 756 + 0x1d0) & 0x40)) {
 					fcn_00475220(g_6b5c60);
 				}
 				g_7746a4 = 0;
-				g_7746ac = 0;
+				sv_HoveredObjekt = 0;
 				if (z == 0) {
 					d2_SetOverlayAnimation(0, 0);
 				}
@@ -403,7 +403,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 	if (g_774670 == 0 && (flags & 0x80)) {
 		f = flags & 0x1000;
 		if (!(f != 0 && g_14ce8e8 == 0 && g_774668 == 0 && d3_ActiveCameraAnimation == 0 &&
-			g_7e4300 == 0 && g_7725c8 == 0 && g_7749e4 == 0)) {
+			d3_SelectionBoxActive == 0 && d2_SuppressOverlay == 0 && g_7749e4 == 0)) {
 			g_67d8dc = 0;
 		} else {
 			g_67d8dc = 1;
@@ -432,7 +432,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 			fcn_00532bd0();
 		}
 		if (f != 0 && g_14ce8e8 == 0 && g_774668 == 0 && d3_ActiveCameraAnimation == 0 &&
-			g_7e4300 == 0 && g_7725c8 == 0 && g_7749e4 == 0) {
+			d3_SelectionBoxActive == 0 && d2_SuppressOverlay == 0 && g_7749e4 == 0) {
 			fcn_005337a0();
 		}
 		fcn_005337f0();
@@ -445,8 +445,8 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 	}
 	fcn_00411fe0();
 	if (g_6772c4 != 0) {
-		g_100f1e8 = g_14cf900;
-		g_100f1ec = g_14cf902;
+		d2_MouseX = g_14cf900;
+		d2_MouseY = g_14cf902;
 	}
 	fcn_00537320(flags);
 	if (g_774670 == 0 && (flags & 0x80)) {
@@ -463,7 +463,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 	}
 	fcn_00536b10();
 	if (g_774964 != 0) {
-		if ((g_7747b0 & 4) && g_7725d0 == 0 && g_14cf950 == 0x1c && (flags & 0x2000)) {
+		if ((g_7747b0 & 4) && tp_d2_SelectedControl == 0 && g_14cf950 == 0x1c && (flags & 0x2000)) {
 			fcn_00536810();
 		}
 		if (g_774964 != 0) {
@@ -494,7 +494,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 		}
 		if (g_774970 != 0xffff && (unsigned char) g_7f4ca0[(unsigned short) g_774970 * 540 + 8] > 0) {
 			if (g_100f1dc != -1) {
-				i = g_67d370;
+				i = d2_CurrentElementId;
 				if (i == g_6a25a0) {
 					fcn_005d4a20();
 				} else if (i == g_6a257c) {
@@ -513,7 +513,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 				}
 			}
 		} else if (g_100f1dc != -1) {
-			i = g_67d370;
+			i = d2_CurrentElementId;
 			if (i == g_6a25a0 || i == g_6a257c || i == g_6a2584 ||
 				i == g_6a2588 || i == g_6a2580 || i == g_6a2578) {
 				fcn_00533a40(g_14a5544);
@@ -528,7 +528,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 			if (!((g_7747b0 & 0x80))) {
 				g_774960 = 1;
 				fcn_0042df30(g_538060, 1);
-				g_7e46ac |= 0x100000;
+				main_LoopFlags |= 0x100000;
 				fcn_00526660(g_14a5524, 0xc4);
 				fcn_005356b0(g_5438c0);
 			}
@@ -545,13 +545,13 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 		fcn_0042df30(g_538060, 0);
 		g_7747ad = 0;
 	}
-	if (g_774988[0] != 0 && !(g_7e46ac & 0x200000)) {
-		if (g_774980 == 1) {
+	if (g_774988[0] != 0 && !(main_LoopFlags & 0x200000)) {
+		if (cm_SaveRequestSlot == 1) {
 			memcpy(s, g_6a33e8, 10);
-		} else if (g_774980 == 0) {
+		} else if (cm_SaveRequestSlot == 0) {
 			memcpy(s, g_6a33dc, 9);
 		} else {
-			fcn_64d41a(s, g_6a33c8, g_774980);
+			fcn_64d41a(s, g_6a33c8, cm_SaveRequestSlot);
 		}
 		i = 0;
 		do {
@@ -560,7 +560,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 		g_774988[0] = 0;
 		fcn_005e41b0(s, buf);
 	}
-	if (g_772e84 > 0 && !(g_7e46ac & 0x200000)) {
+	if (g_772e84 > 0 && !(main_LoopFlags & 0x200000)) {
 		g_772e84--;
 		fcn_00535850(flags, g_14ac5e8);
 	}

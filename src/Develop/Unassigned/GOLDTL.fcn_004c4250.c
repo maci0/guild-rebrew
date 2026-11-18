@@ -2,7 +2,7 @@
 
 #pragma intrinsic(memcpy)
 
-extern char* g_aed324;
+extern char* cm_CommandQueueHead;
 extern unsigned char g_aed340[];
 
 /* ADDRESS: GOLDTL 0x004c4250 */
@@ -15,7 +15,7 @@ int __cdecl fcn_004c4250(char* obj)
 	if (*(int*) (obj + 0xc) == 0) {
 		return 0;
 	}
-	for (e = g_aed324; e != 0; e = *(char**) (e + 0x95)) {
+	for (e = cm_CommandQueueHead; e != 0; e = *(char**) (e + 0x95)) {
 		if (*(unsigned char*) (e + 3) == *(unsigned char*) (obj + 3) &&
 				*(int*) (e + 8) == *(int*) (obj + 0xc)) {
 			break;
@@ -31,7 +31,7 @@ int __cdecl fcn_004c4250(char* obj)
 	i = 0x7e;
 	while (i < *(int*) 0x1005764) {
 		prev = e;
-		e = g_aed324;
+		e = cm_CommandQueueHead;
 		if (e == 0) {
 			return 0;
 		}

@@ -52,7 +52,7 @@ typedef struct {
 } Scene;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/d3_camera.h"
@@ -90,16 +90,16 @@ void __cdecl fcn_00516f60(void)
 	View* v;
 	int i;
 
-	mode = fcn_00500e20(&(*(char*)&g_7f4c00));
-	if (g_6b8010 != 0) {
+	mode = fcn_00500e20(&(*(char*)&gm_GameTime));
+	if (d3_CurrentContextIndex != 0) {
 		return;
 	}
 	v = (View*) gm_GetEntityTableEntry((char*) (&((Entity*)g_7f4ca0)[g_774970]));
 	if (v != 0 && v->zoom != -1.0f) {
-		fcn_00438b40(((Camera*)g_6b8014), v->pos);
+		fcn_00438b40(((Camera*)d3_ActiveCamera), v->pos);
 		fcn_0052ac60(v->zoom);
-		((Camera*)g_6b8014)->angle = v->angle;
-		fcn_00438cb0(((Camera*)g_6b8014), ((Camera*)g_6b8014)->pos);
+		((Camera*)d3_ActiveCamera)->angle = v->angle;
+		fcn_00438cb0(((Camera*)d3_ActiveCamera), ((Camera*)d3_ActiveCamera)->pos);
 	} else {
 		fcn_0052ac60(0.33f);
 	}
@@ -133,7 +133,7 @@ void __cdecl fcn_00516f60(void)
 	g_6b8061 = 1;
 	g_6791c8 = 0;
 	g_67a964 = 1.0f - (unsigned char) g_77666c * 0.01f;
-	fcn_0052a960(&(*(char*)&g_7f4c00));
+	fcn_0052a960(&(*(char*)&gm_GameTime));
 	if (g_6b859b != 0) {
 		fcn_00443230(0);
 	} else {

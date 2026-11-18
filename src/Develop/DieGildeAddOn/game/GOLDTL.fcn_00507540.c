@@ -17,7 +17,7 @@ typedef struct {
 } Ent;
 
 extern Ent g_7f4ca0[];
-extern Time g_7f4c00;
+extern Time gm_GameTime;
 
 int __cdecl gm_GetOppositeStatIndex(int stat);
 int __cdecl gm_MapEntityStatRange(int stat);
@@ -75,12 +75,12 @@ float __cdecl fcn_00507540(int idx, Time* out)
 			a.hour += 6;
 		}
 		d = g_7f4ca0[idx].day;
-		h = g_7f4c00.hour;
+		h = gm_GameTime.hour;
 		b.day = d;
 		b.hour = h;
 		if (fcn_00500cb0(&b, &a) < 0) {
 			f = (float) fcn_00500d20(&z, &b) / (float) fcn_00500d20(&z, &a);
-			fcn_00500bb0(&a, g_7f4c00.day * 24 + h, 0, 0);
+			fcn_00500bb0(&a, gm_GameTime.day * 24 + h, 0, 0);
 			fcn_00500bb0(&a, -h - d * 24, 0, 0);
 			*out = a;
 			return f;

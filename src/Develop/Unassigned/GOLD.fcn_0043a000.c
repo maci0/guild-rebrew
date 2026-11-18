@@ -22,7 +22,7 @@ char* __cdecl fcn_0043a000(char* object)
     if (*(unsigned char*) (model + 0x96c) <= 0)
         return 0;
 
-    eye = g_6b8014;
+    eye = d3_ActiveCamera;
     if ((*(unsigned char*) (object + 0x213) & 0x30) == 0 && eye) {
         delta = *(VECTOR3*) (object + 0x4c);
         delta.x -= *(float*) (eye + 0x4c);
@@ -42,7 +42,7 @@ char* __cdecl fcn_0043a000(char* object)
     page = model + 0xf4 + index * 0x198;
     if (*(int*) (page + 8) == 0 || *(int*) (page + 0xc) == 0)
         return 0;
-    if (page != *(char**) (object + 0x1cc) || LightingUpdatePending)
+    if (page != *(char**) (object + 0x1cc) || d3_LightingUpdatePending)
         object[0x210] |= 0x40;
     return page;
 }

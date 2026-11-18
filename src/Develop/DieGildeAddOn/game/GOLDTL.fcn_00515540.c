@@ -26,7 +26,7 @@ int __cdecl fcn_00515540(char* object)
 {
     int index;
 
-    if (((signed char*) g_7f3b40)[*(unsigned short*) object] == -1) {
+    if (((signed char*) init_SceneContextIndices)[*(unsigned short*) object] == -1) {
         if (object == g_7746cc) {
             init_LoadObjektScene(*(unsigned short*) object);
         } else {
@@ -34,11 +34,11 @@ int __cdecl fcn_00515540(char* object)
             if (index == -1) {
                 return index;
             }
-            ((signed char*) g_7f3b40)[*(unsigned short*) object] = (signed char) index;
+            ((signed char*) init_SceneContextIndices)[*(unsigned short*) object] = (signed char) index;
             ((D3_UNIVERSE_VIEW*) g_10432c0)[index].verwendet = 1;
             strcpy((char*) &((D3_UNIVERSE_VIEW*) g_10432c0)[index],
                 g_item_def_table + *(unsigned short*) object * 0x41 + 1);
         }
     }
-    return ((signed char*) g_7f3b40)[*(unsigned short*) object];
+    return ((signed char*) init_SceneContextIndices)[*(unsigned short*) object];
 }

@@ -13,7 +13,7 @@ typedef struct {
 } fcn_004b3c00_rec;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 fcn_004b3c00_rec* __cdecl fcn_004b3bc0(int);
 
@@ -25,7 +25,7 @@ fcn_004b3c00_rec* __cdecl fcn_004b3c00(int a)
 
 	p = fcn_004b3bc0(a);
 	if (p != 0) {
-		p->when = (*(fcn_004b3c00_stamp*)&g_7f4c00);
+		p->when = (*(fcn_004b3c00_stamp*)&gm_GameTime);
 		p->f18 = 0;
 		p->f1c = 0;
 		p->f20 = 0;

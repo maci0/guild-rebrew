@@ -20,12 +20,12 @@ struct house {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_77e0a0[];
 extern char g_776709;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 void __cdecl fcn_00546190(char*);
@@ -42,14 +42,14 @@ void __cdecl fcn_005700d0(char* u)
 	case 0:
 		t = ((struct step*)g_77e0a0)[*(int*) (u + 0xac)].msg;
 		if (t != 0 && t != -1 && g_776709 != 0) {
-			fcn_00545d40(((struct house*)g_7f4ca0)[g_774970].owner, -1, g_14a5320[t], 0x40, 0x5f9, 0);
+			fcn_00545d40(((struct house*)g_7f4ca0)[g_774970].owner, -1, txt_TextEntries[t], 0x40, 0x5f9, 0);
 		}
 		(*(int*) (u + 0xac))++;
 		if (((struct step*)g_77e0a0)[*(int*) (u + 0xac)].msg == 0) {
 			*(int*) (u + 0x70) = 1;
 			return;
 		}
-		*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 		*(int*) (u + 0x52) = ((struct step*)g_77e0a0)[*(int*) (u + 0xac)].when;
 		*(short*) (u + 0x56) = ((struct step*)g_77e0a0)[*(int*) (u + 0xac)].dur;
 		*(int*) (u + 0x58) = ((struct step*)g_77e0a0)[*(int*) (u + 0xac)].arg;

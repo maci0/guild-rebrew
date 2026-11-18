@@ -2,7 +2,7 @@
 
 
 extern unsigned char* lpGebaeudePROT;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern char s_6a99f4[];
@@ -30,7 +30,7 @@ int __cdecl fcn_005909d0(int i)
 		io_AppendText(i * 14 + 0x48e);
 	}
 	d2_SetForm(0, 2);
-	fcn_0046f740(0, 0, i + 0x427, g_772514);
+	fcn_0046f740(0, 0, i + 0x427, d2_CurrentWindowId);
 	io_AppendText(i * 14 + 0x48f);
 	if (rec[0] != 10) {
 		d2_SetForm(0, 3);

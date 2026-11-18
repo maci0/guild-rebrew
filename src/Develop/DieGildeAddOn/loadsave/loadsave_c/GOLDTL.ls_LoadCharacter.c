@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
 extern char* g_6b5c20;
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 extern int g_6b7fdc;
 extern int ls_SaveVersion;
 extern char s_675504[];
@@ -71,7 +71,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 	found = 0;
 	alloc = 0;
 	count = 0;
-	total = g_6b8010;
+	total = d3_CurrentContextIndex;
 	if (!ls_ReadVfsDataChecked(&count, 4, 1, (void*) stream)) {
 		return 0;
 	}

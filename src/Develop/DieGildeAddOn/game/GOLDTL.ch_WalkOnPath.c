@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 /* Character task fields used by this body. */
-extern int g_6b5c24;    /* game tick counter */
+extern int ch_UpdateTime;    /* game tick counter */
 extern char g_6b5c28;   /* scene debug switch */
-extern int g_6b8010;    /* scripted-motion mode */
+extern int d3_CurrentContextIndex;    /* scripted-motion mode */
 
 /* Shared float pool reached through raw .rdata addresses. */
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -78,7 +78,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 	}
 	else {
 		if (*(int*) (obj + 0x154) != -1) {
-			if (g_6b5c24 < *(int*) (obj + 0x154) + 225) {
+			if (ch_UpdateTime < *(int*) (obj + 0x154) + 225) {
 				return;
 			}
 			anim = *(char**) (inst + 0x70);
@@ -171,7 +171,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 				}
 				*(unsigned int*) (obj + 0x160) |= 0x80;
 				fcn_00438b40(*(char**) (inst + 0x34), (int*) (obj + 0x144));
-				ch_PlaceOnGround(inst, g_6b8010 != 0);
+				ch_PlaceOnGround(inst, d3_CurrentContextIndex != 0);
 				return;
 			}
 		}

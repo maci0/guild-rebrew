@@ -33,7 +33,7 @@ struct pos14 {
 };
 #pragma pack(pop)
 
-extern struct pos14 g_7f4c00;
+extern struct pos14 gm_GameTime;
 extern int g_7749ec;
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
@@ -82,11 +82,11 @@ void __cdecl EvtSensenmann(char* e)
 	}
 	if (g_7749ec == 0) {
 		fcn_004e4e90("cd2\\DerSeuchenzug.mp3");
-		if (g_772d1c != 0) {
+		if (tp_msx_CurrentTrack != 0) {
 			g_7749ec = 1;
 		}
 	}
-	*(struct pos14*) (e + 0x52) = g_7f4c00;
+	*(struct pos14*) (e + 0x52) = gm_GameTime;
 	switch (*(int*) (e + 0x70)) {
 	case 0:
 		r = fcn_00558680(e);

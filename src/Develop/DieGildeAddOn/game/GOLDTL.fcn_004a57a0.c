@@ -14,7 +14,7 @@ typedef struct Query {
 // SIZE 0x50
 
 extern char *g_77261c;
-extern int g_664398[];
+extern int gm_RandomSearchSteps[];
 
 int __cdecl fcn_005cf720(unsigned short, unsigned short, Query *, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -33,7 +33,7 @@ unsigned int __cdecl fcn_004a57a0(unsigned short *e, int a1, int n, char *src, f
 	int flag;
 
 	flag = 0;
-	step = g_664398[gm_RandomMod(0x10)];
+	step = gm_RandomSearchSteps[gm_RandomMod(0x10)];
 	memset(&q, 0, sizeof(q));
 	{
 	len = n * 2;

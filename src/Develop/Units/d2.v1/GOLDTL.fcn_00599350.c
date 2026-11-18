@@ -30,16 +30,16 @@ typedef struct {
 extern char* g_1015ea0;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_6aa0a8;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
 extern int g_7746f8;
 extern unsigned char g_773d75;
-extern char* g_773da8;
-extern int g_7f4c00;
+extern char* gm_CityEntity;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -113,12 +113,12 @@ void __cdecl fcn_00599350(void)
 	hwnd = fcn_00470820(0, 0, (char*) 0x6aa298);
 	fcn_00471b60(hwnd);
 	d2_SetForm(hwnd, 0);
-	i = g_772514 * 0x3cc;
+	i = d2_CurrentWindowId * 0x3cc;
 	*(int*) (i + 0x10162e8) = 0x18;
 	*(int*) (i + 0x10162ec) = 0x18;
 	*(int*) (i + 0x10162f0) = 0x18;
 	*(int*) (i + 0x10162f4) = 0x18;
-	fcn_00533f40(0x20c, 0x168, g_772514, fcn_00472830(hwnd, 3), 0x5a, &ida, &idc, &idb);
+	fcn_00533f40(0x20c, 0x168, d2_CurrentWindowId, fcn_00472830(hwnd, 3), 0x5a, &ida, &idc, &idb);
 	d2_SetForm(hwnd, 1);
 	io_AppendText(0x17eb);
 	d2_SetForm(hwnd, 2);
@@ -141,7 +141,7 @@ void __cdecl fcn_00599350(void)
 				}
 			}
 		}
-		id = fcn_0046f740((count % 2) * 0x46 + 0x30, (count / 2) * 0x5a + 0x0f, i + 0x6d4, g_772514);
+		id = fcn_0046f740((count % 2) * 0x46 + 0x30, (count / 2) * 0x5a + 0x0f, i + 0x6d4, d2_CurrentWindowId);
 		ids[i] = id;
 		if (flag == 0) {
 			*(int*) (g_1015ea0 + id * 0x2f4 + 0x5c) = 1;
@@ -169,7 +169,7 @@ void __cdecl fcn_00599350(void)
 			char* rec;
 
 			d2_SetForm(hwnd, 3);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			mode = 0;
 			if (g_6aa0a8 == 3) {
 				g_7746f8 = 1;
@@ -187,14 +187,14 @@ void __cdecl fcn_00599350(void)
 					avail = fcn_00504f30(idx, g_774970);
 					if (avail == 1) {
 						if (p->kind != 0x0f && p->kind != 6) {
-							id = fcn_0046f740((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, idx + 0x427, g_772514);
+							id = fcn_0046f740((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, idx + 0x427, d2_CurrentWindowId);
 							*(int*) (g_1015ea0 + id * 0x2f4 + 0x58) = 1;
 							strcpy((char*) (g_1015ea0 + id * 0x2f4 + 0xcc), *(char**) rec);
 							*(int*) (g_1015ea0 + id * 0x2f4 + 0x1d0) = 3;
 							*(int*) (g_1015ea0 + id * 0x2f4 + 0x1cc) = 0x54;
 							txt = fcn_0050d200((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), idx);
 							fcn_0050bc10(txt, g_773d75, buf);
-							txt = d2_ShowTxt((count % 3) * 0x46 + 2, (count / 3) * 0x5a + 0x3f, g_6b5c60, g_772514);
+							txt = d2_ShowTxt((count % 3) * 0x46 + 2, (count / 3) * 0x5a + 0x3f, g_6b5c60, d2_CurrentWindowId);
 							fcn_00472900(txt, 0x54);
 							fcn_0046f940(txt, buf);
 							*(int*) (g_1015ea0 + txt * 0x2f4 + 0x18) = 0x8c;
@@ -203,7 +203,7 @@ void __cdecl fcn_00599350(void)
 						}
 					} else {
 						if (avail == 2) {
-							id = fcn_0046f740((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, 0x4fb, g_772514);
+							id = fcn_0046f740((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, 0x4fb, d2_CurrentWindowId);
 							*(char*) (g_1015ea0 + id * 0x2f4 + 0xcc) = g_6b5c60[0];
 							*(int*) (g_1015ea0 + id * 0x2f4 + 0x1d0) = 3;
 							*(int*) (g_1015ea0 + id * 0x2f4 + 0x1cc) = 0x54;
@@ -223,7 +223,7 @@ void __cdecl fcn_00599350(void)
 				*(int*) (g_1015ea0 + prevIdx * 0x2f4 + 0x38) = 0;
 				*(int*) (g_1015ea0 + prevIdx * 0x2f4 + 0x3c) = 0;
 			}
-			prevIdx = g_67d370;
+			prevIdx = d2_CurrentElementId;
 			if (mode != 0) {
 				txt = fcn_0050d200((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), i);
 				if (!fcn_00526070((int) mode, *(int*) (mode + 0x14), txt, g_773d75)) {
@@ -238,7 +238,7 @@ void __cdecl fcn_00599350(void)
 			fcn_00471af0(hwnd, 0);
 			obj = (char*) lc_GebaeudeAusrichten(i, path);
 			if (obj != 0) {
-				msg.f28 = g_7f4c00;
+				msg.f28 = gm_GameTime;
 				msg.type = 0x0d;
 				msg.f2c = g_7f4c04;
 				msg.f36 = 2;
@@ -248,7 +248,7 @@ void __cdecl fcn_00599350(void)
 				msg.f08 = id;
 				msg.f0c = id;
 				if (g_6aa0a8 == 3) {
-					msg.f58 = *(int*) (g_773da8 + 4);
+					msg.f58 = *(int*) (gm_CityEntity + 4);
 				} else {
 					msg.f58 = id;
 				}

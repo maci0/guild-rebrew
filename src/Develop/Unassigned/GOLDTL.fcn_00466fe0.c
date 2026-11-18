@@ -23,7 +23,7 @@ typedef struct
 #include "client_types.h"
 extern Fld_102d140 g_102d140[];
 extern char* g_1015ea0;
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 
 int __cdecl fcn_0046b520(char* s, int font);
 
@@ -47,10 +47,10 @@ void __cdecl fcn_00466fe0(int fld, int str)
 	if (f->len != 0) {
 		memmove(cur, cur + f->len, strlen(*(char**) (e + 0x3c)) - (cur - *(char**) (e + 0x3c)) + 1);
 	}
-	len = strlen(g_14a5320[str]);
+	len = strlen(txt_TextEntries[str]);
 	f->len = len;
 	memmove(f->cur + len, f->cur, strlen(*(char**) (e + 0x3c)) - (f->cur - *(char**) (e + 0x3c)) + 1);
-	memcpy(f->cur, g_14a5320[str], f->len);
-	f->w = fcn_0046b520(g_14a5320[str], f->font);
+	memcpy(f->cur, txt_TextEntries[str], f->len);
+	f->w = fcn_0046b520(txt_TextEntries[str], f->font);
 	((fcn_00466fe0_Ent*)g_1015ea0)[f->ent].i[0x18 / 4] = f->w;
 }

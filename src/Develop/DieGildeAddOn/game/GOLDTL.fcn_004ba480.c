@@ -15,7 +15,7 @@ typedef struct Kind {
 // SIZE 0x24d
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
@@ -82,7 +82,7 @@ int __cdecl fcn_004ba480(int* a1)
 		message[0x36] = 1;
 		*(int*) (message + 0x5c) = v;
 		*(int*) (message + 8) = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
-		*(stamp14*) (message + 0x28) = (*(stamp14*)&g_7f4c00);
+		*(stamp14*) (message + 0x28) = (*(stamp14*)&gm_GameTime);
 		*(short*) (message + 0x64) = *(unsigned short*) (a1 + 1) + 0x12e7;
 		*(int*) (message + 0x58) = *(int*) (e + 2);
 		*(int*) (message + 0x60) = *(int*) (p + 2);

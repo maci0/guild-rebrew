@@ -20,7 +20,7 @@ extern int g_6b86d4;
 #include "client_types.h"
 extern VECTOR3 g_67bbdc;
 extern VECTOR3 g_6b86c4;
-extern int g_6b805c;
+extern int d3_FogColor;
 extern float g_10425fc;
 extern float g_104329c;
 extern char g_1041d80[];
@@ -54,7 +54,7 @@ void __cdecl fcn_00446cd0(char* name, void* stream)
 	fcn_00401260(s, 0);
 	fcn_004012f0(s, ((int*)&g_67bbdc));
 	fcn_004012f0(s, ((int*)&g_6b86c4));
-	fcn_00401360(s, g_6b805c);
+	fcn_00401360(s, d3_FogColor);
 	fcn_00401260(s, (*(int*)&g_10425fc));
 	fcn_00401260(s, (*(int*)&g_104329c));
 	for (i = 0; i < 7; i++) {

@@ -37,8 +37,8 @@ int __cdecl ch_InitActionQueue(void)
 	if (g_6b5c20 == 0) {
 		return 0;
 	}
-	memset(((int*)g_14d0c40), 0, sizeof(int[0x4c0]));
-	memset(((int*)g_14d0020), 0, sizeof(int[0x300]));
+	memset(((int*)ch_ActionDefinitions), 0, sizeof(int[0x4c0]));
+	memset(((int*)ch_CharacterSlots), 0, sizeof(int[0x300]));
 	ch_DeclareAction(7, fcn_004079f0, 1, "bewegung/dreh_90_rechts", 2);
 	ch_DeclareAction(0, ch_ExecFinishAnimation, 1, &(*(char*)g_6b5c60), 0);
 	ch_DeclareAction(23, fcn_00406280, 1, &(*(char*)g_6b5c60), 0);

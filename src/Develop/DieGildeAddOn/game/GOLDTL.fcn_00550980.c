@@ -29,8 +29,8 @@ struct house {
 
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
-extern char* g_773da8;
+extern pos14_7f4c00 gm_GameTime;
+extern char* gm_CityEntity;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -57,7 +57,7 @@ void __cdecl fcn_00550980(char* u)
 		fcn_00546190(u);
 		return;
 	}
-	if (fcn_00500cb0(&g_7f4c00, (pos14_7f4c00*) (u + 0x44)) == -1) {
+	if (fcn_00500cb0(&gm_GameTime, (pos14_7f4c00*) (u + 0x44)) == -1) {
 		return;
 	}
 	switch (*(int*) (u + 0x70)) {
@@ -78,7 +78,7 @@ void __cdecl fcn_00550980(char* u)
 		*(int*) (u + 0x70) = 1;
 		break;
 	case 1:
-		if (fcn_00500cb0(&g_7f4c00, (pos14_7f4c00*) (u + 0x52)) > 0) {
+		if (fcn_00500cb0(&gm_GameTime, (pos14_7f4c00*) (u + 0x52)) > 0) {
 			fcn_00545780(u);
 			fcn_00546190(u);
 			return;
@@ -93,7 +93,7 @@ void __cdecl fcn_00550980(char* u)
 		if (g_100f1dc == 2) {
 			memset(&m, 0, sizeof(m));
 			v = *(int*) (u + 0xb0);
-			fcn_004c51a0(((struct house*)g_773da8)->owner, ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, g_773d75, v);
+			fcn_004c51a0(((struct house*)gm_CityEntity)->owner, ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, g_773d75, v);
 			m.kind = 0x56;
 			m.target = -1;
 			m.code = 0x11;

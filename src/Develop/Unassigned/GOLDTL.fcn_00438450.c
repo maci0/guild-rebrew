@@ -1,6 +1,6 @@
 extern int g_6b8050;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 extern float g_662a34;
 extern int g_10432a8;
 extern int g_1042a04;
@@ -39,7 +39,7 @@ unsigned char __cdecl fcn_00438450(char* o)
 			return anim;
 		}
 		if (sel != 0 || (flags & 0x10) != 0) {
-			fcn_00438100((unsigned int) o, g_6b8014, 0);
+			fcn_00438100((unsigned int) o, d3_ActiveCamera, 0);
 			*(unsigned char*) (p + 0x163d) = (unsigned char) fcn_00438270((unsigned int) o, v, *(int*) (o + 0x1ec) + 0x48);
 			*(int*) (v + 0x300) = 0;
 			*(int*) (v + 0x304) = 0;

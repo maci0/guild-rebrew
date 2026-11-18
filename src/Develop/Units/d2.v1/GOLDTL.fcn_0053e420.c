@@ -8,7 +8,7 @@ extern int g_14ce8e0;
 extern char g_14cf950;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -63,19 +63,19 @@ int __cdecl fcn_0053e420(void)
 			g_774654 = 1;
 		}
 		if (g_100f1dc == 2) {
-			if (g_67d370 == option0) {
+			if (d2_CurrentElementId == option0) {
 				(*(char*)&g_6a3440) = -1;
-			} else if (g_67d370 == option1) {
+			} else if (d2_CurrentElementId == option1) {
 				(*(char*)&g_6a3440) = 0;
-			} else if (g_67d370 == option2) {
+			} else if (d2_CurrentElementId == option2) {
 				(*(char*)&g_6a3440) = 1;
-			} else if (g_67d370 == option3) {
+			} else if (d2_CurrentElementId == option3) {
 				(*(char*)&g_6a3440) = 2;
-			} else if (g_67d370 == option4) {
+			} else if (d2_CurrentElementId == option4) {
 				(*(char*)&g_6a3440) = 3;
-			} else if (g_67d370 == option5) {
+			} else if (d2_CurrentElementId == option5) {
 				(*(char*)&g_6a3440) = 4;
-			} else if (g_67d370 == option6) {
+			} else if (d2_CurrentElementId == option6) {
 				(*(char*)&g_6a3440) = 5;
 			}
 			g_776704 = (*(char*)&g_6a3440);

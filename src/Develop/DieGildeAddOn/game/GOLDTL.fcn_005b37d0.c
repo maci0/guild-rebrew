@@ -56,7 +56,7 @@ void __cdecl fcn_005b37d0(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		g_772514 = h;
+		d2_CurrentWindowId = h;
 		io_AppendText((int) "$C");
 		io_AppendText((int) s_6ab7e4);
 		total = fcn_0045a230(0x1ff, 0x80, 0);
@@ -83,7 +83,7 @@ void __cdecl fcn_005b37d0(void)
 		io_AppendText((int) s_6ab728, n);
 		io_AppendText((int) s_6ab710, total);
 		io_AppendText((int) s_6ab6f8, fcn_00402ba0(-1, 1));
-		io_AppendText((int) s_6ab6e4, g_773d70);
+		io_AppendText((int) s_6ab6e4, gm_EntityCount);
 		io_AppendText((int) s_6ab6d0, g_773d8c);
 		fcn_005b0f00(w);
 	}

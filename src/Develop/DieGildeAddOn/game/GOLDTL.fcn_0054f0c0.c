@@ -33,7 +33,7 @@ typedef struct {
 } Order_54f0c0;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 Entity_54f0c0* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -100,7 +100,7 @@ void __cdecl fcn_0054f0c0(Order_54f0c0* o)
 					}
 				}
 			}
-			o->stamp = (*(Stamp_54f0c0*)&g_7f4c00);
+			o->stamp = (*(Stamp_54f0c0*)&gm_GameTime);
 			fcn_00500bb0(&o->stamp, 0, 2, 0);
 			o->event = fcn_004c5620(-1, o);
 		}

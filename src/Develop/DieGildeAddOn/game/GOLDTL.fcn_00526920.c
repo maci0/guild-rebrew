@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern char* g_7e2704;
 extern char* g_7e2708;
 extern char g_7e2714[];
@@ -43,7 +43,7 @@ void __cdecl fcn_00526920(char* a0, int a1, char* a2)
 	if (g_7e2700 != 0) {
 		return;
 	}
-	if ((g_7e46ac & 0x10000) != 0) {
+	if ((main_LoopFlags & 0x10000) != 0) {
 		return;
 	}
 	hit = 0;

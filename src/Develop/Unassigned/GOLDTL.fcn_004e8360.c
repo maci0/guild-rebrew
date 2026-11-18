@@ -47,7 +47,7 @@ int __cdecl fcn_004e8360(char* a0)
 			return 0;
 		other = *(int*) (ent + 4);
 	}
-	p = (unsigned char*) &g_9a9220;
+	p = (unsigned char*) &amt_OfficeSlots;
 	i = 0;
 	do {
 		if (*p == *(unsigned char*) a0)
@@ -59,9 +59,9 @@ int __cdecl fcn_004e8360(char* a0)
 		return 0;
 	if (i >= 0x2a)
 		return 0;
-	x = gm_LookupEntityRecordById(((Rec18*) ((unsigned long)&g_9a9220 + i * 0x18))->f04);
+	x = gm_LookupEntityRecordById(((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f04);
 	if (x != 0 && *(int*) (x + 4) != *(int*) (a0 + 1)) {
-		bit = ((Rec18*) ((unsigned long)&g_9a9220 + i * 0x18))->f08;
+		bit = ((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f08;
 		if (*(unsigned char*) (x + 0x166) == (unsigned char) bit) {
 			*(unsigned char*) (x + 0x166) = 0;
 		} else if (*(unsigned char*) (x + 0x169) == (unsigned char) bit) {
@@ -80,7 +80,7 @@ int __cdecl fcn_004e8360(char* a0)
 
 	if (ent == 0)
 		goto tail;
-	v = ((Rec18*) ((unsigned long)&g_9a9220 + i * 0x18))->f08;
+	v = ((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f08;
 	if ((int) v > 0x1b)
 		goto special;
 	if (*(unsigned char*) (ent + 0x166) != 0) {
@@ -88,10 +88,10 @@ int __cdecl fcn_004e8360(char* a0)
 		ip = (int*) 0x9a9224;
 		do {
 			if (*ip == other) {
-				((Rec18*) ((unsigned long)&g_9a9220 + k * 0x18))->f04 = -1;
-				((Rec18*) ((unsigned long)&g_9a9220 + k * 0x18))->f14 = -1;
-				((Rec18*) ((unsigned long)&g_9a9220 + k * 0x18))->f10 = 4;
-				((Rec18*) ((unsigned long)&g_9a9220 + k * 0x18))->f0c = 0;
+				((Rec18*) ((unsigned long)&amt_OfficeSlots + k * 0x18))->f04 = -1;
+				((Rec18*) ((unsigned long)&amt_OfficeSlots + k * 0x18))->f14 = -1;
+				((Rec18*) ((unsigned long)&amt_OfficeSlots + k * 0x18))->f10 = 4;
+				((Rec18*) ((unsigned long)&amt_OfficeSlots + k * 0x18))->f0c = 0;
 				break;
 			}
 			ip = (int*) ((char*) ip + 0x18);
@@ -117,12 +117,12 @@ int __cdecl fcn_004e8360(char* a0)
 		p = (unsigned char*) 0x9a9228;
 		do {
 			if (*(unsigned char*) p == (unsigned char) v && k != i) {
-				if (((Rec18*) ((unsigned long)&g_9a9220 + k * 0x18))->f10 == 3 &&
-				    ((Rec18*) ((unsigned long)&g_9a9220 + k * 0x18))->f0c != 0) {
-					((Rec18*) ((unsigned long)&g_9a9220 + k * 0x18))->f0c =
-						((Rec18*) ((unsigned long)&g_9a9220 + k * 0x18))->f0c - 1;
-					if (((Rec18*) ((unsigned long)&g_9a9220 + k * 0x18))->f0c == 0)
-						((Rec18*) ((unsigned long)&g_9a9220 + k * 0x18))->f10 = 4;
+				if (((Rec18*) ((unsigned long)&amt_OfficeSlots + k * 0x18))->f10 == 3 &&
+				    ((Rec18*) ((unsigned long)&amt_OfficeSlots + k * 0x18))->f0c != 0) {
+					((Rec18*) ((unsigned long)&amt_OfficeSlots + k * 0x18))->f0c =
+						((Rec18*) ((unsigned long)&amt_OfficeSlots + k * 0x18))->f0c - 1;
+					if (((Rec18*) ((unsigned long)&amt_OfficeSlots + k * 0x18))->f0c == 0)
+						((Rec18*) ((unsigned long)&amt_OfficeSlots + k * 0x18))->f10 = 4;
 				}
 				break;
 			}
@@ -131,11 +131,11 @@ int __cdecl fcn_004e8360(char* a0)
 		} while ((int) p < (int) 0x9a94f8);
 	}
 tail:
-	((Rec18*) ((unsigned long)&g_9a9220 + i * 0x18))->f04 = other;
-	((Rec18*) ((unsigned long)&g_9a9220 + i * 0x18))->f14 = *(int*) (a0 + 7);
-	((Rec18*) ((unsigned long)&g_9a9220 + i * 0x18))->f10 = *(unsigned char*) (a0 + 5);
+	((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f04 = other;
+	((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f14 = *(int*) (a0 + 7);
+	((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f10 = *(unsigned char*) (a0 + 5);
 	if (*(unsigned char*) (a0 + 5) == 3)
-		((Rec18*) ((unsigned long)&g_9a9220 + i * 0x18))->f0c = 0;
+		((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f0c = 0;
 	if (setter != 0 && ent != 0 &&
 	    *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c) == *(int*) (ent + 4))
 		fcn_005b2280(setter, ent);

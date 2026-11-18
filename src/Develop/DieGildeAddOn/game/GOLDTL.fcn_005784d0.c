@@ -1,6 +1,6 @@
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c5620(int, char*);
@@ -51,7 +51,7 @@ void __cdecl fcn_005784d0(char* obj)
 		res = gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0xac));
 		if (res == 0) {
 reset:
-			*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 idle:
 			*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
 			return;
@@ -64,14 +64,14 @@ idle:
 	case 2:
 		*(int*) (obj + 0xbc) = -1;
 		if (*(int*) (*(int*) &lager[0xc2] + 0x128) != 0) {
-			*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 			fcn_00500bb0(obj + 0x52, 0, 4, 0);
 			*(int*) (obj + 0x84) = fcn_004c5620(2, obj);
 			return;
 		}
 		a = *(unsigned int*) (obj + 0xac);
 		if (gm_StartFilteredEntitySearch(1, 1, a) != 0) {
-			*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 			h = (int) gm_LookupEntityRecordById(*(int*) (obj + 0xb0));
 			if (h != 0) {
 				fcn_00500bb0(obj + 0x52, 0x18, 0, 0);
@@ -85,7 +85,7 @@ idle:
 	case 3:
 		if (*(int*) &lager[0xb6] == 0) {
 reset3:
-			*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 			*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
 			return;
 		}
@@ -97,11 +97,11 @@ reset3:
 	case 4:
 		if (*(int*) &lager[0xb6] != 0) {
 			if (*(int*) (*(int*) &lager[0xc2] + 0x128) != 0) {
-				*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 				fcn_00500bb0(obj + 0x52, 0, 4, 0);
 				return;
 			}
-			*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 			fcn_00529160(0, 0, *lager, 0);
 			*(int*) (obj + 0x84) = fcn_004c5620(5, obj);
 			h = *(int*) (obj + 0xb8) >> 1;

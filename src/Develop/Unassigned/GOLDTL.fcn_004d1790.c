@@ -1,11 +1,11 @@
 extern int g_14ce8d4;
-extern int g_7e4300;
+extern int d3_SelectionBoxActive;
 extern int g_14ce8e4;
 extern int g_6772c4;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8cc;
 extern int g_14ce8e0;
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 extern unsigned short* g_772f24;
 extern unsigned short* g_772e9c;
 extern int g_772ee4;
@@ -28,17 +28,17 @@ void __cdecl fcn_004d1790(int a0)
 	char* p;
 
 	if (g_14ce8d4 == 0) {
-		if (g_7e4300 != 0)
+		if (d3_SelectionBoxActive != 0)
 			fcn_005345a0();
 	}
 	if (g_14ce8d4 != 0 && g_14ce8e4 == 0) {
-		if (g_7e4300 == 0 && g_6772c4 != 0 && g_67d370 == -1) {
+		if (d3_SelectionBoxActive == 0 && g_6772c4 != 0 && d2_CurrentElementId == -1) {
 			fcn_004d1910();
 			fcn_00534520();
 		}
 	} else {
 		if (g_14ce8cc != 0) {
-			for (q = g_7e4260; (int) q < (int) (g_7e4260 + 32); q++) {
+			for (q = ch_ContextCharacters; (int) q < (int) (ch_ContextCharacters + 32); q++) {
 				o = *q;
 				if (o == 0)
 					continue;
@@ -60,7 +60,7 @@ void __cdecl fcn_004d1790(int a0)
 			}
 		}
 	}
-	for (q = g_7e4260; (int) q < (int) (g_7e4260 + 32); q++) {
+	for (q = ch_ContextCharacters; (int) q < (int) (ch_ContextCharacters + 32); q++) {
 		o = *q;
 		if (o == 0)
 			continue;

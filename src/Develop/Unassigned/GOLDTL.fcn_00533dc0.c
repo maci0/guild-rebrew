@@ -9,7 +9,7 @@ typedef struct {
 
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_7746c4;
 extern unsigned char* g_7746c8;
 
@@ -56,8 +56,8 @@ void __cdecl fcn_00533dc0(int wnd, int page, int icon)
 		fcn_0046f740(0x1f7, 0x43, 0x73e, wnd);
 		fcn_0046f740(0, 0x1a8, 0x73c, wnd);
 	}
-	((Window*)g_1015f40)[g_772514].margin[0] = 0x18;
-	((Window*)g_1015f40)[g_772514].margin[1] = 0x18;
-	((Window*)g_1015f40)[g_772514].margin[2] = 0x18;
-	((Window*)g_1015f40)[g_772514].margin[3] = 0x18;
+	((Window*)g_1015f40)[d2_CurrentWindowId].margin[0] = 0x18;
+	((Window*)g_1015f40)[d2_CurrentWindowId].margin[1] = 0x18;
+	((Window*)g_1015f40)[d2_CurrentWindowId].margin[2] = 0x18;
+	((Window*)g_1015f40)[d2_CurrentWindowId].margin[3] = 0x18;
 }

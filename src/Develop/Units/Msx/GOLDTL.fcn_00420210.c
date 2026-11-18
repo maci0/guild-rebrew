@@ -23,9 +23,9 @@ void __cdecl fcn_00420210(void)
 	unsigned int v;
 	unsigned int t;
 
-	if (g_6b71a4 != 0) {
+	if (msx_TrackDriver != 0) {
 		for (i = 0; i < 10; i++) {
-			c = &g_6b71b0[i];
+			c = &msx_Tracks[i];
 			if (c->active == 0) {
 				continue;
 			}

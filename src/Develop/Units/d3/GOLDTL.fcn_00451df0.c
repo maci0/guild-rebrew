@@ -80,7 +80,7 @@ void __cdecl fcn_00451df0(Ent* e)
 		return;
 	}
 	if (!(e->flags & 0x20) || !(e->flags & 0x40)) {
-		fcn_00438100(e, g_6b8014, 0);
+		fcn_00438100(e, d3_ActiveCamera, 0);
 	}
 	fcn_005ebea2(&m, 0, &e->xf->a);
 	fcn_005ebbb9(&m, &m);

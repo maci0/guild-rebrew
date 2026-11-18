@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 
@@ -14,7 +14,7 @@ typedef struct {
 	int name;
 } T_4cd090;
 
-extern char* g_773da8;
+extern char* gm_CityEntity;
 
 int __cdecl fcn_00503fe0(int a, int b, int c);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
@@ -44,11 +44,11 @@ int __cdecl fcn_004ccf10(int cmd, char* result)
 		if (entity == (void*) 0x0) {
 			return 1;
 		}
-		if ((*(int*)&g_7f4c00) - *(int*) ((char*) entity + 0x28) > 1) {
+		if ((*(int*)&gm_GameTime) - *(int*) ((char*) entity + 0x28) > 1) {
 			*(int*) ((char*) entity + 0x1c) = -1;
 			*(int*) ((char*) entity + 0x20) = -1;
 			*(int*) ((char*) entity + 0x24) = -1;
-			*(int*) ((char*) entity + 0x28) = (*(int*)&g_7f4c00) - 1;
+			*(int*) ((char*) entity + 0x28) = (*(int*)&gm_GameTime) - 1;
 		}
 		else {
 			return 1;
@@ -164,7 +164,7 @@ int __cdecl fcn_004cd090(T_4cd090* s, char* out)
 		}
 		if (*(unsigned short*) (h + 0x27) != 0xffff) {
 			e = g_7f4ca0 + *(unsigned short*) (h + 0x27) * 0x21c;
-			if (e != 0 && e != g_773da8 &&
+			if (e != 0 && e != gm_CityEntity &&
 			    *(char*) (e + 8) != 0 &&
 			    *(unsigned char*) (e + 2) != 0xf) {
 				return 1;

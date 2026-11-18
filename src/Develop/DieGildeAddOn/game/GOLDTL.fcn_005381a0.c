@@ -35,7 +35,7 @@ void __cdecl fcn_005381a0(void)
 		fcn_00422100();
 		fcn_00418c60();
 	}
-	if (g_774930 != 0) {
+	if (msx_MusicEnabled != 0) {
 		fcn_0041fb80();
 	}
 	if (g_774934 != 0) {

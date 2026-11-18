@@ -55,7 +55,7 @@ void __cdecl fcn_00452740(void *arg)
 		}
 	}
 	fcn_004557c0((char*) obj + 0xe8,
-				 (char*) (~-((*(unsigned char *) (obj + 0x2fc) & 0x20) != 0) & (unsigned int) g_6b8014), 0, matrix);
+				 (char*) (~-((*(unsigned char *) (obj + 0x2fc) & 0x20) != 0) & (unsigned int) d3_ActiveCamera), 0, matrix);
 	first = *(int *) g_6b5de0;
 	(*(int (__stdcall **) (int, int, float*)) (first + 0x94))((int) g_6b5de0, 0x100, matrix);
 	if (cnt > 0) {
@@ -80,7 +80,7 @@ void __cdecl fcn_00452740(void *arg)
 				if (((unsigned char) g_6b8710 & 0x20) == 0) { int vert; float sum; sum = 0.0f;
 					v = (-(g_6b8718 != 0) & 0xfffff000) + 0x2000;
 					(*(int (__stdcall **) (int, int, int, int *, int))
-					 (*(int *) g_104095c + 0x2c))((int) g_104095c,
+					 (*(int *) tp_d3_RenderVertexBuffer + 0x2c))((int) tp_d3_RenderVertexBuffer,
 												   g_6b8714 * g_6b8718,
 												   (cnt - k) * g_6b8714,
 												   &vert, v);
@@ -114,7 +114,7 @@ void __cdecl fcn_00452740(void *arg)
 				} else { int vert;
 					v = (-(g_6b8718 != 0) & 0xfffff000) + 0x2000;
 					(*(int (__stdcall **) (int, int, int, int *, int))
-					 (*(int *) g_104095c + 0x2c))((int) g_104095c,
+					 (*(int *) tp_d3_RenderVertexBuffer + 0x2c))((int) tp_d3_RenderVertexBuffer,
 												   g_6b8714 * g_6b8718,
 												   (cnt - k) * g_6b8714,
 												   &vert, v);
@@ -142,7 +142,7 @@ void __cdecl fcn_00452740(void *arg)
 						}
 					}
 				}
-				(*(int (__stdcall **) (int)) (*(int *) g_104095c + 0x30))((int) g_104095c);
+				(*(int (__stdcall **) (int)) (*(int *) tp_d3_RenderVertexBuffer + 0x30))((int) tp_d3_RenderVertexBuffer);
 				(*(int (__stdcall **) (int, int, int, int)) (*(int *) g_6b5de0 + 0x118))(
 					(int) g_6b5de0, 1, g_6b8718, emitted);
 				g_6b8718 += cnt;
@@ -150,6 +150,6 @@ void __cdecl fcn_00452740(void *arg)
 			}
 		}
 	}
-	g_1052bac += cnt;
+	d3_RenderedVertexCount += cnt;
 	g_1042a08 += cnt;
 }

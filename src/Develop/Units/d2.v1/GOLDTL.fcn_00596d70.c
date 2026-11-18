@@ -1,4 +1,4 @@
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern unsigned int g_7746d8;
 extern unsigned char g_773d75;
 extern char* g_1015ea0;
@@ -71,7 +71,7 @@ void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
 	w = &((DlgWin_596d70*) g_1015f40)[g_1038144[a0 * 175 + a1]];
 	if (r->id != 0) {
 		if (r->title == -1) {
-			r->title = fcn_004677e0(r->x + 6, r->y, 0x30, 0, 100, 0x6a, 0x3d, g_772514);
+			r->title = fcn_004677e0(r->x + 6, r->y, 0x30, 0, 100, 0x6a, 0x3d, d2_CurrentWindowId);
 		}
 		if (r->icon == -1) {
 			if (makeIcon) {
@@ -79,18 +79,18 @@ void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
 				if (g_7746d8 & 0x200) {
 					v = 0xca;
 				}
-				r->icon = fcn_00466ee0(r->x + 0xf, r->y + 6, r->id + 0xdf, v, g_772514);
+				r->icon = fcn_00466ee0(r->x + 0xf, r->y + 6, r->id + 0xdf, v, d2_CurrentWindowId);
 				fcn_00472900(r->icon, 0x54);
 			} else {
-				r->icon = fcn_0046f740(r->x + 0xf, r->y + 6, r->id + 0xdf, g_772514);
+				r->icon = fcn_0046f740(r->x + 0xf, r->y + 6, r->id + 0xdf, d2_CurrentWindowId);
 				*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x5c) = 1;
 			}
 		}
 		if (r->icon2 == -1) {
 			if (flags & 1) {
-				r->icon2 = fcn_0046f740(r->x + 0xf, r->y + 0x3a, 0x747, g_772514);
+				r->icon2 = fcn_0046f740(r->x + 0xf, r->y + 0x3a, 0x747, d2_CurrentWindowId);
 			} else if (flags & 2) {
-				r->icon2 = fcn_0046f740(r->x + 0xf, r->y + 0x3a, 0x746, g_772514);
+				r->icon2 = fcn_0046f740(r->x + 0xf, r->y + 0x3a, 0x746, d2_CurrentWindowId);
 			}
 		}
 		if (flags & 2) {
@@ -103,7 +103,7 @@ void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
 			}
 			fcn_0050bc10((int) f, g_773d75, text);
 			if (r->text1 == -1) {
-				r->text1 = d2_ShowTxt(r->x + 0x10, r->y + 0x40, text, g_772514);
+				r->text1 = d2_ShowTxt(r->x + 0x10, r->y + 0x40, text, d2_CurrentWindowId);
 			} else {
 				fcn_0046f940(r->text1, text);
 			}
@@ -119,7 +119,7 @@ void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
 			}
 			fcn_0050bc10((int) f, g_773d75, text);
 			if (r->text2 == -1) {
-				r->text2 = d2_ShowTxt(r->x + 0x10, r->y + 0x49, text, g_772514);
+				r->text2 = d2_ShowTxt(r->x + 0x10, r->y + 0x49, text, d2_CurrentWindowId);
 			} else {
 				fcn_0046f940(r->text2, text);
 			}

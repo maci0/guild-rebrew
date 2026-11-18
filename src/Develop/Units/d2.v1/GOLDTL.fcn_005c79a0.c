@@ -44,10 +44,10 @@ typedef struct
 
 extern unsigned char* lpGebaeudePROT;
 extern char* g_77255c;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern volatile int g_6b7fac;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 extern int g_14abc44;
 #include "client_dialog_state.h"
@@ -65,7 +65,7 @@ extern char s_6ac7dc[];
 extern char s_6ac7ec[];
 extern char s_6ac7fc[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -124,12 +124,12 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	dlg = fcn_00470820(0, 0, s_6ac79c);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_00533dc0(g_772514, 0x72f, 0);
+	fcn_00533dc0(d2_CurrentWindowId, 0x72f, 0);
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x1a46);
 	fcn_0052a0c0(obj, 1);
 	d2_SetForm(dlg, 2);
-	hwnd = g_772514;
+	hwnd = d2_CurrentWindowId;
 	fcn_005c78f0(0, 0x762, out, hwnd);
 	fcn_005c78f0(1, 0x763, out + 3, hwnd);
 	fcn_005c78f0(2, 0x764, out + 6, hwnd);
@@ -191,18 +191,18 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 			cnt6c++;
 			p = he_fn_Handlung();
 		}
-		hwnd = g_772514;
-		g_772514 = out[2];
+		hwnd = d2_CurrentWindowId;
+		d2_CurrentWindowId = out[2];
 		io_AppendText(s_6aa194, cnt2, 0x51e, 0x1a47, 0x16b9);
-		g_772514 = out[5];
+		d2_CurrentWindowId = out[5];
 		io_AppendText(s_6aa194, cnt3, 0x51e, 0x1a47, 0x16ba);
-		g_772514 = out[8];
+		d2_CurrentWindowId = out[8];
 		io_AppendText(s_6ac7dc, cnt6c, 0x51e, 0x1a48);
 		if (g_100f1dc != -1) {
 			if (CountDisplayCounters() != 0) {
 				i = 0;
 				do {
-					if (out[i * 3] != -1 && g_67d370 == out[i * 3]) {
+					if (out[i * 3] != -1 && d2_CurrentElementId == out[i * 3]) {
 						sum = cnt3 + cnt2;
 						if (i == 0 || i == 1) {
 							q = (unsigned int*) (g_7f4ca0 + 0x17c);
@@ -219,7 +219,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 									pkt.type = 0x16;
 									pkt.x8 = *(int*) (g_7f4ca0 + g_774970 * 0x21c + 4);
 									pkt.xc = *(int*) (obj + 1);
-									pkt.name = *(Name14*) &g_7f4c00;
+									pkt.name = *(Name14*) &gm_GameTime;
 									pkt.x36 = 1;
 									if (g_7746cc != 0) {
 										pkt.x60 = *(int*) (g_7746cc + 2);
@@ -247,7 +247,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 									pkt.type = 0x6c;
 									pkt.x8 = *(int*) ((char*) g_7f4ca4 + *(unsigned short*) (obj + 0x27) * 0x21c);
 									pkt.xc = *(int*) (obj + 1);
-									pkt.name = *(Name14*) &g_7f4c00;
+									pkt.name = *(Name14*) &gm_GameTime;
 									pkt.x36 = 1;
 									if (g_7746cc != 0 && *(unsigned short*) g_7746cc != 0xfd) {
 										pkt.x60 = *(int*) (g_7746cc + 2);
@@ -281,7 +281,7 @@ send:
 			else {
 				i = 0;
 				do {
-					if (out[i * 3] != -1 && g_67d370 == out[i * 3]) {
+					if (out[i * 3] != -1 && d2_CurrentElementId == out[i * 3]) {
 						if (i != 2) {
 							for (p = fcn_005463a0(2, 0, 0x16, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
 								if (*(char*) (p + 0xac) == (char) (i + 2)) {

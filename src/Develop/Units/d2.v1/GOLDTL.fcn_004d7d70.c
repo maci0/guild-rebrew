@@ -19,7 +19,7 @@ extern int g_68bfbc;
 extern int g_68b7a4;
 extern int g_772ea4;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_68b7a8;
 extern unsigned short* g_772f24;
 #include "client_dialog_state.h"
@@ -41,7 +41,7 @@ void __cdecl fcn_004d7d70(char* rec)
 {
 	ent2c l;
 
-	d2_SetElementValue(g_68b7a4, 0, g_68bfbc, g_772f34 - cut_CurrentTick + 1);
+	d2_SetElementValue(g_68b7a4, 0, g_68bfbc, cut_ClockDeadline - cut_CurrentTick + 1);
 	fcn_0052ae80();
 	fcn_004d0a20();
 	fcn_004d06d0();
@@ -51,11 +51,11 @@ void __cdecl fcn_004d7d70(char* rec)
 	fcn_004cfc00(rec);
 	fcn_004cf180();
 	fcn_004cf6b0();
-	if (g_772f38 != 0 || g_772ea4 != 0) {
+	if (cut_ClockExpired != 0 || g_772ea4 != 0) {
 		g_774654 = 1;
 		return;
 	}
-	if (g_100f1dc == -1 || g_67d370 != g_68b7a8)
+	if (g_100f1dc == -1 || d2_CurrentElementId != g_68b7a8)
 		return;
 	l = *fcn_004ceac0(rec, ((char*)g_772f24));
 	l.id = *(int*) (((char*)g_772f24) + 4);

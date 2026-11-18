@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c06;
 extern int g_7f4c08;
@@ -96,7 +96,7 @@ void __cdecl ai_MeisterCollectTrans(char* e)
 						*(int*) (pkt + 0x08) = *(int*) (g_7f4ca4 +
 						                                *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c);
 						pkt[0x36] = 2;
-						*(int*) (pkt + 0x28) = g_7f4c00;
+						*(int*) (pkt + 0x28) = gm_GameTime;
 						*(int*) (pkt + 0x2c) = g_7f4c04;
 						*(int*) (pkt + 0x30) = g_7f4c08;
 						*(unsigned short*) (pkt + 0x34) = g_7f4c0c;

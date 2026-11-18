@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/Units/d3/d3_camera.h"
-extern char g_14cf950, g_1040600; extern char* g_1043254;
+extern char g_14cf950, g_1040600; extern char* d3_ObjectListHead;
 int __cdecl fcn_00436aa0(void *flags);
 int __cdecl fcn_00436f70(int enable);
 void *__cdecl fcn_00437890(void *node);
@@ -47,9 +47,9 @@ char __cdecl fcn_00448b10(void)
 			fcn_00436aa0(flags);
 			return 0;
 		case 0x2e:
-			node = g_6b8014;
+			node = d3_ActiveCamera;
 			if (*(char **) 0x1041d0c == node) {
-				node = g_1043254;
+				node = d3_ObjectListHead;
 				while (*(int *) (node + 0x218) != 4) {
 					if (node == (char *) 0x1042340)
 						return 0;

@@ -1,8 +1,8 @@
 #include <string.h>
 
 extern int g_1052de0;
-extern char* g_14a5320[];
-int g_67fca0 = 0xffffffff;
+extern char* txt_TextEntries[];
+int hst_HistoryTextBase = 0xffffffff;
 extern char g_679060[]; /* %s */
 extern char g_6808b0[]; /* hst_ParseText_Fake_1st_Pass() failed: Syntax Error in Label %i */
 extern char g_6808f0[]; /* hst_ParseText_Fake_1st_Pass() failed: Label %i is too long */
@@ -47,7 +47,7 @@ int __cdecl hst_ParseText_Fake_1st_Pass(char* out, int id)
 		rep stosb
 	}
 	if (id < 0x4800) {
-		p = g_14a5320[id];
+		p = txt_TextEntries[id];
 		if (p == 0) {
 			return 0;
 		}
@@ -63,21 +63,21 @@ int __cdecl hst_ParseText_Fake_1st_Pass(char* out, int id)
 	while (*p != 0) {
 		if (*p == '[') {
 			if (open != 0) {
-				sprintf(msg, g_6808b0, id - g_67fca0);
+				sprintf(msg, g_6808b0, id - hst_HistoryTextBase);
 				return 0;
 			}
 			open = p;
 			p++;
 		} else if (*p == '#') {
 			if (open == 0 || hash != 0) {
-				sprintf(msg, g_6808b0, id - g_67fca0);
+				sprintf(msg, g_6808b0, id - hst_HistoryTextBase);
 				return 0;
 			}
 			hash = p;
 			p++;
 		} else if (*p == ']') {
 			if (open == 0 || hash == 0) {
-				sprintf(msg, g_6808b0, id - g_67fca0);
+				sprintf(msg, g_6808b0, id - hst_HistoryTextBase);
 				return 0;
 			}
 			fcn_0064d740(p, p + 1, strlen(p + 1) + 1);
@@ -90,7 +90,7 @@ int __cdecl hst_ParseText_Fake_1st_Pass(char* out, int id)
 		}
 	}
 	if (open != 0 || hash != 0) {
-		sprintf(msg, g_6808b0, id - g_67fca0);
+		sprintf(msg, g_6808b0, id - hst_HistoryTextBase);
 		return 0;
 	}
 	sprintf(out, g_679060, buf);

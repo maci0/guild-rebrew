@@ -68,11 +68,11 @@ extern unsigned char g_77670b;		/* 0x0077670b */
 extern signed char g_6a3440;		/* 0x006a3440 */
 extern int g_6a3420;			/* 0x006a3420 */
 extern int g_6a25b8;			/* 0x006a25b8 */
-extern int g_772514;			/* 0x00772514 */
+extern int d2_CurrentWindowId;			/* 0x00772514 */
 extern unsigned char g_773d75;		/* 0x00773d75 */
 extern int g_7e4314;			/* 0x007e4314 */
 extern int g_1007cd0;			/* 0x01007cd0 */
-extern pos14_7f4c00 g_7f4c00;		/* 0x007f4c00 */
+extern pos14_7f4c00 gm_GameTime;		/* 0x007f4c00 */
 extern char g_7f4ca0[];			/* slot table, stride 0x21c */
 extern unsigned char* lpGebaeudePROT;		/* entity type table */
 extern float g_696540[];
@@ -84,7 +84,7 @@ extern int g_1040480;
 extern int g_1040484;
 extern int g_1040488;
 extern int g_104048c;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_6a3764;
 extern int g_6a3768;
@@ -181,11 +181,11 @@ void __cdecl fcn_00540020(void)
 
 	v5 = (unsigned char*) fcn_00509570(SLOTPTR(g_774970 & 0xffff));
 	hp = 0;
-	fcn_00500e20((int*) &g_7f4c00);
-	pos.a = g_7f4c00.a;
-	pos.b = g_7f4c00.b;
-	pos.c = g_7f4c00.c;
-	pos.d = g_7f4c00.d;
+	fcn_00500e20((int*) &gm_GameTime);
+	pos.a = gm_GameTime.a;
+	pos.b = gm_GameTime.b;
+	pos.c = gm_GameTime.c;
+	pos.d = gm_GameTime.d;
 	if ((g_7747b0 & 4) && (g_774950 > 1)) {
 		pos.a++;
 	}
@@ -199,15 +199,15 @@ void __cdecl fcn_00540020(void)
 		g_1040488 = 0;
 		g_1040480 = g_1040494;
 		g_1040484 = 0;
-		g_104048c = g_1040490;
+		g_104048c = d2_ScreenHeight;
 		if (g_774978 == 0) {
-			hp = fcn_004730c0(0, 0, g_1040494, g_1040490, 0x67d67c, 0, 1);
+			hp = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0, 1);
 			while (!(*(unsigned char*) hp & 4)) {
 				fcn_005373e0(0, 0x24087);
 			}
 			fcn_00469e30(0x79d);
 			fcn_00473150(hp);
-			fcn_004730c0(0, 0, g_1040494, g_1040490, 0x67d67c, 0x32, 0xa);
+			fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x32, 0xa);
 		}
 	}
 	if (g_7747b0 & 4) {
@@ -231,37 +231,37 @@ void __cdecl fcn_00540020(void)
 		if (fcn_005463a0(1, 0, 0x66) == 0) {
 			memset(evs, 0, sizeof(evs));
 			evs[0].ent = SLOT4(g_774970 & 0xffff);
-			evs[0].year = g_7f4c00.a;
+			evs[0].year = gm_GameTime.a;
 			evs[0].id = 0x66;
 			evs[0].kind = -1;
 			evs[0].visible = 1;
-			evs[0].mon = g_7f4c00.b;
-			evs[0].day = g_7f4c00.c;
-			evs[0].wd = g_7f4c00.d;
+			evs[0].mon = gm_GameTime.b;
+			evs[0].day = gm_GameTime.c;
+			evs[0].wd = gm_GameTime.d;
 			fcn_004c5530(&evs[0]);
 		}
 		if (fcn_005463a0(1, 0, 0x70) == 0) {
 			memset(evs, 0, sizeof(evs));
 			evs[0].ent = SLOT4(g_774970 & 0xffff);
-			evs[0].year = g_7f4c00.a;
+			evs[0].year = gm_GameTime.a;
 			evs[0].id = 0x70;
 			evs[0].kind = -1;
 			evs[0].visible = 1;
-			evs[0].mon = g_7f4c00.b;
-			evs[0].day = g_7f4c00.c;
-			evs[0].wd = g_7f4c00.d;
+			evs[0].mon = gm_GameTime.b;
+			evs[0].day = gm_GameTime.c;
+			evs[0].wd = gm_GameTime.d;
 			fcn_004c5530(&evs[0]);
 		}
 		if (fcn_005463a0(1, 0, 0x68) == 0) {
 			memset(evs, 0, sizeof(evs));
 			evs[0].ent = SLOT4(g_774970 & 0xffff);
-			evs[0].year = g_7f4c00.a;
+			evs[0].year = gm_GameTime.a;
 			evs[0].id = 0x68;
 			evs[0].kind = -1;
 			evs[0].visible = 1;
-			evs[0].mon = g_7f4c00.b;
-			evs[0].day = g_7f4c00.c;
-			evs[0].wd = g_7f4c00.d;
+			evs[0].mon = gm_GameTime.b;
+			evs[0].day = gm_GameTime.c;
+			evs[0].wd = gm_GameTime.d;
 			fcn_004c5530(&evs[0]);
 		}
 	}
@@ -269,50 +269,50 @@ void __cdecl fcn_00540020(void)
 		if (fcn_005463a0(1, 0, 0x85) == 0) {
 			memset(evs, 0, sizeof(evs));
 			evs[0].ent = SLOT4(g_774970 & 0xffff);
-			evs[0].year = g_7f4c00.a;
+			evs[0].year = gm_GameTime.a;
 			evs[0].id = 0x85;
 			evs[0].kind = -1;
 			evs[0].visible = 1;
-			evs[0].mon = g_7f4c00.b;
-			evs[0].day = g_7f4c00.c;
-			evs[0].wd = g_7f4c00.d;
+			evs[0].mon = gm_GameTime.b;
+			evs[0].day = gm_GameTime.c;
+			evs[0].wd = gm_GameTime.d;
 			fcn_004c5530(&evs[0]);
 		}
 	}
 	if (fcn_005463a0(1, 0, 0x7c) == 0) {
 		memset(evs, 0, sizeof(evs));
 		evs[0].ent = SLOT4(g_774970 & 0xffff);
-		evs[0].year = g_7f4c00.a;
+		evs[0].year = gm_GameTime.a;
 		evs[0].id = 0x7c;
 		evs[0].kind = -1;
 		evs[0].visible = 1;
-		evs[0].mon = g_7f4c00.b;
-		evs[0].day = g_7f4c00.c;
-		evs[0].wd = g_7f4c00.d;
+		evs[0].mon = gm_GameTime.b;
+		evs[0].day = gm_GameTime.c;
+		evs[0].wd = gm_GameTime.d;
 		fcn_004c5530(&evs[0]);
 	}
 	if (fcn_005463a0(1, 0, 0x93) == 0) {
 		memset(evs, 0, sizeof(evs));
 		evs[0].ent = SLOT4(g_774970 & 0xffff);
-		evs[0].year = g_7f4c00.a;
+		evs[0].year = gm_GameTime.a;
 		evs[0].id = 0x93;
 		evs[0].kind = -1;
 		evs[0].visible = 1;
-		evs[0].mon = g_7f4c00.b;
-		evs[0].day = g_7f4c00.c;
-		evs[0].wd = g_7f4c00.d;
+		evs[0].mon = gm_GameTime.b;
+		evs[0].day = gm_GameTime.c;
+		evs[0].wd = gm_GameTime.d;
 		fcn_004c5530(&evs[0]);
 	}
 	if (fcn_005463a0(1, 0, 0x84) == 0 && g_77670b != 0) {
 		memset(evs, 0, sizeof(evs));
 		evs[0].ent = SLOT4(g_774970 & 0xffff);
-		evs[0].year = g_7f4c00.a;
+		evs[0].year = gm_GameTime.a;
 		evs[0].id = 0x84;
 		evs[0].kind = -1;
 		evs[0].visible = 1;
-		evs[0].mon = g_7f4c00.b;
-		evs[0].day = g_7f4c00.c;
-		evs[0].wd = g_7f4c00.d;
+		evs[0].mon = gm_GameTime.b;
+		evs[0].day = gm_GameTime.c;
+		evs[0].wd = gm_GameTime.d;
 		fcn_004c5530(&evs[0]);
 	}
 
@@ -324,7 +324,7 @@ void __cdecl fcn_00540020(void)
 		w = d2_CreateScrollPerga();
 		fcn_004727a0(w, 2);
 		fcn_00519190(0x7d);
-		fcn_0046e830(-1, -1, g_772514, fcn_00472830(w, 1), 0x767);
+		fcn_0046e830(-1, -1, d2_CurrentWindowId, fcn_00472830(w, 1), 0x767);
 		*(int*) (0x10161b4 + fcn_00472830(w, 1) * 972) = 0x18;
 		fcn_004727a0(w, 1);
 		fcn_00519190(0x2051, &pos, (int) g_696540[season],
@@ -374,7 +374,7 @@ void __cdecl fcn_00540020(void)
 				*(int*) 0x774654 = 1;
 			}
 		}
-		hp = fcn_004730c0(0, 0, g_1040494, g_1040490, 0x67d67c, 0x1e, 1);
+		hp = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x1e, 1);
 		while (!(*(unsigned char*) hp & 4)) {
 			fcn_005373e0(0, *(int*) 0x7e46ac | 0x80);
 		}
@@ -399,7 +399,7 @@ void __cdecl fcn_00540020(void)
 		if (hp != 0) {
 			fcn_00473150(hp);
 		}
-		fcn_004730c0(0, 0, g_1040494, g_1040490, 0x67d67c, 0x32, 0xa);
+		fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x32, 0xa);
 	}
 	if (g_6a25b8 != -1) {
 		fcn_00471af0(g_6a25b8, 1);
@@ -412,10 +412,10 @@ void __cdecl fcn_00540020(void)
 			evs[0].kind = SLOT4(g_774970 & 0xffff);
 			evs[0].f10 = 0;
 			evs[0].f14 = 0;
-			evs[0].year = g_7f4c00.a;
-			evs[0].mon = g_7f4c00.b;
-			evs[0].day = g_7f4c00.c;
-			evs[0].wd = g_7f4c00.d;
+			evs[0].year = gm_GameTime.a;
+			evs[0].mon = gm_GameTime.b;
+			evs[0].day = gm_GameTime.c;
+			evs[0].wd = gm_GameTime.d;
 			evs[0].visible = 1;
 			fcn_004c5530(&evs[0]);
 		}

@@ -1,7 +1,7 @@
 /* Builds one renderable particle per visible entity slot: allocates the
  * pool record, fills its transform and colour fields and links it into the
  * active list, or re-submits an already lit slot through the device. */
-extern int g_1052bac, g_1042a08; extern void* g_6b8068;
+extern int d3_RenderedVertexCount, g_1042a08; extern void* g_6b8068;
 void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
 void* __cdecl fcn_00436930(char* o, float* r);
 void __cdecl fcn_004372d0(unsigned char a, unsigned char b, int c, unsigned char d, unsigned char e);
@@ -84,7 +84,7 @@ unsigned char __cdecl fcn_004385e0(int a0)
 		}
 	}
 tail:
-	g_1052bac += *(int*) (v1 + 0x310);
+	d3_RenderedVertexCount += *(int*) (v1 + 0x310);
 	g_1042a08 += *(int*) (v1 + 0x314);
 	(*(int*) 0x6b8054)++;
 	return 1;

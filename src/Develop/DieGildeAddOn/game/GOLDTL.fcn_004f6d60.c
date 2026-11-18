@@ -3,8 +3,8 @@
 #include "client_types.h"
 
 extern char g_7f4ca0[];
-extern pos14_7f4c00 g_7f4c00;
-extern int g_6b8010;
+extern pos14_7f4c00 gm_GameTime;
+extern int d3_CurrentContextIndex;
 
 extern int __cdecl gm_WalkEntityChain(int);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -109,10 +109,10 @@ void __cdecl fcn_004f6d60(unsigned int a0)
             add ecx, ebx
             rep stosb
         }
-		*(int*) (msg + 0x2c) = g_7f4c00.b;
-		*(int*) (msg + 0x28) = g_7f4c00.a;
-		*(short*) (msg + 0x34) = g_7f4c00.d;
-		*(int*) (msg + 0x30) = g_7f4c00.c;
+		*(int*) (msg + 0x2c) = gm_GameTime.b;
+		*(int*) (msg + 0x28) = gm_GameTime.a;
+		*(short*) (msg + 0x34) = gm_GameTime.d;
+		*(int*) (msg + 0x30) = gm_GameTime.c;
 		*(unsigned char*) (msg + 4) = 0x69;
 		*(int*) (msg + 8) = *(int*) (slot + 4);
 		*(int*) (msg + 0xc) = -1;
@@ -153,10 +153,10 @@ void __cdecl fcn_004f6d60(unsigned int a0)
             add ecx, ebx
             rep stosb
         }
-			*(int*) (msg + 0x2c) = g_7f4c00.b;
-			*(int*) (msg + 0x28) = g_7f4c00.a;
-			*(short*) (msg + 0x34) = g_7f4c00.d;
-			*(int*) (msg + 0x30) = g_7f4c00.c;
+			*(int*) (msg + 0x2c) = gm_GameTime.b;
+			*(int*) (msg + 0x28) = gm_GameTime.a;
+			*(short*) (msg + 0x34) = gm_GameTime.d;
+			*(int*) (msg + 0x30) = gm_GameTime.c;
 			*(unsigned char*) (msg + 4) = 0x69;
 			*(int*) ((char*) msg + 8) = *(int*) (other + 2);
 			*(int*) (msg + 0xc) = -1;

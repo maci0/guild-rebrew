@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern char g_7f4ca0[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -47,7 +47,7 @@ void __cdecl fcn_004ea620(void)
 				break;
 			}
 			owner_id = *(unsigned short*) (ent + 0x27);
-			if (owner_id != 0xffff && owner_id != *(unsigned short*) g_773da8 && (*(unsigned char*) (ent + 0x5a) & 1) == 0) {
+			if (owner_id != 0xffff && owner_id != *(unsigned short*) gm_CityEntity && (*(unsigned char*) (ent + 0x5a) & 1) == 0) {
 				found++;
 				rec = (char*) (g_7f4ca0 + owner_id * 0x21c);
 				t = *(unsigned char*) (rec + 0x164);
@@ -73,7 +73,7 @@ void __cdecl fcn_004ea620(void)
 				break;
 			}
 			owner_id = *(unsigned short*) (ent + 0x27);
-			if (owner_id != 0xffff && owner_id != *(unsigned short*) g_773da8 && (*(unsigned char*) (ent + 0x5a) & 1) == 0) {
+			if (owner_id != 0xffff && owner_id != *(unsigned short*) gm_CityEntity && (*(unsigned char*) (ent + 0x5a) & 1) == 0) {
 				found++;
 				rec = (char*) (g_7f4ca0 + owner_id * 0x21c);
 				t = *(unsigned char*) (rec + 0x164);

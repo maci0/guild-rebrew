@@ -11,7 +11,7 @@ struct house {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern char g_6a7e18[];
 
@@ -40,7 +40,7 @@ void __cdecl fcn_00578380(char* u)
 			return;
 		}
 	}
-	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 	if (*(int*) (u + 0xb4) == -1) {
 		*(int*) (u + 0x84) = fcn_004c5620(-1, u);

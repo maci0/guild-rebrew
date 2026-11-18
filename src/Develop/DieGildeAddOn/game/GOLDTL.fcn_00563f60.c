@@ -8,7 +8,7 @@ typedef struct Req {
 } Req;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 extern char g_6a6248[];
@@ -73,7 +73,7 @@ void __cdecl fcn_00563f60(char* o)
 				Req m;
 
 				p = fcn_00502cd0(*(int*) (e + 0x5d), 1, 4, 2);
-				*(pos14_7f4c00*) &m = g_7f4c00;
+				*(pos14_7f4c00*) &m = gm_GameTime;
 				fcn_00500bb0((pos14_7f4c00*) &m, 0, 0, 1);
 				m.id = *(int*) (e + 1);
 				m.x4 = *(int*) (p + 2);

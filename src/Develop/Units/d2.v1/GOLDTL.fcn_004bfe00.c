@@ -2,12 +2,12 @@
 #include "client_packet_builder.h"
 extern int g_772908;
 extern int g_772900;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14ce8e0;
 extern int g_6ab3dc;
-extern int g_7725d0;
+extern int tp_d2_SelectedControl;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_6816d8;
 extern int g_14ce8d8;
 extern char* g_772904;
@@ -91,25 +91,25 @@ int __cdecl fcn_004bfe00(char *obj)
 		}
 	}
 	d2_SetForm(*(int *) town, 2);
-	fcn_00533bb0(g_772514, 5, forms, 3,
+	fcn_00533bb0(d2_CurrentWindowId, 5, forms, 3,
 		*(int *) 0x14b5e90, *(int *) 0x14b5e94, *(int *) 0x14b5e98);
 	form0 = forms[0]; form1 = forms[1]; form2 = forms[2];
 	while (fcn_005373e0((void *) 0x4bfe00, 0x657c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		g_6ab3dc = (g_7725d0 == 0);
+		g_6ab3dc = (tp_d2_SelectedControl == 0);
 		if (g_100f1dc != -1) {
-			if (g_67d370 == form2) {
+			if (d2_CurrentElementId == form2) {
 				fcn_004bf8e0(obj, town);
-			} else if (g_67d370 == form0) {
+			} else if (d2_CurrentElementId == form0) {
 				if (g_6816d8 != -1) {
 					v = *(int *) (g_6816d8 * 0x8c + 0x102cbc8);
 					if (v != -1) {
 						fcn_004bf1b0(*(int *) (0x10058a4 + v * 8), town);
 					}
 				}
-			} else if (g_67d370 == form1 && g_772904 != 0) {
+			} else if (d2_CurrentElementId == form1 && g_772904 != 0) {
 				p = (char *) fcn_004be1f0((void *) g_772908);
 				*(int *) (p + 4) = *(int *) (g_772904 + 1);
 				*(int *) p = *(int *) (obj + 2);
@@ -119,12 +119,12 @@ int __cdecl fcn_004bfe00(char *obj)
 			}
 		}
 		fcn_005b11f0(town);
-		if (g_14ce8d8 != 0 && g_67d370 != -1 &&
+		if (g_14ce8d8 != 0 && d2_CurrentElementId != -1 &&
 		    *(int *) (town + 0x27a4) > 0) {
 			n = *(int *) (town + 0x27a4);
 			for (i = 0; i < n; i++) {
 				slot = (int *) (town + 0xdc + i * 0x18);
-				if (slot[0] == g_67d370) {
+				if (slot[0] == d2_CurrentElementId) {
 					g_772904 = (char *) slot[1];
 					for (j = 0; j < 8; j++) {
 						v = *(int *) (0x10058a4 + j * 8);

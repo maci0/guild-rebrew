@@ -22,7 +22,7 @@ typedef struct {
 } View;
 
 #include "Develop/Units/d3/d3_camera.h"
-extern float g_774690;
+extern float d3_CameraHeightFraction;
 extern float g_6a2558;
 extern float g_6a2560;
 extern int d3_ActiveCameraAnimation;
@@ -38,10 +38,10 @@ void __cdecl fcn_0052ad70(void)
 	float d;
 	View* v;
 
-	if (((View*)g_6b8014) != 0) {
-		d = fcn_00413d10(&((View*)g_6b8014)->x);
-		v = ((View*)g_6b8014);
-		d = d + ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558) - (v->height + v->y);
+	if (((View*)d3_ActiveCamera) != 0) {
+		d = fcn_00413d10(&((View*)d3_ActiveCamera)->x);
+		v = ((View*)d3_ActiveCamera);
+		d = d + ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558) - (v->height + v->y);
 		if (fabs(d) > 5.0) {
 			step = d * 0.06666667f;
 			if (step > 0.0f) {

@@ -5,8 +5,8 @@ extern int g_7766a8;
 extern float g_6628cc;
 extern char g_14cf950;
 extern int g_7e2700;
-extern int g_7725d0;
-extern int g_7e46ac;
+extern int tp_d2_SelectedControl;
+extern int main_LoopFlags;
 extern unsigned char g_7747b0;
 extern int g_14a5538;
 
@@ -28,7 +28,7 @@ void __cdecl fcn_005924d0(void)
 	if (g_14cf950 == 0x1f) {
 		fcn_00592400();
 	}
-	if (g_14cf950 == 0x10 && g_7725d0 == 0 && (g_7e46ac & 0x10000) == 0) {
+	if (g_14cf950 == 0x10 && tp_d2_SelectedControl == 0 && (main_LoopFlags & 0x10000) == 0) {
 		fcn_005e40b0();
 	}
 	if ((g_7747b0 & 4) == 0) {

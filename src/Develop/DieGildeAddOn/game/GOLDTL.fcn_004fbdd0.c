@@ -1,4 +1,4 @@
-extern int g_7f4c00;
+extern int gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_99ed10;
 extern float g_99ed14;
@@ -47,10 +47,10 @@ void __cdecl fcn_004fbdd0(void)
 	int have;
 	char* slot;
 
-	if (g_7f4c00 < 8) {
+	if (gm_GameTime < 8) {
 		return;
 	}
-	if (g_7f4c00 % 4 != 0) {
+	if (gm_GameTime % 4 != 0) {
 		return;
 	}
 	sum2 = (g_99ed14 + g_99ed28 + g_99ed3c + g_99ed50) * g_6628bc;

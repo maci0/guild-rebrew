@@ -29,7 +29,7 @@ int __cdecl AttachAnimLooped(char** character, char** animation, int* kind)
 #endif
         for (i = 0; i < 3; i++, slot = (char**) ((char*) slot + 0x7c)) {
             if (draw != 0 && *slot != 0) {
-                *(void**) (g_6b7e98 + 0xc60) = (void*) AttachAnimLooped;
+                *(void**) (evt_CurrentScript + 0xc60) = (void*) AttachAnimLooped;
                 return 0;
             }
         }
@@ -59,12 +59,12 @@ int __cdecl AttachAnimLooped(char** character, char** animation, int* kind)
         options.reverse = 0;
         options.loop = 1;
         if (fcn_00434970(*(char**) (object + 0x1cc), name, options) == 0) {
-            fcn_00425bf0(g_6b7e98, *(unsigned int*) (g_6b7e98 + 0x118),
+            fcn_00425bf0(evt_CurrentScript, *(unsigned int*) (evt_CurrentScript + 0x118),
                 "AttachAnimLooped(): Could not find animation-file...");
         }
     }
-    if (*(int*) (g_6b7e98 + 0xc84) == 1) {
-        *(void**) (g_6b7e98 + 0xc60) = (void*) AttachAnimLooped;
+    if (*(int*) (evt_CurrentScript + 0xc84) == 1) {
+        *(void**) (evt_CurrentScript + 0xc60) = (void*) AttachAnimLooped;
     }
     return 0;
 }

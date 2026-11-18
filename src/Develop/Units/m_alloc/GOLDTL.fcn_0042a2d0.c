@@ -1,5 +1,5 @@
 extern int g_6b7f90;
-extern int* g_6b7ed0[16];
+extern int* msx_WaveDrivers[16];
 extern int* g_6b7f10[16];
 extern int* g_6b7f50[16];
 extern void (__stdcall* g_6623a8)(int);
@@ -25,7 +25,7 @@ int __cdecl fcn_0042a2d0(int* a0)
             g_6b7f50[i] = r;
         }
         m_FreeTracked(a0);
-        g_6b7ed0[i] = r;
+        msx_WaveDrivers[i] = r;
     } else {
         r = -1;
     }

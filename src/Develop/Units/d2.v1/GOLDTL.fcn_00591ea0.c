@@ -69,16 +69,16 @@ void __cdecl fcn_00591ea0(void)
 	item = win;
 	fcn_00471b60(win);
 	d2_SetForm(win, 0);
-	fcn_005340f0(*(int*) &g_772514);
+	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(win, 2);
 	io_AppendText(0x205b);
 	d2_SetForm(win, 0);
-	fcn_00533f40(0x214, 0x168, *(int*) &g_772514,
+	fcn_00533f40(0x214, 0x168, *(int*) &d2_CurrentWindowId,
 		fcn_00472830(win, 1),
 		0x38, &b1, &b2, &b3);
 	d2_SetForm(win, 3);
-	fcn_00533a60(*(int*) &g_772514, 0, clicks, 2,
+	fcn_00533a60(*(int*) &d2_CurrentWindowId, 0, clicks, 2,
 		*(int*) 0x14ad4cc, *(int*) 0x14ad4c8);
 	fcn_00476b60();
 	redraw = 1;
@@ -90,7 +90,7 @@ void __cdecl fcn_00591ea0(void)
 				old_sel = *(int*) (y + (unsigned long)&g_102cbc8);
 				fcn_00469510(last_win);
 			}
-			fcn_0046f2c0(*(int*) &g_772514, 1);
+			fcn_0046f2c0(*(int*) &d2_CurrentWindowId, 1);
 			last_win = d2_CreateRadioGroup(0);
 			i = 0;
 			y = 9;
@@ -100,27 +100,27 @@ void __cdecl fcn_00591ea0(void)
 			do {
 				ent = 0;
 				res = 0;
-				item = fcn_0046f740(0x10, y - 5, i + 0x769, *(int*) &g_772514);
+				item = fcn_0046f740(0x10, y - 5, i + 0x769, *(int*) &d2_CurrentWindowId);
 				fcn_00469470(last_win, item);
 				if (row[-1] != -1)
 					ent = (unsigned char*) gm_SearchTable67(row[-1]);
 				if (row[0] != -1)
 					res = (unsigned short*) gm_FindRecordById(row[0]);
 				if (ent != 0) {
-					fcn_0046f740(0x60, y - 9, *ent + 0x427, *(int*) &g_772514);
+					fcn_0046f740(0x60, y - 9, *ent + 0x427, *(int*) &d2_CurrentWindowId);
 					io_FormatTextBuffer(buf, 0x6a9b48, *(unsigned short*) &ent[0x27], ent);
-					v3 = d2_ShowTxt(0x9c, y, buf, *(int*) &g_772514);
+					v3 = d2_ShowTxt(0x9c, y, buf, *(int*) &d2_CurrentWindowId);
 					v3 *= 0x2f4;
 					*(int*) (v3 + 0x18 + *(int*) &g_1015ea0) = 0x80;
 					*(int*) (v3 + 0x84 + *(int*) &g_1015ea0) = 0x54;
 				} else {
-					v3 = d2_ShowTxt(0x60, y, *(char**) 0x14ad494, *(int*) &g_772514);
+					v3 = d2_ShowTxt(0x60, y, *(char**) 0x14ad494, *(int*) &d2_CurrentWindowId);
 					*(int*) (*(int*) &g_1015ea0 + 0x84 + v3 * 0x2f4) = 0x53;
 				}
 				if (res != 0 && *res != 0xfd) {
-					fcn_0046f740(0x128, y - 9, *res + 0xdf, *(int*) &g_772514);
+					fcn_0046f740(0x128, y - 9, *res + 0xdf, *(int*) &d2_CurrentWindowId);
 					io_FormatTextBuffer(buf, 0x6a9b44, (int) *res * 2 + 0x9a8);
-					v3 = d2_ShowTxt(0x164, y + 9, buf, *(int*) &g_772514);
+					v3 = d2_ShowTxt(0x164, y + 9, buf, *(int*) &d2_CurrentWindowId);
 					v3 *= 0x2f4;
 					*(int*) (v3 + 0x18 + *(int*) &g_1015ea0) = 0x80;
 					*(int*) (v3 + 0x84 + *(int*) &g_1015ea0) = 0x54;

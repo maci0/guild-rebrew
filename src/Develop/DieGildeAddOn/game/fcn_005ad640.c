@@ -44,7 +44,7 @@ extern Ent g_7f4ca0[];
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14abc98;
 extern char s_6ab1b8[];
 
@@ -141,7 +141,7 @@ int __cdecl fcn_005ad640(void* a0, char* obj)
 						g_774654 = 1;
 					}
 					if (g_100f1dc != -1) {
-						if (g_67d370 == cnt) {
+						if (d2_CurrentElementId == cnt) {
 							for (i = 0; i < 8; i = i + 1) {
 								msg.ids[i] = -1;
 							}
@@ -171,7 +171,7 @@ int __cdecl fcn_005ad640(void* a0, char* obj)
 								fcn_00526120((char*) g_14abc98, 0);
 								g_774654 = 1;
 							}
-						} else if (g_67d370 == r1) {
+						} else if (d2_CurrentElementId == r1) {
 							g_774654 = 1;
 						}
 					}

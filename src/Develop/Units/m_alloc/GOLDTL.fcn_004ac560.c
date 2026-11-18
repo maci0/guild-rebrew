@@ -5,7 +5,7 @@
 #include "Develop/Units/m_alloc/m_alloc.h"
 
 extern char g_6b5c60[];
-extern int g_7e1f80;
+extern int main_Instance;
 
 typedef struct HistRec {
 	int id;
@@ -40,7 +40,7 @@ unsigned int __cdecl fcn_004ac560(void)
 
 	memset(&hist, 0, sizeof(hist));
 
-	GetModuleFileNameA((HMODULE) g_7e1f80, path, 0x104);
+	GetModuleFileNameA((HMODULE) main_Instance, path, 0x104);
 	p = strrchr(path, '\\');
 	p[1] = 0;
 	strcat(path, "historical.ini");

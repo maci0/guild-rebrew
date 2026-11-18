@@ -37,7 +37,7 @@ void __cdecl fcn_00599f90(void)
 		if (g_14ce8d8 == 0) {
 			return;
 		}
-		if (g_67d370 != g_6a2590 && g_67d370 != g_6a2594) {
+		if (d2_CurrentElementId != g_6a2590 && d2_CurrentElementId != g_6a2594) {
 			return;
 		}
 	}

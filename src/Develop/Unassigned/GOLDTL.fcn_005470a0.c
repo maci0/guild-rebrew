@@ -11,7 +11,7 @@ struct pos14_005470a0 {
 #pragma pack()
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 // SIZE 0xf8
 struct msg_005470a0 {
@@ -53,7 +53,7 @@ void __cdecl fcn_005470a0(void)
 		m.fc = -1;
 		m.b36 = 2;
 		m.f8 = ((struct s_7f4ca0*)g_7f4ca0)[g_774970].f4;
-		m.pos = (*(struct pos14_005470a0*)&g_7f4c00);
+		m.pos = (*(struct pos14_005470a0*)&gm_GameTime);
 		fcn_004c5530(&m);
 	}
 }

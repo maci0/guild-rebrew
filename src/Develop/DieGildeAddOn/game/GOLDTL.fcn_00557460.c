@@ -6,7 +6,7 @@
  * that decide whether the corner stays dark. */
 
 extern char g_9a3800[];
-extern int g_664398[];
+extern int gm_RandomSearchSteps[];
 extern char* g_aed32c;
 typedef struct BuildingRow557460 { unsigned char kind; char fields[0x24c]; } BuildingRow557460;
 
@@ -213,7 +213,7 @@ void __cdecl fcn_00557460(char* dlg)
 			found[1] = -1;
 			found[2] = -1;
 			idx = (unsigned short) fcn_0042e410(0x200);
-			step = g_664398[fcn_0042e410(8) & 0xffff];
+			step = gm_RandomSearchSteps[fcn_0042e410(8) & 0xffff];
 			tries = 0x200;
 			i = 0;
 			do {
@@ -293,7 +293,7 @@ fail:
 			found[1] = -1;
 			found[2] = -1;
 			idx = (unsigned short) fcn_0042e410(0x200);
-			step = g_664398[fcn_0042e410(8) & 0xffff];
+			step = gm_RandomSearchSteps[fcn_0042e410(8) & 0xffff];
 			tries = 0x200;
 			i = 0;
 			do {
@@ -337,7 +337,7 @@ fail:
 		    + *(unsigned short*) (hit + 0x27) * 0x21c + 4), -1, text, 0,
 		    0x5ec, *(int*) (hit + 1), *(int*) (dlg + 0xb4), 0,
 		    (char*) 0x6b5c60);
-		*(pos14_7f4c00*) (dlg + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+		*(pos14_7f4c00*) (dlg + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 		goto fail;
 	}
 	}

@@ -14,7 +14,7 @@ extern float g_696540[];
 extern float g_696550[];
 extern int g_6b7fdc;
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl fcn_00500e20(int*);
 int __cdecl fcn_00530b20(char*, int, char*);
@@ -68,10 +68,10 @@ void __cdecl fcn_00530c60(unsigned char* a0)
 		}
 		g_6a2520 = g_6b7fac;
 	}
-	hour = fcn_00500e20((int*) &g_7f4c00);
+	hour = fcn_00500e20((int*) &gm_GameTime);
 	i = 0;
 	do {
-		ent = g_7e4260[i];
+		ent = ch_ContextCharacters[i];
 		if (ent != 0 && (info = *(char**) (ent + 0x184)) != 0
 		    && *(int*) (info + 0x2c) == *(int*) (a0 + 1)
 		    && *(unsigned char*) (ent + 8) != 0
@@ -163,7 +163,7 @@ after:
 						flags[k] = 1;
 						k += 1;
 					}
-					for (q = (char*)g_7e4260; q < (char*)(g_7e4260 + 32); q += 4) {
+					for (q = (char*)ch_ContextCharacters; q < (char*)(ch_ContextCharacters + 32); q += 4) {
 						info2 = *(char**) q;
 						if (info2 != 0 && (info2 = *(char**) (info2 + 0x184)) != 0
 						    && (id = *(int*) (info2 + 0x28)) != -1

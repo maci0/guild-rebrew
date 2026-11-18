@@ -53,7 +53,7 @@ char __cdecl fcn_0043b360(void)
 		fcn_00459a90(g_6b89c0);
 	}
 	fcn_00456c60();
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	for (i = 0; i < 0x40; i++) {
 		if (i != saved) {
 			fcn_004432d0(i, 1);

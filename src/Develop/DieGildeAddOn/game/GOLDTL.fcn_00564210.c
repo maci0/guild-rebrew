@@ -23,7 +23,7 @@ struct good {
 #pragma pack()
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 
@@ -65,7 +65,7 @@ void __cdecl fcn_00564210(char* e)
 				}
 			}
 		}
-		*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 5, 0);
 		*(int*) (e + 0x70) = *(int*) (e + 0x70) + 1;
 		return;

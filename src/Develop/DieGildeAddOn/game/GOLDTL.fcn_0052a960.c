@@ -83,7 +83,7 @@ void __cdecl fcn_0052a960(Stamp* now)
 	if (g_7e4548 != 0) {
 		light = g_7e4548[0x2a] * 0.003921569f;
 	}
-	if (((Slot_52a960*)g_1043340)[g_6b8010].f2c != 0 && (unsigned int) g_6b7fac < (unsigned int) (g_7e4468 + g_7e446c)) {
+	if (((Slot_52a960*)g_1043340)[d3_CurrentContextIndex].f2c != 0 && (unsigned int) g_6b7fac < (unsigned int) (g_7e4468 + g_7e446c)) {
 		fcn_004463f0(0, 2, 1.0f);
 		g_77472c = 1;
 		return;
@@ -92,22 +92,22 @@ void __cdecl fcn_0052a960(Stamp* now)
 		fcn_004463f0(0, 1, light);
 		g_77472c = 0;
 	}
-	if ((fabs(g_7e42e0 - 1.0f) < 0.1 && abs(g_7e4380 - v) < 10 && g_7e2a60 == g_6b8010) || d3_ActiveCameraAnimation != 0) {
+	if ((fabs(g_7e42e0 - 1.0f) < 0.1 && abs(g_7e4380 - v) < 10 && g_7e2a60 == d3_CurrentContextIndex) || d3_ActiveCameraAnimation != 0) {
 		fcn_004463f0(0, 1, light);
 		return;
 	}
 	if (!(fabs(g_7e42e0 - 1.0f) > 0.2) && abs(g_7e4380 - v) < 100) {
-		changed = g_7e2a60 != g_6b8010;
+		changed = g_7e2a60 != d3_CurrentContextIndex;
 	} else {
 		changed = 1;
 	}
-	g_7e2a60 = g_6b8010;
+	g_7e2a60 = d3_CurrentContextIndex;
 	g_7e4380 = v;
 	g_7e42e0 = 1.0f;
 	x = (float)(v * 0.01);
 	v = (int) x;
 	idx = v % 7;
-	if (g_6a2bd8 != idx && ((Slot_52a960*)g_1043340)[g_6b8010].f2c != 0) {
+	if (g_6a2bd8 != idx && ((Slot_52a960*)g_1043340)[d3_CurrentContextIndex].f2c != 0) {
 		if (idx >= 0 && g_7746fc == 0) {
 			fcn_004379a0(g_67a370, 0, 6, fcn_0052a910, 0);
 			g_7746fc++;

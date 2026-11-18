@@ -1,4 +1,4 @@
-extern void* g_14d0020[];
+extern void* ch_CharacterSlots[];
 extern char g_10432c0[];
 
 
@@ -11,7 +11,7 @@ int __cdecl fcn_00402c00(int a1, int a2, float* pos, float tolerance)
 	void* obj;
 
 	count = 0;
-	cursor = g_14d0020;
+	cursor = ch_CharacterSlots;
 	do {
 		obj = *cursor;
 		if (obj != 0) {

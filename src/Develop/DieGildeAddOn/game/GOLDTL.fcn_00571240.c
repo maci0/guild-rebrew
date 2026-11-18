@@ -29,8 +29,8 @@ void __cdecl fcn_00500bb0(char*, int, int, int);
 void __cdecl fcn_004c51f0(int, int, int, int, int, int);
 
 extern char g_7f4ca0[];
-extern char g_7f4c00[];
-extern char* g_773da8;
+extern char gm_GameTime[];
+extern char* gm_CityEntity;
 extern unsigned char g_773d75;
 extern char* lpObjektePROT;
 extern double g_6640e8;
@@ -66,7 +66,7 @@ void __cdecl fcn_00571240(char* self)
 	}
 	if (*(unsigned short*) (node + 0x27) != 0xffff) {
 		row = g_7f4ca0 + *(unsigned short*) (node + 0x27) * 0x21c;
-		if (row != g_773da8)
+		if (row != gm_CityEntity)
 			map = row;
 	}
 	switch (*(int*) (self + 0x70)) {
@@ -92,11 +92,11 @@ void __cdecl fcn_00571240(char* self)
 			}
 			*(unsigned char*) (self + 0xc8) = 0;
 		}
-		n = fcn_0050c830(self + 0x60, g_7f4c00, 0);
+		n = fcn_0050c830(self + 0x60, gm_GameTime, 0);
 		if (n > 0)
 			*(unsigned char*) (self + 0xc8) += n;
 		total = total + *(float*) (self + 0xc4);
-		if (fcn_00500cb0(self + 0x52, g_7f4c00) >= 0)
+		if (fcn_00500cb0(self + 0x52, gm_GameTime) >= 0)
 			return;
 		do {
 			entry = lpObjektePROT + *(unsigned short*) (self + 0xac) * 0x41;
@@ -129,7 +129,7 @@ void __cdecl fcn_00571240(char* self)
 			}
 			*(pos14_7f4c00*) (self + 0x60) = *(pos14_7f4c00*) (self + 0x52);
 			fcn_00500bb0(self + 0x52, 0, 0, 5);
-		} while (fcn_00500cb0(self + 0x52, g_7f4c00) < 0);
+		} while (fcn_00500cb0(self + 0x52, gm_GameTime) < 0);
 		return;
 	case 2:
 		if (*(int*) (self + 0x14) > 0 || *(int*) (self + 0x18) > 0) {

@@ -39,7 +39,7 @@ void __cdecl fcn_00537080(void)
 			fcn_004234e0(g_7747c0, g_6a33a4, 1, 0x3f, (int) (g_664e80 * g_699b0c), 0, 0);
 		}
 	}
-	if (g_6b8010 == 0) {
+	if (d3_CurrentContextIndex == 0) {
 		if ((unsigned short) (*(int*)&g_7f4c04) >= 0xb && (unsigned short) (*(int*)&g_7f4c04) <= 0x11 && g_7e43a4[(unsigned short) (*(int*)&g_7f4c04)] != 0
 		    && g_7e43a4[(unsigned short) (*(int*)&g_7f4c04) + 1] == 0
 		    && g_7f4c06 > 0x1e) {

@@ -41,18 +41,18 @@ int* __cdecl fcn_00415310(int count)
 	rain[13] = *(int*) &g_6b7fac;
 	rain[14] = *(int*) &g_6b7fac;
 	rain[15] = *(int*) &g_6b7fac;
-	cam = *(char**) &g_6b8014;
+	cam = *(char**) &d3_ActiveCamera;
 	if (cam != 0) {
 		rain[16] = *(int*) (cam + 0x84);
-		cam = *(char**) &g_6b8014;
+		cam = *(char**) &d3_ActiveCamera;
 		rain[17] = *(int*) (cam + 0x88);
-		cam = *(char**) &g_6b8014;
+		cam = *(char**) &d3_ActiveCamera;
 		rain[18] = *(int*) (cam + 0x8c);
-		cam = *(char**) &g_6b8014;
+		cam = *(char**) &d3_ActiveCamera;
 		rain[20] = *(int*) (cam + 0x4c);
-		cam = *(char**) &g_6b8014;
+		cam = *(char**) &d3_ActiveCamera;
 		rain[21] = *(int*) (cam + 0x50);
-		cam = *(char**) &g_6b8014;
+		cam = *(char**) &d3_ActiveCamera;
 		rain[22] = *(int*) (cam + 0x54);
 	}
 	n = count;

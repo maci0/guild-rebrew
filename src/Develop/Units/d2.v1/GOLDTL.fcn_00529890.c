@@ -2,8 +2,8 @@
 
 extern char* g_1015ea0;
 #include "GOLDTL.fcn_00529890_gconf.h"
-extern int g_67d370;
-extern int g_772514;
+extern int d2_CurrentElementId;
+extern int d2_CurrentWindowId;
 extern char g_6b5c60[]; extern int g_6a25b4; extern char g_774724;
 
 void fcn_0046b2b0(int id);
@@ -116,12 +116,12 @@ label_529a17:
 						d2_SetForm(g_6a25b4, 1);
 						v5 = v6 * 0x4e;
 						v6 *= 0x28;
-						v4 = fcn_0046f740(6, v5, 0x5dc, g_772514);
+						v4 = fcn_0046f740(6, v5, 0x5dc, d2_CurrentWindowId);
 						v16 = *(unsigned int*) (v11 + 0x27);
 						*(unsigned int*) (v6 + 0x7e30c4) = v4;
-						v16 = fcn_0046f740(8, v5 + 0x11, v16, g_772514);
+						v16 = fcn_0046f740(8, v5 + 0x11, v16, d2_CurrentWindowId);
 						*(unsigned int*) (v6 + 0x7e30c0) = v16;
-						v15 = d2_ShowTxt(0, v5 + 4, g_6b5c60, g_772514);
+						v15 = d2_ShowTxt(0, v5 + 4, g_6b5c60, d2_CurrentWindowId);
 						*(int*) (v6 + 0x7e30d4) = v15;
 						*(unsigned int*) (g_1015ea0 + 0x6c + v15 * 0x2f4) = 1;
 						*(unsigned int*) (g_1015ea0 + 0x18
@@ -140,13 +140,13 @@ label_529a17:
 						if (v1 == 0x10 || v1 == 0x13 || v1 == 0x04) {
 							d2_SetForm(g_6a25b4, 1);
 							v16 = fcn_0046f100(6, v5 + 0x3f, 0x50, 0xf, 0,
-								g_772514);
+								d2_CurrentWindowId);
 							*(unsigned int*) (v6 + 0x7e30d8) = v16;
-							fcn_0046f740(4, 1, 0x5df, g_772514);
+							fcn_0046f740(4, 1, 0x5df, d2_CurrentWindowId);
 							fcn_00534210(0x10, 4,
 								(char*) (*(int*) (v6 + 0x7e30d0) * 0x21c
 									+ 0x7f4ca0), 2, 0x4f1);
-							fcn_0046f740(0x28, 1, 0x5e0, g_772514);
+							fcn_0046f740(0x28, 1, 0x5e0, d2_CurrentWindowId);
 							fcn_00534210(0x34, 4,
 								(char*) (*(int*) (v6 + 0x7e30d0) * 0x21c
 									+ 0x7f4ca0), 3, 0x4f1);
@@ -170,7 +170,7 @@ label_529c64:
 			if (*(int*) 0x100f1dc != -1) {
 				v3 = *v13;
 				if (v3 != 0xffff) {
-					if (g_67d370 == v13[-4]) {
+					if (d2_CurrentElementId == v13[-4]) {
 						if (*(int*) (g_1015ea0 + 0x38 + v13[-4] * 0x2f4)) {
 							*(char*) (v3 * 0x21c + 0x7f4e28) = 1;
 							fcn_004c3540((char*) (v3 * 0x21c + 0x7f4ca0));
@@ -246,11 +246,11 @@ label_529cf0:
 						if (v5 == -1) {
 							if (out[0] >= 0xdf && out[0] <= 0x3bb) {
 								v6 = fcn_0046f7e0(0x38, v3 - 0x18,
-									out[0], g_772514, -2);
+									out[0], d2_CurrentWindowId, -2);
 							}
 							else {
 								v6 = fcn_0046f740(0x38, v3 - 0x18,
-									v6, g_772514);
+									v6, d2_CurrentWindowId);
 							}
 						}
 						else {
@@ -262,11 +262,11 @@ label_529cf0:
 							*v13 = -1;
 							if (out[0] >= 0xdf && out[0] <= 0x3bb) {
 								v6 = fcn_0046f7e0(0x38, v3 - 0x18,
-									out[0], g_772514, -2);
+									out[0], d2_CurrentWindowId, -2);
 							}
 							else {
 								v6 = fcn_0046f740(0x38, v3 - 0x18,
-									v6, g_772514);
+									v6, d2_CurrentWindowId);
 							}
 						}
 						*v13 = v6;
@@ -283,20 +283,20 @@ label_529f4c:
 							v13[1] = -1;
 							if (v15 != 0) {
 								v6 = fcn_0046f7e0(0x38, v3, v15,
-									g_772514, -2);
+									d2_CurrentWindowId, -2);
 							}
 							else {
 								v6 = fcn_0046f740(0x38, v3, 0,
-									g_772514);
+									d2_CurrentWindowId);
 							}
 						} else {
 							if (v15 >= 0xdf && v15 <= 0x3bb) {
 								v6 = fcn_0046f7e0(0x38, v3, v15,
-									g_772514, -2);
+									d2_CurrentWindowId, -2);
 							}
 							else {
 								v6 = fcn_0046f740(0x38, v3, v15,
-									g_772514);
+									d2_CurrentWindowId);
 							}
 						}
 						v13[1] = v6;

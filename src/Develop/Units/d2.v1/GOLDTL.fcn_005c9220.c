@@ -1,6 +1,6 @@
 
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern char g_6a9694[];
@@ -20,7 +20,7 @@ void __cdecl fcn_005c9220(int* o)
 		if (fcn_004f4830(o[5], info) != 0 && info[6] != 0 && info[3] != 0) {
 			d2_SetForm(o[0], o[1]);
 			for (i = 0; i < info[3]; i++) {
-				fcn_0046f740(5 + i * 16, 5, 0x526, g_772514);
+				fcn_0046f740(5 + i * 16, 5, 0x526, d2_CurrentWindowId);
 			}
 		}
 		if (o[4] <= 4) {

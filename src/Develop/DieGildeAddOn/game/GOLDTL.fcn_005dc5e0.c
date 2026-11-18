@@ -1,7 +1,7 @@
 #include <string.h>
 #include "client_packet_builder.h"
 
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -64,7 +64,7 @@ int __cdecl fcn_005dc5e0(char* a0, int* a1)
 		*(char*) (buf + 4) = 0x76;
 		*(int*) (buf + 8) = *(int*) (a0 + 4);
 		*(int*) (buf + 0xc) = -1;
-		*(int*) (buf + 0x28) = g_7f4c00;
+		*(int*) (buf + 0x28) = gm_GameTime;
 		*(int*) (buf + 0x2c) = g_7f4c04;
 		*(int*) (buf + 0x30) = g_7f4c08;
 		*(unsigned short*) (buf + 0x34) = g_7f4c0c;
@@ -89,7 +89,7 @@ int __cdecl fcn_005dc5e0(char* a0, int* a1)
 		*(char*) (buf + 4) = 0x76;
 		*(int*) (buf + 8) = *(int*) (a0 + 4);
 		*(int*) (buf + 0xc) = -1;
-		*(int*) (buf + 0x28) = g_7f4c00;
+		*(int*) (buf + 0x28) = gm_GameTime;
 		*(int*) (buf + 0x2c) = g_7f4c04;
 		*(int*) (buf + 0x30) = g_7f4c08;
 		*(unsigned short*) (buf + 0x34) = g_7f4c0c;
@@ -103,7 +103,7 @@ int __cdecl fcn_005dc5e0(char* a0, int* a1)
 	*(char*) (buf + 4) = 0x77;
 	*(int*) (buf + 8) = *(int*) (a0 + 4);
 	*(int*) (buf + 0xc) = -1;
-	*(int*) (buf + 0x28) = g_7f4c00;
+	*(int*) (buf + 0x28) = gm_GameTime;
 	*(int*) (buf + 0x2c) = g_7f4c04;
 	*(int*) (buf + 0x30) = g_7f4c08;
 	*(unsigned short*) (buf + 0x34) = g_7f4c0c;

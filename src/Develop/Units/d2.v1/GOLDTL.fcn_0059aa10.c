@@ -19,8 +19,8 @@ extern int g_7747b4;
 extern int g_85ab60;
 extern int g_14ce8e0;
 extern int g_100f1dc;
-extern int g_67d370;
-extern char* g_773da8;
+extern int d2_CurrentElementId;
+extern char* gm_CityEntity;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
@@ -29,7 +29,7 @@ extern char* g_14a5398;
 extern char s_6aa330[];
 extern char s_6aa328[];
 extern char s_68b7ac[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl fcn_0057ec20(int);
 void __cdecl fcn_0057e880(int, int, int, int);
@@ -108,12 +108,12 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 	while (fcn_005373e0((void*) 0x59aa10, 0x657c7)) {
 		if (g_14ce8e0)
 			g_774654 = 1;
-		if (g_100f1dc != -1 && g_67d370 == h)
+		if (g_100f1dc != -1 && d2_CurrentElementId == h)
 			fcn_005c3820(a0);
 		if (g_100f1dc >= 0xdf && g_100f1dc <= 0x3bb && g_85ab60 > 0) {
 			for (i = 0; i < g_85ab60; i++) {
 				p = &g_7f3f24[i * 0x34];
-				if (*(int*) p != -1 && *(int*) p == g_67d370)
+				if (*(int*) p != -1 && *(int*) p == d2_CurrentElementId)
 					break;
 			}
 			if (i < g_85ab60) {
@@ -132,20 +132,20 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 							*(unsigned char*) (msg + 4) = 0x0c;
 							*(int*) (msg + 0x58) = *(int*) (a0 + 1);
 							*(int*) (msg + 0x60) = sel;
-							*(int*) (msg + 0x28) = g_7f4c00.a;
-							*(int*) (msg + 0x2c) = g_7f4c00.b;
-							*(int*) (msg + 0x30) = g_7f4c00.c;
+							*(int*) (msg + 0x28) = gm_GameTime.a;
+							*(int*) (msg + 0x2c) = gm_GameTime.b;
+							*(int*) (msg + 0x30) = gm_GameTime.c;
 							*(int*) (msg + 8) = *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (a0 + 0x25) * 0x21c + 4);
-							*(short*) (msg + 0x34) = g_7f4c00.d;
+							*(short*) (msg + 0x34) = gm_GameTime.d;
 							*(int*) (msg + 0x5c) = *(int*) (msg + 8);
 						} else {
 							*(int*) (msg + 0x0c) = *(int*) (a0 + 1);
-							*(int*) (msg + 0x30) = g_7f4c00.c;
+							*(int*) (msg + 0x30) = gm_GameTime.c;
 							*(unsigned char*) (msg + 4) = 2;
 							*(int*) (msg + 8) = *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (a0 + 0x25) * 0x21c + 4);
-							*(int*) (msg + 0x28) = g_7f4c00.a;
-							*(int*) (msg + 0x2c) = g_7f4c00.b;
-							*(short*) (msg + 0x34) = g_7f4c00.d;
+							*(int*) (msg + 0x28) = gm_GameTime.a;
+							*(int*) (msg + 0x2c) = gm_GameTime.b;
+							*(short*) (msg + 0x34) = gm_GameTime.d;
 							*(short*) (msg + 0x58) = (short) sel;
 							*(int*) (msg + 0x5c) = *(int*) ((char*) q + 2);
 						}
@@ -155,7 +155,7 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 							n = (int) eval_ObjektPreis2Credits(sel, 100);
 							amount = (int) (n * f);
 							ok = 0;
-							if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) g_773da8) {
+							if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
 								if (fcn_00526010(&g_7f4ca0[(unsigned int) g_774970 * 0x21c], amount, g_773d75))
 									ok = 1;
 								io_FormatTextBuffer(buf, 0x1a, amount, a0, sel * 2 + 0x9a8);
@@ -170,7 +170,7 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 							if (ok && fcn_00526120(buf, 1)) {
 								fcn_0057e880(0x2b, (int) a0, 0, sel);
 								fcn_004c4eb0(s_6aa328);
-								if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) g_773da8) {
+								if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
 									fcn_004c5150(-1, *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (a0 + 0x27) * 0x21c + 4), (char) g_773d75, amount);
 									p = gm_GetEntityTableEntry(house);
 									if (p)

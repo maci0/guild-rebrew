@@ -4,7 +4,7 @@ extern char g_6761ec[];
 
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 void __cdecl fcn_00425bf0(void*, int, char*);
 
 int __cdecl KillCharacterAnimations(char** target)
@@ -15,7 +15,7 @@ int __cdecl KillCharacterAnimations(char** target)
 
 	p = *target;
 	if (p == 0) {
-		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), g_6761ec);
+		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), g_6761ec);
 	} else {
 		q = *(char**) (p + 0x128);
 		if (q != 0) {

@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -12,7 +12,7 @@ extern unsigned char g_773d75;
 extern float g_66414c;
 extern char g_67eb38[];
 extern char g_67eb2c[];
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern float g_100a0a0;
 extern float g_100a0c0[];
 
@@ -39,7 +39,7 @@ int __cdecl ai_RunBaumeister(char* entity, char* a2, char* a3)
 		*(int*) (msg + 8) = *(int*) (entity + 4);
 		*(int*) (msg + 0xc) = *(int*) (a3 + 4);
 		msg[0x36] = 1;
-		*(int*) (msg + 0x28) = (*(int*)&g_7f4c00);
+		*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
 		*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(short*) (msg + 0x34) = g_7f4c0c;
@@ -54,7 +54,7 @@ int __cdecl ai_RunBaumeister(char* entity, char* a2, char* a3)
 		return 0x2f;
 	} else {
 		fcn_004c4eb0(g_67eb2c);
-		if (amt_ExecGebaeudeBauen(g_773da8, a2, a3)) {
+		if (amt_ExecGebaeudeBauen(gm_CityEntity, a2, a3)) {
 			fcn_004c5150(-1, *(int*) (b + 2), (*(char*)&g_773d75), fcn_0050d170(*(int*) (a2 + 4)));
 			fcn_004c4ef0(g_67eb2c);
 			if (*(int*) (a2 + 0x10) > 0 && *(int*) (a2 + 0x10) < 4) {

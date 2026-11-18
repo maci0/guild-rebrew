@@ -3,7 +3,7 @@ extern Rec24_99f5a0 g_99f5a0;
 
 void __cdecl fcn_004c6a00(void* msg);
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x004fb650 */
 void __cdecl fcn_004fb650(int a1, int a2, int a3, int a4)
@@ -38,7 +38,7 @@ void __cdecl fcn_004fb650(int a1, int a2, int a3, int a4)
 	buf[9] = 0x696e6974;
 	buf[0] = a1;
 	buf[1] = 0;
-	buf[2] = (*(int*)&g_7f4c00);
+	buf[2] = (*(int*)&gm_GameTime);
 	buf[3] = a2;
 	buf[4] = a3;
 	buf[5] = 0;

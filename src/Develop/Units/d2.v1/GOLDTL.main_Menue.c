@@ -3,7 +3,7 @@ extern int g_1040480;
 extern int g_1040484;
 extern int g_1040488;
 extern int g_104048c;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_10421a0;
 extern int g_10432a4;
@@ -12,12 +12,12 @@ extern int g_14ac498;
 extern int g_14ac49c;
 extern int g_14ac4a0;
 extern int g_14ce8d8;
-extern int g_67d370;
-extern int g_7725c8;
+extern int d2_CurrentElementId;
+extern int d2_SuppressOverlay;
 extern int g_774650;
 extern int g_774654;
 extern int g_774658;
-extern int g_774930;
+extern int msx_MusicEnabled;
 extern int g_774954;
 extern int g_77496c;
 extern char g_7e1d00[];
@@ -118,11 +118,11 @@ void __cdecl main_Menue(void)
 	fcn_00412630();
 	*(unsigned char*) &g_14cf950 = 0;
 	fcn_0042a070();
-	v4 = fcn_004730c0(0, 0, g_1040494, g_1040490, (char *)0x67d67c, 0, 1);
+	v4 = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, (char *)0x67d67c, 0, 1);
 	while ((*(unsigned char *)v4 & 4) == 0) {
 		fcn_005373e0(0, 0x24087);
 	}
-	g_7725c8 = 1;
+	d2_SuppressOverlay = 1;
 	fcn_004432d0(0, 0);
 	fcn_00442e30();
 	if (fcn_0051e070() != 0) {
@@ -137,7 +137,7 @@ void __cdecl main_Menue(void)
 	if (!fcn_00448360((char *)0x6a3b98, 0, 0)) {
 		ReportClientMessage((char *)0x6a3b70);
 	}
-	fcn_00438da0((float)g_1040494, (float)g_1040490, 0, 0, g_10529c8, g_10421a0, g_10432a4, g_1040494, g_1040490);
+	fcn_00438da0((float)g_1040494, (float)d2_ScreenHeight, 0, 0, g_10529c8, g_10421a0, g_10432a4, g_1040494, d2_ScreenHeight);
 	g_774658 = g_774650 + 1;
 	*(int*) &g_7747b0 = 0;
 	v28 = 0x8c;
@@ -159,17 +159,17 @@ void __cdecl main_Menue(void)
 		rep stosb
 	}
 	g_1040480 = g_1040494;
-	g_7725c8 = 0;
+	d2_SuppressOverlay = 0;
 	g_1040488 = 0;
 	g_1040484 = 0;
-	g_104048c = g_1040490;
+	g_104048c = d2_ScreenHeight;
 	fcn_0046b4f0();
 	fcn_00469e30(0x797);
 	v29 = 0;
 	v15 = fcn_00470820(0, 0, (char *)0x6a3b60);
 	fcn_00471d80(v15, 3);
 	d2_SetForm(v15, 0);
-	v5 = g_772514;
+	v5 = d2_CurrentWindowId;
 	v20 = fcn_0053a3a0(0, *(int *)0x14ac4ac, v5);
 	v23 = fcn_0053a3a0(1, *(int *)0x14ac490, v5);
 	v26 = fcn_0053a3a0(2, *(int *)0x14b4f84, v5);
@@ -187,7 +187,7 @@ void __cdecl main_Menue(void)
 		v16 = fcn_0053a3a0(6, (int)(char *)0x6a3b20, v5);
 		v28 = d2_CreateRadioGroup(9, v20, v23, v26, v19, v24, v18, v21, v27, v22);
 	}
-	if (g_774930 != 0) {
+	if (msx_MusicEnabled != 0) {
 		v6 = fcn_0064d3f8() % 3;
 		if (v6 == 0) {
 			v14 = (char *)0x6a3adc;
@@ -199,7 +199,7 @@ void __cdecl main_Menue(void)
 		*(int *)0x7747d0 = fcn_0041fd70(v14, 1);
 	}
 	fcn_00473150((int)v4);
-	fcn_004730c0(0, 0, g_1040494, g_1040490, (char *)0x67d67c, 0x5a, 10);
+	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, (char *)0x67d67c, 0x5a, 10);
 	*(unsigned char*) &g_14cf950 = 0;
 	fcn_00420200(2000);
 	read_profile = GetPrivateProfileStringA;
@@ -209,8 +209,8 @@ void __cdecl main_Menue(void)
 			fcn_00469e30(0x797);
 			v29 = 0;
 		}
-		if (g_14ce8d8 != 0 && g_67d370 != -1) {
-			if (g_67d370 == v20) {
+		if (g_14ce8d8 != 0 && d2_CurrentElementId != -1) {
+			if (d2_CurrentElementId == v20) {
 				fcn_00472170(v5, 0);
 				fcn_00469e70();
 				fcn_004acee0();
@@ -220,7 +220,7 @@ void __cdecl main_Menue(void)
 				} else {
 					goto label_53a8e3;
 				}
-			} else if (g_67d370 == v26) {
+			} else if (d2_CurrentElementId == v26) {
 				fcn_00472170(v5, 0);
 				if (fcn_005845e0()) {
 					fcn_00584530();
@@ -234,7 +234,7 @@ void __cdecl main_Menue(void)
 label_53a8e3:
 					fcn_00472170(v5, 1);
 				}
-			} else if (g_67d370 == v18) {
+			} else if (d2_CurrentElementId == v18) {
 				fcn_00472170(v5, 0);
 				if (fcn_005dfb40(0x24087, 1, (char *)0x6a3ab8, (char *)0x6a3778, (char *)0x6a3ac8, v7)) {
 					fcn_0064d41a(v8, (char *)0x67728c, (char *)0x6a3448, v7);
@@ -242,7 +242,7 @@ label_53a8e3:
 					fcn_005392a0(v9, 0);
 				}
 				goto label_53a8e3;
-			} else if (g_67d370 == v21) {
+			} else if (d2_CurrentElementId == v21) {
 				fcn_00472170(v5, 0);
 				if (fcn_005dfb40(0x24087, 1, (char *)0x6a3ab8, (char *)0x6a3778, (char *)0x6a3ac8, v10)) {
 					fcn_0064d41a(v11, (char *)0x67728c, (char *)0x6a3448, v10);
@@ -250,13 +250,13 @@ label_53a8e3:
 					fcn_005392a0(v12, 1);
 				}
 				fcn_00472170(v5, 1);
-			} else if (g_67d370 == v23) {
+			} else if (d2_CurrentElementId == v23) {
 				fcn_00472170(v5, 0);
 				if (fcn_005e0700()) {
 					g_774654 = 1;
 				}
 				fcn_00472170(v5, 1);
-			} else if (g_67d370 == v19) {
+			} else if (d2_CurrentElementId == v19) {
 				fcn_00472170(v5, 0);
 				if (fcn_0053a160()) {
 					g_774654 = 1;
@@ -264,7 +264,7 @@ label_53a8e3:
 					fcn_00472170(v5, 1);
 					*(int*) &g_7747b0 = 0;
 				}
-			} else if (g_67d370 == v25) {
+			} else if (d2_CurrentElementId == v25) {
 				fcn_00472170(v5, 0);
 				fcn_005e2b60();
 				fcn_00472170(v5, 1);
@@ -272,29 +272,29 @@ label_53a8e3:
 				if (*(int *)0x77495c != 0) {
 					g_774654 = 1;
 				}
-			} else if (g_67d370 == v17) {
+			} else if (d2_CurrentElementId == v17) {
 				fcn_00472170(v5, 0);
 				fcn_005e3150();
 				fcn_00472170(v5, 1);
-			} else if (g_67d370 == v24) {
+			} else if (d2_CurrentElementId == v24) {
 				fcn_00472170(v5, 0);
 				fcn_005e3520();
 				fcn_00472170(v5, 1);
-			} else if (g_67d370 == v22) {
+			} else if (d2_CurrentElementId == v22) {
 				g_774954 = 1;
 				g_77496c = 1;
 				g_774654 = 1;
-			} else if (g_67d370 == v16) {
+			} else if (d2_CurrentElementId == v16) {
 				fcn_0053a2f0();
-			} else if (g_67d370 == v27) {
+			} else if (d2_CurrentElementId == v27) {
 				fcn_00472170(v5, 0);
-				if (g_774930 != 0) {
+				if (msx_MusicEnabled != 0) {
 					fcn_00420200(1000);
 					fcn_0041fd70((char *)0x6a3aa4, 1);
 				}
 				fcn_005e4970();
 				fcn_00472170(v5, 1);
-				if (g_774930 != 0) {
+				if (msx_MusicEnabled != 0) {
 					fcn_00420200(1000);
 					fcn_0041fe10(*(int *)0x7747d0, 1);
 				}
@@ -315,9 +315,9 @@ label_53a8e3:
 	fcn_00420200(1000);
 	if (*(int *)0x7747d0 != 0) {
 		fcn_00420120(*(int *)0x7747d0, 1);
-		g_7725c8 = 1;
+		d2_SuppressOverlay = 1;
 		while (*(char *)(*(int *)0x7747d0 + 0x104)) {
-			fcn_005373e0(0, g_7e46ac);
+			fcn_005373e0(0, main_LoopFlags);
 		}
 		Sleep(1000);
 	}

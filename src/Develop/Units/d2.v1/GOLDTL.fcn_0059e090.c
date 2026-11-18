@@ -36,7 +36,7 @@ typedef struct {
 
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14a566c;
 extern volatile int g_6b7fac;
 extern Win_1015f40 g_1015f40[0x60];
@@ -44,7 +44,7 @@ extern Obj_1038140 g_1038140[];
 extern char* g_1015ea0;
 extern char g_868060[];
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -100,14 +100,14 @@ void __cdecl fcn_0059e090(char* b)
 			h = fcn_00470820(0, 0, "Handel\\Handel_Transport");
 			fcn_00471b60(h);
 			d2_SetForm(h, 0);
-			fcn_00533dc0(g_772514, 0x70b, 0x73f);
+			fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x73f);
 			slot = (Slot*) &g_1015f40[((Dlg*)g_1038140)[h].slot];
 			fcn_0064d41a(buf, "ief_Wappen%li", *(int*) (b + 0x65));
 			d2_SetBackgroundTexture(buf, slot->x0);
 			slot->x3a4 = 0.0f;
 			t0 = *(unsigned int*)&g_6b7fac;
 			d2_SetForm(h, 4);
-			fcn_00533a60(g_772514, 0, &pick, 3, g_14a566c, "Import", "Export");
+			fcn_00533a60(d2_CurrentWindowId, 0, &pick, 3, g_14a566c, "Import", "Export");
 			fcn_00472170(pick.x0, 0);
 			a = pick.a;
 			c = pick.b;
@@ -142,10 +142,10 @@ void __cdecl fcn_0059e090(char* b)
 		fcn_005974e0(b, grp);
 		fcn_00597940(h, 1, 0, b, grp);
 		if (g_100f1dc == 2) {
-			if (g_67d370 == a) {
+			if (d2_CurrentElementId == a) {
 				sel = 1;
 			}
-			else if (g_67d370 == c) {
+			else if (d2_CurrentElementId == c) {
 				sel = 0;
 			}
 		}

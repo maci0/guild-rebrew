@@ -1,13 +1,13 @@
 extern char g_68114c[];
 extern char g_681140[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 extern int g_14ce8e0;
 extern char g_14cf950;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
-extern int g_67d370;
-extern int g_7e46ac;
+extern int d2_CurrentElementId;
+extern int main_LoopFlags;
 
 struct list_4b3fe0 {
 	int sel;
@@ -51,9 +51,9 @@ int __cdecl fcn_004b3fe0(int a1)
 	d2_SetForm(h, 1);
 	io_AppendText(0x1ace);
 	d2_SetForm(h, 2);
-	prev = g_772514;
+	prev = d2_CurrentWindowId;
 	d2_SetForm(h, 0);
-	fcn_0046e830(-1, -1, g_772514, prev, 0x767);
+	fcn_0046e830(-1, -1, d2_CurrentWindowId, prev, 0x767);
 	d2_SetForm(h, 2);
 	lst = d2_CreateRadioGroup(0);
 	for (it = fcn_004b3ce0(a1, 0); it != 0; it = fcn_004b3ce0(a1, it)) {
@@ -66,9 +66,9 @@ int __cdecl fcn_004b3fe0(int a1)
 		if (g_14ce8e0 != 0 || g_14cf950 == 1 || g_100f1dc == 1)
 			g_774654 = 1;
 		if (g_100f1dc != -1 && ((struct list_4b3fe0*)g_102cbc8)[lst].sel != -1
-		    && g_67d370 == ((struct list_4b3fe0*)g_102cbc8)[lst].items[((struct list_4b3fe0*)g_102cbc8)[lst].sel]) {
+		    && d2_CurrentElementId == ((struct list_4b3fe0*)g_102cbc8)[lst].items[((struct list_4b3fe0*)g_102cbc8)[lst].sel]) {
 			e = *(int**) (g_1015ea0 + ((struct list_4b3fe0*)g_102cbc8)[lst].items[((struct list_4b3fe0*)g_102cbc8)[lst].sel] * 756 + 0x2f0);
-			if (fcn_004b3ec0(*e, g_7e46ac) != 0) {
+			if (fcn_004b3ec0(*e, main_LoopFlags) != 0) {
 				result = *e;
 				g_774654 = 1;
 			}

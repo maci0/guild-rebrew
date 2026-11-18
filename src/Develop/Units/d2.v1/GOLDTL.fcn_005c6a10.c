@@ -13,7 +13,7 @@ extern Slot_5c6a10 g_7774a0[32];
 extern char* g_1015ea0;
 extern char* lpObjektePROT;
 extern unsigned char g_10161bc[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_775334;
 
 void __cdecl d2_SetForm(int, int);
@@ -79,7 +79,7 @@ unsigned int __cdecl fcn_005c6a10(unsigned int a0, unsigned int a1)
 			}
 			continue;
 		}
-		g_772514 = slot->ac;
+		d2_CurrentWindowId = slot->ac;
 		for (j = 0; j < 6; j++) {
 			if (slot->s[j].item != 0
 			    && !fcn_00502cd0(*(int*) (slot->ent + 0x178), 1, 0, slot->s[j].item)) {
@@ -88,7 +88,7 @@ unsigned int __cdecl fcn_005c6a10(unsigned int a0, unsigned int a1)
 				slot->s[j].item = 0;
 			}
 		}
-		g_772514 = slot->ac;
+		d2_CurrentWindowId = slot->ac;
 		io_AppendText(0x6ac790, *(unsigned short*) slot->ent,
 			(int) (fcn_004ff040(slot->ent) * 100.0));
 		io_AppendText(0x16ac);
@@ -111,7 +111,7 @@ unsigned int __cdecl fcn_005c6a10(unsigned int a0, unsigned int a1)
 				}
 				if (j < 6) {
 					p[(button_base + j) * 2] = fcn_00466ee0(j * 0x36 + 0x50, row_y,
-						*item + 0xdf, 10, g_772514);
+						*item + 0xdf, 10, d2_CurrentWindowId);
 					p[(button_base + j) * 2 + 1] = *item;
 				}
 present:
@@ -141,12 +141,12 @@ present:
 			continue;
 		d2_SetForm(a0, a1);
 		g_7774a0[i].ent = *list;
-		h = fcn_0046f740(0, i * 0x78, 0x74c, g_772514);
+		h = fcn_0046f740(0, i * 0x78, 0x74c, d2_CurrentWindowId);
 		g_7774a0[i].a8 = h;
 		*(int*) (g_1015ea0 + h * 0x2f4 + 0x5c) = 1;
 		g_7774a0[i].a4 = fcn_0046f740(0x10, i * 0x78 + 5,
-			*(int*) (g_7774a0[i].ent + 0x18c), g_772514);
-		h = fcn_0046f100(0x40, i * 0x78, 0xb4, 0x50, 0x10, g_772514);
+			*(int*) (g_7774a0[i].ent + 0x18c), d2_CurrentWindowId);
+		h = fcn_0046f100(0x40, i * 0x78, 0xb4, 0x50, 0x10, d2_CurrentWindowId);
 		g_7774a0[i].ac = h;
 		fcn_00472900(*(int*) (g_10161bc + h * 0x3cc), 0x54);
 		io_AppendText(0x16ab, *(unsigned short*) g_7774a0[i].ent,

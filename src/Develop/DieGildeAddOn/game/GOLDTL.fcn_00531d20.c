@@ -10,7 +10,7 @@ extern int g_7746a4;
 extern int g_7746c4;
 extern int g_7746c8;
 extern short* g_7746cc;
-extern int g_7746ac;
+extern int sv_HoveredObjekt;
 extern int g_14ce8cc;
 extern int g_67fcb4;
 extern char* g_14a5310[];
@@ -55,7 +55,7 @@ void __cdecl fcn_00531d20(void)
 			return;
 		if (*(int*) (g_7746a4 + 0x220) != 2)
 			return;
-		if (g_7746ac != 0)
+		if (sv_HoveredObjekt != 0)
 			return;
 	}
 	if (g_14ce8cc == 0)

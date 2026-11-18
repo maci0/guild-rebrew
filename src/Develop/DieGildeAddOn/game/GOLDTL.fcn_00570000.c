@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_77e0a0[];
 extern short g_77e0a4;
 extern int g_77e0a8;
@@ -37,7 +37,7 @@ void __cdecl fcn_00570000(char* o)
 	} else if (k == 11) {
 		he_OpenHelpEvents("help_events_dieb");
 	}
-	*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 	*(int*) (o + 0x52) = (*(int*)g_77e0a0);
 	*(short*) (o + 0x56) = g_77e0a4;
 	*(int*) (o + 0x58) = g_77e0a8;

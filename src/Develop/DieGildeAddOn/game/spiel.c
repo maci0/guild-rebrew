@@ -1951,7 +1951,7 @@ int __cdecl gm_FreeObjectListRecursive(LinkedNode** head)
 
 #ifndef REBREW_SERVER
 #include "../../Units/d3/d3_object.h"
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 int __cdecl fcn_005155e0(unsigned char*);
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00445600(char*, int, char*, char*);
@@ -2141,7 +2141,7 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 		existing = gm_StartFilteredEntitySearch(1, 1, parent_id);
 		if (existing != NULL && gm_CheckEntityType((unsigned char*) existing) != 0)
 			universe = fcn_005155e0((unsigned char*) existing);
-		saved_mode = g_6b8010;
+		saved_mode = d3_CurrentContextIndex;
 		fcn_004432d0(universe, 1);
 		if (gm_CheckEntityType((unsigned char*) existing) != 0)
 			found = fcn_00445600(NULL, 0x100, NULL, "dummy_TRANSPORTER");

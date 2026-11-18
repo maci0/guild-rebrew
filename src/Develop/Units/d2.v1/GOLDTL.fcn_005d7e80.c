@@ -18,7 +18,7 @@ extern char s_6a59fc[];
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c6ae0(int, int);
@@ -96,7 +96,7 @@ int __cdecl fcn_005d7e80(unsigned char* e, unsigned char* a2)
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == ok) {
+			if (d2_CurrentElementId == ok) {
 				if (fcn_00525f60(e, 2)) {
 					fcn_004c6ae0(*(int*) (e + 4), -2);
 					fcn_004c6ae0(*(int*) (o + 4), -3);
@@ -114,7 +114,7 @@ int __cdecl fcn_005d7e80(unsigned char* e, unsigned char* a2)
 					g_774654 = 1;
 					result = 0x81;
 				}
-			} else if (g_67d370 == cancel) {
+			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;
 			}
 		}

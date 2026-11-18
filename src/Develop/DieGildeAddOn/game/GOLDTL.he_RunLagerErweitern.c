@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char* g_aed32c;
 extern char g_7f4ca4[];
 
@@ -46,7 +46,7 @@ void __cdecl he_RunLagerErweitern(char* a0)
 	default:
 		return;
 	}
-	if (fcn_00500cb0(q, (char*) &g_7f4c00) >= 0)
+	if (fcn_00500cb0(q, (char*) &gm_GameTime) >= 0)
 		return;
 	v5[1] = 1;
 	gm_ResolveEntityById(0, (void**) v5, 0, *(unsigned int*) (a0 + 0xac));
@@ -75,7 +75,7 @@ void __cdecl he_RunLagerErweitern(char* a0)
 			}
 		}
 		} else {
-			*(pos14_7f4c00*) q = g_7f4c00;
+			*(pos14_7f4c00*) q = gm_GameTime;
 			fcn_00500bb0(q, 0, 0xf, 0);
 			return;
 				}

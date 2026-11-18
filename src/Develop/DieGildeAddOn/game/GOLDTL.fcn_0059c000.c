@@ -1,16 +1,16 @@
 #include <string.h>
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* lpObjektePROT;
 extern char* g_1015ea0;
 extern int g_100f1dc;
 extern int g_100f884;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_7746cc;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
 extern int g_7798a0;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -106,13 +106,13 @@ int __cdecl fcn_0059c000(char* a0)
 	fcn_00594340();
 	count = 0;
 	d2_SetForm(h, 0);
-	p = (int*) (0x10162e8 + g_772514 * 0x3cc);
+	p = (int*) (0x10162e8 + d2_CurrentWindowId * 0x3cc);
 	p[0] = 0xe;
 	p[1] = 0xe;
 	p[2] = 0xe;
 	p[3] = 0xe;
-	fcn_00533dc0(g_772514, 0x70b, 0x742);
-	fcn_00533f40(0x270, 0x15e, g_772514, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
+	fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x742);
+	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
 	*(unsigned int*) (g_1015ea0 + 0x84 + item * 0x2f4) = 0x54;
 	do {
 		d2_SetForm(h, 2);
@@ -137,7 +137,7 @@ int __cdecl fcn_0059c000(char* a0)
 			if (count > 0) {
 				rows = (int*) 0x7798c0;
 				for (k = 0; k < count; k++) {
-					if (g_67d370 == *(int*) (0x779194 + k * 0x58)) {
+					if (d2_CurrentElementId == *(int*) (0x779194 + k * 0x58)) {
 						if (any == 0) {
 							p = (int*) 0x7e30d0;
 							do {
@@ -162,7 +162,7 @@ int __cdecl fcn_0059c000(char* a0)
 								req.f8 = *(unsigned int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + 0x7f4ca4);
 							else
 								req.f8 = *(unsigned int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4);
-							req.c28 = g_7f4c00;
+							req.c28 = gm_GameTime;
 							req.c2c = g_7f4c04;
 							req.c30 = g_7f4c08;
 							req.c34 = g_7f4c0c;
@@ -198,7 +198,7 @@ located:
 					}
 					ep = (int*) (0x779164 + k * 0x58);
 					for (j = 0; j < 4; j++) {
-						if (g_67d370 == ep[0xe]) {
+						if (d2_CurrentElementId == ep[0xe]) {
 							if (*(int*) (0x77918c + k * 0x58) != j)
 								g_7798a0 = *ep;
 							else

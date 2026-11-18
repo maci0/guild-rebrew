@@ -3,7 +3,7 @@ typedef struct {
 } stamp14;
 
 extern int g_14cbca0;
-extern int g_699364;
+extern int gm_NextEntityId;
 extern char cm_LastObjectId[];
 
 char* __cdecl gm_SearchTable67(int);
@@ -28,7 +28,7 @@ int __cdecl fcn_004cd860(char* input, char* response)
 	char* q;
 
 	if (g_14cbca0 != -1)
-		g_699364 = *(int*) (input + 0x10);
+		gm_NextEntityId = *(int*) (input + 0x10);
 	if (response != 0) {
 		response[0] = 2;
 		response[1] = 0;

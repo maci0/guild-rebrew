@@ -30,15 +30,15 @@ typedef struct {
 /* SIZE 0x14 */
 
 extern unsigned char g_7747b0;   /* 0x007747b0 */
-extern int g_68bfb8;             /* 0x0068bfb8 */
+extern int cut_EventLoopFlags;             /* 0x0068bfb8 */
 extern int g_68bfbc;             /* 0x0068bfbc */
 extern int g_6b5c60;             /* 0x006b5c60 */
 extern int g_772f24;             /* 0x00772f24 */
 extern int g_772f28;             /* 0x00772f28 */
 extern int g_772f2c;             /* 0x00772f2c */
 extern int cut_CurrentTick;             /* 0x00772f30 */
-extern int g_772f34;             /* 0x00772f34 */
-extern int g_772f38;             /* 0x00772f38 */
+extern int cut_ClockDeadline;             /* 0x00772f34 */
+extern int cut_ClockExpired;             /* 0x00772f38 */
 extern int g_772f3c;             /* 0x00772f3c */
 extern int g_14ac5e8;            /* 0x014ac5e8 */
 extern int g_14ac5ec;            /* 0x014ac5ec */
@@ -118,8 +118,8 @@ label_4e526f:
 			}
 			rec = &((rec35c*) g_9b0e20)[i];
 			if (*(unsigned char*) (g_772f24 + 2) == 6) {
-				g_772f34 = g_68bfbc + cut_CurrentTick;
-				g_772f38 = 0;
+				cut_ClockDeadline = g_68bfbc + cut_CurrentTick;
+				cut_ClockExpired = 0;
 				((cmd_entry*) g_9b0844)[s[8]].f0(rec, id);
 			} else if (((cmd_entry*) g_9b0844)[s[8]].f4 != 0) {
 				((cmd_entry*) g_9b0844)[s[8]].f4(rec, id);
@@ -154,7 +154,7 @@ label_4e526f:
 							fcn_00535960();
 						}
 						fcn_004e5140(s);
-						fcn_005373e0(0, g_68bfb8 | 0x8000);
+						fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
 					}
 					rec++;
 				}
@@ -164,8 +164,8 @@ label_4e526f:
 			for (i = 0; i < (int) s[0x30]; i++) {
 				if (*(int*) (s + 0x34 + i * 4) == ent) {
 					c1 = ((rec35c*) g_9b0e20)[i];
-					g_772f34 = g_68bfbc + cut_CurrentTick;
-					g_772f38 = 0;
+					cut_ClockDeadline = g_68bfbc + cut_CurrentTick;
+					cut_ClockExpired = 0;
 					((cmd_entry*) g_9b0844)[s[8]].f0(&c1, id);
 					c1.f8 = 1;
 					c1.fc = 0;
@@ -180,7 +180,7 @@ label_4e526f:
 			while (fcn_004e4fc0(s) == 0) {
 				fcn_004e5140(s);
 				fcn_00533a40(g_14ac5ec);
-				fcn_005373e0(0, g_68bfb8 | 0x8000);
+				fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
 			}
 		} else if (kind == 0) {
 			pos = -1;
@@ -196,7 +196,7 @@ label_4e526f:
 			}
 			while (fcn_004e4fc0(s) == 0) {
 				fcn_004e5140(s);
-				fcn_005373e0(0, g_68bfb8 | 0x8000);
+				fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
 				if (pos != -1
 						&& (pos == 0 || ((rec35c*) g_9b0e20)[found].f8 == 1)
 						&& ((rec35c*) g_9b0e20)[pos].f8 == 0) {
@@ -204,8 +204,8 @@ label_4e526f:
 					c1 = ((rec35c*) g_9b0e20)[pos];
 					g_772f24 = gm_LookupEntityRecordById(*(int*) (s + 0x34 + pos * 4));
 					fcn_004e5140(s);
-					g_772f34 = g_68bfbc + cut_CurrentTick;
-					g_772f38 = 0;
+					cut_ClockDeadline = g_68bfbc + cut_CurrentTick;
+					cut_ClockExpired = 0;
 					((cmd_entry*) g_9b0844)[s[8]].f0(&c1, id);
 					c1.f8 = 1;
 					c1.fc = 0;
@@ -215,7 +215,7 @@ label_4e526f:
 						fcn_00535960();
 					}
 					fcn_004e5140(s);
-					fcn_005373e0(0, g_68bfb8 | 0x8000);
+					fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
 				}
 				if (*(int*) (s + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
 					for (i = 0; i < (int) s[0x30]; i++) {
@@ -244,7 +244,7 @@ label_4e526f:
 				}
 			}
 			fcn_004e5140(s);
-			fcn_005373e0(0, g_68bfb8 | 0x8000);
+			fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
 		}
 	}
 	g_772f2c += 1;

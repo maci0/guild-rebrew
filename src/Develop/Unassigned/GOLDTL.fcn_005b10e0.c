@@ -3,9 +3,9 @@
 extern short g_14ce8c0;
 extern short g_14ce8c2;
 extern int g_6b5c80;
-extern int g_6b5c84;
-extern int g_6772bc;
-extern int g_6772c0;
+extern int d2_MouseTopBoundary;
+extern int d2_MouseRightBoundary;
+extern int d2_MouseBottomBoundary;
 extern char g_14cf7c8;
 extern char g_14cf7d0;
 extern char g_14cf7cb;
@@ -27,12 +27,12 @@ int __cdecl fcn_005b10e0(char* w)
 	y = *(int*) (w + 0x258);
 	if (g_14ce8c0 <= g_6b5c80) {
 		x -= 10;
-	} else if (g_14ce8c0 >= g_6772bc) {
+	} else if (g_14ce8c0 >= d2_MouseRightBoundary) {
 		x += 10;
 	}
-	if (g_14ce8c2 <= g_6b5c84) {
+	if (g_14ce8c2 <= d2_MouseTopBoundary) {
 		y -= 10;
-	} else if (g_14ce8c2 >= g_6772c0) {
+	} else if (g_14ce8c2 >= d2_MouseBottomBoundary) {
 		y += 10;
 	}
 	if (g_14cf7c8 != 0) {

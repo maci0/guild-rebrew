@@ -24,7 +24,7 @@ typedef struct Pos_554b90 {
 
 extern House_554b90 g_7f4ca0[768];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern Pos_554b90 g_7f4c00;
+extern Pos_554b90 gm_GameTime;
 
 void __cdecl fcn_00546190(char*);
 int __cdecl gm_AccumulateTyped2(House_554b90*);
@@ -135,11 +135,11 @@ put:
 			*(int*) (msg + 0x7c) = *(int*) (e + 0xac);
 			*(int*) (msg + 0x80) = *(int*) (e + 0xb0);
 			*(int*) (msg + 0x84) = 0;
-			*(Pos_554b90*) (msg + 0x18) = g_7f4c00;
+			*(Pos_554b90*) (msg + 0x18) = gm_GameTime;
 			fcn_00500bb0(msg + 0x18, 0, 0x1e, 0);
 			fcn_004c5980(msg);
 		}
-		*(Pos_554b90*) (e + 0x52) = g_7f4c00;
+		*(Pos_554b90*) (e + 0x52) = gm_GameTime;
 		fcn_00500bb0(e + 0x52, 0x18, 0, 0);
 		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 		return;

@@ -30,7 +30,7 @@ extern signed char g_6a3440;
 extern char g_10069a0[];
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00546190(char*);
@@ -60,7 +60,7 @@ void __cdecl fcn_005754e0(char* u)
 	}
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		if (((rec24*)g_10069a0)[i].f20 == 0 && (unsigned short) g_7f4c00.b < 0x16 && fcn_004b5070(&((rec24*)g_10069a0)[i]) != 0) {
+		if (((rec24*)g_10069a0)[i].f20 == 0 && (unsigned short) gm_GameTime.b < 0x16 && fcn_004b5070(&((rec24*)g_10069a0)[i]) != 0) {
 			((rec24*)g_10069a0)[i].f20 = 1;
 			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 			*(int*) (u + 0x70) = 1;
@@ -70,7 +70,7 @@ void __cdecl fcn_005754e0(char* u)
 		return;
 	case 1:
 		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
-		if (((rec24*)g_10069a0)[i].f20 == 1 && (unsigned short) g_7f4c00.b < 0x16 && g_6a3760 == -1) {
+		if (((rec24*)g_10069a0)[i].f20 == 1 && (unsigned short) gm_GameTime.b < 0x16 && g_6a3760 == -1) {
 			q.who = ((rec24*)g_10069a0)[i].f4;
 			*(int*) (u + 0xac) = fcn_004c5790(8, &q);
 			*(int*) (u + 0x70) = 2;

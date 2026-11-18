@@ -1,10 +1,10 @@
 #include <string.h>
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00; extern char g_7f4ca0[];
-extern int g_100f1dc, g_67d370, g_14ce8e0, g_774654;
+extern pos14_7f4c00 gm_GameTime; extern char g_7f4ca0[];
+extern int g_100f1dc, d2_CurrentElementId, g_14ce8e0, g_774654;
 
 extern unsigned int* g_1015ea0;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 
 typedef struct Req_59ecc0 {
 	int f00;                    /* 0x00 */
@@ -98,17 +98,17 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 	total = fcn_00470820(0, 0, (char*) 0x6a9750);
 	fcn_00471b60(total);
 	d2_SetForm(total, 0);
-	fcn_00533dc0(g_772514, 0x70f, 0x741);
+	fcn_00533dc0(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(total, 3);
 	io_AppendText(0x1806);
 	fcn_0052a0c0(a0, 0);
 	fcn_00594340();
 	fcn_00471b60(total);
 	d2_SetForm(total, 2);
-	y = *(int*) (0x1015f4c + g_772514 * 0x3cc) / 2 - 0x80;
+	y = *(int*) (0x1015f4c + d2_CurrentWindowId * 0x3cc) / 2 - 0x80;
 	cnt = 0;
 	for (x = 0x19; x < 0x109; x += 0x50) {
-		h = fcn_0046f740(y, x, (int) ids[cnt] + 0xdf, g_772514);
+		h = fcn_0046f740(y, x, (int) ids[cnt] + 0xdf, d2_CurrentWindowId);
 		g_1015ea0[h * 0xbd + 0x17] = 1;
 		g_1015ea0[h * 0xbd + 0x74] = 3;
 		g_1015ea0[h * 0xbd + 0x77] = 100;
@@ -158,7 +158,7 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 		}
 		if (g_100f1dc != -1) {
 			for (sel = 0; sel < 3; sel++) {
-				if (handles[sel] == g_67d370)
+				if (handles[sel] == d2_CurrentElementId)
 					break;
 			}
 			if (sel < 3) {
@@ -168,7 +168,7 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 				req.f08 = *(int*) (*(unsigned short*) (a0 + 0x27) * 0x21c
 					+ (int)(g_7f4ca0 + 4));
 				req.f0c = *(int*) (a0 + 1);
-				*(pos14_7f4c00*)&req.f28 = g_7f4c00;
+				*(pos14_7f4c00*)&req.f28 = gm_GameTime;
 
 				req.f5a = (unsigned short) ids[sel];
 				req.f60 = *(int*) (a1 + 2);

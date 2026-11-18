@@ -1,4 +1,4 @@
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 
 void __cdecl fcn_00428720(char*);
 extern char g_675bbc[];
@@ -24,9 +24,9 @@ int __cdecl fcn_0040c6d0(void)
             continue;
         if ((*(unsigned char*) (obj + 0x124) & 1) == 0)
             continue;
-        if (*(int*) (obj + 0x104) != *(int*) (g_6b7e98 + 0x104))
+        if (*(int*) (obj + 0x104) != *(int*) (evt_CurrentScript + 0x104))
             continue;
-        if (id == *(int*) (g_6b7e98 + 0x100))
+        if (id == *(int*) (evt_CurrentScript + 0x100))
             continue;
         fcn_00428720(obj);
     }
@@ -40,7 +40,7 @@ int __cdecl fcn_0040c740(int** pp, int** pp2)
 	void* g;
 
 	if (*pp == 0) {
-		g = g_6b7e98;
+		g = evt_CurrentScript;
 		fcn_00425bf0(g, *(int*) ((char*) g + 0x118), g_675bbc);
 		return 0;
 	}
@@ -55,7 +55,7 @@ int __cdecl fcn_0040c780(int** pp, int** pp2, int** pp3)
 	void* g;
 
 	if (*pp == 0) {
-		g = g_6b7e98;
+		g = evt_CurrentScript;
 		fcn_00425bf0(g, *(int*) ((char*) g + 0x118), g_675be8);
 		return 0;
 	}

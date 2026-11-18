@@ -9,12 +9,12 @@ typedef struct {
 #pragma pack(pop)
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char g_7f4ca0[];
-extern int g_773da8;
+extern int gm_CityEntity;
 extern char g_6a5998[];
 
 void __cdecl fcn_00546190(char*);
@@ -68,7 +68,7 @@ void __cdecl fcn_0054a210(char* a0)
     }
     if (*(unsigned short*) (a0 + 0x27) != 0xffff) {
         rec = g_7f4ca0 + *(unsigned short*) (a0 + 0x27) * 0x21c;
-        if (rec != 0 && rec != (char*) g_773da8 && *(char*) (rec + 8) != 0 && *(char*) (rec + 2) != 0xf) {
+        if (rec != 0 && rec != (char*) gm_CityEntity && *(char*) (rec + 8) != 0 && *(char*) (rec + 2) != 0xf) {
             if (*(int*) (o + 0xc0) != 1) {
                 if (fcn_00500d20((Stamp_54a210*) 0x7f4c00, (Stamp_54a210*) (o + 0xb0)) >= 1) {
                     fcn_00500bb0((Stamp_54a210*) (o + 0x52), 1, 0, 0);
@@ -76,12 +76,12 @@ void __cdecl fcn_0054a210(char* a0)
                     return;
                 }
                 fcn_00549c50(0x65786563, a0, sel, -1);
-                *(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+                *(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 
 
 
                 fcn_00500bb0((Stamp_54a210*) (o + 0x52), 1, 0, 0);
-                *(pos14_7f4c00*) (o + 0xb0) = g_7f4c00;
+                *(pos14_7f4c00*) (o + 0xb0) = gm_GameTime;
                 fcn_00500bb0((Stamp_54a210*) (o + 0xb0), 0x18, 0, 0);
                 *(int*) (o + 0xb6) = 0;
                 *(short*) (o + 0xb4) = gm_RandomMod(4) + 0x13;
@@ -94,12 +94,12 @@ void __cdecl fcn_0054a210(char* a0)
             else {
                 fcn_00549c50(0x6e657720, a0, sel, -1);
                 *(int*) (o + 0xc0) = *(int*) (o + 0xc0) - 1;
-                *(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+                *(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 
 
 
                 fcn_00500bb0((Stamp_54a210*) (o + 0x52), 1, 0, 0);
-                *(pos14_7f4c00*) (o + 0xb0) = g_7f4c00;
+                *(pos14_7f4c00*) (o + 0xb0) = gm_GameTime;
                 fcn_00500bb0((Stamp_54a210*) (o + 0xb0), 0x18, 0, 0);
                 *(int*) (o + 0xb6) = 0;
                 *(short*) (o + 0xb4) = gm_RandomMod(4) + 0x13;
@@ -120,12 +120,12 @@ void __cdecl fcn_0054a210(char* a0)
         fcn_004c4ef0(g_6a5998);
         *(int*) (o + 0xc0) = *(int*) (o + 0xc0) + 1;
     }
-    *(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+    *(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 
 
 
     fcn_00500bb0((Stamp_54a210*) (o + 0x52), 1, 0, 0);
-    *(pos14_7f4c00*) (o + 0xb0) = g_7f4c00;
+    *(pos14_7f4c00*) (o + 0xb0) = gm_GameTime;
 
 
 

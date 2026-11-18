@@ -95,7 +95,7 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == other) {
+			if (d2_CurrentElementId == other) {
 				for (i = 0; i < 8; i++) {
 					((unsigned int*) (packet + 0x38))[i] = 0xffffffff;
 				}
@@ -122,7 +122,7 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 					g_774654 = 1;
 				}
 			}
-			else if (g_67d370 == index) {
+			else if (d2_CurrentElementId == index) {
 				g_774654 = 1;
 			}
 		}

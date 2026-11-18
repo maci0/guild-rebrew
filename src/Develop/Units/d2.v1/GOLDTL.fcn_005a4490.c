@@ -1,12 +1,12 @@
 extern char* g_772500;
 extern char* g_77255c;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern char g_8680b4[];
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 extern int g_14ab658;
 extern int g_14ab65c;
@@ -75,7 +75,7 @@ void __cdecl fcn_005a4490(char* p)
 	dialog = fcn_00470820(0, 0, "locations\\geldleihe\\geldleihe_kreditaufnehmen");
 	fcn_00471b60(dialog);
 	d2_SetForm(dialog, 0);
-	arg = g_772514 * 0x3cc;
+	arg = d2_CurrentWindowId * 0x3cc;
 	*(int*) (arg + 0x10162e8) = 0x18;
 	*(int*) (arg + 0x10162ec) = 0x18;
 	*(int*) (arg + 0x10162f0) = 0x18;
@@ -115,11 +115,11 @@ void __cdecl fcn_005a4490(char* p)
 			d2_SetForm(dialog, 3);
 			io_AppendText(g_6811b0);
 			if (refresh == 0) {
-				fcn_00533a60(g_772514, 0, sel, 2, g_14ab658, g_14ab65c);
+				fcn_00533a60(d2_CurrentWindowId, 0, sel, 2, g_14ab658, g_14ab65c);
 				first = sel[0];
 				second = sel[1];
 			} else {
-				fcn_00533a60(g_772514, 0, sel, 1, g_14ab65c);
+				fcn_00533a60(d2_CurrentWindowId, 0, sel, 1, g_14ab65c);
 				first = -1;
 				second = sel[0];
 			}
@@ -130,8 +130,8 @@ void __cdecl fcn_005a4490(char* p)
 				y = 0;
 				for (i = 0; i < count; i++) {
 					d2_SetForm(dialog, 2);
-					rows[i].text = fcn_0046f740((*(int*) (g_77255c + 0xc) - w) >> 1, y, 0x75a, g_772514);
-					rows[i].image = fcn_0046f100((*(int*) (g_77255c + 0xc) - w) >> 1, y, w, h, 0x10, g_772514);
+					rows[i].text = fcn_0046f740((*(int*) (g_77255c + 0xc) - w) >> 1, y, 0x75a, d2_CurrentWindowId);
+					rows[i].image = fcn_0046f100((*(int*) (g_77255c + 0xc) - w) >> 1, y, w, h, 0x10, d2_CurrentWindowId);
 					line = lines[index];
 					rows[i].line = line;
 					*(int*) (rows[i].image * 0x3cc + 0x10161cc) = 0x56;
@@ -163,8 +163,8 @@ void __cdecl fcn_005a4490(char* p)
 			fcn_00472640(second, arg);
 		}
 		if (g_100f1dc != -1 && g_100f1dc == 2) {
-			if (g_67d370 != first || first == -1) {
-				if (g_67d370 == second && second != -1) {
+			if (d2_CurrentElementId != first || first == -1) {
+				if (d2_CurrentElementId == second && second != -1) {
 					fcn_00471af0(dialog, 0);
 					fcn_005a4360(p, rows[*(int*) (slot * 0x8c + 0x102cbc8)].line);
 					refresh = 1;

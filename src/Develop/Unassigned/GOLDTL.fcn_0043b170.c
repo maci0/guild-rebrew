@@ -1,9 +1,9 @@
 extern int g_67a370;
-extern char g_1042340[];
+extern char d3_SceneObjectSentinel[];
 extern unsigned int g_1052c50;
 extern volatile int g_6b7fac;
-extern int g_6b8010;
-extern int g_6b8014;
+extern int d3_CurrentContextIndex;
+extern int d3_ActiveCamera;
 extern int g_6b86d4;
 extern char g_6b8018;
 
@@ -27,7 +27,7 @@ void __cdecl fcn_0043b170(unsigned int flags, char force, unsigned int mode, cha
 	if (g_6b86d4 < 0) {
 		g_6b86d4 = 0;
 	}
-	if (!g_6b8018 || g_6b86d4 != 0 || !g_6b8014) {
+	if (!g_6b8018 || g_6b86d4 != 0 || !d3_ActiveCamera) {
 		return;
 	}
 	g_6b86d4 = 1;
@@ -49,13 +49,13 @@ void __cdecl fcn_0043b170(unsigned int flags, char force, unsigned int mode, cha
 			i = 0;
 			entry = (Entry_1043340*) 0x1043340;
 			do {
-				if (i != g_6b8010) {
+				if (i != d3_CurrentContextIndex) {
 					node = entry->node;
-					if (node != 0 && node != g_1042340) {
+					if (node != 0 && node != d3_SceneObjectSentinel) {
 						do {
 							fcn_004379a0((char*) g_67a370, node, fl, fcn_00432480, (void*) (now | 0x80000000));
 							node = *(char**) (node + 0x1f4);
-						} while (node != g_1042340);
+						} while (node != d3_SceneObjectSentinel);
 					}
 				}
 				entry++;

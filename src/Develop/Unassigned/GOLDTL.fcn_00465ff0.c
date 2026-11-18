@@ -18,24 +18,24 @@ void __cdecl fcn_00465ff0(int x, int y, int w, int h, char* owner)
 	if (*(int*) (owner + 0x190) == 0 || owner + 0x1ac == 0) {
 		return;
 	}
-	if (x > g_67d964) {
-		x = g_67d964;
+	if (x > d2_ClipRight) {
+		x = d2_ClipRight;
 	}
 	if (x & 1) {
 		x--;
 		w = (w + 2) & ~1;
 	}
-	if (y + h > g_67d968) {
-		h = g_67d968 - y;
+	if (y + h > d2_ClipBottom) {
+		h = d2_ClipBottom - y;
 	}
-	if (x + w > g_67d964) {
-		w = g_67d964 - x;
+	if (x + w > d2_ClipRight) {
+		w = d2_ClipRight - x;
 	}
 	if (y < g_7725fc) {
 		y = g_7725fc;
 	}
-	if (x < g_7725f8) {
-		x = g_7725f8;
+	if (x < d2_ClipLeft) {
+		x = d2_ClipLeft;
 	}
 	if (w < 0) {
 		w = 1;

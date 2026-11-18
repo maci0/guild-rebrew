@@ -40,7 +40,7 @@ int __cdecl fcn_005222a0(void* stream)
 	} else {
 		(*(int*)g_1043370) = fcn_0045b700(((struct s_6b8300*)g_6b8300), 0x100, 2);
 	}
-	save = g_6b8010;
+	save = d3_CurrentContextIndex;
 	fcn_004432d0(0, 0);
 	if (((struct s_6b8300*)g_6b8300) != 0) {
 		((struct s_6b8300*)g_6b8300)->mode = g_699b08;

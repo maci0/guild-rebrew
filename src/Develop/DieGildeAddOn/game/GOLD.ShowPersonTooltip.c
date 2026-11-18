@@ -51,7 +51,7 @@ void __cdecl ShowPersonTooltip(char* w)
 	memset(&info, 0, sizeof(info));
 	info.who = w;
 	if (fcn_005ca560(&info) != 0) {
-		fcn_005caaa0(0xa6, 5, g_772514, &info);
+		fcn_005caaa0(0xa6, 5, d2_CurrentWindowId, &info);
 	}
 	d2_SetForm(0, 2);
 	if (w[2] != 0x14) {
@@ -104,7 +104,7 @@ void __cdecl ShowPersonTooltip(char* w)
 	d2_SetForm(0, 3);
 	for (i = 0; i < 5; i++) {
 		io_FormatTextBuffer(buf, "%s:", i + 0x16b7);
-		d2_ShowTxt(0, i * 15, buf, g_772514);
+		d2_ShowTxt(0, i * 15, buf, d2_CurrentWindowId);
 		fcn_00534210(0x64, i * 15 + 2, w, i, 0x4df);
 	}
 	do {

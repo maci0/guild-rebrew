@@ -3,7 +3,7 @@
 extern Obj_1038140 g_1038140[];
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7725ec;
@@ -47,7 +47,7 @@ void __cdecl fcn_00471490(int k)
 	int oh1;
 	int oh2;
 
-	saved = g_772604;
+	saved = d2_QueuedQuadCount;
 	base = ((char*) g_1038140) + k * 0x2bc;
 	if (*(int*) (base + 0x190) == 0) {
 		return;
@@ -103,7 +103,7 @@ void __cdecl fcn_00471490(int k)
 					case 5:
 					case 8:
 						if (*(int*) (obj + 0x1d0) & 2) {
-							if (g_1015ea0 + g_67d370 * 0x2f4 == obj || *(int*) (obj + 0x38) != 0) {
+							if (g_1015ea0 + d2_CurrentElementId * 0x2f4 == obj || *(int*) (obj + 0x38) != 0) {
 								if (*(int*) (obj + 0x1d0) & 1) {
 									*(int*) (obj + 0x3c) = 1;
 								}
@@ -157,7 +157,7 @@ void __cdecl fcn_00471490(int k)
 						break;
 					case 0x43:
 						if (*(int*) (obj + 0x24) > 0) {
-							fcn_0047a040(0, 0, g_1040494, g_1040490);
+							fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 							fcn_00472880(*(int*) (obj + 0x84));
 							flags = 0;
 							if (*(int*) (obj + 0x3c)) {
@@ -187,7 +187,7 @@ void __cdecl fcn_00471490(int k)
 						break;
 					}
 				}
-				fcn_0047a040(0, 0, g_1040494, g_1040490);
+				fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 			}
 		}
 		fcn_0047c560(saved, g_7725ec, surf);

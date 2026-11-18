@@ -1,8 +1,8 @@
 #include <string.h>
 
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern unsigned char g_773d75;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -65,7 +65,7 @@ void __cdecl fcn_004f3ef0(char* a0)
 	total = 0;
 	handle = -1;
 	if (*(unsigned short*) (a0 + 0x27) != 0xffff
-	    && *(unsigned short*) (a0 + 0x27) != *(unsigned short*) g_773da8) {
+	    && *(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
 		home = g_7f4ca0 + *(unsigned short*) (a0 + 0x27) * 0x21c;
 	}
 	entry = (int*) FindSlotEntryFiltered(0, a0, 0, (void*) fcn_004f1850, 0xff);
@@ -100,7 +100,7 @@ void __cdecl fcn_004f3ef0(char* a0)
 						* g_6652e8[entry[0]] * a);
 					if (value <= 0)
 						continue;
-					if (((fcn_004f1790((char*) *(int*) (a0 + 0x65), entry) ^ g_7f4c00) & 1) != 0)
+					if (((fcn_004f1790((char*) *(int*) (a0 + 0x65), entry) ^ gm_GameTime) & 1) != 0)
 						continue;
 					handle = fcn_004f2d30((int) a0, entry[0],
 						fcn_004f1790((char*) *(int*) (a0 + 0x65), entry), -value);
@@ -114,21 +114,21 @@ void __cdecl fcn_004f3ef0(char* a0)
 				* g_6652e8[entry[0]] * a);
 			if (value > 0) {
 				list = (char*) *(int*) (a0 + 0x65);
-				if (((fcn_004f1790(list, entry) ^ g_7f4c00) & 1) == 0) {
+				if (((fcn_004f1790(list, entry) ^ gm_GameTime) & 1) == 0) {
 					handle = fcn_004f2d30((int) a0, result, fcn_004f1790(list, entry), -value);
 					n++;
 				}
 			}
 			if (home == 0)
 				continue;
-			if (slot != home && g_7f4c00 % 4 == (*(int*) (slot + 4) & 3)
+			if (slot != home && gm_GameTime % 4 == (*(int*) (slot + 4) & 3)
 			    && *(unsigned char*) ((char*) entry + 0xc) * g_662c30 < g_664178) {
 				handle = fcn_004c54c0(*(unsigned int*) (home + 4), *(unsigned int*) (slot + 4),
 					-5 - gm_RandomMod(0x10), 1);
 				n++;
 				hits++;
 			}
-			if (*(unsigned short*) ((char*) entry + 0xa) != g_7f4c00)
+			if (*(unsigned short*) ((char*) entry + 0xa) != gm_GameTime)
 				continue;
 			result = fcn_004f4440((int) slot, *(unsigned char*) ((char*) entry + 0xc), entry[0], 0, &out);
 			if (slot == home) {
@@ -149,7 +149,7 @@ void __cdecl fcn_004f3ef0(char* a0)
 			} else {
 				memset(block, 0, sizeof(block));
 				*(int*) ((char*) block + 8) = *(int*) (slot + 4);
-				*(int*) ((char*) block + 0x28) = g_7f4c00;
+				*(int*) ((char*) block + 0x28) = gm_GameTime;
 				*(int*) ((char*) block + 0x30) = g_7f4c08;
 				*(int*) ((char*) block + 0xc) = *(int*) (a0 + 1);
 				*(int*) ((char*) block + 0x2c) = g_7f4c04;

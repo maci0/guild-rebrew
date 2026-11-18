@@ -56,16 +56,16 @@ typedef struct {
 
 extern char s_6ad434[];
 extern char s_6811b0[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern volatile int g_6b7fac;
 extern int g_14b5af8;
 extern int g_14b5afc;
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern int g_14ce8e0;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern float g_6628a0;
 extern float g_662cf8;
 
@@ -109,7 +109,7 @@ void __cdecl fcn_005e5ea0(char* participant)
 	char* entity;
 	int dlg;
 
-	st = *(Stamp*) &g_7f4c00;
+	st = *(Stamp*) &gm_GameTime;
 	fcn_00500bb0(&st, 0x18, 0, 0);
 	st.b = (unsigned short) (fcn_0042e410(stage) + 0x15);
 	*(int*) ((char*) &st + 6) = 0;
@@ -118,16 +118,16 @@ void __cdecl fcn_005e5ea0(char* participant)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, stage);
-	timer1 = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2, 10, 300, 0, 100, 0x75, 0x42, g_772514);
+	timer1 = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2, 10, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_SetElementValue(timer1, 0, 100, 0);
 	d2_SetForm(dlg, 2);
-	timer2 = fcn_004677e0(0x57, 7, 200, 0, 100, 0x7b, 2, g_772514);
+	timer2 = fcn_004677e0(0x57, 7, 200, 0, 100, 0x7b, 2, d2_CurrentWindowId);
 	fcn_00510550(participant);
 	d2_SetElementValue(timer2, 0, fcn_00510550(participant) - 1, 0, 1);
 	d2_SetForm(dlg, 3);
-	fcn_00533a60(g_772514, 0, ids, stage, g_14b5af8, g_14b5afc);
+	fcn_00533a60(d2_CurrentWindowId, 0, ids, stage, g_14b5af8, g_14b5afc);
 
 	for (;;) {
 		if ((unsigned int) g_6b7fac > last + 0x8c || fcn_00471f80(timer2) != idx) {
@@ -142,7 +142,7 @@ void __cdecl fcn_005e5ea0(char* participant)
 					(int) ((((float) value / n < 1.0f) ? ((float) value / n) : 1.0f) * 100.0f));
 			}
 			else {
-				st = *(Stamp*) &g_7f4c00;
+				st = *(Stamp*) &gm_GameTime;
 				fcn_00500bb0(&st, 0x18, 0, 0);
 				st.b = (unsigned short) (fcn_0042e410(2) + 0x15);
 				*(int*) ((char*) &st + 6) = 0;
@@ -178,7 +178,7 @@ void __cdecl fcn_005e5ea0(char* participant)
 			g_774654 = 1;
 		}
 		else if (g_100f1dc != -1) {
-			if (g_67d370 == ids[0]) {
+			if (d2_CurrentElementId == ids[0]) {
 				if (fcn_00525f60(((House*) g_7f4ca0) + g_774970, stage) == 1) {
 					fcn_005100f0(((House*) g_7f4ca0)[g_774970].f4, -stage);
 					memset(&msg, 0, sizeof(msg));
@@ -186,13 +186,13 @@ void __cdecl fcn_005e5ea0(char* participant)
 					msg.b36 = 2;
 					msg.f8 = ((House*) g_7f4ca0)[g_774970].f4;
 					msg.fc = *(int*) (participant + 1);
-					msg.pos = g_7f4c00;
+					msg.pos = gm_GameTime;
 					msg.sel = idx;
 					fcn_004c5530(&msg);
 					g_774654 = 1;
 				}
 			}
-			else if (g_67d370 == ids[1]) {
+			else if (d2_CurrentElementId == ids[1]) {
 				g_774654 = 1;
 			}
 		}

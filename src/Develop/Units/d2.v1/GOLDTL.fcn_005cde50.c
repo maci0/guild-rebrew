@@ -1,8 +1,8 @@
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern char* g_1015ea0;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6ac994[];
@@ -42,13 +42,13 @@ void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
 	else
 		io_AppendText(0xa2);
 	d2_SetForm(dlg, 1);
-	btn[0] = fcn_0046f740(0x10f, 0x25, 0x599, g_772514);
-	btn[1] = fcn_0046f740(0x10f, 0x93, 0x58d, g_772514);
-	btn[2] = fcn_0046f740(0x69, 0xab, 0x590, g_772514);
-	btn[3] = fcn_0046f740(0x1b5, 0xab, 0x58c, g_772514);
-	btn[4] = fcn_0046f740(0x45, 0x125, 0x58a, g_772514);
-	btn[5] = fcn_0046f740(0x10f, 0x125, 0x58f, g_772514);
-	btn[6] = fcn_0046f740(0x1d9, 0x125, 0x58b, g_772514);
+	btn[0] = fcn_0046f740(0x10f, 0x25, 0x599, d2_CurrentWindowId);
+	btn[1] = fcn_0046f740(0x10f, 0x93, 0x58d, d2_CurrentWindowId);
+	btn[2] = fcn_0046f740(0x69, 0xab, 0x590, d2_CurrentWindowId);
+	btn[3] = fcn_0046f740(0x1b5, 0xab, 0x58c, d2_CurrentWindowId);
+	btn[4] = fcn_0046f740(0x45, 0x125, 0x58a, d2_CurrentWindowId);
+	btn[5] = fcn_0046f740(0x10f, 0x125, 0x58f, d2_CurrentWindowId);
+	btn[6] = fcn_0046f740(0x1d9, 0x125, 0x58b, d2_CurrentWindowId);
 	for (i = 0; i < 7; i++) {
 		if (i != 0 || enableFirst != 0) {
 			id = btn[i];
@@ -70,7 +70,7 @@ void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
 		if (g_100f1dc != -1) {
 			sel = -1;
 			for (i = 0; i < 7; i++) {
-				if (btn[i] == g_67d370) {
+				if (btn[i] == d2_CurrentElementId) {
 					sel = i;
 					break;
 				}

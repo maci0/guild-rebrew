@@ -1,5 +1,5 @@
 extern unsigned char g_slot_table[2];
-extern void* g_773da8;
+extern void* gm_CityEntity;
 
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004fffb0(unsigned int);
@@ -28,7 +28,7 @@ int __cdecl fcn_005cf720(unsigned int a0, unsigned int a1, unsigned char* p)
 		return 0;
 	if (s[0x1b1] > 0)
 		return 0;
-	if (s == (unsigned char*) g_773da8)
+	if (s == (unsigned char*) gm_CityEntity)
 		return 0;
 	if (!p)
 		return 1;

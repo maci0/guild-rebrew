@@ -1,7 +1,7 @@
 void __cdecl fcn_00546190(char*);
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 
 
@@ -24,7 +24,7 @@ void __cdecl fcn_005662a0(char* o)
 		}
 	}
 	*(int*) (o + 0xb0) = -1;
-	*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
 	e = gm_LookupEntityRecordById(*(int*) (o + 0xac));
 	if (e == 0) {

@@ -9,7 +9,7 @@ typedef struct {
 // SIZE 0xe
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca4[];
 
 int __cdecl fcn_004ae170(int);
@@ -21,7 +21,7 @@ int __cdecl fcn_004b1820(void)
 	char m[0xf8];
 	int i;
 
-	st = (*(stamp14*)&g_7f4c00);
+	st = (*(stamp14*)&gm_GameTime);
 	memset(m, 0, sizeof(m));
 	*(int*) ((char*) &st + 6) = 0;
 	for (i = 0; i < 0x300; i++) {

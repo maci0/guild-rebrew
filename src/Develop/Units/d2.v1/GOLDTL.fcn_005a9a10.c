@@ -27,9 +27,9 @@ extern int g_14abb2c;
 extern int g_14abb28;
 extern int g_14abb38;
 extern int g_14abb54;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6aaebc[];
@@ -96,7 +96,7 @@ void __cdecl fcn_005a9a10(void)
 		prev = n;
 		if (flag != 0) {
 			d2_SetForm(dlg, 1);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			io_AppendText(0x1a01);
 			for (i = 0; i < n; i++) {
 				btns[i] = fcn_00472250(dlg, 1, io_AppendText(0x1a04, list[i].x0 + 0x253));
@@ -112,7 +112,7 @@ void __cdecl fcn_005a9a10(void)
 		if (g_100f1dc != -1) {
 			sel = -1;
 			for (i = 0; i < n; i++) {
-				if (btns[i] == g_67d370) {
+				if (btns[i] == d2_CurrentElementId) {
 					sel = i;
 					break;
 				}

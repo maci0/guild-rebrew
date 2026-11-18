@@ -40,8 +40,8 @@ int __cdecl fcn_00478fc0(int x, int y, Surf* s, Spr* spr)
 	if (g_100ef80 == 0) {
 		if (spr->x26 != -1) {
 			h = spr->h;
-			if (x <= g_67d964) {
-				if (h + x >= g_7725f8) {
+			if (x <= d2_ClipRight) {
+				if (h + x >= d2_ClipLeft) {
 					right = h + x;
 					saved = g_67d96c;
 					g_67d96c = s->x10;
@@ -54,9 +54,9 @@ int __cdecl fcn_00478fc0(int x, int y, Surf* s, Spr* spr)
 						}
 						return 1;
 					case 1:
-						if (x < g_7725f8) {
+						if (x < d2_ClipLeft) {
 							fcn_004774e0(x, y, s->bits, spr);
-						} else if (right > g_67d964) {
+						} else if (right > d2_ClipRight) {
 							fcn_004774e0(x, y, s->bits, spr);
 						} else {
 							fcn_0047a320(x, y, s->bits, spr);

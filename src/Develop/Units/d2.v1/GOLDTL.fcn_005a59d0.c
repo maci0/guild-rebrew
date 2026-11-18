@@ -9,7 +9,7 @@ typedef struct {
 	int x18;
 } Lrow;
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern char* g_1015ea0;
 extern char g_1015f40[];
@@ -26,7 +26,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern double g_6640e8;
 
 void __cdecl ResetDisplayCounters(void);
@@ -94,24 +94,24 @@ int __cdecl fcn_005a59d0(char* a0)
 	e0 = fcn_00472250(v8, 0, 0);
 	e4 = fcn_00472250(v8, 0, 4);
 	d2_SetForm(v8, 0);
-	fcn_00533dc0(g_772514, 0x73b, 0x73f);
+	fcn_00533dc0(d2_CurrentWindowId, 0x73b, 0x73f);
 	d2_SetForm(v8, 0);
 	h1 = d2_ShowTxt((*(int*)(g_1015ea0 + e1 * 0x2f4 + 0x10) - *(int*)(g_77255c + 4)) + 2,
 		(*(int*)(g_1015ea0 + e1 * 0x2f4 + 0x1c) - *(int*)(g_77255c + 8)) + 2
 			+ *(int*)(g_1015ea0 + e1 * 0x2f4 + 0x14),
-		g_6b5c60, g_772514);
+		g_6b5c60, d2_CurrentWindowId);
 	h2 = d2_ShowTxt((*(int*)(g_1015ea0 + e2 * 0x2f4 + 0x10) - *(int*)(g_77255c + 4)) + 2,
 		(*(int*)(g_1015ea0 + e2 * 0x2f4 + 0x1c) - *(int*)(g_77255c + 8)) + 2
 			+ *(int*)(g_1015ea0 + e2 * 0x2f4 + 0x14),
-		g_6b5c60, g_772514);
+		g_6b5c60, d2_CurrentWindowId);
 	*(int*)(g_1015ea0 + 0x84 + h1 * 0x2f4) = 0x54;
 	*(int*)(g_1015ea0 + 0x84 + h2 * 0x2f4) = 0x54;
 	*(int*)(g_1015ea0 + 0x54 + e4 * 0x2f4) = 1;
 	d2_SetForm(v8, 0);
-	*(int*)(g_1015f40 + g_772514 * 0x3cc + 0x3a8) = 0xe;
-	*(int*)(g_1015f40 + g_772514 * 0x3cc + 0x3ac) = 0x18;
-	*(int*)(g_1015f40 + g_772514 * 0x3cc + 0x3b0) = 0xe;
-	*(int*)(g_1015f40 + g_772514 * 0x3cc + 0x3b4) = 0xe;
+	*(int*)(g_1015f40 + d2_CurrentWindowId * 0x3cc + 0x3a8) = 0xe;
+	*(int*)(g_1015f40 + d2_CurrentWindowId * 0x3cc + 0x3ac) = 0x18;
+	*(int*)(g_1015f40 + d2_CurrentWindowId * 0x3cc + 0x3b0) = 0xe;
+	*(int*)(g_1015f40 + d2_CurrentWindowId * 0x3cc + 0x3b4) = 0xe;
 	d2_SetForm(v8, 1);
 	io_AppendText(0x18f5);
 	d2_SetForm(v8, 2);
@@ -189,18 +189,18 @@ int __cdecl fcn_005a59d0(char* a0)
 			fcn_0046f940(h2, buf);
 		}
 		if (g_100f1dc == 3 || g_100f1dc == 4) {
-			if (g_67d370 == e2) {
+			if (d2_CurrentElementId == e2) {
 				d2_SetForm(v8, 4);
-				fcn_0046ed00(0, -0x4c, g_772514);
-			} else if (g_67d370 == e3) {
+				fcn_0046ed00(0, -0x4c, d2_CurrentWindowId);
+			} else if (d2_CurrentElementId == e3) {
 				d2_SetForm(v8, 4);
-				fcn_0046ed00(0, 0x4c, g_772514);
-			} else if (g_67d370 == e1) {
+				fcn_0046ed00(0, 0x4c, d2_CurrentWindowId);
+			} else if (d2_CurrentElementId == e1) {
 				d2_SetForm(v8, 5);
-				fcn_0046ed00(0, -0x4c, g_772514);
-			} else if (g_67d370 == e0) {
+				fcn_0046ed00(0, -0x4c, d2_CurrentWindowId);
+			} else if (d2_CurrentElementId == e0) {
 				d2_SetForm(v8, 5);
-				fcn_0046ed00(0, 0x4c, g_772514);
+				fcn_0046ed00(0, 0x4c, d2_CurrentWindowId);
 			}
 		}
 		if (v31 == 1) {

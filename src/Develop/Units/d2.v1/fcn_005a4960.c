@@ -1,7 +1,7 @@
 #include "d2_gui.h"
 typedef unsigned short u16;
 typedef unsigned int   u32;
-extern int g_772514, g_14ce8e0, g_774654;
+extern int d2_CurrentWindowId, g_14ce8e0, g_774654;
 void* __cdecl fcn_00470820(int a, int b, char* c);
 void __cdecl fcn_00471b60(int a);
 void __cdecl d2_SetForm(int a, int b);
@@ -36,7 +36,7 @@ void __cdecl fcn_005a4960(char* owner, int id)
     dlg = fcn_00470820(0, 0, "locations\\geldleihe\\geldleihe_kreditaufnehmen");
     fcn_00471b60((int)dlg);
     d2_SetForm((int)dlg, 0);
-    idx = 972 * g_772514;
+    idx = 972 * d2_CurrentWindowId;
     *(int*)(0x10162e8 + idx) = 0xe;
     *(int*)(0x10162ec + idx) = 0x18;
     *(int*)(0x10162f0 + idx) = 0x18;
@@ -62,9 +62,9 @@ void __cdecl fcn_005a4960(char* owner, int id)
             for (i = 0; i < count; i++) {
                 d2_SetForm((int)dlg, 2);
                 slot[i][1] = fcn_0046f740(0, ebx, 0x75a,
-                                           g_772514);
+                                           d2_CurrentWindowId);
                 slot[i][0] = fcn_0046f100(0, ebx, cx, cy,
-                                           0x110, g_772514);
+                                           0x110, d2_CurrentWindowId);
                 slot[i][2] = (int) entries[i];
                 idx = 972 * slot[i][0];
                 *(int*)(0x10161cc + idx) = 0x56;

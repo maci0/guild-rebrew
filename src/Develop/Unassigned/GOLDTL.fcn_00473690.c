@@ -16,13 +16,13 @@ void __cdecl fcn_00473690(int key, int amt)
 	if (amt == 0) {
 		return;
 	}
-	for (i = 0, a = (int) DisplayCounters; a < (int) (DisplayCounters + 6); a += 0xc, i++) {
+	for (i = 0, a = (int) d2_DisplayCounters; a < (int) (d2_DisplayCounters + 6); a += 0xc, i++) {
 		if (*(int*) a == key) {
 			break;
 		}
 	}
 	if (i == 6) {
-		for (i = 0, a = (int) DisplayCounters; a < (int) (DisplayCounters + 6); a += 0xc, i++) {
+		for (i = 0, a = (int) d2_DisplayCounters; a < (int) (d2_DisplayCounters + 6); a += 0xc, i++) {
 			if (*(int*) a == -1) {
 				break;
 			}
@@ -31,8 +31,8 @@ void __cdecl fcn_00473690(int key, int amt)
 			return;
 		}
 	}
-	DisplayCounters[i].key = key;
-	DisplayCounters[i].val += amt;
+	d2_DisplayCounters[i].key = key;
+	d2_DisplayCounters[i].val += amt;
 }
 unsigned char _dpad_f8aae0[160] = {
     0x00,

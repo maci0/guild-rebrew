@@ -22,18 +22,18 @@ extern int __cdecl d2_Open(HWND, int, int, char*, char*);
 extern void __cdecl fcn_00473df0(void);
 extern int __cdecl sprintf(char*, const char*, ...);
 extern int g_1015ce0;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
-extern int g_6772bc;
-extern int g_6772c0;
-extern int g_67ac90;
+extern int d2_MouseRightBoundary;
+extern int d2_MouseBottomBoundary;
+extern int d3_LODMode;
 extern int g_6a3764;
 extern int g_6a3768;
 extern int g_6a376c;
 extern int g_6a3770;
 extern int g_6acf80;
 extern int g_6acf84;
-extern int g_7e1f80;
+extern int main_Instance;
 
 typedef struct Gfx538 {
 	int width;
@@ -156,7 +156,7 @@ int __cdecl fcn_00538850(int topmost)
 	g.f74 = 4.0f;
 	g.f78 = 12000.0f;
 	g.f7c = (float) (12000.0 / (double) g.width);
-	g_67ac90 = 2;
+	d3_LODMode = 2;
 	fcn_0041a380(g_6acf80, g_6acf84, topmost == 1);
 	if (!fcn_0041a970(*(HWND*) 0x774940, (void*) 0x5387c0, topmost == 1, 1)) {
 		ReportClientMessage((char*) 0x6a3904);
@@ -166,7 +166,7 @@ int __cdecl fcn_00538850(int topmost)
 		return 0;
 	}
 	fcn_0041a2a0();
-	if (!fcn_00439020(&g.w2, *(HWND*) 0x774940, g_7e1f80))
+	if (!fcn_00439020(&g.w2, *(HWND*) 0x774940, main_Instance))
 		return 0;
 	fcn_00444040();
 	while (ShowCursor(0) > 0)
@@ -177,10 +177,10 @@ int __cdecl fcn_00538850(int topmost)
 			if (*(int*) 0x774974 != 0)
 				fcn_005386c0(0);
 		}
-		fcn_00411820(*(HWND*) 0x774940, g_7e1f80, 1);
+		fcn_00411820(*(HWND*) 0x774940, main_Instance, 1);
 		fcn_00410610(0x50);
 	} else {
-		fcn_00411820(*(HWND*) 0x774940, g_7e1f80, 6);
+		fcn_00411820(*(HWND*) 0x774940, main_Instance, 6);
 	}
 	fcn_005e2510();
 	fcn_0045bf50((char*) 0x6a38f8);
@@ -200,8 +200,8 @@ int __cdecl fcn_00538850(int topmost)
 			(char*) 0x6a3550, g.text))
 		return 0;
 	g_1015ce0 = *(int*) 0x774940;
-	g_6772bc = g_1040494 - 8;
-	g_6772c0 = g_1040490;
+	d2_MouseRightBoundary = g_1040494 - 8;
+	d2_MouseBottomBoundary = d2_ScreenHeight;
 	fcn_00473df0();
 	fcn_005356e0();
 	return 1;

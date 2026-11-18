@@ -17,7 +17,7 @@ struct rec {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -39,8 +39,8 @@ void __cdecl fcn_005649d0(char* e)
 	char* r;
 	int v;
 
-	*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
-	*(pos14_7f4c00*) (e + 0xc4) = g_7f4c00;
+	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
+	*(pos14_7f4c00*) (e + 0xc4) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (e + 0xc4), *(int*) (e + 0xb8) * 24, 0, 0);
 	*(short*) (e + 0xc8) = 8;
 	*(int*) (e + 0xca) = 0;

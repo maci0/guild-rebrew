@@ -1,5 +1,5 @@
-extern char g_7f3b40[];
-extern char g_7f3b40[];
+extern char init_SceneContextIndices[];
+extern char init_SceneContextIndices[];
 extern signed char g_7f3b00[];
 extern signed char g_7f3b00[];
 
@@ -10,7 +10,7 @@ char __cdecl fcn_00510900(void)
 	int i;
 
 	for (i = 0; i < 0xb7; i++) {
-		((int*) g_7f3b40)[i] = -1;
+		((int*) init_SceneContextIndices)[i] = -1;
 	}
 	for (i = 0; i < 17; i++) {
 		((short*) g_7f3b00)[i] = -1;

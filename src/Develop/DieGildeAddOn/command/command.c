@@ -4063,7 +4063,7 @@ int __cdecl cm_ExSetGebUpgrade(int cmd, char* result)
  * contents, and removes it from the game world. */
 
 #ifndef REBREW_SERVER
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 extern char* g_7e2aa0;
 extern int g_773dd8;
 void __cdecl fcn_00530510(void);
@@ -4088,7 +4088,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 #ifndef REBREW_SERVER
 	void* handle;
 
-	saved_mode = g_6b8010;
+	saved_mode = d3_CurrentContextIndex;
 #endif
 
 	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
@@ -4928,7 +4928,7 @@ int __cdecl cm_DispatchMoveSlot(void* cmd, char* result_buf)
  * delegating to gv_ExAllocGraveyardWorker. */
 
 extern int g_14cbca0;
-extern int g_699364;
+extern int gm_NextEntityId;
 
 #if defined(REBREW_SERVER)
 int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
@@ -4957,7 +4957,7 @@ int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
 		*(int*) (result + 6) = 0;
 	}
 	if (g_14cbca0 != -1) {
-		g_699364 = *(int*) (cmd + 0x14);
+		gm_NextEntityId = *(int*) (cmd + 0x14);
 	}
 	else {
 		*(int*) (cmd + 0x10) = rand();
@@ -5006,7 +5006,7 @@ int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
 		*(int*) (result + 6) = 0;
 	}
 	if (g_14cbca0 != -1) {
-		g_699364 = *(int*) (cmd + 0x14);
+		gm_NextEntityId = *(int*) (cmd + 0x14);
 	}
 	else {
 		*(int*) (cmd + 0x10) = rand();

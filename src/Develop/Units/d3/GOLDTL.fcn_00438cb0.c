@@ -25,7 +25,7 @@ void __cdecl fcn_00438cb0(char* o, int* v)
 		fcn_00437ac0(g_67a370, o, 0xc0, fcn_00456df0);
 		return;
 	}
-	if (o == ((char*)g_6b8014)) {
+	if (o == ((char*)d3_ActiveCamera)) {
 		fcn_00438af0(0);
 	}
 	n[0] = -p[0];

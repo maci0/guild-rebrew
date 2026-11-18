@@ -34,7 +34,7 @@ extern char* g_7746c4;
 extern int g_14abab4;
 extern int g_14abaac;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6aa464[];
@@ -95,7 +95,7 @@ int __cdecl fcn_005ad380(int unused, char* e)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == btn1) {
+			if (d2_CurrentElementId == btn1) {
 				pkt.type = 0x3f;
 				pkt.x36 = 1;
 				n = 0;
@@ -122,7 +122,7 @@ int __cdecl fcn_005ad380(int unused, char* e)
 				g_774654 = 1;
 				r = 1;
 			}
-			else if (g_67d370 == btn2) {
+			else if (d2_CurrentElementId == btn2) {
 				g_774654 = 1;
 			}
 		}

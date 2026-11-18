@@ -8,7 +8,7 @@ extern void __cdecl sub_5ae960(long);
 extern void __cdecl sub_5aeab0(long);
 extern void __cdecl sub_5aee90(long);
 extern void __cdecl sub_4030e0(void *);
-extern int g_6b8010, g_7746a0, g_7746d8;
+extern int d3_CurrentContextIndex, g_7746a0, g_7746d8;
 /* ADDRESS: GOLDTL 0x005af140 */
 void __cdecl fcn_005af140(void *a0, void *a1)
 {
@@ -29,7 +29,7 @@ void __cdecl fcn_005af140(void *a0, void *a1)
             if (*(void **)((char *)esi + 0x184) == 0) {
                 if ((unsigned char)*(char *)((char *)esi + 2) != 6 &&
                     (unsigned char)*(char *)((char *)esi + 2) != 7) {
-                    made = (long)sub_4fe2e0(esi, (void*)g_6b8010,
+                    made = (long)sub_4fe2e0(esi, (void*)d3_CurrentContextIndex,
                                              0, 0, 0, 0x6a69a8);
                 }
             }

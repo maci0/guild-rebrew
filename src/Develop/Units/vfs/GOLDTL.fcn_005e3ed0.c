@@ -1,6 +1,6 @@
 
 
-extern unsigned short g_7ea3c0[];
+extern unsigned short ls_SavePreviewPixels[];
 extern struct VFS_DIR* g_6b7fdc;
 extern char g_6790b0[];
 extern char g_6a23b0[];
@@ -30,7 +30,7 @@ void __cdecl fcn_005e3ed0(int a1, char* name)
 		buf = m_alloc(0xe100, g_6a23b0);
 		for (y = 0; y < 120; y++) {
 			for (x = 0; x < 160; x++) {
-				fcn_0041bb70(g_7ea3c0[n], &buf[n * 3], &buf[n * 3 + 1], &buf[n * 3 + 2]);
+				fcn_0041bb70(ls_SavePreviewPixels[n], &buf[n * 3], &buf[n * 3 + 1], &buf[n * 3 + 2]);
 				n++;
 			}
 		}

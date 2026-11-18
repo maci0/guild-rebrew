@@ -26,7 +26,7 @@ int __cdecl fcn_005589d0(char* u)
 	int t;
 	char* c;
 
-	t = g_6b8010;
+	t = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	c = *(char**) (u + 0xc8);
 	if (c != 0 && *(char**) (c + 0x1cc) != 0 && *(char**) (*(char**) (c + 0x1cc) + 0x318) != 0) {

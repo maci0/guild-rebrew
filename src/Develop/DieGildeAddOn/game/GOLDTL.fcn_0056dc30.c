@@ -12,7 +12,7 @@ struct house {
 
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00500d20(pos14_7f4c00*, pos14_7f4c00*);
@@ -39,18 +39,18 @@ void __cdecl fcn_0056dc30(char* u)
 		if (h == 0) {
 			break;
 		}
-		x = fcn_00500d20((pos14_7f4c00*) (u + 0x60), &g_7f4c00) * 0.1f;
+		x = fcn_00500d20((pos14_7f4c00*) (u + 0x60), &gm_GameTime) * 0.1f;
 		x *= 5.0f;
 		r = fcn_004ff040(h) * 100.0;
 		if (*(unsigned int*) (u + 0xb0) > 0 && x + r < 100.0f) {
 			fcn_004ff210(*(unsigned short*) h, (int) x);
 			*(unsigned int*) (u + 0xb0) = (unsigned int) (*(unsigned int*) (u + 0xb0) - x);
-			*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 10, 0);
 		} else {
 			(*(int*) (u + 0x70))++;
 		}
-		*(pos14_7f4c00*) (u + 0x60) = g_7f4c00;
+		*(pos14_7f4c00*) (u + 0x60) = gm_GameTime;
 		return;
 	case 1:
 		h = gm_LookupEntityRecordById(*(int*) (u + 0xac));

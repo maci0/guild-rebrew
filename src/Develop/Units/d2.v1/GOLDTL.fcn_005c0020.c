@@ -1,12 +1,12 @@
 
 #include <stdio.h>
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern char g_7f4ca0[];
 
 typedef struct {
@@ -63,9 +63,9 @@ void __cdecl fcn_005c0020(void)
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x173f);
 	d2_SetForm(dlg, 2);
-	h2 = g_772514;
+	h2 = d2_CurrentWindowId;
 	d2_SetForm(dlg, 3);
-	fcn_0046e830(-1, -1, g_772514, h2, 0x767);
+	fcn_0046e830(-1, -1, d2_CurrentWindowId, h2, 0x767);
 	n = fcn_004f61c0(ids, v11, v10, *(unsigned short*) ent);
 	count = 0;
 	for (i = 0; i < n; i++) {
@@ -91,9 +91,9 @@ void __cdecl fcn_005c0020(void)
 			    (rec->x2c != 1) + 0x1748);
 			rec->x10 = 0x32;
 			rec->x14 = y;
-			fcn_005ca740(0x32, y, g_772514, 0x56, rec, 1);
+			fcn_005ca740(0x32, y, d2_CurrentWindowId, 0x56, rec, 1);
 			fcn_005c9160(buf,
-			    *(int*) (0x1015f4c + g_772514 * 0x3cc) - 0xf,
+			    *(int*) (0x1015f4c + d2_CurrentWindowId * 0x3cc) - 0xf,
 			    y + 0x2d, 200, 0x55);
 
 		}
@@ -111,7 +111,7 @@ void __cdecl fcn_005c0020(void)
 		else if (g_100f1dc != -1) {
 			selected = -1;
 			for (i = 0; i < count; i++) {
-				if (g_67d370 == recs[i].x4) { selected = i; break; }
+				if (d2_CurrentElementId == recs[i].x4) { selected = i; break; }
 			}
 			if (selected > -1)
 				fcn_005bfdf0((char*) 0x7f4ca0 + g_774970 * 0x21c,

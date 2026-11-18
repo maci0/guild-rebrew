@@ -32,7 +32,7 @@ int __cdecl fcn_00558680(char* a0)
 	int block;
 	int ret;
 
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	block = *(int*) (a0 + 0xc8);
 	if (block != 0) {

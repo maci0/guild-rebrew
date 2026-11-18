@@ -15,7 +15,7 @@
 extern unsigned char g_slot_table[];
 
 extern unsigned short g_774970;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_774674;
 extern int g_774678;
@@ -51,12 +51,12 @@ extern int g_7746f8;
 extern int g_774698;
 extern int g_774720;
 extern int g_67d8d4;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_100f1dc;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_772544;
 extern int g_77e8a0;
-extern int g_6b8014;
+extern int d3_ActiveCamera;
 
 void __cdecl fcn_0047a040(int, int, int, int);
 int __cdecl fcn_0047cb60(int, int, int, int);
@@ -118,7 +118,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 	if (g_slot_table[2 + g_774970 * 0x21c] != 6) {
 		return;
 	}
-	fcn_0047a040(0, 0, g_1040494, g_1040490);
+	fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 	if (g_774674) {
 		fcn_0047cb60(g_14ce860 - 0x80, 0, g_77250c, g_774674);
 	}
@@ -189,17 +189,17 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 		EFIELD(g_6a25a0, 0x84) = 0x55;
 
 		g_6a2588 = fcn_00469c30((short) (g_1040494 - 0x8d),
-					(short) (g_1040490 - 0x73), 0x583);
+					(short) (d2_ScreenHeight - 0x73), 0x583);
 		EFIELD(g_6a2588, 0x1d0) = 0x43;
 		EFIELD(g_6a2588, 0x5c) = 1;
 
 		g_6a258c = fcn_00469c30((short) (g_1040494 - 0x57),
-					(short) (g_1040490 - 0x4f), 0x7d9);
+					(short) (d2_ScreenHeight - 0x4f), 0x7d9);
 		EFIELD(g_6a258c, 0x1d0) = three;
 		EFIELD(g_6a258c, 0x5c) = 1;
 
 		g_6a2584 = fcn_00469c30((short) (g_1040494 - 0x2a),
-					(short) (g_1040490 - 0x66), 0x584);
+					(short) (d2_ScreenHeight - 0x66), 0x584);
 		EFIELD(g_6a2584, 0x1d0) = 0x43;
 		EFIELD(g_6a2584, 0x5c) = 1;
 
@@ -215,7 +215,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 		EFIELD(g_6a2594, 0x20) = 8;
 
 		g_6a25a4 = fcn_0046fcd0((short) (g_1040494 - 0x6a),
-					(short) (g_1040490 - 0x7e),
+					(short) (d2_ScreenHeight - 0x7e),
 					g_6b5c60);
 		EFIELD(g_6a25a4, 0x6c) = 1;
 		EFIELD(g_6a25a4, 0x84) = 0x54;
@@ -307,7 +307,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 			fcn_00472170(g_6a2590, 0);
 			fcn_00472170(g_6a2594, 1);
 			EFIELD(g_6a2594, 0x88) =
-				(int) (fmod((double) *(float*) (g_6b8014 + 0x88),
+				(int) (fmod((double) *(float*) (d3_ActiveCamera + 0x88),
 					    *(double*) 0x662958)
 				       * *(float*) 0x665dc8
 				       * *(double*) 0x665dc0
@@ -424,35 +424,35 @@ hidden:
 		g_774720 = 0;
 		val = 0;
 	}
-	if (g_100f1dc != -1 && g_67d370 == g_6a25fc) {
+	if (g_100f1dc != -1 && d2_CurrentElementId == g_6a25fc) {
 		val = (val == 0);
 		g_774720 = val;
 	}
 	if (g_6a2be8 == g_6a4768
-	    && (g_100f1dc == -1 || g_67d370 != g_6a25fc)) {
+	    && (g_100f1dc == -1 || d2_CurrentElementId != g_6a25fc)) {
 		goto stored;
 	}
 	if (val) {
 		d2_SetForm(g_77e8a0, 0);
 		fcn_00469c40(g_1040494 - g_6a4768 * 0x20 - 0x1d,
-			     *(int*) (0x1015f48 + g_772514 * 0x3cc),
-			     *(int*) (0x10161bc + g_772514 * 0x3cc));
+			     *(int*) (0x1015f48 + d2_CurrentWindowId * 0x3cc),
+			     *(int*) (0x10161bc + d2_CurrentWindowId * 0x3cc));
 		fcn_00469c40(g_1040494 - g_6a4768 * 0x20 - 0x4d,
-			     g_1040490 - 0x21, g_6a25fc);
+			     d2_ScreenHeight - 0x21, g_6a25fc);
 	} else {
 		d2_SetForm(g_77e8a0, 0);
 		fcn_00469c40(g_1040494 - 0x7d,
-			     *(int*) (0x1015f48 + g_772514 * 0x3cc),
-			     *(int*) (0x10161bc + g_772514 * 0x3cc));
-		fcn_00469c40(g_1040494 - 0xad, g_1040490 - 0x21, g_6a25fc);
+			     *(int*) (0x1015f48 + d2_CurrentWindowId * 0x3cc),
+			     *(int*) (0x10161bc + d2_CurrentWindowId * 0x3cc));
+		fcn_00469c40(g_1040494 - 0xad, d2_ScreenHeight - 0x21, g_6a25fc);
 	}
 stored:
 	g_6a2be8 = g_6a4768;
 	if (g_774720) {
-		fcn_0047a040(0, 0, g_1040494 - 0x8c, g_1040490);
+		fcn_0047a040(0, 0, g_1040494 - 0x8c, d2_ScreenHeight);
 		fcn_0047cba0(g_1040494 - g_6a4768 * 0x20 - 0x37,
-			     g_1040490 - 0x37, g_77250c,
+			     d2_ScreenHeight - 0x37, g_77250c,
 			     d2_GetResourceData(g_6a25ac + 3), 0);
-		fcn_0047a040(0, 0, g_1040494, g_1040490);
+		fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 	}
 }

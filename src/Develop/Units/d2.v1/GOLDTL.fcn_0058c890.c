@@ -1,12 +1,12 @@
 
 
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
-extern int g_7e46ac;
+extern int main_LoopFlags;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern int g_665f78[];
@@ -45,7 +45,7 @@ int __cdecl fcn_0058c890(char* entity, int a2, unsigned char a3, int choice)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 1);
 	if (*(unsigned short*) (entity + 0x27) == g_774970) {
 		io_AppendText(0x4115, 0x4112, entity, g_665f78[choice]);
@@ -61,13 +61,13 @@ int __cdecl fcn_0058c890(char* entity, int a2, unsigned char a3, int choice)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == ok) {
+			if (d2_CurrentElementId == ok) {
 				if (cost == 0 || fcn_00526010(g_7f4ca0 + g_774970 * 540, cost, (*(char*)&g_773d75)) != 0) {
 					h = fcn_004f2f90(g_7f4ca0 + g_774970 * 540, choice, entity, a2, a3, cost);
 					while (h != -1 && (s = fcn_004c4450(h)) == 0) {
 						fcn_005373e0((void*) s, 0x20007);
 					}
-					g_7e46ac = 0x677c7;
+					main_LoopFlags = 0x677c7;
 					if (fcn_004c4450(h) == 2) {
 						io_FormatTextBuffer(buf, 0x411b, 0x4112, g_665f78[choice]);
 						fcn_00526120(buf, 0x100);
@@ -76,7 +76,7 @@ int __cdecl fcn_0058c890(char* entity, int a2, unsigned char a3, int choice)
 						r = 1;
 					}
 				}
-			} else if (g_67d370 == cancel) {
+			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;
 			}
 		}

@@ -74,7 +74,7 @@ typedef struct {
 } Party;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern char g_6b5c60[];
 
@@ -116,7 +116,7 @@ void __cdecl fcn_0054b940(Order* o)
 	if (pl != 0) {
 		g = fcn_00502cd0(pl->home, 1, 0, 0x17);
 		if (g == 0) {
-			o->stamp = (*(Stamp*)&g_7f4c00);
+			o->stamp = (*(Stamp*)&gm_GameTime);
 			fcn_004c5620(-1, o);
 			return;
 		}
@@ -182,11 +182,11 @@ void __cdecl fcn_0054b940(Order* o)
 			}
 			fcn_00545d40(party.ent->id, -1, msg, 0x20, 0x5fd, g_6b5c60);
 		}
-		o->stamp = (*(Stamp*)&g_7f4c00);
+		o->stamp = (*(Stamp*)&gm_GameTime);
 		fcn_004c5620(-1, o);
 		return;
 	case 1:
-		o->stamp = (*(Stamp*)&g_7f4c00);
+		o->stamp = (*(Stamp*)&gm_GameTime);
 		fcn_004c5620(-1, o);
 		return;
 	}

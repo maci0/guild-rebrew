@@ -14,7 +14,7 @@ typedef struct VfsEntry {
 
 extern char* g_772500;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_772568;
+extern int d2_ResourceOffset;
 
 void __cdecl d2_Show(int idx, int arg);
 
@@ -23,7 +23,7 @@ int __cdecl fcn_00466260(int idx, void** out, int* out_idx)
 {
 	int j;
 
-	g_772568 = 0;
+	d2_ResourceOffset = 0;
 	if (((VfsEntry*)g_772500)[idx].flags & 2) {
 		idx += g_772510;
 	}
@@ -33,7 +33,7 @@ int __cdecl fcn_00466260(int idx, void** out, int* out_idx)
 			d2_Show(((VfsEntry*)g_772500)[idx].link, 0);
 		}
 		j = ((VfsEntry*)g_772500)[idx].link;
-		g_772568 = idx - j;
+		d2_ResourceOffset = idx - j;
 	} else if (((VfsEntry*)g_772500)[idx].data == 0) {
 		d2_Show(idx, 0);
 	}

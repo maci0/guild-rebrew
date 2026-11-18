@@ -12,7 +12,7 @@ typedef struct {
 extern char* g_772f24;
 extern int g_68b79c;
 extern volatile int g_6b7fac;
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 extern float g_6628a4;
 extern float g_662910;
 extern float g_662cf8;
@@ -60,7 +60,7 @@ void __cdecl fcn_004d0070(void)
 
 	if (*(int*) (g_772f24 + 4) == g_68b79c) {
 		if ((unsigned int) g_6b7fac % 350 == 0) {
-			for (p = g_7e4260; (int) p < (int) &g_7e4260[32]; p++) {
+			for (p = ch_ContextCharacters; (int) p < (int) &ch_ContextCharacters[32]; p++) {
 				e = *p;
 				if (e == 0) {
 					continue;
@@ -82,7 +82,7 @@ void __cdecl fcn_004d0070(void)
 			}
 		}
 	}
-	for (p = g_7e4260; (int) p < (int) &g_7e4260[32]; p++) {
+	for (p = ch_ContextCharacters; (int) p < (int) &ch_ContextCharacters[32]; p++) {
 		e = *p;
 		found = 0;
 		if (e == 0) {
@@ -109,7 +109,7 @@ void __cdecl fcn_004d0070(void)
 				fcn_0043a3f0(e34, *(char**) (e34 + 0x1cc), c);
 			} else {
 				best = 999999.0f;
-				for (q = g_7e4260; (int) q < (int) &g_7e4260[32]; q++) {
+				for (q = ch_ContextCharacters; (int) q < (int) &ch_ContextCharacters[32]; q++) {
 					g = *q;
 					if (g == 0) {
 						continue;

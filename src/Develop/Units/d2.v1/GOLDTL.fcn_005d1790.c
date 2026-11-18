@@ -1,6 +1,6 @@
 #include "client_data.h"
-extern int g_7e46ac;
-extern int g_772514;
+extern int main_LoopFlags;
+extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char *g_1015ea0;
 
@@ -9,7 +9,7 @@ extern int g_14ad084;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern char g_7f4ca0[];
 
 struct d2_daterec {
@@ -83,7 +83,7 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 	ok = 0;
 	r4 = -1;
 	r2 = -1;
-	msg = g_7e46ac;
+	msg = main_LoopFlags;
 	h = fcn_00470820(0, 0, "panel\\info_spieler");
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
@@ -161,7 +161,7 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 		;
 	}
 	io_AppendText("$5<$R%s $0<$3>$L%s$A$0>", 0x488,
-	    (g_7f4c00.a >= 0x75 ? 0x483 : 0x486) + *((unsigned char *)a0 + 0xc));
+	    (gm_GameTime.a >= 0x75 ? 0x483 : 0x486) + *((unsigned char *)a0 + 0xc));
 	io_AppendText("$5<$R%s$0<", 0x1f5a);
 	ok = 0;
 	p = (char *)a0 + 0x68;
@@ -179,9 +179,9 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 		io_AppendText("$3>$L-$A$0>");
 	}
 	d2_SetForm(h, 3);
-	stamp = g_1015f40[g_772514].xc;
+	stamp = g_1015f40[d2_CurrentWindowId].xc;
 	io_FormatTextBuffer(buf12, 0x1f61);
-	idx = d2_ShowTxt(0, 1, buf12, g_772514);
+	idx = d2_ShowTxt(0, 1, buf12, d2_CurrentWindowId);
 	*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
 	*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
 	inx = 2;
@@ -189,75 +189,75 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 	do {
 		io_FormatTextBuffer(buf12, i + 0x16b7);
 		inx += 0x18;
-		d2_ShowTxt(10, inx - 1, buf12, g_772514);
+		d2_ShowTxt(10, inx - 1, buf12, d2_CurrentWindowId);
 		fcn_00534210(0xaf, inx, (char *)a0, i, 0x4e5);
 		i++;
 	} while (i < 5);
 	io_FormatTextBuffer(buf12, 0x1f63);
-	idx = d2_ShowTxt(0, 0x9a, buf12, g_772514);
+	idx = d2_ShowTxt(0, 0x9a, buf12, d2_CurrentWindowId);
 	inx = 7;
 	*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
 	*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
 	if (*(int *)((char *)a0 + 0x2c) != 0) {
 		if (*(int *)((char *)a0 + 0x2c) & 0xf) {
 			io_FormatTextBuffer(buf12, 0x161e);
-			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, g_772514);
+			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)a0 + 0x2c) & 0xf0) {
 			io_FormatTextBuffer(buf12, 0x161f);
-			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, g_772514);
+			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)a0 + 0x2c) & 0xf00) {
 			io_FormatTextBuffer(buf12, 0x1620);
-			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, g_772514);
+			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)a0 + 0x2c) & 0x3000) {
 			io_FormatTextBuffer(buf12, 0x1621);
-			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, g_772514);
+			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)a0 + 0x2c) & 0x1c000) {
 			io_FormatTextBuffer(buf12, 0x1622);
-			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, g_772514);
+			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)a0 + 0x2c) & 0xe0000) {
 			io_FormatTextBuffer(buf12, 0x1623);
-			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, g_772514);
+			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)a0 + 0x2c) & 0x700000) {
 			io_FormatTextBuffer(buf12, 0x1624);
-			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, g_772514);
+			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)a0 + 0x2c) & 0x1800000) {
 			io_FormatTextBuffer(buf12, 0x1625);
-			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, g_772514);
+			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)a0 + 0x2c) & 0x1e000000) {
 			io_FormatTextBuffer(buf12, 0x1626);
-			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, g_772514);
+			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
 			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
 		}
@@ -278,7 +278,7 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 							io_FormatTextBuffer(bufA, 0x1f4b, *a0);
 							io_FormatTextBuffer(bufB, 0x1a96);
 							d2_SetForm(h, 4);
-							fcn_00533a60(g_772514, 0, buttons, 2, bufA, bufB);
+							fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, bufA, bufB);
 							r1 = buttons[0];
 							r2 = buttons[1];
 						}
@@ -297,7 +297,7 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 						io_FormatTextBuffer(bufA, 0x1f4b, *a0);
 						io_FormatTextBuffer(bufB, 0x1a97);
 						d2_SetForm(h, 4);
-						fcn_00533a60(g_772514, 0, buttons, 2, bufA, bufB);
+						fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, bufA, bufB);
 						r1 = buttons[0];
 						r4 = buttons[1];
 					}
@@ -316,7 +316,7 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 	}
 label_2281:
 	g_100f1dc = -1;
-	g_67d370 = -1;
+	d2_CurrentElementId = -1;
 	do {
 		if (r1 != -1) {
 			fcn_00472640(r1, gm_AccumulateTyped2(g_7f4ca0 + 540 * g_774970) > 0);
@@ -326,11 +326,11 @@ label_2281:
 		}
 		if (g_100f1dc != -1) {
 			fcn_00471af0(h, 0);
-			if (g_67d370 != r5) {
-				if (g_67d370 != r1) {
-					if (g_67d370 != r2) {
-						if (g_67d370 != r4) {
-							if (g_67d370 == r3) {
+			if (d2_CurrentElementId != r5) {
+				if (d2_CurrentElementId != r1) {
+					if (d2_CurrentElementId != r2) {
+						if (d2_CurrentElementId != r4) {
+							if (d2_CurrentElementId == r3) {
 								fcn_004b54e0(*(int *)((char *)a0 + 4));
 							}
 						} else if (fcn_005dbb60(g_7f4ca0 + 540 * g_774970, a0) != 0) {

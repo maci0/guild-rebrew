@@ -12,7 +12,7 @@ typedef struct Cell_441ab0 {
 	char pad2[5];
 } Cell_441ab0;
 
-extern void* g_6b8014;
+extern void* d3_ActiveCamera;
 extern char g_1052be0[];
 extern float g_1052c00[16];
 extern float g_1043294;
@@ -51,10 +51,10 @@ int __cdecl fcn_00441ab0(char* o, int mx, int my, float radius, float* out)
 	if (o == 0) {
 		return -1;
 	}
-	fcn_005ec410(world, *(float*) (o + 0x50) - *(float*) (((char*) g_6b8014) + 0x4c),
-	             *(float*) (o + 0x54) - *(float*) (((char*) g_6b8014) + 0x50),
-	             *(float*) (o + 0x58) - *(float*) (((char*) g_6b8014) + 0x54));
-	fcn_005eb970(world, world, (float*) (((char*) g_6b8014) + 0x18c));
+	fcn_005ec410(world, *(float*) (o + 0x50) - *(float*) (((char*) d3_ActiveCamera) + 0x4c),
+	             *(float*) (o + 0x54) - *(float*) (((char*) d3_ActiveCamera) + 0x50),
+	             *(float*) (o + 0x58) - *(float*) (((char*) d3_ActiveCamera) + 0x54));
+	fcn_005eb970(world, world, (float*) (((char*) d3_ActiveCamera) + 0x18c));
 	r2 = radius * radius;
 	view[14] = 0.0f;
 	view[13] = 0.0f;

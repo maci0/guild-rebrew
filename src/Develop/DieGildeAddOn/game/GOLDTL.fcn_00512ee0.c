@@ -56,9 +56,9 @@ typedef struct {
 
 extern unsigned char *lpGebaeudePROT;
 extern unsigned char *lpGebaeudeINST;
-extern unsigned char *g_773da8;
+extern unsigned char *gm_CityEntity;
 extern char g_7f4ca0[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 extern int g_6a3424;
 extern unsigned char g_6a3440;
@@ -266,8 +266,8 @@ void __cdecl fcn_00512ee0(void)
 		fcn_004c4570(4, 1, 0x69, (char *)&count);
 		fcn_004c5360();
 		o = (Office *)(lpGebaeudePROT + *(unsigned char *)e * 0x24d);
-		fcn_004c5f60(*(int *)(e + 1), *(int *)(g_773da8 + 4),
-				*(int *)(g_773da8 + 4));
+		fcn_004c5f60(*(int *)(e + 1), *(int *)(gm_CityEntity + 4),
+				*(int *)(gm_CityEntity + 4));
 		fcn_004c6090((unsigned char *)e, 1, o->f230, o->slots[0]);
 		fcn_004c6090((unsigned char *)e, 0, o->f22f, 0);
 		fcn_004c6090((unsigned char *)e, 0, o->f22f, 0);
@@ -416,8 +416,8 @@ handles_done:
 			}
 		}
 		if (kinds[o->kind] == 0 && slot == 0xffff)
-			fcn_004c5f60(p->id, *(int *)(g_773da8 + 4),
-					*(int *)(g_773da8 + 4));
+			fcn_004c5f60(p->id, *(int *)(gm_CityEntity + 4),
+					*(int *)(gm_CityEntity + 4));
 	}
 	fcn_004c44b0();
 	while (fcn_004c44c0() == 0) {
@@ -431,13 +431,13 @@ handles_done:
 	while (e) {
 		if (*(short *)(e + 0x25) == -1 && *e != 'E' && *e != 'D' && *e != 'F') {
 			msg.b4 = 0x1b;
-			msg.f8 = *(int *)(g_773da8 + 4);
+			msg.f8 = *(int *)(gm_CityEntity + 4);
 			msg.fc = -1;
 			msg.b36 = 2;
 			msg.f58 = *(int *)(e + 1);
 			msg.f5c = fcn_0050cf50((unsigned char *)e, (char)e[0x5c]);
-			fcn_004c5f60(*(int *)(e + 1), *(int *)(g_773da8 + 4),
-					*(int *)(g_773da8 + 4));
+			fcn_004c5f60(*(int *)(e + 1), *(int *)(gm_CityEntity + 4),
+					*(int *)(gm_CityEntity + 4));
 			fcn_004c5530(&msg);
 		}
 		e = (char *)gm_FindNextFilteredEntity();
@@ -455,7 +455,7 @@ handles_done:
 		msg.fc = msg.f8;
 		msg.f10 = 0;
 		msg.f14 = 0;
-		msg.pos = g_7f4c00;
+		msg.pos = gm_GameTime;
 		msg.b36 = 1;
 		fcn_004c5530(&msg);
 	}

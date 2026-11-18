@@ -47,11 +47,11 @@ char* __cdecl CreateSonnenstrahlen(void)
 	value = *(float*) (licht + 0x88);
 	rotation[2] = 0.0f;
 	rotation[1] = value;
-	value = *(float*) (g_6b8014 + 0x4c);
+	value = *(float*) (d3_ActiveCamera + 0x4c);
 	position[0] = value;
-	value = *(float*) (g_6b8014 + 0x50);
+	value = *(float*) (d3_ActiveCamera + 0x50);
 	position[1] = value;
-	value = *(float*) (g_6b8014 + 0x54);
+	value = *(float*) (d3_ActiveCamera + 0x54);
 	position[2] = value;
 	g_6b5cf8 = fcn_00442910(0, position, rotation, "sonnenstrahlen");
 #ifdef REBREW_GOLD

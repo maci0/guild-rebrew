@@ -5,7 +5,7 @@ extern char* lpObjektePROT;
 extern Obj_1038140 g_1038140[];
 extern Win_1015f40 g_1015f40[0x60];
 extern int g_1040494;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_7747b4;
 extern char* g_7746c4;
 extern unsigned char* g_7746c8;
@@ -42,7 +42,7 @@ int __cdecl fcn_00591190(int id)
 		fcn_00469c40(g_1040494 - *(int*) (p + 0xc) - 16, *(int*) (p + 8), *(int*) (p + 0x27c));
 	}
 	d2_SetForm(0, 2);
-	fcn_0046f740(0, 0, id + 0xdf, g_772514);
+	fcn_0046f740(0, 0, id + 0xdf, d2_CurrentWindowId);
 	io_AppendText(id * 2 + 0x9a9);
 	d2_SetForm(0, 1);
 	io_AppendText(id * 2 + 0x9a8);

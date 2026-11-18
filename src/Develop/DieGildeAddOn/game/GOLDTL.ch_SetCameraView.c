@@ -12,6 +12,6 @@ void __cdecl ch_SetCameraView(char* a1, int a2)
 	float b[4];
 
 	ch_GetCameraView(a1, a2, b, a);
-	fcn_00438cb0(g_6b8014, a);
-	fcn_00438b40(g_6b8014, b);
+	fcn_00438cb0(d3_ActiveCamera, a);
+	fcn_00438b40(d3_ActiveCamera, b);
 }

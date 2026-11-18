@@ -4,17 +4,17 @@
 #include "client_timer.h"
 #include "client_scene_loader.h"
 
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 extern char* lpObjektePROT;
 extern char g_774964;
 extern int g_774670;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern char g_7747b0;
-extern char g_7f3b40[];
+extern char init_SceneContextIndices[];
 extern char g_10432c0[];
-extern void* g_14d0020[];
+extern void* ch_CharacterSlots[];
 extern int g_67a370;
 extern int g_6b8300;
 extern float g_662d70[];
@@ -62,7 +62,7 @@ void __cdecl init_LoadObjektScene(int a0)
 	char* found;
 	void** p;
 
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	name = lpObjektePROT + a0 * 0x41;
 	progress = 0;
 	paused = 0;
@@ -70,8 +70,8 @@ void __cdecl init_LoadObjektScene(int a0)
 		unsigned int flags;
 		unsigned char* ch;
 
-		flags = (g_7e46ac & 0xfffffff7) | 0x100080;
-		ch = (unsigned char*) fcn_004730c0(0, 0, g_1040494, g_1040490, s_67d67c, 0x32, 1);
+		flags = (main_LoopFlags & 0xfffffff7) | 0x100080;
+		ch = (unsigned char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x32, 1);
 		while ((*ch & 4) == 0) {
 			fcn_005373e0(0, flags);
 		}
@@ -82,7 +82,7 @@ void __cdecl init_LoadObjektScene(int a0)
 		fcn_0042df30((TIMER_CALLBACK) fcn_00538060, 1);
 		paused = 1;
 	}
-	if (g_7f3b40[a0] == -1) {
+	if (init_SceneContextIndices[a0] == -1) {
 		type = fcn_00413160();
 		if (type == -1) {
 			ReportClientMessage(s_6a1c30);
@@ -91,28 +91,28 @@ void __cdecl init_LoadObjektScene(int a0)
 		sprintf(path, s_6a1c1c, name + 1);
 		strupr(path);
 		if (fcn_00448360(path, 0, (SCENE_PROGRESS) progress)) {
-			fcn_004432d0(g_6b8010, 0);
+			fcn_004432d0(d3_CurrentContextIndex, 0);
 			fcn_00437ac0(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) fcn_005105a0);
 			fcn_00437ac0(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
-			g_7f3b40[a0] = (char) type;
+			init_SceneContextIndices[a0] = (char) type;
 			fcn_004432d0(saved, 0);
 		}
 	} else {
-		type = (signed char) g_7f3b40[a0];
+		type = (signed char) init_SceneContextIndices[a0];
 		if (g_10432c0[type * 0xf7 * 4 + 0x3d5] != 0) {
 			slot = type * 0xf7;
 			fcn_004432d0(type, 0);
 			sprintf(path, s_6a1c1c, name + 1);
 			strupr(path);
 			if (fcn_00448360(path, 0, (SCENE_PROGRESS) progress)) {
-				fcn_004432d0(g_6b8010, 0);
+				fcn_004432d0(d3_CurrentContextIndex, 0);
 				gv_Free3Fields((int*) *(int*) (g_67a370 + 0xb0));
 				*(int*) (g_67a370 + 0xb0) = 0;
 				fcn_004026f0((char*) g_67a370);
 				fcn_0045b290((char*) *(int*) (g_67a370 + 0xb0), g_6b8300);
 				fcn_00437ac0(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) fcn_005105a0);
 				fcn_00437ac0(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
-				p = g_14d0020;
+				p = ch_CharacterSlots;
 				do {
 					obj = (char*) *p;
 					if (obj != 0
@@ -133,7 +133,7 @@ void __cdecl init_LoadObjektScene(int a0)
 					}
 					p++;
 				} while ((int) p < 0x14d0c20);
-				g_10432c0[(signed char) g_7f3b40[a0] * 0x3dc + 0x3d5] = 0;
+				g_10432c0[(signed char) init_SceneContextIndices[a0] * 0x3dc + 0x3d5] = 0;
 				fcn_004432d0(saved, 0);
 			}
 		}

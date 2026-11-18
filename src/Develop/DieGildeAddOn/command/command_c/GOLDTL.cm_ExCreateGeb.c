@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-extern int g_14cbca0, g_699364, g_773dd8; extern void* g_6b7fdc;
+extern int g_14cbca0, gm_NextEntityId, g_773dd8; extern void* g_6b7fdc;
 void __cdecl fcn_004432d0(int a, int b);
 int __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl gm_AllocGebaeude(char typ, unsigned short id);
@@ -46,7 +46,7 @@ int __cdecl cm_ExCreateGeb(char* a0, char* out)
 	if (model == 0)
 		return 1;
 	if (g_14cbca0 != -1)
-		g_699364 = *(int*) (a0 + 0x14);
+		gm_NextEntityId = *(int*) (a0 + 0x14);
 	geb = (unsigned char*) gm_AllocGebaeude(*(char*) (a0 + 0x18),
 	                                        *(unsigned short*) model);
 	if (geb == 0)
@@ -67,7 +67,7 @@ int __cdecl cm_ExCreateGeb(char* a0, char* out)
 	}
 	goto done;
 load:
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	pos[0] = *(int*) (a0 + 0x19);
 	pos[1] = *(int*) (a0 + 0x1d);

@@ -9,9 +9,9 @@ char* __cdecl cut_FindFreeCutscene(void)
 	int i;
 
 	i = 0;
-	for (a = (int) g_9a9660; a < (int) g_9a9660 + 0x6780; a += 0x114) {
+	for (a = (int) cut_Cutscenes; a < (int) cut_Cutscenes + 0x6780; a += 0x114) {
 		if (*(int*) a == -1) {
-			return (char*) ((int) g_9a9660 + i * 0x114);
+			return (char*) ((int) cut_Cutscenes + i * 0x114);
 		}
 		i++;
 	}

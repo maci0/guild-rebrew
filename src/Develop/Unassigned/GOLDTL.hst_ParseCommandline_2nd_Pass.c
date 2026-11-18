@@ -2,10 +2,10 @@
 #include <stdlib.h>
 
 extern int g_1052de0;
-extern int* g_14a5320[];
+extern int* txt_TextEntries[];
 extern int g_680748;
 extern int g_68074d;
-extern int g_67fca0;
+extern int hst_HistoryTextBase;
 
 /* Inferred helper name; the operand-homed fill is the reviewed original
  * inline assembly (see .scratch/sol/RULES.md, inline fill/copy block). */
@@ -60,15 +60,15 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 	fill0(buf, 0x100);
 
 	if (a0 < 0x4800) {
-		if (g_14a5320[a0] == 0) {
+		if (txt_TextEntries[a0] == 0) {
 			return 0;
 		}
-		len = strlen((char*) g_14a5320[a0]);
+		len = strlen((char*) txt_TextEntries[a0]);
 		if ((unsigned int) len > 0x17c0) {
 			sprintf(buf, (char*) 0x680a9c, a0);
 			return 0;
 		}
-		strncpy(label, (char*) g_14a5320[a0], 0x17c0);
+		strncpy(label, (char*) txt_TextEntries[a0], 0x17c0);
 	} else {
 		strcpy(label, (char*) a0);
 	}
@@ -79,7 +79,7 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 		buf[0] = label[6];
 		i = atoi(buf);
 		if (i < 0 || i >= 4) {
-			sprintf(buf, (char*) 0x680a50, a0 - g_67fca0);
+			sprintf(buf, (char*) 0x680a50, a0 - hst_HistoryTextBase);
 			return 0;
 		}
 		rec = i * 0x44 + 0x1007bc0;

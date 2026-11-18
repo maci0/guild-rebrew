@@ -5,8 +5,8 @@ typedef struct { unsigned char kind; char rest[0x24c]; } SpawnBuilding;
 
 extern int rand(void);
 extern int gm_CurrentHumanFamilyCount;
-extern int g_773d70;
-extern int g_699364;
+extern int gm_EntityCount;
+extern int gm_NextEntityId;
 extern int g_773d68;
 
 unsigned short __cdecl gm_RandomMod(int n);
@@ -59,7 +59,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         }
     }
     if (B((char*) 0x7f4ca0 + idx * 0x21c, 2) == 0xf) {
-        (g_773d70)--;
+        (gm_EntityCount)--;
     }
     if (idx == 0x300)
         return -1;
@@ -72,7 +72,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         D((char*) 0x7f4ca0 + idx * 0x21c, 0x5c + n * 4) = -1;
     }
     W((char*) 0x7f4ca0 + idx * 0x21c, 0) = (unsigned short) idx;
-    (g_773d70)++;
+    (gm_EntityCount)++;
     D(slot, 0x1f0) = 0;
     B(slot, 0x215) = 0;
     D(slot, 0x170) = 0;
@@ -81,9 +81,9 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
     B(slot, 0x216) = 0;
     B(slot, 0x217) = 0;
     B(slot, 2) = (unsigned char) type;
-    sprintf(work, (char*) 0x6999fc, g_699364, type);
-    D(slot, 4) = g_699364;
-    (g_699364)++;
+    sprintf(work, (char*) 0x6999fc, gm_NextEntityId, type);
+    D(slot, 4) = gm_NextEntityId;
+    (gm_NextEntityId)++;
     B(slot, 0x165) = (unsigned char) arg7;
     D(slot, 0x18c) = -1;
     D(slot, 0x20c) = -1;
@@ -473,6 +473,6 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         rnd = gm_RandomMod(3) & 0xffff;
         B(slot, 0x82 + rnd) = (char) (B(slot, 0x82 + rnd) + 0x2a);
     }
-    sprintf(work, (char*) 0x6999d8, g_699364, slot + 0x30);
+    sprintf(work, (char*) 0x6999d8, gm_NextEntityId, slot + 0x30);
     return (short) idx;
 }

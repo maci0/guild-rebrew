@@ -24,7 +24,7 @@ typedef struct
 } fcn_0047da10_Ent;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern fcn_0047da10_Stamp g_100dc04;
 extern int g_100dc00;
 extern int g_100dc14;
@@ -55,13 +55,13 @@ void __cdecl fcn_0047da10(void)
 	int k;
 	int idx;
 
-	now = (*(fcn_0047da10_Stamp*)&g_7f4c00);
+	now = (*(fcn_0047da10_Stamp*)&gm_GameTime);
 	d = fcn_00500d20(&g_100dc04, &now);
 	f = d * 12.8f;
 	n = (int) f;
 	g_67db50 = (float) g_7747b4;
 	g_67db54 = g_7747b4 * 0.0625f + 0.5f;
-	if (d <= 0 || (*(fcn_0047da10_Stamp*)&g_7f4c00).hour > 0x16 || (*(fcn_0047da10_Stamp*)&g_7f4c00).hour < 6)
+	if (d <= 0 || (*(fcn_0047da10_Stamp*)&gm_GameTime).hour > 0x16 || (*(fcn_0047da10_Stamp*)&gm_GameTime).hour < 6)
 		return;
 	if (g_100dc04.t < now.t) {
 		g_100dc04 = now;
@@ -84,8 +84,8 @@ void __cdecl fcn_0047da10(void)
 		if (((fcn_0047da10_Ent*)g_7f4ca0)[idx].id != 0xffff) {
 			e = &((fcn_0047da10_Ent*)g_7f4ca0)[idx];
 			fcn_00489920(e);
-			if ((*(fcn_0047da10_Stamp*)&g_7f4c00).hour > 6 && (*(fcn_0047da10_Stamp*)&g_7f4c00).hour < 0x16 && (g_7747b0 & 0x80) == 0 && (e->kind == 5
-			    || ((e->id ^ (*(fcn_0047da10_Stamp*)&g_7f4c00).hour) & 1) == 0))
+			if ((*(fcn_0047da10_Stamp*)&gm_GameTime).hour > 6 && (*(fcn_0047da10_Stamp*)&gm_GameTime).hour < 0x16 && (g_7747b0 & 0x80) == 0 && (e->kind == 5
+			    || ((e->id ^ (*(fcn_0047da10_Stamp*)&gm_GameTime).hour) & 1) == 0))
 				fcn_0047d810(e);
 			if ((fcn_0047dca0(e) != 0 && e->gold != 0) || (e->flags & 0x3000)) {
 				int v;

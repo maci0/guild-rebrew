@@ -27,7 +27,7 @@ void __cdecl fcn_00445e40(int idx)
 	int n;
 
 	if (g_67a960 >= 0) {
-		((Trip*)g_1041d20)[g_67a960].a = g_6b805c;
+		((Trip*)g_1041d20)[g_67a960].a = d3_FogColor;
 		((Trip*)g_1041d20)[g_67a960].b = (*(int*)&g_10425fc);
 		((Trip*)g_1041d20)[g_67a960].c = (*(int*)&g_104329c);
 	}

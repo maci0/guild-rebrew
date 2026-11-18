@@ -27,7 +27,7 @@ typedef struct {
 } Pick;
 
 #include "client_types.h"
-extern Rec18_68da68 g_9a9220[42];
+extern Rec18_68da68 amt_OfficeSlots[42];
 extern Rec18_68da68 g_68da68[];
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
@@ -75,12 +75,12 @@ int __cdecl fcn_004e8ee0(char* who, int n, Pick* picks, int* full_out)
 	for (i = 0; i < 30; i++) {
 		float score;
 
-		if (((Slot*)g_9a9220)[i].state != 3)
+		if (((Slot*)amt_OfficeSlots)[i].state != 3)
 			continue;
-		t = ((Slot*)g_9a9220)[i].type;
+		t = ((Slot*)amt_OfficeSlots)[i].type;
 		if (amt_GetOfficeAffinity((unsigned char*) who, t, &score) == 0)
 			continue;
-		if (((Slot*)g_9a9220)[i].count >= 4) {
+		if (((Slot*)amt_OfficeSlots)[i].count >= 4) {
 			full = 1;
 			continue;
 		}
@@ -115,9 +115,9 @@ int __cdecl fcn_004e8ee0(char* who, int n, Pick* picks, int* full_out)
 				picks[k].score = picks[k - 1].score;
 				picks[k].type = picks[k - 1].type;
 			}
-			picks[j].rank = ((Tmpl*)g_68da68)[((Slot*)g_9a9220)[i].type].rank;
+			picks[j].rank = ((Tmpl*)g_68da68)[((Slot*)amt_OfficeSlots)[i].type].rank;
 			picks[j].score = score;
-			picks[j].type = ((Slot*)g_9a9220)[i].type;
+			picks[j].type = ((Slot*)amt_OfficeSlots)[i].type;
 		}
 	}
 	if (full_out != 0)

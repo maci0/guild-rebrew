@@ -40,7 +40,7 @@ extern int g_772ea8;
 #include "client_dialog_state.h"
 extern unsigned char g_7747b0;
 extern char g_14cf950;
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 extern int g_67a370;
 extern char g_6b5c60[];
 extern char* g_14a97d4;
@@ -89,8 +89,8 @@ void __cdecl fcn_004d9f20(int arg)
 		if (((*(int*)&g_7747b0) & 4) == 0 && g_14cf950 == 0x39) {
 			g_772e94 = g_772e94 == 0;
 			for (i = 0; i < 0x20; i++) {
-				if (((Unit**)g_7e4260)[i] != 0 && ((Unit**)g_7e4260)[i]->obj->owner == g_67a370) {
-					fcn_00405540(((Unit**)g_7e4260)[i]->obj, g_772e94);
+				if (((Unit**)ch_ContextCharacters)[i] != 0 && ((Unit**)ch_ContextCharacters)[i]->obj->owner == g_67a370) {
+					fcn_00405540(((Unit**)ch_ContextCharacters)[i]->obj, g_772e94);
 				}
 			}
 			fcn_00533a40(&(*(char*)g_6b5c60));

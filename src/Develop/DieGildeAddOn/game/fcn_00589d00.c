@@ -1,6 +1,6 @@
 #include <string.h>
-extern int g_7f4c00, g_7f4c08; extern unsigned short g_7f4c0c;
-extern int g_772514, g_100f1dc, g_14ce8e0, g_774654, g_67d370; extern char* g_1015ea0; extern unsigned short g_774970; extern unsigned char g_773d75;
+extern int gm_GameTime, g_7f4c08; extern unsigned short g_7f4c0c;
+extern int d2_CurrentWindowId, g_100f1dc, g_14ce8e0, g_774654, d2_CurrentElementId; extern char* g_1015ea0; extern unsigned short g_774970; extern unsigned char g_773d75;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_664150;
@@ -78,14 +78,14 @@ void __cdecl fcn_00589d00(int a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
-	elem = fcn_0046fac0(0, 3, *(int*) 0x14b5360, g_772514);
+	elem = fcn_0046fac0(0, 3, *(int*) 0x14b5360, d2_CurrentWindowId);
 	*(int*) (g_1015ea0 + elem * 0x2f4 + 0x6c) = 1;
 	*(int*) (g_1015ea0 + elem * 0x2f4 + 0x18) =
-	    *(int*) (g_772514 * 0x3cc + 0x1015f4c);
+	    *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c);
 	fcn_00472900(elem, 0x54);
-	elem = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, g_772514);
+	elem = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, d2_CurrentWindowId);
 	fcn_00472380(elem, 0, 2, 0, 1);
 	fcn_00468bb0(elem, 3, *(int*) 0x14b5364, *(int*) 0x14b5368,
 	             *(int*) 0x14b536c);
@@ -103,7 +103,7 @@ void __cdecl fcn_00589d00(int a0)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			pick = g_67d370;
+			pick = d2_CurrentElementId;
 			if (pick == no) {
 				char* p;
 
@@ -146,7 +146,7 @@ void __cdecl fcn_00589d00(int a0)
 					             (unsigned int) *(unsigned short*) (a0 + 0x27) *
 					                 0x21c);
 					*(int*) (req + 0xc) = *(int*) (a0 + 1);
-					*(int*) (req + 0x28) = g_7f4c00;
+					*(int*) (req + 0x28) = gm_GameTime;
 					*(int*) (req + 0x2c) = *(int*) 0x7f4c04;
 					*(int*) (req + 0x30) = g_7f4c08;
 					*(short*) (req + 0x34) = g_7f4c0c;

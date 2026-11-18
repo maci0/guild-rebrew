@@ -9,7 +9,7 @@ void __cdecl fcn_00456df0(void);
 /* ADDRESS: GOLDTL 0x00438b40 */
 void __cdecl fcn_00438b40(char* p, int* v)
 {
-	if (p == ((char*)g_6b8014)) {
+	if (p == ((char*)d3_ActiveCamera)) {
 		fcn_00438af0(1);
 	} else {
 		fcn_00438ac0(p, 1);

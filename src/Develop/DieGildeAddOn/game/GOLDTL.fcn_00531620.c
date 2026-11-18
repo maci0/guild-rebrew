@@ -45,7 +45,7 @@ extern int g_7746a0;
 extern int g_7746b8;
 extern int g_7ea360;
 extern char g_7e2760[];
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 extern char g_7f4ca0[];
 extern int g_7e4318;
 extern unsigned short* g_7e431c;
@@ -111,7 +111,7 @@ void __cdecl fcn_00531620(void)
 	if (g_14ce8d4 != 0) {
 		goto L684;
 	}
-	if (g_7e4300 != 0) {
+	if (d3_SelectionBoxActive != 0) {
 		fcn_004c35b0();
 		fcn_005345a0();
 		if (g_14ce8d4 != 0) {
@@ -122,7 +122,7 @@ void __cdecl fcn_00531620(void)
 
 L684:
 	if (g_14ce8e4 == 0) {
-		if (g_7e4300 == 0 && g_6772c4 != 0 && *(int*) 0x100f894 == -1
+		if (d3_SelectionBoxActive == 0 && g_6772c4 != 0 && *(int*) 0x100f894 == -1
 		    && ent != 0 && *(unsigned short*) (ent + 0x27) == g_774970) {
 			fcn_00534520();
 		}
@@ -215,7 +215,7 @@ L6d3:
 				fcn_00428720(f);
 			}
 		}
-		fcn_004c5b50(s->handle, ix, iy, g_6b8010);
+		fcn_004c5b50(s->handle, ix, iy, d3_CurrentContextIndex);
 	}
 	if (g_7746b8 == 0) {
 		goto La50;
@@ -231,7 +231,7 @@ L192f:
 	}
 	ei = -1;
 	for (idx = 0; idx < 32; idx++) {
-		e = g_7e4260[idx]; p = 0;
+		e = ch_ContextCharacters[idx]; p = 0;
 		if (e == 0) {
 			continue;
 		}

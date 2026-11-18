@@ -22,11 +22,11 @@ typedef struct {
 } Msg_59d380;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* g_7746a4;
 extern int g_14abd04;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6aa4b8[];
@@ -105,7 +105,7 @@ int __cdecl fcn_0059d380(int a0, char* object)
 		if (g_100f1dc == -1) {
 			continue;
 		}
-		if (g_67d370 == item1) {
+		if (d2_CurrentElementId == item1) {
 			fcn_004c35f0();
 			message.b4 = 0x62;
 			slot = g_774970 * 0x21c;
@@ -115,7 +115,7 @@ int __cdecl fcn_0059d380(int a0, char* object)
 			} else {
 				message.fc = *(int*) (g_7746c8 + 1);
 			}
-			message.pos28 = g_7f4c00;
+			message.pos28 = gm_GameTime;
 			message.b36 = 2;
 			message.f5c = *(int*) (object + 1);
 			if (g_7746c4 != 0) {
@@ -129,15 +129,15 @@ int __cdecl fcn_0059d380(int a0, char* object)
 				message.f6c = -1;
 			}
 			for (i = 0; i < 0x20; i++) {
-				if (g_7e4260[i] != 0 && g_7e4260[i][0x188] != 0) {
-					message.f58 = *(int*) (g_7e4260[i] + 4);
+				if (ch_ContextCharacters[i] != 0 && ch_ContextCharacters[i][0x188] != 0) {
+					message.f58 = *(int*) (ch_ContextCharacters[i] + 4);
 					break;
 				}
 			}
 			fcn_004c5530(&message);
 			g_774654 = 1;
 			sv_ClearObjectSelection();
-		} else if (g_67d370 == item2) {
+		} else if (d2_CurrentElementId == item2) {
 			g_774654 = 1;
 		}
 	} while (fcn_005373e0((void*) fcn_0059d380, 0x677c7) != 0);

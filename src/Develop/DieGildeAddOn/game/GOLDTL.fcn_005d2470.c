@@ -19,7 +19,7 @@ void __cdecl fcn_004c4ef0(char*);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
-extern int g_14ce8e0, g_67d370, g_774654;
+extern int g_14ce8e0, d2_CurrentElementId, g_774654;
 #define SHP_REC (g_7f4ca0 + g_774970 * 0x21c)
 #define SHP_ID (*(unsigned short*) SHP_REC)
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -95,7 +95,7 @@ int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 		if (*(int*) &g_100f1dc == -1 || flag != 0) {
 			continue;
 		}
-		if (g_67d370 == v18) {
+		if (d2_CurrentElementId == v18) {
 			hv = fcn_00471f80(v10);
 			uv = fcn_0050b750(hv, *(unsigned char*) &g_773d75);
 			if (fcn_00526010((void*) ((unsigned long)&g_7f4ca0 +
@@ -113,7 +113,7 @@ int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 			}
 			r = 1;
 			g_774654 = 1;
-		} else if (g_67d370 == vc) {
+		} else if (d2_CurrentElementId == vc) {
 			g_774654 = 1;
 		}
 	} while (fcn_005373e0((void*) fcn_005d2470, 0x677c7) != 0);

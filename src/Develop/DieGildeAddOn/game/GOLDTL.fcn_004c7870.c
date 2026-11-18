@@ -23,7 +23,7 @@ int __cdecl fcn_004c7870(int cmd, char* result)
 		unsigned int kind;
 
 		if (g_14cbca0 != -1)
-			g_699364 = *(int*) (c + 0x10);
+			gm_NextEntityId = *(int*) (c + 0x10);
 		else
 			*(int*) (c + 0x45) = rand();
 		srv_SeedRandom(*(int*) (c + 0x22));

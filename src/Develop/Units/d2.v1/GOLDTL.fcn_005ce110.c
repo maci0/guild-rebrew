@@ -1,4 +1,4 @@
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_004e8b80(int, int, char*);
@@ -39,13 +39,13 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 	dialog = fcn_00470820(0, 0, "special\\tagesordnung");
 	fcn_00471b60(dialog);
 	d2_SetForm(dialog, 2);
-	w = g_772514;
+	w = d2_CurrentWindowId;
 	d2_SetForm(dialog, 4);
-	fcn_0046e830(0xffffffff, 0xffffffff, g_772514, w, 0x767);
+	fcn_0046e830(0xffffffff, 0xffffffff, d2_CurrentWindowId, w, 0x767);
 	d2_SetForm(dialog, 3);
-	w = g_772514;
+	w = d2_CurrentWindowId;
 	d2_SetForm(dialog, 5);
-	fcn_0046e830(0xffffffff, 0xffffffff, g_772514, w, 0x767);
+	fcn_0046e830(0xffffffff, 0xffffffff, d2_CurrentWindowId, w, 0x767);
 	d2_SetForm(dialog, 1);
 	io_AppendText(a0 + 0x13a3);
 	d2_SetForm(dialog, 2);

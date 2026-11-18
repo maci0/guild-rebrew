@@ -1,10 +1,10 @@
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14ab694;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];
 
@@ -59,17 +59,17 @@ void __cdecl fcn_005a4e00(char* a0)
 	h = fcn_00470820(0, 0, (char*) 0x6aac2c);
 	fcn_00471b60(h);
 	d2_SetForm(h, 0);
-	fcn_00533dc0(g_772514, 0x73b, 0x73f);
-	fcn_00533f40(0x206, 0x167, g_772514,
+	fcn_00533dc0(d2_CurrentWindowId, 0x73b, 0x73f);
+	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId,
 	    fcn_00472830(h, 2, 0x78, &v3, &v2, &v1));
-	*(int*) (0x10162e8 + g_772514 * 0x3cc) = 0xe;
-	*(int*) (0x10162ec + g_772514 * 0x3cc) = 0x18;
-	*(int*) (0x10162f0 + g_772514 * 0x3cc) = 0xe;
-	*(int*) (0x10162f4 + g_772514 * 0x3cc) = 0xe;
+	*(int*) (0x10162e8 + d2_CurrentWindowId * 0x3cc) = 0xe;
+	*(int*) (0x10162ec + d2_CurrentWindowId * 0x3cc) = 0x18;
+	*(int*) (0x10162f0 + d2_CurrentWindowId * 0x3cc) = 0xe;
+	*(int*) (0x10162f4 + d2_CurrentWindowId * 0x3cc) = 0xe;
 	d2_SetForm(h, 1);
 	io_AppendText(0x18d9);
 	d2_SetForm(h, 3);
-	fcn_00533a60(g_772514, 0, tmp, 1, g_14ab694);
+	fcn_00533a60(d2_CurrentWindowId, 0, tmp, 1, g_14ab694);
 	while (fcn_005373e0((void*) fcn_005a4e00, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
@@ -127,12 +127,12 @@ void __cdecl fcn_005a4e00(char* a0)
 		}
 		first = 0;
 		if (g_100f1dc == 2) {
-			if (g_67d370 == tmp[0]) {
+			if (d2_CurrentElementId == tmp[0]) {
 				fcn_005a4bb0(a0);
 			}
 			else {
 				for (i = 0; i < count - 1; i++) {
-					if (g_67d370 == items[i][1]) {
+					if (d2_CurrentElementId == items[i][1]) {
 						fcn_005a4960(a0, ids[i]);
 						first = 1;
 					}

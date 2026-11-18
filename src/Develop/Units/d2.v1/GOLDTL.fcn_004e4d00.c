@@ -3,7 +3,7 @@
 
 extern volatile int g_6b7fac;
 extern int g_772f3c;
-extern int g_68bfb8;
+extern int cut_EventLoopFlags;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int* cut_ActiveCutscene;
@@ -22,7 +22,7 @@ int __cdecl fcn_004e4d00(int secs, int(__cdecl* cb)(int), int arg)
 	res = 0;
 	if (g_772f3c != 0)
 		return 0;
-	if (fcn_005373e0(fcn_004e4de0, g_68bfb8 | 0x8000) != 0) {
+	if (fcn_005373e0(fcn_004e4de0, cut_EventLoopFlags | 0x8000) != 0) {
 		do {
 			if (g_14ce8e0 != 0) {
 				if (cb != 0)
@@ -35,7 +35,7 @@ int __cdecl fcn_004e4d00(int secs, int(__cdecl* cb)(int), int arg)
 			}
 			fcn_004cfca0();
 			fcn_004e5140((*(int*)&cut_ActiveCutscene));
-		} while (fcn_005373e0(fcn_004e4de0, g_68bfb8 | 0x8000) != 0);
+		} while (fcn_005373e0(fcn_004e4de0, cut_EventLoopFlags | 0x8000) != 0);
 	}
 	return res;
 }

@@ -534,7 +534,7 @@ int __cdecl fcn_004dcf50(int a0)
 			} else {
 				sprintf(end, " handwerker_MANN");
 			}
-			msg.hnd[6] = g_6b8010;
+			msg.hnd[6] = d3_CurrentContextIndex;
 			fcn_004e4730("ob_GEFAENGNIS_FOLTERKAMMER.ed3");
 			fcn_004e44b0((int) "cutscenes\\prozess\\folter-create.esc", (int) str);
 			fcn_004e4450(g_68bfc0, 1);

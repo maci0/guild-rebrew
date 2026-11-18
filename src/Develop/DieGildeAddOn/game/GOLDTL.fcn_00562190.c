@@ -16,7 +16,7 @@ typedef struct Query {
 } Query;
 // SIZE 0x220
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern __int64 g_666018;
 extern char g_7f4ca0[];
@@ -64,7 +64,7 @@ void __cdecl fcn_00562190(char* u)
 	*(int*) (u + 0xc0) = g_6643d8[gm_RandomMod(0x10)];
 	*(int*) (u + 0xb8) = 0;
 	*(int*) (u + 0xb4) = -1;
-	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 	for (e = fcn_005463a0(1, 0, 0x18); e != 0; e = he_fn_Handlung()) {
 		if (*(unsigned short*) (u + 8) == *(unsigned short*) (e + 8) && *(int*) (e + 4) != *(int*) (u + 4) && *(int*) (e + 0xc4) == *(int*) (u + 0xc4)) {
@@ -87,8 +87,8 @@ void __cdecl fcn_00562190(char* u)
 	memset(&q, 0, sizeof(q));
 	q.kind = 1;
 	h = &((House*)g_7f4ca0)[*(unsigned short*) (u + 8)];
-	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
-	*(pos14_7f4c00*) (u + 0xc8) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
+	*(pos14_7f4c00*) (u + 0xc8) = gm_GameTime;
 	if (fcn_004fa5b0(0x26, h, &q) == 2) {
 		fcn_00500bb0((pos14_7f4c00*) (u + 0xc8), (*(int*) (u + 0xe8) + 4) * 24, 0, 0);
 	} else {

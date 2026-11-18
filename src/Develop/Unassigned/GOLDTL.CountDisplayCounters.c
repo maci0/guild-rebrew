@@ -6,7 +6,7 @@ int __cdecl CountDisplayCounters(void)
     int n;
     n = 0;
     for (i = 0; i < 6; i++) {
-        if (DisplayCounters[i].key != -1) {
+        if (d2_DisplayCounters[i].key != -1) {
             n++;
         }
     }

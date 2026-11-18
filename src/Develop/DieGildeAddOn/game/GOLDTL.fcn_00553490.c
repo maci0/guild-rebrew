@@ -15,7 +15,7 @@ typedef struct Msg553490 {
 	char pad5c[0xf8 - 0x5c];
 } Msg553490;
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 #include "client_data.h"
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -70,7 +70,7 @@ void __cdecl fcn_00553490(char* self)
 	}
 	*(int*) (self + 0x84) = -1;
 	if (ent == 0 || p == 0 || *(unsigned short*) (p + 0x27) == 0xffff) {
-		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &g_7f4c00);
+		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 		fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 0, 2, 0);
 		*(int*) (self + 0x70) = -1;
 		*(int*) (self + 0x84) = fcn_004c5620(-1, self);
@@ -81,14 +81,14 @@ void __cdecl fcn_00553490(char* self)
 		fcn_00529160(p, 0, *(unsigned short*) ent, self);
 		fcn_004c5c80(*(int*) (ent + 4));
 		fcn_004c5da0(*(int*) (ent + 4), *(int*) (p + 1), -1, 0, 1, (char*) 0x6a5c24);
-		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &g_7f4c00);
+		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 		fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 0, 10, 0);
 		*(int*) (self + 0x70) = 2;
 		*(int*) (self + 0x84) = fcn_004c5620(2, self);
 		return;
 	case 2:
 		if (*(int*) (*(int*) (ent + 0x184) + 0x128) != 0) {
-			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &g_7f4c00);
+			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 			fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 0, step, 0);
 			*(int*) (self + 0x70) = 2;
 			*(int*) (self + 0x84) = fcn_004c5620(2, self);
@@ -98,7 +98,7 @@ void __cdecl fcn_00553490(char* self)
 		slotofs = *(unsigned short*) (p + 0x27) * 0x21c;
 		kind = *(unsigned char*) (slotofs + (unsigned long)&g_7f4ca2);
 		if (kind != 6 && kind != 7) {
-			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &g_7f4c00);
+			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 			fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 0, (gm_RandomMod(0x10) & 0xffff) + 2, 0);
 			*(int*) (self + 0x70) = 3;
 			if (*(unsigned char*) (p + 0x5b) & 1) {
@@ -120,11 +120,11 @@ void __cdecl fcn_00553490(char* self)
 		msg.id = *(int*) (p + 1);
 		msg.seed = *(int*) (slotofs + (unsigned long)&g_7f4ca4);
 		msg.value = *(int*) (self + 4);
-		msg.pos = (*(pos14_7f4c00*) &g_7f4c00);
+		msg.pos = (*(pos14_7f4c00*) &gm_GameTime);
 		msg.type = 0x63;
 		msg.code = 9;
 		fcn_004c5530((char*) &msg);
-		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &g_7f4c00);
+		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 		fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 3, 0, 0);
 		*(int*) (self + 0x70) = 3;
 		*(int*) (self + 0xb8) = 2;
@@ -138,8 +138,8 @@ void __cdecl fcn_00553490(char* self)
 				q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0xbc));
 				*(int*) (q + 0x4d) = *(int*) (q + 0x4d) + *(int*) (self + 0xb4);
 			}
-			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &g_7f4c00);
-			*(pos14_7f4c00*) (self + 0x44) = (*(pos14_7f4c00*) &g_7f4c00);
+			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
+			*(pos14_7f4c00*) (self + 0x44) = (*(pos14_7f4c00*) &gm_GameTime);
 			fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 0x30, 0, 0);
 			*(int*) (self + 0x70) = step;
 			*(int*) (self + 0x84) = fcn_004c5620(step, self);
@@ -149,7 +149,7 @@ void __cdecl fcn_00553490(char* self)
 			return;
 		}
 		if (*(int*) (self + 0xb8) != 0) {
-			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &g_7f4c00);
+			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 			fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 0, 5, 0);
 			*(int*) (self + 0x70) = step;
 			*(int*) (self + 0x84) = fcn_004c5620(step, self);
@@ -158,7 +158,7 @@ void __cdecl fcn_00553490(char* self)
 			fcn_00545d40(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
 			return;
 		} else {
-			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &g_7f4c00);
+			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 			fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 0, 5, 0);
 			*(int*) (self + 0x70) = step;
 			*(int*) (self + 0x84) = fcn_004c5620(step, self);
@@ -178,7 +178,7 @@ void __cdecl fcn_00553490(char* self)
 		fcn_00529160(p, 0, *(unsigned short*) ent, 0);
 		fcn_004c5c80(*(int*) (ent + 4));
 		fcn_004c5da0(*(int*) (ent + 4), *(int*) (self + 0xbc), *(int*) (self + 0xc0), 0, 0, (char*) 0x6a5c24);
-		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &g_7f4c00);
+		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 		fcn_00500bb0((pos14_7f4c00*) (self + 0x52), 0, 2, 0);
 		*(int*) (self + 0x70) = -1;
 		*(int*) (self + 0x84) = fcn_004c5620(-1, self);

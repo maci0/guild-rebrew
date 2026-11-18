@@ -44,7 +44,7 @@ extern char g_7f4ca0[];			/* slot table, stride 0x21c */
 extern Prod483f20 g_100d0c0[];		/* production entries */
 extern int g_100b0ac;			/* production entry count */
 extern char g_100b0c4[];		/* resource entry table, stride 0x40 */
-extern int g_100b0a8;			/* resource entry count */
+extern int ai_ResourceCount;			/* resource entry count */
 extern char g_100b0e8[];
 extern int g_100dc20;			/* owner production building */
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -265,7 +265,7 @@ after_start:
 			prod->flags &= ~8;
 		}
 	}
-	for (res = (Res483f20*) g_100b0c4, i = 0; i < g_100b0a8; i++, res = (Res483f20*) ((char*) res + 0x40)) {
+	for (res = (Res483f20*) g_100b0c4, i = 0; i < ai_ResourceCount; i++, res = (Res483f20*) ((char*) res + 0x40)) {
 		if ((res->flags & 0x400) != 0 && (res->flags & 0x10) != 0 && res->id >= 0) {
 			g_100d0c0[res->id].flags |= 0x10;
 		}

@@ -24,7 +24,7 @@ typedef struct {
 extern const int g_666018;
 extern int g_66601c;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 extern char g_7f4ca0[];
 
@@ -99,7 +99,7 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 			fcn_00545d40(*(unsigned short*) (rec + 0x27), *(unsigned short*) (rec + 0x27),
 				text, 0, 0x5fb, (char*) 0x6a59fc);
 		}
-		fcn_005099e0(ent, (int) g_773da8);
+		fcn_005099e0(ent, (int) gm_CityEntity);
 		fcn_004c57e0(*(int*) (ent + 4), 1);
 		return 0x10;
 	}
@@ -139,7 +139,7 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == kid) {
+			if (d2_CurrentElementId == kid) {
 				if (fcn_00525f60(entity, 5) != 0) {
 					fcn_004c6ae0(*(int*) (entity + 4), -5);
 					thr = fcn_004c5420(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
@@ -169,13 +169,13 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 							fcn_00545d40(*(int*) (state_ptr + 4), *(int*) (state_ptr + 4),
 								text, 0, 0x5fb, (char*) 0x6a59fc);
 						}
-						fcn_005099e0(ent, (int) g_773da8);
+						fcn_005099e0(ent, (int) gm_CityEntity);
 						fcn_004c57e0(*(int*) (ent + 4), 1);
 					}
 					ret = 0x81;
 					g_774654 = 1;
 				}
-			} else if (g_67d370 == i) {
+			} else if (d2_CurrentElementId == i) {
 				g_774654 = 1;
 			}
 		}

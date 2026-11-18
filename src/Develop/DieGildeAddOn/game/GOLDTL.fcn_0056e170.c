@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00426cc0(int);
@@ -54,7 +54,7 @@ void __cdecl fcn_0056e170(char* u)
 			h = fcn_0040c120(*(char**) (h + 0x184), 0x36, 1);
 			strcpy(h + 0xf0, "bewegung/zu_boden_sinken");
 		}
-		*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 1, 0, 0);
 		(*(int*) (u + 0x70))++;
 		break;

@@ -35,7 +35,7 @@ int __cdecl fcn_00574150(char* a)
 	int n;
 
 	best = 0;
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	sprintf(buf, "he_%i", *(int*) (a + 4));
 	l.handle = fcn_00445600(0, 0x1c0, 0, buf);

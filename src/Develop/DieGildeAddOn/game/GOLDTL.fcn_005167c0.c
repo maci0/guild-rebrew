@@ -1,7 +1,7 @@
 #include "client_types.h"
 typedef struct { unsigned char kind, unknown01[0x24c]; } BuildingProto5167c0;
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 extern char* g_7f3b24;
 extern char* g_7f3ee0;
@@ -55,12 +55,12 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	unsigned char* obj;
 	unsigned char** p;
 
-	mode = fcn_00500e20(&(*(char*) &g_7f4c00));
+	mode = fcn_00500e20(&(*(char*) &gm_GameTime));
 	gm_GetBuildingTypeCategory(*a0);
 	rec = &((BuildingProto5167c0*)lpGebaeudePROT)[*a0];
 	entity = (unsigned char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, a1);
 	if (entity != 0 && *(unsigned short*) entity != 0xfd) {
-		type = ((signed char*) g_7f3b40)[*(unsigned short*) entity];
+		type = ((signed char*) init_SceneContextIndices)[*(unsigned short*) entity];
 		g_7f3b24 = (char*) entity;
 		fcn_00516b70();
 	} else {
@@ -69,7 +69,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 		type = ((signed char*) g_7f3b00)[type];
 		fcn_00516be0();
 	}
-	if (g_6b8010 != type
+	if (d3_CurrentContextIndex != type
 	    || (g_7746c4 != 0 && (unsigned char*) g_7746c4 != a0)
 	    || (g_7746c8 != 0 && (unsigned char*) g_7746c8 != a0)) {
 		return;
@@ -114,7 +114,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	} else {
 		count = (rec->kind != 1) * 4 + 4;
 	}
-	p = (unsigned char**) g_14d0020;
+	p = (unsigned char**) ch_CharacterSlots;
 	do {
 		obj = *p;
 		if (obj != 0 && fcn_00413190(*(int*) (obj + 0x88)) == type) {

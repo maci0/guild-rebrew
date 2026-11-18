@@ -28,7 +28,7 @@ typedef struct {
 #pragma pack(pop)
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -66,7 +66,7 @@ int __cdecl fcn_004ab0d0(char* a1, char* a2, char* a3)
 	m.mode = 2;
 	m.from = *(int*) (a1 + 4);
 	m.to = *(int*) (a2 + 4);
-	m.stamp.a = (*(int*)&g_7f4c00);
+	m.stamp.a = (*(int*)&gm_GameTime);
 	m.stamp.b = (*(int*)&g_7f4c04);
 	m.stamp.c = g_7f4c08;
 	m.stamp.d = g_7f4c0c;

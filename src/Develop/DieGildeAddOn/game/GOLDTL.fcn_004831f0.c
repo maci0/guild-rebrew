@@ -1,6 +1,6 @@
 #include <string.h>
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 struct unit;
 
@@ -22,7 +22,7 @@ void __cdecl fcn_004831f0(char* obj)
 	int mode;
 	char s[0xf8];
 
-	mode = g_7f4c00.b;
+	mode = gm_GameTime.b;
 	if ((short) mode != 7 && (short) mode != 0xc && (short) mode != 0x12) {
 		*(int*) (obj + 0x1b4) &= ~0x800;
 		return;
@@ -72,10 +72,10 @@ void __cdecl fcn_004831f0(char* obj)
 		*(char*) (s + 4) = 0x8d;
 		*(int*) (s + 8) = *(int*) (*(unsigned short*) (c + 0x27) * 0x21c + 0x7f4ca4);
 		*(int*) (s + 0xc) = *(int*) (c + 1);
-		*(int*) (s + 0x28) = g_7f4c00.a;
-		*(int*) (s + 0x2c) = g_7f4c00.b;
-		*(int*) (s + 0x30) = g_7f4c00.c;
-		*(unsigned short*) (s + 0x34) = (unsigned short) g_7f4c00.d;
+		*(int*) (s + 0x28) = gm_GameTime.a;
+		*(int*) (s + 0x2c) = gm_GameTime.b;
+		*(int*) (s + 0x30) = gm_GameTime.c;
+		*(unsigned short*) (s + 0x34) = (unsigned short) gm_GameTime.d;
 		*(char*) (s + 0x36) = 1;
 		*(int*) (s + 0x5c) = *(int*) e;
 		*(char*) (s + 0x60) = (char) fcn_004f1790(*(char**) (c + 0x65), e);

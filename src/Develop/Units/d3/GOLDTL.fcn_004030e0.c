@@ -1,5 +1,5 @@
 #include "Develop/Units/d3/d3_object.h"
-extern void* g_14d0020[];
+extern void* ch_CharacterSlots[];
 extern int g_67a370;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -21,18 +21,18 @@ int __cdecl fcn_004030e0(char* obj)
 	int saved;
 
 	if (obj != 0) {
-		while (((char**)g_14d0020)[i] != obj && i < 0x300) {
+		while (((char**)ch_CharacterSlots)[i] != obj && i < 0x300) {
 			i++;
 		}
 		if (i < 0x300) {
-			((char**)g_14d0020)[i] = 0;
+			((char**)ch_CharacterSlots)[i] = 0;
 			*(int*) obj = -1;
 			ch_ClearActionQueue(obj);
 			if (*(int*) (obj + 0x34) != 0) {
 				saved = -1;
 				fcn_00404560(obj);
 				if (g_67a370 != *(int*) (obj + 0x88)) {
-					saved = g_6b8010;
+					saved = d3_CurrentContextIndex;
 					fcn_004432d0(fcn_00413190(*(int*) (obj + 0x88)), 1);
 				}
 				if (*(void (__cdecl**)(char*)) (obj + 0x228) != 0) {

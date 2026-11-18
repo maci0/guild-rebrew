@@ -12,7 +12,7 @@ typedef struct Rec {
 // SIZE 0x21c
 
 extern char g_7f4ca0[];
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern float g_662cf8;
 extern float g_662910;
 extern float g_665bf0;
@@ -63,12 +63,12 @@ void __cdecl fcn_00553cd0(char* event)
 		fcn_00529160(e, 0, *record, event);
 		fcn_004c5c80(*(int*) (record + 2));
 		fcn_004c5da0(*(int*) (record + 2), *(int*) (e + 1), -1, 0, 1, "BetriebsPr");
-		*(pos14_7f4c00*) (event + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+		*(pos14_7f4c00*) (event + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 		fcn_00500bb0((int*) (event + 0x52), 0, 10, 0);
 		*(int*) (event + 0x70) = 1;
 		return;
 	case 1:
-		*(pos14_7f4c00*) (event + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+		*(pos14_7f4c00*) (event + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 		fcn_00500bb0((int*) (event + 0x52), 0, 4, 0);
 		p = *(char**) ((char*) record + 0x184);
 		if (*(int*) (p + 0x128)) {

@@ -1,7 +1,7 @@
 
 
 
-extern char* g_773da8;
+extern char* gm_CityEntity;
 
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 unsigned char* __cdecl FindSlotEntryFiltered(int a, char* e, unsigned char* prev, void* filter, int mask);
@@ -13,7 +13,7 @@ unsigned char* __cdecl fcn_004f43b0(char* e, unsigned char lim)
 	unsigned char* r;
 
 	best = 0;
-	if (*(unsigned short*) (e + 0x27) == 0xffff || *(unsigned short*) (e + 0x27) == *((unsigned short*)g_773da8)) {
+	if (*(unsigned short*) (e + 0x27) == 0xffff || *(unsigned short*) (e + 0x27) == *((unsigned short*)gm_CityEntity)) {
 		return 0;
 	}
 	if (!fcn_00502cd0(*(int*) (e + 0x5d), 2, 4, 0x1f8, 6)) {

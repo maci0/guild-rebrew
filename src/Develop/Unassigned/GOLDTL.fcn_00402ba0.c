@@ -9,7 +9,7 @@ int __cdecl fcn_00402ba0(int a1, int a2)
 	void* e;
 
 	count = 0;
-	p = g_14d0020;
+	p = ch_CharacterSlots;
 	do {
 		e = *p;
 		if (e != 0) {

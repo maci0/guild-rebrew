@@ -23,7 +23,7 @@ int __cdecl fcn_004c49f0(char* src)
 	g_aed200 = *pn;
 	memcpy(p, src, 0x99);
 	*(unsigned short*) (p + 1) = fcn_004c3a50(p);
-	q = g_aed324;
+	q = cm_CommandQueueHead;
 	if (q != 0) {
 		while (*(char**) (q + 0x95) != 0) {
 			q = *(char**) (q + 0x95);
@@ -34,7 +34,7 @@ int __cdecl fcn_004c49f0(char* src)
 	} else {
 		*(char**) (p + 0x91) = 0;
 		*pn = 0;
-		g_aed324 = p;
+		cm_CommandQueueHead = p;
 	}
 	return 0;
 }

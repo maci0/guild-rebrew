@@ -52,7 +52,7 @@ void __cdecl fcn_0057cbc0(char* p)
             he_MessageBoxQuickjump(*(int*) (tbl + 4), *(int*) (tbl + 4), buf, 0, 0x5fc,
                          *(int*) (s + 1), *(int*) (wnd + 2), g_6b5c60,
                          g_6b5c60);
-            gfx = g_6b8010;
+            gfx = d3_CurrentContextIndex;
             r = fcn_00515540((int) wnd);
             fcn_004432d0(r, 1);
             e = (char*) evt_LoadGfxScript(g_6a80c0);

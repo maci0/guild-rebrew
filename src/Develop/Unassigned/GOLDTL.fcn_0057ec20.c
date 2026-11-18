@@ -2,8 +2,8 @@ extern int* g_665f08;
 extern int* g_665f08;
 extern volatile int g_6b7fc0;
 extern volatile int g_6b7fc0;
-extern int g_774a14;
-extern int g_774a14;
+extern int d2_TutorialActive;
+extern int d2_TutorialActive;
 
 /* ADDRESS: GOLD 0x00576680 */
 /* ADDRESS: GOLDTL 0x0057ec20 */
@@ -11,7 +11,7 @@ int __cdecl fcn_0057ec20(int a1)
 {
 	int* p;
 
-	if (*(int*) ((char*)&g_774a14) == 0) {
+	if (*(int*) ((char*)&d2_TutorialActive) == 0) {
 		return 1;
 	}
 	p = g_665f08;

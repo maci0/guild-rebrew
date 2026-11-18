@@ -1,5 +1,5 @@
-extern int g_100f1e8;
-extern int g_100f1ec;
+extern int d2_MouseX;
+extern int d2_MouseY;
 extern int g_67d8cc;
 extern short g_7725c4;
 
@@ -15,7 +15,7 @@ void __cdecl d2_SetOverlayAnimation(int unused_arg, int resource_id)
 			fcn_0047a2b0(g_67d8cc);
 			g_67d8cc = -1;
 		}
-		g_67d8cc = fcn_0047a200((short) g_100f1e8, (short) g_100f1ec, d2_GetResourceData(resource_id), 0);
+		g_67d8cc = fcn_0047a200((short) d2_MouseX, (short) d2_MouseY, d2_GetResourceData(resource_id), 0);
 	} else {
 		if (g_67d8cc != -1) {
 			fcn_0047a2b0(g_67d8cc);

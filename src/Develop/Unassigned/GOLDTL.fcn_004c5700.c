@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 
 
@@ -20,7 +20,7 @@ int __cdecl fcn_004c5700(Quad4* stamp)
 {
 	char buf[0x9c];
 
-	if (fcn_00500cb0(stamp, ((char*)&g_7f4c00)) == 0) {
+	if (fcn_00500cb0(stamp, ((char*)&gm_GameTime)) == 0) {
 		return -1;
 	}
 	buf[0] = 0x1e;

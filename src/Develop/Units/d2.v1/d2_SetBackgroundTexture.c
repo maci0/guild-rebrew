@@ -12,7 +12,7 @@ typedef Obj_1038140 Obj;
 
 extern Obj_1038140 g_1038140[];
 extern int g_772534;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern char s_67d7d0[];
 

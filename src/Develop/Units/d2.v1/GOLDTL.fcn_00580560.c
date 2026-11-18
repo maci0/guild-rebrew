@@ -2,7 +2,7 @@
 
 extern int* g_665f08;
 extern char g_6a8364[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "client_types.h"
 extern s_1015f4c g_1015f4c[];
 
@@ -16,6 +16,6 @@ void __cdecl fcn_00580560(void)
 	g_665f08[26] = fcn_00470820(0, 0, g_6a8364);
 	fcn_00471d80(g_665f08[26], 3);
 	d2_SetForm(g_665f08[26], 0);
-	g_665f08[27] = fcn_004677e0(((int*)g_1015f4c)[g_772514 * 243] / 2 - 200, 5, 0x190, 0, 0x190, 0x75,
-	    0x42, g_772514);
+	g_665f08[27] = fcn_004677e0(((int*)g_1015f4c)[d2_CurrentWindowId * 243] / 2 - 200, 5, 0x190, 0, 0x190, 0x75,
+	    0x42, d2_CurrentWindowId);
 }

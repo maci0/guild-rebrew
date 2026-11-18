@@ -23,7 +23,7 @@ typedef struct
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern __int64 g_666018;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern float g_6628ac;
 extern unsigned char g_773d75;
 #include "client_dialog_state.h"
@@ -142,7 +142,7 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == r1) {
+			if (d2_CurrentElementId == r1) {
 				if (fcn_00525f60(a0, 4) != 0 &&
 				    fcn_00526010(a0, v, *(char*) &g_773d75) != 0) {
 					w1 = gm_RandomMod(0x1e) + 3;
@@ -171,7 +171,7 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 					g_774654 = 1;
 					rc = 1;
 				}
-			} else if (g_67d370 == r2) {
+			} else if (d2_CurrentElementId == r2) {
 				g_774654 = 1;
 			}
 		}

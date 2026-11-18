@@ -16,7 +16,7 @@ typedef struct Ctx {
 	float y;
 } Ctx;
 
-extern float g_1052bc0;
+extern float d3_ViewportCenterX;
 extern float g_1052bc8;
 #include "Develop/Units/d3/d3_camera.h"
 extern int g_67a370;
@@ -36,8 +36,8 @@ char* __cdecl fcn_00443bf0(float a, float b, int flags, int mask)
 		ctx.hits[i].d = 1.0e10f;
 		ctx.hits[i].e = 0;
 	}
-	ctx.x = g_1052bc0 - a;
-	ctx.cam = g_6b8014;
+	ctx.x = d3_ViewportCenterX - a;
+	ctx.cam = d3_ActiveCamera;
 	ctx.mask = mask;
 	ctx.y = g_1052bc8 - b;
 	fcn_004379a0(g_67a370, 0, flags, fcn_00443b00, &ctx);

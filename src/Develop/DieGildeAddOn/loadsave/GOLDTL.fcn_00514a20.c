@@ -61,7 +61,7 @@ int __cdecl fcn_00514a20(char* name)
 	fcn_00535770(0x24087);
 	fcn_00514570(g_14ac5fc);
 	init_LocalData();
-	g_7725c8 = 0;
+	d2_SuppressOverlay = 0;
 	return 0;
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)

@@ -14,7 +14,7 @@ void __cdecl fcn_00468b80(int id, int value);
 void __cdecl fcn_00468bb0(int slot, int n, ...);
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
 float __cdecl fcn_005e8860(int a0);
-extern char * g_1015ea0; extern char g_10161bc[]; extern float g_662cf8; extern int g_6b7fac; extern char * g_772500; extern int g_772514;
+extern char * g_1015ea0; extern char g_10161bc[]; extern float g_662cf8; extern int g_6b7fac; extern char * g_772500; extern int d2_CurrentWindowId;
 /* ADDRESS: GOLDTL 0x005893d0 */
 void __cdecl fcn_005893d0(int w, int a1)
 {
@@ -26,7 +26,7 @@ void __cdecl fcn_005893d0(int w, int a1)
 	int id2;
 
 	width = g_1040494;
-	height = g_1040490;
+	height = d2_ScreenHeight;
 	half = (height - (width >> 4) * 9) >> 1;
 	v = height - half;
 	if (width == 0x320) {
@@ -41,59 +41,59 @@ void __cdecl fcn_005893d0(int w, int a1)
 	}
 	*(int*) (w + 0xd4) = fcn_00469c30(0, 0, id);
 	*(int*) (w + 0xd8) = fcn_00469c30(0,
-	    g_1040490
+	    d2_ScreenHeight
 	    - (int) ((D2_BILD_GROESSE*)g_772500)[id2].hoehe, id2);
 	*(int*) (w + 0xa4) = fcn_00470820(0, 0, (char*) 0x6a94e8);
 	fcn_00471d80(*(int*) (w + 0xa4), 1);
 	d2_SetForm(*(int*) (w + 0xa4), 0);
-	fcn_00469c40(((D2_WIN*)g_1015f40)[g_772514].left, v - 0x19,
-	    ((D2_WIN*)g_1015f40)[g_772514].slot);
+	fcn_00469c40(((D2_WIN*)g_1015f40)[d2_CurrentWindowId].left, v - 0x19,
+	    ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].slot);
 	d2_SetForm(*(int*) (w + 0xa4), 2);
-	*(int*) (w + 0xb8) = fcn_0046f740(0x59, 0xf, 0x7d5, *(int*) &g_772514);
+	*(int*) (w + 0xb8) = fcn_0046f740(0x59, 0xf, 0x7d5, *(int*) &d2_CurrentWindowId);
 	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xb8)].f5c = 1;
 	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xb8)].f1d0 = 3;
-	*(int*) (w + 0xbc) = fcn_0046f740(0x9b, 0xf, 0x7d4, *(int*) &g_772514);
+	*(int*) (w + 0xbc) = fcn_0046f740(0x9b, 0xf, 0x7d4, *(int*) &d2_CurrentWindowId);
 	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xbc)].f5c = 1;
 	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xbc)].f1d0 = 3;
 	d2_SetForm(*(int*) (w + 0xa4), 1);
 	*(int*) (w + 0xb0) = fcn_004677e0(0x140, 0x14, 100, 0, 100, 0x7b, 0x82,
-	    *(int*) &g_772514);
+	    *(int*) &d2_CurrentWindowId);
 	fcn_00472380(*(int*) (w + 0xb0), 0, 4, *(int*) 0x9a9214, 1);
 	fcn_00468b80(*(int*) (w + 0xb0), *(int*) 0x14b54a4);
 	fcn_00468bb0(*(int*) (w + 0xb0), 5, *(int*) 0x14b54ac,
 	    *(int*) 0x14b54b0, *(int*) 0x14b54b4, *(int*) 0x14b54b8,
 	    *(int*) 0x14b54bc);
 	*(int*) (w + 0xb4) = fcn_004677e0(0x140, 0x32, 100, 0, 100, 0x7b, 0x82,
-	    *(int*) &g_772514);
+	    *(int*) &d2_CurrentWindowId);
 	fcn_00472380(*(int*) (w + 0xb4), 0, 100, *(int*) 0x9a9218, 1);
 	fcn_00468b80(*(int*) (w + 0xb4), *(int*) 0x14b54a8);
-	*(int*) (w + 0xc8) = fcn_0046f740(0x14, 0x17, 0x7d3, *(int*) &g_772514);
+	*(int*) (w + 0xc8) = fcn_0046f740(0x14, 0x17, 0x7d3, *(int*) &d2_CurrentWindowId);
 	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xc8)].f5c = 1;
 	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xc8)].f1d0 = 3;
-	*(int*) (w + 0xcc) = fcn_0046f740(0x56, 0x17, 0x7d1, *(int*) &g_772514);
+	*(int*) (w + 0xcc) = fcn_0046f740(0x56, 0x17, 0x7d1, *(int*) &d2_CurrentWindowId);
 	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xcc)].f5c = 1;
 	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xcc)].f1d0 = 3;
-	*(int*) (w + 0xd0) = fcn_0046f740(0x98, 0x17, 0x7d2, *(int*) &g_772514);
+	*(int*) (w + 0xd0) = fcn_0046f740(0x98, 0x17, 0x7d2, *(int*) &d2_CurrentWindowId);
 	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xd0)].f5c = 1;
 	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xd0)].f1d0 = 3;
 	*(int*) (w + 0xc0) = fcn_00470820(0, 0, (char*) 0x6a94c8);
 	fcn_00471d80(*(int*) (w + 0xc0), 1);
 	d2_SetForm(*(int*) (w + 0xc0), 0);
-	fcn_00469c40(((D2_WIN*)g_1015f40)[g_772514].left, half - 0x4b,
-	    ((D2_WIN*)g_1015f40)[g_772514].slot);
+	fcn_00469c40(((D2_WIN*)g_1015f40)[d2_CurrentWindowId].left, half - 0x4b,
+	    ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].slot);
 	d2_SetForm(*(int*) (w + 0xc0), 1);
 	*(int*) (w + 0xa8) = fcn_004677e0(0x96, 0xb, 200, 0, 100, 0x75, 0x4c2,
-	    *(int*) &g_772514);
+	    *(int*) &d2_CurrentWindowId);
 	fcn_00472380(*(int*) (w + 0xa8), 0, 100,
 	    (int) (fcn_005e8860(1) * 100.0f));
 	fcn_00468b80(*(int*) (w + 0xa8), *(int*) 0x14b5498);
 	*(int*) (w + 0xac) = fcn_004677e0(0x96, 0x1f, 200, 0, 100, 0x75, 0x4c2,
-	    *(int*) &g_772514);
+	    *(int*) &d2_CurrentWindowId);
 	fcn_00472380(*(int*) (w + 0xac), 0, 100,
 	    (int) (fcn_005e8860(1) * 100.0f));
 	fcn_00468b80(*(int*) (w + 0xac), *(int*) 0x14b549c);
 	*(int*) (w + 0xc4) = fcn_004677e0(0x96, 0x33, 200, 0, 100, 0x75, 0x4c2,
-	    *(int*) &g_772514);
+	    *(int*) &d2_CurrentWindowId);
 	fcn_00472380(*(int*) (w + 0xc4), 0, 100,
 	    (int) (*(float*) (a1 + *(int*) (w + 0xa0) * 4 + 8)
 		* 100.0f));

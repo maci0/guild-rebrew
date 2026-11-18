@@ -1,5 +1,5 @@
 extern int g_14cbca0;
-extern int g_699364;
+extern int gm_NextEntityId;
 extern int cm_LastEntityId;
 extern char g_7f4ca0[];
 
@@ -18,7 +18,7 @@ int __cdecl fcn_004c7790(void* packet, char* reply)
 	int arg;
 
 	if (g_14cbca0 != -1) {
-		g_699364 = *(int*) ((char*) packet + 0x10);
+		gm_NextEntityId = *(int*) ((char*) packet + 0x10);
 	} else {
 		*(int*) ((char*) packet + 0x26) = fcn_0064d3f8();
 	}

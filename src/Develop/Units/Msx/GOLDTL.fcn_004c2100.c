@@ -18,7 +18,7 @@ extern char* g_7746c4;
 extern unsigned char* g_7746c8;
 extern char* g_7746cc;
 extern unsigned char* lpGebaeudePROT;
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern IdGroup g_688118[];
 extern Tpl_4c2100 g_6819b8[];
@@ -58,7 +58,7 @@ void __cdecl fcn_004c2100(void)
 	}
 	j = 0;
 	kind = lpGebaeudePROT[*e * 0x24d];
-	cls = fcn_00500e20((int*) &g_7f4c00);
+	cls = fcn_00500e20((int*) &gm_GameTime);
 	i = fcn_004c27f0();
 	if (i >= 0) {
 		g_688118[i].active = j;
@@ -93,7 +93,7 @@ void __cdecl fcn_004c2100(void)
 			g_688118[n].score += 0x14;
 		}
 		track = fcn_0041fd70(name, 0);
-		g_772d1c = g_772d20 = track;
+		tp_msx_CurrentTrack = g_772d20 = track;
 		fcn_0064d41a(g_772c10, s_68a14c, name);
 		return;
 	}
@@ -124,7 +124,7 @@ void __cdecl fcn_004c2100(void)
 				g_688118[n].score += 0x14;
 			}
 			track = fcn_0041fd70(name, 0);
-			g_772d1c = g_772d20 = track;
+			tp_msx_CurrentTrack = g_772d20 = track;
 			fcn_0064d41a(g_772c10, s_68a130, name);
 			return;
 		}

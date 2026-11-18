@@ -1,5 +1,5 @@
 #include "Develop/Units/d3/d3_object.h"
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern char g_6766f0[];
 
 
@@ -15,6 +15,6 @@ int __cdecl ecmd_KillObject(void* objectRef)
 		d3_DestroyObject((D3_OBJECT*) (p));
 		return 1;
 	}
-	fcn_00425bf0(((int*)g_6b7e98), *(int*) ((char*) ((int*)g_6b7e98) + 0x118), g_6766f0);
+	fcn_00425bf0(((int*)evt_CurrentScript), *(int*) ((char*) ((int*)evt_CurrentScript) + 0x118), g_6766f0);
 	return 1;
 }

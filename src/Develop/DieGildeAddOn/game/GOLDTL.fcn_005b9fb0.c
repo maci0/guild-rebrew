@@ -7,7 +7,7 @@ typedef struct {
 } Stamp;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl fcn_005463a0(int, int, int);
 char* __cdecl he_fn_Handlung(void);
@@ -19,7 +19,7 @@ void __cdecl fcn_005b9fb0(char* e)
 
 	for (p = fcn_005463a0(1, 0, 0xf); p != 0; p = he_fn_Handlung()) {
 		if (*(int*) (p + 0xac) == *(int*) (e + 2)) {
-			*(Stamp*) (p + 0x52) = (*(Stamp*)&g_7f4c00);
+			*(Stamp*) (p + 0x52) = (*(Stamp*)&gm_GameTime);
 			fcn_004c5620(-1, p);
 			return;
 		}

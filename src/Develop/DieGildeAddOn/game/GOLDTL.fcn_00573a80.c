@@ -3,7 +3,7 @@
 
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
@@ -21,7 +21,7 @@ void __cdecl fcn_00573a80(char* u)
 
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		if (fcn_00500cb0((pos14_7f4c00*) (u + 0x52), &g_7f4c00) > 0) {
+		if (fcn_00500cb0((pos14_7f4c00*) (u + 0x52), &gm_GameTime) > 0) {
 			break;
 		}
 		*(int*) (u + 0xc8) = fcn_004c51f0(*(int*) (u + 0xac), -1, *(int*) (u + 0xb4), 1, g_773d75, 0);
@@ -42,7 +42,7 @@ void __cdecl fcn_00573a80(char* u)
 		(*(int*) (u + 0x70))++;
 		break;
 	case 2:
-		if (fcn_00500cb0((pos14_7f4c00*) (u + 0x52), &g_7f4c00) >= 0) {
+		if (fcn_00500cb0((pos14_7f4c00*) (u + 0x52), &gm_GameTime) >= 0) {
 			break;
 		}
 		do {
@@ -53,7 +53,7 @@ void __cdecl fcn_00573a80(char* u)
 				fcn_00546190(u);
 				break;
 			}
-		} while (fcn_00500cb0((pos14_7f4c00*) (u + 0x52), &g_7f4c00) < 0);
+		} while (fcn_00500cb0((pos14_7f4c00*) (u + 0x52), &gm_GameTime) < 0);
 		break;
 	case -2:
 	case -1:

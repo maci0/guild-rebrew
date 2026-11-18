@@ -4,7 +4,7 @@ typedef struct {
 	int v[6];
 } Row_54f4a0;
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern float g_662924;
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -42,6 +42,6 @@ void __cdecl fcn_0054f4a0(char* a0, char* a1, unsigned char* a2)
 	}
 	fcn_004ec2d0(a2, ret, -9 - (int) (gm_GetEntitySkill(a1, 4) * 8.0f) - (gm_RandomMod(8) & 0xffff));
 	fcn_004c54c0(*(int*) (a1 + 4), *(int*) (a2 + 4), -0x14, 1);
-	*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 	fcn_004c5620(-1, a0);
 }

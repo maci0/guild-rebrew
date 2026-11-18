@@ -98,7 +98,7 @@ void __cdecl fcn_00485970(char* a0, int a1, int a2)
 	pa = (fcn_00485970_EntA*) 0x100b0c0;
 	pb = (fcn_00485970_EntB*) 0x100d0c0;
 	g_100b0ac = 0;
-	g_100b0a8 = 0;
+	ai_ResourceCount = 0;
 	if (!a2) {
 		ent = gm_StartFilteredEntitySearch(1, 0, 0x47);
 		while (ent) {
@@ -112,7 +112,7 @@ void __cdecl fcn_00485970(char* a0, int a1, int a2)
 						f1 = fcn_0050bb50(id, (unsigned char) *(char*) (ent + 0x65));
 						f0 = eval_ObjektPreis2Credits(id, 100) - f1;
 						idx = 0;
-						while (idx < g_100b0a8) {
+						while (idx < ai_ResourceCount) {
 							if (pa[idx].id == id) {
 								if (f0 < pa[idx].f20)
 									goto label_485b77;
@@ -138,8 +138,8 @@ void __cdecl fcn_00485970(char* a0, int a1, int a2)
 						pa[idx].f34 = 0;
 						pa[idx].f38 = fcn_0050dfa0((int) cont, id);
 						pa[idx].f3c = 0x80;
-						if (idx == g_100b0a8)
-							g_100b0a8++;
+						if (idx == ai_ResourceCount)
+							ai_ResourceCount++;
 						q = fcn_00502cd0(*(int*) (cont + 0x14), 1, 5);
 						while (q && q != slot)
 							q = gm_NextEntityQueryMatch();
@@ -217,8 +217,8 @@ label_485d61:
 				    * 0.01f;
 				f0 = eval_ObjektPreis2Credits(id, 100) - f1;
 				idx = 0;
-				if (1 <= g_100b0a8) {
-					while (idx < g_100b0a8) {
+				if (1 <= ai_ResourceCount) {
+					while (idx < ai_ResourceCount) {
 						if (pa[idx].id == id) {
 							if (f0 < pa[idx].f20)
 								goto label_485f7e;
@@ -245,8 +245,8 @@ label_485d61:
 				pa[idx].f2c = gm_eval_SlotVoll(a1, id, 1000000);
 				pa[idx].f34 = 0;
 				pa[idx].f38 = fcn_0050dfa0((int) cont, id);
-				if (idx == g_100b0a8)
-					g_100b0a8++;
+				if (idx == ai_ResourceCount)
+					ai_ResourceCount++;
 				q = fcn_00502cd0(*(int*) (cont + 0x14), 1, 5);
 				while (q && q != slot)
 					q = gm_NextEntityQueryMatch();
@@ -256,7 +256,7 @@ label_485f7e:
 		}
 	}
 	idx = 0;
-	while (idx < g_100b0a8) {
+	while (idx < ai_ResourceCount) {
 		found = 0;
 		for (i = 0; i < g_100b0ac; i++) {
 			if (pa[idx].id == pb[i].id) {
@@ -315,7 +315,7 @@ label_485f7e:
 					if (pb[j].id == (rb.slots[i] & 0xffff))
 						pb[j].f38 += rb.vals[i];
 				}
-				for (j = 0; j < g_100b0a8; j++) {
+				for (j = 0; j < ai_ResourceCount; j++) {
 					if (pa[j].id == (rb.slots[i] & 0xffff))
 						pa[j].f24 += rb.vals[i];
 				}
@@ -329,7 +329,7 @@ label_485f7e:
 					if (pb[i].id == id)
 						pb[i].f38 += k;
 				}
-				for (i = 0; i < g_100b0a8; i++) {
+				for (i = 0; i < ai_ResourceCount; i++) {
 					if (pa[i].id == id)
 						pa[i].f24 += k;
 				}
@@ -337,7 +337,7 @@ label_485f7e:
 		}
 		rec = he_fn_Handlung();
 	}
-	for (i = 0; i < g_100b0a8; i++) {
+	for (i = 0; i < ai_ResourceCount; i++) {
 		for (j = 0; j < g_100b0ac; j++) {
 			if (pa[i].id != pb[j].id)
 				continue;
@@ -358,8 +358,8 @@ label_485f7e:
 			t = pb[i].f50;
 		pb[i].f4c = t;
 	}
-	for (i = 0; i < g_100b0a8; i++) {
-		for (j = i; j < g_100b0a8; j++) {
+	for (i = 0; i < ai_ResourceCount; i++) {
+		for (j = i; j < ai_ResourceCount; j++) {
 			if ((float) pa[i].f34 * pa[i].f20 < (float) pa[j].f34 * pa[j].f20) {
 				ta = pa[i];
 				pa[i] = pa[j];
@@ -378,7 +378,7 @@ label_485f7e:
 	}
 	for (i = 0; i < g_100b0ac; i++)
 		pb[i].f48 = i;
-	for (i = 0; i < g_100b0a8; i++)
+	for (i = 0; i < ai_ResourceCount; i++)
 		pa[i].f30 = i;
 	return;
 }

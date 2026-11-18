@@ -4,7 +4,7 @@
 extern int* g_665f08;
 extern int g_7749f8[];
 extern char* g_774a10;
-extern int g_774a14;
+extern int d2_TutorialActive;
 extern int g_774a18;
 
 void __cdecl fcn_004230e0(int);
@@ -35,6 +35,6 @@ void __cdecl fcn_00580c20(void)
 	fcn_00471e30(g_665f08[13]);
 	g_665f08[13] = -1;
 	g_665f08[5] = 0;
-	g_774a14 = 0;
+	d2_TutorialActive = 0;
 	g_774a18 = 0;
 }

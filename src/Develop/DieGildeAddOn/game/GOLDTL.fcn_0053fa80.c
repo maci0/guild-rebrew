@@ -2,7 +2,7 @@
 
 extern int g_6b5c60;
 extern int g_538060;
-extern int g_7725c8;
+extern int d2_SuppressOverlay;
 extern int g_772f3c;
 extern int g_7749cc;
 extern int g_774934;
@@ -67,7 +67,7 @@ void __cdecl fcn_0053fa80(void)
 	fcn_00533880();
 	fcn_00475220(&g_6b5c60);
 	fcn_00533a40(&g_6b5c60);
-	g_7725c8 = 1;
+	d2_SuppressOverlay = 1;
 	fcn_0042def0(&g_538060);
 	g_772f3c = 0;
 	fcn_004298e0();

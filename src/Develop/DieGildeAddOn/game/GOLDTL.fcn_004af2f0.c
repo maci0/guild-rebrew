@@ -961,7 +961,7 @@ typedef struct Msg {
 // SIZE 0x114
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
@@ -1043,7 +1043,7 @@ int __cdecl fcn_004b0780(int* pairs, int idx, char* text)
 		}
 		msg.count = (unsigned char) n;
 		msg.flags = 0x22;
-		msg.when = (*(Pos14*)&g_7f4c00);
+		msg.when = (*(Pos14*)&gm_GameTime);
 		fcn_00500bb0(&msg.when, 0x18, 0, 0);
 		msg.when.b0 = 0xa;
 		fcn_004c5980(&msg);

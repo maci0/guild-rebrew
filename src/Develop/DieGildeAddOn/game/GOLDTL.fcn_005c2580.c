@@ -1,9 +1,9 @@
 extern char* g_14ab248;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern char g_7f4ca0[];
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -86,8 +86,8 @@ void __cdecl fcn_005c2580(char* e)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 != h0 && g_67d370 != h1 && g_67d370 != h2) {
-				if (g_67d370 == h3) {
+			if (d2_CurrentElementId != h0 && d2_CurrentElementId != h1 && d2_CurrentElementId != h2) {
+				if (d2_CurrentElementId == h3) {
 					g_774654 = 1;
 				}
 			} else {
@@ -98,17 +98,17 @@ void __cdecl fcn_005c2580(char* e)
 				*(unsigned char*) (msg + 0x36) = 1;
 				*(int*) (msg + 8) = *(int*) (g_7f4ca0 + (unsigned int) g_774970 * 0x21c + 4);
 				*(int*) (msg + 0x58) = *(int*) (e + 1);
-				if (g_67d370 == h0) {
+				if (d2_CurrentElementId == h0) {
 					dur = (int) (n * 0.25);
 					val = c;
-				} else if (g_67d370 == h1) {
+				} else if (d2_CurrentElementId == h1) {
 					dur = (int) (n * 0.5);
 					val = b;
-				} else if (g_67d370 == h2) {
+				} else if (d2_CurrentElementId == h2) {
 					dur = n;
 					val = a;
 				}
-				if (*(unsigned short*) (e + 0x27) == *(unsigned short*) g_773da8) {
+				if (*(unsigned short*) (e + 0x27) == *(unsigned short*) gm_CityEntity) {
 					char* q;
 
 					q = fcn_00507a10(e);

@@ -6,8 +6,8 @@ typedef struct {
 // SIZE 0xe
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
-extern char* g_773da8;
+extern pos14_7f4c00 gm_GameTime;
+extern char* gm_CityEntity;
 
 int __cdecl fcn_004e8a80(int, void*);
 #include "Develop/DieGildeAddOn/game/aemter.h"
@@ -41,11 +41,11 @@ int __cdecl fcn_004b11a0(int a1, int a2, char* arg)
 	fcn_0064eeec(arg + 1);
 	memset(m, 0, sizeof(m));
 	m[4] = (char) 0x80;
-	*(int*) (m + 8) = *(int*) (g_773da8 + 4);
+	*(int*) (m + 8) = *(int*) (gm_CityEntity + 4);
 	*(int*) (m + 0xc) = -1;
 	m[0x36] = 2;
 	*(int*) (m + 0x58) = 4;
-	*(stamp14*) (m + 0x28) = (*(stamp14*)&g_7f4c00);
+	*(stamp14*) (m + 0x28) = (*(stamp14*)&gm_GameTime);
 	*(short*) (m + 0x2c) = 8;
 	*(int*) (m + 0x2e) = 0;
 	fcn_004c5530(m);

@@ -113,7 +113,7 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == ok && fcn_00525f60(e, 8)) {
+			if (d2_CurrentElementId == ok && fcn_00525f60(e, 8)) {
 				fcn_004e8240(info.f0, 0, 0, g_7f4c04 > 0xd ? 0xff : 3, 0xff);
 				fcn_005100f0(*(int*) (e + 4), -8);
 				h = fcn_004c5420(*(int*) (e + 4), 0x1cc, 4, 0x40000, 0);
@@ -126,7 +126,7 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 					io_FormatTextBuffer(text, 0x1e10, *(unsigned short*) e, o[9] == 0 ? 0x253 : o[0x166] + 0x27b);
 					fcn_00545d40(*(int*) (o + 4), -1, text, 0, 0x5fb, 0);
 				}
-			} else if (g_67d370 == cancel) {
+			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;
 			}
 		}

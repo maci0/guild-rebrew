@@ -2,7 +2,7 @@
 
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -25,14 +25,14 @@ void __cdecl fcn_00560d30(char* u)
 			if (*(int*) (u + 0xb4) != -1) {
 				q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 1, *(int*) (u + 0xb4));
 			}
-			*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
-			*(pos14_7f4c00*) (u + 0x44) = g_7f4c00;
+			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
+			*(pos14_7f4c00*) (u + 0x44) = gm_GameTime;
 			if (q != 0) {
 				fcn_00529160(e, q, *(unsigned short*) h, u);
 			} else {
 				fcn_00529160(e, 0, *(unsigned short*) h, u);
 			}
-			*(pos14_7f4c00*) (u + 0x60) = g_7f4c00;
+			*(pos14_7f4c00*) (u + 0x60) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 0x1e, 0);
 			*(pos14_7f4c00*) (u + 0xb8) = *(pos14_7f4c00*) (u + 0x52);
 			fcn_00500bb0((pos14_7f4c00*) (u + 0xb8), 6, 0, 0);

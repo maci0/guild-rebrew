@@ -3,7 +3,7 @@
  * choice loop. Chosen action opens the guest/order subdialog, runs the Wirtshaus
  * action helpers (0x5a0cd0, 0x492d60, 0x493000) and formats the result lines.
  * Stack slots are bound to the native frame offsets (frame 0x390). */
-extern int g_100f1dc; extern int g_772514; extern unsigned char g_773d75; extern unsigned short g_774970; extern unsigned short g_7f4c04; extern char g_7f4ca4[];
+extern int g_100f1dc; extern int d2_CurrentWindowId; extern unsigned char g_773d75; extern unsigned short g_774970; extern unsigned short g_7f4c04; extern char g_7f4ca4[];
 #include <math.h>
 #include <string.h>
 
@@ -112,7 +112,7 @@ void __cdecl fcn_005a1430(void)
   v7 = fcn_00509570(v3);
   v6 = fcn_00470820(0,0,(char *)0x6aa908);
   d2_SetForm(v6,0);
-  fcn_005340f0((*(int *)&g_772514));
+  fcn_005340f0((*(int *)&d2_CurrentWindowId));
   fcn_00471b60(v6);
   d2_SetForm(v6,1);
   d2_SetOverlayAnimation(0,0);
@@ -233,7 +233,7 @@ label_5a15b5:
         }
         v6 = fcn_00470820(0,0,(char *)0x6aa8f0);
         d2_SetForm(v6,0);
-        fcn_005340f0((*(int *)&g_772514));
+        fcn_005340f0((*(int *)&d2_CurrentWindowId));
         fcn_00471b60(v6);
         d2_SetForm(v6,1);
         d2_SetOverlayAnimation(0,0);
@@ -305,7 +305,7 @@ label_5a1b81:
                     else if (v2) {
                       v2 = 0;
                       d2_SetForm(v6,4);
-                      fcn_0046f2c0((*(int *)&g_772514),1);
+                      fcn_0046f2c0((*(int *)&d2_CurrentWindowId),1);
                       io_AppendText(0x6811b0);
                       v10 = v22;
                       v31 = 3;
@@ -330,7 +330,7 @@ label_5a1b81:
                           v2 = 1;
                           d2_SetForm(v6,4);
                           io_AppendText(0x6811b0);
-                          fcn_0046f2c0((*(int *)&g_772514),1);
+                          fcn_0046f2c0((*(int *)&d2_CurrentWindowId),1);
                           fcn_005a0cd0(&v14,v24,v22[v11 * 0x43 + 1],v6,3,0x96,0);
                           fcn_00492d60(&v14,v3,v22[v11 * 0x43 + 1]);
                           fcn_00493000(&v14);

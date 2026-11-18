@@ -26,7 +26,7 @@ typedef struct
 	int x58;
 } Gauge;
 
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_772534;
 extern char* g_1015ea0;
 extern char* g_14abc28;
@@ -79,12 +79,12 @@ void __cdecl d2_CreateGauge(int x, int y, Gauge* s)
 {
 	int i;
 
-	s->icon = fcn_0046f740(x, y, 0x5db, g_772514);
+	s->icon = fcn_0046f740(x, y, 0x5db, d2_CurrentWindowId);
 	((Ctl*)g_1015ea0)[s->icon].x5c = 1;
-	s->label = d2_ShowTxt(x - 0x36, y - 0x11, g_14abc28, g_772514);
+	s->label = d2_ShowTxt(x - 0x36, y - 0x11, g_14abc28, d2_CurrentWindowId);
 	((Ctl*)g_1015ea0)[s->label].x18 = 0xa0;
 	((Ctl*)g_1015ea0)[s->label].x6c = 1;
-	s->value = d2_ShowTxt(x - 0x36, y + 0x44, "", g_772514);
+	s->value = d2_ShowTxt(x - 0x36, y + 0x44, "", d2_CurrentWindowId);
 	((Ctl*)g_1015ea0)[s->value].x18 = 0xa0;
 	((Ctl*)g_1015ea0)[s->value].x6c = 1;
 	s->x1c = -1;
@@ -108,12 +108,12 @@ void __cdecl d2_UpdateGauge(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 
 	rec = lpGebaeudePROT + **(unsigned char**) (e + 0x16c) * 0x24d;
 	d2_SetForm(g->win, 3);
-	g->x1c = fcn_0046f740(g->x + 2, g->y, *(int*) (e + 0x18c), g_772514);
+	g->x1c = fcn_0046f740(g->x + 2, g->y, *(int*) (e + 0x18c), d2_CurrentWindowId);
 	fcn_00517c00(*(unsigned short*) e, 1, 1, buf);
 	fcn_0046f940(g->label, buf);
 	((fcn_005b59c0_Ctl*)g_1015ea0)[g->label].x6c = 1;
 	((fcn_005b59c0_Ctl*)g_1015ea0)[g->label].x18 = 0xa0;
-	g->bar = fcn_004677e0(g->x - 8, g->y + 0x32, 0x40, 0, 0x64, 0x75, 0x42, g_772514);
+	g->bar = fcn_004677e0(g->x - 8, g->y + 0x32, 0x40, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 	((fcn_005b59c0_Ctl*)g_1015ea0)[g->bar].x4c = 1;
 	g->state = 1;
 	((fcn_005b59c0_Ctl*)g_1015ea0)[g->icon].x2f0 = (char*) e;

@@ -47,7 +47,7 @@ typedef struct House {
 extern float g_662d40[3];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_7e3a40[3];
-extern float g_7e3a50[3];
+extern float d3_CameraTargetRotation[3];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern char* g_7e2aa0;
@@ -83,7 +83,7 @@ void __cdecl fcn_0052cf20(Ent* e)
 
 	obj = e->obj;
 	fcn_004133e0(obj, &lo, &hi);
-	fcn_005ebbb9(m, ((View*)g_6b8014)->mat);
+	fcn_005ebbb9(m, ((View*)d3_ActiveCamera)->mat);
 	a = g_662d40[0] * -600.0f;
 	b = g_662d40[1] * -600.0f;
 	c = g_662d40[2] * -600.0f;
@@ -95,28 +95,28 @@ void __cdecl fcn_0052cf20(Ent* e)
 	q.y = p.y + off.y;
 	q.z = p.z + off.z;
 	h = fcn_00413d10((Vec3*) &q);
-	q.y = ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558) + h;
+	q.y = ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558) + h;
 	d.y = q.y - p.y;
 	fcn_004133e0(obj, &lo, &hi);
 	r = off.y / ((hi - lo) * 0.5f + d.y);
 	q.x = (float)(q.x - (r * off.x - off.x * 1.8));
 	q.z = (float)(q.z - (r * off.z - off.z * 1.8));
-	*(int*) &rot.x = *(int*) &((View*)g_6b8014)->rot.x;
-	*(int*) &rot.y = *(int*) &((View*)g_6b8014)->rot.y;
-	*(int*) &rot.z = *(int*) &((View*)g_6b8014)->rot.z;
-	fcn_00433780((View*)g_6b8014);
+	*(int*) &rot.x = *(int*) &((View*)d3_ActiveCamera)->rot.x;
+	*(int*) &rot.y = *(int*) &((View*)d3_ActiveCamera)->rot.y;
+	*(int*) &rot.z = *(int*) &((View*)d3_ActiveCamera)->rot.z;
+	fcn_00433780((View*)d3_ActiveCamera);
 	d3_ActiveCameraAnimation = 0;
-	g_6b5cbc = 0;
+	d3_CameraAnimating = 0;
 	h2 = fcn_00413d10((Vec3*) &q);
-	q.y = ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558) + h2;
-	g_7e3a50[0] = rot.x;
-	g_7e3a50[1] = rot.y;
-	g_7e3a50[2] = rot.z;
+	q.y = ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558) + h2;
+	d3_CameraTargetRotation[0] = rot.x;
+	d3_CameraTargetRotation[1] = rot.y;
+	d3_CameraTargetRotation[2] = rot.z;
 	g_7e3a40[0] = q.x;
 	g_7e3a40[1] = q.y;
 	g_7e3a40[2] = q.z;
-	fcn_00438b40((View*)g_6b8014, (Vec3*) &q);
-	fcn_00438cb0((View*)g_6b8014, &rot);
+	fcn_00438b40((View*)d3_ActiveCamera, (Vec3*) &q);
+	fcn_00438cb0((View*)d3_ActiveCamera, &rot);
 	s = (Save*) gm_GetEntityTableEntry((char*) (&((House*)g_7f4ca0)[g_774970]));
 	if (s != 0) {
 		*(int*) &s->pos.x = *(int*) &q.x;

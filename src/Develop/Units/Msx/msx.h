@@ -16,12 +16,12 @@ typedef char MSX_OFFSET_F11C[(offsetof(Chan_14cc460, f11c) == 0x11c) ? 1 : -1];
 typedef char MSX_OFFSET_F120[(offsetof(Chan_14cc460, f120) == 0x120) ? 1 : -1];
 typedef char MSX_OFFSET_NEXT[(offsetof(Chan_14cc460, next) == 0x124) ? 1 : -1];
 
-extern Chan_14cc460 g_6b71b0[10];
-extern Chan_14cc460 g_14cc460;
-extern char g_14cc360[];
-extern int g_6b71a4;
-extern int g_6b71a8;
-extern CRITICAL_SECTION g_14cc5a0;
+extern Chan_14cc460 msx_Tracks[10];
+extern Chan_14cc460 msx_NullTrack;
+extern char msx_TrackPath[];
+extern int msx_TrackDriver;
+extern int msx_AmbientDriver;
+extern CRITICAL_SECTION msx_TrackLock;
 
 void __cdecl fcn_0042b040(int handle, void* position);
 void __cdecl fcn_0042ad90(int handle, int mode);

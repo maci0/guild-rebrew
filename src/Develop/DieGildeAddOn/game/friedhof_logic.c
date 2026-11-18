@@ -1169,12 +1169,12 @@ int __cdecl gv_ValidateEntityAction(void* cmd)
 }
 #endif
 
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern char* g_entity_type_table;
 extern unsigned char g_773d75;
 extern unsigned char g_slot_table[2];
 extern int g_current_year;
-extern int g_699364;
+extern int gm_NextEntityId;
 extern int g_14cbca0;
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
@@ -1339,7 +1339,7 @@ int __cdecl gv_MoveSlotEntry(void* a)
 	gm_ResolveEntityById(&rec2, 0, 0, *(int*) ((char*) cmd + 4));
 	if (rec2 == 0 || *(unsigned short*) ((char*) rec2 + 0x27) == 0xffff ||
 	    (char*) g_slot_table + (*(unsigned short*) ((char*) rec2 + 0x27)) * 540 ==
-	        g_773da8)
+	        gm_CityEntity)
 		return -1;
 	if (*(unsigned char*) (g_entity_type_table + *(unsigned char*) rec2 +
 	    *(unsigned char*) rec2 * 588) != 0x1d)
@@ -1397,7 +1397,7 @@ done:
 	*(unsigned char*) ((char*) found2 + 0xc) = 0xff;
 	*(unsigned short*) ((char*) found + 0xa) = 0xff;
 	if (g_14cbca0 != -1)
-		g_699364 = *(int*) ((char*) cmd + 0x15);
+		gm_NextEntityId = *(int*) ((char*) cmd + 0x15);
 
 	count = *(int*) ((char*) cmd + 0x11);
 	if (count > 0) {

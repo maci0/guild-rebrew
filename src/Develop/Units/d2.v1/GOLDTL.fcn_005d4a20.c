@@ -35,10 +35,10 @@ extern char g_6811b0[];
 extern char g_68b300[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern volatile int g_6b7fac;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 
 int __cdecl fcn_0057ec20(int);
@@ -141,8 +141,8 @@ void __cdecl fcn_005d4a20(void)
 				d2_SetForm((int) dlg, 2);
 				io_AppendText((int) g_6811b0);
 				sel = -1;
-				*(int*) (g_772514 * 0x3cc + 0x1016194) = 0;
-				*(int*) (g_772514 * 0x3cc + 0x1016198) = 0;
+				*(int*) (d2_CurrentWindowId * 0x3cc + 0x1016194) = 0;
+				*(int*) (d2_CurrentWindowId * 0x3cc + 0x1016198) = 0;
 				if (mode == 2) {
 					d2_SetForm((int) dlg, 1);
 					io_AppendText(0x1cdd);
@@ -191,10 +191,10 @@ void __cdecl fcn_005d4a20(void)
 				}
 				if (count > 9) {
 					d2_SetForm((int) dlg, 2);
-					win = g_772514;
+					win = d2_CurrentWindowId;
 					d2_SetForm((int) dlg, 4);
 					io_AppendText((int) g_6811b0);
-					fcn_0046e830(-1, -1, g_772514, win, 0x767);
+					fcn_0046e830(-1, -1, d2_CurrentWindowId, win, 0x767);
 				} else {
 					d2_SetForm((int) dlg, 4);
 					io_AppendText((int) g_6811b0);
@@ -202,12 +202,12 @@ void __cdecl fcn_005d4a20(void)
 			}
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == sel) {
+			if (d2_CurrentElementId == sel) {
 				changed = 1;
 				mode = (mode == 2) ? 10 : 2;
 			} else {
 				for (i = 0; i < 0x3a; i++) {
-					if (keys[i] == g_67d370) {
+					if (keys[i] == d2_CurrentElementId) {
 						fcn_00471af0((int) dlg, 0);
 						q.kind = mode == 2 ? 3 : 4;
 						r = fcn_004fa5b0(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);

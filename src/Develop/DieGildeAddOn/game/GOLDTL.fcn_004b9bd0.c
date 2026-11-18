@@ -13,7 +13,7 @@ typedef struct Date {
 
 extern char g_868060[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(unsigned short*, int);
@@ -62,7 +62,7 @@ int __cdecl fcn_004b9bd0(int* a1)
 	}
 	if (count == 0)
 		return 0x400;
-	d = (*(Date*)&g_7f4c00);
+	d = (*(Date*)&gm_GameTime);
 	d.a++;
 	index = gm_RandomMod(count);
 	s = ss[index];

@@ -24,7 +24,7 @@ extern int g_1040494;
 extern int g_7746f0;
 extern int g_14b5f10;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
@@ -67,17 +67,17 @@ void __cdecl fcn_0052e7b0(char* e)
 		fcn_005186c0(*(unsigned short*) e, 1, 4, buf);
 		io_AppendText(g_6a2e8c, buf, pct);
 		d2_SetForm(g_6a25b8, 0);
-		x = (((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1;
-		d2_CurrentValueBar = fcn_004677e0(0x18, 0x6c, 0x30, 0, 0x64, 0x75, 0x442, g_772514);
+		x = (((Slot*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1;
+		d2_CurrentValueBar = fcn_004677e0(0x18, 0x6c, 0x30, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 		d2_SetElementValue(d2_CurrentValueBar, -0x7f, 0x7f, rel);
 		if (e[2] == 5 || e[2] == 6 || e[2] == 7) {
-			fcn_0046f740(x - 8, 0x30, *(int*) (e + 0x54), g_772514);
+			fcn_0046f740(x - 8, 0x30, *(int*) (e + 0x54), d2_CurrentWindowId);
 		}
 		if (kind == 0xb || kind == 0xc || kind == 0xa) {
 			v = *(unsigned char*) (e + 0x82);
-			fcn_0046f740(0x19, 0x7e, 0x5df, g_772514);
+			fcn_0046f740(0x19, 0x7e, 0x5df, d2_CurrentWindowId);
 			fcn_00534160(0x29, 0x7e, v, 0x4f1);
-			fcn_0046f740(0x19, 0x8c, 0x5e0, g_772514);
+			fcn_0046f740(0x19, 0x8c, 0x5e0, d2_CurrentWindowId);
 			fcn_00534160(0x29, 0x8c, *(unsigned char*) (e + 0x83), 0x4f1);
 		}
 	}
@@ -86,13 +86,13 @@ void __cdecl fcn_0052e7b0(char* e)
 		io_AppendText(buf);
 	}
 	d2_SetForm(g_6a25b8, 0);
-	x = (((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1;
+	x = (((Slot*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1;
 	if (e != 0) {
-		g_6a25d8 = fcn_0046f740(x, 0x38, *(int*) (e + 0x18c), g_772514);
+		g_6a25d8 = fcn_0046f740(x, 0x38, *(int*) (e + 0x18c), d2_CurrentWindowId);
 		((Ctl*)g_1015ea0)[g_6a25d8].owner = e;
 		((Ctl*)g_1015ea0)[g_6a25d8].linked = 1;
 	}
 	else {
-		fcn_0046f740(x, 0x38, 0x521, g_772514);
+		fcn_0046f740(x, 0x38, 0x521, d2_CurrentWindowId);
 	}
 }

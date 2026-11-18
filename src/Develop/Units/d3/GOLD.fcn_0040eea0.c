@@ -6,7 +6,7 @@ void __cdecl fcn_00433780(void*);
 
 void __cdecl fcn_0040eea0(void)
 {
-	fcn_00433780(g_6b8014);
+	fcn_00433780(d3_ActiveCamera);
 	*(int*) 0x6310e8 = 0;
 	*(int*) 0x6310e4 = 0;
 }

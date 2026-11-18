@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern double g_6640e8;
 extern double g_6629c8;
 int __cdecl gm_LookupEntityRecordById(int);
@@ -51,7 +51,7 @@ void __cdecl fcn_005609c0(char* jobState)
 				i += 1;
 			}
 		}
-		*(pos14_7f4c00*) (jobState + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (jobState + 0x52) = gm_GameTime;
 		fcn_00500bb0((unsigned int*) (jobState + 0x52), 2, gm_RandomMod(0x1e), 0);
 		*(int*) (jobState + 0x70) = *(int*) (jobState + 0x70) + 1;
 		return;

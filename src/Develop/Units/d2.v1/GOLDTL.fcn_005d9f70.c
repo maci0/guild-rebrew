@@ -16,11 +16,11 @@ typedef struct {
 extern Rec2d_9a3800 g_9a3800[512];
 #include "GOLDTL.fcn_005d9f70_gconf.h"
 extern char g_6ac4c8[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 int __cdecl fcn_004f63d0(int, int*, unsigned short);
 void __cdecl fcn_004f6780(int n, Rec2d_9a3800* arr);
@@ -75,9 +75,9 @@ int __cdecl fcn_005d9f70(unsigned short* entity, unsigned short* other)
 	dlg = fcn_00470820(0, 0, g_6ac4c8);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 2);
-	w = g_772514;
+	w = d2_CurrentWindowId;
 	d2_SetForm(dlg, 4);
-	fcn_0046e830(-1, -1, g_772514, w, 0x767);
+	fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1742, *other);
@@ -86,7 +86,7 @@ int __cdecl fcn_005d9f70(unsigned short* entity, unsigned short* other)
 		fcn_005c91c0(g_14aa314[rows[k].x1c].name, 10, k * 0x28 + 10, 0x13b, 0x55);
 		if (fcn_004f4830(rows[k].x1c, &st) != 0 && st.count != 0) {
 			for (i = 0; i < st.count; i++) {
-				fcn_0046f740(i * 0x10 + 0x154, k * 0x28 + 10, 0x526, g_772514);
+				fcn_0046f740(i * 0x10 + 0x154, k * 0x28 + 10, 0x526, d2_CurrentWindowId);
 			}
 		}
 	}
@@ -107,7 +107,7 @@ int __cdecl fcn_005d9f70(unsigned short* entity, unsigned short* other)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == sel) {
+			if (d2_CurrentElementId == sel) {
 				fcn_005d9ca0(entity, other, n, 0);
 				g_774654 = 3;
 			}

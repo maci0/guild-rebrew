@@ -30,7 +30,7 @@ void __cdecl fcn_00407800(char* e, int mode, char* name)
 	} else if (mode == 3) {
 		slot = (int*) (e + 0x6c);
 	}
-	saved_mode = g_6b8010;
+	saved_mode = d3_CurrentContextIndex;
 	if (name != 0) {
 		fcn_004432d0(fcn_00413190(*(int*) (e + 0x88)), 1);
 		if (*slot != 0) {

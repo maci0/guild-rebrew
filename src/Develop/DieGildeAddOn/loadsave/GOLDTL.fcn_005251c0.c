@@ -30,7 +30,7 @@ int __cdecl fcn_005251c0(void* file)
 	fcn_004b1e60();
 	if (!ls_ReadVfsDataChecked(&v, 4, 1, file))
 		return 0;
-	g_67fca8 = g_67fca0 + v;
+	g_67fca8 = hst_HistoryTextBase + v;
 	if (!ls_ReadVfsDataChecked(&v, 4, 1, file))
 		return 0;
 	g_67fcb4 = g_67fcac + v;

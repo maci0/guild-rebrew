@@ -22,7 +22,7 @@ typedef struct {
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 extern trade_868080 g_868080[];
 extern unsigned char g_6a375c;
@@ -117,7 +117,7 @@ void __cdecl fcn_005a92c0(char* p)
 				msg[4] = 0x69;
 				*(int*) (msg + 0xc) = -1;
 				msg[0x36] = 9;
-				*(Stamp5a92*) (msg + 0x28) = (*(Stamp5a92*)&g_7f4c00);
+				*(Stamp5a92*) (msg + 0x28) = (*(Stamp5a92*)&gm_GameTime);
 				if (fcn_005809f0() == 0) {
 					fcn_00500bb0((Stamp5a92*) (msg + 0x28), 0, 5, 0);
 				} else {

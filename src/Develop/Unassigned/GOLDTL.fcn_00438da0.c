@@ -39,7 +39,7 @@ void __cdecl fcn_00438da0(float w, float h, float x, float y, float znear, float
 	g_10529d4 = h;
 	g_10529c8 = znear;
 	g_10421a0 = zfar;
-	g_1052bc0 = (g_1052bbc = w * 0.5f) + x;
+	d3_ViewportCenterX = (g_1052bbc = w * 0.5f) + x;
 	g_10529c4 = x;
 	g_1043288 = y;
 	g_1052bc8 = (g_1052bb4 = h * 0.5f) + y;
@@ -51,11 +51,11 @@ void __cdecl fcn_00438da0(float w, float h, float x, float y, float znear, float
 	top = (int) (y + 0.5f);
 	right = (int) (w + x);
 	bottom = (int) (h + y);
-	if (left != g_1042570 || right != g_1042578 || top != g_1042574 || bottom != g_104257c) {
+	if (left != g_1042570 || right != d3_ViewportRight || top != g_1042574 || bottom != d3_ViewportBottom) {
 		g_1042570 = left;
 		g_1042574 = top;
-		g_1042578 = right;
-		g_104257c = bottom;
+		d3_ViewportRight = right;
+		d3_ViewportBottom = bottom;
 	}
 	fcn_00437bc0();
 	fcn_00436df0(g_1042fa4 + g_1042fa4, w / h, w, h, x, y, znear, zfar);

@@ -21,9 +21,9 @@ typedef struct {
 } Map5b4f;
 
 extern int g_67a370;
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char g_6abad8[];
@@ -75,7 +75,7 @@ void __cdecl fcn_005b4f70(void)
 	int k;
 
 	frame = 0;
-	t = g_7e46ac;
+	t = main_LoopFlags;
 	d = fcn_00470820(0, 0, g_6abad8);
 	fcn_00471b60(d);
 	d2_SetForm(d, 0);
@@ -88,29 +88,29 @@ void __cdecl fcn_005b4f70(void)
 	h7 = fcn_00472250(d, 0, io_AppendText(g_6aba48, 2));
 	while (fcn_005373e0(fcn_005b4f70, t) != 0) {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == h1) {
+			if (d2_CurrentElementId == h1) {
 				fcn_005b3490();
 			}
-			if (g_67d370 == h2) {
+			if (d2_CurrentElementId == h2) {
 				fcn_005b3660();
 			}
-			if (g_67d370 == h3) {
+			if (d2_CurrentElementId == h3) {
 				fcn_005b37d0();
 			}
-			if (g_67d370 == h4) {
+			if (d2_CurrentElementId == h4) {
 				fcn_005b39c0();
 			}
-			if (g_67d370 == h5) {
+			if (d2_CurrentElementId == h5) {
 				fcn_00471af0(d, 0);
 				fcn_005b3b60();
 				fcn_00471af0(d, 1);
 			}
-			else if (g_67d370 == h6) {
+			else if (d2_CurrentElementId == h6) {
 				fcn_00471af0(d, 0);
 				fcn_005b4500();
 				fcn_00471af0(d, 1);
 			}
-			else if (g_67d370 == h7) {
+			else if (d2_CurrentElementId == h7) {
 				fcn_00471af0(d, 0);
 				fcn_005b4c80();
 				fcn_00471af0(d, 1);

@@ -15,14 +15,14 @@ int __cdecl ch_DeclareAction(int idx, int handler, unsigned char kind, const cha
 	if (idx > 0x3f) {
 		return 0;
 	}
-	if (g_14d0c40[idx].handler != 0) {
+	if (ch_ActionDefinitions[idx].handler != 0) {
 		ReportClientMessage("slot already in use");
 		return 0;
 	}
-	g_14d0c40[idx].handler = handler;
-	g_14d0c40[idx].kind = kind;
-	g_14d0c40[idx].param = param;
-	strcpy(g_14d0c40[idx].name, name);
+	ch_ActionDefinitions[idx].handler = handler;
+	ch_ActionDefinitions[idx].kind = kind;
+	ch_ActionDefinitions[idx].param = param;
+	strcpy(ch_ActionDefinitions[idx].name, name);
 	return 1;
 }
 unsigned char _dpad_1468ae0[3104] = {

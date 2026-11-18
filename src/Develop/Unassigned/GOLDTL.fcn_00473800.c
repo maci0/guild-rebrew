@@ -39,7 +39,7 @@ extern Anim_100e7a0 g_100e7a0[0x30];
 
 extern char* g_772500;
 extern int g_67d3ac;
-extern int g_772568;
+extern int d2_ResourceOffset;
 extern char* g_14a567c;
 
 void __cdecl fcn_0047a040(int, int, int, int);
@@ -69,13 +69,13 @@ void __cdecl fcn_00473800(Ctx* c, int x, int y)
 	int id;
 	int v;
 
-	if (g_7725c8 != 0) {
+	if (d2_SuppressOverlay != 0) {
 		return;
 	}
-	x0 = g_7725f8;
+	x0 = d2_ClipLeft;
 	y0 = g_7725fc;
-	x1 = g_67d964;
-	y1 = g_67d968;
+	x1 = d2_ClipRight;
+	y1 = d2_ClipBottom;
 	fcn_0047a040(0, 0, c->w, c->h);
 	if (g_67d8cc == -1) {
 		fcn_0047cba0(x, y, c, (*(int*)&g_7725c0), (*(int*)&g_7725c4) & 0xffff);
@@ -85,15 +85,15 @@ void __cdecl fcn_00473800(Ctx* c, int x, int y)
 		fcn_0047cd70(g_67d8cc, c);
 	}
 	old = d2_CurrentFont;
-	fcn_00472880(g_67d398 + 1);
+	fcn_00472880(d2_DefaultFont + 1);
 	k = 0;
 	for (i = 0; i < 6; i++) {
-		p = &((Item*)DisplayCounters)[i];
+		p = &((Item*)d2_DisplayCounters)[i];
 		if (p->id != -1) {
 			px = x + ((Cls*)g_772500)[g_67d3ac].x50 + k % 3 * 0x1a;
-			py = (g_1015ea4 + 0x1a) * (k / 3) + y;
+			py = (d2_FontHeight + 0x1a) * (k / 3) + y;
 			h = d2_GetResourceData(p->id);
-			if (fcn_0047cc80(px, py, c, h, g_772568, 0.5f, 0)) {
+			if (fcn_0047cc80(px, py, c, h, d2_ResourceOffset, 0.5f, 0)) {
 				v = p->value;
 				id = p->id;
 				if (id >= 0xdf && id < 0x3bb) {
@@ -105,7 +105,7 @@ void __cdecl fcn_00473800(Ctx* c, int x, int y)
 				} else {
 					sprintf(buf, "%i", v);
 				}
-				fcn_0046bd20(px - 8, py + 0x18, 0x28, g_1015ea4, c, buf, 8);
+				fcn_0046bd20(px - 8, py + 0x18, 0x28, d2_FontHeight, c, buf, 8);
 			}
 			k++;
 		}

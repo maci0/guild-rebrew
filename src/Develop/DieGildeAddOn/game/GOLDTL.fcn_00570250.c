@@ -11,7 +11,7 @@ struct house {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_77670b;
 extern char g_77e020[];
 extern char* g_14ad590[];
@@ -37,10 +37,10 @@ void __cdecl fcn_00570250(char* u)
 			if (*(int*) (u + 0xac) > 0x1a) {
 				*(int*) (u + 0x70) = 1;
 			}
-			*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), gm_RandomMod(4) + 8, 0, 0);
 		} else {
-			*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 1, 0, 0);
 		}
 		break;

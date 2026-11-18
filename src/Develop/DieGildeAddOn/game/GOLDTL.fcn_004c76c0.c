@@ -20,7 +20,7 @@ int __cdecl fcn_004c76c0(int cmd, char* result)
 	int i;
 
 	if (g_14cbca0 != -1)
-		g_699364 = *(int*) (cmd + 0x10);
+		gm_NextEntityId = *(int*) (cmd + 0x10);
 	if (*(int*) (cmd + 0x16) == -1) {
 		i = 0xffff;
 	}

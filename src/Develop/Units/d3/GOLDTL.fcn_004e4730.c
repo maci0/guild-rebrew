@@ -4,14 +4,14 @@ extern char g_77666a;
 extern int* cut_ActiveCutscene;
 extern int g_77250c;
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern int g_772f4c;
 extern int g_6791c8;
 extern int g_67a370;
 extern int evt_LastGfxScriptId;
 extern int g_68bfc4;
 extern unsigned char* g_772f50;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 extern char g_67d67c[];
 
@@ -61,7 +61,7 @@ void __cdecl fcn_004e4730(char* a1)
 	}
 	if ((((char*)cut_ActiveCutscene)[0x26] & 0x20) != 0)
 		fcn_00476970(g_77250c);
-	if (fcn_00500e20(&(*(int*)&g_7f4c00)) == 3)
+	if (fcn_00500e20(&(*(int*)&gm_GameTime)) == 3)
 		fcn_0052a7d0();
 	g_6791c8 = -2;
 	g_772f4c++;
@@ -76,5 +76,5 @@ void __cdecl fcn_004e4730(char* a1)
 		fcn_00473150((*(int*)&g_772f50));
 		(*(int*)&g_772f50) = 0;
 	}
-	fcn_004730c0(0, 0, g_1040494, g_1040490, g_67d67c, 0x5a, 0xa);
+	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x5a, 0xa);
 }

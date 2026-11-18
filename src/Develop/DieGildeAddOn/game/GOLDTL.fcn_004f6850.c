@@ -5,7 +5,7 @@ typedef struct {
 	unsigned short sec;
 } Time;
 
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -45,7 +45,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 	case 0:
 		msg[4] = 0x5c;
 		msg[0x36] = 1;
-		*(int*) (msg + 0x28) = g_7f4c00;
+		*(int*) (msg + 0x28) = gm_GameTime;
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
@@ -59,7 +59,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 	case 1:
 		msg[4] = 0x5b;
 		msg[0x36] = 1;
-		*(int*) (msg + 0x28) = g_7f4c00;
+		*(int*) (msg + 0x28) = gm_GameTime;
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
@@ -73,7 +73,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 	case 2:
 		msg[4] = 0x5c;
 		msg[0x36] = 1;
-		*(int*) (msg + 0x28) = g_7f4c00;
+		*(int*) (msg + 0x28) = gm_GameTime;
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
@@ -87,7 +87,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 	case 3:
 		msg[4] = 0x5b;
 		msg[0x36] = 1;
-		*(int*) (msg + 0x28) = g_7f4c00;
+		*(int*) (msg + 0x28) = gm_GameTime;
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
@@ -135,7 +135,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		*(char*) (pkt + 0x30) = (char) n;
 		*(int*) (pkt + 0x0c) = *(int*) (g_7f4ca4 + (unsigned int) g_774970 * 0x21c);
 		*(int*) (pkt + 0x14) = -1;
-		*(int*) (pkt + 0x18) = g_7f4c00;
+		*(int*) (pkt + 0x18) = gm_GameTime;
 		*(int*) (pkt + 0x1c) = g_7f4c04;
 		*(int*) (pkt + 0x20) = g_7f4c08;
 		*(unsigned short*) (pkt + 0x24) = g_7f4c0c;

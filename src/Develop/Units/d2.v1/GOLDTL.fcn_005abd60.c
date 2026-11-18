@@ -24,7 +24,7 @@ extern char g_7f4ca0[];
 extern char* g_77255c;
 extern char* g_772500;
 extern char* g_14a6554;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
@@ -64,7 +64,7 @@ void __cdecl fcn_005abd60(void)
 	dlg = fcn_00470820(0, 0, s_6ab048);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	dirty = 1;
 	g_100f1dc = -1;
@@ -83,7 +83,7 @@ void __cdecl fcn_005abd60(void)
 		}
 		if (dirty != 0) {
 			d2_SetForm(dlg, 1);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			io_AppendText(0x196b);
 			half = *(int*) (g_77255c + 0xc) / 2;
 			x = half - *(short*) (g_772500 + 0x1ebd8) - 0x87;
@@ -94,7 +94,7 @@ void __cdecl fcn_005abd60(void)
 				items[i].x30 = items[i].x0 != 0;
 				fcn_005ca560(&items[i]);
 				items[i].x30 = items[i].x0 != 0;
-				fcn_005caaa0(items[i].x10, items[i].x14, g_772514, &items[i]);
+				fcn_005caaa0(items[i].x10, items[i].x14, d2_CurrentWindowId, &items[i]);
 				if (items[i].x0 != 0) {
 					io_FormatTextBuffer(buf, 0x196d, a[i]);
 				}

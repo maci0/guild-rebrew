@@ -106,7 +106,7 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 	if (base < w->count) {
 		for (k = base; k < w->count; k++) {
 			tile = &((Tile46b5f0*) g_1015ea0)[w->layers[k]];
-			if (tile->skip78 == 0 && tile->y14 < y + g_1015ea4
+			if (tile->skip78 == 0 && tile->y14 < y + d2_FontHeight
 			    && y < tile->y14 + tile->h1c && newflags != 0x40) {
 				sum += 6 + tile->w18 + g_67d384;
 			}
@@ -141,11 +141,11 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 				flag = 1;
 				break;
 			case '[':
-				tex = (char*) d2_GetResourceData(*(int*) 0x67d3b4 + (d2_CurrentFont - g_67d398) * 2);
+				tex = (char*) d2_GetResourceData(*(int*) 0x67d3b4 + (d2_CurrentFont - d2_DefaultFont) * 2);
 				special = 0;
 				break;
 			case ']':
-				tex = (char*) d2_GetResourceData(*(int*) 0x67d3b4 + (d2_CurrentFont - g_67d398) * 2);
+				tex = (char*) d2_GetResourceData(*(int*) 0x67d3b4 + (d2_CurrentFont - d2_DefaultFont) * 2);
 				special = 1;
 				break;
 			}
@@ -169,7 +169,7 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 					if (tile->skip78 == 0) {
 						while (tile->x10 < rec->f108 + x
 						       && x < tile->x10 + tile->w18 + 6
-						       && y + g_1015ea4 > tile->y14
+						       && y + d2_FontHeight > tile->y14
 						       && y < tile->y14 + tile->h1c
 						       && newflags != 0x40) {
 							x = tile->x10 + tile->w18 + 6;

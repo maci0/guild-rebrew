@@ -156,8 +156,8 @@ void __cdecl cut_MainDuell(char* a0)
     g_9afde0 = (int) &sA;
     g_772f58 = 0;
     g_772f59 = 0;
-    fcn_004fe2e0((char*) &sB, g_6b8010, 0, 0, 0, (int*) 0x68cdd0);
-    fcn_004fe2e0((char*) &sA, g_6b8010, 0, 0, 0, (int*) 0x68cdb8);
+    fcn_004fe2e0((char*) &sB, d3_CurrentContextIndex, 0, 0, 0, (int*) 0x68cdd0);
+    fcn_004fe2e0((char*) &sA, d3_CurrentContextIndex, 0, 0, 0, (int*) 0x68cdb8);
     if (sB.entity != 0 && sA.entity != 0) {
     fcn_00407800((char*) sB.entity, 2, (char*) 0x68cdac);
     *(unsigned char*) (sB.entity + 0x240) = 4;

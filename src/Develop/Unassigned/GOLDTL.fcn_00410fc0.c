@@ -1,7 +1,7 @@
 
 
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern int g_6791c8;
 int __cdecl fcn_00422460(int a, int b);
 int __cdecl fcn_00423670(int o, int a, int b);
@@ -12,7 +12,7 @@ int __cdecl PlaySample3D(int* a, int* b, int* c, int* d)
 {
 	int o;
 
-	if (*(int*) (g_6b7e98 + 0x104) != g_6791c8) {
+	if (*(int*) (evt_CurrentScript + 0x104) != g_6791c8) {
 		return 0;
 	}
 	o = fcn_00422460(0, *c);

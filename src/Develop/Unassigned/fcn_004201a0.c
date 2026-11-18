@@ -1,5 +1,5 @@
-extern char g_14cc5a0[];
-extern int g_6b71a4;
+extern char msx_TrackLock[];
+extern int msx_TrackDriver;
 
 __declspec(dllimport) void __stdcall EnterCriticalSection(void* lpCriticalSection);
 __declspec(dllimport) void __stdcall LeaveCriticalSection(void* lpCriticalSection);
@@ -15,17 +15,17 @@ int __cdecl fcn_004201a0(void* p)
 {
 	int v;
 
-	if (g_6b71a4 == 0) {
+	if (msx_TrackDriver == 0) {
 		return 1;
 	}
-	EnterCriticalSection(g_14cc5a0);
+	EnterCriticalSection(msx_TrackLock);
 	v = *(int*) ((char*) p + 0x100);
 	if (v != 0) {
 		if (fcn_0042af10(v) == 4) {
-			LeaveCriticalSection(g_14cc5a0);
+			LeaveCriticalSection(msx_TrackLock);
 			return 1;
 		}
 	}
-	LeaveCriticalSection(g_14cc5a0);
+	LeaveCriticalSection(msx_TrackLock);
 	return 0;
 }

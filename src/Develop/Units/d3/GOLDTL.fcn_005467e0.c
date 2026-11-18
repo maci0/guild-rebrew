@@ -16,7 +16,7 @@ void __cdecl fcn_005467e0(int* s)
 
 	h = (char*) s[2];
 	if (s[3] != 0) {
-		save = g_6b8010;
+		save = d3_CurrentContextIndex;
 		s[2] = 0;
 		fcn_004432d0(0, 1);
 		if (h != 0 && fcn_00445600(0, 0x1c0, h, 0) != 0) {

@@ -1,4 +1,4 @@
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_772500;
 extern int g_77255c;
 extern int g_14ce8e0;
@@ -34,7 +34,7 @@ void __cdecl fcn_005a1e40(int a0, int* a1)
 	dlg = fcn_00470820(0, 0, "locations\\Wirtshaus\\Stammtisch");
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	src = (int*) ((char*) a1 + 0x1c);
 	for (;;) {
@@ -59,7 +59,7 @@ void __cdecl fcn_005a1e40(int a0, int* a1)
 		}
 		if (changed) {
 			d2_SetForm(dlg, 1);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			io_AppendText((char*) 0x188c, a0);
 			if (n == 0) {
 				io_AppendText((char*) 0x188e);
@@ -73,12 +73,12 @@ void __cdecl fcn_005a1e40(int a0, int* a1)
 					p[4] = (i % 2 + 1) * third + remainder_half + (*(short*) (g_772500 + 0x1ebd8) + 10) * (i % 2) - 10;
 					p[5] = (i / 2) * 0x82 + 100;
 					fcn_005ca560(p);
-					fcn_005ca740(p[4], p[5], g_772514, 0x54, p, 1);
+					fcn_005ca740(p[4], p[5], d2_CurrentWindowId, 0x54, p, 1);
 					p += 0xe;
 				}
 			}
 			d2_SetForm(dlg, 2);
-			fcn_0046f2c0(g_772514, 1);
+			fcn_0046f2c0(d2_CurrentWindowId, 1);
 			if (n == 4) {
 				io_AppendText((char*) 0x1892);
 			}

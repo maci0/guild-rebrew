@@ -67,18 +67,18 @@ void __cdecl fcn_004c2860(void)
 			idx = slot * 0x114;
 			if (*(char*) (0x68822a + idx) != 0) {
 				fcn_0064d41a(g_772a10, (char*) 0x68a448, (char*) (0x688128 + idx));
-				p = g_772d1c;
+				p = tp_msx_CurrentTrack;
 				*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) - 0x1e);
 				*(char*) (0x68822a + idx) = 0;
 				if (p != 0) {
 					fcn_00420120((int) p, 1);
-					strcpy(g_772d58, (char*) g_772d1c);
+					strcpy(g_772d58, (char*) tp_msx_CurrentTrack);
 					p = 0;
 					g_689d20 = 1;
-					g_772d1c = p;
+					tp_msx_CurrentTrack = p;
 				}
 			} else {
-				p = g_772d1c;
+				p = tp_msx_CurrentTrack;
 			}
 			*(char*) (0x688128 + idx) = 0;
 			if (p != 0) {
@@ -89,21 +89,21 @@ void __cdecl fcn_004c2860(void)
 		g_772e64 = fcn_00500e20((int*) 0x7f4c00);
 		return;
 	}
-	if (g_772d1c != 0) {
-		if (g_772d1c->active != 0 || g_772d1c->b105 != 0) {
+	if (tp_msx_CurrentTrack != 0) {
+		if (tp_msx_CurrentTrack->active != 0 || tp_msx_CurrentTrack->b105 != 0) {
 			goto check;
 		}
 		slot = fcn_004c27f0();
 		if (slot >= 0) {
 			idx = slot * 0x114;
 			*(char*) (0x68822a + idx) = 0;
-			if (g_772d1c->f108 - g_772d1c->f10c < 0x4e20) {
+			if (tp_msx_CurrentTrack->f108 - tp_msx_CurrentTrack->f10c < 0x4e20) {
 				*(char*) (0x688128 + idx) = 0;
 			}
 			fcn_0064d41a(g_772a10, (char*) 0x68a3f8, (char*) (0x688128 + idx));
 		}
-		strcpy(g_772d58, (char*) g_772d1c);
-		g_772d1c = 0;
+		strcpy(g_772d58, (char*) tp_msx_CurrentTrack);
+		tp_msx_CurrentTrack = 0;
 		g_689d20 = now;
 		g_772e60 = (int) ((g_6628a0 - g_6819b0) * g_664ea4);
 		fcn_0064d41a(g_772a10, (char*) 0x68a3cc, now, g_772e60);
@@ -112,7 +112,7 @@ void __cdecl fcn_004c2860(void)
 	goto noptr;
 check:
 	cc = g_7746cc;
-	if ((unsigned int) (now - g_772e68) > 0x9c40 && g_772d1c != g_772d24) {
+	if ((unsigned int) (now - g_772e68) > 0x9c40 && tp_msx_CurrentTrack != g_772d24) {
 		if ((g_7746c4 != 0 && g_772e58 != g_7746c4) ||
 		    (g_7746c8 != 0 && g_772e58 != g_7746c8) ||
 		    (g_7746c4 == 0 && g_7746c8 == 0 && g_772e58 != 0)) {

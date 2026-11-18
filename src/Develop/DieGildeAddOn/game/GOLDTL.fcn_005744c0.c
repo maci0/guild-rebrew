@@ -6,7 +6,7 @@ extern char* g_7747b8;
 #pragma pack(push, 1)
 typedef struct { unsigned char unknown00[0x243]; unsigned int period; unsigned char unknown247[6]; } Building5744c0;
 #pragma pack(pop)
-extern char* g_773da8;
+extern char* gm_CityEntity;
 char __cdecl fcn_00413680(int, int, void*, void*);
 int __cdecl fcn_00415300(int);
 int __cdecl fcn_004234e0(int, int, int, int, int, int, int);
@@ -84,7 +84,7 @@ void __cdecl fcn_005744c0(int a0)
 	char v22[0x200];
 
 	v5 = a0;
-	v30 = g_6b8010;
+	v30 = d3_CurrentContextIndex;
 	v15 = 0;
 	if (*(int*) (v5 + 0x84) != -1 && !fcn_004c4450(*(int*) (v5 + 0x84))) {
 		return;
@@ -93,11 +93,11 @@ void __cdecl fcn_005744c0(int a0)
 	v8 = *(int*) (v5 + 0x70) + 2;
 	switch (v8) {
 	case 2:
-		if (fcn_00500cb0((void*) (v5 + 0x52), (void*) &g_7f4c00) > 0
+		if (fcn_00500cb0((void*) (v5 + 0x52), (void*) &gm_GameTime) > 0
 			|| !(*(unsigned char*) (v5 + 0x78) & 2)) {
 			break;
 		}
-		if (*(int*) (v5 + 0xac) != *(int*) ((int) g_773da8 + 4)) {
+		if (*(int*) (v5 + 0xac) != *(int*) ((int) gm_CityEntity + 4)) {
 			v8 = fcn_00508e40(*(int*) (v5 + 0xac));
 			if (v8) {
 				*(int*) (v5 + 0xcc) = fcn_004c5150(-1, *(int*) (v5 + 0xac),
@@ -257,10 +257,10 @@ LfailB:
 				v11 += 1;
 			} while (v11 < v18[32]);
 		}
-		*(int*) (v5 + 0x52) = g_7f4c00.a;
-		*(int*) (v5 + 0x56) = g_7f4c00.b;
-		*(int*) (v5 + 0x5a) = g_7f4c00.c;
-		*(unsigned short*) (v5 + 0x5e) = (unsigned short) g_7f4c00.d;
+		*(int*) (v5 + 0x52) = gm_GameTime.a;
+		*(int*) (v5 + 0x56) = gm_GameTime.b;
+		*(int*) (v5 + 0x5a) = gm_GameTime.c;
+		*(unsigned short*) (v5 + 0x5e) = (unsigned short) gm_GameTime.d;
 		fcn_00500bb0((void*) (v5 + 0x52), 0, 10, 0);
 		*(int*) (v5 + 0x70) = *(int*) (v5 + 0x70) + 1;
 		fcn_004432d0(v30, 1);
@@ -289,14 +289,14 @@ LfailB:
 			}
 			d3_DestroyObject(v18[v11]);
 		}
-		*(int*) (v5 + 0x60) = g_7f4c00.a;
-		*(int*) (v5 + 0x64) = g_7f4c00.b;
-		*(int*) (v5 + 0x68) = g_7f4c00.c;
-		*(unsigned short*) (v5 + 0x6c) = (unsigned short) g_7f4c00.d;
-		*(int*) (v5 + 0x52) = g_7f4c00.a;
-		*(int*) (v5 + 0x56) = g_7f4c00.b;
-		*(int*) (v5 + 0x5a) = g_7f4c00.c;
-		*(unsigned short*) (v5 + 0x5e) = (unsigned short) g_7f4c00.d;
+		*(int*) (v5 + 0x60) = gm_GameTime.a;
+		*(int*) (v5 + 0x64) = gm_GameTime.b;
+		*(int*) (v5 + 0x68) = gm_GameTime.c;
+		*(unsigned short*) (v5 + 0x6c) = (unsigned short) gm_GameTime.d;
+		*(int*) (v5 + 0x52) = gm_GameTime.a;
+		*(int*) (v5 + 0x56) = gm_GameTime.b;
+		*(int*) (v5 + 0x5a) = gm_GameTime.c;
+		*(unsigned short*) (v5 + 0x5e) = (unsigned short) gm_GameTime.d;
 		fcn_00500bb0((void*) (v5 + 0x52), 0, 10, 0);
 		*(int*) (v5 + 0x70) = *(int*) (v5 + 0x70) + 1;
 		*(int*) (v5 + 0xb4) = 0;
@@ -304,7 +304,7 @@ LfailB:
 		return;
 
 	case 9:
-		v8 = fcn_0050cad0((void*) (v5 + 0x60), (void*) &g_7f4c00);
+		v8 = fcn_0050cad0((void*) (v5 + 0x60), (void*) &gm_GameTime);
 		v36 = v8 + *(int*) (v5 + 0xb4);
 		if (v36 < *(int*) (v5 + 0xc0)) {
 			fcn_00500bb0((void*) (v5 + 0x52), 0, 0x1e, 0);
@@ -355,7 +355,7 @@ LfailB:
 		*(int*) (v5 + 0xc8) = *(int*) (v5 + 0xc8) + v36 / v11;
 		*(int*) (v5 + 0xb4) = v36 % v11;
 		fcn_00500bb0((void*) (v5 + 0x52), 0, v11, 0);
-		if (g_6b8010 == 0) {
+		if (d3_CurrentContextIndex == 0) {
 			if (*(int*) (v5 + 0xc8) <= *(int*) (v5 + 0xc4)) {
 				fcn_00573e10(v5);
 			}
@@ -381,7 +381,7 @@ LfailB:
 			}
 			fcn_00573e10(v5);
 			if (*(int*) (v15 + 0x61)) {
-				v8 = fcn_00500e20((int) &g_7f4c00);
+				v8 = fcn_00500e20((int) &gm_GameTime);
 				if (v8 == 1) {
 					g_773dd4 = (char) v8;
 				}
@@ -409,7 +409,7 @@ LfailB:
 			}
 			fcn_00598510();
 			if (*(int*) (*(int*) (v15 + 0x61) + 0x1ec)) {
-				if (fcn_00413680(*(int*) (v15 + 0x61), (int) g_6b8014, v17, &v21)) {
+				if (fcn_00413680(*(int*) (v15 + 0x61), (int) d3_ActiveCamera, v17, &v21)) {
 					v31 = (int) (v21 * 1.8);
 					v8 = evt_LoadGfxScript((char*) 0x6a7da0);
 					if (v8) {
@@ -423,10 +423,10 @@ LfailB:
 			if (*(unsigned char*) (v5 + 0x78) & 2) {
 				fcn_004c5420(*(int*) (v15 + 1), 0x5a, 2, 0, 1);
 				if (*(unsigned char*) v15 >= 4 && *(unsigned char*) v15 <= 7) {
-					*(int*) v20 = g_7f4c00.a;
-					*(int*) (v20 + 4) = g_7f4c00.b;
-					*(int*) (v20 + 8) = g_7f4c00.c;
-					*(unsigned short*) (v20 + 12) = (unsigned short) g_7f4c00.d;
+					*(int*) v20 = gm_GameTime.a;
+					*(int*) (v20 + 4) = gm_GameTime.b;
+					*(int*) (v20 + 8) = gm_GameTime.c;
+					*(unsigned short*) (v20 + 12) = (unsigned short) gm_GameTime.d;
 					fcn_004c4510(v15, *(int*) (v15 + 1));
 					fcn_004c4570(1, 0xe, 0x69, v20);
 					fcn_004c5360();

@@ -48,7 +48,7 @@ typedef struct
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
@@ -85,7 +85,7 @@ void __cdecl fcn_005ceb20(unsigned char* obj, int mode)
 	btn2 = -1;
 	dlg = fcn_00470820(0, 0, s_6aca6c);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	fcn_00471b60(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
@@ -109,7 +109,7 @@ void __cdecl fcn_005ceb20(unsigned char* obj, int mode)
 			g_774654 = 1;
 		}
 		else if (g_100f1dc != -1) {
-			if (g_67d370 == btn1) {
+			if (d2_CurrentElementId == btn1) {
 				for (p = fcn_005463a0(2, 0, 7, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
 					if (p[0xac] == 0) {
 						break;
@@ -121,7 +121,7 @@ void __cdecl fcn_005ceb20(unsigned char* obj, int mode)
 					pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
 					pkt.xc = *(int*) (obj + 1);
 					pkt.x36 = 1;
-					pkt.name = (*(Name14*)&g_7f4c00);
+					pkt.name = (*(Name14*)&gm_GameTime);
 					pkt.x5c = 1;
 					if (gm_CheckEntityType(obj) != 0) {
 						pkt.x60 = -1;
@@ -137,7 +137,7 @@ void __cdecl fcn_005ceb20(unsigned char* obj, int mode)
 				}
 				g_774654 = 1;
 			}
-			else if (g_67d370 == btn2) {
+			else if (d2_CurrentElementId == btn2) {
 				g_774654 = 1;
 			}
 		}

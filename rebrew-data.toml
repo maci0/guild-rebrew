@@ -1762,13 +1762,12 @@ definition_hash = "ab8fa7008547dd116d9f44a0768b760b156564ca3457e205c006e5a8f84ef
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x00631130"]
 file = "src/client_sound.h"
-name = "g_6b5d08"
+name = "tp_SoundSources"
 kind = "GLOBAL"
 type = "SOUND_SOURCE *"
 section = ".data"
-status = "DISPLACED"
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T21:23:04+00:00"
 
 ["GOLD.0x00631130".verification]
 status = "DISPLACED"
@@ -1859,16 +1858,15 @@ definition_hash = "93763e646f1544102fdee1362df638a3a308b2ba22a6eef0f8c0bf9032cf5
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006325c4"]
 file = "src/Develop/Units/Msx/msx.h"
-name = "g_6b71a4"
+name = "msx_TrackDriver"
 kind = "GLOBAL"
 type = "int"
 size = 4
 section = ".data"
 storage_kind = "alias"
 note = "Native accessed declaration view; no new storage or data verdict. Original global/type spelling and complete backing allocation owner unresolved."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T23:22:29+00:00"
 
 ["GOLD.0x006325c4".verification]
 status = "DISPLACED"
@@ -1878,16 +1876,15 @@ definition_hash = "7502949729c7abffaa64db73c3e966bf42daa3c6df92142bf680cb147d794
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006325c8"]
 file = "src/Develop/Units/Msx/msx.h"
-name = "g_6b71a8"
+name = "msx_AmbientDriver"
 kind = "GLOBAL"
 type = "int"
 size = 4
 section = ".data"
 storage_kind = "alias"
 note = "Native accessed declaration view; no new storage or data verdict. Original global/type spelling and complete backing allocation owner unresolved."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T23:29:48+00:00"
 
 ["GOLD.0x006325c8".verification]
 status = "DISPLACED"
@@ -1897,16 +1894,15 @@ definition_hash = "27ad5486ffade0fe03a5d48972e978707f3eae4e92eea9d8527640f070b96
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006325d0"]
 file = "src/Develop/Units/Msx/msx.h"
-name = "g_6b71b0"
+name = "msx_Tracks"
 kind = "GLOBAL"
 type = "Chan_14cc460[10]"
 size = 2960
 section = ".data"
 storage_kind = "alias"
 note = "Native accessed track view. Ten-record table extent follows native296-byte stride and bound; dummy record extent follows native acquisition pointer and296-byte clear. Backing allocation and original storage owner remain unresolved. Declaration only; no new storage or data verdict."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:33:29+00:00"
 
 ["GOLD.0x006325d0".verification]
 status = "DISPLACED"
@@ -1951,12 +1947,11 @@ definition_hash = "cbaf4858b437fe0974fc8ff84d0ee65e1f82b1aa18859170a0dc1c4256b53
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x00633174"]
 file = "src/Develop/Units/net/net.h"
-name = "g_6b7d54"
+name = "nt_ReceivedBytes"
 kind = "GLOBAL"
 type = "int"
-status = "DISPLACED"
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T22:32:35+00:00"
 
 ["GOLD.0x00633174".verification]
 status = "DISPLACED"
@@ -1966,12 +1961,11 @@ definition_hash = "4fef59cdb6548c8437cf352aedb1fb32219c259d4d0aeafabc3c282b0453b
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x00633178"]
 file = "src/Develop/Units/net/net.h"
-name = "g_6b7d58"
+name = "nt_ReceivedPacketCount"
 kind = "GLOBAL"
 type = "int"
-status = "DISPLACED"
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T20:57:32+00:00"
 
 ["GOLD.0x00633178".verification]
 status = "DISPLACED"
@@ -2089,16 +2083,15 @@ definition_hash = "1d93450ae8eda0359232cc7c161a8f11e9849e3f48eb7ec7e141387ae2efc
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006332b8"]
 file = "src/Develop/DieGildeAddOn/game/ch_motion.h"
-name = "g_6b7e98"
+name = "evt_CurrentScript"
 kind = "GLOBAL"
 type = "char *"
 size = 4
 section = ".data"
 storage_kind = "alias"
 note = "Provisional native game declaration view used by shared character helpers. Size describes the declared accessed view, not a complete backing allocation. Original name, allocation extent and storage owner unknown; extern only, no data verdict."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:46:16+00:00"
 
 ["GOLD.0x006332b8".verification]
 status = "DISPLACED"
@@ -2142,12 +2135,12 @@ definition_hash = "fb9ac81fdc72e6296f927249f7f78c5e1f4343a011d51c19008476e9bf932
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006332f0"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_0042a350.c"
-name = "g_6b7ed0"
+name = "msx_WaveDrivers"
 kind = "GLOBAL"
 type = "int *[16]"
 section = ".data"
-updated_by = "data"
-updated_at = "2026-10-27T09:16:40+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T23:18:15+00:00"
 
 ["GOLD.0x006332f0".verification]
 status = "DISPLACED"
@@ -2498,12 +2491,12 @@ definition_hash = "2c024b27d3947edacd108092a8bf187a19b4c6fe8c25216cf709e6182b8d0
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006ed938"]
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_005931a0.c"
-name = "g_772514"
+name = "d2_CurrentWindowId"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
-updated_by = "data"
-updated_at = "2026-10-27T09:16:42+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T22:13:43+00:00"
 
 ["GOLD.0x006ed938".verification]
 status = "DISPLACED"
@@ -2513,16 +2506,15 @@ definition_hash = "a68861338a9e3ee41617174ae4dd7dc9c26b26abf32c31d7c4849a53898de
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006ed98c"]
 file = "src/Develop/Units/d2.v1/d2_gui.h"
-name = "g_772568"
+name = "d2_ResourceOffset"
 kind = "GLOBAL"
 type = "int"
 size = 4
 section = ".data"
 storage_kind = "alias"
 note = "Existing reconstructed C spelling retained, original name unproven. Declaration-only accessed view bound from d2_SetElementImage native operand; .data zero-filled virtual tail, accessed size only. Complete backing extent, allocation identity and storage owner unresolved; no storage definition or data-byte verdict. Header is a reconstructed declaration home, not original unit evidence."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:54:38+00:00"
 
 ["GOLD.0x006ed98c".verification]
 status = "DISPLACED"
@@ -2532,16 +2524,15 @@ definition_hash = "6e252db4639dc859cd63b46470c458b3b8b37888446791824e2ba2c72cd4d
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006f0b6c"]
 file = "src/client_sound.h"
-name = "g_772d1c"
+name = "tp_msx_CurrentTrack"
 kind = "GLOBAL"
 type = "Chan_14cc460*"
 size = 4
 section = ".data"
 storage_kind = "alias"
 note = "Native four-byte track-pointer slot view. Acquisition result is stored here and passed to MSX track APIs; all known users share the canonical declaration. Inferred name; storage owner and backing allocation unresolved. Declaration only; no new storage or data byte verdict."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:59:34+00:00"
 
 ["GOLD.0x006f0b6c".verification]
 status = "DISPLACED"
@@ -2735,16 +2726,15 @@ definition_hash = "d47c20531803c051f1d227fc30c2a1340c2c42cc3872155b15fccd752a977
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006f1bf8"]
 file = "src/client_actions.h"
-name = "g_773da8"
+name = "gm_CityEntity"
 kind = "GLOBAL"
 type = "char *"
 size = 4
 section = ".data"
 storage_kind = "alias"
 note = "Existing reconstructed C spelling retained; declaration-only native accessed view. .data zero-filled virtual tail; no storage or data verdict. Complete backing allocation and storage owner remain unresolved."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T23:14:37+00:00"
 
 ["GOLD.0x006f1bf8".verification]
 status = "DISPLACED"
@@ -2829,12 +2819,12 @@ definition_hash = "18a227802ae25fe41abc183f41d965b5ffef3ae4152a5ace84565fbad03b5
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006f265c"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_0057ec20.c"
-name = "g_774a14"
+name = "d2_TutorialActive"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
-updated_by = "data"
-updated_at = "2026-10-27T09:16:42+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T22:53:40+00:00"
 
 ["GOLD.0x006f265c".verification]
 status = "DISPLACED"
@@ -2949,15 +2939,15 @@ definition_hash = "c76f840704c8f53f22eb9356b3aebff91d3d92e751f0dac4874ba49328968
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x007603a0"]
 file = "src/Develop/Unassigned/GOLD.fcn_004d0a30.c"
-name = "g_7e4260"
+name = "ch_ContextCharacters"
 kind = "GLOBAL"
 type = "char*[32]"
 size = 128
 section = ".data"
 storage_kind = "alias"
 note = "Declaration-only 32-pointer output-table view in the physical .data zero-filled virtual tail. Gold 0x004d0a30 clears all 128 bytes, fills at most 31 entries, and independently agrees with seven native users. Storage owner and containing backing allocation unresolved; no C definition/native linker symbol invented. Evidence: .scratch/goal-tl-callee-identities/{Gold-list-audit,Gold-output-users}.json."
-updated_by = "data"
-updated_at = "2026-10-27T09:16:42+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T22:50:00+00:00"
 
 ["GOLD.0x007603a0".verification]
 status = "DISPLACED"
@@ -2997,12 +2987,12 @@ definition_hash = "b3c2ad752869abb6e851be460efd7cf78658e5b9f1d04bd5b8cb83b9bcf6a
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x0076faa0"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_00510900.c"
-name = "g_7f3b40"
+name = "init_SceneContextIndices"
 kind = "GLOBAL"
 type = "char[]"
 section = ".data"
-updated_by = "data"
-updated_at = "2026-10-27T09:16:42+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T23:33:48+00:00"
 
 ["GOLD.0x0076faa0".verification]
 status = "DISPLACED"
@@ -3389,15 +3379,15 @@ definition_hash = "8c3eefe459542d66eec0af83f0bc55de33380519fb405dc645b3455db338e
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x00925120"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_004e8af0.c"
-name = "g_9a9220"
+name = "amt_OfficeSlots"
 kind = "GLOBAL"
 type = "Rec18_68da68[42]"
 section = ".data"
 storage_kind = "alias"
 link_symbol = "_g_office_slots"
 note = "Existing declaration-only client slot-table view. Native query operands independently bind the shared _g_office_slots spelling; complete backing allocation and client storage owner are not established by the 42-row declaration. No replacement storage or linked verdict."
-updated_by = "data"
-updated_at = "2026-10-27T09:16:42+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T21:39:18+00:00"
 
 ["GOLD.0x00925120".verification]
 status = "DISPLACED"
@@ -3416,12 +3406,12 @@ section = ".data"
 
 ["GOLD.0x00925520"]
 file = "src/Develop/DieGildeAddOn/game/cut_FindCutsceneById.c"
-name = "g_9a9660"
+name = "cut_Cutscenes"
 kind = "GLOBAL"
 type = "char[]"
 section = ".data"
 updated_by = "rename"
-updated_at = "2026-11-01T14:04:49+00:00"
+updated_at = "2026-11-18T22:04:02+00:00"
 
 ["GOLD.0x00925520".verification]
 status = "DISPLACED"
@@ -3674,13 +3664,12 @@ definition_hash = "02919a6167698d6103b004ac242c65c3fa7f06fa4728221ecf6b4293bdd05
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x00f8ab80"]
 file = "src/client_types.h"
-name = "DisplayCounters"
+name = "d2_DisplayCounters"
 kind = "GLOBAL"
 type = "DISPLAY_COUNTER[6]"
 section = ".bss"
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:41:58+00:00"
 
 ["GOLD.0x00f8ab80".verification]
 status = "DISPLACED"
@@ -3779,13 +3768,12 @@ definition_hash = "ecaf4dd2fa5e99ef0fc7cc2eb2354e78bc05ff3e6c5cd16cd9d4747aa224d
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x00fc2dec"]
 file = "src/Develop/Units/d3/d3_camera.h"
-name = "g_6b8014"
+name = "d3_ActiveCamera"
 kind = "GLOBAL"
 type = "char*"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:44:55+00:00"
 
 ["GOLD.0x00fc2dec".verification]
 status = "DISPLACED"
@@ -3938,15 +3926,14 @@ definition_hash = "77b54e5e69d4be2e355248857da4de99f7dc2595f6e7a8f065ccc39ccc6f1
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x0143ab0c"]
 file = "src/Develop/DieGildeAddOn/game/aemter.h"
-name = "g_14a5c6c"
+name = "amt_OfficeNames"
 kind = "GLOBAL"
 type = "char*[]"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T22:35:14+00:00"
 storage_kind = "alias"
 note = "Declaration-only string-pointer table view in the zero-filled virtual .data tail; indexing office-role bytes and UI labels proves four-byte pointer entries. Storage owner, backing allocation and complete extent remain unresolved; no storage emitted. The aemter.h declaration home is reconstructed, not an attested original header."
-status = "DISPLACED"
 
 ["GOLD.0x0143ab0c".verification]
 status = "DISPLACED"
@@ -4084,15 +4071,14 @@ definition_hash = "5fd8cc0fd3fed61df5436eecc60d48cbae5457b14e3c6060ba0cf09dc66fd
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x014611a0"]
 file = "src/Develop/Units/Msx/msx.h"
-name = "g_14cc360"
+name = "msx_TrackPath"
 kind = "GLOBAL"
 type = "char[]"
 section = ".data"
 storage_kind = "alias"
 note = "Native MSX path-buffer view used by GOLD4243d0 setter and GOLD423b30 start helper. Does not alias the unrelated f8aae0 game buffer. Complete extent and allocation owner unresolved; declaration only."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:37:58+00:00"
 
 ["GOLD.0x014611a0".verification]
 status = "DISPLACED"
@@ -4102,16 +4088,15 @@ definition_hash = "b3b7026506918f63411ff60e1ba31ed72d3ef3da2fc6209ecbe160861aa6c
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x014612a0"]
 file = "src/Develop/Units/Msx/msx.h"
-name = "g_14cc460"
+name = "msx_NullTrack"
 kind = "GLOBAL"
 type = "Chan_14cc460"
 size = 296
 section = ".data"
 storage_kind = "alias"
 note = "Native accessed track view. Ten-record table extent follows native296-byte stride and bound; dummy record extent follows native acquisition pointer and296-byte clear. Backing allocation and original storage owner remain unresolved. Declaration only; no new storage or data verdict."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:36:16+00:00"
 
 ["GOLD.0x014612a0".verification]
 status = "DISPLACED"
@@ -4121,16 +4106,15 @@ definition_hash = "cd5b7fa40db2fc2006694c82e2ba33f930a79cd088d742078772c6a8b86ce
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x014613e0"]
 file = "src/Develop/Units/Msx/msx.h"
-name = "g_14cc5a0"
+name = "msx_TrackLock"
 kind = "GLOBAL"
 type = "CRITICAL_SECTION"
 size = 24
 section = ".data"
 storage_kind = "alias"
 note = "Native accessed declaration view; no new storage or data verdict. Original global/type spelling and complete backing allocation owner unresolved."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:26:10+00:00"
 
 ["GOLD.0x014613e0".verification]
 status = "DISPLACED"
@@ -6353,13 +6337,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x006b7ed0"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_0042a350.c"
-name = "g_6b7ed0"
+name = "msx_WaveDrivers"
 kind = "GLOBAL"
 type = "int *[16]"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T23:18:15+00:00"
 
 ["GOLDTL.0x006b7ed0".verification]
 status = "DISPLACED"
@@ -6534,13 +6517,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x006b8010"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_00402c90.c"
-name = "g_6b8010"
+name = "d3_CurrentContextIndex"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:04:32+00:00"
 
 ["GOLDTL.0x006b8010".verification]
 status = "DISPLACED"
@@ -6552,13 +6534,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x006b86fc"]
 file = "src/Develop/Units/m_alloc/GOLDTL.fcn_00450ad0.c"
-name = "g_6b86fc"
+name = "d3_MaxActiveLights"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T23:07:02+00:00"
 
 ["GOLDTL.0x006b86fc".verification]
 status = "DISPLACED"
@@ -6660,13 +6641,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x00772514"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_004da4d0.c"
-name = "g_772514"
+name = "d2_CurrentWindowId"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:13:43+00:00"
 
 ["GOLDTL.0x00772514".verification]
 status = "DISPLACED"
@@ -7090,13 +7070,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x00774a14"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_0057ec20.c"
-name = "g_774a14"
+name = "d2_TutorialActive"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:53:40+00:00"
 
 ["GOLDTL.0x00774a14".verification]
 status = "DISPLACED"
@@ -7288,13 +7267,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x007f3b40"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_00510900.c"
-name = "g_7f3b40"
+name = "init_SceneContextIndices"
 kind = "GLOBAL"
 type = "char[]"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T23:33:48+00:00"
 
 ["GOLDTL.0x007f3b40".verification]
 status = "DISPLACED"
@@ -7306,16 +7284,15 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x007f4c00"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_004c5700.c"
-name = "g_7f4c00"
+name = "gm_GameTime"
 kind = "GLOBAL"
 type = "pos14_7f4c00"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T23:11:35+00:00"
 storage_kind = "alias"
 link_symbol = "_g_current_year"
 note = "Declaration-only packed calendar view; native delimiter operands read its first four bytes as an integer year. _g_current_year is the inferred shared C scalar-view spelling, independently resolved against native operands; not another allocation. The existing 14-byte declaration does not establish the complete backing extent or storage owner; both remain unresolved."
-status = "DISPLACED"
 
 ["GOLDTL.0x007f4c00".verification]
 status = "DISPLACED"
@@ -7471,16 +7448,15 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x009a9220"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_004e8af0.c"
-name = "g_9a9220"
+name = "amt_OfficeSlots"
 kind = "GLOBAL"
 type = "Rec18_68da68[42]"
 section = ".data"
 storage_kind = "alias"
 link_symbol = "_g_office_slots"
 note = "Existing declaration-only client slot-table view. Native query operands independently bind the shared _g_office_slots spelling; complete backing allocation and client storage owner are not established by the 42-row declaration. No replacement storage or linked verdict."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:39:18+00:00"
 
 ["GOLDTL.0x009a9220".verification]
 status = "DISPLACED"
@@ -7492,13 +7468,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x009a9660"]
 file = "src/Develop/DieGildeAddOn/game/cut_FindCutsceneById.c"
-name = "g_9a9660"
+name = "cut_Cutscenes"
 kind = "GLOBAL"
 type = "char[]"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-11-03T19:50:03+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:04:02+00:00"
 
 ["GOLDTL.0x009a9660".verification]
 status = "DISPLACED"
@@ -7963,13 +7938,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x01052bac"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_0043b320.c"
-name = "g_1052bac"
+name = "d3_RenderedVertexCount"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T23:01:44+00:00"
 
 ["GOLDTL.0x01052bac".verification]
 status = "DISPLACED"
@@ -8125,13 +8099,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x014d0020"]
 file = "src/Develop/Unassigned/client_scene_transform.c"
-name = "g_14d0020"
+name = "ch_CharacterSlots"
 kind = "GLOBAL"
 type = "void *[]"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:08:16+00:00"
 
 ["GOLDTL.0x014d0020".verification]
 status = "DISPLACED"
@@ -21991,16 +21964,15 @@ definition_hash = "5bf41ad6a6ae43e6dd41e746a8a6566b6081eedd9f0d466130db024c2bcbe
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x00633b14"]
 file = "src/client_lighting.h"
-name = "LightingUpdatePending"
+name = "d3_LightingUpdatePending"
 kind = "GLOBAL"
 type = "unsigned char"
 storage_kind = "alias"
 size = 1
 section = ".data"
 note = "Lighting update pending byte declaration view, 1-byte C access width. Native helper/slot references and rejecting operand controls establish these accesses; complete backing allocation and storage owner remain unknown. Extern only in canonical client_lighting.h. PE zero-filled .data tail, not initialized file bytes; no data verdict. Names and interface are inferred."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:40:35+00:00"
 
 ["GOLD.0x00633b14".verification]
 status = "DISPLACED"
@@ -22029,16 +22001,15 @@ definition_hash = "2deece9c2e5086751dd031fa8dfefd2e6b2749d92b9b8fea517b02f97ea6e
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLDTL.0x006b5cbc"]
 file = "src/Develop/Units/d3/StartObjectTransformAnimation.c"
-name = "g_6b5cbc"
+name = "d3_CameraAnimating"
 kind = "GLOBAL"
 type = "int"
 size = 4
 section = ".data"
 storage_kind = "alias"
 note = "Four-byte declaration view accessed by TL object-animation callers in initialized .data; reference bytes are zero. No allocation, storage owner or complete backing extent established. Existing numeric name retained; inferred meaning pending. Function comparisons do not verify data."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:16:25+00:00"
 
 ["GOLDTL.0x006b5cbc".verification]
 status = "DISPLACED"
@@ -22070,16 +22041,15 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLD.0x01469700"]
 file = "src/Develop/DieGildeAddOn/game/ch_queue.h"
-name = "g_14d0c40"
+name = "ch_ActionDefinitions"
 kind = "GLOBAL"
 type = "Entry_14d0c40[64]"
 storage_kind = "object"
 size = 4864
 section = ".data"
 note = "64 x 0x4c action dispatch table; native 0x40afcd/0x40afd4/0x40afd9 clear 0x4c0 DWORDs and paired setter 0x405670. Zero-filled virtual .data tail. Extern-only header: source owner and raw-link provider unresolved. Handler retains existing opaque DWORD access view, not a reconciled callback signature."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:19:27+00:00"
 
 ["GOLD.0x01469700".verification]
 status = "DISPLACED"
@@ -22124,15 +22094,14 @@ definition_hash = "cef29c7f092318302147d919d3a6644f633474753eeb5e5d67cf13148297a
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006f0d84"]
 file = "src/Develop/DieGildeAddOn/game/cutscene_clock.h"
-name = "g_772f34"
+name = "cut_ClockDeadline"
 kind = "DATA"
 type = "int"
 storage_kind = "alias"
 section = ".data"
 note = "Inferred scalar access view for the cutscene clock; complete backing allocation and storage owner remain unresolved."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:27:50+00:00"
 
 ["GOLD.0x006f0d84".verification]
 status = "DISPLACED"
@@ -22142,15 +22111,14 @@ definition_hash = "de52e2f902f3039bcfd1858e87d81428594b5bb7907972f0f4f865a9f3d8f
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006f0d88"]
 file = "src/Develop/DieGildeAddOn/game/cutscene_clock.h"
-name = "g_772f38"
+name = "cut_ClockExpired"
 kind = "DATA"
 type = "int"
 storage_kind = "alias"
 section = ".data"
 note = "Inferred scalar access view for the cutscene clock; complete backing allocation and storage owner remain unresolved."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T20:53:45+00:00"
 
 ["GOLD.0x006f0d88".verification]
 status = "DISPLACED"
@@ -22838,13 +22806,12 @@ input_hash = "880e7e7ef720e1d03021c6e4816a2062f552204da134dc43dde44ebf92126cac"
 definition_hash = "2d6d9bd0fe52a78f8817b94c81df968687058d0f6d0300ec47ea13ef98de55bc"
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x005fe710"]
-name = "g_67d370"
+name = "d2_CurrentElementId"
 section = ".data"
 kind = "GLOBAL"
 note = "Image identity of existing C symbol g_67d370. 58 current RELOC Gold bodies, DIR32 addend 0, dword operands; 55 sites also match another catalogued operand. Address is in raw .data and the first 8 file bytes are ff. Rows at 0x5fcfa0 and 0x5feb8c do not close an allocation. storage_kind, size, type, file, link_symbol and backing stay unset: a dword access does not prove interiority or an allocation, and this row is not a storage owner."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:43:15+00:00"
 
 ["GOLD.0x005fe710".verification]
 status = "DISPLACED"
@@ -23102,13 +23069,12 @@ input_hash = "2da839faf3a0c09a345279891b7de8ab5159af376246a94f64450181e0fc1ead"
 definition_hash = "5470c919c8e93ce3ff2c66db9b24e2e3f563661eda20f3dd9e6c6385e45d5a2f"
 measured_at = "2026-10-18T19:40:33+00:00"
 ["GOLD.0x006f2578"]
-name = "g_774930"
+name = "msx_MusicEnabled"
 section = ".data"
 kind = "GLOBAL"
 note = "Existing inferred sound-control spelling. Complete shared 63-byte body and seven native operands match independently on each image: .scratch/goal91-sound-wrapper/caller-shared-controls.json. Storage owner and allocation extent unknown. Identity only; no C storage added."
-updated_by = "verify"
-updated_at = "2026-10-18T19:40:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:23:13+00:00"
 
 ["GOLD.0x006f2578".verification]
 status = "DISPLACED"
@@ -23428,13 +23394,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x00773da8"]
 type = "char *"
-name = "g_773da8"
+name = "gm_CityEntity"
 section = ".bss"
 file = "src/Develop/DieGildeAddOn/command/command_c/GOLDTL.cm_ChkJoinLeaveElection.c"
 note = "Type conflict canonicalized: majority .c declaration 'char *' (52 of 62 .c files)."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T23:14:37+00:00"
 
 ["GOLDTL.0x00773da8".verification]
 status = "DISPLACED"
@@ -23446,13 +23411,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x006b7e98"]
 type = "char *"
-name = "g_6b7e98"
+name = "evt_CurrentScript"
 section = ".bss"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0040c9b0.c"
 note = "Type conflict canonicalized: majority .c declaration 'char *' (76 of 78 .c files)."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:46:16+00:00"
 
 ["GOLDTL.0x006b7e98".verification]
 status = "DISPLACED"
@@ -23518,13 +23482,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x014cc5a0"]
 type = "CRITICAL_SECTION"
-name = "g_14cc5a0"
+name = "msx_TrackLock"
 section = ".bss"
 file = "src/Develop/Units/Msx/msx_thread.c"
 note = "Type conflict canonicalized: majority .c declaration 'CRITICAL_SECTION' (4 of 6 .c files)."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:26:10+00:00"
 
 ["GOLDTL.0x014cc5a0".verification]
 status = "DISPLACED"
@@ -24004,13 +23967,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x006b8014"]
 type = "char *"
-name = "g_6b8014"
+name = "d3_ActiveCamera"
 section = ".bss"
 file = "src/Develop/Units/d3/GOLDTL.fcn_00412900.c"
 note = "Type conflict canonicalized: majority .c declaration 'char *' (25 of 32 .c files)."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:44:55+00:00"
 
 ["GOLDTL.0x006b8014".verification]
 status = "DISPLACED"
@@ -24202,13 +24164,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x014a5320"]
 type = "char *[]"
-name = "g_14a5320"
+name = "txt_TextEntries"
 section = ".bss"
 file = "src/Develop/Units/vfs/vfs_text.c"
 note = "Type conflict canonicalized: majority .c declaration 'char *[]' (17 of 18 .c files)."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:50:26+00:00"
 
 ["GOLDTL.0x014a5320".verification]
 status = "DISPLACED"
@@ -24598,13 +24559,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x007725d0"]
 type = "int"
-name = "g_7725d0"
+name = "tp_d2_SelectedControl"
 section = ".bss"
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_00466550.c"
 note = "Type conflict canonicalized: majority .c declaration 'int' (13 of 14 .c files)."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:07:36+00:00"
 
 ["GOLDTL.0x007725d0".verification]
 status = "DISPLACED"
@@ -25030,13 +24990,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x0067fca0"]
 type = "int"
-name = "g_67fca0"
+name = "hst_HistoryTextBase"
 section = ".data"
 file = "src/Develop/Unassigned/GOLDTL.fcn_004b1e60.c"
 note = "Type conflict canonicalized: majority .c declaration 'int' (9 of 10 .c files)."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:14:29+00:00"
 
 ["GOLDTL.0x0067fca0".verification]
 status = "DISPLACED"
@@ -25120,13 +25079,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x007e46ac"]
 type = "int"
-name = "g_7e46ac"
+name = "main_LoopFlags"
 section = ".bss"
 file = "src/Develop/Units/d2.v1/d2_group.c"
 note = "Type conflict canonicalized: majority .c declaration 'int' (47 of 48 .c files)."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T21:47:36+00:00"
 
 ["GOLDTL.0x007e46ac".verification]
 status = "DISPLACED"
@@ -25354,13 +25312,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x007e4260"]
 type = "char *[32]"
-name = "g_7e4260"
+name = "ch_ContextCharacters"
 section = ".bss"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004d0070.c"
 note = "Type conflict canonicalized: majority .c declaration 'char *[32]' (17 of 18 .c files)."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:50:00+00:00"
 
 ["GOLDTL.0x007e4260".verification]
 status = "DISPLACED"
@@ -25790,13 +25747,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x007e3a50"]
 type = "float[3]"
-name = "g_7e3a50"
+name = "d3_CameraTargetRotation"
 section = ".bss"
 file = "src/Develop/Units/d3/GOLDTL.fcn_0052ac60.c"
 note = "Type conflict canonicalized: majority .c declaration 'float[3]' (8 of 10 .c files)."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T22:19:06+00:00"
 
 ["GOLDTL.0x007e3a50".verification]
 status = "DISPLACED"
@@ -25902,13 +25858,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x007746ac"]
 type = "char *"
-name = "g_7746ac"
+name = "sv_HoveredObjekt"
 section = ".bss"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0052fde0.c"
 note = "Type conflict canonicalized: majority .c declaration 'char *' (2 of 3 .c files)."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T23:04:22+00:00"
 
 ["GOLDTL.0x007746ac".verification]
 status = "DISPLACED"
@@ -26837,13 +26792,13 @@ measured_at = "2026-10-27T19:30:02+00:00"
 
 ["GOLD.0x00a68d24"]
 type = "char *"
-name = "g_aed324"
+name = "cm_CommandQueueHead"
 size = 4
 section = ".data"
 kind = "GLOBAL"
 note = "Inferred four-byte queue pointer access view in the zero-filled native .data tail; Gold 0x4c38f8 and T&L 0x4c4268 read corresponding operands. Existing provisional name; storage owner and backing allocation are unresolved."
-updated_by = "data"
-updated_at = "2026-11-01T11:57:09+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T21:01:04+00:00"
 
 ["GOLD.0x00633400"]
 name = "g_6b7fe0"

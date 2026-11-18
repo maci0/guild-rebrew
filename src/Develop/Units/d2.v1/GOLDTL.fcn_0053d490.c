@@ -7,8 +7,8 @@ extern int g_100f1e4;
 extern char* g_1015ea0;
 extern int g_14ce8e0;
 extern char g_14cf950;
-extern int g_67d370;
-extern int g_772514;
+extern int d2_CurrentElementId;
+extern int d2_CurrentWindowId;
 #include "client_dialog_state.h"
 extern char g_7e22c0[];
 extern char g_7e23ea[];
@@ -101,23 +101,23 @@ int __cdecl fcn_0053d490(int a0, int a1)
 	v21 = fcn_00472250(dlg, 2, io_AppendText(0x1ad1, 0x1ad3));
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x1ad4);
-	fcn_00533a60(g_772514, 0x1c, v11, 2, *(int*) 0x14abe74,
+	fcn_00533a60(d2_CurrentWindowId, 0x1c, v11, 2, *(int*) 0x14abe74,
 	    *(int*) 0x14abe78);
 	s1a = (char*) v11[0];
 	s1b = (char*) v11[1];
 	d2_SetForm(dlg, 4);
 	io_AppendText(0x1ad7);
-	fcn_00533a60(g_772514, 0x1c, v11, 2, *(int*) 0x14abe80,
+	fcn_00533a60(d2_CurrentWindowId, 0x1c, v11, 2, *(int*) 0x14abe80,
 	    *(int*) 0x14abe84);
 	s2a = (char*) v11[0];
 	s2b = (char*) v11[1];
 	d2_SetForm(dlg, 5);
 	io_AppendText(0x1adb);
-	rows = (*(int*) (g_772514 * 0x3cc + 0x1015f4c) - 0x20) / 0x30;
+	rows = (*(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0x20) / 0x30;
 	list = d2_CreateRadioGroup(0);
 	for (i = 0; i < 8; i++) {
 		id = fcn_0046f740((i % rows) * 0x30 + 0x50,
-		    (i / rows) * 0x30 + 0x20, i + 0x59a, g_772514);
+		    (i / rows) * 0x30 + 0x20, i + 0x59a, d2_CurrentWindowId);
 		sel[i] = id;
 		*(int*) (g_1015ea0 + id * 0x2f4 + 0x58) = 1;
 		*(int*) (g_1015ea0 + id * 0x2f4 + 0x38) = 0;
@@ -146,7 +146,7 @@ int __cdecl fcn_0053d490(int a0, int a1)
 	g_14cf950 = 0;
 	for (;;) {
 		if (g_14ce8e0 != 0
-		    || (g_100f1dc != -1 && g_67d370 == v27)
+		    || (g_100f1dc != -1 && d2_CurrentElementId == v27)
 		    || g_14cf950 == 1) {
 			if (v9 == 0 && a1 == 0) {
 				g_774654 = 1;
@@ -187,11 +187,11 @@ int __cdecl fcn_0053d490(int a0, int a1)
 		} else if (v9 == 2) {
 			d2_UpdateRadioGroup(list1);
 			if (g_100f1dc != -1) {
-				if (g_67d370 == (int) s1a) {
+				if (d2_CurrentElementId == (int) s1a) {
 					g_7e23e8 = 0;
 					v9 = 3;
 					redraw = 1;
-				} else if (g_67d370 == (int) s1b) {
+				} else if (d2_CurrentElementId == (int) s1b) {
 					g_7e23e8 = 1;
 					v9 = 3;
 					redraw = 1;
@@ -200,11 +200,11 @@ int __cdecl fcn_0053d490(int a0, int a1)
 		} else if (v9 == 3) {
 			d2_UpdateRadioGroup(list2);
 			if (g_100f1dc != -1) {
-				if (g_67d370 == (int) s2b) {
+				if (d2_CurrentElementId == (int) s2b) {
 					g_7e23e9 = 1;
 					v9 = 4;
 					redraw = 1;
-				} else if (g_67d370 == (int) s2a) {
+				} else if (d2_CurrentElementId == (int) s2a) {
 					g_7e23e9 = 0;
 					v9 = 4;
 					redraw = 1;

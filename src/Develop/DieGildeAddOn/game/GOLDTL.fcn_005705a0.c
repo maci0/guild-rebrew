@@ -3,7 +3,7 @@
 #include "client_types.h"
 #include "client_actions.h"
 
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern unsigned char g_773d75;
 extern int g_aed32c;
 extern float g_665ee8;
@@ -76,7 +76,7 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 		eid = *(unsigned int*) (entity + 4);
 		job.f08 = eid;
 		job.f0c = eid;
-		job.a28 = g_7f4c00;
+		job.a28 = gm_GameTime;
 		job.b2c = g_7f4c04;
 		job.f04 = 0x10;
 		job.e36 = 1;
@@ -131,7 +131,7 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 			job.f08 = *(unsigned int*) (entity + 4);
 			job.f04 = 0x0f;
 			job.f0c = -1;
-			job.a28 = g_7f4c00;
+			job.a28 = gm_GameTime;
 			job.b2c = g_7f4c04;
 			job.c30 = g_7f4c08;
 			job.d34 = g_7f4c0c;

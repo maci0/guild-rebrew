@@ -202,7 +202,7 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 		if (ones > cap) {
 			return 0;
 		}
-		flags = (unsigned int) g_7f4c00 & 0x80000007u;
+		flags = (unsigned int) gm_GameTime & 0x80000007u;
 		if ((int) flags < 0) {
 			flags = (flags - 1 | 0xfffffff8u) + 1;
 		}

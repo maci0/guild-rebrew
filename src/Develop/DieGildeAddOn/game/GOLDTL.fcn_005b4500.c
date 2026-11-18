@@ -54,7 +54,7 @@ void __cdecl fcn_005b4500(void)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-			g_772514 = w;
+			d2_CurrentWindowId = w;
 			io_AppendText(s_6811b0);
 			for (i = 0; i < 768; i++) {
 				if (((Player*)g_7f4ca0)[i].x0 != 0xffff) {

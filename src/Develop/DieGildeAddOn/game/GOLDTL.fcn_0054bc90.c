@@ -143,7 +143,7 @@ state2_report:
 	fcn_00546190(a0);
 	return;
 state1:
-	if (fcn_00500cb0((char*) &g_7f4c00, a0 + 0x52) > 0) {
+	if (fcn_00500cb0((char*) &gm_GameTime, a0 + 0x52) > 0) {
 		fcn_00545780(a0);
 		*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
 		return;
@@ -227,8 +227,8 @@ dialog:
 		io_AppendText(0x1771, *(unsigned short*) (v10 + 0x27), *v3, a0 + 0xac, v6, *v3);
 	else
 		io_AppendText(0x1770, *(unsigned short*) (v10 + 0x27), *v3, a0 + 0xac, v10, v6, *v3);
-	*(pos14_7f4c00*) (a0 + 0x44) = g_7f4c00;
-	*(pos14_7f4c00*) (a0 + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (a0 + 0x44) = gm_GameTime;
+	*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 	fcn_00500bb0(a0 + 0x52, 0x18, 0, 0);
 	fcn_004c3030(-7, 0, (char*) 0x6a5a34, 0);
 	*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;

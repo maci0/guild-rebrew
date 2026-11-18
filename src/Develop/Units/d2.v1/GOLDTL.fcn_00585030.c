@@ -18,11 +18,11 @@ typedef struct {
 } Screen;
 
 extern volatile int g_6b7fac;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_14b546c;
 extern int g_14b5470;
@@ -102,9 +102,9 @@ void __cdecl fcn_00585030(int a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(win);
 	d2_SetForm(win, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(win, 2);
-	wnd = g_772514;
+	wnd = d2_CurrentWindowId;
 	d2_SetForm(win, 1);
 	io_AppendText(0x404f);
 	if (data == 0) {
@@ -119,7 +119,7 @@ void __cdecl fcn_00585030(int a0)
 		return;
 	}
 	d2_SetForm(win, 3);
-	fcn_00533a60(g_772514, 0, two, 2, g_14b546c, g_14b5470);
+	fcn_00533a60(d2_CurrentWindowId, 0, two, 2, g_14b546c, g_14b5470);
 	btn0 = two[0];
 	btn1 = two[1];
 	d2_SetForm(win, 2);
@@ -151,7 +151,7 @@ void __cdecl fcn_00585030(int a0)
 		d2_SetForm(win, 4);
 		io_AppendText(0x6811b0);
 		if (sel != 0) {
-			dlg = fcn_004677e0((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, g_772514);
+			dlg = fcn_004677e0((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			if (sel == 1) {
 				io_FormatTextBuffer(buf, (char*) 0x404b);
 			} else if (sel == 2) {
@@ -159,7 +159,7 @@ void __cdecl fcn_00585030(int a0)
 			} else if (sel == 3) {
 				io_FormatTextBuffer(buf, (char*) 0x404d, owner + 0x4172);
 			}
-			item = d2_ShowTxt(0, 0, buf, g_772514);
+			item = d2_ShowTxt(0, 0, buf, d2_CurrentWindowId);
 			((Ctl*) g_1015ea0)[item].x18 = ((Screen*) g_77255c)->xc;
 			((Ctl*) g_1015ea0)[item].x6c = 1;
 			fcn_00472900(item, 0x54);
@@ -202,7 +202,7 @@ void __cdecl fcn_00585030(int a0)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == btn1) {
+			if (d2_CurrentElementId == btn1) {
 				for (i = 0; i < 6; i++) {
 					if (g_102cbc8[list].n != i) {
 						continue;
@@ -213,7 +213,7 @@ void __cdecl fcn_00585030(int a0)
 						fcn_00526120(g_14b59e0, 0);
 					}
 				}
-			} else if (g_67d370 == btn0) {
+			} else if (d2_CurrentElementId == btn0) {
 				fcn_00585850(e, records);
 			}
 		}

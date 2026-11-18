@@ -34,10 +34,10 @@ extern unsigned char g_773d75;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ab670;
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -99,7 +99,7 @@ void __cdecl fcn_005a4090(char* p)
 		}
 		if (g_100f1dc == 2) {
 			for (i = 0; i < 3; i++) {
-				if (list[i].n != 0 && g_67d370 == list[i].handle) {
+				if (list[i].n != 0 && d2_CurrentElementId == list[i].handle) {
 					goto found;
 				}
 			}
@@ -109,7 +109,7 @@ found:
 			ev[4] = 0x23;
 			*(int*) (ev + 8) = ((struct house*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].handle;
 			*(int*) (ev + 0xc) = *(int*) (p + 1);
-			*(int*) (ev + 0x28) = (*(int*)&g_7f4c00);
+			*(int*) (ev + 0x28) = (*(int*)&gm_GameTime);
 			*(int*) (ev + 0x2c) = (*(int*)&g_7f4c04);
 			*(int*) (ev + 0x30) = g_7f4c08;
 			*(short*) (ev + 0x34) = g_7f4c0c;

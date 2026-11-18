@@ -49,8 +49,8 @@ int __cdecl fcn_004e7ff0(unsigned char* arg)
 		goto fail;
 	}
 	want = arg[4];
-	slot = (SlotRec*) g_9a9220;
-	for (i = 0; (int) slot < (int) g_9a9220 + 0x2d0; slot++, i++) {
+	slot = (SlotRec*) amt_OfficeSlots;
+	for (i = 0; (int) slot < (int) amt_OfficeSlots + 0x2d0; slot++, i++) {
 		if (slot->type == want) {
 			goto found;
 		}
@@ -62,27 +62,27 @@ found:
 		goto fail;
 	}
 	c = arg[6];
-	if (((SlotRec*) g_9a9220)[i].tag != c) {
+	if (((SlotRec*) amt_OfficeSlots)[i].tag != c) {
 		goto fail;
 	}
 	if (arg[5] == 0xff) {
-		if (((SlotRec*) g_9a9220)[i].id != -1) {
+		if (((SlotRec*) amt_OfficeSlots)[i].id != -1) {
 			goto fail;
 		}
-		if (((SlotRec*) g_9a9220)[i].state != 3) {
+		if (((SlotRec*) amt_OfficeSlots)[i].state != 3) {
 			goto fail;
 		}
-		if (((SlotRec*) g_9a9220)[i].count >= 4) {
+		if (((SlotRec*) amt_OfficeSlots)[i].count >= 4) {
 			goto fail;
 		}
 		*(unsigned char*) (owner + 0x168) = c;
-		((SlotRec*) g_9a9220)[i].count++;
+		((SlotRec*) amt_OfficeSlots)[i].count++;
 		return 1;
 	}
 	want = arg[5];
-	other = (SlotRec*) g_9a9220;
-	for (j = 0; (int) other < (int) g_9a9220 + 0x2d0; other++, j++) {
-		if (((SlotRec*) g_9a9220)[j].type == want) {
+	other = (SlotRec*) amt_OfficeSlots;
+	for (j = 0; (int) other < (int) amt_OfficeSlots + 0x2d0; other++, j++) {
+		if (((SlotRec*) amt_OfficeSlots)[j].type == want) {
 			goto found2;
 		}
 	}
@@ -91,33 +91,33 @@ found2:
 	if (j >= 0x1e) {
 		goto fail;
 	}
-	if (((SlotRec*) g_9a9220)[i].tag != ((SlotRec*) g_9a9220)[j].tag) {
+	if (((SlotRec*) amt_OfficeSlots)[i].tag != ((SlotRec*) amt_OfficeSlots)[j].tag) {
 		goto fail;
 	}
-	rec = ((TypeRec*) g_68da68)[((SlotRec*) g_9a9220)[i].tag];
+	rec = ((TypeRec*) g_68da68)[((SlotRec*) amt_OfficeSlots)[i].tag];
 	if (rec.f0 != c) {
 		goto fail;
 	}
 	if (rec.f4 == 0) {
 		goto fail;
 	}
-	if (((SlotRec*) g_9a9220)[i].id != -1) {
+	if (((SlotRec*) amt_OfficeSlots)[i].id != -1) {
 		goto fail;
 	}
-	if (((SlotRec*) g_9a9220)[i].state != 3) {
+	if (((SlotRec*) amt_OfficeSlots)[i].state != 3) {
 		goto fail;
 	}
-	if (((SlotRec*) g_9a9220)[i].count >= 4) {
+	if (((SlotRec*) amt_OfficeSlots)[i].count >= 4) {
 		goto fail;
 	}
-	if (((SlotRec*) g_9a9220)[j].id != -1) {
+	if (((SlotRec*) amt_OfficeSlots)[j].id != -1) {
 		goto fail;
 	}
-	if (((SlotRec*) g_9a9220)[j].count >= 4) {
+	if (((SlotRec*) amt_OfficeSlots)[j].count >= 4) {
 		goto fail;
 	}
 	*(unsigned char*) (owner + 0x168) = c;
-	((SlotRec*) g_9a9220)[i].count++;
-	((SlotRec*) g_9a9220)[j].count++;
+	((SlotRec*) amt_OfficeSlots)[i].count++;
+	((SlotRec*) amt_OfficeSlots)[j].count++;
 	return 1;
 }

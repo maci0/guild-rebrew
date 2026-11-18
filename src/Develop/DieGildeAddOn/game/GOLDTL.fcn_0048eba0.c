@@ -33,7 +33,7 @@ typedef struct Msg {
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca4[];
 extern char* g_77261c;
 
@@ -80,13 +80,13 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 	if ((cnt.total != 6 || cnt.free != 0) && cnt.blocked != 0xf) {
 		if (cnt.total < 6) {
 			if (cnt.free == 0) {
-				if (*(int*) &g_7f4c00 < 0x14) {
+				if (*(int*) &gm_GameTime < 0x14) {
 					return 0;
 				}
 				if (*(unsigned char*) (e + 0xd) <= 4) {
 					return 0;
 				}
-				if (*(int*) &g_7f4c00 % 8 != (*(unsigned int*) (e + 4) & 7)) {
+				if (*(int*) &gm_GameTime % 8 != (*(unsigned int*) (e + 4) & 7)) {
 					return 0;
 				}
 				if (*(unsigned int*) (e + 0x1cc) & 0x40000000) {

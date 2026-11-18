@@ -31,19 +31,19 @@ CH_ACTION* __cdecl fcn_0040c120(char* e, int kind, ...)
 	if (e == 0) {
 		return 0;
 	}
-	if (((Entry*) g_14d0c40)[kind].handler == 0) {
+	if (((Entry*) ch_ActionDefinitions)[kind].handler == 0) {
 		kind = 0;
 	}
 	t = ch_NewAction(e);
 	if (t == 0) {
 		return 0;
 	}
-	t->ausfuehren = ((Entry*) g_14d0c40)[kind].handler;
+	t->ausfuehren = ((Entry*) ch_ActionDefinitions)[kind].handler;
 	t->art = (char) kind;
 	t->besitzer = e;
 	t->zustand = 0;
 	va_start(ap, kind);
-	for (i = 0; i < ((Entry*) g_14d0c40)[(unsigned char) t->art].nargs; i++) {
+	for (i = 0; i < ((Entry*) ch_ActionDefinitions)[(unsigned char) t->art].nargs; i++) {
 		(&t->parameter)[i] = va_arg(ap, int);
 	}
 	va_end(ap);

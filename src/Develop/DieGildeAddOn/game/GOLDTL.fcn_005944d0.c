@@ -1,4 +1,4 @@
-extern int g_100f1dc, g_14ce8e0, g_67d370;
+extern int g_100f1dc, g_14ce8e0, d2_CurrentElementId;
 /* Runs the town trade/settlement dialog: opens the window, collects the shop
    list, draws the goods rows and processes input until the player closes it. */
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -112,8 +112,8 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 		id = 0x717;
 		break;
 	}
-	fcn_00533dc0(g_772514, id, 0x742);
-	fcn_00533f40(0x270, 0x15e, g_772514,
+	fcn_00533dc0(d2_CurrentWindowId, id, 0x742);
+	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId,
 	             fcn_00472830(window, 2), 0x78, &rect2, &rect1, &v13);
 	*(unsigned int*) (*(int*) 0x1015ea0 + 0x84 + v13 * 0x2f4) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
@@ -146,7 +146,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 				row = 0;
 				rowsLeft = count;
 				do {
-					if (g_67d370 == *(int*) (row + 0x779194)) {
+					if (d2_CurrentElementId == *(int*) (row + 0x779194)) {
 						if (!(any)) {
 							int* r2;
 
@@ -416,17 +416,17 @@ after_input:
 			if (idx) {
 				d2_SetForm(saved, 2);
 				idx = 0;
-				*(int*) (g_772514 * 0x3cc + 0x1016198) =
-				    *(int*) (g_772514 * 0x3cc + 0x10161b4) *
+				*(int*) (d2_CurrentWindowId * 0x3cc + 0x1016198) =
+				    *(int*) (d2_CurrentWindowId * 0x3cc + 0x10161b4) *
 				    (signed char) a0[0x59];
 			}
 			fcn_00595e20(a0, entry);
 			fcn_005963f0(saved, 1, 0, a0);
 			if (!fcn_005373e0((void*) 0x5944d0, 0x677c7)) {
 				d2_SetForm(saved, 2);
-				a0[0x59] = (unsigned char) ((*(int*) (g_772514 * 0x3cc + 0x10161a0) +
-				                             *(int*) (g_772514 * 0x3cc + 0x1016198)) /
-				                            *(int*) (g_772514 * 0x3cc + 0x10161b4));
+				a0[0x59] = (unsigned char) ((*(int*) (d2_CurrentWindowId * 0x3cc + 0x10161a0) +
+				                             *(int*) (d2_CurrentWindowId * 0x3cc + 0x1016198)) /
+				                            *(int*) (d2_CurrentWindowId * 0x3cc + 0x10161b4));
 				fcn_00471e30(saved);
 				fcn_0052a2d0();
 				fcn_0057e880(0x1f, 0, 1, 0);

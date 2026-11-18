@@ -9,7 +9,7 @@
 extern float g_662d40[3];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_7e3a40[3];
-extern float g_7e3a50[3];
+extern float d3_CameraTargetRotation[3];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern char* g_7e2aa0;
@@ -66,7 +66,7 @@ void __cdecl fcn_0052cbb0(Ent* e)
 
 	obj = e->obj;
 	fcn_004133e0(obj, &lo, &hi);
-	fcn_005ebbb9(m, (float*) ((char*) g_6b8014 + 0x18c));
+	fcn_005ebbb9(m, (float*) ((char*) d3_ActiveCamera + 0x18c));
 	a = g_662d40[0] * -600.0f;
 	b = g_662d40[1] * -600.0f;
 	c = g_662d40[2] * -600.0f;
@@ -78,31 +78,31 @@ void __cdecl fcn_0052cbb0(Ent* e)
 	q[1] = p[1] + off[1];
 	q[2] = p[2] + off[2];
 	h = fcn_00413d10(q);
-	q[1] = ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558) + h;
+	q[1] = ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558) + h;
 	d[1] = q[1] - p[1];
 	fcn_004133e0(obj, &lo, &hi);
 	n = off[1] / ((hi - lo) * 0.5f + d[1]);
 	q[0] = (float) (q[0] - (n * off[0] - off[0] * 1.8));
 	q[2] = (float) (q[2] - (n * off[2] - off[2] * 1.8));
-	cam = (char*) g_6b8014;
+	cam = (char*) d3_ActiveCamera;
 	*(int*) &rot[0] = *(int*) (cam + 0x84);
 	*(int*) &rot[1] = *(int*) (cam + 0x88);
 	*(int*) &rot[2] = *(int*) (cam + 0x8c);
 	fcn_00433780(cam);
 	d3_ActiveCameraAnimation = 0;
-	g_6b5cbc = 0;
+	d3_CameraAnimating = 0;
 	h = fcn_00413d10(q);
-	q[1] = ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558) + h;
-	cam = (char*) g_6b8014;
+	q[1] = ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558) + h;
+	cam = (char*) d3_ActiveCamera;
 	dx = q[0] - *(float*) (cam + 0x4c);
 	dy = q[1] - *(float*) (cam + 0x50);
 	dz = q[2] - *(float*) (cam + 0x54);
 	n = (float) g_6a256c;
 	len = (float) sqrt(dz * dz + dy * dy + dx * dx) * n * 0.0005f;
 	fcn_00412cf0(cam, q, rot, (int) MINV(MAXV(n, len), (float) (g_6a256c * 3)), 0x68);
-	g_7e3a50[0] = rot[0];
-	g_7e3a50[1] = rot[1];
-	g_7e3a50[2] = rot[2];
+	d3_CameraTargetRotation[0] = rot[0];
+	d3_CameraTargetRotation[1] = rot[1];
+	d3_CameraTargetRotation[2] = rot[2];
 	g_7e3a40[0] = q[0];
 	g_7e3a40[1] = q[1];
 	g_7e3a40[2] = q[2];

@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 extern void __cdecl fcn_00546190(void* a0);
 extern void __cdecl fcn_00500bb0(unsigned int* p, int a, int b, int c);
@@ -17,7 +17,7 @@ void __cdecl fcn_005511a0(char* a0)
 		if (state >= 0) {
 			if (state == 0) {
 				if ((*(unsigned char*)(a0 + 0x78) & 2) != 0) {
-					*(pos14_7f4c00*)(a0 + 0x52) = g_7f4c00;
+					*(pos14_7f4c00*)(a0 + 0x52) = gm_GameTime;
 					fcn_00500bb0((unsigned int*)(a0 + 0x52), 0, 2, 0);
 					*(int*)(a0 + 0x84) = fcn_004c5620(-1, a0);
 				}

@@ -45,7 +45,7 @@ void __cdecl fcn_00488e10(char* e)
 	q = *(char**) (e + 0x16c); *(char*) (s + 4) = 0x8f;
 	*(int*) (s + 8) = *(int*) (*(unsigned short*) (q + 0x27) * 0x21c + 0x7f4ca4);
 	*(int*) (s + 0xc) = *(int*) (q + 1);
-	*(pos14_7f4c00*) (s + 0x28) = g_7f4c00;
+	*(pos14_7f4c00*) (s + 0x28) = gm_GameTime;
 
 
 

@@ -4,7 +4,7 @@ int __cdecl fcn_004c5530(void *);
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 #pragma pack(2)
 typedef struct
@@ -26,7 +26,7 @@ int __cdecl fcn_004b1740(void)
 	int i;
 	int id;
 
-	stamp = *(stamp14*) &g_7f4c00;
+	stamp = *(stamp14*) &gm_GameTime;
 	memset(msg, 0, sizeof(msg));
 	stamp.c = 0;
 	i = 0;

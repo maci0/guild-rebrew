@@ -12,7 +12,7 @@ struct house {
 
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "client_packet_builder.h"
 extern unsigned char* lpGebaeudePROT;
 
@@ -49,7 +49,7 @@ void __cdecl fcn_0055fd10(char* u)
 		*(int*) (u + 0x70) += 1;
 		return;
 	case 1:
-		if (fcn_00500cb0((pos14_7f4c00*) (u + 0x52), &g_7f4c00) >= 0) {
+		if (fcn_00500cb0((pos14_7f4c00*) (u + 0x52), &gm_GameTime) >= 0) {
 			return;
 		}
 		gm_ResolveEntityById(0, (void**) (&h), 0, *(int*) (u + 0xac));
@@ -86,7 +86,7 @@ void __cdecl fcn_0055fd10(char* u)
 			}
 		}
 		if (*(int*) (u + 0xb4) != 0 || *(int*) (u + 0xb0) != 0) {
-			*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 0xf, 0);
 			return;
 		}

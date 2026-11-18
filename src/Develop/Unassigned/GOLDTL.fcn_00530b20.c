@@ -12,7 +12,7 @@ typedef struct {
 } Job;
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern s_7e2ac0 g_7e2ac0[48];
 extern float g_696540[];
@@ -26,7 +26,7 @@ int __cdecl fcn_00530b20(char* ent, int owner, char* out)
 	int i;
 	float t;
 
-	hour = fcn_00500e20(&(*(int*)&g_7f4c00));
+	hour = fcn_00500e20(&(*(int*)&gm_GameTime));
 	for (i = 0; ((Job*)g_7e2ac0)[i].kind != 0; i++) {
 		if (((Job*)g_7e2ac0)[i].kind == *(unsigned char*) (ent + 0x180)) {
 			if ((*(unsigned int*) (ent + 0x1cc) & 0x1000000) != 0) {

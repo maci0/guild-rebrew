@@ -49,7 +49,7 @@ typedef struct {
 extern char* lpObjektePROT;  /* +0x41 stride goods records: type byte, name */
 extern char g_100d0c0[];     /* +0x58 stride building records */
 extern char g_100b0c0[];     /* +0x40 stride ware records */
-extern int g_100b0a8;        /* ware count */
+extern int ai_ResourceCount;        /* ware count */
 extern int g_100b0ac;        /* building count */
 extern int g_100dc20;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -265,8 +265,8 @@ done:
 				rec->f54 = val & 0xfffffff7;
 		}
 	}
-	if (g_100b0a8 > 0) {
-		for (i = 0; i < g_100b0a8; i++) {
+	if (ai_ResourceCount > 0) {
+		for (i = 0; i < ai_ResourceCount; i++) {
 			val = *(int*) (g_100b0c0 + 4 + i * 0x40 + 0x38);
 			if (((val & 0x20) || (val & 0x200)) && (val & 0x10) &&
 			    *(int*) (g_100b0c0 + 4 + i * 0x40) >= 0) {

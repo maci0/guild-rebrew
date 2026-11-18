@@ -23,7 +23,7 @@ void __cdecl fcn_004131e0(float* out, float amount)
 	float a;
 	char* base;
 
-	base = (char*) g_6b8014;
+	base = (char*) d3_ActiveCamera;
 	cam[0] = *(float*) (base + 0x4c);
 	cam[1] = *(float*) (base + 0x50);
 	cam[2] = *(float*) (base + 0x54);

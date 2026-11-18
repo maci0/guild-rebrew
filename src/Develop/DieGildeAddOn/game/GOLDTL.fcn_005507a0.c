@@ -10,10 +10,10 @@ struct house {
 };
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern unsigned char g_773d75;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6652c8;
 extern char g_6a5a10[];
@@ -33,7 +33,7 @@ void __cdecl fcn_005507a0(char* u)
 	int v;
 
 	if (*(int*) (u + 0x70) != -1 && *(int*) (u + 0x70) != -2) {
-		if (fcn_00500cb0(&g_7f4c00, u + 0x44) == -1) {
+		if (fcn_00500cb0(&gm_GameTime, u + 0x44) == -1) {
 			return;
 		}
 		switch (*(int*) (u + 0x70)) {
@@ -56,7 +56,7 @@ void __cdecl fcn_005507a0(char* u)
 				return;
 			}
 			if (g_100f1dc == 2) {
-				fcn_004c5150(*(int*) (g_773da8 + 4), ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, g_773d75,
+				fcn_004c5150(*(int*) (gm_CityEntity + 4), ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, g_773d75,
 				    (int) (gm_WalkEntityChain(*(unsigned short*) (u + 8)) * g_6652c8));
 				fcn_0050fe40(*(unsigned short*) (u + 8), 8);
 				fcn_00545780(u);

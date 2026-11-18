@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 extern char g_6b5c60[];
 
 int __cdecl fcn_004c4450(int);
@@ -98,7 +98,7 @@ void __cdecl fcn_00566360(char* a0)
 			fcn_00546190(o);
 			return;
 		}
-		v15 = g_6b8010;
+		v15 = d3_CurrentContextIndex;
 		v7 = fcn_00413190(*(unsigned int*) (v6 + 0x88));
 		name[0] = g_6b5c60[0];
 		memset(name + 1, 0, 0x7f);

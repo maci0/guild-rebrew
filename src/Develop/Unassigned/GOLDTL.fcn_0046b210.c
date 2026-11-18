@@ -40,11 +40,11 @@ int __cdecl fcn_0046b210(int x, int y)
 				break;
 			}
 			if (y >= s->top && y <= s->bottom && s->hidden4c == 0) {
-				g_67d370 = i;
+				d2_CurrentElementId = i;
 				return s->value;
 			}
 		}
 	}
-	g_67d370 = -1;
+	d2_CurrentElementId = -1;
 	return -1;
 }

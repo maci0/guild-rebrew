@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern Rec18_68da68 g_9a9220[42];
+extern Rec18_68da68 amt_OfficeSlots[42];
 extern char g_7f4ca0[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -22,7 +22,7 @@ void __cdecl fcn_004ea350(void)
 
 
 
-	for (r = &g_9a9220[0].x10; (int) r < (int) &g_9a9220[30].x10; r += 0x18) {
+	for (r = &amt_OfficeSlots[0].x10; (int) r < (int) &amt_OfficeSlots[30].x10; r += 0x18) {
 		e = gm_LookupEntityRecordById(*(int*) (r - 0xc));
 		res = -1;
 		if (e != 0 && *(unsigned char*) (e + 8) != 0) {

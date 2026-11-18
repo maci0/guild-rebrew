@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern s_77e8c0 g_77e8c0[16];
 
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
@@ -17,7 +17,7 @@ unsigned int __cdecl fcn_005455b0(void)
 	int foundi;
 	int i;
 
-	pos = g_7f4c00;
+	pos = gm_GameTime;
 	found = 0;
 	foundi = -1;
 	for (i = 0, r = g_77e8c0; (int) r < (int) (g_77e8c0 + 16); r++, i++) {

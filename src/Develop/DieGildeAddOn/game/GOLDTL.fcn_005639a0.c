@@ -1,7 +1,7 @@
 #include "client_types.h"
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern char g_7f4ca0[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -36,13 +36,13 @@ void __cdecl fcn_005639a0(int a)
 			fcn_00546190((void*) a);
 			return;
 		}
-		t = fcn_00500d20((void*) (a + 0x60), (void*) &g_7f4c00);
+		t = fcn_00500d20((void*) (a + 0x60), (void*) &gm_GameTime);
 		t = (int) ((double) t * g_6629f8 + g_662908);
 		*(int*) (a + 0xb0) -= t;
 		fcn_0050ff70(r, t);
 		if (*(int*) (a + 0xb0) > 0) {
-			*(pos14_7f4c00*) (a + 0x60) = *(pos14_7f4c00*) &g_7f4c00;
-			*(pos14_7f4c00*) (a + 0x52) = *(pos14_7f4c00*) &g_7f4c00;
+			*(pos14_7f4c00*) (a + 0x60) = *(pos14_7f4c00*) &gm_GameTime;
+			*(pos14_7f4c00*) (a + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 			fcn_00500bb0((void*) (a + 0x52), 0, 0xa, 0);
 			return;
 		}

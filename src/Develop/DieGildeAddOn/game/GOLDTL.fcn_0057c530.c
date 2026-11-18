@@ -1,7 +1,7 @@
 void __cdecl fcn_0057c530(char*, char*);
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 // SIZE 0xf8
 struct msg {
@@ -41,7 +41,7 @@ void __cdecl fcn_0057c530(char* a, char* b)
 	m.b4 = (char) 0x9f;
 	m.f8 = *(int*) (b + 4);
 	m.fc = -1;
-	m.pos = g_7f4c00;
+	m.pos = gm_GameTime;
 	m.b36 = 1;
 	fcn_004c5530(&m);
 	if (b == a) {

@@ -9,10 +9,10 @@ extern int g_6a25d4;
 extern int g_6a25d8;
 extern int g_6a25e8;
 extern int g_100f1dc;
-extern int g_67d370;
-extern int g_7e46ac;
+extern int d2_CurrentElementId;
+extern int main_LoopFlags;
 extern int g_7746f0;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char* g_7e2aa0;
 extern int* g_7e2a9c;
@@ -103,11 +103,11 @@ header_done:
 			return;
 		}
 		ratio = (float) fcn_00500d20(e + 0x44, e + 0xb8);
-		ratio = (float) fcn_00500d20(e + 0x44, (char*) &g_7f4c00) / ratio;
+		ratio = (float) fcn_00500d20(e + 0x44, (char*) &gm_GameTime) / ratio;
 		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
-			g_6a25c4[0] = fcn_0046f740(((((Win_1015f40*) g_1015f40)[g_772514].xc - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, g_772514);
+			g_6a25c4[0] = fcn_0046f740(((((Win_1015f40*) g_1015f40)[d2_CurrentWindowId].xc - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 		}
 		return;
 	}
@@ -123,7 +123,7 @@ header_done:
 			}
 			if (g_6a25c4[0] == -1) {
 				d2_SetForm(g_6a25b8, 0);
-				g_6a25c4[0] = fcn_0046f740(((((Win_1015f40*) g_1015f40)[g_772514].xc - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, g_772514);
+				g_6a25c4[0] = fcn_0046f740(((((Win_1015f40*) g_1015f40)[d2_CurrentWindowId].xc - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 			}
 		}
 		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
@@ -135,11 +135,11 @@ header_done:
 			return;
 		}
 		ratio = (float) fcn_00500d20(e + 0x44, e + 0x52);
-		ratio = (float) fcn_00500d20(e + 0x44, (char*) &g_7f4c00) / ratio;
+		ratio = (float) fcn_00500d20(e + 0x44, (char*) &gm_GameTime) / ratio;
 		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
-			g_6a25c4[0] = fcn_0046f740(((((Win_1015f40*) g_1015f40)[g_772514].xc - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, g_772514);
+			g_6a25c4[0] = fcn_0046f740(((((Win_1015f40*) g_1015f40)[d2_CurrentWindowId].xc - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 		}
 		return;
 	}
@@ -155,11 +155,11 @@ header_done:
 		return;
 	}
 	ratio = (float) fcn_00500d20(e + 0x44, e + 0x52);
-	ratio = (float) fcn_00500d20(e + 0x44, (char*) &g_7f4c00) / ratio;
+	ratio = (float) fcn_00500d20(e + 0x44, (char*) &gm_GameTime) / ratio;
 	*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 	if (g_6a25c4[0] == -1) {
 		d2_SetForm(g_6a25b8, 0);
-		g_6a25c4[0] = fcn_0046f740(((((Win_1015f40*) g_1015f40)[g_772514].xc - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, g_772514);
+		g_6a25c4[0] = fcn_0046f740(((((Win_1015f40*) g_1015f40)[d2_CurrentWindowId].xc - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 	}
 	return;
 
@@ -190,15 +190,15 @@ no_header:
 		}
 	}
 	d2_SetForm(g_6a25b8, 0);
-	x = (((Win_1015f40*) g_1015f40)[g_772514].xc - 0x30) >> 1;
+	x = (((Win_1015f40*) g_1015f40)[d2_CurrentWindowId].xc - 0x30) >> 1;
 	n = fcn_00529800(s, kinds);
 	if (n > 0) {
 		y = 0x38;
 		for (i = 0; i < n; i++) {
 			if (kinds[i] >= 0xdf && kinds[i] < 0x3bb) {
-				g_6a25c4[i] = fcn_0046f7e0(x + 0x32, y, kinds[i], g_772514, -2);
+				g_6a25c4[i] = fcn_0046f7e0(x + 0x32, y, kinds[i], d2_CurrentWindowId, -2);
 			} else {
-				g_6a25c4[i] = fcn_0046f740(x + 0x32, y, kinds[i], g_772514);
+				g_6a25c4[i] = fcn_0046f740(x + 0x32, y, kinds[i], d2_CurrentWindowId);
 			}
 			y += 0x1a;
 		}
@@ -218,13 +218,13 @@ no_header:
 	case 0x8f:
 		n = fcn_00500d20(p + 0x44, p + 0xb8);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
+			ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
 		}
 		break;
 	case 0x16:
 		n = fcn_00500d20(p + 0x44, p + 0xb8);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
+			ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
 		}
 		break;
 	case 0x40:
@@ -233,7 +233,7 @@ no_header:
 		} else if (*(int*) (p + 0x70) == 2) {
 			n = fcn_00500d20(p + 0x44, p + 0x52);
 			if (n != 0) {
-				ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
+				ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
 			}
 		}
 		break;
@@ -242,7 +242,7 @@ no_header:
 		fcn_00500bb0(&pos, 8, 0, 0);
 		n = fcn_00500d20(p + 0xc4, &pos);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0xc4, (char*) &g_7f4c00) / (float) n;
+			ratio = (float) fcn_00500d20(p + 0xc4, (char*) &gm_GameTime) / (float) n;
 		}
 		break;
 	case 0x43:
@@ -250,7 +250,7 @@ no_header:
 		fcn_00500bb0(&pos, 0x18, 0, 0);
 		n = fcn_00500d20(p + 0x44, &pos);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
+			ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
 		}
 		break;
 	case 0x62:
@@ -261,7 +261,7 @@ no_header:
 			fcn_00500bb0(&pos, 0x60, 0, 0);
 			n = fcn_00500d20(p + 0x44, &pos);
 			if (n != 0) {
-				ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
+				ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
 			}
 		}
 		break;
@@ -273,7 +273,7 @@ no_header:
 			fcn_00500bb0(&pos, 0x18, 0, 0);
 			n = fcn_00500d20(p + 0x44, &pos);
 			if (n != 0) {
-				ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
+				ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
 			}
 		}
 		break;
@@ -283,14 +283,14 @@ no_header:
 		} else if (*(int*) (p + 0x70) == 1) {
 			n = fcn_00500d20(p + 0x44, p + 0xcc);
 			if (n != 0) {
-				ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
+				ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
 			}
 		}
 		break;
 	case 0x6c:
 		n = fcn_00500d20(p + 0x44, p + 0xb4);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0x44, (char*) &g_7f4c00) / (float) n;
+			ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
 		}
 		break;
 	}
@@ -320,7 +320,7 @@ no_target:
 		return;
 	}
 	if (g_6a25e8 != -1 && g_100f1dc != -1
-	    && g_67d370 == g_6a25e8 && (g_7e46ac & 0x2000)) {
+	    && d2_CurrentElementId == g_6a25e8 && (main_LoopFlags & 0x2000)) {
 		fcn_004bfe00((char*) g_7e2a9c);
 	}
 	if (d2_CurrentValueBar != -1) {
@@ -333,7 +333,7 @@ no_target:
 			g_6a25c4[i] = -1;
 		}
 	}
-	fcn_0046f2c0(g_772514, 1);
+	fcn_0046f2c0(d2_CurrentWindowId, 1);
 	e = *(char**) ((char*) g_7e2a9c + 0x24);
 	if (e != 0) {
 		s = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb4));
@@ -351,9 +351,9 @@ no_target:
 	}
 	k = 0;
 	for (i = 3; i < 0x83; i += 0x20) {
-		g_6a25c4[k] = fcn_0046f7e0(i, 0x28, *(unsigned short*) s + 0xdf, g_772514, -2);
+		g_6a25c4[k] = fcn_0046f7e0(i, 0x28, *(unsigned short*) s + 0xdf, d2_CurrentWindowId, -2);
 		fcn_0064d41a(buf, g_67d444, gm_GetMsgField((int) e, (int) s));
-		n = d2_ShowTxt(i - 2, 0x1c, buf, g_772514);
+		n = d2_ShowTxt(i - 2, 0x1c, buf, d2_CurrentWindowId);
 		*(int*) (g_1015ea0 + n * 0x2f4 + 0x5c) = 1;
 		*(int*) (g_1015ea0 + n * 0x2f4 + 0x6c) = 1;
 		*(int*) (g_1015ea0 + n * 0x2f4 + 0x18) = 0x20;

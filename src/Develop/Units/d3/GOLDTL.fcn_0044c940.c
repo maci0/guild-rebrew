@@ -30,7 +30,7 @@ int __cdecl fcn_00411490(int h, const char* name, float* out);
 void __cdecl fcn_00410430(int h);
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
-extern int g_67ac90;
+extern int d3_LODMode;
 
 
 /* Reads the Direct3D screen and window options from the registry over the
@@ -88,11 +88,11 @@ char __cdecl fcn_0044c940(D3dRegCfg_44c940* cfg, const char* key, D3dRegCfg_44c9
 			fcn_00411390(h, "d3d_static_texture_fourcc", &cfg->static_tex_fourcc);
 			if (fcn_004113d0(h, "d3io_LODMode", mode) != 0) {
 				if (fcn_0065f220(mode, "d3io_LOD_SWITCH") == 0) {
-					g_67ac90 = 1;
+					d3_LODMode = 1;
 				} else if (fcn_0065f220(mode, "d3io_LOD_LOW") == 0) {
-					g_67ac90 = 2;
+					d3_LODMode = 2;
 				} else if (fcn_0065f220(mode, "d3io_LOD_HIGH") == 0) {
-					g_67ac90 = 4;
+					d3_LODMode = 4;
 				}
 			}
 			fcn_00411490(h, "d3_window_width", &cfg->window_width);

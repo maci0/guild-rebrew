@@ -20,7 +20,7 @@ extern void __cdecl fcn_00455350(char*, char*, float*);
 extern void __cdecl he_CharacterBehavior(char*, int);
 extern void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 extern int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x00554170 */
 void __cdecl fcn_00554170(char* obj)
@@ -54,7 +54,7 @@ void __cdecl fcn_00554170(char* obj)
 	if (*(unsigned char*) (obj + 0x78) & 4)
 		return;
 	time = (pos14_7f4c00*) (obj + 0x52);
-	*(pos14_7f4c00*) (obj + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 	switch (*(int*) (obj + 0x70)) {
 	case 0:
 		iter = obj + 0x8c;
@@ -82,7 +82,7 @@ void __cdecl fcn_00554170(char* obj)
 			count++;
 			iter += 4;
 		}
-		*(pos14_7f4c00*) (obj + 0x44) = g_7f4c00;
+		*(pos14_7f4c00*) (obj + 0x44) = gm_GameTime;
 		fcn_00500bb0(time, 0, 0xa, 0);
 		*(int*) (obj + 0x84) = fcn_004c5620(2, obj);
 		return;
@@ -135,7 +135,7 @@ void __cdecl fcn_00554170(char* obj)
 						idx++;
 					}
 				}
-				*(pos14_7f4c00*) (msg + 0x18) = g_7f4c00;
+				*(pos14_7f4c00*) (msg + 0x18) = gm_GameTime;
 				*(int*) (msg + 0x100) = -1;
 				*(int*) (msg + 0x104) = -1;
 				*(int*) (msg + 0x108) = -1;
@@ -150,7 +150,7 @@ void __cdecl fcn_00554170(char* obj)
 		}
 	not_found:
 		fcn_00500bb0(time, 0, 0xa, 0);
-		if (g_6b8010 == 0) {
+		if (d3_CurrentContextIndex == 0) {
 			rec = fcn_00445600(0, 0x140, 0, obj + 0xac);
 			if (rec != 0) {
 				float pos[4];

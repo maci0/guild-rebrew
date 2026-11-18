@@ -2,7 +2,7 @@
 #include <string.h>
 
 extern int g_1052de0;
-extern int g_67fca0;
+extern int hst_HistoryTextBase;
 
 void __cdecl io_FormatTextBuffer(int, int, ...);
 
@@ -60,21 +60,21 @@ void __cdecl hst_ParseText_Real(int out, int src)
 		c = *scan;
 		if (c == '[') {
 			if (open != 0) {
-				sprintf(msg, (char*) 0x680b28, src - g_67fca0);
+				sprintf(msg, (char*) 0x680b28, src - hst_HistoryTextBase);
 				return;
 			}
 			open = scan;
 			scan++;
 		} else if (c == '#') {
 			if (open == 0 || hash != 0) {
-				sprintf(msg, (char*) 0x680b28, src - g_67fca0);
+				sprintf(msg, (char*) 0x680b28, src - hst_HistoryTextBase);
 				return;
 			}
 			hash = scan;
 			scan++;
 		} else if (c == ']') {
 			if (open == 0 || hash == 0) {
-				sprintf(msg, (char*) 0x680b28, src - g_67fca0);
+				sprintf(msg, (char*) 0x680b28, src - hst_HistoryTextBase);
 				return;
 			}
 			memmove(hash, scan + 1, strlen(scan + 1) + 1);

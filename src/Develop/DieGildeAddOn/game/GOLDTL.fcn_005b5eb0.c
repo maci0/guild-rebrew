@@ -1,7 +1,7 @@
 extern char* g_1015ea0; /* 0x1015ea0, GUI pool, stride 0x2f4 */
 extern char* g_773d78;  /* 0x773d78 */
 extern int g_14abc14;
-extern int g_772514;    /* 0x772514 */
+extern int d2_CurrentWindowId;    /* 0x772514 */
 
 int __cdecl fcn_004fdec0(char* name);
 int __cdecl d2_SetForm(int k, int i);
@@ -55,13 +55,13 @@ void __cdecl fcn_005b5eb0(int a0, char* a1)
         v8[1] = fcn_004fdec0("handwerker_MANN");
         v8[2] = fcn_004fdec0("handwerker2_MANN");
         v8[3] = fcn_004fdec0("handwerker3_MANN");
-        fcn_0046f740(0xe, y - 2, 0x5db, g_772514);
+        fcn_0046f740(0xe, y - 2, 0x5db, d2_CurrentWindowId);
         fcn_0046f740(0x10, y,
                      v8[*(int*) (*(int*) (i * 4 + 0x777cc4) + 2) & 3] + 0x639,
-                     g_772514);
+                     d2_CurrentWindowId);
         fcn_0046f740(0x50, x - 0x5a,
                      *(unsigned short*) (*(int*) (i * 4 + 0x777cc4)) + 0x4b1,
-                     g_772514);
+                     d2_CurrentWindowId);
         v = *(int*) (i * 4 + 0x777cc4);
         if (*(int*) (v + 0x24) != 0) {
             name = gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (*(int*) (v + 0x24) + 0xb4));
@@ -75,11 +75,11 @@ void __cdecl fcn_005b5eb0(int a0, char* a1)
             }
             io_FormatTextBuffer(buf, 0x1a3e, name);
         }
-        v = fcn_0046fac0(0, x - 0x12, buf, g_772514);
+        v = fcn_0046fac0(0, x - 0x12, buf, d2_CurrentWindowId);
         *(int*) (i * 4 + 0x777cdc) = v;
         fcn_00472900(v, 0x56);
         if (a1 != name) {
-            v = fcn_0046f740(0, x, 5, g_772514);
+            v = fcn_0046f740(0, x, 5, d2_CurrentWindowId);
             *(int*) (i * 4 + 0x777cd0) = v;
             *(unsigned int*) (g_1015ea0 + 0x5c + v * 0x2f4) = 1;
             *(char**) (g_1015ea0 + 0x2f0 +

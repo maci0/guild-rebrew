@@ -108,24 +108,24 @@ void __cdecl fcn_005c49e0(unsigned char* p)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == h1) {
+			if (d2_CurrentElementId == h1) {
 				fcn_00471af0(d, 0);
 				fcn_0059aa10(p, 0xfd);
 				fcn_00471af0(d, 1);
 			}
-			else if (g_67d370 == h2) {
+			else if (d2_CurrentElementId == h2) {
 				fcn_00471af0(d, 0);
 				fcn_005c2580(p);
 				fcn_00471af0(d, 1);
 				redraw = 1;
 			}
-			else if (g_67d370 == h3) {
+			else if (d2_CurrentElementId == h3) {
 				fcn_00471af0(d, 0);
 				fcn_005c2a40(p);
 				fcn_00471af0(d, 1);
 				redraw = 1;
 			}
-			else if (g_67d370 == h4) {
+			else if (d2_CurrentElementId == h4) {
 				fcn_00471af0(d, 0);
 				fcn_005c30e0(p);
 				fcn_00471af0(d, 1);

@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 extern char g_1043695[];
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -38,7 +38,7 @@ int __cdecl cm_ExChrWalkToDummy(char* a1, char* a2)
 		s = gm_FindRecordById(*(int*) (a1 + 0x18));
 	else
 		r = gm_SearchTable67(*(int*) (a1 + 0x14));
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	if (*(int*) (a1 + 0x18) != -1)
 		k = fcn_00515540(s);
 	else if (*(int*) (a1 + 0x14) != -1)

@@ -60,13 +60,13 @@ void __cdecl fcn_00441400(char* o)
 	int a;
 	int b;
 
-	if (g_6b8014 == 0) {
+	if (d3_ActiveCamera == 0) {
 		return;
 	}
-	fcn_005ec410(m, *(float*) (o + 0x50) - *(float*) (((char*) g_6b8014) + 0x4c),
-	             *(float*) (o + 0x54) - *(float*) (((char*) g_6b8014) + 0x50),
-	             *(float*) (o + 0x58) - *(float*) (((char*) g_6b8014) + 0x54));
-	fcn_005eb970(m, m, (float*) (((char*) g_6b8014) + 0x18c));
+	fcn_005ec410(m, *(float*) (o + 0x50) - *(float*) (((char*) d3_ActiveCamera) + 0x4c),
+	             *(float*) (o + 0x54) - *(float*) (((char*) d3_ActiveCamera) + 0x50),
+	             *(float*) (o + 0x58) - *(float*) (((char*) d3_ActiveCamera) + 0x54));
+	fcn_005eb970(m, m, (float*) (((char*) d3_ActiveCamera) + 0x18c));
 	((IDev*) g_6b5de0)->v->SetTransform(((IDev*) g_6b5de0), 0x100, m);
 	fcn_004372d0(0xff, 0, 0, 0, 0);
 	for (pp = (MObj**) (o + 0x30), k = 0; k < 8; k++) {

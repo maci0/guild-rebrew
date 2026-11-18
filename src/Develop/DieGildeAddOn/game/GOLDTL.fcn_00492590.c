@@ -68,7 +68,7 @@ unsigned int __cdecl fcn_00492590(int a0)
 	memset(((char *)g_772628), 0, 0x21c);
 	((char *)g_772628)[9] = (char) gm_RandomMod(2);
 	if (((char *)g_772628)[9] != 0) {
-		src = g_14a60d0[gm_RandomMod(0x70) & 0xffff];
+		src = gm_FemaleNames[gm_RandomMod(0x70) & 0xffff];
 	} else {
 		src = g_14a5dbc[gm_RandomMod(0xbf) & 0xffff];
 	}

@@ -77,7 +77,7 @@ void __cdecl fcn_004efde0(void)
 	*(int*) 0x772ff0 = *(int*) 0x7f4c08;
 	*(short*) 0x772ff4 = *(short*) 0x7f4c0c;
 	step = step * *(float*) 0x662a3c;
-	save = g_6b8010; fcn_004432d0(0, 1);
+	save = d3_CurrentContextIndex; fcn_004432d0(0, 1);
 	count = 0; idx = 0;
 	for (;;) {
 		if (SLOT->id != -1) {

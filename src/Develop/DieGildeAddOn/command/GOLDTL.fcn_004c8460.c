@@ -32,7 +32,7 @@ int __cdecl fcn_004c8460(int msg, char* result)
 	uint recipe_idx;
 
 	if (g_14cbca0 != -1)
-		g_699364 = *(int*) (msg + 0x1a);
+		gm_NextEntityId = *(int*) (msg + 0x1a);
 	quantity = gm_GetFieldByType((char*)msg, *(int*)(msg + 0x10));
 	*(int*)(msg + 0x10) = quantity;
 	quantity = gm_ResolveEntityById((void**)0, (void**)&lager, (void**)0, quantity);

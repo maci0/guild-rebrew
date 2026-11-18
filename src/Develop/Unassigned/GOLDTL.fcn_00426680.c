@@ -1,10 +1,10 @@
 #include <string.h>
 #include <stdlib.h>
 extern char g_14cb3b0[]; extern int g_6b25b0, g_6b23a4;
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern int g_6b7eb4;
 extern int g_6b7ec4;
-#define LEX_426680 (*(char**) (g_6b7e98 + 0x118))
+#define LEX_426680 (*(char**) (evt_CurrentScript + 0x118))
 
 /* SIZE 0x64 */
 struct tok_426680 {
@@ -138,7 +138,7 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 			tok->u.num = atoi(buf);
 		}
 	} else {
-		if ((p = fcn_004260f0(g_6b7e98, buf)) != 0) {
+		if ((p = fcn_004260f0(evt_CurrentScript, buf)) != 0) {
 			tok->type = 2;
 			tok->u.sym = p;
 			return;
@@ -148,7 +148,7 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 			tok->u.num = r;
 			return;
 		}
-		if ((p = fcn_004262b0(g_6b7e98, buf)) != 0) {
+		if ((p = fcn_004262b0(evt_CurrentScript, buf)) != 0) {
 			tok->type = 3;
 			tok->u.sym = p;
 			return;
@@ -158,7 +158,7 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 			tok->u.sym = p;
 			return;
 		}
-		if ((p = fcn_00426240(g_6b7e98, buf)) != 0) {
+		if ((p = fcn_00426240(evt_CurrentScript, buf)) != 0) {
 			tok->type = 0xb;
 			tok->u.sym = p;
 			return;

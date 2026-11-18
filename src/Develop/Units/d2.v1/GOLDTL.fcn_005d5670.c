@@ -19,7 +19,7 @@ struct msg {
 	char pad60[0x98];
 };
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char s_6acc74[];
 extern int g_100f1dc;
 extern int g_14ce8e0;
@@ -76,13 +76,13 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
 				if (chance >= gm_RandomMod(8)) {
-					pos = g_7f4c00;
+					pos = gm_GameTime;
 					fcn_00500bb0(&pos, 0x60, 0, 0);
 					memset(&m, 0, sizeof(m));
 					m.b4 = 0x45;
 					m.b36 = 2;
 					m.f8 = *(int*) (e + 4);
-					m.pos = g_7f4c00;
+					m.pos = gm_GameTime;
 					m.fc = *(int*) (e + 4);
 					m.f58 = *(int*) (e + 4);
 					m.f5c = *(int*) (o + 4);

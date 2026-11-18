@@ -27,12 +27,12 @@ char* __cdecl fcn_00472880(int idx)
 	}
 	g_772524 = d2_GetResourceData(idx);
 	d2_CurrentFont = idx;
-	g_1015ea4 = *(unsigned short*) (g_772524 + 8);
-	if (idx == g_67d398) {
+	d2_FontHeight = *(unsigned short*) (g_772524 + 8);
+	if (idx == d2_DefaultFont) {
 		g_67d380 = 8;
 	} else {
 		g_67d380 = 4;
-		if (idx == g_67d398 + 2) {
+		if (idx == d2_DefaultFont + 2) {
 			g_67d380 = 8;
 		}
 	}

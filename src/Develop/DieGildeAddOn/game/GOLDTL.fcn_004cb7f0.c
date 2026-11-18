@@ -2,13 +2,13 @@
 #include <string.h>
 
 extern int g_14cbca0;
-extern int g_699364;
+extern int gm_NextEntityId;
 extern char* lpGebaeudePROT;
 extern char g_7f4ca9[];
 extern int g_6798d4;
 extern int g_6b7fdc;
-extern int g_6b8010;
-extern int g_6b8014;
+extern int d3_CurrentContextIndex;
+extern int d3_ActiveCamera;
 extern int g_773dd8;
 extern unsigned char g_773dd4;
 extern unsigned char g_773d75;
@@ -75,7 +75,7 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 	int res;
 
 	if (g_14cbca0 != -1) {
-		g_699364 = *(int*) (a0 + 0x14);
+		gm_NextEntityId = *(int*) (a0 + 0x14);
 	}
 	v4 = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0x10));
 	if (v4 == 0) {
@@ -117,7 +117,7 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 			goto done;
 		}
 	}
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	h = *(int*) (v4 + 0x61);
 	fcn_00455350((char*) h, (char*) (h + 0x4c), (int*) vec);
@@ -139,7 +139,7 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 			fcn_004550b0(*(int*)(v4 + 0x61), g_773dd8);
 		}
 		d3_DestroyObject(*(int*)(v4 + 0x61));
-		if (*(int*) (obj + 0x1ec) != 0 && fcn_00413680((char*) obj, (char*) g_6b8014, vec, &radius)) {
+		if (*(int*) (obj + 0x1ec) != 0 && fcn_00413680((char*) obj, (char*) d3_ActiveCamera, vec, &radius)) {
 			res = (int)(radius * g_664ec0);
 			h = (int) evt_LoadGfxScript(0x68b228);
 			if (h != 0) {

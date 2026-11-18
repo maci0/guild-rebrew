@@ -1,7 +1,7 @@
 
 
 #include "Develop/Units/d3/d3_camera.h"
-extern float g_1052bc0;
+extern float d3_ViewportCenterX;
 extern float g_1052bc8;
 extern float g_10432a4;
 float* __stdcall fcn_005ebbb9(float* out, const float* in);
@@ -15,8 +15,8 @@ void __cdecl fcn_004132a0(float x, float y, float y0, float y1, float* out)
 	float dy;
 	float t;
 
-	fcn_005ebbb9(m, (float*) (((char*)g_6b8014) + 0x18c));
-	v[0] = x - g_1052bc0;
+	fcn_005ebbb9(m, (float*) (((char*)d3_ActiveCamera) + 0x18c));
+	v[0] = x - d3_ViewportCenterX;
 	v[1] = -(y - g_1052bc8);
 	v[2] = g_10432a4;
 	fcn_004518a0(v);

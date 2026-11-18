@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 extern char g_67617c[];
 
 
@@ -13,7 +13,7 @@ int __cdecl PreloadAnimation(void** objectRef, int* a2, int* a3, int* a4, int* a
 
 	object = *objectRef;
 	if (object == 0) {
-		fcn_00425bf0(g_6b7e98, *(int*) ((char*) g_6b7e98 + 0x118), g_67617c);
+		fcn_00425bf0(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), g_67617c);
 		return 1;
 	}
 	fcn_00404a00(object, 4, *a2, *a3, *a4, *a5);

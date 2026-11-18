@@ -38,7 +38,7 @@ void __cdecl fcn_005c6310(void)
 	if (g_774970 >= 0x300) {
 		return;
 	}
-	fcn_00500d20((void*) 0x775320, &g_7f4c00);
+	fcn_00500d20((void*) 0x775320, &gm_GameTime);
 	n = g_775330;
 	off = n * 0x21c;
 	for (; n < g_775330 + 0x20; n++) {
@@ -53,10 +53,10 @@ void __cdecl fcn_005c6310(void)
 					if (*(int*) (obj + 4) > 0) {
 						rec = (char*) item;
 						if (*(int*) (rec + 0x21) != 0) {
-							stamp = fcn_00500d20(rec + 0x2d, &g_7f4c00);
+							stamp = fcn_00500d20(rec + 0x2d, &gm_GameTime);
 							left = *(int*) (rec + 0x1c) - stamp;
 							*(int*) (rec + 0x1c) = left;
-							*(pos14_7f4c00*) (rec + 0x2d) = g_7f4c00;
+							*(pos14_7f4c00*) (rec + 0x2d) = gm_GameTime;
 							if (left < 0) {
 								*(int*) (rec + 0x21) = 0;
 								if (*(char*) (g_7f4ca0 + 2 + off) == 6) {
@@ -86,9 +86,9 @@ void __cdecl fcn_005c6310(void)
 		}
 		off += 0x21c;
 	}
-	g_775320 = g_7f4c00.a;
-	g_775324 = g_7f4c00.b;
-	g_775328 = g_7f4c00.c;
-	g_77532c = g_7f4c00.d;
+	g_775320 = gm_GameTime.a;
+	g_775324 = gm_GameTime.b;
+	g_775328 = gm_GameTime.c;
+	g_77532c = gm_GameTime.d;
 	g_775330 = (n + 1) % 0x300;
 }

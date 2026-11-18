@@ -70,7 +70,7 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 			continue;
 		}
 		q = fcn_00502cd0(*(int*) (p + 0x174), 1, 4, 0xc);
-		n = g_100b0a8;
+		n = ai_ResourceCount;
 		if (q != 0) {
 			found = 0;
 			for (lp = &g_100e760[1]; lp[-1] != 0 && lp[0] != 0 && found == 0; lp++) {
@@ -111,7 +111,7 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 			}
 		}
 	}
-	n = g_100b0a8;
+	n = ai_ResourceCount;
 	for (i = 0; i < n; i++) {
 		seg = &g_100b0c0[i];
 		if (seg->x14 != 0) {
@@ -148,7 +148,7 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 						seg->x8 = rec->v0;
 					}
 				}
-				n = g_100b0a8;
+				n = ai_ResourceCount;
 			}
 		}
 		if (seg->x8 == 0) {
@@ -158,7 +158,7 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 	sum = 0;
 	if (g_100e760[0] != 0) {
 		for (k = 0; g_100e760[k] != 0; k++) {
-			for (i = 0; i < g_100b0a8; i++) {
+			for (i = 0; i < ai_ResourceCount; i++) {
 				seg = &g_100b0c0[i];
 				if (g_100e760[k] == seg->id && seg->x14 != 0) {
 					while (seg->x14 > 0) {
@@ -176,7 +176,7 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 		return;
 	}
 	for (k = 0; g_100e720[k] != 0; k++) {
-		for (i = 0; i < g_100b0a8; i++) {
+		for (i = 0; i < ai_ResourceCount; i++) {
 			seg = &g_100b0c0[i];
 			if (g_100e720[k] == seg->id && seg->x14 != 0) {
 				while (seg->x14 > 0) {

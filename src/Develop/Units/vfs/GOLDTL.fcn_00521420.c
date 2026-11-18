@@ -14,7 +14,7 @@ typedef struct {
 } Group;
 
 extern char g_7728d4;
-extern int g_67fca0;
+extern int hst_HistoryTextBase;
 extern int g_67fca8;
 extern int g_67fcac;
 extern int g_67fcb4;
@@ -31,7 +31,7 @@ int __cdecl fcn_00521420(void* file)
 
 	if (vfs_fwrite(&(*(unsigned char*)&g_7728d4), 1, 1, file) <= 0)
 		return 0;
-	v = g_67fca8 - g_67fca0;
+	v = g_67fca8 - hst_HistoryTextBase;
 	if (vfs_fwrite(&v, 4, 1, file) <= 0)
 		return 0;
 	v = g_67fcb4 - g_67fcac;

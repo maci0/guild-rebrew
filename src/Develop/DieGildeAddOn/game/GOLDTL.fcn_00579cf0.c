@@ -1,7 +1,7 @@
 void __cdecl fcn_00546190(char*);
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 
 
@@ -26,8 +26,8 @@ void __cdecl fcn_00579cf0(char* o)
 			fcn_00529160(r, q, *x, o);
 			*(int*) (o + 0xac) = 0;
 			*(int*) (o + 0xb8) = 0x1fe;
-			*(pos14_7f4c00*) (o + 0xbc) = g_7f4c00;
-			*(pos14_7f4c00*) (o + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (o + 0xbc) = gm_GameTime;
+			*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 			*(int*) (o + 0x70) = 0;
 			fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
 			return;

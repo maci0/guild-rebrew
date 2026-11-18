@@ -1,7 +1,7 @@
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_67d370;
-extern int g_772514;
+extern int d2_CurrentElementId;
+extern int d2_CurrentWindowId;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -31,7 +31,7 @@ void __cdecl fcn_0058d020(char* a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x410a, 0x4108);
 	fcn_0058c4f0(a0, dlg, 2, ids, &sel);
@@ -42,7 +42,7 @@ void __cdecl fcn_0058d020(char* a0)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (g_67d370 == task) {
+			if (d2_CurrentElementId == task) {
 				fcn_00471af0(dlg, 0);
 				if (fcn_0058cda0(a0, selected) == 1) {
 					g_774654 = 1;
@@ -50,7 +50,7 @@ void __cdecl fcn_0058d020(char* a0)
 				fcn_00471af0(dlg, 1);
 			} else {
 				for (i = 0; i < 4; i++) {
-					if (g_67d370 == ids[i] && i != selected) {
+					if (d2_CurrentElementId == ids[i] && i != selected) {
 						sel = i;
 						fcn_0058c4f0(a0, dlg, 2, ids, &sel); selected = sel;
 						break;

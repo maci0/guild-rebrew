@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "game_data.h"
-extern int g_68bfb8;
-extern int g_7725c8;
+extern int cut_EventLoopFlags;
+extern int d2_SuppressOverlay;
 extern int g_772f54;
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -55,8 +55,8 @@ void __cdecl fcn_004e1b00(int a0)
 	q = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
 	r = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x3c));
 	s = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x40));
-	g_68bfb8 = 0x702c6;
-	g_7725c8 = 1;
+	cut_EventLoopFlags = 0x702c6;
+	d2_SuppressOverlay = 1;
 	fcn_004e4730((char*) 0x68cfb0);
 	fcn_00445f50(0, 0, 1.0f, 1);
 	fcn_004463f0(0, 0, 0);
@@ -129,6 +129,6 @@ done:
 	fcn_004e4c00();
 	g_772f54 = 0;
 	fcn_004e4910();
-	g_7725c8 = 0;
+	d2_SuppressOverlay = 0;
 	fcn_004e3640();
 }

@@ -1,4 +1,4 @@
-extern int g_6b7d74;
+extern int MemUsed;
 extern int* g_6b7d78;
 extern int g_6b7d7c;
 
@@ -38,7 +38,7 @@ void __cdecl fcn_004232f0(void)
 	if (g_6b7d7c == 0) {
 		return;
 	}
-	if (g_6b7d74 == 0) {
+	if (MemUsed == 0) {
 		return;
 	}
 	bank = (Bank*) g_6b7d78;
@@ -58,9 +58,9 @@ void __cdecl fcn_004232f0(void)
 					}
 					smp = &bank->samples[i];
 					if (smp->kind == 1) {
-						g_6b7d74 += -12 - *(int*) ((char*) smp->ptr + 4);
+						MemUsed += -12 - *(int*) ((char*) smp->ptr + 4);
 					} else {
-						g_6b7d74 += -12 - *(int*) ((char*) smp->ptr + 8);
+						MemUsed += -12 - *(int*) ((char*) smp->ptr + 8);
 					}
 					m_FreeTracked((int) bank->samples[i].ptr);
 					bank->samples[i].ptr = 0;
@@ -70,7 +70,7 @@ void __cdecl fcn_004232f0(void)
 			} while (i < bank->count);
 		}
 		p = (char*) bank->next;
-		g_6b7d74 += -0x144 - bank->count * 0x40;
+		MemUsed += -0x144 - bank->count * 0x40;
 		m_FreeTracked((int) bank);
 		bank = (Bank*) p;
 	}

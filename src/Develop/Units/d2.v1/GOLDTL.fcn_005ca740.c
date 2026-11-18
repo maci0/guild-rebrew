@@ -24,22 +24,22 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* a4, int a5)
 	(void) a2;
 	v10 = ((D2_BILD_GROESSE*)g_772500)[0x5da].breite / 2 + a0;
 	v8 = a1 + 0x1c;
-	a4[1] = fcn_0046f740(a0, v8, 0x5da, g_772514);
+	a4[1] = fcn_0046f740(a0, v8, 0x5da, d2_CurrentWindowId);
 	a4[2] = -1;
 	if (a4[0] != 0) {
 		v5 = *(int*) (a4[0] + 0x18c);
 		a4[6] = fcn_0046f740(v10 - ((D2_BILD_GROESSE*)g_772500)[v5].breite / 2 - 3,
-		                     a1 + 0x1d, v5, g_772514);
-		fcn_0046f740(a0 + 3, a1 + 0x1f, a4[7], g_772514);
+		                     a1 + 0x1d, v5, d2_CurrentWindowId);
+		fcn_0046f740(a0 + 3, a1 + 0x1f, a4[7], d2_CurrentWindowId);
 		if (a4[8])
 			fcn_0046f740(a0 + 3, ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 9 + a1,
-			             a4[8], g_772514);
+			             a4[8], d2_CurrentWindowId);
 		if (a4[9])
 			fcn_0046f740(((D2_BILD_GROESSE*)g_772500)[0x5da].breite - 0x10 + a0,
-			             a1 + 0x1f, a4[9], g_772514);
+			             a1 + 0x1f, a4[9], d2_CurrentWindowId);
 		fcn_0046f740(((D2_BILD_GROESSE*)g_772500)[0x5da].breite - 0x10 + a0,
 		             ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 9 + a1, a4[10],
-		             g_772514);
+		             d2_CurrentWindowId);
 		if (a5 && *(unsigned char*) (a4[0] + 0xd))
 			io_FormatTextBuffer(buf, (const char*) 0x6ac964,
 			             ((*(unsigned char*) (a4[0] + 9) != 0) ? 10 : 0) + 0x114 +
@@ -53,7 +53,7 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* a4, int a5)
 		fcn_005c9090(buf, v10, a4[5] + 0xe, 0xca, v7);
 		if (*(unsigned char*) (a4[0] + 2) != 6) {
 			v6 = fcn_004677e0(v10 - 0x23, ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 0x1e + a1,
-			                  0x40, 0, 100, 0x75, 0x442, g_772514);
+			                  0x40, 0, 100, 0x75, 0x442, d2_CurrentWindowId);
 			a4[2] = v6;
 			if (*(unsigned char*) (a4[0] + 2) != 7) {
 				d2_SetElementValue(a4[2], 0, 100, (int)fcn_0050f980(*(unsigned short*) &g_774970,
@@ -71,10 +71,10 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* a4, int a5)
 		kind = *(unsigned char*) (a4[0] + 2);
 		if (kind != 5 && kind != 6 && kind != 7)
 			return 0;
-		fcn_0046f740(a0 - 0x20, v8, *(int*) (a4[0] + 0x54), g_772514);
+		fcn_0046f740(a0 - 0x20, v8, *(int*) (a4[0] + 0x54), d2_CurrentWindowId);
 	} else {
 		fcn_0046f740(v10 - ((D2_BILD_GROESSE*)g_772500)[0x4fb].breite / 2 - 3,
-		             a1 + 0x1d, 0x4fb, g_772514);
+		             a1 + 0x1d, 0x4fb, d2_CurrentWindowId);
 	}
 	return 0;
 }

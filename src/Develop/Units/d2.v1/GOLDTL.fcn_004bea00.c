@@ -9,10 +9,10 @@ void __cdecl fcn_004116d0(void);
 int __cdecl fcn_005373e0(int, int);
 
 extern void* g_1015ea0;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14ce8e0;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
 typedef struct RouteItem {
@@ -65,7 +65,7 @@ int __cdecl fcn_004bea00(int ctx, RouteNode* list)
 	d2_SetForm(menu, 2);
 	for (i = 0; i < count; i++) {
 		entry = fcn_0046f740((i % 4) << 6, (i / 4) << 6, values[i] + 0xdf,
-			g_772514);
+			d2_CurrentWindowId);
 		entries[i] = entry;
 
 		*(int*) ((char*) g_1015ea0 + entry * 0x2f4 + 0x5c) = 1;
@@ -74,7 +74,7 @@ int __cdecl fcn_004bea00(int ctx, RouteNode* list)
 	}
 	values[i] = 0;
 	entry = fcn_0046f740((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527,
-		g_772514);
+		d2_CurrentWindowId);
 	entries[i] = entry;
 
 	*(int*) ((char*) g_1015ea0 + entry * 0x2f4 + 0x5c) = 1;
@@ -85,12 +85,12 @@ int __cdecl fcn_004bea00(int ctx, RouteNode* list)
 
 		if (g_14ce8e0 != 0 || result != 0) {
 			g_774654 = 1;
-		} else if (g_100f1dc != -1 && g_67d370 == active) {
+		} else if (g_100f1dc != -1 && d2_CurrentElementId == active) {
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
 			for (i = 0; i < count + 1; i++) {
-				if (g_67d370 == entries[i]) {
+				if (d2_CurrentElementId == entries[i]) {
 					result = values[i];
 					break;
 				}

@@ -4,7 +4,7 @@
 
 
 
-extern void* g_14d0020[];
+extern void* ch_CharacterSlots[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int ch_LowPolyMode;
 int __cdecl fcn_00413190(int p);
@@ -19,8 +19,8 @@ void __cdecl fcn_00403330(unsigned char mode)
 	char** p;
 	char* e;
 
-	saved = g_6b8010;
-	p = ((char**)g_14d0020);
+	saved = d3_CurrentContextIndex;
+	p = ((char**)ch_CharacterSlots);
 	do {
 		e = *p;
 		if (e != 0) {
@@ -37,7 +37,7 @@ void __cdecl fcn_00403330(unsigned char mode)
 			}
 		}
 		p++;
-	} while ((int) p < (int) (((char**)g_14d0020) + 0x300));
+	} while ((int) p < (int) (((char**)ch_CharacterSlots) + 0x300));
 	ch_LowPolyMode = 2 - mode;
 	fcn_004432d0(saved, 1);
 }

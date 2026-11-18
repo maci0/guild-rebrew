@@ -1,7 +1,7 @@
 
 
 extern int* g_665f08;
-extern int g_774a14;
+extern int d2_TutorialActive;
 extern char* g_6a8204[];
 extern char* g_6a8238[];
 extern char g_6a935c[];
@@ -16,7 +16,7 @@ int __cdecl io_AppendText(char*, ...);
 
 void __cdecl fcn_00584800(void)
 {
-	if (g_774a14 == 0) {
+	if (d2_TutorialActive == 0) {
 		io_AppendText(g_6a935c);
 		return;
 	}

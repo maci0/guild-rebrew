@@ -116,12 +116,12 @@ void __cdecl fcn_00450e90(float a, float b, char* c, float* d, float* e)
 		}
 	}
 	qsort((SortEntry450e90*) g_1041d04, g_6b8708, 0xc, (int (__cdecl*)(const void*, const void*)) fcn_00451120);
-	if (g_6b8708 < g_6b86fc) {
+	if (g_6b8708 < d3_MaxActiveLights) {
 		n = g_6b8708;
 	} else {
-		n = g_6b86fc;
+		n = d3_MaxActiveLights;
 	}
-	for (i = n; i < g_6b86fc; i++) {
+	for (i = n; i < d3_MaxActiveLights; i++) {
 		g_6b5de0->vtbl->SetTransform(g_6b5de0, i, 0);
 	}
 	for (i = 0; i < n; i++) {

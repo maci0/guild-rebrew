@@ -1,5 +1,5 @@
 #include <stdio.h>
-extern int g_68bfb8, g_7725c8;
+extern int cut_EventLoopFlags, d2_SuppressOverlay;
 extern char g_6b5c60[];
 extern char g_6811b0[];
 
@@ -51,8 +51,8 @@ void __cdecl fcn_004e2090(int event)
 	if (((char*) entity2)[2] == 6) {
 		fcn_004b4650((char*) entity2, 0x28);
 	}
-	g_68bfb8 = 0x702c6;
-	g_7725c8 = 1;
+	cut_EventLoopFlags = 0x702c6;
+	d2_SuppressOverlay = 1;
 	fcn_004c5420(*(int*) &entity1[2], 0x1c8, 4, 0, 0x40000);
 	fcn_004c5420(*(int*) &entity2[2], 0x1c8, 4, 0, 0x40000);
 	value = (int) fcn_004fda30(*entity1);

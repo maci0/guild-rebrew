@@ -27,7 +27,7 @@ void __cdecl UpdateSceneLighting(unsigned char flag)
         goto update_terrain;
     }
     fcn_00438d40((char*)g_67a370, 0, 2, fcn_00452e30, 0);
-    LightingUpdatePending = 1;
+    d3_LightingUpdatePending = 1;
 update_terrain:
 #endif
     if (g_6b8300 != 0) {

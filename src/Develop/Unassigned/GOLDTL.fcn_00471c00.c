@@ -28,12 +28,12 @@ void __cdecl fcn_00471c00(int k, unsigned char center)
 
 	w = &((Win0471c00*)g_1015f40)[k];
 	if (center & 1) {
-		x = g_1015eac - w->width / 2;
+		x = d2_CenterX - w->width / 2;
 	} else {
 		x = w->left;
 	}
 	if (center & 2) {
-		y = g_1015ea8 - w->height / 2;
+		y = d2_DialogCenterY - w->height / 2;
 	} else {
 		y = w->top;
 	}

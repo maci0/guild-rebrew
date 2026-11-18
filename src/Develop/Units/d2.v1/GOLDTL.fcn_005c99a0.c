@@ -124,23 +124,23 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, int cells,
 		x = items->x + 0x65;
 		y = items->y + 0x23;
 		left = x - (int) *(short*) (*(int*) &g_772500 + 0x1ebd8) / 2;
-		items->win = fcn_0046f740(left, y, 0x5da, *(int*) &g_772514);
+		items->win = fcn_0046f740(left, y, 0x5da, *(int*) &d2_CurrentWindowId);
 		obj = items->obj;
 		if (obj != 0) {
 			if (*(char*) ((int) obj + 2) == 6 || *(char*) ((int) obj + 2) == 7 || *(char*) ((int) obj + 2) == 5) {
-				fcn_0046f740(left - 0x20, y, *(int*) ((int) obj + 0x54), *(int*) &g_772514);
+				fcn_0046f740(left - 0x20, y, *(int*) ((int) obj + 0x54), *(int*) &d2_CurrentWindowId);
 			}
 			obj = items->obj;
 			v = (int) *(short*) (*(int*) &g_772500 + 0x50 + *(int*) ((int) obj + 0x18c) * 0x54) / 2;
-			items->cw18 = fcn_0046f740(x - v - 3, y + 1, *(int*) ((int) obj + 0x18c), *(int*) &g_772514);
-			fcn_0046f740(left + 3, y + 3, items->cw1c, *(int*) &g_772514);
+			items->cw18 = fcn_0046f740(x - v - 3, y + 1, *(int*) ((int) obj + 0x18c), *(int*) &d2_CurrentWindowId);
+			fcn_0046f740(left + 3, y + 3, items->cw1c, *(int*) &d2_CurrentWindowId);
 			if (items->cw20 != 0) {
-				fcn_0046f740(left + 3, (int) *(short*) (*(int*) &g_772500 + 0x1ebda) - 0x13 + y, items->cw20, *(int*) &g_772514);
+				fcn_0046f740(left + 3, (int) *(short*) (*(int*) &g_772500 + 0x1ebda) - 0x13 + y, items->cw20, *(int*) &d2_CurrentWindowId);
 			}
 			if (items->cw24 != 0) {
-				fcn_0046f740((int) *(short*) (*(int*) &g_772500 + 0x1ebd8) - 0x10 + (left), y + 3, items->cw24, *(int*) &g_772514);
+				fcn_0046f740((int) *(short*) (*(int*) &g_772500 + 0x1ebd8) - 0x10 + (left), y + 3, items->cw24, *(int*) &d2_CurrentWindowId);
 			}
-			fcn_0046f740((int) *(short*) (*(int*) &g_772500 + 0x1ebd8) - 0x10 + (left), (int) *(short*) (*(int*) &g_772500 + 0x1ebda) - 0x13 + y, items->cw28, *(int*) &g_772514);
+			fcn_0046f740((int) *(short*) (*(int*) &g_772500 + 0x1ebd8) - 0x10 + (left), (int) *(short*) (*(int*) &g_772500 + 0x1ebda) - 0x13 + y, items->cw28, *(int*) &d2_CurrentWindowId);
 			obj = items->obj;
 			if (mode != 7) {
 				io_FormatTextBuffer(buf, 0x6ac964, (*(char*) ((int) obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) obj + 0xd), *(unsigned short*) obj);
@@ -155,7 +155,7 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, int cells,
 			}
 			fcn_005c9090(buf, x, items->y + 0xf, 0xca, 0x56);
 			if (items->obj != (int*) owner && *(char*) ((int) items->obj + 2) != 6) {
-				items->win2 = fcn_004677e0(x - 0x23, (int) *(short*) (*(int*) &g_772500 + 0x1ebda) + 5 + y, 0x40, 0, 100, 0x75, 0x442, *(int*) &g_772514);
+				items->win2 = fcn_004677e0(x - 0x23, (int) *(short*) (*(int*) &g_772500 + 0x1ebda) + 5 + y, 0x40, 0, 100, 0x75, 0x442, *(int*) &d2_CurrentWindowId);
 				if (!(*(char*) ((int) items->obj + 2) != 7)) {
 					fcn_00472380(items->win2, 0, 100, 0);
 				} else {
@@ -167,7 +167,7 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, int cells,
 				*(int*) (*(int*) &g_1015ea0 + 0x5c + items->win2 * 0x2f4) = 1;
 			}
 			if (owner != 0 && *(char*) (owner + 2) == 6 && *(int*) ((int) items->obj + 0x210) == *(int*) (owner + 4)) {
-				fcn_0046f740((int) *(short*) (*(int*) &g_772500 + 0x1ebd8) + (left), y, 0x6d3, *(int*) &g_772514);
+				fcn_0046f740((int) *(short*) (*(int*) &g_772500 + 0x1ebd8) + (left), y, 0x6d3, *(int*) &d2_CurrentWindowId);
 			}
 			if (filter == 0 || fcn_005cf720(*(unsigned short*) &g_774970, *(unsigned short*) items->obj, filter, 0) != 0) {
 				*(int*) (*(int*) &g_1015ea0 + 0x5c + items->win * 0x2f4) = 1;

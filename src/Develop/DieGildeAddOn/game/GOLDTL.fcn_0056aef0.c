@@ -15,7 +15,7 @@ typedef struct {
 // SIZE 0x1c
 #pragma pack()
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -84,7 +84,7 @@ void __cdecl fcn_0056aef0(char* a1)
 			p++;
 			n--;
 		} while (n != 0);
-		*(pos14_7f4c00*)(a1 + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*)(a1 + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*)(a1 + 0x52), 0, 0xa, 0);
 		*(int*)(a1 + 0x70) = 1;
 		return;
@@ -112,7 +112,7 @@ void __cdecl fcn_0056aef0(char* a1)
 			n--;
 		} while (n != 0);
 		if (v == 0) {
-			*(pos14_7f4c00*)(a1 + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*)(a1 + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*)(a1 + 0x52), 0, 5, 0);
 			return;
 		}
@@ -147,8 +147,8 @@ void __cdecl fcn_0056aef0(char* a1)
 			d = 2880.0f;
 		}
 		i = (int)d;
-		*(pos14_7f4c00*)(a1 + 0x44) = g_7f4c00;
-		*(pos14_7f4c00*)(a1 + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*)(a1 + 0x44) = gm_GameTime;
+		*(pos14_7f4c00*)(a1 + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*)(a1 + 0x52), 0, i, 0);
 		*(int*)(a1 + 0x70) = 2;
 		return;
@@ -215,7 +215,7 @@ void __cdecl fcn_0056aef0(char* a1)
 		} else if (k < 2) {
 			k = 2;
 		}
-		m.stamp = g_7f4c00;
+		m.stamp = gm_GameTime;
 		m.f0e = *(int*)(h2 + 1);
 		m.f16 = v;
 		m.f1a = (char)fcn_0050c710((unsigned char*)h2, 7, 1);

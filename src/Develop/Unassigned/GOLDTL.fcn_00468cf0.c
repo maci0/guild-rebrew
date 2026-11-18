@@ -13,9 +13,9 @@ typedef struct
 
 extern char* g_1015ea0;
 extern char* g_772500;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
-extern int g_67d398;
+extern int d2_DefaultFont;
 
 int __cdecl fcn_00469890(void);
 int __cdecl d2_GetResourceData(int);
@@ -36,10 +36,10 @@ int __cdecl fcn_00468cf0(int a1, int a2, int resourceId, int a4)
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x14 / 4] = a2;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x8 / 4] = resourceId;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x30 / 4] = 0;
-	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x34 / 4] = g_1040490;
+	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x34 / 4] = d2_ScreenHeight;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x28 / 4] = 0;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x2c / 4] = g_1040494;
-	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x84 / 4] = g_67d398;
+	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x84 / 4] = d2_DefaultFont;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0xc / 4] = d2_GetResourceData(resourceId);
 	fcn_0046f9b0(idx, a4);
 	d2_AddRefcount(resourceId);

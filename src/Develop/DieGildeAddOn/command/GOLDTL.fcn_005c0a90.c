@@ -94,7 +94,7 @@ void __cdecl fcn_005c0a90(int arg)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == h1) {
+			if (d2_CurrentElementId == h1) {
 				char ev[0xf8];
 
 				v = *(int*) (b + 2);
@@ -111,7 +111,7 @@ void __cdecl fcn_005c0a90(int arg)
 				fcn_00526120(text, 0);
 				g_774654 = 1;
 			}
-			else if (g_67d370 == h2) {
+			else if (d2_CurrentElementId == h2) {
 				g_774654 = 1;
 			}
 		}

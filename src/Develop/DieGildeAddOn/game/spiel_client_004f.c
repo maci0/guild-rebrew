@@ -1,14 +1,14 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 extern char g_7f4ca0[];
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern unsigned char* lpGebaeudePROT;
 extern int g_6652f8[];
 extern float g_6652d8[];
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, void* d, int e);
@@ -38,7 +38,7 @@ int __cdecl fcn_004f25a0(char* req)
 
 	gm_ResolveEntityById((void**) (&entity1), 0, 0, *(int*) (req + 8));
 	if (entity1 == 0 || *(unsigned short*) ((char*) entity1 + 0x27) == 0xffff ||
-	    g_7f4ca0 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c == g_773da8) {
+	    g_7f4ca0 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c == gm_CityEntity) {
 		return -1;
 	}
 	type = *(unsigned char*) entity1;
@@ -65,7 +65,7 @@ int __cdecl fcn_004f25a0(char* req)
 	}
 	*(int*) (slot + 4) = *(int*) ((char*) entity2 + 4);
 	*(unsigned short*) (slot + 8) = *(unsigned short*) ((char*) entity2 + 0x50);
-	*(unsigned short*) (slot + 0xa) = *(unsigned short*) (req + 0x11) + (unsigned short) g_7f4c00.a;
+	*(unsigned short*) (slot + 0xa) = *(unsigned short*) (req + 0x11) + (unsigned short) gm_GameTime.a;
 	*(unsigned char*) (slot + 0xc) = 0xff;
 	for (j = 0; j < g_6652f8[*(int*) (req + 0xc)]; j++) {
 		*(int*) (*(char**) (slot + 0x10) + j * 0x44) = -1;

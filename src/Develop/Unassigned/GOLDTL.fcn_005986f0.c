@@ -10,7 +10,7 @@ void __cdecl fcn_005986f0(float* result, char* object)
 	float v[4];
 	int saved;
 
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	v[0] = 0;
 	v[1] = 0;

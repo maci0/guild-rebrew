@@ -28,7 +28,7 @@ typedef struct {
 // SIZE 0xf8
 
 extern char g_7f4ca4[];
-extern Time g_7f4c00;
+extern Time gm_GameTime;
 
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, int);
@@ -61,7 +61,7 @@ void __cdecl fcn_005498b0(char *a1, char *entity, char *a3, char *a4, int a5, fl
 			m.who = *(int *) (a3 + 4);
 		}
 		m.fc = -1;
-		m.t = g_7f4c00;
+		m.t = gm_GameTime;
 		m.f36 = 2;
 		m.f58 = *(int *) (entity + 4);
 		fcn_004c5530(&m);

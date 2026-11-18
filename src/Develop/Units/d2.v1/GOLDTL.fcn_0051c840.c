@@ -15,17 +15,17 @@
  *
  */
 extern int g_1052de0;
-extern char* g_14a5320[];
+extern char* txt_TextEntries[];
 extern int g_11bb000[];
 extern char* g_14a5400[];
 extern char* g_14a540c[];
 extern char* g_14a5418[];
 extern char* g_14a5450[];
 extern char* g_14a7bb0[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_6b25b0;
 extern int g_6b23a4;
-extern int g_6b7f98;
+extern int txt_EntryCount;
 extern char g_6a239c[];
 extern int g_6a2390;
 extern int g_6a2394;
@@ -107,19 +107,19 @@ int __cdecl fcn_0051c840(int id)
 	if (g_1052de0 == 0) {
 		return -1;
 	}
-	base = g_772514 * 0x3cc;
+	base = d2_CurrentWindowId * 0x3cc;
 	if (*(int*) ((char*) base + 0x10161d0) == 0) {
 		return -1;
 	}
 	memset(buf, 0, 0x17d0);
 	if ((unsigned) id < 0x4800) {
-		if (g_14a5320[id] == 0) {
+		if (txt_TextEntries[id] == 0) {
 			return -1;
 		}
-		if (strlen(g_14a5320[id]) > 0x17c0) {
+		if (strlen(txt_TextEntries[id]) > 0x17c0) {
 			return -1;
 		}
-		fcn_0064d530(buf, g_14a5320[id], 0x17c0);
+		fcn_0064d530(buf, txt_TextEntries[id], 0x17c0);
 	} else {
 		strcpy(buf, (char*) id);
 	}
@@ -292,8 +292,8 @@ body:
 				*(int*) ((char*) base + 0x10161d4 +
 					 *(int*) ((char*) base + 0x10162d4) * 4) = -1;
 				if (buf[i + 1] == 'a') {
-					if (*(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x53 ||
-					    *(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x55) {
+					if (*(int*) ((char*) (d2_CurrentWindowId * 0x3cc) + 0x10161cc) == 0x53 ||
+					    *(int*) ((char*) (d2_CurrentWindowId * 0x3cc) + 0x10161cc) == 0x55) {
 						*(int*) ((char*) base + 0x10161d4 +
 							 *(int*) ((char*) base + 0x10162d4) * 4) = -1;
 					} else {
@@ -301,8 +301,8 @@ body:
 							 *(int*) ((char*) base + 0x10162d4) * 4) = -1;
 					}
 				} else if (buf[i + 1] == 'n') {
-					if (*(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x53 ||
-					    *(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x55) {
+					if (*(int*) ((char*) (d2_CurrentWindowId * 0x3cc) + 0x10161cc) == 0x53 ||
+					    *(int*) ((char*) (d2_CurrentWindowId * 0x3cc) + 0x10161cc) == 0x55) {
 						*(int*) ((char*) base + 0x10161d4 +
 							 *(int*) ((char*) base + 0x10162d4) * 4) = -1;
 					} else {
@@ -310,8 +310,8 @@ body:
 							 *(int*) ((char*) base + 0x10162d4) * 4) = -1;
 					}
 				} else if (buf[i + 1] == 't') {
-					if (*(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x53 ||
-					    *(int*) ((char*) (g_772514 * 0x3cc) + 0x10161cc) == 0x55) {
+					if (*(int*) ((char*) (d2_CurrentWindowId * 0x3cc) + 0x10161cc) == 0x53 ||
+					    *(int*) ((char*) (d2_CurrentWindowId * 0x3cc) + 0x10161cc) == 0x55) {
 						*(int*) ((char*) base + 0x10161d4 +
 							 *(int*) ((char*) base + 0x10162d4) * 4) = 2;
 					} else {
@@ -537,17 +537,17 @@ body:
 			}
 			fcn_0064d530((char*) tab78, buf + i + 3, k - i - 4);
 			res = fcn_0064eeec((char*) tab78);
-			for (j = id; j < g_6b7f98; j++) {
+			for (j = id; j < txt_EntryCount; j++) {
 				if (g_11bb000[j] == e) {
 					break;
 				}
 			}
-			if (j >= g_6b7f98) {
+			if (j >= txt_EntryCount) {
 				ReportClientMessage(g_6a2318);
 				break;
 			}
 			res = gm_RandomMod(res) & 0xffff;
-			p = g_14a5320[res + j];
+			p = txt_TextEntries[res + j];
 			if (p == 0) {
 				break;
 			}
@@ -570,14 +570,14 @@ body:
 				p = (char*) e;
 			} else {
 				(*(int*) (num + 0xc)) = g_11bb000[e];
-				p = g_14a5320[e];
+				p = txt_TextEntries[e];
 			}
 			if (r != -1) {
 				p = (char*) fcn_0042b2f0(p, r, 4);
 				i--;
 			}
 			if (p == 0) {
-				p = g_14a5320[e];
+				p = txt_TextEntries[e];
 			}
 			if (rec[5] != 0) {
 				sprintf(s98, g_6a2308, p, rec + 5);
@@ -646,11 +646,11 @@ body:
 		goto body;
 	}
 done:
-	p = *(char**) ((char*) (g_772514 * 0x3cc) + 0x1015f7c);
+	p = *(char**) ((char*) (d2_CurrentWindowId * 0x3cc) + 0x1015f7c);
 	if (strlen(p) + strlen(buf) > 0x17cf) {
 		return -1;
 	}
 	strcat(p, buf);
-	*(int*) ((char*) (g_772514 * 0x3cc) + 0x10161b8) = 2;
+	*(int*) ((char*) (d2_CurrentWindowId * 0x3cc) + 0x10161b8) = 2;
 	return 0;
 }

@@ -1,6 +1,6 @@
 #include <math.h>
 
-extern char* g_6b8014;
+extern char* d3_ActiveCamera;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_10432a4;
 extern float g_6628a8;
@@ -29,15 +29,15 @@ char __cdecl fcn_0045bad0(char* e, int gx, int gy, int* ox, int* oy)
 	if (e == 0) {
 		return 0;
 	}
-	o[0] = *(float*) (g_6b8014 + 0x4c) - *(float*) (e + 0);
-	o[1] = *(float*) (g_6b8014 + 0x50) - *(float*) (e + 4);
-	o[2] = *(float*) (g_6b8014 + 0x54) - *(float*) (e + 8);
+	o[0] = *(float*) (d3_ActiveCamera + 0x4c) - *(float*) (e + 0);
+	o[1] = *(float*) (d3_ActiveCamera + 0x50) - *(float*) (e + 4);
+	o[2] = *(float*) (d3_ActiveCamera + 0x54) - *(float*) (e + 8);
 	o[0] = o[0] / *(float*) (e + 0x10);
 	o[1] = o[1] / *(float*) (e + 0x14);
 	o[2] = o[2] / *(float*) (e + 0x18);
-	u = ((float) gx - g_1052bc0) / g_10432a4;
+	u = ((float) gx - d3_ViewportCenterX) / g_10432a4;
 	v = ((float) gy - g_1052bc8) / d3_ProjectionScaleY;
-	fcn_005ebbb9(m, (float*) (g_6b8014 + 0x18c));
+	fcn_005ebbb9(m, (float*) (d3_ActiveCamera + 0x18c));
 	px = m[4] * v + m[0] * u + m[8];
 	py = m[5] * v + m[1] * u + m[9];
 	pz = m[6] * v + m[2] * u + m[10];

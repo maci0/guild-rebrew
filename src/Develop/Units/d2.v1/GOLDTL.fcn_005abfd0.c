@@ -11,10 +11,10 @@ typedef struct
 
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14ab930;
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6ab060[];
@@ -60,7 +60,7 @@ void __cdecl fcn_005abfd0(unsigned char* e)
 	dlg = fcn_00470820(0, 0, s_6ab060);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x197f);
@@ -80,7 +80,7 @@ void __cdecl fcn_005abfd0(unsigned char* e)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1 && flag != 0) {
-			if (g_67d370 == btnA) {
+			if (d2_CurrentElementId == btnA) {
 				me = &((Player*)g_7f4ca0)[g_774970];
 				v = fcn_00471f80(btnB);
 				if (fcn_00525f60(me, v) != 0) {
@@ -94,7 +94,7 @@ void __cdecl fcn_005abfd0(unsigned char* e)
 					g_774654 = 1;
 				}
 			}
-			else if (g_67d370 == btnC) {
+			else if (d2_CurrentElementId == btnC) {
 				g_774654 = 1;
 			}
 		}

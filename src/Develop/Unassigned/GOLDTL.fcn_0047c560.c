@@ -74,12 +74,12 @@ int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
 	Sample s;
 
 	start = idx;
-	if (((Device*) g_772614)->vtbl->Lock((Device*) g_772614, 0, (g_772604 - idx) * 0x18, &idx, 0x2000) < 0) {
+	if (((Device*) g_772614)->vtbl->Lock((Device*) g_772614, 0, (d2_QueuedQuadCount - idx) * 0x18, &idx, 0x2000) < 0) {
 		return 0;
 	}
 	data = (char*) idx;
 	rec = g_1552020 + start;
-	if (start < g_772604) {
+	if (start < d2_QueuedQuadCount) {
 		p = data;
 		i = start;
 		do {
@@ -87,14 +87,14 @@ int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
 			p += 0xa8;
 			rec++;
 			i++;
-		} while (i < g_772604);
+		} while (i < d2_QueuedQuadCount);
 	}
 	((Device*) g_772614)->vtbl->Unlock((Device*) g_772614);
 	fcn_0047c4e0();
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 7, 0);
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x88, 0);
 	fcn_004372d0(0xff, 0, 0, 1, 1);
-	if (g_772604 != 0) {
+	if (d2_QueuedQuadCount != 0) {
 		if (snd != 0) {
 			s.f0 = 0;
 			s.f4 = 0;
@@ -113,12 +113,12 @@ int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
 		}
 		rec = g_1552020 + start;
 		i = start;
-		while (i < g_772604) {
+		while (i < d2_QueuedQuadCount) {
 			id = *(int*) ((char*) rec + 0xa8);
 			p = (char*) rec + 0xa8;
 			count = 0;
 			j = i;
-			while (j < g_772604) {
+			while (j < d2_QueuedQuadCount) {
 				p += 0xac;
 				count++;
 				j++;
@@ -139,7 +139,7 @@ int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
 		}
 	}
 done:
-	g_772604 = start;
+	d2_QueuedQuadCount = start;
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 7, 1);
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x88, 1);
 	fcn_0047c520();

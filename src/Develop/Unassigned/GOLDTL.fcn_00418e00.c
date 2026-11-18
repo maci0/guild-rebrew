@@ -13,7 +13,7 @@ struct snd_418e00 {
 	int keep;
 };
 
-extern char* g_6b5d08;
+extern char* tp_SoundSources;
 
 void __cdecl fcn_004237f0(char*, int);
 void __cdecl fcn_00426170(char*, int);
@@ -30,42 +30,42 @@ void __cdecl fcn_00418e00(void)
 {
 	int i;
 
-	if (((struct snd_418e00*)g_6b5d08) == 0) {
+	if (((struct snd_418e00*)tp_SoundSources) == 0) {
 		return;
 	}
 	for (i = 0; i < d3snd_SourceCount; i++) {
-		if (((struct snd_418e00*)g_6b5d08)[i].obj == 0) {
+		if (((struct snd_418e00*)tp_SoundSources)[i].obj == 0) {
 			continue;
 		}
 #ifdef REBREW_GOLD
-		if (*(char**) (((struct snd_418e00*)g_6b5d08)[i].obj + 0x208) != ((char*)g_67a370)) {
+		if (*(char**) (((struct snd_418e00*)tp_SoundSources)[i].obj + 0x208) != ((char*)g_67a370)) {
 #else
-		if (*(char**) (((struct snd_418e00*)g_6b5d08)[i].obj + 0x20c) != ((char*)g_67a370)) {
+		if (*(char**) (((struct snd_418e00*)tp_SoundSources)[i].obj + 0x20c) != ((char*)g_67a370)) {
 #endif
-			if (((struct snd_418e00*)g_6b5d08)[i].voice == 0) {
+			if (((struct snd_418e00*)tp_SoundSources)[i].voice == 0) {
 				continue;
 			}
-			fcn_004237f0(((struct snd_418e00*)g_6b5d08)[i].voice, 0);
-			*(unsigned int*) (((struct snd_418e00*)g_6b5d08)[i].voice + 0x14) |= 8;
-			if (((struct snd_418e00*)g_6b5d08)[i].keep == 0) {
-				fcn_00426170(((struct snd_418e00*)g_6b5d08)[i].voice, 0);
-				((struct snd_418e00*)g_6b5d08)[i].voice = 0;
+			fcn_004237f0(((struct snd_418e00*)tp_SoundSources)[i].voice, 0);
+			*(unsigned int*) (((struct snd_418e00*)tp_SoundSources)[i].voice + 0x14) |= 8;
+			if (((struct snd_418e00*)tp_SoundSources)[i].keep == 0) {
+				fcn_00426170(((struct snd_418e00*)tp_SoundSources)[i].voice, 0);
+				((struct snd_418e00*)tp_SoundSources)[i].voice = 0;
 			}
 			continue;
 		}
-		d3_UpdateSoundSourceVolume(&((struct snd_418e00*)g_6b5d08)[i]);
-		d3_UpdateSoundSourcePan(&((struct snd_418e00*)g_6b5d08)[i]);
-		if (((struct snd_418e00*)g_6b5d08)[i].voice == 0 || fcn_00423460(((struct snd_418e00*)g_6b5d08)[i].voice) != 0) {
+		d3_UpdateSoundSourceVolume(&((struct snd_418e00*)tp_SoundSources)[i]);
+		d3_UpdateSoundSourcePan(&((struct snd_418e00*)tp_SoundSources)[i]);
+		if (((struct snd_418e00*)tp_SoundSources)[i].voice == 0 || fcn_00423460(((struct snd_418e00*)tp_SoundSources)[i].voice) != 0) {
 			continue;
 		}
-		((struct snd_418e00*)g_6b5d08)[i].idle++;
-		if (((struct snd_418e00*)g_6b5d08)[i].idle > 500 && ((struct snd_418e00*)g_6b5d08)[i].keep == 0) {
-			if (((struct snd_418e00*)g_6b5d08)[i].fade != 0) {
-				fcn_00418d70(&((struct snd_418e00*)g_6b5d08)[i]);
+		((struct snd_418e00*)tp_SoundSources)[i].idle++;
+		if (((struct snd_418e00*)tp_SoundSources)[i].idle > 500 && ((struct snd_418e00*)tp_SoundSources)[i].keep == 0) {
+			if (((struct snd_418e00*)tp_SoundSources)[i].fade != 0) {
+				fcn_00418d70(&((struct snd_418e00*)tp_SoundSources)[i]);
 			} else {
-				fcn_00426170(((struct snd_418e00*)g_6b5d08)[i].voice, 0);
-				*(unsigned int*) (((struct snd_418e00*)g_6b5d08)[i].voice + 0x14) |= 8;
-				((struct snd_418e00*)g_6b5d08)[i].voice = 0;
+				fcn_00426170(((struct snd_418e00*)tp_SoundSources)[i].voice, 0);
+				*(unsigned int*) (((struct snd_418e00*)tp_SoundSources)[i].voice + 0x14) |= 8;
+				((struct snd_418e00*)tp_SoundSources)[i].voice = 0;
 			}
 		}
 	}

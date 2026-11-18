@@ -32,7 +32,7 @@ typedef struct {
 
 extern char s_6acf98[];
 extern char s_6acf90[];
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_14ac654;
 extern char* g_1015ea0;
 extern char* g_77255c;
@@ -40,7 +40,7 @@ extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_14ce8d8;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
@@ -84,7 +84,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 	d2_SetForm(dlg, 2);
 	io_AppendText(title);
 	d2_SetForm(dlg, 0);
-	fcn_00533f40(0x140, 0x100, g_772514, fcn_00472830(dlg, 1), 0x18, &w, &h, &field);
+	fcn_00533f40(0x140, 0x100, d2_CurrentWindowId, fcn_00472830(dlg, 1), 0x18, &w, &h, &field);
 	memset(recs, 0, sizeof(recs));
 	count = fcn_005dfa40(a4, a5, recs);
 	flag = mode & 1;
@@ -97,7 +97,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 	}
 	d2_SetForm(dlg, 1);
 	for (i = 0; i < count; i++) {
-		recs[i].id = d2_ShowTxt(0, (short) (i * 24), recs[i].name, g_772514);
+		recs[i].id = d2_ShowTxt(0, (short) (i * 24), recs[i].name, d2_CurrentWindowId);
 		((Slot*)g_1015ea0)[recs[i].id].f5c = 1;
 		((Slot*)g_1015ea0)[recs[i].id].f6c = 1;
 		((Slot*)g_1015ea0)[recs[i].id].f18 = ((Win*)g_77255c)->fc;
@@ -112,7 +112,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 		}
 		if (g_14ce8d8 != 0) {
 			for (i = 0; i < count; i++) {
-				if (g_67d370 == recs[i].id) {
+				if (d2_CurrentElementId == recs[i].id) {
 					if (flag) {
 						sprintf(out, s_6acf90, a4, recs[i].name, a5);
 						g_774654 = 1;
@@ -124,7 +124,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 				}
 			}
 		}
-		if (g_100f1dc != -1 && g_67d370 == ok) {
+		if (g_100f1dc != -1 && d2_CurrentElementId == ok) {
 			if (!flag) {
 				sprintf(out, s_6acf90, a4, fcn_00471f80(list), a5);
 			}

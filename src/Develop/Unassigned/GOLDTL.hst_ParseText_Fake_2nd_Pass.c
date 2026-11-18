@@ -7,7 +7,7 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x44
 
-extern int g_67fca0;
+extern int hst_HistoryTextBase;
 extern char g_680ae0[]; /* hst_ParseText_Fake_2nd_Pass() failed: Syntax Error in Label %i < %s > */
 
 int __cdecl sprintf(char*, const char*, ...);
@@ -113,7 +113,7 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 				s++;
 				dashes++;
 				if (dashes > 2) {
-					sprintf(msg, g_680ae0, id - g_67fca0 - 1, label);
+					sprintf(msg, g_680ae0, id - hst_HistoryTextBase - 1, label);
 					return 0;
 				}
 				continue;
@@ -125,7 +125,7 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 			}
 			n = isdigit(c);
 			if (n == 0) {
-				sprintf(msg, g_680ae0, id - g_67fca0 - 1, label);
+				sprintf(msg, g_680ae0, id - hst_HistoryTextBase - 1, label);
 				return 0;
 			}
 			while (isdigit(*s) && *s != 0) {
@@ -164,7 +164,7 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 	}
 	if (in_label != 0 && dashes < 2) {
 syntax_error:
-		sprintf(msg, g_680ae0, id - g_67fca0 - 1, label);
+		sprintf(msg, g_680ae0, id - hst_HistoryTextBase - 1, label);
 		return 0;
 	}
 	if (in_label == 1 && dashes == 2) {

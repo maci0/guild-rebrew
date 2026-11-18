@@ -6,7 +6,7 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
@@ -38,7 +38,7 @@ int __cdecl fcn_005b5750(void)
 	int v;
 
 	r = 0;
-	timer = g_7e46ac;
+	timer = main_LoopFlags;
 	if (fcn_00526010(&((Player*)g_7f4ca0)[g_774970], 0x140, (*(char*)&g_773d75)) == 0) {
 		return 0;
 	}

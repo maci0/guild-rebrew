@@ -27,8 +27,8 @@ char* __cdecl ch_AttachMotion(char* obj, int kind)
 	char path[0x110];
 	char msg[0x200];
 
-	sprintf(path, "character/%s/%s_%s.baf", obj + 0x130, ((struct kind_404150*)g_14d0c40)[kind].name, obj + 0x130);
-	sprintf(ani, "%s_%s", ((struct kind_404150*)g_14d0c40)[kind].name, obj + 0x130);
+	sprintf(path, "character/%s/%s_%s.baf", obj + 0x130, ((struct kind_404150*)ch_ActionDefinitions)[kind].name, obj + 0x130);
+	sprintf(ani, "%s_%s", ((struct kind_404150*)ch_ActionDefinitions)[kind].name, obj + 0x130);
 	vfs_ToSlashes(ani);
 	if (path[0] != 0) {
 		memset(&opt, 0, sizeof(opt));

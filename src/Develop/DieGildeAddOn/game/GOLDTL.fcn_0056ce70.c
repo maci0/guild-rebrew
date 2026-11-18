@@ -34,12 +34,12 @@ void __cdecl fcn_0056ce70(char* obj)
 		*(int*) (obj + 0xb8 + i * 4) = -1;
 	}
 	p = (pos14_7f4c00*) (obj + 0x52);
-	*p = g_7f4c00;
+	*p = gm_GameTime;
 
 
 
 	p = (pos14_7f4c00*) (obj + 0x60);
-	*p = g_7f4c00;
+	*p = gm_GameTime;
 
 
 

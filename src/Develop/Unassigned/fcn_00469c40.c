@@ -1,5 +1,5 @@
 extern char *g_1015ea0;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 #include "client_types.h"
 extern Anim_100e7a0 g_100e7a0[0x30];
@@ -78,7 +78,7 @@ void __cdecl fcn_00469c40(int a1, int a2, int a3)
 	e->x7d = 8;
 	if (kind != 0x40) {
 		e->x30 = 0;
-		e->x34 = g_1040490;
+		e->x34 = d2_ScreenHeight;
 		e->x28 = 0;
 		e->x2c = g_1040494;
 	} else {
@@ -100,8 +100,8 @@ void __cdecl fcn_00469c40(int a1, int a2, int a3)
 
 
 		e->x34 = t;
-		if (t >= g_1040490) {
-			t = g_1040490;
+		if (t >= d2_ScreenHeight) {
+			t = d2_ScreenHeight;
 		}
 		e->x34 = t;
 		t = (r->x1 > e->x28) ? r->x1 : e->x28;
@@ -135,8 +135,8 @@ void __cdecl fcn_00469c40(int a1, int a2, int a3)
 		if (e->x2c > g_1040494) {
 			e->x2c = g_1040494;
 		}
-		if (e->x34 > g_1040490) {
-			e->x34 = g_1040490;
+		if (e->x34 > d2_ScreenHeight) {
+			e->x34 = d2_ScreenHeight;
 		}
 		for (i = 0; i < w->n; i++) {
 			idx = w->ids[i];

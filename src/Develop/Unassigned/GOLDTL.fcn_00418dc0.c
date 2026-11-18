@@ -44,7 +44,7 @@ SOUND_SOURCE* __cdecl fcn_00418dc0(void)
 	SOUND_SOURCE* t;
 	int n;
 
-	t = ((SOUND_SOURCE*)g_6b5d08);
+	t = ((SOUND_SOURCE*)tp_SoundSources);
 	if (t != 0) {
 		n = d3snd_SourceCount;
 		for (; i < n; i++) {

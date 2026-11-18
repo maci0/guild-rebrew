@@ -1,16 +1,16 @@
 
 
 
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 
 int __cdecl fcn_00426340(void)
 {
-	while (*(char**) (g_6b7e98 + 0x118) < (char*) (*(int*) (g_6b7e98 + 0x120) + *(int*) (g_6b7e98 + 0x11c))) {
-		if (**(char**) (g_6b7e98 + 0x118) == ';') {
-			(*(char**) (g_6b7e98 + 0x118))++;
+	while (*(char**) (evt_CurrentScript + 0x118) < (char*) (*(int*) (evt_CurrentScript + 0x120) + *(int*) (evt_CurrentScript + 0x11c))) {
+		if (**(char**) (evt_CurrentScript + 0x118) == ';') {
+			(*(char**) (evt_CurrentScript + 0x118))++;
 			return 1;
 		}
-		(*(char**) (g_6b7e98 + 0x118))++;
+		(*(char**) (evt_CurrentScript + 0x118))++;
 	}
 	return 0;
 }

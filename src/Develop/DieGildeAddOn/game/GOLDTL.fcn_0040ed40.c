@@ -23,7 +23,7 @@ int __cdecl AttachAnim(char** character, char** animation, int* kind)
 		slot = (char**) (draw + 0x484);
 		for (; i < 3; i++, slot = (char**) ((char*) slot + 0x7c)) {
 			if (*slot != 0) {
-				*(void**) (g_6b7e98 + 0xc60) = (void*) AttachAnim;
+				*(void**) (evt_CurrentScript + 0xc60) = (void*) AttachAnim;
 				return 0;
 			}
 		}
@@ -51,8 +51,8 @@ int __cdecl AttachAnim(char** character, char** animation, int* kind)
 		options.reverse = 0;
 		fcn_00434970(*(char**) (object + 0x1cc), name, options);
 	}
-	if (*(int*) (g_6b7e98 + 0xc84) == 1) {
-		*(void**) (g_6b7e98 + 0xc60) = (void*) AttachAnim;
+	if (*(int*) (evt_CurrentScript + 0xc84) == 1) {
+		*(void**) (evt_CurrentScript + 0xc60) = (void*) AttachAnim;
 	}
 	return 0;
 }

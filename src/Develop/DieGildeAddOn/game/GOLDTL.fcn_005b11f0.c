@@ -6,12 +6,12 @@ extern char g_14cf7c8;
 extern char g_14cf7cb;
 extern char g_14cf7cd;
 extern char g_14cf7d0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_6a99e8;
 extern int g_6ab3dc;
 extern float g_6ab3e0;
 extern volatile int g_6b7fac;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern unsigned char g_773d75;
 extern int g_778d20;
@@ -56,7 +56,7 @@ void __cdecl fcn_005b11f0(int* a0)
 	view = *(char**) g_1043370;
 	ox = *(int*) (g_773d75 * 0x2f4 + 0x86834c);
 	oy = *(int*) (g_773d75 * 0x2f4 + 0x868350);
-	g_772514 = a0[2];
+	d2_CurrentWindowId = a0[2];
 	g_77255c = (char*) (a0[2] * 0x3cc + 0x1015f40);
 	t = g_77255c;
 	if (g_6ab3dc) {
@@ -71,21 +71,21 @@ void __cdecl fcn_005b11f0(int* a0)
 	    && g_14ce8e8 && g_6a99e8 == -1 && a0[0x9e9] >= 1) {
 		n = 0;
 		p = (char*) (a0 + 0x38);
-		i = g_67d370;
+		i = d2_CurrentElementId;
 		do {
 			if (i != -1 && i == *(int*) (p - 4)) {
 				w = *(unsigned short*) (*(int*) p + 0x27);
 				if (w != 0xffff
 				    && *(unsigned char*) (w * 0x21c + 0x7f4ca2) < 10) {
 					fcn_005918f0((char*) (w * 0x21c + 0x7f4ca0));
-					i = g_67d370;
+					i = d2_CurrentElementId;
 				}
 			}
 			n += 1;
 			p += 6 * 4;
 		} while (n < a0[0x9e9]);
 	}
-	g_772514 = a0[2];
+	d2_CurrentWindowId = a0[2];
 	list = (int*) 0x14d0020;
 	slot = a0 + 0x637;
 	for (;;) {
@@ -200,18 +200,18 @@ next:
 		}
 	}
 	if (*(char*) 0x14cf7c8) {
-		fcn_0046ed00(0, -4, g_772514);
+		fcn_0046ed00(0, -4, d2_CurrentWindowId);
 		return;
 	}
 	if (g_14cf7d0) {
-		fcn_0046ed00(0, 4, g_772514);
+		fcn_0046ed00(0, 4, d2_CurrentWindowId);
 		return;
 	}
 	if (g_14cf7cb) {
-		fcn_0046ed00(-4, 0, g_772514);
+		fcn_0046ed00(-4, 0, d2_CurrentWindowId);
 		return;
 	}
 	if (g_14cf7cd) {
-		fcn_0046ed00(4, 0, g_772514);
+		fcn_0046ed00(4, 0, d2_CurrentWindowId);
 	}
 }

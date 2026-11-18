@@ -2,15 +2,15 @@
 extern char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 extern char* g_1015ea0;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
 extern int g_100f1dc;
 extern int g_14b556c;
 extern int g_774654;
-extern int g_7e46ac;
-extern int g_67d370;
+extern int main_LoopFlags;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 
 int __cdecl fcn_00502cd0(int, int, ...);
@@ -125,7 +125,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 	ids[3] = menu;
 	fcn_00471b60(menu);
 	d2_SetForm(menu, 0);
-	fcn_00533dc0(g_772514, 0x70f, 0x741);
+	fcn_00533dc0(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(menu, 3);
 	screen = (*ents != 0x1f) ? 0x4128 : 0x421e;
 	io_AppendText(screen);
@@ -134,10 +134,10 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 	fcn_00471b60(menu);
 	d2_SetForm(menu, 2);
 	if (n) {
-		i = *(int*) (0x1015f4c + g_772514 * 0x3cc) / 2 - 0x80;
+		i = *(int*) (0x1015f4c + d2_CurrentWindowId * 0x3cc) / 2 - 0x80;
 		j = 0x19;
 		for (count = 0; count < n; count++) {
-			h = fcn_0046f740(i, j, (int) ids[count] + 0xdf, g_772514);
+			h = fcn_0046f740(i, j, (int) ids[count] + 0xdf, d2_CurrentWindowId);
 			vp = (unsigned char*) (g_1015ea0 + h * 0x2f4);
 			*(int*) (vp + 0x5c) = 1;
 			*(int*) (vp + 0x1d0) = 3;
@@ -202,7 +202,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 		}
 		if (g_100f1dc != -1) {
 			for (sel = 0; sel < n; sel++) {
-				if (handles[sel] == g_67d370)
+				if (handles[sel] == d2_CurrentElementId)
 					break;
 			}
 			if (sel < n) {
@@ -240,7 +240,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 							fcn_005373e0(0, 0x20007);
 						}
 					}
-					g_7e46ac = 0x677c7;
+					main_LoopFlags = 0x677c7;
 					sv_ClearObjectSelection();
 				} else {
 					fcn_00526120(g_14b556c, 4);

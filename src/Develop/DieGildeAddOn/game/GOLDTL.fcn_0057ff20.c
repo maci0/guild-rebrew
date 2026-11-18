@@ -26,7 +26,7 @@ typedef struct {
 
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -60,7 +60,7 @@ void __cdecl fcn_0057ff20(int a)
 		msg.kind = 1;
 		msg.flags = 0xa0;
 		msg.target = -1;
-		msg.a = (*(int*)&g_7f4c00);
+		msg.a = (*(int*)&gm_GameTime);
 		msg.b = (*(int*)&g_7f4c04);
 		msg.c = g_7f4c08;
 		msg.d = g_7f4c0c;

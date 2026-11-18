@@ -1,5 +1,5 @@
-extern int g_67d370;
-extern int g_7e46ac;
+extern int d2_CurrentElementId;
+extern int main_LoopFlags;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 extern signed char g_6a3440;
@@ -70,28 +70,28 @@ int __cdecl fcn_004b43f0(int n)
 		sel = 0;
 	}
 	d2_SelectRadioGroup(list, sel);
-	if (fcn_005373e0(fcn_004b41b0, g_7e46ac) != 0) {
+	if (fcn_005373e0(fcn_004b41b0, main_LoopFlags) != 0) {
 		do {
 			d2_UpdateRadioGroup(list);
 			if (g_100f1dc == 2) {
-				if (g_67d370 == b6) {
+				if (d2_CurrentElementId == b6) {
 					g_6a3440 = -1;
 					r = 0xff;
 					g_774654 = 1;
-				} else if (g_67d370 == b0) {
+				} else if (d2_CurrentElementId == b0) {
 					g_6a3440 = -1;
 					r = 0;
 					g_774654 = 1;
 				} else {
-					if (g_67d370 == b1) {
+					if (d2_CurrentElementId == b1) {
 						g_6a3440 = 0;
-					} else if (g_67d370 == b2) {
+					} else if (d2_CurrentElementId == b2) {
 						g_6a3440 = 1;
-					} else if (g_67d370 == b3) {
+					} else if (d2_CurrentElementId == b3) {
 						g_6a3440 = 2;
-					} else if (g_67d370 == b4) {
+					} else if (d2_CurrentElementId == b4) {
 						g_6a3440 = 3;
-					} else if (g_67d370 == b5) {
+					} else if (d2_CurrentElementId == b5) {
 						g_6a3440 = 4;
 					}
 					d2_SelectRadioGroup(list, 0);
@@ -101,7 +101,7 @@ int __cdecl fcn_004b43f0(int n)
 					}
 				}
 			}
-		} while (fcn_005373e0(fcn_004b41b0, g_7e46ac) != 0);
+		} while (fcn_005373e0(fcn_004b41b0, main_LoopFlags) != 0);
 	}
 	fcn_00469510(list);
 	fcn_00471e30(dlg);

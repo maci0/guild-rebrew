@@ -1,10 +1,10 @@
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 extern unsigned char* lpGebaeudePROT;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern unsigned short g_7f3ee4;
 extern int g_90d520[];
 extern int g_14a79c0[];
@@ -61,7 +61,7 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 		do {
 			if (*(int*) (e + 0xe) > 1) {
 				t = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40,
-					*(unsigned short*) e + 0xdf, g_772514);
+					*(unsigned short*) e + 0xdf, d2_CurrentWindowId);
 				items[n] = t;
 				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x5c) = 1;
 				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1d0) = 3;
@@ -84,7 +84,7 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 		do {
 			if (*(int*) (e + 0xe) >= 1) {
 				t = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40,
-					*(unsigned short*) e + 0xdf, g_772514);
+					*(unsigned short*) e + 0xdf, d2_CurrentWindowId);
 				items[n] = t;
 				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x5c) = 1;
 				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1d0) = 3;
@@ -102,7 +102,7 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 			e = (char*) fcn_00502cd0(*(int*) (q + 0x14), 1, 0, g_90d520[n]);
 			if (e && *(int*) (e + 0xe) > 1) {
 				t = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40,
-					g_90d520[n] + 0xdf, g_772514);
+					g_90d520[n] + 0xdf, d2_CurrentWindowId);
 				items[n] = t;
 				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x5c) = 1;
 				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1d0) = 0x23;
@@ -118,7 +118,7 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 tail:
 	g_7f3ee4 = (unsigned short) n;
 	g_90d520[n] = 0;
-	t = fcn_0046f740((n % 4) * 0x40 + 7, (n / 4) * 0x40 + 7, 0x527, g_772514);
+	t = fcn_0046f740((n % 4) * 0x40 + 7, (n / 4) * 0x40 + 7, 0x527, d2_CurrentWindowId);
 	items[n] = t;
 	*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x5c) = 1;
 	*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1d0) = 3;
@@ -128,7 +128,7 @@ tail:
 		}
 		if (g_100f1dc != -1) {
 			for (t = 0; t < g_7f3ee4 + 1; t++) {
-				if (g_67d370 == items[t]) {
+				if (d2_CurrentElementId == items[t]) {
 					ret = g_90d520[t];
 					g_774654 = 1;
 					break;

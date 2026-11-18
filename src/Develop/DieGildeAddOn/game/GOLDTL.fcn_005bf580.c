@@ -4,11 +4,11 @@
 extern char g_7f4ca0[];
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14b5e04;
 extern int g_14b5e08;
 extern int g_14b5e0c;
@@ -70,7 +70,7 @@ int __cdecl fcn_005bf580(char* rec)
 			if (*(int*) (q + 0xc4) == *(int*) (rec + 4)) {
 				io_FormatTextBuffer(buf, 0x42c1, *(unsigned short*) rec);
 				if (fcn_00526120(buf, 0x101) != 0) {
-					*(pos14_7f4c00*) (q + 0x52) = g_7f4c00;
+					*(pos14_7f4c00*) (q + 0x52) = gm_GameTime;
 					*(int*) (q + 0x84) = fcn_004c5620(-1, (unsigned char*) q);
 				}
 				return 0;
@@ -91,17 +91,17 @@ int __cdecl fcn_005bf580(char* rec)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60((int) h);
 	d2_SetForm((int) h, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm((int) h, 2);
-	row = fcn_0046fac0(0, 3, g_14b5e18, g_772514);
+	row = fcn_0046fac0(0, 3, g_14b5e18, d2_CurrentWindowId);
 	*(int*) (g_1015ea0 + row * 0x2f4 + 0x6c) = 1;
-	*(int*) (g_1015ea0 + row * 0x2f4 + 0x18) = g_1015f40[g_772514].xc;
+	*(int*) (g_1015ea0 + row * 0x2f4 + 0x18) = g_1015f40[d2_CurrentWindowId].xc;
 	fcn_00472900(row, 0x54);
-	row2 = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 0x82, g_772514);
+	row2 = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 0x82, d2_CurrentWindowId);
 	fcn_00472380(row2, 0, 2, 0, 1);
 	fcn_00468bb0(row2, 3, g_14b5e0c, g_14b5e10, g_14b5e14);
 	d2_SetForm((int) h, 3);
-	fcn_00533a60(g_772514, 0, sel, 2, g_14b5e04, g_14b5e08);
+	fcn_00533a60(d2_CurrentWindowId, 0, sel, 2, g_14b5e04, g_14b5e08);
 	while (fcn_005373e0((void*) fcn_005bf580, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0 || *(unsigned short*) rec == 0xffff) {
 			g_774654 = 1;
@@ -117,7 +117,7 @@ int __cdecl fcn_005bf580(char* rec)
 			io_AppendText((int) 0x6811b0);
 			io_AppendText(0x42b8, n, *(unsigned short*) rec);
 			if (g_100f1dc != -1) {
-				if (g_67d370 == sel[0]
+				if (d2_CurrentElementId == sel[0]
 					&& fcn_00526010(g_7f4ca0 + g_774970 * 0x21c, n, g_773d75) != 0) {
 					pkt[4] = 0x18;
 					*(int*) (pkt + 8) = *(int*) (g_7f4ca0 + g_774970 * 0x21c + 4);
@@ -135,7 +135,7 @@ int __cdecl fcn_005bf580(char* rec)
 					fcn_00526120(buf, 0x100);
 					g_774654 = 1;
 					ret = 1;
-				} else if (g_67d370 == sel[1]) {
+				} else if (d2_CurrentElementId == sel[1]) {
 					g_774654 = 1;
 				}
 			}

@@ -12,7 +12,7 @@ void __cdecl fcn_004c4aa0(char* node)
 	if (prev != 0) {
 		*(char**) (prev + 0x95) = *(char**) (node + 0x95);
 	} else {
-		g_aed324 = *(char**) (node + 0x95);
+		cm_CommandQueueHead = *(char**) (node + 0x95);
 	}
 	next = *(char**) (node + 0x95);
 	if (next != 0) {

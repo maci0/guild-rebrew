@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00500bb0(pos14_7f4c00* when, int h, int m, int s);
@@ -13,8 +13,8 @@ void __cdecl fcn_00563e90(char* p)
 {
 	void* rec;
 
-	*(pos14_7f4c00*) (p + 0x52) = g_7f4c00;
-	*(pos14_7f4c00*) (p + 0x44) = g_7f4c00;
+	*(pos14_7f4c00*) (p + 0x52) = gm_GameTime;
+	*(pos14_7f4c00*) (p + 0x44) = gm_GameTime;
 	if (g_774800 != 0) {
 		fcn_00500bb0((pos14_7f4c00*) (p + 0x52), 0, 0, 1);
 	} else {

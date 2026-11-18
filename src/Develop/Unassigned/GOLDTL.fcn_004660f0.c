@@ -20,8 +20,8 @@ void __cdecl fcn_004660f0(int x, int y, int w, int h)
 		x--;
 		w = (w + 2) & ~1;
 	}
-	if (y + h > g_67d968) {
-		h = g_67d968 - y;
+	if (y + h > d2_ClipBottom) {
+		h = d2_ClipBottom - y;
 	}
 	if (y < g_7725fc) {
 		h += y - g_7725fc;

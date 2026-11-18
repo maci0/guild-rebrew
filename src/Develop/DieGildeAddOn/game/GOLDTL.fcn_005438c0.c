@@ -14,7 +14,7 @@ __declspec(dllimport) int __stdcall FreeLibrary(void*);
 
 extern unsigned char g_7747b0;		/* 0x007747b0 */
 extern int g_7e2500;			/* 0x007e2500 */
-extern int g_7e46ac;			/* 0x007e46ac */
+extern int main_LoopFlags;			/* 0x007e46ac */
 extern char* g_14ac5cc;			/* 0x014ac5cc */
 extern char* g_14ac5d0;			/* 0x014ac5d0 */
 extern int g_14ac5d4;			/* 0x014ac5d4 */
@@ -27,12 +27,12 @@ extern unsigned char g_77670a;		/* 0x0077670a */
 extern int g_7747b4;			/* 0x007747b4 */
 extern int g_7e4314;			/* 0x007e4314 */
 extern int g_7e2510;			/* 0x007e2510 */
-extern int g_7725c8;			/* 0x007725c8 */
+extern int d2_SuppressOverlay;			/* 0x007725c8 */
 extern int g_774958;			/* 0x00774958 */
 extern int g_774954;			/* 0x00774954 */
 extern int g_77497c;			/* 0x0077497c */
 extern int g_774950;			/* 0x00774950 */
-extern unsigned int g_774948;
+extern unsigned int main_PlayerTurnIndex;
 #include "Develop/DieGildeAddOn/game/game_player.h"		/* 0x00774970 */
 extern unsigned char g_77494c;		/* 0x0077494c */
 extern unsigned char g_773de8;		/* 0x00773de8 */
@@ -42,7 +42,7 @@ extern int g_6a3764;			/* 0x006a3764 */
 extern int g_6a3768;			/* 0x006a3768 */
 extern int g_6a376c;			/* 0x006a376c */
 extern int g_6a3770;			/* 0x006a3770 */
-extern int g_1040490;			/* 0x01040490 */
+extern int d2_ScreenHeight;			/* 0x01040490 */
 extern int g_1040494;			/* 0x01040494 */
 extern int g_10432a4;			/* 0x010432a4 */
 extern int g_10421a0;			/* 0x010421a0 */
@@ -80,7 +80,7 @@ extern char g_7e254a[];			/* 0x007e254a */
 extern char g_7e21a0[];			/* 0x007e21a0 */
 extern char g_7e2000[];			/* 0x007e2000 */
 extern char g_6a33dc[];			/* 0x006a33dc */
-extern char g_7f4c00[];			/* 0x007f4c00 */
+extern char gm_GameTime[];			/* 0x007f4c00 */
 
 void __cdecl srv_InitBuildingTypeTable(void);
 void __cdecl fcn_004b20d0(int);
@@ -212,7 +212,7 @@ void __cdecl fcn_005438c0(int a0)
 				int r;
 
 				do {
-					g_7e46ac = 0x24087;
+					main_LoopFlags = 0x24087;
 					io_FormatTextBuffer(buf, 0x79);
 					r = fcn_00526120(buf, 1);
 					if (r != 0) {
@@ -226,7 +226,7 @@ void __cdecl fcn_005438c0(int a0)
 			}
 			g_7e2500 = (int) LoadLibraryA(g_7e1be0);
 			if (g_7e2500 == 0) {
-				g_7e46ac = 0x66087;
+				main_LoopFlags = 0x66087;
 				fcn_00526120(g_14ac5cc, 0x100);
 				g_774958 = 0;
 				g_774954 = 1;
@@ -240,7 +240,7 @@ void __cdecl fcn_005438c0(int a0)
 			if (proc == 0) {
 				FreeLibrary((void*) g_7e2500);
 				g_7e2500 = 0;
-				g_7e46ac = 0x66087;
+				main_LoopFlags = 0x66087;
 				fcn_00471e30(h);
 				fcn_00526120(g_14ac5cc, 0x100);
 				g_774958 = 0;
@@ -250,7 +250,7 @@ void __cdecl fcn_005438c0(int a0)
 			if (((int (__cdecl*) (int)) proc)((int) g_7e2520) == 0) {
 				FreeLibrary((void*) g_7e2500);
 				g_7e2500 = 0;
-				g_7e46ac = 0x66087;
+				main_LoopFlags = 0x66087;
 				fcn_00471e30(h);
 				fcn_00526120(g_14ac5cc, 0x100);
 				g_774958 = 0;
@@ -267,13 +267,13 @@ void __cdecl fcn_005438c0(int a0)
 		fcn_00420db0(0, 0);
 		if (fcn_005435d0() != 1) {
 			for (;;) {
-				g_7725c8 = 0;
-				g_7e46ac = 0x24087;
+				d2_SuppressOverlay = 0;
+				main_LoopFlags = 0x24087;
 				io_FormatTextBuffer(buf, 0x79);
 				if (fcn_00526120(buf, 1) == 0) {
 					break;
 				}
-				g_7725c8 = 1;
+				d2_SuppressOverlay = 1;
 				fcn_0046ac30();
 				Sleep(1000);
 			}
@@ -284,7 +284,7 @@ void __cdecl fcn_005438c0(int a0)
 	}
 	fcn_004c3d50();
 	if (g_7747b0 & 0x44) {
-		g_7725c8 = 0;
+		d2_SuppressOverlay = 0;
 		if (fcn_005926f0() != 0) {
 			if (g_7e2500 != 0) {
 				Sleep(1000);
@@ -296,7 +296,7 @@ void __cdecl fcn_005438c0(int a0)
 			return;
 		}
 	}
-	g_7725c8 = 1;
+	d2_SuppressOverlay = 1;
 	fcn_0053f4c0();
 	d2_SetForm(g_7e1d40, 1);
 	if (g_7747b0 & 4) {
@@ -354,15 +354,15 @@ void __cdecl fcn_005438c0(int a0)
 	} else if (g_7747b0 & 2) {
 		g_7747b4 = g_77670a;
 		if (fcn_00521920(g_7e21a0, 1) == 0) {
-			g_7e46ac = 0x46086;
+			main_LoopFlags = 0x46086;
 			fcn_00526120(g_14ac630, 0);
 			g_774954 = 1;
 			fcn_0053fa80();
 			fcn_0053f720();
 			return;
 		}
-		fcn_0052a890(g_7f4c00);
-		g_7e4314 = fcn_0052a310(g_7f4c00);
+		fcn_0052a890(gm_GameTime);
+		g_7e4314 = fcn_0052a310(gm_GameTime);
 	}
 	fcn_00512500();
 	if (g_7747b0 & 1) {
@@ -396,7 +396,7 @@ void __cdecl fcn_005438c0(int a0)
 	fcn_005bd820();
 	fcn_005356e0();
 	fcn_0053f720();
-	g_7725c8 = 0;
+	d2_SuppressOverlay = 0;
 	fcn_00526db0(fcn_00527000());
 	fcn_004432d0(0, 0);
 	if ((g_7747b0 & 1) && (!(g_7747b0 & 0x40))) {
@@ -408,9 +408,9 @@ void __cdecl fcn_005438c0(int a0)
 	fcn_00438da0((float) (g_6a376c - g_6a3764),
 	    (float) (g_6a3770 - g_6a3768), (float) g_6a3764,
 	    (float) g_6a3768, g_10529c8, g_10421a0, g_10432a4,
-	    g_1040494, g_1040490);
+	    g_1040494, d2_ScreenHeight);
 	if (g_7747b0 & 2) {
-		fcn_0052a3a0(g_7f4c00, 0);
+		fcn_0052a3a0(gm_GameTime, 0);
 		if (g_7f3a30 != -1) {
 			base = (void*) gm_SearchTable67(g_7f3a30);
 			x = gm_FindRecordById(g_7f3a34);
@@ -451,10 +451,10 @@ void __cdecl fcn_005438c0(int a0)
 		if (g_774950 >= 0x320) {
 			break;
 		}
-		(*(int *)&g_774948) = 0;
+		(*(int *)&main_PlayerTurnIndex) = 0;
 		if (!(g_7747b0 & 0x42)) {
 			g_774970 = 0;
-			(*(int *)&g_774948) = 0;
+			(*(int *)&main_PlayerTurnIndex) = 0;
 			main_RundenBeginn();
 		} else {
 			c = 0;
@@ -468,7 +468,7 @@ void __cdecl fcn_005438c0(int a0)
 					p += 0x21c;
 					count--;
 				} while (count != 0);
-				(*(int *)&g_774948) = c;
+				(*(int *)&main_PlayerTurnIndex) = c;
 			}
 		}
 		for (;;) {
@@ -591,10 +591,10 @@ void __cdecl fcn_005438c0(int a0)
 			goto l_inc;
 		}
 		g_7747b0 &= 0xbd;
-		(*(int *)&g_774948) += 1;
+		(*(int *)&main_PlayerTurnIndex) += 1;
 		goto l_gate;
 l_inc:
-		(*(int *)&g_774948) += 1;
+		(*(int *)&main_PlayerTurnIndex) += 1;
 l_gate:
 		if (g_774954 != 0) {
 			goto l_step;
@@ -638,7 +638,7 @@ l_gate:
 				*(int*) (msg + 0x1c) = *(int*) 0x7f4c04;
 				*(int*) (msg + 0x20) = *(int*) 0x7f4c08;
 				*(short*) (msg + 0x24) = *(short*) 0x7f4c0c;
-				g_7e46ac = 0x24087;
+				main_LoopFlags = 0x24087;
 				msg[8] = 1;
 				*(int*) (msg + 0x14) = -1;
 				msg[0x26] = 0x61;

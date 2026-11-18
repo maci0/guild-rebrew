@@ -45,18 +45,18 @@ void __cdecl fcn_004b1e60(void)
 			((Slot*)g_1007bc0)[i].p[j].b = 0xffff;
 		}
 	}
-	g_67fca0 = -1;
+	hst_HistoryTextBase = -1;
 	g_67fca4 = -1;
 	sprintf(buf, "historie\\text_H_%s", ((char(*)[0x2f4])g_868060)[g_773d75]);
-	if (((Text*)g_149d120)[fcn_0042d630(buf)].x68 == 0 && fcn_0042d6b0(buf) == 0) {
+	if (((Text*)txt_TextBanks)[fcn_0042d630(buf)].x68 == 0 && fcn_0042d6b0(buf) == 0) {
 		g_7728d4 = 0;
 		return;
 	}
 	i = fcn_0042d630(buf);
 	n = 0x10;
-	g_67fca0 = ((Text*)g_149d120)[i].x60;
-	g_67fca4 = ((Text*)g_149d120)[i].x64;
-	g_67fca8 = ((Text*)g_149d120)[i].x60;
+	hst_HistoryTextBase = ((Text*)txt_TextBanks)[i].x60;
+	g_67fca4 = ((Text*)txt_TextBanks)[i].x64;
+	g_67fca8 = ((Text*)txt_TextBanks)[i].x60;
 	/* block-fill prelude, see docs/codegen-walls.md section 6b */
 	__asm {
 		mov edi, offset g_1007ba0

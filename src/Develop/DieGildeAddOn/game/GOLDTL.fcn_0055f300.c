@@ -14,7 +14,7 @@ void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00546190(char*);
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 /* One stage of the message-box tick; state lives at +0x70 of the caller's record. */
 /* ADDRESS: GOLDTL 0x0055f300 */
@@ -40,7 +40,7 @@ void __cdecl fcn_0055f300(char* e)
 		}
 		if ((int) *((unsigned char*) item + 0x12) < *(int*) (e + 0xb4)) {
 			gm_ChangeObjektZustand(*(int*) (e + 0xac), i / *(int*) (e + 0xb8));
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0((void*) (e + 0x52), 0, *(int*) (e + 0xb8) * 2, 0);
 		} else {
 			*(int*) (e + 0x70) = *(int*) (e + 0x70) + 1;

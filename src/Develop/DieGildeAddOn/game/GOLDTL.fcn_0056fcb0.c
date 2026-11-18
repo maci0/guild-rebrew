@@ -2,7 +2,7 @@
 
 #include "client_types.h"
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_slot_table[2];
 
 void __cdecl fcn_00546190(char* e);
@@ -29,7 +29,7 @@ void __cdecl fcn_0056fcb0(char* e)
 			return;
 		}
 		if ((*(int*) (g_slot_table + (*(unsigned short*) (e + 8)) * 0x21c + 0x1c8) & 0x80000000) != 0) {
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0(e + 0x52, 4, 0, 0);
 			return;
 		}
@@ -43,11 +43,11 @@ void __cdecl fcn_0056fcb0(char* e)
 			*(int*) (msg + 0x58) = *(int*) (g_slot_table + (*(unsigned short*) (e + 8)) * 0x21c + 4);
 			fcn_004c5530(msg);
 			*(int*) (g_slot_table + (*(unsigned short*) (e + 8)) * 0x21c + 0x1c8) |= 0x80000000;
-			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0(e + 0x52, 4, 0, 0);
 			return;
 		}
-		*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		fcn_00500bb0(e + 0x52, 0, 0x14, 0);
 	} else {
 		fcn_00546190(e);

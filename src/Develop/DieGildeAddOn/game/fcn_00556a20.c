@@ -21,7 +21,7 @@ void __cdecl fcn_00556a20(char* p)
 		return;
 	}
 	q = (int*) (p + 0x52);
-	*(pos14_7f4c00*) q = g_7f4c00;
+	*(pos14_7f4c00*) q = gm_GameTime;
 
 
 

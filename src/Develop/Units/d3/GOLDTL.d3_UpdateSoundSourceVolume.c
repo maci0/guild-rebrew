@@ -23,9 +23,9 @@ void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source)
         return;
     }
     fcn_00455350(source->objekt, source->objekt + 0x4c, position);
-    x = position[0] - *(float*)((char*)g_6b8014 + 0x4c);
-    y = position[1] - *(float*)((char*)g_6b8014 + 0x50);
-    z = position[2] - *(float*)((char*)g_6b8014 + 0x54);
+    x = position[0] - *(float*)((char*)d3_ActiveCamera + 0x4c);
+    y = position[1] - *(float*)((char*)d3_ActiveCamera + 0x50);
+    z = position[2] - *(float*)((char*)d3_ActiveCamera + 0x54);
     distance = (float)sqrt(z * z + y * y + x * x);
     distance = (float)(distance * g_662b40);
     remaining = source->range - distance;

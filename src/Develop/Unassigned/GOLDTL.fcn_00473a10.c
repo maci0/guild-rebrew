@@ -14,8 +14,8 @@ int __cdecl fcn_00473a10(int x, int y)
 	int a;
 	int b;
 
-	px = g_100f1e8 + x;
-	py = g_100f1ec + y;
+	px = d2_MouseX + x;
+	py = d2_MouseY + y;
 	a = 6;
 	b = 6;
 	if (!g_7725c0) {

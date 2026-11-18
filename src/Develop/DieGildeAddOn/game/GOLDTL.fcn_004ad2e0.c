@@ -30,10 +30,10 @@ void __cdecl fcn_004ad2e0(void)
 	char* rec;
 	float f;
 
-	if (g_7f4c00.a < 4) {
+	if (gm_GameTime.a < 4) {
 		return;
 	}
-	idx = g_7f4c00.a % 4;
+	idx = gm_GameTime.a % 4;
 	if (idx == 0) {
 		return;
 	}

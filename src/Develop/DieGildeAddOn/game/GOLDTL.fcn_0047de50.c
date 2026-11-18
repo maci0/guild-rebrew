@@ -47,7 +47,7 @@ typedef struct {
 #pragma pack(pop)
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern Master47de* g_100e748;
 extern char g_7f4ca0[];
 extern char* g_7746c4;
@@ -77,7 +77,7 @@ void __cdecl fcn_0047de50(Master47de* m)
 	char buf[0x100];
 	unsigned char k;
 
-	if ((*(Time47de*)&g_7f4c00).hour < 6 || ((*(Time47de*)&g_7f4c00).hour == 6 && (*(Time47de*)&g_7f4c00).min < 30)) {
+	if ((*(Time47de*)&gm_GameTime).hour < 6 || ((*(Time47de*)&gm_GameTime).hour == 6 && (*(Time47de*)&gm_GameTime).min < 30)) {
 		return;
 	}
 	if (gm_CanEvaluateMaster((char*) m) == 0) {

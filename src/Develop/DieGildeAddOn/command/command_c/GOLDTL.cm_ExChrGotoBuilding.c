@@ -91,7 +91,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 		C = gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0x2c));
 
 	/* chunk 1: native ins 100-199 */
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	if (C != 0 && gm_CheckEntityType(C) != 0) {
 		k = fcn_00413190(*(int*) (o + 0x88));
 		fcn_004432d0(k, 1);

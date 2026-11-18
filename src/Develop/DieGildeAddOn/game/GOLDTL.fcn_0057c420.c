@@ -29,7 +29,7 @@ struct house {
 	char pad8[0x214];
 };
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_004c5530(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -47,7 +47,7 @@ void __cdecl fcn_0057c420(struct house* a, struct house* b)
 	m.kind = 0x9e;
 	m.owner = b->owner;
 	m.target = -1;
-	m.when = g_7f4c00;
+	m.when = gm_GameTime;
 	m.code = 1;
 	m.who = a == b ? -1 : a->owner;
 	m.other = b->owner;

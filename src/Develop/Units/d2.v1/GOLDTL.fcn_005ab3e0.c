@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 extern int g_774654;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 extern float g_662910;
 
@@ -73,7 +73,7 @@ void __cdecl fcn_005ab3e0(char* a0)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1960);
 	if (cost > 0) {
@@ -88,7 +88,7 @@ void __cdecl fcn_005ab3e0(char* a0)
 	do {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
-		} else if (g_100f1dc != -1 && g_67d370 == item
+		} else if (g_100f1dc != -1 && d2_CurrentElementId == item
 			&& fcn_00526010(g_7f4ca0 + g_774970 * 0x21c, cost, g_773d75) != 0) {
 			rec = g_7f4ca0 + g_774970 * 0x21c;
 			fcn_004c4510(rec, *(int*) (rec + 4));

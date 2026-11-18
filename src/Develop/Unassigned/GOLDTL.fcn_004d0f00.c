@@ -1,6 +1,6 @@
 extern unsigned short* g_772f24;
 extern int g_7746a0;
-extern char* g_7e4260[32];
+extern char* ch_ContextCharacters[32];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_7746a4;
 extern char g_14cf736;
@@ -32,12 +32,12 @@ void __cdecl fcn_004d0f00(void)
 	me = g_772f24;
 	g_7746a0 = 0;
 	for (i = 0; i < 32; i++) {
-		e = g_7e4260[i];
+		e = ch_ContextCharacters[i];
 		if (e != 0 && e[0x188] != 0 && (fcn_004cef70(*me, e) & 0x800) != 0
 		    && *(int*) (e + 0x184) != 0 && e[8] != 0)
 			break;
 	}
-	if (g_14ce8cc == 0 || g_67d370 != -1)
+	if (g_14ce8cc == 0 || d2_CurrentElementId != -1)
 		return;
 	x = g_7746a4;
 	if (x != 0 && *(int*) (x + 0x220) == 2) {

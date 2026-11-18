@@ -29,7 +29,7 @@ void __cdecl fcn_0057ae50(char* u)
 	if (e == 0 || *(char**) (e + 0x61) == 0 || q == 0 || *(int*) (q + 0x70) == -2 || *(int*) (q + 0x70) == -1) {
 		o = fcn_00426cc0(*(int*) (u + 0xb0));
 		if (o != 0 && *(int*) o == FX_MAGIC && *(int*) (o + 4) == *(int*) (u + 0x10)) {
-			saved = g_6b8010;
+			saved = d3_CurrentContextIndex;
 			fcn_004432d0(0, 1);
 			fcn_00428720(o);
 			fcn_004432d0(saved, 1);
@@ -58,7 +58,7 @@ void __cdecl fcn_0057ae50(char* u)
 	}
 	*(int*) o = FX_MAGIC;
 	*(int*) (o + 4) = *(int*) (u + 0x10);
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	fcn_00455350(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, pos);
 	pos[1] += 500.0f;

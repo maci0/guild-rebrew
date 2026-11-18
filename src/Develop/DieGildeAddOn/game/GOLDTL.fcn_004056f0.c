@@ -14,9 +14,9 @@ void __cdecl fcn_004056f0(char* a1, int a2, int a3)
 
 	if (a1 != 0) {
 		ch_GetCameraView(a1, a2, b, a);
-		fcn_00433780(g_6b8014);
-		g_6b5cbc = 0;
+		fcn_00433780(d3_ActiveCamera);
+		d3_CameraAnimating = 0;
 		d3_ActiveCameraAnimation = 0;
-		fcn_00412cf0(g_6b8014, b, a, a3, 0x28);
+		fcn_00412cf0(d3_ActiveCamera, b, a, a3, 0x28);
 	}
 }

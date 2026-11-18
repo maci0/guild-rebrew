@@ -1,6 +1,6 @@
 extern char* g_772500;
 extern char* g_1015ea0;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 
 int __cdecl fcn_00469890(void);
@@ -57,7 +57,7 @@ int __cdecl fcn_004675f0(int a0, int a1, int a2, int a3, int a4, int resourceId,
 	*(int*) (g_1015ea0 + id * 0x2f4 + 0xa0) = a4 / 2;
 	*(int*) (g_1015ea0 + id * 0x2f4 + 0xa4) = resourceId;
 	*(int*) (g_1015ea0 + id * 0x2f4 + 0x30) = 0;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x34) = g_1040490;
+	*(int*) (g_1015ea0 + id * 0x2f4 + 0x34) = d2_ScreenHeight;
 	*(int*) (g_1015ea0 + id * 0x2f4 + 0x28) = 0;
 	*(int*) (g_1015ea0 + id * 0x2f4 + 0x2c) = g_1040494;
 	*(int*) (g_1015ea0 + id * 0x2f4 + 0xc) = d2_GetResourceData(resourceId);

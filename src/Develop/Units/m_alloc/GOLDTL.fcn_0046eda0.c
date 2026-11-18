@@ -75,7 +75,7 @@ typedef struct
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern char* g_772500;
-extern int g_1040490;
+extern int d2_ScreenHeight;
 extern int g_1040494;
 
 void __cdecl m_FreeTracked(void* p);
@@ -142,8 +142,8 @@ void __cdecl fcn_0046eda0(int w, int h, int win)
 	e = &((fcn_0046eda0_Ent*)g_1015ea0)[p->ent];
 	e->bottom = p->y + p->h;
 	e->right = p->w + p->x;
-	if (p->y + p->h > g_1040490) {
-		p->h = g_1040490 - p->y;
+	if (p->y + p->h > d2_ScreenHeight) {
+		p->h = d2_ScreenHeight - p->y;
 	}
 	if (p->x + p->w > g_1040494) {
 		p->w = g_1040494 - p->x;

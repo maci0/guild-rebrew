@@ -2,11 +2,11 @@
 
 extern char* g_entity_type_table;
 extern char* g_1015ea0;
-extern int g_772514;
-extern int g_67d370;
+extern int d2_CurrentWindowId;
+extern int d2_CurrentElementId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -104,7 +104,7 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9750);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_00533dc0(g_772514, 0x70f, 0x741);
+	fcn_00533dc0(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x17fe);
 	fcn_0052a0c0(a0, 0);
@@ -112,10 +112,10 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 2);
 	if (count > 0) {
-		y = *(int*) (g_772514 * 0x3cc + 0x1015f4c) / 2 - 0x80;
+		y = *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) / 2 - 0x80;
 		x = 0x19;
 		for (i = 0; i < count; i++) {
-			h = fcn_0046f740(y, x, ids[i] + 0xdf, g_772514);
+			h = fcn_0046f740(y, x, ids[i] + 0xdf, d2_CurrentWindowId);
 			*(int*) (g_1015ea0 + h * 0x2f4 + 0x5c) = 1;
 			*(int*) (g_1015ea0 + h * 0x2f4 + 0x1d0) = 3;
 			*(int*) (g_1015ea0 + h * 0x2f4 + 0x1dc) = 100;
@@ -160,12 +160,12 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 		}
 		if (g_100f1dc != -1 && count > 0) {
 			for (i = 0; i < count; i++) {
-				if (handles[i] == g_67d370) {
+				if (handles[i] == d2_CurrentElementId) {
 					memset(pkt, 0, sizeof(pkt));
 					pkt[4] = 0x14;
 					pkt[0x36] = 1;
 					*(int*) (pkt + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) (a0 + 0x27) * 0x21c);
-					*(int*) (pkt + 0x28) = g_7f4c00;
+					*(int*) (pkt + 0x28) = gm_GameTime;
 					*(int*) (pkt + 0xc) = *(int*) (a0 + 1);
 					*(int*) (pkt + 0x30) = g_7f4c08;
 					*(int*) (pkt + 0x2c) = g_7f4c04;

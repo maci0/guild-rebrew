@@ -1,7 +1,7 @@
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int lpGebaeudePROT;
-extern int g_6b8010;
+extern int d3_CurrentContextIndex;
 extern unsigned char g_slot_table[2];
 
 extern float g_696540[];
@@ -29,7 +29,7 @@ void __cdecl fcn_0052db70(char* a0)
 	int p;
 	float ft;
 
-	sel = fcn_00500e20(&g_7f4c00);
+	sel = fcn_00500e20(&gm_GameTime);
 
 	if (*(unsigned char*) (lpGebaeudePROT + (unsigned char) *a0 * 0x24d) == 7 ||
 	    *(int*) (a0 + 0x61) == 0) {
@@ -55,7 +55,7 @@ void __cdecl fcn_0052db70(char* a0)
 			if (!(ft < g_696550[sel])) {
 				return;
 			}
-			h = g_6b8010; fcn_004432d0(0, 1);
+			h = d3_CurrentContextIndex; fcn_004432d0(0, 1);
 			obj = fcn_00445600(*(int*) (a0 + 0x61), 0x100, 0, "dummy_RAUCH_0");
 			if (obj == 0) {
 				goto unlock;

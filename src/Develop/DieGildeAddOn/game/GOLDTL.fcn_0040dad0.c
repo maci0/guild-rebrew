@@ -11,7 +11,7 @@ int __cdecl CharacterIdle(int** charakter_argument)
 	void* g;
 
 	if (*charakter_argument == 0) {
-		g = *(void**) ((char*)&g_6b7e98);
+		g = *(void**) ((char*)&evt_CurrentScript);
 		fcn_00425bf0(g, *(int*) ((char*) g + 0x118), (void*) g_6761a4);
 		return 0;
 	}

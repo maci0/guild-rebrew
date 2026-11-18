@@ -16,7 +16,7 @@ void __cdecl fcn_00598740(float* out, int obj);
 void __cdecl fcn_004c5530(int a1);
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern char g_67f0ac[]; 
 extern char g_68de2c[]; 
 
@@ -94,7 +94,7 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 		v4 = 1;
 	}
 	sprintf(event + 0x9c, (char*) 0x679060, v9);
-	*(pos14_7f4c00*) (event + 0x28) = g_7f4c00;
+	*(pos14_7f4c00*) (event + 0x28) = gm_GameTime;
 	v6 = *(unsigned int*) (a0 + 4);
 
 	*(int*) (event + 0xc) = *(int*) (event + 8) = v6;

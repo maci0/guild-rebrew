@@ -22,7 +22,7 @@ void __cdecl fcn_00546190(char* e);
 int __cdecl fcn_004d5450(char* e);
 int __cdecl fcn_004d5110(char* a, char* b, char* c, char* d);
 int __cdecl memset(void* dst, int c, unsigned int n);
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 /* ADDRESS: GOLDTL 0x0056bfd0 */
 void __cdecl fcn_0056bfd0(char* ent)
 {
@@ -62,7 +62,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 				ids++;
 				count--;
 			} while (count != 0);
-			*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
@@ -80,7 +80,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 				if (*(int*) (target + 0x184) != 0
 				    && *(int*) (*(int*) (target + 0x184) + 0x128)
 				    != 0) {
-					*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+					*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
@@ -93,7 +93,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 				}
 			}
 		}
-		*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
@@ -178,13 +178,13 @@ void __cdecl fcn_0056bfd0(char* ent)
 				e2 += 4;
 			} while (i < 8);
 			if (slot != 0 && n != 0) {
-				*(pos14_7f4c00*) (msg + 0x18) = g_7f4c00;
+				*(pos14_7f4c00*) (msg + 0x18) = gm_GameTime;
 
 
 
 				fcn_00500bb0((char*) msg + 0x18, 0, 0x1e, 0);
 				*(int*) (ent + 0xb4) = fcn_004c5980(msg);
-				*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
@@ -211,7 +211,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 			fcn_00545e80(*(int*) (0x7f4ca4
 			    + *(unsigned short*) (ent + 8) * 0x21c),
 			    -1, text, 0, 0x5f0, *(int*) (e2 + 1), -1, 0, 0);
-			*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
@@ -253,7 +253,7 @@ tail:
 		}
 		target = (char*) fcn_004c4480(*(int*) (ent + 0xb4));
 		*(int*) (ent + 0xb8) = *(int*) target;
-		*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
@@ -262,14 +262,14 @@ tail:
 		return;
 	case 4:
 		if (cut_FindCutsceneById(*(int*) (ent + 0xb8)) != 0) {
-			*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+			*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
 			fcn_00500bb0(ent + 0x52, 0, 5, 0);
 			return;
 		}
-		*(pos14_7f4c00*) (ent + 0x52) = g_7f4c00;
+		*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 

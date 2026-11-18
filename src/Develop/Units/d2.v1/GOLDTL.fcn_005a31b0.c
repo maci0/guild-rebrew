@@ -1,6 +1,6 @@
 extern int g_6a256c;
 extern volatile int g_6b7fac;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
 extern char g_1015f40[];
@@ -66,7 +66,7 @@ void __cdecl fcn_005a31b0(char* a0)
 				idx = fcn_00470820(0, 0, "Handel\\Handel_Stadtinfo");
 				fcn_00471b60(idx);
 				d2_SetForm(idx, 0);
-				win = g_772514 * 0x3cc;
+				win = d2_CurrentWindowId * 0x3cc;
 				*(int*) (win + 0x10162e8) = 0x18;
 				*(int*) (win + 0x10162ec) = 0x18;
 				*(int*) (win + 0x10162f0) = 0x1c;
@@ -95,7 +95,7 @@ void __cdecl fcn_005a31b0(char* a0)
 				while (it != 0) {
 					p = (int) gm_FindSlotById(*(int*) (a0 + 0x65), *it);
 					if (p != 0 && *(int*) (p + 4) != 0) {
-						fcn_005a30c0((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, g_772514, *it, *(int*) (a0 + 0x65));
+						fcn_005a30c0((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, d2_CurrentWindowId, *it, *(int*) (a0 + 0x65));
 						n++;
 					}
 					it = gm_NextEntityQueryMatch();
@@ -107,7 +107,7 @@ void __cdecl fcn_005a31b0(char* a0)
 				while (it != 0) {
 					p = (int) gm_FindSlotById(*(int*) (a0 + 0x65), *it);
 					if (p != 0 && *(int*) (p + 4) != 0) {
-						fcn_005a30c0((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, g_772514, *it, *(int*) (a0 + 0x65));
+						fcn_005a30c0((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, d2_CurrentWindowId, *it, *(int*) (a0 + 0x65));
 						n++;
 					}
 					it = gm_NextEntityQueryMatch();

@@ -2,7 +2,7 @@
 
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -51,12 +51,12 @@ void __cdecl fcn_0056c8f0(char* u)
 		}
 	}
 	*(int*) (u + 0xec) = *(int*) (pick + 1);
-	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	if (*(unsigned short*) (u + 0x56) > 0x14) {
 		*(unsigned short*) (u + 0x56) = gm_RandomMod(10) + 8;
 		(*(int*) (u + 0x52))++;
 	}
-	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	if (*(unsigned short*) (u + 0x56) < 7) {
 		*(unsigned short*) (u + 0x56) = gm_RandomMod(10) + 8;
 	}

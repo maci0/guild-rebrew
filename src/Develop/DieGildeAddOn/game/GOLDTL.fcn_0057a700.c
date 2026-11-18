@@ -30,7 +30,7 @@ struct house {
 	char pad8[0x214];
 };
 
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 
 char* __cdecl fcn_005463a0(int, ...);
@@ -49,7 +49,7 @@ void __cdecl fcn_0057a700(char* u)
 	if (u[0x78] & 4) {
 		return;
 	}
-	*(pos14_7f4c00*) (u + 0x52) = g_7f4c00;
+	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	for (o = fcn_005463a0(2, 0, 0x90, 3, *(int*) (u + 0x10)); o != 0; o = he_fn_Handlung()) {
 		if (o != u) {
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
@@ -59,7 +59,7 @@ void __cdecl fcn_0057a700(char* u)
 	memset(&m, 0, sizeof(m));
 	m.owner = *(int*) (u + 0xc);
 	m.target = *(int*) (u + 0xac);
-	m.when = g_7f4c00;
+	m.when = gm_GameTime;
 	m.kind = 0x91;
 	m.code = 0xa;
 	m.who = *(int*) (u + 4);

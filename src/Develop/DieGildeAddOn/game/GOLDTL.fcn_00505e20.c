@@ -53,7 +53,7 @@ extern unsigned char* lpGebaeudePROT;
 extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 Estate* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 Unit* __cdecl gm_LookupEntityRecordById(int);
@@ -96,7 +96,7 @@ void __cdecl fcn_00505e20(int search, int buyer, int price, Order* o, int notify
 		}
 	}
 	if (o != 0) {
-		o->stamp = (*(Stamp*)&g_7f4c00);
+		o->stamp = (*(Stamp*)&gm_GameTime);
 		fcn_00500bb0(&o->stamp, 0, 0, 1);
 		o->event = fcn_004c5620(-1, o);
 	}

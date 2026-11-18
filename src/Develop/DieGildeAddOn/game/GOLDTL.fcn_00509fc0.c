@@ -28,7 +28,7 @@ typedef struct
 
 
 extern unsigned char* lpGebaeudePROT;
-extern char* g_773da8;
+extern char* gm_CityEntity;
 extern unsigned char g_773d75;
 extern int g_666028;
 extern int g_66602c;
@@ -36,7 +36,7 @@ extern int g_aed32c;
 extern char g_7f4ca4[];
 extern char s_6999a8[];
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
@@ -89,7 +89,7 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 	n = 0;
 	count = 0;
 	best = 0;
-	sp = g_773da8;
+	sp = gm_CityEntity;
 	p = gm_StartFilteredEntitySearch(1, 3, *a0);
 	while (p != 0) {
 		mask = 0;
@@ -140,7 +140,7 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 					pkt.type = 0x31;
 					pkt.x8 = *(int*) (sp + 4);
 					pkt.xc = *(int*) (cur + 1);
-					pkt.name = *(Name14*) &g_7f4c00;
+					pkt.name = *(Name14*) &gm_GameTime;
 					pkt.x36 = 1;
 					pkt.x58 = *(int*) q;
 					fcn_004c5530(&pkt);

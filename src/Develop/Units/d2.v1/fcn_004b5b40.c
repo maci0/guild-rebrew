@@ -1,7 +1,7 @@
 extern int g_10069a0[9];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern char g_6a3440;
 extern int g_7728dc;
 #include "client_dialog_state.h"
@@ -77,7 +77,7 @@ void __cdecl fcn_004b5b40(int mode)
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
-			if (g_67d370 == r1) {
+			if (d2_CurrentElementId == r1) {
 				obj = (int*) fcn_004b3d80(*(int*) (slot + 4), (int) g_6a3440, 1);
 				m1.id = *(int*) (slot + 4);
 				m1.vend = 0;
@@ -88,7 +88,7 @@ void __cdecl fcn_004b5b40(int mode)
 					fcn_00535960();
 				}
 			}
-			else if (g_67d370 == r2) {
+			else if (d2_CurrentElementId == r2) {
 				m2.id = *(int*) (slot + 4);
 				g_6a3440 = -1;
 				m2.vend = 0;
@@ -98,7 +98,7 @@ void __cdecl fcn_004b5b40(int mode)
 					fcn_00535960();
 				}
 			}
-			else if (g_67d370 == r3) {
+			else if (d2_CurrentElementId == r3) {
 				g_6a3440 = -1;
 				m3.id = *(int*) (slot + 4);
 				arena_done = 1;

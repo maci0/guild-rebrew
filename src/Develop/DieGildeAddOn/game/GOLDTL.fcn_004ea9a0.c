@@ -22,7 +22,7 @@ typedef struct {
 } Obj;
 
 #include "client_types.h"
-extern Rec18_68da68 g_9a9220[42];
+extern Rec18_68da68 amt_OfficeSlots[42];
 extern char g_7f4ca0[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int type);
@@ -75,8 +75,8 @@ void __cdecl fcn_004ea9a0(void)
 	}
 	found = 1;
 	for (i = 36; i >= 0 && found != 0; i--) {
-		if (((Rec*)g_9a9220)[i].c == 0x22) {
-			rec = ((Rec*)g_9a9220)[i];
+		if (((Rec*)amt_OfficeSlots)[i].c == 0x22) {
+			rec = ((Rec*)amt_OfficeSlots)[i];
 			found--;
 		}
 	}

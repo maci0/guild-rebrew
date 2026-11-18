@@ -4,7 +4,7 @@
 
 
 extern float g_662d40[3];
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 void __cdecl fcn_00455350(char* src, char* pos, float* out);
 void __cdecl fcn_00455140(char* src, float* v, float* out);
 float __cdecl fcn_00451380(float* a, float* b);
@@ -18,7 +18,7 @@ int __cdecl SetCharacterToDummy(char** a, char** b)
 	float p[4];
 
 	if (*a == 0 || *b == 0) {
-		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "invalid object");
+		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 1;
 	}
 	fcn_00455350(*b, *b + 0x4c, p);

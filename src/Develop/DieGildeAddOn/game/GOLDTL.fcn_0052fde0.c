@@ -12,7 +12,7 @@ extern char g_14a6558[];
 extern char g_100f8c0[];
 extern int g_67d8cc;
 extern char* g_773dfc;
-extern char* g_7746ac;
+extern char* sv_HoveredObjekt;
 extern char* g_7746b0;
 extern char* g_7746b4;
 extern char* g_7746c8;
@@ -20,7 +20,7 @@ extern char* g_7746c4;
 extern char* g_7746cc;
 extern unsigned short* g_7746bc;
 extern char* g_7e2aa0;
-extern int g_7e46ac;
+extern int main_LoopFlags;
 extern int g_7725bc;
 extern int g_7746dc;
 extern int g_7746e4;
@@ -68,9 +68,9 @@ void __cdecl fcn_0052fde0(void)
 	}
 	g_6a2bf0 = g_14ce8c0;
 	g_6a2bf4 = g_14ce8c2;
-	if (g_6a2bf0 <= g_6a3764 || g_6a376c <= g_6a2bf0 || g_6a2bf4 <= g_6a3768 || (g_6a3770 <= g_6a2bf4 || g_100f894 != -1) || g_67d8d4 != -1 || ((g_7746a4 = fcn_00443bf0((float) g_6a2bf0,
+	if (g_6a2bf0 <= g_6a3764 || g_6a376c <= g_6a2bf0 || g_6a2bf4 <= g_6a3768 || (g_6a3770 <= g_6a2bf4 || d2_HoveredWindow != -1) || g_67d8d4 != -1 || ((g_7746a4 = fcn_00443bf0((float) g_6a2bf0,
 	    (float) g_6a2bf4, 0x20, 1)) == 0 && (g_7746a4 = fcn_00443bf0((float) g_14ce8c0, (float) g_14ce8c2, 0x40, 1)) == 0)) {
-		if (g_67d370 == -1 || !(*(unsigned char*) (g_1015ea0 + g_67d370 * 0x2f4 + 0x1d0) & 0x40)) {
+		if (d2_CurrentElementId == -1 || !(*(unsigned char*) (g_1015ea0 + d2_CurrentElementId * 0x2f4 + 0x1d0) & 0x40)) {
 			g_100f8c0[0] = 0;
 		}
 		if (g_67d8cc != -1) {
@@ -79,13 +79,13 @@ void __cdecl fcn_0052fde0(void)
 			g_774798 = -1;
 		}
 		g_773dfc = 0;
-		g_7746ac = 0;
+		sv_HoveredObjekt = 0;
 		g_7746b0 = 0;
 		g_7746b4 = 0;
 		g_7725c4 = 0;
 		return;
 	}
-	if (!(g_7e46ac & 0x10)) {
+	if (!(main_LoopFlags & 0x10)) {
 		return;
 	}
 	if (g_7725bc) {
@@ -94,7 +94,7 @@ void __cdecl fcn_0052fde0(void)
 	if (!g_7746a4) {
 		return;
 	}
-	if (g_100f894 != -1) {
+	if (d2_HoveredWindow != -1) {
 		return;
 	}
 	if (g_67d8d4 != -1) {
@@ -106,22 +106,22 @@ void __cdecl fcn_0052fde0(void)
 	g_7746e0 = 0;
 	g_7746e8 = 0;
 	g_7725c4 = 0;
-	g_7746ac = 0;
+	sv_HoveredObjekt = 0;
 	g_7746b0 = 0;
 	g_7746b4 = 0;
 	g_7746bc = 0;
 	cur = g_7746a4;
 	c = cur[0x4b];
 	if (c == 1) {
-		g_7746ac = *(char**) (cur + 0x204);
+		sv_HoveredObjekt = *(char**) (cur + 0x204);
 		if (g_7746c8) {
 			target = g_7746c8;
 		} else {
 			target = 0;
 		}
-		g_7746dc = fcn_00506380((int) g_774970, target, (unsigned short*) g_7746ac, 0);
-		if (g_7746ac) {
-			v = (unsigned int) *(unsigned short*) g_7746ac;
+		g_7746dc = fcn_00506380((int) g_774970, target, (unsigned short*) sv_HoveredObjekt, 0);
+		if (sv_HoveredObjekt) {
+			v = (unsigned int) *(unsigned short*) sv_HoveredObjekt;
 			c = g_item_def_table[v * 0x41];
 			if (!((c != 6 && c != 2) || !(g_7746dc & 0x4000))) {
 				fcn_0064d41a(g_100f8c0, s_68b3f8, g_14a79c0[v * 2], *(char**) 0x14a552c);
@@ -155,7 +155,7 @@ void __cdecl fcn_0052fde0(void)
 		g_7746b4 = *(char**) (cur + 0x204);
 		g_7746dc = fcn_00506380((int) g_774970, 0, 0, (int) g_7746b4);
 		if (g_7746b4 && (fcn_00517c00(*(unsigned short*) g_7746b4, 1, 4, g_100f8c0), *(char*) ((int) g_7746b4 + 0x165) == 0x1c) && ((*(unsigned char*) (g_7746b4 + 0x1b4) & 1) && ((g_7746dc & 0x800) &&
-		    g_6b8010))) {
+		    d3_CurrentContextIndex))) {
 			io_FormatTextBuffer(g_100f8c0, 0x414c, *(unsigned short*) g_7746b4);
 			g_7725c4 = 0x2e;
 		}

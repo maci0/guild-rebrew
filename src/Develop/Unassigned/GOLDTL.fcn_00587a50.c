@@ -99,8 +99,8 @@ void __cdecl fcn_00587a50(char* o)
 	v[5] = u * *(float*) (o + 0x28) + s;
 	v[4] = v[4] + u * *(float*) (o + 0x24);
 	v[6] = v[6] + u * z;
-	fcn_00438b40(g_6b8014, v + 4);
-	fcn_00438cb0(g_6b8014, v);
+	fcn_00438b40(d3_ActiveCamera, v + 4);
+	fcn_00438cb0(d3_ActiveCamera, v);
 
 	if (*(int*) (o + 0x7c) == 0) {
 		fcn_00587f40(o);

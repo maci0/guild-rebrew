@@ -1,4 +1,4 @@
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 
 
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
@@ -13,7 +13,7 @@ int __cdecl fcn_0040f250(char** a, int* x, int* y, int* z)
 
 	e = *a;
 	if (!m_is_tracked(e)) {
-		fcn_004273d0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), "invalid object");
+		fcn_004273d0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 0;
 	}
 	fx = *x * 0.01f;

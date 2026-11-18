@@ -92,7 +92,7 @@ void __cdecl fcn_0047c7b0(int x, int y, int w, int h, Tex* tex, float alpha)
 		return;
 	}
 	fcn_0047b9f0(&q, (int) (alpha * 255.0f));
-	t = g_772608 * 0.001f;
+	t = d2_DrawDepthIndex * 0.001f;
 	for (i = 0; i < 6; i++) {
 		q.vs.v[i].z = 1.0f - t;
 		q.vs.v[i].w = t + 0.01f;
@@ -125,5 +125,5 @@ void __cdecl fcn_0047c7b0(int x, int y, int w, int h, Tex* tex, float alpha)
 		((Device*) g_6b5de0)->vtbl->EndScene(((Device*) g_6b5de0));
 	}
 	((Device*) g_6b5de0)->vtbl->SetRenderState(((Device*) g_6b5de0), 0x88, 1);
-	g_772608++;
+	d2_DrawDepthIndex++;
 }

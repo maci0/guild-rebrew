@@ -36,7 +36,7 @@ typedef struct
 #pragma pack()
 
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 
 
 int __cdecl fcn_004c4700(unsigned char type, unsigned char count, short id, char* data);
@@ -70,7 +70,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 			*(int*) (msg + 8) = e->h;
 			*(int*) (msg + 0xc) = -1;
 			msg[0x36] = 2;
-			*(fcn_004ff210_Stamp*) (msg + 0x28) = (*(fcn_004ff210_Stamp*)&g_7f4c00);
+			*(fcn_004ff210_Stamp*) (msg + 0x28) = (*(fcn_004ff210_Stamp*)&gm_GameTime);
 			*(int*) (msg + 0x58) = e->h;
 			fcn_004c5530(msg);
 			return 0.0f;
@@ -96,7 +96,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 			*(int*) (msg + 8) = e->h;
 			*(int*) (msg + 0xc) = -1;
 			msg[0x36] = 2;
-			*(fcn_004ff210_Stamp*) (msg + 0x28) = (*(fcn_004ff210_Stamp*)&g_7f4c00);
+			*(fcn_004ff210_Stamp*) (msg + 0x28) = (*(fcn_004ff210_Stamp*)&gm_GameTime);
 			*(int*) (msg + 0x58) = e->h;
 			fcn_004c5530(msg);
 			return 0.0f;

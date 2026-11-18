@@ -3,8 +3,8 @@
 
 extern char s_6ad2f8[];
 extern char s_6ad2e8[];
-extern int g_7e46ac;
-extern int g_772514;
+extern int main_LoopFlags;
+extern int d2_CurrentWindowId;
 extern unsigned char g_7766a0[4];
 extern unsigned char g_7766a4[4];
 extern int g_14ac564;
@@ -24,7 +24,7 @@ extern char g_14cf950;
 extern int g_14ce8d0;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern char* g_7747b8;
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -70,13 +70,13 @@ void __cdecl fcn_005e3150(void)
 
 	changed = 0;
 	playing = 0;
-	wait = g_7e46ac & ~0x2000;
+	wait = main_LoopFlags & ~0x2000;
 	dlg = fcn_00470820(0, 0, s_6ad2f8);
 	fcn_00537320(wait);
 	fcn_00471db0(dlg, 1);
 	fcn_00471d80(dlg, 2);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(g_772514);
+	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 2);
 	io_AppendText(0x1c5b);
@@ -103,7 +103,7 @@ void __cdecl fcn_005e3150(void)
 	fcn_00468b80(s4, g_14ac574);
 	fcn_00468bb0(s4, 5, g_14ac53c, g_14ac540, g_14ac544, g_14ac548, g_14ac54c);
 	d2_SetForm(dlg, 3);
-	fcn_00533a60(g_772514, 0, btn, 2, g_14ac5a8, g_14ac5ac);
+	fcn_00533a60(d2_CurrentWindowId, 0, btn, 2, g_14ac5a8, g_14ac5ac);
 	ok = btn[0];
 	cancel = btn[1];
 	while (fcn_005373e0((void*) fcn_005e3150, wait) != 0) {
@@ -111,20 +111,20 @@ void __cdecl fcn_005e3150(void)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_67d370 == ok) {
+			if (d2_CurrentElementId == ok) {
 				changed = 1;
 				g_774654 = 1;
-			} else if (g_67d370 == cancel) {
+			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;
 			}
 		}
-		if (g_14ce8d0 != 0 && (g_67d370 == s0 || g_67d370 == s1 || g_67d370 == s2 || g_67d370 == s3)) {
+		if (g_14ce8d0 != 0 && (d2_CurrentElementId == s0 || d2_CurrentElementId == s1 || d2_CurrentElementId == s2 || d2_CurrentElementId == s3)) {
 			master = fcn_00471f80(s0) * 0.01f;
 			music = (float)(fcn_00471f80(s1));
 			sfx = (float)(fcn_00471f80(s2));
 			fcn_00427370((int) (music * master));
 			SetMasterVolume((int) (sfx * master));
-			if (g_67d370 == s1 && playing == 0) {
+			if (d2_CurrentElementId == s1 && playing == 0) {
 				playing = fcn_004234e0(g_7747b8, s_6ad2e8, 1, 0x3f, 0x7f, 0, 0);
 			}
 		}

@@ -21,7 +21,7 @@ typedef struct GOLDTL_Msg549 {
 
 extern float g_6628a8;
 extern float g_6628cc;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
@@ -72,7 +72,7 @@ void __cdecl fcn_00549580(int a0, char* a1, char* a2, char* a3,
 		} else {
 			msg.f8 = *(int*) (a2 + 4);
 		}
-		msg.f28 = g_7f4c00;
+		msg.f28 = gm_GameTime;
 		msg.f2c = g_7f4c04;
 		msg.f30 = g_7f4c08;
 		msg.fc = -1;

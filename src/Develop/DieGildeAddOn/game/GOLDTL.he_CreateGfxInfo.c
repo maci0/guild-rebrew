@@ -17,7 +17,7 @@ void __cdecl he_CreateGfxInfo(unsigned char* p, char* name, char* entity)
 	int saved;
 	int i;
 
-	saved = g_6b8010;
+	saved = d3_CurrentContextIndex;
 	if (*(unsigned char*) 0x7766bb == 0)
 		goto done;
 	for (i = 0; i < 0x40; i++) {

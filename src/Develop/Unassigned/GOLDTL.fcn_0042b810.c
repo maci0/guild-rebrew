@@ -1,6 +1,6 @@
 #include <stdio.h>
-extern void* g_6b7fa0;
-extern int g_6b7fa4, g_6b7f98;
+extern void* txt_TextBuffer;
+extern int g_6b7fa4, txt_EntryCount;
 #include <string.h>
 
 #pragma intrinsic(memset, strlen, strcpy, strcat)
@@ -106,19 +106,19 @@ int __cdecl fcn_0042b810(char* text, int index)
 	}
 	for (i = 0; i < 4; i++) {
 		strcat(v20[i], "|");
-		strcat((char*) ((int) g_6b7fa0 + (g_6b7f98 << 12)), v20[i]);
+		strcat((char*) ((int) txt_TextBuffer + (txt_EntryCount << 12)), v20[i]);
 		g_6b7fa4 = g_6b7fa4 + strlen(v20[i]);
 	}
 	for (i = 0; i < 4; i++) {
 		strcat(v21[i], "|");
-		strcat((char*) ((int) g_6b7fa0 + (g_6b7f98 << 12)), v21[i]);
+		strcat((char*) ((int) txt_TextBuffer + (txt_EntryCount << 12)), v21[i]);
 		g_6b7fa4 = g_6b7fa4 + strlen(v21[i]);
 	}
-	*(int*) (g_6b7f98 * 4 + 0x11bb000) = kind;
-	sprintf((char*) (g_6b7f98 * 0x50 + 0x1053000), "%s+%i",
+	*(int*) (txt_EntryCount * 4 + 0x11bb000) = kind;
+	sprintf((char*) (txt_EntryCount * 0x50 + 0x1053000), "%s+%i",
 	    (char*) (index * 0x50 + 0x13350d0),
-	    g_6b7f98 - *(int*) (index * 4 + 0x14b731c));
+	    txt_EntryCount - *(int*) (index * 4 + 0x14b731c));
 	g_6b7fa4 = g_6b7fa4 + 1;
-	g_6b7f98 = g_6b7f98 + 1;
+	txt_EntryCount = txt_EntryCount + 1;
 	return 1;
 }

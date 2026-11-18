@@ -27,7 +27,7 @@ int __cdecl cm_ExecCommand(void)
 	char buf2[256];
 	char buf3[256];
 
-	node = g_aed324;
+	node = cm_CommandQueueHead;
 	if (g_14cbcb0) {
 		while (node) {
 			if (*(int*) (node + 4) != -1) {
@@ -37,7 +37,7 @@ int __cdecl cm_ExecCommand(void)
 				cell->f6 = 0;
 			}
 			fcn_004c4aa0(node);
-			node = g_aed324;
+			node = cm_CommandQueueHead;
 		}
 		p = (char*) 0xfb5760;
 		do {
@@ -47,7 +47,7 @@ int __cdecl cm_ExecCommand(void)
 		if (!g_774954) {
 			g_774954 = 1;
 			fcn_005356b0(0x5438c0);
-			node = g_aed324;
+			node = cm_CommandQueueHead;
 		}
 	}
 	prev = 0;
@@ -70,8 +70,8 @@ int __cdecl cm_ExecCommand(void)
 			if (prev)
 				pass = 0;
 			if (*node != 7 && fcn_004c41c0(node) && pass) {
-				if (node == g_aed324) {
-					g_aed324 = next;
+				if (node == cm_CommandQueueHead) {
+					cm_CommandQueueHead = next;
 				} else {
 					*(char**) (*(char**) (node + 0x91) + 0x95) = *(char**) slot;
 					if (*(char**) slot)

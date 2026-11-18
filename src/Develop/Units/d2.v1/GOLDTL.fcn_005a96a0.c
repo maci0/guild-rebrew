@@ -24,14 +24,14 @@ typedef struct {
 extern char g_7f4ca0[];
 extern char* g_772500;
 extern char* g_77255c;
-extern int g_772514;
+extern int d2_CurrentWindowId;
 extern int g_14abb40;
 extern int g_14abb44;
 extern int g_14abb48;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern char g_6aae98[];
 
 int __cdecl fcn_004e8a80(int, void*);
@@ -106,13 +106,13 @@ int __cdecl fcn_005a96a0(char* who, int id)
 					d2_SetForm(d, 1);
 					io_AppendText(0x1a07, id + 0x253);
 					d2_SetForm(d, 3);
-					fcn_00533a60(g_772514, 0, ids, 3, g_14abb40, g_14abb44, g_14abb48);
+					fcn_00533a60(d2_CurrentWindowId, 0, ids, 3, g_14abb40, g_14abb44, g_14abb48);
 					ha = ids[0];
 					hb = ids[1];
 					hc = ids[2];
 				}
 				d2_SetForm(d, 2);
-				fcn_0046f2c0(g_772514, 1);
+				fcn_0046f2c0(d2_CurrentWindowId, 1);
 				io_AppendText(0x1a0b);
 				if (n <= 0) {
 					io_AppendText(0x1a0c);
@@ -126,7 +126,7 @@ int __cdecl fcn_005a96a0(char* who, int id)
 						items[i].y = i / 2 * 0x41 * 2 + 0x28;
 						items[i].house = houses[i];
 						fcn_005ca560(&items[i]);
-						fcn_005ca740(items[i].x, items[i].y, g_772514, 0x56, &items[i], 1);
+						fcn_005ca740(items[i].x, items[i].y, d2_CurrentWindowId, 0x56, &items[i], 1);
 					}
 				}
 				if (n < 4 && who[0x168] == 0) {
@@ -141,7 +141,7 @@ int __cdecl fcn_005a96a0(char* who, int id)
 			g_774654 = 1;
 		}
 		else if (g_100f1dc != -1) {
-			if (g_67d370 == ha) {
+			if (d2_CurrentElementId == ha) {
 				r = fcn_004e7d40(who, id);
 				if (r != -1) {
 					do {
@@ -156,11 +156,11 @@ int __cdecl fcn_005a96a0(char* who, int id)
 				}
 				fcn_0057e880(0x2f, 0, 0, id);
 			}
-			else if (g_67d370 == hb) {
+			else if (d2_CurrentElementId == hb) {
 				r = fcn_004e6f10(id);
 				fcn_005cadc0(r, 0, 0, 0, fcn_0052f7a0);
 			}
-			else if (g_67d370 == hc) {
+			else if (d2_CurrentElementId == hc) {
 				fcn_005cdd90(id, 0);
 			}
 		}

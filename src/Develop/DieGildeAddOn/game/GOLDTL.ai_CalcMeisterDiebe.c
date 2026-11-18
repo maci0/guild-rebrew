@@ -27,7 +27,7 @@ typedef struct GOLDTL_Msg481 {
 
 extern char g_7f4ca0[];
 extern unsigned short g_7f4c04;
-extern int g_7f4c00;
+extern int gm_GameTime;
 extern int g_7f4c08;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpObjektePROT;
@@ -38,7 +38,7 @@ extern int g_100dc20;
 extern int g_100dc24;
 extern char* g_100df20;
 extern unsigned char g_100b0c0[];
-extern unsigned short* g_773da8;
+extern unsigned short* gm_CityEntity;
 extern int g_7747b4;
 
 int __cdecl fcn_00502cd0(int, int, int, ...);
@@ -119,13 +119,13 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 		goto common;
 	}
 	g_100b0ac = 0;
-	g_100b0a8 = 0;
+	ai_ResourceCount = 0;
 	fcn_00485650((int) rec, (int) handle);
 	fcn_00486c40((int) rec, (int) handle, *(int*) (*(int*) (rec + 0x16c) + 0x39));
 	fcn_00489010((int) rec, (int) handle);
 	if (g_100dc20 == *(int*) (rec + 0x16c) && g_100dc38 < 4) {
 		j = 0;
-		n = g_100b0a8;
+		n = ai_ResourceCount;
 		e = g_100b0c0;
 		do {
 			if (j >= n) {
@@ -194,7 +194,7 @@ common:
 				goto L176c;
 			}
 		} else {
-			if (gm_RandomFloat01() > 0.85 && match >= 3 && g_7f4c00 >= 7 - g_7747b4) {
+			if (gm_RandomFloat01() > 0.85 && match >= 3 && gm_GameTime >= 7 - g_7747b4) {
 				goto L1e70;
 			}
 			sel = gm_RandomMod(3) & 0xffff;
@@ -289,7 +289,7 @@ L1a0c:
 			msg.f4 = 0x3c;
 			msg.f8 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (h + 0x27) * 0x21c + 0x7f4ca4);
 			msg.fc = *(int*) (h + 1);
-			msg.f28 = g_7f4c00;
+			msg.f28 = gm_GameTime;
 			msg.f2c = *(int*) &g_7f4c04;
 			msg.f30 = g_7f4c08;
 			msg.f34 = *(unsigned short*) 0x7f4c0c;
@@ -387,7 +387,7 @@ L176c:
 				unsigned short hid = *(unsigned short*) (e + 0x27);
 				unsigned short hsel = *(unsigned short*) (*(int*) (rec + 0x16c) + 0x27);
 				if (hid != hsel && hid != 0xffff && (e[0x5a] & 1) == 0
-				    && hid != *g_773da8
+				    && hid != *gm_CityEntity
 				    && gm_CheckEntityType(e) == 0
 				    && *bld != '!'
 				    && fcn_0055c050(e) != 0) {
@@ -500,7 +500,7 @@ Lcae:
 		msg.f4 = 0x40;
 		msg.f8 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (h + 0x27) * 0x21c + 0x7f4ca4);
 		msg.fc = *(int*) (h + 1);
-		msg.f28 = g_7f4c00;
+		msg.f28 = gm_GameTime;
 		msg.f2c = *(int*) &g_7f4c04;
 		msg.f30 = g_7f4c08;
 		msg.f34 = *(unsigned short*) 0x7f4c0c;
@@ -551,7 +551,7 @@ Lb45:
 		msg.f4 = 0x3f;
 		msg.f8 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (h + 0x27) * 0x21c + 0x7f4ca4);
 		msg.fc = *(int*) (h + 1);
-		msg.f28 = g_7f4c00;
+		msg.f28 = gm_GameTime;
 		msg.f2c = *(int*) &g_7f4c04;
 		msg.f30 = g_7f4c08;
 		msg.f34 = *(unsigned short*) 0x7f4c0c;
@@ -620,7 +620,7 @@ L2267:
 		msg.f4 = 0x61;
 		msg.f8 = *(int*) (id * 0x21c + 0x7f4ca4);
 		msg.fc = *(int*) (h + 1);
-		msg.f28 = g_7f4c00;
+		msg.f28 = gm_GameTime;
 		msg.f2c = *(int*) &g_7f4c04;
 		msg.f30 = g_7f4c08;
 		msg.f34 = *(unsigned short*) 0x7f4c0c;

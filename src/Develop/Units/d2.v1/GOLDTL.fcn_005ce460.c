@@ -17,7 +17,7 @@ typedef struct {
 // SIZE 0x230
 
 extern int g_100f1dc;
-extern int g_67d370;
+extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
@@ -98,7 +98,7 @@ void __cdecl fcn_005ce460(int cmd)
 		if (g_100f1dc != -1) {
 			sel = -1;
 			for (i = 0; i < 12; i++) {
-				if (items[i] == g_67d370) {
+				if (items[i] == d2_CurrentElementId) {
 					sel = i;
 					break;
 				}

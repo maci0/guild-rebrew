@@ -4,12 +4,12 @@ void __cdecl SetTrackVolume(const char* name, int volume)
 {
 	Chan_14cc460* p;
 
-	if (g_6b71a4 != 0) {
-		EnterCriticalSection(&g_14cc5a0);
+	if (msx_TrackDriver != 0) {
+		EnterCriticalSection(&msx_TrackLock);
 		p = FindTrackByName(name);
 		if (p != 0) {
 			fcn_0041fc10(p, volume);
 		}
-		LeaveCriticalSection(&g_14cc5a0);
+		LeaveCriticalSection(&msx_TrackLock);
 	}
 }

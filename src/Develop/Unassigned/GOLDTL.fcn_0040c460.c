@@ -1,4 +1,4 @@
-extern char* g_6b7e98;
+extern char* evt_CurrentScript;
 
 
 
@@ -13,9 +13,9 @@ char* __cdecl fcn_0040c460(int* scriptName)
 	if (p == 0) {
 		return 0;
 	}
-	*(int*) (p + 0x104) = *(int*) (g_6b7e98 + 0x104);
-	*(int*) (p + 0xc8c) = *(int*) (g_6b7e98 + 0xc8c);
-	*(int*) (p + 0xc90) = *(int*) (g_6b7e98 + 0xc90);
+	*(int*) (p + 0x104) = *(int*) (evt_CurrentScript + 0x104);
+	*(int*) (p + 0xc8c) = *(int*) (evt_CurrentScript + 0xc8c);
+	*(int*) (p + 0xc90) = *(int*) (evt_CurrentScript + 0xc90);
 	evt_RunScript(p);
 	return p;
 }

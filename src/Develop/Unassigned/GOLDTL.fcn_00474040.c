@@ -63,10 +63,10 @@ void __cdecl fcn_00474040(void)
 	int mx;
 	int max;
 
-	if (g_67d370 == -1) {
+	if (d2_CurrentElementId == -1) {
 		return;
 	}
-	s = &((Slot*)g_1015ea0)[g_67d370];
+	s = &((Slot*)g_1015ea0)[d2_CurrentElementId];
 	if (s->type != 0x45 || (s->flags & 0x40) != 0) {
 		return;
 	}
@@ -83,7 +83,7 @@ void __cdecl fcn_00474040(void)
 		fcn_0047b620(font, 1);
 		fcn_0047b620(font, 3);
 		bar = fcn_0047b620(font, 6);
-		s = &((Slot*)g_1015ea0)[g_67d370];
+		s = &((Slot*)g_1015ea0)[d2_CurrentElementId];
 		flags = s->flags;
 		max = s->max;
 		min = s->min;
@@ -104,11 +104,11 @@ void __cdecl fcn_00474040(void)
 				pos = max;
 			}
 			s->dirty = 1;
-			((Slot*)g_1015ea0)[g_67d370].pos = pos;
+			((Slot*)g_1015ea0)[d2_CurrentElementId].pos = pos;
 		}
 	}
-	if (g_14ce8d8 != 0 || (g_14ce8d4 != 0 && ((Slot*)g_1015ea0)[g_67d370].max >= 100)) {
-		s = &((Slot*)g_1015ea0)[g_67d370];
+	if (g_14ce8d8 != 0 || (g_14ce8d4 != 0 && ((Slot*)g_1015ea0)[d2_CurrentElementId].max >= 100)) {
+		s = &((Slot*)g_1015ea0)[d2_CurrentElementId];
 		pos = s->pos;
 		max = s->max;
 		min = s->min;
@@ -125,6 +125,6 @@ void __cdecl fcn_00474040(void)
 			pos = max;
 		}
 		s->dirty = 1;
-		((Slot*)g_1015ea0)[g_67d370].pos = pos;
+		((Slot*)g_1015ea0)[d2_CurrentElementId].pos = pos;
 	}
 }

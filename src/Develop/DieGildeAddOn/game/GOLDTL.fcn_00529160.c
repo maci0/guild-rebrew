@@ -3,7 +3,7 @@
 #include "client_types.h"
 
 extern char g_7f4ca0[];
-extern pos14_7f4c00 g_7f4c00;
+extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern char* g_entity_type_table;
 extern float g_696540[];
@@ -88,7 +88,7 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 		} else {
 			v7 = fcn_005155e0(a1);
 		}
-		cls = fcn_00500e20((int*) &g_7f4c00);
+		cls = fcn_00500e20((int*) &gm_GameTime);
 		tick = g_7f4c04 & 0xffff;
 		if ((((float) (int) tick < g_696550[cls] && g_696540[cls] <= (float) (int) tick)
 		     || rec->type == 4 || rec->type == 0x13 || rec->type == 0x1d)
@@ -134,7 +134,7 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 				}
 			}
 			if (*(int*) (old + 0x70) < 3) {
-				*(pos14_7f4c00*) (old + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (old + 0x52) = gm_GameTime;
 				*(int*) (old + 0x70) = -1;
 			}
 			break;
@@ -145,7 +145,7 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 		case 143:
 			fcn_005290d0(old);
 			if (fcn_005241f0(old) <= 0) {
-				*(pos14_7f4c00*) (old + 0x52) = g_7f4c00;
+				*(pos14_7f4c00*) (old + 0x52) = gm_GameTime;
 				fcn_004c5620(-1, old);
 			}
 			break;

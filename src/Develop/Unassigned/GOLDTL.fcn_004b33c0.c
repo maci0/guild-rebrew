@@ -1,7 +1,7 @@
 extern int g_67fca8;
 extern int g_67fca4;
 extern unsigned char g_7728d4;
-extern int g_7f4c00;
+extern int gm_GameTime;
 
 int __cdecl hst_ParseDate(int pos, int n, int* out, int a1);
 void __cdecl hst_ParseText_Real(char* out, int pos);
@@ -20,7 +20,7 @@ int __cdecl fcn_004b33c0(int a0, char* a1)
 			g_7728d4 = 0;
 			return 4;
 		}
-		diff = g_7f4c00 - v4[0];
+		diff = gm_GameTime - v4[0];
 		if (diff == 1) {
 			v5 = 1;
 			hst_ParseText_Real(a1, g_67fca8 + 1);

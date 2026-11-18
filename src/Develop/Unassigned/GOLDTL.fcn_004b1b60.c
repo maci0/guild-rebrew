@@ -11,8 +11,8 @@ typedef struct Val {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67fcb0;
 #include "client_types.h"
-extern pos14_7f4c00 g_7f4c00;
-extern char* g_773da8;
+extern pos14_7f4c00 gm_GameTime;
+extern char* gm_CityEntity;
 
 int __cdecl hst_ParseDate(int pos, int k, Val* v, char* buf);
 void __cdecl fcn_004c5530(char* msg);
@@ -113,14 +113,14 @@ int __cdecl fcn_004b1b60(void)
 			g_67fcb4 = pos + 6;
 			memset(msg, 0, sizeof(msg));
 			msg[4] = 0x52;
-			*(int*) (msg + 8) = *(int*) (g_773da8 + 4);
+			*(int*) (msg + 8) = *(int*) (gm_CityEntity + 4);
 			*(int*) (msg + 0xc) = -1;
 			*(int*) (msg + 0x58) = pos - g_67fcac;
 			msg[0x36] = 0x12;
 			fcn_004c5530(msg);
 			return 1;
 		}
-		if (v.x0 > (*(int*)&g_7f4c00)) {
+		if (v.x0 > (*(int*)&gm_GameTime)) {
 			return 0;
 		}
 		pos += 6;
