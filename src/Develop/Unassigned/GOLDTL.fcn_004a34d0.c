@@ -1,12 +1,7 @@
-typedef struct {
-	int a;
-	int b;
-	int c;
-} fcn_004a34d0_entry;
-// SIZE 0xc
+#include "Develop/DieGildeAddOn/game/entity_candidate.h"
 
 typedef struct {
-	fcn_004a34d0_entry* cur;
+	ENTITY_CANDIDATE* cur;
 	int step;
 } fcn_004a34d0_ring;
 
@@ -15,11 +10,11 @@ extern unsigned int g_7728bc;
 
 
 /* ADDRESS: GOLDTL 0x004a34d0 */
-fcn_004a34d0_entry* __cdecl fcn_004a34d0(void)
+ENTITY_CANDIDATE* __cdecl fcn_004a34d0(void)
 {
 	unsigned int n;
 	fcn_004a34d0_ring* r;
-	fcn_004a34d0_entry* cur;
+	ENTITY_CANDIDATE* cur;
 
 	n = g_7728bc;
 	r = g_664448;

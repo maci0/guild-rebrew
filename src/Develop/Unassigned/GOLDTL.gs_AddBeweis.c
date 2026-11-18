@@ -1,11 +1,11 @@
 
 
 
-typedef struct
-{
-	int a;
-	int b;
-} Pair;
+#include "Develop/Unassigned/evidence_link.h"
+
+
+
+
 // SIZE 0x8
 
 #include "client_types.h"
@@ -22,8 +22,8 @@ int __cdecl gs_AddBeweis(int a, int b)
 
 	k = fcn_004f58b0(b, a);
 	if (k > -1) {
-		((Pair*)g_99f800)[k].a = b;
-		((Pair*)g_99f800)[k].b = a;
+		g_99f800[k].owner = b;
+		g_99f800[k].key = a;
 		sprintf(buf, g_6903a8, b, a, k);
 		return 1;
 	}

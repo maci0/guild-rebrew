@@ -1,6 +1,6 @@
 struct VFS_DIR;
 #include "g_772f90.h"
-extern int g_772fd8;
+extern int ahm_PlayerPrototypeCount;
 extern Draw772* g_772fdc;
 extern int g_772fe0;
 extern Rec772fe4* g_772fe4;
@@ -27,10 +27,10 @@ int __cdecl fcn_004edae0(void)
 	if (vfs_fwrite((char*) &magic, 4, 1, (char*) f) <= 0) {
 		goto fail;
 	}
-	if (vfs_fwrite(&g_772fd8, 4, 1, (char*) f) <= 0) {
+	if (vfs_fwrite(&ahm_PlayerPrototypeCount, 4, 1, (char*) f) <= 0) {
 		goto fail;
 	}
-	for (i = 0; i < g_772fd8; i++) {
+	for (i = 0; i < ahm_PlayerPrototypeCount; i++) {
 
 
 		if (vfs_fwrite(&g_772fdc[i].b, 1, 1, (char*) f) <= 0) {

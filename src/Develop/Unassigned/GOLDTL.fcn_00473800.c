@@ -84,7 +84,7 @@ void __cdecl fcn_00473800(Ctx* c, int x, int y)
 		((Slot*)g_100e7a0)[g_67d8cc].y = (short) y;
 		fcn_0047cd70(g_67d8cc, c);
 	}
-	old = g_67d378;
+	old = d2_CurrentFont;
 	fcn_00472880(g_67d398 + 1);
 	k = 0;
 	for (i = 0; i < 6; i++) {

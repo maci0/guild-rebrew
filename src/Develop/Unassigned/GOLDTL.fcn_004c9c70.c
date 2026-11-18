@@ -1,11 +1,11 @@
 
 
 
-typedef struct
-{
-	int a;
-	int b;
-} Pair;
+#include "Develop/Unassigned/evidence_link.h"
+
+
+
+
 // SIZE 0x8
 
 #include "client_types.h"
@@ -19,8 +19,8 @@ int __cdecl fcn_004c9c70(char* a1, char* response)
 
 	index = fcn_004f58b0(*(int*) (a1 + 0x14), *(int*) (a1 + 0x10));
 	if (index > -1) {
-		((Pair*)g_99f800)[index].a = *(int*) (a1 + 0x14);
-		((Pair*)g_99f800)[index].b = *(int*) (a1 + 0x10);
+		g_99f800[index].owner = *(int*) (a1 + 0x14);
+		g_99f800[index].key = *(int*) (a1 + 0x10);
 	}
 	if (response != 0) {
 		*response = 1;

@@ -1,10 +1,10 @@
 
 
 #include "client_types.h"
-typedef Loot_7774a0 Loot;
+#include "Develop/Units/d2.v1/d2_training_rows.h"
 // SIZE 0x40
 
-extern Loot_7774a0 g_7774a0[32];
+ 
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
@@ -38,8 +38,8 @@ void __cdecl fcn_005ae4f0(char* e)
 					g_774654 = 1;
 				} else {
 					for (i = 0; i < 32; i++) {
-						if (g_7774a0[i].btn != -1 && fcn_00471f80(g_7774a0[i].btn) != 0) {
-							d2_SetElementValue(g_7774a0[i].btn, 0);
+						if (g_7774a0[i].row_element != -1 && fcn_00471f80(g_7774a0[i].row_element) != 0) {
+							d2_SetElementValue(g_7774a0[i].row_element, 0);
 						}
 					}
 					ResetDisplayCounters();
@@ -47,8 +47,8 @@ void __cdecl fcn_005ae4f0(char* e)
 			}
 			if (g_100f1dc != -1 && g_100f1dc == 0x113) {
 				for (i = 0; i < 32; i++) {
-					if (g_7774a0[i].btn != -1 && fcn_00471f80(g_7774a0[i].btn) != 0) {
-						d2_SetElementValue(g_7774a0[i].btn, 0);
+					if (g_7774a0[i].row_element != -1 && fcn_00471f80(g_7774a0[i].row_element) != 0) {
+						d2_SetElementValue(g_7774a0[i].row_element, 0);
 					}
 				}
 				ResetDisplayCounters();

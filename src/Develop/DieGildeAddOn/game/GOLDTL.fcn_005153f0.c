@@ -3,13 +3,13 @@
 
 
 // SIZE 0x21c
-typedef struct {
-	short slot;
-	unsigned char type;
-	char pad3;
-	int id;
-	char pad8[0x21c - 8];
-} Entity;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 #pragma pack(push, 1)
 // SIZE 0xa9
@@ -28,7 +28,7 @@ typedef struct {
 } Office;
 #pragma pack(pop)
 
-extern char g_7f4ca0[];
+
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 #include "client_packet_builder.h"
@@ -45,12 +45,12 @@ int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 void __cdecl fcn_005153f0(void)
 {
 	int i;
-	Entity* e;
+	ENTITY_RECORD* e;
 	Player* p;
 
-	e = ((Entity*)g_7f4ca0);
+	e = ((ENTITY_RECORD*)g_7f4ca0);
 	for (i = 0; i < 0x300; i++) {
-		if (e->type == 6) {
+		if (e->entity_state == 6) {
 			break;
 		}
 		e++;
@@ -69,7 +69,7 @@ void __cdecl fcn_005153f0(void)
 				fcn_004c4510((char*) p, p->id);
 				fcn_004c4570(4, 1, (char*) p - g_aed32c + 0x39, &value);
 				fcn_004c5360();
-				fcn_004c5f60(p->id, e->id, e->id);
+				fcn_004c5f60(p->id, e->entity_id, e->entity_id);
 				fcn_004c6090(p, 1, 0, ((Office*)lpGebaeudePROT)[p->office].level);
 				fcn_004c51f0(p->id, -1, 0x135, 1, (*(char*)&g_773d75), 0);
 			}

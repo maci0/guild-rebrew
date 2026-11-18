@@ -4,27 +4,27 @@ typedef struct Rec {
 } Rec;
 // SIZE 0x41
 
-typedef struct Node {
-	int id;
-	int links[4];
-	char pad14[0x54 - 0x14];
-	int flags;
-} Node;
+#include "Develop/DieGildeAddOn/game/production_goods.h"
+
+
+
+
+
 // SIZE 0x58
 
 extern char* lpObjektePROT;
 #include "client_types.h"
 extern Seg g_100b0c0[];
-extern entry_100d0c0 g_100d0c0[];
+ 
 
 /* ADDRESS: GOLDTL 0x00487d80 */
-void __cdecl fcn_00487d80(int* ca, int* cb, Node* n)
+void __cdecl fcn_00487d80(int* ca, int* cb, PRODUCTION_GOODS_RECORD* n)
 {
 	int i;
 	Seg* s;
 
 	if (!(n->flags & 1)) {
-		if (((Rec*)lpObjektePROT)[n->id].type == 0x17 || ((Rec*)lpObjektePROT)[n->id].type == 0x25) {
+		if (((Rec*)lpObjektePROT)[n->goods_id].type == 0x17 || ((Rec*)lpObjektePROT)[n->goods_id].type == 0x25) {
 			(*ca)++;
 		} else {
 			(*cb)++;
@@ -32,10 +32,10 @@ void __cdecl fcn_00487d80(int* ca, int* cb, Node* n)
 		n->flags |= 1;
 	}
 	for (i = 0; i < 4; i++) {
-		if (n->links[i] < 0) {
+		if (n->building_indices[i] < 0) {
 			continue;
 		}
-		s = &g_100b0c0[n->links[i]];
+		s = &g_100b0c0[n->building_indices[i]];
 		if (!(s->flags & 1)) {
 			if (((Rec*)lpObjektePROT)[s->id].type == 0x17 || ((Rec*)lpObjektePROT)[s->id].type == 0x25) {
 				(*ca)++;
@@ -44,11 +44,11 @@ void __cdecl fcn_00487d80(int* ca, int* cb, Node* n)
 			}
 			s->flags |= 1;
 			if (s->next != -1) {
-				((Node*)g_100d0c0)[s->next].flags |= 1;
+				((PRODUCTION_GOODS_RECORD*)g_100d0c0)[s->next].flags |= 1;
 			}
 		}
 		if (s->next != -1) {
-			fcn_00487d80(ca, cb, &((Node*)g_100d0c0)[s->next]);
+			fcn_00487d80(ca, cb, &((PRODUCTION_GOODS_RECORD*)g_100d0c0)[s->next]);
 		}
 	}
 }

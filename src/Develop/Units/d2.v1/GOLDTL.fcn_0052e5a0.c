@@ -22,7 +22,7 @@ extern int g_6a25dc;
 extern int g_6a25e0;
 extern int g_6a25ec;
 extern int g_6a25f0;
-extern int g_6a25c0;
+extern int d2_CurrentValueBar;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_772514;
 #include "client_types.h"
@@ -67,8 +67,8 @@ void __cdecl fcn_0052e5a0(void)
 	io_AppendText(g_6a2f9c, name, *g_7746c8 * 14 + 0x48e, g_7746c8 + 5);
 	d2_SetForm(g_6a25b8, 0);
 	fcn_0046f740(((((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1) - 1, 0x4c, *g_7746c8 + 0x427, g_772514);
-	g_6a25c0 = fcn_004677e0(0x15, 0x7a, 0x30, 0, 0x64, 0x75, 0x442, g_772514);
-	d2_SetElementValue(g_6a25c0, 0, 0x64, pct);
+	d2_CurrentValueBar = fcn_004677e0(0x15, 0x7a, 0x30, 0, 0x64, 0x75, 0x442, g_772514);
+	d2_SetElementValue(d2_CurrentValueBar, 0, 0x64, pct);
 	g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0cc);
 	if (*g_7746c8 == 0x1e) {
 		g_6a25f0 = fcn_0052dee0(0, 0xa6, g_14ad0d0);

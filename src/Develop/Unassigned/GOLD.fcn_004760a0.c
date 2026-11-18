@@ -1,7 +1,8 @@
 #include "gold_gui.h"
+#include "Develop/Units/d2.v1/gold_window.h"
 
 extern GuiEnt* g_00f8f080;
-extern GuiWin g_00f8f120[];
+extern GOLD_GUI_WINDOW g_00f8f120[];
 extern int g_fa6158[];
 
 /* ADDRESS: GOLD 0x004760a0 */

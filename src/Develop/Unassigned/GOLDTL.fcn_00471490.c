@@ -173,7 +173,7 @@ void __cdecl fcn_00471490(int k)
 							}
 							fcn_0046bd20(sx, sy, *(int*) (obj + 0x18), *(int*) (obj + 0x1c),
 							             surf, *(char**) (obj + 0x88), flags);
-							fcn_00472880(g_67d378);
+							fcn_00472880(d2_CurrentFont);
 						}
 						break;
 					case 0x45:

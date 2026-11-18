@@ -33,7 +33,7 @@ char __cdecl fcn_00443b00(char* e, char* ctx)
 		slot = (float*) (ctx + *(int*) (e + 0x218) * 8);
 		w = g_10432a4 * inv * w;
 		x = g_10432a4 * v[0] * inv + *(float*) (ctx + 0x50);
-		y = g_1042584 * v[1] * inv + *(float*) (ctx + 0x54);
+		y = d3_ProjectionScaleY * v[1] * inv + *(float*) (ctx + 0x54);
 		d2 = x * x + y * y;
 		if (d2 < slot[1] && (float) sqrt(d2) < w) {
 			slot[1] = d2;

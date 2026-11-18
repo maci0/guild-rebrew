@@ -26,7 +26,7 @@ typedef struct {
 } Flags4cf450;
 
 int g_6b5cbc = 0;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 extern void* g_6b8014;
 
 int __cdecl fcn_00445600(int a1, int a2, int a3, char* name);
@@ -169,7 +169,7 @@ int __cdecl fcn_00414d20(int a1, int count, ...)
 		}
 		ents[m].type = 0;
 	}
-	g_6b5cc0 = fcn_004339e0((char*) g_6b8014, fl, n + 1, rec);
+	d3_ActiveCameraAnimation = fcn_004339e0((char*) g_6b8014, fl, n + 1, rec);
 	g_6b5cbc = 1;
 	return 1;
 }

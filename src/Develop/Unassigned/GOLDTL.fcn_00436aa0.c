@@ -1,19 +1,19 @@
-typedef struct IDev IDev;
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
 
-/* SIZE 0x100 */
-typedef struct IDevVtbl {
-    void* slots0[37];
-    long (__stdcall* SetTransform)(IDev*, int, const float*);
-    void* slots98[12];
-    long (__stdcall* SetRenderState)(IDev*, int, int);
-    void* slotscc[12];
-    long (__stdcall* SetTextureStageState)(IDev*, int, int, int);
-} IDevVtbl;
 
-/* SIZE 0x4 */
-struct IDev {
-    IDevVtbl* v;
-};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #include <string.h>
 
@@ -35,45 +35,45 @@ void __cdecl fcn_00436aa0(unsigned char* flags)
     int copy_size;
     float f;
 
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x8e, 0);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x1a, 1);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x8d, 0);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x9c, 1);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x9d, 1);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x8e, 0);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x1a, 1);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x8d, 0);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x9c, 1);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x9d, 1);
     f = 0.0f;
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x9e, *(int*) &f);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x9e, *(int*) &f);
     f = 0.0f;
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x9f, *(int*) &f);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x9f, *(int*) &f);
     f = 1.0f;
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0xa0, *(int*) &f);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x30, 1);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x8c, 3);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x19, 5);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0xa0, *(int*) &f);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x30, 1);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x8c, 3);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x19, 5);
     if ((flags != 0 && (*flags & 2) != 0) || g_6b8001 != 0) {
-        ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0x10, 2);
-        ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0x12, 2);
-        ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0x11, 3);
-        ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0x15, g_14ce7ac);
+        ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 0x10, 2);
+        ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 0x12, 2);
+        ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 0x11, 3);
+        ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 0x15, g_14ce7ac);
     }
     else {
-        ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0x10, 2);
-        ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0x12, 1);
-        ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0x11, 2);
+        ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 0x10, 2);
+        ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 0x12, 1);
+        ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 0x11, 2);
     }
     if (flags != 0)
         g_6b8001 = (unsigned char) ((*flags >> 1) & 1);
-    ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 4, 3);
-    ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 5, 2);
-    ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 6, 0);
-    ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 1, 4);
-    ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 2, 2);
-    ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 3, 0);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x1b, 0);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x14, 1);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0x13, 2);
-    ((IDev*) g_6b5de0)->v->SetRenderState(((IDev*) g_6b5de0), 0xf, 0);
-    ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0xb, 0);
-    ((IDev*) g_6b5de0)->v->SetTextureStageState(((IDev*) g_6b5de0), 0, 0x18, 0);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 4, 3);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 5, 2);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 6, 0);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 1, 4);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 2, 2);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 3, 0);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x1b, 0);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x14, 1);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0x13, 2);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0xf, 0);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 0xb, 0);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 0x18, 0);
     g_6b7ffa = 0;
     g_6b7ffb = 0;
     g_6b7ffc = 0;
@@ -95,7 +95,7 @@ void __cdecl fcn_00436aa0(unsigned char* flags)
     m[13] = 0.5f;
     m[14] = 0.0f;
     m[15] = 1.0f;
-    ((IDev*) g_6b5de0)->v->SetTransform(((IDev*) g_6b5de0), 0x10, m);
+    ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTransform(((D3D_DEVICE_VIEW*) g_6b5de0), 0x10, m);
     if (flags == 0)
         return;
     copy_size = 8;

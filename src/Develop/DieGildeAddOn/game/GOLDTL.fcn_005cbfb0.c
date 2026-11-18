@@ -7,15 +7,15 @@ typedef struct Sel {
 } Sel;
 // SIZE 0x38
 
-typedef struct Player {
-	unsigned short id;
-	char pad2[0x166];
-	unsigned char x168;
-	char pad169[0xb3];
-} Player;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 
 int __cdecl fcn_004e9310(int k, int max, char** out);
 int __cdecl fcn_005ca560(Sel* s);
@@ -33,7 +33,7 @@ unsigned int __cdecl fcn_005cbfb0(char* e, unsigned int max, Sel* out, void* q)
 {
 	int m;
 	unsigned int n;
-	Player* pl[3];
+	ENTITY_RECORD* pl[3];
 	char* ids[6];
 	unsigned int k;
 	int j;
@@ -48,9 +48,9 @@ unsigned int __cdecl fcn_005cbfb0(char* e, unsigned int max, Sel* out, void* q)
 		if (m >= 3) {
 			break;
 		}
-		if (((Player*)g_7f4ca0)[i].id != 0xffff && ((Player*)g_7f4ca0)[i].id != *(unsigned short*) e &&
-		    ((Player*)g_7f4ca0)[i].x168 == *(unsigned char*) (e + 0x168)) {
-			pl[m] = &((Player*)g_7f4ca0)[i];
+		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != *(unsigned short*) e &&
+		    ((ENTITY_RECORD*)g_7f4ca0)[i].unk_165[3] == *(unsigned char*) (e + 0x168)) {
+			pl[m] = &((ENTITY_RECORD*)g_7f4ca0)[i];
 			m++;
 		}
 	}

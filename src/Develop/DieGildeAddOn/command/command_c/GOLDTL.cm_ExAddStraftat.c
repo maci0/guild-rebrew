@@ -18,7 +18,7 @@ typedef struct Area {
 } Area;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_9a3800[];
+#include "client_straftat.h"
 extern char g_7f4ca0[];
 
 void __cdecl srv_SeedRandom(int);
@@ -40,7 +40,7 @@ void __cdecl fcn_005b2740(char*, char*);
 /* ADDRESS: GOLDTL 0x004c9a10 */
 int __cdecl cm_ExAddStraftat(char* src, char* out)
 {
-	Straftat* rec;
+	STRAFTAT_RECORD* rec;
 	unsigned int v13;
 	unsigned int v14;
 	char* p;
@@ -52,9 +52,9 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 	unsigned short slot;
 
 	if (g_14cbca0 != -1) {
-		g_773d38 = *(int*) (src + 0x10);
+		cm_LastCrimeId = *(int*) (src + 0x10);
 	} else {
-		g_773d38 = g_773d38 + 1;
+		cm_LastCrimeId = cm_LastCrimeId + 1;
 	}
 	idx = fcn_004f57e0();
 	if (idx != -1) {
@@ -62,11 +62,11 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 		if (ent != 0 && *(char*) ((char*) ent + 2) == 6) {
 			fcn_004b4650((char*) ent, 0x17);
 		}
-		rec = (Straftat*) (g_9a3800 + idx * 0x2d);
+		rec = &g_9a3800[idx];
 		memcpy(rec, src + 0x10, 0x2d);
-		rec->id = g_773d38;
+		rec->id = cm_LastCrimeId;
 		sprintf(msg, "cm_ExAddStraftat(): Executed---- st_id = %i, taeter = %i, opfer = %i",
-			g_773d38, *(int*) (src + 0x26), *(int*) (src + 0x22));
+			cm_LastCrimeId, *(int*) (src + 0x26), *(int*) (src + 0x22));
 		taeter = *(int*) (src + 0x31);
 		if (taeter == -1) {
 			ent = (Straftat*) gm_LookupEntityRecordById(*(int*) (src + 0x22));
@@ -95,7 +95,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 		}
 		for (ent = (Straftat*) fcn_005463a0(1, 0, 0x18); ent != 0;
 			ent = (Straftat*) he_fn_Handlung()) {
-			if (*(int*) ((char*) ent + 0xc4) != *(int*) (g_9a3800 + idx * 0x2d + 0x16)) {
+			if (*(int*) ((char*) ent + 0xc4) != g_9a3800[idx].target_id) {
 				continue;
 			}
 			slot = *(unsigned short*) ((char*) ent + 8);
@@ -114,7 +114,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 		if (out != 0) {
 			out[0] = 1;
 			out[1] = 6;
-			*(Straftat**) (out + 6) = rec;
+			*(STRAFTAT_RECORD**) (out + 6) = rec;
 		}
 		return 0;
 	}

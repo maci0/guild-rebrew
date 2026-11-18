@@ -6,7 +6,7 @@
 #include "client_types.h"
 
 extern char* cm_LoadBuf;
-extern int g_6a23ac;
+extern int ls_SaveVersion;
 extern int g_699364;
 extern int g_699368;
 extern int g_7749d0;
@@ -18,7 +18,7 @@ extern int g_773d68;
 extern int g_773d6c;
 extern int g_773d70;
 extern int g_773d7c;
-extern int g_773d38;
+extern int cm_LastCrimeId;
 extern int g_100dc00;
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
@@ -117,7 +117,7 @@ int __cdecl fcn_00521920(char* cpath)
 	if (ls_ReadVfsDataChecked(&g_773d70, 4, 1, stream) == 0) {
 		goto fail;
 	}
-	if (g_6a23ac >= 0x10022) {
+	if (ls_SaveVersion >= 0x10022) {
 		ls_ReadVfsDataChecked(&g_773d7c, 4, 1, stream);
 	}
 	ls_ReadVfsDataChecked(&g_100dc00, 0x18, 1, stream);
@@ -125,13 +125,13 @@ int __cdecl fcn_00521920(char* cpath)
 	if (!(g_7f39c0[4] & 2)) {
 		g_7747b4 = *(int*) 0x7f3a58;
 	}
-	if (g_6a23ac >= 0x10030) {
+	if (ls_SaveVersion >= 0x10030) {
 		ls_ReadVfsDataChecked(&g_699368, 4, 1, stream);
 	}
-	if (g_6a23ac >= 0x1003d) {
-		ls_ReadVfsDataChecked(&g_773d38, 4, 1, stream);
+	if (ls_SaveVersion >= 0x1003d) {
+		ls_ReadVfsDataChecked(&cm_LastCrimeId, 4, 1, stream);
 	} else {
-		g_773d38 = 1000000;
+		cm_LastCrimeId = 1000000;
 	}
 	if (ls_LoadExistingEntities(stream) == 0) {
 		goto fail;
@@ -148,7 +148,7 @@ int __cdecl fcn_00521920(char* cpath)
 	if (fcn_00524040(stream) == 0) {
 		goto fail;
 	}
-	if (g_6a23ac >= 0x10045 && amt_fio_LoadAemter(stream, g_6a23ac) == 0) {
+	if (ls_SaveVersion >= 0x10045 && amt_fio_LoadAemter(stream, ls_SaveVersion) == 0) {
 		goto fail;
 	}
 	if (fcn_005222a0(stream) == 0) {
@@ -163,19 +163,19 @@ int __cdecl fcn_00521920(char* cpath)
 		}
 		goto fail;
 	}
-	if (g_6a23ac < 0x10045 && amt_fio_LoadAemter(stream, g_6a23ac) == 0) {
+	if (ls_SaveVersion < 0x10045 && amt_fio_LoadAemter(stream, ls_SaveVersion) == 0) {
 		goto fail;
 	}
 	if (fcn_004f4c40(stream) == 0) {
 		goto fail;
 	}
-	if (g_6a23ac >= 0x10016 && fcn_00524610(stream) == 0) {
+	if (ls_SaveVersion >= 0x10016 && fcn_00524610(stream) == 0) {
 		goto fail;
 	}
 	if (fcn_005246e0((unsigned int) stream) == 0) {
 		goto fail;
 	}
-	if (g_6a23ac >= 0x1002a && fcn_00524b40(stream) == 0) {
+	if (ls_SaveVersion >= 0x1002a && fcn_00524b40(stream) == 0) {
 		goto fail;
 	}
 	if (fcn_00524b50(stream) == 0) {
@@ -192,7 +192,7 @@ int __cdecl fcn_00521920(char* cpath)
 		fcn_00525670();
 		return 0;
 	}
-	if (g_6a23ac >= 0x1002e && fcn_005255b0(stream) == 0) {
+	if (ls_SaveVersion >= 0x1002e && fcn_005255b0(stream) == 0) {
 		goto fail;
 	}
 	if (fcn_00525670() == 0) {
@@ -215,31 +215,31 @@ int __cdecl fcn_00521920(char* cpath)
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (g_6a23ac >= 0x10029 && fcn_00592370(stream) == 0) {
+	if (ls_SaveVersion >= 0x10029 && fcn_00592370(stream) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (g_6a23ac >= 0x10047 && fcn_005b1ff0(stream) == 0) {
+	if (ls_SaveVersion >= 0x10047 && fcn_005b1ff0(stream) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (g_6a23ac >= 0x10049 && fcn_004edec0(stream) == 0) {
+	if (ls_SaveVersion >= 0x10049 && fcn_004edec0(stream) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (g_6a23ac >= 0x10052 && fcn_004adba0(stream, g_6a23ac) == 0) {
+	if (ls_SaveVersion >= 0x10052 && fcn_004adba0(stream, ls_SaveVersion) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (g_6a23ac >= 0x10053 && fcn_004c0840((int) stream) == 0) {
+	if (ls_SaveVersion >= 0x10053 && fcn_004c0840((int) stream) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;

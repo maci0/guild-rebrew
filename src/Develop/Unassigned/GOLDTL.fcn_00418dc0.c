@@ -46,7 +46,7 @@ SOUND_SOURCE* __cdecl fcn_00418dc0(void)
 
 	t = ((SOUND_SOURCE*)g_6b5d08);
 	if (t != 0) {
-		n = g_677680;
+		n = d3snd_SourceCount;
 		for (; i < n; i++) {
 			if (t[i].objekt == 0) {
 				r = &t[i];

@@ -39,7 +39,7 @@ void __cdecl fcn_00441720(char*, float*, int, int*, int*, float*);
 extern float g_6628a8;
 #include "../../../Units/d3/d3_animation.h"
 
-extern int g_6b5c34;
+extern int ch_LowPolyMode;
 #include "../../../Units/d3/d3_camera.h"
 extern int g_67530c;
 extern int g_675310;

@@ -12,13 +12,13 @@ typedef struct {
 } Screen;
 
 // SIZE 0x3c4
-typedef struct {
-	char pad0[0x1a];
-	short height;
-	char pad1c[0x27c - 0x1c];
-	int id;
-	char pad280[0x3c4 - 0x280];
-} Window;
+#include "Develop/Units/d2.v1/gold_window.h"
+
+
+
+
+
+
 
 extern int g_6f2460;
 extern int g_6ed9d4;
@@ -110,8 +110,8 @@ int __cdecl main_OpenEngine(void)
 	fcn_0046e980();
 	screen = fcn_004741e0(0, 0, "Misc\\Loading_main");
 	fcn_004756a0(g_fb1024[screen].image, 3);
-	fcn_0046cd90(0, g_fb9070 - ((Window*)g_f8f110)[g_fb1024[screen].window].height - 0x30,
-		((Window*)g_f8f110)[g_fb1024[screen].window].id);
+	fcn_0046cd90(0, g_fb9070 - ((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_fb1024[screen].window].height - 0x30,
+		((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_fb1024[screen].window].id);
 	fcn_004756a0(g_fb1024[screen].window, 1);
 	fcn_00515990(0x73, g_75e760);
 	fcn_00424990(0, 0);

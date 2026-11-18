@@ -1,20 +1,21 @@
 #include <string.h>
 
-typedef struct {
-	int used;
-	char pad4[0x120];
-} fcn_004bc060_slot;
-// SIZE 0x124
+#include "Develop/DieGildeAddOn/game/ambient_animal_slot.h"
+
+
+
+
+
 
 extern int g_7728e4;
 
-void __cdecl fcn_004030e0(int);
+void __cdecl fcn_004030e0(char*);
 
 
 /* ADDRESS: GOLDTL 0x004bc060 */
-void __cdecl fcn_004bc060(fcn_004bc060_slot* s)
+void __cdecl fcn_004bc060(AMBIENT_ANIMAL_SLOT* s)
 {
-	fcn_004030e0(s->used);
+	fcn_004030e0(s->objekt);
 	memset(s, 0, sizeof(*s));
 	g_7728e4--;
 }

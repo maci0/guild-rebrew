@@ -3,14 +3,14 @@
 
 #include <string.h>
 
-typedef struct Ent {
-	char pad0[9];
-	char b9;
-	char pada[0x21c - 0xa];
-} Ent;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern __int64 g_666018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -39,7 +39,7 @@ int __cdecl fcn_005dec00(char* ent, int* arg)
 		memset(desc + 7, 0xff, 8 * sizeof(int));
 		io_FormatTextBuffer(name, 0x9c);
 		desc[0] = 1;
-		desc[1] = ((((Ent*)g_7f4ca0)[g_774970].b9 != 0) + 1) | 0x400;
+		desc[1] = ((((ENTITY_RECORD*)g_7f4ca0)[g_774970].gender != 0) + 1) | 0x400;
 		desc[4] = 6;
 		desc[2] = (*(int*)&g_666018);
 		desc[3] = g_66601c;

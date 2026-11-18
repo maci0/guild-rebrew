@@ -105,7 +105,7 @@ void __cdecl fcn_0052cf20(Ent* e)
 	*(int*) &rot.y = *(int*) &((View*)g_6b8014)->rot.y;
 	*(int*) &rot.z = *(int*) &((View*)g_6b8014)->rot.z;
 	fcn_00433780((View*)g_6b8014);
-	g_6b5cc0 = 0;
+	d3_ActiveCameraAnimation = 0;
 	g_6b5cbc = 0;
 	h2 = fcn_00413d10((Vec3*) &q);
 	q.y = ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558) + h2;

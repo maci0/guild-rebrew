@@ -1,5 +1,5 @@
 extern int g_67a370;
-extern int g_677680;
+extern int d3snd_SourceCount;
 
 // SIZE 0x54
 struct snd_418e00 {
@@ -33,7 +33,7 @@ void __cdecl fcn_00418e00(void)
 	if (((struct snd_418e00*)g_6b5d08) == 0) {
 		return;
 	}
-	for (i = 0; i < g_677680; i++) {
+	for (i = 0; i < d3snd_SourceCount; i++) {
 		if (((struct snd_418e00*)g_6b5d08)[i].obj == 0) {
 			continue;
 		}

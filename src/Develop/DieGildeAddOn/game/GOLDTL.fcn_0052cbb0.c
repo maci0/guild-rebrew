@@ -89,7 +89,7 @@ void __cdecl fcn_0052cbb0(Ent* e)
 	*(int*) &rot[1] = *(int*) (cam + 0x88);
 	*(int*) &rot[2] = *(int*) (cam + 0x8c);
 	fcn_00433780(cam);
-	g_6b5cc0 = 0;
+	d3_ActiveCameraAnimation = 0;
 	g_6b5cbc = 0;
 	h = fcn_00413d10(q);
 	q[1] = ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558) + h;

@@ -46,7 +46,7 @@ void __cdecl fcn_00438da0(float w, float h, float x, float y, float znear, float
 	g_1042a10 = 1.0f / zfar;
 	g_1042a18 = sh * 4.0f / (sw * 3.0f);
 	g_10432a4 = dist;
-	g_1042584 = g_1042a18 * dist * -1.0f;
+	d3_ProjectionScaleY = g_1042a18 * dist * -1.0f;
 	left = (int) (x + 0.5f);
 	top = (int) (y + 0.5f);
 	right = (int) (w + x);

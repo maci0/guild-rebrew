@@ -8,7 +8,7 @@ double __cdecl cos(double);
 extern float g_1052bbc;
 extern float g_1052bb4;
 extern float g_10432a4;
-extern float g_1042584;
+extern float d3_ProjectionScaleY;
 extern float g_1042ce8;
 extern float g_1042fa4;
 extern float g_10529c8;
@@ -62,7 +62,7 @@ void __cdecl fcn_00437bc0(void)
 	g_1042fc8[5] = 0.0f;
 	g_1042fc8[6] = s;
 	g_1042fc8[7] = 1e-7f;
-	angle_y = atan2(g_1052bb4, -g_1042584);
+	angle_y = atan2(g_1052bb4, -d3_ProjectionScaleY);
 	g_1042fa4 = angle_y;
 	g_1042fc8[8] = 0.0f;
 	s = sin(angle_y);

@@ -1,11 +1,11 @@
 
 
 // SIZE 0x3c4
-typedef struct {
-	char pad0[0x3a8];
-	int margin[4];
-	char pad3b8[0x3c4 - 0x3b8];
-} Window;
+#include "Develop/Units/d2.v1/gold_window.h"
+
+
+
+
 
 #include "client_types.h"
 extern Slot_f8f110 g_f8f110[];
@@ -56,8 +56,8 @@ void __cdecl fcn_0052e700(int wnd, int page, int icon)
 		fcn_004731c0(0x1f7, 0x43, 0x73e, wnd);
 		fcn_004731c0(0, 0x1a8, 0x73c, wnd);
 	}
-	((Window*)g_f8f110)[g_6ed938].margin[0] = 0x18;
-	((Window*)g_f8f110)[g_6ed938].margin[1] = 0x18;
-	((Window*)g_f8f110)[g_6ed938].margin[2] = 0x18;
-	((Window*)g_f8f110)[g_6ed938].margin[3] = 0x18;
+	((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_6ed938].margin[0] = 0x18;
+	((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_6ed938].margin[1] = 0x18;
+	((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_6ed938].margin[2] = 0x18;
+	((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_6ed938].margin[3] = 0x18;
 }

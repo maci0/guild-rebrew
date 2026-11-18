@@ -29,7 +29,7 @@ extern double g_662950;
 extern double g_6629c8;
 extern double g_6640e8;
 extern int g_7e1f80;
-extern int g_772fd8;
+extern int ahm_PlayerPrototypeCount;
 extern unsigned char* g_772fdc;
 extern int g_772fe0;
 extern unsigned char* g_772fe4;
@@ -55,20 +55,20 @@ unsigned int __cdecl fcn_004ed240(void)
 	p[1] = 0;
 	strcat(path, "alchemy_data.ini");
 	GetPrivateProfileStringA(s_68dfa8, s_68dfbc, s_6b5c60, out, 0x100, path);
-	g_772fd8 = atoi(out);
-	if (g_772fd8 <= 0) {
+	ahm_PlayerPrototypeCount = atoi(out);
+	if (ahm_PlayerPrototypeCount <= 0) {
 		goto drop_second;
 	}
 	if (g_772fdc) {
 		m_FreeTracked(g_772fdc);
 		g_772fdc = 0;
 	}
-	g_772fdc = (unsigned char*) m_alloc(g_772fd8 * 0xc, s_68df8c);
+	g_772fdc = (unsigned char*) m_alloc(ahm_PlayerPrototypeCount * 0xc, s_68df8c);
 	if (g_772fdc == 0) {
 		goto drop_second;
 	}
 
-		for (i = 0; i < g_772fd8; i++) {
+		for (i = 0; i < ahm_PlayerPrototypeCount; i++) {
 			sprintf(app, s_68df84, i);
 			GetPrivateProfileStringA(app, s_68df78, s_68df80, out, 0x100, path);
 			v = atoi(out);
@@ -174,6 +174,6 @@ drop_second:
 		g_772fe4 = 0;
 	}
 	g_772fe0 = 0;
-	g_772fd8 = 0;
+	ahm_PlayerPrototypeCount = 0;
 	return 0;
 }

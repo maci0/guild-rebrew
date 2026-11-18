@@ -36,7 +36,7 @@ char __cdecl fcn_0045bad0(char* e, int gx, int gy, int* ox, int* oy)
 	o[1] = o[1] / *(float*) (e + 0x14);
 	o[2] = o[2] / *(float*) (e + 0x18);
 	u = ((float) gx - g_1052bc0) / g_10432a4;
-	v = ((float) gy - g_1052bc8) / g_1042584;
+	v = ((float) gy - g_1052bc8) / d3_ProjectionScaleY;
 	fcn_005ebbb9(m, (float*) (g_6b8014 + 0x18c));
 	px = m[4] * v + m[0] * u + m[8];
 	py = m[5] * v + m[1] * u + m[9];

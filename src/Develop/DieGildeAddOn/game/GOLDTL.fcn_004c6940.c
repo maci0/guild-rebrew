@@ -13,7 +13,7 @@ int __cdecl fcn_004c6940(void* a0, int a1, void* a2)
 	char* q;
 	char* r;
 
-	*(int*) (buf + 0x10) = *g_772f40;
+	*(int*) (buf + 0x10) = *cut_ActiveCutscene;
 	buf[0] = 0x55;
 	buf[0x14] = (char) a1;
 	memcpy(buf + 0x35, a2, 0x2c);

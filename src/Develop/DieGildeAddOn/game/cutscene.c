@@ -69,7 +69,7 @@ int __cdecl cut_RemoveParticipant(int a, int b)
 			break;
 		}
 	}
-	if (g_772f40 != 0 && *g_772f40 == a) {
+	if (cut_ActiveCutscene != 0 && *cut_ActiveCutscene == a) {
 		for (i = 0; i < 16; i++) {
 			if (*(int*) (g_9b0e20 + i * 0x35c + 0x10) == b) {
 				*(int*) (g_9b0e20 + i * 0x35c + 0x10) = -1;

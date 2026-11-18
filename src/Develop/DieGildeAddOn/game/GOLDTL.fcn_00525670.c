@@ -25,7 +25,7 @@ extern void __cdecl fcn_005290d0(char*);
 extern void __cdecl fcn_00573e10(char*);
 extern void __cdecl fcn_00510100(void);
 extern char *g_773da8, *g_773d78;
-extern int g_6a23ac, g_773d8c;
+extern int ls_SaveVersion, g_773d8c;
 /* Reload the whole world state after a new game starts.  Every master record
  * of the type table is released and reallocated, the entity list is relinked
  * from the owner chains of the loaded objects, every live game object runs its
@@ -51,7 +51,7 @@ unsigned int __cdecl fcn_00525670(void)
 	if (!g_773da8)
 		return 0;
 	g_773d78 = (char*) gm_StartFilteredEntitySearch(1, 5, 10);
-	if (g_6a23ac >= 0x10017) {
+	if (ls_SaveVersion >= 0x10017) {
 		for (p = (char*) 0x773db4; (int) p < 0x773dd4; p += 4)
 			*(int*) p = gm_LookupEntityRecordById(*(int*) p);
 	}

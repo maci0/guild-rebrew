@@ -7,11 +7,11 @@ int __cdecl fcn_00417650(int count)
     if (g_6b5d08 != 0)
         goto fail;
     if (count != 0)
-        g_677680 = count;
-    g_6b5d08 = (SOUND_SOURCE*) m_alloc(g_677680 * sizeof(SOUND_SOURCE), "d3snd_Init");
+        d3snd_SourceCount = count;
+    g_6b5d08 = (SOUND_SOURCE*) m_alloc(d3snd_SourceCount * sizeof(SOUND_SOURCE), "d3snd_Init");
     if (g_6b5d08 == 0)
         goto fail;
-    count = g_677680 * sizeof(SOUND_SOURCE);
+    count = d3snd_SourceCount * sizeof(SOUND_SOURCE);
     __asm {
         mov edi, g_6b5d08
         mov ebx, count

@@ -11,58 +11,50 @@ typedef struct Rec {
 // SIZE 0x41
 #pragma pack(pop)
 
-typedef struct Node {
-	int id;
-	int links[4];
-	char pad14[0x10];
-	float value;
-	float sum;
-	float base;
-	float price;
-	float slope;
-} Node;
+#include "Develop/DieGildeAddOn/game/production_goods.h"
 
-typedef struct Seg {
-	int id;
-	int next;
-	char pad8[0x14];
-	float price;
-	char pad20[0x20];
-} Seg;
-// SIZE 0x40
+
+
+
+
+
+
+
+
+
+#include "Develop/DieGildeAddOn/game/goods_plan.h"
 
 extern char* lpObjektePROT;
-extern Seg g_100b0c0[];
 extern unsigned char g_773d75;
 
 float __cdecl fcn_0050bb50(int id, unsigned char k);
 float __cdecl fcn_0050b840(int id);
 
 /* ADDRESS: GOLDTL 0x00486500 */
-void __cdecl fcn_00486500(Node* n)
+void __cdecl fcn_00486500(PRODUCTION_GOODS_RECORD* n)
 {
-	Seg* s;
+	GOODS_PLAN_ENTRY* s;
 	int i;
 
 	if (!(n->value > -10000000000.0)) {
 		n->sum = 0;
 		for (i = 0; i < 4; i++) {
-			if (n->links[i] >= 0) {
-				s = &g_100b0c0[n->links[i]];
+			if (n->building_indices[i] >= 0) {
+				s = &g_100b0c0[n->building_indices[i]];
 				if (!(s->price > -10000000000.0)) {
-					if (s->next != -1) {
-						s->price = (float)(fcn_0050bb50(s->id, g_773d75) * 0.9);
+					if (s->parent_index != -1) {
+						s->price = (float)(fcn_0050bb50(s->goods_id, g_773d75) * 0.9);
 					} else {
-						s->price = fcn_0050bb50(s->id, g_773d75);
+						s->price = fcn_0050bb50(s->goods_id, g_773d75);
 					}
 				}
-				n->sum += ((Rec*)lpObjektePROT)[n->id].weight[i] * s->price;
+				n->sum += ((Rec*)lpObjektePROT)[n->goods_id].weight[i] * s->price;
 			}
 		}
-		n->sum = n->sum / ((Rec*)lpObjektePROT)[n->id].div;
-		n->base = fcn_0050b840(n->id);
+		n->sum = n->sum / ((Rec*)lpObjektePROT)[n->goods_id].div;
+		n->base = fcn_0050b840(n->goods_id);
 		n->value = n->base + n->sum;
-		n->price = fcn_0050bb50(n->id, g_773d75);
-		n->slope = (n->price - n->value) / ((Rec*)lpObjektePROT)[n->id].cap;
+		n->price = fcn_0050bb50(n->goods_id, g_773d75);
+		n->slope = (n->price - n->value) / ((Rec*)lpObjektePROT)[n->goods_id].cap;
 	}
 }

@@ -1,21 +1,22 @@
 #include "client_packet_queue.h"
 #include "client_types.h"
 
-#pragma pack(push, 1)
-typedef struct pkt99 {
-	unsigned char type;
-	unsigned short crc;
-	unsigned char flag;
-	int seq;
-	int cur;
-	int nextseq;
-	unsigned char data[0x80];
-	char pad90;
-	struct pkt99* prev;
-	struct pkt99* next;
-} pkt99;
-#pragma pack(pop)
-/* SIZE 0x99 */
+#include "client_queued_packet.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 typedef cell10_fb5760 cell10;
 /* SIZE 0xa */
@@ -24,19 +25,19 @@ typedef cell10_fb5760 cell10;
 extern unsigned char* g_14cbca8;
 extern int g_aecde0;
 extern int g_aed330;
-extern pkt99 g_aed740[0x8000];
+extern CLIENT_QUEUED_PACKET g_aed740[0x8000];
 extern cell10_fb5760 g_fb5760[0x8000];
 
-unsigned short __cdecl fcn_004c3a50(pkt99*);
+unsigned short __cdecl fcn_004c3a50(CLIENT_QUEUED_PACKET*);
 int __cdecl fcn_004c4090(void);
 
 
 /* ADDRESS: GOLDTL 0x004c4330 */
-int __cdecl fcn_004c4330(pkt99* a1)
+int __cdecl fcn_004c4330(CLIENT_QUEUED_PACKET* a1)
 {
-	pkt99* p;
-	pkt99* q;
-	pkt99* last;
+	CLIENT_QUEUED_PACKET* p;
+	CLIENT_QUEUED_PACKET* q;
+	CLIENT_QUEUED_PACKET* last;
 	int n;
 	int seq;
 
@@ -45,9 +46,9 @@ int __cdecl fcn_004c4330(pkt99* a1)
 	n = g_1005768 + 1;
 	seq = n & 0x7fff;
 	p = &g_aed740[seq];
-	if (g_14cbca0 != -1 && (*(pkt99**)&g_14cbca8) == p)
+	if (g_14cbca0 != -1 && (*(CLIENT_QUEUED_PACKET**)&g_14cbca8) == p)
 		return -1;
-	for (q = (*(pkt99**)&g_1005760); q != 0; q = q->next) {
+	for (q = (*(CLIENT_QUEUED_PACKET**)&g_1005760); q != 0; q = q->next) {
 		if (q == p)
 			return -1;
 	}
@@ -62,14 +63,14 @@ int __cdecl fcn_004c4330(pkt99* a1)
 		g_aecde0 = p->cur;
 	g_fb5760[seq].f0 = 0;
 	g_fb5760[seq].f2 = seq;
-	last = (*(pkt99**)&g_1005760);
+	last = (*(CLIENT_QUEUED_PACKET**)&g_1005760);
 	if (last != 0) {
 		while (last->next != 0)
 			last = last->next;
 		p->prev = last;
 		last->next = p;
 	} else {
-		(*(pkt99**)&g_1005760) = p;
+		(*(CLIENT_QUEUED_PACKET**)&g_1005760) = p;
 		p->prev = 0;
 	}
 	p->next = 0;

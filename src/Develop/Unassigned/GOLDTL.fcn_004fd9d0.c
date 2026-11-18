@@ -1,21 +1,21 @@
 
 
 
-typedef struct
-{
-	int key;
-	char pad[0x40];
-} Rec44;
+#include "Develop/DieGildeAddOn/game/head_set.h"
+
+
+
+
 // SIZE 0x44
 
-extern Rec44 g_6918e8[];
-extern Rec44 g_693228[];
+extern HEAD_SET g_6918e8[];
 
-void __cdecl fcn_004fdd70(Rec44*);
 
-Rec44* __cdecl fcn_004fd9d0(int which, int key)
+void __cdecl fcn_004fdd70(HEAD_SET*);
+
+HEAD_SET* __cdecl fcn_004fd9d0(int which, int key)
 {
-	Rec44* base;
+	HEAD_SET* base;
 	int i;
 
 	i = 0;

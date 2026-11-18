@@ -1,4 +1,4 @@
-#include "client_town.h"
+#include "Develop/DieGildeAddOn/game/season_slots.h"
 extern char g_868060[];
 extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 

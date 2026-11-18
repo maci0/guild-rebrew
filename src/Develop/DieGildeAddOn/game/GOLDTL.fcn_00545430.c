@@ -1,7 +1,6 @@
-#include "he_tables.h"
+#include "Develop/DieGildeAddOn/game/event_deal.h"
 
-extern Deal g_7d2020[256];
-extern ApEvent g_7dcae0[256];
+extern HE_AP_EVENT g_7dcae0[256];
 extern Rec7dc6e0 g_7dc6e0[64];
 
 

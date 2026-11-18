@@ -9,16 +9,16 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-typedef struct Order {
-	int id;
-	char pad4[0x54 - 4];
-	int flags;
-} Order;
+#include "Develop/DieGildeAddOn/game/production_goods.h"
+
+
+
+
 // SIZE 0x58
 
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern entry_100d0c0 g_100d0c0[];
+ 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_005463a0(int, int, int, int, int);
@@ -35,19 +35,19 @@ void __cdecl fcn_00487e60(char* e, int k)
 		found = 0;
 		if (k == 4) {
 			for (i = 0; i < g_100b0ac; i++) {
-				if (((Order*)g_100d0c0)[i].id == *(unsigned short*) (q + 0xac) && !(((Order*)g_100d0c0)[i].flags & 8)) {
+				if (g_100d0c0[i].goods_id == *(unsigned short*) (q + 0xac) && !(g_100d0c0[i].flags & 8)) {
 					found = 1;
 				}
 			}
 		} else if (k == 8) {
 			for (i = 0; i < g_100b0ac; i++) {
-				if (((Order*)g_100d0c0)[i].id == *(unsigned short*) (q + 0xac) && !(((Order*)g_100d0c0)[i].flags & 0x10)) {
+				if (g_100d0c0[i].goods_id == *(unsigned short*) (q + 0xac) && !(g_100d0c0[i].flags & 0x10)) {
 					found = 1;
 				}
 			}
 		} else if (k == 3) {
 			for (i = 0; i < g_100b0ac; i++) {
-				if (((Order*)g_100d0c0)[i].id == *(unsigned short*) (q + 0xac) && !(((Order*)g_100d0c0)[i].flags & 8)) {
+				if (g_100d0c0[i].goods_id == *(unsigned short*) (q + 0xac) && !(g_100d0c0[i].flags & 8)) {
 					found = 1;
 				}
 			}

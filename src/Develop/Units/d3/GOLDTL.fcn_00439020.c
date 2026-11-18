@@ -63,7 +63,7 @@ extern float g_1052bbc;
 extern float g_10432a4;
 extern float g_1052bc4;
 extern float g_1052bb4;
-extern float g_1042584;
+extern float d3_ProjectionScaleY;
 extern float g_1052bb8;
 extern char g_10432c0[];
 
@@ -147,7 +147,7 @@ char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
 	fcn_00438da0(g_10529e0.x, g_10529e0.y, g_10529e0.cw, g_10529e0.ch, g_10529e0.f4c, g_10529e0.f50, g_10529e0.f54, g_10529e0.w, g_10529e0.h);
 	g_6b8010 = 0;
 	g_1052bc4 = (float) atan2(g_1052bbc, g_10432a4);
-	g_1052bb8 = (float) atan2(g_1052bb4, g_1042584);
+	g_1052bb8 = (float) atan2(g_1052bb4, d3_ProjectionScaleY);
 	{
 		int len;
 

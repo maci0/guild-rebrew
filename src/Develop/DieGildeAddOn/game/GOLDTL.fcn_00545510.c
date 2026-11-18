@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
-extern unit_77e980 g_77e980[1024];
+#include "Develop/DieGildeAddOn/game/he_action.h"
 
 
 
@@ -10,9 +10,9 @@ void __cdecl fcn_00545510(void)
 {
 	int i;
 
-	for (i = 0; i <= g_7749d4 && i < 0x400; i++) {
-		if (((char*)g_77e980)[i * 0x14c] != 0) {
-			fcn_00546190(((char*)g_77e980) + i * 0x14c);
+	for (i = 0; i <= he_LastEventSlot && i < 0x400; i++) {
+		if (g_77e980[i].kind != 0) {
+			fcn_00546190((char*) &g_77e980[i]);
 		}
 	}
 }

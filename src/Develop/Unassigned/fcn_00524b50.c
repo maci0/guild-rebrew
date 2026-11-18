@@ -1,8 +1,8 @@
-extern int g_7749d4, g_7749d8, g_7dc424;
+extern int he_LastEventSlot, g_7749d8, g_7dc424;
 void __cdecl fcn_00545510(void);
 int __cdecl ls_ReadVfsDataChecked(void *, int, int, void *);
 #include "Develop/Units/m_alloc/m_alloc.h"
-extern int g_6a23ac;
+extern int ls_SaveVersion;
 
 /* ADDRESS: GOLDTL 0x00524b50 */
 int __cdecl fcn_00524b50(unsigned char *S)
@@ -15,7 +15,7 @@ int __cdecl fcn_00524b50(unsigned char *S)
         return 0;
     if (!ls_ReadVfsDataChecked(&c2, 4, 1, S))
         return 0;
-    g_7749d4 = 0;
+    he_LastEventSlot = 0;
     g_7749d8 = 0;
     g_7dc424 = 0;
     i = 0;
@@ -44,7 +44,7 @@ int __cdecl fcn_00524b50(unsigned char *S)
                 return 0;
             if (!ls_ReadVfsDataChecked(rec + 0x78, 1, 1, S))
                 return 0;
-            if (g_6a23ac >= 0x1002f) {
+            if (ls_SaveVersion >= 0x1002f) {
                 for (j = 0; j < 8; j++)
                     if (!ls_ReadVfsDataChecked(rec + 0x8c + 4 * j, 4, 1, S))
                         return 0;
@@ -82,7 +82,7 @@ int __cdecl fcn_00524b50(unsigned char *S)
             g_7dc424 = i;
         } while (i < cnt);
     }
-    g_7749d4 = i;
+    he_LastEventSlot = i;
     if (!ls_ReadVfsDataChecked(&cnt, 4, 1, S))
         return 0;
     if (cnt > 0) {

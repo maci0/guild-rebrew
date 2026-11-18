@@ -6,7 +6,7 @@
 
 extern void* g_14d0020[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_6b5c34;
+extern int ch_LowPolyMode;
 int __cdecl fcn_00413190(int p);
 void __cdecl fcn_004432d0(int a, int b);
 void __cdecl d3_RemoveObjectAnim(int h);
@@ -38,6 +38,6 @@ void __cdecl fcn_00403330(unsigned char mode)
 		}
 		p++;
 	} while ((int) p < (int) (((char**)g_14d0020) + 0x300));
-	g_6b5c34 = 2 - mode;
+	ch_LowPolyMode = 2 - mode;
 	fcn_004432d0(saved, 1);
 }

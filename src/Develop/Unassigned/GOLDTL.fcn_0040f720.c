@@ -1,7 +1,7 @@
 extern char* g_6b7ebc;
 extern char* g_6b7e98;
 extern int g_6b5cbc;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 
 void __cdecl fcn_00414d20(int, int, int, int, int, int, int, int);
 
@@ -12,7 +12,7 @@ void __cdecl fcn_00414d20(int, int, int, int, int, int, int, int);
 int __cdecl NewCameraFlight(int* a1, int* a2, int* a3, int* a4, int* a5, int* a6, int* a7)
 {
 	if (g_6b7ebc != 0 && *(int (__cdecl**)()) (g_6b7ebc + 0x44) == (int (__cdecl*)()) NewCameraFlight) {
-		if (g_6b5cbc == 0 && g_6b5cc0 == 0) {
+		if (g_6b5cbc == 0 && d3_ActiveCameraAnimation == 0) {
 			return 0;
 		}
 		*(int (__cdecl**)()) (g_6b7e98 + 0xc60) = (int (__cdecl*)()) NewCameraFlight;

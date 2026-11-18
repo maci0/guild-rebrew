@@ -258,7 +258,7 @@ void __cdecl fcn_00401260(int a, int b)
 """
 
 # Real Gold translation units now define these symbols; no placeholder is emitted.
-[specials.g_6791d0]
+[specials.evt_LastGfxScriptId]
 impl = ""
 
 [specials.CloseVideo]

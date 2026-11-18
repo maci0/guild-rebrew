@@ -1,13 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/entity_candidate.h"
 extern char g_7f4ca0[];
-typedef struct
-{
-	char* ent;
-	float key;
-	int flags;
-} fcn_004a3530_Ent;
-/* SIZE 0xc */
 
 typedef struct
 {
@@ -18,7 +12,6 @@ typedef struct
 } Rec18;
 /* SIZE 0x18 */
 
-extern fcn_004a3530_Ent g_10082a0[];
 extern int g_664418[];
 extern int g_664440[];
 extern int* g_664448;
@@ -65,8 +58,8 @@ void __cdecl fcn_004a3530(char* a0)
 			if (!e || e == a0)
 				continue;
 			g_10082a0[n].flags = 0x40;
-			g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
-			g_10082a0[n].ent = e;
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].entity = e;
 			n++;
 		}
 		cnt = fcn_004e8c00(2, 6, out);
@@ -77,8 +70,8 @@ void __cdecl fcn_004a3530(char* a0)
 			if (!e || e == a0)
 				continue;
 			g_10082a0[n].flags = 0x40;
-			g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
-			g_10082a0[n].ent = e;
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].entity = e;
 			n++;
 		}
 		cnt = fcn_004e8c00(3, 6, out);
@@ -89,8 +82,8 @@ void __cdecl fcn_004a3530(char* a0)
 			if (!e || e == a0)
 				continue;
 			g_10082a0[n].flags = 0x40;
-			g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
-			g_10082a0[n].ent = e;
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].entity = e;
 			n++;
 		}
 	}
@@ -141,8 +134,8 @@ void __cdecl fcn_004a3530(char* a0)
 			if (!e || e == a0)
 				continue;
 			g_10082a0[n].flags = 0x10;
-			g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
-			g_10082a0[n].ent = e;
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].entity = e;
 			n++;
 		}
 		cnt = fcn_004e8c00(flag, 6, out);
@@ -153,8 +146,8 @@ void __cdecl fcn_004a3530(char* a0)
 			if (!e || e == a0)
 				continue;
 			g_10082a0[n].flags = 1;
-			g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
-			g_10082a0[n].ent = e;
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].entity = e;
 			n++;
 		}
 		cnt = fcn_004e8c00(grp, 6, out);
@@ -165,8 +158,8 @@ void __cdecl fcn_004a3530(char* a0)
 			if (!e || e == a0)
 				continue;
 			g_10082a0[n].flags = 1;
-			g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
-			g_10082a0[n].ent = e;
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].entity = e;
 			n++;
 		}
 		if (cls == 3 || cls == 6) {
@@ -180,8 +173,8 @@ void __cdecl fcn_004a3530(char* a0)
 				if (!e || e == a0)
 					continue;
 				g_10082a0[n].flags = 0x40;
-				g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
-				g_10082a0[n].ent = e;
+				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+				g_10082a0[n].entity = e;
 				n++;
 			}
 			cnt = fcn_004e8c00(arr[1], 6, out);
@@ -194,8 +187,8 @@ void __cdecl fcn_004a3530(char* a0)
 				if (!e || e == a0)
 					continue;
 				g_10082a0[n].flags = 0x40;
-				g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
-				g_10082a0[n].ent = e;
+				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+				g_10082a0[n].entity = e;
 				n++;
 			}
 		}
@@ -210,8 +203,8 @@ void __cdecl fcn_004a3530(char* a0)
 				if (!e || e == a0)
 					continue;
 				g_10082a0[n].flags = 0x80;
-				g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
-				g_10082a0[n].ent = e;
+				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+				g_10082a0[n].entity = e;
 				n++;
 			}
 			cnt = fcn_004e8c00(arr[3], 6, out);
@@ -224,8 +217,8 @@ void __cdecl fcn_004a3530(char* a0)
 				if (!e || e == a0)
 					continue;
 				g_10082a0[n].flags = 0x80;
-				g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
-				g_10082a0[n].ent = e;
+				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+				g_10082a0[n].entity = e;
 				n++;
 			}
 			cnt = fcn_004e8c00(arr[4], 6, out);
@@ -238,8 +231,8 @@ void __cdecl fcn_004a3530(char* a0)
 				if (!e || e == a0)
 					continue;
 				g_10082a0[n].flags = 0x80;
-				g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
-				g_10082a0[n].ent = e;
+				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+				g_10082a0[n].entity = e;
 				n++;
 			}
 		}
@@ -252,7 +245,7 @@ void __cdecl fcn_004a3530(char* a0)
 				continue;
 			
 			for (j = 0; j < n; j++) {
-				if (g_10082a0[j].ent == e) {
+				if (g_10082a0[j].entity == e) {
 					g_10082a0[j].flags |= 2;
 					
 					break;
@@ -263,8 +256,8 @@ void __cdecl fcn_004a3530(char* a0)
 			if (n >= 32)
 				continue;
 			g_10082a0[n].flags = 2;
-			g_10082a0[n].key = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
-			g_10082a0[n].ent = e;
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].entity = e;
 			n++;
 		}
 	}
@@ -284,7 +277,7 @@ void __cdecl fcn_004a3530(char* a0)
 				continue;
 			
 			for (j = 0; j < n; j++) {
-				if (g_10082a0[j].ent == q) {
+				if (g_10082a0[j].entity == q) {
 					g_10082a0[j].flags |= flag;
 					
 					break;
@@ -295,16 +288,16 @@ void __cdecl fcn_004a3530(char* a0)
 			if (n >= 32)
 				continue;
 			g_10082a0[n].flags = flag;
-			g_10082a0[n].key = fcn_0050f980(*(unsigned short*) q, *(unsigned short*) a0, 1);
-			g_10082a0[n].ent = q;
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) q, *(unsigned short*) a0, 1);
+			g_10082a0[n].entity = q;
 			n++;
 		}
 	}
 	flag = (4 - g_7747b4) * 5;
 	for (i = 0; i < n; i++) {
-		if (*(unsigned char*) (g_10082a0[i].ent + 2) == 6
-		    || *(unsigned char*) (g_10082a0[i].ent + 2) == 7)
-			g_10082a0[i].key += (float) flag;
+		if (*(unsigned char*) (g_10082a0[i].entity + 2) == 6
+		    || *(unsigned char*) (g_10082a0[i].entity + 2) == 7)
+			g_10082a0[i].score += (float) flag;
 	}
 	g_7728bc = n;
 	if (n > 3) {

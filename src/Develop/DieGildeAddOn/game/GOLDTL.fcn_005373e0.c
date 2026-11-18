@@ -41,7 +41,7 @@ extern int g_1015ea0;
 extern int g_7746a4;
 extern int g_7746ac;
 extern int g_774668;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 extern int g_7725c8;
 extern int g_7749e4;
 extern int g_67d8dc;
@@ -402,7 +402,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 	}
 	if (g_774670 == 0 && (flags & 0x80)) {
 		f = flags & 0x1000;
-		if (!(f != 0 && g_14ce8e8 == 0 && g_774668 == 0 && g_6b5cc0 == 0 &&
+		if (!(f != 0 && g_14ce8e8 == 0 && g_774668 == 0 && d3_ActiveCameraAnimation == 0 &&
 			g_7e4300 == 0 && g_7725c8 == 0 && g_7749e4 == 0)) {
 			g_67d8dc = 0;
 		} else {
@@ -431,7 +431,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 		} else if ((flags & 8) && (g_7746cc != 0 || g_7746c8 != 0)) {
 			fcn_00532bd0();
 		}
-		if (f != 0 && g_14ce8e8 == 0 && g_774668 == 0 && g_6b5cc0 == 0 &&
+		if (f != 0 && g_14ce8e8 == 0 && g_774668 == 0 && d3_ActiveCameraAnimation == 0 &&
 			g_7e4300 == 0 && g_7725c8 == 0 && g_7749e4 == 0) {
 			fcn_005337a0();
 		}

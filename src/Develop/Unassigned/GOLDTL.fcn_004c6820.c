@@ -12,7 +12,7 @@ void __cdecl fcn_004c6820(int a1, void* a2)
 
 	buf[0] = 0x51;
 	*(int*) (buf + 0x10) = a1;
-	*(int*) (buf + 0x40) = g_772f40 != 0 ? *g_772f40 : -1;
+	*(int*) (buf + 0x40) = cut_ActiveCutscene != 0 ? *cut_ActiveCutscene : -1;
 	memcpy(buf + 0x14, a2, 0x2c);
 	fcn_004c4330(buf);
 }

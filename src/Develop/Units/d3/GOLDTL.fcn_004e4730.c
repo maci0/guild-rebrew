@@ -1,14 +1,14 @@
 extern int g_772f3c;
 extern int g_6b8300;
 extern char g_77666a;
-extern int* g_772f40;
+extern int* cut_ActiveCutscene;
 extern int g_77250c;
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 extern int g_772f4c;
 extern int g_6791c8;
 extern int g_67a370;
-extern int g_6791d0;
+extern int evt_LastGfxScriptId;
 extern int g_68bfc4;
 extern unsigned char* g_772f50;
 extern int g_1040490;
@@ -59,7 +59,7 @@ void __cdecl fcn_004e4730(char* a1)
 		}
 		fcn_004428d0(((char*)g_6b8300), n >> 1, 1);
 	}
-	if ((((char*)g_772f40)[0x26] & 0x20) != 0)
+	if ((((char*)cut_ActiveCutscene)[0x26] & 0x20) != 0)
 		fcn_00476970(g_77250c);
 	if (fcn_00500e20(&(*(int*)&g_7f4c00)) == 3)
 		fcn_0052a7d0();
@@ -70,7 +70,7 @@ void __cdecl fcn_004e4730(char* a1)
 		if (ui != 0 && *(hook_4e4730*) (ui + 0x210) != 0)
 			(*(hook_4e4730*) (ui + 0x210))(((char*)g_67a370), 4, ui + 0x214, 0);
 	}
-	g_68bfc4 = g_6791d0;
+	g_68bfc4 = evt_LastGfxScriptId;
 	fcn_00443230(1);
 	if ((*(int*)&g_772f50) != 0) {
 		fcn_00473150((*(int*)&g_772f50));

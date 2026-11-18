@@ -1,5 +1,5 @@
-extern int g_14ce8a0;
-extern int g_14ce89c;
+#include "client_input.h"
+
 extern int g_14ce8d0;
 extern int g_14ce8d8;
 extern int g_14ce920;
@@ -10,26 +10,26 @@ extern int g_14cf900;
 extern int g_14cf902;
 extern int g_6772c4;
 
-int __stdcall ClientToScreen(int hwnd, int* pt);
-int __stdcall SetCursorPos(int x, int y);
+
+
 void __cdecl fcn_00411780(int a1, int err, char* text, ...);
 
 /* ADDRESS: GOLDTL 0x004123a0 */
 void __cdecl fcn_004123a0(void)
 {
 	int state[4];
-	int pt[2];
-	int dev;
-	int vtable;
+	POINT pt;
+	INPUT_DEVICE* dev;
+	INPUT_DEVICE_VTABLE* vtable;
 	int err;
 	short dx;
 	short dy;
-	int hwnd;
+	HWND hwnd;
 
 	dev = g_14ce8a0;
-	vtable = *(int*) dev;
-	err = ((int (__stdcall*) (int, int, int*)) *(int*) (vtable + 0x24))
-		(dev, 0x10, state);
+	vtable = dev->vtbl;
+	err = vtable->GetDeviceState(dev, 0x10, state);
+
 	if (err != 0) {
 		if (err == 0x8007001e)
 			fcn_00411780(0, err, "Access to Input Device Lost");
@@ -57,9 +57,9 @@ void __cdecl fcn_004123a0(void)
 	*(short*) &g_14cf902 = (short) dy;
 	*(short*) &g_14ce920 = (short) dx;
 	*(short*) &g_14ce922 = (short) dy;
-	pt[0] = dx;
-	pt[1] = dy;
+	pt.x = dx;
+	pt.y = dy;
 	hwnd = g_14ce89c;
-	ClientToScreen(hwnd, pt);
-	SetCursorPos(pt[0], pt[1]);
+	ClientToScreen(hwnd, &pt);
+	SetCursorPos(pt.x, pt.y);
 }

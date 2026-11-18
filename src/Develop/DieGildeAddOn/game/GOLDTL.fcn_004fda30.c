@@ -1,20 +1,20 @@
-typedef struct HeadSet {
-	char pad0[4];
-	char name[0x30];
-	int head[4];
-} HeadSet;
+#include "Develop/DieGildeAddOn/game/head_set.h"
 
-extern HeadSet g_6918e8[];
-extern HeadSet g_693228[];
+
+
+
+
+extern HEAD_SET g_6918e8[];
+
 
 int __cdecl gm_RandomMod(unsigned short n);
-void __cdecl fcn_004fdd70(HeadSet* hs);
+void __cdecl fcn_004fdd70(HEAD_SET* hs);
 
 /* ADDRESS: GOLDTL 0x004fda30 */
-HeadSet* __cdecl fcn_004fda30(unsigned int a0)
+HEAD_SET* __cdecl fcn_004fda30(unsigned int a0)
 {
 	char* v4;
-	HeadSet* v6;
+	HEAD_SET* v6;
 	int* v7;
 	int v3;
 	int v5;
@@ -28,9 +28,9 @@ HeadSet* __cdecl fcn_004fda30(unsigned int a0)
 	v1 = *(unsigned char*) (v3 + 0x7f4e04);
 	if (!v1 && *(unsigned short*) (v3 + 0x7f4caa) < *(float*) (v3 + 0x7f4cc0)) {
 		if (*(char*) (v3 + 0x7f4ca9)) {
-			return (HeadSet*) 0x690600;
+			return (HEAD_SET*) 0x690600;
 		}
-		return (HeadSet*) 0x6905b8;
+		return (HEAD_SET*) 0x6905b8;
 	}
 	v4 = (char*) (v3 + 0x7f4e94);
 	v8 = *(int*) (v3 + 0x7f4e2c);
@@ -51,18 +51,18 @@ HeadSet* __cdecl fcn_004fda30(unsigned int a0)
 		*(int*) (v3 + 0x99ed98) = v8;
 		*(int*) (v3 + 0x99ed9c) = v8;
 		*(int*) (v3 + 0x99eda0) = v8;
-		return (HeadSet*) (v3 + 0x99ed60);
+		return (HEAD_SET*) (v3 + 0x99ed60);
 	}
 	if (*(char*) (v3 + 0x7f4ca2) == 0x11) {
-		return (HeadSet*) ((unsigned short) gm_RandomMod(3) * 0x44 + 0x6960a8);
+		return (HEAD_SET*) ((unsigned short) gm_RandomMod(3) * 0x44 + 0x6960a8);
 	}
 	if (v1) {
 		if (*(char*) (v3 + 0x7f4ca9)) {
 			if (*(char*) (v3 + 0x7f4ca9) == 1) {
-				v6 = (HeadSet*) 0x693228;
+				v6 = (HEAD_SET*) 0x693228;
 			}
 		} else {
-			v6 = (HeadSet*) 0x6918e8;
+			v6 = (HEAD_SET*) 0x6918e8;
 		}
 		v7 = (int*) v6;
 		do {
@@ -81,10 +81,10 @@ HeadSet* __cdecl fcn_004fda30(unsigned int a0)
 	if (*(unsigned char*) (v3 + 0x7f4e05)) {
 		if (*(char*) (v3 + 0x7f4ca9)) {
 			if (*(char*) (v3 + 0x7f4ca9) == 1) {
-				v6 = (HeadSet*) 0x690f98;
+				v6 = (HEAD_SET*) 0x690f98;
 			}
 		} else {
-			v6 = (HeadSet*) 0x690648;
+			v6 = (HEAD_SET*) 0x690648;
 		}
 		v7 = (int*) v6;
 		do {
@@ -103,10 +103,10 @@ HeadSet* __cdecl fcn_004fda30(unsigned int a0)
 		} while (v5 < 0x23);
 	}
 	if (!*(char*) (v3 + 0x7f4ca9)) {
-		return (HeadSet*) 0x690648;
+		return (HEAD_SET*) 0x690648;
 	}
 	if (*(char*) (v3 + 0x7f4ca9) != 1) {
 		return v6;
 	}
-	return (HeadSet*) 0x690f98;
+	return (HEAD_SET*) 0x690f98;
 }

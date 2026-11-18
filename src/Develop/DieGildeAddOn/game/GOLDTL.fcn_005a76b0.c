@@ -159,7 +159,7 @@ int __cdecl fcn_005a76b0(char* o, int p2)
                                 (t, 4, i + 0x214, 0);
                     }
                 }
-                r = *(int*) &g_6791d0;
+                r = *(int*) &evt_LastGfxScriptId;
                 if (*(u16*) (o + 0x27) != *(u16*) &g_774970) {
                     i = fcn_00504bd0((int) *(u8*) o);
                     if (i == 1 || i == 8) {
@@ -337,7 +337,7 @@ int __cdecl fcn_005a76b0(char* o, int p2)
                     }
                 }
             }
-            i = *(int*) &g_6791d0;
+            i = *(int*) &evt_LastGfxScriptId;
             if (i != -1)
                 fcn_005312d0(i);
             fcn_00516ed0(o);

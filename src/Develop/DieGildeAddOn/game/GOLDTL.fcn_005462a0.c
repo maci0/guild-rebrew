@@ -1,7 +1,7 @@
 #include "client_types.h"
 
-extern unit_77e980 g_77e980[1024];
-extern unit_77e980* g_7dc420;
+#include "Develop/DieGildeAddOn/game/he_action.h"
+extern HE_ACTION* g_7dc420;
 extern char g_7749dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_6a4758[4];
@@ -12,10 +12,10 @@ extern int g_6a4764;
 void __cdecl ReportClientMessage(const char* msg);
 
 /* ADDRESS: GOLDTL 0x005462a0 */
-unit_77e980* __cdecl he_fn_Handlung(void)
+HE_ACTION* __cdecl he_fn_Handlung(void)
 {
-	unit_77e980* e;
-	unit_77e980* base;
+	HE_ACTION* e;
+	HE_ACTION* base;
 	char matched;
 	unsigned char kind;
 	int id;
@@ -24,10 +24,10 @@ unit_77e980* __cdecl he_fn_Handlung(void)
 
 	matched = 0;
 	base = 0;
-	if (g_7749d4 < 0 || g_7749d4 >= 0x400) {
+	if (he_LastEventSlot < 0 || he_LastEventSlot >= 0x400) {
 		ReportClientMessage((const char*) 0x6a5784);
 	} else {
-		base = &g_77e980[g_7749d4];
+		base = &g_77e980[he_LastEventSlot];
 	}
 	e = g_7dc420;
 	if (e == 0 || e == base || (unsigned int) e > (unsigned int) base) {

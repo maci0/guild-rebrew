@@ -7,27 +7,27 @@ typedef struct {
 	int v[5];
 } Pos;
 
-// SIZE 0x21c
-typedef struct {
-	char pad0[0x132];
-	unsigned char kind;
-	char pad133[0xe5];
-	unsigned char flags;
-	char pad219[3];
-} Actor;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-typedef struct Plan Plan;
 
-// SIZE 0x94
-struct Plan {
-	unsigned char kind;
-	char pad1[0x23];
-	void (__cdecl *rate)(float *, float *, int, Actor *, int, Pos *, Pos *);
-	int (__cdecl *pick)(int, Actor *, int, Pos *, Pos *);
-	char pad2c[0x68];
-};
 
-extern char g_7f4ca0[];
+
+
+
+
+
+#include "client_method_registry.h"
+
+
+
+
+
+
+
+
+
+
+
 extern char g_1008540[];
 
 int __cdecl fcn_00495150(int);
@@ -49,8 +49,8 @@ int __cdecl fcn_00495400(int who, int idx, int arg, Pos *out1, Pos *out2)
 	Pos primarySecond;
 	Pos secondaryFirst;
 	Pos secondarySecond;
-	Actor *me;
-	Plan *pl;
+	ENTITY_RECORD *me;
+	AM_METHOD *pl;
 	int r;
 
 	best1 = -1e30f;
@@ -59,29 +59,29 @@ int __cdecl fcn_00495400(int who, int idx, int arg, Pos *out1, Pos *out2)
 	res2 = 0;
 	primaryFirst.valid = 0;
 	secondaryFirst.valid = 0;
-	me = &((Actor*)g_7f4ca0)[idx];
+	me = &((ENTITY_RECORD*)g_7f4ca0)[idx];
 	primarySecond.valid = 0;
 	secondarySecond.valid = 0;
 	if (fcn_00495150(who) != 0) {
 		return 0;
 	}
-	if (me->flags == 0) {
-		me->flags = 1;
+	if (me->unk_218 == 0) {
+		me->unk_218 = 1;
 	}
 	for (i = 0; i < 73; i++) {
-		pl = &((Plan*)g_1008540)[i];
-		if (pl->kind == 0 || pl->kind == me->kind || fcn_00495150(pl->kind) != 0) {
+		pl = &((AM_METHOD*)g_1008540)[i];
+		if (pl->type == 0 || pl->type == me->unk_132 || fcn_00495150(pl->type) != 0) {
 			continue;
 		}
-		fcn_00495120(pl->kind);
+		fcn_00495120(pl->type);
 		p1 = *out1;
 		p2 = *out2;
-		if (pl->rate != 0) {
-			pl->rate(&s1, &s2, i, me, arg, &p1, &p2);
+		if (pl->score != 0) {
+			((void (__cdecl *)(float *, float *, int, ENTITY_RECORD *, int, Pos *, Pos *)) pl->score)(&s1, &s2, i, me, arg, &p1, &p2);
 		}
 		if (s1 >= best1 || s2 >= best2) {
-			if (pl->pick != 0) {
-				r = pl->pick(who, me, arg, &p1, &p2);
+			if (pl->start != 0) {
+				r = ((int (__cdecl *)(int, ENTITY_RECORD *, int, Pos *, Pos *)) pl->start)(who, me, arg, &p1, &p2);
 				if (r != 0) {
 					if (s1 >= best1) {
 						best1 = s1;

@@ -2,14 +2,14 @@
 /* Twin of GOLDTL 0x52a0c0; GOLD has 0x2ec-byte entities (fields 0x10 lower), 0x3c4-byte slots and a 16-bit base value at 0xfb9072. */
 
 // SIZE 0x3c4
-typedef struct {
-	char pad0[0x274];
-	int mode;
-	char pad278[0x3b8 - 0x278];
-	int h0;
-	int h1;
-	char pad3c0[0x3c4 - 0x3c0];
-} Slot;
+#include "Develop/Units/d2.v1/gold_window.h"
+
+
+
+
+
+
+
 
 // SIZE 0x2ec
 typedef struct {
@@ -82,13 +82,13 @@ void __cdecl fcn_00525260(int unused, char arg)
 		d2_SetForm(g_623864, 2);
 		id = fcn_00475b70(g_623864, 2, 0);
 		((Ent*)g_f8f080)[id].f1d0 = 3;
-		((Slot*)g_f8f110)[g_6ed938].h0 = id;
+		((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_6ed938].child[0] = id;
 		((Ent*)g_f8f080)[id].owner = owner;
 		id = fcn_00475b70(g_623864, 2, 1);
 		((Ent*)g_f8f080)[id].f1d0 = 3;
-		((Slot*)g_f8f110)[g_6ed938].h1 = id;
+		((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_6ed938].child[1] = id;
 		((Ent*)g_f8f080)[id].owner = owner;
-		((Slot*)g_f8f110)[owner].mode = 0x4e;
+		((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[owner].step = 0x4e;
 		if (g_623864 != -1) {
 			if (g_623868 != -1) {
 				fcn_00475580(g_623868, 0);

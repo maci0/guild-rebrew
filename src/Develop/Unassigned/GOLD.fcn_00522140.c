@@ -3,7 +3,7 @@
 
 // SIZE 0x3c4
 #include "client_types.h"
-typedef Slot_f8f110 Slot;
+#include "Develop/Units/d2.v1/gold_window.h"
 
 extern int g_623868;
 extern int g_623e90;
@@ -76,7 +76,7 @@ void __cdecl fcn_00522140(int show)
 		fcn_00475a90(g_623854, show);
 	}
 	if (g_623848 != -1) {
-		fcn_00475a90(g_f8f110[g_623848].panel, show);
+		fcn_00475a90(((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_623848].id, show);
 	}
 	for (i = 0; i < 15; i++) {
 		if (g_7662e0[i] != -1) {

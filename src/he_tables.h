@@ -26,16 +26,8 @@ typedef struct {
 } Deal;
 // SIZE 0xa4
 
-/* Registered by he_RegisterApEvent (fcn_00546ef0). */
-typedef struct {
-	char b0;
-	char pad[3];
-	int f4;
-	int f8;
-	int fc;
-	char name[0x40];
-} ApEvent;
-// SIZE 0x50
+#include "Develop/DieGildeAddOn/game/he_ap_event.h"
+typedef HE_AP_EVENT ApEvent;
 
 typedef struct {
 	int a;

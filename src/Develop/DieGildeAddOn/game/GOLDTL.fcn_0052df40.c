@@ -27,7 +27,7 @@ typedef struct {
 
 extern int g_6a25b8;
 extern int g_6a25bc;
-extern int g_6a25c0;
+extern int d2_CurrentValueBar;
 extern int g_6a25c4[4];
 extern int g_6a25e4;
 extern int g_6a25ec;
@@ -92,10 +92,10 @@ void __cdecl fcn_0052df40(unsigned char* s)
 		((Ctl_52df40*)g_1015ea0)[g_6a25bc].link = &g_7f4ca0[*(unsigned short*) (s + 0x27)];
 	}
 	if (*s == 0x47 || *s == 0x1d || *s == 0x57) {
-		g_6a25c0 = -1;
+		d2_CurrentValueBar = -1;
 	} else {
-		g_6a25c0 = fcn_004677e0(0x15, 0x7b, 0x38, 0, 0x64, 0x75, 0x442, g_772514);
-		d2_SetElementValue(g_6a25c0, 0, 0x64, pct);
+		d2_CurrentValueBar = fcn_004677e0(0x15, 0x7b, 0x38, 0, 0x64, 0x75, 0x442, g_772514);
+		d2_SetElementValue(d2_CurrentValueBar, 0, 0x64, pct);
 	}
 	if ((s[0x5a] & 1) != 0 || *s == 0x47 || *s == 0x1d || *s == 0x57) {
 		g_6a25ec = -1;

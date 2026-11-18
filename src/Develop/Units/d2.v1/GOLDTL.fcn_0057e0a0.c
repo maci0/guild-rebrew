@@ -2,7 +2,7 @@ extern int g_774a14;
 extern int *g_665f08;
 extern int g_7749e4;
 extern int g_6b5cbc;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 extern int g_7e2700;
 extern int g_774a18;
 extern volatile int g_6b7fac;
@@ -73,7 +73,7 @@ int __cdecl fcn_0057e0a0(void)
 	}
 	switch (g_665f08[0]) {
 	case 1:
-		if (g_6b5cc0 != 0) {
+		if (d3_ActiveCameraAnimation != 0) {
 			break;
 		}
 		if (fcn_00580140() != 0) {

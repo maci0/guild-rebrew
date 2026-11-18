@@ -14,7 +14,7 @@ extern node99_load g_aed740[0x8000];
 extern cell10_fb5760 g_fb5760[0x8000];
 extern char* g_aed324;
 extern char* g_aed200;
-extern int g_6a23ac;
+extern int ls_SaveVersion;
 extern int g_1005760;
 extern int g_1005768;
 extern unsigned int g_100581c;
@@ -64,7 +64,7 @@ read_failed: return 0;
 	} else {
 		g_aed200 = (char*) &((node99_load*) g_9bade0)[n];
 	}
-	n = (g_6a23ac >= 0x1003c) ? 0x8000 : 0x2000;
+	n = (ls_SaveVersion >= 0x1003c) ? 0x8000 : 0x2000;
 	for (r = (char*) g_fb5760 + 2; (int) r < (int) g_fb5760 + 0x50002; r += 0xa) {
 		*(int*) (r + 4) = 0;
 		*(int*) r = -1;
@@ -99,7 +99,7 @@ read_failed: return 0;
 	if (!ls_ReadVfsDataChecked(&g_1005768, 4, 1, fp)) {
 		return 0;
 	}
-	n = (g_6a23ac >= 0x1003c) ? 0x8000 : 0x2000;
+	n = (ls_SaveVersion >= 0x1003c) ? 0x8000 : 0x2000;
 	if (n > 0) {
 		for (r = (char*) g_fb5760; i < n; i++, r += 0xa) {
 			if (!ls_ReadVfsDataChecked(r, 0xa, 1, fp)) {

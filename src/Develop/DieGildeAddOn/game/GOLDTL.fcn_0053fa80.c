@@ -17,7 +17,7 @@ extern int g_7e4538;
 extern int g_6b89c0;
 extern char g_6b8061;
 extern int g_6b5cf8;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 extern int g_77497c;
 extern int g_7e2aa0;
 extern int g_7746cc;
@@ -131,7 +131,7 @@ void __cdecl fcn_0053fa80(void)
 		fcn_00418ae0(g_6b5cf8);
 		g_6b5cf8 = 0;
 	}
-	g_6b5cc0 = 0;
+	d3_ActiveCameraAnimation = 0;
 	fcn_00510930();
 	fcn_005c80d0();
 	fcn_004bbd50();

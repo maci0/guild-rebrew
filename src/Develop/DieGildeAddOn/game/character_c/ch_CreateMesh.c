@@ -150,7 +150,7 @@ int __cdecl ch_CreateMesh(char* model, char* resource, float* position)
         }
     }
     fcn_00404a00(model, 2, "bewegung/gehen", "stehen/stehen_newnoise");
-    if (g_6b5c34 != 0 && *(int*) (model + 0x22c) != 0) {
+    if (ch_LowPolyMode != 0 && *(int*) (model + 0x22c) != 0) {
         fcn_00404b60(model, 1, "gehen");
         ch_Updatelowpoly(model);
     }

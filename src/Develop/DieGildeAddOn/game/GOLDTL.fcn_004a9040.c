@@ -1,14 +1,14 @@
 
 
 
-typedef struct Ent {
-	char pad0[4];
-	int x4;
-	char pad8[0x21c - 8];
-} Ent;
-// SIZE 0x21c
+#include "entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
 extern float g_664458;
 extern float g_6629e8;
 
@@ -32,8 +32,8 @@ int __cdecl fcn_004a9040(char* a1, char* e, char* a3, char* a4, char* out)
 	d2 = fcn_0050f980(idx[1], idx[0], 1);
 	if (!(d1 > g_6629e8) || !(d2 > g_6629e8)) {
 		out[0] = 7;
-		*(int*) (out + 4) = ((Ent*)g_7f4ca0)[idx[0]].x4;
-		*(int*) (out + 8) = ((Ent*)g_7f4ca0)[idx[1]].x4;
+		*(int*) (out + 4) = ((ENTITY_RECORD*)g_7f4ca0)[idx[0]].entity_id;
+		*(int*) (out + 8) = ((ENTITY_RECORD*)g_7f4ca0)[idx[1]].entity_id;
 		return 1;
 	}
 	return 0;

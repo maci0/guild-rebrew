@@ -26,7 +26,7 @@ char* __cdecl fcn_00472880(int idx)
 		return 0;
 	}
 	g_772524 = d2_GetResourceData(idx);
-	g_67d378 = idx;
+	d2_CurrentFont = idx;
 	g_1015ea4 = *(unsigned short*) (g_772524 + 8);
 	if (idx == g_67d398) {
 		g_67d380 = 8;

@@ -80,7 +80,7 @@ void __cdecl fcn_005a86a0(void* a0)
 					(*(void**) &g_67a370, 4, (char*) t + 0x214, 0);
 			}
 		}
-		sub = *(int*) &g_6791d0;
+		sub = *(int*) &evt_LastGfxScriptId;
 		fcn_00438b40(*(void**) &g_6b8014, (char*) *(void**) &g_6b8014 + 0x5c);
 		fcn_00438cb0(*(void**) &g_6b8014, (char*) *(void**) &g_6b8014 + 0x90);
 		saved688 = (char*)g_774688;
@@ -155,8 +155,8 @@ void __cdecl fcn_005a86a0(void* a0)
 				(*(void**) &g_67a370, 5, (char*) t + 0x298, 0);
 		}
 	}
-	if (*(int*) &g_6791d0 != -1) {
-		fcn_005312d0(*(int*) &g_6791d0);
+	if (*(int*) &evt_LastGfxScriptId != -1) {
+		fcn_005312d0(*(int*) &evt_LastGfxScriptId);
 	}
 	fcn_0043a9c0(3);
 	fcn_004432d0(save10, 0);

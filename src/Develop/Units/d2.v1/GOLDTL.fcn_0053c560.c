@@ -12,10 +12,10 @@
 #include "Develop/Units/d3/d3_camera.h"
 #include "client_lighting.h"
 
-extern int g_6791d0;
+extern int evt_LastGfxScriptId;
 extern int g_67a370;
 extern int g_6b5cbc;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 extern int g_1040490;
 extern int g_1040494;
 extern int g_14ce8e0;
@@ -116,7 +116,7 @@ int __cdecl fcn_0053c560(void)
 				fn(base, 4, sub + 0x214, 0);
 		}
 	}
-	oldSound = g_6791d0;
+	oldSound = evt_LastGfxScriptId;
 	if (g_6b8300 != 0) {
 		base = g_6b8300;
 		*(unsigned char *) (base + 0x8036) =
@@ -161,7 +161,7 @@ int __cdecl fcn_0053c560(void)
 					}
 					fcn_00433780(g_6b8014);
 					g_6b5cbc = 0;
-					g_6b5cc0 = 0;
+					d3_ActiveCameraAnimation = 0;
 					fcn_00412cf0(g_6b8014, &parentA, &parentB, 0x50, 8);
 				}
 				flag = 0;
@@ -210,7 +210,7 @@ slot_found:
 				fcn_00471af0(obj, 0);
 				fcn_00433780(g_6b8014);
 				g_6b5cbc = 0;
-				g_6b5cc0 = 0;
+				d3_ActiveCameraAnimation = 0;
 				fcn_00412cf0(g_6b8014,
 				    (Vec3 *) (g_6b8014 + 0x114),
 				    (Vec3 *) (g_6b8014 + 0x120), 0x50, 8);
@@ -278,7 +278,7 @@ slot_found:
 	}
 	fcn_00433780(g_6b8014);
 	g_6b5cbc = 0;
-	g_6b5cc0 = 0;
+	d3_ActiveCameraAnimation = 0;
 	if (spr != 0)
 		fcn_00473150(spr);
 	return ret;

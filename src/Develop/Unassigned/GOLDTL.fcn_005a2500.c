@@ -1,15 +1,15 @@
 
 
 
-typedef struct
-{
-	unsigned short x0;
-	char pad2[0x21a];
-} Player;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+
 
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl fcn_005463a0(int, int, int, int, int);
@@ -23,7 +23,7 @@ void __cdecl fcn_005a2500(char* a, char* b)
 
 	e = fcn_00502cd0(*(int*) (b + 0x14), 1, 0, 0x12d);
 	if (e != 0 && fcn_005463a0(2, 0, 0x2a, 3, *(int*) (a + 1)) != 0) {
-		if (((Player*)g_7f4ca0)[g_774970].x0 == *(unsigned short*) (a + 0x27)) {
+		if (((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_index == *(unsigned short*) (a + 0x27)) {
 			fcn_005a1e40(a, e);
 		}
 		else {

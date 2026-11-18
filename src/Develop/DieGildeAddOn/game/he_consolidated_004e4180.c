@@ -12,7 +12,7 @@ void __cdecl fcn_004e3640(void);
 extern int g_772f3c;
 extern unsigned char* g_7746c4;
 extern unsigned char* g_7746c8;
-extern int* g_772f40;
+extern int* cut_ActiveCutscene;
 extern int g_77250c;
 extern unsigned char* g_772f50;
 extern unsigned char* lpGebaeudePROT;
@@ -78,7 +78,7 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 	}
 	if ((g_7746c4 == entity && *(unsigned short*) (entity + 0x29) == sceneId) ||
 	    (g_7746c8 == entity && *(unsigned short*) (entity + 0x29) == sceneId)) {
-		if (*((unsigned char*) g_772f40 + 0x26) & 0x20) {
+		if (*((unsigned char*) cut_ActiveCutscene + 0x26) & 0x20) {
 			fcn_00476970(g_77250c);
 		}
 		if (g_772f50) {
@@ -116,7 +116,7 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 			fcn_0043aa30(flags & 0xfd);
 			g_772f48 &= 0xfffffffd;
 		}
-		if (*((unsigned char*) g_772f40 + 0x26) & 0x20) {
+		if (*((unsigned char*) cut_ActiveCutscene + 0x26) & 0x20) {
 			fcn_00476970(g_77250c);
 		}
 		if (g_772f50) {

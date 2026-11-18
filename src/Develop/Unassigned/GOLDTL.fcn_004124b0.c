@@ -12,7 +12,7 @@ struct DevData {
 	unsigned int app;
 };
 
-typedef int (__stdcall* GetDevData)(void* self, unsigned int cb, DevData* data, unsigned int* n, unsigned int flags);
+#include "client_input.h"
 
 /* Drain the keyboard device. The loop is a do/while on the HRESULT so
  * the failure path is a jl to the tail and GetDeviceData is emitted
@@ -22,7 +22,7 @@ void __cdecl fcn_004124b0(void)
 	DevData ev;
 	unsigned int n;
 	int one;
-	int* dev;
+	INPUT_DEVICE* dev;
 	int hr;
 	unsigned int ofs;
 	unsigned char cur;
@@ -32,9 +32,9 @@ void __cdecl fcn_004124b0(void)
 	*(unsigned char*) 0x14cf950 = 0;
 	one = 1;
 	do {
-		dev = *(int**) 0x14ce90c;
+		dev = *(INPUT_DEVICE**) 0x14ce90c;
 		n = (unsigned int) one;
-		hr = ((GetDevData) ((int*) *dev)[10])(dev, 0x14, &ev, &n, 0);
+		hr = dev->vtbl->GetDeviceData(dev, 0x14, (LPDIDEVICEOBJECTDATA) &ev, (LPDWORD) &n, 0);
 		if (hr < 0) {
 			break;
 		}

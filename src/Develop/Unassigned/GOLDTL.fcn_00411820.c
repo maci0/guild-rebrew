@@ -1,31 +1,31 @@
 
 
-#include <windows.h>
+#include "client_input.h"
 
-typedef struct Com Com;
 
-// SIZE 0x38
-typedef struct {
-	void* QueryInterface;
-	void* AddRef;
-	void* Release;
-	HRESULT (__stdcall* CreateDevice)(Com* self, const void* guid, Com** dev, void* outer);
-	void* m10;
-	void* m14;
-	HRESULT (__stdcall* SetProperty)(Com* self, const void* prop, void* hdr);
-	void* m1c;
-	void* m20;
-	void* m24;
-	void* m28;
-	HRESULT (__stdcall* SetDataFormat)(Com* self, const void* fmt);
-	HRESULT (__stdcall* SetEventNotification)(Com* self, HANDLE ev);
-	HRESULT (__stdcall* SetCooperativeLevel)(Com* self, HWND hwnd, DWORD flags);
-} ComVtbl;
 
-// SIZE 0x4
-struct Com {
-	ComVtbl* vtbl;
-};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SIZE 0x14
 typedef struct {
@@ -36,12 +36,12 @@ typedef struct {
 	DWORD dwData;
 } PropDword;
 
-extern HWND g_14ce89c;
+
 extern HINSTANCE g_14ce8a4;
 extern int g_6b5c88;
-extern Com* g_14cf954;
-extern Com* g_14ce8a0;
-extern Com* g_14ce90c;
+
+
+
 extern int g_14ce920[];
 extern short g_14ce922;
 extern short g_14ce924;
@@ -66,8 +66,8 @@ extern char g_6772d8[];
 
 HRESULT __stdcall DirectInput8Create(HINSTANCE hinst, DWORD version, const void* iid, void** out, void* outer);
 void __cdecl fcn_00411780(int a1, int a2, char* fmt, ...);
-int __cdecl fcn_004117c0(int a1);
-int __cdecl fcn_004117f0(int a1);
+
+
 int __cdecl fcn_00411590(void);
 
 int __cdecl fcn_00411820(HWND hwnd, HINSTANCE hinst, int flags)

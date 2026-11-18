@@ -3,18 +3,18 @@ extern int g_773d40;
 extern char* g_773d44;
 
 // SIZE 0x44
-typedef struct HeadSet {
-	char pad0[4];
-	char name[0x30];
-	int head[4];
-} HeadSet;
+#include "Develop/DieGildeAddOn/game/head_set.h"
+
+
+
+
 
 char* __cdecl fcn_0064d1a0(char* s, int c);
 int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...);
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
 /* ADDRESS: GOLDTL 0x004fdd70 */
-void __cdecl fcn_004fdd70(HeadSet* hs)
+void __cdecl fcn_004fdd70(HEAD_SET* hs)
 {
 	char base[0x80];
 	char kind[0x80];

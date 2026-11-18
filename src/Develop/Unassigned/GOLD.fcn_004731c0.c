@@ -1,5 +1,6 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern GuiWin g_00f8f120[];
+#include "Develop/Units/d2.v1/gold_window.h"
+extern GOLD_GUI_WINDOW g_00f8f120[];
 int __cdecl fcn_0046cd70(short, short, int);
 void __cdecl fcn_004730d0(int, char*);
 void __cdecl fcn_00472c70(void*, int*, int*);
@@ -8,7 +9,7 @@ void __cdecl ReportClientMessage(const char*);
 /* ADDRESS: GOLD 0x004731c0 */
 int __cdecl fcn_004731c0(short x, short y, int image, int window)
 {
-    GuiWin* owner;
+    GOLD_GUI_WINDOW* owner;
     int index;
     int height;
 
@@ -21,11 +22,11 @@ int __cdecl fcn_004731c0(short x, short y, int image, int window)
     }
     owner->list[owner->count] = fcn_0046cd70(
         x + owner->x - *(short*) ((char*) owner + 0x258),
-        y + owner->y - owner->scroll, image);
+        y + owner->y - (short) owner->scroll, image);
     index = owner->list[owner->count];
     if (index != -1) {
         fcn_004730d0(index, (char*) owner);
-        g_00f8f080[index].parent = owner;
+        g_00f8f080[index].parent = (void*) owner;
         g_00f8f080[index].f22 = 0;
         g_00f8f080[index].f24 = g_00fb9070;
         g_00f8f080[index].f1e = 0;

@@ -324,7 +324,7 @@ label_46a7ab:
 				fcn_0046bd20(dx, dy, *(int*) (ent + 0x18), *(int*) (ent + 0x1c),
 				             g_77250c, (char*) *(int*) (ent + 0x88), flags);
 				*(int*) (ent + 0x1c) = g_772548;
-				fcn_00472880(g_67d378);
+				fcn_00472880(d2_CurrentFont);
 				break;
 			case 0x45:
 				if (*(int*) (ent + 0x40)) {

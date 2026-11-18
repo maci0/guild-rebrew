@@ -9,7 +9,7 @@ typedef struct {
 	float rot[3];
 } View;
 
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 extern int g_6b5cbc;
 extern float g_14ce880[3];
 extern float g_7e3a40[3];
@@ -35,17 +35,17 @@ void __cdecl fcn_00532ef0(void)
 	char* e;
 
 	done = 0;
-	if (g_6b5cc0 != 0) {
+	if (d3_ActiveCameraAnimation != 0) {
 		if (CompareVector3WithinTolerance(g_14ce880, g_7e3a40, 0.1f)) {
 			fcn_00433780(((View*)g_6b8014));
-			g_6b5cc0 = 0;
+			d3_ActiveCameraAnimation = 0;
 			g_6b5cbc = 0;
 			done = 1;
 			fcn_00438b40(((View*)g_6b8014), g_7e3a40);
 			fcn_00438cb0(((View*)g_6b8014), g_7e3a50);
 		} else {
 			fcn_00433780(((View*)g_6b8014));
-			g_6b5cc0 = 0;
+			d3_ActiveCameraAnimation = 0;
 			g_6b5cbc = 0;
 		}
 	}

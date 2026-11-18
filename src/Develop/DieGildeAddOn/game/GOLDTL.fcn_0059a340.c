@@ -20,7 +20,7 @@ extern int g_774658;
 extern int g_14ce8d4;
 extern int g_14ce8e4;
 extern int g_7746b0;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_6a25dc;
@@ -200,7 +200,7 @@ void __cdecl fcn_0059a340(void)
 			}
 		}
 		fcn_0059a2a0();
-		if (g_14ce8d4 && !g_14ce8e4 && g_7746b0 && !g_6b5cc0)
+		if (g_14ce8d4 && !g_14ce8e4 && g_7746b0 && !d3_ActiveCameraAnimation)
 			fcn_0052cbb0(g_7746b0);
 		if (g_100f1dc != -1 && g_67d370 == g_6a25dc)
 			fcn_00599350();

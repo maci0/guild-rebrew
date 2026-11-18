@@ -86,19 +86,19 @@ int __cdecl fcn_00522510(void* stream)
 				return 0;
 			}
 
-			if (g_6a23ac >= 0x10028) {
+			if (ls_SaveVersion >= 0x10028) {
 				if (!ls_ReadVfsDataChecked(building_entity + 0x49, 4, 1, stream)) {
 					return 0;
 				}
 			}
 
-			if (g_6a23ac < 0x10032) {
+			if (ls_SaveVersion < 0x10032) {
 				if (!ls_ReadVfsDataChecked(&legacy_value, 4, 1, stream)) {
 					return 0;
 				}
 			}
 
-			if (g_6a23ac >= 0x10057) {
+			if (ls_SaveVersion >= 0x10057) {
 				if (!ls_ReadVfsDataChecked(building_entity + 0x4d, 4, 1, stream)) {
 					return 0;
 				}
@@ -148,7 +148,7 @@ int __cdecl fcn_00522510(void* stream)
 				}
 			}
 			else if (building_entity[0] == 0x48 || building_entity[0] == 0x49 || building_entity[0] == 0x4a) {
-				if (g_6a23ac >= 0x10047) {
+				if (ls_SaveVersion >= 0x10047) {
 					load_result = ls_LoadGraveyardData(stream, (unsigned char*) building_entity);
 				}
 				else {
@@ -163,7 +163,7 @@ int __cdecl fcn_00522510(void* stream)
 				}
 			}
 			else if (building_entity[0] == 0x4b || building_entity[0] == 0x4c || building_entity[0] == 0x4d) {
-				if (g_6a23ac >= 0x10049) {
+				if (ls_SaveVersion >= 0x10049) {
 					load_result = ahm_AllocAhmInfo(stream, (int) building_entity);
 				}
 				else {
@@ -187,7 +187,7 @@ int __cdecl fcn_00522510(void* stream)
 			}
 
 		label_tail:
-			if (g_6a23ac >= 0x10043) {
+			if (ls_SaveVersion >= 0x10043) {
 				if (!ls_ReadVfsDataChecked(building_entity + 0x99, 0x10, 1, stream)) {
 					return 0;
 				}

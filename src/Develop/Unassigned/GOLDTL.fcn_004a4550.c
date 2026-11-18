@@ -1,18 +1,18 @@
-typedef struct Share {
-	unsigned char kind;
-	char pad[3];
-	float val;
-} Share;
+#include "client_method_registry.h"
 
-typedef struct Deal {
-	char pad0[0x30];
-	Share a[4];
-	char pad50[0x20];
-	Share b[4];
-	unsigned char flags;
-	char pad91[3];
-} Deal;
-// SIZE 0x94
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 typedef struct Rate {
 	float f;
@@ -29,19 +29,19 @@ typedef struct Actor {
 	unsigned char flags;
 } Actor;
 
-extern char g_1008540[];
+extern AM_METHOD g_1008540[];
 
 /* ADDRESS: GOLDTL 0x004a4550 */
 int __cdecl fcn_004a4550(float* s1, float* s2, int idx, Actor* e)
 {
-	Deal* t;
+	AM_METHOD* t;
 	float k;
 	int found;
 	int i;
 
 	*s1 = 0;
 	*s2 = 0;
-	t = &((Deal*)g_1008540)[idx];
+	t = &g_1008540[idx];
 	if (t->flags & e->flags) {
 		k = 40.0f;
 		found = 1;
@@ -50,18 +50,18 @@ int __cdecl fcn_004a4550(float* s1, float* s2, int idx, Actor* e)
 		found = 0;
 	}
 	for (i = 0; !found && i < 4; i++) {
-		if (t->a[i].kind == e->kind && t->a[i].val > 0.0f) {
+		if (t->effects[i].type == e->kind && t->effects[i].value > 0.0f) {
 			found = 1;
 		}
 	}
 	for (i = 0; !found && i < 4; i++) {
-		if (t->b[i].kind == e->kind && t->b[i].val > 0.0f) {
+		if (t->other_effects[i].type == e->kind && t->other_effects[i].value > 0.0f) {
 			found = 1;
 		}
 	}
 	for (i = 0; i < 4; i++) {
-		*s1 += t->a[i].kind == e->kind ? t->a[i].val / k * e->rate[t->a[i].kind].f : 0.0f;
-		*s2 += t->b[i].kind == e->kind ? t->b[i].val / k * e->rate[t->b[i].kind].f : 0.0f;
+		*s1 += t->effects[i].type == e->kind ? t->effects[i].value / k * e->rate[t->effects[i].type].f : 0.0f;
+		*s2 += t->other_effects[i].type == e->kind ? t->other_effects[i].value / k * e->rate[t->other_effects[i].type].f : 0.0f;
 	}
 	return found;
 }

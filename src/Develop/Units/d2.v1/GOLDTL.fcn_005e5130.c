@@ -12,22 +12,22 @@ typedef struct
 } Req;
 // SIZE 0x50
 
-// SIZE 0x21c
-typedef struct
-{
-	char pad0[0x1cc];
-	int flags;
-	char pad1d0[0x4c];
-} House;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+
 extern int g_14b5bc0;
 extern char* g_14b5bc8;
 extern char g_6b5c60[];
 
 void __cdecl fcn_00526120(int, int);
-int __cdecl fcn_00525f60(House*, int);
+int __cdecl fcn_00525f60(ENTITY_RECORD*, int);
 int __cdecl fcn_005cd440(Req*, char*, char*, void*);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_005e4e50(void);
@@ -41,11 +41,11 @@ void __cdecl fcn_005e5130(void)
 	Req* p;
 	int n;
 
-	if (((House*)g_7f4ca0)[g_774970].flags & 0x20000) {
+	if (((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_flags & 0x20000) {
 		fcn_00526120(g_14b5bc0, 4);
 		return;
 	}
-	if (fcn_00525f60(&((House*)g_7f4ca0)[g_774970], 1)) {
+	if (fcn_00525f60(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 1)) {
 		n = 0x50;
 		p = &req;
 		__asm {

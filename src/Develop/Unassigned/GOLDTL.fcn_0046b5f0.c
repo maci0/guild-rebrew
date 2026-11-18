@@ -141,11 +141,11 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 				flag = 1;
 				break;
 			case '[':
-				tex = (char*) d2_GetResourceData(*(int*) 0x67d3b4 + (g_67d378 - g_67d398) * 2);
+				tex = (char*) d2_GetResourceData(*(int*) 0x67d3b4 + (d2_CurrentFont - g_67d398) * 2);
 				special = 0;
 				break;
 			case ']':
-				tex = (char*) d2_GetResourceData(*(int*) 0x67d3b4 + (g_67d378 - g_67d398) * 2);
+				tex = (char*) d2_GetResourceData(*(int*) 0x67d3b4 + (d2_CurrentFont - g_67d398) * 2);
 				special = 1;
 				break;
 			}
@@ -153,10 +153,10 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 		if (rec->b104 & 0x40) {
 			fcn_0046bd00(rec->b100, rec->b101, rec->b102);
 			draw = fcn_0047cd20;
-			back = g_67d378;
-			if (g_67d378 == 0x55) {
+			back = d2_CurrentFont;
+			if (d2_CurrentFont == 0x55) {
 				fcn_00472880(0x53);
-			} else if (g_67d378 == 0x56) {
+			} else if (d2_CurrentFont == 0x56) {
 				fcn_00472880(0x54);
 			}
 		} else {
@@ -237,7 +237,7 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 				rem--;
 			}
 		}
-		if ((rec->b104 & 0x40) && g_67d378 != back) {
+		if ((rec->b104 & 0x40) && d2_CurrentFont != back) {
 			fcn_00472880(back);
 		}
 	}

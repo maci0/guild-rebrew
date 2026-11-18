@@ -955,13 +955,12 @@ definition_hash = "c7853f763e1cce75e563c0d80d0863726c44ac87ab552b135ef04f80b1cb1
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x005f38a0"]
 file = "src/client_sound.h"
-name = "g_677680"
+name = "d3snd_SourceCount"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
-status = "DISPLACED"
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
+updated_by = "rename"
+updated_at = "2026-11-18T18:57:39+00:00"
 
 ["GOLD.0x005f38a0".verification]
 status = "DISPLACED"
@@ -5180,13 +5179,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x006791d0"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_00429fe0.c"
-name = "g_6791d0"
+name = "evt_LastGfxScriptId"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T18:48:41+00:00"
 
 ["GOLDTL.0x006791d0".verification]
 status = "DISPLACED"
@@ -6806,13 +6804,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x00772f40"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_004c67c0.c"
-name = "g_772f40"
+name = "cut_ActiveCutscene"
 kind = "GLOBAL"
 type = "int *"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T18:36:30+00:00"
 
 ["GOLDTL.0x00772f40".verification]
 status = "DISPLACED"
@@ -6860,13 +6857,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x00773d38"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_004c5820.c"
-name = "g_773d38"
+name = "cm_LastCrimeId"
 kind = "GLOBAL"
 type = "int"
 section = ".data"
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T18:39:52+00:00"
 
 ["GOLDTL.0x00773d38".verification]
 status = "DISPLACED"
@@ -22054,16 +22050,15 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x006b5cc0"]
 file = "src/Develop/Units/d3/StartObjectTransformAnimation.c"
-name = "g_6b5cc0"
+name = "d3_ActiveCameraAnimation"
 kind = "GLOBAL"
 type = "int"
 size = 4
 section = ".data"
 storage_kind = "alias"
 note = "Four-byte declaration view accessed by TL object-animation callers in initialized .data; reference bytes are zero. No allocation, storage owner or complete backing extent established. Existing numeric name retained; inferred meaning pending. Function comparisons do not verify data."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T18:44:49+00:00"
 
 ["GOLDTL.0x006b5cc0".verification]
 status = "DISPLACED"
@@ -22112,15 +22107,14 @@ definition_hash = "0409d6a5209941d596ce0f2b8681128494db2b411ea607ddaf986a7088747
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x006f0d80"]
 file = "src/Develop/DieGildeAddOn/game/cutscene_clock.h"
-name = "g_772f30"
+name = "cut_CurrentTick"
 kind = "DATA"
 type = "int"
 storage_kind = "alias"
 section = ".data"
 note = "Inferred scalar access view for the cutscene clock; complete backing allocation and storage owner remain unresolved."
-updated_by = "verify"
-updated_at = "2026-10-17T12:44:33+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-18T18:54:34+00:00"
 
 ["GOLD.0x006f0d80".verification]
 status = "DISPLACED"

@@ -62,12 +62,12 @@ typedef struct {
 	unsigned char flags;		/* +0x30 */
 } Ctx45a9d0;
 
-typedef struct {
-	int nxt;			/* +0x00: (i + 1) % 3 */
-	int prv;			/* +0x04: (i + 2) % 3 */
-} Edge45a9d0;
+#include "Develop/Units/d3/d3_triangle_neighbors.h"
 
-extern Edge45a9d0 g_662c7c[];
+
+
+
+
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* p);
 int __cdecl fcn_00451d70(Point45a9d0* a, Point45a9d0* b, Point45a9d0* c,
@@ -233,13 +233,13 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 				}
 			}
 			pa = (Point45a9d0*) ((char*) pts +
-			    id[g_662c7c[mini].prv] * 0x50);
+			    id[g_662c7c[mini].previous] * 0x50);
 			pb = (Point45a9d0*) ((char*) pts +
-			    id[g_662c7c[mini].nxt] * 0x50);
+			    id[g_662c7c[mini].next] * 0x50);
 			pc = (Point45a9d0*) ((char*) pts +
-			    id[g_662c7c[maxi].prv] * 0x50);
+			    id[g_662c7c[maxi].previous] * 0x50);
 			pd = (Point45a9d0*) ((char*) pts +
-			    id[g_662c7c[maxi].nxt] * 0x50);
+			    id[g_662c7c[maxi].next] * 0x50);
 			ext = mini;
 			if (fabs(pc->y + pd->y - dmax - dmax) >
 			    fabs(pa->y + pb->y - dmin - dmin)) {

@@ -1,12 +1,13 @@
 
 
 #include "gold_gui.h"
+#include "Develop/Units/d2.v1/gold_window.h"
 
-extern GuiWin g_00f8f120[]; /* 0x00f8f120 */
+extern GOLD_GUI_WINDOW g_00f8f120[]; /* 0x00f8f120 */
 extern GuiObj g_00fb1020[]; /* 0x00fb1020 */
 extern int g_006ed958; /* 0x006ed958 */
 extern int g_006ed938; /* 0x006ed938 */
-extern GuiWin* g_006ed980; /* 0x006ed980 */
+extern GOLD_GUI_WINDOW* g_006ed980; /* 0x006ed980 */
 extern char s_005feaf4[]; /* 0x005feaf4 */
 
 void __cdecl fcn_004222b0(const char* msg);

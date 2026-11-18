@@ -3,7 +3,7 @@
 struct VFS_DIR;
 
 extern struct VFS_DIR* g_6b7fdc;
-extern int g_772fd8;
+extern int ahm_PlayerPrototypeCount;
 extern Draw772* g_772fdc;
 extern int g_772fe0;
 extern Rec772fe4* g_772fe4;
@@ -35,21 +35,21 @@ int __cdecl fcn_004ed800(void)
 	if (magic != 0x61486d52) {
 		goto fail;
 	}
-	if (vfs_ReadData((char*) &g_772fd8, 4, 1, f) <= 0) {
+	if (vfs_ReadData((char*) &ahm_PlayerPrototypeCount, 4, 1, f) <= 0) {
 		goto fail;
 	}
-	if (g_772fd8 < 1 || g_772fd8 > 100) {
+	if (ahm_PlayerPrototypeCount < 1 || ahm_PlayerPrototypeCount > 100) {
 		goto fail;
 	}
 	if (g_772fdc != 0) {
 		m_FreeTracked(g_772fdc);
 		g_772fdc = 0;
 	}
-	g_772fdc = (Draw772*) m_alloc(g_772fd8 * 12, "ahm_AllocPlayerPrototypes");
+	g_772fdc = (Draw772*) m_alloc(ahm_PlayerPrototypeCount * 12, "ahm_AllocPlayerPrototypes");
 	if (g_772fdc == 0) {
 		goto fail;
 	}
-	for (i = 0; i < g_772fd8; i++) {
+	for (i = 0; i < ahm_PlayerPrototypeCount; i++) {
 		off = i * 12;
 		if (vfs_ReadData((char*) g_772fdc + off, 1, 1, f) <= 0) {
 			goto fail;
@@ -111,7 +111,7 @@ done:
 		g_772fe4 = 0;
 	}
 	g_772fe0 = 0;
-	g_772fd8 = 0;
+	ahm_PlayerPrototypeCount = 0;
 	return 0;
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)

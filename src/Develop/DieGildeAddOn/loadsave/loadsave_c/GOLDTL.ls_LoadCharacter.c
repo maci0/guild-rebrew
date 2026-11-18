@@ -5,7 +5,7 @@
 extern char* g_6b5c20;
 extern int g_6b8010;
 extern int g_6b7fdc;
-extern int g_6a23ac;
+extern int ls_SaveVersion;
 extern char s_675504[];
 extern char s_6a24a8[];
 extern char s_6a2498[];
@@ -209,9 +209,9 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 	{
 		*(unsigned int*) g_6b5c20 = 0;
 		n = 0;
-		if (g_6a23ac < 0x10044) {
+		if (ls_SaveVersion < 0x10044) {
 			count = 0x300;
-		} else if (g_6a23ac < 0x10058) {
+		} else if (ls_SaveVersion < 0x10058) {
 			count = 0x500;
 		} else {
 			count = 0x7d0;

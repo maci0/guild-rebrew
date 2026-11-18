@@ -1,9 +1,9 @@
 #include "client_types.h"
-typedef entry_100d0c0 fcn_0047e220_entry;
+#include "Develop/DieGildeAddOn/game/production_goods.h"
 // SIZE 0x58
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern entry_100d0c0 g_100d0c0[];
+ 
 
 void __cdecl fcn_004c52d0(int, int);
 
@@ -14,7 +14,7 @@ void __cdecl fcn_0047e220(char* x)
 	int i;
 
 	for (i = 0; i < g_100b0ac; i++) {
-		if (g_100d0c0[i].f3c == 0 && (g_100d0c0[i].flags & 8) == 0)
-			fcn_004c52d0(*(int*) (x + 2), g_100d0c0[i].f0);
+		if (g_100d0c0[i].unk_3c == 0 && (g_100d0c0[i].flags & 8) == 0)
+			fcn_004c52d0(*(int*) (x + 2), g_100d0c0[i].goods_id);
 	}
 }

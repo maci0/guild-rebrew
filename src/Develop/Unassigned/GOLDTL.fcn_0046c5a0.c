@@ -7,7 +7,7 @@ extern int g_102d020;
 extern int g_102d024;
 extern int g_1040490;
 extern int g_1040494;
-extern int g_67d378;
+extern int d2_CurrentFont;
 extern int g_67d380;
 extern int g_67d390;
 extern int g_67d398;
@@ -519,7 +519,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				tailCh = *(char*) 0x67d526;
 			colon_run:
 				*(char*) (span + 0x10119e2) = tailCh;
-				len = (g_67d378 - g_67d398) + g_67d3b4 * 2;
+				len = (d2_CurrentFont - g_67d398) + g_67d3b4 * 2;
 				tmp += 1;
 				len = len * 21;
 				*(int*) (span + 0x1011ae8) = *(short*) (g_772500 + len * 4 + 0x50);

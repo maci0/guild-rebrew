@@ -5,25 +5,25 @@ extern int g_85ab60;
 extern int g_90e090;
 extern unsigned short g_7f4c20[];
 
-typedef struct {
-	int x0;
-	int x4;
-	int x8;
-	unsigned short xc;
-	unsigned short xd;
-	int x10;
-	int x14;
-	int x18;
-	int x1c;
-	int x20;
-	int x24;
-	int x28;
-	int x2c;
-	unsigned char x30;
-	char pad[3];
-} Rec34;
+#include "Develop/Units/d2.v1/d2_dependency_node.h"
 
-extern Rec34 g_7f3f00[];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int __cdecl fcn_0050e780(int i);
 
@@ -31,7 +31,7 @@ int __cdecl fcn_0050e780(int i);
 int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 {
 	char* rec;
-	Rec34 tmp;
+	DEPENDENCY_DIAGRAM_NODE tmp;
 
 	int i;
 	int j;
@@ -71,18 +71,18 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 		if (g_item_def_table[j * 0x41] == 2 || g_item_def_table[j * 0x41] == 6) {
 			break;
 		}
-		g_7f3f00[g_85ab60].x0 = j;
-		g_7f3f00[g_85ab60].x4 = *(unsigned short*) (rec + 0xa3 + i * 4);
-		g_7f3f00[g_85ab60].x8 = *(unsigned short*) (rec + 0xa5 + i * 4);
-		g_7f3f00[g_85ab60].xc = 0xffff;
-		g_7f3f00[g_85ab60].x10 = 0;
-		g_7f3f00[g_85ab60].x14 = 0;
-		g_7f3f00[g_85ab60].x1c = -1;
-		g_7f3f00[g_85ab60].x20 = -1;
-		g_7f3f00[g_85ab60].x24 = -1;
-		g_7f3f00[g_85ab60].x28 = -1;
-		g_7f3f00[g_85ab60].x2c = -1;
-		g_7f3f00[g_85ab60].x30 = 0xff;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].item_id = j;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].parent_a = *(unsigned short*) (rec + 0xa3 + i * 4);
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].parent_b = *(unsigned short*) (rec + 0xa5 + i * 4);
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].depth = 0xffff;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].x = 0;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].y = 0;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].unk_1c = -1;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].unk_20 = -1;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].unk_24 = -1;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].unk_28 = -1;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].unk_2c = -1;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].state = 0xff;
 		g_85ab60++;
 
 	}
@@ -93,7 +93,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 	max = 0;
 	for (i = 0; i < n; i++) {
 		v = fcn_0050e780(i);
-		g_7f3f00[i].xc = (unsigned short) v;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].depth = (unsigned short) v;
 		if (max <= (v & 0xffff)) {
 			max = v & 0xffff;
 		}
@@ -105,11 +105,11 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 		v = 0;
 		for (; i < n; i++) {
 			for (j = i; j < n; j++) {
-				if (g_7f3f00[j].xc < g_7f3f00[i - 1].xc) {
-					tmp = g_7f3f00[i - 1];
-					g_7f3f00[i - 1] = g_7f3f00[j];
+				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].depth < ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i - 1].depth) {
+					tmp = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i - 1];
+					((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i - 1] = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j];
 					v = 1;
-					g_7f3f00[j] = tmp;
+					((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j] = tmp;
 				}
 			}
 		}
@@ -119,7 +119,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 	if (n > 0) {
 		k = 0;
 		for (i = 0; i < n; i++) {
-			if (g_7f3f00[i].xc > k) {
+			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].depth > k) {
 				k++;
 				g_7f4c20[k] = (unsigned short) i;
 			}
@@ -130,7 +130,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 	span = a2 / (v0 * 2);
 	v = span - 0x18;
 	for (i = 0; i < v0; i++) {
-		g_7f3f00[i].x10 = v;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x = v;
 		v += span * 2;
 	}
 	for (k = 1; k < g_90e090; k++) {
@@ -140,25 +140,25 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 			sum = 0;
 			num = 0;
 			for (h = 0; h < v; h++) {
-				if (g_7f3f00[h].x0 == g_7f3f00[i].x4
-				    || g_7f3f00[h].x0 == g_7f3f00[i].x8) {
-					sum += g_7f3f00[h].x10;
+				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_a
+				    || ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_b) {
+					sum += ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x;
 					num++;
 				}
 			}
 			if (num != 0) {
 				sum /= num;
 			}
-			g_7f3f00[i].x10 = sum;
+			((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x = sum;
 		}
 		do {
 			n = 0;
 			for (i = v + 1; i < j; i++) {
 				for (h = i; h < j; h++) {
-					if (g_7f3f00[h].x10 < g_7f3f00[i - 1].x10) {
-						tmp = g_7f3f00[i - 1];
-						g_7f3f00[i - 1] = g_7f3f00[h];
-						g_7f3f00[h] = tmp;
+					if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x < ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i - 1].x) {
+						tmp = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i - 1];
+						((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i - 1] = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h];
+						((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h] = tmp;
 						n = 1;
 					}
 				}
@@ -166,7 +166,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 		} while (n);
 		for (i = v; i < j; i++) {
 			for (h = i; h < j; h++) {
-				if (g_7f3f00[h].x10 != g_7f3f00[i].x10) {
+				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x != ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x) {
 					break;
 				}
 			}
@@ -176,17 +176,17 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 				half = d >> 1;
 				acc = 0;
 				for (h = i; h < i + len; h++) {
-					g_7f3f00[h].x10 += acc / (len - 1) - half;
+					((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x += acc / (len - 1) - half;
 					acc += d;
 				}
 			}
 		}
 		for (i = v; i < j; i++) {
 			for (h = i + 1; h < j; h++) {
-				if (g_7f3f00[h].x10 - g_7f3f00[i].x10 < 0x50) {
-					d = (g_7f3f00[i].x10 - g_7f3f00[h].x10 + 0x50) >> 1;
-					g_7f3f00[i].x10 -= d;
-					g_7f3f00[h].x10 += d;
+				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x - ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x < 0x50) {
+					d = (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x + 0x50) >> 1;
+					((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x -= d;
+					((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x += d;
 				}
 			}
 		}
@@ -195,11 +195,11 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 	max = -1;
 	for (k = 0; k < g_90e090; k++) {
 		for (i = g_7f4c20[k]; i < g_7f4c20[k + 1]; i++) {
-			if (g_7f3f00[i].x10 <= min) {
-				min = g_7f3f00[i].x10;
+			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x <= min) {
+				min = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x;
 			}
-			if (g_7f3f00[i].x10 >= max) {
-				max = g_7f3f00[i].x10;
+			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x >= max) {
+				max = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x;
 			}
 		}
 	}
@@ -208,7 +208,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 		base = (int) -((float) (min - 0x18) * scale);
 		for (k = 0; k < g_90e090; k++) {
 			for (i = g_7f4c20[k]; i < g_7f4c20[k + 1]; i++) {
-				g_7f3f00[i].x10 = (int) ((float) g_7f3f00[i].x10 * scale) + base;
+				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x = (int) ((float) ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x * scale) + base;
 			}
 		}
 	}
@@ -218,7 +218,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 		v = h;
 	}
 	for (i = 0; i < g_85ab60; i++) {
-		g_7f3f00[i].x14 = g_7f3f00[i].xc * v / g_90e090 + 0x10;
+		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].depth * v / g_90e090 + 0x10;
 	}
 	return 0;
 }

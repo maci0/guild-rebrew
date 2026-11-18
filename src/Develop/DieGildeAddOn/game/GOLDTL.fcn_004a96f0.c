@@ -1,12 +1,12 @@
-typedef struct Ent {
-	unsigned short id;
-	char pad2[2];
-	int seed;
-	char pad8[0x21c - 8];
-} Ent;
-// SIZE 0x21c
+#include "entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int n, int* lim, float a4, float r, unsigned short* ids);
@@ -25,6 +25,6 @@ int __cdecl fcn_004a96f0(int a1, char* e, int a3, int a4, char* out)
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = ((Ent*)g_7f4ca0)[id].seed;
+	*(int*) (out + 4) = ((ENTITY_RECORD*)g_7f4ca0)[id].entity_id;
 	return 1;
 }

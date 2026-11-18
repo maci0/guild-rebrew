@@ -90,8 +90,8 @@ done:
 	g_100f1c0 = g_100f1e8;
 	g_100f944 = g_100f890;
 	g_100f1c4 = g_100f1ec;
-	if (g_67d378 != -1) {
-		sel = g_67d378;
+	if (d2_CurrentFont != -1) {
+		sel = d2_CurrentFont;
 	}
 	for (i = 0; i < 0x60; i++) {
 		if ((((Win*)g_1015f40)[i].style & 0x200) != 0 && ((Win*)g_1015f40)[i].tip_on == 1 && ((Win*)g_1015f40)[i].tip != 0) {

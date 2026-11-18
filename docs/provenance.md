@@ -30041,3 +30041,242 @@ fcn_004f9f70 (io_FormatTextBuffer dispatch helper, native 286 bytes) previously 
 - 2026-11-19: Reversed the r5b46 keep in src/Develop/Unassigned/GOLDTL.fcn_00436a00.c (GOLDTL 0x004321a0 / GOLD 0x004324e0). Its unsigned short local raised aligned pairs 26/30 to 29/30 but grew the object from 65 to 67 bytes against native 65, which the matching rules do not accept as a keep. Restored the e57817ff0 version: 26/30 NEAR_MATCHING at native size on both targets, GOLDTL 0x00436a00 54/54 RELOC unchanged. Decision owner: lead.
 - 2026-11-19: src/Develop/DieGildeAddOn/game/game_data.h declares 242 client globals (GoldTL address labels) that every user declared with one plain C type, in a block guarded by `#if !defined(REBREW_SERVER)`; 590 client sources replace their matching local externs with an include of game_data.h. Why: one canonical declaration per shared global (AGENTS.md global ownership). Excluded: globals another header already owns, files whose other locals conflict with game_data.h types (82 compile failures, kept local; list .scratch/hdr/s2-m/conflicts.txt), GOLDTL.fcn_00541150.c (the include cost 3 aligned pairs, 196 -> 193), the 7 server-built TUs (spiel.c, command.c, lobbycommands.c, alchemistry_logic.c, friedhof_logic.c, zufall.c, loadsave.c: moving their declarations changed 90 server raw-link bytes, so they keep local declarations), and 520 files not yet measured. Verified: --no-promote test of every committed file, no status or aligned-pair loss; both clients link; server raw link byte-identical; lint 0/0 after rebinding d3.universe-view and event.validator_view (header context changed, definitions unchanged). Decision owner: lead, at the user's request for better shared headers.
 - 2026-11-19: Removed 23 `src/*_gconf.h` headers. They held minority-type externs moved out of their .c files on 2026-10-26 so the data conflict check no longer saw them. Four had no includer; for 19, the include line became the canonical extern (line count unchanged) and each use an explicit view of the width the file reads (`(*(int *)&g_772e98)`, `((char *)g_772628)`). GOLDTL.fcn_005373e0.c and GOLDTL.fcn_0053fa80.c pass the callback as `(void*) fcn_00538060` (native 0x538060 is code, not data), as the other users already do. Verified: --no-promote test of each file, no status or aligned-pair change; gate as above. Remaining 25 gconf headers: second names for one address (g_entity_type_table for lpGebaeudePROT 0x868050, g_slot_table for g_7f4ca0, g_current_year for g_7f4c00), struct views, and files on active lanes. Decision owner: lead.
+
+2026-11-19 | Added D3_TRIANGLE_NEIGHBORS shared declaration and converted fcn_00456080; native 0x4561d9 and 0x4561e9 read the two triangle-neighbor words at 8-byte stride. Decision owner: struct lane 23. Verification: GOLDTL SIZE_MISMATCH 124 aligned pairs before and after, no promotion.
+
+- 2026-11-19: Defined HE_AP_EVENT in Develop/DieGildeAddOn/game/he_ap_event.h and moved the existing he_tables.h layout behind a compatibility typedef; converted he_RegisterApEvent. Native 0x546f0a proves stride 0x50 and 0x546f58-0x546f6a establish fields. Decision owner: struct lane 25. Verification: no-promote source-target tests retain 42/47 aligned pairs and RELOC for GOLDTL and GOLD.
+
+2026-11-19: Unified GOLDTL 0x004a4410 method registry view with existing AM_METHOD and AM_EFFECT, preserving the source line count. Native 0x4a4439, 0x4a44dd and 0x4a44ac establish the 0x94-byte method and two effect blocks. Decision owner: struct lane 19. Verification: source-targets no-promote RELOC 100/102 aligned pairs before and after; relink pending.
+- 2026-11-19: Added shared HEAD_SET layout and converted fcn_004fd9d0. Native 0x004fd9f3 reads the key and 0x004fd9fe advances 0x44 bytes; 0x004fdd8d and 0x004fde9c evidence the name and four head entries. Source-target no-promote comparison retained GOLDTL and GOLD RELOC, 42/44 aligned pairs each. Decision owner: struct lane 16.
+
+2026-11-19 | Reused D3_TRIANGLE_NEIGHBORS in fcn_0045a9d0; native 0x45aea3 and 0x45ae86 read the two 8-byte-stride neighbor fields. Decision owner: struct lane 23. Verification: GOLDTL SIZE_MISMATCH 249 aligned pairs before and after, no promotion.
+
+- 2026-11-19: Introduced goods_plan.h shared goods planning record and converted fcn_00486640; native 0x48666d proves 0x40 stride, 0x486850 reads float price, 0x486690/0x4866b2 distinguish stock and allocation. Decision owner: struct lane 21. Verification: GoldTL SIZE_MISMATCH 123 -> 123 aligned pairs, lint clear; other targets unbound.
+
+- 2026-11-19: Added the shared D2 window view header and converted fcn_00471a30 to the existing D2_WIN layout; native 0x46f10e proves the 0x3cc stride, and 0x46f167 and 0x46f170 read children and count. Decision owner: struct lane 17. Verification: GOLDTL source-target no-promote retains RELOC 54/58 aligned pairs; relink pending.
+| 2026-11-19 | Shared crime record header and save loader view | Reconciled the 0x2d-stride record; native 0x4f675b steps 0x2d and 0x4f595f/0x4f596a use a signed count. | Decision owner: struct lane 18 | GOLDTL fcn_004f4c40 RELOC, 234 -> 234 aligned pairs; no-promote source-target test. |
+
+2026-11-19 | Shared AI supply candidate record for fcn_00486640 in ai_supply_candidate.h | Native candidate stride 0x486897, fields read 0x486785/0x4867a9/0x4867b8 and producer writes 0x503b0d/0x503c7b | Decision owner: struct lane 22 | GOLDTL aligned pairs 123/200 to 123/200, no-promote; all-target lint clear for source.
+
+2026-11-19: Unified GOLDTL 0x004a4550 with existing AM_METHOD and AM_EFFECT without changing line count. Native 0x4a4579 and 0x4a4611 establish method stride and effect block. Decision owner: struct lane 19. Verification: source-targets no-promote RELOC 97/99 aligned pairs before and after; relink pending.
+- 2026-11-19: Introduced D2_TRAINING_ROW and converted GOLDTL 0x005c7170 to the shared training-row view. Native initialization 0x5c69d9..0x5c6a02 establishes the 0x40 stride and 0x5c71c7 reads the row element at +8. Decision owner: struct lane 24. Verification: source-targets no-promote RELOC 75 -> 75 aligned pairs; file-specific lint clean.
+
+- 2026-11-19: Reused HE_AP_EVENT for the event save writer; native event stride 0x546f0a and field stores 0x546f58-0x546f6a support the layout. Decision owner: struct lane 25. Verification: GOLDTL no-promote aligned pairs 263 -> 263, status SIZE_MISMATCH unchanged.
+
+- 2026-11-19: Converted event aggregation to HE_AP_EVENT fields, following native 0x546fbc-0x546fc7. Decision owner: struct lane 25. Verification: GOLDTL and GOLD remain RELOC with 13 aligned pairs each.
+
+2026-11-19: Unified GOLDTL 0x004964e0 with existing AM_METHOD and AM_EFFECT, preserving line count; native 0x4950fc establishes 0x94-byte registry stride and 0x4a44dd/0x4a44ac establish the two effect blocks. Decision owner: struct lane 19. Verification: source-targets no-promote SIZE_MISMATCH 205/258 aligned pairs before and after; relink pending.
+
+2026-11-19 | Added PRODUCTION_GOODS_RECORD and converted fcn_00487e60 to the shared 0x58-byte view. Native 0x484a0b stores the goods id; 0x484d09 updates 32-bit flags; 0x485088 advances one record. Decision owner: struct lane 23. Verification: GOLDTL and GOLD RELOC, 92 aligned pairs unchanged on each, no promotion.
+- 2026-11-19: Converted fcn_004fda30 and fcn_004fdc40 to the shared HEAD_SET declaration, preserving the 0x44 stride evidenced at native 0x004fd9fe and the indexed table address at 0x004fdccb. Source-target no-promote results remained 122/196 SIZE_MISMATCH and 41/52 RELOC respectively. Decision owner: struct lane 16.
+
+- 2026-11-19: Converted src/Develop/Unassigned/GOLDTL.fcn_00472100.c to the shared D2_WIN window view. Native 0x46f10e establishes the 0x3cc stride and 0x46f167/0x46f170 read children and count. Decision owner: struct lane 17. Verification: Europa1400Gold_TL.exe RELOC 27/30 -> RELOC 27/30; no-promote, relink pending.
+
+2026-11-19 | Converted fcn_0047e220 to PRODUCTION_GOODS_RECORD using the evidenced 32-bit flags at 0x484d09. Decision owner: struct lane 23. Verification: GOLDTL RELOC with 28 aligned pairs unchanged, no promotion.
+
+2026-11-19 | Use AI_SUPPLY_CANDIDATE in fcn_004868d0 | Native stride 0x486b79 and fields 0x486b00/0x486b24/0x486b37 | Decision owner: struct lane 22 | GOLDTL aligned pairs 106/268 to 106/268, no-promote; all-target lint clear for source.
+
+- 2026-11-19: Converted fcn_004868d0 to goods_plan.h; native 0x486b5b stores supplier, 0x486b71 stores requested quantity and 0x486911 reads flags. Decision owner: struct lane 21. Verification: GoldTL SIZE_MISMATCH 106 -> 106 aligned pairs, lint clear; other targets unbound.
+
+- 2026-11-19: Converted second event aggregation to HE_AP_EVENT fields, following native 0x546fec-0x546ff7. Decision owner: struct lane 25. Verification: GOLDTL and GOLD remain RELOC with 13 aligned pairs each.
+
+2026-11-19: Reused INPUT_DEVICE and INPUT_SYSTEM in the shared input header for GOLDTL 0x00411b10 and GOLD 0x00410a50, replacing the local combined COM view while retaining line count. Native 0x411b45 and 0x411b48 establish release and pointer clear. Decision owner: struct lane 19. Verification: source-targets no-promote RELOC 37/37 aligned pairs on both targets before and after; relink pending.
+- 2026-11-19: Converted fcn_004fdd70 to HEAD_SET, unifying the name and four head-index fields evidenced at native 0x004fdd7a, 0x004fdd8d and 0x004fde9c. Source-target no-promote comparison retained GOLDTL NEAR_MATCHING, 97/111 aligned pairs. Decision owner: struct lane 16.
+
+2026-11-19 | Converted fcn_00487d80 recursive production-record view to PRODUCTION_GOODS_RECORD, whose index fields are evidenced at 0x484a11 and flags at 0x484d09. Decision owner: struct lane 23. Verification: GOLDTL RELOC with 76 aligned pairs unchanged, no promotion.
+
+- 2026-11-19: Converted src/Develop/Unassigned/GOLDTL.fcn_00472170.c to the shared D2_WIN window view. Native 0x46f10e establishes the 0x3cc stride and 0x46f167/0x46f170 read children and count. Decision owner: struct lane 17. Verification: Europa1400Gold_TL.exe RELOC 39/41 -> RELOC 39/41; no-promote, relink pending.
+
+- 2026-11-19: Unified the evidence-link view in GOLDTL.fcn_004c9c70.c using evidence_link.h, preserving native field stores at 0x4c9c8d and 0x4c9c97. Both target comparisons remained RELOC with 19 aligned pairs. Decision owner: struct lane 20.
+
+- 2026-11-19: Converted fcn_00486500 to goods_plan.h; native 0x4856e2 stores float price and 0x4855f0 tests parent sentinel. Decision owner: struct lane 21. Verification: GoldTL RELOC 98 -> 98 aligned pairs, lint clear; other targets unbound.
+
+- 2026-11-19: Bound event table clearing to HE_AP_EVENT, whose 0x50 stride is native at 0x546f0a. Decision owner: struct lane 25. Verification: GOLDTL and GOLD remain RELOC with 64 aligned pairs each.
+
+2026-11-19: Replaced the combined local COM view in GOLDTL 0x00411820 with the existing INPUT_SYSTEM and INPUT_DEVICE declarations; native 0x4118ee/0x41191a/0x4119e0 establish factory and device calls. Decision owner: struct lane 19. Verification: source-targets no-promote RELOC 260/281 aligned pairs before and after, line count unchanged; relink pending.
+
+2026-11-19 | Introduce HE_ACTION in he_action.h and use it in he_fn_Handlung | Native stride 0x546040, kind write 0x5460de and pointer restore 0x524d4e | Decision owner: struct lane 22 | GOLDTL and GOLD aligned pairs 55/86 to 55/86, no-promote; all-target lint clear for source.
+
+2026-11-19 | Converted fcn_0047e270 production-record view to PRODUCTION_GOODS_RECORD; native 0x484a11 and 0x484d09 establish building index and dword flags. Decision owner: struct lane 23. Verification: GOLDTL SIZE_MISMATCH with 232 aligned pairs unchanged, no promotion.
+
+- 2026-11-19: Converted src/Develop/Unassigned/GOLDTL.fcn_00472250.c to the shared D2_WIN window view. Native 0x46f10e establishes the 0x3cc stride and 0x46f167/0x46f170 read children and count. Decision owner: struct lane 17. Verification: Europa1400Gold_TL.exe RELOC 26/29 -> RELOC 26/29; no-promote, relink pending.
+- 2026-11-19: Added the GOLD_GUI_WINDOW view and converted fcn_0052e890, retaining original g_f8f110 and g_f8f120 relocation addends. Native 0x0052e8af computes 0x3c4 indexing; 0x0052ea47 and 0x0052ea51 write the 0x248 and 0x264 fields. Source-target no-promote comparison retained GOLD RELOC, 128/133 aligned pairs; the relocation bindings remain unresolved and require a later link review. Decision owner: struct lane 16.
+
+- 2026-11-19: Added client_queued_packet.h and converted packet enqueue to its shared packed record, retaining the existing struct tag for declarations. Native 0x4c4351-0x4c4358 proves stride and 0x4c4412-0x4c4431 proves link offsets. Decision owner: struct lane 25. Verification: GOLDTL and GOLD remain RELOC with 88 aligned pairs each.
+
+- 2026-11-19: Unified the evidence-link view in GOLDTL.fcn_004c9cb0.c using evidence_link.h, preserving native stores at 0x4c9ce5 and 0x4c9cec. Both target comparisons remained RELOC with 25 aligned pairs. Decision owner: struct lane 20.
+
+2026-11-19 | Converted fcn_004868d0 parent-record view to PRODUCTION_GOODS_RECORD; native 0x486997 and 0x48699d read its amount fields. Decision owner: struct lane 23. Verification: GOLDTL SIZE_MISMATCH 106 aligned pairs unchanged, no promotion.
+- 2026-11-19: Converted fcn_0052e700 to the shared GOLD_GUI_WINDOW view; the four offsets are evidenced by the native stores at 0x005badd8 through 0x005badea and the original g_f8f110 relocation addends are unchanged. Source-target no-promote comparison retained GOLD RELOC, 125/129 aligned pairs. Decision owner: struct lane 16.
+
+- 2026-11-19: Converted packet splitting to CLIENT_QUEUED_PACKET with native fields at 0x4c40f3-0x4c412f and link stores at 0x4c416c-0x4c4195. Decision owner: struct lane 25. Verification: GOLDTL and GOLD remain SIZE_MISMATCH with 66 aligned pairs each.
+
+2026-11-19 | Converted fcn_00486640 parent address arithmetic to PRODUCTION_GOODS_RECORD indexing using the native 0x58 stride at 0x485088. Decision owner: struct lane 23. Verification: GOLDTL SIZE_MISMATCH 123 aligned pairs unchanged, no promotion.
+
+2026-11-19 | Use HE_ACTION in fcn_00545510 | Native 0x14c action stride 0x546040 | Decision owner: struct lane 22 | GOLDTL and GOLD RELOC, aligned pairs 20/22 to 20/22; all-target lint clear for source.
+
+- 2026-11-19: Added DEPENDENCY_DIAGRAM_NODE view and converted fcn_0050e780. Native 0x50e91f writes the depth word and 0x50e9dc establishes the 0x34 record stride. Decision owner: struct lane 17. Verification: GOLDTL and GOLD source-target no-promote retain RELOC 68/73 aligned pairs; relink pending.
+
+- 2026-11-19: Converted the input device state call in `src/Develop/Unassigned/fcn_004123a0.c` to the existing `client_input.h` interface and canonical Windows types. Native evidence: GOLDTL 0x4123ac/0x4123b2. Decision owner: struct lane 19. Verification: source-target test, GOLDTL SIZE_MISMATCH aligned pairs 57/74 to 59/74.
+
+- 2026-11-19: Added ambient_animal_slot.h and converted ambient slot allocation to its shared type; native 0x4bc021 proves 0x124 stride, 0x4bc01b pointer occupancy, and 0x4bc052 timer offset. Decision owner: struct lane 25. Verification: GOLDTL remains RELOC with 27 aligned pairs.
+- 2026-11-19: Converted fcn_00525260 to GOLD_GUI_WINDOW, preserving its window-relative handle and step fields as evidenced by native 0x0052e8dc and 0x0052ea51 and retaining all g_f8f110 relocation addends. Source-target no-promote comparison retained GOLD RELOC, 137/146 aligned pairs. Decision owner: struct lane 16.
+
+- 2026-11-19: Unified gs_AddBeweis evidence-link fields using evidence_link.h; native pair layout is evidenced at 0x4c9c8d and 0x4c9c97. Both target comparisons remained RELOC with 28 aligned pairs. Decision owner: struct lane 20.
+
+2026-11-19 | Converted fcn_00486500 production record parameter to PRODUCTION_GOODS_RECORD; native x87 stores at 0x4865ef and 0x48662e establish float value and slope fields. Decision owner: struct lane 23. Verification: GOLDTL RELOC 98 aligned pairs unchanged, no promotion.
+- 2026-11-19: Converted GOLD main_OpenEngine to GOLD_GUI_WINDOW, preserving the height and window ID views evidenced by native 0x005c07f6 and 0x00473002 and the original g_f8f110 relocation addends. Source-target no-promote comparison retained GOLD RELOC, 229/252 aligned pairs. Decision owner: struct lane 16.
+
+2026-11-19 | Added CRIME_DESCRIPTION_VIEW declaration for the 0x14-byte indexed crime-description view. Native 0x5da0d1 and 0x5da0d4 establish its stride and first word. Decision owner: struct lane 23. Verification: declaration inspected; all consuming sources are held by the global-rename exclusion and require comparison after conversion.
+
+- 2026-11-19: Converted ambient slot cleanup to AMBIENT_ANIMAL_SLOT, matching native pointer disposal 0x4bc065 and 0x124-byte clear 0x4bc074. Decision owner: struct lane 25. Verification: GOLDTL remains RELOC with 14 aligned pairs.
+
+- 2026-11-19: Added the client `ENTITY_RECORD` view in `src/Develop/DieGildeAddOn/game/entity_record.h` and converted `GOLDTL.fcn_005c4d00.c`. Native evidence: 0x55073b record stride, 0x5257f4/0x5257fe object-list pointer, 0x5c4d48 read at +0x194, and the allocation writes listed in lane 19 research. This separate client header avoids the conflicting existing server `EntityStruct`. Decision owner: struct lane 19. Verification: GOLDTL 0x5c4d00 remains RELOC, aligned pairs 60/64.
+| 2026-11-19 | Shared head-set type in GOLDTL.fcn_004fdfe0.c | Reuse the record declaration already established for the head-set table | Native stride 0x4fdd7a and field access 0x4fd9fe | Decision owner: struct lane 24 | GOLDTL RELOC 216 -> 216 aligned pairs; lint clean |
+
+- 2026-11-19: Converted fcn_0050e830 to DEPENDENCY_DIAGRAM_NODE. Native 0x50e8ff, 0x50e90b, 0x50e917 and 0x50e91f establish item, parent IDs and depth; 0x50e9dc establishes the 0x34 stride. Decision owner: struct lane 17. Verification: GOLDTL source-target no-promote retains SIZE_MISMATCH 269/527 aligned pairs; relink pending.
+
+2026-11-19 | Use HE_ACTION in fcn_005463a0 | Native action stride 0x546040 | Decision owner: struct lane 22 | GOLDTL and GOLD RELOC, aligned pairs 51/59 to 51/59; all-target lint clear for source.
+- 2026-11-19: Converted fcn_00522140 to the shared GOLD_GUI_WINDOW ID view, preserving its g_f8f110 relocation addend and the ID position shown at native 0x00473002. Source-target no-promote comparison retained GOLD RELOC, 130/133 aligned pairs. Decision owner: struct lane 16.
+
+- 2026-11-19: Added entity_candidate.h and converted fcn_004a3530. Native 0x4a35e2 stores the entity, 0x4a35dd stores its score and 0x4a35e6 advances by 0x0c. Decision owner: struct lane 21. Verification: GoldTL SIZE_MISMATCH 547 -> 547 aligned pairs, lint clear; other targets unbound. The proposed shared client_types.h is on the rename hold list, so the new header is in the game unit.
+
+- 2026-11-19: Converted ambient animal spawning to AMBIENT_ANIMAL_SLOT; native 0x4bc20c-0x4bc231 establishes object, position and kind. Decision owner: struct lane 25. Verification: GOLDTL and GOLD remain RELOC with 36 aligned pairs each.
+
+- 2026-11-19: Converted the client entity view in `src/Develop/Units/d2.v1/fcn_004b62e0.c` to `ENTITY_RECORD`; native identifier write 0x50a90a and record stride 0x55073b. Decision owner: struct lane 19. Verification: GOLDTL 0x4b62e0 SIZE_MISMATCH aligned pairs unchanged at 134/139.
+
+- 2026-11-19: Unified the keyboard acquire wrapper with the existing client_input.h device interface; native calls at 0x411805 and 0x411811 remain byte-exact on both targets, 18 aligned pairs each. Decision owner: struct lane 20.
+- 2026-11-19: Converted GOLD fcn_004754c0 to the GOLD_GUI_WINDOW list and count view evidenced by native 0x00475531 and 0x0047554e. Source-target no-promote comparison retained GOLD RELOC, 59/63 aligned pairs. Decision owner: struct lane 16.
+| 2026-11-19 | Shared HE_ACTION type in fcn_00520d90.c | Unify the saved action record with the existing shared action header | Native stride 0x520dac and serialized fields 0x520e4a..0x520fd2 | Decision owner: struct lane 24 | GOLDTL SIZE_MISMATCH 263 -> 263 aligned pairs; lint clean |
+
+- 2026-11-19: Converted fcn_004a34d0 and its declaration header to entity_candidate.h; native 0x4a3511/0x4a3514 index 12-byte entries. Decision owner: struct lane 21. Verification: GoldTL RELOC 31 -> 31 aligned pairs, lint clear; other targets unbound.
+
+- 2026-11-19: Converted ambient animal initialization to AMBIENT_ANIMAL_SLOT, with fields supported by 0x4bc29e-0x4bc2c3. Decision owner: struct lane 25. Verification: GOLDTL and GOLD remain RELOC with 37 aligned pairs each.
+
+- 2026-11-19: Converted the entity flags view in `src/Develop/Units/d2.v1/GOLDTL.fcn_005e5130.c` to `ENTITY_RECORD`, using native +0x1cc dword accesses 0x4e86cc/0x4e86e7. Decision owner: struct lane 19. Verification: GOLDTL 0x5e5130 and GOLD 0x5d84b0 remain RELOC, 58/62 aligned pairs each.
+
+- 2026-11-19: Converted fcn_0050f780 to DEPENDENCY_DIAGRAM_NODE and corrected its coordinate argument declarations to int, matching fcn_0050f750. Native 0x50f88c-0x50f8ad adds offsets to coordinate values and 0x50e9dc establishes the 0x34 stride. Decision owner: struct lane 17. Verification: GOLDTL source-target no-promote retains RELOC 119/129 aligned pairs; relink pending.
+
+2026-11-19 | Use HE_ACTION in fcn_00546de0 | Native stride 0x546d77 and action flag read 0x546d35 | Decision owner: struct lane 22 | GOLDTL and GOLD RELOC, aligned pairs 28/31 to 28/31; all-target lint clear for source.
+- 2026-11-19: Converted GOLD fcn_00472380 to GOLD_GUI_WINDOW, preserving the native 0x3c4 window stride at 0x00472fe8 and list/count offsets at 0x00475531/0x0047554e. Source-target no-promote results: Europa1400Gold.exe 242->242/274 SIZE_MISMATCH; relocation bindings unchanged. Decision owner: struct lane 16.
+
+- 2026-11-19: Converted fcn_004a5340 candidate view to entity_candidate.h; native 0x4a5413 reads its entity pointer and 0x4a5419 reads score. Decision owner: struct lane 21. Verification: GoldTL RELOC 120 -> 120 aligned pairs, lint clear; other targets unbound.
+
+- 2026-11-19: Converted the client entity view in `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00495890.c` to `ENTITY_RECORD`, using the +2 and +4 writes at 0x50a8c2/0x50a90a. Decision owner: struct lane 19. Verification: GOLDTL 0x495890 remains RELOC, 55/57 aligned pairs.
+- 2026-11-19: Converted GOLD fcn_004741e0 to GOLD_GUI_WINDOW, preserving the native 0x3c4 window stride at 0x00472fe8 and list/count offsets at 0x00475531/0x0047554e. Source-target no-promote results: Europa1400Gold.exe 295->295/702 SIZE_MISMATCH; relocation bindings unchanged. Decision owner: struct lane 16.
+
+- 2026-11-19: Converted another ambient animal spawn to AMBIENT_ANIMAL_SLOT, following fields at 0x4bc32b-0x4bc350. Decision owner: struct lane 25. Verification: GOLDTL and GOLD remain RELOC with 40 aligned pairs each.
+- 2026-11-19: Converted GOLD fcn_004755f0 to GOLD_GUI_WINDOW, preserving the native 0x3c4 window stride at 0x00472fe8 and list/count offsets at 0x00475531/0x0047554e. Source-target no-promote results: Europa1400Gold.exe 57->57/61 RELOC; relocation bindings unchanged. Decision owner: struct lane 16.
+- 2026-11-19: Converted GOLD fcn_004756a0 to GOLD_GUI_WINDOW, preserving the native 0x3c4 window stride at 0x00472fe8 and list/count offsets at 0x00475531/0x0047554e. Source-target no-promote results: Europa1400Gold.exe 46->46/47 RELOC; relocation bindings unchanged. Decision owner: struct lane 16.
+- 2026-11-19: Converted GOLD fcn_00475a90 to GOLD_GUI_WINDOW, preserving the native 0x3c4 window stride at 0x00472fe8 and list/count offsets at 0x00475531/0x0047554e. Source-target no-promote results: Europa1400Gold.exe 71->71/73 RELOC; relocation bindings unchanged. Decision owner: struct lane 16.
+- 2026-11-19: Converted GOLD fcn_00475b70 to GOLD_GUI_WINDOW, preserving the native 0x3c4 window stride at 0x00472fe8 and list/count offsets at 0x00475531/0x0047554e. Source-target no-promote results: Europa1400Gold.exe 37->37/40 RELOC; relocation bindings unchanged. Decision owner: struct lane 16.
+- 2026-11-19: Converted GOLD fcn_00475f60 to GOLD_GUI_WINDOW, preserving the native 0x3c4 window stride at 0x00472fe8 and list/count offsets at 0x00475531/0x0047554e. Source-target no-promote results: Europa1400Gold.exe 37->37/41 RELOC; relocation bindings unchanged. Decision owner: struct lane 16.
+
+- 2026-11-19: Unified the keyboard event polling call with the shared client_input.h device interface, preserving the event ABI and native call at 0x4124da. Its existing NEAR_MATCHING comparison remained at 62 aligned pairs. Decision owner: struct lane 20.
+- 2026-11-19: Converted GOLD fcn_004760a0 to GOLD_GUI_WINDOW, preserving the native 0x3c4 window stride at 0x00472fe8 and list/count offsets at 0x00475531/0x0047554e. Source-target no-promote results: Europa1400Gold.exe 26->26/28 RELOC; relocation bindings unchanged. Decision owner: struct lane 16.
+| 2026-11-19 | Shared HE_ACTION type in GOLDTL.fcn_00545fe0.c | Use the common action record when constructing its fields | Native field copies 0x5460da..0x546166 | Decision owner: struct lane 24 | GOLDTL and GOLD RELOC 125 -> 125 aligned pairs; lint clean |
+
+- 2026-11-19: Added D3D_DEVICE_VIEW partial COM interface view and converted fcn_00436aa0. Native 0x436dad, 0x436ab8 and 0x436bb8 call the transform, render-state and texture-stage-state slots. Decision owner: struct lane 17. Verification: GOLDTL source-target no-promote retains RELOC 268/269 aligned pairs; relink pending.
+| 2026-11-19 | Shared D2_TRAINING_ROW type in GOLDTL.fcn_005ae4f0.c and GOLDTL.fcn_005c69d0.c | Reuse the evidenced training-row declaration | Native initialization 0x5c69d9..0x5c6a02 and row handle at +8 | Decision owner: struct lane 24 | GOLDTL RELOC 80 -> 80; GOLDTL/GOLD RELOC 17 -> 17 aligned pairs; lint clean |
+
+- 2026-11-19: Converted ambient animal spawn to AMBIENT_ANIMAL_SLOT, following native fields 0x4bc3bb-0x4bc3e0. Decision owner: struct lane 25. Verification: GOLDTL and GOLD remain RELOC with 40 aligned pairs each.
+
+- 2026-11-19: Converted the client entity view in `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0048dbc0.c` to `ENTITY_RECORD`, using native index and identifier writes 0x50a896/0x50a90a. Decision owner: struct lane 19. Verification: GOLDTL 0x48dbc0 and GOLD 0x48e610 remain RELOC, 84/85 aligned pairs each.
+
+- 2026-11-19: Converted fcn_004a54a0 candidate view to entity_candidate.h; native 0x4a5560 reads candidate score. Decision owner: struct lane 21. Verification: GoldTL and Gold both RELOC 100 -> 100 aligned pairs; lint clear.
+- 2026-11-19: Converted GOLD fcn_00472260 to GOLD_GUI_WINDOW and its 0x264 step field, as evidenced by native 0x0052ea51. Source-target no-promote comparison retained GOLD RELOC, 72/80 aligned pairs. Decision owner: struct lane 16.
+
+2026-11-19 | Use HE_ACTION in fcn_00546190 | Native data pointer read/free 0x54619e-0x5461ae and slot read 0x5461de | Decision owner: struct lane 22 | GOLDTL and GOLD RELOC, aligned pairs 79/85 to 79/85; all-target lint clear for source.
+
+- 2026-11-19: Converted ambient animal creation to named AMBIENT_ANIMAL_SLOT fields, supported by native 0x4bc4dc-0x4bc501. Decision owner: struct lane 25. Verification: GOLDTL remains RELOC with 73 aligned pairs.
+
+- 2026-11-19: Added season_slots.h and unified the season-table views in GOLDTL.fcn_00502450.c. Native slot ID and value reads at 0x502476 and 0x5024bb establish offsets after the 16-byte row header. The two RELOC functions remain at 39 and 66 aligned pairs. Decision owner: struct lane 20.
+
+- 2026-11-19: Converted the client entity view in `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0048dcd0.c` to `ENTITY_RECORD`, retaining the byte view at +0x166 and native identifier write 0x50a90a. Decision owner: struct lane 19. Verification: GOLDTL 0x48dcd0 and GOLD 0x48e720 remain RELOC, 77/79 aligned pairs each.
+
+- 2026-11-19: Converted fcn_004372d0 to the D3D_DEVICE_VIEW interface. Native 0x436ab8 and 0x436bb8 identify the shared render-state and texture-stage-state vtable slots. Decision owner: struct lane 17. Verification: GOLDTL source-target no-promote retains RELOC 244/245 aligned pairs; relink pending.
+
+- 2026-11-19: Converted ambient slot update to AMBIENT_ANIMAL_SLOT; native 0x4bc09a and 0x4bc1ce establish the offset 8 field. Decision owner: struct lane 25. Verification: GOLDTL remains RELOC with 107 aligned pairs.
+- 2026-11-19: Exposed the existing unknown window field at offset 0x28 in GOLD_GUI_WINDOW and converted fcn_00476700. The 0x3c4 stride is evidenced at 0x00472fe8. Rechecked all 15 previously converted header users and kept their status, aligned pairs and relocation bindings; fcn_00476700 retained GOLD RELOC, 20/24 aligned pairs. Decision owner: struct lane 16.
+
+- 2026-11-19: Converted both ambient movement functions to AMBIENT_ANIMAL_SLOT, whose position offset 0x10 is supported by 0x4bc222. Decision owner: struct lane 25. Verification: GOLDTL functions retain RELOC and 113 and 98 aligned pairs.
+
+- 2026-11-19: Converted the client entity view in `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004a9040.c` to `ENTITY_RECORD`, using native identifier write 0x50a90a. Decision owner: struct lane 19. Verification: GOLDTL 0x4a9040 and GOLD 0x4a8f20 remain RELOC, 73/75 aligned pairs each.
+
+- 2026-11-19: Replaced local season-table views in GOLDTL.fcn_005020e0.c with season_slots.h. Native 0x502387 and 0x502413 establish the 16-byte row header and 0x80-byte slot stride. The existing SIZE_MISMATCH comparison stayed at 224 aligned pairs. Decision owner: struct lane 20.
+
+- 2026-11-19: Converted fcn_004721e0 to the D2_WIN window view. Native 0x46f10e proves the 0x3cc stride and 0x46f167/0x46f170 establish children and count. Decision owner: struct lane 17. Verification: GOLDTL source-target no-promote retains RELOC 29/32 aligned pairs; relink pending.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004a8e40.c` to `ENTITY_RECORD`; native identifier write 0x50a90a and stride 0x55073b. Decision owner: struct lane 19. Verification: 0x4a8e40 RELOC 43/44 -> 43/44.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004a8da0.c` to `ENTITY_RECORD`; native identifier write 0x50a90a and stride 0x55073b. Decision owner: struct lane 19. Verification: 0x4a8da0 RELOC 41/43 -> 41/43.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004a9780.c` to `ENTITY_RECORD`; native identifier write 0x50a90a and stride 0x55073b. Decision owner: struct lane 19. Verification: 0x4a9780 RELOC 49/50 -> 49/50.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004a96f0.c` to `ENTITY_RECORD`; native identifier write 0x50a90a and stride 0x55073b. Decision owner: struct lane 19. Verification: 0x4a96f0 RELOC 43/44 -> 43/44.
+- 2026-11-19: Converted GOLD fcn_00474b20 to the shared GOLD_GUI_WINDOW view, replacing raw accesses with the native 0x3c4 stride and window fields at 0x18, 0x1c and 0x26c evidenced at 0x00472fe8 and 0x00475531. Source-target no-promote comparison retained GOLD NEAR_MATCHING, 112/117 aligned pairs, and its g_1015f40 bindings remained validated. Decision owner: struct lane 16.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004a9540.c` to `ENTITY_RECORD`; native identifier write 0x50a90a and stride 0x55073b. Decision owner: struct lane 19. Verification: GOLDTL 0x4a9540 remains RELOC, aligned pairs 57/59.
+
+- 2026-11-19: Converted ambient allocation to AMBIENT_ANIMAL_SLOT, retaining the local pointer used by native 0x4bbd2f-0x4bbd41. Decision owner: struct lane 25. Verification: GOLDTL remains RELOC with 8 aligned pairs.
+
+- 2026-11-19: Switched GOLDTL.fcn_00520310.c to season_slots.h, retaining the serialized layout and native 0x80-byte stride at 0x5204c2. Its existing SIZE_MISMATCH comparison remained at 163 aligned pairs. Decision owner: struct lane 20.
+- 2026-11-19: Converted GOLD fcn_00472a90 to GOLD_GUI_WINDOW, retaining native 16-bit scroll use where applicable (0x00473a3b) and original relocation bindings. Source-target no-promote: Europa1400Gold.exe 128->128/139 RELOC. Decision owner: struct lane 16.
+- 2026-11-19: Converted GOLD fcn_00472fc0 to GOLD_GUI_WINDOW, retaining native 16-bit scroll use where applicable (0x00473a3b) and original relocation bindings. Source-target no-promote: Europa1400Gold.exe 92->92/93 RELOC. Decision owner: struct lane 16.
+- 2026-11-19: Converted GOLD fcn_004731c0 to GOLD_GUI_WINDOW, retaining native 16-bit scroll use where applicable (0x00473a3b) and original relocation bindings. Source-target no-promote: Europa1400Gold.exe 109->109/112 RELOC. Decision owner: struct lane 16.
+- 2026-11-19: Converted GOLD fcn_00473340 to GOLD_GUI_WINDOW, retaining native 16-bit scroll use where applicable (0x00473a3b) and original relocation bindings. Source-target no-promote: Europa1400Gold.exe 110->110/113 RELOC. Decision owner: struct lane 16.
+
+2026-11-19 | Introduce D2_SURFACE prefix view and use it in fcn_00465c60 | Allocation at 0x4770ab, interface write 0x47726a, surface global write 0x470690; no complete size claim | Decision owner: struct lane 22 | GOLDTL aligned pairs 147/152 to 147/152, no-promote; all-target lint clear for source.
+
+- 2026-11-19: Converted fcn_004692c0 to the D2_WIN window view. Native 0x46f10e proves the 0x3cc stride and 0x46e9be/0x46e9d2 establish left and top fields. Decision owner: struct lane 17. Verification: GOLDTL source-target no-promote retains RELOC 29/31 aligned pairs; relink pending.
+
+- 2026-11-19: Converted ambient slot pool cleanup to AMBIENT_ANIMAL_SLOT, matching native 0x4bbd50-0x4bbd62. Decision owner: struct lane 25. Verification: GOLDTL remains RELOC with 8 aligned pairs.
+- 2026-11-19: Converted GOLD fcn_00473970 to GOLD_GUI_WINDOW, retaining native 16-bit scroll use where applicable (0x00473a3b) and original relocation bindings. Source-target no-promote: Europa1400Gold.exe 111->111/114 RELOC. Decision owner: struct lane 16.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004a8bf0.c` to `ENTITY_RECORD`, preserving evidenced offsets (x4=entity_id; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x4a8bf0 RELOC 98/99 -> 98/99; 0x4a8ad0 RELOC 98/99 -> 98/99.
+
+- 2026-11-19: Converted `src/Develop/Units/d2.v1/GOLDTL.fcn_005a66b0.c` to `ENTITY_RECORD`, preserving evidenced offsets (f4=entity_id; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x5a66b0 RELOC 127/132 -> 127/132.
+
+- 2026-11-19: Switched GOLDTL.fcn_004f58b0.c to evidence_link.h, preserving the native two-ID record layout shown at 0x4f60b4 and 0x4f60b9. Its RELOC result remained at 32 aligned pairs. Decision owner: struct lane 20.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00514b50.c` to `ENTITY_RECORD`, preserving evidenced offsets (trade=unk_164,type=entity_state; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x514b50 RELOC 127/133 -> 127/133; 0x511430 RELOC 127/133 -> 127/133.
+
+- 2026-11-19: Converted fcn_00468df0 to the D2_WIN window view. Native 0x46f10e proves the 0x3cc stride and 0x46e9be/0x46e9d2 establish left and top fields. Decision owner: struct lane 17. Verification: GOLDTL source-target no-promote retains RELOC 27/29 aligned pairs; relink pending.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005b9cb0.c` to `ENTITY_RECORD`, preserving evidenced offsets (x4=entity_id; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x5b9cb0 RELOC 109/110 -> 109/110; 0x5ae6c0 RELOC 109/110 -> 109/110.
+| 2026-11-19 | Shared event deal declaration | Reused the native 0xa4-stride event record; 0x546e4c steps records, 0x546e96 writes state and 0x52105e uses the first word as a pointer. | Decision owner: struct lane 18 | Per-file no-promote source-target comparisons in .scratch/fleet/18/STRUCTS-RESULTS.md. |
+
+- 2026-11-19: Converted `src/Develop/Unassigned/GOLDTL.fcn_005a2500.c` to `ENTITY_RECORD`, preserving evidenced offsets (x0=entity_index; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x5a2500 RELOC 43/44 -> 43/44; 0x599320 RELOC 43/44 -> 43/44.
+
+- 2026-11-19: Unified the evidence-link view in GOLDTL.fcn_004f4c40.c after the separate crime-record conversion. Native 0x4c9c8d and 0x4c9c97 establish the two four-byte fields; RELOC stayed at 234 aligned pairs. Decision owner: struct lane 20.
+
+- 2026-11-19: Converted `src/Develop/Unassigned/GOLDTL.fcn_004f7bf0.c` to `ENTITY_RECORD`, preserving evidenced offsets (id=entity_index,x166=unk_165[1]; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x4f7bf0 RELOC 82/85 -> 82/85; 0x4f5800 RELOC 82/85 -> 82/85.
+
+- 2026-11-19: Converted `src/Develop/Unassigned/GOLDTL.fcn_004c35b0.c` to `ENTITY_RECORD`, preserving evidenced offsets (active=unk_17c[12]; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x4c35b0 RELOC 14/17 -> 14/17; 0x4c2ce0 RELOC 14/17 -> 14/17.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005cbfb0.c` to `ENTITY_RECORD`, preserving evidenced offsets (id=entity_index,x168=unk_165[3]; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x5cbfb0 RELOC 121/123 -> 121/123.
+
+- 2026-11-19: Unified the evidence-link cleanup view in GOLDTL.fcn_004f6740.c; native field offsets at 0x4c9ce5 and 0x4c9cec establish the pair. Both targets retained RELOC at 14 aligned pairs. Decision owner: struct lane 20.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004aa6a0.c` to `ENTITY_RECORD`, preserving evidenced offsets (x4=entity_id; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x4aa6a0 RELOC 90/93 -> 90/93; 0x4aa580 RELOC 90/93 -> 90/93.
+
+- 2026-11-19: Unified the evidence-link view in GOLDTL.fcn_004f5d00.c, preserving the two native ID fields observed at 0x4f60b4 and 0x4f60b9. Both targets retained RELOC at 44 aligned pairs. Decision owner: struct lane 20.
+
+- 2026-11-19: Converted `src/Develop/Unassigned/GOLDTL.fcn_00495400.c` to shared `ENTITY_RECORD` and `AM_METHOD`, preserving the native entity bytes and callback invocation contracts at 0x4954ce and 0x495542. Decision owner: struct lane 19. Verification: GOLDTL 0x495400 remains RELOC, 174/177 aligned pairs.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005dec00.c` to `ENTITY_RECORD`, preserving evidenced offsets (b9=gender; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x5dec00 RELOC 130/131 -> 130/131; 0x5d26d0 RELOC 130/131 -> 130/131.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0049fc80.c` to `ENTITY_RECORD`, preserving evidenced offsets (id=entity_index,x166=unk_165[1],x167=unk_165[2],x168=unk_165[3]; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x49fc80 RELOC 156/159 -> 156/159.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005153f0.c` to `ENTITY_RECORD`, preserving evidenced offsets (id=entity_id,type=entity_state; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x5153f0 RELOC 113/114 -> 113/114; 0x511ca0 RELOC 113/114 -> 113/114.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00512d20.c` to `ENTITY_RECORD`, preserving evidenced offsets (id=entity_id,type=entity_state; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x512d20 RELOC 157/161 -> 157/161; 0x50f750 RELOC 157/161 -> 157/161.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00511580.c` to `ENTITY_RECORD`, preserving evidenced offsets (owner=entity_id,slot=entity_index,type=entity_state; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x511580 RELOC 188/190 -> 188/190; 0x50e0d0 RELOC 188/190 -> 188/190.
+
+- 2026-11-19: Shared evidence link in `src/Develop/Unassigned/GOLDTL.fcn_004f6470.c`; native pair stride 8 and fields at 0x4c9c8d/0x4c9c97. Decision owner: struct lane 20. Verification: source-target comparisons unchanged and lint.
+
+- 2026-11-19: Converted `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0048ddd0.c` to `ENTITY_RECORD`, preserving evidenced offsets (id=entity_index,x166=unk_165[1],x4=entity_id; stride 0x55073b). Decision owner: struct lane 19. Verification: 0x48ddd0 RELOC 132/134 -> 132/134.
+
+- 2026-11-19: Shared evidence link in `src/Develop/Unassigned/GOLDTL.fcn_004f63d0.c`; native pair stride 8 and fields at 0x4c9c8d/0x4c9c97. Decision owner: struct lane 20. Verification: source-target comparisons unchanged and lint.
+- 2026-11-19: Renamed 13 client globals from address labels to evidenced names with `rebrew source rename --data` (preview digest applied; generated stub scaffolds and stubs/*/specials.toml keys renamed with them): d3_ActiveCameraAnimation, ls_SaveVersion, cut_ActiveCutscene, d2_CurrentFont, cm_LastCrimeId, evt_LastGfxScriptId, he_LastEventSlot, d3_ProjectionScaleY, ahm_PlayerPrototypeCount, d2_CurrentValueBar, cut_CurrentTick, d3snd_SourceCount, ch_LowPolyMode. Evidence per name (writer and reader instructions) is in docs/name-ledger.tsv; each was proposed by one research lane and confirmed by a second lane's review. `d3snd_` is attested by GOLDTL strings d3snd_Init/d3sndw_Init and added to docs/naming_conventions.md. Re-recorded the unchanged GOLD assembly evidence for fcn_00514b50 and fcn_005e5130 and rebound six type identities (d3.object-animation-flags/frame, d3.universe-view, event.validator_view) whose source context changed with the shared struct headers; definitions, extents and offsets unchanged. Verified: both clients link, server raw link byte-identical, lint 0/0. Decision owner: lead, at the user's request for proper global names.

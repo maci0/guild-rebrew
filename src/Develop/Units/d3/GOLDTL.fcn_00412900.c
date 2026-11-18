@@ -20,7 +20,7 @@ typedef struct {
 
 extern char* g_6b8014;
 extern int g_6b5cbc;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 
 int* __cdecl fcn_004339e0(char* a0, flags_00412900 a1, int a2, frame_00412900* a3);
 
@@ -69,7 +69,7 @@ int* __cdecl fcn_00412900(char* obj, float* pos, int id)
 	frames[4].drehung[2] = pos[2] - *(float*) (g_6b8014 + 0x8c);
 	r = (unsigned char*) fcn_004339e0(g_6b8014, flags, 5, frames);
 	g_6b5cbc = 1;
-	g_6b5cc0 = (int) r;
+	d3_ActiveCameraAnimation = (int) r;
 	r[0x2d] |= 8;
 	return (int*) r;
 }

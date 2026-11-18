@@ -36,7 +36,7 @@ extern int g_6b5c60;             /* 0x006b5c60 */
 extern int g_772f24;             /* 0x00772f24 */
 extern int g_772f28;             /* 0x00772f28 */
 extern int g_772f2c;             /* 0x00772f2c */
-extern int g_772f30;             /* 0x00772f30 */
+extern int cut_CurrentTick;             /* 0x00772f30 */
 extern int g_772f34;             /* 0x00772f34 */
 extern int g_772f38;             /* 0x00772f38 */
 extern int g_772f3c;             /* 0x00772f3c */
@@ -118,7 +118,7 @@ label_4e526f:
 			}
 			rec = &((rec35c*) g_9b0e20)[i];
 			if (*(unsigned char*) (g_772f24 + 2) == 6) {
-				g_772f34 = g_68bfbc + g_772f30;
+				g_772f34 = g_68bfbc + cut_CurrentTick;
 				g_772f38 = 0;
 				((cmd_entry*) g_9b0844)[s[8]].f0(rec, id);
 			} else if (((cmd_entry*) g_9b0844)[s[8]].f4 != 0) {
@@ -164,7 +164,7 @@ label_4e526f:
 			for (i = 0; i < (int) s[0x30]; i++) {
 				if (*(int*) (s + 0x34 + i * 4) == ent) {
 					c1 = ((rec35c*) g_9b0e20)[i];
-					g_772f34 = g_68bfbc + g_772f30;
+					g_772f34 = g_68bfbc + cut_CurrentTick;
 					g_772f38 = 0;
 					((cmd_entry*) g_9b0844)[s[8]].f0(&c1, id);
 					c1.f8 = 1;
@@ -204,7 +204,7 @@ label_4e526f:
 					c1 = ((rec35c*) g_9b0e20)[pos];
 					g_772f24 = gm_LookupEntityRecordById(*(int*) (s + 0x34 + pos * 4));
 					fcn_004e5140(s);
-					g_772f34 = g_68bfbc + g_772f30;
+					g_772f34 = g_68bfbc + cut_CurrentTick;
 					g_772f38 = 0;
 					((cmd_entry*) g_9b0844)[s[8]].f0(&c1, id);
 					c1.f8 = 1;

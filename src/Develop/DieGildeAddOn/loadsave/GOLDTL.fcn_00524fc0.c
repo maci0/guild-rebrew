@@ -57,7 +57,7 @@ int __cdecl fcn_00524fc0(void* fp)
 		if (!ls_ReadVfsDataChecked(&p->field30, 1, 1, fp)) {
 			return 0;
 		}
-		if (g_6a23ac >= 0x10059) {
+		if (ls_SaveVersion >= 0x10059) {
 			if (!ls_ReadVfsDataChecked(&p->field34[0], 4, 0x10, fp)) {
 				return 0;
 			}
@@ -75,7 +75,7 @@ int __cdecl fcn_00524fc0(void* fp)
 		if (!ls_ReadVfsDataChecked(&p->field7c[0], 0x98, 1, fp)) {
 			return 0;
 		}
-		if (g_6a23ac >= 0x1003f) {
+		if (ls_SaveVersion >= 0x1003f) {
 			if (!ls_ReadVfsDataChecked(&p->pad18[0], 0xe, 1, fp)) {
 				return 0;
 			}
@@ -83,7 +83,7 @@ int __cdecl fcn_00524fc0(void* fp)
 			*(pos14_7f4c00*) (&p->pad18[0]) = g_7f4c00;
 			fcn_00500bb0(&p->pad18[0], i + 1, 0, 0);
 		}
-		if (g_6a23ac >= 0x10040) {
+		if (ls_SaveVersion >= 0x10040) {
 			if (!ls_ReadVfsDataChecked(&p->pad0[0xc], 4, 1, fp)) {
 				return 0;
 			}

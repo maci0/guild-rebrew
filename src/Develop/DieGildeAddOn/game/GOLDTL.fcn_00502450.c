@@ -1,4 +1,4 @@
-#include "client_town.h"
+#include "Develop/DieGildeAddOn/game/season_slots.h"
 
 #pragma pack(push, 1)
 typedef struct {
@@ -19,15 +19,15 @@ int __cdecl fcn_00502450(int a, int b)
 	unsigned short w;
 	Obj41* o;
 
-	w = g_85ab80[a].c[b].w;
+	w = g_85ab80[a].slots[b].objekt_id;
 	o = &((Obj41*)lpObjektePROT)[w];
 	if (o->kind == 0x17 || o->kind == 0x25) {
 		return 0;
 	}
 	if (a == 0) {
-		return (int) (g_773d4c * g_85ab80[0].c[b].f * g_665b80 + g_662908);
+		return (int) (g_773d4c * g_85ab80[0].slots[b].unk_08 * g_665b80 + g_662908);
 	}
-	return (int) (g_85ab80[a].c[0].x0 * g_85ab80[a].c[b].f * g_665b78);
+	return (int) (g_85ab80[a].unk_00 * g_85ab80[a].slots[b].unk_08 * g_665b78);
 }
 
 extern float g_6628a8;
@@ -44,7 +44,7 @@ int __cdecl fcn_005024e0(int a, int b)
 	unsigned char* e;
 
 	sum = 0;
-	c = (char*) &g_85ab80[a].c[b].w;
+	c = (char*) &g_85ab80[a].slots[b].objekt_id;
 	if (c[0x40] == 0) {
 		return 0;
 	}

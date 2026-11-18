@@ -3,13 +3,13 @@
 
 #include <string.h>
 
-#include "he_tables.h"
+#include "Develop/DieGildeAddOn/game/event_deal.h"
 
 #pragma pack(1)
 // SIZE 0x1e
 typedef struct {
 	int id;
-	Deal* deal;
+	EVENT_DEAL* deal;
 	char* tail;
 	int amount;
 	Pos14 pos;
@@ -33,7 +33,6 @@ typedef struct {
 	int special;
 } Sorted;
 
-extern Deal g_7d2020[256];
 
 char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int owner);
 char* __cdecl gm_AddObjekt(void);
@@ -44,7 +43,7 @@ int __cdecl fcn_0050e380(int owner, Summary* out)
 {
 	Sorted sorted;
 	int k;
-	Deal* d;
+	EVENT_DEAL* d;
 	char* p;
 	int i;
 

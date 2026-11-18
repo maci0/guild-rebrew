@@ -11,7 +11,7 @@ extern int g_772608;
 extern int g_1015ea4;
 extern int g_1040490;
 extern int g_1040494;
-extern int g_67d378;
+extern int d2_CurrentFont;
 extern int g_67d380;
 extern int g_67d384;
 extern int g_67d968;
@@ -125,7 +125,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
             else
                 end = strchr(word, 0);
             offset += end - word + 1;
-            last_width = fcn_0046b520(word, g_67d378);
+            last_width = fcn_0046b520(word, d2_CurrentFont);
             x += last_width;
             used_width += last_width;
             if (offset <= length) {
@@ -144,7 +144,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
                             if (last[split] == '~')
                                 last[split] = '-';
                             last[split + 1] = 0;
-                            if (fcn_0046b520(last, g_67d378) + used_width <= width)
+                            if (fcn_0046b520(last, d2_CurrentFont) + used_width <= width)
                                 break;
                         }
                         split--;
@@ -154,7 +154,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
                         used_width = 0;
                         word = words[0];
                         for (i = next_count; i > 0; i--) {
-                            used_width += fcn_0046b520(word, g_67d378) + g_67d380;
+                            used_width += fcn_0046b520(word, d2_CurrentFont) + g_67d380;
                             word += 0x60;
                         }
                         used_width -= g_67d380;
@@ -164,7 +164,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
                         used_width = 0;
                         word = words[0];
                         for (i = next_count; i > 0; i--) {
-                            used_width += fcn_0046b520(word, g_67d378) + g_67d380;
+                            used_width += fcn_0046b520(word, d2_CurrentFont) + g_67d380;
                             word += 0x60;
                         }
                         used_width -= g_67d380;

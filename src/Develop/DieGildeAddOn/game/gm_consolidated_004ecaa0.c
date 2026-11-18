@@ -53,10 +53,10 @@ void __cdecl fcn_004ecb40(void)
 	int b;
 	Draw772 tmp;
 
-	n = g_772fd8 * 2;
+	n = ahm_PlayerPrototypeCount * 2;
 	for (i = 0; i < n; i++) {
-		a = gm_RandomMod((unsigned short) g_772fd8);
-		b = gm_RandomMod((unsigned short) g_772fd8);
+		a = gm_RandomMod((unsigned short) ahm_PlayerPrototypeCount);
+		b = gm_RandomMod((unsigned short) ahm_PlayerPrototypeCount);
 		if (a != b) {
 			tmp = g_772fdc[a];
 			g_772fdc[a] = g_772fdc[b];

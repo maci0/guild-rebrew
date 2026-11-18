@@ -144,9 +144,9 @@ impl = "char str_6776b8[] = {0};"
 [specials.g_6791c8]
 impl = "int g_6791c8 = -1;"
 
-# Native initial value measured at reference row g_6791d0 (first bytes: ff ff ff ff).
-[specials.g_6791d0]
-impl = "int g_6791d0 = -1;"
+# Native initial value measured at reference row evt_LastGfxScriptId (first bytes: ff ff ff ff).
+[specials.evt_LastGfxScriptId]
+impl = "int evt_LastGfxScriptId = -1;"
 
 # Native initial value measured at reference row g_67a370 (first bytes: c0 32 04 01).
 [specials.g_67a370]

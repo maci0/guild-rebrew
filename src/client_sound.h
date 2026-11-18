@@ -22,7 +22,7 @@ typedef struct SOUND_SOURCE {
     int keepVoice;
 } SOUND_SOURCE;
 
-extern int g_677680;
+extern int d3snd_SourceCount;
 extern SOUND_SOURCE* g_6b5d08;
 extern Chan_14cc460* g_772efc;
 extern Chan_14cc460* g_772d1c;

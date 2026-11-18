@@ -4,7 +4,7 @@ extern char g_14cf950;
 #include "GOLDTL.fcn_00533090_gconf.h"
 extern int g_67d370;
 extern int g_6b5cbc;
-int g_6b5cc0 = 0;
+int d3_ActiveCameraAnimation = 0;
 extern char* g_6b8014;
 extern float g_7e3a40[3];
 extern float g_7e3a50[3];
@@ -154,20 +154,20 @@ void __cdecl fcn_00533090(unsigned int a0)
 			goto done;
 		}
 		v2 = 0;
-		if (g_6b5cc0) {
+		if (d3_ActiveCameraAnimation) {
 			if (g_7746c4 == 0 && g_7746c8 == 0) {
 				goto done;
 			}
 			if (CompareVector3WithinTolerance(&g_14ce880, g_7e3a40, 0.1f)) {
 				fcn_00433780(g_6b8014);
-				g_6b5cc0 = 0;
+				d3_ActiveCameraAnimation = 0;
 				g_6b5cbc = 0;
 				v2 = 1;
 				fcn_00438b40(g_6b8014, g_7e3a40);
 				fcn_00438cb0(g_6b8014, g_7e3a50);
 			} else {
 				fcn_00433780(g_6b8014);
-				g_6b5cc0 = 0;
+				d3_ActiveCameraAnimation = 0;
 				g_6b5cbc = 0;
 			}
 		}

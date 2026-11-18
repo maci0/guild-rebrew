@@ -82,7 +82,7 @@ void __cdecl ch_Updatelowpoly(char* obj)
 	if (*(char**) (obj + 0x22c) == 0) {
 		return;
 	}
-	if (g_6b5c34 != 0) {
+	if (ch_LowPolyMode != 0) {
 		*(int*) (*(char**) (obj + 0x22c) + 0x204) = *(int*) (*(char**) (obj + 0x34) + 0x204);
 		*(int*) (*(char**) (obj + 0x22c) + 0x48) = *(int*) (*(char**) (obj + 0x34) + 0x48);
 		flags = *(unsigned short*) (obj + 0x8c);
@@ -96,7 +96,7 @@ void __cdecl ch_Updatelowpoly(char* obj)
 			return;
 		}
 		if (*(char**) (obj + 0x88) == g_10432c0) {
-			if (g_6b5c34 != 1) {
+			if (ch_LowPolyMode != 1) {
 				goto lowpoly_model;
 			}
 			if (g_6b8014 == 0) {

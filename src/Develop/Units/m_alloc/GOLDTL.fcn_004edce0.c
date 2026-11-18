@@ -2,7 +2,7 @@
 
 #include "g_772f90.h"
 
-extern int g_772fd8;
+extern int ahm_PlayerPrototypeCount;
 extern Draw772* g_772fdc;
 extern int g_772fe0;
 extern Rec772fe4* g_772fe4;
@@ -20,5 +20,5 @@ void __cdecl fcn_004edce0(void)
 		g_772fe4 = 0;
 	}
 	g_772fe0 = 0;
-	g_772fd8 = 0;
+	ahm_PlayerPrototypeCount = 0;
 }

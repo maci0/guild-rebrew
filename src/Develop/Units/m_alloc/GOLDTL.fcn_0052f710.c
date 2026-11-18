@@ -1,6 +1,6 @@
 extern int g_6a25b8;
 extern int g_6a25bc;
-extern int g_6a25c0;
+extern int d2_CurrentValueBar;
 extern int g_6a25c4[4];
 extern int g_6a25d4;
 extern int g_6a25d8;
@@ -31,7 +31,7 @@ void __cdecl fcn_0052f710(void)
 		fcn_00471e30(g_6a25b8);
 		g_6a25b8 = -1;
 		g_6a25bc = -1;
-		g_6a25c0 = -1;
+		d2_CurrentValueBar = -1;
 		g_6a25f0 = -1;
 		g_6a25ec = -1;
 		g_6a25e4 = -1;

@@ -2,7 +2,7 @@ extern int g_772f3c;
 extern int g_772f4c;
 extern int g_68bfc4;
 extern int g_67a370;
-int g_6791d0 = 0xffffffff;
+int evt_LastGfxScriptId = 0xffffffff;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/d3_camera.h"
 
@@ -38,8 +38,8 @@ void __cdecl fcn_004e4910(void)
 		if (ui != 0 && *(hook_4e4910*) (ui + 0x294) != 0)
 			(*(hook_4e4910*) (ui + 0x294))(((char*)g_67a370), 5, ui + 0x298, 0);
 	}
-	if (g_6791d0 != -1) {
-		for (w = fcn_00426cc0(g_6791d0); w != 0 && (w[0x124] & 1) != 0; w = fcn_00426cc0(g_6791d0))
+	if (evt_LastGfxScriptId != -1) {
+		for (w = fcn_00426cc0(evt_LastGfxScriptId); w != 0 && (w[0x124] & 1) != 0; w = fcn_00426cc0(evt_LastGfxScriptId))
 			fcn_005373e0(0, g_68bfb8 | 0x80);
 	}
 	fcn_004e4640();
@@ -53,7 +53,7 @@ void __cdecl fcn_004e4910(void)
 		*(int*) (((char*)g_67a370) + 0xb0) = 0;
 	}
 	fcn_00433780(g_6b8014);
-	g_6b5cc0 = 0;
+	d3_ActiveCameraAnimation = 0;
 	g_6b5cbc = 0;
 	fcn_00442e30();
 	g_772f4c--;

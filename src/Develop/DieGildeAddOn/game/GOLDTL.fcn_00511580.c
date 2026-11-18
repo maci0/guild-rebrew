@@ -2,13 +2,13 @@
 
 
 // SIZE 0x21c
-typedef struct {
-	unsigned short slot;
-	unsigned char type;
-	char pad3;
-	int owner;
-	char pad8[0x21c - 8];
-} Entity;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 // SIZE 0x8
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 	int owner;
 } Figure;
 
-extern char g_7f4ca0[];
+
 extern unsigned char g_773d75;
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
@@ -51,9 +51,9 @@ void __cdecl fcn_00511580(void)
 
 	fcn_0064d3f8();
 	for (i = 0; i < 16; i++) {
-		if (((Entity*)g_7f4ca0)[i].slot != 0xffff && ((Entity*)g_7f4ca0)[i].type < 5) {
+		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state < 5) {
 			money = fcn_0050b750(gm_RandomMod(0x122) + 10, (*(char*)&g_773d75));
-			fcn_004c4510((char*) &((Entity*)g_7f4ca0)[i], ((Entity*)g_7f4ca0)[i].owner);
+			fcn_004c4510((char*) &((ENTITY_RECORD*)g_7f4ca0)[i], ((ENTITY_RECORD*)g_7f4ca0)[i].entity_id);
 			fcn_004c4670(4, 1, 0x1ac, &money);
 			fcn_004c5360();
 		}

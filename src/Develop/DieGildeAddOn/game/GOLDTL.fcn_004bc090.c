@@ -6,6 +6,7 @@ int __cdecl fcn_00505340(unsigned char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00455350(int, int, void*);
 #include "client_scene_transform.h"
+#include "Develop/DieGildeAddOn/game/ambient_animal_slot.h"
 
 struct vec_4bc090 {
 	float x;
@@ -17,7 +18,7 @@ struct vec_4bc090 {
 
 
 /* ADDRESS: GOLDTL 0x004bc090 */
-void __cdecl fcn_004bc090(char* result)
+void __cdecl fcn_004bc090(AMBIENT_ANIMAL_SLOT* result)
 {
 	unsigned char* chosen;
 	struct vec_4bc090 pb;
@@ -30,7 +31,7 @@ void __cdecl fcn_004bc090(char* result)
 	unsigned short cnt;
 	int i;
 
-	if (*(int*) (result + 8) != -1)
+	if (result->unk_08 != -1)
 		return;
 	n = 0;
 	for (it = gm_StartFilteredEntitySearch(1, 6); it != 0; it = gm_FindNextFilteredEntity()) {
@@ -51,5 +52,5 @@ void __cdecl fcn_004bc090(char* result)
 			pts[cnt++].z = pb.z;
 		}
 	}
-	*(int*) (result + 8) = cnt;
+	result->unk_08 = cnt;
 }

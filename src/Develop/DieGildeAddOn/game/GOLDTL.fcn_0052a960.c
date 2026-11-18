@@ -92,7 +92,7 @@ void __cdecl fcn_0052a960(Stamp* now)
 		fcn_004463f0(0, 1, light);
 		g_77472c = 0;
 	}
-	if ((fabs(g_7e42e0 - 1.0f) < 0.1 && abs(g_7e4380 - v) < 10 && g_7e2a60 == g_6b8010) || g_6b5cc0 != 0) {
+	if ((fabs(g_7e42e0 - 1.0f) < 0.1 && abs(g_7e4380 - v) < 10 && g_7e2a60 == g_6b8010) || d3_ActiveCameraAnimation != 0) {
 		fcn_004463f0(0, 1, light);
 		return;
 	}

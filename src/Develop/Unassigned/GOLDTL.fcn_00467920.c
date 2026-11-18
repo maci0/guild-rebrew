@@ -34,7 +34,7 @@ extern double g_662908;			/* 0x00662908 */
 extern double g_662950;			/* 0x00662950 */
 extern int g_1015ea4;			/* 0x01015ea4 */
 extern int g_67d370;			/* 0x0067d370 */
-extern int g_67d378;			/* 0x0067d378 */
+extern int d2_CurrentFont;			/* 0x0067d378 */
 extern int g_67d398;			/* 0x0067d398 */
 extern int g_102d020;			/* 0x0102d020 */
 extern int g_102d024;			/* 0x0102d024 */
@@ -509,7 +509,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 			}
 			sprintf(f.v3c, str_67d444, f.v38);
 			n = (g_1015ea4 - GLYPH_H(h0)) / 2 - 1;
-			x = fcn_0046b520(f.v3c, g_67d378);
+			x = fcn_0046b520(f.v3c, d2_CurrentFont);
 			fcn_0046bbc0(e[4] - x - 4, e[5] - n,
 				     (int) b, f.v3c, 0);
 			sprintf(f.v3c, str_67d444, f.v10);

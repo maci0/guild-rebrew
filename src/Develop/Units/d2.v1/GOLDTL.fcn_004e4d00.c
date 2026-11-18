@@ -6,7 +6,7 @@ extern int g_772f3c;
 extern int g_68bfb8;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int* g_772f40;
+extern int* cut_ActiveCutscene;
 
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_004cfca0(void);
@@ -34,7 +34,7 @@ int __cdecl fcn_004e4d00(int secs, int(__cdecl* cb)(int), int arg)
 				g_774654 = 1;
 			}
 			fcn_004cfca0();
-			fcn_004e5140((*(int*)&g_772f40));
+			fcn_004e5140((*(int*)&cut_ActiveCutscene));
 		} while (fcn_005373e0(fcn_004e4de0, g_68bfb8 | 0x8000) != 0);
 	}
 	return res;

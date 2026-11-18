@@ -1,13 +1,14 @@
 #include "gold_gui.h"
+#include "Develop/Units/d2.v1/gold_window.h"
 
 extern char* g_f8f080;
-extern GuiWin g_f8f120[];
+extern GOLD_GUI_WINDOW g_f8f120[];
 
 /* ADDRESS: GOLD 0x00475a90 */
 void __cdecl fcn_00475a90(int id, int flag)
 {
     GuiEnt* e;
-    GuiWin* w;
+    GOLD_GUI_WINDOW* w;
     int i;
     int enabled;
 

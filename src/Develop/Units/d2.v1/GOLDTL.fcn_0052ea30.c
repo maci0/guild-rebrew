@@ -3,7 +3,7 @@
 
 extern int g_6a25b8;
 extern int g_6a25bc;
-extern int g_6a25c0;
+extern int d2_CurrentValueBar;
 extern int g_6a25c4[4];
 extern int g_6a25d4;
 extern int g_6a25d8;
@@ -78,7 +78,7 @@ void __cdecl fcn_0052ea30(void)
 	if (g_6a25b8 == -1) {
 		return;
 	}
-	if (g_7e2aa0 == 0 || g_6a25c0 == -1 || g_6a25bc == -1) {
+	if (g_7e2aa0 == 0 || d2_CurrentValueBar == -1 || g_6a25bc == -1) {
 		goto no_header;
 	}
 	pct = fcn_00508da0(g_7e2aa0);
@@ -95,7 +95,7 @@ void __cdecl fcn_0052ea30(void)
 		io_AppendText(g_6a2f24, (char*) 0x870, g_868060 + *(int*) (g_7e2aa0 + 0x65) * 0x2f4);
 	}
 header_done:
-	d2_SetElementValue(g_6a25c0, 0, 100, pct);
+	d2_SetElementValue(d2_CurrentValueBar, 0, 100, pct);
 	flags = *(unsigned short*) (g_7e2aa0 + 0x5a);
 	if (flags & 4) {
 		e = fcn_005463a0(2, 0, 0x1c, 3, *(int*) (g_7e2aa0 + 1));
@@ -323,8 +323,8 @@ no_target:
 	    && g_67d370 == g_6a25e8 && (g_7e46ac & 0x2000)) {
 		fcn_004bfe00((char*) g_7e2a9c);
 	}
-	if (g_6a25c0 != -1) {
-		d2_SetElementValue(g_6a25c0, 0, 100, *((unsigned char*) g_7e2a9c + 0x12));
+	if (d2_CurrentValueBar != -1) {
+		d2_SetElementValue(d2_CurrentValueBar, 0, 100, *((unsigned char*) g_7e2a9c + 0x12));
 	}
 	d2_SetForm(g_6a25b8, 2);
 	for (i = 0; i < 4; i++) {

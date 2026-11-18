@@ -20,7 +20,7 @@ extern int g_772524;
 extern int g_77253c;
 extern int g_772540;
 extern FILE* g_772564;
-extern int g_77256c;
+#include "Develop/Units/d2.v1/d2_surface.h"
 extern int g_77257c;
 extern int g_772580;
 extern int g_772584;
@@ -90,7 +90,7 @@ void __cdecl fcn_00465c60(void)
 		g_77250c = 0;
 	}
 	if (g_77256c != 0) {
-		fcn_00475f80((void*) g_77256c);
+		fcn_00475f80(g_77256c);
 		g_77256c = 0;
 	}
 	fcn_00477550();

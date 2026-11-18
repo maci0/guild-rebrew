@@ -2,21 +2,21 @@
 extern float g_6628a8;
 extern float g_6628ac;
 
-typedef struct Share {
-	unsigned char kind;
-	char pad[3];
-	float val;
-} Share;
+#include "client_method_registry.h"
 
-typedef struct Deal {
-	char pad0[0x30];
-	Share a[4];
-	char pad50[0x20];
-	Share b[4];
-	unsigned char flags;
-	char pad91[3];
-} Deal;
-/* SIZE 0x94 */
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 typedef struct Rate {
 	float f;
@@ -46,7 +46,7 @@ typedef struct Entry {
 	int ref2;                /* 0xbc */
 } Entry;
 
-extern char g_1008540[];
+extern AM_METHOD g_1008540[];
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
 extern char* g_77261c;
@@ -67,7 +67,7 @@ int __cdecl fcn_004a4680(float* a0, float* a1, int idx, Actor* e, int* rec);
 int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
 	char* a5, int a6)
 {
-	Deal* t;
+	AM_METHOD* t;
 	Entry* p;
 	char* sv[3];
 	char* s;
@@ -86,7 +86,7 @@ int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
 	}
 	*a0 = 0.0f;
 	*a1 = 0.0f;
-	t = (Deal*) (g_1008540 + idx * 0x94);
+	t = &g_1008540[idx];
 	if (e->f168 != 0) {
 		goto calc;
 	}
@@ -142,19 +142,19 @@ fallback:
 	return fcn_004a4680(a0, a1, idx, e, rec);
 calc:
 	for (i = 0; i < 4; i++) {
-		if (t->a[i].val > 0.0f) {
-			if (t->a[i].kind == e->kind) {
-				*a0 += e->rate[t->a[i].kind].f * t->a[i].val * 0.02f;
+		if (t->effects[i].value > 0.0f) {
+			if (t->effects[i].type == e->kind) {
+				*a0 += e->rate[t->effects[i].type].f * t->effects[i].value * 0.02f;
 			} else {
-				*a0 += e->rate[t->a[i].kind].f * t->a[i].val * 0.01f;
+				*a0 += e->rate[t->effects[i].type].f * t->effects[i].value * 0.01f;
 			}
 
 		}
-		if (t->b[i].val > 0.0f) {
-			if (t->b[i].kind == e->kind) {
-				*a1 += e->rate[t->b[i].kind].f * t->b[i].val * 0.02f;
+		if (t->other_effects[i].value > 0.0f) {
+			if (t->other_effects[i].type == e->kind) {
+				*a1 += e->rate[t->other_effects[i].type].f * t->other_effects[i].value * 0.02f;
 			} else {
-				*a1 += e->rate[t->b[i].kind].f * t->b[i].val * 0.01f;
+				*a1 += e->rate[t->other_effects[i].type].f * t->other_effects[i].value * 0.01f;
 			}
 
 		}

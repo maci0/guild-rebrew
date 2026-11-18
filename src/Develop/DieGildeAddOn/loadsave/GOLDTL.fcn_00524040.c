@@ -18,7 +18,7 @@ int __cdecl fcn_00524040(void* stream)
 	int ptr;
 
 	count = 0x3e;
-	if (g_6a23ac >= 0x10048) {
+	if (ls_SaveVersion >= 0x10048) {
 		if (!ls_ReadVfsDataChecked(&count, 4, 1, stream)) {
 			return 0;
 		}
@@ -225,7 +225,7 @@ int __cdecl fcn_00524040(void* stream)
 		if (!ls_ReadVfsDataChecked(b + 0x1dc, 0xd0, 1, stream)) {
 			return 0;
 		}
-		if (g_6a23ac >= 0x10037) {
+		if (ls_SaveVersion >= 0x10037) {
 			if (!ls_ReadVfsDataChecked(b + 0x2ec, 8, 1, stream)) {
 				return 0;
 			}

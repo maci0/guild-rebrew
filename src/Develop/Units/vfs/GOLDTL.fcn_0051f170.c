@@ -39,7 +39,7 @@ typedef struct {
 } Entry;
 
 extern Entry g_85a0a0[16];
-extern int g_6a23ac;
+extern int ls_SaveVersion;
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
 
@@ -93,7 +93,7 @@ int __cdecl fcn_0051f170(void* f)
 		if (vfs_fwrite(&g_85a0a0[i].f50, 4, 1, f) <= 0) {
 			return 0;
 		}
-		if (g_6a23ac >= 0x10014) {
+		if (ls_SaveVersion >= 0x10014) {
 			if (vfs_fwrite(&g_85a0a0[i].f54, 4, 1, f) <= 0) {
 				return 0;
 			}

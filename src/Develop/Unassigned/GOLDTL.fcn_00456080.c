@@ -6,12 +6,12 @@ extern int g_1042580;
 extern int g_1040620;
 extern int g_1040624;
 
-typedef struct Edge456080 {
-	int nxt;
-	int prv;
-} Edge456080;
+#include "Develop/Units/d3/d3_triangle_neighbors.h"
 
-extern Edge456080 g_662c7c[];
+
+
+
+
 
 extern void __cdecl fcn_00456400(int i, int j);
 extern void __cdecl fcn_00455c90(int i, int j);
@@ -72,17 +72,17 @@ void __cdecl fcn_00456080(float* v, unsigned char* colors, int base, int size,
 		flags &= 5;
 	if (flags == 0)
 		return;
-	t1 = g_662c7c[top].nxt;
+	t1 = g_662c7c[top].next;
 	if (g_1043040[t1] == ymin) {
-		lower1 = g_662c7c[top].prv;
+		lower1 = g_662c7c[top].previous;
 		upper2 = t1;
-		lower2 = g_662c7c[t1].nxt;
+		lower2 = g_662c7c[t1].next;
 		upper1 = top;
 	}
 	else {
-		t2 = g_662c7c[top].prv;
+		t2 = g_662c7c[top].previous;
 		if (g_1043040[t2] == ymin) {
-			lower1 = g_662c7c[t2].prv;
+			lower1 = g_662c7c[t2].previous;
 			upper1 = t2;
 			upper2 = top;
 			lower2 = t1;

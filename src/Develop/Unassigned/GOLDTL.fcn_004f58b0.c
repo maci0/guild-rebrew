@@ -1,8 +1,8 @@
 
 
 // SIZE 0x8
-#include "client_types.h"
-typedef Pair_99f800 Pair;
+#include "Develop/Unassigned/evidence_link.h"
+
 
 extern Pair_99f800 g_99f800[0x800];
 

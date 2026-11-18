@@ -2,7 +2,7 @@ extern char* g_6b8014;
 extern float g_6628a0;
 extern int g_14ce860;
 extern int g_14ce864;
-extern float g_1042584;
+extern float d3_ProjectionScaleY;
 extern float g_10432a4;
 extern float g_1052bc0;
 extern float g_1052bc8;
@@ -94,7 +94,7 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 				f = verts + i * 6;
 				fcn_005eb225(f + 3, src, (void*) (*(int*) (a0 + 0x1ec) + 0x48));
 				f[0] = g_10432a4 * (g_6628a0 / f[5]) * f[3] + g_1052bc0;
-				f[1] = g_1042584 * f[4] * (g_6628a0 / f[5]) + g_1052bc8;
+				f[1] = d3_ProjectionScaleY * f[4] * (g_6628a0 / f[5]) + g_1052bc8;
 			}
 		}
 		m_FreeTracked(bbox);

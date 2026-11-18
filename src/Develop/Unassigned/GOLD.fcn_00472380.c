@@ -1,6 +1,7 @@
 #include <string.h>
 #include "gold_gui.h"
-extern GuiWin g_00f8f120[];
+#include "Develop/Units/d2.v1/gold_window.h"
+extern GOLD_GUI_WINDOW g_00f8f120[];
 extern GuiEnt* g_00f8f080;
 extern short g_005fe73c;
 void* __cdecl m_alloc(unsigned int, const char*);

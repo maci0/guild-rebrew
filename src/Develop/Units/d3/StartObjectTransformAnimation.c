@@ -24,7 +24,7 @@ typedef struct {
 } D3_OBJ_ANIM_FRAME;
 
 extern int g_6b5cbc;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 #include "Develop/Units/d3/d3_camera.h"
 int __cdecl fcn_004339e0(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_FRAME*);
 
@@ -60,7 +60,7 @@ int __cdecl StartObjectTransformAnimation(char* objekt, float x, float y, float 
     ergebnis = fcn_004339e0(objekt, flags, 2, frames);
     if (objekt == g_6b8014) {
         g_6b5cbc = 1;
-        g_6b5cc0 = ergebnis;
+        d3_ActiveCameraAnimation = ergebnis;
     }
     return 1;
 }

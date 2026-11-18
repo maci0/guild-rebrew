@@ -15,15 +15,15 @@ typedef struct {
 } Item;
 
 // SIZE 0x34
-typedef struct {
-	int key;
-	int a;
-	int b;
-	int padc;
-	char* from;
-	char* to;
-	char pad18[0x34 - 0x18];
-} Edge;
+#include "Develop/Units/d2.v1/d2_dependency_node.h"
+
+
+
+
+
+
+
+
 
 extern int g_7f4c10;
 extern volatile int g_6b7fac;
@@ -33,7 +33,7 @@ extern Item g_1038150[];
 extern Win_1015f40 g_1015f40[0x60];
 extern char g_699a9c[];
 extern int g_85ab60;
-extern Rec34_7f3f00 g_7f3f00[];
+
 
 int __cdecl fcn_00470820(int a, int b, int c);
 void __cdecl fcn_00471b60(int h);
@@ -42,7 +42,7 @@ void __cdecl io_AppendText(char* fmt, int a, int b);
 int __cdecl fcn_0050e830(unsigned char* a, unsigned short* b, int w, int h);
 void __cdecl fcn_00471e30(int h);
 void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b);
-void __cdecl fcn_0050f750(char* a, char* b, char* c, char* d);
+void __cdecl fcn_0050f750(int a, int b, int c, int d);
 
 int __cdecl fcn_0050f780(int arg, unsigned char* a, unsigned short* b)
 {
@@ -68,12 +68,12 @@ int __cdecl fcn_0050f780(int arg, unsigned char* a, unsigned short* b)
 	fcn_0050ee80(a, b);
 	for (i = 0; i < g_85ab60; i++) {
 		for (j = 0; j < i; j++) {
-			if (((Edge*)g_7f3f00)[j].key == ((Edge*)g_7f3f00)[i].a) {
-				fcn_0050f750(((Edge*)g_7f3f00)[j].from + 0x18, ((Edge*)g_7f3f00)[j].to + 0x30, ((Edge*)g_7f3f00)[i].from + 0x18,
-					     ((Edge*)g_7f3f00)[i].to + 0x18);
-			} else if (((Edge*)g_7f3f00)[j].key == ((Edge*)g_7f3f00)[i].b) {
-				fcn_0050f750(((Edge*)g_7f3f00)[j].from + 0x18, ((Edge*)g_7f3f00)[j].to + 0x30, ((Edge*)g_7f3f00)[i].from + 0x18,
-					     ((Edge*)g_7f3f00)[i].to + 0x18);
+			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_a) {
+				fcn_0050f750(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].x + 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].y + 0x30, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x + 0x18,
+					     ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x18);
+			} else if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_b) {
+				fcn_0050f750(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].x + 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].y + 0x30, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x + 0x18,
+					     ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x18);
 			}
 		}
 	}

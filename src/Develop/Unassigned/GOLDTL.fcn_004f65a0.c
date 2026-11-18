@@ -1,5 +1,6 @@
 #include "client_types.h"
-extern Rec2d_9a3800 g_9a3800[512]; extern Pair_99f800 g_99f800[0x800];
+#include "client_straftat.h"
+extern Pair_99f800 g_99f800[0x800];
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 /* ADDRESS: GOLDTL 0x004f65a0 */
 void* __cdecl fcn_004f65a0(unsigned char* a1, int cap, int* out, int* out_count)
@@ -34,18 +35,18 @@ void* __cdecl fcn_004f65a0(unsigned char* a1, int cap, int* out, int* out_count)
 	group_limit = 1;
 	id = *(int*) (a1 + 4);
 	for (off = 0; off < 0x5a00; off += 0x2d) {
-		if (*(unsigned int*) ((char*) g_9a3800 + 0x25 + off) <= 0) {
+		if (((STRAFTAT_RECORD*) ((char*) g_9a3800 + off))->state <= 0) {
 			continue;
 		}
-		if (*(int*) ((char*) g_9a3800 + 0x16 + off) == id) {
+		if (((STRAFTAT_RECORD*) ((char*) g_9a3800 + off))->target_id == id) {
 			continue;
 		}
-		ent = gm_LookupEntityRecordById(*(int*) ((char*) g_9a3800 + 0x16 + off));
+		ent = gm_LookupEntityRecordById(((STRAFTAT_RECORD*) ((char*) g_9a3800 + off))->target_id);
 		if (ent == 0) {
 			continue;
 		}
 		for (rec = (unsigned char*) g_99f800 + 4; (int) rec < 0x9a3804; rec += 8) {
-			if (*(int*) (rec - 4) == id && *(int*) rec == *(int*) ((char*) g_9a3800 + off)) {
+			if (*(int*) (rec - 4) == id && *(int*) rec == ((STRAFTAT_RECORD*) ((char*) g_9a3800 + off))->id) {
 				goto next;
 			}
 		}

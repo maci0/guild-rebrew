@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "gold_gui.h"
-extern GuiWin g_00f8f120[];
+#include "Develop/Units/d2.v1/gold_window.h"
+extern GOLD_GUI_WINDOW g_00f8f120[];
 extern GuiEnt* g_00f8f080;
 char* __cdecl fcn_00430470(char*, const char*, void*);
 unsigned int __cdecl fcn_00430bd0(void*, unsigned int, unsigned int, char*);

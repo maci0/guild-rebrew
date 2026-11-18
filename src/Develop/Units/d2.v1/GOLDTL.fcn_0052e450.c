@@ -25,7 +25,7 @@ extern char* g_1015ea0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14b5e84;
 extern int g_6a25e8;
-extern int g_6a25c0;
+extern int d2_CurrentValueBar;
 extern int g_6a25d4;
 extern int g_6b5c48;
 
@@ -57,8 +57,8 @@ void __cdecl fcn_0052e450(unsigned short* e)
 			if (*parent == g_774970) {
 				g_6a25e8 = fcn_0052dee0(x, 0xac, g_14b5e84);
 			}
-			g_6a25c0 = fcn_004677e0(0x18, 0x66, 0x30, 0, 0x64, 0x75, 0x442, g_772514);
-			d2_SetElementValue(g_6a25c0, 0, 0x64, *((unsigned char*) e + 0x12));
+			d2_CurrentValueBar = fcn_004677e0(0x18, 0x66, 0x30, 0, 0x64, 0x75, 0x442, g_772514);
+			d2_SetElementValue(d2_CurrentValueBar, 0, 0x64, *((unsigned char*) e + 0x12));
 			d2_SetForm(g_6a25b8, 2);
 			g_6a25d4 = g_772514;
 			g_6b5c48 = *(int*) ((char*) e + 0x3b);

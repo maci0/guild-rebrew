@@ -27,13 +27,13 @@ typedef struct {
 #pragma pack(pop)
 
 // SIZE 0x21c
-typedef struct {
-	char pad0[2];
-	unsigned char type;
-	char pad3;
-	int id;
-	char pad8[0x21c - 8];
-} Entity;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 // SIZE 0x8
 typedef struct {
@@ -42,7 +42,7 @@ typedef struct {
 } Handle;
 
 extern unsigned char* lpGebaeudePROT;
-extern char g_7f4ca0[];
+
 extern unsigned char g_773d75;
 
 
@@ -70,7 +70,7 @@ void __cdecl fcn_00512d20(Player* p)
 	o = &((Office*)lpGebaeudePROT)[p->office];
 	if (o->kind == 9) {
 		fcn_004c51f0(p->id, -1, 0x136, 1, (*(char*)&g_773d75), 0);
-		fcn_004c5150(((Entity*)g_7f4ca0)[p->slot].id, -1, (*(char*)&g_773d75), fcn_0050b750(0x1f4, (*(char*)&g_773d75)));
+		fcn_004c5150(((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_id, -1, (*(char*)&g_773d75), fcn_0050b750(0x1f4, (*(char*)&g_773d75)));
 	} else if (o->kind != 4 && o->kind != 0x10 && o->kind != 0x13) {
 		fcn_004c51f0(p->id, -1, 0x134, 1, (*(char*)&g_773d75), 0);
 	}
@@ -79,7 +79,7 @@ void __cdecl fcn_00512d20(Player* p)
 			if (o->kind == 0x1d) {
 				h = fcn_004f36f0(p);
 			} else {
-				if (((Entity*)g_7f4ca0)[p->slot].type != 6 && ((Entity*)g_7f4ca0)[p->slot].type != 7) {
+				if (((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_state != 6 && ((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_state != 7) {
 					fcn_004c6090(p, 0, o->level, 0);
 				}
 				h = fcn_004c6090(p, 0, o->level, 0);

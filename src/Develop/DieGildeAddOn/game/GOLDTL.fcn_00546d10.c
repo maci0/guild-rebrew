@@ -27,7 +27,7 @@ void __cdecl fcn_00546d10(void)
 	int i;
 
 	fcn_00546b40();
-	for (i = 0; i <= g_7749d4 && i < 1024; i++) {
+	for (i = 0; i <= he_LastEventSlot && i < 1024; i++) {
 		if (((struct s_77e980*)g_77e980)[i].b0 != 0 && (((struct s_77e980*)g_77e980)[i].b78 & 0x18) == 0) {
 			fcn_00546850(&((struct s_77e980*)g_77e980)[i]);
 			if (fcn_00500cb0(((char*)&g_7f4c00), ((struct s_77e980*)g_77e980)[i].f52) > 0 && ((struct s_77e980*)g_77e980)[i].b0 < 0xa7) {

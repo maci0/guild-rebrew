@@ -11,7 +11,7 @@ extern float g_6a2558;
 extern float g_6a2560;
 extern float g_774690;
 extern int g_6a256c;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 extern int g_6b5cbc;
 
 int __cdecl fcn_004133e0(char* e, float* lo, float* hi);
@@ -66,7 +66,7 @@ void __cdecl fcn_0052d4c0(char* entity)
 	t[1] = *(float*) (cam + 0x88);
 	t[2] = *(float*) (cam + 0x8c);
 	fcn_00433780(cam);
-	g_6b5cc0 = 0;
+	d3_ActiveCameraAnimation = 0;
 	g_6b5cbc = 0;
 	h = fcn_00413d10(w);
 	w[1] = h + ((g_6a2560 - g_6a2558) * g_774690 + g_6a2558);

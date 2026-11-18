@@ -3,19 +3,19 @@
 #include <string.h>
 #pragma intrinsic(memset)
 
-typedef struct {
-	int pad0;
-	int f4;
-	char pad8[0x214];
-} Ent5a66;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
 
 typedef struct {
 	char b[0x2f4];
 } Row5a66;
 // SIZE 0x2f4
 
-extern char g_7f4ca0[];
+
 extern char g_868060[];
 extern char g_6aacdc[];
 extern int g_14ce8e0;
@@ -66,7 +66,7 @@ int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
 				msg[4] = 0x27;
 				*(int*) (msg + 0xc) = -1;
 				msg[0x36] = 1;
-				*(int*) (msg + 8) = ((Ent5a66*)g_7f4ca0)[*(unsigned short*) (who + 0x27)].f4;
+				*(int*) (msg + 8) = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (who + 0x27)].entity_id;
 				*(int*) (msg + 0x58) = *(int*) (who + 1);
 				msg[0x5c] = k;
 				*(int*) (msg + 0x60) = (int) (a - fa);

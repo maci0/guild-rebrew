@@ -15,7 +15,7 @@ extern int g_7e3a50;
 extern int g_7e3a54;
 extern int g_7e3a58;
 extern int g_6b5cbc;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 extern int g_6a256c;
 
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
@@ -158,7 +158,7 @@ void __cdecl fcn_0052ae80(void)
 	g_7e3a58 = next[2];
 	fcn_00433780(g_6b8014);
 	g_6b5cbc = 0;
-	g_6b5cc0 = 0;
+	d3_ActiveCameraAnimation = 0;
 	fcn_00412cf0(g_6b8014, cur, next, g_6a256c, 8);
 	g_774734 = 1;
 }

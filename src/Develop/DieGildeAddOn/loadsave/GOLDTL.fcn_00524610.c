@@ -12,10 +12,10 @@ int __cdecl fcn_00524610(void* x)
 	int i;
 	int j;
 
-	if (g_6a23ac < 0x1003a) {
+	if (ls_SaveVersion < 0x1003a) {
 		n = 0x100;
 	} else {
-		n = g_6a23ac < 0x10042 ? 0x200 : 0x300;
+		n = ls_SaveVersion < 0x10042 ? 0x200 : 0x300;
 	}
 	for (j = 0; j < n; j++) {
 		for (i = 0; i < n; i++) {
@@ -24,7 +24,7 @@ int __cdecl fcn_00524610(void* x)
 			}
 		}
 	}
-	if (g_6a23ac >= 0x10036) {
+	if (ls_SaveVersion >= 0x10036) {
 		for (j = 0; j < n; j++) {
 			for (i = 0; i < n; i++) {
 				if (ls_ReadVfsDataChecked(&g_90e0a0[j][i], 1, 1, x) == 0) {

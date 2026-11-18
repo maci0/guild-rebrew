@@ -1,4 +1,4 @@
-extern int* g_772f40;
+extern int* cut_ActiveCutscene;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 void __cdecl fcn_004cd2a0(char*, float*, float*, int);
@@ -16,7 +16,7 @@ int __cdecl fcn_004cd330(unsigned char* command, char* result)
 {
 	char* e;
 
-	if (g_772f40 == 0 || *g_772f40 != *(int*) (command + 0x10))
+	if (cut_ActiveCutscene == 0 || *cut_ActiveCutscene != *(int*) (command + 0x10))
 		return 1;
 	e = gm_LookupEntityRecordIn32SlotTable(*(int*) (command + 0x35));
 	switch (command[0x14]) {

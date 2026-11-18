@@ -18,11 +18,11 @@ void __cdecl fcn_004ec9e0(void)
 {
 	int i;
 
-	if (g_772fd8 == 0) {
+	if (ahm_PlayerPrototypeCount == 0) {
 		return;
 	}
 	for (i = 0; i < 3; i++) {
-		g_772f90[i].v = g_772fdc[g_772f88 % g_772fd8];
+		g_772f90[i].v = g_772fdc[g_772f88 % ahm_PlayerPrototypeCount];
 		g_772f88++;
 		g_772f90[i].active = 1;
 		g_772f90[i].x = g_772f80;
@@ -30,7 +30,7 @@ void __cdecl fcn_004ec9e0(void)
 		g_772f80 = (g_772f84 + g_772f80) % 25;
 		g_772f78 = (g_772f7c + g_772f78) % 25;
 	}
-	if (g_772f88 >= g_772fd8) {
+	if (g_772f88 >= ahm_PlayerPrototypeCount) {
 		fcn_004ecaa0(1);
 	}
 }

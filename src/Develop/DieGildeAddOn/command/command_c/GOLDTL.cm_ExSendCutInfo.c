@@ -11,7 +11,7 @@ struct cut_4c9d10 {
 extern char g_9b0e20[];
 #include "client_types.h"
 #include "client_packet_queue.h"
-extern int* g_772f40;
+extern int* cut_ActiveCutscene;
 extern volatile int g_6b7fac;
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -25,7 +25,7 @@ int __cdecl cm_ExSendCutInfo(char* cmd, char* out)
 
 	for (i = 0; i < 16; i++) {
 		if (((struct cut_4c9d10*)g_9b0e20)[i].id == *(int*) (cmd + 0x10)) {
-			if (g_772f40 != 0 && *g_772f40 == *(int*) (cmd + 0x14)) {
+			if (cut_ActiveCutscene != 0 && *cut_ActiveCutscene == *(int*) (cmd + 0x14)) {
 				((struct cut_4c9d10*)g_9b0e20)[i] = (*(struct cut_4c9d10*) g_aed340);
 				((struct cut_4c9d10*)g_9b0e20)[i].fc = 0;
 				fcn_0064d41a(buf, "cm_ExSendCutInfo: PlayerId:%i Valid:%i  Ready:%i  Time:%i",
@@ -35,7 +35,7 @@ int __cdecl cm_ExSendCutInfo(char* cmd, char* out)
 		}
 	}
 	if (i >= 16) {
-		if (g_772f40 != 0 && *g_772f40 == *(int*) (cmd + 0x14))
+		if (cut_ActiveCutscene != 0 && *cut_ActiveCutscene == *(int*) (cmd + 0x14))
 			fcn_0064d41a(buf, "cm_ExSendCutInfo(): io-buffer has not been written, because player not found (player id %i)",
 			    *(int*) (cmd + 0x10));
 		return 1;

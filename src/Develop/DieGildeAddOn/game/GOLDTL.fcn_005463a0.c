@@ -3,15 +3,15 @@
 
 #include <stdarg.h>
 
-// SIZE 0x14c
-struct unit {
-	unsigned char kind;
-	char pad1[0x14b];
-};
+#include "Develop/DieGildeAddOn/game/he_action.h"
+
+
+
+
 
 #include "client_types.h"
-extern unit_77e980 g_77e980[1024];
-extern struct unit* g_7dc420;
+
+extern HE_ACTION* g_7dc420;
 extern char g_7749dc;
 extern int g_7749e0;
 extern unsigned char g_6a4758[4];
@@ -19,9 +19,9 @@ extern int g_6a475c;
 extern unsigned short g_6a4760[2];
 extern int g_6a4764;
 
-struct unit* __cdecl he_fn_Handlung(void);
+HE_ACTION* __cdecl he_fn_Handlung(void);
 
-struct unit* __cdecl fcn_005463a0(int n, ...)
+HE_ACTION* __cdecl fcn_005463a0(int n, ...)
 {
 	va_list ap;
 	int i;
@@ -50,7 +50,7 @@ struct unit* __cdecl fcn_005463a0(int n, ...)
 		}
 	}
 	va_end(ap);
-	g_7dc420 = ((struct unit*)g_77e980);
+	g_7dc420 = g_77e980;
 	i = 0;
 	while (g_7dc420->kind == 0 && i < 0x400) {
 		g_7dc420++;

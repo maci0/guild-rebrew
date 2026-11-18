@@ -21,6 +21,6 @@ int __cdecl fcn_004efd30(int a1)
 		}
 		a += 0x170;
 		i++;
-	} while (a < (int) &g_773d38);
+	} while (a < (int) &cm_LastCrimeId);
 	return 0;
 }

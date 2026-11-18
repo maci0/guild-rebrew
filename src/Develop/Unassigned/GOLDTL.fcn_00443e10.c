@@ -1,5 +1,5 @@
 #include "Develop/Units/d3/d3_camera.h"
-extern float g_10432a4, g_1042584, g_1052bc0, g_1052bc8;
+extern float g_10432a4, d3_ProjectionScaleY, g_1052bc0, g_1052bc8;
 extern int g_1042570, g_1042574, g_1042578, g_104257c;
 typedef struct Vec3 {
 	float x;
@@ -36,7 +36,7 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 		fcn_00455450(obj, g_6b8014, (Vec3*) (obj + 0x4c), (Vec3*) p);
 		t = 1.0f / p[2];
 		sx = p[0] * g_10432a4 * t + g_1052bc0;
-		sy = p[1] * g_1042584 * t + g_1052bc8;
+		sy = p[1] * d3_ProjectionScaleY * t + g_1052bc8;
 		d = *(float*) (obj + 0x68) * g_10432a4 * 0.5f * t;
 		rc[0] = (int) (sx - d);
 		rc[2] = (int) (sx + d);
@@ -72,7 +72,7 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 		ix = (int) (g_10432a4 * rec[-1] * t + g_1052bc0);
 		rc[0] = rc[0] < ix ? rc[0] : ix;
 		rc[2] = rc[2] > ix ? rc[2] : ix;
-		iy = (int) (g_1042584 * rec[0] * t + g_1052bc8);
+		iy = (int) (d3_ProjectionScaleY * rec[0] * t + g_1052bc8);
 		rc[1] = rc[1] < iy ? rc[1] : iy;
 		rc[3] = rc[3] > iy ? rc[3] : iy;
 		rec += 0x14;

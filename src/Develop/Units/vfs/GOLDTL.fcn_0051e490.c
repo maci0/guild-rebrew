@@ -2,7 +2,7 @@ extern int g_6a23b8;
 extern int g_6a23bc;
 extern char g_6a23c0;
 extern char g_6a23b0[];
-extern int g_6a23ac;
+extern int ls_SaveVersion;
 extern char g_868060[];
 extern char g_6a375c;
 extern char g_7f4c00[];
@@ -67,7 +67,7 @@ int __cdecl fcn_0051e490(void* a0, int a1)
 	i = 0;
 	buf = m_alloc(0xe100, g_6a23b0);
 	v11 = 0x1005a;
-	g_6a23ac = 0x1005a;
+	ls_SaveVersion = 0x1005a;
 	r = vfs_fwrite(&v11, 4, 1, a0);
 	if (r <= 0) {
 		goto fail;

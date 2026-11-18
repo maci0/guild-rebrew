@@ -19,7 +19,7 @@ prefix is attested. A `fio_` infix identifies module file I/O, as in
 | `ch_`, `ai_`, `he_`, `cut_` | Characters, AI, events, cutscenes |
 | `d2_`, `d3_`, `txt_`, `lc_`, `rd_` | UI, renderer, text, location, records |
 | `sv_`, `io_`, `init_`, `main_`, `nt_`, `ob_`, `gs_`, `am_` | Client state, I/O, startup, main loop, network, objects, court, method registry |
-| `evt_`, `ecmd_`, `hst_`, `msx_`, `sbs_` | Event scripts, event commands, script host, MSX audio, sample banks |
+| `evt_`, `ecmd_`, `hst_`, `msx_`, `sbs_`, `d3snd_` | Event scripts, event commands, script host, MSX audio, sample banks, D3 sound |
 
 Asset/config prefixes are not automatically function prefixes.
 
@@ -32,6 +32,7 @@ Prefix witnesses in the current source tree:
 | `hst_` | `src/Develop/Unassigned/GOLDTL.hst_ParseText_Fake_1st_Pass.c`, diagnostic naming `hst_ParseText_Fake_1st_Pass` |
 | `msx_` | `src/Develop/Units/Msx/msx.c`, assertion path `D:\develop\units\Msx\msx.c`; attests the unit, not a function spelling |
 | `sbs_` | `docs/name-ledger.tsv`, `sbs:CreateSB` witness for `sbs_CreateSB`; definition in `src/Develop/Units/m_alloc/GOLDTL.sbs_CreateSB.c` |
+| `d3snd_` | GOLDTL diagnostic strings `d3snd_Init` and `d3sndw_Init` (file offsets 0x277750, 0x27779c); attests the prefix for the D3 sound unit |
 
 ## Function naming
 

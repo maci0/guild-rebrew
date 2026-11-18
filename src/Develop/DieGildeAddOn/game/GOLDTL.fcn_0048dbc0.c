@@ -1,15 +1,15 @@
 
 
 
-typedef struct Ent {
-	unsigned short id;
-	char pad2[2];
-	int x4;
-	char pad8[0x21c - 8];
-} Ent;
-// SIZE 0x21c
+#include "entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -22,7 +22,7 @@ int __cdecl fcn_0048dbc0(char* e, char* a2, char* a3)
 {
 	int mask;
 	int idx;
-	Ent* t;
+	ENTITY_RECORD* t;
 	int have;
 	int need;
 
@@ -33,16 +33,16 @@ int __cdecl fcn_0048dbc0(char* e, char* a2, char* a3)
 	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + g_662da8, &idx) == 0) {
 		return 0;
 	}
-	t = &((Ent*)g_7f4ca0)[(unsigned short) idx];
+	t = &((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx];
 	have = (int) (fcn_0050b810(*(int*) (e + 0x178), (*(char*)&g_773d75)) * g_6628bc);
 	need = gm_WalkEntityChain(*(unsigned short*) e);
-	need = (int) ((gm_WalkEntityChain(t->id) + need) * g_6628ac);
+	need = (int) ((gm_WalkEntityChain(t->entity_index) + need) * g_6628ac);
 	if (have < need) {
 		return 0;
 	}
 	*(int*) (a3 + 8) = need;
 	*(int*) (a2 + 8) = 0;
-	*(int*) (a3 + 0xc) = t->x4;
+	*(int*) (a3 + 0xc) = t->entity_id;
 	*(int*) (a3 + 0x10) = 0;
 	*(int*) (a2 + 0x10) = 0;
 	return 1;

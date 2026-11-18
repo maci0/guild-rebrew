@@ -1,4 +1,4 @@
-extern int g_6791d0;
+extern int evt_LastGfxScriptId;
 
 
 
@@ -14,9 +14,9 @@ int __cdecl fcn_00429fe0(int a1, int a2, int a3)
 	if (script != 0) {
 		evt_RunScript(script);
 		result = *(int*) ((char*) script + 0x100);
-		g_6791d0 = result;
+		evt_LastGfxScriptId = result;
 		return result;
 	}
-	g_6791d0 = -1;
+	evt_LastGfxScriptId = -1;
 	return -1;
 }

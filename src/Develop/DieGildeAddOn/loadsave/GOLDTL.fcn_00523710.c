@@ -70,10 +70,10 @@ Figure* __cdecl fcn_00523710(void* f)
 	if (ls_ReadVfsDataChecked(&v, 4, 1, f) == 0) {
 		return 0;
 	}
-	if (g_6a23ac >= 0x10013 && ls_ReadVfsDataChecked(o->x1a8, 0x40, 1, f) == 0) {
+	if (ls_SaveVersion >= 0x10013 && ls_ReadVfsDataChecked(o->x1a8, 0x40, 1, f) == 0) {
 		return 0;
 	}
-	if (g_6a23ac >= 0x1005a && ls_ReadVfsDataChecked(o->x1e8, 0x40, 1, f) == 0) {
+	if (ls_SaveVersion >= 0x1005a && ls_ReadVfsDataChecked(o->x1e8, 0x40, 1, f) == 0) {
 		return 0;
 	}
 	o->value = v;

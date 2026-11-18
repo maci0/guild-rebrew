@@ -15,7 +15,7 @@ struct house {
 extern char* cm_LoadBuf;
 extern unsigned int g_aed328;
 extern unsigned int g_1005820;
-extern int g_6a23ac;
+extern int ls_SaveVersion;
 extern int g_699364;
 extern int g_699368;
 extern int g_7749d0;
@@ -27,7 +27,7 @@ extern int g_773d68;
 extern int g_773d6c;
 extern int g_773d70;
 extern int g_773d7c;
-extern int g_773d38;
+extern int cm_LastCrimeId;
 extern int g_100dc00;
 extern char g_7f4ca0[];
 
@@ -88,13 +88,13 @@ int __cdecl fcn_00525b40(void)
 	g_7e1f70 = g_7f4c00;
 	ls_ReadVfsDataChecked(&g_773d7c, 4, 1, f);
 	ls_ReadVfsDataChecked(&g_100dc00, 0x18, 1, f);
-	if (g_6a23ac >= 0x10030) {
+	if (ls_SaveVersion >= 0x10030) {
 		ls_ReadVfsDataChecked(&g_699368, 4, 1, f);
 	}
-	if (g_6a23ac >= 0x1003d) {
-		ls_ReadVfsDataChecked(&g_773d38, 4, 1, f);
+	if (ls_SaveVersion >= 0x1003d) {
+		ls_ReadVfsDataChecked(&cm_LastCrimeId, 4, 1, f);
 	} else {
-		g_773d38 = 1000000;
+		cm_LastCrimeId = 1000000;
 	}
 	if (ls_LoadExistingEntities(f) == 0) {
 		CloseVfsStream(f);
@@ -131,7 +131,7 @@ int __cdecl fcn_00525b40(void)
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (g_6a23ac >= 0x10045 && amt_fio_LoadAemter(f, g_6a23ac) == 0) {
+	if (ls_SaveVersion >= 0x10045 && amt_fio_LoadAemter(f, ls_SaveVersion) == 0) {
 		CloseVfsStream(f);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;

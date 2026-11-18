@@ -1,29 +1,29 @@
 
 
 
-#include <windows.h>
+#include "client_input.h"
 
-typedef struct Com Com;
 
-// SIZE 0xc
-typedef struct {
-	void* QueryInterface;
-	void* AddRef;
-	ULONG (__stdcall* Release)(Com* self);
-} ComVtbl;
 
-// SIZE 0x4
-struct Com {
-	ComVtbl* vtbl;
-};
 
-extern HWND g_14ce89c;
-extern Com* g_14ce90c;
-extern Com* g_14ce8a0;
-extern Com* g_14cf954;
-extern HANDLE g_14cf94c;
-void __cdecl fcn_004117f0(int a);
-void __cdecl fcn_004117c0(int a);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void __cdecl fcn_00411b10(void)
 {

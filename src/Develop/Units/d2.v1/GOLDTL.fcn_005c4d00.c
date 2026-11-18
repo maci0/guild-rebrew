@@ -9,15 +9,15 @@ typedef struct {
 } Btn5c4d;
 // SIZE 0x8
 
-typedef struct {
-	char pad[0x194];
-	int name;
-	char pad2[0x84];
-} Ent5c4d;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
 
 extern Btn5c4d g_776ca0[256];
-extern char g_7f4ca0[];
+
 
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_0050e380(int, char*);
@@ -34,7 +34,7 @@ void __cdecl fcn_005c4d00(int win, int sub, int idx, int unused)
 	d2_SetForm(win, sub);
 	memset(g_776ca0, 0, sizeof(g_776ca0));
 	fcn_0050e380(idx, buf);
-	io_AppendText(0x1efa, ((Ent5c4d*)g_7f4ca0)[idx].name);
+	io_AppendText(0x1efa, ((ENTITY_RECORD*)g_7f4ca0)[idx].unk_194);
 	k = 0;
 	while (*(int*) (buf + 0x35 + k * 0x1e) != 0 && k < 256) {
 		r = buf + 0x35 + k * 0x1e;

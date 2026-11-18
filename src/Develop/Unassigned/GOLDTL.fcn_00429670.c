@@ -1,7 +1,7 @@
 extern int g_6b7ec8;
 extern char* g_14c9320[0x20];
 extern char* g_6b7e98;
-extern int g_6791d0;
+extern int evt_LastGfxScriptId;
 extern int g_6791c8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -19,7 +19,7 @@ void __cdecl fcn_00429670(char* s)
 	char* c;
 
 	saved = -1;
-	g_6791d0 = -1;
+	evt_LastGfxScriptId = -1;
 	if (g_6b7ec8 < 0x20) {
 		g_14c9320[g_6b7ec8] = g_6b7e98;
 		g_6b7ec8++;

@@ -2,6 +2,7 @@
 
 
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/entity_candidate.h"
 
 typedef struct Query {
 	int x0;
@@ -16,24 +17,19 @@ typedef struct Query {
 } Query;
 // SIZE 0x50
 
-typedef struct Cand {
-	unsigned short* obj;
-	float val;
-} Cand;
-// SIZE 0x8
 
 extern char* g_77261c;
 extern unsigned int g_7728bc;
 
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, Query* q, int c);
-Cand* __cdecl fcn_004a34d0(void);
+ENTITY_CANDIDATE* __cdecl fcn_004a34d0(void);
 
 int __cdecl fcn_004a54a0(unsigned short* e, int queryFlags, unsigned int n, char* src, float lo, float hi, unsigned short* out)
 {
 	Query q;
 	unsigned int len;
 	int i;
-	Cand* t;
+	ENTITY_CANDIDATE* t;
 
 	memset(&q, 0, sizeof(q));
 	len = n * 2;
@@ -51,9 +47,9 @@ int __cdecl fcn_004a54a0(unsigned short* e, int queryFlags, unsigned int n, char
 		}
 	}
 	q.x40 = 0;
-	for (i = (*(int*)&g_7728bc); t = fcn_004a34d0(), i != 0 && t->obj != 0; i--) {
-		if (!(t->val < lo) && !(t->val > hi) && fcn_005cf720(*e, *t->obj, &q, 0) != 0) {
-			*out = *t->obj;
+	for (i = (*(int*)&g_7728bc); t = fcn_004a34d0(), i != 0 && t->entity != 0; i--) {
+		if (!(t->score < lo) && !(t->score > hi) && fcn_005cf720(*e, *(unsigned short*)t->entity, &q, 0) != 0) {
+			*out = *(unsigned short*)t->entity;
 			return 1;
 		}
 	}

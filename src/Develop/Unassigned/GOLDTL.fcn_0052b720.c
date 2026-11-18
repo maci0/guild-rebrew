@@ -5,7 +5,7 @@ extern int g_7746c8;
 extern int g_7746c4;
 extern int g_6b8014;
 extern volatile int g_6b7fac;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 extern int g_6b5cbc;
 extern int g_6b5c84;
 extern int g_6b5c80;
@@ -45,7 +45,7 @@ int __cdecl fcn_0052b720(void)
 	if (mode >= 1 && mode <= 8) {
 		g_7725c4 = 0;
 	}
-	if (g_6b5cc0 != 0 || g_6b5cbc != 0) {
+	if (d3_ActiveCameraAnimation != 0 || g_6b5cbc != 0) {
 		return 0;
 	}
 	if (*(int*) 0x774750 != 0) {

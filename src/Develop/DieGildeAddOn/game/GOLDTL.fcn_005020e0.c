@@ -15,33 +15,33 @@ typedef struct {
 	char pad[0x2f4 - 0xa0];
 } CurveRow;
 
-/* SIZE 0x80; row header words overlay cell 0, as in client_town.h */
-typedef struct {
-	int x0;
-	int x4;
-	int x8;
-	int xc;
-	unsigned short id;
-	char p12[0xe];
-	int x20;
-	int x24;
-	int x28;
-	int x2c;
-	float f30;
-	char p34[0xc];
-	int x40;
-	int x44;
-	float f48;
-	char p4c[4];
-	unsigned char b50;
-	char p51[0x2f];
-} Cell;
+#include "Develop/DieGildeAddOn/game/season_slots.h"
 
-/* SIZE 0x2a90 */
-typedef struct {
-	Cell c[85];
-	char tail[0x10];
-} TownRow;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 typedef struct {
 	char day;
@@ -54,7 +54,7 @@ typedef struct {
 } Stamp;
 
 extern CurveRow g_8680c0[];
-extern TownRow g_85ab80[];
+extern SEASON_TABLE g_85ab80[];
 extern char* lpObjektePROT;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -91,17 +91,17 @@ void __cdecl fcn_005020e0(int a0, char* a1)
 			break;
 	}
 	if (k >= n - 1) {
-		g_85ab80[a0].c[0].x0 = g_8680c0[a0].a[n].val;
+		g_85ab80[a0].unk_00 = g_8680c0[a0].a[n].val;
 	} else if (year == g_8680c0[a0].a[k].key) {
-		g_85ab80[a0].c[0].x0 = (stamp.month + (year - g_8680c0[a0].a[k].key) * 12) * (g_8680c0[a0].a[k + 2].val - g_8680c0[a0].a[k + 1].val)
+		g_85ab80[a0].unk_00 = (stamp.month + (year - g_8680c0[a0].a[k].key) * 12) * (g_8680c0[a0].a[k + 2].val - g_8680c0[a0].a[k + 1].val)
 		    / ((g_8680c0[a0].a[k + 1].key - g_8680c0[a0].a[k].key) * 12) + g_8680c0[a0].a[k + 1].val;
 	} else if (k > 0) {
-		g_85ab80[a0].c[0].x0 = (stamp.month + (year - g_8680c0[a0].a[k - 1].key) * 12) * (g_8680c0[a0].a[k + 1].val - g_8680c0[a0].a[k].val)
+		g_85ab80[a0].unk_00 = (stamp.month + (year - g_8680c0[a0].a[k - 1].key) * 12) * (g_8680c0[a0].a[k + 1].val - g_8680c0[a0].a[k].val)
 		    / ((g_8680c0[a0].a[k].key - g_8680c0[a0].a[k - 1].key) * 12) + g_8680c0[a0].a[k].val;
 	} else {
-		g_85ab80[a0].c[0].x0 = g_8680c0[a0].a[1].val;
+		g_85ab80[a0].unk_00 = g_8680c0[a0].a[1].val;
 	}
-	g_85ab80[a0].c[0].x0 = g_85ab80[a0].c[0].x4 * g_85ab80[a0].c[0].x0 / 1000;
+	g_85ab80[a0].unk_00 = g_85ab80[a0].unk_04 * g_85ab80[a0].unk_00 / 1000;
 
 	for (n = 0; n < 9; n++) {
 		if (g_8680c0[a0].b[n].key >= g_8680c0[a0].b[n + 1].key)
@@ -114,7 +114,7 @@ void __cdecl fcn_005020e0(int a0, char* a1)
 			break;
 	}
 	if (k >= n - 1) {
-		g_85ab80[a0].c[0].x8 = g_8680c0[a0].b[n].val;
+		g_85ab80[a0].unk_08 = g_8680c0[a0].b[n].val;
 	} else {
 		if (year == g_8680c0[a0].b[k].key) {
 			v = (stamp.month + (year - g_8680c0[a0].b[k].key) * 12) * (g_8680c0[a0].b[k + 2].val - g_8680c0[a0].b[k + 1].val)
@@ -125,27 +125,27 @@ void __cdecl fcn_005020e0(int a0, char* a1)
 		} else {
 			v = g_8680c0[a0].b[1].val;
 		}
-		g_85ab80[a0].c[0].x8 = v;
+		g_85ab80[a0].unk_08 = v;
 	}
-	g_85ab80[a0].c[0].x8 = g_85ab80[a0].c[0].xc * g_85ab80[a0].c[0].x8 / 1000;
+	g_85ab80[a0].unk_08 = g_85ab80[a0].unk_0c * g_85ab80[a0].unk_08 / 1000;
 	for (i = 0; i < 85; i++) {
-		kind = lpObjektePROT[g_85ab80[a0].c[i].id * 0x41];
+		kind = lpObjektePROT[g_85ab80[a0].slots[i].objekt_id * 0x41];
 		if (kind != 0x17 && kind != 0x25) {
-			g_85ab80[a0].c[i].f30 = (float) (((double) fcn_00502450(a0, i) - g_85ab80[a0].c[i].f30) * g_662908 + g_85ab80[a0].c[i].f30);
+			g_85ab80[a0].slots[i].unk_20 = (float) (((double) fcn_00502450(a0, i) - g_85ab80[a0].slots[i].unk_20) * g_662908 + g_85ab80[a0].slots[i].unk_20);
 		}
 		if (a0 == g_773d75) {
-			g_85ab80[a0].c[i].x44 = fcn_005024e0(a0, i);
+			g_85ab80[a0].slots[i].unk_34 = fcn_005024e0(a0, i);
 		} else {
-			g_85ab80[a0].c[i].x44 = g_85ab80[a0].c[i].x40;
+			g_85ab80[a0].slots[i].unk_34 = g_85ab80[a0].slots[i].unk_30;
 		}
-		g_85ab80[a0].c[i].f48 = fcn_005025a0(a0, i);
-		if (g_85ab80[a0].c[i].b50) {
-			g_85ab80[a0].c[i].f30 = (float) g_85ab80[a0].c[i].x44;
+		g_85ab80[a0].slots[i].unk_38 = fcn_005025a0(a0, i);
+		if (g_85ab80[a0].slots[i].entries[0].kind) {
+			g_85ab80[a0].slots[i].unk_20 = (float) g_85ab80[a0].slots[i].unk_34;
 		}
-		g_85ab80[a0].c[i].x20 = 0;
-		g_85ab80[a0].c[i].x24 = 0;
-		g_85ab80[a0].c[i].x2c = 0;
-		g_85ab80[a0].c[i].x28 = 0;
+		g_85ab80[a0].slots[i].unk_10 = 0;
+		g_85ab80[a0].slots[i].unk_14 = 0;
+		g_85ab80[a0].slots[i].unk_1c = 0;
+		g_85ab80[a0].slots[i].unk_18 = 0;
 	}
 	if (g_14cbca0 == -1) {
 		fcn_005017a0(a0);

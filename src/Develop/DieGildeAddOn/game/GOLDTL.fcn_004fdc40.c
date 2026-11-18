@@ -1,19 +1,19 @@
 
 
-typedef struct
-{
-	char b[0x44];
-} Rec44;
+#include "Develop/DieGildeAddOn/game/head_set.h"
+
+
+
 // SIZE 0x44
 
-extern Rec44 g_690648[];
-extern Rec44 g_690f98[];
-extern Rec44 g_6918e8[];
-extern Rec44 g_693228[];
+extern HEAD_SET g_690648[];
+extern HEAD_SET g_690f98[];
+extern HEAD_SET g_6918e8[];
+
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
-Rec44* __cdecl fcn_004fdc40(void)
+HEAD_SET* __cdecl fcn_004fdc40(void)
 {
 	switch (gm_RandomMod(4)) {
 	case 0:

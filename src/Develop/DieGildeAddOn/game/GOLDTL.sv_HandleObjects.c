@@ -25,7 +25,7 @@ extern char g_7e2714[];
 extern char* g_7e2a9c;
 extern char* g_7e2aa0;
 extern int g_14ce8cc;
-extern int g_6b5cc0;
+extern int d3_ActiveCameraAnimation;
 extern short g_14ce8c0;
 extern short g_14ce8c2;
 extern int g_6a3764;
@@ -141,7 +141,7 @@ L6d3:
 	}
 	g_7e2700 = 0;
 L744:
-	if (g_14ce8cc == 0 || g_6b5cc0 != 0
+	if (g_14ce8cc == 0 || d3_ActiveCameraAnimation != 0
 	    || g_14ce8c0 <= g_6a3764 || g_14ce8c0 >= g_6a376c
 	    || g_14ce8c2 <= g_6a3768 || g_14ce8c2 >= g_6a3770
 	    || g_100f894 != -1 || g_67d8d4 != -1) {

@@ -3,15 +3,16 @@
 #include <string.h>
 
 #include "gold_gui.h"
+#include "Develop/Units/d2.v1/gold_window.h"
 
-extern GuiWin g_00f8f120[]; /* 0x00f8f120 */
+extern GOLD_GUI_WINDOW g_00f8f120[]; /* 0x00f8f120 */
 extern GuiEnt** g_006ed964; /* 0x006ed964 */
 
 void __cdecl fcn_00472f40(int id);
 
 void __cdecl fcn_00472fc0(int win)
 {
-	GuiWin* w;
+	GOLD_GUI_WINDOW* w;
 	GuiEnt* tmp[0x181];
 	int i;
 	int first;
@@ -26,7 +27,7 @@ void __cdecl fcn_00472fc0(int win)
 			last = i;
 			break;
 		}
-		if (g_006ed964[i] != 0 && g_006ed964[i]->parent == w && first == -1) {
+		if (g_006ed964[i] != 0 && g_006ed964[i]->parent == (void*) w && first == -1) {
 			first = i;
 		}
 	}

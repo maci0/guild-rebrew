@@ -1,5 +1,6 @@
 #include "gold_gui.h"
-extern GuiWin g_00f8f120[];
+#include "Develop/Units/d2.v1/gold_window.h"
+extern GOLD_GUI_WINDOW g_00f8f120[];
 extern int g_00f8f08c;
 extern int g_00f8f088;
 void __cdecl fcn_0046cd90(int, int, int);
@@ -7,7 +8,7 @@ void __cdecl fcn_0046cd90(int, int, int);
 /* ADDRESS: GOLD 0x004756a0 */
 void __cdecl fcn_004756a0(int index, unsigned char flags)
 {
-    GuiWin* window;
+    GOLD_GUI_WINDOW* window;
     int x;
     int y;
     window = &g_00f8f120[index];

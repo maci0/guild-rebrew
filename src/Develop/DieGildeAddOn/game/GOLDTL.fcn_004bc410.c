@@ -1,4 +1,5 @@
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/ambient_animal_slot.h"
 
 extern char g_6812d0[][32];
 
@@ -10,7 +11,7 @@ char* __cdecl fcn_0040c120(char*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bc410 */
-void __cdecl fcn_004bc410(char** entry, int kind)
+void __cdecl fcn_004bc410(AMBIENT_ANIMAL_SLOT* entry, int kind)
 {
 	float pos[4];
 	char buf[0x80];
@@ -29,15 +30,15 @@ void __cdecl fcn_004bc410(char** entry, int kind)
 	else if (kind == 6)
 		strcpy(buf, "schwein_SCHWEIN");
 	obj = ch_CreateAtPosition(buf, pos);
-	entry[0] = obj;
+	entry->objekt = obj;
 	if (obj != 0) {
 		*(float*) (obj + 0x1a0) = 1.0f;
-		*(float*) (entry + 4) = pos[0];
-		*(float*) (entry + 5) = pos[1];
-		*(float*) (entry + 6) = pos[2];
-		*(int*) (entry + 1) = kind;
-		*(int*) (entry[0] + 4) = 2;
-		*(int*) (*(char**) (entry[0] + 0x34) + 0x224) = 0;
-		fcn_0040c120(entry[0], 0x38, 1);
+		entry->pos[0] = pos[0];
+		entry->pos[1] = pos[1];
+		entry->pos[2] = pos[2];
+		entry->kind = kind;
+		*(int*) (entry->objekt + 4) = 2;
+		*(int*) (*(char**) (entry->objekt + 0x34) + 0x224) = 0;
+		fcn_0040c120(entry->objekt, 0x38, 1);
 	}
 }

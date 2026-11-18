@@ -1,19 +1,19 @@
 
 
 
-typedef struct Ent {
-	char pad0[4];
-	int x4;
-	char pad8[0x21c - 8];
-} Ent;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
 
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int a, int* b, float c, float r, int* out);
-int __cdecl fcn_0055c140(char* e, Ent* t, int* cnt);
-int __cdecl fcn_00579640(Ent* t, char* e);
+int __cdecl fcn_0055c140(char* e, ENTITY_RECORD* t, int* cnt);
+int __cdecl fcn_00579640(ENTITY_RECORD* t, char* e);
 double __cdecl gm_RandomFloat01(void);
 
 int __cdecl fcn_004aa580(char* e, char* a2, char* out)
@@ -30,10 +30,10 @@ int __cdecl fcn_004aa580(char* e, char* a2, char* out)
 	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x40), &idx) == 0) {
 		return 0;
 	}
-	if (fcn_0055c140(e, &((Ent*)g_7f4ca0)[(unsigned short) idx], &cnt) == 0) {
+	if (fcn_0055c140(e, &((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx], &cnt) == 0) {
 		return 0;
 	}
-	if (fcn_00579640(&((Ent*)g_7f4ca0)[(unsigned short) idx], e) == 0) {
+	if (fcn_00579640(&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx], e) == 0) {
 		return 0;
 	}
 	if (cnt > 3) {
@@ -43,6 +43,6 @@ int __cdecl fcn_004aa580(char* e, char* a2, char* out)
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = ((Ent*)g_7f4ca0)[(unsigned short) idx].x4;
+	*(int*) (out + 4) = ((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx].entity_id;
 	return 1;
 }

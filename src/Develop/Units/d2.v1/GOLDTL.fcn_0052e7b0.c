@@ -18,7 +18,7 @@ typedef struct {
 } Ctl;
 
 extern int g_6a25b8;
-extern int g_6a25c0;
+extern int d2_CurrentValueBar;
 extern int g_6a25d8;
 extern int g_1040494;
 extern int g_7746f0;
@@ -68,8 +68,8 @@ void __cdecl fcn_0052e7b0(char* e)
 		io_AppendText(g_6a2e8c, buf, pct);
 		d2_SetForm(g_6a25b8, 0);
 		x = (((Slot*)g_1015f40)[g_772514].width - 0x30) >> 1;
-		g_6a25c0 = fcn_004677e0(0x18, 0x6c, 0x30, 0, 0x64, 0x75, 0x442, g_772514);
-		d2_SetElementValue(g_6a25c0, -0x7f, 0x7f, rel);
+		d2_CurrentValueBar = fcn_004677e0(0x18, 0x6c, 0x30, 0, 0x64, 0x75, 0x442, g_772514);
+		d2_SetElementValue(d2_CurrentValueBar, -0x7f, 0x7f, rel);
 		if (e[2] == 5 || e[2] == 6 || e[2] == 7) {
 			fcn_0046f740(x - 8, 0x30, *(int*) (e + 0x54), g_772514);
 		}

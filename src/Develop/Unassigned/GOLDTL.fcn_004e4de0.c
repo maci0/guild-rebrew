@@ -25,6 +25,6 @@ void __cdecl fcn_004e4de0(int secs)
 		if ((*(unsigned int*)&g_6b7fac) >= end)
 			g_774654 = 1;
 		fcn_004cfca0();
-		fcn_004e5140((*(int*)&g_772f40));
+		fcn_004e5140((*(int*)&cut_ActiveCutscene));
 	} while (fcn_005373e0(fcn_004e4de0, g_68bfb8 | 0x8000) != 0);
 }

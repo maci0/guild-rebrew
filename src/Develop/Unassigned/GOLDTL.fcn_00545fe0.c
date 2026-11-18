@@ -17,28 +17,28 @@ struct blob160 {
 };
 
 // SIZE 0x14c
-struct unit {
-	unsigned char kind;
-	char pad1[3];
-	int serial;
-	unsigned short house;
-	char pada[2];
-	int owner;
-	int value;
-	int params[12];
-	struct pos14 pos;
-	char pad52[0x1e];
-	int f70;
-	int f74;
-	unsigned char flags;
-	char pad79[3];
-	int f7c;
-	char pad80[4];
-	int f84;
-	char pad88[4];
-	int extra[8];
-	struct blob160 blob;
-};
+#include <string.h>
+#include "Develop/DieGildeAddOn/game/he_action.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SIZE 0xf8
 struct spawn {
@@ -55,25 +55,25 @@ struct spawn {
 	struct blob160 blob;
 };
 
-extern void (__cdecl* g_7d1d80[])(struct unit*);
+extern void (__cdecl* g_7d1d80[])(HE_ACTION*);
 extern char g_7dc440[];
 #include "client_types.h"
-extern unit_77e980 g_77e980[1024];
+
 extern unsigned char* g_7d1980[];
 extern int g_7749d0;
-extern int g_7749d4;
+extern int he_LastEventSlot;
 extern int g_7749d8;
 extern int g_7dc424;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 
-struct unit* __cdecl fcn_00545fe0(struct spawn* t)
+HE_ACTION* __cdecl fcn_00545fe0(struct spawn* t)
 {
 	char* e;
 	int i;
 	int j;
 	int k;
-	struct unit* u;
+	HE_ACTION* u;
 
 	e = 0;
 	if (t->kind >= 0xa7 || g_7d1d80[t->kind] == 0 || ((int*)g_7dc440)[t->kind] == 0) {
@@ -86,16 +86,16 @@ struct unit* __cdecl fcn_00545fe0(struct spawn* t)
 		}
 	}
 	for (i = 0; i < 1024; i++) {
-		if (((struct unit*)g_77e980)[i].kind == 0) {
+		if (((HE_ACTION*)g_77e980)[i].kind == 0) {
 			break;
 		}
 	}
 	if (i == 1024) {
 		return 0;
 	}
-	u = &((struct unit*)g_77e980)[i];
-	if (i > g_7749d4) {
-		g_7749d4 = i;
+	u = &((HE_ACTION*)g_77e980)[i];
+	if (i > he_LastEventSlot) {
+		he_LastEventSlot = i;
 	}
 	if (t->owner == -1) {
 		u->owner = -1;
@@ -106,34 +106,34 @@ struct unit* __cdecl fcn_00545fe0(struct spawn* t)
 	}
 	if (t->flags & 8) {
 		for (j = 0; j < 256; j++) {
-			if (((struct unit**)g_7d1980)[j] == 0) {
+			if (((HE_ACTION**)g_7d1980)[j] == 0) {
 				break;
 			}
 		}
 		if (j == 256) {
 			return 0;
 		}
-		((struct unit**)g_7d1980)[j] = u;
+		((HE_ACTION**)g_7d1980)[j] = u;
 		if (j > g_7749d8) {
 			g_7749d8 = j;
 		}
 	}
 	u->kind = t->kind;
 	u->serial = g_7749d0++;
-	u->value = t->value;
+	u->unk_10 = t->value;
 	for (k = 0; k < 12; k++) {
-		u->params[k] = t->params[k];
+		u->unk_14[k] = t->params[k];
 	}
-	u->pos = t->pos;
+	memcpy(u->position, &t->pos, sizeof(t->pos));
 	u->flags = t->flags;
-	u->f70 = 0;
-	u->f74 = 0;
-	u->f7c = 0;
-	u->f84 = -1;
+	u->unk_70 = 0;
+	u->slot = 0;
+	u->data = 0;
+	u->unk_84 = -1;
 	for (k = 0; k < 8; k++) {
-		u->extra[k] = t->extra[k];
+		u->unk_8c[k] = t->extra[k];
 	}
-	u->blob = t->blob;
+	memcpy(u->unk_ac, &t->blob, sizeof(t->blob));
 	g_7d1d80[t->kind](u);
 	g_7dc424++;
 	return u;

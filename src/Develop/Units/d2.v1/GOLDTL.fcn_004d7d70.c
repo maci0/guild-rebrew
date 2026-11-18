@@ -41,7 +41,7 @@ void __cdecl fcn_004d7d70(char* rec)
 {
 	ent2c l;
 
-	d2_SetElementValue(g_68b7a4, 0, g_68bfbc, g_772f34 - g_772f30 + 1);
+	d2_SetElementValue(g_68b7a4, 0, g_68bfbc, g_772f34 - cut_CurrentTick + 1);
 	fcn_0052ae80();
 	fcn_004d0a20();
 	fcn_004d06d0();

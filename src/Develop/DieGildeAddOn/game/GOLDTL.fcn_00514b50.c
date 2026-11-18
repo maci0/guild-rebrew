@@ -5,13 +5,13 @@
 #include <windows.h>
 
 // SIZE 0x21c
-typedef struct {
-	short slot;
-	unsigned char type;
-	char pad3[0x161];
-	unsigned char trade;
-	char pad165[0x21c - 0x165];
-} Entity;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 // SIZE 0x2f4
 typedef struct {
@@ -36,7 +36,7 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7747e8;
-extern char g_7f4ca0[];
+
 extern char g_868060[];
 extern unsigned char g_6a375c;
 extern unsigned char g_7747b0;
@@ -66,7 +66,7 @@ int __cdecl fcn_00514b50(int variant)
 	fcn_00511580(0);
 	if (g_7747e8 != 0) {
 		for (i = 0; i < 768; i++) {
-			if (((Entity*)g_7f4ca0)[i].type == 6) {
+			if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6) {
 				fcn_0053abe0(i);
 				break;
 			}
@@ -109,9 +109,9 @@ int __cdecl fcn_00514b50(int variant)
 			wares[0] = 0x12;
 		} else {
 			for (i = 0; i < 768; i++) {
-				if (((Entity*)g_7f4ca0)[i].type == 6 || ((Entity*)g_7f4ca0)[i].type == 7) {
+				if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7) {
 					for (j = 0; j < 8; j++) {
-						if (((Entity*)g_7f4ca0)[i].trade == wares[j]) {
+						if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_164 == wares[j]) {
 							wares[j] = 0;
 							break;
 						}

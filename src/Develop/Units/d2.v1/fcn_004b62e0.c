@@ -1,12 +1,12 @@
 #include <string.h>
 
-typedef struct Ent {
-	unsigned short id;
-	char pad2[2];
-	int x4;
-	char pad8[0x21c - 8];
-} Ent;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 typedef struct Job {
 	int op;
@@ -30,7 +30,7 @@ typedef struct Req {
 } Req;
 // SIZE 0x7c
 
-extern char g_7f4ca0[];
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_10069a0[];
 extern signed char g_6a3440;
@@ -50,7 +50,7 @@ void __cdecl fcn_004b62e0(int flags)
 {
 	int level;
 	Req m;
-	Ent* ent;
+	ENTITY_RECORD* ent;
 	Spec* s;
 	int h;
 	int i;
@@ -58,9 +58,9 @@ void __cdecl fcn_004b62e0(int flags)
 
 	s = 0;
 	level = -1;
-	ent = &((Ent*)g_7f4ca0)[g_774970];
+	ent = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 	for (i = 0; i < 128; i++) {
-		if (((Job*)g_10069a0)[i].op != 0 && ((Job*)g_10069a0)[i].id == ent->x4) {
+		if (((Job*)g_10069a0)[i].op != 0 && ((Job*)g_10069a0)[i].id == ent->entity_id) {
 			s = fcn_004b3c50(((Job*)g_10069a0)[i].op);
 			level = s->level + 1;
 			memset(&((Job*)g_10069a0)[i], 0, sizeof(Job));
@@ -73,7 +73,7 @@ void __cdecl fcn_004b62e0(int flags)
 	r = fcn_004b43f0(level);
 	if (r == 0) {
 		g_6a3440 = -1;
-		m.id = ent->x4;
+		m.id = ent->entity_id;
 		m.x10 = 0;
 		h = fcn_004c5790(10, &m);
 		while (fcn_004c4450(h) == 0) {
@@ -81,7 +81,7 @@ void __cdecl fcn_004b62e0(int flags)
 		}
 	} else if (r == 0xff) {
 		g_6a3440 = -1;
-		m.id = ent->x4;
+		m.id = ent->entity_id;
 		m.x10 = 1;
 		h = fcn_004c5790(10, &m);
 		while (fcn_004c4450(h) == 0) {
@@ -89,8 +89,8 @@ void __cdecl fcn_004b62e0(int flags)
 		}
 		fcn_004b5b20(flags);
 	} else {
-		fcn_004b3e10(ent->x4, r, 1);
-		m.id = ent->x4;
+		fcn_004b3e10(ent->entity_id, r, 1);
+		m.id = ent->entity_id;
 		m.x10 = 0;
 		h = fcn_004c5790(10, &m);
 		while (fcn_004c4450(h) == 0) {
