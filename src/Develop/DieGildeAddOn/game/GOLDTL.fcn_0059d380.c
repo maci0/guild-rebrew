@@ -52,11 +52,11 @@ extern void __cdecl fcn_00471e30(int);
 /* Oeffnet den Jahrmarkt-Dialog eines Objekts, bietet seine zwei Eintraege an
  * und schickt beim Anklicken das Nachrichtenpaket 0x62. */
 /* ADDRESS: GOLDTL 0x0059d380 */
-int __cdecl fcn_0059d380(int a0, char* a1)
+int __cdecl fcn_0059d380(int a0, char* object)
 {
-	Msg_59d380 m;
+	Msg_59d380 message;
 	char buf[512];
-	char* e;
+	char* event;
 	int i;
 	int dlg;
 	int text;
@@ -64,17 +64,17 @@ int __cdecl fcn_0059d380(int a0, char* a1)
 	int item2;
 	int slot;
 
-	if (a1 == 0) {
+	if (object == 0) {
 		return 0;
 	}
-	e = fcn_005463a0(1, 0, 0x62);
-	while (e != 0) {
-		if (*(int*) (e + 0xb0) == *(int*) (a1 + 1)) {
-			io_FormatTextBuffer(buf, (char*) 0x1a91, *(unsigned short*) (a1 + 0x27), a1);
+	event = fcn_005463a0(1, 0, 0x62);
+	while (event != 0) {
+		if (*(int*) (event + 0xb0) == *(int*) (object + 1)) {
+			io_FormatTextBuffer(buf, (char*) 0x1a91, *(unsigned short*) (object + 0x27), object);
 			fcn_00526120(buf, 0);
 			return 0;
 		}
-		e = he_fn_Handlung();
+		event = he_fn_Handlung();
 	}
 	for (i = 0; i < 0x300; i++) {
 		if (*(char*) (g_7f4ca0 + i * 0x21c + 0x188) != 0) {
@@ -85,8 +85,8 @@ int __cdecl fcn_0059d380(int a0, char* a1)
 		fcn_00526120((char*) g_14abd04, 0);
 		return 0;
 	}
-	if (fcn_0055c050(a1) == 0) {
-		io_FormatTextBuffer(buf, (char*) 0x1a89, *(unsigned short*) (a1 + 0x27), a1);
+	if (fcn_0055c050(object) == 0) {
+		io_FormatTextBuffer(buf, (char*) 0x1a89, *(unsigned short*) (object + 0x27), object);
 		fcn_00526120(buf, 0);
 		return 0;
 	}
@@ -94,7 +94,7 @@ int __cdecl fcn_0059d380(int a0, char* a1)
 	fcn_00471b60(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
-	text = io_AppendText(0x1a8b, a1);
+	text = io_AppendText(0x1a8b, object);
 	item1 = fcn_00472250(dlg, 1, text);
 	item2 = fcn_00472250(dlg, 1, text + 1);
 	g_100f1dc = -1;
@@ -107,34 +107,34 @@ int __cdecl fcn_0059d380(int a0, char* a1)
 		}
 		if (g_67d370 == item1) {
 			fcn_004c35f0();
-			m.b4 = 0x62;
+			message.b4 = 0x62;
 			slot = g_774970 * 0x21c;
-			m.f8 = *(int*) (g_7f4ca0 + slot + 4);
+			message.f8 = *(int*) (g_7f4ca0 + slot + 4);
 			if (g_7746c4 != 0) {
-				m.fc = *(int*) (g_7746c4 + 1);
+				message.fc = *(int*) (g_7746c4 + 1);
 			} else {
-				m.fc = *(int*) (g_7746c8 + 1);
+				message.fc = *(int*) (g_7746c8 + 1);
 			}
-			m.pos28 = g_7f4c00;
-			m.b36 = 2;
-			m.f5c = *(int*) (a1 + 1);
+			message.pos28 = g_7f4c00;
+			message.b36 = 2;
+			message.f5c = *(int*) (object + 1);
 			if (g_7746c4 != 0) {
-				m.f68 = *(int*) (g_7746c4 + 1);
+				message.f68 = *(int*) (g_7746c4 + 1);
 			} else {
-				m.f68 = *(int*) (g_7746c8 + 1);
+				message.f68 = *(int*) (g_7746c8 + 1);
 			}
 			if (g_7746cc != 0) {
-				m.f6c = *(int*) (g_7746cc + 2);
+				message.f6c = *(int*) (g_7746cc + 2);
 			} else {
-				m.f6c = -1;
+				message.f6c = -1;
 			}
 			for (i = 0; i < 0x20; i++) {
 				if (g_7e4260[i] != 0 && g_7e4260[i][0x188] != 0) {
-					m.f58 = *(int*) (g_7e4260[i] + 4);
+					message.f58 = *(int*) (g_7e4260[i] + 4);
 					break;
 				}
 			}
-			fcn_004c5530(&m);
+			fcn_004c5530(&message);
 			g_774654 = 1;
 			sv_ClearObjectSelection();
 		} else if (g_67d370 == item2) {

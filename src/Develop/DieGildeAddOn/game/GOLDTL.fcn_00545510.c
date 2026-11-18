@@ -1,4 +1,4 @@
-extern int g_7749d4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
 extern unit_77e980 g_77e980[1024];
 

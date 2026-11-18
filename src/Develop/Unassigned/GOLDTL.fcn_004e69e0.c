@@ -18,7 +18,7 @@ typedef struct
 } Ent114;
 // SIZE 0x114
 
-extern char g_9a9660[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 Ent114* __cdecl fcn_004e69e0(int type, int key)
 {

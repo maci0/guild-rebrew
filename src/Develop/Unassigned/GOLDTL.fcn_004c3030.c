@@ -1,8 +1,7 @@
 
 
 
-extern int g_774934;
-extern char* g_772d34;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_681750;
 extern float g_664e80;
 

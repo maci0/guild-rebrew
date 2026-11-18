@@ -1,4 +1,4 @@
-extern double g_662b20;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_772e6c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 

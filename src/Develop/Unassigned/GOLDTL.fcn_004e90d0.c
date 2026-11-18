@@ -15,14 +15,14 @@ typedef struct {
 extern Rec18_68da68 g_9a9220[42];
 char* __cdecl gm_LookupEntityRecordById(int);
 
-char* __cdecl fcn_004e90d0(int a1)
+char* __cdecl fcn_004e90d0(int value)
 {
-	int i;
-	int a;
+	int index;
+	int cursor;
 
-	for (i = 0, a = (int) g_9a9220 + 8; a < (int) g_9a9220 + 0x3f8; a += 0x18, i++) {
-		if (*(unsigned char*) a == a1) {
-			return gm_LookupEntityRecordById(((fcn_004e90d0_E*) ((int) g_9a9220 + 4))[i].a);
+	for (index = 0, cursor = (int) g_9a9220 + 8; cursor < (int) g_9a9220 + 0x3f8; cursor += 0x18, index++) {
+		if (*(unsigned char*) cursor == value) {
+			return gm_LookupEntityRecordById(((fcn_004e90d0_E*) ((int) g_9a9220 + 4))[index].a);
 		}
 	}
 	return 0;

@@ -2,7 +2,7 @@
 
 
 extern int g_772f3c;
-extern int g_68bfb8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_005373e0(int, int);
 int __cdecl fcn_00426cc0(int);

@@ -1,8 +1,7 @@
-extern char* g_item_def_table;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include "Develop/DieGildeAddOn/command/command_internal.h"
 
-extern unsigned char g_current_season;
 
 short* __cdecl gm_ResolveParentEntity(short*);
 double __cdecl eval_ObjektPreis2Credits(uint, int);
@@ -13,8 +12,6 @@ char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 
-extern int g_14cbca0;
-extern int g_699364;
 
 
 /* ADDRESS: GOLDTL 0x004c8460 */

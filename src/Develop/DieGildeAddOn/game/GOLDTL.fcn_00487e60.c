@@ -19,7 +19,7 @@ typedef struct Order {
 extern char g_7f4ca0[];
 #include "client_types.h"
 extern entry_100d0c0 g_100d0c0[];
-extern int g_100b0ac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_005463a0(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);

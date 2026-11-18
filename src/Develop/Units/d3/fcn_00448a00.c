@@ -17,7 +17,7 @@ void __cdecl fcn_00439c00(ITEM_448a00*, ITEM_448a00*);
 void __cdecl d3_UnlinkObject(ITEM_448a00*);
 
 /* ADDRESS: GOLDTL 0x00448a00 */
-void __cdecl fcn_00448a00(void* a1, int count, ITEM_448a00** list)
+void __cdecl fcn_00448a00(void* name, int count, ITEM_448a00** list)
 {
 	void* cont;
 	ITEM_448a00* p;
@@ -41,7 +41,7 @@ void __cdecl fcn_00448a00(void* a1, int count, ITEM_448a00** list)
 		}
 	}
 	if (kinder == 0) {
-		cont = vfs_Tfopen(a1, s_6790b0, g_6b7fdc);
+		cont = vfs_Tfopen(name, s_6790b0, g_6b7fdc);
 		fcn_00401360((int) cont, 0x3a6c00bb);
 		fcn_00401360((int) cont, count);
 		for (i = 0; i < count; i++)
@@ -53,7 +53,7 @@ void __cdecl fcn_00448a00(void* a1, int count, ITEM_448a00** list)
 		d3_UnlinkObject(list[i]);
 		fcn_00439c00((ITEM_448a00*) kinder, list[i]);
 	}
-	cont = vfs_Tfopen(a1, s_6790b0, g_6b7fdc);
+	cont = vfs_Tfopen(name, s_6790b0, g_6b7fdc);
 	fcn_00401360((int) cont, 0x3a6c00bb);
 	fcn_00401360((int) cont, 1);
 	fcn_00446540((int) cont, list[0]);

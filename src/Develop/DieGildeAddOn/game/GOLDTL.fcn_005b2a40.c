@@ -3,7 +3,7 @@
 extern char* g_14b5a08;
 extern char* g_14b5a14;
 extern char* g_14b5a18;
-extern char g_774a80[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);

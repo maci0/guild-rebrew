@@ -17,11 +17,11 @@ typedef struct
 #pragma pack(pop)
 // SIZE 0xf
 
-int __cdecl fcn_004c63a0(char* a1)
+int __cdecl fcn_004c63a0(char* data)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x45;
-	*(Packed15*) (buf + 0x10) = *(Packed15*) a1;
+	*(Packed15*) (buf + 0x10) = *(Packed15*) data;
 	return fcn_004c4330((struct pkt99*) buf);
 }

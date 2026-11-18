@@ -13,7 +13,7 @@ int __cdecl fcn_0041e680(char*, void*, void*, int, int, int, int, int);
 int __cdecl fcn_0041f350(int);
 void __cdecl fcn_00473150(unsigned char*);
 
-#include "fcn_005448e0_gconf.h"
+
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
 extern void (__stdcall* g_662264)(int);
 extern int g_7747d4, g_7e46ac, g_1040494, g_1040490, g_7e1f80;

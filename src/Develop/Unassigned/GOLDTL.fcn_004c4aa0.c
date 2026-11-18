@@ -1,8 +1,7 @@
 
 
 
-extern char* g_aed324;
-extern char* g_aed200;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_004c4aa0(char* node)
 {

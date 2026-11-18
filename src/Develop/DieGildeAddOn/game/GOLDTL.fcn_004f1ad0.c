@@ -12,7 +12,7 @@ char* __cdecl FindSlotEntryFiltered(int a0, void* a1, int a2, void* filter, int 
 char* __cdecl fcn_004fd9d0(int a0, int a1);
 
 /* ADDRESS: GOLDTL 0x004f1ad0 */
-int __cdecl fcn_004f1ad0(void* a0, int count)
+int __cdecl fcn_004f1ad0(void* building, int count)
 {
 	char* hit;
 	char* tbl;
@@ -20,7 +20,7 @@ int __cdecl fcn_004f1ad0(void* a0, int count)
 	int j;
 	int idx;
 
-	idx = (unsigned char) *(char*) a0;
+	idx = (unsigned char) *(char*) building;
 	tbl = lpGebaeudePROT + idx * 589;
 	if (*tbl != 0x1d) {
 		return 0;
@@ -33,7 +33,7 @@ int __cdecl fcn_004f1ad0(void* a0, int count)
 
 
 	for (; i < count; i++) {
-		hit = FindSlotEntryFiltered(0, a0, 0, (void*) 0x4f1840, 0);
+		hit = FindSlotEntryFiltered(0, building, 0, (void*) 0x4f1840, 0);
 		if (hit == 0) {
 			return i;
 		}

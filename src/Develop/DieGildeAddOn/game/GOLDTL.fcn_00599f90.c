@@ -16,10 +16,7 @@ typedef struct
 // SIZE 0x50
 
 extern char g_14cf950;
-extern int g_14ce8d8;
-extern int g_67d370;
-extern int g_6a2590;
-extern int g_6a2594;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7746f4;
 extern unsigned char* g_7746c8;
 extern char* g_7746c4;

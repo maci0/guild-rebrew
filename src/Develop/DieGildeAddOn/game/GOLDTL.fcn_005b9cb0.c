@@ -9,7 +9,7 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern double g_662b20;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];

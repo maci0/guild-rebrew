@@ -52,7 +52,7 @@ typedef struct {
 extern pos14_7f4c00 g_7f4c00;
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
-extern int g_6643d8[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7f4ca0[];
 
 unsigned short __cdecl gm_RandomMod(int);

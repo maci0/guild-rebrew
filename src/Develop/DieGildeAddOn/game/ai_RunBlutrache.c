@@ -7,40 +7,40 @@ void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_005b2a40(void *, int, int *);
 
 /* ADDRESS: GOLDTL 0x004ab7d0 */
-int __cdecl ai_RunBlutrache(int a1, char *a2, char *a3)
+int __cdecl ai_RunBlutrache(int actor, char *a2, char *a3)
 {
 	int h;
-	void *p;
-	int arr[4];
-	int n;
+	void *entity;
+	int participants[4];
+	int count;
 	int i;
 	int t;
 
 	h = *(int *) (a2 + 0x10);
-	if (a3 == 0 || a1 == 0)
+	if (a3 == 0 || actor == 0)
 		return 0;
-	p = gm_LookupEntityRecordById(*(int *) (a2 + 4));
-	if (p == 0)
+	entity = gm_LookupEntityRecordById(*(int *) (a2 + 4));
+	if (entity == 0)
 		return 0;
-	arr[0] = (int) gm_LookupEntityRecordById(*(int *) (a2 + 0xc));
-	if (arr[0] == 0)
+	participants[0] = (int) gm_LookupEntityRecordById(*(int *) (a2 + 0xc));
+	if (participants[0] == 0)
 		return 0;
-	n = 1;
-	arr[1] = (int) gm_LookupEntityRecordById(*(int *) (a2 + 8));
-	if (arr[1] == 0)
-		n = 2;
-	arr[n] = (int) gm_LookupEntityRecordById(*(int *) (a3 + 0xc));
-	if (arr[n] == 0)
-		n++;
-	arr[n] = (int) gm_LookupEntityRecordById(*(int *) (a3 + 8));
-	if (arr[n] == 0)
-		n++;
-	fcn_005100f0(*(int *) (a1 + 4), -h);
-	fcn_004c5420(*(int *) (a1 + 4), 0x1cc, 4, 8, 0);
-	for (i = 0; i < n; i++) {
-		t = 0x32 - (int) (fcn_00507e70((char *) a1, (char *) arr[i], 4) * -50.0f);
-		fcn_004c54c0(*(unsigned short *) p, *(unsigned short *) arr[i], -t, 1);
+	count = 1;
+	participants[1] = (int) gm_LookupEntityRecordById(*(int *) (a2 + 8));
+	if (participants[1] == 0)
+		count = 2;
+	participants[count] = (int) gm_LookupEntityRecordById(*(int *) (a3 + 0xc));
+	if (participants[count] == 0)
+		count++;
+	participants[count] = (int) gm_LookupEntityRecordById(*(int *) (a3 + 8));
+	if (participants[count] == 0)
+		count++;
+	fcn_005100f0(*(int *) (actor + 4), -h);
+	fcn_004c5420(*(int *) (actor + 4), 0x1cc, 4, 8, 0);
+	for (i = 0; i < count; i++) {
+		t = 0x32 - (int) (fcn_00507e70((char *) actor, (char *) participants[i], 4) * -50.0f);
+		fcn_004c54c0(*(unsigned short *) entity, *(unsigned short *) participants[i], -t, 1);
 	}
-	fcn_005b2a40(p, n, arr);
+	fcn_005b2a40(entity, count, participants);
 	return 0x44;
 }

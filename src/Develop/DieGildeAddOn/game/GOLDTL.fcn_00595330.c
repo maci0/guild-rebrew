@@ -1,6 +1,6 @@
 extern char* lpObjektePROT;
 extern char* g_1015ea0;
-extern int g_772514;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl d2_SetForm(int, int);

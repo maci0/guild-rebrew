@@ -28,7 +28,7 @@ void __cdecl fcn_00456c80(void);
 void __cdecl fcn_0043bbf0(unsigned char);
 #include "client_scene_loader.h"
 
-void __cdecl fcn_00439690(unsigned char a1, int a2, unsigned char a3, unsigned int a4, SCENE_PROGRESS a5)
+void __cdecl fcn_00439690(unsigned char a1, int a2, unsigned char a3, unsigned int a4, SCENE_PROGRESS progress)
 {
 	int save;
 	unsigned int i;
@@ -51,6 +51,6 @@ void __cdecl fcn_00439690(unsigned char a1, int a2, unsigned char a3, unsigned i
 	fcn_0043bbf0(a1);
 	if (g_6b7ff8 != a3) {
 		g_6b7ff8 = a3;
-		fcn_0045cfa0(a5);
+		fcn_0045cfa0(progress);
 	}
 }

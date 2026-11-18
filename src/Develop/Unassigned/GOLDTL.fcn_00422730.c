@@ -3,13 +3,13 @@ extern int* g_6b7d78;
 
 
 
-int* __cdecl fcn_00422730(int a1)
+int* __cdecl fcn_00422730(int needle)
 {
 	int* node;
 
 	node = g_6b7d78;
 	while (node != 0) {
-		if (strstr((char*) node + 0x32, (char*) a1) != 0) {
+		if (strstr((char*) node + 0x32, (char*) needle) != 0) {
 			break;
 		}
 		node = (int*) node[0x13c / 4];

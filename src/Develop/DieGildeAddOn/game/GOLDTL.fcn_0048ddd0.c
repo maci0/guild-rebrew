@@ -17,7 +17,7 @@ int __cdecl fcn_0050b810(int a, char b);
 int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
 
 /* ADDRESS: GOLDTL 0x0048ddd0 */
-int __cdecl fcn_0048ddd0(char* e, char* a2, char* a3)
+int __cdecl fcn_0048ddd0(char* e, char* thresholdOut, char* resultOut)
 {
 	int mask;
 	Ent* t;
@@ -66,10 +66,10 @@ int __cdecl fcn_0048ddd0(char* e, char* a2, char* a3)
 	if (nv >= n) {
 		nv = n;
 	}
-	*(int*) (a3 + 8) = tot[nv];
-	*(int*) (a2 + 8) = thr[nv];
-	*(int*) (a3 + 0xc) = t->x4;
-	*(int*) (a3 + 0x10) = nv;
-	*(int*) (a2 + 0x10) = 2;
+	*(int*) (resultOut + 8) = tot[nv];
+	*(int*) (thresholdOut + 8) = thr[nv];
+	*(int*) (resultOut + 0xc) = t->x4;
+	*(int*) (resultOut + 0x10) = nv;
+	*(int*) (thresholdOut + 0x10) = 2;
 	return 1;
 }

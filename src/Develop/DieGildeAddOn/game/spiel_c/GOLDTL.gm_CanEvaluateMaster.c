@@ -8,7 +8,7 @@ typedef struct Ent {
 // SIZE 0x21c
 
 extern char g_7f4ca0[];
-extern int g_14cbca0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned int g_14cbcb4;
 extern unsigned char g_6a375c;
 

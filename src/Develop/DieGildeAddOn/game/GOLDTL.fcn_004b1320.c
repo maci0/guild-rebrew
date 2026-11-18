@@ -25,12 +25,12 @@ float __cdecl eval_ObjektPreis2Credits(int, int);
 void __cdecl fcn_004c6190(char*, char);
 
 /* ADDRESS: GOLDTL 0x004b1320 */
-int __cdecl fcn_004b1320(int a1, int a2, char* a3)
+int __cdecl fcn_004b1320(int a1, int a2, char* argumentText)
 {
 	float f;
 	float factor;
 
-	if (*a3 != '-')
+	if (*argumentText != '-')
 		return 0;
 	{
 		int sign[2] = { -1, 1 };
@@ -43,29 +43,29 @@ int __cdecl fcn_004b1320(int a1, int a2, char* a3)
 		char* row;
 		char* p;
 
-		a3++;
+		argumentText++;
 		for (i = 0; i < 2; i++) {
-			if (memcmp(a3, names[i], strlen(names[i])) == 0)
+			if (memcmp(argumentText, names[i], strlen(names[i])) == 0)
 				break;
 		}
 		if (i >= 2)
 			return 0;
 		sign[0] = sign[i];
-		a3 += strlen(names[i]);
-		if (*a3 != '_')
+		argumentText += strlen(names[i]);
+		if (*argumentText != '_')
 			return 0;
-		a3++;
+		argumentText++;
 		for (j = 0; j < 3; j++) {
-			if (memcmp(a3, cats[j], strlen(cats[j])) == 0)
+			if (memcmp(argumentText, cats[j], strlen(cats[j])) == 0)
 				break;
 		}
 		if (j >= 3)
 			return 0;
-		a3 += strlen(cats[j]);
-		if (*a3 != '_')
+		argumentText += strlen(cats[j]);
+		if (*argumentText != '_')
 			return 0;
-		a3++;
-		amount = atoi(a3) * sign[0];
+		argumentText++;
+		amount = atoi(argumentText) * sign[0];
 		{
 			factor = amount * 0.01;
 			switch (j) {

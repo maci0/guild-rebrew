@@ -6,7 +6,7 @@ extern Card_1007ce0 g_1007ce0[24];
 
 /* ADDRESS: GOLD 0x004a76d0 */
 /* ADDRESS: GOLDTL 0x004a77f0 */
-int __cdecl fcn_004a77f0(int* h, int a2)
+int __cdecl fcn_004a77f0(int* h, int skipFirstTwo)
 {
 	int s;
 	int best;
@@ -14,7 +14,7 @@ int __cdecl fcn_004a77f0(int* h, int a2)
 	int rank;
 	int suit;
 
-	s = a2 ? 2 : 0;
+	s = skipFirstTwo ? 2 : 0;
 	best = h[s];
 	if (best < 0) {
 		return -1;

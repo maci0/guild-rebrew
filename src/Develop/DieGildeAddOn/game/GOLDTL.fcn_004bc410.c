@@ -10,7 +10,7 @@ char* __cdecl fcn_0040c120(char*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bc410 */
-void __cdecl fcn_004bc410(char** a1, int kind)
+void __cdecl fcn_004bc410(char** entry, int kind)
 {
 	float pos[4];
 	char buf[0x80];
@@ -29,15 +29,15 @@ void __cdecl fcn_004bc410(char** a1, int kind)
 	else if (kind == 6)
 		strcpy(buf, "schwein_SCHWEIN");
 	obj = ch_CreateAtPosition(buf, pos);
-	a1[0] = obj;
+	entry[0] = obj;
 	if (obj != 0) {
 		*(float*) (obj + 0x1a0) = 1.0f;
-		*(float*) (a1 + 4) = pos[0];
-		*(float*) (a1 + 5) = pos[1];
-		*(float*) (a1 + 6) = pos[2];
-		*(int*) (a1 + 1) = kind;
-		*(int*) (a1[0] + 4) = 2;
-		*(int*) (*(char**) (a1[0] + 0x34) + 0x224) = 0;
-		fcn_0040c120(a1[0], 0x38, 1);
+		*(float*) (entry + 4) = pos[0];
+		*(float*) (entry + 5) = pos[1];
+		*(float*) (entry + 6) = pos[2];
+		*(int*) (entry + 1) = kind;
+		*(int*) (entry[0] + 4) = 2;
+		*(int*) (*(char**) (entry[0] + 0x34) + 0x224) = 0;
+		fcn_0040c120(entry[0], 0x38, 1);
 	}
 }

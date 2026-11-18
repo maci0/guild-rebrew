@@ -18,14 +18,14 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 
 
 /* ADDRESS: GOLDTL 0x004c9d10 */
-int __cdecl cm_ExSendCutInfo(char* a1, char* a2)
+int __cdecl cm_ExSendCutInfo(char* cmd, char* out)
 {
 	char buf[0x100];
 	int i;
 
 	for (i = 0; i < 16; i++) {
-		if (((struct cut_4c9d10*)g_9b0e20)[i].id == *(int*) (a1 + 0x10)) {
-			if (g_772f40 != 0 && *g_772f40 == *(int*) (a1 + 0x14)) {
+		if (((struct cut_4c9d10*)g_9b0e20)[i].id == *(int*) (cmd + 0x10)) {
+			if (g_772f40 != 0 && *g_772f40 == *(int*) (cmd + 0x14)) {
 				((struct cut_4c9d10*)g_9b0e20)[i] = (*(struct cut_4c9d10*) g_aed340);
 				((struct cut_4c9d10*)g_9b0e20)[i].fc = 0;
 				fcn_0064d41a(buf, "cm_ExSendCutInfo: PlayerId:%i Valid:%i  Ready:%i  Time:%i",
@@ -35,15 +35,15 @@ int __cdecl cm_ExSendCutInfo(char* a1, char* a2)
 		}
 	}
 	if (i >= 16) {
-		if (g_772f40 != 0 && *g_772f40 == *(int*) (a1 + 0x14))
+		if (g_772f40 != 0 && *g_772f40 == *(int*) (cmd + 0x14))
 			fcn_0064d41a(buf, "cm_ExSendCutInfo(): io-buffer has not been written, because player not found (player id %i)",
-			    *(int*) (a1 + 0x10));
+			    *(int*) (cmd + 0x10));
 		return 1;
 	}
-	if (a2 != 0) {
-		a2[0] = 1;
-		a2[1] = 8;
-		*(struct cut_4c9d10**) (a2 + 6) = &((struct cut_4c9d10*)g_9b0e20)[i];
+	if (out != 0) {
+		out[0] = 1;
+		out[1] = 8;
+		*(struct cut_4c9d10**) (out + 6) = &((struct cut_4c9d10*)g_9b0e20)[i];
 	}
 	return 0;
 }

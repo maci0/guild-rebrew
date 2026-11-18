@@ -15,11 +15,11 @@ typedef struct
 
 #pragma pack(pop)
 
-void __cdecl fcn_004c6b60(Small10* a1)
+void __cdecl fcn_004c6b60(Small10* body)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x5c;
-	*(Small10*) (buf + 0x10) = *a1;
+	*(Small10*) (buf + 0x10) = *body;
 	fcn_004c4330(buf);
 }

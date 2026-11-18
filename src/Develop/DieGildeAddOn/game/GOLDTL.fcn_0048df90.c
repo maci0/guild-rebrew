@@ -11,7 +11,7 @@ extern unsigned char g_773d75;
 int __cdecl fcn_0050b810(int a, unsigned char b);
 
 /* ADDRESS: GOLDTL 0x0048df90 */
-int __cdecl fcn_0048df90(Ent* e, char* a2, char* a3)
+int __cdecl fcn_0048df90(Ent* e, char* firstOut, char* secondOut)
 {
 	int t;
 	int thr[3];
@@ -34,8 +34,8 @@ int __cdecl fcn_0048df90(Ent* e, char* a2, char* a3)
 	} else {
 		return 0;
 	}
-	*(int*) (a2 + 0x10) = 3;
-	*(int*) (a3 + 0x10) = i;
-	*(int*) (a3 + 8) = thr[i];
+	*(int*) (firstOut + 0x10) = 3;
+	*(int*) (secondOut + 0x10) = i;
+	*(int*) (secondOut + 8) = thr[i];
 	return 1;
 }

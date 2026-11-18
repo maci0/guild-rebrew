@@ -64,7 +64,7 @@ int __cdecl ls_LoadExistingEntities(void* arg1)
  * building type, owner, upgrade level, and production
  * state for each building entity. */
 
-extern int g_citizen_count;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 #if 0 /* split to loadsave_c/ls_LoadEntities.c */
 int __cdecl ls_LoadEntities(void* arg1)

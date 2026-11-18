@@ -9,7 +9,7 @@ typedef struct {
 	char pad3[0xc98 - 0x125];
 } E42a030;
 
-extern char* g_6b7e94;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_0042a030(void)
 {

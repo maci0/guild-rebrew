@@ -32,7 +32,7 @@ extern int g_774958;			/* 0x00774958 */
 extern int g_774954;			/* 0x00774954 */
 extern int g_77497c;			/* 0x0077497c */
 extern int g_774950;			/* 0x00774950 */
-#include "GOLDTL.fcn_005438c0_gconf.h"
+extern unsigned int g_774948;
 #include "Develop/DieGildeAddOn/game/game_player.h"		/* 0x00774970 */
 extern unsigned char g_77494c;		/* 0x0077494c */
 extern unsigned char g_773de8;		/* 0x00773de8 */
@@ -451,10 +451,10 @@ void __cdecl fcn_005438c0(int a0)
 		if (g_774950 >= 0x320) {
 			break;
 		}
-		g_774948 = 0;
+		(*(int *)&g_774948) = 0;
 		if (!(g_7747b0 & 0x42)) {
 			g_774970 = 0;
-			g_774948 = 0;
+			(*(int *)&g_774948) = 0;
 			main_RundenBeginn();
 		} else {
 			c = 0;
@@ -468,7 +468,7 @@ void __cdecl fcn_005438c0(int a0)
 					p += 0x21c;
 					count--;
 				} while (count != 0);
-				g_774948 = c;
+				(*(int *)&g_774948) = c;
 			}
 		}
 		for (;;) {
@@ -591,10 +591,10 @@ void __cdecl fcn_005438c0(int a0)
 			goto l_inc;
 		}
 		g_7747b0 &= 0xbd;
-		g_774948 += 1;
+		(*(int *)&g_774948) += 1;
 		goto l_gate;
 l_inc:
-		g_774948 += 1;
+		(*(int *)&g_774948) += 1;
 l_gate:
 		if (g_774954 != 0) {
 			goto l_step;

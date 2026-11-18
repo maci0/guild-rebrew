@@ -5,10 +5,8 @@ extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern int g_1040490;
 extern int g_1040494;
-extern int g_67d370;
-extern int g_67d378;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7725ec;
-extern int g_772604;
 extern char s_67d7a0[];
 
 void __cdecl ReportClientMessage(char* text);

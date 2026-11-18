@@ -12,10 +12,10 @@
    expired slots, replenish the pool up to the wanted count and write the
    transformed positions. Returns 0 once the slot budget is filled. */
 /* ADDRESS: GOLDTL 0x00453d80 */
-unsigned char __cdecl fcn_00453d80(void* a1, unsigned int a2)
+unsigned char __cdecl fcn_00453d80(void* a1, unsigned int tick)
 {
-	char* e;
-	char* p;
+	char* emitter;
+	char* particle;
 	int i;
 	int cnt;
 	int n;
@@ -37,167 +37,167 @@ unsigned char __cdecl fcn_00453d80(void* a1, unsigned int a2)
 	float y;
 	float z;
 
-	e = (char*) a1;
+	emitter = (char*) a1;
 	cnt = 1;
-	if (*(int*) (e + 0x24) == a2) {
+	if (*(int*) (emitter + 0x24) == tick) {
 		return 1;
 	}
-	if (*(unsigned char*) (e + 0xd4) & 0x80) {
-		wanted = (int) ((float) *(int*) (e + 0xd8) * *(float*) (e + 0xb4));
+	if (*(unsigned char*) (emitter + 0xd4) & 0x80) {
+		wanted = (int) ((float) *(int*) (emitter + 0xd8) * *(float*) (emitter + 0xb4));
 	} else {
-		wanted = *(int*) (e + 0xd8);
+		wanted = *(int*) (emitter + 0xd8);
 	}
-	if (*(int*) (e + 0xdc) != 0 &&
-		*(unsigned char*) (*(int*) (e + 0xdc) + 0x5c) > 0) {
-		cnt = *(unsigned char*) (*(int*) (e + 0xdc) + 0x5c);
+	if (*(int*) (emitter + 0xdc) != 0 &&
+		*(unsigned char*) (*(int*) (emitter + 0xdc) + 0x5c) > 0) {
+		cnt = *(unsigned char*) (*(int*) (emitter + 0xdc) + 0x5c);
 	}
-	*(float*) (e + 0x38) = 1.0f / (float) *(int*) (e + 0xc4);
-	*(float*) (e + 0x3c) = 1.0f /
-		(float) (*(int*) (e + 0xcc) - *(int*) (e + 0xc8));
-	p = *(char**) (e + 0x28);
+	*(float*) (emitter + 0x38) = 1.0f / (float) *(int*) (emitter + 0xc4);
+	*(float*) (emitter + 0x3c) = 1.0f /
+		(float) (*(int*) (emitter + 0xcc) - *(int*) (emitter + 0xc8));
+	particle = *(char**) (emitter + 0x28);
 	n = 0;
 	i = 0;
-	while (i < *(int*) (e + 0xd8)) {
-		if (!(*(unsigned char*) (p + 0x51) & 1)) {
+	while (i < *(int*) (emitter + 0xd8)) {
+		if (!(*(unsigned char*) (particle + 0x51) & 1)) {
 			if (n < wanted &&
-				(!(*(unsigned char*) (e + 0xd4) & 0x80) ||
-					*(unsigned char*) (e + 0xd5) & 2)) {
+				(!(*(unsigned char*) (emitter + 0xd4) & 0x80) ||
+					*(unsigned char*) (emitter + 0xd5) & 2)) {
 				n++;
-				*(float*) (p + 0x10) = TWO_PI_F_453D80 *
+				*(float*) (particle + 0x10) = TWO_PI_F_453D80 *
 					((float) rand() * RAND_UNIT_453D80);
-				*(float*) (p + 0x14) = TWO_PI_F_453D80 *
+				*(float*) (particle + 0x14) = TWO_PI_F_453D80 *
 					((float) rand() * RAND_UNIT_453D80);
-				*(float*) (p + 0x18) = TWO_PI_F_453D80 *
+				*(float*) (particle + 0x18) = TWO_PI_F_453D80 *
 					((float) rand() * RAND_UNIT_453D80);
-				*(float*) (p + 0x1c) = TWO_PI_F_453D80 *
+				*(float*) (particle + 0x1c) = TWO_PI_F_453D80 *
 					((float) rand() * RAND_UNIT_453D80);
-				*(float*) (p + 0x0c) = TWO_PI_F_453D80 *
+				*(float*) (particle + 0x0c) = TWO_PI_F_453D80 *
 					((float) rand() * RAND_UNIT_453D80);
-				*(unsigned char*) (p + 0x50) = (unsigned char) (i % cnt);
-				*(unsigned char*) (p + 0x4e) = (unsigned char) (rand() &
-					*(unsigned char*) (e + 0xd3)) +
-					*(unsigned char*) (e + 0xd2);
-				*(unsigned char*) (p + 0x4d) = (unsigned char) (rand() &
-					*(unsigned char*) (e + 0xd3)) +
-					*(unsigned char*) (e + 0xd1);
-				*(unsigned char*) (p + 0x4c) = (unsigned char) (rand() &
-					*(unsigned char*) (e + 0xd3)) +
-					*(unsigned char*) (e + 0xd0);
-				*(unsigned char*) (p + 0x4f) = 0;
-				*(unsigned int*) (p + 0x30) = a2;
+				*(unsigned char*) (particle + 0x50) = (unsigned char) (i % cnt);
+				*(unsigned char*) (particle + 0x4e) = (unsigned char) (rand() &
+					*(unsigned char*) (emitter + 0xd3)) +
+					*(unsigned char*) (emitter + 0xd2);
+				*(unsigned char*) (particle + 0x4d) = (unsigned char) (rand() &
+					*(unsigned char*) (emitter + 0xd3)) +
+					*(unsigned char*) (emitter + 0xd1);
+				*(unsigned char*) (particle + 0x4c) = (unsigned char) (rand() &
+					*(unsigned char*) (emitter + 0xd3)) +
+					*(unsigned char*) (emitter + 0xd0);
+				*(unsigned char*) (particle + 0x4f) = 0;
+				*(unsigned int*) (particle + 0x30) = tick;
 				s[0] = 2.0f * ((float) rand() * RAND_UNIT_453D80) - 1.0f;
 				s[1] = 2.0f * ((float) rand() * RAND_UNIT_453D80) - 1.0f;
 				s[2] = 2.0f * ((float) rand() * RAND_UNIT_453D80) - 1.0f;
-				*(float*) (p + 0x20) = s[0] * *(float*) (e + 0x68);
-				*(float*) (p + 0x24) = s[1] * *(float*) (e + 0x6c);
-				*(float*) (p + 0x28) = s[2] * *(float*) (e + 0x70);
-				if (*(unsigned char*) (e + 0xd4) & 0x40) {
+				*(float*) (particle + 0x20) = s[0] * *(float*) (emitter + 0x68);
+				*(float*) (particle + 0x24) = s[1] * *(float*) (emitter + 0x6c);
+				*(float*) (particle + 0x28) = s[2] * *(float*) (emitter + 0x70);
+				if (*(unsigned char*) (emitter + 0xd4) & 0x40) {
 					r = (float) rand() * RAND_UNIT_453D80;
-					*(int*) (p + 0x34) = (int) (
-						(float) (unsigned int) a2 -
-						r * (float) *(int*) (e + 0xcc));
+					*(int*) (particle + 0x34) = (int) (
+						(float) (unsigned int) tick -
+						r * (float) *(int*) (emitter + 0xcc));
 				} else {
-					*(unsigned int*) (p + 0x34) = a2;
+					*(unsigned int*) (particle + 0x34) = tick;
 				}
-				*(float*) (p) = (float) rand() * RAND_UNIT_453D80;
-				*(float*) (p + 4) = (float) rand() * RAND_UNIT_453D80;
-				*(float*) (p + 8) = (float) rand() * RAND_UNIT_453D80;
-				*(float*) (p) *= *(float*) (e + 0x8c);
-				*(float*) (p + 4) *= *(float*) (e + 0x90);
-				*(float*) (p + 8) *= *(float*) (e + 0x94);
-				*(unsigned char*) (p + 0x51) |= 1;
+				*(float*) (particle) = (float) rand() * RAND_UNIT_453D80;
+				*(float*) (particle + 4) = (float) rand() * RAND_UNIT_453D80;
+				*(float*) (particle + 8) = (float) rand() * RAND_UNIT_453D80;
+				*(float*) (particle) *= *(float*) (emitter + 0x8c);
+				*(float*) (particle + 4) *= *(float*) (emitter + 0x90);
+				*(float*) (particle + 8) *= *(float*) (emitter + 0x94);
+				*(unsigned char*) (particle + 0x51) |= 1;
 			}
 		} else {
-			dt = (float) (unsigned int) (a2 - *(unsigned int*) (p + 0x30));
+			dt = (float) (unsigned int) (tick - *(unsigned int*) (particle + 0x30));
 			if (dt > 150.0f) {
-				*(unsigned int*) (p + 0x34) +=
-					a2 - *(unsigned int*) (p + 0x30);
+				*(unsigned int*) (particle + 0x34) +=
+					tick - *(unsigned int*) (particle + 0x30);
 				dt = 0.0f;
 			}
-			*(unsigned int*) (p + 0x30) = a2;
-			if (*(unsigned char*) (e + 0xd4) & 0x1f) {
-				*(unsigned char*) (p + 0x50) = (unsigned char) (
-					(int) (a2 - *(unsigned int*) (p + 0x34)) /
-					(*(unsigned char*) (e + 0xd4) & 0x1f) % cnt);
+			*(unsigned int*) (particle + 0x30) = tick;
+			if (*(unsigned char*) (emitter + 0xd4) & 0x1f) {
+				*(unsigned char*) (particle + 0x50) = (unsigned char) (
+					(int) (tick - *(unsigned int*) (particle + 0x34)) /
+					(*(unsigned char*) (emitter + 0xd4) & 0x1f) % cnt);
 			}
-			*(float*) (p + 0x10) += dt * *(float*) (e + 0x58);
-			*(float*) (p + 0x14) += dt * *(float*) (e + 0x5c);
-			*(float*) (p + 0x18) += dt * *(float*) (e + 0x60);
-			*(float*) (p + 0x1c) += dt * *(float*) (e + 0x64);
-			t = *(float*) (p + 0x10) = (float) fmod(*(float*) (p + 0x10),
+			*(float*) (particle + 0x10) += dt * *(float*) (emitter + 0x58);
+			*(float*) (particle + 0x14) += dt * *(float*) (emitter + 0x5c);
+			*(float*) (particle + 0x18) += dt * *(float*) (emitter + 0x60);
+			*(float*) (particle + 0x1c) += dt * *(float*) (emitter + 0x64);
+			t = *(float*) (particle + 0x10) = (float) fmod(*(float*) (particle + 0x10),
 				TWO_PI_D_453D80);
-			u = *(float*) (p + 0x14) = (float) fmod(*(float*) (p + 0x14),
+			u = *(float*) (particle + 0x14) = (float) fmod(*(float*) (particle + 0x14),
 				TWO_PI_D_453D80);
-			v = *(float*) (p + 0x18) = (float) fmod(*(float*) (p + 0x18),
+			v = *(float*) (particle + 0x18) = (float) fmod(*(float*) (particle + 0x18),
 				TWO_PI_D_453D80);
-			w = *(float*) (p + 0x1c) = (float) fmod(*(float*) (p + 0x1c),
+			w = *(float*) (particle + 0x1c) = (float) fmod(*(float*) (particle + 0x1c),
 				TWO_PI_D_453D80);
-			*(float*) (p + 0x0c) = (float) fmod(
-				*(float*) (p + 0x0c) + dt * *(float*) (e + 0xbc),
+			*(float*) (particle + 0x0c) = (float) fmod(
+				*(float*) (particle + 0x0c) + dt * *(float*) (emitter + 0xbc),
 				TWO_PI_D_453D80);
-			*(float*) (p) += dt * *(float*) (e + 0x98);
-			*(float*) (p + 4) += dt * *(float*) (e + 0x9c);
-			*(float*) (p + 8) += dt * *(float*) (e + 0xa0);
-			s[0] = *(float*) (e + 0x80) + *(float*) (p);
-			s[1] = *(float*) (e + 0x84) + *(float*) (p + 4);
-			s[2] = *(float*) (e + 0x88) + *(float*) (p + 8);
-			*(float*) (p + 0x20) += dt * s[0];
-			*(float*) (p + 0x24) += dt * s[1];
-			*(float*) (p + 0x28) += dt * s[2];
+			*(float*) (particle) += dt * *(float*) (emitter + 0x98);
+			*(float*) (particle + 4) += dt * *(float*) (emitter + 0x9c);
+			*(float*) (particle + 8) += dt * *(float*) (emitter + 0xa0);
+			s[0] = *(float*) (emitter + 0x80) + *(float*) (particle);
+			s[1] = *(float*) (emitter + 0x84) + *(float*) (particle + 4);
+			s[2] = *(float*) (emitter + 0x88) + *(float*) (particle + 8);
+			*(float*) (particle + 0x20) += dt * s[0];
+			*(float*) (particle + 0x24) += dt * s[1];
+			*(float*) (particle + 0x28) += dt * s[2];
 			s[0] = (float) sin(t);
 			s[1] = (float) sin(u);
 			s[2] = (float) sin(v);
 			s[3] = (float) sin(w);
-			*(float*) (p + 0x38) = *(float*) (e + 0x48) * s[0] +
-				*(float*) (p + 0x20);
-			*(float*) (p + 0x3c) = *(float*) (e + 0x4c) * s[1] +
-				*(float*) (p + 0x24);
-			*(float*) (p + 0x40) = *(float*) (e + 0x50) * s[2] +
-				*(float*) (p + 0x28);
-			*(float*) (p + 0x48) = *(float*) (e + 0x54) * s[3] +
-				*(float*) (e + 0xe4);
-			*(float*) (p + 0x44) = *(float*) (e + 0xb8) *
-				(float) sin(*(float*) (p + 0x0c)) + *(float*) (e + 0xc0);
-			if ((*(float*) (e + 0xb0) < 0.0f &&
-					*(float*) (p + 0x40) < *(float*) (e + 0xb0)) ||
-				(*(float*) (e + 0xb0) > 0.0f &&
-					*(float*) (p + 0x40) > *(float*) (e + 0xb0))) {
-				*(int*) (p + 0x40) = *(int*) (e + 0xb0);
-				*(float*) (p) *= *(float*) (e + 0xa4);
-				*(float*) (p + 4) *= *(float*) (e + 0xa8);
-				*(float*) (p + 8) *= *(float*) (e + 0xac);
+			*(float*) (particle + 0x38) = *(float*) (emitter + 0x48) * s[0] +
+				*(float*) (particle + 0x20);
+			*(float*) (particle + 0x3c) = *(float*) (emitter + 0x4c) * s[1] +
+				*(float*) (particle + 0x24);
+			*(float*) (particle + 0x40) = *(float*) (emitter + 0x50) * s[2] +
+				*(float*) (particle + 0x28);
+			*(float*) (particle + 0x48) = *(float*) (emitter + 0x54) * s[3] +
+				*(float*) (emitter + 0xe4);
+			*(float*) (particle + 0x44) = *(float*) (emitter + 0xb8) *
+				(float) sin(*(float*) (particle + 0x0c)) + *(float*) (emitter + 0xc0);
+			if ((*(float*) (emitter + 0xb0) < 0.0f &&
+					*(float*) (particle + 0x40) < *(float*) (emitter + 0xb0)) ||
+				(*(float*) (emitter + 0xb0) > 0.0f &&
+					*(float*) (particle + 0x40) > *(float*) (emitter + 0xb0))) {
+				*(int*) (particle + 0x40) = *(int*) (emitter + 0xb0);
+				*(float*) (particle) *= *(float*) (emitter + 0xa4);
+				*(float*) (particle + 4) *= *(float*) (emitter + 0xa8);
+				*(float*) (particle + 8) *= *(float*) (emitter + 0xac);
 			}
-			age = (int) (a2 - *(unsigned int*) (p + 0x34));
-			if (age < *(int*) (e + 0xc4)) {
-				fade = 1.0f - (float) (*(int*) (e + 0xc4) - age) *
-					*(float*) (e + 0x38);
-				*(char*) (p + 0x4f) = (char) MAX(0.0f, MIN(255.0f,
-					fade * *(float*) (p + 0x44)));
-			} else if (age < *(int*) (e + 0xc8)) {
-				*(char*) (p + 0x4f) = (char) MAX(0.0f, MIN(255.0f,
-					*(float*) (p + 0x44)));
-			} else if (age < *(int*) (e + 0xcc)) {
-				fade = (float) (*(int*) (e + 0xcc) - age) *
-					*(float*) (e + 0x3c);
-				*(char*) (p + 0x4f) = (char) MAX(0.0f, MIN(255.0f,
-					fade * *(float*) (p + 0x44)));
+			age = (int) (tick - *(unsigned int*) (particle + 0x34));
+			if (age < *(int*) (emitter + 0xc4)) {
+				fade = 1.0f - (float) (*(int*) (emitter + 0xc4) - age) *
+					*(float*) (emitter + 0x38);
+				*(char*) (particle + 0x4f) = (char) MAX(0.0f, MIN(255.0f,
+					fade * *(float*) (particle + 0x44)));
+			} else if (age < *(int*) (emitter + 0xc8)) {
+				*(char*) (particle + 0x4f) = (char) MAX(0.0f, MIN(255.0f,
+					*(float*) (particle + 0x44)));
+			} else if (age < *(int*) (emitter + 0xcc)) {
+				fade = (float) (*(int*) (emitter + 0xcc) - age) *
+					*(float*) (emitter + 0x3c);
+				*(char*) (particle + 0x4f) = (char) MAX(0.0f, MIN(255.0f,
+					fade * *(float*) (particle + 0x44)));
 			} else {
-				*(unsigned char*) (p + 0x51) &= 0xfe;
-				(*(int*) (e + 0x20))++;
+				*(unsigned char*) (particle + 0x51) &= 0xfe;
+				(*(int*) (emitter + 0x20))++;
 			}
 		}
 		i++;
-		p += STRIDE_453D80;
+		particle += STRIDE_453D80;
 	}
-	if (*(unsigned char*) (e + 0xd4) & 0x20) {
-		*(unsigned char*) (e + 0xd4) &= 0xdf;
+	if (*(unsigned char*) (emitter + 0xd4) & 0x20) {
+		*(unsigned char*) (emitter + 0xd4) &= 0xdf;
 	}
-	if (*(unsigned char*) (e + 0xd5) & 2) {
-		*(unsigned char*) (e + 0xd5) &= 0xfd;
+	if (*(unsigned char*) (emitter + 0xd5) & 2) {
+		*(unsigned char*) (emitter + 0xd5) &= 0xfd;
 	}
-	*(unsigned int*) (e + 0x24) = a2;
-	return (*(unsigned char*) (e + 0xd5) & 1) &&
-		*(int*) (e + 0x20) >= wanted ? 0 : 1;
+	*(unsigned int*) (emitter + 0x24) = tick;
+	return (*(unsigned char*) (emitter + 0xd5) & 1) &&
+		*(int*) (emitter + 0x20) >= wanted ? 0 : 1;
 }
 /* Layout scaffolding: shifts the next source object to its reference
  * VA. 0x90 filler, not reconstruction. Generated by the text lead pass. */

@@ -5,22 +5,22 @@
 /* ADDRESS: GOLDTL 0x004f1860 */
 int __cdecl fcn_004f1860(int* a1, int* a2)
 {
-	int n;
+	int count;
 	int i;
-	int* p;
+	int* cursor;
 
 	i = 0;
-	n = *(int*) (0x6652f8 + *a2 * 4);
-	if (n <= 0) {
+	count = *(int*) (0x6652f8 + *a2 * 4);
+	if (count <= 0) {
 		return 0;
 	}
-	p = (int*) a2[4];
+	cursor = (int*) a2[4];
 	do {
-		if (*p != -1) {
+		if (*cursor != -1) {
 			return 1;
 		}
 		i++;
-		p = (int*) ((char*) p + 0x44);
-	} while (i < n);
+		cursor = (int*) ((char*) cursor + 0x44);
+	} while (i < count);
 	return 0;
 }

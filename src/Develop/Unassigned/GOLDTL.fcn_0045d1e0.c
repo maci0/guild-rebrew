@@ -1,4 +1,4 @@
-extern int g_10405c4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 // SIZE 0x70
 typedef struct {

@@ -9,7 +9,7 @@ void __cdecl fcn_005a6880(char* obj);
 void __cdecl fcn_005a4e00(char* obj);
 
 /* ADDRESS: GOLDTL 0x005a7200 */
-void __cdecl fcn_005a7200(char* a0)
+void __cdecl fcn_005a7200(char* subject)
 {
 	char* s1;
 	char* s2;
@@ -33,24 +33,24 @@ void __cdecl fcn_005a7200(char* a0)
 		obj = *(char**) 0x7746a0;
 		if (obj) {
 			if (obj == s3) {
-				fcn_005cf560(a0);
+				fcn_005cf560(subject);
 				obj = *(char**) 0x7746a0;
 			} else if (obj == s4) {
-				fcn_005a7190(a0);
+				fcn_005a7190(subject);
 				obj = *(char**) 0x7746a0;
 			}
 			if (obj) {
-				if (*(unsigned short*) (a0 + 0x27) == *(unsigned short*) 0x774970) {
+				if (*(unsigned short*) (subject + 0x27) == *(unsigned short*) 0x774970) {
 					if (obj == s1) {
-						fcn_005a6880(a0);
+						fcn_005a6880(subject);
 					} else if (obj == s2) {
-						fcn_005a4e00(a0);
+						fcn_005a4e00(subject);
 					}
 				} else {
 					if (obj == s1) {
-						fcn_005a59d0(a0);
+						fcn_005a59d0(subject);
 					} else if (obj == s2) {
-						fcn_005a4490(a0);
+						fcn_005a4490(subject);
 					}
 				}
 			}

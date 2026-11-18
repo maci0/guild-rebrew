@@ -5,11 +5,11 @@ int __cdecl fcn_00468cf0(int x, int y, int a3, int a4);
 void __cdecl fcn_00465eb0(int r, int i);
 
 /* ADDRESS: GOLDTL 0x00468df0 */
-int __cdecl fcn_00468df0(int a1, int a2, int a3, int a4, int i)
+int __cdecl fcn_00468df0(int offsetX, int offsetY, int a3, int a4, int i)
 {
 	int r;
 
-	r = fcn_00468cf0(*(int*) (((char*)g_1015f40) + i * 0x3cc + 4) + a1, *(int*) (((char*)g_1015f40) + i * 0x3cc + 8) + a2, a3, a4);
+	r = fcn_00468cf0(*(int*) (((char*)g_1015f40) + i * 0x3cc + 4) + offsetX, *(int*) (((char*)g_1015f40) + i * 0x3cc + 8) + offsetY, a3, a4);
 	fcn_00465eb0(r, i);
 	return r;
 }

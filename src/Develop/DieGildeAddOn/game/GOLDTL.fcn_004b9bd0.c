@@ -37,36 +37,36 @@ int __cdecl fcn_004b9bd0(int* a1)
 	char buf[0x200];
 	unsigned short* e;
 	char* s;
-	int n;
-	int r;
+	int count;
+	int index;
 
-	n = 0;
+	count = 0;
 	e = gm_LookupEntityRecordById(a1[0]);
 	if (e == 0)
 		return 1;
 	if (fcn_005c6270(e, 0x290))
 		return 0x400;
-	for (s = fcn_005463a0(1, 0, 0xf); s != 0 && n < 8; s = he_fn_Handlung()) {
+	for (s = fcn_005463a0(1, 0, 0xf); s != 0 && count < 8; s = he_fn_Handlung()) {
 		gm_ResolveEntityById(0, (void**) (&y), 0, *(int*) (s + 0xac));
 		if (y != 0 && *(int*) (y + 0xa) == *e) {
 			gm_ResolveEntityById((void**) (&x1), 0, 0, *(int*) (s + 0xb4));
 			gm_ResolveEntityById((void**) (&x2), 0, 0, *(int*) (s + 0xb0));
 			if ((x1 != 0 && gm_CheckEntityType(x1) != 0) || (x2 != 0 && gm_CheckEntityType(x2) != 0)) {
 				if ((x1 != 0 && x2 != 0 && *x2 == 'G') || *x1 == 'G') {
-					ss[n] = s;
-					ys[n] = y;
-					n++;
+					ss[count] = s;
+					ys[count] = y;
+					count++;
 				}
 			}
 		}
 	}
-	if (n == 0)
+	if (count == 0)
 		return 0x400;
 	d = (*(Date*)&g_7f4c00);
 	d.a++;
-	r = gm_RandomMod(n);
-	s = ss[r];
-	y = ys[r];
+	index = gm_RandomMod(count);
+	s = ss[index];
+	y = ys[index];
 	gm_ResolveEntityById((void**) (&x2), 0, 0, *(int*) (s + 0xb0));
 	gm_ResolveEntityById((void**) (&x1), 0, 0, *(int*) (s + 0xb4));
 	if (x2 != 0 && x1 != 0) {

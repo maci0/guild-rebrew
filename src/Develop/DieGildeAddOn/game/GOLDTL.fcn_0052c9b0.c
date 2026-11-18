@@ -19,15 +19,12 @@ typedef struct {
 
 #include "Develop/Units/d3/d3_camera.h"
 extern volatile int g_6b7fc0;
-extern int g_7e4300;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6a99e8;
-extern int g_14ce8e8;
 extern int g_774668;
 extern int g_7e46ac;
 extern char g_6a2574[4];
 extern char g_14cf70f;
-extern int g_774650;
-extern int g_774658;
 extern char* g_7746c4;
 extern unsigned char* g_7746c8;
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -39,14 +36,9 @@ extern float g_7e3a48;
 extern float g_7e3a50[3];
 extern float g_7e3a54;
 extern float g_7e3a58;
-extern int g_6772c4;
 extern short g_14ce8c0;
 extern int g_1040494;
 extern int g_1040490;
-extern int g_6b5c80;
-extern int g_6b5c84;
-extern int g_6772bc;
-extern int g_6772c0;
 
 int __cdecl fcn_0052b720(void);
 void __cdecl fcn_0052c060(void);

@@ -13,9 +13,8 @@ typedef struct {
 } ent2c;
 // SIZE 0x2c
 
-extern char* g_772eb4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned short* g_772e9c;
-extern char g_9b0e20[];
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 ent2c* __cdecl fcn_004ceac0(char*, char*);

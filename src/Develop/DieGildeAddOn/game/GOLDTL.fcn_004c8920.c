@@ -6,23 +6,23 @@ int __cdecl gm_RemoveObjectByType(char*, int);
 
 
 /* ADDRESS: GOLDTL 0x004c8920 */
-int __cdecl fcn_004c8920(char* a1, char* a2)
+int __cdecl fcn_004c8920(char* request, char* result)
 {
 	char* f;
 	char* e;
 
-	*(int*) (a1 + 0x10) = fcn_004c4dc0(a1, *(int*) (a1 + 0x10));
-	if (gm_ResolveEntityById(0, (void**) (&f), 0, *(int*) (a1 + 0x10)) == 0)
+	*(int*) (request + 0x10) = fcn_004c4dc0(request, *(int*) (request + 0x10));
+	if (gm_ResolveEntityById(0, (void**) (&f), 0, *(int*) (request + 0x10)) == 0)
 		return 1;
 	if (*(short*) f != 0x2a && *(short*) f != 0x116)
 		return 1;
-	e = fcn_00502cd0(*(int*) (f + 0x14), 1, 0, *(unsigned short*) (a1 + 0x14));
+	e = fcn_00502cd0(*(int*) (f + 0x14), 1, 0, *(unsigned short*) (request + 0x14));
 	if (e == 0)
 		return 1;
 	if (*(int*) (e + 0xe) != 1)
 		return 1;
-	gm_RemoveObjectByType(f + 0x14, *(unsigned short*) (a1 + 0x14));
-	if (a2 != 0)
-		*a2 = 1;
+	gm_RemoveObjectByType(f + 0x14, *(unsigned short*) (request + 0x14));
+	if (result != 0)
+		*result = 1;
 	return 0;
 }

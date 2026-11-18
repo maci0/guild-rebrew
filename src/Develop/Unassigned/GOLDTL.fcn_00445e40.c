@@ -12,7 +12,7 @@ typedef struct {
 } Slot;
 
 extern int g_67a960;
-extern int g_6b805c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_10425fc;
 extern float g_104329c;
 #include "client_types.h"

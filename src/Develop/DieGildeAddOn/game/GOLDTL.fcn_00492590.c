@@ -4,9 +4,8 @@ unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl gm_RandomFloat01(void);
 char* __cdecl fcn_0064d530(char* dst, const char* src, unsigned int n);
 
-#include "GOLDTL.fcn_00492590_gconf.h"
-extern char* g_14a5dbc[];
-extern char* g_14a60d0[];
+extern unsigned char g_772628[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00492590 */
 unsigned int __cdecl fcn_00492590(int a0)
@@ -66,14 +65,14 @@ unsigned int __cdecl fcn_00492590(int a0)
 			break;
 		}
 	}
-	memset(g_772628, 0, 0x21c);
-	g_772628[9] = (char) gm_RandomMod(2);
-	if (g_772628[9] != 0) {
+	memset(((char *)g_772628), 0, 0x21c);
+	((char *)g_772628)[9] = (char) gm_RandomMod(2);
+	if (((char *)g_772628)[9] != 0) {
 		src = g_14a60d0[gm_RandomMod(0x70) & 0xffff];
 	} else {
 		src = g_14a5dbc[gm_RandomMod(0xbf) & 0xffff];
 	}
-	fcn_0064d530(g_772628 + 0x30, src, 0xf);
+	fcn_0064d530(((char *)g_772628) + 0x30, src, 0xf);
 	switch (a0) {
 	case 1:
 		bl = 0x15;
@@ -101,8 +100,8 @@ unsigned int __cdecl fcn_00492590(int a0)
 		break;
 	}
 	for (i = 0; i < 5; i++) {
-		g_772628[0x80 + i] = (char) (gm_RandomMod(sel) + bl + 1);
+		((char *)g_772628)[0x80 + i] = (char) (gm_RandomMod(sel) + bl + 1);
 	}
-	g_772628[2] = 10;
+	((char *)g_772628)[2] = 10;
 	return v2 | a0;
 }

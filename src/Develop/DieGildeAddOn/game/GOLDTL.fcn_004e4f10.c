@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 
-extern char g_9b0e20[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* Inferred name and source home; byte views preserve the native strided accesses. */
 /* ADDRESS: GOLDTL 0x004e4f10 */

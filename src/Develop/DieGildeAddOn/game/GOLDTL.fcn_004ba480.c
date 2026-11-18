@@ -37,7 +37,7 @@ int __cdecl fcn_004ba480(int* a1)
 	Kind* kind;
 	int lim;
 	unsigned char* ents[8];
-	char m[0xf8];
+	char message[0xf8];
 	unsigned char* it;
 	unsigned char* chosen;
 	char* rec;
@@ -75,18 +75,18 @@ int __cdecl fcn_004ba480(int* a1)
 	}
 	if (cnt >= 2) {
 		p = fcn_005049a0(chosen);
-		memset(m, 0, sizeof(m));
+		memset(message, 0, sizeof(message));
 		v = *(int*) (chosen + 1);
-		m[4] = 0x4a;
-		*(int*) (m + 0xc) = v;
-		m[0x36] = 1;
-		*(int*) (m + 0x5c) = v;
-		*(int*) (m + 8) = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
-		*(stamp14*) (m + 0x28) = (*(stamp14*)&g_7f4c00);
-		*(short*) (m + 0x64) = *(unsigned short*) (a1 + 1) + 0x12e7;
-		*(int*) (m + 0x58) = *(int*) (e + 2);
-		*(int*) (m + 0x60) = *(int*) (p + 2);
-		fcn_004c5530(m);
+		message[4] = 0x4a;
+		*(int*) (message + 0xc) = v;
+		message[0x36] = 1;
+		*(int*) (message + 0x5c) = v;
+		*(int*) (message + 8) = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
+		*(stamp14*) (message + 0x28) = (*(stamp14*)&g_7f4c00);
+		*(short*) (message + 0x64) = *(unsigned short*) (a1 + 1) + 0x12e7;
+		*(int*) (message + 0x58) = *(int*) (e + 2);
+		*(int*) (message + 0x60) = *(int*) (p + 2);
+		fcn_004c5530(message);
 		return 0;
 	}
 fail:

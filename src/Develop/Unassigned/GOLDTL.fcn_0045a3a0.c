@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl fcn_0045a2e0(int x, int y, int* img);
 
 /* ADDRESS: GOLDTL 0x0045a3a0 */

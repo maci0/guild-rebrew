@@ -18,7 +18,7 @@ typedef struct
 } Ent114;
 // SIZE 0x114
 
-extern char g_9a9660[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl cut_FindCutsceneById(unsigned int);
 

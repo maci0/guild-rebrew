@@ -15,10 +15,8 @@ typedef struct {
 extern __int64 g_666018;
 extern char g_6b5c60[];
 extern char s_6acdac[];
-extern int g_100f1dc;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
-extern int g_67d370;
 
 unsigned short __cdecl gm_RandomMod(int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);

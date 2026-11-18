@@ -14,8 +14,7 @@ extern float g_1042188;
 extern float g_1042190;
 extern float g_1042194;
 extern float g_1042198;
-extern int g_1052bac;
-extern int g_1042a08;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_10432a8;
 extern int g_1042a04;
 

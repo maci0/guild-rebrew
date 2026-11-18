@@ -1,18 +1,11 @@
 extern char* g_6b8014;
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6629b8;
 extern float g_662a70;
-extern float g_6628b0;
 extern float g_662a90;
 extern float g_662a94;
-extern float g_662918;
-extern double g_662a48;
 extern double g_662a50;
 extern double g_6629c8;
-extern int g_1042570;
-extern int g_1042574;
-extern int g_1042578;
-extern int g_104257c;
 
 void __cdecl fcn_00451900(float*, float*);
 

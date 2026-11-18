@@ -21,7 +21,7 @@ typedef struct {
 
 extern char* lpGebaeudePROT;
 extern unsigned char g_773d75;
-extern double g_6640e8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 float __cdecl fcn_0050b8d0(unsigned char* p, int k, int a, int b);
 void* __cdecl fcn_004ec7d0(unsigned char* e);

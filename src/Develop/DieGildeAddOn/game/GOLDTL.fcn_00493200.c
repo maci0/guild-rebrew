@@ -1,5 +1,5 @@
 extern char g_7f4ca0[];
-extern float g_662c98;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004e8b40(int kind, int* out);

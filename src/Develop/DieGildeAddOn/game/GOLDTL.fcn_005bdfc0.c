@@ -12,7 +12,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005bdfc0 */
-int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* a1, int a2, int a3)
+int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* building, int a2, int a3)
 {
 	int btn;
 	char* info;
@@ -22,7 +22,7 @@ int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* a1, int a2, int a3)
 	int handled = 0;
 	int r;
 
-	info = lpGebaeudePROT + *a1 * 0x24d;
+	info = lpGebaeudePROT + *building * 0x24d;
 	dlg = fcn_00470820(0, 0, (char*) 0x6ac448);
 	fcn_00471b60(dlg);
 	io_AppendText(0x10b);

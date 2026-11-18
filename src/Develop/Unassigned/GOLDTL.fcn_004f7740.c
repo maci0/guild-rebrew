@@ -5,20 +5,20 @@ void __cdecl fcn_005d6030(void*, void*);
 extern char g_679060[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
-int __cdecl fcn_004f7740(void* a1, void* a2)
+int __cdecl fcn_004f7740(void* entity, void* params)
 {
-	int v;
+	int mode;
 
-	v = *(int*) a2;
-	if (v == 3 || v == 1) {
-		if (*(unsigned char*) ((char*) a1 + 0xd) >= 3 &&
-		    (*(int*) ((char*) a1 + 0x1c8) & 0x400) == 0) {
-			if (v == 3) {
-				fcn_005d6030(a1, a2);
+	mode = *(int*) params;
+	if (mode == 3 || mode == 1) {
+		if (*(unsigned char*) ((char*) entity + 0xd) >= 3 &&
+		    (*(int*) ((char*) entity + 0x1c8) & 0x400) == 0) {
+			if (mode == 3) {
+				fcn_005d6030(entity, params);
 				return 2;
 			}
-			if (v == 1 && *(char*) ((char*) a1 + 2) == 6) {
-				io_FormatTextBuffer((char*) a2 + 0x14, (int) g_679060, 0x1d65);
+			if (mode == 1 && *(char*) ((char*) entity + 2) == 6) {
+				io_FormatTextBuffer((char*) params + 0x14, (int) g_679060, 0x1d65);
 			}
 			return 2;
 		}

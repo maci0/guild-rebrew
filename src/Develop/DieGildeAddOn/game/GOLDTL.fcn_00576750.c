@@ -3,7 +3,7 @@
 
 extern char* lpGebaeudePROT;
 extern float g_6629d0;
-extern float g_662a3c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_662b10;
 
 unsigned short __cdecl gm_RandomMod(int range);

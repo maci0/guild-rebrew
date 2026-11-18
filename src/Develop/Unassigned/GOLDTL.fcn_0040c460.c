@@ -5,11 +5,11 @@ extern char* g_6b7e98;
 char* __cdecl evt_LoadGfxScript(int);
 void __cdecl evt_RunScript(char*);
 
-char* __cdecl fcn_0040c460(int* a1)
+char* __cdecl fcn_0040c460(int* scriptName)
 {
 	char* p;
 
-	p = evt_LoadGfxScript(*a1);
+	p = evt_LoadGfxScript(*scriptName);
 	if (p == 0) {
 		return 0;
 	}

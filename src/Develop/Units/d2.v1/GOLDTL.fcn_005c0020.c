@@ -40,7 +40,7 @@ void __cdecl fcn_00532ef0(void);
 /* ADDRESS: GOLDTL 0x005c0020 */
 void __cdecl fcn_005c0020(void)
 {
-	int v12[32];
+	int ids[32];
 	int v11[32];
 	int v10[32];
 	Rec38 recs[32];
@@ -52,7 +52,7 @@ void __cdecl fcn_005c0020(void)
 	int i;
 	int n;
 	int count;
-	int v;
+	int selected;
 	int sum;
 	int y;
 	int h2;
@@ -66,10 +66,10 @@ void __cdecl fcn_005c0020(void)
 	h2 = g_772514;
 	d2_SetForm(dlg, 3);
 	fcn_0046e830(-1, -1, g_772514, h2, 0x767);
-	n = fcn_004f61c0(v12, v11, v10, *(unsigned short*) ent);
+	n = fcn_004f61c0(ids, v11, v10, *(unsigned short*) ent);
 	count = 0;
 	for (i = 0; i < n; i++) {
-		p = gm_LookupEntityRecordById(v12[i]);
+		p = gm_LookupEntityRecordById(ids[i]);
 		if (p != 0) {
 
 			recs[count].x0 = (int) p;
@@ -109,13 +109,13 @@ void __cdecl fcn_005c0020(void)
 			g_774654 = 1;
 		}
 		else if (g_100f1dc != -1) {
-			v = -1;
+			selected = -1;
 			for (i = 0; i < count; i++) {
-				if (g_67d370 == recs[i].x4) { v = i; break; }
+				if (g_67d370 == recs[i].x4) { selected = i; break; }
 			}
-			if (v > -1)
+			if (selected > -1)
 				fcn_005bfdf0((char*) 0x7f4ca0 + g_774970 * 0x21c,
-				    recs[v].x0);
+				    recs[selected].x0);
 		}
 	} while (fcn_005373e0((void*) fcn_005c0020, 0x657c7) != 0);
 	fcn_00471e30(dlg);

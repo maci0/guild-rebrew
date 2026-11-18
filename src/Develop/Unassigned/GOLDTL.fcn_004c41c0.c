@@ -18,7 +18,7 @@ typedef struct node99 {
 // SIZE 0x99
 #pragma pack()
 
-extern char* g_aed324;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004c41c0(node99* n)
 {

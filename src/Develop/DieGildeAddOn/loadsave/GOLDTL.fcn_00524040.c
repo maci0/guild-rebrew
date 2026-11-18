@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern int g_6a23ac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_town.h"
 extern char g_868060[];
 extern char* g_14a5320[];

@@ -1,7 +1,6 @@
 /* g_662a48 is owned (both targets) by src/GOLDTL.fcn_004b6fe0.c; g_6640e8 by
    src/GOLDTL.fcn_004b6f00.c; g_773d75 by src/GOLDTL.fcn_005b24b0.c. */
-extern double g_662a48;
-extern double g_6640e8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 
 #include <string.h>

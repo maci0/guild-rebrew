@@ -7,10 +7,7 @@ typedef struct Item {
 	char pad2[0x1b];
 } Item;
 
-extern char* g_1042c38;
-extern char g_1042d00[];
-extern char* g_1042320;
-extern char g_1052a40[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_104049c;
 extern unsigned int g_10404a0;
 

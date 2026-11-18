@@ -16,8 +16,7 @@ typedef struct Win0471c00 {
 
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
-extern int g_1015ea8;
-extern int g_1015eac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00469c40(int x, int y, int slot);
 

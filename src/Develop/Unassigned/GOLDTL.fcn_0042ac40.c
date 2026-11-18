@@ -1,13 +1,10 @@
 typedef void (__stdcall* g_662408_f)(int);
-extern int* g_6b7f50[16];
-extern int* g_6b7f50[16];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern g_662408_f g_662408;
 extern g_662408_f g_662408;
 
 
 
-extern int g_6b7f90;
-extern int* g_6b7ed0[16];
 
 int __cdecl fcn_0042b280(int);
 int __cdecl fcn_0042b200(int);

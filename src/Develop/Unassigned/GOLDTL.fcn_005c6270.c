@@ -6,12 +6,12 @@ int __cdecl fcn_005c61e0(int);
 
 int __cdecl fcn_005c6270(char* a1, int a2)
 {
-	char* p;
+	char* match;
 
-	p = (char*) fcn_00502cd0(*(int*) (a1 + 0x178), 1, 0, a2);
-	if (p != 0) {
-		if (fcn_005c61e0(*(unsigned short*) p) != 0) {
-			if (*(int*) (p + 0x21) != 0) {
+	match = (char*) fcn_00502cd0(*(int*) (a1 + 0x178), 1, 0, a2);
+	if (match != 0) {
+		if (fcn_005c61e0(*(unsigned short*) match) != 0) {
+			if (*(int*) (match + 0x21) != 0) {
 				return 1;
 			}
 		}

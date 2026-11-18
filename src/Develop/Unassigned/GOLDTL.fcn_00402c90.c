@@ -1,4 +1,3 @@
-extern void* g_14d0020[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00402c90 */

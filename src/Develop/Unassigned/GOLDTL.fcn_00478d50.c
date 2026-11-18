@@ -1,4 +1,4 @@
-extern double g_6628f0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_664088;
 typedef struct Seg {
 	unsigned int offset;

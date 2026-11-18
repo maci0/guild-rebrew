@@ -14,11 +14,8 @@ typedef struct {
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern __int64 g_666018;
-extern int g_66601c;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
-extern int g_67d370;
 extern char g_6ac494[];
 
 int __cdecl fcn_00525f60(void*, int);

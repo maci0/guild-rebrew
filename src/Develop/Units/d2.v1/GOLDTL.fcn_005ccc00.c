@@ -15,18 +15,18 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 void __cdecl fcn_005ccc00(unsigned short* self, unsigned int n, Match* arr)
 {
 	unsigned int i;
-	unsigned short* p;
+	unsigned short* other;
 
 	if (self != 0 && *self != 0xffff && n > 0) {
 		for (i = 0; i < n; i++, arr++) {
-			p = arr->who;
-			if (p != 0 && *p != 0xffff && arr->h != -1) {
+			other = arr->who;
+			if (other != 0 && *other != 0xffff && arr->h != -1) {
 				if ((((char*) self)[2] == 6 || ((char*) self)[2] == 7) &&
-				    (((char*) p)[2] == 6 || ((char*) p)[2] == 7)) {
+				    (((char*) other)[2] == 6 || ((char*) other)[2] == 7)) {
 					d2_SetElementValue(arr->h, 0, 100, 0);
 				}
 				else {
-					d2_SetElementValue(arr->h, 0, 100, (int) fcn_0050f980(*self, *p, 1));
+					d2_SetElementValue(arr->h, 0, 100, (int) fcn_0050f980(*self, *other, 1));
 				}
 			}
 		}

@@ -7,7 +7,7 @@ float __cdecl gm_GetEntitySkill(char* entity, int index);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x00490580 */
-int __cdecl fcn_00490580(char* e, int a1, int* a2)
+int __cdecl fcn_00490580(char* e, int a1, int* choice)
 {
 	float y;
 	int n;
@@ -36,14 +36,14 @@ int __cdecl fcn_00490580(char* e, int a1, int* a2)
 	fcn_004f4830(1, info);
 	if (m > 1.0f && info[6] == 0) {
 		if (m > 1.4f || z > y) {
-			*a2 = 1;
+			*choice = 1;
 			return 1;
 		}
 		return 0;
 	}
 	if (m < 0.5f && info[6] == 1
 		&& (w > y || *(unsigned char*) (e + 0x166) == 0x11)) {
-		*a2 = 0;
+		*choice = 0;
 		return 1;
 	}
 	p = fcn_004e90d0(0x11);
@@ -51,11 +51,11 @@ int __cdecl fcn_00490580(char* e, int a1, int* a2)
 		r = fcn_0050f980(*(unsigned short*) p, *(unsigned short*) e, 1);
 		if (info[6] == 1) {
 			if (r > 0.75f) {
-				*a2 = 0;
+				*choice = 0;
 				return 1;
 			}
 		} else if (info[6] == 0 && r < 0.25f) {
-			*a2 = 1;
+			*choice = 1;
 			return 1;
 		}
 	}

@@ -16,23 +16,23 @@ int __cdecl fcn_004b73b0(void* a1)
 	char buf[0x100];
 	double d;
 	int v;
-	void* p;
+	void* entity;
 	int n;
 
-	p = gm_LookupEntityRecordById(*(int*) a1);
-	if (p == 0) {
+	entity = gm_LookupEntityRecordById(*(int*) a1);
+	if (entity == 0) {
 		return 1;
 	}
-	if (fcn_005c6270(p, 0x290) != 0) {
+	if (fcn_005c6270(entity, 0x290) != 0) {
 		return 0x400;
 	}
 	v = gm_RandomMod(3);
 	d = (double) v + 2.0;
-	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) p) * d) *
+	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) entity) * d) *
 	    0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, n);
 	fcn_004c51a0(-1, *(int*) a1, (*(char*)&g_773d75), n);
-	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
+	fcn_00545d40(*(int*) ((char*) entity + 4), *(int*) ((char*) entity + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

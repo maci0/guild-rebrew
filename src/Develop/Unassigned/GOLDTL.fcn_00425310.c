@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-extern char* g_6b7d68;
-extern int g_6b7d6c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 /* Writes the sample bank as text, blanks in names replaced by '~'. */

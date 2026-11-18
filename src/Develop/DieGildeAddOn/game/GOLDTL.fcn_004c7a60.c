@@ -8,18 +8,18 @@ extern char cm_LastObjectId[];
 
 /* ADDRESS: GOLD 0x004c4450 */
 /* ADDRESS: GOLDTL 0x004c4dc0 */
-int __cdecl fcn_004c4dc0(int a1, int a2)
+int __cdecl fcn_004c4dc0(int a1, int value)
 {
-	if (a2 == -2) {
+	if (value == -2) {
 		return *(int*) cm_LastEntityId;
 	}
-	if (a2 == -3) {
+	if (value == -3) {
 		return *(int*) cm_LastBuildingId;
 	}
-	if (a2 == -4) {
+	if (value == -4) {
 		return *(int*) cm_LastObjectId;
 	}
-	return a2;
+	return value;
 }
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);

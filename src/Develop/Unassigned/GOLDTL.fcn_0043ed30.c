@@ -14,7 +14,7 @@ typedef struct Scene {
 	float f60;
 } Scene;
 
-extern float g_6628cc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00455350(char* object, float* in, float* out);
 int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3,

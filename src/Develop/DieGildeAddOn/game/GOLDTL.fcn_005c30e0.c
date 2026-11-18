@@ -40,11 +40,10 @@ typedef struct GOLDTL_House5c30 {
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_774800;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 extern double g_664e60;
-extern char g_67e968[];
 
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl fcn_00504f30(int, int);

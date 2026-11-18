@@ -9,9 +9,8 @@ extern unsigned short* g_773da8;
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];
 extern pos14_7f4c00 g_7f4c00;
-extern double g_6640e8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_664128;
-extern double g_662908;
 extern float g_665368;
 extern void (__stdcall* g_662068)(unsigned int);
 

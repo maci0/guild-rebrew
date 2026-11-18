@@ -8,7 +8,7 @@ typedef struct Seq {
 } Seq;
 // SIZE 0xb4
 
-extern char* g_1007cd4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_004a8770(void);
 void __cdecl fcn_004a8640(void);

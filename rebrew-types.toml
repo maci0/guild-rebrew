@@ -419,10 +419,10 @@ symbol = "Kind"
 size = 20
 native_size = 20
 extent = "allocation"
-evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged. Rebound after the Rebrew 6.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged."
 cflags = "/O2 /Gd"
-source_hash = "858ac181419695cc3f3422032f693ecb5fa4a27292ac14965a71090e98d9397d"
-headers_hash = "a729d57218e906692e93ec4517d575c8d4381b49566299c3b2fc793d3f4583b0"
+source_hash = "91dc2a3fdc0b355bc6d9ce377c2c61971bf5ef7bac9019ffd544ca194ed06e9b"
+headers_hash = "67e5ba41030b6806da4771f8050ae07a3534b3a188ea7b3c77160c1504c940bc"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -434,16 +434,15 @@ symbol = "Kind"
 size = 20
 native_size = 20
 extent = "allocation"
-evidence = "GOLD rebind after source edits; native GOLD 0x4e4cc0 scales the event type as index*5*4 and calls the fourth slot, unchanged 20-byte stride. Rebound after the Rebrew 6.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged."
 cflags = "/O2 /Gd"
-source_hash = "858ac181419695cc3f3422032f693ecb5fa4a27292ac14965a71090e98d9397d"
-headers_hash = "a729d57218e906692e93ec4517d575c8d4381b49566299c3b2fc793d3f4583b0"
+source_hash = "91dc2a3fdc0b355bc6d9ce377c2c61971bf5ef7bac9019ffd544ca194ed06e9b"
+headers_hash = "67e5ba41030b6806da4771f8050ae07a3534b3a188ea7b3c77160c1504c940bc"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."event.validator_view".GOLD.offsets]
 fn = 0
-pad4 = 4
 [types."client.timer_callback_slot".GOLDTL]
 file = "src/client_timer.h"
 symbol = "TIMER_CALLBACK_SLOT"
@@ -566,10 +565,10 @@ symbol = "D3_UNIVERSE_VIEW"
 size = 988
 native_size = 988
 extent = "allocation"
-evidence = "Rebound after the g_6b7fac declaration in GOLDTL.fcn_00515540.c became volatile (timer-thread clock); the source change does not touch this type, and the reviewed native extent and every modeled offset are unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged."
 cflags = "/O2 /Gd"
-source_hash = "ce5678c822535d18e5de8d1559b2db3dd00e0a3f70493b702329fc1bf22a5152"
-headers_hash = "5b5dc7834fc81d94d23404cfda16f7678e4bdd7ff36652bccd132a3a289c2381"
+source_hash = "5c331c1c1c22c4a9d121fbb82d1d8f22171782ed6627b6a01d233ea445fa4890"
+headers_hash = "b155acd65693b6d704a80bb78a51be5ca94c777b5c37b6b90a27ea3572dfa211"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -581,10 +580,10 @@ symbol = "D3_UNIVERSE_VIEW"
 size = 992
 native_size = 992
 extent = "allocation"
-evidence = "Rebound after the g_6b7fac declaration in GOLDTL.fcn_00515540.c became volatile (timer-thread clock); the source change does not touch this type, and the reviewed native extent and every modeled offset are unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged."
 cflags = "/O2 /Gd"
-source_hash = "ce5678c822535d18e5de8d1559b2db3dd00e0a3f70493b702329fc1bf22a5152"
-headers_hash = "5b5dc7834fc81d94d23404cfda16f7678e4bdd7ff36652bccd132a3a289c2381"
+source_hash = "5c331c1c1c22c4a9d121fbb82d1d8f22171782ed6627b6a01d233ea445fa4890"
+headers_hash = "b155acd65693b6d704a80bb78a51be5ca94c777b5c37b6b90a27ea3572dfa211"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 

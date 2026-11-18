@@ -44,9 +44,8 @@ struct Device451150 {
 
 extern void* g_6b5de0;
 extern double g_662d38;
-extern float g_662d34;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_662d30;
-extern float g_6628d8;
 extern float g_67bbfc;
 extern float g_67bc00;
 extern float g_67bc04;

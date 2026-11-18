@@ -5,7 +5,7 @@ typedef Card_1007ce0 Card;
 extern Card_1007ce0 g_1007ce0[24];
 
 /* ADDRESS: GOLDTL 0x004a7340 */
-int __cdecl fcn_004a7340(int* h, int* out, int a3)
+int __cdecl fcn_004a7340(int* h, int* out, int startAtTwo)
 {
 	int s;
 	int i;
@@ -14,7 +14,7 @@ int __cdecl fcn_004a7340(int* h, int* out, int a3)
 	int rank;
 	int* p;
 
-	s = a3 ? 2 : 0;
+	s = startAtTwo ? 2 : 0;
 	if (h[s] >= 0 && h[s + 1] >= 0 && h[s + 2] >= 0 && s < 3) {
 		p = &h[s];
 		i = s + 1;

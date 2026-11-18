@@ -12,7 +12,7 @@ typedef struct
 } Obj;
 // SIZE 0xc98
 
-extern char* g_6b7e94;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00428720(Obj*);
 

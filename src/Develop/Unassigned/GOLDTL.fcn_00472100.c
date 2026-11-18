@@ -41,7 +41,7 @@ typedef Obj_1038140 Obj;
 extern char* g_1015ea0;
 extern Win_1015f40 g_1015f40[0x60];
 extern Obj_1038140 g_1038140[];
-extern int g_772534;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00472100 */
 char* __cdecl fcn_00472100(int j, int i)

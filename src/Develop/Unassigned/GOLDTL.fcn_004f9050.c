@@ -8,24 +8,24 @@ extern char g_679060[];
 int __cdecl fcn_004fa5f0(void*, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, short);
 
-int __cdecl fcn_004f9050(unsigned char* a1, int* a2)
+int __cdecl fcn_004f9050(unsigned char* entity, int* request)
 {
 	char buf[0x800];
 
-	if (*a2 != 3 && *a2 != 1) {
+	if (*request != 3 && *request != 1) {
 		return 1;
 	}
-	if (a1[0x166] != 0xa) {
+	if (entity[0x166] != 0xa) {
 		return 1;
 	}
-	if (*a2 == 3 && a1[2] == 6) {
+	if (*request == 3 && entity[2] == 6) {
 		memset(buf, 0, sizeof(buf));
-		io_FormatTextBuffer(buf, 0x1dc5, *(short*) a1);
+		io_FormatTextBuffer(buf, 0x1dc5, *(short*) entity);
 		fcn_004fa5f0(buf, 2, 0x657c7);
 		return 2;
 	}
-	if (*a2 == 1 && a1[2] == 6) {
-		io_FormatTextBuffer((char*) a2 + 0x14, (int) g_679060, 0x1dc4);
+	if (*request == 1 && entity[2] == 6) {
+		io_FormatTextBuffer((char*) request + 0x14, (int) g_679060, 0x1dc4);
 	}
 	return 2;
 }

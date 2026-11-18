@@ -1,5 +1,4 @@
-extern int g_14cbca0;
-extern int g_699364;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char cm_LastBuildingId[];
 extern char g_7f4ca0[];
 

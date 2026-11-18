@@ -1,7 +1,7 @@
 
 /* ADDRESS: GOLDTL 0x00476c70 */
-int __cdecl fcn_00476c70(int a1, int a2, short a3, char* a4)
+int __cdecl fcn_00476c70(int x, int y, short value, char* grid)
 {
-	((short*) *(int*) (a4 + 0x1c))[a1 + a2 * *(int*) (a4 + 0x10)] = a3;
+	((short*) *(int*) (grid + 0x1c))[x + y * *(int*) (grid + 0x10)] = value;
 	return 1;
 }

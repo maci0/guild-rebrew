@@ -7,10 +7,7 @@ typedef struct DirtyRect {
 } DirtyRect;
 // SIZE 0x14
 
-extern int g_67d964;
-extern int g_67d968;
-extern int g_7725f8;
-extern int g_7725fc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern DirtyRect* g_772588;
 
 /* ADDRESS: GOLDTL 0x00465ff0 */

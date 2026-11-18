@@ -1,17 +1,17 @@
 
 /* ADDRESS: GOLDTL 0x00545970 */
-int __cdecl fcn_00545970(int a1)
+int __cdecl fcn_00545970(int index)
 {
 	int i;
-	int n;
+	int count;
 
-	n = 0;
+	count = 0;
 	for (i = 0; i < 768; i++) {
 		if (*(unsigned char*) (0x7f4ca2 + i * 0x21c) == 6) {
-			if (i == a1) {
-				return n;
+			if (i == index) {
+				return count;
 			}
-			n++;
+			count++;
 		}
 	}
 	return -1;

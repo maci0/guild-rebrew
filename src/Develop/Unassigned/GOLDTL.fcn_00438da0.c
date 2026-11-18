@@ -8,16 +8,10 @@ extern float g_10432a4;
 extern float g_1042a28;
 extern float g_1042a24;
 extern float g_1052bbc;
-extern float g_1052bc0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_1052bb4;
-extern float g_1052bc8;
 extern float g_1042a10;
 extern float g_1042a18;
-extern float g_1042584;
-extern int g_1042570;
-extern int g_1042574;
-extern int g_1042578;
-extern int g_104257c;
 extern float g_1042fa4;
 
 void __cdecl fcn_00437bc0(void);

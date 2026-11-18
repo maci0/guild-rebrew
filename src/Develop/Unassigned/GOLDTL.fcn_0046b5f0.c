@@ -45,11 +45,8 @@ typedef struct {
 
 extern char* g_772524;
 extern char* g_1015ea0;
-extern int g_1015ea4;
-extern int g_67d378;
-extern int g_67d380;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d384;
-extern int g_67d398;
 extern int g_772554;
 extern TextWin46b5f0 g_1015f40[0x60];
 

@@ -2,9 +2,8 @@
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char g_773d75;
-extern double g_662a48;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_664360;
-extern float g_6628d8;
 extern float g_664198;
 
 int __cdecl fcn_0050e4a0(int);

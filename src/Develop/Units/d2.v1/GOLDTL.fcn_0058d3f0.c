@@ -39,24 +39,24 @@ void __cdecl fcn_00428340(int, int, char*);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_0058d3f0(int a1, Req* a2)
+int __cdecl fcn_0058d3f0(int a1, Req* request)
 {
 	int cancel;
 	int info;
 	int ok;
 	char line[0x40];
 	char buf[0x200];
-	int r;
-	int s;
+	int result;
+	int status;
 	int dlg;
 	int id;
 	int h;
 	char* p;
 
-	r = 0;
-	s = fcn_004f3e60(a1, &info);
-	if (s != 1) {
-		if (s == 0) {
+	result = 0;
+	status = fcn_004f3e60(a1, &info);
+	if (status != 1) {
+		if (status == 0) {
 			io_FormatTextBuffer(buf, 0x4135, info, 0x229, a1);
 			fcn_00526120(buf, 0);
 		}
@@ -79,12 +79,12 @@ int __cdecl fcn_0058d3f0(int a1, Req* a2)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (g_67d370 == ok) {
-				if (*a2->xc == -1) {
+				if (*request->xc == -1) {
 					g_774654 = 1;
 				} else {
-					h = fcn_004f3280(a1, *a2->x0, a2->x8, a2->x10, 0x1c);
-					while (h != -1 && (s = fcn_004c4450(h)) == 0) {
-						fcn_005373e0((void*) s, 0x20007);
+					h = fcn_004f3280(a1, *request->x0, request->x8, request->x10, 0x1c);
+					while (h != -1 && (status = fcn_004c4450(h)) == 0) {
+						fcn_005373e0((void*) status, 0x20007);
 					}
 					p = fcn_004c4480(h);
 					if (p != 0) {
@@ -92,7 +92,7 @@ int __cdecl fcn_0058d3f0(int a1, Req* a2)
 						id = evt_LoadGfxScript(s_6a9714);
 						fcn_00428340(id, 1, line);
 					}
-					r = 1;
+					result = 1;
 					g_774654 = 1;
 				}
 			} else if (g_67d370 == cancel) {
@@ -101,5 +101,5 @@ int __cdecl fcn_0058d3f0(int a1, Req* a2)
 		}
 	} while (fcn_005373e0((void*) fcn_0058d3f0, 0x677c7) != 0);
 	fcn_00471e30(dlg);
-	return r;
+	return result;
 }

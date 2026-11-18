@@ -2,17 +2,14 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* g_7746cc;
 extern char* g_entity_type_table;
-extern int g_100f1dc;
-extern int g_67d370;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6abb00;
-extern int g_772514;
 extern unsigned char g_773d75;
 extern int g_774654;
 extern unsigned short g_774970;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
-extern int g_14ce8e0;
 extern unsigned char g_7747b0;
 extern char g_6b5c60[];
 extern char g_7f4ca4[];

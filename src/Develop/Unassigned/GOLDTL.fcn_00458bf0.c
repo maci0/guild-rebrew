@@ -36,7 +36,7 @@ struct Device {
 };
 
 extern void* g_6b5de0;
-#include "GOLDTL.fcn_00458bf0_gconf.h"
+extern unsigned char g_6b89bc;
 extern char* g_6b86ec;
 extern char* g_1041d00;
 
@@ -57,7 +57,7 @@ void __cdecl fcn_00458bf0(Ent* n)
 	((Device*)g_6b5de0)->vtbl->SetTransform(((Device*)g_6b5de0), 0x100, &m);
 	((Device*)g_6b5de0)->vtbl->SetVertexShader(((Device*)g_6b5de0), 0x142);
 	fcn_004372d0(0x7f, 0, 0, 1, 0);
-	if (!g_6b89bc) {
+	if (!(*(char *)&g_6b89bc)) {
 		((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x13, 1);
 		((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x14, 4);
 	}
@@ -71,7 +71,7 @@ void __cdecl fcn_00458bf0(Ent* n)
 			fcn_00458d20(e);
 		}
 	}
-	if (!g_6b89bc) {
+	if (!(*(char *)&g_6b89bc)) {
 		((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x13, 5);
 		((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x14, 6);
 	}

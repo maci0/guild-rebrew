@@ -45,10 +45,8 @@ typedef struct GOLDTL_TileUv {
 extern void* g_6b5de0;
 extern unsigned char g_6b89bc;
 extern unsigned char g_1040600;
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6628a4;
-extern float g_6628cc;
-extern float g_662c30;
 extern unsigned long g_14ce728;
 
 void* __cdecl fcn_00457c10(void* vb, void* ib, void* map, int step, int* rect,

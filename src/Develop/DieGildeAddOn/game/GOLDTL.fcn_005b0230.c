@@ -1,8 +1,7 @@
 #include "client_data.h"
 #include "game_data.h"
 extern char* g_774a68;
-extern int g_778d20;
-extern int g_778d24;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_1043370;
 extern char* g_77255c;
 

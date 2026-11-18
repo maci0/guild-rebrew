@@ -17,11 +17,11 @@ void __cdecl fcn_005803f0(void)
 /* ADDRESS: GOLDTL 0x005805e0 */
 void __cdecl fcn_005805e0(void)
 {
-	int h;
+	int dialog;
 
-	h = *(int*) (((char*) g_665f08) + 0x68);
-	if (h != -1) {
-		fcn_00471e30(h);
+	dialog = *(int*) (((char*) g_665f08) + 0x68);
+	if (dialog != -1) {
+		fcn_00471e30(dialog);
 		*(int*) (((char*) g_665f08) + 0x68) = -1;
 	}
 }

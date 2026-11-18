@@ -29,24 +29,18 @@ typedef struct Slot {
 
 extern int g_100f890;
 extern int g_100f944;
-extern int g_100f1e8;
-extern int g_100f1ec;
-extern int g_14ce8e8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d8e0;
 extern int g_67d8e4;
-extern int g_14ce8d0;
 extern volatile int g_6b7fb0;
 extern int g_100f888;
 extern int g_100f1c8;
 extern int g_7725d8;
 extern int g_100f1c0;
 extern int g_100f1c4;
-extern int g_67d378;
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
-extern int g_100f894;
 extern int g_7725d0;
-extern int g_67d370;
 extern char* g_1015ea0;
 extern int g_67d38c;
 extern int g_14ce900;

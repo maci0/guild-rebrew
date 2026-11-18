@@ -7,29 +7,29 @@ void  __cdecl fcn_005da250(void*, void*);
 void  __cdecl io_FormatTextBuffer(void*, int, int);
 extern char g_679060[];
 
-int __cdecl fcn_004f74e0(void* a1, void* a2)
+int __cdecl fcn_004f74e0(void* entity, void* request)
 {
 	void* p;
 
-	if (*(int*) a2 != 3 && *(int*) a2 != 1) {
+	if (*(int*) request != 3 && *(int*) request != 1) {
 		return 1;
 	}
-	if (*(char*) ((char*) a1 + 0x166) == 0xd) {
+	if (*(char*) ((char*) entity + 0x166) == 0xd) {
 		return 1;
 	}
 	p = fcn_005463a0(1, 0, 0x2c);
 	while (p != 0) {
-		if (*(int*) ((char*) p + 0xac) == *(int*) ((char*) a1 + 4)) {
+		if (*(int*) ((char*) p + 0xac) == *(int*) ((char*) entity + 4)) {
 			return 1;
 		}
 		p = he_fn_Handlung();
 	}
-	if (*(int*) a2 == 3) {
-		fcn_005da250(a1, a2);
+	if (*(int*) request == 3) {
+		fcn_005da250(entity, request);
 		return 2;
 	}
-	if (*(int*) a2 == 1 && *(char*) ((char*) a1 + 2) == 6) {
-		io_FormatTextBuffer((char*) a2 + 0x14, (int) g_679060, 0x1d44);
+	if (*(int*) request == 1 && *(char*) ((char*) entity + 2) == 6) {
+		io_FormatTextBuffer((char*) request + 0x14, (int) g_679060, 0x1d44);
 	}
 	return 2;
 }

@@ -13,18 +13,18 @@ int __cdecl fcn_005dd4e0(unsigned char* e, int* a2)
 	char text[0x800];
 	int last;
 	int i;
-	int n;
+	int count;
 
 	last = 0;
 	a2[4] = 1;
 	fcn_00508cf0(5, ids);
 	i = 0;
-	n = 0;
-	while (n < 1 && i < 5) {
+	count = 0;
+	while (count < 1 && i < 5) {
 		if (e[ids[i] + 0x80] < 0xfc) {
 			fcn_005dcf40(e, ids[i]);
 			last = ids[i];
-			n++;
+			count++;
 		}
 		i++;
 	}

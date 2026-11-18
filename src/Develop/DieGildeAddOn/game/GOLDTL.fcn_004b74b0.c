@@ -15,19 +15,19 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 int __cdecl fcn_004b74b0(int* a1)
 {
 	char buf[0x100];
-	unsigned short* e;
-	int v;
+	unsigned short* entity;
+	int amount;
 
-	e = gm_LookupEntityRecordById(a1[0]);
-	if (e == 0)
+	entity = gm_LookupEntityRecordById(a1[0]);
+	if (entity == 0)
 		return 1;
-	if (fcn_005c6270(e, 0x290) != 0)
+	if (fcn_005c6270(entity, 0x290) != 0)
 		return 0x400;
-	v = (int) ((gm_RandomMod(2) + 1.0) * gm_WalkEntityChain(*e) * 0.01);
-	if (v > gm_WalkEntityChain(*e))
+	amount = (int) ((gm_RandomMod(2) + 1.0) * gm_WalkEntityChain(*entity) * 0.01);
+	if (amount > gm_WalkEntityChain(*entity))
 		return 0;
-	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, v);
-	fcn_004c51a0(-1, a1[0], g_773d75, v);
-	fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
+	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, amount);
+	fcn_004c51a0(-1, a1[0], g_773d75, amount);
+	fcn_00545d40(*(int*) (entity + 2), *(int*) (entity + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

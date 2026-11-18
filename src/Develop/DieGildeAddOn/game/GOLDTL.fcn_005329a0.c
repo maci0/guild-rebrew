@@ -36,7 +36,7 @@ typedef struct {
 extern char* g_7746cc;
 extern unsigned char* g_7746c8;
 extern char* lpObjektePROT;
-extern int g_77250c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14a79c0[];
 
 void* __cdecl fcn_00502cd0(int, int, int, ...);

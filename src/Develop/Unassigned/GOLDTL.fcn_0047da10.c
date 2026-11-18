@@ -27,7 +27,7 @@ typedef struct
 extern pos14_7f4c00 g_7f4c00;
 extern fcn_0047da10_Stamp g_100dc04;
 extern int g_100dc00;
-#include "GOLDTL.fcn_0047da10_gconf.h"
+extern int g_100dc14;
 extern int g_7747b4;
 float g_67db50 = 1.0f;
 float g_67db54 = 0.5f;
@@ -72,9 +72,9 @@ void __cdecl fcn_0047da10(void)
 		n = 0x300;
 	} else {
 		g_100dc04 = now;
-		g_100dc14 += f - n;
-		if (g_100dc14 >= 1.0f) {
-			g_100dc14 -= 1.0f;
+		(*(float *)&g_100dc14) += f - n;
+		if ((*(float *)&g_100dc14) >= 1.0f) {
+			(*(float *)&g_100dc14) -= 1.0f;
 			n++;
 		}
 	}
@@ -104,7 +104,7 @@ void __cdecl fcn_0047da10(void)
 		g_100dc04.hour++;
 		g_100dc04.f6 = 0;
 		g_100dc04.f10 = 0;
-		g_100dc14 = 0;
+		(*(float *)&g_100dc14) = 0;
 	}
 	fcn_0064d41a(buf, "Next Player: %i", g_100dc00);
 }

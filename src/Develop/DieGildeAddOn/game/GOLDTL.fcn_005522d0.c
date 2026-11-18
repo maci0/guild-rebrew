@@ -1,6 +1,6 @@
 extern char s_6a5b84[];
 extern char s_6a5b8c[];
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_662948;
 extern float g_6640b4;
 extern char* lpGebaeudePROT;

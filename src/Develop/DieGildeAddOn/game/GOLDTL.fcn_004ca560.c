@@ -1,6 +1,5 @@
 #include <string.h>
 
-extern char g_68b0d8[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_0064d41a(char*, char*, ...);

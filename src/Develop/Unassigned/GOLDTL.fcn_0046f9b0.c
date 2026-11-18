@@ -5,7 +5,7 @@ typedef struct
 // SIZE 0x2f4
 
 extern char* g_1015ea0;
-extern int g_67d398;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_0047b620(int p, int i);
 int __cdecl fcn_0046b520(char* s, int font);

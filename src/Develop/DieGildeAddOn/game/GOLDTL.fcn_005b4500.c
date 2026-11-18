@@ -21,9 +21,8 @@ typedef struct
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char g_7f4ca0[];
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
-extern int g_772514;
 extern char s_6811b0[];
 extern char s_6ab848[];
 extern char s_6ab834[];

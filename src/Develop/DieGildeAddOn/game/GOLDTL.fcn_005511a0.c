@@ -10,12 +10,12 @@ extern int __cdecl fcn_004c5620(int a, void* b);
 /* ADDRESS: GOLDTL 0x005511a0 */
 void __cdecl fcn_005511a0(char* a0)
 {
-	int v1;
+	int state;
 
-	v1 = *(int*)(a0 + 0x70);
-	if (v1 >= -2) {
-		if (v1 >= 0) {
-			if (v1 == 0) {
+	state = *(int*)(a0 + 0x70);
+	if (state >= -2) {
+		if (state >= 0) {
+			if (state == 0) {
 				if ((*(unsigned char*)(a0 + 0x78) & 2) != 0) {
 					*(pos14_7f4c00*)(a0 + 0x52) = g_7f4c00;
 					fcn_00500bb0((unsigned int*)(a0 + 0x52), 0, 2, 0);

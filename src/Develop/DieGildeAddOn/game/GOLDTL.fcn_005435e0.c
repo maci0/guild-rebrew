@@ -45,8 +45,7 @@ typedef struct {
 } Figure;
 
 extern char g_7e23e0[];
-extern char* g_14a60d0[];
-extern char* g_14a5dbc[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 extern signed char g_6a3440;
 

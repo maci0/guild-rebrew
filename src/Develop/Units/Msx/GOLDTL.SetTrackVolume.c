@@ -1,6 +1,6 @@
 #include "msx.h"
 
-void __cdecl SetTrackVolume(const char* name, int a2)
+void __cdecl SetTrackVolume(const char* name, int volume)
 {
 	Chan_14cc460* p;
 
@@ -8,7 +8,7 @@ void __cdecl SetTrackVolume(const char* name, int a2)
 		EnterCriticalSection(&g_14cc5a0);
 		p = FindTrackByName(name);
 		if (p != 0) {
-			fcn_0041fc10(p, a2);
+			fcn_0041fc10(p, volume);
 		}
 		LeaveCriticalSection(&g_14cc5a0);
 	}

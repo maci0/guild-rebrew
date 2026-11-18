@@ -19,7 +19,7 @@ typedef struct
 // SIZE 0x38
 
 extern char g_7f4ca0[];
-extern float g_662da8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
 void __cdecl fcn_005b3410(char* e, char* r, int mode);

@@ -10,17 +10,17 @@ void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
 void __cdecl fcn_005100f0(int a, int b);
 
 /* ADDRESS: GOLDTL 0x004b8d00 */
-int __cdecl fcn_004b8d00(int* a0)
+int __cdecl fcn_004b8d00(int* request)
 {
 	char buf[0x200];
 	char* p;
 	int n;
 
-	p = gm_LookupEntityRecordById(*a0);
+	p = gm_LookupEntityRecordById(*request);
 	if (p == 0) {
 		return 1;
 	}
-	io_FormatTextBuffer(buf, 0x12e7 + *(unsigned short*) ((char*) a0 + 4),
+	io_FormatTextBuffer(buf, 0x12e7 + *(unsigned short*) ((char*) request + 4),
 		fcn_0050b750(1, g_773d75),
 		n = (unsigned short) fcn_0042e410(3) + 3);
 	fcn_00545d40(*(int*) (p + 4), *(int*) (p + 4), buf,

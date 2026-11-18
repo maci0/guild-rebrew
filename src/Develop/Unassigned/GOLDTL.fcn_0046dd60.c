@@ -52,10 +52,7 @@ typedef struct
 extern fcn_0046dd60_Surf* g_77256c;
 extern char* g_77253c;
 extern char* g_772500;
-extern int g_7725f8;
-extern int g_7725fc;
-extern int g_67d964;
-extern int g_67d968;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl fcn_0047bf80(int x, int y, int w, int h, int a5, void* r);
 void __cdecl fcn_0047b9a0(void* p, int r, int g, int b);

@@ -19,7 +19,7 @@ typedef struct {
 } msg9c;
 // SIZE 0x9c
 
-extern int g_9badd0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004c4330(msg9c*);
 char* __cdecl fcn_0064d530(char*, char*, int);

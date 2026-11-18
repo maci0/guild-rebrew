@@ -8,7 +8,7 @@ typedef Voice_14cbbe0 Voice;
 extern int g_6b7d7c;
 extern Voice_14cbbe0 g_14cbbe0;
 extern char* g_6b7e88;
-extern int g_6b7e8c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl fcn_0042aaa0(int h);
 void __cdecl fcn_0042a7c0(int h);
 

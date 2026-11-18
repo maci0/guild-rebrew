@@ -44,12 +44,11 @@ __declspec(dllimport) int __stdcall select(int n, FdSet_420db0* r, FdSet_420db0*
 __declspec(dllimport) int __stdcall shutdown(unsigned int s, int how);
 __declspec(dllimport) int __stdcall closesocket(unsigned int s);
 
-extern int g_14cbca0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_14cbca4;
 extern unsigned char* g_14cbca8;
 extern unsigned short g_14cbcac;
 extern unsigned short g_14cbcae;
-extern int g_14cbcb0;
 extern int g_6b7d40;
 
 void __cdecl fcn_00420b70(void);

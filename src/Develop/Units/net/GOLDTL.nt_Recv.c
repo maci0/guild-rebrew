@@ -1,9 +1,9 @@
 /* Reads one network packet fragment into the receive buffer. */
 
-extern int g_14cbca0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_14cbca4;
 extern unsigned short g_14cbcac;
-#include "GOLDTL.nt_Recv_gconf.h"
+extern unsigned int g_6b7d54;
 extern int g_14cbc84;
 
 extern int (__stdcall* g_662384)(unsigned int s, char* buf, int len, int flags);
@@ -38,7 +38,7 @@ int __cdecl nt_Recv(void)
 		if (n == -1) {
 			goto got_error;
 		}
-		g_6b7d54 += n;
+		(*(int *)&g_6b7d54) += n;
 		g_14cbcac = g_14cbcac + n;
 		if (g_14cbcac < 3) {
 			return 0;
@@ -61,7 +61,7 @@ fail:
 		fcn_00421050();
 		return 1;
 	}
-	g_6b7d54 += n;
+	(*(int *)&g_6b7d54) += n;
 	g_14cbcac = g_14cbcac + n;
 	if (g_14cbcac != *(unsigned short*) (g_14cbca4 + 1)) {
 		return 0;

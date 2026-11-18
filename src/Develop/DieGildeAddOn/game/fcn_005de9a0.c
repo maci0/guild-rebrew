@@ -7,14 +7,14 @@ void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 void __cdecl fcn_005dbe90(void* buf);
 
 /* ADDRESS: GOLDTL 0x005de9a0 */
-int __cdecl fcn_005de9a0(char* a0, char* a1)
+int __cdecl fcn_005de9a0(char* actor, char* action)
 {
 	char desc[0x50];
 	char bufA[0x200];
 	char bufB[0x400];
 	void* p;
 
-	if (a0[2] == 6) {
+	if (actor[2] == 6) {
 		memset(desc, 0, 0x50);
 		memset(desc + 0x1c, 0xff, 0x20);
 		io_FormatTextBuffer(bufA, 0x9c);
@@ -25,14 +25,14 @@ int __cdecl fcn_005de9a0(char* a0, char* a1)
 		*(__int64*) (desc + 0x08) = g_666018;
 		p = fcn_005cd440(desc, bufA, 0, 0);
 	} else {
-		p = gm_LookupEntityRecordById(*(int*) (a1 + 4));
+		p = gm_LookupEntityRecordById(*(int*) (action + 4));
 	}
 	if (p == 0) {
 		return 0;
 	}
 	fcn_004c5420(*(int*) ((char*) p + 4), 0x1cc, 4, 0x200000, 0);
-	*(int*) (a1 + 0x10) = 1;
-	if (a0[2] == 6) {
+	*(int*) (action + 0x10) = 1;
+	if (actor[2] == 6) {
 		io_FormatTextBuffer(bufA, 0x10a7, *(unsigned short*) p);
 		io_FormatTextBuffer(bufB, 0xfe8, bufA);
 		fcn_005dbe90(bufB);

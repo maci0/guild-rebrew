@@ -1,8 +1,6 @@
 #include <string.h>
 
-extern int g_100b0ac;
-extern int g_100b0a8;
-extern int g_100dc34;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100dc20;
 extern int g_100dc24;
 extern int g_7747b4;

@@ -23,19 +23,19 @@ void __cdecl fcn_004c6ae0(int a, int b);
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005d6ea0 */
-int __cdecl fcn_005d6ea0(int a0)
+int __cdecl fcn_005d6ea0(int entity)
 {
     int dlg;
     int wnd;
     char buf[0x100];
     int player;
-    int r;
+    int result;
     int t;
     u8 v;
 
-    r = 0;
+    result = 0;
     v = *(u8*) (0x7f4ca9 + 540 * *(u16*) 0x774970);
-    if (v == *(u8*) ((char*) a0 + 9)) {
+    if (v == *(u8*) ((char*) entity + 9)) {
         if (v == 0)
             io_FormatTextBuffer(buf, 0x1db1, 0x1db2);
         else
@@ -48,7 +48,7 @@ int __cdecl fcn_005d6ea0(int a0)
     fcn_00471b60(dlg);
     d2_SetForm(dlg, 1);
     wnd = fcn_00472250(dlg, 1,
-                       io_AppendText(0x1db4, *(u16*) a0, *(u16*) a0));
+                       io_AppendText(0x1db4, *(u16*) entity, *(u16*) entity));
     fcn_00472380(wnd, 1, 5, 1);
     g_100f1dc = -1;
     for (;;) {
@@ -59,16 +59,16 @@ int __cdecl fcn_005d6ea0(int a0)
                                  player) != 0) {
                     t = fcn_004946f0((void*) (0x7f4ca0 +
                                               540 * *(u16*) 0x774970),
-                                     a0, player);
+                                     entity, player);
                     fcn_004c6ae0(*(int*) (0x7f4ca4 + 540 * *(u16*) 0x774970),
                                  -player);
                     fcn_004c54c0(*(int*) (0x7f4ca4 +
                                           540 * *(u16*) 0x774970),
-                                 *(int*) ((char*) a0 + 4), t, 1);
-                    io_FormatTextBuffer(buf, 0x1db5, *(u16*) a0, *(u16*) a0);
+                                 *(int*) ((char*) entity + 4), t, 1);
+                    io_FormatTextBuffer(buf, 0x1db5, *(u16*) entity, *(u16*) entity);
                     fcn_00526120(buf, 0);
                     g_774654 = 4;
-                    r = 1;
+                    result = 1;
                 }
             } else if (g_100f1dc == 1) {
                 g_774654 = 2;
@@ -80,5 +80,5 @@ int __cdecl fcn_005d6ea0(int a0)
             break;
     }
     fcn_00471e30(dlg);
-    return r;
+    return result;
 }

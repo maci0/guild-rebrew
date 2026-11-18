@@ -1,7 +1,7 @@
 #include "game_data.h"
 #include "client_dialog_state.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern float g_67d368;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14ce8e0, g_67d370, g_7e2468;
 extern char g_6b5c60[], g_7e23e8;
 void __cdecl ch_SetVisible(void* obj, int value);

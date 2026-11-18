@@ -28,7 +28,7 @@ void __cdecl fcn_0041fc10(Chan_14cc460* p, int a2)
 	}
 }
 
-Chan_14cc460* __cdecl fcn_0041fd70(const char* name, int a)
+Chan_14cc460* __cdecl fcn_0041fd70(const char* name, int restart)
 {
 	Chan_14cc460* c;
 
@@ -48,7 +48,7 @@ Chan_14cc460* __cdecl fcn_0041fd70(const char* name, int a)
 		LeaveCriticalSection(&g_14cc5a0);
 	}
 	c->bAmbient = 0;
-	if (fcn_0041fe10(c, a) == -1) {
+	if (fcn_0041fe10(c, restart) == -1) {
 		c = 0;
 	}
 	return c;

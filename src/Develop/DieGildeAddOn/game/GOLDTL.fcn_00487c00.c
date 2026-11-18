@@ -18,7 +18,7 @@ void __cdecl fcn_004c4ef0(int a1);
 /* ADDRESS: GOLDTL 0x00487c00 */
 void __cdecl fcn_00487c00(char* a0, char* entity, int chance)
 {
-	unsigned char v[0xf8];
+	unsigned char msg[0xf8];
 
 	if (a0 == 0) {
 		return;
@@ -38,17 +38,17 @@ void __cdecl fcn_00487c00(char* a0, char* entity, int chance)
 	if (*(int*) (entity + 0x1b8) < 0x9600) {
 		return;
 	}
-	memset(v, 0, 0xf8);
-	v[4] = 0x13;
-	*(int*) (v + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (entity + 0x16c) + 0x27) * 0x21c);
-	*(int*) (v + 0xc) = *(int*) (*(char**) (entity + 0x16c) + 1);
-	v[0x36] = 1;
-	*(pos14_7f4c00*) (v + 0x28) = g_7f4c00;
-	*(int*) (v + 0x58) = *(int*) (a0 + 2);
-	*(int*) (v + 0x5c) = 1;
-	*(int*) (v + 0x64) = 1;
+	memset(msg, 0, 0xf8);
+	msg[4] = 0x13;
+	*(int*) (msg + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (entity + 0x16c) + 0x27) * 0x21c);
+	*(int*) (msg + 0xc) = *(int*) (*(char**) (entity + 0x16c) + 1);
+	msg[0x36] = 1;
+	*(pos14_7f4c00*) (msg + 0x28) = g_7f4c00;
+	*(int*) (msg + 0x58) = *(int*) (a0 + 2);
+	*(int*) (msg + 0x5c) = 1;
+	*(int*) (msg + 0x64) = 1;
 	fcn_004c4eb0((int) g_67e348);
-	fcn_004c5530((int) v);
+	fcn_004c5530((int) msg);
 	fcn_004c5150(-1, *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (entity + 0x16c) + 0x27) * 0x21c), g_773d75, 0x3200);
 	*(int*) (entity + 0x1b8) += -0x3200;
 	fcn_004c4ef0((int) g_67e348);

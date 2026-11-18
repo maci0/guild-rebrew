@@ -16,7 +16,7 @@ typedef struct {
 } Req;
 
 extern __int64 g_666018;
-extern int g_66601c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(Req*, char*, int, int);

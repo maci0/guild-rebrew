@@ -2,11 +2,11 @@
 
 char* __cdecl FindVideoById(int);
 
-int __cdecl fcn_0041f5c0(int a1, int a2)
+int __cdecl fcn_0041f5c0(int id, int a2)
 {
 	char* node;
 
-	node = FindVideoById(a1);
+	node = FindVideoById(id);
 	if (node != 0) {
 		*(int*) (node + 0x118) = a2;
 		return 1;

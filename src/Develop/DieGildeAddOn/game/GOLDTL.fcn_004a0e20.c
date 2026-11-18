@@ -36,7 +36,7 @@ int __cdecl fcn_0050d320(char* e, unsigned char b);
 
 /* r[] is block-scoped so it shares the slot of the Rec6 return temporary.
  * `p[8] > 0` on the unsigned byte gives the reference's jbe. */
-int __cdecl ai_StartStudium(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
+int __cdecl ai_StartStudium(int a1, char* actor, int a3, Blk24* o1, Blk24* o2)
 {
 	Share sh[3];
 	Rec6 s;
@@ -51,8 +51,8 @@ int __cdecl ai_StartStudium(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	if (a1 != 0) {
 		return 0;
 	}
-	if (e[2] != 5) {
-		p = gm_LookupEntityRecordById(*(int*) (e + 0x5c));
+	if (actor[2] != 5) {
+		p = gm_LookupEntityRecordById(*(int*) (actor + 0x5c));
 		if (p != 0) {
 			if (p[2] == 5 || p[2] == 6 || p[2] == 7) {
 				return 0;
@@ -64,7 +64,7 @@ int __cdecl ai_StartStudium(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	}
 	best = 0;
 	for (i = 0; i < 5; i++) {
-		p = gm_LookupEntityRecordById(((int*) (e + 0x68))[i]);
+		p = gm_LookupEntityRecordById(((int*) (actor + 0x68))[i]);
 		if (p != 0 && p[8] > 0 && p[0x164] != 0 && !(*(int*) (p + 0x1c8) & 0x10000)) {
 			if (best == 0 || *(unsigned short*) (p + 0xa) > *(unsigned short*) (best + 0xa)) {
 				best = p;
@@ -74,7 +74,7 @@ int __cdecl ai_StartStudium(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	if (best == 0) {
 		return 0;
 	}
-	fcn_004942a0(e, sh);
+	fcn_004942a0(actor, sh);
 	s = fcn_00506d50(best[0x164]);
 	{
 		float r[3];
@@ -94,7 +94,7 @@ int __cdecl ai_StartStudium(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 			}
 		}
 	}
-	if (fcn_0050d320(e, g_773d75) < sh[k].amount * 10) {
+	if (fcn_0050d320(actor, g_773d75) < sh[k].amount * 10) {
 		return 0;
 	}
 	o1->kind = 7;

@@ -8,7 +8,7 @@ int __cdecl fcn_004a4680(float* o1, float* o2, int a3, char* e, Stat* st);
 int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, char* p);
 
 /* ADDRESS: GOLDTL 0x0049bb00 */
-int __cdecl fcn_0049bb00(float* o1, float* o2, int a3, char* e, int a5, int a6, char* p)
+int __cdecl fcn_0049bb00(float* o1, float* o2, int a3, char* entity, int a5, int a6, char* p)
 {
 	Stat st;
 
@@ -19,7 +19,7 @@ int __cdecl fcn_0049bb00(float* o1, float* o2, int a3, char* e, int a5, int a6, 
 	}
 	fcn_004f4830(0x11, &st);
 	if (st.v[6]) {
-		return fcn_004a4680(o1, o2, a3, e, &st);
+		return fcn_004a4680(o1, o2, a3, entity, &st);
 	}
-	return fcn_004a4410(o1, o2, a3, e, a5, a6, p);
+	return fcn_004a4410(o1, o2, a3, entity, a5, a6, p);
 }

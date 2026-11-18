@@ -24,7 +24,7 @@ int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
 	float* d;
 	char* s;
 	char* t;
-	Req r;
+	Req request;
 
 	if (*p == 2) {
 		if (*(int*) (p + 0x10) == 1) {
@@ -59,17 +59,17 @@ int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
 	}
 	d = fcn_005c61e0(*(unsigned short*) s);
 	if (d) {
-		r.s = (unsigned short*) s;
-		r.id = *(int*) (q + 4);
-		r.arg = *(int*) (q + 8);
-		r.dir = 0;
-		r.pad = 0;
-		if (fcn_005dbf10(e, &r) == 1) {
-			if (r.dir == 1) {
+		request.s = (unsigned short*) s;
+		request.id = *(int*) (q + 4);
+		request.arg = *(int*) (q + 8);
+		request.dir = 0;
+		request.pad = 0;
+		if (fcn_005dbf10(e, &request) == 1) {
+			if (request.dir == 1) {
 				g_100af34 = g_100af14 * d[3];
 				return 0x1c;
 			}
-			if (r.dir == -1) {
+			if (request.dir == -1) {
 				g_100af34 = g_100af14 * d[3] * -0.5f;
 			}
 			return 0x1c;

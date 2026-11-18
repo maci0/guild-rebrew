@@ -6,15 +6,12 @@ extern int g_7746a0;
 extern int g_14ad118;
 extern int g_14ad110;
 extern int g_14ad108;
-extern int g_14abc30;
-extern int g_14abc2c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14ad170;
 extern int g_14ad140;
 extern int g_14abd28;
 extern int g_14ad168;
-extern int g_14ad0f0;
 extern int g_14ad0e8;
-extern int g_14ad100;
 extern char s_6aa5ac[];
 extern char s_6aa594[];
 extern char s_6aa584[];

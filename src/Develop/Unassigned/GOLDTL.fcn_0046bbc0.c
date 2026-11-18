@@ -1,9 +1,8 @@
 #include <string.h>
 
 extern char* g_772524;
-extern int g_1015ea4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1040494;
-extern int g_67d380;
 extern int g_67d384;
 extern int g_772548;
 extern int g_772544;

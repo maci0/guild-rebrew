@@ -5,13 +5,13 @@ int __cdecl fcn_00424700(int);
 
 int __cdecl fcn_00423ce0(int a1)
 {
-	int* p;
-	int r;
+	int* entry;
+	int result;
 
-	r = 0;
-	p = (int*) fcn_00423ac0(a1);
-	if (p != 0) {
-		r = p[0xd] + fcn_00424700(a1) * 12;
+	result = 0;
+	entry = (int*) fcn_00423ac0(a1);
+	if (entry != 0) {
+		result = entry[0xd] + fcn_00424700(a1) * 12;
 	}
-	return r;
+	return result;
 }

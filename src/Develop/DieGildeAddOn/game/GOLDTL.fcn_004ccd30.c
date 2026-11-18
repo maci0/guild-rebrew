@@ -5,7 +5,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca4[];
-extern char g_9b0e20[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl gm_LookupEntityRecordById(int);

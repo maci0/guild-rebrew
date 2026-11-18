@@ -16,7 +16,7 @@ int __cdecl fcn_0057de80(int);
 char *__cdecl fcn_00545fe0(Msg *);
 char *__cdecl m_alloc(int, char *);
 
-int __cdecl fcn_004c9160(char *a1, char *a2)
+int __cdecl fcn_004c9160(char *packet, char *reply)
 {
 	Msg m;
 	char *o;
@@ -30,15 +30,15 @@ int __cdecl fcn_004c9160(char *a1, char *a2)
 			if (o == 0) {
 				return 1;
 			}
-			if (o[2] == 7 || (o[2] != 6 && a2 == 0)) {
+			if (o[2] == 7 || (o[2] != 6 && reply == 0)) {
 				return 1;
 			}
 		}
-		if (a2 == 0 && (m.flags & 2)) {
+		if (reply == 0 && (m.flags & 2)) {
 			m.flags &= ~2;
 			m.flags |= 4;
 		}
-		g_7749d0 = *(int *) (a1 + 0x10);
+		g_7749d0 = *(int *) (packet + 0x10);
 	}
 	if (m.type == 0x11 && fcn_0057de80(m.f58) != 0) {
 		return 0;
@@ -60,10 +60,10 @@ int __cdecl fcn_004c9160(char *a1, char *a2)
 			*(int *) (w + 0x80) = strlen(*(char **) (w + 0x7c)) + 1;
 		}
 	}
-	if (a2 != 0) {
-		a2[0] = 1;
-		a2[1] = 4;
-		*(char **) (a2 + 6) = w;
+	if (reply != 0) {
+		reply[0] = 1;
+		reply[1] = 4;
+		*(char **) (reply + 6) = w;
 	}
 	return 0;
 }

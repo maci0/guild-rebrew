@@ -27,7 +27,7 @@ extern unsigned short g_7f4c04;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudeINST;
-extern int g_6643d8[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004a55c0(struct house*, int, int*, float, float, unsigned short*);
 int __cdecl fcn_004a5e60(struct house*, int, F8, int, float, int*);

@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include "client_data.h"
-extern int g_6798d4;
 extern unsigned char* lpGebaeudePROT;
 extern int g_6b7fdc;
 
 
 
 
-extern int g_772514;
 
 int __cdecl fcn_0042f690(char* a, int b, int c, char* out);
 int __cdecl fcn_0050d200(int a, int b);
@@ -19,8 +17,6 @@ void __cdecl fcn_004c5530(int a1);
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_773da8;
-extern int g_6798d4;    
-extern char g_7e1ae0[]; 
 extern char g_67f0ac[]; 
 extern char g_68de2c[]; 
 

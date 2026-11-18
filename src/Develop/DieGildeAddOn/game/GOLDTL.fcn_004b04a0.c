@@ -7,7 +7,7 @@ void __cdecl fcn_004c51a0(int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b04a0 */
-int __cdecl fcn_004b04a0(int* a1, int a2, char* a3)
+int __cdecl fcn_004b04a0(int* entries, int index, char* text)
 {
 	int sign[2] = { -1, 1 };
 	char names[2][6] = { "MINUS", "PLUS" };
@@ -16,25 +16,25 @@ int __cdecl fcn_004b04a0(int* a1, int a2, char* a3)
 	int amount;
 	int i;
 
-	if (a1 == 0 || a2 >= 8)
+	if (entries == 0 || index >= 8)
 		return 0;
-	e = gm_LookupEntityRecordById(a1[a2 * 2 + 1]);
+	e = gm_LookupEntityRecordById(entries[index * 2 + 1]);
 	if (e == 0)
 		return 0;
-	if (*a3 != '-')
+	if (*text != '-')
 		return 0;
-	a3++;
+	text++;
 	for (i = 0; i < 2; i++) {
-		if (memcmp(a3, names[i], strlen(names[i])) == 0)
+		if (memcmp(text, names[i], strlen(names[i])) == 0)
 			break;
 	}
 	if (i >= 2)
 		return 0;
-	a3 += strlen(names[i]);
-	if (*a3 != '_')
+	text += strlen(names[i]);
+	if (*text != '_')
 		return 0;
-	a3++;
-	f = fcn_0064eeec(a3) * 0.01f;
+	text++;
+	f = fcn_0064eeec(text) * 0.01f;
 	amount = (int) (gm_AccumulateTyped2(e) * f);
 	if (sign[i] == -1)
 		fcn_004c51a0(-1, *(int*) (e + 4), 0, amount);

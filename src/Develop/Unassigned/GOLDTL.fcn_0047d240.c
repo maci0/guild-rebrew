@@ -1,5 +1,5 @@
 extern unsigned char g_6a375c;
-extern int g_14cbca0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned int g_14cbcb4;
 extern unsigned int g_774948;
 

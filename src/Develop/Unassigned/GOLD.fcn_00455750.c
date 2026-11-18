@@ -1,6 +1,6 @@
 #include "client_scene_resources.h"
 
-extern char* g_5fb5b0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_004556d0(char*);
 void __cdecl m_FreeTracked(void*);
 

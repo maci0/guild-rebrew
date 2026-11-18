@@ -34,11 +34,8 @@ struct building {
 extern char g_7f4ca0[];
 #include "client_types.h"
 extern unit_77e980 g_77e980[1024];
-extern char g_9a9660[];
-extern int g_774954;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_773d68;
-extern char* g_14a5dbc[];
-extern char* g_14a60d0[];
 
 void __cdecl fcn_00546190(unit_77e980*);
 unsigned short __cdecl gm_RandomMod(int);

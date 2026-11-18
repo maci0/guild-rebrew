@@ -9,10 +9,10 @@ typedef struct {
 
 extern T41b1c0 g_662b68[];
 
-T41b1c0* __cdecl fcn_0041b1c0(int a1)
+T41b1c0* __cdecl fcn_0041b1c0(int index)
 {
-	if (a1 >= 0x14 && a1 <= 0x1f) {
-		return &g_662b68[a1 - 0x14];
+	if (index >= 0x14 && index <= 0x1f) {
+		return &g_662b68[index - 0x14];
 	}
 	return 0;
 }

@@ -1,9 +1,7 @@
 #include <string.h>
 extern char g_6b5c60;
-extern double g_6640e8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_665ed0;
-extern float g_662910;
-extern float g_662a2c;
 extern int g_7f4c08;
 extern unsigned char g_773d75;
 

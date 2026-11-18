@@ -29,21 +29,21 @@ void __cdecl fcn_005d3980(Cur cur, int w, int h)
 	int x;
 	int nx;
 	int i;
-	float v0;
-	float v1;
+	float previous;
+	float sample;
 
 	step = (w - 0x69) / 16;
 	scale = (float) (h - 0x1e);
 	base = (float) (h - 0x16);
 	x = 0x2d;
 	for (i = 1; i < 16; i++) {
-		v0 = (float)(CLAMP0(g_99ec20[i - 1].a));
-		v1 = (float)(CLAMP0(g_99ec20[i].a));
+		previous = (float)(CLAMP0(g_99ec20[i - 1].a));
+		sample = (float)(CLAMP0(g_99ec20[i].a));
 		nx = x + step;
-		fcn_00472c30(x, (int) (base - v0 * scale), nx, (int) (base - v1 * scale), 0xee, 0xee, 0x10);
+		fcn_00472c30(x, (int) (base - previous * scale), nx, (int) (base - sample * scale), 0xee, 0xee, 0x10);
 		x = nx;
 	}
-	v0 = (float)(CLAMP0(g_99ec20[15].a));
-	v1 = (float)(CLAMP0(cur.a));
-	fcn_00472c30(step * 15 + 0x2d, (int) (base - v0 * scale), step * 16 + 0x2d, (int) (base - v1 * scale), 0xee, 0xee, 0x10);
+	previous = (float)(CLAMP0(g_99ec20[15].a));
+	sample = (float)(CLAMP0(cur.a));
+	fcn_00472c30(step * 15 + 0x2d, (int) (base - previous * scale), step * 16 + 0x2d, (int) (base - sample * scale), 0xee, 0xee, 0x10);
 }

@@ -1,4 +1,4 @@
-extern float g_662918;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct ENT_490c10 ENT_490c10;
 struct ENT_490c10 { unsigned char pad_000[0xac]; float fac; unsigned char pad_0b0[0xb4]; unsigned char f164; };
 typedef struct BUF_490c10 BUF_490c10;

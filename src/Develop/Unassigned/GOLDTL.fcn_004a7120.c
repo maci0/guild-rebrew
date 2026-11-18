@@ -11,13 +11,13 @@ typedef struct Card {
 #include "client_types.h"
 extern Card_1007ce0 g_1007ce0[24];
 
-int __cdecl fcn_004a7120(int* h, int* out, int a3)
+int __cdecl fcn_004a7120(int* h, int* out, int skipFirst)
 {
 	int i;
 	int j;
 	int v;
 
-	i = a3 ? 2 : 0;
+	i = skipFirst ? 2 : 0;
 	if (h[i] < 0 || h[i + 1] < 0) {
 		return 0;
 	}

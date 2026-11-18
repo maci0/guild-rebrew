@@ -2,7 +2,7 @@
 
 typedef int (__stdcall* fcn_004117f0_m)(int*);
 
-int __cdecl fcn_004117f0(int a1)
+int __cdecl fcn_004117f0(int enable)
 {
 	int* obj;
 
@@ -14,7 +14,7 @@ int __cdecl fcn_004117f0(int a1)
 	if (obj == 0) {
 		return 0;
 	}
-	if (a1 != 0) {
+	if (enable != 0) {
 		if (((fcn_004117f0_m) ((int*) *obj)[7])(obj) < 0) {
 			return 0;
 		}

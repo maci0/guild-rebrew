@@ -12,31 +12,31 @@ void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, int);
 
-int __cdecl fcn_004b76e0(void* a1)
+int __cdecl fcn_004b76e0(void* request)
 {
 	char buf[0x100];
 	double d;
 	int v;
-	void* p;
-	int n;
+	void* entity;
+	int amount;
 
-	p = gm_LookupEntityRecordById(*(int*) a1);
-	if (p == 0) {
+	entity = gm_LookupEntityRecordById(*(int*) request);
+	if (entity == 0) {
 		return 1;
 	}
-	if (*(char*) ((char*) p + 0x166) == 0 && *(char*) ((char*) p + 0x169) == 0) {
+	if (*(char*) ((char*) entity + 0x166) == 0 && *(char*) ((char*) entity + 0x169) == 0) {
 		return 0x400;
 	}
-	if (fcn_005c6270(p, 0x290) != 0) {
+	if (fcn_005c6270(entity, 0x290) != 0) {
 		return 0x400;
 	}
 	v = gm_RandomMod(4);
 	d = (double) v + 1.0;
-	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) p) * d) *
+	amount = (int) (((double) gm_WalkEntityChain(*(unsigned short*) entity) * d) *
 	    0.01);
-	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, n);
-	fcn_004c51a0(-1, *(int*) a1, (*(char*)&g_773d75), n);
-	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
+	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, amount);
+	fcn_004c51a0(-1, *(int*) request, (*(char*)&g_773d75), amount);
+	fcn_00545d40(*(int*) ((char*) entity + 4), *(int*) ((char*) entity + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

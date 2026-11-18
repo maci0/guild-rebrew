@@ -50,8 +50,7 @@ extern char g_100d0c0[];    /* +0x58 stride building records */
 extern char g_100b0c0[];
 extern int g_100b0ac;       /* building count */
 extern int g_100dc20;
-extern int g_100dc34;
-extern int g_100dc38;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100dc3c;
 extern char g_100dc40[];
 extern char g_100dc60[];

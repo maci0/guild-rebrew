@@ -15,7 +15,7 @@ typedef struct {
 
 extern int g_14ab080;
 extern __int64 g_666018;
-extern int g_66601c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_005cd440(Desc*, int, int, void*);
 void __cdecl fcn_005c06e0(void);

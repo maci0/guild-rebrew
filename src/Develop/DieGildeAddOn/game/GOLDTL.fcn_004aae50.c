@@ -14,7 +14,7 @@ struct info_4aae50 {
 
 
 /* ADDRESS: GOLDTL 0x004aae50 */
-int __cdecl fcn_004aae50(int a1, unsigned short* a2, int* a3, int* a4)
+int __cdecl fcn_004aae50(int a1, unsigned short* referenceId, int* candidateIds, int* a4)
 {
 	float score[4];
 	char* ents[4];
@@ -31,10 +31,10 @@ int __cdecl fcn_004aae50(int a1, unsigned short* a2, int* a3, int* a4)
 	if (fcn_004e8af0(a1, &info) == 0)
 		return -1;
 	for (i = 0; i < 4; i++) {
-		e = gm_LookupEntityRecordById(a3[i]);
+		e = gm_LookupEntityRecordById(candidateIds[i]);
 		ents[i] = e;
 		if (e != 0 && amt_GetOfficeAffinity((unsigned char*) e, info.kind, &bonus) != 0) {
-			score[i] = fcn_0050f980(*(unsigned short*) e, *a2, 1) + bonus;
+			score[i] = fcn_0050f980(*(unsigned short*) e, *referenceId, 1) + bonus;
 			if (fcn_005c6270(e, 0x2be) != 0)
 				score[i] += 0.2f;
 			if ((*(int*) (e + 0x1cc) & 0x400000) != 0)

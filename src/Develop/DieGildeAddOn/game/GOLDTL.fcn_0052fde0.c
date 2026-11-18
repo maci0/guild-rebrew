@@ -4,13 +4,6 @@ extern char* g_7746a4;
 extern unsigned short g_7725c4;
 extern int g_6a2bf0;
 extern int g_6a2bf4;
-extern int g_6a3764;
-extern int g_6a376c;
-extern int g_6a3768;
-extern int g_6a3770;
-extern int g_100f894;
-extern int g_67d8d4;
-extern int g_67d370;
 extern char* g_1015ea0;
 extern short g_14ce8c0;
 extern short g_14ce8c2;
@@ -36,7 +29,6 @@ extern int g_7746e8;
 extern int g_774798;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "game_player.h"
-extern char* g_item_def_table;
 extern char s_6a2308[];
 extern char s_6a2ff8[];
 extern char s_6a3004[];

@@ -19,12 +19,12 @@ void __cdecl fcn_0046f740(int, int, int, int);
  * so one body cannot carry both markers; the file stays GOLDTL-only. */
 
 /* ADDRESS: GOLDTL 0x004da510 */
-void __cdecl fcn_004da510(int a1, int a2, int a3)
+void __cdecl fcn_004da510(int a1, int reset, int row)
 {
 	char buf[0x40];
 	int h;
 
-	if (a2 != 0) {
+	if (reset != 0) {
 		fcn_0046f2c0(g_772514, 1);
 		io_FormatTextBuffer(buf, 0x12d3);
 		h = d2_ShowTxt(0, 0x20, buf, g_772514);
@@ -40,17 +40,17 @@ void __cdecl fcn_004da510(int a1, int a2, int a3)
 		g_772f20 = 0;
 		return;
 	}
-	if (a3 == 0) {
+	if (row == 0) {
 		fcn_0046f740((short) ((g_772f1c * 5 + 40) * 2), 0x20, 0x4df, g_772514);
 		g_772f1c++;
 		return;
 	}
-	if (a3 == 1) {
+	if (row == 1) {
 		fcn_0046f740((short) ((g_772f18 * 5 + 40) * 2), 0x3e, 0x4df, g_772514);
 		g_772f18++;
 		return;
 	}
-	if (a3 == 2) {
+	if (row == 2) {
 		fcn_0046f740((short) ((g_772f20 * 5 + 40) * 2), 0x2f, 0x4df, g_772514);
 		g_772f20++;
 	}

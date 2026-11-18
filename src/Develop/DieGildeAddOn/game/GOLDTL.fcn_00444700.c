@@ -1,7 +1,7 @@
 #include <math.h>
 
 extern float g_662a94;
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00455540(char* o, float* v, float* out);
 void __cdecl fcn_00455350(char* src, char* pos, float* out);

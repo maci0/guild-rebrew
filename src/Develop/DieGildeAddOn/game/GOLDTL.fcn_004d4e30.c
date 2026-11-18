@@ -1,5 +1,5 @@
 extern unsigned short* g_772f24;
-extern int g_68b79c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_packet_builder.h"
 
 char* __cdecl fcn_004ce680(char* o);

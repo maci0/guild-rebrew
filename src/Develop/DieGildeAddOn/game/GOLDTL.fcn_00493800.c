@@ -5,24 +5,24 @@ unsigned short __cdecl gm_RandomMod(int n);
 /* ADDRESS: GOLDTL 0x00493800 */
 int __cdecl fcn_00493800(char* p)
 {
-	unsigned short* a;
-	unsigned short* b;
-	unsigned short* c;
-	float d1;
-	float d2;
+	unsigned short* targetRecord;
+	unsigned short* firstRecord;
+	unsigned short* secondRecord;
+	float firstResult;
+	float secondResult;
 
-	a = gm_LookupEntityRecordById(*(int*) (p + 0x28));
-	if (!a) {
+	targetRecord = gm_LookupEntityRecordById(*(int*) (p + 0x28));
+	if (!targetRecord) {
 		return 1;
 	}
-	b = gm_LookupEntityRecordById(*(int*) (p + 0x18));
-	c = gm_LookupEntityRecordById(*(int*) (p + 0x14));
-	d1 = fcn_0050f980(*b, *a, 1);
-	d2 = fcn_0050f980(*c, *a, 1);
-	if (d1 - d2 > 20.0f) {
+	firstRecord = gm_LookupEntityRecordById(*(int*) (p + 0x18));
+	secondRecord = gm_LookupEntityRecordById(*(int*) (p + 0x14));
+	firstResult = fcn_0050f980(*firstRecord, *targetRecord, 1);
+	secondResult = fcn_0050f980(*secondRecord, *targetRecord, 1);
+	if (firstResult - secondResult > 20.0f) {
 		return 1;
 	}
-	if (d2 - d1 > 20.0f) {
+	if (secondResult - firstResult > 20.0f) {
 		return 0;
 	}
 	return gm_RandomMod(2);

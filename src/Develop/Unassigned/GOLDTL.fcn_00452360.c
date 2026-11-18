@@ -4,7 +4,7 @@ extern void* g_6b5de0;
 extern unsigned int g_6b8710;
 extern unsigned int g_6b8714;
 extern int g_67bc4c;
-extern void* g_104095c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6b8718;
 
 /* ADDRESS: GOLDTL 0x00452360 */

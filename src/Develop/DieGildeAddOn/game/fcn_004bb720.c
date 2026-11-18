@@ -14,27 +14,27 @@ int __cdecl fcn_004c51a0(int, int, unsigned char, int);
 unsigned int __cdecl fcn_004bb720(void *a0)
 {
     char buf[1024];
-    unsigned char *p;
+    unsigned char *entity;
     int h;
     unsigned int len;
 
     h = fcn_0050b750((fcn_0042e410(5) & 0xffff) + 1, g_773d75);
-    p = gm_LookupEntityRecordById(*(int *)a0);
-    if (p == 0)
+    entity = gm_LookupEntityRecordById(*(int *)a0);
+    if (entity == 0)
     {
         return 1;
     }
-    if (fcn_005c6270(p, 0x290) != 0)
+    if (fcn_005c6270(entity, 0x290) != 0)
     {
         return 0x400;
     }
-    if (fcn_00508540((int *)p) == 0)
+    if (fcn_00508540((int *)entity) == 0)
     {
         return 0x400;
     }
     io_FormatTextBuffer(buf, *(unsigned short *)((char *)a0 + 4) + 0x12e7, h);
     len = strlen(buf);
-    fcn_00545d40(*(int *)((char *)p + 4), *(int *)((char *)p + 4), buf, 0x100 < len, 0x603, 0);
+    fcn_00545d40(*(int *)((char *)entity + 4), *(int *)((char *)entity + 4), buf, 0x100 < len, 0x603, 0);
     fcn_004c51a0(-1, *(int *)a0, g_773d75, h);
     return 0;
 }

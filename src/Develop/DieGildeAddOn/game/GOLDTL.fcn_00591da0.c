@@ -23,7 +23,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00533a40(char*);
 
-void __cdecl fcn_00591da0(int a1)
+void __cdecl fcn_00591da0(int index)
 {
 	char buf[0x100];
 	char* e;
@@ -50,16 +50,16 @@ void __cdecl fcn_00591da0(int a1)
 		}
 	}
 	if (t != 0) {
-		((Tip*)g_779d00)[a1].x4 = *(int*) (e + 1);
-		((Tip*)g_779d00)[a1].x8 = *(int*) (t + 2);
+		((Tip*)g_779d00)[index].x4 = *(int*) (e + 1);
+		((Tip*)g_779d00)[index].x8 = *(int*) (t + 2);
 	} else {
-		((Tip*)g_779d00)[a1].x4 = *(int*) (e + 1);
-		((Tip*)g_779d00)[a1].x8 = -1;
+		((Tip*)g_779d00)[index].x4 = *(int*) (e + 1);
+		((Tip*)g_779d00)[index].x8 = -1;
 	}
 	if (t != 0 && *(unsigned short*) t != 0xfd) {
-		io_FormatTextBuffer(buf, (int) s_6a9b30, a1 + 0x205e, e, *(unsigned short*) t * 2 + 0x9a8);
+		io_FormatTextBuffer(buf, (int) s_6a9b30, index + 0x205e, e, *(unsigned short*) t * 2 + 0x9a8);
 	} else {
-		io_FormatTextBuffer(buf, (int) s_6a9b3c, a1 + 0x205e, e);
+		io_FormatTextBuffer(buf, (int) s_6a9b3c, index + 0x205e, e);
 	}
 	fcn_00533a40(buf);
 }

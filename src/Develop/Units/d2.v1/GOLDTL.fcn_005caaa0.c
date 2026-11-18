@@ -53,40 +53,40 @@ void __cdecl fcn_00472640(int i, int flag);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x005caaa0 */
-int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* s)
+int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* selection)
 {
 	int cx;
 	int b;
 
 	cx = x + ((fcn_005caaa0_Def*)g_772500)[1498].w / 2;
-	s->tile = fcn_0046f740(x, y, 0x5da, g_772514);
-	s->bar = -1;
-	if (s->e != 0) {
-		s->icon = fcn_0046f740(cx - ((fcn_005caaa0_Def*)g_772500)[*(int*) (s->e + 0x18c)].w / 2 - 3, y + 1, *(int*) (s->e + 0x18c), g_772514);
-		fcn_0046f740(x + 3, y + 3, s->f1c, g_772514);
-		if (s->f20 != 0)
-			fcn_0046f740(x + 3, ((fcn_005caaa0_Def*)g_772500)[1498].h + y - 0x13, s->f20, g_772514);
-		if (s->f24 != 0)
-			fcn_0046f740(((fcn_005caaa0_Def*)g_772500)[1498].w + x - 0x10, y + 3, s->f24, g_772514);
-		fcn_0046f740(((fcn_005caaa0_Def*)g_772500)[1498].w + x - 0x10, ((fcn_005caaa0_Def*)g_772500)[1498].h + y - 0x13, s->f28, g_772514);
-		if (s->e[2] != 6) {
+	selection->tile = fcn_0046f740(x, y, 0x5da, g_772514);
+	selection->bar = -1;
+	if (selection->e != 0) {
+		selection->icon = fcn_0046f740(cx - ((fcn_005caaa0_Def*)g_772500)[*(int*) (selection->e + 0x18c)].w / 2 - 3, y + 1, *(int*) (selection->e + 0x18c), g_772514);
+		fcn_0046f740(x + 3, y + 3, selection->f1c, g_772514);
+		if (selection->f20 != 0)
+			fcn_0046f740(x + 3, ((fcn_005caaa0_Def*)g_772500)[1498].h + y - 0x13, selection->f20, g_772514);
+		if (selection->f24 != 0)
+			fcn_0046f740(((fcn_005caaa0_Def*)g_772500)[1498].w + x - 0x10, y + 3, selection->f24, g_772514);
+		fcn_0046f740(((fcn_005caaa0_Def*)g_772500)[1498].w + x - 0x10, ((fcn_005caaa0_Def*)g_772500)[1498].h + y - 0x13, selection->f28, g_772514);
+		if (selection->e[2] != 6) {
 			b = fcn_004677e0(cx - 0x23, ((fcn_005caaa0_Def*)g_772500)[1498].h + y + 2, 0x40, 0, 0x64, 0x75, 0x442, g_772514);
-			s->bar = b;
-			if (s->e[2] == 7)
+			selection->bar = b;
+			if (selection->e[2] == 7)
 				d2_SetElementValue(b, 0, 0x64, 0, 1);
 			else
-				d2_SetElementValue(s->bar, 0, 0x64, (int) fcn_0050f980(g_774970, *(unsigned short*) s->e, 1));
-			fcn_00472640(s->bar, 0);
+				d2_SetElementValue(selection->bar, 0, 0x64, (int) fcn_0050f980(g_774970, *(unsigned short*) selection->e, 1));
+			fcn_00472640(selection->bar, 0);
 		}
-		if (*(int*) (s->e + 0x210) == ((fcn_005caaa0_Ent*)g_7f4ca0)[g_774970].id)
+		if (*(int*) (selection->e + 0x210) == ((fcn_005caaa0_Ent*)g_7f4ca0)[g_774970].id)
 			fcn_0046f740(((fcn_005caaa0_Def*)g_772500)[1498].w + x, y, 0x6d3, g_772514);
-		if (s->f30 != 0) {
-			((fcn_005caaa0_Tile*)g_1015ea0)[s->tile].f5c = 1;
-			((fcn_005caaa0_Tile*)g_1015ea0)[s->tile].f1d0 = 3;
-			((fcn_005caaa0_Tile*)g_1015ea0)[s->tile].owner = s->e;
+		if (selection->f30 != 0) {
+			((fcn_005caaa0_Tile*)g_1015ea0)[selection->tile].f5c = 1;
+			((fcn_005caaa0_Tile*)g_1015ea0)[selection->tile].f1d0 = 3;
+			((fcn_005caaa0_Tile*)g_1015ea0)[selection->tile].owner = selection->e;
 		}
-		if (s->e[2] == 5 || s->e[2] == 6 || s->e[2] == 7)
-			fcn_0046f740(x - 0x20, y, *(int*) (s->e + 0x54), g_772514);
+		if (selection->e[2] == 5 || selection->e[2] == 6 || selection->e[2] == 7)
+			fcn_0046f740(x - 0x20, y, *(int*) (selection->e + 0x54), g_772514);
 	} else {
 		fcn_0046f740(cx - ((fcn_005caaa0_Def*)g_772500)[1275].w / 2 - 3, y + 1, 0x4fb, g_772514);
 	}

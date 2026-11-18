@@ -24,23 +24,23 @@ typedef struct {
 
 int __cdecl fcn_004c4330(void*);
 
-int __cdecl fcn_004c4f30(unsigned char a1, int a2, Blk30* a3, unsigned short a4)
+int __cdecl fcn_004c4f30(unsigned char id, int value, Blk30* block, unsigned short extra)
 {
-	Msg4f30 m;
+	Msg4f30 msg;
 
-	m.type = 0xa;
-	if (a1 == 0) {
+	msg.type = 0xa;
+	if (id == 0) {
 		return -1;
 	}
-	m.id = a1;
-	m.value = a2;
-	m.extra = a4;
-	if (a3 != 0) {
-		m.blk = *a3;
-		m.has_blk = 1;
+	msg.id = id;
+	msg.value = value;
+	msg.extra = extra;
+	if (block != 0) {
+		msg.blk = *block;
+		msg.has_blk = 1;
 	} else {
-		memset(&m.blk, 0, sizeof(m.blk));
-		m.has_blk = 0;
+		memset(&msg.blk, 0, sizeof(msg.blk));
+		msg.has_blk = 0;
 	}
-	return fcn_004c4330(&m);
+	return fcn_004c4330(&msg);
 }

@@ -3,7 +3,7 @@
 extern char* g_6b5c20;
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-extern void* g_14d0020[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1551f40[0x30];
 extern void* g_6b5c5c;
 extern char g_6b5c60[];

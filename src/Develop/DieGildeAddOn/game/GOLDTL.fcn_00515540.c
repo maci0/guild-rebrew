@@ -12,7 +12,6 @@ typedef struct D3_UNIVERSE_VIEW {
 #endif
 } D3_UNIVERSE_VIEW;
 
-extern char g_7f3b40[];
 extern char* g_7746cc;
 extern char g_10432c0[];
 #ifdef REBREW_GOLD

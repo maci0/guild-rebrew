@@ -18,7 +18,7 @@ typedef struct {
 	unsigned char count;
 } fcn_004a8700_game;
 
-extern char* g_1007cd4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
 extern slot_1007ce8 g_1007ce8[];
 

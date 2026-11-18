@@ -3,7 +3,7 @@
 extern unsigned char g_773d75;
 extern float g_66436c;
 extern float g_664368;
-extern float g_6628d8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* SIZE 0x18 */
 typedef struct {

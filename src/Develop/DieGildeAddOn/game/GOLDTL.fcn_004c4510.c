@@ -18,18 +18,18 @@ extern char g_aed220[];
 
 
 
-void __cdecl fcn_004c4510(char* a1, int a2)
+void __cdecl fcn_004c4510(char* src, int id)
 {
 	void* l0;
 	void* l1;
 	void* static_ptr;
 
-	(*(Buf220*)g_aed220).id = a2;
+	(*(Buf220*)g_aed220).id = id;
 	(*(Buf220*)g_aed220).count = 0;
 	memset((*(Buf220*)g_aed220).data, 0, sizeof((*(Buf220*)g_aed220).data));
 	g_aed208 = 0;
-	if (gm_ResolveEntityById(&l1, &l0, &static_ptr, a2) != 0) {
-		g_aed32c = a1;
+	if (gm_ResolveEntityById(&l1, &l0, &static_ptr, id) != 0) {
+		g_aed32c = src;
 	}
 }
 unsigned char _dpad_aecde0[1088];

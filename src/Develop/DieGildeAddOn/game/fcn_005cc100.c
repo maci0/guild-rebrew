@@ -3,7 +3,7 @@ int __cdecl fcn_005ca560(void* sel);
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005cc100 */
-int __cdecl fcn_005cc100(char* a1, unsigned int a2, char* a3, int a4)
+int __cdecl fcn_005cc100(char* a1, unsigned int capacity, char* results, int a4)
 {
 	int n;
 	int i;
@@ -20,7 +20,7 @@ int __cdecl fcn_005cc100(char* a1, unsigned int a2, char* a3, int a4)
 	if (n == 0) {
 		return 0;
 	}
-	if (a2 == 0) {
+	if (capacity == 0) {
 		ent = (char*) 0x7f4e08;
 		do {
 			if (*ent != 0) {
@@ -42,10 +42,10 @@ int __cdecl fcn_005cc100(char* a1, unsigned int a2, char* a3, int a4)
 	i = 0;
 	if (n > 0) {
 		do {
-			if ((unsigned int) count >= a2) {
+			if ((unsigned int) count >= capacity) {
 				break;
 			}
-			out = a3 + count * 0x38;
+			out = results + count * 0x38;
 			ent = (char*) 0x7f4ca0;
 			do {
 				if (ids[i] == (int) (unsigned char) ent[0x168]) {
@@ -56,7 +56,7 @@ int __cdecl fcn_005cc100(char* a1, unsigned int a2, char* a3, int a4)
 						*(unsigned short*) *(char**) out, a4, 0);
 					count++;
 					out += 0x38;
-					if ((unsigned int) count >= a2) {
+					if ((unsigned int) count >= capacity) {
 						break;
 					}
 				}

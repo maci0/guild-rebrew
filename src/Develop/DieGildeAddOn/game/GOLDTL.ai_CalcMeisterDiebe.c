@@ -34,13 +34,10 @@ extern unsigned char* lpObjektePROT;
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char g_99ef80[];
 extern int g_100dc20;
-extern int g_100dc38;
-extern int g_100dc34;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100dc24;
 extern char* g_100df20;
 extern unsigned char g_100b0c0[];
-extern int g_100b0a8;
-extern int g_100b0ac;
 extern unsigned short* g_773da8;
 extern int g_7747b4;
 

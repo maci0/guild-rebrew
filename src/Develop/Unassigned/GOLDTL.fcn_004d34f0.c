@@ -4,7 +4,7 @@
 #include <math.h>
 
 extern int g_67a370;
-extern int g_772f10;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004d34b0(char*, char**);
 void __cdecl fcn_004379a0(char*, int, int, int(__cdecl*)(char*, char**), char**);

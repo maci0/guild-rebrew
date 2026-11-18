@@ -1,4 +1,4 @@
-extern int g_100f1dc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 extern int g_774960;
 

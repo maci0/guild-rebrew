@@ -3,10 +3,8 @@ extern int g_772f4c;
 extern int g_68bfc4;
 extern int g_67a370;
 int g_6791d0 = 0xffffffff;
-extern int g_68bfb8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/d3_camera.h"
-extern int g_6b5cc0;
-extern int g_6b5cbc;
 
 typedef void(__cdecl* hook_4e4910)(char*, int, char*, int);
 

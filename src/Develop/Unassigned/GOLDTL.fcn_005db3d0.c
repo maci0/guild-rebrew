@@ -32,20 +32,20 @@ extern short g_7f4c0c;
 
 void __cdecl fcn_004c5530(Msg*);
 
-void __cdecl fcn_005db3d0(char* a1, char* a2, int a3)
+void __cdecl fcn_005db3d0(char* owner, char* a2, int a3)
 {
 	Msg msg;
 
 	memset(&msg, 0, sizeof(msg));
 	msg.kind = 0x45;
-	msg.owner = *(int*) (a1 + 4);
+	msg.owner = *(int*) (owner + 4);
 	msg.entity = -1;
 	msg.a = (*(int*)&g_7f4c00);
 	msg.b = (*(int*)&g_7f4c04);
 	msg.c = g_7f4c08;
 	msg.d = g_7f4c0c;
 	msg.flag = 2;
-	msg.v58 = *(int*) (a1 + 4);
+	msg.v58 = *(int*) (owner + 4);
 	msg.v5c = *(int*) (a2 + 4);
 	msg.v60 = a3;
 	fcn_004c5530(&msg);

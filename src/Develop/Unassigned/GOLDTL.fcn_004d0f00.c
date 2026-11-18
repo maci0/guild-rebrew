@@ -1,8 +1,7 @@
 extern unsigned short* g_772f24;
 extern int g_7746a0;
 extern char* g_7e4260[32];
-extern int g_14ce8cc;
-extern int g_67d370;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_7746a4;
 extern char g_14cf736;
 extern unsigned short* g_772e9c;

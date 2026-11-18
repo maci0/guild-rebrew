@@ -6,26 +6,16 @@ extern int g_14cf900[]; extern short g_14cf902; extern char g_67d908[];
 extern Group_102cbc4 g_102cbc4[8];
 /* Refreshes the current selection/building view state. */
 
-extern int g_6772c4;
-extern int g_100f1e8;
-extern int g_100f1ec;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f890;
-extern int g_100f894;
 extern int g_100f800;
 extern int g_67d388;
-extern int g_67d370;
-extern int g_14ce8d8;
-extern int g_14ce8d0;
-extern int g_100f1dc;
 extern int g_6b5c8c;
-extern int g_100f884;
 extern int g_772578;
 extern int g_100f84c;
 extern int g_100f1d0;
 extern int g_100f1e4;
 extern int g_67d8d0;
-extern int g_67d8d4;
-extern int g_1015ea4;
 
 int __cdecl fcn_0046aee0(int x, int y);
 void __cdecl fcn_004748b0(void);

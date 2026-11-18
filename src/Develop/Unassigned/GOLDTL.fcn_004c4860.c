@@ -1,7 +1,7 @@
 
 
 
-extern char g_68a9cc[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004c5790(int, void*);
 

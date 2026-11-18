@@ -8,7 +8,7 @@ extern volatile int g_6b7fac;
 extern char g_774964;
 extern float g_6819b0;
 extern float g_6628a8;
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_664ea4;
 extern int g_772e64;
 extern int g_772e68;

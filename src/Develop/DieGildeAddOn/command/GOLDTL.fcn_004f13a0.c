@@ -3,19 +3,19 @@
 
 int __cdecl cm_GetBuildingStatCount(char*);
 
-int __cdecl fcn_004f13a0(char* a1)
+int __cdecl fcn_004f13a0(char* building)
 {
 	int n;
 	int c;
 	char* p;
 
-	n = cm_GetBuildingStatCount(a1);
+	n = cm_GetBuildingStatCount(building);
 	c = 0;
 	if (n == 0) {
 		return 0;
 	}
 	if (n > 0) {
-		p = *(char**) (*(char**) (a1 + 0x65) + 0x20);
+		p = *(char**) (*(char**) (building + 0x65) + 0x20);
 		do {
 			if (*(int*) p != -1) {
 				c++;

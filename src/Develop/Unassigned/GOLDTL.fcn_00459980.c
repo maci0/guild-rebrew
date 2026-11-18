@@ -1,6 +1,6 @@
 extern float g_6628a8;
 /* ADDRESS: GOLDTL 0x00459980 */
-void __cdecl fcn_00459980(void *a0, void *a1, char a2, float a3)
+void __cdecl fcn_00459980(void *a0, void *a1, char value, float scale)
 {
 	unsigned char *p;
 	int zero;
@@ -9,11 +9,11 @@ void __cdecl fcn_00459980(void *a0, void *a1, char a2, float a3)
 		return;
 	}
 	p = (unsigned char *)a1;
-	if (a3 != g_6628a8) {
+	if (scale != g_6628a8) {
 		p[0x28] = p[0x2a];
-		p[0x29] = a2;
+		p[0x29] = value;
 		*(int *) (p + 0xc) = zero;
-		*(float *) (p + 0x10) = 1.0f / a3;
+		*(float *) (p + 0x10) = 1.0f / scale;
 	} else {
 		*(float *) (p + 0xc) = 1.0f;
 		*(int *) (p + 0x10) = zero;

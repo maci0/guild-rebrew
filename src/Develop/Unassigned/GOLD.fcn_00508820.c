@@ -1,5 +1,5 @@
 #include <stdio.h>
-extern char* g_item_def_table;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_entity_type_table;
 
 #pragma pack(push, 1)

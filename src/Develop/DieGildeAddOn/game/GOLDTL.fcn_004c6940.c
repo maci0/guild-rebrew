@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern int* g_772f40;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004c4330(void* p);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int id);

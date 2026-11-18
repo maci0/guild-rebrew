@@ -11,7 +11,7 @@ typedef struct {
 } rec35c;
 // SIZE 0x35c
 
-extern char g_9b0e20[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_004c4df0(int, void*);
 int __cdecl cm_RequestSendCutInfo(int, int);

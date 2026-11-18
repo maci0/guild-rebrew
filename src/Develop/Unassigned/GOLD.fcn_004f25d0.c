@@ -1,5 +1,5 @@
 extern char* g_889f74;
-extern unsigned char* g_7e3f30;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 void* __cdecl fcn_004ef7c0(void* a0, void* a1, void* a2, void* a3, int a4);
 
 /* ADDRESS: GOLD 0x004f25d0 */

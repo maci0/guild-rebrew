@@ -8,8 +8,7 @@ struct sel {
 	char pad4[0x34];
 };
 
-extern int g_772514;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
 int __cdecl fcn_00470820(int, int, char*);

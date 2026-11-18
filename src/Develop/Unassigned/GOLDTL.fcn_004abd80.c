@@ -10,14 +10,14 @@ void __cdecl fcn_005100f0(int id, int amount);
 void __cdecl fcn_004c5530(char* msg);
 
 /* ADDRESS: GOLDTL 0x004abd80 */
-int __cdecl ai_RunTheater(char* a1, char* x)
+int __cdecl ai_RunTheater(char* actor, char* x)
 {
 	char msg[0xf8];
 
-	fcn_005100f0(*(int*) (a1 + 4), -*(int*) (x + 0x10));
+	fcn_005100f0(*(int*) (actor + 4), -*(int*) (x + 0x10));
 	memset(msg, 0, sizeof(msg));
 	msg[4] = (char) 0xa0;
-	*(int*) (msg + 8) = *(int*) (a1 + 4);
+	*(int*) (msg + 8) = *(int*) (actor + 4);
 	*(int*) (msg + 0xc) = *(int*) (x + 4);
 	*(int*) (msg + 0x28) = (*(int*)&g_7f4c00);
 	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);

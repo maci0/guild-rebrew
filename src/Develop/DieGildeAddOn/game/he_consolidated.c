@@ -20,15 +20,15 @@ void __cdecl fcn_004e3ff0(void);
 void __cdecl cut_MainDuell(char*);
 
 /* ADDRESS: GOLDTL 0x004e7160 */
-void __cdecl fcn_004e7160(int idx, EVENT_RUN a2, void* a3, void* a4, EVENT_CHECK a5, unsigned char a6)
+void __cdecl fcn_004e7160(int idx, EVENT_RUN runEvent, void* a3, void* a4, EVENT_CHECK checkEvent, unsigned char a6)
 {
 	int o;
 
 	o = idx * 20;
-	*(EVENT_RUN*) (g_9b0840 + o) = a2;
+	*(EVENT_RUN*) (g_9b0840 + o) = runEvent;
 	*(void**) (g_9b0840 + 4 + o) = a3;
 	*(void**) (g_9b0840 + 8 + o) = a4;
-	*(EVENT_CHECK*) (g_9b0840 + 0x10 + o) = a5;
+	*(EVENT_CHECK*) (g_9b0840 + 0x10 + o) = checkEvent;
 	*(unsigned char*) (g_9b0840 + 0xc + o) = a6;
 }
 

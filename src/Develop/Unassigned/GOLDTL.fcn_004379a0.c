@@ -1,9 +1,5 @@
 extern int g_67a370;
-extern char* g_1043254;
-extern char* g_1042538;
-extern char* g_1040c74;
-extern char* g_1040958;
-extern char g_1042340[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char __cdecl fcn_004378c0(int, unsigned int);
 

@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/entity.h"
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772514;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_775338;
 
 int __cdecl fcn_00470820(int, int, char*);

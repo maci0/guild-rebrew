@@ -6,7 +6,7 @@ struct sel {
 	char pad4[0x34];
 };
 
-extern int g_772514;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);

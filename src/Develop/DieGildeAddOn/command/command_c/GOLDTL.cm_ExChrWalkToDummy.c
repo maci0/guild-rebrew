@@ -21,18 +21,18 @@ int __cdecl cm_ExChrWalkToDummy(char* a1, char* a2)
 {
 	int saved;
 	char buf[0x80];
-	char* o;
+	char* character;
 	char* s;
 	char* r;
-	char* w;
-	char* q;
+	char* dummy;
+	char* queuedWalk;
 	int k;
 
 	s = 0;
 	r = 0;
 	fcn_0064d41a(buf, "sp_%i", *(int*) (a1 + 0x10));
-	o = fcn_004032b0(buf);
-	if (o == 0)
+	character = fcn_004032b0(buf);
+	if (character == 0)
 		return 1;
 	if (*(int*) (a1 + 0x18) != -1)
 		s = gm_FindRecordById(*(int*) (a1 + 0x18));
@@ -51,17 +51,17 @@ int __cdecl cm_ExChrWalkToDummy(char* a1, char* a2)
 		return 3;
 	if (a1[0x1c] != 0) {
 		fcn_004432d0(k, 1);
-		w = fcn_00445600(0, 0x160, 0, a1 + 0x1c);
+		dummy = fcn_00445600(0, 0x160, 0, a1 + 0x1c);
 		fcn_004432d0(saved, 1);
-		if (w == 0)
+		if (dummy == 0)
 			return 4;
-		fcn_00406670(o, "sitzend/aufstehen");
-		q = ch_QueueWalkToDummy(o, w);
-		if (q != 0)
-			strcpy(q + 0x70, "cm_ExChrWalkToDummy");
+		fcn_00406670(character, "sitzend/aufstehen");
+		queuedWalk = ch_QueueWalkToDummy(character, dummy);
+		if (queuedWalk != 0)
+			strcpy(queuedWalk + 0x70, "cm_ExChrWalkToDummy");
 	} else {
-		fcn_00406670(o, "sitzend/aufstehen");
-		fcn_0040c120(o, 0x39, k);
+		fcn_00406670(character, "sitzend/aufstehen");
+		fcn_0040c120(character, 0x39, k);
 	}
 	if (a2 != 0) {
 		a2[0] = 1;

@@ -11,7 +11,7 @@ typedef struct {
 } Msg18F;
 
 extern float g_6628a8;
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl ahm_CheckFlag(void* p);
 int __cdecl fcn_004ec950(void* p, int id);

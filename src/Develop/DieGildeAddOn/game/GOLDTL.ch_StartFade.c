@@ -17,7 +17,7 @@ typedef struct {
 } V402950;
 
 extern int g_1551f40[0x30];
-extern int g_6b5c24;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl ch_SetVisible(char* e, int on);
 void __cdecl fcn_0043a3f0(char* o, int v, V402950 c);
 

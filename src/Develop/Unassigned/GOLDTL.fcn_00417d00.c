@@ -26,7 +26,7 @@ typedef struct {
 	int count;
 } Explosion417d00;
 
-extern float g_662a18;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_662b08;
 extern float g_662b0c;
 

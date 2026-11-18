@@ -5,23 +5,23 @@ int  __cdecl fcn_005d5930(void*, void*);
 extern char g_679060[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
-int __cdecl fcn_004f7580(void* a1, void* a2)
+int __cdecl fcn_004f7580(void* entity, void* request)
 {
-	int v;
+	int mode;
 
-	v = *(int*) a2;
-	if (v != 3 && v != 1) {
+	mode = *(int*) request;
+	if (mode != 3 && mode != 1) {
 		return 1;
 	}
-	if (*(int*) ((char*) a1 + 0x1c8) & 0x100) {
+	if (*(int*) ((char*) entity + 0x1c8) & 0x100) {
 		return 1;
 	}
-	if (v == 3) {
-		fcn_005d5930(a1, a2);
+	if (mode == 3) {
+		fcn_005d5930(entity, request);
 		return 2;
 	}
-	if (v == 1 && *(char*) ((char*) a1 + 2) == 6) {
-		io_FormatTextBuffer((char*) a2 + 0x14, (int) g_679060, 0x1d54);
+	if (mode == 1 && *(char*) ((char*) entity + 2) == 6) {
+		io_FormatTextBuffer((char*) request + 0x14, (int) g_679060, 0x1d54);
 	}
 	return 2;
 }

@@ -10,7 +10,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bad30 */
-int __cdecl fcn_004bad30(int* a1)
+int __cdecl fcn_004bad30(int* request)
 {
 	float f;
 	int id;
@@ -19,7 +19,7 @@ int __cdecl fcn_004bad30(int* a1)
 	char* s;
 
 	f = (float)((gm_RandomMod(0xd) + 13.0) * 0.01);
-	e = gm_LookupEntityRecordById(a1[0]);
+	e = gm_LookupEntityRecordById(request[0]);
 	if (e == 0)
 		return 1;
 	if (fcn_005c6270(e, 0x290) != 0)
@@ -28,7 +28,7 @@ int __cdecl fcn_004bad30(int* a1)
 		goto fail;
 	s = gm_StartFilteredEntitySearch(1, 1, id);
 	if (s != 0) {
-		io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, s, (int) (f * 100.0f));
+		io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, s, (int) (f * 100.0f));
 		fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 		return 0;
 	}

@@ -2,7 +2,7 @@
 
 extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca4[];
-extern double g_662908;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl gm_SearchTable67(int id);
 double __cdecl gm_RandomFloat01(void);

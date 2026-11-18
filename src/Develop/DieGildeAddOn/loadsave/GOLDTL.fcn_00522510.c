@@ -10,7 +10,7 @@ void* __cdecl realloc(void* p, unsigned int size);
 void* __cdecl memset(void* dst, int value, unsigned int count);
 
 extern unsigned char* g_entity_ptr;
-extern int g_6a23ac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_aux_entity_count;
 extern int g_aux_entity_buffer;
 

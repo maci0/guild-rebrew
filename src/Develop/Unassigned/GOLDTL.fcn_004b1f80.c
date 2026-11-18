@@ -13,16 +13,12 @@ typedef struct {
 } rec44;
 // SIZE 0x44
 
-extern char g_1007bc0[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 extern char g_868060[];
 extern char g_680890[];
-extern int g_67fca0;
 extern int g_67fca4;
-extern int g_67fca8;
-extern int g_67fcac;
 extern int g_67fcb0;
-extern int g_67fcb4;
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_0042d670(char*);

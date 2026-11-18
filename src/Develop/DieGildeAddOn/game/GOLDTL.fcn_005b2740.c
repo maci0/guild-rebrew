@@ -1,4 +1,4 @@
-extern char g_774a80[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 char g_6ab41c[] = "_NACHRICHTEN_HS_46";
 
 

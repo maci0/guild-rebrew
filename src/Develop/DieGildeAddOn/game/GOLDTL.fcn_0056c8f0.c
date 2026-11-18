@@ -17,8 +17,8 @@ void __cdecl fcn_0056c8f0(char* u)
 {
 	unsigned short n;
 	unsigned short m;
-	float v2[4];
-	float v1[4];
+	float targetPos[4];
+	float sourcePos[4];
 	char* list[0x100];
 	char* e;
 	char* t;
@@ -44,9 +44,9 @@ void __cdecl fcn_0056c8f0(char* u)
 	}
 	for (i = 0; i < n && m < 0x10; i++) {
 		e = list[i];
-		fcn_00455350(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, v1);
-		fcn_00455350(*(char**) (pick + 0x61), *(char**) (pick + 0x61) + 0x4c, v2);
-		if (e != pick && CompareVector3WithinTolerance(v1, v2, (float) *(int*) (u + 0xf0)) != 0) {
+		fcn_00455350(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, sourcePos);
+		fcn_00455350(*(char**) (pick + 0x61), *(char**) (pick + 0x61) + 0x4c, targetPos);
+		if (e != pick && CompareVector3WithinTolerance(sourcePos, targetPos, (float) *(int*) (u + 0xf0)) != 0) {
 			((int*) (u + 0xac))[m++] = *(int*) (e + 1);
 		}
 	}

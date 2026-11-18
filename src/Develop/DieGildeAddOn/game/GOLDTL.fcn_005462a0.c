@@ -3,7 +3,7 @@
 extern unit_77e980 g_77e980[1024];
 extern unit_77e980* g_7dc420;
 extern char g_7749dc;
-extern int g_7749d4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_6a4758[4];
 extern int g_6a475c;
 extern unsigned short g_6a4760;

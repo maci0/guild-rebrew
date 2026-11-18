@@ -34,14 +34,13 @@ typedef struct {
 } Kind;
 // SIZE 0x14
 
-extern char g_9a9660[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7f4ca4[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_77494c;
 extern unsigned char g_7747b0;
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
-extern int g_7e2700;
 
 void __cdecl fcn_00500bb0(Time *, int, int, int);
 int __cdecl fcn_00500cb0(Time *, Time *);

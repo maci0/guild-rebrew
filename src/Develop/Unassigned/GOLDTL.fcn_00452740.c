@@ -3,12 +3,10 @@ extern int g_10432a8;
 extern int g_1042a04;
 extern int g_67bc4c;
 extern int g_6b8718;
-extern int g_1052bac;
-extern int g_1042a08;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned int g_6b8710;
 extern unsigned int g_6b8714;
 extern void* g_6b5de0;
-extern void* g_104095c;
 extern volatile unsigned int g_6b7fac; void __cdecl fcn_00452420(void*);
 int __cdecl fcn_0045cb10(int, char);
 void __cdecl fcn_004557c0(char*, char*, int, float*);

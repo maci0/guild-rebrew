@@ -7,8 +7,7 @@ typedef struct coords_16 {
 	int data[4];
 } coords_16;
 
-extern int g_14cbca0;
-extern int g_699364;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl rand(void);
 void __cdecl srv_SeedRandom(int);

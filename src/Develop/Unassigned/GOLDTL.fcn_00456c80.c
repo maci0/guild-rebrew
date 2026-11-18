@@ -1,6 +1,6 @@
 
 
-extern unsigned int g_104061c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned int g_10405fc;
 extern int g_6b89b8;
 extern void* g_6b5de0;

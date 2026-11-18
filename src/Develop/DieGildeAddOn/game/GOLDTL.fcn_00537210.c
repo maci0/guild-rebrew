@@ -5,11 +5,9 @@ extern int g_7e46ac;
 extern char g_774660;
 extern float g_675308;
 extern char g_14cf950;
-extern int g_14ce8cc;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 extern float g_665e40;
-extern double g_662ad8;
 extern char g_6a33b4[];
 
 int __cdecl fcn_0057ec20(int);

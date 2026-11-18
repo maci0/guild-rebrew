@@ -15,7 +15,7 @@ float __cdecl fcn_004ff210(unsigned short, int);
 
 
 /* ADDRESS: GOLDTL 0x004b8860 */
-int __cdecl fcn_004b8860(int* a1)
+int __cdecl fcn_004b8860(int* request)
 {
 	char* ents[8];
 	char buf[0x200];
@@ -28,12 +28,12 @@ int __cdecl fcn_004b8860(int* a1)
 	int m;
 	int k;
 	int i;
-	int r;
-	int r2;
+	int selectedIndex;
+	int otherIndex;
 
 	n = 0;
 	sel = 0;
-	e = gm_LookupEntityRecordById(a1[0]);
+	e = gm_LookupEntityRecordById(request[0]);
 	if (e == 0)
 		return 1;
 	if (fcn_005c6270(e, 0x290) != 0)
@@ -56,16 +56,16 @@ int __cdecl fcn_004b8860(int* a1)
 			ents[m++] = rec;
 	}
 	if (m > 2) {
-		r = gm_RandomMod(m);
-		sel = ents[r];
-		r2 = gm_RandomMod(m);
-		while (r2 == r)
-			r2 = gm_RandomMod(m);
+		selectedIndex = gm_RandomMod(m);
+		sel = ents[selectedIndex];
+		otherIndex = gm_RandomMod(m);
+		while (otherIndex == selectedIndex)
+			otherIndex = gm_RandomMod(m);
 	}
 	if (chosen == 0 || sel == 0)
 		return 0x400;
 	if (gm_RandomMod(2) != 0) {
-		io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, chosen,
+		io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, chosen,
 		    (sel[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (sel + 0x165),
 		    *(unsigned short*) sel, *(unsigned short*) sel);
 		fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);

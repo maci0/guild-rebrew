@@ -43,7 +43,7 @@ typedef struct GOLDTL_TileUv {
 	float dv;                   /* 0x0c, scaled by the step on entry */
 } GOLDTL_TileUv;
 
-extern float g_6628cc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00457c10 */
 void* __cdecl fcn_00457c10(void* vb, void* ib, GOLDTL_TileMap* map, int step,

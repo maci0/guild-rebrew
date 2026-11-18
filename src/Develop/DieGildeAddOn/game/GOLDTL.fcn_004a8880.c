@@ -56,8 +56,8 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 	int i;
 	int n;
 	int cnt;
-	int t;
-	float d;
+	int tries;
+	float score;
 	Ent* p;
 	Ent* list[6];
 	Rec info;
@@ -104,13 +104,13 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 		list[i] = 0;
 	}
 	i = gm_RandomMod(6);
-	for (t = 6; t != 0; i = (i + 1) % 6) {
+	for (tries = 6; tries != 0; i = (i + 1) % 6) {
 		if (list[i] != 0 && h != list[i]->h && fcn_0050f980(list[i]->id, e->id, 1) < 33.0f &&
 			recs[i].status == 1) {
 			found = list[i];
 			break;
 		}
-		t--;
+		tries--;
 	}
 	if (found != 0 && e->x5c != found->h) {
 		out->type = 7;
@@ -124,21 +124,21 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 		return 0;
 	}
 	i = gm_RandomMod(6);
-	for (t = 6; t != 0; i = (i + 1) % 6) {
+	for (tries = 6; tries != 0; i = (i + 1) % 6) {
 		p = list[i];
 		if (p != 0 && h != p->h) {
 			if (fcn_004e8b40(p->x166, &other) == 0) {
 				return 0;
 			}
 			if (other.x8 > info.x8 && recs[i].status == 1) {
-				d = fcn_0050f980(p->id, e->id, 1);
-				if (gm_RandomMod(0x20) + 40.0f > d) {
+				score = fcn_0050f980(p->id, e->id, 1);
+				if (gm_RandomMod(0x20) + 40.0f > score) {
 					found = list[i];
 					break;
 				}
 			}
 		}
-		t--;
+		tries--;
 	}
 	if (found != 0 && e->x5c != found->h) {
 		out->type = 7;

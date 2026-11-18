@@ -19,7 +19,7 @@ void __cdecl fcn_004fac80(int, struct cap_4cb6f0*);
 
 
 /* ADDRESS: GOLDTL 0x004cb6f0 */
-int __cdecl fcn_004cb6f0(char* a1, char* a2)
+int __cdecl fcn_004cb6f0(char* a1, char* out)
 {
 	struct cap_4cb6f0 info;
 	unsigned char* e;
@@ -42,10 +42,10 @@ int __cdecl fcn_004cb6f0(char* a1, char* a2)
 	if (old != 0 && ((Kind*)lpGebaeudePROT)[old[0]].type == 1 && old[0x65] > 0)
 		old[0x65]--;
 	*(unsigned char**) (p + 0x170) = e;
-	if (a2 != 0) {
-		a2[0] = 1;
-		a2[1] = 0;
-		*(int*) (a2 + 6) = 0;
+	if (out != 0) {
+		out[0] = 1;
+		out[1] = 0;
+		*(int*) (out + 6) = 0;
 	}
 	return 0;
 }

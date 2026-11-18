@@ -4,20 +4,20 @@
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 void __cdecl fcn_004cfc40(char*, int, int);
 
-int __cdecl fcn_004cceb0(char* a1, char* a2)
+int __cdecl fcn_004cceb0(char* request, char* output)
 {
-	char* r;
+	char* target;
 
-	r = gm_LookupEntityRecordIn32SlotTable(*(int*) (a1 + 0x10));
-	if (r != 0) {
-		fcn_004cfc40(r, *(int*) (a1 + 0x14), 0);
-		*(int*) (r + 0x24) -= *(int*) (a1 + 0x14);
-		r[8] = a1[0x18];
+	target = gm_LookupEntityRecordIn32SlotTable(*(int*) (request + 0x10));
+	if (target != 0) {
+		fcn_004cfc40(target, *(int*) (request + 0x14), 0);
+		*(int*) (target + 0x24) -= *(int*) (request + 0x14);
+		target[8] = request[0x18];
 	}
-	if (a2 != 0) {
-		a2[0] = 1;
-		a2[1] = 8;
-		*(int*) (a2 + 6) = 0;
+	if (output != 0) {
+		output[0] = 1;
+		output[1] = 8;
+		*(int*) (output + 6) = 0;
 	}
 	return 0;
 }

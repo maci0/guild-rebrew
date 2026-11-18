@@ -63,18 +63,18 @@ void __cdecl fcn_004372d0(int, int, int, int, int);
 /* ADDRESS: GOLDTL 0x0047c9c0 */
 void __cdecl fcn_0047c9c0(int a1, int a2, int a3, int a4, int tex, float alpha)
 {
-	Quad q;
+	Quad quad;
 	float t;
 	int i;
 
-	if (fcn_0047b8b0(a1, a2, a3, a4, &q) == 0) {
+	if (fcn_0047b8b0(a1, a2, a3, a4, &quad) == 0) {
 		return;
 	}
-	fcn_0047b9f0(&q, (int) (alpha * 255.0f));
+	fcn_0047b9f0(&quad, (int) (alpha * 255.0f));
 	t = g_772608 * 0.001f;
 	for (i = 0; i < 6; i++) {
-		q.vs.v[i].z = 1.0f - t;
-		q.vs.v[i].w = t + 0.01f;
+		quad.vs.v[i].z = 1.0f - t;
+		quad.vs.v[i].w = t + 0.01f;
 	}
 	{
 		void* ptr;
@@ -82,7 +82,7 @@ void __cdecl fcn_0047c9c0(int a1, int a2, int a3, int a4, int tex, float alpha)
 		if (((VB*)g_772614)->vtbl->Lock(((VB*)g_772614), 0, 0x18, &ptr, 0x2000) < 0) {
 			return;
 		}
-		*(Verts*) ptr = q.vs;
+		*(Verts*) ptr = quad.vs;
 	}
 	((VB*)g_772614)->vtbl->Unlock(((VB*)g_772614));
 	fcn_0047c4e0();

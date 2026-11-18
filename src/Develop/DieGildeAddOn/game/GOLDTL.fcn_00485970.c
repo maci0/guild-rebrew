@@ -46,8 +46,7 @@ typedef struct
 } fcn_00485970_EntB;
 /* SIZE 0x58 */
 
-extern int g_100b0a8;
-extern int g_100b0ac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char* lpGebaeudeINST;
 extern int g_773d78;
 extern unsigned char g_773d75;

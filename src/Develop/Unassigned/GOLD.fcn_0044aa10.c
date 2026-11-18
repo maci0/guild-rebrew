@@ -1,7 +1,7 @@
 #include "client_lighting.h"
 #include "Develop/Units/d3/d3_object.h"
 
-extern char* g_5fb5b0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_6338c4;
 extern int g_fc52f0;
 int __cdecl fcn_00430470(char*, const char*, int);

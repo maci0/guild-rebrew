@@ -152,11 +152,11 @@ VFS_DIR* __cdecl fcn_0042f6d0(char* path, VFS_DIR* parent)
 
 /* ADDRESS: GOLD 0x00430d90 */
 /* ADDRESS: GOLDTL 0x00430870 */
-int __cdecl fcn_00430870(void* a1)
+int __cdecl fcn_00430870(void* stream)
 {
 	char c;
 
-	if (vfs_ReadData(&c, 1, 1, a1) == 1) {
+	if (vfs_ReadData(&c, 1, 1, stream) == 1) {
 		return c;
 	}
 	return -1;

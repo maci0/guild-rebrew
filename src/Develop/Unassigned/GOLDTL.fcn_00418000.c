@@ -14,8 +14,7 @@ int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, int b, void 
 void __cdecl fcn_004526d0(int* s, float* pos);
 void __cdecl fcn_00417f00(void);
 extern volatile int g_6b7fac;
-extern float g_6628a0;
-extern float g_662a18;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00418000 */
 int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, float f6,

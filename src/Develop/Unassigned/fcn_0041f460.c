@@ -3,15 +3,15 @@ typedef int (__stdcall *FN_41f460)(int *);
 int *__cdecl FindVideoById(int *);
 
 /* ADDRESS: GOLDTL 0x0041f460 */
-int __cdecl fcn_0041f460(int *a1)
+int __cdecl fcn_0041f460(int *videoId)
 {
-	int *x;
-	int *y;
+	int *video;
+	int *iface;
 
-	x = FindVideoById(a1);
-	if (x != 0) {
-		y = (int *) x[0x120 / 4];
-		return (*(FN_41f460 *) (*y + 0x20))(y) >= 0;
+	video = FindVideoById(videoId);
+	if (video != 0) {
+		iface = (int *) video[0x120 / 4];
+		return (*(FN_41f460 *) (*iface + 0x20))(iface) >= 0;
 	}
 	return 0;
 }

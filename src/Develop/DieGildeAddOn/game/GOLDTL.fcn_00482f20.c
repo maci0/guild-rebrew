@@ -34,8 +34,7 @@ extern char *lpObjektePROT;
 extern int g_100e74c;
 extern char *g_100dbc0[16];
 extern unsigned char *lpGebaeudePROT;
-extern int g_100b0a8;
-extern int g_100b0ac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100b0f4;
 extern float g_100b0e0;
 extern int g_100d10c;

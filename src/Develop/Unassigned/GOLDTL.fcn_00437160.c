@@ -19,7 +19,7 @@ extern VECTOR3 g_67bbdc;
 extern float g_1052bd8;
 extern int g_1052bdc;
 extern char g_1052c40;
-#include "GOLDTL.fcn_00437160_gconf.h"
+extern unsigned char g_6b7ff9;
 extern char g_6b7ffa;
 extern unsigned char g_6b7ffd;
 extern char g_67a2ac;
@@ -39,7 +39,7 @@ void __cdecl fcn_00437160(unsigned char fog, int color, char light)
 	if (fog) {
 		((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x22, color);
 	}
-	((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 7, light ? (g_6b7ff9 != 0) + 1 : 0);
+	((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 7, light ? ((*(char *)&g_6b7ff9) != 0) + 1 : 0);
 	if (light) {
 		((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0xe, light && g_6b7ffa == 0);
 		((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x2f, g_6b7ffa ? 0x10 : 0);

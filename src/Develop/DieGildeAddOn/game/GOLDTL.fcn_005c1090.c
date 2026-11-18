@@ -1,5 +1,5 @@
 extern __int64 g_666018;
-extern int g_66601c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_5c0d90[];
 
 #include <string.h>

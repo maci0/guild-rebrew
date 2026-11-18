@@ -4,19 +4,19 @@
 
 extern Offer g_6abb08[];
 
-char* __cdecl fcn_005c61e0(int a1)
+char* __cdecl fcn_005c61e0(int id)
 {
-	int n;
-	int v;
+	int index;
+	int entryId;
 
-	v = *(int*) g_6abb08;
-	n = 0;
-	while (v != 0) {
-		if (v == a1) {
-			return (char*) g_6abb08 + n * 0x1c;
+	entryId = *(int*) g_6abb08;
+	index = 0;
+	while (entryId != 0) {
+		if (entryId == id) {
+			return (char*) g_6abb08 + index * 0x1c;
 		}
-		n++;
-		v = *(int*) ((char*) g_6abb08 + n * 0x1c);
+		index++;
+		entryId = *(int*) ((char*) g_6abb08 + index * 0x1c);
 	}
 	return 0;
 }

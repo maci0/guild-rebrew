@@ -12,13 +12,12 @@
 #pragma intrinsic(memcpy, memset)
 
 void __cdecl gm_KillAllSpieler(void);
-extern int g_query_limit;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_slot_table[2];
 #include "spiel.h"
 extern int g_next_object_id; /* defined in spiel.c */
 
 int __cdecl gm_GetBuildingTypeCategory(int);
-extern int g_citizen_count;
 
 /* Inferred 32-slot entity lookup. */
 #ifdef REBREW_GOLD

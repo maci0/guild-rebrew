@@ -1,7 +1,7 @@
 #include "client_types.h"
 
 extern pos14_7f4c00 g_7f4c00;
-extern int g_774800;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl fcn_005463a0(int a1, int a2, int a3, int a4, int a5);
 void* __cdecl he_fn_Handlung(void);

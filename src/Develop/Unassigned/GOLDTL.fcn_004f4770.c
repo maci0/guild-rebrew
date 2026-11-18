@@ -2,7 +2,7 @@
 
 
 extern float g_665370;
-extern float g_6628cc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 

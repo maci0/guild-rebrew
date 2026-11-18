@@ -7,7 +7,7 @@ typedef struct Rec {
 
 extern char* lpObjektePROT;
 extern unsigned char g_773d75;
-extern double g_662908;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl gm_AccumulateTyped2(void*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);

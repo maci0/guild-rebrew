@@ -19,15 +19,10 @@ typedef struct Text {
 } Text;
 // SIZE 0x74
 
-extern char g_1007bc0[];
-extern char g_1007ba0[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 extern char g_868060[];
-extern char g_149d120[][0x74];
-extern int g_67fca0;
 extern int g_67fca4;
-extern int g_67fca8;
-extern int g_67fcac;
 extern int g_67fcb0;
 extern char g_7728d4;
 

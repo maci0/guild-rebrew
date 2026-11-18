@@ -43,23 +43,15 @@ extern unsigned char* g_7746c8;
 extern char* g_7746cc;
 extern int g_7746a0;
 extern int g_7746b8;
-extern int g_7746f0;
 extern int g_7ea360;
 extern char g_7e2760[];
 extern char* g_7e4260[32];
 extern char g_7f4ca0[];
-extern int g_7e4300;
 extern int g_7e4318;
-#include "GOLDTL.fcn_00531620_gconf.h"
-extern int g_6772c4;
-extern int g_100f894;
+extern unsigned short* g_7e431c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern short g_14ce8c0;
 extern short g_14ce8c2;
-extern int g_14ce8cc;
-extern int g_14ce8d4;
-extern int g_14ce8e4;
-extern int g_14ce8e0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00414c30(int, int);
@@ -147,7 +139,7 @@ L6d3:
 	if (g_7746a0 != 0) {
 		goto La50;
 	}
-	if (g_7e431c != 0) {
+	if ((*(int *)&g_7e431c) != 0) {
 		goto La50;
 	}
 	if (g_7e4318 != 0) {

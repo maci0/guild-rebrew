@@ -16,12 +16,12 @@ void __cdecl fcn_004cfab0(int, Ent21c*);
 
 void __cdecl fcn_004cfc00(int a1)
 {
-	Ent21c* e;
+	Ent21c* entity;
 
 	fcn_004cfa80();
-	for (e = g_9b4a40; (int) e < (int) (g_9b4a40 + 32); e++) {
-		if (e->active != 0) {
-			fcn_004cfab0(a1, e);
+	for (entity = g_9b4a40; (int) entity < (int) (g_9b4a40 + 32); entity++) {
+		if (entity->active != 0) {
+			fcn_004cfab0(a1, entity);
 		}
 	}
 }

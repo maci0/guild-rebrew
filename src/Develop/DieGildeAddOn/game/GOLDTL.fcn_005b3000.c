@@ -10,14 +10,14 @@ char* __cdecl strcat(char*, const char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
-void __cdecl fcn_005b3000(char* a1, unsigned char* a2, unsigned short* a3, int a4)
+void __cdecl fcn_005b3000(char* recipient, unsigned char* entity, unsigned short* id, int includeDetails)
 {
-	io_FormatTextBuffer(g_774a80, 0x40ad, 0x40a3, *(unsigned short*) a2, *(int*) (a2 + 0x16c), *a3);
-	if (a4 != 0) {
-		io_FormatTextBuffer(g_774e80, 0x40ae, (a2[9] != 0 ? 0x230 : 0x20d) + a2[0x165]);
+	io_FormatTextBuffer(g_774a80, 0x40ad, 0x40a3, *(unsigned short*) entity, *(int*) (entity + 0x16c), *id);
+	if (includeDetails != 0) {
+		io_FormatTextBuffer(g_774e80, 0x40ae, (entity[9] != 0 ? 0x230 : 0x20d) + entity[0x165]);
 		strcat(g_774a80, g_774e80);
 	}
-	fcn_00545d40(*(int*) (a1 + 4), -1, g_774a80, 0, 0x5fa, g_6ab50c);
+	fcn_00545d40(*(int*) (recipient + 4), -1, g_774a80, 0, 0x5fa, g_6ab50c);
 }
 unsigned char _dpad_6ab52c[20] = {
     0x48, 0x52, 0x49, 0x43, 0x48, 0x54, 0x45, 0x4e, 0x5f, 0x44, 0x4f, 0x4d, 0x49, 0x5a, 0x49, 0x4c,

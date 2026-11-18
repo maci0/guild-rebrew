@@ -8,16 +8,16 @@ struct I41f2f0 {
 
 char* __cdecl FindVideoById(int);
 
-int __cdecl fcn_0041f2f0(int a1, int a2)
+int __cdecl fcn_0041f2f0(int videoId, int enabled)
 {
 	char* p;
 	I41f2f0* o;
 	int r;
 
-	p = FindVideoById(a1);
+	p = FindVideoById(videoId);
 	if (p != 0) {
 		o = *(I41f2f0**) (p + 0x130);
-		r = o->vt[0x90 / 4](o, a2 ? -1 : 0);
+		r = o->vt[0x90 / 4](o, enabled ? -1 : 0);
 		if (r == 0 || r == 1) {
 			return 1;
 		}

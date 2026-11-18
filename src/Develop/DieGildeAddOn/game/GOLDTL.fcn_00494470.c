@@ -23,7 +23,7 @@ typedef struct {
 	unsigned char count;
 } Party494470;
 
-extern float g_662a2c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 
 unsigned short __cdecl gm_RandomMod(unsigned short range);

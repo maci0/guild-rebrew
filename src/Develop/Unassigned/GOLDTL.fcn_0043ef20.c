@@ -4,8 +4,7 @@
 /* Compiler float/double pools and lighting constants. */
 extern float g_6628a0; /* 1.0f */
 extern float g_6628a8; /* 0.0f */
-extern float g_6628cc;
-extern float g_662c30;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_662ca8;
 extern double g_662ca0;
 extern float g_662d40[3];

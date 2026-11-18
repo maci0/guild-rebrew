@@ -17,7 +17,7 @@ struct vec_4bc090 {
 
 
 /* ADDRESS: GOLDTL 0x004bc090 */
-void __cdecl fcn_004bc090(char* a1)
+void __cdecl fcn_004bc090(char* result)
 {
 	unsigned char* chosen;
 	struct vec_4bc090 pb;
@@ -30,7 +30,7 @@ void __cdecl fcn_004bc090(char* a1)
 	unsigned short cnt;
 	int i;
 
-	if (*(int*) (a1 + 8) != -1)
+	if (*(int*) (result + 8) != -1)
 		return;
 	n = 0;
 	for (it = gm_StartFilteredEntitySearch(1, 6); it != 0; it = gm_FindNextFilteredEntity()) {
@@ -51,5 +51,5 @@ void __cdecl fcn_004bc090(char* a1)
 			pts[cnt++].z = pb.z;
 		}
 	}
-	*(int*) (a1 + 8) = cnt;
+	*(int*) (result + 8) = cnt;
 }

@@ -10,14 +10,10 @@ typedef struct
 
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
-extern int g_772514;
 extern int g_67a370;
 extern int g_6b8300;
-extern char* g_1042320;
-extern char g_1052a40[];
-extern int g_773d70;
 extern int g_773d8c;
 extern char s_6ab7e4[];
 extern char s_6ab7cc[];

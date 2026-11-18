@@ -1,4 +1,4 @@
-extern char g_85ab90[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_773d78;
 extern unsigned char g_773d75;
 extern unsigned char* lpGebaeudePROT;

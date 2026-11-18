@@ -1,4 +1,4 @@
-extern int* g_772f40;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 

@@ -5,13 +5,13 @@ extern int g_14b52fc;
 void* __cdecl fcn_00577850(int);
 void __cdecl fcn_00526120(int, int);
 
-int __cdecl fcn_005898f0(void* a1)
+int __cdecl fcn_005898f0(void* entry)
 {
-	void* p;
+	void* match;
 
-	p = fcn_00577850(*(int*) ((char*) a1 + 1));
-	if (p != 0) {
+	match = fcn_00577850(*(int*) ((char*) entry + 1));
+	if (match != 0) {
 		fcn_00526120(g_14b52fc, 0);
 	}
-	return p == 0;
+	return match == 0;
 }

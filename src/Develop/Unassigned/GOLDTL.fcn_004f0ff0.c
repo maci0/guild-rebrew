@@ -1,7 +1,5 @@
-extern float g_6628a0;
-extern float g_6628bc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_664330;
-extern float g_664154;
 extern unsigned char g_773d75;
 
 int __cdecl fcn_0050b810(int, unsigned char);

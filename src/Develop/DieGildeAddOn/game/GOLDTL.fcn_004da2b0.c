@@ -12,7 +12,7 @@ void __cdecl fcn_00402b00(char*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004da2b0 */
-char* __cdecl fcn_004da2b0(unsigned short* a1, char* prefix, int idx)
+char* __cdecl fcn_004da2b0(unsigned short* entity, char* prefix, int idx)
 {
 	float pos[4];
 	char name[0x80];
@@ -30,7 +30,7 @@ char* __cdecl fcn_004da2b0(unsigned short* a1, char* prefix, int idx)
 	if (w == 0)
 		goto fail;
 	fcn_00455350(w, w + 0x4c, pos);
-	r = fcn_004fda30(*a1);
+	r = fcn_004fda30(*entity);
 	if (r == 0) {
 		k = cut_RandMod(3);
 		if (k == 1)
@@ -46,7 +46,7 @@ char* __cdecl fcn_004da2b0(unsigned short* a1, char* prefix, int idx)
 	g_9b0dc0[idx] = o;
 	if (o != 0) {
 		fcn_00402b00(o, w);
-		fcn_0064d41a(name, "sp_%i", *(int*) (a1 + 2));
+		fcn_0064d41a(name, "sp_%i", *(int*) (entity + 2));
 		strcpy(*(char**) (o + 0x34), name);
 		strcpy(o + 8, name);
 		return o;

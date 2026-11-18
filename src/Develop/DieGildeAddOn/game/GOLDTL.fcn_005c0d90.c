@@ -12,8 +12,7 @@ typedef struct {
 
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_100f1dc;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;

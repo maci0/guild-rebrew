@@ -20,7 +20,7 @@ typedef struct GOLDTL_TileMap {
 	float height_scale;         /* 0x84 */
 } GOLDTL_TileMap;
 
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004137e0(GOLDTL_TileMap* m, int* lo, int* hi, int x0, int x1,
 	int y);

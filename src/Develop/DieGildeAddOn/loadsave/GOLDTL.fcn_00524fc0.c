@@ -2,8 +2,7 @@
 #include "client_types.h"
 
 extern pos14_7f4c00 g_7f4c00;
-extern int g_6a23ac;
-extern char g_9a9660[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 void __cdecl fcn_00500bb0(void*, int, int, int);

@@ -12,14 +12,14 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl fcn_004d5450(unsigned char* a1)
 {
-	Tile* t;
+	Tile* tile;
 
-	t = &((Tile*)lpGebaeudePROT)[a1[0]];
-	if (t->type == 0x13) {
+	tile = &((Tile*)lpGebaeudePROT)[a1[0]];
+	if (tile->type == 0x13) {
 		return 0;
 	}
-	if (t->type == 0x10) {
+	if (tile->type == 0x10) {
 		return 1;
 	}
-	return t->type == 4 ? 2 : 0;
+	return tile->type == 4 ? 2 : 0;
 }

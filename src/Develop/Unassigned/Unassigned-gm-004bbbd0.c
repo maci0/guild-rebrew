@@ -23,19 +23,19 @@ int __cdecl fcn_004bbce0(int);
 void __cdecl fcn_004c5530(void*);
 
 /* ADDRESS: GOLDTL 0x004bbbd0 */
-int __cdecl fcn_004bbbd0(fcn_004bbbd0_msg* m)
+int __cdecl fcn_004bbbd0(fcn_004bbbd0_msg* msg)
 {
-	char* p;
+	char* entity;
 
 	if ((*(int*)&g_7f4c00) < 8)
 		return 0;
-	if (m == 0)
+	if (msg == 0)
 		return -1;
-	p = gm_LookupEntityRecordById(m->who);
-	if (p == 0 || *(unsigned char*) (p + 0x1b1) > 0)
+	entity = gm_LookupEntityRecordById(msg->who);
+	if (entity == 0 || *(unsigned char*) (entity + 0x1b1) > 0)
 		return 0x400;
-	if (m->op < 0x45)
-		return g_6811b8[m->op](m);
+	if (msg->op < 0x45)
+		return g_6811b8[msg->op](msg);
 	return -2;
 }
 
@@ -43,24 +43,24 @@ int __cdecl fcn_004bbbd0(fcn_004bbbd0_msg* m)
 /* ADDRESS: GOLDTL 0x004bbc30 */
 int __cdecl fcn_004bbc30(int a1, int a2)
 {
-	char m[0xf8];
-	int n;
+	char packet[0xf8];
+	int count;
 	int i;
 
-	n = fcn_004bbce0(a1 + 1);
+	count = fcn_004bbce0(a1 + 1);
 	g_7728e0 = GetTickCount();
-	memset(m, 0, sizeof(m));
-	m[4] = 0x42;
-	*(int*) (m + 8) = a2;
-	*(int*) (m + 0xc) = -1;
-	*(stamp14*) (m + 0x28) = (*(stamp14*)&g_7f4c00);
-	m[0x36] = 1;
-	for (i = 0; i < n; i++) {
-		*(short*) (m + 0x5c) = fcn_004bbce0(0x45);
-		*(int*) (m + 0x58) = a2;
-		fcn_004c5530(m);
+	memset(packet, 0, sizeof(packet));
+	packet[4] = 0x42;
+	*(int*) (packet + 8) = a2;
+	*(int*) (packet + 0xc) = -1;
+	*(stamp14*) (packet + 0x28) = (*(stamp14*)&g_7f4c00);
+	packet[0x36] = 1;
+	for (i = 0; i < count; i++) {
+		*(short*) (packet + 0x5c) = fcn_004bbce0(0x45);
+		*(int*) (packet + 0x58) = a2;
+		fcn_004c5530(packet);
 	}
-	return n;
+	return count;
 }
 
 /* ADDRESS: GOLDTL 0x004bbce0 */

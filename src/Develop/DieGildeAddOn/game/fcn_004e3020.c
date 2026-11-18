@@ -12,13 +12,9 @@ typedef struct {
 #include "client_types.h"
 
 extern pos14_7f4c00 g_7f4c00;
-extern int g_68bfb8;
-extern int g_7725c8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_7747b0;
-extern int g_772f54;
-extern int g_774954;
 extern char g_5438c0[];
-extern char g_67d444[];
 
 int __cdecl gm_LookupEntityRecordById(void* p);
 int __cdecl fcn_004c3100(char* s, int a);

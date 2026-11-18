@@ -6,7 +6,7 @@ extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern unsigned char g_773d75;
-extern float g_66414c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_00507ab0(int k);
 void __cdecl fcn_004c4eb0(char* s);

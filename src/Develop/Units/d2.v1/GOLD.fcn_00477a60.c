@@ -31,7 +31,7 @@ void __cdecl fcn_00477490(Spin00477a60* p, int v, int a3, int a4);
 void __cdecl fcn_00477a60(void)
 {
 	int step;
-	Spin00477a60* p;
+	Spin00477a60* spin;
 
 	if (g_006ed9dc == 0 || !(g_006ed9dc->flags & 2)) {
 		return;
@@ -47,15 +47,15 @@ void __cdecl fcn_00477a60(void)
 		g_006ed9f4 = 1;
 		g_00f8a66c = g_006310b4;
 		g_00f8a664 = g_005f323c;
-		p = g_006ed9dc;
-		g_006ed9c4 = p->value;
+		spin = g_006ed9dc;
+		g_006ed9c4 = spin->value;
 		g_006ed9e8 = g_01467380;
 		g_006ed9ec = g_01467382;
-		if (p->flags & 0x80) {
-			g_005f323c = (g_006ed9c4 - p->min) * 4 / step + g_006ed9ec;
-			g_006310b4 = (g_006ed9c4 - p->max) * 4 / step + g_006ed9ec;
+		if (spin->flags & 0x80) {
+			g_005f323c = (g_006ed9c4 - spin->min) * 4 / step + g_006ed9ec;
+			g_006310b4 = (g_006ed9c4 - spin->max) * 4 / step + g_006ed9ec;
 		}
-		p->pos = (g_006ed9c4 - p->min) * 4 / step + g_006ed9ec;
+		spin->pos = (g_006ed9c4 - spin->min) * 4 / step + g_006ed9ec;
 	}
 	fcn_00477490(g_006ed9dc, g_006ed9c4, g_006ed9ec, g_01467382);
 }

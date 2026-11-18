@@ -7,7 +7,7 @@ extern char g_67553c[]; /* morph_%i */
 extern char g_675584[]; /* character/%s/%s.baf */
 extern char g_675548[]; /* could not attach CurrentAnimStream */
 extern char g_675598[]; /* huston we got a problem */
-extern float g_6628cc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_675314;
 extern int g_675318;
 

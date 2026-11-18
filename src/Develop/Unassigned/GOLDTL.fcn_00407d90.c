@@ -1,7 +1,7 @@
 
 
 
-extern void* g_14d0020[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_scene_transform.h"
 
 int __cdecl fcn_00407d90(char* self, char** out)

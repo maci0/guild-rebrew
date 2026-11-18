@@ -2,7 +2,7 @@
 extern int g_699b10;
 extern void* g_6b7fdc;
 extern char g_6790c8[];
-extern char g_68b0d8[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_0050dc90(void*);
 int __cdecl gm_CheckEntityType(void*);

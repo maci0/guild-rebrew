@@ -11,9 +11,7 @@ typedef struct Ent {
 
 extern char g_7f4ca0[];
 extern unsigned char g_773d75;
-extern float g_662da8;
-extern float g_6628bc;
-extern float g_6628ac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);

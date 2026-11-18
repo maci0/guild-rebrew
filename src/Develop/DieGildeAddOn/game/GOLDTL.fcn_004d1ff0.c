@@ -34,8 +34,6 @@ int __cdecl fcn_0050c710(int, int, int);
 int __cdecl gm_CheckEntityType(void *);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_664ef8;
-extern char g_7e1ae0[];
-extern int g_68b79c;
 extern int g_6b89c0; extern char g_6a2574[];
 typedef struct BuildingRow4d1ff0 { unsigned char kind; char fields[0x24c]; } BuildingRow4d1ff0;
 /* ADDRESS: GOLDTL 0x004d1ff0 */

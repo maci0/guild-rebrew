@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-extern int g_7746f8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 

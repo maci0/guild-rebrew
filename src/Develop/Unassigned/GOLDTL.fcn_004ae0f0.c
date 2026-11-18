@@ -9,7 +9,7 @@ typedef struct {
 } fcn_004ae0f0_group;
 // SIZE 0x44
 
-extern char g_1007bc0[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 /* ADDRESS: GOLDTL 0x004ae0f0 */

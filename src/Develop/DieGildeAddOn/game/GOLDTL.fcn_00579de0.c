@@ -54,10 +54,10 @@ void __cdecl fcn_00546190(char* a0);
 /* ADDRESS: GOLDTL 0x00579de0 */
 void __cdecl fcn_00579de0(char* a0)
 {
-	Place579* p;
+	Place579* place;
 	char text[1024];
-	char* s;
-	char* q;
+	char* entity;
+	char* slot;
 	char* fig;
 	char* rec;
 	int win;
@@ -75,59 +75,59 @@ void __cdecl fcn_00579de0(char* a0)
 		fcn_00500bb0(&((Place579*) a0)->pos52, 0, 5, 0);
 		return;
 	}
-	p = (Place579*) a0;
-	if (p->idx == 0xffff || p->xc == -1) {
+	place = (Place579*) a0;
+	if (place->idx == 0xffff || place->xc == -1) {
 		goto end;
 	}
-	s = gm_LookupEntityRecordById(p->x8c);
-	if (s) {
-		fcn_00529160(0, 0, *(unsigned short*) s, (int) p);
+	entity = gm_LookupEntityRecordById(place->x8c);
+	if (entity) {
+		fcn_00529160(0, 0, *(unsigned short*) entity, (int) place);
 	} else {
-		p->status = -1;
+		place->status = -1;
 	}
-	rec = (char*) gm_StartFilteredEntitySearch(1, 1, p->x10);
+	rec = (char*) gm_StartFilteredEntitySearch(1, 1, place->x10);
 	if (!rec) {
-		p->status = -1;
+		place->status = -1;
 	}
-	q = gv_GetSlotEntry(*(int*) (rec + 0x65), p->xb0, p->xb4);
-	if (!q) {
-		p->status = -1;
+	slot = gv_GetSlotEntry(*(int*) (rec + 0x65), place->xb0, place->xb4);
+	if (!slot) {
+		place->status = -1;
 	}
-	if (p->status == 0) {
-		v = fcn_00500d20(&p->posBC, &g_7f4c00);
-		f = (float) (4 - *(int*) q) * v * *(float*) 0x662a3c;
-		if ((s[0x165] == 0x1b || s[0x165] == 0x1c)
-			&& (*(unsigned char*) (s + 0x1b4) & 1)) {
+	if (place->status == 0) {
+		v = fcn_00500d20(&place->posBC, &g_7f4c00);
+		f = (float) (4 - *(int*) slot) * v * *(float*) 0x662a3c;
+		if ((entity[0x165] == 0x1b || entity[0x165] == 0x1c)
+			&& (*(unsigned char*) (entity + 0x1b4) & 1)) {
 			f *= *(float*) 0x6628bc;
 		}
-		p->add += f;
-		p->pos52 = g_7f4c00;
-		fcn_00500bb0(&p->pos52, 0, 5, 0);
-		p->xb8 -= v;
+		place->add += f;
+		place->pos52 = g_7f4c00;
+		fcn_00500bb0(&place->pos52, 0, 5, 0);
+		place->xb8 -= v;
 
-		p->posBC = g_7f4c00;
-		if (p->xb8 <= 0) {
-			p->status = -1;
+		place->posBC = g_7f4c00;
+		if (place->xb8 <= 0) {
+			place->status = -1;
 		}
-		if ((int) (*(unsigned char*) (q + 0xc)) + (int) p->add >= 0xff) {
-			p->status = -1;
+		if ((int) (*(unsigned char*) (slot + 0xc)) + (int) place->add >= 0xff) {
+			place->status = -1;
 		}
 	}
-	if (p->status < -2) {
+	if (place->status < -2) {
 		return;
 	}
-	if (p->status >= 0) {
+	if (place->status >= 0) {
 		return;
 	}
-	v = (int) p->add;
-	if (q != 0 && v > 0) {
-		fcn_004f2d30(rec, p->xb0, p->xb4, v);
-		if (!s) {
+	v = (int) place->add;
+	if (slot != 0 && v > 0) {
+		fcn_004f2d30(rec, place->xb0, place->xb4, v);
+		if (!entity) {
 			fcn_00546190(a0);
 			return;
 		}
 		fig = fcn_0050dc90(rec);
-		io_FormatTextBuffer(text, 0x4126, 0x411e, *(unsigned short*) s, rec);
+		io_FormatTextBuffer(text, 0x4126, 0x411e, *(unsigned short*) entity, rec);
 		row = (int) (*(unsigned short*) (a0 + 8)) * 0x21c;
 		if ((g_7f4ca0[row + 2] == 6 || g_7f4ca0[row + 2] == 7)
 			&& (!fig || !(*(unsigned char*) (fig + 0x1b4) & 1))) {
@@ -135,8 +135,8 @@ void __cdecl fcn_00579de0(char* a0)
 				*(int*) (rec + 1), -1, 0, (char*) 0x6a7f70);
 		}
 	}
-	if (s) {
-		fcn_00529160(0, 0, *(unsigned short*) s, 0);
+	if (entity) {
+		fcn_00529160(0, 0, *(unsigned short*) entity, 0);
 	}
 end:
 	fcn_00546190(a0);

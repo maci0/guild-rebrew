@@ -20,7 +20,7 @@ int __cdecl fcn_004690a0(int);
 void __cdecl fcn_00473530(int, int);
 void __cdecl d2_AddRefcount(int);
 
-int __cdecl fcn_0046bdf0(int a1, int a2, int a3, int a4)
+int __cdecl fcn_0046bdf0(int x, int y, int a3, int a4)
 {
 	int idx;
 
@@ -28,9 +28,9 @@ int __cdecl fcn_0046bdf0(int a1, int a2, int a3, int a4)
 	g_00f8f080[idx].kind = 9;
 	g_00f8f080[idx].f4c = 1;
 	g_00f8f080[idx].flags = 3;
-	g_00f8f080[idx].x = a1;
+	g_00f8f080[idx].x = x;
 	g_00f8f080[idx].f16 = g_006ed918[a3].f52;
-	g_00f8f080[idx].y = a2;
+	g_00f8f080[idx].y = y;
 	g_00f8f080[idx].f08 = a3;
 	g_00f8f080[idx].f22 = 0;
 	g_00f8f080[idx].f24 = g_00fb9070;

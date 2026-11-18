@@ -5,17 +5,13 @@ extern int g_774714;
 extern int g_774950;
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
-extern int g_774954;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774958;
 extern char g_774965;
-extern char g_68a9cc[];
 extern int g_7749cc;
-extern int g_774934;
 extern int g_7747bc;
 extern int g_7e2470;
 extern int g_7747c0;
-extern int g_7747c4;
-extern int g_7747c8;
 extern int g_7747cc;
 extern int g_6b5c2c;
 extern int g_774978;

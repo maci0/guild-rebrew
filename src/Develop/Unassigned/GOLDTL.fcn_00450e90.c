@@ -49,7 +49,7 @@ extern void* g_1041d04;
 extern Device450e90* g_6b5de0;
 extern void* g_6b86e4;
 extern void* g_6b86e8;
-extern int g_6b86fc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6b8704;
 extern int g_6b8708;
 

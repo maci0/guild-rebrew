@@ -5,9 +5,8 @@ extern int g_773d48;
 extern char g_slot_table[];
 extern int g_aed32c;
 extern double g_6629c8;
-extern double g_662908;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_6640f0;
-extern float g_6628a0;
 
 void __cdecl fcn_004fd400(short*, int*);
 int __cdecl gm_WalkEntityChain(unsigned short);

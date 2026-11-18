@@ -16,13 +16,10 @@ extern unsigned int g_6b8710;
 extern unsigned int g_6b8714;
 extern int g_67bc4c;
 extern void* g_6b5de0;
-extern char g_1040640[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1040960[];
-extern char* g_1040c74;
 extern int g_1040954;
 extern int g_1040c78;
-extern char* g_1040958;
-extern void* g_104095c;
 extern int g_6b8718;
 
 void __cdecl fcn_00452280(void)

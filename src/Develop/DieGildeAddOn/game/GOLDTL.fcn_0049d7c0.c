@@ -30,7 +30,7 @@ int __cdecl fcn_0049d7c0(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	Blk24 b2;
 	Blk24 b1;
 	int found;
-	char* q;
+	char* target;
 	int tries;
 	int r;
 	F8 f;
@@ -46,8 +46,8 @@ int __cdecl fcn_0049d7c0(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	f.b = 0;
 	do {
 		if (fcn_004a5e60(e, 2, f, 0, 100.0f, &found) != 0) {
-			gm_ResolveEntityById((void**) (&q), 0, 0, found);
-			if (q != 0 && fcn_004a4fb0(&v[0], &v[1], q, 0) != 0) {
+			gm_ResolveEntityById((void**) (&target), 0, 0, found);
+			if (target != 0 && fcn_004a4fb0(&v[0], &v[1], target, 0) != 0) {
 				b1.kind = 2;
 				b1.a = v[0];
 				b1.b = 1;
@@ -56,7 +56,7 @@ int __cdecl fcn_0049d7c0(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 					b2.a = v[1];
 				} else {
 					b2.kind = 4;
-					b2.a = *(int*) (q + 1);
+					b2.a = *(int*) (target + 1);
 				}
 				b2.b = 1;
 				b2.f = 0.44f;

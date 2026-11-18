@@ -7,15 +7,15 @@ void __cdecl evt_RunScript(void*);
 
 int __cdecl fcn_00429fe0(int a1, int a2, int a3)
 {
-	int v;
-	void* p;
+	int result;
+	void* script;
 
-	p = evt_LoadGfxScript(a3);
-	if (p != 0) {
-		evt_RunScript(p);
-		v = *(int*) ((char*) p + 0x100);
-		g_6791d0 = v;
-		return v;
+	script = evt_LoadGfxScript(a3);
+	if (script != 0) {
+		evt_RunScript(script);
+		result = *(int*) ((char*) script + 0x100);
+		g_6791d0 = result;
+		return result;
 	}
 	g_6791d0 = -1;
 	return -1;

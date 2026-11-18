@@ -13,15 +13,15 @@ int __cdecl fcn_005ba020(char* a1, char* a2)
 	char* owner;
 	char* next;
 	int last;
-	float v[4];
+	float pos[4];
 
 	s = *(char**) (a2 + 0x3b);
 	if (s == 0) {
 		return 0;
 	}
 	if (*(int*) (a1 + 0x61) != 0) {
-		fcn_00455350(*(int*) (a1 + 0x61), *(int*) (a1 + 0x61) + 0x4c, v);
-		if (CompareVector3WithinTolerance((float*) (*(char**) (s + 0x34) + 0x4c), v, 1350.0f) != 0 && *(int*) (s + 0x128) == 0) {
+		fcn_00455350(*(int*) (a1 + 0x61), *(int*) (a1 + 0x61) + 0x4c, pos);
+		if (CompareVector3WithinTolerance((float*) (*(char**) (s + 0x34) + 0x4c), pos, 1350.0f) != 0 && *(int*) (s + 0x128) == 0) {
 			return 1;
 		}
 	}

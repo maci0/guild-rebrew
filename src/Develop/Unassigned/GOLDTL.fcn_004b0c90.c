@@ -20,14 +20,14 @@ struct range_4b0c90 {
 
 
 /* ADDRESS: GOLDTL 0x004b0c90 */
-int __cdecl fcn_004b0c90(int a1, int a2, char* a3)
+int __cdecl fcn_004b0c90(int a1, int a2, char* text)
 {
 	int ids[2];
 	int i;
 	int n;
 	int id;
 
-	if (*a3 != '-')
+	if (*text != '-')
 		return 0;
 	{
 		int sign = -1;
@@ -37,34 +37,34 @@ int __cdecl fcn_004b0c90(int a1, int a2, char* a3)
 
 		ids[0] = 0;
 		ids[1] = 0xf;
-		a3++;
+		text++;
 		for (i = 0; i < 2; i++) {
-			if (memcmp(a3, signs[i], strlen(signs[i])) == 0)
+			if (memcmp(text, signs[i], strlen(signs[i])) == 0)
 				break;
 		}
 		if (i >= 2)
 			return 0;
 		if (i == 1)
 			sign = i;
-		a3 += strlen(names[i]);
-		if (*a3 != '_')
+		text += strlen(names[i]);
+		if (*text != '_')
 			return 0;
-		a3++;
+		text++;
 		for (i = 0; i < 2; i++) {
-			if (memcmp(a3, names[i], strlen(names[i])) == 0)
+			if (memcmp(text, names[i], strlen(names[i])) == 0)
 				break;
 		}
 		if (i >= 2)
 			return 0;
-		a3 += strlen(names[i]);
-		if (*a3 != '_')
+		text += strlen(names[i]);
+		if (*text != '_')
 			return 0;
 		id = ids[i];
 		r = (struct range_4b0c90*) names;
 		if (fcn_004f4830(id, r) == 0)
 			return 0;
-		a3++;
-		n = fcn_0064eeec(a3) * sign + r->cur;
+		text++;
+		n = fcn_0064eeec(text) * sign + r->cur;
 		n = MAX(MIN(r->hi, n), r->lo);
 	}
 	fcn_004f4860(0, id, n);

@@ -12,13 +12,10 @@ typedef struct
 extern char* lpObjektePROT;
 extern unsigned char* g_7746c8;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_774650;
-extern int g_774658;
-extern int g_7e2700;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7e2708;
 extern unsigned char* g_7e2704;
 extern int g_7746b8;
-extern int g_7746f0;
 extern unsigned char* lpGebaeudePROT;
 
 int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);

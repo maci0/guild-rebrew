@@ -9,7 +9,7 @@ typedef struct {
 
 void __cdecl fcn_00425bf0(void*, int, char*);
 
-int __cdecl SetBlocked(S40fe00** a1, char* a2)
+int __cdecl SetBlocked(S40fe00** a1, char* blocked)
 {
 	S40fe00* p;
 
@@ -18,6 +18,6 @@ int __cdecl SetBlocked(S40fe00** a1, char* a2)
 		fcn_00425bf0(*(void**) 0x6b7e98, *(int*) ((char*) *(void**) 0x6b7e98 + 0x118), (char*) 0x6769e8);
 		return 0;
 	}
-	p->b2 = *a2;
+	p->b2 = *blocked;
 	return 1;
 }

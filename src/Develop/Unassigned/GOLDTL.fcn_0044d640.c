@@ -9,7 +9,7 @@ typedef struct Vert {
 	float rest[3];
 } Vert;
 
-extern char g_662d18[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_004010b0(void*);
 char* __cdecl fcn_0064f026(char*, char*);

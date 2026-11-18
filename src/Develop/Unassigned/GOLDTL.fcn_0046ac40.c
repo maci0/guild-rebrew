@@ -22,7 +22,7 @@ extern HitObj** g_772540;
 extern char* g_1015ea0;
 
 /* ADDRESS: GOLDTL 0x0046ac40 */
-int __cdecl fcn_0046ac40(int a0, int a1)
+int __cdecl fcn_0046ac40(int x, int y)
 {
 	HitObj* o;
 	int n;
@@ -38,16 +38,16 @@ int __cdecl fcn_0046ac40(int a0, int a1)
 		if (o->f50 != 0) {
 			hit = *(int*) (o->f50 + 0x198);
 		}
-		if (a0 < o->f10 || a0 > o->f10 + o->f18) {
+		if (x < o->f10 || x > o->f10 + o->f18) {
 			continue;
 		}
-		if (a1 < o->f14 || a1 > o->f14 + o->f1c) {
+		if (y < o->f14 || y > o->f14 + o->f1c) {
 			continue;
 		}
 		if (hit != 0) {
 			continue;
 		}
-		if (a1 < o->f30 || a1 > o->f34) {
+		if (y < o->f30 || y > o->f34) {
 			continue;
 		}
 		if (o->f4c != 0 || o->f48 != 0) {

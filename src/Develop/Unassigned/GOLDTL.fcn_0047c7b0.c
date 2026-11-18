@@ -68,7 +68,7 @@ typedef struct {
 	int height;
 } TexDesc;
 
-extern int g_772608;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_772614;
 extern void* g_6b5de0;
 

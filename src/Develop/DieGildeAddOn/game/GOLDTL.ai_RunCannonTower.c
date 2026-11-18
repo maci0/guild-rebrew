@@ -3,21 +3,21 @@
 int __cdecl fcn_004a6550(int a1, int x);
 
 /* ADDRESS: GOLDTL 0x0048e780 */
-int __cdecl ai_RunCannonTower(int a1, char* a, char* b)
+int __cdecl ai_RunCannonTower(int a1, char* firstEntry, char* secondEntry)
 {
-	int x;
-	int y;
+	int firstEntity;
+	int secondEntity;
 
-	if (a[0] != 4 || b[0] != 4) {
+	if (firstEntry[0] != 4 || secondEntry[0] != 4) {
 		return 0;
 	}
-	gm_ResolveEntityById((void**) (&x), 0, 0, *(int*) (a + 4));
-	if (!x) {
+	gm_ResolveEntityById((void**) (&firstEntity), 0, 0, *(int*) (firstEntry + 4));
+	if (!firstEntity) {
 		return 0;
 	}
-	gm_ResolveEntityById((void**) (&y), 0, 0, *(int*) (b + 4));
-	if (!y) {
+	gm_ResolveEntityById((void**) (&secondEntity), 0, 0, *(int*) (secondEntry + 4));
+	if (!secondEntity) {
 		return 0;
 	}
-	return fcn_004a6550(a1, x) ? 0x42 : 0;
+	return fcn_004a6550(a1, firstEntity) ? 0x42 : 0;
 }

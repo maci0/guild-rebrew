@@ -5,8 +5,7 @@ extern int g_7746d8;
 extern int g_7746a0;
 extern int g_14abcbc;
 extern int g_14abcd8;
-extern int g_14a7b50;
-extern int g_14a7d28;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14abce4;
 extern char s_6ab3a0[];
 extern char s_6ab394[];

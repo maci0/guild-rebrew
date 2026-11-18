@@ -19,7 +19,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005cde50 */
-void __cdecl fcn_005cde50(void (*a0)(int), int a1, int a2)
+void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
 {
 	int btn[14];
 	int dlg;
@@ -37,8 +37,8 @@ void __cdecl fcn_005cde50(void (*a0)(int), int a1, int a2)
 	dlg = fcn_00470820(0, 0, s_6ac994);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 2);
-	if (a1)
-		io_AppendText(a1);
+	if (textId)
+		io_AppendText(textId);
 	else
 		io_AppendText(0xa2);
 	d2_SetForm(dlg, 1);
@@ -50,7 +50,7 @@ void __cdecl fcn_005cde50(void (*a0)(int), int a1, int a2)
 	btn[5] = fcn_0046f740(0x10f, 0x125, 0x58f, g_772514);
 	btn[6] = fcn_0046f740(0x1d9, 0x125, 0x58b, g_772514);
 	for (i = 0; i < 7; i++) {
-		if (i != 0 || a2 != 0) {
+		if (i != 0 || enableFirst != 0) {
 			id = btn[i];
 			*(int*) (g_1015ea0 + id * 0x2f4 + 0x5c) = 1;
 			*(int*) (g_1015ea0 + id * 0x2f4 + 0x1d0) = 3;
@@ -75,9 +75,9 @@ void __cdecl fcn_005cde50(void (*a0)(int), int a1, int a2)
 					break;
 				}
 			}
-			if (a0 != 0 && sel > -1 && sel < 7) {
+			if (cb != 0 && sel > -1 && sel < 7) {
 				fcn_00471af0(dlg, 0);
-				(*a0)(btn[sel + 7]);
+				(*cb)(btn[sel + 7]);
 				fcn_00471af0(dlg, 1);
 			}
 		}

@@ -8,17 +8,17 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 int __cdecl fcn_004bba20(int* a0)
 {
 	char buf[0x200];
-	char* p;
+	char* entity;
 	int len;
 	int big;
 
-	p = (char*) gm_LookupEntityRecordById(*a0);
-	if (p == 0) {
+	entity = (char*) gm_LookupEntityRecordById(*a0);
+	if (entity == 0) {
 		return 1;
 	}
 	io_FormatTextBuffer(buf, 0x12e7 + *(unsigned short*) ((char*) a0 + 4));
 	len = strlen(buf);
 	big = (unsigned int) len > 0x100u;
-	fcn_00545d40(*(int*) (p + 4), *(int*) (p + 4), buf, big, 0x603, 0);
+	fcn_00545d40(*(int*) (entity + 4), *(int*) (entity + 4), buf, big, 0x603, 0);
 	return 0;
 }

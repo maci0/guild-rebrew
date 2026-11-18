@@ -28,9 +28,7 @@ typedef struct {
 } Fade;
 // SIZE 0x54
 
-extern int g_6b5c24;
-extern int g_67530c;
-extern int g_675310;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67a370;
 
 void __cdecl ch_SetVisible(char*, int);

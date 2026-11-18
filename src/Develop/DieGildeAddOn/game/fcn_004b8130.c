@@ -10,7 +10,7 @@ extern void __cdecl fcn_004c51a0(int a, int b, char c, int d);
 extern void __cdecl io_FormatTextBuffer(char* buf, int a, int b, int c);
 extern void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
 extern double g_6629c8;
-extern double g_6640e8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 
 /* ADDRESS: GOLDTL 0x004b8130 */

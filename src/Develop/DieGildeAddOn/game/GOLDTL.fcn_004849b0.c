@@ -70,12 +70,9 @@ typedef struct Lvl {
 
 extern Ord g_100d0c0[];
 extern Seg g_100b0c0[];
-extern int g_100b0ac;
-extern int g_100b0a8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* lpObjektePROT;
 extern char* lpGebaeudePROT;
-extern float g_662910;
-extern float g_6628a0;
 extern float g_664124;
 
 char* __cdecl fcn_00502cd0(int, int, int, ...);

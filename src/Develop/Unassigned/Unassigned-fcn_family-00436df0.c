@@ -21,7 +21,7 @@ struct viewport_436df0 {
 };
 
 extern void* g_6b5de0;
-extern char g_1052be0[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_1052c00[16];
 extern float g_67a28c;
 extern float g_67a290;
@@ -36,7 +36,7 @@ float* __stdcall fcn_005ecf13(float*, float, float, float, float);
 typedef int(__stdcall* Fn3)(void* self, int a, int b);
 
 extern int g_14ce764;
-#include "GOLDTL.fcn_00436f70_gconf.h"
+extern unsigned char g_6b7ff9;
 
 /* Sets the viewport and the perspective projection, skipping whichever of
  * the two did not change since the last call. */
@@ -75,8 +75,8 @@ void __cdecl fcn_00436df0(float fov, float aspect, float width, float height, fl
 /* ADDRESS: GOLDTL 0x00436f70 */
 void __cdecl fcn_00436f70(char on)
 {
-	if (((void**)g_6b5de0) != 0 && (g_14ce764 & 0x40000) != 0 && on != g_6b7ff9) {
+	if (((void**)g_6b5de0) != 0 && (g_14ce764 & 0x40000) != 0 && on != (*(char *)&g_6b7ff9)) {
 		((Fn3) ((void**) *((void**)g_6b5de0))[0xc8 / 4])(((void**)g_6b5de0), 7, (on != 0) + 1);
-		g_6b7ff9 = on;
+		(*(char *)&g_6b7ff9) = on;
 	}
 }

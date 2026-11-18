@@ -5,7 +5,7 @@ typedef Card_1007ce0 Card;
 extern Card_1007ce0 g_1007ce0[24];
 
 /* ADDRESS: GOLDTL 0x004a7770 */
-int __cdecl fcn_004a7770(int* h, int a2, int skip, int* out)
+int __cdecl fcn_004a7770(int* h, int requireOwner, int skip, int* out)
 {
 	int counts[6];
 	int k;
@@ -19,7 +19,7 @@ int __cdecl fcn_004a7770(int* h, int a2, int skip, int* out)
 		for (g = 0; g < 6; g++) {
 			c = 0;
 			for (j = 0; j < 4; j++) {
-				if (g_1007ce0[g * 4 + j].count == k && (!a2 || g_1007ce0[g * 4 + j].owner != 0)) {
+				if (g_1007ce0[g * 4 + j].count == k && (!requireOwner || g_1007ce0[g * 4 + j].owner != 0)) {
 					c++;
 				}
 			}

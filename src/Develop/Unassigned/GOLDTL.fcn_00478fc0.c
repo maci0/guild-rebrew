@@ -19,8 +19,7 @@ typedef struct {
 } Surf;
 
 extern int g_100ef80;
-extern int g_67d964;
-extern int g_7725f8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d96c;
 extern int g_100f1bc;
 

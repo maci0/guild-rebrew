@@ -29,7 +29,7 @@ typedef struct {
 extern __int64 g_666018;
 extern char* g_14a5590;
 extern char g_7f4ca0[];
-extern int g_664398[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);

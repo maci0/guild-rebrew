@@ -1,11 +1,6 @@
-extern float g_6628a0;
-extern float g_6628cc;
-extern float g_662918;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_662930;
 extern double g_662950;
-extern float g_662a18;
-extern float g_662a68;
-extern float g_662a98;
 extern double g_662aa0;
 extern float g_662aac;
 extern float g_662ab0;
@@ -13,7 +8,6 @@ extern float g_662ab4;
 extern float g_662ab8;
 extern double g_662ac0;
 extern float g_662ac8;
-extern float g_662acc;
 extern double g_662ad0;
 
 int __cdecl rand(void);

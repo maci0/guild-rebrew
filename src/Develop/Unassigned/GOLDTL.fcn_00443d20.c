@@ -16,12 +16,7 @@ typedef struct Ctx {
 } Ctx;
 
 extern char g_6b85a0;
-extern int g_1042570;
-extern int g_1042574;
-extern int g_1042578;
-extern int g_104257c;
-extern float g_1052bc0;
-extern float g_1052bc8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67a370;
 
 void __cdecl fcn_004379a0(int, int, int, void*, void*);

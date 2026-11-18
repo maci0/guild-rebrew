@@ -32,8 +32,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char s_6ac494[];
-extern int g_100f1dc;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);

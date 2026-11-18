@@ -8,9 +8,9 @@ int __cdecl fcn_0047bdd0(int, int, int, float, unsigned char, unsigned char, uns
 
 
 /* ADDRESS: GOLDTL 0x0047cba0 */
-int __cdecl fcn_0047cba0(int a1, int a2, int a3, fcn_0047cba0_set* s, int idx)
+int __cdecl fcn_0047cba0(int x, int y, int a3, fcn_0047cba0_set* s, int idx)
 {
 	if (s == 0)
 		return 0;
-	return fcn_0047bdd0(a1, a2, s->items[idx], 1.0f, 0xc8, 0xc8, 0xc8) != 0;
+	return fcn_0047bdd0(x, y, s->items[idx], 1.0f, 0xc8, 0xc8, 0xc8) != 0;
 }

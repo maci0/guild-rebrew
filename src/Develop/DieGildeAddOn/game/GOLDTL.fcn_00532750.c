@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_77250c;
 
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 void* __cdecl fcn_00502cd0(int, int, ...);

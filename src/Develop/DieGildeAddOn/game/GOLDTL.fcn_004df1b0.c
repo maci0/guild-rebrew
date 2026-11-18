@@ -18,11 +18,8 @@ void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_00493be0(char*);
 int __cdecl fcn_004f6810(char*, unsigned int);
 void __cdecl fcn_00472640(int, int);
-extern int g_100f1dc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
-extern int g_67d370;
-extern int g_68bfb8;
-extern int g_772514;
 extern char* g_77255c;
 #ifdef REBREW_GOLD
 #define cut_SECOND_CHOICE 0

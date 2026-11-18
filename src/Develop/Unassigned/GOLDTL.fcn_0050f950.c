@@ -2,10 +2,10 @@
 
 /* ADDRESS: GOLD 0x0050c520 */
 /* ADDRESS: GOLDTL 0x0050f950 */
-int __cdecl fcn_0050f950(int a1, int a2)
+int __cdecl fcn_0050f950(int row, int column)
 {
-	if (a1 == a2) {
+	if (row == column) {
 		return 0x7f;
 	}
-	return (signed char) *(char*) (((char*)g_869480) + a1 * 768 + a2);
+	return (signed char) *(char*) (((char*)g_869480) + row * 768 + column);
 }

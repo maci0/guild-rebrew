@@ -3,7 +3,7 @@ typedef struct {
 } Anim_4e0210;
 // SIZE 0x18
 
-extern int g_772f44;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_68bfc0;
 extern char* g_9afde4;
 extern char g_772f5a;

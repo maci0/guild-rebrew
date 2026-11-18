@@ -1,13 +1,4 @@
-extern int g_7747c8;
-extern int g_77468c;
-extern int g_774688;
-extern int g_774670;
-extern int g_774658;
 extern int g_774654;
-extern int g_774650;
-extern int g_7725c8;
-extern int g_675310;
-extern int g_67530c;
 typedef unsigned char u8;
 typedef unsigned short u16;
 

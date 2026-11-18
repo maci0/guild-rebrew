@@ -17,8 +17,7 @@ typedef struct Area {
 	unsigned int d;
 } Area;
 
-extern int g_14cbca0;
-extern int g_773d38;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_9a3800[];
 extern char g_7f4ca0[];
 

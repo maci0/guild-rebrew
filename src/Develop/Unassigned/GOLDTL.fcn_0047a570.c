@@ -2,8 +2,7 @@
 #include <string.h>
 
 extern int g_67dac0;
-extern float g_6628cc;
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern double dbl_1_0;
 
 /* ADDRESS: GOLDTL 0x0047a570 */

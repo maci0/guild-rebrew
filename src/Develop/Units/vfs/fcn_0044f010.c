@@ -10,32 +10,32 @@ void __cdecl CloseVfsStream(void* f);
 /* ADDRESS: GOLDTL 0x0044f010 */
 int __cdecl fcn_0044f010(char* a1)
 {
-	char* p;
+	char* stream;
 	int local[2];
 	int result;
-	int c;
+	int marker;
 
-	p = vfs_Tfopen(a1, (char*) 0x6750e8, *(void**) &g_6b7fdc);
-	if (p == 0)
+	stream = vfs_Tfopen(a1, (char*) 0x6750e8, *(void**) &g_6b7fdc);
+	if (stream == 0)
 		return -1;
-	vfs_ReadData((char*) &local[1], 4, 1, p);
+	vfs_ReadData((char*) &local[1], 4, 1, stream);
 	for (;;) {
-		result = fcn_00430c50(p);
-		c = fcn_0044d770(p);
-		if (c == 0x2d) {
-			fcn_004011f0(p, &a1);
-			fcn_004011f0(p, &local[0]);
+		result = fcn_00430c50(stream);
+		marker = fcn_0044d770(stream);
+		if (marker == 0x2d) {
+			fcn_004011f0(stream, &a1);
+			fcn_004011f0(stream, &local[0]);
 			if (local[0] == 0xfab50005) {
-				CloseVfsStream(p);
+				CloseVfsStream(stream);
 				return result;
 			}
-			vfs_fseek(p, a1 - 4, 1);
-		} else if (c == 0x2b) {
-			CloseVfsStream(p);
+			vfs_fseek(stream, a1 - 4, 1);
+		} else if (marker == 0x2b) {
+			CloseVfsStream(stream);
 			return -1;
 		} else {
-			fcn_004011f0(p, &a1);
-			vfs_fseek(p, a1, 1);
+			fcn_004011f0(stream, &a1);
+			vfs_fseek(stream, a1, 1);
 		}
 	}
 }

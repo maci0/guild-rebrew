@@ -8,13 +8,13 @@ char* __cdecl fcn_004247c0(int dir, char* buf, int size);
 char* __cdecl fcn_00424790(char* p, char* buf, int size);
 
 /* ADDRESS: GOLDTL 0x00423f60 */
-int __cdecl fcn_00423f60(int a1, char* a2)
+int __cdecl fcn_00423f60(int a1, char* src)
 {
 	char* dest;
 
 	dest = fcn_00423a50(a1);
 	if (dest != 0) {
-		strcpy(dest, a2);
+		strcpy(dest, src);
 		return 0;
 	}
 	return -1;

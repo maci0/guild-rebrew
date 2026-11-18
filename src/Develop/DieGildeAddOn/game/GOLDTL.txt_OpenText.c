@@ -20,12 +20,9 @@ extern char g_1335120[][0x50];
 extern char* g_14a5320[];
 extern int g_14b7320[];
 extern int g_14b731c[];
-extern char g_149d120[][0x74];
-extern int g_11bb000[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_14a0b20[];
 extern char g_6b5c60[];
-extern int g_1052de0;
-extern int g_6b7f98;
 extern int g_6b7f9c;
 #include "GOLDTL.txt_OpenText_gconf.h"
 extern int g_6b7fa4;

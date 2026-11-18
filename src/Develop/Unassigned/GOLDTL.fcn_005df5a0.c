@@ -25,12 +25,12 @@ extern short g_7f4c0c;
 
 void __cdecl fcn_004c5530(Msg*);
 
-int __cdecl fcn_005df5a0(char* a1)
+int __cdecl fcn_005df5a0(char* obj)
 {
 	Msg msg;
 
 	msg.kind = 0xa4;
-	msg.owner = *(int*) (a1 + 4);
+	msg.owner = *(int*) (obj + 4);
 	msg.entity = -1;
 	msg.a = (*(int*)&g_7f4c00);
 	msg.b = (*(int*)&g_7f4c04);

@@ -6,7 +6,7 @@ typedef struct {
 // SIZE 0x19
 
 extern blk19 g_68cb58;
-extern int g_772f44;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 double __cdecl fcn_004ff040(char*);
 void __cdecl fcn_00417b50(char*, int, float, float, float, float);

@@ -19,11 +19,8 @@ struct slot_4c3e30 {
 extern char g_9bade0[];
 #include "client_types.h"
 extern cell10_fb5760 g_fb5760[0x8000];
-extern char* g_aed200;
-extern char* g_aed324;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1005780;
-extern int g_1005768;
-extern int g_1005760;
 
 
 /* ADDRESS: GOLDTL 0x004c3e30 */

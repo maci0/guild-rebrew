@@ -3,7 +3,7 @@
 
 extern Rec7dc6e0 g_7dc6e0[64];
 extern float g_6628c8;
-extern double g_662908;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00455350(char*, float*, float*);
 int __cdecl fcn_004133e0(char*, float*, float*);

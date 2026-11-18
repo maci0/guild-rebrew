@@ -12,15 +12,15 @@ typedef struct {
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00425bf0(void*, int, char*);
 
-int __cdecl fcn_0040f690(S4105a0** a1, char* a2)
+int __cdecl fcn_0040f690(S4105a0** object, char* flag)
 {
 	S4105a0* p;
 
-	p = *a1;
+	p = *object;
 	if (m_is_tracked(p) == 0) {
 		fcn_00425bf0(g_6b7e98, *(int*) ((char*) g_6b7e98 + 0x118), g_676bfc);
 		return 0;
 	}
-	p->b5 = *a2;
+	p->b5 = *flag;
 	return 0;
 }

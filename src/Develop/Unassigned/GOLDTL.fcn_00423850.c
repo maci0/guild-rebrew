@@ -4,21 +4,21 @@ extern int g_6b7d7c;
 
 int __cdecl fcn_0042a9a0(int, int);
 
-int __cdecl fcn_00423850(int* a1, int a2)
+int __cdecl fcn_00423850(int* voice, int pan)
 {
 	int r;
 
 	r = g_6b7d7c;
 	if (r != 0) {
-		if (a1 != 0) {
-			if (a2 >= 0 && a2 <= 0x7f) {
-				if (a1[0xa] != a2) {
-					a1[0xa] = a2;
-					return fcn_0042a9a0(a1[0], a2);
+		if (voice != 0) {
+			if (pan >= 0 && pan <= 0x7f) {
+				if (voice[0xa] != pan) {
+					voice[0xa] = pan;
+					return fcn_0042a9a0(voice[0], pan);
 				}
-				return a2;
+				return pan;
 			}
-			return a2;
+			return pan;
 		}
 	}
 	return r;

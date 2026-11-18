@@ -10,7 +10,7 @@ typedef struct {
 #pragma pack(pop)
 // SIZE 0xe
 
-void __cdecl fcn_00566920(char* a1)
+void __cdecl fcn_00566920(char* obj)
 {
-	*(fcn_00566920_rec*) (a1 + 0x52) = *(fcn_00566920_rec*) (a1 + 0x44);
+	*(fcn_00566920_rec*) (obj + 0x52) = *(fcn_00566920_rec*) (obj + 0x44);
 }

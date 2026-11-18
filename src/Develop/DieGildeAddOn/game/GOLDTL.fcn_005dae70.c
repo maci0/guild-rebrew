@@ -8,10 +8,8 @@ typedef struct
 } Law;
 // SIZE 0x18
 
-extern int g_100f1dc;
-extern int g_67d370;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
-extern int g_14ce8e0;
 extern unsigned short g_7f4c04;
 
 int __cdecl fcn_004e8a80(int, Law*);

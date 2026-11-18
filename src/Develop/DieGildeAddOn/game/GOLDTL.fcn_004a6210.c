@@ -38,7 +38,7 @@ int __cdecl fcn_0050b810(int, unsigned char);
 int __cdecl gm_RandomMod(int);
 
 extern float g_662cf8;
-extern float g_6628bc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x004a6210 */
 int __cdecl fcn_004a6210(char* a0, char* a1, int a2)

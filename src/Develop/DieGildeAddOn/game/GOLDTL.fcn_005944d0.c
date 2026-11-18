@@ -1,7 +1,7 @@
 extern int g_100f1dc, g_14ce8e0, g_67d370;
 /* Runs the town trade/settlement dialog: opens the window, collects the shop
    list, draws the goods rows and processes input until the player closes it. */
-extern int g_772514;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char* lpGebaeudePROT;
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } BUILDING_ROW;
 

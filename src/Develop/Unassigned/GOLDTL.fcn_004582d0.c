@@ -10,11 +10,10 @@
 
 extern unsigned char g_1040600;
 extern float* g_6b89e4;
-extern unsigned int g_104061c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern void** g_1040610[];
 extern void* g_6b5de0;
 extern unsigned long g_14ce728;
-extern float g_662a98;
 
 void __cdecl fcn_00455350(char* object, float* in, float* out);
 void* __cdecl fcn_00436930(char* o, float* r);

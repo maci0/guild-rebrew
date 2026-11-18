@@ -2,7 +2,7 @@ extern unsigned short g_6b6d20[256];
 extern unsigned short g_6b5e08[256];
 extern unsigned short g_6b6b18[256];
 extern int g_6b6714[];
-#include "GOLDTL.fcn_0041bdc0_gconf.h"
+extern unsigned int* g_6b6d18;
 
 /* ADDRESS: GOLDTL 0x0041bdc0 */
 void __cdecl fcn_0041bdc0(void)
@@ -17,5 +17,5 @@ void __cdecl fcn_0041bdc0(void)
 	for (i = -0xff; i <= 0xff; i++) {
 		g_6b6714[i] = i * i;
 	}
-	g_6b6d18 = g_6b6714;
+	(*(int * *)&g_6b6d18) = g_6b6714;
 }

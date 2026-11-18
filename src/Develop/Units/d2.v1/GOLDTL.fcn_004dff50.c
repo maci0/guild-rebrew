@@ -1,18 +1,16 @@
 extern int g_68bfc0;
 extern char* g_9afde4;
-#include "GOLDTL.fcn_004dff50_gconf.h"
+extern int g_9afde0;
 extern char g_772f5a;
 extern char g_772f5b;
 extern char g_772f5c;
 extern char g_772f5d;
 extern unsigned char g_772f58;
 extern unsigned char g_772f59;
-extern int g_772f44;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_664108;
 extern double g_662a08;
 extern double g_664180;
-extern double g_6640e8;
-extern float g_662a6c;
 
 void __cdecl d2_SetForm(int, int);
 float __cdecl gm_GetEntitySkill(char*, int);
@@ -50,12 +48,12 @@ void __cdecl fcn_004dff50(char* task)
 	if (fcn_005c6270(e, 0x16f) != 0) {
 		a = a * g_662a08;
 	}
-	if ((e == g_9afde4 && g_772f5b) || (e == g_9afde0 && g_772f5a)) {
+	if ((e == g_9afde4 && g_772f5b) || (e == (*(char * *)&g_9afde0) && g_772f5a)) {
 		a = a * g_664180;
 	}
 	if (cut_RandFloat() < a) {
 		hit = 1;
-		if ((e == g_9afde4 && g_772f5d) || (e == g_9afde0 && g_772f5c)) {
+		if ((e == g_9afde4 && g_772f5d) || (e == (*(char * *)&g_9afde0) && g_772f5c)) {
 			n = cut_RandMod(0xf) + 5;
 		} else {
 			n = cut_RandMod(0x1e) + 0xf;

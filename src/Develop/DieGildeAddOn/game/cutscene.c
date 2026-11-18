@@ -53,8 +53,7 @@ int __cdecl cut_AddParticipant(int id, int v)
 }
 
 
-extern int* g_772f40;
-extern char g_9b0e20[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl cut_RemoveParticipant(int a, int b)
 {

@@ -1,5 +1,4 @@
-extern int g_774934;
-extern int g_774930;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_005e12d0(void);
 void __cdecl fcn_00500a20(void);

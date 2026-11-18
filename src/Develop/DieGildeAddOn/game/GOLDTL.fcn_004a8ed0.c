@@ -12,7 +12,7 @@ typedef struct Ent {
 
 extern char g_7f4ca0[];
 extern char* g_77261c;
-extern float g_664154;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned short __cdecl gm_RandomMod(int n);
 typedef struct F8 {

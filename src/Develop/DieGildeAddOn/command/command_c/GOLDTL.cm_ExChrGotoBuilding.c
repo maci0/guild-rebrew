@@ -37,7 +37,6 @@ char* __cdecl fcn_0055d630(char*);
 char* __cdecl strupr(char*);
 void __cdecl ReportClientMessage(char*);
 
-extern char g_68b0d8[];
 extern char g_6756b8[];
 extern char g_675908[];
 extern char g_68b1f8[];

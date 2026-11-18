@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern unsigned char g_773d75;
-extern double g_6640e8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00507b00(int);

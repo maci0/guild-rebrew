@@ -36,8 +36,7 @@ typedef struct Slot {
 extern Obj_1038140 g_1038140[];
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
-extern int g_1015ea8;
-extern int g_1015eac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00469c40(int x, int y, int slot);
 

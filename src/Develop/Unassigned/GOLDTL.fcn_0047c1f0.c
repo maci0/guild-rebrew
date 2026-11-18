@@ -24,12 +24,7 @@ typedef struct Tex {
 	int size;
 } Tex;
 
-extern int g_772604;
-extern int g_772608;
-extern int g_7725f8;
-extern int g_7725fc;
-extern int g_67d964;
-extern int g_67d968;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Quad g_1552020[0x400];
 
 int __cdecl fcn_0047b8b0(int x, int y, int w, int h, Quad* q);

@@ -1,4 +1,4 @@
-extern char* g_6b7e94;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 

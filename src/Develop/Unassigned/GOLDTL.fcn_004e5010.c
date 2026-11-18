@@ -11,7 +11,7 @@ typedef struct
 } Player35c;
 // SIZE 0x35c
 
-extern char g_9b0e20[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl gm_LookupEntityRecordById(int);
 

@@ -1,4 +1,4 @@
-extern double g_662908;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508220(int, int*);
 int __cdecl fcn_004c4510(int*, int);

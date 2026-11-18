@@ -1,8 +1,6 @@
 typedef int(__stdcall* Fn1)(void* self);
 
-extern char* g_1040c74;
-extern char g_1040640[];
-extern void* g_104095c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned long g_14ce728;
 
 void __cdecl fcn_00452420(char* p);

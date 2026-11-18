@@ -1,6 +1,4 @@
-extern int g_773dd8;
-extern char g_7f3b40[];
-extern signed char g_7f3b00[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 // SIZE 0x3dc
 struct s_1043370 {

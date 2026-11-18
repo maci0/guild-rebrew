@@ -7,12 +7,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 extern float g_662d40[3];
-extern float g_6a2558;
-extern float g_6a2560;
-extern float g_774690;
-extern int g_6a256c;
-extern int g_6b5cc0;
-extern int g_6b5cbc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_7e3a40[3];
 extern float g_7e3a50[3];
 #include "Develop/DieGildeAddOn/game/game_player.h"

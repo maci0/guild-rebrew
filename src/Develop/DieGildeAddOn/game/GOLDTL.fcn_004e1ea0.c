@@ -15,20 +15,20 @@ void __cdecl fcn_004e6240(void*, void*, char*, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
-int __cdecl fcn_004e1ea0(char* a1)
+int __cdecl fcn_004e1ea0(char* event)
 {
 	char buf[0x200];
 	void* e1;
 	void* e2;
 	char* p;
 
-	e1 = gm_LookupEntityRecordById(*(int*) ((char*) a1 + 0x34));
-	e2 = gm_LookupEntityRecordById(*(int*) ((char*) a1 + 0x38));
+	e1 = gm_LookupEntityRecordById(*(int*) ((char*) event + 0x34));
+	e2 = gm_LookupEntityRecordById(*(int*) ((char*) event + 0x38));
 	if (e1 != 0) {
 		if (e2 != 0 && *(char*) ((char*) e1 + 9) != *(char*) ((char*) e2 + 9)) {
 			if (*(char*) ((char*) e1 + 2) == 6 || *(char*) ((char*) e1 + 2) == 7) {
 				io_FormatTextBuffer(buf, 0x11c3, *(unsigned short*) e2);
-				fcn_004e6240(e1, a1, buf, g_68cfec);
+				fcn_004e6240(e1, event, buf, g_68cfec);
 			}
 			if (*(char*) ((char*) e1 + 2) == 6 || *(char*) ((char*) e1 + 2) == 7 ||
 			    *(char*) ((char*) e1 + 2) == 5) {

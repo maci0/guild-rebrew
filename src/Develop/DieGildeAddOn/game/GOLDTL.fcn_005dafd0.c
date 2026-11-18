@@ -24,10 +24,8 @@ extern char* g_14acb58;
 extern int g_14ac6a0;
 extern char s_6acd74[];
 extern char s_6ace58[];
-extern int g_100f1dc;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
-extern int g_67d370;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004e8a80(int, Info*);

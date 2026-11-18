@@ -9,7 +9,7 @@ void __cdecl fcn_004c51f0(int, int, int, int, char, int);
 int __cdecl sprintf(char*, char*, ...);
 
 extern unsigned char g_773d75;
-extern int g_100b0a8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100e724;
 extern int g_100e764;
 extern char* lpObjektePROT;

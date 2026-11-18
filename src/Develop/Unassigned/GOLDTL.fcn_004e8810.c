@@ -15,7 +15,7 @@ void __cdecl fcn_005b2900(char*, char*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004e8810 */
-int __cdecl fcn_004e8810(unsigned char* a1)
+int __cdecl fcn_004e8810(unsigned char* request)
 {
 	char* e;
 	char* w1;
@@ -23,16 +23,16 @@ int __cdecl fcn_004e8810(unsigned char* a1)
 	struct job_4e8810* p1;
 	struct job_4e8810* p2;
 	int i;
-	int t;
+	int savedId;
 
-	e = gm_LookupEntityRecordById(*(int*) a1);
+	e = gm_LookupEntityRecordById(*(int*) request);
 	if (e == 0)
 		return 0;
-	if (*(int*) (e + 0x194) < *(int*) (a1 + 6))
+	if (*(int*) (e + 0x194) < *(int*) (request + 6))
 		return 0;
 	p1 = 0;
 	for (i = 0; i < 30; i++) {
-		if (((struct job_4e8810*)g_9a9220)[i].key == a1[4]) {
+		if (((struct job_4e8810*)g_9a9220)[i].key == request[4]) {
 			p1 = &((struct job_4e8810*)g_9a9220)[i];
 			break;
 		}
@@ -44,7 +44,7 @@ int __cdecl fcn_004e8810(unsigned char* a1)
 		return 0;
 	p2 = 0;
 	for (i = 0; i < 30; i++) {
-		if (((struct job_4e8810*)g_9a9220)[i].key == a1[5]) {
+		if (((struct job_4e8810*)g_9a9220)[i].key == request[5]) {
 			p2 = &((struct job_4e8810*)g_9a9220)[i];
 			break;
 		}
@@ -57,9 +57,9 @@ int __cdecl fcn_004e8810(unsigned char* a1)
 	fcn_005b2900(e, w1, w2);
 	w1[0x166] = p2->slot;
 	w2[0x166] = p1->slot;
-	t = p1->id;
+	savedId = p1->id;
 	p1->id = p2->id;
-	p2->id = t;
-	*(int*) (e + 0x194) -= *(int*) (a1 + 6);
+	p2->id = savedId;
+	*(int*) (e + 0x194) -= *(int*) (request + 6);
 	return 1;
 }

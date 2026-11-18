@@ -60,9 +60,9 @@ void __cdecl fcn_004d0a20(void);
 
 void __cdecl fcn_004d0c70(void)
 {
-	char* u;
+	char* unit;
 	char** name;
-	float v;
+	float length;
 	int i;
 	int k;
 
@@ -79,11 +79,11 @@ void __cdecl fcn_004d0c70(void)
 		if (k >= 6) {
 			break;
 		}
-		u = g_7e4260[i];
-		if (u != 0 && (fcn_004cef70(((Game*)g_772f24)->id, u) & 0x800) != 0) {
+		unit = g_7e4260[i];
+		if (unit != 0 && (fcn_004cef70(((Game*)g_772f24)->id, unit) & 0x800) != 0) {
 			g_9b4840[k].frame = fcn_00469c30(k * 0x80 + 0x18, 0xf, 0x5da);
 			g_9b4840[k].win = fcn_0046e940(k * 0x80, 0, 0x80, 0x4b, 0x110);
-			name = fcn_004ce610(u);
+			name = fcn_004ce610(unit);
 			if (name != 0 && *name != 0) {
 				g_9b4840[k].name = fcn_0046f740(0x54, 0xf, (int) (*name + 0xdf), g_772514);
 				fcn_00472680(g_9b4840[k].name, -2);
@@ -92,17 +92,17 @@ void __cdecl fcn_004d0c70(void)
 				((Slot*)g_1015ea0)[g_9b4840[k].label].h = 0x18;
 				((Slot*)g_1015ea0)[g_9b4840[k].label].centered = 1;
 			}
-			g_9b4840[k].unit = u;
+			g_9b4840[k].unit = unit;
 			((Win*)g_1015f40)[g_9b4840[k].win].border = 0;
 			((Win*)g_1015f40)[g_9b4840[k].win].color = 0x54;
-			g_9b4840[k].icon = fcn_0046f740(0x28, 0x11, *(int*) (u + 0x18c), g_772514);
+			g_9b4840[k].icon = fcn_0046f740(0x28, 0x11, *(int*) (unit + 0x18c), g_772514);
 			((Slot*)g_1015ea0)[g_9b4840[k].icon].shadow = 1;
 			g_9b4840[k].text = d2_ShowTxt(0, 0, &(*(char*)g_6b5c60), g_772514);
 			((Slot*)g_1015ea0)[g_9b4840[k].text].color = 0x54;
 			((Slot*)g_1015ea0)[g_9b4840[k].text].h = 0x80;
 			((Slot*)g_1015ea0)[g_9b4840[k].text].centered = 1;
-			v = (float)(fcn_00507e30((char*) u, 3));
-			fcn_00534160(0x24, 0x41, (int)v, 0x4df);
+			length = (float)(fcn_00507e30((char*) unit, 3));
+			fcn_00534160(0x24, 0x41, (int)length, 0x4df);
 			k++;
 		}
 	}

@@ -12,7 +12,7 @@
 
 #include <math.h>
 
-extern int g_6b8008;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* Native record strides: the walk frame is 0x58 bytes, the building frame
  * 0xc0. Indexing through these types is what turns the multiplies into the

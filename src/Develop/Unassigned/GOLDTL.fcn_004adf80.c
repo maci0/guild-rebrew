@@ -2,8 +2,7 @@
 
 extern int g_67fbac;
 extern Entry2c* g_67fbb4;
-extern int g_7728cc;
-extern int g_7728c8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 /* ADDRESS: GOLDTL 0x004adf80 */

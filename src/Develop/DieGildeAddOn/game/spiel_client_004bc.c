@@ -15,7 +15,7 @@ char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 char* __cdecl fcn_0040c120(char*, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004bc540 */
-void __cdecl fcn_004bc540(char** a1)
+void __cdecl fcn_004bc540(char** state)
 {
 	int x;
 	int g;
@@ -26,34 +26,34 @@ void __cdecl fcn_004bc540(char** a1)
 	int n;
 	char* o;
 
-	if (*(int*) (a1[0] + 0x128) != 0)
+	if (*(int*) (state[0] + 0x128) != 0)
 		return;
 	if (gm_RandomMod(0x64) > 0x1e) {
-		if (a1[1] == 0) {
+		if (state[1] == 0) {
 			if (gm_RandomMod(0x64) > 0x32)
-				fcn_00406340(a1[0], "bewegung/stehen", gm_RandomMod(3) + 1);
+				fcn_00406340(state[0], "bewegung/stehen", gm_RandomMod(3) + 1);
 			else
-				fcn_00406340(a1[0], "bewegung/bellen", gm_RandomMod(3) + 1);
+				fcn_00406340(state[0], "bewegung/bellen", gm_RandomMod(3) + 1);
 		} else {
-			fcn_00406340(a1[0], "bewegung/stehen", gm_RandomMod(3) + 1);
+			fcn_00406340(state[0], "bewegung/stehen", gm_RandomMod(3) + 1);
 		}
 		return;
 	}
 	g = *(int*) (((char*)g_67a370) + 0xb0);
 	n = gm_RandomMod(3) + 1;
-	n = fcn_004bc8a0((int*) (a1 + 4), n, pts[0]);
+	n = fcn_004bc8a0((int*) (state + 4), n, pts[0]);
 	if (n <= 0)
 		return;
 	for (pt = pts[0]; n != 0; n--, pt += 4) {
 		if (fcn_0045b990(g, pt, &x, &y, &z) != 0) {
-			o = fcn_0040c120(a1[0], 0x2d, x, y, 0);
+			o = fcn_0040c120(state[0], 0x2d, x, y, 0);
 			strcpy(o + 0x70, "anm_UpdateCat");
 		}
 	}
 }
 
 /* ADDRESS: GOLDTL 0x004bc6b0 */
-void __cdecl fcn_004bc6b0(char** a1)
+void __cdecl fcn_004bc6b0(char** state)
 {
 	int x;
 	int g;
@@ -64,23 +64,23 @@ void __cdecl fcn_004bc6b0(char** a1)
 	int n;
 	char* o;
 
-	if (*(int*) (a1[0] + 0x128) != 0)
+	if (*(int*) (state[0] + 0x128) != 0)
 		return;
 	if (gm_RandomMod(0x64) > 0x14) {
 		if (gm_RandomMod(0x64) > 0x32)
-			fcn_00406340(a1[0], "bewegung/stehen", gm_RandomMod(3) + 1);
+			fcn_00406340(state[0], "bewegung/stehen", gm_RandomMod(3) + 1);
 		else
-			fcn_00406340(a1[0], "bewegung/fressen", gm_RandomMod(3) + 1);
+			fcn_00406340(state[0], "bewegung/fressen", gm_RandomMod(3) + 1);
 		return;
 	}
 	g = *(int*) (((char*)g_67a370) + 0xb0);
 	n = gm_RandomMod(3) + 1;
-	n = fcn_004bc8a0((int*) (a1 + 4), n, pts[0]);
+	n = fcn_004bc8a0((int*) (state + 4), n, pts[0]);
 	if (n <= 0)
 		return;
 	for (pt = pts[0]; n != 0; n--, pt += 4) {
 		if (fcn_0045b990(g, pt, &x, &y, &z) != 0) {
-			o = fcn_0040c120(a1[0], 0x2d, x, y, 0);
+			o = fcn_0040c120(state[0], 0x2d, x, y, 0);
 			strcpy(o + 0x70, "anm_UpdateSheep");
 		}
 	}

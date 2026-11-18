@@ -5,49 +5,49 @@ int __cdecl fcn_0055c0a0(char* a, char* b);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x004aa7c0 */
-int __cdecl fcn_004aa7c0(char* e, char* res, char* out)
+int __cdecl fcn_004aa7c0(char* entity, char* res, char* out)
 {
 	int d[32];
 	int ids[32];
 	int vb[2]; /* holds the double result of fcn_0050f980; an aligned double local forces an EBP frame */
-	int k;
+	int remaining;
 	int i;
-	int n;
+	int count;
 	int r;
-	char* p;
+	char* target;
 
-	if (*(int*) (e + 0x194) < 2) {
+	if (*(int*) (entity + 0x194) < 2) {
 		return 0;
 	}
-	n = fcn_004f6040(ids, d, *(unsigned short*) e);
-	if (!n) {
+	count = fcn_004f6040(ids, d, *(unsigned short*) entity);
+	if (!count) {
 		return 0;
 	}
-	i = gm_RandomMod(n);
-	k = n;
+	i = gm_RandomMod(count);
+	remaining = count;
 	do {
-		p = gm_LookupEntityRecordById(ids[i]);
-		if (!p) {
+		target = gm_LookupEntityRecordById(ids[i]);
+		if (!target) {
 			return 0;
 		}
-		if (!fcn_0055c0a0(e, p)) {
+		if (!fcn_0055c0a0(entity, target)) {
 			return 0;
 		}
-		*(double*) vb = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) p, 1);
+		*(double*) vb = fcn_0050f980(*(unsigned short*) entity, *(unsigned short*) target, 1);
 		r = gm_RandomMod(0x3d) & 0xffff;
 		if ((double) r + 20.0 > *(double*) vb) {
 			r = gm_RandomMod(4) & 0xffff;
 			if (d[i] < r + 2) {
 				out[0] = 7;
-				*(int*) (out + 4) = *(int*) (p + 4);
-				*(int*) (out + 0x10) = *(unsigned short*) p;
+				*(int*) (out + 4) = *(int*) (target + 4);
+				*(int*) (out + 0x10) = *(unsigned short*) target;
 				*(int*) (res + 8) = (gm_RandomMod(*(unsigned short*) &d[i]) & 0xffff) + 1;
 				*(int*) (res + 0x10) = gm_RandomMod(3) & 0xffff;
 				return 1;
 			}
 		}
-		k--;
-		i = (i + 1) % n;
-	} while (k);
+		remaining--;
+		i = (i + 1) % count;
+	} while (remaining);
 	return 0;
 }

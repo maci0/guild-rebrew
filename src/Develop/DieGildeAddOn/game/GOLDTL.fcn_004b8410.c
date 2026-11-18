@@ -17,7 +17,7 @@ int __cdecl fcn_004b8410(void* a1)
 {
 	char buf[0x400];
 	int d2;
-	unsigned short w1;
+	unsigned short index;
 	void* p;
 	void* e;
 	int n;
@@ -30,10 +30,10 @@ int __cdecl fcn_004b8410(void* a1)
 		return 0x400;
 	}
 	d2 = 0x600c00;
-	if (fcn_004a55c0(p, 1, &d2, 0.0f, 100.0f, &w1) == 0) {
+	if (fcn_004a55c0(p, 1, &d2, 0.0f, 100.0f, &index) == 0) {
 		return 0x400;
 	}
-	e = (void*) (g_7f4ca0 + 540 * w1);
+	e = (void*) (g_7f4ca0 + 540 * index);
 	if (e == 0) {
 		return 0x400;
 	}

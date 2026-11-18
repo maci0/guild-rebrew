@@ -1,5 +1,5 @@
 #include <string.h>
-extern char* g_6b7fd0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_6b7fd8;
 
 static __inline void fill0_42e180(char* dst, int size)

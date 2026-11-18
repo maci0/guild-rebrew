@@ -21,14 +21,14 @@ int __cdecl CharacterSitsDown(char** object)
 
 
 
-int __cdecl FindInCharacterName(char** a1, int* a2)
+int __cdecl FindInCharacterName(char** character, int* needle)
 {
 	char* p;
 
-	p = *a1;
+	p = *character;
 	if (p == 0) {
 		fcn_00425bf0(*(void**) 0x6b7e98, *(int*) ((char*) *(void**) 0x6b7e98 + 0x118), (char*) 0x676384);
 		return 0;
 	}
-	return strstr(p + 8, (char*) *a2) != 0;
+	return strstr(p + 8, (char*) *needle) != 0;
 }

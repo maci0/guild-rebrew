@@ -8,7 +8,7 @@ float __cdecl fcn_0050bb50(int id, unsigned char a);
 void __cdecl fcn_0050bc10(int, int, char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-int __cdecl fcn_005a30c0(int x, int y, int layer, int a4, int a5)
+int __cdecl fcn_005a30c0(int x, int y, int layer, int itemId, int a5)
 {
 	char text[0x40];
 	int r;
@@ -16,10 +16,10 @@ int __cdecl fcn_005a30c0(int x, int y, int layer, int a4, int a5)
 	float f;
 
 	fcn_0046f740(x, y, 0x525, layer);
-	r = fcn_0046f740(x + 2, y + 2, a4 + 0xdf, layer);
+	r = fcn_0046f740(x + 2, y + 2, itemId + 0xdf, layer);
 	fcn_0046f740(x + 3, y + 0x35, 0x746, layer);
 	*(int*) (g_1015ea0 + r * 756 + 0x5c) = 1;
-	f = fcn_0050bb50(a4, a5);
+	f = fcn_0050bb50(itemId, a5);
 	fcn_0050bc10((int) f, a5, text);
 	w = d2_ShowTxt(x + 7, y + 0x3a, text, g_772514);
 	*(int*) (g_1015ea0 + w * 756 + 0x18) = 0x24;

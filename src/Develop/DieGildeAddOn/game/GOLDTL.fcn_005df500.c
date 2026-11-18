@@ -21,7 +21,7 @@ char* __cdecl fcn_005bdc30(int, Req*, char*, int, int);
 char* __cdecl gm_SearchTable67(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
-int __cdecl fcn_005df500(char* e, char* a2)
+int __cdecl fcn_005df500(char* e, char* request)
 {
 	Req req;
 	char* r;
@@ -36,7 +36,7 @@ int __cdecl fcn_005df500(char* e, char* a2)
 		r = fcn_005bdc30(1, &req, g_14a558c, 0, 0);
 	}
 	else {
-		r = gm_SearchTable67(*(int*) (a2 + 4));
+		r = gm_SearchTable67(*(int*) (request + 4));
 	}
 	if (r == 0) {
 		return 0;

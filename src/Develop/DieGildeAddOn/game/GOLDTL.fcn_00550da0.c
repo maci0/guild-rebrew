@@ -17,10 +17,10 @@ typedef struct
 int __cdecl gm_RandomMod(int);
 void __cdecl fcn_00546190(void*);
 
-void __cdecl fcn_00550da0(void* a1)
+void __cdecl fcn_00550da0(void* record)
 {
-	*(S14b*) ((char*) a1 + 0x52) = *(S14b*) ((char*) a1 + 0x44);
+	*(S14b*) ((char*) record + 0x52) = *(S14b*) ((char*) record + 0x44);
 	if ((short) gm_RandomMod(2) != 0) {
-		fcn_00546190(a1);
+		fcn_00546190(record);
 	}
 }

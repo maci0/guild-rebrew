@@ -27,8 +27,7 @@ extern unsigned char g_773d75;
 extern trade_868080 g_868080[];
 extern unsigned char g_6a375c;
 extern char g_6aae78[];
-extern int g_100f1dc;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
 int __cdecl gm_AccumulateTyped2(Ent5a92*);

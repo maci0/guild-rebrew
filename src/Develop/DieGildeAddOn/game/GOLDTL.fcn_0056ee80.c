@@ -17,7 +17,7 @@ extern char s_6a6a40[];
 
 extern char s_68be9c[];
 extern char s_68bea4[];
-extern double g_6629f8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_665ed0;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);

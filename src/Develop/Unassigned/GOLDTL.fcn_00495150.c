@@ -5,14 +5,14 @@ extern int g_100af80[];
 
 /* ADDRESS: GOLD 0x00495790 */
 /* ADDRESS: GOLDTL 0x00495150 */
-int __cdecl fcn_00495150(int a1)
+int __cdecl fcn_00495150(int value)
 {
 	int i;
 	int n;
 
 	n = g_1008524;
 	for (i = 0; i < n; i++) {
-		if (g_100af80[i] == a1) {
+		if (g_100af80[i] == value) {
 			return 1;
 		}
 	}

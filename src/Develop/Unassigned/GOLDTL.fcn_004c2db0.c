@@ -1,9 +1,9 @@
 
 /* ADDRESS: GOLDTL 0x004c2db0 */
-int __cdecl fcn_004c2db0(unsigned a1, int a2)
+int __cdecl fcn_004c2db0(unsigned value, int mode)
 {
-	if (a2 == 1) {
-		return (a1 & 1) - 2;
+	if (mode == 1) {
+		return (value & 1) - 2;
 	}
-	return (int) (a1 % 3) - 5;
+	return (int) (value % 3) - 5;
 }

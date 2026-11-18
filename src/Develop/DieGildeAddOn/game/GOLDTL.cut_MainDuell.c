@@ -16,7 +16,6 @@ typedef struct {
 } Chunk24;
 
 extern int g_772f3c;
-extern int g_772f44;
 extern unsigned char g_772f58;
 extern unsigned char g_772f59;
 extern unsigned char g_772f5a;

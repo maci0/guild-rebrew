@@ -1,4 +1,4 @@
-extern char g_679060[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl io_FormatTextBuffer(char*, char*, int);
 int __cdecl fcn_005dafd0(int, int);

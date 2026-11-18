@@ -20,7 +20,7 @@ struct rec {
 extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 extern unsigned char g_773d75;
-extern char g_8680b4[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);

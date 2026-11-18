@@ -1,7 +1,5 @@
-extern char* g_772eb4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned short* g_772e9c;
-extern char g_9b0e20[];
-extern double g_662ad8;
 
 float* __cdecl fcn_004d3c60(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);

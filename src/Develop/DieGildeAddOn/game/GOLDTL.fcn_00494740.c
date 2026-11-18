@@ -1,8 +1,7 @@
 #include <string.h>
 
 extern float g_664320;
-extern float g_662a3c;
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 float __cdecl fcn_00507e70(char* a, char* b, int c);
 float __cdecl gm_RandomFloat01(void);

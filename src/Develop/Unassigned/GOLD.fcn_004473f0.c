@@ -1,4 +1,3 @@
-extern char* g_5fb5b0;
 extern char g_fc2700[];
 extern char* g_fc28f4;
 extern int g_6b8300;

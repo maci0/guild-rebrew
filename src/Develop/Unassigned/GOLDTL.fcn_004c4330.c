@@ -20,11 +20,8 @@ typedef struct pkt99 {
 typedef cell10_fb5760 cell10;
 /* SIZE 0xa */
 
-extern int g_14cbcb0;
-extern int g_1005768;
-extern int g_14cbca0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char* g_14cbca8;
-extern int g_1005760;
 extern int g_aecde0;
 extern int g_aed330;
 extern pkt99 g_aed740[0x8000];

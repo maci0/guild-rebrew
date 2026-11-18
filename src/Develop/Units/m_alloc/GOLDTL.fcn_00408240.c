@@ -2,7 +2,7 @@
 
 void __cdecl m_FreeTracked(int);
 
-void __cdecl fcn_00408240(int a1)
+void __cdecl fcn_00408240(int allocation)
 {
-	m_FreeTracked(a1);
+	m_FreeTracked(allocation);
 }

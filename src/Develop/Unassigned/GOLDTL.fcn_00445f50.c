@@ -4,9 +4,8 @@
 #include "client_types.h"
 
 extern float g_6628a8;
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67a370;
-extern int g_6b89c0;
 extern VECTOR3 g_6b86c4;
 extern Pal_1041d20 g_1041d20[6];
 typedef struct {

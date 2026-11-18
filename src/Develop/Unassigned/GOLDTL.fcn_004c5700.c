@@ -16,17 +16,17 @@ typedef struct
 
 int __cdecl fcn_00500cb0(void*, char*);
 
-int __cdecl fcn_004c5700(Quad4* a1)
+int __cdecl fcn_004c5700(Quad4* stamp)
 {
 	char buf[0x9c];
 
-	if (fcn_00500cb0(a1, ((char*)&g_7f4c00)) == 0) {
+	if (fcn_00500cb0(stamp, ((char*)&g_7f4c00)) == 0) {
 		return -1;
 	}
 	buf[0] = 0x1e;
-	*(int*) (buf + 0x10) = a1->a;
-	*(int*) (buf + 0x14) = a1->b;
-	*(int*) (buf + 0x18) = a1->c;
-	*(short*) (buf + 0x1c) = a1->d;
+	*(int*) (buf + 0x10) = stamp->a;
+	*(int*) (buf + 0x14) = stamp->b;
+	*(int*) (buf + 0x18) = stamp->c;
+	*(short*) (buf + 0x1c) = stamp->d;
 	return fcn_004c4330(buf);
 }

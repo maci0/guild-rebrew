@@ -5,7 +5,7 @@ extern unsigned char** g_7749e4;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_774964;
 extern unsigned char g_773d75;
-extern int g_100f1dc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00500cb0(void*, void*);
 int __cdecl gm_LookupEntityRecordById(int);

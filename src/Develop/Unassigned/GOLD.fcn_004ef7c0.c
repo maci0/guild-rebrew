@@ -1,4 +1,4 @@
-extern unsigned char* g_7e3f30;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl gv_CheckSlotActive(void*, int);
 int __cdecl fcn_004f13d0(unsigned char*);
 

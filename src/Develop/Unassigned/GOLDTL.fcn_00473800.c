@@ -30,22 +30,15 @@ typedef struct {
 	int h;
 } Ctx;
 
-extern int g_7725c8;
-extern int g_7725fc;
-extern int g_67d964;
-extern int g_7725f8;
-extern int g_67d968;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d8cc;
 extern short g_7725c4;
 extern char* g_7725c0;
 #include "client_types.h"
 extern Anim_100e7a0 g_100e7a0[0x30];
-extern int g_67d378;
-extern int g_67d398;
 
 extern char* g_772500;
 extern int g_67d3ac;
-extern int g_1015ea4;
 extern int g_772568;
 extern char* g_14a567c;
 

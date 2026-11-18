@@ -2,14 +2,14 @@ extern char g_68b400[];
 
 /* ADDRESS: GOLD 0x004cd9d0 */
 /* ADDRESS: GOLDTL 0x004ce590 */
-int __cdecl fcn_004ce590(int a1)
+int __cdecl fcn_004ce590(int value)
 {
-	int i;
-	int a;
+	int index;
+	int cursor;
 
-	for (i = 0, a = (int) g_68b400; a < (int) g_68b400 + 0x398; a += 0x5c, i++) {
-		if (*(int*) a == a1) {
-			return (int) ((int) g_68b400 + i * 92);
+	for (index = 0, cursor = (int) g_68b400; cursor < (int) g_68b400 + 0x398; cursor += 0x5c, index++) {
+		if (*(int*) cursor == value) {
+			return (int) ((int) g_68b400 + index * 92);
 		}
 	}
 	return 0;

@@ -7,7 +7,7 @@ int __cdecl fcn_004ef760(void*, void*);
 void* __cdecl fcn_004ef7c0(void*, void*, void*, int (__cdecl*)(void*, void*), int);
 int __cdecl gm_SubObjectNoKill(int, int, int);
 int __cdecl gm_AddObjekt(int, int, int);
-extern unsigned char* g_7e3f30;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLD 0x004f0ed0 */
 int __cdecl fcn_004f0ed0(char* request)

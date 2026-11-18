@@ -1,5 +1,5 @@
 extern char* g_1015ea0;
-extern int g_67d370;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_0050dfd0(char*, int);
 int __cdecl gm_GetMsgField(char*, char*);

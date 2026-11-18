@@ -19,7 +19,7 @@ void __cdecl fcn_00471e30(int);
 
 
 /* ADDRESS: GOLDTL 0x004dc230 */
-int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short* a3, int* a4)
+int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short* a3, int* out)
 {
 	int aux;
 	int h;
@@ -29,7 +29,7 @@ int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short*
 	int w;
 	int res;
 
-	*a4 = 0;
+	*out = 0;
 	h = fcn_00470820(0, 0, g_68c340);
 	fcn_00471d80(h, 1);
 	d2_SetForm(h, 0);

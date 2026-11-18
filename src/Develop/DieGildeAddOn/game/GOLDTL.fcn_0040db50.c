@@ -7,13 +7,13 @@ extern char g_6761ec[];
 extern char* g_6b7e98;
 void __cdecl fcn_00425bf0(void*, int, char*);
 
-int __cdecl KillCharacterAnimations(char** a1)
+int __cdecl KillCharacterAnimations(char** target)
 {
 	char* p;
 	char* q;
 	char* e;
 
-	p = *a1;
+	p = *target;
 	if (p == 0) {
 		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), g_6761ec);
 	} else {

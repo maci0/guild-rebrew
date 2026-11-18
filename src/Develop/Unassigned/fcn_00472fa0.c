@@ -9,12 +9,12 @@ int __cdecl d2_GetResourceData(int a);
 void __cdecl fcn_0047cba0(int a1, int a2, int a3, int a4, int a5);
 
 /* ADDRESS: GOLDTL 0x00472fa0 */
-void __cdecl fcn_00472fa0(int a1, int a2, int a3)
+void __cdecl fcn_00472fa0(int a1, int a2, int resourceId)
 {
 	F472Table* t;
-	int v;
+	int resource;
 
 	t = (F472Table*) (0x1015f40 + 0x3cc * *(int*) 0x772514);
-	v = d2_GetResourceData(a3);
-	fcn_0047cba0(a1, a2, t->f38, v, *(int*) 0x772568);
+	resource = d2_GetResourceData(resourceId);
+	fcn_0047cba0(a1, a2, t->f38, resource, *(int*) 0x772568);
 }

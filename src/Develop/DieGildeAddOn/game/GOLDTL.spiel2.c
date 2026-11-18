@@ -30,7 +30,7 @@ typedef struct {
 #pragma pack(pop)
 
 void __cdecl gm_KillAllSpieler(void);
-extern int g_query_limit;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl m_FreeTracked(void*);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
@@ -77,7 +77,6 @@ int __cdecl gm_RemoveLinkedNodeById(int*, int);
 void __cdecl amt_ClearEntityLinks(short*);
 void __cdecl gm_InitEntityIfValid(void* arg1);
 void __cdecl gm_KillSpieler(unsigned int idx, int param);
-extern int g_citizen_count;
 extern int g_next_family_index;
 extern int g_dynasty_generation_counter;
 extern unsigned char g_entity_base[1];
@@ -102,7 +101,6 @@ extern const float g_const_0_0; /* 0x100256cc */
 extern float g_graveyard_const_c; /* 0x100257c8 */
 extern double g_const_half; /* 0x100257d0 */
 double __cdecl eval_ObjektPreis2Credits(int, int);
-extern unsigned char g_current_season;
 int __cdecl gm_SumBuildingProductionValues(char*, int);
 int __cdecl gm_EntityQuerySum(int);
 int __cdecl compute_size(char*); /* 0x10019d00 */
@@ -119,8 +117,6 @@ extern float g_const_neg_1_0;
  * pointer or NULL. The imported body had leaked the server VA
  * 0x1009b770 — the reference folds 0x85ab90 into the lea chain. */
 
-extern char g_85ab90[];
-extern char g_85ab90[];
 // gm_FindSlotById
 
 

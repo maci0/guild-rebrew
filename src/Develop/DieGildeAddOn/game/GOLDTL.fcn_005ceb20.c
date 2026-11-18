@@ -50,10 +50,7 @@ extern char g_7f4ca0[];
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 extern unsigned char* lpGebaeudePROT;
-extern int g_772514;
-extern int g_100f1dc;
-extern int g_67d370;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 extern char* g_7746cc;
 extern char s_6aca6c[];

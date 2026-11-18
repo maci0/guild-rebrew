@@ -2,10 +2,9 @@
 
 
 extern int g_772f3c;
-extern int g_68bfb8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/cutscene_clock.h"
 #include "client_dialog_state.h"
-extern int* g_772f40;
 
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_004cfca0(void);

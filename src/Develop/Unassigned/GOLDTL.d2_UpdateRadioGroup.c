@@ -1,6 +1,5 @@
 #include "client_data.h"
 extern Group_102cbc4 g_102cbc4[8];
-extern double g_662908;
 extern int g_14ce904, g_14ce900, g_67d370, g_67d38c, g_14ce8d8, g_14ce8cc;
 void __cdecl d2_SelectRadioGroup(int, int); int __cdecl fcn_004125c0(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"

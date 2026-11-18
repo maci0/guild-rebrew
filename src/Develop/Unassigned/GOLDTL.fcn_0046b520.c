@@ -1,4 +1,4 @@
-extern int g_67d380;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include <string.h>
 
 void* __cdecl d2_GetResourceData(int idx);

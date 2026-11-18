@@ -17,7 +17,7 @@ typedef struct {
 } Window;
 
 extern int g_774818;
-extern int g_7725c8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6a3550[];
 #include "client_types.h"
 extern Page_1038144 g_1038144[];
@@ -25,8 +25,6 @@ extern Win_1015f40 g_1015f40[0x60];
 extern int g_1040490;
 extern int g_1040494;
 extern char g_7e25a0[];
-extern int g_774934;
-extern int g_774930;
 extern char* g_7747b8;
 extern char g_7e2080[];
 extern int g_774820;

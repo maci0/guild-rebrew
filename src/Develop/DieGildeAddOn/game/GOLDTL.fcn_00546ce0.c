@@ -5,11 +5,11 @@ void __cdecl fcn_00546be0(void*);
 void* __cdecl he_fn_Handlung(void);
 
 /* ADDRESS: GOLDTL 0x00546ce0 */
-void __cdecl fcn_00546ce0(unsigned short* a1)
+void __cdecl fcn_00546ce0(unsigned short* record)
 {
 	void* entry;
 
-	entry = fcn_005463a0(1, 2, *a1);
+	entry = fcn_005463a0(1, 2, *record);
 	while (entry != 0) {
 		fcn_00546be0(entry);
 		entry = he_fn_Handlung();

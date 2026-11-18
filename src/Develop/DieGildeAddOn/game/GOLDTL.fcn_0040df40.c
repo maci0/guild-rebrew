@@ -21,14 +21,14 @@ int __cdecl CharacterSitting(char** object)
 
 
 
-int __cdecl GetCharacterSubObjectHandle(char** a1, int* a2)
+int __cdecl GetCharacterSubObjectHandle(char** character, int* selector)
 {
 	char* p;
 
-	p = *a1;
+	p = *character;
 	if (p == 0) {
 		fcn_00425bf0(*(void**) 0x6b7e98, *(int*) ((char*) *(void**) 0x6b7e98 + 0x118), (char*) 0x6762fc);
 		return 0;
 	}
-	return fcn_00445600(*(int*) (p + 0x34), 0x140, 0, *a2);
+	return fcn_00445600(*(int*) (p + 0x34), 0x140, 0, *selector);
 }

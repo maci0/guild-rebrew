@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-extern int g_1041d08;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct VFS_DIR VFS_DIR;
 extern VFS_DIR* g_6b7fdc;
 extern char g_6b85c0[];

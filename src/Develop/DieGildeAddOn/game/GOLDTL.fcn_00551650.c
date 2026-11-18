@@ -9,16 +9,16 @@ struct unit* __cdecl fcn_005463a0(int n, ...);
 /* ADDRESS: GOLDTL 0x00551650 */
 void __cdecl fcn_00551650(char* e)
 {
-	int v;
+	int entry;
 
-	v = (int) fcn_005463a0(2, 0, 0x5e, 2, (unsigned int) *(unsigned short*) (e + 8));
-	while (v != 0) {
-		if (v != (int) e) {
+	entry = (int) fcn_005463a0(2, 0, 0x5e, 2, (unsigned int) *(unsigned short*) (e + 8));
+	while (entry != 0) {
+		if (entry != (int) e) {
 			*(pos14_7f4c00*) (e + 0x52) = g_7f4c00;
 			*(int*) (e + 0x84) = fcn_004c5620(-1, (unsigned char*) e);
 			return;
 		}
-		v = (int) he_fn_Handlung();
+		entry = (int) he_fn_Handlung();
 	}
 	*(int*) (e + 0x70) = 0;
 	*(char*) (e + 0xb8) = 0;

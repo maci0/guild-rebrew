@@ -7,12 +7,12 @@
 
 void __cdecl fcn_004c4330(void*);
 
-void __cdecl fcn_004c6be0(char* a1, char* a2)
+void __cdecl fcn_004c6be0(char* a1, char* src)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x5e;
 	*(int*) (buf + 0x14) = *(int*) (a1 + 1);
-	memcpy(buf + 0x18, a2, 0x1c);
+	memcpy(buf + 0x18, src, 0x1c);
 	fcn_004c4330(buf);
 }

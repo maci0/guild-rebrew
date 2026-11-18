@@ -2,8 +2,7 @@
 
 
 #include "Develop/Units/d3/d3_camera.h"
-extern int g_6b5cbc;
-extern int g_6b5cc0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00433780(void*);
 void __cdecl fcn_00412cf0(char*, float*, float*, int, int);

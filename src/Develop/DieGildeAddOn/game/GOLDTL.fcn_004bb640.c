@@ -28,16 +28,16 @@ int __cdecl fcn_004bb640(int* a1)
 	stamp14 st;
 	struct date_4bb640 d;
 	char buf[0x100];
-	unsigned char* e;
+	unsigned char* entity;
 
-	e = gm_LookupEntityRecordById(a1[0]);
-	if (e == 0)
+	entity = gm_LookupEntityRecordById(a1[0]);
+	if (entity == 0)
 		return 1;
-	if (*(int*) (e + 0x2c) == 0)
+	if (*(int*) (entity + 0x2c) == 0)
 		return 0x400;
 	st = (*(stamp14*)&g_7f4c00);
 	fcn_00500d60(&st, &d);
 	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, fcn_004fe330(&d) + 0x4c);
-	fcn_00545d40(*(int*) (e + 4), *(int*) (e + 4), buf, strlen(buf) > 0x100, 0x603, 0);
+	fcn_00545d40(*(int*) (entity + 4), *(int*) (entity + 4), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

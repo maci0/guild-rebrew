@@ -8,12 +8,7 @@ typedef struct {
 	float v;
 } Vtx47ba20;
 
-extern int g_772604;
-extern int g_772608;
-extern int g_7725f8;
-extern int g_7725fc;
-extern int g_67d964;
-extern int g_67d968;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_0047c560(int a, int b, int c);
 int __cdecl fcn_0047b8b0(int x, int y, int w, int h, Vtx47ba20* v);

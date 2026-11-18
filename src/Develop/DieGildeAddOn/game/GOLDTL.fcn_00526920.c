@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern int g_7e2700;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7e46ac;
 extern char* g_7e2704;
 extern char* g_7e2708;
@@ -16,10 +16,7 @@ typedef struct {
 extern char* g_7746c4;
 extern char* g_7746c8;
 extern char* g_7746cc;
-extern int g_774650;
 #include "client_dialog_state.h"
-extern int g_774658;
-extern int g_774670;
 extern char g_7f4e51[];
 extern char g_7f4ca4[];
 extern char g_1043690[];

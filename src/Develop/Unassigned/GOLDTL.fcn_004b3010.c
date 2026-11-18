@@ -1,11 +1,9 @@
 #include <string.h>
 
-extern int g_1052de0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_14a5320[];
-extern int g_67fca0;
 extern unsigned char g_773d75;
 extern char g_868080[];
-extern char g_1007ba0[];
 
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);

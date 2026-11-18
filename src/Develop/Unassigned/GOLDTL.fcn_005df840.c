@@ -22,12 +22,12 @@ typedef struct {
 
 void __cdecl fcn_004c5530(Msg*);
 
-int __cdecl fcn_005df840(char* a1)
+int __cdecl fcn_005df840(char* subject)
 {
 	Msg msg;
 
 	msg.kind = 0x82;
-	msg.owner = *(int*) (a1 + 4);
+	msg.owner = *(int*) (subject + 4);
 	msg.entity = -1;
 	msg.flag = 2;
 	msg.mode = 0;
@@ -37,7 +37,7 @@ int __cdecl fcn_005df840(char* a1)
 	msg.speed = 0x18;
 	fcn_004c5530(&msg);
 	msg.kind = 0x82;
-	msg.owner = *(int*) (a1 + 4);
+	msg.owner = *(int*) (subject + 4);
 	msg.entity = -1;
 	msg.flag = 2;
 	msg.mode = 3;

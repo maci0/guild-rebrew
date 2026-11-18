@@ -16,7 +16,7 @@ typedef struct {
 } Req;
 
 extern __int64 g_666018;
-extern int g_66601c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 extern unsigned short g_7f4c04;

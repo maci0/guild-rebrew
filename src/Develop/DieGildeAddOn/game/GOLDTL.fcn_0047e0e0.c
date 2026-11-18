@@ -20,7 +20,7 @@ typedef struct Ware {
 } Ware;
 
 extern Seg g_100b0c0[];
-extern int g_100b0a8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 extern char* g_773d78;
 

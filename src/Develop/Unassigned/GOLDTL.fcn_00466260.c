@@ -13,7 +13,7 @@ typedef struct VfsEntry {
 // SIZE 0x54
 
 extern char* g_772500;
-extern signed char g_772510;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_772568;
 
 void __cdecl d2_Show(int idx, int arg);

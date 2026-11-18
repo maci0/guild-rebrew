@@ -1,6 +1,5 @@
 extern volatile int g_6b7fac;
-extern int g_772f54;
-extern int g_77250c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_68bfd0[];
 
 void __cdecl fcn_00472880(int c);

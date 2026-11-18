@@ -14,7 +14,7 @@ void __cdecl ch_UseGate(char*, char*, char*, int, int, int);
 char* __cdecl strupr(char*);
 
 /* ADDRESS: GOLDTL 0x004cb450 */
-int __cdecl fcn_004cb450(char* a0, char* a1)
+int __cdecl fcn_004cb450(char* command, char* result)
 {
 	char gate2[0x80];
 	char search[0x80];
@@ -26,12 +26,12 @@ int __cdecl fcn_004cb450(char* a0, char* a1)
 	char* name;
 	int id;
 	int k;
-	fcn_0064d41a(search, g_68b0d8, *(int*) (a0 + 0x10));
+	fcn_0064d41a(search, g_68b0d8, *(int*) (command + 0x10));
 	o = fcn_004032b0(search);
 	if (!o)
 		return 1;
-	s = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0x14));
-	d = fcn_00502cd0(*(int*) (s + 0x5d), 1, 1, *(int*) (a0 + 0x18));
+	s = gm_StartFilteredEntitySearch(1, 1, *(int*) (command + 0x14));
+	d = fcn_00502cd0(*(int*) (s + 0x5d), 1, 1, *(int*) (command + 0x18));
 	id = *(int*) (o + 0x30);
 	if (id != -1)
 		v4 = fcn_00502cd0(*(int*) (s + 0x5d), 1, 1, id);
@@ -49,10 +49,10 @@ int __cdecl fcn_004cb450(char* a0, char* a1)
 	fcn_0064d41a(gate2, g_68b214, strupr(name + 1));
 	if (k >= 0)
 		ch_UseGate(o, gate2, gate, k, *(int*) (s + 1), *(int*) (d + 2));
-	if (a1) {
-		a1[0] = 2;
-		a1[1] = 0;
-		*(int*) (a1 + 6) = 0;
+	if (result) {
+		result[0] = 2;
+		result[1] = 0;
+		*(int*) (result + 6) = 0;
 	}
 	return 0;
 }

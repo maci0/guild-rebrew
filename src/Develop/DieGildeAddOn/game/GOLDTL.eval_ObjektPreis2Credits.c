@@ -36,7 +36,7 @@ extern int g_14a79c0[];
 
 #pragma optimize("l", off)
 /* ADDRESS: GOLDTL 0x0050b980 */
-float __cdecl eval_ObjektPreis2Credits(int id, int a1)
+float __cdecl eval_ObjektPreis2Credits(int id, int percent)
 {
     fcn_0050b980_Rec* r;
     char buf[256];
@@ -44,7 +44,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int a1)
     float price;
     float q;
     int divisor;
-    int v6;
+    int buildingType;
     int i;
     unsigned short child;
     char* childp;
@@ -52,7 +52,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int a1)
 
     r = &((fcn_0050b980_Rec*) lpObjektePROT)[id];
     if (r->cache != 0) {
-        price = (float) (r->cache << 5) * (a1 & 0xff) * 0.01f;
+        price = (float) (r->cache << 5) * (percent & 0xff) * 0.01f;
         if (r->sub == 3) {
             return price * g_662acc;
         }
@@ -61,9 +61,9 @@ float __cdecl eval_ObjektPreis2Credits(int id, int a1)
 
     divisor = (int) r->div + (r->div == 0);
     q = (float) r->cap / divisor;
-    v6 = g_99e0a0[id];
-    building = (BUILDING_PRICE_ROW*) g_entity_type_table + v6;
-    if (v6) {
+    buildingType = g_99e0a0[id];
+    building = (BUILDING_PRICE_ROW*) g_entity_type_table + buildingType;
+    if (buildingType) {
         acc = g_6628a8;
         for (i = 0; i < 2; i++) {
             acc += building->unknown233[i] *
@@ -84,7 +84,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int a1)
             break;
         }
         if (child != 0xffff) {
-            price = eval_ObjektPreis2Credits(child, a1) * *(unsigned short*) (childp - 8) / r->div
+            price = eval_ObjektPreis2Credits(child, percent) * *(unsigned short*) (childp - 8) / r->div
                     + price;
         } else {
             sprintf(buf,
@@ -94,7 +94,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int a1)
         }
     }
     r->cache = (int) (price * 0.06875f);
-    price = (float) (a1 & 0xff) * price;
+    price = (float) (percent & 0xff) * price;
     price *= 0.01f;
     return price * 2.2f;
 }

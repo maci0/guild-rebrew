@@ -8,15 +8,15 @@ struct I41f630 {
 
 char* __cdecl FindVideoById(int);
 
-int __cdecl fcn_0041f630(int a1, int a2)
+int __cdecl fcn_0041f630(int videoId, int a2)
 {
-	char* p;
-	I41f630* o;
+	char* video;
+	I41f630* iface;
 
-	p = FindVideoById(a1);
-	if (p != 0) {
-		o = *(I41f630**) (p + 0x130);
-		return o->vt[0x4c / 4](o, a2 ? -1 : 0) >= 0;
+	video = FindVideoById(videoId);
+	if (video != 0) {
+		iface = *(I41f630**) (video + 0x130);
+		return iface->vt[0x4c / 4](iface, a2 ? -1 : 0) >= 0;
 	}
 	return 0;
 }

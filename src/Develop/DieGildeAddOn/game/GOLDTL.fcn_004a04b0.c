@@ -23,9 +23,7 @@ typedef struct {
 
 extern unsigned char g_773d75;
 extern unsigned char* lpGebaeudePROT;
-extern float g_6628bc;
-extern float g_6628cc;
-extern float g_6628d8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);

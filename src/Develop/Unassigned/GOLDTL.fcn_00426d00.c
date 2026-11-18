@@ -6,7 +6,7 @@ typedef struct {
 	char name[0xc98];
 } T426d00;
 
-extern char* g_6b7e94;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl fcn_0065f220(char*, char*);
 
 T426d00* __cdecl fcn_00426d00(char* name)

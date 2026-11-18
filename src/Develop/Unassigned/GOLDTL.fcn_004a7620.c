@@ -5,7 +5,7 @@ typedef Card_1007ce0 Card;
 extern Card_1007ce0 g_1007ce0[24];
 
 /* ADDRESS: GOLDTL 0x004a7620 */
-int __cdecl fcn_004a7620(int* h, int* out, int a3)
+int __cdecl fcn_004a7620(int* h, int* out, int flag)
 {
 	int i;
 	int k;
@@ -13,7 +13,7 @@ int __cdecl fcn_004a7620(int* h, int* out, int a3)
 	int rank;
 	int* p;
 
-	if (!a3 && h[0] >= 0 && h[1] >= 0 && h[2] >= 0 && h[3] >= 0) {
+	if (!flag && h[0] >= 0 && h[1] >= 0 && h[2] >= 0 && h[3] >= 0) {
 		for (i = 1, p = h; i < 3; p++, i++) {
 			rank = g_1007ce0[*p].rank;
 			out[0] = *p;

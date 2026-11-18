@@ -6,8 +6,7 @@ typedef struct ClipRect {
 } ClipRect;
 // SIZE 0x10
 
-extern int g_67d968;
-extern int g_7725fc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern ClipRect* g_77257c[2];
 extern int g_77258c[2];
 

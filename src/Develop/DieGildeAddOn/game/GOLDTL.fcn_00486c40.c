@@ -27,7 +27,7 @@ typedef struct ClientRec {
 } ClientRec;
 // SIZE 0x18
 
-extern int g_100b0a8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Seg g_100b0c0[];
 extern int g_100e720[];
 extern int g_100e760[];

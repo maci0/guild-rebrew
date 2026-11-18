@@ -1,8 +1,6 @@
 #include <string.h>
 
-extern char* g_aed200;
-extern char* g_aed324;
-extern int g_14cbca0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00421050(void);
 unsigned short __cdecl fcn_004c3a50(char* n);

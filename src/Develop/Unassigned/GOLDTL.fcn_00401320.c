@@ -11,10 +11,10 @@ void __cdecl fcn_00401260(int, int);
 #define stream_write fcn_00401260
 #endif
 
-void __cdecl fcn_004012e0(int a1, int* a2)
+void __cdecl fcn_004012e0(int stream, int* values)
 {
-	stream_write(a1, a2[0]);
-	stream_write(a1, a2[1]);
-	stream_write(a1, a2[2]);
-	stream_write(a1, a2[3]);
+	stream_write(stream, values[0]);
+	stream_write(stream, values[1]);
+	stream_write(stream, values[2]);
+	stream_write(stream, values[3]);
 }

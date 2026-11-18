@@ -6,7 +6,7 @@ typedef struct Rec38 {
 } Rec38;
 // SIZE 0x38
 
-extern char g_662d18[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_0064f026(char* s, const char* delim);
 int __cdecl fcn_0064eeec(const char* s);

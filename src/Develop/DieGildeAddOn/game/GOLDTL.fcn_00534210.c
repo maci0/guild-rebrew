@@ -15,7 +15,7 @@ typedef struct BarImg {
 // SIZE 0x54
 
 extern char* g_772500;
-extern int g_772514;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_0046f740(int x, int y, int a3, int win);

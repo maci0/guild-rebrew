@@ -15,7 +15,7 @@ float __cdecl fcn_004ff210(unsigned short, int);
 
 
 /* ADDRESS: GOLDTL 0x004b8670 */
-int __cdecl fcn_004b8670(int* a1)
+int __cdecl fcn_004b8670(int* input)
 {
 	char* ents[8];
 	char buf[0x200];
@@ -33,7 +33,7 @@ int __cdecl fcn_004b8670(int* a1)
 
 	n = 0;
 	sel = 0;
-	e = gm_LookupEntityRecordById(a1[0]);
+	e = gm_LookupEntityRecordById(input[0]);
 	if (e == 0)
 		return 1;
 	if (fcn_005c6270(e, 0x290) != 0)
@@ -60,7 +60,7 @@ int __cdecl fcn_004b8670(int* a1)
 	if (chosen == 0 || sel == 0)
 		return 0x400;
 	if (gm_RandomMod(2) != 0) {
-		io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, chosen,
+		io_FormatTextBuffer(buf, *(unsigned short*) (input + 1) + 0x12e7, chosen,
 		    (sel[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (sel + 0x165), *(unsigned short*) sel);
 		fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 		a = (int) (*(float*) (sel + 0x1c) * 0.3);

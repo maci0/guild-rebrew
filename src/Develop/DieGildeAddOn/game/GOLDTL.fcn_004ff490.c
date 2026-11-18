@@ -9,7 +9,7 @@ typedef struct {
 } Time;
 #pragma pack(pop)
 
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_664158;
 extern int g_773d48;
 extern int g_7f4c00;

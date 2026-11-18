@@ -61,15 +61,15 @@ int __cdecl fcn_004ba080(Req* r)
 	float dist;
 	char* list[8];
 	char buf[0x200];
-	int n;
-	int m;
+	int buildingCount;
+	int playerCount;
 	int i;
 	char* e;
-	char* p1;
-	char* p2;
+	char* building;
+	char* player;
 
-	n = 0;
-	p2 = 0;
+	buildingCount = 0;
+	player = 0;
 	o = gm_LookupEntityRecordById(r->id);
 	if (o == 0) {
 		return 1;
@@ -82,55 +82,55 @@ int __cdecl fcn_004ba080(Req* r)
 		return 0x400;
 	}
 	do {
-		if (n >= 8) {
+		if (buildingCount >= 8) {
 			break;
 		}
 		if (gm_GetBuildingTypeCategory(*(unsigned char*) e) == 1) {
-			list[n] = e;
-			n++;
+			list[buildingCount] = e;
+			buildingCount++;
 		}
 		e = gm_FindNextFilteredEntity();
 	} while (e != 0);
-	if (n == 0) {
+	if (buildingCount == 0) {
 		return 0x400;
 	}
-	m = 0;
-	p1 = list[gm_RandomMod(n)];
+	playerCount = 0;
+	building = list[gm_RandomMod(buildingCount)];
 	for (i = 0; i < 768; i++) {
-		if (m >= 6) {
+		if (playerCount >= 6) {
 			break;
 		}
-		if (((Player*)g_7f4ca0)[i].x2 == 0 && ((Player*)g_7f4ca0)[i].x16c == p1 && ((Player*)g_7f4ca0)[i].x165 != 0) {
-			list[m] = (char*) &((Player*)g_7f4ca0)[i];
-			m++;
+		if (((Player*)g_7f4ca0)[i].x2 == 0 && ((Player*)g_7f4ca0)[i].x16c == building && ((Player*)g_7f4ca0)[i].x165 != 0) {
+			list[playerCount] = (char*) &((Player*)g_7f4ca0)[i];
+			playerCount++;
 		}
 	}
-	if (m > 2) {
-		p2 = list[gm_RandomMod(m)];
+	if (playerCount > 2) {
+		player = list[gm_RandomMod(playerCount)];
 	}
-	if (p1 == 0 || p2 == 0) {
+	if (building == 0 || player == 0) {
 		return 0x400;
 	}
-	dist = fcn_0050f980(*(unsigned short*) o, *(unsigned short*) p2, 1);
+	dist = fcn_0050f980(*(unsigned short*) o, *(unsigned short*) player, 1);
 	if (!((float) gm_RandomMod(50) > dist)) {
 		return 0x400;
 	}
-	io_FormatTextBuffer(buf, r->x4 + 0x12e7, (p2[9] ? 0x230 : 0x20d) + *(unsigned char*) (p2 + 0x165),
-		*(unsigned short*) p2, p1);
+	io_FormatTextBuffer(buf, r->x4 + 0x12e7, (player[9] ? 0x230 : 0x20d) + *(unsigned char*) (player + 0x165),
+		*(unsigned short*) player, building);
 	fcn_00545d40(*(int*) (o + 4), *(int*) (o + 4), buf, strlen(buf) > 0x100, 0x603, 0);
 	{
 		Packet msg;
 
 		memset(&msg, 0, sizeof(msg));
 		msg.x8 = *(int*) (o + 4);
-		msg.xc = *(int*) (p1 + 1);
+		msg.xc = *(int*) (building + 1);
 		msg.x28 = (*(int*)&g_7f4c00);
 		msg.x2c = (*(int*)&g_7f4c04);
 		msg.x30 = g_7f4c08;
 		msg.type = 0x31;
 		msg.x36 = 1;
 		msg.x34 = g_7f4c0c;
-		msg.x58 = *(int*) (p2 + 4);
+		msg.x58 = *(int*) (player + 4);
 		fcn_004c5530(&msg);
 	}
 	return 0;

@@ -6,24 +6,24 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 
 /* ADDRESS: GOLDTL 0x004fa160 */
-int __cdecl fcn_004fa160(void* a1, void* a2)
+int __cdecl fcn_004fa160(void* entity, void* request)
 {
 	char buf[0x100];
 
-	if (*(int*) a2 != 3 && *(int*) a2 != 1) {
+	if (*(int*) request != 3 && *(int*) request != 1) {
 		return 1;
 	}
-	if ((*(unsigned int*) ((char*) a1 + 0x1cc) & 0x800) == 0) {
+	if ((*(unsigned int*) ((char*) entity + 0x1cc) & 0x800) == 0) {
 		return 1;
 	}
-	if (*(int*) a2 == 3 && *(char*) ((char*) a1 + 2) == 6) {
+	if (*(int*) request == 3 && *(char*) ((char*) entity + 2) == 6) {
 		io_FormatTextBuffer(buf, 0x1e14,
-		    0x278 + (*(char*) ((char*) a1 + 9) != 0 ? 0x28 : 0), 0x16b9);
+		    0x278 + (*(char*) ((char*) entity + 9) != 0 ? 0x28 : 0), 0x16b9);
 		fcn_004fa5f0(buf, 0, 0x657c7);
 		return 2;
 	}
-	if (*(int*) a2 == 1 && *(char*) ((char*) a1 + 2) == 6) {
-		io_FormatTextBuffer((char*) a2 + 0x14, (int) g_679060, 0x1e13);
+	if (*(int*) request == 1 && *(char*) ((char*) entity + 2) == 6) {
+		io_FormatTextBuffer((char*) request + 0x14, (int) g_679060, 0x1e13);
 	}
 	return 2;
 }

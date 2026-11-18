@@ -11,7 +11,7 @@ void __cdecl io_FormatTextBuffer(char* buf, int fmt, int a, int b, int c, int d)
 void __cdecl fcn_00545d40(int a, int b, char* buf, int overflow, int msg, int zero);
 
 /* ADDRESS: GOLDTL 0x004ba830 */
-int __cdecl fcn_004ba830(unsigned short* a0)
+int __cdecl fcn_004ba830(unsigned short* request)
 {
 	char buf[0x100];
 	int list[8];
@@ -28,7 +28,7 @@ int __cdecl fcn_004ba830(unsigned short* a0)
 
 	count = 0;
 	slot = 0;
-	rec = (unsigned short*) gm_LookupEntityRecordById(*(int*) a0);
+	rec = (unsigned short*) gm_LookupEntityRecordById(*(int*) request);
 	if (rec == 0)
 		return 1;
 	if (fcn_005c6270((char*) rec, 0x290) == 0) {
@@ -61,7 +61,7 @@ int __cdecl fcn_004ba830(unsigned short* a0)
 						else
 							v = (fcn_0042e410(10) & 0xffff) + 5;
 						fcn_004c6ba0(*(int*) (slot + 2), 1, -(int) (signed char) v);
-						io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a0 + 4) + 0x12e7,
+						io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
 						    *slot, pick, *slot, 0x16b8);
 						fcn_00545d40(*(int*) (rec + 2), *(int*) (rec + 2), buf,
 						    0x100 < strlen(buf), 0x603, 0);

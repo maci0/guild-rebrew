@@ -4,14 +4,14 @@ int __cdecl gm_LookupEntityRecordById(int value);
 int __cdecl fcn_005dcf40(unsigned char *e, int idx);
 
 /* ADDRESS: GOLDTL 0x005dd130 */
-int __cdecl fcn_005dd130(char *a0, int *a1)
+int __cdecl fcn_005dd130(char *entity, int *a1)
 {
 	char buf[0x100];
 	int r;
 
-	if (a0[2] == 6) {
+	if (entity[2] == 6) {
 		io_FormatTextBuffer(buf, 0x9d);
-		r = fcn_005cad70(a0, buf);
+		r = fcn_005cad70(entity, buf);
 		if (r != 0) {
 			fcn_005dcf40((unsigned char *) r, 4);
 			return 1;

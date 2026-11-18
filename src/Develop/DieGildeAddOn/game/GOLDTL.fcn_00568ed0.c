@@ -2,11 +2,7 @@
 
 extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
-extern float g_662910;
-extern float g_6628a0;
-extern float g_6628cc;
-extern float g_662a3c;
-extern double g_662908;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_6629c8;
 extern double g_6653f8;
 extern char* g_aed32c;

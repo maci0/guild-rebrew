@@ -1,7 +1,7 @@
 typedef int(__stdcall* Fn3)(void* self, int a, int b);
 
 extern void* g_6b5de0;
-extern int g_6b86fc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern void* g_6b870c;
 
 /* ADDRESS: GOLDTL 0x00450c70 */

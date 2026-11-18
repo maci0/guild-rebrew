@@ -24,7 +24,7 @@ typedef struct
 } Item;
 // SIZE 0x38
 
-extern int g_772514;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
 extern Win_f8f120 g_f8f120[];
 extern int g_14aadc0[];

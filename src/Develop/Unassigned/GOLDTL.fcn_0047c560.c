@@ -51,7 +51,7 @@ typedef struct {
 	int f14;
 } Sample;
 
-extern int g_772604;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Device* g_772614;
 extern Device* g_6b5de0;
 extern BankRec g_1552020[];

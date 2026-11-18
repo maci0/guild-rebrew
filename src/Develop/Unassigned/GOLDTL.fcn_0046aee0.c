@@ -46,7 +46,7 @@ extern void** g_772540;
 extern int g_67d38c;
 extern int g_67d388;
 extern int g_67d374;
-extern int g_67d370;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_0046ac40(int x, int y);
 int __cdecl fcn_0046acf0(int x, int y);

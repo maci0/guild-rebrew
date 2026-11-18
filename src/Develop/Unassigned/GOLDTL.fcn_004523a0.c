@@ -1,10 +1,8 @@
 
 
-extern char g_1040640[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1040960[];
 extern int g_67a370;
-extern char* g_1040c74;
-extern char* g_1040958;
 
 /* ADDRESS: GOLD 0x004556d0 */
 void __cdecl fcn_004523a0(char* o)

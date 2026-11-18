@@ -38,14 +38,14 @@ void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
 {
 	char buf[0x100];
 	char* p;
-	char* s;
-	char* d;
+	char* src;
+	char* dst;
 
 	p = fcn_005463a0(2, 0, a3, 3, *(int*) (e + 1));
 	if (p != 0 && *(int*) (p + a4 * 4 + 0xb0) != 0) {
-		s = g_14abbb0;
-		d = buf;
-		while ((*d++ = *s++) != 0) {
+		src = g_14abbb0;
+		dst = buf;
+		while ((*dst++ = *src++) != 0) {
 		}
 		g->state = 2;
 		fcn_0046f940(g->label, buf);
@@ -63,9 +63,9 @@ void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
 		return;
 	}
 	fcn_005b5c70(g);
-	s = g_14abc28;
-	d = buf;
-	while ((*d++ = *s++) != 0) {
+	src = g_14abc28;
+	dst = buf;
+	while ((*dst++ = *src++) != 0) {
 	}
 	g->state = 0;
 	fcn_0046f940(g->label, buf);

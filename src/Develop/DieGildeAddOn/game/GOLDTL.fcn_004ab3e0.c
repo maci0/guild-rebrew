@@ -20,38 +20,38 @@ struct msg_4ab3e0 {
 
 
 /* ADDRESS: GOLDTL 0x004ab3e0 */
-int __cdecl fcn_004ab3e0(char* a1, char* a2, char* a3)
+int __cdecl fcn_004ab3e0(char* actor, char* a2, char* a3)
 {
 	struct msg_4ab3e0 msg;
-	char* e;
-	char* q;
+	char* found;
+	char* entry;
 	int i;
 
-	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (a3 + 4));
-	if (e == 0)
+	found = gm_StartFilteredEntitySearch(1, 1, *(int*) (a3 + 4));
+	if (found == 0)
 		return 0;
-	q = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0x120);
-	if (q == 0)
+	entry = fcn_00502cd0(*(int*) (found + 0x5d), 1, 0, 0x120);
+	if (entry == 0)
 		return 0;
-	q = fcn_00502cd0(*(int*) (q + 0x14), 1, 0, 0x12c);
-	if (q == 0)
+	entry = fcn_00502cd0(*(int*) (entry + 0x14), 1, 0, 0x12c);
+	if (entry == 0)
 		return 0;
 	for (i = 0; i < 3; i++) {
-		if (*(int*) (q + 0x1c + i * 4) == *(int*) (a2 + 4))
+		if (*(int*) (entry + 0x1c + i * 4) == *(int*) (a2 + 4))
 			break;
 	}
 	if (i == 3)
 		return 0;
 	msg.tag = 0x62757920;
-	msg.where = *(int*) (e + 1);
-	msg.who = *(int*) (a1 + 4);
+	msg.where = *(int*) (found + 1);
+	msg.who = *(int*) (actor + 4);
 	msg.what = *(int*) (a2 + 4);
 	msg.amount = *(int*) (a2 + 0x10);
 	fcn_004c4eb0(s_67fb68);
 	fcn_004c68c0(&msg);
-	fcn_004c58b0(*(int*) (a2 + 4), *(int*) (a1 + 4));
-	fcn_004c51a0(*(int*) (g_7f4ca0 + *(unsigned short*) (e + 0x27) * 540 + 4),
-	    *(int*) (a1 + 4), 0, *(int*) (a2 + 0x10));
+	fcn_004c58b0(*(int*) (a2 + 4), *(int*) (actor + 4));
+	fcn_004c51a0(*(int*) (g_7f4ca0 + *(unsigned short*) (found + 0x27) * 540 + 4),
+	    *(int*) (actor + 4), 0, *(int*) (a2 + 0x10));
 	fcn_004c4ef0(s_67fb68);
 	return 1;
 }

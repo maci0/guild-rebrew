@@ -1,5 +1,4 @@
-extern int* g_6b7ed0[16];
-extern int* g_6b7f10[16];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x0042b240 */
 int __cdecl fcn_0042b240(int id)

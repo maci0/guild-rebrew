@@ -71,7 +71,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 	char buf[0x20];
 	Rec recs[32];
 	int dlg;
-	int n;
+	int count;
 	int i;
 
 	list = -1;
@@ -86,7 +86,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 	d2_SetForm(dlg, 0);
 	fcn_00533f40(0x140, 0x100, g_772514, fcn_00472830(dlg, 1), 0x18, &w, &h, &field);
 	memset(recs, 0, sizeof(recs));
-	n = fcn_005dfa40(a4, a5, recs);
+	count = fcn_005dfa40(a4, a5, recs);
 	flag = mode & 1;
 	if (!flag) {
 		d2_SetForm(dlg, 3);
@@ -96,14 +96,14 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 		d2_SetElementValue(list, g_14ac654);
 	}
 	d2_SetForm(dlg, 1);
-	for (i = 0; i < n; i++) {
+	for (i = 0; i < count; i++) {
 		recs[i].id = d2_ShowTxt(0, (short) (i * 24), recs[i].name, g_772514);
 		((Slot*)g_1015ea0)[recs[i].id].f5c = 1;
 		((Slot*)g_1015ea0)[recs[i].id].f6c = 1;
 		((Slot*)g_1015ea0)[recs[i].id].f18 = ((Win*)g_77255c)->fc;
 		((Slot*)g_1015ea0)[recs[i].id].f1d0 = 3;
 	}
-	_itoa(n, buf, 10);
+	_itoa(count, buf, 10);
 	fcn_0046f940(field, buf);
 	fcn_00472900(field, 0x54);
 	while (fcn_005373e0((void*) fcn_005dfb40, wait) != 0) {
@@ -111,7 +111,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 			g_774654 = 1;
 		}
 		if (g_14ce8d8 != 0) {
-			for (i = 0; i < n; i++) {
+			for (i = 0; i < count; i++) {
 				if (g_67d370 == recs[i].id) {
 					if (flag) {
 						sprintf(out, s_6acf90, a4, recs[i].name, a5);

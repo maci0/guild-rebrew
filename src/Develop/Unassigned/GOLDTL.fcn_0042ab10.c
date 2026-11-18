@@ -3,18 +3,18 @@
 int __cdecl fcn_0042b1c0(int);
 typedef int (__stdcall* f)(int);
 
-int __cdecl fcn_0042ab10(int a1, int* a2)
+int __cdecl fcn_0042ab10(int a1, int* out)
 {
-	int r = 0;
+	int result = 0;
 
 	if (*(int*) 0x6b7f90 != 0) {
 		if (fcn_0042b1c0(a1) >= 0) {
-			*a2 = (*(f*) 0x006623f8)(a1);
+			*out = (*(f*) 0x006623f8)(a1);
 		} else {
-			r = -1;
+			result = -1;
 		}
 	} else {
-		r = -1;
+		result = -1;
 	}
-	return r;
+	return result;
 }

@@ -1,7 +1,6 @@
 #include "client_types.h"
 
-extern char g_85ab90[];
-extern char* g_item_def_table;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 extern float flt_1;
 extern double g_664e78;

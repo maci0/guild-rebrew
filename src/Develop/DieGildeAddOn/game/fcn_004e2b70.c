@@ -1,4 +1,4 @@
-extern int g_68bfb8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* TOD cutscene setup handler, 0x4e2b70..0x4e301e (1199 bytes).  Registered
  * with id 8 through fcn_004e7160 at 0x4e7299; frame is a 0x23EC-byte local
  * block (single `add esp,0x23EC; ret` exit at 0x4e3018/0x4e301e). */

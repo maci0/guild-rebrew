@@ -7,24 +7,24 @@ int __cdecl fcn_004a91a0(int a1, char* e, int a3, int a4, char* out)
 {
 	int d[32];
 	int ids[32];
-	int k;
+	int remaining;
 	int i;
-	int n;
-	int thr;
+	int count;
+	int threshold;
 	char* p;
 
-	thr = gm_RandomMod(4) + 2;
+	threshold = gm_RandomMod(4) + 2;
 	if (e[0x166] == 0xd) {
 		return 0;
 	}
-	n = fcn_004f6040(ids, d, *(unsigned short*) e);
-	if (!n) {
+	count = fcn_004f6040(ids, d, *(unsigned short*) e);
+	if (!count) {
 		return 0;
 	}
 	i = 0;
-	k = n;
+	remaining = count;
 	do {
-		if (d[i] >= thr) {
+		if (d[i] >= threshold) {
 			p = gm_LookupEntityRecordById(ids[i]);
 			if (p && p[2] != 0xf && p[8] && p[0x166] != 0xd && p[0x166] != 0x1b && p[0x166] != 0xf && p[0x166] != 0x15) {
 				out[0] = 7;
@@ -32,8 +32,8 @@ int __cdecl fcn_004a91a0(int a1, char* e, int a3, int a4, char* out)
 				return 1;
 			}
 		}
-		k--;
-		i = (i + 1) % n;
-	} while (k);
+		remaining--;
+		i = (i + 1) % count;
+	} while (remaining);
 	return 0;
 }

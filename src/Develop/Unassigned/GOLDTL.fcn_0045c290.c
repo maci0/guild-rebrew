@@ -19,7 +19,7 @@ typedef struct Tex {
 
 extern char* g_104049c;
 extern unsigned int g_10404a0;
-extern int g_10405c4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 Tex* __cdecl fcn_0045c290(Col c, int* out)
 {

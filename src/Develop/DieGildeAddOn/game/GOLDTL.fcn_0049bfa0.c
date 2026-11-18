@@ -2,7 +2,7 @@ extern double g_662aa0;
 extern float g_664138;
 extern float g_664160;
 extern float g_664188;
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];
 

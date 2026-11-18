@@ -12,16 +12,11 @@ typedef struct
 
 extern void* g_6b5de0;
 
-extern int g_1015ea4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1040490;
 extern int g_1040494;
 extern unsigned g_1052be4;
 extern unsigned g_1052bec;
-extern int g_14ce8d4;
-extern int g_67d370;
-extern int g_67d378;
-extern int g_67d398;
-extern int g_77250c;
 extern int g_77251c;
 extern int g_772524;
 extern int g_772540;
@@ -31,12 +26,10 @@ extern int g_772570;
 extern int g_772574;
 extern int g_7725a0;
 extern int g_7725a4;
-#include "GOLDTL.fcn_0046a110_gconf.h"
+extern void* g_7725a8;
 extern int g_7725d0;
-extern float g_6628a0;
 extern float g_6628a8;
 extern double g_6629c8;
-extern double g_662c38;
 extern float g_67d3c0[];
 
 void __cdecl fcn_0047a090(void);
@@ -122,9 +115,9 @@ void __cdecl fcn_0046a110(int a1)
 			(*(void (__stdcall **)(void*, int, void*, int, int, float, int)) (*(int*) g_6b5de0 + 0x90))(g_6b5de0, n, u.clip, 1, 0, 1.0f, 0);
 		}
 	}
-	if (g_7725a8) {
+	if ((*(int *)&g_7725a8)) {
 		fcn_0047a040(0, 0, g_1040494, g_1040490);
-		fcn_0047cba0(0, 0, g_77250c, (char*) g_7725a8, 0);
+		fcn_0047cba0(0, 0, g_77250c, (char*) (*(int *)&g_7725a8), 0);
 	}
 	if (!*(char**) g_772540)
 		goto label_46aadd;

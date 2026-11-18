@@ -7,7 +7,7 @@ typedef struct
 
 extern unsigned long g_14ce728;
 extern unsigned int g_10405fc;
-extern unsigned int g_104061c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int* g_6b89e4;
 
 void __cdecl fcn_00456560(void);

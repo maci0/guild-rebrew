@@ -10,12 +10,10 @@ void __cdecl fcn_004c57e0(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_004e6240(char*, char*, char*, char*);
 
-extern int g_68bfb8;
-extern int g_7725c8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
 extern int g_7725d0;
 extern int g_7747f0;
-extern int g_772f54;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 #include "client_packet_builder.h"

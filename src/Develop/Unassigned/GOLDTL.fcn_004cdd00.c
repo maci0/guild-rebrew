@@ -4,28 +4,28 @@
 int __cdecl fcn_004f0960(int);
 int __cdecl fcn_004f09c0(int);
 
-int __cdecl fcn_004cdd00(char* a1, char* a2)
+int __cdecl fcn_004cdd00(char* request, char* response)
 {
-	int r;
-	int v;
+	int result;
+	int code;
 
-	if (a2 != 0) {
-		a2[0] = 2;
-		a2[1] = 0;
-		*(int*) (a2 + 6) = 0;
+	if (response != 0) {
+		response[0] = 2;
+		response[1] = 0;
+		*(int*) (response + 6) = 0;
 	}
-	v = *(int*) (a1 + 0x10);
-	if (v == 0x6154436e) {
-		r = fcn_004f0960(*(int*) (a1 + 0x14));
-	} else if (v == 0x6454436e) {
-		r = fcn_004f09c0(*(int*) (a1 + 0x14));
+	code = *(int*) (request + 0x10);
+	if (code == 0x6154436e) {
+		result = fcn_004f0960(*(int*) (request + 0x14));
+	} else if (code == 0x6454436e) {
+		result = fcn_004f09c0(*(int*) (request + 0x14));
 	} else {
 		return -1;
 	}
-	if (a2 != 0 && r != 0) {
-		*a2 = 1;
+	if (response != 0 && result != 0) {
+		*response = 1;
 	}
-	if (r == 0) {
+	if (result == 0) {
 		return -1;
 	}
 	return 0;

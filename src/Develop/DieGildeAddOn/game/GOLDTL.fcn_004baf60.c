@@ -3,7 +3,7 @@ extern double g_664e78;
 extern float g_662cf8;
 extern float g_662cf8;
 /* Owned (both targets) by src/GOLDTL.fcn_004b6f00.c. */
-extern double g_6640e8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include <string.h>
 

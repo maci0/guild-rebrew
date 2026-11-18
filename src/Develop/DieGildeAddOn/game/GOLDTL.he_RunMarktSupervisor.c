@@ -47,21 +47,14 @@ extern unsigned char g_773d75;
 extern char* g_773da8;
 extern char* lpObjektePROT;
 extern unsigned char g_7747b0;
-extern char g_85ab90[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
-extern float g_6628a0;
 extern float g_6628a8;
-extern float g_662910;
 extern float g_662948;
-extern float g_662d34;
 extern float g_664198;
 extern float g_665ea0;
-extern double g_662908;
 extern double g_662930;
 extern double g_6629c8;
-extern double g_6629f8;
-extern double g_662ad8;
-extern double g_662b20;
 extern double g_6640f8;
 extern double g_664468;
 extern double g_665dd0;

@@ -24,11 +24,7 @@ int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005d2ec0(char*, int*);
 
 extern float g_6628a8;
-extern float g_6628b0;
-extern float g_6628cc;
-extern int g_100f1dc;
-extern int g_67d370;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;

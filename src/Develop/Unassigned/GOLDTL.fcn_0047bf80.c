@@ -49,10 +49,10 @@ Quad* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* src)
 	float v0;
 	float u1;
 	float v1;
-	float t;
+	float depth;
 	int i;
-	int n;
-	Quad* q;
+	int quadIndex;
+	Quad* quad;
 
 	fu = 0.0f;
 	fv = 0.0f;
@@ -65,11 +65,11 @@ Quad* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* src)
 		rw = src->right - src->left;
 		rh = src->bottom - src->top;
 	}
-	n = g_772604;
-	if (n >= 0x400) {
+	quadIndex = g_772604;
+	if (quadIndex >= 0x400) {
 		fcn_0047c560(0, 0, 0);
-		n = g_772604;
-		if (n >= 0x400) {
+		quadIndex = g_772604;
+		if (quadIndex >= 0x400) {
 			return 0;
 		}
 	}
@@ -92,34 +92,34 @@ Quad* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* src)
 	if (ch + y > g_67d968) {
 		ch = g_67d968 - y;
 	}
-	q = &g_1552020[n];
-	if (fcn_0047b8b0(x, y, cw, ch, q) == 0) {
+	quad = &g_1552020[quadIndex];
+	if (fcn_0047b8b0(x, y, cw, ch, quad) == 0) {
 		return 0;
 	}
-	q->tex = tex;
+	quad->tex = tex;
 	u0 = fu / w;
 	v0 = fv / h;
-	q->v[0].u = u0;
-	q->v[0].v = v0;
+	quad->v[0].u = u0;
+	quad->v[0].v = v0;
 	u1 = (float) cw / rw + u0;
-	q->v[1].u = u1;
-	q->v[1].v = v0;
-	q->v[2].u = u0;
+	quad->v[1].u = u1;
+	quad->v[1].v = v0;
+	quad->v[2].u = u0;
 	v1 = (float) ch / rh + v0;
-	q->v[2].v = v1;
-	q->v[3].u = u1;
-	q->v[3].v = v0;
-	q->v[4].u = u1;
-	q->v[4].v = v1;
-	q->v[5].u = u0;
-	q->v[5].v = v1;
-	t = g_772608 * 0.001f;
+	quad->v[2].v = v1;
+	quad->v[3].u = u1;
+	quad->v[3].v = v0;
+	quad->v[4].u = u1;
+	quad->v[4].v = v1;
+	quad->v[5].u = u0;
+	quad->v[5].v = v1;
+	depth = g_772608 * 0.001f;
 	for (i = 0; i < 6; i++) {
-		q->v[i].z = 1.0f - t;
-		q->v[i].rhw = t + 0.01f;
+		quad->v[i].z = 1.0f - depth;
+		quad->v[i].rhw = depth + 0.01f;
 	}
-	g_772604 = n + 1;
+	g_772604 = quadIndex + 1;
 	g_772608++;
-	fcn_0047b9a0(q, 200, 200, 200);
-	return q;
+	fcn_0047b9a0(quad, 200, 200, 200);
+	return quad;
 }

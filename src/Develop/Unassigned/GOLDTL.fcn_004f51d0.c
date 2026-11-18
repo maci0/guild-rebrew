@@ -14,7 +14,7 @@ typedef struct tag_req_2d_b {
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
-int __cdecl fcn_004f51d0(void* a1, req_2d_b s, int b)
+int __cdecl fcn_004f51d0(void* dst, req_2d_b s, int b)
 {
 	unsigned short w;
 	unsigned char* p;
@@ -30,24 +30,24 @@ int __cdecl fcn_004f51d0(void* a1, req_2d_b s, int b)
 	switch (*(int*) ((char*) &s + 0x1c) & 0xff) {
 	case 2:
 		if (*(int*) ((char*) &s + 4) < 0x75) {
-			io_FormatTextBuffer(a1, v + 0x140a, (char*) &s + 4,
+			io_FormatTextBuffer(dst, v + 0x140a, (char*) &s + 4,
 			    *(int*) ((char*) &s + 0x1d) + 0x13f9);
 		} else {
-			io_FormatTextBuffer(a1, v + 0x140a, (char*) &s + 4,
+			io_FormatTextBuffer(dst, v + 0x140a, (char*) &s + 4,
 			    *(int*) ((char*) &s + 0x1d) + 0x13fb);
 		}
 		break;
 	case 3:
-		io_FormatTextBuffer(a1, v + 0x140f, (char*) &s + 4);
+		io_FormatTextBuffer(dst, v + 0x140f, (char*) &s + 4);
 		break;
 	case 4:
-		io_FormatTextBuffer(a1, v + 0x1414, (char*) &s + 4, w);
+		io_FormatTextBuffer(dst, v + 0x1414, (char*) &s + 4, w);
 		break;
 	case 8:
-		io_FormatTextBuffer(a1, v + 0x1428, (char*) &s + 4);
+		io_FormatTextBuffer(dst, v + 0x1428, (char*) &s + 4);
 		break;
 	default:
-		memcpy(a1, g_69037c, 0x20);
+		memcpy(dst, g_69037c, 0x20);
 		r = 0;
 		break;
 	}

@@ -6,7 +6,7 @@ extern unsigned int g_6b7d58;
 extern unsigned int g_6b7d54;
 extern unsigned int g_6b7d60;
 extern unsigned int g_6b7d5c;
-extern double g_662c38;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 /* ADDRESS: GOLDTL 0x00420bf0 */

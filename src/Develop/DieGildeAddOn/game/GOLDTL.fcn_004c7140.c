@@ -5,7 +5,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 
 
 /* ADDRESS: GOLDTL 0x004c7140 */
-int __cdecl fcn_004c7140(unsigned char* a1)
+int __cdecl fcn_004c7140(unsigned char* packet)
 {
 	char* stat;
 	unsigned int k;
@@ -19,8 +19,8 @@ int __cdecl fcn_004c7140(unsigned char* a1)
 	unsigned int n;
 	unsigned int j;
 
-	*(int*) (a1 + 0x10) = fcn_004c4dc0((char*) a1, *(int*) (a1 + 0x10));
-	if (gm_ResolveEntityById((void**) (&dyn), (void**) (&exist), (void**) (&stat), *(int*) (a1 + 0x10)) == 0)
+	*(int*) (packet + 0x10) = fcn_004c4dc0((char*) packet, *(int*) (packet + 0x10));
+	if (gm_ResolveEntityById((void**) (&dyn), (void**) (&exist), (void**) (&stat), *(int*) (packet + 0x10)) == 0)
 		return 1;
 	if (dyn != 0)
 		base = dyn;
@@ -28,8 +28,8 @@ int __cdecl fcn_004c7140(unsigned char* a1)
 		base = exist;
 	else
 		base = stat;
-	p = a1 + 0x15;
-	for (k = 0; k < a1[0x14]; k++) {
+	p = packet + 0x15;
+	for (k = 0; k < packet[0x14]; k++) {
 		size = (signed char) *p++;
 		n = (signed char) *p++;
 		addr = base + *(unsigned short*) p;

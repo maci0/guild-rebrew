@@ -12,7 +12,7 @@ int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
 
 /* ADDRESS: GOLDTL 0x004bac00 */
-int __cdecl fcn_004bac00(unsigned short* a1, int* a2, float a3)
+int __cdecl fcn_004bac00(unsigned short* entity, int* outId, float factor)
 {
 	char* arr[12];
 	unsigned char* it;
@@ -26,7 +26,7 @@ int __cdecl fcn_004bac00(unsigned short* a1, int* a2, float a3)
 	int v;
 
 	n = 0;
-	for (it = gm_StartFilteredEntitySearch(1, 3, *a1); it != 0 && n < 8; it = gm_FindNextFilteredEntity()) {
+	for (it = gm_StartFilteredEntitySearch(1, 3, *entity); it != 0 && n < 8; it = gm_FindNextFilteredEntity()) {
 		k = gm_GetBuildingTypeCategory(it[0]);
 		if (k == 1 || k == 2)
 			arr[n++] = (char*) it;
@@ -35,7 +35,7 @@ int __cdecl fcn_004bac00(unsigned short* a1, int* a2, float a3)
 		goto fail;
 	m = 0;
 	c = arr[gm_RandomMod(n)];
-	*a2 = *(int*) (c + 1);
+	*outId = *(int*) (c + 1);
 	q = fcn_00502cd0(*(int*) (c + 0x5d), 2, 6, 0, 0x2a);
 	if (q == 0)
 		goto fail;
@@ -46,7 +46,7 @@ int __cdecl fcn_004bac00(unsigned short* a1, int* a2, float a3)
 			s = arr[i];
 			k = *(int*) (s + 0xe);
 			if (k > 1) {
-				v = (int) (k * a3);
+				v = (int) (k * factor);
 				if (v < 1)
 					v = 1;
 				fcn_004c51f0(-1, *(int*) (q + 2), *(unsigned short*) s, v, g_773d75, 0);

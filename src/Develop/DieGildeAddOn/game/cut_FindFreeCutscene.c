@@ -1,7 +1,7 @@
 
 
 
-extern char g_9a9660[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl cut_FindFreeCutscene(void)
 {

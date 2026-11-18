@@ -9,7 +9,7 @@ extern float* __stdcall fcn_005eb970(float*, const float*, const float*);
 extern void __cdecl fcn_004519d0(float*, float*);
 extern char g_6b85a0;
 extern float g_6628a8;
-extern float g_662a3c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern const float g_662d40[3];
 
 /* Project one entity point through the active camera basis.  The view matrix

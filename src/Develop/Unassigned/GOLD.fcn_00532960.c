@@ -22,18 +22,12 @@ struct netslot {
 };
 
 extern struct netslot g_9baa70;
-extern char g_7e21a0[];
-extern char g_7e2000[];
-extern char g_7e1d00[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6a3a28[];
 extern char g_6a3778[];
 extern unsigned char g_7747b0;
 extern unsigned char g_6a375c;
 extern short g_7e2510;
-extern int g_6a3764;
-extern int g_6a3768;
-extern int g_6a376c;
-extern int g_6a3770;
 extern float g_10529c8;
 extern float g_10421a0;
 extern float g_10432a4;
@@ -44,7 +38,6 @@ struct shortpair {
 };
 
 extern short g_fb9070;
-extern int g_77250c;
 
 int __cdecl fcn_00539380(void);
 void __cdecl fcn_00469e70(void);

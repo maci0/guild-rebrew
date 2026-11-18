@@ -2,19 +2,16 @@ typedef unsigned char u8;
 #include <string.h>
 #include "game_data.h"
 typedef struct SelectProto { unsigned char kind; unsigned char rest[0x24c]; } SelectProto;
-extern int g_67d370;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6a25b4;
-extern int g_6a25b8;
 extern int g_6a25e0;
 extern int g_6a25e4;
-extern int g_6a25ec;
 extern int g_6a2524;
 extern char* g_7e2aa0;
 extern int* g_7e2a9c;
 extern char* g_7746c0;
 extern int g_7746d8;
 extern int g_7746dc;
-extern int g_7746f0;
 extern char g_7746f4;
 extern char g_6b5c60[];
 

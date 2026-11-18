@@ -18,14 +18,14 @@ struct range_4b0b30 {
 
 
 /* ADDRESS: GOLDTL 0x004b0b30 */
-int __cdecl fcn_004b0b30(int a1, int a2, char* a3)
+int __cdecl fcn_004b0b30(int a1, int a2, char* arg)
 {
 	int ids[2];
 	int i;
 	int n;
 	int id;
 
-	if (*a3 != '-')
+	if (*arg != '-')
 		return 0;
 	{
 		char names[2][32] = { "RECHTSPRECHUNG_HAERTE", "AEMTEREINKOMMEN" };
@@ -33,18 +33,18 @@ int __cdecl fcn_004b0b30(int a1, int a2, char* a3)
 
 		ids[0] = 0;
 		ids[1] = 0xf;
-		a3++;
+		arg++;
 		for (i = 0; i < 2; i++) {
-			if (memcmp(a3, names[i], strlen(names[i])) == 0)
+			if (memcmp(arg, names[i], strlen(names[i])) == 0)
 				break;
 		}
 		if (i >= 2)
 			return 0;
-		a3 += strlen(names[i]);
-		if (*a3 != '_')
+		arg += strlen(names[i]);
+		if (*arg != '_')
 			return 0;
-		a3++;
-		n = fcn_0064eeec(a3);
+		arg++;
+		n = fcn_0064eeec(arg);
 		id = ids[i];
 		r = (struct range_4b0b30*) names;
 		if (fcn_004f4830(id, r) == 0)

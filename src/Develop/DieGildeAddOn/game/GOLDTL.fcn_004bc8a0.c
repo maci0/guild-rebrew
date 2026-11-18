@@ -7,7 +7,7 @@ void __cdecl fcn_0045b920(char*, int, int, float*);
 
 
 /* ADDRESS: GOLDTL 0x004bc8a0 */
-int __cdecl fcn_004bc8a0(float* a1, int n, float* out)
+int __cdecl fcn_004bc8a0(float* position, int n, float* out)
 {
 	int ny;
 	int y;
@@ -18,7 +18,7 @@ int __cdecl fcn_004bc8a0(float* a1, int n, float* out)
 	char* g;
 
 	g = *(char**) (((char*)g_67a370) + 0xb0);
-	fcn_0045b990(g, a1, &x, &y, &z);
+	fcn_0045b990(g, position, &x, &y, &z);
 	for (k = 0; k < n; k++) {
 		nx = gm_RandomMod(10) + x - 4;
 		ny = gm_RandomMod(10) + y - 4;
@@ -30,7 +30,7 @@ int __cdecl fcn_004bc8a0(float* a1, int n, float* out)
 			ny = *(int*) (g + 0x20) - 2;
 		if (ny < 2)
 			ny = 2;
-		if (fcn_00407e30(g, a1, a1, nx, ny, &nx, &ny, 0x258, 0) != 0)
+		if (fcn_00407e30(g, position, position, nx, ny, &nx, &ny, 0x258, 0) != 0)
 			fcn_0045b920(g, nx, ny, out + k * 4);
 		else
 			fcn_0045b920(g, x, y, out + k * 4);

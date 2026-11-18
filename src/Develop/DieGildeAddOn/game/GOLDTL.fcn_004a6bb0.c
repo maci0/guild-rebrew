@@ -42,13 +42,11 @@ typedef struct {
 	char fba[6];
 } Game;
 
-extern char* g_1007cd4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Card_1007ce0 g_1007ce0[24];
 extern Player g_1007e60[2];
 extern unsigned char g_773d75;
 extern char* g_14a62d8[];
-extern char* g_14a5dbc[];
-extern char* g_14a60d0[];
 
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004fdec0(char* name);

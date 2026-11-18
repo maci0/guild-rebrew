@@ -8,9 +8,9 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 int __cdecl fcn_004fa230(void* a1, void* a2)
 {
-	int r;
+	int result;
 
-	r = 0;
+	result = 0;
 	*(char*) ((char*) a2 + 0x14) = 0;
 	if (*(int*) a2 != 3 && *(int*) a2 != 1) {
 		return 1;
@@ -31,7 +31,7 @@ int __cdecl fcn_004fa230(void* a1, void* a2)
 		return 1;
 	}
 	if (*(int*) a2 == 3) {
-		r = fcn_005db460(a1, a2);
+		result = fcn_005db460(a1, a2);
 	}
-	return r | 2;
+	return result | 2;
 }

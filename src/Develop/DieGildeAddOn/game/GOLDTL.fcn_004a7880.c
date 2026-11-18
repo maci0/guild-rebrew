@@ -4,7 +4,7 @@ typedef Card_1007ce0 Card;
 
 extern Card_1007ce0 g_1007ce0[24];
 
-extern char* g_1007cd4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned short __cdecl gm_RandomMod(int n);
 

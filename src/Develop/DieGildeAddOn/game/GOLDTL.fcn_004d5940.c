@@ -1,20 +1,13 @@
 extern int g_772ea8;
 extern unsigned short* g_772e98;
 extern unsigned short* g_772e9c;
-extern char* g_772eb4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_772eac;
-extern int g_100f1dc;
 #include "client_dialog_state.h"
-extern int g_14ce8e0;
 extern unsigned char g_773d75;
 extern int g_774654;
-extern double g_662908;
-extern double g_6629f8;
-extern double g_6640e8;
 extern double g_6640f8;
 extern double g_664108;
-extern float g_664168;
-extern int g_67d370;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);

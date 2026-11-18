@@ -30,36 +30,36 @@ void __cdecl fcn_0052a2d0(void);
 
 extern char g_7746cc[];
 /* ADDRESS: GOLDTL 0x0059dcf0 */
-void __cdecl fcn_0059dcf0(void* a)
+void __cdecl fcn_0059dcf0(void* entity)
 {
-	Dlgs_0059dcf0 s;
-	void* e;
-	void* q;
+	Dlgs_0059dcf0 message;
+	void* entry;
+	void* selection;
 	int i;
 	int idx;
 
-	e = 0;
-	if (fcn_00525fb0(a) != 0)
+	entry = 0;
+	if (fcn_00525fb0(entity) != 0)
 		return;
-	fcn_0052a0c0(a, 0);
+	fcn_0052a0c0(entity, 0);
 	if (fcn_00526120((void*) *(int*) 0x14abb7c, 1) != 0) {
 		for (i = 0; i < 0x20; i++) {
 			if (g_7e4260[i] != 0
 			    && *(unsigned char*) ((char*) g_7e4260[i] + 0x188) != 0) {
-				e = g_7e4260[i];
+				entry = g_7e4260[i];
 				break;
 			}
 		}
-		s.v04 = 0x6c;
-		idx = *(unsigned short*) ((char*) a + 0x27);
-		s.v36 = 1;
-		s.v08 = g_7f4ca4[idx * 0x87];
-		s.v0c = *(int*) ((char*) a + 1);
-		s.v28 = g_7f4c00;
-		q = *(void**) g_7746cc;
-		s.v58 = *(int*) ((char*) e + 4);
-		s.v70 = (q != 0 && *(unsigned short*) q != 0xfd) ? *(int*) ((char*) q + 2) : -1;
-		fcn_004c5530(&s);
+		message.v04 = 0x6c;
+		idx = *(unsigned short*) ((char*) entity + 0x27);
+		message.v36 = 1;
+		message.v08 = g_7f4ca4[idx * 0x87];
+		message.v0c = *(int*) ((char*) entity + 1);
+		message.v28 = g_7f4c00;
+		selection = *(void**) g_7746cc;
+		message.v58 = *(int*) ((char*) entry + 4);
+		message.v70 = (selection != 0 && *(unsigned short*) selection != 0xfd) ? *(int*) ((char*) selection + 2) : -1;
+		fcn_004c5530(&message);
 		fcn_004c35f0();
 		fcn_005305a0();
 	}

@@ -18,8 +18,7 @@ struct IDev {
 };
 
 extern void* g_6b5de0;
-extern int g_1052bac;
-extern int g_1042a08;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00458d20(char* o)
 {

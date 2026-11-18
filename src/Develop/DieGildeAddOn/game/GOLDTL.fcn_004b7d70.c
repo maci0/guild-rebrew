@@ -9,7 +9,7 @@ void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, int);
 
-int __cdecl fcn_004b7d70(void* a1)
+int __cdecl fcn_004b7d70(void* request)
 {
 	char buf[0x400];
 	int d2;
@@ -18,7 +18,7 @@ int __cdecl fcn_004b7d70(void* a1)
 	void* e;
 	int n;
 
-	p = gm_LookupEntityRecordById(*(int*) a1);
+	p = gm_LookupEntityRecordById(*(int*) request);
 	if (p == 0) {
 		return 1;
 	}
@@ -29,7 +29,7 @@ int __cdecl fcn_004b7d70(void* a1)
 	e = (void*) ((int) g_7f4ca0 + 540 * w1);
 	n = 2 * gm_RandomMod(5) + 6;
 	fcn_004c54c0(*(int*) ((char*) p + 4), *(int*) ((char*) e + 4), n, 1);
-	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7,
+	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
 	    *(unsigned short*) e, *(unsigned short*) e);
 	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);

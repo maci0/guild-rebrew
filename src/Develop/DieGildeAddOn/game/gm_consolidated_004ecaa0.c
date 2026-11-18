@@ -13,7 +13,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short n);
 void __cdecl fcn_004ecb40(void);
 #include "g_772f90.h"
 
-extern int g_772fd8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Draw772* g_772fdc;
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);

@@ -9,11 +9,8 @@ struct IRes {
 	IResVtbl* v;
 };
 
-extern char* g_1042c38;
-extern char g_1042d00[];
 extern unsigned long g_14ce728;
 extern int g_6b8300;
-extern int g_6b89c0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00452340(void);

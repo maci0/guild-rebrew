@@ -4,7 +4,7 @@
 extern int g_dispatch_table_a[1];
 extern int g_dispatch_table_b[1];
 extern unsigned short g_query_filter_type;
-extern int g_query_limit;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_query_filter_max_id;
 extern int g_query_filter_owner;
 

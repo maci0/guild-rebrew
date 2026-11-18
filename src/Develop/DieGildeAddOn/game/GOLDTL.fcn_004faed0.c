@@ -11,11 +11,8 @@ extern unsigned short g_696180;
 extern float g_99ef90[];         /* cell table, 6 floats per entry */
 extern float g_99ef94[];
 extern float g_99f590[];
-extern float g_6628a0;
-extern float g_6628bc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6629c0;
-extern float g_662a68;
-extern double g_662908;
 extern double g_6629c8;
 extern double g_664e60;
 

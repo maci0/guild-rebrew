@@ -8,10 +8,8 @@ typedef struct Val {
 } Val;
 // SIZE 0x10
 
-extern int g_67fcac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67fcb0;
-extern int g_67fcb4;
-extern char g_1007ba0[];
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 extern char* g_773da8;

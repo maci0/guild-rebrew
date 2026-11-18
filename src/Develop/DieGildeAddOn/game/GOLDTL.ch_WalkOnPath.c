@@ -6,7 +6,7 @@ extern char g_6b5c28;   /* scene debug switch */
 extern int g_6b8010;    /* scripted-motion mode */
 
 /* Shared float pool reached through raw .rdata addresses. */
-extern float g_662910;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_6629c8;
 extern float g_6629c0;
 extern float g_6629bc;

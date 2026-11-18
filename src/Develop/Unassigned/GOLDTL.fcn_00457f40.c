@@ -31,8 +31,7 @@ typedef struct GOLDTL_TileUv {
 } GOLDTL_TileUv;
 
 extern float g_6629b0;
-extern float g_662acc;
-extern float g_662da8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_6b7ff9;
 
 /* ADDRESS: GOLDTL 0x00457f40 */

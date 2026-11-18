@@ -16,7 +16,7 @@ void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_004c5150(int, int, char, int);
 
 /* ADDRESS: GOLDTL 0x004d52a0 */
-int __cdecl fcn_004d52a0(int* a0, char* a1, int* a2, int a3, float a4)
+int __cdecl fcn_004d52a0(int* a0, char* a1, int* a2, int a3, float scale)
 {
 	int total;
 	int i;
@@ -39,7 +39,7 @@ int __cdecl fcn_004d52a0(int* a0, char* a1, int* a2, int a3, float a4)
 			ent = fcn_00502cd0(*(int*) (ent + 0x14), 1, 5);
 			while (ent != 0) {
 				gm_ResolveParentEntity((short*) ent);
-				v = (float) *(int*) (ent + 0xe) * a4;
+				v = (float) *(int*) (ent + 0xe) * scale;
 				if (1.0f > v) {
 					v = 1.0f;
 				}

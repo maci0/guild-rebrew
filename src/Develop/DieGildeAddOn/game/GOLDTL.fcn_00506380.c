@@ -2,7 +2,7 @@ extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 extern char g_7f4ca0[];
 
-extern int g_774800;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl fcn_00507910(unsigned char typ);
 int __cdecl gm_CheckStatLevel(int a0, int typ);
 int __cdecl fcn_005903d0(void* geb, void* a1, void* a2);

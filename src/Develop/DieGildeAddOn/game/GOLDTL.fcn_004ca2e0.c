@@ -3,8 +3,7 @@
 
 #include <string.h>
 
-extern int g_14cbca0;
-extern int g_699364;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char cm_LastObjectId[];
 
 int __cdecl fcn_004c4dc0(char*, int);

@@ -9,11 +9,11 @@ typedef struct
 } Body18;
 // SIZE 0x48
 
-void __cdecl fcn_004c6aa0(Body18* a1)
+void __cdecl fcn_004c6aa0(Body18* body)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x59;
-	*(Body18*) (buf + 0x10) = *a1;
+	*(Body18*) (buf + 0x10) = *body;
 	fcn_004c4330(buf);
 }

@@ -5,7 +5,7 @@
 
 extern unsigned char g_773d75;
 extern char* g_773da8;
-extern char* g_item_def_table;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "game_data.h"
 typedef struct StateProto { unsigned char kind; unsigned char rest[0x24c]; } StateProto;
 extern char g_7f4ca0[];

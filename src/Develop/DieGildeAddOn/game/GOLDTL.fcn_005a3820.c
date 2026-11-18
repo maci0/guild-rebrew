@@ -15,9 +15,7 @@ void __cdecl fcn_005a3680(void);
 
 extern int g_7746d8;
 extern char* g_7746a0;
-extern int g_14ad100;
-extern int g_14ad0f0;
-extern int g_14a7d28;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14abb60;
 
 /* Object server loop: probes the two card-table object names, picks the

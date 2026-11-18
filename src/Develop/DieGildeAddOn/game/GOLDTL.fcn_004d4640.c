@@ -17,7 +17,7 @@ struct slot_4d4640 {
 
 
 /* ADDRESS: GOLDTL 0x004d4640 */
-void __cdecl fcn_004d4640(char* a1)
+void __cdecl fcn_004d4640(char* context)
 {
 	struct slot_4d4640* s;
 	char* r;
@@ -28,7 +28,7 @@ void __cdecl fcn_004d4640(char* a1)
 		fcn_0052ae80();
 		busy = 0;
 		for (i = 0; i < 16; i++) {
-			s = (struct slot_4d4640*) (a1 + 0x94) + i;
+			s = (struct slot_4d4640*) (context + 0x94) + i;
 			if (s->active != 0 && s->id != -1) {
 				r = gm_LookupEntityRecordIn32SlotTable(s->id);
 				if (r != 0 && *(char**) (r + 0x184) != 0

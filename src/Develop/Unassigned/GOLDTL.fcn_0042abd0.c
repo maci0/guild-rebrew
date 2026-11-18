@@ -11,17 +11,17 @@ typedef void (__stdcall* fcn_0042abd0_g)(void);
 extern fcn_0042abd0_f g_662404;
 extern fcn_0042abd0_g g_6623b8;
 
-int __cdecl fcn_0042abd0(int* a1, int a2, int* a3)
+int __cdecl fcn_0042abd0(int* device, int a2, int* outHandle)
 {
 	int r = 0;
 	int i;
 	int j;
 
-	if (g_6b7f90 != 0 && (i = fcn_0042b120(a1)) >= 0 && (j = fcn_0042b180(a1)) >= 0) {
-		*a3 = g_662404(*a1, a2, r);
-		if (*a3 != 0) {
-			g_6b7f50[i][j] = *a3;
-			a1[5]++;
+	if (g_6b7f90 != 0 && (i = fcn_0042b120(device)) >= 0 && (j = fcn_0042b180(device)) >= 0) {
+		*outHandle = g_662404(*device, a2, r);
+		if (*outHandle != 0) {
+			g_6b7f50[i][j] = *outHandle;
+			device[5]++;
 		} else {
 			g_6623b8();
 			r = -1;

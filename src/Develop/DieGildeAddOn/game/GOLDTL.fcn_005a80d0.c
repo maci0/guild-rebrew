@@ -34,7 +34,6 @@ void __cdecl fcn_0059e390(int a0);
 void __cdecl fcn_0058f0a0(int a0);
 void __cdecl fcn_005e69f0(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_774650;
 extern int g_774658, g_774688, g_77468c, g_7725c8, g_67530c, g_675310;
 /* ADDRESS: GOLDTL 0x005a80d0 */
 void __cdecl fcn_005a80d0(unsigned char* a0)

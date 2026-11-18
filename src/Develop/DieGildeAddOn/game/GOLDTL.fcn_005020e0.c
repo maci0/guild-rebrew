@@ -57,8 +57,7 @@ extern CurveRow g_8680c0[];
 extern TownRow g_85ab80[];
 extern char* lpObjektePROT;
 extern unsigned char g_773d75;
-extern int g_14cbca0;
-extern double g_662908;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00500d60(char*, Stamp*);
 void __cdecl fcn_005017a0(int);

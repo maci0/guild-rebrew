@@ -1,5 +1,4 @@
-extern int g_14cbca0;
-extern int g_14cbcb0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6b7d40;
 extern void (__stdcall *g_662374)(int, int);
 extern void (__stdcall *g_66234c)(int);

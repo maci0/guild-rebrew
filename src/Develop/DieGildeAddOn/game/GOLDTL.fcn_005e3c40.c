@@ -10,11 +10,7 @@ typedef struct {
 
 extern int g_1040490;
 extern int g_1040494;
-extern int g_1040480;
-extern int g_6a3764;
-extern int g_774954;
-extern int g_774670;
-extern char g_67d67c[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 int __cdecl fcn_005373e0(void*, int);

@@ -47,11 +47,9 @@ typedef struct {
 } Guild4adc;
 
 #include "Develop/DieGildeAddOn/game/game_matrices.h"
-extern char g_8680b4[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];
-extern int g_7728cc;
-extern int g_7728c4;
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 

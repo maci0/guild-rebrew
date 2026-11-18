@@ -1,5 +1,4 @@
-extern char g_9b0e20[];
-extern char g_9b0e20[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLD 0x004e50e0 */
 /* ADDRESS: GOLDTL 0x004e6a70 */

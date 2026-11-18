@@ -1,8 +1,7 @@
 #include "client_types.h"
 extern Slot_779d00 g_779d00[];
 extern Slot_779d00 g_779d00[];
-extern int g_7e2700;
-extern int g_7e2700;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf72a[];
 extern char g_14cf72a[];
 extern char g_14cf950;

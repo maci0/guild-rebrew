@@ -1,7 +1,7 @@
 #include "client_types.h"
 
 extern pos14_7f4c00 g_7f4c00;
-extern double g_662908;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004f4830(int idx, void* dst);
 char* __cdecl gm_LookupEntityRecordById(int a1);

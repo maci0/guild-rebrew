@@ -2,7 +2,7 @@
 typedef entry_100d0c0 fcn_0047e220_entry;
 // SIZE 0x58
 
-extern int g_100b0ac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern entry_100d0c0 g_100d0c0[];
 
 void __cdecl fcn_004c52d0(int, int);

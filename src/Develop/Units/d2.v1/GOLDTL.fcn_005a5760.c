@@ -46,7 +46,7 @@ void __cdecl io_FormatTextBuffer(void*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_00472900(int, int);
 
-void __cdecl fcn_005a5760(Row* rows, int a2, int a3, int a4)
+void __cdecl fcn_005a5760(Row* rows, int window, int form, int a4)
 {
 	char buf[0x80];
 	int i;
@@ -55,7 +55,7 @@ void __cdecl fcn_005a5760(Row* rows, int a2, int a3, int a4)
 		if (rows[i].id == 0) {
 			return;
 		}
-		d2_SetForm(a2, a3);
+		d2_SetForm(window, form);
 		if (a4 != 0) {
 			rows[i].icon = fcn_00466ee0((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, 0x82, g_772514);
 		} else {

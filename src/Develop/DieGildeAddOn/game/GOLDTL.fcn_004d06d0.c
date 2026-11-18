@@ -1,6 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern int g_67d370;
 int __cdecl fcn_00443bf0(float, float, int, int); int __cdecl fcn_00442c00(int, int);
 int __cdecl fcn_0045bad0(int, int, int, int*, int*);
 char __cdecl fcn_0045b920(int, int, int, float*);

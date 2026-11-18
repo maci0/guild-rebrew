@@ -1,4 +1,4 @@
-extern int g_6643d8[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char* g_entity_ptr;
 
 int __cdecl gm_RandomMod(int a0);

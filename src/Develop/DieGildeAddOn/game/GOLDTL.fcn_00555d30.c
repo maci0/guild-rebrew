@@ -1,5 +1,5 @@
 
-extern int g_772514;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 unsigned short __cdecl gm_RandomMod(int);

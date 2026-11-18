@@ -26,7 +26,7 @@ int __cdecl fcn_004b9e60(int* a1)
 	char* s;
 	int n;
 	int cnt;
-	int r;
+	int choice;
 
 	n = 0;
 	e = gm_LookupEntityRecordById(a1[0]);
@@ -49,9 +49,9 @@ int __cdecl fcn_004b9e60(int* a1)
 	if (n == 0)
 		return 0x400;
 	cnt = gm_RandomMod(3) + 2;
-	r = gm_RandomMod(n);
-	s = ss[r];
-	y = ys[r];
+	choice = gm_RandomMod(n);
+	s = ss[choice];
+	y = ys[choice];
 	gm_ResolveEntityById((void**) (&x2), 0, 0, *(int*) (s + 0xb0));
 	gm_ResolveEntityById((void**) (&x1), 0, 0, *(int*) (s + 0xb4));
 	if (*x2 == 'G')

@@ -45,7 +45,7 @@ struct SaveHeaderTail {
 };
 #pragma pack()
 extern char g_save_header_tail[]; /* 0x1002d4f0 */
-extern unsigned short g_7ea3c0[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl fcn_0041bac0(char a, char b, char c);
 
 int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)

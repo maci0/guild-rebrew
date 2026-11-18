@@ -16,7 +16,7 @@ typedef struct Hand {
 #include "client_types.h"
 extern Card_1007ce0 g_1007ce0[24];
 
-int __cdecl fcn_004a7240(Hand* in, Hand* out, int a3)
+int __cdecl fcn_004a7240(Hand* in, Hand* out, int flag)
 {
 	int swapped;
 	int k;
@@ -24,7 +24,7 @@ int __cdecl fcn_004a7240(Hand* in, Hand* out, int a3)
 	int t;
 
 	swapped = 1;
-	if (a3 != 0 || in->c[0] < 0 || in->c[1] < 0 || in->c[2] < 0 || in->c[3] < 0 || in->c[4] < 0) {
+	if (flag != 0 || in->c[0] < 0 || in->c[1] < 0 || in->c[2] < 0 || in->c[3] < 0 || in->c[4] < 0) {
 		return 0;
 	}
 	*out = *in;

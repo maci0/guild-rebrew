@@ -5,9 +5,8 @@ extern char g_7e22c0[];      /* ini file path */
 extern char g_7e23ea[];      /* first name buffer (0x20) */
 extern char g_7e240a[];      /* family name buffer (0x20) */
 extern char g_14cf950;       /* last pressed key */
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc;        /* focused element id */
-extern int g_67d370;
 #include "client_dialog_state.h"
 extern int* g_774a34;        /* entity list head */
 extern int* g_779cb8;        /* rejected entity */
@@ -16,9 +15,8 @@ extern char* g_100f1e4;      /* element of the current player */
 extern int g_102cbc8[];
 extern int g_102cbcc[];
 extern char g_1015f4c[];
-extern int g_772514;
 extern char g_7e23e0;
-#include "GOLDTL.fcn_005936f0_gconf.h"
+extern unsigned char g_7e23e1; extern unsigned char g_7e23e2;
 extern int g_7e23e4;
 extern char g_7e23e8;
 extern char g_7e23e9;
@@ -275,8 +273,8 @@ dispatch:
 		}
 		else if (sel == 5) {
 			g_7e23e0 = 0;
-			g_7e23e1 = 0;
-			g_7e23e2 = 0x12;
+			(*(char *)&g_7e23e1) = 0;
+			(*(char *)&g_7e23e2) = 0x12;
 			g_7e23e4 = *(int*) (g_1015ea0 + g_102cbcc[group * 35 + g_102cbc8[group * 35]] * 0x2f4 + 8);
 			result = 1;
 			g_774654 = 1;

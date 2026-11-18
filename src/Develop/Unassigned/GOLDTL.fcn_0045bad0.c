@@ -1,12 +1,9 @@
 #include <math.h>
 
 extern char* g_6b8014;
-extern float g_1052bc0;
-extern float g_1052bc8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_10432a4;
-extern float g_1042584;
 extern float g_6628a8;
-extern float g_6628a0;
 extern double g_662e68;
 
 float* __stdcall fcn_005ebbb9(float* out, const float* in);

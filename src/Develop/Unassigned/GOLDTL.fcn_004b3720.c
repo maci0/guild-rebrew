@@ -1,5 +1,5 @@
 #include "client_data.h"
-extern int g_67fca8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67fca4;
 extern unsigned char g_7728d4;
 int __cdecl hst_ParseDate(int, int, int*, int);

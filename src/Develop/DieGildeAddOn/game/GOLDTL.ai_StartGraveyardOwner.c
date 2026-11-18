@@ -29,9 +29,9 @@ int __cdecl fcn_0048fb10(char* e, char* q, Blk24* b1, Blk24* b2);
 
 int __cdecl ai_StartGraveyardOwner(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 {
-	char* q;
+	char* target;
 	int res[4];
-	int found;
+	int targetId;
 	Blk24 b1[4];
 	Blk24 b2[4];
 	int k;
@@ -56,17 +56,17 @@ int __cdecl ai_StartGraveyardOwner(int a1, char* e, int a3, Blk24* o1, Blk24* o2
 	if (gm_CheckStatLevel(*(unsigned short*) e, 0xd) == 0) {
 		return 0;
 	}
-	if (fcn_004a5e60(e, 4, f, 0, 100.0f, &found) == 0) {
+	if (fcn_004a5e60(e, 4, f, 0, 100.0f, &targetId) == 0) {
 		return 0;
 	}
-	gm_ResolveEntityById((void**) (&q), 0, 0, found);
-	if (q == 0) {
+	gm_ResolveEntityById((void**) (&target), 0, 0, targetId);
+	if (target == 0) {
 		return 0;
 	}
-	res[0] = fcn_0048f4f0(e, q, &b1[0], &b2[0]);
-	res[1] = fcn_0048f710(e, q, &b1[1], &b2[1]);
-	res[2] = fcn_0048f8f0(e, q, &b1[2], &b2[2]);
-	res[3] = fcn_0048fb10(e, q, &b1[3], &b2[3]);
+	res[0] = fcn_0048f4f0(e, target, &b1[0], &b2[0]);
+	res[1] = fcn_0048f710(e, target, &b1[1], &b2[1]);
+	res[2] = fcn_0048f8f0(e, target, &b1[2], &b2[2]);
+	res[3] = fcn_0048fb10(e, target, &b1[3], &b2[3]);
 	k = gm_RandomMod(4);
 	for (n = 4; n != 0;) {
 		if (res[k] != 0) {

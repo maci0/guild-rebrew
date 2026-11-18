@@ -35,7 +35,6 @@ extern int g_77472c;
 extern float g_7e42e0;
 extern int g_7e4380;
 extern int g_7e2a60;
-extern int g_6b5cc0;
 extern int g_6a2bd8;
 extern char g_7746fc;
 extern int g_67a370;

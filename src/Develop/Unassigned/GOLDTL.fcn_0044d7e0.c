@@ -8,18 +8,18 @@ void __cdecl fcn_0044d7e0(void* stream, int* table, int kind, void* extra)
 {
 	int* rec;
 	int idx;
-	int v;
+	int token;
 
-	v = fcn_0044d770(stream);
-	if (v != 0x27) {
+	token = fcn_0044d770(stream);
+	if (token != 0x27) {
 		do {
-			if (v == 0x2f) {
+			if (token == 0x2f) {
 				break;
 			}
-			if (v == 0x2b) {
+			if (token == 0x2b) {
 				break;
 			}
-			if (v == 0x28) {
+			if (token == 0x28) {
 				idx = FindTableEntryIndex(0x28, table, kind);
 				if (idx != 0x27) {
 					if (table[idx * 3 + 1] != 0) {
@@ -28,7 +28,7 @@ void __cdecl fcn_0044d7e0(void* stream, int* table, int kind, void* extra)
 				}
 				break;
 			}
-			idx = FindTableEntryIndex(v, table, kind);
+			idx = FindTableEntryIndex(token, table, kind);
 			if (idx != 0x27) {
 				rec = table + idx * 3;
 				if (rec[1] != 0 && rec[2] == 0) {
@@ -45,8 +45,8 @@ void __cdecl fcn_0044d7e0(void* stream, int* table, int kind, void* extra)
 					}
 				}
 			}
-			v = fcn_0044d770(stream);
-		} while (v != 0x27);
+			token = fcn_0044d770(stream);
+		} while (token != 0x27);
 	}
 	g_6b86c0--;
 }

@@ -23,22 +23,22 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004910e0(Ent* e, int a2, int* out)
 {
 	Stat st;
-	int r;
-	int d;
+	int range;
+	int difference;
 
-	r = gm_MapEntityStatRange(e->job);
+	range = gm_MapEntityStatRange(e->job);
 	if ((*(int*)&g_7f4c00) < 4) {
 		return 0;
 	}
 	fcn_004f4830(0xc, &st);
-	d = st.v[2] - st.v[1];
-	if (r == 8) {
-		if (st.v[6] > (int) (d * 0.33f + st.v[1])) {
+	difference = st.v[2] - st.v[1];
+	if (range == 8) {
+		if (st.v[6] > (int) (difference * 0.33f + st.v[1])) {
 			*out = st.v[1] + gm_RandomMod(3);
 			return 1;
 		}
 	} else {
-		if (st.v[6] < (int) (d * 0.66f + st.v[1])) {
+		if (st.v[6] < (int) (difference * 0.66f + st.v[1])) {
 			*out = st.v[2] - gm_RandomMod(3);
 			return 1;
 		}

@@ -22,14 +22,14 @@ int __cdecl fcn_004b0220(int a1, int a2, char *a3)
 		int i;
 		int amount;
 		int dir;
-		char *p;
+		char *cursor;
 		char *e;
 		unsigned short *q;
-		unsigned short *r;
+		unsigned short *item;
 
-		p = a3 + 1;
+		cursor = a3 + 1;
 		for (i = 0; i < 2; i++) {
-			if (memcmp(p, word[i], strlen(word[i])) == 0) {
+			if (memcmp(cursor, word[i], strlen(word[i])) == 0) {
 				break;
 			}
 		}
@@ -37,12 +37,12 @@ int __cdecl fcn_004b0220(int a1, int a2, char *a3)
 			return 0;
 		}
 		dir = sign[i];
-		p += strlen(word[i]);
-		if (*p != '_') {
+		cursor += strlen(word[i]);
+		if (*cursor != '_') {
 			return 0;
 		}
-		p++;
-		a3 = (char *) atoi(p);
+		cursor++;
+		a3 = (char *) atoi(cursor);
 		if ((int) a3 <= 0) {
 			return 1;
 		}
@@ -54,21 +54,21 @@ int __cdecl fcn_004b0220(int a1, int a2, char *a3)
 		if (q == 0) {
 			return 0;
 		}
-		r = fcn_00502cd0(*(int *) ((char *) q + 0x14), 1, 5);
-		if (r == 0) {
+		item = fcn_00502cd0(*(int *) ((char *) q + 0x14), 1, 5);
+		if (item == 0) {
 			return 1;
 		}
 		while (1) {
-			type = g_item_def_table[*(unsigned short *) r * 0x41];
+			type = g_item_def_table[*(unsigned short *) item * 0x41];
 			if (type == 9) {
 				break;
 			}
-			r = gm_NextEntityQueryMatch();
-			if (r == 0) {
+			item = gm_NextEntityQueryMatch();
+			if (item == 0) {
 				return 1;
 			}
 		}
-		amount = *(int *) ((char *) r + 0xe);
+		amount = *(int *) ((char *) item + 0xe);
 		if (amount <= 0) {
 			return 1;
 		}

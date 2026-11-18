@@ -70,7 +70,7 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 	int i;
 	int j;
 	int ent;
-	int v;
+	int amount;
 	char buf[0x20];
 
 	result = -1;
@@ -121,12 +121,12 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 		r->ent = ent;
 		q = (char*) fcn_00502cd0(list, 1, 0, r->key);
 		if (q != 0 && fcn_00508640(*(int*) (q + 0xe), r->key) != 0) {
-			v = fcn_00508640(*(int*) (q + 0xe), r->key);
-			d2_SetElementValue(r->icon, 0, v, ent);
-			io_FormatTextBuffer(buf, (int) g_6aac70, v, g_14a79c0[r->key * 2]);
+			amount = fcn_00508640(*(int*) (q + 0xe), r->key);
+			d2_SetElementValue(r->icon, 0, amount, ent);
+			io_FormatTextBuffer(buf, (int) g_6aac70, amount, g_14a79c0[r->key * 2]);
 			fcn_0046f940(r->label, buf);
 			((Ent*)g_1015ea0)[r->label].f18 = 0xbe;
-			r->count = v;
+			r->count = amount;
 		} else {
 			fcn_0046b2b0(r->label);
 			r->label = -1;

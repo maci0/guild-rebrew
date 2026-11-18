@@ -28,21 +28,21 @@ int __cdecl gm_LookupEntityRecordById();
 int __cdecl fcn_00591990();
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005a1130 */
-int __cdecl fcn_005a1130(char* a0, int a1)
+int __cdecl fcn_005a1130(char* a0, int window)
 {
 	char* self;
 	int i;
 	int x;
 	int y;
 
-	d2_SetForm(a1, 2);
+	d2_SetForm(window, 2);
 	fcn_0046f2c0(*(int*) &g_772514, 1);
-	d2_SetForm(a1, 3);
+	d2_SetForm(window, 3);
 	fcn_0046f2c0(*(int*) &g_772514, 1);
 	self = a0;
 
 	if (*(unsigned char*) (*(char**) (self + 0xc) + 2) == 6) {
-		d2_SetForm(a1, 3);
+		d2_SetForm(window, 3);
 		io_AppendText(0x6a9694, *(char**) (self + 0xc) + 0x30);
 		i = 0;
 		x = 0x1c;
@@ -54,7 +54,7 @@ int __cdecl fcn_005a1130(char* a0, int a1)
 			y = 0x1d + (i > 7 ? 0x29 : 0);
 		}
 	} else {
-		d2_SetForm(a1, 2);
+		d2_SetForm(window, 2);
 		io_AppendText(0x6a9694, *(char**) (self + 0xc) + 0x30);
 		i = 0;
 		x = 0x1c;
@@ -72,7 +72,7 @@ int __cdecl fcn_005a1130(char* a0, int a1)
 	}
 
 	if (*(unsigned char*) (*(char**) (self + 0x30) + 2) == 6) {
-		d2_SetForm(a1, 3);
+		d2_SetForm(window, 3);
 		io_AppendText(0x6a9694, *(char**) (self + 0x30) + 0x30);
 		i = 0;
 		x = 0x1c;
@@ -84,7 +84,7 @@ int __cdecl fcn_005a1130(char* a0, int a1)
 			y = 0x1d + (i > 7 ? 0x29 : 0);
 		}
 	} else {
-		d2_SetForm(a1, 2);
+		d2_SetForm(window, 2);
 		io_AppendText(0x6a9694, *(char**) (self + 0x30) + 0x30);
 		i = 0;
 		x = 0x1c;
@@ -101,7 +101,7 @@ int __cdecl fcn_005a1130(char* a0, int a1)
 		}
 	}
 
-	d2_SetForm(a1, 4);
+	d2_SetForm(window, 4);
 	fcn_0046f2c0(*(int*) &g_772514, 1);
 	if ((*(int*) (self + 8) == 5 && *(unsigned char*) (*(char**) (self + 0xc) + 2) == 6)
 		|| (*(int*) (self + 8) == 6 && *(unsigned char*) (*(char**) (self + 0x30) + 2) == 6)) {

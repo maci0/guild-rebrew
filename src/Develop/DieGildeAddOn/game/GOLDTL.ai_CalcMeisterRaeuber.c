@@ -18,11 +18,9 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
 extern char* g_773da8;
 extern int g_7747b4;
-extern int g_100b0a8;
-extern int g_100b0ac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100dc20;
 extern int g_100dc24;
-extern int g_100dc34;
 
 unsigned short __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);

@@ -24,9 +24,7 @@ typedef struct pkt99_payload {
 
 typedef cell10_fb5760 cell10;
 
-extern int g_14cbcb0;
-extern int g_1005768;
-extern int g_1005760;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_aed330;
 extern pkt99 g_aed740[0x8000];
 extern cell10_fb5760 g_fb5760[0x8000];

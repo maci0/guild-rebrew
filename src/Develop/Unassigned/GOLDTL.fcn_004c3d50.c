@@ -18,15 +18,12 @@ typedef cell10_fb5760 cell10;
 
 extern int g_68a9dc;
 extern char g_9bade0[];
-extern char* g_aed200;
-extern char* g_aed324;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1005780;
-extern int g_1005768;
-extern int g_1005760;
 extern cell10_fb5760 g_fb5760[0x8000];
 extern char* g_14cbca4;
 extern volatile int g_6b7fac;
-#include "GOLDTL.fcn_004c3d50_gconf.h"
+extern unsigned int g_aecde4;
 
 void __cdecl fcn_004c3f70(void);
 int __cdecl fcn_004c3fa0(void);
@@ -61,5 +58,5 @@ void __cdecl fcn_004c3d50(void)
 	fcn_004c3f70();
 	if (fcn_004c3fa0() != 0)
 		fcn_00421050();
-	g_aecde4 = g_6b7fac;
+	(*(int *)&g_aecde4) = g_6b7fac;
 }

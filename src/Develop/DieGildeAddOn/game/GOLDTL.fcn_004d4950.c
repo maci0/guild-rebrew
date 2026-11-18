@@ -1,7 +1,7 @@
 #include <string.h>
 #include "game_data.h"
 #include "client_packet_builder.h"
-extern int g_68b79c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_004ce610(char*);
 int __cdecl fcn_00402610(char*);

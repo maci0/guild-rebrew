@@ -1,4 +1,4 @@
-extern int g_7749d4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 extern void (__cdecl* g_7dc440[])(unsigned char*);

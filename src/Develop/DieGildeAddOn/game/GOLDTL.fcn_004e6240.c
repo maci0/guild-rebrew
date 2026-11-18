@@ -11,38 +11,38 @@ void __cdecl fcn_004c5580(char*, int, char*);
 /* ADDRESS: GOLDTL 0x004e6240 */
 void __cdecl fcn_004e6240(int* a1, char* a2, char* text, char* extra)
 {
-	char m[0xf8];
+	char message[0xf8];
 	char buf[0x800];
-	char* s;
-	char* q;
+	char* entity;
+	char* query;
 	int k;
 	int n;
 
-	memset(m, 0, sizeof(m));
-	m[4] = 0x11;
-	*(int*) (m + 0xc) = -1;
-	m[0x36] = 9;
-	*(int*) (m + 0x58) = 0x5ec;
-	*(int*) (m + 8) = a1[1];
+	memset(message, 0, sizeof(message));
+	message[4] = 0x11;
+	*(int*) (message + 0xc) = -1;
+	message[0x36] = 9;
+	*(int*) (message + 0x58) = 0x5ec;
+	*(int*) (message + 8) = a1[1];
 	k = *(int*) (a2 + 0x14);
 	if (k != -1 && (a2[0x26] & 0x10) != 0)
-		m[0x9c] = 0xe;
+		message[0x9c] = 0xe;
 	else
-		m[0x9c] = 0xc;
-	*(int*) (m + 0x5c) = k;
-	*(int*) (m + 0x64) = *(int*) a2;
-	*(int*) (m + 0x60) = -1;
+		message[0x9c] = 0xc;
+	*(int*) (message + 0x5c) = k;
+	*(int*) (message + 0x64) = *(int*) a2;
+	*(int*) (message + 0x60) = -1;
 	if (k != -1) {
-		s = gm_SearchTable67(k);
-		if (s != 0) {
-			if (gm_CheckEntityType(s) == 0) {
-				q = gm_SetupEntityQuery(s);
-				if (q != 0)
-					*(int*) (m + 0x60) = *(int*) (q + 2);
+		entity = gm_SearchTable67(k);
+		if (entity != 0) {
+			if (gm_CheckEntityType(entity) == 0) {
+				query = gm_SetupEntityQuery(entity);
+				if (query != 0)
+					*(int*) (message + 0x60) = *(int*) (query + 2);
 			} else {
-				q = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0xfd);
-				if (q != 0)
-					*(int*) (m + 0x60) = *(int*) (q + 2);
+				query = fcn_00502cd0(*(int*) (entity + 0x5d), 1, 0, 0xfd);
+				if (query != 0)
+					*(int*) (message + 0x60) = *(int*) (query + 2);
 			}
 		}
 	}
@@ -50,9 +50,9 @@ void __cdecl fcn_004e6240(int* a1, char* a2, char* text, char* extra)
 	n = strlen(buf) + 1;
 	if (extra != 0 && *extra != 0) {
 		memcpy(buf + n, extra, strlen(extra) + 1);
-		m[0x9c] |= 0x10;
-		fcn_004c5580(m, strlen(extra) + n + 1, buf);
+		message[0x9c] |= 0x10;
+		fcn_004c5580(message, strlen(extra) + n + 1, buf);
 	} else {
-		fcn_004c5580(m, strlen(text) + 1, text);
+		fcn_004c5580(message, strlen(text) + 1, text);
 	}
 }

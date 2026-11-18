@@ -1,5 +1,5 @@
 extern char* g_entity_type_table;
-extern int g_773d70;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00506a70(void*);
 void __cdecl fcn_005b2a00(void*, void*);

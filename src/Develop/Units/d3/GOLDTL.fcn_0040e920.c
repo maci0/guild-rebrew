@@ -6,11 +6,11 @@ extern char g_6766f0[];
 
 void __cdecl fcn_00425bf0(int*, int, char*);
 
-int __cdecl ecmd_KillObject(void* a1)
+int __cdecl ecmd_KillObject(void* objectRef)
 {
 	void* p;
 
-	p = *(void**) a1;
+	p = *(void**) objectRef;
 	if (p != 0) {
 		d3_DestroyObject((D3_OBJECT*) (p));
 		return 1;

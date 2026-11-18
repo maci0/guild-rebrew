@@ -12,7 +12,7 @@
  */
 
 #include "client_lighting.h"
-extern float g_662a3c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))

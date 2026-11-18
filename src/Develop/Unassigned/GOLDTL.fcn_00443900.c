@@ -26,11 +26,7 @@ typedef struct
 // SIZE 0x8
 
 extern int g_67a370;
-extern char* g_1043254;
-extern char* g_1042538;
-extern char* g_1040c74;
-extern char* g_1040958;
-extern char g_1042340[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1043060;
 
 void __cdecl fcn_004379a0(fcn_00443900_Scene* s, fcn_00443900_Obj* o, int mask, void* fn, void* ctx);

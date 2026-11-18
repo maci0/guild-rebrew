@@ -23,7 +23,7 @@ void __cdecl fcn_0046f9b0(int, int);
 void __cdecl d2_AddRefcount(int);
 
 /* ADDRESS: GOLDTL 0x00468cf0 */
-int __cdecl fcn_00468cf0(int a1, int a2, int a3, int a4)
+int __cdecl fcn_00468cf0(int a1, int a2, int resourceId, int a4)
 {
 	int idx;
 
@@ -32,16 +32,16 @@ int __cdecl fcn_00468cf0(int a1, int a2, int a3, int a4)
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x5c / 4] = 1;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x1d0 / 4] = 3;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x10 / 4] = a1;
-	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x1c / 4] = ((fcn_00468cf0_Def*)g_772500)[a3].f52;
+	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x1c / 4] = ((fcn_00468cf0_Def*)g_772500)[resourceId].f52;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x14 / 4] = a2;
-	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x8 / 4] = a3;
+	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x8 / 4] = resourceId;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x30 / 4] = 0;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x34 / 4] = g_1040490;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x28 / 4] = 0;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x2c / 4] = g_1040494;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x84 / 4] = g_67d398;
-	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0xc / 4] = d2_GetResourceData(a3);
+	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0xc / 4] = d2_GetResourceData(resourceId);
 	fcn_0046f9b0(idx, a4);
-	d2_AddRefcount(a3);
+	d2_AddRefcount(resourceId);
 	return idx;
 }

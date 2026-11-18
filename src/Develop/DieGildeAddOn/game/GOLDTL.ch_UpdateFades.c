@@ -29,7 +29,7 @@ typedef struct {
 // SIZE 0xc
 
 extern int g_1551f40[0x30];
-extern int g_6b5c24;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_0043a3f0(char* node, char* m, Key4_4027b0 k);
 void __cdecl ch_SetVisible(char* obj, int shown);

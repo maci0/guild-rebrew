@@ -1,7 +1,7 @@
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 void* __cdecl fcn_00502cd0(int, int, ...);
-extern char* g_item_def_table;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_7746c4; extern unsigned char* g_7746c8; extern int* g_7e2a9c;
 extern char* g_7e2aa0; extern char* g_7746c0; extern char g_7746f4;
 /* ADDRESS: GOLDTL 0x00530510 */

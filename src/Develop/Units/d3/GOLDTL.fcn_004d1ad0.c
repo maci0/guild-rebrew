@@ -10,17 +10,17 @@ char __cdecl SelectTextureSet(void* obj, void* ctx, unsigned char a, char b);
 void __cdecl fcn_00455350(char* object, float* in, float* out);
 
 /* ADDRESS: GOLDTL 0x004d1ad0 */
-char __cdecl fcn_004d1ad0(char* a0)
+char __cdecl fcn_004d1ad0(char* dummy)
 {
 	float dir[3];
 	float pos[4];
 	char* obj;
 
-	if (strstr(a0, "dummy_sp_ESCAPE") != 0) {
+	if (strstr(dummy, "dummy_sp_ESCAPE") != 0) {
 		dir[0] = 0.0f;
 		dir[1] = 0.0f;
 		dir[2] = 0.0f;
-		fcn_00455350(a0, (float*) (a0 + 0x4c), pos);
+		fcn_00455350(dummy, (float*) (dummy + 0x4c), pos);
 		obj = fcn_00442910(0, pos, dir, "ub_FLUCHTFLAGGE");
 		g_9b9e40[g_772f08] = obj;
 		strcpy(obj, "sp_ESCAPE");
@@ -34,11 +34,11 @@ char __cdecl fcn_004d1ad0(char* a0)
 		g_772f08++;
 		return 1;
 	}
-	if (strstr(a0, "dummy_CONQUER") != 0) {
+	if (strstr(dummy, "dummy_CONQUER") != 0) {
 		dir[0] = 0.0f;
 		dir[1] = 0.0f;
 		dir[2] = 0.0f;
-		fcn_00455350(a0, (float*) (a0 + 0x4c), pos);
+		fcn_00455350(dummy, (float*) (dummy + 0x4c), pos);
 		obj = fcn_00442910(0, pos, dir, "ub_CONQUER");
 		g_9b9e40[g_772f08] = obj;
 		SelectTextureSet(obj, *(void**) (obj + 0x1cc), 1, 1);

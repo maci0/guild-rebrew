@@ -13,8 +13,7 @@ typedef struct {
 	char name[0x74];
 } fcn_004b2070_rec;
 
-extern char g_1007bc0[];
-extern char g_149d120[][0x74];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6808a4[];
 
 int __cdecl fcn_0065f2f0(char*, char*, int);

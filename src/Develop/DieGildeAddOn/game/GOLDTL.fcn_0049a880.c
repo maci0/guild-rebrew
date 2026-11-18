@@ -38,7 +38,7 @@ int __cdecl fcn_0049a880(int kind, char* e, int busy, Msg* out1, Msg* out2)
 	Msg m1;
 	Counts cnt;
 	int idx;
-	int r;
+	int result;
 	int who;
 
 	who = kind != 0 ? kind : 0x1e;
@@ -79,12 +79,12 @@ int __cdecl fcn_0049a880(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				m2.type = 7;
 				m2.a = *(int*) (e + 4);
 				m2.b = 1;
-				r = fcn_00495400(who, *(unsigned short*) e, 2, &m1, &m2);
-				if (r != 0) {
+				result = fcn_00495400(who, *(unsigned short*) e, 2, &m1, &m2);
+				if (result != 0) {
 					*out1 = m1;
 					*out2 = m2;
 				}
-				return r;
+				return result;
 			}
 		}
 	}

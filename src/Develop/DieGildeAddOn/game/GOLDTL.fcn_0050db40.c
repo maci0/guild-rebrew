@@ -12,7 +12,7 @@ typedef struct {
 } Entity;
 
 extern float g_6628a8;
-extern double g_6628f0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_665bf0;
 extern double g_664f18;
 

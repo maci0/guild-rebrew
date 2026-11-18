@@ -33,7 +33,7 @@ extern char* g_14ac60c;
 extern unsigned char g_6a375c;
 extern char g_7f4ca0[];
 extern char g_7e2480[];
-#include "GOLDTL.fcn_005e41b0_gconf.h"
+extern int g_774980;
 extern char g_773de8;
 typedef struct VFS_DIR VFS_DIR;
 extern VFS_DIR* g_6b7fdc;
@@ -76,7 +76,7 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 			}
 		}
 		strcpy(g_7e2480, title);
-		g_773de8 = g_774980;
+		g_773de8 = (*(char *)&g_774980);
 		fcn_005e3fa0("Gamedata/cities/standard.scr");
 		sprintf(path, "Gamedata\\network\\%s.SAV", name);
 		f = vfs_Tfopen(path, "wb", g_6b7fdc);

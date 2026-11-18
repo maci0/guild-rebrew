@@ -6,32 +6,32 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 
 /* ADDRESS: GOLDTL 0x004fa3b0 */
-int __cdecl fcn_004fa3b0(void* a1, void* a2)
+int __cdecl fcn_004fa3b0(void* obj, void* request)
 {
 	int r;
 
 	r = 0;
-	*(char*) ((char*) a2 + 0x14) = 0;
-	if (*(int*) a2 != 3 && *(int*) a2 != 1) {
+	*(char*) ((char*) request + 0x14) = 0;
+	if (*(int*) request != 3 && *(int*) request != 1) {
 		return 1;
 	}
-	if ((*(unsigned int*) ((char*) a1 + 0x1c8) & 0x100) != 0) {
+	if ((*(unsigned int*) ((char*) obj + 0x1c8) & 0x100) != 0) {
 		return 1;
 	}
-	if ((*(unsigned int*) ((char*) a1 + 0x1cc) & 0x400) == 0) {
+	if ((*(unsigned int*) ((char*) obj + 0x1cc) & 0x400) == 0) {
 		return 1;
 	}
-	if (*(char*) ((char*) a1 + 2) == 6) {
-		io_FormatTextBuffer((char*) a2 + 0x14, (int) g_679060, 0x1e1c);
+	if (*(char*) ((char*) obj + 2) == 6) {
+		io_FormatTextBuffer((char*) request + 0x14, (int) g_679060, 0x1e1c);
 	}
-	if ((*(unsigned int*) ((char*) a1 + 0x1c8) & 0x200) != 0) {
+	if ((*(unsigned int*) ((char*) obj + 0x1c8) & 0x200) != 0) {
 		return 9;
 	}
-	if ((*(unsigned int*) ((char*) a1 + 0x1c8) & 0x40000) != 0) {
+	if ((*(unsigned int*) ((char*) obj + 0x1c8) & 0x40000) != 0) {
 		return 1;
 	}
-	if (*(int*) a2 == 3) {
-		r = fcn_005db6a0(a1, a2);
+	if (*(int*) request == 3) {
+		r = fcn_005db6a0(obj, request);
 	}
 	return r | 2;
 }

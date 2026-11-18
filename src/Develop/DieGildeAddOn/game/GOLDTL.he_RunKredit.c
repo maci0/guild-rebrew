@@ -9,7 +9,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl fcn_004c5620(int, int);
 int __cdecl fcn_005c4ec0(int, int, int, char*);
-extern double g_6640e8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_64d41a(char*, char*, int);
 void __cdecl fcn_00546190(int);
 void __cdecl fcn_004c51a0(int, int, int, int);

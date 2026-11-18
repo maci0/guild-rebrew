@@ -6,7 +6,7 @@ extern unsigned char* lpGebaeudePROT;
 extern int g_6652f8[];
 extern float g_6652d8[];
 extern unsigned char g_773d75;
-extern char g_8680b4[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
 extern pos14_7f4c00 g_7f4c00;
 

@@ -1,5 +1,5 @@
 extern int g_6b7fdc;
-#include "GOLDTL.fcn_0044b340_gconf.h"
+extern char g_6b85c0[];
 
 char* __cdecl fcn_00449ac0(char*, char*);
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);

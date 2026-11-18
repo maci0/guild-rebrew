@@ -1,8 +1,7 @@
 #include "game_data.h"
 #include "game_player.h"
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
-extern int g_67d370;
 extern int g_14abaac;
 int __cdecl fcn_0055c050(char* obj);
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);

@@ -3,7 +3,7 @@
 
 #include "client_types.h"
 extern Slot170_7731b8 g_7731b8[8];
-extern int g_773d38;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004efd30(int a1)
 {

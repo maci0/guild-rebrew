@@ -18,7 +18,7 @@
 #include "game_structs.h"
 #define Record LinkedNode
 
-extern int g_query_limit;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl m_FreeTracked(void*);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
@@ -27,7 +27,6 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 
 /* Inferred execution-context role/name; original source-unit ownership unresolved. */
-extern char* g_6b7e94;
 extern char* g_6b7e98;
 extern void __cdecl fcn_00429670(unsigned char*);
 void __cdecl ProcessActiveContexts(void)

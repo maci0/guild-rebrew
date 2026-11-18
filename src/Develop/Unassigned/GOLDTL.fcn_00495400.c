@@ -45,10 +45,10 @@ int __cdecl fcn_00495400(int who, int idx, int arg, Pos *out1, Pos *out2)
 	int res1;
 	Pos p1;
 	Pos p2;
-	Pos a1;
-	Pos a2;
-	Pos b1;
-	Pos b2;
+	Pos primaryFirst;
+	Pos primarySecond;
+	Pos secondaryFirst;
+	Pos secondarySecond;
 	Actor *me;
 	Plan *pl;
 	int r;
@@ -57,11 +57,11 @@ int __cdecl fcn_00495400(int who, int idx, int arg, Pos *out1, Pos *out2)
 	best2 = -1e30f;
 	res1 = 0;
 	res2 = 0;
-	a1.valid = 0;
-	b1.valid = 0;
+	primaryFirst.valid = 0;
+	secondaryFirst.valid = 0;
 	me = &((Actor*)g_7f4ca0)[idx];
-	a2.valid = 0;
-	b2.valid = 0;
+	primarySecond.valid = 0;
+	secondarySecond.valid = 0;
 	if (fcn_00495150(who) != 0) {
 		return 0;
 	}
@@ -86,14 +86,14 @@ int __cdecl fcn_00495400(int who, int idx, int arg, Pos *out1, Pos *out2)
 					if (s1 >= best1) {
 						best1 = s1;
 						res1 = r;
-						a1 = p1;
-						a2 = p2;
+						primaryFirst = p1;
+						primarySecond = p2;
 					}
 					if (s2 >= best2) {
 						best2 = s2;
 						res2 = r;
-						b1 = p1;
-						b2 = p2;
+						secondaryFirst = p1;
+						secondarySecond = p2;
 					}
 				}
 			}
@@ -101,11 +101,11 @@ int __cdecl fcn_00495400(int who, int idx, int arg, Pos *out1, Pos *out2)
 		fcn_00495140();
 	}
 	if (best1 != 0.0f && best1 >= best2) {
-		*out1 = a1;
-		*out2 = a2;
+		*out1 = primaryFirst;
+		*out2 = primarySecond;
 		return res1;
 	}
-	*out1 = b1;
-	*out2 = b2;
+	*out1 = secondaryFirst;
+	*out2 = secondarySecond;
 	return res2;
 }

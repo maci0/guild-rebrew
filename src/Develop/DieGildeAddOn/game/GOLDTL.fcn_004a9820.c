@@ -8,10 +8,10 @@ unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
-int __cdecl fcn_004a9820(char* a1, char* e, char* a3, char* a4, char* out)
+int __cdecl fcn_004a9820(char* a1, char* entity, char* a3, char* a4, char* out)
 {
 	int id;
-	float d;
+	float score;
 	char* cands[6];
 	OFFICE_SLOT recs[6];
 	int n;
@@ -20,14 +20,14 @@ int __cdecl fcn_004a9820(char* a1, char* e, char* a3, char* a4, char* out)
 	int tries;
 	char* c;
 
-	if (*(int*) (e + 0x1c8) & 0x100) {
+	if (*(int*) (entity + 0x1c8) & 0x100) {
 		return 0x20;
 	}
-	if (*(int*) (e + 0x194) < 4) {
+	if (*(int*) (entity + 0x194) < 4) {
 		return 0x20;
 	}
 	if (*(int*) a3 == 1) {
-		id = *(int*) (e + 4);
+		id = *(int*) (entity + 4);
 	} else if (*(int*) a3 == 2 && *(char**) (a3 + 0x21c) != 0) {
 		id = *(int*) (*(char**) (a3 + 0x21c) + 4);
 	} else {
@@ -44,10 +44,10 @@ int __cdecl fcn_004a9820(char* a1, char* e, char* a3, char* a4, char* out)
 	for (tries = 6; tries != 0;) {
 		c = cands[k];
 		if (c != 0 && id != *(int*) (c + 4)) {
-			d = fcn_0050f980(*(unsigned short*) c, *(unsigned short*) e, 1);
-			if (gm_RandomMod(0x10) + 16.0f > d) {
+			score = fcn_0050f980(*(unsigned short*) c, *(unsigned short*) entity, 1);
+			if (gm_RandomMod(0x10) + 16.0f > score) {
 				c = cands[k];
-				if (c == 0 || *(int*) (e + 0x5c) == *(int*) (c + 4)) {
+				if (c == 0 || *(int*) (entity + 0x5c) == *(int*) (c + 4)) {
 					return 0;
 				}
 				out[0] = 7;

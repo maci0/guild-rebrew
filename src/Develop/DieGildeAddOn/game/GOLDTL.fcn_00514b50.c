@@ -34,7 +34,7 @@ typedef struct {
 } Player;
 #pragma pack(pop)
 
-extern int g_14cbca0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7747e8;
 extern char g_7f4ca0[];
 extern char g_868060[];

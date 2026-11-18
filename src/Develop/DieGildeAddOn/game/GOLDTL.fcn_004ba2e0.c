@@ -14,7 +14,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004ba2e0 */
-int __cdecl fcn_004ba2e0(int* a1)
+int __cdecl fcn_004ba2e0(int* input)
 {
 	char* ents[8];
 	char buf[0x200];
@@ -31,7 +31,7 @@ int __cdecl fcn_004ba2e0(int* a1)
 
 	n = 0;
 	sel = 0;
-	e = gm_LookupEntityRecordById(a1[0]);
+	e = gm_LookupEntityRecordById(input[0]);
 	if (e == 0)
 		return 1;
 	for (it = gm_StartFilteredEntitySearch(1, 3, *e); it != 0 && n < 8; it = gm_FindNextFilteredEntity()) {
@@ -55,7 +55,7 @@ int __cdecl fcn_004ba2e0(int* a1)
 	if (chosen == 0 || sel == 0)
 		return 0x400;
 	x = (sel[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (sel + 0x165);
-	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, x,
+	io_FormatTextBuffer(buf, *(unsigned short*) (input + 1) + 0x12e7, x,
 	    *(unsigned short*) sel, *(unsigned short*) sel, x);
 	fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;

@@ -32,8 +32,7 @@ extern char g_7f4ca0[];
 extern pos14_7f4c00 g_7f4c00;
 extern char* g_773da8;
 extern unsigned char g_773d75;
-extern int g_100f884;
-extern int g_100f1dc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00545780(char*);

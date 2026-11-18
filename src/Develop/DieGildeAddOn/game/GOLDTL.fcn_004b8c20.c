@@ -9,21 +9,21 @@ void __cdecl fcn_005100f0(int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b8c20 */
-int __cdecl fcn_004b8c20(int* a1)
+int __cdecl fcn_004b8c20(int* request)
 {
 	char buf[0x200];
 	unsigned short* e;
 	int n;
 
 	n = gm_RandomMod(3) + 2;
-	e = gm_LookupEntityRecordById(a1[0]);
+	e = gm_LookupEntityRecordById(request[0]);
 	if (e == 0)
 		return 1;
 	if (fcn_005c6270(e, 0x290) != 0)
 		return 0x400;
 	if (*(int*) (e + 0xca) < n)
 		return 0x400;
-	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, n);
+	io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, n);
 	fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 	fcn_005100f0(*(int*) (e + 2), -n);
 	return 0;

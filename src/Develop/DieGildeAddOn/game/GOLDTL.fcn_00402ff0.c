@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 
-extern void* g_14d0020[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00438c40(int, void*);
 

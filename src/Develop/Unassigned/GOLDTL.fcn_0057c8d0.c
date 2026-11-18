@@ -3,13 +3,13 @@
 
 int __cdecl fcn_00546190(int*);
 
-int __cdecl fcn_0057c8d0(int* a1)
+int __cdecl fcn_0057c8d0(int* event)
 {
-	int v;
+	int state;
 
-	v = *(int*) ((char*) a1 + 0x70);
-	if (v == -1 || v == -2) {
-		return fcn_00546190(a1);
+	state = *(int*) ((char*) event + 0x70);
+	if (state == -1 || state == -2) {
+		return fcn_00546190(event);
 	}
-	return v;
+	return state;
 }

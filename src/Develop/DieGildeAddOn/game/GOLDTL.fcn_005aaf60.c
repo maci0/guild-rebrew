@@ -1,15 +1,10 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern int g_100f1dc;
-extern int g_772514;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
-extern float g_662910;
-extern int g_14ce8e0;
 extern int g_774654;
-extern int g_67d370;
 extern char g_67728c[];
-extern char g_8680b4[];
 
 typedef struct {
 	int d;

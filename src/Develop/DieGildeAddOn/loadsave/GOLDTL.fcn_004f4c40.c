@@ -33,8 +33,7 @@ typedef struct
 
 #include "client_types.h"
 extern Slot_68ff80 g_68ff80[29];
-extern int g_773d38;
-extern int g_6a23ac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Rec2d_9a3800 g_9a3800[512];
 extern Pair_99f800 g_99f800[0x800];
 

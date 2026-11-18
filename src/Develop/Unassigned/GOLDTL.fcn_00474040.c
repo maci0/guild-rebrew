@@ -38,15 +38,12 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern int g_67d370;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_1015ea0;
 extern int g_102d028;
 extern int g_102d02c;
 extern short g_14ce8c0;
 extern short g_14ce8c2;
-extern int g_14ce8d0;
-extern int g_14ce8d4;
-extern int g_14ce8d8;
 
 Glyph* __cdecl fcn_0047b620(char* font, int c);
 

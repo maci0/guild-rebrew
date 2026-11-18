@@ -28,9 +28,6 @@ void __cdecl fcn_0054a6a0(int a0)
 	int v3;
 	int v4;
 	int v7;
-	char v8;
-	char v9;
-	unsigned int v10;
 	unsigned int v14;
 	int v15;
 	int pair[2];
@@ -64,7 +61,10 @@ void __cdecl fcn_0054a6a0(int a0)
 	}
 	v3 = fcn_00502cd0(*(int*) (v7 + 0x5d), 1, 0, 0x1b5);
 	switch (*(int*) (v2 + 0x70)) {
-	case 2:
+	case 2: {
+		char v8;
+		char v9;
+		unsigned int v10;
 		if (v3 && *(char*) (v3 + 0x22)) {
 			v8 = 0;
 			v9 = (char) 0xff;
@@ -112,6 +112,7 @@ void __cdecl fcn_0054a6a0(int a0)
 		*(unsigned short*) (v2 + 0x56) = 7;
 		*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
 		return;
+	}
 	case 1:
 		fcn_00500bb0(v2 + 0x52,
 		              (int) ((gm_RandomMod(2) & 0xffff) + 1), 0, 0);

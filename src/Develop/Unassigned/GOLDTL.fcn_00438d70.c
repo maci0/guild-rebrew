@@ -2,12 +2,12 @@
 
 void __cdecl fcn_00438cb0(char*, void*);
 
-void __cdecl fcn_00438d70(int a1, int a2, int a3, int a4)
+void __cdecl fcn_00438d70(int object, int x, int y, int z)
 {
 	int buf[3];
 
-	buf[0] = a2;
-	buf[1] = a3;
-	buf[2] = a4;
-	fcn_00438cb0((char*) a1, buf);
+	buf[0] = x;
+	buf[1] = y;
+	buf[2] = z;
+	fcn_00438cb0((char*) object, buf);
 }

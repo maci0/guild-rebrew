@@ -41,7 +41,7 @@ void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005d9ca0(unsigned short*, unsigned short*, int, int);
 
 /* ADDRESS: GOLDTL 0x005d9f70 */
-int __cdecl fcn_005d9f70(unsigned short* a1, unsigned short* a2)
+int __cdecl fcn_005d9f70(unsigned short* entity, unsigned short* other)
 {
 	int flag;
 	int sel;
@@ -57,10 +57,10 @@ int __cdecl fcn_005d9f70(unsigned short* a1, unsigned short* a2)
 
 	flag = 0;
 	sel = -1;
-	if (*a2 == 0xffff) {
+	if (*other == 0xffff) {
 		return 0;
 	}
-	n = fcn_004f63d0(*(int*) (a2 + 2), list, *a1);
+	n = fcn_004f63d0(*(int*) (other + 2), list, *entity);
 	if (n < 1) {
 		return 0x60;
 	}
@@ -68,7 +68,7 @@ int __cdecl fcn_005d9f70(unsigned short* a1, unsigned short* a2)
 		rows[i] = g_9a3800[list[i]];
 		flag |= (rows[i].x25 == 1);
 	}
-	if (a1 == a2) {
+	if (entity == other) {
 		flag = 0;
 	}
 	fcn_004f6780(n, rows);
@@ -80,7 +80,7 @@ int __cdecl fcn_005d9f70(unsigned short* a1, unsigned short* a2)
 	fcn_0046e830(-1, -1, g_772514, w, 0x767);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
-	io_AppendText(0x1742, *a2);
+	io_AppendText(0x1742, *other);
 	d2_SetForm(dlg, 2);
 	for (k = 0; k < n; k++) {
 		fcn_005c91c0(g_14aa314[rows[k].x1c].name, 10, k * 0x28 + 10, 0x13b, 0x55);
@@ -93,7 +93,7 @@ int __cdecl fcn_005d9f70(unsigned short* a1, unsigned short* a2)
 	memset(q, 0, sizeof(q));
 	q[0] = 1;
 	d2_SetForm(dlg, 3);
-	if (fcn_004fa5b0(0x16, a2, q) & 2) {
+	if (fcn_004fa5b0(0x16, other, q) & 2) {
 		io_AppendText(0x174a);
 	} else {
 		sel = fcn_00472250(dlg, 3, io_AppendText(0x1745));
@@ -108,7 +108,7 @@ int __cdecl fcn_005d9f70(unsigned short* a1, unsigned short* a2)
 		}
 		if (g_100f1dc != -1) {
 			if (g_67d370 == sel) {
-				fcn_005d9ca0(a1, a2, n, 0);
+				fcn_005d9ca0(entity, other, n, 0);
 				g_774654 = 3;
 			}
 		}

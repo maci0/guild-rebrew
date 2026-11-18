@@ -14,7 +14,7 @@ typedef struct {
 /* ADDRESS: GOLDTL 0x004321a0 */
 int __cdecl fcn_004321a0(F4321a0 flags, int a2, int a3, int v, int lo, int hi, int max)
 {
-	unsigned short f;
+	unsigned char f;
 
 	f = *(unsigned char*) &flags.b1;
 	if (f & 2) {

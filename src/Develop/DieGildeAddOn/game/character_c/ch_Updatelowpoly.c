@@ -27,7 +27,7 @@ void __cdecl ch_RunAnimationScript();
 char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl fcn_00425bf0(char*, int, const char*);
 
-extern void* g_14d0020[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include <math.h>
 
 char* __cdecl fcn_00402610(char*);
@@ -39,10 +39,7 @@ void __cdecl fcn_00441720(char*, float*, int, int*, int*, float*);
 extern float g_6628a8;
 #include "../../../Units/d3/d3_animation.h"
 
-extern int g_6b5c34;
 #include "../../../Units/d3/d3_camera.h"
-extern int g_67530c;
-extern int g_675310;
 extern char g_10432c0[];
 
 char __cdecl fcn_00442c00(char*, char);

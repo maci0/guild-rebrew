@@ -8,7 +8,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
-int __cdecl fcn_004a99a0(char* a1, char* e, char* a3, char* a4, char* out)
+int __cdecl fcn_004a99a0(char* a1, char* e, char* context, char* a4, char* out)
 {
 	int id;
 	float d;
@@ -26,10 +26,10 @@ int __cdecl fcn_004a99a0(char* a1, char* e, char* a3, char* a4, char* out)
 	if (*(int*) (e + 0x194) < 4) {
 		return 0x20;
 	}
-	if (*(int*) a3 == 1) {
+	if (*(int*) context == 1) {
 		id = *(int*) (e + 4);
-	} else if (*(int*) a3 == 2 && *(char**) (a3 + 0x21c) != 0) {
-		id = *(int*) (*(char**) (a3 + 0x21c) + 4);
+	} else if (*(int*) context == 2 && *(char**) (context + 0x21c) != 0) {
+		id = *(int*) (*(char**) (context + 0x21c) + 4);
 	} else {
 		return 0;
 	}

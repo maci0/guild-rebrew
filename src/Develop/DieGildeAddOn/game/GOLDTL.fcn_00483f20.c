@@ -47,8 +47,7 @@ extern char g_100b0c4[];		/* resource entry table, stride 0x40 */
 extern int g_100b0a8;			/* resource entry count */
 extern char g_100b0e8[];
 extern int g_100dc20;			/* owner production building */
-extern int g_100dc34;
-extern int g_100dc38;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100dc3c;
 extern int g_100dc40[];
 extern int* g_100dc48;

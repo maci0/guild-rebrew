@@ -9,7 +9,7 @@ extern int g_772f80;
 extern int g_772f84;
 extern int g_772f88;
 extern Slot772f90 g_772f90[3];
-extern int g_772fd8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Draw772* g_772fdc;
 
 void __cdecl fcn_004ecaa0(int a);

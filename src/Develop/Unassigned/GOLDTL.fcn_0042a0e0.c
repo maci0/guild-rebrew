@@ -6,14 +6,14 @@ extern g_6623b0_f g_6623b0;
 
 int __cdecl fcn_0042b120(int);
 
-int __cdecl fcn_0042a0e0(int* a1, int a2)
+int __cdecl fcn_0042a0e0(int* audio, int value)
 {
-	int r = 0;
+	int result = 0;
 
-	if (fcn_0042b120((int) a1) >= 0 && a2 >= 0 && a2 <= 0x7f) {
-		g_6623b0(*a1, a2);
+	if (fcn_0042b120((int) audio) >= 0 && value >= 0 && value <= 0x7f) {
+		g_6623b0(*audio, value);
 	} else {
-		r = -1;
+		result = -1;
 	}
-	return r;
+	return result;
 }

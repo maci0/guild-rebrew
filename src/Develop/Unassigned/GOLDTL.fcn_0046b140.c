@@ -26,7 +26,7 @@ typedef struct Slot {
 extern char* g_1015ea0;
 extern void** g_772540;
 extern int g_67d388;
-extern int g_67d370;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x0046b140 */
 int __cdecl fcn_0046b140(int x, int y)

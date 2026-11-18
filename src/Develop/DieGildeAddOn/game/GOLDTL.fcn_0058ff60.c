@@ -41,19 +41,19 @@ int __cdecl fcn_0058ff60(char* a1, unsigned short* a2, int a3)
 {
 	Packet pkt;
 	char buf[0x400];
-	char* d;
+	char* entry;
 
 	io_FormatTextBuffer(buf, 0x413a, *a2);
 	if (fcn_00526120(buf, 1) != 0) {
-		d = fcn_00502cd0(*(int*) (a1 + 0x5d), 1, 0, 0x211);
+		entry = fcn_00502cd0(*(int*) (a1 + 0x5d), 1, 0, 0x211);
 		memset(&pkt, 0, sizeof(pkt));
 		pkt.type = 0x8f;
 		pkt.x36 = 1;
 		pkt.x8 = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
 		pkt.xc = *(int*) (a1 + 1);
 		pkt.name = (*(Name14*)&g_7f4c00);
-		if (d != 0) {
-			pkt.x60 = *(int*) (d + 2);
+		if (entry != 0) {
+			pkt.x60 = *(int*) (entry + 2);
 		} else {
 			pkt.x60 = -1;
 		}

@@ -14,11 +14,7 @@ struct ctlinfo {
 	char pad270[0x15c];
 };
 
-extern int g_7725c8;
-extern int g_1040480;
-extern int g_1040484;
-extern int g_1040488;
-extern int g_104048c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1040490;
 extern int g_1040494;
 extern float g_10421a0;
@@ -31,7 +27,6 @@ extern int g_7e1d40;
 #include "client_types.h"
 extern Page_1038144 g_1038144[];
 extern struct ctlinfo g_1015f50[];
-extern int g_772514;
 
 void __cdecl fcn_0046b4f0(void);
 void __cdecl fcn_00537320(int);

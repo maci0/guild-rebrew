@@ -12,7 +12,7 @@ void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
 
 /* ADDRESS: GOLDTL 0x004bb540 */
-int __cdecl fcn_004bb540(void* a1)
+int __cdecl fcn_004bb540(void* record)
 {
 	int n;
 	double d;
@@ -21,7 +21,7 @@ int __cdecl fcn_004bb540(void* a1)
 	int r;
 	unsigned int len;
 
-	p = gm_LookupEntityRecordById(*(int*) a1);
+	p = gm_LookupEntityRecordById(*(int*) record);
 	if (p == 0) {
 		return 1;
 	}
@@ -32,10 +32,10 @@ int __cdecl fcn_004bb540(void* a1)
 	d = (double) n + 1.0;
 	n = gm_WalkEntityChain(*(short*) p);
 	r = (int) (((double) n * d) * 0.01);
-	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, r);
+	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) record + 4) + 0x12e7, r);
 	len = strlen(buf);
 	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    0x100 < len, 0x603, 0);
-	fcn_004c51a0(-1, *(int*) a1, g_773d75, r);
+	fcn_004c51a0(-1, *(int*) record, g_773d75, r);
 	return 0;
 }

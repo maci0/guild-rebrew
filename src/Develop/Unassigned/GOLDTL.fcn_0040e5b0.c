@@ -7,14 +7,14 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 extern char* g_6b7e98;
 void __cdecl fcn_00425bf0(void*, int, char*);
 
-int __cdecl GetObjectHandle(int* a1)
+int __cdecl GetObjectHandle(int* id)
 {
 	char buf[0x200];
 	int r;
 
-	r = fcn_00445600(0, 0x140, 0, *a1);
+	r = fcn_00445600(0, 0x140, 0, *id);
 	if (r == 0) {
-		fcn_0064d41a(buf, g_676694, *a1);
+		fcn_0064d41a(buf, g_676694, *id);
 		fcn_00425bf0(g_6b7e98, *(int*) (g_6b7e98 + 0x118), buf);
 		return 0;
 	}

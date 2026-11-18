@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "GOLDTL.fcn_00534c40_gconf.h"
-extern int g_7747c4;
+extern unsigned char g_6b7ff9;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern void *__cdecl m_alloc(unsigned int size, const char *tag);
 extern void __cdecl m_FreeTracked(void *p);
 extern int __cdecl fcn_00412eb0(int a0, int a1);
@@ -102,9 +102,9 @@ int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
     m_FreeTracked(v3);
     return 0;
 finish:
-    if ((unsigned char)g_6b7ff9 != 0)
+    if ((unsigned char)(*(int *)&g_6b7ff9) != 0)
     {
-        *(char *)((char *)v3 + 0x272) = g_6b7ff9;
+        *(char *)((char *)v3 + 0x272) = (*(int *)&g_6b7ff9);
         fcn_00436f70(0);
     }
     fcn_004234e0(g_7747c4, (char *)0x6a313c, 1, 0x3f, 0x7f, 0, 0);

@@ -6,7 +6,7 @@ extern void __cdecl fcn_005ad000(char* obj);
 #define SOUND_FLAG (*(unsigned char*) (0x7f4e51 + *(unsigned short*) 0x774970 * 0x21c))
 
 /* ADDRESS: GOLDTL 0x005ad260 */
-void __cdecl fcn_005ad260(char* a0)
+void __cdecl fcn_005ad260(char* obj)
 {
 	int handle;
 	int wait;
@@ -20,8 +20,8 @@ void __cdecl fcn_005ad260(char* a0)
 		if (SOUND_FLAG > 0)
 			handle = fcn_005338d0((char*) 0x6ab1a4, *(int*) 0x14ab9e0, 0x10);
 		if (SOUND_FLAG > 0 && *(int*) 0x7746a0 != 0 &&
-		    *(unsigned short*) (a0 + 0x27) != 0xffff && *(int*) 0x7746a0 == handle)
-			fcn_005ad000(a0);
+		    *(unsigned short*) (obj + 0x27) != 0xffff && *(int*) 0x7746a0 == handle)
+			fcn_005ad000(obj);
 		wait = SOUND_FLAG > 0 ? 0x677ff : 0x67fff;
 	} while (fcn_005373e0(0x5ad260, wait) != 0);
 }

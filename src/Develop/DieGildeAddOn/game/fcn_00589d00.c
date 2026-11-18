@@ -2,10 +2,8 @@
 extern int g_7f4c00, g_7f4c08; extern unsigned short g_7f4c0c;
 extern int g_772514, g_100f1dc, g_14ce8e0, g_774654, g_67d370; extern char* g_1015ea0; extern unsigned short g_774970; extern unsigned char g_773d75;
 
-extern float g_662acc;
-extern float g_662910;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_664150;
-extern float g_6628ac;
 
 int __cdecl gm_WalkEntityChain(unsigned short);
 void* __cdecl fcn_005cd440(void*, int, int, int);

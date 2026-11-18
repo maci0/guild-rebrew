@@ -1,6 +1,6 @@
 #include "game_data.h"
 #include "client_data.h"
-extern int g_85ab60;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7f4c10;
 typedef struct {
 	int x0;

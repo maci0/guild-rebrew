@@ -4,12 +4,12 @@
 int __cdecl fcn_004f4830(int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
-int __cdecl fcn_004f5110(void* a1, int a2)
+int __cdecl fcn_004f5110(void* buf, int a2)
 {
 	unsigned char local[0x24];
 	unsigned char a;
 	unsigned char b;
-	int v;
+	int formatId;
 	int r = 1;
 
 	if (!fcn_004f4830(a2, local)) {
@@ -17,19 +17,19 @@ int __cdecl fcn_004f5110(void* a1, int a2)
 	}
 	a = local[0];
 	b = local[1];
-	v = a * 5 + 0x13fd;
+	formatId = a * 5 + 0x13fd;
 	switch (b) {
 	case 0:
-		io_FormatTextBuffer(a1, v + 1, v, *(int*) (local + 0x18));
+		io_FormatTextBuffer(buf, formatId + 1, formatId, *(int*) (local + 0x18));
 		break;
 	case 1:
-		io_FormatTextBuffer(a1, v + 1, v, *(int*) (local + 0x18) + 0x13dd);
+		io_FormatTextBuffer(buf, formatId + 1, formatId, *(int*) (local + 0x18) + 0x13dd);
 		break;
 	case 2:
-		io_FormatTextBuffer(a1, v + 1, v, *(int*) (local + 0x18) + 0x13e6);
+		io_FormatTextBuffer(buf, formatId + 1, formatId, *(int*) (local + 0x18) + 0x13e6);
 		break;
 	case 3:
-		io_FormatTextBuffer(a1, v + 1, v, *(int*) (local + 0x18) + 0x13ec);
+		io_FormatTextBuffer(buf, formatId + 1, formatId, *(int*) (local + 0x18) + 0x13ec);
 		break;
 	default:
 		r = 0;

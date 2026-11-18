@@ -7,7 +7,7 @@ typedef struct Light {
 	int b;
 } Light;
 
-extern int g_6b86fc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern void* g_6b870c;
 extern int g_6b8700;
 extern char* g_1041d00;

@@ -16,8 +16,7 @@ extern char s_67d67c[];
 #include "client_types.h"
 extern Win_f8f120 g_f8f120[];
 extern char* g_77255c;
-extern int g_7725c8;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
 #include "client_dialog_state.h"
 extern float g_6a24e4;

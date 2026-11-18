@@ -14,7 +14,7 @@ typedef struct {
 	char pad3c[0x80 - 0x3c];
 } Offer;
 
-extern char g_85ab90[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 
 unsigned short __cdecl gm_RandomMod(int n);

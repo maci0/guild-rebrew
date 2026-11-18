@@ -1,9 +1,6 @@
 #include "client_types.h"
 
-extern char* g_aed324;
-extern char* g_aed200;
-extern int g_14cbcb0;
-extern int g_774954;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_aecde0;
 extern cell10_fb5760 g_fb5760[0x8000];
 

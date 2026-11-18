@@ -4,12 +4,12 @@
 
 #pragma intrinsic(memcpy, memset)
 
-void __cdecl fcn_00460a00(char* a1, void* a2, int a3)
+void __cdecl fcn_00460a00(char* buffer, void* src, int size)
 {
 	char* dst;
 
-	dst = *(char**) (a1 + 0x28);
-	memcpy(dst, a2, a3);
-	*(int*) (a1 + 0x34) = (int) *(char**) (a1 + 0x28) + a3;
-	*(int*) (a1 + 0x30) = (int) *(char**) (a1 + 0x28) + a3;
+	dst = *(char**) (buffer + 0x28);
+	memcpy(dst, src, size);
+	*(int*) (buffer + 0x34) = (int) *(char**) (buffer + 0x28) + size;
+	*(int*) (buffer + 0x30) = (int) *(char**) (buffer + 0x28) + size;
 }

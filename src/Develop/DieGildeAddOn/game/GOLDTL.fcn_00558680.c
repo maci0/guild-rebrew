@@ -6,9 +6,6 @@ extern volatile int g_6b7fac;
 extern float g_662920;
 extern float g_665ea0;
 extern double g_665ea8;
-extern float g_6628bc;
-extern float g_6628cc;
-extern float g_662a3c;
 
 int __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_00455350(char*, char*, float*);

@@ -2,7 +2,7 @@
 
 extern char g_7f4ca4[];
 extern char g_6b5c60[];
-extern float g_66414c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 float __cdecl gm_RandomFloat01(void);
 char* __cdecl gm_LookupEntityRecordById(int id);

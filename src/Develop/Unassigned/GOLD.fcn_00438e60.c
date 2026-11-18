@@ -1,4 +1,4 @@
-extern char* g_5fb5b0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_fc52f0, g_fc28f4, g_fb98f4, g_fb9598;
 char __cdecl fcn_004378c0(int, unsigned int);
 

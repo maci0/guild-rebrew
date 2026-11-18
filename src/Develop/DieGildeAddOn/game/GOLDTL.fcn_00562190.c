@@ -17,7 +17,7 @@ typedef struct Query {
 // SIZE 0x220
 
 extern pos14_7f4c00 g_7f4c00;
-extern int g_6643d8[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern __int64 g_666018;
 extern char g_7f4ca0[];
 extern char g_67ed14[];

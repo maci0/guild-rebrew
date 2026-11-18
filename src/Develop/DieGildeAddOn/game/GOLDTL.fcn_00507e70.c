@@ -1,8 +1,6 @@
 
 
-extern float g_662d34;
-extern float g_6628d8;
-extern float g_6628cc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 

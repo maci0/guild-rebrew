@@ -1,4 +1,4 @@
-extern int g_6a23ac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_matrices.h"
 
 

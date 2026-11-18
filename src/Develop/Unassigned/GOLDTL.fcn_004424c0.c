@@ -8,7 +8,7 @@
  * literals. */
 
 #include <math.h>
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_10425a0[];
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))

@@ -7,7 +7,7 @@ void __cdecl fcn_00535960(void);
 
 
 /* ADDRESS: GOLDTL 0x004e63e0 */
-int __cdecl cut_CheckMaster(int* a1)
+int __cdecl cut_CheckMaster(int* event)
 {
 	int flag;
 	char buf[0x80];
@@ -15,22 +15,22 @@ int __cdecl cut_CheckMaster(int* a1)
 	int i;
 	int r;
 
-	if (cut_IsParticipant(a1[3], (unsigned char*) a1) == 0) {
+	if (cut_IsParticipant(event[3], (unsigned char*) event) == 0) {
 		flag = 1;
-		e = gm_LookupEntityRecordById(a1[3]);
-		fcn_0064d41a(buf, "cut_CheckMaster(): invalid master for id %i", a1[0]);
+		e = gm_LookupEntityRecordById(event[3]);
+		fcn_0064d41a(buf, "cut_CheckMaster(): invalid master for id %i", event[0]);
 		for (i = 0; i < 16; i++) {
 			if (flag == 0)
 				break;
-			if (a1[i + 13] != -1) {
-				e = gm_LookupEntityRecordById(a1[i + 13]);
+			if (event[i + 13] != -1) {
+				e = gm_LookupEntityRecordById(event[i + 13]);
 				if (e != 0 && (e[2] == 6 || e[2] == 7))
 					flag = 0;
 			}
 		}
-		if (e != 0 && *(int*) (e + 4) != a1[3]) {
-			fcn_0064d41a(buf, "cut_CheckMaster(): new master for id %i => %i", a1[0], *(int*) (e + 4));
-			r = fcn_004c6d70(a1, e);
+		if (e != 0 && *(int*) (e + 4) != event[3]) {
+			fcn_0064d41a(buf, "cut_CheckMaster(): new master for id %i => %i", event[0], *(int*) (e + 4));
+			r = fcn_004c6d70(event, e);
 			while (fcn_004c4450(r) == 0)
 				fcn_00535960();
 			return 0;

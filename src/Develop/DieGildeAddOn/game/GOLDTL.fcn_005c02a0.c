@@ -12,9 +12,7 @@ extern char g_7f4ca0[];
 extern float g_664164;
 extern float g_662ac8;
 extern char g_67eab0[];
-extern int g_100f1dc;
-extern int g_14ce8e0;
-extern int g_67d370;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00470820(short, short, char*);
 void __cdecl fcn_00471b60(int);

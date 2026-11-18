@@ -1,5 +1,5 @@
 
-extern float g_6628a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 typedef struct Cam {
     char pad_00[0x4c];

@@ -17,7 +17,7 @@ typedef struct
 
 extern char* g_1015ea0;
 extern int g_67d394;
-extern int g_67d398;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1040490;
 extern int g_1040494;
 extern short g_14ce8c2;

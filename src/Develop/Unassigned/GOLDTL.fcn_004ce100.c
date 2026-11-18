@@ -9,7 +9,7 @@ extern int g_9baa00;
 extern int g_9baa08;
 extern Rec9baa20 g_9baa20;
 extern char g_9baae0[];
-extern int g_9badd0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_9badd4;
 
 void __cdecl fcn_004ce100(int a1, int a2)

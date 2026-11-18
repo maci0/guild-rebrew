@@ -9,15 +9,15 @@ typedef struct {
 	int b;
 } fcn_004fac80_E;
 
-int __cdecl fcn_004fac80(int a1, int* out)
+int __cdecl fcn_004fac80(int idx, int* out)
 {
 	fcn_004fac80_E* t;
 
-	if (a1 >= 0x58) {
+	if (idx >= 0x58) {
 		return 0;
 	}
 	t = (fcn_004fac80_E*) g_696178;
-	out[0] = t[a1].a;
-	out[1] = t[a1].b;
+	out[0] = t[idx].a;
+	out[1] = t[idx].b;
 	return 1;
 }

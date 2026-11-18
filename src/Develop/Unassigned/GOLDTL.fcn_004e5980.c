@@ -1,6 +1,6 @@
 
 
-extern void* g_14d0020[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00538060(void);
 #include "client_timer.h"

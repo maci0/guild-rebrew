@@ -1,5 +1,5 @@
 #include <string.h>
-extern int g_664398[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_77261c;
 
 int __cdecl gm_RandomMod(int);

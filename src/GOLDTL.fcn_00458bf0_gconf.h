@@ -1,6 +1,0 @@
-#ifndef GOLDTL_FCN_00458BF0_GCONF_H
-#define GOLDTL_FCN_00458BF0_GCONF_H
-
-extern char g_6b89bc;
-
-#endif /* GOLDTL_FCN_00458BF0_GCONF_H */

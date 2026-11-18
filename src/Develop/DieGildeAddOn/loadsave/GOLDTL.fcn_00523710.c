@@ -22,7 +22,7 @@ typedef struct {
 	char x1e8[0x40];
 } Figure;
 
-extern int g_6a23ac;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 Figure* __cdecl fcn_00403270(int);

@@ -13,7 +13,7 @@ extern unsigned char g_1006114[];
 extern int g_1043698;
 extern int g_773ddc;
 extern int g_67a370;
-extern int g_778d24;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char s_681664[];
 extern char s_681658[];
 extern char s_68149c[];

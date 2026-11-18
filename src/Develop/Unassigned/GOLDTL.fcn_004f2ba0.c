@@ -6,17 +6,17 @@ int __cdecl fcn_004c6c30(char*);
 int __cdecl fcn_004f2ba0(char* a1, char* a2, int a3)
 {
 	char buf[0x20];
-	int v;
+	int value;
 
 	if (a2 == 0) {
 		return -1;
 	}
 	if (a1 == 0) {
-		v = -1;
+		value = -1;
 	} else {
-		v = *(int*) (a1 + 4);
+		value = *(int*) (a1 + 4);
 	}
-	*(int*) (buf + 4) = v;
+	*(int*) (buf + 4) = value;
 	*(int*) (buf + 8) = *(int*) (a2 + 1);
 	*(int*) buf = 4;
 	*(int*) (buf + 0xc) = a3;

@@ -1,6 +1,6 @@
 
 
-extern int g_772f10;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_9b46c0[];
 extern char g_68bda0[];
 

@@ -72,24 +72,24 @@ void __cdecl fcn_00404b60(char*, int, ...);
 #undef ch_UNIVERSE_STRIDE
 void __cdecl ch_Updatelowpoly(char* obj);
 void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force);
-void __cdecl ch_SetPosition(char* a1, float* a2, int flag)
+void __cdecl ch_SetPosition(char* obj, float* pos, int flag)
 {
-	fcn_00438b40(*(char**) (a1 + 0x34), (int*) a2);
+	fcn_00438b40(*(char**) (obj + 0x34), (int*) pos);
 #ifdef REBREW_GOLD
 	if (flag != 0) {
-		fcn_00453270(*(char**) (a1 + 0x34));
+		fcn_00453270(*(char**) (obj + 0x34));
 	}
 #endif
-	ch_PlaceOnGround(a1, 0);
-	if (*(int*) ((char*) a1 + 0x124) != 0) {
-		ch_UpdateAttachedModelPosition(a1, 0);
+	ch_PlaceOnGround(obj, 0);
+	if (*(int*) ((char*) obj + 0x124) != 0) {
+		ch_UpdateAttachedModelPosition(obj, 0);
 #ifdef REBREW_GOLD
 		if (flag != 0) {
-			fcn_00453270(**(char***) (a1 + 0x124));
+			fcn_00453270(**(char***) (obj + 0x124));
 		}
 #endif
 	}
-	if (*(int*) ((char*) a1 + 0x22c) != 0) {
-		ch_Updatelowpoly(a1);
+	if (*(int*) ((char*) obj + 0x22c) != 0) {
+		ch_Updatelowpoly(obj);
 	}
 }

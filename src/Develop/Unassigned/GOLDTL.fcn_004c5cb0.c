@@ -10,17 +10,17 @@ typedef struct
 } Triple3;
 // SIZE 0xc
 
-void __cdecl fcn_004c5cb0(int a1, Triple3* a2, Triple3* a3)
+void __cdecl fcn_004c5cb0(int a1, Triple3* firstTriple, Triple3* secondTriple)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x32;
 	*(int*) (buf + 0x10) = a1;
-	if (a2 != 0) {
-		*(Triple3*) (buf + 0x14) = *a2;
+	if (firstTriple != 0) {
+		*(Triple3*) (buf + 0x14) = *firstTriple;
 	}
-	if (a3 != 0) {
-		*(Triple3*) (buf + 0x24) = *a3;
+	if (secondTriple != 0) {
+		*(Triple3*) (buf + 0x24) = *secondTriple;
 	}
 	fcn_004c4330(buf);
 }

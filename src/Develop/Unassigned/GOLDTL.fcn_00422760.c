@@ -10,7 +10,7 @@ typedef struct {
 #include "client_types.h"
 extern Voice_14cbbe0 g_14cbbe0;
 extern char* g_6b7e88;
-extern int g_6b7e8c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 /* ADDRESS: GOLD 0x004262f0 */

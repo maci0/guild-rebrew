@@ -15,12 +15,12 @@ void __cdecl fcn_004d0c70(void);
 /* ADDRESS: GOLDTL 0x004d7e50 */
 void __cdecl fcn_004d7e50(void)
 {
-	int v1;
+	int dialog;
 
-	v1 = fcn_00470820(0, 0, 0x68bed0);
-	*(unsigned int*) 0x772f14 = v1;
-	fcn_00471d80(v1, 3);
-	d2_SetForm(v1, 0);
+	dialog = fcn_00470820(0, 0, 0x68bed0);
+	*(unsigned int*) 0x772f14 = dialog;
+	fcn_00471d80(dialog, 3);
+	d2_SetForm(dialog, 0);
 	*(unsigned int*) 0x68b7a8 = fcn_00468df0(0x10, 0xc, 0xbf,
 	                                         *(unsigned int*) 0x14a9a14,
 	                                         *(unsigned int*) 0x772514);

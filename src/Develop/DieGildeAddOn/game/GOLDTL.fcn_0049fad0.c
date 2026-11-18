@@ -29,9 +29,9 @@ int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 {
 	int v;
-	int found;
-	char* q;
-	int n;
+	int targetId;
+	char* target;
+	int count;
 	int i;
 	F8 f;
 
@@ -50,24 +50,24 @@ int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 	}
 	f.mask = 0x807d4190;
 	f.b = 1;
-	if (fcn_004a5e60(e, 6, f, 0, (float) (gm_RandomMod(0x20) + 0x20), &found) == 0) {
+	if (fcn_004a5e60(e, 6, f, 0, (float) (gm_RandomMod(0x20) + 0x20), &targetId) == 0) {
 		return 0;
 	}
-	gm_ResolveEntityById((void**) (&q), 0, 0, found);
-	if (q == 0) {
+	gm_ResolveEntityById((void**) (&target), 0, 0, targetId);
+	if (target == 0) {
 		return 0;
 	}
-	n = 0;
+	count = 0;
 	for (i = 0; i < 768; i++) {
-		if (((Ent*)g_7f4ca0)[i].home == q) {
-			n++;
+		if (((Ent*)g_7f4ca0)[i].home == target) {
+			count++;
 		}
 	}
-	if (n == 0) {
+	if (count == 0) {
 		return 0;
 	}
 	*(int*) (out + 0x10) = v;
 	out[0] = 4;
-	*(int*) (out + 4) = found;
+	*(int*) (out + 4) = targetId;
 	return 0x37;
 }

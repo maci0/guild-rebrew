@@ -16,8 +16,7 @@ typedef struct
 } Player35c;
 // SIZE 0x35c
 
-extern char* g_772eb4;
-extern char g_9b0e20[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 Slot2c* __cdecl fcn_004ceb40(char* a1)
 {
