@@ -126,9 +126,9 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 	while (sel) {
 		fcn_00595e20(a0, ids[6]);
 		fcn_005963f0(total, 1, 0, a0);
-		ids[3] = 0;
-		ids[4] = 0;
-		ids[5] = 0;
+		for (i = 3; i < 6; i++) {
+			ids[i] = 0;
+		}
 		h = fcn_005463a0(2, 0, 0x15, 3, *(int*) (a0 + 1));
 		while (h) {
 			i = 0;

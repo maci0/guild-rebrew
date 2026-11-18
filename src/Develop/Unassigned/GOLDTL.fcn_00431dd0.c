@@ -57,10 +57,10 @@ void __cdecl fcn_00431dd0(Cam* cam, PathState* ps, int a2, int a3, float* out)
     out[2] = 0.0f;
     if (info->flag != 0) {
         segs = info->segs;
-        tgt = &segs[a2];
         v1 = ps->d;
         v2 = ps->e;
         cur = &segs[v1];
+        tgt = &segs[a2];
         if (a3 == v2 && v1 == a2) {
             out[0] = cam->off[0] + cam->pos[0];
             out[1] = cam->off[1] + cam->pos[1];

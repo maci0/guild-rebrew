@@ -80,7 +80,7 @@ int __cdecl fcn_005c1110(void)
 			if (ent != 0) {
 				i = 2;
 				for (k = 0; ; ) {
-					if (k >= 0x10) {
+					if (k == 0x10) {
 						goto done;
 					}
 					if (ent->f70 > -1) {

@@ -131,7 +131,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
                 fcn_00534160(0xa0, v7, *(unsigned char*) (*v15 + 0x24 + v14), 0x4df);
                 v14 += 1;
                 v7 += 0xd;
-            } while (v14 < 5);
+            } while (v14 <= 4);
             v18 += 1;
             v15 = &v15[3];
         } while (v18 < v16);

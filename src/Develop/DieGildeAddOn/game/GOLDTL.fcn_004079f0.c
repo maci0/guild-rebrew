@@ -38,6 +38,7 @@ typedef struct {
 } VEC4_4079f0;
 
 extern float g_662d40[3];
+extern double g_6628f0;
 
 void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
@@ -84,7 +85,7 @@ void __cdecl fcn_004079f0(char* task)
 			*(float*) (task + 0x1c) = angle + *(float*) (*(char**) (owner + 0x34) + 0x88);
 			*(float*) (task + 0x20) = *(float*) (*(char**) (owner + 0x34) + 0x8c);
 		}
-		if (!(angle >= *(double*) 0x6628f0)) {
+		if (!(angle >= g_6628f0)) {
 			if (angle < *(double*) 0x6628e8) {
 				*(char**) (owner + 0x70) = ch_AttachAni(*(char**) (task + 0x14),
 									 "bewegung/dreh_90_rechts", 1);

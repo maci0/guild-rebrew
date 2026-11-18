@@ -95,9 +95,7 @@ unsigned char __cdecl fcn_00444860(float x, float y, int obj, int index,
 		fr.ctx.uv[i][1] = 1.0f - fr.ctx.uv[i][1];
 	}
 
-	fr.ia = -1;
-	fr.ib = -1;
-	fr.ic = -1;
+	fr.ia = fr.ib = fr.ic = -1;
 	fr.w1 = 1.0e10f;
 	fr.w2 = -1.0e10f;
 	fr.t1 = -1.0e10f;

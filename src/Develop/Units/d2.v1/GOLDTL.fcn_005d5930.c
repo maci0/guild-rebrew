@@ -67,8 +67,6 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 	int ids[0x20];
 	char text[0x40];
 	int b[0x20];
-	Msg_5d5930 m;
-	pos14_7f4c00 pos;
 	int cnt;
 	int dlg;
 	char* e;
@@ -88,6 +86,8 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 		}
 		b[0] = fcn_004f6470(*(int*) (e + 4), ids, *(unsigned short*) p);
 		if (b[0] >= gm_RandomMod(8)) {
+			Msg_5d5930 m;
+			pos14_7f4c00 pos;
 			pos = g_7f4c00;
 			fcn_00500bb0(&pos, 0x60, 0, 0);
 			memset(&m, 0, sizeof(m));

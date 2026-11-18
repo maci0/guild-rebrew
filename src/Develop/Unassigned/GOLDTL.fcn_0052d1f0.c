@@ -56,7 +56,7 @@ void __cdecl fcn_0052d1f0(char* a0)
 	fcn_004518a0(level);
 	dot = dir[2] * level[2] + dir[1] * level[1] + dir[0] * level[0];
 	angles[0] = (float) acos(dot < -1.0 || !(dot < 1.0) ? (dot < -1.0 ? -1.0 : 1.0) : dot);
-	if (dir[1] < 0.0f)
+	if (0.0f > dir[1])
 		angles[0] = -angles[0];
 	pos[1] = pos[1] + 700.0f;
 	fcn_00412cf0(*(int*) 0x6b8014, pos, angles, *(int*) 0x6a256c, 0x28);

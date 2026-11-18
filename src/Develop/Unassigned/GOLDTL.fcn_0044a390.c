@@ -66,9 +66,9 @@ void __cdecl fcn_0044a390(MeshBox* m)
 		bb[5] = -1e10f;
 		v = m->verts;
 		for (i = n; i > 0; i--) {
-			if (!(1e10f < v->px))
+			if (!(bb[0] < v->px))
 				bb[0] = v->px;
-			if (!(v->py > 1e10f))
+			if (!(v->py > bb[1]))
 				bb[1] = v->py;
 			if (!(v->pz > bb[2]))
 				bb[2] = v->pz;

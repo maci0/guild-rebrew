@@ -131,7 +131,6 @@ int __cdecl main_OpenEngine(void);
 int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 {
 	char text[0x100];
-	OSVERSIONINFOA os;
 	char pbuf[0x8c];
 	void *mutex;
 	int server;
@@ -146,9 +145,12 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 
 	server = 0;
 	*(void**) 0x7e1f80 = instance;
+	{
+	OSVERSIONINFOA os;
 	os.dwOSVersionInfoSize = sizeof(os);
 	GetVersionExA(&os);
 	*(int*) 0x7e246c = (os.dwPlatformId != 1);
+	}
 
 	GetModuleFileNameA(*(HMODULE*) 0x7e1f80, (char*) 0x7e22c0, 0x104);
 	strcpy((char*) 0x7e2080, (char*) 0x7e22c0);

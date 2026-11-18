@@ -128,7 +128,6 @@ int __cdecl gm_RandomMod(int);
 /* ADDRESS: GOLDTL 0x0047f6b0 */
 int __cdecl fcn_0047f6b0(char* a)
 {
-	char m[0xf8];
 	Msg st;
 	char* t1;
 	int* p2;
@@ -198,6 +197,7 @@ int __cdecl fcn_0047f6b0(char* a)
 				if (q == 0) {
 					*(int*) (a + 0x1c8) |= 0x10;
 				} else {
+					char m[0xf8];
 					memset(m, 0, sizeof(m));
 					m[4] = 9;
 					*(int*) (m + 8) = *(int*) (g_7f4ca4 +
