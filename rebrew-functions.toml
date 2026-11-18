@@ -544593,10 +544593,10 @@ updated_by = "rename"
 updated_at = "2026-11-07T23:13:09+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Extent spec 0x240 (native ret at 0x42dabe). Object 573B; frame 0x218 vs native 0x214 (one extra spilled scalar slot) shifts the prologue"
-similarity = 64.5320197044335
+similarity = 65.51724137931035
 
 ["GOLDTL.0x0042d880".verification]
-source_hash = "f101375fb861e64d4f2b6f7bb6eb31ea361d717100609ee406332763b541ddf6"
+source_hash = "0172dd33a8b7152cd1dfa2f2bdf26140e8f63d816193674633f473ac6c9e8961"
 reference_hash = "6b4e371872dfbcaa918422e930f292a539297535ab528d66fd1059aec8494170"
 reference_size = "575"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -544607,15 +544607,15 @@ module = "GOLDTL"
 va = "0x42d880"
 context_hash = ""
 defines = "[]"
-input_hash = "8bc306ccd328d80d4b09334463f275283c98730bdb65cf4c23465e6779f6a2ce"
-aligned_pairs = 131
+input_hash = "7dffea305845bdb46e37038a8dba549026d84b0a055a82fa09b7ec266832a784"
+aligned_pairs = 133
 target_instructions = 203
 candidate_instructions = 203
 hunks = 46
-similarity = 64.5320197044335
+similarity = 65.51724137931035
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-18T01:05:56+00:00"
+measured_at = "2026-11-18T07:02:30+00:00"
 
 [["GOLDTL.0x0042d880".status_history]]
 old_status = "STUB"

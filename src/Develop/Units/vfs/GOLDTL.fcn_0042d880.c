@@ -74,7 +74,7 @@ found:
 	if (a >= 1) { dst = (int*) ((*pc) * 4 + 0x14a5320); base = *(int*) (rec + 0x68); for (i = 0; i < a; i++, dst++)
 		*dst =
 		    ((int*) table)[i] + base; }
-	if (g_6b7f98 + 1 < *pcount)
+	if (*pcount > g_6b7f98 + 1)
 		g_6b7f98 = *pcount + 1;
 	CloseVfsStream(stream);
 	m_FreeTracked(table);
