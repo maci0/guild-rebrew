@@ -79,7 +79,7 @@ void __cdecl ch_DroppingObject(char* ev)
 		return;
 	}
 	if (*(int**) (obj + 0x70) != 0 && **(int**) (obj + 0x70) >= *(int*) (ev + 0x30)) {
-		fcn_00407800(*(char* volatile*) (ev + 0x14), *(int*) (ev + 0x38), 0);
+		fcn_00407800(*(char**) (ev + 0x14), *(int*) (ev + 0x38), 0);
 		*(int*) (ev + 0x30) = 99999999;
 	}
 	if (*(int*) (obj + 0x80) == 0 && fcn_004042b0(obj)) {

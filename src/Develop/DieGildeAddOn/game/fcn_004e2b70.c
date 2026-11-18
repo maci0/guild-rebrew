@@ -89,14 +89,14 @@ void __cdecl fcn_004e2b70(void* arg)
 		fcn_004e4b40(-8, handle, (char*) 0x68d294, 6, 500);
 		state = fcn_004e4d00(0x2af8, 0, 0);
 		if (state == 0) {
-			start = *(volatile int*) 0x6b7fac;
+			start = *(int*) 0x6b7fac;
 			while (*(volatile unsigned int*) 0x6b7fac < (unsigned int) (start + 0x339) && state == 0) {
 				fcn_005373e0(0, g_68bfb8);
 				if (*(int*) 0x14ce8e0 != 0) {
 					state = 1;
 				}
-				if ((float) (unsigned int) (*(volatile int*) 0x6b7fac - start) * (1.0f / 825.0f) < 1.0f) {
-					f10 = (float) (unsigned int) (*(volatile int*) 0x6b7fac - start) * (1.0f / 825.0f);
+				if ((float) (unsigned int) (*(int*) 0x6b7fac - start) * (1.0f / 825.0f) < 1.0f) {
+					f10 = (float) (unsigned int) (*(int*) 0x6b7fac - start) * (1.0f / 825.0f);
 				} else {
 					f10 = 1.0f;
 				}

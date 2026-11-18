@@ -12,12 +12,10 @@ int __cdecl fcn_004c6de0(void*);
 int __cdecl fcn_004f0a30(char* a0, char* a1, unsigned int* a2,
 	unsigned int* a3, unsigned int* a4, unsigned int a5, int a6, unsigned int a7)
 {
-	/* volatile keeps these four state slots in memory: the native frame is
-	   0x90 with a0 held in ESI and prio/need_start/ok/ret all spilled. */
-	volatile unsigned int prio;
-	volatile unsigned int need_start;
-	volatile int ok;
-	volatile int ret;
+	unsigned int prio;
+	unsigned int need_start;
+	int ok;
+	int ret;
 	unsigned int pkt[32];
 	char* rec;
 

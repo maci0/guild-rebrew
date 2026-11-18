@@ -12,7 +12,7 @@ char* __cdecl fcn_004c49a0(char a1, int a2)
 	unsigned int end;
 	char* p;
 
-	end = (*(volatile unsigned int*)&g_6b7fac) + a2;
+	end = (*(unsigned int*)&g_6b7fac) + a2;
 	while ((*(volatile unsigned int*)&g_6b7fac) < end) {
 		fcn_004c3ff0();
 		fcn_004c4940();

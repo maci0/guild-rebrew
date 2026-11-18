@@ -64,11 +64,7 @@ void __cdecl fcn_005b39c0(void)
 				p = save;
 				do {
 					rec = (Rec80*) (p - 0x1c);
-					/* The reference compares the id word in memory and
-					   zero-extends a second load for the slot math, so the
-					   guard reads through a volatile lvalue. The f1c read
-					   below keeps 0x85abac as the addressing base. */
-					if (*(volatile unsigned short*) (p - 0x1c) != 0 && rec->f04 != 0) {
+					if (*(unsigned short*) (p - 0x1c) != 0 && rec->f04 != 0) {
 						id = rec->f00;
 						slot = (int) lpObjektePROT + id * 0x40 + id;
 						v1c = rec->f1c;

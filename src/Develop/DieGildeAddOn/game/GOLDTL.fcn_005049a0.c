@@ -11,7 +11,7 @@ int __cdecl fcn_005049a0(unsigned char* building)
 {
 	unsigned char* type;
 	unsigned short* slot;
-	volatile int found;
+	int found;
 	int category;
 	int item;
 	int i;

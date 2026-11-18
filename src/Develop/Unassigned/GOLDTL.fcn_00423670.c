@@ -68,8 +68,8 @@ int __cdecl fcn_00423670(int* a0, int a1, int a2)
 		goto done;
 	}
 	if (a1 != 0) {
-		a0[4] = ((*(volatile int*) &g_6b7fac) * 2 + (*(volatile int*) &g_6b7fac)) * 4
-			+ (*(volatile int*) &g_6b7fac);
+		a0[4] = ((*(int*) &g_6b7fac) * 2 + (*(int*) &g_6b7fac)) * 4
+			+ (*(int*) &g_6b7fac);
 		a0[5] |= 1;
 		fcn_0042a920(*a0, 0);
 	} else {
@@ -84,8 +84,8 @@ int __cdecl fcn_00423670(int* a0, int a1, int a2)
 		fcn_0042aa20(*a0, a0[3]);
 		a0[6] = 0;
 	}
-	stamp = ((*(volatile int*) &g_6b7fac) * 2 + (*(volatile int*) &g_6b7fac)) * 4
-		+ (*(volatile int*) &g_6b7fac);
+	stamp = ((*(int*) &g_6b7fac) * 2 + (*(int*) &g_6b7fac)) * 4
+		+ (*(int*) &g_6b7fac);
 	((int*) a0[1])[0xf] = a0[2] = stamp;
 	a0[5] &= ~8;
 	fcn_0042a7f0(*a0);

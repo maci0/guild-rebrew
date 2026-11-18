@@ -14,7 +14,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 /* ADDRESS: GOLDTL 0x004b6af0 */
 int __cdecl fcn_004b6af0(int* a0)
 {
-	volatile double d;
+	double d;
 	int* ent;
 	int v;
 	char buf[0x100];

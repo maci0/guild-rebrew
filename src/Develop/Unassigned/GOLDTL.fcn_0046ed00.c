@@ -1,6 +1,4 @@
 
-// scroll is read through a volatile lvalue so the later += stays a memory
-// read-modify-write (add [mem],reg) as in the reference.
 
 typedef struct Win046ed00 {
 	char pad0[0x10];
@@ -25,7 +23,7 @@ void __cdecl fcn_0046ed00(int delta, int step, int k)
 	int sum;
 	int v;
 
-	scroll = *(volatile int*)&((Win046ed00*)g_1015f40)[k].scroll;
+	scroll = *(int*)&((Win046ed00*)g_1015f40)[k].scroll;
 	base = ((Win046ed00*)g_1015f40)[k].base;
 	sum = base + scroll;
 	if (sum > 0 && step < 0) {

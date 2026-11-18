@@ -7,7 +7,7 @@ void __cdecl fcn_004c3030(int, int, int, int);
 /* ADDRESS: GOLDTL 0x004c3800 */
 void __cdecl fcn_004c3800(void *arg)
 {
-	volatile int flag;
+	int flag;
 	unsigned char slot[0xb8];
 	int ret;
 	void *obj;

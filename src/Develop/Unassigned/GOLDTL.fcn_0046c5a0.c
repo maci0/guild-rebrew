@@ -57,7 +57,7 @@ int __cdecl d2_GetResourceData(int table, int index);
 /* ADDRESS: GOLDTL 0x0046c5a0 */
 void __cdecl fcn_0046c5a0(int a0, int a1)
 {
-	volatile int i;
+	int i;
 	int nImg;
 	int img;
 	int xr;

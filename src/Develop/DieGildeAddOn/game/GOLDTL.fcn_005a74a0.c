@@ -28,7 +28,7 @@ void __cdecl fcn_005263d0(char*, char*, int);
 
 int __cdecl fcn_005a74a0(unsigned char* p)
 {
-	volatile int a;
+	int a;
 	int b;
 	char line[0x80];
 	char title[0x80];

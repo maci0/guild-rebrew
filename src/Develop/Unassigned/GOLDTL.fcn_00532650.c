@@ -32,7 +32,7 @@ void __cdecl fcn_00532650(void)
 	for (q = &g_7e6060[0].o; (int) q < (int) &g_7e6060[64].o;
 		q = (char**) ((char*) q + sizeof(struct s_7e6060))) {
 		if (*q != 0
-			&& (*(volatile unsigned int*) &g_6b7fac) > (unsigned int) (((int*) q)[-1] + 0x12c)) {
+			&& (*(unsigned int*) &g_6b7fac) > (unsigned int) (((int*) q)[-1] + 0x12c)) {
 			*q = 0;
 		}
 	}

@@ -89,7 +89,7 @@ void __cdecl fcn_00569a90(char* a)
 						*(int*) (entity + 0x20) += *(int*) (a + 0xb4);
 					*(int*) (pkt + 0x4d) += *(int*) (a + 0xb4);
 				}
-				*(volatile int*) (a + 0x70) = 3;
+				*(int*) (a + 0x70) = 3;
 				*(int*) (a + 0x70) = -1;
 				return;
 			}

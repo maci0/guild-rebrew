@@ -16,7 +16,7 @@ void __cdecl fcn_00428340(int, int, int, int);
 /* ADDRESS: GOLDTL 0x00515c60 */
 void __cdecl fcn_00515c60(unsigned char* a0, unsigned char* a1)
 {
-	volatile int z;
+	int z;
 	char v6[4];
 	char v7[48];
 	char v5[260];

@@ -24,18 +24,18 @@ int __cdecl fcn_005155e0(unsigned char* e)
 	int r;
 
 	k = lpGebaeudePROT[*e * 0x24d];
-	if (((volatile signed char*)g_7f3b00)[k] == -1) {
+	if (((signed char*)g_7f3b00)[k] == -1) {
 		if (e != g_7746c8 && *e != 0x1e) {
 			r = fcn_00413160();
 			if (r == -1) {
 				return r;
 			}
-			((volatile signed char*)g_7f3b00)[k] = (signed char) r;
+			((signed char*)g_7f3b00)[k] = (signed char) r;
 			((struct s_10432c0*)g_10432c0)[r].used = 1;
 			strcpy(((struct s_10432c0*)g_10432c0)[r].name, (char*) lpGebaeudePROT + *e * 0x24d + 1);
-			return ((volatile signed char*)g_7f3b00)[k];
+			return ((signed char*)g_7f3b00)[k];
 		}
 		init_LoadGebaeudeScene(*e);
 	}
-	return ((volatile signed char*)g_7f3b00)[k];
+	return ((signed char*)g_7f3b00)[k];
 }

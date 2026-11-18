@@ -95,7 +95,7 @@ int __cdecl fcn_00501040(char* dir)
 				def_row = lpObjektePROT + idx * 0x40;
 				cat_p = (char*) idx;
 				cat_p += (int) def_row;
-				category = *(volatile char*) cat_p;
+				category = *(char*) cat_p;
 				if ((category == 2 || category == 6) && idx != 0xfd && (entry & 0x8000) != 0) {
 					count++;
 				}

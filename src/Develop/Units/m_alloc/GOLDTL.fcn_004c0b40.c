@@ -31,7 +31,7 @@ void __cdecl fcn_004c0b40(void)
 
 	if (g_772d18 != 0)
 		return;
-	now = (*(volatile int*)&g_6b7fac) + ((*(volatile int*)&g_6b7fac) + (*(volatile int*)&g_6b7fac) * 2) * 4;
+	now = g_6b7fac + (g_6b7fac + g_6b7fac * 2) * 4;
 	cur = (*(struct snd_4c0b40**)&g_772d34);
 	if (cur == 0)
 		return;

@@ -17,7 +17,6 @@ unsigned char __cdecl fcn_0044e570(int a)
 
 // Lives in fcn_0044e570's file on purpose: with the callee defined in the same
 // TU, c2 knows the size check writes no memory and keeps h in edi across it.
-// ok is volatile: the reference stores the flag although nothing reads it.
 
 #include <string.h>
 
@@ -29,11 +28,11 @@ int __cdecl fcn_0044cbd0(int tex, char verbose)
 	char* name;
 	int h;
 	int w;
-	volatile int ok;
+	int ok;
 	char msg[256];
 
 	name = fcn_0045be40(tex);
-	if (name == 0 || (ok = fcn_00401590(name, &w, &h, 0)) == 0) {
+	if (name == 0 ? 1 : (ok = fcn_00401590(name, &w, &h, 0)) == 0) {
 		if (verbose) {
 			h = -1;
 			w = -1;

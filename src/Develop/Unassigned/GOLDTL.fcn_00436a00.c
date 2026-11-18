@@ -16,7 +16,7 @@ int __cdecl fcn_004321a0(F4321a0 flags, int a2, int a3, int v, int lo, int hi, i
 {
 	unsigned char f;
 
-	f = *(volatile unsigned char*) &flags.b1;
+	f = *(unsigned char*) &flags.b1;
 	if (f & 2) {
 		if (v > lo) {
 			return v - 1;

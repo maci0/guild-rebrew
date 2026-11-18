@@ -26,11 +26,11 @@ void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_0058cae0(char* p, int a1, int a2)
 {
-	volatile int sel;
+	int sel;
 	int res;
 	int ids[4];
 	int d;
-	volatile int back;
+	int back;
 	int i;
 
 	sel = 0;
@@ -42,10 +42,10 @@ int __cdecl fcn_0058cae0(char* p, int a1, int a2)
 	fcn_005340f0(g_772514);
 	d2_SetForm(d, 1);
 	io_AppendText(0x4113, 0x4112);
-	fcn_0058c4f0(p, d, 2, ids, (int*) &sel);
+	fcn_0058c4f0(p, d, 2, ids, &sel);
 	d2_SetForm(d, 3);
 	back = fcn_00472250(d, 3, io_AppendText(g_6a4078, 0x4119));
-	fcn_00472640(back, fcn_0058c780(p, a1, a2, ids, (int*) &sel));
+	fcn_00472640(back, fcn_0058c780(p, a1, a2, ids, &sel));
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -69,8 +69,8 @@ int __cdecl fcn_0058cae0(char* p, int a1, int a2)
 				continue;
 found:
 				sel = i;
-				fcn_0058c4f0(p, d, 2, ids, (int*) &sel);
-				fcn_00472640(back, fcn_0058c780(p, a1, a2, ids, (int*) &sel));
+				fcn_0058c4f0(p, d, 2, ids, &sel);
+				fcn_00472640(back, fcn_0058c780(p, a1, a2, ids, &sel));
 			}
 		}
 	} while (fcn_005373e0(fcn_0058cae0, 0x677c7) != 0);

@@ -45,7 +45,7 @@ long __stdcall fcn_0041e530(void* hwnd, unsigned int msg, unsigned int wp, long 
 		}
 		break;
 	case 0x9021:
-		id = *(volatile long*) &lp;
+		id = lp;
 		if (fcn_0041f530(id, (long*) &wp, &lp) == 1) {
 			CloseVideo(id);
 			DestroyWindow(hwnd);

@@ -116,8 +116,8 @@ int __cdecl fcn_0057e0a0(void)
 			break;
 		}
 		g_665f08[0] = g_665f08[1];
-		g_665f08[2] = (*(volatile unsigned int *)&g_6b7fac);
-		g_665f08[3] = (*(volatile unsigned int *)&g_6b7fac);
+		g_665f08[2] = ((unsigned int) g_6b7fac);
+		g_665f08[3] = ((unsigned int) g_6b7fac);
 		g_665f08[4] = 0;
 		fcn_00545c50(0);
 		return 0;
@@ -135,18 +135,18 @@ ret0:
 			fcn_0057e880(0, 0, 0, 0);
 			return 0;
 		}
-		if ((*(volatile unsigned int *)&g_6b7fac) > *(int *)((int)g_665f08[6] + 0x2c) + g_665f08[2]) {
-			g_665f08[2] = (*(volatile unsigned int *)&g_6b7fac);
+		if (((unsigned int) g_6b7fac) > *(int *)((int)g_665f08[6] + 0x2c) + g_665f08[2]) {
+			g_665f08[2] = ((unsigned int) g_6b7fac);
 			if (g_665f08[10] == 0 && *(int *)((int)g_665f08[6] + 0x14) != 0) {
 				g_665f08[10] = 1;
 				fcn_00580320();
 			}
 		} else {
-			if ((*(volatile unsigned int *)&g_6b7fac) > g_665f08[2] + 0x238) {
+			if (((unsigned int) g_6b7fac) > g_665f08[2] + 0x238) {
 				if (g_665f08[10] != 1) {
 					return 0;
 				}
-				g_665f08[2] = (*(volatile unsigned int *)&g_6b7fac);
+				g_665f08[2] = ((unsigned int) g_6b7fac);
 				g_665f08[10] = 0;
 				fcn_005803f0();
 			}
@@ -157,7 +157,7 @@ ret0:
 		}
 		break;
 	case 5:
-		g_665f08[2] = (*(volatile unsigned int *)&g_6b7fac);
+		g_665f08[2] = ((unsigned int) g_6b7fac);
 		g_665f08[10] = 0;
 		fcn_005803f0();
 		g_665f08[0xf] = 2;
@@ -175,22 +175,22 @@ label7:
 		return 0;
 	case 6:
 		cues = *(int**)((int)g_665f08[6] + 0x58); deadline = (unsigned int) cues[g_665f08[0x10] * 4] + (unsigned int) g_665f08[3];
-		g_6b7fc0 = deadline <= (*(volatile unsigned int *)&g_6b7fac);
+		g_6b7fc0 = deadline <= ((unsigned int) g_6b7fac);
 		fcn_00472640(g_665f08[0x13], g_6b7fc0);
 		if (fcn_00580960() != 1) {
 			break;
 		}
 		g_665f08[0x10] = g_665f08[0x10] + 1;
-		g_665f08[2] = (*(volatile unsigned int *)&g_6b7fac);
+		g_665f08[2] = ((unsigned int) g_6b7fac);
 		if ((unsigned int)g_665f08[0x10] < *(unsigned int *)((int)g_665f08[6] + 0x50)) {
-			g_665f08[3] = (*(volatile unsigned int *)&g_6b7fac);
+			g_665f08[3] = ((unsigned int) g_6b7fac);
 			fcn_005806d0();
 			return 0;
 		}
 		goto label7;
 	case 7:
 		g_665f08[0xf] = 3;
-		g_665f08[3] = (*(volatile unsigned int *)&g_6b7fac);
+		g_665f08[3] = ((unsigned int) g_6b7fac);
 		g_665f08[0x14] = 0;
 		fcn_005806d0();
 		g_6b7fc0 = 0;
@@ -205,7 +205,7 @@ label7:
 		return 0;
 	case 9:
 		if (g_665f08[10] == 1) {
-			g_665f08[2] = (*(volatile unsigned int *)&g_6b7fac);
+			g_665f08[2] = ((unsigned int) g_6b7fac);
 			g_665f08[10] = 0;
 			fcn_005803f0();
 		}
@@ -221,16 +221,16 @@ label7:
 		return 0;
 	case 10:
 		if (g_665f08[10] == 1) {
-			g_665f08[2] = (*(volatile unsigned int *)&g_6b7fac);
+			g_665f08[2] = ((unsigned int) g_6b7fac);
 			g_665f08[10] = 0;
 			fcn_005803f0();
 		}
-		if ((*(volatile unsigned int *)&g_6b7fac) > *(int *)((int)g_665f08[6] + 0x44) + g_665f08[3]) {
+		if (((unsigned int) g_6b7fac) > *(int *)((int)g_665f08[6] + 0x44) + g_665f08[3]) {
 			fcn_00532ef0();
 			g_774654 = g_774650 - g_774658;
 			g_665f08[0] = 0xb;
 			g_665f08[1] = 0xb;
-			g_665f08[3] = (*(volatile unsigned int *)&g_6b7fac);
+			g_665f08[3] = ((unsigned int) g_6b7fac);
 		}
 		if (g_665f08[0xb] != 0) {
 			break;
@@ -253,16 +253,16 @@ label7:
 		return 0;
 	case 11:
 		if (g_665f08[10] == 1) {
-			g_665f08[2] = (*(volatile unsigned int *)&g_6b7fac);
+			g_665f08[2] = ((unsigned int) g_6b7fac);
 			g_665f08[10] = 0;
 			fcn_005803f0();
 		}
-		if ((*(volatile unsigned int *)&g_6b7fac) > *(int *)((int)g_665f08[6] + 0x30) + g_665f08[3]) {
+		if (((unsigned int) g_6b7fac) > *(int *)((int)g_665f08[6] + 0x30) + g_665f08[3]) {
 			fcn_00532ef0();
 			g_774654 = g_774650 - g_774658;
 			g_665f08[0] = 0xc;
 			g_665f08[1] = 0xc;
-			g_665f08[3] = (*(volatile unsigned int *)&g_6b7fac);
+			g_665f08[3] = ((unsigned int) g_6b7fac);
 		}
 		if (g_665f08[0xb] != 0) {
 			break;
@@ -285,7 +285,7 @@ label7:
 		return 0;
 	case 12:
 		if (g_665f08[10] == 1) {
-			g_665f08[2] = (*(volatile unsigned int *)&g_6b7fac);
+			g_665f08[2] = ((unsigned int) g_6b7fac);
 			g_665f08[10] = 0;
 			fcn_005803f0();
 		}

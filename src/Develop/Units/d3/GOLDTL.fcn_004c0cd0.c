@@ -274,13 +274,13 @@ void __cdecl fcn_004c0cd0(void)
             }
         }
         if (g_6b8300 != 0 && g_772d10 != 0
-            && (unsigned int) ((*(volatile int*) &g_6b7fac
-                        + *(volatile int*) &g_6b7fac * 2) * 4
-                    - g_772d40 + scaled + *(volatile int*) &g_6b7fac)
+            && (unsigned int) ((*(int*) &g_6b7fac
+                        + *(int*) &g_6b7fac * 2) * 4
+                    - g_772d40 + scaled + *(int*) &g_6b7fac)
                 >= (unsigned int) ((int*) 0x6817f8)[g_772d3c * 3]) {
-            g_772d40 = (*(volatile int*) &g_6b7fac
-                    + *(volatile int*) &g_6b7fac * 2) * 4
-                + *(volatile int*) &g_6b7fac;
+            g_772d40 = (*(int*) &g_6b7fac
+                    + *(int*) &g_6b7fac * 2) * 4
+                + *(int*) &g_6b7fac;
             if (((float*) 0x6817f0)[g_772d3c * 3]
                     + (float) fcn_0064d3f8() * flt_inv32768
                 > flt_1) {

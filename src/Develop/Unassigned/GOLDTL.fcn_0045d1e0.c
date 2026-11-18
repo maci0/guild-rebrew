@@ -30,7 +30,7 @@ Tex* __cdecl fcn_0045c290(int, int);
 Tex* __cdecl fcn_0045d1e0(Tex* src, int color, char recurse)
 {
 	Tex* p;
-	volatile int n;
+	int n;
 	int c;
 	unsigned int i;
 

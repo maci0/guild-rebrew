@@ -524,9 +524,9 @@ void __cdecl fcn_00540020(void)
 				c = ENTCLASS(OBJBYTE);
 				if (c == 1) {
 					v = leftw * 2 / n;
-					*(volatile int*) ((char*) obj + 0x39) = v;
+					*(int*) ((char*) obj + 0x39) = v;
 					v = v < 0 ? 0 : v;
-					*(volatile int*) ((char*) obj + 0x39) = v;
+					*(int*) ((char*) obj + 0x39) = v;
 					if (ENTTYPE(OBJBYTE) == 5) {
 						if (v >= 0x2ee00) {
 							v = 0x2ee00;
@@ -534,12 +534,12 @@ void __cdecl fcn_00540020(void)
 					} else if (v >= 0xfa00) {
 						v = 0xfa00;
 					}
-					*(volatile int*) ((char*) obj + 0x39) = v;
+					*(int*) ((char*) obj + 0x39) = v;
 				} else if (c == 2) {
 					v = leftw * 4 / n;
-					*(volatile int*) ((char*) obj + 0x39) = v;
+					*(int*) ((char*) obj + 0x39) = v;
 					v = v < 0 ? 0 : v;
-					*(volatile int*) ((char*) obj + 0x39) = v;
+					*(int*) ((char*) obj + 0x39) = v;
 					if (ENTTYPE(OBJBYTE) == 5) {
 						if (v >= 0x4e200) {
 							v = 0x4e200;
@@ -547,12 +547,12 @@ void __cdecl fcn_00540020(void)
 					} else if (v >= 0x1f400) {
 						v = 0x1f400;
 					}
-					*(volatile int*) ((char*) obj + 0x39) = v;
+					*(int*) ((char*) obj + 0x39) = v;
 				} else if (c == 3) {
 					v = leftw * 8 / n;
-					*(volatile int*) ((char*) obj + 0x39) = v;
+					*(int*) ((char*) obj + 0x39) = v;
 					v = v < 0 ? 0 : v;
-					*(volatile int*) ((char*) obj + 0x39) = v;
+					*(int*) ((char*) obj + 0x39) = v;
 					if (ENTTYPE(OBJBYTE) == 5) {
 						if (v >= 0x9c400) {
 							v = 0x9c400;
@@ -560,7 +560,7 @@ void __cdecl fcn_00540020(void)
 					} else if (v >= 0x3e800) {
 						v = 0x3e800;
 					}
-					*(volatile int*) ((char*) obj + 0x39) = v;
+					*(int*) ((char*) obj + 0x39) = v;
 				}
 next2:
 				;

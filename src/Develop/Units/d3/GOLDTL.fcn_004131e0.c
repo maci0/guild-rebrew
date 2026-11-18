@@ -33,15 +33,15 @@ void __cdecl fcn_004131e0(float* out, float amount)
 	*(float*) (blk.hole + 4) = scale;
 	a = blk.m[8] * neg;
 	a = a + blk.m[4] * scale;
-	a = a + *(volatile float*) &blk.m[0] * *(volatile float*) (blk.hole + 4);
+	a = a + *(float*) &blk.m[0] * *(float*) (blk.hole + 4);
 	*(float*) (blk.hole + 0x14) = a;
 	a = blk.m[9] * neg;
 	a = a + blk.m[5] * scale;
-	a = a + *(volatile float*) &blk.m[1] * *(volatile float*) (blk.hole + 4);
+	a = a + *(float*) &blk.m[1] * *(float*) (blk.hole + 4);
 	*(float*) (blk.hole + 0x18) = a;
 	/* Left-associated so m[10]*neg is the first multiply. Nesting the
 	 * memory term first emits that multiply before m[10]*neg. */
-	a = (blk.m[10] * neg + blk.m[6] * scale) + *(volatile float*) &blk.m[2] * *(volatile float*) (blk.hole + 4);
+	a = (blk.m[10] * neg + blk.m[6] * scale) + *(float*) &blk.m[2] * *(float*) (blk.hole + 4);
 	out[0] = *(float*) (blk.hole + 0x14) + cam[0];
 	out[1] = *(float*) (blk.hole + 0x18) + cam[1];
 	out[2] = a + cam[2];

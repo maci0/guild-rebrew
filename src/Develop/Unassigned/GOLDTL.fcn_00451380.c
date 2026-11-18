@@ -33,12 +33,12 @@ float __cdecl fcn_00451380(float* a, float* b)
 	if (CompareVector3WithinTolerance(va, nvb, 1.0e-7f)) {
 		return *(float*) 0x6628f8;
 	}
-	cr[0] = *(volatile float*) &vb[2] * va[1] - *(volatile float*) &vb[1] * va[2];
-	cr[1] = *(volatile float*) &vb[0] * va[2] - *(volatile float*) &vb[2] * va[0];
-	cr[2] = *(volatile float*) &vb[1] * va[0] - *(volatile float*) &vb[0] * va[1];
+	cr[0] = vb[2] * va[1] - vb[1] * va[2];
+	cr[1] = vb[0] * va[2] - vb[2] * va[0];
+	cr[2] = vb[1] * va[0] - vb[0] * va[1];
 	cross = g_662d60 * cr[0] + g_662d64 * cr[1] + g_662d68 * cr[2];
 	if (cross > *(float*) 0x6628a8) {
-		return (float) (-asin(*(volatile float*) &vb[2] * va[2] + *(volatile float*) &vb[1] * va[1] + *(volatile float*) &vb[0] * va[0]));
+		return (float) (-asin(vb[2] * va[2] + vb[1] * va[1] + vb[0] * va[0]));
 	}
-	return (float) (asin(*(volatile float*) &vb[2] * va[2] + *(volatile float*) &vb[1] * va[1] + *(volatile float*) &vb[0] * va[0]) - *(double*) 0x662958);
+	return (float) (asin(vb[2] * va[2] + vb[1] * va[1] + vb[0] * va[0]) - *(double*) 0x662958);
 }

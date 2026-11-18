@@ -84,7 +84,7 @@ void __cdecl cut_MainDuell(char* a0)
 {
     int keepB;
     int bank;
-    char* volatile other;
+    char* other;
     int event;
     int keepA;
     int snd;

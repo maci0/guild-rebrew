@@ -72,8 +72,8 @@ int __cdecl fcn_004c16c0(void)
 
 	if (g_6b8300 != 0 && g_772d10 != 0) {
 		v5 = 0;
-		v2 = (*(volatile int *) &g_6b7fac + *(volatile int *) &g_6b7fac * 2) * 4
-		    + *(volatile int *) &g_6b7fac;
+		v2 = (*(int *) &g_6b7fac + *(int *) &g_6b7fac * 2) * 4
+		    + *(int *) &g_6b7fac;
 		if (g_772d4c != fcn_00500e20((int *) 0x7f4c00)) {
 			g_772d4c = fcn_00500e20((int *) 0x7f4c00);
 			if (g_772d48 != 0) {
@@ -242,8 +242,8 @@ join:
 		}
 	}
 	else {
-		v5 = (*(volatile int *) &g_6b7fac + *(volatile int *) &g_6b7fac * 2) * 4
-		    + *(volatile int *) &g_6b7fac;
+		v5 = (*(int *) &g_6b7fac + *(int *) &g_6b7fac * 2) * 4
+		    + *(int *) &g_6b7fac;
 		if (g_772d4c != fcn_00500e20((int *) 0x7f4c00)) {
 			g_772d4c = fcn_00500e20((int *) 0x7f4c00);
 		}

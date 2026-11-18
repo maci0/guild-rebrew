@@ -71,7 +71,7 @@ void __cdecl fcn_004d9f20(int arg)
 	int id;
 	int i;
 
-	last = (*(volatile unsigned int*)&g_6b7fb8) - 0x15e;
+	last = (*(unsigned int*)&g_6b7fb8) - 0x15e;
 	r = gm_RandomMod(100);
 	fcn_004d1a80();
 	fcn_004d7e50(arg);
@@ -103,7 +103,7 @@ void __cdecl fcn_004d9f20(int arg)
 		if (g_772ea4 != 0 || g_772ea8 != 0) {
 			g_774654 = 1;
 		} else if (g_772e94 == 0) {
-			if ((*(volatile unsigned int*)&g_6b7fb8) > last + 0x1a4) {
+			if ((*(unsigned int*)&g_6b7fb8) > last + 0x1a4) {
 				for (i = 0; i < ((Party*)g_772eb4)->count; i++) {
 					id = ((Party*)g_772eb4)->ids[i];
 					if (id != -1) {
@@ -113,7 +113,7 @@ void __cdecl fcn_004d9f20(int arg)
 						}
 					}
 				}
-				last = (*(volatile unsigned int*)&g_6b7fb8);
+				last = (*(unsigned int*)&g_6b7fb8);
 			}
 			if (((Game*)g_772f24)->player == g_68b79c) {
 				fcn_004d4f30(((Party*)g_772eb4));

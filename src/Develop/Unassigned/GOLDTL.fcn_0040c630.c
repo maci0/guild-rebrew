@@ -22,8 +22,6 @@ int __cdecl fcn_0040c630(int* ticks)
 		return 0;
 	}
 	*(void**) (g_6b7e98 + 0xc60) = (void*) fcn_0040c630;
-	/* The clock is read again through volatile so this load stays in
-	 * eax and the VM is reloaded into ecx. */
-	*(int*) (g_6b7e98 + 0xc88) = *(volatile int*) &g_6b7fac;
+	*(int*) (g_6b7e98 + 0xc88) = *(int*) &g_6b7fac;
 	return 1;
 }

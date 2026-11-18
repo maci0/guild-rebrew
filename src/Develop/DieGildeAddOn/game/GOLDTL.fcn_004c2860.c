@@ -50,7 +50,7 @@ void __cdecl fcn_004c2860(void)
 	char* cc;
 	Chan_14cc460* p;
 
-	now = (*(volatile int*) &g_6b7fac + *(volatile int*) &g_6b7fac * 2) * 4 + *(volatile int*) &g_6b7fac;
+	now = (*(int*) &g_6b7fac + *(int*) &g_6b7fac * 2) * 4 + *(int*) &g_6b7fac;
 	if (g_774964 == 0) {
 		return;
 	}

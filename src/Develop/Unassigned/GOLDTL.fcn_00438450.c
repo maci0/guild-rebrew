@@ -22,7 +22,7 @@ unsigned char __cdecl fcn_00438450(char* o)
 	float* src;
 	int i;
 
-	result = *(volatile unsigned char*) &o | 0x40;
+	result = *(unsigned char*) &o | 0x40;
 	g_6b8050 = g_6b8050 + 1;
 	v = fcn_004382e0((unsigned int) o);
 	if (v != 0) {

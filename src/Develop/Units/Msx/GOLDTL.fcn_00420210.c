@@ -9,7 +9,7 @@ extern float g_678158;
 extern unsigned int g_67815c;
 extern int g_678160;
 extern int g_6b7190;
-extern volatile int g_6b7fac;
+extern int g_6b7fac;
 
 int __cdecl fcn_0042af10(int h);
 int __cdecl fcn_0042ae10(int h, int v);

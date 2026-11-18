@@ -1,7 +1,5 @@
 
 
-// The volatile read of g_6b7fac orders it after the reload of g_772500, as
-// in the reference.
 
 typedef struct S00469900 {
 	char pad0[0x30];
@@ -30,5 +28,5 @@ void __cdecl d2_AddRefcount(int i)
 		i = e->f4c;
 	}
 	((S00469900*)g_772500)[i].f40++;
-	((S00469900*)g_772500)[i].f48 = *(volatile int*)&g_6b7fac;
+	((S00469900*)g_772500)[i].f48 = g_6b7fac;
 }

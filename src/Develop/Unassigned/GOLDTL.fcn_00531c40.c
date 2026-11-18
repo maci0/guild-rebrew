@@ -43,7 +43,7 @@ void __cdecl fcn_00531c40(char* o, int a, char* name)
 	if (k >= 64) {
 		int now;
 
-		now = (*(volatile int*)&g_6b7fac);
+		now = g_6b7fac;
 		k = -1;
 		for (i = 0; i < 64; i++) {
 			if (g_7e6060[i].t < now) {
@@ -55,7 +55,7 @@ void __cdecl fcn_00531c40(char* o, int a, char* name)
 		}
 	}
 	p = &g_7e6060[k];
-	p->t = (*(volatile int*)&g_6b7fac);
+	p->t = g_6b7fac;
 	p->o = o;
 	p->a = a;
 	*(void**) (o + 0x228) = (void*) fcn_00531c00;

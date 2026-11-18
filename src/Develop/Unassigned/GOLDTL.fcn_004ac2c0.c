@@ -1,7 +1,7 @@
 int __cdecl fcn_004ac1e0(int a);
 
 /* ADDRESS: GOLDTL 0x004ac2c0 */
-unsigned short __cdecl fcn_004ac2c0(int a0, volatile int a1)
+unsigned short __cdecl fcn_004ac2c0(int a0, int a1)
 {
 	unsigned short v;
 	int r;

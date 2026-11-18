@@ -63,8 +63,8 @@ fail:
 	}
 	g_665f08[0] = 1;
 	g_665f08[1] = 1;
-	g_665f08[2] = (*(volatile int*)&g_6b7fac);
-	g_665f08[3] = (*(volatile int*)&g_6b7fac);
+	g_665f08[2] = g_6b7fac;
+	g_665f08[3] = g_6b7fac;
 	g_665f08[4] = 0;
 	g_665f08[5] = 0;
 	g_665f08[6] = (int) g_774a10;

@@ -95,7 +95,7 @@ void __cdecl fcn_1001fe31(int rterrnum)
         return;
     if (__error_mode == 1 || (__error_mode == 0 && __app_type == 1))
     {
-        char* volatile* slot = &((char* volatile*)0x10033ef4)[off >> 2];
+        char** slot = &((char**)0x10033ef4)[off >> 2];
 
         WriteFile(GetStdHandle((DWORD)-12), *slot, fcn_1001bdd0(*slot),
                   (unsigned long*)&rterrnum, NULL);
@@ -143,7 +143,7 @@ char* __cdecl fcn_1001f8e0(char* dst, const char* src)
  * Verified byte-for-byte against glibc strncpy on 20k differential cases
  * (all alignments, n 0-999, embedded zeros). Residue drivers found:
  * keep=n init + keep-test at dw gives push-edi-first frameless entry;
- * t-first scan order homes countdown in ecx; volatile second load keeps
+ * t-first scan order homes countdown in ecx; second load once kept
  * the store-copy load from CSE. Probes: .scratch/probe_g*.c, probe_h*.c. */
 
 void* __cdecl fcn_1001ae20(void* dst, const void* src, unsigned int n)
@@ -177,7 +177,7 @@ dw:
         t += x;
         x = ~x;
         t ^= x;
-        word = *(volatile unsigned int*)s;
+        word = *(unsigned int*)s;
         s += 4;
         t &= 0x81010100;
         if (t == 0)

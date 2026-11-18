@@ -22,7 +22,7 @@ void __cdecl fcn_004fdcf0(int* a0)
     res = (int*) (*(int*) ((char*) ctx + 0x1ec) + 0xf4);
     q = *(int**) ((char*) res + 0x318);
     if (v != 0x10432c0) {
-        n = *(volatile int*) ((char*) q + 0x1e8);
+        n = *(int*) ((char*) q + 0x1e8);
         if (n <= 4) {
             idx = (unsigned int) a0[1] % (unsigned int) n;
         } else {

@@ -36,7 +36,7 @@ float __cdecl fcn_00413d10(float* pos)
 				} while (k < 4);
 				return acc * *(float*) 0x662a38;
 			}
-			acc = *(volatile float*) &acc;
+			acc = *(float*) &acc;
 			return acc;
 		}
 	}

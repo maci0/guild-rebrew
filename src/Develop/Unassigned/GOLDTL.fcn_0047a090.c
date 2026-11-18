@@ -1,4 +1,4 @@
-extern volatile int g_6b7fb0;
+extern int g_6b7fb0;
 extern int g_772600;
 
 void __cdecl fcn_0047a2b0(int index);
@@ -19,7 +19,7 @@ void __cdecl fcn_0047a090(void)
 	if (g_6b7fb0 - g_772600 == 0) {
 		return;
 	}
-	delta = (unsigned int) (g_6b7fb0 - g_772600) < 1U ? 1 : g_6b7fb0 - g_772600;
+	delta = g_6b7fb0 - g_772600; delta = (unsigned int) delta < 1U ? 1 : delta;
 	g_772600 = g_6b7fb0;
 	index = 0;
 	for (p = (char*) 0x100e7a4; (int) p < 0x100eb64; p += 0x14, index++) {

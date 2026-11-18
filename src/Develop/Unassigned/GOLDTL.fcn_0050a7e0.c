@@ -290,7 +290,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
             p = (char*) gm_GetEntityTableEntry(slot);
             if (p != 0) {
                 D(p, 0x88) = 0xbf800000;
-                W(p, 0) = *(volatile unsigned short*) (slot + 0x50);
+                W(p, 0) = *(unsigned short*) (slot + 0x50);
             }
             if (type == 7 || type == 5) {
                 int id;

@@ -31,10 +31,10 @@ void __cdecl fcn_00590500(void)
 	n = 0;
 	vb = -1;
 	va = 0;
-	if ((*(volatile unsigned int*)&g_6b7fac) < g_6a9654 + 4500) {
+	if ((*(unsigned int*)&g_6b7fac) < g_6a9654 + 4500) {
 		return;
 	}
-	g_6a9654 = (*(volatile unsigned int*)&g_6b7fac);
+	g_6a9654 = (*(unsigned int*)&g_6b7fac);
 	if (g_774800 == 0 && (float) gm_RandomFloat01() < g_664090) {
 		return;
 	}

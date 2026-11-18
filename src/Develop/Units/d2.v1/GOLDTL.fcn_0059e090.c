@@ -105,7 +105,7 @@ void __cdecl fcn_0059e090(char* b)
 			fcn_0064d41a(buf, "ief_Wappen%li", *(int*) (b + 0x65));
 			d2_SetBackgroundTexture(buf, slot->x0);
 			slot->x3a4 = 0.0f;
-			t0 = *(volatile unsigned int*)&g_6b7fac;
+			t0 = *(unsigned int*)&g_6b7fac;
 			d2_SetForm(h, 4);
 			fcn_00533a60(g_772514, 0, &pick, 3, g_14a566c, "Import", "Export");
 			fcn_00472170(pick.x0, 0);
@@ -134,7 +134,7 @@ void __cdecl fcn_0059e090(char* b)
 			fcn_00594340();
 			shown = sel;
 		}
-		d = (*(volatile unsigned int*)&g_6b7fac - t0) * 0.0013333333333333333;
+		d = (*(unsigned int*)&g_6b7fac - t0) * 0.0013333333333333333;
 		if (!(d < 0.25)) {
 			d = 0.25;
 		}

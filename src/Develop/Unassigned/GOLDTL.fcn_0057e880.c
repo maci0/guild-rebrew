@@ -43,7 +43,7 @@ typedef struct {
 
 extern int g_774a14;
 extern Seq* g_665f08;
-extern volatile unsigned int g_6b7fac;
+extern unsigned int g_6b7fac;
 
 void __cdecl fcn_005804f0(void);
 void __cdecl fcn_00584160(int);

@@ -28,6 +28,6 @@ void __cdecl FadeMasterVolume(float fade, int time)
 	g_67815c = time;
 	g_678158 = fade;
 	g_678154 = g_678150;
-	g_6b7190 = (*(volatile int*)&g_6b7fac) * 8 + (*(volatile int*)&g_6b7fac) * 4 + (*(volatile int*)&g_6b7fac);
+	g_6b7190 = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
 	LeaveCriticalSection(&g_14cc5a0);
 }

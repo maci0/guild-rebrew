@@ -18,8 +18,8 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int a2, int a3, 
 		switch (a2) {
 		case 1:
 			io_FormatTextBuffer(buf, 0x1883, *(int*) a1 + 0x30);
-			target = (*(volatile int*) &g_6b7fac) + a5;
-			last = (*(volatile int*) &g_6b7fac);
+			target = (*(int*) &g_6b7fac) + a5;
+			last = (*(int*) &g_6b7fac);
 			while (target > (*(volatile int*) &g_6b7fac)) {
 				fcn_005373e0(0, 0x777c7);
 				if (!*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4)) {
@@ -35,8 +35,8 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int a2, int a3, 
 			break;
 		case 2:
 			io_FormatTextBuffer(buf, 0x1884, *(int*) a1 + 0x30, *(int*) (a0 + 4));
-			target = (*(volatile int*) &g_6b7fac) + a5;
-			last = (*(volatile int*) &g_6b7fac);
+			target = (*(int*) &g_6b7fac) + a5;
+			last = (*(int*) &g_6b7fac);
 			while (target > (*(volatile int*) &g_6b7fac)) {
 				fcn_005373e0(0, 0x777c7);
 				if (!*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4)) {
@@ -52,7 +52,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int a2, int a3, 
 			break;
 		case 3:
 			io_FormatTextBuffer(buf, 0x1885, *(int*) a1 + 0x30, *(int*) (a0 + 4));
-			last = (*(volatile int*) &g_6b7fac);
+			last = (*(int*) &g_6b7fac);
 			d2_SetForm(a3, a4);
 			fcn_005a0be0((int) buf, a1);
 			target = last + a5;
@@ -65,7 +65,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int a2, int a3, 
 			break;
 		case 4:
 			io_FormatTextBuffer(buf, 0x1886, *(int*) a1 + 0x30, *(int*) (a0 + 4));
-			last = (*(volatile int*) &g_6b7fac);
+			last = (*(int*) &g_6b7fac);
 			d2_SetForm(a3, a4);
 			fcn_005a0be0((int) buf, a1);
 			target = last + a5;
@@ -93,7 +93,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int a2, int a3, 
 			io_FormatTextBuffer(buf, 0x1886, *(int*) a1 + 0x30, *(int*) (a0 + 4));
 			break;
 		}
-		last = (*(volatile int*) &g_6b7fac);
+		last = (*(int*) &g_6b7fac);
 		d2_SetForm(a3, a4);
 		fcn_005a0be0((int) buf, a1);
 		target = last + a5;

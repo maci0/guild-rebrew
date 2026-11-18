@@ -27,7 +27,6 @@ struct item {
 #pragma pack()
 
 extern int* g_665f08;
-/* volatile: the original loads the tick before the state pointer */
 extern int g_6b7fac;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -42,7 +41,7 @@ int __cdecl fcn_0057f430(int* ev)
 			(*(struct fsm**)&g_665f08)->flag = 1;
 			(*(struct fsm**)&g_665f08)->next = 0xa;
 			(*(struct fsm**)&g_665f08)->state = (*(struct fsm**)&g_665f08)->next;
-			(*(struct fsm**)&g_665f08)->since = (*(volatile int*)&g_6b7fac);
+			(*(struct fsm**)&g_665f08)->since = g_6b7fac;
 		}
 	} else if (ev[0] == 0x10 && (p = (struct item*) ev[1]) != 0) {
 		if (((struct good*)lpGebaeudePROT)[p->good].kind == 0x12 && p->owner == g_774970) {
@@ -57,7 +56,7 @@ int __cdecl fcn_0057f430(int* ev)
 				}
 			}
 			(*(struct fsm**)&g_665f08)->state = (*(struct fsm**)&g_665f08)->next;
-			(*(struct fsm**)&g_665f08)->since = (*(volatile int*)&g_6b7fac);
+			(*(struct fsm**)&g_665f08)->since = g_6b7fac;
 			return 1;
 		}
 	}

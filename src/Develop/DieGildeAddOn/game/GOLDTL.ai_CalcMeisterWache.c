@@ -42,7 +42,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 	char *res;
 	char *cand;
 	char *it;
-	char *volatile name;
+	char *name;
 	unsigned short action;
 	unsigned char kind;
 	int idx1;

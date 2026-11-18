@@ -19,8 +19,8 @@ void __cdecl txt_ParseRandomText(char* s)
 			return;
 		}
 		ReportClientMessage(g_679964);
-		g_11bb000[g_6b7f98] = *(volatile int*) &s;
+		g_11bb000[g_6b7f98] = *(int*) &s;
 		return;
 	}
-	g_11bb000[g_6b7f98] = *(volatile int*) &s;
+	g_11bb000[g_6b7f98] = *(int*) &s;
 }

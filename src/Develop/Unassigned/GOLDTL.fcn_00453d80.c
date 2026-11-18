@@ -21,7 +21,7 @@ unsigned char __cdecl fcn_00453d80(void* a1, unsigned int a2)
 	int n;
 	int wanted;
 	int age;
-	volatile float dt;
+	float dt;
 	float fade;
 	float r;
 	float s1;

@@ -24,7 +24,7 @@ extern char g_1041d80[];
 void __cdecl fcn_00445e40(int idx)
 {
 	char* dst;
-	volatile int n;
+	int n;
 
 	if (g_67a960 >= 0) {
 		((Trip*)g_1041d20)[g_67a960].a = g_6b805c;

@@ -18,7 +18,6 @@ struct good {
 #pragma pack()
 
 extern int* g_665f08;
-/* volatile: the original loads the tick before the state pointer */
 extern int g_6b7fac;
 extern unsigned char* lpGebaeudePROT;
 
@@ -27,7 +26,7 @@ int __cdecl fcn_0057f030(int* ev)
 	if (ev[0] == 0xd && ev[1] != 0 && ((struct good*)lpGebaeudePROT)[*(unsigned char*) ev[1]].kind == 0xa) {
 		((struct fsm*)g_665f08)->state = 0xb;
 		((struct fsm*)g_665f08)->next = 0xb;
-		((struct fsm*)g_665f08)->since = (*(volatile int*)&g_6b7fac);
+		((struct fsm*)g_665f08)->since = g_6b7fac;
 		return 1;
 	}
 	return 3;
