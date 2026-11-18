@@ -1,6 +1,6 @@
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_6b7fb8;
+extern volatile int g_6b7fb8;
 extern int g_6b8010;
 extern int g_7e4538;
 extern int g_7f4c00;

@@ -1,4 +1,4 @@
-extern int g_6b7fb8;
+extern volatile int g_6b7fb8;
 
 typedef struct DevData DevData;
 

@@ -1,5 +1,5 @@
 #include <string.h>
-extern int g_6b7fb8;
+extern volatile int g_6b7fb8;
 extern int g_6b5c8c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* Watch the cursor and the two button click latches, then publish the new

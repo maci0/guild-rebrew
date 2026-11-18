@@ -1,5 +1,5 @@
 extern int g_774a14;
-extern int g_6b7fc0;
+extern volatile int g_6b7fc0;
 
 // SIZE 0x40
 struct cb_57eba0 {

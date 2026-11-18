@@ -35,7 +35,7 @@ extern int g_14ce8e8;
 extern int g_67d8e0;
 extern int g_67d8e4;
 extern int g_14ce8d0;
-extern int g_6b7fb0;
+extern volatile int g_6b7fb0;
 extern int g_100f888;
 extern int g_100f1c8;
 extern int g_7725d8;

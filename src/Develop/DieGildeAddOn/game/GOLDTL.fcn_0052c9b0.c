@@ -18,7 +18,7 @@ typedef struct {
 } Rec;
 
 #include "Develop/Units/d3/d3_camera.h"
-extern int g_6b7fc0;
+extern volatile int g_6b7fc0;
 extern int g_7e4300;
 extern int g_6a99e8;
 extern int g_14ce8e8;

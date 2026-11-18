@@ -13,7 +13,7 @@ typedef struct Sprite {
 // SIZE 0x64
 
 #include "client_sprites.h"
-extern int g_6b7fb8;
+extern volatile int g_6b7fb8;
 extern char s_67d8b0[];
 
 void* __cdecl m_alloc(int size, const char* tag);

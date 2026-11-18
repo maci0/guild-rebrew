@@ -1,4 +1,4 @@
-extern int g_6b7fb8; extern char g_77250c[];
+extern volatile int g_6b7fb8; extern char g_77250c[];
 
 typedef struct Fade Fade;
 

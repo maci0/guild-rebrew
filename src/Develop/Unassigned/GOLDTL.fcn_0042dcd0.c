@@ -1,15 +1,15 @@
-extern int g_6b7fbc;
+extern volatile int g_6b7fbc;
 
 #include "client_timer.h"
 
-extern int g_6b7fb8;
-extern int g_6b7fc0;
+extern volatile int g_6b7fb8;
+extern volatile int g_6b7fc0;
 extern volatile int g_6b7fac;
-extern int g_6b7fb0;
-extern int g_6b7fb4;
-extern char g_6b7fc8;
-extern int g_6b7fcc;
-extern int g_6b7fc4;
+extern volatile int g_6b7fb0;
+extern volatile int g_6b7fb4;
+extern volatile char g_6b7fc8;
+extern volatile int g_6b7fcc;
+extern volatile int g_6b7fc4;
 extern unsigned int g_1052c48[2];
 extern unsigned int g_1052c50;
 extern int g_6b7fa8;

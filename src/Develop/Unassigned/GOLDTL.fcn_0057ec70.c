@@ -3,7 +3,7 @@
 
 extern int g_774a14;
 extern int* g_665f08;
-extern int g_6b7fc0;
+extern volatile int g_6b7fc0;
 
 int __cdecl fcn_0057ec70(int mask)
 {

@@ -7,7 +7,7 @@
 extern int g_77493c;
 extern char g_774944;
 extern int g_77250c;
-extern int g_6b7fc0;
+extern volatile int g_6b7fc0;
 
 int __cdecl fcn_0041baa0(void);
 void __cdecl fcn_00418640(void);

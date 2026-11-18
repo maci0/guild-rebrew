@@ -21,7 +21,7 @@ extern unsigned char** g_7749e4;
 extern s_77e8c0 g_77e8c0[16];
 extern char* g_1015ea0;
 extern unsigned char g_7747b0;
-extern int g_6b7fc0;
+extern volatile int g_6b7fc0;
 
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_004707d0(int);

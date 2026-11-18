@@ -1,6 +1,6 @@
 extern int g_6a476c;
 extern unsigned char g_7747b0;
-extern int g_6b7fc0;
+extern volatile int g_6b7fc0;
 
 // SIZE 0xc
 struct ev_545c50 {

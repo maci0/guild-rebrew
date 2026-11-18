@@ -32,7 +32,7 @@ typedef struct Game {
 	int player;
 } Game;
 
-extern int g_6b7fb8;
+extern volatile int g_6b7fb8;
 #include "client_sound.h"
 extern int g_772e94;
 extern int g_772ea4;

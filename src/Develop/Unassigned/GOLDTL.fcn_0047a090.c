@@ -1,4 +1,4 @@
-extern int g_6b7fb0;
+extern volatile int g_6b7fb0;
 extern int g_772600;
 
 void __cdecl fcn_0047a2b0(int index);

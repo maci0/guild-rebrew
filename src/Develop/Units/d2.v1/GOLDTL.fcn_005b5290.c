@@ -17,7 +17,7 @@ typedef struct {
 	unsigned char* data;
 } Map5b52;
 
-extern int g_6b7fc0;
+extern volatile int g_6b7fc0;
 extern int g_14ce8e0;
 extern int g_774654;
 extern char g_6abaec[];

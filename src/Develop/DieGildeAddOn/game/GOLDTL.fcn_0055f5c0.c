@@ -16,7 +16,7 @@ extern int g_100f884;
 extern int g_100f1dc;
 extern int g_14ce8d8;
 extern int g_6b5c8c;
-extern int g_6b7fc0;
+extern volatile int g_6b7fc0;
 extern pos14_7f4c00 g_7f4c00;
 extern Slot7f4ca2 g_7f4ca2[768];
 extern int g_7f4ca4;
