@@ -11679,7 +11679,7 @@ size = 1288
 section = ".rdata"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-11-12T14:53:08+00:00"
+updated_at = "2026-11-18T10:53:38+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10025fc0".verification]
@@ -11689,7 +11689,7 @@ input_hash = "fd09d6d94c1e5ee83c61f5f6f0cd83f0c6710836a50e8ceb85129c472e6eeb41"
 definition_hash = "4fc6c0e8d11bc31ad5d096bf7b680cf5769969ffb7afea3d00ed12ff8449b1d1"
 built_va = "0x10025fc0"
 placement_method = "section-relative-span"
-measured_at = "2026-11-14T03:08:40+00:00"
+measured_at = "2026-11-18T10:53:38+00:00"
 
 ["SERVER.0x100264c8"]
 file = "src/Develop/crt_globals.h"
@@ -11722,7 +11722,7 @@ size = 312
 section = ".rdata"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-11-12T14:53:08+00:00"
+updated_at = "2026-11-18T10:53:38+00:00"
 storage_kind = "span"
 
 ["SERVER.0x100264d0".verification]
@@ -11732,7 +11732,7 @@ input_hash = "6a88dc00500936e572962f180b521c22c6737670e7284c9786cc9a7bc831a9be"
 definition_hash = "ae7d819f898ac498dc2e7d35a1094b9fdf45646790ceb3ba39ffb839c2ff424e"
 built_va = "0x100264d0"
 placement_method = "section-relative-span"
-measured_at = "2026-11-14T03:08:40+00:00"
+measured_at = "2026-11-18T10:53:38+00:00"
 
 ["SERVER.0x10026608"]
 file = "src/crt_region/section_spans.c"
@@ -11765,7 +11765,7 @@ section = ".data"
 status = "EXACT"
 storage_kind = "span"
 updated_by = "verify"
-updated_at = "2026-11-12T14:53:08+00:00"
+updated_at = "2026-11-18T10:53:38+00:00"
 
 ["SERVER.0x10027000".verification]
 status = "EXACT"
@@ -11774,7 +11774,7 @@ input_hash = "2ab320d5ab56fa83f08b63f2a8fef7daf3a086a28ca5b60334cbbea8c58bbd30"
 definition_hash = "c34321578fa513bac0c81b5c1eda34b2c7a85c3d92bdc1efe99bf34b990bfb8d"
 built_va = "0x10027000"
 placement_method = "section-relative-span"
-measured_at = "2026-11-14T03:08:40+00:00"
+measured_at = "2026-11-18T10:53:38+00:00"
 
 ["SERVER.0x10027030"]
 file = "src/Develop/Units/net/broadcast.c"
@@ -16767,7 +16767,7 @@ section = ".data"
 status = "EXACT"
 note = "first init fnptr"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-18T10:53:38+00:00"
 
 ["SERVER.0x100317d8".verification]
 status = "EXACT"
@@ -16776,7 +16776,7 @@ input_hash = "cfb660c4ee7b5ec9d396cb0af3e7820353ea0235f29de717ff7dcaf425e93c5f"
 definition_hash = "3190a13fd38792a4ab476b84defa70cd212bc642d61b5727bd02d00716b277d7"
 built_va = "0x100317d8"
 placement_method = "link-symbol"
-measured_at = "2026-11-14T03:08:40+00:00"
+measured_at = "2026-11-18T10:53:38+00:00"
 
 ["SERVER.0x100317dc"]
 file = "src/crt_region/section_spans.c"
@@ -16787,7 +16787,7 @@ size = 20
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-18T10:53:38+00:00"
 storage_kind = "span"
 
 ["SERVER.0x100317dc".verification]
@@ -16797,7 +16797,7 @@ input_hash = "3ed8a26a84408234f3693ec550a246e391386078a814273cad18434a9570552a"
 definition_hash = "d18d8fa0f2e5f56af9faa843cd8395bafaf1cafedf08635a387247a4c83779c1"
 built_va = "0x100317dc"
 placement_method = "section-relative-span"
-measured_at = "2026-11-14T03:08:40+00:00"
+measured_at = "2026-11-18T10:53:38+00:00"
 
 ["SERVER.0x100317f0"]
 file = "src/crt_region/data_globals.c"
@@ -16809,7 +16809,7 @@ section = ".data"
 status = "EXACT"
 note = "_exit hook fnptr"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-18T10:53:38+00:00"
 storage_kind = "alias"
 link_symbol = "__aexit_rtn"
 
@@ -16820,7 +16820,7 @@ input_hash = "8f6a2dde640b7ac07b4c3eb1714f917c5d788632f0ebbe415547351335699bc7"
 definition_hash = "c3f74a5586cb2aad1a82e6ca2c574629810abcd74320fe3250e307c95ca12a1e"
 built_va = "0x100317f0"
 placement_method = "link-symbol"
-measured_at = "2026-11-14T03:08:40+00:00"
+measured_at = "2026-11-18T10:53:38+00:00"
 
 ["SERVER.0x100317f4"]
 file = "src/crt_region/section_spans.c"
@@ -17050,7 +17050,7 @@ size = 848
 section = ".data"
 status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-11-12T14:53:08+00:00"
+updated_at = "2026-11-18T10:53:38+00:00"
 storage_kind = "span"
 
 ["SERVER.0x10033ba0".verification]
@@ -17060,7 +17060,7 @@ input_hash = "0d6f156c4b788510b2254c73261e59ac3b23c3906d6bd981886c2589568e83e0"
 definition_hash = "c570b976a79cc473f4f107cbc49ac027ad5025647c50b515933f6f5963ae074d"
 built_va = "0x10033ba0"
 placement_method = "section-relative-span"
-measured_at = "2026-11-14T03:08:40+00:00"
+measured_at = "2026-11-18T10:53:38+00:00"
 
 ["SERVER.0x10033ef0"]
 file = "src/crt_region/data_globals.c"
