@@ -9,8 +9,8 @@ void __cdecl fcn_00580560(void);
 void __cdecl fcn_005805e0(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-#define ELAPSED(t) ((*(unsigned int*)&g_6b7fac) - (t) ? (*(unsigned int*)&g_6b7fac) - (t) : 0)
-#define MIN(a, b) ((b) > (a) ? (a) : (b))
+#define ELAPSED(t) (((unsigned int)g_6b7fac) - (t) ? ((unsigned int)g_6b7fac) - (t) : 0)
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 void __cdecl fcn_00580610(void)
 {

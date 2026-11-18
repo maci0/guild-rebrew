@@ -43,7 +43,7 @@ void __cdecl fcn_00423010(int fade)
 		}
 		return;
 	}
-	t = (*(int*)&g_6b7fac) * 8 + (*(int*)&g_6b7fac) * 4 + (*(int*)&g_6b7fac);
+	t = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
 	g_678dec = fade;
 	g_6b7e90 = 1;
 	for (i = 0; i < g_6b7e8c; i++) {

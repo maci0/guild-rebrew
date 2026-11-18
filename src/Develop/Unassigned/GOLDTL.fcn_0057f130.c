@@ -1,3 +1,4 @@
+extern volatile int g_6b7fac;
 
 /* ADDRESS: GOLDTL 0x0057f130 */
 int __cdecl fcn_0057f130(int* msg)
@@ -9,7 +10,7 @@ int __cdecl fcn_0057f130(int* msg)
 		if (e != 0 && *e == 0x10e) {
 			(*(int**) 0x665f08)[0] = 0xb;
 			(*(int**) 0x665f08)[1] = 0xb;
-			(*(int**) 0x665f08)[3] = *(int*) 0x6b7fac;
+			(*(int**) 0x665f08)[3] = g_6b7fac;
 			return 1;
 		}
 	}

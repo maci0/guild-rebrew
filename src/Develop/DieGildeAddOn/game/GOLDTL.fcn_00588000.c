@@ -46,10 +46,10 @@ void __cdecl fcn_00588000(char* w)
 	int msg;
 
 	cnt = 0;
-	if (*(unsigned int*) (w + 0x70) + 0x15e > (*(unsigned int*)&g_6b7fac)) {
+	if (*(unsigned int*) (w + 0x70) + 0x15e > g_6b7fac) {
 		return;
 	}
-	*(unsigned int*) (w + 0x70) = (*(unsigned int*)&g_6b7fac);
+	*(unsigned int*) (w + 0x70) = g_6b7fac;
 	d2_SetForm(*(int*) (w + 0x74), 0);
 	for (i = 0; i < 3; i++) {
 		if (((struct deal*)g_77dda0)[i].state != i) {

@@ -12,8 +12,8 @@ char* __cdecl fcn_004c49a0(char a1, int a2)
 	unsigned int end;
 	char* p;
 
-	end = (*(unsigned int*)&g_6b7fac) + a2;
-	while ((*(volatile unsigned int*)&g_6b7fac) < end) {
+	end = (unsigned int)g_6b7fac + a2;
+	while ((unsigned int)g_6b7fac < end) {
 		fcn_004c3ff0();
 		fcn_004c4940();
 		for (p = g_aed324; p != 0; p = *(char**) (p + 0x95)) {

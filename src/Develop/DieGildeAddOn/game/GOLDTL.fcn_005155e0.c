@@ -22,6 +22,7 @@ int __cdecl fcn_005155e0(unsigned char* e)
 {
 	int k;
 	int r;
+	char *dst, *src;
 
 	k = lpGebaeudePROT[*e * 0x24d];
 	if (((signed char*)g_7f3b00)[k] == -1) {
@@ -32,7 +33,9 @@ int __cdecl fcn_005155e0(unsigned char* e)
 			}
 			((signed char*)g_7f3b00)[k] = (signed char) r;
 			((struct s_10432c0*)g_10432c0)[r].used = 1;
-			strcpy(((struct s_10432c0*)g_10432c0)[r].name, (char*) lpGebaeudePROT + *e * 0x24d + 1);
+			dst = ((struct s_10432c0*)g_10432c0)[r].name;
+			src = (char*) lpGebaeudePROT + *e * 0x24d + 1;
+			while ((*dst++ = *src++) != 0) { }
 			return ((signed char*)g_7f3b00)[k];
 		}
 		init_LoadGebaeudeScene(*e);

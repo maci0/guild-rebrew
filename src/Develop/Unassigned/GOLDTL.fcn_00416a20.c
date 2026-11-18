@@ -100,27 +100,27 @@ void __cdecl fcn_00416a20(Lines *l)
 		return;
 	}
 	if (l->t0 != l->t1) {
-		if ((*(unsigned int*)&g_6b7fac) >= l->t1) {
+		if (((unsigned int)g_6b7fac) >= l->t1) {
 			l->count = l->count1;
 		} else {
 			span = l->t1 - l->t0;
-			rem = l->t1 - (*(unsigned int*)&g_6b7fac);
+			rem = l->t1 - ((unsigned int)g_6b7fac);
 			l->count = (span - rem) * l->count1 / span + l->count0 * rem / span;
 		}
 	}
 	if (l->u0 != l->u1) {
-		if ((*(unsigned int*)&g_6b7fac) >= l->u1) {
+		if (((unsigned int)g_6b7fac) >= l->u1) {
 			l->a = l->a1;
 			l->b = l->b1;
 		} else {
 			span = l->u1 - l->u0;
-			rem = l->u1 - (*(unsigned int*)&g_6b7fac);
+			rem = l->u1 - ((unsigned int)g_6b7fac);
 			l->a = rem * l->a0 / span + (span - rem) * l->a1 / span;
 			l->b = rem * l->b0 / span + (span - rem) * l->b1 / span;
 		}
 	}
-	dt = ((*(unsigned int*)&g_6b7fac) - l->last) * 0.1f;
-	l->last = (*(unsigned int*)&g_6b7fac);
+	dt = (((unsigned int)g_6b7fac) - l->last) * 0.1f;
+	l->last = ((unsigned int)g_6b7fac);
 	fcn_00416540(l, dt);
 	fcn_00437160(0, 0, 0);
 	fcn_004372d0(0x7f, 1, 0, 0, 0);

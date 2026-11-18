@@ -13,7 +13,7 @@ int __cdecl fcn_0057f1d0(int* msg)
 		if (e != 0 && *e == 0x110) {
 			g_665f08[0] = 0xb;
 			g_665f08[1] = 0xb;
-			g_665f08[3] = *(int*) ((char*)&g_6b7fac);
+			g_665f08[3] = g_6b7fac;
 			return 1;
 		}
 	}
