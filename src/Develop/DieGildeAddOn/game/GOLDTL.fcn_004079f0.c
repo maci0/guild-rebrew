@@ -71,7 +71,7 @@ void __cdecl fcn_004079f0(char* task)
 		if (*(int*) (task + 0x34) != 0) {
 			fcn_00455140(*(char**) (owner + 0x34), g_662d40, dir.v);
 			angle = -fcn_00451380(g_662d40, dir.v) - angle;
-			if (angle > *(float*) 0x6628fc) {
+			if (angle > 3.1415927f) {
 				angle -= 6.2831855f;
 			} else if (angle < *(float*) 0x6628f8) {
 				angle += 6.2831855f;

@@ -75,7 +75,7 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 	ops = *(GOLDTL_BufferVtbl**) ib;
 	ops->Lock(ib, 0, w * h * 0xc, &idxs, 0x2000);
 	if (verts == 0) {
-		goto done;
+		goto cleanup;
 	}
 	if (idxs == 0) {
 		goto cleanup;

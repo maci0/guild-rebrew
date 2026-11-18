@@ -540872,10 +540872,10 @@ updated_by = "fix-sizes"
 updated_at = "2026-10-29T11:14:46+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 38.499184339314844
+similarity = 39.8042414355628
 
 ["GOLDTL.0x00457f40".verification]
-source_hash = "e921f6ddebc231dae2207356a22a635ddeedd76dbd76f07c8596950ff3fcb6eb"
+source_hash = "05c73a78d94aac3693c5460b2382037a7faa72dcf50d0bce942f6bf6fe0836c4"
 reference_hash = "94026015e9a85b4d341384ad75f483e71031981d3257acaa3641daee27c596f4"
 reference_size = "906"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -540886,15 +540886,15 @@ module = "GOLDTL"
 va = "0x457f40"
 context_hash = ""
 defines = "[]"
-input_hash = "fcb102d7966e3d26fc58ac40426cb070b15e8577cce9b90f255be8fddecd3247"
-aligned_pairs = 118
+input_hash = "a47a31860d5294b06d3e166a7a583b704c89f5cf845ff5be095d67c3d40e36e8"
+aligned_pairs = 122
 target_instructions = 310
 candidate_instructions = 303
-hunks = 70
-similarity = 38.499184339314844
+hunks = 69
+similarity = 39.8042414355628
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-17T15:37:34+00:00"
+measured_at = "2026-11-18T03:01:42+00:00"
 
 [["GOLDTL.0x00457f40".status_history]]
 old_status = "STUB"
@@ -677379,7 +677379,7 @@ blocker = "Application code — pending per-function decompilation"
 similarity = 72.61663286004057
 
 ["GOLDTL.0x004079f0".verification]
-source_hash = "de29561047ab6cedb5f6a5c8b387d8c2703d40ecdc41659796e091d5d75c792d"
+source_hash = "2e98bdef056c6841c4a88af7ab595b4d4c41b349abb69e209de417883e099ec8"
 reference_hash = "f9eba78e3c18c9ec0d9cd4393976d5fd25189ed878f86b2511e3424e2a39bbc7"
 reference_size = "915"
 headers_hash = "a6315c8fbe575e6e88e2b5d9407d966301f39a4d13727280a73f0692d1c79996"
@@ -677390,7 +677390,7 @@ module = "GOLDTL"
 va = "0x4079f0"
 context_hash = ""
 defines = "[]"
-input_hash = "afa55160b5a9e3ddfc9cd6033d4f28624e0ff5c4025114ef066897c93529c58e"
+input_hash = "8c93781d40ef91b356162b3033c0db4a13498eeaca128f867e4abe65e1676cb4"
 aligned_pairs = 179
 target_instructions = 271
 candidate_instructions = 222
@@ -677398,7 +677398,7 @@ hunks = 22
 similarity = 72.61663286004057
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-17T19:31:24+00:00"
+measured_at = "2026-11-18T03:01:20+00:00"
 
 [["GOLDTL.0x004079f0".status_history]]
 old_status = "STUB"
