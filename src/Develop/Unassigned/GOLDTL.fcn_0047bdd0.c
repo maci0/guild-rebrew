@@ -84,7 +84,7 @@ int __cdecl fcn_0047bdd0(int x, int y, Sprite47bdd0 *sprite, float scale,
 		n = (int) ((float) sprite->tile / (float) whole + 0.99f);
 		i = 0;
 		off = 0;
-		if (sprite->count2 >= 1) {
+		if (sprite->count2 > 0) {
 			do {
 				cell = (Cell47bdd0 *) ((char *) sprite->cells + off); whole = sprite->size;
 				q = fcn_0047c1f0(

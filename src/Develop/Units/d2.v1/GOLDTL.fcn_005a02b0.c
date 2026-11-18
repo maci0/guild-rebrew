@@ -6,6 +6,7 @@
 extern pos14_7f4c00 g_7f4c00;
 
 extern int g_772514;
+extern int g_774654;
 extern char* g_77255c;
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -113,15 +114,15 @@ int __cdecl fcn_005a02b0(void)
 					*(int*) (msg + 0x58) = *(int*) (slot + 4);
 					fcn_00500bb0(msg + 0x28, 2, 0, 0);
 					fcn_004c5530(msg);
-					*(int*) 0x774654 = 1;
+					g_774654 = 1;
 				}
 			}
 			else if (mode == 1) {
-				*(int*) 0x774654 = 1;
+				g_774654 = 1;
 			}
 		}
 		if (*(int*) 0x14ce8e0 != 0) {
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
 		}
 	}
 	fcn_00471e30(h);

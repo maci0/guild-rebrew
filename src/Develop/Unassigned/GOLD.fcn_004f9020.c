@@ -6,7 +6,7 @@ int __cdecl fcn_004f9020(char* src)
 {
     int totals[5] = {0};
     int count;
-    int sum;
+    int sum = 0;
     int i;
     float a;
     float b;
@@ -18,7 +18,6 @@ int __cdecl fcn_004f9020(char* src)
     *(int*) 0x91b4c8 = *(int*) (src - 0x24);
     *(int*) 0x91b4cc = *(int*) (src - 0x20);
     *(int*) 0x91b4d0 = *(int*) (src - 0x1c);
-    sum = 0;
     a = *(float*) (src - 0x18);
     *(float*) 0x91b4d4 = a;
     b = *(float*) (src - 0x14);

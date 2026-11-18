@@ -54,7 +54,7 @@ int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 	} else {
 		selected = (float) gm_AccumulateTyped2(SHP_REC);
 	}
-	if ((int) selected < 0xc80) {
+	if ((int) selected <= 0xc7f) {
 		ebp = 0xc80;
 	} else {
 		v4 = (float) gm_WalkEntityChain(SHP_ID) * 0.05f;

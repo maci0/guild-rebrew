@@ -108,7 +108,7 @@ void __cdecl fcn_005b0230(char* town)
 	g_cur_dir = dir;
 	i = 0;
 	slot = (ScrollSlot*) (town + 0xdc);
-	if (count >= 1) {
+	if (count > 0) {
 		do {
 			obj = slot->ent;
 			handle = *(int*) (obj + 0x61);

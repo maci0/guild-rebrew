@@ -42,7 +42,7 @@ int __cdecl fcn_00490c90(char* a0, int a1, int* a2)
 		p = fcn_0050e4a0(1);
 		p = fcn_00502cd0(*(int*) ((char*) p + 0x5d), 2, 6, 0, 0x115);
 		cur = fcn_0050b810(*(int*) ((char*) p + 0x14), g_773d75);
-		if (cur < 3 * (int) ((float) fcn_004ec710() * *(float*) 0x6628bc)) {
+		if (cur < 3 * (int) ((float) fcn_004ec710() * 0.25f)) {
 			r = r + 1 + (gm_RandomMod(3) & 0xffff);
 		}
 		if (v5[6] - 3 > r) {

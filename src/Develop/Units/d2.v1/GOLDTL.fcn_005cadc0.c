@@ -96,7 +96,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 			} else if (1 <= a0 && a0 <= 6) {
 				char buf[0x90];
 				count = fcn_004e8b80(a0, 6, buf);
-				if (count >= 1) {
+				if (count > 0) {
 					for (i = 0; i < count; i++) {
 						rec[i].ent = (char*) gm_LookupEntityRecordById(*(int*) (buf + i * 0x18 + 4));
 						rec[i].text = *(unsigned char*) (buf + i * 0x18 + 8);

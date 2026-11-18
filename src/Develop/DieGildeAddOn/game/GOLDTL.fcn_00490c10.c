@@ -1,3 +1,4 @@
+extern float g_662918;
 typedef struct ENT_490c10 ENT_490c10;
 struct ENT_490c10 { unsigned char pad_000[0xac]; float fac; unsigned char pad_0b0[0xb4]; unsigned char f164; };
 typedef struct BUF_490c10 BUF_490c10;
@@ -12,7 +13,7 @@ int __cdecl fcn_00490c10(ENT_490c10* a0, int unused, int* out)
     int t;
 
     gm_MapEntityStatRange((unsigned char) a0->f164);
-    v = (int) ((a0->fac - *(float*) 0x662918) * 5.0f);
+    v = (int) ((a0->fac - g_662918) * 5.0f);
     t = v < 4 ? v : 4;
     t = t < 1 ? 1 : t;
     fcn_004f4830(7, &buf);

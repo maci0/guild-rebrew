@@ -184,7 +184,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 				if (*ents != 0x1f) {
 					h = ids[i] * 2 + 0x9a8;
 					if (counts[i] == 1) {
-						io_FormatTextBuffer(text, 0x4129, 0x228);
+						io_FormatTextBuffer(text, 0x4129, 0x228, h);
 					} else if (counts[i] > 1) {
 						io_FormatTextBuffer(text, 0x412a, counts[i], 0x228, h);
 					} else {
@@ -193,7 +193,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 				} else if (counts[i] == 1) {
 					io_FormatTextBuffer(text, 0x421f, 0x22d, ids[i] * 2 + 0x9a8);
 				} else if (counts[i] >= 2) {
-					io_FormatTextBuffer(text, 0x4220, counts[i], 0x22d);
+					io_FormatTextBuffer(text, 0x4220, counts[i], 0x22d, ids[i] * 2 + 0x9a8);
 				} else {
 					io_FormatTextBuffer(text, 0x679060, ids[i] * 2 + 0x9a8);
 				}

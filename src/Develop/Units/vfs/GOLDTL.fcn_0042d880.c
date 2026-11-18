@@ -47,7 +47,7 @@ found:
 		return 0;
 	fcn_0064d41a(path, "textbin_%s\\%s.res", "german", name);
 	stream = vfs_Tfopen(path, "rb", g_6b7fdc);
-	if (stream == 0) {
+	if (!stream) {
 		fcn_0064d41a(msg, "Could not open textfile:%s", path);
 		ReportClientMessage(msg);
 		return 0;

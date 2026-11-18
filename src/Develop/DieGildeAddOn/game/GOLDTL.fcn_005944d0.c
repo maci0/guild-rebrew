@@ -1,3 +1,4 @@
+extern int g_100f1dc, g_14ce8e0, g_67d370;
 /* Runs the town trade/settlement dialog: opens the window, collects the shop
    list, draws the goods rows and processes input until the player closes it. */
 extern int g_772514;
@@ -129,7 +130,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 		if (!entry) {
 			return 0;
 		}
-		if (*(int*) 0x100f1dc != -1 && *(int*) 0x100f884 == window) {
+		if (g_100f1dc != -1 && *(int*) 0x100f884 == window) {
 			any = 0;
 			r = (int*) 0x7e30e0;
 			do {
@@ -145,7 +146,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 				row = 0;
 				rowsLeft = count;
 				do {
-					if (*(int*) 0x67d370 == *(int*) (row + 0x779194)) {
+					if (g_67d370 == *(int*) (row + 0x779194)) {
 						if (!(any)) {
 							int* r2;
 
@@ -285,7 +286,7 @@ found_row:
 				} while (rowsLeft);
 			}
 		}
-		if (*(int*) 0x14ce8e0) {
+		if (g_14ce8e0) {
 			any = 0;
 			r = (int*) 0x7e30e0;
 			do {

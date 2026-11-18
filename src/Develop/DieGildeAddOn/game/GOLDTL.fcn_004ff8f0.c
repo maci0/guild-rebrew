@@ -57,7 +57,7 @@ void __cdecl fcn_004ff8f0(void)
 	}
 	for (s = g_slot_table + 2; (int) s < 0x85a0a2; s += 0x21c) {
 		e = s - 2;
-		if (*(short*) e == -1 || s[6] < 2)
+		if (*(short*) e == -1 || s[6] <= 1)
 			continue;
 		if ((float) active > 652.8f) {
 			if (s[0] == 8) {
