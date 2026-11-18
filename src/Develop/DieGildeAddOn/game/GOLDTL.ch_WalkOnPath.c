@@ -155,7 +155,8 @@ void __cdecl ch_WalkOnPath(char* obj)
 		cell = fcn_00407610(obj);
 		fcn_004098e0(obj, cell);
 		if (*(float*) (inst + 0x1a4) < g_6629c8) {
-			*(float*) (inst + 0x1a4) += g_662910;
+			speed = *(float*) (inst + 0x1a4);
+			*(float*) (inst + 0x1a4) = speed + g_662910;
 		}
 		if (*(int*) (obj + 0xf4) != 0 && !fcn_00409c90(obj, res)) {
 			return;

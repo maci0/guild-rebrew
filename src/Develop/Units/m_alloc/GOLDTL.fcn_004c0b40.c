@@ -1,6 +1,6 @@
 #include <string.h>
 extern int g_772d18;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_772d2c;
 extern unsigned int g_772d38;
 

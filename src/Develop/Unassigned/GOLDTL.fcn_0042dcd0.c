@@ -4,7 +4,7 @@ extern int g_6b7fbc;
 
 extern int g_6b7fb8;
 extern int g_6b7fc0;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_6b7fb0;
 extern int g_6b7fb4;
 extern char g_6b7fc8;

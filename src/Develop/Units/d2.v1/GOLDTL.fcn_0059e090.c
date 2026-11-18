@@ -38,7 +38,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int g_772514;
 extern int g_14a566c;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern Win_1015f40 g_1015f40[0x60];
 extern Obj_1038140 g_1038140[];
 extern char* g_1015ea0;

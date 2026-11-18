@@ -14,7 +14,7 @@ typedef struct {
 	char pad70[0x2f4 - 0x70];
 } Ctl;
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_772514;
 extern char* g_77255c;
 extern int g_100f1dc;

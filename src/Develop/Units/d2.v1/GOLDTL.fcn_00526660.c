@@ -15,7 +15,7 @@ typedef struct Screen {
 } Screen;
 /* SIZE 0x30 */
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern char g_77470e;
 extern int g_7e46ac;
 extern int g_772514;

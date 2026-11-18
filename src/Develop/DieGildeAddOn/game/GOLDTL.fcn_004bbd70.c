@@ -12,7 +12,7 @@ typedef struct Slot {
 extern int g_6b8010;
 extern char g_7f4c00[];
 extern unsigned char g_776664;
-extern unsigned int g_6b7fac;
+extern volatile unsigned int g_6b7fac;
 extern unsigned int g_7728f0;
 extern int g_7728e4;
 extern Slot* g_7728e8;

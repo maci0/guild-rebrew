@@ -4,7 +4,7 @@ extern int g_6b7e88;
 extern int g_6b7e90;
 extern int g_678de8;
 extern int g_678dec;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 extern int __cdecl fcn_0042aaa0(int a0);
 extern void __cdecl fcn_0042a920(int a0, int a1);

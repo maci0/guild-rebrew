@@ -11,7 +11,7 @@ extern int g_10404c0[32];
 extern int g_10405c0;
 extern int g_1040540[32];
 extern int g_10405c8;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern char g_67bd38[];
 
 void* __cdecl m_alloc(int, void*);

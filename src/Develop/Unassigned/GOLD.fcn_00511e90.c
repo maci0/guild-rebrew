@@ -23,6 +23,8 @@ int __cdecl fcn_00511e90(unsigned char* e)
 {
 	int k;
 	int r;
+	char *src;
+	char *dst;
 
 	k = g_7e3f30[*e * 0x24d];
 	if (g_76fa60[k] == -1) {
@@ -33,7 +35,10 @@ int __cdecl fcn_00511e90(unsigned char* e)
 			}
 			g_76fa60[k] = (signed char) r;
 			g_fd7ba0[r].used = 1;
-			strcpy(g_fd7ba0[r].name, (char*) g_7e3f30 + *e * 0x24d + 1);
+			src = (char*) g_7e3f30 + *e * 0x24d + 1;
+			dst = g_fd7ba0[r].name;
+			while ((*dst++ = *src++) != 0) {
+			}
 			return g_76fa60[k];
 		}
 		fcn_0050dc30(*e);

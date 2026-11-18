@@ -10,7 +10,7 @@ extern int g_67d370;
 extern int g_6a99e8;
 extern int g_6ab3dc;
 extern float g_6ab3e0;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_772514;
 extern char* g_77255c;
 extern unsigned char g_773d75;

@@ -6,7 +6,7 @@ extern int g_10405c4;
 extern int g_10404c0[32];
 extern int g_10405c0;
 extern int g_10405c8;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_6b8af0;
 
 void __cdecl fcn_0045bfb0(char* p);

@@ -58,7 +58,7 @@ extern char s_6ad434[];
 extern char s_6811b0[];
 extern int g_772514;
 extern char* g_77255c;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_14b5af8;
 extern int g_14b5afc;
 extern pos14_7f4c00 g_7f4c00;

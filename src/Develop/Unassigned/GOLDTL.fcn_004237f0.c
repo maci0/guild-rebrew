@@ -2,7 +2,7 @@ extern int g_6b7d7c;
 
 
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 int __cdecl fcn_0042a880(int);
 
 void __cdecl fcn_004237f0(int* p, int a2)

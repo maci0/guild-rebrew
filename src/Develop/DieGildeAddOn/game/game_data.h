@@ -153,7 +153,7 @@ extern float g_6628a0;
 extern float g_662910;
 extern signed char g_6a3440;
 extern unsigned char g_6a375c;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern char * g_772500;
 extern int g_7725d0;
 extern unsigned short * g_772e9c;

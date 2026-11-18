@@ -15,7 +15,7 @@ typedef struct S00469900 {
 // SIZE 0x54
 
 extern char* g_772500;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 void __cdecl d2_AddRefcount(int i)
 {

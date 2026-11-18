@@ -33,7 +33,7 @@ extern int g_67a370;
 extern int g_6b5dcc;
 extern int g_6b5d54;
 extern int g_6b5da8;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_6b5dc8;
 extern float g_6628a0;
 extern float g_6628a8;

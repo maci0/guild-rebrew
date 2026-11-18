@@ -8,7 +8,7 @@ typedef struct {
 
 extern fcn_004bc010_slot* g_7728e8;
 extern int g_7728e4;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 
 /* ADDRESS: GOLDTL 0x004bc010 */

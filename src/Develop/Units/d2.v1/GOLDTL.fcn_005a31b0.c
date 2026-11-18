@@ -1,5 +1,5 @@
 extern int g_6a256c;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_772514;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;

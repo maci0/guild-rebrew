@@ -9,7 +9,7 @@ extern int g_7e4408[];
 extern int g_7e43a4[];
 extern int g_7e4468;
 extern int g_7e446c;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_6b8010;
 extern char* g_6b5cf8;
 extern int g_6a2c24;

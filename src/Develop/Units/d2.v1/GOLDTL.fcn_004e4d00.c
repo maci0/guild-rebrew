@@ -1,7 +1,7 @@
 
 
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_772f3c;
 extern int g_68bfb8;
 extern int g_14ce8e0;

@@ -1,3 +1,4 @@
+extern int *g_665f08;
 
 /* ADDRESS: GOLDTL 0x0057f180 */
 int __cdecl fcn_0057f180(int* msg)
@@ -7,9 +8,9 @@ int __cdecl fcn_0057f180(int* msg)
 	if (*msg == 0x19) {
 		e = (short*) msg[1];
 		if (e != 0 && *e == 0x110) {
-			(*(int**) 0x665f08)[0] = 0xb;
-			(*(int**) 0x665f08)[1] = 0xb;
-			(*(int**) 0x665f08)[3] = *(int*) 0x6b7fac;
+			g_665f08[0] = 0xb;
+			g_665f08[1] = 0xb;
+			g_665f08[3] = *(int*) 0x6b7fac;
 			return 1;
 		}
 	}

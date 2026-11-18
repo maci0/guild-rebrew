@@ -566,10 +566,10 @@ symbol = "D3_UNIVERSE_VIEW"
 size = 988
 native_size = 988
 extent = "allocation"
-evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged."
+evidence = "Rebound after the g_6b7fac declaration in GOLDTL.fcn_00515540.c became volatile (timer-thread clock); the source change does not touch this type, and the reviewed native extent and every modeled offset are unchanged."
 cflags = "/O2 /Gd"
 source_hash = "ce5678c822535d18e5de8d1559b2db3dd00e0a3f70493b702329fc1bf22a5152"
-headers_hash = "558a44f6abfd13cb834d42ce4be79d401b1701eb0ef0a8a8291c55c6e6243faa"
+headers_hash = "5b5dc7834fc81d94d23404cfda16f7678e4bdd7ff36652bccd132a3a289c2381"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -581,10 +581,10 @@ symbol = "D3_UNIVERSE_VIEW"
 size = 992
 native_size = 992
 extent = "allocation"
-evidence = "Native helper515540TL/511df0Gold scales a free index by3dc/3e0, stores byte1 at row+3d5, copies prototype string to row base. Private inferred opaque byte view: no string capacity, original typedef, full table allocation or storage owner claimed. Complete native and rejecting proofs .scratch/goal67/load-character/helper-proof.json; production .scratch/goal68/helper-proof. GOLD rebind after later source/header edits; native evidence unchanged. Rebound after the Rebrew 6.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged."
+evidence = "Rebound after the g_6b7fac declaration in GOLDTL.fcn_00515540.c became volatile (timer-thread clock); the source change does not touch this type, and the reviewed native extent and every modeled offset are unchanged."
 cflags = "/O2 /Gd"
 source_hash = "ce5678c822535d18e5de8d1559b2db3dd00e0a3f70493b702329fc1bf22a5152"
-headers_hash = "558a44f6abfd13cb834d42ce4be79d401b1701eb0ef0a8a8291c55c6e6243faa"
+headers_hash = "5b5dc7834fc81d94d23404cfda16f7678e4bdd7ff36652bccd132a3a289c2381"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 

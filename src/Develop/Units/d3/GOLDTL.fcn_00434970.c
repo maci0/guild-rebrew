@@ -2,7 +2,7 @@
 
 #include "client_lighting.h"
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_6b8008;
 
 void __cdecl fcn_00434ba0(char* anim, char* mesh);

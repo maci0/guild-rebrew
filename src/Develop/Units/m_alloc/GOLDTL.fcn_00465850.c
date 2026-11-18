@@ -14,7 +14,7 @@ typedef struct VfsEntry {
 extern char* g_772500;
 extern int g_772504;
 extern int g_772508;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 void __cdecl fcn_0047b5d0(void* p);
 void __cdecl m_FreeTracked(void* p);

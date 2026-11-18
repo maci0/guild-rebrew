@@ -32,7 +32,9 @@ int __cdecl fcn_0044cbd0(int tex, char verbose)
 	char msg[256];
 
 	name = fcn_0045be40(tex);
-	if (name == 0 ? 1 : (ok = fcn_00401590(name, &w, &h, 0)) == 0) {
+	if (name != 0)
+		ok = fcn_00401590(name, &w, &h, 0);
+	if (name == 0 || ok == 0) {
 		if (verbose) {
 			h = -1;
 			w = -1;

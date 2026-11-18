@@ -1,5 +1,5 @@
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_67a370;
 extern int g_77250c;
 extern char* g_14a5320[];

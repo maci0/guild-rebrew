@@ -2,7 +2,7 @@
 
 
 extern int* g_665f08;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 int __cdecl fcn_0057f3e0(int* msg)
 {

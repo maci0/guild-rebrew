@@ -1,6 +1,6 @@
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern unsigned int g_772f70;
 extern int g_68bfcc;
 

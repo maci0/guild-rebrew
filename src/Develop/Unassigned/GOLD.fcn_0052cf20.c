@@ -1,4 +1,4 @@
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 void __cdecl fcn_00476020(int);
 unsigned char __cdecl fcn_004486e0(char*, int*);
 void __cdecl fcn_0046f190(int, int, int, int, int, char*, int);

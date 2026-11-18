@@ -21,7 +21,7 @@ extern char* g_6b7e88;
 extern int g_6b7e8c;
 extern int g_6b7e90;
 extern int g_678dec;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 int __cdecl fcn_0042aaa0(int h);
 void __cdecl fcn_004237f0(Voice* v, int a);
 

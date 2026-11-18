@@ -29,7 +29,7 @@ void __cdecl fcn_0043c0d0(unsigned char* buf, int x0, int x1, unsigned char c0, 
 void __cdecl d3_FillWaterRegion(unsigned char* regionen, int breite, int x, int y,
     int alte_region, int neue_region);
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_6b5de0;
 extern unsigned long g_14ce728;
 

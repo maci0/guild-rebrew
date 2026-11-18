@@ -22,7 +22,7 @@ typedef struct Cell {
 
 #include "Develop/Units/d3/d3_camera.h"
 extern void* g_6b5de0;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 float* __stdcall fcn_005ec410(float*, float, float, float);
 float* __stdcall fcn_005eb970(float*, float*, float*);

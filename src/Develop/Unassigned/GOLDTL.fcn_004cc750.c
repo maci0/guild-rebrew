@@ -7,7 +7,7 @@ extern char g_7e3a60[];
 extern char g_68b300[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca4[];
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_6a2c1c;
 
 int __cdecl fcn_004cc750(char* x, char* out)

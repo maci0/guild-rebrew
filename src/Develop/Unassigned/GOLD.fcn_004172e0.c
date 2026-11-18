@@ -2,7 +2,7 @@
 
 extern char* g_6b8014;
 extern char* g_6b5cf8;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int SonnenstrahlenAktiv;
 extern int SonnenstrahlenStartZeit;
 

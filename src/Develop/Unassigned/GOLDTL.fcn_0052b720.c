@@ -4,7 +4,7 @@ extern short g_14ce8c0;
 extern int g_7746c8;
 extern int g_7746c4;
 extern int g_6b8014;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_6b5cc0;
 extern int g_6b5cbc;
 extern int g_6b5c84;

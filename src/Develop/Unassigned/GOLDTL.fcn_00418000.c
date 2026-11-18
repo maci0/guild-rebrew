@@ -13,7 +13,7 @@ int __cdecl fcn_0064d3f8(void);
 int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, int b, void (__cdecl* cb)(void));
 void __cdecl fcn_004526d0(int* s, float* pos);
 void __cdecl fcn_00417f00(void);
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern float g_6628a0;
 extern float g_662a18;
 

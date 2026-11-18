@@ -1,7 +1,7 @@
 extern int g_774a14;
 extern char* g_665f08;
 extern int g_774650;
-extern unsigned int g_6b7fac;
+extern volatile unsigned int g_6b7fac;
 
 void __cdecl fcn_0046f4c0(int);
 int __cdecl fcn_00472170(int, int);

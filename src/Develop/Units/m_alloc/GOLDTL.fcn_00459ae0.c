@@ -1,4 +1,4 @@
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_00459a10(char* p);

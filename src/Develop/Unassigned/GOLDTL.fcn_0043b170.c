@@ -1,7 +1,7 @@
 extern int g_67a370;
 extern char g_1042340[];
 extern unsigned int g_1052c50;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_6b8010;
 extern int g_6b8014;
 extern int g_6b86d4;

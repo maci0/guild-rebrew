@@ -1,7 +1,7 @@
 
 
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_772f3c;
 extern int g_68bfb8;
 #include "client_dialog_state.h"

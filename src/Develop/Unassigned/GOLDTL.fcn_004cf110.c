@@ -9,7 +9,7 @@ typedef struct {
 
 extern char g_9ba1c0[];
 extern char g_68b7b4[];
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 int __cdecl fcn_00442910(int, int, float*, char*);
 

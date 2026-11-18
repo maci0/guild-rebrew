@@ -6,7 +6,7 @@
 #define fcn_00418860 fcn_004172e0
 #endif
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 int SonnenstrahlenAktiv = 0;
 int SonnenstrahlenStartZeit = 0xffffffff;
 int SonnenstrahlenPhase = 0;

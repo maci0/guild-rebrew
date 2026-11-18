@@ -6,7 +6,7 @@ extern int g_67d370;
 extern int g_14ce8e0;
 extern int g_14ce8e8;
 #include "client_dialog_state.h"
-extern unsigned int g_6b7fac;
+extern volatile unsigned int g_6b7fac;
 extern char* g_1015ea0;
 extern char g_7f4ca0[];
 

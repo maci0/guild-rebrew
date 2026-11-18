@@ -50,7 +50,7 @@ typedef struct {
 	unsigned char b3;
 } LoadFlags;
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 #include "Develop/Units/d3/d3_camera.h"
 extern char g_677618[];
 extern char g_677604[];

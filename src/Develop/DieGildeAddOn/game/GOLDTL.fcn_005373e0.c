@@ -17,7 +17,7 @@ extern int g_7f4c04;
 extern char g_7f4ca0[];
 extern int g_14a5544;
 extern unsigned int g_aecde4;
-extern unsigned int g_6b7fac;
+extern volatile unsigned int g_6b7fac;
 extern int g_14cbca0;
 extern char g_774964;
 extern char g_774660;

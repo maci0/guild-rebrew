@@ -45,7 +45,7 @@ typedef struct
 extern unsigned char* lpGebaeudePROT;
 extern char* g_77255c;
 extern int g_772514;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_100f1dc;
 extern int g_67d370;
 extern int g_14ce8e0;

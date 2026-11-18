@@ -34,7 +34,7 @@ extern char* g_1015ea0;
 extern char g_6811b0[];
 extern char g_68b300[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_772514;
 #include "client_dialog_state.h"
 extern int g_100f1dc;

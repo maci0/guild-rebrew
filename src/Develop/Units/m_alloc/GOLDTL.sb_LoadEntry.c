@@ -4,7 +4,7 @@
 extern int g_6b7d70;
 extern int g_6b7d74;
 extern int g_6b7d7c;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int __cdecl fcn_00422910(int need);
 
 typedef struct

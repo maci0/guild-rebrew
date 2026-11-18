@@ -26,7 +26,7 @@ typedef struct {
 } Edge;
 
 extern int g_7f4c10;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_7f3ee8;
 extern Item g_1038150[];
 #include "client_types.h"

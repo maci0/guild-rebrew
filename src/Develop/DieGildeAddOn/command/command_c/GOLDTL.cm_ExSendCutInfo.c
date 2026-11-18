@@ -12,7 +12,7 @@ extern char g_9b0e20[];
 #include "client_types.h"
 #include "client_packet_queue.h"
 extern int* g_772f40;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
 

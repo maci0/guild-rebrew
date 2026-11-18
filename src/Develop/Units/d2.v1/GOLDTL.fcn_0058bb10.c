@@ -58,7 +58,7 @@ typedef struct {
 
 extern int g_772514;
 extern int g_67d370;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_14ce8e0;
 extern int g_100f1dc;
 #include "client_dialog_state.h"

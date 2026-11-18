@@ -2,7 +2,7 @@
 
 
 extern int* g_665f08;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern unsigned char* lpGebaeudePROT;
 
 int __cdecl fcn_0057f220(int* m)

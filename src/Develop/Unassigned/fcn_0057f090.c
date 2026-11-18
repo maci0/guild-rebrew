@@ -1,3 +1,5 @@
+extern int *g_665f08;
+
 #pragma auto_inline(off)
 #pragma check_stack(off)
 
@@ -7,16 +9,16 @@ int __cdecl fcn_0057f090(register int* p)
 	register int v;
 
 	if (*p == 0x17) {
-		(*(int**) 0x665f08)[0] = 10;
-		(*(int**) 0x665f08)[1] = 10;
+		g_665f08[0] = 10;
+		g_665f08[1] = 10;
 		v = *(int*) 0x6b7fac;
-		*(int*) (0xc + (char*) *(int*) 0x665f08) = v;
+		g_665f08[3] = v;
 		return 1;
 	} else if (*p == 0x18) {
-		(*(int**) 0x665f08)[0] = 11;
-		(*(int**) 0x665f08)[1] = 11;
+		g_665f08[0] = 11;
+		g_665f08[1] = 11;
 		v = *(int*) 0x6b7fac;
-		*(int*) ((char*) *(int*) 0x665f08 + 0xc) = v;
+		g_665f08[3] = v;
 		return 1;
 	}
 	return 3;

@@ -2,7 +2,7 @@
 
 extern int g_1043370;
 extern int g_6b8010;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern float g_662920;
 extern float g_665ea0;
 extern double g_665ea8;

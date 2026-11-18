@@ -5,7 +5,7 @@ extern char* g_6b8014;
 /* Sun-ray state shared with sonnenstrahlen.c. */
 extern char* g_6b5cf8;
 extern int g_6b5cfc;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int SonnenstrahlenStartZeit;
 extern float flt_1;
 extern float g_6628a8;

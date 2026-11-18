@@ -1,5 +1,5 @@
 extern int g_6b7d7c;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 int __cdecl fcn_004228c0(int* a0);
 int __cdecl sb_LoadEntry(int a0, int* a1);

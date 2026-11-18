@@ -27,7 +27,7 @@ struct item {
 #pragma pack()
 
 extern int* g_665f08;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 

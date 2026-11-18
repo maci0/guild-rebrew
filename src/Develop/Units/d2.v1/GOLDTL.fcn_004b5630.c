@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d370;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 extern void __cdecl fcn_004c09b0(void);
 extern void *__cdecl fcn_00470820(int a, int b, const char *name);

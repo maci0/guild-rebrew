@@ -13,7 +13,7 @@ typedef struct Obj2f4 {
 } Obj2f4;
 // SIZE 0x2f4
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern char g_77534d;
 extern int g_7e46ac;
 extern char* g_77255c;

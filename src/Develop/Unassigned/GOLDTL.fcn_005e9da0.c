@@ -3,7 +3,7 @@ extern float g_6660f0;
 extern float g_6660e8;
 extern float g_6628cc;
 extern int g_1043370;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 char __cdecl fcn_0045b990(int, float*, int*, int*, float*);
 int __cdecl fcn_005ea2d0(int, float*, float*, int, int, int*, int*);

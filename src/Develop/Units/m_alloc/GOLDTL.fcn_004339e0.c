@@ -1,5 +1,5 @@
 #include <string.h>
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 #include "../d3/d3_animation.h"
 void __cdecl fcn_00433780(char* a0);
 char* __cdecl m_alloc(unsigned int size, char* file);

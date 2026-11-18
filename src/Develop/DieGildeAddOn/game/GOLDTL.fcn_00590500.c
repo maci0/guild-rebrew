@@ -2,7 +2,7 @@
 
 
 extern unsigned int g_6a9654;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_774800;
 extern float g_664090;
 extern int g_67a370;

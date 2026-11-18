@@ -11,7 +11,7 @@ typedef struct {
 
 extern char* g_772f24;
 extern int g_68b79c;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern char* g_7e4260[32];
 extern float g_6628a4;
 extern float g_662910;

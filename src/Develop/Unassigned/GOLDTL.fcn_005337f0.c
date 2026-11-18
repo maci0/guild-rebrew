@@ -4,7 +4,7 @@ extern float g_67d368;
 extern int g_1015eac;
 extern int g_77250c;
 extern int g_6a251c;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 
 

@@ -1,7 +1,7 @@
 
 
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern char g_68ae34[];
 
 int __cdecl sprintf(char*, const char*, ...);

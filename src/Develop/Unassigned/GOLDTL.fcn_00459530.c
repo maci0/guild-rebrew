@@ -52,7 +52,7 @@ extern char* g_6b5de0;
 extern int g_6b86d4;
 extern unsigned char g_67a2ac;
 extern unsigned char g_6b7ff9;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 int __cdecl fcn_00459050(Ent459*);
 void __cdecl fcn_00458e00(Ent459*, Node459*);
 

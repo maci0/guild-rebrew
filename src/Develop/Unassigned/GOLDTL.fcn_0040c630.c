@@ -1,6 +1,6 @@
 extern char* g_6b7ebc;
 extern char* g_6b7e98;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 /* Sleep. While this command is the one in progress, wait until the
  * clock reaches the stored base plus the tick count divided by 14.

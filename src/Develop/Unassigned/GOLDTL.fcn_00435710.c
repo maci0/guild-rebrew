@@ -1,6 +1,6 @@
 
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 void __cdecl fcn_00435710(char* o, float a, float b, unsigned int t0, unsigned int t1)
 {

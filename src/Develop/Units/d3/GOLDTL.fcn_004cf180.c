@@ -1,4 +1,4 @@
-extern unsigned int g_6b7fac;    /* 0x6b7fac */
+extern volatile unsigned int g_6b7fac;    /* 0x6b7fac */
 extern char* g_772ec4;           /* 0x772ec4 */
 extern unsigned short* g_772e9c; /* 0x772e9c, entity pointer */
 extern double g_6640e8;          /* 0.01 */

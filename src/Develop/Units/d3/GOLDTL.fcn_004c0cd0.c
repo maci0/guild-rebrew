@@ -6,7 +6,7 @@ extern int g_6b8300;
 extern char g_772d10;
 extern int g_772d3c;
 extern int g_772d40;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern char* g_6b8014;
 extern int* g_7e4538;
 extern int g_7747bc;

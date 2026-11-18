@@ -2,7 +2,7 @@
 
 
 extern int* g_665f08;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern float g_665f10;
 
 void __cdecl fcn_00580560(void);

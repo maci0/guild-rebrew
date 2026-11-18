@@ -17,7 +17,7 @@ typedef struct {
 	char pad10[0x3cc - 0x10];
 } Screen;
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_772514;
 extern char* g_77255c;
 extern int g_100f1dc;

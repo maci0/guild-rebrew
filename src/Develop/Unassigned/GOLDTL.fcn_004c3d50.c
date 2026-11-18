@@ -25,7 +25,7 @@ extern int g_1005768;
 extern int g_1005760;
 extern cell10_fb5760 g_fb5760[0x8000];
 extern char* g_14cbca4;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 #include "GOLDTL.fcn_004c3d50_gconf.h"
 
 void __cdecl fcn_004c3f70(void);

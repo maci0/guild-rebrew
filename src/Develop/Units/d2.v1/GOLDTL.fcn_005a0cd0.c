@@ -4,7 +4,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005a0a40(int);
 void __cdecl fcn_005a0ad0(int, unsigned char*);
 void __cdecl fcn_005a0be0(int, unsigned char*);
-extern int g_6b7fac; extern unsigned short g_774970; extern char g_7f4ca4[];
+extern volatile int g_6b7fac; extern unsigned short g_774970; extern char g_7f4ca4[];
 /* ADDRESS: GOLDTL 0x005a0cd0 */
 void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int a2, int a3, int a4, int a5, int a6)
 {

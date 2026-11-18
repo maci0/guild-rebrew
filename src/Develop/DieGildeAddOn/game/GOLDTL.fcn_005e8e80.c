@@ -36,7 +36,7 @@ typedef struct {
 extern float g_6660fc;
 extern float g_666100;
 extern float g_6628a8;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 V4* __cdecl fcn_005e8850(void);
 

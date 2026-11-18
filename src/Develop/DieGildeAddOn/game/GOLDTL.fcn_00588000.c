@@ -30,7 +30,7 @@ extern char g_7f4ca0[];
 extern char g_77dda0[];
 extern char* g_773da8;
 extern int g_774a1c;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00471af0(int, int);

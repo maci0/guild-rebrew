@@ -21,7 +21,7 @@ typedef struct {
 typedef List8c_102cbc8 List8c;
 // SIZE 0x8c
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern char g_77470d;
 extern int g_7e46ac;
 extern int g_772514;

@@ -4,7 +4,7 @@
 #include "client_types.h"
 #include "g_688118.h"
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern char g_774964;
 extern float g_6819b0;
 extern float g_6628a8;

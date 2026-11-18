@@ -1,4 +1,4 @@
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 
 

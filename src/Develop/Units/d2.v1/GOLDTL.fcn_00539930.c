@@ -13,7 +13,7 @@ extern int g_14ac61c;           /* 0x014ac61c */
 extern int g_14ce8e0;           /* 0x014ce8e0 */
 extern char g_14cf950;          /* 0x014cf950 */
 extern int g_67d370;            /* 0x0067d370 */
-extern unsigned int g_6b7fac;            /* 0x006b7fac */
+extern volatile unsigned int g_6b7fac;            /* 0x006b7fac */
 extern int g_6b7fdc;            /* 0x006b7fdc */
 extern int g_772514;            /* 0x00772514 */
 extern int g_7725c8;            /* 0x007725c8 */

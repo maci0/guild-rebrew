@@ -9,7 +9,7 @@ extern float g_678158;
 extern unsigned int g_67815c;
 extern int g_678160;
 extern int g_6b7190;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern CRITICAL_SECTION g_14cc5a0;
 void __cdecl SetMasterVolume(int vol);
 

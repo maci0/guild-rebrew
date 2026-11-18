@@ -1,6 +1,6 @@
 extern int g_6b8010;
 extern float g_662d40[3];
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 extern int __cdecl gm_ResolveEntityById(void **a0, int a1, int a2, int a3);
 extern void __cdecl fcn_004432d0(int a0, int a1);

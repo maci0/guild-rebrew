@@ -52,7 +52,7 @@ extern pos14_7f4c00 g_7f4c00;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 char g_6811b0[] = "$C";
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_100f1dc;
 extern int g_666018;
 extern int g_66601c;

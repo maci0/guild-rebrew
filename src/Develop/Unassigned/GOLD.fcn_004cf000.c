@@ -3,7 +3,7 @@
 
 typedef struct OBJECT_COLOR { unsigned char a, b, c, d; } OBJECT_COLOR;
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern char* g_7e4260[32];
 extern float g_662cf8;
 extern double g_6640e8;

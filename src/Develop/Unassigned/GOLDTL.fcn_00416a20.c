@@ -78,7 +78,7 @@ typedef struct {
 
 extern void *g_6b5de0;
 extern VBuf *g_6b5cb8;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 void __cdecl fcn_00416540(Lines *, float);
 void __cdecl fcn_00437160(int, int, int);

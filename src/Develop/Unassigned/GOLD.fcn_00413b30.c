@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern char* g_6b8014;
 
 void* __cdecl m_alloc(int size, const char* tag);

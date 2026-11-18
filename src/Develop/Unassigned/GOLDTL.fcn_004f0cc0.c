@@ -5,7 +5,7 @@ typedef struct {
 	int d[0x1a];
 } Blk4f0cc0;
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 char* __cdecl fcn_004f0c90(int a1);
 

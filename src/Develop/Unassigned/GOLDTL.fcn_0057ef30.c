@@ -10,7 +10,7 @@ struct fsm {
 };
 
 extern int* g_665f08;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 int __cdecl fcn_0057ef30(int* ev)
 {

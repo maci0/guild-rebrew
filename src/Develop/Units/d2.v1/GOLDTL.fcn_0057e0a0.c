@@ -5,7 +5,7 @@ extern int g_6b5cbc;
 extern int g_6b5cc0;
 extern int g_7e2700;
 extern int g_774a18;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_6b7fc0;
 extern int g_774650;
 extern int g_774658;

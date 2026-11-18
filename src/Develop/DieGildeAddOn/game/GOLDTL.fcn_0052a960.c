@@ -30,7 +30,7 @@ extern int g_6b8010;
 extern Slot_1043340 g_1043340[64];
 extern int g_7e4468;
 extern int g_7e446c;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_77472c;
 extern float g_7e42e0;
 extern int g_7e4380;

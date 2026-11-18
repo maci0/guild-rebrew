@@ -12,7 +12,7 @@ typedef struct Slot {
 	int rest[27];
 } Slot;
 
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 void __cdecl fcn_00435630(char* o, char* name, char on)
 {

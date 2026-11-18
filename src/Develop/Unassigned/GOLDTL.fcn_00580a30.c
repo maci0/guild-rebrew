@@ -9,7 +9,7 @@ extern char* g_774a10;
 extern int g_6a81dc[5];
 extern pagefn g_6a81f0[5];
 extern int* g_665f08;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 
 char* __cdecl fcn_00580d50(void);
 char* __cdecl fcn_00584010(void);

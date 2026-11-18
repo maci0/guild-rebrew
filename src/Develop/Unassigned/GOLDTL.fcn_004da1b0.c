@@ -1,4 +1,4 @@
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_772f54;
 extern int g_77250c;
 extern char g_68bfd0[];

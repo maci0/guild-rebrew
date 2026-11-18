@@ -3,7 +3,7 @@
 extern void* g_14d0020[];
 int g_67a370 = 17052352;
 extern int g_6b8010;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern int g_6b5c24;
 extern unsigned int g_67529c;
 extern int g_6b5c30;

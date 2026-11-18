@@ -1,5 +1,5 @@
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 /* Load the eight 0x170-byte render-object records from a save stream.  Older
    versions (before 0x10055) carry no rotation block, so the two rotation
    floats are forced to 1.0f. */

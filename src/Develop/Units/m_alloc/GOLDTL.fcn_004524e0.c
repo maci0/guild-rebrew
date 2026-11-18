@@ -1,7 +1,7 @@
 extern int g_104049c;
 extern char* g_1040958;
 extern int g_67a370;
-extern int g_6b7fac;
+extern volatile int g_6b7fac;
 extern char g_1040640[];
 int __cdecl fcn_0045c5b0(char* name, int flags, int a3, int a4);
 void __cdecl fcn_0045ce90(int h);
