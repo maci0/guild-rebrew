@@ -564911,39 +564911,44 @@ file = "src/Develop/Units/vfs/GOLDTL.fcn_0051e080.c"
 symbol = "_fcn_0051e080"
 name = "fcn_0051e080"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:34:54+00:00"
-status = "SIZE_MISMATCH"
-blocker = "MSVC block merge: null-open exit tail-merged into a shared return-0 epilogue (long je); reference keeps it inline, layout decided by the 16-call flags&2 group"
-similarity = 88.33333333333333
+updated_by = "verify"
+updated_at = "2026-11-19T08:50:24+00:00"
+status = "RELOC"
+similarity = 99.74293059125964
 
 ["GOLDTL.0x0051e080".verification]
-source_hash = "f6aa368d1d636484854ea480c1c48e3e357c6dee4b82d91fc2cd14320f879a06"
+source_hash = "d68f8710c609b5d65268a713e396551d7c4189d3ec0fe49609ffa9af2b77af1e"
 reference_hash = "3393315d6fd269bc0b7205b52d34286522f57e744ac3c9495f8d03245e25d344"
 reference_size = "1035"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "95104fbd80c1e609e30b13ef20b27b243f71e781f432fa5d79e9b296b7365371"
+compiler_hash = "f7884cca217174141243a451224de5c479221b5f4cb18d350e7949e0bd765b13"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x51e080"
 context_hash = ""
 defines = "[]"
-input_hash = "00f0bc5bc3cecf5813b9973490a49ce6c9abbfc45764280c530e28a007c9e3c1"
-aligned_pairs = 318
+input_hash = "3293c30d1fbd6c0cff3dfb88cf317f769acc29aaeb16e2fd8e72ff19f67aa32b"
+aligned_pairs = 388
 target_instructions = 389
-candidate_instructions = 331
-hunks = 14
-similarity = 88.33333333333333
+candidate_instructions = 389
+hunks = 1
+similarity = 99.74293059125964
 writer = "verify"
-status = "SIZE_MISMATCH"
-measured_at = "2026-11-13T12:22:04+00:00"
+status = "RELOC"
+measured_at = "2026-11-19T10:02:56+00:00"
 
 [["GOLDTL.0x0051e080".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-19T21:23:20.250745+00:00"
 updated_by = "test"
+
+[["GOLDTL.0x0051e080".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "RELOC"
+changed_at = "2026-11-19T08:50:24.077475+00:00"
+updated_by = "verify"
 ["GOLDTL.0x0057b390"]
 size = 992
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0057b390.c"
