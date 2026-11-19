@@ -740994,14 +740994,47 @@ updated_at = "2026-11-12T14:24:38+00:00"
 
 ["GOLDTL.0x005fc0f4"]
 size = 24
-updated_by = "fix-sizes"
-updated_at = "2026-11-12T14:25:17+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-19T20:03:10+00:00"
+file = "src/Develop/Unassigned/GOLDTL.fcn_005fc0f4.c"
+symbol = "_fcn_005fc0f4@4"
+name = "fcn_005fc0f4"
+kind = "FUNCTION"
+blocker = "Native uses 'dec dword ptr [ecx+0x30]' on the self pointer loaded into ecx, then reloads eax and branches on the dec flags, with the thiscall callee at 0x5fc024 reached with self still in ecx and no edx setup. Ours loads self into eax, does load/dec/store through ecx (27 vs 24 bytes). Tried self[0xc]--, --self[0xc], self[0xc] -= 1, a volatile int*, an int n = --self[0xc] local, and a __fastcall callee with an unused edx parameter; all 5-9 of 24-29 bytes. Likely a different original compile context (library or COM-style Release); library attribution could not be checked here (references/dxsdk8/lib/d3dx8.lib and the FLIRT signatures are missing from this checkout)."
+blocker_delta = 3
 
 ["GOLDTL.0x0064d217"]
 size = 16
-updated_by = "fix-sizes"
-updated_at = "2026-11-12T14:26:22+00:00"
+updated_by = "test"
+updated_at = "2026-11-19T20:01:56+00:00"
+file = "src/Develop/Unassigned/GOLDTL.fcn_0064d217.c"
+symbol = "_fcn_0064d217"
+name = "fcn_0064d217"
+kind = "FUNCTION"
+status = "RELOC"
+similarity = 100.0
 
+["GOLDTL.0x0064d217".verification]
+source_hash = "8ae8c53ef994f7360bd71bb1da02a56a6d575ce51f98da3d9c1be722bfadb6c1"
+reference_hash = "8a83dfbcf52bb4fff3d5f769fb02db6ebc10cb30e98c592ac7e19aac26b93f90"
+reference_size = "16"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "74877f878b3f8e7289abbc942f2c4b585393e19c0fd2fe5fab9cd7d6748a4041"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x64d217"
+context_hash = ""
+defines = "[]"
+input_hash = "f7403e8bac986fa144dfa49b079f41141fcba862f80419ffddff55dbc84d2426"
+aligned_pairs = 4
+target_instructions = 4
+candidate_instructions = 4
+hunks = 0
+similarity = 100.0
+status = "RELOC"
+writer = "test"
+measured_at = "2026-11-19T20:01:56+00:00"
 ["GOLD.0x0042c3b0"]
 size = 125
 updated_by = "rehome"
