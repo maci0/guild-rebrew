@@ -102,7 +102,7 @@ int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_00469470(int, int);
 
 /* ADDRESS: GOLDTL 0x005b88b0 */
-void __cdecl fcn_005b88b0(char* a0, int a1)
+void __cdecl fcn_005b88b0(char* building, int a1)
 {
 	int cnt;
 	int pg;
@@ -138,7 +138,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 	Row* r;
 
 	cnt = 0;
-	ent = lpGebaeudePROT + *(unsigned char*) a0 * 0x24d;
+	ent = lpGebaeudePROT + *(unsigned char*) building * 0x24d;
 	nSlots = 0;
 	hA = -1;
 	sel = -1;
@@ -149,9 +149,9 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 	win = (char*) fcn_00534c40(a1, 0x6a42c8, 4, 0x6ac340, 0x6ac300, 0x6ac314,
 	                          0x6ac328);
 	fcn_005350d0(win);
-	fcn_00517c00(*(unsigned short*) (a0 + 0x27), 1, 2, numA);
-	fcn_00517c00(*(unsigned short*) (a0 + 0x25), 1, 2, numB);
-	p = fcn_0050dc90((int) a0);
+	fcn_00517c00(*(unsigned short*) (building + 0x27), 1, 2, numA);
+	fcn_00517c00(*(unsigned short*) (building + 0x25), 1, 2, numB);
+	p = fcn_0050dc90((int) building);
 	if (p == 0) {
 		strcpy(txtName, *(char**) 0x14abc28);
 	} else {
@@ -246,7 +246,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 	                 *(int*) 0x772514);
 	GUI(cnt).f6c = 1;
 	GUI(cnt).w = 0x64;
-	fcn_005b5eb0((int) win, a0);
+	fcn_005b5eb0((int) win, building);
 	d2_SetOverlayAnimation(0, 0);
 
 	while (fcn_005373e0((void*) 0x5b88b0, 0x677c7)) {
@@ -255,7 +255,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 		}
 		fcn_005350d0(win);
 		fcn_00534c20(win);
-		fcn_005b6130((int) win, a0);
+		fcn_005b6130((int) win, building);
 		if (*(unsigned char*) 0x14cf950 == 0xcd) {
 			fcn_00535550(win);
 		}
@@ -294,7 +294,7 @@ void __cdecl fcn_005b88b0(char* a0, int a1)
 			             fcn_0050b750(ret, *(unsigned char*) 0x773d75));
 			}
 		}
-		p = fcn_0050dc90((int) a0);
+		p = fcn_0050dc90((int) building);
 		if (p != 0) {
 			if (*(unsigned short*) p != *(unsigned short*) 0x774970) {
 				if (p[8] == 0) {
@@ -332,7 +332,7 @@ after_gage:
 				hD = fcn_00472250(gage.win, 2,
 				                  io_AppendText((char*) 0x1a22,
 				                                (int) fcn_005101e0(
-				                                    (unsigned char*) a0, a0[0],
+				                                    (unsigned char*) building, building[0],
 				                                    0, -1),
 				                                ent[0x223] + 0x130));
 			}
@@ -350,7 +350,7 @@ after_gage:
 		if (*(int*) 0x67d370 != hD || gage.obj != 0) {
 			goto packet2;
 		}
-		p = (char*) fcn_005463a0(2, 0, 7, 3, *(int*) (a0 + 1));
+		p = (char*) fcn_005463a0(2, 0, 7, 3, *(int*) (building + 1));
 		if (p != 0) {
 			if (p[0xac] == 0) {
 				goto packet2;
@@ -366,7 +366,7 @@ after_gage:
 			}
 		}
 		memset(pkt, 0, 0xf8);
-		*(int*) (pkt + 0x0c) = *(int*) (a0 + 1);
+		*(int*) (pkt + 0x0c) = *(int*) (building + 1);
 		*(unsigned char*) (pkt + 4) = 7;
 		*(unsigned char*) (pkt + 0x36) = 1;
 		*(int*) (pkt + 0x30) = *(int*) 0x7f4c08;
@@ -376,7 +376,7 @@ after_gage:
 		*(int*) (pkt + 0x28) = *(int*) 0x7f4c00;
 		*(int*) (pkt + 0x2c) = *(int*) 0x7f4c04;
 		*(unsigned short*) (pkt + 0x34) = *(unsigned short*) 0x7f4c0c;
-		if (gm_CheckEntityType((int) a0)) {
+		if (gm_CheckEntityType((int) building)) {
 			*(int*) (pkt + 0x5c) = -1;
 		} else {
 			*(int*) (pkt + 0x5c) = *(int*) (*(int*) 0x7746cc + 2);
@@ -403,7 +403,7 @@ packet2:
 		memset(pkt, 0, 0xf8);
 		*(unsigned char*) (pkt + 4) = 0x31;
 		*(unsigned char*) (pkt + 0x36) = 1;
-		*(int*) (pkt + 0x0c) = *(int*) (a0 + 1);
+		*(int*) (pkt + 0x0c) = *(int*) (building + 1);
 		*(int*) (pkt + 8) = *(int*) (0x7f4ca4
 		                             + *(unsigned short*) 0x774970 * 0x21c);
 		*(int*) (pkt + 0x28) = *(int*) 0x7f4c00;
@@ -427,7 +427,7 @@ after2:
 		for (i = 0; i < tv2; i++) {
 			rows[i].obj = 0;
 		}
-		nSlots = fcn_00505d00((unsigned char*) a0, slots);
+		nSlots = fcn_00505d00((unsigned char*) building, slots);
 		for (i = 0; i < 12; i++) {
 			if (slots[0xd + i] == 0xffff) {
 				continue;
@@ -470,7 +470,7 @@ after2:
 				}
 			}
 		}
-		p = (char*) fcn_005463a0(2, 0, 6, 3, *(int*) (a0 + 1));
+		p = (char*) fcn_005463a0(2, 0, 6, 3, *(int*) (building + 1));
 		pIt = (int*) (p + 0xb0);
 		hC = tv2;
 		i = 0;

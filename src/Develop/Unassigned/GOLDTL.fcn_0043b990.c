@@ -12,7 +12,7 @@ long __stdcall D3DXCreateMeshFVF(int a0, int a1, int a2, int a3, char* a4, char*
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x0043b990 */
-void __cdecl fcn_0043b990(char* a0)
+void __cdecl fcn_0043b990(char* terrainObject)
 {
 	char* rec;
 	char* start;
@@ -28,7 +28,7 @@ void __cdecl fcn_0043b990(char* a0)
 	void* copy_src;
 	int copy_count;
 
-	rec = a0 + 0x244;
+	rec = terrainObject + 0x244;
 	i = 8;
 	do {
 		j = 8;
@@ -159,5 +159,5 @@ void __cdecl fcn_0043b990(char* a0)
 			rec = start;
 		} while (--j);
 	} while (--i);
-	fcn_0043ef20(a0);
+	fcn_0043ef20(terrainObject);
 }

@@ -14,16 +14,16 @@ int __cdecl io_AppendText(char*, ...);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005ce710(int a1, int a2)
+void __cdecl fcn_005ce710(int textId, int value)
 {
 	int h;
 
 	h = fcn_00470820(0, 0, g_6aca14);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
-	io_AppendText((char*) (a1 + 1), a1, a2);
+	io_AppendText((char*) (textId + 1), textId, value);
 	d2_SetForm(h, 2);
-	io_AppendText((char*) (a1 + 2));
+	io_AppendText((char*) (textId + 2));
 	do {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

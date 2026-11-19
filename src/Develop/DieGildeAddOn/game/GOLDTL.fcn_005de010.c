@@ -26,7 +26,7 @@ void __cdecl fcn_004c6ba0(int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005de010(unsigned char* e, char* a2)
+int __cdecl fcn_005de010(unsigned char* e, char* request)
 {
 	int ids[5];
 	Req req;
@@ -48,7 +48,7 @@ int __cdecl fcn_005de010(unsigned char* e, char* a2)
 		r = fcn_005cd440(&req, text, 0, 0);
 	}
 	else {
-		r = gm_LookupEntityRecordById(*(int*) (a2 + 4));
+		r = gm_LookupEntityRecordById(*(int*) (request + 4));
 	}
 	if (r == 0) {
 		return 0;
@@ -73,6 +73,6 @@ found:
 		fcn_005dbe90(msg);
 	}
 done:
-	*(int*) (a2 + 0x10) = 1;
+	*(int*) (request + 0x10) = 1;
 	return 1;
 }

@@ -13,7 +13,7 @@ int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl fcn_004c51a0(int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x0057c9f0 */
-void __cdecl fcn_0057c9f0(char* a0)
+void __cdecl fcn_0057c9f0(char* action)
 {
 	char buf[512];
 	int handle;
@@ -28,17 +28,17 @@ void __cdecl fcn_0057c9f0(char* a0)
 	char* p;
 
 	found = 0;
-	gm_ResolveEntityById(&handle, 0, 0, *(int*) (a0 + 0x10));
+	gm_ResolveEntityById(&handle, 0, 0, *(int*) (action + 0x10));
 	if (handle == 0) {
 		return;
 	}
-	ent = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0xc));
+	ent = (unsigned short*) gm_LookupEntityRecordById(*(int*) (action + 0xc));
 	if (ent == 0) {
 		return;
 	}
 	kind = fcn_00510500(handle);
 	if (kind == 3) {
-		level = *(int*) (a0 + 0xac);
+		level = *(int*) (action + 0xac);
 		base = 0;
 		bonus = 0;
 		if (level < 4) {
@@ -54,7 +54,7 @@ void __cdecl fcn_0057c9f0(char* a0)
 		count = gm_RandomMod(0x18) + 0xf;
 	}
 	else if (kind == 2) {
-		level = *(int*) (a0 + 0xac);
+		level = *(int*) (action + 0xac);
 		base = 0;
 		bonus = 0;
 		if (level < 4) {

@@ -6,7 +6,7 @@ int __cdecl fcn_00468df0(int x, int a2, int a3, char* buf, int a5);
 int __cdecl fcn_00469110(int id, int max);
 
 /* ADDRESS: GOLDTL 0x00533a60 */
-void __cdecl fcn_00533a60(int a1, int a2, int* out, int count, ...)
+void __cdecl fcn_00533a60(int windowId, int a2, int* out, int count, ...)
 {
     char buf[32][0x40];
     char* entity; char* text;
@@ -18,7 +18,7 @@ void __cdecl fcn_00533a60(int a1, int a2, int* out, int count, ...)
     int step;
     int id;
 
-    entity = (char*) 0x1015f40 + a1 * 0x3cc;
+    entity = (char*) 0x1015f40 + windowId * 0x3cc;
     max = 0;
     if (count > 0) {
         for (i = 0; i < count; i++) {
@@ -45,7 +45,7 @@ void __cdecl fcn_00533a60(int a1, int a2, int* out, int count, ...)
     start -= max / 2;
     if (count > 0) {
         for (i = 0; i < count; i++) {
-            id = fcn_00468df0(start, a2, 0xbf, buf[i], a1);
+            id = fcn_00468df0(start, a2, 0xbf, buf[i], windowId);
             out[i] = id;
             *(int*) (g_1015ea0 + id * 0x2f4 + 0x84) = 0x53;
             fcn_00469110(id, max);

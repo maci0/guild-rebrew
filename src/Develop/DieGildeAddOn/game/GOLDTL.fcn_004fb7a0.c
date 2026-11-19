@@ -30,7 +30,7 @@ void __cdecl fcn_004fb7a0(void)
 	unsigned char ev[0xf8];
 	int msg[10];
 	int phase;
-	int v7;
+	int nextPhase;
 	float f;
 
 	if (g_99f5a0 != 1) {
@@ -113,9 +113,9 @@ void __cdecl fcn_004fb7a0(void)
 		sel[12] = 1;
 		sel[13] = 1;
 	}
-	v7 = sel[gm_RandomMod(0x10) & 0xffff] + 1;
-	st[7] = v7;
-	if (v7 == 1) {
+	nextPhase = sel[gm_RandomMod(0x10) & 0xffff] + 1;
+	st[7] = nextPhase;
+	if (nextPhase == 1) {
 		ev[4] = 'Y';
 		*(int*) (ev + 8) = *(int*) (gm_CityEntity + 4);
 		*(int*) (ev + 0xc) = -1;
@@ -129,7 +129,7 @@ void __cdecl fcn_004fb7a0(void)
 		} else {
 			fcn_00500bb0((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		}
-	} else if (v7 == 2) {
+	} else if (nextPhase == 2) {
 		ev[4] = 'N';
 		*(int*) (ev + 8) = *(int*) (gm_CityEntity + 4);
 		*(int*) (ev + 0xc) = -1;
@@ -143,7 +143,7 @@ void __cdecl fcn_004fb7a0(void)
 		} else {
 			fcn_00500bb0((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		}
-	} else if (v7 == 3) {
+	} else if (nextPhase == 3) {
 state3:
 		ev[4] = 'P';
 		*(int*) (ev + 8) = *(int*) (gm_CityEntity + 4);
@@ -158,7 +158,7 @@ state3:
 			fcn_00500bb0((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		}
 	} else {
-		st[8] = v7;
+		st[8] = nextPhase;
 		goto send_state;
 	}
 	fcn_004c5530(ev);

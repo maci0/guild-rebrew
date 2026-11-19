@@ -2,14 +2,14 @@ char __cdecl fcn_00438b40(char*, float*);
 char __cdecl fcn_00438cb0(char*, float*);
 
 /* ADDRESS: GOLDTL 0x00445aa0 */
-char __cdecl fcn_00445aa0(char* a0, unsigned int a1, float a2)
+char __cdecl fcn_00445aa0(char* interpObj, unsigned int keyIndex, float keyFraction)
 {
-	float v14[4];
-	float v15[4];
-	char* v3;
+	float newPosition[4];
+	float newRotation[4];
+	char* keyframes;
 	float t;
-	char* v1;
-	char* v2;
+	char* firstFrame;
+	char* nextFrame;
 	unsigned int idx;
 	unsigned int idx2;
 	int flag;
@@ -17,49 +17,49 @@ char __cdecl fcn_00445aa0(char* a0, unsigned int a1, float a2)
 	int v5;
 	unsigned int i;
 
-	if (a0 == 0 || a1 >= 7 || !(a2 >= 0.0f) || !(a2 <= 1.0f) || *(int*) (a0 + 0x218) < 5 || (v3 = *(char**) (a0 + 0x1e8)) == 0)
+	if (interpObj == 0 || keyIndex >= 7 || !(keyFraction >= 0.0f) || !(keyFraction <= 1.0f) || *(int*) (interpObj + 0x218) < 5 || (keyframes = *(char**) (interpObj + 0x1e8)) == 0)
 		return 0;
-	t = a2 + *(float*) (v3 + 0x1a4);
+	t = keyFraction + *(float*) (keyframes + 0x1a4);
 	if (t > 1.0f) {
 		t = t - 1.0f;
-		idx = (a1 + 1) % 7;
+		idx = (keyIndex + 1) % 7;
 	} else if (t < -1.0f) {
 		t = t + 1.0f;
-		idx = (a1 - 1) % 7;
+		idx = (keyIndex - 1) % 7;
 	} else {
-		idx = a1;
+		idx = keyIndex;
 	}
 	idx2 = (idx + 1) % 7;
-	flag = (*(float*) (v3 + 0x24 + ((idx - 1) % 7) * 0x38) != 0.0f) || (*(int*) (a0 + 0x218) == 8);
-	v1 = v3 + idx * 0x38;
+	flag = (*(float*) (keyframes + 0x24 + ((idx - 1) % 7) * 0x38) != 0.0f) || (*(int*) (interpObj + 0x218) == 8);
+	firstFrame = keyframes + idx * 0x38;
 	v4 = 0;
-	if (*(float*) (v1 + 0x24) != 0.0f || *(int*) (a0 + 0x218) == 8)
+	if (*(float*) (firstFrame + 0x24) != 0.0f || *(int*) (interpObj + 0x218) == 8)
 		v4 = 1;
-	v2 = v3 + idx2 * 0x38;
+	nextFrame = keyframes + idx2 * 0x38;
 	v5 = 0;
-	if (*(float*) (v2 + 0x24) != 0.0f || *(int*) (a0 + 0x218) == 8)
+	if (*(float*) (nextFrame + 0x24) != 0.0f || *(int*) (interpObj + 0x218) == 8)
 		v5 = 1;
 	if (flag && v4 && v5) {
-		*(float*) (a0 + 0x94) = (*(float*) (v2 + 0x24) - *(float*) (v1 + 0x24)) * t + *(float*) (v1 + 0x24);
+		*(float*) (interpObj + 0x94) = (*(float*) (nextFrame + 0x24) - *(float*) (firstFrame + 0x24)) * t + *(float*) (firstFrame + 0x24);
 		goto L;
 	}
 	if (v4 && t < 0.5f) {
-		*(int*) (a0 + 0x94) = *(int*) (v1 + 0x24);
+		*(int*) (interpObj + 0x94) = *(int*) (firstFrame + 0x24);
 		goto L;
 	}
 	if (v5 && t >= 0.5f)
-		*(int*) (a0 + 0x94) = *(int*) (v2 + 0x24);
+		*(int*) (interpObj + 0x94) = *(int*) (nextFrame + 0x24);
 	else
-		*(int*) (a0 + 0x94) = 0;
+		*(int*) (interpObj + 0x94) = 0;
 L:
-	*(float*) (a0 + 0x90) = (*(float*) (v2 + 0x28) - *(float*) (v1 + 0x28)) * t + *(float*) (v1 + 0x28);
-	*(float*) (a0 + 0x98) = (*(float*) (v2 + 0x2c) - *(float*) (v1 + 0x2c)) * t + *(float*) (v1 + 0x2c);
+	*(float*) (interpObj + 0x90) = (*(float*) (nextFrame + 0x28) - *(float*) (firstFrame + 0x28)) * t + *(float*) (firstFrame + 0x28);
+	*(float*) (interpObj + 0x98) = (*(float*) (nextFrame + 0x2c) - *(float*) (firstFrame + 0x2c)) * t + *(float*) (firstFrame + 0x2c);
 	for (i = 0; i < 12; i += 4) {
-		*(float*) ((char*) v14 + i) = (*(float*) (v2 + i) - *(float*) (v1 + i)) * t + *(float*) (v1 + i);
-		*(float*) (a0 + 0x5c + i) = (*(float*) (v2 + 0x18 + i) - *(float*) (v1 + 0x18 + i)) * t + *(float*) (v1 + 0x18 + i);
-		*(float*) ((char*) v15 + i) = (*(float*) (v2 + 0xc + i) - *(float*) (v1 + 0xc + i)) * t + *(float*) (v1 + 0xc + i);
+		*(float*) ((char*) newPosition + i) = (*(float*) (nextFrame + i) - *(float*) (firstFrame + i)) * t + *(float*) (firstFrame + i);
+		*(float*) (interpObj + 0x5c + i) = (*(float*) (nextFrame + 0x18 + i) - *(float*) (firstFrame + 0x18 + i)) * t + *(float*) (firstFrame + 0x18 + i);
+		*(float*) ((char*) newRotation + i) = (*(float*) (nextFrame + 0xc + i) - *(float*) (firstFrame + 0xc + i)) * t + *(float*) (firstFrame + 0xc + i);
 	}
-	fcn_00438b40(a0, v14);
-	fcn_00438cb0(a0, v15);
+	fcn_00438b40(interpObj, newPosition);
+	fcn_00438cb0(interpObj, newRotation);
 	return 1;
 }

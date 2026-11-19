@@ -50,7 +50,7 @@ void __cdecl fcn_005c8c40(void)
 	int idx;
 	int ofs;
 	int save;
-	int v2;
+	int firstWindow;
 	int v3;
 	int v4;
 	int i;
@@ -74,7 +74,7 @@ void __cdecl fcn_005c8c40(void)
 	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(save, 3);
 	fcn_00533a60(*(int*) &d2_CurrentWindowId, 0, out, 3, *(int*) 0x14b5294, *(int*) 0x14b5298, *(int*) 0x14b529c);
-	v2 = fcn_005c8400();
+	firstWindow = fcn_005c8400();
 	v3 = fcn_005c86b0();
 	v4 = fcn_005c89a0();
 	idx = d2_CreateRadioGroup(3, out[0], out[1], out[2]);
@@ -90,21 +90,21 @@ void __cdecl fcn_005c8c40(void)
 		}
 		state = *(int*) (ofs + (unsigned long)&g_102cbc8);
 		if (state == 0) {
-			fcn_00471af0(v2, 1);
+			fcn_00471af0(firstWindow, 1);
 			fcn_00471af0(v3, 0);
 			fcn_00471af0(v4, 0);
 		} else if (state == 1) {
 			fcn_00471af0(v3, 1);
-			fcn_00471af0(v2, 0);
+			fcn_00471af0(firstWindow, 0);
 			fcn_00471af0(v4, 0);
 		} else if (state == 2) {
 			fcn_00471af0(v4, 1);
 			fcn_00471af0(v3, 0);
-			fcn_00471af0(v2, 0);
+			fcn_00471af0(firstWindow, 0);
 		}
-		if (v2 != -1) {
-			d2_SetForm(v2, 1);
-			fcn_005a5440(*(int*) (0x7f4e18 + (*(unsigned short*) &g_774970) * 0x21c), (char*) 0x776aa0, v2, 1, 0);
+		if (firstWindow != -1) {
+			d2_SetForm(firstWindow, 1);
+			fcn_005a5440(*(int*) (0x7f4e18 + (*(unsigned short*) &g_774970) * 0x21c), (char*) 0x776aa0, firstWindow, 1, 0);
 		}
 		if (v3 != -1 && *(int*) &g_100f1dc != -1) {
 			for (i = 0; i < g_775338; i++) {
@@ -159,8 +159,8 @@ void __cdecl fcn_005c8c40(void)
 		*(int*) 0x77533c = *(int*) (ofs + (unsigned long)&g_102cbc8);
 		fcn_00469510(idx);
 		fcn_00471e30(save);
-		if (v2 != -1) {
-			fcn_00471e30(v2);
+		if (firstWindow != -1) {
+			fcn_00471e30(firstWindow);
 		}
 		if (v3 != -1) {
 			fcn_00471e30(v3);

@@ -46,7 +46,7 @@ int __cdecl fcn_0055c050(int* p);
 /* ADDRESS: GOLDTL 0x00499090 */
 int __cdecl fcn_00499090(int who, char* e, int arg, Msg* o1, Msg* o2)
 {
-	int v0;
+	int targetRec;
 	int v4;
 	int v8;
 	int id;
@@ -123,19 +123,19 @@ find_target:
 		goto fail;
 	}
 have_id:
-	gm_ResolveEntityById(&v0, 0, 0, id);
-	if (v0 == 0) {
+	gm_ResolveEntityById(&targetRec, 0, 0, id);
+	if (targetRec == 0) {
 		goto fail;
 	}
-	if (*(unsigned short*)(v0 + 0x27) == 0xffff) {
+	if (*(unsigned short*)(targetRec + 0x27) == 0xffff) {
 		goto fail;
 	}
-	if (fcn_00579640((char*)((unsigned int)*(unsigned short*)(v0 + 0x27) * 0x21c + 0x7f4ca0), e) == 0) {
+	if (fcn_00579640((char*)((unsigned int)*(unsigned short*)(targetRec + 0x27) * 0x21c + 0x7f4ca0), e) == 0) {
 		goto fail;
 	}
 	memset(buf, 0, 0x220);
 	buf[0] = 1;
-	v4 = fcn_0050cf50((int*)v0, 100);
+	v4 = fcn_0050cf50((int*)targetRec, 100);
 	f = (float)v4 * 0.05f;
 	v4 = gm_WalkEntityChain(*(unsigned short*)e);
 	v4 = (int)((float)v4 * 0.02f + f);
@@ -146,7 +146,7 @@ have_id:
 	if ((float)v8 * 0.44f < (float)v4) {
 		goto fail;
 	}
-	if (fcn_00507e70(e, (char*)((unsigned int)*(unsigned short*)(v0 + 0x27) * 0x21c + 0x7f4ca0), 2) + gm_RandomFloat01() < 1.0f) {
+	if (fcn_00507e70(e, (char*)((unsigned int)*(unsigned short*)(targetRec + 0x27) * 0x21c + 0x7f4ca0), 2) + gm_RandomFloat01() < 1.0f) {
 		b1.kind = 0xe;
 		b1.a = 2;
 		b1.b = 1;
@@ -162,20 +162,20 @@ have_id:
 		*o2 = b2;
 		return r;
 	}
-	if (fcn_0055c0f0((char*)((unsigned int)*(unsigned short*)(v0 + 0x27) * 0x21c + 0x7f4ca0), e) == 0) {
+	if (fcn_0055c0f0((char*)((unsigned int)*(unsigned short*)(targetRec + 0x27) * 0x21c + 0x7f4ca0), e) == 0) {
 		goto fail;
 	}
-	if (fcn_0055c0a0((char*)((unsigned int)*(unsigned short*)(v0 + 0x27) * 0x21c + 0x7f4ca0), e) == 0) {
+	if (fcn_0055c0a0((char*)((unsigned int)*(unsigned short*)(targetRec + 0x27) * 0x21c + 0x7f4ca0), e) == 0) {
 		goto fail;
 	}
-	if (fcn_0055c050((int*)v0) == 0) {
+	if (fcn_0055c050((int*)targetRec) == 0) {
 		goto fail;
 	}
-	if (fcn_00579640((char*)((unsigned int)*(unsigned short*)(v0 + 0x27) * 0x21c + 0x7f4ca0), e) == 0) {
+	if (fcn_00579640((char*)((unsigned int)*(unsigned short*)(targetRec + 0x27) * 0x21c + 0x7f4ca0), e) == 0) {
 		goto fail;
 	}
 	o1->kind = 4;
-	o1->a = *(int*)(v0 + 1);
+	o1->a = *(int*)(targetRec + 1);
 	o1->d = v4;
 	o1->b = 1;
 	o1->f = (float)(st.v[6] * 2 + 1);

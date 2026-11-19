@@ -29,14 +29,14 @@ int __cdecl fcn_0050d0c0(char*, int);
 void __cdecl fcn_004c5530(char*);
 
 /* ADDRESS: GOLDTL 0x00480c60 */
-int __cdecl ai_CalcAngriff(char* a1, int a2)
+int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 {
 	char msg[0xf8];
 	char buf[0x400];
 	float w;
 	float best;
 	float fmax;
-	char* nm;
+	char* attackerName;
 	int r;
 	Cell99ef80* cell;
 	float v;
@@ -52,17 +52,17 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 	int kind;
 	char* rec;
 
-	nm = a1 + 0x30;
-	sprintf(buf, "ai_CalcAngriff(): Meister %s m\xf6" "chte angreifen", nm);
-	if (*(int*) (a1 + 0x1c0) != -1) {
-		cand = gm_SearchTable67(*(int*) (a1 + 0x1c0));
+	attackerName = attackerRec + 0x30;
+	sprintf(buf, "ai_CalcAngriff(): Meister %s m\xf6" "chte angreifen", attackerName);
+	if (*(int*) (attackerRec + 0x1c0) != -1) {
+		cand = gm_SearchTable67(*(int*) (attackerRec + 0x1c0));
 		if (cand == 0) {
-			*(int*) (a1 + 0x1c0) = -1;
-		} else if (*(unsigned short*) (cand + 0x27) == *(unsigned short*) (*(char**) (a1 + 0x16c) + 0x27)) {
-			*(int*) (a1 + 0x1c0) = -1;
+			*(int*) (attackerRec + 0x1c0) = -1;
+		} else if (*(unsigned short*) (cand + 0x27) == *(unsigned short*) (*(char**) (attackerRec + 0x16c) + 0x27)) {
+			*(int*) (attackerRec + 0x1c0) = -1;
 		}
 	}
-	if (*(int*) (a1 + 0x1c0) == -1) {
+	if (*(int*) (attackerRec + 0x1c0) == -1) {
 		fmax = 0.0f;
 		a = 8;
 		b = 8;
@@ -86,7 +86,7 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 			if (*(unsigned char*) p == 0) {
 				continue;
 			}
-			if (*(unsigned short*) (p + 0x27) == *(unsigned short*) (*(char**) (a1 + 0x16c) + 0x27)) {
+			if (*(unsigned short*) (p + 0x27) == *(unsigned short*) (*(char**) (attackerRec + 0x16c) + 0x27)) {
 				continue;
 			}
 			if (*(unsigned short*) (p + 0x27) == 0xffff) {
@@ -127,12 +127,12 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 			}
 			cand = p;
 		}
-		*(int*) (a1 + 0x1c0) = *(int*) (cand + 1);
+		*(int*) (attackerRec + 0x1c0) = *(int*) (cand + 1);
 	}
 	if (cand != 0) {
 		kind = ((unsigned char*) g_entity_type_table)[*(unsigned char*) cand + *(unsigned char*) cand * 0x24c];
 		if (kind == 0x13 || kind == 4 || kind == 0x10) {
-	for (q = fcn_00502cd0(*(int*) (*(char**) (a1 + 0x16c) + 0x5d), 1, 0, 0xca); q != 0; q = gm_NextEntityQueryMatch()) {
+	for (q = fcn_00502cd0(*(int*) (*(char**) (attackerRec + 0x16c) + 0x5d), 1, 0, 0xca); q != 0; q = gm_NextEntityQueryMatch()) {
 		if (*(int*) (q + 0x2a) != *(int*) (cand + 1)) {
 			continue;
 		}
@@ -142,33 +142,33 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 		if (a2 < 3) {
 			return 0;
 		}
-		for (t = fcn_005463a0(2, 0, 0x40, 3, *(int*) (*(char**) (a1 + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
+		for (t = fcn_005463a0(2, 0, 0x40, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
 			if (*(int*) (t + 0xac) == *(int*) (cand + 1)) {
 				goto log2;
 			}
 		}
-		for (t = fcn_005463a0(2, 0, 0x3f, 3, *(int*) (*(char**) (a1 + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
+		for (t = fcn_005463a0(2, 0, 0x3f, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
 			if (*(int*) (t + 0xac) == *(int*) (cand + 1)) {
 				goto log2;
 			}
 		}
-		for (t = fcn_005463a0(2, 0, 0x49, 3, *(int*) (*(char**) (a1 + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
+		for (t = fcn_005463a0(2, 0, 0x49, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
 			if (*(int*) (t + 0xac) == *(int*) (cand + 1)) {
 				goto log2;
 			}
 		}
-		sprintf(buf, "ai_CalcAngriff(): Meister %s greift an '%s' ", nm, cand + 5);
+		sprintf(buf, "ai_CalcAngriff(): Meister %s greift an '%s' ", attackerName, cand + 5);
 		memset(msg, 0, sizeof(msg));
 		msg[4] = 0x49;
-		*(int*) (msg + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (a1 + 0x16c) + 0x27) * 0x21c);
-		*(int*) (msg + 0xc) = *(int*) (*(char**) (a1 + 0x16c) + 1);
+		*(int*) (msg + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (attackerRec + 0x16c) + 0x27) * 0x21c);
+		*(int*) (msg + 0xc) = *(int*) (*(char**) (attackerRec + 0x16c) + 1);
 		*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
 		*(int*) (msg + 0x2c) = gm_GameTime.b;
 		*(int*) (msg + 0x30) = gm_GameTime.c;
 		*(short*) (msg + 0x34) = gm_GameTime.d;
 		msg[0x36] = 1;
 		*(int*) (msg + 0x58) = *(int*) (cand + 1);
-		*(int*) (msg + 0x5c) = *(int*) (*(char**) (a1 + 0x16c) + 1);
+		*(int*) (msg + 0x5c) = *(int*) (*(char**) (attackerRec + 0x16c) + 1);
 		n = a2;
 		if (n >= 8) {
 			n = 8;
@@ -180,7 +180,7 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 				if ((int) rec >= 0x85a205) {
 					break;
 				}
-				if (*(short*) (rec - 0x165) != -1 && *(int*) (rec + 7) == *(int*) (a1 + 0x16c) && *(unsigned char*) rec != 0 && *(int*) (rec + 0x17) == 0 && *(int*) (rec + 0x1f) != 0 &&
+				if (*(short*) (rec - 0x165) != -1 && *(int*) (rec + 7) == *(int*) (attackerRec + 0x16c) && *(unsigned char*) rec != 0 && *(int*) (rec + 0x17) == 0 && *(int*) (rec + 0x1f) != 0 &&
 				    *(int*) (*(int*) (rec + 0x1f) + 0x2c) == *(int*) (*(int*) (rec + 7) + 1)) {
 					*(int*) (msg + 0x38 + i * 4) = *(int*) (rec - 0x161);
 					i++;
@@ -197,36 +197,36 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 			return 1;
 		}
 		fcn_004c5530(msg);
-		*(int*) (a1 + 0x1c0) = -1;
+		*(int*) (attackerRec + 0x1c0) = -1;
 		return 1;
 	}
-	for (t = fcn_005463a0(2, 0, 0x40, 3, *(int*) (*(char**) (a1 + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
+	for (t = fcn_005463a0(2, 0, 0x40, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
 		if (*(int*) (t + 0xac) == *(int*) (cand + 1)) {
 			goto log1;
 		}
 	}
-	for (t = fcn_005463a0(2, 0, 0x3f, 3, *(int*) (*(char**) (a1 + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
+	for (t = fcn_005463a0(2, 0, 0x3f, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
 		if (*(int*) (t + 0xac) == *(int*) (cand + 1)) {
 			goto log1;
 		}
 	}
-	for (t = fcn_005463a0(2, 0, 0x49, 3, *(int*) (*(char**) (a1 + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
+	for (t = fcn_005463a0(2, 0, 0x49, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
 		if (*(int*) (t + 0xac) == *(int*) (cand + 1)) {
 			goto log1;
 		}
 	}
-	sprintf(buf, "ai_CalcAngriff(): Meister %s spioniert bei '%s'", nm, cand + 5);
+	sprintf(buf, "ai_CalcAngriff(): Meister %s spioniert bei '%s'", attackerName, cand + 5);
 	memset(msg, 0, sizeof(msg));
 	msg[4] = 0x40;
-	*(int*) (msg + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (a1 + 0x16c) + 0x27) * 0x21c);
-	*(int*) (msg + 0xc) = *(int*) (*(char**) (a1 + 0x16c) + 1);
+	*(int*) (msg + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (attackerRec + 0x16c) + 0x27) * 0x21c);
+	*(int*) (msg + 0xc) = *(int*) (*(char**) (attackerRec + 0x16c) + 1);
 	*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
 	*(int*) (msg + 0x2c) = gm_GameTime.b;
 	*(int*) (msg + 0x30) = gm_GameTime.c;
 	*(short*) (msg + 0x34) = gm_GameTime.d;
 	msg[0x36] = 1;
 	*(int*) (msg + 0x58) = *(int*) (cand + 1);
-	*(int*) (msg + 0x5c) = *(int*) (*(char**) (a1 + 0x16c) + 1);
+	*(int*) (msg + 0x5c) = *(int*) (*(char**) (attackerRec + 0x16c) + 1);
 	n = a2;
 	if (n >= 8) {
 		n = 8;
@@ -238,7 +238,7 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 			if ((int) rec >= 0x85a205) {
 				break;
 			}
-			if (*(short*) (rec - 0x165) != -1 && *(int*) (rec + 7) == *(int*) (a1 + 0x16c) && *(unsigned char*) rec != 0 && *(int*) (rec + 0x17) == 0 && *(int*) (rec + 0x1f) != 0 &&
+			if (*(short*) (rec - 0x165) != -1 && *(int*) (rec + 7) == *(int*) (attackerRec + 0x16c) && *(unsigned char*) rec != 0 && *(int*) (rec + 0x17) == 0 && *(int*) (rec + 0x1f) != 0 &&
 			    *(int*) (*(int*) (rec + 0x1f) + 0x2c) == *(int*) (*(int*) (rec + 7) + 1)) {
 				*(int*) (msg + 0x38 + i * 4) = *(int*) (rec - 0x161);
 				i++;
@@ -257,9 +257,9 @@ int __cdecl ai_CalcAngriff(char* a1, int a2)
 	}
 	return 0;
 log2:
-	sprintf(buf, "ai_CalcAngriff(): Meister %s hat aber noch eine Spionage bei '%s' nicht beendet", nm, cand + 5);
+	sprintf(buf, "ai_CalcAngriff(): Meister %s hat aber noch eine Spionage bei '%s' nicht beendet", attackerName, cand + 5);
 	return 1;
 log1:
-	sprintf(buf, "ai_CalcAngriff(): Meister %s hat schon eine Spionage bei '%s' laufen", nm, cand + 5);
+	sprintf(buf, "ai_CalcAngriff(): Meister %s hat schon eine Spionage bei '%s' laufen", attackerName, cand + 5);
 	return 1;
 }

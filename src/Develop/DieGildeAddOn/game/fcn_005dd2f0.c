@@ -9,17 +9,17 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x005dd2f0 */
-unsigned int __cdecl fcn_005dd2f0(int a0, int a1)
+unsigned int __cdecl fcn_005dd2f0(int actorRec, int eventArgs)
 {
 	unsigned int q[20];
 	char buf[0x100];
 	char name[0x400];
-	unsigned short* v2;
-	unsigned short* v3;
-	int v9;
+	unsigned short* firstTarget;
+	unsigned short* secondTarget;
+	int effectDelta;
 
 
-	if (*(char*) (a0 + 2) == 6) {
+	if (*(char*) (actorRec + 2) == 6) {
 		memset(q, 0, 0x50);
 		memset(q + 7, 0xff, 0x20);
 		io_FormatTextBuffer(buf, 0x9c);
@@ -27,35 +27,35 @@ unsigned int __cdecl fcn_005dd2f0(int a0, int a1)
 		q[1] = 0x400;
 		q[4] = 6;
 		*(__int64*) (q + 2) = g_666018;
-		v2 = fcn_005cd440(q, buf, 0, 0);
-		if (v2 != 0) {
+		firstTarget = fcn_005cd440(q, buf, 0, 0);
+		if (firstTarget != 0) {
 			q[5] = 3;
-			*(unsigned short*) &q[7] = *v2;
+			*(unsigned short*) &q[7] = *firstTarget;
 			io_FormatTextBuffer(buf, 0x9e);
-			v3 = fcn_005cd440(q, buf, 0, 0);
-			if (v3 != 0) {
+			secondTarget = fcn_005cd440(q, buf, 0, 0);
+			if (secondTarget != 0) {
 				goto do_apply;
 			}
 		}
 		return 0;
 	} else {
-		v2 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a1 + 4));
-		v3 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a1 + 8));
-		if (v2 == 0 || v3 == 0) {
+		firstTarget = (unsigned short*) gm_LookupEntityRecordById(*(int*) (eventArgs + 4));
+		secondTarget = (unsigned short*) gm_LookupEntityRecordById(*(int*) (eventArgs + 8));
+		if (firstTarget == 0 || secondTarget == 0) {
 			return 0;
 		}
 	}
 do_apply:
-	v9 = ((fcn_005c6270(a0, 0x2c5) != 0) + 1) * -0x28;
-	fcn_004c54c0(*(unsigned int*) ((char*) v2 + 4), *(unsigned int*) ((char*) v3 + 4), v9, 1);
-	fcn_004c54c0(*(unsigned int*) ((char*) v3 + 4), *(unsigned int*) ((char*) v2 + 4), v9, 1);
-	if (*(char*) ((char*) v2 + 2) == 6 || *(char*) ((char*) v2 + 2) == 7) {
-		io_FormatTextBuffer(name, 0xfea, *v3);
-		fcn_00545d40(*(unsigned int*) ((char*) v2 + 4), -1, name, 1, 0x5fb, 0);
+	effectDelta = ((fcn_005c6270(actorRec, 0x2c5) != 0) + 1) * -0x28;
+	fcn_004c54c0(*(unsigned int*) ((char*) firstTarget + 4), *(unsigned int*) ((char*) secondTarget + 4), effectDelta, 1);
+	fcn_004c54c0(*(unsigned int*) ((char*) secondTarget + 4), *(unsigned int*) ((char*) firstTarget + 4), effectDelta, 1);
+	if (*(char*) ((char*) firstTarget + 2) == 6 || *(char*) ((char*) firstTarget + 2) == 7) {
+		io_FormatTextBuffer(name, 0xfea, *secondTarget);
+		fcn_00545d40(*(unsigned int*) ((char*) firstTarget + 4), -1, name, 1, 0x5fb, 0);
 	}
-	if (*(char*) ((char*) v3 + 2) == 6 || *(char*) ((char*) v3 + 2) == 7) {
-		io_FormatTextBuffer(name, 0xfeb, *v2, *v2);
-		fcn_00545d40(*(unsigned int*) ((char*) v3 + 4), -1, name, 1, 0x5fb, 0);
+	if (*(char*) ((char*) secondTarget + 2) == 6 || *(char*) ((char*) secondTarget + 2) == 7) {
+		io_FormatTextBuffer(name, 0xfeb, *firstTarget, *firstTarget);
+		fcn_00545d40(*(unsigned int*) ((char*) secondTarget + 4), -1, name, 1, 0x5fb, 0);
 	}
 	return 1;
 }

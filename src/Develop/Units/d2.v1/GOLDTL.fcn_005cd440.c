@@ -22,7 +22,7 @@ int __cdecl fcn_005cadc0(int, char*, char*, int, void*);
 int __cdecl fcn_005ccca0(char*, char*, int, void*);
 
 /* ADDRESS: GOLDTL 0x005cd440 */
-int __cdecl fcn_005cd440(char* a0, int a1, int a2, void* a3)
+int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
 {
 	int btn[9];
 	int order[9];
@@ -45,8 +45,8 @@ int __cdecl fcn_005cd440(char* a0, int a1, int a2, void* a3)
 	dlg = fcn_00470820(0, 0, s_6ac994);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 2);
-	if (a1) {
-		io_AppendText(a1);
+	if (titleTextId) {
+		io_AppendText(titleTextId);
 	} else {
 		io_AppendText(0xa1);
 	}
@@ -100,11 +100,11 @@ int __cdecl fcn_005cd440(char* a0, int a1, int a2, void* a3)
 			}
 			if (i < 9 && i > -1) {
 				fcn_00471af0(dlg, 0);
-				result = fcn_005cadc0(order[i], a0, (char*) a1, 0, a3);
+				result = fcn_005cadc0(order[i], a0, (char*) titleTextId, 0, a3);
 				fcn_00471af0(dlg, 1);
 			} else if (d2_CurrentElementId == id) {
 				fcn_00471af0(dlg, 0);
-				result = fcn_005ccca0(a0, (char*) a1, -1, a3);
+				result = fcn_005ccca0(a0, (char*) titleTextId, -1, a3);
 				fcn_00471af0(dlg, 1);
 			}
 			if (result && a3 == 0 && (*(unsigned char*) (a0 + 0x14) & 4) == 0) {

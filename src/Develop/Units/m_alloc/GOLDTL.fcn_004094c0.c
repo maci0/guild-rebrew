@@ -20,7 +20,7 @@ extern int __cdecl CompareVector3WithinTolerance();
 /* Rebuilds one object's render state from its definition record. Native
  * extent 1056 bytes. */
 /* ADDRESS: GOLDTL 0x004094c0 */
-unsigned int __cdecl fcn_004094c0(int a0, int a1)
+unsigned int __cdecl fcn_004094c0(int a0, int gridContext)
 {
 	char buf[0x60];
 	char small[4];
@@ -64,7 +64,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	}
 	if (*(unsigned char*) (rec + 0x160) & 8)
 		*(int*) (rec + 0x110) = ch_FindCharacterByName(rec + 0x114);
-	r = fcn_0045b990(a1, *(int*) (*(int*) (rec + 0x14) + 0x34) + 0x4c,
+	r = fcn_0045b990(gridContext, *(int*) (*(int*) (rec + 0x14) + 0x34) + 0x4c,
 	    &v15, &v14, small);
 	if (r == 0) {
 		if (*(char*) 0x6b5c28 != 0)
@@ -80,7 +80,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 		v15 = 1;
 	}
 	else {
-		n = *(int*) (a1 + 0x20) - 2;
+		n = *(int*) (gridContext + 0x20) - 2;
 		if (v15 > n)
 			v15 = n;
 	}
@@ -88,22 +88,22 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 		v14 = 1;
 	}
 	else {
-		n = *(int*) (a1 + 0x20) - 2;
+		n = *(int*) (gridContext + 0x20) - 2;
 		if (v14 > n)
 			v14 = n;
 	}
 	if (*(unsigned char*) (obj + 4) & 4)
 		*(unsigned int*) (rec + 0x160) &= 0xffffffef;
 	if (*(unsigned int*) (rec + 0x160) & 0x10)
-		fcn_00407e30(a1, *(int*) (obj + 0x34) + 0x4c, rec + 0x144, v16, v17,
+		fcn_00407e30(gridContext, *(int*) (obj + 0x34) + 0x4c, rec + 0x144, v16, v17,
 		    &v17, &v16, 8, *(unsigned int*) (rec + 0x160));
 	else
-		fcn_00407e30(a1, *(int*) (obj + 0x34) + 0x4c,
+		fcn_00407e30(gridContext, *(int*) (obj + 0x34) + 0x4c,
 		    *(int*) (obj + 0x34) + 0x4c, v16, v17,
 		    &v17, &v16, 8, *(unsigned int*) (rec + 0x160));
 	*(unsigned int*) 0x14d0c28 = 0x14cfc20;
 	*(unsigned int*) 0x14d0c24 = 0x200;
-	if (fcn_00421350((void*) 0x14d0c20, a1, v15, v14, v17, v16,
+	if (fcn_00421350((void*) 0x14d0c20, gridContext, v15, v14, v17, v16,
 	    *(unsigned char*) (obj + 0x240)) == -1) {
 		*(char*) (*(int*) (rec + 0x14) + 0x110) = 0;
 		if (*(char*) 0x6b5c28 != 0)
@@ -121,10 +121,10 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	*(int*) (rec + 0xf4) = (int) m_alloc(*(unsigned int*) 0x14d0c20 * 2,
 	    (char*) 0x675ad8);
 	*(int*) (rec + 0xf0) = fcn_00407760(obj, (void*) 0x14d0c20,
-	    (void*) *(int*) (rec + 0xf4), a1);
+	    (void*) *(int*) (rec + 0xf4), gridContext);
 	*(int*) (rec + 0xf8) = 0;
 	*(int*) (rec + 0xfc) = -1;
-	d3_GridPointToWorld(a1, *(unsigned char*) *(int*) (rec + 0xf4),
+	d3_GridPointToWorld(gridContext, *(unsigned char*) *(int*) (rec + 0xf4),
 	    ((unsigned char*) *(int*) (rec + 0xf4))[1], (float*) (rec + 0x124));
 	*(float*) (rec + 0x124) = *(float*) 0x6b5c38 + *(float*) (rec + 0x124);
 	*(float*) (rec + 0x128) = *(float*) 0x6b5c3c + *(float*) (rec + 0x128);
@@ -136,7 +136,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 		*(int*) (rec + 0x13c) = *(int*) (obj + 0x40);
 	}
 	else {
-		d3_GridPointToWorld(a1, v17, v16, (float*) (rec + 0x134));
+		d3_GridPointToWorld(gridContext, v17, v16, (float*) (rec + 0x134));
 		*(float*) (rec + 0x124) = *(float*) 0x6b5c38 + *(float*) (rec + 0x124);
 		*(float*) (rec + 0x128) = *(float*) 0x6b5c3c + *(float*) (rec + 0x128);
 		*(float*) (rec + 0x12c) = *(float*) 0x6b5c40 + *(float*) (rec + 0x12c);

@@ -48,7 +48,7 @@ void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005d61d0(unsigned short* a1)
+int __cdecl fcn_005d61d0(unsigned short* target)
 {
 	int dlg;
 	pos14_7f4c00 nm;
@@ -61,7 +61,7 @@ int __cdecl fcn_005d61d0(unsigned short* a1)
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
-	io_AppendText(0x1d62, *a1, *a1, 2, *a1);
+	io_AppendText(0x1d62, *target, *target, 2, *target);
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
@@ -74,12 +74,12 @@ int __cdecl fcn_005d61d0(unsigned short* a1)
 					pkt.xc = pkt.x8;
 					pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 					pkt.x36 = 2;
-					pkt.x5c = *(int*) (a1 + 2);
+					pkt.x5c = *(int*) (target + 2);
 					pkt.x58 = pkt.x8;
 					fcn_004c5530(&pkt);
 					nm = (*(pos14_7f4c00*)&gm_GameTime);
 					fcn_00500bb0(&nm, 0x18, 0, 0);
-					io_FormatTextBuffer(buf, 0x1d63, &nm, *a1);
+					io_FormatTextBuffer(buf, 0x1d63, &nm, *target);
 					fcn_00526120(buf, 0);
 					g_774654 = 4;
 					r = 1;

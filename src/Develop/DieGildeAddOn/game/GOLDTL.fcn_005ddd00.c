@@ -24,7 +24,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
-int __cdecl fcn_005ddd00(char* e, char* a2)
+int __cdecl fcn_005ddd00(char* e, char* request)
 {
 	Req req;
 	char text[0x100];
@@ -52,8 +52,8 @@ int __cdecl fcn_005ddd00(char* e, char* a2)
 		io_FormatTextBuffer(text, 0x9e);
 		b = fcn_005cd440(&req, text, 0, 0);
 	} else {
-		a = gm_LookupEntityRecordById(*(int*) (a2 + 4));
-		b = gm_LookupEntityRecordById(*(int*) (a2 + 8));
+		a = gm_LookupEntityRecordById(*(int*) (request + 4));
+		b = gm_LookupEntityRecordById(*(int*) (request + 8));
 		if (a == 0) {
 			goto done;
 		}

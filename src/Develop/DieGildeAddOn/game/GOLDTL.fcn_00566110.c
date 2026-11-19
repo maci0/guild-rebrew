@@ -13,7 +13,7 @@ void __cdecl fcn_004c5da0(int a0, int a1, int a2, int a3, int a4, char* a5);
 void __cdecl fcn_00546190(int a0);
 
 /* ADDRESS: GOLDTL 0x00566110 */
-void __cdecl fcn_00566110(int a0)
+void __cdecl fcn_00566110(int event)
 {
 	char* ent;
 	int v6;
@@ -23,16 +23,16 @@ void __cdecl fcn_00566110(int a0)
 	unsigned short v2;
 
 	v6 = 0;
-	if (*(int*) (a0 + 0x70) < -2) {
+	if (*(int*) (event + 0x70) < -2) {
 		return;
 	}
-	if (*(int*) (a0 + 0x70) < 0) {
+	if (*(int*) (event + 0x70) < 0) {
 		goto tail;
 	}
-	if (*(int*) (a0 + 0x70) != 0) {
+	if (*(int*) (event + 0x70) != 0) {
 		return;
 	}
-	ent = (char*) gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
+	ent = (char*) gm_LookupEntityRecordById(*(int*) (event + 0xac));
 	if (ent == 0 || *(char*) (ent + 8) == 0) {
 		goto fail;
 	}
@@ -58,8 +58,8 @@ void __cdecl fcn_00566110(int a0)
 		}
 	}
 tail:
-	fcn_00546190(a0);
+	fcn_00546190(event);
 	return;
 fail:
-	*(int*) (a0 + 0x70) = -1;
+	*(int*) (event + 0x70) = -1;
 }

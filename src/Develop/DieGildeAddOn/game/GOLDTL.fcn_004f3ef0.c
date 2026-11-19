@@ -39,7 +39,7 @@ extern int __cdecl fcn_004f1850();
 extern int __cdecl fcn_004c5530(void* msg);
 
 /* ADDRESS: GOLDTL 0x004f3ef0 */
-void __cdecl fcn_004f3ef0(char* a0)
+void __cdecl fcn_004f3ef0(char* entity)
 {
 	int n;
 	int result;
@@ -64,11 +64,11 @@ void __cdecl fcn_004f3ef0(char* a0)
 	count = 0;
 	total = 0;
 	handle = -1;
-	if (*(unsigned short*) (a0 + 0x27) != 0xffff
-	    && *(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
-		home = g_7f4ca0 + *(unsigned short*) (a0 + 0x27) * 0x21c;
+	if (*(unsigned short*) (entity + 0x27) != 0xffff
+	    && *(unsigned short*) (entity + 0x27) != *(unsigned short*) gm_CityEntity) {
+		home = g_7f4ca0 + *(unsigned short*) (entity + 0x27) * 0x21c;
 	}
-	entry = (int*) FindSlotEntryFiltered(0, a0, 0, (void*) fcn_004f1850, 0xff);
+	entry = (int*) FindSlotEntryFiltered(0, entity, 0, (void*) fcn_004f1850, 0xff);
 	if (entry != 0) {
 		do {
 			if (n >= 0x40 && handle != -1) {
@@ -92,18 +92,18 @@ void __cdecl fcn_004f3ef0(char* a0)
 						break;
 				}
 				if (i >= k) {
-					handle = fcn_004f2a10(0, (int) a0, result,
-						fcn_004f1790((char*) *(int*) (a0 + 0x65), entry));
+					handle = fcn_004f2a10(0, (int) entity, result,
+						fcn_004f1790((char*) *(int*) (entity + 0x65), entry));
 				} else {
 					a = (gm_RandomFloat01() + 1.0f) * g_6628cc;
 					value = (int) (*(unsigned char*) ((char*) entry + 0xc) * g_662c30
 						* g_6652e8[entry[0]] * a);
 					if (value <= 0)
 						continue;
-					if (((fcn_004f1790((char*) *(int*) (a0 + 0x65), entry) ^ gm_GameTime) & 1) != 0)
+					if (((fcn_004f1790((char*) *(int*) (entity + 0x65), entry) ^ gm_GameTime) & 1) != 0)
 						continue;
-					handle = fcn_004f2d30((int) a0, entry[0],
-						fcn_004f1790((char*) *(int*) (a0 + 0x65), entry), -value);
+					handle = fcn_004f2d30((int) entity, entry[0],
+						fcn_004f1790((char*) *(int*) (entity + 0x65), entry), -value);
 				}
 				n++;
 				continue;
@@ -113,9 +113,9 @@ void __cdecl fcn_004f3ef0(char* a0)
 			value = (int) (*(unsigned char*) ((char*) entry + 0xc) * g_662c30
 				* g_6652e8[entry[0]] * a);
 			if (value > 0) {
-				list = (char*) *(int*) (a0 + 0x65);
+				list = (char*) *(int*) (entity + 0x65);
 				if (((fcn_004f1790(list, entry) ^ gm_GameTime) & 1) == 0) {
-					handle = fcn_004f2d30((int) a0, result, fcn_004f1790(list, entry), -value);
+					handle = fcn_004f2d30((int) entity, result, fcn_004f1790(list, entry), -value);
 					n++;
 				}
 			}
@@ -132,46 +132,46 @@ void __cdecl fcn_004f3ef0(char* a0)
 				continue;
 			result = fcn_004f4440((int) slot, *(unsigned char*) ((char*) entry + 0xc), entry[0], 0, &out);
 			if (slot == home) {
-				handle = fcn_004f2810((int) slot, (int) a0, entry[0],
-					fcn_004f1790((char*) *(int*) (a0 + 0x65), entry), 10, 0);
+				handle = fcn_004f2810((int) slot, (int) entity, entry[0],
+					fcn_004f1790((char*) *(int*) (entity + 0x65), entry), 10, 0);
 			} else if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
 				value = fcn_0050d320(slot, (char) g_773d75);
 				if ((int) (value * g_66417c) > result) {
-					handle = fcn_004f2810((int) slot, (int) a0, entry[0],
-						fcn_004f1790((char*) *(int*) (a0 + 0x65), entry), 10, result);
+					handle = fcn_004f2810((int) slot, (int) entity, entry[0],
+						fcn_004f1790((char*) *(int*) (entity + 0x65), entry), 10, result);
 					n++;
 					count++;
 					total += out;
 					continue;
 				}
-				handle = fcn_004f2a10(0, (int) a0, entry[0],
-					fcn_004f1790((char*) *(int*) (a0 + 0x65), entry));
+				handle = fcn_004f2a10(0, (int) entity, entry[0],
+					fcn_004f1790((char*) *(int*) (entity + 0x65), entry));
 			} else {
 				memset(block, 0, sizeof(block));
 				*(int*) ((char*) block + 8) = *(int*) (slot + 4);
 				*(int*) ((char*) block + 0x28) = gm_GameTime;
 				*(int*) ((char*) block + 0x30) = g_7f4c08;
-				*(int*) ((char*) block + 0xc) = *(int*) (a0 + 1);
+				*(int*) ((char*) block + 0xc) = *(int*) (entity + 1);
 				*(int*) ((char*) block + 0x2c) = g_7f4c04;
-				*(int*) ((char*) block + 0x58) = *(int*) (a0 + 1);
+				*(int*) ((char*) block + 0x58) = *(int*) (entity + 1);
 				*(unsigned char*) ((char*) block + 4) = 0x92;
 				*(unsigned short*) ((char*) block + 0x34) = (unsigned short) g_7f4c0c;
 				*(unsigned char*) ((char*) block + 0x36) = 9;
 				*(int*) ((char*) block + 0x5c) = entry[0];
-				*(char*) ((char*) block + 0x60) = (char) fcn_004f1790((char*) *(int*) (a0 + 0x65), entry);
+				*(char*) ((char*) block + 0x60) = (char) fcn_004f1790((char*) *(int*) (entity + 0x65), entry);
 				*(int*) ((char*) block + 0x64) = result;
 				*(int*) ((char*) block + 0x68) = 10;
 				handle = fcn_004c5530(block);
 			}
 			n++;
-		} while ((entry = (int*) FindSlotEntryFiltered(0, a0, entry, (void*) fcn_004f1850, 0xff)) != 0);
+		} while ((entry = (int*) FindSlotEntryFiltered(0, entity, entry, (void*) fcn_004f1850, 0xff)) != 0);
 	}
-	if (fcn_004f13a0(a0) < 4)
-		fcn_004f2e80(a0, gm_RandomMod(2) + 1);
+	if (fcn_004f13a0(entity) < 4)
+		fcn_004f2e80(entity, gm_RandomMod(2) + 1);
 	if (home != 0 && (*(char*) (home + 2) == 6 || *(char*) (home + 2) == 7)) {
 		if (count > 0)
-			fcn_005b2d50((int) home, (int) a0, count, total);
+			fcn_005b2d50((int) home, (int) entity, count, total);
 		if (hits != 0)
-			fcn_005b2c60((int) home, (int) a0);
+			fcn_005b2c60((int) home, (int) entity);
 	}
 }

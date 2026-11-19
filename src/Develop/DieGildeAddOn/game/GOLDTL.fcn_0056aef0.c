@@ -43,7 +43,7 @@ extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
 
 /* ADDRESS: GOLDTL 0x0056aef0 */
-void __cdecl fcn_0056aef0(char* a1)
+void __cdecl fcn_0056aef0(char* action)
 {
 	int* p;
 	char* e;
@@ -65,38 +65,38 @@ void __cdecl fcn_0056aef0(char* a1)
 
 	v = 0;
 	u = 0;
-	switch (*(int*)(a1 + 0x70)) {
+	switch (*(int*)(action + 0x70)) {
 	case 0:
-		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xac));
+		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(action + 0xac));
 		if (h == 0) {
-			*(int*)(a1 + 0x70) = -1;
+			*(int*)(action + 0x70) = -1;
 			return;
 		}
-		p = (int*)(a1 + 0x8c);
+		p = (int*)(action + 0x8c);
 		n = 8;
 		do {
 			e = (char*)gm_LookupEntityRecordById(*p);
 			if (e != 0) {
 				fcn_004c5c80(*(int*)(e + 4));
 				fcn_004c5da0(*(int*)(e + 4), *(int*)(h + 1), -1, 0, 1, "GebSpionage");
-				fcn_00529160(h, 0, *(unsigned short*)e, a1);
+				fcn_00529160(h, 0, *(unsigned short*)e, action);
 			}
 			p++;
 			n--;
 		} while (n != 0);
-		*(pos14_7f4c00*)(a1 + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*)(a1 + 0x52), 0, 0xa, 0);
-		*(int*)(a1 + 0x70) = 1;
+		*(pos14_7f4c00*)(action + 0x52) = gm_GameTime;
+		fcn_00500bb0((pos14_7f4c00*)(action + 0x52), 0, 0xa, 0);
+		*(int*)(action + 0x70) = 1;
 		return;
 
 	case 1:
 		v = 1;
-		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xac));
+		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(action + 0xac));
 		if (h == 0) {
-			*(int*)(a1 + 0x70) = -1;
+			*(int*)(action + 0x70) = -1;
 			return;
 		}
-		p = (int*)(a1 + 0x8c);
+		p = (int*)(action + 0x8c);
 		n = 8;
 		do {
 			e = (char*)gm_LookupEntityRecordById(*p);
@@ -112,13 +112,13 @@ void __cdecl fcn_0056aef0(char* a1)
 			n--;
 		} while (n != 0);
 		if (v == 0) {
-			*(pos14_7f4c00*)(a1 + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*)(a1 + 0x52), 0, 5, 0);
+			*(pos14_7f4c00*)(action + 0x52) = gm_GameTime;
+			fcn_00500bb0((pos14_7f4c00*)(action + 0x52), 0, 5, 0);
 			return;
 		}
 		k = 0;
 		t = 0;
-		p = (int*)(a1 + 0x8c);
+		p = (int*)(action + 0x8c);
 		n = 8;
 		do {
 			e = (char*)gm_LookupEntityRecordById(*p);
@@ -130,14 +130,14 @@ void __cdecl fcn_0056aef0(char* a1)
 			n--;
 		} while (n != 0);
 		if (k == 0) {
-			fcn_00546190(a1);
+			fcn_00546190(action);
 			return;
 		}
 		t = t / k;
 		d = (1.0 > (double)t) ? 1.0 : (double)t;
-		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xac));
+		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(action + 0xac));
 		if (h == 0) {
-			*(int*)(a1 + 0x70) = -1;
+			*(int*)(action + 0x70) = -1;
 			return;
 		}
 		v = fcn_0050c4e0((unsigned char*)h);
@@ -147,16 +147,16 @@ void __cdecl fcn_0056aef0(char* a1)
 			d = 2880.0f;
 		}
 		i = (int)d;
-		*(pos14_7f4c00*)(a1 + 0x44) = gm_GameTime;
-		*(pos14_7f4c00*)(a1 + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*)(a1 + 0x52), 0, i, 0);
-		*(int*)(a1 + 0x70) = 2;
+		*(pos14_7f4c00*)(action + 0x44) = gm_GameTime;
+		*(pos14_7f4c00*)(action + 0x52) = gm_GameTime;
+		fcn_00500bb0((pos14_7f4c00*)(action + 0x52), 0, i, 0);
+		*(int*)(action + 0x70) = 2;
 		return;
 
 	case 2:
-		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xb0));
+		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(action + 0xb0));
 		if (h == 0) {
-			*(int*)(a1 + 0x70) = -1;
+			*(int*)(action + 0x70) = -1;
 			return;
 		}
 		i = *(unsigned short*)(h + 0x27);
@@ -164,7 +164,7 @@ void __cdecl fcn_0056aef0(char* a1)
 		q = (char*)gm_SetupEntityQuery((unsigned char*)h);
 		t = 0;
 		k = 0;
-		p = (int*)(a1 + 0x8c);
+		p = (int*)(action + 0x8c);
 		n = 8;
 		do {
 			e = (char*)gm_LookupEntityRecordById(*p);
@@ -180,14 +180,14 @@ void __cdecl fcn_0056aef0(char* a1)
 			n--;
 		} while (n != 0);
 		if (k == 0) {
-			fcn_00546190(a1);
+			fcn_00546190(action);
 			return;
 		}
 		t = t / k;
 		t = (int)((42.0f > (double)t) ? 42.0f : (double)t);
-		h2 = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xac));
+		h2 = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(action + 0xac));
 		if (h2 == 0) {
-			*(int*)(a1 + 0x70) = -1;
+			*(int*)(action + 0x70) = -1;
 			return;
 		}
 		i = *(unsigned short*)(h2 + 0x27);
@@ -228,20 +228,20 @@ void __cdecl fcn_0056aef0(char* a1)
 					io_FormatTextBuffer(buf, 0x19f8, *(unsigned short*)u, *(unsigned short*)r, h2);
 					i = fcn_005049a0((unsigned char*)h);
 					he_MessageBoxQuickjump(*(int*)(ent + 4), *(int*)(ent + 4), buf, 1, 0x5f0,
-						*(int*)(a1 + 0xb0), *(int*)((char*)i + 2), 0, "_NACHRICHTEN_HS_78");
+						*(int*)(action + 0xb0), *(int*)((char*)i + 2), 0, "_NACHRICHTEN_HS_78");
 				}
 			}
 		}
-		fcn_00546190(a1);
+		fcn_00546190(action);
 		return;
 
 	case -2:
 	case -1:
-		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(a1 + 0xb0));
+		h = (char*)gm_StartFilteredEntitySearch(1, 1, *(int*)(action + 0xb0));
 		if (h != 0) {
 			q = (char*)gm_SetupEntityQuery((unsigned char*)h);
 		}
-		p = (int*)(a1 + 0x8c);
+		p = (int*)(action + 0x8c);
 		n = 8;
 		do {
 			e = (char*)gm_LookupEntityRecordById(*p);
@@ -255,11 +255,11 @@ void __cdecl fcn_0056aef0(char* a1)
 			p++;
 			n--;
 		} while (n != 0);
-		fcn_00546190(a1);
+		fcn_00546190(action);
 		return;
 
 	default:
 		break;
 	}
-	fcn_00546190(a1);
+	fcn_00546190(action);
 }

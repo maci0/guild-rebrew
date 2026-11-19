@@ -88,8 +88,8 @@ int __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_0046f740(int x, int y, int id, int layer);
 
 /* ADDRESS: GOLDTL 0x0046e940 */
-int __cdecl fcn_0046e940(unsigned int a0, unsigned int a1, unsigned int a2, int a3,
-	unsigned int a4)
+int __cdecl fcn_0046e940(unsigned int x, unsigned int y, unsigned int width, int height,
+	unsigned int flags)
 {
 	WinRec* rec;
 	int v9[23];
@@ -113,11 +113,11 @@ found:
 		return i;
 	}
 	rec = (WinRec*) (i * 0x3cc + 0x1015f40);
-	rec->x4 = a0;
-	rec->xc = a2;
-	rec->x8 = a1;
-	rec->x10 = a3;
-	rec->flags = a4;
+	rec->x4 = x;
+	rec->xc = width;
+	rec->x8 = y;
+	rec->x10 = height;
+	rec->flags = flags;
 	rec->x18 = 4;
 	rec->x1c = 4;
 	rec->x20 = 4;
@@ -125,21 +125,21 @@ found:
 	rec->x3a0 = 0;
 	rec->x270 = 4;
 	rec->x274 = 0;
-	if (a4 & 4) {
+	if (flags & 4) {
 		rec->x288 = g_67d3a0;
 	}
-	if (a4 & 0x200) {
-		rec->x254 = a3;
-		rec->x258 = -a3;
-		rec->x25c = -a3;
+	if (flags & 0x200) {
+		rec->x254 = height;
+		rec->x258 = -height;
+		rec->x25c = -height;
 	}
-	if (a4 & 1) {
+	if (flags & 1) {
 		rec->x3a4 = 0.65f;
 	}
-	if (a4 & 0x1000) {
+	if (flags & 0x1000) {
 		memset(v9, 0, sizeof(v9));
-		v9[1] = a2;
-		v9[2] = a3;
+		v9[1] = width;
+		v9[2] = height;
 		h = fcn_004770a0(v9, 0xb);
 		rec->x30 = h;
 		if (h == 0) {
@@ -198,14 +198,14 @@ found:
 	rec->x3ac = 0;
 	rec->x3b0 = 0;
 	rec->x3b4 = 0;
-	if (a4 & 8) {
+	if (flags & 8) {
 		fcn_0046f740(3, 3, g_67d390, i);
 	}
-	if (a4 & 0x20) {
+	if (flags & 0x20) {
 		fcn_0046f740((short) (rec->xc - 0xc), 3, g_67d390 + 1, i);
 		fcn_0046f740((short) (rec->xc - 0xc), (short) (rec->x10 - 10), g_67d390 + 2, i);
 	}
-	if (a4 & 0x10) {
+	if (flags & 0x10) {
 		rec->x3c = m_alloc(0x17d0, "d2_t:w->txt");
 	}
 	d2_CurrentWindowId = i;

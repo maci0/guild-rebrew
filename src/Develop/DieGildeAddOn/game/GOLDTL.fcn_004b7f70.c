@@ -14,7 +14,7 @@ extern void __cdecl fcn_004c54c0(int, int, int, int);
 /* Collects the entity ids in the given building's filter chain, drops repeated
  * ids, emits the remaining ones and announces the building's road segment. */
 /* ADDRESS: GOLDTL 0x004b7f70 */
-int __cdecl fcn_004b7f70(unsigned int* a0)
+int __cdecl fcn_004b7f70(unsigned int* request)
 {
 	unsigned short* ent;
 	int r; unsigned short owner;
@@ -29,7 +29,7 @@ int __cdecl fcn_004b7f70(unsigned int* a0)
 	double d;
 
 	cnt = 0;
-	ent = (unsigned short*) gm_LookupEntityRecordById(*a0);
+	ent = (unsigned short*) gm_LookupEntityRecordById(*request);
 	if (ent == 0) {
 		return 1;
 	}
@@ -70,9 +70,9 @@ int __cdecl fcn_004b7f70(unsigned int* a0)
 	d = (double) v + *(double*) 0x662a48;
 	n = (int) (((double) gm_WalkEntityChain(owner) * d) *
 	    *(double*) 0x6640e8);
-	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a0 + 4) + 0x12e7, n);
+	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
 	fcn_00545d40(*(int*) ((char*) ent + 4), *(int*) ((char*) ent + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
-	fcn_004c51a0(-1, *(int*) a0, *(char*) 0x773d75, n);
+	fcn_004c51a0(-1, *(int*) request, *(char*) 0x773d75, n);
 	return 0;
 }

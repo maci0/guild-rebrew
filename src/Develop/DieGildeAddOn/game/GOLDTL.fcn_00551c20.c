@@ -11,7 +11,7 @@ void __cdecl fcn_00500bb0(void* clock, int arg2, int arg3, int arg4);
 /* ADDRESS: GOLDTL 0x00551c20 */
 void __cdecl fcn_00551c20(char* obj)
 {
-	char* v;
+	char* otherAction;
 	unsigned int idx;
 	unsigned char type;
 	unsigned char shade;
@@ -26,13 +26,13 @@ void __cdecl fcn_00551c20(char* obj)
 		return;
 	}
 	{
-		v = (char*) fcn_005463a0(2, 2, idx, 0, 0x60);
-		while (v != 0) {
-			if (v != obj) {
+		otherAction = (char*) fcn_005463a0(2, 2, idx, 0, 0x60);
+		while (otherAction != 0) {
+			if (otherAction != obj) {
 				fcn_00546190(obj);
 				return;
 			}
-			v = (char*) he_fn_Handlung();
+			otherAction = (char*) he_fn_Handlung();
 		}
 		idx = *(unsigned short*) (obj + 8);
 		type = *(unsigned char*) (obj + 0xae);

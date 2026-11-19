@@ -48,7 +48,7 @@ typedef struct {
 #pragma pack(pop)
 
 /* ADDRESS: GOLDTL 0x005705a0 */
-void __cdecl fcn_005705a0(int a0, char* rec)
+void __cdecl fcn_005705a0(int action, char* rec)
 {
 	TIME_JOB job;
 	char* entity;
@@ -118,7 +118,7 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 				next_idx = 0;
 			fcn_004c4510(rec, *(unsigned int*) (rec + 2));
 			fcn_004c4700(4, 1, (int) (rec + 0x2d) - g_aed32c, &next_idx);
-			*(unsigned int*) (a0 + 0x84) = fcn_004c53a0();
+			*(unsigned int*) (action + 0x84) = fcn_004c53a0();
 			return;
 		}
 		found = (char*) gm_EntityAccumulate(rec);

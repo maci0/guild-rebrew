@@ -8,7 +8,7 @@ void __cdecl fcn_00477560(const void* src, char* hdr);
 /* Block-encodes the colour-keyed sprite rectangle found inside the plane at
  * a5 (stride a7, origin a1) and returns the packed block buffer. */
 /* ADDRESS: GOLDTL 0x00477e70 */
-char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char a8, int a7)
+char* __cdecl fcn_00477e70(int a1, int a2, int width, int height, int a5, unsigned char a8, int a7)
 {
 	unsigned short minx;
 	unsigned short maxx;
@@ -31,17 +31,17 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char
 	int j;
 	int runs;
 
-	minx = a3;
-	miny = a4;
+	minx = width;
+	miny = height;
 	maxx = 0;
 	maxy = 0;
 	runs = 0;
-	b = (char*) m_alloc((a3 * 8 + 4) * a4 + 0x32, (char*) 0x67d9c0);
+	b = (char*) m_alloc((width * 8 + 4) * height + 0x32, (char*) 0x67d9c0);
 	g = (char*) a5;
 	p = (char*) (a5 + (a1 + a2 * a7) * 2);
-	for (i = 0; i < a4; i++) {
+	for (i = 0; i < height; i++) {
 			q = p;
-			for (j = 0; j < a3; j++) {
+			for (j = 0; j < width; j++) {
 				if (*(unsigned short*) q != 0) {
 					if (j > maxx) {
 						maxx = (unsigned short) j;

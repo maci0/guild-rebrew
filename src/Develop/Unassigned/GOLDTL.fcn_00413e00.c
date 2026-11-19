@@ -1,16 +1,16 @@
 /* ADDRESS: GOLDTL 0x00413e00 */
-int __cdecl fcn_00413e00(float *a0, float *a1, float *a2, float *a3,
-                         float *a4)
+int __cdecl fcn_00413e00(float *pointA, float *pointB, float *pointC, float *boxMin,
+                         float *boxMax)
 {
 	float v[7];
 
-	v[0] = ((*a0 < *a1 ? *a0 : *a1) < *a2) ? (*a0 < *a1 ? *a0 : *a1) : *a2;
-	v[1] = ((a1[1] > a0[1] ? a0[1] : a1[1]) < a2[1]) ? (a1[1] > a0[1] ? a0[1] : a1[1]) : a2[1];
-	v[2] = ((a1[2] > a0[2] ? a0[2] : a1[2]) < a2[2]) ? (a1[2] > a0[2] ? a0[2] : a1[2]) : a2[2];
-	v[3] = ((*a0 > *a1 ? *a0 : *a1) > *a2) ? (*a0 > *a1 ? *a0 : *a1) : *a2;
-	v[6] = ((a1[2] < a0[2] ? a0[2] : a1[2]) > a2[2]) ? (a1[2] < a0[2] ? a0[2] : a1[2]) : a2[2];
-	if (!(v[3] < *a3) && !(v[0] > *a4) && !(v[1] > a4[1]) && !(v[6] < a3[2]) &&
-	    !(v[2] > a4[2]))
+	v[0] = ((*pointA < *pointB ? *pointA : *pointB) < *pointC) ? (*pointA < *pointB ? *pointA : *pointB) : *pointC;
+	v[1] = ((pointB[1] > pointA[1] ? pointA[1] : pointB[1]) < pointC[1]) ? (pointB[1] > pointA[1] ? pointA[1] : pointB[1]) : pointC[1];
+	v[2] = ((pointB[2] > pointA[2] ? pointA[2] : pointB[2]) < pointC[2]) ? (pointB[2] > pointA[2] ? pointA[2] : pointB[2]) : pointC[2];
+	v[3] = ((*pointA > *pointB ? *pointA : *pointB) > *pointC) ? (*pointA > *pointB ? *pointA : *pointB) : *pointC;
+	v[6] = ((pointB[2] < pointA[2] ? pointA[2] : pointB[2]) > pointC[2]) ? (pointB[2] < pointA[2] ? pointA[2] : pointB[2]) : pointC[2];
+	if (!(v[3] < *boxMin) && !(v[0] > *boxMax) && !(v[1] > boxMax[1]) && !(v[6] < boxMin[2]) &&
+	    !(v[2] > boxMax[2]))
 		return 1;
 	return 0;
 }

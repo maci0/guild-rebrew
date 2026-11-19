@@ -23,7 +23,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x004dc3a0 */
-int __cdecl fcn_004dc3a0(char* a0, int a1, int* a2, int* a3)
+int __cdecl fcn_004dc3a0(char* a0, int a1, int* entityIds, int* a3)
 {
 	char info[0x18];
 	char buf[24];
@@ -49,7 +49,7 @@ int __cdecl fcn_004dc3a0(char* a0, int a1, int* a2, int* a3)
 	for (; i < 4; i++) {
 		char* e;
 
-		e = gm_LookupEntityRecordById(a2[i]);
+		e = gm_LookupEntityRecordById(entityIds[i]);
 		if (e != 0) {
 			ents[found] = e;
 			found++;
@@ -58,7 +58,7 @@ int __cdecl fcn_004dc3a0(char* a0, int a1, int* a2, int* a3)
 	if (found == 0) {
 		return -1;
 	}
-	result = fcn_004aae50(a0, a1, a2, &ret);
+	result = fcn_004aae50(a0, a1, entityIds, &ret);
 	gui = fcn_00470820(0, 0, (char*) 0x68c340);
 	fcn_00471d80(gui, 1);
 	d2_SetForm(gui, 0);

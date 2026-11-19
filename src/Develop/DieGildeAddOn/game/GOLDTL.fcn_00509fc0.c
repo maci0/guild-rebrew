@@ -62,7 +62,7 @@ void __cdecl fcn_004c5f60(int, int, int);
 float __cdecl gm_RandomQuadratic(void);
 
 /* ADDRESS: GOLDTL 0x00509fc0 */
-void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
+void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a2)
 {
 	char buf[0x800];
 	Packet pkt;
@@ -85,13 +85,13 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 	char* sp;
 	char* q;
 
-	stop = *(unsigned char**) (a0 + 0xb8);
+	stop = *(unsigned char**) (subjectRecord + 0xb8);
 	prev = 0;
 	n = 0;
 	count = 0;
 	best = 0;
 	sp = gm_CityEntity;
-	p = gm_StartFilteredEntitySearch(1, 3, *a0);
+	p = gm_StartFilteredEntitySearch(1, 3, *subjectRecord);
 	while (p != 0) {
 		mask = 0;
 		bit = 0;
@@ -136,7 +136,7 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 			fcn_004c5530(&pkt);
 			q = (char*) g_7f4ca4;
 			do {
-				if (*(unsigned char**) (q + 0x168) == cur && *(int*) q != *(int*) (a0 + 2)) {
+				if (*(unsigned char**) (q + 0x168) == cur && *(int*) q != *(int*) (subjectRecord + 2)) {
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 0x31;
 					pkt.x8 = *(int*) (sp + 4);
@@ -152,14 +152,14 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 		}
 		p = gm_FindNextFilteredEntity();
 	}
-	r = gm_SumTreasury(a0);
+	r = gm_SumTreasury(subjectRecord);
 	fcn_004c5150(*(int*) (sp + 4), -1, g_773d75, r);
-	p = (unsigned char*) fcn_00502cd0(*(int*) (a0 + 0xbc), 1, 5);
+	p = (unsigned char*) fcn_00502cd0(*(int*) (subjectRecord + 0xbc), 1, 5);
 	while (p != 0) {
-		fcn_004c5a60(*(int*) (a0 + 2), -1, *(int*) (p + 2));
+		fcn_004c5a60(*(int*) (subjectRecord + 2), -1, *(int*) (p + 2));
 		p = gm_NextEntityQueryMatch();
 	}
-	fcn_004c5150(*(int*) (a0 + 2), -1, g_773d75, fcn_0050b750(0x5dc, g_773d75));
+	fcn_004c5150(*(int*) (subjectRecord + 2), -1, g_773d75, fcn_0050b750(0x5dc, g_773d75));
 	if (a2 != 0) {
 		i = 100;
 		ui_f08 = 0x10;
@@ -175,62 +175,62 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 		ui_f30 = 0;
 		ui_f30 = 0;
 		ui_pos = (unsigned char) i;
-		fcn_004c4510((char*) a0, *(int*) (a0 + 2));
-		fcn_004c4570(1, 1, (unsigned short) ((int) a0 + (8 - g_aed32c)), (char*) &ui_pos);
-		fcn_004c4570(2, 1, (unsigned short) ((int) a0 + (10 - g_aed32c)), (char*) &ui_f08);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x194 - g_aed32c)), (char*) &ui_f14);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x198 - g_aed32c)), (char*) &ui_f30);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x19c - g_aed32c)), (char*) &ui_f30);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a0 - g_aed32c)), (char*) &ui_f30);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a4 - g_aed32c)), (char*) &ui_f30);
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x1a8 - g_aed32c)), (char*) &ui_f30);
-		fcn_004c4570(1, 1, (unsigned short) ((int) a0 + (0x1b0 - g_aed32c)), (char*) &ui_b0b);
-		fcn_004c4570(1, 1, (unsigned short) ((int) a0 + (0x1b1 - g_aed32c)), (char*) &ui_b0a);
-		fcn_004c5420(*(int*) (a0 + 2), 0x1c8, 4, 0x800000, 0);
+		fcn_004c4510((char*) subjectRecord, *(int*) (subjectRecord + 2));
+		fcn_004c4570(1, 1, (unsigned short) ((int) subjectRecord + (8 - g_aed32c)), (char*) &ui_pos);
+		fcn_004c4570(2, 1, (unsigned short) ((int) subjectRecord + (10 - g_aed32c)), (char*) &ui_f08);
+		fcn_004c4570(4, 1, (unsigned short) ((int) subjectRecord + (0x194 - g_aed32c)), (char*) &ui_f14);
+		fcn_004c4570(4, 1, (unsigned short) ((int) subjectRecord + (0x198 - g_aed32c)), (char*) &ui_f30);
+		fcn_004c4570(4, 1, (unsigned short) ((int) subjectRecord + (0x19c - g_aed32c)), (char*) &ui_f30);
+		fcn_004c4570(4, 1, (unsigned short) ((int) subjectRecord + (0x1a0 - g_aed32c)), (char*) &ui_f30);
+		fcn_004c4570(4, 1, (unsigned short) ((int) subjectRecord + (0x1a4 - g_aed32c)), (char*) &ui_f30);
+		fcn_004c4570(4, 1, (unsigned short) ((int) subjectRecord + (0x1a8 - g_aed32c)), (char*) &ui_f30);
+		fcn_004c4570(1, 1, (unsigned short) ((int) subjectRecord + (0x1b0 - g_aed32c)), (char*) &ui_b0b);
+		fcn_004c4570(1, 1, (unsigned short) ((int) subjectRecord + (0x1b1 - g_aed32c)), (char*) &ui_b0a);
+		fcn_004c5420(*(int*) (subjectRecord + 2), 0x1c8, 4, 0x800000, 0);
 		fcn_004c5360();
-		fcn_004c4510((char*) a0, *(int*) (a0 + 2));
+		fcn_004c4510((char*) subjectRecord, *(int*) (subjectRecord + 2));
 		for (i = 0; i < 8; i++) {
-			fcn_004c4570(4, 1, (unsigned short) ((i * 4 + 0x5c - g_aed32c) + (int) a0), (char*) &ui_f0c);
+			fcn_004c4570(4, 1, (unsigned short) ((i * 4 + 0x5c - g_aed32c) + (int) subjectRecord), (char*) &ui_f0c);
 		}
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x24 - g_aed32c)), (char*) &ui_f30);
+		fcn_004c4570(4, 1, (unsigned short) ((int) subjectRecord + (0x24 - g_aed32c)), (char*) &ui_f30);
 		ui_f0c = 0;
-		fcn_004c4570(4, 1, (unsigned short) ((int) a0 + (0x2c - g_aed32c)), (char*) &ui_f0c);
-		fcn_004c4570(2, 1, (unsigned short) ((int) a0 + (0x28 - g_aed32c)), (char*) &ui_f30);
+		fcn_004c4570(4, 1, (unsigned short) ((int) subjectRecord + (0x2c - g_aed32c)), (char*) &ui_f0c);
+		fcn_004c4570(2, 1, (unsigned short) ((int) subjectRecord + (0x28 - g_aed32c)), (char*) &ui_f30);
 		fcn_004c5360();
-		fcn_004c5480(*(int*) (a0 + 2), 0x7c, -*(float*) (a0 + 0x3e));
+		fcn_004c5480(*(int*) (subjectRecord + 2), 0x7c, -*(float*) (subjectRecord + 0x3e));
 		h = gm_RandomQuadratic();
-		fcn_004c5480(*(int*) (a0 + 2), 0x14, (float) h * 7.0f + 30.0f - *(float*) (a0 + 10));
-		fcn_004c5480(*(int*) (a0 + 2), 0x1c, 1000.0f - *(float*) (a0 + 0xe));
-		fcn_004c5480(*(int*) (a0 + 2), 0x18, 1000.0f - *(float*) (a0 + 0xc));
-		fcn_004c5480(*(int*) (a0 + 2), 0x20, 12.0f - *(float*) (a0 + 0x10));
-		fcn_004c4510((char*) a0, *(int*) (a0 + 2));
+		fcn_004c5480(*(int*) (subjectRecord + 2), 0x14, (float) h * 7.0f + 30.0f - *(float*) (subjectRecord + 10));
+		fcn_004c5480(*(int*) (subjectRecord + 2), 0x1c, 1000.0f - *(float*) (subjectRecord + 0xe));
+		fcn_004c5480(*(int*) (subjectRecord + 2), 0x18, 1000.0f - *(float*) (subjectRecord + 0xc));
+		fcn_004c5480(*(int*) (subjectRecord + 2), 0x20, 12.0f - *(float*) (subjectRecord + 0x10));
+		fcn_004c4510((char*) subjectRecord, *(int*) (subjectRecord + 2));
 		for (i = 0; i < 5; i++) {
 			ui_b34 = 0;
-			fcn_004c4700(1, 1, (i - g_aed32c) + 0x80 + (int) a0, (char*) &ui_b34);
+			fcn_004c4700(1, 1, (i - g_aed32c) + 0x80 + (int) subjectRecord, (char*) &ui_b34);
 		}
 		r = fcn_004c53a0();
 	}
-	io_FormatTextBuffer(a1, 0x1c4f, *a0, fcn_0050b750(0x5dc, g_773d75));
+	io_FormatTextBuffer(reportText, 0x1c4f, *subjectRecord, fcn_0050b750(0x5dc, g_773d75));
 	if (prev != 0) {
 		io_FormatTextBuffer(buf, s_6999a8, prev);
-		strcat(a1, buf);
+		strcat(reportText, buf);
 	}
 	if (stop != 0) {
 		io_FormatTextBuffer(buf, s_6999a8, stop);
-		strcat(a1, buf);
+		strcat(reportText, buf);
 	}
 	if (count == 0) {
 		return;
 	}
 	io_FormatTextBuffer(buf, 0x1c50);
-	strcat(a1, buf);
+	strcat(reportText, buf);
 	if (count <= 0) {
 		return;
 	}
 	i = 0;
 	while (i <= 5) {
 		io_FormatTextBuffer(buf, s_6999a8, list[i]);
-		strcat(a1, buf);
+		strcat(reportText, buf);
 		i++;
 		if (count <= i) {
 			return;
@@ -240,5 +240,5 @@ void __cdecl fcn_00509fc0(unsigned short* a0, char* a1, int a2)
 		return;
 	}
 	io_FormatTextBuffer(buf, 0xb6, count - i);
-	strcat(a1, buf);
+	strcat(reportText, buf);
 }

@@ -11,7 +11,7 @@ int __cdecl _ftol(void);
 /* Picks the first free animation slot from a random start, updates the four
  * packed flags fields for the chosen slot and hands the record to the pool. */
 /* ADDRESS: GOLDTL 0x005086f0 */
-unsigned int __cdecl fcn_005086f0(unsigned short* a0)
+unsigned int __cdecl fcn_005086f0(unsigned short* objectContext)
 {
 	int slots[8];
 	int flags;
@@ -28,7 +28,7 @@ unsigned int __cdecl fcn_005086f0(unsigned short* a0)
 	slots[1] = 6;
 	slots[2] = 7;
 	slots[3] = 8;
-	flags = *(int*) ((char*) a0 + 0x2c);
+	flags = *(int*) ((char*) objectContext + 0x2c);
 	if ((flags & 0x1c000) == 0) {
 		slots[4] = 1;
 	}
@@ -67,7 +67,7 @@ unsigned int __cdecl fcn_005086f0(unsigned short* a0)
 		return 0;
 	}
 	n = (int) ((float) value * *(float*) &slots[5]);
-	flags = *(int*) ((char*) a0 + 0x2c);
+	flags = *(int*) ((char*) objectContext + 0x2c);
 	if (id == 5) {
 		value = (value << 0x17 ^ flags) & 0x1800000;
 	} else if (id == 6) {
@@ -79,9 +79,9 @@ unsigned int __cdecl fcn_005086f0(unsigned short* a0)
 	}
 	flags = flags ^ value;
 	slots[5] = flags;
-	fcn_004c4510(a0, *(int*) ((char*) a0 + 4));
+	fcn_004c4510(objectContext, *(int*) ((char*) objectContext + 4));
 	fcn_004c4570(4, 1, 0x2c, &slots[5]);
 	fcn_004c5360();
-	fcn_004ff210(*a0, -n);
+	fcn_004ff210(*objectContext, -n);
 	return id;
 }

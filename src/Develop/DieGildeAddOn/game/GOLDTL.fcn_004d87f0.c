@@ -14,7 +14,7 @@ char __cdecl SelectTextureSet(void*, void*, unsigned char, char);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x004d87f0 */
-void __cdecl fcn_004d87f0(int* a0)
+void __cdecl fcn_004d87f0(int* orderRecord)
 {
 	char buf[0x100];
 	float rotation[3];
@@ -26,12 +26,12 @@ void __cdecl fcn_004d87f0(int* a0)
 	unsigned char lod;
 
 	ent = 0;
-	if (a0[1] == 0) {
+	if (orderRecord[1] == 0) {
 		return;
 	}
-	info = fcn_00445600(0, 0x40, 0, (char*) a0 + 0x10);
-	if (a0[0] != -1) {
-		ent = gm_LookupEntityRecordIn32SlotTable(a0[0]);
+	info = fcn_00445600(0, 0x40, 0, (char*) orderRecord + 0x10);
+	if (orderRecord[0] != -1) {
+		ent = gm_LookupEntityRecordIn32SlotTable(orderRecord[0]);
 		*(unsigned char*) (*(int*) (ent + 0x184) + 0x8d) |= 4;
 		io_FormatTextBuffer(buf, 0x11b8, *(unsigned short*) ent);
 		fcn_00533a40(buf);

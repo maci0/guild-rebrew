@@ -20,7 +20,7 @@ int __cdecl fcn_00545d40(int a, int b, char* s, int flag, int c, int d);
 
 /* Builds a chat line for the owner of the record named by a0. */
 /* ADDRESS: GOLDTL 0x004b7800 */
-int __cdecl fcn_004b7800(int* a0)
+int __cdecl fcn_004b7800(int* request)
 {
 	char buf[512];
 	char* h;
@@ -32,7 +32,7 @@ int __cdecl fcn_004b7800(int* a0)
 	double d;
 	F8 f;
 
-	h = gm_LookupEntityRecordById(*a0);
+	h = gm_LookupEntityRecordById(*request);
 	if (h == 0)
 		return 1;
 	if (fcn_005c6270(h, 0x290) != 0)
@@ -45,9 +45,9 @@ int __cdecl fcn_004b7800(int* a0)
 		return 0x400;
 	d = (double) (gm_RandomMod(3) & 0xffff) + 1.0;
 	r = (int) ((double) gm_WalkEntityChain(*(unsigned short*) h) * d * 0.01);
-	w = *(unsigned short*) ((char*) a0 + 4);
+	w = *(unsigned short*) ((char*) request + 4);
 	io_FormatTextBuffer(buf, w + 0x12e7, y, r);
-	fcn_004c51a0(-1, *a0, g_773d75, r);
+	fcn_004c51a0(-1, *request, g_773d75, r);
 	e = (char*) *(int*) (h + 4);
 	fcn_00545d40((int) e, (int) e, buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;

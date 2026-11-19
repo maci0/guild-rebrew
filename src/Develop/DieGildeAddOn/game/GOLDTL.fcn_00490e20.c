@@ -14,7 +14,7 @@ int __cdecl fcn_004ec710(void);
 int __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x00490e20 */
-int __cdecl fcn_00490e20(char* a0, int a1, int* a2)
+int __cdecl fcn_00490e20(char* a0, int a1, int* outValue)
 {
 	int v5[9];
 	int mode;
@@ -64,17 +64,17 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* a2)
 			v = v5[6];
 			if (v - 3 > r) {
 				cur = (v - (gm_RandomMod(2) & 0xffff)) - 1;
-				*a2 = cur;
+				*outValue = cur;
 				if (v5[1] > cur)
 					cur = v5[1];
-				*a2 = cur;
+				*outValue = cur;
 				return 1;
 			}
 			if (v + 3 < r) {
 				cur = (gm_RandomMod(2) & 0xffff) + v + 1;
 				if (v5[2] < cur)
 					cur = v5[2];
-				*a2 = cur;
+				*outValue = cur;
 				return 1;
 			}
 		}

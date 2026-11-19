@@ -33,20 +33,20 @@ void __cdecl fcn_0057ceb0(char* entity)
 	Counts57ceb0 counts;
 	int handles[4];
 	unsigned short* p;
-	char* v3;
+	char* ownerRec;
 	char* item;
 	int id;
 	int n;
 	int queued;
 	int i;
-	void* v15;
+	void* resolvedTarget;
 
-	v3 = gm_LookupEntityRecordById(*(int*) (entity + 0xc));
-	if (v3 == 0) {
+	ownerRec = gm_LookupEntityRecordById(*(int*) (entity + 0xc));
+	if (ownerRec == 0) {
 		return;
 	}
-	gm_ResolveEntityById(&v15, 0, 0, *(int*) (entity + 0x10));
-	if (v15 == 0) {
+	gm_ResolveEntityById(&resolvedTarget, 0, 0, *(int*) (entity + 0x10));
+	if (resolvedTarget == 0) {
 		return;
 	}
 	memset(slots, 0, sizeof(slots));
@@ -60,7 +60,7 @@ void __cdecl fcn_0057ceb0(char* entity)
 		p++;
 	}
 	if (n != 0) {
-		fcn_004a51d0(v3, n, slots, &counts);
+		fcn_004a51d0(ownerRec, n, slots, &counts);
 		queued = 0;
 		p = (unsigned short*) (entity + 0xc8);
 		for (i = 0; i < n; i++) {
@@ -70,7 +70,7 @@ void __cdecl fcn_0057ceb0(char* entity)
 				if (item != 0) {
 					if (*(int*) (item + 0xe) < 3) {
 						handles[queued++] = id;
-						fcn_004c51f0(*(int*) (v3 + 4), -1, (short) id, 1, g_773d75, 0);
+						fcn_004c51f0(*(int*) (ownerRec + 4), -1, (short) id, 1, g_773d75, 0);
 						goto next;
 					}
 					*(int*) (entity + 0xac) += (int) fcn_0050bb50(id, g_773d75);
@@ -79,7 +79,7 @@ void __cdecl fcn_0057ceb0(char* entity)
 				if (counts.total < 6) {
 					counts.total++;
 					handles[queued++] = id;
-					fcn_004c51f0(*(int*) (v3 + 4), -1, (short) id, 1, g_773d75, 0);
+					fcn_004c51f0(*(int*) (ownerRec + 4), -1, (short) id, 1, g_773d75, 0);
 					goto next;
 				}
 				*(int*) (entity + 0xac) += (int) fcn_0050bb50(id, g_773d75);
@@ -97,7 +97,7 @@ next:
 	else {
 		io_FormatTextBuffer(msg, 0x41f1, *(unsigned int*) (entity + 0xac));
 	}
-	fcn_004c51a0(*(int*) (v3 + 4), -1, g_773d75, *(unsigned int*) (entity + 0xac));
-	io_FormatTextBuffer(buf, 0x41f0, v15, msg);
-	fcn_00545d40(*(int*) (v3 + 4), -1, buf, 0, 0x5ff, 0);
+	fcn_004c51a0(*(int*) (ownerRec + 4), -1, g_773d75, *(unsigned int*) (entity + 0xac));
+	io_FormatTextBuffer(buf, 0x41f0, resolvedTarget, msg);
+	fcn_00545d40(*(int*) (ownerRec + 4), -1, buf, 0, 0x5ff, 0);
 }

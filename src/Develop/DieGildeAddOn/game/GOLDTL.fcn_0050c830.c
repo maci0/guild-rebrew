@@ -37,7 +37,7 @@ void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int f
  * minute-of-day is scaled, the remainder is distributed over the days
  * between the records, and the end record's minute-of-day is scaled too. */
 /* ADDRESS: GOLDTL 0x0050c830 */
-int __cdecl fcn_0050c830(Time* a0, Time* a1, char* a2)
+int __cdecl fcn_0050c830(Time* start, Time* end, char* building)
 {
 	float f1;
 	float f2;
@@ -50,23 +50,23 @@ int __cdecl fcn_0050c830(Time* a0, Time* a1, char* a2)
 	int acc;
 	int res1;
 
-	idx = fcn_00500e20((int*) a0);
+	idx = fcn_00500e20((int*) start);
 	f1 = g_696540[idx];
 	f2 = g_696550[idx];
 	if ((g_7747b0 & 0x80) != 0) {
-		return gm_GetElapsedMinutes((TimeKey*) a0, (TimeKey*) a1);
+		return gm_GetElapsedMinutes((TimeKey*) start, (TimeKey*) end);
 	}
-	if (a2 != 0) {
-		if (lpGebaeudePROT[*(unsigned char*) a2 * 0x24d] == 0x1d) {
-			return gm_GetElapsedMinutes((TimeKey*) a0, (TimeKey*) a1);
+	if (building != 0) {
+		if (lpGebaeudePROT[*(unsigned char*) building * 0x24d] == 0x1d) {
+			return gm_GetElapsedMinutes((TimeKey*) start, (TimeKey*) end);
 		}
 	}
-	if (fcn_00500cb0(a0, a1) > 0) {
+	if (fcn_00500cb0(start, end) > 0) {
 		return 0;
 	}
-	t = *a0;
+	t = *start;
 	i = t.day;
-	n = a1->day;
+	n = end->day;
 	if (i < n) {
 		acc = (int) (f2 * 60.0f - (float) (int) CLAMPF((float) (t.min + t.hour * 60), f1 * 60.0f, f2 * 60.0f));
 		i = ++t.day;
@@ -80,6 +80,6 @@ int __cdecl fcn_0050c830(Time* a0, Time* a1, char* a2)
 			acc = (int) ((double) acc + d);
 		}
 	}
-	res1 = (int) CLAMPF((float) (a1->min + a1->hour * 60), f1 * 60.0f, f2 * 60.0f);
+	res1 = (int) CLAMPF((float) (end->min + end->hour * 60), f1 * 60.0f, f2 * 60.0f);
 	return acc - (int) CLAMPF((float) (t.min + t.hour * 60), f1 * 60.0f, f2 * 60.0f) + res1;
 }

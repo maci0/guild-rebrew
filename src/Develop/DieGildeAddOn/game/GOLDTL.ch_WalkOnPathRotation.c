@@ -16,8 +16,8 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 	char buf[256];
 	char* inst;
 	char* o;
-	float v;
-	float t;
+	float turnDelta;
+	float turnStep;
 	float angle;
 	float dx;
 	float dy;
@@ -27,38 +27,38 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 	inst = *(char**) (obj + 0x14);
 	if (*(float*) (obj + 0x108) < 0.0f) {
 		o = *(char**) (inst + 0x34);
-		v = fcn_00444700(o, (float*) (obj + 0x124));
-		*(float*) (obj + 0x108) = v;
-		if (v <= 0.04 && v >= -0.04) {
-			angle = v + *(float*) (o + 0x88);
+		turnDelta = fcn_00444700(o, (float*) (obj + 0x124));
+		*(float*) (obj + 0x108) = turnDelta;
+		if (turnDelta <= 0.04 && turnDelta >= -0.04) {
+			angle = turnDelta + *(float*) (o + 0x88);
 			*(int*) (obj + 0x108) = 0;
 		} else {
 			ticks = ch_UpdateTime - g_67529c;
-			t = ticks * 0.9090909f;
+			turnStep = ticks * 0.9090909f;
 			if (*(int*) (inst + 4) & 8) {
-				t *= 0.4f;
+				turnStep *= 0.4f;
 			} else if (*(int*) (inst + 4) & 0x10) {
-				t *= 1.4f;
+				turnStep *= 1.4f;
 			}
-			if (fabs(v) > 2.0943951f && !(*(int*) (inst + 4) & 8)) {
+			if (fabs(turnDelta) > 2.0943951f && !(*(int*) (inst + 4) & 8)) {
 				*(float*) (inst + 0x1a4) = 0.4f;
 			}
-			if (fabs(v) > 1.5707964f) {
-				t *= 0.19999998807907104f;
-			} else if (fabs(v) > 1.0471976f) {
-				t *= 0.14f;
-			} else if (fabs(v) > 0.52359879f) {
-				t *= 0.06f;
+			if (fabs(turnDelta) > 1.5707964f) {
+				turnStep *= 0.19999998807907104f;
+			} else if (fabs(turnDelta) > 1.0471976f) {
+				turnStep *= 0.14f;
+			} else if (fabs(turnDelta) > 0.52359879f) {
+				turnStep *= 0.06f;
 			} else {
-				t *= 0.04f;
+				turnStep *= 0.04f;
 			}
-			angle = *(float*) (o + 0x88) - t;
+			angle = *(float*) (o + 0x88) - turnStep;
 			angle = (float) fmod(angle, 6.2831855f);
 			if (angle < 0.0) {
 				angle += 6.2831855f;
 			}
-			if (angle < v + *(float*) (o + 0x88)) {
-				angle = v + *(float*) (o + 0x88);
+			if (angle < turnDelta + *(float*) (o + 0x88)) {
+				angle = turnDelta + *(float*) (o + 0x88);
 				*(int*) (obj + 0x108) = 0;
 			}
 		}
@@ -68,38 +68,38 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 	}
 	if (*(float*) (obj + 0x108) > 0.0f) {
 		o = *(char**) (inst + 0x34);
-		v = fcn_00444700(o, (float*) (obj + 0x124));
-		*(float*) (obj + 0x108) = v;
-		if (v <= 0.04 && v >= -0.04) {
-			angle = v + *(float*) (o + 0x88);
+		turnDelta = fcn_00444700(o, (float*) (obj + 0x124));
+		*(float*) (obj + 0x108) = turnDelta;
+		if (turnDelta <= 0.04 && turnDelta >= -0.04) {
+			angle = turnDelta + *(float*) (o + 0x88);
 			*(int*) (obj + 0x108) = 0;
 		} else {
 			ticks = ch_UpdateTime - g_67529c;
-			t = ticks * 0.9090909f;
+			turnStep = ticks * 0.9090909f;
 			if (*(int*) (inst + 4) & 8) {
-				t *= 0.4f;
+				turnStep *= 0.4f;
 			} else if (*(int*) (inst + 4) & 0x10) {
-				t *= 0.8f;
+				turnStep *= 0.8f;
 			}
-			if (fabs(v) > 2.0943951f && !(*(int*) (inst + 4) & 8)) {
+			if (fabs(turnDelta) > 2.0943951f && !(*(int*) (inst + 4) & 8)) {
 				*(float*) (inst + 0x1a4) = 0.4f;
 			}
-			if (fabs(v) > 1.5707964f) {
-				t *= 0.19999998807907104f;
-			} else if (fabs(v) > 1.0471976f) {
-				t *= 0.14f;
-			} else if (fabs(v) > 0.52359879f) {
-				t *= 0.06f;
+			if (fabs(turnDelta) > 1.5707964f) {
+				turnStep *= 0.19999998807907104f;
+			} else if (fabs(turnDelta) > 1.0471976f) {
+				turnStep *= 0.14f;
+			} else if (fabs(turnDelta) > 0.52359879f) {
+				turnStep *= 0.06f;
 			} else {
-				t *= 0.04f;
+				turnStep *= 0.04f;
 			}
-			angle = *(float*) (o + 0x88) + t;
+			angle = *(float*) (o + 0x88) + turnStep;
 			angle = (float) fmod(angle, 6.2831855f);
 			if (angle < 0.0) {
 				angle += 6.2831855f;
 			}
-			if (angle > v + *(float*) (o + 0x88)) {
-				angle = v + *(float*) (o + 0x88);
+			if (angle > turnDelta + *(float*) (o + 0x88)) {
+				angle = turnDelta + *(float*) (o + 0x88);
 				*(int*) (obj + 0x108) = 0;
 			}
 		}

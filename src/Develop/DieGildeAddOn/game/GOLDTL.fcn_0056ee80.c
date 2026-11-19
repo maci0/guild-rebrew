@@ -60,7 +60,7 @@ int __cdecl gm_GetMsgField(int, int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x0056ee80 */
-void __cdecl fcn_0056ee80(char* a0)
+void __cdecl fcn_0056ee80(char* actionRecord)
 {
 	char msg[0x400];
 	char str[0x100];
@@ -85,118 +85,118 @@ void __cdecl fcn_0056ee80(char* a0)
 	memset(gestik[2] + 0x10, 0, 0x30);
 	i = 0;
 	count = 0;
-	switch (*(int*) (a0 + 0x70)) {
+	switch (*(int*) (actionRecord + 0x70)) {
 	case 0: {
 		int e;
 
-		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
+		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		if (rec1 == 0) {
 			goto tail;
 		}
 		for (cnt = 0; cnt < 8; cnt++) {
-			if (*(int*) (a0 + 0x8c + cnt * 4) != -1) {
-				e = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + cnt * 4));
+			if (*(int*) (actionRecord + 0x8c + cnt * 4) != -1) {
+				e = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + cnt * 4));
 				if (e != 0) {
-					fcn_00529160(rec1, 0, *(unsigned short*) e, (int) a0);
-					fcn_004c5c80(*(int*) (a0 + 0x8c + cnt * 4));
-					fcn_004c5da0(*(int*) (a0 + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 1, s_6a6dc4);
+					fcn_00529160(rec1, 0, *(unsigned short*) e, (int) actionRecord);
+					fcn_004c5c80(*(int*) (actionRecord + 0x8c + cnt * 4));
+					fcn_004c5da0(*(int*) (actionRecord + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 1, s_6a6dc4);
 				}
 			}
 		}
-		*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
-		fcn_00500bb0(a0 + 0x52, 0, 4, 0);
-		*(int*) (a0 + 0x70) = 1;
+		*(pos14_7f4c00*) (actionRecord + 0x52) = gm_GameTime;
+		fcn_00500bb0(actionRecord + 0x52, 0, 4, 0);
+		*(int*) (actionRecord + 0x70) = 1;
 		return;
 	}
 	case 1:
-		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
+		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		i = 0;
 		for (;;) {
-			if (*(int*) (a0 + 0x8c + i * 4) != -1) {
-				ent = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + i * 4));
+			if (*(int*) (actionRecord + 0x8c + i * 4) != -1) {
+				ent = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + i * 4));
 				if (ent != 0 && *(int*) (ent + 0x184) != 0 && fcn_00529670(ent, rec1) == 0) {
 					break;
 				}
 			}
 			i++;
 			if (i >= 8) {
-				*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
-				fcn_00500bb0(a0 + 0x52, 0, 0, 1);
-				*(int*) (a0 + 0x70) = 2;
+				*(pos14_7f4c00*) (actionRecord + 0x52) = gm_GameTime;
+				fcn_00500bb0(actionRecord + 0x52, 0, 0, 1);
+				*(int*) (actionRecord + 0x70) = 2;
 				return;
 			}
 		}
-		*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
-		fcn_00500bb0(a0 + 0x52, 0, 4, 0);
+		*(pos14_7f4c00*) (actionRecord + 0x52) = gm_GameTime;
+		fcn_00500bb0(actionRecord + 0x52, 0, 4, 0);
 		return;
 	case 2:
-		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
+		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		if (rec1 == 0) {
 			goto label_1bc;
 		}
 		row = (int) ((unsigned short) *(unsigned short*) (rec1 + 0x27) * 0x21c + (int) g_7f4ca0);
 		req[0] = rec1;
 		req[1] = 0x451c4000;
-		req[2] = (int) a0;
+		req[2] = (int) actionRecord;
 		req[3] = 0;
 		if (fcn_0055be70(req) != 0) {
 			h = req[3];
-			*(int*) (a0 + 0xb4) = fcn_004f4f60(0x17, 1,
-			    *(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (a0 + 8) * 0x21c + 4),
+			*(int*) (actionRecord + 0xb4) = fcn_004f4f60(0x17, 1,
+			    *(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (actionRecord + 8) * 0x21c + 4),
 			    *(int*) (row + 4), *(int*) (rec1 + 1));
-			*(int*) (a0 + 0xb8) = *(int*) (h + 4);
-			*(int*) (a0 + 0xbc) = *(int*) (h + 0xb0);
-			*(int*) (a0 + 0x70) = 3;
-			*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
+			*(int*) (actionRecord + 0xb8) = *(int*) (h + 4);
+			*(int*) (actionRecord + 0xbc) = *(int*) (h + 0xb0);
+			*(int*) (actionRecord + 0x70) = 3;
+			*(pos14_7f4c00*) (actionRecord + 0x52) = gm_GameTime;
 			return;
 		}
 label_1bc:
 		for (cnt = 0; cnt < 8; cnt++) {
-			if (*(int*) (a0 + 0x8c + cnt * 4) != -1) {
-				ent = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + cnt * 4));
+			if (*(int*) (actionRecord + 0x8c + cnt * 4) != -1) {
+				ent = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + cnt * 4));
 				if (ent != 0) {
-					fcn_00529160(rec1, 0, *(unsigned short*) ent, (int) a0);
-					fcn_004c5c80(*(int*) (a0 + 0x8c + cnt * 4));
-					fcn_004c5da0(*(int*) (a0 + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 0, s_6a6dc4);
-					fcn_004c5ed0(*(int*) (a0 + 0x8c + cnt * 4), gestik[gm_RandomMod(3)], 1);
+					fcn_00529160(rec1, 0, *(unsigned short*) ent, (int) actionRecord);
+					fcn_004c5c80(*(int*) (actionRecord + 0x8c + cnt * 4));
+					fcn_004c5da0(*(int*) (actionRecord + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 0, s_6a6dc4);
+					fcn_004c5ed0(*(int*) (actionRecord + 0x8c + cnt * 4), gestik[gm_RandomMod(3)], 1);
 				}
 			}
 		}
-		*(int*) (a0 + 0x70) = 5;
-		*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
-		fcn_00500bb0(a0 + 0x52, 0, 0xf, 0);
+		*(int*) (actionRecord + 0x70) = 5;
+		*(pos14_7f4c00*) (actionRecord + 0x52) = gm_GameTime;
+		fcn_00500bb0(actionRecord + 0x52, 0, 0xf, 0);
 		return;
 	case 3:
-		if (*(int*) (a0 + 0xb4) != -1 && fcn_004c4450(*(int*) (a0 + 0xb4)) == 0) {
+		if (*(int*) (actionRecord + 0xb4) != -1 && fcn_004c4450(*(int*) (actionRecord + 0xb4)) == 0) {
 			return;
 		}
-		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
-		q = (int) fcn_005463a0(1, 1, *(int*) (a0 + 0xb8));
-		if (rec1 != 0 && q != 0 && *(int*) (q + 0xd4) == *(int*) (a0 + 4) && *(int*) (a0 + 0xb4) != -1) {
-			ent = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0xb8));
-			h = (int) fcn_004c4480(*(int*) (a0 + 0xb4));
+		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
+		q = (int) fcn_005463a0(1, 1, *(int*) (actionRecord + 0xb8));
+		if (rec1 != 0 && q != 0 && *(int*) (q + 0xd4) == *(int*) (actionRecord + 4) && *(int*) (actionRecord + 0xb4) != -1) {
+			ent = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0xb8));
+			h = (int) fcn_004c4480(*(int*) (actionRecord + 0xb4));
 			if (ent != 0 && h != 0) {
 				fcn_004c58b0(*(int*) h, *(int*) (ent + 4));
 			}
-			*(int*) (a0 + 0x70) = 4;
-			fcn_00500bb0(a0 + 0x52, 0, 10, 0);
+			*(int*) (actionRecord + 0x70) = 4;
+			fcn_00500bb0(actionRecord + 0x52, 0, 10, 0);
 			return;
 		}
-		*(int*) (a0 + 0x70) = -1;
+		*(int*) (actionRecord + 0x70) = -1;
 		return;
 	case 4:
-		q = (int) fcn_005463a0(1, 1, *(int*) (a0 + 0xb8));
+		q = (int) fcn_005463a0(1, 1, *(int*) (actionRecord + 0xb8));
 		if (q == 0) {
-			*(int*) (a0 + 0x70) = -1;
+			*(int*) (actionRecord + 0x70) = -1;
 			return;
 		}
-		if (*(int*) (q + 0xd4) == *(int*) (a0 + 4)) {
-			fcn_00500bb0(a0 + 0x52, 0, 6, 0);
+		if (*(int*) (q + 0xd4) == *(int*) (actionRecord + 4)) {
+			fcn_00500bb0(actionRecord + 0x52, 0, 6, 0);
 			return;
 		}
-		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
+		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		if (rec1 != 0) {
-			val = (int) gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (a0 + 8) * 0x21c + 4));
+			val = (int) gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (actionRecord + 8) * 0x21c + 4));
 			row = (int) ((unsigned short) *(unsigned short*) (q + 8) * 0x21c + (int) g_7f4ca0);
 			if (row != 0 && val != 0) {
 				ent = fcn_0050b750(gm_RandomMod(200) + 0x226, g_773d75);
@@ -206,7 +206,7 @@ label_1bc:
 				fcn_00545d40(*(int*) (row + 4), *(int*) (row + 4), buf, 1, 0x5f0, (char*) 0x6a6a4c);
 				fcn_004c51a0(*(int*) (row + 4), *(int*) (val + 4), g_773d75, ent);
 			}
-			q = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xbc));
+			q = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xbc));
 			if (q != 0) {
 				fcn_004c4510(q, *(int*) (q + 1));
 				fcn_004c4670(4, 1, 0x65, &ent);
@@ -214,45 +214,45 @@ label_1bc:
 			}
 		}
 		for (cnt = 0; cnt < 8; cnt++) {
-			if (*(int*) (a0 + 0x8c + cnt * 4) != -1) {
-				val = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + cnt * 4));
+			if (*(int*) (actionRecord + 0x8c + cnt * 4) != -1) {
+				val = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + cnt * 4));
 				if (val != 0) {
 					fcn_004ff210(*(unsigned short*) val, 0xffffff9c - gm_RandomMod(100));
 				}
 			}
 		}
-		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xb0));
+		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xb0));
 		if (rec1 == 0) {
 			goto tail;
 		}
 		q = (int) gm_SetupEntityQuery((char*) rec1);
 		for (i = 0; i < 8; i++) {
-			if (*(int*) (a0 + 0x8c + i * 4) != -1) {
-				fcn_004c5c80(*(int*) (a0 + 0x8c + i * 4));
-				fcn_004c5da0(*(int*) (a0 + 0x8c + i * 4), *(int*) (rec1 + 1), *(int*) (q + 2), 0, 0, s_6a6a40);
+			if (*(int*) (actionRecord + 0x8c + i * 4) != -1) {
+				fcn_004c5c80(*(int*) (actionRecord + 0x8c + i * 4));
+				fcn_004c5da0(*(int*) (actionRecord + 0x8c + i * 4), *(int*) (rec1 + 1), *(int*) (q + 2), 0, 0, s_6a6a40);
 			}
 		}
-		fcn_00546190(a0);
+		fcn_00546190(actionRecord);
 		return;
 	case 5:
-		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
-		ent = (int) gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (a0 + 8) * 0x21c + 4));
+		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
+		ent = (int) gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (actionRecord + 8) * 0x21c + 4));
 		if (rec1 == 0 || ent == 0) {
-			*(int*) (a0 + 0x70) = 0xfffffffe;
+			*(int*) (actionRecord + 0x70) = 0xfffffffe;
 			return;
 		}
 		row = (int) ((unsigned short) *(unsigned short*) (rec1 + 0x27) * 0x21c + (int) g_7f4ca0);
-		h = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xb0));
+		h = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xb0));
 		if (h != 0) {
 			q = (int) gm_SetupEntityQuery((char*) h);
 			i = (int) fcn_00502cd0(*(int*) (h + 0x5d), 2, 6, 0, 0x116);
 			cnt = 8;
 			do {
-				if (*(int*) (a0 + 0x8c + (8 - cnt) * 4) != -1) {
-					val = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + (8 - cnt) * 4));
+				if (*(int*) (actionRecord + 0x8c + (8 - cnt) * 4) != -1) {
+					val = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4));
 					if (val != 0) {
-						fcn_004c5c80(*(int*) (a0 + 0x8c + (8 - cnt) * 4));
-						fcn_004c5da0(*(int*) (a0 + 0x8c + (8 - cnt) * 4), *(int*) (h + 1), *(int*) (q + 2), 0, 0, s_6a6dc4);
+						fcn_004c5c80(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4));
+						fcn_004c5da0(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4), *(int*) (h + 1), *(int*) (q + 2), 0, 0, s_6a6dc4);
 						count++;
 						fcn_00507e30((char*) val, 2);
 						fcn_00529160(h, 0, *(unsigned short*) val, 0);
@@ -262,7 +262,7 @@ label_1bc:
 			} while (cnt != 0);
 			val = 1;
 			fcn_004f4f60(0x17, 1,
-			    *(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (a0 + 8) * 0x21c + 4),
+			    *(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (actionRecord + 8) * 0x21c + 4),
 			    *(int*) (row + 4), *(int*) (h + 1));
 		} else {
 			val = 0;
@@ -272,7 +272,7 @@ label_1bc:
 		}
 		msg[0] = g_6b5c60[0];
 		memset(msg + 1, 0, 0x3ff);
-		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
+		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		h = (int) fcn_00502cd0(*(int*) (rec1 + 0x5d), 2, 6, 0, 0x2a);
 		fcn_0050c5d0((char*) rec1, req);
 		val = (int) (*(int*) req * g_665ed0);
@@ -315,12 +315,12 @@ label_1bc:
 		if (*(char*) (row + 2) == 6 || *(char*) (row + 2) == 7) {
 			io_FormatTextBuffer(buf, 0x1a86, rec1, val);
 			he_MessageBoxQuickjump(*(int*) (row + 4), *(int*) (row + 4), buf, 0, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
-			fcn_00546190(a0);
+			fcn_00546190(actionRecord);
 			return;
 		}
 		goto tail;
 label_fa92:
-		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xac));
+		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		if (rec1 == 0) {
 			goto tail;
 		}
@@ -331,21 +331,21 @@ label_fa92:
 		if (*(char*) (row + 2) == 6 || *(char*) (row + 2) == 7) {
 			io_FormatTextBuffer(buf, 0x19e9, rec1);
 			he_MessageBoxQuickjump(*(int*) (row + 4), *(int*) (row + 4), buf, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, 0);
-			fcn_00546190(a0);
+			fcn_00546190(actionRecord);
 			return;
 		}
 		goto tail;
 	case -2:
 	case -1:
-		h = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xb0));
+		h = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xb0));
 		if (h != 0) {
 			q = (int) gm_SetupEntityQuery((char*) h);
 		}
 		for (i = 0; i < 8; i++) {
-			if (*(int*) (a0 + 0x8c + i * 4) != -1) {
-				ent = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0x8c + i * 4));
+			if (*(int*) (actionRecord + 0x8c + i * 4) != -1) {
+				ent = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + i * 4));
 				if (ent != 0) {
-					fcn_004c5c80(*(int*) (a0 + 0x8c + i * 4));
+					fcn_004c5c80(*(int*) (actionRecord + 0x8c + i * 4));
 					if (h != 0 && q != 0) {
 						row = *(int*) (q + 2);
 						val = *(int*) (h + 1);
@@ -353,7 +353,7 @@ label_fa92:
 						row = -1;
 						val = -1;
 					}
-					fcn_004c5da0(*(int*) (a0 + 0x8c + i * 4), val, row, 0, 0, s_6a6dc4);
+					fcn_004c5da0(*(int*) (actionRecord + 0x8c + i * 4), val, row, 0, 0, s_6a6dc4);
 					fcn_00529160(0, 0, *(unsigned short*) ent, 0);
 				}
 			}
@@ -363,5 +363,5 @@ label_fa92:
 		return;
 	}
 tail:
-	fcn_00546190(a0);
+	fcn_00546190(actionRecord);
 }

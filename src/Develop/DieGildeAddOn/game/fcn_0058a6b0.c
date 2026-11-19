@@ -55,7 +55,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
 /* ADDRESS: GOLDTL 0x0058a6b0 */
-void __cdecl fcn_0058a6b0(char *a0)
+void __cdecl fcn_0058a6b0(char *gebaeude)
 {
     int tmp;
     int dlg;
@@ -106,7 +106,7 @@ void __cdecl fcn_0058a6b0(char *a0)
             if (d2_CurrentElementId == h1) {
                 if (fcn_00526010(&g_7f4ca0[g_774970], price, g_773d75) != 0
                     && fcn_00525f60(&g_7f4ca0[g_774970], 0x10) == 1
-                    && fcn_005898f0(a0) != 0) {
+                    && fcn_005898f0(gebaeude) != 0) {
                     rec = gm_GetEntityTableEntry(&g_7f4ca0[g_774970]);
                     if (rec != 0)
                         *(int *) (rec + 0x28) += price;
@@ -114,14 +114,14 @@ void __cdecl fcn_0058a6b0(char *a0)
                     fcn_005100f0(g_7f4ca0[g_774970].f4, -0x10);
                     memset(msg, 0, sizeof(msg));
                     msg[4] = (char) 0x99;
-                    *(int *) (msg + 8) = g_7f4ca0[*(unsigned short *) (a0 + 0x27)].f4;
-                    *(int *) (msg + 0xc) = *(int *) (a0 + 1);
+                    *(int *) (msg + 8) = g_7f4ca0[*(unsigned short *) (gebaeude + 0x27)].f4;
+                    *(int *) (msg + 0xc) = *(int *) (gebaeude + 1);
                     *(int *) (msg + 0x28) = gm_GameTime.a;
                     *(int *) (msg + 0x2c) = gm_GameTime.b;
                     *(int *) (msg + 0x30) = gm_GameTime.c;
                     *(short *) (msg + 0x34) = gm_GameTime.d;
                     msg[0x36] = 2;
-                    *(int *) (msg + 0x5c) = *(int *) (a0 + 1);
+                    *(int *) (msg + 0x5c) = *(int *) (gebaeude + 1);
                     *(int *) (msg + 0x60) = *(int *) (sel + 4);
                     *(int *) (msg + 0x64) = -1;
                     *(int *) (msg + 0x68) = 4;

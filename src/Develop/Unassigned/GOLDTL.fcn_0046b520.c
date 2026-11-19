@@ -5,7 +5,7 @@ void* __cdecl d2_GetResourceData(int idx);
 char* __cdecl fcn_0047b620(char* p, int i);
 
 /* ADDRESS: GOLDTL 0x0046b520 */
-int __cdecl fcn_0046b520(char* a0, int a1)
+int __cdecl fcn_0046b520(char* inputText, int fontId)
 {
 	int len;
 	int total;
@@ -15,13 +15,13 @@ int __cdecl fcn_0046b520(char* a0, int a1)
 	char* entry;
 
 	total = 0;
-	len = strlen(a0);
-	tbl = d2_GetResourceData(a1);
+	len = strlen(inputText);
+	tbl = d2_GetResourceData(fontId);
 	for (i = 0; i < len; i++) {
-		c = a0[i];
+		c = inputText[i];
 		if (c != '~') {
 			entry = fcn_0047b620((char*) tbl, (unsigned char) c);
-			if (i != 0 && a0[i - 1] != ' ')
+			if (i != 0 && inputText[i - 1] != ' ')
 				total -= *(unsigned short*) (entry + 0x11);
 			if (c != ' ')
 				total += *(unsigned short*) (entry + 0x15) + *(int*) 0x67d384;

@@ -30,7 +30,7 @@ extern float g_662a40;
  * expires; the live records are counted and, once the emitter is enabled, the
  * free records up to half its capacity are seeded and the dirty flag cleared. */
 /* ADDRESS: GOLDTL 0x00417870 */
-char __cdecl fcn_00417870(char* a0, int a1)
+char __cdecl fcn_00417870(char* a0, int timeNow)
 {
 	Rec* rec;
 	char* base;
@@ -48,7 +48,7 @@ char __cdecl fcn_00417870(char* a0, int a1)
 		for (i = 0; i < *(int*) (a0 + 0xd8); i++) {
 			rec = (Rec*) base + i;
 			if (rec->fl & 1) {
-				t = (unsigned int) (a1 - ((Rec*) *(char**) (a0 + 0x28) + i)->t);
+				t = (unsigned int) (timeNow - ((Rec*) *(char**) (a0 + 0x28) + i)->t);
 				v = (float) t * 0.001f;
 				((Rec*) *(char**) (a0 + 0x28) + i)->nx = ((Rec*) *(char**) (a0 + 0x28) + i)->vx + ((Rec*) *(char**) (a0 + 0x28) + i)->px;
 				((Rec*) *(char**) (a0 + 0x28) + i)->ny = ((Rec*) *(char**) (a0 + 0x28) + i)->vy + ((Rec*) *(char**) (a0 + 0x28) + i)->py;
@@ -94,7 +94,7 @@ char __cdecl fcn_00417870(char* a0, int a1)
 				                         *(float*) a0 +
 				                     (float) fcn_0064d3f8() * g_662a40 +
 				                     0.4f;
-				rec->t = a1;
+				rec->t = timeNow;
 				rec->vx = rec->nx;
 				rec->w = *(int*) (a0 + 0xe4);
 				rec->vy = rec->ny;

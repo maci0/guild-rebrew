@@ -65,7 +65,7 @@ int __cdecl fcn_004a4680(float* a0, float* a1, int idx, Actor* e, int* rec);
    building-deal calculators. */
 /* ADDRESS: GOLDTL 0x004964e0 */
 int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
-	char* a5, int a6)
+	char* resultData, int a6)
 {
 	AM_METHOD* t;
 	Entry* p;
@@ -126,9 +126,9 @@ int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
 			}
 			if (bi != -1) {
 				s = sv[bi];
-				a5[0] = 7;
-				*(int*) (a5 + 4) = *(int*) (s + 4);
-				*(int*) (a5 + 8) = 1;
+				resultData[0] = 7;
+				*(int*) (resultData + 4) = *(int*) (s + 4);
+				*(int*) (resultData + 8) = 1;
 				goto calc;
 			}
 			goto fallback;
@@ -137,7 +137,7 @@ int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
 fallback:
 	fcn_004f4830(0x10, rec);
 	if (rec[6] == 0) {
-		return fcn_004a4410(a0, a1, idx, e, 0, a5, a6);
+		return fcn_004a4410(a0, a1, idx, e, 0, resultData, a6);
 	}
 	return fcn_004a4680(a0, a1, idx, e, rec);
 calc:

@@ -37,7 +37,7 @@ char* __cdecl plt_FindPlantInfo(int);
 void __cdecl fcn_00565ab0(char* ev)
 {
 	char* v8;
-	char* v6;
+	char* plantInfo;
 	char* v4;
 	char* v15;
 	char* v24;
@@ -56,7 +56,7 @@ void __cdecl fcn_00565ab0(char* ev)
 			if (v15 != 0) {
 				if (*(int*) (v5 + 0x10) == -1 || *(int*) (v5 + 0x10) == *(int*) (ev + 4)) {
 					v8 = *(char**) (v15 + 0x184);
-					v6 = plt_FindPlantInfo(*(unsigned short*) (v5 + 0xa));
+					plantInfo = plt_FindPlantInfo(*(unsigned short*) (v5 + 0xa));
 					switch (*(int*) (ev + 0x70)) {
 					case 0:
 						if (!fcn_004c4450(*(int*) (ev + 0xc0))) {
@@ -66,7 +66,7 @@ void __cdecl fcn_00565ab0(char* ev)
 							void* found;
 							char* ent = (char*) lpGebaeudePROT + (unsigned char) *v4 * 0x24d;
 
-							sprintf(erm, "Ernten_start_%s", v6 + 2);
+							sprintf(erm, "Ernten_start_%s", plantInfo + 2);
 							sprintf(path, "%slocations/%s/%s_%s.esc", "x:\\engine\\gfx\\scripts\\",
 							        ent + 1, erm, ent + 1);
 							if (vfs_LookupPath(path, g_6b7fdc, &found)) {
@@ -75,7 +75,7 @@ void __cdecl fcn_00565ab0(char* ev)
 								if (script != 0) {
 									sprintf(spname, "sp_%i", *(int*) (ev + 0xb0));
 									fcn_00428340(script, 3, spname, *(int*) (v5 + 0x14),
-									             (int) *(char*) (v5 + 0xd) / (int) *(unsigned char*) (v6 + 0x43));
+									             (int) *(char*) (v5 + 0xd) / (int) *(unsigned char*) (plantInfo + 0x43));
 									*(int*) (script + 0xc94) = (int) v8;
 									*(int*) (v8 + 0x28) = *(int*) (script + 0x100);
 									*(int*) (ev + 0xb4) = *(int*) (script + 0x100);
@@ -109,7 +109,7 @@ void __cdecl fcn_00565ab0(char* ev)
 							void* found;
 							char* ent = (char*) lpGebaeudePROT + (unsigned char) *v4 * 0x24d;
 
-							sprintf(erm, "Ernten_end_%s", v6 + 2);
+							sprintf(erm, "Ernten_end_%s", plantInfo + 2);
 							sprintf(path, "%slocations/%s/%s_%s.esc", "x:\\engine\\gfx\\scripts\\",
 							        ent + 1, erm, ent + 1);
 							if (vfs_LookupPath(path, g_6b7fdc, &found)) {
@@ -118,7 +118,7 @@ void __cdecl fcn_00565ab0(char* ev)
 								if (script != 0) {
 									sprintf(spname, "sp_%i", *(int*) (ev + 0xb0));
 									fcn_00428340(script, 3, spname, *(int*) (v5 + 0x14),
-									             (int) *(char*) (v5 + 0xd) / (int) *(unsigned char*) (v6 + 0x43));
+									             (int) *(char*) (v5 + 0xd) / (int) *(unsigned char*) (plantInfo + 0x43));
 									*(int*) (script + 0xc94) = (int) v8;
 									*(int*) (v8 + 0x28) = *(int*) (script + 0x100);
 									*(int*) (ev + 0xb4) = *(int*) (script + 0x100);
@@ -149,10 +149,10 @@ void __cdecl fcn_00565ab0(char* ev)
 								if (*(char*) p != -1 && *(int*) (p - 0xd) != *(int*) (ev + 0xb8)
 								    && *(char*) p >= *(char*) (v5 + 0xd)
 								    && *(short*) (v5 + 0xa) == *(short*) (p - 3)) {
-									if (*(unsigned char*) (v5 + 8) < (unsigned char) p[-5] + 2 + *(unsigned char*) (v6 + 0x42)
-									    && (int) *(unsigned char*) (v5 + 8) > (int) ((unsigned char) p[-5] - *(unsigned char*) (v6 + 0x42) - 2)
-									    && *(unsigned char*) (v5 + 9) < (unsigned char) p[-4] + 2 + *(unsigned char*) (v6 + 0x42)
-									    && (int) *(unsigned char*) (v5 + 9) > (int) ((unsigned char) p[-4] - *(unsigned char*) (v6 + 0x42) - 2)) {
+									if (*(unsigned char*) (v5 + 8) < (unsigned char) p[-5] + 2 + *(unsigned char*) (plantInfo + 0x42)
+									    && (int) *(unsigned char*) (v5 + 8) > (int) ((unsigned char) p[-5] - *(unsigned char*) (plantInfo + 0x42) - 2)
+									    && *(unsigned char*) (v5 + 9) < (unsigned char) p[-4] + 2 + *(unsigned char*) (plantInfo + 0x42)
+									    && (int) *(unsigned char*) (v5 + 9) > (int) ((unsigned char) p[-4] - *(unsigned char*) (plantInfo + 0x42) - 2)) {
 										rec2 = v24 + k * 0x18;
 										if (rec2 != 0) {
 											int id;

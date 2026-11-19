@@ -198,15 +198,15 @@ void __cdecl fcn_00557460(char* dlg)
 			return;
 		}
 		{
-			int v2;
+			int selectedCount;
 
-			v2 = *(int*) (dlg + 0xc0);
-			if (v2 >= 3) {
-				v2 = 3;
-			} else if (v2 <= 0) {
-				v2 = 0;
+			selectedCount = *(int*) (dlg + 0xc0);
+			if (selectedCount >= 3) {
+				selectedCount = 3;
+			} else if (selectedCount <= 0) {
+				selectedCount = 0;
 			}
-			*(int*) (dlg + 0xc0) = v2;
+			*(int*) (dlg + 0xc0) = selectedCount;
 		}
 		if (*(int*) (dlg + 0xc0) != 0) {
 			found[0] = -1;

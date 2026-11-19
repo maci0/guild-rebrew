@@ -17,7 +17,7 @@ void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl fcn_00428340(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0052db70 */
-void __cdecl fcn_0052db70(char* a0)
+void __cdecl fcn_0052db70(char* buildingRecord)
 {
 	float v[4];
 	char* ent;
@@ -31,21 +31,21 @@ void __cdecl fcn_0052db70(char* a0)
 
 	sel = fcn_00500e20(&gm_GameTime);
 
-	if (*(unsigned char*) (lpGebaeudePROT + (unsigned char) *a0 * 0x24d) == 7 ||
-	    *(int*) (a0 + 0x61) == 0) {
+	if (*(unsigned char*) (lpGebaeudePROT + (unsigned char) *buildingRecord * 0x24d) == 7 ||
+	    *(int*) (buildingRecord + 0x61) == 0) {
 		return;
 	}
 	idx = 0;
 	ent = (char*) g_slot_table;
 	do {
 		if (*(unsigned char*) (ent + 8) > 0 && *(unsigned short*) ent != 0xffff &&
-		    *(unsigned char*) (ent + 2) != 10 && *(int*) (ent + 0x16c) == (int) a0 &&
+		    *(unsigned char*) (ent + 2) != 10 && *(int*) (ent + 0x16c) == (int) buildingRecord &&
 		    *(unsigned char*) (ent + 0x180) == 4) {
 			found = *(void**) (g_slot_table + idx * 0x21c + 0x17c);
 			if (found != 0 && *(int*) ((char*) found + 0xc8) != 0) {
 				break;
 			}
-			if (*(int*) (a0 + 0x95) != -1) {
+			if (*(int*) (buildingRecord + 0x95) != -1) {
 				return;
 			}
 			ft = (float) (g_7f4c04 & 0xffff);
@@ -56,7 +56,7 @@ void __cdecl fcn_0052db70(char* a0)
 				return;
 			}
 			h = d3_CurrentContextIndex; fcn_004432d0(0, 1);
-			obj = fcn_00445600(*(int*) (a0 + 0x61), 0x100, 0, "dummy_RAUCH_0");
+			obj = fcn_00445600(*(int*) (buildingRecord + 0x61), 0x100, 0, "dummy_RAUCH_0");
 			if (obj == 0) {
 				goto unlock;
 			}
@@ -66,7 +66,7 @@ void __cdecl fcn_0052db70(char* a0)
 			}
 			d3_TransformPoint(obj, (float*) (obj + 0x4c), v);
 			if (fcn_00428340((int) found, 3, (int) v[0], (int) v[1], (int) v[2]) != 0) {
-				*(int*) (a0 + 0x95) = *(int*) ((char*) found + 0x100);
+				*(int*) (buildingRecord + 0x95) = *(int*) ((char*) found + 0x100);
 			}
 			*(int*) ((char*) found + 0x104) = 0;
 		unlock:
@@ -76,11 +76,11 @@ void __cdecl fcn_0052db70(char* a0)
 		ent += 0x21c;
 		idx++;
 	} while ((int) ent < (int) g_slot_table + 0x65400);
-	if (*(int*) (a0 + 0x95) != -1) {
-		p = fcn_00426cc0(*(int*) (a0 + 0x95));
+	if (*(int*) (buildingRecord + 0x95) != -1) {
+		p = fcn_00426cc0(*(int*) (buildingRecord + 0x95));
 		if (p != 0) {
 			fcn_00428720((char*) p);
 		}
-		*(int*) (a0 + 0x95) = -1;
+		*(int*) (buildingRecord + 0x95) = -1;
 	}
 }

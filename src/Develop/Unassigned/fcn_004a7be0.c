@@ -14,21 +14,21 @@ void __cdecl fcn_004a7be0(void)
 {
 	int counts[6];
 	int off;
-	int v13;
-	int v11;
-	int v14;
+	int duplicateRows;
+	int maxRowCount;
+	int bestColumn;
 	int i;
 	int g;
 	int j;
 	int c;
 	int best;
 
-	v14 = 0;
+	bestColumn = 0;
 	i = 1;
 	off = 0x34;
 	do {
-		v13 = 0;
-		v11 = 0;
+		duplicateRows = 0;
+		maxRowCount = 0;
 		best = 0;
 		for (g = 0; g < 6; g++) {
 			c = 0;
@@ -38,10 +38,10 @@ void __cdecl fcn_004a7be0(void)
 				}
 			}
 			if (c > 1) {
-				v13++;
+				duplicateRows++;
 			}
-			if (c > v11) {
-				v11 = c;
+			if (c > maxRowCount) {
+				maxRowCount = c;
 			}
 			counts[g] = c;
 		}
@@ -54,29 +54,29 @@ void __cdecl fcn_004a7be0(void)
 			}
 			if (c > best) {
 				best = c;
-				v14 = g;
+				bestColumn = g;
 			}
 			counts[g] = c;
 		}
-		if ((unsigned char) g_1007cd4[0xb5] < 5 && v13 <= 1 && v11 < 2) {
+		if ((unsigned char) g_1007cd4[0xb5] < 5 && duplicateRows <= 1 && maxRowCount < 2) {
 			*(int*) (g_1007cd4 + 0x30 + off) = 3;
 		} else if ((unsigned char) g_1007cd4[0xb5] == best) {
 			*(int*) (g_1007cd4 + 0x30 + off) = 2;
 		} else if (*(int*) g_1007cd4 < 6 && (unsigned char) g_1007cd4[0xb5] - best <= 1) {
 			for (c = 0; c < 6; c++) {
-				if (((int*) 0x01007cec)[v14 * 4 + c * 16 - 1] != i &&
-				    ((int*) 0x01007cec)[v14 * 4 + c * 16] == 0) {
+				if (((int*) 0x01007cec)[bestColumn * 4 + c * 16 - 1] != i &&
+				    ((int*) 0x01007cec)[bestColumn * 4 + c * 16] == 0) {
 					break;
 				}
 			}
 			if (c == 6) {
 				*(int*) (g_1007cd4 + 0x30 + off) = 2;
-			} else if ((unsigned char) g_1007cd4[0xb5] == 5 && v11 < 2) {
+			} else if ((unsigned char) g_1007cd4[0xb5] == 5 && maxRowCount < 2) {
 				*(int*) (g_1007cd4 + 0x30 + off) = 0;
 			} else {
 				*(int*) (g_1007cd4 + 0x30 + off) = 1;
 			}
-		} else if ((unsigned char) g_1007cd4[0xb5] == 5 && v11 < 2) {
+		} else if ((unsigned char) g_1007cd4[0xb5] == 5 && maxRowCount < 2) {
 			*(int*) (g_1007cd4 + 0x30 + off) = 0;
 		} else {
 			*(int*) (g_1007cd4 + 0x30 + off) = 1;

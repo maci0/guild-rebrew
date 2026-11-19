@@ -8,12 +8,12 @@ extern g_662450_f g_662450;
 
 int __cdecl msx_FindSampleHandleIndex(int);
 
-int __cdecl fcn_0042aaa0(int a1)
+int __cdecl fcn_0042aaa0(int sampleHandle)
 {
 	int r = -1;
 
-	if (g_6b7f90 != 0 && msx_FindSampleHandleIndex(a1) >= 0) {
-		r = g_662450(a1);
+	if (g_6b7f90 != 0 && msx_FindSampleHandleIndex(sampleHandle) >= 0) {
+		r = g_662450(sampleHandle);
 	}
 	return r;
 }

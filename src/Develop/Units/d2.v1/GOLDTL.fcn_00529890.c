@@ -28,7 +28,7 @@ void sv_ClearObjectSelection(void);
 void fcn_00534210(int a, int b, char* entity, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00529890 */
-void __cdecl fcn_00529890(char* a0)
+void __cdecl fcn_00529890(char* building)
 {
 	unsigned char* v2;
 	char* v11;
@@ -48,7 +48,7 @@ void __cdecl fcn_00529890(char* a0)
 	char v9[128];
 
 	if (g_6a25b4 != -1) {
-		v12 = (char*) (g_entity_type_table + (unsigned int) (unsigned char) *a0 * 0x24d);
+		v12 = (char*) (g_entity_type_table + (unsigned int) (unsigned char) *building * 0x24d);
 		d2_SetForm(g_6a25b4, 1);
 		ResetDisplayCounters();
 		v13 = (int*) 0x7e30cc;
@@ -82,7 +82,7 @@ void __cdecl fcn_00529890(char* a0)
 		v3 = 0;
 		v11 = (char*) 0x7f4e05;
 		do {
-			if (*(char**) (v11 + 7) == a0 && *(int*) (v11 + 0x1f) && v11[-0x15d]) {
+			if (*(char**) (v11 + 7) == building && *(int*) (v11 + 0x1f) && v11[-0x15d]) {
 				if ((unsigned char) g_774724) {
 					if ((unsigned char) g_774724 != 1
 						|| (v6 = fcn_00507c30((unsigned char) *v11), !v11[-1]
@@ -164,7 +164,7 @@ label_529c64:
 			v11 = &v11[0x21c];
 			v3 += 1;
 		} while ((int) v11 < 0x85a205);
-		v2 = (unsigned char*) a0;
+		v2 = (unsigned char*) building;
 		v13 = (int*) 0x7e30d0;
 		do {
 			if (*(int*) 0x100f1dc != -1) {
@@ -304,7 +304,7 @@ label_529f4c:
 				}
 			}
 label_529fe5:
-			v2 = (unsigned char*) a0;
+			v2 = (unsigned char*) building;
 			v3 += 0x4e;
 			v13 = &v13[10];
 		} while (v3 < 0x9e8);
@@ -323,7 +323,7 @@ label_529fe5:
 			v14 = (unsigned int*) 0x7e30d0;
 			do {
 				if (v14[4]) {
-					fcn_00529160(a0, 0, *v14, 0);
+					fcn_00529160(building, 0, *v14, 0);
 				}
 				v14 = &v14[10];
 			} while ((int) v14 < 0x7e35d0);

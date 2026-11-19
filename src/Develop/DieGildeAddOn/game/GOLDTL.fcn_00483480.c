@@ -35,7 +35,7 @@ typedef struct {
 } RECORD;
 
 /* ADDRESS: GOLDTL 0x00483480 */
-void __cdecl fcn_00483480(int a0)
+void __cdecl fcn_00483480(int entityRecord)
 {
 	void *rec1;
 	int i;
@@ -59,41 +59,41 @@ void __cdecl fcn_00483480(int a0)
 	short mode;
 
 	found = 0;
-	rec0 = (void *) fcn_00502cd0(*(int *) (*(int *) (a0 + 0x16c) + 0x5d), 2, 6, 0, 0xff);
+	rec0 = (void *) fcn_00502cd0(*(int *) (*(int *) (entityRecord + 0x16c) + 0x5d), 2, 6, 0, 0xff);
 	if (rec0 == 0) {
 		return;
 	}
-	rec1 = (void *) fcn_00502cd0(*(int *) (*(int *) (a0 + 0x16c) + 0x5d), 2, 6, 0, 0x2a);
+	rec1 = (void *) fcn_00502cd0(*(int *) (*(int *) (entityRecord + 0x16c) + 0x5d), 2, 6, 0, 0x2a);
 	if (rec1 == 0) {
 		return;
 	}
-	fcn_004849b0(a0, (int) rec0, (int) rec1);
-	fcn_00487360(a0);
-	fcn_00487970((int) rec1, a0, 0x4b);
-	fcn_00487c00((int) rec1, a0, 0x19);
-	fcn_00487470(a0);
-	fcn_00488a20(a0);
-	fcn_00488e10(a0);
-	fcn_004833a0(a0);
+	fcn_004849b0(entityRecord, (int) rec0, (int) rec1);
+	fcn_00487360(entityRecord);
+	fcn_00487970((int) rec1, entityRecord, 0x4b);
+	fcn_00487c00((int) rec1, entityRecord, 0x19);
+	fcn_00487470(entityRecord);
+	fcn_00488a20(entityRecord);
+	fcn_00488e10(entityRecord);
+	fcn_004833a0(entityRecord);
 	mode = *(short *) 0x7f4c04;
 	if (mode == 8 || mode == 0xd) {
-		if ((*(unsigned int *) (a0 + 0x1b4) & 0x100) == 0) {
-			*(unsigned short *) (a0 + 0x1bc) = 0;
-			*(unsigned int *) (a0 + 0x1b4) |= 0x100;
-		} else if (*(unsigned short *) (a0 + 0x1bc) != 0) {
+		if ((*(unsigned int *) (entityRecord + 0x1b4) & 0x100) == 0) {
+			*(unsigned short *) (entityRecord + 0x1bc) = 0;
+			*(unsigned int *) (entityRecord + 0x1b4) |= 0x100;
+		} else if (*(unsigned short *) (entityRecord + 0x1bc) != 0) {
 			int n;
 
 			n = g_100b0ac;
 			if (n > 0) {
 				for (i = 0; i < n; i++) {
 					sp = (void *) (i * 0x58 + (int) g_100d0c0);
-					if (*(int *) sp == (int) *(unsigned short *) (a0 + 0x1bc)) {
+					if (*(int *) sp == (int) *(unsigned short *) (entityRecord + 0x1bc)) {
 						if (*(int *) ((char *) sp + 0x40) >=
 							    (int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) &&
-						    fcn_00486640(a0, sp, 1) != 0) {
+						    fcn_00486640(entityRecord, sp, 1) != 0) {
 							*(unsigned int *) ((char *) sp + 0x54) |= 8;
-							fcn_004868d0(a0, sp);
-							*(unsigned short *) (a0 + 0x1bc) = *(unsigned short *) sp;
+							fcn_004868d0(entityRecord, sp);
+							*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) sp;
 							goto tail;
 						}
 						goto type6;
@@ -108,26 +108,26 @@ void __cdecl fcn_00483480(int a0)
 		n = g_100b0ac;
 		for (i = 0; i < n; i++) {
 			sp = (void *) (i * 0x58 + (int) g_100d0c0);
-			if (*(int *) sp == (int) *(unsigned short *) (a0 + 0x1bc)) {
+			if (*(int *) sp == (int) *(unsigned short *) (entityRecord + 0x1bc)) {
 				if (*(int *) ((char *) sp + 0x40) >=
 					    (int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) &&
-				    fcn_00486640(a0, sp, 1) != 0) {
+				    fcn_00486640(entityRecord, sp, 1) != 0) {
 					*(unsigned int *) ((char *) sp + 0x54) |= 8;
-					fcn_004868d0(a0, sp);
-					*(unsigned short *) (a0 + 0x1bc) = *(unsigned short *) sp;
+					fcn_004868d0(entityRecord, sp);
+					*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) sp;
 					found = 1;
 				}
 				break;
 			}
 		}
-		*(unsigned int *) (a0 + 0x1b4) &= 0xfffffeffu;
+		*(unsigned int *) (entityRecord + 0x1b4) &= 0xfffffeffu;
 		if (found != 0) {
 			goto tail;
 		}
 	}
 type6:
-	if (*(char *) ((int) *(unsigned short *) (*(int *) (a0 + 0x16c) + 0x27) * 0x21c + 0x7f4ca2) == 6) {
-		gate = fcn_005b1e40(*(int *) (a0 + 0x16c));
+	if (*(char *) ((int) *(unsigned short *) (*(int *) (entityRecord + 0x16c) + 0x27) * 0x21c + 0x7f4ca2) == 6) {
+		gate = fcn_005b1e40(*(int *) (entityRecord + 0x16c));
 		if (gate != 0) {
 			for (i = 0; i < 0x20; i++) {
 				sp = (void *) (i * 0x58 + (int) g_100d0c0);
@@ -143,18 +143,18 @@ type6:
 						have = gm_eval_SlotVoll(res, *(int *) sp, 1000000);
 						if ((int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) +
 							    *(int *) ((char *) sp + 0x3c) <= have) {
-							if (fcn_00486640(a0, sp, 1) != 0) {
+							if (fcn_00486640(entityRecord, sp, 1) != 0) {
 								*(unsigned int *) ((char *) sp + 0x54) |= 8;
-								fcn_004868d0(a0, sp);
-								*(unsigned short *) (a0 + 0x1bc) = *(unsigned short *) sp;
+								fcn_004868d0(entityRecord, sp);
+								*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) sp;
 								fcn_0064d41a(msg,
 									"Produktion von %s starten, da Humanplayer es so will.",
 									*(int *) sp * 0x41 + 1 + *(int *) 0x99ec10);
 								goto tail;
 							}
-							if (fcn_00486640(a0, sp, 0) != 0) {
-								fcn_004868d0(a0, sp);
-								*(unsigned short *) (a0 + 0x1bc) = *(unsigned short *) sp;
+							if (fcn_00486640(entityRecord, sp, 0) != 0) {
+								fcn_004868d0(entityRecord, sp);
+								*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) sp;
 								fcn_0064d41a(msg,
 									"Produktion von %s starten obwohl Rohstoffe fehlen, da der spieler es so will",
 									*(int *) sp * 0x41 + 1 + *(int *) 0x99ec10);
@@ -206,10 +206,10 @@ shuffle:
 			have = gm_eval_SlotVoll(res, typ, 1000000);
 			if ((int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) +
 				    *(int *) (off + ((int) g_100d0c0 + 0x3c)) <= have &&
-			    fcn_00486640(a0, (void *) (off + (int) g_100d0c0), 1) != 0) {
+			    fcn_00486640(entityRecord, (void *) (off + (int) g_100d0c0), 1) != 0) {
 				*(unsigned int *) (off + ((int) g_100d0c0 + 0x54)) |= 8;
-				fcn_004868d0(a0, (void *) (off + (int) g_100d0c0));
-				*(unsigned short *) (a0 + 0x1bc) = *(unsigned short *) (off + (int) g_100d0c0);
+				fcn_004868d0(entityRecord, (void *) (off + (int) g_100d0c0));
+				*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) (off + (int) g_100d0c0);
 				fcn_0064d41a(msg, "Produktion von %s starten",
 					*(int *) (off + (int) g_100d0c0) * 0x41 + 1 + *(int *) 0x99ec10);
 				goto tail;
@@ -240,19 +240,19 @@ shuffle:
 			have = gm_eval_SlotVoll(res, typ, 1000000);
 			if ((int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) +
 				    *(int *) (off + ((int) g_100d0c0 + 0x3c)) <= have &&
-			    fcn_00486640(a0, (void *) (off + (int) g_100d0c0), 0) != 0) {
-				fcn_004868d0(a0, (void *) (off + (int) g_100d0c0));
-				*(unsigned short *) (a0 + 0x1bc) = *(unsigned short *) (off + (int) g_100d0c0);
+			    fcn_00486640(entityRecord, (void *) (off + (int) g_100d0c0), 0) != 0) {
+				fcn_004868d0(entityRecord, (void *) (off + (int) g_100d0c0));
+				*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) (off + (int) g_100d0c0);
 				fcn_0064d41a(msg, "Produktion von %s starten obwohl Rohstoffe fehlen",
 					*(int *) (off + (int) g_100d0c0) * 0x41 + 1 + *(int *) 0x99ec10);
 				goto tail;
 			}
 		}
 	}
-	*(unsigned short *) (a0 + 0x1bc) = 0;
+	*(unsigned short *) (entityRecord + 0x1bc) = 0;
 tail:
 	fcn_0047e220((int) rec1);
-	fcn_0047e0e0(a0, (int) rec1);
+	fcn_0047e0e0(entityRecord, (int) rec1);
 	{
 		unsigned int *fl;
 		int n;
@@ -301,7 +301,7 @@ tail:
 			pp += 0x10;
 		}
 	}
-	if (g_100dc20 == *(int *) (a0 + 0x16c)) {
+	if (g_100dc20 == *(int *) (entityRecord + 0x16c)) {
 		int *pp;
 
 		pp = (int *) ((int) g_100d0c0 + 4);
@@ -332,29 +332,29 @@ tail:
 			pp += 0x16;
 		}
 	}
-	fcn_00487e60(a0, 4);
+	fcn_00487e60(entityRecord, 4);
 	arg.cur = 0;
 	sp = (void *) 0x7f4ca2;
 	while ((int) sp < 0x85a0a2) {
 		if (*((char *) sp + 6) != 0 && *(short *) ((char *) sp - 2) != -1 &&
 		    *(char *) sp != 0xa) {
-			if (*(int *) ((char *) sp + 0x16a) == *(int *) (a0 + 0x16c) &&
+			if (*(int *) ((char *) sp + 0x16a) == *(int *) (entityRecord + 0x16c) &&
 			    *((char *) sp + 0x163) != 0 &&
 			    *(int *) ((char *) sp + 0x182) != 0 &&
 			    *(int *) (*(int *) ((char *) sp + 0x182) + 0x2c) ==
 				    *(int *) (*(int *) ((char *) sp + 0x16a) + 1) &&
 			    (*(char **) ((char *) sp + 0x17a) == 0 ||
 			     **(char **) ((char *) sp + 0x17a) == 4)) {
-				fcn_00529160(*(int *) (a0 + 0x16c), 0, *(short *) ((char *) sp - 2), 0);
+				fcn_00529160(*(int *) (entityRecord + 0x16c), 0, *(short *) ((char *) sp - 2), 0);
 				arg.cur++;
 			}
 		}
 		sp = (void *) ((char *) sp + 0x21c);
 	}
-	if (g_100dc20 == *(int *) (a0 + 0x16c)) {
+	if (g_100dc20 == *(int *) (entityRecord + 0x16c)) {
 		g_100dc34 = arg.cur;
 	}
-	fcn_004831f0(a0);
+	fcn_004831f0(entityRecord);
 	arg.k = 0;
 	{
 		unsigned int *fl;
@@ -376,11 +376,11 @@ tail:
 		arg.k = arg.cur;
 	}
 	if (arg.cur == 0 || arg.k == 0) {
-		ai_MeisterCollectTrans(a0);
-		ai_MeisterTrade(a0, (int) rec1);
+		ai_MeisterCollectTrans(entityRecord);
+		ai_MeisterTrade(entityRecord, (int) rec1);
 		return;
 	}
-	arg.owner = (void *) a0;
+	arg.owner = (void *) entityRecord;
 	arg.rec = rec1;
 	arg.zero = 0;
 	arg.z2 = 0;
@@ -396,7 +396,7 @@ tail:
 				arg.kind = 4;
 				arg.entry = (void *) ((char *) fl - 0x54);
 				fcn_00487f90(&arg);
-				if (g_100dc20 == *(int *) (a0 + 0x16c) && g_100dc3c < 4) {
+				if (g_100dc20 == *(int *) (entityRecord + 0x16c) && g_100dc3c < 4) {
 					int dst;
 
 					dst = g_100dc3c * 0x58 + 0x100ddc0;
@@ -408,7 +408,7 @@ tail:
 			arg.kind = 0x8c;
 			arg.entry = (void *) ((char *) fl - 0x54);
 			fcn_00487f90(&arg);
-			if (g_100dc20 == *(int *) (a0 + 0x16c) && g_100dc3c < 4) {
+			if (g_100dc20 == *(int *) (entityRecord + 0x16c) && g_100dc3c < 4) {
 				int dst;
 
 				dst = g_100dc3c * 0x58 + 0x100ddc0;
@@ -417,6 +417,6 @@ tail:
 			}
 		}
 	}
-	ai_MeisterCollectTrans(a0);
-	ai_MeisterTrade(a0, (int) rec1);
+	ai_MeisterCollectTrans(entityRecord);
+	ai_MeisterTrade(entityRecord, (int) rec1);
 }

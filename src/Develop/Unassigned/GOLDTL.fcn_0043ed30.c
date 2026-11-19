@@ -28,8 +28,8 @@ char __cdecl fcn_0043ed30(char* node, LightIter* it)
 	float f90;
 	float t;
 	float scale;
-	int v4;
-	int v3;
+	int centerX;
+	int centerY;
 	int r;
 	int r2;
 	int w;
@@ -56,7 +56,7 @@ char __cdecl fcn_0043ed30(char* node, LightIter* it)
 	sc = (Scene*) it->obj;
 	f90 = *(float*) (node + 0x90);
 	d3_TransformPoint(node, (float*) (node + 0x4c), pt);
-	if (!(unsigned char) fcn_00441720(&sc->width, pt, 0, (unsigned int*) &v4, (unsigned int*) &v3, &val)) {
+	if (!(unsigned char) fcn_00441720(&sc->width, pt, 0, (unsigned int*) &centerX, (unsigned int*) &centerY, &val)) {
 		return 1;
 	}
 	t = f90 * f90 - (pt[1] - val) * (pt[1] - val);
@@ -66,16 +66,16 @@ char __cdecl fcn_0043ed30(char* node, LightIter* it)
 	scale = sqrt(t) / (*(float*) 0x6b8308 + sc->f60);
 	w = sc->width;
 	if (!(scale > *(double*) 0x6629c8)) {
-		sc->data[w * v3 + v4] |= 0x80;
+		sc->data[w * centerY + centerX] |= 0x80;
 		return 1;
 	}
 	r = (int) scale;
 	r2 = (int) (scale * scale + g_6628cc);
-	y0 = v3 - r;
+	y0 = centerY - r;
 	if (y0 < 0) {
 		y0 = 0;
 	}
-	y1 = v3 + r;
+	y1 = centerY + r;
 	if (y1 > w - 1) {
 		y1 = w - 1;
 	}
@@ -83,16 +83,16 @@ char __cdecl fcn_0043ed30(char* node, LightIter* it)
 		return 1;
 	}
 	for (y = y0; y <= y1; y++) {
-		x0 = v4 - r;
+		x0 = centerX - r;
 		if (x0 < 0) {
 			x0 = 0;
 		}
-		x1 = v4 + r;
+		x1 = centerX + r;
 		if (x1 > sc->width - 1) {
 			x1 = sc->width - 1;
 		}
 		for (x = x0; x <= x1; x++) {
-			if ((x - v4) * (x - v4) + (y - v3) * (y - v3) < r2) {
+			if ((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY) < r2) {
 				sc->data[y * sc->width + x] |= 0x80;
 			}
 		}

@@ -276,7 +276,7 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
    random direction, integrate live slots by the elapsed time, fade and retire
    expired slots. Returns 0 once the slot budget is filled. */
 /* ADDRESS: GOLDTL 0x00453470 */
-char __cdecl fcn_00453470(void* a1, unsigned int a2)
+char __cdecl fcn_00453470(void* a1, unsigned int tick)
 {
 	char* e;
 	char* p;
@@ -293,7 +293,7 @@ char __cdecl fcn_00453470(void* a1, unsigned int a2)
 
 	e = (char*) a1;
 	cnt = 1;
-	if (*(int*) (e + 0x24) == a2) {
+	if (*(int*) (e + 0x24) == tick) {
 		return 1;
 	}
 	t = sqrt(*(float*) (e + 0x74) * *(float*) (e + 0x74) +
@@ -347,13 +347,13 @@ char __cdecl fcn_00453470(void* a1, unsigned int a2)
 				*(unsigned char*) (e + 0xd3)) +
 				*(unsigned char*) (e + 0xd0);
 			*(unsigned char*) (p + 0x4f) = 0;
-			*(unsigned int*) (p + 0x30) = a2;
+			*(unsigned int*) (p + 0x30) = tick;
 			v[0] = (float) rand() * RAND_UNIT_453470 - 0.5f;
 			v[1] = (float) rand() * RAND_UNIT_453470 - 0.5f;
 			v[2] = 0.0f;
 			fcn_004518a0(v);
 			if (!(*(unsigned char*) (e + 0xd4) & 0x60)) {
-				*(unsigned int*) (p + 0x34) = a2;
+				*(unsigned int*) (p + 0x34) = tick;
 				r = (float) rand() * RAND_UNIT_453470 *
 					*(float*) (e + 0x68);
 				*(float*) (p + 0x20) = v[0] * r;
@@ -398,7 +398,7 @@ char __cdecl fcn_00453470(void* a1, unsigned int a2)
 				v[2] -= *(float*) (p + 0x28);
 				fcn_004518a0(v);
 				r = (float) rand() * RAND_UNIT_453470;
-				*(int*) (p + 0x34) = (int) ((double) a2 -
+				*(int*) (p + 0x34) = (int) ((double) tick -
 					(float) *(int*) (e + 0xcc) * r);
 				r = r * *(float*) (e + 0x70);
 				*(float*) (p + 0x20) += v[0] * r;
@@ -433,15 +433,15 @@ char __cdecl fcn_00453470(void* a1, unsigned int a2)
 		} else {
 			unsigned int d;
 
-			d = a2 - *(unsigned int*) (p + 0x30);
+			d = tick - *(unsigned int*) (p + 0x30);
 			dt = (float) d;
 			if (dt > 150.0f) {
 				*(unsigned int*) (p + 0x34) +=
-					a2 - *(unsigned int*) (p + 0x30);
+					tick - *(unsigned int*) (p + 0x30);
 				dt = 0.0f;
 			}
-			age = (int) (a2 - *(unsigned int*) (p + 0x34));
-			*(unsigned int*) (p + 0x30) = a2;
+			age = (int) (tick - *(unsigned int*) (p + 0x34));
+			*(unsigned int*) (p + 0x30) = tick;
 			if (*(unsigned char*) (e + 0xd4) & 0x1f) {
 				*(unsigned char*) (p + 0x50) = (unsigned char) (
 					(age / (*(unsigned char*) (e + 0xd4) & 0x1f)) %
@@ -518,7 +518,7 @@ char __cdecl fcn_00453470(void* a1, unsigned int a2)
 	if (*(unsigned char*) (e + 0xd5) & 2) {
 		*(unsigned char*) (e + 0xd5) &= 0xfd;
 	}
-	*(unsigned int*) (e + 0x24) = a2;
+	*(unsigned int*) (e + 0x24) = tick;
 	return !((*(unsigned char*) (e + 0xd5) & 1) &&
 		*(int*) (e + 0x20) >= wanted);
 }

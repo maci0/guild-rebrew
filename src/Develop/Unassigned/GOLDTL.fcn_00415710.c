@@ -42,9 +42,9 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 	float* s;
 	float in[3];
 	float out[16];
-	float a0; double d0; double d1; double d2;
-	float a1;
-	float a2;
+	float transformX; double d0; double d1; double d2;
+	float transformY;
+	float transformZ;
 	float b0;
 	float b1;
 	float t0;
@@ -85,9 +85,9 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 	d0 = (double) self->px - *(float*) (cam + 0x4c);
 	d1 = (double) self->py - *(float*) (cam + 0x50);
 	d2 = (double) self->pz - *(float*) (cam + 0x54);
-	a0 = d2 * m[8] + d1 * m[4] + d0 * m[0]; a0 *= g_662a70;
-	a1 = d2 * m[9] + d1 * m[5] + d0 * m[1]; a1 *= g_662a70;
-	a2 = (d2 * m[10] + d1 * m[6] + d0 * m[2]) * g_662a70;
+	transformX = d2 * m[8] + d1 * m[4] + d0 * m[0]; transformX *= g_662a70;
+	transformY = d2 * m[9] + d1 * m[5] + d0 * m[1]; transformY *= g_662a70;
+	transformZ = (d2 * m[10] + d1 * m[6] + d0 * m[2]) * g_662a70;
 	self->px = *(float*) (cam + 0x4c);
 	self->py = *(float*) (cam + 0x50);
 	self->pz = *(float*) (cam + 0x54);
@@ -105,12 +105,12 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 	if (self->count <= 0) {
 		return;
 	}
-	dz = a2 + a2;
+	dz = transformZ + transformZ;
 	k = half * 0.33333334f;
 	s = self->segs;
 	for (i = 0; i < self->count; i++, s += 10) {
 		wx = t0 * s[4] + u0 * s[5];
-		s[0] = wx * dt + s[0] + a0 + b0;
+		s[0] = wx * dt + s[0] + transformX + b0;
 		if (s[0] < g_662a60 || g_662a58 <= s[0]) {
 			sprintf(msg[0], (char*) 0x6775e0, (long) i, (double) s[0]);
 			sprintf(msg[0], (char*) 0x6775b8, (double) self->wind_x, (double) self->wind_z);
@@ -127,7 +127,7 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 			} while (g_6629c8 <= s[0]);
 		}
 		wy = t1 * s[4] + u1 * s[5];
-		s[1] = wy * dt + a1 + b1 + s[1];
+		s[1] = wy * dt + transformY + b1 + s[1];
 		if (s[1] < g_662a60 || g_662a58 <= s[1]) {
 			sprintf(msg[1], (char*) 0x6775a4, (long) i, (double) s[1]);
 			sprintf(msg[1], (char*) 0x6775b8, (double) self->wind_x, (double) self->wind_z);

@@ -38,14 +38,14 @@ typedef struct PathState {
 } PathState;
 
 /* ADDRESS: GOLDTL 0x00431dd0 */
-void __cdecl fcn_00431dd0(Cam* cam, PathState* ps, int a2, int a3, float* out)
+void __cdecl fcn_00431dd0(Cam* cam, PathState* ps, int segmentIndex, int segmentOffset, float* out)
 {
     PathInfo* info;
     Seg* segs;
     Seg* cur;
     Seg* tgt;
-    int v1;
-    int v2;
+    int currentSegment;
+    int currentOffset;
     int i;
     float t;
     float p[4];
@@ -57,26 +57,26 @@ void __cdecl fcn_00431dd0(Cam* cam, PathState* ps, int a2, int a3, float* out)
     out[2] = 0.0f;
     if (info->flag != 0) {
         segs = info->segs;
-        v1 = ps->d;
-        v2 = ps->e;
-        cur = &segs[v1];
-        tgt = &segs[a2];
-        if (a3 == v2 && v1 == a2) {
+        currentSegment = ps->d;
+        currentOffset = ps->e;
+        cur = &segs[currentSegment];
+        tgt = &segs[segmentIndex];
+        if (segmentOffset == currentOffset && currentSegment == segmentIndex) {
             out[0] = cam->off[0] + cam->pos[0];
             out[1] = cam->off[1] + cam->pos[1];
             out[2] = cam->off[2] + cam->pos[2];
             return;
         }
-        if (v1 < a2) {
-            t = g_6628a0 - (float) v2 / (float) cur->len;
-            d[0] = segs[v1 + 1].sx - cur->sx;
-            d[1] = segs[v1 + 1].sy - cur->sy;
-            d[2] = segs[v1 + 1].sz - cur->sz;
+        if (currentSegment < segmentIndex) {
+            t = g_6628a0 - (float) currentOffset / (float) cur->len;
+            d[0] = segs[currentSegment + 1].sx - cur->sx;
+            d[1] = segs[currentSegment + 1].sy - cur->sy;
+            d[2] = segs[currentSegment + 1].sz - cur->sz;
             p[0] = d[0] * t;
             p[1] = d[1] * t;
             p[2] = d[2] * t;
         }
-        for (i = v1 + 1; i < a2; i++) {
+        for (i = currentSegment + 1; i < segmentIndex; i++) {
             d[0] = segs[i + 1].sx - segs[i].sx;
             d[1] = segs[i + 1].sy - segs[i].sy;
             d[2] = segs[i + 1].sz - segs[i].sz;
@@ -84,13 +84,13 @@ void __cdecl fcn_00431dd0(Cam* cam, PathState* ps, int a2, int a3, float* out)
             p[1] += d[1];
             p[2] += d[2];
         }
-        if (v1 == a2) {
-            a3 -= v2;
+        if (currentSegment == segmentIndex) {
+            segmentOffset -= currentOffset;
         }
-        t = (float) a3 / (float) tgt->len;
-        d[0] = segs[a2 + 1].sx - tgt->sx;
-        d[1] = segs[a2 + 1].sy - tgt->sy;
-        d[2] = segs[a2 + 1].sz - tgt->sz;
+        t = (float) segmentOffset / (float) tgt->len;
+        d[0] = segs[segmentIndex + 1].sx - tgt->sx;
+        d[1] = segs[segmentIndex + 1].sy - tgt->sy;
+        d[2] = segs[segmentIndex + 1].sz - tgt->sz;
         p[0] += d[0] * t;
         p[1] += d[1] * t;
         p[2] += d[2] * t;

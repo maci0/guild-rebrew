@@ -9,7 +9,7 @@ int __cdecl gm_GetMsgField(int, int);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 
 /* ADDRESS: GOLDTL 0x00503a70 */
-int __cdecl fcn_00503a70(int a0)
+int __cdecl fcn_00503a70(int itemId)
 {
 	char* p;
 	int count;
@@ -33,7 +33,7 @@ int __cdecl fcn_00503a70(int a0)
 	n = 0x58;
 	p = (char*) g_entity_ptr;
 	do {
-		v5 = a0;
+		v5 = itemId;
 		if (*p) {
 			v4 = 0;
 			count = *(int*) 0x86805c * 0x18;
@@ -41,7 +41,7 @@ int __cdecl fcn_00503a70(int a0)
 			*(int*) (count + 0x868c48) = 0;
 			*(int*) (count + 0x868c54) = 0;
 			if (p == g_773d78) {
-				v6 = fcn_00503d10(a0);
+				v6 = fcn_00503d10(itemId);
 				if (v6) {
 					v7 = fcn_00502cd0(*(int*) (v6 + 0x14), 1, 0, v5);
 					if (v7) {
@@ -67,7 +67,7 @@ add:
 			else {
 				v7 = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0xff);
 				if (v7) {
-					v7 = fcn_00502cd0(*(int*) (v7 + 0x14), 1, 0, a0);
+					v7 = fcn_00502cd0(*(int*) (v7 + 0x14), 1, 0, itemId);
 					if (v7) {
 						v4 = 1;
 						*(char**) (*(int*) 0x86805c * 0x18 + 0x868c40) = p;
@@ -76,7 +76,7 @@ add:
 				}
 				v6 = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x2a);
 				if (v6) {
-					v7 = fcn_00502cd0(*(int*) (v6 + 0x14), 1, 0, a0);
+					v7 = fcn_00502cd0(*(int*) (v6 + 0x14), 1, 0, itemId);
 					if (v7) {
 						count = *(int*) 0x86805c * 0x18;
 						*(char**) (count + 0x868c40) = p;
@@ -101,7 +101,7 @@ add:
 	if (*(int*) 0x86805c > 0) {
 		p = (char*) 0x868c50;
 		do {
-			f = fcn_0050bb50(a0, *(unsigned char*) 0x773d75);
+			f = fcn_0050bb50(itemId, *(unsigned char*) 0x773d75);
 			v6++;
 			*(float*) p = f * *(float*) (*(int*) (p - 0x10) + 0x49);
 			p += 0x18;

@@ -7,7 +7,7 @@ int __cdecl hst_ParseDate(int pos, int n, int* out, int a1);
 void __cdecl hst_ParseText_Real(char* out, int pos);
 
 /* ADDRESS: GOLDTL 0x004b33c0 */
-int __cdecl fcn_004b33c0(int a0, char* a1)
+int __cdecl fcn_004b33c0(int a0, char* textOut)
 {
 	int v5;
 	int v4[4];
@@ -23,8 +23,8 @@ int __cdecl fcn_004b33c0(int a0, char* a1)
 		diff = gm_GameTime - v4[0];
 		if (diff == 1) {
 			v5 = 1;
-			hst_ParseText_Real(a1, g_67fca8 + 1);
-			if (*a1 == 0)
+			hst_ParseText_Real(textOut, g_67fca8 + 1);
+			if (*textOut == 0)
 				v5 = 6;
 		} else if (diff > 1) {
 			v5 = 0;

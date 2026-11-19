@@ -16,7 +16,7 @@ void __cdecl fcn_00451500(float* a, float angle, float* m)
 	float v[4];
 
 
-	float v4;
+	float dotOffset;
 
 	v[2] = g_662d68;
 	s = (float) sin(angle);
@@ -27,10 +27,10 @@ void __cdecl fcn_00451500(float* a, float angle, float* m)
 	m[9] = a[1];
 	m[10] = a[2];
 	fcn_004518a0(m + 8);
-	v4 = -(v[0] * m[8] + v[2] * m[10] + v[1] * m[9]);
-	m[4] = v[0] = v4 * m[8] + v[0];
-	m[5] = v[1] = v4 * m[9] + v[1];
-	m[6] = v[2] = v4 * m[10] + v[2];
+	dotOffset = -(v[0] * m[8] + v[2] * m[10] + v[1] * m[9]);
+	m[4] = v[0] = dotOffset * m[8] + v[0];
+	m[5] = v[1] = dotOffset * m[9] + v[1];
+	m[6] = v[2] = dotOffset * m[10] + v[2];
 	if ((float) sqrt(v[0] * v[0] + (v[1] * v[1] + v[2] * v[2])) < g_662ce8) {
 		v[0] = -m[9];
 		m[4] = v[0] * m[8] + g_662d60;

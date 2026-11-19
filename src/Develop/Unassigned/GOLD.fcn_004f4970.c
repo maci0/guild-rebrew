@@ -19,7 +19,7 @@ extern void __cdecl fcn_004fe140(void*, int, int, int);
 
 
 /* ADDRESS: GOLD 0x004f4970 */
-void __cdecl fcn_004f4970(unsigned int a0)
+void __cdecl fcn_004f4970(unsigned int packedId)
 {
 	char text[0x200];
 	char msg[0xf8];
@@ -33,7 +33,7 @@ void __cdecl fcn_004f4970(unsigned int a0)
 	char* fill_dst;
 	int fill_count;
 
-	slot = g_770b80 + (a0 & 0xffff) * 0x21c;
+	slot = g_770b80 + (packedId & 0xffff) * 0x21c;
 	if (*(short*) slot == -1) {
 		return;
 	}
@@ -46,7 +46,7 @@ void __cdecl fcn_004f4970(unsigned int a0)
 	if (*(unsigned char*) (slot + 2) == 0) {
 		return;
 	}
-	v = gm_WalkEntityChain((int) a0);
+	v = gm_WalkEntityChain((int) packedId);
 	count = *(unsigned char*) (slot + 0xd);
 	limit = count + 1;
 	if (limit > 0xa) {
@@ -80,10 +80,10 @@ void __cdecl fcn_004f4970(unsigned int a0)
 	if (count >= 9) {
 		return;
 	}
-	*((unsigned char*)&a0 + 3) = count + 1;
+	*((unsigned char*)&packedId + 3) = count + 1;
 	if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
 		fcn_004c4510(slot, *(int*) (slot + 4));
-		fcn_004c4570(1, 1, 0xd, ((unsigned char*)&a0 + 3));
+		fcn_004c4570(1, 1, 0xd, ((unsigned char*)&packedId + 3));
 		fcn_004c5360();
 	} else {
 		fill_dst = msg;
@@ -115,7 +115,7 @@ void __cdecl fcn_004f4970(unsigned int a0)
 		*(unsigned char*) (msg + 0x36) = 9;
 		*(short*) (msg + 0x2c) = 7;
 		*(int*) (msg + 0x2e) = 0;
-		*(char*) (msg + 0x58) = *((unsigned char*)&a0 + 3);
+		*(char*) (msg + 0x58) = *((unsigned char*)&packedId + 3);
 		*(int*) (msg + 0x5c) = *(int*) (slot + 4);
 		fcn_004c5530(msg);
 	}
@@ -163,7 +163,7 @@ void __cdecl fcn_004f4970(unsigned int a0)
 				limit = gm_RandomMod(8);
 				fcn_004fe140(msg + 0x28, gm_RandomMod(4), limit * 7, 0);
 			}
-			*(char*) (msg + 0x58) = *((unsigned char*)&a0 + 3);
+			*(char*) (msg + 0x58) = *((unsigned char*)&packedId + 3);
 			*(int*) (msg + 0x5c) = *(int*) (slot + 4);
 			fcn_004c5530(msg);
 			v++;

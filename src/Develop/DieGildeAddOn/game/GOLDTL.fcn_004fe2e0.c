@@ -15,7 +15,7 @@ void __cdecl fcn_004fdfe0(char*);
 /* ADDRESS: GOLDTL 0x004fe2e0 */
 int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 {
-	int v2;
+	int savedContext;
 	float def[4];
 	float opt[4];
 	int* q;
@@ -23,7 +23,7 @@ int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 	int v5;
 	char* v6;
 
-	v2 = d3_CurrentContextIndex;
+	savedContext = d3_CurrentContextIndex;
 	def[0] = 0.0f;
 	def[1] = 0.0f;
 	def[2] = 0.0f;
@@ -48,7 +48,7 @@ int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 		}
 	}
 	if (p == 0 && q == 0) {
-		fcn_004432d0(v2, 1);
+		fcn_004432d0(savedContext, 1);
 		return *(int*) (a0 + 0x184);
 	}
 	*(int*) &opt[0] = p[0];
@@ -71,6 +71,6 @@ have:
 			fcn_004fdfe0(a0);
 		}
 	}
-	fcn_004432d0(v2, 1);
+	fcn_004432d0(savedContext, 1);
 	return *(int*) (a0 + 0x184);
 }

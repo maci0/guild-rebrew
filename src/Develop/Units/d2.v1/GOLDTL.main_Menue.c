@@ -84,10 +84,10 @@ void __cdecl main_Menue(void)
 {
 	char v7[260];
 	char v8[260];
-	char v9[96];
+	char profileValueA[96];
 	char v10[260];
 	char v11[260];
-	char v12[96];
+	char profileValueB[96];
 	DWORD (WINAPI *read_profile)(LPCSTR, LPCSTR, LPCSTR, LPSTR, DWORD, LPCSTR);
 	char *v4;
 	char *v14;
@@ -238,16 +238,16 @@ label_53a8e3:
 				d2_SetSlotVisibility(v5, 0);
 				if (fcn_005dfb40(0x24087, 1, (char *)0x6a3ab8, (char *)0x6a3778, (char *)0x6a3ac8, v7)) {
 					fcn_0064d41a(v8, (char *)0x67728c, (char *)0x6a3448, v7);
-					read_profile((char *)0x6a2278, (char *)0x6a2288, (char *)0x6a2294, v9, 0x60, v8);
-					fcn_005392a0(v9, 0);
+					read_profile((char *)0x6a2278, (char *)0x6a2288, (char *)0x6a2294, profileValueA, 0x60, v8);
+					fcn_005392a0(profileValueA, 0);
 				}
 				goto label_53a8e3;
 			} else if (d2_CurrentElementId == v21) {
 				d2_SetSlotVisibility(v5, 0);
 				if (fcn_005dfb40(0x24087, 1, (char *)0x6a3ab8, (char *)0x6a3778, (char *)0x6a3ac8, v10)) {
 					fcn_0064d41a(v11, (char *)0x67728c, (char *)0x6a3448, v10);
-					read_profile((char *)0x6a2278, (char *)0x6a2288, (char *)0x6a2294, v12, 0x60, v11);
-					fcn_005392a0(v12, 1);
+					read_profile((char *)0x6a2278, (char *)0x6a2288, (char *)0x6a2294, profileValueB, 0x60, v11);
+					fcn_005392a0(profileValueB, 1);
 				}
 				d2_SetSlotVisibility(v5, 1);
 			} else if (d2_CurrentElementId == v23) {

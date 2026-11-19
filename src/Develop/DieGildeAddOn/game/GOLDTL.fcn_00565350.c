@@ -24,7 +24,7 @@ void __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl fcn_00545780(int);
 
 /* ADDRESS: GOLDTL 0x00565350 */
-void __cdecl fcn_00565350(int a0)
+void __cdecl fcn_00565350(int action)
 {
 	unsigned char* ent;
 	char* p;
@@ -37,51 +37,51 @@ void __cdecl fcn_00565350(int a0)
 	int z;
 	int kind;
 	int v;
-	int v6;
+	int statIndex;
 	int v7;
 	int v8;
 	int v9;
 	int i;
 	int sex;
 
-	if (g_774970 != *(unsigned short*) (a0 + 8))
+	if (g_774970 != *(unsigned short*) (action + 8))
 		return;
 	if (!g_774964)
 		return;
-	if (0 < fcn_00500cb0((void*) (a0 + 0x44), (void*) 0x7f4c00))
+	if (0 < fcn_00500cb0((void*) (action + 0x44), (void*) 0x7f4c00))
 		return;
-	if (!*(unsigned char*) (a0 + 0xb1)) {
-		v = gm_LookupEntityRecordById(*(unsigned int*) (a0 + 0xac));
+	if (!*(unsigned char*) (action + 0xb1)) {
+		v = gm_LookupEntityRecordById(*(unsigned int*) (action + 0xac));
 		if (v) {
-			*(unsigned char*) (a0 + 0xb0) = *(char*) (v + 0x164);
-			*(unsigned char*) (a0 + 0xb1) = *(char*) (v + 0x164) - 1;
+			*(unsigned char*) (action + 0xb0) = *(char*) (v + 0x164);
+			*(unsigned char*) (action + 0xb1) = *(char*) (v + 0x164) - 1;
 		}
 	}
-	switch (*(int*) (a0 + 0x70)) {
+	switch (*(int*) (action + 0x70)) {
 	case 0:
-		fcn_00545670((char*) a0, 0, 0, "Berufe\\Meisterpruefung_BESTANDEN", 0x5ec);
-		if (!*(int*) (a0 + 0x74)) {
-			fcn_00546190((char*) a0);
+		fcn_00545670((char*) action, 0, 0, "Berufe\\Meisterpruefung_BESTANDEN", 0x5ec);
+		if (!*(int*) (action + 0x74)) {
+			fcn_00546190((char*) action);
 			return;
 		}
-		d2_SetForm(*(int*) (*(int*) (a0 + 0x74) + 8), 0);
-		d2_CenterDialogWindows(*(int*) (*(int*) (a0 + 0x74) + 8));
-		ent = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (a0 + 0xac));
+		d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 0);
+		d2_CenterDialogWindows(*(int*) (*(int*) (action + 0x74) + 8));
+		ent = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (action + 0xac));
 		sex = *(unsigned char*) (ent + 9);
 		sex = -sex;
 		y = (sex >> 8) & 0x5f;
 		y += 0x130;
-		x = gm_MapEntityStatRange(*(unsigned char*) (a0 + 0xb0));
-		z = gm_GetOppositeStatIndex(*(unsigned char*) (a0 + 0xb0));
-		d2_SetForm(*(int*) (*(int*) (a0 + 0x74) + 8), 1);
+		x = gm_MapEntityStatRange(*(unsigned char*) (action + 0xb0));
+		z = gm_GetOppositeStatIndex(*(unsigned char*) (action + 0xb0));
+		d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 1);
 		v7 = (int) (z * 0.5 + (3 * x + 0x155a));
 		io_AppendText(0x15c3, g_773d75 * 0x2f4 + (int) 0x868080, (int) 0x7f4c00,
-			*(unsigned char*) (a0 + 0xb1) + y, v7, x + 0x158a);
-		fcn_004c6470(*(int*) (ent + 4), *(unsigned char*) (a0 + 0xb1));
+			*(unsigned char*) (action + 0xb1) + y, v7, x + 0x158a);
+		fcn_004c6470(*(int*) (ent + 4), *(unsigned char*) (action + 0xb1));
 		kind = *(char*) (ent + 2);
 		if (kind == 6 || kind == 7 || kind == 5) {
 			io_FormatTextBuffer(buf, 0x1c1f, *(unsigned short*) ent,
-				*(unsigned char*) (a0 + 0xb0) + y, *(unsigned char*) (a0 + 0xb1) + y);
+				*(unsigned char*) (action + 0xb0) + y, *(unsigned char*) (action + 0xb1) + y);
 			p = (char*) 0x7f4ca4; do {
 				kind = *(char*) (p - 2);
 				if ((kind == 6 || kind == 7) && *(int*) p != *(int*) (ent + 4))
@@ -89,12 +89,12 @@ void __cdecl fcn_00565350(int a0)
 			} while (p += 0x21c, (int) p < 0x85a0a4);
 			*(unsigned int*) (ent + 0x1c8) &= 0x7fffffff;
 		}
-		*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
+		*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 		return;
 	case 1:
-		ent = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (a0 + 0xac));
-		x = gm_MapEntityStatRange(*(unsigned char*) (a0 + 0xb0));
-		v6 = gm_GetOppositeStatIndex(*(unsigned char*) (a0 + 0xb0));
+		ent = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (action + 0xac));
+		x = gm_MapEntityStatRange(*(unsigned char*) (action + 0xb0));
+		statIndex = gm_GetOppositeStatIndex(*(unsigned char*) (action + 0xb0));
 		sprintf(name, "brk_%02i", x);
 		v7 = sb_FindBankByName("BERUF_BESTANDEN");
 		if (0xd <= x) {
@@ -115,8 +115,8 @@ void __cdecl fcn_00565350(int a0)
 			v9 = sb_FindBankByName("BERUFE_VEREINIGUNG_UNTERSCHRIFT");
 		}
 
-		if (v6 + 1 >= 3) {
-			if (v6 + 1 >= 5)
+		if (statIndex + 1 >= 3) {
+			if (statIndex + 1 >= 5)
 				s = "FanfarePositivLang";
 			else
 				s = "FanfarePositivMittel";
@@ -125,9 +125,9 @@ void __cdecl fcn_00565350(int a0)
 		}
 		fcn_004c30a0(-7, 0, s, -1, 0);
 		fcn_004c30a0(-6, v7, "SELBST", 1, 0);
-		fcn_004c30a0(-8, v, name, v6 - 1, 0);
+		fcn_004c30a0(-8, v, name, statIndex - 1, 0);
 		fcn_004c30a0(-6, v7, "SELBST", 0, 0);
-		fcn_004c30a0(-8, v8, name, (int) (3.0 - ((double) v6 + 1.0) * 0.5), 0);
+		fcn_004c30a0(-8, v8, name, (int) (3.0 - ((double) statIndex + 1.0) * 0.5), 0);
 		fcn_004c30a0(-6, v7, "GEZEICHNET", -1, 0);
 		if (0xd <= x)
 			x -= 0xd;
@@ -135,21 +135,21 @@ void __cdecl fcn_00565350(int a0)
 			x -= 1;
 		fcn_004c30a0(-8, v9, "_BERUFE_VEREINIGUNG_UNTERSCHRIFT", x, 0);
 		fcn_004c30a0(-7, 0, "MausclickLinks_s_01", -1, 0);
-		*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
+		*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 		return;
 	case 2:
 		break;
 	case 0xfffffffe:
 	case 0xffffffff:
-		fcn_00545780(a0);
-		fcn_00546190((char*) a0);
+		fcn_00545780(action);
+		fcn_00546190((char*) action);
 		return;
 	default:
 		return;
 	}
-	slot = (int*) *(int*) (a0 + 0x74);
+	slot = (int*) *(int*) (action + 0x74);
 	if (!slot) {
-		*(unsigned int*) (a0 + 0x70) = 0;
+		*(unsigned int*) (action + 0x70) = 0;
 		return;
 	}
 	if (g_100f884 != slot[2]) {
@@ -165,20 +165,20 @@ void __cdecl fcn_00565350(int a0)
 			return;
 	} else {
 		if (g_100f1dc == 2) {
-			fcn_00545780(a0);
-			fcn_00546190((char*) a0);
+			fcn_00545780(action);
+			fcn_00546190((char*) action);
 			return;
 		}
 		if (g_100f1dc == 1) {
-			fcn_00545780(a0);
-			fcn_00546190((char*) a0);
+			fcn_00545780(action);
+			fcn_00546190((char*) action);
 			g_7749e8 = 0;
 			return;
 		}
 	}
 	if (!g_7749e8)
 		return;
-	fcn_00545780(a0);
-	fcn_00546190((char*) a0);
+	fcn_00545780(action);
+	fcn_00546190((char*) action);
 	g_7749e8 = 0;
 }

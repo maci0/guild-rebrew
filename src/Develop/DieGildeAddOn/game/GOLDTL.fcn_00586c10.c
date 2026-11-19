@@ -53,7 +53,7 @@ void __cdecl fcn_00586c10(char* obj)
     int tbl;
     int count;
     int v[3];
-    unsigned int a0;
+    unsigned int elapsedTicks;
     float anchor[3];
     int g28;
     int s0;
@@ -218,8 +218,8 @@ void __cdecl fcn_00586c10(char* obj)
     while (fcn_005373e0((int)fcn_00586c10, 0x2656c7)) {
         fcn_005270c0(0);
         *(unsigned int*) ((char*) S + 0x6c) = (unsigned int)g_6b7fac;
-        a0 = (unsigned int)g_6b7fac - *(unsigned int*) ((char*) S + 0x68);
-        dt = (float) (unsigned int) a0 * 0.013513514f;
+        elapsedTicks = (unsigned int)g_6b7fac - *(unsigned int*) ((char*) S + 0x68);
+        dt = (float) (unsigned int) elapsedTicks * 0.013513514f;
         if (*(int*) (res + 4) == 0
             && (g_14ce8e0 != 0
                 || (g_100f1dc != -1

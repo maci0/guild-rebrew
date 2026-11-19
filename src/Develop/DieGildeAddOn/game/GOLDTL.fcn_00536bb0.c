@@ -33,7 +33,7 @@ void __cdecl fcn_00536bb0(void)
 	int lim;
 	int idx;
 	int i;
-	char v1;
+	char opacity;
 	float v2;
 	char* name;
 
@@ -134,12 +134,12 @@ void __cdecl fcn_00536bb0(void)
 	fcn_00459940((void*) g_6b89c0, g_7e4540, f * 0.75f);
 	fcn_00459940((void*) g_6b89c0, g_7e4544, f);
 	if (lim == 0) {
-		v1 = 0;
+		opacity = 0;
 		v2 = 2500.0f;
 	} else {
-		v1 = (lim << 6) / 1000 + 0x60;
+		opacity = (lim << 6) / 1000 + 0x60;
 		v2 = 1000.0f;
 	}
-	fcn_00459980((void*) g_6b89c0, g_7e4548, v1, v2);
+	fcn_00459980((void*) g_6b89c0, g_7e4548, opacity, v2);
 	fcn_00459940((void*) g_6b89c0, g_7e4548, f * 1.5f);
 }

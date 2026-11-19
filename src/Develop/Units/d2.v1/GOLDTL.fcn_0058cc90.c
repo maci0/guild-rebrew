@@ -25,7 +25,7 @@ int __cdecl fcn_0058c670(char*, int, unsigned char);
 int __cdecl fcn_0058cae0(char*, int, unsigned char);
 int __cdecl fcn_005373e0(void*, int);
 
-void __cdecl fcn_0058cc90(char* a1, Req* s)
+void __cdecl fcn_0058cc90(char* input, Req* s)
 {
 	int ids[2];
 	int ok;
@@ -44,13 +44,13 @@ void __cdecl fcn_0058cc90(char* a1, Req* s)
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
 				fcn_00471af0(s->x0, 0);
-				if (fcn_0058c670(a1, s->x20, s->x24) == 1) {
+				if (fcn_0058c670(input, s->x20, s->x24) == 1) {
 					g_774654 = 1;
 				}
 				fcn_00471af0(s->x0, 1);
 			} else if (d2_CurrentElementId == cancel) {
 				fcn_00471af0(s->x0, 0);
-				if (fcn_0058cae0(a1, s->x20, s->x24) == 1) {
+				if (fcn_0058cae0(input, s->x20, s->x24) == 1) {
 					g_774654 = 1;
 				}
 				fcn_00471af0(s->x0, 1);

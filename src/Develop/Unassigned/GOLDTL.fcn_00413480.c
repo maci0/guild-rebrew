@@ -7,7 +7,7 @@ void __cdecl d3_UpdateObjectCameraTransform(char*, char*, int);
 void __cdecl fcn_00455540(char*, float*, float*);
 
 /* ADDRESS: GOLDTL 0x00413480 */
-int __cdecl fcn_00413480(char* a0, float a1, float* a2, float* a3, float* a4, float* a5)
+int __cdecl fcn_00413480(char* obj, float a1, float* a2, float* a3, float* a4, float* a5)
 {
 	float lo[4];
 	float hi[4];
@@ -20,16 +20,16 @@ int __cdecl fcn_00413480(char* a0, float a1, float* a2, float* a3, float* a4, fl
 	int i;
 	int j;
 
-	if (*(int*) (a0 + 0x218) != 4)
+	if (*(int*) (obj + 0x218) != 4)
 		return 1;
-	if ((*(unsigned char*) (a0 + 0x216) & 0x20) == 0)
-		d3_UpdateObjectCameraTransform(a0, d3_ActiveCamera, 0);
-	m = *(char**) (*(char**) (a0 + 0x1cc) + 0x318);
+	if ((*(unsigned char*) (obj + 0x216) & 0x20) == 0)
+		d3_UpdateObjectCameraTransform(obj, d3_ActiveCamera, 0);
+	m = *(char**) (*(char**) (obj + 0x1cc) + 0x318);
 	n = *(int*) (m + 0x44);
 	i = 0;
 	if (n > 0) {
 		p = (float*) *(char**) (m + 0x27c);
-		e = *(char**) (a0 + 0x1ec);
+		e = *(char**) (obj + 0x1ec);
 		do {
 			if (p[1] * *(float*) (e + 0x1c) + p[2] * *(float*) (e + 0x2c) + p[0] * *(float*) (e + 0xc) + *(float*) (e + 0x3c) <= a1) {
 				q = p;
@@ -47,7 +47,7 @@ int __cdecl fcn_00413480(char* a0, float a1, float* a2, float* a3, float* a4, fl
 	}
 	if (i < n) {
 		p = (float*) *(char**) (m + 0x27c) + i * 3;
-		e = *(char**) (a0 + 0x1ec);
+		e = *(char**) (obj + 0x1ec);
 		n -= i;
 		do {
 			if (p[1] * *(float*) (e + 0x1c) + p[2] * *(float*) (e + 0x2c) + p[0] * *(float*) (e + 0xc) + *(float*) (e + 0x3c) <= a1) {
@@ -63,18 +63,18 @@ int __cdecl fcn_00413480(char* a0, float a1, float* a2, float* a3, float* a4, fl
 	t[0] = lo[0];
 	t[1] = lo[1];
 	t[2] = lo[2];
-	fcn_00455540(a0, t, a2);
+	fcn_00455540(obj, t, a2);
 	t[0] = hi[0];
 	t[1] = lo[1];
 	t[2] = lo[2];
-	fcn_00455540(a0, t, a3);
+	fcn_00455540(obj, t, a3);
 	t[0] = hi[0];
 	t[1] = lo[1];
 	t[2] = hi[2];
-	fcn_00455540(a0, t, a4);
+	fcn_00455540(obj, t, a4);
 	t[0] = lo[0];
 	t[1] = lo[1];
 	t[2] = hi[2];
-	fcn_00455540(a0, t, a5);
+	fcn_00455540(obj, t, a5);
 	return 0;
 }

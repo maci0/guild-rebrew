@@ -75,7 +75,7 @@ typedef struct Msg59b {
 } Msg59b;
 
 /* ADDRESS: GOLDTL 0x0059b260 */
-int __cdecl fcn_0059b260(char* a0)
+int __cdecl fcn_0059b260(char* building)
 {
 	Msg59b msg;
 	char buf[4];
@@ -97,12 +97,12 @@ int __cdecl fcn_0059b260(char* a0)
 	int v;
 	int prev;
 
-	if (fcn_00525fb0((int) a0) != 0) {
+	if (fcn_00525fb0((int) building) != 0) {
 		return 0;
 	}
 	h = fcn_00470820(0, 0, (char*) 0x6aa148);
 	d2_CenterDialogWindows(h);
-	fcn_0052a0c0((int) a0, 0);
+	fcn_0052a0c0((int) building, 0);
 	d2_SetForm(h, 3);
 	io_AppendText(0xc7);
 	fcn_00594340();
@@ -120,15 +120,15 @@ int __cdecl fcn_0059b260(char* a0)
 	d2_SetOverlayAnimation(0, 0);
 	do {
 		d2_SetForm(h, 2);
-		p1 = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, 0xff);
+		p1 = fcn_00502cd0(*(int*) (building + 0x5d), 2, 6, 0, 0xff);
 		if (p1 == 0) {
 			return 0;
 		}
-		p2 = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, 0x2a);
+		p2 = fcn_00502cd0(*(int*) (building + 0x5d), 2, 6, 0, 0x2a);
 		if (p2 == 0) {
 			return 0;
 		}
-		p3 = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, 0xfe);
+		p3 = fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0xfe);
 		if (p3 == 0) {
 			return 0;
 		}
@@ -161,12 +161,12 @@ int __cdecl fcn_0059b260(char* a0)
 								}
 								p = *(char**) (((int) g_7f4ca0 + 0x17c) + n * 0x21c);
 								if (i == 0) {
-									if (p != 0 && *(char*) p == 9 && *(int*) (p + 0x10) == *(int*) (a0 + 1)) {
+									if (p != 0 && *(char*) p == 9 && *(int*) (p + 0x10) == *(int*) (building + 1)) {
 										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 0;
 									}
 								}
 								else {
-									if (p != 0 && *(char*) p == 8 && *(int*) (p + 0x10) == *(int*) (a0 + 1)
+									if (p != 0 && *(char*) p == 8 && *(int*) (p + 0x10) == *(int*) (building + 1)
 										&& *(unsigned short*) (p + 0xac) == *(int*) e) {
 										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 1;
 									}
@@ -176,20 +176,20 @@ int __cdecl fcn_0059b260(char* a0)
 						} else {
 							if (i == 0) {
 								fcn_004c35f0();
-								p = fcn_005463a0(2, 0, 9, 3, *(int*) (a0 + 1));
+								p = fcn_005463a0(2, 0, 9, 3, *(int*) (building + 1));
 								if (p == 0) {
 									memset(&msg, 0, 0xf8);
 									msg.timestamp.a = gm_GameTime.a;
 									msg.timestamp.c = g_7f4c08;
 									msg.type = 9;
 									msg.f08 = *(int*) (g_7f4ca4 + (unsigned) g_774970 * 0x21c);
-									msg.f0c = *(int*) (a0 + 1);
+									msg.f0c = *(int*) (building + 1);
 									msg.f10 = 0;
 									msg.f14 = 0;
 									msg.f36 = 1;
 									msg.timestamp.b = g_7f4c04;
 									msg.timestamp.d = (unsigned short) g_7f4c0c;
-									msg.f58 = *(int*) (a0 + 1);
+									msg.f58 = *(int*) (building + 1);
 									msg.f5c = *(int*) (p1 + 2);
 									msg.f60 = *(int*) (p3 + 2);
 									k = fcn_004c5530((char*) &msg);
@@ -203,7 +203,7 @@ int __cdecl fcn_0059b260(char* a0)
 							}
 							else {
 								fcn_004c35f0();
-								p = fcn_005463a0(2, 0, 8, 3, *(int*) (a0 + 1));
+								p = fcn_005463a0(2, 0, 8, 3, *(int*) (building + 1));
 								while (p != 0) {
 									if (*(unsigned short*) (p + 0xac) == *(int*) e) {
 										break;
@@ -220,10 +220,10 @@ int __cdecl fcn_0059b260(char* a0)
 									msg.f08 = *(int*) (g_7f4ca4 + (unsigned) g_774970 * 0x21c);
 									msg.f10 = 0;
 									msg.f14 = 0;
-									msg.f0c = *(int*) (a0 + 1);
+									msg.f0c = *(int*) (building + 1);
 									msg.timestamp.b = g_7f4c04;
 									msg.timestamp.d = (unsigned short) g_7f4c0c;
-									msg.f5c = *(int*) (a0 + 1);
+									msg.f5c = *(int*) (building + 1);
 									msg.f60 = *(int*) (p3 + 2);
 									k = fcn_004c5530((char*) &msg);
 									e = (char*) fcn_004c4450(k);
@@ -242,7 +242,7 @@ int __cdecl fcn_0059b260(char* a0)
 										break;
 									}
 									if (*(int*) (q + 0x10) != 0) {
-										fcn_00529160(a0, g_7746cc, n, p);
+										fcn_00529160(building, g_7746cc, n, p);
 										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 0;
 									}
 									q += 0x28;
@@ -360,8 +360,8 @@ int __cdecl fcn_0059b260(char* a0)
 		itoa(count - 1, buf, 10);
 		fcn_0046f940(item, buf);
 		fcn_00594de0(h, 2, count, p3);
-		fcn_00595e20((int) a0, (int) p2);
-		fcn_005963f0(h, 1, 0, (int) a0);
+		fcn_00595e20((int) building, (int) p2);
+		fcn_005963f0(h, 1, 0, (int) building);
 	} while (fcn_005373e0(fcn_005944d0, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_0052a2d0();

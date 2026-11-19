@@ -12,7 +12,7 @@ int __cdecl fcn_004e9310(int, int, unsigned char**);
 extern char* g_77261c;
 
 /* ADDRESS: GOLDTL 0x00496810 */
-int __cdecl fcn_00496810(int a1, short* ent, int mode, Cmd* out1, Cmd* out2, int extra)
+int __cdecl fcn_00496810(int targetSlot, short* ent, int mode, Cmd* out1, Cmd* out2, int extra)
 {
     Cmd c1;
     Cmd c2;
@@ -81,8 +81,8 @@ int __cdecl fcn_00496810(int a1, short* ent, int mode, Cmd* out1, Cmd* out2, int
             if ((*(unsigned int*)((char*)ent + 0x1cc) & 0x1c000) != 0) return 0;
             mode = 0x10000500;
             i = (unsigned short)gm_RandomMod(0x19);
-            if (fcn_004a5340((unsigned short*)ent, 1, (unsigned int*)&mode, 0.0f, (float)i + 10.0, (unsigned short*)&a1) == 0) return 0;
-            e = (unsigned char*)0x7f4ca0 + *(unsigned short*)&a1 * 0x21c;
+            if (fcn_004a5340((unsigned short*)ent, 1, (unsigned int*)&mode, 0.0f, (float)i + 10.0, (unsigned short*)&targetSlot) == 0) return 0;
+            e = (unsigned char*)0x7f4ca0 + *(unsigned short*)&targetSlot * 0x21c;
         }
         if (e == 0) return 0;
         out1->kind = 7;

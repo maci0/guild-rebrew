@@ -12,7 +12,7 @@ extern int __cdecl fcn_00472640(int element, int a);
  * unit icon plus its 0xca-wide gauges, then create the element and kick off
  * its animation. */
 /* ADDRESS: GOLDTL 0x005ca740 */
-int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* a4, int a5)
+int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* row, int a5)
 {
 	int v8;
 	int v10;
@@ -24,54 +24,54 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* a4, int a5)
 	(void) a2;
 	v10 = ((D2_BILD_GROESSE*)g_772500)[0x5da].breite / 2 + a0;
 	v8 = a1 + 0x1c;
-	a4[1] = fcn_0046f740(a0, v8, 0x5da, d2_CurrentWindowId);
-	a4[2] = -1;
-	if (a4[0] != 0) {
-		v5 = *(int*) (a4[0] + 0x18c);
-		a4[6] = fcn_0046f740(v10 - ((D2_BILD_GROESSE*)g_772500)[v5].breite / 2 - 3,
+	row[1] = fcn_0046f740(a0, v8, 0x5da, d2_CurrentWindowId);
+	row[2] = -1;
+	if (row[0] != 0) {
+		v5 = *(int*) (row[0] + 0x18c);
+		row[6] = fcn_0046f740(v10 - ((D2_BILD_GROESSE*)g_772500)[v5].breite / 2 - 3,
 		                     a1 + 0x1d, v5, d2_CurrentWindowId);
-		fcn_0046f740(a0 + 3, a1 + 0x1f, a4[7], d2_CurrentWindowId);
-		if (a4[8])
+		fcn_0046f740(a0 + 3, a1 + 0x1f, row[7], d2_CurrentWindowId);
+		if (row[8])
 			fcn_0046f740(a0 + 3, ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 9 + a1,
-			             a4[8], d2_CurrentWindowId);
-		if (a4[9])
+			             row[8], d2_CurrentWindowId);
+		if (row[9])
 			fcn_0046f740(((D2_BILD_GROESSE*)g_772500)[0x5da].breite - 0x10 + a0,
-			             a1 + 0x1f, a4[9], d2_CurrentWindowId);
+			             a1 + 0x1f, row[9], d2_CurrentWindowId);
 		fcn_0046f740(((D2_BILD_GROESSE*)g_772500)[0x5da].breite - 0x10 + a0,
-		             ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 9 + a1, a4[10],
+		             ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 9 + a1, row[10],
 		             d2_CurrentWindowId);
-		if (a5 && *(unsigned char*) (a4[0] + 0xd))
+		if (a5 && *(unsigned char*) (row[0] + 0xd))
 			io_FormatTextBuffer(buf, (const char*) 0x6ac964,
-			             ((*(unsigned char*) (a4[0] + 9) != 0) ? 10 : 0) + 0x114 +
-			                 *(unsigned char*) (a4[0] + 0xd),
-			             *(unsigned short*) a4[0]);
+			             ((*(unsigned char*) (row[0] + 9) != 0) ? 10 : 0) + 0x114 +
+			                 *(unsigned char*) (row[0] + 0xd),
+			             *(unsigned short*) row[0]);
 		else
-			io_FormatTextBuffer(buf, (const char*) 0x6ac96c, *(unsigned short*) a4[0]);
+			io_FormatTextBuffer(buf, (const char*) 0x6ac96c, *(unsigned short*) row[0]);
 		v7 = a3;
-		fcn_005c9090(buf, v10, a4[5], 0xca, a3);
-		io_FormatTextBuffer(buf, (const char*) 0x6ac95c, *(unsigned short*) a4[0]);
-		fcn_005c9090(buf, v10, a4[5] + 0xe, 0xca, v7);
-		if (*(unsigned char*) (a4[0] + 2) != 6) {
+		fcn_005c9090(buf, v10, row[5], 0xca, a3);
+		io_FormatTextBuffer(buf, (const char*) 0x6ac95c, *(unsigned short*) row[0]);
+		fcn_005c9090(buf, v10, row[5] + 0xe, 0xca, v7);
+		if (*(unsigned char*) (row[0] + 2) != 6) {
 			v6 = fcn_004677e0(v10 - 0x23, ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 0x1e + a1,
 			                  0x40, 0, 100, 0x75, 0x442, d2_CurrentWindowId);
-			a4[2] = v6;
-			if (*(unsigned char*) (a4[0] + 2) != 7) {
-				d2_SetElementValue(a4[2], 0, 100, (int)fcn_0050f980(*(unsigned short*) &g_774970,
-				             *(unsigned short*) a4[0], 1));
+			row[2] = v6;
+			if (*(unsigned char*) (row[0] + 2) != 7) {
+				d2_SetElementValue(row[2], 0, 100, (int)fcn_0050f980(*(unsigned short*) &g_774970,
+				             *(unsigned short*) row[0], 1));
 			} else {
 				d2_SetElementValue(v6, 0, 100, 0, 1);
 			}
-			fcn_00472640(a4[2], 0);
+			fcn_00472640(row[2], 0);
 		}
-		if (a4[0xc]) {
-			*(int*) ((int)g_1015ea0 + 0x5c + a4[1] * 0x2f4) = 1;
-			*(int*) ((int)g_1015ea0 + 0x1d0 + a4[1] * 0x2f4) = 3;
-			*(int*) ((int)g_1015ea0 + 0x2f0 + a4[1] * 0x2f4) = a4[0];
+		if (row[0xc]) {
+			*(int*) ((int)g_1015ea0 + 0x5c + row[1] * 0x2f4) = 1;
+			*(int*) ((int)g_1015ea0 + 0x1d0 + row[1] * 0x2f4) = 3;
+			*(int*) ((int)g_1015ea0 + 0x2f0 + row[1] * 0x2f4) = row[0];
 		}
-		kind = *(unsigned char*) (a4[0] + 2);
+		kind = *(unsigned char*) (row[0] + 2);
 		if (kind != 5 && kind != 6 && kind != 7)
 			return 0;
-		fcn_0046f740(a0 - 0x20, v8, *(int*) (a4[0] + 0x54), d2_CurrentWindowId);
+		fcn_0046f740(a0 - 0x20, v8, *(int*) (row[0] + 0x54), d2_CurrentWindowId);
 	} else {
 		fcn_0046f740(v10 - ((D2_BILD_GROESSE*)g_772500)[0x4fb].breite / 2 - 3,
 		             a1 + 0x1d, 0x4fb, d2_CurrentWindowId);

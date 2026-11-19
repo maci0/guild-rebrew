@@ -19,7 +19,7 @@ void __cdecl fcn_00515c60(unsigned char* a0, unsigned char* a1)
 	int z;
 	char v6[4];
 	char v7[48];
-	char v5[260];
+	char path[260];
 	int v9;
 	int v8;
 	int v3;
@@ -63,13 +63,13 @@ found:
 		}
 	}
 	v3++;
-	fcn_0064d41a(v5, (char*) 0x6a1f54, g_6790c8, v3, v3);
-	r = vfs_LookupPath(v5, (int) g_6b7fdc, v6);
+	fcn_0064d41a(path, (char*) 0x6a1f54, g_6790c8, v3, v3);
+	r = vfs_LookupPath(path, (int) g_6b7fdc, v6);
 	if (!r) {
 		return;
 	}
 	fcn_0064d41a(v7, g_68b0d8, *(int*) (v8 + 4));
-	r = evt_LoadScript(v5);
+	r = evt_LoadScript(path);
 	if (!r) {
 		g_699b10 = -1;
 		return;

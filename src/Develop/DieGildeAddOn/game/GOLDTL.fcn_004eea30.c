@@ -18,23 +18,23 @@ int __cdecl fcn_004ec950(void* p, int id);
 int __cdecl fcn_004c6d30(void* m);
 
 /* ADDRESS: GOLDTL 0x004eea30 */
-int __cdecl fcn_004eea30(void* a0, int a1, float a2)
+int __cdecl fcn_004eea30(void* obj, int id, float fraction)
 {
 	Msg18F m;
 
-	if (ahm_CheckFlag(a0) == 0) {
+	if (ahm_CheckFlag(obj) == 0) {
 		return -1;
 	}
-	if (fcn_004ec950(a0, a1) == 0) {
+	if (fcn_004ec950(obj, id) == 0) {
 		return -1;
 	}
 	memset(&m, 0, sizeof(m));
 	m.tag = 0x61535263;
-	m.obj = *(int*) ((char*) a0 + 4);
-	m.id = a1;
-	if (a2 > g_6628a8) {
-		if (a2 < 1.0f) {
-			m.f = a2;
+	m.obj = *(int*) ((char*) obj + 4);
+	m.id = id;
+	if (fraction > g_6628a8) {
+		if (fraction < 1.0f) {
+			m.f = fraction;
 			return fcn_004c6d30(&m);
 		}
 	} else {

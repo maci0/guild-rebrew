@@ -22,7 +22,7 @@ void __cdecl fcn_004d4250(char* rec, char* e)
 	char* ent;
 	char* obj;
 	char* map;
-	unsigned int v5;
+	unsigned int gridX;
 	float f4;
 	unsigned int grid_z;
 	if (!e || !*(char**) (e + 0x184) || (*(char*) (e + 8) && *(int*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x218) != 1)) {
@@ -37,10 +37,10 @@ void __cdecl fcn_004d4250(char* rec, char* e)
 			if (*(int*) (obj + 0x58) == 2) {
 				map = *(char**) (g_67a370 + 0xb0);
 				ent = *(char**) (e + 0x184);
-				if (fcn_0045b990(map, (float*) (*(char**) (ent + 0x34) + 0x4c), (int*) &v5, (int*) &grid_z, &f4)) {
-					obj = (char*) fcn_004d3330(e, v5, (int) grid_z, (int) (g_664330 / *(float*) (map + 0x10)), &v5, &grid_z);
+				if (fcn_0045b990(map, (float*) (*(char**) (ent + 0x34) + 0x4c), (int*) &gridX, (int*) &grid_z, &f4)) {
+					obj = (char*) fcn_004d3330(e, gridX, (int) grid_z, (int) (g_664330 / *(float*) (map + 0x10)), &gridX, &grid_z);
 					if (obj != 0) {
-						fcn_004d1020(rec, e, 0, v5, (int) grid_z);
+						fcn_004d1020(rec, e, 0, gridX, (int) grid_z);
 						return;
 					}
 				}

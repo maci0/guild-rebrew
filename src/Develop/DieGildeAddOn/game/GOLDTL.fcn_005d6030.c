@@ -18,7 +18,7 @@ int __cdecl fcn_005cd440(void*, char*, int, char*);
  * the owner id and four random-range globals; the quest path fills a
  * five-dword descriptor and looks up the record for id 0x1d66. */
 /* ADDRESS: GOLDTL 0x005d6030 */
-int __cdecl fcn_005d6030(char* a0, char* a1)
+int __cdecl fcn_005d6030(char* actor, char* a1)
 {
 	unsigned char rec[0xf8];
 	unsigned int init[20];
@@ -29,7 +29,7 @@ int __cdecl fcn_005d6030(char* a0, char* a1)
 	int ret;
 
 	ret = 2;
-	if (*(unsigned char*) (a0 + 2) != 6 && *(unsigned char*) (a0 + 2) != 7) {
+	if (*(unsigned char*) (actor + 2) != 6 && *(unsigned char*) (actor + 2) != 7) {
 		found = gm_LookupEntityRecordById(*(unsigned int*) (a1 + 0x214));
 		if (found == 0) {
 			return 0x60;
@@ -39,9 +39,9 @@ int __cdecl fcn_005d6030(char* a0, char* a1)
 		id = gm_RandomMod(9);
 		id += 0x1d6d;
 		memset(rec, 0, sizeof(rec));
-		*(int*) (rec + 8) = *(int*) (a0 + 4);
-		*(int*) (rec + 0xc) = *(int*) (a0 + 4);
-		*(int*) (rec + 0x58) = *(int*) (a0 + 4);
+		*(int*) (rec + 8) = *(int*) (actor + 4);
+		*(int*) (rec + 0xc) = *(int*) (actor + 4);
+		*(int*) (rec + 0x58) = *(int*) (actor + 4);
 		*(char*) (rec + 4) = 0x47;
 		*(int*) (rec + 0x28) = gm_GameTime;
 		*(int*) (rec + 0x30) = g_7f4c08;
@@ -52,7 +52,7 @@ int __cdecl fcn_005d6030(char* a0, char* a1)
 		*(unsigned short*) (rec + 0x60) = (unsigned short) id;
 		*(unsigned short*) (rec + 0x62) = (unsigned short) owner;
 		fcn_004c5530(rec);
-		fcn_004c6ae0(*(int*) (a0 + 4), -2);
+		fcn_004c6ae0(*(int*) (actor + 4), -2);
 		return 0x10;
 	}
 	memset(init, 0, sizeof(init));

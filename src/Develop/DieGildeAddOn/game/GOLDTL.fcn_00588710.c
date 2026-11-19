@@ -8,7 +8,7 @@ void __cdecl fcn_00438b40(char*, int*);
 char __cdecl fcn_00442c00(char*, char);
 
 /* ADDRESS: GOLDTL 0x00588710 */
-void __cdecl fcn_00588710(int a0, int a1, int a2, int a3, int a4)
+void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
 {
 	unsigned int start = *(unsigned int*) 0x6b7fac;
 	float f;
@@ -18,7 +18,7 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int a3, int a4)
 	float factor;
 	int i;
 
-	if (a3 == *(int*) (a1 + 0xa0) || a3 > *(int*) (a1 + 0xdc)) {
+	if (selectedIndex == *(int*) (a1 + 0xa0) || selectedIndex > *(int*) (a1 + 0xdc)) {
 		return;
 	}
 	while (fcn_005373e0((void*) fcn_00588710, a4) != 0) {
@@ -53,8 +53,8 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int a3, int a4)
 	for (i = 0; i != 3; i++) {
 		fcn_00442c00((char*) *(int*) (a1 + 0x8c + i * 4), 0);
 	}
-	fcn_00442c00((char*) *(int*) (a1 + 0x8c + a3 * 4), 1);
-	*(int*) (a1 + 0xa0) = a3;
+	fcn_00442c00((char*) *(int*) (a1 + 0x8c + selectedIndex * 4), 1);
+	*(int*) (a1 + 0xa0) = selectedIndex;
 	start = *(unsigned int*) 0x6b7fac;
 	while (fcn_005373e0((void*) fcn_00588710, a4) != 0) {
 		fcn_00588200(a0, a1, a2);

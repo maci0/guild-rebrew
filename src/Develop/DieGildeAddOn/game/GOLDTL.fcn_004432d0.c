@@ -17,15 +17,15 @@ extern char g_1041d20[];
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x004432d0 */
-char __cdecl fcn_004432d0(int a0, char a1)
+char __cdecl fcn_004432d0(int contextIndex, char a1)
 {
 	int off;
 	char* cp;
 	int cn;
 
-	if (a0 >= 0x40)
+	if (contextIndex >= 0x40)
 		return 0;
-	if (a0 != d3_CurrentContextIndex) {
+	if (contextIndex != d3_CurrentContextIndex) {
 	off = d3_CurrentContextIndex * 0x3dc;
 	*(int*) (g_10432c0 + off + 0x80) = *(int*) 0x1043254;
 	*(int*) (g_10432c0 + off + 0x84) = *(int*) 0x1042538;
@@ -110,7 +110,7 @@ char __cdecl fcn_004432d0(int a0, char a1)
 		*(int*) (g_10432c0 + off + 0xa0) =
 			*(int*) (*(int*) (g_10432c0 + off + 0x88) + 0x8c);
 	}
-	off = a0 * 0x3dc;
+	off = contextIndex * 0x3dc;
 	if (*(int*) (g_10432c0 + off + 0x80) == 0)
 		fcn_00443030(g_10432c0 + off);
 	*(int*) 0x1043254 = *(int*) (g_10432c0 + off + 0x80);
@@ -167,7 +167,7 @@ char __cdecl fcn_004432d0(int a0, char a1)
 		add ecx, ebx
 		rep movsb
 	}
-	d3_CurrentContextIndex = a0;
+	d3_CurrentContextIndex = contextIndex;
 	*(int*) 0x67a370 = (int) (g_10432c0 + off);
 	if (*(int*) 0x1041d0c == *(int*) 0x6b8484)
 		*(int*) 0x1041d0c = *(int*) (g_10432c0 + off + 0x88);

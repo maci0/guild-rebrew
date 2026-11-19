@@ -30,7 +30,7 @@ void __cdecl fcn_004c5530(char*);
 char* __cdecl fcn_005c6220(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005df6b0(char* e, char* a2)
+int __cdecl fcn_005df6b0(char* e, char* request)
 {
 	int out;
 	Req req;
@@ -53,7 +53,7 @@ int __cdecl fcn_005df6b0(char* e, char* a2)
 		r = fcn_005cd440(&req, text, 0, 0);
 	}
 	else {
-		r = gm_LookupEntityRecordById(*(int*) (a2 + 4));
+		r = gm_LookupEntityRecordById(*(int*) (request + 4));
 	}
 	if (r == 0) {
 		return 0;
@@ -68,11 +68,11 @@ int __cdecl fcn_005df6b0(char* e, char* a2)
 	msg[0x36] = 1;
 	fcn_004c5530(msg);
 	if (e[2] == 6) {
-		p = fcn_005c6220(**(unsigned short**) a2, &out);
+		p = fcn_005c6220(**(unsigned short**) request, &out);
 		io_FormatTextBuffer(buf, *(unsigned short*) (p + 0x18) + 1, *(unsigned short*) r);
 		io_FormatTextBuffer(line, 0xfe8, buf);
 		fcn_005dbe90(line);
 	}
-	*(int*) (a2 + 0x10) = 1;
+	*(int*) (request + 0x10) = 1;
 	return 1;
 }

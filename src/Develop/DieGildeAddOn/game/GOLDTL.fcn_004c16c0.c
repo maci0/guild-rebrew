@@ -63,7 +63,7 @@ int __cdecl fcn_004c16c0(void)
 	char buf[16];
 	int v2;
 	int v5;
-	int v6;
+	int offset;
 	int i;
 	float f;
 	float fv;
@@ -92,18 +92,18 @@ int __cdecl fcn_004c16c0(void)
 		if (g_7e4538 != 0) {
 			v5 = *g_7e4538;
 		}
-		v6 = g_772d4c * 100;
-		if ((unsigned) (v2 - *(int *) (v6 + 0x681830)) >
-		    (unsigned) (fcn_0064d3f8() % 2000 + *(int *) (v6 + 0x68182c))) {
+		offset = g_772d4c * 100;
+		if ((unsigned) (v2 - *(int *) (offset + 0x681830)) >
+		    (unsigned) (fcn_0064d3f8() % 2000 + *(int *) (offset + 0x68182c))) {
 			if (v5 < 0x15e) {
-				*(int *) (v6 + 0x681830) = v2;
-				v6 = g_772d4c * 100;
+				*(int *) (offset + 0x681830) = v2;
+				offset = g_772d4c * 100;
 				if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
-				    + *(float *) (v6 + 0x681820)) {
+				    + *(float *) (offset + 0x681820)) {
 					fcn_004234e0(0, s_68a124,
 					    fcn_0064d3f8() % *(int *) (g_772d4c * 100 + 0x681828) + 1,
 					    0x3f,
-					    (int) ((float) (*(float *) (v6 + 0x681824)) * 127.0f),
+					    (int) ((float) (*(float *) (offset + 0x681824)) * 127.0f),
 					    0, 0);
 				}
 				if (fcn_0064d3f8() % 10 > 6) {
@@ -115,9 +115,9 @@ int __cdecl fcn_004c16c0(void)
 				}
 			}
 		}
-		v6 = g_772d4c * 100;
-		if ((unsigned) (v2 - *(int *) (v6 + 0x681844)) <=
-		    (unsigned) (fcn_0064d3f8() % 2000 + *(int *) (v6 + 0x681840)) || v5 >= 100) {
+		offset = g_772d4c * 100;
+		if ((unsigned) (v2 - *(int *) (offset + 0x681844)) <=
+		    (unsigned) (fcn_0064d3f8() % 2000 + *(int *) (offset + 0x681840)) || v5 >= 100) {
 			if (v5 > 0x64 || g_772d4c == 3) {
 				if (g_772d44 != 0) {
 					fcn_0064d41a(&g_772b10, s_689f48, g_772d44);
@@ -147,7 +147,7 @@ int __cdecl fcn_004c16c0(void)
 			}
 		}
 		else {
-			*(int *) (v6 + 0x681844) = v2;
+			*(int *) (offset + 0x681844) = v2;
 			if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
 			    + *(float *) (g_772d4c * 100 + 0x681834)) {
 				if (g_772d48 != 0) {
@@ -190,22 +190,22 @@ join:
 				*(int *) ((char *) g_772d44 + 0x18) = 0; /* stores through the just-cleared pointer, as in the original */
 			}
 		}
-		v6 = g_772d4c * 100;
-		if ((unsigned) (fcn_0064d3f8() % 2000 + *(int *) (v6 + 0x68187c)) <
-		    (unsigned) (v2 - *(int *) (v6 + 0x681880))) {
-			*(int *) (v6 + 0x681880) = v2;
-			v6 = g_772d4c * 100;
+		offset = g_772d4c * 100;
+		if ((unsigned) (fcn_0064d3f8() % 2000 + *(int *) (offset + 0x68187c)) <
+		    (unsigned) (v2 - *(int *) (offset + 0x681880))) {
+			*(int *) (offset + 0x681880) = v2;
+			offset = g_772d4c * 100;
 			if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
-			    + *(float *) (v6 + 0x681820)) {
+			    + *(float *) (offset + 0x681820)) {
 				fcn_004234e0(0, s_689ee0, 1, 0x3f,
-				    (int) (f * *(float *) (v6 + 0x681874) * 127.0f),
+				    (int) (f * *(float *) (offset + 0x681874) * 127.0f),
 				    0, 0);
 			}
 		}
-		v6 = g_772d4c * 100;
-		if ((unsigned) (fcn_0064d3f8() % 2000 + *(int *) (v6 + 0x681868)) <
-		    (unsigned) (v2 - *(int *) (v6 + 0x68186c))) {
-			*(int *) (v6 + 0x68186c) = v2;
+		offset = g_772d4c * 100;
+		if ((unsigned) (fcn_0064d3f8() % 2000 + *(int *) (offset + 0x681868)) <
+		    (unsigned) (v2 - *(int *) (offset + 0x68186c))) {
+			*(int *) (offset + 0x68186c) = v2;
 			if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
 			    + *(float *) (g_772d4c * 100 + 0x68185c)) {
 				p = s_689ed4;
@@ -217,17 +217,17 @@ join:
 					* 127.0f), 0, 0);
 			}
 		}
-		v6 = g_772d4c * 100;
-		if ((unsigned) (fcn_0064d3f8() % 2000 + *(int *) (v6 + 0x681854)) <
-		    (unsigned) (v2 - *(int *) (v6 + 0x681858))) {
-			*(int *) (v6 + 0x681858) = v2;
-			v6 = g_772d4c * 100;
+		offset = g_772d4c * 100;
+		if ((unsigned) (fcn_0064d3f8() % 2000 + *(int *) (offset + 0x681854)) <
+		    (unsigned) (v2 - *(int *) (offset + 0x681858))) {
+			*(int *) (offset + 0x681858) = v2;
+			offset = g_772d4c * 100;
 			if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
-			    + *(float *) (v6 + 0x681848)) {
+			    + *(float *) (offset + 0x681848)) {
 				fcn_004234e0(0, s_689ebc,
 				    fcn_0064d3f8() % *(int *) (g_772d4c * 100 + 0x681850) + 1,
 				    0x3f,
-				    (int) (f * *(float *) (v6 + 0x68184c)
+				    (int) (f * *(float *) (offset + 0x68184c)
 					* 127.0f), 0, 0);
 			}
 		}

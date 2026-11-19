@@ -45,7 +45,7 @@ typedef struct {
 } Rec_5cd810;
 
 /* ADDRESS: GOLDTL 0x005cd810 */
-void __cdecl fcn_005cd810(int a0)
+void __cdecl fcn_005cd810(int office)
 {
 	Rec_5cd810 rec[8];
 	char src2[0x90];
@@ -74,7 +74,7 @@ void __cdecl fcn_005cd810(int a0)
 			if (sel)
 				io_AppendText(0xa0, (unsigned short) *sel2);
 			else
-				io_AppendText(0x6a9ac4, a0 + 0x12b2);
+				io_AppendText(0x6a9ac4, office + 0x12b2);
 			d2_SetForm(dlg, 3);
 			io_AppendText(0x6811b0);
 			d2_SetForm(dlg, 1);
@@ -84,8 +84,8 @@ void __cdecl fcn_005cd810(int a0)
 				rec[i].h1 = -1;
 				rec[i].text = 0;
 			}
-			if (((0 < a0) && (a0 < 7)) || (a0 == 8)) {
-				count = fcn_004e8b80(a0, 6, src1);
+			if (((0 < office) && (office < 7)) || (office == 8)) {
+				count = fcn_004e8b80(office, 6, src1);
 				if (count > 0) {
 					for (i = 0; i < count; i++) {
 						rec[i].ent = gm_LookupEntityRecordById(*(int*) (src1 + i * 0x18 + 4));
@@ -93,7 +93,7 @@ void __cdecl fcn_005cd810(int a0)
 					}
 				}
 			} else {
-				if (a0 != 7)
+				if (office != 7)
 					return;
 				count = fcn_004e8cb0(0, 6, src2);
 				if (count > 0) {
@@ -162,10 +162,10 @@ void __cdecl fcn_005cd810(int a0)
 			p = (char*) sel2;
 			if (!p)
 				p = (char*) (g_774970 * 0x21c + 0x7f4ca0);
-			if (a0 && (a0 != 7))
-				fcn_005c9f10(d2_CurrentWindowId, a0, 0, count, (int) rec, (short*) p);
+			if (office && (office != 7))
+				fcn_005c9f10(d2_CurrentWindowId, office, 0, count, (int) rec, (short*) p);
 			else
-				fcn_005c99a0(d2_CurrentWindowId, a0, 0, count, (int) rec, (int) p);
+				fcn_005c99a0(d2_CurrentWindowId, office, 0, count, (int) rec, (int) p);
 			for (i = 0; i < count; i++) {
 				fcn_00472640(rec[i].h1, 1);
 				if (rec[i].h2 != -1)

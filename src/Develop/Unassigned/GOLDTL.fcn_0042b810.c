@@ -16,7 +16,7 @@ int __cdecl fcn_0042b810(char* text, int index)
 	char v16[128];
 	char v15[128];
 	char v18[128];
-	char v17[256];
+	char tokenCopy[256];
 	char v20[4][160];
 	char v21[4][160];
 	unsigned char count;
@@ -39,8 +39,8 @@ int __cdecl fcn_0042b810(char* text, int index)
 	p = strtok(text, ",\";\n");
 	while (p != 0) {
 		if (count == 0) {
-			strcpy(v17, p);
-			q = fcn_0042b790(v17);
+			strcpy(tokenCopy, p);
+			q = fcn_0042b790(tokenCopy);
 			txt_TrimTrailingSpaces(q);
 			if (strcmpi(q, "(m)") == 0) {
 				kind = 0;

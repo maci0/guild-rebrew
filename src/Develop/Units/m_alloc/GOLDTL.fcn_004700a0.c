@@ -100,7 +100,7 @@ void __cdecl d2_SelectFont(int handle);
 char* __cdecl fcn_0047ce00(char* name, int a1);
 
 /* ADDRESS: GOLDTL 0x004700a0 */
-int __cdecl d2_Open(int a0, int a1, int a2, char* a3, char* a4)
+int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 {
 	char path[0x100];
 	char message[0x400];
@@ -259,8 +259,8 @@ int __cdecl d2_Open(int a0, int a1, int a2, char* a3, char* a4)
 	}
 	g_1040494 = a1;
 	g_1015ce0 = a0;
-	d2_ScreenHeight = a2;
-	fcn_0047a040(0, 0, a1, a2);
+	d2_ScreenHeight = screenHeight;
+	fcn_0047a040(0, 0, a1, screenHeight);
 	d2_CenterX = (unsigned int) g_14ce860 >> 1;
 	d2_DialogCenterY = (unsigned int) g_14ce864 >> 1;
 	for (i = 0; i < 0x17; i++) {

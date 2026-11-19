@@ -73,10 +73,10 @@ void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
 	int y0;
 	int cw;
 	int ch;
-	int s1;
-	int s2;
-	int s3;
-	int s4;
+	int clipLeft;
+	int clipTop;
+	int clipRight;
+	int clipBottom;
 	int oy;
 	int i;
 	int rows;
@@ -97,10 +97,10 @@ void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
 	else if (w->img != 0)
 		fcn_0047cb60(w->x - w->sx, w->y - w->sy, dst, w->img);
 	if (w->tex != -1 && (tex = d2_GetResourceData(w->tex)) != 0) {
-		s1 = d2_ClipLeft;
-		s2 = g_7725fc;
-		s3 = d2_ClipRight;
-		s4 = d2_ClipBottom;
+		clipLeft = d2_ClipLeft;
+		clipTop = g_7725fc;
+		clipRight = d2_ClipRight;
+		clipBottom = d2_ClipBottom;
 		fcn_0047a040(w->x, w->y, w->w + w->x, w->h + w->y);
 		d = &((fcn_0046dd60_Def*)g_772500)[w->tex];
 		if (w->sy >= 0)
@@ -111,7 +111,7 @@ void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
 			for (i = 0; i < w->w / d->w; i++)
 				fcn_0047cba0(w->x + d->w * i, d->h * rows + oy, dst, tex, 0);
 		}
-		fcn_0047a040(s1, s2, s3, s4);
+		fcn_0047a040(clipLeft, clipTop, clipRight, clipBottom);
 	}
 	if (w->surf != 0)
 		fcn_0047c7b0(w->x, w->y, w->surf->width, w->surf->height, (int) w->surf->surface, 1.0f);

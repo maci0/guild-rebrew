@@ -31,7 +31,7 @@ void __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004e4730 */
-void __cdecl fcn_004e4730(char* a1)
+void __cdecl fcn_004e4730(char* sceneName)
 {
 	char buf[0x80];
 	char* ui;
@@ -44,7 +44,7 @@ void __cdecl fcn_004e4730(char* a1)
 
 		s = fcn_00413160();
 		fcn_004432d0(s, 0);
-		fcn_0064d41a(buf, "scenes/*%s", a1);
+		fcn_0064d41a(buf, "scenes/*%s", sceneName);
 		d3_LoadScene(buf, 0, 0);
 		fcn_004432d0(0, 1);
 		fcn_004432d0(s, 0);

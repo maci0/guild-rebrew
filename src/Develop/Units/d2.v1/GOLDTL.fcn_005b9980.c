@@ -31,92 +31,92 @@ extern int __cdecl gm_GetEntityTableEntry(int a0);
 extern void __cdecl fcn_004c51f0(int a0, int a1, int a2, int a3, char a4, int a5);
 
 /* ADDRESS: GOLDTL 0x005b9980 */
-void __cdecl fcn_005b9980(int a0)
+void __cdecl fcn_005b9980(int sourceObj)
 {
-    int v17;
-    int v5;
-    int v1;
-    int v16;
-    int v14[3];
-    char v13[512];
-    char v15[1024];
+    int choiceIndex;
+    int confirmButton;
+    int groupId;
+    int groupOffset;
+    int optionButtons[3];
+    char messageBuf[512];
+    char confirmBuf[1024];
     int h;
     int i;
-    int v7;
+    int priceValue;
     int v;
 
-    v17 = 0;
-    if (fcn_0050c490(a0, 0) >= 3)
+    choiceIndex = 0;
+    if (fcn_0050c490(sourceObj, 0) >= 3)
     {
-        io_FormatTextBuffer(v13, (char *)0xf1, 3);
-        fcn_00526120(v13, 0);
+        io_FormatTextBuffer(messageBuf, (char *)0xf1, 3);
+        fcn_00526120(messageBuf, 0);
         return;
     }
     h = fcn_00470820(0, 0, (char *)0x6ac354);
     d2_CenterDialogWindows(h);
     d2_SetForm(h, 2);
     io_AppendText(0xd8);
-    v14[0] = fcn_00472250(h, 1, 0);
-    v14[1] = fcn_00472250(h, 1, 1);
-    v14[2] = fcn_00472250(h, 1, 2);
+    optionButtons[0] = fcn_00472250(h, 1, 0);
+    optionButtons[1] = fcn_00472250(h, 1, 1);
+    optionButtons[2] = fcn_00472250(h, 1, 2);
     d2_SetForm(h, 0);
     fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x741);
     d2_SetForm(h, 3);
-    v5 = fcn_00472250(h, 3, io_AppendText(0xdb));
-    v1 = d2_CreateRadioGroup(3, v14[0], v14[1], v14[2]);
-    d2_SelectRadioGroup(v1, 0);
-    v16 = 35 * v1;
+    confirmButton = fcn_00472250(h, 3, io_AppendText(0xdb));
+    groupId = d2_CreateRadioGroup(3, optionButtons[0], optionButtons[1], optionButtons[2]);
+    d2_SelectRadioGroup(groupId, 0);
+    groupOffset = 35 * groupId;
     do
     {
         if (g_100f1dc >= 0x5e2 && g_100f1dc <= 0x5e4)
         {
             for (i = 0; i < 3; i++)
             {
-                if (d2_CurrentElementId == v14[i])
-                    v17 = i;
+                if (d2_CurrentElementId == optionButtons[i])
+                    choiceIndex = i;
             }
         }
         else if (g_100f1dc == 2)
         {
-            if (d2_CurrentElementId == v5)
+            if (d2_CurrentElementId == confirmButton)
             {
-                v7 = (int) eval_ObjektPreis2Credits(v17 + 0x134, 100);
-                if (fcn_00526010((char *)(g_774970 * 0x21c + 0x7f4ca0), v7,
-                        (v7 & 0xffffff00) | g_773d75))
+                priceValue = (int) eval_ObjektPreis2Credits(choiceIndex + 0x134, 100);
+                if (fcn_00526010((char *)(g_774970 * 0x21c + 0x7f4ca0), priceValue,
+                        (priceValue & 0xffffff00) | g_773d75))
                 {
                     switch (fcn_0051e070())
                     {
                     case 1:
-                        io_FormatTextBuffer(v15, (char *)0xd9, v17 * 2 + 0xc10, v7);
+                        io_FormatTextBuffer(confirmBuf, (char *)0xd9, choiceIndex * 2 + 0xc10, priceValue);
                         break;
                     case 0:
-                        io_FormatTextBuffer(v15, (char *)0xd9, v7, v17 * 2 + 0xc10);
+                        io_FormatTextBuffer(confirmBuf, (char *)0xd9, priceValue, choiceIndex * 2 + 0xc10);
                         break;
                     }
-                    if (fcn_00526120(v15, 0x101))
+                    if (fcn_00526120(confirmBuf, 0x101))
                     {
                         fcn_004c51a0(-1, *(int *)(g_774970 * 0x21c + 0x7f4ca4),
-                            g_773d75, v7);
+                            g_773d75, priceValue);
                         v = gm_GetEntityTableEntry(g_774970 * 0x21c + 0x7f4ca0);
                         if (v != 0)
-                            *(int *)(v + 0x50) = *(int *)(v + 0x50) + v7;
-                        fcn_004c51f0(*(int *)(a0 + 1), -1, v17 + 0x134, 1,
+                            *(int *)(v + 0x50) = *(int *)(v + 0x50) + priceValue;
+                        fcn_004c51f0(*(int *)(sourceObj + 1), -1, choiceIndex + 0x134, 1,
                             g_773d75, 0);
                         g_774654 = 1;
                     }
                 }
             }
         }
-        if (*(int *)(0x102cbc8 + v16 * 4) != -1)
+        if (*(int *)(0x102cbc8 + groupOffset * 4) != -1)
         {
-            io_FormatTextBuffer(v13, (char *)0xda, v17 * 2 + 0xc10,
-                (int) eval_ObjektPreis2Credits(v17 + 0x134, 100));
-            fcn_0046f9b0(v5, v13);
-            fcn_00469090(v5);
+            io_FormatTextBuffer(messageBuf, (char *)0xda, choiceIndex * 2 + 0xc10,
+                (int) eval_ObjektPreis2Credits(choiceIndex + 0x134, 100));
+            fcn_0046f9b0(confirmButton, messageBuf);
+            fcn_00469090(confirmButton);
         }
         if (g_14ce8e0 != 0)
             g_774654 = 1;
     } while (fcn_005373e0((void *)0x5b9980, 0x677c7) != 0);
     fcn_00471e30(h);
-    fcn_00469510(v1);
+    fcn_00469510(groupId);
 }

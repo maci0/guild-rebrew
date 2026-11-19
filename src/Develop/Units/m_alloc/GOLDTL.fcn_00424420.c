@@ -8,7 +8,7 @@ int __cdecl fcn_00423920(unsigned int a0);
 char* __cdecl strncpy(char* dst, const char* src, unsigned int n);
 
 /* ADDRESS: GOLDTL 0x00424420 */
-unsigned int __cdecl fcn_00424420(unsigned int a0)
+unsigned int __cdecl fcn_00424420(unsigned int bankName)
 {
 	char* v2;
 	char* v3;
@@ -17,13 +17,13 @@ unsigned int __cdecl fcn_00424420(unsigned int a0)
 	if (sbs_BankManager == 0) {
 		return 0xffffffff;
 	}
-	v2 = (char*) fcn_00423a50(a0);
+	v2 = (char*) fcn_00423a50(bankName);
 	if (v2 != 0) {
 		return 0xffffffff;
 	}
 	v2 = (char*) fcn_004239e0();
 	v3 = m_alloc(0x108, (char*) 0x679000);
-	v4 = a0;
+	v4 = bankName;
 	if (v2 != 0) {
 		*(char**) (v2 + 0x104) = v3;
 		if (v3 != 0) {
@@ -48,7 +48,7 @@ unsigned int __cdecl fcn_00424420(unsigned int a0)
 				add ecx, ebx
 				rep stosb
 			}
-			strncpy(*(char**) (v2 + 0x104), (char*) a0, 0x100);
+			strncpy(*(char**) (v2 + 0x104), (char*) bankName, 0x100);
 			v4 = fcn_00423920(v4);
 			*(unsigned int*) (*(char**) (v2 + 0x104) + 0x100) = v4;
 			*(int*) (sbs_BankManager + 0x34) = *(int*) (sbs_BankManager + 0x34) + *(int*) (*(char**) (v2 + 0x104) + 0x100);
@@ -80,7 +80,7 @@ unsigned int __cdecl fcn_00424420(unsigned int a0)
 				add ecx, ebx
 				rep stosb
 			}
-			strncpy(*(char**) (sbs_BankManager + 0x38), (char*) a0, 0x100);
+			strncpy(*(char**) (sbs_BankManager + 0x38), (char*) bankName, 0x100);
 			v4 = fcn_00423920(v4);
 			*(unsigned int*) (*(char**) (sbs_BankManager + 0x38) + 0x100) = v4;
 			*(int*) (sbs_BankManager + 0x34) = *(int*) (sbs_BankManager + 0x34) + *(int*) (*(char**) (sbs_BankManager + 0x38) + 0x100);

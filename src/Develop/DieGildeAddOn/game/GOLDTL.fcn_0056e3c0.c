@@ -28,7 +28,7 @@ int __cdecl cut_FindCutsceneById(int);
 void __cdecl fcn_00546190(char*);
 
 /* ADDRESS: GOLDTL 0x0056e3c0 */
-void __cdecl fcn_0056e3c0(char* a0)
+void __cdecl fcn_0056e3c0(char* eventState)
 {
 	char* s;
 	char* obj;
@@ -39,37 +39,37 @@ void __cdecl fcn_0056e3c0(char* a0)
 	unsigned int idx;
 	char buf[0x514];
 
-	if (*(int*) (a0 + 0x70) != -1) {
+	if (*(int*) (eventState + 0x70) != -1) {
 	} else {
 		goto tail;
 	}
-	s = gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
+	s = gm_LookupEntityRecordById(*(int*) (eventState + 0xac));
 	if (s == 0) {
 		goto tail;
 	}
-	if (*(int*) (s + 0x20c) != -1 && *(int*) (a0 + 0x70) != 6) {
-		*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) gm_GameTime;
-		fcn_00500bb0((int*) (a0 + 0x52), 0, 5, 0);
+	if (*(int*) (s + 0x20c) != -1 && *(int*) (eventState + 0x70) != 6) {
+		*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
+		fcn_00500bb0((int*) (eventState + 0x52), 0, 5, 0);
 		return;
 	}
-	switch (*(int*) (a0 + 0x70)) {
+	switch (*(int*) (eventState + 0x70)) {
 	case -2:
 	case -1:
 		goto tail;
 	case 0:
 		obj = *(char**) (s + 0x184);
 		if (obj == 0) {
-			if ((*(unsigned char*) (a0 + 0x78) & 2) == 0) {
+			if ((*(unsigned char*) (eventState + 0x78) & 2) == 0) {
 				goto tail;
 			}
-			*(int*) (a0 + 0x70) = 3;
+			*(int*) (eventState + 0x70) = 3;
 			return;
 		}
 		if (*(int*) (obj + 0x28) != -1) {
 			fcn_00428720(fcn_00426cc0(*(int*) (obj + 0x28)));
 		}
 		fcn_00529160(0, 0, *(unsigned short*) s, 0);
-		if ((*(unsigned char*) (a0 + 0x78) & 2) != 0) {
+		if ((*(unsigned char*) (eventState + 0x78) & 2) != 0) {
 			p = *(char**) (s + 0x16c);
 			if (p != 0) {
 				idx = *(unsigned short*) (p + 0x27);
@@ -82,14 +82,14 @@ void __cdecl fcn_0056e3c0(char* a0)
 			}
 		}
 		*(int*) (s + 0x16c) = 0;
-		*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
+		*(int*) (eventState + 0x70) = *(int*) (eventState + 0x70) + 1;
 		return;
 	case 1:
 		obj = *(char**) (s + 0x184);
 		if (obj != 0 && *(int*) (obj + 0x28) != -1) {
 			return;
 		}
-		*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
+		*(int*) (eventState + 0x70) = *(int*) (eventState + 0x70) + 1;
 		return;
 	case 2:
 		obj = *(char**) (s + 0x184);
@@ -100,18 +100,18 @@ void __cdecl fcn_0056e3c0(char* a0)
 				memcpy(p + 0xf0, g_68cb58, 0x19);
 			}
 		}
-		*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) gm_GameTime;
-		fcn_00500bb0((int*) (a0 + 0x52), 0, 0x1e, 0);
-		*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
-		if ((*(unsigned char*) (a0 + 0x78) & 4) != 0) {
+		*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
+		fcn_00500bb0((int*) (eventState + 0x52), 0, 0x1e, 0);
+		*(int*) (eventState + 0x70) = *(int*) (eventState + 0x70) + 1;
+		if ((*(unsigned char*) (eventState + 0x78) & 4) != 0) {
 			goto tail;
 		}
 		return;
 	case 3:
 		c = *(char*) (s + 2);
 		if (c != 6 && c != 7) {
-			fcn_00500bb0((int*) (a0 + 0x52), 0, 2, 0);
-			*(int*) (a0 + 0x70) = 4;
+			fcn_00500bb0((int*) (eventState + 0x52), 0, 2, 0);
+			*(int*) (eventState + 0x70) = 4;
 			return;
 		}
 		for (i = 0; i < 0x45; i++) {
@@ -129,14 +129,14 @@ void __cdecl fcn_0056e3c0(char* a0)
 		*(int*) (buf + 0x0c) = (int) s;
 		*(char*) (buf + 0x30) = 1;
 		*(int*) (buf + 0x34) = (int) s;
-		*(int*) (a0 + 0xb4) = fcn_004c5980((int) buf);
-		fcn_00500bb0((int*) (a0 + 0x52), 0, 1, 0);
-		*(int*) (a0 + 0x70) = 6;
+		*(int*) (eventState + 0xb4) = fcn_004c5980((int) buf);
+		fcn_00500bb0((int*) (eventState + 0x52), 0, 1, 0);
+		*(int*) (eventState + 0x70) = 6;
 		return;
 	case 4:
 		p = fcn_004934c0(s);
 		if (p == 0) {
-			*(int*) (a0 + 0x70) = 5;
+			*(int*) (eventState + 0x70) = 5;
 			return;
 		}
 		fcn_005099e0(s, p);
@@ -147,23 +147,23 @@ void __cdecl fcn_0056e3c0(char* a0)
 			fcn_004c5360();
 		}
 		fcn_004c57e0(*(int*) (s + 4), fcn_0050a710(s));
-		fcn_00546190(a0);
+		fcn_00546190(eventState);
 		return;
 	case 5:
 		fcn_005099e0(s, (char*) gm_CityEntity);
 		fcn_004c57e0(*(int*) (s + 4), fcn_0050a710(s));
-		fcn_00546190(a0);
+		fcn_00546190(eventState);
 		return;
 	case 6:
-		v = fcn_004c4450(*(int*) (a0 + 0xb4));
+		v = fcn_004c4450(*(int*) (eventState + 0xb4));
 		if (v == 0) {
 			return;
 		}
 		if (v != 2) {
-			*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) gm_GameTime;
-			*(int*) (a0 + 0xb0) = *(int*) fcn_004c4480(*(int*) (a0 + 0xb4));
-			fcn_00500bb0((int*) (a0 + 0x52), 2, 0, 0);
-			*(int*) (a0 + 0x70) = 7;
+			*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
+			*(int*) (eventState + 0xb0) = *(int*) fcn_004c4480(*(int*) (eventState + 0xb4));
+			fcn_00500bb0((int*) (eventState + 0x52), 2, 0, 0);
+			*(int*) (eventState + 0x70) = 7;
 			return;
 		}
 		goto label_7b3;
@@ -171,24 +171,24 @@ void __cdecl fcn_0056e3c0(char* a0)
 		if (*(unsigned char*) (s + 8) != 0) {
 			goto tail;
 		}
-		if (cut_FindCutsceneById(*(int*) (a0 + 0xb0)) != 0) {
-			*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) gm_GameTime;
-			fcn_00500bb0((int*) (a0 + 0x52), 2, 0, 0);
+		if (cut_FindCutsceneById(*(int*) (eventState + 0xb0)) != 0) {
+			*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
+			fcn_00500bb0((int*) (eventState + 0x52), 2, 0, 0);
 			return;
 		}
-		*(int*) (a0 + 0xb4) = -1;
-		*(int*) (a0 + 0xb0) = -1;
+		*(int*) (eventState + 0xb4) = -1;
+		*(int*) (eventState + 0xb0) = -1;
 		goto label_7b3;
 	default:
 		return;
 	}
 label_7b3:
-	*(int*) (a0 + 0x52) = *(int*) gm_GameTime;
-	*(int*) (a0 + 0x56) = *(int*) (gm_GameTime + 4);
-	*(int*) (a0 + 0x5a) = *(int*) (gm_GameTime + 8);
-	*(int*) (a0 + 0x70) = 4;
-	*(unsigned short*) (a0 + 0x5e) = *(unsigned short*) (gm_GameTime + 0xc);
+	*(int*) (eventState + 0x52) = *(int*) gm_GameTime;
+	*(int*) (eventState + 0x56) = *(int*) (gm_GameTime + 4);
+	*(int*) (eventState + 0x5a) = *(int*) (gm_GameTime + 8);
+	*(int*) (eventState + 0x70) = 4;
+	*(unsigned short*) (eventState + 0x5e) = *(unsigned short*) (gm_GameTime + 0xc);
 	return;
 tail:
-	fcn_00546190(a0);
+	fcn_00546190(eventState);
 }

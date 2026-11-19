@@ -34,8 +34,8 @@ void __cdecl fcn_004d4950(int a0)
     int v5;
     int v22;
     int v11;
-    char v12[2][0x20] = { "kampf/arm_greifen", "kampf/bauch_greifen" };
-    char v13[0x100];
+    char animations[2][0x20] = { "kampf/arm_greifen", "kampf/bauch_greifen" };
+    char message[0x100];
     int v8;
     int r;
 
@@ -122,12 +122,12 @@ draw:
         if (!v8 || *(char*) (v8 + 9) == ';') {
             ch_CancelActionQueue((char*) *(int*) ((char*) v4 + 0x184));
             ch_NewAnimationAction(*(unsigned int*) ((char*) v4 + 0x184),
-                         v12[cut_RandMod(2)], 1, 1.4f);
+                         animations[cut_RandMod(2)], 1, 1.4f);
         }
         if (*v7 == 0x16e) {
             *(char*) ((char*) v4 + 8) = 4;
-            io_FormatTextBuffer(v13, 0x1188, *(unsigned int*) (v9 + 0x54), *v4);
-            fcn_00533a40(v13);
+            io_FormatTextBuffer(message, 0x1188, *(unsigned int*) (v9 + 0x54), *v4);
+            fcn_00533a40(message);
             return;
         }
     } else {

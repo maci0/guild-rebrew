@@ -46,7 +46,7 @@ Node* __cdecl fcn_005463a0(int, int, int);
 #include "GOLDTL.fcn_005cb440_gconf.h"
 
 /* ADDRESS: GOLDTL 0x005cb440 */
-int __cdecl fcn_005cb440(Ent* a0, int a1, Row* a2, int a3)
+int __cdecl fcn_005cb440(Ent* subject, int capacity, Row* rows, int a3)
 {
 	Ent* e;
 	Node* p;
@@ -55,10 +55,10 @@ int __cdecl fcn_005cb440(Ent* a0, int a1, Row* a2, int a3)
 	int i;
 
 	n = 0;
-	if (a1 == 0) {
+	if (capacity == 0) {
 		for (e = (Ent*) g_slot_table; (int) e < 0x85a0a0;
 		     e = (Ent*) ((char*) e + 0x21c)) {
-			if (e == a0) {
+			if (e == subject) {
 				continue;
 			}
 			if (e->id == 0xffff) {
@@ -68,14 +68,14 @@ int __cdecl fcn_005cb440(Ent* a0, int a1, Row* a2, int a3)
 				continue;
 			}
 			for (i = 0; i < 8; i++) {
-				if (a0->sel[i] == e->key) {
+				if (subject->sel[i] == e->key) {
 					goto matched1;
 				}
 			}
-			if (e->w50 != a0->w50) {
+			if (e->w50 != subject->w50) {
 				continue;
 			}
-			if (e->b58 != a0->b58) {
+			if (e->b58 != subject->b58) {
 				continue;
 			}
 matched1:
@@ -83,18 +83,18 @@ matched1:
 		}
 		p = fcn_005463a0(1, 0, 0x41);
 		while (p != 0) {
-			if (p->keyac == a0->key) {
+			if (p->keyac == subject->key) {
 				return n + 1;
 			}
 			p = he_fn_Handlung();
 		}
 		return n;
 	}
-	memset(a2, 0, a1 * 0x38);
-	o = a2;
+	memset(rows, 0, capacity * 0x38);
+	o = rows;
 	e = (Ent*) g_slot_table;
-	while ((int) e < 0x85a0a0 && (unsigned int) n < (unsigned int) a1) {
-		if (e == a0) {
+	while ((int) e < 0x85a0a0 && (unsigned int) n < (unsigned int) capacity) {
+		if (e == subject) {
 			goto next;
 		}
 		if (e->id == 0xffff) {
@@ -104,14 +104,14 @@ matched1:
 			goto next;
 		}
 		for (i = 0; i < 8; i++) {
-			if (a0->sel[i] == e->key) {
+			if (subject->sel[i] == e->key) {
 				goto matched2;
 			}
 		}
-		if (e->w50 != a0->w50) {
+		if (e->w50 != subject->w50) {
 			goto next;
 		}
-		if (e->b58 != a0->b58) {
+		if (e->b58 != subject->b58) {
 			goto next;
 		}
 		o->ent = e;
@@ -139,13 +139,13 @@ accept2:
 next:
 		e = (Ent*) ((char*) e + 0x21c);
 	}
-	if ((unsigned int) n < (unsigned int) a1) {
+	if ((unsigned int) n < (unsigned int) capacity) {
 		p = fcn_005463a0(1, 0, 0x41);
 		while (p != 0) {
-			if (p->keyac == a0->key) {
+			if (p->keyac == subject->key) {
 				e = (Ent*) gm_LookupEntityRecordById(p->b0);
-				if (e != 0 && e->key != a0->sel[0]) {
-					o = &a2[n];
+				if (e != 0 && e->key != subject->sel[0]) {
+					o = &rows[n];
 					o->ent = e;
 					o->cls = 8 + (e->b9 != 0);
 					n++;
@@ -155,10 +155,10 @@ next:
 			p = he_fn_Handlung();
 		}
 	}
-	o = a2;
+	o = rows;
 	for (i = 0; i < n; i++) {
 		fcn_005ca560(o);
-		o->val = fcn_005cf720(a0->id, o->ent->id, a3, 0);
+		o->val = fcn_005cf720(subject->id, o->ent->id, a3, 0);
 		o = (Row*) ((char*) o + 0x38);
 	}
 	return n;

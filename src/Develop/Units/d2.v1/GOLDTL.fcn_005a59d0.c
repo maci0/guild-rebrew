@@ -68,7 +68,7 @@ char* __cdecl itoa(int, char*, int);
 /* ADDRESS: GOLDTL 0x005a59d0 */
 int __cdecl fcn_005a59d0(char* a0)
 {
-	int v1, v2, v3, v4, v5, v6, v7, v8;
+	int v1, v2, v3, v4, v5, v6, v7, dialogId;
 	int v17, v18, v19;
 	int e0, e1, e2, e3, e4;
 	int h1, h2;
@@ -87,16 +87,16 @@ int __cdecl fcn_005a59d0(char* a0)
 		*(int*)((char*)globRows + v7 + 0xc) = 0;
 		v7 += 0x1c;
 	} while (v7 < 0x1c0);
-	v8 = fcn_00470820(0, 0, g_6aac84);
-	d2_CenterDialogWindows(v8);
-	e2 = fcn_00472250(v8, 0, 2);
-	e3 = fcn_00472250(v8, 0, 3);
-	e1 = fcn_00472250(v8, 0, 1);
-	e0 = fcn_00472250(v8, 0, 0);
-	e4 = fcn_00472250(v8, 0, 4);
-	d2_SetForm(v8, 0);
+	dialogId = fcn_00470820(0, 0, g_6aac84);
+	d2_CenterDialogWindows(dialogId);
+	e2 = fcn_00472250(dialogId, 0, 2);
+	e3 = fcn_00472250(dialogId, 0, 3);
+	e1 = fcn_00472250(dialogId, 0, 1);
+	e0 = fcn_00472250(dialogId, 0, 0);
+	e4 = fcn_00472250(dialogId, 0, 4);
+	d2_SetForm(dialogId, 0);
 	fcn_00533dc0(d2_CurrentWindowId, 0x73b, 0x73f);
-	d2_SetForm(v8, 0);
+	d2_SetForm(dialogId, 0);
 	h1 = d2_ShowTxt((*(int*)(g_1015ea0 + e1 * 0x2f4 + 0x10) - *(int*)(g_77255c + 4)) + 2,
 		(*(int*)(g_1015ea0 + e1 * 0x2f4 + 0x1c) - *(int*)(g_77255c + 8)) + 2
 			+ *(int*)(g_1015ea0 + e1 * 0x2f4 + 0x14),
@@ -108,14 +108,14 @@ int __cdecl fcn_005a59d0(char* a0)
 	*(int*)(g_1015ea0 + 0x84 + h1 * 0x2f4) = 0x54;
 	*(int*)(g_1015ea0 + 0x84 + h2 * 0x2f4) = 0x54;
 	*(int*)(g_1015ea0 + 0x54 + e4 * 0x2f4) = 1;
-	d2_SetForm(v8, 0);
+	d2_SetForm(dialogId, 0);
 	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0] = 0xe;
 	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[4] = 0x18;
 	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[8] = 0xe;
 	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[12] = 0xe;
-	d2_SetForm(v8, 1);
+	d2_SetForm(dialogId, 1);
 	io_AppendText(0x18f5);
-	d2_SetForm(v8, 2);
+	d2_SetForm(dialogId, 2);
 	io_AppendText(0x18f6, *(int*)(a0 + 0x69),
 		*(unsigned short*)(g_773d75 * 0x2f4 + 0x8680b4) * 2 + 0x9a8, *(int*)(a0 + 0x6d));
 	fcn_00475220(g_14ab6fc);
@@ -137,7 +137,7 @@ int __cdecl fcn_005a59d0(char* a0)
 		}
 		ResetDisplayCounters();
 		if (v31 != 2) {
-			v29 = fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, v8, 5, 1);
+			v29 = fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, dialogId, 5, 1);
 			if (v29 != -1) {
 				if (!g_100f8c0 || !v31) {
 					io_FormatTextBuffer(buf, 0x18fa, ownRows[v29].x14, ownRows[v29].val * 2 + 0x9a8);
@@ -149,7 +149,7 @@ int __cdecl fcn_005a59d0(char* a0)
 				goto label_image_done;
 			}
 		}
-		v29 = fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, v8, 4, 1);
+		v29 = fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
 		if (v29 == -1) {
 			v30 = -1;
 			v31 = 0;
@@ -191,16 +191,16 @@ int __cdecl fcn_005a59d0(char* a0)
 		}
 		if (g_100f1dc == 3 || g_100f1dc == 4) {
 			if (d2_CurrentElementId == e2) {
-				d2_SetForm(v8, 4);
+				d2_SetForm(dialogId, 4);
 				fcn_0046ed00(0, -0x4c, d2_CurrentWindowId);
 			} else if (d2_CurrentElementId == e3) {
-				d2_SetForm(v8, 4);
+				d2_SetForm(dialogId, 4);
 				fcn_0046ed00(0, 0x4c, d2_CurrentWindowId);
 			} else if (d2_CurrentElementId == e1) {
-				d2_SetForm(v8, 5);
+				d2_SetForm(dialogId, 5);
 				fcn_0046ed00(0, -0x4c, d2_CurrentWindowId);
 			} else if (d2_CurrentElementId == e0) {
-				d2_SetForm(v8, 5);
+				d2_SetForm(dialogId, 5);
 				fcn_0046ed00(0, 0x4c, d2_CurrentWindowId);
 			}
 		}
@@ -232,8 +232,8 @@ int __cdecl fcn_005a59d0(char* a0)
 						fcn_004c51f0(*(int*)(a0 + 1), -1, v2, (int) (v17 + fee), g_773d75, 0);
 						v5 = fcn_004c4ef0(g_6aac7c);
 						while (!fcn_004c4450(v5)) fcn_005373e0(0, 0x677c7);
-						fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, v8, 4, 1);
-						fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, v8, 5, 1);
+						fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
+						fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, dialogId, 5, 1);
 						fcn_00533a40(g_14ab718);
 						d2_ClearSelectedControl();
 						for (v15 = 0; v15 < 0x1c0; v15 += 0x1c) {
@@ -269,8 +269,8 @@ int __cdecl fcn_005a59d0(char* a0)
 						fcn_004c51f0(*(int*)(a0 + 1), -1, v3, v28, g_773d75, 0);
 						v5 = fcn_004c4ef0(g_6aac7c);
 						while (!fcn_004c4450(v5)) fcn_005373e0(0, 0x677c7);
-						fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, v8, 4, 1);
-						fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, v8, 5, 1);
+						fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
+						fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, dialogId, 5, 1);
 						fcn_00533a40(g_14ab718);
 						d2_ClearSelectedControl();
 						for (v15 = 0; v15 < 0x1c0; v15 += 0x1c) {
@@ -286,6 +286,6 @@ int __cdecl fcn_005a59d0(char* a0)
 		}
 	} while (fcn_005373e0(fcn_005a59d0, 0x677c7));
 	ResetDisplayCounters();
-	fcn_00471e30(v8);
+	fcn_00471e30(dialogId);
 	return fcn_00532ef0();
 }

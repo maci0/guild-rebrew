@@ -708267,7 +708267,7 @@ source_hash = "e6652cbd04955f15518c3445986c2baf94bd2d4d6b76fd63483baaa008301b61"
 evidence = "Whole-function naked assembly: the reference extent is an ABI shape MSVC 6 C mode cannot express; bytes transcribed instruction for instruction."
 
 [source.definitions."src/Develop/Units/m_alloc/GOLDTL.fcn_0043c640.c".fcn_0043c640.GOLDTL]
-source_hash = "afe425ceeb6d487841cc3f0915f545422853304390577e8f62dd8d9e3cd93220"
+source_hash = "6f49eff44ca1d33edcaac1470d43d19ac9616be723cd7bacdf01789483b9187c"
 evidence = "Reviewed fixed-EBX inline fill/copy core (LEA ECX,[EDI+EDI*2]; AND ECX,3; REP STOSB/STOSD/STOSB or MOVSB/MOVSD/MOVSB with operands homed from locals) at native five cores in 0x43c640 (lane09 review, re-recorded after the 2026-11-13 correctness fixes), matching the documented original-assembly family (725 native sites). Only this block is assembly; the rest of the definition is C."
 
 [source.definitions."src/Develop/DieGildeAddOn/game/GOLDTL.ai_RegisterDomizilMethods.c".ai_RegisterDomizilMethods.GOLD]
@@ -708309,7 +708309,7 @@ source_hash = "c8e3f5b759c20f54be77a84d582125b73d89e56aab946818c4d30884b5e8df04"
 evidence = "native 0x412f6f..0x412f9c is the reviewed fixed-EBX fill core (LEA/AND/SUB then rep stosb, rep stosd, rep stosb) that MSVC6 memset never emits; same reviewed inline fill exception as fill0_42e180/fill0_5dc5e0 (r3-02, .scratch/sol/r3/02/412f10-asm.txt)"
 
 [source.definitions."src/Develop/Units/m_alloc/GOLDTL.fcn_00424420.c".fcn_00424420.GOLDTL]
-source_hash = "78a3d00a5bc45298714316a1cf2194d1f5d602c933788fa61e59979cd41d3a02"
+source_hash = "dfd071268ee7c3ad25ef7a8599e6c832fea62bdb5a38862c6de75f23cac42d64"
 evidence = "native 0x424483..0x4244a5 and 0x424520..0x424542 are the reviewed fixed-EBX fill core (LEA ECX,[EDI+EDI*2]; AND ECX,3 then rep stos), which MSVC6 memset never emits; count 0x108 and destination homes at 0x424479/0x424480 and 0x424516/0x42451d; same reviewed inline fill exception as fcn_00423e10 (r3-06). Batch 7 replaced raw 0x6b7d68/0x6b7d6c reads with g_6b7d68/g_6b7d6c; inline core unchanged."
 
 [source.definitions."src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00496e60.c".fcn_00496e60.GOLDTL]
@@ -708317,7 +708317,7 @@ source_hash = "3eb952d0ff985fd11588d8a5b260516e9d5827dd95e685f35f0d79b76be15c93"
 evidence = "Reviewed native fixed-EBX zero-fill at 0x496ea7..0x496ec7: LEA ECX,[EDI+EDI*2], AND ECX,3, SUB EBX,ECX and rep stosb/stosd. Native sets count 24 at 0x496e9d and destination at 0x496ea4. Batch 5 changes surrounding C order and branch layout only; inline core unchanged. Evidence: .scratch/fleet/recorded/b5/native-496e60.json."
 
 [source.definitions."src/Develop/Units/m_alloc/GOLDTL.fcn_00424270.c".fcn_00424270.GOLDTL]
-source_hash = "c4be1d33e435178ceba46aaa59e14cbbe3b292e50753dc04c84e93cfdecd0d2f"
+source_hash = "87ea68bb7004896b0ee0db95eed8530a553d34645a6029b89018b49b69af05e4"
 evidence = "Reviewed native fixed-EBX fill cores 0x4242e4..0x424304 and 0x424389..0x4243a9: LEA ECX,[EDI+EDI*2], AND ECX,3, SUB EBX,ECX and rep stosb/stosd. Each count is 0x108 with native destination homes at 0x4242e1 and 0x424386. Batch 5 changes surrounding C success/failure layout only; inline cores unchanged. Evidence: .scratch/fleet/recorded/b5/native-424270.json."
 
 [source.definitions."src/Develop/Units/vfs/GOLDTL.vfs_ReadData.c".vfs_ReadData.GOLDTL]
@@ -708333,7 +708333,7 @@ source_hash = "07fb0989422b60c6daea31f841c1cc5c452cddaed811af820ee0028045218fb1"
 evidence = "native 0x5a2e87..0x5a2ea7 is the reviewed fixed-EBX fill core (LEA ECX,[EDI+EDI*2]; AND ECX,3 then rep stos), which MSVC6 memset never emits; 32 fill tests pass; same reviewed inline fill exception (r3-10, .scratch/sol/r3/10/5a2db0-fill.json)"
 
 [source.definitions."src/Develop/Units/m_alloc/GOLDTL.fcn_004400b0.c".fcn_004400b0.GOLDTL]
-source_hash = "5ff555e0048fc9462652281a1dacdba01e5e368e015f427817222d449f4eef20"
+source_hash = "ccc78891874835f81de8a36c927ec3491369853b7982136bd19274831cf1bc34"
 evidence = "native 0x440105..0x440132 is the reviewed fixed-EBX nonzero fill core (LEA ECX,[EDI+EDI*2]; AND ECX,3 then rep stos), which MSVC6 memset never emits; real pointer/count/value locals; same core as fcn_004c0a80 (sol-07)"
 
 [source.definitions."src/Develop/Unassigned/GOLD.fcn_00454500.c".fcn_00454500.GOLD]

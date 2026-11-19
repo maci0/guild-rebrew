@@ -44,7 +44,7 @@ int __cdecl fcn_00503a70(int type);
 int __cdecl fcn_004868d0(char* a0, int* a1);
 
 /* ADDRESS: GOLDTL 0x004868d0 */
-int __cdecl fcn_004868d0(char* a0, int* a1)
+int __cdecl fcn_004868d0(char* actor, int* a1)
 {
 	int* p;
 	int off;
@@ -92,21 +92,21 @@ int __cdecl fcn_004868d0(char* a0, int* a1)
 				if (rp->unk_40 > *(unsigned short*) (g_item_def_table + rp->goods_id * 0x41 + 0x36)) {
 					rp->flags |= 8;
 				}
-				fcn_004868d0(a0, (int*) rp);
+				fcn_004868d0(actor, (int*) rp);
 			}
 		} else {
 			w = *(unsigned short*) (g_item_def_table + a1[0] * 0x41 + off);
 			if (seg->stock + seg->allocated < w * 4) {
 				fcn_00503a70(seg->goods_id);
 				for (idx = 0, rec = g_868c40; idx < g_86805c; idx++, rec++) {
-					if (rec->entity != *(char**) (a0 + 0x16c)
+					if (rec->entity != *(char**) (actor + 0x16c)
 					    && gm_GetBuildingTypeCategory((unsigned char) *rec->entity) != 2
 					    && rec->unk_08 != 0) {
 						limit = rec->limit;
 						w = *(unsigned short*) (g_item_def_table + a1[0] * 0x41 + off);
 						if (limit >= w) {
 							seg->supplier = rec->entity;
-							if (*(short*) (rec->entity + 0x27) == *(short*) (*(int*) (a0 + 0x16c) + 0x27)) {
+							if (*(short*) (rec->entity + 0x27) == *(short*) (*(int*) (actor + 0x16c) + 0x27)) {
 								seg->requested = seg->capacity;
 								continue;
 							}
@@ -123,7 +123,7 @@ int __cdecl fcn_004868d0(char* a0, int* a1)
 							if (t > n) {
 								t = n;
 							}
-							ratio = (float) *(int*) (a0 + 0x1b8) / seg->price;
+							ratio = (float) *(int*) (actor + 0x1b8) / seg->price;
 							fl = (float) t;
 							n = (int) (ratio < fl ? ratio : fl);
 							if (n > limit) {

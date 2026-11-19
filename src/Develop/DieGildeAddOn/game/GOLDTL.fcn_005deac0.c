@@ -26,7 +26,7 @@ float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c6b20(int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005deac0(char* e, char* a2)
+int __cdecl fcn_005deac0(char* e, char* action)
 {
 	Req req;
 	char text[0x200];
@@ -45,7 +45,7 @@ int __cdecl fcn_005deac0(char* e, char* a2)
 		r = fcn_005cd440(&req, text, 0, 0);
 	}
 	else {
-		r = gm_LookupEntityRecordById(*(int*) (a2 + 4));
+		r = gm_LookupEntityRecordById(*(int*) (action + 4));
 	}
 	if (r == 0) {
 		return 0;
@@ -53,7 +53,7 @@ int __cdecl fcn_005deac0(char* e, char* a2)
 	if (fcn_005c6270(r, 0x2c4) == 0 || gm_RandomFloat01() > g_662a6c) {
 		fcn_004c6b20(*(int*) (r + 4), 1, 0);
 	}
-	*(int*) (a2 + 0x10) = 1;
+	*(int*) (action + 0x10) = 1;
 	if (e[2] == 6) {
 		io_FormatTextBuffer(text, 0x10a9, *(unsigned short*) r);
 		io_FormatTextBuffer(msg, 0xfe8, text);

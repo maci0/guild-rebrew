@@ -4,7 +4,7 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 	unsigned int* line;
 	unsigned int* q;
 	unsigned int* end;
-	unsigned int v2;
+	unsigned int height;
 	unsigned int off;
 	int row;
 	unsigned int i;
@@ -20,8 +20,8 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 	line = (unsigned int*) ((char*) spr + 0x32);
 	dst = (unsigned short*) (*(int*) (s + 0x1c)
 	 + (*(int*) (s + 0x10) * (int) y + x) * 2);
-	v2 = *(unsigned short*) ((char*) spr + 0xa);
-	if ((int) (v2 + y) < *(int*) 0x7725fc) {
+	height = *(unsigned short*) ((char*) spr + 0xa);
+	if ((int) (height + y) < *(int*) 0x7725fc) {
 		return 0;
 	}
 	h = *(unsigned short*) ((char*) spr + 6);
@@ -31,13 +31,13 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 	if ((int) x + (int) h < *(int*) 0x7725f8) {
 		return 0;
 	}
-	if (*(int*) 0x67d968 < (int) ((int) v2 / (int) zoom + (int) y)) {
-		v2 = (*(int*) 0x67d968 - (int) y) * zoom;
+	if (*(int*) 0x67d968 < (int) ((int) height / (int) zoom + (int) y)) {
+		height = (*(int*) 0x67d968 - (int) y) * zoom;
 	}
 	off = 0;
 	row = 0;
 	if ((int) y >= *(int*) 0x7725fc) {
-		while (row < (int) v2) {
+		while (row < (int) height) {
 			first = (row % (int) zoom) == 0;
 			end = q;
 			d = dst;
@@ -75,7 +75,7 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 		}
 		return 1;
 	}
-	while (row < (int) v2) {
+	while (row < (int) height) {
 		first = (row % (int) zoom) == 0;
 		end = q;
 		d = dst;

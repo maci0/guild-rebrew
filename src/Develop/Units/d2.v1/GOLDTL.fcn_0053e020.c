@@ -41,45 +41,45 @@ int __cdecl fcn_0053e020(void)
 	int v12;
 	int v13;
 	int v1;
-	int v2;
+	int dialog;
 	int v3;
 	int v4;
 	int v5;
 	int v6;
-	int v7;
+	int group;
 	int r;
 	Name6_53e020 v11;
 
 	v12 = 0;
 	v1 = 0;
 	v13 = -1;
-	v2 = fcn_00470820(0, 0, 0x68116c);
-	d2_CenterDialogWindows(v2);
-	d2_SetForm(v2, 0);
+	dialog = fcn_00470820(0, 0, 0x68116c);
+	d2_CenterDialogWindows(dialog);
+	d2_SetForm(dialog, 0);
 	v3 = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca);
-	v4 = fcn_00472250(v2, 0, v3);
-	v5 = fcn_00472250(v2, 0, v3 + 1);
-	v6 = fcn_00472250(v2, 0, v3 + 2);
-	v3 = fcn_00472250(v2, 0, v3 + 3);
+	v4 = fcn_00472250(dialog, 0, v3);
+	v5 = fcn_00472250(dialog, 0, v3 + 1);
+	v6 = fcn_00472250(dialog, 0, v3 + 2);
+	v3 = fcn_00472250(dialog, 0, v3 + 3);
 	if (*(unsigned char*) &g_6a375c > 1) {
-		v13 = fcn_00472250(v2, 0, io_AppendText(0x681164, 2, 0x1acb));
+		v13 = fcn_00472250(dialog, 0, io_AppendText(0x681164, 2, 0x1acb));
 	}
 	if (*(int*) 0x776700 <= -1) {
 		*(int*) 0x776700 = -1;
 	}
-	v7 = d2_CreateRadioGroup(4, v4, v5, v6, v3);
+	group = d2_CreateRadioGroup(4, v4, v5, v6, v3);
 	r = *(int*) 0x776700;
 	if (r != -1) {
-		d2_SelectRadioGroup(v7, r + 1);
+		d2_SelectRadioGroup(group, r + 1);
 	} else {
-		d2_SelectRadioGroup(v7, 0);
+		d2_SelectRadioGroup(group, 0);
 	}
-	fcn_00469470(v7, fcn_00472250(v2, 0, io_AppendText(0x7e)));
+	fcn_00469470(group, fcn_00472250(dialog, 0, io_AppendText(0x7e)));
 	for (;;) {
 		if (fcn_005373e0((int)fcn_0053e020, 0xc6) == 0) {
 			break;
 		}
-		d2_UpdateRadioGroup(v7);
+		d2_UpdateRadioGroup(group);
 		if (g_14ce8e0 || *(unsigned char*) &g_14cf950 == 1 || *(int*) &g_100f1dc == 1) {
 			g_774654 = 1;
 		}
@@ -100,11 +100,11 @@ int __cdecl fcn_0053e020(void)
 			r = *(signed char*) &g_6a3440;
 			*(int*) 0x776700 = r;
 			if (r != -1) {
-				d2_SelectRadioGroup(v7, r + 1);
+				d2_SelectRadioGroup(group, r + 1);
 			} else {
-				d2_SelectRadioGroup(v7, 0);
+				d2_SelectRadioGroup(group, 0);
 			}
-			fcn_00471af0(v2, 0);
+			fcn_00471af0(dialog, 0);
 			*(int*) &main_LoopFlags = 0x12d6;
 			cut_EventLoopFlags = 0x12d6;
 			fcn_004e44f0(fcn_004e4470(0x6a4040));
@@ -138,7 +138,7 @@ int __cdecl fcn_0053e020(void)
 					v1 = 1;
 				}
 			}
-			fcn_00471af0(v2, 1);
+			fcn_00471af0(dialog, 1);
 			if (v12 != 0) {
 				if (*(unsigned char*) &g_6a375c >= 1) {
 					*(int*) &g_7747b0 |= 8;
@@ -153,8 +153,8 @@ int __cdecl fcn_0053e020(void)
 			}
 		}
 	}
-	fcn_00469510(v7);
-	fcn_00471e30(v2);
+	fcn_00469510(group);
+	fcn_00471e30(dialog);
 	if (v12 != 0) {
 		v3 = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 100, 1);
 		*(int*) &main_LoopFlags = 0x12d6;

@@ -29,7 +29,7 @@ void __cdecl fcn_004fad10(void)
 
 	int stats[9];
 	unsigned char v3;
-	unsigned int* v5;
+	unsigned int* building;
 	float v20;
 	float v21;
 	float* v6;
@@ -51,11 +51,11 @@ void __cdecl fcn_004fad10(void)
 	do {
 		if (*(int*) ((char*) v12 + 0x25) != 0 && *v12 != -1) {
 			memcpy(record, v12, 0x2d);
-			v5 = (unsigned int*) gm_StartFilteredEntitySearch(1, 1, *(int*) (record + 0x21));
-			if (v5 != 0 && *(unsigned char*) v5 != 0) {
-				v8 = *(int*) ((char*) v5 + 0x61);
+			building = (unsigned int*) gm_StartFilteredEntitySearch(1, 1, *(int*) (record + 0x21));
+			if (building != 0 && *(unsigned char*) building != 0) {
+				v8 = *(int*) ((char*) building + 0x61);
 				if (v8 != 0) {
-					v3 = *(unsigned char*) (lpGebaeudePROT + *(unsigned char*) v5 * 0x24d);
+					v3 = *(unsigned char*) (lpGebaeudePROT + *(unsigned char*) building * 0x24d);
 					if ((v3 < 0xb || v3 >= 0xe) && v3 != 0x10) {
 						if (fcn_004fa6f0((char*) v8 + 0x4c, &v15, &v14) != 0) {
 							fcn_004f4830(record[0x1c], (char*) stats);

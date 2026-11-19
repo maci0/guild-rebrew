@@ -29,7 +29,7 @@ extern unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...
 extern int __cdecl gm_NextEntityQueryMatch(void);
 
 /* ADDRESS: GOLDTL 0x0050e170 */
-int __cdecl fcn_0050e170(ENT_50e170* p0, int a1, int a2)
+int __cdecl fcn_0050e170(ENT_50e170* p0, int a1, int maxAmount)
 {
     int total;
     unsigned short* p;
@@ -38,8 +38,8 @@ int __cdecl fcn_0050e170(ENT_50e170* p0, int a1, int a2)
     total = fcn_0050dfd0((char*) p0, a1);
     p = fcn_00502cd0(p0->id, 1, 0, a1);
     if (p != 0) {
-        if (total - *(int*) ((char*) p + 0xe) > a2) {
-            return a2;
+        if (total - *(int*) ((char*) p + 0xe) > maxAmount) {
+            return maxAmount;
         }
         return total - *(int*) ((char*) p + 0xe);
     }
@@ -52,8 +52,8 @@ int __cdecl fcn_0050e170(ENT_50e170* p0, int a1, int a2)
     if (i >= (int) p0->f1c) {
         return 0;
     }
-    if (total >= a2) {
-        return a2;
+    if (total >= maxAmount) {
+        return maxAmount;
     }
     return total;
 }

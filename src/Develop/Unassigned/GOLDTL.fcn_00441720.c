@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00441720 */
-int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, unsigned int* a4, float* a5)
+int __cdecl fcn_00441720(int* a0, float* worldPos, unsigned int a2, unsigned int* gridX, unsigned int* gridZ, float* heightOut)
 {
 	float pp[3];
 	float v13;
@@ -22,8 +22,8 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 	if (a0 == 0) {
 		return 0;
 	}
-	pp[0] = a1[0] - *(float*) ((char*) a0 + 0x50);
-	pp[2] = a1[2] - *(float*) ((char*) a0 + 0x58);
+	pp[0] = worldPos[0] - *(float*) ((char*) a0 + 0x50);
+	pp[2] = worldPos[2] - *(float*) ((char*) a0 + 0x58);
 	if (*(float*) ((char*) a0 + 0x60) != 0.0f) {
 		pp[0] = pp[0] / *(float*) ((char*) a0 + 0x60);
 	}
@@ -31,13 +31,13 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 		pp[2] = pp[2] / *(float*) ((char*) a0 + 0x78);
 	}
 	v4 = (int) (pp[0] + 0.5f);
-	*a3 = v4;
+	*gridX = v4;
 	v3 = (int) (pp[2] + 0.5f);
-	*a4 = v3;
+	*gridZ = v3;
 	if (v4 < 0 || v4 >= a0[0] || v3 < 0 || v3 >= a0[0]) {
 		return 0;
 	}
-	if (a5 == 0) {
+	if (heightOut == 0) {
 		goto fail_1;
 	}
 	width = a0[0];
@@ -85,7 +85,7 @@ int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3, 
 			pp[0] = 1.0f - pp[0];
 		}
 	}
-	*a5 = (v11 * pp[0] + v12 * pp[2] + v13) * *(float*) ((char*) a0 + 0x84) + *(float*) ((char*) a0 + 0x54);
+	*heightOut = (v11 * pp[0] + v12 * pp[2] + v13) * *(float*) ((char*) a0 + 0x84) + *(float*) ((char*) a0 + 0x54);
 	goto fail_1;
 fail_1:
 	return 1;

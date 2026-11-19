@@ -45,7 +45,7 @@ static __inline void fill0_5dc5e0(char* dst, int size)
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x005dc5e0 */
-int __cdecl fcn_005dc5e0(char* a0, int* a1)
+int __cdecl fcn_005dc5e0(char* entity, int* target)
 {
 	char text[0x800];
 	char name[0x100];
@@ -55,14 +55,14 @@ int __cdecl fcn_005dc5e0(char* a0, int* a1)
 	unsigned int ent;
 	char kind;
 
-	if (*(char*) (a0 + 2) != 6) {
-		pkt = (char*) gm_StartFilteredEntitySearch(1, 1, a1[1]);
+	if (*(char*) (entity + 2) != 6) {
+		pkt = (char*) gm_StartFilteredEntitySearch(1, 1, target[1]);
 		if (pkt == 0) {
 			return 0;
 		}
 		fill0_5dc5e0(buf, 0xf8);
 		*(char*) (buf + 4) = 0x76;
-		*(int*) (buf + 8) = *(int*) (a0 + 4);
+		*(int*) (buf + 8) = *(int*) (entity + 4);
 		*(int*) (buf + 0xc) = -1;
 		*(int*) (buf + 0x28) = gm_GameTime;
 		*(int*) (buf + 0x2c) = g_7f4c04;
@@ -87,7 +87,7 @@ int __cdecl fcn_005dc5e0(char* a0, int* a1)
 		}
 		fill0_5dc5e0(buf, 0xf8);
 		*(char*) (buf + 4) = 0x76;
-		*(int*) (buf + 8) = *(int*) (a0 + 4);
+		*(int*) (buf + 8) = *(int*) (entity + 4);
 		*(int*) (buf + 0xc) = -1;
 		*(int*) (buf + 0x28) = gm_GameTime;
 		*(int*) (buf + 0x2c) = g_7f4c04;
@@ -101,7 +101,7 @@ int __cdecl fcn_005dc5e0(char* a0, int* a1)
 
 
 	*(char*) (buf + 4) = 0x77;
-	*(int*) (buf + 8) = *(int*) (a0 + 4);
+	*(int*) (buf + 8) = *(int*) (entity + 4);
 	*(int*) (buf + 0xc) = -1;
 	*(int*) (buf + 0x28) = gm_GameTime;
 	*(int*) (buf + 0x2c) = g_7f4c04;
@@ -111,8 +111,8 @@ int __cdecl fcn_005dc5e0(char* a0, int* a1)
 	*(int*) (buf + 0x58) = *(int*) (pkt + 1);
 	fcn_004c5530(buf);
 
-	fcn_004c4510((char*) *a1, *(int*) (*a1 + 2));
-	fcn_004c4570(4, 1, (char*) *a1 + 0x25 - g_aed32c, pkt + 1);
+	fcn_004c4510((char*) *target, *(int*) (*target + 2));
+	fcn_004c4570(4, 1, (char*) *target + 0x25 - g_aed32c, pkt + 1);
 	fcn_004c5360();
 	fcn_004c5420(*(int*) (pkt + 1), 0x5a, 2, 0x20, 0);
 

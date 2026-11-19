@@ -9,7 +9,7 @@ int __cdecl fcn_00423920(unsigned int a0);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x00424270 */
-unsigned int __cdecl fcn_00424270(unsigned int a0, unsigned int a1)
+unsigned int __cdecl fcn_00424270(unsigned int a0, unsigned int sampleName)
 {
 	char* p;
 	char* v3;
@@ -17,7 +17,7 @@ unsigned int __cdecl fcn_00424270(unsigned int a0, unsigned int a1)
 
 	v2 = sbs_FindSet(a0);
 	if (v2) {
-		if (!fcn_00423c50(a0, a1)) {
+		if (!fcn_00423c50(a0, sampleName)) {
 	v3 = fcn_00423a10(a0);
 	p = m_alloc(0x108, (char*) 0x678fec);
 	if (v3) {
@@ -44,8 +44,8 @@ unsigned int __cdecl fcn_00424270(unsigned int a0, unsigned int a1)
 			add ecx, ebx
 			rep stosb
 		}
-		strncpy(*(char**) (v3 + 0x104), (char*) a1, 0x100);
-		*(int*) (*(char**) (v3 + 0x104) + 0x100) = fcn_00423920(a1);
+		strncpy(*(char**) (v3 + 0x104), (char*) sampleName, 0x100);
+		*(int*) (*(char**) (v3 + 0x104) + 0x100) = fcn_00423920(sampleName);
 		*(int*) (v2 + 0x34) += *(int*) (*(char**) (v3 + 0x104) + 0x100);
 		*(int*) (*(char**) 0x6b7d68 + 0x34) += *(int*) (*(char**) (v3 + 0x104) + 0x100);
 		*(int*) 0x6b7d6c = *(int*) 0x6b7d6c + 1;
@@ -75,8 +75,8 @@ unsigned int __cdecl fcn_00424270(unsigned int a0, unsigned int a1)
 			add ecx, ebx
 			rep stosb
 		}
-		strncpy(*(char**) (v2 + 0x38), (char*) a1, 0x100);
-		*(int*) (*(char**) (v2 + 0x38) + 0x100) = fcn_00423920(a1);
+		strncpy(*(char**) (v2 + 0x38), (char*) sampleName, 0x100);
+		*(int*) (*(char**) (v2 + 0x38) + 0x100) = fcn_00423920(sampleName);
 		*(int*) (v2 + 0x34) += *(int*) (*(char**) (v2 + 0x38) + 0x100);
 		*(int*) (*(char**) 0x6b7d68 + 0x34) += *(int*) (*(char**) (v2 + 0x38) + 0x100);
 		*(int*) 0x6b7d6c = *(int*) 0x6b7d6c + 1;

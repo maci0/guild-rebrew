@@ -37,7 +37,7 @@ int __cdecl fcn_005ae6a0(void* a0)
 	void* p;
 	char* q;
 	int found;
-	int v8;
+	int dialogId;
 	int v9;
 	int v10;
 	int slot;
@@ -63,13 +63,13 @@ int __cdecl fcn_005ae6a0(void* a0)
 			return 0;
 		p = gm_StartFilteredEntitySearch(1, 1, found);
 	}
-	v8 = fcn_00470820(0, 0, (char*) 0x6ab2b0);
-	d2_CenterDialogWindows(v8);
+	dialogId = fcn_00470820(0, 0, (char*) 0x6ab2b0);
+	d2_CenterDialogWindows(dialogId);
 	d2_SetOverlayAnimation(0, 0);
-	d2_SetForm(v8, 1);
+	d2_SetForm(dialogId, 1);
 	v9 = io_AppendText(0x19b9, *(unsigned short*) a0, 3, *(unsigned short*) a0);
-	v10 = fcn_00472250(v8, 1, v9);
-	v9 = fcn_00472250(v8, 1, v9 + 1);
+	v10 = fcn_00472250(dialogId, 1, v9);
+	v9 = fcn_00472250(dialogId, 1, v9 + 1);
 	*(int*) &g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0)
@@ -111,7 +111,7 @@ int __cdecl fcn_005ae6a0(void* a0)
 				g_774654 = 1;
 		}
 	} while (fcn_005373e0((void*) 0x5ae6a0, 0x677c7) != 0);
-	fcn_00471e30(v8);
+	fcn_00471e30(dialogId);
 	return res;
 	}
 	return 0;

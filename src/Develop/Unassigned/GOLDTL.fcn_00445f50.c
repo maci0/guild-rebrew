@@ -23,7 +23,7 @@ char __cdecl fcn_00445d20(int a, float* v);
 char __cdecl fcn_00445d00(char* p, float* q);
 
 /* ADDRESS: GOLDTL 0x00445f50 */
-char __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
+char __cdecl fcn_00445f50(unsigned int slot, float t, float scale, int a3)
 {
 	float pos;
 	Pal_1041d20* pc;
@@ -34,7 +34,7 @@ char __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 	float c[3];
 	unsigned int n;
 
-	if (a0 < 7) {
+	if (slot < 7) {
 	} else {
 		return 0;
 	}
@@ -42,28 +42,28 @@ char __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 		return 0;
 	if (!(t <= g_6628a0))
 		return 0;
-	pos = (float) a0 + t;
+	pos = (float) slot + t;
 	d3_VisitSceneObjects(g_67a370, 0, 0x1e, (void*) fcn_00445d20, &pos);
 	if (scale != g_6628a0)
 		d3_VisitSceneObjects(g_67a370, 0, 8, (void*) fcn_00445d00, &scale);
-	n = (a0 + 1) % 7;
-	c[0] = g_1041d80[n].a.x - g_1041d80[a0].a.x;
-	c[1] = g_1041d80[n].a.y - g_1041d80[a0].a.y;
-	c[2] = g_1041d80[n].a.z - g_1041d80[a0].a.z;
-	g_67bbdc.x = c[0] * t + g_1041d80[a0].a.x;
-	g_67bbdc.y = c[1] * t + g_1041d80[a0].a.y;
-	g_67bbdc.z = c[2] * t + g_1041d80[a0].a.z;
+	n = (slot + 1) % 7;
+	c[0] = g_1041d80[n].a.x - g_1041d80[slot].a.x;
+	c[1] = g_1041d80[n].a.y - g_1041d80[slot].a.y;
+	c[2] = g_1041d80[n].a.z - g_1041d80[slot].a.z;
+	g_67bbdc.x = c[0] * t + g_1041d80[slot].a.x;
+	g_67bbdc.y = c[1] * t + g_1041d80[slot].a.y;
+	g_67bbdc.z = c[2] * t + g_1041d80[slot].a.z;
 	g_67bbdc.x *= scale;
 	g_67bbdc.y *= scale;
 	g_67bbdc.z *= scale;
-	c[0] = g_1041d80[n].b.x - g_1041d80[a0].b.x;
-	c[1] = g_1041d80[n].b.y - g_1041d80[a0].b.y;
-	c[2] = g_1041d80[n].b.z - g_1041d80[a0].b.z;
-	g_6b86c4.x = c[0] * t + g_1041d80[a0].b.x;
-	g_6b86c4.y = c[1] * t + g_1041d80[a0].b.y;
-	g_6b86c4.z = c[2] * t + g_1041d80[a0].b.z;
+	c[0] = g_1041d80[n].b.x - g_1041d80[slot].b.x;
+	c[1] = g_1041d80[n].b.y - g_1041d80[slot].b.y;
+	c[2] = g_1041d80[n].b.z - g_1041d80[slot].b.z;
+	g_6b86c4.x = c[0] * t + g_1041d80[slot].b.x;
+	g_6b86c4.y = c[1] * t + g_1041d80[slot].b.y;
+	g_6b86c4.z = c[2] * t + g_1041d80[slot].b.z;
 	inv = 1.0f - t;
-	pc = g_1041d80[a0].pal;
+	pc = g_1041d80[slot].pal;
 	pn = g_1041d80[n].pal;
 	for (dst = g_1041d20; (int) dst < (int) (g_1041d20 + 6); dst++) {
 		((unsigned char*) &dst->color)[2] = (unsigned char) (int) (((unsigned char*) &pc->color)[2] * inv + ((unsigned char*) &pn->color)[2] * t);
@@ -75,15 +75,15 @@ char __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 		pn++;
 	}
 	UpdateSceneLighting(a3);
-	*(int*) 0x67a95c = a0;
+	*(int*) 0x67a95c = slot;
 	if (g_6b89c0 != 0) {
 		rows = (unsigned char*) g_10405e0;
 		*((unsigned char*) (g_6b89c0 + 0x0a)) =
-			(unsigned char) (int) (rows[a0 * 4 + 2] * inv + rows[n * 4 + 2] * t);
+			(unsigned char) (int) (rows[slot * 4 + 2] * inv + rows[n * 4 + 2] * t);
 		*((unsigned char*) (g_6b89c0 + 0x09)) =
-			(unsigned char) (int) (rows[a0 * 4 + 1] * inv + rows[n * 4 + 1] * t);
+			(unsigned char) (int) (rows[slot * 4 + 1] * inv + rows[n * 4 + 1] * t);
 		*((unsigned char*) (g_6b89c0 + 0x08)) =
-			(unsigned char) (int) (rows[a0 * 4 + 0] * inv + rows[n * 4 + 0] * t);
+			(unsigned char) (int) (rows[slot * 4 + 0] * inv + rows[n * 4 + 0] * t);
 	}
 	return 1;
 }

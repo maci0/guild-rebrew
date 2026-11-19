@@ -58,7 +58,7 @@ extern Win2_469 g_1015f40[0x60];
 extern Fld_102d140 g_102d140[0x10];
 
 /* ADDRESS: GOLDTL 0x00469c40 */
-void __cdecl fcn_00469c40(int a1, int a2, int a3)
+void __cdecl fcn_00469c40(int a1, int a2, int index)
 {
 	Ent469c *e;
 	Rect469 *r;
@@ -70,7 +70,7 @@ void __cdecl fcn_00469c40(int a1, int a2, int a3)
 	int xo;
 	int yo;
 
-	e = (Ent469c *) g_1015ea0 + a3;
+	e = (Ent469c *) g_1015ea0 + index;
 	kind = e->x20;
 	e->x10 = a1;
 	e->x14 = a2;

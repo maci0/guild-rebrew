@@ -1,7 +1,7 @@
 int __cdecl FindStraftatIndexById(int key);
 
 /* ADDRESS: GOLDTL 0x004f61c0 */
-int __cdecl fcn_004f61c0(int* a0, int* a1, int* a2, unsigned int a3)
+int __cdecl fcn_004f61c0(int* groupIds, int* flagCounts, int* totals, unsigned int entityIndex)
 {
 	int found[0x200];
 	int* vp;
@@ -19,19 +19,19 @@ int __cdecl fcn_004f61c0(int* a0, int* a1, int* a2, unsigned int a3)
 	unsigned char* p;
 
 	for (i = 0; i < 0x20; i++) {
-		a0[i] = -1;
+		groupIds[i] = -1;
 	}
 	total = 0;
 	for (i = 0; i < 0x20; i++) {
-		a1[i] = 0;
+		flagCounts[i] = 0;
 	}
 	for (i = 0; i < 0x20; i++) {
-		a2[i] = 0;
+		totals[i] = 0;
 	}
 	for (i = 0; i < 0x200; i++) {
 		found[i] = 0;
 	}
-	slot_id = *(int*) (0x7f4ca0 + (a3 & 0xffff) * 0x21c + 4);
+	slot_id = *(int*) (0x7f4ca0 + (entityIndex & 0xffff) * 0x21c + 4);
 	n = 0;
 	for (p = (unsigned char*) 0x99f804; (int) p < 0x9a3804; p += 8) {
 		if (*(int*) (p - 4) != slot_id) {
@@ -78,22 +78,22 @@ int __cdecl fcn_004f61c0(int* a0, int* a1, int* a2, unsigned int a3)
 				found[i] = 0;
 			}
 			*vp = 0;
-			if (cnt > a1[0x1f]) {
-				a1[0x1f] = flagcnt;
-				a2[0x1f] = cnt;
-				a0[0x1f] = group_id;
+			if (cnt > flagCounts[0x1f]) {
+				flagCounts[0x1f] = flagcnt;
+				totals[0x1f] = cnt;
+				groupIds[0x1f] = group_id;
 			}
 			for (i = 0x1e; i >= 0; i--) {
-				if (a2[i] < a2[i + 1]) {
-					tmp = a2[i];
-					a2[i] = a2[i + 1];
-					a2[i + 1] = tmp;
-					tmp = a1[i];
-					a1[i] = a1[i + 1];
-					a1[i + 1] = tmp;
-					tmp = a0[i];
-					a0[i] = a0[i + 1];
-					a0[i + 1] = tmp;
+				if (totals[i] < totals[i + 1]) {
+					tmp = totals[i];
+					totals[i] = totals[i + 1];
+					totals[i + 1] = tmp;
+					tmp = flagCounts[i];
+					flagCounts[i] = flagCounts[i + 1];
+					flagCounts[i + 1] = tmp;
+					tmp = groupIds[i];
+					groupIds[i] = groupIds[i + 1];
+					groupIds[i + 1] = tmp;
 				}
 			}
 		}

@@ -38,7 +38,7 @@ unsigned int __cdecl fcn_00525670(void)
 	char* obj;
 	char* rec;
 	int* q;
-	int v3;
+	int savedContext;
 	int v4;
 	int v5;
 	int v6;
@@ -111,7 +111,7 @@ unsigned int __cdecl fcn_00525670(void)
 		}
 		v9++;
 	}
-	v3 = d3_CurrentContextIndex;
+	savedContext = d3_CurrentContextIndex;
 	fcn_004432d0(0, 0);
 	for (p = (char*) 0x77e980; (int) p <= 0x7d197f; p += 0x14c) {
 		kind = *(unsigned char*) p;
@@ -169,7 +169,7 @@ unsigned int __cdecl fcn_00525670(void)
 			    *(unsigned char*) (p + 0x14) + *(unsigned char*) (p + 0x18);
 		}
 	}
-	fcn_004432d0(v3, 0);
+	fcn_004432d0(savedContext, 0);
 	for (q = (int*) 0x7d2020; (int) q < 0x7dc420; q += 0x29) {
 		v9 = *q;
 		if (v9)

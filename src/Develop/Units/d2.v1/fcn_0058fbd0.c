@@ -34,7 +34,7 @@ void __cdecl fcn_005305a0(void);
 int __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00526120(int a1, int a2);
 /* ADDRESS: GOLDTL 0x0058fbd0 */
-int __cdecl fcn_0058fbd0(char* a1)
+int __cdecl fcn_0058fbd0(char* gebaeude)
 {
 	int id1;
 	struct msg58 m;
@@ -44,7 +44,7 @@ int __cdecl fcn_0058fbd0(char* a1)
 	int one;
 	int sel;
 
-	fcn_0052a0c0(a1, 0);
+	fcn_0052a0c0(gebaeude, 0);
 	dlg = fcn_00470820(0, 0, (char*) 0x6a96d8);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
@@ -83,8 +83,8 @@ found:
 					memset(&m, 0, sizeof(m));
 					m.b4 = 0x8a;
 					m.b36 = 1;
-					m.f8 = *(int*) (*(unsigned short*) (a1 + 0x27) * 0x21c + 0x7f4ca4);
-					m.fc = *(int*) (a1 + 1);
+					m.f8 = *(int*) (*(unsigned short*) (gebaeude + 0x27) * 0x21c + 0x7f4ca4);
+					m.fc = *(int*) (gebaeude + 1);
 					m.stamp = gm_GameTime;
 					m.f58 = *(int*) (h + 4);
 					m.f38 = *(int*) (h + 4);

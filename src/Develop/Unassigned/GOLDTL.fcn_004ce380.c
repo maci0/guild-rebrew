@@ -6,14 +6,14 @@
 
 void __cdecl fcn_004c4330(void*);
 
-void __cdecl fcn_004ce380(void* a1)
+void __cdecl fcn_004ce380(void* payload)
 {
 	char buf[0x9c];
 
 	memset(buf + 0x10, 0, 0x80);
 	buf[0] = 0x5f;
-	*(int*) a1 = g_9badd0;
+	*(int*) payload = g_9badd0;
 	*(int*) (buf + 0x10) = 4;
-	memcpy(buf + 0x14, a1, 0x57);
+	memcpy(buf + 0x14, payload, 0x57);
 	fcn_004c4330(buf);
 }

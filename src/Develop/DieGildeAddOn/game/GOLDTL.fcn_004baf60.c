@@ -18,7 +18,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, void*, int, int, int, int, int, vo
 
 /* ADDRESS: GOLD 0x004bab90 */
 /* ADDRESS: GOLDTL 0x004baf60 */
-int __cdecl fcn_004baf60(void* a1)
+int __cdecl fcn_004baf60(void* request)
 {
 	float f;
 	int v;
@@ -31,7 +31,7 @@ int __cdecl fcn_004baf60(void* a1)
 
 	n = gm_RandomMod(0x14) & 0xffff;
 	f = (float) (((double) n + g_664e78) * 0.01);
-	p = gm_LookupEntityRecordById(*(int*) a1);
+	p = gm_LookupEntityRecordById(*(int*) request);
 	if (p == 0) {
 		return 1;
 	}
@@ -43,7 +43,7 @@ int __cdecl fcn_004baf60(void* a1)
 
 				t = f;
 				r = (int) (t * g_662cf8);
-				io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, r, e);
+				io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, r, e);
 				len = strlen(buf);
 				he_MessageBoxQuickjump(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4),
 				    buf, 0x100 < len, 0x603, *(int*) ((char*) e + 1), -1, 0, 0);

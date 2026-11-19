@@ -59,7 +59,7 @@ static __inline void send_hit(int id)
 
 
 /* ADDRESS: GOLDTL 0x005deda0 */
-int __cdecl fcn_005deda0(char* e, char* a2)
+int __cdecl fcn_005deda0(char* e, char* request)
 {
 	int out;
 	Req req;
@@ -84,14 +84,14 @@ int __cdecl fcn_005deda0(char* e, char* a2)
 				io_FormatTextBuffer(msg, 0xffb);
 				fcn_00545d40(*(int*) (r + 4), -1, msg, 0, 0x5fb, 0);
 			}
-			p = fcn_005c6220(**(unsigned short**) a2, &out);
-			*(int*) (a2 + 0x10) = 1;
+			p = fcn_005c6220(**(unsigned short**) request, &out);
+			*(int*) (request + 0x10) = 1;
 			io_FormatTextBuffer(msg, 0xfe8, *(unsigned short*) (p + 0x18) + 1, *(unsigned short*) r);
 			fcn_005dbe90(msg);
 			return 1;
 		}
 	} else {
-		r = gm_LookupEntityRecordById(*(int*) (a2 + 4));
+		r = gm_LookupEntityRecordById(*(int*) (request + 4));
 		if (r != 0) {
 			send_hit(*(int*) (r + 4));
 			if (r[2] == 6 || r[2] == 7) {

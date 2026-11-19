@@ -12,7 +12,7 @@ void __cdecl fcn_004518a0(float *v);
 /* ADDRESS: GOLDTL 0x00416d50 */
 char __cdecl fcn_00416d50(unsigned char *P, int pos)
 {
-    float v3[4];    /* 16-byte slot: fcn_004518a0 normalizes v3[0..2] */
+    float normal[4];    /* 16-byte slot: fcn_004518a0 normalizes v3[0..2] */
     unsigned char *E;
     int spawned;
     int killed;
@@ -53,24 +53,24 @@ char __cdecl fcn_00416d50(unsigned char *P, int pos)
                 *(float *)(E + 4) =
                     *(float *)(E + 4) - f * *(float *)(P + 0x1c);
             } else {
-                v3[0] = vx;
-                v3[1] = vy;
-                v3[2] = vz;
-                fcn_004518a0(v3);
-                if (v3[1] < 0.0f)
+                normal[0] = vx;
+                normal[1] = vy;
+                normal[2] = vz;
+                fcn_004518a0(normal);
+                if (normal[1] < 0.0f)
                     *(unsigned char *)(E + 0x51) &= ~1u;
                 else {
-                    *(float *)(E + 0x38) = *(float *)(P + 0xc) * v3[0];
-                    *(float *)(E + 0x3c) = *(float *)(P + 0xc) * v3[1];
-                    *(float *)(E + 0x40) = *(float *)(P + 0xc) * v3[2];
-                    f = (v3[2] * *(float *)(E + 8) + (v3[1] * *(float *)(E + 4) +
-                         v3[0] * *(float *)E)) *
+                    *(float *)(E + 0x38) = *(float *)(P + 0xc) * normal[0];
+                    *(float *)(E + 0x3c) = *(float *)(P + 0xc) * normal[1];
+                    *(float *)(E + 0x40) = *(float *)(P + 0xc) * normal[2];
+                    f = (normal[2] * *(float *)(E + 8) + (normal[1] * *(float *)(E + 4) +
+                         normal[0] * *(float *)E)) *
                         -2.0f;
-                    vx = v3[0] * f + *(float *)E;
+                    vx = normal[0] * f + *(float *)E;
                     *(float *)E = vx;
-                    vy = v3[1] * f + *(float *)(E + 4);
+                    vy = normal[1] * f + *(float *)(E + 4);
                     *(float *)(E + 4) = vy;
-                    vz = v3[2] * f + *(float *)(E + 8);
+                    vz = normal[2] * f + *(float *)(E + 8);
                     *(float *)(E + 8) = vz;
                     if (nlen > *(float *)(P + 0x14)) {
                         *(float *)E = *(float *)(P + 0x18) * vx;

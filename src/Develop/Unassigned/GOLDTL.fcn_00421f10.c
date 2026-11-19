@@ -13,18 +13,18 @@ typedef struct {
 // SIZE 0x28
 
 /* ADDRESS: GOLDTL 0x00421f10 */
-void __cdecl fcn_00421f10(Obj_00421f10* a0, unsigned int a1)
+void __cdecl fcn_00421f10(Obj_00421f10* a0, unsigned int startIndex)
 {
 	unsigned int v;
 	unsigned short n;
 	int tail;
 
-	v = (unsigned short) a1;
+	v = (unsigned short) startIndex;
 	if (a0->table[v].next == 0xffff) {
 		return;
 	}
 	a0->table[v].prev = 0xffff;
-	tail = (int) a1;
+	tail = (int) startIndex;
 	while (v != 0xffff) {
 		n = a0->table[v].next;
 		if (n != 0xffff) {

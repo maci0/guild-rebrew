@@ -50,7 +50,7 @@ struct item_table {
 /* Modal sub-dialog for picking the guard shift. The first block drives the
  * generic selection page, the second the concrete shift of one guard. */
 /* ADDRESS: GOLDTL 0x004d5940 */
-unsigned int __cdecl fcn_004d5940(int a0)
+unsigned int __cdecl fcn_004d5940(int dialogState)
 {
 	char str[1024];
 	char text[1024];
@@ -78,17 +78,17 @@ unsigned int __cdecl fcn_004d5940(int a0)
 	win = fcn_00470820(0, 0, (char*) 0x68be84);
 	fcn_00471d80(win, 3);
 	g_772ea8 = 0;
-	id = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (a0 + 0x14));
-	rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (a0 + 0x10c));
+	id = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x14));
+	rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x10c));
 	k = fcn_004d5450(rec);
 	d2_SetForm(win, 1);
 	if (*((char*) g_772e9c + 2) == 6) {
-		if (*(unsigned char*) (a0 + 0x7c) & 2) {
+		if (*(unsigned char*) (dialogState + 0x7c) & 2) {
 			io_AppendText(0x1138, k + 0x1125, rec, *g_772e98, id);
 			d2_SetForm(win, 2);
 			sel = io_AppendText(0x113a, *g_772e98, id);
-		} else if (*(unsigned char*) (a0 + 0x7c) & 1) {
-			p = (int*) (a0 + 0x100);
+		} else if (*(unsigned char*) (dialogState + 0x7c) & 1) {
+			p = (int*) (dialogState + 0x100);
 			i = 3;
 			do {
 				if (*p != -1) {
@@ -102,7 +102,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 			d2_SetForm(win, 2);
 			io_AppendText(0x112f, count, 0xc10);
 			if (v >= 0.5) {
-				if (*(int*) (a0 + 0x110)) {
+				if (*(int*) (dialogState + 0x110)) {
 					io_AppendText(0x1134);
 				} else {
 					io_AppendText(0x1135);
@@ -121,14 +121,14 @@ unsigned int __cdecl fcn_004d5940(int a0)
 			} else {
 				sel = io_AppendText(0x1133, 0x1137);
 			}
-		} else if (*(unsigned char*) (a0 + 0x7c) & 4) {
+		} else if (*(unsigned char*) (dialogState + 0x7c) & 4) {
 			io_AppendText(0x113b, rec, *g_772e98);
 			d2_SetForm(win, 2);
 			sel = io_AppendText(0x113c, *g_772e98, id);
 		}
 		d2_SetForm(win, 1);
 		io_AppendText(0x1132);
-		fcn_004d5740((char*) (a0 + 0xc0), 0, 0xb4);
+		fcn_004d5740((char*) (dialogState + 0xc0), 0, 0xb4);
 		fcn_00472250(win, 2, sel);
 		fcn_00472250(win, 2, sel + 1);
 		t = fcn_005373e0(0x4d5940, 0x7d6c6);
@@ -151,7 +151,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 			t = fcn_005373e0(0x4d5940, 0x7d6c6);
 		}
 	}
-	if ((*(unsigned char*) (a0 + 0x7c) & 1) && *((char*) g_772e98 + 2) == 6 && !g_772ea8) {
+	if ((*(unsigned char*) (dialogState + 0x7c) & 1) && *((char*) g_772e98 + 2) == 6 && !g_772ea8) {
 
 		items.count_a = 0;
 		total = 0;
@@ -162,7 +162,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 			p++;
 			sel--;
 		}
-		p = (int*) (a0 + 0x100);
+		p = (int*) (dialogState + 0x100);
 		i = 3;
 		do {
 			if (*p != -1) {
@@ -171,14 +171,14 @@ unsigned int __cdecl fcn_004d5940(int a0)
 			p++;
 			i--;
 		} while (i);
-		sel = *(int*) (a0 + 0x100);
+		sel = *(int*) (dialogState + 0x100);
 		sel = *(int*) (fcn_00502cd0(0, 2, 7, 1, sel) + 0x24);
 		d2_SetForm(win, 1);
 		io_AppendText(0x6811b0);
 		if (sel) {
 			sel = gm_SearchTable67(*(unsigned int*) (sel + 0xb4));
 			r = 0;
-			p = (int*) (a0 + 0xc0);
+			p = (int*) (dialogState + 0xc0);
 			i = 0x10;
 			do {
 				if (*p != -1) {
@@ -196,13 +196,13 @@ unsigned int __cdecl fcn_004d5940(int a0)
 		if (t > 4) {
 			t = 4;
 		}
-		if (*(int*) (a0 + 0x110)) {
+		if (*(int*) (dialogState + 0x110)) {
 			io_AppendText(0x113e, (t < 0 ? 0 : t) + 0x1128);
 		} else {
 			io_AppendText(0x113f);
 		}
 		fcn_004d5490(0x10, 0x96, 0);
-		p = (int*) (a0 + 0x100);
+		p = (int*) (dialogState + 0x100);
 		i = 3;
 		do {
 			if (*p != -1) {
@@ -228,7 +228,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 		r = fcn_00472250(win, 2, t + 1);
 		n = fcn_00472250(win, 2, t + 2);
 		clicked = 0;
-		p = (int*) (a0 + 0x80);
+		p = (int*) (dialogState + 0x80);
 		i = 0x10;
 		do {
 			if (*p != -1) {
@@ -262,7 +262,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 						count = 0x5a;
 					}
 					if ((gm_RandomMod(0x5a) & 0xffff) + 10 <= count) {
-						rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (a0 + 0x10c));
+						rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x10c));
 						io_FormatTextBuffer(text, 0x1142);
 						fcn_004e6eb0(text, 0);
 						g_774654 = 1;
@@ -279,10 +279,10 @@ unsigned int __cdecl fcn_004d5940(int a0)
 			}
 			t = fcn_005373e0(0x4d5940, 0x7d6c6);
 		}
-	} else if ((*(unsigned char*) (a0 + 0x7c) & 1) && *((char*) g_772e98 + 2) != 6 && !g_772ea8) {
+	} else if ((*(unsigned char*) (dialogState + 0x7c) & 1) && *((char*) g_772e98 + 2) != 6 && !g_772ea8) {
 
 		clicked = 0;
-		p = (int*) (a0 + 0x80);
+		p = (int*) (dialogState + 0x80);
 		i = 0x10;
 		do {
 			if (*p != -1) {
@@ -291,7 +291,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 			p++;
 			i--;
 		} while (i);
-		if (!clicked || (int) (gm_RandomMod(5) & 0xffff) > *(int*) (a0 + 0x110)) {
+		if (!clicked || (int) (gm_RandomMod(5) & 0xffff) > *(int*) (dialogState + 0x110)) {
 			count = 0;
 			t = gm_RandomMod(4) & 0xffff;
 			if (t == 0) {
@@ -302,7 +302,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 				count = 0x32;
 			}
 			if ((gm_RandomMod(0x5a) & 0xffff) + 10 <= count) {
-				rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (a0 + 0x10c));
+				rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x10c));
 				answer = 0;
 				g_772ea8 = 1;
 				g_772eac = fcn_004d52a0((int) g_772eb4, rec, (char*) g_772e9c, (char*) g_772e98, (float) count * 0.01);

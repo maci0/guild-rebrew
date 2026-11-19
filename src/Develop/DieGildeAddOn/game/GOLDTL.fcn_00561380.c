@@ -62,14 +62,14 @@ typedef struct {
 #pragma pack(pop)
 
 /* ADDRESS: GOLDTL 0x00561380 */
-void __cdecl fcn_00561380(void *a0)
+void __cdecl fcn_00561380(void *action)
 {
 	unsigned char *p;
 	char text[0x400];
 	unsigned char msg[0xf8];
 	float pos[8];
 
-	p = (unsigned char *)a0;
+	p = (unsigned char *)action;
 	if (*(int *)(p + 0xc8) != -1 && !fcn_004c4450(*(int *)(p + 0xc8)))
 		return;
 	switch (*(int *)(p + 0x70)) {

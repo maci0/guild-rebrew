@@ -77,7 +77,7 @@ int __cdecl gm_eval_SlotVoll(char*, int, int);
 int __cdecl fcn_64d41a(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x00568060 */
-void __cdecl he_RunMarktSupervisor(char* a0)
+void __cdecl he_RunMarktSupervisor(char* action)
 {
 	union { float f; int n; } uf;
 	int i;
@@ -99,27 +99,27 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 	char* hall;
 
 	if (g_773d78 == 0) {
-		fcn_00546190(a0);
+		fcn_00546190(action);
 		return;
 	}
-	v = gm_GetElapsedMinutes((void*) (a0 + 0x60), (void*) &gm_GameTime);
+	v = gm_GetElapsedMinutes((void*) (action + 0x60), (void*) &gm_GameTime);
 	if ((unsigned short) gm_GameTime.b > 0x14) {
-		fcn_00546190(a0);
+		fcn_00546190(action);
 		return;
 	}
 	if (v == 0) {
 		return;
 	}
-	*(GAME_TIMESTAMP*) (a0 + 0x60) = *(GAME_TIMESTAMP*) &gm_GameTime;
-	if (*(int*) (a0 + 0x70) < -2) {
+	*(GAME_TIMESTAMP*) (action + 0x60) = *(GAME_TIMESTAMP*) &gm_GameTime;
+	if (*(int*) (action + 0x70) < -2) {
 		return;
 	}
-	if (*(int*) (a0 + 0x70) < 0) {
-		fcn_00549330(a0, *(unsigned short*) gm_CityEntity);
-		*(int*) (a0 + 0x70) = 0;
+	if (*(int*) (action + 0x70) < 0) {
+		fcn_00549330(action, *(unsigned short*) gm_CityEntity);
+		*(int*) (action + 0x70) = 0;
 		return;
 	}
-	if (*(int*) (a0 + 0x70) != 0) {
+	if (*(int*) (action + 0x70) != 0) {
 		return;
 	}
 	if (fcn_0050d320((int) gm_CityEntity, g_773d75) < 0x4e2000) {
@@ -421,10 +421,10 @@ next_lager:
 		lager += 0x2a90;
 	} while (bar < (char*) 0x868c30);
 	if ((unsigned short) gm_GameTime.b >= 0x16) {
-		fcn_00546190(a0);
+		fcn_00546190(action);
 		return;
 	}
-	*(GAME_TIMESTAMP*) (a0 + 0x52) = *(GAME_TIMESTAMP*) &gm_GameTime;
-	fcn_00500bb0(a0 + 0x52, 1, 0, 0);
-	*(int*) (a0 + 0x70) = 0;
+	*(GAME_TIMESTAMP*) (action + 0x52) = *(GAME_TIMESTAMP*) &gm_GameTime;
+	fcn_00500bb0(action + 0x52, 1, 0, 0);
+	*(int*) (action + 0x70) = 0;
 }

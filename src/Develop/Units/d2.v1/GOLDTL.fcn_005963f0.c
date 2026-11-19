@@ -10,7 +10,7 @@ void __cdecl fcn_00596d70(int a0, int a1, int* rect, int w, int n,
                           unsigned int a5);
 
 /* ADDRESS: GOLDTL 0x005963f0 */
-void __cdecl fcn_005963f0(int a0, int a1, int a2, unsigned int a3)
+void __cdecl fcn_005963f0(int dialog, int form, int a2, unsigned int a3)
 {
 	int idx;
 	int v1;
@@ -21,11 +21,11 @@ void __cdecl fcn_005963f0(int a0, int a1, int a2, unsigned int a3)
 	int* v;
 	char* tbl;
 
-	idx = *(int*) ((a1 + a0 * 0xaf) * 4 + 0x1038144);
+	idx = *(int*) ((form + dialog * 0xaf) * 4 + 0x1038144);
 	p = (int*) 0x1015f40 + idx * 0xf3;
 	v1 = p[3];
 
-	d2_SetForm(a0, a1);
+	d2_SetForm(dialog, form);
 
 	for (v = (int*) 0x778d50; (int) v < 0x778da0; v += 5) {
 		if (*v == -1) {
@@ -33,7 +33,7 @@ void __cdecl fcn_005963f0(int a0, int a1, int a2, unsigned int a3)
 		}
 	}
 
-	d2_SetForm(a0, a1);
+	d2_SetForm(dialog, form);
 
 	for (v = (int*) 0x779130; (int) v < 0x779158; v += 5) {
 		if (*v == -1) {
@@ -73,7 +73,7 @@ void __cdecl fcn_005963f0(int a0, int a1, int a2, unsigned int a3)
 		i++;
 	} while ((int) v < 0x779154);
 
-	d2_SetForm(a0, a1);
+	d2_SetForm(dialog, form);
 
 	for (v = (int*) 0x778d50; (int) v < 0x778da0; v += 5) {
 		if (v[-2] >= 2) {
@@ -97,11 +97,11 @@ void __cdecl fcn_005963f0(int a0, int a1, int a2, unsigned int a3)
 		}
 		v[-1] = *(int*) ((char*) 0x778d40 + k * 0x14) + n * 0x44 - 0x44;
 		*v = *(int*) ((char*) 0x778d44 + k * 0x14);
-		fcn_00596d70(a0, a1, v - 3, a2, 2, a3);
+		fcn_00596d70(dialog, form, v - 3, a2, 2, a3);
 		v += 0xe;
 	} while ((int) v < 0x77912c);
 
-	d2_SetForm(a0, a1);
+	d2_SetForm(dialog, form);
 
 	for (v = (int*) 0x77912c; (int) v < 0x779154; v += 5) {
 		if (v[-1] != *v) {
@@ -129,7 +129,7 @@ void __cdecl fcn_005963f0(int a0, int a1, int a2, unsigned int a3)
 		}
 		v[-1] = *(int*) ((char*) 0x779120 + k * 0x14) + n * 0x44 - 0x44;
 		*v = *(int*) ((char*) 0x779124 + k * 0x14);
-		fcn_00596d70(a0, a1, v - 3, a2, 2, a3);
+		fcn_00596d70(dialog, form, v - 3, a2, 2, a3);
 		v += 0xe;
 	} while ((int) v < 0x7798ac);
 

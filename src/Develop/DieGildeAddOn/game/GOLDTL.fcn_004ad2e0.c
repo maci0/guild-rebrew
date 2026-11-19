@@ -19,9 +19,9 @@ void __cdecl fcn_004ad2e0(void)
 	Hit4ad2e0 hits[4];
 	char text[0x104];
 	int idx;
-	int v3;
+	int requiredMask;
 	int v4;
-	int v5;
+	int excludedMask;
 	int v6;
 	int count;
 	int i;
@@ -37,9 +37,9 @@ void __cdecl fcn_004ad2e0(void)
 	if (idx == 0) {
 		return;
 	}
-	v3 = *(int*) (idx * 4 + 0x664e18);
+	requiredMask = *(int*) (idx * 4 + 0x664e18);
 	v4 = *(int*) (idx * 4 + 0x664e0c);
-	v5 = *(int*) (idx * 4 + 0x664e24);
+	excludedMask = *(int*) (idx * 4 + 0x664e24);
 	idx--;
 	v6 = *(int*) (idx * 4 + 0x664e34);
 	fcn_004ad4d0(idx);
@@ -51,7 +51,7 @@ void __cdecl fcn_004ad2e0(void)
 	memset(hits, 0, sizeof(hits));
 	rec = (char*) 0x7f4ca0;
 	do {
-		if (!(v5 & *(int*) (rec + 0x1cc)) && (v3 & *(int*) (rec + 0x1cc)) && *(unsigned char*) (rec + 0xd) >= 7 &&
+		if (!(excludedMask & *(int*) (rec + 0x1cc)) && (requiredMask & *(int*) (rec + 0x1cc)) && *(unsigned char*) (rec + 0xd) >= 7 &&
 		    (*(unsigned char*) (rec + 2) == 6 || *(unsigned char*) (rec + 2) == 7 ||
 		     *(unsigned char*) (rec + 2) == 5 || *(unsigned char*) (rec + 2) == 4 ||
 		     *(unsigned char*) (rec + 2) == 3 || *(unsigned char*) (rec + 2) == 2)) {

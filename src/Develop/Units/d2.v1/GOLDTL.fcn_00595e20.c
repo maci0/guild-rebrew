@@ -17,7 +17,7 @@ int __cdecl fcn_00471f80(int);
 int __cdecl CountDisplayCounters(void);
 
 /* ADDRESS: GOLDTL 0x00595e20 */
-int __cdecl fcn_00595e20(char* a0, char* a1)
+int __cdecl fcn_00595e20(char* building, char* a1)
 {
 	unsigned int tbl1[36];
 	unsigned int tbl2[18];
@@ -83,7 +83,7 @@ int __cdecl fcn_00595e20(char* a0, char* a1)
 	tbl2[0x10] = 4;
 	tbl2[0x11] = 4;
 
-	cat = gm_GetBuildingTypeCategory(*(unsigned char*) a0);
+	cat = gm_GetBuildingTypeCategory(*(unsigned char*) building);
 
 	i = 0;
 	for (p = (unsigned int*) 0x778d4c; (int) p < 0x778d9c; p += 5) {

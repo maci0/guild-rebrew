@@ -8,7 +8,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta);
 
 /* Releases every played sound of the behaviour when its counter ran out. */
 /* ADDRESS: GOLDTL 0x0057a180 */
-void __cdecl fcn_0057a180(char* a0)
+void __cdecl fcn_0057a180(char* action)
 {
 	char* entity;
 	char* sound;
@@ -17,18 +17,18 @@ void __cdecl fcn_0057a180(char* a0)
 	int found;
 	int count;
 
-	if (*(int*) (a0 + 0x70) < -2) {
+	if (*(int*) (action + 0x70) < -2) {
 		return;
 	}
-	if (*(int*) (a0 + 0x70) > 0) {
+	if (*(int*) (action + 0x70) > 0) {
 		return;
 	}
-	entity = gm_LookupEntityRecordById(*(int*) (a0 + 0xc));
+	entity = gm_LookupEntityRecordById(*(int*) (action + 0xc));
 	if (entity != 0) {
 		count = fcn_0050d320(entity, g_773d75);
-		if (count > *(int*) (a0 + 0xac)) {
-			fcn_004c5150(-1, *(int*) (entity + 4), g_773d75, *(int*) (a0 + 0xac));
-			fcn_00546190(a0);
+		if (count > *(int*) (action + 0xac)) {
+			fcn_004c5150(-1, *(int*) (entity + 4), g_773d75, *(int*) (action + 0xac));
+			fcn_00546190(action);
 			return;
 		}
 		found = 0;
@@ -46,7 +46,7 @@ void __cdecl fcn_0057a180(char* a0)
 		if (found == 0) {
 			fcn_004ff210(*(unsigned short*) entity, -1001);
 		}
-		fcn_00546190(a0);
+		fcn_00546190(action);
 	}
-	fcn_00546190(a0);
+	fcn_00546190(action);
 }

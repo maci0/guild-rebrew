@@ -74,7 +74,7 @@ void __cdecl fcn_00543080(void)
 	unsigned int* v4;
 	int v5;
 	int v11;
-	char v6[256];
+	char messageText[256];
 	char v7[48];
 	unsigned int* v8;
 	char* v9;
@@ -102,8 +102,8 @@ void __cdecl fcn_00543080(void)
 		while (v11 != 1) {
 			d2_SuppressOverlay = 0;
 			*(int*) &main_LoopFlags = 0x24087;
-			io_FormatTextBuffer(v6, 0x79);
-			if (!fcn_00526120(v6, 1)) {
+			io_FormatTextBuffer(messageText, 0x79);
+			if (!fcn_00526120(messageText, 1)) {
 				g_774954 = 1;
 				fcn_005356b0(0x5438c0);
 				return;

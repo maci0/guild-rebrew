@@ -12,7 +12,7 @@ unsigned int __cdecl fcn_0047a990(int a0, int a1, char* a2, char* a3)
 	int* v13;
 	u16 words[0x480];
 	u32* v15;
-	int v16;
+	int loopIndex;
 
 	u16* v18;
 
@@ -36,10 +36,10 @@ unsigned int __cdecl fcn_0047a990(int a0, int a1, char* a2, char* a3)
 				v11 = (u16*) (*(int*) (a3 + 0x1c) + ((v8 + a1) * *(int*) (a3 + 0x10) + a0) * 2);
 				if (*v13 > 0) {
 					do {
-						for (v16 = 0; v16 < (int) (*v15 / 3); v16++) {
+						for (loopIndex = 0; loopIndex < (int) (*v15 / 3); loopIndex++) {
 							*v11 = 0;
 						}
-						v16 = 0;
+						loopIndex = 0;
 						v1 = (u32*) ((int) v11 + ((*v15 / 3) * 2));
 						if ((int) v15[1] > 0) {
 							v9 = (u8*) ((int) v15 + 10);
@@ -51,14 +51,14 @@ unsigned int __cdecl fcn_0047a990(int a0, int a1, char* a2, char* a3)
 								v9[-1] = v6 >> 3;
 								*v9 = v7 >> 3;
 								v10 = (u16) (((u16) (v5 >> 3) << 5 | (u16) (v6 >> 3)) << 5 | (u16) (v7 >> 3));
-								words[v16] = v10;
+								words[loopIndex] = v10;
 								if (!v10) {
-									words[v16] = 0x421;
+									words[loopIndex] = 0x421;
 								}
-								words[v16] |= 0x8000;
-								v16 += 1;
+								words[loopIndex] |= 0x8000;
+								loopIndex += 1;
 								v9 = v9 + 3;
-							} while (v16 < (int) v15[1]);
+							} while (loopIndex < (int) v15[1]);
 						}
 						memcpy(v1, words, v15[1] * 2);
 						v11 = (u16*) ((int) v1 + v15[1] * 2);

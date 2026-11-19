@@ -75,7 +75,7 @@ void __cdecl fcn_0043c640(Tile* t)
 	int y;
 	RegionRecord* r;
 	int* idx;
-	int v1;
+	int nextRowVertex;
 	int v0;
 	float jx;
 	float jy;
@@ -392,7 +392,7 @@ void __cdecl fcn_0043c640(Tile* t)
 								continue;
 							}
 							v0 = (t->H + 1) * row + col;
-							v1 = (row + 1) * (t->H + 1) + col;
+							nextRowVertex = (row + 1) * (t->H + 1) + col;
 							if (idx[v0] == -1) {
 								r->p04[count] = t->H * x +
 									(row + t->H * y) * t->W + col - 0x1000000;
@@ -431,10 +431,10 @@ void __cdecl fcn_0043c640(Tile* t)
 								t->verts[2 * (t->W * (row + t->H * y) + hx + col) + 3] =
 									(hy * t->vstep + f + f) - jy;
 							}
-							if (idx[v1] == -1) {
+							if (idx[nextRowVertex] == -1) {
 								r->p04[count] = t->H * x +
 									(row + 1 + t->H * y) * t->W + col - 0x1000000;
-								idx[v1] = count;
+								idx[nextRowVertex] = count;
 								count++;
 								jx = col != 0 ? t->jitter : 0;
 								jy = row == t->H - 1 ? 0 : t->jitter;
@@ -450,10 +450,10 @@ void __cdecl fcn_0043c640(Tile* t)
 								t->verts[2 * (t->W * (row + 1 + t->H * y) + hx + col) + 1] =
 									(hy * t->vstep + f + f) - jy;
 							}
-							if (idx[v1 + 1] == -1) {
+							if (idx[nextRowVertex + 1] == -1) {
 								r->p04[count] = t->H * x +
 									(row + 1 + t->H * y) * t->W + col + 1 - 0x1000000;
-								idx[v1 + 1] = count;
+								idx[nextRowVertex + 1] = count;
 								count++;
 								jx = col == t->H - 1 ? 0 : t->jitter;
 								jy = row == t->H - 1 ? 0 : t->jitter;
@@ -473,15 +473,15 @@ void __cdecl fcn_0043c640(Tile* t)
 										   t->H * x + col] < 0) {
 								out[0] = (unsigned short) idx[v0];
 								out[1] = (unsigned short) idx[v0 + 1];
-								out[2] = (unsigned short) idx[v1];
-								out[3] = (unsigned short) idx[v1];
+								out[2] = (unsigned short) idx[nextRowVertex];
+								out[3] = (unsigned short) idx[nextRowVertex];
 								out[4] = (unsigned short) idx[v0 + 1];
-								out[5] = (unsigned short) idx[v1 + 1];
+								out[5] = (unsigned short) idx[nextRowVertex + 1];
 							} else {
-								out[0] = (unsigned short) idx[v1];
+								out[0] = (unsigned short) idx[nextRowVertex];
 								out[1] = (unsigned short) idx[v0];
-								out[2] = (unsigned short) idx[v1 + 1];
-								out[3] = (unsigned short) idx[v1 + 1];
+								out[2] = (unsigned short) idx[nextRowVertex + 1];
+								out[3] = (unsigned short) idx[nextRowVertex + 1];
 								out[4] = (unsigned short) idx[v0];
 								out[5] = (unsigned short) idx[v0 + 1];
 							}
@@ -557,7 +557,7 @@ void __cdecl fcn_0043c640(Tile* t)
 								continue;
 							}
 							v0 = (t->H + 1) * row + col;
-							v1 = (row + 1) * (t->H + 1) + col;
+							nextRowVertex = (row + 1) * (t->H + 1) + col;
 							if (idx[v0] == -1) {
 								r->p08[count] =
 									(t->mat[(row + t->H * y) * t->W + t->H * x + col] == i ?
@@ -600,12 +600,12 @@ void __cdecl fcn_0043c640(Tile* t)
 								t->verts[2 * (t->W * (row + t->H * y) + hx + col) + 3] =
 									(hy * t->vstep + f + f) - jy2;
 							}
-							if (idx[v1] == -1) {
+							if (idx[nextRowVertex] == -1) {
 								r->p08[count] =
 									(t->mat[(row + 1 + t->H * y) * t->W + t->H * x + col] == i ?
 									 0xFF000000 : 0) +
 									(row + 1 + t->H * y) * t->W + t->H * x + col;
-								idx[v1] = count;
+								idx[nextRowVertex] = count;
 								count++;
 								jx2 = col != 0 ? t->jitter : 0;
 								jy2 = row == t->H - 1 ? 0 : t->jitter;
@@ -621,12 +621,12 @@ void __cdecl fcn_0043c640(Tile* t)
 								t->verts[2 * (t->W * (row + 1 + t->H * y) + hx + col) + 1] =
 									(hy * t->vstep + f + f) - jy2;
 							}
-							if (idx[v1 + 1] == -1) {
+							if (idx[nextRowVertex + 1] == -1) {
 								r->p08[count] =
 									(t->mat[(row + 1 + t->H * y) * t->W + t->H * x + col + 1] == i ?
 									 0xFF000000 : 0) +
 									(row + 1 + t->H * y) * t->W + t->H * x + col + 1;
-								idx[v1 + 1] = count;
+								idx[nextRowVertex + 1] = count;
 								count++;
 								jx2 = col == t->H - 1 ? 0 : t->jitter;
 								jy2 = row == t->H - 1 ? 0 : t->jitter;
@@ -656,15 +656,15 @@ void __cdecl fcn_0043c640(Tile* t)
 										   t->H * x + col] < 0) {
 								out[0] = (unsigned short) idx[v0];
 								out[1] = (unsigned short) idx[v0 + 1];
-								out[2] = (unsigned short) idx[v1];
-								out[3] = (unsigned short) idx[v1];
+								out[2] = (unsigned short) idx[nextRowVertex];
+								out[3] = (unsigned short) idx[nextRowVertex];
 								out[4] = (unsigned short) idx[v0 + 1];
-								out[5] = (unsigned short) idx[v1 + 1];
+								out[5] = (unsigned short) idx[nextRowVertex + 1];
 							} else {
-								out[0] = (unsigned short) idx[v1];
+								out[0] = (unsigned short) idx[nextRowVertex];
 								out[1] = (unsigned short) idx[v0];
-								out[2] = (unsigned short) idx[v1 + 1];
-								out[3] = (unsigned short) idx[v1 + 1];
+								out[2] = (unsigned short) idx[nextRowVertex + 1];
+								out[3] = (unsigned short) idx[nextRowVertex + 1];
 								out[4] = (unsigned short) idx[v0];
 								out[5] = (unsigned short) idx[v0 + 1];
 							}

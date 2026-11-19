@@ -41,7 +41,7 @@ int __cdecl fcn_004339e0(char* obj, FLAGS546590 fl, int n, FRAME546590* frames);
 int __cdecl fcn_00546480(char* entity);
 
 /* ADDRESS: GOLDTL 0x00546590 */
-char* __cdecl fcn_00546590(char* a0, char* name, char* entity)
+char* __cdecl fcn_00546590(char* effectState, char* name, char* entity)
 {
 	FRAME546590 frames[2];
 	FLAGS546590 flags;
@@ -55,8 +55,8 @@ char* __cdecl fcn_00546590(char* a0, char* name, char* entity)
 	d3_GetObjectVerticalBounds(entity, &lo, &hi);
 	pos[1] = hi;
 	obj = fcn_00442910(0, pos, g_662d70, name);
-	*(char**) (a0 + 0xc) = obj;
-	*(char**) (a0 + 8) = entity;
+	*(char**) (effectState + 0xc) = obj;
+	*(char**) (effectState + 8) = entity;
 	if (obj != 0) {
 		obj[0x214] &= 0x7f;
 		obj[0x216] |= 3;

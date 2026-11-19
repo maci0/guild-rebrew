@@ -17,7 +17,7 @@ void __cdecl fcn_00459940(int h, int s, int a);
 void __cdecl fcn_00459980(int h, int s, int a, float b);
 
 /* ADDRESS: GOLDTL 0x004e4b60 */
-void __cdecl fcn_004e4b60(int a1)
+void __cdecl fcn_004e4b60(int textureName)
 {
 	Col4e4b60 c;
 
@@ -25,7 +25,7 @@ void __cdecl fcn_004e4b60(int a1)
 		g_6b89c0 = g_772f68 = fcn_00459ae0(-2.25f, -0.2f, 600.0f);
 		*(int*) &c = 0;
 		c.b = 0;
-		g_772f64 = fcn_00459870(g_772f68, 0, a1, c, 3.0f, 0, 0.8f, -0.25f);
+		g_772f64 = fcn_00459870(g_772f68, 0, textureName, c, 3.0f, 0, 0.8f, -0.25f);
 		fcn_00459940(g_772f68, g_772f64, 0);
 		fcn_00459980(g_772f68, g_772f64, 0xff, 10.0f);
 	}

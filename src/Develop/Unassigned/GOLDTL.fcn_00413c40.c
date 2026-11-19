@@ -8,7 +8,7 @@ int __cdecl fcn_00413870(void* o, void* a, void* b, void* c, void* d, void* e);
 /* ADDRESS: GOLDTL 0x00413c40 */
 int __cdecl fcn_00413c40(void* obj, float* outA, float* outB, void* p4, void* p5, void* p6, void* p7)
 {
-    void* a6;
+    void* thirdPoint;
     void* first;
     void* object;
     int r1;
@@ -16,9 +16,9 @@ int __cdecl fcn_00413c40(void* obj, float* outA, float* outB, void* p4, void* p5
 
     object = obj;
     first = p4;
-    a6 = p6;
-    r1 = fcn_00413870(obj, &p6, &p5, p4, p5, a6);
-    r2 = fcn_00413870(object, &p4, &obj, a6, p7, first);
+    thirdPoint = p6;
+    r1 = fcn_00413870(obj, &p6, &p5, p4, p5, thirdPoint);
+    r2 = fcn_00413870(object, &p4, &obj, thirdPoint, p7, first);
     if (r1 != 0 && r2 != 0)
         return 1;
     if (r1 == 0) {

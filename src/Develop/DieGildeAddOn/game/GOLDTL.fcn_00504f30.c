@@ -20,7 +20,7 @@ int __cdecl gm_CheckStatLevel(int id, int kind);
 int __cdecl fcn_00504ef0(int kind, int* out);
 
 /* ADDRESS: GOLDTL 0x00504f30 */
-unsigned int __cdecl fcn_00504f30(int a0, int a1)
+unsigned int __cdecl fcn_00504f30(int buildingType, int playerIndex)
 {
 	Loc* rec;
 	unsigned char* rb;
@@ -32,13 +32,13 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 	int i;
 	int lvl;
 
-	type = gm_GetBuildingTypeCategory(a0);
-	rec = &((Loc*) lpGebaeudePROT)[a0];
-	loc = gm_CheckStatLevel(a1, fcn_00507910(rec->kind));
-	if (a1 == 0xffff) {
+	type = gm_GetBuildingTypeCategory(buildingType);
+	rec = &((Loc*) lpGebaeudePROT)[buildingType];
+	loc = gm_CheckStatLevel(playerIndex, fcn_00507910(rec->kind));
+	if (playerIndex == 0xffff) {
 		return 0;
 	}
-	rb = (unsigned char*) (g_7f4ca0 + a1 * 0x21c);
+	rb = (unsigned char*) (g_7f4ca0 + playerIndex * 0x21c);
 	if (g_774800 != 0 && (rb[2] == 6 || rb[2] == 7)) {
 		return 1;
 	}
@@ -117,7 +117,7 @@ unsigned int __cdecl fcn_00504f30(int a0, int a1)
 	}
 	if (type == 6) {
 		lvl = 0;
-		switch (a0) {
+		switch (buildingType) {
 		case 4:
 			lvl = 1;
 			break;

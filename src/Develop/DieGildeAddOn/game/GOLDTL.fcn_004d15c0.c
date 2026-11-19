@@ -31,7 +31,7 @@ int __cdecl fcn_004c67c0(int, pkt2c*);
 void __cdecl fcn_00533a40(char*);
 
 /* ADDRESS: GOLDTL 0x004d15c0 */
-char __cdecl fcn_004d15c0(char* a0, char* a1)
+char __cdecl fcn_004d15c0(char* context, char* targetEntity)
 {
 	pkt2c l;
 	pkt2c* e;
@@ -45,25 +45,25 @@ char __cdecl fcn_004d15c0(char* a0, char* a1)
 		if (g_7746a0) {
 			if (*(int*) ((char*) g_7746a0 + 0x220) == 2) {
 				obj = *(int*) ((char*) g_7746a0 + 0x204);
-				if (fcn_004ce270(a1, obj) != 0 || g_14cf736 != 0) {
-					if (fcn_004d1020(a0, a1, (char*) obj, 0, 0) != -1) {
+				if (fcn_004ce270(targetEntity, obj) != 0 || g_14cf736 != 0) {
+					if (fcn_004d1020(context, targetEntity, (char*) obj, 0, 0) != -1) {
 						r = 1;
 						goto end;
 					}
 				}
 			} else {
 				if (strcmp((char*) g_7746a0, "sp_ESCAPE") == 0) {
-					fcn_004d1250(a0, a1, (char*) g_7746a0);
+					fcn_004d1250(context, targetEntity, (char*) g_7746a0);
 					r = 1;
 					goto end;
 				}
 				if (strncmp((char*) g_7746a0, "sp_CONQUER", 10) == 0) {
-					fcn_004d1320(a0, a1, (char*) g_7746a0);
+					fcn_004d1320(context, targetEntity, (char*) g_7746a0);
 					r = 1;
 					goto end;
 				}
 				if (strncmp((char*) g_7746a0, "WARE", 4) == 0) {
-					fcn_004d13d0(a0, a1, (char*) g_7746a0);
+					fcn_004d13d0(context, targetEntity, (char*) g_7746a0);
 					r = 1;
 					goto end;
 				}
@@ -71,14 +71,14 @@ char __cdecl fcn_004d15c0(char* a0, char* a1)
 		} else {
 			if (fcn_0045bad0(*(int*) (g_67a370 + 0xb0), g_14ce8c0 + 0x1a,
 					 g_14ce8c2 + 0x1a, &v13, &v12) != 0) {
-				e = gm_FindOrCreateEntitySlot(a0, a1);
+				e = gm_FindOrCreateEntitySlot(context, targetEntity);
 				e->fc = 0;
 				l = *e;
-				l.id = *(int*) (a1 + 4);
+				l.id = *(int*) (targetEntity + 4);
 				l.f4 = 1;
 				l.f10 = v13;
 				l.f14 = v12;
-				fcn_004c67c0(*(int*) (a0 + 0x10), &l);
+				fcn_004c67c0(*(int*) (context + 0x10), &l);
 				r = 1;
 				goto end;
 			}

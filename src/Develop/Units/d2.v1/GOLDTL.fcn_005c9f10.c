@@ -23,7 +23,7 @@ int __cdecl fcn_005c9f10(int a0, int a1, int a2, int a3, int a4, unsigned short*
 	int v12;
 	int* v15;
 	int v17;
-	char v13[256];
+	char caption[256];
 
 	if (a1 != 1 && a1 != 2 && a1 != 3) {
 		if (a1 != 4 && a1 != 5 && a1 != 6) {
@@ -109,16 +109,16 @@ label_5ca044:
 				} else {
 					v12 = -(unsigned int) ((v12 & 0x200) != 0) & 0x23;
 				}
-				io_FormatTextBuffer(v13, 0x6ac96c, *(unsigned short*) v15[-6]);
-				fcn_005c9090(v13, v6, v15[-1], 0xca, 0x56);
-				io_FormatTextBuffer(v13, "%s", (-(unsigned int) (*(char*) (v15[-6] + 9) != 0) & 0x28) + 0x253 + v12);
-				fcn_005c9090(v13, v6, v15[-1] + 0xf, 0xca, 0x56);
+				io_FormatTextBuffer(caption, 0x6ac96c, *(unsigned short*) v15[-6]);
+				fcn_005c9090(caption, v6, v15[-1], 0xca, 0x56);
+				io_FormatTextBuffer(caption, "%s", (-(unsigned int) (*(char*) (v15[-6] + 9) != 0) & 0x28) + 0x253 + v12);
+				fcn_005c9090(caption, v6, v15[-1] + 0xf, 0xca, 0x56);
 			} else {
 				v3 = (unsigned short*) v15[-6];
-				io_FormatTextBuffer(v13, 0x6ac964, (-(unsigned int) (*(char*) ((int) v3 + 9) != 0) & 10) + 0x114 + (unsigned int) *(unsigned char*) ((int) v3 + 0xd), *v3);
-				fcn_005c9090(v13, v6, v15[-1], 0xca, 0x56);
-				io_FormatTextBuffer(v13, 0x6ac95c, *(unsigned short*) v15[-6]);
-				fcn_005c9090(v13, v6, v15[-1] + 0xf, 0xca, 0x56);
+				io_FormatTextBuffer(caption, 0x6ac964, (-(unsigned int) (*(char*) ((int) v3 + 9) != 0) & 10) + 0x114 + (unsigned int) *(unsigned char*) ((int) v3 + 0xd), *v3);
+				fcn_005c9090(caption, v6, v15[-1], 0xca, 0x56);
+				io_FormatTextBuffer(caption, 0x6ac95c, *(unsigned short*) v15[-6]);
+				fcn_005c9090(caption, v6, v15[-1] + 0xf, 0xca, 0x56);
 			}
 			v3 = a5;
 			if ((unsigned short*) v15[-6] != a5 && *(char*) &((unsigned short*) v15[-6])[1] != 6) {
@@ -143,8 +143,8 @@ label_5ca044:
 			}
 		} else {
 			fcn_0046f740((v6 - (int) *(short*) ((int) g_772500 + 0x1a2ac) / 2) - 3, v10 + 1, 0x4fb, d2_CurrentWindowId);
-			io_FormatTextBuffer(v13, "%s", v15[-3] + 0x253);
-			fcn_005c9090(v13, v6, v15[-1], 0xca, 0x56);
+			io_FormatTextBuffer(caption, "%s", v15[-3] + 0x253);
+			fcn_005c9090(caption, v6, v15[-1], 0xca, 0x56);
 			*(int*) ((int) g_1015ea0 + 0x5c + v15[-5] * 0x2f4) = 1;
 			*(int*) ((int) g_1015ea0 + 0x2f0 + v15[-5] * 0x2f4) = 0;
 			fcn_00472640(v15[-5], 0);

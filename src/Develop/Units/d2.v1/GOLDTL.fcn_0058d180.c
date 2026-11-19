@@ -62,7 +62,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
 
-int __cdecl fcn_0058d180(char* who, char* a2)
+int __cdecl fcn_0058d180(char* who, char* request)
 {
 	int r;
 	int ok;
@@ -75,7 +75,7 @@ int __cdecl fcn_0058d180(char* who, char* a2)
 	ENTITY_RECORD* hh;
 
 	r = 0;
-	if (fcn_0057b9d0(who, *(int*) (a2 + 4), *(unsigned char*) (a2 + 8)) != 0) {
+	if (fcn_0057b9d0(who, *(int*) (request + 4), *(unsigned char*) (request + 8)) != 0) {
 		fcn_005263d0(g_14b5798, g_14b579c, 0);
 		return 0;
 	}
@@ -113,8 +113,8 @@ int __cdecl fcn_0058d180(char* who, char* a2)
 					m.owner = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (who + 0x27)].entity_id;
 					m.target = *(int*) (who + 1);
 					m.when = gm_GameTime;
-					m.who = *(int*) (a2 + 4);
-					m.slot = a2[8];
+					m.who = *(int*) (request + 4);
+					m.slot = request[8];
 					m.field = hh->entity_id;
 					id = fcn_004c5530(&m);
 					while (id != -1 && fcn_004c4450(id) == 0) {

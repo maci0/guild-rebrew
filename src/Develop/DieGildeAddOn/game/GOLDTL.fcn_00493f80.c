@@ -38,7 +38,7 @@ void __cdecl fcn_00493f80(void)
 	int flags[0x300];
 	GOLDTL_Msg493 msg;
 	unsigned char* cand[5];
-	int v25;
+	int candidateCount;
 	unsigned char* e0;
 	int i;
 	int v28;
@@ -84,7 +84,7 @@ void __cdecl fcn_00493f80(void)
 			 && rec[0] < 10 && rec[0] != 6 && rec[0] != 7) {
 				e0 = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (rec + 0x5a));
 				v29 = (e0[2] == 6 || e0[2] == 7);
-				v25 = 0;
+				candidateCount = 0;
 				ap = (int*) (rec + 0x66);
 				for (i = 5; i != 0; i--, ap++) {
 					e1 = (unsigned char*) gm_LookupEntityRecordById(*ap);
@@ -98,14 +98,14 @@ void __cdecl fcn_00493f80(void)
 					 && (float) (*(unsigned short*) (e1 + 0xa) + 3) >= *(float*) (e1 + 0x20)
 					 && !e1[0x164]
 					 && !fcn_005463a0(2, 2, *(unsigned short*) e1, 0, 0x5e)) {
-						cand[v25] = e1;
-						v25++;
+						cand[candidateCount] = e1;
+						candidateCount++;
 					} else {
 						v29 = 1;
 						flags[*(unsigned short*) e1] = 1;
 					}
 				}
-				if (!v29 && v25) {
+				if (!v29 && candidateCount) {
 					rec -= 2;
 					v6 = gm_MapEntityStatRange(rec[0x164]);
 					v28 = gm_WalkEntityChain(*(unsigned short*) rec);
@@ -140,7 +140,7 @@ void __cdecl fcn_00493f80(void)
 					best = cand[0];
 					flags[*(unsigned short*) best] = 1;
 					i = 1;
-					if (v25 > 1) {
+					if (candidateCount > 1) {
 						do {
 							e1 = cand[i];
 							flags[*(unsigned short*) e1] = 1;
@@ -148,7 +148,7 @@ void __cdecl fcn_00493f80(void)
 								best = e1;
 							}
 							i++;
-						} while (i < v25);
+						} while (i < candidateCount);
 					}
 					msg.f36 = 0x11;
 					msg.f4 = 0x5e;

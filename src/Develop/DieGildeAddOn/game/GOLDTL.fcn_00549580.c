@@ -45,7 +45,7 @@ int __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d,
                                    int e, int f, int g, void* h);
 
 /* ADDRESS: GOLDTL 0x00549580 */
-void __cdecl fcn_00549580(int a0, char* a1, char* a2, char* a3,
+void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
                           float a4, int a5)
 {
 	char* p;
@@ -55,7 +55,7 @@ void __cdecl fcn_00549580(int a0, char* a1, char* a2, char* a3,
 	char buf[0x800];
 	int t;
 
-	p = a1;
+	p = subject;
 	if (a4 <= g_6628a8) {
 		fcn_00529160(0, 0, *(unsigned short*) p, 0);
 		t = *(int*) (p + 0x184);

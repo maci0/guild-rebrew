@@ -11,8 +11,8 @@ void __cdecl fcn_004757b0(char*, char, char, char);
    used bounds, blank the two row markers, pack each glyph run into the block
    and return a right-sized copy. */
 /* ADDRESS: GOLDTL 0x00477590 */
-unsigned int* __cdecl fcn_00477590(int a0, int a1, unsigned int a2,
-                                   unsigned int a3, int a4, char a5, int a6)
+unsigned int* __cdecl fcn_00477590(int originX, int originY, unsigned int width,
+                                   unsigned int height, int pixels, char a5, int rowStride)
 {
     unsigned int minx;
     unsigned int maxy;
@@ -31,18 +31,18 @@ unsigned int* __cdecl fcn_00477590(int a0, int a1, unsigned int a2,
     int r;
     int runs;
 
-    minx = a2;
+    minx = width;
     ref[0] = 0;
     ref[1] = 0;
     ref[2] = 0;
     maxx = 0;
     maxy = 0;
-    miny = a3;
+    miny = height;
     total = 0;
-    buf = (unsigned int*) m_alloc((a2 * 0xc + 4) * a3 + 0x32, (char*) 0x67d984);
-    for (y = 0; y < (int) a3; y++) {
-        for (x = 0; x < (int) a2; x++) {
-            stride = a4 + (((a1 + y) * a6 + a0) + x) * 3;
+    buf = (unsigned int*) m_alloc((width * 0xc + 4) * height + 0x32, (char*) 0x67d984);
+    for (y = 0; y < (int) height; y++) {
+        for (x = 0; x < (int) width; x++) {
+            stride = pixels + (((originY + y) * rowStride + originX) + x) * 3;
             if (fcn_00475780((char*) stride, (char*) 0x100f1a0) && x > (int) (unsigned short) maxx) {
                 maxx = x;
             }
@@ -72,9 +72,9 @@ unsigned int* __cdecl fcn_00477590(int a0, int a1, unsigned int a2,
     *(unsigned short*) ((char*) buf + 0x12) = (unsigned short) (maxx + 1);
     *(unsigned short*) ((char*) buf + 0x14) = (unsigned short) (maxy + 1);
     if (fcn_00475780((char*) 0x67d95c, ref)) {
-        for (y = 0; y < (int) a3; y++) {
-            for (x = 0; x < (int) a2; x++) {
-                stride = a4 + (((a1 + y) * a6 + a0) + x) * 3;
+        for (y = 0; y < (int) height; y++) {
+            for (x = 0; x < (int) width; x++) {
+                stride = pixels + (((originY + y) * rowStride + originX) + x) * 3;
                 if (fcn_00475780((char*) 0x67d960, ref) && !fcn_00475780((char*) stride, (char*) 0x67d960)) {
                     fcn_004757b0((char*) stride, *(char*) 0x100f1a0, *(char*) 0x100f1a1, *(char*) 0x100f1a2);
                     minx = x;
@@ -103,18 +103,18 @@ unsigned int* __cdecl fcn_00477590(int a0, int a1, unsigned int a2,
             run[0] = 0;
             run[1] = 0;
             for (; x < (int) *(unsigned short*) ((char*) buf + 6); x++) {
-                if (fcn_00475780((char*) (a4 + (x + (a1 + r) * a6 + a0) * 3), (char*) 0x100f1a0)) {
+                if (fcn_00475780((char*) (pixels + (x + (originY + r) * rowStride + originX) * 3), (char*) 0x100f1a0)) {
                     break;
                 }
                 run[0]++;
             }
             run[0] *= 3;
             for (; run[1] + x < *(unsigned short*) ((char*) buf + 6); run[1]++) {
-                if (!fcn_00475780((char*) (a4 + (run[1] + (a1 + r) * a6 + x + a0) * 3), (char*) 0x100f1a0)) {
+                if (!fcn_00475780((char*) (pixels + (run[1] + (originY + r) * rowStride + x + originX) * 3), (char*) 0x100f1a0)) {
                     break;
                 }
             }
-            memcpy(run + 2, (char*) (a4 + ((a1 + r) * a6 + a0 + x) * 3), run[1] * 3);
+            memcpy(run + 2, (char*) (pixels + ((originY + r) * rowStride + originX + x) * 3), run[1] * 3);
             *(unsigned int*) ((char*) buf + 0x2e) += run[1];
             x += run[1] - 1;
             buf[0] += run[1] * 3 + 8;

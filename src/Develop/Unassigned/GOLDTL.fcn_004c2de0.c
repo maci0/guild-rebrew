@@ -31,7 +31,7 @@ int __cdecl fcn_00422600(int a0, char* text, int n);
 int __cdecl fcn_00422460(int a0, char* text);
 
 /* ADDRESS: GOLDTL 0x004c2de0 */
-int __cdecl fcn_004c2de0(int code, int a1, char* a2, int a3)
+int __cdecl fcn_004c2de0(int code, int a1, char* text, int a3)
 {
 	char num[0x14];
 	char tmp[0x10];
@@ -76,26 +76,26 @@ int __cdecl fcn_004c2de0(int code, int a1, char* a2, int a3)
 
 
 		}
-		sprintf(buf, g_67728c, a2, num);
+		sprintf(buf, g_67728c, text, num);
 		res = fcn_004234a0(a1, buf);
 		if (a3 >= 0 && res == 0) {
 			sprintf(tmp, g_68a4c4, a3);
 			strcat(num, tmp);
 		}
-		sprintf(buf, g_67728c, a2, num);
+		sprintf(buf, g_67728c, text, num);
 		if (res != 0 && a3 >= 0) {
 			res = fcn_00422600(a1, buf, a3);
 			if (res == 0) {
-				sprintf(buf, g_68a498, a2, a3);
+				sprintf(buf, g_68a498, text, a3);
 			}
 			return res;
 		}
 	} else {
-		sprintf(buf, a2);
+		sprintf(buf, text);
 	}
 	res = fcn_00422460(a1, buf);
 	if (res == 0) {
-		sprintf(buf, g_68a47c, a2);
+		sprintf(buf, g_68a47c, text);
 	}
 	return res;
 }

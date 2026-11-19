@@ -28,7 +28,7 @@ extern unsigned short g_7f4c20[];
 int __cdecl fcn_0050e780(int i);
 
 /* ADDRESS: GOLDTL 0x0050e830 */
-int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
+int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int width, int height)
 {
 	char* rec;
 	DEPENDENCY_DIAGRAM_NODE tmp;
@@ -42,7 +42,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 	int max;
 	int min;
 	int v;
-	int v0;
+	int rootCount;
 	int span;
 	int h;
 	int len;
@@ -126,10 +126,10 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 		}
 	}
 	g_7f4c20[g_90e090] = (unsigned short) n;
-	v0 = g_7f4c20[1];
-	span = a2 / (v0 * 2);
+	rootCount = g_7f4c20[1];
+	span = width / (rootCount * 2);
 	v = span - 0x18;
-	for (i = 0; i < v0; i++) {
+	for (i = 0; i < rootCount; i++) {
 		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x = v;
 		v += span * 2;
 	}
@@ -172,7 +172,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 			}
 			len = h - i;
 			if (len > 1) {
-				d = (a2 / v0 >> (k - 1)) - (len * 3 + 3) * 8;
+				d = (width / rootCount >> (k - 1)) - (len * 3 + 3) * 8;
 				half = d >> 1;
 				acc = 0;
 				for (h = i; h < i + len; h++) {
@@ -191,7 +191,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 			}
 		}
 	}
-	min = a2 + 1;
+	min = width + 1;
 	max = -1;
 	for (k = 0; k < g_90e090; k++) {
 		for (i = g_7f4c20[k]; i < g_7f4c20[k + 1]; i++) {
@@ -203,8 +203,8 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 			}
 		}
 	}
-	if ((min - 0x18) < 0 || a2 <= max + 0x60) {
-		scale = (float) a2 / ((max - min) + 0x78);
+	if ((min - 0x18) < 0 || width <= max + 0x60) {
+		scale = (float) width / ((max - min) + 0x78);
 		base = (int) -((float) (min - 0x18) * scale);
 		for (k = 0; k < g_90e090; k++) {
 			for (i = g_7f4c20[k]; i < g_7f4c20[k + 1]; i++) {
@@ -213,7 +213,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int a2, int a3)
 		}
 	}
 	v = g_90e090 * 0x60;
-	h = a3 - 0x10;
+	h = height - 0x10;
 	if (v >= h) {
 		v = h;
 	}

@@ -59,7 +59,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
 /* ADDRESS: GOLDTL 0x0059ecc0 */
-void __cdecl fcn_0059ecc0(int a0, int a1)
+void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 {
 	int i;
 	int h;
@@ -77,13 +77,13 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 	ids[0] = 0x1c1;
 	ids[1] = 0x1c2;
 	ids[2] = 0x1c3;
-	ids[6] = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, 0x2a);
-	if (fcn_00525fb0(a0))
+	ids[6] = fcn_00502cd0(*(int*) (gebaeude + 0x5d), 2, 6, 0, 0x2a);
+	if (fcn_00525fb0(gebaeude))
 		return;
 	for (i = 3; i < 6; i++) {
 		ids[i] = 0;
 	}
-	h = fcn_005463a0(2, 0, 0x15, 3, *(int*) (a0 + 1));
+	h = fcn_005463a0(2, 0, 0x15, 3, *(int*) (gebaeude + 1));
 	while (h) {
 		i = 0;
 		do {
@@ -101,7 +101,7 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 	fcn_00533dc0(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(total, 3);
 	io_AppendText(0x1806);
-	fcn_0052a0c0(a0, 0);
+	fcn_0052a0c0(gebaeude, 0);
 	fcn_00594340();
 	d2_CenterDialogWindows(total);
 	d2_SetForm(total, 2);
@@ -120,16 +120,16 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 		cnt++;
 	}
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00595e20(a0, ids[6]);
-	fcn_005963f0(total, 1, 0, a0);
+	fcn_00595e20(gebaeude, ids[6]);
+	fcn_005963f0(total, 1, 0, gebaeude);
 	sel = fcn_005373e0(0x59ecc0, 0x677c7);
 	while (sel) {
-		fcn_00595e20(a0, ids[6]);
-		fcn_005963f0(total, 1, 0, a0);
+		fcn_00595e20(gebaeude, ids[6]);
+		fcn_005963f0(total, 1, 0, gebaeude);
 		for (i = 3; i < 6; i++) {
 			ids[i] = 0;
 		}
-		h = fcn_005463a0(2, 0, 0x15, 3, *(int*) (a0 + 1));
+		h = fcn_005463a0(2, 0, 0x15, 3, *(int*) (gebaeude + 1));
 		while (h) {
 			i = 0;
 			do {
@@ -165,9 +165,9 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 				memset(&req, 0, 0xf8);
 				req.kind = 0x15;
 				req.f36 = 1;
-				req.f08 = *(int*) (*(unsigned short*) (a0 + 0x27) * 0x21c
+				req.f08 = *(int*) (*(unsigned short*) (gebaeude + 0x27) * 0x21c
 					+ (int)(g_7f4ca0 + 4));
-				req.f0c = *(int*) (a0 + 1);
+				req.f0c = *(int*) (gebaeude + 1);
 				*(pos14_7f4c00*)&req.f28 = gm_GameTime;
 
 				req.f5a = (unsigned short) ids[sel];

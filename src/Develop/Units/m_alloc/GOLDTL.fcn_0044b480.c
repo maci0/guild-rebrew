@@ -99,7 +99,7 @@ BGF_OBJ* __cdecl fcn_0044f250(char*, char*, char*, int, int);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0044b480 */
-BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
+BGF_OBJ* __cdecl fcn_0044b480(char* name, char* objectName, char* nametab, int namestep,
 	int namecount)
 {
 	char buf[0x120];
@@ -152,10 +152,10 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 		goto done;
 	}
 	ok = fcn_0044f0e0(buf);
-	obj = fcn_0044f250(buf, a1, nametab, namestep, namecount);
+	obj = fcn_0044f250(buf, objectName, nametab, namestep, namecount);
 	if (obj == 0) {
 		d3_AddFLChunk(buf, ok);
-		obj = fcn_0044f250(buf, a1, nametab, namestep, namecount);
+		obj = fcn_0044f250(buf, objectName, nametab, namestep, namecount);
 		res = (int) obj;
 	}
 	if (obj != 0) {
@@ -193,7 +193,7 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* a1, char* nametab, int namestep,
 	}
 	obj = m_alloc(0x2a4, (char*) 0x67afe0);
 	res = (int) obj;
-	fcn_0064d530(obj->name, a1, 0x3f);
+	fcn_0064d530(obj->name, objectName, 0x3f);
 	obj->name[0x3f] = 0;
 	obj->flags = (obj->flags & 0xfd) | ((hdr.flags & 1) << 1);
 

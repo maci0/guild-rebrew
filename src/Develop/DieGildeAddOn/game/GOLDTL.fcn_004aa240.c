@@ -19,7 +19,7 @@ extern int __cdecl fcn_004a9540(int a0, int obj, void *rec, char *out, int a4);
 extern int __cdecl fcn_004a9600(int a0, int obj, void *rec, char *out, int a4);
 
 /* ADDRESS: GOLDTL 0x004aa240 */
-unsigned int __cdecl fcn_004aa240(int a0, int a1, int a2, char *a3, int a4)
+unsigned int __cdecl fcn_004aa240(int a0, int entity, int a2, char *request, int a4)
 {
     int n;
     unsigned short r;
@@ -35,12 +35,12 @@ unsigned int __cdecl fcn_004aa240(int a0, int a1, int a2, char *a3, int a4)
     memset(&rec, 0, sizeof rec);
     cc = 0;
     rec.ptr = 0;
-    if (*(int *)(a1 + 0x1c8) & 0x100)
+    if (*(int *)(entity + 0x1c8) & 0x100)
     {
         q = (char *)fcn_005463a0(1, 0, 0x45);
         while (q)
         {
-            if (*(int *)(q + 0xac) == *(int *)(a1 + 4))
+            if (*(int *)(q + 0xac) == *(int *)(entity + 4))
             {
                 rec.ptr = (int *)gm_LookupEntityRecordById(*(int *)(q + 0xb0));
                 break;
@@ -48,13 +48,13 @@ unsigned int __cdecl fcn_004aa240(int a0, int a1, int a2, char *a3, int a4)
             q = (char *)he_fn_Handlung();
         }
     }
-    if (*a3 == 0)
+    if (*request == 0)
     {
         n = 0;
         rec.type = 1;
         for (src = (int *)0x67faa4; (int)src < (int)0x67fab0; src++)
         {
-            if (fcn_004fa5b0(*src, a1, &rec) & 2)
+            if (fcn_004fa5b0(*src, entity, &rec) & 2)
                 ids1[n++] = *src;
         }
         if (rec.ptr)
@@ -63,7 +63,7 @@ unsigned int __cdecl fcn_004aa240(int a0, int a1, int a2, char *a3, int a4)
             cc = 0;
             for (src = (int *)0x67faa4; (int)src < (int)0x67fab0; src++)
             {
-                if (fcn_004fa5b0(*src, a1, &rec) & 2)
+                if (fcn_004fa5b0(*src, entity, &rec) & 2)
                     ids2[cc++] = *src;
             }
         }
@@ -73,7 +73,7 @@ unsigned int __cdecl fcn_004aa240(int a0, int a1, int a2, char *a3, int a4)
             r = (unsigned short)gm_RandomMod(n);
             id = (unsigned int)ids1[r];
             n = 3;
-            ok = fcn_004fa5b0((int)id, a1, &rec) & 2;
+            ok = fcn_004fa5b0((int)id, entity, &rec) & 2;
         }
         else if (cc != 0)
         {
@@ -81,44 +81,44 @@ unsigned int __cdecl fcn_004aa240(int a0, int a1, int a2, char *a3, int a4)
             r = (unsigned short)gm_RandomMod(cc);
             id = (unsigned int)ids2[r];
             n = 4;
-            ok = fcn_004fa5b0((int)id, a1, &rec) & 2;
+            ok = fcn_004fa5b0((int)id, entity, &rec) & 2;
         }
         else
             return 0;
         if (!ok)
             return 0;
-        *a3 = 0x10;
-        *(int *)(a3 + 4) = (int)id;
-        *(int *)(a3 + 8) = n;
+        *request = 0x10;
+        *(int *)(request + 4) = (int)id;
+        *(int *)(request + 8) = n;
     }
     else
     {
-        if (*a3 != 0x10)
+        if (*request != 0x10)
             return 0;
-        id = (unsigned int)*(int *)(a3 + 4);
+        id = (unsigned int)*(int *)(request + 4);
         rec.type = 1;
-        if (fcn_004fa5b0((int)id, a1, &rec) & 2)
-            *(int *)(a3 + 8) = 3;
+        if (fcn_004fa5b0((int)id, entity, &rec) & 2)
+            *(int *)(request + 8) = 3;
         else
         {
             rec.type = 2;
-            if (!(fcn_004fa5b0((int)id, a1, &rec) & 2))
+            if (!(fcn_004fa5b0((int)id, entity, &rec) & 2))
                 return 0;
-            *(int *)(a3 + 8) = 4;
+            *(int *)(request + 8) = 4;
         }
     }
     switch (id)
     {
     case 0:
-        return fcn_004a92c0(a0, a1, &rec, a3, a4);
+        return fcn_004a92c0(a0, entity, &rec, request, a4);
     case 3:
-        return fcn_004a93a0(a0, a1, &rec, a3, a4);
+        return fcn_004a93a0(a0, entity, &rec, request, a4);
     case 4:
-        return fcn_004a9470(a0, a1, &rec, a3, a4);
+        return fcn_004a9470(a0, entity, &rec, request, a4);
     case 7:
-        return fcn_004a9540(a0, a1, &rec, a3, a4);
+        return fcn_004a9540(a0, entity, &rec, request, a4);
     case 8:
-        return fcn_004a9600(a0, a1, &rec, a3, a4);
+        return fcn_004a9600(a0, entity, &rec, request, a4);
     }
     return 0;
 }

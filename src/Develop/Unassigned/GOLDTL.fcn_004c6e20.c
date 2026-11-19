@@ -5,7 +5,7 @@ int __cdecl fcn_004c4df0(unsigned short n, void *src);
 int __cdecl fcn_004c4330(void *buf);
 
 /* ADDRESS: GOLDTL 0x004c6e20 */
-void __cdecl fcn_004c6e20(char *a0, char *a1)
+void __cdecl fcn_004c6e20(char *record, char *head)
 {
     char buf[0x9c];
     char items[0x200];
@@ -15,10 +15,10 @@ void __cdecl fcn_004c6e20(char *a0, char *a1)
     char *dst;
     char *src;
 
-    p = a1;
+    p = head;
     count = fcn_004be340(p);
     buf[0] = 0x68;
-    *(int *)(buf + 0x10) = *(int *)(a0 + 2);
+    *(int *)(buf + 0x10) = *(int *)(record + 2);
     *(int *)(buf + 0x14) = count;
     if (count > 0) {
         dst = items;

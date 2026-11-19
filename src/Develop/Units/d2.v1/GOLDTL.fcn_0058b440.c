@@ -28,9 +28,9 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
     char v13[256];
     int v14;
     int* v15;
-    int v16;
+    int rowCount;
     int v17;
-    int v18;
+    int rowIndex;
     unsigned int v19;
     unsigned int* v2;
     unsigned int* v3;
@@ -41,7 +41,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
     int v8;
     char v9[4];
     v2 = a1;
-    v16 = 0;
+    rowCount = 0;
     v19 = 0;
     v1 = (int*) a1[a1[0x4d] * 4 + 0xe];
     v14 = *(int*) (*v1 * 4 + 0x6652f8);
@@ -52,7 +52,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
             v3 = v4;
             if (*(int*) (v1[4] + v7) != -1) {
                 v4[-1] = (int) (v1[4] + v7);
-                v16 += 1;
+                rowCount += 1;
                 v3 = &v4[3];
                 v6 = *(unsigned int*) (v7 + v1[4]);
                 v4[-2] = 0xffffffff;
@@ -63,9 +63,9 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
             v4 = v3;
         } while (v14);
     }
-    if (v16 < 8) {
-        v14 = 8 - v16;
-        v4 = &a1[v16 * 3 + 0x51];
+    if (rowCount < 8) {
+        v14 = 8 - rowCount;
+        v4 = &a1[rowCount * 3 + 0x51];
         do {
             v4[-1] = 0;
             *v4 = 0xffffffff;
@@ -91,8 +91,8 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
                      (int*) v10, (int*) v9);
     }
     d2_SetForm(*v2, 3);
-    v18 = 0;
-    if (v16 > 0) {
+    rowIndex = 0;
+    if (rowCount > 0) {
         v17 = a3 == 0;
         v15 = (int*) &v2[0x50];
         do {
@@ -101,16 +101,16 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
             v7 = *(int*) (v8 + 0x1015f50);
             v8 = (*(int*) (v8 + 0x1015f4c) -
                   (int) *(short*) ((int) g_772500 + 0x2399c)) / 2;
-            v15[-1] = fcn_0046f740(v8, v7 * v18 + 2, 0x6c7, v14);
+            v15[-1] = fcn_0046f740(v8, v7 * rowIndex + 2, 0x6c7, v14);
             v14 = fcn_0046f740(v8 + 2,
-                               *(int*) (v2[3] * 0x3cc + 0x1015f50) * v18 + 4,
+                               *(int*) (v2[3] * 0x3cc + 0x1015f50) * rowIndex + 4,
                                *(unsigned int*) (*v15 + 0x3c), v2[3]);
             v15[-1] = v14;
             *(unsigned int*) ((int) g_1015ea0 + 0x5c + v14 * 0x2f4) = v17;
             *(unsigned int*) ((int) g_1015ea0 + 0x1d0 + v15[-1] * 0x2f4) = 3;
             fcn_0058b9c0((void*) *v15, v12);
             fcn_0058ba20((char*) *v15, v13);
-            v7 = *(int*) (v2[3] * 0x3cc + 0x1015f50) * v18;
+            v7 = *(int*) (v2[3] * 0x3cc + 0x1015f50) * rowIndex;
             v14 = fcn_0046fac0(0, v7 + 0x38, v12, v2[3]);
             *(unsigned int*) (v14 * 0x2f4 + 0x6c + (int) g_1015ea0) = 1;
             *(unsigned int*) (v14 * 0x2f4 + 0x18 + (int) g_1015ea0) =
@@ -132,9 +132,9 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
                 v14 += 1;
                 v7 += 0xd;
             } while (v14 <= 4);
-            v18 += 1;
+            rowIndex += 1;
             v15 = &v15[3];
-        } while (v18 < v16);
+        } while (rowIndex < rowCount);
     }
     *(unsigned int*) (v2[3] * 0x3cc + 0x1016198) = v19;
     d2_SetForm(*v2, 7);
@@ -150,7 +150,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
             io_FormatTextBuffer(v12, 0x6a9680, *v5);
         } else {
             v14 = 0;
-            if (v16 > 0) {
+            if (rowCount > 0) {
                 v4 = &v2[0x50];
                 do {
                     if (*(int*) *v4 == v1[1]) {
@@ -159,7 +159,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
                     }
                     v14 += 1;
                     v4 = &v4[3];
-                } while (v14 < v16);
+                } while (v14 < rowCount);
             }
         }
         io_AppendText((int) 0x6a9668, 0x4101, (int) v12);

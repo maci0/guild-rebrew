@@ -15,7 +15,7 @@ extern void __stdcall fcn_005eb2e4(float* dst, unsigned int* src, char* a, float
 	float* c, void* ctx);
 
 /* ADDRESS: GOLDTL 0x00444ff0 */
-unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
+unsigned char __cdecl fcn_00444ff0(int sceneObject, int* selectionBounds)
 {
 	char* holder;
 	char* model;
@@ -34,9 +34,9 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 	int px;
 	int py;
 
-	if (*(int*) (a0 + 0x1ec) == 0)
+	if (*(int*) (sceneObject + 0x1ec) == 0)
 		return 1;
-	holder = *(char**) (a0 + 0x1cc);
+	holder = *(char**) (sceneObject + 0x1cc);
 	if (holder == 0)
 		return 1;
 	model = *(char**) (holder + 0x318);
@@ -48,7 +48,7 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 		int* ids;
 		ids = *(int**) (model + 0x284);
 		do {
-			if (*ids == *a1)
+			if (*ids == *selectionBounds)
 				break;
 			index++;
 			ids++;
@@ -72,16 +72,16 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 	view[10] = 1.0f;
 	view[5] = 1.0f;
 	view[0] = 1.0f;
-	d3_UpdateObjectCameraTransform(a0, d3_ActiveCamera, 0);
+	d3_UpdateObjectCameraTransform(sceneObject, d3_ActiveCamera, 0);
 	total = *(int*) (model + 0x44);
 	verts = (float*) m_alloc(total * 0x18, "!d3:TransformedPoints");
-	if (*(char*) (*(int*) (a0 + 0x1cc) + 0x4a0) != 0
+	if (*(char*) (*(int*) (sceneObject + 0x1cc) + 0x4a0) != 0
 		&& (*(unsigned char*) (model + 0x2a1) & 2) != 0) {
 		bbox = (float*) m_alloc(total << 5, "!d3int:GetTextureBBoxVertices");
 		flags = (unsigned int*) m_alloc(total << 2, "!d3int:GetTextureBBoxRepeat");
 		for (i = 0; i < total; i++)
 			flags[i] = 1;
-		fcn_00435910(*(unsigned int*) (a0 + 0x1cc), flags, bbox, 0);
+		fcn_00435910(*(unsigned int*) (sceneObject + 0x1cc), flags, bbox, 0);
 		m_FreeTracked(flags);
 		if (total > 0) {
 			for (i = 0; i < total; i++) {
@@ -89,7 +89,7 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 				src[1] = *(unsigned int*) ((char*) bbox + i * 0x20 + 4);
 				src[2] = *(unsigned int*) ((char*) bbox + i * 0x20 + 8);
 				f = verts + i * 6;
-				fcn_005eb225(f + 3, src, (void*) (*(int*) (a0 + 0x1ec) + 0x48));
+				fcn_005eb225(f + 3, src, (void*) (*(int*) (sceneObject + 0x1ec) + 0x48));
 				f[0] = g_10432a4 * (g_6628a0 / f[5]) * f[3] + d3_ViewportCenterX;
 				f[1] = d3_ProjectionScaleY * f[4] * (g_6628a0 / f[5]) + g_1052bc8;
 			}
@@ -103,9 +103,9 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 				src[2] = *(unsigned int*) (*(int*) (model + 0x27c) + i * 0xc + 8);
 				f = verts + i * 6;
 				fcn_005eb2e4(f, src, g_1052be0, g_1052c00, view,
-					(void*) (*(int*) (a0 + 0x1ec) + 0x48));
+					(void*) (*(int*) (sceneObject + 0x1ec) + 0x48));
 				fcn_005eb225(f + 3, src,
-					(void*) (*(int*) (a0 + 0x1ec) + 0x48));
+					(void*) (*(int*) (sceneObject + 0x1ec) + 0x48));
 			}
 		}
 	}
@@ -113,7 +113,7 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 	for (i = 0; i < total; i++) {
 		if (*(int*) (*(int*) (model + 0x288) + i * 4) != index)
 			continue;
-		*(char*) (a1 + 0x21) = 1;
+		*(char*) (selectionBounds + 0x21) = 1;
 		j = 0;
 		do {
 			int idx;
@@ -122,44 +122,44 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 			px = (int) f[0];
 			py = (int) f[1];
 			m = i * 3 + j;
-			if (py + px < a1[0x1a] + a1[0x19]) {
-				a1[0x19] = px;
-				a1[0x1a] = py;
-				a1[0x11] = *(int*) (*(int*) (model + 0x28c) + m * 8);
-				a1[0x12] = *(int*) (*(int*) (model + 0x28c) + m * 8 + 4);
-				a1[1] = *(int*) (f + 3);
-				a1[2] = *(int*) (f + 4);
-				a1[3] = *(int*) (f + 5);
+			if (py + px < selectionBounds[0x1a] + selectionBounds[0x19]) {
+				selectionBounds[0x19] = px;
+				selectionBounds[0x1a] = py;
+				selectionBounds[0x11] = *(int*) (*(int*) (model + 0x28c) + m * 8);
+				selectionBounds[0x12] = *(int*) (*(int*) (model + 0x28c) + m * 8 + 4);
+				selectionBounds[1] = *(int*) (f + 3);
+				selectionBounds[2] = *(int*) (f + 4);
+				selectionBounds[3] = *(int*) (f + 5);
 			}
 			if ((unsigned int) ((g_14ce860 - px) - 1 + py)
-				< (unsigned int) ((a1[0x1c] - a1[0x1b]) - 1 + g_14ce860)) {
-				a1[0x1b] = px;
-				a1[0x1c] = py;
-				a1[0x13] = *(int*) (*(int*) (model + 0x28c) + m * 8);
-				a1[0x14] = *(int*) (*(int*) (model + 0x28c) + m * 8 + 4);
-				a1[5] = *(int*) (f + 3);
-				a1[6] = *(int*) (f + 4);
-				a1[7] = *(int*) (f + 5);
+				< (unsigned int) ((selectionBounds[0x1c] - selectionBounds[0x1b]) - 1 + g_14ce860)) {
+				selectionBounds[0x1b] = px;
+				selectionBounds[0x1c] = py;
+				selectionBounds[0x13] = *(int*) (*(int*) (model + 0x28c) + m * 8);
+				selectionBounds[0x14] = *(int*) (*(int*) (model + 0x28c) + m * 8 + 4);
+				selectionBounds[5] = *(int*) (f + 3);
+				selectionBounds[6] = *(int*) (f + 4);
+				selectionBounds[7] = *(int*) (f + 5);
 			}
 			if ((unsigned int) ((g_14ce864 - py) - 1 + px)
-				< (unsigned int) ((a1[0x1d] - a1[0x1e]) - 1 + g_14ce864)) {
-				a1[0x1d] = px;
-				a1[0x1e] = py;
-				a1[0x15] = *(int*) (*(int*) (model + 0x28c) + m * 8);
-				a1[0x16] = *(int*) (*(int*) (model + 0x28c) + m * 8 + 4);
-				a1[9] = *(int*) (f + 3);
-				a1[10] = *(int*) (f + 4);
-				a1[0x0b] = *(int*) (f + 5);
+				< (unsigned int) ((selectionBounds[0x1d] - selectionBounds[0x1e]) - 1 + g_14ce864)) {
+				selectionBounds[0x1d] = px;
+				selectionBounds[0x1e] = py;
+				selectionBounds[0x15] = *(int*) (*(int*) (model + 0x28c) + m * 8);
+				selectionBounds[0x16] = *(int*) (*(int*) (model + 0x28c) + m * 8 + 4);
+				selectionBounds[9] = *(int*) (f + 3);
+				selectionBounds[10] = *(int*) (f + 4);
+				selectionBounds[0x0b] = *(int*) (f + 5);
 			}
 			if ((unsigned int) (((g_14ce864 - py) - px) - 2 + g_14ce860)
-				< (unsigned int) (((g_14ce864 - a1[0x20]) - a1[0x1f]) - 2 + g_14ce860)) {
-				a1[0x1f] = px;
-				a1[0x20] = py;
-				a1[0x17] = *(int*) (*(int*) (model + 0x28c) + m * 8);
-				a1[0x18] = *(int*) (*(int*) (model + 0x28c) + m * 8 + 4);
-				a1[0x0d] = *(int*) (f + 3);
-				a1[0x0e] = *(int*) (f + 4);
-				a1[0x0f] = *(int*) (f + 5);
+				< (unsigned int) (((g_14ce864 - selectionBounds[0x20]) - selectionBounds[0x1f]) - 2 + g_14ce860)) {
+				selectionBounds[0x1f] = px;
+				selectionBounds[0x20] = py;
+				selectionBounds[0x17] = *(int*) (*(int*) (model + 0x28c) + m * 8);
+				selectionBounds[0x18] = *(int*) (*(int*) (model + 0x28c) + m * 8 + 4);
+				selectionBounds[0x0d] = *(int*) (f + 3);
+				selectionBounds[0x0e] = *(int*) (f + 4);
+				selectionBounds[0x0f] = *(int*) (f + 5);
 			}
 		} while (++j < 3);
 	}

@@ -29,7 +29,7 @@ void __cdecl fcn_0046ed00(int, int, int);
 char* __cdecl fcn_0050d490(char*);
 
 /* ADDRESS: GOLDTL 0x005b11f0 */
-void __cdecl fcn_005b11f0(int* a0)
+void __cdecl fcn_005b11f0(int* state)
 {
 	char* view;
 	char* t;
@@ -56,21 +56,21 @@ void __cdecl fcn_005b11f0(int* a0)
 	view = *(char**) g_1043370;
 	ox = *(int*) (g_773d75 * 0x2f4 + 0x86834c);
 	oy = *(int*) (g_773d75 * 0x2f4 + 0x868350);
-	d2_CurrentWindowId = a0[2];
-	g_77255c = (char*) (a0[2] * 0x3cc + 0x1015f40);
+	d2_CurrentWindowId = state[2];
+	g_77255c = (char*) (state[2] * 0x3cc + 0x1015f40);
 	t = g_77255c;
 	if (g_6ab3dc) {
-		a0[0x9e7] = 0;
-		a0[0x9e7] = fcn_005b0f00((char*) (a0[2] * 0x3cc + 0x1015f40));
-		a0[0x9e7] |= fcn_005b10e0((char*) (a0[2] * 0x3cc + 0x1015f40));
-		if (a0[0x9e7] != 0) {
-			a0[0x9e8] = g_6b7fac;
+		state[0x9e7] = 0;
+		state[0x9e7] = fcn_005b0f00((char*) (state[2] * 0x3cc + 0x1015f40));
+		state[0x9e7] |= fcn_005b10e0((char*) (state[2] * 0x3cc + 0x1015f40));
+		if (state[0x9e7] != 0) {
+			state[0x9e8] = g_6b7fac;
 		}
 	}
-	if (g_100f888 != -1 && (unsigned int) (a0[0x9e8] + 0x4b) < (unsigned int) g_6b7fac
-	    && g_14ce8e8 && g_6a99e8 == -1 && a0[0x9e9] >= 1) {
+	if (g_100f888 != -1 && (unsigned int) (state[0x9e8] + 0x4b) < (unsigned int) g_6b7fac
+	    && g_14ce8e8 && g_6a99e8 == -1 && state[0x9e9] >= 1) {
 		n = 0;
-		p = (char*) (a0 + 0x38);
+		p = (char*) (state + 0x38);
 		i = d2_CurrentElementId;
 		do {
 			if (i != -1 && i == *(int*) (p - 4)) {
@@ -83,11 +83,11 @@ void __cdecl fcn_005b11f0(int* a0)
 			}
 			n += 1;
 			p += 6 * 4;
-		} while (n < a0[0x9e9]);
+		} while (n < state[0x9e9]);
 	}
-	d2_CurrentWindowId = a0[2];
+	d2_CurrentWindowId = state[2];
 	list = (int*) 0x14d0020;
-	slot = a0 + 0x637;
+	slot = state + 0x637;
 	for (;;) {
 		obj = *list;
 		if (obj == 0) {
@@ -147,7 +147,7 @@ void __cdecl fcn_005b11f0(int* a0)
 					*(int*) (g_1015ea0 + 0x2c + *slot * 0x2f4) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
 					*(int*) (g_1015ea0 + 0x30 + *slot * 0x2f4) = *(int*) (g_77255c + 8);
 					*(int*) (g_1015ea0 + 0x34 + *slot * 0x2f4) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
-					*(char**) (g_1015ea0 + 0x50 + *slot * 0x2f4) = (char*) (a0[0] * 700 + 0x1038140);
+					*(char**) (g_1015ea0 + 0x50 + *slot * 0x2f4) = (char*) (state[0] * 700 + 0x1038140);
 					goto check;
 				}
 				goto check;
@@ -170,7 +170,7 @@ void __cdecl fcn_005b11f0(int* a0)
 			*(int*) (g_1015ea0 + 0x2c + *slot * 0x2f4) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
 			*(int*) (g_1015ea0 + 0x30 + *slot * 0x2f4) = *(int*) (g_77255c + 8);
 			*(int*) (g_1015ea0 + 0x34 + *slot * 0x2f4) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
-			*(char**) (g_1015ea0 + 0x50 + *slot * 0x2f4) = (char*) (a0[0] * 700 + 0x1038140);
+			*(char**) (g_1015ea0 + 0x50 + *slot * 0x2f4) = (char*) (state[0] * 700 + 0x1038140);
 		} else {
 			e = *(char**) (obj + 0x34);
 			if (*(int*) (e + 0x218) == 1 && *(int*) (obj + 0x124) == 0) {

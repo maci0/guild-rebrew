@@ -20,7 +20,7 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 	unsigned char kind;
 	int i;
 	int cnt;
-	int v28;
+	int owner;
 
 	if (a2 != 1) {
 		goto fail;
@@ -37,7 +37,7 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 	}
 	ent = 0;
 	rec = 0;
-	v28 = 0;
+	owner = 0;
 	if (*a4 == 1) {
 		rec = (char*) gm_FindRecordById(*(unsigned int*) (a4 + 4));
 		if (rec == 0) {
@@ -111,8 +111,8 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 			}
 		}
 	} else if (*a4 == 7) {
-		v28 = (int) gm_LookupEntityRecordById(*(unsigned int*) (a4 + 4));
-		if (v28 == 0) {
+		owner = (int) gm_LookupEntityRecordById(*(unsigned int*) (a4 + 4));
+		if (owner == 0) {
 			return 0;
 		}
 	} else {
@@ -124,19 +124,19 @@ done:
 		*(int*) (a3 + 0x10) = 0x39;
 	} else {
 		if (rec != 0) {
-			v28 = (int) fcn_0050d430((short*) rec);
+			owner = (int) fcn_0050d430((short*) rec);
 		} else if (ent != 0) {
 			if (*(unsigned short*) (ent + 0x27) == 0xffff) {
 				goto fail;
 			}
-			v28 = (unsigned int) *(unsigned short*) (ent + 0x27) * 0x21c + 0x7f4ca0;
-		} else if (v28 == 0) {
+			owner = (unsigned int) *(unsigned short*) (ent + 0x27) * 0x21c + 0x7f4ca0;
+		} else if (owner == 0) {
 			goto fail;
 		}
-		if (v28 == 0) {
+		if (owner == 0) {
 			goto fail;
 		}
-		i = fcn_0050d320((char*) v28, g_773d75);
+		i = fcn_0050d320((char*) owner, g_773d75);
 		*(int*) (a3 + 0x10) = 0;
 	}
 	if (*(float*) (a3 + 0x14) > 0.0f && *(float*) (a3 + 0x14) < 1.0f) {

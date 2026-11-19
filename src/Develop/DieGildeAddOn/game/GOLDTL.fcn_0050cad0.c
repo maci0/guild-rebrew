@@ -12,7 +12,7 @@ int __cdecl fcn_0050cad0(int* a, int* b)
 {
     pos14_7f4c00 cur;
     int v3;
-    int v4;
+    int minutes;
     int v5;
     int v6;
     int v7;
@@ -27,18 +27,18 @@ int __cdecl fcn_0050cad0(int* a, int* b)
         f = (float) (*(unsigned short*) ((char*) &cur + 4) * 60 + *(int*) ((char*) &cur + 6));
         f = (g_665c00 > f || f < g_665bfc) ? (g_665c00 > f ? g_665c00 : f) : g_665bfc;
         v5 = (int) f;
-        v4 = (int) (g_665bfc - (float) v5);
+        minutes = (int) (g_665bfc - (float) v5);
         cur.a = v3 + 1;
         sim_SetSyncParams((int*) &cur, 6, 0, 0);
         v3 = cur.a;
     } else {
-        v4 = 0;
+        minutes = 0;
     }
     if (v3 < v7) {
         v7 -= v3;
         do {
-            f = (float) v4 + g_665bf8;
-            v4 = (int) f;
+            f = (float) minutes + g_665bf8;
+            minutes = (int) f;
         } while (--v7);
     }
     f = (float) (*(unsigned short*) ((char*) b + 4) * 60 + *(int*) ((char*) b + 6));
@@ -47,5 +47,5 @@ int __cdecl fcn_0050cad0(int* a, int* b)
     f = (float) (*(unsigned short*) ((char*) &cur + 4) * 60 + *(int*) ((char*) &cur + 6));
     f = (g_665c00 > f || f < g_665bfc) ? (g_665c00 > f ? g_665c00 : f) : g_665bfc;
     v6 = (int) f;
-    return (v4 - v6) + v5;
+    return (minutes - v6) + v5;
 }

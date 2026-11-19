@@ -42,7 +42,7 @@ typedef struct DialogState {
  * type, marks the selected row and clears the unused rows. */
 
 /* ADDRESS: GOLDTL 0x0058b1f0 */
-void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
+void __cdecl fcn_0058b1f0(char* building, DialogState* st, unsigned int type)
 {
 	SlotItem* item;
 	DialogEntry* de;
@@ -65,21 +65,21 @@ void __cdecl fcn_0058b1f0(char* a0, DialogState* st, unsigned int type)
 		fcn_00533f40(0, 0, st->owner, st->slot, 0x35, &id2, &id1, (int*) &type);
 	}
 
-	item = (SlotItem*) FindSlotEntryFiltered(0, a0, 0, 0, st->type);
+	item = (SlotItem*) FindSlotEntryFiltered(0, building, 0, 0, st->type);
 	if (item != 0) {
 		int y = 2;
 		de = st->entries;
 		do {
 			de->item = item;
 			de->id = item->id;
-			de->kind = fcn_004f1790(*(int*) (a0 + 0x65), (int*) item);
+			de->kind = fcn_004f1790(*(int*) (building + 0x65), (int*) item);
 			de->btn = fcn_0046f740(1, y, (item->flag == -1) ? g_665f58[st->type] : g_665f68[st->type], st->slot);
-			if (fcn_0057b9d0(a0, item->id, (unsigned char) de->kind)) {
+			if (fcn_0057b9d0(building, item->id, (unsigned char) de->kind)) {
 				fcn_0046f740(0xf, y + 7, 0x7de, st->slot);
 			}
 			*(int*) ((char*) g_1015ea0 + 0x5c + de->btn * 0x2f4) = 1;
 			*(int*) ((char*) g_1015ea0 + 0x1d0 + de->btn * 0x2f4) = 3;
-			item = (SlotItem*) FindSlotEntryFiltered(0, a0, item, 0, st->type);
+			item = (SlotItem*) FindSlotEntryFiltered(0, building, item, 0, st->type);
 			count++;
 			y += 0x35;
 			de++;

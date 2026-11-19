@@ -13,14 +13,14 @@ unsigned char __cdecl fcn_004385e0(int a0)
 	int v1;
 	int v16;
 	int v17;
-	int v13;
+	int slotIndex;
 	float v14;
 	float v15;
 	int* rec;
 	int* p;
 	unsigned char flag;
 
-	v13 = 0; v1 = *(int*) (a0 + 0x1cc);
+	slotIndex = 0; v1 = *(int*) (a0 + 0x1cc);
 	if (*(int*) (v1 + 0x318) == 0
 	    || *(int*) (*(int*) (v1 + 0x318) + 0x264) == 0
 	    || *(int*) (a0 + 0x1ec) == 0) {
@@ -37,9 +37,9 @@ unsigned char __cdecl fcn_004385e0(int a0)
 	if (*(int*) (a0 + 0x220) == 1) {
 		v15 = -v15;
 	}
-	for (; v13 < *(int*) (*(int*) (v1 + 0x318) + 0x1e4); v13++) {
+	for (; slotIndex < *(int*) (*(int*) (v1 + 0x318) + 0x1e4); slotIndex++) {
 		rec = (int*) *(int*) (*(int*) (v1 + 0x31c)
-		    + (*(int*) (*(int*) (v1 + 0x318) + 0x1e4) + v13) * 4);
+		    + (*(int*) (*(int*) (v1 + 0x318) + 0x1e4) + slotIndex) * 4);
 		if (v16 != *(int*) (*(int*) (v1 + 0x318) + 0x268)
 		    && (*(unsigned char*) ((char*) rec + 0x58) < 0xff
 			|| (*(unsigned char*) ((char*) rec + 0x5a) & 1))) {
@@ -50,7 +50,7 @@ unsigned char __cdecl fcn_004385e0(int a0)
 			p[3] = (int) rec;
 			p[5] = *(int*) &v15;
 			p[4] = *(int*) &v14;
-			p[6] = v13;
+			p[6] = slotIndex;
 			p[7] = (*(unsigned char*) (a0 + 0x215) & 0x20)
 			    ? *(int*) (v1 + 0x49c)
 			    : *(int*) ((char*) rec + 0x58);
@@ -80,7 +80,7 @@ unsigned char __cdecl fcn_004385e0(int a0)
 			    *(int*) ((char*) rec + 0x6c) | *(int*) (v1 + 0x324),
 			    (*(unsigned char*) ((char*) rec + 0x5a) >> 1) & 1,
 			    (*(unsigned char*) ((char*) rec + 0x54) >> 3) & 1);
-			(*(void (__stdcall**)(int, int)) (*(int*) v16 + 0xc))(v16, v13);
+			(*(void (__stdcall**)(int, int)) (*(int*) v16 + 0xc))(v16, slotIndex);
 		}
 	}
 tail:

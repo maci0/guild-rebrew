@@ -24,7 +24,7 @@ char* __cdecl fcn_00502cd0(int id, int a, int b, int c);
 int __cdecl fcn_00503a70(int id);
 
 /* ADDRESS: GOLDTL 0x00486c40 */
-void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
+void __cdecl fcn_00486c40(char* a0, unsigned int a1, int budget)
 {
 	GOODS_PLAN_ENTRY* seg;
 	AI_SUPPLY_CANDIDATE* rec;
@@ -143,7 +143,7 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 				seg = &g_100b0c0[i];
 				if (g_100e760[k] == seg->goods_id && seg->requested != 0) {
 					while (seg->requested > 0) {
-						if (!((double) seg->requested * seg->price + (float) sum > (float) a2)) {
+						if (!((double) seg->requested * seg->price + (float) sum > (float) budget)) {
 							break;
 						}
 						seg->requested--;
@@ -161,7 +161,7 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 			seg = &g_100b0c0[i];
 			if (g_100e720[k] == seg->goods_id && seg->requested != 0) {
 				while (seg->requested > 0) {
-					if (!((double) seg->requested * seg->price + (float) sum > (float) a2)) {
+					if (!((double) seg->requested * seg->price + (float) sum > (float) budget)) {
 						break;
 					}
 					seg->requested--;

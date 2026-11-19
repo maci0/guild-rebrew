@@ -6,7 +6,7 @@ extern int g_67dac0;
 extern double dbl_1_0;
 
 /* ADDRESS: GOLDTL 0x0047a570 */
-int __cdecl fcn_0047a570(int a0, int a1, int a2, int* a3, int* a4, int a5)
+int __cdecl fcn_0047a570(int a0, int a1, int a2, int* countOut, int* sizesOut, int a5)
 {
 	int tmp[8];
 	int n;
@@ -63,17 +63,17 @@ int __cdecl fcn_0047a570(int a0, int a1, int a2, int* a3, int* a4, int a5)
 	}
 	if (bp > 0) {
 		for (i = 0; i < bp; i++) {
-			a4[i] = size;
+			sizesOut[i] = size;
 		}
 	}
 	if (bp >= 1 && a0 % prod != 0 && a0 > prod && a5 != 0) {
 
 		fcn_0047a570(a0 % prod, a1, a2, &a0, tmp, 0);
 		if (a0 > 0) {
-			memcpy(&a4[bp], tmp, a0 * 4);
+			memcpy(&sizesOut[bp], tmp, a0 * 4);
 			bp += a0;
 		}
 	}
-	*a3 = bp;
+	*countOut = bp;
 	return 1;
 }

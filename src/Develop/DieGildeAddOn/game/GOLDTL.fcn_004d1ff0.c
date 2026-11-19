@@ -54,7 +54,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 	int t;
 	int r;
 	int h;
-	int v14;
+	int containerId;
 	int v10;
 	int slots[3];
 	char ids[12];
@@ -284,10 +284,10 @@ void __cdecl fcn_004d1ff0(void *arg)
 					gm_FindRecordById(*p);
 					*p = -1;
 				} else {
-					v14 = *(int *) (ent + 0x14);
-					v10 = fcn_00502cd0(v14, 1, 0, 0x1dd);
+					containerId = *(int *) (ent + 0x14);
+					v10 = fcn_00502cd0(containerId, 1, 0, 0x1dd);
 					n = 0;
-					m = fcn_00502cd0(*(int *) (v10 + 0x14), 1, 5, v14);
+					m = fcn_00502cd0(*(int *) (v10 + 0x14), 1, 5, containerId);
 					while (n < 3 && m != 0) {
 						slots[n] = m;
 						n++;

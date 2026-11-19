@@ -11,7 +11,7 @@ void __cdecl msx_SetSampleLoopCount(int a0, int a1);
 void __cdecl msx_StartSample(int a0);
 
 /* ADDRESS: GOLDTL 0x00423670 */
-int __cdecl fcn_00423670(int* a0, int a1, int a2)
+int __cdecl fcn_00423670(int* voice, int a1, int a2)
 {
 	int result;
 	char* ent;
@@ -26,7 +26,7 @@ int __cdecl fcn_00423670(int* a0, int a1, int a2)
 	if (g_6b7d7c == 0) {
 		return 0;
 	}
-	ent = (char*) a0[1];
+	ent = (char*) voice[1];
 	if (*(int*) (ent + 0x38) == 0) {
 		v = sb_FindSampleBank((int*) ent);
 		if (v == 0) {
@@ -38,14 +38,14 @@ int __cdecl fcn_00423670(int* a0, int a1, int a2)
 			goto done;
 		}
 	}
-	ent = (char*) a0[1];
+	ent = (char*) voice[1];
 	type = *(unsigned char*) (ent + 0x36);
 	if (type == 1) {
 		entry = (char*) *(int*) (ent + 0x38);
 	} else if (type == 2) {
 		p2 = (int*) *(int*) (ent + 0x38);
-		if ((*(unsigned char*) ((char*) a0 + 0x14) & 4) != 0) {
-			index = a0[8];
+		if ((*(unsigned char*) ((char*) voice + 0x14) & 4) != 0) {
+			index = voice[8];
 		} else {
 			index = fcn_0064d3f8() % p2[0];
 		}
@@ -63,32 +63,32 @@ int __cdecl fcn_00423670(int* a0, int a1, int a2)
 		result = -1;
 		goto done;
 	}
-	if (fcn_0042a5d0(*a0, v, *(int*) (entry + 8), *(int*) (entry + 4)) == -1) {
+	if (fcn_0042a5d0(*voice, v, *(int*) (entry + 8), *(int*) (entry + 4)) == -1) {
 		result = -1;
 		goto done;
 	}
 	if (a1 != 0) {
-		a0[4] = ((*(int*) &g_6b7fac) * 2 + (*(int*) &g_6b7fac)) * 4
+		voice[4] = ((*(int*) &g_6b7fac) * 2 + (*(int*) &g_6b7fac)) * 4
 			+ (*(int*) &g_6b7fac);
-		a0[5] |= 1;
-		fcn_0042a920(*a0, 0);
+		voice[5] |= 1;
+		fcn_0042a920(*voice, 0);
 	} else {
-		fcn_0042a920(*a0, a0[9]);
+		fcn_0042a920(*voice, voice[9]);
 	}
-	fcn_0042a9a0(*a0, a0[10]);
-	if ((*(unsigned char*) ((char*) a0 + 0x14) & 4) == 0 && a2 != 0) {
-		msx_SetSampleLoopCount(*a0, 1);
-		a0[7] = 0;
-		a0[6] = a2;
+	fcn_0042a9a0(*voice, voice[10]);
+	if ((*(unsigned char*) ((char*) voice + 0x14) & 4) == 0 && a2 != 0) {
+		msx_SetSampleLoopCount(*voice, 1);
+		voice[7] = 0;
+		voice[6] = a2;
 	} else {
-		msx_SetSampleLoopCount(*a0, a0[3]);
-		a0[6] = 0;
+		msx_SetSampleLoopCount(*voice, voice[3]);
+		voice[6] = 0;
 	}
 	stamp = ((*(int*) &g_6b7fac) * 2 + (*(int*) &g_6b7fac)) * 4
 		+ (*(int*) &g_6b7fac);
-	((int*) a0[1])[0xf] = a0[2] = stamp;
-	a0[5] &= ~8;
-	msx_StartSample(*a0);
+	((int*) voice[1])[0xf] = voice[2] = stamp;
+	voice[5] &= ~8;
+	msx_StartSample(*voice);
 done:
 	return result;
 }

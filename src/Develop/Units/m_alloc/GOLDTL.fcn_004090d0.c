@@ -29,7 +29,7 @@ unsigned int __cdecl fcn_004090d0(int self)
 	int v13;
 	int v14;
 	char v9[4];
-	short v3;
+	short pathResult;
 
 	v1 = *(int*) (self + 0x14);
 	v4 = fcn_00402610(v1);
@@ -68,9 +68,9 @@ unsigned int __cdecl fcn_004090d0(int self)
 	v11 = v13;
 	*(int*) 0x14d0c28 = 0x14cfc20;
 	*(int*) 0x14d0c24 = 0x200;
-	v3 = fcn_00421350((struct path_421350*) 0x14d0c20, v4, a0, v10, v14, v13,
+	pathResult = fcn_00421350((struct path_421350*) 0x14d0c20, v4, a0, v10, v14, v13,
 	                  *(unsigned char*) (v1 + 0x240));
-	if (v3 == -1) {
+	if (pathResult == -1) {
 		return 0;
 	}
 	if (*(int*) (self + 0xf4)) {

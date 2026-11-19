@@ -13,7 +13,7 @@ int __cdecl fcn_00478cb0(void*, int);
 /* Opens a screen page: creates it, flags its window and every child GUI entity
  * (+0x38), and builds the two 0x40-byte descriptors stored at +0x1a4/+0x1a8. */
 /* ADDRESS: GOLD 0x00474b20 */
-int __cdecl fcn_00474b20(int a0, int a1, char* a2)
+int __cdecl fcn_00474b20(int a0, int a1, char* formName)
 {
 	int buf[0x10];
 	int r;
@@ -22,7 +22,7 @@ int __cdecl fcn_00474b20(int a0, int a1, char* a2)
 	int i;
 	int j;
 
-	r = fcn_004741e0(a0, a1, a2);
+	r = fcn_004741e0(a0, a1, formName);
 	if (r != 0) {
 		rec = (char*) 0xfb1020 + r * 0x2ac;
 		for (i = 0; i < *(int*) (rec + 0x184); i++) {

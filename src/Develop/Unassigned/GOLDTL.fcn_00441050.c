@@ -40,7 +40,7 @@ int __cdecl fcn_00441050(char* e)
 	float* f;
 	float* p;
 	char* w;
-	void** v10;
+	void** objects;
 	Fn_441050 fn;
 	int count;
 
@@ -108,26 +108,26 @@ int __cdecl fcn_00441050(char* e)
 				center[3] = (float) sqrt(center[2] * center[2] + center[1] * center[1] + center[0] * center[0]);
 				*(float*) (w - 4) = center[3];
 			}
-			v10 = (void**) (w - 0x1cc);
+			objects = (void**) (w - 0x1cc);
 			k = 8;
 			do {
-				if (v10[1] != 0) {
+				if (objects[1] != 0) {
 					if (*(unsigned char*) (w + 0xe) > 0) {
-						d3_RenderedVertexCount += (*(Fn_441050*) ((char*) *(void**) v10[1] + 0x14))(v10[1]);
-						g_1042a08 += (*(Fn_441050*) ((char*) *(void**) v10[1] + 0x10))(v10[1]);
+						d3_RenderedVertexCount += (*(Fn_441050*) ((char*) *(void**) objects[1] + 0x14))(objects[1]);
+						g_1042a08 += (*(Fn_441050*) ((char*) *(void**) objects[1] + 0x10))(objects[1]);
 					}
-					g_10432a8 += (*(Fn_441050*) ((char*) *(void**) v10[1] + 0x10))(v10[1]);
-					g_1042a04 += (*(Fn_441050*) ((char*) *(void**) v10[1] + 0x14))(v10[1]);
+					g_10432a8 += (*(Fn_441050*) ((char*) *(void**) objects[1] + 0x10))(objects[1]);
+					g_1042a04 += (*(Fn_441050*) ((char*) *(void**) objects[1] + 0x14))(objects[1]);
 				}
-				if (v10[0] != 0) {
+				if (objects[0] != 0) {
 					if (*(unsigned char*) (w + 0xe) > 0) {
-						d3_RenderedVertexCount += (*(Fn_441050*) ((char*) *(void**) v10[0] + 0x14))(v10[0]);
-						g_1042a08 += (*(Fn_441050*) ((char*) *(void**) v10[0] + 0x10))(v10[0]);
+						d3_RenderedVertexCount += (*(Fn_441050*) ((char*) *(void**) objects[0] + 0x14))(objects[0]);
+						g_1042a08 += (*(Fn_441050*) ((char*) *(void**) objects[0] + 0x10))(objects[0]);
 					}
-					g_10432a8 += (*(Fn_441050*) ((char*) *(void**) v10[0] + 0x10))(v10[0]);
-					g_1042a04 += (*(Fn_441050*) ((char*) *(void**) v10[0] + 0x14))(v10[0]);
+					g_10432a8 += (*(Fn_441050*) ((char*) *(void**) objects[0] + 0x10))(objects[0]);
+					g_1042a04 += (*(Fn_441050*) ((char*) *(void**) objects[0] + 0x14))(objects[0]);
 				}
-				v10 = (void**) ((char*) v10 + 0x34);
+				objects = (void**) ((char*) objects + 0x34);
 				k -= 1;
 			} while (k != 0);
 			w += 0x1f4;

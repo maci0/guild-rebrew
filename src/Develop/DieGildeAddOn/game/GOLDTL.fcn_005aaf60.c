@@ -38,7 +38,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00532ef0(void);
 
 /* ADDRESS: GOLDTL 0x005aaf60 */
-void __cdecl fcn_005aaf60(char* a0)
+void __cdecl fcn_005aaf60(char* gebaeude)
 {
 	char buf[512];
 	int dlg;
@@ -62,22 +62,22 @@ void __cdecl fcn_005aaf60(char* a0)
 	c = -1;
 	a = -1;
 	b = -1;
-	if (a0 == 0) {
+	if (gebaeude == 0) {
 		return;
 	}
-	if (*(unsigned short*) (a0 + 0x27) == 0xffff) {
+	if (*(unsigned short*) (gebaeude + 0x27) == 0xffff) {
 		return;
 	}
-	if (*(unsigned short*) (a0 + 0x27) == g_774970) {
+	if (*(unsigned short*) (gebaeude + 0x27) == g_774970) {
 		return;
 	}
-	h = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, 0xe8);
+	h = fcn_00502cd0(*(int*) (gebaeude + 0x5d), 2, 6, 0, 0xe8);
 	if (h == 0) {
 		return;
 	}
 	m = gm_WalkEntityChain(g_774970) > 1 ? gm_WalkEntityChain(g_774970) : 1;
-	n = gm_WalkEntityChain(*(unsigned short*) (a0 + 0x27)) > 1
-		? gm_WalkEntityChain(*(unsigned short*) (a0 + 0x27)) : 1;
+	n = gm_WalkEntityChain(*(unsigned short*) (gebaeude + 0x27)) > 1
+		? gm_WalkEntityChain(*(unsigned short*) (gebaeude + 0x27)) : 1;
 	cnt = (int) ((total = (float) (m + n)) * 0.01f);
 	v = gm_AccumulateTyped2((char*) (g_774970 * 0x21c + (int) g_7f4ca0));
 	if (v >= cnt) {
@@ -94,7 +94,7 @@ void __cdecl fcn_005aaf60(char* a0)
 		io_AppendText(0x1987, g_774970,
 			*(unsigned short*) (g_8680b4 + (unsigned char) g_773d75 * 0x2f4) * 2 + 0x9a8);
 	} else {
-		c = io_AppendText(0x1988, g_774970, *(unsigned short*) (a0 + 0x27), 0x48c,
+		c = io_AppendText(0x1988, g_774970, *(unsigned short*) (gebaeude + 0x27), 0x48c,
 			*(unsigned short*) (g_8680b4 + (unsigned char) g_773d75 * 0x2f4) * 2 + 0x9a8);
 		d2_ClampAmountToRange(cnt, v, 0x20, &b);
 		c = fcn_00472250(dlg, 1, c);
@@ -120,7 +120,7 @@ void __cdecl fcn_005aaf60(char* a0)
 						g_773d75, d);
 					frac = (float) (d * 255) / total;
 					fcn_004c54c0(*(int*) (g_774970 * 0x21c + (int) g_7f4ca4),
-						*(int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + (int) g_7f4ca4), (int) frac, 1);
+						*(int*) (*(unsigned short*) (gebaeude + 0x27) * 0x21c + (int) g_7f4ca4), (int) frac, 1);
 					scale = frac * 0.2f;
 					for (i = 0; i < 0x300; i++) {
 						Entry5aa* ent;
@@ -132,7 +132,7 @@ void __cdecl fcn_005aaf60(char* a0)
 						if (d == -1) {
 							continue;
 						}
-						off = *(unsigned short*) (a0 + 0x27) * 0x21c;
+						off = *(unsigned short*) (gebaeude + 0x27) * 0x21c;
 						if (d == *(int*) (g_7f4ca4 + off)) {
 							continue;
 						}

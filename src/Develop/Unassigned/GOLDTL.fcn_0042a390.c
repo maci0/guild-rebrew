@@ -8,13 +8,13 @@ extern g_662454_f g_662454;
 
 int __cdecl fcn_0042b120(int);
 
-int __cdecl fcn_0042a390(int* a1)
+int __cdecl fcn_0042a390(int* audio)
 {
 	int r = 0;
 
 	if (g_6b7f90 != 0) {
-		if (fcn_0042b120((int) a1) >= 0) {
-			if (g_662454(*a1) == 0) {
+		if (fcn_0042b120((int) audio) >= 0) {
+			if (g_662454(*audio) == 0) {
 				r = -1;
 			}
 		} else {

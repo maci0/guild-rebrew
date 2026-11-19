@@ -7,13 +7,13 @@ void __cdecl io_FormatTextBuffer(void*, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
 /* ADDRESS: GOLD 0x005a8e50 */
-void __cdecl fcn_005b22d0(void* a1)
+void __cdecl fcn_005b22d0(void* noticeEntity)
 {
-	char t;
+	char entityKind;
 
-	t = *(char*) ((char*) a1 + 2);
-	if (t == 6 || t == 7) {
+	entityKind = *(char*) ((char*) noticeEntity + 2);
+	if (entityKind == 6 || entityKind == 7) {
 		io_FormatTextBuffer(g_774a80, 0x20bd);
-		fcn_00545d40(*(int*) ((char*) a1 + 4), -1, g_774a80, 0, 0x5ec, g_6b5c60);
+		fcn_00545d40(*(int*) ((char*) noticeEntity + 4), -1, g_774a80, 0, 0x5ec, g_6b5c60);
 	}
 }

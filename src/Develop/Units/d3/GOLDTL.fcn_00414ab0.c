@@ -3,7 +3,7 @@
 void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, char force);
 
 /* ADDRESS: GOLDTL 0x00414ab0 */
-void __cdecl fcn_00414ab0(float* a0, float* a1, char* ent)
+void __cdecl fcn_00414ab0(float* outA, float* outB, char* ent)
 {
 	float* p;
 	int i;
@@ -20,21 +20,21 @@ void __cdecl fcn_00414ab0(float* a0, float* a1, char* ent)
 	if (p == 0) {
 		return;
 	}
-	a0[0] = p[0];
-	a0[1] = p[1];
-	a0[2] = p[2];
-	a1[0] = p[0];
-	a1[1] = p[1];
-	a1[2] = p[2];
+	outA[0] = p[0];
+	outA[1] = p[1];
+	outA[2] = p[2];
+	outB[0] = p[0];
+	outB[1] = p[1];
+	outB[2] = p[2];
 	i = 7; p += 0x14;
 	do {
 
-		a0[0] = (a0[0] < p[0]) ? a0[0] : p[0];
-		a0[1] = (p[1] > a0[1]) ? a0[1] : p[1];
-		a0[2] = (p[2] > a0[2]) ? a0[2] : p[2];
-		a1[0] = (p[0] < a1[0]) ? a1[0] : p[0];
-		a1[1] = (p[1] < a1[1]) ? a1[1] : p[1];
-		a1[2] = (p[2] < a1[2]) ? a1[2] : p[2];
+		outA[0] = (outA[0] < p[0]) ? outA[0] : p[0];
+		outA[1] = (p[1] > outA[1]) ? outA[1] : p[1];
+		outA[2] = (p[2] > outA[2]) ? outA[2] : p[2];
+		outB[0] = (p[0] < outB[0]) ? outB[0] : p[0];
+		outB[1] = (p[1] < outB[1]) ? outB[1] : p[1];
+		outB[2] = (p[2] < outB[2]) ? outB[2] : p[2];
 		i--; p += 0x14;
 	} while (i != 0);
 }

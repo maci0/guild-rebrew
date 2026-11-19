@@ -30,7 +30,7 @@ unsigned int __cdecl fcn_0053d020(int a0)
 	int w3;
 	int w4;
 	int v;
-	int v2;
+	int elementAddress;
 	int found;
 	unsigned int r3;
 	unsigned int r4;
@@ -134,9 +134,9 @@ unsigned int __cdecl fcn_0053d020(int a0)
 		} else if (g_100f1dc >= 0x59a && g_100f1dc < 0x5a2) {
 			i = 0;
 			do {
-				v2 = (int) g_1015ea0 + items[i] * 0x2f4;
+				elementAddress = (int) g_1015ea0 + items[i] * 0x2f4;
 				found = 0;
-				if (v2 == *(int*) 0x100f1e4) {
+				if (elementAddress == *(int*) 0x100f1e4) {
 					sel = items[i];
 					found = 1;
 				} else {

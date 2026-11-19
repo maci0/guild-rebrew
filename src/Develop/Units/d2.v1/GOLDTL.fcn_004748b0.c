@@ -29,7 +29,7 @@ extern int g_7725e8;
 int __cdecl fcn_004748b0(void)
 {
 	unsigned int *p;
-	unsigned int *v1;
+	unsigned int *candidateControl;
 	int v7;
 	int v8;
 	int i;
@@ -57,36 +57,36 @@ int __cdecl fcn_004748b0(void)
 	if (d2_CurrentElementId != -1) {
 		v8 = *(int *) &g_1015ea0 + d2_CurrentElementId * 0x2f4;
 		if (*(int *) (v8 + 0x20) == 0x41) {
-			v1 = *(unsigned int **) (v8 + 0xc);
-			if (d2_CurrentElementId == (int) v1[0x4d]) {
+			candidateControl = *(unsigned int **) (v8 + 0xc);
+			if (d2_CurrentElementId == (int) candidateControl[0x4d]) {
 				if (!g_14ce8d0) {
 					goto label_474b14;
 				}
-				if (p == v1 || g_7725e4) {
+				if (p == candidateControl || g_7725e4) {
 					goto label_474afe;
 				}
 				if (p != 0) {
 					*(int *) (*(int *) &g_1015ea0 + 0x3c + p[0x4d] * 0x2f4) = 0;
 				}
-				*(int *) (*(int *) &g_1015ea0 + 0x3c + v1[0x4d] * 0x2f4) = 1;
-				v8 = *(int *) (*(int *) &g_1015ea0 + 0x40 + v1[0x4d] * 0x2f4);
-				g_100f940 = v1[0x4b];
+				*(int *) (*(int *) &g_1015ea0 + 0x3c + candidateControl[0x4d] * 0x2f4) = 1;
+				v8 = *(int *) (*(int *) &g_1015ea0 + 0x40 + candidateControl[0x4d] * 0x2f4);
+				g_100f940 = candidateControl[0x4b];
 				g_100f950 = 0;
 				g_100f1d4 = d2_MouseBottomBoundary - v7;
 				i = 0;
 				if (v8 != 0) {
 					while (i < *(int *) (v8 + 0x2c)) {
-						if (*(int *) (*(int *) (v8 + 0x28) + i * 4) == (int) v1[0x4d]) {
+						if (*(int *) (*(int *) (v8 + 0x28) + i * 4) == (int) candidateControl[0x4d]) {
 							g_100f1cc = i;
 						}
 						i++;
 					}
 				}
-				p = v1;
-				*(unsigned int **) &tp_d2_SelectedControl = v1;
-				if ((*(unsigned char *) ((char *) v1 + 0x28) & 0x40) && !v1[6]
-				    && !v1[7] && !CountDisplayCounters() && !v1[0x4b]) {
-					v1[0x4b] = 0xffffffff;
+				p = candidateControl;
+				*(unsigned int **) &tp_d2_SelectedControl = candidateControl;
+				if ((*(unsigned char *) ((char *) candidateControl + 0x28) & 0x40) && !candidateControl[6]
+				    && !candidateControl[7] && !CountDisplayCounters() && !candidateControl[0x4b]) {
+					candidateControl[0x4b] = 0xffffffff;
 					p = *(unsigned int **) &tp_d2_SelectedControl;
 				}
 				if (*(unsigned char *) ((char *) p + 0x28) & 1) {
@@ -165,12 +165,12 @@ label_474b96:
 		    && (*(unsigned char *) (*(int *) &tp_d2_SelectedControl + 0x28) & 0x10)
 		    && d2_CurrentElementId == (int) (*(unsigned int **) &tp_d2_SelectedControl)[0x4d]
 		    && g_14ce8d8) {
-			v1 = *(unsigned int **) &tp_d2_SelectedControl;
-			v1[0x53] = v1[0x53] + 1;
-			if ((int) (v1[0x54] + 0xffffffff + v1[0x52]) < (int) v1[0x53]) {
-				v1[0x53] = v1[0x52];
+			candidateControl = *(unsigned int **) &tp_d2_SelectedControl;
+			candidateControl[0x53] = candidateControl[0x53] + 1;
+			if ((int) (candidateControl[0x54] + 0xffffffff + candidateControl[0x52]) < (int) candidateControl[0x53]) {
+				candidateControl[0x53] = candidateControl[0x52];
 			}
-			fcn_00466fe0(v1[0], v1[0x53]);
+			fcn_00466fe0(candidateControl[0], candidateControl[0x53]);
 		}
 	}
 label_474ca4:

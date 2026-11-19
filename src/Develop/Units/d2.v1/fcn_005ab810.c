@@ -54,8 +54,8 @@ void __cdecl fcn_005ab810(char* e, int unused)
 	int d;
 	int x;
 	int s;
-	int v1;
-	int v2;
+	int firstButton;
+	int secondButton;
 	int i;
 
 	p = &((struct house*) g_7f4ca0)[g_774970];
@@ -77,15 +77,15 @@ void __cdecl fcn_005ab810(char* e, int unused)
 		io_AppendText(0x1976, p->id, d, 2 * (0x75 <= gm_GameTime) + 0x197a + 1 - p->state);
 		d2_SetForm((int) dlg, 2);
 		s = io_AppendText(0x1977);
-		v1 = fcn_00472250((int) dlg, 2, s);
-		v2 = fcn_00472250((int) dlg, 2, s + 1);
+		firstButton = fcn_00472250((int) dlg, 2, s);
+		secondButton = fcn_00472250((int) dlg, 2, s + 1);
 		g_100f1dc = -1;
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
 			if (g_100f1dc != -1) {
-				if (d2_CurrentElementId == v1) {
+				if (d2_CurrentElementId == firstButton) {
 					if (fcn_00526010(&((struct house*) g_7f4ca0)[g_774970], d, (char) g_773d75) != 0) {
 						x = 1 - p->state;
 						fcn_004c51a0(-1, p->handle, 0, d);
@@ -113,7 +113,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 						fcn_00526120(buf, 0);
 						g_774654 = 1;
 					}
-				} else if (d2_CurrentElementId == v2) {
+				} else if (d2_CurrentElementId == secondButton) {
 					g_774654 = 1;
 				}
 			}
@@ -138,15 +138,15 @@ void __cdecl fcn_005ab810(char* e, int unused)
 		io_AppendText(0x1971, p->id, t, 2 * (0x75 <= gm_GameTime) + 0x197a + q->state);
 		d2_SetForm((int) dlg, 2);
 		s = io_AppendText(0x1972);
-		v1 = fcn_00472250((int) dlg, 2, s);
-		v2 = fcn_00472250((int) dlg, 2, s + 1);
+		firstButton = fcn_00472250((int) dlg, 2, s);
+		secondButton = fcn_00472250((int) dlg, 2, s + 1);
 		g_100f1dc = -1;
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
 			if (g_100f1dc != -1) {
-				if (d2_CurrentElementId == v1) {
+				if (d2_CurrentElementId == firstButton) {
 					if (fcn_00526010(&((struct house*) g_7f4ca0)[g_774970], t, (char) g_773d75) != 0) {
 						x = q->state;
 						fcn_004c51a0(q->handle, p->handle, 0, t);
@@ -161,7 +161,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 						fcn_00526120(buf, 0);
 						g_774654 = 1;
 					}
-				} else if (d2_CurrentElementId == v2) {
+				} else if (d2_CurrentElementId == secondButton) {
 					g_774654 = 1;
 				}
 			}

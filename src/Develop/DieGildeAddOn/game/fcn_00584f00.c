@@ -12,14 +12,14 @@ void __cdecl fcn_004ee080(int a1);
 void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00584f00 */
-int __cdecl fcn_00584f00(int a1, char* a2, int a3)
+int __cdecl fcn_00584f00(int a1, char* a2, int cost)
 {
     char buf[0x200];
     int h;
     int r;
 
     h = fcn_004ec7d0(a1);
-    if (fcn_00526010((void*) (540 * *(u16*) 0x774970 + 0x7f4ca0), a3,
+    if (fcn_00526010((void*) (540 * *(u16*) 0x774970 + 0x7f4ca0), cost,
                      *(u8*) 0x773d75) != 0) {
         if (h != 0) {
             fcn_00526120((void*) *(int*) 0x14b5440, 0x100);
@@ -38,7 +38,7 @@ int __cdecl fcn_00584f00(int a1, char* a2, int a3)
                 if (fcn_004c4450(r) == 1) {
                     fcn_004ee080((int) a2);
                     fcn_004c5150(-1, *(int*) (0x7f4ca4 + 540 * *(u16*) 0x774970),
-                                 *(u8*) 0x773d75, a3);
+                                 *(u8*) 0x773d75, cost);
                     return 1;
                 }
             }

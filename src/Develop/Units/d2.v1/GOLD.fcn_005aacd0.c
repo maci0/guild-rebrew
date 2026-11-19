@@ -94,7 +94,7 @@ typedef struct {
 } FRAME;
 
 /* ADDRESS: GOLD 0x005aacd0 */
-int __cdecl fcn_005aacd0(unsigned char* a1, int a2, int a3)
+int __cdecl fcn_005aacd0(unsigned char* buildingRec, int modelId, int a3)
 {
 	FRAME f;
 	char* tbl;
@@ -105,7 +105,7 @@ int __cdecl fcn_005aacd0(unsigned char* a1, int a2, int a3)
 	char c;
 	int t;
 
-	t = *a1;
+	t = *buildingRec;
 	f.sel.type = 0;
 	memset(&f.sel.a04, 0, 0x58);
 	f.v38 = 0;
@@ -122,18 +122,18 @@ int __cdecl fcn_005aacd0(unsigned char* a1, int a2, int a3)
 	f.row = tbl + t * 0x24c;
 
 	if (f.row[0] != 4 && f.row[0] != 0x13 && f.row[0] != 0x10) {
-		book = (char*) fcn_0052f390(a2, 0x62537c, 4, 0x62cc04,
+		book = (char*) fcn_0052f390(modelId, 0x62537c, 4, 0x62cc04,
 			0x62cc18, 0x62cc2c, 0x62cc40);
 	} else {
-		book = (char*) fcn_0052f390(a2, 0x62537c, 4, 0x62cbe4,
+		book = (char*) fcn_0052f390(modelId, 0x62537c, 4, 0x62cbe4,
 			0x62cc18, 0x62cc2c, 0x62cc40);
 	}
 	f.book = book;
 	fcn_005350d0((int) book);
 	fcn_00576300(0x21, (int) book, 0, 0);
-	fcn_00514400(*(unsigned short*) (a1 + 0x27), 1, 2, f.txt7b0);
-	fcn_00514400(*(unsigned short*) (a1 + 0x25), 1, 2, f.txt760);
-	r = (char*) fcn_0050dc90(a1);
+	fcn_00514400(*(unsigned short*) (buildingRec + 0x27), 1, 2, f.txt7b0);
+	fcn_00514400(*(unsigned short*) (buildingRec + 0x25), 1, 2, f.txt760);
+	r = (char*) fcn_0050dc90(buildingRec);
 	if (r == 0) {
 		src = *(char**) 0x1440ac8;
 		dst = f.txt204;
@@ -146,10 +146,10 @@ int __cdecl fcn_005aacd0(unsigned char* a1, int a2, int a3)
 	}
 	fcn_00475f60(*(int*) (book + 0x228), 3);
 	f.v40 = fcn_00475b70(*(int*) (book + 0x228), 3, 2);
-	fcn_00475ca0(f.v40, 0x32, 0x96, *(int*) (a1 + 0x3d));
+	fcn_00475ca0(f.v40, 0x32, 0x96, *(int*) (buildingRec + 0x3d));
 	if (f.row[0] != 4 && f.row[0] != 0x13 && f.row[0] != 0x10) {
 		f.v44 = fcn_00475b70(*(int*) (book + 0x228), 3, 3);
-		fcn_00475ca0(f.v44, 0, 4, *(int*) (a1 + 0x41));
+		fcn_00475ca0(f.v44, 0, 4, *(int*) (buildingRec + 0x41));
 		fcn_0046bc90(f.v44, 5, *(int*) 0x1440a78, *(int*) 0x1440a7c,
 			*(int*) 0x1440a80, *(int*) 0x1440a84,
 			*(int*) 0x1440a88);

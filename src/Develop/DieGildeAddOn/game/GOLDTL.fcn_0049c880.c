@@ -14,7 +14,7 @@ int __cdecl ai_StartDrohen(int a0, unsigned short* a1, int a2, int* a3, int* a4)
 	int v7[6];
 	int v8[6];
 	float v9;
-	int v5;
+	int method;
 	char* p;
 	char kind;
 
@@ -56,7 +56,7 @@ int __cdecl ai_StartDrohen(int a0, unsigned short* a1, int a2, int* a3, int* a4)
 		v8[1] = *(int*) (*(char**) (p + 0x170) + 1);
 		v8[2] = 1;
 	}
-	v5 = ai_SelectBestMethod(0x28, *a1, 1, v7, v8);
+	method = ai_SelectBestMethod(0x28, *a1, 1, v7, v8);
 	goto done;
 retry:
 	memset(v7, 0, sizeof(v7));
@@ -76,12 +76,12 @@ retry:
 	*(unsigned char*) v8 = 0;
 	v8[1] = 0;
 	v8[2] = 0;
-	v5 = ai_SelectBestMethod(0x28, *a1, 0, v7, v8);
+	method = ai_SelectBestMethod(0x28, *a1, 0, v7, v8);
 done:
-	if (v5 == 0) {
+	if (method == 0) {
 		return 0;
 	}
 	memcpy(a3, v7, sizeof(v7));
 	memcpy(a4, v8, sizeof(v8));
-	return v5;
+	return method;
 }

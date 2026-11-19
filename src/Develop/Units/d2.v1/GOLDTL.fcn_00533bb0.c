@@ -11,7 +11,7 @@ int __cdecl fcn_00468df0(int a1, int a2, int a3, int a4, int i);
 void __cdecl fcn_00469110(int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00533bb0 */
-void __cdecl fcn_00533bb0(int a0, int a1, int* a2, int a3, ...)
+void __cdecl fcn_00533bb0(int windowId, int a1, int* a2, int labelCount, ...)
 {
 	int maxw;
 	D2_WIN* winp;
@@ -26,12 +26,12 @@ void __cdecl fcn_00533bb0(int a0, int a1, int* a2, int a3, ...)
 	int start;
 	int span;
 
-	winp = &((D2_WIN*) g_1015f40)[a0];
+	winp = &((D2_WIN*) g_1015f40)[windowId];
 	maxw = 0;
-	if (a3 > 0) {
-		int remaining; va_start(ap, a3);
+	if (labelCount > 0) {
+		int remaining; va_start(ap, labelCount);
 		slot = buf;
-		for (remaining = a3; remaining != 0; remaining--) {
+		for (remaining = labelCount; remaining != 0; remaining--) {
 			src = va_arg(ap, char*);
 			strcpy(slot, src);
 			w = fcn_0046b520(src, 0x54) + 0x20;
@@ -41,10 +41,10 @@ void __cdecl fcn_00533bb0(int a0, int a1, int* a2, int a3, ...)
 			slot += 0x40;
 		}
 	}
-	q = winp->width / (a3 + 1);
+	q = winp->width / (labelCount + 1);
 	if (maxw > q) {
 		step = maxw + 8;
-		span = step * a3;
+		span = step * labelCount;
 		if (span > winp->width) {
 			span -= winp->width;
 		} else {
@@ -57,8 +57,8 @@ void __cdecl fcn_00533bb0(int a0, int a1, int* a2, int a3, ...)
 	}
 
 	slot = buf;
-	for (i = 0; i < a3; i++, slot += 0x40, start += step) {
-		w = fcn_00468df0(start - maxw / 2, a1, 0xc5, slot, a0);
+	for (i = 0; i < labelCount; i++, slot += 0x40, start += step) {
+		w = fcn_00468df0(start - maxw / 2, a1, 0xc5, slot, windowId);
 		a2[i] = w;
 		*(int*) (g_1015ea0 + w * 0x2f4 + 0x84) = 0x54;
 		fcn_00469110(w, maxw);

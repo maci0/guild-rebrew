@@ -9,32 +9,32 @@ void __cdecl fcn_00471e30(int h);
 void __cdecl fcn_00469c40(int x, int y, int slot);
 
 /* ADDRESS: GOLDTL 0x00545780 */
-void __cdecl fcn_00545780(char* a0)
+void __cdecl fcn_00545780(char* obj)
 {
     int* v3;
     int* v1;
     int v4;
-    int v2;
+    int dialog;
 
-    if (*(int*) (a0 + 0x74) == 0) {
+    if (*(int*) (obj + 0x74) == 0) {
         return;
     }
-    if (*(int*) (*(int*) (a0 + 0x74) + 4) != -1) {
+    if (*(int*) (*(int*) (obj + 0x74) + 4) != -1) {
         d2_SetForm(g_77e8a0, 0);
-        fcn_0046b2b0(*(int*) (*(int*) (a0 + 0x74) + 4));
-        *(int*) (*(int*) (a0 + 0x74) + 4) = -1;
+        fcn_0046b2b0(*(int*) (*(int*) (obj + 0x74) + 4));
+        *(int*) (*(int*) (obj + 0x74) + 4) = -1;
     } else {
         __asm { int 3 }
     }
-    v2 = *(int*) (*(int*) (a0 + 0x74) + 8);
-    if (v2 != -1) {
-        fcn_00471e30(v2);
-        *(int*) (*(int*) (a0 + 0x74) + 8) = -1;
+    dialog = *(int*) (*(int*) (obj + 0x74) + 8);
+    if (dialog != -1) {
+        fcn_00471e30(dialog);
+        *(int*) (*(int*) (obj + 0x74) + 8) = -1;
     }
-    if (g_7749e4 == *(int*) (a0 + 0x74)) {
+    if (g_7749e4 == *(int*) (obj + 0x74)) {
         g_7749e4 = 0;
     }
-    *(int*) (a0 + 0x74) = 0;
+    *(int*) (obj + 0x74) = 0;
     v4 = 0;
     v3 = (int*) 0x77e8c4;
     do {

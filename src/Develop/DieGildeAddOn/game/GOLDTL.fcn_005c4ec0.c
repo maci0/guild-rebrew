@@ -23,7 +23,7 @@ int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 /* ADDRESS: GOLDTL 0x005c4ec0 */
-int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
+int __cdecl fcn_005c4ec0(int a0, char* ownerEntity, int requestedAmount, char* a3)
 {
 	char buf[0x100];
 	char* ent;
@@ -41,11 +41,11 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 	found = 0;
 	written = 0;
 	total = 0;
-	got = gm_AccumulateTyped2(a1);
-	remaining = a2;
+	got = gm_AccumulateTyped2(ownerEntity);
+	remaining = requestedAmount;
 	amount = got < remaining ? got : remaining;
 	if (amount > 0) {
-		fcn_004c5150(a0, *(int*) (a1 + 4), g_773d75, amount);
+		fcn_004c5150(a0, *(int*) (ownerEntity + 4), g_773d75, amount);
 		remaining -= amount;
 		written = amount;
 	}
@@ -53,7 +53,7 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 		if (found) {
 			break;
 		}
-		ent = gm_StartFilteredEntitySearch(1, 4, *(unsigned short*) a1);
+		ent = gm_StartFilteredEntitySearch(1, 4, *(unsigned short*) ownerEntity);
 		found = 1;
 		while (ent != 0) {
 			if (remaining <= 0) {
@@ -105,7 +105,7 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 		if (found) {
 			break;
 		}
-		ent = gm_StartFilteredEntitySearch(1, 4, *(unsigned short*) a1);
+		ent = gm_StartFilteredEntitySearch(1, 4, *(unsigned short*) ownerEntity);
 		found = 1;
 		while (ent != 0) {
 			if (remaining <= 0) {
@@ -156,7 +156,7 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 		return written;
 	}
 	if (remaining > 0) {
-		fcn_004c51a0(a0, *(int*) (a1 + 4), g_773d75, remaining);
+		fcn_004c51a0(a0, *(int*) (ownerEntity + 4), g_773d75, remaining);
 	}
 	return written;
 }

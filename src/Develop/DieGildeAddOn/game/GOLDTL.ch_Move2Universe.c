@@ -19,58 +19,58 @@ void __cdecl ch_SetVisible(char* obj, int shown);
 /* ADDRESS: GOLDTL 0x00407390 */
 void __cdecl ch_Move2Universe(char* a0)
 {
-	char* v4;
-	char* v3;
+	char* action;
+	char* character;
 	char* p;
-	int v2;
+	int contextIndex;
 	int v5;
 	char v8[16];
 	char name[0x80];
 
-	v4 = a0;
-	v2 = *(int*) (a0 + 0x30);
-	v3 = *(char**) (a0 + 0x14);
-	if (v2 < 0) {
+	action = a0;
+	contextIndex = *(int*) (a0 + 0x30);
+	character = *(char**) (a0 + 0x14);
+	if (contextIndex < 0) {
 		ReportClientMessage((char*) 0x675a40);
-		ch_RemoveQueueEntry(v4);
+		ch_RemoveQueueEntry(action);
 		return;
 	}
-	if ((v2 == 0) == (*(int*) (v4 + 0x34) != -1)) {
-		if (v2 == 0) {
+	if ((contextIndex == 0) == (*(int*) (action + 0x34) != -1)) {
+		if (contextIndex == 0) {
 			ReportClientMessage((char*) 0x6759c8);
 		} else {
 			ReportClientMessage((char*) 0x675950);
 		}
-		ch_RemoveQueueEntry(v4);
+		ch_RemoveQueueEntry(action);
 		return;
 	}
-	v5 = (int) ch_MoveCharacter2Universe(v3, g_10432c0 + v2 * 0x3dc);
+	v5 = (int) ch_MoveCharacter2Universe(character, g_10432c0 + contextIndex * 0x3dc);
 	if (v5 == 0) {
 		ReportClientMessage((char*) 0x675918);
-		ch_RemoveQueueEntry(v4);
+		ch_RemoveQueueEntry(action);
 		return;
 	}
 	{
 		int saved = d3_CurrentContextIndex;
 
-		fcn_004432d0(*(int*) (v4 + 0x30), 1);
-		if (*(int*) (v4 + 0x30) == 0) {
-			if (g_67530c == *(int*) (v3 + 0x2c))
-				SelectTextureSet(*(void**) (v3 + 0x34),
-					(char*) *(int*) (*(int*) (v3 + 0x34) + 0x1ec) + 0xf4,
+		fcn_004432d0(*(int*) (action + 0x30), 1);
+		if (*(int*) (action + 0x30) == 0) {
+			if (g_67530c == *(int*) (character + 0x2c))
+				SelectTextureSet(*(void**) (character + 0x34),
+					(char*) *(int*) (*(int*) (character + 0x34) + 0x1ec) + 0xf4,
 					0, 0);
 		} else {
-			if (g_67530c == *(int*) (v3 + 0x2c))
-				SelectTextureSet(*(void**) (v3 + 0x34),
-					(char*) *(int*) (*(int*) (v3 + 0x34) + 0x1ec) + 0xf4,
-					*(unsigned char*) (v3 + 0x23a), 1);
+			if (g_67530c == *(int*) (character + 0x2c))
+				SelectTextureSet(*(void**) (character + 0x34),
+					(char*) *(int*) (*(int*) (character + 0x34) + 0x1ec) + 0xf4,
+					*(unsigned char*) (character + 0x23a), 1);
 		}
-		ch_ClearSitting((unsigned char*) v3);
-		if (*(char*) (v4 + 0x17c)) {
-			ch_SetPosition(v3, (float*) (v4 + 0x180), 0);
+		ch_ClearSitting((unsigned char*) character);
+		if (*(char*) (action + 0x17c)) {
+			ch_SetPosition(character, (float*) (action + 0x180), 0);
 		} else {
-			if (*(char*) (v4 + 0xf0)) {
-				strcpy(name, v4 + 0xf0);
+			if (*(char*) (action + 0xf0)) {
+				strcpy(name, action + 0xf0);
 			} else {
 				memcpy(name, (void*) 0x675908, 14);
 			}
@@ -78,24 +78,24 @@ void __cdecl ch_Move2Universe(char* a0)
 			if (p != 0 || (p = fcn_00445600(0, 0x100, 0, (char*) 0x675908)) != 0
 				|| (p = fcn_00445600(0, 0x100, 0, (char*) 0x675908)) != 0) {
 				d3_TransformPoint(p, p + 0x4c, (float*) v8);
-				ch_SetPosition(v3, (float*) v8, 0);
+				ch_SetPosition(character, (float*) v8, 0);
 			}
 		}
-		*(int*) (v3 + 0x2c) = *(int*) (v4 + 0x34);
-		*(int*) (v3 + 0x30) = *(int*) (v4 + 0x38);
-		*(int*) (v3 + 0x38) = 0;
-		*(int*) (v3 + 0x3c) = 0;
-		*(int*) (v3 + 0x40) = 0;
-		ch_SetVisible(v3, 1);
-		if (saved == *(int*) (v4 + 0x30)) {
-			if ((*(int*) (v3 + 0x2c) != -1 && g_67530c != *(int*) (v3 + 0x2c))
-				|| (g_675310 != -1 && g_675310 != *(int*) (v3 + 0x30)))
-				ch_SetVisible(v3, 0);
+		*(int*) (character + 0x2c) = *(int*) (action + 0x34);
+		*(int*) (character + 0x30) = *(int*) (action + 0x38);
+		*(int*) (character + 0x38) = 0;
+		*(int*) (character + 0x3c) = 0;
+		*(int*) (character + 0x40) = 0;
+		ch_SetVisible(character, 1);
+		if (saved == *(int*) (action + 0x30)) {
+			if ((*(int*) (character + 0x2c) != -1 && g_67530c != *(int*) (character + 0x2c))
+				|| (g_675310 != -1 && g_675310 != *(int*) (character + 0x30)))
+				ch_SetVisible(character, 0);
 		}
-		if (*(int*) (v4 + 0x28) != 0
-			&& *(char*) (*(int*) (v4 + 0x28) + 9) == 0x38)
-			ch_SetVisible(v3, 0);
+		if (*(int*) (action + 0x28) != 0
+			&& *(char*) (*(int*) (action + 0x28) + 9) == 0x38)
+			ch_SetVisible(character, 0);
 		fcn_004432d0(saved, 1);
-		ch_RemoveQueueEntry(v4);
+		ch_RemoveQueueEntry(action);
 	}
 }

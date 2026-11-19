@@ -14,7 +14,7 @@ int __cdecl fcn_00408320(int a0, char* a1, int* a2)
 	int end;
 
 
-	int k1;
+	int flags;
 
 	b = *(char**) (a1 + 0x128); obj = a1;
 	p = start = a2;
@@ -45,8 +45,8 @@ int __cdecl fcn_00408320(int a0, char* a1, int* a2)
 	if (start[2] != 0) {
 		q = start + 1;
 		do {
-			k1 = q[1];
-			if (k1 & 4) {
+			flags = q[1];
+			if (flags & 4) {
 				break;
 			}
 			if (q[4] == 0) {

@@ -51,7 +51,7 @@ int __cdecl fcn_004bf3e0(int*);
 void __cdecl fcn_004bfc70(int);
 
 /* ADDRESS: GOLDTL 0x004bf1b0 */
-void __cdecl fcn_004bf1b0(int* a0, int* a1)
+void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 {
 	int counts[3] = { 1, 2, 3 };
 	int ids[2];
@@ -82,7 +82,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 	if (rec == 0 || tbl == 0) {
 		return;
 	}
-	d2_SetGroupVisibility(a1[0], 0);
+	d2_SetGroupVisibility(uiContext[0], 0);
 	types = (char*)&((TradeProto*)lpGebaeudePROT)[*(unsigned char*)tbl];
 	h = fcn_00470820(0, 0, s_681718);
 	d2_CenterDialogWindows(h);
@@ -233,7 +233,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 				fcn_004be360();
 				a0 = (int*) g_772908;
 				while (a0 != 0) {
-					fcn_004be3d0(a1, rec, g_772908, (int) a0);
+					fcn_004be3d0(uiContext, rec, g_772908, (int) a0);
 					a0 = (int*) a0[0xf];
 				}
 				d2_SelectRadioGroup(g_6816d8, 0);
@@ -254,6 +254,6 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 		}
 	}
 	fcn_00471e30(h);
-	d2_SetGroupVisibility(a1[0], 1);
+	d2_SetGroupVisibility(uiContext[0], 1);
 }
 unsigned char _dpad_772908[1032];

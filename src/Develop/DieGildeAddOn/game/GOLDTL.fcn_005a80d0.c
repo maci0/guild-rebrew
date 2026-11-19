@@ -38,7 +38,7 @@ extern int g_774658, d3_CameraHorizontalIndex, d3_CameraVerticalStep, d2_Suppres
 /* ADDRESS: GOLDTL 0x005a80d0 */
 void __cdecl fcn_005a80d0(unsigned char* a0)
 {
-	unsigned char* v7;
+	unsigned char* buildingPtr;
 	int n;
 	int id;
 	int w;
@@ -54,7 +54,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	unsigned char* p;
 	int c;
 
-	v7 = a0;
+	buildingPtr = a0;
 	id = -1;
 	n = fcn_005a74a0(a0);
 	if (n == 0) {
@@ -75,24 +75,24 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	*(int*) 0x6752a8 = *(int*) 0x6aada0;
 	*(int*) 0x6752ac = *(int*) 0x6aada4;
 	*(unsigned char*) 0x6752b0 = *(unsigned char*) 0x6aada8;
-	n = fcn_005155e0(v7);
+	n = fcn_005155e0(buildingPtr);
 	w = n * 0x3dc;
 	*(int*) (w + 0x1043378) = *(int*) 0x1043378;
 	if (n != 0) {
-		fcn_004c3170(v7);
+		fcn_004c3170(buildingPtr);
 		if (n == -1 || *(char*) (w + 0x1043695) != 0) {
 			d2_SuppressOverlay = 1;
 			fcn_005373e0(0, 0x603c7);
 			fcn_005373e0(0, 0x603c7);
-			init_LoadGebaeudeScene(*v7);
+			init_LoadGebaeudeScene(*buildingPtr);
 			d2_SuppressOverlay = 0;
 		}
-		*(int*) &g_7746c8 = (int) v7;
-		*(int*) &g_6791c8 = *(int*) (v7 + 1);
-		g_67530c = *(int*) (v7 + 1);
-		p = (unsigned char*) fcn_00502cd0(*(int*) (v7 + 0x5d), 2, 6, 0, 0xfd);
+		*(int*) &g_7746c8 = (int) buildingPtr;
+		*(int*) &g_6791c8 = *(int*) (buildingPtr + 1);
+		g_67530c = *(int*) (buildingPtr + 1);
+		p = (unsigned char*) fcn_00502cd0(*(int*) (buildingPtr + 0x5d), 2, 6, 0, 0xfd);
 		if (p == 0) {
-			p = (unsigned char*) fcn_00502cd0(*(int*) (v7 + 0x5d), 2, 6, 4, 2);
+			p = (unsigned char*) fcn_00502cd0(*(int*) (buildingPtr + 0x5d), 2, 6, 4, 2);
 		}
 		g_675310 = *(int*) (p + 2);
 		fcn_004432d0(n, 0);
@@ -113,14 +113,14 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 			}
 		}
 		id = *(int*) &evt_LastGfxScriptId;
-		if (*(unsigned short*) (v7 + 0x27) == *(unsigned short*) &g_774970) {
+		if (*(unsigned short*) (buildingPtr + 0x27) == *(unsigned short*) &g_774970) {
 			fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x5c));
 			v10 = *(int*) &d3_ActiveCamera + 0x90;
 			v11 = *(int*) &d3_ActiveCamera;
 			fcn_00438cb0(v11, v10);
 		} else {
-			v10 = gm_GetBuildingTypeCategory(*v7);
-			c = *v7;
+			v10 = gm_GetBuildingTypeCategory(*buildingPtr);
+			c = *buildingPtr;
 			rec = *(int*) &lpGebaeudePROT + c + c * 0x24c;
 			if (v10 != 2) {
 				if (*(char*) rec == 0x1c) {
@@ -149,10 +149,10 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 		d3_CameraHorizontalIndex = 0;
 		d3_CameraVerticalStep = 0;
 	}
-	switch (*v7) {
+	switch (*buildingPtr) {
 	case 0x1e:
 		fcn_0059c9a0(*(int*) &g_7746c8);
-		fcn_004bd1a0(*(int*) (v7 + 0x71));
+		fcn_004bd1a0(*(int*) (buildingPtr + 0x71));
 		break;
 	case 0x1f:
 		fcn_0059cb40(*(int*) &g_7746c8);

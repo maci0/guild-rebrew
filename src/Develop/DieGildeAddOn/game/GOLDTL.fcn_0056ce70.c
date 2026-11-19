@@ -20,8 +20,8 @@ void __cdecl d3_TransformPoint(char*, float*, float*);
 /* ADDRESS: GOLDTL 0x0056ce70 */
 void __cdecl fcn_0056ce70(char* obj)
 {
-	float v1[4];
-	float v2[4];
+	float posA[4];
+	float posB[4];
 	double d;
 	pos14_7f4c00* p;
 	int i;
@@ -52,12 +52,12 @@ void __cdecl fcn_0056ce70(char* obj)
 	target = fcn_00504c90(e, 3);
 	if (target != 0) {
 		a = *(char**) (e + 0x61);
-		d3_TransformPoint(a, (float*) (a + 0x4c), v1);
+		d3_TransformPoint(a, (float*) (a + 0x4c), posA);
 		b = *(char**) (target + 0x61);
-		d3_TransformPoint(b, (float*) (b + 0x4c), v2);
-		d = sqrt((double) ((v1[2] - v2[2]) * (v1[2] - v2[2])
-			+ (v1[1] - v2[1]) * (v1[1] - v2[1])
-			+ (v1[0] - v2[0]) * (v1[0] - v2[0]))) * 0.001;
+		d3_TransformPoint(b, (float*) (b + 0x4c), posB);
+		d = sqrt((double) ((posA[2] - posB[2]) * (posA[2] - posB[2])
+			+ (posA[1] - posB[1]) * (posA[1] - posB[1])
+			+ (posA[0] - posB[0]) * (posA[0] - posB[0]))) * 0.001;
 	} else {
 		d = g_6628a0;
 	}

@@ -88,15 +88,15 @@ void __cdecl fcn_005a1430(void)
 	int *  v24;
 	float v26;
 	unsigned short *  v4;
-	unsigned int v5;
-	unsigned int v6;
+	unsigned int playerSlot;
+	unsigned int windowId;
 	int v7;
 	int v8;
 	unsigned int v9;
 	unsigned char frame[0x390];
-  v5 = (*(unsigned short *)&g_774970);
+  playerSlot = (*(unsigned short *)&g_774970);
   v14 = 0;
-  v3 = v5 * 0x21c + 0x7f4ca0;
+  v3 = playerSlot * 0x21c + 0x7f4ca0;
   v11 = 0x15;
   v24 = v13;
   while (v11) {
@@ -108,17 +108,17 @@ void __cdecl fcn_005a1430(void)
   v28 = -1;
   v30 = -1;
   v29 = -1;
-  v11 = fcn_0050b710(fcn_0050dac0((unsigned short)v5),(*(unsigned char *)&g_773d75));
+  v11 = fcn_0050b710(fcn_0050dac0((unsigned short)playerSlot),(*(unsigned char *)&g_773d75));
   v7 = fcn_00509570(v3);
-  v6 = fcn_00470820(0,0,(char *)0x6aa908);
-  d2_SetForm(v6,0);
+  windowId = fcn_00470820(0,0,(char *)0x6aa908);
+  d2_SetForm(windowId,0);
   fcn_005340f0((*(int *)&d2_CurrentWindowId));
-  d2_CenterDialogWindows(v6);
-  d2_SetForm(v6,1);
+  d2_CenterDialogWindows(windowId);
+  d2_SetForm(windowId,1);
   d2_SetOverlayAnimation(0,0);
   io_AppendText(0x1874);
   if (((!(fcn_0042e450() < *(float *)(v7 + 0x5c))) || ((*(unsigned short *)&g_7f4c04) <= 0xb)) || (v11 < 10000)) {
-    d2_SetForm(v6,2);
+    d2_SetForm(windowId,2);
     io_AppendText(0x1875);
     if ((*(unsigned short *)&g_7f4c04) > 0xb) {
       v26 = *(float *)(v7 + 0x5c) * (*(float *)0x664178) - (*(float *)0x6628ac);
@@ -126,12 +126,12 @@ void __cdecl fcn_005a1430(void)
     }
   }
   else {
-    d2_SetForm(v6,2);
+    d2_SetForm(windowId,2);
     io_AppendText(0x1876);
-    d2_SetForm(v6,3);
-    v29 = fcn_00472250(v6,3,io_AppendText(0x1877));
-    v28 = fcn_00472250(v6,3,io_AppendText(0x1878));
-    v30 = fcn_00472250(v6,3,io_AppendText(0x1879));
+    d2_SetForm(windowId,3);
+    v29 = fcn_00472250(windowId,3,io_AppendText(0x1877));
+    v28 = fcn_00472250(windowId,3,io_AppendText(0x1878));
+    v30 = fcn_00472250(windowId,3,io_AppendText(0x1879));
     v26 = *(float *)(v7 + 0x5c) * (*(float *)0x664178) - (*(float *)0x662a3c);
 label_5a15b5:
     *(float *)(v7 + 0x5c) = v26;
@@ -148,9 +148,9 @@ label_5a15b5:
       if ((*(int *)0x67d370) != v30) { // branch-flip
         if ((*(int *)0x67d370) != v28) { // branch-flip
           if ((*(int *)0x67d370) == v29) {
-            fcn_00471af0(v6,0);
+            fcn_00471af0(windowId,0);
             fcn_005a0960();
-            fcn_00471af0(v6,1);
+            fcn_00471af0(windowId,1);
           }
         }
         else {
@@ -166,11 +166,11 @@ label_5a15b5:
   } while (fcn_005373e0(0x5a1430,0x677c7));
   /* Phase 3: guest/order subdialog opened from the Wirtshaus menu. */
   if ((!v2) && (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8))) {
-    d2_SetForm(v6,3);
+    d2_SetForm(windowId,3);
     io_AppendText(0x6811b0);
-    v11 = fcn_00472250(v6,3,io_AppendText(0x187a));
-    v7 = fcn_00472250(v6,3,io_AppendText(0x187b));
-    v8 = fcn_00472250(v6,3,io_AppendText(0x187c));
+    v11 = fcn_00472250(windowId,3,io_AppendText(0x187a));
+    v7 = fcn_00472250(windowId,3,io_AppendText(0x187b));
+    v8 = fcn_00472250(windowId,3,io_AppendText(0x187c));
     (*(int *)&g_100f1dc) = -1;
     do {
       if ((*(int *)&g_100f1dc) != -1) {
@@ -189,11 +189,11 @@ label_5a15b5:
       }
     } while (fcn_005373e0(0x5a1430,0x777c7));
     if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
-      d2_SetForm(v6,2);
+      d2_SetForm(windowId,2);
       io_AppendText(0x6811b0);
       v9 = (v13[2] != v3) ? 0x187d : 0x187e; // branch-flip
       io_AppendText(v9,v14);
-      d2_SetForm(v6,3);
+      d2_SetForm(windowId,3);
       io_AppendText(0x6811b0);
       io_AppendText(0x187f);
       (*(int *)&g_100f1dc) = -1;
@@ -202,7 +202,7 @@ label_5a15b5:
           (*(int *)0x774654) = 1;
       } while (fcn_005373e0(0x5a1430,0x777c7));
       if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
-        fcn_00471e30(v6);
+        fcn_00471e30(windowId);
         v22[1] = 2;
         v22[0] = -1;
         v22[2] = 0;
@@ -231,11 +231,11 @@ label_5a15b5:
           v24 = &v13[2];
           v12 = v21;
         }
-        v6 = fcn_00470820(0,0,(char *)0x6aa8f0);
-        d2_SetForm(v6,0);
+        windowId = fcn_00470820(0,0,(char *)0x6aa8f0);
+        d2_SetForm(windowId,0);
         fcn_005340f0((*(int *)&d2_CurrentWindowId));
-        d2_CenterDialogWindows(v6);
-        d2_SetForm(v6,1);
+        d2_CenterDialogWindows(windowId);
+        d2_SetForm(windowId,1);
         d2_SetOverlayAnimation(0,0);
         io_AppendText(0x1874);
         v32 = 0;
@@ -248,7 +248,7 @@ label_5a15b5:
           v9 = 3;
           v10 = v24;
         }
-        fcn_005a0cd0(&v14,v10,1,v6,v9,0x96,0);
+        fcn_005a0cd0(&v14,v10,1,windowId,v9,0x96,0);
         if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
           fcn_00492d60(&v14,v13[2],1);
           fcn_00493000(&v14);
@@ -260,7 +260,7 @@ label_5a15b5:
             v9 = 3;
             v10 = v24;
           }
-          fcn_005a0cd0(&v14,v10,1,v6,v9,0x14,1);
+          fcn_005a0cd0(&v14,v10,1,windowId,v9,0x14,1);
           if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
             if (v25) {
               v9 = 3;
@@ -270,7 +270,7 @@ label_5a15b5:
               v9 = 2;
               v10 = v12;
             }
-            fcn_005a0cd0(&v14,v10,1,v6,v9,0x96,0);
+            fcn_005a0cd0(&v14,v10,1,windowId,v9,0x96,0);
             if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
               fcn_00492d60(&v14,v21[0],1);
               fcn_00493000(&v14);
@@ -282,16 +282,16 @@ label_5a15b5:
                 v9 = 2;
                 v10 = v12;
               }
-              fcn_005a0cd0(&v14,v10,1,v6,v9,0x14,1);
+              fcn_005a0cd0(&v14,v10,1,windowId,v9,0x14,1);
               if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
                 if ((v13[1] != 5) && (v13[1] != 6)) {
                   if (v25) {
                     v9 = fcn_00492e50(&v14,*v12);
-                    fcn_005a0cd0(&v14,v12,v9,v6,2,0x96,0);
+                    fcn_005a0cd0(&v14,v12,v9,windowId,2,0x96,0);
                     if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
                       fcn_00492d60(&v14,*v12,v9);
                       fcn_00493000(&v14);
-                      fcn_005a0cd0(&v14,v12,v9,v6,2,0x14,1);
+                      fcn_005a0cd0(&v14,v12,v9,windowId,2,0x14,1);
                       if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) goto label_5a1b81;
                     }
                     goto label_532ef0;
@@ -304,7 +304,7 @@ label_5a1b81:
                       (*(int *)0x774654) = 1;
                     else if (v2) {
                       v2 = 0;
-                      d2_SetForm(v6,4);
+                      d2_SetForm(windowId,4);
                       d2_ClearWindowChildren((*(int *)&d2_CurrentWindowId),1);
                       io_AppendText(0x6811b0);
                       v10 = v22;
@@ -313,7 +313,7 @@ label_5a1b81:
                         v11 = v10[1];
                         if (fcn_00492950(&v14,v3,v11)) { // branch-flip
                           v9 = io_AppendText(&v10[3]);
-                          *v10 = fcn_00472250(v6,4,v9);
+                          *v10 = fcn_00472250(windowId,4,v9);
                         }
                         else {
                           *v10 = -1;
@@ -328,19 +328,19 @@ label_5a1b81:
                       do {
                         if ((*(int *)0x67d370) == *v10) {
                           v2 = 1;
-                          d2_SetForm(v6,4);
+                          d2_SetForm(windowId,4);
                           io_AppendText(0x6811b0);
                           d2_ClearWindowChildren((*(int *)&d2_CurrentWindowId),1);
-                          fcn_005a0cd0(&v14,v24,v22[v11 * 0x43 + 1],v6,3,0x96,0);
+                          fcn_005a0cd0(&v14,v24,v22[v11 * 0x43 + 1],windowId,3,0x96,0);
                           fcn_00492d60(&v14,v3,v22[v11 * 0x43 + 1]);
                           fcn_00493000(&v14);
-                          fcn_005a0cd0(&v14,v24,v22[v11 * 0x43 + 1],v6,3,0x14,1);
+                          fcn_005a0cd0(&v14,v24,v22[v11 * 0x43 + 1],windowId,3,0x14,1);
                           if ((v13[1] != 5) && (v13[1] != 6)) {
                             v9 = fcn_00492e50(&v14,*v12);
-                            fcn_005a0cd0(&v14,v12,v9,v6,2,0x96,0);
+                            fcn_005a0cd0(&v14,v12,v9,windowId,2,0x96,0);
                             fcn_00492d60(&v14,*v12,v9);
                             fcn_00493000(&v14);
-                            fcn_005a0cd0(&v14,v12,v9,v6,2,0x14,1);
+                            fcn_005a0cd0(&v14,v12,v9,windowId,2,0x14,1);
                             if ((v13[1] != 5) && (v13[1] != 6)) break;
                           }
                           v25 = 1;
@@ -353,9 +353,9 @@ label_5a1b81:
                   } while (fcn_005373e0(0x5a1430,0x777c7));
                 }
                 if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
-                  fcn_005a1130(&v14,v6);
+                  fcn_005a1130(&v14,windowId);
                   if (((v13[1] == 5 && v3 == v13[2]) || (v13[1] == 6 && v3 == v21[0])))
-                    fcn_004c51a0(*(unsigned int *)(v5 * 0x21c + (unsigned long)&g_7f4ca4),0xffffffff,0,v34);
+                    fcn_004c51a0(*(unsigned int *)(playerSlot * 0x21c + (unsigned long)&g_7f4ca4),0xffffffff,0,v34);
                   do {
                     if ((*(int *)0x14ce8e0))
                       (*(int *)0x774654) = 1;
@@ -369,6 +369,6 @@ label_5a1b81:
     }
   }
 label_532ef0:
-	fcn_00471e30(v6);
+	fcn_00471e30(windowId);
 	fcn_00532ef0();
 }

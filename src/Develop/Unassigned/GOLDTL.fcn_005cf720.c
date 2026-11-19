@@ -7,7 +7,7 @@ int __cdecl fcn_0047dd60(void*);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x005cf720 */
-int __cdecl fcn_005cf720(unsigned int a0, unsigned int a1, unsigned char* p)
+int __cdecl fcn_005cf720(unsigned int self, unsigned int candidate, unsigned char* p)
 {
 	unsigned char* s;
 	unsigned int idx;
@@ -20,9 +20,9 @@ int __cdecl fcn_005cf720(unsigned int a0, unsigned int a1, unsigned char* p)
 	int b6;
 	int b7;
 
-	if ((unsigned short) a0 == (unsigned short) a1)
+	if ((unsigned short) self == (unsigned short) candidate)
 		return 0;
-	idx = a1 & 0xffff;
+	idx = candidate & 0xffff;
 	s = g_slot_table + idx * 0x21c;
 	if (*(short*) s == -1)
 		return 0;
@@ -41,7 +41,7 @@ int __cdecl fcn_005cf720(unsigned int a0, unsigned int a1, unsigned char* p)
 		i = 0;
 		q = (short*) (p + 0x1c);
 		do {
-			if ((unsigned short) a1 == (unsigned short) *q && *q != -1)
+			if ((unsigned short) candidate == (unsigned short) *q && *q != -1)
 				return 0;
 			i++;
 			q++;
@@ -58,12 +58,12 @@ int __cdecl fcn_005cf720(unsigned int a0, unsigned int a1, unsigned char* p)
 				return 0;
 		}
 		flags = *(unsigned int*) (p + 4);
-		if ((flags & 4) && *(short*) (s + 0x50) != *(short*) (g_slot_table + (a0 & 0xffff) * 0x21c + 0x50) && *(int*) (s + 0x5c) != *(int*) (g_slot_table + (a0 & 0xffff) * 0x21c + 4))
+		if ((flags & 4) && *(short*) (s + 0x50) != *(short*) (g_slot_table + (self & 0xffff) * 0x21c + 0x50) && *(int*) (s + 0x5c) != *(int*) (g_slot_table + (self & 0xffff) * 0x21c + 4))
 			return 0;
 		if (flags & 8) {
-			if (*(short*) (s + 0x50) == *(short*) (g_slot_table + (a0 & 0xffff) * 0x21c + 0x50))
+			if (*(short*) (s + 0x50) == *(short*) (g_slot_table + (self & 0xffff) * 0x21c + 0x50))
 				return 0;
-			if (*(int*) (s + 0x5c) == *(int*) (g_slot_table + (a0 & 0xffff) * 0x21c + 4))
+			if (*(int*) (s + 0x5c) == *(int*) (g_slot_table + (self & 0xffff) * 0x21c + 4))
 				return 0;
 		}
 		if ((flags & 0x40) && s[2] != 1)
@@ -76,9 +76,9 @@ int __cdecl fcn_005cf720(unsigned int a0, unsigned int a1, unsigned char* p)
 		}
 		if ((flags & 0x100) && s[2] != 6 && s[2] != 7 && (s[2] != 5 && !s[0x166]) && !s[0x169])
 			return 0;
-		if ((flags & 0x200) && !fcn_004fffb0(a1))
+		if ((flags & 0x200) && !fcn_004fffb0(candidate))
 			return 0;
-		if ((*(unsigned int*) (p + 4) & 0x400) && fcn_004fffb0(a1))
+		if ((*(unsigned int*) (p + 4) & 0x400) && fcn_004fffb0(candidate))
 			return 0;
 		flags = *(unsigned int*) (p + 4);
 		if ((flags & 0x2000) && *(int*) (s + 0x184))
@@ -116,7 +116,7 @@ int __cdecl fcn_005cf720(unsigned int a0, unsigned int a1, unsigned char* p)
 	}
 	if (!*(int*) (p + 0x40))
 		return 1;
-	f = fcn_0050f980((int) (a0 & 0xffff), (int) (a1 & 0xffff), 1);
+	f = fcn_0050f980((int) (self & 0xffff), (int) (candidate & 0xffff), 1);
 	if (!(f < *(float*) (p + 0x44))) {
 		if (!(f > *(float*) (p + 0x48)))
 			return 1;

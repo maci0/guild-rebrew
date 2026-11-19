@@ -2,7 +2,7 @@ void* __cdecl d3_CreateObjectMesh(char* e);
 void __cdecl fcn_00435910(char* a0, int a1, int a2, int* a3);
 
 /* ADDRESS: GOLDTL 0x00436930 */
-void* __cdecl fcn_00436930(char* a0, int* out)
+void* __cdecl fcn_00436930(char* sceneObject, int* out)
 {
 	char* v1;
 	char* v2;
@@ -13,22 +13,22 @@ void* __cdecl fcn_00436930(char* a0, int* out)
 	if (out != 0) {
 		*out = 0;
 	}
-	if (a0 == 0) {
+	if (sceneObject == 0) {
 		goto done;
 	}
-	v1 = *(char**) (a0 + 0x318);
+	v1 = *(char**) (sceneObject + 0x318);
 	if (v1 == 0) {
 		goto done;
 	}
-	if (*(char*) (a0 + 0x4a0) != 0) {
+	if (*(char*) (sceneObject + 0x4a0) != 0) {
 		if (*(int*) (v1 + 0x264) != 0 && (*(unsigned char*) (v1 + 0x2a1) & 2) != 0 && *(int*) (v1 + 0x268) == 0) {
-			*(int*) (*(int*) (a0 + 0x318) + 0x268) = (int) d3_CreateObjectMesh(v1);
+			*(int*) (*(int*) (sceneObject + 0x318) + 0x268) = (int) d3_CreateObjectMesh(v1);
 		}
-		if (*(char*) (a0 + 0x4a0) != 0) {
-			v1 = *(char**) (a0 + 0x318); v2 = *(char**) (v1 + 0x268);
+		if (*(char*) (sceneObject + 0x4a0) != 0) {
+			v1 = *(char**) (sceneObject + 0x318); v2 = *(char**) (v1 + 0x268);
 			if (v2 != 0) {
 				if (((int (__stdcall*) (void*, int, void**)) *(void**) (*(int*) v2 + 0x38)) (v2, 0x2000, (void**) &buf) >= 0) {
-					fcn_00435910(a0, *(int*) (v1 + 0x29c), buf, out);
+					fcn_00435910(sceneObject, *(int*) (v1 + 0x29c), buf, out);
 					((void (__stdcall*) (void*)) *(void**) (*(int*) v2 + 0x3c)) (v2);
 				}
 				r = v2;
@@ -36,7 +36,7 @@ void* __cdecl fcn_00436930(char* a0, int* out)
 			}
 		}
 	}
-	return *(void**) (*(int*) (a0 + 0x318) + 0x264);
+	return *(void**) (*(int*) (sceneObject + 0x318) + 0x264);
 done:
 	return r;
 }

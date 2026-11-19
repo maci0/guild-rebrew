@@ -48,7 +48,7 @@ void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005da250(char*, char*);
 
 /* ADDRESS: GOLDTL 0x005da820 */
-int __cdecl fcn_005da820(char* e, char* a2)
+int __cdecl fcn_005da820(char* e, char* request)
 {
 	int result;
 	int count;
@@ -69,11 +69,11 @@ int __cdecl fcn_005da820(char* e, char* a2)
 		if (e[0x166] == 0xd) {
 			return 0x60;
 		}
-		who = gm_LookupEntityRecordById(*(int*) (a2 + 0x214));
+		who = gm_LookupEntityRecordById(*(int*) (request + 0x214));
 		if (who == 0 || who[0x166] == 0xd) {
 			return 0x60;
 		}
-		b[0] = fcn_004f63d0(*(int*) (a2 + 0x214), ids, *(short*) e);
+		b[0] = fcn_004f63d0(*(int*) (request + 0x214), ids, *(short*) e);
 		if (b[0] == 0) {
 			return 0x60;
 		}

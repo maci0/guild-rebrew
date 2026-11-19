@@ -18,7 +18,7 @@ extern volatile int g_6b7fac;
 
 /* ADDRESS: GOLDTL 0x00418000 */
 int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, float f6,
-    int v2, float f8, float* p, int v3, int v4, Bytes4 color)
+    int v2, float f8, float* p, int v3, int timeStep, Bytes4 color)
 {
     Bytes4 f;
     float v[4];
@@ -73,7 +73,7 @@ int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, flo
             *(unsigned char*) (rec + 0x4d) = (unsigned char) ((fcn_0064d3f8() & mask) + color.b);
             *(unsigned char*) (rec + 0x4c) = (unsigned char) ((fcn_0064d3f8() & mask) + color.a);
             *(int*) (rec + 0x30) = (fcn_0064d3f8() & 7) + sum + k;
-            sum += v4;
+            sum += timeStep;
             rec += 0x54;
         } while (++i < s[0x36]); }
     }

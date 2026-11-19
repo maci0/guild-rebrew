@@ -38,7 +38,7 @@ void __cdecl fcn_00532ef0(void);
 /* ADDRESS: GOLDTL 0x00589d00 */
 void __cdecl fcn_00589d00(int a0)
 {
-	char* v6;
+	char* selectedEntity;
 	char req[0xf8];
 	int q[20];
 	int amt[3];
@@ -63,11 +63,11 @@ void __cdecl fcn_00589d00(int a0)
 	q[1] = 0x400;
 	q[4] = 6;
 	q[0] = 1;
-	v6 = (char*) fcn_005cd440(q, *(int*) 0x14b5354, 0, 0);
-	if (v6 == 0)
+	selectedEntity = (char*) fcn_005cd440(q, *(int*) 0x14b5354, 0, 0);
+	if (selectedEntity == 0)
 		return;
-	total += gm_WalkEntityChain(*(unsigned short*) v6);
-	n = fcn_004e99c0(*(unsigned char*) (v6 + 0x166)) / 3 + 2;
+	total += gm_WalkEntityChain(*(unsigned short*) selectedEntity);
+	n = fcn_004e99c0(*(unsigned char*) (selectedEntity + 0x166)) / 3 + 2;
 	amt[0] = (int) (float) n;
 	amt[1] = (int) (1.5f * (float) n);
 	amt[2] = (int) ((float) n + (float) n);
@@ -98,7 +98,7 @@ void __cdecl fcn_00589d00(int a0)
 		sel = fcn_00471f80(elem);
 		d2_SetForm(dlg, 1);
 		io_AppendText(0x6811b0);
-		io_AppendText(0x400e, 0x400c, *(unsigned short*) v6);
+		io_AppendText(0x400e, 0x400c, *(unsigned short*) selectedEntity);
 		io_AppendText(0x400f, amt[sel], ids[sel]);
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
@@ -151,12 +151,12 @@ void __cdecl fcn_00589d00(int a0)
 					*(int*) (req + 0x30) = g_7f4c08;
 					*(short*) (req + 0x34) = g_7f4c0c;
 					*(int*) (req + 0x5c) = *(int*) (a0 + 1);
-					*(int*) (req + 0x60) = *(int*) (v6 + 4);
-					if (*(int*) (v6 + 0x170) != 0)
-						sel = *(int*) (*(int*) (v6 + 0x170) + 1);
-					else if (*(int*) (v6 + 0x16c) != 0) {
+					*(int*) (req + 0x60) = *(int*) (selectedEntity + 4);
+					if (*(int*) (selectedEntity + 0x170) != 0)
+						sel = *(int*) (*(int*) (selectedEntity + 0x170) + 1);
+					else if (*(int*) (selectedEntity + 0x16c) != 0) {
 						*(int*) (req + 0x58) =
-						    *(int*) (*(int*) (v6 + 0x16c) + 1);
+						    *(int*) (*(int*) (selectedEntity + 0x16c) + 1);
 						goto sent;
 					} else {
 						n = -1;

@@ -62,7 +62,7 @@ double __cdecl sqrt(double);
 /* ADDRESS: GOLDTL 0x005744c0 */
 void __cdecl fcn_005744c0(int a0)
 {
-	int v5;
+	int buildAction;
 	int v8;
 	unsigned char v9;
 	int v11;
@@ -71,7 +71,7 @@ void __cdecl fcn_005744c0(int a0)
 	int v31;
 	int v27;
 	unsigned char* v14;
-	int v30;
+	int savedContext;
 	float v29;
 	float v21;
 	unsigned char* v15;
@@ -81,130 +81,130 @@ void __cdecl fcn_005744c0(int a0)
 	char v16[0x54];
 	int v18[33];
 	char v19[128];
-	char v22[0x200];
+	char messageText[0x200];
 
-	v5 = a0;
-	v30 = d3_CurrentContextIndex;
+	buildAction = a0;
+	savedContext = d3_CurrentContextIndex;
 	v15 = 0;
-	if (*(int*) (v5 + 0x84) != -1 && !fcn_004c4450(*(int*) (v5 + 0x84))) {
+	if (*(int*) (buildAction + 0x84) != -1 && !fcn_004c4450(*(int*) (buildAction + 0x84))) {
 		return;
 	}
-	*(int*) (v5 + 0x84) = -1;
-	v8 = *(int*) (v5 + 0x70) + 2;
+	*(int*) (buildAction + 0x84) = -1;
+	v8 = *(int*) (buildAction + 0x70) + 2;
 	switch (v8) {
 	case 2:
-		if (fcn_00500cb0((void*) (v5 + 0x52), (void*) &gm_GameTime) > 0
-			|| !(*(unsigned char*) (v5 + 0x78) & 2)) {
+		if (fcn_00500cb0((void*) (buildAction + 0x52), (void*) &gm_GameTime) > 0
+			|| !(*(unsigned char*) (buildAction + 0x78) & 2)) {
 			break;
 		}
-		if (*(int*) (v5 + 0xac) != *(int*) ((int) gm_CityEntity + 4)) {
-			v8 = fcn_00508e40(*(int*) (v5 + 0xac));
+		if (*(int*) (buildAction + 0xac) != *(int*) ((int) gm_CityEntity + 4)) {
+			v8 = fcn_00508e40(*(int*) (buildAction + 0xac));
 			if (v8) {
-				*(int*) (v5 + 0xcc) = fcn_004c5150(-1, *(int*) (v5 + 0xac),
-					(v8 & 0xffffff00) | g_773d75, *(int*) (v5 + 0xb4));
+				*(int*) (buildAction + 0xcc) = fcn_004c5150(-1, *(int*) (buildAction + 0xac),
+					(v8 & 0xffffff00) | g_773d75, *(int*) (buildAction + 0xb4));
 				v8 = fcn_00509570(v8);
 				if (v8) {
-					*(int*) (v8 + 0x54) = *(int*) (v8 + 0x54) + *(int*) (v5 + 0xb4);
+					*(int*) (v8 + 0x54) = *(int*) (v8 + 0x54) + *(int*) (buildAction + 0xb4);
 				}
 			}
 			else {
 LfailB:
-				*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
+				*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
 				return;
 			}
 		}
 		else {
-			*(int*) (v5 + 0xcc) = fcn_0050f910(*(int*) (v5 + 0xb4));
+			*(int*) (buildAction + 0xcc) = fcn_0050f910(*(int*) (buildAction + 0xb4));
 		}
-		*(int*) (v5 + 0x84) = fcn_004c5620(*(int*) (v5 + 0x70) + 1, (void*) v5);
+		*(int*) (buildAction + 0x84) = fcn_004c5620(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
 		return;
 
 	case 3:
-		*(int*) (v5 + 0x84) = -1;
-		if (*(unsigned char*) (v5 + 0x78) & 4) {
+		*(int*) (buildAction + 0x84) = -1;
+		if (*(unsigned char*) (buildAction + 0x78) & 4) {
 			break;
 		}
-		if (!fcn_004c4450(*(int*) (v5 + 0xcc))) {
+		if (!fcn_004c4450(*(int*) (buildAction + 0xcc))) {
 			break;
 		}
-		if (fcn_004c4450(*(int*) (v5 + 0xcc)) == 2) {
-			*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
+		if (fcn_004c4450(*(int*) (buildAction + 0xcc)) == 2) {
+			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
 			return;
 		}
-		*(int*) (v5 + 0x84) = fcn_004c5620(*(int*) (v5 + 0x70) + 1, (void*) v5);
+		*(int*) (buildAction + 0x84) = fcn_004c5620(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
 		return;
 
 	case 4:
-		if (!(*(unsigned char*) (v5 + 0x78) & 2)) {
+		if (!(*(unsigned char*) (buildAction + 0x78) & 2)) {
 			break;
 		}
-		v13 = fcn_004c4f30((v8 & 0xffffff00) | *(unsigned char*) (v5 + 0xb0),
-			*(int*) (v5 + 0xac), 0, 1);
-		*(int*) (v5 + 0xcc) = v13;
-		*(int*) (v5 + 0x84) = fcn_004c5620(*(int*) (v5 + 0x70) + 1, (void*) v5);
+		v13 = fcn_004c4f30((v8 & 0xffffff00) | *(unsigned char*) (buildAction + 0xb0),
+			*(int*) (buildAction + 0xac), 0, 1);
+		*(int*) (buildAction + 0xcc) = v13;
+		*(int*) (buildAction + 0x84) = fcn_004c5620(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
 		return;
 
 	case 5:
-		*(int*) (v5 + 0x84) = -1;
-		if (*(unsigned char*) (v5 + 0x78) & 4) {
+		*(int*) (buildAction + 0x84) = -1;
+		if (*(unsigned char*) (buildAction + 0x78) & 4) {
 			break;
 		}
-		if (!fcn_004c4450(*(int*) (v5 + 0xcc))) {
+		if (!fcn_004c4450(*(int*) (buildAction + 0xcc))) {
 			break;
 		}
-		if (fcn_004c4450(*(int*) (v5 + 0xcc)) == 2) {
+		if (fcn_004c4450(*(int*) (buildAction + 0xcc)) == 2) {
 			goto LfailB;
 		}
-		v15 = (unsigned char*) fcn_004c4480(*(int*) (v5 + 0xcc));
+		v15 = (unsigned char*) fcn_004c4480(*(int*) (buildAction + 0xcc));
 		if (v15) {
-			*(int*) (v5 + 0xb8) = *(int*) (v15 + 1);
-			*(int*) (v5 + 0x10) = *(int*) (v15 + 1);
+			*(int*) (buildAction + 0xb8) = *(int*) (v15 + 1);
+			*(int*) (buildAction + 0x10) = *(int*) (v15 + 1);
 		}
 		else {
-			*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
+			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
 			return;
 		}
-		*(int*) (v5 + 0x84) = fcn_004c5620(*(int*) (v5 + 0x70) + 1, (void*) v5);
+		*(int*) (buildAction + 0x84) = fcn_004c5620(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
 		return;
 
 	case 6:
-		*(int*) (v5 + 0x84) = -1;
-		fcn_005015e0(&v15, 0, 0, *(int*) (v5 + 0xb8));
+		*(int*) (buildAction + 0x84) = -1;
+		fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
 		if (!v15) {
-			*(int*) (v5 + 0x70) = -1;
+			*(int*) (buildAction + 0x70) = -1;
 			return;
 		}
-		v8 = fcn_005742e0((void*) (v5 + 0xe4), (void*) (v5 + 0xd4), (void*) v15,
-			(void*) (v5 + 0xf0), (void*) v5);
+		v8 = fcn_005742e0((void*) (buildAction + 0xe4), (void*) (buildAction + 0xd4), (void*) v15,
+			(void*) (buildAction + 0xf0), (void*) buildAction);
 		if (!v8) {
-			*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
-			fcn_004432d0(v30, 1);
+			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
+			fcn_004432d0(savedContext, 1);
 			return;
 		}
 		fcn_00510820(*(int*) (v15 + 0x61), v15, 2);
 		v8 = *(unsigned char*) v15;
 		v27 = (int) &((Building5744c0*) lpGebaeudePROT)[v8];
 		if (g_774800) {
-			*(int*) (v5 + 0xc4) = fcn_00574150(v5);
-			*(int*) (v5 + 0xc0) = 10;
+			*(int*) (buildAction + 0xc4) = fcn_00574150(buildAction);
+			*(int*) (buildAction + 0xc0) = 10;
 		}
 		else {
-			v11 = fcn_00574150(v5);
-			*(int*) (v5 + 0xc4) = v11;
-			*(int*) (v5 + 0xc0) = ((Building5744c0*) v27)->period * 0x3fc / v11;
+			v11 = fcn_00574150(buildAction);
+			*(int*) (buildAction + 0xc4) = v11;
+			*(int*) (buildAction + 0xc0) = ((Building5744c0*) v27)->period * 0x3fc / v11;
 		}
-		*(int*) (v5 + 0xc8) = 0;
-		fcn_00500bb0((void*) (v5 + 0x52), 0, 1, 0);
-		*(int*) (v5 + 0x70) = *(int*) (v5 + 0x70) + 1;
+		*(int*) (buildAction + 0xc8) = 0;
+		fcn_00500bb0((void*) (buildAction + 0x52), 0, 1, 0);
+		*(int*) (buildAction + 0x70) = *(int*) (buildAction + 0x70) + 1;
 		return;
 
 	case 7:
-		*(int*) (v5 + 0x84) = -1;
+		*(int*) (buildAction + 0x84) = -1;
 		fcn_004432d0(0, 1);
-		fcn_005015e0(&v15, 0, 0, *(int*) (v5 + 0xb8));
+		fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
 		if (!v15 || !fcn_005985f0(v16, (int) v15)) {
-			*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
-			fcn_004432d0(v30, 1);
+			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
+			fcn_004432d0(savedContext, 1);
 			return;
 		}
 		v13 = 0;
@@ -229,15 +229,15 @@ LfailB:
 			v11 += 0xa9;
 		} while (v11 < 0xa900);
 		if (!v13) {
-			*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
-			fcn_004432d0(v30, 1);
+			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
+			fcn_004432d0(savedContext, 1);
 			return;
 		}
 		for (v11 = 0; v11 < 33; v11++) {
 			v18[v11] = 0;
 		}
 		d3_VisitSceneObjects(g_67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
-		*(unsigned char*) (v5 + 0xd0) = 0;
+		*(unsigned char*) (buildAction + 0xd0) = 0;
 		v21 = 0.0f;
 		if (v18[32] > 0) {
 			v11 = 0;
@@ -247,36 +247,36 @@ LfailB:
 				if (v8 && *(int*) (v8 + 0x218) != 1 && v14) {
 					v24 = evt_LoadGfxScript((char*) 0x6a7dd4);
 					if (v24) {
-						fcn_00428340(v24, 4, v14, v8, 0x573d90, v5);
+						fcn_00428340(v24, 4, v14, v8, 0x573d90, buildAction);
 						*(int*) (v24 + 0x104) = 0;
 						*(int*) (v24 + 0xc8c) = 1;
 						fcn_00429670(v24);
 					}
-					*(unsigned char*) (v5 + 0xd0) = *(unsigned char*) (v5 + 0xd0) + 1;
+					*(unsigned char*) (buildAction + 0xd0) = *(unsigned char*) (buildAction + 0xd0) + 1;
 				}
 				v11 += 1;
 			} while (v11 < v18[32]);
 		}
-		*(int*) (v5 + 0x52) = gm_GameTime.a;
-		*(int*) (v5 + 0x56) = gm_GameTime.b;
-		*(int*) (v5 + 0x5a) = gm_GameTime.c;
-		*(unsigned short*) (v5 + 0x5e) = (unsigned short) gm_GameTime.d;
-		fcn_00500bb0((void*) (v5 + 0x52), 0, 10, 0);
-		*(int*) (v5 + 0x70) = *(int*) (v5 + 0x70) + 1;
-		fcn_004432d0(v30, 1);
+		*(int*) (buildAction + 0x52) = gm_GameTime.a;
+		*(int*) (buildAction + 0x56) = gm_GameTime.b;
+		*(int*) (buildAction + 0x5a) = gm_GameTime.c;
+		*(unsigned short*) (buildAction + 0x5e) = (unsigned short) gm_GameTime.d;
+		fcn_00500bb0((void*) (buildAction + 0x52), 0, 10, 0);
+		*(int*) (buildAction + 0x70) = *(int*) (buildAction + 0x70) + 1;
+		fcn_004432d0(savedContext, 1);
 		return;
 
 	case 8:
-		*(int*) (v5 + 0x84) = -1;
-		fcn_00500bb0((void*) (v5 + 0x52), 0, 0x14, 0);
-		if (*(unsigned char*) (v5 + 0xd0)) {
+		*(int*) (buildAction + 0x84) = -1;
+		fcn_00500bb0((void*) (buildAction + 0x52), 0, 0x14, 0);
+		if (*(unsigned char*) (buildAction + 0xd0)) {
 			break;
 		}
 		fcn_004432d0(0, 1);
-		fcn_005015e0(&v15, 0, 0, *(int*) (v5 + 0xb8));
+		fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
 		if (!fcn_005985f0(v16, (int) v15)) {
-			*(int*) (v5 + 0x84) = fcn_004c5620(-1, (void*) v5);
-			fcn_004432d0(v30, 1);
+			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
+			fcn_004432d0(savedContext, 1);
 			return;
 		}
 		for (v11 = 0; v11 < 33; v11++) {
@@ -289,37 +289,37 @@ LfailB:
 			}
 			d3_DestroyObject(v18[v11]);
 		}
-		*(int*) (v5 + 0x60) = gm_GameTime.a;
-		*(int*) (v5 + 0x64) = gm_GameTime.b;
-		*(int*) (v5 + 0x68) = gm_GameTime.c;
-		*(unsigned short*) (v5 + 0x6c) = (unsigned short) gm_GameTime.d;
-		*(int*) (v5 + 0x52) = gm_GameTime.a;
-		*(int*) (v5 + 0x56) = gm_GameTime.b;
-		*(int*) (v5 + 0x5a) = gm_GameTime.c;
-		*(unsigned short*) (v5 + 0x5e) = (unsigned short) gm_GameTime.d;
-		fcn_00500bb0((void*) (v5 + 0x52), 0, 10, 0);
-		*(int*) (v5 + 0x70) = *(int*) (v5 + 0x70) + 1;
-		*(int*) (v5 + 0xb4) = 0;
-		fcn_004432d0(v30, 1);
+		*(int*) (buildAction + 0x60) = gm_GameTime.a;
+		*(int*) (buildAction + 0x64) = gm_GameTime.b;
+		*(int*) (buildAction + 0x68) = gm_GameTime.c;
+		*(unsigned short*) (buildAction + 0x6c) = (unsigned short) gm_GameTime.d;
+		*(int*) (buildAction + 0x52) = gm_GameTime.a;
+		*(int*) (buildAction + 0x56) = gm_GameTime.b;
+		*(int*) (buildAction + 0x5a) = gm_GameTime.c;
+		*(unsigned short*) (buildAction + 0x5e) = (unsigned short) gm_GameTime.d;
+		fcn_00500bb0((void*) (buildAction + 0x52), 0, 10, 0);
+		*(int*) (buildAction + 0x70) = *(int*) (buildAction + 0x70) + 1;
+		*(int*) (buildAction + 0xb4) = 0;
+		fcn_004432d0(savedContext, 1);
 		return;
 
 	case 9:
-		v8 = fcn_0050cad0((void*) (v5 + 0x60), (void*) &gm_GameTime);
-		v36 = v8 + *(int*) (v5 + 0xb4);
-		if (v36 < *(int*) (v5 + 0xc0)) {
-			fcn_00500bb0((void*) (v5 + 0x52), 0, 0x1e, 0);
+		v8 = fcn_0050cad0((void*) (buildAction + 0x60), (void*) &gm_GameTime);
+		v36 = v8 + *(int*) (buildAction + 0xb4);
+		if (v36 < *(int*) (buildAction + 0xc0)) {
+			fcn_00500bb0((void*) (buildAction + 0x52), 0, 0x1e, 0);
 			return;
 		}
-		*(int*) (v5 + 0x60) = *(int*) (v5 + 0x52);
-		*(int*) (v5 + 0x64) = *(int*) (v5 + 0x56);
-		*(int*) (v5 + 0x68) = *(int*) (v5 + 0x5a);
-		*(unsigned short*) (v5 + 0x6c) = *(unsigned short*) (v5 + 0x5e);
+		*(int*) (buildAction + 0x60) = *(int*) (buildAction + 0x52);
+		*(int*) (buildAction + 0x64) = *(int*) (buildAction + 0x56);
+		*(int*) (buildAction + 0x68) = *(int*) (buildAction + 0x5a);
+		*(unsigned short*) (buildAction + 0x6c) = *(unsigned short*) (buildAction + 0x5e);
 		if (!v15) {
-			fcn_005015e0(&v15, 0, 0, *(int*) (v5 + 0xb8));
+			fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
 		}
-		if (*(int*) (v5 + 0xbc) == -1 && *(int*) (v5 + 0xc8) >= 2) {
+		if (*(int*) (buildAction + 0xbc) == -1 && *(int*) (buildAction + 0xc8) >= 2) {
 			fcn_004432d0(0, 1);
-			fcn_0064d41a(v19, (char*) 0x6a7d60, *(int*) (v5 + 4));
+			fcn_0064d41a(v19, (char*) 0x6a7d60, *(int*) (buildAction + 4));
 			v8 = fcn_00445600(0, 0x1c0, 0, v19);
 			d3_TransformPoint((char*) v8, (char*) (v8 + 0x4c), (float*) v20);
 			v21 = 1e+35f;
@@ -346,40 +346,40 @@ LfailB:
 				fcn_00428340(v24, 3, v8, v13, 2);
 				*(int*) (v24 + 0xc8c) = 1;
 				*(int*) (v24 + 0x104) = 0;
-				*(int*) (v5 + 0xbc) = *(int*) (v24 + 0x100);
+				*(int*) (buildAction + 0xbc) = *(int*) (v24 + 0x100);
 				fcn_00429670(v24);
 			}
-			fcn_004432d0(v30, 1);
+			fcn_004432d0(savedContext, 1);
 		}
-		v11 = *(int*) (v5 + 0xc0);
-		*(int*) (v5 + 0xc8) = *(int*) (v5 + 0xc8) + v36 / v11;
-		*(int*) (v5 + 0xb4) = v36 % v11;
-		fcn_00500bb0((void*) (v5 + 0x52), 0, v11, 0);
+		v11 = *(int*) (buildAction + 0xc0);
+		*(int*) (buildAction + 0xc8) = *(int*) (buildAction + 0xc8) + v36 / v11;
+		*(int*) (buildAction + 0xb4) = v36 % v11;
+		fcn_00500bb0((void*) (buildAction + 0x52), 0, v11, 0);
 		if (d3_CurrentContextIndex == 0) {
-			if (*(int*) (v5 + 0xc8) <= *(int*) (v5 + 0xc4)) {
-				fcn_00573e10(v5);
+			if (*(int*) (buildAction + 0xc8) <= *(int*) (buildAction + 0xc4)) {
+				fcn_00573e10(buildAction);
 			}
-			if (*(int*) (v5 + 0xc8) == 2 && (*(unsigned char*) (v5 + 0x78) & 2)) {
+			if (*(int*) (buildAction + 0xc8) == 2 && (*(unsigned char*) (buildAction + 0x78) & 2)) {
 				for (v11 = 0; v11 < 31; v11++) {
 					((int*) v19)[v11] = 0;
 				}
 				fcn_004c5790(0xc, v19);
 			}
 		}
-		if (*(int*) (v5 + 0xc8) > *(int*) (v5 + 0xc4)) {
+		if (*(int*) (buildAction + 0xc8) > *(int*) (buildAction + 0xc4)) {
 			fcn_004432d0(0, 1);
-			if (*(int*) (v5 + 0xbc) != -1) {
-				v8 = fcn_00426cc0(*(int*) (v5 + 0xbc));
+			if (*(int*) (buildAction + 0xbc) != -1) {
+				v8 = fcn_00426cc0(*(int*) (buildAction + 0xbc));
 				if (v8) {
 					fcn_00428720(v8);
 				}
-				*(int*) (v5 + 0xbc) = -1;
+				*(int*) (buildAction + 0xbc) = -1;
 			}
-			if (v30) {
+			if (savedContext) {
 				fcn_00415300(*(int*) (v15 + 0x61));
 				*(unsigned char*) (*(int*) (v15 + 0x61) + 0x217) |= 1;
 			}
-			fcn_00573e10(v5);
+			fcn_00573e10(buildAction);
 			if (*(int*) (v15 + 0x61)) {
 				v8 = fcn_00500e20((int) &gm_GameTime);
 				if (v8 == 1) {
@@ -420,7 +420,7 @@ LfailB:
 				}
 			}
 			fcn_004bd4e0(*(int*) (v15 + 0x61), *(unsigned char*) v15);
-			if (*(unsigned char*) (v5 + 0x78) & 2) {
+			if (*(unsigned char*) (buildAction + 0x78) & 2) {
 				fcn_004c5420(*(int*) (v15 + 1), 0x5a, 2, 0, 1);
 				if (*(unsigned char*) v15 >= 4 && *(unsigned char*) v15 <= 7) {
 					*(int*) v20 = gm_GameTime.a;
@@ -433,15 +433,15 @@ LfailB:
 				}
 				if (g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind == 6) {
 					if (*(unsigned char*) v15 >= 4 && *(unsigned char*) v15 <= 7) {
-						fcn_0051af00(v22, 0x1c2f, v15);
+						fcn_0051af00(messageText, 0x1c2f, v15);
 						fcn_00545e80(*(int*) (g_7f4ca0 + *(unsigned short*) (v15 + 0x27) * 0x21c + 4),
-							*(int*) (v5 + 0x10), v22, 1, 0x5f6, *(int*) (v15 + 1), -1, 0,
+							*(int*) (buildAction + 0x10), messageText, 1, 0x5f6, *(int*) (v15 + 1), -1, 0,
 							(char*) 0x6a7d8c);
 					}
 					else {
-						fcn_0051af00(v22, 0x1c27, v15);
+						fcn_0051af00(messageText, 0x1c27, v15);
 						fcn_00545e80(*(int*) (g_7f4ca0 + *(unsigned short*) (v15 + 0x27) * 0x21c + 4),
-							*(int*) (v5 + 0x10), v22, 0, 0x5f6, *(int*) (v15 + 1), -1, 0,
+							*(int*) (buildAction + 0x10), messageText, 0, 0x5f6, *(int*) (v15 + 1), -1, 0,
 							(char*) 0x6a7d8c);
 					}
 					fcn_004234e0((int) g_7747b8, 0x6a7d7c, 1, 0x3f, 0x7f, 0, 0);
@@ -452,9 +452,9 @@ LfailB:
 					do {
 						if ((*(char*) (v27 - 2) == 6 || *(char*) (v27 - 2) == 7)
 							&& *(int*) v27 != *(int*) (g_7f4ca0 + *(unsigned short*) (v15 + 0x27) * 0x21c + 4)) {
-							fcn_0051af00(v22, 0x1c30, *(unsigned short*) (v15 + 0x27),
+							fcn_0051af00(messageText, 0x1c30, *(unsigned short*) (v15 + 0x27),
 								(void*) (*(unsigned char*) v15 * 0xe + 0x48e));
-							fcn_00545e80(*(int*) v27, -1, v22, 0, 0x607, *(int*) (v15 + 1), -1, 0,
+							fcn_00545e80(*(int*) v27, -1, messageText, 0, 0x607, *(int*) (v15 + 1), -1, 0,
 								(char*) 0x6a7d68);
 						}
 						v27 += 0x21c;
@@ -475,35 +475,35 @@ LfailB:
 			}
 			fcn_005001e0((void*) (*(unsigned short*) (v15 + 0x27) * 0x21c + (int) g_7f4ca0),
 				(int) v15);
-			fcn_004432d0(v30, 1);
-			*(int*) (v5 + 0x7c) = 0;
-			fcn_00546190(v5);
+			fcn_004432d0(savedContext, 1);
+			*(int*) (buildAction + 0x7c) = 0;
+			fcn_00546190(buildAction);
 			return;
 		}
 		break;
 
 	case 0:
 	case 1:
-		fcn_005015e0(&v15, 0, 0, *(int*) (v5 + 0xb8));
+		fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
 		fcn_004432d0(0, 1);
-		if (*(int*) (v5 + 0xbc) != -1) {
-			v8 = fcn_00426cc0(*(int*) (v5 + 0xbc));
+		if (*(int*) (buildAction + 0xbc) != -1) {
+			v8 = fcn_00426cc0(*(int*) (buildAction + 0xbc));
 			if (v8) {
 				fcn_00428720(v8);
 			}
-			*(int*) (v5 + 0xbc) = -1;
+			*(int*) (buildAction + 0xbc) = -1;
 		}
-		*(int*) (v5 + 0xc8) = *(int*) (v5 + 0xc4) + 1;
-		fcn_00573e10(v5);
-		if ((*(unsigned char*) (v5 + 0x78) & 2) && v15) {
+		*(int*) (buildAction + 0xc8) = *(int*) (buildAction + 0xc4) + 1;
+		fcn_00573e10(buildAction);
+		if ((*(unsigned char*) (buildAction + 0x78) & 2) && v15) {
 			fcn_004c5fd0(*(int*) (v15 + 1));
 			for (v11 = 0; v11 < 31; v11++) {
 				((int*) v19)[v11] = 0;
 			}
 			fcn_004c5790(0xc, v19);
 		}
-		fcn_004432d0(v30, 1);
-		fcn_00546190(v5);
+		fcn_004432d0(savedContext, 1);
+		fcn_00546190(buildAction);
 		return;
 	}
 	return;

@@ -11,7 +11,7 @@ int __cdecl fcn_004e8b80(unsigned int a0, int a1, EVT_ARG* a2);
 char* __cdecl gm_LookupEntityRecordById(int a0);
 
 /* ADDRESS: GOLDTL 0x004ea130 */
-unsigned int __cdecl fcn_004ea130(unsigned int a0)
+unsigned int __cdecl fcn_004ea130(unsigned int officeKind)
 {
 	EVT_ARG args[6];
 	int flag;
@@ -24,7 +24,7 @@ unsigned int __cdecl fcn_004ea130(unsigned int a0)
 	char* p;
 
 	flag = 0;
-	n = fcn_004e8b80(a0, 6, args);
+	n = fcn_004e8b80(officeKind, 6, args);
 	if (n <= 0) {
 		goto done;
 	}

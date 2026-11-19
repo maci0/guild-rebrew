@@ -18,7 +18,7 @@ void __cdecl fcn_0058b9c0(void* a1, void* a2);
 void __cdecl fcn_0058ba20(char* o, char* buf);
 
 /* ADDRESS: GOLDTL 0x0058bfd0 */
-void __cdecl fcn_0058bfd0(int* a0)
+void __cdecl fcn_0058bfd0(int* ctx)
 {
 	int i;
 	int saved;
@@ -36,11 +36,11 @@ void __cdecl fcn_0058bfd0(int* a0)
 	int* r;
 
 	n = 0;
-	v1 = (int*) a0[7];
+	v1 = (int*) ctx[7];
 	i = g_6652f8[v1[0]];
 	if (i > 0) {
 		e = 0;
-		r = a0 + 0xc;
+		r = ctx + 0xc;
 		do {
 			if (*(int*) ((char*) v1[4] + e) != -1) {
 				r[-1] = v1[4] + e;
@@ -54,7 +54,7 @@ void __cdecl fcn_0058bfd0(int* a0)
 		} while (--i);
 	}
 	if (n < 8) {
-		r = a0 + n * 3 + 0xc;
+		r = ctx + n * 3 + 0xc;
 		i = 8 - n;
 		do {
 			r[-1] = 0;
@@ -63,50 +63,50 @@ void __cdecl fcn_0058bfd0(int* a0)
 			r += 3;
 		} while (--i);
 	}
-	saved = *(int*) (a0[2] * 0x3cc + 0x1016198);
-	d2_SetForm(a0[0], 2);
+	saved = *(int*) (ctx[2] * 0x3cc + 0x1016198);
+	d2_SetForm(ctx[0], 2);
 	io_AppendText(g_6811b0);
-	d2_SetForm(a0[0], 3);
+	d2_SetForm(ctx[0], 3);
 	io_AppendText(g_6811b0);
-	d2_SetForm(a0[0], 5);
+	d2_SetForm(ctx[0], 5);
 	io_AppendText(g_6811b0);
-	fcn_00533f40(0, 0, a0[4], a0[2], *(int*) (a0[2] * 0x3cc + 0x1015f50),
+	fcn_00533f40(0, 0, ctx[4], ctx[2], *(int*) (ctx[2] * 0x3cc + 0x1015f50),
 	             &v9, &v11, &v10);
-	d2_SetForm(a0[0], 2);
+	d2_SetForm(ctx[0], 2);
 	i = 0;
 	if (n > 0) {
-		r = a0 + 0xb;
+		r = ctx + 0xb;
 		do {
-			h = *(int*) (a0[2] * 0x3cc + 0x1015f4c);
+			h = *(int*) (ctx[2] * 0x3cc + 0x1015f4c);
 			y = (h - *(short*) (g_772500 + 0x2399c)) / 2;
 			r[-1] = fcn_0046f740(y,
-			                     *(int*) (a0[2] * 0x3cc + 0x1015f50) * i + 2,
-			                     0x6c7, a0[2]);
+			                     *(int*) (ctx[2] * 0x3cc + 0x1015f50) * i + 2,
+			                     0x6c7, ctx[2]);
 			h = fcn_0046f740(y + 2,
-			                 *(int*) (a0[2] * 0x3cc + 0x1015f50) * i + 4,
-			                 *(int*) (*r + 0x3c), a0[2]);
+			                 *(int*) (ctx[2] * 0x3cc + 0x1015f50) * i + 4,
+			                 *(int*) (*r + 0x3c), ctx[2]);
 			r[-1] = h;
 			*(int*) (g_1015ea0 + 0x5c + h * 0x2f4) = 1;
 			*(int*) (g_1015ea0 + 0x1d0 + r[-1] * 0x2f4) = 3;
 			fcn_0058b9c0((void*) *r, buf);
 			fcn_0058ba20((char*) *r, buf2);
-			y = *(int*) (a0[2] * 0x3cc + 0x1015f50) * i + 0x38;
-			h = fcn_0046fac0(0, y, buf, a0[2]);
+			y = *(int*) (ctx[2] * 0x3cc + 0x1015f50) * i + 0x38;
+			h = fcn_0046fac0(0, y, buf, ctx[2]);
 			*(int*) (g_1015ea0 + 0x6c + h * 0x2f4) = 1;
 			*(int*) (g_1015ea0 + 0x18 + h * 0x2f4) =
-			    *(int*) (a0[2] * 0x3cc + 0x1015f4c);
+			    *(int*) (ctx[2] * 0x3cc + 0x1015f4c);
 			d2_SetElementFont(h, 0x54);
 			y += 0xd;
-			h = fcn_0046fac0(0, y, buf2, a0[2]);
+			h = fcn_0046fac0(0, y, buf2, ctx[2]);
 			*(int*) (g_1015ea0 + 0x6c + h * 0x2f4) = 1;
 			*(int*) (g_1015ea0 + 0x18 + h * 0x2f4) =
-			    *(int*) (a0[2] * 0x3cc + 0x1015f4c);
+			    *(int*) (ctx[2] * 0x3cc + 0x1015f4c);
 			d2_SetElementFont(h, 0x54);
 			y += 0x12;
 			j = 0;
 			do {
 				io_FormatTextBuffer(buf, "%s:", 0x16b7 + j);
-				h = fcn_0046fac0(0x28, y, buf, a0[2]);
+				h = fcn_0046fac0(0x28, y, buf, ctx[2]);
 				*(int*) (g_1015ea0 + 0x18 + h * 0x2f4) = 0x12c;
 				d2_SetElementFont(h, 0x54);
 				fcn_00534160(0xa0, y,
@@ -118,8 +118,8 @@ void __cdecl fcn_0058bfd0(int* a0)
 			r += 3;
 		} while (i < n);
 	}
-	*(int*) (a0[2] * 0x3cc + 0x1016198) = saved;
-	d2_SetForm(a0[0], 5);
+	*(int*) (ctx[2] * 0x3cc + 0x1016198) = saved;
+	d2_SetForm(ctx[0], 5);
 	io_AppendText(g_6811b0);
 	io_FormatTextBuffer(buf, "%1N3",
 	             *(unsigned short*) (g_7f4ca0 +

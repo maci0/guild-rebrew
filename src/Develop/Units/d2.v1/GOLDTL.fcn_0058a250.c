@@ -46,11 +46,11 @@ void __cdecl fcn_0058a250(int a0)
 	int ids[3];
 	int q[20];
 	char req[0xf8];
-	char* v6;
+	char* targetEntity;
 	int dlg;
 	int elem;
-	int v22;
-	int v20;
+	int confirmButton;
+	int cancelButton;
 	int v16;
 	int sel;
 	int id;
@@ -66,12 +66,12 @@ void __cdecl fcn_0058a250(int a0)
 	for (i = 7; i < 15; i++) {
 		q[i] = -1;
 	}
-	v6 = (char*) fcn_005cd440(q, (char*) *(int*) 0x14b5310, 0, 0);
-	if (v6 == 0) {
+	targetEntity = (char*) fcn_005cd440(q, (char*) *(int*) 0x14b5310, 0, 0);
+	if (targetEntity == 0) {
 		fcn_00532ef0();
 		return;
 	}
-	n = fcn_004e99c0(*(unsigned char*) (v6 + 0x166)) / 3 + 2;
+	n = fcn_004e99c0(*(unsigned char*) (targetEntity + 0x166)) / 3 + 2;
 	ids[0] = n + 3;
 	ids[1] = n + 5;
 	ids[2] = n + 8;
@@ -90,19 +90,19 @@ void __cdecl fcn_0058a250(int a0)
 	fcn_00468bb0(elem, 3, *(int*) 0x14b5320, *(int*) 0x14b5324, *(int*) 0x14b5328);
 	d2_SetForm(dlg, 3);
 	v16 = io_AppendText(0x4003);
-	v22 = fcn_00472250(dlg, 3, v16);
-	v20 = fcn_00472250(dlg, 3, v16 + 1);
+	confirmButton = fcn_00472250(dlg, 3, v16);
+	cancelButton = fcn_00472250(dlg, 3, v16 + 1);
 	g_100f1dc = -1;
 	do {
 		v16 = fcn_00471f80(elem);
 		d2_SetForm(dlg, 1);
 		io_AppendText(0x6811b0);
-		io_AppendText(0x3ffd, 0x3ffb, *(unsigned short*) v6, n);
+		io_AppendText(0x3ffd, 0x3ffb, *(unsigned short*) targetEntity, n);
 		cost = ids[v16]; io_AppendText(0x3ffe, cost);
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			if (d2_CurrentElementId == v22) {
+			if (d2_CurrentElementId == confirmButton) {
 				if (fcn_00525f60(g_slot_table + g_774970 * 0x21c, cost) == 1 && fcn_005898f0((void*) a0) != 0) {
 					fcn_005100f0(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -cost);
 					for (i = 0; i < 0x3e; i++) {
@@ -119,12 +119,12 @@ void __cdecl fcn_0058a250(int a0)
 					*(int*) (req + 0x5c) = *(int*) (a0 + 1);
 					*(int*) (req + 0x30) = g_7f4c08;
 					*(short*) (req + 0x34) = g_7f4c0c;
-					*(int*) (req + 0x60) = *(int*) (v6 + 4);
+					*(int*) (req + 0x60) = *(int*) (targetEntity + 4);
 					*(int*) (req + 0x6c) = v16;
-					if (*(int*) (v6 + 0x170) != 0) {
-						sel = *(int*) (*(int*) (v6 + 0x170) + 1);
-					} else if (*(int*) (v6 + 0x16c) != 0) {
-						sel = *(int*) (*(int*) (v6 + 0x16c) + 1);
+					if (*(int*) (targetEntity + 0x170) != 0) {
+						sel = *(int*) (*(int*) (targetEntity + 0x170) + 1);
+					} else if (*(int*) (targetEntity + 0x16c) != 0) {
+						sel = *(int*) (*(int*) (targetEntity + 0x16c) + 1);
 					} else {
 						v16 = -1;
 						fcn_004a5e60((unsigned short*) (g_slot_table + g_774970 * 0x21c), 0, 0x7b4c4a0, 0, 0.0f, 100.0f, &v16);
@@ -139,7 +139,7 @@ void __cdecl fcn_0058a250(int a0)
 					}
 					fcn_004c3030(-7, 0, (char*) 0x6a9508, 0);
 				}
-			} else if (d2_CurrentElementId == v20) {
+			} else if (d2_CurrentElementId == cancelButton) {
 				g_774654 = 1;
 			}
 		}

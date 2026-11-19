@@ -36,7 +36,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00535960(void);
 
 /* ADDRESS: GOLDTL 0x005017a0 */
-void __cdecl fcn_005017a0(int a0)
+void __cdecl fcn_005017a0(int player)
 {
 	Slot rec;
 	Slot* p;
@@ -58,8 +58,8 @@ void __cdecl fcn_005017a0(int a0)
 	if (g_773d78 == 0) {
 		return;
 	}
-	s = (Slot*) (g_85ab90 + a0 * 0x2a90);
-	if (a0 == g_773d75) {
+	s = (Slot*) (g_85ab90 + player * 0x2a90);
+	if (player == g_773d75) {
 		p = s;
 		for (n = 0x55; n != 0; n--) {
 			p->active = 0;
@@ -121,7 +121,7 @@ void __cdecl fcn_005017a0(int a0)
 						}
 					}
 				}
-				fcn_004c6190((char*) &rec, (char) a0);
+				fcn_004c6190((char*) &rec, (char) player);
 			}
 			s = (Slot*) ((char*) s + 0x80);
 			p = (Slot*) ((char*) p + 0x80);
@@ -150,7 +150,7 @@ void __cdecl fcn_005017a0(int a0)
 			}
 		}
 	} else {
-		e = (unsigned char*) gm_FindKind47ByOwner(a0);
+		e = (unsigned char*) gm_FindKind47ByOwner(player);
 		if (e == 0) {
 			return;
 		}
@@ -179,7 +179,7 @@ void __cdecl fcn_005017a0(int a0)
 				} else {
 					rec.active = 0;
 				}
-				fcn_004c6190((char*) &rec, (char) a0);
+				fcn_004c6190((char*) &rec, (char) player);
 			}
 			p = (Slot*) ((char*) p + 0x80);
 		}

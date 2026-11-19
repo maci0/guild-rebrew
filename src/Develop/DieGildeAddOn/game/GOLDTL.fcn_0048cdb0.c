@@ -78,7 +78,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 	char name[0xb8];
 	char line[0x400];
 	int totals[4];
-	char* v2;
+	char* item;
 	char* e;
 	char* g;
 	char* q;
@@ -98,8 +98,8 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 		return 0;
 	fcn_0050cce0(*(char**) (o + 0x16c), name, 0);
 	for (i = 0; i < *(int*) 0x100e74c; i++) {
-		v2 = (char*) *(int*) (0x100dbc0 + i * 4);
-		if (*(unsigned char*) (v2 + 0x12) < 0x21) {
+		item = (char*) *(int*) (0x100dbc0 + i * 4);
+		if (*(unsigned char*) (item + 0x12) < 0x21) {
 			memset(&m, 0, 0xf8);
 			m.type = 0x10;
 			m.flag2 = 1;
@@ -110,11 +110,11 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			m.p30 = g_7f4c08;
 			m.p34 = g_7f4c0c;
 			fcn_00500bb0(&m.p28, 0, 0, 10);
-			m.f58 = *(int*) (v2 + 2);
+			m.f58 = *(int*) (item + 2);
 			m.slots[0] = 5;
 			m.ids[4] = 0;
 			m.ids[5] = 0;
-			m.f5c = 100 - (int) *(unsigned char*) (v2 + 0x12);
+			m.f5c = 100 - (int) *(unsigned char*) (item + 0x12);
 			fcn_004c5530(&m);
 		}
 		else {
@@ -127,8 +127,8 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 				m.ids[j + 3] = 0;
 				m.slots[j + 3] = -1;
 			}
-			fcn_0050de80(v2, &st);
-			q = fcn_00502cd0(*(int*) (v2 + 0x14), 1, 0, 0x1dd);
+			fcn_0050de80(item, &st);
+			q = fcn_00502cd0(*(int*) (item + 0x14), 1, 0, 0x1dd);
 			if (st.x0 > 0) {
 				for (idx = 0; idx < st.x0; idx++) {
 					if (st.x48[idx] == 0)
@@ -227,7 +227,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			m.p30 = g_7f4c08;
 			m.p34 = g_7f4c0c;
 			m.flag2 = 1;
-			m.f58 = *(int*) (v2 + 2);
+			m.f58 = *(int*) (item + 2);
 			m.f5c = lim;
 			m.f60 = *(int*) (o + 4);
 			for (kind = 1; kind < 4; kind++) {

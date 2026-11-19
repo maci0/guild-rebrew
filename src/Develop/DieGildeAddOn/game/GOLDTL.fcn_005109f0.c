@@ -9,7 +9,7 @@ int __cdecl strcmpi(const char* a0, const char* a1);
 int __cdecl sprintf(char* a0, const char* a1, ...);
 
 /* ADDRESS: GOLDTL 0x005109f0 */
-void __cdecl fcn_005109f0(int a0)
+void __cdecl fcn_005109f0(int sceneObject)
 {
 	char name[128];
 	char buf[256];
@@ -18,15 +18,15 @@ void __cdecl fcn_005109f0(int a0)
 	int i;
 	char* p;
 
-	if (fcn_005105a0(a0) == 0) {
+	if (fcn_005105a0(sceneObject) == 0) {
 		return;
 	}
-	if (*(int*) (a0 + 0x48) != -1 && (id = *(int*) (a0 + 0x48) & 0xffffff, *(char*) (a0 + 0x4b) == 2) &&
-	    *(int*) (a0 + 0x218) != 0) {
+	if (*(int*) (sceneObject + 0x48) != -1 && (id = *(int*) (sceneObject + 0x48) & 0xffffff, *(char*) (sceneObject + 0x4b) == 2) &&
+	    *(int*) (sceneObject + 0x218) != 0) {
 
 		if (id == 0x47) {
 			v = gm_AllocGebaeude(0x47, 0xffff);
-			strcpy(name, (char*) fcn_0064d1a0(a0, 0x5f) + 1);
+			strcpy(name, (char*) fcn_0064d1a0(sceneObject, 0x5f) + 1);
 			i = 1;
 			p = (char*) 0x868354;
 			do {
@@ -44,11 +44,11 @@ void __cdecl fcn_005109f0(int a0)
 		}
 		if (v != 0) {
 			sprintf(buf, (char*) 0x6a1bdc, *(int*) (0x14a6558 + id * 56));
-			*(int*) (v + 0x61) = a0;
-			*(int*) (a0 + 0x204) = v;
+			*(int*) (v + 0x61) = sceneObject;
+			*(int*) (sceneObject + 0x204) = v;
 		}
 	}
-	if (*(int*) (a0 + 0x218) == 0 && *(int*) (a0 + 0x1fc) != 0) {
-		*(int*) (a0 + 0x204) = *(int*) (*(int*) (a0 + 0x1fc) + 0x204);
+	if (*(int*) (sceneObject + 0x218) == 0 && *(int*) (sceneObject + 0x1fc) != 0) {
+		*(int*) (sceneObject + 0x204) = *(int*) (*(int*) (sceneObject + 0x1fc) + 0x204);
 	}
 }

@@ -27,7 +27,7 @@ int __cdecl fcn_00445f50(int, float, float, int);
 void __cdecl fcn_004463f0(int, int, float);
 
 /* ADDRESS: GOLDTL 0x004e1b00 */
-void __cdecl fcn_004e1b00(int a0)
+void __cdecl fcn_004e1b00(int eventRecord)
 {
 	int mode;
 	unsigned short* p;
@@ -48,13 +48,13 @@ void __cdecl fcn_004e1b00(int a0)
 	ranges[2] = 12000;
 	ranges[3] = 15000;
 	ranges[4] = 10000;
-	p = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
+	p = (unsigned short*) gm_LookupEntityRecordById(*(int*) (eventRecord + 0x34));
 	if (p == 0) {
 		return;
 	}
-	q = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
-	r = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x3c));
-	s = (unsigned short*) gm_LookupEntityRecordById(*(int*) (a0 + 0x40));
+	q = (unsigned short*) gm_LookupEntityRecordById(*(int*) (eventRecord + 0x38));
+	r = (unsigned short*) gm_LookupEntityRecordById(*(int*) (eventRecord + 0x3c));
+	s = (unsigned short*) gm_LookupEntityRecordById(*(int*) (eventRecord + 0x40));
 	cut_EventLoopFlags = 0x702c6;
 	d2_SuppressOverlay = 1;
 	fcn_004e4730((char*) 0x68cfb0);
@@ -98,10 +98,10 @@ void __cdecl fcn_004e1b00(int a0)
 	sprintf(s_dst, (char*) 0x679060, id + 4);
 	fcn_004e44b0((char*) 0x68cf80, buf);
 	fcn_004e44f0(fcn_004e44b0((char*) 0x68cf54, (char*) 0x6b5c60));
-	if (*(int*) (a0 + 0xc) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
+	if (*(int*) (eventRecord + 0xc) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
 		fcn_004ff210(*p, (int) -(*(float*) ((char*) p + 0x1c) + *(float*) 0x662a98));
 	}
-	switch (*(char*) (a0 + 0x7c)) {
+	switch (*(char*) (eventRecord + 0x7c)) {
 	case 0:
 		scene = (char*) 0x68cf28;
 		break;
@@ -120,7 +120,7 @@ void __cdecl fcn_004e1b00(int a0)
 	}
 	fcn_004e44b0(scene, (char*) 0x6b5c60);
 done:
-	fcn_004e4de0(ranges[*(char*) (a0 + 0x7c)]);
+	fcn_004e4de0(ranges[*(char*) (eventRecord + 0x7c)]);
 	fcn_004e48b0();
 	fcn_004e44f0(fcn_004e44b0((char*) 0x68ce6c, (char*) 0x6b5c60));
 	if (mode != 0) {

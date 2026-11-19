@@ -11,7 +11,7 @@ int __cdecl fcn_004ec710(void);
 int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x00490c90 */
-int __cdecl fcn_00490c90(char* a0, int a1, int* a2)
+int __cdecl fcn_00490c90(char* entity, int a1, int* outResult)
 {
 	int v5[9];
 	int mode;
@@ -23,7 +23,7 @@ int __cdecl fcn_00490c90(char* a0, int a1, int* a2)
 	float k;
 	int d;
 
-	mode = gm_MapEntityStatRange(*(unsigned char*) (a0 + 0x164));
+	mode = gm_MapEntityStatRange(*(unsigned char*) (entity + 0x164));
 	if (gm_GameTime >= 4) {
 		fcn_004f4830(9, v5);
 		f = fcn_004fbd40();
@@ -47,22 +47,22 @@ int __cdecl fcn_00490c90(char* a0, int a1, int* a2)
 		}
 		if (v5[6] - 3 > r) {
 			v = gm_RandomMod(3) & 0xffff; v = v5[6] - v - 1;
-			*a2 = v;
+			*outResult = v;
 			if (v5[1] > v) {
-				*a2 = v5[1];
+				*outResult = v5[1];
 				return 1;
 			}
-			*a2 = v;
+			*outResult = v;
 			return 1;
 		}
 		if (v5[6] + 3 < r) {
 			v = (gm_RandomMod(3) & 0xffff) + v5[6] + 1;
-			*a2 = v;
+			*outResult = v;
 			if (v5[2] < v) {
-				*a2 = v5[2];
+				*outResult = v5[2];
 				return 1;
 			}
-			*a2 = v;
+			*outResult = v;
 			return 1;
 		}
 	}

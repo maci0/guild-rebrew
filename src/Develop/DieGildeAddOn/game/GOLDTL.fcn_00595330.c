@@ -48,7 +48,7 @@ typedef struct Stock {
 #define g_id_field(row, ofs) (*(unsigned short*) (lpObjektePROT + g_row_type(row) * 0x41 + (ofs)))
 
 /* ADDRESS: GOLDTL 0x00595330 */
-void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
+void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4)
 {
 	char numbuf[32];
 	char* slot;
@@ -75,13 +75,13 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 		ent = (char*) *(int*) 0x7746c4;
 	}
 	gm_GetBuildingTypeCategory((unsigned char) *ent);
-	d2_SetForm(a0, 0);
-	d2_SetForm(a0, a1);
+	d2_SetForm(windowId, 0);
+	d2_SetForm(windowId, formId);
 	fcn_0050cce0(ent, &stock, 1);
 
-	if (a2 > 0) {
+	if (rowCount > 0) {
 		row = g_row(0);
-		for (i = a2; i > 0; i--) {
+		for (i = rowCount; i > 0; i--) {
 			g_row_sel(row) = -1;
 			if (*(int*) 0x7798a0) {
 				for (j = 0; j < 4; j++) {
@@ -94,7 +94,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 		}
 	}
 
-	for (i = 0; i < a2; i++) {
+	for (i = 0; i < rowCount; i++) {
 		row = g_row(i);
 		delta = 0;
 		pick = 0;
@@ -329,7 +329,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 			}
 		}
 
-		d2_SetForm(a0, a1);
+		d2_SetForm(windowId, formId);
 	}
 
 	if (i >= 0x10) {

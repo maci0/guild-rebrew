@@ -31,7 +31,7 @@ int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005a2080 */
-void __cdecl fcn_005a2080(int a0, int a1)
+void __cdecl fcn_005a2080(int building, int table)
 {
 	int sel[4][0xe];
 	int join[3];
@@ -61,7 +61,7 @@ void __cdecl fcn_005a2080(int a0, int a1)
 	d2_SetForm(win, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
-	ip = (unsigned int*) (a1 + 0x1c);
+	ip = (unsigned int*) (table + 0x1c);
 	for (;;) {
 		i = 0;
 		n = 0;
@@ -116,7 +116,7 @@ void __cdecl fcn_005a2080(int a0, int a1)
 		if (changed) {
 			d2_SetForm(win, 1);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-			io_AppendText((char*) 0x188c, a0);
+			io_AppendText((char*) 0x188c, building);
 			if (n == 0) {
 				io_AppendText((char*) 0x188e);
 			} else {
@@ -161,7 +161,7 @@ label_5a23ad:
 
 			if (g_100f1dc == 2) {
 				join[0] = 0x6a6f696e;
-				join[2] = *(int*) (a0 + 1);
+				join[2] = *(int*) (building + 1);
 				join[1] = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
 				fcn_004c4eb0("stammtisch join H-Plr");
 				next = fcn_004c6900(join);
@@ -171,7 +171,7 @@ label_5a23ad:
 					fcn_005373e0(0, 0x20007);
 					n = fcn_004c4450(next);
 				}
-				io_FormatTextBuffer(buf, (n != 1) ? 0x189f : 0x189e, a0);
+				io_FormatTextBuffer(buf, (n != 1) ? 0x189f : 0x189e, building);
 			}
 			if (buf[0] != 0) {
 				fcn_00526120(buf, 0);

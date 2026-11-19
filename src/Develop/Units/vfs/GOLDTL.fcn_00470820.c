@@ -39,13 +39,13 @@ char* __cdecl strcat(char*, const char*);
 int __cdecl strcmp(const char*, const char*);
 
 /* ADDRESS: GOLDTL 0x00470820 */
-int __cdecl fcn_00470820(int a0, int a1, char* a2)
+int __cdecl fcn_00470820(int a0, int a1, char* formName)
 {
 	char v22[256];
-	char v21[256];
+	char formPath[256];
 	char v23[8];
 	int v40;
-	int v24;
+	int formCount;
 	int v25;
 	int* v26;
 	int v27;
@@ -92,18 +92,18 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 	char* c;
 	char ch;
 
-	v21[0] = g_6b5c60;
-	memset(v21 + 1, 0, 255);
+	formPath[0] = g_6b5c60;
+	memset(formPath + 1, 0, 255);
 
-	strcpy(v21, a2);
+	strcpy(formPath, formName);
 	if (!g_772560) {
-		strcpy(v21, s_67d268);
-		strcat(v21, a2);
-		strcat(v21, ".form");
+		strcpy(formPath, s_67d268);
+		strcat(formPath, formName);
+		strcat(formPath, ".form");
 	}
-	v15 = (int) vfs_Tfopen(v21, (char*) 0x6750e8, g_6b7fdc);
+	v15 = (int) vfs_Tfopen(formPath, (char*) 0x6750e8, g_6b7fdc);
 	if (!v15) {
-		sprintf(v22, s_67d774, a2);
+		sprintf(v22, s_67d774, formName);
 		return -1;
 	}
 	vfs_ReadData(v23, 1, 4, (void*) v15);
@@ -112,11 +112,11 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 	if (v40 != 2) {
 		v40 = 0;
 		vfs_fseek((void*) v15, 0, 0);
-		vfs_ReadData((char*) &v24, 4, 1, (void*) v15);
-		vfs_ReadData((char*) 0x6b8b00, 0xed4, v24, (void*) v15);
+		vfs_ReadData((char*) &formCount, 4, 1, (void*) v15);
+		vfs_ReadData((char*) 0x6b8b00, 0xed4, formCount, (void*) v15);
 	} else {
-		vfs_ReadData((char*) &v24, 4, 1, (void*) v15);
-		vfs_ReadData((char*) 0x711a80, 0x101c, v24, (void*) v15);
+		vfs_ReadData((char*) &formCount, 4, 1, (void*) v15);
+		vfs_ReadData((char*) 0x711a80, 0x101c, formCount, (void*) v15);
 	}
 	CloseVfsStream((void*) v15);
 	v35 = 1;
@@ -135,7 +135,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 	v44 = 0;
 	v15 = v35 * 700;
 	*(int*) (v15 + 0x10382d4) = g_772528 - 1;
-	if (v24 > 0) {
+	if (formCount > 0) {
 		v39 = (int*) 0x6b8b00;
 		v36 = (int*) 0x712950;
 		v43 = v35 * 0xaf;
@@ -374,7 +374,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 			v32++;
 			v36 += 0x407;
 			v39 += 0x3b5;
-		} while (v44 < v24);
+		} while (v44 < formCount);
 	}
 	v13 = v35;
 	*(unsigned int*) (v15 + 0x10382d0) = 1;
@@ -383,7 +383,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 	*(int*) (v15 + 0x1038140) = v35;
 	g_772534 = v35;
 	g_772560 = 0;
-	strcpy((char*) (v15 + 0x1038374), a2);
+	strcpy((char*) (v15 + 0x1038374), formName);
 	v15 = *(int*) (v15 + 0x1038144) * 0x3cc;
 	if (a0 || a1)
 		fcn_00469c40(a0, a1,

@@ -11,8 +11,8 @@ void __cdecl fcn_00477560(const void* src, char* hdr);
    replace the two row markers with blanks, pack the glyph runs into the
    block and return a right-sized copy. */
 /* ADDRESS: GOLDTL 0x00478400 */
-unsigned int* __cdecl fcn_00478400(int a0, int a1, unsigned int a2,
-                                   unsigned int a3, int a4, char a5, int a6)
+unsigned int* __cdecl fcn_00478400(int a0, int a1, unsigned int width,
+                                   unsigned int height, int a4, char a5, int stride)
 {
     int* v1;
     int v10;
@@ -40,19 +40,19 @@ unsigned int* __cdecl fcn_00478400(int a0, int a1, unsigned int a2,
     unsigned int v8;
     int v9;
 
-    v19 = a3;
-    v16 = a2;
+    v19 = height;
+    v16 = width;
     v18 = 0;
     v25 = 0;
     v24 = 0;
-    v26 = a3;
+    v26 = height;
     v28 = 0;
-    v7 = (unsigned int*) m_alloc((a2 * 8 + 4) * a3 + 0x32, (char*) 0x67d9dc);
+    v7 = (unsigned int*) m_alloc((width * 8 + 4) * height + 0x32, (char*) 0x67d9dc);
     if ((int) v19 > 0) {
-        v13 = a1 * a6 + a0 + a4;
+        v13 = a1 * stride + a0 + a4;
         do {
             v8 = 0;
-            if ((int) a2 > 0) {
+            if ((int) width > 0) {
                 do {
                     v6 = *(char*) (v13 + v8);
                     if (v6) {
@@ -70,11 +70,11 @@ unsigned int* __cdecl fcn_00478400(int a0, int a1, unsigned int a2,
                         }
                     }
                     v8 += 1;
-                } while ((int) v8 < (int) a2);
-                v19 = a3;
+                } while ((int) v8 < (int) width);
+                v19 = height;
             }
             v18 += 1;
-            v13 += a6;
+            v13 += stride;
         } while ((int) v18 < (int) v19);
     }
     if ((v16 & 0xffff) <= (v25 & 0xffff)) {
@@ -100,8 +100,8 @@ bounds_done:
     *(short*) ((char*) v7 + 0x12) = (short) v25 + 1;
     if ((int) v19 > 0) {
         do {
-            v19 = a2;
-            if ((int) a2 > 0) {
+            v19 = width;
+            if ((int) width > 0) {
                 do {
                     v9 = (unsigned int) *(unsigned char*) (v13 + a4) * 4;
                     if ((unsigned char) g_100eb80[v9 + 0] ==
@@ -117,15 +117,15 @@ bounds_done:
                 v16 = v27;
             }
             v13 += 1;
-        } while (v13 < (int) a3);
+        } while (v13 < (int) height);
     }
     v15 = (unsigned short) v16;
     v19 = 0;
-    if ((int) a3 > 0) {
-        v13 = a1 * a6 + a0 + a4;
+    if ((int) height > 0) {
+        v13 = a1 * stride + a0 + a4;
         do {
             v18 = 0;
-            if ((int) a2 > 0) {
+            if ((int) width > 0) {
                 do {
                     v9 = (unsigned int) *(unsigned char*) (v13 + v18) * 4;
                     if ((unsigned char) g_100eb80[v9 + 0] ==
@@ -149,12 +149,12 @@ bounds_done:
                         }
                     }
                     v18 += 1;
-                } while ((int) v18 < (int) a2);
+                } while ((int) v18 < (int) width);
             }
             v15 = (unsigned short) v16;
             v19 += 1;
-            v13 += a6;
-        } while ((int) v19 < (int) a3);
+            v13 += stride;
+        } while ((int) v19 < (int) height);
     }
     *(short*) ((char*) v7 + 0x1a) = (short) v25;
     v16 = 0;
@@ -164,7 +164,7 @@ bounds_done:
     *v7 = 0x32;
     v26 = 0;
     if (*(short*) ((char*) v7 + 10)) {
-        v9 = a1 * a6;
+        v9 = a1 * stride;
         v13 = v9 + a0 + a4;
         do {
             v27 = 0;
@@ -207,8 +207,8 @@ bounds_done:
                 } while (v10 < (int) (*(unsigned short*) ((char*) v7 + 6)));
                 v16 = v26;
             }
-            v9 += a6;
-            v13 += a6;
+            v9 += stride;
+            v13 += stride;
             *v1 = v27;
             v16 += 1;
             v26 = v16;

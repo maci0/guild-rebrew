@@ -66,7 +66,7 @@ void __cdecl ResetDisplayCounters(void);
 int __cdecl __itoa(int, char*, int);
 
 /* ADDRESS: GOLDTL 0x005c72f0 */
-int __cdecl fcn_005c72f0(int a0)
+int __cdecl fcn_005c72f0(int objectArg)
 {
 	int v7;
 	int v8;
@@ -93,10 +93,10 @@ int __cdecl fcn_005c72f0(int a0)
 	int* rec;
 	int win;
 
-	v7 = a0;
+	v7 = objectArg;
 	v15 = 0;
 	v8 = -1;
-	v15 = fcn_00525fb0(a0);
+	v15 = fcn_00525fb0(objectArg);
 	if (v15 != 0) {
 		return v15;
 	}
@@ -128,14 +128,14 @@ int __cdecl fcn_005c72f0(int a0)
 	def = g_item_def_table + (unsigned int) *p * 0x41;
 	v16 = win * 0xaf;
 label_5c7466:
-	v7 = a0;
+	v7 = objectArg;
 	if (*p != 0x116 && *def != 0x11) {
 		if (*def == 0x05) {
-			v15 = fcn_00595e20(a0, (int) p);
+			v15 = fcn_00595e20(objectArg, (int) p);
 			fcn_005963f0(win, 1, 1, v7);
 		}
 	} else {
-		v15 = fcn_005974e0(a0, (int) p);
+		v15 = fcn_005974e0(objectArg, (int) p);
 		fcn_00597940(win, 1, 1, v7, (int) p);
 	}
 	if (g_100f1dc != -1 && v15 != 0) {

@@ -26,7 +26,7 @@ int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_0050b710(int, unsigned char);
 
 /* ADDRESS: GOLDTL 0x0051e490 */
-int __cdecl fcn_0051e490(void* a0, int a1)
+int __cdecl fcn_0051e490(void* outputStream, int a1)
 {
 	char hdr[0x10];
 	char name[0x20];
@@ -68,11 +68,11 @@ int __cdecl fcn_0051e490(void* a0, int a1)
 	buf = m_alloc(0xe100, g_6a23b0);
 	v11 = 0x1005a;
 	ls_SaveVersion = 0x1005a;
-	r = vfs_fwrite(&v11, 4, 1, a0);
+	r = vfs_fwrite(&v11, 4, 1, outputStream);
 	if (r <= 0) {
 		goto fail;
 	}
-	r = vfs_fwrite(&a1, 1, 1, a0);
+	r = vfs_fwrite(&a1, 1, 1, outputStream);
 	if (r <= 0) {
 		goto fail;
 	}
@@ -85,74 +85,74 @@ int __cdecl fcn_0051e490(void* a0, int a1)
 	pair[1] = *(unsigned int*) (base + 0x44);
 	v14 = *(char*) (base + 0x48);
 	v15 = g_6a375c;
-	if (vfs_fwrite(name, 0x20, 1, a0) <= 0) {
+	if (vfs_fwrite(name, 0x20, 1, outputStream) <= 0) {
 		goto fail;
 	}
-	if (vfs_fwrite(pair, 8, 1, a0) <= 0) {
+	if (vfs_fwrite(pair, 8, 1, outputStream) <= 0) {
 		goto fail;
 	}
-	if (vfs_fwrite(&v14, 1, 1, a0) <= 0) {
+	if (vfs_fwrite(&v14, 1, 1, outputStream) <= 0) {
 		goto fail;
 	}
-	if (vfs_fwrite(&v15, 1, 1, a0) <= 0) {
+	if (vfs_fwrite(&v15, 1, 1, outputStream) <= 0) {
 		goto fail;
 	}
-	if (vfs_fwrite(gm_GameTime, 0xe, 1, a0) <= 0) {
+	if (vfs_fwrite(gm_GameTime, 0xe, 1, outputStream) <= 0) {
 		goto fail;
 	}
 	if (g_774970 != 0xffff) {
 		n = g_774970;
 		p = (char*)&((ENTITY_RECORD*)g_7f4ca0)[n];
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_02c[4], 0x10, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_02c[4], 0x10, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_02c[0x14], 0x10, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_02c[0x14], 0x10, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_00c, 1, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_00c, 1, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_052[2], 4, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_052[2], 4, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_164, 1, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_164, 1, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_165[1], 1, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_165[1], 1, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_00d, 1, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_00d, 1, 1, outputStream) <= 0) {
 			goto fail;
 		}
 		tmp = fcn_0050b710(gm_WalkEntityChain(g_774970), g_773d75);
-		if (vfs_fwrite(&tmp, 4, 1, a0) <= 0) {
+		if (vfs_fwrite(&tmp, 4, 1, outputStream) <= 0) {
 			goto fail;
 		}
 		s = &((ENTITY_RECORD*)g_7f4ca0)[g_774970].gender;
 	} else {
 		/* Native prologue initializes all four default bytes. */
-		if (vfs_fwrite(hdr, 0x10, 1, a0) <= 0) {
+		if (vfs_fwrite(hdr, 0x10, 1, outputStream) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(&b1, 1, 1, a0) <= 0) {
+		if (vfs_fwrite(&b1, 1, 1, outputStream) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(&b3, 1, 1, a0) <= 0) {
+		if (vfs_fwrite(&b3, 1, 1, outputStream) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(&b0, 1, 1, a0) <= 0) {
+		if (vfs_fwrite(&b0, 1, 1, outputStream) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(zq, 4, 1, a0) <= 0) {
+		if (vfs_fwrite(zq, 4, 1, outputStream) <= 0) {
 			return 0;
 		}
 		s = &b2;
 	}
-	if (vfs_fwrite(s, 1, 1, a0) <= 0) {
+	if (vfs_fwrite(s, 1, 1, outputStream) <= 0) {
 fail:
 		return 0;
 	}
-	if (vfs_fwrite(&g_773de8, 1, 1, a0) <= 0) {
+	if (vfs_fwrite(&g_773de8, 1, 1, outputStream) <= 0) {
 		return 0;
 	}
 	v22 = -1;
@@ -161,15 +161,15 @@ fail:
 	} else if (g_7746c8 != 0) {
 		v22 = *(unsigned int*) (g_7746c8 + 1);
 	}
-	vfs_fwrite(&v22, 4, 1, a0);
+	vfs_fwrite(&v22, 4, 1, outputStream);
 	if (g_7746cc != 0) {
 		v22 = *(unsigned int*) (g_7746cc + 2);
 	} else {
 		v22 = -1;
 	}
-	vfs_fwrite(&v22, 4, 1, a0);
+	vfs_fwrite(&v22, 4, 1, outputStream);
 	for (n = 0; n < 8; n++) {
-		vfs_fwrite(g_7f3ac4 + n * 8, 4, 1, a0);
+		vfs_fwrite(g_7f3ac4 + n * 8, 4, 1, outputStream);
 	}
 	tmp = 0x78;
 	do {
@@ -183,14 +183,14 @@ fail:
 		} while (j != 0);
 		tmp = tmp - 1;
 	} while (tmp != 0);
-	r = vfs_fwrite(buf, 0xe100, 1, a0);
+	r = vfs_fwrite(buf, 0xe100, 1, outputStream);
 	if (r <= 0) {
 		return 0;
 	}
 	if (buf != 0) {
 		m_FreeTracked(buf);
 	}
-	vfs_fwrite(g_7747b4, 4, 1, a0);
-	vfs_fwrite(g_7e2480, 0x60, 1, a0);
+	vfs_fwrite(g_7747b4, 4, 1, outputStream);
+	vfs_fwrite(g_7e2480, 0x60, 1, outputStream);
 	return 1;
 }

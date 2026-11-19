@@ -31,7 +31,7 @@ int __cdecl fcn_004c5c80(int);
 int __cdecl fcn_00546190(int);
 
 /* ADDRESS: GOLDTL 0x00552a60 */
-void __cdecl fcn_00552a60(int a0)
+void __cdecl fcn_00552a60(int event)
 {
 	unsigned char v1;
 	unsigned char v2;
@@ -50,52 +50,52 @@ void __cdecl fcn_00552a60(int a0)
 	int v17;
 	int v18;
 
-	v4 = gm_GetElapsedMinutes((char*) a0 + 0xc4, (char*) 0x7f4c00);
+	v4 = gm_GetElapsedMinutes((char*) event + 0xc4, (char*) 0x7f4c00);
 	v14 = 0;
 	v17 = 0;
 	v15 = 0;
-	v5 = (int) gm_LookupEntityRecordById(*(int*) (a0 + 0xd4));
-	v6 = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0x10));
+	v5 = (int) gm_LookupEntityRecordById(*(int*) (event + 0xd4));
+	v6 = gm_StartFilteredEntitySearch(1, 1, *(int*) (event + 0x10));
 	v18 = v5;
 	if (v6 != 0 && *(unsigned short*) (v6 + 0x27) != 0xffff) {
 		v5 = *(unsigned short*) (v6 + 0x27) * 0x21c + 0x7f4ca0;
 		v18 = v5;
 	}
-	if (*(int*) (a0 + 0x70) != -2 && v5 != 0) {
+	if (*(int*) (event + 0x70) != -2 && v5 != 0) {
 		v14 = 0;
 		do {
-			if (6 <= *(unsigned char*) (a0 + 0xd2)) {
+			if (6 <= *(unsigned char*) (event + 0xd2)) {
 				if (v14 == 0) {
-					*(char*) (a0 + 0xd2) = 0;
+					*(char*) (event + 0xd2) = 0;
 					return;
 				}
 				break;
 			}
 			v14 = (unsigned short*) gm_LookupEntityRecordById(
-			    *(int*) (a0 + 0x8c + *(unsigned char*) (a0 + 0xd2) * 4));
-			v17 = *(unsigned char*) (a0 + 0xd2);
-			*(unsigned char*) (a0 + 0xd2) = *(unsigned char*) (a0 + 0xd2) + 1;
+			    *(int*) (event + 0x8c + *(unsigned char*) (event + 0xd2) * 4));
+			v17 = *(unsigned char*) (event + 0xd2);
+			*(unsigned char*) (event + 0xd2) = *(unsigned char*) (event + 0xd2) + 1;
 		} while (v14 == 0);
-		*(int*) (a0 + 0x70) = 0x1e0 < v4;
-		*(int*) (a0 + 0x52) = gm_GameTime;
-		*(int*) (a0 + 0x56) = *(int*) &g_7f4c04;
-		*(int*) (a0 + 0x5a) = g_7f4c08;
-		*(unsigned short*) (a0 + 0x5e) = g_7f4c0c;
-		fcn_00500bb0((int*) (a0 + 0x52), 0, 6, 0);
-		*(unsigned char*) (a0 + 0xd2) =
-		    (unsigned char) (*(unsigned char*) (a0 + 0xd2) % 6);
+		*(int*) (event + 0x70) = 0x1e0 < v4;
+		*(int*) (event + 0x52) = gm_GameTime;
+		*(int*) (event + 0x56) = *(int*) &g_7f4c04;
+		*(int*) (event + 0x5a) = g_7f4c08;
+		*(unsigned short*) (event + 0x5e) = g_7f4c0c;
+		fcn_00500bb0((int*) (event + 0x52), 0, 6, 0);
+		*(unsigned char*) (event + 0xd2) =
+		    (unsigned char) (*(unsigned char*) (event + 0xd2) % 6);
 		v15 = (int) v14;
 	} else {
-		*(int*) (a0 + 0x70) = 1;
+		*(int*) (event + 0x70) = 1;
 	}
-	if (*(int*) (a0 + 0x70) != 0) {
-		if (*(int*) (a0 + 0x70) == 1) {
-			v4 = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0x10));
+	if (*(int*) (event + 0x70) != 0) {
+		if (*(int*) (event + 0x70) == 1) {
+			v4 = gm_StartFilteredEntitySearch(1, 1, *(int*) (event + 0x10));
 			v14 = 0;
 			v15 = 0;
 			if (v4 != 0 && v5 != 0) {
 				v5 = gm_SetupEntityQuery(v4);
-				v16 = (int*) (a0 + 0x8c);
+				v16 = (int*) (event + 0x8c);
 				v17 = 6;
 				do {
 					v14 = (unsigned short*) gm_LookupEntityRecordById(*v16);
@@ -143,13 +143,13 @@ void __cdecl fcn_00552a60(int a0)
 					}
 				}
 			}
-			fcn_00546190(a0);
+			fcn_00546190(event);
 			return;
 		}
 	} else if (v14 != 0
 	    && *(int*) (*(int*) ((char*) v14 + 0x184) + 0x128) == 0) {
 		v8 = (unsigned char*) gm_StartFilteredEntitySearch(1, 1,
-		    *(int*) (a0 + 0xac + v17 * 4));
+		    *(int*) (event + 0xac + v17 * 4));
 		v13[0] = 10;
 		v13[1] = 5;
 		v13[2] = 7;
@@ -162,7 +162,7 @@ void __cdecl fcn_00552a60(int a0)
 			v9 = (gm_RandomMod((unsigned short) ((v6 + 1) * v6))
 			    & 0xffff) + v6 * 2;
 			v5 = fcn_0050b750(v9 * 2, g_773d75);
-			if (*(char*) (a0 + 0xd8) != 0) {
+			if (*(char*) (event + 0xd8) != 0) {
 				v4 = 0;
 				v6 = 0x20;
 				do {
@@ -182,7 +182,7 @@ void __cdecl fcn_00552a60(int a0)
 						break;
 					}
 				} while (v6);
-				*(char*) (a0 + 0xd8) = *(char*) (a0 + 0xd8) - 1;
+				*(char*) (event + 0xd8) = *(char*) (event + 0xd8) - 1;
 				if (v4 != 0) {
 					v1 = *(unsigned char*) (v4 + 0x82);
 					v2 = *(unsigned char*) (v14 + 0x41);
@@ -226,10 +226,10 @@ void __cdecl fcn_00552a60(int a0)
 		} else {
 			v9 = gm_StartFilteredEntitySearch(1, 5, 10);
 		}
-		fcn_00529160(v9, 0, *v14, a0);
+		fcn_00529160(v9, 0, *v14, event);
 		fcn_004c5c80(*(int*) (v14 + 2));
 		fcn_004c5da0(*(int*) (v14 + 2), *(int*) ((char*) v9 + 1),
 		    -1, 0, 1, (char*) 0x6a5bbc);
-		*(int*) (a0 + 0xac + v17 * 4) = *(int*) ((char*) v9 + 1);
+		*(int*) (event + 0xac + v17 * 4) = *(int*) ((char*) v9 + 1);
 	}
 }

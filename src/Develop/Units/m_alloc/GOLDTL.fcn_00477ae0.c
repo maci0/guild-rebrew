@@ -9,8 +9,8 @@ void __cdecl fcn_004757b0(char*, char, char, char);
    used bounds, repaint both row markers, copy the bounding rows into the block
    header and return a right-sized copy. */
 /* ADDRESS: GOLDTL 0x00477ae0 */
-unsigned int* __cdecl fcn_00477ae0(int a0, int a1, int a2,
-                                   int a3, char* a4, char a5, int a6)
+unsigned int* __cdecl fcn_00477ae0(int x, int y, int width,
+                                   int height, char* pixels, char a5, int stride)
 {
 	unsigned int* v6;
 	unsigned int* v8;
@@ -32,16 +32,16 @@ unsigned int* __cdecl fcn_00477ae0(int a0, int a1, int a2,
 	black[1] = 0;
 	black[2] = 0;
 	xmax = 0;
-	xmin = (unsigned short) a2;
+	xmin = (unsigned short) width;
 	ymax = 0;
-	ymin = (unsigned short) a3;
-	v6 = (unsigned int*) m_alloc((a2 * 0xc + 4) * a3 + 0x32, (char*) 0x67d9a0);
-	if (a3 > 0) {
-		step = a6 * 3;
-		v7 = a4 + (a1 * a6 + a0) * 3;
-		for (row = 0; (int) row < (int) a3; row++) {
+	ymin = (unsigned short) height;
+	v6 = (unsigned int*) m_alloc((width * 0xc + 4) * height + 0x32, (char*) 0x67d9a0);
+	if (height > 0) {
+		step = stride * 3;
+		v7 = pixels + (y * stride + x) * 3;
+		for (row = 0; (int) row < (int) height; row++) {
 			v20 = v7;
-			for (col = 0; (int) col < (int) a2; col++) {
+			for (col = 0; (int) col < (int) width; col++) {
 				if (fcn_00475780(v20, (char*) 0x100f1a0) &&
 				    (int) col > (int) (xmax & 0xffff)) {
 					xmax = (unsigned short) col;
@@ -78,12 +78,12 @@ unsigned int* __cdecl fcn_00477ae0(int a0, int a1, int a2,
 	*(unsigned short*) ((char*) v6 + 0x10) = ymin;
 	*(unsigned short*) ((char*) v6 + 0x12) = (unsigned short) (xmax + 1);
 	*(unsigned short*) ((char*) v6 + 0x14) = (unsigned short) (ymax + 1);
-	if (fcn_00475780((char*) 0x67d95c, black) && 1 <= (int) a3) {
-		step = a6 * 3;
-		v7 = a4 + (a1 * a6 + a0) * 3;
-		for (row = 0; (int) row < (int) a3; row++) {
+	if (fcn_00475780((char*) 0x67d95c, black) && 1 <= (int) height) {
+		step = stride * 3;
+		v7 = pixels + (y * stride + x) * 3;
+		for (row = 0; (int) row < (int) height; row++) {
 			v20 = v7;
-			for (col = 0; (int) col < (int) a2; col++) {
+			for (col = 0; (int) col < (int) width; col++) {
 				if (!fcn_00475780(v20, (char*) 0x67d960)) {
 					xmin = (unsigned short) col;
 					ymin = (unsigned short) row;
@@ -110,8 +110,8 @@ unsigned int* __cdecl fcn_00477ae0(int a0, int a1, int a2,
 	*(unsigned int*) v6 = 0x32;
 	v8 = (unsigned int*) ((char*) v6 + 0x32);
 	if (*(unsigned short*) ((char*) v6 + 0xa) != 0) {
-		v7 = a4 + (a1 * a6 + a0) * 3;
-		step = a6 * 3;
+		v7 = pixels + (y * stride + x) * 3;
+		step = stride * 3;
 		for (i = 0; (int) i < (int) *(unsigned short*) ((char*) v6 + 0xa);
 		     i++) {
 			w = *(unsigned short*) ((char*) v6 + 6);

@@ -54,7 +54,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	int id_b;
 	int v19;
 	int v5;
-	int v8;
+	int dialog;
 	int v9;
 	int v7;
 	unsigned short* v6;
@@ -69,18 +69,18 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	v6 = a1;
 	v4 = *(unsigned int*) (a2 + 4);
 	v3 = *(unsigned int*) &a1[2];
-	v8 = fcn_00470820(0, 0, "locations\\wohnsitz\\geliebte2");
-	d2_SetForm(v8, 0);
+	dialog = fcn_00470820(0, 0, "locations\\wohnsitz\\geliebte2");
+	d2_SetForm(dialog, 0);
 	fcn_005340f0(d2_CurrentWindowId);
-	d2_CenterDialogWindows(v8);
+	d2_CenterDialogWindows(dialog);
 	d2_SetOverlayAnimation(0, 0);
-	d2_SetForm(v8, 1);
+	d2_SetForm(dialog, 1);
 	io_AppendText("$C$Z$[%1N3$]", *v6);
-	d2_SetForm(v8, 3);
+	d2_SetForm(dialog, 3);
 	fcn_00533a60(d2_CurrentWindowId, 0, pair, 2, g_14abc90, g_14abc94);
 	id_a = pair[0];
 	id_b = pair[1];
-	d2_SetForm(v8, 2);
+	d2_SetForm(dialog, 2);
 	*(int*) (cmd + 0x10) = (*(int*) (g_77255c + 0xc) - (int) *(short*) (g_772500 + 0x1ebd8)) / 2;
 	*(int*) (cmd + 0x14) = 0x19;
 	*(unsigned int*) cmd = (unsigned int) v6;
@@ -142,7 +142,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 			g_774654 = 1;
 		}
 		if (!fcn_005373e0(0x59fa80, 0x677c7)) {
-			fcn_00471e30(v8);
+			fcn_00471e30(dialog);
 			return;
 		}
 	}

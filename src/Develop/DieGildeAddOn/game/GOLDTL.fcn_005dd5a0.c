@@ -18,7 +18,7 @@ void __cdecl fcn_005dbe90(char*);
 unsigned int __cdecl fcn_005dd5a0(unsigned short* a0, unsigned int* a1)
 {
 	char v10[256];
-	char v11[2048];
+	char messageText[2048];
 	unsigned int v8[20];
 	unsigned short* v12[3];
 	char v13[4];
@@ -108,15 +108,15 @@ label_5dd807:
 	fcn_004c54c0(*(int*) (v4 + 4), *(int*) (v15 + 4), v6, 1);
 	if ((char) *(unsigned short*) (v4 + 2) == 6 ||
 	    (char) *(unsigned short*) (v4 + 2) == 7) {
-		io_FormatTextBuffer(v11, 0xfec, *(unsigned short*) v12[0],
+		io_FormatTextBuffer(messageText, 0xfec, *(unsigned short*) v12[0],
 		             *(unsigned short*) v12[1], *(unsigned short*) v15);
-		fcn_00545d40(*(int*) (v4 + 4), 0xffffffff, v11, 1, 0x5fb, 0);
+		fcn_00545d40(*(int*) (v4 + 4), 0xffffffff, messageText, 1, 0x5fb, 0);
 	}
-	io_FormatTextBuffer(v11, 0xfed, *(unsigned short*) v4);
+	io_FormatTextBuffer(messageText, 0xfed, *(unsigned short*) v4);
 	for (v6 = 0; v6 < 3; v6++) {
 		v2 = (char) v12[v6][1];
 		if (v2 == 6 || v2 == 7) {
-			fcn_00545d40(*(int*) (v12[v6] + 2), 0xffffffff, v11, 0, 0x5fb,
+			fcn_00545d40(*(int*) (v12[v6] + 2), 0xffffffff, messageText, 0, 0x5fb,
 			             0);
 		}
 	}
@@ -124,8 +124,8 @@ label_5dd807:
 		return 1;
 	}
 	v6 = fcn_005c6220((int) *(unsigned short*) *a1, v13);
-	io_FormatTextBuffer(v11, 0xfe8, *(unsigned short*) (v6 + 0x18) + 1,
+	io_FormatTextBuffer(messageText, 0xfe8, *(unsigned short*) (v6 + 0x18) + 1,
 	             *(unsigned short*) v12[0], *(unsigned short*) v3, *(unsigned short*) v15);
-	fcn_005dbe90(v11);
+	fcn_005dbe90(messageText);
 	return 1;
 }

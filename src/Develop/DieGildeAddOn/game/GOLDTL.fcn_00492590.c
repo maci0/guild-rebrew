@@ -17,7 +17,7 @@ unsigned int __cdecl fcn_00492590(int a0)
 	int col;
 	float* threshold;
 	int cs;
-	int v2;
+	int resultBits;
 	int sel;
 	int v;
 	int bl;
@@ -58,10 +58,10 @@ unsigned int __cdecl fcn_00492590(int a0)
 		cs = row == 0 ? v : row - v;
 	}
 	r = gm_RandomFloat01();
-	v2 = a0;
+	resultBits = a0;
 	for (col = 0; col < 5; col++) {
 		if (r <= tab[cs * 5 + col]) {
-			v2 = (col + 1) * 0x100;
+			resultBits = (col + 1) * 0x100;
 			break;
 		}
 	}
@@ -103,5 +103,5 @@ unsigned int __cdecl fcn_00492590(int a0)
 		((char *)g_772628)[0x80 + i] = (char) (gm_RandomMod(sel) + bl + 1);
 	}
 	((char *)g_772628)[2] = 10;
-	return v2 | a0;
+	return resultBits | a0;
 }

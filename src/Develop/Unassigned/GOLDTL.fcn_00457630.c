@@ -77,7 +77,7 @@ char __cdecl fcn_00457630(void* obj, void* map)
 	unsigned char c[4];
 	float q;
 	float u0;
-	float v0;
+	float texV;
 	float du;
 	float dv;
 	float fw;
@@ -151,7 +151,7 @@ char __cdecl fcn_00457630(void* obj, void* map)
 		 * dimension, spread over the cell rectangle */
 		q = g_6628cc / (float) (unsigned long) *(int*) (*(char**) s + 0x64);
 		u0 = q;
-		v0 = 1.0f - q;
+		texV = 1.0f - q;
 		fw = (float) w;
 		du = (1.0f - (q + q)) / fw;
 		fh = (float) h;
@@ -165,7 +165,7 @@ char __cdecl fcn_00457630(void* obj, void* map)
 			x1 = *(int*) (s + 0x14) - 1;
 		}
 		if (z0 < 0) {
-			v0 = (float) z0 / fh;
+			texV = (float) z0 / fh;
 			z0 = 0;
 		}
 		if (z1 >= *(int*) (s + 0x14)) {
@@ -202,7 +202,7 @@ char __cdecl fcn_00457630(void* obj, void* map)
 		if (ib != 0) {
 			uv.u = u0;
 			uv.du = du;
-			uv.v = v0;
+			uv.v = texV;
 			rect[0] = x0;
 			uv.dv = dv;
 			rect[1] = x1;

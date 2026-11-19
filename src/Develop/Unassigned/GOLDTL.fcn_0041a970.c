@@ -13,7 +13,7 @@ extern char __cdecl fcn_0041ad80(int a, int b);
 extern int __cdecl fcn_0041ba40(void);
 
 /* ADDRESS: GOLDTL 0x0041a970 */
-char __cdecl fcn_0041a970(int a0, INDEXFN a1, unsigned char a2, unsigned char a3)
+char __cdecl fcn_0041a970(int a0, INDEXFN indexCallback, unsigned char a2, unsigned char a3)
 {
 	int ready;
 	int slot;
@@ -34,7 +34,7 @@ char __cdecl fcn_0041a970(int a0, INDEXFN a1, unsigned char a2, unsigned char a3
 	if (ready == 0 || *(unsigned int *) 0x6b5de8 <= 0)
 		goto done;
 	slot = -1;
-	*(unsigned char *) 0x6b5dec = (a1 != 0);
+	*(unsigned char *) 0x6b5dec = (indexCallback != 0);
 	found = fcn_0041b290((unsigned int *) &slot, pos);
 	while (!found) {
 		if (!fcn_0041ad80(0, a0))
@@ -49,8 +49,8 @@ char __cdecl fcn_0041a970(int a0, INDEXFN a1, unsigned char a2, unsigned char a3
 		pos[2] = entry[2];
 		pos[3] = entry[3];
 	}
-	if (a1) {
-		index = a1(*(int *) (*(int *) 0x6b5dd0 + slot * 0x508 + 0x500),
+	if (indexCallback) {
+		index = indexCallback(*(int *) (*(int *) 0x6b5dd0 + slot * 0x508 + 0x500),
 			*(int *) (*(int *) 0x6b5dd0 + slot * 0x508 + 0x504));
 		if (index < 0 || (rec = (unsigned char *) (*(int *) 0x6b5dd0 + slot * 0x508),
 			index >= *(int *) (rec + 0x500)))

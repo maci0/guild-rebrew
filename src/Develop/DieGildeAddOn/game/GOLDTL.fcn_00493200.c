@@ -12,7 +12,7 @@ void __cdecl fcn_004c4570(int a, int b, int offset, void* value);
 void __cdecl fcn_004c5360(void);
 
 /* ADDRESS: GOLDTL 0x00493200 */
-int __cdecl fcn_00493200(char* a1, char* a2)
+int __cdecl fcn_00493200(char* actorEntity, char* a2)
 {
 	char slots[0x90];
 	char* pick;
@@ -31,18 +31,18 @@ int __cdecl fcn_00493200(char* a1, char* a2)
 
 	pick = 0;
 	roll = gm_RandomMod(3);
-	if (a1 == 0 || a2 == 0) {
+	if (actorEntity == 0 || a2 == 0) {
 		return 0;
 	}
-	kind = *(unsigned char*) (a1 + 0x130);
-	if (kind == 0 || *(int*) (a1 + 0x194) < 2) {
+	kind = *(unsigned char*) (actorEntity + 0x130);
+	if (kind == 0 || *(int*) (actorEntity + 0x194) < 2) {
 		return 0;
 	}
 	if (kind == 7) {
-		if (*(unsigned char*) (a1 + 0x166) == 0) {
+		if (*(unsigned char*) (actorEntity + 0x166) == 0) {
 			goto other;
 		}
-		if (fcn_004e8b40(*(unsigned char*) (a1 + 0x166), rec) == 0) {
+		if (fcn_004e8b40(*(unsigned char*) (actorEntity + 0x166), rec) == 0) {
 			return 0;
 		}
 		count = fcn_004e8b80(rec[1], 6, slots);
@@ -52,10 +52,10 @@ int __cdecl fcn_00493200(char* a1, char* a2)
 		index = gm_RandomMod(count);
 		for (left = count; left != 0; left--) {
 			r = *(int*) (slots + index * 24 + 4);
-			if (*(int*) (a1 + 4) != r) {
+			if (*(int*) (actorEntity + 4) != r) {
 				pick = gm_LookupEntityRecordById(r);
 				if (pick != 0) {
-					f = fcn_0050f980(*(unsigned short*) a1, *(unsigned short*) pick, 1);
+					f = fcn_0050f980(*(unsigned short*) actorEntity, *(unsigned short*) pick, 1);
 					r = gm_RandomMod(0x1e);
 					if ((float) r + g_662c98 > f) {
 						break;
@@ -68,7 +68,7 @@ int __cdecl fcn_00493200(char* a1, char* a2)
 	} else if (kind == 0xa) {
 		code = 0xc00;
 		pos = gm_RandomMod(0x1e);
-		if (fcn_004a55c0((unsigned short*) a1, 1, &code, 0.0f,
+		if (fcn_004a55c0((unsigned short*) actorEntity, 1, &code, 0.0f,
 				 (float) (int) pos + g_662c98, (unsigned short*) &pos) == 0) {
 			goto other;
 		}
@@ -88,7 +88,7 @@ int __cdecl fcn_00493200(char* a1, char* a2)
 	}
 
 other:
-	kind = *(unsigned char*) (a1 + 0x130);
+	kind = *(unsigned char*) (actorEntity + 0x130);
 	if (kind != 3 && kind != 4 && roll == 0) {
 		return 0;
 	}

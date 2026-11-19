@@ -89,7 +89,7 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
 {
 	unsigned int *  v1;
 	int v3;
-	unsigned int v5;
+	unsigned int dialogId;
 	int v10;
 	unsigned int v11;
 	int v12;
@@ -130,13 +130,13 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
   if (((!v4) && (v4 = (short *)fcn_00502cd0(v3,2,0,0x116,6), !v4)) && (v4 = (short *)fcn_00502cd0(*(unsigned int *)&v2[0x5d],2,0,0x2a,6), !v4))
     return;
   fcn_0057e880(0x1d,v2,0,0);
-  v5 = fcn_00470820(0,0,(char *)0x6ac468);
-  d2_CenterDialogWindows(v5);
-  d2_SetForm(v5,3);
+  dialogId = fcn_00470820(0,0,(char *)0x6ac468);
+  d2_CenterDialogWindows(dialogId);
+  d2_SetForm(dialogId,3);
   io_AppendText(0xfa);
-  d2_SetForm(v5,0);
+  d2_SetForm(dialogId,0);
   fcn_00533dc0(d2_CurrentWindowId,0x70b,0x740);
-  d2_SetForm(v5,4);
+  d2_SetForm(dialogId,4);
   fcn_00533a60(d2_CurrentWindowId,0,&v23,2,(*(int *)0x14a570c),(*(int *)0x14a5710));
   v29 = v23;
   v28 = v30;
@@ -154,7 +154,7 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
       v6 = he_fn_Handlung();
     }
     v7 = fcn_005463a0(2,0,0x13,3,*(unsigned int *)&v2[1]);
-    d2_SetForm(v5,2);
+    d2_SetForm(dialogId,2);
     if (*v4 != 0x116) { // branch-flip
       io_AppendText(0xfe,(unsigned char)v4[0xe],*(unsigned char *)(v18 + 0x240));
       io_AppendText(0xff,8000);
@@ -361,23 +361,23 @@ label_5bea6c:
     if (((3 <= *(int *)&v4[7]) && ((int)v8 <= (int)(unsigned int)*(unsigned char *)&v4[0xe])) && ((int)v15 <= (int)(unsigned int)*(unsigned char *)((int)v4 + 0x1d))) {
       if (v28 != -1)
         d2_SetSlotVisibility(v28,0);
-      d2_SetForm(v5,4);
+      d2_SetForm(dialogId,4);
       io_AppendText(0x112);
       v28 = -1;
       v29 = -1;
     }
     if (*v4 == 0x116) {
       fcn_005974e0(v2,v4);
-      fcn_00597940(v5,1,1,v2,v4);
+      fcn_00597940(dialogId,1,1,v2,v4);
     } else { // branch-flip
       fcn_00595e20(v2,v4);
-      fcn_005963f0(v5,1,0,v2);
+      fcn_005963f0(dialogId,1,0,v2);
     }
     if (((*(int *)0x14ce8e0)) && (fcn_0057ecc0() == 1))
       (*(int *)0x774654) = 1;
     if (!fcn_005373e0(0x5be140,0x657c7)) {
       fcn_00532ef0();
-      fcn_00471e30(v5);
+      fcn_00471e30(dialogId);
       fcn_0057e880(0x1d,v2,1,0);
       return;
     }

@@ -62,7 +62,7 @@ typedef int (__cdecl* Fn_5305d0)(char*, int, char*, int);
 void __cdecl sv_HandleObjects(void)
 {
 	char buf[0x80];
-	char* v5;
+	char* selected;
 	char* v7;
 	char* p;
 	char* list;
@@ -83,7 +83,7 @@ void __cdecl sv_HandleObjects(void)
 	if (g_7ea360 != 0 && *(char*) (g_7ea360 + 0x188) == 0) {
 		g_7ea360 = 0;
 	}
-	v5 = g_7746a4;
+	selected = g_7746a4;
 	if (g_7e2700 == 0) {
 		goto L744;
 	}
@@ -107,7 +107,7 @@ L66a:
 	if (g_7e2714[0] != 0) {
 		p = fcn_00445600(0, 0x60, 0, g_7e2714);
 		if (p != 0) {
-			v5 = p;
+			selected = p;
 			g_7746a4 = p;
 			created = 1;
 			g_7e2700 = 0;
@@ -115,11 +115,11 @@ L66a:
 		}
 		fcn_0064d41a(buf, s_6a301c, g_7e2714);
 	}
-	v5 = g_7746a4;
+	selected = g_7746a4;
 	g_7e2700 = 0;
 	goto L6d3;
 L6cd:
-	v5 = g_7746a4;
+	selected = g_7746a4;
 L6d3:
 	if (v7 != g_7e2704) {
 		goto L744;
@@ -130,14 +130,14 @@ L6d3:
 	if (g_7e2714[0] != 0) {
 		p = fcn_00445600(0, 0x60, 0, g_7e2714);
 		if (p != 0) {
-			v5 = p;
+			selected = p;
 			created = 1;
 			g_7746a4 = p;
 			g_7e2700 = 0;
 			goto L744;
 		}
 		fcn_0064d41a(buf, s_6a301c, g_7e2714);
-		v5 = g_7746a4;
+		selected = g_7746a4;
 	}
 	g_7e2700 = 0;
 L744:
@@ -149,7 +149,7 @@ L744:
 			return;
 		}
 	}
-	if (v5 == 0) {
+	if (selected == 0) {
 		if (g_7746f4 != 0) {
 			return;
 		}
@@ -162,7 +162,7 @@ L744:
 	} else {
 		p = 0;
 	}
-	if (memcmp(v5, s_6a3004, 8) != 0) {
+	if (memcmp(selected, s_6a3004, 8) != 0) {
 		if ((p != 0 && *p == 6) || g_7746bc != 0) {
 			match = 1;
 		}
@@ -173,22 +173,22 @@ L744:
 	g_7e431c = sv_HoveredObjekt;
 	g_7e4320 = g_7746b4;
 	g_7746b8 = g_7746bc;
-	g_7746a0 = v5;
-	if ((*(unsigned char*) (v5 + 0x214) & 0x40) != 0 && match == 0) {
-		fcn_00412e50(v5, g_6a256c);
+	g_7746a0 = selected;
+	if ((*(unsigned char*) (selected + 0x214) & 0x40) != 0 && match == 0) {
+		fcn_00412e50(selected, g_6a256c);
 		g_7746a8 = g_7746a4;
-		v5 = g_7746a4;
-		if (v5 != 0) {
-			p = *(char**) (v5 + 0x1d4);
+		selected = g_7746a4;
+		if (selected != 0) {
+			p = *(char**) (selected + 0x1d4);
 			if (p != 0 && *(Fn_5305d0*) (p + 0x108) != 0) {
-				(*(Fn_5305d0*) (p + 0x108))(v5, 2, p + 0x10c, 0);
-				v5 = g_7746a4;
+				(*(Fn_5305d0*) (p + 0x108))(selected, 2, p + 0x10c, 0);
+				selected = g_7746a4;
 			}
 		}
 		g_77465c = g_774650;
 		list = sv_HoveredObjekt;
 	}
-	g_77479c = v5;
+	g_77479c = selected;
 	if (g_7746b4 != 0 && *(char*) (g_7746b4 + 8) != 0) {
 		r = fcn_00506380((int) g_774970, 0, 0, g_7746b4);
 		sv_ClearObjectSelection();
@@ -203,26 +203,26 @@ L744:
 			p = g_7746b4;
 		}
 		g_6b5c48 = *(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) p * 0x21c + 0x184);
-		v5 = g_7746a4;
+		selected = g_7746a4;
 		list = sv_HoveredObjekt;
 	}
 	if (g_7746f0 == 0 && g_7746f4 == 0 && g_7746b0 != 0 && g_7e2a9c == 0) {
-		g_7746c0 = v5;
+		g_7746c0 = selected;
 	}
 	g_7e2aa0 = g_7746b0;
 	g_7e2a9c = sv_HoveredObjekt;
 	if (g_7746b0 != 0) {
-		g_7746c0 = v5;
+		g_7746c0 = selected;
 	}
 	if (list == 0) {
 		g_7e2aa0 = g_7746b0;
 		return;
 	}
 	if (*(char*) (lpObjektePROT + (unsigned int) (unsigned short) *(unsigned short*) list * 0x41) == 0x1d) {
-		g_7746c0 = v5;
+		g_7746c0 = selected;
 		sv_ClearObjectSelection();
 		return;
 	}
-	g_7746c0 = v5;
+	g_7746c0 = selected;
 	g_7e2aa0 = g_7746b0;
 }

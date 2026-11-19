@@ -14,7 +14,7 @@ int __cdecl fcn_004a4680(float* o0, float* o1, int idx, char* s, int* p4)
 	float v9;
 	float v8;
 	float v10;
-	float v11;
+	float contribution;
 	char* t;
 	AM_METHOD* method;
 	int i;
@@ -62,40 +62,40 @@ int __cdecl fcn_004a4680(float* o0, float* o1, int idx, char* s, int* p4)
 	for (i = 4; i != 0; i--) {
 		if (*(float*) (t + 4) > g_6628a8) {
 			if (*(unsigned char*) t == *(unsigned char*) (s + 0x130)) {
-				v11 = (*(float*) (s + (*(unsigned char*) t + 0xc) * 0xc)
+				contribution = (*(float*) (s + (*(unsigned char*) t + 0xc) * 0xc)
 					* *(float*) (t + 4)) / (v10 + v9);
 			} else {
-				v11 = (*(float*) (s + (*(unsigned char*) t + 0xc) * 0xc)
+				contribution = (*(float*) (s + (*(unsigned char*) t + 0xc) * 0xc)
 					* *(float*) (t + 4)) / (v8 + v9);
 			}
 		} else {
-			v11 = *(float*) (t + 4);
+			contribution = *(float*) (t + 4);
 			if (*(unsigned char*) t == *(unsigned char*) (s + 0x130)) {
-				v11 = v11 / v10;
+				contribution = contribution / v10;
 			} else {
-				v11 = v11 / v8;
+				contribution = contribution / v8;
 			}
-			v11 = v11 * *(float*) (s + (*(unsigned char*) t + 0xc) * 0xc);
+			contribution = contribution * *(float*) (s + (*(unsigned char*) t + 0xc) * 0xc);
 		}
-		*o0 += v11;
+		*o0 += contribution;
 		if (*(float*) (t + 0x44) > g_6628a8) {
 			if (*(unsigned char*) (t + 0x40) == *(unsigned char*) (s + 0x130)) {
-				v11 = (*(float*) (s + (*(unsigned char*) (t + 0x40) + 0xc) * 0xc)
+				contribution = (*(float*) (s + (*(unsigned char*) (t + 0x40) + 0xc) * 0xc)
 					* *(float*) (t + 0x44)) / (v10 + v9);
 			} else {
-				v11 = (*(float*) (s + (*(unsigned char*) (t + 0x40) + 0xc) * 0xc)
+				contribution = (*(float*) (s + (*(unsigned char*) (t + 0x40) + 0xc) * 0xc)
 					* *(float*) (t + 0x44)) / (v8 + v9);
 			}
 		} else {
-			v11 = *(float*) (t + 0x44);
+			contribution = *(float*) (t + 0x44);
 			if (*(unsigned char*) (t + 0x40) == *(unsigned char*) (s + 0x130)) {
-				v11 = v11 / v10;
+				contribution = contribution / v10;
 			} else {
-				v11 = v11 / v8;
+				contribution = contribution / v8;
 			}
-			v11 = v11 * *(float*) (s + (*(unsigned char*) (t + 0x40) + 0xc) * 0xc);
+			contribution = contribution * *(float*) (s + (*(unsigned char*) (t + 0x40) + 0xc) * 0xc);
 		}
-		*o1 += v11;
+		*o1 += contribution;
 		t += 8;
 	}
 	return found;

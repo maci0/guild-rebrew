@@ -27,7 +27,7 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004a3530 */
-void __cdecl fcn_004a3530(char* a0)
+void __cdecl fcn_004a3530(char* subjectEnt)
 {
 	Rec18 out[6];
 	Rec18 r;
@@ -49,16 +49,16 @@ void __cdecl fcn_004a3530(char* a0)
 	n = 0;
 	g_7728bc = 0;
 	memset(g_10082a0, 0, 0x180);
-	if (0 == *(unsigned char*) (a0 + 0x166)) {
+	if (0 == *(unsigned char*) (subjectEnt + 0x166)) {
 		cnt = fcn_004e8c00(1, 6, out);
 		for (i = 0; i < cnt; i++) {
 			if (fcn_004e99c0(out[i].x8) >= 3)
 				continue;
 			e = gm_LookupEntityRecordById(out[i].id);
-			if (!e || e == a0)
+			if (!e || e == subjectEnt)
 				continue;
 			g_10082a0[n].flags = 0x40;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -67,10 +67,10 @@ void __cdecl fcn_004a3530(char* a0)
 			if (fcn_004e99c0(out[i].x8) >= 3)
 				continue;
 			e = gm_LookupEntityRecordById(out[i].id);
-			if (!e || e == a0)
+			if (!e || e == subjectEnt)
 				continue;
 			g_10082a0[n].flags = 0x40;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -79,10 +79,10 @@ void __cdecl fcn_004a3530(char* a0)
 			if (fcn_004e99c0(out[i].x8) >= 3)
 				continue;
 			e = gm_LookupEntityRecordById(out[i].id);
-			if (!e || e == a0)
+			if (!e || e == subjectEnt)
 				continue;
 			g_10082a0[n].flags = 0x40;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -95,8 +95,8 @@ void __cdecl fcn_004a3530(char* a0)
 		arr[2] = 0;
 		arr[3] = 0;
 		arr[4] = 0;
-		cls = fcn_004e99c0(*(unsigned char*) (a0 + 0x166));
-		fcn_004e8b40(*(unsigned char*) (a0 + 0x166), &r);
+		cls = fcn_004e99c0(*(unsigned char*) (subjectEnt + 0x166));
+		fcn_004e8b40(*(unsigned char*) (subjectEnt + 0x166), &r);
 		x10 = r.id;
 		if (x10 > 0 && x10 < 4) {
 			grp = 3;
@@ -131,10 +131,10 @@ void __cdecl fcn_004a3530(char* a0)
 			if (n >= 32)
 				break;
 			e = gm_LookupEntityRecordById(out[i].id);
-			if (!e || e == a0)
+			if (!e || e == subjectEnt)
 				continue;
 			g_10082a0[n].flags = 0x10;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -143,10 +143,10 @@ void __cdecl fcn_004a3530(char* a0)
 			if (n >= 32)
 				break;
 			e = gm_LookupEntityRecordById(out[i].id);
-			if (!e || e == a0)
+			if (!e || e == subjectEnt)
 				continue;
 			g_10082a0[n].flags = 1;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -155,10 +155,10 @@ void __cdecl fcn_004a3530(char* a0)
 			if (n >= 32)
 				break;
 			e = gm_LookupEntityRecordById(out[i].id);
-			if (!e || e == a0)
+			if (!e || e == subjectEnt)
 				continue;
 			g_10082a0[n].flags = 1;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -170,10 +170,10 @@ void __cdecl fcn_004a3530(char* a0)
 				if (abs(fcn_004e99c0(out[i].x8) - cls) > 1)
 					continue;
 				e = gm_LookupEntityRecordById(out[i].id);
-				if (!e || e == a0)
+				if (!e || e == subjectEnt)
 					continue;
 				g_10082a0[n].flags = 0x40;
-				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 				g_10082a0[n].entity = e;
 				n++;
 			}
@@ -184,10 +184,10 @@ void __cdecl fcn_004a3530(char* a0)
 				if (abs(fcn_004e99c0(out[i].x8) - cls) > 1)
 					continue;
 				e = gm_LookupEntityRecordById(out[i].id);
-				if (!e || e == a0)
+				if (!e || e == subjectEnt)
 					continue;
 				g_10082a0[n].flags = 0x40;
-				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 				g_10082a0[n].entity = e;
 				n++;
 			}
@@ -200,10 +200,10 @@ void __cdecl fcn_004a3530(char* a0)
 				if (abs(fcn_004e99c0(out[i].x8) - cls) > 1)
 					continue;
 				e = gm_LookupEntityRecordById(out[i].id);
-				if (!e || e == a0)
+				if (!e || e == subjectEnt)
 					continue;
 				g_10082a0[n].flags = 0x80;
-				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 				g_10082a0[n].entity = e;
 				n++;
 			}
@@ -214,10 +214,10 @@ void __cdecl fcn_004a3530(char* a0)
 				if (abs(fcn_004e99c0(out[i].x8) - cls) > 1)
 					continue;
 				e = gm_LookupEntityRecordById(out[i].id);
-				if (!e || e == a0)
+				if (!e || e == subjectEnt)
 					continue;
 				g_10082a0[n].flags = 0x80;
-				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 				g_10082a0[n].entity = e;
 				n++;
 			}
@@ -228,20 +228,20 @@ void __cdecl fcn_004a3530(char* a0)
 				if (abs(fcn_004e99c0(out[i].x8) - cls) > 1)
 					continue;
 				e = gm_LookupEntityRecordById(out[i].id);
-				if (!e || e == a0)
+				if (!e || e == subjectEnt)
 					continue;
 				g_10082a0[n].flags = 0x80;
-				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 				g_10082a0[n].entity = e;
 				n++;
 			}
 		}
 	}
-	if (*(unsigned char*) (a0 + 0x168)) {
-		cnt = fcn_004e9310(*(unsigned char*) (a0 + 0x168), 6, (char**) &arr[2]);
+	if (*(unsigned char*) (subjectEnt + 0x168)) {
+		cnt = fcn_004e9310(*(unsigned char*) (subjectEnt + 0x168), 6, (char**) &arr[2]);
 		for (i = 0; i < cnt; i++) {
 			e = (char*) arr[2 + i];
-			if (e == a0)
+			if (e == subjectEnt)
 				continue;
 			
 			for (j = 0; j < n; j++) {
@@ -256,22 +256,22 @@ void __cdecl fcn_004a3530(char* a0)
 			if (n >= 32)
 				continue;
 			g_10082a0[n].flags = 2;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) a0, 1);
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
 	}
-	if (*(unsigned char*) (a0 + 0x168) || *(unsigned char*) (a0 + 2) == 5) {
+	if (*(unsigned char*) (subjectEnt + 0x168) || *(unsigned char*) (subjectEnt + 2) == 5) {
 		for (q = g_7f4ca0; (int) q < (int) (g_7f4ca0 + 0x65400); q += 0x21c) {
-			if (q == a0)
+			if (q == subjectEnt)
 				continue;
 			if (*(unsigned short*) q == 0xffff)
 				continue;
 			flag = 0;
 			if ((*(unsigned char*) (q + 2) == 6 || *(unsigned char*) (q + 2) == 7
-			     || *(unsigned char*) (q + 2) == 5) && *(unsigned char*) (a0 + 2) == 5)
+			     || *(unsigned char*) (q + 2) == 5) && *(unsigned char*) (subjectEnt + 2) == 5)
 				flag |= 1;
-			if (*(unsigned char*) (q + 0x168) == *(unsigned char*) (a0 + 0x168))
+			if (*(unsigned char*) (q + 0x168) == *(unsigned char*) (subjectEnt + 0x168))
 				flag |= 4;
 			if (!flag)
 				continue;
@@ -288,7 +288,7 @@ void __cdecl fcn_004a3530(char* a0)
 			if (n >= 32)
 				continue;
 			g_10082a0[n].flags = flag;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) q, *(unsigned short*) a0, 1);
+			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) q, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = q;
 			n++;
 		}

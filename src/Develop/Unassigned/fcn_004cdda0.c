@@ -6,7 +6,7 @@ void __cdecl fcn_004be280(void*);
 void* __cdecl fcn_004be2a0(void*);
 
 /* ADDRESS: GOLDTL 0x004cdda0 */
-int __cdecl fcn_004cdda0(char* a1, unsigned char* a2, unsigned char* a3)
+int __cdecl fcn_004cdda0(char* command, unsigned char* response, unsigned char* a3)
 {
 	char buf[0x240];
 	void* p;
@@ -15,19 +15,19 @@ int __cdecl fcn_004cdda0(char* a1, unsigned char* a2, unsigned char* a3)
 	int n;
 	int i;
 
-	if (a2 != 0) {
-		a2[0] = 2;
-		a2[1] = 0;
-		*(int*) (a2 + 6) = 0;
+	if (response != 0) {
+		response[0] = 2;
+		response[1] = 0;
+		*(int*) (response + 6) = 0;
 	}
-	p = (void*) gm_FindRecordById(*(int*) (a1 + 0x10));
+	p = (void*) gm_FindRecordById(*(int*) (command + 0x10));
 	if (p == 0)
 		return -1;
 	if (*(int*) ((char*) p + 0x29) != 0) {
 		fcn_004be280(*(void**) ((char*) p + 0x29));
 		*(int*) ((char*) p + 0x29) = 0;
 	}
-	n = *(int*) (a1 + 0x14);
+	n = *(int*) (command + 0x14);
 	memcpy(buf, g_aed340, n * 64);
 	node = buf;
 
@@ -43,7 +43,7 @@ int __cdecl fcn_004cdda0(char* a1, unsigned char* a2, unsigned char* a3)
 	}
 	*(int*) (buf + i * 0x40 - 4) = 0;
 	*(void**) ((char*) p + 0x29) = fcn_004be2a0(buf);
-	if (a2 != 0)
-		a2[0] = 1;
+	if (response != 0)
+		response[0] = 1;
 	return 0;
 }

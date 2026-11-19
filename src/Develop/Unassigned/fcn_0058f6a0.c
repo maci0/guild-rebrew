@@ -47,7 +47,7 @@ struct hand_s {
 };
 
 /* ADDRESS: GOLDTL 0x0058f6a0 */
-void __cdecl fcn_0058f6a0(const unsigned char* arg1)
+void __cdecl fcn_0058f6a0(const unsigned char* entity)
 {
     unsigned long query[20];
     char msg[0xf8];
@@ -74,7 +74,7 @@ void __cdecl fcn_0058f6a0(const unsigned char* arg1)
         sub_532ef0();
         return;
     }
-    sub_52a0c0((int) arg1, 0);
+    sub_52a0c0((int) entity, 0);
     dlg = sub_470820(0, 0, (char*) 0x6a96d8);
     sub_473a90(0, 0);
     sub_471b60(dlg);
@@ -116,8 +116,8 @@ void __cdecl fcn_0058f6a0(const unsigned char* arg1)
                         msg[4] = 0x89;
                         msg[0x36] = 1;
                         *(int*) (msg + 0x64) = 4;
-                        index = *(unsigned short*) (arg1 + 0x27);
-                        *(int*) (msg + 0xc) = *(int*) (arg1 + 1);
+                        index = *(unsigned short*) (entity + 0x27);
+                        *(int*) (msg + 0xc) = *(int*) (entity + 1);
                         *(int*) (msg + 8) = *(int*) (0x7f4ca4 + index * 0x21c);
                         *(int*) (msg + 0x30) = dword_7f4c08;
                         *(int*) (msg + 0x28) = dword_7f4c00;

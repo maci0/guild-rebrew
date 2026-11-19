@@ -31,7 +31,7 @@ int __cdecl fcn_004a99a0(char*, char*, int, char*, int);
 int __cdecl fcn_004a8d30(char*, char*, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x004a9b20 */
-int __cdecl fcn_004a9b20(char* a0, char* a1, int a2, char* a3, int a4)
+int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 {
 	sel_ctx c;
 	int ids1[19];
@@ -45,10 +45,10 @@ int __cdecl fcn_004a9b20(char* a0, char* a1, int a2, char* a3, int a4)
 
 	memset(&c, 0, sizeof(c));
 	c.found = 0;
-	if (*(int*) (a1 + 0x1c8) & 0x100) {
+	if (*(int*) (actorEntity + 0x1c8) & 0x100) {
 		e = fcn_005463a0(1, 0, 0x45);
 		while (e != 0) {
-			if (*(int*) (e + 0xac) == *(int*) (a1 + 4)) {
+			if (*(int*) (e + 0xac) == *(int*) (actorEntity + 4)) {
 				c.found = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 				break;
 			}
@@ -59,7 +59,7 @@ int __cdecl fcn_004a9b20(char* a0, char* a1, int a2, char* a3, int a4)
 		*(int*) c.text = 1;
 		n1 = 0;
 		for (p = (int*) 0x67fa58; (int) p < (int) 0x67faa4; p++) {
-			if (fcn_004fa5b0(*p, a1, (int) &c) & 2) {
+			if (fcn_004fa5b0(*p, actorEntity, (int) &c) & 2) {
 				ids1[n1] = *p;
 				n1++;
 			}
@@ -68,7 +68,7 @@ int __cdecl fcn_004a9b20(char* a0, char* a1, int a2, char* a3, int a4)
 			*(int*) c.text = 2;
 			n2 = 0;
 			for (p = (int*) 0x67fa58; (int) p < (int) 0x67faa4; p++) {
-				if (fcn_004fa5b0(*p, a1, (int) &c) & 2) {
+				if (fcn_004fa5b0(*p, actorEntity, (int) &c) & 2) {
 					ids2[n2] = *p;
 					n2++;
 				}
@@ -81,7 +81,7 @@ int __cdecl fcn_004a9b20(char* a0, char* a1, int a2, char* a3, int a4)
 			*(int*) c.text = 1;
 			id = ids1[gm_RandomMod(n1)];
 			sel = 3;
-			if (!(fcn_004fa5b0(id, a1, (int) &c) & 2)) {
+			if (!(fcn_004fa5b0(id, actorEntity, (int) &c) & 2)) {
 				return 0;
 			}
 		} else {
@@ -92,7 +92,7 @@ pick_second:
 			*(int*) c.text = 2;
 			id = ids2[gm_RandomMod(n2)];
 			sel = 4;
-			if (!(fcn_004fa5b0(id, a1, (int) &c) & 2)) {
+			if (!(fcn_004fa5b0(id, actorEntity, (int) &c) & 2)) {
 				return 0;
 			}
 		}
@@ -105,11 +105,11 @@ pick_second:
 		}
 		id = *(int*) (a3 + 4);
 		*(int*) c.text = 1;
-		if (fcn_004fa5b0(id, a1, (int) &c) & 2) {
+		if (fcn_004fa5b0(id, actorEntity, (int) &c) & 2) {
 			*(int*) (a3 + 8) = 3;
 		} else {
 			*(int*) c.text = 2;
-			if (!(fcn_004fa5b0(id, a1, (int) &c) & 2)) {
+			if (!(fcn_004fa5b0(id, actorEntity, (int) &c) & 2)) {
 				return 0;
 			}
 			*(int*) (a3 + 8) = 4;
@@ -117,42 +117,42 @@ pick_second:
 	}
 	switch (id) {
 	case 0x12:
-		return fcn_004a8880(a0, a1, (int) &c, a3, a4);
+		return fcn_004a8880(a0, actorEntity, (int) &c, a3, a4);
 	case 0x13:
 	case 0x14:
-		return fcn_004a8b70(a0, a1, (int) &c, a3, a4);
+		return fcn_004a8b70(a0, actorEntity, (int) &c, a3, a4);
 	case 0x1c:
-		return fcn_004a8bf0(a0, a1, (int) &c, a3, a4);
+		return fcn_004a8bf0(a0, actorEntity, (int) &c, a3, a4);
 	case 0x1d:
-		return fcn_004a8d10(a0, a1, (int) &c, a3, a4);
+		return fcn_004a8d10(a0, actorEntity, (int) &c, a3, a4);
 	case 0x21:
-		return fcn_004a8d30(a0, a1, (int) &c, a3, a4);
+		return fcn_004a8d30(a0, actorEntity, (int) &c, a3, a4);
 	case 0x24:
-		return fcn_004a8d40(a0, a1, (int) &c, a3, a4);
+		return fcn_004a8d40(a0, actorEntity, (int) &c, a3, a4);
 	case 0x25:
-		return fcn_004a8da0(a0, a1, (int) &c, a3, a4);
+		return fcn_004a8da0(a0, actorEntity, (int) &c, a3, a4);
 	case 0x27:
-		return fcn_004a8e40(a0, a1, (int) &c, a3, a4);
+		return fcn_004a8e40(a0, actorEntity, (int) &c, a3, a4);
 	case 0x28:
-		return fcn_004a8ed0(a0, a1, (int) &c, a3, a4);
+		return fcn_004a8ed0(a0, actorEntity, (int) &c, a3, a4);
 	case 0x29:
-		return fcn_004a9000(a0, a1, (int) &c, a3, a4);
+		return fcn_004a9000(a0, actorEntity, (int) &c, a3, a4);
 	case 0x2a:
-		return fcn_004a9040(a0, a1, (int) &c, a3, a4);
+		return fcn_004a9040(a0, actorEntity, (int) &c, a3, a4);
 	case 0x2b:
-		return fcn_004a9150(a0, a1, (int) &c, a3, a4);
+		return fcn_004a9150(a0, actorEntity, (int) &c, a3, a4);
 	case 0x2c:
-		return fcn_004a91a0(a0, a1, (int) &c, a3, a4);
+		return fcn_004a91a0(a0, actorEntity, (int) &c, a3, a4);
 	case 0x2d:
-		return fcn_004a9270(a0, a1, (int) &c, a3, a4);
+		return fcn_004a9270(a0, actorEntity, (int) &c, a3, a4);
 	case 0x31:
-		return fcn_004a96f0(a0, a1, (int) &c, a3, a4);
+		return fcn_004a96f0(a0, actorEntity, (int) &c, a3, a4);
 	case 0x32:
-		return fcn_004a9780(a0, a1, (int) &c, a3, a4);
+		return fcn_004a9780(a0, actorEntity, (int) &c, a3, a4);
 	case 0x35:
-		return fcn_004a9820(a0, a1, (int) &c, a3, a4);
+		return fcn_004a9820(a0, actorEntity, (int) &c, a3, a4);
 	case 0x37:
-		return fcn_004a99a0(a0, a1, (int) &c, a3, a4);
+		return fcn_004a99a0(a0, actorEntity, (int) &c, a3, a4);
 	}
 	return 0;
 }

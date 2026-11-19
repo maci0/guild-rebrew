@@ -11,7 +11,7 @@ char* __cdecl fcn_004ce610(char*);
 char* __cdecl fcn_004ce680(char*);
 
 /* ADDRESS: GOLDTL 0x004d1970 */
-void* __cdecl fcn_004d1970(int a1, int a2)
+void* __cdecl fcn_004d1970(int entityId, int a2)
 {
 	char* src;
 	char* rec;
@@ -23,7 +23,7 @@ void* __cdecl fcn_004d1970(int a1, int a2)
 	EntityStruct* pool;
 	EntityStruct* scan;
 
-	src = (char*) gm_LookupEntityRecordById(a1);
+	src = (char*) gm_LookupEntityRecordById(entityId);
 	i = 0;
 	pool = (EntityStruct*) g_9b4a40;
 	scan = pool;

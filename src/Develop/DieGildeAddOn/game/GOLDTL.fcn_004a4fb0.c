@@ -5,7 +5,7 @@ unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 
 /* ADDRESS: GOLDTL 0x004a4fb0 */
-unsigned int __cdecl fcn_004a4fb0(unsigned int* a0, unsigned int* a1, unsigned char* a2)
+unsigned int __cdecl fcn_004a4fb0(unsigned int* outItem, unsigned int* a1, unsigned char* building)
 {
 	unsigned char* rec;
 	unsigned char* v6;
@@ -19,8 +19,8 @@ unsigned int __cdecl fcn_004a4fb0(unsigned int* a0, unsigned int* a1, unsigned c
 	int v4;
 	int idx;
 
-	container = *(int*) (a2 + 0x5d);
-	rec = (unsigned char*) (lpGebaeudePROT + *a2 * 0x24d);
+	container = *(int*) (building + 0x5d);
+	rec = (unsigned char*) (lpGebaeudePROT + *building * 0x24d);
 	v11 = 0;
 	idx = 0;
 	if ((unsigned char) rec[0x22] <= 0) {
@@ -28,7 +28,7 @@ unsigned int __cdecl fcn_004a4fb0(unsigned int* a0, unsigned int* a1, unsigned c
 	}
 	v12 = (unsigned short*) (rec + 0xa5);
 	v10 = (unsigned short*) (rec + 0x23);
-	v6 = a2;
+	v6 = building;
 	do {
 		v1 = *(unsigned char*) (lpObjektePROT + (*v10 & 0x7fff) * 0x41);
 		if (v1 != '!') {
@@ -38,7 +38,7 @@ label:
 					if (!*(unsigned short*) ((char*) v12 - 2) ||
 					    fcn_00502cd0(container, 1, 0, *(unsigned short*) ((char*) v12 - 2))) {
 						if (!*v12 || fcn_00502cd0(container, 1, 0, *v12)) {
-							*a0 = *(unsigned short*) (rec + 0x23 + idx * 2) & 0x7fff;
+							*outItem = *(unsigned short*) (rec + 0x23 + idx * 2) & 0x7fff;
 							if (v11 != 0) {
 								*a1 = *(unsigned int*) ((char*) v11 + 2);
 								return 1;
@@ -66,7 +66,7 @@ label:
 					v5 = gm_NextEntityQueryMatch();
 				}
 				if (v7 < (int) (unsigned char) rec[0x21] && !v4) {
-					v5 = fcn_00502cd0(*(int*) (a2 + 0x5d), 1, 4, 6);
+					v5 = fcn_00502cd0(*(int*) (building + 0x5d), 1, 4, 6);
 					do {
 						if (!v5) {
 							break;
@@ -84,7 +84,7 @@ label:
 					}
 				}
 			}
-			v6 = a2;
+			v6 = building;
 		}
 		v12 += 2;
 		idx += 1;

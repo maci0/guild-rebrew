@@ -41,7 +41,7 @@ extern float g_662cf8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x004a6210 */
-int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
+int __cdecl fcn_004a6210(char* actor, char* a1, int a2)
 {
 	int col;
 	int row;
@@ -77,7 +77,7 @@ int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
 	fcn_004f10d0(a1, &row, &col);
 	col = gm_RandomMod(col + 1) & 0xffff;
 	fcn_004f0f60(col, profile);
-	if (*(int*) (a0 + 0x194) < profile[1]) return 0;
+	if (*(int*) (actor + 0x194) < profile[1]) return 0;
 	value.level = fcn_004f1290(a1);
 	row = gm_RandomMod(row + 1) & 0xffff;
 	fcn_005e8de0(g_6660f4, *(float*) (col * 0xc + 0x665290), entry);
@@ -93,8 +93,8 @@ int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
 	state = (int) ((trajectory - bounds[0]) * g_662cf8 / (bounds[1] - bounds[0]));
 	spread = fcn_004f0eb0(col, state, row + 1);
 	if (spread > *(float*) (p + 2 + row)) return 0;
-	if (fcn_004f0ff0((int) a0, col, state, row + 1, &res.amount, &res.cost) == 0) return 0;
-	value.cash = fcn_0050b810(*(int*) (a0 + 0x178), g_773d75);
+	if (fcn_004f0ff0((int) actor, col, state, row + 1, &res.amount, &res.cost) == 0) return 0;
+	value.cash = fcn_0050b810(*(int*) (actor + 0x178), g_773d75);
 	if ((int) (value.cash * 0.25f) < res.cost) return 0;
 	g_772850 = origin[0];
 	g_772854 = origin[1];
@@ -108,7 +108,7 @@ int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
 	g_772870 = normal[0];
 	g_772874 = normal[1];
 	g_772878 = normal[2];
-	g_772848 = *(int*) (a0 + 4);
+	g_772848 = *(int*) (actor + 4);
 	g_7728b4 = res.cost;
 	g_77284c = *(int*) (a1 + 1);
 	g_7728b8 = res.amount;

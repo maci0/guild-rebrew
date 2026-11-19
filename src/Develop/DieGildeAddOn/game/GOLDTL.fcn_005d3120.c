@@ -32,7 +32,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 
 /* ADDRESS: GOLDTL 0x005d3120 */
-int __cdecl fcn_005d3120(int a0, int* a1)
+int __cdecl fcn_005d3120(int entity, int* request)
 {
 	int mode;
 	int id;
@@ -57,7 +57,7 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 	id = -1;
 	e = fcn_005463a0(1, 0, 0x41);
 	while (e != 0) {
-		if (*(int*) (e + 0xac) == *(int*) (a0 + 4)) {
+		if (*(int*) (e + 0xac) == *(int*) (entity + 4)) {
 			mode = 2;
 			id = *(int*) (e + 0xb0);
 			if (*(char*) (e + 0xbb) == 1) {
@@ -70,19 +70,19 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 		}
 		e = he_fn_Handlung();
 	}
-	if (*(char*) (a0 + 2) != 6) {
+	if (*(char*) (entity + 2) != 6) {
 		if (e != 0) {
 			return 0x20;
 		}
-		p = gm_LookupEntityRecordById(*(int*) ((char*) a1 + 0x214));
+		p = gm_LookupEntityRecordById(*(int*) ((char*) request + 0x214));
 		if (p == 0 || *(char*) (p + 8) == 0) {
 			return 0x20;
 		}
 		memset(buf, 0, 0xf8);
 		*(pos14_7f4c00*) (buf + 0x28) = gm_GameTime;
-		*(int*) (buf + 0x08) = *(int*) (a0 + 4);
-		*(int*) (buf + 0x0c) = *(int*) (a0 + 4);
-		*(int*) (buf + 0x58) = *(int*) (a0 + 4);
+		*(int*) (buf + 0x08) = *(int*) (entity + 4);
+		*(int*) (buf + 0x0c) = *(int*) (entity + 4);
+		*(int*) (buf + 0x58) = *(int*) (entity + 4);
 		buf[0x04] = 0x41;
 		buf[0x36] = 2;
 		*(int*) (buf + 0x5c) = *(int*) (p + 4);
@@ -90,7 +90,7 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 		return 0x10;
 	}
 	if (mode == 1) {
-		return fcn_005d2ec0((char*) a0, a1);
+		return fcn_005d2ec0((char*) entity, request);
 	}
 	h = fcn_00470820(0, 0, (char*) 0x6acbbc);
 	d2_CenterDialogWindows(h);
@@ -102,7 +102,7 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 		d = (char) *(e + 0xb9);
 		d -= (char) *(e + 0xb8);
 		d = d < 0 ? 0 : d;
-		io_AppendText(0x1ce7, *(unsigned short*) a0, *(unsigned short*) p, d, 0x5d);
+		io_AppendText(0x1ce7, *(unsigned short*) entity, *(unsigned short*) p, d, 0x5d);
 	} else if (mode == 3) {
 		p = gm_LookupEntityRecordById(id);
 		io_AppendText(0x1ce3);
@@ -179,7 +179,7 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 					}
 					*(char*) (e + 0xba) = 0;
 					*(int*) (e + 0x84) = fcn_004c5620(0, (unsigned char*) e);
-					fcn_004c5150(-1, *(int*) (a0 + 4), g_773d75, q);
+					fcn_004c5150(-1, *(int*) (entity + 4), g_773d75, q);
 					fcn_00526120(buf2, 0);
 					mode = mode;
 					g_774654 = 1;

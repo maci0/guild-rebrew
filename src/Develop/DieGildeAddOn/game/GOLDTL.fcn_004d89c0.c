@@ -45,8 +45,8 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 {
 	Ev_4d89c0 ev;
 	unsigned int v7;
-	unsigned int v11;
-	int v4;
+	unsigned int roll;
+	int actor;
 	int* p;
 	int v8;
 	int v9;
@@ -59,22 +59,22 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 	memset(&ev, 0, sizeof(ev));
 	ev.ent = *(unsigned int*) (a1 + 4);
 	v2 = *(char*) (a1 + 0x1c4);
-	v4 = a1;
+	actor = a1;
 	ev.kind = 2;
 	ev.target = *(unsigned int*) (a2 + 4);
 	if (v2 == 1 || v2 == 2 || v2 == 3)
 		ev.busy = 1;
 	p = (int*) fcn_004ce610(a1);
 	if ((p[0x16] == 1 || p[0x16] == 2)
-	    && (w = fcn_004ce680(v4)) != 0
+	    && (w = fcn_004ce680(actor)) != 0
 	    && *(int*) (w + 0x20) <= 0)
 		goto fail;
 	v8 = p[0];
 	if (v8 == 0x154 || v8 == 0x156 || v8 == 0x158 || v8 == 0x16e
 	    || v8 == 0x172 || v8 == 0 || v8 == 0x176) {
 		v9 = *(int*) (a2 + 0x184);
-		if (*(float*) (p + 3) < fcn_004cefb0(v4, *(unsigned int*) (v9 + 0x34))) {
-			if (*(int*) (*(int*) (v4 + 0x184) + 0x128) != 0)
+		if (*(float*) (p + 3) < fcn_004cefb0(actor, *(unsigned int*) (v9 + 0x34))) {
+			if (*(int*) (*(int*) (actor + 0x184) + 0x128) != 0)
 				goto fail;
 			if (ev.busy)
 				goto fail;
@@ -82,16 +82,16 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 				goto fail;
 			if (fcn_004cec00(a1, a2, (int*) &a1, &a2) == 0)
 				goto fail;
-			return fcn_004c6680(*(int*) (*(int*) (v4 + 0x184) + 0x34), a1, a2, 0);
+			return fcn_004c6680(*(int*) (*(int*) (actor + 0x184) + 0x34), a1, a2, 0);
 		}
 	}
-	if (*(int*) (*(int*) (v4 + 0x184) + 0x128) != 0)
+	if (*(int*) (*(int*) (actor + 0x184) + 0x128) != 0)
 		goto fail;
-	v11 = (unsigned short) gm_RandomMod(0xff);
-	a1 = *(unsigned char*) (v4 + 0x83);
-	v9 = *(int*) (v4 + 0x16c);
+	roll = (unsigned short) gm_RandomMod(0xff);
+	a1 = *(unsigned char*) (actor + 0x83);
+	v9 = *(int*) (actor + 0x16c);
 	v8 = (int) (*((unsigned char*) p + 4) * 0.01 * (int) a1);
-	if ((int) v11 <= 0xff - v8) {
+	if ((int) roll <= 0xff - v8) {
 		hit = 0;
 		ev.amount = 0;
 	} else {
@@ -117,12 +117,12 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 			if (*(int*) (v8 + 4) == 0) {
 				w = fcn_004ce680(a2);
 				if (w != 0 && *(int*) (w + 0x20) > 0)
-					*(unsigned int*) (v8 + 8) = fcn_004d1020(v9, a2, v4, 0, 0);
+					*(unsigned int*) (v8 + 8) = fcn_004d1020(v9, a2, actor, 0, 0);
 			}
 		}
 	}
-	fcn_004c5420(*(unsigned int*) (v4 + 4), 0x1c8, 4, 0x20000000, 0);
-	return fcn_004c6940(v4, 2, &ev);
+	fcn_004c5420(*(unsigned int*) (actor + 4), 0x1c8, 4, 0x20000000, 0);
+	return fcn_004c6940(actor, 2, &ev);
 fail:
 	return 0xffffffff;
 }

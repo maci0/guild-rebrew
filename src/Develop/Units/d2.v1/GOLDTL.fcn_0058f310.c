@@ -40,7 +40,7 @@ void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
 
 /* ADDRESS: GOLDTL 0x0058f310 */
-int __cdecl fcn_0058f310(char* a0)
+int __cdecl fcn_0058f310(char* subject)
 {
 	int q[20];
 	char req[0xf8];
@@ -70,7 +70,7 @@ int __cdecl fcn_0058f310(char* a0)
 	if (v == 0) {
 		return fcn_00532ef0();
 	}
-	fcn_0052a0c0(a0, 0);
+	fcn_0052a0c0(subject, 0);
 	h = fcn_00470820(0, 0, (char*) 0x6a96d8);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
@@ -112,8 +112,8 @@ int __cdecl fcn_0058f310(char* a0)
 					req[4] = (char) 0x88;
 					req[0x36] = 2;
 					*(int*) (req + 0x64) = n;
-					*(int*) (req + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (a0 + 0x27) * 0x21c);
-					*(int*) (req + 0xc) = *(int*) (a0 + 1);
+					*(int*) (req + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (subject + 0x27) * 0x21c);
+					*(int*) (req + 0xc) = *(int*) (subject + 1);
 					*(int*) (req + 0x28) = gm_GameTime;
 					*(int*) (req + 0x2c) = g_7f4c04;
 					*(int*) (req + 0x30) = g_7f4c08;

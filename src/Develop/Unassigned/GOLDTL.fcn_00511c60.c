@@ -42,7 +42,7 @@ int __cdecl fcn_00511c60(void)
 	int v35[6];
 	int v39[6];
 	int v41[6];
-	int v27[30];
+	int shuffledIds[30];
 	int v40[6];
 	int v34[6];
 	int v26[30];
@@ -114,15 +114,15 @@ int __cdecl fcn_00511c60(void)
 		p += 0x21c;
 	}
 	for (i = 0; i < 0x1e; i++) {
-		v27[i] = i;
+		shuffledIds[i] = i;
 	}
-	fcn_00508d80(4, &v27[0]);
-	fcn_00508d80(4, &v27[4]);
-	fcn_00508d80(4, &v27[8]);
-	fcn_00508d80(6, &v27[12]);
-	fcn_00508d80(6, &v27[18]);
-	fcn_00508d80(6, &v27[24]);
-	fcn_00511b70(0x1e - n, &v33[n], (unsigned char *) &v27[n]);
+	fcn_00508d80(4, &shuffledIds[0]);
+	fcn_00508d80(4, &shuffledIds[4]);
+	fcn_00508d80(4, &shuffledIds[8]);
+	fcn_00508d80(6, &shuffledIds[12]);
+	fcn_00508d80(6, &shuffledIds[18]);
+	fcn_00508d80(6, &shuffledIds[24]);
+	fcn_00511b70(0x1e - n, &v33[n], (unsigned char *) &shuffledIds[n]);
 	i = n;
 	while (i < 0x1e) {
 		fcn_004c44a0();
@@ -169,7 +169,7 @@ int __cdecl fcn_00511c60(void)
 	v25[49] = 100000;
 	for (i = 0; i < 0x1e; i++) {
 		v36 = 2;
-		fcn_004e8af0(v27[i], v34);
+		fcn_004e8af0(shuffledIds[i], v34);
 		fcn_004e8b40(v34[2] & 0xff, v35);
 		v37 = (char) (int) ((float) gm_RandomMod(0x2a) +
 				    (float) ((v35[2] & 0xff) / 3 + 1) *
@@ -199,7 +199,7 @@ int __cdecl fcn_00511c60(void)
 		}
 		fcn_004c5360();
 		fcn_004fee50(p, v25[i] & 0xffff);
-		k = fcn_004e8210((unsigned char) v27[i], p, 0xff);
+		k = fcn_004e8210((unsigned char) shuffledIds[i], p, 0xff);
 		if (k != -1) {
 			while (fcn_004c4450(k) == 0) {
 				fcn_00535960();

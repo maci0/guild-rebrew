@@ -56,7 +56,7 @@ void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5530(char* msg);
 
 /* ADDRESS: GOLDTL 0x004f01c0 */
-void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
+void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 {
 	Ff01c0Out out;
 	Ff01c0Vec pv;
@@ -265,7 +265,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 			}
 		}
 	}
-	if (a3 != 0) {
-		*a3 = out;
+	if (resultOut != 0) {
+		*resultOut = out;
 	}
 }

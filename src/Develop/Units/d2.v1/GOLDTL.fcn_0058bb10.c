@@ -78,8 +78,8 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x0058bb10 */
-void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
-			  void (__cdecl* a4)(char*, PickResult*))
+void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
+			  void (__cdecl* callback)(char*, PickResult*))
 {
 
 	DialogState st;
@@ -95,9 +95,9 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 	int found;
 
 	deadline = (unsigned int)g_6b7fac;
-	if (a0 != 0) {
-		a0->item = 0;
-		a0->item2 = 0;
+	if (result != 0) {
+		result->item = 0;
+		result->item2 = 0;
 	}
 	st.handle = fcn_00470820(0, 0, g_6a969c);
 
@@ -125,7 +125,7 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 	st.type = 0; st.selected = 0;
 	fcn_0058b030(a1, (SelDlg*)&st);
 	fcn_0058b1f0(a1, &st, 0xffffffff);
-	fcn_0058b440((unsigned int) a1, (unsigned int*) &st, -1, a3);
+	fcn_0058b440((unsigned int) a1, (unsigned int*) &st, -1, mode);
 	g_100f1dc = -1;
 	deadline += 0x96;
 	selft = st.selected;
@@ -162,22 +162,22 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 					}
 				}
 			}
-			if (a3 == 0) {
+			if (mode == 0) {
 				if (found == 0) {
 					for (i = 0; i < 8; i++) {
 						if (st.rows[i][0] != d2_CurrentElementId) {
 							continue;
 						}
 						found = 1;
-						if (a0 != 0) {
-							a0->item = st.entries[selft].item;
-							a0->value = *(int*) a0->item;
-							a0->kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), a0->item);
-							a0->item2 = (char*) st.rows[i][1];
-							a0->value2 = *(int*) a0->item2;
+						if (result != 0) {
+							result->item = st.entries[selft].item;
+							result->value = *(int*) result->item;
+							result->kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), result->item);
+							result->item2 = (char*) st.rows[i][1];
+							result->value2 = *(int*) result->item2;
 						}
-						if (a4 == 0) {
-							if (a0 != 0) {
+						if (callback == 0) {
+							if (result != 0) {
 								g_774654 = 1;
 							}
 							break;
@@ -188,21 +188,21 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 						rec.item2 = (char*) st.rows[i][1];
 						rec.value2 = *(int*) rec.item2;
 						fcn_00471af0(st.handle, 0);
-						a4(a1, &rec);
+						callback(a1, &rec);
 						fcn_00471af0(st.handle, 1);
 						break;
 					}
 				}
-			} else if (a3 == 1 && st.button == d2_CurrentElementId) {
-				if (a0 != 0) {
-					a0->item = st.entries[selft].item;
-					a0->value = *(int*) a0->item;
-					a0->kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), a0->item);
-					a0->item2 = 0;
-					a0->value2 = -1;
+			} else if (mode == 1 && st.button == d2_CurrentElementId) {
+				if (result != 0) {
+					result->item = st.entries[selft].item;
+					result->value = *(int*) result->item;
+					result->kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), result->item);
+					result->item2 = 0;
+					result->value2 = -1;
 				}
-				if (a4 == 0) {
-					if (a0 != 0) {
+				if (callback == 0) {
+					if (result != 0) {
 						g_774654 = 1;
 					}
 				} else {
@@ -212,7 +212,7 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 					rec1.item2 = 0;
 					rec1.value2 = -1;
 					fcn_00471af0(st.handle, 0);
-					a4(a1, &rec1);
+					callback(a1, &rec1);
 					fcn_00471af0(st.handle, 1);
 				}
 			}
@@ -226,7 +226,7 @@ void __cdecl fcn_0058bb10(PickResult* a0, char* a1, int a2, int a3,
 			selft = st.selected;
 		}
 		if (flags & 1) {
-			fcn_0058b440((unsigned int) a1, (unsigned int*) &st, cur, a3);
+			fcn_0058b440((unsigned int) a1, (unsigned int*) &st, cur, mode);
 			selft = st.selected;
 		}
 		if (fcn_005373e0((void*) 0x58bb10, 0x677c7) == 0) {

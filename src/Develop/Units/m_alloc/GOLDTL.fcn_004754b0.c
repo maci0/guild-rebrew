@@ -9,7 +9,7 @@ void* __cdecl m_alloc(int, int);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLDTL 0x004754b0 */
-unsigned char __cdecl fcn_004754b0(void* a0, void* a1, int a3)
+unsigned char __cdecl fcn_004754b0(void* path, void* pixels, int a3)
 {
 	BITMAPINFOHEADER hdr;
 	unsigned char v10[2];
@@ -21,7 +21,7 @@ unsigned char __cdecl fcn_004754b0(void* a0, void* a1, int a3)
 	int i;
 	void* q;
 
-	f = (void*) fcn_0064e2f9(a0, 0x6750e8);
+	f = (void*) fcn_0064e2f9(path, 0x6750e8);
 	if (f) {
 		fcn_0064e48f(f, 0xe, 0);
 		fcn_0064ebe4(&hdr, 1, 0x28, f);
@@ -35,7 +35,7 @@ unsigned char __cdecl fcn_004754b0(void* a0, void* a1, int a3)
 			while (v9 < abs(hdr.biHeight)) {
 				fcn_0064ebe4(v10, 1, 2, f);
 				if (v10[0]) {
-					memset((char*) a1 + hdr.biWidth * v9 + v12, v10[1], v10[0]);
+					memset((char*) pixels + hdr.biWidth * v9 + v12, v10[1], v10[0]);
 					v12 += v10[0];
 				}
 				else {
@@ -54,10 +54,10 @@ unsigned char __cdecl fcn_004754b0(void* a0, void* a1, int a3)
 						break;
 					default:
 						if ((v10[1] & 1) == 1) {
-							fcn_0064ebe4((char*) a1 + hdr.biWidth * v9 + v12, v10[1] + 1, 1, f);
+							fcn_0064ebe4((char*) pixels + hdr.biWidth * v9 + v12, v10[1] + 1, 1, f);
 						}
 						else {
-							fcn_0064ebe4((char*) a1 + hdr.biWidth * v9 + v12, v10[1], 1, f);
+							fcn_0064ebe4((char*) pixels + hdr.biWidth * v9 + v12, v10[1], 1, f);
 						}
 						v12 += v10[1];
 						break;
@@ -66,7 +66,7 @@ unsigned char __cdecl fcn_004754b0(void* a0, void* a1, int a3)
 			}
 		}
 		else {
-			fcn_0064ebe4(a1, hdr.biHeight, hdr.biWidth, f);
+			fcn_0064ebe4(pixels, hdr.biHeight, hdr.biWidth, f);
 		}
 		fcn_0064e1fd(f);
 		if ((a3 & 0xff) && hdr.biHeight > 0) {
@@ -75,9 +75,9 @@ unsigned char __cdecl fcn_004754b0(void* a0, void* a1, int a3)
 			last = hdr.biHeight - 1;
 			n = hdr.biHeight / 2;
 			while (i < n) {
-				memcpy(q, (char*) a1 + hdr.biWidth * i, hdr.biWidth);
-				memcpy((char*) a1 + hdr.biWidth * i, (char*) a1 + hdr.biWidth * last, hdr.biWidth);
-				memcpy((char*) a1 + hdr.biWidth * last, q, hdr.biWidth);
+				memcpy(q, (char*) pixels + hdr.biWidth * i, hdr.biWidth);
+				memcpy((char*) pixels + hdr.biWidth * i, (char*) pixels + hdr.biWidth * last, hdr.biWidth);
+				memcpy((char*) pixels + hdr.biWidth * last, q, hdr.biWidth);
 				i++;
 				last--;
 			}

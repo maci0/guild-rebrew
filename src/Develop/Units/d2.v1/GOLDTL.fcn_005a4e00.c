@@ -30,7 +30,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
 /* ADDRESS: GOLDTL 0x005a4e00 */
-void __cdecl fcn_005a4e00(char* a0)
+void __cdecl fcn_005a4e00(char* building)
 {
 	int items[16][3];
 	int ids[16];
@@ -86,7 +86,7 @@ void __cdecl fcn_005a4e00(char* a0)
 				}
 			}
 			io_AppendText(0x6811b0);
-			n = fcn_0050d640(*(unsigned short*) (a0 + 0x27), a0, 0xffff, out);
+			n = fcn_0050d640(*(unsigned short*) (building + 0x27), building, 0xffff, out);
 			for (i = 0; i < 16; i++) {
 				ids[i] = -1;
 			}
@@ -115,7 +115,7 @@ void __cdecl fcn_005a4e00(char* a0)
 			}
 			fcn_0050dd00(count - 1, ids, 0);
 			for (i = 0; i < count - 1; i++) {
-				v = fcn_0050d640(*(unsigned short*) (a0 + 0x27), a0,
+				v = fcn_0050d640(*(unsigned short*) (building + 0x27), building,
 				    ids[i], out);
 				sum = 0;
 				for (j = 0; j < v; j++) {
@@ -128,12 +128,12 @@ void __cdecl fcn_005a4e00(char* a0)
 		first = 0;
 		if (g_100f1dc == 2) {
 			if (d2_CurrentElementId == tmp[0]) {
-				fcn_005a4bb0(a0);
+				fcn_005a4bb0(building);
 			}
 			else {
 				for (i = 0; i < count - 1; i++) {
 					if (d2_CurrentElementId == items[i][1]) {
-						fcn_005a4960(a0, ids[i]);
+						fcn_005a4960(building, ids[i]);
 						first = 1;
 					}
 				}

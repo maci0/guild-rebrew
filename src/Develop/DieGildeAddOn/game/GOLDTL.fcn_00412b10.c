@@ -15,7 +15,7 @@ void __cdecl fcn_00438cb0(void* a0, void* a1);
 /* The native body keeps an EBP frame (/Oy-, non-frame-omitted build). */
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x00412b10 */
-unsigned int __cdecl fcn_00412b10(char* a0, float a1, float a2, float a3, float a4, float a5, float a6, unsigned int a7, unsigned char a8)
+unsigned int __cdecl fcn_00412b10(char* object, float targetX, float targetY, float targetZ, float targetRotX, float targetRotY, float targetRotZ, unsigned int a7, unsigned char a8)
 {
 	D3_ANIMATION_OPTIONS z;
 	float rotation[3];
@@ -25,7 +25,7 @@ unsigned int __cdecl fcn_00412b10(char* a0, float a1, float a2, float a3, float 
 	void* fill_dst;
 	int fill_size;
 
-	if (*(int*) 0x6b5cbc != 0 && (char*) d3_ActiveCamera == a0) {
+	if (*(int*) 0x6b5cbc != 0 && (char*) d3_ActiveCamera == object) {
 		return 0;
 	}
 	fill_dst = &z;
@@ -48,41 +48,41 @@ unsigned int __cdecl fcn_00412b10(char* a0, float a1, float a2, float a3, float 
 		rep stosb
 	}
 	z.layer = z.layer | 0x14;
-	rotation[0] = a4;
+	rotation[0] = targetRotX;
 	z.layer = z.layer & 0xf7;
 	z.queue = 1;
-	rotation[2] = a6;
+	rotation[2] = targetRotZ;
 	frames[0].rotation[0] = 0.0f;
 	frames[0].rotation[1] = 0.0f;
 	frames[0].rotation[2] = 0.0f;
 	frames[0].position[0] = 0.0f;
 	frames[0].position[1] = 0.0f;
 	frames[0].position[2] = 0.0f;
-	rotation[1] = a5;
+	rotation[1] = targetRotY;
 	if ((a8 & 8) != 0) {
-		fcn_00451720(a0 + 0x84, rotation, v6, rotation);
-		fcn_00438cb0(a0, v6);
+		fcn_00451720(object + 0x84, rotation, v6, rotation);
+		fcn_00438cb0(object, v6);
 	}
-	if (a0 == (char*) d3_ActiveCamera) {
+	if (object == (char*) d3_ActiveCamera) {
 		*(float*) 0x14ce890 = rotation[0];
 		*(float*) 0x14ce894 = rotation[1];
 		*(float*) 0x14ce898 = rotation[2];
-		*(float*) 0x14ce880 = a1;
-		*(float*) 0x14ce884 = a2;
-		*(float*) 0x14ce888 = a3;
+		*(float*) 0x14ce880 = targetX;
+		*(float*) 0x14ce884 = targetY;
+		*(float*) 0x14ce888 = targetZ;
 	}
-	frames[1].position[0] = a1 - *(float*) (a0 + 0x4c);
-	frames[1].position[1] = a2 - *(float*) (a0 + 0x50);
-	frames[1].position[2] = a3 - *(float*) (a0 + 0x54);
+	frames[1].position[0] = targetX - *(float*) (object + 0x4c);
+	frames[1].position[1] = targetY - *(float*) (object + 0x50);
+	frames[1].position[2] = targetZ - *(float*) (object + 0x54);
 	frames[0].parameter = a7;
-	rotation[0] -= *(float*) (a0 + 0x84);
-	rotation[1] -= *(float*) (a0 + 0x88);
-	rotation[2] -= *(float*) (a0 + 0x8c);
+	rotation[0] -= *(float*) (object + 0x84);
+	rotation[1] -= *(float*) (object + 0x88);
+	rotation[2] -= *(float*) (object + 0x8c);
 	frames[1].rotation[0] = rotation[0];
 	frames[1].rotation[1] = rotation[1];
 	frames[1].rotation[2] = rotation[2];
-	v3 = fcn_004339e0(a0, z, 2, frames);
-	if (a0 != (char*) d3_ActiveCamera) {
+	v3 = fcn_004339e0(object, z, 2, frames);
+	if (object != (char*) d3_ActiveCamera) {
 		return 1;
 	}
 	*(int*) 0x6b5cbc = 1;

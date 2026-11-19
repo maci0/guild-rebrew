@@ -25,7 +25,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetElementValue(int, ...);
 
 /* ADDRESS: GOLDTL 0x005c3820 */
-void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
+void __cdecl fcn_005c3820(unsigned char* building, unsigned char* a1)
 {
 	int table[37] = { 1, 2, 0xb, 0xc, 9, 5, 6, 3, 4, 0xa, 0xd, 0xe, 0xf,
 		0x10, 0x11, 7, 8, 0 };
@@ -45,7 +45,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 	int entry;
 	int type;
 
-	id = *(int*) (a0 + 1);
+	id = *(int*) (building + 1);
 	for (i = 0; i < 0x24; i++) {
 		table[i] = i + 1;
 	}
@@ -57,7 +57,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 	d2_CenterDialogWindows(window);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(window, 1);
-	io_AppendText(0x17e0, a0);
+	io_AppendText(0x17e0, building);
 	d2_SetForm(window, 3);
 	elem = fcn_00472250(window, 3, io_AppendText(0x17e1));
 	d2_SetForm(window, 2);
@@ -65,7 +65,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 	count = 0;
 	if (entry != 0) {
 		for (i = 0; table[i] != 0; i++) {
-			if (fcn_0050c7d0(a0[0], table[i]) != 0) {
+			if (fcn_0050c7d0(building[0], table[i]) != 0) {
 				count++;
 			}
 		}
@@ -74,7 +74,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 	height = (*(int*) (g_77255c + 0x10) - step * count) / 2 + 0xe;
 	if (entry != 0) {
 		for (i = 0; table[i] != 0; i++) {
-			if (fcn_0050c7d0(a0[0], table[i]) != 0) {
+			if (fcn_0050c7d0(building[0], table[i]) != 0) {
 				label = fcn_0046f740(0, height, 2, d2_CurrentWindowId);
 				wins[i] = label;
 				*(int*) (g_1015ea0 + label * 0x2f4 + 0x1d0) = 3;
@@ -89,7 +89,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 					type = 4;
 				}
 				else {
-					type = fcn_0050c7d0(a0[0], table[i]);
+					type = fcn_0050c7d0(building[0], table[i]);
 				}
 				gauge = fcn_004677e0(0x140, height, 0x82, 0, type, 0x6f, 0x56, d2_CurrentWindowId);
 				elems[i] = gauge;
@@ -126,7 +126,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 		}
 		if (entry != 0) {
 			for (i = 0; table[i] != 0; i++) {
-				if (fcn_0050c7d0(a0[0], table[i]) != 0 && elems[i] != -1) {
+				if (fcn_0050c7d0(building[0], table[i]) != 0 && elems[i] != -1) {
 					if (table[i] == 3) {
 						type = 6;
 					}
@@ -134,12 +134,12 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 						type = 4;
 					}
 					else {
-						type = fcn_0050c7d0(a0[0], table[i]);
+						type = fcn_0050c7d0(building[0], table[i]);
 					}
-					fcn_0050c710((unsigned char*) a0, table[i], 0);
+					fcn_0050c710((unsigned char*) building, table[i], 0);
 					d2_SetElementValue(elems[i], 0, type,
-					    fcn_0050c710((unsigned char*) a0, table[i], 1),
-					    fcn_0050c710((unsigned char*) a0, table[i], 0));
+					    fcn_0050c710((unsigned char*) building, table[i], 1),
+					    fcn_0050c710((unsigned char*) building, table[i], 0));
 				}
 			}
 		}

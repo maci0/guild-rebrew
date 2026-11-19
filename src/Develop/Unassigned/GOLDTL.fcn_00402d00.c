@@ -10,7 +10,7 @@ void __cdecl fcn_004518a0(float* v);
 char __cdecl fcn_0045b990(float* tex, float* pt, int* col, int* row, float* out);
 
 /* ADDRESS: GOLDTL 0x00402d00 */
-void __cdecl fcn_00402d00(char* a0)
+void __cdecl fcn_00402d00(char* character)
 {
 	float limit = 50.0f;
 	float t;
@@ -29,16 +29,16 @@ void __cdecl fcn_00402d00(char* a0)
 	char* s;
 	int type;
 
-	if ((*(unsigned short*) (a0 + 0x8c) & 0x18) != 0) {
+	if ((*(unsigned short*) (character + 0x8c) & 0x18) != 0) {
 		return;
 	}
-	if (*(int*) (a0 + 0x124) != 0) {
+	if (*(int*) (character + 0x124) != 0) {
 		return;
 	}
-	if (*(char**) (a0 + 0x128) != 0 && *(char*) (*(char**) (a0 + 0x128) + 9) == '-') {
+	if (*(char**) (character + 0x128) != 0 && *(char*) (*(char**) (character + 0x128) + 9) == '-') {
 		return;
 	}
-	if (*(char**) (a0 + 0x128) != 0 && *(char*) (*(char**) (a0 + 0x128) + 9) == '-') {
+	if (*(char**) (character + 0x128) != 0 && *(char*) (*(char**) (character + 0x128) + 9) == '-') {
 		limit = 100.0f;
 	}
 	p = ch_CharacterSlots;
@@ -47,11 +47,11 @@ void __cdecl fcn_00402d00(char* a0)
 			break;
 		}
 		e = *p;
-		if (e != 0 && a0 != e &&
-		    *(int*) (a0 + 0x2c) == *(int*) (e + 0x2c) &&
-		    *(int*) (a0 + 0x30) == *(int*) (e + 0x30) &&
-		    (*(unsigned short*) (a0 + 0x8c) & 0x18) == 0 &&
-		    *(int*) (a0 + 0x124) == 0) {
+		if (e != 0 && character != e &&
+		    *(int*) (character + 0x2c) == *(int*) (e + 0x2c) &&
+		    *(int*) (character + 0x30) == *(int*) (e + 0x30) &&
+		    (*(unsigned short*) (character + 0x8c) & 0x18) == 0 &&
+		    *(int*) (character + 0x124) == 0) {
 			s = *(char**) (e + 0x34);
 			if (*(int*) (s + 0x218) == 1) {
 				if (*(char**) (e + 0x22c) == 0) {
@@ -61,7 +61,7 @@ void __cdecl fcn_00402d00(char* a0)
 					goto next;
 				}
 			}
-			if (CompareVector3WithinTolerance((float*) (*(char**) (a0 + 0x34) + 0x4c),
+			if (CompareVector3WithinTolerance((float*) (*(char**) (character + 0x34) + 0x4c),
 			                 (float*) (s + 0x4c), limit) != 0) {
 				list[i] = (int) *p;
 				i++;
@@ -76,7 +76,7 @@ next:
 			break;
 		}
 		e = (char*) list[i];
-		s = *(char**) (a0 + 0x34);
+		s = *(char**) (character + 0x34);
 		direction[0] = *(float*) (*(char**) (e + 0x34) + 0x4c) - *(float*) (s + 0x4c);
 		direction[1] = *(float*) (*(char**) (e + 0x34) + 0x50) - *(float*) (s + 0x50);
 		direction[2] = *(float*) (*(char**) (e + 0x34) + 0x54) - *(float*) (s + 0x54);
@@ -96,20 +96,20 @@ next:
 		direction[2] = -direction[2];
 		fcn_004518a0(direction);
 		k = t * g_6628b0;
-		s = *(char**) (a0 + 0x34);
+		s = *(char**) (character + 0x34);
 		pt[0] = *(float*) (s + 0x4c) + k * direction[0];
 		pt[1] = *(float*) (s + 0x50);
 		pt[2] = *(float*) (s + 0x54) + k * direction[2];
-		*(unsigned short*) (a0 + 0x8c) |= 1;
-		*(int*) (a0 + 0x58) = 0;
-		*(float*) (a0 + 0x54) = k * direction[0];
-		*(float*) (a0 + 0x5c) = k * direction[2];
-		s = *(char**) (a0 + 0x88);
+		*(unsigned short*) (character + 0x8c) |= 1;
+		*(int*) (character + 0x58) = 0;
+		*(float*) (character + 0x54) = k * direction[0];
+		*(float*) (character + 0x5c) = k * direction[2];
+		s = *(char**) (character + 0x88);
 		e = *(char**) (s + 0xb0);
 		if (e != 0 && fcn_0045b990((float*) e, pt, &col, &row, &out) != 0) {
 			type = *(int*) (*(char**) (e + 0x24) + (*(int*) (e + 0x20) * row + col) * 0x1c);
 			if (type == 0 || type == 0xd) {
-				*(unsigned short*) (a0 + 0x8c) &= 0xfe;
+				*(unsigned short*) (character + 0x8c) &= 0xfe;
 			}
 		}
 	}

@@ -18,7 +18,7 @@ int __cdecl fcn_004e8240(int id, char* ea, char* eb, int x1, int x2);
 int __cdecl fcn_004e8b80(int kind, int max, OFFICE_SLOT* out);
 
 /* ADDRESS: GOLDTL 0x004eba60 */
-unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
+unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 {
 	float f;
 	int sign;
@@ -42,9 +42,9 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 	sign = (f > 0.3f) ? 1 : -1;
 
 	if (e[0x169] == 0x1e) {
-		if (a1[0] != 1)
+		if (target[0] != 1)
 			return 0;
-		h = gm_LookupEntityRecordById(a1[1]);
+		h = gm_LookupEntityRecordById(target[1]);
 		if (h == 0)
 			return 0;
 		if (h[0x166] == 0)
@@ -96,13 +96,13 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 	if (e[0x169] != 0x1f && e[0x169] != 0x21) {
 		if (e[0x169] != 0x20)
 			return 0;
-		if (a1[0] != 4)
+		if (target[0] != 4)
 			return 0;
-		if (a1[1] < 1 || a1[1] > 6)
+		if (target[1] < 1 || target[1] > 6)
 			return 0;
 		if (f > 0.3f) {
 			float g;
-			n = fcn_004e8b80(a1[1], 6, arr);
+			n = fcn_004e8b80(target[1], 6, arr);
 			g = gm_GetEntitySkill(e, 4);
 			value = (int) (((gm_RandomFloat01() + 1.0f) * g * 15.0f + 5.0) * 2.55f);
 			for (k = 0; k < n; k++) {
@@ -114,7 +114,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 		fcn_005100f0(*(int*) (e + 4), -8);
 		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
 		if (f > 0.3f) {
-			io_FormatTextBuffer(buf, 0x167a, a1[1] + 0x1663);
+			io_FormatTextBuffer(buf, 0x167a, target[1] + 0x1663);
 			p = g_7f4ca4;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4))
@@ -122,11 +122,11 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 				p += 0x21c;
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
-				io_FormatTextBuffer(buf, 0x1678, a1[1] + 0x1663);
+				io_FormatTextBuffer(buf, 0x1678, target[1] + 0x1663);
 				fcn_00526120(buf, 0);
 			}
 		} else {
-			io_FormatTextBuffer(buf, 0x167b, a1[1] + 0x1663);
+			io_FormatTextBuffer(buf, 0x167b, target[1] + 0x1663);
 			p = g_7f4ca4;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4))
@@ -134,18 +134,18 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 				p += 0x21c;
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
-				io_FormatTextBuffer(buf, 0x1679, a1[1] + 0x1663);
+				io_FormatTextBuffer(buf, 0x1679, target[1] + 0x1663);
 				fcn_00526120(buf, 0);
 			}
 		}
 	} else {
-		if (a1[0] != 4)
+		if (target[0] != 4)
 			return 0;
-		if (a1[1] < 1 || a1[1] > 6)
+		if (target[1] < 1 || target[1] > 6)
 			return 0;
 		if (f > 0.3f) {
 			float g;
-			n = fcn_004e8b80(a1[1], 6, arr);
+			n = fcn_004e8b80(target[1], 6, arr);
 			g = gm_GetEntitySkill(e, 4);
 			value = (int) (((gm_RandomFloat01() + 1.0f) * g * 15.0f + 5.0) * 2.55f);
 			for (i = 0; i < n - 1; i++) {
@@ -161,13 +161,13 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 				}
 			}
 		} else {
-			n = fcn_004e8b80(a1[1], 6, arr);
+			n = fcn_004e8b80(target[1], 6, arr);
 		}
 		fcn_005100f0(*(int*) (e + 4), -8);
 		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
 		if (f > 0.3f) {
-			io_FormatTextBuffer(buf, 0x1672, a1[1] + 0x1663);
-			io_FormatTextBuffer(buf2, 0x1670, a1[1] + 0x1663);
+			io_FormatTextBuffer(buf, 0x1672, target[1] + 0x1663);
+			io_FormatTextBuffer(buf2, 0x1670, target[1] + 0x1663);
 			p = g_7f4ca4;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4)) {
@@ -183,13 +183,13 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 				p += 0x21c;
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
-				io_FormatTextBuffer(buf, 0x166e, a1[1] + 0x1663);
+				io_FormatTextBuffer(buf, 0x166e, target[1] + 0x1663);
 				fcn_00526120(buf, 0);
 				return sign;
 			}
 		} else {
-			io_FormatTextBuffer(buf, 0x1673, a1[1] + 0x1663);
-			io_FormatTextBuffer(buf2, 0x1671, a1[1] + 0x1663);
+			io_FormatTextBuffer(buf, 0x1673, target[1] + 0x1663);
+			io_FormatTextBuffer(buf2, 0x1671, target[1] + 0x1663);
 			p = g_7f4ca4;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4)) {
@@ -205,7 +205,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 				p += 0x21c;
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
-				io_FormatTextBuffer(buf, 0x166f, a1[1] + 0x1663);
+				io_FormatTextBuffer(buf, 0x166f, target[1] + 0x1663);
 				fcn_00526120(buf, 0);
 			}
 		}

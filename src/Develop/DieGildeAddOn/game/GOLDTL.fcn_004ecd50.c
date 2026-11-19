@@ -11,10 +11,10 @@ float __cdecl fcn_004ecd50(char* a0, unsigned int* a1, int* a2)
 {
 	float x;
 	int* obj;
-	int v1;
+	int requested;
 	int v4;
-	int v5;
-	int v6;
+	int adjusted;
+	int amount;
 
 	x = fcn_004ec8a0(a0, 2);
 	obj = fcn_004ec950(a0, *a1);
@@ -24,19 +24,19 @@ float __cdecl fcn_004ecd50(char* a0, unsigned int* a1, int* a2)
 	if (*((float*) obj + 1) >= 1.0f) {
 		return g_6628a8;
 	}
-	v1 = *a2;
-	if (v1 <= 0) {
+	requested = *a2;
+	if (requested <= 0) {
 		return g_6628a8;
 	}
 	v4 = fcn_004eccd0(a0, (char*) a1);
-	v5 = (int) ((float) v4 * (1.0f - x * 0.5f) * (1.0f - *((float*) obj + 1)));
-	if (v5 <= 0) {
+	adjusted = (int) ((float) v4 * (1.0f - x * 0.5f) * (1.0f - *((float*) obj + 1)));
+	if (adjusted <= 0) {
 		return g_6628a8;
 	}
-	v6 = v5;
-	if (v1 < v5) {
-		v6 = v1;
+	amount = adjusted;
+	if (requested < adjusted) {
+		amount = requested;
 	}
-	*a2 = v6;
-	return ((float) v6 / (float) v5) * (1.0f - *((float*) obj + 1));
+	*a2 = amount;
+	return ((float) amount / (float) adjusted) * (1.0f - *((float*) obj + 1));
 }

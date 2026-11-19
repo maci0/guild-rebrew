@@ -29,7 +29,7 @@ void __cdecl fcn_005156a0(char* record)
 	char* item;
 	char* table;
 	unsigned int id;
-	unsigned int v22;
+	unsigned int statusFlags;
 	int idx;
 	unsigned char kind;
 	int k0;
@@ -178,8 +178,8 @@ label_59eb:
 		d3_SetSubtreeVisible(record, 1);
 		*(char**) (record + 0x204) = slot;
 		if ((entry[0] == 6 || entry[0] == 2) && g_7746c8 != 0) {
-			v22 = fcn_00506380(g_774970, (void*) 0x7f3ee0, slot, 0);
-			if ((v22 & 0x4000) != 0) {
+			statusFlags = fcn_00506380(g_774970, (void*) 0x7f3ee0, slot, 0);
+			if ((statusFlags & 0x4000) != 0) {
 				*(unsigned int*) (record + 0x224) = 1;
 				*(char**) (slot + 0x30) = record;
 				goto label_5aab;

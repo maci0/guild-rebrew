@@ -22,137 +22,137 @@ void __cdecl fcn_004c57e0(int a0, int a1);
 void __cdecl fcn_00546190(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00562ba0 */
-void __cdecl fcn_00562ba0(int a0)
+void __cdecl fcn_00562ba0(int eventCursor)
 {
-	int v3;
+	int eventBase;
 	int v6;
 	int v4;
 	int v7;
 	int state;
-	char v1;
+	char targetType;
 	char buf[1024];
 	int v10[4];
 	char v11[4];
 	char* pkt;
 	char* ep;
 
-	v3 = a0;
-	state = *(int*) (a0 + 0x70);
-	if (state > 0 && (*(int*) (a0 + 0xc8) == 0 || *(int*) (a0 + 0xc8) == -1)) {
-		*(int*) (a0 + 0x70) = -2;
+	eventBase = eventCursor;
+	state = *(int*) (eventCursor + 0x70);
+	if (state > 0 && (*(int*) (eventCursor + 0xc8) == 0 || *(int*) (eventCursor + 0xc8) == -1)) {
+		*(int*) (eventCursor + 0x70) = -2;
 	}
-	switch (*(int*) (a0 + 0x70)) {
+	switch (*(int*) (eventCursor + 0x70)) {
 	case 0:
-		v6 = *(int*) (v3 + 0xcc);
+		v6 = *(int*) (eventBase + 0xcc);
 		if (v6 != -1 && fcn_004c4450(v6) == 0) {
 			return;
 		}
-		v7 = fcn_004c4480(*(int*) (v3 + 0xcc));
+		v7 = fcn_004c4480(*(int*) (eventBase + 0xcc));
 		if (v7 != 0) {
-			v4 = gm_GetEntityTableEntry(*(unsigned short*) (v3 + 8) * 0x21c + (int) &g_7f4ca0);
+			v4 = gm_GetEntityTableEntry(*(unsigned short*) (eventBase + 8) * 0x21c + (int) &g_7f4ca0);
 			if (v4 != 0) {
-				*(int*) (v4 + 0x28) = *(int*) (v4 + 0x28) + *(int*) (v3 + 0xd8);
+				*(int*) (v4 + 0x28) = *(int*) (v4 + 0x28) + *(int*) (eventBase + 0xd8);
 			}
-			*(int*) (v3 + 0xc8) = *(int*) (v7 + 4);
-			fcn_004c51a0(-1, *(int*) (*(unsigned short*) (v3 + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(unsigned char*) &g_773d75, *(int*) (v3 + 0xd8));
-			fcn_00529160(0, 0, *(unsigned short*) v7, v3);
-			*(int*) (v3 + 0xcc) = -1;
-			*(int*) (v3 + 0x70) = *(int*) (v3 + 0x70) + 1;
+			*(int*) (eventBase + 0xc8) = *(int*) (v7 + 4);
+			fcn_004c51a0(-1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(unsigned char*) &g_773d75, *(int*) (eventBase + 0xd8));
+			fcn_00529160(0, 0, *(unsigned short*) v7, eventBase);
+			*(int*) (eventBase + 0xcc) = -1;
+			*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 			return;
 		}
-		*(int*) (v3 + 0x70) = -1;
-		*(int*) (v3 + 0xcc) = -1;
+		*(int*) (eventBase + 0x70) = -1;
+		*(int*) (eventBase + 0xcc) = -1;
 		return;
 	case 1:
-		v6 = gm_StartFilteredEntitySearch(1, 1, *(int*) (v3 + 0xd0));
+		v6 = gm_StartFilteredEntitySearch(1, 1, *(int*) (eventBase + 0xd0));
 		if (v6 != 0) {
-			*(int*) (v3 + 0xcc) = fcn_004c5da0(*(int*) (v3 + 0xc8), *(int*) (v6 + 1), -1, 0, 1, 0x6a659c);
-			*(int*) (v3 + 0x70) = *(int*) (v3 + 0x70) + 1;
+			*(int*) (eventBase + 0xcc) = fcn_004c5da0(*(int*) (eventBase + 0xc8), *(int*) (v6 + 1), -1, 0, 1, 0x6a659c);
+			*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 			return;
 		}
 		goto label_562e74;
 	case 2:
-		*(int*) (v3 + 0xcc) = -1;
-		v6 = gm_LookupEntityRecordById(*(int*) (v3 + 0xc8));
+		*(int*) (eventBase + 0xcc) = -1;
+		v6 = gm_LookupEntityRecordById(*(int*) (eventBase + 0xc8));
 		if (v6 == 0) {
-			*(int*) (v3 + 0x70) = -1;
+			*(int*) (eventBase + 0x70) = -1;
 			return;
 		}
 		if (*(int*) (*(int*) (v6 + 0x184) + 0x128) != 0) {
-			pkt = (char*) (v3 + 0x52);
+			pkt = (char*) (eventBase + 0x52);
 			*(pos14_7f4c00*) pkt = *(pos14_7f4c00*) &gm_GameTime;
 			fcn_00500bb0((int*) pkt, 0, 4, 0);
-			*(int*) (v3 + 0x70) = 2;
+			*(int*) (eventBase + 0x70) = 2;
 			return;
 		}
-		*(int*) (v3 + 0x70) = 7;
+		*(int*) (eventBase + 0x70) = 7;
 		return;
 	case 7:
-		v6 = gm_StartFilteredEntitySearch(1, 1, *(int*) (v3 + 0xd0));
-		v4 = gm_LookupEntityRecordById(*(int*) (v3 + 0xb4));
+		v6 = gm_StartFilteredEntitySearch(1, 1, *(int*) (eventBase + 0xd0));
+		v4 = gm_LookupEntityRecordById(*(int*) (eventBase + 0xb4));
 		if (v6 != 0 && v4 != 0) {
 			v10[0] = v6;
 			v10[1] = 0x457a0000;
-			v10[2] = v3;
+			v10[2] = eventBase;
 			v10[3] = 0;
 			if (fcn_0055be70(v10) != 0) {
-				*(int*) (v3 + 0xcc) = fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (v3 + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (v4 + 4), *(int*) (v6 + 1));
-				a0 += 0x52;
-				*(int*) (a0 + 0x1e) = 8;
-				*(int*) (a0 + 0x82) = *(int*) (v10[3] + 4);
-				*(pos14_7f4c00*) a0 = *(pos14_7f4c00*) &gm_GameTime;
+				*(int*) (eventBase + 0xcc) = fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (v4 + 4), *(int*) (v6 + 1));
+				eventCursor += 0x52;
+				*(int*) (eventCursor + 0x1e) = 8;
+				*(int*) (eventCursor + 0x82) = *(int*) (v10[3] + 4);
+				*(pos14_7f4c00*) eventCursor = *(pos14_7f4c00*) &gm_GameTime;
 				return;
 			}
 		}
 label_562e74:
-		*(int*) (v3 + 0x70) = 4;
+		*(int*) (eventBase + 0x70) = 4;
 		return;
 	case 8:
-		v6 = *(int*) (v3 + 0xcc);
+		v6 = *(int*) (eventBase + 0xcc);
 		if (v6 != -1 && fcn_004c4450(v6) == 0) {
 			return;
 		}
-		v6 = gm_StartFilteredEntitySearch(1, 1, *(int*) (v3 + 0xac));
-		v4 = fcn_005463a0(1, 1, *(int*) (v3 + 0xd4));
-		if (v6 != 0 && v4 != 0 && *(int*) (v4 + 0xd4) == *(int*) (v3 + 4) && *(int*) (v3 + 0xcc) != -1) {
-			v6 = gm_LookupEntityRecordById(*(int*) (v3 + 0xd4));
-			v7 = fcn_004c4480(*(int*) (v3 + 0xcc));
+		v6 = gm_StartFilteredEntitySearch(1, 1, *(int*) (eventBase + 0xac));
+		v4 = fcn_005463a0(1, 1, *(int*) (eventBase + 0xd4));
+		if (v6 != 0 && v4 != 0 && *(int*) (v4 + 0xd4) == *(int*) (eventBase + 4) && *(int*) (eventBase + 0xcc) != -1) {
+			v6 = gm_LookupEntityRecordById(*(int*) (eventBase + 0xd4));
+			v7 = fcn_004c4480(*(int*) (eventBase + 0xcc));
 			if (v7 != 0 && v6 != 0) {
 				fcn_004c58b0(*(int*) v7, *(int*) (v6 + 4));
 			}
-			*(int*) (v3 + 0x70) = 9;
-			fcn_00500bb0((int*) (v3 + 0x52), 0, 10, 0);
+			*(int*) (eventBase + 0x70) = 9;
+			fcn_00500bb0((int*) (eventBase + 0x52), 0, 10, 0);
 			return;
 		}
-		*(int*) (v3 + 0x70) = -1;
+		*(int*) (eventBase + 0x70) = -1;
 		return;
 	case 9:
-		v6 = fcn_005463a0(1, 1, *(int*) (v3 + 0xd4));
+		v6 = fcn_005463a0(1, 1, *(int*) (eventBase + 0xd4));
 		if (v6 == 0) {
-			*(int*) (v3 + 0x70) = -1;
+			*(int*) (eventBase + 0x70) = -1;
 			return;
 		}
-		if (*(int*) (v6 + 0xd4) == *(int*) (v3 + 4)) {
-			fcn_00500bb0((int*) (v3 + 0x52), 0, 6, 0);
+		if (*(int*) (v6 + 0xd4) == *(int*) (eventBase + 4)) {
+			fcn_00500bb0((int*) (eventBase + 0x52), 0, 6, 0);
 			return;
 		}
-		fcn_004c5da0(*(int*) (v3 + 0xc8), *(int*) (v3 + 0x10), -1, 0, 1, 0x6a659c);
-		*(pos14_7f4c00*) (v3 + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
-		fcn_00500bb0((int*) (v3 + 0x52), 0, 4, 0);
-		*(int*) (v3 + 0x70) = 5;
+		fcn_004c5da0(*(int*) (eventBase + 0xc8), *(int*) (eventBase + 0x10), -1, 0, 1, 0x6a659c);
+		*(pos14_7f4c00*) (eventBase + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
+		fcn_00500bb0((int*) (eventBase + 0x52), 0, 4, 0);
+		*(int*) (eventBase + 0x70) = 5;
 		return;
 	case 3:
-		fcn_004c5da0(*(int*) (v3 + 0xc8), *(int*) (v3 + 0x10), -1, 0, 1, 0x6a659c);
-		*(int*) (v3 + 0x70) = *(int*) (v3 + 0x70) + 1;
+		fcn_004c5da0(*(int*) (eventBase + 0xc8), *(int*) (eventBase + 0x10), -1, 0, 1, 0x6a659c);
+		*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 		return;
 	case 4:
-		if (0 <= fcn_00500cb0((int*) (v3 + 0x52), (int) &gm_GameTime)) {
+		if (0 <= fcn_00500cb0((int*) (eventBase + 0x52), (int) &gm_GameTime)) {
 			return;
 		}
-		ep = (char*) (*(unsigned short*) (v3 + 8) * 0x21c + (unsigned long)&g_7f4ca0);
-		v7 = gm_LookupEntityRecordById(*(int*) (v3 + 0xb4));
+		ep = (char*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca0);
+		v7 = gm_LookupEntityRecordById(*(int*) (eventBase + 0xb4));
 		if (v7 == 0) {
-			*(int*) (v3 + 0x70) = -1;
+			*(int*) (eventBase + 0x70) = -1;
 			return;
 		}
 		v4 = fcn_00494740((int*) ep, v7, (int) v11);
@@ -174,9 +174,9 @@ label_562e74:
 			io_FormatTextBuffer(buf, 0xff3);
 			fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 		} else {
-			v1 = *(char*) (v7 + 2);
+			targetType = *(char*) (v7 + 2);
 			if (v4 != 0) {
-				if (v1 == 6 || v1 == 7) {
+				if (targetType == 6 || targetType == 7) {
 					io_FormatTextBuffer(buf, 0x173b, 2);
 					fcn_00545d40(*(int*) (v7 + 4), -1, buf, 0, 0x5fb, (char*) 0x6a6538);
 				}
@@ -185,12 +185,12 @@ label_562e74:
 					fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 				}
 				if (fcn_005c6270(v7, 0x2b4)) {
-					fcn_005100f0(*(int*) (v3 + 0xb4), -1);
+					fcn_005100f0(*(int*) (eventBase + 0xb4), -1);
 				} else {
-					fcn_005100f0(*(int*) (v3 + 0xb4), -2);
+					fcn_005100f0(*(int*) (eventBase + 0xb4), -2);
 				}
 			} else {
-				if (v1 == 6 || v1 == 7) {
+				if (targetType == 6 || targetType == 7) {
 					io_FormatTextBuffer(buf, 0x173d);
 					fcn_00545d40(*(int*) (v7 + 4), -1, buf, 0, 0x5fb, 0);
 				}
@@ -199,36 +199,36 @@ label_562e74:
 					fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 				}
 			}
-			fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (v3 + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (v3 + 0xb4), *(int*) (v3 + 0xac));
+			fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (eventBase + 0xb4), *(int*) (eventBase + 0xac));
 			if (*(char*) (v7 + 2) != 6 && *(char*) (v7 + 2) != 7) {
 				fcn_004c54c0(*(int*) (ep + 4), *(int*) (v7 + 4), -0x19, 1);
-				*(int*) (v3 + 0x70) = *(int*) (v3 + 0x70) + 1;
+				*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 				return;
 			}
 			goto label_563129;
 		}
 label_563129:
-		*(int*) (v3 + 0x70) = *(int*) (v3 + 0x70) + 1;
+		*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 		return;
 	case 5:
-		v6 = gm_LookupEntityRecordById(*(int*) (v3 + 0xc8));
+		v6 = gm_LookupEntityRecordById(*(int*) (eventBase + 0xc8));
 		if (v6 == 0) {
-			*(int*) (v3 + 0x70) = -1;
+			*(int*) (eventBase + 0x70) = -1;
 			return;
 		}
 		if (*(int*) (*(int*) (v6 + 0x184) + 0x128) != 0) {
-			*(pos14_7f4c00*) (v3 + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
-			fcn_00500bb0((int*) (v3 + 0x52), 0, 4, 0);
+			*(pos14_7f4c00*) (eventBase + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
+			fcn_00500bb0((int*) (eventBase + 0x52), 0, 4, 0);
 			return;
 		}
-		*(int*) (v3 + 0x70) = -1;
+		*(int*) (eventBase + 0x70) = -1;
 		return;
 	case -2:
 	case -1:
-		if (*(int*) (v3 + 0xc8) != -1) {
-			fcn_004c57e0(*(int*) (v3 + 0xc8), 1);
+		if (*(int*) (eventBase + 0xc8) != -1) {
+			fcn_004c57e0(*(int*) (eventBase + 0xc8), 1);
 		}
-		fcn_00546190(v3);
+		fcn_00546190(eventBase);
 		return;
 	}
 }

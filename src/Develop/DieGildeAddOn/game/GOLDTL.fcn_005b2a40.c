@@ -9,7 +9,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
 /* ADDRESS: GOLDTL 0x005b2a40 */
-void __cdecl fcn_005b2a40(unsigned short* a0, int n, char** arr)
+void __cdecl fcn_005b2a40(unsigned short* senderEntity, int n, char** arr)
 {
 	char buf[0x80];
 	char* e;
@@ -22,7 +22,7 @@ void __cdecl fcn_005b2a40(unsigned short* a0, int n, char** arr)
 	if (n < 1 || n >= 4) {
 		return;
 	}
-	io_FormatTextBuffer(g_774a80, 0x41bf, *a0);
+	io_FormatTextBuffer(g_774a80, 0x41bf, *senderEntity);
 	for (i = 0; i < n; i++) {
 		e = arr[i];
 		if (e[2] == 6 || e[2] == 7) {
@@ -66,5 +66,5 @@ void __cdecl fcn_005b2a40(unsigned short* a0, int n, char** arr)
 		}
 		strcat(g_774a80, g_14b5a14);
 	}
-	fcn_00545d40(*(int*) (a0 + 2), -1, g_774a80, 1, 0x5fb, (void*) 0x6ab464);
+	fcn_00545d40(*(int*) (senderEntity + 2), -1, g_774a80, 1, 0x5fb, (void*) 0x6ab464);
 }

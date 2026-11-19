@@ -35,7 +35,7 @@ void __cdecl fcn_00474e80(void)
 	int found;
 	unsigned int* v1;
 	int* v5;
-	int* v10;
+	int* groupCursor;
 
 	if (g_6772c4 != 0) {
 		d2_MouseX = *(short*) g_14cf900;
@@ -98,9 +98,9 @@ void __cdecl fcn_00474e80(void)
 					}
 					v6 = 0;
 					if (g_102cbc4[v4].count > 0) {
-						v10 = g_102cbc4[v4].ids;
+						groupCursor = g_102cbc4[v4].ids;
 						do {
-							if (*v10 == v7) {
+							if (*groupCursor == v7) {
 								v8 = 0;
 								if (g_102cbc4[v4].count > 0) {
 									v5 = g_102cbc4[v4].ids;
@@ -120,7 +120,7 @@ void __cdecl fcn_00474e80(void)
 								found = 1;
 							}
 							v6 += 1;
-							v10 = v10 + 1;
+							groupCursor = groupCursor + 1;
 						} while (v6 < g_102cbc4[v4].count);
 					}
 					v4++;

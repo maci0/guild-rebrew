@@ -33,7 +33,7 @@ void __cdecl fcn_00473690(int, int);
 float __cdecl fcn_004ff040(int);
 
 /* ADDRESS: GOLDTL 0x005c6a10 */
-unsigned int __cdecl fcn_005c6a10(unsigned int a0, unsigned int a1)
+unsigned int __cdecl fcn_005c6a10(unsigned int dialog, unsigned int form)
 {
 	D2_TRAINING_ROW* slot;
 	unsigned short* item;
@@ -50,7 +50,7 @@ unsigned int __cdecl fcn_005c6a10(unsigned int a0, unsigned int a1)
 	int button_base;
 
 	built = 0;
-	d2_SetForm(a0, a1);
+	d2_SetForm(dialog, form);
 	g_775334 = 0;
 	p = (int*) ((char*) g_7774a0 + 0x10);
 	for (button_base = 0, row_offset = 0, row_y = 0x28; row_y < 0xf28;
@@ -104,7 +104,7 @@ unsigned int __cdecl fcn_005c6a10(unsigned int a0, unsigned int a1)
 				}
 				if (j < 6)
 					goto present;
-				d2_SetForm(a0, a1);
+				d2_SetForm(dialog, form);
 				for (j = 0; j < 6; j++) {
 					if (!slot->item[j].objekt_id)
 						break;
@@ -139,7 +139,7 @@ present:
 		}
 		if (i >= 32)
 			continue;
-		d2_SetForm(a0, a1);
+		d2_SetForm(dialog, form);
 		g_7774a0[i].entity = *list;
 		h = fcn_0046f740(0, i * 0x78, 0x74c, d2_CurrentWindowId);
 		g_7774a0[i].row_element = h;

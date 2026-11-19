@@ -76,7 +76,7 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 	int i;
 	int sel;
 	int ok;
-	int v7;
+	int item;
 	float f;
 	int n;
 	int amount;
@@ -122,10 +122,10 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 				if (!fcn_0057eba0(0x2b, (int) a0, 0, sel)) continue; {
 					node = lpObjektePROT + sel * 0x41;
 					if (q)
-						v7 = (int) fcn_00502cd0(*(int*) ((char*) q + 0x14), 1, 0, sel);
+						item = (int) fcn_00502cd0(*(int*) ((char*) q + 0x14), 1, 0, sel);
 					else
-						v7 = (int) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, sel);
-					if (!v7) {
+						item = (int) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, sel);
+					if (!item) {
 						*(unsigned char*) (msg + 0x36) = 1;
 						if (*(unsigned char*) (lpObjektePROT + sel * 0x41) == 6) {
 							*(int*) (msg + 0x0c) = *(int*) (a0 + 1);

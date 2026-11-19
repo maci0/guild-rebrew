@@ -1,18 +1,18 @@
 #include "g_680bd0.h"
 extern Entry680bd0 g_680bd0[48];
 /* ADDRESS: GOLDTL 0x004b3ce0 */
-int* __cdecl fcn_004b3ce0(int a0, int* a1)
+int* __cdecl fcn_004b3ce0(int key, int* previous)
 {
 	int i;
 	int* p;
 	char* end;
 	char* q;
 
-	if (a1 == 0) {
+	if (previous == 0) {
 		i = 0;
 		p = (int*) 0x680bd4;
 		while ((int) p < (int) 0x681114) {
-			if (*p == a0) {
+			if (*p == key) {
 				return (int*) (0x680bd0 + i * 0x1c);
 			}
 			p = (int*) ((char*) p + 0x1c);
@@ -21,15 +21,15 @@ int* __cdecl fcn_004b3ce0(int a0, int* a1)
 		return 0;
 	}
 	end = (char*) &g_680bd0[47];
-	if ((char*) a1 >= end) {
+	if ((char*) previous >= end) {
 		return 0;
 	}
-	p = (int*) ((char*) a1 + 0x1c);
+	p = (int*) ((char*) previous + 0x1c);
 	if ((char*) p > end) {
 		return 0;
 	}
 	do {
-		if (*(int*) ((char*) p + 4) == a0) {
+		if (*(int*) ((char*) p + 4) == key) {
 			return p;
 		}
 		p = (int*) ((char*) p + 0x1c);

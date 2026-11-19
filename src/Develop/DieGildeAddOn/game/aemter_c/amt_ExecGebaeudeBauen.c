@@ -41,9 +41,9 @@ char* __cdecl strupr(char*);
 /* ADDRESS: GOLDTL 0x004a4d90 */
 int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 {
-	char v8[260];
-	char v9[260];
-	char v10[256];
+	char buildingName[260];
+	char path[260];
+	char resolvedPath[256];
 	char event[0xf8];
 
 
@@ -70,30 +70,30 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 		return 0;
 	}
 	v3 = *(unsigned int*) (a2 + 4);
-	*(int*) v8 = g_6798d4;
-	strcat(v8, (char*) (lpGebaeudePROT + *(int*) (a1 + 4) * 0x24d + 1));
-	_strupr(v8 + 2);
+	*(int*) buildingName = g_6798d4;
+	strcat(buildingName, (char*) (lpGebaeudePROT + *(int*) (a1 + 4) * 0x24d + 1));
+	_strupr(buildingName + 2);
 	v4 = 0;
 	for (;;) {
 		if (v4) {
-			sprintf(v9, (char*) 0x67f0c0, (char*) 0x7e1ae0, v8,
+			sprintf(path, (char*) 0x67f0c0, (char*) 0x7e1ae0, buildingName,
 				(char) (v4 + '@'));
 		}
 		else {
-			sprintf(v9, (char*) 0x67f0ac, (char*) 0x7e1ae0, v8);
+			sprintf(path, (char*) 0x67f0ac, (char*) 0x7e1ae0, buildingName);
 		}
-		v6 = vfs_ResolvePath(v9, g_6b7fdc, g_6b7fdc, v10);
+		v6 = vfs_ResolvePath(path, g_6b7fdc, g_6b7fdc, resolvedPath);
 		if (v6) {
 			break;
 		}
 		if (v4) {
-			sprintf(v8, (char*) 0x67f074,
+			sprintf(buildingName, (char*) 0x67f074,
 				(char*) (lpGebaeudePROT + *(int*) (a1 + 4) * 0x24d + 1));
 			return 0;
 		}
 		v4 = 1;
 	}
-	sprintf(event + 0x9c, (char*) 0x679060, v9);
+	sprintf(event + 0x9c, (char*) 0x679060, path);
 	*(pos14_7f4c00*) (event + 0x28) = gm_GameTime;
 	v6 = *(unsigned int*) (a0 + 4);
 

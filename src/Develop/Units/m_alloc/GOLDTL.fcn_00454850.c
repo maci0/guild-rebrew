@@ -7,7 +7,7 @@ char* __cdecl fcn_00454630(char* src, float* lo, float* hi);
 void __cdecl fcn_00454560(char** n);
 
 /* ADDRESS: GOLDTL 0x00454850 */
-void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, unsigned int a3)
+void __cdecl fcn_00454850(unsigned int* node, unsigned int a1, unsigned int depth, unsigned int maxDepth)
 {
 	float lo[4];
 	float hi[4];
@@ -20,74 +20,74 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 	int i;
 
 	ok = 1;
-	if (a0[0xc] > 0) {
-		*((float*) (a0 + 4)) = 1.0e10f;
-		*((float*) (a0 + 5)) = 1.0e10f;
-		*((float*) (a0 + 6)) = 1.0e10f;
-		*((float*) (a0 + 8)) = -1.0e10f;
-		*((float*) (a0 + 9)) = -1.0e10f;
-		*((float*) (a0 + 10)) = -1.0e10f;
-		if (a2 <= 1) {
-			for (p = (unsigned int*) a0[0xf]; p != 0; p = (unsigned int*) p[1]) {
+	if (node[0xc] > 0) {
+		*((float*) (node + 4)) = 1.0e10f;
+		*((float*) (node + 5)) = 1.0e10f;
+		*((float*) (node + 6)) = 1.0e10f;
+		*((float*) (node + 8)) = -1.0e10f;
+		*((float*) (node + 9)) = -1.0e10f;
+		*((float*) (node + 10)) = -1.0e10f;
+		if (depth <= 1) {
+			for (p = (unsigned int*) node[0xf]; p != 0; p = (unsigned int*) p[1]) {
 				if (fcn_004546e0((char*) *p, lo, hi)) {
-					*((float*) (a0 + 4)) = (*((float*) (a0 + 4)) < lo[0])
-						? *((float*) (a0 + 4)) : lo[0];
-					*((float*) (a0 + 5)) = (*((float*) (a0 + 5)) < lo[1])
-						? *((float*) (a0 + 5)) : lo[1];
-					*((float*) (a0 + 6)) = (*((float*) (a0 + 6)) < lo[2])
-						? *((float*) (a0 + 6)) : lo[2];
-					*((float*) (a0 + 8)) = (*((float*) (a0 + 8)) > hi[0])
-						? *((float*) (a0 + 8)) : hi[0];
-					*((float*) (a0 + 9)) = (*((float*) (a0 + 9)) > hi[1])
-						? *((float*) (a0 + 9)) : hi[1];
-					*((float*) (a0 + 10)) = (*((float*) (a0 + 10)) > hi[2])
-						? *((float*) (a0 + 10)) : hi[2];
+					*((float*) (node + 4)) = (*((float*) (node + 4)) < lo[0])
+						? *((float*) (node + 4)) : lo[0];
+					*((float*) (node + 5)) = (*((float*) (node + 5)) < lo[1])
+						? *((float*) (node + 5)) : lo[1];
+					*((float*) (node + 6)) = (*((float*) (node + 6)) < lo[2])
+						? *((float*) (node + 6)) : lo[2];
+					*((float*) (node + 8)) = (*((float*) (node + 8)) > hi[0])
+						? *((float*) (node + 8)) : hi[0];
+					*((float*) (node + 9)) = (*((float*) (node + 9)) > hi[1])
+						? *((float*) (node + 9)) : hi[1];
+					*((float*) (node + 10)) = (*((float*) (node + 10)) > hi[2])
+						? *((float*) (node + 10)) : hi[2];
 				}
 			}
 		} else {
-			for (p = (unsigned int*) a0[0xf]; p != 0; p = (unsigned int*) p[1]) {
+			for (p = (unsigned int*) node[0xf]; p != 0; p = (unsigned int*) p[1]) {
 				v = *(unsigned int*) (*p + 0x1ec);
-				*((float*) (a0 + 4)) = (*((float*) (a0 + 4)) < *((float*) (v + 0x90)))
-					? *((float*) (a0 + 4)) : *((float*) (v + 0x90));
-				*((float*) (a0 + 5)) = (*((float*) (a0 + 5)) < *((float*) (v + 0x94)))
-					? *((float*) (a0 + 5)) : *((float*) (v + 0x94));
-				*((float*) (a0 + 6)) = (*((float*) (a0 + 6)) < *((float*) (v + 0x98)))
-					? *((float*) (a0 + 6)) : *((float*) (v + 0x98));
-				*((float*) (a0 + 8)) = (*((float*) (a0 + 8)) > *((float*) (v + 0xa0)))
-					? *((float*) (a0 + 8)) : *((float*) (v + 0xa0));
-				*((float*) (a0 + 9)) = (*((float*) (a0 + 9)) > *((float*) (v + 0xa4)))
-					? *((float*) (a0 + 9)) : *((float*) (v + 0xa4));
-				*((float*) (a0 + 10)) = (*((float*) (a0 + 10)) > *((float*) (v + 0xa8)))
-					? *((float*) (a0 + 10)) : *((float*) (v + 0xa8));
+				*((float*) (node + 4)) = (*((float*) (node + 4)) < *((float*) (v + 0x90)))
+					? *((float*) (node + 4)) : *((float*) (v + 0x90));
+				*((float*) (node + 5)) = (*((float*) (node + 5)) < *((float*) (v + 0x94)))
+					? *((float*) (node + 5)) : *((float*) (v + 0x94));
+				*((float*) (node + 6)) = (*((float*) (node + 6)) < *((float*) (v + 0x98)))
+					? *((float*) (node + 6)) : *((float*) (v + 0x98));
+				*((float*) (node + 8)) = (*((float*) (node + 8)) > *((float*) (v + 0xa0)))
+					? *((float*) (node + 8)) : *((float*) (v + 0xa0));
+				*((float*) (node + 9)) = (*((float*) (node + 9)) > *((float*) (v + 0xa4)))
+					? *((float*) (node + 9)) : *((float*) (v + 0xa4));
+				*((float*) (node + 10)) = (*((float*) (node + 10)) > *((float*) (v + 0xa8)))
+					? *((float*) (node + 10)) : *((float*) (v + 0xa8));
 			}
 		}
 	}
-	if (a2 < a3 && a1 < a0[0xc]) {
-		dx = (*((float*) (a0 + 8)) - *((float*) (a0 + 4))) * 0.5f;
-		dz = (*((float*) (a0 + 10)) - *((float*) (a0 + 6))) * 0.5f;
-		lo[0] = *((float*) (a0 + 4));
-		lo[2] = *((float*) (a0 + 6));
-		hi[0] = dx + *((float*) (a0 + 4));
-		hi[2] = dz + *((float*) (a0 + 6));
-		a0[0] = (unsigned int) fcn_00454630((char*) a0, lo, hi);
-		lo[0] = dx + *((float*) (a0 + 4));
-		lo[2] = *((float*) (a0 + 6));
-		hi[0] = *((float*) (a0 + 8));
-		hi[2] = dz + *((float*) (a0 + 6));
-		a0[1] = (unsigned int) fcn_00454630((char*) a0, lo, hi);
-		lo[0] = dx + *((float*) (a0 + 4));
-		lo[2] = dz + *((float*) (a0 + 6));
-		hi[0] = *((float*) (a0 + 8));
-		hi[2] = *((float*) (a0 + 10));
-		a0[2] = (unsigned int) fcn_00454630((char*) a0, lo, hi);
-		lo[0] = *((float*) (a0 + 4));
-		lo[2] = dx + *((float*) (a0 + 6));
-		hi[0] = dx + *((float*) (a0 + 4));
-		hi[2] = *((float*) (a0 + 10));
-		a0[3] = (unsigned int) fcn_00454630((char*) a0, lo, hi);
+	if (depth < maxDepth && a1 < node[0xc]) {
+		dx = (*((float*) (node + 8)) - *((float*) (node + 4))) * 0.5f;
+		dz = (*((float*) (node + 10)) - *((float*) (node + 6))) * 0.5f;
+		lo[0] = *((float*) (node + 4));
+		lo[2] = *((float*) (node + 6));
+		hi[0] = dx + *((float*) (node + 4));
+		hi[2] = dz + *((float*) (node + 6));
+		node[0] = (unsigned int) fcn_00454630((char*) node, lo, hi);
+		lo[0] = dx + *((float*) (node + 4));
+		lo[2] = *((float*) (node + 6));
+		hi[0] = *((float*) (node + 8));
+		hi[2] = dz + *((float*) (node + 6));
+		node[1] = (unsigned int) fcn_00454630((char*) node, lo, hi);
+		lo[0] = dx + *((float*) (node + 4));
+		lo[2] = dz + *((float*) (node + 6));
+		hi[0] = *((float*) (node + 8));
+		hi[2] = *((float*) (node + 10));
+		node[2] = (unsigned int) fcn_00454630((char*) node, lo, hi);
+		lo[0] = *((float*) (node + 4));
+		lo[2] = dx + *((float*) (node + 6));
+		hi[0] = dx + *((float*) (node + 4));
+		hi[2] = *((float*) (node + 10));
+		node[3] = (unsigned int) fcn_00454630((char*) node, lo, hi);
 		first = 0xffffffff;
 		for (i = 0; i < 4; i++) {
-			v = a0[i];
+			v = node[i];
 			if (v != 0) {
 				if ((int) first < 0) {
 					first = *(unsigned int*) (v + 0x30);
@@ -98,13 +98,13 @@ void __cdecl fcn_00454850(unsigned int* a0, unsigned int a1, unsigned int a2, un
 			}
 		}
 		for (i = 0; i < 4; i++) {
-			v = a0[i];
+			v = node[i];
 			if (v != 0) {
 				if (ok != 0) {
 					fcn_00454560((char**) v);
-					a0[i] = 0;
+					node[i] = 0;
 				} else {
-					fcn_00454850((unsigned int*) v, a1, a2 + 1, a3);
+					fcn_00454850((unsigned int*) v, a1, depth + 1, maxDepth);
 				}
 			}
 		}

@@ -74,7 +74,7 @@ void __cdecl fcn_00541620(void)
 	char* ent;
 
 	unsigned char b;
-	int a7;
+	int runningTotal;
 	int b200;
 	int c1fc;
 	int d1f8;
@@ -90,7 +90,7 @@ void __cdecl fcn_00541620(void)
 	double dbl;
 
 	b200 = 0;
-	a7 = 0;
+	runningTotal = 0;
 	f1e8 = 0;
 	g1f4 = 0;
 	e1ec = 0;
@@ -128,75 +128,75 @@ void __cdecl fcn_00541620(void)
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x2007);
 	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
-	a7 = *(int*) (k + 0x7f4e3c);
-	c1fc = a7 - *(int*) (k + 0x7f4e38);
-	if (a7 != 0) {
-		io_AppendText(0x2008, a7);
+	runningTotal = *(int*) (k + 0x7f4e3c);
+	c1fc = runningTotal - *(int*) (k + 0x7f4e38);
+	if (runningTotal != 0) {
+		io_AppendText(0x2008, runningTotal);
 	}
-	a7 = *(int*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + 0x7f4e38);
-	if (a7 != 0) {
-		io_AppendText(0x2009, a7);
+	runningTotal = *(int*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + 0x7f4e38);
+	if (runningTotal != 0) {
+		io_AppendText(0x2009, runningTotal);
 	}
-	a7 = c1fc;
+	runningTotal = c1fc;
 	if (*(int*) (sel + 0x40) != 0) {
 		io_AppendText(0x2014, *(int*) (sel + 0x40));
 		b200 = *(int*) (sel + 0x40);
-		a7 = c1fc - b200;
+		runningTotal = c1fc - b200;
 	}
 	if (*(int*) (sel + 0x44) != 0) {
 		io_AppendText(0x2016, *(int*) (sel + 0x44));
-		a7 -= *(int*) (sel + 0x44);
+		runningTotal -= *(int*) (sel + 0x44);
 		b200 += *(int*) (sel + 0x44);
 	}
 	if (*(int*) (sel + 0x48) != 0) {
 		io_AppendText(0x201b, *(int*) (sel + 0x48));
-		a7 -= *(int*) (sel + 0x48);
+		runningTotal -= *(int*) (sel + 0x48);
 		b200 += *(int*) (sel + 0x48);
 	}
 	if (*(int*) (sel + 0x4c) != 0) {
 		io_AppendText(0x201a, *(int*) (sel + 0x4c));
-		a7 -= *(int*) (sel + 0x4c);
+		runningTotal -= *(int*) (sel + 0x4c);
 		b200 += *(int*) (sel + 0x4c);
 	}
 	if (*(int*) (sel + 0x54) != 0) {
 		io_AppendText(0x2015, *(int*) (sel + 0x54));
-		a7 -= *(int*) (sel + 0x54);
+		runningTotal -= *(int*) (sel + 0x54);
 		b200 += *(int*) (sel + 0x54);
 	}
 	if (*(int*) (sel + 0x28) != 0) {
 		io_AppendText(0x201c, *(int*) (sel + 0x28));
-		a7 -= *(int*) (sel + 0x28);
+		runningTotal -= *(int*) (sel + 0x28);
 		b200 += *(int*) (sel + 0x28);
 	}
 	if (*(int*) (sel + 0x14) != 0) {
 		io_AppendText(0x200d, *(int*) (sel + 0x14));
-		a7 += *(int*) (sel + 0x14);
+		runningTotal += *(int*) (sel + 0x14);
 		c1fc += *(int*) (sel + 0x14);
 	}
 	if (*(int*) (sel + 0x18) != 0) {
 		io_AppendText(0x200c, *(int*) (sel + 0x18));
-		a7 += *(int*) (sel + 0x18);
+		runningTotal += *(int*) (sel + 0x18);
 		c1fc += *(int*) (sel + 0x18);
 	}
 	if (*(int*) (sel + 0x1c) != 0) {
 		io_AppendText(0x200b, *(int*) (sel + 0x1c));
-		a7 += *(int*) (sel + 0x1c);
+		runningTotal += *(int*) (sel + 0x1c);
 		c1fc += *(int*) (sel + 0x1c);
 	}
 	if (*(int*) (sel + 0x20) != 0) {
 		io_AppendText(0x2010, *(int*) (sel + 0x20));
-		a7 += *(int*) (sel + 0x20);
+		runningTotal += *(int*) (sel + 0x20);
 		c1fc += *(int*) (sel + 0x20);
 	}
 	if (*(int*) (sel + 0x50) != 0) {
 		io_AppendText(0x201d, *(int*) (sel + 0x50));
-		a7 -= *(int*) (sel + 0x50);
+		runningTotal -= *(int*) (sel + 0x50);
 		b200 += *(int*) (sel + 0x50);
 	}
-	if (a7 == 0) {
+	if (runningTotal == 0) {
 		io_AppendText(0x201e);
 	} else {
-		io_AppendText(0x204c, a7);
+		io_AppendText(0x204c, runningTotal);
 	}
 	d2_SetForm(dlg, 3);
 	*(int*) ((char*) g_77255c + 0x28c) = 0x55;
@@ -271,20 +271,20 @@ void __cdecl fcn_00541620(void)
 		io_AppendText(0x204a, e1ec);
 	}
 	n = fcn_0050d5d0(((unsigned short)g_774970) & 0xffff, 0, v1d0);
-	a7 = 0;
+	runningTotal = 0;
 	i = 0;
 	if (n > 0) {
 		do {
 			dbl = (double) *(int*) ((char*) (int) v1d0[i] + 0xc0) * 0.01
 				* *(int*) ((char*) (int) v1d0[i] + 0xb4);
 			b200 = (int) (b200 + dbl);
-			a7 = (int) (a7 + dbl);
+			runningTotal = (int) (runningTotal + dbl);
 			d1f8 = (int) (d1f8 - dbl);
 			i++;
 		} while (i < n);
 	}
-	if (b200 != 0 && a7 != 0) {
-		io_AppendText(0x204b, a7);
+	if (b200 != 0 && runningTotal != 0) {
+		io_AppendText(0x204b, runningTotal);
 	}
 	io_AppendText(0x204c, d1f8);
 	c1fc -= b200;
@@ -294,7 +294,7 @@ void __cdecl fcn_00541620(void)
 		io_AppendText(0x204e, c1fc);
 	}
 	n = fcn_0050d2a0((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0);
-	io_AppendText(0x2029, ((n - f1e8) - e1ec) - a7);
+	io_AppendText(0x2029, ((n - f1e8) - e1ec) - runningTotal);
 	fcn_005459a0(0xffff);
 	fcn_00476970(g_77250c);
 	fcn_00469e30(0x79d);
@@ -341,7 +341,7 @@ fold:
 		g1f4 = 0;
 	}
 	n = fcn_0050db40((char*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0),
-		-(f1e8 + e1ec + a7));
+		-(f1e8 + e1ec + runningTotal));
 	if (n != 0) {
 		memset(panel, 0, 0x114);
 		*(unsigned char*) (panel + 8) = 9;

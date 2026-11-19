@@ -8,7 +8,7 @@ short __cdecl d2_PackColorForPixelFormat(unsigned char r, unsigned char g, unsig
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x004781e0 */
-unsigned int* __cdecl fcn_004781e0(int a0, int a1, int a2, int a3, int a4, char a5, int a6)
+unsigned int* __cdecl fcn_004781e0(int a0, int a1, int width, int a3, int a4, char a5, int a6)
 {
 	char* v6;
 	unsigned int* v18;
@@ -29,14 +29,14 @@ unsigned int* __cdecl fcn_004781e0(int a0, int a1, int a2, int a3, int a4, char 
 	x0 = 0;
 	y0 = 0;
 	y1 = (unsigned short) a3;
-	x1 = (unsigned short) a2;
-	v6 = m_alloc(a3 * (a2 * 8 + 4) + 0x32, (char*) 0x67d9c0);
+	x1 = (unsigned short) width;
+	v6 = m_alloc(a3 * (width * 8 + 4) + 0x32, (char*) 0x67d9c0);
 	i = 0;
 	if (a3 > 0) {
 		p = (unsigned short*) (a4 + (a1 * a6 + a0) * 2);
 		do {
 			j = 0;
-			if (a2 > 0) {
+			if (width > 0) {
 				q = p;
 				do {
 					if (*q != 0) {
@@ -55,7 +55,7 @@ unsigned int* __cdecl fcn_004781e0(int a0, int a1, int a2, int a3, int a4, char 
 					}
 					j++;
 					q++;
-				} while (j < a2);
+				} while (j < width);
 			}
 			i++;
 			p += a6;

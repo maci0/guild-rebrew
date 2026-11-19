@@ -61,8 +61,8 @@ int __cdecl fcn_0053d490(int a0, int a1)
 	char* s2a;
 	char* s2b;
 	int dlg;
-	int v20;
-	int v21;
+	int firstNameField;
+	int surnameField;
 	int v27;
 	int i;
 	int j;
@@ -94,9 +94,9 @@ int __cdecl fcn_0053d490(int a0, int a1)
 	fcn_00517b10(g_7e1d00, buf);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1acf, buf);
-	v20 = fcn_00472250(dlg, 1, io_AppendText(0x1ad0, 0x1ad2));
+	firstNameField = fcn_00472250(dlg, 1, io_AppendText(0x1ad0, 0x1ad2));
 	d2_SetForm(dlg, 2);
-	v21 = fcn_00472250(dlg, 2, io_AppendText(0x1ad1, 0x1ad3));
+	surnameField = fcn_00472250(dlg, 2, io_AppendText(0x1ad1, 0x1ad3));
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x1ad4);
 	fcn_00533a60(d2_CurrentWindowId, 0x1c, v11, 2, *(int*) 0x14abe74,
@@ -126,16 +126,16 @@ int __cdecl fcn_0053d490(int a0, int a1)
 	}
 	d2_SetForm(dlg, 6);
 	v27 = fcn_00472250(dlg, 6, io_AppendText(0x7e));
-	fcn_00472380(v20, g_7e23ea);
-	fcn_00472380(v21, g_7e240a);
+	fcn_00472380(firstNameField, g_7e23ea);
+	fcn_00472380(surnameField, g_7e240a);
 	for (j = 0; j < 8; j++) {
 		if (*(int*) (g_1015ea0 + sel[j] * 0x2f4 + 8) == g_7e23e4) {
 			d2_SelectRadioGroup(list, j);
 			break;
 		}
 	}
-	d2_SetBildArgument(v20, 0xc);
-	d2_SetBildArgument(v21, 0xc);
+	d2_SetBildArgument(firstNameField, 0xc);
+	d2_SetBildArgument(surnameField, 0xc);
 	list1 = d2_CreateRadioGroup(2, s1a, s1b);
 	d2_SelectRadioGroup(list1, g_7e23e8 & 0xff);
 	list2 = d2_CreateRadioGroup(2, s2a, s2b);
@@ -162,22 +162,22 @@ int __cdecl fcn_0053d490(int a0, int a1)
 			d2_SetSlotVisibility(fcn_00472250(dlg, 0, i), i <= v9);
 		}
 		if (v9 == 0) {
-			fcn_00474cf0(v20);
+			fcn_00474cf0(firstNameField);
 		} else if (v9 == 1) {
-			fcn_00474cf0(v21);
+			fcn_00474cf0(surnameField);
 		}
 		redraw = 0;
 	state_machine:
 		if (v9 == 0) {
 			if (g_14cf950 == 0x1c) {
-				strcpy(g_7e23ea, fcn_00471f80(v20));
+				strcpy(g_7e23ea, fcn_00471f80(firstNameField));
 				v9 = 1;
 				redraw = 1;
 				g_14cf950 = 0;
 			}
 		} else if (v9 == 1) {
 			if (g_14cf950 == 0x1c) {
-				strcpy(g_7e240a, fcn_00471f80(v21));
+				strcpy(g_7e240a, fcn_00471f80(surnameField));
 				v9 = 2;
 				redraw = 1;
 				g_14cf950 = 0;

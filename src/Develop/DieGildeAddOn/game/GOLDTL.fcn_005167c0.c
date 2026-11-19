@@ -44,7 +44,7 @@ void __cdecl fcn_005156a0(void);
 void __cdecl fcn_00515ef0(void);
 
 /* ADDRESS: GOLDTL 0x005167c0 */
-void __cdecl fcn_005167c0(unsigned char* a0, int a1)
+void __cdecl fcn_005167c0(unsigned char* building, int queryId)
 {
 	int mode;
 	int type;
@@ -56,33 +56,33 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	unsigned char** p;
 
 	mode = fcn_00500e20(&(*(char*) &gm_GameTime));
-	gm_GetBuildingTypeCategory(*a0);
-	rec = &((BuildingProto5167c0*)lpGebaeudePROT)[*a0];
-	entity = (unsigned char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, a1);
+	gm_GetBuildingTypeCategory(*building);
+	rec = &((BuildingProto5167c0*)lpGebaeudePROT)[*building];
+	entity = (unsigned char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, queryId);
 	if (entity != 0 && *(unsigned short*) entity != 0xfd) {
 		type = ((signed char*) init_SceneContextIndices)[*(unsigned short*) entity];
 		g_7f3b24 = (char*) entity;
 		fcn_00516b70();
 	} else {
-		type = ((BuildingProto5167c0*) lpGebaeudePROT)[*a0].kind;
+		type = ((BuildingProto5167c0*) lpGebaeudePROT)[*building].kind;
 		g_7f3b24 = 0;
 		type = ((signed char*) g_7f3b00)[type];
 		fcn_00516be0();
 	}
 	if (d3_CurrentContextIndex != type
-	    || (g_7746c4 != 0 && (unsigned char*) g_7746c4 != a0)
-	    || (g_7746c8 != 0 && (unsigned char*) g_7746c8 != a0)) {
+	    || (g_7746c4 != 0 && (unsigned char*) g_7746c4 != building)
+	    || (g_7746c8 != 0 && (unsigned char*) g_7746c8 != building)) {
 		return;
 	}
 	obj = (unsigned char*) fcn_00445600(0, 0x180, 0, s_6a1fdc);
 	if (obj != 0) {
 		d3_SetSubtreeVisible((int) obj, g_776664 ? 1 : 0);
 	}
-	g_67530c = *(int*) (a0 + 1);
+	g_67530c = *(int*) (building + 1);
 	if (g_7746cc != 0) {
 		g_6791c8 = *(int*) (g_7746cc + 2);
 	} else {
-		g_6791c8 = *(int*) (a0 + 1);
+		g_6791c8 = *(int*) (building + 1);
 	}
 	if (mode == 1) {
 		g_773dd4 = 1;
@@ -96,18 +96,18 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	g_6b8061 = 0;
 	g_67a964 = 1.0f;
 	g_6b86d8 = 0x800;
-	if (gm_CheckEntityType((char*) a0)) {
+	if (gm_CheckEntityType((char*) building)) {
 		d3_TraverseSceneObjects(g_67a370, 0, 0xc0, fcn_00516550);
 		d3_TraverseSceneObjects(g_67a370, 0, 0xc0, fcn_005165b0);
 	}
-	if (*a0 == 0x1e && a1 == 0xfd) {
-		fcn_004bd150(*(int*) (a0 + 0x71));
+	if (*building == 0x1e && queryId == 0xfd) {
+		fcn_004bd150(*(int*) (building + 0x71));
 	}
-	g_7f3ee0 = (char*) a0;
-	fcn_00530a00((char*) a0);
+	g_7f3ee0 = (char*) building;
+	fcn_00530a00((char*) building);
 	d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, fcn_005156a0);
 	d3_TraverseSceneObjects(g_67a370, 0, 0x20, fcn_00515ef0);
-	fcn_00505c80((char*) a0);
+	fcn_00505c80((char*) building);
 	i = 0;
 	if (rec->kind == 0x16) {
 		count = 8;
@@ -118,7 +118,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	do {
 		obj = *p;
 		if (obj != 0 && d3_GetContextIndex(*(int*) (obj + 0x88)) == type) {
-			if (*(int*) (obj + 0x2c) != *(int*) (a0 + 1)
+			if (*(int*) (obj + 0x2c) != *(int*) (building + 1)
 			    && *(int*) (obj + 0x30) != *(int*) (entity + 2)) {
 				ch_SetVisible((char*) obj, 0);
 			} else {
@@ -133,7 +133,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 		obj = *p;
 		if (obj != 0 && d3_GetContextIndex(*(int*) (obj + 0x88)) == type) {
 			obj = *p;
-			if ((*(int*) (obj + 0x2c) != *(int*) (a0 + 1)
+			if ((*(int*) (obj + 0x2c) != *(int*) (building + 1)
 			     && *(int*) (obj + 0x30) != *(int*) (entity + 2))
 			    || i >= count) {
 				ch_SetVisible((char*) obj, 0);
@@ -151,7 +151,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	while (p != 0) {
 		obj = (unsigned char*) *(void**) ((char*) p + 0x3b);
 		if (*(int*) (obj + 0x88) == g_67a370) {
-			if (*(int*) (obj + 0x2c) == *(int*) (a0 + 1)) {
+			if (*(int*) (obj + 0x2c) == *(int*) (building + 1)) {
 				ch_SetVisible((char*) obj, 1);
 				ch_PlaceOnGround((char*) obj, 0);
 				ch_UpdateAttachedModelPosition((char*) obj, 1);

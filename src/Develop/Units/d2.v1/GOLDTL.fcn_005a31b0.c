@@ -25,7 +25,7 @@ int __cdecl fcn_005a30c0(int x, int y, int layer, int a4, int a5);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x005a31b0 */
-void __cdecl fcn_005a31b0(char* a0)
+void __cdecl fcn_005a31b0(char* building)
 {
 	char name[260];
 	int win;
@@ -39,11 +39,11 @@ void __cdecl fcn_005a31b0(char* a0)
 	unsigned int flag;
 	int object;
 	double dt;
-	char* v12p;
+	char* windowData;
 
 	flag = 0;
-	v12p = 0;
-	if (a0[0] != 'G') {
+	windowData = 0;
+	if (building[0] != 'G') {
 		return;
 	}
 	p = (int) fcn_00445600(0, 0x100, 0, g_6a40b0);
@@ -74,18 +74,18 @@ void __cdecl fcn_005a31b0(char* a0)
 				d2_SetForm(idx, 1);
 				io_AppendText((char*) 0x1a11);
 				d2_SetForm(idx, 5);
-				io_AppendText((char*) 0x1a14, *(int*) (a0 + 0x65) * 0x2f4 + g_868060, g_85ab80[*(int*) (a0 + 0x65)].unk_00);
+				io_AppendText((char*) 0x1a14, *(int*) (building + 0x65) * 0x2f4 + g_868060, g_85ab80[*(int*) (building + 0x65)].unk_00);
 				win = *(int*) (idx * 700 + 0x103814c) * 0x3cc;
-				v12p = g_1015f40 + win;
-				sprintf(name, "Wappen128_ns_Stadt_%s", (char*) (*(int*) (a0 + 0x65) * 0x2f4 + (int) g_868060));
+				windowData = g_1015f40 + win;
+				sprintf(name, "Wappen128_ns_Stadt_%s", (char*) (*(int*) (building + 0x65) * 0x2f4 + (int) g_868060));
 				d2_SetBackgroundTexture(name, *(int*) (win + 0x1015f40));
 				*(int*) (win + 0x10162e4) = 0;
 				flag = g_6b7fac;
-				slot = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 0, 0x1db, 6);
+				slot = fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x1db, 6);
 				if (slot == 0) {
 					return;
 				}
-				win2 = (int) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 0, 0x1dc, 6);
+				win2 = (int) fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x1dc, 6);
 				if (win2 == 0) {
 					return;
 				}
@@ -93,9 +93,9 @@ void __cdecl fcn_005a31b0(char* a0)
 				io_AppendText((char*) 0x1a12);
 				it = (unsigned short*) fcn_00502cd0(*(int*) (slot + 0x14), 1, 5);
 				while (it != 0) {
-					p = (int) gm_FindSlotById(*(int*) (a0 + 0x65), *it);
+					p = (int) gm_FindSlotById(*(int*) (building + 0x65), *it);
 					if (p != 0 && *(int*) (p + 4) != 0) {
-						fcn_005a30c0((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, d2_CurrentWindowId, *it, *(int*) (a0 + 0x65));
+						fcn_005a30c0((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, d2_CurrentWindowId, *it, *(int*) (building + 0x65));
 						n++;
 					}
 					it = gm_NextEntityQueryMatch();
@@ -105,9 +105,9 @@ void __cdecl fcn_005a31b0(char* a0)
 				io_AppendText((char*) 0x1a13);
 				it = (unsigned short*) fcn_00502cd0(*(int*) (win2 + 0x14), 1, 5);
 				while (it != 0) {
-					p = (int) gm_FindSlotById(*(int*) (a0 + 0x65), *it);
+					p = (int) gm_FindSlotById(*(int*) (building + 0x65), *it);
 					if (p != 0 && *(int*) (p + 4) != 0) {
-						fcn_005a30c0((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, d2_CurrentWindowId, *it, *(int*) (a0 + 0x65));
+						fcn_005a30c0((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, d2_CurrentWindowId, *it, *(int*) (building + 0x65));
 						n++;
 					}
 					it = gm_NextEntityQueryMatch();
@@ -118,7 +118,7 @@ void __cdecl fcn_005a31b0(char* a0)
 			if (!(dt < g_665ed0)) {
 				dt = g_665ed0;
 			}
-			*(float*) (v12p + 0x3a4) = (float) dt;
+			*(float*) (windowData + 0x3a4) = (float) dt;
 		} while (fcn_005373e0((void*) fcn_005a31b0, 0x677c7));
 		if (idx != -1) {
 			fcn_00471e30(idx);

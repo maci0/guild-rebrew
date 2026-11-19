@@ -43,7 +43,7 @@ typedef struct Span14 {
 #pragma pack()
 
 /* ADDRESS: GOLD 0x00554f00 */
-void __cdecl he_AllocTransport(char* a0)
+void __cdecl he_AllocTransport(char* action)
 {
 	char* query;
 	char* second;
@@ -68,21 +68,21 @@ void __cdecl he_AllocTransport(char* a0)
 
 	found_first = 0;
 	found_second = 0;
-	*(int*) (a0 + 0xe8) = -1;
-	*(int*) (a0 + 0xd4) = 0;
-	*(Span14*) (a0 + 0x52) = *(Span14*) (a0 + 0x44);
-	*(char*) (a0 + 0xd0) = 0;
-	*(Span14*) (a0 + 0x60) = *(Span14*) (a0 + 0x44);
+	*(int*) (action + 0xe8) = -1;
+	*(int*) (action + 0xd4) = 0;
+	*(Span14*) (action + 0x52) = *(Span14*) (action + 0x44);
+	*(char*) (action + 0xd0) = 0;
+	*(Span14*) (action + 0x60) = *(Span14*) (action + 0x44);
 
-	first = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xb0));
+	first = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0xb0));
 	if (first == 0) {
 		goto done;
 	}
-	gm_ResolveEntityById(0, (void**) &query, 0, *(int*) (a0 + 0xac));
+	gm_ResolveEntityById(0, (void**) &query, 0, *(int*) (action + 0xac));
 	if (query == 0) {
 		goto done;
 	}
-	second = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xb4));
+	second = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0xb4));
 	if (second == 0) {
 		goto done;
 	}
@@ -110,7 +110,7 @@ void __cdecl he_AllocTransport(char* a0)
 				p = gm_FindNextFilteredEntity();
 			} while (p != 0);
 			if (best != second) {
-				type = *(int*) (a0 + 0xf4);
+				type = *(int*) (action + 0xf4);
 				if (type != 0 && type != -1) {
 					rec = fcn_005463a0(1, 1, type);
 					if (rec != 0) {
@@ -128,7 +128,7 @@ void __cdecl he_AllocTransport(char* a0)
 						}
 					}
 				}
-				*(int*) (a0 + 0xb4) = *(int*) (best + 1);
+				*(int*) (action + 0xb4) = *(int*) (best + 1);
 				second = best;
 			}
 		}
@@ -143,25 +143,25 @@ void __cdecl he_AllocTransport(char* a0)
 
 	if (found_first) {
 		if (found_second) {
-			*(int*) (a0 + 0xc8) = 4;
+			*(int*) (action + 0xc8) = 4;
 			if (first == second) {
 				ReportClientMessage("he_AllocTransport(): Start and goal are the same!");
-				fcn_00546190(a0);
+				fcn_00546190(action);
 				return;
 			}
 		} else {
-			*(int*) (a0 + 0xc8) = 2;
+			*(int*) (action + 0xc8) = 2;
 		}
 	} else if (found_second) {
-		*(int*) (a0 + 0xc8) = 1;
+		*(int*) (action + 0xc8) = 1;
 	} else {
-		*(int*) (a0 + 0xc8) = 3;
+		*(int*) (action + 0xc8) = 3;
 	}
 
-	*(int*) (a0 + 0xb8) = *(int*) (second + 0x30) + *(int*) (first + 0x30);
-	*(int*) (a0 + 0xc4) = *(int*) (first + 1);
-	*(char*) (a0 + 0xd0) = 0;
-	fcn_004fe140((int*) (a0 + 0x52), 0, 0, 1);
+	*(int*) (action + 0xb8) = *(int*) (second + 0x30) + *(int*) (first + 0x30);
+	*(int*) (action + 0xc4) = *(int*) (first + 1);
+	*(char*) (action + 0xd0) = 0;
+	fcn_004fe140((int*) (action + 0x52), 0, 0, 1);
 
 	if (query == 0) {
 		goto done;
@@ -182,35 +182,35 @@ void __cdecl he_AllocTransport(char* a0)
 		f = (float) ((double) v * 0.01 + 1.0) *
 		    *(float*) (node + 0x1a0);
 		*(float*) (node + 0x1a0) = f;
-		*(float*) (a0 + 0xc0) = f;
+		*(float*) (action + 0xc0) = f;
 	}
 	*(unsigned char*) (query + 0x13) = *(unsigned char*) (query + 0x13) | 0x40;
-	if ((*(unsigned char*) (a0 + 0x78) & 2) != 0) {
+	if ((*(unsigned char*) (action + 0x78) & 2) != 0) {
 		fcn_004c5420(*(int*) (query + 2), 0x13, 1, 0x40, 0);
 	}
-	*(int*) (query + 0x24) = (int) a0;
-	*(int*) (a0 + 0x10) = *(int*) (query + 2);
+	*(int*) (query + 0x24) = (int) action;
+	*(int*) (action + 0x10) = *(int*) (query + 2);
 
 	if ((*(unsigned char*) (query + 0x20) & 1) != 0) {
 		fcn_0050de80(query, &stats);
 		if (stats.total > 0) {
-			*(int*) (a0 + 0xcc) = stats.total / 16000 + (unsigned short) gm_RandomMod(2);
+			*(int*) (action + 0xcc) = stats.total / 16000 + (unsigned short) gm_RandomMod(2);
 		} else {
-			*(int*) (a0 + 0xcc) = 0;
+			*(int*) (action + 0xcc) = 0;
 		}
-		if (*(int*) (a0 + 0xcc) > 2) {
-			*(int*) (a0 + 0xcc) = 2;
+		if (*(int*) (action + 0xcc) > 2) {
+			*(int*) (action + 0xcc) = 2;
 		}
-		if (*(int*) (a0 + 0xcc) != 0) {
-			sprintf(nbuf, "he_AllocTransport(): master choose eskorte type %i", *(int*) (a0 + 0xcc));
-			*(char*) (query + 0x28) = *(char*) (a0 + 0xcc);
+		if (*(int*) (action + 0xcc) != 0) {
+			sprintf(nbuf, "he_AllocTransport(): master choose eskorte type %i", *(int*) (action + 0xcc));
+			*(char*) (query + 0x28) = *(char*) (action + 0xcc);
 			v = fcn_0050ddf0(stats.total, (int) *(char*) (query + 0x28));
-			if ((*(unsigned char*) (a0 + 0x78) & 2) != 0) {
+			if ((*(unsigned char*) (action + 0x78) & 2) != 0) {
 				fcn_004c51a0(-1, *(int*) ((g_770b80 + 4) +
-				              *(unsigned short*) (a0 + 8) * 0x21c),
+				              *(unsigned short*) (action + 8) * 0x21c),
 				             (char) g_773d75, v);
-				*(int*) (a0 + 0x84) = -1;
-				*(int*) (a0 + 0xec) = -1;
+				*(int*) (action + 0x84) = -1;
+				*(int*) (action + 0xec) = -1;
 				return;
 			}
 		} else {
@@ -218,10 +218,10 @@ void __cdecl he_AllocTransport(char* a0)
 		}
 	}
 
-	*(int*) (a0 + 0x84) = -1;
-	*(int*) (a0 + 0xec) = -1;
+	*(int*) (action + 0x84) = -1;
+	*(int*) (action + 0xec) = -1;
 	return;
 
 done:
-	fcn_00546190(a0);
+	fcn_00546190(action);
 }

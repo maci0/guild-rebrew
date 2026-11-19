@@ -56,9 +56,9 @@ void __cdecl fcn_00501d20(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x004cb7f0 */
-int __cdecl fcn_004cb7f0(char* a0, char* a1)
+int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 {
-	unsigned char* v4;
+	unsigned char* upgradeBuilding;
 	BuildingProto4cb7f0* rec;
 	char name[0x80];
 	char path[0x104];
@@ -75,31 +75,31 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 	int res;
 
 	if (g_14cbca0 != -1) {
-		gm_NextEntityId = *(int*) (a0 + 0x14);
+		gm_NextEntityId = *(int*) (upgradeCmd + 0x14);
 	}
-	v4 = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0x10));
-	if (v4 == 0) {
+	upgradeBuilding = gm_StartFilteredEntitySearch(1, 1, *(int*) (upgradeCmd + 0x10));
+	if (upgradeBuilding == 0) {
 		return 1;
 	}
-	rec = &((BuildingProto4cb7f0*)lpGebaeudePROT)[v4[0]];
+	rec = &((BuildingProto4cb7f0*)lpGebaeudePROT)[upgradeBuilding[0]];
 	if (rec->level >= rec->max_level) {
 		ReportClientMessage("cm_ExSetGebUpgrade(): already highest level");
 		return 1;
 	}
-	v4[0] = (unsigned char) (v4[0] + 1);
-	v4[0x5c] = (unsigned char) ((100 - (int) (signed char) v4[0x5c]) / 2 + (signed char) v4[0x5c]);
-	gm_SetBuildingWorkerLimits(v4);
-	fcn_00504250(v4);
+	upgradeBuilding[0] = (unsigned char) (upgradeBuilding[0] + 1);
+	upgradeBuilding[0x5c] = (unsigned char) ((100 - (int) (signed char) upgradeBuilding[0x5c]) / 2 + (signed char) upgradeBuilding[0x5c]);
+	gm_SetBuildingWorkerLimits(upgradeBuilding);
+	fcn_00504250(upgradeBuilding);
 	if (rec->kind == 0x1d) {
-		gv_UpgradeField(v4);
+		gv_UpgradeField(upgradeBuilding);
 	}
 	*(int*)name = g_6798d4;
-	strcat(name, &((BuildingProto4cb7f0*)lpGebaeudePROT)[v4[0]].name);
+	strcat(name, &((BuildingProto4cb7f0*)lpGebaeudePROT)[upgradeBuilding[0]].name);
 	_strupr(name + 2);
 	i = 0;
 	for (;;) {
 		if (rec->kind == 0x21) {
-			if (*(char*) (g_7f4ca9 + (*(unsigned short*) (v4 + 0x27)) * 0x21c) == 1) {
+			if (*(char*) (g_7f4ca9 + (*(unsigned short*) (upgradeBuilding + 0x27)) * 0x21c) == 1) {
 				fcn_0064d41a(path, "%sgebaeude/*%s_A.ogr", g_7e1ae0, name);
 			} else {
 				fcn_0064d41a(path, "%sgebaeude/*%s_B.ogr", g_7e1ae0, name);
@@ -119,7 +119,7 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 	}
 	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
-	h = *(int*) (v4 + 0x61);
+	h = *(int*) (upgradeBuilding + 0x61);
 	d3_TransformPoint((char*) h, (char*) (h + 0x4c), (int*) vec);
 	obj = fcn_004488e0(path, 0, 0);
 	if (obj == 0) {
@@ -127,7 +127,7 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 		ReportClientMessage(name);
 		goto restore;
 	} else {
-		fcn_00455140((char*) *(int*)(v4 + 0x61), g_662d40, direction);
+		fcn_00455140((char*) *(int*)(upgradeBuilding + 0x61), g_662d40, direction);
 		angles[0] = 0;
 		angles[1] = 0;
 		angles[2] = 0;
@@ -136,9 +136,9 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 		fcn_00438cb0((char*) obj, (int*) angles);
 		fcn_00598860(obj, vec);
 		if (g_773dd8 != 0) {
-			fcn_004550b0(*(int*)(v4 + 0x61), g_773dd8);
+			fcn_004550b0(*(int*)(upgradeBuilding + 0x61), g_773dd8);
 		}
-		d3_DestroyObject(*(int*)(v4 + 0x61));
+		d3_DestroyObject(*(int*)(upgradeBuilding + 0x61));
 		if (*(int*) (obj + 0x1ec) != 0 && d3_ComputeObjectBoundingSphere((char*) obj, (char*) d3_ActiveCamera, vec, &radius)) {
 			res = (int)(radius * g_664ec0);
 			h = (int) evt_LoadGfxScript(0x68b228);
@@ -148,37 +148,37 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 				*(int*) (h + 0x104) = 0;
 			}
 		}
-		fcn_00510820(obj, v4, 2);
+		fcn_00510820(obj, upgradeBuilding, 2);
 	}
-	fcn_0052d9d0(v4);
-	h = *(int*) (v4 + 0x61);
+	fcn_0052d9d0(upgradeBuilding);
+	h = *(int*) (upgradeBuilding + 0x61);
 	if (h != 0) {
 		res = fcn_00500e20((char*) 0x7f4c00);
 		if (res == 1) g_773dd4 = (unsigned char)res;
 		else if (res == 0) g_773dd4 = (unsigned char)res;
 		else if (res == 2) g_773dd4 = (unsigned char)res;
 		else if (res == 3) g_773dd4 = (unsigned char)res;
-		fcn_005165b0(*(int*)(v4 + 0x61));
-		d3_TraverseSceneObjects((char*) g_67a370, (char*) *(int*)(v4 + 0x61), 0x2c0, (void (__cdecl*) (char*)) 0x514d80);
+		fcn_005165b0(*(int*)(upgradeBuilding + 0x61));
+		d3_TraverseSceneObjects((char*) g_67a370, (char*) *(int*)(upgradeBuilding + 0x61), 0x2c0, (void (__cdecl*) (char*)) 0x514d80);
 		f = (float) g_774728 + g_6a2bec;
-		d3_VisitSceneObjects(g_67a370, *(int*)(v4 + 0x61), 0x21e, 0x445d20, &f);
-		if (*(int*) (v4 + 0x95) != -1) {
-			obj = (int) fcn_00426cc0(*(int*) (v4 + 0x95));
+		d3_VisitSceneObjects(g_67a370, *(int*)(upgradeBuilding + 0x61), 0x21e, 0x445d20, &f);
+		if (*(int*) (upgradeBuilding + 0x95) != -1) {
+			obj = (int) fcn_00426cc0(*(int*) (upgradeBuilding + 0x95));
 			if (obj != 0) {
 				fcn_00428720(obj);
 			}
-			*(int*) (v4 + 0x95) = -1;
-			fcn_0052db70((char*) v4);
+			*(int*) (upgradeBuilding + 0x95) = -1;
+			fcn_0052db70((char*) upgradeBuilding);
 		}
 	}
 restore:
 	fcn_004432d0(saved, 1);
 done:
 	fcn_00501d20(g_773d75);
-	if (a1 != 0) {
-		a1[0] = 2;
-		a1[1] = 0;
-		*(int*) (a1 + 6) = 0;
+	if (replyData != 0) {
+		replyData[0] = 2;
+		replyData[1] = 0;
+		*(int*) (replyData + 6) = 0;
 	}
 	return 0;
 }

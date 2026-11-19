@@ -36,9 +36,9 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 	float in[4]; float dv[4];
 	float out[16];
 	float* r;
-	float a0;
-	float a1;
-	float a2;
+	float transformX;
+	float transformY;
+	float transformZ;
 	float t0;
 	float t1;
 	float t2;
@@ -69,10 +69,10 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 	dv[0] = self->px - *(float*) (d3_ActiveCamera + 0x4c);
 	dv[1] = self->py - *(float*) (d3_ActiveCamera + 0x50);
 	dv[2] = self->pz - *(float*) (d3_ActiveCamera + 0x54);
-	a0 = dv[2] * (*(float*) (d3_ActiveCamera + 0x18c + 8 * 4)) + dv[1] * (*(float*) (d3_ActiveCamera + 0x18c + 4 * 4)) + dv[0] * (*(float*) (d3_ActiveCamera + 0x18c + 0 * 4));
-	a1 = dv[2] * (*(float*) (d3_ActiveCamera + 0x18c + 9 * 4)) + dv[1] * (*(float*) (d3_ActiveCamera + 0x18c + 5 * 4)) + dv[0] * (*(float*) (d3_ActiveCamera + 0x18c + 1 * 4));
-	a2 = dv[2] * (*(float*) (d3_ActiveCamera + 0x18c + 10 * 4)) + dv[1] * (*(float*) (d3_ActiveCamera + 0x18c + 6 * 4)) + dv[0] * (*(float*) (d3_ActiveCamera + 0x18c + 2 * 4));
-	a0 *= 0.0025f; a1 *= 0.0025f; a2 *= 0.0025f;
+	transformX = dv[2] * (*(float*) (d3_ActiveCamera + 0x18c + 8 * 4)) + dv[1] * (*(float*) (d3_ActiveCamera + 0x18c + 4 * 4)) + dv[0] * (*(float*) (d3_ActiveCamera + 0x18c + 0 * 4));
+	transformY = dv[2] * (*(float*) (d3_ActiveCamera + 0x18c + 9 * 4)) + dv[1] * (*(float*) (d3_ActiveCamera + 0x18c + 5 * 4)) + dv[0] * (*(float*) (d3_ActiveCamera + 0x18c + 1 * 4));
+	transformZ = dv[2] * (*(float*) (d3_ActiveCamera + 0x18c + 10 * 4)) + dv[1] * (*(float*) (d3_ActiveCamera + 0x18c + 6 * 4)) + dv[0] * (*(float*) (d3_ActiveCamera + 0x18c + 2 * 4));
+	transformX *= 0.0025f; transformY *= 0.0025f; transformZ *= 0.0025f;
 	self->px = *(float*) (d3_ActiveCamera + 0x4c);
 	self->py = *(float*) (d3_ActiveCamera + 0x50);
 	self->pz = *(float*) (d3_ActiveCamera + 0x54);
@@ -91,7 +91,7 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 	i = 0;
 	r = self->list;
 	while (i < self->count) {
-		r[0] = (u0 * r[5] + t0 * r[4]) * dt + r[0] + a0 + b0;
+		r[0] = (u0 * r[5] + t0 * r[4]) * dt + r[0] + transformX + b0;
 		if (r[0] < (-1.0)) {
 			do {
 				r[0] += 2.0;
@@ -102,7 +102,7 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 				r[0] -= 2.0;
 			} while (1.0 <= r[0]);
 		}
-		r[1] = (u1 * r[5] + t1 * r[4]) * dt + r[1] + a1 + b1;
+		r[1] = (u1 * r[5] + t1 * r[4]) * dt + r[1] + transformY + b1;
 		if (r[1] < (-1.0)) {
 			do {
 				r[1] += 2.0;
@@ -113,7 +113,7 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 				r[1] -= 2.0;
 			} while (1.0 <= r[1]);
 		}
-		r[2] = (u2 * r[5] + t2 * r[4]) * dt + (a2 + a2) + r[2];
+		r[2] = (u2 * r[5] + t2 * r[4]) * dt + (transformZ + transformZ) + r[2];
 		if (r[2] < (-1.0f)) {
 			do {
 				r[2] += 2.0f;

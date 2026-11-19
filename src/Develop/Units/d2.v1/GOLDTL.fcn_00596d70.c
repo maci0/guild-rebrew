@@ -58,7 +58,7 @@ void __cdecl fcn_00469c40(int, int, int);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x00596d70 */
-void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
+void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
                           unsigned int flags, unsigned char* p)
 {
 	D2_WIN* w;
@@ -68,8 +68,8 @@ void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
 	int v;
 	int n;
 
-	d2_SetForm(a0, a1);
-	w = &((D2_WIN*) g_1015f40)[g_1038144[a0 * 175 + a1]];
+	d2_SetForm(dialog, form);
+	w = &((D2_WIN*) g_1015f40)[g_1038144[dialog * 175 + form]];
 	if (r->id != 0) {
 		if (r->title == -1) {
 			r->title = fcn_004677e0(r->x + 6, r->y, 0x30, 0, 100, 0x6a, 0x3d, d2_CurrentWindowId);

@@ -3,9 +3,9 @@
    basis rows from the constant block at 0x1042180 and stores the four
    resulting columns at 0x6b8080. */
 /* ADDRESS: GOLDTL 0x00440260 */
-unsigned int __cdecl fcn_00440260(int a0, int a1, int a2, int a3)
+unsigned int __cdecl fcn_00440260(int a0, int a1, int gridX, int gridY)
 {
-    int v1;
+    int cellSize;
     int i2;
     int i3;
     int i4;
@@ -27,11 +27,11 @@ unsigned int __cdecl fcn_00440260(int a0, int a1, int a2, int a3)
     float v15;
     float v16;
 
-    v1 = *(int*) (a0 + 4);
-    i2 = v1 * a2;
-    i3 = (a2 + 1) * v1;
-    i4 = v1 * a3;
-    i5 = (a3 + 1) * v1;
+    cellSize = *(int*) (a0 + 4);
+    i2 = cellSize * gridX;
+    i3 = (gridX + 1) * cellSize;
+    i4 = cellSize * gridY;
+    i5 = (gridY + 1) * cellSize;
     cv[0] = (float) i2;
     cv[1] = (float) i3;
     cv[2] = (float) i4;
@@ -65,7 +65,7 @@ unsigned int __cdecl fcn_00440260(int a0, int a1, int a2, int a3)
     *(float*) 0x6b8170 = v11 + (v15 + v7);
     *(float*) 0x6b8174 = v12 + (v16 + v8);
     *(float*) 0x6b8178 = v6 + (v5 + v2);
-    v6 = (float) *(unsigned char*) (a0 + 0x28d + (a2 + a3 * 8) * 500);
+    v6 = (float) *(unsigned char*) (a0 + 0x28d + (gridX + gridY * 8) * 500);
     v11 = *(float*) 0x1042160 * v6;
     *(float*) 0x6b81c0 = v11 + (v9 + v7);
     v12 = *(float*) 0x1042164 * v6;

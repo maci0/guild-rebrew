@@ -32,7 +32,7 @@ unsigned short __cdecl gm_RandomMod(int);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x0049f6d0 */
-unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* a1, int* a2, char* a3)
+unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* actorEntity, int* a2, char* a3)
 {
 	Calc calc[7];
 	int matched[7];
@@ -56,7 +56,7 @@ unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* a1, 
 
 	if (a0 != 0 || a2 != 0)
 		return 0;
-	if (gm_CheckZunftPreismanipulation((char*) a1) != 1)
+	if (gm_CheckZunftPreismanipulation((char*) actorEntity) != 1)
 		return 0;
 	fn = sizeof(matched);
 	fp = matched;
@@ -135,7 +135,7 @@ unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* a1, 
 		if (kind == 0 || kind > 7)
 			continue;
 		kind--;
-		if (*(unsigned short*) (ent + 0x27) == a1[0])
+		if (*(unsigned short*) (ent + 0x27) == actorEntity[0])
 			matched[kind] += rec->level;
 		total[kind] += rec->level;
 		if (ids[kind] == 0) {

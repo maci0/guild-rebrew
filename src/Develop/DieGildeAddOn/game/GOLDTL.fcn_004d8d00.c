@@ -74,7 +74,7 @@ static int ent34(char* e)
 }
 
 /* ADDRESS: GOLDTL 0x004d8d00 */
-void __cdecl fcn_004d8d00(char* a0)
+void __cdecl fcn_004d8d00(char* context)
 {
 	char b118[0x30];
 	char be8[0x30];
@@ -104,7 +104,7 @@ void __cdecl fcn_004d8d00(char* a0)
 	for (i = 0; i < 0x10; i++) {
 		if (g_772ea4)
 			return;
-		p = (TaskRec*)(a0 + 0x94) + i;
+		p = (TaskRec*)(context + 0x94) + i;
 		if (p)
 			msg = *(MsgRec*)p;
 		if (p->state == 0 || p->type == -1)
@@ -128,7 +128,7 @@ void __cdecl fcn_004d8d00(char* a0)
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
 			fcn_004c6940(obj, 7, msg.f);
-			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
+			p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
 			break;
 		case 1:
 			if (p->timer != 1 && !fcn_004c4450(p->timer))
@@ -151,7 +151,7 @@ void __cdecl fcn_004d8d00(char* a0)
 				fcn_004c6940(obj, 6, msg.f);
 
 
-				p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
+				p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
 			}
 			break;
 		case 2:
@@ -166,7 +166,7 @@ void __cdecl fcn_004d8d00(char* a0)
 					msg.f[0] = *(int*)(obj + 4);
 					msg.f[1] = 0;
 					fcn_004c6940(obj, 6, msg.f);
-					p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
+					p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
 					break;
 				}
 			}
@@ -176,7 +176,7 @@ void __cdecl fcn_004d8d00(char* a0)
 					msg.f[0] = *(int*)(obj + 4);
 					msg.f[1] = 0;
 					fcn_004c6940(obj, 6, msg.f);
-					p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
+					p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
 					break;
 				}
 			}
@@ -265,7 +265,7 @@ void __cdecl fcn_004d8d00(char* a0)
 						v80 = 0;
 						for (v84 = 0; v84 < n; v84++) {
 							if (*(int*)((char*)*(int*)0x772eb4 + 0x34 + v84 * 4) != -1
-							    && a0 != (char*)(0x9b0e20 + v84 * 0x35c)) {
+							    && context != (char*)(0x9b0e20 + v84 * 0x35c)) {
 								v80 = 0x9b0e20 + v84 * 0x35c;
 								break;
 							}
@@ -341,7 +341,7 @@ lvl3:
 			if (fcn_004d31d0(obj, *(int*)0x102d020, *(int*)0x102d024, 0xc,
 				(unsigned int*)&v10, (unsigned int*)&v14))
 				p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
-			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
+			p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
 			goto after2;
 tail2:
 			fcn_004c5420(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
@@ -359,7 +359,7 @@ tail1_body:
 				p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
-			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
+			p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
 			goto after2;
 		case 3:
 			if (p->timer != 1 && !fcn_004c4450(p->timer))
@@ -383,7 +383,7 @@ tail1_body:
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
 			fcn_004c6940(obj, 1, msg.f);
-			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
+			p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
 			break;
 		case 6:
 			if (p->timer != 1 && !fcn_004c4450(p->timer))
@@ -393,7 +393,7 @@ tail1_body:
 				fcn_004c6940(obj, 6, msg.f);
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
-				p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
+				p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
 			}
 			if (!*((unsigned char*)p + 0x22)) {
 				if (*(int*)(*(int*)(obj + 0x184) + 0x128) == 0) {
@@ -412,7 +412,7 @@ tail1_body:
 						break;
 					fcn_004c6940(obj, 4, msg.f);
 					*((unsigned char*)msg.f + 0x22) = 1;
-					p->timer = fcn_004c6820(*(int*)(a0 + 0x10), msg.f);
+					p->timer = fcn_004c6820(*(int*)(context + 0x10), msg.f);
 				}
 			} else if (*((unsigned char*)p + 0x22) == 1) {
 				if (*(int*)(*(int*)(obj + 0x184) + 0x128) != 0)
@@ -428,7 +428,7 @@ tail1_body:
 				*((unsigned char*)msg.f + 0x20) = (unsigned char)v10;
 				*((unsigned char*)msg.f + 0x21) = (unsigned char)v14;
 				*((unsigned char*)msg.f + 0x22) = 2;
-				fcn_004c6820(*(int*)(a0 + 0x10), msg.f);
+				fcn_004c6820(*(int*)(context + 0x10), msg.f);
 				n = (*(int*)(*(int*)(obj + 0x184) + 0x34));
 				p->timer = fcn_004c6680((char*)n, v10, v14, 0);
 			} else if (*((unsigned char*)p + 0x22) == 2) {
@@ -440,7 +440,7 @@ tail1_body:
 				fcn_004c6940(obj, 5, msg.f);
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
-				p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
+				p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
 			}
 			break;
 		case 4:
@@ -486,7 +486,7 @@ tail1_body:
 			fcn_004c6940(obj, 3, msg.f);
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
-			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
+			p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
 			break;
 case4b:
 			d3_TransformPoint(e, (float*)(e + 0x4c), vec);
@@ -494,7 +494,7 @@ case4b:
 				if (*((unsigned char*)v68 + 8) != 0
 				    && CompareVector3WithinTolerance(vec,
 					(float*)(ent34((char*)v68) + 0x4c), 49.5f)) {
-					p->timer = fcn_004d89c0((int)a0, (unsigned int)obj,
+					p->timer = fcn_004d89c0((int)context, (unsigned int)obj,
 					    *(int*)(e + 0x204));
 					goto after2;
 				}
@@ -503,7 +503,7 @@ case4b:
 				break;
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
-			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
+			p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
 			break;
 		case 7:
 			if (p->timer != 1 && !fcn_004c4450(p->timer))
@@ -524,7 +524,7 @@ case4b:
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
 				fcn_004c6940(obj, 6, msg.f);
-				p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
+				p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
 			}
 			break;
 		case 8:

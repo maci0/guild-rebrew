@@ -34,9 +34,9 @@ void __cdecl fcn_0058dbe0(int a0)
 	int query[0x14];
 	char text[1024];
 	int req[0x3e];
-	int v2;
-	int v3;
-	int v4;
+	int dialogId;
+	int firstControl;
+	int secondControl;
 	int v5;
 	int v6;
 	int v9;
@@ -86,37 +86,37 @@ void __cdecl fcn_0058dbe0(int a0)
 		fcn_00532ef0();
 		return;
 	}
-	v2 = fcn_00470820(0, 0, (char*) 0x6a9768);
+	dialogId = fcn_00470820(0, 0, (char*) 0x6a9768);
 	d2_SetOverlayAnimation(0, 0);
-	d2_CenterDialogWindows(v2);
-	d2_SetForm(v2, 0);
+	d2_CenterDialogWindows(dialogId);
+	d2_SetForm(dialogId, 0);
 	fcn_005340f0(*(int*) &d2_CurrentWindowId);
-	d2_SetForm(v2, 1);
+	d2_SetForm(dialogId, 1);
 	io_AppendText(0x40b7, 0x40b6, *(unsigned short*) (rec + 0x27), rec);
-	v3 = fcn_004677e0(100, 0xa0, 200, 0, 2, 0x7b, 0x82,
+	firstControl = fcn_004677e0(100, 0xa0, 200, 0, 2, 0x7b, 0x82,
 	                  *(int*) &d2_CurrentWindowId);
-	fcn_00472380(v3, 0, 2, 0);
-	fcn_00468cd0(v3, 0x82);
-	fcn_00468b80(v3, *(int*) 0x14b561c);
-	fcn_00468bb0(v3, 3, *(int*) 0x14b5620, *(int*) 0x14b5624,
+	fcn_00472380(firstControl, 0, 2, 0);
+	fcn_00468cd0(firstControl, 0x82);
+	fcn_00468b80(firstControl, *(int*) 0x14b561c);
+	fcn_00468bb0(firstControl, 3, *(int*) 0x14b5620, *(int*) 0x14b5624,
 	             *(int*) 0x14b5628);
-	v4 = fcn_004677e0(100, 0xbe, 200, 0, 2, 0x7b, 0x82,
+	secondControl = fcn_004677e0(100, 0xbe, 200, 0, 2, 0x7b, 0x82,
 	                  *(int*) &d2_CurrentWindowId);
-	fcn_00472380(v4, 0, 2, 0);
-	fcn_00468cd0(v4, 0x82);
-	fcn_00468b80(v4, *(int*) 0x14b562c);
-	fcn_00468bb0(v4, 3, *(int*) 0x14b5630, *(int*) 0x14b5634,
+	fcn_00472380(secondControl, 0, 2, 0);
+	fcn_00468cd0(secondControl, 0x82);
+	fcn_00468b80(secondControl, *(int*) 0x14b562c);
+	fcn_00468bb0(secondControl, 3, *(int*) 0x14b5630, *(int*) 0x14b5634,
 	             *(int*) 0x14b5638);
-	d2_SetForm(v2, 2);
+	d2_SetForm(dialogId, 2);
 	v30 = (int*) io_AppendText(0x40be);
-	v27 = (int*) fcn_00472250(v2, 2, (int) v30);
-	v30 = (int*) fcn_00472250(v2, 2, (int) v30 + 1);
+	v27 = (int*) fcn_00472250(dialogId, 2, (int) v30);
+	v30 = (int*) fcn_00472250(dialogId, 2, (int) v30 + 1);
 	*(int*) &g_100f1dc = -1;
 	do {
-		d2_SetForm(v2, 3);
+		d2_SetForm(dialogId, 3);
 		io_AppendText(0x6811b0);
-		v6 = fcn_00471f80(v4);
-		v6 = (v6 + 2) * (fcn_00471f80(v3) + 2);
+		v6 = fcn_00471f80(secondControl);
+		v6 = (v6 + 2) * (fcn_00471f80(firstControl) + 2);
 		io_AppendText(0x40b9);
 		io_AppendText(0x40ba, v6);
 		if (*(int*) 0x14ce8e0) {
@@ -141,8 +141,8 @@ void __cdecl fcn_0058dbe0(int a0)
 					*(int*) ((char*) req + 0x2c) = *(int*) &g_7f4c04;
 					*(int*) ((char*) req + 0x30) = *(int*) 0x7f4c08;
 					*(unsigned short*) ((char*) req + 0x34) = *(unsigned short*) 0x7f4c0c;
-					*(int*) ((char*) req + 0x5c) = fcn_00471f80(v3);
-					*(int*) ((char*) req + 0x60) = fcn_00471f80(v4);
+					*(int*) ((char*) req + 0x5c) = fcn_00471f80(firstControl);
+					*(int*) ((char*) req + 0x60) = fcn_00471f80(secondControl);
 					*(int*) ((char*) req + 0x58) = *(int*) (rec + 1);
 					fcn_004c5530(req);
 				label_58df76:
@@ -151,7 +151,7 @@ void __cdecl fcn_0058dbe0(int a0)
 			}
 		}
 		if (!fcn_005373e0(0x58dbe0, 0x677c7)) {
-			fcn_00471e30(v2);
+			fcn_00471e30(dialogId);
 			fcn_00532ef0();
 			return;
 		}

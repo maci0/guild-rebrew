@@ -41,7 +41,7 @@ typedef struct {
 } GebProt_5110d0;
 
 /* ADDRESS: GOLDTL 0x005110d0 */
-void __cdecl init_LoadGebaeudeScene(int a0)
+void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 {
 	char name[260];
 	char scene[128];
@@ -63,7 +63,7 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 		fcn_0042df30((void*) 0x538060, 1);
 		restore = 1;
 	}
-	p = (char*) (((GebProt_5110d0*) lpGebaeudePROT)[a0].type + 0x7f3b00);
+	p = (char*) (((GebProt_5110d0*) lpGebaeudePROT)[prototypeIndex].type + 0x7f3b00);
 	if (*p == (char) 0xff) {
 		if (g_774964 != 0 && (g_774670 <= 0 || g_7e2700 != 0)) {
 			flags = (main_LoopFlags & 0xfffffff7) | 0x80;
@@ -79,7 +79,7 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 			ReportClientMessage("init_LoadGebaeudeScene:Could not find a free universe...");
 		}
 		fcn_004432d0(v, 0);
-		fcn_00511040(a0, tmp);
+		fcn_00511040(prototypeIndex, tmp);
 		sprintf(name, "scenes/*gb_%s.ed3", tmp);
 		strupr(name);
 		sprintf(tmp, "init_LoadGebaeudeScene: %s", name);
@@ -112,7 +112,7 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 	}
 	obj = *p;
 	fcn_004432d0(obj, 0);
-	fcn_00511040(a0, scene);
+	fcn_00511040(prototypeIndex, scene);
 	sprintf(name, "scenes/*gb_%s.ed3", scene);
 	strupr(name);
 	if (!d3_LoadScene(name, 0, progress)) {

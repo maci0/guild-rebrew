@@ -14,7 +14,7 @@ char* __cdecl fcn_0042b2f0(char*, int, int);
 #define ENDS_APOSTROPHE(x) ((x)[strlen(x) - 1] == 's' || (x)[strlen(x) - 1] == 'z' || (unsigned char) (x)[strlen(x) - 1] == -0x21 || (x)[strlen(x) - 1] == 'x')
 
 /* ADDRESS: GOLDTL 0x00517c00 */
-int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
+int __cdecl fcn_00517c00(int entityIndex, unsigned char a2, int a3, char* nameOut)
 {
 	unsigned char b1[0x100];
 	unsigned char b3[0x100];
@@ -28,113 +28,113 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 	memset(&b3[1], 0, 255);
 	b2[0] = g_6b5c60[0];
 	memset(&b2[1], 0, 255);
-	if (a1 < 0 || a1 == 0xffff) {
-		strcpy(a4, g_14abc28);
+	if (entityIndex < 0 || entityIndex == 0xffff) {
+		strcpy(nameOut, g_14abc28);
 		return 0;
 	}
-	if (a1 != 0xfffe) {
-		p = (char*) 0x7f4ca0 + a1 * 0x21c;
+	if (entityIndex != 0xfffe) {
+		p = (char*) 0x7f4ca0 + entityIndex * 0x21c;
 	} else {
 		memset(loc, 0, 0x21c);
 		p = (char*) loc;
 		strcpy((char*) p + 0x30, g_14a5770[2]);
 	}
 	if (p == (char*) gm_CityEntity) {
-		strcpy(a4, (char*) 0x868060 + g_773d75 * 0x2f4);
+		strcpy(nameOut, (char*) 0x868060 + g_773d75 * 0x2f4);
 		if (a2 != 2) {
 			return 1;
 		}
-		strcat(a4, "'s");
+		strcat(nameOut, "'s");
 		return 1;
 	}
 	switch (a3 & 0xff) {
 	case 1:
-		strcpy(a4, (char*) p + 0x30);
+		strcpy(nameOut, (char*) p + 0x30);
 		if (a2 != 2) {
 			break;
 		}
-		if (a4[strlen(a4) - 1] == 's' || a4[strlen(a4) - 1] == 'z' || (unsigned char) a4[strlen(a4) - 1] == 0xdf || a4[strlen(a4) - 1] == 'x') {
-			strcat(a4, "'");
+		if (nameOut[strlen(nameOut) - 1] == 's' || nameOut[strlen(nameOut) - 1] == 'z' || (unsigned char) nameOut[strlen(nameOut) - 1] == 0xdf || nameOut[strlen(nameOut) - 1] == 'x') {
+			strcat(nameOut, "'");
 		} else {
-			strcat(a4, "s");
+			strcat(nameOut, "s");
 		}
 		return 1;
 	case 2:
 		if (*(unsigned char*) (p + 0xd)) {
 			if (!p[0x40]) {
-				sprintf(a4, "%s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30);
+				sprintf(nameOut, "%s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30);
 			} else {
-				sprintf(a4, "%s %s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30, (char*) p + 0x40);
+				sprintf(nameOut, "%s %s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30, (char*) p + 0x40);
 			}
 		} else {
-			sprintf(a4, "%s", (char*) p + 0x30);
+			sprintf(nameOut, "%s", (char*) p + 0x30);
 		}
 		return 1;
 	case 3:
 		if (*(unsigned char*) (p + 0x166)) {
 			if (p[0x40]) {
-				sprintf(a4, "%s %s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4), (char*) p + 0x30, (char*) p + 0x40);
+				sprintf(nameOut, "%s %s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4), (char*) p + 0x30, (char*) p + 0x40);
 			} else {
-				sprintf(a4, "%s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4), (char*) p + 0x30);
+				sprintf(nameOut, "%s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4), (char*) p + 0x30);
 			}
 		} else if (p[0x40]) {
-			sprintf(a4, "%s %s", (char*) p + 0x30, (char*) p + 0x40);
+			sprintf(nameOut, "%s %s", (char*) p + 0x30, (char*) p + 0x40);
 		} else {
-			sprintf(a4, "%s", (char*) p + 0x30);
+			sprintf(nameOut, "%s", (char*) p + 0x30);
 		}
 		if (a2 != 2) {
 			break;
 		}
 		if (ENDS_APOSTROPHE((char*) p + 0x40)) {
-			strcat(a4, "'");
+			strcat(nameOut, "'");
 		} else {
-			strcat(a4, "s");
+			strcat(nameOut, "s");
 		}
 		goto ret_one;
 	case 4:
 		if (*(unsigned char*) (p + 0x164)) {
-			sprintf(a4, "%s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x18f : 0x130) + *(unsigned char*) (p + 0x164)], 1, 4), (char*) p + 0x30);
+			sprintf(nameOut, "%s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x18f : 0x130) + *(unsigned char*) (p + 0x164)], 1, 4), (char*) p + 0x30);
 		} else if (*(unsigned char*) (p + 0x165)) {
-			sprintf(a4, "%s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (p + 0x165)], 1, 4), (char*) p + 0x30);
+			sprintf(nameOut, "%s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (p + 0x165)], 1, 4), (char*) p + 0x30);
 		} else {
-			sprintf(a4, "%s", (char*) p + 0x30);
+			sprintf(nameOut, "%s", (char*) p + 0x30);
 		}
 		if (a2 != 2) {
 			break;
 		}
 		if (ENDS_APOSTROPHE((char*) p + 0x30)) {
-			strcat(a4, "'");
+			strcat(nameOut, "'");
 		} else {
-			strcat(a4, "s");
+			strcat(nameOut, "s");
 		}
 		return 1;
 	case 5:
-		sprintf(a4, "%s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4));
+		sprintf(nameOut, "%s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4));
 		return 1;
 	case 6:
 		if (p[0x40]) {
-			strcpy(a4, (char*) p + 0x40);
+			strcpy(nameOut, (char*) p + 0x40);
 		} else {
-			strcpy(a4, (char*) p + 0x30);
+			strcpy(nameOut, (char*) p + 0x30);
 		}
 		return 1;
 	case 7:
 		if (a2 == 2) {
 			if (ENDS_APOSTROPHE((char*) p + 0x40)) {
 				if (p[0x40]) {
-					sprintf(a4, "%s %s'", (char*) p + 0x30, (char*) p + 0x40);
+					sprintf(nameOut, "%s %s'", (char*) p + 0x30, (char*) p + 0x40);
 				} else {
-					sprintf(a4, "%s'", (char*) p + 0x30);
+					sprintf(nameOut, "%s'", (char*) p + 0x30);
 				}
 			} else if (p[0x40]) {
-				sprintf(a4, "%s %ss", (char*) p + 0x30, (char*) p + 0x40);
+				sprintf(nameOut, "%s %ss", (char*) p + 0x30, (char*) p + 0x40);
 			} else {
-				sprintf(a4, "%ss", (char*) p + 0x30);
+				sprintf(nameOut, "%ss", (char*) p + 0x30);
 			}
 		} else if (p[0x40]) {
-			sprintf(a4, "%s %s", (char*) p + 0x30, (char*) p + 0x40);
+			sprintf(nameOut, "%s %s", (char*) p + 0x30, (char*) p + 0x40);
 		} else {
-			sprintf(a4, "%s", (char*) p + 0x30);
+			sprintf(nameOut, "%s", (char*) p + 0x30);
 		}
 		goto ret_one;
 	case 8:
@@ -154,9 +154,9 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 			strcpy((char*) b1, (char*) p + 0x30);
 		}
 		if (*(unsigned char*) (p + 0x166)) {
-			sprintf(a4, "%s %s", (char*) b2, (char*) b1);
+			sprintf(nameOut, "%s %s", (char*) b2, (char*) b1);
 		} else {
-			sprintf(a4, "%s %s", (char*) b3, (char*) b1);
+			sprintf(nameOut, "%s %s", (char*) b3, (char*) b1);
 		}
 		return 1;
 	case 9:
@@ -190,7 +190,7 @@ int __cdecl fcn_00517c00(int a1, unsigned char a2, int a3, char* a4)
 		} else {
 			strcpy((char*) b1, (char*) p + 0x30);
 		}
-		sprintf(a4, "%s %s", (char*) (i != 0 ? b2 : b3), (char*) b1);
+		sprintf(nameOut, "%s %s", (char*) (i != 0 ? b2 : b3), (char*) b1);
 		return 1;
 	}
 ret_one:

@@ -11,20 +11,20 @@ int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl fcn_004fdd70(HEAD_SET* hs);
 
 /* ADDRESS: GOLDTL 0x004fda30 */
-HEAD_SET* __cdecl fcn_004fda30(unsigned int a0)
+HEAD_SET* __cdecl fcn_004fda30(unsigned int entityIndex)
 {
 	char* v4;
-	HEAD_SET* v6;
-	int* v7;
+	HEAD_SET* headSet;
+	int* headEntry;
 	int v3;
 	int v5;
 	int v8;
 	unsigned char v1;
 	char v2;
 
-	v6 = 0;
+	headSet = 0;
 	v5 = 0;
-	v3 = a0 * 0x21c;
+	v3 = entityIndex * 0x21c;
 	v1 = *(unsigned char*) (v3 + 0x7f4e04);
 	if (!v1 && *(unsigned short*) (v3 + 0x7f4caa) < *(float*) (v3 + 0x7f4cc0)) {
 		if (*(char*) (v3 + 0x7f4ca9)) {
@@ -59,54 +59,54 @@ HEAD_SET* __cdecl fcn_004fda30(unsigned int a0)
 	if (v1) {
 		if (*(char*) (v3 + 0x7f4ca9)) {
 			if (*(char*) (v3 + 0x7f4ca9) == 1) {
-				v6 = (HEAD_SET*) 0x693228;
+				headSet = (HEAD_SET*) 0x693228;
 			}
 		} else {
-			v6 = (HEAD_SET*) 0x6918e8;
+			headSet = (HEAD_SET*) 0x6918e8;
 		}
-		v7 = (int*) v6;
+		headEntry = (int*) headSet;
 		do {
-			if (*v7 == 0) {
+			if (*headEntry == 0) {
 				break;
 			}
-			if (*v7 == v1) {
-				fcn_004fdd70(&v6[v5]);
-				return &v6[v5];
+			if (*headEntry == v1) {
+				fcn_004fdd70(&headSet[v5]);
+				return &headSet[v5];
 			}
 			v5++;
-			v7 = &v7[0x11];
+			headEntry = &headEntry[0x11];
 		} while (v5 < 0x5f);
-		return &v6[v5];
+		return &headSet[v5];
 	}
 	if (*(unsigned char*) (v3 + 0x7f4e05)) {
 		if (*(char*) (v3 + 0x7f4ca9)) {
 			if (*(char*) (v3 + 0x7f4ca9) == 1) {
-				v6 = (HEAD_SET*) 0x690f98;
+				headSet = (HEAD_SET*) 0x690f98;
 			}
 		} else {
-			v6 = (HEAD_SET*) 0x690648;
+			headSet = (HEAD_SET*) 0x690648;
 		}
-		v7 = (int*) v6;
+		headEntry = (int*) headSet;
 		do {
-			if (*v7 == 0) {
+			if (*headEntry == 0) {
 				if (v5 <= 0x22) {
-					return &v6[v5];
+					return &headSet[v5];
 				}
 				break;
 			}
-			if (*v7 == *(unsigned char*) (v3 + 0x7f4e05)) {
-				fcn_004fdd70(&v6[v5]);
-				return &v6[v5];
+			if (*headEntry == *(unsigned char*) (v3 + 0x7f4e05)) {
+				fcn_004fdd70(&headSet[v5]);
+				return &headSet[v5];
 			}
 			v5++;
-			v7 = &v7[0x11];
+			headEntry = &headEntry[0x11];
 		} while (v5 < 0x23);
 	}
 	if (!*(char*) (v3 + 0x7f4ca9)) {
 		return (HEAD_SET*) 0x690648;
 	}
 	if (*(char*) (v3 + 0x7f4ca9) != 1) {
-		return v6;
+		return headSet;
 	}
 	return (HEAD_SET*) 0x690f98;
 }

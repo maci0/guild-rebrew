@@ -67,7 +67,7 @@ int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strupr(char*);
 
 /* ADDRESS: GOLDTL 0x005279f0 */
-void __cdecl fcn_005279f0(unsigned int a0)
+void __cdecl fcn_005279f0(unsigned int inputFlags)
 {
 	int v9;
 	int v6;
@@ -130,7 +130,7 @@ void __cdecl fcn_005279f0(unsigned int a0)
 		d2_QueueTexturedQuad(g_1040494 - 0x6e, 0x5b, 0x68, 0x6e,
 			*(int*) (g_774684 + 0x20), &r);
 	}
-	if (!(a0 & 0x2000))
+	if (!(inputFlags & 0x2000))
 		goto done;
 	x = (*(short*) &g_14ce8c0 - g_1040494) + 0x72;
 	y = *(short*) &g_14ce8c2 - 0x59;

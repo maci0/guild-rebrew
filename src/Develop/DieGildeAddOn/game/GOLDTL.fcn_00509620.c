@@ -23,7 +23,7 @@ extern void __cdecl gm_AddObjekt(int record, unsigned int item, int value);
 extern void __cdecl gm_KillSpieler(int slot, int value);
 
 /* ADDRESS: GOLDTL 0x00509620 */
-int __cdecl fcn_00509620(int a0, int a1)
+int __cdecl fcn_00509620(int sourceId, int targetId)
 {
 	EntityStruct* slots;
 	EntityStruct* p;
@@ -48,7 +48,7 @@ int __cdecl fcn_00509620(int a0, int a1)
 	unsigned char* ep;
 
 	slots = (EntityStruct*) g_slot_table;
-	p = (EntityStruct*) gm_LookupEntityRecordById(a0);
+	p = (EntityStruct*) gm_LookupEntityRecordById(sourceId);
 	if (p == 0)
 		return -1;
 	kind = (int) fcn_004b3c00(p);
@@ -63,7 +63,7 @@ int __cdecl fcn_00509620(int a0, int a1)
 	}
 	p_slot = p->entity_index;
 	value = gm_WalkEntityChain(p_slot);
-	q = (EntityStruct*) gm_LookupEntityRecordById(a1);
+	q = (EntityStruct*) gm_LookupEntityRecordById(targetId);
 	if (q == 0)
 		return -2;
 	fcn_00546ce0(p);
@@ -135,10 +135,10 @@ int __cdecl fcn_00509620(int a0, int a1)
 
 	for (q = slots, i = 0x300; i != 0; i--, q++) {
 		for (j = 0; j < 8; j++) {
-			if (q->ref_table[j] == a0)
-				q->ref_table[j] = a1;
-			else if (q->ref_table[j] == a1)
-				q->ref_table[j] = a0;
+			if (q->ref_table[j] == sourceId)
+				q->ref_table[j] = targetId;
+			else if (q->ref_table[j] == targetId)
+				q->ref_table[j] = sourceId;
 		}
 	}
 

@@ -30,7 +30,7 @@ void __cdecl fcn_005aa9a0(int a1)
 {
 	Req s;
 	int dlg;
-	int v;
+	int titleId;
 
 	dlg = fcn_00470820(0, 0, s_6aaf90);
 	d2_CenterDialogWindows(dlg);
@@ -41,11 +41,11 @@ void __cdecl fcn_005aa9a0(int a1)
 	io_AppendText(0x166a);
 	d2_SetForm(dlg, 2);
 	if (g_7f4ca0[g_774970 * 540 + 9] == 0) {
-		v = (unsigned char) g_7f4ca0[g_774970 * 540 + 0x169] + 0x253;
+		titleId = (unsigned char) g_7f4ca0[g_774970 * 540 + 0x169] + 0x253;
 	} else {
-		v = (unsigned char) g_7f4ca0[g_774970 * 540 + 0x169] + 0x27b;
+		titleId = (unsigned char) g_7f4ca0[g_774970 * 540 + 0x169] + 0x27b;
 	}
-	io_AppendText(0x166d, v, 8, a1 + 0x1663);
+	io_AppendText(0x166d, titleId, 8, a1 + 0x1663);
 	do {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

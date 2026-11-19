@@ -15,7 +15,7 @@ int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00546190(char*);
 
 /* ADDRESS: GOLDTL 0x005513d0 */
-void __cdecl fcn_005513d0(char* a0)
+void __cdecl fcn_005513d0(char* action)
 {
 	char msg[0x114];
 	char* entry;
@@ -29,17 +29,17 @@ void __cdecl fcn_005513d0(char* a0)
 	float threshold; int rec_id;
 
 	v20 = -1;
-	entry = g_7f4ca0 + *(unsigned short*) (a0 + 8) * 0x21c;
+	entry = g_7f4ca0 + *(unsigned short*) (action + 8) * 0x21c;
 	rec = gm_LookupEntityRecordById(*(int*) (entry + 0x5c));
 	if (rec == 0 || rec[8] == 0 || entry[8] == 0)
 		goto tail;
-	state = *(int*) (a0 + 0x70);
+	state = *(int*) (action + 0x70);
 	if (state == -2)
 		goto tail;
 	if (state != 0) {
 		if (state != 1)
 			return;
-		if (*(float*) (a0 + 0xac) >= 3.0) {
+		if (*(float*) (action + 0xac) >= 3.0) {
 			if (entry[2] == 6) {
 				rec_id = *(int*) (rec + 4); memset(msg, 0, sizeof(msg));
 				*(int*) (msg + 0xc) = *(int*) (entry + 4);
@@ -56,7 +56,7 @@ void __cdecl fcn_005513d0(char* a0)
 				fcn_00500bb0(msg + 0x18, 0, 0x1e, 0);
 				fcn_004c5980(msg);
 			}
-			*(float*) (a0 + 0xac) = 0;
+			*(float*) (action + 0xac) = 0;
 			if (*(int*) (entry + 0x170) != 0)
 				v20 = *(int*) (*(int*) (entry + 0x170) + 1);
 			if (entry[9] == 0) {
@@ -64,12 +64,12 @@ void __cdecl fcn_005513d0(char* a0)
 			} else {
 				fcn_004c4fc0(8, *(int*) (rec + 4), *(int*) (entry + 4), 0, v20, 0, 0, 2);
 			}
-			*(int*) (a0 + 0x70) = 0;
-			*(int*) (a0 + 0x52) += (gm_RandomMod(8) & 0xffff) + 1;
+			*(int*) (action + 0x70) = 0;
+			*(int*) (action + 0x52) += (gm_RandomMod(8) & 0xffff) + 1;
 			return;
 		}
-		*(int*) (a0 + 0x52) += 1;
-		*(float*) (a0 + 0xac) = *(float*) (a0 + 0xac) + 1.0;
+		*(int*) (action + 0x52) += 1;
+		*(float*) (action + 0xac) = *(float*) (action + 0xac) + 1.0;
 		return;
 	}
 	count = 0;
@@ -81,16 +81,16 @@ void __cdecl fcn_005513d0(char* a0)
 	if (count != 5) {
 		factor = (5.0f - (float) count) * 0.2f;
 		f = (float) (factor * factor);
-		threshold = (float) (f * *(float*) (a0 + 0xac));
+		threshold = (float) (f * *(float*) (action + 0xac));
 		if ((1.0f - f) + gm_RandomFloat01() < threshold) {
-			*(int*) (a0 + 0x70) = 1;
-			*(int*) (a0 + 0x52) += 1;
-			*(float*) (a0 + 0xac) = 0;
+			*(int*) (action + 0x70) = 1;
+			*(int*) (action + 0x52) += 1;
+			*(float*) (action + 0xac) = 0;
 			return;
 		}
-		*(float*) (a0 + 0xac) = f * 0.1 + *(float*) (a0 + 0xac);
+		*(float*) (action + 0xac) = f * 0.1 + *(float*) (action + 0xac);
 		return;
 	}
 tail:
-	fcn_00546190(a0);
+	fcn_00546190(action);
 }

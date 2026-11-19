@@ -9,7 +9,7 @@ void __cdecl fcn_0043f6b0(int* obj);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x004400b0 */
-int* __cdecl fcn_004400b0(int a0, char* a1, char* a2, char** a3, float a4, float a5)
+int* __cdecl fcn_004400b0(int gridSize, char* a1, char* a2, char** a3, float a4, float a5)
 {
 	int* obj;
 	char* p;
@@ -18,10 +18,10 @@ int* __cdecl fcn_004400b0(int a0, char* a1, char* a2, char** a3, float a4, float
 	int v;
 
 	obj = (int*) m_alloc(0x8038, (char*) 0x67a950);
-	obj[0] = a0;
-	obj[3] = a0 - 1;
-	obj[2] = (a0 * a0 - 1) | (a0 - 1);
-	p = (char*) m_alloc(a0 * a0, (char*) 0x67a940);
+	obj[0] = gridSize;
+	obj[3] = gridSize - 1;
+	obj[2] = (gridSize * gridSize - 1) | (gridSize - 1);
+	p = (char*) m_alloc(gridSize * gridSize, (char*) 0x67a940);
 	obj[4] = (int) p;
 	n = obj[0] * obj[0];
 	v = 0x20;
@@ -47,10 +47,10 @@ int* __cdecl fcn_004400b0(int a0, char* a1, char* a2, char** a3, float a4, float
 		add ecx, ebx
 		rep stosb
 	}
-	obj[5] = (int) m_alloc(a0 * a0, (char*) 0x67a87c);
+	obj[5] = (int) m_alloc(gridSize * gridSize, (char*) 0x67a87c);
 	*(float*) (obj + 0x21) = a5;
-	obj[1] = a0 / 8;
-	*(float*) (obj + 0x14) = (float) (-a0) * a4 * *(float*) 0x6628cc;
+	obj[1] = gridSize / 8;
+	*(float*) (obj + 0x14) = (float) (-gridSize) * a4 * *(float*) 0x6628cc;
 	*(float*) (obj + 0x18) = a4;
 	obj[0x19] = 0;
 	obj[0x1a] = 0;
@@ -62,7 +62,7 @@ int* __cdecl fcn_004400b0(int a0, char* a1, char* a2, char** a3, float a4, float
 	obj[0x2009] = 0x41a00000;
 	obj[0x200a] = 0x42200000;
 	((unsigned char*) obj)[0x8036] &= 0xe1;
-	*(float*) (obj + 0x16) = (float) a0 * a4 * *(float*) 0x6628cc;
+	*(float*) (obj + 0x16) = (float) gridSize * a4 * *(float*) 0x6628cc;
 	*(float*) (obj + 0x1e) = -a4;
 	p = (char*) obj + 0x7e24;
 	for (i = 0; i < 8; i++) {

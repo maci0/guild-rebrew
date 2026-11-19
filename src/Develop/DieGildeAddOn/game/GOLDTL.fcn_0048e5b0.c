@@ -28,7 +28,7 @@ void __cdecl gm_ResolveEntityById(void**, int, int, int);
 int __cdecl fcn_004a6210(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x0048e5b0 */
-int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* a3, char* a4)
+int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* firstAction, char* a4)
 {
 	char* p;
 	char* e;
@@ -59,7 +59,7 @@ int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* a3, char* a4)
 		m2.b = 1;
 		r = ai_SelectBestMethod(0x42, *(unsigned short*) p, 1, &m1, &m2);
 		if (r != 0) {
-			memcpy(a3, &m1, 24);
+			memcpy(firstAction, &m1, 24);
 			memcpy(a4, &m2, 24);
 			return r;
 		}
@@ -83,8 +83,8 @@ int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* a3, char* a4)
 	if (fcn_004a6210(p, e, a1) == 0) {
 		return 0;
 	}
-	*(char*) a3 = 4;
-	*(int*) (a3 + 4) = *(int*) (e + 1);
+	*(char*) firstAction = 4;
+	*(int*) (firstAction + 4) = *(int*) (e + 1);
 	*(char*) a4 = 4;
 	*(int*) (a4 + 4) = *(int*) (a1 + 1);
 	return 0x42;

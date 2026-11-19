@@ -45,7 +45,7 @@ void __cdecl fcn_00471e30(int handle);
 void __cdecl fcn_005a2580(char* a, char* b, char* c);
 
 /* ADDRESS: GOLDTL 0x005a2970 */
-void __cdecl fcn_005a2970(char* a0, char* a1)
+void __cdecl fcn_005a2970(char* building, char* a1)
 {
 	struct sel sel[3];
 	unsigned int out2[6];
@@ -82,7 +82,7 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 	do {
 		for (j = 0; j < 3; j++) {
 			q = (int*) (a1 + 0x1c + j * 4);
-			if (fcn_004f7120(*q, (char*) ((*(unsigned short*) (a0 + 0x27)) * 0x21c + 0x7f4ca0),
+			if (fcn_004f7120(*q, (char*) ((*(unsigned short*) (building + 0x27)) * 0x21c + 0x7f4ca0),
 				&out1, out2, &idx[j])) {
 				if (seen[j] != *q)
 					changed = 1;
@@ -130,7 +130,7 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 							vals[j], (char) g_773d75)) {
 							out2[1] = 0x62757920;
 							out2[2] = *(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4);
-							out2[3] = *(unsigned int*) (a0 + 1);
+							out2[3] = *(unsigned int*) (building + 1);
 							out2[4] = seen[j];
 							out2[5] = vals[j];
 							fcn_004c4eb0("buy dunkle ecke");
@@ -138,7 +138,7 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 							fcn_004c58b0(seen[j],
 								*(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4));
 							fcn_004c51a0(
-								*(unsigned int*) ((*(unsigned short*) (a0 + 0x27)) * 0x21c + 0x7f4ca4),
+								*(unsigned int*) ((*(unsigned short*) (building + 0x27)) * 0x21c + 0x7f4ca4),
 								*(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4), 0, vals[j]);
 							fcn_004c4ef0("buy dunkle ecke");
 						}

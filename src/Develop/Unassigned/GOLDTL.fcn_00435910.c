@@ -62,7 +62,7 @@ int* __cdecl fcn_004356c0(int a0);
 void __cdecl fcn_004357b0(unsigned char* blend, float* w1, float* w0);
 
 /* ADDRESS: GOLDTL 0x00435910 */
-void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
+void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bounds)
 {
 	unsigned char* layout;
 	unsigned char* grid;
@@ -157,8 +157,8 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 
 			/* the macro expands MIN twice, so the native re-reads the
 			   two +0x38 fields for the second MIN */
-			if (a3 != 0) {
-				*a3 = MAX(*a3, MIN(*(float*) ((char*) r0 + 0x38),
+			if (bounds != 0) {
+				*bounds = MAX(*bounds, MIN(*(float*) ((char*) r0 + 0x38),
 					*(float*) ((char*) r1 + 0x38)));
 			}
 			if (ei > 0) {
@@ -175,7 +175,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 		if (n <= 0) {
 			return;
 		}
-		v = a2;
+		v = vertices;
 		for (item = 0; n > item; item++) {
 			o = item * CELL_STRIDE;
 			v->f[0] = (float) tapA[2][1][o] * wA[2][1][0] +
@@ -208,7 +208,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 				((float) tapB[0][1][o + 1] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
 			v->f[5] = (((float) tapB[0][0][o + 2] - F_STEP_BIAS) * m[0][0] +
 				((float) tapB[0][1][o + 2] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
-			c = *a1;
+			c = *vertexCounts;
 			if (c > 0) {
 				v->id[0] = ids[0];
 				v->id[1] = ids[1];
@@ -222,7 +222,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 				ids += 2;
 				v++;
 			}
-			a1++;
+			vertexCounts++;
 		}
 		return;
 
@@ -231,7 +231,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 		if (n <= 0) {
 			return;
 		}
-		v = a2;
+		v = vertices;
 		for (item = 0; item < n; item++) {
 			o = item * CELL_STRIDE;
 			v->f[0] = (float) tapA[1][1][o] * wA[1][1][0] +
@@ -258,7 +258,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 				((float) tapB[0][1][o + 1] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
 			v->f[5] = (((float) tapB[0][0][o + 2] - F_STEP_BIAS) * m[0][0] +
 				((float) tapB[0][1][o + 2] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
-			c = *a1;
+			c = *vertexCounts;
 			if (c > 0) {
 				v->id[0] = ids[0];
 				v->id[1] = ids[1];
@@ -272,7 +272,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 				ids += 2;
 				v++;
 			}
-			a1++;
+			vertexCounts++;
 		}
 		return;
 
@@ -281,7 +281,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 		if (n <= 0) {
 			return;
 		}
-		v = a2;
+		v = vertices;
 		for (item = 0; item < n; item++) {
 			o = item * CELL_STRIDE;
 			v->f[0] = (float) tapA[0][1][o] * wA[0][1][0] +
@@ -299,7 +299,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 				((float) tapB[0][1][o + 1] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
 			v->f[5] = (((float) tapB[0][0][o + 2] - F_STEP_BIAS) * m[0][0] +
 				((float) tapB[0][1][o + 2] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
-			c = *a1;
+			c = *vertexCounts;
 			if (c > 0) {
 				v->id[0] = ids[0];
 				v->id[1] = ids[1];
@@ -313,7 +313,7 @@ void __cdecl fcn_00435910(int a0, int* a1, Vertex* a2, float* a3)
 				ids += 2;
 				v++;
 			}
-			a1++;
+			vertexCounts++;
 		}
 		return;
 	}

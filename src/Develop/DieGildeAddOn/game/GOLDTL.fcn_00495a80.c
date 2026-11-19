@@ -19,7 +19,7 @@ int __cdecl fcn_005463a0(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x00495a80 */
-int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
+int __cdecl fcn_00495a80(int a0, char* actorEntity, int a2, char* a3, char* a4)
 {
 	int left;
 	int i;
@@ -42,7 +42,7 @@ int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
 	if (a2 != 0) {
 		return 0;
 	}
-	if (*(int*) (a1 + 0x170) == 0 && *(char*) (a1 + 2) != 3) {
+	if (*(int*) (actorEntity + 0x170) == 0 && *(char*) (actorEntity + 2) != 3) {
 		extra.msg.mode = 0;
 		extra.msg.f1 = 0;
 		extra.msg.f2 = 0;
@@ -50,14 +50,14 @@ int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
 		action.msg.mode = 0;
 		action.msg.f1 = 0;
 		action.msg.f2 = 0;
-		r = ai_SelectBestMethod(4, *(unsigned short*) a1, 1, &extra.msg, &action.msg);
+		r = ai_SelectBestMethod(4, *(unsigned short*) actorEntity, 1, &extra.msg, &action.msg);
 		if (r != 0) {
 			*(Out495a80*) a3 = extra.msg;
 			*(Out495a80*) a4 = action.msg;
 		}
 		return r;
 	}
-	if (fcn_005463a0(2, 2, *(unsigned short*) a1, 0, 0x60) != 0) {
+	if (fcn_005463a0(2, 2, *(unsigned short*) actorEntity, 0, 0x60) != 0) {
 		return 0;
 	}
 	if (*(char*) a3 == 0x0e) {
@@ -69,27 +69,27 @@ int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
 			buf[k] = 0;
 		}
 		buf[0] = 1;
-		r = fcn_004fa5b0(keep[i], a1, buf);
+		r = fcn_004fa5b0(keep[i], actorEntity, buf);
 		f = (r & 2) ? (-1.0f) : 0.0f;
-		if (*(unsigned char*) (a1 + i + 0x80) < 0x2a) {
+		if (*(unsigned char*) (actorEntity + i + 0x80) < 0x2a) {
 			slot = 1;
-		} else if (*(unsigned char*) (a1 + i + 0x80) < 0x54) {
+		} else if (*(unsigned char*) (actorEntity + i + 0x80) < 0x54) {
 			slot = 2;
-		} else if (*(unsigned char*) (a1 + i + 0x80) < 0x7e) {
+		} else if (*(unsigned char*) (actorEntity + i + 0x80) < 0x7e) {
 			slot = 4;
-		} else if (*(unsigned char*) (a1 + i + 0x80) < 0xa8) {
+		} else if (*(unsigned char*) (actorEntity + i + 0x80) < 0xa8) {
 			slot = 6;
-		} else if (*(unsigned char*) (a1 + i + 0x80) < 0xd2) {
+		} else if (*(unsigned char*) (actorEntity + i + 0x80) < 0xd2) {
 			slot = 9;
 		} else {
 			slot = 12;
 		}
 		/* native: fild; fadd; call _ftol (0x64d228) */
 		slot = (int) ((float) slot + f);
-		if (slot < *(int*) (a1 + 0x194)) {
+		if (slot < *(int*) (actorEntity + 0x194)) {
 			return 0;
 		}
-		if ((float) *(unsigned char*) (a1 + i + 0x80) == g_66413c) {
+		if ((float) *(unsigned char*) (actorEntity + i + 0x80) == g_66413c) {
 			return 0;
 		}
 		*(int*) (a3 + 0x10) = slot;
@@ -107,31 +107,31 @@ int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
 		if (action.count[i] == 0) {
 			action.count[i] = 0xfc;
 		}
-		r = fcn_004fa5b0(keep[i], a1, buf);
+		r = fcn_004fa5b0(keep[i], actorEntity, buf);
 		f = (r & 2) ? (-1.0f) : 0.0f;
-		if (*(unsigned char*) (a1 + 0x80 + i) < 0x2a) {
+		if (*(unsigned char*) (actorEntity + 0x80 + i) < 0x2a) {
 			weight[i] = 1;
-		} else if (*(unsigned char*) (a1 + 0x80 + i) < 0x54) {
+		} else if (*(unsigned char*) (actorEntity + 0x80 + i) < 0x54) {
 			weight[i] = 2;
-		} else if (*(unsigned char*) (a1 + 0x80 + i) < 0x7e) {
+		} else if (*(unsigned char*) (actorEntity + 0x80 + i) < 0x7e) {
 			weight[i] = 4;
-		} else if (*(unsigned char*) (a1 + 0x80 + i) < 0xa8) {
+		} else if (*(unsigned char*) (actorEntity + 0x80 + i) < 0xa8) {
 			weight[i] = 6;
-		} else if (*(unsigned char*) (a1 + 0x80 + i) < 0xd2) {
+		} else if (*(unsigned char*) (actorEntity + 0x80 + i) < 0xd2) {
 			weight[i] = 9;
 		} else {
 			weight[i] = 12;
 		}
 		/* native: fild qword; fadd; call _ftol (0x64d228) */
 		weight[i] = (unsigned int) ((float) weight[i] + f);
-		if (weight[i] > *(unsigned int*) (a1 + 0x194)) {
+		if (weight[i] > *(unsigned int*) (actorEntity + 0x194)) {
 			used[i] = 0;
 			left--;
-		} else if ((float) *(unsigned char*) (a1 + 0x80 + i) == g_66413c) {
+		} else if ((float) *(unsigned char*) (actorEntity + 0x80 + i) == g_66413c) {
 			used[i] = 0;
 			left--;
 		} else {
-			extra.ratios[i] = (float) *(unsigned char*) (a1 + 0x80 + i) / (float) action.count[i];
+			extra.ratios[i] = (float) *(unsigned char*) (actorEntity + 0x80 + i) / (float) action.count[i];
 		}
 	}
 	if (left == 0) {
@@ -141,17 +141,17 @@ int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
 	while (used[i] == 0) {
 		i = (i + 1) % 5;
 	}
-	if (*(char*) (a1 + 2) == 3) {
+	if (*(char*) (actorEntity + 2) == 3) {
 		if (i == 4) {
-			if ((*(unsigned char*) (a1 + 0x1e8) & 4) == 0) {
+			if ((*(unsigned char*) (actorEntity + 0x1e8) & 4) == 0) {
 				return 0;
 			}
 		} else if (i == 3) {
-			if ((*(unsigned char*) (a1 + 0x1e8) & 8) == 0) {
+			if ((*(unsigned char*) (actorEntity + 0x1e8) & 8) == 0) {
 				return 0;
 			}
 		} else if (i == 2) {
-			if ((*(unsigned char*) (a1 + 0x1e8) & 2) == 0) {
+			if ((*(unsigned char*) (actorEntity + 0x1e8) & 2) == 0) {
 				return 0;
 			}
 		}
@@ -165,15 +165,15 @@ int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
 		} else {
 			slot = (i == 3) ? 0x17 : 0x14;
 		}
-		if (fcn_00502cd0(*(int*) (*(char**) (a1 + 0x170) + 0x5d), 1, 0, slot) == 0) {
+		if (fcn_00502cd0(*(int*) (*(char**) (actorEntity + 0x170) + 0x5d), 1, 0, slot) == 0) {
 			extra.msg.mode = 2;
 			extra.msg.f1 = slot;
 			extra.msg.f2 = 1;
 			extra.msg.f5 = 0x3ee147ae;
 			action.msg.mode = 4;
-			action.msg.f1 = *(int*) (*(char**) (a1 + 0x170) + 1);
+			action.msg.f1 = *(int*) (*(char**) (actorEntity + 0x170) + 1);
 			action.msg.f2 = 1;
-			r = ai_SelectBestMethod(4, *(unsigned short*) a1, 1, &extra.msg, &action.msg);
+			r = ai_SelectBestMethod(4, *(unsigned short*) actorEntity, 1, &extra.msg, &action.msg);
 			if (r != 0) {
 				*(Out495a80*) a3 = extra.msg;
 				*(Out495a80*) a4 = action.msg;

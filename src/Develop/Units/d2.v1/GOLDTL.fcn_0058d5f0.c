@@ -61,7 +61,7 @@ typedef struct {
 } Req_58d5f0;
 
 /* ADDRESS: GOLDTL 0x0058d5f0 */
-void __cdecl fcn_0058d5f0(unsigned char* a0)
+void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 {
 	Req_58d5f0 req;
 	unsigned int ids[4];
@@ -82,9 +82,9 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 	int screen;
 
 	ids[2] = 0x227;
-	handles[3] = fcn_00502cd0(*(unsigned int*) (a0 + 0x5d), 2, 6, 0, 0x2a);
+	handles[3] = fcn_00502cd0(*(unsigned int*) (gebaeude + 0x5d), 2, 6, 0, 0x2a);
 	n = 2;
-	ents = (char*) (lpGebaeudePROT + (unsigned int) *a0 * 0x24d);
+	ents = (char*) (lpGebaeudePROT + (unsigned int) *gebaeude * 0x24d);
 	if (*ents == 0x1f) {
 		ids[0] = 0x293;
 		ids[1] = 0x294;
@@ -100,12 +100,12 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 			n = 3;
 		}
 	}
-	if (fcn_00525fb0((int) a0))
+	if (fcn_00525fb0((int) gebaeude))
 		return;
 	counts[0] = 0;
 	counts[1] = 0;
 	counts[2] = 0;
-	h = fcn_005463a0(2, 0, 0x8c, 3, *(unsigned int*) (a0 + 1));
+	h = fcn_005463a0(2, 0, 0x8c, 3, *(unsigned int*) (gebaeude + 1));
 	while (h) {
 		j = 0;
 		do {
@@ -129,7 +129,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 	d2_SetForm(menu, 3);
 	screen = (*ents != 0x1f) ? 0x4128 : 0x421e;
 	io_AppendText(screen);
-	fcn_0052a0c0((int) a0, 0);
+	fcn_0052a0c0((int) gebaeude, 0);
 	fcn_00594340();
 	d2_CenterDialogWindows(menu);
 	d2_SetForm(menu, 2);
@@ -152,16 +152,16 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 		menu = ids[3];
 	}
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00595e20((int) a0, handles[3]);
-	fcn_005963f0(menu, 1, 0, (int) a0);
+	fcn_00595e20((int) gebaeude, handles[3]);
+	fcn_005963f0(menu, 1, 0, (int) gebaeude);
 	sel = fcn_005373e0(0x58d5f0, 0x677c7);
 	while (sel) {
-		fcn_00595e20((int) a0, handles[3]);
-		fcn_005963f0(menu, 1, 0, (int) a0);
+		fcn_00595e20((int) gebaeude, handles[3]);
+		fcn_005963f0(menu, 1, 0, (int) gebaeude);
 		counts[0] = 0;
 		counts[1] = 0;
 		counts[2] = 0;
-		h = fcn_005463a0(2, 0, 0x8c, 3, *(unsigned int*) (a0 + 1));
+		h = fcn_005463a0(2, 0, 0x8c, 3, *(unsigned int*) (gebaeude + 1));
 		while (h) {
 			j = 0;
 			do {
@@ -209,8 +209,8 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 				memset(&req, 0, sizeof(req));
 				req.kind = 0x8c;
 				req.flag = 1;
-				req.owner = *(unsigned int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + 0x7f4ca4);
-				req.self = *(unsigned int*) (a0 + 1);
+				req.owner = *(unsigned int*) (*(unsigned short*) (gebaeude + 0x27) * 0x21c + 0x7f4ca4);
+				req.self = *(unsigned int*) (gebaeude + 1);
 				req.date0 = *(int*) 0x7f4c00;
 				req.date1 = g_7f4c04;
 				req.date2 = g_7f4c08;

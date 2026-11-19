@@ -59,7 +59,7 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 	float t;
 	float scale;
 	unsigned int v20;
-	unsigned int v25;
+	unsigned int secondId;
 	int found;
 	int best;
 	int k;
@@ -69,7 +69,7 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 
 	best = 0;
 	v20 = 0;
-	v25 = 0;
+	secondId = 0;
 	packet[3] = 0;
 	packet[4] = 0;
 	if (packet[0] != 3)
@@ -119,7 +119,7 @@ found:
 		return 0;
 	fcn_00508cf0(n, pick);
 	if (n != 1) {
-		v25 = (unsigned int) ids[pick[1]];
+		secondId = (unsigned int) ids[pick[1]];
 		v20 = (unsigned int) ids[pick[0]];
 	} else {
 		v20 = (unsigned int) ids[pick[0]];
@@ -139,23 +139,23 @@ found:
 		ent.f38 = fcn_00502780(g_773d75, v20);
 		fcn_004c61d0(&ent, g_773d75);
 		packet[3] = v20;
-		e = gm_FindSlotById(g_773d75, v25);
+		e = gm_FindSlotById(g_773d75, secondId);
 		if (e != 0) {
 			ent = *e;
 			ent.f24 = ent.f20 * scale;
-			ent.f38 = fcn_00502780(g_773d75, v25);
+			ent.f38 = fcn_00502780(g_773d75, secondId);
 			fcn_004c61d0(&ent, g_773d75);
-			packet[4] = v25;
+			packet[4] = secondId;
 		}
 		fcn_004c5420(*(int*) (self + 4), 0x1c8, 4, 0x4000000, 0);
 		fcn_005100f0(*(int*) (self + 4), -3);
 		found = gm_RandomMod(3);
 		if (packet[2] != 1) {
 			io_FormatTextBuffer(buf1, (found & 0xffff) + 0x165a, packet[1] + 0x1648);
-			io_FormatTextBuffer(buf2, 0x1659, buf1, v20 * 2 + 0x9a8, v25 * 2 + 0x9a8);
+			io_FormatTextBuffer(buf2, 0x1659, buf1, v20 * 2 + 0x9a8, secondId * 2 + 0x9a8);
 		} else {
 			io_FormatTextBuffer(buf1, (found & 0xffff) + 0x1656, packet[1] + 0x1648);
-			io_FormatTextBuffer(buf2, 0x1655, buf1, v20 * 2 + 0x9a8, v25 * 2 + 0x9a8);
+			io_FormatTextBuffer(buf2, 0x1655, buf1, v20 * 2 + 0x9a8, secondId * 2 + 0x9a8);
 		}
 		for (q = (unsigned char*) 0x7f4ca4; (int) q < (int) 0x85a0a4; q += 0x21c) {
 			if ((*(unsigned char*) (q - 2) == 7 || *(unsigned char*) (q - 2) == 6) &&

@@ -1,7 +1,7 @@
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x00478eb0 */
-void __cdecl fcn_00478eb0(int a0, int a1, char* a2, char* a3, int a4, int a5, int a6)
+void __cdecl fcn_00478eb0(int x, int y, char* surface, char* sprite, int xStep, int yStep, int transparent)
 {
 	short* dest;
 	int stride;
@@ -14,13 +14,13 @@ void __cdecl fcn_00478eb0(int a0, int a1, char* a2, char* a3, int a4, int a5, in
 	short px;
 	short* out;
 
-	stride = *(int*) (a2 + 0x10);
-	v2 = a3[6];
-	v3 = a3[0xa];
-	dest = (short*) (*(int*) (a2 + 0x1c) + (a0 + stride * a1) * 2);
-	src = a3 + 0x32;
-	width = *(unsigned short*) (a3 + 6) * 2;
-	if (a6 == 0) {
+	stride = *(int*) (surface + 0x10);
+	v2 = sprite[6];
+	v3 = sprite[0xa];
+	dest = (short*) (*(int*) (surface + 0x1c) + (x + stride * y) * 2);
+	src = sprite + 0x32;
+	width = *(unsigned short*) (sprite + 6) * 2;
+	if (transparent == 0) {
 		row = 0;
 		do {
 			col = 0;
@@ -28,12 +28,12 @@ void __cdecl fcn_00478eb0(int a0, int a1, char* a2, char* a3, int a4, int a5, in
 			do {
 				px = *(short*) (src + ((col >> 8) & 0xff) * 2);
 				*out = px;
-				col += a4;
+				col += xStep;
 				out++;
 			} while ((char) (col >> 8) < v2);
 			dest += stride;
-			row += a5;
-			src = a3 + 0x32 + ((row >> 8) & 0xff) * width;
+			row += yStep;
+			src = sprite + 0x32 + ((row >> 8) & 0xff) * width;
 		} while ((char) (row >> 8) < v3);
 		return;
 	}
@@ -46,11 +46,11 @@ void __cdecl fcn_00478eb0(int a0, int a1, char* a2, char* a3, int a4, int a5, in
 			if (px != 0) {
 				*out = px;
 			}
-			col += a4;
+			col += xStep;
 			out++;
 		} while ((char) (col >> 8) < v2);
 		dest += stride;
-		row += a5;
-		src = a3 + 0x32 + ((row >> 8) & 0xff) * width;
+		row += yStep;
+		src = sprite + 0x32 + ((row >> 8) & 0xff) * width;
 	} while ((char) (row >> 8) < v3);
 }

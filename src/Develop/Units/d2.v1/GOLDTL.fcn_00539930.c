@@ -74,20 +74,20 @@ unsigned int __cdecl fcn_00539930(int a0)
 	
 	
 	
-	char v21[260];
+	char path[260];
 	
-	char v24[128];
-	char v25[128];
+	char mapName[128];
+	char crestName[128];
 	
-	char v27[260];
+	char savePath[260];
 	
 	
 	unsigned int v36;
 	int v38;
 	int v4;
-	int v5;
+	int dialog;
 	int v12;
-	int v14;
+	int group;
 	int buttons[3];
 	int v32;
 	char v2;
@@ -111,15 +111,15 @@ unsigned int __cdecl fcn_00539930(int a0)
 	v38 = 0;
 	v4 = 1;
 	v36 = g_6b7fac;
-	v14 = -1;
-	v5 = fcn_00470820(0, 0, s_6a3a6c);
-	fcn_00471db0(v5, 1);
-	fcn_00471d80(v5, 2);
-	d2_SetForm(v5, 0);
+	group = -1;
+	dialog = fcn_00470820(0, 0, s_6a3a6c);
+	fcn_00471db0(dialog, 1);
+	fcn_00471d80(dialog, 2);
+	d2_SetForm(dialog, 0);
 	fcn_005340f0(d2_CurrentWindowId);
-	d2_SetForm(v5, 1);
+	d2_SetForm(dialog, 1);
 	io_AppendText(0x1ca5);
-	d2_SetForm(v5, 3);
+	d2_SetForm(dialog, 3);
 	fcn_00533a60(d2_CurrentWindowId, 0, buttons, 3, g_14ac614, g_14ac618, g_14ac61c);
 	fcn_00472640(buttons[0], 0);
 	if (fcn_005373e0(0x539930, 0x24087) != 0) {
@@ -133,12 +133,12 @@ unsigned int __cdecl fcn_00539930(int a0)
 				fcn_00471e30(v6);
 				v32 = 0;
 				d2_SuppressOverlay = 0;
-				d2_SetForm(v5, 2);
+				d2_SetForm(dialog, 2);
 				d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-				if (v14 != -1) {
-					fcn_00469510(v14);
+				if (group != -1) {
+					fcn_00469510(group);
 				}
-				v14 = (int) d2_CreateRadioGroup(0);
+				group = (int) d2_CreateRadioGroup(0);
 				if (v36 >= 1) {
 					v12 = -0x116;
 					v34 = 0;
@@ -163,8 +163,8 @@ label_539ae5:
 						}
 						if (v11 != 0x3f) {
 							v13 = (int*) ((int) ((int*) ((char*) hosts + 0x5a)) + v32);
-							sprintf(v21, s_6a3a54, &((unsigned char*) hosts + 0x36)[v32 + 4]);
-							v32 = vfs_Tfopen(v21, 0x6750e8, g_6b7fdc);
+							sprintf(path, s_6a3a54, &((unsigned char*) hosts + 0x36)[v32 + 4]);
+							v32 = vfs_Tfopen(path, 0x6750e8, g_6b7fdc);
 							if (v32 != 0) {
 								v4 = 1;
 								fcn_00521eb0(v32, header1);
@@ -187,21 +187,21 @@ label_539ba4:
 								v4 = 0;
 							}
 							v8 = &((char*) hosts + 0x16)[v34];
-							strcpy(v24, v8);
+							strcpy(mapName, v8);
 							v12 = v37;
 							v32 = v34;
 						} else {
 							v8 = &((char*) hosts + 0x16)[v32];
-							strcpy(v24, v8);
+							strcpy(mapName, v8);
 						}
 						if (v4 != 0) {
-							__strupr(v24);
-							sprintf(v25, s_6a2e38, v24);
-							v32 = fcn_00465950(v25);
+							__strupr(mapName);
+							sprintf(crestName, s_6a2e38, mapName);
+							v32 = fcn_00465950(crestName);
 							if (v32 == -1) {
 								v32 = fcn_00465950(s_6a2e24);
 							}
-							d2_SetForm(v5, 2);
+							d2_SetForm(dialog, 2);
 							v32 = fcn_0046f740(8, v34, v32, d2_CurrentWindowId);
 							*v31 = v32;
 							*(int*) (v32 * 0x2f4 + 0x5c + (int) g_1015ea0) = 1;
@@ -210,7 +210,7 @@ label_539ba4:
 								fcn_00472640(v32, 0);
 							}
 							*(int*) (v32 * 0x2f4 + 0x1d0 + (int) g_1015ea0) = 3;
-							fcn_00469470(v14, v32);
+							fcn_00469470(group, v32);
 							v32 = fcn_0046f100(0x88, v35, 400, 0x78, 0x10, d2_CurrentWindowId);
 							v31[1] = v32;
 							d2_SetElementFont(*(int*) (d2_CurrentWindowId * 0x3cc + 0x10161bc), 0x53);
@@ -244,18 +244,18 @@ label_539d27:
 				if (d2_CurrentElementId != buttons[0]) {
 					if (d2_CurrentElementId != v39b) {
 						if (d2_CurrentElementId == v40b) {
-							fcn_00471af0(v5, 0);
+							fcn_00471af0(dialog, 0);
 							if (fcn_005397c0() != 0) {
 								g_774654 = 1;
 								v38 = 1;
 							}
-							fcn_00471af0(v5, 1);
+							fcn_00471af0(dialog, 1);
 						}
 					} else {
 						v4 = 1;
 					}
 				} else {
-					v32 = *(int*) (v14 * 0x8c + 0x102cbc8);
+					v32 = *(int*) (group * 0x8c + 0x102cbc8);
 					if (v32 != -1) {
 						v12 = v32 * 0x80;
 						v8 = &((char*) hosts)[v12];
@@ -306,7 +306,7 @@ label_539d27:
 								v10 = &v10[1];
 							} while (v3 != 0);
 							g_7747b0 |= 0x40;
-							sprintf(v27, s_6a3a54, g_7e21a0);
+							sprintf(savePath, s_6a3a54, g_7e21a0);
 							memset(header2, 0, sizeof(header2));
 
 
@@ -315,7 +315,7 @@ label_539d27:
 
 
 
-							v32 = vfs_Tfopen(v27, 0x6750e8, g_6b7fdc);
+							v32 = vfs_Tfopen(savePath, 0x6750e8, g_6b7fdc);
 							if (v32 != 0) {
 								fcn_00521eb0(v32, (char*) ((int*) header2));
 								CloseVfsStream(v32);
@@ -351,12 +351,12 @@ label_539d27:
 					}
 				}
 			}
-			fcn_00472640(buttons[0], *(int*) (v14 * 0x8c + 0x102cbc8) != -1);
+			fcn_00472640(buttons[0], *(int*) (group * 0x8c + 0x102cbc8) != -1);
 		} while (fcn_005373e0(0x539930, 0x24087) != 0);
-		if (v14 != -1) {
-			fcn_00469510(v14);
+		if (group != -1) {
+			fcn_00469510(group);
 		}
 	}
-	fcn_00471e30(v5);
+	fcn_00471e30(dialog);
 	return v38;
 }

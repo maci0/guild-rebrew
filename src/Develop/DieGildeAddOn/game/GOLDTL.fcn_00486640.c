@@ -19,7 +19,7 @@ int __cdecl fcn_00503a70(int type);
 int __cdecl fcn_00486640(char* a0, int* a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00486640 */
-int __cdecl fcn_00486640(char* a0, int* a1, int a2)
+int __cdecl fcn_00486640(char* a0, int* goodsPlan, int a2)
 {
 	int* p;
 	int off;
@@ -40,13 +40,13 @@ int __cdecl fcn_00486640(char* a0, int* a1, int a2)
 	GOODS_PLAN_ENTRY* seg;
 
 	off = 0x26;
-	p = a1 + 1;
+	p = goodsPlan + 1;
 	do {
 		if (*p < 0) {
 			goto next;
 		}
 		seg = &g_100b0c0[*p];
-		word = *(unsigned short*) (lpObjektePROT + a1[0] * 0x41 + off);
+		word = *(unsigned short*) (lpObjektePROT + goodsPlan[0] * 0x41 + off);
 		if (seg->stock < word) {
 			if (a2 != 0) {
 				return 0;
@@ -78,16 +78,16 @@ int __cdecl fcn_00486640(char* a0, int* a1, int a2)
 						    && gm_GetBuildingTypeCategory((unsigned char) *rec->entity) != 2
 						    && rec->unk_08 != 0) {
 							lim = rec->limit;
-							w = *(unsigned short*) (lpObjektePROT + a1[0] * 0x41 + off);
+							w = *(unsigned short*) (lpObjektePROT + goodsPlan[0] * 0x41 + off);
 							if (lim >= w) {
 								if (*(short*) (rec->entity + 0x27) == *(short*) (*(int*) (a0 + 0x16c) + 0x27)) {
 									found = 1;
 								} else {
-									sc = *(int*) ((char*) a1 + 0x40) >> 1;
+									sc = *(int*) ((char*) goodsPlan + 0x40) >> 1;
 									if (sc < 1) {
 										sc = 1;
 									}
-									w = *(unsigned short*) (lpObjektePROT + a1[0] * 0x41 + i);
+									w = *(unsigned short*) (lpObjektePROT + goodsPlan[0] * 0x41 + i);
 									t = w * sc - seg->stock - seg->allocated;
 									n = (seg->capacity >> 1) - seg->allocated;
 									if (t <= n) {

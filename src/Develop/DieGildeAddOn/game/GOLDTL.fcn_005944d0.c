@@ -62,7 +62,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	unsigned int v37;
 	unsigned int v38;
 	unsigned int v39;
-	int v13;
+	int listControl;
 	int rect1;
 	int rect2;
 	int list[10];
@@ -114,8 +114,8 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	}
 	fcn_00533dc0(d2_CurrentWindowId, id, 0x742);
 	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId,
-	             fcn_00472830(window, 2), 0x78, &rect2, &rect1, &v13);
-	*(unsigned int*) (*(int*) 0x1015ea0 + 0x84 + v13 * 0x2f4) = 0x54;
+	             fcn_00472830(window, 2), 0x78, &rect2, &rect1, &listControl);
+	*(unsigned int*) (*(int*) 0x1015ea0 + 0x84 + listControl * 0x2f4) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
 	while (1) {
 		int any;
@@ -408,10 +408,10 @@ after_input:
 				} while (rows);
 			}
 			fcn_00657a73(count, list, 10);
-			fcn_0046f940(v13, list);
+			fcn_0046f940(listControl, list);
 			window = saved;
-			*(unsigned int*) (*(int*) 0x1015ea0 + 0x6c + v13 * 0x2f4) = 1;
-			*(unsigned int*) (*(int*) 0x1015ea0 + 0x18 + v13 * 0x2f4) = 0x30;
+			*(unsigned int*) (*(int*) 0x1015ea0 + 0x6c + listControl * 0x2f4) = 1;
+			*(unsigned int*) (*(int*) 0x1015ea0 + 0x18 + listControl * 0x2f4) = 0x30;
 			fcn_00595330(saved, 2, count, entry, 0);
 			if (idx) {
 				d2_SetForm(saved, 2);

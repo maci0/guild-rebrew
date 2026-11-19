@@ -9,7 +9,7 @@ int __cdecl fcn_0042e410(int a);
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST; extern unsigned char g_773d75; extern float g_664160;
 /* ADDRESS: GOLDTL 0x0048fe70 */
-int __cdecl fcn_0048fe70(int a0, char* a1, int a2, int* a3, int* a4, int* a5)
+int __cdecl fcn_0048fe70(int a0, char* actorEntity, int a2, int* a3, int* a4, int* a5)
 {
 	int cand[8];
 	char* rec;
@@ -29,17 +29,17 @@ int __cdecl fcn_0048fe70(int a0, char* a1, int a2, int* a3, int* a4, int* a5)
 	if (a0 != 0) {
 		return 0;
 	}
-	if (*(unsigned short*) (a1 + 0x50) == 0x7fff) {
+	if (*(unsigned short*) (actorEntity + 0x50) == 0x7fff) {
 		return 0;
 	}
-	if ((*(int*) 0x7f4c04 & 0xffff) % 6 != (unsigned) (*(int*) (a1 + 4)) % 6) {
+	if ((*(int*) 0x7f4c04 & 0xffff) % 6 != (unsigned) (*(int*) (actorEntity + 4)) % 6) {
 		return 0;
 	}
-	if (*(int*) 0x7f4c00 % 3 != (unsigned) (*(int*) (a1 + 4)) % 3) {
+	if (*(int*) 0x7f4c00 % 3 != (unsigned) (*(int*) (actorEntity + 4)) % 3) {
 		return 0;
 	}
-	if (*(char*) (a1 + 2) != 5) {
-		rec = (char*) gm_LookupEntityRecordById(*(int*) (a1 + 0x5c));
+	if (*(char*) (actorEntity + 2) != 5) {
+		rec = (char*) gm_LookupEntityRecordById(*(int*) (actorEntity + 0x5c));
 		if (rec != 0) {
 			if (*(char*) (rec + 2) == 5) {
 				return 0;
@@ -62,7 +62,7 @@ int __cdecl fcn_0048fe70(int a0, char* a1, int a2, int* a3, int* a4, int* a5)
 				cand[n] = (int) rec;
 				n++;
 			}
-			v9 = (int*) fcn_004f18d0(a1, rec, 0, 0x4f17f0, 0xff);
+			v9 = (int*) fcn_004f18d0(actorEntity, rec, 0, 0x4f17f0, 0xff);
 			if (v9 != 0) {
 				break;
 			}
@@ -87,8 +87,8 @@ int __cdecl fcn_0048fe70(int a0, char* a1, int a2, int* a3, int* a4, int* a5)
 			v--;
 		} while (v > *v9);
 		if (v4 != 0) {
-			out = fcn_004f4550((int) a1, *v9, *v4, &a2);
-			m = fcn_0050d320((int) a1, g_773d75);
+			out = fcn_004f4550((int) actorEntity, *v9, *v4, &a2);
+			m = fcn_0050d320((int) actorEntity, g_773d75);
 			if ((int) ((float) m * g_664160) <= out) {
 				return 0;
 			}
@@ -101,12 +101,12 @@ int __cdecl fcn_0048fe70(int a0, char* a1, int a2, int* a3, int* a4, int* a5)
 			return 0x3e;
 		}
 	} else if (n != 0
-	    && 0x23 <= (fcn_0042e410(8) & 0xffff) + *(unsigned short*) (a1 + 0xa)) {
+	    && 0x23 <= (fcn_0042e410(8) & 0xffff) + *(unsigned short*) (actorEntity + 0xa)) {
 		v9 = (int*) cand[fcn_0042e410(n) & 0xffff];
 		v4 = (int*) fcn_004f18d0(0, (char*) v9, 0, 0x4f1840, 0xff);
 		if (v4 != 0) {
-			t = fcn_004f4440((int) a1, 0xff, *v4, 1, &r);
-			m = fcn_0050d320((int) a1, g_773d75);
+			t = fcn_004f4440((int) actorEntity, 0xff, *v4, 1, &r);
+			m = fcn_0050d320((int) actorEntity, g_773d75);
 			if ((int) ((float) m * g_664160) < t) {
 				return 0;
 			}

@@ -45,7 +45,7 @@ void __cdecl fcn_004d8200(int* p)
 	char* task;
 	unsigned short* rec;
 	int* ent;
-	unsigned int v13;
+	unsigned int tileX;
 	int save;
 	int eid;
 	int i;
@@ -139,9 +139,9 @@ block_174:
 		                  &g_102d020, &g_102d024, &height)) {
 			return;
 		}
-		fcn_004d31d0((char*) rec, g_102d020, g_102d024, 8, &v13,
+		fcn_004d31d0((char*) rec, g_102d020, g_102d024, 8, &tileX,
 		             (unsigned int*) &ent);
-		q = *(char**) ((char*) rec + 0x184); fcn_004c6680((char*) *(int*) (q + 0x34), v13, (int) ent, 0);
+		q = *(char**) ((char*) rec + 0x184); fcn_004c6680((char*) *(int*) (q + 0x34), tileX, (int) ent, 0);
 		p[0] = -1;
 		p[1] = 0;
 	}

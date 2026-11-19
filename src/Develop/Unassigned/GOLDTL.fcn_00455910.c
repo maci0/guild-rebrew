@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00455910 */
-int __cdecl fcn_00455910(int a0, int a1, float* a2)
+int __cdecl fcn_00455910(int a0, int a1, float* matrix)
 {
 	float corners[32];
 	float mn[4];
@@ -94,20 +94,20 @@ int __cdecl fcn_00455910(int a0, int a1, float* a2)
 		corners[30] = mx[2];
 		for (i = 0; i < 8; i++) {
 			p = (float*) (a1 + i * 0x50);
-			p[0] = corners[i * 4] * a2[0] + corners[i * 4 + 1] * a2[4] + corners[i * 4 + 2] * a2[8] + a2[0xc];
-			p[1] = corners[i * 4] * a2[1] + corners[i * 4 + 1] * a2[5] + corners[i * 4 + 2] * a2[9] + a2[0xd];
-			p[2] = corners[i * 4] * a2[2] + corners[i * 4 + 1] * a2[6] + corners[i * 4 + 2] * a2[10] + a2[0xe];
+			p[0] = corners[i * 4] * matrix[0] + corners[i * 4 + 1] * matrix[4] + corners[i * 4 + 2] * matrix[8] + matrix[0xc];
+			p[1] = corners[i * 4] * matrix[1] + corners[i * 4 + 1] * matrix[5] + corners[i * 4 + 2] * matrix[9] + matrix[0xd];
+			p[2] = corners[i * 4] * matrix[2] + corners[i * 4 + 1] * matrix[6] + corners[i * 4 + 2] * matrix[10] + matrix[0xe];
 		}
 		return a1;
 	}
 	for (i = 1; i <= 8; i++) {
 		rec = *(int*) (a1 + 0x318);
 		p = (float*) (a1 + (i - 1) * 0x50);
-		p[0] = *(float*) (rec + 0x1fc + i * 0xc) * a2[4] + *(float*) (rec + 0x200 + i * 0xc) * a2[8] + *(float*) (rec + 0x1f8 + i * 0xc) * a2[0] + a2[0xc];
+		p[0] = *(float*) (rec + 0x1fc + i * 0xc) * matrix[4] + *(float*) (rec + 0x200 + i * 0xc) * matrix[8] + *(float*) (rec + 0x1f8 + i * 0xc) * matrix[0] + matrix[0xc];
 		rec = *(int*) (a1 + 0x318);
-		p[1] = *(float*) (rec + 0x1fc + i * 0xc) * a2[5] + *(float*) (rec + 0x200 + i * 0xc) * a2[9] + *(float*) (rec + 0x1f8 + i * 0xc) * a2[1] + a2[0xd];
+		p[1] = *(float*) (rec + 0x1fc + i * 0xc) * matrix[5] + *(float*) (rec + 0x200 + i * 0xc) * matrix[9] + *(float*) (rec + 0x1f8 + i * 0xc) * matrix[1] + matrix[0xd];
 		rec = *(int*) (a1 + 0x318);
-		p[2] = *(float*) (rec + 0x1fc + i * 0xc) * a2[6] + *(float*) (rec + 0x200 + i * 0xc) * a2[10] + *(float*) (rec + 0x1f8 + i * 0xc) * a2[2] + a2[0xe];
+		p[2] = *(float*) (rec + 0x1fc + i * 0xc) * matrix[6] + *(float*) (rec + 0x200 + i * 0xc) * matrix[10] + *(float*) (rec + 0x1f8 + i * 0xc) * matrix[2] + matrix[0xe];
 	}
 	return a1;
 }

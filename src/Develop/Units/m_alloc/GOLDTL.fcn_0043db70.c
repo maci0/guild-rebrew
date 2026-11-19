@@ -44,7 +44,7 @@ void __cdecl PrepareFloorWater(char* e)
 	char flag;
 	int v17, v16, v15, v14, v13, v12, v11, v10, v9, v8, v6, v5, v4, v2, v1, v0;
 	int v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29;
-	char *v7, *v3, *v30;
+	char *v7, *waterMask, *v30;
 	char buf[0x40];
 	unsigned char used[0x100];
 	char* rec;
@@ -71,7 +71,7 @@ void __cdecl PrepareFloorWater(char* e)
 		goto teardown;
 	}
 
-	v3 = (char*) m_alloc(*(int*) e * *(int*) e, (char*) 0x67a778);
+	waterMask = (char*) m_alloc(*(int*) e * *(int*) e, (char*) 0x67a778);
 	flag = 0;
 	v9 = 0;
 	if (*(int*) e - 4 > 0) {
@@ -96,20 +96,20 @@ void __cdecl PrepareFloorWater(char* e)
 						    && v9 % *(int*) (e + 4) == 0 && v9 > 0) {
 							*(unsigned char*) (v15 - 0xf38) = 1;
 						}
-						v3[v17] = 0xff;
+						waterMask[v17] = 0xff;
 						v8 = v11 + 1;
 						v17 = v11 - 1;
-						v3[*(int*) e * v9 + (v17 & *(int*) (e + 0xc))] = 0xff;
-						v3[*(int*) e * v9 + (v8 & *(int*) (e + 0xc))] = 0xff;
-						v3[((v9 - 1) & *(int*) (e + 0xc)) * *(int*) e
+						waterMask[*(int*) e * v9 + (v17 & *(int*) (e + 0xc))] = 0xff;
+						waterMask[*(int*) e * v9 + (v8 & *(int*) (e + 0xc))] = 0xff;
+						waterMask[((v9 - 1) & *(int*) (e + 0xc)) * *(int*) e
 						    + (v17 & *(int*) (e + 0xc))] = 0xff;
-						v3[((v9 - 1) & *(int*) (e + 0xc)) * *(int*) e + v11] = 0xff;
-						v3[((v9 - 1) & *(int*) (e + 0xc)) * *(int*) e
+						waterMask[((v9 - 1) & *(int*) (e + 0xc)) * *(int*) e + v11] = 0xff;
+						waterMask[((v9 - 1) & *(int*) (e + 0xc)) * *(int*) e
 						    + (v8 & *(int*) (e + 0xc))] = 0xff;
-						v3[((v9 + 1) & *(int*) (e + 0xc)) * *(int*) e
+						waterMask[((v9 + 1) & *(int*) (e + 0xc)) * *(int*) e
 						    + (v17 & *(int*) (e + 0xc))] = 0xff;
-						v3[((v9 + 1) & *(int*) (e + 0xc)) * *(int*) e + v11] = 0xff;
-						v3[((v9 + 1) & *(int*) (e + 0xc)) * *(int*) e
+						waterMask[((v9 + 1) & *(int*) (e + 0xc)) * *(int*) e + v11] = 0xff;
+						waterMask[((v9 + 1) & *(int*) (e + 0xc)) * *(int*) e
 						    + (v8 & *(int*) (e + 0xc))] = 0xff;
 					}
 					v11++;
@@ -125,15 +125,15 @@ void __cdecl PrepareFloorWater(char* e)
 	}
 	if (*(int*) (e + 0x18) != 0) {
 		for (v15 = 0; v15 < *(int*) e * *(int*) e; v15++) {
-			*(unsigned char*) (*(int*) (e + 0x18) + v15) &= v3[v15];
-			if (v3[v15] == 0xff
+			*(unsigned char*) (*(int*) (e + 0x18) + v15) &= waterMask[v15];
+			if (waterMask[v15] == 0xff
 			    && *(unsigned char*) (*(int*) (e + 0x18) + v15) == 0) {
 				*(unsigned char*) (*(int*) (e + 0x18) + v15) = 0xff;
 			}
 		}
 	} else {
 		*(int*) (e + 0x18) = (int) m_alloc(*(int*) e * *(int*) e, (char*) 0x67a764);
-		memcpy((void*) *(int*) (e + 0x18), v3, *(int*) e * *(int*) e);
+		memcpy((void*) *(int*) (e + 0x18), waterMask, *(int*) e * *(int*) e);
 	}
 
 	v13 = 0;
@@ -165,7 +165,7 @@ void __cdecl PrepareFloorWater(char* e)
 							v12 = MAX(1,
 							    *(unsigned char*) (*(int*) (e + 0x10) + v17 - 1) - 2);
 						}
-						fcn_0043c0d0((unsigned char*) v3 + *(int*) e * v13,
+						fcn_0043c0d0((unsigned char*) waterMask + *(int*) e * v13,
 						    v15, v14 - 1, (unsigned char) v10, (unsigned char) v12);
 					}
 					v14++;
@@ -174,7 +174,7 @@ void __cdecl PrepareFloorWater(char* e)
 			if (flag) {
 				v12 = MAX(1, *(unsigned char*) (*(int*) (e + 0x10)
 					+ (v13 + 1) * *(int*) e - 1) - 2);
-				fcn_0043c0d0((unsigned char*) v3 + *(int*) e * v13,
+				fcn_0043c0d0((unsigned char*) waterMask + *(int*) e * v13,
 				    v15, *(int*) e - 1, (unsigned char) v10, (unsigned char) v12);
 			}
 			v13++;
@@ -532,7 +532,7 @@ void __cdecl PrepareFloorWater(char* e)
 	m_FreeTracked(v7);
 
 free_v3:
-	m_FreeTracked(v3);
+	m_FreeTracked(waterMask);
 
 teardown:
 	for (v13 = 0; v13 < 8; v13++) {

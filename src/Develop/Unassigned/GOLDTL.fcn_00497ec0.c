@@ -30,7 +30,7 @@ int __cdecl fcn_004a4bb0(int, short*, int, Cmd*, Cmd*, int);
 int __cdecl ai_StartKreditNehmen(int, short*, int, Cmd*, Cmd*);
 
 /* ADDRESS: GOLDTL 0x00497ec0 */
-int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
+int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 {
 	int n;
 	int chain[4] = {7, 6, 5, 4};
@@ -45,18 +45,18 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 	unsigned int lo;
 	unsigned int hi;
 
-	if (*(char*) ((char*) a1 + 2) == 3)
+	if (*(char*) ((char*) entity + 2) == 3)
 		return 0;
 	if (a2 == 0) {
-		if (*(char*) a3 != 0)
+		if (*(char*) request != 0)
 			return 0;
 	} else {
 		if (a2 == 1) {
-			if (*(char*) a3 != 5 && *(char*) a3 != 4)
+			if (*(char*) request != 5 && *(char*) request != 4)
 				return 0;
 		}
 	}
-	if (fcn_005463a0(2, 0, 0xd, 2, *(unsigned short*) a1) != 0)
+	if (fcn_005463a0(2, 0, 0xd, 2, *(unsigned short*) entity) != 0)
 		return 0;
 	p = (int) g_entity_ptr;
 	n = 0;
@@ -71,7 +71,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 			} else {
 				lo = 1 << rec[0];
 			}
-			if (*(unsigned short*) (p + 0x27) == *(unsigned short*) a1
+			if (*(unsigned short*) (p + 0x27) == *(unsigned short*) entity
 				&& ((g_666028 & lo) || (g_66602c & hi))) {
 				int need;
 				int rem;
@@ -79,13 +79,13 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 
 				/* scan address and money value share one stack slot in the
 				 * native body; every hit path returns before the scan resumes */
-				p = fcn_0050d320(a1, g_773d75);
+				p = fcn_0050d320(entity, g_773d75);
 				p = (int) ((float) p * g_664178);
 				out.kind = 0;
 				out.f1 = 0;
 				out.f2 = 0;
-				if (*(char*) a3 == 0) {
-					q = *(unsigned char**) ((char*) a1 + 0x170);
+				if (*(char*) request == 0) {
+					q = *(unsigned char**) ((char*) entity + 0x170);
 					if (q != 0) {
 						id = *q;
 						rec = (unsigned char*) &((BldProt_497ec0*) lpGebaeudePROT)[id];
@@ -107,20 +107,20 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 								out.kind = 4;
 								out.f1 = *(int*) (q + 1);
 								out.f2 = 1;
-								if (!fcn_004a4bb0(a0, a1, a2, &cmd, &out, 0))
+								if (!fcn_004a4bb0(a0, entity, a2, &cmd, &out, 0))
 									return 0;
-								need = fcn_0050d200(a1, cmd.f1);
+								need = fcn_0050d200(entity, cmd.f1);
 								if (p < need) {
 									rem = need - p;
 									if ((float) rem / (float) need < 0.25f) {
-										a3->kind = 0x12;
-										a3->f2 = rem;
-										return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
+										request->kind = 0x12;
+										request->f2 = rem;
+										return ai_StartKreditNehmen(0x11, entity, a2, request, a4);
 									}
 									return 0;
 								}
 								*a4 = out;
-								*a3 = cmd;
+								*request = cmd;
 								return 0x11;
 							}
 							if (t == 5)
@@ -130,17 +130,17 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					cmd.kind = 5;
 					cmd.f1 = 6;
 					cmd.f2 = 1;
-					if (fcn_004a4bb0(a0, a1, a2, &cmd, &out, 1)) {
-						need = fcn_0050d200(a1, cmd.f1);
+					if (fcn_004a4bb0(a0, entity, a2, &cmd, &out, 1)) {
+						need = fcn_0050d200(entity, cmd.f1);
 						if (p < need) {
 							rem = need - p;
 							if ((float) rem / (float) need < 0.25f) {
-								a3->kind = 0x12;
-								a3->f2 = rem;
-								return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
+								request->kind = 0x12;
+								request->f2 = rem;
+								return ai_StartKreditNehmen(0x11, entity, a2, request, a4);
 							}
 						} else {
-							*a3 = cmd;
+							*request = cmd;
 							*a4 = out;
 							return 0x11;
 						}
@@ -148,31 +148,31 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					cmd.kind = 5;
 					cmd.f1 = 4;
 					cmd.f2 = 1;
-					if (!fcn_004a4bb0(a0, a1, a2, &cmd, &out, 1))
+					if (!fcn_004a4bb0(a0, entity, a2, &cmd, &out, 1))
 						return 0;
-					a0 = fcn_0050d200(a1, cmd.f1);
+					a0 = fcn_0050d200(entity, cmd.f1);
 					if (p < a0) {
 						rem = a0 - p;
 						if ((float) rem / (float) a0 < 0.25f) {
-							a3->kind = 0x12;
-							a3->f2 = rem;
-							return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
+							request->kind = 0x12;
+							request->f2 = rem;
+							return ai_StartKreditNehmen(0x11, entity, a2, request, a4);
 						}
 						return 0;
 					}
-					*a3 = cmd;
+					*request = cmd;
 					*a4 = out;
 					return 0x11;
 				}
-				if (*(char*) a3 != 5)
+				if (*(char*) request != 5)
 					return 0;
-				cmd = *a3;
-				q = *(unsigned char**) ((char*) a1 + 0x170);
+				cmd = *request;
+				q = *(unsigned char**) ((char*) entity + 0x170);
 				if (q != 0) {
 					id = *q;
 					if (((BldProt_497ec0*) lpGebaeudePROT)[id].type != 2)
 						return 0;
-					v = *(int*) ((char*) a3 + 4);
+					v = *(int*) ((char*) request + 4);
 					if (v - id != 1)
 						return 0;
 					if (id == 5 || id == 7)
@@ -183,38 +183,38 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					out.f1 = *(int*) (q + 1);
 					out.f2 = 1;
 					need = (int) ((float) fcn_0050d170(v) * g_66414c);
-					if (!fcn_004a4bb0(a0, a1, a2, &cmd, &out, 0))
+					if (!fcn_004a4bb0(a0, entity, a2, &cmd, &out, 0))
 						return 0;
 					if (p < need) {
 						rem = need - p;
 						if ((float) rem / (float) need < 0.25f) {
-							a3->kind = 0x12;
-							a3->f2 = rem;
-							return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
+							request->kind = 0x12;
+							request->f2 = rem;
+							return ai_StartKreditNehmen(0x11, entity, a2, request, a4);
 						}
 						return 0;
 					}
-					*a3 = cmd;
+					*request = cmd;
 					*a4 = out;
 					return 0x11;
 				}
-				if (((BldProt_497ec0*) lpGebaeudePROT)[a3->f1].type != 2)
+				if (((BldProt_497ec0*) lpGebaeudePROT)[request->f1].type != 2)
 					return 0;
-				if (!fcn_004a4bb0(a0, a1, a2, &cmd, &out, 1))
+				if (!fcn_004a4bb0(a0, entity, a2, &cmd, &out, 1))
 					return 0;
-				if (*(char*) ((char*) a1 + 2) != 5)
+				if (*(char*) ((char*) entity + 2) != 5)
 					return 0;
-				need = fcn_0050d200(a1, cmd.f1);
+				need = fcn_0050d200(entity, cmd.f1);
 				if (p < need) {
 					rem = need - p;
 					if ((float) rem / (float) need < 0.25f) {
-						a3->kind = 0x12;
-						a3->f2 = rem;
-						return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
+						request->kind = 0x12;
+						request->f2 = rem;
+						return ai_StartKreditNehmen(0x11, entity, a2, request, a4);
 					}
 					return 0;
 				}
-				*a3 = cmd;
+				*request = cmd;
 				*a4 = out;
 				return 0x11;
 			}

@@ -2,7 +2,7 @@ extern unsigned char* lpGebaeudePROT;
 extern short* gm_CityEntity;
 
 /* ADDRESS: GOLDTL 0x005cfb00 */
-unsigned int __cdecl fcn_005cfb00(short* a0, int* a1, unsigned char* a2)
+unsigned int __cdecl fcn_005cfb00(short* a0, int* filterSpec, unsigned char* gebaeude)
 {
 	unsigned int hi;
 	unsigned int lo;
@@ -16,63 +16,63 @@ unsigned int __cdecl fcn_005cfb00(short* a0, int* a1, unsigned char* a2)
 	short* q;
 
 	hi = 0;
-	if (!a1)
+	if (!filterSpec)
 		return 1;
-	if (!a2)
+	if (!gebaeude)
 		return 0;
 	if (!a0)
 		return 0;
-	if (!a1[2] && !a1[3] && !a1[4])
+	if (!filterSpec[2] && !filterSpec[3] && !filterSpec[4])
 		return 1;
-	type = (unsigned char) lpGebaeudePROT[a2[0] * 0x24d];
+	type = (unsigned char) lpGebaeudePROT[gebaeude[0] * 0x24d];
 	lo = 0;
 	if (type > 0x1f)
 		hi = 1u << ((type - 0x20) & 0x1f);
 	else
 		lo = 1u << (type & 0x1f);
-	if (a1[3] < 0) {
-		if (a2[0x5a] & 1)
+	if (filterSpec[3] < 0) {
+		if (gebaeude[0x5a] & 1)
 			return 0;
-		if (!*(int*) (a2 + 0x61))
+		if (!*(int*) (gebaeude + 0x61))
 			return 0;
 	}
-	if ((a1[2] & lo) || (a1[3] & hi))
+	if ((filterSpec[2] & lo) || (filterSpec[3] & hi))
 		match = 1;
 	else
 		match = 0;
 	accept = 0;
 	inlist = 1;
 
-	if (a1[4] == 0) {
+	if (filterSpec[4] == 0) {
 		accept = 1;
 	} else {
-		switch (a1[4]) {
+		switch (filterSpec[4]) {
 		case 0:
 			accept = 1;
 			break;
 		case 1:
-			accept = *(unsigned short*) (a2 + 0x27) == 0xffff;
+			accept = *(unsigned short*) (gebaeude + 0x27) == 0xffff;
 			break;
 		case 2:
-			accept = *(unsigned short*) (a2 + 0x27) != 0xffff;
+			accept = *(unsigned short*) (gebaeude + 0x27) != 0xffff;
 			break;
 		case 3:
-			if ((*(short*) (a2 + 0x27)) == *a0 || *(unsigned short*) (a2 + 0x27) == 0xffff) {
+			if ((*(short*) (gebaeude + 0x27)) == *a0 || *(unsigned short*) (gebaeude + 0x27) == 0xffff) {
 				accept = 1;
 				break;
 			}
 			goto zero;
 		case 4:
-			accept = (*(short*) (a2 + 0x27)) == *a0;
+			accept = (*(short*) (gebaeude + 0x27)) == *a0;
 			break;
 		case 5:
-			accept = (*(short*) (a2 + 0x27)) != *a0;
+			accept = (*(short*) (gebaeude + 0x27)) != *a0;
 			break;
 		case 6:
-			other = (*(short*) (a2 + 0x27));
+			other = (*(short*) (gebaeude + 0x27));
 			goto compare;
 		case 7:
-			other = (*(short*) (a2 + 0x27));
+			other = (*(short*) (gebaeude + 0x27));
 			if (other == *a0)
 				goto zero;
 			a0 = gm_CityEntity;
@@ -86,10 +86,10 @@ unsigned int __cdecl fcn_005cfb00(short* a0, int* a1, unsigned char* a2)
 			break;
 		}
 	}
-	if ((a1[0x14 / 4] & 1) && *(unsigned short*) (a2 + 0x27) != 0xffff) {
-		q = (short*) (a1 + 7);
+	if ((filterSpec[0x14 / 4] & 1) && *(unsigned short*) (gebaeude + 0x27) != 0xffff) {
+		q = (short*) (filterSpec + 7);
 		for (i = 0; i < 4; i++, q++) {
-			if ((*(short*) (a2 + 0x27)) == *q && *q != -1) {
+			if ((*(short*) (gebaeude + 0x27)) == *q && *q != -1) {
 				inlist = 0;
 				break;
 			}

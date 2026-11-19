@@ -23,7 +23,7 @@ int __cdecl sprintf(char*, const char*, ...);
 
 /* Sends one behaviour event to the server when its delay has elapsed. */
 /* ADDRESS: GOLDTL 0x00551d50 */
-void __cdecl fcn_00551d50(char* a0)
+void __cdecl fcn_00551d50(char* actionRecord)
 {
 	char buf[0x800];
 	char packet[0xf8];
@@ -37,13 +37,13 @@ void __cdecl fcn_00551d50(char* a0)
 	int fn;
 	char* fp;
 
-	if (*(int*) (a0 + 0x70) != -2) {
-		if (*(int*) (a0 + 0x70) != 0) {
+	if (*(int*) (actionRecord + 0x70) != -2) {
+		if (*(int*) (actionRecord + 0x70) != 0) {
 			return;
 		}
-		delay = *(unsigned char*) (a0 + 0xac) - (gm_RandomMod(*(unsigned char*) (a0 + 0xad)) & 0xffff);
-		index = *(unsigned short*) (a0 + 8);
-		byte = *(unsigned char*) (a0 + 0xae);
+		delay = *(unsigned char*) (actionRecord + 0xac) - (gm_RandomMod(*(unsigned char*) (actionRecord + 0xad)) & 0xffff);
+		index = *(unsigned short*) (actionRecord + 8);
+		byte = *(unsigned char*) (actionRecord + 0xae);
 		row = g_7f4ca0 + index * 0x21c;
 		id = *(unsigned char*) (row + 0x80 + byte);
 		if ((float) (id + delay) > 252.0f) {
@@ -51,7 +51,7 @@ void __cdecl fcn_00551d50(char* a0)
 		}
 		fcn_004c6ba0(*(int*) (row + 4), byte, delay);
 		if (*(unsigned char*) (row + 2) == 6) {
-			byte = *(unsigned char*) (a0 + 0xae);
+			byte = *(unsigned char*) (actionRecord + 0xae);
 			id = *(unsigned char*) (row + 0x80 + byte);
 			value = (int) ((float) (id + delay) * 0.023809524f);
 			if (value > (int) ((float) id * 0.023809524f)) {
@@ -82,19 +82,19 @@ void __cdecl fcn_00551d50(char* a0)
 				*(char*) (packet + 4) = 0x6a;
 				*(int*) (packet + 0xc) = -1;
 				*(char*) (packet + 0x36) = 9;
-				*(char*) (packet + 0x58) = *(unsigned char*) (a0 + 0xae);
+				*(char*) (packet + 0x58) = *(unsigned char*) (actionRecord + 0xae);
 				*(int*) (packet + 0x5c) = value;
 				fcn_004c5530(packet);
 			} else {
 				sprintf(msg, s_6a5b74, byte);
-				io_FormatTextBuffer(buf, 0x67728c, 0x16f2, *(unsigned char*) (a0 + 0xae) + 0x16f3);
-				id = *(int*) (0x7f4ca4 + *(unsigned short*) (a0 + 8) * 0x21c);
+				io_FormatTextBuffer(buf, 0x67728c, 0x16f2, *(unsigned char*) (actionRecord + 0xae) + 0x16f3);
+				id = *(int*) (0x7f4ca4 + *(unsigned short*) (actionRecord + 8) * 0x21c);
 				fcn_00545d40(id, id, buf, 0, 0x5fd, msg);
 			}
 		}
 		fcn_004c6330(*(int*) (row + 4));
-		fcn_00546190(a0);
+		fcn_00546190(actionRecord);
 		return;
 	}
-	fcn_00546190(a0);
+	fcn_00546190(actionRecord);
 }

@@ -4,7 +4,7 @@ extern char g_699b08;
 void __cdecl fcn_004428d0(char*, unsigned char, char);
 
 /* ADDRESS: GOLDTL 0x00516de0 */
-void __cdecl fcn_00516de0(char* a1, unsigned char a2)
+void __cdecl fcn_00516de0(char* a1, unsigned char force)
 {
 	unsigned char al;
 	int oldmode;
@@ -48,7 +48,7 @@ void __cdecl fcn_00516de0(char* a1, unsigned char a2)
 			unit = 2;
 		}
 	}
-	if (oldmode != ((*(unsigned char*) (a1 + 0x8036) >> 2) & 7) || a2 != 0) {
+	if (oldmode != ((*(unsigned char*) (a1 + 0x8036) >> 2) & 7) || force != 0) {
 		fcn_004428d0(a1, (unsigned char) (unit >> 1), 1);
 	}
 }

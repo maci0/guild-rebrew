@@ -15,7 +15,7 @@ int __cdecl m_alloc(int, char*);
 int __cdecl fcn_0046b520(char*, int);
 
 /* ADDRESS: GOLDTL 0x0046fcd0 */
-int __cdecl fcn_0046fcd0(int a1, int a2, char* name)
+int __cdecl fcn_0046fcd0(int xpos, int ypos, char* name)
 {
 	int idx;
 	char c;
@@ -37,8 +37,8 @@ int __cdecl fcn_0046fcd0(int a1, int a2, char* name)
 	} while (c != 0);
 	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x84 / 4] = d2_DefaultFont;
 	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x20 / 4] = 0x43;
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x10 / 4] = a1;
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x14 / 4] = a2;
+	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x10 / 4] = xpos;
+	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x14 / 4] = ypos;
 	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x18 / 4] = fcn_0046b520(name, ((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x84 / 4]) + 0x60;
 	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x1c / 4] = d2_FontHeight;
 	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x24 / 4] = 2;

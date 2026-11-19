@@ -12,7 +12,7 @@ float __cdecl fcn_004e7990(int a0, int a1, unsigned int a2, int a3)
 	float v;
 	Rec18_68da68 v9;
 	int v10[9];
-	float v14;
+	float bonus;
 	int i;
 	int j;
 	int code;
@@ -72,15 +72,15 @@ float __cdecl fcn_004e7990(int a0, int a1, unsigned int a2, int a3)
 	if (a3 != 0) {
 		fcn_004e8b40(*(unsigned char*) (a1 + 0x166), &v9);
 		fcn_004f4830(2, v10);
-		v14 = *(float*) ((char*) &v9 + 0x14);
+		bonus = *(float*) ((char*) &v9 + 0x14);
 		if (v10[6] == 2) {
-			v14 = v14 * *(float*) 0x662a6c;
+			bonus = bonus * *(float*) 0x662a6c;
 		}
 		if (*(char*) (a0 + 0xc) == *(char*) (a1 + 0xc)) {
-			return v14 + v;
+			return bonus + v;
 		}
 		if (a2 == 0) {
-			return v - v14;
+			return v - bonus;
 		}
 	}
 	return v;

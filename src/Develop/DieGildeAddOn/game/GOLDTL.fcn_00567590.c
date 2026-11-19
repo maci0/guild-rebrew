@@ -37,7 +37,7 @@ int __cdecl fcn_00567170(char*, int*, int*, int*);
 int __cdecl fcn_00567410(char*, int, char**, int*, int*);
 
 /* ADDRESS: GOLDTL 0x00567590 */
-void __cdecl fcn_00567590(char* a0)
+void __cdecl fcn_00567590(char* action)
 {
 	char* p;
 	char* q;
@@ -62,7 +62,7 @@ void __cdecl fcn_00567590(char* a0)
 	v18 = 0;
 	found = 0;
 	hour = fcn_00500e20((int*) &gm_GameTime);
-	switch (*(int*) (a0 + 0x70)) {
+	switch (*(int*) (action + 0x70)) {
 	case 0:
 		idx = 0;
 		p = (char*) 0x7f4e0c;
@@ -99,7 +99,7 @@ void __cdecl fcn_00567590(char* a0)
 								    + (v10[1] - v11[1]) * (v10[1] - v11[1])
 								    + (v10[2] - v11[2]) * (v10[2] - v11[2]));
 								if (!(dist < g_665ec4)) {
-									*(int*) (a0 + 0xac) = idx;
+									*(int*) (action + 0xac) = idx;
 									goto next0;
 								}
 							}
@@ -111,7 +111,7 @@ void __cdecl fcn_00567590(char* a0)
 							}
 						}
 					}
-					*(int*) (a0 + 0xac) = idx;
+					*(int*) (action + 0xac) = idx;
 				}
 			}
 next0:
@@ -119,11 +119,11 @@ next0:
 			idx += 1;
 		}
 		if (found != 0) {
-			*(int*) (a0 + 0x52) = *(int*) &gm_GameTime;
-			*(int*) (a0 + 0x56) = g_7f4c04;
-			*(int*) (a0 + 0x5a) = g_7f4c08;
-			*(unsigned short*) (a0 + 0x5e) = g_7f4c0c;
-			fcn_00500bb0(a0 + 0x52, 0, 5, 0);
+			*(int*) (action + 0x52) = *(int*) &gm_GameTime;
+			*(int*) (action + 0x56) = g_7f4c04;
+			*(int*) (action + 0x5a) = g_7f4c08;
+			*(unsigned short*) (action + 0x5e) = g_7f4c0c;
+			fcn_00500bb0(action + 0x52, 0, 5, 0);
 		}
 		if ((float) (g_7f4c04 & 0xffff) < g_696540[hour]) {
 			return;
@@ -142,21 +142,21 @@ next0:
 			}
 			p += 0x21c;
 		}
-		*(int*) (a0 + 0x52) = *(int*) &gm_GameTime;
-		*(int*) (a0 + 0x56) = g_7f4c04;
-		*(int*) (a0 + 0x5a) = g_7f4c08;
-		*(unsigned short*) (a0 + 0x5e) = g_7f4c0c;
-		sim_SetSyncParams((int*) (a0 + 0x52), (int) g_696550[hour], 0, 0);
-		*(int*) (a0 + 0x70) = 1;
-		*(int*) (a0 + 0xac) = 0;
+		*(int*) (action + 0x52) = *(int*) &gm_GameTime;
+		*(int*) (action + 0x56) = g_7f4c04;
+		*(int*) (action + 0x5a) = g_7f4c08;
+		*(unsigned short*) (action + 0x5e) = g_7f4c0c;
+		sim_SetSyncParams((int*) (action + 0x52), (int) g_696550[hour], 0, 0);
+		*(int*) (action + 0x70) = 1;
+		*(int*) (action + 0xac) = 0;
 		return;
 	case 1:
 		if ((signed char) g_7747b0 < 0) {
-			fcn_00546190(a0);
+			fcn_00546190(action);
 			return;
 		}
-		if (*(int*) &gm_GameTime != *(int*) (a0 + 0x44)) {
-			fcn_00546190(a0);
+		if (*(int*) &gm_GameTime != *(int*) (action + 0x44)) {
+			fcn_00546190(action);
 			return;
 		}
 		q = (char*) gm_StartFilteredEntitySearch(1, 5, 0x16);
@@ -207,7 +207,7 @@ next0:
 after1:
 						*(unsigned int*) (p + 0x44) |= 0x800;
 						fcn_004c5420(*(int*) (p - 0x180), 0x1c8, 4, 0x800, 0x1000);
-						*(int*) (a0 + 0xac) = idx;
+						*(int*) (action + 0xac) = idx;
 						found += 1;
 					}
 				}
@@ -247,17 +247,17 @@ after1:
 				*(unsigned int*) (p + 0x5c) |= 0x800;
 				fcn_004c5420(*(int*) (p - 0x168), 0x1c8, 4, 0x800, 0x1000);
 				moved += 1;
-				*(int*) (a0 + 0xac) = idx;
+				*(int*) (action + 0xac) = idx;
 			}
 			p += 0x21c;
 			idx += 1;
 		}
 		if (moved != 0) {
-			*(int*) (a0 + 0x52) = *(int*) &gm_GameTime;
-			*(int*) (a0 + 0x56) = g_7f4c04;
-			*(int*) (a0 + 0x5a) = g_7f4c08;
-			*(unsigned short*) (a0 + 0x5e) = g_7f4c0c;
-			fcn_00500bb0(a0 + 0x52, 0, 5, 0);
+			*(int*) (action + 0x52) = *(int*) &gm_GameTime;
+			*(int*) (action + 0x56) = g_7f4c04;
+			*(int*) (action + 0x5a) = g_7f4c08;
+			*(unsigned short*) (action + 0x5e) = g_7f4c0c;
+			fcn_00500bb0(action + 0x52, 0, 5, 0);
 		}
 		if ((float) (g_7f4c04 & 0xffff) <= g_696550[hour] + 2.0f) {
 			return;
@@ -294,11 +294,11 @@ after1:
 			}
 			p += 0x21c;
 		}
-		fcn_00546190(a0);
+		fcn_00546190(action);
 		return;
 	case -2:
 	case -1:
-		fcn_00546190(a0);
+		fcn_00546190(action);
 		return;
 	default:
 		return;

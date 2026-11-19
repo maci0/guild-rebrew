@@ -50,7 +50,7 @@ void __cdecl fcn_00469510(int a);
 void __cdecl fcn_00471e30(int a);
 
 /* ADDRESS: GOLDTL 0x005c5310 */
-void __cdecl ob_HandleBepflanzung(int a0)
+void __cdecl ob_HandleBepflanzung(int gebaeude)
 {
 	int v1;
 
@@ -102,7 +102,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 	char v15[256];
 
 
-	v40 = *(unsigned int*) ((char*) a0 + 0x71);
+	v40 = *(unsigned int*) ((char*) gebaeude + 0x71);
 	v33 = -1;
 	v24 = -1;
 	v17 = 0;
@@ -130,7 +130,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 		v17 += 0x40;
 		v18 += 1;
 	} while (v17 < 0x200);
-	v17 = fcn_00502cd0(*(unsigned int*) ((char*) a0 + 0x5d), 1, 0, 0xff);
+	v17 = fcn_00502cd0(*(unsigned int*) ((char*) gebaeude + 0x5d), 1, 0, 0xff);
 	if (!v17) {
 		return;
 	}
@@ -219,7 +219,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 		d3_SetSubtreeColor(v6, v20, v21, v22);
 		v4 = v26;
 		if (g_14ce8cc && v18 != 0xffffffff && v1) {
-			v20 = fcn_004c5aa0(*(unsigned int*) ((char*) a0 + 1),
+			v20 = fcn_004c5aa0(*(unsigned int*) ((char*) gebaeude + 1),
 				v34, v37, *v26, 0, 0xffffffff);
 			v17 = fcn_004c4450(v20);
 			while (!v17) {

@@ -12,7 +12,7 @@ void __cdecl d3_AnimateObjectTransform(void*, float*, float*, int, int);
  * camera chain and the resolved entity expose a view target. The aim vector
  * is rotated by the view direction and sent as a placement message. */
 /* ADDRESS: GOLDTL 0x00558b70 */
-unsigned int __cdecl fcn_00558b70(char* a0)
+unsigned int __cdecl fcn_00558b70(char* eventRecord)
 {
 	float from[4];
 	float to[4];
@@ -26,7 +26,7 @@ unsigned int __cdecl fcn_00558b70(char* a0)
 	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 
-	view = *(char**) (a0 + 0xc8);
+	view = *(char**) (eventRecord + 0xc8);
 	if (view == 0) {
 		goto fail;
 	}
@@ -37,7 +37,7 @@ unsigned int __cdecl fcn_00558b70(char* a0)
 	if (*(int*) (view + 0x318) == 0) {
 		goto fail;
 	}
-	gm_ResolveEntityById((int*) &ent, 0, 0, *(int*) (a0 + 0xb4));
+	gm_ResolveEntityById((int*) &ent, 0, 0, *(int*) (eventRecord + 0xb4));
 
 
 	if (ent == 0) {
@@ -59,13 +59,13 @@ unsigned int __cdecl fcn_00558b70(char* a0)
 
 	from[1] = from[1] + *(float*) (*(char**) (*(char**) (*(char**) (ent + 0x61) + 0x1cc) + 0x318) + 0x1d4) + g_665ea0;
 
-	d3_TransformPoint(*(char**) (a0 + 0xc8), *(char**) (a0 + 0xc8) + 0x4c, to);
+	d3_TransformPoint(*(char**) (eventRecord + 0xc8), *(char**) (eventRecord + 0xc8) + 0x4c, to);
 	delta[0] = from[0] - to[0];
 	delta[1] = from[1] - to[1];
 	delta[2] = from[2] - to[2];
-	fcn_00455140(*(char**) (a0 + 0xc8), (char*) 0x662d40, aim);
+	fcn_00455140(*(char**) (eventRecord + 0xc8), (char*) 0x662d40, aim);
 	angle = fcn_004514d0(aim, delta);
-	view = *(char**) (a0 + 0xc8);
+	view = *(char**) (eventRecord + 0xc8);
 	if (view == 0) {
 		goto fail;
 	}

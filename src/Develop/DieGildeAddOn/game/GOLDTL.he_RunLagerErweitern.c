@@ -19,7 +19,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 
 /* ADDRESS: GOLDTL 0x0055ffe0 */
-void __cdecl he_RunLagerErweitern(char* a0)
+void __cdecl he_RunLagerErweitern(char* action)
 {
 	char* q;
 	char buf[1024];
@@ -29,19 +29,19 @@ void __cdecl he_RunLagerErweitern(char* a0)
 	int cat;
 	int msg;
 	int px;
-	int v9;
-	int v10;
+	int entityId;
+	int categoryId;
 
-	switch (*(int*) (a0 + 0x70)) {
+	switch (*(int*) (action + 0x70)) {
 	case 0:
-		*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
+		*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 		return;
 	case 1:
-		q = a0 + 0x52;
+		q = action + 0x52;
 		break;
 	case 0xfffffffe:
 	case 0xffffffff:
-		fcn_00546190(a0);
+		fcn_00546190(action);
 		return;
 	default:
 		return;
@@ -49,14 +49,14 @@ void __cdecl he_RunLagerErweitern(char* a0)
 	if (fcn_00500cb0(q, (char*) &gm_GameTime) >= 0)
 		return;
 	v5[1] = 1;
-	gm_ResolveEntityById(0, (void**) v5, 0, *(unsigned int*) (a0 + 0xac));
+	gm_ResolveEntityById(0, (void**) v5, 0, *(unsigned int*) (action + 0xac));
 	if (v5[0]) {
 		fcn_004c4510((char*) v5[0], *(int*) ((char*) v5[0] + 2));
 		fcn_004c4670(4, 1, (v5[0] - (int) g_aed32c) + 0xe, &v5[1]);
 		fcn_004c5360();
-		if (--*(int*) (a0 + 0xb0) <= 0) {
+		if (--*(int*) (action + 0xb0) <= 0) {
 		msg = 0x606;
-		ent = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (a0 + 0x10));
+		ent = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (action + 0x10));
 		if (ent) {
 			info = (char*) fcn_0050dc90(ent);
 			if (info != 0 && (*(unsigned char*) (info + 0x1b4) & 1))
@@ -66,12 +66,12 @@ void __cdecl he_RunLagerErweitern(char* a0)
 
 
 			if (cat) {
-				v10 = *(int*) ((char*) cat + 2); v9 = *(int*) ((char*) ent + 1);
-				px = *(int*) (g_7f4ca4 + (*(unsigned short*) (a0 + 8)) * 0x21c);
-				he_MessageBoxQuickjump(px, -1, buf, 0, msg, v9, v10, 0, 0);
-			} else { v9 = *(int*) ((char*) ent + 1);
-				px = *(int*) (g_7f4ca4 + (*(unsigned short*) (a0 + 8)) * 0x21c);
-				he_MessageBoxQuickjump(px, -1, buf, 0, msg, v9, -1, 0, 0);
+				categoryId = *(int*) ((char*) cat + 2); entityId = *(int*) ((char*) ent + 1);
+				px = *(int*) (g_7f4ca4 + (*(unsigned short*) (action + 8)) * 0x21c);
+				he_MessageBoxQuickjump(px, -1, buf, 0, msg, entityId, categoryId, 0, 0);
+			} else { entityId = *(int*) ((char*) ent + 1);
+				px = *(int*) (g_7f4ca4 + (*(unsigned short*) (action + 8)) * 0x21c);
+				he_MessageBoxQuickjump(px, -1, buf, 0, msg, entityId, -1, 0, 0);
 			}
 		}
 		} else {
@@ -83,5 +83,5 @@ void __cdecl he_RunLagerErweitern(char* a0)
 	else {
 		ReportClientMessage("he_RunLagerErweitern():Wrong LagerID...");
 	}
-	fcn_00546190(a0);
+	fcn_00546190(action);
 }

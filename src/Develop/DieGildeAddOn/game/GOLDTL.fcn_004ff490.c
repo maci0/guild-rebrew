@@ -29,7 +29,7 @@ void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5980(void*);
 
 /* ADDRESS: GOLDTL 0x004ff490 */
-void __cdecl fcn_004ff490(char* a0)
+void __cdecl fcn_004ff490(char* entity)
 {
 	char* ent;
 	char* other;
@@ -45,25 +45,25 @@ void __cdecl fcn_004ff490(char* a0)
 	char pkt[0x110];
 	float f;
 
-	if ((unsigned char) a0[2] >= 10) {
+	if ((unsigned char) entity[2] >= 10) {
 		return;
 	}
-	if (a0[8] == 0) {
+	if (entity[8] == 0) {
 		return;
 	}
-	if (a0[9] != 1) {
+	if (entity[9] != 1) {
 		return;
 	}
-	if ((unsigned char) a0[0x1b1] > 0) {
+	if ((unsigned char) entity[0x1b1] > 0) {
 		return;
 	}
-	if ((*(unsigned int*) (a0 + 0x1c8)) & 0x40000) {
+	if ((*(unsigned int*) (entity + 0x1c8)) & 0x40000) {
 		return;
 	}
 
-	ent = gm_LookupEntityRecordById(*(unsigned int*) (a0 + 0x5c));
-	if (*(float*) (a0 + 0x7c) > 1.0f) {
-		fcn_004c5480(*(unsigned int*) (a0 + 4), 0x7c, gm_RandomFloat01() * -0.5f - *(float*) (a0 + 0x7c));
+	ent = gm_LookupEntityRecordById(*(unsigned int*) (entity + 0x5c));
+	if (*(float*) (entity + 0x7c) > 1.0f) {
+		fcn_004c5480(*(unsigned int*) (entity + 4), 0x7c, gm_RandomFloat01() * -0.5f - *(float*) (entity + 0x7c));
 		g_773d48++;
 		if (ent == 0) {
 			return;
@@ -76,7 +76,7 @@ void __cdecl fcn_004ff490(char* a0)
 		other = 0;
 		t.hour = gm_RandomMod(4) + 8;
 		t.minute = 0;
-		handle = *(int*) (a0 + 0x170);
+		handle = *(int*) (entity + 0x170);
 		if (handle != 0) {
 			id = *(int*) (handle + 1);
 		} else {
@@ -102,9 +102,9 @@ void __cdecl fcn_004ff490(char* a0)
 				id = -1;
 			}
 			other = ent;
-		} else if (*(char*) (a0 + 2) == 6 || *(char*) (a0 + 2) == 7) {
+		} else if (*(char*) (entity + 2) == 6 || *(char*) (entity + 2) == 7) {
 			count = 0;
-			p = a0 + 0x68;
+			p = entity + 0x68;
 			for (i = 0; i < 4; i++) {
 				if (*(int*) p != -1) {
 					count++;
@@ -112,7 +112,7 @@ void __cdecl fcn_004ff490(char* a0)
 				p += 4;
 			}
 			if (count == 0) {
-				extra = (unsigned char) a0[9];
+				extra = (unsigned char) entity[9];
 			}
 			if (handle != 0) {
 				id = *(int*) (handle + 1);
@@ -121,10 +121,10 @@ void __cdecl fcn_004ff490(char* a0)
 			} else {
 				id = -1;
 			}
-			other = a0;
+			other = entity;
 		}
 
-		id = fcn_004c4fc0(8, *(int*) (ent + 4), *(int*) (a0 + 4), 0, id, 0, 0, extra);
+		id = fcn_004c4fc0(8, *(int*) (ent + 4), *(int*) (entity + 4), 0, id, 0, 0, extra);
 		while (fcn_004c4450(id) == 0) {
 			fcn_00535960();
 		}
@@ -152,9 +152,9 @@ void __cdecl fcn_004ff490(char* a0)
 		}
 	}
 
-	if (ent != 0 && ent[8] != 0 && *(unsigned short*) (a0 + 0xa) <= 0x26) {
+	if (ent != 0 && ent[8] != 0 && *(unsigned short*) (entity + 0xa) <= 0x26) {
 		count = 0;
-		p = a0 + 0x68;
+		p = entity + 0x68;
 		for (i = 0; i < 5; i++) {
 			if (*(int*) p != -1) {
 				e = gm_LookupEntityRecordById(*(int*) p);
@@ -190,7 +190,7 @@ void __cdecl fcn_004ff490(char* a0)
 			}
 		}
 		f = (gm_RandomFloat01() + 1.0f) * g_696444[count];
-		fcn_004c5480(*(unsigned int*) (a0 + 4), 0x7c, f);
+		fcn_004c5480(*(unsigned int*) (entity + 4), 0x7c, f);
 		g_773d48++;
 		return;
 	}

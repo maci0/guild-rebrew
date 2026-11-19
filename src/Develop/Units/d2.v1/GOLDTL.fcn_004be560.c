@@ -28,7 +28,7 @@ void __cdecl fcn_004116d0(void);
  * window, walk the candidate query, spawn one icon record per hit, then keep
  * dispatching until the master loop closes the dialog. */
 /* ADDRESS: GOLDTL 0x004be560 */
-unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
+unsigned int __cdecl fcn_004be560(char* building, int a1, unsigned int a2)
 {
 	int items[10];
 	unsigned char* src;
@@ -41,7 +41,7 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 	unsigned int ret;
 
 	ret = a2;
-	src = lpGebaeudePROT + (unsigned char) *a0 * 0x24d;
+	src = lpGebaeudePROT + (unsigned char) *building * 0x24d;
 	a2 = fcn_00470820(0, 0, (char*) 0x6816e8);
 	d2_CenterDialogWindows(a2);
 	d2_SetForm(a2, 4);
@@ -49,7 +49,7 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 	d2_SetForm(a2, 2);
 	win = a2;
 	if (*src == 0x1c) {
-		q = (char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 0, 0x1dc, 6);
+		q = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x1dc, 6);
 		n = 0;
 		if (!q) {
 			goto tail;
@@ -72,7 +72,7 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 			e = (char*) gm_NextEntityQueryMatch();
 		} while (e);
 	} else if (*src == 9) {
-		q = (char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 0, 0x116, 6);
+		q = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x116, 6);
 		n = 0;
 		if (!q) {
 			goto tail;
@@ -95,8 +95,8 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 			e = (char*) gm_NextEntityQueryMatch();
 		} while (e);
 	} else {
-		fcn_005039e0((int) a0);
-		q = (char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 0, 0xff, 6);
+		fcn_005039e0((int) building);
+		q = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0xff, 6);
 		n = 0;
 		for (i = 0; i < g_7f3ee4; i++) {
 			e = (char*) fcn_00502cd0(*(int*) (q + 0x14), 1, 0, g_90d520[n]);

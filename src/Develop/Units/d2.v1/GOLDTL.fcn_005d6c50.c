@@ -26,7 +26,7 @@ int __cdecl fcn_005373e0(void* fn, int msg);
 int __cdecl fcn_00525f60(int a, int b);
 
 /* ADDRESS: GOLDTL 0x005d6c50 */
-int __cdecl fcn_005d6c50(int a0, int a1)
+int __cdecl fcn_005d6c50(int actor, int a1)
 {
     char frame[0x114];
     u16* p;
@@ -46,7 +46,7 @@ int __cdecl fcn_005d6c50(int a0, int a1)
     frame[4] = 0;
 
     if (h == 3) {
-        p = (u16*) a0;
+        p = (u16*) actor;
     } else if (h == 4) {
         q = *(u16**) (a1 + 0x21c);
         if (q == 0)
@@ -58,11 +58,11 @@ int __cdecl fcn_005d6c50(int a0, int a1)
     fcn_004fcda0(*p, 0, frame + 4);
     v = gm_RandomMod(0xb0) & 0xffff;
     h2 = (int) ((double) (v + 0x19) * g_664138 * *(int*) (frame + 0x8));
-    if (((u8*) a0)[2] != 6) {
-        if (*(int*) (a0 + 0x194) < 4)
+    if (((u8*) actor)[2] != 6) {
+        if (*(int*) (actor + 0x194) < 4)
             return 0x20;
-        fcn_004c51a0(*(int*) (a0 + 4), -1, 0, h2);
-        fcn_004c6ae0(*(int*) (a0 + 4), -4);
+        fcn_004c51a0(*(int*) (actor + 4), -1, 0, h2);
+        fcn_004c6ae0(*(int*) (actor + 4), -4);
         fcn_004c5420(*(int*) (p + 2), 0x1c8, 4, 0x400000, 0);
         return *(int*) (frame + 0);
     }
@@ -71,14 +71,14 @@ int __cdecl fcn_005d6c50(int a0, int a1)
     d2_SetOverlayAnimation(0, 0);
     d2_CenterDialogWindows(dlg);
     d2_SetForm(dlg, 1);
-    io_AppendText(0x1dc2, *(u16*) a0);
+    io_AppendText(0x1dc2, *(u16*) actor);
     g_100f1dc = -1;
     for (;;) {
         if (g_100f1dc != -1) {
             if (g_100f1dc == 2) {
-                if (fcn_00525f60(a0, 4) != 0) {
-                    fcn_004c51a0(*(int*) (a0 + 4), -1, 0, h2);
-                    fcn_004c6ae0(*(int*) (a0 + 4), -4);
+                if (fcn_00525f60(actor, 4) != 0) {
+                    fcn_004c51a0(*(int*) (actor + 4), -1, 0, h2);
+                    fcn_004c6ae0(*(int*) (actor + 4), -4);
                     dlg = fcn_004c5420(*(int*) (p + 2), 0x1c8, 4, 0x400000,
                                      0);
                     while (fcn_004c4450(dlg) == 0)

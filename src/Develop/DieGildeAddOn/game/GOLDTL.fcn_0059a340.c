@@ -72,8 +72,8 @@ void __cdecl fcn_004125c0(int x, int y);
 void __cdecl fcn_0059a340(void)
 {
 	int v7;
-	int v3;
-	int v4;
+	int savedRight;
+	int savedBottom;
 	int v5;
 	int v6;
 	int fx;
@@ -94,8 +94,8 @@ void __cdecl fcn_0059a340(void)
 		fcn_0043c2c0((int*) g_6b8300);
 		g_773ddc = 0;
 	}
-	v3 = d2_MouseRightBoundary;
-	v4 = d2_MouseBottomBoundary;
+	savedRight = d2_MouseRightBoundary;
+	savedBottom = d2_MouseBottomBoundary;
 	v5 = g_6b5c80;
 	v6 = d2_MouseTopBoundary;
 	g_772d10 = 1;
@@ -142,8 +142,8 @@ void __cdecl fcn_0059a340(void)
 			d2_SuppressOverlay = 0;
 			g_6772c4 = 1;
 			fcn_004125c0(d2_MouseX, d2_MouseY);
-			d2_MouseRightBoundary = v3;
-			d2_MouseBottomBoundary = v4;
+			d2_MouseRightBoundary = savedRight;
+			d2_MouseBottomBoundary = savedBottom;
 			g_6b5c80 = v5;
 			d2_MouseTopBoundary = v6;
 			fcn_005373e0(0, 0x67fff);

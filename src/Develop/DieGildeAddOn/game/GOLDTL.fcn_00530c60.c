@@ -27,7 +27,7 @@ int __cdecl fcn_00428340(char*, int, ...);
 void __cdecl fcn_00511040(int, char*);
 
 /* ADDRESS: GOLDTL 0x00530c60 */
-void __cdecl fcn_00530c60(unsigned char* a0)
+void __cdecl fcn_00530c60(unsigned char* building)
 {
 	char* itemdef;
 	JobProto* type_row;
@@ -58,7 +58,7 @@ void __cdecl fcn_00530c60(unsigned char* a0)
 	if (g_7746cc != 0 && *(unsigned short*) g_7746cc != 0xfd) {
 		itemdef = lpObjektePROT + *(unsigned short*) g_7746cc * 0x41;
 	}
-	type_row = &((JobProto*)lpGebaeudePROT)[*a0];
+	type_row = &((JobProto*)lpGebaeudePROT)[*building];
 	if ((unsigned int)g_6b7fac > g_6a2520 + 500) {
 		if (g_67a370 != 0) {
 			info = *(char**) (g_67a370 + 0x3c8);
@@ -73,12 +73,12 @@ void __cdecl fcn_00530c60(unsigned char* a0)
 	do {
 		ent = ch_ContextCharacters[i];
 		if (ent != 0 && (info = *(char**) (ent + 0x184)) != 0
-		    && *(int*) (info + 0x2c) == *(int*) (a0 + 1)
+		    && *(int*) (info + 0x2c) == *(int*) (building + 1)
 		    && *(unsigned char*) (ent + 8) != 0
 		    && *(int*) (info + 0x88) == g_67a370) {
 			mode = 0;
 			job[0] = 0;
-			r = fcn_00530b20(ent, (int) a0, job);
+			r = fcn_00530b20(ent, (int) building, job);
 			info = *(char**)(ent + 0x184);
 			if (r != 0) {
 				category = type_row->kind;
@@ -119,12 +119,12 @@ void __cdecl fcn_00530c60(unsigned char* a0)
 					strcpy(job, "besucher");
 					goto flag_on;
 				}
-				if (category == 1 && *(char**) (ent + 0x170) == (char*) a0
+				if (category == 1 && *(char**) (ent + 0x170) == (char*) building
 				    && (*(unsigned int*) (ent + 0x1c8) & 0x1000) == 0) {
 					strcpy(job, "bewohner");
 					goto flag_on;
 				}
-				if (*(char*) (ent + 0x180) == 0 && *(char**) (ent + 0x16c) == (char*) a0
+				if (*(char*) (ent + 0x180) == 0 && *(char**) (ent + 0x16c) == (char*) building
 				    && *(int*) (info + 0x28) == -1) {
 					if (*(char*) (ent + 0x164)) {
 						strcpy(job, "meister");
@@ -188,7 +188,7 @@ after:
 						strcpy(name, "Training_Allgemein");
 					} else {
 						if (itemdef == 0) {
-							fcn_00511040((int) *a0, name);
+							fcn_00511040((int) *building, name);
 						} else {
 							strcpy(name, itemdef + 1);
 						}
@@ -212,7 +212,7 @@ after:
 				goto next;
 			}
 bottom:
-			if (*(char**) (ent + 0x16c) == (char*) a0
+			if (*(char**) (ent + 0x16c) == (char*) building
 			    && (info = *(char**) (ent + 0x184)) != 0
 			    && *(int*) (info + 0x28) != -1) {
 				mode = 0;

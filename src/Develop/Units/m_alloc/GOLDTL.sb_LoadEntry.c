@@ -18,7 +18,7 @@ typedef struct
 } SB_LOAD;
 
 /* ADDRESS: GOLDTL 0x00422ad0 */
-int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
+int __cdecl sb_LoadEntry(char *a0, SB_LOAD *loadState)
 {
     FILE *f;
     unsigned char hdr[12];
@@ -33,22 +33,22 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
     rc = 0;
     if (g_6b7d7c == 0)
         return 0;
-    if (a1->block != 0 || a0 == 0)
+    if (loadState->block != 0 || a0 == 0)
         return -1;
     f = fopen(a0 + 0x32, (char *)0x6750e8);
     if (f == 0)
         return -1;
-    if (fseek(f, a1->offset, 0) != 0)
+    if (fseek(f, loadState->offset, 0) != 0)
     {
         fclose(f);
         return -1;
     }
-    if (a1->type == 1)
+    if (loadState->type == 1)
     {
         if (fread(hdr, 0xc, 1, f) != 1)
         {
             fclose(f);
-            a1->block = 0;
+            loadState->block = 0;
             return -1;
         }
         count = *(int *)(hdr + 4);
@@ -57,9 +57,9 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
         blk = m_alloc(count + 0xc, (char *)0x678e94);
         if (blk == 0)
         {
-            sprintf((char *)0x14cbae0, (char *)0x678e68, a1->name);
+            sprintf((char *)0x14cbae0, (char *)0x678e68, loadState->name);
             fclose(f);
-            a1->block = 0;
+            loadState->block = 0;
             return 0;
         }
         *(unsigned char *)blk = hdr[0];
@@ -68,17 +68,17 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
         if (fread((char *)blk + 0xc, count, 1, f) != 1)
         {
             m_FreeTracked(blk);
-            a1->block = 0;
+            loadState->block = 0;
             fclose(f);
             return -1;
         }
-        a1->mem = g_6b7fac * 13;
+        loadState->mem = g_6b7fac * 13;
         MemUsed += count + 0xc;
-        a1->block = blk;
+        loadState->block = blk;
         fclose(f);
         return 0;
     }
-    if (a1->type != 2)
+    if (loadState->type != 2)
     {
         fclose(f);
         return -1;
@@ -95,7 +95,7 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
     if (blk == 0)
     {
         fclose(f);
-        a1->block = 0;
+        loadState->block = 0;
         return -1;
     }
     *(int *)blk = *(int *)hdr2;
@@ -104,7 +104,7 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
     if (fread((char *)blk + 0xc, size, 1, f) != 1)
     {
         m_FreeTracked(blk);
-        a1->block = 0;
+        loadState->block = 0;
         fclose(f);
         return -1;
     }
@@ -116,9 +116,9 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
         sum += *(int *)(*(char **)((char *)blk + 4) + i * 0xc + 4);
     }
     MemUsed += size + 0xc;
-    a1->mem = g_6b7fac * 13;
-    sprintf((char *)0x14cbae0, (char *)0x678e38, a1->name, MemUsed);
-    a1->block = blk;
+    loadState->mem = g_6b7fac * 13;
+    sprintf((char *)0x14cbae0, (char *)0x678e38, loadState->name, MemUsed);
+    loadState->block = blk;
     fclose(f);
     return rc;
 }

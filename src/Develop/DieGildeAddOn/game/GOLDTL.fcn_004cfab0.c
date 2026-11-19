@@ -13,7 +13,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004cfab0 */
-void __cdecl fcn_004cfab0(int a0, int a1)
+void __cdecl fcn_004cfab0(int a0, int targetEntity)
 {
 	int rect[4];
 	int w;
@@ -22,7 +22,7 @@ void __cdecl fcn_004cfab0(int a0, int a1)
 	int y0;
 	int slot;
 
-	if (!fcn_00443e10(*(int*) (*(int*) (a1 + 0x184) + 0x34), rect)) {
+	if (!fcn_00443e10(*(int*) (*(int*) (targetEntity + 0x184) + 0x34), rect)) {
 		return;
 	}
 	x0 = rect[0] - 0x10;
@@ -34,14 +34,14 @@ void __cdecl fcn_004cfab0(int a0, int a1)
 	h = rect[3] - rect[1] + 0x20;
 	for (slot = 0; slot < 0x20; slot++) {
 		if (g_9ba2e0[slot] == -1) {
-			gm_FindOrCreateEntitySlot(a0, a1);
+			gm_FindOrCreateEntitySlot(a0, targetEntity);
 			g_9ba2e0[slot] = fcn_0046e940(x0, y0, w, h, 0x10);
 			fcn_0046f740(0, 0, 0x7b0, d2_CurrentWindowId);
 			fcn_0046f740(w - 0x18, 0, 0x7b1, d2_CurrentWindowId);
 			*(int*) (0x10161cc + d2_CurrentWindowId * 0x3cc) = 0x54;
-			fcn_00534160(4, 4, fcn_00507e30(a1, 3, 0x4df));
+			fcn_00534160(4, 4, fcn_00507e30(targetEntity, 3, 0x4df));
 			fcn_00472380(fcn_004677e0(0, 0xe, 0x40, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId), 0, 0x64,
-			    (int) (fcn_004ff040(a1) * 100.0));
+			    (int) (fcn_004ff040(targetEntity) * 100.0));
 			return;
 		}
 	}

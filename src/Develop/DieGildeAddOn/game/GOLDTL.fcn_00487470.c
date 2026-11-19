@@ -35,7 +35,7 @@ void __cdecl fcn_004c5530(void*);
  * current shop; the first pass prefers a partner that the guild filter does
  * not already lock out, the fallback pass only accepts the first free one. */
 /* ADDRESS: GOLDTL 0x00487470 */
-void __cdecl fcn_00487470(char* a0)
+void __cdecl fcn_00487470(char* actor)
 {
 	unsigned int found;
 	int cand;
@@ -55,33 +55,33 @@ void __cdecl fcn_00487470(char* a0)
 
 	found = 0;
 	cand = 0xfd;
-	if (*(unsigned char*) (a0 + 0x1c8) & 8) {
+	if (*(unsigned char*) (actor + 0x1c8) & 8) {
 		return;
 	}
 	if ((short) g_7f4c04 != 7 && (short) g_7f4c04 != 0xc && (short) g_7f4c04 != 0x12) {
-		*(int*) (a0 + 0x1b4) &= ~0x400;
+		*(int*) (actor + 0x1b4) &= ~0x400;
 		return;
 	}
-	if (*(int*) (a0 + 0x1b4) & 0x400) {
+	if (*(int*) (actor + 0x1b4) & 0x400) {
 		return;
 	}
-	p = (char*) *(int*) (a0 + 0x16c);
-	*(int*) (a0 + 0x1b4) |= 0x400;
+	p = (char*) *(int*) (actor + 0x16c);
+	*(int*) (actor + 0x1b4) |= 0x400;
 	kind = g_7f4ca2[*(unsigned short*) (p + 0x27) * 0x21c];
 	if (kind != 6 && kind != 7) {
 		return;
 	}
-	if (!(*(int*) (a0 + 0x1b4) & 8)) {
+	if (!(*(int*) (actor + 0x1b4) & 8)) {
 		return;
 	}
 	if (gm_RandomMod(0x14) + 0x4b > fcn_00508da0((unsigned char*) p)) {
-		amountf = (float) fcn_0050cf50(*(int*)(a0 + 0x16c), 100) * g_664138 * g_664138;
+		amountf = (float) fcn_0050cf50(*(int*)(actor + 0x16c), 100) * g_664138 * g_664138;
 		if (g_662a7c > amountf) {
 			amountf = 128.0f;
 		}
-		if ((float) *(int*) (a0 + 0x1b8) * g_662a6c > amountf) {
+		if ((float) *(int*) (actor + 0x1b8) * g_662a6c > amountf) {
 			memset(pkt1, 0, 0xf8);
-			p = *(char**)(a0 + 0x16c);
+			p = *(char**)(actor + 0x16c);
 			pkt1[4] = 0x1c;
 			*(int*) (pkt1 + 0xc) = -1;
 			pkt1[0x36] = 1;
@@ -89,22 +89,22 @@ void __cdecl fcn_00487470(char* a0)
 			*(int*) (pkt1 + 0x58) = *(int*) (p + 1);
 			*(int*) (pkt1 + 0x5c) = 100 - *(char*) (p + 0x5c);
 			fcn_004c4eb0(g_67e330);
-			p = *(char**)(a0 + 0x16c);
+			p = *(char**)(actor + 0x16c);
 			fcn_004c5150(-1,
 						 *(int*) (0x7f4ca4 + *(unsigned short*) (p + 0x27) * 0x21c),
 						 (char) g_773d75,
 						 (int) amountf);
 			fcn_004c5530(pkt1);
 			fcn_004c4ef0(g_67e330);
-			p = *(char**)(a0 + 0x16c);
+			p = *(char**)(actor + 0x16c);
 			other = gm_GetEntityTableEntry(g_7f4ca0 + *(unsigned short*) (p + 0x27) * 0x21c);
 			if (other != 0) {
 				*(int*) (other + 0x44) = (int) ((float) *(int*) (other + 0x44) + amountf);
 			}
-			*(int*) (a0 + 0x1b8) = (int) ((float) *(int*) (a0 + 0x1b8) - amountf);
+			*(int*) (actor + 0x1b8) = (int) ((float) *(int*) (actor + 0x1b8) - amountf);
 		}
 	}
-	p = (char*) *(int*) (a0 + 0x16c);
+	p = (char*) *(int*) (actor + 0x16c);
 	id = *(unsigned char*) p;
 	row = &((BuildingProto487470*)lpGebaeudePROT)[id];
 	if (row->count > 0) {
@@ -119,7 +119,7 @@ void __cdecl fcn_00487470(char* a0)
 				id = w & 0x7fff;
 				kind = *(char*) (lpObjektePROT + id * 0x41);
 				if (kind != 2 && kind != 6) {
-					if (cand != 0xfd && fcn_00502cd0(*(int*) (*(int*) (a0 + 0x16c) + 0x5d), 2, 6, 0, id) == 0) {
+					if (cand != 0xfd && fcn_00502cd0(*(int*) (*(int*) (actor + 0x16c) + 0x5d), 2, 6, 0, id) == 0) {
 						found = *entry & 0x7fff;
 					}
 				} else {
@@ -148,7 +148,7 @@ void __cdecl fcn_00487470(char* a0)
 			id = w & 0x7fff;
 			kind = *(char*) (lpObjektePROT + id * 0x41);
 			if (kind != 2 && kind != 6) {
-				if (cand == 0xfd && fcn_00502cd0(*(int*) (*(int*) (a0 + 0x16c) + 0x5d), 2, 6, 0, id) == 0) {
+				if (cand == 0xfd && fcn_00502cd0(*(int*) (*(int*) (actor + 0x16c) + 0x5d), 2, 6, 0, id) == 0) {
 					found = *entry & 0x7fff;
 				}
 			} else {
@@ -163,12 +163,12 @@ void __cdecl fcn_00487470(char* a0)
 	}
 
 have:
-	p = fcn_00502cd0(*(int*) (*(int*) (a0 + 0x16c) + 0x5d), 1, 0, cand);
+	p = fcn_00502cd0(*(int*) (*(int*) (actor + 0x16c) + 0x5d), 1, 0, cand);
 	if (p != 0) {
 		amount = (int) eval_ObjektPreis2Credits(found, 100);
-		if (*(int*) (a0 + 0x1b8) > amount * 3) {
+		if (*(int*) (actor + 0x1b8) > amount * 3) {
 			memset(pkt2, 0, 0xf8);
-			building = *(char**)(a0 + 0x16c);
+			building = *(char**)(actor + 0x16c);
 			pkt2[4] = 2;
 			*(int*) (pkt2 + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) (building + 0x25) * 0x21c);
 			*(int*) (pkt2 + 0xc) = *(int*) (building + 1);
@@ -185,15 +185,15 @@ have:
 				*(int*) (other + 0x40) = *(int*) (other + 0x40) + amount;
 			}
 			fcn_004c4eb0((char*) 0x67e31c);
-			building = *(char**)(a0 + 0x16c);
+			building = *(char**)(actor + 0x16c);
 			fcn_004c5150(-1,
 						 *(int*) (0x7f4ca4 + *(unsigned short*) (building + 0x25) * 0x21c),
 						 (char) g_773d75,
 						 amount);
 			fcn_004c5530(pkt2);
 			fcn_004c4ef0((char*) 0x67e31c);
-			*(int*) (a0 + 0x1b8) = *(int*) (a0 + 0x1b8) - amount;
+			*(int*) (actor + 0x1b8) = *(int*) (actor + 0x1b8) - amount;
 		}
 	}
-	*(int*) (a0 + 0x1c8) |= 8;
+	*(int*) (actor + 0x1c8) |= 8;
 }

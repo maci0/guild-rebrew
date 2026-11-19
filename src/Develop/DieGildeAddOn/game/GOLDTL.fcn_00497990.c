@@ -19,7 +19,7 @@ int __cdecl fcn_0050d320(char*, char);
 int __cdecl fcn_00505e20(int, int, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x00497990 */
-int __cdecl fcn_00497990(int a1, char* a2, int a3, char* a4, int a5)
+int __cdecl fcn_00497990(int a1, char* entityRec, int phaseFlag, char* decisionMsg, int a5)
 {
 	unsigned char* e;
 	unsigned char* t;
@@ -34,24 +34,24 @@ int __cdecl fcn_00497990(int a1, char* a2, int a3, char* a4, int a5)
 	int id;
 	char buf[0x220];
 
-	if (*(char*) (a2 + 2) == 3) {
+	if (*(char*) (entityRec + 2) == 3) {
 		return 0;
 	}
 	for (i = 0; i < 0x88; i++) {
 		((int*) buf)[i] = 0;
 	}
 	*(int*) buf = 1;
-	if (a3 == 0) {
-		if (*(char*) a4 != 0) {
+	if (phaseFlag == 0) {
+		if (*(char*) decisionMsg != 0) {
 			return 0;
 		}
-	} else if (a3 == 1) {
-		unsigned char b = *(char*) a4;
+	} else if (phaseFlag == 1) {
+		unsigned char b = *(char*) decisionMsg;
 		if (b != 5 && b != 4) {
 			return 0;
 		}
 	}
-	if (fcn_005463a0(2, 0, 0xd, 2, *(unsigned short*) a2) != 0) {
+	if (fcn_005463a0(2, 0, 0xd, 2, *(unsigned short*) entityRec) != 0) {
 		return 0;
 	}
 	e = (unsigned char*) lpGebaeudeINST;
@@ -65,7 +65,7 @@ int __cdecl fcn_00497990(int a1, char* a2, int a3, char* a4, int a5)
 			} else {
 				bits_lo = 1 << b;
 			}
-			if (*(unsigned short*) (e + 0x27) == *(unsigned short*) a2) {
+			if (*(unsigned short*) (e + 0x27) == *(unsigned short*) entityRec) {
 				if ((g_666028 & bits_lo) != 0 || (g_66602c & bits_hi) != 0) {
 					goto found;
 				}
@@ -75,16 +75,16 @@ int __cdecl fcn_00497990(int a1, char* a2, int a3, char* a4, int a5)
 	}
 	return 0;
 found:
-	A = (int) (fcn_0050d320(a2, g_773d75) * g_664178);
-	r = fcn_004fa5b0(1, (int) a2, (int) buf);
+	A = (int) (fcn_0050d320(entityRec, g_773d75) * g_664178);
+	r = fcn_004fa5b0(1, (int) entityRec, (int) buf);
 	q[0] = (r == 2 || r == 4);
-	r = fcn_004fa5b0(5, (int) a2, (int) buf);
+	r = fcn_004fa5b0(5, (int) entityRec, (int) buf);
 	q[1] = (r == 2 || r == 4);
-	r = fcn_004fa5b0(9, (int) a2, (int) buf);
+	r = fcn_004fa5b0(9, (int) entityRec, (int) buf);
 	q[2] = (r == 2 || r == 4);
-	r = fcn_004fa5b0(0xc, (int) a2, (int) buf);
+	r = fcn_004fa5b0(0xc, (int) entityRec, (int) buf);
 	q[3] = (r == 2 || r == 4);
-	t = (unsigned char*) *(int*) (a2 + 0x170);
+	t = (unsigned char*) *(int*) (entityRec + 0x170);
 	if (t != 0) {
 		n = ((BUILDING_ROW*)lpGebaeudePROT)[*t].level - 1;
 		if (n >= 0) {
@@ -94,9 +94,9 @@ found:
 			}
 		}
 	}
-	if (*(char*) a4 == 0) {
+	if (*(char*) decisionMsg == 0) {
 		e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
-		if (*(char*) a4 != 0) {
+		if (*(char*) decisionMsg != 0) {
 			return 0x10;
 		}
 		while (e != 0) {
@@ -115,27 +115,27 @@ found:
 						if (A < B) {
 							goto fraction;
 						}
-						*(char*) a4 = 4;
-						*(int*) (a4 + 4) = *(int*) (e + 1);
-						*(int*) (a4 + 8) = 1;
+						*(char*) decisionMsg = 4;
+						*(int*) (decisionMsg + 4) = *(int*) (e + 1);
+						*(int*) (decisionMsg + 8) = 1;
 					}
 				}
 			}
 		next_ent:
 			e = (unsigned char*) gm_FindNextFilteredEntity();
-			if (*(char*) a4 != 0) {
+			if (*(char*) decisionMsg != 0) {
 				return 0x10;
 			}
 		}
-		if (*(char*) a4 != 0) {
+		if (*(char*) decisionMsg != 0) {
 			return 0x10;
 		}
 		return 0;
 	} else {
-		if (*(unsigned char*) a4 != 5) {
+		if (*(unsigned char*) decisionMsg != 5) {
 			return 0;
 		}
-		id = *(int*) (a4 + 4);
+		id = *(int*) (decisionMsg + 4);
 		if (id == 4 && q[0] == 0) {
 			return 0;
 		}
@@ -149,7 +149,7 @@ found:
 			return 0;
 		}
 		e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
-		if (*(unsigned char*) a4 != 5) {
+		if (*(unsigned char*) decisionMsg != 5) {
 			return 0x10;
 		}
 		while (e != 0) {
@@ -166,18 +166,18 @@ found:
 					if (A < B) {
 						goto fraction;
 					}
-					*(char*) a4 = 4;
-					*(int*) (a4 + 4) = *(int*) (e + 1);
-					*(int*) (a4 + 8) = 1;
+					*(char*) decisionMsg = 4;
+					*(int*) (decisionMsg + 4) = *(int*) (e + 1);
+					*(int*) (decisionMsg + 8) = 1;
 				}
 			}
 		next_ent2:
 			e = (unsigned char*) gm_FindNextFilteredEntity();
-			if (*(unsigned char*) a4 != 5) {
+			if (*(unsigned char*) decisionMsg != 5) {
 				return 0x10;
 			}
 		}
-		if (*(unsigned char*) a4 == 5) {
+		if (*(unsigned char*) decisionMsg == 5) {
 			return 0;
 		}
 		return 0x10;
@@ -185,9 +185,9 @@ found:
 fraction:
 	r = fcn_0050cf50((char*) e, (int) *(signed char*) (e + 0x5c));
 	if ((double) (B - A) / (double) B < (double) (B - r) / (double) r * g_664158 + 0.25f) {
-		*(int*) (a4 + 8) = B - A;
-		*(char*) a4 = 0x12;
-		return ai_StartKreditNehmen(0x10, a2, a3, a4, a5);
+		*(int*) (decisionMsg + 8) = B - A;
+		*(char*) decisionMsg = 0x12;
+		return ai_StartKreditNehmen(0x10, entityRec, phaseFlag, decisionMsg, a5);
 	}
 	return 0;
 }

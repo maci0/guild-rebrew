@@ -26,7 +26,7 @@ typedef struct ObjList {
  * state 5 and clears their pending flag, or selects the object whose
  * underscore-separated numeric range contains the requested value. */
 /* ADDRESS: GOLDTL 0x00573e10 */
-void __cdecl fcn_00573e10(int a0)
+void __cdecl fcn_00573e10(int action)
 {
 	ObjList list;
 	char name[256];
@@ -45,9 +45,9 @@ void __cdecl fcn_00573e10(int a0)
 
 	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
-	fcn_0064d41a(name, "he_%i", *(int*) (a0 + 4));
+	fcn_0064d41a(name, "he_%i", *(int*) (action + 4));
 	obj = fcn_00445600(0, 0x1c0, 0, name);
-	cur = *(int*) (a0 + 0xc8);
+	cur = *(int*) (action + 0xc8);
 	if (cur == -1 && obj != 0) {
 		list.handle = obj;
 		list.count = 0;
@@ -72,8 +72,8 @@ next_mark:
 		d3_SetSubtreeVisible(obj, 0);
 		goto done;
 	}
-	if (cur >= *(int*) (a0 + 0xc4) || obj == 0) {
-		if (cur > *(int*) (a0 + 0xc4))
+	if (cur >= *(int*) (action + 0xc4) || obj == 0) {
+		if (cur > *(int*) (action + 0xc4))
 			goto release;
 		goto done;
 	}
@@ -129,12 +129,12 @@ next_mark:
 				p = fcn_0064d1a0(buf, '_');
 			} while (p != 0);
 			if (num == 1) {
-				if (*(int*) (a0 + 0xc8) >= range[0])
+				if (*(int*) (action + 0xc8) >= range[0])
 					d3_SetSubtreeVisible((int) list.items[idx], 1);
 				else
 					d3_SetSubtreeVisible((int) list.items[idx], 0);
 			} else if (num == 2) {
-				if (*(int*) (a0 + 0xc8) <= range[0] && *(int*) (a0 + 0xc8) >= range[1])
+				if (*(int*) (action + 0xc8) <= range[0] && *(int*) (action + 0xc8) >= range[1])
 					d3_SetSubtreeVisible((int) list.items[idx], 1);
 				else
 					d3_SetSubtreeVisible((int) list.items[idx], 0);
@@ -144,7 +144,7 @@ next_mark:
 	}
 	goto done;
 release:
-	slot = gm_SearchTable67(*(int*) (a0 + 0xb8));
+	slot = gm_SearchTable67(*(int*) (action + 0xb8));
 	if (slot != 0 && *(int*) (slot + 0x61) != 0)
 		d3_SetSubtreeVisible(*(int*) (slot + 0x61), 1);
 	if (obj != 0) {

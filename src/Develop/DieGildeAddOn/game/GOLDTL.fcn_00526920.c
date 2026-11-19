@@ -29,7 +29,7 @@ void __cdecl init_LoadObjektScene(unsigned short id);
 void __cdecl fcn_005356b0(void* p);
 
 /* ADDRESS: GOLDTL 0x00526920 */
-void __cdecl fcn_00526920(char* a0, int a1, char* a2)
+void __cdecl fcn_00526920(char* buildingRecord, int a1, char* a2)
 {
 	char* cur;
 	char* hit;
@@ -49,14 +49,14 @@ void __cdecl fcn_00526920(char* a0, int a1, char* a2)
 	hit = 0;
 	id = (int) g_774970;
 	if (g_774970 != 0xffff && g_7f4e51[id * 540] != 0) {
-		type = ((BldProt_526920*) lpGebaeudePROT)[(unsigned char) *a0].type;
+		type = ((BldProt_526920*) lpGebaeudePROT)[(unsigned char) *buildingRecord].type;
 		if (type == 6) {
 			goto ready;
 		}
 		if (type != 4) {
 			return;
 		}
-		if (*(int*) (a0 + 0x65) != *(int*) (g_7f4ca4 + id * 540)) {
+		if (*(int*) (buildingRecord + 0x65) != *(int*) (g_7f4ca4 + id * 540)) {
 			return;
 		}
 	}
@@ -66,19 +66,19 @@ ready:
 	} else if (g_7746c8 != 0) {
 		hit = g_7746c8;
 	}
-	g_7e2704 = a0;
-	g_7e2708 = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 1, a1);
-	if (*a0 == 0x47) {
-		g_7e2708 = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, 0xfd);
+	g_7e2704 = buildingRecord;
+	g_7e2708 = fcn_00502cd0(*(int*) (buildingRecord + 0x5d), 1, 1, a1);
+	if (*buildingRecord == 0x47) {
+		g_7e2708 = fcn_00502cd0(*(int*) (buildingRecord + 0x5d), 1, 0, 0xfd);
 	}
 	strcpy(g_7e2714, a2);
 	g_7e2700 = 1;
 	cur = g_7e2708;
 	if (cur != 0 && *(unsigned short*) cur != 0) {
 		if (cur != g_7746cc) {
-			if (a0 == hit) {
+			if (buildingRecord == hit) {
 				if (gm_CheckEntityType(hit) != 0) {
-					*(unsigned short*) (a0 + 0x29) = *(unsigned short*) g_7e2708;
+					*(unsigned short*) (buildingRecord + 0x29) = *(unsigned short*) g_7e2708;
 					if (g_7746cc != 0) {
 						g_774654 = g_774650 + 1 - g_774658;
 						return;
@@ -87,10 +87,10 @@ ready:
 					return;
 				}
 			}
-			*(unsigned short*) (a0 + 0x29) = *(unsigned short*) g_7e2708;
+			*(unsigned short*) (buildingRecord + 0x29) = *(unsigned short*) g_7e2708;
 			old = g_7746cc;
 			saved = g_774670;
-			if (gm_CheckEntityType(a0) == 0 && fcn_00505340(a0) == 0) {
+			if (gm_CheckEntityType(buildingRecord) == 0 && fcn_00505340(buildingRecord) == 0) {
 				cur = g_7e2708;
 				g_7746cc = cur;
 				g_7e2700 = 0;
@@ -113,7 +113,7 @@ ready:
 		g_7e2700 = 0;
 		return;
 	}
-	if (a0 == hit && g_7746c8 == 0) {
+	if (buildingRecord == hit && g_7746c8 == 0) {
 		g_7e2700 = 0;
 		return;
 	}

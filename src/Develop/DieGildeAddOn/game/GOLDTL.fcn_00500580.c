@@ -7,7 +7,7 @@ int __cdecl fcn_004fe470(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00500580 */
 char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
-	char* a6)
+	char* queryEntity)
 {
 	int i;
 	char* rec;
@@ -31,10 +31,10 @@ char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
 	}
 	rec = g_7f4ca0 + i * 0x21c;
 	if (flags & 4) {
-		if (a6 != 0) {
-			s = sim_StartEntityQueryByType(a6);
+		if (queryEntity != 0) {
+			s = sim_StartEntityQueryByType(queryEntity);
 			if (s != 0) {
-				fcn_004fe470(*(int*) (rec + 4), *(int*) (a6 + 1),
+				fcn_004fe470(*(int*) (rec + 4), *(int*) (queryEntity + 1),
 					*(int*) (s + 2), 0, 0);
 			}
 		}

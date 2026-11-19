@@ -40,7 +40,7 @@ void __cdecl fcn_00526120(char* buf, int flag);
 void __cdecl fcn_00532ef0(void);
 
 /* ADDRESS: GOLDTL 0x0059e740 */
-void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
+void __cdecl fcn_0059e740(unsigned char* targetBuilding, unsigned char* a1)
 {
 	int count;
 	int ids[7];
@@ -63,8 +63,8 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 	ids[0] = 0x1c4;
 	ids[1] = 0x1c5;
 	ids[2] = 0x1c6;
-	ids[6] = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, 0x2a);
-	type = *(unsigned char*) a0;
+	ids[6] = fcn_00502cd0(*(int*) (targetBuilding + 0x5d), 2, 6, 0, 0x2a);
+	type = *(unsigned char*) targetBuilding;
 	rec = g_entity_type_table + type * 0x24d;
 	kind = *(unsigned char*) rec;
 	if (kind == 0x20) {
@@ -85,13 +85,13 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 			count = 2;
 		}
 	}
-	if (fcn_00525fb0(a0) != 0) {
+	if (fcn_00525fb0(targetBuilding) != 0) {
 		return;
 	}
 	ids[3] = 0;
 	ids[4] = 0;
 	ids[5] = 0;
-	entity = fcn_005463a0(2, 0, 0x14, 3, *(int*) (a0 + 1));
+	entity = fcn_005463a0(2, 0, 0x14, 3, *(int*) (targetBuilding + 1));
 	while (entity != 0) {
 		for (i = 0; i < 3; i++) {
 			if (*(unsigned short*) ((char*) entity + 0xae) == ids[i]) {
@@ -107,7 +107,7 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 	fcn_00533dc0(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x17fe);
-	fcn_0052a0c0(a0, 0);
+	fcn_0052a0c0(targetBuilding, 0);
 	fcn_00594340();
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 2);
@@ -128,13 +128,13 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 		}
 	}
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00595e20(a0, ids[6]);
-	fcn_005963f0(dlg, 1, 0, a0);
+	fcn_00595e20(targetBuilding, ids[6]);
+	fcn_005963f0(dlg, 1, 0, targetBuilding);
 	while (fcn_005373e0((void*) fcn_0059e740, 0x677c7) != 0) {
-		fcn_00595e20(a0, ids[6]);
-		fcn_005963f0(dlg, 1, 0, a0);
+		fcn_00595e20(targetBuilding, ids[6]);
+		fcn_005963f0(dlg, 1, 0, targetBuilding);
 		memset(ids + 3, 0, 3 * sizeof(int));
-		entity = fcn_005463a0(2, 0, 0x14, 3, *(int*) (a0 + 1));
+		entity = fcn_005463a0(2, 0, 0x14, 3, *(int*) (targetBuilding + 1));
 		while (entity != 0) {
 			for (i = 0; i < 3; i++) {
 				if (*(unsigned short*) ((char*) entity + 0xae) == ids[i]) {
@@ -164,9 +164,9 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 					memset(pkt, 0, sizeof(pkt));
 					pkt[4] = 0x14;
 					pkt[0x36] = 1;
-					*(int*) (pkt + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) (a0 + 0x27) * 0x21c);
+					*(int*) (pkt + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) (targetBuilding + 0x27) * 0x21c);
 					*(int*) (pkt + 0x28) = gm_GameTime;
-					*(int*) (pkt + 0xc) = *(int*) (a0 + 1);
+					*(int*) (pkt + 0xc) = *(int*) (targetBuilding + 1);
 					*(int*) (pkt + 0x30) = g_7f4c08;
 					*(int*) (pkt + 0x2c) = g_7f4c04;
 					*(unsigned short*) (pkt + 0x5a) = (unsigned short) ids[i];

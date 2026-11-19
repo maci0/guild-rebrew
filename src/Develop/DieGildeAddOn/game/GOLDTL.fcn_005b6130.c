@@ -16,7 +16,7 @@ void __cdecl fcn_00526920(char* text, int a2, int a3);
 /* ADDRESS: GOLDTL 0x005b6130 */
 void __cdecl fcn_005b6130(int a0, char* a1)
 {
-    char v5[512];
+    char label[512];
     int v1;
     char* v2;
     int v3;
@@ -35,7 +35,7 @@ void __cdecl fcn_005b6130(int a0, char* a1)
                 v2 = gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (v1 + 0xb4));
                 if (v2) {
                     v8 = 0x1a3e;
-                    io_FormatTextBuffer(v5, (char*) v8, v2);
+                    io_FormatTextBuffer(label, (char*) v8, v2);
                 }
             } else {
                 v2 = gm_EntityAccumulate(v3);
@@ -43,11 +43,11 @@ void __cdecl fcn_005b6130(int a0, char* a1)
                     v2 = g_773d78;
                 }
                 v8 = 0x1a3f;
-                io_FormatTextBuffer(v5, (char*) v8, v2);
+                io_FormatTextBuffer(label, (char*) v8, v2);
             }
             v3 = *(int*) (v4 * 4 + 0x777cdc);
             if (v3 != -1) {
-                fcn_0046f940(v3, v5);
+                fcn_0046f940(v3, label);
                 if (a1 != v2 &&
                     *(int*) (v4 * 4 + 0x777cd0) == -1) {
                     v3 = fcn_0046f740(0, v7, 5, d2_CurrentWindowId);

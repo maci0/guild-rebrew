@@ -60,7 +60,7 @@ void __cdecl fcn_00599f90(void);
 void __cdecl fcn_005a7320(int, int);
 
 /* ADDRESS: GOLDTL 0x00533090 */
-void __cdecl fcn_00533090(unsigned int a0)
+void __cdecl fcn_00533090(unsigned int flags)
 {
 	char* p;
 	char* q;
@@ -114,7 +114,7 @@ void __cdecl fcn_00533090(unsigned int a0)
 			i += 1;
 		} while ((int) ip < 0x77e984);
 	}
-	if (a0 & 0x800) {
+	if (flags & 0x800) {
 		fcn_00599f90();
 		fcn_004bbd70();
 		if (g_14ce8e0 && g_7e2aa0
@@ -242,14 +242,14 @@ void __cdecl fcn_00533090(unsigned int a0)
 		fcn_00530510();
 	}
 done:
-	if (a0 & 0x100) {
+	if (flags & 0x100) {
 		fcn_0052f7b0();
 	}
 	v4 = g_7746c4;
 	if (v4 == 0) {
 		v4 = g_7746c8 != 0 ? g_7746c8 : d;
 	}
-	if ((a0 & 8) && v4 != 0) {
+	if ((flags & 8) && v4 != 0) {
 		if (g_7746cc != 0) {
 			g_7746dc = fcn_00506380(g_774970, v4, g_7746cc, 0);
 		} else {

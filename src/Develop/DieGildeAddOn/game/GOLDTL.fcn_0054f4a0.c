@@ -18,7 +18,7 @@ void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c5620(int, char*);
 
 /* ADDRESS: GOLDTL 0x0054f4a0 */
-void __cdecl fcn_0054f4a0(char* a0, char* a1, unsigned char* a2)
+void __cdecl fcn_0054f4a0(char* a0, char* firstEntity, unsigned char* secondEntity)
 {
 	Row_54f4a0 role;
 	Row_54f4a0 slot;
@@ -26,22 +26,22 @@ void __cdecl fcn_0054f4a0(char* a0, char* a1, unsigned char* a2)
 	int ret;
 
 	ret = 0;
-	if (a1[2] == 6 || a1[2] == 7) {
-		io_FormatTextBuffer(buf, 0x1d81, *(unsigned short*) a2, *(unsigned short*) a2, (a2[9] != 0) + 0x1d68);
-		fcn_00545d40(*(int*) (a1 + 4), *(int*) (a1 + 4), buf, 0, 0x5fb, 0);
-		fcn_004c5420(*(int*) (a1 + 4), 0x1c8, 4, 0, 0x400);
-		fcn_004c5420(*(int*) (a2 + 4), 0x1c8, 4, 0, 0x400);
+	if (firstEntity[2] == 6 || firstEntity[2] == 7) {
+		io_FormatTextBuffer(buf, 0x1d81, *(unsigned short*) secondEntity, *(unsigned short*) secondEntity, (secondEntity[9] != 0) + 0x1d68);
+		fcn_00545d40(*(int*) (firstEntity + 4), *(int*) (firstEntity + 4), buf, 0, 0x5fb, 0);
+		fcn_004c5420(*(int*) (firstEntity + 4), 0x1c8, 4, 0, 0x400);
+		fcn_004c5420(*(int*) (secondEntity + 4), 0x1c8, 4, 0, 0x400);
 	}
-	if (a2[0x166] != 0) {
-		if (srv_GetEntityOfficeSlot(a2, &role, &slot) != 0) {
+	if (secondEntity[0x166] != 0) {
+		if (srv_GetEntityOfficeSlot(secondEntity, &role, &slot) != 0) {
 			ret = role.v[1];
 		}
 		else {
 			ret = (unsigned short) gm_RandomMod(3) + 1;
 		}
 	}
-	fcn_004ec2d0(a2, ret, -9 - (int) (gm_GetEntitySkill(a1, 4) * 8.0f) - (gm_RandomMod(8) & 0xffff));
-	fcn_004c54c0(*(int*) (a1 + 4), *(int*) (a2 + 4), -0x14, 1);
+	fcn_004ec2d0(secondEntity, ret, -9 - (int) (gm_GetEntitySkill(firstEntity, 4) * 8.0f) - (gm_RandomMod(8) & 0xffff));
+	fcn_004c54c0(*(int*) (firstEntity + 4), *(int*) (secondEntity + 4), -0x14, 1);
 	*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 	fcn_004c5620(-1, a0);
 }

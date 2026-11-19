@@ -5,7 +5,7 @@ int __cdecl fcn_005ca560(void*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
 
 /* ADDRESS: GOLDTL 0x005cb860 */
-unsigned int __cdecl fcn_005cb860(short* a0, unsigned int a1, int* a2, void* a3)
+unsigned int __cdecl fcn_005cb860(short* a0, unsigned int maxCount, int* a2, void* a3)
 {
 	unsigned char* c;
 	int* e;
@@ -19,7 +19,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int a1, int* a2, void* a3)
 	double previous;
 
 	found = 0;
-	if (!a1) {
+	if (!maxCount) {
 		for (c = (unsigned char*) 0x7f4ca0; c < (unsigned char*) 0x85a0a0; c += 0x21c) {
 			if (c == (unsigned char*) a0)
 				continue;
@@ -33,8 +33,8 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int a1, int* a2, void* a3)
 		}
 		return found;
 	}
-	memset(a2, 0, a1 * 0x38);
-	for (i = 0; i < a1; i++)
+	memset(a2, 0, maxCount * 0x38);
+	for (i = 0; i < maxCount; i++)
 		a2[i * 14 + 11] = 100;
 	for (c = (unsigned char*) 0x7f4ca0; c < (unsigned char*) 0x85a0a0; c += 0x21c) {
 		if (c == (unsigned char*) a0)
@@ -50,13 +50,13 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int a1, int* a2, void* a3)
 		} else {
 			d = 0.0f;
 		}
-		e = &a2[(a1 - 1) * 14];
+		e = &a2[(maxCount - 1) * 14];
 		if (!(d < (float) e[11]))
 			continue;
 		e[0] = (int) c;
 		e[11] = (int) d;
 		found++;
-		i = a1 - 1;
+		i = maxCount - 1;
 		if (i) {
 			p = &e[-3];
 			do {
@@ -74,9 +74,9 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int a1, int* a2, void* a3)
 		}
 	}
 	keep = found;
-	if (a1 <= found) {
-		keep = a1;
-		found = a1;
+	if (maxCount <= found) {
+		keep = maxCount;
+		found = maxCount;
 	}
 	if ((int) keep < 1)
 		return keep;

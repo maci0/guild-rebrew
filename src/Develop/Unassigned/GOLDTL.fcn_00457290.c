@@ -92,7 +92,7 @@ int __cdecl fcn_00457630(Item0457290* rec, unsigned int map);
 #include <string.h>
 
 /* ADDRESS: GOLDTL 0x00457290 */
-char __cdecl fcn_00457290(Node0457290* a0, Node0457290* a1, char* a2, char* a3)
+char __cdecl fcn_00457290(Node0457290* node, Node0457290* other, char* a2, char* a3)
 {
 	Master0457290* m;
 	Item0457290* rec;
@@ -109,15 +109,15 @@ char __cdecl fcn_00457290(Node0457290* a0, Node0457290* a1, char* a2, char* a3)
 
 	rec = 0;
 	if (*(int*) 0x104061c != 0
-	    && a0->f218 < 5
-	    && (a0->f215 & 1) != 0
-	    && a0->p1ec != 0
-	    && (a1->f215 & 1) != 0
-	    && a1->f94 != *(double*) 0x662950) {
-		m = a0->p1ec;
+	    && node->f218 < 5
+	    && (node->f215 & 1) != 0
+	    && node->p1ec != 0
+	    && (other->f215 & 1) != 0
+	    && other->f94 != *(double*) 0x662950) {
+		m = node->p1ec;
 		i = 0;
 		do {
-			if (m->items[i].f0 != 0 && m->items[i].f8 == (char*) a1) {
+			if (m->items[i].f0 != 0 && m->items[i].f8 == (char*) other) {
 				rec = &m->items[i];
 				break;
 			}
@@ -132,12 +132,12 @@ char __cdecl fcn_00457290(Node0457290* a0, Node0457290* a1, char* a2, char* a3)
 			return 0;
 alloc:
 			rec = &m->items[i];
-			rec->f8 = (char*) a1;
+			rec->f8 = (char*) other;
 			rec->f10 = 0;
 			rec->f14 = 0;
 			rec->f18 = 0;
 			rec->f70 = -1;
-			rec->f98 = (unsigned char) ((a0->f215 >> 1) & 1);
+			rec->f98 = (unsigned char) ((node->f215 >> 1) & 1);
 			rec->f1c = 0;
 			rec->f20 = 0;
 			rec->f24 = 0;
@@ -159,7 +159,7 @@ alloc:
 				unsigned int off;
 				float v;
 
-				q = a0->p1cc;
+				q = node->p1cc;
 				lim = *(unsigned int*) 0x104061c;
 				e = q->p318;
 				if (e != 0 && *(char*) 0x10405f8 != 0) {
@@ -193,20 +193,20 @@ alloc:
 		if (rec->fc != 0) {
 			*(int*) (rec->fc + 8) = *(int*) 0x6b8008;
 		}
-		m = a0->p1ec;
-		q = a0->p1cc;
+		m = node->p1ec;
+		q = node->p1cc;
 		p1 = (char*) q;
 		p2 = (char*) q;
 		if (m->f11f4 > 0 && m->f11f0 > 0) {
 			p1 = (char*) m + 0xee0;
 		}
-		d3_TransformPoint((char*) a1, (float*) ((char*) a1 + 0x4c), vb);
-		if ((a1->f215 & 4) != 0) {
+		d3_TransformPoint((char*) other, (float*) ((char*) other + 0x4c), vb);
+		if ((other->f215 & 4) != 0) {
 			tol = 0.01f;
-			fcn_00455140((char*) a1, (float*) 0x662d40, va);
+			fcn_00455140((char*) other, (float*) 0x662d40, va);
 		} else {
 			tol = 1.0f;
-			d3_TransformPoint((char*) a0, (float*) ((char*) a0 + 0x4c), vc);
+			d3_TransformPoint((char*) node, (float*) ((char*) node + 0x4c), vc);
 			va[0] = vc[0] - vb[0];
 			va[1] = vc[1] - vb[1];
 			va[2] = vc[2] - vb[2];
@@ -250,7 +250,7 @@ alloc:
 			}
 		}
 submit:
-		fcn_004582d0((char*) a0, p2, p1, a2, va, vb, (char*) a1, rec, a3);
+		fcn_004582d0((char*) node, p2, p1, a2, va, vb, (char*) other, rec, a3);
 		fcn_00457630(rec, *(unsigned int*) 0x6b8300);
 	}
 end:

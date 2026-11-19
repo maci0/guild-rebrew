@@ -20,7 +20,7 @@ int __cdecl gm_MapEntityStatRange(int arg);
 int __cdecl fcn_005373e0(int task, int time);
 
 /* ADDRESS: GOLDTL 0x0053b6b0 */
-unsigned int __cdecl fcn_0053b6b0(int a0)
+unsigned int __cdecl fcn_0053b6b0(int jobCode)
 {
 	float pos[4];
 	char name[0x20];
@@ -53,7 +53,7 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 	char* p;
 	float d;
 
-	idx = gm_MapEntityStatRange(a0);
+	idx = gm_MapEntityStatRange(jobCode);
 
 	dev = fcn_00445600(0, 0x100, 0, "dummy_SPIELER");
 	if (dev != 0) {

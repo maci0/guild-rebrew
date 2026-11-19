@@ -4,7 +4,7 @@ extern int g_14ce904, g_14ce900, d2_CurrentElementId, g_67d38c, g_14ce8d8, g_14c
 void __cdecl d2_SelectRadioGroup(int, int); int __cdecl fcn_004125c0(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00469630 */
-void __cdecl d2_UpdateRadioGroup(int a0)
+void __cdecl d2_UpdateRadioGroup(int groupIndex)
 {
 	int count;
 	int sel;
@@ -13,11 +13,11 @@ void __cdecl d2_UpdateRadioGroup(int a0)
 	int id;
 	char key;
 
-	count = g_102cbc4[a0].count;
+	count = g_102cbc4[groupIndex].count;
 	if (count <= 0) {
 		return;
 	}
-	sel = g_102cbc4[a0].sel;
+	sel = g_102cbc4[groupIndex].sel;
 	if (*(int*) 0x67d3d0) {
 		goto scan;
 	}
@@ -27,13 +27,13 @@ void __cdecl d2_UpdateRadioGroup(int a0)
 scan:
 		if (!tp_d2_SelectedControl) {
 			for (i = 0; i < count; i++) {
-				if (g_102cbc4[a0].ids[i] == d2_CurrentElementId
-					&& (!(*(unsigned char*) (a0 * 0x8c + (unsigned long)&g_102cbc0) & 1)
+				if (g_102cbc4[groupIndex].ids[i] == d2_CurrentElementId
+					&& (!(*(unsigned char*) (groupIndex * 0x8c + (unsigned long)&g_102cbc0) & 1)
 						|| g_14ce8cc)) {
 					sel = i;
 				}
 			}
-			if (sel == g_102cbc4[a0].sel) {
+			if (sel == g_102cbc4[groupIndex].sel) {
 				*(int*) 0x67d3d0 = 0;
 			}
 		}
@@ -59,7 +59,7 @@ scan:
 	}
 	sel %= count;
 	if (alt) {
-		id = g_102cbc4[a0].ids[sel];
+		id = g_102cbc4[groupIndex].ids[sel];
 		alt = *(int*) &g_1015ea0 + id * 0x2f4;
 		fcn_004125c0(
 			(int) (*(int*) (alt + 0x18) * 0.5
@@ -69,24 +69,24 @@ scan:
 	}
 skip:
 	if (sel == -1) {
-		if (g_102cbc4[a0].sel != -1) {
-			d2_SelectRadioGroup(a0, -1);
+		if (g_102cbc4[groupIndex].sel != -1) {
+			d2_SelectRadioGroup(groupIndex, -1);
 		}
 		return;
 	}
 	if (sel < 0) {
-		sel = g_102cbc4[a0].count - 1;
+		sel = g_102cbc4[groupIndex].count - 1;
 	}
-	sel %= g_102cbc4[a0].count;
-	if (sel != g_102cbc4[a0].sel || !*(int*) 0x67d3d0) {
-		d2_SelectRadioGroup(a0, sel);
+	sel %= g_102cbc4[groupIndex].count;
+	if (sel != g_102cbc4[groupIndex].sel || !*(int*) 0x67d3d0) {
+		d2_SelectRadioGroup(groupIndex, sel);
 	}
 	if (g_14cf950 != 0x1c) {
 		return;
 	}
 	g_14ce8d8 = 1;
 	g_14cf950 = 0;
-	id = g_102cbc4[a0].ids[sel];
+	id = g_102cbc4[groupIndex].ids[sel];
 	d2_CurrentElementId = id;
 	alt = *(int*) &g_1015ea0 + id * 0x2f4;
 	if (*(int*) (alt + 0x20) != 9) {

@@ -36,7 +36,7 @@ static __inline void fill0(char* dst, int size)
 }
 
 /* ADDRESS: GOLDTL 0x004b2670 */
-int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
+int __cdecl hst_ParseCommandline_2nd_Pass(int textRef)
 {
 	char label[0x17d0];
 	char buf[0x100];
@@ -59,18 +59,18 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 	fill0(label, 0x17d0);
 	fill0(buf, 0x100);
 
-	if (a0 < 0x4800) {
-		if (txt_TextEntries[a0] == 0) {
+	if (textRef < 0x4800) {
+		if (txt_TextEntries[textRef] == 0) {
 			return 0;
 		}
-		len = strlen((char*) txt_TextEntries[a0]);
+		len = strlen((char*) txt_TextEntries[textRef]);
 		if ((unsigned int) len > 0x17c0) {
-			sprintf(buf, (char*) 0x680a9c, a0);
+			sprintf(buf, (char*) 0x680a9c, textRef);
 			return 0;
 		}
-		strncpy(label, (char*) txt_TextEntries[a0], 0x17c0);
+		strncpy(label, (char*) txt_TextEntries[textRef], 0x17c0);
 	} else {
-		strcpy(label, (char*) a0);
+		strcpy(label, (char*) textRef);
 	}
 
 	if (*(int*) (label + 1) != g_680748 && *(int*) (label + 1) != g_68074d) {
@@ -79,7 +79,7 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 		buf[0] = label[6];
 		i = atoi(buf);
 		if (i < 0 || i >= 4) {
-			sprintf(buf, (char*) 0x680a50, a0 - hst_HistoryTextBase);
+			sprintf(buf, (char*) 0x680a50, textRef - hst_HistoryTextBase);
 			return 0;
 		}
 		rec = i * 0x44 + 0x1007bc0;
@@ -129,9 +129,9 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 	if (!inToken) {
 		return 1;
 	}
-	a0 = 8; start = buf + 2;
+	textRef = 8; start = buf + 2;
 	if (*(int*) (buf + 1) == g_68074d) {
-		a0 = atoi(buf); start = buf + 8;
+		textRef = atoi(buf); start = buf + 8;
 	}
 	for (i = 0; i < 27; i++) {
 		if (strncmp(start, (char*) (0x67fcb8 + i * 0x40), strlen((char*) (0x67fcb8 + i * 0x40))) == 0) {
@@ -140,7 +140,7 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int a0)
 	}
 	if (i < 27 && i < 0x1b) {
 		end = start + strlen((char*) (0x67fcb8 + i * 0x40));
-		(*(void (__cdecl**)(int, int, char*)) (0x680798 + i * 4))(rec, a0, end);
+		(*(void (__cdecl**)(int, int, char*)) (0x680798 + i * 4))(rec, textRef, end);
 	}
 	return 1;
 }

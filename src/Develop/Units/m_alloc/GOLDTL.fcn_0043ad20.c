@@ -51,9 +51,9 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 	int v3;
 	int v10;
 	int* outer;
-	int* v12;
-	float v15;
-	int p6;
+	int* drawNode;
+	float fogDistance;
+	int drawFlags;
 
 	v3 = g_6b86d4;
 	if (g_6b86d4 < 0) {
@@ -79,9 +79,9 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 		}
 		if (*(int*) 0x6b8300) {
 			if (*(char*) 0x6b8060 && *(char*) 0x6b8061) {
-				v15 = fcn_004424c0(*(int*) 0x6b8300, *(int*) 0x6b8014 + 0x4c, *(int*) 0x6b8014 + 0x18c);
-				if (v15 < *(float*) 0x104329c) {
-					fcn_00438840((1.0f - (*(float*) 0x104329c - v15) / *(float*) 0x104329c) * *(float*) 0x10425fc, v15);
+				fogDistance = fcn_004424c0(*(int*) 0x6b8300, *(int*) 0x6b8014 + 0x4c, *(int*) 0x6b8014 + 0x18c);
+				if (fogDistance < *(float*) 0x104329c) {
+					fcn_00438840((1.0f - (*(float*) 0x104329c - fogDistance) / *(float*) 0x104329c) * *(float*) 0x10425fc, fogDistance);
 				} else {
 					fcn_00438840(*(float*) 0x10425fc, *(float*) 0x104329c);
 				}
@@ -113,19 +113,19 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 			} else {
 				fcn_00450e90(outer[4], outer[5], *(int*) (*outer + 0x1cc) + 0x280, 0x1040cc0, 0x1040c80);
 			}
-			v12 = outer;
+			drawNode = outer;
 			do {
-				v3 = v12[3];
+				v3 = drawNode[3];
 				DEV_43ad20->vtbl->SetTexture(DEV_43ad20, 0, *(int*) (v3 + 0x50));
-				p6 = *(unsigned char*) ((int) v12 + 0x1e);
-				fcn_004372d0(*(unsigned char*) ((int) v12 + 0x1c), (*(unsigned char*) (v3 + 0x54) & 1) * 2 | (p6 & 1), v12[8], (*(unsigned char*) (v3 + 0x54) >> 3) & 1, (p6 >> 1) & 1);
-				if (!(*(unsigned char*) (v3 + 0x54) & 8) && ((unsigned int) v12[6] >> 0x1b & 1) != (unsigned int) (v10 == 2)) {
-					v10 = (~v12[6] & 0x8000000U | 0x10000000) >> 0x1b;
+				drawFlags = *(unsigned char*) ((int) drawNode + 0x1e);
+				fcn_004372d0(*(unsigned char*) ((int) drawNode + 0x1c), (*(unsigned char*) (v3 + 0x54) & 1) * 2 | (drawFlags & 1), drawNode[8], (*(unsigned char*) (v3 + 0x54) >> 3) & 1, (drawFlags >> 1) & 1);
+				if (!(*(unsigned char*) (v3 + 0x54) & 8) && ((unsigned int) drawNode[6] >> 0x1b & 1) != (unsigned int) (v10 == 2)) {
+					v10 = (~drawNode[6] & 0x8000000U | 0x10000000) >> 0x1b;
 					DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x16, v10);
 				}
-				((Mesh_43ad20*) v12[2])->vtbl->DrawSubset((Mesh_43ad20*) v12[2], v12[6] & 0x7ffffff);
-				v12 = (int*) v12[9];
-			} while (v12);
+				((Mesh_43ad20*) drawNode[2])->vtbl->DrawSubset((Mesh_43ad20*) drawNode[2], drawNode[6] & 0x7ffffff);
+				drawNode = (int*) drawNode[9];
+			} while (drawNode);
 		}
 		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x16, (*(char*) 0x6b7ffe == 0) * 2 + 1);
 		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x89, 0);

@@ -47,7 +47,7 @@ int __cdecl fcn_004cf6b0(void)
 	int other;
 	Ent4cf6b0* p;
 	int* q;
-	float v8[4];
+	float position[4];
 	float v7[4];
 	unsigned char color[4];
 
@@ -61,26 +61,26 @@ int __cdecl fcn_004cf6b0(void)
 		if (p0 != 0) {
 			count++;
 			if ((*(unsigned char*) (p->d + 0x2d) & 0x20) != 0) {
-				v8[0] = -243.0f;
-				v8[1] = -90.0f;
-				v8[2] = 190.0f;
-				v8[3] = 0.0f;
+				position[0] = -243.0f;
+				position[1] = -90.0f;
+				position[2] = 190.0f;
+				position[3] = 0.0f;
 				v7[0] = -50.0f;
 				v7[1] = 0.0f;
 				v7[2] = 38.0f;
 				v7[3] = 0.0f;
-				v8[0] = *(float*) (p0 + 0x4c);
-				v8[1] = *(float*) (p0 + 0x50);
-				v8[2] = *(float*) (p0 + 0x54);
+				position[0] = *(float*) (p0 + 0x4c);
+				position[1] = *(float*) (p0 + 0x50);
+				position[2] = *(float*) (p0 + 0x54);
 				color[2] = 0xc0;
 				color[1] = 0xc0;
 				color[0] = 0xc0;
 				color[3] = 0x3f;
-				fcn_00418000(0, v8, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f,
+				fcn_00418000(0, position, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f,
 				    140.0f, 35.0f, v7, 0x190, 6, *(int*) color);
-				fcn_004185a0(0, v8, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f,
+				fcn_004185a0(0, position, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f,
 				    4.0f, 7.0f, 8.0f, *(int*) color);
-				fcn_00417d00(0, v8, 0x1e, 70.0f, 50.0f, 20.0f, 60.0f,
+				fcn_00417d00(0, position, 0x1e, 70.0f, 50.0f, 20.0f, 60.0f,
 				    0x3c);
 				map = g_6b8300;
 				n = p->x + p->z * *(int*) map;
@@ -98,11 +98,11 @@ int __cdecl fcn_004cf6b0(void)
 					if (e != 0) {
 						other = *(int*) (e + 0x184);
 						if (e[8] != 0) {
-							d3_GridPointToWorld(world, p->x, p->z, v8);
-							v8[0] -= *(float*) (*(int*) (other + 0x34) + 0x4c);
-							v8[1] -= *(float*) (*(int*) (other + 0x34) + 0x50);
-							v8[2] -= *(float*) (*(int*) (other + 0x34) + 0x54);
-							d = (float) sqrt(v8[2] * v8[2] + v8[1] * v8[1] + v8[0] * v8[0]);
+							d3_GridPointToWorld(world, p->x, p->z, position);
+							position[0] -= *(float*) (*(int*) (other + 0x34) + 0x4c);
+							position[1] -= *(float*) (*(int*) (other + 0x34) + 0x50);
+							position[2] -= *(float*) (*(int*) (other + 0x34) + 0x54);
+							d = (float) sqrt(position[2] * position[2] + position[1] * position[1] + position[0] * position[0]);
 							if (d < 100.0f) {
 								n = (int) cut_RandMod((unsigned int) ((unsigned char) ((char*) obj)[6] - (unsigned char) ((char*) obj)[5]));
 								dmg = (int) ((double) (unsigned int) (n + (unsigned char) ((char*) obj)[5]) * (*(float*) (e + 0x1c) * 0.01));

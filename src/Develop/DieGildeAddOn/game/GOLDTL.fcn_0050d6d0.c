@@ -27,7 +27,7 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 	int v6;
 	unsigned int v8;
 	int* v9;
-	unsigned int v11;
+	unsigned int loopIndex;
 	int* v12;
 	int v21;
 	int v17;
@@ -101,12 +101,12 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 			cap = (double) v21 * g_662908;
 			v17 = (int) (ratio < cap ? ratio : cap);
 			offer = (float) v17;
-			for (v11 = 0; v11 < a2; v11++) {
+			for (loopIndex = 0; loopIndex < a2; loopIndex++) {
 				v17 = -(gm_RandomMod(0x1e) & 0xffff);
 				v17 = (int) (((double) v17 * 0.01 + g_6629c8) * offer);
-				if (v11 == 0) {
+				if (loopIndex == 0) {
 					v17 = (int) ((double) v17 * 0.25);
-				} else if (v11 == 1) {
+				} else if (loopIndex == 1) {
 					v17 = (int) ((double) v17 * g_662908);
 				}
 				v6 = (gm_RandomMod(6) & 0xffff) + 2;
@@ -125,9 +125,9 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 					        *(unsigned short*) (a0 + 0x27), 1) - g_662914)
 					    * 0.01) * g_662a98));
 				}
-				a3[v11 * 3 + 2] = v18;
-				a3[v11 * 3] = v17;
-				a3[v11 * 3 + 1] = v6;
+				a3[loopIndex * 3 + 2] = v18;
+				a3[loopIndex * 3] = v17;
+				a3[loopIndex * 3 + 1] = v6;
 			}
 			if ((char) a1[1] == 6) {
 				SiteTriple* src;

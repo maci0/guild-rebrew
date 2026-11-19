@@ -37,8 +37,8 @@ int __cdecl fcn_0053dc20(void)
 	char buf[8];
 	int retry;
 	int again;
-	int v10;
-	int v11;
+	int firstOption;
+	int lastOption;
 	int v12;
 	int v13;
 	int mode;
@@ -59,16 +59,16 @@ int __cdecl fcn_0053dc20(void)
 	d2_SetForm(obj, 0);
 	if (fcn_0051e070()) {
 		v4 = io_AppendText(0x1ac0, 0x1ac2, 0x1ac4, 0x1ac2, 0x1ac4, 1);
-		v10 = fcn_00472250(obj, 0, v4);
-		v11 = fcn_00472250(obj, 0, v4 + 1);
-		dlg = d2_CreateRadioGroup(3, v10, v11, fcn_00472250(obj, 0, v4 + 2));
+		firstOption = fcn_00472250(obj, 0, v4);
+		lastOption = fcn_00472250(obj, 0, v4 + 1);
+		dlg = d2_CreateRadioGroup(3, firstOption, lastOption, fcn_00472250(obj, 0, v4 + 2));
 	} else {
 		v4 = io_AppendText(0x1ac0, 0x1ac2, 0x1ac3, 0x1ac4, 0x1ac2, 0x1ac3,
 		    0x1ac4, 1);
-		v10 = fcn_00472250(obj, 0, v4);
+		firstOption = fcn_00472250(obj, 0, v4);
 		v12 = fcn_00472250(obj, 0, v4 + 1);
-		v11 = fcn_00472250(obj, 0, v4 + 2);
-		dlg = d2_CreateRadioGroup(4, v10, v12, v11, fcn_00472250(obj, 0, v4 + 3));
+		lastOption = fcn_00472250(obj, 0, v4 + 2);
+		dlg = d2_CreateRadioGroup(4, firstOption, v12, lastOption, fcn_00472250(obj, 0, v4 + 3));
 	}
 	if (*(int *) 0x7766fc == 0) {
 		mode = 2;
@@ -101,12 +101,12 @@ label_53dd68:
 			if (v2) {
 				goto label_53de5c;
 			}
-			if (d2_CurrentElementId != v10) {
+			if (d2_CurrentElementId != firstOption) {
 				if (d2_CurrentElementId == v12) {
 					mode = 2;
 					goto label_53de0b;
 				}
-				if (d2_CurrentElementId == v11 || g_14cf950 == 0x1c) {
+				if (d2_CurrentElementId == lastOption || g_14cf950 == 0x1c) {
 					mode = 0;
 					fcn_004b20d0(mode);
 				}

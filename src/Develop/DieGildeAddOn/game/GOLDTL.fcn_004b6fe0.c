@@ -11,7 +11,7 @@ int __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
-int __cdecl fcn_004b6fe0(void* a1)
+int __cdecl fcn_004b6fe0(void* noticeRequest)
 {
 	int n;
 	double d;
@@ -20,7 +20,7 @@ int __cdecl fcn_004b6fe0(void* a1)
 	int r;
 	unsigned int len;
 
-	p = gm_LookupEntityRecordById(*(int*) a1);
+	p = gm_LookupEntityRecordById(*(int*) noticeRequest);
 	if (p == 0) {
 		return 1;
 	}
@@ -28,8 +28,8 @@ int __cdecl fcn_004b6fe0(void* a1)
 	d = (double) n + 2.0;
 	n = gm_WalkEntityChain(*(short*) p);
 	r = (int) (((double) n * d) * 0.01);
-	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, r);
-	fcn_004c51a0(*(int*) a1, -1, g_773d75, r);
+	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) noticeRequest + 4) + 0x12e7, r);
+	fcn_004c51a0(*(int*) noticeRequest, -1, g_773d75, r);
 	len = strlen(buf);
 	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    0x100 < len, 0x603, 0);

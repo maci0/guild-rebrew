@@ -20,7 +20,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_005b2280(void* a1, void* a2);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x004e8360 */
-int __cdecl fcn_004e8360(char* a0)
+int __cdecl fcn_004e8360(char* requestData)
 {
 	char* ent;
 	char* setter;
@@ -35,14 +35,14 @@ int __cdecl fcn_004e8360(char* a0)
 
 	other = -1;
 	setter = 0;
-	if (*(int*) (a0 + 7) != -1) {
-		setter = gm_LookupEntityRecordById(*(int*) (a0 + 7));
+	if (*(int*) (requestData + 7) != -1) {
+		setter = gm_LookupEntityRecordById(*(int*) (requestData + 7));
 		if (setter == 0)
 			return 0;
 	}
 	ent = 0;
-	if (*(int*) (a0 + 1) != -1) {
-		ent = gm_LookupEntityRecordById(*(int*) (a0 + 1));
+	if (*(int*) (requestData + 1) != -1) {
+		ent = gm_LookupEntityRecordById(*(int*) (requestData + 1));
 		if (ent == 0)
 			return 0;
 		other = *(int*) (ent + 4);
@@ -50,7 +50,7 @@ int __cdecl fcn_004e8360(char* a0)
 	p = (unsigned char*) &amt_OfficeSlots;
 	i = 0;
 	do {
-		if (*p == *(unsigned char*) a0)
+		if (*p == *(unsigned char*) requestData)
 			break;
 		p += 0x18;
 		i++;
@@ -60,7 +60,7 @@ int __cdecl fcn_004e8360(char* a0)
 	if (i >= 0x2a)
 		return 0;
 	x = gm_LookupEntityRecordById(((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f04);
-	if (x != 0 && *(int*) (x + 4) != *(int*) (a0 + 1)) {
+	if (x != 0 && *(int*) (x + 4) != *(int*) (requestData + 1)) {
 		bit = ((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f08;
 		if (*(unsigned char*) (x + 0x166) == (unsigned char) bit) {
 			*(unsigned char*) (x + 0x166) = 0;
@@ -132,9 +132,9 @@ int __cdecl fcn_004e8360(char* a0)
 	}
 tail:
 	((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f04 = other;
-	((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f14 = *(int*) (a0 + 7);
-	((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f10 = *(unsigned char*) (a0 + 5);
-	if (*(unsigned char*) (a0 + 5) == 3)
+	((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f14 = *(int*) (requestData + 7);
+	((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f10 = *(unsigned char*) (requestData + 5);
+	if (*(unsigned char*) (requestData + 5) == 3)
 		((Rec18*) ((unsigned long)&amt_OfficeSlots + i * 0x18))->f0c = 0;
 	if (setter != 0 && ent != 0 &&
 	    *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c) == *(int*) (ent + 4))

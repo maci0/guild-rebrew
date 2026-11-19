@@ -67,7 +67,7 @@ typedef struct {
 } Req_59ba40;
 
 /* ADDRESS: GOLDTL 0x0059ba40 */
-int __cdecl fcn_0059ba40(char* a0)
+int __cdecl fcn_0059ba40(char* building)
 {
 	Req_59ba40 req;
 	char buf[4];
@@ -88,11 +88,11 @@ int __cdecl fcn_0059ba40(char* a0)
 	int* acc;
 	char* row;
 
-	if (fcn_00525fb0((int) a0))
+	if (fcn_00525fb0((int) building))
 		return 0;
 	h = fcn_00470820(0, 0, "Handel\\Handel_PRODUKTION");
 	d2_CenterDialogWindows(h);
-	fcn_0052a0c0(a0, 0);
+	fcn_0052a0c0(building, 0);
 	d2_SetForm(h, 3);
 	io_AppendText(0xca);
 	fcn_00594340();
@@ -109,13 +109,13 @@ int __cdecl fcn_0059ba40(char* a0)
 	*(unsigned int*) (g_1015ea0 + 0x84 + item * 0x2f4) = 0x54;
 	do {
 		d2_SetForm(h, 2);
-		t = fcn_00502cd0(*(unsigned int*) (a0 + 0x5d), 2, 6, 0, 0xff);
+		t = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0xff);
 		if (!t)
 			return 0;
-		q = fcn_00502cd0(*(unsigned int*) (a0 + 0x5d), 1, 0, 0xfe);
+		q = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 1, 0, 0xfe);
 		if (!q)
 			return 0;
-		r = fcn_00502cd0(*(unsigned int*) (a0 + 0x5d), 2, 6, 0, 0x2a);
+		r = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0x2a);
 		if (!r)
 			return 0;
 		if ((g_100f1dc != -1) && (g_100f884 == h)) {
@@ -139,13 +139,13 @@ int __cdecl fcn_0059ba40(char* a0)
 								if (*p == 0xffff)
 									break;
 								row = *(char**) (*p * 0x21c + 0x7f4e1c);
-								if (row && (*row == 3) && (*(int*) (row + 0x10) == *(int*) (a0 + 1)) && (*(unsigned short*) (row + 0xac) == *(unsigned int*) (0x779160 + k * 0x58)))
+								if (row && (*row == 3) && (*(int*) (row + 0x10) == *(int*) (building + 1)) && (*(unsigned short*) (row + 0xac) == *(unsigned int*) (0x779160 + k * 0x58)))
 									*(char*) (*p * 0x21c + 0x7f4e28) = 1;
 								p += 10;
 							} while ((int) p < 0x7e35d0);
 						} else {
 							fcn_004c35f0();
-							found = fcn_005463a0(2, 0, 3, 3, *(unsigned int*) (a0 + 1));
+							found = fcn_005463a0(2, 0, 3, 3, *(unsigned int*) (building + 1));
 							while (found) {
 								if (*(unsigned short*) (found + 0xac) == *(unsigned int*) (0x779160 + k * 0x58))
 									goto located;
@@ -156,14 +156,14 @@ int __cdecl fcn_0059ba40(char* a0)
 							req.f16 = 0;
 							req.f20 = 0;
 							req.flag36 = 1;
-							req.f8 = *(unsigned int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + 0x7f4ca4);
-							req.f12 = *(unsigned int*) (a0 + 1);
+							req.f8 = *(unsigned int*) (*(unsigned short*) (building + 0x27) * 0x21c + 0x7f4ca4);
+							req.f12 = *(unsigned int*) (building + 1);
 							req.c28 = gm_GameTime;
 							req.c2c = g_7f4c04;
 							req.c30 = g_7f4c08;
 							req.c34 = g_7f4c0c;
 							req.id = *(unsigned short*) (0x779160 + k * 0x58);
-							req.f68 = *(unsigned int*) (a0 + 1);
+							req.f68 = *(unsigned int*) (building + 1);
 							req.f6c = *(unsigned int*) (q + 2);
 							req.f70 = *(unsigned int*) (r + 2);
 							m = fcn_004c5530(&req);
@@ -176,7 +176,7 @@ located:
 								if (*p == 0xffff)
 									break;
 								if (p[4]) {
-									fcn_00529160(a0, g_7746cc, *p, found);
+									fcn_00529160(building, g_7746cc, *p, found);
 									*(char*) (*p * 0x21c + 0x7f4e28) = 0;
 								}
 								p += 10;
@@ -257,8 +257,8 @@ located:
 		itoa(count, buf, 10);
 		fcn_0046f940(item, buf);
 		fcn_00595330(h, 2, count, r, 1);
-		fcn_00595e20(a0, r);
-		fcn_005963f0(h, 1, 0, a0);
+		fcn_00595e20(building, r);
+		fcn_005963f0(h, 1, 0, building);
 	} while (fcn_005373e0((int) fcn_0059ba40, 0x677c7));
 	fcn_00471e30(h);
 	fcn_0052a2d0();

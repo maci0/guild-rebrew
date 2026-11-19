@@ -58,8 +58,8 @@ extern int __cdecl fcn_0064d41a(char*, char*, int);
 int __cdecl fcn_005926f0(void)
 {
 	char v11[0x100];
-	char v13[0x100];
-	char v12[0x48];
+	char profileText[0x100];
+	char inputText[0x48];
 	int ret = 0;
 	int n;
 	int flag;
@@ -195,13 +195,13 @@ int __cdecl fcn_005926f0(void)
 		} else {
 			if (*(int*)0x7725d0 == 0 || *(char*)0x14cf950 == 0x1c) {
 				flag = 0;
-				strcpy(v12, (char*)fcn_00471f80(h));
+				strcpy(inputText, (char*)fcn_00471f80(h));
 				fcn_00472380(h, (char*)0x6b5c60);
-				if (strlen(v12) != 0) {
+				if (strlen(inputText) != 0) {
 					if (g_779c40 != -1)
-						fcn_004ce2a0(g_779c40, v12);
+						fcn_004ce2a0(g_779c40, inputText);
 					else
-						fcn_004ce2a0(0, v12);
+						fcn_004ce2a0(0, inputText);
 				}
 			}
 		}
@@ -309,14 +309,14 @@ int __cdecl fcn_005926f0(void)
 	strcpy((char*)0x7e23ea, (char*)(g_779cb8 + 0x12));
 	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a1e54, (char*)0x7e23ea, (char*)0x7e22c0);
 	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a1e3c, (char*)0x7e240a, (char*)0x7e22c0);
-	fcn_0064d41a(v13, (char*)0x6a81d8, *(int*)0x7e23e4);
-	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a4008, v13, (char*)0x7e22c0);
-	fcn_0064d41a(v13, (char*)0x6a81d8, *(int*)0x7e23e8 & 0xff);
-	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a3ffc, v13, (char*)0x7e22c0);
-	fcn_0064d41a(v13, (char*)0x6a81d8, *(int*)0x7e23e8 >> 8 & 0xff);
-	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a3ff4, v13, (char*)0x7e22c0);
-	fcn_0064d41a(v13, (char*)0x6a81d8, *(unsigned char*)0x7e23e3);
-	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a9bb0, v13, (char*)0x7e22c0);
+	fcn_0064d41a(profileText, (char*)0x6a81d8, *(int*)0x7e23e4);
+	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a4008, profileText, (char*)0x7e22c0);
+	fcn_0064d41a(profileText, (char*)0x6a81d8, *(int*)0x7e23e8 & 0xff);
+	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a3ffc, profileText, (char*)0x7e22c0);
+	fcn_0064d41a(profileText, (char*)0x6a81d8, *(int*)0x7e23e8 >> 8 & 0xff);
+	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a3ff4, profileText, (char*)0x7e22c0);
+	fcn_0064d41a(profileText, (char*)0x6a81d8, *(unsigned char*)0x7e23e3);
+	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a9bb0, profileText, (char*)0x7e22c0);
 	fcn_00469e70();
 	return ret;
 }

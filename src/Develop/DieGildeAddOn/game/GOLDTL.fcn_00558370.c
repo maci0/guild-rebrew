@@ -20,7 +20,7 @@ typedef struct
 /* ADDRESS: GOLDTL 0x00558370 */
 int __cdecl fcn_00558370(int a0)
 {
-    int v2;
+    int savedContext;
     int v3;
     int v5;
     int v6;
@@ -31,7 +31,7 @@ int __cdecl fcn_00558370(int a0)
     VEC rot;
     VEC dir;
 
-    v2 = d3_CurrentContextIndex;
+    savedContext = d3_CurrentContextIndex;
     fcn_004432d0(0, 1);
     v3 = a0;
     gm_ResolveEntityById(&out, 0, 0, *(int *)(v3 + 0xb0));
@@ -110,10 +110,10 @@ int __cdecl fcn_00558370(int a0)
         *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x217) = *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x217) & 0xfe;
         d3_ApplyObjectAnimation(*(int *)(v3 + 0xc8), (char *)0x6a5fb4, 1);
         *(int *)(v3 + 0xec) = g_6b7fac;
-        fcn_004432d0(v2, 1);
+        fcn_004432d0(savedContext, 1);
         return 1;
     }
 fail:
-    fcn_004432d0(v2, 1);
+    fcn_004432d0(savedContext, 1);
     return 0;
 }

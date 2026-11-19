@@ -13,7 +13,7 @@ extern char* g_1052ba4;
  * it here instead of overriding the locked CFLAGS. */
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x00433be0 */
-char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, char* a5, char* a6, int a7)
+char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, char* a5, char* name, int a7)
 {
 	char* p;
 	char* r;
@@ -48,10 +48,10 @@ char* __cdecl fcn_00433be0(char* a0, char* a1, char* a2, char* a3, char* a4, cha
 	p = m_alloc(0x16c, (char*) 0x67a1d4);
 	*(int*) (p + 0x140) = *(int*) (a0 + 0x44);
 	*(int*) (p + 0x148) = 2;
-	r = a6;
+	r = name;
 	do {
 		c = *r;
-		p[r - a6] = c;
+		p[r - name] = c;
 		r++;
 	} while (c != 0);
 

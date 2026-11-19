@@ -7,8 +7,8 @@ int __cdecl fcn_005cf720(unsigned int, unsigned int, void*, int);
 float __cdecl fcn_0050f980(unsigned short, unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x004a55c0 */
-unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned int* a2,
-				  float a3, float a4, unsigned short* a5)
+unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int requestedCount, unsigned int* a2,
+				  float minimumScore, float maximumScore, unsigned short* outIds)
 {
 	unsigned int v12[20];
 	int step;
@@ -30,19 +30,19 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned 
 		v12[1] = *a2;
 		if (fcn_005cf720(*a0, *(unsigned short*) g_77261c, v12, 0) != 0) {
 			idx = 1;
-			*a5 = *(unsigned short*) g_77261c;
+			*outIds = *(unsigned short*) g_77261c;
 		}
 	}
-	if ((a3 > 0.0 || a4 < 100.0) && a3 < a4) {
+	if ((minimumScore > 0.0 || maximumScore < 100.0) && minimumScore < maximumScore) {
 		flag = 1;
 	}
-	if (a1 <= idx) {
+	if (requestedCount <= idx) {
 		return 1;
 	}
 	do {
 		v12[1] = a2[idx];
 		if (idx != 0) {
-			*(unsigned short*) ((char*) v12 + 0x1c + idx * 2) = a5[idx - 1];
+			*(unsigned short*) ((char*) v12 + 0x1c + idx * 2) = outIds[idx - 1];
 		} else {
 			*(unsigned short*) ((char*) v12 + 0x1c) = *a0;
 		}
@@ -59,15 +59,15 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned 
 			id = *a0;
 			if (fcn_005cf720(id, (unsigned short) pos, v12, 0) != 0) {
 				if (flag == 0 ||
-				    (f = fcn_0050f980((unsigned short) pos, *a0, 1), !(f < a3) && !(f > a4))) {
+				    (f = fcn_0050f980((unsigned short) pos, *a0, 1), !(f < minimumScore) && !(f > maximumScore))) {
 					hit = 1;
-					a5[idx] = (unsigned short) pos;
+					outIds[idx] = (unsigned short) pos;
 				}
 			}
 			tries--;
 			pos = (pos + step) % 0x300;
 		} while (hit == 0);
 		idx++;
-	} while (idx < a1);
+	} while (idx < requestedCount);
 	return 1;
 }

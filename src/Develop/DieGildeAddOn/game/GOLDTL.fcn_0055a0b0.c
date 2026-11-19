@@ -19,7 +19,7 @@ void __cdecl fcn_00500bb0(void*, int, int, int);
 void __cdecl fcn_00546190(void*);
 
 /* ADDRESS: GOLDTL 0x0055a0b0 */
-void __cdecl fcn_0055a0b0(char* a0)
+void __cdecl fcn_0055a0b0(char* action)
 {
 	int cnt;
 	int b;
@@ -32,9 +32,9 @@ void __cdecl fcn_0055a0b0(char* a0)
 	unsigned char* r;
 	unsigned char* v3;
 
-	idx = *(int*) (a0 + 0x70);
+	idx = *(int*) (action + 0x70);
 	if (idx == 0xc) {
-		if (*(int*) (a0 + 0xac) == 0) {
+		if (*(int*) (action + 0xac) == 0) {
 			io_FormatTextBuffer(buf, 0x10bc, (unsigned char*) 0x868080 + g_773d75 * 0x2f4);
 		} else {
 			io_FormatTextBuffer(buf, 0x10be, (unsigned char*) 0x868080 + g_773d75 * 0x2f4);
@@ -46,18 +46,18 @@ void __cdecl fcn_0055a0b0(char* a0)
 			}
 			p += 0x21c;
 		} while ((int) p < 0x85a0a2);
-		*(int*) (a0 + 0x70) = 0;
-		fcn_00500bb0((unsigned char*) a0 + 0x52, 1, 0, 0);
+		*(int*) (action + 0x70) = 0;
+		fcn_00500bb0((unsigned char*) action + 0x52, 1, 0, 0);
 		return;
 	} else {
 		if (idx >= 0 && idx < 6) {
-			cnt = fcn_004e8b80(*(int*) (a0 + 0xb0 + idx * 4), 6, arr);
+			cnt = fcn_004e8b80(*(int*) (action + 0xb0 + idx * 4), 6, arr);
 			if (cnt > 0) {
 				r = (unsigned char*) arr;
 				do {
 					v3 = gm_LookupEntityRecordById(*(int*) (r + 4));
 					if (v3 != 0 && fcn_004e8b40(*(unsigned char*) (r + 8), tmp)) {
-						if (*(int*) (a0 + 0xac) == 1
+						if (*(int*) (action + 0xac) == 1
 						    && ((unsigned char) *(tmp + 2) == 9 || ((*(2 + tmp)) & 0xFF) == 6)) {
 							if ((short) gm_RandomMod(3) != 0) {
 								fcn_004e8240(*(unsigned char*) r, 0, 0, 4, 0xff);
@@ -79,7 +79,7 @@ void __cdecl fcn_0055a0b0(char* a0)
 							} while ((int) p < 0x85a0a4);
 							if (n != 0) {
 								if ((*(unsigned char*) (v3 + 2) == 6 || *(unsigned char*) (v3 + 2) == 7)) {
-									if (!(*(int*) (a0 + 0xac) != 0)) {
+									if (!(*(int*) (action + 0xac) != 0)) {
 										io_FormatTextBuffer(buf, 0x10bd, *(unsigned short*) v3);
 										fcn_00545d40(*(int*) (v3 + 4), -1, buf, 1, 0x5fd, (void*) 0x6b5c60);
 									} else {
@@ -93,10 +93,10 @@ void __cdecl fcn_0055a0b0(char* a0)
 					r = r + 0x18;
 				} while (--cnt);
 			}
-			(*(int*) (a0 + 0x70))++;
-			fcn_00500bb0((unsigned char*) a0 + 0x52, 1, 0, 0);
+			(*(int*) (action + 0x70))++;
+			fcn_00500bb0((unsigned char*) action + 0x52, 1, 0, 0);
 			return;
 		}
-		fcn_00546190((unsigned char*) a0);
+		fcn_00546190((unsigned char*) action);
 	}
 }

@@ -12,7 +12,7 @@ int __cdecl gm_MapEntityStatRange(int);
 int __cdecl fcn_00507400(int, int);
 
 /* ADDRESS: GOLDTL 0x004a0bb0 */
-int __cdecl ai_StartBerufsausbildung(int a0, char* ent, int a2, char* out1, char* out2)
+int __cdecl ai_StartBerufsausbildung(int busy, char* ent, int pending, char* out1, char* out2)
 {
 	char* q;
 	char* best;
@@ -22,10 +22,10 @@ int __cdecl ai_StartBerufsausbildung(int a0, char* ent, int a2, char* out1, char
 	int idx;
 	unsigned short w;
 
-	if (a2 != 0) {
+	if (pending != 0) {
 		return 0;
 	}
-	if (a0 != 0) {
+	if (busy != 0) {
 		return 0;
 	}
 	if (*(unsigned char*) (ent + 2) != 5) {

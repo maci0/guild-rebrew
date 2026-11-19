@@ -32,10 +32,10 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 	int list[0x30];
 	int items[0x30];
 	int g;
-	int v4;
+	int closeButton;
 	int v6;
 	unsigned int v7;
-	unsigned int v17;
+	unsigned int selection;
 	int v18;
 	int v2;
 	int i;
@@ -44,7 +44,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 	char* p;
 	char* p2;
 
-	v17 = a2;
+	selection = a2;
 	v2 = 1;
 	v18 = -1;
 	ids[0] = 0x95;
@@ -59,7 +59,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 	d2_SetForm(g, 1);
 	io_AppendText("$Z%2N3$A%1G", *(unsigned short*) (a0 + 0x27), a0);
 	d2_SetForm(g, 4);
-	v4 = fcn_00472250(g, 4, io_AppendText(0x7d));
+	closeButton = fcn_00472250(g, 4, io_AppendText(0x7d));
 	d2_SetForm(g, 3);
 	k = d2_CreateRadioGroup(0);
 	for (i = 0; i < 7; i++) {
@@ -73,7 +73,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 	fcn_00476b60();
 	for (;;) {
 		n = k * 0x8c;
-		if (g_14ce8e0 != 0 || v17 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == v4)) {
+		if (g_14ce8e0 != 0 || selection != 0 || (g_100f1dc != -1 && d2_CurrentElementId == closeButton)) {
 			g_774654 = 1;
 		}
 		if (*(int*) (0x102cbc8 + n) != v18 || v2) {
@@ -114,7 +114,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 0x30; i++) {
 				if (d2_CurrentElementId == list[i]) {
-					v17 = items[i];
+					selection = items[i];
 					break;
 				}
 			}
@@ -123,7 +123,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 			fcn_00469510(k);
 			fcn_00471e30(g);
 			fcn_004116d0();
-			return v17;
+			return selection;
 		}
 	}
 }

@@ -21,7 +21,7 @@ unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050f980(int, int, int);
 
 /* ADDRESS: GOLDTL 0x004a57a0 */
-unsigned int __cdecl fcn_004a57a0(unsigned short *e, int a1, int n, char *src, float lo, float hi, unsigned short *out)
+unsigned int __cdecl fcn_004a57a0(unsigned short *e, int filterFlags, int n, char *src, float lo, float hi, unsigned short *out)
 {
 	int step;
 	float val;
@@ -44,13 +44,13 @@ unsigned int __cdecl fcn_004a57a0(unsigned short *e, int a1, int n, char *src, f
 	q.kind = 2;
 	if (g_77261c != 0) {
 		q.x40 = 0;
-		q.flags = a1;
+		q.flags = filterFlags;
 		if (fcn_005cf720(*e, *((unsigned short *) g_77261c), &q, 0) != 0) {
 			*out = *((unsigned short *) g_77261c);
 			return 1;
 		}
 	}
-	q.flags = a1;
+	q.flags = filterFlags;
 	if (0.0 < lo || hi < 100.0) {
 		if (lo < hi) {
 			flag = 1;

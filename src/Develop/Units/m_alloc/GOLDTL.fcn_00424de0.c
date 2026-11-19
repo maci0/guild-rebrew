@@ -16,7 +16,7 @@ void* __cdecl m_alloc(unsigned int, char*);
 int __cdecl fcn_00423920(char*);
 
 /* ADDRESS: GOLDTL 0x00424de0 */
-int __cdecl fcn_00424de0(char* a0, char* a1)
+int __cdecl fcn_00424de0(char* sampleListPath, char* languageSuffix)
 {
 	void* fp;
 	char buf[0x100];
@@ -35,7 +35,7 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 	if (sbs_BankManager != 0) {
 		goto fail;
 	}
-	fp = fopen(a0, "rt");
+	fp = fopen(sampleListPath, "rt");
 	if (fp == 0) {
 		goto fail;
 	}
@@ -120,7 +120,7 @@ int __cdecl fcn_00424de0(char* a0, char* a1)
 		p = strstr(buf, "%lang");
 		if (p != 0) {
 			*p = 0;
-			strcat(buf, a1);
+			strcat(buf, languageSuffix);
 			strcat(buf, (char*) node + (p - buf) + 5);
 		}
 		*(int*) ((char*) node + 0x100) = fcn_00423920(buf);
@@ -216,7 +216,7 @@ after_banks:
 			p = strstr(buf, "%lang");
 			if (p != 0) {
 				*p = 0;
-				strcat(buf, a1);
+				strcat(buf, languageSuffix);
 				strcat(buf, (char*) node + (p - buf) + 5);
 			}
 			*(int*) ((char*) node + 0x100) = fcn_00423920(buf);

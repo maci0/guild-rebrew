@@ -6,7 +6,7 @@ extern int g_778d24;
 extern float g_6ab3e0;
 
 /* ADDRESS: GOLDTL 0x005b00f0 */
-void __cdecl fcn_005b00f0(char* obj, int a2, int a3)
+void __cdecl fcn_005b00f0(char* obj, int offsetX, int offsetY)
 {
 	double t;
 	float a;
@@ -29,6 +29,6 @@ void __cdecl fcn_005b00f0(char* obj, int a2, int a3)
 	} else {
 		w = w * 51.0f + b;
 	}
-	*(float*) (obj + 0x10) = (float) a2 + (float) g_778d24 * 0.5f + v;
-	*(float*) (obj + 0x14) = (float) g_778d20 * 0.5f + (float) a3 + w;
+	*(float*) (obj + 0x10) = (float) offsetX + (float) g_778d24 * 0.5f + v;
+	*(float*) (obj + 0x14) = (float) g_778d20 * 0.5f + (float) offsetY + w;
 }

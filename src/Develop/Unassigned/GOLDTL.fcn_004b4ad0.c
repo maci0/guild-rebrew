@@ -12,17 +12,17 @@ extern float g_6628a0;
 
 void __cdecl fcn_004b53c0(int, int, stat12*);
 
-int __cdecl fcn_004b4ad0(int a1)
+int __cdecl fcn_004b4ad0(int key)
 {
 	stat12 s;
 
-	fcn_004b53c0(a1, 0x13, &s);
+	fcn_004b53c0(key, 0x13, &s);
 	if (s.f < g_6628a0)
 		return 0;
-	fcn_004b53c0(a1, 4, &s);
+	fcn_004b53c0(key, 4, &s);
 	if (s.n > 0 && s.f < g_6628a0)
 		return 0;
-	fcn_004b53c0(a1, 0x10, &s);
+	fcn_004b53c0(key, 0x10, &s);
 	if (s.n > 0 && s.f < g_6628a0)
 		return 0;
 	return 1;

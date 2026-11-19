@@ -8,22 +8,22 @@ int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int 
 
 void __cdecl fcn_004e04f0(char* a0)
 {
-	char* v2;
-	char* v3;
+	char* first;
+	char* second;
 	char* w;
 	char* p;
-	int v4[6];
-	int v5[6];
+	int slot[6];
+	int role[6];
 	char buf[0x400];
 
-	v2 = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
-	v3 = gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
-	if (v2 != 0 && v3 != 0) {
-		w = gm_GetEntitySkill(v2, 3) > gm_GetEntitySkill(v3, 3) ? v3 : v2;
+	first = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
+	second = gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
+	if (first != 0 && second != 0) {
+		w = gm_GetEntitySkill(first, 3) > gm_GetEntitySkill(second, 3) ? second : first;
 		if (*(unsigned char*) (w + 0x166) != 0) {
-			if (srv_GetEntityOfficeSlot((unsigned char*) w, v5, v4) != 0) {
+			if (srv_GetEntityOfficeSlot((unsigned char*) w, role, slot) != 0) {
 				if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + g_774970 * 0x21c)) {
-					fcn_004e8240(*(unsigned char*) v4, 0, 0, 4, 0xff);
+					fcn_004e8240(*(unsigned char*) slot, 0, 0, 4, 0xff);
 					p = (char*) 0x7f4ca2;
 					do {
 						if (*p == 6 || *p == 7) {

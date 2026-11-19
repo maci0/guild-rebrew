@@ -74,7 +74,7 @@ int __cdecl fcn_004235b0(char* bank, const char* name, int prio, int loop,
 void __cdecl fcn_00589390(void);
 
 /* ADDRESS: GOLDTL 0x00588aa0 */
-int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
+int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 {
 	Particle p0;
 	Particle p1;
@@ -109,10 +109,10 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 	ex = 0;
 	ey = 0;
 	ez = 0;
-	slot0 = fcn_00471f80(a0->slot0);
-	slot1 = fcn_00471f80(a0->slot1);
+	slot0 = fcn_00471f80(emitter->slot0);
+	slot1 = fcn_00471f80(emitter->slot1);
 	if (!fcn_004f0ff0((char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
-			slot0, slot1, a0->mode + 1, &o1, &o2)) {
+			slot0, slot1, emitter->mode + 1, &o1, &o2)) {
 		return 0;
 	}
 	fcn_004f11c0(a1, &spread, &scale);
@@ -123,34 +123,34 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 		* ((float) slot1 * 0.01f)
 		+ ((CANNON_ROW_588AA0*)0x665288)[slot0].f00;
 	fcn_00589390();
-	dir1 = a0->dir1; dir2 = a0->dir2; dir3 = a0->dir3;
-	if (a0->mode == 0) {
+	dir1 = emitter->dir1; dir2 = emitter->dir2; dir3 = emitter->dir3;
+	if (emitter->mode == 0) {
 		pos0.x = dir1.x * 50.0f; pos0.y = dir1.y * 50.0f; pos0.z = dir1.z * 50.0f;
-		pos0.x += a0->pos.x; pos0.y += a0->pos.y;
-		pos0.z += a0->pos.z;
-		fcn_005e8e80(&p0, &pos0, &a0->dir1, speed, b, 7874.0f);
-		fcn_005e8fe0((float*) &p0, spread, &a0->dir2, spread, &a0->dir3,
+		pos0.x += emitter->pos.x; pos0.y += emitter->pos.y;
+		pos0.z += emitter->pos.z;
+		fcn_005e8e80(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
+		fcn_005e8fe0((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
 		h = fcn_004f0a30(a1,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
 			(unsigned int*) &p0, 0, 0,
 			fcn_004f0eb0(slot0, slot1, 1), o1, (unsigned int) o2);
 		sel = 1;
-	} else if (a0->mode == 1) {
-		px = dir1.x * 40.0f + a0->pos.x;
-		py = dir1.y * 40.0f + a0->pos.y;
-		pz = dir1.z * 40.0f + a0->pos.z;
+	} else if (emitter->mode == 1) {
+		px = dir1.x * 40.0f + emitter->pos.x;
+		py = dir1.y * 40.0f + emitter->pos.y;
+		pz = dir1.z * 40.0f + emitter->pos.z;
 		pos1.x = dir2.x * 5.0f + px;
 		pos1.y = dir2.y * 5.0f + py;
 		pos1.z = dir2.z * 5.0f + pz;
 		pos0.x = dir2.x * (-5.0f) + px;
 		pos0.y = dir2.y * (-5.0f) + py;
 		pos0.z = dir2.z * (-5.0f) + pz;
-		fcn_005e8e80(&p1, &pos1, &a0->dir1, speed, b, 7874.0f);
-		fcn_005e8e80(&p0, &pos0, &a0->dir1, speed, b, 7874.0f);
-		fcn_005e8fe0((float*) &p1, spread, &a0->dir2, spread, &a0->dir3,
+		fcn_005e8e80(&p1, &pos1, &emitter->dir1, speed, b, 7874.0f);
+		fcn_005e8e80(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
+		fcn_005e8fe0((float*) &p1, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
-		fcn_005e8fe0((float*) &p0, spread, &a0->dir2, spread, &a0->dir3,
+		fcn_005e8fe0((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
 		h = fcn_004f0a30(a1,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
@@ -160,10 +160,10 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 		dx = -5;
 		dy = 0;
 		ey = 40;
-	} else if (a0->mode == 2) {
-		px = dir1.x * 40.0f + a0->pos.x;
-		py = dir1.y * 40.0f + a0->pos.y;
-		pz = dir1.z * 40.0f + a0->pos.z;
+	} else if (emitter->mode == 2) {
+		px = dir1.x * 40.0f + emitter->pos.x;
+		py = dir1.y * 40.0f + emitter->pos.y;
+		pz = dir1.z * 40.0f + emitter->pos.z;
 		pos2.x = dir2.x * 5.0f
 			+ dir3.x * (-3.0f) + px;
 		pos2.y = dir2.y * 5.0f
@@ -179,14 +179,14 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 			+ dir3.y * (-3.0f) + py;
 		pos0.z = dir2.z * (-5.0f)
 			+ dir3.z * (-3.0f) + pz;
-		fcn_005e8e80(&p2, &pos2, &a0->dir1, speed, b, 7874.0f);
-		fcn_005e8e80(&p0, &pos0, &a0->dir1, speed, b, 7874.0f);
-		fcn_005e8e80(&p1, &pos1, &a0->dir1, speed, b, 7874.0f);
-		fcn_005e8fe0((float*) &p2, spread, &a0->dir2, spread, &a0->dir3,
+		fcn_005e8e80(&p2, &pos2, &emitter->dir1, speed, b, 7874.0f);
+		fcn_005e8e80(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
+		fcn_005e8e80(&p1, &pos1, &emitter->dir1, speed, b, 7874.0f);
+		fcn_005e8fe0((float*) &p2, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
-		fcn_005e8fe0((float*) &p0, spread, &a0->dir2, spread, &a0->dir3,
+		fcn_005e8fe0((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
-		fcn_005e8fe0((float*) &p1, spread, &a0->dir2, spread, &a0->dir3,
+		fcn_005e8fe0((float*) &p1, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
 		h = fcn_004f0a30(a1,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
@@ -213,19 +213,19 @@ int __cdecl fcn_00588aa0(Emitter* a0, char* a1)
 		h = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
 		h2 = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
 		h3 = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
-		fcn_00428340(h, 4, 5, dy, 40, a0->frame2);
-		fcn_00428340(h2, 4, dx, dy, ey, a0->frame2);
-		fcn_00428340(h3, 4, 0, ex, ez, a0->frame2);
+		fcn_00428340(h, 4, 5, dy, 40, emitter->frame2);
+		fcn_00428340(h2, 4, dx, dy, ey, emitter->frame2);
+		fcn_00428340(h3, 4, 0, ex, ez, emitter->frame2);
 		return fcn_004235b0(0, "Explosion", 1, 1, 0x3f, 0x7f, 0);
 	}
 	if (sel == 2) {
 		h = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
 		h2 = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
-		fcn_00428340(h, 4, 5, 0, 40, a0->frame1);
-		fcn_00428340(h2, 4, dx, dy, ey, a0->frame1);
+		fcn_00428340(h, 4, 5, 0, 40, emitter->frame1);
+		fcn_00428340(h2, 4, dx, dy, ey, emitter->frame1);
 		return fcn_004235b0(0, "Explosion", 2, 1, 0x3f, 0x7f, 0);
 	}
 	h = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
-	fcn_00428340(h, 4, 0, 0, 50, a0->frame0);
+	fcn_00428340(h, 4, 0, 0, 50, emitter->frame0);
 	return fcn_004235b0(0, "Explosion", 3, 1, 0x3f, 0x7f, 0);
 }

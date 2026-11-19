@@ -34,7 +34,7 @@ float __cdecl fcn_00507e70(void*, unsigned short*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005c06e0 */
-int __cdecl fcn_005c06e0(unsigned short* a0)
+int __cdecl fcn_005c06e0(unsigned short* entityRecord)
 {
 	int result;
 	int h1;
@@ -49,23 +49,23 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 	Slot5c06* me;
 
 	result = 0;
-	if (!a0)
+	if (!entityRecord)
 		goto none;
-	if (*a0 == 0xffff)
+	if (*entityRecord == 0xffff)
 		goto none;
-	if (*a0 == g_774970)
+	if (*entityRecord == g_774970)
 		goto none;
 	if (!fcn_00525f60(&g_7f4ca0[g_774970], 2))
 		return 0;
-	if (!fcn_00579640(a0, &g_7f4ca0[g_774970])) {
-		io_FormatTextBuffer(text, 0x409f, *a0);
+	if (!fcn_00579640(entityRecord, &g_7f4ca0[g_774970])) {
+		io_FormatTextBuffer(text, 0x409f, *entityRecord);
 		fcn_00526120(text, 0);
 		return 0;
 	}
 	me = &g_7f4ca0[g_774970];
-	r = CountMatchingStraftatEntries(*(int*) (a0 + 2), g_774970);
+	r = CountMatchingStraftatEntries(*(int*) (entityRecord + 2), g_774970);
 	if (r <= 0) {
-		io_FormatTextBuffer(text, 0x1756, *a0);
+		io_FormatTextBuffer(text, 0x1756, *entityRecord);
 		fcn_00526120(text, 0);
 		return 0;
 	}
@@ -75,7 +75,7 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
-	t = io_AppendText(0x1759, r, (r != 1) + 0x1752, *a0, *a0);
+	t = io_AppendText(0x1759, r, (r != 1) + 0x1752, *entityRecord, *entityRecord);
 	h1 = fcn_00472250(dlg, 1, t);
 	h2 = fcn_00472250(dlg, 1, t + 1);
 	memset(ids, 0xff, sizeof(ids));
@@ -93,18 +93,18 @@ int __cdecl fcn_005c06e0(unsigned short* a0)
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == h1) {
 				fcn_004c6ae0(me->f4, -2);
-				f = fcn_00507e70(me, a0, 4);
+				f = fcn_00507e70(me, entityRecord, 4);
 				if (gm_RandomFloat01() + f >= 1.0f) {
 					ev[4] = 0x2e;
-					*(int*) (ev + 8) = *(int*) (a0 + 2);
+					*(int*) (ev + 8) = *(int*) (entityRecord + 2);
 					*(int*) (ev + 0xc) = -1;
 					ev[0x36] = 2;
 					*(int*) (ev + 0x5c) = me->f4;
-					*(int*) (ev + 0x58) = *(int*) (a0 + 2);
+					*(int*) (ev + 0x58) = *(int*) (entityRecord + 2);
 					fcn_004c5530(ev);
-					io_FormatTextBuffer(text, 0x175b, *a0);
+					io_FormatTextBuffer(text, 0x175b, *entityRecord);
 				} else {
-					io_FormatTextBuffer(text, 0x175c, *a0, *a0);
+					io_FormatTextBuffer(text, 0x175c, *entityRecord, *entityRecord);
 				}
 				fcn_00526120(text, 0);
 				g_774654 = 1;

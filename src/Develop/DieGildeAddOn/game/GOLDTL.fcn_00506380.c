@@ -10,7 +10,7 @@ int __cdecl gm_MapEntityStatRange(int typ);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00506380 */
-int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
+int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2, int a3)
 {
 	unsigned char* rec;
 	unsigned char* geb;
@@ -26,12 +26,12 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 	if (a1 != 0) {
 		rec = (unsigned char*) (lpGebaeudePROT +
 		                       (unsigned int) *a1 * 0x24d);
-		found = gm_CheckStatLevel(a0, fcn_00507910(*rec));
+		found = gm_CheckStatLevel(playerIndex, fcn_00507910(*rec));
 		typ = *rec;
 		if (typ == 0x1d)
-			return fcn_005903d0((void*) (g_7f4ca0 + a0 * 0x21c), a1, a2);
+			return fcn_005903d0((void*) (g_7f4ca0 + playerIndex * 0x21c), a1, a2);
 		if ((unsigned int) (typ - 1) <= 0x20) {
-			geb = (unsigned char*) (g_7f4ca0 + a0 * 0x21c);
+			geb = (unsigned char*) (g_7f4ca0 + playerIndex * 0x21c);
 			switch (typ) {
 			case 1:
 			case 3:
@@ -50,21 +50,21 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 				break;
 			case 2:
 			case 30:
-				if (*(unsigned short*) (a1 + 0x25) == a0)
+				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
 					result = 0x3c;
-				if (*(unsigned short*) (a1 + 0x27) == a0)
+				if (*(unsigned short*) (a1 + 0x27) == playerIndex)
 					result |= 0x5661;
 				break;
 			case 33:
-				if (*(unsigned short*) (a1 + 0x25) == a0)
+				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
 					result = 0x3c;
-				if (*(unsigned short*) (a1 + 0x27) == a0)
+				if (*(unsigned short*) (a1 + 0x27) == playerIndex)
 					result |= 0x620;
 				break;
 			case 4:
-				if (*(unsigned short*) (a1 + 0x25) == a0)
+				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
 					result = 0x50bd;
-				if (*(unsigned short*) (a1 + 0x27) != a0)
+				if (*(unsigned short*) (a1 + 0x27) != playerIndex)
 					break;
 				result |= 0x44e1;
 				for (i = 0; i < 6; i++) {
@@ -78,9 +78,9 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 				}
 				break;
 			case 19:
-				if (*(unsigned short*) (a1 + 0x25) == a0)
+				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
 					result = 0x50bd;
-				if (*(unsigned short*) (a1 + 0x27) != a0)
+				if (*(unsigned short*) (a1 + 0x27) != playerIndex)
 					break;
 				result |= 0x44e1;
 				for (i = 0; i < 6; i++) {
@@ -102,9 +102,9 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 			case 22:
 			case 32:
 				result = 0x81;
-				if (*(unsigned short*) (a1 + 0x25) == a0)
+				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
 					result = 0x10bd;
-				if (*(unsigned short*) (a1 + 0x27) != a0)
+				if (*(unsigned short*) (a1 + 0x27) != playerIndex)
 					break;
 				result |= 0x460;
 				for (i = 0; i < 6; i++) {
@@ -120,9 +120,9 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 				break;
 			case 6:
 				result = 0x5001;
-				if (*(unsigned short*) (a1 + 0x25) == a0)
+				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
 					result = 0x503d;
-				if (*(unsigned short*) (a1 + 0x27) == a0)
+				if (*(unsigned short*) (a1 + 0x27) == playerIndex)
 					result |= 0x5660;
 				if (*(unsigned char*) (geb + 0x166) == 0xf)
 					result |= 0x30;
@@ -131,9 +131,9 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 				result = 1;
 				if (a2 != 0 && (*a2 == 0xe6 || *a2 == 0xe5))
 					result = 0x1001;
-				if (*(unsigned short*) (a1 + 0x25) == a0)
+				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
 					result |= 0x103c;
-				if (*(unsigned short*) (a1 + 0x27) == a0) {
+				if (*(unsigned short*) (a1 + 0x27) == playerIndex) {
 					result |= 0x4460;
 					for (i = 0; i < 6; i++) {
 						ch = rec[0x223 + i];
@@ -153,9 +153,9 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 				break;
 			case 9:
 				result = 1;
-				if (*(unsigned short*) (a1 + 0x25) == a0)
+				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
 					result = 0x403d;
-				if (*(unsigned short*) (a1 + 0x27) != a0)
+				if (*(unsigned short*) (a1 + 0x27) != playerIndex)
 					break;
 				result |= 0x54e1;
 				for (i = 0; i < 6; i++) {
@@ -176,11 +176,11 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 			case 13:
 			case 17:
 			case 31:
-				if (a2 == 0 || *(unsigned short*) (a1 + 0x27) == a0)
+				if (a2 == 0 || *(unsigned short*) (a1 + 0x27) == playerIndex)
 					result = 0x81;
-				if (*(unsigned short*) (a1 + 0x25) == a0)
+				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
 					result |= 0x403c;
-				if (*(unsigned short*) (a1 + 0x27) == a0)
+				if (*(unsigned short*) (a1 + 0x27) == playerIndex)
 					result |= 0x5670;
 				if (a2 == 0)
 					goto finish;
@@ -188,7 +188,7 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 					result |= 0x4001;
 				break;
 			case 16:
-				if (*(unsigned short*) (a1 + 0x27) == a0) {
+				if (*(unsigned short*) (a1 + 0x27) == playerIndex) {
 					result = 0x54e1;
 					for (i = 0; i < 6; i++) {
 						ch = rec[0x223 + i];
@@ -200,7 +200,7 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 						}
 					}
 				}
-				if (*(unsigned short*) (a1 + 0x25) == a0)
+				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
 					result |= 0x3c;
 				break;
 			case 23:
@@ -234,7 +234,7 @@ int __cdecl fcn_00506380(int a0, unsigned char* a1, unsigned short* a2, int a3)
 		}
 	} else if (a3 != 0) {
 		if (*(int*) (a3 + 0x16c) != 0 &&
-		    *(unsigned short*) (*(int*) (a3 + 0x16c) + 0x27) == a0)
+		    *(unsigned short*) (*(int*) (a3 + 0x16c) + 0x27) == playerIndex)
 			result = 0x800;
 	} else {
 		if (a2 == 0)

@@ -34,12 +34,12 @@ int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 	int ebp;
 	int flag;
 	int dlg;
-	int v18 = -1;
+	int confirm = -1;
 	int vc = -1;
 	int r;
 	int hv;
 	int uv;
-	int v10;
+	int slider;
 
 	v14 = (int) ((float) gm_WalkEntityChain(SHP_ID) * 0.005f);
 	if (v14 < 0x640) {
@@ -76,12 +76,12 @@ int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 	if (flag != 0) {
 		io_AppendText(0x1f4f);
 	} else {
-		v10 = fcn_00472250(dlg, 1,
+		slider = fcn_00472250(dlg, 1,
 		    io_AppendText(0x1f4d, *arg3, *(unsigned char*) &g_773d75));
 		hv = io_AppendText(0x1f4e);
-		v18 = fcn_00472250(dlg, 1, hv);
+		confirm = fcn_00472250(dlg, 1, hv);
 		vc = fcn_00472250(dlg, 1, hv + 1);
-		fcn_00472380(v10,
+		fcn_00472380(slider,
 		    fcn_0050b710(v14, *(unsigned char*) &g_773d75),
 		    fcn_0050b710(ebp, *(unsigned char*) &g_773d75),
 		    fcn_0050b710(v14, *(unsigned char*) &g_773d75));
@@ -95,8 +95,8 @@ int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 		if (*(int*) &g_100f1dc == -1 || flag != 0) {
 			continue;
 		}
-		if (d2_CurrentElementId == v18) {
-			hv = fcn_00471f80(v10);
+		if (d2_CurrentElementId == confirm) {
+			hv = fcn_00471f80(slider);
 			uv = fcn_0050b750(hv, *(unsigned char*) &g_773d75);
 			if (fcn_00526010((void*) ((unsigned long)&g_7f4ca0 +
 				*(unsigned short*) &g_774970 * 0x21c), uv,

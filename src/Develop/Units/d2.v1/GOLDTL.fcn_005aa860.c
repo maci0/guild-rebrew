@@ -26,7 +26,7 @@ void __cdecl fcn_004eba60(char*, Req*);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005aa860(unsigned short* a1)
+int __cdecl fcn_005aa860(unsigned short* target)
 {
 	Req s;
 	int r;
@@ -47,13 +47,13 @@ int __cdecl fcn_005aa860(unsigned short* a1)
 	} else {
 		v = (unsigned char) g_7f4ca0[g_774970 * 540 + 0x169] + 0x27b;
 	}
-	io_AppendText(0x167f, v, 8, *a1);
+	io_AppendText(0x167f, v, 8, *target);
 	do {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
 		if (g_100f1dc == 2) {
-			s.x4 = *(int*) (a1 + 2);
+			s.x4 = *(int*) (target + 2);
 			s.x0 = 1;
 			fcn_004eba60(g_7f4ca0 + g_774970 * 540, &s);
 			g_774654 = 3;

@@ -15,7 +15,7 @@ extern char g_1040600;
 
 /* ADDRESS: GOLDTL 0x00456750 */
 void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
-                          char a4, char a5, int a6)
+                          char a4, char tryAdditionalModes, int a6)
 {
 	int r;
 	unsigned int h;
@@ -36,7 +36,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 	fcn_00456530(a2, a3);
 	r = 0;
 	g_6b89b8 = r;
-	if (a5) {
+	if (tryAdditionalModes) {
 		r = SET_MODE(0x1c);
 		if (r >= 0) {
 			r = 0x1c;

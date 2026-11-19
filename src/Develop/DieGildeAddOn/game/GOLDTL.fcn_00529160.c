@@ -56,14 +56,14 @@ typedef struct {
  * object type selects one of two scene-hook paths, then the shown object is
  * replaced by a4. */
 /* ADDRESS: GOLDTL 0x00529160 */
-void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsigned char* a4)
+void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index, unsigned char* newShown)
 {
 	Slot_529160* slot;
 	Rec_529160* rec;
 	char* old;
 	char* r;
 	void* o;
-	int v7;
+	int contextIdx;
 	int cls;
 	int obj;
 	unsigned int tick;
@@ -75,32 +75,32 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 	}
 	slot = (Slot_529160*) (g_7f4ca0 + index * 0x21c);
 	old = *(char**) (g_7f4ca0 + index * 0x21c + 0x17c);
-	if ((char*) a4 == old) {
+	if ((char*) newShown == old) {
 		return;
 	}
-	if (a1 == 0) {
-		a1 = (unsigned char*) slot->active;
+	if (activeRec == 0) {
+		activeRec = (unsigned char*) slot->active;
 	}
 	if (a2 != 0) {
-		rec = (Rec_529160*) ((unsigned char*) g_entity_type_table + (unsigned int) *a1 * 0x24d);
+		rec = (Rec_529160*) ((unsigned char*) g_entity_type_table + (unsigned int) *activeRec * 0x24d);
 		if (*(short*) a2 != 0xfd) {
-			v7 = fcn_00515540(a2);
+			contextIdx = fcn_00515540(a2);
 		} else {
-			v7 = fcn_005155e0(a1);
+			contextIdx = fcn_005155e0(activeRec);
 		}
 		cls = fcn_00500e20((int*) &gm_GameTime);
 		tick = g_7f4c04 & 0xffff;
 		if ((((float) (int) tick < g_696550[cls] && g_696540[cls] <= (float) (int) tick)
 		     || rec->type == 4 || rec->type == 0x13 || rec->type == 0x1d)
-		    && v7 >= 0 && slot->owner != 0
-		    && v7 * 0x3dc + 0x10432c0 != ((Rec_529160*) slot->owner)->field88) {
-			r = ch_CreateAction(slot->owner, 0x33, v7, *(int*) (a1 + 1), *(int*) (a2 + 2));
+		    && contextIdx >= 0 && slot->owner != 0
+		    && contextIdx * 0x3dc + 0x10432c0 != ((Rec_529160*) slot->owner)->field88) {
+			r = ch_CreateAction(slot->owner, 0x33, contextIdx, *(int*) (activeRec + 1), *(int*) (a2 + 2));
 			strcpy(r + 0x70, "sv_ChangePlayerHE");
 
 
 
 
-			r = ch_CreateAction(slot->owner, 0x39, v7);
+			r = ch_CreateAction(slot->owner, 0x39, contextIdx);
 			strcpy(r + 0x70, "sv_ChangePlayerHE");
 
 
@@ -168,9 +168,9 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 			fcn_00428720((char*) o);
 		}
 	}
-	if (a4 != 0) {
-		fcn_00529000(slot->id, (char*) a4);
-		switch (*a4) {
+	if (newShown != 0) {
+		fcn_00529000(slot->id, (char*) newShown);
+		switch (*newShown) {
 		case 3:
 		case 4:
 		case 8:
@@ -178,16 +178,16 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 		case 20:
 		case 21:
 		case 140:
-			fcn_005290d0((char*) a4);
+			fcn_005290d0((char*) newShown);
 			break;
 		}
-		type = *a4;
+		type = *newShown;
 	}
-	if ((slot->shown == 0 || a4 != 0) && type == 0) {
+	if ((slot->shown == 0 || newShown != 0) && type == 0) {
 		return;
 	}
 	fcn_004c4510((char*) slot, slot->handle);
 	fcn_004c4700(1, 1, 0x180, &type);
 	fcn_004c53a0();
-	slot->shown = (char*) a4;
+	slot->shown = (char*) newShown;
 }

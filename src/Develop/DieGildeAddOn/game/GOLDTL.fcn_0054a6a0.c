@@ -27,15 +27,15 @@ void __cdecl fcn_0054a6a0(int a0)
 	int v2;
 	int v3;
 	int v4;
-	int v7;
+	int entity;
 	unsigned int v14;
 	int v15;
 	int pair[2];
-	char v12[256];
+	char message[256];
 	char v1;
 
 	v2 = a0;
-	v7 = 0;
+	entity = 0;
 	if (*(int*) (a0 + 0x70) == -1 || *(int*) (a0 + 0x70) == -2) {
 		fcn_00546190(a0);
 		return;
@@ -48,18 +48,18 @@ void __cdecl fcn_0054a6a0(int a0)
 		return;
 	}
 	*(int*) (v2 + 0x84) = 0xffffffff;
-	gm_ResolveEntityById(&v7, 0, 0, *(int*) (v2 + 0x10));
-	if (!v7) {
+	gm_ResolveEntityById(&entity, 0, 0, *(int*) (v2 + 0x10));
+	if (!entity) {
 		fcn_004c5620(0xffffffff, v2);
 		return;
 	}
-	if (*(unsigned short*) (v7 + 0x27) == 0xffff) {
+	if (*(unsigned short*) (entity + 0x27) == 0xffff) {
 		fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
 		*(unsigned short*) (v2 + 0x56) = 7;
 		fcn_004c5620(0, v2);
 		return;
 	}
-	v3 = fcn_00502cd0(*(int*) (v7 + 0x5d), 1, 0, 0x1b5);
+	v3 = fcn_00502cd0(*(int*) (entity + 0x5d), 1, 0, 0x1b5);
 	switch (*(int*) (v2 + 0x70)) {
 	case 2: {
 		char v8;
@@ -74,10 +74,10 @@ void __cdecl fcn_0054a6a0(int a0)
 			if (v4) {
 				v15 = v4;
 				fcn_005b23e0(
-				    (int) ((unsigned int) *(unsigned short*) (v7 + 0x27) *
+				    (int) ((unsigned int) *(unsigned short*) (entity + 0x27) *
 				               0x21c +
 				           0x7f4ca0),
-				    v4, v7);
+				    v4, entity);
 			}
 			fcn_004c4510(v3, *(int*) (v3 + 2));
 			fcn_004c4570(1, 1, 0x22, (int*) &v8);
@@ -85,25 +85,25 @@ void __cdecl fcn_0054a6a0(int a0)
 			fcn_004c4570(1, 1, 0x1d, (int*) &v9);
 			fcn_004c4570(4, 1, 0x1e, (int*) &v10);
 			fcn_004c5360();
-			v4 = fcn_004fd4f0(v7, pair);
+			v4 = fcn_004fd4f0(entity, pair);
 			if (v4) {
-				v1 = *(char*) ((unsigned int) *(unsigned short*) (v7 + 0x27) *
+				v1 = *(char*) ((unsigned int) *(unsigned short*) (entity + 0x27) *
 			                       0x21c +
 			                   0x7f4ca2);
 				if (v1 == 6 || v1 == 7) {
-					io_FormatTextBuffer(v12, 0x19a7, pair[0], pair[1]);
+					io_FormatTextBuffer(message, 0x19a7, pair[0], pair[1]);
 					fcn_00545d40(*(int*) ((unsigned int) *
-					                              (unsigned short*) (v7 + 0x27) *
+					                              (unsigned short*) (entity + 0x27) *
 					                              0x21c +
 					                          0x7f4ca4),
-					             0xffffffff, v12, 0, 0x5ff, (char*) 0x6b5c60);
+					             0xffffffff, message, 0, 0x5ff, (char*) 0x6b5c60);
 				}
 				fcn_004c5150(*(int*) ((unsigned int) *
-				                          (unsigned short*) (v7 + 0x27) *
+				                          (unsigned short*) (entity + 0x27) *
 				                          0x21c +
 				                      0x7f4ca4),
 				             0xffffffff, g_773d75, pair[1]);
-				fcn_004c4510(v7, *(int*) (v7 + 1));
+				fcn_004c4510(entity, *(int*) (entity + 1));
 				fcn_004c4570(4, 1, 0x69, &pair[1]);
 				fcn_004c5360();
 			}
@@ -119,7 +119,7 @@ void __cdecl fcn_0054a6a0(int a0)
 		*(int*) (v2 + 0x84) = fcn_004c5620(2, v2);
 		return;
 	case 0:
-		v4 = (unsigned int) *(unsigned short*) (v7 + 0x27) * 0x21c;
+		v4 = (unsigned int) *(unsigned short*) (entity + 0x27) * 0x21c;
 		v1 = *(char*) (v4 + 0x7f4ca2);
 		if (v1 != 6 && v1 != 7) {
 			if (!v3 || !fcn_00493200(v4 + 0x7f4ca0, v3)) {

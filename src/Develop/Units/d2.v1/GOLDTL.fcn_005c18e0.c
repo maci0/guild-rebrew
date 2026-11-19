@@ -66,9 +66,9 @@ void __cdecl fcn_005c18e0(int a0,int a1)
   unsigned short *v2;
   int v20 [4];
   int commit; 
-  char v22 [256];
-  char v23 [256];
-  char v26 [0xf8];
+  char buttonLabelA [256];
+  char buttonLabelB [256];
+  char message [0xf8];
   int v27; 
   unsigned int v28; 
   unsigned int v29; 
@@ -319,9 +319,9 @@ label_5c221e:
               fcn_00472640(v12,0);
             d2_SetForm(v9,3);
             io_AppendText(0x6811b0);
-            io_FormatTextBuffer(v22,0x176c);
-            io_FormatTextBuffer(v23,0x176d);
-            fcn_00533a60(d2_CurrentWindowId,0,buttons,2,v22,v23);
+            io_FormatTextBuffer(buttonLabelA,0x176c);
+            io_FormatTextBuffer(buttonLabelB,0x176d);
+            fcn_00533a60(d2_CurrentWindowId,0,buttons,2,buttonLabelA,buttonLabelB);
             commit = buttons[0];
             v38 = buttons[1];
             if (!v10)
@@ -352,12 +352,12 @@ label_5c221e:
               else {
                 v8 = 0;
                 v27 = -1;
-                *(unsigned char*) (v26 + 4) = 0x37;
-                *(unsigned int*) (v26 + 0x6c) = 0;
-                *(unsigned char*) (v26 + 0x36) = 2;
-                *(unsigned int*) (v26 + 8) = *(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4);
-                *(unsigned int*) (v26 + 0xc) = *(unsigned int *)(a0 + 1);
-                fcn_004c5530(v26);
+                *(unsigned char*) (message + 4) = 0x37;
+                *(unsigned int*) (message + 0x6c) = 0;
+                *(unsigned char*) (message + 0x36) = 2;
+                *(unsigned int*) (message + 8) = *(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4);
+                *(unsigned int*) (message + 0xc) = *(unsigned int *)(a0 + 1);
+                fcn_004c5530(message);
                 v10 = 0;
                 do {
                   v12 = v20[v8];
@@ -365,17 +365,17 @@ label_5c221e:
                     fcn_004c4510(a1,*(unsigned int *)(a1 + 2));
                     fcn_004c4570(4,1,v10 * 4 + 0x1c,(unsigned int *)(v12 + 4));
                     fcn_004c5360();
-                    *(unsigned char*) (v26 + 4) = 0x36;
-                    *(unsigned int*) (v26 + 8) = *(unsigned int *)(v12 + 4);
-                    *(unsigned int*) (v26 + 0x68) = 0;
-                    *(unsigned int*) (v26 + 0xc) = *(unsigned int *)(a0 + 1);
-                    *(int*) (v26 + 0x5c) = timer.b;
-                    *(int*) (v26 + 0x60) = timer.c;
-                    *(int*) (v26 + 0x58) = timer.a;
-                    *(unsigned short*) (v26 + 0x64) = timer.d;
-                    if ((*(char *)(v12 + 2) == '\x06') || (*(unsigned char*) (v26 + 0x36) = 1, *(char *)(v12 + 2) == '\a'))
-                      *(unsigned char*) (v26 + 0x36) = 9;
-                    fcn_004c5530(v26);
+                    *(unsigned char*) (message + 4) = 0x36;
+                    *(unsigned int*) (message + 8) = *(unsigned int *)(v12 + 4);
+                    *(unsigned int*) (message + 0x68) = 0;
+                    *(unsigned int*) (message + 0xc) = *(unsigned int *)(a0 + 1);
+                    *(int*) (message + 0x5c) = timer.b;
+                    *(int*) (message + 0x60) = timer.c;
+                    *(int*) (message + 0x58) = timer.a;
+                    *(unsigned short*) (message + 0x64) = timer.d;
+                    if ((*(char *)(v12 + 2) == '\x06') || (*(unsigned char*) (message + 0x36) = 1, *(char *)(v12 + 2) == '\a'))
+                      *(unsigned char*) (message + 0x36) = 9;
+                    fcn_004c5530(message);
                     v10 += 1;
                   }
                   v4 = a1;

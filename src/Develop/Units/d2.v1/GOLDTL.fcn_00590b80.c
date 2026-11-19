@@ -34,7 +34,7 @@ int __cdecl fcn_0050dc90(int);
 float __cdecl fcn_00510260(int, int, int*);
 
 /* ADDRESS: GOLDTL 0x00590b80 */
-int __cdecl fcn_00590b80(int a0)
+int __cdecl fcn_00590b80(int itemId)
 {
 	int arr[32];
 	char* def;
@@ -51,8 +51,8 @@ int __cdecl fcn_00590b80(int a0)
 	int val;
 	float quality;
 
-	rec = fcn_004ce590(a0);
-	def = g_item_def_table + a0 * 0x41;
+	rec = fcn_004ce590(itemId);
+	def = g_item_def_table + itemId * 0x41;
 	if (rec != 0 && *rec != 0) {
 		win = fcn_00470820(0, 0, s_6a9a5c);
 	} else {
@@ -67,16 +67,16 @@ int __cdecl fcn_00590b80(int a0)
 				((D2_WIN*) g_1015f40)[n].slot);
 	}
 	d2_SetForm(0, 2);
-	fcn_0046f740(0, 0, a0 + 0xdf, d2_CurrentWindowId);
-	io_AppendText(a0 * 2 + 0x9a9);
+	fcn_0046f740(0, 0, itemId + 0xdf, d2_CurrentWindowId);
+	io_AppendText(itemId * 2 + 0x9a9);
 	d2_SetForm(0, 1);
-	io_AppendText(a0 * 2 + 0x9a8);
+	io_AppendText(itemId * 2 + 0x9a8);
 	d2_SetForm(0, 3);
 	if (def[0x40] != 0) {
 		io_AppendText(0x21, (unsigned char) def[0x40]);
 	} else {
-		io_AppendText(0x1f, (int) fcn_0050bb50(a0, g_773d75),
-				(int) eval_ObjektPreis2Credits(a0, 100));
+		io_AppendText(0x1f, (int) fcn_0050bb50(itemId, g_773d75),
+				(int) eval_ObjektPreis2Credits(itemId, 100));
 	}
 	ent = (int*) g_7746c4;
 	if (ent == 0) {
@@ -130,7 +130,7 @@ int __cdecl fcn_00590b80(int a0)
 		p = (char*) (0x699059 + i);
 		val = slot * 0x16 + 0x28;
 		for (n = 10; n != 0; n--) {
-			if (*(unsigned short*) p == a0 && a0 != 0x1cd) {
+			if (*(unsigned short*) p == itemId && itemId != 0x1cd) {
 				fcn_0046f7e0(6, val,
 						*(unsigned char*) (0x699058 + i) + 0x427,
 						d2_CurrentWindowId, -2);
@@ -147,35 +147,35 @@ int __cdecl fcn_00590b80(int a0)
 		goto done;
 	}
 	i = 0;
-	if (a0 == 0x225 || a0 == 0x226 || a0 == 0x227) {
+	if (itemId == 0x225 || itemId == 0x226 || itemId == 0x227) {
 		arr[0] = 0x48;
 		arr[1] = 0x49;
 		arr[2] = 0x4a;
 		i = 3;
-	} else if (a0 == 0x293 || a0 == 0x294 || a0 == 0x295) {
+	} else if (itemId == 0x293 || itemId == 0x294 || itemId == 0x295) {
 		arr[0] = 0x4e;
 		arr[1] = 0x4f;
 		arr[2] = 0x50;
 		i = 3;
-	} else if (a0 == 0x1c1 || a0 == 0x1c2 || a0 == 0x1c3) {
+	} else if (itemId == 0x1c1 || itemId == 0x1c2 || itemId == 0x1c3) {
 		arr[0] = 0x18;
 		arr[1] = 0x19;
 		i = 2;
-	} else if (a0 != 0x1c7) {
-		if (a0 == 0x1c4 || a0 == 0x1c5 || a0 == 0x1c6
-				|| a0 == 0x2af || a0 == 0x2b0) {
+	} else if (itemId != 0x1c7) {
+		if (itemId == 0x1c4 || itemId == 0x1c5 || itemId == 0x1c6
+				|| itemId == 0x2af || itemId == 0x2b0) {
 			arr[0] = 0x1e;
 			i = 1;
-		} else if ((0x1d0 <= a0 && a0 <= 0x1d2)
-				|| (0x1bd <= a0 && a0 <= 0x1c0)) {
+		} else if ((0x1d0 <= itemId && itemId <= 0x1d2)
+				|| (0x1bd <= itemId && itemId <= 0x1c0)) {
 			arr[0] = 0x20;
 			i = 1;
-		} else if ((0x1b7 <= a0 && a0 <= 0x1b9)
-				|| (0x1ca <= a0 && a0 <= 0x1cc)) {
+		} else if ((0x1b7 <= itemId && itemId <= 0x1b9)
+				|| (0x1ca <= itemId && itemId <= 0x1cc)) {
 			arr[0] = 0x1e;
 			i = 1;
-		} else if ((0x1cd <= a0 && a0 <= 0x1cf) || a0 == 0x1ba
-				|| (0x1bb <= a0 && a0 <= 0x1bc)) {
+		} else if ((0x1cd <= itemId && itemId <= 0x1cf) || itemId == 0x1ba
+				|| (0x1bb <= itemId && itemId <= 0x1bc)) {
 			arr[0] = 0x1f;
 			i = 1;
 		}
@@ -191,10 +191,10 @@ int __cdecl fcn_00590b80(int a0)
 			val += 0x16;
 		}
 	}
-	if ((a0 == 0x1c7
-			|| (a0 != 0x1c1 && a0 != 0x1c2 && a0 != 0x1c3
-				&& a0 != 0x1c4 && a0 != 0x1c5 && a0 != 0x1c6
-				&& a0 != 0x2af && a0 != 0x2b0))
+	if ((itemId == 0x1c7
+			|| (itemId != 0x1c1 && itemId != 0x1c2 && itemId != 0x1c3
+				&& itemId != 0x1c4 && itemId != 0x1c5 && itemId != 0x1c6
+				&& itemId != 0x2af && itemId != 0x2b0))
 			&& (def[0] == 0x17 || def[0] == 0x25)) {
 		fcn_0046f7e0(6, n * 0x16 + 0x28, 0x444, d2_CurrentWindowId, -2);
 		io_AppendText((int) s_6a9a28, 0x624);

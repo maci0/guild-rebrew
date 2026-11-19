@@ -140,7 +140,7 @@ void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00505370(char*);
 
 /* ADDRESS: GOLDTL 0x005b7880 */
-void __cdecl fcn_005b7880(unsigned char* a0, int a1)
+void __cdecl fcn_005b7880(unsigned char* building, int a1)
 {
 	FRAME f;
 	char* p;
@@ -158,13 +158,13 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 	f.hD = -1;
 	f.hA = -1;
 	f.hRadio = -1;
-	f.ent = (unsigned char*) (lpGebaeudePROT + a0[0] * 0x24d);
+	f.ent = (unsigned char*) (lpGebaeudePROT + building[0] * 0x24d);
 	f.win = (char*) fcn_00534c40(a1, 0x6a42c8, 4, 0x6ac340, 0x6ac300,
 	                           0x6ac314, 0x6ac328);
 	fcn_005350d0(f.win);
-	fcn_00517c00(*(unsigned short*) (a0 + 0x27), 1, 2, f.numA);
-	fcn_00517c00(*(unsigned short*) (a0 + 0x25), 1, 2, f.numB);
-	p = fcn_0050dc90((int) a0);
+	fcn_00517c00(*(unsigned short*) (building + 0x27), 1, 2, f.numA);
+	fcn_00517c00(*(unsigned short*) (building + 0x25), 1, 2, f.numB);
+	p = fcn_0050dc90((int) building);
 	if (p == 0) {
 		strcpy(f.txtName, *(char**) 0x14abc28);
 	} else {
@@ -322,7 +322,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 				f.rows[i].obj = 0;
 			}
 		}
-		f.nSlots = fcn_00505d00((unsigned char*) a0, f.slots);
+		f.nSlots = fcn_00505d00((unsigned char*) building, f.slots);
 		for (i = 0; i < 12; i++) {
 			entityId = f.slots[0x19 + i];
 			if (entityId == 0xffff) {
@@ -373,7 +373,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 			}
 		}
 
-		f.pg = (int) fcn_005463a0(2, 0, 6, 3, *(int*) (a0 + 1));
+		f.pg = (int) fcn_005463a0(2, 0, 6, 3, *(int*) (building + 1));
 		f.pIt = (int*) (f.pg + 0xb0);
 		f.tv3 = n;
 		i = 0;
@@ -476,9 +476,9 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 			if (f.rows[i].obj == 0) {
 				n = (int) fcn_005101e0(
 				    (unsigned char*) (0x7f4ca0
-				                      + *(unsigned short*) (a0 + 0x27)
+				                      + *(unsigned short*) (building + 0x27)
 				                            * 0x21c),
-				    a0[0], -1, 1);
+				    building[0], -1, 1);
 				d2_SetForm(f.rows[i].win, 2);
 				f.hC = fcn_00472250(f.rows[i].win, 2,
 				                    io_AppendText(
@@ -504,12 +504,12 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 		}
 		if (*(int*) 0x67d370 == f.hC && f.hA != -1) {
 			p = (char*) fcn_005463a0(2, 0, 6, 3,
-			                         *(int*) (a0 + 1));
+			                         *(int*) (building + 1));
 			if (p != 0) {
 				*(int*) (p + 0xb0 + f.hA * 4) = 1;
 			} else {
 				memset(&f.msg, 0, 0xf8);
-				f.msg.f0c = *(int*) (a0 + 1);
+				f.msg.f0c = *(int*) (building + 1);
 				f.msg.type = 6;
 				f.msg.b36 = 1;
 				f.msg.f30 = *(int*) 0x7f4c08;
@@ -520,7 +520,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 				f.msg.f2c = *(int*) 0x7f4c04;
 				f.msg.w34 = *(short*) 0x7f4c0c;
 				f.msg.f5c[f.hA] = 1;
-				if (fcn_00505370((char*) a0) != 0) {
+				if (fcn_00505370((char*) building) != 0) {
 					f.msg.f8c = -1;
 				} else {
 					f.msg.f8c = *(int*) (*(int*) 0x7746cc
@@ -550,7 +550,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 				f.msg.f08 = *(int*) (0x7f4ca4
 				                     + *(unsigned short*) 0x774970
 				                           * 0x21c);
-				f.msg.f0c = *(int*) (a0 + 1);
+				f.msg.f0c = *(int*) (building + 1);
 				f.msg.f28 = *(int*) 0x7f4c00;
 				f.msg.f2c = *(int*) 0x7f4c04;
 				f.msg.f30 = *(int*) 0x7f4c08;
@@ -573,7 +573,7 @@ void __cdecl fcn_005b7880(unsigned char* a0, int a1)
 				f.msg.f08 = *(int*) (0x7f4ca4
 				                     + *(unsigned short*) 0x774970
 				                           * 0x21c);
-				f.msg.f0c = *(int*) (a0 + 1);
+				f.msg.f0c = *(int*) (building + 1);
 				f.msg.f28 = *(int*) 0x7f4c00;
 				f.msg.f2c = *(int*) 0x7f4c04;
 				f.msg.f30 = *(int*) 0x7f4c08;

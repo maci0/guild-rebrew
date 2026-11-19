@@ -18,7 +18,7 @@ extern void __cdecl fcn_00500bb0(void*, int, int, int);
 extern int __cdecl fcn_004c3030(int, int, char*, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x0054bc90 */
-void __cdecl fcn_0054bc90(char* a0)
+void __cdecl fcn_0054bc90(char* action)
 {
 	char text[512];
 	char* v10;
@@ -40,10 +40,10 @@ void __cdecl fcn_0054bc90(char* a0)
 	v10 = 0;
 	v13 = 0;
 	v15 = 0;
-	if (*(int*) (a0 + 0x70) == -1 || *(int*) (a0 + 0x70) == -2)
+	if (*(int*) (action + 0x70) == -1 || *(int*) (action + 0x70) == -2)
 		goto close;
-	if (*(int*) (a0 + 0xbc) == 0) {
-		gm_ResolveEntityById(&v10, 0, 0, *(unsigned int*) (a0 + 0x10));
+	if (*(int*) (action + 0xbc) == 0) {
+		gm_ResolveEntityById(&v10, 0, 0, *(unsigned int*) (action + 0x10));
 		if (v10 == 0)
 			goto close;
 		v13 = fcn_00502cd0(*(unsigned int*) (v10 + 0x5d), 1, 0, 0x17);
@@ -52,25 +52,25 @@ void __cdecl fcn_0054bc90(char* a0)
 		v5 = *(unsigned short*) (v10 + 0x27);
 		if (v5 == 0xffff)
 			goto close;
-	} else if (*(int*) (a0 + 0xbc) == 1) {
-		v15 = fcn_005463a0(2, 1, *(unsigned int*) (a0 + 0xc0), 0, 0x37);
+	} else if (*(int*) (action + 0xbc) == 1) {
+		v15 = fcn_005463a0(2, 1, *(unsigned int*) (action + 0xc0), 0, 0x37);
 		if (v15 == 0)
 			goto close;
 		v5 = *(unsigned short*) (v15 + 8);
 	} else {
-		fcn_00546190(a0);
+		fcn_00546190(action);
 		return;
 	}
 	v1 = (unsigned int) v5 * 0x21c;
 	v7 = (unsigned short*) (v1 + (unsigned long)&g_7f4ca0);
 	if (v7 == 0)
 		goto close;
-	v4 = *(char*) ((unsigned int) *(unsigned short*) (a0 + 8) * 0x21c + (unsigned long)&g_7f4ca2);
-	v2 = (unsigned int) *(unsigned short*) (a0 + 8) * 0x21c;
+	v4 = *(char*) ((unsigned int) *(unsigned short*) (action + 8) * 0x21c + (unsigned long)&g_7f4ca2);
+	v2 = (unsigned int) *(unsigned short*) (action + 8) * 0x21c;
 	v3 = (unsigned short*) (v2 + (unsigned long)&g_7f4ca0);
 	if (v4 != 6 && v4 != 7)
-		*(int*) (a0 + 0x70) = 2;
-	state = *(int*) (a0 + 0x70);
+		*(int*) (action + 0x70) = 2;
+	state = *(int*) (action + 0x70);
 	switch (state) {
 	case 0: goto dialog;
 	case 1: goto state1;
@@ -81,7 +81,7 @@ void __cdecl fcn_0054bc90(char* a0)
 		goto state2_unequal;
 	v16 = *(int*) (v3 + 2);
 	idx = 0;
-	if (*(int*) (a0 + 0xbc) == 0)
+	if (*(int*) (action + 0xbc) == 0)
 		arr = v13 + 0x1c;
 	else
 		arr = v15 + 0xac;
@@ -90,13 +90,13 @@ void __cdecl fcn_0054bc90(char* a0)
 			break;
 		idx++;
 		if (idx >= 4) {
-			fcn_00546190(a0);
+			fcn_00546190(action);
 			return;
 		}
 	}
 	if (idx >= 4) {
 	close2:
-		fcn_00546190(a0);
+		fcn_00546190(action);
 		return;
 	}
 	io_FormatTextBuffer(text, 0x1785, *v3);
@@ -104,7 +104,7 @@ void __cdecl fcn_0054bc90(char* a0)
 state2_unequal:
 	v11 = -1;
 	idx = 0;
-	if (*(int*) (a0 + 0xbc) == 0) {
+	if (*(int*) (action + 0xbc) == 0) {
 		v16 = *(int*) (v3 + 2);
 		arr = v13 + 0x1c;
 		for (;;) {
@@ -112,7 +112,7 @@ state2_unequal:
 				break;
 			idx++;
 			if (idx >= 4) {
-				fcn_00546190(a0);
+				fcn_00546190(action);
 				return;
 			}
 		}
@@ -127,12 +127,12 @@ state2_unequal:
 				break;
 			idx++;
 			if (idx >= 4) {
-				fcn_00546190(a0);
+				fcn_00546190(action);
 				return;
 			}
 		}
 		*(int*) (v15 + 0xac + idx * 4) = -1;
-		fcn_004c5620(0, a0);
+		fcn_004c5620(0, action);
 	}
 	if (idx >= 4)
 		goto close2;
@@ -140,15 +140,15 @@ state2_unequal:
 state2_report:
 	v16 = *(int*) (v1 + (unsigned long)&g_7f4ca4);
 	fcn_00545d40(v16, -1, text, 0, 0x5ec, 0);
-	fcn_00546190(a0);
+	fcn_00546190(action);
 	return;
 state1:
-	if (fcn_00500cb0((char*) &gm_GameTime, a0 + 0x52) > 0) {
-		fcn_00545780(a0);
-		*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
+	if (fcn_00500cb0((char*) &gm_GameTime, action + 0x52) > 0) {
+		fcn_00545780(action);
+		*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 		return;
 	}
-	if (*(int*) 0x100f884 != *(int*) (*(int*) (a0 + 0x74) + 8))
+	if (*(int*) 0x100f884 != *(int*) (*(int*) (action + 0x74) + 8))
 		return;
 	v11 = -1;
 	if (*(int*) &g_100f1dc == -1)
@@ -156,7 +156,7 @@ state1:
 	if (*(int*) &g_100f1dc == 2) {
 		v16 = *(int*) (v3 + 2);
 		idx = 0;
-		if (*(int*) (a0 + 0xbc) == 0)
+		if (*(int*) (action + 0xbc) == 0)
 			arr = v13 + 0x1c;
 		else
 			arr = v15 + 0xac;
@@ -175,7 +175,7 @@ state1:
 	} else if (*(int*) &g_100f1dc == 1) {
 		v16 = *(int*) (v3 + 2);
 		idx = 0;
-		if (*(int*) (a0 + 0xbc) == 0) {
+		if (*(int*) (action + 0xbc) == 0) {
 			arr = v13 + 0x1c;
 			for (;;) {
 				if (*(int*) (arr + idx * 4) == v16)
@@ -199,7 +199,7 @@ state1:
 				}
 			}
 			*(int*) (v15 + 0xac + idx * 4) = -1;
-			fcn_004c5620(0, a0);
+			fcn_004c5620(0, action);
 		}
 		if (idx >= 4) {
 			goto st1_close;
@@ -212,31 +212,31 @@ state1:
 	fcn_00545d40(v16, -1, text, 0, 0x5ec, 0);
 	goto st1_close;
 st1_close:
-	fcn_00545780(a0);
-	fcn_00546190(a0);
+	fcn_00545780(action);
+	fcn_00546190(action);
 	return;
 dialog:
-	fcn_00545670(a0, 0, 0, (char*) 0x6a5a10, 0x5ec);
-	if (*(int*) (a0 + 0x74) == 0) {
-		fcn_00546190(a0);
+	fcn_00545670(action, 0, 0, (char*) 0x6a5a10, 0x5ec);
+	if (*(int*) (action + 0x74) == 0) {
+		fcn_00546190(action);
 		return;
 	}
-	d2_SetForm(*(int*) (*(int*) (a0 + 0x74) + 8), 0);
+	d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 0);
 	v6 = *v7;
-	if (*(int*) (a0 + 0xbc) != 0)
-		io_AppendText(0x1771, *(unsigned short*) (v10 + 0x27), *v3, a0 + 0xac, v6, *v3);
+	if (*(int*) (action + 0xbc) != 0)
+		io_AppendText(0x1771, *(unsigned short*) (v10 + 0x27), *v3, action + 0xac, v6, *v3);
 	else
-		io_AppendText(0x1770, *(unsigned short*) (v10 + 0x27), *v3, a0 + 0xac, v10, v6, *v3);
-	*(pos14_7f4c00*) (a0 + 0x44) = gm_GameTime;
-	*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
-	fcn_00500bb0(a0 + 0x52, 0x18, 0, 0);
+		io_AppendText(0x1770, *(unsigned short*) (v10 + 0x27), *v3, action + 0xac, v10, v6, *v3);
+	*(pos14_7f4c00*) (action + 0x44) = gm_GameTime;
+	*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
+	fcn_00500bb0(action + 0x52, 0x18, 0, 0);
 	fcn_004c3030(-7, 0, (char*) 0x6a5a34, 0);
-	*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
+	*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 	return;
 close:
-		if (*(int*) (a0 + 0x74))
-			fcn_00545780(a0);
-		fcn_00546190(a0);
+		if (*(int*) (action + 0x74))
+			fcn_00545780(action);
+		fcn_00546190(action);
 		return;
 
 }

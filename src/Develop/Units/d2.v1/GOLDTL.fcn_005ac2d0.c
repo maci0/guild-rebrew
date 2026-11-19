@@ -92,7 +92,7 @@ int __cdecl gm_RandomMod(unsigned short range);
 void __cdecl fcn_00532ef0(void);
 
 /* ADDRESS: GOLDTL 0x005ac2d0 */
-void __cdecl fcn_005ac2d0(char* a0)
+void __cdecl fcn_005ac2d0(char* building)
 {
 	msg005ac2d0 pkt;
 	char text[0x20];
@@ -120,36 +120,36 @@ void __cdecl fcn_005ac2d0(char* a0)
 	btnState2 = 0;
 	btnCancel = 0;
 	btnState0 = 0;
-	if (a0 == 0) {
+	if (building == 0) {
 		return;
 	}
-	if (*(unsigned short*) (a0 + 0x27) == 0xffff) {
+	if (*(unsigned short*) (building + 0x27) == 0xffff) {
 		return;
 	}
-	if (*(unsigned short*) (a0 + 0x27) != g_774970) {
+	if (*(unsigned short*) (building + 0x27) != g_774970) {
 		return;
 	}
-	obj = (char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, 0x1b5);
+	obj = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0x1b5);
 	if (obj == 0) {
 		tag7 t;
 
 		t.a = -1;
 		t.b = -1;
 		t.id = -1;
-		obj = fcn_004c4480(fcn_004c5b00(*(int*) (a0 + 1), t));
+		obj = fcn_004c4480(fcn_004c5b00(*(int*) (building + 1), t));
 		while (fcn_004c44c0() == 0) {
 			fcn_004c3ff0();
 			fcn_004c4940();
 			cm_ExecCommand();
 		}
 	}
-	unit = fcn_005463a0(2, 0, 0x2b, 3, *(int*) (a0 + 1));
+	unit = fcn_005463a0(2, 0, 0x2b, 3, *(int*) (building + 1));
 	if (unit == 0) {
 		pkt.pos = gm_GameTime;
 		pkt.b4 = 0x2b;
 		pkt.b36 = 2;
 		pkt.f8 = *(int*) (gm_CityEntity + 4);
-		pkt.fc = *(int*) (a0 + 1);
+		pkt.fc = *(int*) (building + 1);
 		pkt.b5c = 0;
 		rc = fcn_004c5530(&pkt);
 		if (rc != -1) {
@@ -183,8 +183,8 @@ void __cdecl fcn_005ac2d0(char* a0)
 		if ((unsigned int) (g_6b7fac - prev) > 0x64 && state != 3) {
 			flag = 1;
 			prev = g_6b7fac;
-			obj = (char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, 0x1b5);
-			if (obj == 0 || *(unsigned short*) (a0 + 0x27) != g_774970) {
+			obj = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0x1b5);
+			if (obj == 0 || *(unsigned short*) (building + 0x27) != g_774970) {
 				state = 3;
 				flag = 0;
 				goto post;
@@ -283,7 +283,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 				*(int*) (pkt2 + 0xc) = g_66601c;
 				io_FormatTextBuffer(text, 0x19a2);
 				info = fcn_005cd440(pkt2, text, 0, 0);
-				obj = (char*) fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, 0x1b5);
+				obj = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0x1b5);
 				if (info != 0 && *(int*) (info + 4) != -1 && obj != 0) {
 					v15 = (char) gm_RandomMod(8);
 					v16 = (char) gm_RandomMod(8);

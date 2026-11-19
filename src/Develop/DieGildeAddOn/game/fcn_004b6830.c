@@ -13,7 +13,7 @@ void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b6830 */
-int __cdecl fcn_004b6830(int* a0)
+int __cdecl fcn_004b6830(int* request)
 {
 	unsigned char msg[0xa8];
 	char buf[0xe8];
@@ -29,7 +29,7 @@ int __cdecl fcn_004b6830(int* a0)
 	int v;
 	double d;
 
-	ent = (unsigned short*) gm_LookupEntityRecordById(*a0);
+	ent = (unsigned short*) gm_LookupEntityRecordById(*request);
 	if (ent == 0) {
 		return 1;
 	}
@@ -70,10 +70,10 @@ found:
 	d = (double) v + 2.0;
 	w = fcn_0050dac0(*(short*) hit);
 	v = (int) (((double) w * d) * 0.01);
-	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a0 + 4) + 0x12e7,
+	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
 	    *(unsigned short*) hit, *(unsigned short*) ent,
 	    *(unsigned char*) (msg + 8 + i * 0x18) + 0x253, v);
-	fcn_004c51a0(*a0, *(int*) ((char*) hit + 4), g_773d75, v);
+	fcn_004c51a0(*request, *(int*) ((char*) hit + 4), g_773d75, v);
 	fcn_00545d40(*((int*) ent + 1), *((int*) ent + 1), buf,
 	    0x100 < strlen(buf + 4), 0x603, 0);
 	return 0;

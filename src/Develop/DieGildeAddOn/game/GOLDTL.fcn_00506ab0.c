@@ -8,7 +8,7 @@ void __cdecl ch_DestroyCharacter(int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x00506ab0 */
-void __cdecl gm_KillSpieler(int a0, int a1)
+void __cdecl gm_KillSpieler(int slotIndex, int removeMode)
 {
 	char* e;
 	int v4;
@@ -24,7 +24,7 @@ void __cdecl gm_KillSpieler(int a0, int a1)
 	int v15;
 	int v5;
 
-	v12 = a0 * 0x21c;
+	v12 = slotIndex * 0x21c;
 	ent = (char*) 0x7f4ca0 + v12;
 	v4 = *(int*) (ent + 4);
 	if (ent[2] != 0x0f) {
@@ -83,7 +83,7 @@ void __cdecl gm_KillSpieler(int a0, int a1)
 		*(int*) (ent + 0x170) = 0;
 	}
 	*(int*) (ent + 0x16c) = 0;
-	if (a1 != 0) {
+	if (removeMode != 0) {
 		if (*(unsigned short*) ent != 0xffff) {
 			gm_EntityCount -= 1;
 		}
@@ -113,7 +113,7 @@ void __cdecl gm_KillSpieler(int a0, int a1)
 			v14 += 1;
 			v9 -= 1;
 		} while (v9 != 0);
-		if (a1 != 1) {
+		if (removeMode != 1) {
 			return;
 		}
 		fcn_0064d41a(buf, (char*) 0x699918, v4);
