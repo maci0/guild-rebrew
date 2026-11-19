@@ -1,3 +1,20 @@
+#include "client_types.h"
+
+extern pos14_7f4c00 g_current_year;
+int __cdecl fcn_00500e20(int*);
+void __cdecl fcn_00500c50(pos14_7f4c00*, int, int, int);
+
+/* ADDRESS: GOLDTL 0x00566fa0 */
+/* Timed action 0x3a (HE_SIM_PERSONAL) START: start = now, due = today 06:15:00. */
+void __cdecl fcn_00566fa0(char* h)
+{
+	*(int*) (h + 0xb0) = 3;
+	*(int*) (h + 0xac) = 0;
+	fcn_00500e20((int*) &g_current_year);
+	*(pos14_7f4c00*) (h + 0x52) = g_current_year;
+	*(pos14_7f4c00*) (h + 0x44) = g_current_year;
+	fcn_00500c50((pos14_7f4c00*) (h + 0x52), 6, 0xf, 0);
+}
 
 
 
