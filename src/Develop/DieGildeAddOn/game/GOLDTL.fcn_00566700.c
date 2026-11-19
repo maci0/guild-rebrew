@@ -1,3 +1,4 @@
+#include "client_types.h"
 
 
 
@@ -28,6 +29,21 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 void __cdecl fcn_00546190(char*);
+
+/* ADDRESS: GOLDTL 0x005666b0 */
+/* Timed action 0x33 (HE_PERSONAL_KUENDIGEN) START: if the person still exists and is not
+ * class 0x14, due = start; otherwise the action is freed. */
+void __cdecl fcn_005666b0(char* h)
+{
+	char* p;
+
+	p = gm_LookupEntityRecordById(*(int*) (h + 0xac));
+	if (p != 0 && p[2] != 0x14) {
+		*(pos14_7f4c00*) (h + 0x52) = *(pos14_7f4c00*) (h + 0x44);
+		return;
+	}
+	fcn_00546190(h);
+}
 
 void __cdecl fcn_00566700(char* u)
 {
