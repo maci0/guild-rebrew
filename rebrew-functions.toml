@@ -740686,30 +740686,29 @@ symbol = "_fcn_005c02a0"
 name = "fcn_005c02a0"
 kind = "FUNCTION"
 status = "NEAR_MATCHING"
-similarity = 95.22184300341297
+similarity = 95.90443686006826
 
 ["GOLDTL.0x005c02a0".verification]
-source_hash = "517730f9c48a14b96db81e546c09881018896f31434f5b4e978f8c9f24198096"
+source_hash = "63b802f5c64f24a56a22ce3c5b50caccdb69aa54fb3d7fb6773b794c55e3c062"
 reference_hash = "39570f6ae93e106fb8c6ef0d4b04a604b9dc470e3aceccd64c4935917dfd437b"
 reference_size = "969"
-headers_hash = "052a81b6ac99573c3fa9a0c26ea45647081f76021087b1a9c8fbb4cd0b060bde"
-compiler_hash = "604f3c2c79db2131eb969d1543c5eaaa00bd5df9265b1782b48a34d9a17523b5"
+headers_hash = "1571ae770b53e91d8d12b94c1537a3c1a48cfb026721f9729e14f2613d2beaa7"
+compiler_hash = "74877f878b3f8e7289abbc942f2c4b585393e19c0fd2fe5fab9cd7d6748a4041"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x5c02a0"
 context_hash = ""
 defines = "[]"
-input_hash = "6d42a80b5be3fe05fe28d8f415a3ae58214386efc0fad11fa7d8f89e6f2216ce"
-aligned_pairs = 279
+input_hash = "a1ffa9e8be171ef43dcd0319e44904a79032b2995726f6b5a0547d6d303f5a46"
+aligned_pairs = 281
 target_instructions = 293
 candidate_instructions = 293
-hunks = 13
-similarity = 95.22184300341297
+hunks = 11
+similarity = 95.90443686006826
 status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-17T08:36:38+00:00"
-
+measured_at = "2026-11-19T13:29:03+00:00"
 
 [["GOLDTL.0x005c02a0".status_history]]
 old_status = "SIZE_MISMATCH"
