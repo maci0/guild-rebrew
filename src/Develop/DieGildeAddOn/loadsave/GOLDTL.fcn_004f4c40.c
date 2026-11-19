@@ -59,9 +59,9 @@ int __cdecl fcn_004f4c40(void* f)
 		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Slot*)g_68ff80)[i].id, 4, 1, f) == 0)
 			return 0;
 	}
-	if (ls_ReadVfsDataChecked(&g_773d38, 4, 1, f) == 0)
+	if (ls_ReadVfsDataChecked(&cm_LastCrimeId, 4, 1, f) == 0)
 		return 0;
-	if (g_6a23ac >= 0x10041) {
+	if (ls_SaveVersion >= 0x10041) {
 		if (ls_ReadVfsDataChecked(&n1, 4, 1, f) == 0)
 			return 0;
 		if (ls_ReadVfsDataChecked(&n2, 4, 1, f) == 0)

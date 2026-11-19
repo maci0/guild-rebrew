@@ -24,7 +24,7 @@ typedef Pair_99f800 Pair;
 typedef Slot_68ff80 Slot;
 
 extern Slot_68ff80 g_68ff80[29];
-extern int g_773d38;
+extern int cm_LastCrimeId;
 extern Rec2d_9a3800 g_9a3800[512];
 extern Pair_99f800 g_99f800[0x800];
 
@@ -51,7 +51,7 @@ int __cdecl fcn_004f49e0(int fp)
 			return 0;
 		}
 	}
-	if (vfs_fwrite(&g_773d38, 4, 1, fp) == -1) {
+	if (vfs_fwrite(&cm_LastCrimeId, 4, 1, fp) == -1) {
 		return 0;
 	}
 	for (i = 0; i < 512; i++) {

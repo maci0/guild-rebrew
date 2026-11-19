@@ -2,13 +2,13 @@
 #define ALLOC_ROOT_H
 #include "group_node.h"
 
-extern struct GroupNode g_alloc_root;
-#define g_alloc_root_name (((int*) g_alloc_root.name)[0])
-#define g_alloc_root_name_4 (((int*) g_alloc_root.name)[1])
-#define g_alloc_root_size_total g_alloc_root.size_total
-#define g_alloc_root_count g_alloc_root.count_total
-#define g_alloc_root_size_max g_alloc_root.size_max
-#define g_alloc_root_count_max g_alloc_root.count_max
-#define g_alloc_root_spare g_alloc_root.count
-#define g_list_head g_alloc_root.next
+extern struct GroupNode m_AllocRoot;
+#define g_alloc_root_name (((int*) m_AllocRoot.name)[0])
+#define g_alloc_root_name_4 (((int*) m_AllocRoot.name)[1])
+#define g_alloc_root_size_total m_AllocRoot.size_total
+#define g_alloc_root_count m_AllocRoot.count_total
+#define g_alloc_root_size_max m_AllocRoot.size_max
+#define g_alloc_root_count_max m_AllocRoot.count_max
+#define g_alloc_root_spare m_AllocRoot.count
+#define g_list_head m_AllocRoot.next
 #endif

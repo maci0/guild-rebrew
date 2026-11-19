@@ -70,14 +70,14 @@ void* __cdecl gm_NextEntityQueryMatch(void)
     unsigned short cur_id;
     char is_match;
 
-    current = g_query_cursor;
+    current = gm_QueryCursor;
     matched_ent = (unsigned short*)0;
     is_match = 0;
     if (current == (unsigned short*)0) {
         return (void*)current;
     }
-    if (g_query_active != 0) {
-        g_query_active = 0;
+    if (gm_QueryActive != 0) {
+        gm_QueryActive = 0;
         if (g_query_flag2 != 0 && *(int*)((char*)current + 0x14) != 0) {
             g_dispatch_table_b[g_query_match_count] = *(int*)((char*)current + 0x14);
             g_query_match_count++;
@@ -95,7 +95,7 @@ have_depth:
         }
         while (*current == 0) {
             current = (unsigned short*)((char*)current + 0x43);
-            g_query_cursor = current;
+            gm_QueryCursor = current;
         }
         if (g_query_flag3 != 0) {
             is_match = 1;
@@ -120,21 +120,21 @@ have_depth:
             filter_type_cache = g_query_filter_type;
             if (res == filter_type_cache) {
                 is_match = 1;
-                current = g_query_cursor;
+                current = gm_QueryCursor;
                 goto lab_395;
             }
             is_match = 0;
-            current = g_query_cursor;
+            current = gm_QueryCursor;
             goto lab_3bc;
         }
 lab_395:
-        if (g_query_filter_state != 0xff) {
+        if (gm_QueryFilterState != 0xff) {
             unsigned int eid;
             char* tbl;
             eid = (unsigned int)*current;
             tbl = g_item_def_table;
             tbl += eid * 0x40;
-            is_match = (unsigned char) tbl[eid] == g_query_filter_state;
+            is_match = (unsigned char) tbl[eid] == gm_QueryFilterState;
         }
         goto lab_3bc;
 lab_nomatch:
@@ -146,13 +146,13 @@ lab_3bc:
             }
             current = (unsigned short*)((char*)current + 0x43);
             g_query_count++;
-            g_query_cursor = current;
+            gm_QueryCursor = current;
         } else {
             if (is_match != 0) {
                 matched_ent = current;
             }
             current = *(unsigned short**)((char*)current + 0x3f);
-            g_query_cursor = current;
+            gm_QueryCursor = current;
             if (current != (unsigned short*)0) {
                 int fld;
                 fld = *(int*)((char*)current + 0x14);
@@ -164,7 +164,7 @@ lab_3bc:
                 if (g_query_flag2 != 0 && g_query_match_count != 0) {
                     current = (unsigned short*)g_dispatch_table_a[g_query_match_count];
                     g_query_match_count--;
-                    g_query_cursor = current;
+                    gm_QueryCursor = current;
                     if (*(int*)((char*)current + 0x14) != 0) {
                         g_dispatch_table_b[g_query_match_count] = *(int*)((char*)current + 0x14);
 lab_43e:

@@ -172,9 +172,9 @@ impl = "float g_67db54 = 0.5;"
 [specials.g_699368]
 impl = "int g_699368 = 1;"
 
-# Native initial value measured at reference row g_6a23ac (first bytes: 5a 00 01 00).
-[specials.g_6a23ac]
-impl = "int g_6a23ac = 65626;"
+# Native initial value measured at reference row ls_SaveVersion (first bytes: 5a 00 01 00).
+[specials.ls_SaveVersion]
+impl = "int ls_SaveVersion = 65626;"
 
 # Native initial value measured at reference row g_6a2598 (first bytes: ff ff ff ff).
 [specials.g_6a2598]

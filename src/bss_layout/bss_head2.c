@@ -97,12 +97,12 @@
 #pragma comment(linker, "/include:_strcspn")
 #pragma comment(linker, "/include:_strpbrk")
 
-int g_array_count = 0;
+int m_TrackedCapacity = 0;
 int g_stat1 = 0;
-int g_stat2 = 0;
-int g_stat3 = 0;
+int m_AllocatedBlockCount = 0;
+int m_PeakBytes = 0;
 int g_stat4 = 0;
-int g_alloc_counter = 0;
+int m_AllocationBalance = 0;
 int g_alloc_report_groups = 0;
 void* g_array_ptr = 0;
 char g_gap_10034644[36] = {0};
@@ -113,9 +113,9 @@ char g_vfs_case_sensitive = 0;
 char g_gap_10034675 = 0;
 char g_gap_10034676 = 0;
 char g_gap_10034677 = 0;
-int g_stream_count = 0;
+int vfs_OpenStreamCount = 0;
 int g_connection_counter = 0;
-int g_handler_started = 0;
+int srv_ShutdownRequested = 0;
 char g_gap_10034684[3460] = {0};
 int g_sequence_counter = 0;
 int g_dynamic_count = 0;
@@ -136,7 +136,7 @@ char g_gap_1003544a = 0;
 char g_gap_1003544b = 0;
 int g_dynasty_scan_count = 0;
 int g_query_limit = 0;
-char g_query_active = 0;
+char gm_QueryActive = 0;
 char g_gap_10035455 = 0;
 char g_gap_10035456 = 0;
 char g_gap_10035457 = 0;
@@ -147,7 +147,7 @@ char g_query_flag3 = 0;
 char g_gap_1003545f = 0;
 char g_gap_10035460[4] = {0};
 unsigned char* g_query_filter_base = 0;
-unsigned short* g_query_cursor = 0;
+unsigned short* gm_QueryCursor = 0;
 unsigned short* g_entity_table_end = 0;
 int g_save_header_aux = 0;
 int g_save_header_aux_b = 0;

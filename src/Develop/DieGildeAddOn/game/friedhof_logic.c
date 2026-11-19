@@ -304,7 +304,7 @@ void* __cdecl gv_FindWorkerSlot(void* building, int* entity)
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-extern int g_next_object_id;
+extern int gm_NextObjectId;
 int __cdecl gm_RandomMod(int range);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
                                     void* filter, int type);
@@ -341,8 +341,8 @@ int __cdecl gv_SpawnEntities(void* entity, int count)
 			slot = FindSlotEntryFiltered(0, entity, 0, (void*) gv_eval_SlotFrei, 0);
 			if (slot == 0)
 				break;
-			*(int*) *(int*) ((char*) slot + 0x10) = g_next_object_id;
-			g_next_object_id++;
+			*(int*) *(int*) ((char*) slot + 0x10) = gm_NextObjectId;
+			gm_NextObjectId++;
 			*(int*) ((char*) slot + 4) = *(int*) *(int*) ((char*) slot + 0x10);
 			*(unsigned short*) ((char*) slot + 8) = 0x7fff;
 			*(unsigned short*) ((char*) slot + 0xa) =
@@ -1290,7 +1290,7 @@ done:
 	*(unsigned short*) ((char*) found2 + 0xa) = (unsigned short) (g_current_year + 0xa);
 	*(unsigned char*) ((char*) found2 + 0xc) = (unsigned char) clear;
 	*(unsigned short*) ((char*) found + 0xa) = (unsigned short) clear;
-	*(int*) ((char*) cmd + 0x15) = g_next_object_id;
+	*(int*) ((char*) cmd + 0x15) = gm_NextObjectId;
 
 	count = *(int*) ((char*) cmd + 0x11);
 	if (count > 0) {
@@ -1424,7 +1424,7 @@ fail7:
 #include "rebrew_globals.h"
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern int g_citizen_count;
-extern int g_next_object_id;
+extern int gm_NextObjectId;
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* worker, int worktype);
 extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
@@ -1542,7 +1542,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 		*(int*) (grave + 0x170) = (int) entity;
 		*(int*) (grave + 0x16c) = (int) entity;
 		g_citizen_count++;
-		*(int*) (grave + 4) = g_next_object_id++;
+		*(int*) (grave + 4) = gm_NextObjectId++;
 		*(unsigned short*) ((char*) g_slot_table + off) = (unsigned short) chosen;
 		*(unsigned char*) (grave + 2) = 0x14;
 		*(int*) (grave + 0x1f0) = 0;

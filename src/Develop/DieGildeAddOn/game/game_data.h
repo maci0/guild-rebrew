@@ -26,7 +26,7 @@
 extern char* g_item_def_table;
 
 extern int g_query_limit; /* 0x10035450, src/bss_layout/bss_head2.c */
-extern int g_next_object_id; /* 0x10030b6c, spiel_data.c */
+extern int gm_NextObjectId; /* 0x10030b6c, spiel_data.c */
 extern int g_current_year; /* 0x10035880, src/bss_layout/bss_late.c */
 extern int g_citizen_count; /* 0x10035434, src/bss_layout/bss_head2.c */
 extern unsigned char g_current_season; /* 0x10035439 */

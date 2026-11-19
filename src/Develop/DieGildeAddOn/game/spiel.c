@@ -27,7 +27,7 @@ extern char g_dynasty_scan_flag;
 extern int g_dynasty_scan_count;
 extern char g_query_flag2;
 extern unsigned char* g_query_filter_base;
-extern unsigned short* g_query_cursor;
+extern unsigned short* gm_QueryCursor;
 extern unsigned short* g_entity_table_end;
 extern unsigned char g_slot_table[2];
 extern char g_entity_state_base[2];
@@ -80,7 +80,7 @@ extern unsigned short g_query_filter_type;
 
 unsigned short __cdecl gm_GetEntityType(short* entity);
 
-extern unsigned char g_query_filter_state;
+extern unsigned char gm_QueryFilterState;
 
 void* __cdecl gm_NextEntityQueryMatch(void);
 
@@ -90,7 +90,7 @@ extern int g_query_limit;
 
 
 extern int g_query_limit;      
-extern int g_next_object_id;   
+extern int gm_NextObjectId;   
 
 
 char* __cdecl gm_AllocateObjectSlot(void);
@@ -137,7 +137,7 @@ int __cdecl gv_AllocGraveyardField(char* geb);
 void __cdecl gv_SpawnEntities(char* geb, int param);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
 void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
-extern int g_next_object_id; 
+extern int gm_NextObjectId; 
 
 #pragma pack(push, 1)
 struct blk14 {
@@ -230,13 +230,13 @@ extern int __cdecl rand(void);
 double __cdecl gm_RandomFloat01(void);
 extern const float g_const_0_0; 
 
-extern char g_query_active;
+extern char gm_QueryActive;
 
 extern char g_query_flag1;
 
 extern char g_query_flag3;
 
-extern int g_array_count;
+extern int m_TrackedCapacity;
 
 /* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
 extern int g_alloc_report_groups;
@@ -245,7 +245,7 @@ extern void* g_array_ptr;
 
 extern char g_stream_pool[];
 
-extern int g_stream_count;
+extern int vfs_OpenStreamCount;
 
 /* 0x10034678 */
 extern int g_connection_counter;
@@ -262,7 +262,7 @@ extern int g_dispatch_table_b[1];
 /* 0x101398a0 */
 extern int g_dispatch_table_a[1];
 
-extern unsigned short* g_query_cursor;
+extern unsigned short* gm_QueryCursor;
 
 extern char g_query_flag2;
 
@@ -1490,14 +1490,14 @@ void* __cdecl gm_NextEntityQueryMatch(void)
     unsigned short cur_id;
     char is_match;
 
-    current = g_query_cursor;
+    current = gm_QueryCursor;
     matched_ent = (unsigned short*)0;
     is_match = 0;
     if (current == (unsigned short*)0) {
         return (void*)current;
     }
-    if (g_query_active != 0) {
-        g_query_active = 0;
+    if (gm_QueryActive != 0) {
+        gm_QueryActive = 0;
         if (g_query_flag2 != 0 && *(int*)((char*)current + 0x14) != 0) {
             g_dispatch_table_b[g_query_match_count] = *(int*)((char*)current + 0x14);
             g_query_match_count++;
@@ -1515,7 +1515,7 @@ have_depth:
         }
         while (*current == 0) {
             current = (unsigned short*)((char*)current + 0x43);
-            g_query_cursor = current;
+            gm_QueryCursor = current;
         }
         if (g_query_flag3 != 0) {
             is_match = 1;
@@ -1540,21 +1540,21 @@ have_depth:
             filter_type_cache = g_query_filter_type;
             if (res == filter_type_cache) {
                 is_match = 1;
-                current = g_query_cursor;
+                current = gm_QueryCursor;
                 goto lab_395;
             }
             is_match = 0;
-            current = g_query_cursor;
+            current = gm_QueryCursor;
             goto lab_3bc;
         }
 lab_395:
-        if (g_query_filter_state != 0xff) {
+        if (gm_QueryFilterState != 0xff) {
             unsigned int eid;
             char* tbl;
             eid = (unsigned int)*current;
             tbl = g_item_def_table;
             tbl += eid * 0x40;
-            is_match = (unsigned char) tbl[eid] == g_query_filter_state;
+            is_match = (unsigned char) tbl[eid] == gm_QueryFilterState;
         }
         goto lab_3bc;
 lab_nomatch:
@@ -1566,13 +1566,13 @@ lab_3bc:
             }
             current = (unsigned short*)((char*)current + 0x43);
             g_query_count++;
-            g_query_cursor = current;
+            gm_QueryCursor = current;
         } else {
             if (is_match != 0) {
                 matched_ent = current;
             }
             current = *(unsigned short**)((char*)current + 0x3f);
-            g_query_cursor = current;
+            gm_QueryCursor = current;
             if (current != (unsigned short*)0) {
                 int fld;
                 fld = *(int*)((char*)current + 0x14);
@@ -1584,7 +1584,7 @@ lab_3bc:
                 if (g_query_flag2 != 0 && g_query_match_count != 0) {
                     current = (unsigned short*)g_dispatch_table_a[g_query_match_count];
                     g_query_match_count--;
-                    g_query_cursor = current;
+                    gm_QueryCursor = current;
                     if (*(int*)((char*)current + 0x14) != 0) {
                         g_dispatch_table_b[g_query_match_count] = *(int*)((char*)current + 0x14);
 lab_43e:
@@ -1612,12 +1612,12 @@ void* __cdecl gm_NextQueryItemMatch(void)
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_NextQueryItemMatch(): item table not loaded", 1);
 		return 0;
 	}
-	cur = g_query_cursor;
+	cur = gm_QueryCursor;
 	if (cur == 0) {
 		return 0;
 	}
-	if (g_query_active != 0) {
-		g_query_active = 0;
+	if (gm_QueryActive != 0) {
+		gm_QueryActive = 0;
 		if (g_query_flag2 != 0 && *(int*) ((char*) cur + 0x14) != 0) {
 			g_dispatch_table_b[g_query_match_count] = *(int*) ((char*) cur + 0x14);
 			g_query_match_count++;
@@ -1628,18 +1628,18 @@ void* __cdecl gm_NextQueryItemMatch(void)
 	}
 	else if (g_query_flag1 != 0) {
 		cur = (unsigned short*) ((char*) cur + 0x43);
-		g_query_cursor = cur;
+		gm_QueryCursor = cur;
 		if (*cur != 0) {
 			g_query_count++;
 		}
 		while (g_query_count < g_query_limit && *cur == 0) {
 			cur = (unsigned short*) ((char*) cur + 0x43);
-			g_query_cursor = cur;
+			gm_QueryCursor = cur;
 		}
 	}
 	else {
 		cur = *(unsigned short**) ((char*) cur + 0x3f);
-		g_query_cursor = cur;
+		gm_QueryCursor = cur;
 		if (cur != 0) {
 			if (g_query_flag2 != 0 && *(int*) ((char*) cur + 0x14) != 0) {
 				g_dispatch_table_b[g_query_match_count] = *(int*) ((char*) cur + 0x14);
@@ -1652,7 +1652,7 @@ void* __cdecl gm_NextQueryItemMatch(void)
 			}
 			cur = (unsigned short*) g_dispatch_table_a[g_query_match_count];
 			g_query_match_count--;
-			g_query_cursor = cur;
+			gm_QueryCursor = cur;
 			if (*(int*) ((char*) cur + 0x14) != 0) {
 				g_dispatch_table_b[g_query_match_count] = *(int*) ((char*) cur + 0x14);
 				g_query_match_count++;
@@ -1684,8 +1684,8 @@ void* __cdecl gm_NextQueryItemMatch(void)
 			}
 			match = 1;
 		}
-		if (g_query_filter_state != 0xff) {
-			if ((unsigned char) g_item_def_table[*cur * 0x41] != g_query_filter_state) {
+		if (gm_QueryFilterState != 0xff) {
+			if ((unsigned char) g_item_def_table[*cur * 0x41] != gm_QueryFilterState) {
 				goto next;
 			}
 			match = 1;
@@ -1697,18 +1697,18 @@ next:
 		match = 0;
 		if (g_query_flag1 != 0) {
 			cur = (unsigned short*) ((char*) cur + 0x43);
-			g_query_cursor = cur;
+			gm_QueryCursor = cur;
 			if (*cur != 0) {
 				g_query_count++;
 			}
 			while (g_query_count < g_query_limit && *cur == 0) {
 				cur = (unsigned short*) ((char*) cur + 0x43);
-				g_query_cursor = cur;
+				gm_QueryCursor = cur;
 			}
 		}
 		else {
 			cur = *(unsigned short**) ((char*) cur + 0x3f);
-			g_query_cursor = cur;
+			gm_QueryCursor = cur;
 			if (cur != 0) {
 				if (g_query_flag2 != 0 && *(int*) ((char*) cur + 0x14) != 0) {
 					g_dispatch_table_b[g_query_match_count] = *(int*) ((char*) cur + 0x14);
@@ -1721,7 +1721,7 @@ next:
 				}
 				cur = (unsigned short*) g_dispatch_table_a[g_query_match_count];
 				g_query_match_count--;
-				g_query_cursor = cur;
+				gm_QueryCursor = cur;
 				if (*(int*) ((char*) cur + 0x14) != 0) {
 					g_dispatch_table_b[g_query_match_count] = *(int*) ((char*) cur + 0x14);
 					g_query_match_count++;
@@ -1729,7 +1729,7 @@ next:
 			}
 		}
 		if (g_query_count > g_query_limit || (char*) cur >= (char*) g_query_base + 0x14f218) {
-			g_query_cursor = 0;
+			gm_QueryCursor = 0;
 			return 0;
 		}
 	}
@@ -1754,14 +1754,14 @@ unsigned short* __cdecl gm_ff_Objekt(int container_id, int arg_count, int first_
 	g_query_filter_max_id = 0x7fff;
 	g_query_filter_owner = 0xffffffff;
 	g_query_filter_type = 0xffff;
-	g_query_filter_state = 0xff;
+	gm_QueryFilterState = 0xff;
 	g_query_flag3 = 0;
 
 	flag1 = 0;
 	g_query_flag1 = flag1;
 	flag2 = 0;
 	g_query_flag2 = flag2;
-	g_query_active = 1;
+	gm_QueryActive = 1;
 	g_query_count = 0;
 	g_query_match_count = 0;
 
@@ -1787,7 +1787,7 @@ unsigned short* __cdecl gm_ff_Objekt(int container_id, int arg_count, int first_
 				arg_ptr++;
 				break;
 			case 4:
-				g_query_filter_state = *(char*) (arg_ptr + 1);
+				gm_QueryFilterState = *(char*) (arg_ptr + 1);
 				arg_ptr++;
 				break;
 			case 5:
@@ -1821,7 +1821,7 @@ unsigned short* __cdecl gm_ff_Objekt(int container_id, int arg_count, int first_
 	}
 
 query_tail:
-	g_query_cursor = (unsigned short*) container_id;
+	gm_QueryCursor = (unsigned short*) container_id;
 	return gm_NextEntityQueryMatch();
 }
 #if defined(REBREW_SERVER)
@@ -2061,12 +2061,12 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 
 	entry = g_item_def_table + (type << 6) + type;
 	*(unsigned short*) slot = (unsigned short) type;
-	sprintf(buffer, "----->ObjID= %i ObjProt= %i", g_next_object_id, type & 0xffff);
+	sprintf(buffer, "----->ObjID= %i ObjProt= %i", gm_NextObjectId, type & 0xffff);
 #ifdef REBREW_SERVER
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcee, buffer, 8);
 #endif
-	*(int*) (slot + 2) = g_next_object_id;
-	g_next_object_id++;
+	*(int*) (slot + 2) = gm_NextObjectId;
+	gm_NextObjectId++;
 	if (dynamic != NULL) {
 		*(int*) (slot + 0xa) = *(int*) ((char*) dynamic + 1);
 	} else if (existing != NULL) {
@@ -2781,13 +2781,13 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 		 * `lea r,[ebp-0x410]`, the counter loads) lands on the reference's.
 		 * The `geb + 1` store keeps the literal: the symbol there swaps the
 		 * base/index operands of the 0x600 table fill. */
-		nid = g_next_object_id;
+		nid = gm_NextObjectId;
 		s.record = rec;
 		sprintf(s.msg, "----->GebID= %i GebProt= %i", nid, s.type_id);
 	}
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x10d8, s.msg, 8);
-	*(int*) (geb + 1) = g_next_object_id;
-	g_next_object_id = g_next_object_id + 1;
+	*(int*) (geb + 1) = gm_NextObjectId;
+	gm_NextObjectId = gm_NextObjectId + 1;
 	*(unsigned short*) (geb + 0x25) = (unsigned short) owner;
 	*(unsigned short*) (geb + 0x27) = (unsigned short) owner;
 	*(int*) (geb + 0x3d) = 0x64;
@@ -5057,10 +5057,10 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int father_id, i
 	slot[0x216] = 0;
 	slot[0x217] = 0;
 	slot[0x218] = 1;
-	sprintf(work, "----->SpID= %i playermode= %i", g_next_object_id, type);
+	sprintf(work, "----->SpID= %i playermode= %i", gm_NextObjectId, type);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x2637, work, 8);
-	*(int*) (slot + 4) = g_next_object_id;
-	g_next_object_id++;
+	*(int*) (slot + 4) = gm_NextObjectId;
+	gm_NextObjectId++;
 	*(int*) (slot + 0x1e4) = 0x3f800000; /* 1.0f */
 	slot[0x164] = (char) arg6;
 	slot[8] = 0x64;
@@ -5544,7 +5544,7 @@ draw_tail:
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x286c, "gm_AllocSpieler: bug",
 		                   1);
 	}
-	sprintf(work, "----->PlayerID= %i PlayerName= %s", g_next_object_id, slot + 0x30);
+	sprintf(work, "----->PlayerID= %i PlayerName= %s", gm_NextObjectId, slot + 0x30);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x2888, work, 8);
 	return idx;
 }

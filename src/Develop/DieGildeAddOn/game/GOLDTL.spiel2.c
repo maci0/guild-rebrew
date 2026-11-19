@@ -46,7 +46,7 @@ void __cdecl free_node(char*);
 char* __cdecl gm_AllocateObjectSlot(void);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 short* __cdecl gm_ResolveParentEntity(short*);
-extern int g_next_object_id; /* defined in spiel.c */
+extern int gm_NextObjectId; /* defined in spiel.c */
 extern char s_gm_AddObjekt____obj____ob_NULL_10031390[];
 extern char s_gm_AddObjekt____Parent_not_found_10031358[];
 extern unsigned char* g_EntityListStart;

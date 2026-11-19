@@ -1,6 +1,6 @@
 extern char g_save_session_state[];
 extern char g_saved_dynasty_field[];
-extern int g_next_object_id;
+extern int gm_NextObjectId;
 extern char s_gzip_mode_rb[];
 extern char g_dynasty_initial_trait_offset[];
 #include "../game/entity.h"
@@ -2643,7 +2643,7 @@ unsigned int ls_ID2Ptr(void)
 
 /* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
 extern char g_stream_pool[1]; /* 0x10034670 */
-extern int g_stream_count; /* 0x10034678 */
+extern int vfs_OpenStreamCount; /* 0x10034678 */
 /* Canonical definition lives in game/spiel_c/gm_NextEntityQueryMatch.c. */
 extern int g_query_filter_owner;
 
@@ -2680,7 +2680,7 @@ int srv_RecvGame(void)
 		return 0;
 	}
 	*(int*) &g_entity_table_end = 0;
-	if (ls_ReadVfsDataChecked((void*) &g_next_object_id, 4, 1, file_handle) == 0
+	if (ls_ReadVfsDataChecked((void*) &gm_NextObjectId, 4, 1, file_handle) == 0
 		|| ls_ReadVfsDataChecked((void*) &g_chain_id_start, 4, 1, file_handle) == 0
 		|| ls_ReadVfsDataChecked((void*) &g_current_year, 0xe, 1, file_handle) == 0
 		|| ls_ReadVfsDataChecked((void*) &g_current_season, 1, 1, file_handle) == 0

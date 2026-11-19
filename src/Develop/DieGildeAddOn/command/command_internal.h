@@ -57,7 +57,7 @@ extern void* __cdecl gm_FindRecordById(int);
 /* CRT / thread */
 
 /* Common globals */
-extern int g_next_object_id;
+extern int gm_NextObjectId;
 extern unsigned char g_slot_table[2];
 
 /* __FILE__ string for LogMessageInternal calls in command.c */

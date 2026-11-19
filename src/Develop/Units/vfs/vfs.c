@@ -3,7 +3,7 @@
 #define g_vfs_item_pool g_6b7fe0
 #define g_vfs_case_sensitive g_6b7fe8
 #define g_stream_pool g_6b7fe4
-#define g_stream_count g_6b7fec
+#define vfs_OpenStreamCount g_6b7fec
 #endif
 #include "vfs.h"
 extern char g_zlib_version[];
@@ -1212,7 +1212,7 @@ void* __cdecl vfs_Tfopen(char* path, char* mode, VFS_DIR* root)
 	set_mode:
 		((vfs_mode_bits*) (stream + 0x13c))->b1 = binary;
 		((vfs_mode_bits*) (stream + 0x13c))->compressed = packed;
-		g_stream_count++;
+		vfs_OpenStreamCount++;
 		return stream;
 	}
 	for (p = path; *p == '\\' || *p == '/'; p++) {
@@ -1319,7 +1319,7 @@ int __cdecl CloseVfsStream(void* stream)
 					}
 				}
 		}
-		g_stream_count--;
+		vfs_OpenStreamCount--;
 		m_pool_free((int*) &g_stream_pool, stream);
 	}
 	return result;
@@ -1779,7 +1779,7 @@ void* __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_f
 	}
 finalize:
 	if (stream != 0) {
-		g_stream_count = g_stream_count + 1;
+		vfs_OpenStreamCount = vfs_OpenStreamCount + 1;
 		((vfs_mode_bits*) (stream + 0x13c))->read = *(unsigned char*) &mode14;
 		((vfs_mode_bits*) (stream + 0x13c))->compressed = mode18;
 		sprintf(stream, "0x%08X -> length: %u, read: %u compressed: %u", buf, size, (unsigned char) mode14, mode18);
@@ -1854,7 +1854,7 @@ int __cdecl vfs_init(char* name, char flag)
 
 	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
 	REBREW_VFS_LAYOUT_LOG("D:\\Develop\\Units\\vfs\\vfs.c", 1832, "vfs_init(): enter", 1);
-	g_stream_count = 0;
+	vfs_OpenStreamCount = 0;
 	g_vfs_case_sensitive = flag;
 	g_vfs_root = vfs_ScanDir(name, 0);
 	getcwd(cwd, 0x100);
@@ -1891,8 +1891,8 @@ void __cdecl vfs_exit(char verbose)
 		vfs_FreeDirs(g_vfs_root);
 		g_vfs_root = 0;
 	}
-	if (g_stream_count != 0 && verbose != 0) {
-		sprintf(buf, "%i vfs_file(s) were left open!", g_stream_count);
+	if (vfs_OpenStreamCount != 0 && verbose != 0) {
+		sprintf(buf, "%i vfs_file(s) were left open!", vfs_OpenStreamCount);
 		ReportMessage(buf);
 	}
 	if (*(void**) g_stream_pool != 0) {
@@ -1902,7 +1902,7 @@ void __cdecl vfs_exit(char verbose)
 			s = (char*) m_pool_next(it);
 		}
 	}
-	g_stream_count = 0;
+	vfs_OpenStreamCount = 0;
 	if (*(void**) g_vfs_item_pool != 0) {
 		m_pool_free_all((void*) g_vfs_item_pool);
 	}

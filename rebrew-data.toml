@@ -14700,14 +14700,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x1002c3f4"]
 file = "src/Develop/DieGildeAddOn/command/command.c"
-name = "g_game_speed_index"
+name = "cm_GameSpeedIndex"
 kind = "GLOBAL"
 type = "int"
 size = 4
 section = ".data"
+updated_by = "verify"
+updated_at = "2026-11-19T00:48:01+00:00"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T08:54:56+00:00"
 
 ["SERVER.0x1002c3f4".verification]
 status = "EXACT"
@@ -16148,14 +16148,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x10030b6c"]
 file = "src/Develop/DieGildeAddOn/game/spiel_data.c"
-name = "g_next_object_id"
+name = "gm_NextObjectId"
 kind = "GLOBAL"
 type = "int"
 size = 4
 section = ".data"
+updated_by = "verify"
+updated_at = "2026-11-19T00:48:01+00:00"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
 
 ["SERVER.0x10030b6c".verification]
 status = "EXACT"
@@ -16410,14 +16410,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x10030b9e"]
 file = "src/Develop/DieGildeAddOn/game/spiel_data.c"
-name = "g_query_filter_state"
+name = "gm_QueryFilterState"
 kind = "GLOBAL"
 type = "unsigned char"
 size = 1
 section = ".data"
+updated_by = "verify"
+updated_at = "2026-11-19T00:48:01+00:00"
 status = "EXACT"
-updated_by = "data"
-updated_at = "2026-10-06T02:01:42+00:00"
 
 ["SERVER.0x10030b9e".verification]
 status = "EXACT"
@@ -17352,14 +17352,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x10034624"]
 file = "src/bss_layout/bss_head2.c"
-name = "g_array_count"
+name = "m_TrackedCapacity"
 kind = "DATA"
 type = "int"
 size = 4
 section = ".data"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
+status = "EXACT"
 
 ["SERVER.0x10034624".verification]
 status = "EXACT"
@@ -17392,14 +17392,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x1003462c"]
 file = "src/bss_layout/bss_head2.c"
-name = "g_stat2"
+name = "m_AllocatedBlockCount"
 kind = "DATA"
 type = "int"
 size = 4
 section = ".data"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
+status = "EXACT"
 
 ["SERVER.0x1003462c".verification]
 status = "EXACT"
@@ -17412,14 +17412,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x10034630"]
 file = "src/bss_layout/bss_head2.c"
-name = "g_stat3"
+name = "m_PeakBytes"
 kind = "DATA"
 type = "int"
 size = 4
 section = ".data"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
+status = "EXACT"
 
 ["SERVER.0x10034630".verification]
 status = "EXACT"
@@ -17452,14 +17452,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x10034638"]
 file = "src/bss_layout/bss_head2.c"
-name = "g_alloc_counter"
+name = "m_AllocationBalance"
 kind = "GLOBAL"
 type = "int"
 size = 4
 section = ".data"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
+status = "EXACT"
 
 ["SERVER.0x10034638".verification]
 status = "EXACT"
@@ -17686,14 +17686,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x10034678"]
 file = "src/bss_layout/bss_head2.c"
-name = "g_stream_count"
+name = "vfs_OpenStreamCount"
 kind = "DATA"
 type = "int"
 size = 4
 section = ".data"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
+status = "EXACT"
 
 ["SERVER.0x10034678".verification]
 status = "EXACT"
@@ -17727,14 +17727,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x10034680"]
 file = "src/bss_layout/bss_head2.c"
-name = "g_handler_started"
+name = "srv_ShutdownRequested"
 kind = "GLOBAL"
 type = "int"
 size = 4
 section = ".data"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
+status = "EXACT"
 
 ["SERVER.0x10034680".verification]
 status = "EXACT"
@@ -18162,14 +18162,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x10035454"]
 file = "src/bss_layout/bss_head2.c"
-name = "g_query_active"
+name = "gm_QueryActive"
 kind = "GLOBAL"
 type = "char"
 size = 1
 section = ".bss"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
+status = "EXACT"
 
 ["SERVER.0x10035454".verification]
 status = "EXACT"
@@ -18392,14 +18392,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x10035468"]
 file = "src/bss_layout/bss_head2.c"
-name = "g_query_cursor"
+name = "gm_QueryCursor"
 kind = "GLOBAL"
 type = "unsigned short*"
 size = 4
 section = ".bss"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
+status = "EXACT"
 
 ["SERVER.0x10035468".verification]
 status = "EXACT"
@@ -20761,48 +20761,46 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x101deac0"]
 file = "src/bss_layout/bss_late.c"
-name = "g_download_state"
+name = "srv_DownloadState"
 kind = "GLOBAL"
 type = "struct DownloadState"
 size = 44
 section = ".bss"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
 storage_kind = "object"
 backing = ""
-link_symbol = "_g_download_state"
+link_symbol = "_srv_DownloadState"
+status = "EXACT"
 
 ["SERVER.0x101deac0".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "7ab032001146899f2e20efb23eaf9de60cb29c2348f2fa5bda13bb9571fdf1e3"
-definition_hash = "81e27dc89a556204668347dc0abd9c1cbfb0365cd333ccd51192aff03dd9de4e"
+input_hash = "4dac35de960df7661b2c67981f3c58f1d713379f44a2ba7e2ce0cd6ce5070664"
+definition_hash = "bcf42c0091cde73db84f3038f59a06e79a1503779b68c2ce8d9843fba2d7b0b2"
 built_va = "0x101deac0"
 placement_method = "link-symbol"
-measured_at = "2026-11-14T03:08:40+00:00"
+measured_at = "2026-11-19T00:48:01+00:00"
 
 ["SERVER.0x101deac4"]
 file = "src/bss_layout/bss_late.c"
-name = "g_download_received"
+name = "srv_DownloadReceivedBytes"
 kind = "GLOBAL"
 type = "unsigned int"
 size = 4
 section = ".bss"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
 storage_kind = "alias"
 backing = "g_download_state"
+status = "VERIFIED"
 
 ["SERVER.0x101deac4".verification]
-status = "EXACT"
+status = "VERIFIED"
 writer = "verify"
-input_hash = "351c466411811e9e2df3f4e0c5ccd0cfee531297d617f4a0a018310f171265e1"
+input_hash = "54fd9a24fa2365369ccaeacdd0fe5f91bb276babe351183a5416059f219193cb"
 definition_hash = "55deeca271f9389bc284834e7bcb05210b8688fb2eebe6950a63cd215d2f8647"
-built_va = "0x101deac4"
-placement_method = "backing-offset"
-measured_at = "2026-11-14T03:08:40+00:00"
+measured_at = "2026-11-19T00:48:01+00:00"
 
 ["SERVER.0x101deac8"]
 file = "src/bss_layout/bss_late.c"
@@ -20811,20 +20809,18 @@ kind = "GLOBAL"
 type = "unsigned int[8]"
 size = 32
 section = ".bss"
-status = "EXACT"
+status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
 storage_kind = "alias"
 backing = "g_download_state"
 
 ["SERVER.0x101deac8".verification]
-status = "EXACT"
+status = "VERIFIED"
 writer = "verify"
-input_hash = "51d18e212dc595f64ccab19fa51c1cef99d5608ae0679d6d193d1cc4f3cad42d"
+input_hash = "89d0524bb3924449545f80a1f891761df24782c161fe29e227e59ffbf2a75c33"
 definition_hash = "f69628a0e88868395c06ef3ddfe2977cfb87acd411a6cc8ba93e1dfc57336090"
-built_va = "0x101deac8"
-placement_method = "backing-offset"
-measured_at = "2026-11-14T03:08:40+00:00"
+measured_at = "2026-11-19T00:48:01+00:00"
 
 ["SERVER.0x101deae8"]
 file = "src/bss_layout/bss_late.c"
@@ -20833,20 +20829,18 @@ kind = "GLOBAL"
 type = "unsigned int"
 size = 4
 section = ".bss"
-status = "EXACT"
+status = "VERIFIED"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
 storage_kind = "alias"
 backing = "g_download_state"
 
 ["SERVER.0x101deae8".verification]
-status = "EXACT"
+status = "VERIFIED"
 writer = "verify"
-input_hash = "4fa0271095cf02312751f30c4d134947853c61fa50f836c70558370b84ab06d9"
+input_hash = "e36944a82127bf58a26f1d5d6d92d64f010d2fab63e2ca21387db1cc4bf3378f"
 definition_hash = "9bfe397b42e7d4481406b2eee1e38cc08da611809e1abc8b6fd31b34c017f759"
-built_va = "0x101deae8"
-placement_method = "backing-offset"
-measured_at = "2026-11-14T03:08:40+00:00"
+measured_at = "2026-11-19T00:48:01+00:00"
 
 ["SERVER.0x101deaec"]
 file = "src/bss_layout/bss_late.c"
@@ -21026,14 +21020,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x11764084"]
 file = "src/bss_layout/bss_late.c"
-name = "g_max_players"
+name = "srv_MaxPlayers"
 kind = "GLOBAL"
 type = "int"
 size = 4
 section = ".bss"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
+status = "EXACT"
 
 ["SERVER.0x11764084".verification]
 status = "EXACT"
@@ -21046,14 +21040,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x11764088"]
 file = "src/bss_layout/bss_late.c"
-name = "g_tick_rate"
+name = "srv_ListenPort"
 kind = "GLOBAL"
 type = "int"
 size = 4
 section = ".bss"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
+status = "EXACT"
 
 ["SERVER.0x11764088".verification]
 status = "EXACT"
@@ -21106,14 +21100,14 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x11764094"]
 file = "src/bss_layout/bss_late.c"
-name = "g_thread_handle"
+name = "srv_ThreadHandle"
 kind = "GLOBAL"
 type = "void *"
 size = 4
 section = ".bss"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
+status = "EXACT"
 
 ["SERVER.0x11764094".verification]
 status = "EXACT"
@@ -21148,17 +21142,17 @@ measured_at = "2026-11-14T03:08:40+00:00"
 
 ["SERVER.0x117640a0"]
 file = "src/bss_layout/bss_late.c"
-name = "g_alloc_root"
+name = "m_AllocRoot"
 kind = "GLOBAL"
 type = "struct GroupNode"
 size = 40
 section = ".bss"
-status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-10-31T05:00:26+00:00"
+updated_at = "2026-11-19T00:48:01+00:00"
 storage_kind = "object"
 backing = ""
 link_symbol = "_g_alloc_root_name"
+status = "EXACT"
 
 ["SERVER.0x117640a0".verification]
 status = "EXACT"

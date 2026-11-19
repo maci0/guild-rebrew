@@ -14,7 +14,7 @@ int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_KillSpieler(unsigned int index, int param);
 void* __cdecl gm_NextEntityQueryMatch(void);
 extern float g_color_scale;
-extern int g_next_object_id;
+extern int gm_NextObjectId;
 extern unsigned char g_current_season;
 extern const float g_const_0_0;
 
@@ -289,7 +289,7 @@ int __cdecl gm_RandomMod(int range);
 float __cdecl gm_RandomQuadratic(void);
 void __cdecl gm_AddObjekt(int p1, int p2, int p3);
 int __cdecl gm_ObjectsAvailble(int season);
-extern int g_next_object_id;
+extern int gm_NextObjectId;
 extern unsigned char g_current_season;
 
 extern int g_citizen_count;
@@ -400,10 +400,10 @@ ret_false:
 		g_citizen_count = live;
 		*(int*) (slot + 0x170) = (int) dynamic;
 		*(int*) (slot + 0x16c) = (int) dynamic;
-		seq = g_next_object_id;
+		seq = gm_NextObjectId;
 		*(char*) (slot + 2) = 0;
 		*(int*) (slot + 4) = seq;
-		g_next_object_id = seq + 1;
+		gm_NextObjectId = seq + 1;
 	}
 
 	*(int*) (slot + 0x1f0) = 0;
@@ -627,7 +627,7 @@ int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
 	for (i = 0; i < 6; i++) {
 		if (*(int*) (tgt + 0xc + i * 8) == 0) {
 			query = gm_ff_Objekt(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
-			*(int*) (obj + 0x14) = g_next_object_id;
+			*(int*) (obj + 0x14) = gm_NextObjectId;
 			*(int*) (tgt + 0xc + i * 8) = *(int*) (obj + 8);
 			*(int*) (tgt + 0x10 + i * 8) = *(int*) (obj + 0x10);
 			if (query != 0)

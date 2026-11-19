@@ -8,10 +8,10 @@ struct DownloadState {
     unsigned int slots[8];
     unsigned int buffer;
 };
-extern struct DownloadState g_download_state;
-#define g_download_total_size g_download_state.total_size
-#define g_download_received g_download_state.received
-#define g_download_slots g_download_state.slots
-#define g_download_buffer g_download_state.buffer
+extern struct DownloadState srv_DownloadState;
+#define g_download_total_size srv_DownloadState.total_size
+#define srv_DownloadReceivedBytes srv_DownloadState.received
+#define g_download_slots srv_DownloadState.slots
+#define g_download_buffer srv_DownloadState.buffer
 
 #endif

@@ -14,7 +14,7 @@ typedef struct
 } Pair;
 // SIZE 0x8
 
-extern int g_773d38;
+extern int cm_LastCrimeId;
 extern Rec2d_9a3800 g_9a3800[512];
 extern Pair_99f800 g_99f800[0x800];
 
@@ -22,7 +22,7 @@ void __cdecl fcn_004f6740(void)
 {
 	int i;
 
-	g_773d38 = 0;
+	cm_LastCrimeId = 0;
 	for (i = 0; i < 512; i++) {
 		g_9a3800[i].x16 = -1;
 		g_9a3800[i].x12 = -1;

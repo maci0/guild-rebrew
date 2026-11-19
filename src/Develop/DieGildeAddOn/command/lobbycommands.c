@@ -86,7 +86,7 @@ int __cdecl lb_ExPlayerReadyStatus(unsigned int* player, unsigned char* msg)
 #include "command.h"
 #include "../../Units/Error/error.h"
 
-extern int g_max_players;
+extern int srv_MaxPlayers;
 
 /* Lobby handler: sends the current player list to a client.
  * Iterates player slots and writes connection info into the
@@ -126,7 +126,7 @@ join:
 			count++;
 		}
 	}
-	if (count >= g_max_players) {
+	if (count >= srv_MaxPlayers) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\lobbycommands.c", 0x2b1, "Game is full", 1);
 		msg[0] = 2;
 		if (srv_PutConnSCommand((unsigned int*) player, (unsigned char*) msg) == -1) {

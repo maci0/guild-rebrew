@@ -21,7 +21,7 @@ int __cdecl vfs_FlushAndClose(int);
 extern char g_6b7fe4[];
 extern int g_6b7fec;
 #define g_stream_pool g_6b7fe4
-#define g_stream_count g_6b7fec
+#define vfs_OpenStreamCount g_6b7fec
 
 int __cdecl CloseVfsStream(void* stream)
 {
@@ -76,7 +76,7 @@ int __cdecl CloseVfsStream(void* stream)
 					}
 				}
 		}
-		g_stream_count--;
+		vfs_OpenStreamCount--;
 		m_pool_free((int*) g_stream_pool, stream);
 	}
 	return result;

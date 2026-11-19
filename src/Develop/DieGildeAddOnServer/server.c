@@ -78,7 +78,7 @@ int g_server_flag = 1;
 /* Creates the TCP listen socket for accepting client
  * connections. Calls WSAStartup, socket(), bind(), listen(). */
 
-extern int g_handler_started;
+extern int srv_ShutdownRequested;
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 
@@ -88,7 +88,7 @@ extern int g_game_speed_value; /* 0x1002c3f0 */
 extern char g_module_path[0x104]; /* 0x101de9a0 */
 extern int g_current_year; /* 0x10035880 */
 
-extern int g_handler_started; /* 0x10034680 */
+extern int srv_ShutdownRequested; /* 0x10034680 */
 extern int g_clock_copy_mid; /* 0x10035888 */
 extern unsigned short g_current_hour; /* 0x10035884 */
 
@@ -143,11 +143,11 @@ int __cdecl srv_SendPlayerData(unsigned int*);
 
 extern unsigned int g_next_tick_time; /* 0x101deaf0 */
 
-extern int g_max_players; /* 0x11764084 */
+extern int srv_MaxPlayers; /* 0x11764084 */
 
-extern int g_tick_rate;    /* 0x11764088 */
-extern int g_tick_rate;    /* 0x11764088 */
-extern int g_max_players; /* 0x11764084 */
+extern int srv_ListenPort;    /* 0x11764088 */
+extern int srv_ListenPort;    /* 0x11764088 */
+extern int srv_MaxPlayers; /* 0x11764084 */
 #include "../Units/Error/error.h"
 #include "../Units/m_alloc/m_alloc.h"
 
@@ -208,7 +208,7 @@ extern unsigned char g_connections[0x264264]; /* 0x101deb00: 8 slots of 0x264264
 
 extern int g_players_synced; /* 0x11764090: every player sent 0x20 */
 
-extern void* g_thread_handle;
+extern void* srv_ThreadHandle;
 
 #include "../Units/Error/error.h"
 #include "../Units/m_alloc/m_alloc.h"
@@ -243,8 +243,8 @@ int __stdcall DllMain(int a, int b, int c)
 #if defined(REBREW_SERVER)
 int __cdecl Init(LPVOID param)
 {
-	g_thread_handle = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE) ServerMainThread, param, 0, (LPDWORD) &param);
-	return g_thread_handle != 0;
+	srv_ThreadHandle = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE) ServerMainThread, param, 0, (LPDWORD) &param);
+	return srv_ThreadHandle != 0;
 }
 #endif
 
@@ -255,15 +255,15 @@ int __cdecl Init(LPVOID param)
 #if defined(REBREW_SERVER)
 void __cdecl Exit(void)
 {
-	if (!g_thread_handle) {
+	if (!srv_ThreadHandle) {
 		return;
 	}
-	g_handler_started = 1;
+	srv_ShutdownRequested = 1;
 	do {
 		Sleep(10);
-	} while (g_handler_started);
-	TerminateThread(g_thread_handle, 0);
-	CloseHandle(g_thread_handle);
+	} while (srv_ShutdownRequested);
+	TerminateThread(srv_ThreadHandle, 0);
+	CloseHandle(srv_ThreadHandle);
 }
 #endif
 
@@ -306,8 +306,8 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 	*(unsigned int*) (ini_tail + 4) = *(unsigned int*) ("\\game.ini" + 4);
 	*(unsigned short*) (ini_tail + 8) = *(unsigned short*) ("\\game.ini" + 8);
 
-	g_tick_rate = (int) GetPrivateProfileIntA("Config", "Port", 0x1d6b, module_path);
-	g_max_players = 2;
+	srv_ListenPort = (int) GetPrivateProfileIntA("Config", "Port", 0x1d6b, module_path);
+	srv_MaxPlayers = 2;
 	GetPrivateProfileStringA(
 		"General",
 		"GamePath",
@@ -321,22 +321,22 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 
 	if (*(unsigned short*) ((char*) startup_cfg_words + 2) == 1) {
 		*((unsigned char*) startup_cfg_words + 0x27) = 0;
-		*(unsigned int*) &g_max_players = *(unsigned int*) ((char*) startup_cfg_words + 0x26) & 0xff;
+		*(unsigned int*) &srv_MaxPlayers = *(unsigned int*) ((char*) startup_cfg_words + 0x26) & 0xff;
 	}
 	else if (*(unsigned short*) ((char*) startup_cfg_words + 2) == 4) {
 		*((unsigned char*) startup_cfg_words + 0x27) = 0;
-		*(unsigned int*) &g_max_players = *(unsigned int*) ((char*) startup_cfg_words + 0x26) & 0xff;
+		*(unsigned int*) &srv_MaxPlayers = *(unsigned int*) ((char*) startup_cfg_words + 0x26) & 0xff;
 	}
 
 	srv_Init();
-	sprintf(log_buffer, "Waiting for %li Connection(s)\n", *(int*) &g_max_players);
+	sprintf(log_buffer, "Waiting for %li Connection(s)\n", *(int*) &srv_MaxPlayers);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x131, log_buffer, 1);
 
 	srand(timeGetTime());
 	last_announce_tick = 0;
 	phase_complete = 0;
 	while (phase_complete == 0) {
-		if (*(int*) &g_handler_started != 0) {
+		if (*(int*) &srv_ShutdownRequested != 0) {
 			break;
 		}
 		connected_players = 0;
@@ -350,7 +350,7 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 
 		srv_AcceptConnections();
 
-		if (connected_players == *(unsigned int*) &g_max_players) {
+		if (connected_players == *(unsigned int*) &srv_MaxPlayers) {
 			phase_complete = 1;
 			for (player_slot = (unsigned int*) g_connections; (int) player_slot < (int) (g_connections + 0x1321320);
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264)) {
@@ -448,7 +448,7 @@ send_start_commands:
 	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x1ca, "Receiving Data\n", 1);
 	phase_complete = 0;
 	while (phase_complete == 0) {
-		if (*(int*) &g_handler_started != 0) {
+		if (*(int*) &srv_ShutdownRequested != 0) {
 			break;
 		}
 
@@ -621,8 +621,8 @@ send_start_commands:
 	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x2a8, "Let's go!\n", 1);
 
 	for (;;) {
-		if (*(int*) &g_handler_started != 0) {
-			*(int*) &g_handler_started = 0;
+		if (*(int*) &srv_ShutdownRequested != 0) {
+			*(int*) &srv_ShutdownRequested = 0;
 			return 0;
 		}
 
@@ -796,7 +796,7 @@ int __cdecl srv_Init(void)
 	}
 	gm_KillAllSpieler();
 	srv_InitBuildingTypeTable();
-	g_net_socket = srv_CreateListenSocket(*(int*) &g_tick_rate);
+	g_net_socket = srv_CreateListenSocket(*(int*) &srv_ListenPort);
 	if (g_net_socket == -1) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x3db, "***ERROR: Initialization of Socket failed!\n", 1);
 		goto srv_done;
@@ -1281,7 +1281,7 @@ int __cdecl srv_LoadBuf(void)
 						 * or moving the memset first, rotates the registers here
 						 * and in the memcpy arm below. */
 						g_download_total_size = total;
-						g_download_received = 0;
+						srv_DownloadReceivedBytes = 0;
 						memset(g_download_slots, 0xff, 32);
 						g_download_buffer = (unsigned int) m_alloc(total, "srv_LoadBuf");
 					}
@@ -1295,12 +1295,12 @@ int __cdecl srv_LoadBuf(void)
 						 * register in the reference's order. Volatile locals made
 						 * them non-advancing copies; inline reads load into edi
 						 * and emit `add edi,ecx`. */
-						rec = g_download_received;
+						rec = srv_DownloadReceivedBytes;
 						buf = g_download_buffer;
 						memcpy((void*) (buf + rec), conn + 10, 0x80);
-						g_download_received = g_download_received + 0x80;
+						srv_DownloadReceivedBytes = srv_DownloadReceivedBytes + 0x80;
 					}
-					if (g_download_received >= g_download_total_size) {
+					if (srv_DownloadReceivedBytes >= g_download_total_size) {
 						*conn = *conn & 0xfffffff7;
 					}
 					status = *conn & 0xffffff7f;

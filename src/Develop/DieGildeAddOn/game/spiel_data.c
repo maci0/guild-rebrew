@@ -408,7 +408,7 @@ BuildingDefaults g_building_defaults[37] = {
 	{ 0x00, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
 };
 
-int g_next_object_id = 1;
+int gm_NextObjectId = 1;
 
 int g_entity_id_counter = 1;
 
@@ -435,7 +435,7 @@ int g_query_filter_owner = -1;
 
 unsigned short g_query_filter_type = 0xffff;
 
-unsigned char g_query_filter_state = 0xff;
+unsigned char gm_QueryFilterState = 0xff;
 
 /* 6-byte stat records for gm_AllocSpieler: 95 by slot+0x164, then 35 by
  * slot+0x165 from 0x10030dda (g_stat_table_30dda). */

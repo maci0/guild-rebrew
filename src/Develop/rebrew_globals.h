@@ -38,33 +38,33 @@ extern char s_m_pool_get_free_tp_m_pool[27]; /* 0x10028B78 */
 extern unsigned char g_data_restore_gap[0xb000]; /* 0x1002A000 */
 extern char s_ahm_AllocAhmInfo[]; /* 0x1002A0F8 */
 /* ADDRESS: SERVER 0x1002c3f4 */
-extern int g_game_speed_index; /* 0x1002C3F4 */
+extern int cm_GameSpeedIndex; /* 0x1002C3F4 */
 extern int g_file_version; /* 0x1002D4EC */
 /* ADDRESS: SERVER 0x1002d4f0 */
 extern char g_save_header_tail[]; /* 0x1002D4F0 */
 extern int g_producer_id_table[2720]; /* 0x1002DDE0 */
-extern unsigned char g_query_filter_state; /* 0x10030B9E */
+extern unsigned char gm_QueryFilterState; /* 0x10030B9E */
 extern void * _FPinit; /* 0x100317D8, first init fnptr */
 extern char g_lock_stream_table; /* 0x100317F8, legacy one-byte view of _iob[0] */
 extern struct rterr_entry g_rterrlist[18]; /* 0x10033EF0, _NMSG_WRITE runtime-error table (0x1001fe31) */
 /* ADDRESS: SERVER 0x10034618 */
 extern unsigned int g_log_mode_flags; /* 0x10034618 */
-extern int g_array_count; /* 0x10034624 */
+extern int m_TrackedCapacity; /* 0x10034624 */
 extern int g_stat1; /* 0x10034628 */
-extern int g_stat2; /* 0x1003462C */
-extern int g_stat3; /* 0x10034630 */
+extern int m_AllocatedBlockCount; /* 0x1003462C */
+extern int m_PeakBytes; /* 0x10034630 */
 extern int g_stat4; /* 0x10034634 */
 extern int g_alloc_report_groups; /* 0x1003463C */
 extern void* g_array_ptr; /* 0x10034640 */
 extern int g_connection_counter; /* 0x1003467C, connection counter */
 /* ADDRESS: SERVER 0x10034680 */
-extern int g_handler_started; /* 0x10034680 */
-extern char g_query_active; /* 0x10035454 */
+extern int srv_ShutdownRequested; /* 0x10034680 */
+extern char gm_QueryActive; /* 0x10035454 */
 extern int g_query_count; /* 0x10035458 */
 extern char g_query_flag1; /* 0x1003545C */
 extern char g_query_flag2; /* 0x1003545D */
 extern char g_query_flag3; /* 0x1003545E */
-extern unsigned short* g_query_cursor; /* 0x10035468 */
+extern unsigned short* gm_QueryCursor; /* 0x10035468 */
 extern int g_current_year; /* 0x10035880 */
 /* ADDRESS: SERVER 0x10035884 */
 extern unsigned short g_current_hour; /* 0x10035884 */
@@ -84,7 +84,7 @@ extern char g_office_slots[0x3f0]; /* 0x101DE5A0 */
 extern int g_net_socket; /* 0x101DEAEC, listen socket */
 extern unsigned char g_connections[0x264264]; /* 0x101DEB00, first player slot (stride 0x264264 bytes) */
 /* ADDRESS: SERVER 0x11764088 */
-extern int g_tick_rate; /* 0x11764088 */
+extern int srv_ListenPort; /* 0x11764088 */
 extern char g_log_buffer[256]; /* 0x11766100 */
 extern int g_log_file_handle; /* 0x11766204 */
 
@@ -144,11 +144,11 @@ extern void * pfnMessageBoxA; /* 0x10035838, cached MessageBoxA proc (0x10022107
 extern void * pfnGetActiveWindow; /* 0x1003583C, cached GetActiveWindow proc (0x10022107) */
 extern void * pfnGetLastActivePopup; /* 0x10035840, cached GetLastActivePopup proc (0x10022107) */
 /* ADDRESS: SERVER 0x11764084 */
-extern int g_max_players; /* 0x11764084 */
+extern int srv_MaxPlayers; /* 0x11764084 */
 /* ADDRESS: SERVER 0x1176408c */
 extern int g_chain_id_start; /* 0x1176408C */
 /* ADDRESS: SERVER 0x11764094 */
-extern void * g_thread_handle; /* 0x11764094 */
+extern void * srv_ThreadHandle; /* 0x11764094 */
 extern int __sbh_sizeHeaderList; /* 0x11766430, __sbh_sizeHeaderList - allocated header-list size */
 extern int __sbh_indGroupDefer; /* 0x11766434, __sbh_indGroupDefer - deferred group index */
 extern void * __sbh_pHeaderScan; /* 0x11766438, pool: region scan cursor (ptr into array) */
@@ -168,7 +168,7 @@ extern int g_envp_built; /* 0x1176758C, __envp built flag */
 extern int g_cmdline_parsed; /* 0x11767590, cmdline/env parsed flag */
 
 /* ADDRESS: SERVER 0x10034638 */
-extern int g_alloc_counter;
+extern int m_AllocationBalance;
 extern int g_entity_id_field; /* 0x100358A4 */
 extern int g_entity_ref_table; /* 0x100358FC */
 extern char g_dynamic_entities[]; /* 0x1009ACA2 */
@@ -176,7 +176,7 @@ extern int g_some_limit; /* 0x1009ACFC */
 extern char* g_slot_array; /* 0x1009B770 */
 extern unsigned int g_entity_slot_table[]; /* 0x100A8C94 */
 extern unsigned int g_download_total_size; /* 0x101DEAC0 */
-extern unsigned int g_download_received; /* 0x101DEAC4 */
+extern unsigned int srv_DownloadReceivedBytes; /* 0x101DEAC4 */
 extern unsigned int g_download_slots[8]; /* 0x101DEAC8 */
 extern unsigned int g_download_buffer; /* 0x101DEAE8 */
 extern unsigned int g_player_slot_field; /* 0x101DEB14 */

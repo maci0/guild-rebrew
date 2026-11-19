@@ -15,7 +15,7 @@ void __cdecl gm_KillAllSpieler(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_slot_table[2];
 #include "spiel.h"
-extern int g_next_object_id; /* defined in spiel.c */
+extern int gm_NextObjectId; /* defined in spiel.c */
 
 int __cdecl gm_GetBuildingTypeCategory(int);
 

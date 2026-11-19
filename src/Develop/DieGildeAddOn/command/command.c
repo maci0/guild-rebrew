@@ -196,7 +196,7 @@ char* __cdecl gm_AllocObjekt(int, int, int);
 
 extern int g_game_speed_table[5];
 extern int g_game_speed_value;
-extern int g_game_speed_index;
+extern int cm_GameSpeedIndex;
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
@@ -712,7 +712,7 @@ int g_alchemy_entity_table[232] = {
 
 int g_game_speed_value = 770;
 
-int g_game_speed_index = 2;
+int cm_GameSpeedIndex = 2;
 
 int __cdecl cm_ChkCommandType();
 int __cdecl cm_MarkAndReturn();
@@ -1577,7 +1577,7 @@ int __cdecl cm_ExAllocRaum(int cmd, char* result)
 	int field_id;
 	int i;
 
-	*(int*) (cmd + 0x10) = g_next_object_id;
+	*(int*) (cmd + 0x10) = gm_NextObjectId;
 	if (*(int*) (cmd + 0x16) == -1) {
 		i = 0xffff;
 	}
@@ -1636,7 +1636,7 @@ int __cdecl cm_ExAllocSpieler(int cmd, char* result)
 	int field_id;
 	char* entity_ptr;
 
-	*(int*) (cmd + 0x10) = g_next_object_id;
+	*(int*) (cmd + 0x10) = gm_NextObjectId;
 	seed = rand();
 	*(int*) (cmd + 0x26) = seed;
 	srv_SeedRandom(seed);
@@ -1700,7 +1700,7 @@ int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 	{
 		char* c = (char*) cmd;
 		unsigned int kind;
-		*(int*)(c + 0x10) = g_next_object_id;
+		*(int*)(c + 0x10) = gm_NextObjectId;
 		*(int*)(c + 0x45) = rand();
 		srv_SeedRandom(*(int*)(c + 0x22));
 		if (result)
@@ -1817,7 +1817,7 @@ int __cdecl cm_ExMoveCredits(int cmd, char* result)
 	void* entity_ptr;
 	int field_result;
 
-	*(int*) (cmd + 0x18) = g_next_object_id;
+	*(int*) (cmd + 0x18) = gm_NextObjectId;
 
 	if (*(int*) (cmd + 0x14) != -1) {
 		entity_ptr = (void*) gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x14));
@@ -1857,7 +1857,7 @@ int __cdecl cm_ExTransferCurrencyNoKill(int cmd, char* result)
 {
 	int field_result;
 
-	*(int*) (cmd + 0x18) = g_next_object_id;
+	*(int*) (cmd + 0x18) = gm_NextObjectId;
 	if (*(int*) (cmd + 0x14) != -1) {
 		field_result = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x14));
 		*(int*) (cmd + 0x14) = field_result;
@@ -1966,7 +1966,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	char obj_category;
 
 	source_owner_entity = (short*)0;
-	*(int*)(cmd + 0x1a) = g_next_object_id;
+	*(int*)(cmd + 0x1a) = gm_NextObjectId;
 	dest_owner_entity = (short*)0;
 	resolved_dynamic = (short*)0;
 	dest_game_object = (ushort*)0;
@@ -2649,7 +2649,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	char* recipe_shift;
 	uint recipe_idx;
 
-	*(int*)(msg + 0x1a) = g_next_object_id;
+	*(int*)(msg + 0x1a) = gm_NextObjectId;
 	quantity = gm_GetFieldByType((char*)msg, *(int*)(msg + 0x10));
 	*(int*)(msg + 0x10) = quantity;
 	quantity = gm_ResolveEntityById((void**)0, (void**)&lager, (void**)0, quantity);
@@ -2951,7 +2951,7 @@ int __cdecl cm_ExAllocObjekt(int cmd, char* result)
 	char* entity;
 	unsigned int slot_idx;
 
-	*(int*) (cmd + 0x35) = g_next_object_id;
+	*(int*) (cmd + 0x35) = gm_NextObjectId;
 	field_id = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x10));
 	*(int*) (cmd + 0x10) = field_id;
 	game_obj = gm_AllocObjekt(field_id, (unsigned int) *(unsigned short*) (cmd + 0x14), 1);
@@ -3630,7 +3630,7 @@ int __cdecl cm_ExSysMessage(int cmd, char* result)
 			speed_index = 4;
 		}
 		g_game_speed_value = g_game_speed_table[speed_index];
-		g_game_speed_index = speed_index;
+		cm_GameSpeedIndex = speed_index;
 	}
 	return 0;
 }
@@ -3846,7 +3846,7 @@ int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 	char* dst;
 	uint f;
 
-	*(int*) (cmd + 0x10) = g_next_object_id;
+	*(int*) (cmd + 0x10) = gm_NextObjectId;
 	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x14));
 	*(int*) (cmd + 0x14) = field;
 	obj = gm_AllocObjekt(field, 0x1b5, 1);
@@ -4018,7 +4018,7 @@ int __cdecl cm_ExSetGebUpgrade(int cmd, char* result)
 	uint type_id;
 	char* entry;
 
-	*(int*) (cmd + 0x14) = g_next_object_id;
+	*(int*) (cmd + 0x14) = gm_NextObjectId;
 	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
 	if (building == (ushort*) 0) {
 		LogMessageInternal(
@@ -4173,7 +4173,7 @@ int __cdecl cm_ExEmployWorker(int cmd, char* result)
 	char worker_type;
 
 	workplace_entity = (ushort*) 0;
-	*(int*) (cmd + 0x1f) = g_next_object_id;
+	*(int*) (cmd + 0x1f) = gm_NextObjectId;
 	random_seed = rand();
 	*(int*) (cmd + 0x23) = random_seed;
 	srv_SeedRandom(random_seed);
@@ -4295,7 +4295,7 @@ int __cdecl cm_ExAllocCharacter(int cmd, char* result)
 	unsigned int entity;
 	unsigned int idx;
 
-	*(int *) (cmd + 0x10) = g_next_object_id;
+	*(int *) (cmd + 0x10) = gm_NextObjectId;
 	*(int *) (cmd + 0x22) = rand();
 	if (result) {
 		result[0] = 2;
@@ -4384,7 +4384,7 @@ int __cdecl cm_ExCreateGeb(int cmd, char* result)
 		return 1;
 	}
 
-	*(int*) (cmd + 0x14) = g_next_object_id;
+	*(int*) (cmd + 0x14) = gm_NextObjectId;
 	building = gm_AllocGebaeude(*(unsigned char*) (cmd + 0x18), *owner_record);
 	if (building == (char*) 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x539e, "cm_ExCreateGeb(): failed", 1);
@@ -4824,7 +4824,7 @@ int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
 
 	(void) result;
 
-	*(int*) (cmd + 0x10) = g_next_object_id;
+	*(int*) (cmd + 0x10) = gm_NextObjectId;
 	attacker = gm_SearchTable67(*(int*) (cmd + 0x26));
 	if (attacker == 0) {
 		return 1;
@@ -4882,7 +4882,7 @@ int __cdecl cm_DispatchProduction(int cmd, char* result)
 
 	(void) result;
 
-	*(int*) (cmd + 0x27) = g_next_object_id;
+	*(int*) (cmd + 0x27) = gm_NextObjectId;
 	rc = rand();
 	*(int*) (cmd + 0x2b) = rc;
 	data_ptr = (uint32_t*) (cmd + 0x10);
@@ -4938,7 +4938,7 @@ int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
 
 	(void) result;
 
-	*(int*) (cmd + 0x14) = g_next_object_id;
+	*(int*) (cmd + 0x14) = gm_NextObjectId;
 	val = rand();
 	*(int*) (cmd + 0x10) = val;
 	srv_SeedRandom(val);
@@ -4987,7 +4987,7 @@ int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
 
 	(void) result;
 
-	*(int*) (cmd + 0x14) = g_next_object_id;
+	*(int*) (cmd + 0x14) = gm_NextObjectId;
 	val = rand();
 	*(int*) (cmd + 0x10) = val;
 	srv_SeedRandom(val);

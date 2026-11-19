@@ -15,9 +15,9 @@ extern int __cdecl crt_toupper(int current_char);
  * null check on the pool allocation before the finalize stores. */
 
 #ifndef REBREW_SERVER
-#define g_stream_count g_6b7fec
+#define vfs_OpenStreamCount g_6b7fec
 #endif
-extern int g_stream_count;
+extern int vfs_OpenStreamCount;
 extern void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
 extern void __cdecl m_pool_free(void* pool, void* item);
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
@@ -131,7 +131,7 @@ void* __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_f
 		*(int*) (stream + 0x114) = 0;
 	}
 finalize:
-	g_stream_count = g_stream_count + 1;
+	vfs_OpenStreamCount = vfs_OpenStreamCount + 1;
 	((vfs_mode_bits_tl*) (stream + 0x13c))->read = *(unsigned char*) &mode14;
 	((vfs_mode_bits_tl*) (stream + 0x13c))->compressed = mode18;
 	sprintf(stream, "0x%08X -> length: %u, read: %u compressed: %u", buf, size, (unsigned char) mode14, mode18);

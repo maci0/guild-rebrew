@@ -29,9 +29,9 @@ void __cdecl ReportMessage(char* msg);
 
 extern int g_stat1;
 
-extern int g_stat2;
+extern int m_AllocatedBlockCount;
 
-extern int g_stat3;
+extern int m_PeakBytes;
 
 extern int g_stat4;
 void __cdecl free(void* ptr);
@@ -63,7 +63,7 @@ extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
  * regular `.data` precedes its COMDATs, so the stubs were displacing the very
  * text they stood in for). */
 
-extern int g_alloc_counter;          /* 0x10034638 */
+extern int m_AllocationBalance;          /* 0x10034638 */
 
 /* m_init — allocates and zeroes the packet pool (0x100068E0).
  * Target 162 bytes; compiled 146. Of the 16-byte size delta, 12 bytes are the
@@ -193,7 +193,7 @@ extern int g_alloc_counter;          /* 0x10034638 */
 void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */
 void __cdecl ReportMessage(char* msg); /* Single arg log? */
 void* __cdecl malloc(unsigned int size); /* 0x1001a7f7 - game malloc */
-extern int g_alloc_counter;
+extern int m_AllocationBalance;
 /* g_alloc_root: the reference cannot prove its address nonzero and keeps the loop-head test. */
 void* __cdecl m_alloc(unsigned int size, const char* file_and_line);
 /* Allocates tracked memory. Wraps the CRT allocator with allocation
@@ -515,12 +515,12 @@ extern int g_6b6f70;
 extern int g_6b6f74;
 extern struct GroupNode g_14cc5c0;
 #define g_array_ptr g_6b6f80
-#define g_array_count g_6b6f64
-#define g_alloc_counter g_6b6f78
+#define m_TrackedCapacity g_6b6f64
+#define m_AllocationBalance g_6b6f78
 #define g_alloc_root_name g_14cc5c0
 #define g_stat1 g_6b6f68
-#define g_stat2 g_6b6f6c
-#define g_stat3 g_6b6f70
+#define m_AllocatedBlockCount g_6b6f6c
+#define m_PeakBytes g_6b6f70
 #define g_stat4 g_6b6f74
 #endif
 
@@ -548,7 +548,7 @@ void* __cdecl m_alloc(unsigned int size, const char* tag)
 	if (size == 0) {
 		return 0;
 	}
-	g_alloc_counter++;
+	m_AllocationBalance++;
 	node = (struct GroupNode*) &g_alloc_root_name;
 	if (tag != 0) {
 		p = strchr(tag, ':');
@@ -644,8 +644,8 @@ void* __cdecl m_alloc(unsigned int size, const char* tag)
 	 * With the volatile read in place, `g_stat2 < slots` emits the
 	 * reference's `cmp eax,edi; jge`; the earlier `g_stat2 - slots < 0`
 	 * spelling emitted `sub eax,edi; jns` (-2 linked under /O2 /Gd). */
-	slots = *(volatile int*) &g_array_count;
-	if (g_stat2 < slots) {
+	slots = *(volatile int*) &m_TrackedCapacity;
+	if (m_AllocatedBlockCount < slots) {
 		slot = (char*) g_array_ptr;
 		i = 0;
 		while (i < slots) {
@@ -662,16 +662,16 @@ void* __cdecl m_alloc(unsigned int size, const char* tag)
 		*(unsigned int*) (slot + 0xc) = size;
 		*(struct GroupNode**) slot = node;
 		g_stat1 += (int) size;
-		if (g_stat1 > g_stat3) {
-			g_stat3 = g_stat1;
+		if (g_stat1 > m_PeakBytes) {
+			m_PeakBytes = g_stat1;
 		}
 		node->size_total += (int) size;
 		if (node->size_total > node->size_max) {
 			node->size_max = node->size_total;
 		}
-		g_stat2++;
-		if (g_stat2 > g_stat4) {
-			g_stat4 = g_stat2;
+		m_AllocatedBlockCount++;
+		if (m_AllocatedBlockCount > g_stat4) {
+			g_stat4 = m_AllocatedBlockCount;
 		}
 		/* The reference stores count_max from a second copy of count_total
 		 * (0x100067e1 `mov ecx,edi`), not from the compare's `eax`.  That
@@ -692,12 +692,12 @@ void* __cdecl m_alloc(unsigned int size, const char* tag)
 
 #ifndef REBREW_SERVER
 #undef g_array_ptr
-#undef g_array_count
-#undef g_alloc_counter
+#undef m_TrackedCapacity
+#undef m_AllocationBalance
 #undef g_alloc_root_name
 #undef g_stat1
-#undef g_stat2
-#undef g_stat3
+#undef m_AllocatedBlockCount
+#undef m_PeakBytes
 #undef g_stat4
 #endif
 
@@ -728,7 +728,7 @@ extern void* __cdecl malloc(unsigned int size);
 
 /* shortcut: legacy global names differ by build; remove these bindings after shared declarations are recovered. */
 #ifdef REBREW_SERVER
-#define m_TRACKED_SLOT_COUNT g_array_count
+#define m_TRACKED_SLOT_COUNT m_TrackedCapacity
 #define m_TRACKED_SLOTS g_array_ptr
 #else
 #define m_TRACKED_SLOT_COUNT g_6b6f64
@@ -770,8 +770,8 @@ void __cdecl m_FreeTracked(void* ptr)
 	if (ptr == 0) {
 		return;
 	}
-	g_alloc_counter--;
-	count = g_array_count;
+	m_AllocationBalance--;
+	count = m_TrackedCapacity;
 	pool = (char*) g_array_ptr;
 	for (i = 0; i < count; i++) {
 		if (*(void**) (pool + 8) == ptr) {
@@ -786,7 +786,7 @@ void __cdecl m_FreeTracked(void* ptr)
 	size = *(int*) (pool + 0xc);
 	*(int*) (pool + 8) = 0;
 	free(ptr);
-	g_stat2--;
+	m_AllocatedBlockCount--;
 	block = *(int**) pool;
 	block[5]--;
 	g_stat1 -= size;
@@ -838,10 +838,10 @@ void __cdecl m_init(int n)
 {
 	int len;
 
-	g_array_count = n;
+	m_TrackedCapacity = n;
 	g_stat1 = 0;
-	g_stat3 = 0;
-	g_stat2 = 0;
+	m_PeakBytes = 0;
+	m_AllocatedBlockCount = 0;
 	g_stat4 = 0;
 	len = n * 16;
 	g_array_ptr = malloc((unsigned int) len);
@@ -898,7 +898,7 @@ void __cdecl m_init(int n)
 	g_list_head = 0;
 }
 #pragma optimize("", on)
-extern int g_alloc_counter;
+extern int m_AllocationBalance;
 
 #include <stdio.h>
 #include <string.h>
@@ -920,12 +920,12 @@ extern int g_6b6f70;
 extern int g_6b6f74;
 extern struct GroupNode g_14cc5c0;
 #define g_stat1 g_6b6f68
-#define g_stat2 g_6b6f6c
-#define g_stat3 g_6b6f70
+#define m_AllocatedBlockCount g_6b6f6c
+#define m_PeakBytes g_6b6f70
 #define g_stat4 g_6b6f74
 #define g_alloc_root_name g_14cc5c0
 #define g_array_ptr m_TRACKED_SLOTS
-#define g_array_count m_TRACKED_SLOT_COUNT
+#define m_TrackedCapacity m_TRACKED_SLOT_COUNT
 #endif
 
 void __cdecl m_ReportGroupInfo(const char* toggle)
@@ -938,11 +938,11 @@ void __cdecl m_ReportGroupInfo(const char* toggle)
 	char match;
 	char* p;
 
-	if (g_stat1 == 0 && g_stat2 == 0) {
-		sprintf(buf, "[*] Memory-Subsystem-Information:\n--> max_used %i blocks in %i bytes (%ik).", g_stat4, g_stat3, g_stat3 >> 10);
+	if (g_stat1 == 0 && m_AllocatedBlockCount == 0) {
+		sprintf(buf, "[*] Memory-Subsystem-Information:\n--> max_used %i blocks in %i bytes (%ik).", g_stat4, m_PeakBytes, m_PeakBytes >> 10);
 		} else {
 		sprintf(buf, "[*] Memory-Subsystem-Information: [*]\n--> max_used %i blocks in %i bytes (%ik). %i block(s) left in %i (%ik) bytes.",
-			g_stat4, g_stat3, g_stat3 >> 10, g_stat2, g_stat1, g_stat1 >> 10);
+			g_stat4, m_PeakBytes, m_PeakBytes >> 10, m_AllocatedBlockCount, g_stat1, g_stat1 >> 10);
 	}
 #ifdef REBREW_SERVER
 	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1b5, buf, 1);
@@ -976,7 +976,7 @@ void __cdecl m_ReportGroupInfo(const char* toggle)
 					LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1cc, buf, 1);
 #endif
 					if (match != 0) {
-						for (i = 0, slot = (char*) g_array_ptr; i < g_array_count; i++, slot += 0x10) {
+						for (i = 0, slot = (char*) g_array_ptr; i < m_TrackedCapacity; i++, slot += 0x10) {
 							if (*(char**) (slot + 8) != 0 && *(struct GroupNode**) slot == node) {
 								sprintf(buf, "{%s} w/ %i bytes (%ik).", *(char**) (slot + 4), *(int*) (slot + 0xc), *(int*) (slot + 0xc) >> 10);
 #ifdef REBREW_SERVER
@@ -999,12 +999,12 @@ void __cdecl m_ReportGroupInfo(const char* toggle)
 }
 #ifndef REBREW_SERVER
 #undef g_stat1
-#undef g_stat2
-#undef g_stat3
+#undef m_AllocatedBlockCount
+#undef m_PeakBytes
 #undef g_stat4
 #undef g_alloc_root_name
 #undef g_array_ptr
-#undef g_array_count
+#undef m_TrackedCapacity
 #endif
 
 
@@ -1013,11 +1013,11 @@ extern int g_6b6f7c;
 extern char* g_14cc5e4;
 #include "Develop/Units/Error/error_message.h"
 #define g_stat1 g_6b6f68
-#define g_stat2 g_6b6f6c
-#define g_stat3 g_6b6f70
+#define m_AllocatedBlockCount g_6b6f6c
+#define m_PeakBytes g_6b6f70
 #define g_stat4 g_6b6f74
 #define g_array_ptr m_TRACKED_SLOTS
-#define g_array_count m_TRACKED_SLOT_COUNT
+#define m_TrackedCapacity m_TRACKED_SLOT_COUNT
 #define g_list_head g_14cc5e4
 #define g_alloc_report_groups g_6b6f7c
 #define ReportMessage ReportClientMessage
@@ -1030,8 +1030,8 @@ void __cdecl m_ShutdownAllocator(void)
 	char* node;
 	char* next;
 
-	if (g_stat2 != 0 || g_stat1 != 0) {
-		sprintf(buf, "[*] Memory-Shutdown-Anomaly: [*]\nUsed %i blocks in %i bytes.\n\n%i block(s) left in %i bytes.", g_stat4, g_stat3, g_stat2, g_stat1);
+	if (m_AllocatedBlockCount != 0 || g_stat1 != 0) {
+		sprintf(buf, "[*] Memory-Shutdown-Anomaly: [*]\nUsed %i blocks in %i bytes.\n\n%i block(s) left in %i bytes.", g_stat4, m_PeakBytes, m_AllocatedBlockCount, g_stat1);
 		ReportMessage(buf);
 		if (g_alloc_report_groups != 0) {
 			m_ReportGroupInfo(0);
@@ -1043,7 +1043,7 @@ void __cdecl m_ShutdownAllocator(void)
 		m_ReportGroupInfo(0);
 	}
 	i = 0;
-	if (g_array_count <= 0) {
+	if (m_TrackedCapacity <= 0) {
 		goto cleanup;
 	}
 	item = (char*) g_array_ptr + 8;
@@ -1058,13 +1058,13 @@ void __cdecl m_ShutdownAllocator(void)
 		}
 		i++;
 		item += 0x10;
-	} while (i < g_array_count);
+	} while (i < m_TrackedCapacity);
 cleanup:
 	g_stat4 = 0;
-	g_stat2 = 0;
-	g_stat3 = 0;
+	m_AllocatedBlockCount = 0;
+	m_PeakBytes = 0;
 	g_stat1 = 0;
-	g_array_count = 0;
+	m_TrackedCapacity = 0;
 	node = (char*) g_list_head;
 	while (node != 0) {
 		next = *(char**) (node + 0x24);
@@ -1077,11 +1077,11 @@ cleanup:
 
 #ifndef REBREW_SERVER
 #undef g_stat1
-#undef g_stat2
-#undef g_stat3
+#undef m_AllocatedBlockCount
+#undef m_PeakBytes
 #undef g_stat4
 #undef g_array_ptr
-#undef g_array_count
+#undef m_TrackedCapacity
 #undef g_list_head
 #undef g_alloc_report_groups
 #undef ReportMessage
