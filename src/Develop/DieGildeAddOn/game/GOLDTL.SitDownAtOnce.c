@@ -3,7 +3,7 @@
 extern char* g_6b7ebc;
 extern char* evt_CurrentScript;
 char* __cdecl CreateAnimationEvent(char* owner, char* name);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl SitDownAtOnce(char** a, char** v)
 {
@@ -16,7 +16,7 @@ int __cdecl SitDownAtOnce(char** a, char** v)
 		return 0;
 	}
 	if (*a == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 1;
 	}
 	r = CreateAnimationEvent(*a, *v);

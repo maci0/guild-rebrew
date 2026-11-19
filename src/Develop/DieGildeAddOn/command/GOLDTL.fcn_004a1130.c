@@ -4,7 +4,7 @@
 
 int __cdecl fcn_004a4410(float* s1, float* s2, int idx, char* e);
 int __cdecl fcn_00495960(void);
-int __cdecl fcn_00495980(void);
+int __cdecl am_RunDummyRechtschaffenheit(void);
 int __cdecl fcn_00495990(void);
 int __cdecl fcn_004959b0(void);
 int __cdecl fcn_004959c0(void);
@@ -14,9 +14,9 @@ int __cdecl fcn_00496020(int cmd, int dummy, int result);
 #else
 int __cdecl cm_TestCommandResult(int cmd, int dummy, char* result);
 #endif
-int __cdecl fcn_00495a10(void);
-int __cdecl fcn_00495a20(void);
-int __cdecl fcn_00495a40(void);
+int __cdecl cm_RunDummyUnversehrtheit(void);
+int __cdecl ai_StartDummyBeruf(void);
+int __cdecl cm_RunDummyBeruf(void);
 int __cdecl fcn_00495a50(void);
 int __cdecl fcn_00495a70(void);
 int __cdecl fcn_00495a80(void);
@@ -31,7 +31,7 @@ int __cdecl fcn_00496e60(void);
 int __cdecl fcn_00497000(void);
 int __cdecl fcn_00497030(void);
 int __cdecl fcn_004973a0(void);
-int __cdecl fcn_004974c0(void);
+int __cdecl am_StartBuyObjektAP(void);
 int __cdecl fcn_004974d0(void);
 int __cdecl fcn_004974e0(void);
 int __cdecl fcn_00497670(void);
@@ -60,14 +60,14 @@ int __cdecl fcn_00499950(void);
 int __cdecl PrepareBuergerrecht(void*, char*, int, char*);
 int __cdecl fcn_00499ad0(void);
 int __cdecl fcn_00499cc0(void);
-int __cdecl fcn_00499db0(void);
+int __cdecl cm_RunApsSparen(void);
 int __cdecl fcn_00499dc0(void);
 int __cdecl fcn_00499fe0(void);
 int __cdecl fcn_0049a0c0(void);
 int __cdecl fcn_0049a4b0(void);
 int __cdecl fcn_0049a590(void);
 int __cdecl fcn_0049a7b0(void);
-int __cdecl fcn_0049a880(void);
+int __cdecl ai_StartEducationObject(void);
 int __cdecl fcn_0049aa80(void);
 int __cdecl fcn_0049ab50(void);
 int __cdecl fcn_0049ace0(void);
@@ -76,12 +76,12 @@ int __cdecl fcn_0049b120(void);
 int __cdecl fcn_0049b1f0(void);
 int __cdecl fcn_0049b680(void);
 int __cdecl fcn_0049b7c0(void);
-int __cdecl fcn_0049ba30(void);
+int __cdecl ai_RunSecurityObject(void);
 int __cdecl fcn_0049bb00(void);
-int __cdecl fcn_0049bba0(void);
+int __cdecl ai_StartUseParfuem(void);
 int __cdecl fcn_0049bbc0(void);
 int __cdecl fcn_0049bd50(void);
-int __cdecl fcn_0049bdf0(void);
+int __cdecl cm_StartUseTrank(void);
 int __cdecl fcn_0049be10(void);
 int __cdecl ai_StartSpionage(void);
 int __cdecl ai_RunSpionage(void);
@@ -111,7 +111,7 @@ int __cdecl ai_ScoreBuergermeister(void);
 int __cdecl ai_StartBuergermeister(void);
 #include "client_actions.h"
 int __cdecl fcn_0049d7c0(void);
-int __cdecl fcn_0049d920(void);
+int __cdecl am_RunBuergermeisterUpgrade(void);
 int __cdecl ai_StartBuergermeisterRathaus(void);
 int __cdecl ai_RunBuergermeisterRathaus(void);
 int __cdecl ai_StartBuergermeisterKerker(void);
@@ -144,7 +144,7 @@ int __cdecl ai_StartStudium(void);
 int __cdecl ai_RunStudium(void);
 
 /* ADDRESS: GOLDTL 0x004a1130 */
-int __cdecl fcn_004a1130(char* e)
+int __cdecl am_RegisterGameMethods(char* e)
 {
 	AM_METHOD d;
 
@@ -181,7 +181,7 @@ int __cdecl fcn_004a1130(char* e)
 #else
 	d.start = cm_TestCommandResult;
 #endif
-	d.run = fcn_00495a10;
+	d.run = cm_RunDummyUnversehrtheit;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -214,8 +214,8 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x2;
 	strcpy(d.name, "DummyBeruf");
 	d.score = fcn_004a4410;
-	d.start = fcn_00495a20;
-	d.run = fcn_00495a40;
+	d.start = ai_StartDummyBeruf;
+	d.run = cm_RunDummyBeruf;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -351,7 +351,7 @@ int __cdecl fcn_004a1130(char* e)
 	strcpy(d.name, "DummyRechtschaffenheit");
 	d.score = fcn_004a4410;
 	d.start = fcn_00495960;
-	d.run = fcn_00495980;
+	d.run = am_RunDummyRechtschaffenheit;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -554,7 +554,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0xd;
 	strcpy(d.name, "Objekt kaufen (AP)");
 	d.score = fcn_004a4410;
-	d.start = fcn_004974c0;
+	d.start = am_StartBuyObjektAP;
 	d.run = fcn_004974d0;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -997,7 +997,7 @@ int __cdecl fcn_004a1130(char* e)
 	strcpy(d.name, "ApsSparen");
 	d.score = fcn_004a4410;
 	d.start = fcn_00499cc0;
-	d.run = fcn_00499db0;
+	d.run = cm_RunApsSparen;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1132,7 +1132,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x1e;
 	strcpy(d.name, "UseObject (Bildung)");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049a880;
+	d.start = ai_StartEducationObject;
 	d.run = fcn_0049aa80;
 	d.flags = 0x3b;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -1269,7 +1269,7 @@ int __cdecl fcn_004a1130(char* e)
 	strcpy(d.name, "UseObject (Sicherheit)");
 	d.score = fcn_004a4410;
 	d.start = fcn_0049b7c0;
-	d.run = fcn_0049ba30;
+	d.run = ai_RunSecurityObject;
 	d.flags = 0x39;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1302,7 +1302,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x23;
 	strcpy(d.name, "Use Parfuem");
 	d.score = fcn_0049bb00;
-	d.start = fcn_0049bba0;
+	d.start = ai_StartUseParfuem;
 	d.run = fcn_0049bbc0;
 	d.flags = 0xff;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -1336,7 +1336,7 @@ int __cdecl fcn_004a1130(char* e)
 	d.type = 0x24;
 	strcpy(d.name, "Use Trank");
 	d.score = fcn_0049bd50;
-	d.start = fcn_0049bdf0;
+	d.start = cm_StartUseTrank;
 	d.run = fcn_0049be10;
 	d.flags = 0xff;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -1779,7 +1779,7 @@ int __cdecl fcn_004a1130(char* e)
 	strcpy(d.name, "Buergermeister upgrade");
 	d.score = fcn_004a4410;
 	d.start = fcn_0049d7c0;
-	d.run = fcn_0049d920;
+	d.run = am_RunBuergermeisterUpgrade;
 	d.flags = 0x39;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;

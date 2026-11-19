@@ -1,4 +1,4 @@
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 float __cdecl fcn_00444700(void*, float*);
 void __cdecl fcn_00451720(float*, float*, float*, float*);
 
@@ -9,7 +9,7 @@ void __cdecl fcn_00451720(float*, float*, float*, float*);
  * character and the event's target object. */
 /* ADDRESS: GOLD 0x00406210 */
 /* ADDRESS: GOLDTL 0x00406db0 */
-void __cdecl fcn_00406db0(char* ev)
+void __cdecl ch_ExecTurnTowards(char* ev)
 {
 	char* obj;
 	char* target;
@@ -21,7 +21,7 @@ void __cdecl fcn_00406db0(char* ev)
 
 	target = *(char**) (ev + 0x30);
 	obj = *(char**) (ev + 0x14);
-	fcn_00455350(target, target + 0x4c, pos);
+	d3_TransformPoint(target, target + 0x4c, pos);
 	angle = fcn_00444700(*(void**) (obj + 0x34), pos);
 	rot[1] = angle;
 	rot[0] = 0.0f;

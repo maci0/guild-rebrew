@@ -50,7 +50,7 @@ void __cdecl fcn_00476620(int, int, int, int, Img*, int, int, Tex*);
 int __cdecl fcn_00475fd0(Tex*);
 void __cdecl fcn_00476a50(int, int, Tex*, Rgb*);
 void __cdecl fcn_00476b10(int, int, unsigned char, unsigned char, unsigned char, Tex*);
-void __cdecl fcn_00476060(Tex*);
+void __cdecl d2_UnlockSurface(Tex*);
 void __cdecl fcn_00475f80(Tex*);
 void __cdecl fcn_004760e0(Tex*);
 long __stdcall fcn_006114ff(void*, void*, void*, void*, void*, void*, int, unsigned int);
@@ -108,7 +108,7 @@ Tiles* __cdecl fcn_0047b640(int x, int y, int w, int h, Img* img, int size)
 					}
 				}
 			}
-			fcn_00476060(t);
+			d2_UnlockSurface(t);
 		}
 		memset(&d, 0, sizeof(d));
 		d.w = tile;

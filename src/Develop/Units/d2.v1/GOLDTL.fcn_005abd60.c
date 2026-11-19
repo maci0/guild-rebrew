@@ -31,12 +31,12 @@ extern int g_14ce8e0;
 extern char s_6ab048[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_0050e670(int*, int*);
-void __cdecl fcn_0046f2c0(int, int);
+void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005ca560(Item*);
 void __cdecl fcn_005caaa0(int, int, int, Item*);
@@ -62,7 +62,7 @@ void __cdecl fcn_005abd60(void)
 	int left;
 
 	dlg = fcn_00470820(0, 0, s_6ab048);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
@@ -83,7 +83,7 @@ void __cdecl fcn_005abd60(void)
 		}
 		if (dirty != 0) {
 			d2_SetForm(dlg, 1);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText(0x196b);
 			half = *(int*) (g_77255c + 0xc) / 2;
 			x = half - *(short*) (g_772500 + 0x1ebd8) - 0x87;

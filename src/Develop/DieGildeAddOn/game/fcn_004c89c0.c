@@ -1,6 +1,6 @@
 #include <string.h>
 
-int __cdecl fcn_004c4dc0(char*, int);
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
 char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3);
 
 /* ADDRESS: GOLDTL 0x004c89c0 */
@@ -12,7 +12,7 @@ int __cdecl fcn_004c89c0(char* packet, char* response)
 	if (*(int*) 0x14cbca0 != -1) {
 		*(int*) 0x699364 = *(int*) (packet + 0x35);
 	}
-	parentId = fcn_004c4dc0(packet, *(int*) (packet + 0x10));
+	parentId = cm_ResolveSpecialEntityId(packet, *(int*) (packet + 0x10));
 	*(int*) (packet + 0x10) = parentId;
 	p = gm_AllocObjekt(parentId, *(unsigned short*) (packet + 0x14), 1);
 	if (p == 0) {

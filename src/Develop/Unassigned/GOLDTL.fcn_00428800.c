@@ -47,8 +47,8 @@ extern char g_14cb440[];
 int __cdecl fcn_00428800(char* pEnd);
 char* __cdecl fcn_00426620(char* s, int unused, char* end);
 void __cdecl fcn_00426680(char* s, struct tok_428800* t);
-int __cdecl fcn_00428ef0(void* cmd);
-void __cdecl fcn_00425bf0(char* g, int pos, const char* msg);
+int __cdecl evt_ExecuteCommand(void* cmd);
+void __cdecl evt_LogScriptError(char* g, int pos, const char* msg);
 void __cdecl fcn_00428720(char* g);
 
 
@@ -99,7 +99,7 @@ int __cdecl fcn_00428800(char* pEnd)
 				*(char**) &g_6b7eb8 = 0;
 				level = t.u.num;
 			} else if (t.type == 4) {
-				n = fcn_00428ef0(t.u.sym);
+				n = evt_ExecuteCommand(t.u.sym);
 			}
 			if (t.type == 2) {
 				struct sym_428800* sym = (struct sym_428800*) t.u.sym;
@@ -115,7 +115,7 @@ int __cdecl fcn_00428800(char* pEnd)
 				}
 				if (index > sym->count - 1 || index < 0) {
 					sprintf(msg, "Array index out of bounce: '%s'", (char*) sym + 4);
-					fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), msg);
+					evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), msg);
 					fcn_00428720(evt_CurrentScript);
 					return 0;
 				}
@@ -141,7 +141,7 @@ int __cdecl fcn_00428800(char* pEnd)
 				{ int i = 0; do { g_14cb440[i] = t.u.text[i]; } while (t.u.text[i++]); n = (int) g_14cb440; }
 			} else if (t.type == 0) {
 				sprintf(msg, "Unknown symbol: '%s'", t.u.text);
-				fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), msg);
+				evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), msg);
 				fcn_00428720(evt_CurrentScript);
 				return 0;
 			} else if (t.type == 0xb) {

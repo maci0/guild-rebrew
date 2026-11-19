@@ -3,9 +3,9 @@ extern char* g_773d78;
 extern char g_68a9a8[];
 
 int __cdecl fcn_00422460(int, char*);
-int __cdecl fcn_00418c80(int, int, int, float);
+int __cdecl d3snd_AttachSoundSource(int, int, int, float);
 void __cdecl SetSoundControlValue(int stream, unsigned int value);
-void __cdecl fcn_004192b0(int, int, int, int);
+void __cdecl d3snd_PlaySource(int, int, int, int);
 
 void __cdecl SetSoundControlValue(int stream, unsigned int value);
 void __cdecl fcn_00419370(int, int);
@@ -21,10 +21,10 @@ void __cdecl fcn_004c39b0(void)
 		h = *(int*) (g_773d78 + 0x61);
 		if (h != 0) {
 			t = fcn_00422460(0, g_68a9a8);
-			g_772d30 = fcn_00418c80(t, h, 0x7f, 2200.0f);
+			g_772d30 = d3snd_AttachSoundSource(t, h, 0x7f, 2200.0f);
 			if (g_772d30 != 0) {
 				SetSoundControlValue(g_772d30, 1);
-				fcn_004192b0(g_772d30, 0, 0, 0);
+				d3snd_PlaySource(g_772d30, 0, 0, 0);
 			}
 		}
 	}

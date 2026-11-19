@@ -1,10 +1,10 @@
 extern char* g_772eb4; extern int g_772f2c; extern unsigned short* g_772e9c; extern int g_67a370;
 char* __cdecl fcn_004cef30(int id);
 unsigned short __cdecl fcn_0042e410(int code);
-char* __cdecl fcn_004ceac0(int a, char* s);
+char* __cdecl gm_FindOrCreateEntitySlot(int a, char* s);
 int __cdecl fcn_004d2f70(char* s);
 char* __cdecl fcn_004d34f0(char* s);
-int __cdecl fcn_00455350(char* a, char* b, void* c);
+int __cdecl d3_TransformPoint(char* a, char* b, void* c);
 char __cdecl fcn_0045b990(int a, void* b, void* c, void* d, void* e);
 int __cdecl fcn_004c67c0(int a, void* b);
 double __cdecl fcn_004ff040(char* s);
@@ -80,7 +80,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 		if (found == 0) {
 			return 0;
 		}
-		e = (char*) fcn_004ceac0(a, found);
+		e = (char*) gm_FindOrCreateEntitySlot(a, found);
 		*(int*) e = *(int*) (found + 4);
 		*(int*) (e + 4) = 5;
 		return (int) e;
@@ -91,7 +91,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 			continue;
 		}
 		s = fcn_004cef30(v);
-		e = (char*) fcn_004ceac0(a, s);
+		e = (char*) gm_FindOrCreateEntitySlot(a, s);
 		memcpy(tmp, e, 0x2c);
 		val = fcn_004ff040(s) * 100.0;
 		r = (int) val;
@@ -108,7 +108,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 		} else {
 			float height;
 			e2 = (char*) fcn_004d34f0(s);
-			fcn_00455350(e2, e2 + 0x4c, point);
+			d3_TransformPoint(e2, e2 + 0x4c, point);
 			map_x = a;
 			r = fcn_0045b990(*(int*) (g_67a370 + 0xb0),
 			    point, &map_x, &countC0, &height);

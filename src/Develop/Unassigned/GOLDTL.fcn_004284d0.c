@@ -10,7 +10,7 @@ int __cdecl fcn_0064eeec(char* s);
 /* Splits a script call line on spaces and runs the script with up to seven
  * arguments; numeric tokens are converted, other tokens pass as text. */
 /* ADDRESS: GOLDTL 0x004284d0 */
-void __cdecl fcn_004284d0(char* o, char* line)
+void __cdecl evt_RunScriptLine(char* o, char* line)
 {
 	char delim[2];
 	unsigned int values[16];

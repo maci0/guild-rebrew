@@ -70,7 +70,7 @@ typedef struct {
 
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* p);
-int __cdecl fcn_00451d70(Point45a9d0* a, Point45a9d0* b, Point45a9d0* c,
+int __cdecl d3_CalculateTriangleNormal(Point45a9d0* a, Point45a9d0* b, Point45a9d0* c,
 	float* plane);
 int __cdecl fcn_00456080(float* uvs, unsigned char* depths, int arg2,
 	int width, unsigned char flags, int arg5, int steps);
@@ -175,7 +175,7 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 		p1 = (Point45a9d0*) ((char*) pts + id[1] * 0x50);
 		p2 = (Point45a9d0*) ((char*) pts + id[2] * 0x50);
 
-		fcn_00451d70(p0, p1, p2, plane);
+		d3_CalculateTriangleNormal(p0, p1, p2, plane);
 
 		if (fabs(plane[1]) < 0.05 && (o->flags & 0x10) == 0) {
 			ext = 1;

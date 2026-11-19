@@ -42,9 +42,9 @@ int __cdecl fcn_00533a60(int, int, int*, int, int, int, int);
 int __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005373e0(int, int);
 int __cdecl fcn_005268c0(int, int);
-int __cdecl fcn_00402370(int, int, char*, int);
+int __cdecl nt_ListenForServerAnnouncements(int, int, char*, int);
 int __cdecl fcn_00471e30(int);
-int __cdecl fcn_0046f2c0(int, int);
+int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_00469510(int);
 int* __cdecl d2_CreateRadioGroup(int);
 int __cdecl vfs_Tfopen(char*, int, int);
@@ -56,7 +56,7 @@ int __cdecl fcn_00465950(char*);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_00469470(int, int);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
-int __cdecl fcn_00472900(int, int);
+int __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_005397c0(void);
 int __cdecl d2_SelectRadioGroup(int, int);
@@ -129,12 +129,12 @@ unsigned int __cdecl fcn_00539930(int a0)
 				v4 = 1;
 				d2_SuppressOverlay = 1;
 				v6 = fcn_005268c0(g_14ac5e4, 0);
-				v36 = fcn_00402370(0x3039, 3000, ((char*) hosts), 8);
+				v36 = nt_ListenForServerAnnouncements(0x3039, 3000, ((char*) hosts), 8);
 				fcn_00471e30(v6);
 				v32 = 0;
 				d2_SuppressOverlay = 0;
 				d2_SetForm(v5, 2);
-				fcn_0046f2c0(d2_CurrentWindowId, 1);
+				d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 				if (v14 != -1) {
 					fcn_00469510(v14);
 				}
@@ -213,7 +213,7 @@ label_539ba4:
 							fcn_00469470(v14, v32);
 							v32 = fcn_0046f100(0x88, v35, 400, 0x78, 0x10, d2_CurrentWindowId);
 							v31[1] = v32;
-							fcn_00472900(*(int*) (d2_CurrentWindowId * 0x3cc + 0x10161bc), 0x53);
+							d2_SetElementFont(*(int*) (d2_CurrentWindowId * 0x3cc + 0x10161bc), 0x53);
 							io_AppendText(0x1cbc, &((char*) hosts)[v34], v8, ((unsigned char*) hosts + 0x36)[v34]);
 							v12 = v37;
 							v32 = v34;

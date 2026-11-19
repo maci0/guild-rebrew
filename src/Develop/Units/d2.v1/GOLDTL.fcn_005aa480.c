@@ -1,10 +1,10 @@
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_004eb220(char*);
+int __cdecl gm_CheckZunftPreismanipulation(char*);
 int __cdecl fcn_004eb3e0(int, int*);
 int __cdecl io_AppendText();
 int __cdecl fcn_00525f60(void*, int);
@@ -36,7 +36,7 @@ void __cdecl fcn_005aa480(void)
 	int n;
 	int h;
 
-	n = fcn_004eb220((char*) ((unsigned long)&g_7f4ca0 + (unsigned int) *(unsigned short*) &g_774970 * 0x21c));
+	n = gm_CheckZunftPreismanipulation((char*) ((unsigned long)&g_7f4ca0 + (unsigned int) *(unsigned short*) &g_774970 * 0x21c));
 	if (n != 1) {
 		if (n == -1) {
 			fcn_00526120((void*) *(int*) 0x14aad38, 0);
@@ -46,7 +46,7 @@ void __cdecl fcn_005aa480(void)
 		return;
 	}
 	h = fcn_00470820(0, 0, "LOCATIONS\\ZUNFTHAUS\\LEVEL1");
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
 	fcn_005340f0(*(int*) &d2_CurrentWindowId);

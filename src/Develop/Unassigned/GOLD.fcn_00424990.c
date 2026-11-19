@@ -4,7 +4,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6b7d40;
-void __cdecl fcn_00420b70(void);
+void __cdecl nt_ResetPacketStats(void);
 void __cdecl fcn_00424510(int);
 
 /* ADDRESS: GOLD 0x00424990 */
@@ -22,7 +22,7 @@ int __cdecl fcn_00424990(const char* host, unsigned short port)
     int ready;
     int length;
 
-    fcn_00420b70();
+    nt_ResetPacketStats();
     g_14cbca0 = -1;
     *(int*) 0x1460ae4 = 0;
     *(int*) 0x1460ae8 = 0;

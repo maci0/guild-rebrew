@@ -4,7 +4,7 @@
 char g_6761a4[] = "CharacterIdle(): Invalid character";
 extern char g_6761a4[];
 
-void __cdecl fcn_00425bf0(void*, int, void*);
+void __cdecl evt_LogScriptError(void*, int, void*);
 
 int __cdecl CharacterIdle(int** charakter_argument)
 {
@@ -12,7 +12,7 @@ int __cdecl CharacterIdle(int** charakter_argument)
 
 	if (*charakter_argument == 0) {
 		g = *(void**) ((char*)&evt_CurrentScript);
-		fcn_00425bf0(g, *(int*) ((char*) g + 0x118), (void*) g_6761a4);
+		evt_LogScriptError(g, *(int*) ((char*) g + 0x118), (void*) g_6761a4);
 		return 0;
 	}
 	return *((int*) *charakter_argument + 0x128 / 4) == 0;

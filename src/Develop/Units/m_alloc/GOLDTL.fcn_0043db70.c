@@ -19,12 +19,12 @@
 
 void* __cdecl m_alloc(int size, char* reason);
 void __cdecl m_FreeTracked(void* p);
-char* __cdecl fcn_0045bde0(const char* name);
+char* __cdecl d3_FindTextureByName(const char* name);
 int __cdecl fcn_0045c5b0(char* name, unsigned int flags, unsigned int a3, unsigned int a4);
 void __cdecl fcn_0045ce90(void* obj);
 void __cdecl fcn_0045c310(void* tex, char all);
 void __cdecl fcn_0045bfb0(int obj);
-int __cdecl fcn_0043c070(char* tile, int x, int id, unsigned char tag);
+int __cdecl d3_MapWaterRangeIndex(char* tile, int x, int id, unsigned char tag);
 void __cdecl fcn_0043c0d0(unsigned char* buf, int x0, int x1, unsigned char c0, unsigned char c1);
 void __cdecl d3_FillWaterRegion(unsigned char* regionen, int breite, int x, int y,
     int alte_region, int neue_region);
@@ -263,7 +263,7 @@ void __cdecl PrepareFloorWater(char* e)
 			memcpy((void*) v10, (void*) *(int*) (e + 0x7da0), v4 * 0x158);
 			v9 = v4;
 		}
-		v16 = (int) fcn_0045bde0((const char*) 0x67a718);
+		v16 = (int) d3_FindTextureByName((const char*) 0x67a718);
 		if (v16 == 0) {
 			v16 = fcn_0045c5b0((char*) 0x67a718, 0xac, 0, 0);
 			if (v16 != 0) {
@@ -457,22 +457,22 @@ void __cdecl PrepareFloorWater(char* e)
 										v4 = *(int*) e * (v25 & *(int*) (e + 0xc))
 										    + (v26 & *(int*) (e + 0xc));
 										if (*(unsigned char*) (v7 + v4) == v18) {
-											v28 = fcn_0043c070((char*) v5, v26, v25,
+											v28 = d3_MapWaterRangeIndex((char*) v5, v26, v25,
 											    *(unsigned char*) (v7 + v4));
-											v29 = fcn_0043c070((char*) v5, v27, v25 + 1,
+											v29 = d3_MapWaterRangeIndex((char*) v5, v27, v25 + 1,
 											    *(unsigned char*) (v7 + v4));
-											v2 = fcn_0043c070((char*) v5, v26, v25 + 1,
+											v2 = d3_MapWaterRangeIndex((char*) v5, v26, v25 + 1,
 											    *(unsigned char*) (v7 + v4));
 											v23 = MIN(v28, MIN(v29, MIN(v2, v23)));
 											v24 = MAX(v28, MAX(v29, MAX(v2, v24)));
 											((short*) (void*) v30)[0] = (short) v28;
 											((short*) (void*) v30)[1] = (short) v29;
 											((short*) (void*) v30)[2] = (short) v2;
-											v28 = fcn_0043c070((char*) v5, v26, v25,
+											v28 = d3_MapWaterRangeIndex((char*) v5, v26, v25,
 											    *(unsigned char*) (v7 + v4));
-											v29 = fcn_0043c070((char*) v5, v27, v25,
+											v29 = d3_MapWaterRangeIndex((char*) v5, v27, v25,
 											    *(unsigned char*) (v7 + v4));
-											v2 = fcn_0043c070((char*) v5, v27, v25 + 1,
+											v2 = d3_MapWaterRangeIndex((char*) v5, v27, v25 + 1,
 											    *(unsigned char*) (v7 + v4));
 											v23 = MIN(v28, MIN(v29, MIN(v2, v23)));
 											v24 = MAX(v28, MAX(v29, MAX(v2, v24)));

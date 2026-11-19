@@ -15,7 +15,7 @@ extern float g_6628a8;
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl fcn_00504c90(unsigned char*, int);
 void __cdecl fcn_00546190(char*);
-void __cdecl fcn_00455350(char*, float*, float*);
+void __cdecl d3_TransformPoint(char*, float*, float*);
 
 /* ADDRESS: GOLDTL 0x0056ce70 */
 void __cdecl fcn_0056ce70(char* obj)
@@ -52,9 +52,9 @@ void __cdecl fcn_0056ce70(char* obj)
 	target = fcn_00504c90(e, 3);
 	if (target != 0) {
 		a = *(char**) (e + 0x61);
-		fcn_00455350(a, (float*) (a + 0x4c), v1);
+		d3_TransformPoint(a, (float*) (a + 0x4c), v1);
 		b = *(char**) (target + 0x61);
-		fcn_00455350(b, (float*) (b + 0x4c), v2);
+		d3_TransformPoint(b, (float*) (b + 0x4c), v2);
 		d = sqrt((double) ((v1[2] - v2[2]) * (v1[2] - v2[2])
 			+ (v1[1] - v2[1]) * (v1[1] - v2[1])
 			+ (v1[0] - v2[0]) * (v1[0] - v2[0]))) * 0.001;

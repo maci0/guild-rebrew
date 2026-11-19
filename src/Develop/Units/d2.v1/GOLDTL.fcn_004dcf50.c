@@ -17,7 +17,7 @@ int __cdecl fcn_004e44b0(int a1, int a2);
 void __cdecl fcn_004e44f0(int a1);
 int __cdecl fcn_004e4ae0(char* name, int a2);
 int __cdecl fcn_004e4b20(int a1, int a2, char* name, int mode);
-int __cdecl fcn_00420780(char* snd, int flag);
+int __cdecl msx_StartAmbientTrack(char* snd, int flag);
 int __cdecl cut_RandMod(int n);
 void __cdecl fcn_004e4e90(char* snd);
 int __cdecl fcn_00423460(int a1);
@@ -46,7 +46,7 @@ void __cdecl fcn_004b4650(int a, int b);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e3640(void);
 void __cdecl fcn_004c09b0(void);
-void __cdecl fcn_00420840(int a);
+void __cdecl msx_StopAmbientTrack(int a);
 void __cdecl fcn_004432d0(int a, int b);
 void __cdecl fcn_004e4b00(int a);
 
@@ -197,7 +197,7 @@ int __cdecl fcn_004dcf50(int a0)
 		}
 	}
 	if (g_772f3c == 0) {
-		msg.hnd[7] = fcn_00420780("Athmos\\Athmo_sitzung.mp3", 0x40);
+		msg.hnd[7] = msx_StartAmbientTrack("Athmos\\Athmo_sitzung.mp3", 0x40);
 	}
 	if (cut_RandMod(2) != 0) {
 		fcn_004e4e90("cd2\\ArmerDelinquent.mp3");
@@ -828,7 +828,7 @@ int __cdecl fcn_004dcf50(int a0)
 	h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-exit.esc", (int) "");
 	fcn_004e44f0(h);
 	if (msg.hnd[7] != 0) {
-		fcn_00420840(msg.hnd[7]);
+		msx_StopAmbientTrack(msg.hnd[7]);
 	}
 	fcn_004e3640();
 	fcn_004c09b0();

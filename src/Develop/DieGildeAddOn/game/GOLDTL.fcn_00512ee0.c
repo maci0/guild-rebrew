@@ -64,7 +64,7 @@ extern int g_6a3424;
 extern unsigned char g_6a3440;
 
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_00455350(char *, char *, char *);
+void __cdecl d3_TransformPoint(char *, char *, char *);
 void __cdecl fcn_004c3ff0(void);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
@@ -193,7 +193,7 @@ void __cdecl fcn_00512ee0(void)
 						j++;
 					} while (j < res);
 				}
-				fcn_00455350((char *)list[j], (char *)(list[j] + 0x4c), path);
+				d3_TransformPoint((char *)list[j], (char *)(list[j] + 0x4c), path);
 				fcn_00598740(pos3, list[j]);
 				h = cm_RequestCreateGeb(*(int *)(e + 4), kind, path, pos3);
 				if (h != -1) {

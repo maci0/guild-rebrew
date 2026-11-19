@@ -15,7 +15,7 @@ struct Fade {
 	Fade* link;
 };
 
-void __cdecl fcn_0047c9c0(int, int, int, int, int, float);
+void __cdecl d2_DrawTexturedQuad(int, int, int, int, int, float);
 void __cdecl fcn_00473150(Fade*);
 void __cdecl fcn_00473190(int, int);
 
@@ -40,7 +40,7 @@ void __cdecl fcn_00473190(Fade* t)
 		v = 1.0f;
 	}
 	if (t->link != 0) {
-		fcn_0047c9c0(t->x44, t->x48, t->x4c, t->x50, t->link->x50, v);
+		d2_DrawTexturedQuad(t->x44, t->x48, t->x4c, t->x50, t->link->x50, v);
 	}
 	if ((t->flags & 4) && (t->flags & 8)) {
 		fcn_00473150(t);

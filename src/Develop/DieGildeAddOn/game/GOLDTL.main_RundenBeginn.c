@@ -16,7 +16,7 @@ int __cdecl fcn_00546fb0(int id);
 void __cdecl fcn_004c6ae0(int a1, int a2);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00420bf0(void);
-void __cdecl fcn_00420b70(void);
+void __cdecl nt_ResetPacketStats(void);
 int __cdecl fcn_0064d41a(char* out, char* fmt, ...);
 
 /* ADDRESS: GOLDTL 0x0053fc80 */
@@ -44,7 +44,7 @@ void __cdecl main_RundenBeginn(void)
 	for (i = 1; i < 0x100; i++)
 		bufA[i] = 0;
 	fcn_00420bf0();
-	fcn_00420b70();
+	nt_ResetPacketStats();
 	fcn_0064d41a(bufA, (char*) 0x6a42d0, *(int*) 0x774950);
 	slot2 = (char*) 0x7f4ca2;
 	do {

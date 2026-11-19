@@ -73,7 +73,7 @@ void __cdecl fcn_00500bb0(void*, int, int, int);
 int __cdecl fcn_0042e410(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
@@ -81,11 +81,11 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_00510550(char*);
 void __cdecl fcn_00533a60(int, int, int*, int, int, int);
 int __cdecl fcn_0057c9d0(char*);
-int __cdecl fcn_00500d20(void*, void*);
+int __cdecl gm_GetElapsedMinutes(void*, void*);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00471f80(int);
 void __cdecl fcn_00472640(int, int);
-void __cdecl fcn_00472170(int, int);
+void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00525f60(void*, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_004c5530(void*);
@@ -116,7 +116,7 @@ void __cdecl fcn_005e5ea0(char* participant)
 
 	dlg = fcn_00470820(0, 0, s_6ad434);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, stage);
@@ -136,8 +136,8 @@ void __cdecl fcn_005e5ea0(char* participant)
 			if (entity != 0) {
 				st = *(GAME_TIMESTAMP*) (entity + 0x52);
 				st.hour += *(int*) (entity + 0x70) ? 0 : 2;
-				value = fcn_00500d20(entity + 0x44, (void*) 0x7f4c00);
-				n = fcn_00500d20(entity + 0x44, &st);
+				value = gm_GetElapsedMinutes(entity + 0x44, (void*) 0x7f4c00);
+				n = gm_GetElapsedMinutes(entity + 0x44, &st);
 				d2_SetElementValue(timer1, 0, 100,
 					(int) ((((float) value / n < 1.0f) ? ((float) value / n) : 1.0f) * 100.0f));
 			}
@@ -171,8 +171,8 @@ void __cdecl fcn_005e5ea0(char* participant)
 			fcn_00472640(ids[0], entity == 0);
 			fcn_00472640(ids[1], entity == 0);
 			d2_SetForm(dlg, 2);
-			fcn_00472170(timer1, entity != 0);
-			fcn_00472170(timer2, entity == 0);
+			d2_SetSlotVisibility(timer1, entity != 0);
+			d2_SetSlotVisibility(timer2, entity == 0);
 		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

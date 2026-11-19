@@ -39,7 +39,7 @@ int __cdecl fcn_0042d630(const char* name)
 
 /* Reloads a text bank from its language resource file. */
 /* ADDRESS: GOLDTL 0x0042d6b0 */
-int __cdecl fcn_0042d6b0(const char* name)
+int __cdecl txt_ReloadTextFile(const char* name)
 {
 	int idx;
 	void* f;

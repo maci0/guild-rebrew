@@ -25,11 +25,11 @@ extern int g_67a370;
 int __cdecl fcn_0065f2f0(const char* a, const char* b, int n);
 int __cdecl fcn_0065f220(const char* a, const char* b);
 void* __cdecl fcn_0064fde9(void* p, int size);
-void __cdecl fcn_004379a0(int, int, int, int (__cdecl*)(), Query*);
+void __cdecl d3_VisitSceneObjects(int, int, int, int (__cdecl*)(), Query*);
 int __cdecl fcn_00513d00(char* name, int* list);
-char* __cdecl fcn_00439750(int kind, char* name);
+char* __cdecl d3_SpawnObject(int kind, char* name);
 void __cdecl fcn_00439aa0(char* o);
-char __cdecl fcn_004458e0(char* e, char* parent);
+char __cdecl d3_ReparentObject(char* e, char* parent);
 void __cdecl fcn_00438b40(char* o, float* pos);
 void __cdecl fcn_00438cb0(char* o, float* rot);
 void __cdecl fcn_004442be0(char* o);
@@ -50,7 +50,7 @@ void __cdecl fcn_00513d40(char* name)
 
 	memset(&q, 0, sizeof(q));
 	strcpy(q.path, name);
-	fcn_004379a0(g_67a370, 0, 0x1c0, fcn_00513d00, &q);
+	d3_VisitSceneObjects(g_67a370, 0, 0x1c0, fcn_00513d00, &q);
 	if (q.count == 0) {
 		return;
 	}
@@ -86,15 +86,15 @@ void __cdecl fcn_00513d40(char* name)
 	}
 	for (j = 0; j < q.count; j++) {
 		oo = q.list[j];
-		e = fcn_00439750(2, name);
+		e = d3_SpawnObject(2, name);
 		fcn_00439aa0(e);
-		fcn_004458e0(e, *(char**) (oo + 0x1fc));
+		d3_ReparentObject(e, *(char**) (oo + 0x1fc));
 		fcn_00438b40(e, (float*) (oo + 0x4c));
 		fcn_00438cb0(e, (float*) (oo + 0x84));
 		c = *(char**) (oo + 0x200);
 		while (c != 0) {
 			next = *(char**) (c + 0x1f4);
-			fcn_004458e0(c, e);
+			d3_ReparentObject(c, e);
 			c = next;
 		}
 		fcn_004442be0(oo);

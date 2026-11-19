@@ -36,7 +36,7 @@ extern int d2_CurrentElementId;
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00526010(Ent5aa1*, int, unsigned char);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
@@ -61,7 +61,7 @@ int __cdecl fcn_005aa120(int unused, char* p)
 		return 0;
 	}
 	h = fcn_00470820(0, 0, g_6aaf58);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);

@@ -2,14 +2,14 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_004379a0(int, int, int, int, void*);
-void __cdecl fcn_00442d50(int, int);
+void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
+void __cdecl d3_SetSubtreeVisible(int, int);
 void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_004550b0(int, int);
 void __cdecl d3_DestroyObject(int);
 int __cdecl gm_SearchTable67(int);
-void __cdecl fcn_00573de0(void);
+void __cdecl d3_CollectObjectCallback(void);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 char* __cdecl fcn_0064d1a0(char*, int);
 char* __cdecl fcn_0064d530(char*, const char*, unsigned int);
@@ -51,7 +51,7 @@ void __cdecl fcn_00573e10(int a0)
 	if (cur == -1 && obj != 0) {
 		list.handle = obj;
 		list.count = 0;
-		fcn_004379a0(g_67a370, obj, 0x2c0, (int) fcn_00573de0,
+		d3_VisitSceneObjects(g_67a370, obj, 0x2c0, (int) d3_CollectObjectCallback,
 		             &list);
 		idx = 0;
 		while (idx < list.count) {
@@ -69,7 +69,7 @@ void __cdecl fcn_00573e10(int a0)
 next_mark:
 			idx++;
 		}
-		fcn_00442d50(obj, 0);
+		d3_SetSubtreeVisible(obj, 0);
 		goto done;
 	}
 	if (cur >= *(int*) (a0 + 0xc4) || obj == 0) {
@@ -79,7 +79,7 @@ next_mark:
 	}
 	list.handle = obj;
 	list.count = 0;
-	fcn_004379a0(g_67a370, obj, 0x2c0, (int) fcn_00573de0, &list);
+	d3_VisitSceneObjects(g_67a370, obj, 0x2c0, (int) d3_CollectObjectCallback, &list);
 	idx = 0;
 	while (idx < list.count) {
 		int item;
@@ -130,14 +130,14 @@ next_mark:
 			} while (p != 0);
 			if (num == 1) {
 				if (*(int*) (a0 + 0xc8) >= range[0])
-					fcn_00442d50((int) list.items[idx], 1);
+					d3_SetSubtreeVisible((int) list.items[idx], 1);
 				else
-					fcn_00442d50((int) list.items[idx], 0);
+					d3_SetSubtreeVisible((int) list.items[idx], 0);
 			} else if (num == 2) {
 				if (*(int*) (a0 + 0xc8) <= range[0] && *(int*) (a0 + 0xc8) >= range[1])
-					fcn_00442d50((int) list.items[idx], 1);
+					d3_SetSubtreeVisible((int) list.items[idx], 1);
 				else
-					fcn_00442d50((int) list.items[idx], 0);
+					d3_SetSubtreeVisible((int) list.items[idx], 0);
 			}
 		}
 		idx++;
@@ -146,7 +146,7 @@ next_mark:
 release:
 	slot = gm_SearchTable67(*(int*) (a0 + 0xb8));
 	if (slot != 0 && *(int*) (slot + 0x61) != 0)
-		fcn_00442d50(*(int*) (slot + 0x61), 1);
+		d3_SetSubtreeVisible(*(int*) (slot + 0x61), 1);
 	if (obj != 0) {
 		if (g_773dd8 != 0)
 			fcn_004550b0(obj, g_773dd8);

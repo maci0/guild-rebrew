@@ -16,7 +16,7 @@ typedef struct Glyph {
 	unsigned short h;
 } Glyph;
 
-void __cdecl fcn_00472880(int font);
+void __cdecl d2_SelectFont(int font);
 Glyph* __cdecl fcn_0047b620(char* font, int c);
 void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
 void __cdecl fcn_0047a040(int a, int b, int c, int d);
@@ -56,7 +56,7 @@ void __cdecl fcn_00468e40(int slotIndex, int surface)
 	} else if (*(int*) (slot + 0x60) != 0) {
 		color = 9;
 	}
-	fcn_00472880(*(int*) (slot + 0x84));
+	d2_SelectFont(*(int*) (slot + 0x84));
 	font = *(char**) (slot + 0xc);
 	leftGlyph = fcn_0047b620(font, 0);
 	rightGlyph = fcn_0047b620(font, 1);

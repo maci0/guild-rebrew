@@ -2,13 +2,13 @@
 extern int g_67a370;
 extern int g_6b8300;
 extern char g_10432c0[];
-int __cdecl fcn_00413190(char* p);
+int __cdecl d3_GetContextIndex(char* p);
 void __cdecl fcn_004432d0(int a, int b);
 void __cdecl fcn_0043aa30(int flags);
 int __cdecl fcn_0045b700(int a, int b, int c);
 void __cdecl fcn_004058f0(int r);
 void __cdecl fcn_0043a9c0(int flags);
-int __cdecl fcn_00413190(char* p);
+int __cdecl d3_GetContextIndex(char* p);
 void __cdecl fcn_004432d0(int a, int b);
 void __cdecl fcn_0043aa30(int flags);
 int __cdecl fcn_0045b700(int a, int b, int c);
@@ -35,7 +35,7 @@ int __cdecl fcn_00402610(char* obj)
 			x = *(int*) (p + 0x3d8);
 		}
 		if (*(p + 0x3d5) == 0 && x != 0) {
-			fcn_004432d0(fcn_00413190(p), 1);
+			fcn_004432d0(d3_GetContextIndex(p), 1);
 			flags = x & ~2;
 			fcn_0043aa30(flags);
 		}
@@ -72,7 +72,7 @@ int __cdecl fcn_004026f0(char* p)
 			x = *(int*) (p + 0x3d8);
 		}
 		if (*(p + 0x3d5) == 0 && x != 0) {
-			fcn_004432d0(fcn_00413190(p), 1);
+			fcn_004432d0(d3_GetContextIndex(p), 1);
 			flags = x & ~2;
 			fcn_0043aa30(flags);
 		}

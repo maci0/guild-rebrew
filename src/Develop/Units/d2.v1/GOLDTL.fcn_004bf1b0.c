@@ -20,8 +20,8 @@ extern int g_10058a0[];
 void* __cdecl gm_SearchTable67(int);
 char* __cdecl gm_FindRecordById(int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471a30(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_SetGroupVisibility(int, int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00471f80(int);
 void __cdecl fcn_00472640(int, int);
@@ -82,10 +82,10 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 	if (rec == 0 || tbl == 0) {
 		return;
 	}
-	fcn_00471a30(a1[0], 0);
+	d2_SetGroupVisibility(a1[0], 0);
 	types = (char*)&((TradeProto*)lpGebaeudePROT)[*(unsigned char*)tbl];
 	h = fcn_00470820(0, 0, s_681718);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	first = fcn_00472830(h, 2);
 	fcn_00472830(h, 1);
 	d2_SetForm(h, 1);
@@ -193,7 +193,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 				}
 			}
 			if (cur != 0) {
-				fcn_00471a30(h, 0);
+				d2_SetGroupVisibility(h, 0);
 				if (kind == 1) {
 					n = *cur;
 					if (*types == 0x0a) {
@@ -210,7 +210,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 				else {
 					*cur = fcn_004bea00(rec, (int) g_772908);
 				}
-				fcn_00471a30(h, 1);
+				d2_SetGroupVisibility(h, 1);
 				cur = 0;
 			}
 			if (d2_CurrentElementId == selB) {
@@ -254,6 +254,6 @@ void __cdecl fcn_004bf1b0(int* a0, int* a1)
 		}
 	}
 	fcn_00471e30(h);
-	fcn_00471a30(a1[0], 1);
+	d2_SetGroupVisibility(a1[0], 1);
 }
 unsigned char _dpad_772908[1032];

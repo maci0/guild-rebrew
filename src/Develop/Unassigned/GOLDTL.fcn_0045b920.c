@@ -16,7 +16,7 @@ typedef struct S0045b920 {
 } S0045b920;
 // SIZE 0x2c
 
-char __cdecl fcn_0045b920(S0045b920* g, int x, int z, float* out)
+char __cdecl d3_GridPointToWorld(S0045b920* g, int x, int z, float* out)
 {
 	if (g != 0 && x >= 0 && x < g->n && z >= 0 && z < g->n) {
 		out[0] = x * g->sx + g->ox;

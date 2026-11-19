@@ -34,7 +34,7 @@ extern int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 extern void __cdecl fcn_00546190(char*);
 extern void __cdecl fcn_004432d0(int, int);
 extern char* __cdecl fcn_00445600(int, int, int, char*);
-extern void __cdecl fcn_00455350(char*, char*, float*);
+extern void __cdecl d3_TransformPoint(char*, char*, float*);
 extern int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 extern void __cdecl he_CharacterBehavior(char*, int);
 extern char* __cdecl fcn_005463a0(int, int, int);
@@ -166,7 +166,7 @@ label_56b858:
 		fcn_004432d0(0, 1);
 		door = fcn_00445600(0, 0x100, 0, obj + 0xac);
 		if (door != 0)
-			fcn_00455350(door, door + 0x4c, (float*) &pos);
+			d3_TransformPoint(door, door + 0x4c, (float*) &pos);
 		for (i = 0, iter = obj + 0x8c; i < 8; i++, iter += 4) {
 			if (*(int*) iter == -1)
 				continue;

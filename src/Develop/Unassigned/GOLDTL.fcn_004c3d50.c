@@ -27,7 +27,7 @@ extern unsigned int g_aecde4;
 
 void __cdecl fcn_004c3f70(void);
 int __cdecl fcn_004c3fa0(void);
-void __cdecl fcn_00421050(void);
+void __cdecl nt_CloseClientConnection(void);
 
 void __cdecl fcn_004c3d50(void)
 {
@@ -57,6 +57,6 @@ void __cdecl fcn_004c3d50(void)
 	g_14cbca4 = &g_1005780;
 	fcn_004c3f70();
 	if (fcn_004c3fa0() != 0)
-		fcn_00421050();
+		nt_CloseClientConnection();
 	(*(int *)&g_aecde4) = g_6b7fac;
 }

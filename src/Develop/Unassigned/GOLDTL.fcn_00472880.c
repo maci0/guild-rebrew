@@ -20,7 +20,7 @@ extern int g_67d384;
 char* __cdecl d2_GetResourceData(int idx);
 
 /* ADDRESS: GOLDTL 0x00472880 */
-char* __cdecl fcn_00472880(int idx)
+char* __cdecl d2_SelectFont(int idx)
 {
 	if (((VfsEntry*)g_772500)[idx].kind != 7) {
 		return 0;

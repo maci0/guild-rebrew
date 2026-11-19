@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void __cdecl fcn_004192b0(char*, int, int, int);
+void __cdecl d3snd_PlaySource(char*, int, int, int);
 int __cdecl _crt_locked_call4a(void*, int, int, void*);
 unsigned int __cdecl vfs_GetByte(int*);
 unsigned int __cdecl vfs_FlushStream(int, int);
@@ -21,6 +21,6 @@ int __cdecl vfs_FlushAndClose(int);
 void __cdecl SetSoundControlValue(int stream, unsigned int value)
 {
 	if (value != 0)
-		fcn_004192b0((char*) stream, 0, 0, 0);
+		d3snd_PlaySource((char*) stream, 0, 0, 0);
 	*(unsigned int*) (stream + 0x50) = value;
 }

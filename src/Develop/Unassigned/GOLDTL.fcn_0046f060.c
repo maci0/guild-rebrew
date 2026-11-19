@@ -1,7 +1,7 @@
 #include "client_data.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_0046eda0(int w, int h, int win);
+void __cdecl d2_ResizeWindow(int w, int h, int win);
 
 /* ADDRESS: GOLDTL 0x0046f060 */
 void __cdecl fcn_0046f060(int win)
@@ -34,5 +34,5 @@ void __cdecl fcn_0046f060(int win)
 			n--;
 		} while (n != 0);
 	}
-	fcn_0046eda0(*(short*) &p->width, (short) v, win);
+	d2_ResizeWindow(*(short*) &p->width, (short) v, win);
 }

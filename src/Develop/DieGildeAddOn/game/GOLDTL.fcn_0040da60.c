@@ -4,8 +4,8 @@ extern char g_67617c[];
 
 
 
-void __cdecl fcn_00404a00(void*, int, int, int, int, int);
-void __cdecl fcn_00425bf0(void*, int, char*);
+void __cdecl ch_PreloadCharacterMotions(void*, int, int, int, int, int);
+void __cdecl evt_LogScriptError(void*, int, char*);
 
 int __cdecl PreloadAnimation(void** objectRef, int* a2, int* a3, int* a4, int* a5)
 {
@@ -13,9 +13,9 @@ int __cdecl PreloadAnimation(void** objectRef, int* a2, int* a3, int* a4, int* a
 
 	object = *objectRef;
 	if (object == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), g_67617c);
+		evt_LogScriptError(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), g_67617c);
 		return 1;
 	}
-	fcn_00404a00(object, 4, *a2, *a3, *a4, *a5);
+	ch_PreloadCharacterMotions(object, 4, *a2, *a3, *a4, *a5);
 	return 0;
 }

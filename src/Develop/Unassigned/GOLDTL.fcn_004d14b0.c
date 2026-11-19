@@ -18,7 +18,7 @@ extern int g_67a370;
 
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 int __cdecl fcn_004d31d0(char*, int, int, int, int*, int*);
-ent2c* __cdecl fcn_004ceac0(char*, char*);
+ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl fcn_004c67c0(int, ent2c*);
 
 int __cdecl fcn_004d14b0(char* rec, char* e)
@@ -33,7 +33,7 @@ int __cdecl fcn_004d14b0(char* rec, char* e)
 	h = *(int*) (((char*)g_67a370) + 0xb0);
 	if (fcn_0045b990(h, (float*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c), &c, &a, &b) != 0 &&
 	    fcn_004d31d0(e, c, a, 8, &c, &a) != 0) {
-		r = fcn_004ceac0(rec, e);
+		r = gm_FindOrCreateEntitySlot(rec, e);
 		r->fc = 0;
 		l = *r;
 		l.id = *(int*) (e + 4);

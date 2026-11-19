@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_0046f2c0(int, int);
+void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl fcn_0046f740(int, int, int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
@@ -10,7 +10,7 @@ void __cdecl fcn_005a0ad0(int a, unsigned char* p)
 {
 	int y, x, i;
 
-	fcn_0046f2c0(d2_CurrentWindowId, 1);
+	d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 	io_AppendText(g_6a9694, a);
 
 	if (*(char*) (*(int*) p + 2) == 6) {

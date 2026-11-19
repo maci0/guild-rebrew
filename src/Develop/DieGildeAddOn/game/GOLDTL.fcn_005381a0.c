@@ -7,11 +7,11 @@ void __cdecl fcn_00429800(void);
 void __cdecl fcn_00520f40(void);
 void __cdecl fcn_00422100(void);
 void __cdecl fcn_00418c60(void);
-void __cdecl fcn_0041fb80(void);
+void __cdecl msx_ShutdownDrivers(void);
 void __cdecl msx_ShutdownAIL(void);
 void __cdecl fcn_004195f0(void);
 void __cdecl fcn_0057de00(void);
-void __cdecl fcn_0042d5f0(void);
+void __cdecl txt_ReleaseTextBanks(void);
 void __cdecl gm_CleanupAllEntities(void);
 void __cdecl fcn_005b1ef0(void);
 void __cdecl fcn_004edce0(void);
@@ -36,14 +36,14 @@ void __cdecl fcn_005381a0(void)
 		fcn_00418c60();
 	}
 	if (msx_MusicEnabled != 0) {
-		fcn_0041fb80();
+		msx_ShutdownDrivers();
 	}
 	if (g_774934 != 0) {
 		msx_ShutdownAIL();
 		fcn_004195f0();
 	}
 	fcn_0057de00();
-	fcn_0042d5f0();
+	txt_ReleaseTextBanks();
 	gm_CleanupAllEntities();
 	fcn_005b1ef0();
 	fcn_004edce0();

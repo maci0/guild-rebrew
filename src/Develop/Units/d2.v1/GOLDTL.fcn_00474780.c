@@ -25,9 +25,9 @@ extern int g_7725dc;
 extern int g_7725e0;
 
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00473f50(Spin* p, int v, int a3, int a4);
+void __cdecl d2_UpdateSpinValue(Spin* p, int v, int a3, int a4);
 
-int __cdecl fcn_00474780(void)
+int __cdecl d2_UpdateSelectedControlDrag(void)
 {
 	int step;
 	Spin* p;
@@ -56,6 +56,6 @@ int __cdecl fcn_00474780(void)
 		}
 		p->pos = (g_7725b8 - p->min) * 4 / step + g_7725e0;
 	}
-	fcn_00473f50((*(Spin**)&tp_d2_SelectedControl), g_7725b8, g_7725e0, g_14ce8c2);
+	d2_UpdateSpinValue((*(Spin**)&tp_d2_SelectedControl), g_7725b8, g_7725e0, g_14ce8c2);
 	return 1;
 }

@@ -5,7 +5,7 @@ void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 void __cdecl CloseVfsStream(void* f);
 char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsigned char resources);
-void __cdecl fcn_00439ba0(char* object, char* sibling);
+void __cdecl d3_AppendObjectSibling(char* object, char* sibling);
 void __cdecl fcn_00439c00(char* object, char* child);
 
 /* Reads one object, or a list of objects, and attaches them under the parent. */
@@ -34,7 +34,7 @@ int __cdecl fcn_004488e0(char* path, void* stream, char* parent)
 				for (i = 0; i < count; i++) {
 					object = rd_object(s, parent, magic, 1);
 					if (result != 0 && object != 0 && parent != 0) {
-						fcn_00439ba0(result, object);
+						d3_AppendObjectSibling(result, object);
 					}
 					if (object != 0 && result == 0) {
 						result = object;

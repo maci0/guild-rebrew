@@ -4,7 +4,7 @@
 extern float g_662d40[3];
 
 float* __stdcall fcn_005ebbb9(float*, const float*);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 float __cdecl fcn_00451380(float*, float*);
 void __cdecl fcn_00423850(void*, int);
 
@@ -26,7 +26,7 @@ void __cdecl d3_UpdateSoundSourcePan(char* src)
 	fwd[0] = g_662d40[0] * m[0] + g_662d40[1] * m[4] + g_662d40[2] * m[8];
 	fwd[1] = g_662d40[0] * m[1] + g_662d40[1] * m[5] + g_662d40[2] * m[9];
 	fwd[2] = g_662d40[0] * m[2] + g_662d40[1] * m[6] + g_662d40[2] * m[10];
-	fcn_00455350(*(char**) (src + 0x38), *(char**) (src + 0x38) + 0x4c, pos);
+	d3_TransformPoint(*(char**) (src + 0x38), *(char**) (src + 0x38) + 0x4c, pos);
 	dir[0] = pos[0] - *(float*) (((char*)d3_ActiveCamera) + 0x4c);
 	dir[1] = pos[1] - *(float*) (((char*)d3_ActiveCamera) + 0x50);
 	dir[2] = pos[2] - *(float*) (((char*)d3_ActiveCamera) + 0x54);

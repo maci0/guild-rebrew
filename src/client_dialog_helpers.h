@@ -112,8 +112,8 @@ void __cdecl fcn_005d3ad0(Cur cur, int w, int h);
 void __cdecl fcn_005d3c20(Cur cur, int w, int h);
 
 /* Panel begin and window selection. */
-void __cdecl fcn_00472e50(void);
-int __cdecl fcn_0046f2c0(int win, int keep);
+void __cdecl d2_ClearPaintbox(void);
+int __cdecl d2_ClearWindowChildren(int win, int keep);
 
 /* Dialog construction, from fcn_005a4bb0. */
 void* __cdecl fcn_00470820(short a, short b, char* name);

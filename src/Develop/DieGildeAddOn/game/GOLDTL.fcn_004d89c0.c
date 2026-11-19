@@ -33,7 +33,7 @@ int __cdecl fcn_004c6680(int, int, int, int);
 int __cdecl fcn_004c6940(int, int, Ev_4d89c0*);
 int __cdecl fcn_004ce610(int);
 int __cdecl fcn_004ce680(int);
-int __cdecl fcn_004ceac0(int, int);
+int __cdecl gm_FindOrCreateEntitySlot(int, int);
 int __cdecl fcn_004cec00(int, int, int*, int*);
 float __cdecl fcn_004cefb0(int, unsigned int);
 int __cdecl fcn_004d1020(int, int, int, int, int);
@@ -111,7 +111,7 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 				break;
 			}
 		}
-		v8 = fcn_004ceac0(v9, a2);
+		v8 = gm_FindOrCreateEntitySlot(v9, a2);
 		if (*(int*) (v8 + 8) == -1 || fcn_004c4450(*(int*) (v8 + 8))) {
 			*(unsigned int*) (v8 + 8) = 0xffffffff;
 			if (*(int*) (v8 + 4) == 0) {

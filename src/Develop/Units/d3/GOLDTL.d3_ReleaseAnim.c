@@ -1,8 +1,8 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned int g_67a0d8;
 
-unsigned int __cdecl fcn_004346f0(char*);
-char __cdecl fcn_004348f0(unsigned int, unsigned int);
+unsigned int __cdecl d3_GetAnimSize(char*);
+char __cdecl d3_ReleaseUnusedAnimations(unsigned int, unsigned int);
 void __cdecl m_FreeTracked(void*);
 
 #include "Develop/Units/d3/d3_animation.h"
@@ -44,14 +44,14 @@ void __cdecl d3_ReleaseAnim(char* a, char force)
 		*(int*) (a + 0x14c) = 0;
 		for (e = *(char**) ((char*)&g_1042320); e != g_1052a40; e = *(char**) (e + 0x160)) {
 			if (*(int*) (e + 0x14c) == 0) {
-				n += fcn_004346f0(e);
+				n += d3_GetAnimSize(e);
 			}
 		}
-		size = fcn_004346f0(a);
+		size = d3_GetAnimSize(a);
 		if (size + n <= g_67a0d8) {
 			return;
 		}
-		if (fcn_004348f0(g_67a0d8 - size, n)) {
+		if (d3_ReleaseUnusedAnimations(g_67a0d8 - size, n)) {
 			return;
 		}
 		force = 1;

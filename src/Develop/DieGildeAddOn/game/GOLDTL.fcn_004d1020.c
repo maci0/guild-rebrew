@@ -20,7 +20,7 @@ extern int g_14a9a0c;
 
 char* __cdecl fcn_004ce610(char* x);
 char* __cdecl fcn_004ce680(char* a1);
-char* __cdecl fcn_004ceac0(char* rec, char* e);
+char* __cdecl gm_FindOrCreateEntitySlot(char* rec, char* e);
 char __cdecl fcn_0045b990(char* map, float* pos, int* col, int* row, float* height);
 void __cdecl fcn_00533a40(char* a);
 int __cdecl fcn_004c67c0(int a1, void* a2);
@@ -45,7 +45,7 @@ int __cdecl fcn_004d1020(char* a0, char* e, char* obj, int col, int row)
 	node = *(char**) (map + 0x34);
 	if (node == 0) goto fail;
 	if (fcn_0045b990((char*) kind, (float*) (node + 0x4c), &col, &row, &height) == 0) goto fail;
-	rec = fcn_004ceac0(a0, e);
+	rec = gm_FindOrCreateEntitySlot(a0, e);
 	if (rec == 0) goto fail;
 	*(unsigned char*) (rec + 0x1c) = 0;
 	*(unsigned char*) (rec + 0xc) = 0;

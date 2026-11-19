@@ -8,12 +8,12 @@ extern float g_665ea0;
 extern double g_665ea8;
 
 int __cdecl fcn_004432d0(int, int);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 int __cdecl gm_ResolveEntityById(char**, int, int, int);
 char __cdecl fcn_0045b990(int, float*, int*, int*, float*);
 void __cdecl fcn_004518a0(float*);
 void __cdecl fcn_00438b40(char*, float*);
-int __cdecl fcn_004c48f0(void);
+int __cdecl gm_GetGameSpeedSetting(void);
 
 /* ADDRESS: GOLDTL 0x00558680 */
 int __cdecl fcn_00558680(char* a0)
@@ -49,9 +49,9 @@ int __cdecl fcn_00558680(char* a0)
 							fcn_004432d0(saved, 1);
 							return 1;
 						}
-						fcn_00455350((char*) rec, (char*) rec + 0x4c, pos1);
+						d3_TransformPoint((char*) rec, (char*) rec + 0x4c, pos1);
 						block = *(int*) (a0 + 0xc8);
-						fcn_00455350((char*) block, (char*) block + 0x4c, pos2);
+						d3_TransformPoint((char*) block, (char*) block + 0x4c, pos2);
 						dir[0] = pos1[0] - pos2[0];
 						dir[1] = 0.0f;
 						dir[2] = pos1[2] - pos2[2];
@@ -71,7 +71,7 @@ int __cdecl fcn_00558680(char* a0)
 						scale = (float) (unsigned int) g_6b7fac - (float) keys[0];
 						level = g_1043370;
 						ret = 1;
-						keys[2] = fcn_004c48f0();
+						keys[2] = gm_GetGameSpeedSetting();
 						*(int*) (a0 + 0xec) = g_6b7fac;
 						scale = ((float) (unsigned int) keys[2] * 0.25f + 0.5f) * scale;
 						fcn_004518a0(dir);

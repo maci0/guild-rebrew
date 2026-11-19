@@ -4,7 +4,7 @@
 int __cdecl vfs_LookupPath(int, int, int*);
 void __cdecl fcn_0042f240(int, int, int, int);
 
-int __cdecl fcn_0042f690(int path, int root, int a3, int a4)
+int __cdecl vfs_ResolvePath(int path, int root, int a3, int a4)
 {
 	int file;
 

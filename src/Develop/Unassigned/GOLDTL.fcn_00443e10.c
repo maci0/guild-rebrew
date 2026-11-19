@@ -8,7 +8,7 @@ typedef struct Vec3 {
 } Vec3;
 
 void __cdecl fcn_00455450(char*, char*, Vec3*, Vec3*);
-void __cdecl fcn_00438100(char*, char*, char);
+void __cdecl d3_UpdateObjectCameraTransform(char*, char*, char);
 
 /* Projects an object's bounds into screen space and fills a left/top/right/
  * bottom rectangle. */
@@ -59,7 +59,7 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 	}
 	b = *(unsigned char*) (obj + 0x214) & 0x20;
 	cam = b != 0 ? (char*) 0 : d3_ActiveCamera;
-	fcn_00438100(obj, cam, 0);
+	d3_UpdateObjectCameraTransform(obj, cam, 0);
 	list = (char*) ((int (__cdecl*) (char*, char*, char*)) (*(int**) (sub + 0x318))[0x7c])(obj, sub, *(char**) (obj + 0x1ec) + 0x48);
 	rc[1] = 0x10000;
 	rc[0] = 0x10000;

@@ -4,7 +4,7 @@ extern void* __cdecl m_alloc(unsigned int size, const char* file_and_line);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x00418bc0 */
-int __cdecl fcn_00418bc0(int a0)
+int __cdecl d3snd_InitSources(int a0)
 {
 	int result;
 	unsigned int n;

@@ -9,7 +9,7 @@ typedef struct {
 	float mx[3];
 } Box_45b290;
 
-void __cdecl fcn_004379a0(int, int, int, void*, void*);
+void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 void __cdecl fcn_0045a910(void);
 void __cdecl fcn_0045a9d0(void);
 void __cdecl fcn_0045a3a0(int*, int*);
@@ -60,7 +60,7 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 	box.mx[0] = -1e10f;
 	box.mx[1] = -1e10f;
 	box.mx[2] = -1e10f;
-	fcn_004379a0(g_67a370, 0, 0x40, fcn_0045a910, &box);
+	d3_VisitSceneObjects(g_67a370, 0, 0x40, fcn_0045a910, &box);
 	n = m[8];
 	cells = (int*) m[9];
 	if (cells) {
@@ -189,7 +189,7 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 			rep stosb
 		}
 	}
-	fcn_004379a0(g_67a370, 0, 0x40, fcn_0045a9d0, m);
+	d3_VisitSceneObjects(g_67a370, 0, 0x40, fcn_0045a9d0, m);
 	if (m[9]) {
 		fcn_0045b1d0(m, 0xb, 0xc);
 		for (i = 0; i < m[8]; i++) {

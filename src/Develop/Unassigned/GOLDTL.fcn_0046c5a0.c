@@ -27,11 +27,11 @@ extern int g_7725fc;
 extern int txt_TextEntries;
 
 int __cdecl fcn_00465950(char* name);
-void __cdecl fcn_00472880(int font);
+void __cdecl d2_SelectFont(int font);
 int __cdecl fcn_0046b520(char* text, int font);
 void __cdecl fcn_0046b5f0(int x, int y, int a0, int a1, int last, int color,
     int xr, int yr);
-void __cdecl fcn_0046eda0(int x, int y, int a1);
+void __cdecl d2_ResizeWindow(int x, int y, int a1);
 void __cdecl fcn_00469c40(int a, int b, int c);
 void __cdecl fcn_0047a040(int a, int b, int c, int d);
 void __cdecl fcn_0047cba0(int x, int y, int a0, int text);
@@ -40,7 +40,7 @@ int __cdecl fcn_00467480(int x, int y, int a, int b, int c, int d);
 int __cdecl fcn_00466fe0(int a, int b);
 int __cdecl fcn_0046f740(int x, int y, int img, int a1);
 void __cdecl fcn_0046f9b0(int img, char* text);
-int __cdecl fcn_0046fdf0(int x, int y, int img, int a1);
+int __cdecl d2_AddWindowText(int x, int y, int img, int a1);
 int __cdecl fcn_0046ff90(int a, int b);
 int __cdecl fcn_00468df0(int x, int y, int name, int table, int a1);
 int __cdecl _isctype(int c, int type);
@@ -103,9 +103,9 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 	v60 = 0;
 	slot = a1 * 0x3cc + 0x1015f40;
 	if (*(int*) (slot + 0x28c)) {
-		fcn_00472880(*(int*) (slot + 0x28c));
+		d2_SelectFont(*(int*) (slot + 0x28c));
 	} else {
-		fcn_00472880(fcn_00465950("_FONT"));
+		d2_SelectFont(fcn_00465950("_FONT"));
 	}
 	g_7725b4 = 0;
 	if (!*(int*) (slot + 0x3c)) {
@@ -417,7 +417,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 					nImg += 1;
 					continue;
 				}
-				img = fcn_0046fdf0((short) ((short) g_102d024 - *(short*) (slot + 8)),
+				img = d2_AddWindowText((short) ((short) g_102d024 - *(short*) (slot + 8)),
 				    (short) ((short) g_102d020 - *(short*) (slot + 4)), img, a1);
 				*(int*) (g_1015ea0 + img * 0x2f4 + 0x78) = 1;
 				*(int*) (g_1015ea0 + img * 0x2f4 + 0x8c) = *(int*) (slot + 0x3c) + i;
@@ -552,7 +552,7 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 				continue;
 			case 'F':
 				if (*(char*) (p + 1) != 'F') {
-					fcn_00472880(d2_DefaultFont + d);
+					d2_SelectFont(d2_DefaultFont + d);
 					i += 1;
 					continue;
 				}
@@ -694,10 +694,10 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 						span = fcn_0046b520(bufs.a, *(int*) (slot + 0x28c));
 					}
 				} else if (span + g_102d020 < g_1040494) {
-					fcn_0046eda0((short) ((short) span + *(short*) (slot + 0xc)),
+					d2_ResizeWindow((short) ((short) span + *(short*) (slot + 0xc)),
 					    *(short*) (slot + 0x10), a1);
 				} else {
-					fcn_0046eda0((short) ((short) g_1040494 - *(short*) (slot + 4)),
+					d2_ResizeWindow((short) ((short) g_1040494 - *(short*) (slot + 4)),
 					    *(short*) (slot + 0x10), a1);
 					DRAW_RUN(0, span + g_102d020);
 					g_102d024 += d2_FontHeight;
@@ -775,12 +775,12 @@ void __cdecl fcn_0046c5a0(int a0, int a1)
 			}
 			fcn_00469c40(span, len, tmp);
 		}
-		fcn_0046eda0(*(short*) (slot + 0xc),
+		d2_ResizeWindow(*(short*) (slot + 0xc),
 		    (short) ((d2_FontHeight - *(short*) (slot + 8)) + g_102d024), a1);
 	}
 	g_102d024 += d2_FontHeight;
 	if (*(int*) (slot + 0x14) & 0x2000) {
-		fcn_0046eda0((short) maxW, *(short*) (slot + 0x10), a1);
+		d2_ResizeWindow((short) maxW, *(short*) (slot + 0x10), a1);
 	}
 	tmp = g_102d024 - *(int*) (slot + 8);
 	if (*(int*) (slot + 0x254) < tmp) {

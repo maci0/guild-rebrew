@@ -51,7 +51,7 @@ int __cdecl fcn_0064d530(char*, const char*, unsigned int);
 int __cdecl fcn_0064eeec(char*);
 int __cdecl fcn_00517b90(char*, int, char*);
 int __cdecl fcn_0051e070(void);
-int __cdecl fcn_0046f2c0(int, int);
+int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl ReportClientMessage(char*);
 int __cdecl gm_RandomMod(int);
@@ -149,7 +149,7 @@ body:
 			memset(*(char**) ((char*) base + 0x1015f7c), 0, 0x80);
 			*(int*) ((char*) base + 0x10162d4) = 0;
 			memset((char*) base + 0x10161d4, 0, 0x100);
-			fcn_0046f2c0(*(int*) ((char*) base + 0x1015f40), 0);
+			d2_ClearWindowChildren(*(int*) ((char*) base + 0x1015f40), 0);
 			break;
 		case 'S':
 		case 's':

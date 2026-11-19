@@ -23,7 +23,7 @@ extern int g_1040954;
 extern int g_1040c78;
 extern int g_6b8718;
 
-void __cdecl fcn_00452280(void)
+void __cdecl d3_InitRenderVertexBuffer(void)
 {
 	unsigned int fvf;
 	unsigned int stride;

@@ -1,4 +1,4 @@
-int __cdecl fcn_00425bf0(void*, int, char*);
+int __cdecl evt_LogScriptError(void*, int, char*);
 int __cdecl fcn_00445600(int, int, int, int);
 void __cdecl fcn_00414fb0(int, int, int, int*);
 int __cdecl ObjectFlight(int*, int*, int*, int*, int*, int*, int*);
@@ -27,7 +27,7 @@ int __cdecl ObjectFlight(int* a1, int* a2, int* a3, int* a4, int* a5, int* a6, i
 		o = *(int**) 0x6b7e98;
 	}
 	if (*a1 == 0) {
-		fcn_00425bf0((void*) o, *(int*) ((int) o + 0x118), (char*) 0x676958);
+		evt_LogScriptError((void*) o, *(int*) ((int) o + 0x118), (char*) 0x676958);
 		return 0;
 	}
 	values[0] = fcn_00445600(0, 0x140, 0, *a3);

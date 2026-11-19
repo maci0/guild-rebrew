@@ -5,7 +5,7 @@
 extern char s_67a464[];
 
 int __cdecl fcn_0065f220(const char* a, const char* b);
-void __cdecl fcn_00439860(char* o);
+void __cdecl d3_CleanupObjectResources(char* o);
 int __cdecl fcn_0044c200(char* a, char* b);
 void __cdecl fcn_00449f90(char* o, int a, char* name);
 void __cdecl fcn_00438ac0(char* o, int a);
@@ -38,7 +38,7 @@ char __cdecl fcn_0043aad0(char* o, SCENE_PROGRESS_CONTEXT* cb)
 			*ext = 0;
 		}
 	}
-	fcn_00439860(o);
+	d3_CleanupObjectResources(o);
 	if (fcn_0044c200(buf, buf)) {
 		fcn_00449f90(o, 0, buf);
 	}

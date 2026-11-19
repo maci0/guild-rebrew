@@ -18,7 +18,7 @@ struct list_4b3fe0 {
 extern List8c_102cbc8 g_102cbc8[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
@@ -34,7 +34,7 @@ void __cdecl fcn_00471e30(int);
 
 
 /* ADDRESS: GOLDTL 0x004b3fe0 */
-int __cdecl fcn_004b3fe0(int a1)
+int __cdecl d2_ChooseMission(int a1)
 {
 	int result;
 	int h;
@@ -46,7 +46,7 @@ int __cdecl fcn_004b3fe0(int a1)
 
 	result = 0xff;
 	h = fcn_00470820(0, 0, g_68114c);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1ace);
 	d2_SetForm(h, 2);
@@ -60,7 +60,7 @@ int __cdecl fcn_004b3fe0(int a1)
 		*(int**) (g_1015ea0 + k * 756 + 0x2f0) = it;
 		fcn_00469470(lst, k);
 	}
-	while (fcn_005373e0(fcn_004b3fe0, 0x1c6) != 0) {
+	while (fcn_005373e0(d2_ChooseMission, 0x1c6) != 0) {
 		d2_UpdateRadioGroup(lst);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1 || g_100f1dc == 1)
 			g_774654 = 1;

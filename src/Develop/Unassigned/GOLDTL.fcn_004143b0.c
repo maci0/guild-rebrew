@@ -34,12 +34,12 @@ typedef struct S143b0Box {
 	float maxY;
 } S143b0Box;
 
-char __cdecl fcn_004458e0(char*, int);
+char __cdecl d3_ReparentObject(char*, int);
 void __cdecl fcn_00438d70(char*, int, int, int);
-int __cdecl fcn_004133e0(char*, float*, float*);
+int __cdecl d3_GetObjectVerticalBounds(char*, float*, float*);
 int __cdecl fcn_00413480(char*, float, float*, float*, float*, float*);
 int __cdecl fcn_00413c40(char*, float*, float*, float*, float*, float*, float*);
-int __cdecl fcn_00413fb0(S143b0Box*, char*);
+int __cdecl d3_AccumulateMeshHeightRange(S143b0Box*, char*);
 
 /* ADDRESS: GOLDTL 0x004143b0 */
 int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
@@ -53,7 +53,7 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 
 	link = *(int*) (self + 0x1fc);
 	if (link != 0) {
-		fcn_004458e0(self, 0);
+		d3_ReparentObject(self, 0);
 		fcn_00438d70(self, 0, *(int*) (self + 0x88), 0);
 	} else {
 		link = 0;
@@ -62,7 +62,7 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 		goto fail;
 	}
 	box.obj = self;
-	if (fcn_004133e0(self, &box.lo, &box.hi) != 0) {
+	if (d3_GetObjectVerticalBounds(self, &box.lo, &box.hi) != 0) {
 		goto fail;
 	}
 	box.level = (box.hi - box.lo) * 0.1f + box.lo;
@@ -98,7 +98,7 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 	ok = 1;
 	do {
 		if (node != self) {
-			ok &= fcn_00413fb0(&box, node);
+			ok &= d3_AccumulateMeshHeightRange(&box, node);
 		}
 		node = *(char**) (node + 0x1f4);
 	} while (node != 0);
@@ -114,12 +114,12 @@ pick:
 	*(unsigned char*) (self + 0x214) |= 4;
 	*(float*) (self + 0x50) = value - box.lo + *(float*) (self + 0x50);
 	if (link != 0) {
-		fcn_004458e0(self, link);
+		d3_ReparentObject(self, link);
 	}
 	return 0;
 fail:
 	if (link != 0) {
-		fcn_004458e0(self, link);
+		d3_ReparentObject(self, link);
 	}
 	return 1;
 }

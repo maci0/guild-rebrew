@@ -7,7 +7,7 @@ extern g_6623bc_f g_6623bc;
 
 
 int __cdecl fcn_0042b240(int);
-int __cdecl fcn_0042b1c0(int);
+int __cdecl msx_FindSampleHandleIndex(int);
 
 int __cdecl fcn_0042a6a0(int a1)
 {
@@ -15,7 +15,7 @@ int __cdecl fcn_0042a6a0(int a1)
 	int i;
 	int j;
 
-	if (g_6b7f90 != 0 && (i = fcn_0042b240(a1)) >= 0 && (j = fcn_0042b1c0(a1)) >= 0) {
+	if (g_6b7f90 != 0 && (i = fcn_0042b240(a1)) >= 0 && (j = msx_FindSampleHandleIndex(a1)) >= 0) {
 		g_6623bc(a1);
 		g_6b7f10[i][j] = r;
 		msx_WaveDrivers[i][5]--;

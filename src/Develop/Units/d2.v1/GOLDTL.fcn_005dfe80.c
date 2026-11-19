@@ -30,7 +30,7 @@ extern char s_68d704[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_CreateRadioGroup(int);
 void __cdecl fcn_00469470(int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -71,7 +71,7 @@ int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 		wflags = 0x717c6;
 	}
 	io_AppendText(arg);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	g_77534d = 1;
 	ctx = d2_CreateRadioGroup(0);
 	for (i = 0; i < ((IdList*)g_77255c)->count; i++) {

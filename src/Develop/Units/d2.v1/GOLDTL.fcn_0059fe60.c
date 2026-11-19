@@ -23,7 +23,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl fcn_00470820(int, int, char *);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
@@ -71,7 +71,7 @@ void __cdecl fcn_0059fe60(char *a0)
 	dlg = fcn_00470820(0, 0, "locations\\wohnsitz\\geliebte");
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(d2_CurrentWindowId);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 2);
 	item = fcn_00472250(dlg, 2, io_AppendText(g_7f4ca0[g_774970].b9 == 0 ? 0x1a50 : 0x1a51));

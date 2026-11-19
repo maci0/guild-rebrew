@@ -33,7 +33,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004f63d0(int id, int* ids, short kind);
 int __cdecl fcn_005d9ca0(char* e, char* who, int n, int a4);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
@@ -79,7 +79,7 @@ int __cdecl fcn_005da250(char* e, char* a2)
 		return fcn_005d9ca0(e, who, b[0], 0);
 	}
 	dlg = fcn_00470820(0, 0, "privillegien\\Beweise_Sichten");
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x173f);
 	d2_SetForm(dlg, 2);

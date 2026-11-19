@@ -12,7 +12,7 @@ extern char* g_fc52f0;
 extern char g_fc2700[];
 void* __cdecl fcn_00430470(const char*, const char*, void*);
 int __cdecl fcn_00430aa0(void*);
-int __cdecl fcn_00401180(void*, void*);
+int __cdecl vfs_ReadByte(void*, void*);
 void __cdecl fcn_004011a0(void*, char*);
 int __cdecl fcn_004011d0(void*, void*);
 void __cdecl fcn_00401280(void*, void*);
@@ -164,7 +164,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 				index++;
 			} while (index < count);
 		}
-		fcn_00401180(s, &present);
+		vfs_ReadByte(s, &present);
 		if (present != 0) {
 			g_6b8300 = fcn_0044b920(s, version);
 		}

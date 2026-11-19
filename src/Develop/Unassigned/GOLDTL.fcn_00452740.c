@@ -8,7 +8,7 @@ extern unsigned int g_6b8710;
 extern unsigned int g_6b8714;
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
 extern volatile unsigned int g_6b7fac; void __cdecl fcn_00452420(void*);
-int __cdecl fcn_0045cb10(int, char);
+int __cdecl d3_FindTextureVariant(int, char);
 void __cdecl fcn_004557c0(char*, char*, int, float*);
 void __cdecl fcn_004372d0(unsigned char, unsigned char, int, unsigned char, unsigned char);
 
@@ -45,7 +45,7 @@ void __cdecl fcn_00452740(void *arg)
 			p = *(int *) (obj + 0x28) + i * 0x54;
 			if ((*(unsigned char *) (p + 0x51) & 1) != 0 && *(unsigned char *) (p + 0x4f) > 0) {
 				if (*(unsigned char *) (p + 0x50) > 0)
-					v = fcn_0045cb10(*(int *) (obj + 0xe0), *(char*) (p + 0x50));
+					v = d3_FindTextureVariant(*(int *) (obj + 0xe0), *(char*) (p + 0x50));
 				else
 					v = *(int *) (obj + 0xdc);
 				cnt++;

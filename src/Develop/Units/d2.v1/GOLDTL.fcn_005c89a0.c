@@ -31,7 +31,7 @@ extern char g_6ac870[];
 extern char g_68be7c[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472830(int, int);
@@ -42,7 +42,7 @@ char* __cdecl fcn_0050dc90(unsigned char*);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win);
 int __cdecl fcn_0050b710(int, unsigned char);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -60,7 +60,7 @@ int __cdecl fcn_005c89a0(void)
 
 	n = 0;
 	h = fcn_00470820(0, 0, g_6ac878);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1934);
 	for (k = 0; k < 128; k++) {
@@ -89,7 +89,7 @@ int __cdecl fcn_005c89a0(void)
 				io_FormatTextBuffer(buf, g_6ac870, *e * 14 + 0x48e, e + 5);
 				g_777d00[n].name_text = d2_ShowTxt(0x40, n * 0x3e + 8, buf, d2_CurrentWindowId);
 				((Font5c89*)g_1015ea0)[g_777d00[n].name_text].w = 0xa0;
-				fcn_00472900(g_777d00[n].name_text, 0x54);
+				d2_SetElementFont(g_777d00[n].name_text, 0x54);
 				io_FormatTextBuffer(buf, g_68be7c, *(int*) (m + 0x1b8));
 				g_777d00[n].value_text = d2_ShowTxt(0x180, n * 0x3e + 0x14, buf, d2_CurrentWindowId);
 				g_777d00[n].bar = fcn_00467480(0xea, n * 0x3e + 0x14, 0x40, 0x40, 0x82, d2_CurrentWindowId);

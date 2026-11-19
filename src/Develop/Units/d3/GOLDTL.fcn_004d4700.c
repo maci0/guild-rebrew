@@ -7,7 +7,7 @@ extern char g_68bdd4[];
 unsigned int __cdecl cut_RandMod(int n);
 int __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
 int __cdecl fcn_00442910(int, char*, float*, char*);
-int __cdecl fcn_00412f10(int, char*, int);
+int __cdecl d3_ApplyObjectAnimation(int, char*, int);
 
 /* ADDRESS: GOLDTL 0x004d4700 */
 int __cdecl fcn_004d4700(char* e)
@@ -21,5 +21,5 @@ int __cdecl fcn_004d4700(char* e)
 	rot[1] = cut_RandMod(0x168) * g_6628fc * g_664f10;
 	fcn_004234e0(0, g_68bdd4, 1, 63, 127, 0, 0);
 	h = fcn_00442910(0, *(char**) (*(char**) (e + 0x14) + 0x34) + 0x4c, rot, g_68bdc4);
-	return fcn_00412f10(h, g_68bda8, 0x12);
+	return d3_ApplyObjectAnimation(h, g_68bda8, 0x12);
 }

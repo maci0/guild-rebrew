@@ -16,10 +16,10 @@ int __cdecl vfs_ReadData(char*, int, int, char*);
 unsigned int __cdecl vfs_fwrite(void*, int, int, char*);
 int __cdecl vfs_fseek(char*, int, int);
 int __cdecl vfs_ftell(char*);
-void __cdecl fcn_00401210(void*, char);
-void __cdecl fcn_00401230(void*, void*);
+void __cdecl vfs_WriteByte(void*, char);
+void __cdecl vfs_WriteCString(void*, void*);
 void __cdecl fcn_00401260(void*, int);
-void __cdecl fcn_004012f0(void*, void*);
+void __cdecl vfs_WriteVec3(void*, void*);
 void __cdecl fcn_00401360(void*, int);
 
 /* SIZE 0x18 */
@@ -384,15 +384,15 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 	stream = vfs_Tfopen(pfad, "wb", g_6b7fdc);
 	vfs_fwrite(buf, len, 1, stream);
 	m_FreeTracked(buf);
-	fcn_00401210(stream, 0x2d);
+	vfs_WriteByte(stream, 0x2d);
 	fcn_00401360(stream, fcn_0044fba0((char*) obj, (char*) &info));
 	fcn_00401360(stream, 0xfab50005);
 	fcn_00401360(stream, obj->anzahl_mat);
 	fcn_00401360(stream, obj->anzahl_poi);
 	fcn_00401360(stream, obj->anzahl_pol);
 	for (i = 0; i < obj->anzahl_poi + 8; i++) {
-		fcn_004012f0(stream, obj->poi[i].pos);
-		fcn_004012f0(stream, obj->poi[i].unbekannt);
+		vfs_WriteVec3(stream, obj->poi[i].pos);
+		vfs_WriteVec3(stream, obj->poi[i].unbekannt);
 	}
 	fcn_00401260(stream, *(int*) &obj->radius);
 	for (i = 0; i < obj->anzahl_pol; i++) {
@@ -403,37 +403,37 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 		tmp[0] = pol->ecke[0][0];
 		tmp[1] = pol->ecke[1][0];
 		tmp[2] = pol->ecke[2][0];
-		fcn_004012f0(stream, tmp);
+		vfs_WriteVec3(stream, tmp);
 		tmp[0] = pol->ecke[0][1];
 		tmp[1] = pol->ecke[1][1];
 		tmp[2] = pol->ecke[2][1];
-		fcn_004012f0(stream, tmp);
-		fcn_004012f0(stream, pol->normal);
+		vfs_WriteVec3(stream, tmp);
+		vfs_WriteVec3(stream, pol->normal);
 		if (obj->anzahl_mat > 0xfe) {
 			fcn_00401360(stream, pol->material);
 		} else {
-			fcn_00401210(stream, pol->material == -1 ? (char) 0xff : (char) pol->material);
+			vfs_WriteByte(stream, pol->material == -1 ? (char) 0xff : (char) pol->material);
 		}
 	}
 	for (i = 0; i < obj->anzahl_mat; i++) {
 		mat = &info.mat[i];
-		fcn_00401230(stream, mat->str00);
-		fcn_00401230(stream, mat->str80);
-		fcn_00401230(stream, mat->str40);
-		fcn_00401210(stream, (char) mat->b_c0);
-		fcn_00401210(stream, (char) mat->b_c1);
-		fcn_00401210(stream, (char) (((((mat->b_c3 << 4) | mat->b_c6) << 1) | mat->b_c5) << 1 | mat->b_c2));
-		fcn_00401210(stream, (char) ((mat->b_c7 & 0xfe) | mat->b_c4));
-		fcn_00401210(stream, (char) mat->b_c8);
-		fcn_00401210(stream, (char) mat->b_c9);
+		vfs_WriteCString(stream, mat->str00);
+		vfs_WriteCString(stream, mat->str80);
+		vfs_WriteCString(stream, mat->str40);
+		vfs_WriteByte(stream, (char) mat->b_c0);
+		vfs_WriteByte(stream, (char) mat->b_c1);
+		vfs_WriteByte(stream, (char) (((((mat->b_c3 << 4) | mat->b_c6) << 1) | mat->b_c5) << 1 | mat->b_c2));
+		vfs_WriteByte(stream, (char) ((mat->b_c7 & 0xfe) | mat->b_c4));
+		vfs_WriteByte(stream, (char) mat->b_c8);
+		vfs_WriteByte(stream, (char) mat->b_c9);
 	}
 	fcn_00401360(stream, info.anzahl_bone);
 	for (i = 0; i < info.anzahl_bone; i++) {
-		fcn_00401230(stream, info.bone[i].name);
-		fcn_004012f0(stream, info.bone[i].a);
-		fcn_004012f0(stream, info.bone[i].b);
+		vfs_WriteCString(stream, info.bone[i].name);
+		vfs_WriteVec3(stream, info.bone[i].a);
+		vfs_WriteVec3(stream, info.bone[i].b);
 	}
-	fcn_00401210(stream, 0x2f);
+	vfs_WriteByte(stream, 0x2f);
 	vfs_ftell(stream);
 	CloseVfsStream(stream);
 	if (info.anzahl_mat > 0 && info.mat != 0) {

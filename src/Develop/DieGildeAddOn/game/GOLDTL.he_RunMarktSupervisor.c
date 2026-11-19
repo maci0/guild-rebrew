@@ -58,7 +58,7 @@ extern double g_6640f8;
 extern double g_664468;
 extern double g_665dd0;
 
-int __cdecl fcn_00500d20(void*, void*);
+int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_0050d320(int, unsigned char);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
@@ -102,7 +102,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 		fcn_00546190(a0);
 		return;
 	}
-	v = fcn_00500d20((void*) (a0 + 0x60), (void*) &gm_GameTime);
+	v = gm_GetElapsedMinutes((void*) (a0 + 0x60), (void*) &gm_GameTime);
 	if ((unsigned short) gm_GameTime.b > 0x14) {
 		fcn_00546190(a0);
 		return;

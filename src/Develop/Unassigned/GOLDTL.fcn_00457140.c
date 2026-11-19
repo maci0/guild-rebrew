@@ -58,7 +58,7 @@ typedef struct Ctx0457140 {
 
 extern float g_662c94;
 
-void __cdecl fcn_00455350(Obj0457140* o, int* p, Vec0457140* out);
+void __cdecl d3_TransformPoint(Obj0457140* o, int* p, Vec0457140* out);
 
 float __cdecl fcn_00457140(Obj0457140* o, Ctx0457140* ctx)
 {
@@ -73,7 +73,7 @@ float __cdecl fcn_00457140(Obj0457140* o, Ctx0457140* ctx)
 
 	res = 0.0f;
 	found = 0;
-	fcn_00455350(o, &o->x4c, &pos);
+	d3_TransformPoint(o, &o->x4c, &pos);
 	if (o->parent != 0) {
 		for (p = o->parent; p != 0; p = p->parent) {
 			if ((p->flags & 1) && p->ov != 0) {

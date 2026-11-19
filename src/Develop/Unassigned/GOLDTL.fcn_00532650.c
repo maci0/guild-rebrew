@@ -14,7 +14,7 @@ struct s_7e6060 {
 
 extern struct s_7e6060 g_7e6060[64];
 
-void __cdecl fcn_00472880(int);
+void __cdecl d2_SelectFont(int);
 char __cdecl fcn_00443e10(void*, int*);
 void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
 
@@ -36,7 +36,7 @@ void __cdecl fcn_00532650(void)
 			*q = 0;
 		}
 	}
-	fcn_00472880(0x54);
+	d2_SelectFont(0x54);
 	for (s = &g_7e6060[0].o; (int) s < (int) &g_7e6060[64].o;
 		s = (char**) ((char*) s + sizeof(struct s_7e6060))) {
 		e = *s;

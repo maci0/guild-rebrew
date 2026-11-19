@@ -15,7 +15,7 @@ void __cdecl ch_ExecFinishAnimation(struct CH_ACTION* task);
 int __cdecl ch_RemoveQueueEntry(char* task);
 int __cdecl ch_CancelActionQueue(char* object);
 int __cdecl ch_ClearActionQueue(void* object);
-void __cdecl fcn_00405180(void* object, void* task);
+void __cdecl ch_ValidateActionLinks(void* object, void* task);
 char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...);
 
 /* Native startup clears exactly 64 entries; declaration only, owner unresolved. */

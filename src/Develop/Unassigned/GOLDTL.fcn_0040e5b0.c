@@ -5,7 +5,7 @@ extern char g_676694[];
 int __cdecl fcn_00445600(int, int, int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 extern char* evt_CurrentScript;
-void __cdecl fcn_00425bf0(void*, int, char*);
+void __cdecl evt_LogScriptError(void*, int, char*);
 
 int __cdecl GetObjectHandle(int* id)
 {
@@ -15,7 +15,7 @@ int __cdecl GetObjectHandle(int* id)
 	r = fcn_00445600(0, 0x140, 0, *id);
 	if (r == 0) {
 		fcn_0064d41a(buf, g_676694, *id);
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), buf);
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), buf);
 		return 0;
 	}
 	return r;

@@ -1,6 +1,6 @@
 extern char* g_67a370;
 
-char* __cdecl fcn_004ceac0(int, char*);
+char* __cdecl gm_FindOrCreateEntitySlot(int, char*);
 char* __cdecl fcn_004ce610(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char __cdecl fcn_0045b990(int, int, void*, void*, void*);
@@ -22,7 +22,7 @@ void __cdecl fcn_004cfe60(int a, char* b)
 	int r;
 
 	top = *(int*) (g_67a370 + 0xb0);
-	rec = fcn_004ceac0(a, b);
+	rec = gm_FindOrCreateEntitySlot(a, b);
 	ent = fcn_004ce610(b);
 	if (rec == 0) {
 		return;

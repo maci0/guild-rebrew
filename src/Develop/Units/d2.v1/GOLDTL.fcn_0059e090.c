@@ -50,13 +50,13 @@ extern int d2_CurrentElementId;
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00533dc0(int, int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl d2_SetBackgroundTexture(char*, int);
 void __cdecl fcn_00533a60(int, int, Pick*, int, int, char*, char*);
-void __cdecl fcn_00472170(int, int);
+void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00594340(void);
@@ -99,7 +99,7 @@ void __cdecl fcn_0059e090(char* b)
 				fcn_00471e30(h);
 			}
 			h = fcn_00470820(0, 0, "Handel\\Handel_Transport");
-			fcn_00471b60(h);
+			d2_CenterDialogWindows(h);
 			d2_SetForm(h, 0);
 			fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x73f);
 			slot = (D2_WIN*) &g_1015f40[((Dlg*)g_1038140)[h].slot];
@@ -109,7 +109,7 @@ void __cdecl fcn_0059e090(char* b)
 			t0 = *(unsigned int*)&g_6b7fac;
 			d2_SetForm(h, 4);
 			fcn_00533a60(d2_CurrentWindowId, 0, &pick, 3, g_14a566c, "Import", "Export");
-			fcn_00472170(pick.x0, 0);
+			d2_SetSlotVisibility(pick.x0, 0);
 			a = pick.a;
 			c = pick.b;
 			if (sel != 0) {

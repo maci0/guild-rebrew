@@ -17,7 +17,7 @@ extern double g_dbl_665fb8;
 
 void __cdecl fcn_00442c00(char* object, int flag);
 void __cdecl fcn_004518a0(float* vector);
-void __cdecl fcn_00412cf0(char* camera, float* position, char* view, int limit, int mode);
+void __cdecl d3_AnimateObjectTransform(char* camera, float* position, char* view, int limit, int mode);
 int __cdecl fcn_005373e0(int a, int b);
 void __cdecl fcn_0058f700(int flag);
 void __cdecl fcn_0052d820(void);
@@ -58,7 +58,7 @@ void __cdecl fcn_005a8c30(char* object)
 	v.target[1] = *(float*) (g_7746a0 + 0x50) - v.offset[1];
 	v.target[2] = *(float*) (g_7746a0 + 0x54) - v.offset[2];
 	*(int*) (g_7746a0 + 0x94) = *(int*) (d3_ActiveCamera + 0x88);
-	fcn_00412cf0(d3_ActiveCamera, v.target, (char*) g_7746a0 + 0x90, g_6a256c, 8);
+	d3_AnimateObjectTransform(d3_ActiveCamera, v.target, (char*) g_7746a0 + 0x90, g_6a256c, 8);
 	do {
 		if (!fcn_005373e0(0, 0x67fff)) {
 			break;

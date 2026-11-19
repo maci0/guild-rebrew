@@ -29,10 +29,10 @@ extern int g_67a370;
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 void __cdecl fcn_00401360(void* s, int v);
 void __cdecl fcn_00401260(void* s, int v);
-void __cdecl fcn_004012f0(void* s, int* v);
-void __cdecl fcn_004379a0(int list, int a, int kind, void* fn, void* ctx);
+void __cdecl vfs_WriteVec3(void* s, int* v);
+void __cdecl d3_VisitSceneObjects(int list, int a, int kind, void* fn, void* ctx);
 void __cdecl fcn_00446c60(void);
-void __cdecl fcn_00401210(void* s, int v);
+void __cdecl vfs_WriteByte(void* s, int v);
 #include "Develop/Units/vfs/vfs.h"
 
 /* ADDRESS: GOLDTL 0x00446cd0 */
@@ -52,22 +52,22 @@ void __cdecl fcn_00446cd0(char* name, void* stream)
 	g_6b86d4++;
 	fcn_00401360(s, 0x3a6c00bb);
 	fcn_00401260(s, 0);
-	fcn_004012f0(s, ((int*)&g_67bbdc));
-	fcn_004012f0(s, ((int*)&g_6b86c4));
+	vfs_WriteVec3(s, ((int*)&g_67bbdc));
+	vfs_WriteVec3(s, ((int*)&g_6b86c4));
 	fcn_00401360(s, d3_FogColor);
 	fcn_00401260(s, (*(int*)&g_10425fc));
 	fcn_00401260(s, (*(int*)&g_104329c));
 	for (i = 0; i < 7; i++) {
-		fcn_004012f0(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].pos);
-		fcn_004012f0(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].dir);
+		vfs_WriteVec3(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].pos);
+		vfs_WriteVec3(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].dir);
 		for (j = 0; j < 6; j++) {
 			fcn_00401360(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].keys[j].k);
 			fcn_00401260(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].keys[j].a);
 			fcn_00401260(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].keys[j].b);
 		}
 	}
-	fcn_004379a0(g_67a370, 0, 0x18, (void*) fcn_00446c60, s);
-	fcn_00401210(s, 0);
+	d3_VisitSceneObjects(g_67a370, 0, 0x18, (void*) fcn_00446c60, s);
+	vfs_WriteByte(s, 0);
 	if (stream == 0) {
 		CloseVfsStream(s);
 	}

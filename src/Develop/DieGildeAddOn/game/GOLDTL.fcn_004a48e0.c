@@ -8,7 +8,7 @@ void __cdecl fcn_004432d0(int, int);
 #include "client_placement.h"
 int __cdecl fcn_00598150(char*, char**);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_00455350(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 float __cdecl gm_RandomFloat01(void);
 
 
@@ -41,12 +41,12 @@ char* __cdecl fcn_004a48e0(char* u, int key)
 		if (n != 0) {
 			if (*(char**) (u + 0x170) != 0 && *(char**) (*(char**) (u + 0x170) + 0x61) != 0 && gm_RandomMod(3) != 0) {
 				ref = *(char**) (*(char**) (u + 0x170) + 0x61);
-				fcn_00455350(ref, ref + 0x4c, p1);
+				d3_TransformPoint(ref, ref + 0x4c, p1);
 				found = 0;
 				best = 1.00000002e+21f;
 				for (i = 0; i < n; i++) {
 					if (list[i] != 0) {
-						fcn_00455350(list[i], list[i] + 0x4c, p2);
+						d3_TransformPoint(list[i], list[i] + 0x4c, p2);
 						d[0] = p2[0] - p1[0];
 						d[1] = p2[1] - p1[1];
 						d[2] = p2[2] - p1[2];
@@ -62,12 +62,12 @@ char* __cdecl fcn_004a48e0(char* u, int key)
 			}
 			if (g_773d78 != 0 && *(char**) (g_773d78 + 0x61) != 0) {
 				ref = *(char**) (g_773d78 + 0x61);
-				fcn_00455350(ref, ref + 0x4c, p1);
+				d3_TransformPoint(ref, ref + 0x4c, p1);
 				found = 0;
 				best = 1.00000002e+21f;
 				for (i = 0; i < n; i++) {
 					if (list[i] != 0) {
-						fcn_00455350(list[i], list[i] + 0x4c, p2);
+						d3_TransformPoint(list[i], list[i] + 0x4c, p2);
 						d[0] = p2[0] - p1[0];
 						d[1] = p2[1] - p1[1];
 						d[2] = p2[2] - p1[2];

@@ -14,12 +14,12 @@ int __cdecl gm_GetOppositeStatIndex(int);
 void __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl fcn_00546190(char*);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_004c6470(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-int __cdecl fcn_00422700(char*);
+int __cdecl sb_FindBankByName(char*);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl fcn_00545780(int);
 
@@ -65,7 +65,7 @@ void __cdecl fcn_00565350(int a0)
 			return;
 		}
 		d2_SetForm(*(int*) (*(int*) (a0 + 0x74) + 8), 0);
-		fcn_00471b60(*(int*) (*(int*) (a0 + 0x74) + 8));
+		d2_CenterDialogWindows(*(int*) (*(int*) (a0 + 0x74) + 8));
 		ent = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (a0 + 0xac));
 		sex = *(unsigned char*) (ent + 9);
 		sex = -sex;
@@ -96,23 +96,23 @@ void __cdecl fcn_00565350(int a0)
 		x = gm_MapEntityStatRange(*(unsigned char*) (a0 + 0xb0));
 		v6 = gm_GetOppositeStatIndex(*(unsigned char*) (a0 + 0xb0));
 		sprintf(name, "brk_%02i", x);
-		v7 = fcn_00422700("BERUF_BESTANDEN");
+		v7 = sb_FindBankByName("BERUF_BESTANDEN");
 		if (0xd <= x) {
 			if (*(char*) (ent + 9))
 				s = "ADDON_BERUF_LISTE_WEIBLICH";
 			else
 				s = "ADDON_BERUF_LISTE_MAENNLICH";
-			v = fcn_00422700(s);
-			v8 = fcn_00422700("ADDON_GEBAEUDE_LISTE");
-			v9 = fcn_00422700("ADDON_BERUFE_VEREINIGUNG_UNTERSCHRIFT");
+			v = sb_FindBankByName(s);
+			v8 = sb_FindBankByName("ADDON_GEBAEUDE_LISTE");
+			v9 = sb_FindBankByName("ADDON_BERUFE_VEREINIGUNG_UNTERSCHRIFT");
 		} else {
 			if (*(char*) (ent + 9))
 				s = "BERUF_LISTE_WEIBLICH";
 			else
 				s = "BERUF_LISTE_MAENNLICH";
-			v = fcn_00422700(s);
-			v8 = fcn_00422700("GEBAEUDE_LISTE");
-			v9 = fcn_00422700("BERUFE_VEREINIGUNG_UNTERSCHRIFT");
+			v = sb_FindBankByName(s);
+			v8 = sb_FindBankByName("GEBAEUDE_LISTE");
+			v9 = sb_FindBankByName("BERUFE_VEREINIGUNG_UNTERSCHRIFT");
 		}
 
 		if (v6 + 1 >= 3) {

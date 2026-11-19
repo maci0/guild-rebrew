@@ -14,7 +14,7 @@ typedef struct {
 
 extern char* evt_CurrentScript;
 void __cdecl fcn_0043a3f0(int a, int b, Bytes4 c);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl SetCharacterTransperancy(char** a, unsigned char* v)
 {
@@ -22,7 +22,7 @@ int __cdecl SetCharacterTransperancy(char** a, unsigned char* v)
 	int o;
 
 	if (*a == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 1;
 	}
 	o = *(int*) (*a + 0x34);

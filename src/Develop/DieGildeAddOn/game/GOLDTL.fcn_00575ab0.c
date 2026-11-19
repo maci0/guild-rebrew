@@ -16,7 +16,7 @@ void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl fcn_00546190(char*);
 int __cdecl fcn_005764a0(char*, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_00500d20(pos14_7f4c00*, pos14_7f4c00*);
+int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 
 void __cdecl fcn_00575ab0(char* u)
 {
@@ -53,7 +53,7 @@ void __cdecl fcn_00575ab0(char* u)
 			if (*(int*) (u + 0x70) != 0) {
 				return;
 			}
-			*(int*) (u + 0xb4) -= fcn_00500d20((pos14_7f4c00*) (u + 0xbc), &gm_GameTime);
+			*(int*) (u + 0xb4) -= gm_GetElapsedMinutes((pos14_7f4c00*) (u + 0xbc), &gm_GameTime);
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
 			*(pos14_7f4c00*) (u + 0xbc) = gm_GameTime;

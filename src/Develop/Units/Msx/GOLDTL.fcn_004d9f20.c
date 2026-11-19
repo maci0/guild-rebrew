@@ -75,9 +75,9 @@ void __cdecl fcn_004d9f20(int arg)
 	fcn_004d7e50(arg);
 	g_772efc = 0;
 	if (r < 0x32) {
-		g_772efc = fcn_00420780("Athmos\\Kampfathmo_1.mp3", 0xb);
+		g_772efc = msx_StartAmbientTrack("Athmos\\Kampfathmo_1.mp3", 0xb);
 	} else {
-		g_772efc = fcn_00420780("Athmos\\Kampfathmo_2.mp3", 0xb);
+		g_772efc = msx_StartAmbientTrack("Athmos\\Kampfathmo_2.mp3", 0xb);
 	}
 	g_772e94 = 0;
 	while (fcn_005373e0(fcn_004d9f20, 0xfd6c6) != 0) {

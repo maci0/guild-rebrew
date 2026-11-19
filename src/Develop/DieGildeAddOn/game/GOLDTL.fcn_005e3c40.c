@@ -15,7 +15,7 @@ extern int g_1040494;
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00533cf0(int);
-void __cdecl fcn_0046b4f0(void);
+void __cdecl d2_ClearScreen(void);
 void __cdecl fcn_00473150(unsigned char*);
 void __cdecl fcn_005270c0(int);
 void __cdecl fcn_00528fd0(void);
@@ -29,7 +29,7 @@ void __cdecl fcn_005e3c40(void)
 		fcn_005373e0(0, 0x24087);
 	}
 	if (g_774954 != 0) {
-		fcn_0046b4f0();
+		d2_ClearScreen();
 		fcn_00473150(p);
 		g_774670 = 6;
 		return;
@@ -38,7 +38,7 @@ void __cdecl fcn_005e3c40(void)
 	((Rect*)&g_1040480)->left = ((Rect*)&g_6a3764)->left;
 	((Rect*)&g_1040480)->top = ((Rect*)&g_6a3764)->top;
 	((Rect*)&g_1040480)->bottom = ((Rect*)&g_6a3764)->bottom;
-	fcn_0046b4f0();
+	d2_ClearScreen();
 	fcn_005270c0(1);
 	fcn_00528fd0();
 	fcn_00533cf0(0);

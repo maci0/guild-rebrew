@@ -9,10 +9,10 @@ extern Fld_102d140 g_102d140[];
 
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00475f80(void* surf);
-void __cdecl fcn_0047a2b0(int h);
-int __cdecl fcn_0046f390(int win);
+void __cdecl d2_ClearAnimationSlot(int h);
+int __cdecl d2_DestroyWindow(int win);
 void __cdecl d2_SubRefcount(int i);
-void __cdecl fcn_00465ff0(int x, int y, int w, int h, void* owner);
+void __cdecl d2_AddDirtyRect(int x, int y, int w, int h, void* owner);
 void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 
 
@@ -40,10 +40,10 @@ void __cdecl fcn_0046b2b0(int id)
 		}
 		break;
 	case 4:
-		fcn_0047a2b0(*(int*) (e + 0x88));
+		d2_ClearAnimationSlot(*(int*) (e + 0x88));
 		break;
 	case 0x40:
-		fcn_0046f390(*(int*) (e + 0x88));
+		d2_DestroyWindow(*(int*) (e + 0x88));
 		break;
 	case 0x41:
 		f = &g_102d140[*(int*) (e + 0x88)];
@@ -88,7 +88,7 @@ void __cdecl fcn_0046b2b0(int id)
 	}
 	list = *(char**) (e + 0x50);
 	if (list != 0 && *(int*) (list + 0x198) != 0) {
-		fcn_00465ff0(*(int*) (e + 0x10), *(int*) (e + 0x14), *(int*) (e + 0x18), *(int*) (e + 0x1c), list);
+		d2_AddDirtyRect(*(int*) (e + 0x10), *(int*) (e + 0x14), *(int*) (e + 0x18), *(int*) (e + 0x1c), list);
 	}
 	for (i = 0; i < 0x3ff; i++) {
 		if (g_772540[i] == (void*) e) {

@@ -28,7 +28,7 @@ char* __cdecl fcn_0047abd0(int, int);
 void __cdecl fcn_0047ac20(char*, char*);
 char* __cdecl fcn_004770a0(int*, int);
 int __cdecl fcn_00475fd0(char*);
-void __cdecl fcn_00476060(char*);
+void __cdecl d2_UnlockSurface(char*);
 void __cdecl fcn_004760e0(char*);
 void __cdecl fcn_00475f80(char*);
 int __cdecl fcn_00477420(int);
@@ -169,7 +169,7 @@ char* __cdecl fcn_0047acf0(char* list)
 							break;
 					}
 				}
-				fcn_00476060(surf);
+				d2_UnlockSurface(surf);
 				sprintf(path, "d:\\develop\\d2_test\\textures\\surf%02i.bmp", g_77260c);
 				if (g_67dabc != 0 && *(int*) (bank + 0x1c) != 0) {
 					memset(hdr, 0, 0x17 * 4);
@@ -252,7 +252,7 @@ char* __cdecl fcn_0047acf0(char* list)
 			base = fcn_004770a0(hdr, 0x20);
 			fcn_00475fd0(base);
 			fcn_0047a710(0, 0, shape, base);
-			fcn_00476060(base);
+			d2_UnlockSurface(base);
 			j = 0;
 			y = 0;
 			if (sheets >= 1) {

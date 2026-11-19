@@ -1,7 +1,7 @@
 #include "client_types.h"
 
 int __cdecl gm_ResolveEntityById();
-int __cdecl fcn_00500d20(void*, void*);
+int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl gm_ChangeObjektZustand(int, int);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -31,7 +31,7 @@ void __cdecl fcn_0055f300(char* e)
 	switch (*(int*) (e + 0x70)) {
 	case 0:
 		msg = (int*) (e + 0x60);
-		i = fcn_00500d20(msg, (void*) 0x7f4c00);
+		i = gm_GetElapsedMinutes(msg, (void*) 0x7f4c00);
 		item = fcn_00502cd0(0, 2, 7, 1, *(int*) (e + 0xac));
 		if (item == 0) {
 			item = fcn_00502cd0(0, 2, 7, 1, *(int*) (e + 0xac));

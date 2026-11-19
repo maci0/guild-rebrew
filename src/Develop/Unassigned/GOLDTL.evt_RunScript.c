@@ -10,10 +10,10 @@ struct log_428230 {
 extern int g_6b7eb0;
 extern void* g_14cb8f0;
 
-int __cdecl fcn_00427f00(char*);
+int __cdecl evt_ParseScript(char*);
 void __cdecl fcn_00429d30(char*);
-int __cdecl fcn_004262b0(char*, const char*);
-void __cdecl fcn_00425bf0(char*, int, const char*);
+int __cdecl evt_FindDefinition(char*, const char*);
+void __cdecl evt_LogScriptError(char*, int, const char*);
 void __cdecl evt_EnterFunction(char*, int);
 
 
@@ -27,13 +27,13 @@ int __cdecl evt_RunScript(char* script)
 	if (script == 0) {
 		return 0;
 	}
-	if (fcn_00427f00(script) == 0) {
+	if (evt_ParseScript(script) == 0) {
 		fcn_00429d30(script);
 		return 0;
 	}
-	entry = fcn_004262b0(script, "main");
+	entry = evt_FindDefinition(script, "main");
 	if (entry == 0) {
-		fcn_00425bf0(script, entry, "evt_RunScript:No entrypoint(main) found in script...");
+		evt_LogScriptError(script, entry, "evt_RunScript:No entrypoint(main) found in script...");
 		return 0;
 	}
 	evt_EnterFunction(script, entry);

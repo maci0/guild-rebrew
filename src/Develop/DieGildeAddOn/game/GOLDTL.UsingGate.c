@@ -10,11 +10,11 @@ struct room_4066d0 {
 extern char g_1043370[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_00413190(int);
+int __cdecl d3_GetContextIndex(int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 
 
@@ -41,7 +41,7 @@ void __cdecl UsingGate(char* ev)
 		return;
 	}
 	saved = d3_CurrentContextIndex;
-	room = fcn_00413190(*(int*) (obj + 0x88));
+	room = d3_GetContextIndex(*(int*) (obj + 0x88));
 	if (room == *(int*) (ev + 0x170)) {
 		ch_RemoveQueueEntry(ev);
 		return;
@@ -50,7 +50,7 @@ void __cdecl UsingGate(char* ev)
 	door = fcn_00445600(0, 0x120, 0, ev + 0x130);
 	if (door != 0) {
 		map = ((struct room_4066d0*)g_1043370)[room].map;
-		fcn_00455350(door, door + 0x4c, pos);
+		d3_TransformPoint(door, door + 0x4c, pos);
 		if (fcn_0045b990(map, pos, &col, &row, &height)) {
 			ch_InsertAction(obj, ev, 0x2d, col, row, room);
 		} else {

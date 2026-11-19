@@ -10,7 +10,7 @@ typedef struct BuildingRow552 {
 	char fields[0x24c];
 } BuildingRow552;
 
-int __cdecl fcn_00500d20(void*, void*);
+int __cdecl gm_GetElapsedMinutes(void*, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_FindNextFilteredEntity(void);
@@ -50,7 +50,7 @@ void __cdecl fcn_00552a60(int a0)
 	int v17;
 	int v18;
 
-	v4 = fcn_00500d20((char*) a0 + 0xc4, (char*) 0x7f4c00);
+	v4 = gm_GetElapsedMinutes((char*) a0 + 0xc4, (char*) 0x7f4c00);
 	v14 = 0;
 	v17 = 0;
 	v15 = 0;

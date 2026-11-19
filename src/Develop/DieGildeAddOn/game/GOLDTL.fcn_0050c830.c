@@ -29,7 +29,7 @@ typedef struct
 #define CLAMPF(v, lo, hi) MINF(MAXF((lo), (v)), (hi))
 
 int __cdecl fcn_00500e20(int* p);
-int __cdecl fcn_00500d20(TimeKey* a, TimeKey* b);
+int __cdecl gm_GetElapsedMinutes(TimeKey* a, TimeKey* b);
 int __cdecl fcn_00500cb0(Time* a, Time* b);
 void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10);
 
@@ -54,11 +54,11 @@ int __cdecl fcn_0050c830(Time* a0, Time* a1, char* a2)
 	f1 = g_696540[idx];
 	f2 = g_696550[idx];
 	if ((g_7747b0 & 0x80) != 0) {
-		return fcn_00500d20((TimeKey*) a0, (TimeKey*) a1);
+		return gm_GetElapsedMinutes((TimeKey*) a0, (TimeKey*) a1);
 	}
 	if (a2 != 0) {
 		if (lpGebaeudePROT[*(unsigned char*) a2 * 0x24d] == 0x1d) {
-			return fcn_00500d20((TimeKey*) a0, (TimeKey*) a1);
+			return gm_GetElapsedMinutes((TimeKey*) a0, (TimeKey*) a1);
 		}
 	}
 	if (fcn_00500cb0(a0, a1) > 0) {

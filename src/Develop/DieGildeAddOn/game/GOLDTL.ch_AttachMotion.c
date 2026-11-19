@@ -14,7 +14,7 @@ struct kind_404150 {
 extern int g_675318;
 
 void __cdecl vfs_ToSlashes(char*);
-int __cdecl fcn_00413190(int);
+int __cdecl d3_GetContextIndex(int);
 
 
 /* Attaches the named motion of a character kind to an object. */
@@ -47,7 +47,7 @@ char* __cdecl ch_AttachMotion(char* obj, int kind)
 			return 0;
 		}
 	}
-	if (fcn_00413190(*(int*) (obj + 0x88)) == 0) {
+	if (d3_GetContextIndex(*(int*) (obj + 0x88)) == 0) {
 		*(int*) (anim + 0x3c) = -1;
 	} else {
 		*(int*) (anim + 0x3c) = g_675318;

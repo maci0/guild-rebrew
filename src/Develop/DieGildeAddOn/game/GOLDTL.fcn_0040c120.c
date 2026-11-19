@@ -22,7 +22,7 @@ CH_ACTION* __cdecl ch_NewAction(char* e);
  * params. i is the copy counter, so i = -1 reuses ecx (or ecx,-1) for
  * the kind 0x33 checks. Those checks are two separate ifs: an else
  * would jump over the second test instead of retesting param. */
-CH_ACTION* __cdecl fcn_0040c120(char* e, int kind, ...)
+CH_ACTION* __cdecl ch_CreateAction(char* e, int kind, ...)
 {
 	CH_ACTION* t;
 	va_list ap;
@@ -61,7 +61,7 @@ CH_ACTION* __cdecl fcn_0040c120(char* e, int kind, ...)
 			goto drop;
 		}
 	}
-	fcn_00405180(e, t);
+	ch_ValidateActionLinks(e, t);
 	if (t->ausfuehren == ch_ExecFinishAnimation) {
 		t->parameter = (unsigned char) t->art;
 	}

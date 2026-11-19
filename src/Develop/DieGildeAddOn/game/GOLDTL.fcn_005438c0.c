@@ -89,7 +89,7 @@ void __cdecl io_FormatTextBuffer(void*, int);
 int __cdecl fcn_00526120(void*, int);
 void __cdecl fcn_0046ac30(void);
 int __cdecl fcn_00470820(int, int, const char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl io_AppendText(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -233,7 +233,7 @@ void __cdecl fcn_005438c0(int a0)
 				return;
 			}
 			h = fcn_00470820(0, 0, g_68d714);
-			fcn_00471b60(h);
+			d2_CenterDialogWindows(h);
 			io_AppendText(0x3ff6);
 			fcn_005373e0(0, 0x24087);
 			proc = GetProcAddress((void*) g_7e2500, g_6a44f4);

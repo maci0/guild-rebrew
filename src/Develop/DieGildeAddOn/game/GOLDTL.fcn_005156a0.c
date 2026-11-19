@@ -12,8 +12,8 @@ extern void* __cdecl gm_NextEntityQueryMatch(void);
 extern int __cdecl fcn_005014d0(unsigned short handle);
 extern int __cdecl fcn_00501490(char* key);
 extern int __cdecl fcn_00506380(int a, void* table, void* record, int mode);
-extern void __cdecl fcn_00442d50(char* record, int mode);
-extern int __cdecl fcn_00413680(char* record, char* scene, char* out, int* value);
+extern void __cdecl d3_SetSubtreeVisible(char* record, int mode);
+extern int __cdecl d3_ComputeObjectBoundingSphere(char* record, char* scene, char* out, int* value);
 extern double g_662a08;
 extern void* __cdecl evt_LoadGfxScript(char* name);
 extern void __cdecl fcn_00428340(void* handle, int a, int b);
@@ -81,7 +81,7 @@ void __cdecl fcn_005156a0(char* record)
 				other = (char*) fcn_00502cd0((int) list, 1, 0,
 					id2);
 				if (other != 0) {
-					fcn_00442d50(record, 1);
+					d3_SetSubtreeVisible(record, 1);
 					*(char**) (record + 0x204) = slot;
 					*(unsigned int*) (record + 0x224) = 0;
 					*(char**) (slot + 0x30) = record;
@@ -115,7 +115,7 @@ void __cdecl fcn_005156a0(char* record)
 										p += 2;
 									}
 									if (best != -1 && second < best)
-										fcn_00442d50(record, 0);
+										d3_SetSubtreeVisible(record, 0);
 								}
 							}
 							item = (char*) gm_NextEntityQueryMatch();
@@ -129,16 +129,16 @@ void __cdecl fcn_005156a0(char* record)
 						q = (int*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) table);
 						while (q != 0) {
 							if (*(unsigned short*) other < *(unsigned short*) q)
-								fcn_00442d50(record, 0);
+								d3_SetSubtreeVisible(record, 0);
 							q = (int*) gm_NextEntityQueryMatch();
 						}
 					}
 				} else {
-					fcn_00442d50(record, 0);
+					d3_SetSubtreeVisible(record, 0);
 					*(unsigned int*) (record + 0x204) = 0;
 				}
 			} else {
-				fcn_00442d50(record, 1);
+				d3_SetSubtreeVisible(record, 1);
 				*(char**) (record + 0x204) = slot;
 				*(unsigned int*) (record + 0x224) = 0;
 				*(char**) (slot + 0x30) = record;
@@ -146,14 +146,14 @@ void __cdecl fcn_005156a0(char* record)
 					item = (char*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) entry);
 					while (item != 0) {
 						if (*(unsigned short*) slot < *(unsigned short*) item)
-							fcn_00442d50(record, 0);
+							d3_SetSubtreeVisible(record, 0);
 						item = (char*) gm_NextEntityQueryMatch();
 					}
 				}
 			}
 		} else {
 			entry = lpObjektePROT + idx;
-			fcn_00442d50(record, 1);
+			d3_SetSubtreeVisible(record, 1);
 			*(char**) (record + 0x204) = slot;
 			if (*entry != 0x1d)
 				*(unsigned int*) (record + 0x224) = 0;
@@ -162,7 +162,7 @@ void __cdecl fcn_005156a0(char* record)
 				item = (char*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) entry);
 				while (item != 0) {
 					if (*(unsigned short*) slot < *(unsigned short*) item)
-						fcn_00442d50(record, 0);
+						d3_SetSubtreeVisible(record, 0);
 					item = (char*) gm_NextEntityQueryMatch();
 				}
 			}
@@ -175,7 +175,7 @@ label_59eb:
 			0, (int) id);
 		if (slot == 0)
 			goto label_5a7a;
-		fcn_00442d50(record, 1);
+		d3_SetSubtreeVisible(record, 1);
 		*(char**) (record + 0x204) = slot;
 		if ((entry[0] == 6 || entry[0] == 2) && g_7746c8 != 0) {
 			v22 = fcn_00506380(g_774970, (void*) 0x7f3ee0, slot, 0);
@@ -192,12 +192,12 @@ label_59eb:
 label_5a7a:
 		if (lpObjektePROT[idx] != 0x1d && lpObjektePROT[idx] != 0x21
 			&& *(int*) (record + 0x218) != 1)
-			fcn_00442d50(record, 0);
+			d3_SetSubtreeVisible(record, 0);
 	}
 label_5aab:
 	if (slot != 0 && (*(unsigned char*) (slot + 0x13) & 0xa0) != 0) {
 		if (*(int*) (record + 0x1ec) != 0) {
-			rc = fcn_00413680(record, d3_ActiveCamera, buf, &value);
+			rc = d3_ComputeObjectBoundingSphere(record, d3_ActiveCamera, buf, &value);
 			if (rc != 0) {
 				handle = evt_LoadGfxScript((char*) 0x6a1f3c);
 				if (handle != 0)
@@ -227,8 +227,8 @@ tail:
 	else
 		list = *(char**) (0x7f3ee0 + 0x5d);
 	if (fcn_00502cd0((int) list, 1, 0, idx) != 0) {
-		fcn_00442d50(record, 0);
+		d3_SetSubtreeVisible(record, 0);
 		return;
 	}
-	fcn_00442d50(record, 1);
+	d3_SetSubtreeVisible(record, 1);
 }

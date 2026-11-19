@@ -33,7 +33,7 @@ char* __cdecl gm_FindRecordById(int);
 int __cdecl fcn_0050de80(char* e, Stats* s);
 
 /* ADDRESS: GOLD 0x486180 */
-void __cdecl fcn_00485650(char* a, char* b)
+void __cdecl ai_CollectGoodsResources(char* a, char* b)
 {
 	int i;
 	int j;

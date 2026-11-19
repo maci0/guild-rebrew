@@ -1,6 +1,6 @@
 extern void* g_6b5c5c;
 
-int __cdecl fcn_00408270(float*, float*, int*, int*);
+int __cdecl ch_WorldToGridCoordinates(float*, float*, int*, int*);
 int __cdecl fcn_004082d0(int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00408320 */
@@ -19,12 +19,12 @@ int __cdecl fcn_00408320(int a0, char* a1, int* a2)
 	b = *(char**) (a1 + 0x128); obj = a1;
 	p = start = a2;
 	if (*(int**) (obj + 0x124) != 0) {
-		fcn_00408270((float*) g_6b5c5c,
+		ch_WorldToGridCoordinates((float*) g_6b5c5c,
 			(float*) ((char*) (**(int**) (obj + 0x124)) + 0x4c), p, p + 1);
 		p[2] = 8;
 		p += 3;
 	}
-	fcn_00408270((float*) g_6b5c5c, (float*) (*(char**) (obj + 0x34) + 0x4c), (int*) &a2, (int*) &a1);
+	ch_WorldToGridCoordinates((float*) g_6b5c5c, (float*) (*(char**) (obj + 0x34) + 0x4c), (int*) &a2, (int*) &a1);
 	p[0] = (int) a2;
 	p[1] = (int) a1;
 	p[2] = 1;

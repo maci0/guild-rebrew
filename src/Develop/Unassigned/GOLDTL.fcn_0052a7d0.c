@@ -18,7 +18,7 @@ extern char g_1041d80[];
 
 
 
-void __cdecl fcn_004379a0(char*, int, int, void*, void*);
+void __cdecl d3_VisitSceneObjects(char*, int, int, void*, void*);
 char __cdecl fcn_0052a320(char*);
 
 void __cdecl fcn_0052a7d0(void)
@@ -27,7 +27,7 @@ void __cdecl fcn_0052a7d0(void)
 	int i;
 
 	if (*(int*) (((char*)g_67a370) + 0xac) != 0) {
-		fcn_004379a0(((char*)g_67a370), 0, 8, (void*) fcn_0052a320, 0);
+		d3_VisitSceneObjects(((char*)g_67a370), 0, 8, (void*) fcn_0052a320, 0);
 		if (g_7e4530 == 0) {
 			src = g_6a2a18;
 		} else {

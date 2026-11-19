@@ -3,10 +3,10 @@
 
 extern int g_67a370;
 
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 int __cdecl fcn_004ceba0(int, int);
-void __cdecl fcn_0045b920(char*, int, int, float*);
+void __cdecl d3_GridPointToWorld(char*, int, int, float*);
 
 /* ADDRESS: GOLDTL 0x004cecf0 */
 unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
@@ -43,7 +43,7 @@ unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
 	y2 = 0;
 	found = 0;
 	i = 0;
-	fcn_00455350(a0, a0 + 0x4c, start);
+	d3_TransformPoint(a0, a0 + 0x4c, start);
 	if (!fcn_0045b990(m, start, &col, &row, &height)) {
 		return 0;
 	}
@@ -66,7 +66,7 @@ unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
 				if (!fcn_004ceba0(x, y)) {
 					continue;
 				}
-				fcn_0045b920(m, x, y, hit);
+				d3_GridPointToWorld(m, x, y, hit);
 				hit[0] = start[0] - hit[0];
 				hit[1] = start[1] - hit[1];
 				hit[2] = start[2] - hit[2];

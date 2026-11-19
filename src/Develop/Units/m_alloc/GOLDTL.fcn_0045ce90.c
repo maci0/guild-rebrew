@@ -23,7 +23,7 @@ extern unsigned int g_10404a0;
 extern int g_67bd2c;
 
 int __cdecl fcn_0045be40(char* name);
-void __cdecl fcn_00436ff0(int a1, int a2, void* a3, int a4, int a5, int a6);
+void __cdecl d3_LoadTextureFromFile(int a1, int a2, void* a3, int a4, int a5, int a6);
 void __cdecl fcn_0045ce20(Tex* a0);
 
 /* ADDRESS: GOLDTL 0x0045ce90 */
@@ -44,7 +44,7 @@ void __cdecl fcn_0045ce90(Tex* texture)
 			if (obj != 0) {
 				int val = g_67bd2c;
 				g_6b7ff8 = (texture->flags & 0x20) ? 0 : saved;
-				fcn_00436ff0(obj, texture->x60, &texture->x50, val, texture->x68, texture->x68);
+				d3_LoadTextureFromFile(obj, texture->x60, &texture->x50, val, texture->x68, texture->x68);
 				texture->x64 = (unsigned int) texture->x68 >> g_6b7ff8;
 			}
 		}

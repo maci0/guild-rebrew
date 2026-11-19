@@ -14,7 +14,7 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_00470820(int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
@@ -43,7 +43,7 @@ int __cdecl fcn_0058c890(char* entity, int a2, unsigned char a3, int choice)
 	cost = *(unsigned short*) (entity + 0x27) != g_774970 ? 16000 : 0;
 	dlg = fcn_00470820(0, 0, (int) "Locations\\Friedhof\\Friedhof");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 1);

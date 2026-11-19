@@ -15,7 +15,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl fcn_005779e0(char*, char*, int);
 int __cdecl fcn_00577890(char*, char*, int);
-int __cdecl fcn_00500d20(char*, char*);
+int __cdecl gm_GetElapsedMinutes(char*, char*);
 int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 void __cdecl fcn_004c57e0(int, int);
 void __cdecl fcn_004c5c80(int);
@@ -159,7 +159,7 @@ void __cdecl fcn_00576c90(char* e)
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 4, 0);
 			goto done;
 		}
-		n = fcn_00500d20(e + 0x44, (char*) &gm_GameTime);
+		n = gm_GetElapsedMinutes(e + 0x44, (char*) &gm_GameTime);
 		switch (*(int*) (e + 0xbc)) {
 		case 2:
 			c = 0x21c;
@@ -181,7 +181,7 @@ void __cdecl fcn_00576c90(char* e)
 		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 		goto done;
 	case 6:
-		n = fcn_00500d20(e + 0x44, (char*) &gm_GameTime);
+		n = gm_GetElapsedMinutes(e + 0x44, (char*) &gm_GameTime);
 		if (n > 0x5a0) {
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(int*) (e + 0x84) = fcn_004c5620(4, e);
@@ -214,7 +214,7 @@ void __cdecl fcn_00576c90(char* e)
 		*(int*) (e + 0x84) = fcn_004c5620(6, e);
 		goto done;
 	case 7:
-		n = fcn_00500d20(e + 0x44, (char*) &gm_GameTime);
+		n = gm_GetElapsedMinutes(e + 0x44, (char*) &gm_GameTime);
 		q = gm_LookupEntityRecordById(*(int*) (e + 0xb8));
 		if (q == 0) {
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;

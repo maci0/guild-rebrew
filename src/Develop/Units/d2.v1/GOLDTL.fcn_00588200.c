@@ -13,7 +13,7 @@ float __cdecl fcn_00580070(float*);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046fac0(int, int, char*, int);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_0050d320(char*, unsigned char);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -71,19 +71,19 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
-	fcn_00472900(rec, 0x54);
+	d2_SetElementFont(rec, 0x54);
 	io_FormatTextBuffer(text, (char*) 0x6a9480, v2, v1);
 	rec = fcn_0046fac0(0, 0x23, text, *(int*) &d2_CurrentWindowId);
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
-	fcn_00472900(rec, 0x54);
+	d2_SetElementFont(rec, 0x54);
 	rec = fcn_0046fac0(*(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2,
 	                   0xf, *(char**) 0x14b54c4, *(int*) &d2_CurrentWindowId);
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
-	fcn_00472900(rec, 0x54);
+	d2_SetElementFont(rec, 0x54);
 	io_FormatTextBuffer(text, (char*) 0x6a9480,
 	             fcn_0050d320((char*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0),
 	                          *(unsigned char*) &g_773d75),
@@ -93,7 +93,7 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
 	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
-	fcn_00472900(rec, 0x54);
+	d2_SetElementFont(rec, 0x54);
 	*(int*) 0x9a9214 = level;
 	*(int*) 0x9a9218 = percent;
 	*(int*) 0x9a921c = *(int*) (panel + 0xa0);

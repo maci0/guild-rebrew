@@ -32,7 +32,7 @@ extern double g_662c38;
 int __cdecl fcn_0057ec20(int a);
 void __cdecl fcn_0057e880(int a, int b, int c, int d);
 char* __cdecl fcn_00470820(int a, int b, char* name);
-void __cdecl fcn_00471b60(char* dlg);
+void __cdecl d2_CenterDialogWindows(char* dlg);
 void __cdecl d2_SetForm(char* dlg, int page);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl io_AppendText(int id, ...);
@@ -89,7 +89,7 @@ void __cdecl fcn_005d42e0(void)
 	fcn_0057e880(0xc, 0, 0, 0);
 	dlg = fcn_00470820(0, 0, "panel\\statistik_stadt");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1f0e, (int) g_773d75 * 0x2f4 + 0x868080, 0x7f4c00);
 	fcn_004fc460(&gfx);

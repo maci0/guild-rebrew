@@ -7,14 +7,14 @@ typedef struct Vec3 {
 	float z;
 } Vec3;
 
-void __cdecl fcn_00455350(char*, Vec3*, Vec3*);
+void __cdecl d3_TransformPoint(char*, Vec3*, Vec3*);
 
 void __cdecl fcn_00455450(char* o, char* ref, Vec3* v, Vec3* out)
 {
 	float t[4];
 
 	if ((o[0x214] & 0x20) == 0 && ref != 0) {
-		fcn_00455350(o, v, (Vec3*) t);
+		d3_TransformPoint(o, v, (Vec3*) t);
 		t[0] -= *(float*) (ref + 0x4c);
 		t[1] -= *(float*) (ref + 0x50);
 		t[2] -= *(float*) (ref + 0x54);
@@ -25,6 +25,6 @@ void __cdecl fcn_00455450(char* o, char* ref, Vec3* v, Vec3* out)
 		out->y = t[0] * *(float*) (ref + 0x190) + t[1] * *(float*) (ref + 0x1a0) + t[2] * *(float*) (ref + 0x1b0);
 		out->z = t[0] * *(float*) (ref + 0x194) + t[1] * *(float*) (ref + 0x1a4) + t[2] * *(float*) (ref + 0x1b4);
 	} else {
-		fcn_00455350(o, v, out);
+		d3_TransformPoint(o, v, out);
 	}
 }

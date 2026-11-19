@@ -4,7 +4,7 @@ extern unsigned char* lpGebaeudeINST;
 
 
 void __cdecl fcn_004432d0(int, int);
-void __cdecl fcn_00446f70(int, int);
+void __cdecl d3_SaveScene(int, int);
 
 int __cdecl fcn_0051eb20(int a)
 {
@@ -20,7 +20,7 @@ int __cdecl fcn_0051eb20(int a)
 			    *(int*) (((char*)lpGebaeudeINST) + i * 0xa9 + 1);
 		}
 	}
-	fcn_00446f70(0, a);
+	d3_SaveScene(0, a);
 	for (i = 0; i < 0x100; i++) {
 		e = ((char*)lpGebaeudeINST) + i * 0xa9;
 		if (*e != 0 && *(char**) (e + 0x61) != 0) {

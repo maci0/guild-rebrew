@@ -57,15 +57,15 @@ void __cdecl fcn_0047a040(int, int, int, int);
 int __cdecl fcn_0047cba0(int, int, int, char*, int);
 int __cdecl fcn_0047cbf0(int, int, int, char*, int);
 int __cdecl fcn_0047ccd0(int, int, int, char*, int);
-int __cdecl fcn_0047bf80(int, int, int, int, int, int*);
-void __cdecl fcn_0047b9a0(int*, unsigned char, unsigned char, unsigned char);
-char* __cdecl fcn_00472880(int idx);
+int __cdecl d2_QueueTexturedQuad(int, int, int, int, int, int*);
+void __cdecl d2_SetQuadVertexColor(int*, unsigned char, unsigned char, unsigned char);
+char* __cdecl d2_SelectFont(int idx);
 void __cdecl fcn_00468c30(int slot, int n, char* out);
 int __cdecl fcn_0046b520(char* text, int font);
-void __cdecl fcn_0046bbc0(int x, int y, int surf, char* text, unsigned char flags);
+void __cdecl d2_DrawDefaultFontText(int x, int y, int surf, char* text, unsigned char flags);
 int __cdecl fcn_0046bd20(int, int, int, int, int, int, int);
 void __cdecl fcn_00479e00(unsigned char r, unsigned char g, unsigned char b);
-int __cdecl fcn_0041bac0(unsigned char r, unsigned char g, unsigned char b);
+int __cdecl d2_PackColorForPixelFormat(unsigned char r, unsigned char g, unsigned char b);
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 char* __cdecl itoa(int value, char* buf, int radix);
 
@@ -311,7 +311,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 		}
 		else {
 			/* 0x467f7d: label colour gradient */
-			fcn_0041bac0(0xff, 0x80, 0);
+			d2_PackColorForPixelFormat(0xff, 0x80, 0);
 			ratio = f.v18 / f.w8.f * 2.0f;
 			if (ratio < 1.0) {
 				f.w0.b.v00 = 0xc4 - (int) (-24.0f * ratio);
@@ -328,11 +328,11 @@ void __cdecl fcn_00467920(int a0, int a1)
 				     (unsigned char) f.w0.b.v02);
 
 			/* 0x46802e: label bitmap clipped into the bar rect */
-			n = fcn_0047bf80(e[4],
+			n = d2_QueueTexturedQuad(e[4],
 					 e[5] + (GLYPH_H(H3) - GLYPH_H(h1)) / 2,
 					 e[6], e[7], (int) g_77256c->surface, 0);
 			if (n) {
-				fcn_0047b9a0((int*) n, 1, 1, 1);
+				d2_SetQuadVertexColor((int*) n, 1, 1, 1);
 			}
 			f.wc.i = e[4] + GLYPH_W(h0);
 			fcn_0047a040(f.wc.i, ((int*) a1)[0xc],
@@ -340,11 +340,11 @@ void __cdecl fcn_00467920(int a0, int a1)
 				     ((int*) a1)[0xe]);
 
 			/* 0x4680b3: clamped label bitmap */
-			n = fcn_0047bf80(e[4] + GLYPH_W(h0),
+			n = d2_QueueTexturedQuad(e[4] + GLYPH_W(h0),
 					 e[5] + (GLYPH_H(H3) - GLYPH_H(h1)) / 2,
 					 (int) f.v18, e[7], (int) g_77256c->surface, 0);
 			if (n) {
-				fcn_0047b9a0((int*) n, f.w0.b.v00, f.w0.b.v01,
+				d2_SetQuadVertexColor((int*) n, f.w0.b.v00, f.w0.b.v01,
 					     f.w0.b.v02);
 			}
 
@@ -460,7 +460,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 				     + f.v28, e[5], (int) b, (char*) f.v14, 3);
 			if (*(char*) ((char*) e + 0xe8)) {
 				fcn_00468c30(a0, f.v30, f.buf);
-				fcn_00472880(e[0x21] ? e[0x21]
+				d2_SelectFont(e[0x21] ? e[0x21]
 						     : d2_DefaultFont + 1);
 				f.v2c = GLYPH_W(H3);
 				fcn_0046bd20(e[4] + GLYPH_W(h0) - f.v2c / 2
@@ -471,7 +471,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 					     (int) f.buf, 8);
 			}
 			else {
-				fcn_00472880(e[0x21] ? e[0x21]
+				d2_SelectFont(e[0x21] ? e[0x21]
 						     : d2_DefaultFont + 1);
 				f.v2c = e[4] + GLYPH_W(h0)
 					- GLYPH_W(H3) / 2 + f.v28;
@@ -497,22 +497,22 @@ void __cdecl fcn_00467920(int a0, int a1)
 		/* 0x468700: icon block */
 		if (f.v20 & 0x04) {
 			fcn_0047a040(0, 0, b[1], b[2]);
-			fcn_00472880(e[0x21] ? e[0x21]
+			d2_SelectFont(e[0x21] ? e[0x21]
 					     : (e[0x10] ? FLD(e[0x10], 0x28c)
 							: d2_DefaultFont + 1));
 			if (e[0x1d]) {
 				itoa(f.v30, f.v3c, 10);
 				fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
-				fcn_0046bbc0(e[4] + (int) f.v18, e[5] - 0x10,
+				d2_DrawDefaultFontText(e[4] + (int) f.v18, e[5] - 0x10,
 					     (int) b, f.v3c, 0);
 			}
 			sprintf(f.v3c, str_67d444, f.v38);
 			n = (d2_FontHeight - GLYPH_H(h0)) / 2 - 1;
 			x = fcn_0046b520(f.v3c, d2_CurrentFont);
-			fcn_0046bbc0(e[4] - x - 4, e[5] - n,
+			d2_DrawDefaultFontText(e[4] - x - 4, e[5] - n,
 				     (int) b, f.v3c, 0);
 			sprintf(f.v3c, str_67d444, f.v10);
-			fcn_0046bbc0(e[4] + e[6] + 4, e[5] - n,
+			d2_DrawDefaultFontText(e[4] + e[6] + 4, e[5] - n,
 				     (int) b, f.v3c, 0);
 		}
 
@@ -520,7 +520,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 		if (*(char*) ((char*) e + 0xa8)) {
 			fcn_0047a040(0, 0, FLD(b, 4), FLD(b, 8));
 			/* Four pending pushes make 0x46884f the v10 scratch, not flags. */
-			fcn_00472880(e[0x21] ? e[0x21] : d2_DefaultFont + 1);
+			d2_SelectFont(e[0x21] ? e[0x21] : d2_DefaultFont + 1);
 			x = e[4];
 			y = e[5] - 0xd;
 			n = 8;

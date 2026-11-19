@@ -2,7 +2,7 @@
 
 void* __cdecl fcn_00445600(int a, int b, int c, int d);
 void* __cdecl fcn_00422460(int a, int b);
-int __cdecl fcn_00418c80(void* a, void* b, int c, int d);
+int __cdecl d3snd_AttachSoundSource(void* a, void* b, int c, int d);
 
 int __cdecl fcn_00418d20(int a1, int a2, int a3, int a4)
 {
@@ -15,7 +15,7 @@ int __cdecl fcn_00418d20(int a1, int a2, int a3, int a4)
 	if (p != 0) {
 		q = fcn_00422460(0, a1);
 		if (q != 0) {
-			result = fcn_00418c80(q, p, a3, a4);
+			result = d3snd_AttachSoundSource(q, p, a3, a4);
 		}
 	}
 	return result;

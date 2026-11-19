@@ -30,7 +30,7 @@ int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
 int __cdecl fcn_0046f740(int x, int y, int a3, int win);
 int __cdecl fcn_0046f7e0(int x, int y, int a3, int win, int a5);
 void __cdecl fcn_0046b2b0(int id);
-int __cdecl fcn_00500d20(void* a, void* b);
+int __cdecl gm_GetElapsedMinutes(void* a, void* b);
 void* __cdecl fcn_005463a0(int n, ...);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl io_AppendText(int a, ...);
@@ -140,8 +140,8 @@ void __cdecl fcn_00594de0(int a0, int a1, int a2)
 				p->c[3] = fcn_0046f740(0xd, 5, 0x4fd, p->c[1]);
 			}
 			span = *(int*) ((char*) row + 0x18) + *(int*) ((char*) row + 0x14);
-			t1 = fcn_00500d20((void*) ((char*) row + 0x44), (void*) ((char*) row + 0x52));
-			t2 = fcn_00500d20((void*) ((char*) row + 0x44), (void*) gm_GameTime);
+			t1 = gm_GetElapsedMinutes((void*) ((char*) row + 0x44), (void*) ((char*) row + 0x52));
+			t2 = gm_GetElapsedMinutes((void*) ((char*) row + 0x44), (void*) gm_GameTime);
 			*(float*) (g_1015ea0 + p->c[2] * 0x2f4 + 0x1f4) = (float) t2 / (float) t1;
 		} else {
 			if (p->c[3] != -1) {

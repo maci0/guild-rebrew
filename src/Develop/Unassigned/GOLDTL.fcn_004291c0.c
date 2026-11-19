@@ -30,27 +30,27 @@ extern int g_6b7ec4;
 extern char* g_6b7eb8;
 
 void __cdecl fcn_00426680(int lex, struct tok_4291c0* t);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 void __cdecl fcn_00428720(char* g);
 int __cdecl fcn_00427b40(char* g);
-void __cdecl fcn_00427070(void);
+void __cdecl evt_ParseWhile(void);
 void __cdecl fcn_00427280(void);
-void __cdecl fcn_00427480(void);
-void __cdecl fcn_00427530(void);
+void __cdecl evt_IncludeScript(void);
+void __cdecl evt_ReturnFromFunction(void);
 void __cdecl fcn_00427570(void);
 void __cdecl fcn_00427580(void);
 void __cdecl fcn_00427590(void);
 void __cdecl fcn_004275a0(void);
-void __cdecl fcn_00428ef0(int);
-void __cdecl fcn_00428d50(int);
+void __cdecl evt_ExecuteCommand(int);
+void __cdecl evt_ParseVariableAssignment(int);
 void __cdecl evt_EnterFunction(char*, int);
-int __cdecl fcn_00425fe0(char*, int);
+int __cdecl evt_ParseSymbolDeclaration(char*, int);
 
 
 /* Runs script statements until a block end (keyword 10), token type 12, or
  * the running flag at g+0x124 clears. */
 /* ADDRESS: GOLDTL 0x004291c0 */
-int __cdecl fcn_004291c0(char* g)
+int __cdecl evt_ExecuteStatements(char* g)
 {
 	struct tok_4291c0 t;
 	char msg[0x100];
@@ -82,7 +82,7 @@ int __cdecl fcn_004291c0(char* g)
 			(*(int*)&g_6b7eb8) = 0;
 			switch (t.u.num) {
 			case 1:
-				fcn_00427070();
+				evt_ParseWhile();
 				break;
 			case 2:
 				fcn_00427280();
@@ -91,7 +91,7 @@ int __cdecl fcn_004291c0(char* g)
 				fcn_004275a0();
 				break;
 			case 5:
-				fcn_00427480();
+				evt_IncludeScript();
 				break;
 			case 6:
 				fcn_00427570();
@@ -103,28 +103,28 @@ int __cdecl fcn_004291c0(char* g)
 				fcn_00427590();
 				break;
 			case 3:
-				fcn_00427530();
+				evt_ReturnFromFunction();
 				break;
 			default:
 				sprintf(msg2, "Keyword is not surported!");
-				fcn_00425bf0(g, *(int*) (g + 0x118), msg2);
+				evt_LogScriptError(g, *(int*) (g + 0x118), msg2);
 				fcn_00428720(g);
 				return 0;
 			}
 		} else if (t.type == 4) {
-			fcn_00428ef0(t.u.num);
+			evt_ExecuteCommand(t.u.num);
 		} else if (t.type == 2) {
-			fcn_00428d50(t.u.num);
+			evt_ParseVariableAssignment(t.u.num);
 		} else if (t.type == 3) {
 			evt_EnterFunction(g, t.u.num);
 		} else if (t.type == 8) {
-			fcn_00425fe0(g, t.u.num);
+			evt_ParseSymbolDeclaration(g, t.u.num);
 		} else if (t.type == 11) {
 			(*(int*)&g_6b7eb8) = t.u.num;
 			(*(int*) (g + 0x118))++;
 		} else if (t.type != 12) {
 			sprintf(msg, "Unknown symbol : '%s'", t.u.text);
-			fcn_00425bf0(g, *(int*) (g + 0x118), msg);
+			evt_LogScriptError(g, *(int*) (g + 0x118), msg);
 			fcn_00428720(g);
 		}
 	} while ((*(unsigned char*) (g + 0x124) & 1) && t.type != 12 && !(t.type == 1 && t.u.num == 10));

@@ -3,7 +3,7 @@
 
 double __cdecl sqrt(double);
 #pragma intrinsic(sqrt)
-void __cdecl fcn_00455350(int, int, float*);
+void __cdecl d3_TransformPoint(int, int, float*);
 
 int __cdecl fcn_005987c0(float* pos, int* list)
 {
@@ -24,7 +24,7 @@ int __cdecl fcn_005987c0(float* pos, int* list)
 	p[2] = pos[2];
 	for (i = 0; i < 256; i++) {
 		if (list[i] != 0) {
-			fcn_00455350(list[i], list[i] + 0x4c, v);
+			d3_TransformPoint(list[i], list[i] + 0x4c, v);
 			v[1] = 0;
 			dx = v[0] - p[0];
 			dy = v[1] - p[1];

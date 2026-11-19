@@ -17,7 +17,7 @@ typedef struct {
 extern Slot445f50 g_1041d80[];
 extern int g_10405e0[];
 
-void __cdecl fcn_004379a0(int a, int b, int c, void* cb, void* q);
+void __cdecl d3_VisitSceneObjects(int a, int b, int c, void* cb, void* q);
 void __cdecl UpdateSceneLighting(int a);
 char __cdecl fcn_00445d20(int a, float* v);
 char __cdecl fcn_00445d00(char* p, float* q);
@@ -43,9 +43,9 @@ char __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
 	if (!(t <= g_6628a0))
 		return 0;
 	pos = (float) a0 + t;
-	fcn_004379a0(g_67a370, 0, 0x1e, (void*) fcn_00445d20, &pos);
+	d3_VisitSceneObjects(g_67a370, 0, 0x1e, (void*) fcn_00445d20, &pos);
 	if (scale != g_6628a0)
-		fcn_004379a0(g_67a370, 0, 8, (void*) fcn_00445d00, &scale);
+		d3_VisitSceneObjects(g_67a370, 0, 8, (void*) fcn_00445d00, &scale);
 	n = (a0 + 1) % 7;
 	c[0] = g_1041d80[n].a.x - g_1041d80[a0].a.x;
 	c[1] = g_1041d80[n].a.y - g_1041d80[a0].a.y;

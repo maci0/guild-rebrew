@@ -7,7 +7,7 @@ extern char* g_77255c;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
-void __cdecl fcn_00455350(char*, float*, float*);
+void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl fcn_0045b990(float*, float*, int*, int*, float*);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_005b00f0(char*, int, int);
@@ -112,7 +112,7 @@ void __cdecl fcn_005b0230(char* town)
 			obj = slot->ent;
 			handle = *(int*) (obj + 0x61);
 			if (handle != 0) {
-				fcn_00455350((char*) handle, (float*) (handle + 0x4c), pos);
+				d3_TransformPoint((char*) handle, (float*) (handle + 0x4c), pos);
 				fcn_0045b990((float*) tex, pos, &bld_x, &bld_y, &height);
 				slot->x = bld_x;
 				slot->y = bld_y;
@@ -253,7 +253,7 @@ void __cdecl fcn_005b0230(char* town)
 		while (p < (char*) 0x6a4870) {
 			obj = fcn_00445600(0, 0x100, 0, p);
 			if (obj != 0) {
-				fcn_00455350(obj, (float*) (obj + 0x4c), pos);
+				d3_TransformPoint(obj, (float*) (obj + 0x4c), pos);
 				fcn_0045b990((float*) tex, pos, &bld_x, &bld_y, &height);
 				tmp.x = bld_x;
 				tmp.y = bld_y;
@@ -280,7 +280,7 @@ void __cdecl fcn_005b0230(char* town)
 		for (i = 0; i < 0x100; i++) {
 			obj = (char*) *(int*) (list + i * 4);
 			if (obj != 0) {
-				fcn_00455350(obj, (float*) (obj + 0x4c), pos);
+				d3_TransformPoint(obj, (float*) (obj + 0x4c), pos);
 				fcn_0045b990((float*) tex, pos, &bld_x, &bld_y, &height);
 				tmp.x = bld_x;
 				tmp.y = bld_y;
@@ -309,7 +309,7 @@ void __cdecl fcn_005b0230(char* town)
 		handle = (int) d3_ActiveCamera;
 	}
 
-	fcn_00455350((char*) handle, (float*) (handle + 0x4c), pos);
+	d3_TransformPoint((char*) handle, (float*) (handle + 0x4c), pos);
 	fcn_0045b990((float*) tex, pos, &bld_x, &bld_y, &height);
 	tmp.x = bld_x;
 	tmp.y = bld_y;

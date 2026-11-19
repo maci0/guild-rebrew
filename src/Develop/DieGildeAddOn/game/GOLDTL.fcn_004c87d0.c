@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_004c4dc0(char*, int);
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 
 
@@ -14,7 +14,7 @@ int __cdecl fcn_004c87d0(char* command, char* result)
 	char* prev;
 	int key;
 
-	*(int*) (command + 0x14) = fcn_004c4dc0(command, *(int*) (command + 0x14));
+	*(int*) (command + 0x14) = cm_ResolveSpecialEntityId(command, *(int*) (command + 0x14));
 	if (gm_ResolveEntityById((void**) (&dyn), (void**) (&exist), (void**) (&stat), *(int*) (command + 0x14)) == 0)
 		return 1;
 	if (dyn != 0)
@@ -23,7 +23,7 @@ int __cdecl fcn_004c87d0(char* command, char* result)
 		src = (char**) (exist + 0x14);
 	else
 		src = (char**) (stat + 0x178);
-	*(int*) (command + 0x10) = fcn_004c4dc0(command, *(int*) (command + 0x10));
+	*(int*) (command + 0x10) = cm_ResolveSpecialEntityId(command, *(int*) (command + 0x10));
 	if (gm_ResolveEntityById((void**) (&dyn), (void**) (&exist), (void**) (&stat), *(int*) (command + 0x10)) == 0)
 		return 1;
 	if (dyn != 0)
@@ -32,7 +32,7 @@ int __cdecl fcn_004c87d0(char* command, char* result)
 		dst = (char**) (exist + 0x14);
 	else
 		dst = (char**) (stat + 0x178);
-	key = fcn_004c4dc0(command, *(int*) (command + 0x18));
+	key = cm_ResolveSpecialEntityId(command, *(int*) (command + 0x18));
 	*(int*) (command + 0x18) = key;
 	prev = 0;
 	for (exist = *src; exist != 0; exist = *(char**) (exist + 0x3f)) {

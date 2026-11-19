@@ -21,9 +21,9 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_00502cd0(int, int, int, int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
-void __cdecl fcn_004379a0(int, char*, int, void*, char*);
+void __cdecl d3_VisitSceneObjects(int, char*, int, void*, char*);
 char __cdecl fcn_0052d970(char*, char*);
-int __cdecl fcn_00413190(int);
+int __cdecl d3_GetContextIndex(int);
 void __cdecl SelectTextureSet(char*, int, int, int);
 
 void __cdecl fcn_0052da70(int idx)
@@ -39,13 +39,13 @@ void __cdecl fcn_0052da70(int idx)
 	fcn_004432d0(0, 1);
 	for (e = gm_StartFilteredEntitySearch(1, 4, idx); e != 0; e = gm_FindNextFilteredEntity()) {
 		if (*(char**) (e + 0x61) != 0) {
-			fcn_004379a0(g_67a370, *(char**) (e + 0x61), 0x340, (void*) fcn_0052d970, e);
+			d3_VisitSceneObjects(g_67a370, *(char**) (e + 0x61), 0x340, (void*) fcn_0052d970, e);
 		}
 	}
 	for (e = fcn_00502cd0(0, 3, 7, 3, idx, 4, 0x1d); e != 0; e = gm_NextEntityQueryMatch()) {
 		d = *(char**) (e + 0x3b);
 		if (d != 0) {
-			fcn_004432d0(fcn_00413190(*(int*) (d + 0x88)), 1);
+			fcn_004432d0(d3_GetContextIndex(*(int*) (d + 0x88)), 1);
 			if (r != 0 && r->res != 0 && (r->kind == 5 || r->kind == 6 || r->kind == 7)) {
 				n = r->res - 0x599;
 				if (n != 0) {

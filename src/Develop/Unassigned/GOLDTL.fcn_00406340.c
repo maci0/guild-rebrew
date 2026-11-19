@@ -6,7 +6,7 @@
 #include "Develop/DieGildeAddOn/game/ch_action.h"
 
 CH_ACTION* __cdecl ch_NewAction(char* e);
-void __cdecl fcn_00406280(CH_ACTION* t);
+void __cdecl ch_ExecPlayAnimation(CH_ACTION* t);
 
 int __cdecl fcn_00406340(char* e, const char* name, int param)
 {
@@ -19,7 +19,7 @@ int __cdecl fcn_00406340(char* e, const char* name, int param)
 	t->parameter = param;
 	t->besitzer = e;
 	t->zustand = 0;
-	t->ausfuehren = fcn_00406280;
+	t->ausfuehren = ch_ExecPlayAnimation;
 	t->art = 0x2e;
 	t->unbekannt_178 = 1.0f;
 	t->naechste = 0;

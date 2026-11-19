@@ -21,7 +21,7 @@ extern int __cdecl fcn_004c5620(char, char*);
 extern void __cdecl fcn_004c4510(char*, int);
 extern int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 extern void __cdecl fcn_004c53a0(void);
-extern char* __cdecl fcn_0040c120(char*, int, ...);
+extern char* __cdecl ch_CreateAction(char*, int, ...);
 extern int __cdecl fcn_00500e20(int*);
 extern int __cdecl fcn_00515540(char*);
 extern int __cdecl fcn_005155e0(unsigned char*);
@@ -94,13 +94,13 @@ void __cdecl fcn_00529160(unsigned char* a1, char* a2, unsigned int index, unsig
 		     || rec->type == 4 || rec->type == 0x13 || rec->type == 0x1d)
 		    && v7 >= 0 && slot->owner != 0
 		    && v7 * 0x3dc + 0x10432c0 != ((Rec_529160*) slot->owner)->field88) {
-			r = fcn_0040c120(slot->owner, 0x33, v7, *(int*) (a1 + 1), *(int*) (a2 + 2));
+			r = ch_CreateAction(slot->owner, 0x33, v7, *(int*) (a1 + 1), *(int*) (a2 + 2));
 			strcpy(r + 0x70, "sv_ChangePlayerHE");
 
 
 
 
-			r = fcn_0040c120(slot->owner, 0x39, v7);
+			r = ch_CreateAction(slot->owner, 0x39, v7);
 			strcpy(r + 0x70, "sv_ChangePlayerHE");
 
 

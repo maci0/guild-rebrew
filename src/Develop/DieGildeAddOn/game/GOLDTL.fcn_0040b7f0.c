@@ -3,18 +3,18 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_00402610(char*);
-int __cdecl fcn_00413190(int);
+int __cdecl d3_GetContextIndex(int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl fcn_004432d0(int, int);
-char* __cdecl fcn_00407330(void);
-void __cdecl fcn_00455350(char*, char*, float*);
+char* __cdecl ch_SelectRandomDummy(void);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 
 
 
 /* Steps a walk-to-exit event: queues a walk to the room's exit cell. */
 /* ADDRESS: GOLDTL 0x0040b7f0 */
-void __cdecl fcn_0040b7f0(char* ev)
+void __cdecl ch_RunWalkToRandomDummy(char* ev)
 {
 	char* map;
 	char* door;
@@ -31,15 +31,15 @@ void __cdecl fcn_0040b7f0(char* ev)
 	}
 	map = fcn_00402610(*(char**) (ev + 0x14));
 	saved = d3_CurrentContextIndex;
-	room = fcn_00413190(*(int*) (*(char**) (ev + 0x14) + 0x88));
+	room = d3_GetContextIndex(*(int*) (*(char**) (ev + 0x14) + 0x88));
 	if (room != *(int*) (ev + 0x30)) {
 		ch_RemoveQueueEntry(ev);
 		return;
 	}
 	fcn_004432d0(room, 1);
-	door = fcn_00407330();
+	door = ch_SelectRandomDummy();
 	if (door != 0 && map != 0) {
-		fcn_00455350(door, door + 0x4c, pos);
+		d3_TransformPoint(door, door + 0x4c, pos);
 		if (fcn_0045b990(map, pos, &col, &row, &height)) {
 			walk = ch_InsertAction(*(char**) (ev + 0x14), ev, 0x2d, col, row, room);
 			*(int*) (walk + 0x160) |= 0x10;

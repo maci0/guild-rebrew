@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-void __cdecl fcn_00451900(float* a, float* m)
+void __cdecl d3_BuildEulerRotationMatrix(float* a, float* m)
 {
 	float sx;
 	float sy;

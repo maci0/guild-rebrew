@@ -1,6 +1,6 @@
 #include <string.h>
 void* __cdecl m_alloc(unsigned int, char*);
-int __cdecl fcn_0041bac0(unsigned char, unsigned char, unsigned char);
+int __cdecl d2_PackColorForPixelFormat(unsigned char, unsigned char, unsigned char);
 void __cdecl fcn_00477560(int*, int*);
 
 /* ADDRESS: GOLDTL 0x00479330 */
@@ -41,12 +41,12 @@ int* __cdecl fcn_00479330(int* src)
 				*(int*) out = (int) (((unsigned int) *(int*) p * 2) / 3);
 				*(int*) (out + 4) = *(int*) (p + 4);
 				for (k = 0; k < *(unsigned int*) (p + 4); k++) {
-					work[k] = (unsigned short) fcn_0041bac0(
+					work[k] = (unsigned short) d2_PackColorForPixelFormat(
 					    *(unsigned char*) (p + 8 + k * 3),
 					    *(unsigned char*) (p + 9 + k * 3),
 					    *(unsigned char*) (p + 10 + k * 3));
 					if (work[k] == 0) {
-						work[k] = (unsigned short) fcn_0041bac0(5, 5, 5);
+						work[k] = (unsigned short) d2_PackColorForPixelFormat(5, 5, 5);
 					}
 					if (*(unsigned char*) ((char*) src + 0xd) == 1) {
 						work[k] = (unsigned short) ((work[k] >> 1) &
@@ -88,7 +88,7 @@ int* __cdecl fcn_00479330(int* src)
 			while (i < *(unsigned short*) ((char*) src + 6)) {
 				s = (char*) src + 0x32 +
 				    (*(unsigned short*) ((char*) src + 6) * j + i) * 3;
-				work[i] = (unsigned short) fcn_0041bac0(
+				work[i] = (unsigned short) d2_PackColorForPixelFormat(
 				    *(unsigned char*) s, *((unsigned char*) s + 1),
 				    *((unsigned char*) s + 2));
 				if (*(unsigned char*) ((char*) src + 0xd) == 1) {

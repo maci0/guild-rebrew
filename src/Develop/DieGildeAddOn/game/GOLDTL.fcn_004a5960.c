@@ -34,7 +34,7 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
  * table from a random start with a random stride: first those with a job
  * other than 0x52, then jobless ones. */
 /* ADDRESS: GOLDTL 0x004a5960 */
-unsigned int __cdecl fcn_004a5960(unsigned short* e, unsigned int max, int a2, float lo, float hi, unsigned short* out)
+unsigned int __cdecl gm_FindSimilarEntities(unsigned short* e, unsigned int max, int a2, float lo, float hi, unsigned short* out)
 {
 	Query q;
 	int step;

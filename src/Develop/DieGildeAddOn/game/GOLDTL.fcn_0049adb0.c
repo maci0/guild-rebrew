@@ -30,7 +30,7 @@ void* __cdecl gm_LookupEntityRecordById(int handle);
 void* __cdecl fcn_005463a0(int a, int b, int c);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
-int __cdecl fcn_00495400(int type, int id, int n, Msg* a, Msg* b);
+int __cdecl ai_SelectBestMethod(int type, int id, int n, Msg* a, Msg* b);
 
 /* ADDRESS: GOLDTL 0x0049adb0 */
 int __cdecl fcn_0049adb0(int kind, char* e, int busy, Msg* out1, Msg* out2)
@@ -125,7 +125,7 @@ build:
 			b.type = 7;
 			b.a = *(int*) (e + 4);
 			b.b = 1;
-			r = fcn_00495400(type, *(unsigned short*) e, 2, &a, &b);
+			r = ai_SelectBestMethod(type, *(unsigned short*) e, 2, &a, &b);
 			if (r == 0) {
 				return 0;
 			}
@@ -169,7 +169,7 @@ build:
 	}
 	b.d = 0x20;
 	if (slots[r].id == 0x170) {
-		r = fcn_00495400(type, *(unsigned short*) e, 3, &a, &b);
+		r = ai_SelectBestMethod(type, *(unsigned short*) e, 3, &a, &b);
 		if (r == 0) {
 			return 0;
 		}

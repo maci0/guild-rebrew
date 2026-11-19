@@ -7,7 +7,7 @@ extern char g_67536c[];
 
 int __cdecl m_alloc(int, char*);
 
-void* __cdecl fcn_00403270(int a1)
+void* __cdecl ch_AllocateCharacterSlot(int a1)
 {
 	void* p;
 

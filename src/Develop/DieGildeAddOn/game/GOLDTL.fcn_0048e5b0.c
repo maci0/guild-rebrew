@@ -18,7 +18,7 @@ typedef struct Msg {
 
 int __cdecl gm_StartFilteredEntitySearch(int, int, int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_00495400(int, int, int, void*, void*);
+int __cdecl ai_SelectBestMethod(int, int, int, void*, void*);
 int __cdecl fcn_004efd30(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004eea70(void*);
@@ -57,7 +57,7 @@ int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* a3, char* a4)
 		m2.kind = 4;
 		m2.a = *(int*) (e + 1);
 		m2.b = 1;
-		r = fcn_00495400(0x42, *(unsigned short*) p, 1, &m1, &m2);
+		r = ai_SelectBestMethod(0x42, *(unsigned short*) p, 1, &m1, &m2);
 		if (r != 0) {
 			memcpy(a3, &m1, 24);
 			memcpy(a4, &m2, 24);

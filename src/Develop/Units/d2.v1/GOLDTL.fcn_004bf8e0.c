@@ -26,7 +26,7 @@ extern int g_772900;
 #include "client_packet_builder.h"
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -61,7 +61,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 	int i;
 
 	dlg = fcn_00470820(0, 0, s_681730);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x42e2);
 	list = fcn_00472250(dlg, 2, 0);

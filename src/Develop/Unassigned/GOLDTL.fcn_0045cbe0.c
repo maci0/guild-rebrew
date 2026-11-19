@@ -14,7 +14,7 @@ extern char* g_104049c;
 extern unsigned int g_662ea8[];
 
 unsigned int __cdecl fcn_00401000(void* buf, unsigned int n);
-int __cdecl fcn_0045cb10(int idx, int frame);
+int __cdecl d3_FindTextureVariant(int idx, int frame);
 
 /* ADDRESS: GOLDTL 0x0045cbe0 */
 char __cdecl fcn_0045cbe0(char* o, unsigned int t)
@@ -34,7 +34,7 @@ char __cdecl fcn_0045cbe0(char* o, unsigned int t)
 		for (i = 0; i < n; i++) {
 			e = arr[i];
 			if (e != 0 && e->frames > 0 && e->f5d == 0 && (e->f5e & 0xf) > 0 && e->f40 > 0) {
-				arr[n + i] = (fcn_0045cbe0_Anim*) fcn_0045cb10(e - ((fcn_0045cbe0_Anim*)g_104049c), (t / g_662ea8[e->f5e & 0xf] + h) % e->frames);
+				arr[n + i] = (fcn_0045cbe0_Anim*) d3_FindTextureVariant(e - ((fcn_0045cbe0_Anim*)g_104049c), (t / g_662ea8[e->f5e & 0xf] + h) % e->frames);
 			}
 		}
 	}

@@ -7,7 +7,7 @@ extern int g_774a40;
 extern char** g_779148;
 
 int __cdecl _strnicmp(const char*, const char*, size_t);
-void __cdecl fcn_00455350(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
@@ -29,12 +29,12 @@ char __cdecl fcn_00598050(char* e, char* pfx)
 			return 1;
 		}
 	}
-	fcn_00455350(e, e + 0x4c, pa);
+	d3_TransformPoint(e, e + 0x4c, pa);
 	p = gm_StartFilteredEntitySearch(1, 6);
 	while (p != 0) {
 		q = *(char**) (p + 0x61);
 		if (q != 0) {
-			fcn_00455350(q, q + 0x4c, pb);
+			d3_TransformPoint(q, q + 0x4c, pb);
 			if (CompareVector3WithinTolerance(pb, pa, 100.0f)) {
 				return 1;
 			}

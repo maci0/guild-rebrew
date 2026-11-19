@@ -27,7 +27,7 @@ extern char* g_77261c;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_0050d320(char* e, unsigned char flag);
-int __cdecl fcn_00495400(int kind, int id, int n, Msg* b1, Msg* b2);
+int __cdecl ai_SelectBestMethod(int kind, int id, int n, Msg* b1, Msg* b2);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl fcn_004f4830(int size, Stat* st);
 unsigned short __cdecl gm_RandomMod(int a);
@@ -88,7 +88,7 @@ int __cdecl fcn_00499090(int who, char* e, int arg, Msg* o1, Msg* o2)
 	b2.kind = 4;
 	b2.a = *(int*)(*(int*)(e + 0x170) + 1);
 	b2.b = 1;
-	r = fcn_00495400(0x17, *(unsigned short*)e, 1, &b1, &b2);
+	r = ai_SelectBestMethod(0x17, *(unsigned short*)e, 1, &b1, &b2);
 check_call:
 	if (r == 0) {
 		return 0;
@@ -154,7 +154,7 @@ have_id:
 	zero_b2: b2.kind = 0;
 		b2.a = 0;
 		b2.b = 0;
-		r = fcn_00495400(0x17, *(unsigned short*)e, arg, &b1, &b2);
+		r = ai_SelectBestMethod(0x17, *(unsigned short*)e, arg, &b1, &b2);
 		if (r == 0) {
 			return 0;
 		}

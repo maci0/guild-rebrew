@@ -1,9 +1,9 @@
 
 
-void __cdecl fcn_0047c450(void);
+void __cdecl d2_CreateQuadVertexBuffer(void);
 
 int __cdecl fcn_0047c4a0(void)
 {
-	fcn_0047c450();
+	d2_CreateQuadVertexBuffer();
 	return 1;
 }

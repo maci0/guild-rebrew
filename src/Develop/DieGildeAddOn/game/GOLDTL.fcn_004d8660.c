@@ -10,7 +10,7 @@ extern blk24 g_68bef4;
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl fcn_00445600(int, int, int, int*);
-char* __cdecl fcn_0040c230(int, void*, int, int, int);
+char* __cdecl ch_CreateQueuedAction(int, void*, int, int, int);
 void __cdecl fcn_004d4ee0(void);
 
 /* ADDRESS: GOLD 0x004d7000 */
@@ -34,7 +34,7 @@ void __cdecl fcn_004d8660(int* a)
 #else
 	*(int*) (*(char**) (p + 0x204) + 0xa) = *s;
 #endif
-	o = fcn_0040c230(*(int*) (e + 0x184), fcn_004d4ee0, 5, 0x2e, 1);
+	o = ch_CreateQueuedAction(*(int*) (e + 0x184), fcn_004d4ee0, 5, 0x2e, 1);
 	*(char**) (o + 0x17c) = e;
 	*(char**) (o + 0x180) = p;
 	*(blk24*) (o + 0xf0) = g_68bef4;

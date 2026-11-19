@@ -1,15 +1,15 @@
 extern char* evt_CurrentScript;
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 int __cdecl fcn_00412b10(char* e, float x, float y, float z, float rx, float ry, float rz, int w, int f);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 int __cdecl fcn_00412b10(char* e, float x, float y, float z, float rx, float ry, float rz, int w, int f);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 int __cdecl fcn_00412b10(char* e, float x, float y, float z, float rx, float ry, float rz, int w, int f);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 int __cdecl fcn_00412b10(char* e, float x, float y, float z, float rx, float ry, float rz, int w, int f);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 void __cdecl fcn_00442d90(char* e, int v);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 /* ADDRESS: GOLDTL 0x0040e9c0 */
 int __cdecl ecmd_SetAngle(char** a, float* x, float* y, float* z)
@@ -21,7 +21,7 @@ int __cdecl ecmd_SetAngle(char** a, float* x, float* y, float* z)
 		*(unsigned char*) (*a + 0x214) |= 4;
 		return 0;
 	}
-	fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+	evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 	return 0;
 }
 
@@ -34,7 +34,7 @@ int __cdecl ecmd_MoveObject(char** a, int* x, int* y, int* z, int* w)
 			     *(float*) (*a + 0x88), *(float*) (*a + 0x8c), *w, 0);
 		return 0;
 	}
-	fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+	evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 	return 0;
 }
 
@@ -47,7 +47,7 @@ char** __cdecl ecmd_RotateObject(char** a, int* x, int* y, int* z, int* w)
 			     *x * 0.017453292f, *y * 0.017453292f, *z * 0.017453292f, *w, 0);
 		return a;
 	}
-	fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+	evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 	return a;
 }
 
@@ -61,7 +61,7 @@ int __cdecl ecmd_MoveObjectRelative(char** a, int* x, int* y, int* z, int* w)
 			     *(float*) (*a + 0x8c), *w, 0);
 		return 0;
 	}
-	fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+	evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 	return 0;
 }
 
@@ -76,7 +76,7 @@ int __cdecl ecmd_RotateObjectRelative(char** a, int* x, int* y, int* z, int* w)
 			     *z * 0.017453292f + *(float*) (*a + 0x8c), *w, 0);
 		return 1;
 	}
-	fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+	evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 	return 1;
 }
 
@@ -88,6 +88,6 @@ int __cdecl ecmd_ReplaceObject(char** a, int* v)
 		fcn_00442d90(*a, *v);
 		return 1;
 	}
-	fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+	evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 	return 1;
 }

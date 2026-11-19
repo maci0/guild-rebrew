@@ -12,7 +12,7 @@ typedef struct DialogItem {
 #include "client_dialog_state.h"
 void __cdecl fcn_00591c80(void);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -22,7 +22,7 @@ int __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl fcn_00533a60(int, int, int*, int, int, int);
 void __cdecl fcn_00476b60(void);
 void __cdecl fcn_00469510(int);
-int __cdecl fcn_0046f2c0(int, int);
+int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00469470(int, int);
@@ -67,7 +67,7 @@ void __cdecl fcn_00591ea0(void)
 	fcn_00591c80();
 	win = fcn_00470820(0, 0, (char*) 0x6a9b54);
 	item = win;
-	fcn_00471b60(win);
+	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 0);
 	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
@@ -90,7 +90,7 @@ void __cdecl fcn_00591ea0(void)
 				old_sel = *(int*) (y + (unsigned long)&g_102cbc8);
 				fcn_00469510(last_win);
 			}
-			fcn_0046f2c0(*(int*) &d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(*(int*) &d2_CurrentWindowId, 1);
 			last_win = d2_CreateRadioGroup(0);
 			i = 0;
 			y = 9;

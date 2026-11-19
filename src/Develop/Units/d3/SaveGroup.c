@@ -17,7 +17,7 @@ void __cdecl fcn_00439c00(ITEM_448a00*, ITEM_448a00*);
 void __cdecl d3_UnlinkObject(ITEM_448a00*);
 
 /* ADDRESS: GOLDTL 0x00448a00 */
-void __cdecl fcn_00448a00(void* name, int count, ITEM_448a00** list)
+void __cdecl SaveGroup(void* name, int count, ITEM_448a00** list)
 {
 	void* cont;
 	ITEM_448a00* p;

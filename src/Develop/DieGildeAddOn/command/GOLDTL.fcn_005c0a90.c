@@ -25,7 +25,7 @@ int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 void __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00470820(int, int, void*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -82,7 +82,7 @@ void __cdecl fcn_005c0a90(int arg)
 		return;
 	}
 	d = fcn_00470820(0, 0, g_6ac494);
-	fcn_00471b60(d);
+	d2_CenterDialogWindows(d);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(d, 1);
 	t = io_AppendText(0x1761, r, (r != 1) + 0x1752, *b, *a);

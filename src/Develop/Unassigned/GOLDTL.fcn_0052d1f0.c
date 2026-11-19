@@ -1,11 +1,11 @@
-extern void __cdecl fcn_00455350(char*, char*, float*);
+extern void __cdecl d3_TransformPoint(char*, char*, float*);
 extern void __cdecl fcn_004518a0(float*);
 #include <math.h>
-extern void __cdecl fcn_00412cf0(int, float*, float*, int, int);
+extern void __cdecl d3_AnimateObjectTransform(int, float*, float*, int, int);
 
 
 /* Emit one oriented effect for a node.  The anchor offset of the node is
- * resolved by fcn_00455350, shifted by 600 units of the anchor span plus the
+ * resolved by d3_TransformPoint, shifted by 600 units of the anchor span plus the
  * 900 unit height offset, and the heading/pitch pair is derived from the
  * horizontal delta by two arccosines; arguments outside [-1,1] clamp to the
  * domain edge and the sign of the delta selects the branch. */
@@ -20,7 +20,7 @@ void __cdecl fcn_0052d1f0(char* a0)
 	float dot;
 	float s[3];
 
-	fcn_00455350(a0, a0 + 0x4c, base);
+	d3_TransformPoint(a0, a0 + 0x4c, base);
 	level[0] = 0.0f;
 	level[1] = 0.0f;
 	level[2] = -1.0f;
@@ -59,5 +59,5 @@ void __cdecl fcn_0052d1f0(char* a0)
 	if (0.0f > dir[1])
 		angles[0] = -angles[0];
 	pos[1] = pos[1] + 700.0f;
-	fcn_00412cf0(*(int*) 0x6b8014, pos, angles, *(int*) 0x6a256c, 0x28);
+	d3_AnimateObjectTransform(*(int*) 0x6b8014, pos, angles, *(int*) 0x6a256c, 0x28);
 }

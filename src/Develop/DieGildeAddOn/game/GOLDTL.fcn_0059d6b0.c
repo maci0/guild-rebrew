@@ -11,7 +11,7 @@ void* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00526120(char* buf, int flag);
 int __cdecl fcn_00470820(int a, int b, char* name);
-void __cdecl fcn_00471b60(int dlg);
+void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_SetForm(int dlg, int flag);
 int __cdecl io_AppendText(int id, ...);
@@ -83,7 +83,7 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 	}
 	choice = g_7f4ca0 + *(unsigned short*) (obj + 0x27) * 0x21c;
 	option = fcn_00470820(0, 0, "misc\\Bestechung");
-	fcn_00471b60(option);
+	d2_CenterDialogWindows(option);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(option, 1);
 	index = io_AppendText(0x19f7, *(unsigned short*) choice, obj);

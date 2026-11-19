@@ -9,7 +9,7 @@ extern int g_774654;
 
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -42,7 +42,7 @@ void __cdecl fcn_005c3cc0(char* e)
 
 	id = *(int*) (e + 1);
 	win = fcn_00470820(0, 0, "Panel\\Gebaeude_Brand_loeschen");
-	fcn_00471b60(win);
+	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 1);
 	io_AppendText(0x17e4, e);
 	d2_SetForm(win, 2);

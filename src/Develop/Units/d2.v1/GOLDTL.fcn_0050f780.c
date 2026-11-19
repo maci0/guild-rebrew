@@ -36,7 +36,7 @@ extern int g_85ab60;
 
 
 int __cdecl fcn_00470820(int a, int b, int c);
-void __cdecl fcn_00471b60(int h);
+void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_AppendText(char* fmt, int a, int b);
 int __cdecl fcn_0050e830(unsigned char* a, unsigned short* b, int w, int h);
@@ -51,7 +51,7 @@ int __cdecl fcn_0050f780(int arg, unsigned char* a, unsigned short* b)
 	int j;
 
 	g_7f4c10 = fcn_00470820(0, 0, arg);
-	fcn_00471b60(g_7f4c10);
+	d2_CenterDialogWindows(g_7f4c10);
 	g_7f3ee8 = g_6b7fac;
 	s = &((Slot*)g_1015f40)[g_1038150[g_7f4c10].owner];
 	d2_SetForm(0, 1);

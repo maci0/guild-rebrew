@@ -1,4 +1,4 @@
-int __cdecl fcn_004379a0(int, int, int, int, int);
+int __cdecl d3_VisitSceneObjects(int, int, int, int, int);
 void __cdecl fcn_00445e40(int);
 
 /* ADDRESS: GOLDTL 0x00445ec0 */
@@ -11,7 +11,7 @@ void __cdecl fcn_00445ec0(unsigned idx, int arg, char flag)
 	if (idx >= 7) {
 		return;
 	}
-	fcn_004379a0(*(int*) 0x67a370, 0, arg, 0x445d60, idx);
+	d3_VisitSceneObjects(*(int*) 0x67a370, 0, arg, 0x445d60, idx);
 	base = idx * 96;
 	t1 = *(int*) 0x67bbdc;
 	t2 = *(int*) 0x67bbe0;

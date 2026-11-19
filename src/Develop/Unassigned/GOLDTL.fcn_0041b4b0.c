@@ -22,7 +22,7 @@ void __cdecl fcn_0041b7c0(void);
 
 /* Releases the Direct3D sprite, device and interface objects. */
 /* ADDRESS: GOLDTL 0x0041b4b0 */
-void __cdecl fcn_0041b4b0(void)
+void __cdecl d3_ReleaseGraphicsInterfaces(void)
 {
 	fcn_0041b7c0();
 	if ((*(struct unk_41b4b0**)&g_6b5de4) != 0) {

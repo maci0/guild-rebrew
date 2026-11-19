@@ -31,7 +31,7 @@ int __cdecl fcn_00525fb0(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00526120(int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c69d0(int);
@@ -54,7 +54,7 @@ void __cdecl fcn_004c44a0(void);
 void __cdecl fcn_004c44b0(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_00473fe0(void);
+void __cdecl d2_ClearSelectedControl(void);
 int __cdecl fcn_004ce9e0(int);
 int __cdecl fcn_005c6a10(int, int);
 int __cdecl fcn_0046f940(int, char*);
@@ -114,7 +114,7 @@ int __cdecl fcn_005c72f0(int a0)
 		return v15;
 	}
 	win = fcn_00470820(0, 0, s_6ac7b0);
-	fcn_00471b60(win);
+	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 3);
 	io_AppendText(0x19db);
 	fcn_005c69d0(v7);
@@ -146,7 +146,7 @@ label_5c7466:
 				selected = g_7774a0[v7].entity;
 				if (selected != 0) {
 					fcn_004c44a0();
-					fcn_00473fe0();
+					d2_ClearSelectedControl();
 					v7 = 0; rec = (int*) ((char*) g_778da0 + 0x10);
 					goto label_5c752a;
 				}

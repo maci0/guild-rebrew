@@ -8,7 +8,7 @@ void __cdecl SetTrackVolume(const char* name, int volume)
 		EnterCriticalSection(&msx_TrackLock);
 		p = FindTrackByName(name);
 		if (p != 0) {
-			fcn_0041fc10(p, volume);
+			msx_SetTrackVolume(p, volume);
 		}
 		LeaveCriticalSection(&msx_TrackLock);
 	}

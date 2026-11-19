@@ -15,7 +15,7 @@ typedef struct {
 } Ent5c1110;
 #include "client_data.h"
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
@@ -23,7 +23,7 @@ char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_005463a0();
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_00472170(int, int);
+void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00525f60(char*, int);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_004c4450(int);
@@ -59,7 +59,7 @@ int __cdecl fcn_005c1110(void)
 	b[3] = -1;
 	t = *(int*) &g_6b7fac;
 	h = fcn_00470820(0, 0, (char*) 0x6ac514);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
 	io_AppendText(0x1912);
@@ -95,7 +95,7 @@ int __cdecl fcn_005c1110(void)
 							*(int*) ((char*) a + k) = fcn_00472250(h, i,
 							    io_AppendText(0x1914, 2));
 							*(int*) ((char*) b + k) = ent->f4;
-							fcn_00472170(*(int*) ((char*) &g_10161bc
+							d2_SetSlotVisibility(*(int*) ((char*) &g_10161bc
 							    + 0x3cc * *(int*) ((char*) &g_1038140
 							    + h * 0x2bc + n * 8)), 1);
 							n++;
@@ -114,7 +114,7 @@ int __cdecl fcn_005c1110(void)
 				do {
 					d2_SetForm(h, j);
 					io_AppendText(0x6811b0);
-					fcn_00472170(*(int*) ((char*) &g_10161bc
+					d2_SetSlotVisibility(*(int*) ((char*) &g_10161bc
 					    + 0x3cc * *q), 0);
 					j += 2; q += 2;
 				} while (j < 9);

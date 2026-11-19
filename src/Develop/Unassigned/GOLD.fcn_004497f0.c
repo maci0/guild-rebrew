@@ -16,7 +16,7 @@ typedef struct Obj04497f0 {
 	struct Obj04497f0* parent;
 } Obj04497f0;
 
-void __cdecl fcn_004519d0(void* a, int b);
+void __cdecl d3_MatrixToEulerAngles(void* a, int b);
 void __cdecl fcn_00458d90(Obj04497f0* o, int a, int b, Mat04497f0* out);
 void __cdecl fcn_00454060(Mat04497f0*, Mat04497f0*);
 void __cdecl fcn_00454030(Mat04497f0*, Mat04497f0*);
@@ -33,7 +33,7 @@ void __cdecl fcn_004497f0(Obj04497f0* o, Vec04497f0* in, void* dir, Vec04497f0* 
 		out->x = in->x;
 		out->y = in->y;
 		out->z = in->z;
-		fcn_004519d0(dir, arg);
+		d3_MatrixToEulerAngles(dir, arg);
 		return;
 	}
 	fcn_00458d90(p, 0, 0, &m);
@@ -44,5 +44,5 @@ void __cdecl fcn_004497f0(Obj04497f0* o, Vec04497f0* in, void* dir, Vec04497f0* 
 	fcn_00458d90(p, 0, 1, &m);
 	fcn_00454030(&m, &inv);
 	fcn_00453ed0(dir, &inv, &m);
-	fcn_004519d0(&m, arg);
+	d3_MatrixToEulerAngles(&m, arg);
 }

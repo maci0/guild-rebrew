@@ -19,16 +19,16 @@ unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 void __cdecl fcn_00473150(unsigned char*);
 int __cdecl fcn_00511040(int idx, char* out);
 void __cdecl fcn_004432d0(int a, int b);
-char __cdecl fcn_00448360(const char* filename, void* stream, int progress);
+char __cdecl d3_LoadScene(const char* filename, void* stream, int progress);
 void __cdecl fcn_00516de0(char* a1, unsigned char a2);
 int __cdecl fcn_004026f0(char* p);
 void __cdecl gv_Free3Fields(int);
 void __cdecl fcn_0045b290(int, int);
-char __cdecl fcn_00437ac0(char* scene, char* node, unsigned int flags, void (__cdecl* cb)(char*));
+char __cdecl d3_TraverseSceneObjects(char* scene, char* node, unsigned int flags, void (__cdecl* cb)(char*));
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
-void __cdecl fcn_00455350(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl ch_SetPosition(int, void*, int);
-char* __cdecl fcn_00407330(void);
+char* __cdecl ch_SelectRandomDummy(void);
 int __cdecl fcn_00413160(void);
 void __cdecl ReportClientMessage(const char* msg);
 int __cdecl fcn_005373e0(void*, int);
@@ -83,7 +83,7 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 		sprintf(name, "scenes/*gb_%s.ed3", tmp);
 		strupr(name);
 		sprintf(tmp, "init_LoadGebaeudeScene: %s", name);
-		if (!fcn_00448360(name, 0, progress)) {
+		if (!d3_LoadScene(name, 0, progress)) {
 			fcn_004432d0(saved, 0);
 			goto done;
 		}
@@ -92,8 +92,8 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 			fcn_00516de0(g_6b8300, 1);
 		}
 		fcn_004432d0(d3_CurrentContextIndex, 0);
-		fcn_00437ac0((char*) g_67a370, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
-		fcn_00437ac0((char*) g_67a370, 0, 6, (void (__cdecl*)(char*)) 0x510bd0);
+		d3_TraverseSceneObjects((char*) g_67a370, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
+		d3_TraverseSceneObjects((char*) g_67a370, 0, 6, (void (__cdecl*)(char*)) 0x510bd0);
 		*p = (char) v;
 		fcn_004432d0(saved, 0);
 		goto done;
@@ -115,7 +115,7 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 	fcn_00511040(a0, scene);
 	sprintf(name, "scenes/*gb_%s.ed3", scene);
 	strupr(name);
-	if (!fcn_00448360(name, 0, progress)) {
+	if (!d3_LoadScene(name, 0, progress)) {
 		fcn_004432d0(saved, 0);
 		goto done;
 	}
@@ -127,8 +127,8 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 	*(int*) (g_67a370 + 0xb0) = 0;
 	fcn_004026f0((char*) g_67a370);
 	fcn_0045b290(*(int*) (g_67a370 + 0xb0), (int) g_6b8300);
-	fcn_00437ac0((char*) g_67a370, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
-	fcn_00437ac0((char*) g_67a370, 0, 6, (void (__cdecl*)(char*)) 0x510bd0);
+	d3_TraverseSceneObjects((char*) g_67a370, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
+	d3_TraverseSceneObjects((char*) g_67a370, 0, 6, (void (__cdecl*)(char*)) 0x510bd0);
 	for (v = 0x14d0020; v < 0x14d0c20; v += 4) {
 		char* e = *(char**) v;
 
@@ -137,11 +137,11 @@ void __cdecl init_LoadGebaeudeScene(int a0)
 				char* d;
 
 				if ((*(int*) (e + 0x124) == 0 || (d = fcn_00445600(0, 0x100, 0, "dummy_TRANSPORTER")) == 0)
-					&& (d = fcn_00407330()) == 0
+					&& (d = ch_SelectRandomDummy()) == 0
 					&& (d = fcn_00445600(0, 0x100, 0, "dummy_EINGANG")) == 0
 					&& (d = fcn_00445600(0, 0x100, 0, "dummy_TRANSPORTER_ENTRY")) == 0)
 					continue;
-				fcn_00455350(d, d + 0x4c, (float*) pos);
+				d3_TransformPoint(d, d + 0x4c, (float*) pos);
 				ch_SetPosition((int) e, pos, 1);
 			} else {
 				ch_SetPosition((int) e, e + 0x38, 1);

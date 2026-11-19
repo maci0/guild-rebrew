@@ -57,7 +57,7 @@ extern s_1015f4c g_1015f4c[];
 char* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
 int __cdecl fcn_004fa5b0(int a1, char* a2, int a3);
 int __cdecl fcn_00470820(int a, int b, char* name);
-void __cdecl fcn_00471b60(int h);
+void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl fcn_00471e30(int h);
 void __cdecl d2_SetForm(int h, int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
@@ -70,7 +70,7 @@ void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_005373e0(void* fn, int a);
 void __cdecl fcn_0057e880(int a, int b, int c, int d);
 void __cdecl fcn_00500bb0(Tbebe*, int, int, int);
-int __cdecl fcn_00500d20(void*, void*);
+int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl fcn_004c6ae0(int a, int b);
 void __cdecl fcn_004c5530(MsgBebe* msg);
 
@@ -121,7 +121,7 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 	h = fcn_00470820(0, 0, (char*) 0x6ac484);
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	d2_SetOverlayAnimation(0, 0);
 	io_AppendText(0x16af, a2 + 0x16b7);
@@ -177,9 +177,9 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 
 			t = *(Tbebe*) (slot + 0x44);
 			fcn_00500bb0(&t, 5, 0, 0);
-			dur = (float) fcn_00500d20(slot + 0x44, slot + 0x52);
+			dur = (float) gm_GetElapsedMinutes(slot + 0x44, slot + 0x52);
 			*(float*) (g_1015ea0 + found * 0x2f4 + 500) =
-				(float) fcn_00500d20(slot + 0x44, (void*) &gm_GameTime) / dur;
+				(float) gm_GetElapsedMinutes(slot + 0x44, (void*) &gm_GameTime) / dur;
 		}
 		if (g_14ce8e0 != 0 && tp_d2_SelectedControl == 0) {
 			g_774654 = 1;

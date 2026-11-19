@@ -29,7 +29,7 @@ extern char s_6a9924[];
 
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_00445600(int, int, int, char*);
-void __cdecl fcn_00442d50(int, int);
+void __cdecl d3_SetSubtreeVisible(int, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_005338d0(char*, int, int);
 void __cdecl fcn_005ad5a0(unsigned char*);
@@ -64,13 +64,13 @@ void __cdecl fcn_005ae1b0(unsigned char* arg)
 	if (t->x247 >= 2) {
 		r = fcn_00445600(0, 0xc0, 0, s_6ab260);
 		if (r != 0) {
-			fcn_00442d50(r, 1);
+			d3_SetSubtreeVisible(r, 1);
 		}
 	}
 	else {
 		r = fcn_00445600(0, 0xc0, 0, s_6ab260);
 		if (r != 0) {
-			fcn_00442d50(r, 0);
+			d3_SetSubtreeVisible(r, 0);
 		}
 	}
 	if (fcn_005373e0((void*) fcn_005ae1b0, 0x67fff) != 0) {

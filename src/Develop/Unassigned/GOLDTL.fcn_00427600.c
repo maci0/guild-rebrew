@@ -12,7 +12,7 @@ typedef struct {
 extern char* evt_CurrentScript;
 
 void __cdecl fcn_00426680(int lex, tok_427600* t);
-void __cdecl fcn_00425bf0(char* script, unsigned int position, const char* message);
+void __cdecl evt_LogScriptError(char* script, unsigned int position, const char* message);
 void __cdecl fcn_00428720(char* c);
 
 /* ADDRESS: GOLDTL 0x00427600 */
@@ -32,9 +32,9 @@ int __cdecl fcn_00427600(char* g, int arg)
 			fcn_00426680(*(int*) (evt_CurrentScript + 0x118), &t);
 			if (t.type != 0) {
 				if (t.type == 2)
-					fcn_00425bf0(g, *(int*) (g + 0x118), (char*) 0x679460);
+					evt_LogScriptError(g, *(int*) (g + 0x118), (char*) 0x679460);
 				else
-					fcn_00425bf0(g, *(int*) (g + 0x118), (char*) 0x67944c);
+					evt_LogScriptError(g, *(int*) (g + 0x118), (char*) 0x67944c);
 				fcn_00428720(g);
 				return 0;
 			}

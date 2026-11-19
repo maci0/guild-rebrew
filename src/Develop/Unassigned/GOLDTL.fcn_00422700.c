@@ -4,7 +4,7 @@ extern int* g_6b7d78;
 
 int __cdecl fcn_0065f2f0(int, int, int);
 
-int* __cdecl fcn_00422700(int key)
+int* __cdecl sb_FindBankByName(int key)
 {
 	int* node;
 

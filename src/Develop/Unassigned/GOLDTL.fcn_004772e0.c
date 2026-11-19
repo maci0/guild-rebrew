@@ -13,11 +13,11 @@ typedef struct {
 } Surf;
 
 int __cdecl fcn_00475fd0(Surf*);
-void __cdecl fcn_00476060(Surf*);
+void __cdecl d2_UnlockSurface(Surf*);
 
 
 /* ADDRESS: GOLDTL 0x004772e0 */
-void __cdecl fcn_004772e0(int x, int y, int w, int h, Surf* s)
+void __cdecl d2_ClearSurfaceRect(int x, int y, int w, int h, Surf* s)
 {
 	int locked;
 	int i;
@@ -45,6 +45,6 @@ void __cdecl fcn_004772e0(int x, int y, int w, int h, Surf* s)
 	if (locked) {
 		fcn_00475fd0(s);
 	} else {
-		fcn_00476060(s);
+		d2_UnlockSurface(s);
 	}
 }

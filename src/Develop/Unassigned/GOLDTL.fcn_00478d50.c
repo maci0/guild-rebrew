@@ -25,7 +25,7 @@ typedef struct Surf16 {
 } Surf16;
 
 void __cdecl fcn_0041bb70(int, unsigned char*, unsigned char*, unsigned char*);
-short __cdecl fcn_0041bac0(int, int, int);
+short __cdecl d2_PackColorForPixelFormat(int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x00478d50 */
@@ -53,7 +53,7 @@ void __cdecl fcn_00478d50(int x, int y, Surf16* s, Block* b)
 			for (k = 0; k < seg->count; k++) {
 				fcn_0041bb70(((unsigned short*) (seg + 1))[k], &cb, &cg, &cr);
 				v = (int) (((double) cr + (double) cb) * 0.2 + (double) cg * g_664088);
-				*p = fcn_0041bac0(v, v, v);
+				*p = d2_PackColorForPixelFormat(v, v, v);
 				p++;
 			}
 			seg = (Seg*) ((char*) (seg + 1) + seg->count * 2);

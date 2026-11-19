@@ -4,10 +4,10 @@ extern int g_772f1c;
 extern int g_772f18;
 extern int g_772f20;
 
-void __cdecl fcn_0046f2c0(int, int);
+void __cdecl d2_ClearWindowChildren(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_0046f740(int, int, int, int);
 
 
@@ -25,16 +25,16 @@ void __cdecl fcn_004da510(int a1, int reset, int row)
 	int h;
 
 	if (reset != 0) {
-		fcn_0046f2c0(d2_CurrentWindowId, 1);
+		d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 		io_FormatTextBuffer(buf, 0x12d3);
 		h = d2_ShowTxt(0, 0x20, buf, d2_CurrentWindowId);
-		fcn_00472900(h, 0x54);
+		d2_SetElementFont(h, 0x54);
 		io_FormatTextBuffer(buf, 0x12d4);
 		h = d2_ShowTxt(0, 0x3e, buf, d2_CurrentWindowId);
-		fcn_00472900(h, 0x54);
+		d2_SetElementFont(h, 0x54);
 		io_FormatTextBuffer(buf, 0x12d5);
 		h = d2_ShowTxt(0, 0x2f, buf, d2_CurrentWindowId);
-		fcn_00472900(h, 0x54);
+		d2_SetElementFont(h, 0x54);
 		g_772f1c = 0;
 		g_772f18 = 0;
 		g_772f20 = 0;

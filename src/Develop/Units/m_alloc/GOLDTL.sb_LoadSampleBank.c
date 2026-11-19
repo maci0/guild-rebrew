@@ -35,8 +35,8 @@ extern char g_6b7d88[];
 extern char g_14cb980[];
 extern char g_14cbae0[];
 
-Bank* __cdecl fcn_00422730(const char* name);
-char* __cdecl fcn_00422aa0(void);
+Bank* __cdecl sb_FindBankByPath(const char* name);
+char* __cdecl sb_GetLastBank(void);
 void __cdecl sb_LoadEntry(Bank* bank, Sample* sample);
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
@@ -55,7 +55,7 @@ Bank* __cdecl sb_LoadSampleBank(char* name, int init)
 	if (g_6b7d7c == 0) {
 		return (Bank*) g_14cb980;
 	}
-	bank = fcn_00422730(name);
+	bank = sb_FindBankByPath(name);
 	if (bank == 0) {
 		strcpy(path, g_6b7d88);
 		strcat(path, name);
@@ -70,7 +70,7 @@ Bank* __cdecl sb_LoadSampleBank(char* name, int init)
 					bank->next = 0;
 					bank->samples = (Sample*) (bank + 1);
 					if (fread(bank->samples, 0x40, bank->count, fp) == bank->count) {
-						tail = (Bank*) fcn_00422aa0();
+						tail = (Bank*) sb_GetLastBank();
 						if (tail != 0) {
 							tail->next = bank;
 						} else {

@@ -9,7 +9,7 @@ extern char* g_1015ea0;
 
 char* __cdecl fcn_0047b620(int p, int i);
 int __cdecl fcn_0046b520(char* s, int font);
-int __cdecl fcn_00472050(int slot, int* w, int* h);
+int __cdecl d2_GetElementResourceSize(int slot, int* w, int* h);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
 
 /* ADDRESS: GOLDTL 0x0046f9b0 */
@@ -32,7 +32,7 @@ void __cdecl fcn_0046f9b0(int idx, char* text)
 		((fcn_0046f9b0_Ent*)g_1015ea0)[idx].i[0x18 / 4] = w;
 		return;
 	}
-	if (fcn_00472050(idx, &w, &h) == 0) {
+	if (d2_GetElementResourceSize(idx, &w, &h) == 0) {
 		w = 0x18;
 	}
 	fcn_0064d530((char*) &((fcn_0046f9b0_Ent*)g_1015ea0)[idx] + 0x8c, text, 0x3f);

@@ -5,7 +5,7 @@ extern int gm_GameTime;
 extern char g_7f4ca0[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl fcn_00500d20(void*, void*);
+int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl fcn_0050ff70(void*, int);
 char* __cdecl fcn_0050dc90(void*);
 void __cdecl fcn_00500bb0(void*, int, int, int);
@@ -36,7 +36,7 @@ void __cdecl fcn_005639a0(int a)
 			fcn_00546190((void*) a);
 			return;
 		}
-		t = fcn_00500d20((void*) (a + 0x60), (void*) &gm_GameTime);
+		t = gm_GetElapsedMinutes((void*) (a + 0x60), (void*) &gm_GameTime);
 		t = (int) ((double) t * 0.1 + 0.5);
 		*(int*) (a + 0xb0) -= t;
 		fcn_0050ff70(r, t);

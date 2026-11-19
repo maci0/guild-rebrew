@@ -28,7 +28,7 @@ int __cdecl fcn_004d5490(int, int, int);
 void __cdecl fcn_004d5740(char*, int, int);
 int __cdecl fcn_004e6eb0(char*, unsigned int);
 int __cdecl fcn_004d52a0(int, int, char*, char*, float);
-void __cdecl fcn_00472170(int, int);
+void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl gm_RandomMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00471e30(int);
@@ -239,7 +239,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 		} while (i);
 		t4 = fcn_00472250(win, 2, t + 3);
 		if (!clicked) {
-			fcn_00472170(t4, 0);
+			d2_SetSlotVisibility(t4, 0);
 		}
 		t = fcn_005373e0(0x4d5940, 0x7d6c6);
 		while (t) {

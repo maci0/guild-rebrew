@@ -33,7 +33,7 @@ void __cdecl fcn_00438cb0(Obj* o, V6* v);
 void __cdecl fcn_00449f90(Obj* o, int a, int id);
 
 /* ADDRESS: GOLDTL 0x0043a140 */
-Obj* __cdecl fcn_0043a140(Obj* src)
+Obj* __cdecl d3_CloneObject(Obj* src)
 {
 	Obj* o;
 	Obj* r;

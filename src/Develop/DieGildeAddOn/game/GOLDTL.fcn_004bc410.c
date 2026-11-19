@@ -5,9 +5,9 @@ extern char g_6812d0[][32];
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl fcn_004bca30(char*);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
-char* __cdecl fcn_0040c120(char*, int, int);
+char* __cdecl ch_CreateAction(char*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bc410 */
@@ -22,7 +22,7 @@ void __cdecl fcn_004bc410(AMBIENT_ANIMAL_SLOT* entry, int kind)
 	ent = fcn_004bca30(buf);
 	if (ent == 0)
 		return;
-	fcn_00455350(ent, ent + 0x4c, pos);
+	d3_TransformPoint(ent, ent + 0x4c, pos);
 	if (kind == 3)
 		strcpy(buf, "kuh_KUH");
 	else if (kind == 7)
@@ -39,6 +39,6 @@ void __cdecl fcn_004bc410(AMBIENT_ANIMAL_SLOT* entry, int kind)
 		entry->kind = kind;
 		*(int*) (entry->objekt + 4) = 2;
 		*(int*) (*(char**) (entry->objekt + 0x34) + 0x224) = 0;
-		fcn_0040c120(entry->objekt, 0x38, 1);
+		ch_CreateAction(entry->objekt, 0x38, 1);
 	}
 }

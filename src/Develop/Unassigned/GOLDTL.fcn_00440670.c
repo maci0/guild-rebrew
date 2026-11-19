@@ -11,7 +11,7 @@ extern double g_662cb8;
 extern double g_662cb0;
 extern double g_662ad0;
 
-int __cdecl fcn_0045cb10(int, int);
+int __cdecl d3_FindTextureVariant(int, int);
 
 /* ADDRESS: GOLDTL 0x00440670 */
 void __cdecl fcn_00440670(unsigned int time, unsigned int count, char* p)
@@ -32,7 +32,7 @@ void __cdecl fcn_00440670(unsigned int time, unsigned int count, char* p)
 		e = *(char**) p;
 		if (e != 0) {
 			if (*(unsigned char*) (e + 0x5c) > 0 && (*(unsigned char*) (e + 0x5e) & 0xf) > 0) {
-				*(int*) (p + 4) = fcn_0045cb10(
+				*(int*) (p + 4) = d3_FindTextureVariant(
 				    (int) (e - (char*) g_104049c) / 0x70,
 				    (time / g_662ea8[*(unsigned char*) (e + 0x5e) & 0xf]) % *(unsigned char*) (e + 0x5c));
 			}

@@ -14,7 +14,7 @@ void __cdecl fcn_00545780(char*);
 void __cdecl fcn_00546190(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int* __cdecl fcn_004c30a0(int, int, char*, int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00500cb0(void*, void*);
@@ -81,7 +81,7 @@ void __cdecl fcn_0055b020(char* o)
 		fcn_00546190(o);
 		return;
 	}
-	fcn_00471b60(*(int*) (*(int*) (o + 0x74) + 8));
+	d2_CenterDialogWindows(*(int*) (*(int*) (o + 0x74) + 8));
 	d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 1);
 	if (g == (char*) slot) {
 		kind = 0;

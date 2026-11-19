@@ -10,7 +10,7 @@ char* __cdecl gm_AddObjekt(void);
 int __cdecl gm_CheckEntityType(char*);
 int __cdecl fcn_00505340(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "client_scene_transform.h"
 
 void __cdecl fcn_0056c8f0(char* u)
@@ -44,8 +44,8 @@ void __cdecl fcn_0056c8f0(char* u)
 	}
 	for (i = 0; i < n && m < 0x10; i++) {
 		e = list[i];
-		fcn_00455350(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, sourcePos);
-		fcn_00455350(*(char**) (pick + 0x61), *(char**) (pick + 0x61) + 0x4c, targetPos);
+		d3_TransformPoint(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, sourcePos);
+		d3_TransformPoint(*(char**) (pick + 0x61), *(char**) (pick + 0x61) + 0x4c, targetPos);
 		if (e != pick && CompareVector3WithinTolerance(sourcePos, targetPos, (float) *(int*) (u + 0xf0)) != 0) {
 			((int*) (u + 0xac))[m++] = *(int*) (e + 1);
 		}

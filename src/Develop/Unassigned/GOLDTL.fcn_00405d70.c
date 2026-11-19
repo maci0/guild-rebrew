@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_scene_transform.h"
 
-int __cdecl fcn_00405d70(char* self, char** out, float range)
+int __cdecl ch_FindNearbyCharacters(char* self, char** out, float range)
 {
 	int count;
 	char** p;

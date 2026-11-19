@@ -61,7 +61,7 @@ typedef struct {
 extern char g_1043060;
 extern char g_1040960[];
 
-Ent* __cdecl fcn_00439750(int, const char*);
+Ent* __cdecl d3_SpawnObject(int, const char*);
 void __cdecl fcn_00438b40(Ent*, Vec3*);
 void __cdecl fcn_00438cb0(Ent*, Vec3*);
 
@@ -78,7 +78,7 @@ char __cdecl fcn_00443030(Level* lv)
 	if (lv == 0 || lv->e80 != 0 || lv->xa4 != 0) {
 		return 0;
 	}
-	e = fcn_00439750(3, "MegaCam");
+	e = d3_SpawnObject(3, "MegaCam");
 	lv->pos.x = 0.0f;
 	lv->pos.y = 0.0f;
 	lv->pos.z = -256.0f;

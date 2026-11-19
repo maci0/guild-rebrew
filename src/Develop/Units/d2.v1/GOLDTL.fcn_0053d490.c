@@ -34,10 +34,10 @@ void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 char* __cdecl fcn_00471f80(int);
-void __cdecl fcn_00472170(int, int);
+void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472380(int, ...);
 void __cdecl d2_SetBildArgument(int, int);
@@ -90,7 +90,7 @@ int __cdecl fcn_0053d490(int a0, int a1)
 	g_7e23e8 = GetPrivateProfileIntA(s_6a1e4c, s_6a3ffc, 0, g_7e22c0);
 	g_7e23e9 = GetPrivateProfileIntA(s_6a1e4c, s_6a3ff4, 0, g_7e22c0);
 	dlg = fcn_00470820(0, 0, s_6a3fe0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	fcn_00517b10(g_7e1d00, buf);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1acf, buf);
@@ -159,7 +159,7 @@ int __cdecl fcn_0053d490(int a0, int a1)
 		}
 	redraw_ui:
 		for (i = 0; i < 5; i++) {
-			fcn_00472170(fcn_00472250(dlg, 0, i), i <= v9);
+			d2_SetSlotVisibility(fcn_00472250(dlg, 0, i), i <= v9);
 		}
 		if (v9 == 0) {
 			fcn_00474cf0(v20);

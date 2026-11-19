@@ -8,10 +8,10 @@ typedef struct Event {
 } Event;
 
 void __cdecl fcn_00401360(int, int);
-void __cdecl fcn_00401230(int, char*);
+void __cdecl vfs_WriteCString(int, char*);
 char* __cdecl fcn_0043b550(int);
 
-void __cdecl fcn_0043b740(int w, Event* ev)
+void __cdecl d3_WriteEventTable(int w, Event* ev)
 {
 	int n;
 	int i;
@@ -26,8 +26,8 @@ void __cdecl fcn_0043b740(int w, Event* ev)
 		fcn_00401360(w, n);
 		for (i = 0; i < 7; i++) {
 			if (ev[i].id != 0) {
-				fcn_00401230(w, fcn_0043b550(i));
-				fcn_00401230(w, ev[i].name);
+				vfs_WriteCString(w, fcn_0043b550(i));
+				vfs_WriteCString(w, ev[i].name);
 			}
 		}
 	} else {

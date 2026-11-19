@@ -36,12 +36,12 @@ extern char s_6811b0[];
 extern char s_6b5c60[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_0046f2c0(int, int);
+void __cdecl d2_ClearWindowChildren(int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl fcn_005463a0(int, int, int);
@@ -67,7 +67,7 @@ void __cdecl fcn_005a8e20(void)
 	n = 0;
 	flag = 1;
 	dlg = fcn_00470820(0, 0, s_6aade4);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 2);
 	w = d2_CurrentWindowId;
 	d2_SetForm(dlg, 0);
@@ -80,7 +80,7 @@ void __cdecl fcn_005a8e20(void)
 			io_AppendText(0x17f6);
 			d2_SetForm(dlg, 2);
 			io_AppendText((int) s_6811b0);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			n = 0;
 			for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
 				if (e[0x5a] & 2) {

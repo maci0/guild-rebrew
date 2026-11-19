@@ -12,7 +12,7 @@ typedef struct {
 extern char* g_1015ea0;
 
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 
 void __cdecl fcn_005c91c0(int text, int x, int y, int d, int e)
 {
@@ -21,5 +21,5 @@ void __cdecl fcn_005c91c0(int text, int x, int y, int d, int e)
 	idx = d2_ShowTxt(x, y, (char*) text, *(int*) 0x772514);
 	((Obj*)g_1015ea0)[idx].f70 = 0;
 	((Obj*)g_1015ea0)[idx].f18 = d;
-	fcn_00472900(idx, e);
+	d2_SetElementFont(idx, e);
 }

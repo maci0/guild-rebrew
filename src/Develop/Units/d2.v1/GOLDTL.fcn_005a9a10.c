@@ -39,11 +39,11 @@ int __cdecl fcn_005a96a0(ENTITY_RECORD*, int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_004e8ee0(ENTITY_RECORD*, int, Ent*, int*);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_004e8d10(ENTITY_RECORD*, int, Ent*);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_0046f2c0(int, int);
+void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -85,7 +85,7 @@ void __cdecl fcn_005a9a10(void)
 		return;
 	}
 	dlg = fcn_00470820(0, 0, s_6aaebc);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	g_100f1dc = prev;
 	do {
@@ -96,7 +96,7 @@ void __cdecl fcn_005a9a10(void)
 		prev = n;
 		if (flag != 0) {
 			d2_SetForm(dlg, 1);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText(0x1a01);
 			for (i = 0; i < n; i++) {
 				btns[i] = fcn_00472250(dlg, 1, io_AppendText(0x1a04, list[i].x0 + 0x253));

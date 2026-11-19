@@ -9,7 +9,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_00470820(int a, int b, char* s);
-void __cdecl fcn_00471b60(int h);
+void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetForm(int h, int b);
 void __cdecl io_AppendText(char* x);
 int __cdecl fcn_005373e0(void* fn, int y);
@@ -26,7 +26,7 @@ void __cdecl fcn_004fa5f0(char* x, int mode, int y)
 	} else {
 		h = fcn_00470820(0, 0, g_690568);
 	}
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(x);
 	g_100f1dc = -1;

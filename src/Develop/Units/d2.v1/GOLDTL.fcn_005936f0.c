@@ -27,7 +27,7 @@ extern int g_14abe84;
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00517b10(char*, char*);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -40,7 +40,7 @@ void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_SetBildArgument(int, int);
 void __cdecl fcn_00476b60(void);
 void __cdecl fcn_00474cf0(int);
-int __cdecl fcn_00472170(int, int);
+int __cdecl d2_SetSlotVisibility(int, int);
 char* __cdecl fcn_00471f80(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00469510(int);
@@ -94,7 +94,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 	g_7e23e8 = (char) GetPrivateProfileIntA("Network", "Geschlecht", 0, g_7e22c0);
 	g_7e23e9 = (char) GetPrivateProfileIntA("Network", "Glauben", 0, g_7e22c0);
 	h = fcn_00470820(0, 0, "Menu\\CHOOSEPLAYER");
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	fcn_00517b10((char*) 0x9baa76, text);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1acf, text);
@@ -199,7 +199,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 			goto dispatch;
 update:
 		for (i = 0; i < 5; i++)
-			fcn_00472170(fcn_00472250(h, 0, i), i <= sel);
+			d2_SetSlotVisibility(fcn_00472250(h, 0, i), i <= sel);
 		if (sel == 0)
 			fcn_00474cf0(first);
 		else if (sel == 1)

@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00495a40 */
-int __cdecl fcn_00495a40(void)
+int __cdecl cm_RunDummyBeruf(void)
 {
 	return 2;
 }

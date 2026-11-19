@@ -16,7 +16,7 @@ extern int g_775338;
 extern int g_774654;
 int __cdecl fcn_0057ec20(int); void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00533a60(int, int, int*, int, int, int, int);
@@ -28,7 +28,7 @@ void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005a5440(int, char*, int, int, int);
-void __cdecl fcn_00471a30(int, int);
+void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl fcn_005c8770(int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_0046ed00(int, int, int);
@@ -69,7 +69,7 @@ void __cdecl fcn_005c8c40(void)
 	}
 	fcn_0057e880(0x13, 0, 0, 0);
 	save = fcn_00470820(0, 0, (char*) 0x6ac890);
-	fcn_00471b60(save);
+	d2_CenterDialogWindows(save);
 	d2_SetForm(save, 0);
 	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(save, 3);
@@ -109,9 +109,9 @@ void __cdecl fcn_005c8c40(void)
 		if (v3 != -1 && *(int*) &g_100f1dc != -1) {
 			for (i = 0; i < g_775338; i++) {
 				if (d2_CurrentElementId == *(int*) (0x778900 + i * 4)) {
-					fcn_00471a30(save, 0);
+					d2_SetGroupVisibility(save, 0);
 					fcn_005c8770(*(int*) (*(int*) &g_1015ea0 + 0x2f0 + d2_CurrentElementId * 0x2f4));
-					fcn_00471a30(save, 1);
+					d2_SetGroupVisibility(save, 1);
 					break;
 				}
 			}

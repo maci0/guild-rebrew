@@ -14,7 +14,7 @@ typedef struct Surf {
 } Surf;
 // SIZE 0x3c
 
-short __cdecl fcn_0041bac0(unsigned char r, unsigned char g, unsigned char b);
+short __cdecl d2_PackColorForPixelFormat(unsigned char r, unsigned char g, unsigned char b);
 
 int __cdecl fcn_00476b10(int x, int y, unsigned char r, unsigned char g, unsigned char b, Surf* s)
 {
@@ -24,7 +24,7 @@ int __cdecl fcn_00476b10(int x, int y, unsigned char r, unsigned char g, unsigne
 	if (s == 0 || x < s->x0 || x >= s->x1 || y < s->y0 || y >= s->y1) {
 		return 0;
 	}
-	c = fcn_0041bac0(r, g, b);
+	c = d2_PackColorForPixelFormat(r, g, b);
 	switch (s->bpp) {
 	case 8:
 		s->bits[s->pitch * y + x] = (r + g + b) / 3;

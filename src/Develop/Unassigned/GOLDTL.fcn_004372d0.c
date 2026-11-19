@@ -28,7 +28,7 @@ extern unsigned char g_6b7fff;
 extern char g_6b8000;
 char g_67a2ac = 1;
 
-void __cdecl fcn_00450b20(float a, char* b, int c, char d);
+void __cdecl d3_SetScaledMaterial(float a, char* b, int c, char d);
 
 void __cdecl fcn_004372d0(unsigned char alpha, unsigned char flags, int color, unsigned char test, unsigned char cull)
 {
@@ -72,7 +72,7 @@ void __cdecl fcn_004372d0(unsigned char alpha, unsigned char flags, int color, u
 		g_6b7ffb = 0;
 	}
 	if (f != g_1052bd8 || color != g_1052bdc) {
-		fcn_00450b20((float) alpha * (1.0f / 255.0f), (char*)&g_67bbdc, color, flags & 1);
+		d3_SetScaledMaterial((float) alpha * (1.0f / 255.0f), (char*)&g_67bbdc, color, flags & 1);
 		g_1052bd8 = f;
 		g_1052c40 = flags;
 		g_1052bdc = color;

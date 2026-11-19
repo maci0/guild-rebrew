@@ -8,7 +8,7 @@ char* __cdecl ch_AttachAni(char* e, char* name, int flag);
 int __cdecl ch_FinishAnimation(CH_ACTION* t);
 
 
-void __cdecl fcn_004065c0(CH_ACTION* t)
+void __cdecl ch_RunStandUpAnimation(CH_ACTION* t)
 {
 	char* e;
 	char* s;

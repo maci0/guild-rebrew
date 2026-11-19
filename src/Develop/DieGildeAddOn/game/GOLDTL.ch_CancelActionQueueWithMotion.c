@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/ch_action.h"
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
-void __cdecl fcn_00435500(char*, char*);
+void __cdecl d3_RemoveObjectAnimation(char*, char*);
 
 
 int __cdecl ch_CancelActionQueueWithMotion(char* e)
@@ -21,7 +21,7 @@ int __cdecl ch_CancelActionQueueWithMotion(char* e)
 	}
 	if (t->art == 0x2e) {
 		if (*(int*) (e + 0x70) != 0) {
-			fcn_00435500(*(char**) (*(char**) (e + 0x34) + 0x1ec) + 0xf4,
+			d3_RemoveObjectAnimation(*(char**) (*(char**) (e + 0x34) + 0x1ec) + 0xf4,
 				     *(char**) (*(char**) (e + 0x70) + 0x68));
 			*(int*) (e + 0x70) = 0;
 		}

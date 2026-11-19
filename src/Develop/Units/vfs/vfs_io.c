@@ -15,12 +15,12 @@ VFS_DIR* __cdecl vfs_GetSubDir(char*, VFS_DIR*);
 void __cdecl vfs_AddFile(char*, VFS_DIR*, VFS_DIR*, int, int, unsigned int, unsigned int);
 void __cdecl vfs_FinishFiles(VFS_DIR*, char);
 void __cdecl vfs_ScanArchive(char*, VFS_DIR*, unsigned int);
-VFS_DIR* __cdecl fcn_0042f6d0(char*, VFS_DIR*);
+VFS_DIR* __cdecl vfs_MountPath(char*, VFS_DIR*);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 
 /* ADDRESS: GOLD 0x0042f4d0 */
 /* ADDRESS: GOLDTL 0x0042ed00 */
-void __cdecl fcn_0042ed00(char* path, void* parent, int a3, int a4, int a5, int a6, int a7)
+void __cdecl vfs_AddFilePath(char* path, void* parent, int a3, int a4, int a5, int a6, int a7)
 {
 	char buf[0x100];
 	char part[0x100];
@@ -49,7 +49,7 @@ void __cdecl fcn_0042ed00(char* path, void* parent, int a3, int a4, int a5, int 
  * node (sorted when parent is 0). */
 /* ADDRESS: GOLDTL 0x0042f6d0 */
 /* ADDRESS: GOLD 0x0042fce0 */
-VFS_DIR* __cdecl fcn_0042f6d0(char* path, VFS_DIR* parent)
+VFS_DIR* __cdecl vfs_MountPath(char* path, VFS_DIR* parent)
 {
 	VFS_DIR* dir;
 	char* ext;
@@ -114,7 +114,7 @@ VFS_DIR* __cdecl fcn_0042f6d0(char* path, VFS_DIR* parent)
 					strcpy(buf, dirpath);
 					strcat(buf, fd.cFileName);
 					strcat(buf, "/");
-					fcn_0042f6d0(buf, dir);
+					vfs_MountPath(buf, dir);
 					continue;
 				}
 				found = 0;
@@ -126,7 +126,7 @@ VFS_DIR* __cdecl fcn_0042f6d0(char* path, VFS_DIR* parent)
 						if (vfs_CompareNames(ext, g_file_extension_names + i * 6) == 0) {
 							strcpy(sub, dirpath);
 							strcat(sub, buf);
-							fcn_0042f6d0(sub, dir);
+							vfs_MountPath(sub, dir);
 							found = 1;
 						}
 					}

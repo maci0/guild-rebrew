@@ -13,7 +13,7 @@ extern char s_6a3bcc[];
 extern char s_6a3bc4[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472640(int, int);
@@ -53,7 +53,7 @@ int __cdecl fcn_0053b1b0(void)
 	}
 	memcpy((void*) 0x7e1fc0, st, 44);
 	dlg = fcn_00470820(0, 0, s_6a3bd4);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);

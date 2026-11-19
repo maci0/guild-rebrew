@@ -7,7 +7,7 @@ extern int g_6791c8;
 
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_00429490(char*);
-void __cdecl fcn_004291c0(char*);
+void __cdecl evt_ExecuteStatements(char*);
 
 
 /* Runs a script until it blocks, with the script pushed as the current one
@@ -43,7 +43,7 @@ void __cdecl fcn_00429670(char* s)
 		}
 		if (*(int*) (s + 0xc60) == 0) {
 			do {
-				fcn_004291c0(s);
+				evt_ExecuteStatements(s);
 			} while (*(int*) (s + 0xc84) == 2 && (s[0x124] & 1));
 		}
 		if (saved != -1) {

@@ -1,4 +1,4 @@
-/* per-node lighting/shadow vertex build: 8-vertex loop, fcn_00455350/fcn_00455140/fcn_00457140, IDev vtable slot 0x1f0, world matrix at [0x6b8014]+0x18c. */
+/* per-node lighting/shadow vertex build: 8-vertex loop, d3_TransformPoint/fcn_00455140/fcn_00457140, IDev vtable slot 0x1f0, world matrix at [0x6b8014]+0x18c. */
 
 #include "Develop/Units/d3/d3_camera.h"
 #include "client_lighting.h"
@@ -38,8 +38,8 @@ typedef struct Api456ef0 {
 	float* (__cdecl* query)(char*, char*, char*);
 } Api456ef0;
 
-void __cdecl fcn_00438100(char*, char*, int);
-void __cdecl fcn_00455350(char*, char*, V456ef0*);
+void __cdecl d3_UpdateObjectCameraTransform(char*, char*, int);
+void __cdecl d3_TransformPoint(char*, char*, V456ef0*);
 void __cdecl fcn_00455140(char*, float*, V456ef0*);
 float __cdecl fcn_00457140(char*, char*, char*);
 unsigned char __cdecl fcn_00437ee0(float*, int, int);
@@ -69,14 +69,14 @@ void __cdecl fcn_00456ef0(char* o)
 		return;
 	}
 	if (!(*(unsigned char*) (o + 0x216) & 0x20)) {
-		fcn_00438100(o, (*(unsigned char*) (o + 0x214) & 0x20) ? 0 : d3_ActiveCamera, 0);
+		d3_UpdateObjectCameraTransform(o, (*(unsigned char*) (o + 0x214) & 0x20) ? 0 : d3_ActiveCamera, 0);
 	}
 	for (s = g_6b86e0; s != 0; s = *(char**) (s + 0x1f0)) {
 		ctx = *(char**) (o + 0x1cc);
 		if (ctx == 0) {
 			break;
 		}
-		fcn_00455350(s, s + 0x4c, &position);
+		d3_TransformPoint(s, s + 0x4c, &position);
 		fcn_00455140(s, g_662d40, &direction);
 		h = fcn_00457140(o, ctx, s);
 		base = ((Api456ef0*) *(char**) (ctx + 0x318))->query(

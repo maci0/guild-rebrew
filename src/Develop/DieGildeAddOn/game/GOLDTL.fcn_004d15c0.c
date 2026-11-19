@@ -26,7 +26,7 @@ int __cdecl fcn_004d1250(char*, char*, char*);
 int __cdecl fcn_004d1320(char*, char*, char*);
 int __cdecl fcn_004d13d0(char*, char*, char*);
 int __cdecl fcn_004d1020(char*, char*, char*, int, int);
-pkt2c* __cdecl fcn_004ceac0(char*, char*);
+pkt2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl fcn_004c67c0(int, pkt2c*);
 void __cdecl fcn_00533a40(char*);
 
@@ -71,7 +71,7 @@ char __cdecl fcn_004d15c0(char* a0, char* a1)
 		} else {
 			if (fcn_0045bad0(*(int*) (g_67a370 + 0xb0), g_14ce8c0 + 0x1a,
 					 g_14ce8c2 + 0x1a, &v13, &v12) != 0) {
-				e = fcn_004ceac0(a0, a1);
+				e = gm_FindOrCreateEntitySlot(a0, a1);
 				e->fc = 0;
 				l = *e;
 				l.id = *(int*) (a1 + 4);

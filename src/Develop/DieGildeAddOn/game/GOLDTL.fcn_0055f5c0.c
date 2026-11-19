@@ -24,7 +24,7 @@ extern int g_7f4ca4;
 int __cdecl fcn_00500cb0(void*, void*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl fcn_00546190(char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
 void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
@@ -116,7 +116,7 @@ done:
             fcn_00546190(e);
             return;
         }
-        fcn_00471b60(*(int*) (*(int*) (e + 0x74) + 8));
+        d2_CenterDialogWindows(*(int*) (*(int*) (e + 0x74) + 8));
         fcn_004727a0(*(int*) (*(int*) (e + 0x74) + 8), 0);
         fcn_00519190(0x679060, *(int*) (e + 0x7c));
         if (g_774964 != 2)

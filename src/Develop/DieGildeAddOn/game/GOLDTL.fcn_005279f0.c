@@ -50,12 +50,12 @@ int __cdecl fcn_00465950(const char* name);
 void* __cdecl d2_GetResourceData(int idx);
 int __cdecl fcn_0047cba0(int x, int y, int a3, fcn_0047cba0_set* s,
 	int idx);
-void* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex,
+void* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex,
 	Rect47bf* src);
 int __cdecl fcn_00475fd0(void* s);
 void __cdecl fcn_00476a50(int x, int y, void* s, unsigned char* dst);
 int __cdecl fcn_00475780(char* a1, char* a2);
-int __cdecl fcn_00476060(void* o);
+int __cdecl d2_UnlockSurface(void* o);
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_0057eba0(int a, int b, int c, int d);
@@ -127,7 +127,7 @@ void __cdecl fcn_005279f0(unsigned int a0)
 		r.top = 0;
 		r.right = *(int*) (g_774684 + 0x54);
 		r.bottom = *(int*) (g_774684 + 0x58);
-		fcn_0047bf80(g_1040494 - 0x6e, 0x5b, 0x68, 0x6e,
+		d2_QueueTexturedQuad(g_1040494 - 0x6e, 0x5b, 0x68, 0x6e,
 			*(int*) (g_774684 + 0x20), &r);
 	}
 	if (!(a0 & 0x2000))
@@ -154,7 +154,7 @@ void __cdecl fcn_005279f0(unsigned int a0)
 		q += 3;
 		v6++;
 	} while ((int) q < 0x6a2519);
-	fcn_00476060(g_774680);
+	d2_UnlockSurface(g_774680);
 	if (v6 >= 0xf)
 		goto done;
 	if (g_7746c4) {

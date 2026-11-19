@@ -26,7 +26,7 @@ typedef struct Counts {
 
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
-int __cdecl fcn_00495400(int kind, int id, int a3, Msg* b, Msg* a);
+int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 
 /* ADDRESS: GOLDTL 0x0049ab50 */
 int __cdecl fcn_0049ab50(int kind, char* e, int busy, Msg* out1, Msg* out2)
@@ -59,7 +59,7 @@ int __cdecl fcn_0049ab50(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				b.type = 7;
 				b.a = *(int*) (e + 4);
 				b.b = 1;
-				r = fcn_00495400(kind, *(unsigned short*) e, 2, &a, &b);
+				r = ai_SelectBestMethod(kind, *(unsigned short*) e, 2, &a, &b);
 				if (r != 0) {
 					*out1 = a;
 					*out2 = b;
@@ -74,7 +74,7 @@ int __cdecl fcn_0049ab50(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				b.b = 1;
 				a.type = 0;
 				a.d = 0x1f;
-				r = fcn_00495400(kind, *(unsigned short*) e, 4, &b, &a);
+				r = ai_SelectBestMethod(kind, *(unsigned short*) e, 4, &b, &a);
 				if (r != 0) {
 					*out1 = b;
 					*out2 = a;

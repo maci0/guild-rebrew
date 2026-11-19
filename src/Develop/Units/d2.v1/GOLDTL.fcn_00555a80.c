@@ -26,7 +26,7 @@ int __cdecl fcn_00500cb0(char* name, char* list);
 void __cdecl fcn_00545780(Panel* p);
 void __cdecl fcn_00546190(Panel* p);
 void __cdecl fcn_00545670(Panel* p, int a1, int a2, char* fmt, int a4);
-void __cdecl fcn_00471b60(int dlg);
+void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int a1);
 void __cdecl io_AppendText(int a0);
 void __cdecl fcn_004c30a0(int a0, int a1, char* fmt, int a3, int a4);
@@ -93,7 +93,7 @@ open:
 		fcn_00546190(p);
 		return;
 	}
-	fcn_00471b60(*(int*) (p->handle + 8));
+	d2_CenterDialogWindows(*(int*) (p->handle + 8));
 	d2_SetForm(*(int*) (p->handle + 8), 1);
 	io_AppendText(0x16c8);
 	v = p->base + (int) p->kind * 6 + 0x16c9;

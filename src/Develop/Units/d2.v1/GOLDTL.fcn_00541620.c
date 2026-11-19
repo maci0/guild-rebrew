@@ -34,7 +34,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_005272e0(void);
 void __cdecl fcn_00537320(int);
 int __cdecl d2_CreateScrollPerga(void);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00500d60(void*, void*);
 int __cdecl fcn_00503fe0(int, int);
@@ -116,7 +116,7 @@ void __cdecl fcn_00541620(void)
 	fcn_005272e0();
 	fcn_00537320(0x24087);
 	dlg = d2_CreateScrollPerga();
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	if (g1f4 != 0) {
 		fcn_00473150((unsigned char*) g1f4);
 		g1f4 = 0;

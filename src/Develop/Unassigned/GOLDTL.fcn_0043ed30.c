@@ -16,7 +16,7 @@ typedef struct Scene {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00455350(char* object, float* in, float* out);
+void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3,
                          unsigned int* a4, float* a5);
 
@@ -55,7 +55,7 @@ char __cdecl fcn_0043ed30(char* node, LightIter* it)
 	}
 	sc = (Scene*) it->obj;
 	f90 = *(float*) (node + 0x90);
-	fcn_00455350(node, (float*) (node + 0x4c), pt);
+	d3_TransformPoint(node, (float*) (node + 0x4c), pt);
 	if (!(unsigned char) fcn_00441720(&sc->width, pt, 0, (unsigned int*) &v4, (unsigned int*) &v3, &val)) {
 		return 1;
 	}

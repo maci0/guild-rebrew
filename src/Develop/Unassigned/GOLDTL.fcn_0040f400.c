@@ -11,8 +11,8 @@ struct query_40f400 {
 
 extern int g_67a370;
 
-int __cdecl fcn_0040f3d0();
-void __cdecl fcn_004379a0(char*, int, int, int (__cdecl*)(), struct query_40f400*);
+int __cdecl d3_RemoveAnimationIfNameContains();
+void __cdecl d3_VisitSceneObjects(char*, int, int, int (__cdecl*)(), struct query_40f400*);
 
 
 /* Script command: runs the name query callback over every object of the
@@ -27,7 +27,7 @@ int __cdecl DetachAnimFromAll(char** args)
 	q.count = 0;
 	q.result = 0;
 	if (q.name[0] != 0) {
-		fcn_004379a0(((char*)g_67a370), 0, 0xc0, fcn_0040f3d0, &q);
+		d3_VisitSceneObjects(((char*)g_67a370), 0, 0xc0, d3_RemoveAnimationIfNameContains, &q);
 	}
 	return 0;
 }

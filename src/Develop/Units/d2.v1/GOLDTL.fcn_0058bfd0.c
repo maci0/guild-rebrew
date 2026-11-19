@@ -8,7 +8,7 @@ extern float g_662cf8; extern int g_6652f8[];
 int __cdecl d2_SetForm(int win, int layer);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
 int __cdecl fcn_0046fac0(int x, int y, char* text, int win);
-void __cdecl fcn_00472900(int element, int value);
+void __cdecl d2_SetElementFont(int element, int value);
 int __cdecl io_AppendText();
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5,
@@ -95,20 +95,20 @@ void __cdecl fcn_0058bfd0(int* a0)
 			*(int*) (g_1015ea0 + 0x6c + h * 0x2f4) = 1;
 			*(int*) (g_1015ea0 + 0x18 + h * 0x2f4) =
 			    *(int*) (a0[2] * 0x3cc + 0x1015f4c);
-			fcn_00472900(h, 0x54);
+			d2_SetElementFont(h, 0x54);
 			y += 0xd;
 			h = fcn_0046fac0(0, y, buf2, a0[2]);
 			*(int*) (g_1015ea0 + 0x6c + h * 0x2f4) = 1;
 			*(int*) (g_1015ea0 + 0x18 + h * 0x2f4) =
 			    *(int*) (a0[2] * 0x3cc + 0x1015f4c);
-			fcn_00472900(h, 0x54);
+			d2_SetElementFont(h, 0x54);
 			y += 0x12;
 			j = 0;
 			do {
 				io_FormatTextBuffer(buf, "%s:", 0x16b7 + j);
 				h = fcn_0046fac0(0x28, y, buf, a0[2]);
 				*(int*) (g_1015ea0 + 0x18 + h * 0x2f4) = 0x12c;
-				fcn_00472900(h, 0x54);
+				d2_SetElementFont(h, 0x54);
 				fcn_00534160(0xa0, y,
 				             *(unsigned char*) (*r + 0x24 + j), 0x4df);
 				j++;

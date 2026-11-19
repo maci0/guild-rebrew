@@ -22,7 +22,7 @@ typedef struct {
 } Rec38;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl fcn_0046e830(int, int, int, int, int);
@@ -59,7 +59,7 @@ void __cdecl fcn_005c0020(void)
 
 	ent = (char*) 0x7f4ca0 + g_774970 * 0x21c;
 	dlg = fcn_00470820(0, 0, (char*) 0x6ac4f4);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x173f);
 	d2_SetForm(dlg, 2);

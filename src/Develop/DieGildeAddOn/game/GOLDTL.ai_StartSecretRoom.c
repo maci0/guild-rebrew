@@ -11,7 +11,7 @@ typedef struct Msg {
 
 char* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_00495400(int kind, int id, int a3, Msg* b, Msg* a);
+int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 int __cdecl fcn_00577850(int id);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_0048dbc0(char* e, Msg* a, Msg* b);
@@ -42,7 +42,7 @@ int __cdecl ai_StartSecretRoom(int kind, char* e, int busy, Msg* out1, Msg* out2
 		b.type = 4;
 		b.a = *(int*) (t + 1);
 		b.b = 1;
-		r = fcn_00495400(0x41, *(unsigned short*) e, 1, &a, &b);
+		r = ai_SelectBestMethod(0x41, *(unsigned short*) e, 1, &a, &b);
 		if (r != 0) {
 			*out1 = a;
 			*out2 = b;

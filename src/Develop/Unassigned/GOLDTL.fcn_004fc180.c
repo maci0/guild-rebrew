@@ -21,14 +21,14 @@ extern float g_99ec14;
 extern float g_6628a8;
 extern double g_662ad8;
 
-int __cdecl fcn_00500d20(Blob14* a, Blob14* b);
+int __cdecl gm_GetElapsedMinutes(Blob14* a, Blob14* b);
 
 void __cdecl fcn_004fc180(void)
 {
 	int r;
 	double lim;
 
-	r = fcn_00500d20(&g_99f590, &(*(Blob14*)&gm_GameTime));
+	r = gm_GetElapsedMinutes(&g_99f590, &(*(Blob14*)&gm_GameTime));
 	if (r == 0) {
 		g_99f590 = (*(Blob14*)&gm_GameTime);
 		return;

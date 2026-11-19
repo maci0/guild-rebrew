@@ -13,7 +13,7 @@ typedef struct Msg {
 
 unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_00495400(int kind, int id, int n, Msg* b1, Msg* b2);
+int __cdecl ai_SelectBestMethod(int kind, int id, int n, Msg* b1, Msg* b2);
 int __cdecl fcn_004aa580(char* e, char* a2, char* out);
 
 /* ADDRESS: GOLDTL 0x0049cb20 */
@@ -41,7 +41,7 @@ int __cdecl ai_StartPamphlete(int a1, char* e, int busy, Msg* out1, Msg* out2)
 			b.type = 0;
 			b.a = 0;
 			b.b = 0;
-			r = fcn_00495400(0x28, *(unsigned short*) e, 1, &a, &b);
+			r = ai_SelectBestMethod(0x28, *(unsigned short*) e, 1, &a, &b);
 			if (r != 0) {
 				*out1 = a;
 				*out2 = b;
@@ -58,7 +58,7 @@ int __cdecl ai_StartPamphlete(int a1, char* e, int busy, Msg* out1, Msg* out2)
 				b.type = 4;
 				b.a = *(int*) (*(char**) (e + 0x170) + 1);
 				b.b = 1;
-				r = fcn_00495400(0x29, *(unsigned short*) e, 1, &a, &b);
+				r = ai_SelectBestMethod(0x29, *(unsigned short*) e, 1, &a, &b);
 				if (r != 0) {
 					*out1 = a;
 					*out2 = b;

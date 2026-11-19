@@ -46,7 +46,7 @@ void __cdecl fcn_004f6740(void);
 int __cdecl fcn_0051e070(void);
 void* __cdecl fcn_00445600(int, int, int, char*);
 
-void __cdecl fcn_00437ac0(int, int, int, void*);
+void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl fcn_005109f0(void);
 void __cdecl fcn_005105a0(void);
 void __cdecl fcn_00510b40(void);
@@ -96,9 +96,9 @@ int __cdecl fcn_00514120(char* map)
 	if (folder != 0) {
 		d3_DestroyObject((D3_OBJECT*) (folder));
 	}
-	fcn_00437ac0(g_67a370, 0, 0x140, fcn_005109f0);
-	fcn_00437ac0(g_67a370, 0, 0x40, fcn_005105a0);
-	fcn_00437ac0(g_67a370, 0, 0x20, fcn_00510b40);
+	d3_TraverseSceneObjects(g_67a370, 0, 0x140, fcn_005109f0);
+	d3_TraverseSceneObjects(g_67a370, 0, 0x40, fcn_005105a0);
+	d3_TraverseSceneObjects(g_67a370, 0, 0x20, fcn_00510b40);
 	fcn_00513d40("bk_BRUNNEN");
 	fcn_00513d40("bk_GEFAENGNIS");
 	fcn_00513d40("bk_HANDWERK");

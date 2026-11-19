@@ -16,7 +16,7 @@ char __cdecl fcn_00443e10(void*, int*);
 int __cdecl fcn_0046fcd0(int x, int y, char* name);
 void __cdecl fcn_00469c40(int x, int y, int slot);
 void __cdecl fcn_0046b2b0(int slot);
-void __cdecl fcn_00472170(int slot, int flag);
+void __cdecl d2_SetSlotVisibility(int slot, int flag);
 
 /* ADDRESS: GOLDTL 0x004cfca0 */
 void __cdecl fcn_004cfca0(void)
@@ -35,7 +35,7 @@ void __cdecl fcn_004cfca0(void)
 		owner = g_9b4900[i].owner;
 		if (!fcn_00443e10((void*) *(int*) (*(char**) ((char*) owner + 0x184) + 0x34), r)) {
 			if (g_9b4900[i].handle != -1) {
-				fcn_00472170(g_9b4900[i].handle, 0);
+				d2_SetSlotVisibility(g_9b4900[i].handle, 0);
 			}
 			return;
 		}
@@ -54,7 +54,7 @@ void __cdecl fcn_004cfca0(void)
 			fcn_00469c40(px, (int) ((float) py + g_9b4900[i].speed), g_9b4900[i].handle);
 		}
 		if (g_9b4900[i].handle != -1) {
-			fcn_00472170(g_9b4900[i].handle, 1);
+			d2_SetSlotVisibility(g_9b4900[i].handle, 1);
 		}
 		g_9b4900[i].speed = g_9b4900[i].speed - 0.5;
 		if (g_9b4900[i].speed <= 0.0f) {

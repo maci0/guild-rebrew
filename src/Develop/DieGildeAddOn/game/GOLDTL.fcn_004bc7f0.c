@@ -9,7 +9,7 @@ int __cdecl gm_CheckEntityType(char*);
 int __cdecl fcn_00505340(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 char* __cdecl fcn_00445600(int, int, int, char*);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 
 int __cdecl fcn_004bc7f0(float* out)
 {
@@ -26,10 +26,10 @@ int __cdecl fcn_004bc7f0(float* out)
 	e = list[gm_RandomMod(n)];
 	r = fcn_00445600(*(int*) (e + 0x61), 0x300, 0, g_68149c);
 	if (r != 0) {
-		fcn_00455350(r, r + 0x4c, out);
+		d3_TransformPoint(r, r + 0x4c, out);
 	} else {
 		e = *(char**) (e + 0x61);
-		fcn_00455350(e, e + 0x4c, out);
+		d3_TransformPoint(e, e + 0x4c, out);
 	}
 	return 1;
 }

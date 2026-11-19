@@ -30,7 +30,7 @@ int __cdecl fcn_004c30a0(int, int, char *, int, int);
 void __cdecl fcn_00500bb0(char *, int, int, int);
 char *__cdecl gm_LookupEntityRecordById(int);
 char *__cdecl fcn_00445600(char *, int, int, char *);
-void __cdecl fcn_00455350(char *, char *, float *);
+void __cdecl d3_TransformPoint(char *, char *, float *);
 int __cdecl CompareVector3WithinTolerance(float *, float *, float);
 int __cdecl fcn_004c5da0(int, int, int, char *, int, char *);
 int __cdecl fcn_004c5620(int, char *);
@@ -42,8 +42,8 @@ void __cdecl fcn_00418f90(int);
 void __cdecl fcn_00546190(char *);
 void __cdecl fcn_004432d0(int, int);
 char *__cdecl fcn_00422460(int, char *);
-int __cdecl fcn_00418c80(int, int, int, float);
-void __cdecl fcn_004192b0(int, int, int, int);
+int __cdecl d3snd_AttachSoundSource(int, int, int, float);
+void __cdecl d3snd_PlaySource(int, int, int, int);
 void __cdecl fcn_004193f0(int, int, int, float);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl he_MessageBoxQuickjump(int, int, char *, unsigned char, int, int, int, char *, char *);
@@ -93,8 +93,8 @@ void __cdecl fcn_0056cfc0(char *a0)
 					if (*(char *)(a0 + 0xb4) == 1) {
 						r = fcn_00422460(0, g_6a6b48);
 						if (r != 0 &&
-						    (r = (char *)fcn_00418c80((int)r, *(int *)(e + 0x61), 0x6b, 2200.0f)) != 0)
-							fcn_004192b0((int)r, 0, 0, 0);
+						    (r = (char *)d3snd_AttachSoundSource((int)r, *(int *)(e + 0x61), 0x6b, 2200.0f)) != 0)
+							d3snd_PlaySource((int)r, 0, 0, 0);
 					} else if (*(char *)(a0 + 0xb4) == 0) {
 						r = fcn_00422460(0, g_6a6b38);
 						if (r != 0)
@@ -113,13 +113,13 @@ void __cdecl fcn_0056cfc0(char *a0)
 					r = fcn_00445600((char *)*(int *)(e + 0x61), 0x100, 0,
 							 &names[(unsigned char)*(unsigned char *)(a0 + 0xb4)][0]);
 					if (r != 0) {
-						fcn_00455350(r, r + 0x4c, pos);
+						d3_TransformPoint(r, r + 0x4c, pos);
 					} else {
 						r = fcn_00445600((char *)*(int *)(e + 0x61), 0x100, 0,
 								 g_6a2edc);
 					}
 					if (r != 0) {
-						fcn_00455350(r, r + 0x4c, pos);
+						d3_TransformPoint(r, r + 0x4c, pos);
 						pos[0] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[0] - 32.0f;
 						pos[2] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[2] - 32.0f;
 						pos[1] = pos[1] - 20.0;
@@ -248,7 +248,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 						    *(int *)(m + 0x128) == 0 &&
 						    (m = fcn_00445600((char *)*(int *)(e + 0x61), 0x100, 0,
 								      g_68149c)) != 0) {
-							fcn_00455350(m, m + 0x4c, pos);
+							d3_TransformPoint(m, m + 0x4c, pos);
 							if (!(CompareVector3WithinTolerance(
 								    (float *)(*(int *)(*(int *)(r + 0x184) + 0x34) + 0x4c),
 								    pos, 80.0f) != 0)) {

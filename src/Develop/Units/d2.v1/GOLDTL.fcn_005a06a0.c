@@ -1,6 +1,6 @@
 
 int __cdecl fcn_00470820(int a, int b, char* name);
-void __cdecl fcn_00471b60(int k);
+void __cdecl d2_CenterDialogWindows(int k);
 int __cdecl d2_SetForm(int k, int i);
 void __cdecl io_AppendText(int a);
 int __cdecl fcn_005373e0(void* p, int a);
@@ -19,7 +19,7 @@ void __cdecl fcn_005a06a0(void)
 
 	slot = (char*) 0x7f4ca0 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c;
 	h = fcn_00470820(0, 0, "locations\\wohnsitz\\weinkeller");
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x42cf);
 	d2_SetForm(h, 2);

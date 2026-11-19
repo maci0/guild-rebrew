@@ -33,7 +33,7 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
 int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_005b4660(void*);
 char* __cdecl io_AppendText(int, ...);
@@ -62,9 +62,9 @@ void __cdecl fcn_005b4c80(void)
 	fill = 1;
 	left = fcn_0046f100(0, 0, 0x140, 0x190, 0x10, win = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414));
 	right = fcn_0046f100(0x140, 0, 0x140, 0x190, 0x10, win);
-	fcn_00472900(((D2_WIN*)g_1015f40)[win].slot, 0x54);
-	fcn_00472900(((D2_WIN*)g_1015f40)[left].slot, 0x54);
-	fcn_00472900(((D2_WIN*)g_1015f40)[right].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)g_1015f40)[win].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)g_1015f40)[left].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)g_1015f40)[right].slot, 0x54);
 	if (fcn_005373e0((void*) fcn_005b4c80, 0x657c7)) {
 		rp = &((D2_WIN*)g_1015f40)[right];
 		do {

@@ -24,7 +24,7 @@ typedef struct Obj0442910 {
 	Ov0442910* ov;
 } Obj0442910;
 
-Obj0442910* __cdecl fcn_00439750(int kind, int id);
+Obj0442910* __cdecl d3_SpawnObject(int kind, int id);
 void __cdecl fcn_00439c00(Obj0442910* parent, Obj0442910* o);
 int __cdecl fcn_00449b60(int id);
 void __cdecl fcn_0044c200(int a, int b);
@@ -43,7 +43,7 @@ Obj0442910* __cdecl fcn_00442910(Obj0442910* parent, int a, int b, int id)
 	unsigned int n;
 	unsigned int i;
 
-	o = fcn_00439750(4, id);
+	o = d3_SpawnObject(4, id);
 	if (o == 0) {
 		return 0;
 	}

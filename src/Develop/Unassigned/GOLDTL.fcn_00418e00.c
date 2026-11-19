@@ -26,7 +26,7 @@ void __cdecl fcn_00418d70(struct snd_418e00*);
 
 /* Updates the positional sound sources: silences the ones outside the
  * current room, pans the others and releases finished voices. */
-void __cdecl fcn_00418e00(void)
+void __cdecl d3snd_UpdateSoundSources(void)
 {
 	int i;
 

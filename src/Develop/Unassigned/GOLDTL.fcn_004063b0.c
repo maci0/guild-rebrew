@@ -4,9 +4,9 @@
 #include <string.h>
 
 char* __cdecl ch_NewAction(int);
-void __cdecl fcn_00406280(void);
+void __cdecl ch_ExecPlayAnimation(void);
 
-char* __cdecl fcn_004063b0(int a1, char* s, int a3, float a4)
+char* __cdecl ch_NewAnimationAction(int a1, char* s, int a3, float a4)
 {
 	char* e;
 
@@ -15,7 +15,7 @@ char* __cdecl fcn_004063b0(int a1, char* s, int a3, float a4)
 		return e;
 	}
 	*(int*) (e + 0x30) = a3;
-	*(void**) e = (void*) fcn_00406280;
+	*(void**) e = (void*) ch_ExecPlayAnimation;
 	e[9] = 0x2e;
 	*(float*) (e + 0x178) = 1.0f;
 	*(int*) (e + 0x28) = 0;

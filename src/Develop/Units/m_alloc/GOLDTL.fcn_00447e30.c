@@ -54,7 +54,7 @@ typedef struct S447e30Desc {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl ReportClientMessage(char*);
 char* __cdecl fcn_004011a0(char*, char*);
-int __cdecl fcn_00401180(char*, char*);
+int __cdecl vfs_ReadByte(char*, char*);
 int __cdecl fcn_004011f0(char*, int*);
 int __cdecl fcn_004011d0(char*, float*);
 int __cdecl ReadVfsFourDwords(char*, void*);
@@ -122,7 +122,7 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 			}
 		}
 		if (version >= 0x3a6c00aa) {
-			fcn_00401180(stream, &flag);
+			vfs_ReadByte(stream, &flag);
 			if (flag != 0) {
 				fcn_004011f0(stream, &desc.count);
 				if (desc.count > 0) {
@@ -136,9 +136,9 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 						last = 0;
 
 						fcn_004011a0(stream, recName);
-						fcn_00401180(stream, &kind);
-						fcn_00401180(stream, &b1);
-						fcn_00401180(stream, &b2);
+						vfs_ReadByte(stream, &kind);
+						vfs_ReadByte(stream, &b1);
+						vfs_ReadByte(stream, &b2);
 						if (recName[0] != 0) {
 							mask = ((b1 & 0x0f) << 2) | (b2 & 1);
 							memset(&bits, 0, sizeof(bits)); bits.a = 0x7f; last = fcn_0045c5b0(recName, bits, mask, 0);
@@ -147,13 +147,13 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 							}
 						}
 						memset(&bits, 0, sizeof(bits));
-						fcn_00401180(stream, &flag);
+						vfs_ReadByte(stream, &flag);
 						bits.a = flag;
-						fcn_00401180(stream, &flag);
+						vfs_ReadByte(stream, &flag);
 						bits.b = flag;
-						fcn_00401180(stream, &flag);
+						vfs_ReadByte(stream, &flag);
 						bits.c0 = flag;
-						fcn_00401180(stream, &flag);
+						vfs_ReadByte(stream, &flag);
 						bits.c1 = flag;
 						desc.recs[saved].h1 = last;
 						desc.recs[saved].h0 = last;

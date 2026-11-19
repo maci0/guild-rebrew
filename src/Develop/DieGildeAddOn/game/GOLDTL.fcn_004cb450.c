@@ -5,7 +5,7 @@ extern char g_68b214[];
 extern char* lpObjektePROT;
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
-char* __cdecl fcn_004032b0(char*);
+char* __cdecl ch_FindCharacterByName(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl fcn_00515540(char*);
@@ -27,7 +27,7 @@ int __cdecl fcn_004cb450(char* command, char* result)
 	int id;
 	int k;
 	fcn_0064d41a(search, g_68b0d8, *(int*) (command + 0x10));
-	o = fcn_004032b0(search);
+	o = ch_FindCharacterByName(search);
 	if (!o)
 		return 1;
 	s = gm_StartFilteredEntitySearch(1, 1, *(int*) (command + 0x14));

@@ -11,10 +11,10 @@ extern void __cdecl m_FreeTracked(void *);
 extern void __cdecl fcn_00438b40(int, void *);
 extern float __cdecl fcn_00444700(int, float *);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
-extern char __cdecl fcn_0045b920(void *, int, int, float *);
+extern char __cdecl d3_GridPointToWorld(void *, int, int, float *);
 
 /* ADDRESS: GOLDTL 0x00409c90 */
-unsigned int __cdecl fcn_00409c90(int a0, int a1)
+unsigned int __cdecl ch_UpdateWalkOnPath(int a0, int a1)
 {
     char *eventEntry;
     char *v5;
@@ -155,7 +155,7 @@ Lafter:
         return 0;
     }
     v2 = (float *)(eventEntry + 0x124);
-    fcn_0045b920(v5, *(unsigned char *)(*(int *)(eventEntry + 0xf4) + v9 * 2),
+    d3_GridPointToWorld(v5, *(unsigned char *)(*(int *)(eventEntry + 0xf4) + v9 * 2),
         *(unsigned char *)(*(int *)(eventEntry + 0xf4) + 1 + v9 * 2), v2);
     v14 = *(float *)0x6b5c38;
     *v2 = v14 + *v2;

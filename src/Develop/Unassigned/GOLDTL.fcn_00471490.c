@@ -16,14 +16,14 @@ void __cdecl fcn_00466550(int idx, int surf);
 void __cdecl fcn_00467920(int idx, int surf);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, char* surf, char* text, int flags);
 void __cdecl fcn_0046dff0(int idx, char* surf);
-int __cdecl fcn_00472050(int slot, int* w, int* h);
-void __cdecl fcn_00472880(int idx);
+int __cdecl d2_GetElementResourceSize(int slot, int* w, int* h);
+void __cdecl d2_SelectFont(int idx);
 int __cdecl fcn_004767f0(int x, int y, int w, int h, char* src, int sx, int sy, char* t);
 void __cdecl fcn_0047a040(int left, int top, int right, int bottom);
 void __cdecl fcn_0047c560(int a, int b, char* surf);
 void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
 void __cdecl fcn_0047ccd0(int x, int y, int surf, char* font, int c);
-void __cdecl fcn_0047cd70(int idx, int surf);
+void __cdecl d2_DrawAnimationSlot(int idx, int surf);
 
 /* ADDRESS: GOLDTL 0x00471490 */
 void __cdecl fcn_00471490(int k)
@@ -99,7 +99,7 @@ void __cdecl fcn_00471490(int k)
 						}
 						break;
 					case 4:
-						fcn_0047cd70(*(int*) (obj + 0x88), (int) surf);
+						d2_DrawAnimationSlot(*(int*) (obj + 0x88), (int) surf);
 						break;
 					case 5:
 					case 8:
@@ -123,7 +123,7 @@ void __cdecl fcn_00471490(int k)
 							break;
 						}
 						if (*(int*) (obj + 0x84) != 0) {
-							fcn_00472880(*(int*) (obj + 0x84));
+							d2_SelectFont(*(int*) (obj + 0x84));
 						}
 						flags = 0;
 						if (*(int*) (obj + 0x3c)) {
@@ -137,7 +137,7 @@ void __cdecl fcn_00471490(int k)
 						if (*(int*) (obj + 0x70)) {
 							flags |= 0x10;
 						}
-						fcn_00472050(*(int*) obj, &w, &h);
+						d2_GetElementResourceSize(*(int*) obj, &w, &h);
 						if (*(int*) (obj + 0x1dc) != -1) {
 							sx = *(int*) (obj + 0x1dc) - *(int*) (base + 0x188);
 							top = *(int*) (obj + 0x18);
@@ -159,7 +159,7 @@ void __cdecl fcn_00471490(int k)
 					case 0x43:
 						if (*(int*) (obj + 0x24) > 0) {
 							fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
-							fcn_00472880(*(int*) (obj + 0x84));
+							d2_SelectFont(*(int*) (obj + 0x84));
 							flags = 0;
 							if (*(int*) (obj + 0x3c)) {
 								flags = 2;
@@ -174,7 +174,7 @@ void __cdecl fcn_00471490(int k)
 							}
 							fcn_0046bd20(sx, sy, *(int*) (obj + 0x18), *(int*) (obj + 0x1c),
 							             surf, *(char**) (obj + 0x88), flags);
-							fcn_00472880(d2_CurrentFont);
+							d2_SelectFont(d2_CurrentFont);
 						}
 						break;
 					case 0x45:

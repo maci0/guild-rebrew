@@ -29,9 +29,9 @@ void __cdecl ReportClientMessage(const char*);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char*);
 void __cdecl fcn_00504250(unsigned char*);
 void __cdecl gv_UpgradeField(unsigned char*);
-int __cdecl fcn_0042f690(char*, int, int, char*);
+int __cdecl vfs_ResolvePath(char*, int, int, char*);
 void __cdecl fcn_004432d0(int, int);
-int __cdecl fcn_00455350(char*, char*, int*);
+int __cdecl d3_TransformPoint(char*, char*, int*);
 int __cdecl fcn_004488e0(char*, int, int);
 void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
@@ -40,15 +40,15 @@ void __cdecl fcn_00438cb0(char*, int*);
 void __cdecl fcn_00598860(int, void*);
 void __cdecl fcn_004550b0(int, int);
 void __cdecl d3_DestroyObject(int);
-char __cdecl fcn_00413680(char*, char*, float*, float*);
+char __cdecl d3_ComputeObjectBoundingSphere(char*, char*, float*, float*);
 char* __cdecl evt_LoadGfxScript(int);
 void __cdecl fcn_00428340(char*, int, ...);
 void __cdecl fcn_00510820(int, void*, int);
 void __cdecl fcn_0052d9d0(void*);
 int __cdecl fcn_00500e20(char*);
 void __cdecl fcn_005165b0(int);
-char __cdecl fcn_00437ac0(char*, char*, unsigned int, void (__cdecl*)(char*));
-void __cdecl fcn_004379a0(int, int, int, int, void*);
+char __cdecl d3_TraverseSceneObjects(char*, char*, unsigned int, void (__cdecl*)(char*));
+void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
 void* __cdecl fcn_00426cc0(int);
 int __cdecl fcn_00428720(int);
 void __cdecl fcn_0052db70(char*);
@@ -109,7 +109,7 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 		} else {
 			fcn_0064d41a(path, g_67f0ac, g_7e1ae0, name);
 		}
-		if (fcn_0042f690(path, g_6b7fdc, g_6b7fdc, tmp) != 0) {
+		if (vfs_ResolvePath(path, g_6b7fdc, g_6b7fdc, tmp) != 0) {
 			break;
 		}
 		i++;
@@ -120,7 +120,7 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
 	h = *(int*) (v4 + 0x61);
-	fcn_00455350((char*) h, (char*) (h + 0x4c), (int*) vec);
+	d3_TransformPoint((char*) h, (char*) (h + 0x4c), (int*) vec);
 	obj = fcn_004488e0(path, 0, 0);
 	if (obj == 0) {
 		sprintf(name, "cm_ExGebUpgrade(): Could not load 3D-Object-Group '%s'...", path);
@@ -139,7 +139,7 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 			fcn_004550b0(*(int*)(v4 + 0x61), g_773dd8);
 		}
 		d3_DestroyObject(*(int*)(v4 + 0x61));
-		if (*(int*) (obj + 0x1ec) != 0 && fcn_00413680((char*) obj, (char*) d3_ActiveCamera, vec, &radius)) {
+		if (*(int*) (obj + 0x1ec) != 0 && d3_ComputeObjectBoundingSphere((char*) obj, (char*) d3_ActiveCamera, vec, &radius)) {
 			res = (int)(radius * g_664ec0);
 			h = (int) evt_LoadGfxScript(0x68b228);
 			if (h != 0) {
@@ -159,9 +159,9 @@ int __cdecl fcn_004cb7f0(char* a0, char* a1)
 		else if (res == 2) g_773dd4 = (unsigned char)res;
 		else if (res == 3) g_773dd4 = (unsigned char)res;
 		fcn_005165b0(*(int*)(v4 + 0x61));
-		fcn_00437ac0((char*) g_67a370, (char*) *(int*)(v4 + 0x61), 0x2c0, (void (__cdecl*) (char*)) 0x514d80);
+		d3_TraverseSceneObjects((char*) g_67a370, (char*) *(int*)(v4 + 0x61), 0x2c0, (void (__cdecl*) (char*)) 0x514d80);
 		f = (float) g_774728 + g_6a2bec;
-		fcn_004379a0(g_67a370, *(int*)(v4 + 0x61), 0x21e, 0x445d20, &f);
+		d3_VisitSceneObjects(g_67a370, *(int*)(v4 + 0x61), 0x21e, 0x445d20, &f);
 		if (*(int*) (v4 + 0x95) != -1) {
 			obj = (int) fcn_00426cc0(*(int*) (v4 + 0x95));
 			if (obj != 0) {

@@ -63,7 +63,7 @@ void __cdecl fcn_004372d0(int, int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x0047c9c0 */
-void __cdecl fcn_0047c9c0(int a1, int a2, int a3, int a4, int tex, float alpha)
+void __cdecl d2_DrawTexturedQuad(int a1, int a2, int a3, int a4, int tex, float alpha)
 {
 	Quad quad;
 	float t;

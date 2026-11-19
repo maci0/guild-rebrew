@@ -6,7 +6,7 @@
 
 int __cdecl fcn_0065f220(const char*, const char*);
 void __cdecl vfs_ToSlashes(char*);
-void __cdecl fcn_00435500(char*, char*);
+void __cdecl d3_RemoveObjectAnimation(char*, char*);
 
 
 
@@ -17,7 +17,7 @@ void __cdecl fcn_004311a0(char*, char*, int, int, int);
 #ifdef REBREW_GOLD
 int __cdecl fcn_00411be0(char*);
 #else
-int __cdecl fcn_00413190(char*);
+int __cdecl d3_GetContextIndex(char*);
 #endif
 
 
@@ -59,7 +59,7 @@ void __cdecl ch_FinishAni(char* obj)
 #ifdef REBREW_GOLD
                 if (fcn_00411be0(*(char**) (obj + 0x88)) == 0) {
 #else
-                if (fcn_00413190(*(char**) (obj + 0x88)) == 0) {
+                if (d3_GetContextIndex(*(char**) (obj + 0x88)) == 0) {
 #endif
                     *(int*) (*(char**) (obj + 0x7c) + 0x3c) = -1;
                 } else {
@@ -72,13 +72,13 @@ void __cdecl ch_FinishAni(char* obj)
     if ((*(char**) (ani + 0x68))[0x169] == 0 && (ani[0x70] & 3) != 0) {
         fcn_004311a0(node, ani, 0, *(int*) ani, 3);
     }
-    fcn_00435500(*(char**) (node + 0x1ec) + 0xf4, *(char**) (ani + 0x68));
+    d3_RemoveObjectAnimation(*(char**) (node + 0x1ec) + 0xf4, *(char**) (ani + 0x68));
     *(char**) (obj + 0x70) = 0;
 }
 
 /* Loads each named motion of a character that is not loaded yet; walking
  * and cart pulling are loaded looping. */
-void __cdecl fcn_00404a00(char* obj, int n, ...)
+void __cdecl ch_PreloadCharacterMotions(char* obj, int n, ...)
 {
 	int i;
 	va_list ap;
@@ -113,7 +113,7 @@ void __cdecl fcn_00404a00(char* obj, int n, ...)
 		opt.layer = 0x18;
 		opt.mode = 0;
 		fcn_00434970(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, ani, opt);
-		fcn_00435500(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, ani);
+		d3_RemoveObjectAnimation(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, ani);
 	}
 	va_end(ap);
 }
@@ -149,7 +149,7 @@ void __cdecl ch_PreloadModelMotions(char* model, int n, ...)
         opt.layer = 0x18;
         opt.mode = 0;
         fcn_00434970(*(char**) (*(char**) 0x34 + 0x1ec) + 0xf4, ani, opt);
-        fcn_00435500(*(char**) (*(char**) 0x34 + 0x1ec) + 0xf4, ani);
+        d3_RemoveObjectAnimation(*(char**) (*(char**) 0x34 + 0x1ec) + 0xf4, ani);
     }
     va_end(ap);
 }

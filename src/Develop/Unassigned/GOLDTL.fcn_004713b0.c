@@ -18,7 +18,7 @@ typedef struct Obj {
 extern Obj_1038140 g_1038140[];
 extern int g_14ce86c;
 
-char* __cdecl fcn_0045bde0(char* name);
+char* __cdecl d3_FindTextureByName(char* name);
 void __cdecl fcn_0045d090(char* p, int a);
 void __cdecl fcn_004767f0(int a, int b, int c, int d, int e, int f, int g, int h);
 
@@ -33,7 +33,7 @@ void __cdecl fcn_004713b0(int k, char* a, char* b)
 	p = 0;
 	if (a) {
 		strcpy(o->name1, a);
-		p = fcn_0045bde0(a);
+		p = d3_FindTextureByName(a);
 		if (p) {
 			fcn_0045d090(p, g_14ce86c);
 			fcn_004767f0(0, 0, *(int*) (p + 0x64), *(int*) (p + 0x64), *(int*) (p + 0x50), 0, 0, o->h1);
@@ -41,7 +41,7 @@ void __cdecl fcn_004713b0(int k, char* a, char* b)
 	}
 	if (b) {
 		strcpy(o->name2, b);
-		q = fcn_0045bde0(b);
+		q = d3_FindTextureByName(b);
 		if (q) {
 			fcn_0045d090(q, g_14ce86c);
 			fcn_004767f0(0, 0, *(int*) (q + 0x64), *(int*) (o->h2 + 8), *(int*) (q + 0x50), 0, *(int*) (p + 0x64), (int) o->h2);

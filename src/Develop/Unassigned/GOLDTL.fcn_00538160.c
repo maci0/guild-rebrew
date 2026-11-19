@@ -7,8 +7,8 @@ void __cdecl fcn_005e12d0(void);
 void __cdecl fcn_00465c60(void);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_00418bb0(void);
-void __cdecl fcn_00439490(void);
-void __cdecl fcn_0041b4b0(void);
+void __cdecl d3_Shutdown(void);
+void __cdecl d3_ReleaseGraphicsInterfaces(void);
 void __cdecl fcn_00411b10(void);
 
 void __cdecl fcn_00538160(void)
@@ -20,7 +20,7 @@ void __cdecl fcn_00538160(void)
 	fcn_00465c60();
 	fcn_004432d0(0, 1);
 	fcn_00418bb0();
-	fcn_00439490();
-	fcn_0041b4b0();
+	d3_Shutdown();
+	d3_ReleaseGraphicsInterfaces();
 	fcn_00411b10();
 }

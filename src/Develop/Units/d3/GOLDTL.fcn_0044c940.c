@@ -36,7 +36,7 @@ int __cdecl fcn_0065f220(const char* a, const char* b);
 /* Reads the Direct3D screen and window options from the registry over the
  * defaults. */
 /* ADDRESS: GOLDTL 0x0044c940 */
-char __cdecl fcn_0044c940(D3dRegCfg_44c940* cfg, const char* key, D3dRegCfg_44c940* def)
+char __cdecl d3_ReadRegistryConfig(D3dRegCfg_44c940* cfg, const char* key, D3dRegCfg_44c940* def)
 {
 	int v;
 	int n;

@@ -22,17 +22,17 @@ extern char* __cdecl gm_LookupEntityRecordById(int);
 extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 extern int __cdecl fcn_0051ad90(int);
 extern int __cdecl fcn_004fda30(int);
-extern int __cdecl fcn_0042f690(char*, void*, void*, char*);
+extern int __cdecl vfs_ResolvePath(char*, void*, void*, char*);
 extern int __cdecl ch_CreateMesh(void*, char*, void*);
 extern void __cdecl fcn_00407800(void*, int, void*);
-extern void __cdecl fcn_0040c360(void*, void*);
+extern void __cdecl ch_StartLoopingAnimation(void*, void*);
 extern void __cdecl fcn_00438cb0(void*, void*);
 extern void __cdecl fcn_004ce9e0(void*);
 extern void __cdecl fcn_00510820(void*, void*, int);
 extern char* __cdecl fcn_00442910(int, void*, void*, char*);
 extern char* __cdecl fcn_0050d430(void*);
 extern char __cdecl SelectTextureSet(void*, void*, unsigned char, char);
-extern int __cdecl fcn_00403ce0(void*, void*);
+extern int __cdecl ch_AttachTransport(void*, void*);
 extern void __cdecl ch_SetVisible(void*, int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 extern int __cdecl fcn_004432d0(int, int);
@@ -119,7 +119,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 			}
 			sprintf(path, s_6a2490, name);
 			_strupr(path);
-			if (fcn_0042f690(path, (void*) g_6b7fdc, (void*) g_6b7fdc, text) == 0) {
+			if (vfs_ResolvePath(path, (void*) g_6b7fdc, (void*) g_6b7fdc, text) == 0) {
 				p = *(char**) (rec + 0x12c);
 				template_id = *(unsigned short*) p;
 				p[0x1f4] = 0;
@@ -147,7 +147,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 					if (p != 0) {
 						*p = 0;
 					}
-					fcn_0040c360(rec, rec + 0x1e8);
+					ch_StartLoopingAnimation(rec, rec + 0x1e8);
 				}
 				u = *(unsigned int**) (rec + 0x12c);
 				if (u != 0) {
@@ -192,7 +192,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 							}
 							SelectTextureSet(found, *(void**) ((char*) found + 0x1cc),
 									 (unsigned char) tex, 1);
-							fcn_00403ce0(rec, found);
+							ch_AttachTransport(rec, found);
 							*(unsigned int*) ((char*) found + 0x224) = 1;
 							fcn_00510820(found, u, 1);
 						}

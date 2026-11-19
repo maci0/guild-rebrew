@@ -32,7 +32,7 @@ void __cdecl gm_ResolveEntityById(int, void *, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c5620(int, char *);
-char *__cdecl fcn_004be320(int, int);
+char *__cdecl gm_GetChainNodeAtIndex(int, int);
 int __cdecl fcn_004c0240(void *, char);
 int __cdecl fcn_004c0460(void *, char);
 void __cdecl fcn_004c5790(int, void *);
@@ -217,7 +217,7 @@ void __cdecl he_RunTransport(char *e)
 		if ((*(unsigned char *)(e + 0x78) & 2) == 0) {
 			break;
 		}
-		r = (char *)fcn_004be320(*(int *)(pB0 + 0x29), *(int *)(pB0 + 0x2d));
+		r = (char *)gm_GetChainNodeAtIndex(*(int *)(pB0 + 0x29), *(int *)(pB0 + 0x2d));
 		if (r == 0) {
 			goto ret_minus1;
 		}

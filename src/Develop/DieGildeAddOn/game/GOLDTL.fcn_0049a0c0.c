@@ -44,7 +44,7 @@ extern char g_7f4ca0[];
 
 int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
-int __cdecl fcn_00495400(int who, int idx, int arg, Msg* out1, Msg* out2);
+int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Msg* out1, Msg* out2);
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
 int __cdecl fcn_004a5340(char* e, int a, int* b, float c, float r, unsigned short* out);
 
@@ -123,7 +123,7 @@ int __cdecl fcn_0049a0c0(int kind, char* e, int a2, Msg* out1, Msg* out2)
 		a.type = 7;
 		a.a = ((Ent*) e)->x4;
 		a.b = 1;
-		r = fcn_00495400(k, ((Ent*) e)->id, 2, &b, &a);
+		r = ai_SelectBestMethod(k, ((Ent*) e)->id, 2, &b, &a);
 		if (r != 0) {
 			*out1 = b;
 			*out2 = a;
@@ -163,7 +163,7 @@ pick_used:
 		b.a = ((Ent*) g_7f4ca0)[picked].x4;
 		b.b = -1;
 	} else if (i == 8) {
-		r = fcn_00495400(k, ((Ent*) e)->id, 3, &a, &b);
+		r = ai_SelectBestMethod(k, ((Ent*) e)->id, 3, &a, &b);
 		if (r != 0) {
 			*out1 = a;
 			*out2 = b;

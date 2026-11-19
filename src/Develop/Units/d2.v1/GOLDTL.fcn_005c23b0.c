@@ -22,7 +22,7 @@ extern int g_100f1dc; extern int g_774654; extern int g_14ce8e0;
 extern char g_7f4ca4[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_0050cf50(void*, int);
 int __cdecl fcn_0050b710(int, unsigned char);
 void __cdecl d2_SetForm(int, int);
@@ -52,7 +52,7 @@ void __cdecl fcn_005c23b0(char* e)
 
 	id = *(int*) (e + 1);
 	win = fcn_00470820(0, 0, "Panel\\Gebaeude_Verkaufen_pergament");
-	fcn_00471b60(win);
+	d2_CenterDialogWindows(win);
 	p = fcn_0050cf50(e, *(char*) (e + 0x5c));
 	v = fcn_0050b710(p, g_773d75);
 	d2_SetForm(win, 2);

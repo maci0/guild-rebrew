@@ -39,7 +39,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int a, int b, int id, int d);
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl gv_GetSlotEntry(int a, int b, unsigned char c);
-int __cdecl fcn_00500d20(pos14_7f4c00* a, pos14_7f4c00* b);
+int __cdecl gm_GetElapsedMinutes(pos14_7f4c00* a, pos14_7f4c00* b);
 
 int __cdecl fcn_004f2d30(char* p, int a, int b, int c);
 char* __cdecl fcn_0050dc90(char* p);
@@ -94,7 +94,7 @@ void __cdecl fcn_00579de0(char* a0)
 		place->status = -1;
 	}
 	if (place->status == 0) {
-		v = fcn_00500d20(&place->posBC, &gm_GameTime);
+		v = gm_GetElapsedMinutes(&place->posBC, &gm_GameTime);
 		f = (float) (4 - *(int*) slot) * v * *(float*) 0x662a3c;
 		if ((entity[0x165] == 0x1b || entity[0x165] == 0x1c)
 			&& (*(unsigned char*) (entity + 0x1b4) & 1)) {

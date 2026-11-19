@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_004c4dc0(char*, int);
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 char* __cdecl gm_LookupEntityRecordById(int);
 
@@ -19,7 +19,7 @@ int __cdecl fcn_004c7140(unsigned char* packet)
 	unsigned int n;
 	unsigned int j;
 
-	*(int*) (packet + 0x10) = fcn_004c4dc0((char*) packet, *(int*) (packet + 0x10));
+	*(int*) (packet + 0x10) = cm_ResolveSpecialEntityId((char*) packet, *(int*) (packet + 0x10));
 	if (gm_ResolveEntityById((void**) (&dyn), (void**) (&exist), (void**) (&stat), *(int*) (packet + 0x10)) == 0)
 		return 1;
 	if (dyn != 0)

@@ -53,7 +53,7 @@ extern float g_1040c80[16];
 extern float g_1040cc0[16];
 
 Mesh_451f80* __cdecl fcn_00436930(char* o, float* r);
-void __cdecl fcn_00438100(char* e, char* cam, int force);
+void __cdecl d3_UpdateObjectCameraTransform(char* e, char* cam, int force);
 unsigned char __cdecl fcn_00438270(char* e, char* o, char* world);
 void* __cdecl m_PoolAlloc(int* pool, int size, int grow);
 void __stdcall fcn_005eb970(void* out, void* a, void* b);
@@ -80,7 +80,7 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 		prev = 0;
 		set = 0;
 		if (!(e[0x216] & 0x20)) {
-			fcn_00438100(e, d3_ActiveCamera, 0);
+			d3_UpdateObjectCameraTransform(e, d3_ActiveCamera, 0);
 		}
 		fcn_005eb970(*(char**) (e + 0x1ec) + 0x15fc, *(char**) (e + 0x1ec) + 8, parent);
 		fcn_005ec410(&t, -*(float*) (d3_ActiveCamera + 0x4c), -*(float*) (d3_ActiveCamera + 0x50), -*(float*) (d3_ActiveCamera + 0x54));

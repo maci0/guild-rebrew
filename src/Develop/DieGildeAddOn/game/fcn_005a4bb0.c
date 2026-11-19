@@ -7,7 +7,7 @@ typedef unsigned short u16;
 typedef unsigned int   u32;
 #include "client_actions.h"
 void* __cdecl fcn_00470820(short a, short b, char* c);
-void __cdecl fcn_00471b60(int a);
+void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetForm(int a, int b);
 int __cdecl io_AppendText(void* id, ...);
 int __cdecl fcn_00472250(int a, int b, int c);
@@ -39,7 +39,7 @@ void __cdecl fcn_005a4bb0(char* o)
     int d;
 
     dlg = (char*) fcn_00470820(0, 0, "locations\\geldleihe\\geldleihe_KreditFreigabe");
-    fcn_00471b60((int)dlg);
+    d2_CenterDialogWindows((int)dlg);
     d2_SetForm((int)dlg, 1);
     io_AppendText((void*)0x18e5);
     have = gm_QueryEntitySum(*(int*)(o + 0x5d), g_773d75);

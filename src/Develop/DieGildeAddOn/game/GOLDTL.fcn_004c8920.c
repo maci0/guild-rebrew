@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_004c4dc0(void*, int);
+int __cdecl cm_ResolveSpecialEntityId(void*, int);
 
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_RemoveObjectByType(char*, int);
@@ -11,7 +11,7 @@ int __cdecl fcn_004c8920(char* request, char* result)
 	char* f;
 	char* e;
 
-	*(int*) (request + 0x10) = fcn_004c4dc0(request, *(int*) (request + 0x10));
+	*(int*) (request + 0x10) = cm_ResolveSpecialEntityId(request, *(int*) (request + 0x10));
 	if (gm_ResolveEntityById(0, (void**) (&f), 0, *(int*) (request + 0x10)) == 0)
 		return 1;
 	if (*(short*) f != 0x2a && *(short*) f != 0x116)

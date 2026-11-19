@@ -9,7 +9,7 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl d2_SetForm(int, int);
@@ -65,7 +65,7 @@ void __cdecl fcn_005c2580(char* e)
 		x = 128.0f;
 	}
 	win = fcn_00470820(0, 0, "Panel\\Gebaeude_Renovieren");
-	fcn_00471b60(win);
+	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 2);
 	a = (int) (n * x);
 	b = (int) (n * x * 0.5);

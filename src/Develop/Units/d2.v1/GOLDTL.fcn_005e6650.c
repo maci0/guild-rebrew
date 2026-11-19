@@ -45,7 +45,7 @@ extern int d2_CurrentElementId;
 void __cdecl fcn_0052a0c0(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
@@ -70,7 +70,7 @@ void __cdecl fcn_005e6650(char* e)
 	fcn_0052a0c0(e, 0);
 	dlg = fcn_00470820(0, 0, s_6ad434);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 1);

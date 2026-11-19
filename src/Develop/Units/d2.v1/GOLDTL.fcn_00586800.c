@@ -24,7 +24,7 @@ char* __cdecl fcn_004ec7d0(char*);
 float __cdecl fcn_004ec8a0(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
@@ -63,7 +63,7 @@ int __cdecl fcn_00586800(char* e, int* unused)
 	f = fcn_004ec8a0(p, 3);
 	h = fcn_00470820(0, 0, "Locations\\Domizil\\skill");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);

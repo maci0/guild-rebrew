@@ -6,7 +6,7 @@
 
 /* Writes the sample bank as text, blanks in names replaced by '~'. */
 /* ADDRESS: GOLDTL 0x00425310 */
-int __cdecl fcn_00425310(const char* file)
+int __cdecl sbs_WriteSampleBank(const char* file)
 {
 	int r;
 	FILE* fp;

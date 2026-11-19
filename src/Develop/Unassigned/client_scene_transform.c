@@ -4,7 +4,7 @@ int __cdecl fcn_0065f220(int, int);
 
 /* ADDRESS: GOLD 0x00402a70 */
 /* ADDRESS: GOLDTL 0x004032b0 */
-void* __cdecl fcn_004032b0(int a1)
+void* __cdecl ch_FindCharacterByName(int a1)
 {
 	int i;
 	void* e;
@@ -27,7 +27,7 @@ void* __cdecl fcn_004032b0(int a1)
 
 /* ADDRESS: GOLDTL 0x00403300 */
 /* ADDRESS: GOLD 0x00402ac0 */
-void* __cdecl fcn_00403300(int key)
+void* __cdecl ch_FindCharacterByKey(int key)
 {
 	int i;
 	void* p;

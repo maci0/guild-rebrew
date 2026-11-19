@@ -19,7 +19,7 @@ int __cdecl fcn_00438b40();
 int __cdecl fcn_00438cb0();
 int __cdecl CompareVector3WithinTolerance();
 int __cdecl fcn_00470820();
-int __cdecl fcn_00471b60();
+int __cdecl d2_CenterDialogWindows();
 int __cdecl fcn_00471e30();
 int __cdecl fcn_00472250();
 int __cdecl fcn_00472640();
@@ -141,7 +141,7 @@ label_5c221e:
     v28 = v9;
     d2_SetForm(v9,0);
     fcn_005340f0(d2_CurrentWindowId);
-    fcn_00471b60(v9);
+    d2_CenterDialogWindows(v9);
     d2_SetOverlayAnimation(0,0);
     d2_SetForm(v9,1);
     io_AppendText(0x6811b0);
@@ -173,7 +173,7 @@ label_5c221e:
     v28 = v9;
     d2_SetForm(v9,0);
     fcn_005340f0(d2_CurrentWindowId);
-    fcn_00471b60(v9);
+    d2_CenterDialogWindows(v9);
     d2_SetOverlayAnimation(0,0);
     (*(int *)0x100f1dc) = 0xffffffff;
     d2_SetForm(v9,1);
@@ -278,7 +278,7 @@ label_5c221e:
         v28 = v9;
         d2_SetForm(v9,0);
         fcn_005340f0(d2_CurrentWindowId);
-        fcn_00471b60(v9);
+        d2_CenterDialogWindows(v9);
         d2_SetOverlayAnimation(0,0);
         (*(int *)0x100f1dc) = -1;
         v12 = -1;

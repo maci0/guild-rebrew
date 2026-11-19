@@ -11,7 +11,7 @@ int __cdecl fcn_004011f0(void* stream, void* dst);
 #endif
 char* __cdecl fcn_004011a0(void* stream, char* text);
 int __cdecl fcn_0043b500(char*);
-char __cdecl fcn_0043b660(char*, int, int, char*);
+char __cdecl d3e_RegisterSceneEvent(char*, int, int, char*);
 
 /* ADDRESS: GOLD 0x0043ea10 */
 void __cdecl fcn_0043b850(void* r)
@@ -31,6 +31,6 @@ void __cdecl fcn_0043b850(void* r)
 		fcn_004011a0(r, name);
 		id = fcn_0043b500(name);
 		fcn_004011a0(r, val);
-		fcn_0043b660(((char*)g_67a370), id, (*(fcn_0043b850_f*)&g_67a590)(((char*)g_67a370), id, val), val);
+		d3e_RegisterSceneEvent(((char*)g_67a370), id, (*(fcn_0043b850_f*)&g_67a590)(((char*)g_67a370), id, val), val);
 	}
 }

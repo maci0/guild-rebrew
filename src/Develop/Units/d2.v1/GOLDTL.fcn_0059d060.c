@@ -43,7 +43,7 @@ extern char s_6aa490[];
 
 int __cdecl fcn_00526120(int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -76,7 +76,7 @@ int __cdecl fcn_0059d060(int unused, char* param)
 	flag = 0;
 	dlg = fcn_00470820(0, 0, s_6aa490);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	n = io_AppendText(0x19ee, *(unsigned short*) (param + 0x27), param);
 	btn1 = fcn_00472250(dlg, 1, n);

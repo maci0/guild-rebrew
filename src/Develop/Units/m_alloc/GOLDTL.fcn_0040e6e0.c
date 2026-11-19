@@ -13,7 +13,7 @@ typedef struct {
 
 extern int g_67a370;
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
-void __cdecl fcn_004379a0(int a, int b, int c, void (__cdecl* cb)(void), Query* q);
+void __cdecl d3_VisitSceneObjects(int a, int b, int c, void (__cdecl* cb)(void), Query* q);
 void __cdecl fcn_0040e610(void);
 
 int __cdecl GetRndSubObjectHandle(int* a, char** name)
@@ -28,7 +28,7 @@ int __cdecl GetRndSubObjectHandle(int* a, char** name)
 	}
 	memset(&q, 0, sizeof(q));
 	strcpy(q.name, *name);
-	fcn_004379a0(g_67a370, *a, 0x340, fcn_0040e610, &q);
+	d3_VisitSceneObjects(g_67a370, *a, 0x340, fcn_0040e610, &q);
 	if (q.count == 0) {
 		return 0;
 	}

@@ -37,7 +37,7 @@ extern Obj_1038140 g_1038140[];
 extern char* g_1015ea0;
 
 /* ADDRESS: GOLDTL 0x00471a30 */
-void __cdecl fcn_00471a30(int k, int flag)
+void __cdecl d2_SetGroupVisibility(int k, int flag)
 {
 	Obj* o;
 	D2_WIN* w;

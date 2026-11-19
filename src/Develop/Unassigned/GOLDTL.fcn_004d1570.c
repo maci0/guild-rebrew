@@ -11,7 +11,7 @@ typedef struct
 } Rec2c;
 // SIZE 0x2c
 
-Rec2c* __cdecl fcn_004ceac0(char*, char*);
+Rec2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 void __cdecl fcn_004c67c0(int, Rec2c*);
 
 void __cdecl fcn_004d1570(char* a1, char* a2)
@@ -19,7 +19,7 @@ void __cdecl fcn_004d1570(char* a1, char* a2)
 	Rec2c* s;
 	Rec2c r;
 
-	s = fcn_004ceac0(a1, a2);
+	s = gm_FindOrCreateEntitySlot(a1, a2);
 	s->flag = 0;
 	r = *s;
 	r.a = *(int*) (a2 + 4);

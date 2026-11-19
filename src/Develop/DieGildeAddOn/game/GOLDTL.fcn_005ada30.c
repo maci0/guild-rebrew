@@ -23,7 +23,7 @@ extern char* g_1015ea0;
 extern char g_6ab1e4[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -68,7 +68,7 @@ void __cdecl fcn_005ada30(char* p)
 	n = 0;
 	grp = -1;
 	d = fcn_00470820(0, 0, g_6ab1e4);
-	fcn_00471b60(d);
+	d2_CenterDialogWindows(d);
 	d2_SetForm(d, 1);
 	io_AppendText(0x19fb);
 	d2_SetOverlayAnimation(0, 0);

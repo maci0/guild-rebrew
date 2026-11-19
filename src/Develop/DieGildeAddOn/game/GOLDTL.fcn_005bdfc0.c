@@ -5,7 +5,7 @@ extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -24,7 +24,7 @@ int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* building, int a2, in
 
 	info = lpGebaeudePROT + *building * 0x24d;
 	dlg = fcn_00470820(0, 0, (char*) 0x6ac448);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	io_AppendText(0x10b);
 	if (*a0 != 0x116) {
 		if (a2 >= (int) (unsigned char) info[0x240]) {

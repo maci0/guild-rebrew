@@ -14,7 +14,7 @@ int __cdecl fcn_004246c0(void);
 int __cdecl fcn_004246e0(void);
 int __cdecl fcn_00424700(char*);
 char* __cdecl m_alloc(char*, char*);
-int __cdecl fcn_00425980(char*);
+int __cdecl sbs_UpdateSampleSizes(char*);
 
 /* ADDRESS: GOLDTL 0x004248a0 */
 int __cdecl fcn_004248a0(char* name)
@@ -41,7 +41,7 @@ int __cdecl fcn_004248a0(char* name)
 	if (sbs_BankManager != 0) {
 		n1 = fcn_004246c0();
 		n2 = fcn_004246e0();
-		if (fcn_00425980(name) == -1) {
+		if (sbs_UpdateSampleSizes(name) == -1) {
 			return -1;
 		}
 		text = fcn_00423960();

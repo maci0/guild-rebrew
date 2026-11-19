@@ -12,10 +12,10 @@ int __cdecl fcn_00433780();
 int __cdecl fcn_00438b40();
 int __cdecl fcn_00438cb0();
 int __cdecl CompareVector3WithinTolerance();
-int __cdecl fcn_0046f2c0();
+int __cdecl d2_ClearWindowChildren();
 int __cdecl fcn_00470820();
 int __cdecl fcn_00471af0();
-int __cdecl fcn_00471b60();
+int __cdecl d2_CenterDialogWindows();
 int __cdecl fcn_00471e30();
 int __cdecl fcn_00472250();
 int __cdecl d2_SetForm();
@@ -113,7 +113,7 @@ void __cdecl fcn_005a1430(void)
   v6 = fcn_00470820(0,0,(char *)0x6aa908);
   d2_SetForm(v6,0);
   fcn_005340f0((*(int *)&d2_CurrentWindowId));
-  fcn_00471b60(v6);
+  d2_CenterDialogWindows(v6);
   d2_SetForm(v6,1);
   d2_SetOverlayAnimation(0,0);
   io_AppendText(0x1874);
@@ -234,7 +234,7 @@ label_5a15b5:
         v6 = fcn_00470820(0,0,(char *)0x6aa8f0);
         d2_SetForm(v6,0);
         fcn_005340f0((*(int *)&d2_CurrentWindowId));
-        fcn_00471b60(v6);
+        d2_CenterDialogWindows(v6);
         d2_SetForm(v6,1);
         d2_SetOverlayAnimation(0,0);
         io_AppendText(0x1874);
@@ -305,7 +305,7 @@ label_5a1b81:
                     else if (v2) {
                       v2 = 0;
                       d2_SetForm(v6,4);
-                      fcn_0046f2c0((*(int *)&d2_CurrentWindowId),1);
+                      d2_ClearWindowChildren((*(int *)&d2_CurrentWindowId),1);
                       io_AppendText(0x6811b0);
                       v10 = v22;
                       v31 = 3;
@@ -330,7 +330,7 @@ label_5a1b81:
                           v2 = 1;
                           d2_SetForm(v6,4);
                           io_AppendText(0x6811b0);
-                          fcn_0046f2c0((*(int *)&d2_CurrentWindowId),1);
+                          d2_ClearWindowChildren((*(int *)&d2_CurrentWindowId),1);
                           fcn_005a0cd0(&v14,v24,v22[v11 * 0x43 + 1],v6,3,0x96,0);
                           fcn_00492d60(&v14,v3,v22[v11 * 0x43 + 1]);
                           fcn_00493000(&v14);

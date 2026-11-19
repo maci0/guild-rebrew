@@ -2,7 +2,7 @@
 
 extern char g_10432c0[];
 
-int __cdecl fcn_00413190(char* p)
+int __cdecl d3_GetContextIndex(char* p)
 {
 	int r;
 

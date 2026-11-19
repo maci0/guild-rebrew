@@ -11,7 +11,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -38,7 +38,7 @@ int __cdecl fcn_0053e420(void)
 
 	result = 0;
 	dialogHandle = fcn_00470820(0, 0, g_68116c);
-	fcn_00471b60(dialogHandle);
+	d2_CenterDialogWindows(dialogHandle);
 	d2_SetForm(dialogHandle, 0);
 	textStart = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca, 0x1acb, 0x1acc);
 	option0 = fcn_00472250(dialogHandle, 0, textStart);

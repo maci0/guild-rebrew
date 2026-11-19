@@ -21,7 +21,7 @@ int __cdecl gm_CheckEntityType(unsigned char*);
 char* __cdecl gm_SearchTable67(int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00500bb0(int*, int, int, int);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 void __cdecl fcn_00546190(char*);
 char* __cdecl fcn_005463a0(int, int, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
@@ -91,12 +91,12 @@ void __cdecl he_AllocTransport(char* a0)
 	    (*(unsigned char*) (query + 0x20) & 1) != 0) {
 		best = second;
 		fbest = 1e8f;
-		fcn_00455350((char*) *(int*) (first + 0x61),
+		d3_TransformPoint((char*) *(int*) (first + 0x61),
 		             (char*) (*(int*) (first + 0x61) + 0x4c), pold);
 		p = (char*) gm_StartFilteredEntitySearch(1, 5, 10);
 		if (p != 0) {
 			do {
-				fcn_00455350((char*) *(int*) (p + 0x61),
+				d3_TransformPoint((char*) *(int*) (p + 0x61),
 				             (char*) (*(int*) (p + 0x61) + 0x4c), pnew);
 				dx = (double) pnew[0] - pold[0];
 				dy = (double) pnew[1] - pold[1];

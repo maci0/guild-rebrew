@@ -15,7 +15,7 @@ unsigned int g_6b5c20 = 0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_00408240(void* p);
 void __cdecl m_FreeTracked(void* p);
-void __cdecl fcn_004030e0(char* e);
+void __cdecl ch_DestroyCharacter(char* e);
 
 void __cdecl fcn_0040bfd0(void)
 {
@@ -38,7 +38,7 @@ void __cdecl fcn_0040bfd0(void)
 	p = ((char**)ch_CharacterSlots);
 	do {
 		if (*p != 0) {
-			fcn_004030e0(*p);
+			ch_DestroyCharacter(*p);
 		}
 		p++;
 	} while ((int) p < (int) &((char**)ch_CharacterSlots)[0x300]);

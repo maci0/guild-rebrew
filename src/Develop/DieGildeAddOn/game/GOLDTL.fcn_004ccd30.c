@@ -9,7 +9,7 @@ extern char g_7f4ca4[];
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl gm_LookupEntityRecordById(int);
-int* __cdecl fcn_004ceac0(char*, char*);
+int* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 
 int __cdecl fcn_004ccd30(char* x, char* out)
 {
@@ -31,7 +31,7 @@ int __cdecl fcn_004ccd30(char* x, char* out)
 				if (e == 0)
 					break;
 			}
-			d = fcn_004ceac0(rec, e);
+			d = gm_FindOrCreateEntitySlot(rec, e);
 			memcpy(d, src, 0x2c);
 			if (d[1] == 0)
 				d[0] = -1;

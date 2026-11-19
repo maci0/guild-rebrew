@@ -20,13 +20,13 @@ extern char g_6753fc[]; /* "bewegung/gehen" */
 
 int __cdecl fcn_00402610(char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-int __cdecl fcn_00407610(char*);
+int __cdecl ch_AdjustHeightToGround(char*);
 int __cdecl fcn_004094c0(char*, int);
-void __cdecl fcn_004098e0(char*, int);
-int __cdecl fcn_00409ae0(char*, int);
-int __cdecl fcn_00409c90(char*, int);
+void __cdecl ch_PlayFootstepSound(char*, int);
+int __cdecl ch_StartWalkAnimation(char*, int);
+int __cdecl ch_UpdateWalkOnPath(char*, int);
 void __cdecl ch_FinishAni(char*);
-void __cdecl fcn_00435500(char*, char*);
+void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl fcn_00433780(void*);
 void __cdecl fcn_00438b40(char*, int*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
@@ -61,11 +61,11 @@ void __cdecl ch_WalkOnPath(char* obj)
 		vfs_ToSlashes(buf);
 		anim = *(char**) (inst + 0x70);
 		if (anim != 0) {
-			fcn_00435500(*(char**) (*(char**) (*(char**) (obj + 0x14) + 0x34) + 0x1ec) + 0xf4,
+			d3_RemoveObjectAnimation(*(char**) (*(char**) (*(char**) (obj + 0x14) + 0x34) + 0x1ec) + 0xf4,
 			             *(char**) (anim + 0x68));
 		}
 		*(char**) (inst + 0x70) = 0;
-		fcn_00407610(obj);
+		ch_AdjustHeightToGround(obj);
 		if (g_6b5c28 != 0) {
 			*(char*) (*(char**) (obj + 0x14) + 0x8c) |= 8;
 		}
@@ -103,7 +103,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 		if (*(unsigned int*) (obj + 0x160) & 0x40) {
 			anim = *(char**) (inst + 0x70);
 			if (anim != 0 && (anim[0x6d] & 0x20) != 0) {
-				fcn_00435500(*(char**) (*(char**) (inst + 0x34) + 0x1ec) + 0xf4,
+				d3_RemoveObjectAnimation(*(char**) (*(char**) (inst + 0x34) + 0x1ec) + 0xf4,
 				             *(char**) (anim + 0x68));
 				fcn_00433780(*(char**) (inst + 0x34));
 				*(int*) (inst + 0x78) = 0;
@@ -128,7 +128,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 				goto _Lj9;
 			}
 		_Lc9:
-			if (!fcn_00409ae0(obj, res)) {
+			if (!ch_StartWalkAnimation(obj, res)) {
 				return;
 			}
 		_Lj9:
@@ -152,13 +152,13 @@ void __cdecl ch_WalkOnPath(char* obj)
 				return;
 			}
 		}
-		cell = fcn_00407610(obj);
-		fcn_004098e0(obj, cell);
+		cell = ch_AdjustHeightToGround(obj);
+		ch_PlayFootstepSound(obj, cell);
 		if (*(float*) (inst + 0x1a4) < g_6629c8) {
 			speed = *(float*) (inst + 0x1a4);
 			*(float*) (inst + 0x1a4) = speed + 0.01f;
 		}
-		if (*(int*) (obj + 0xf4) != 0 && !fcn_00409c90(obj, res)) {
+		if (*(int*) (obj + 0xf4) != 0 && !ch_UpdateWalkOnPath(obj, res)) {
 			return;
 		}
 		if (*(int*) (obj + 0xf4) == 0 &&

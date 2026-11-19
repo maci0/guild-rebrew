@@ -5,7 +5,7 @@
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 
 char* __cdecl ch_QueueWalkToDummy(char*, char*);
-void __cdecl fcn_00425bf0(char*, unsigned int, const char*);
+void __cdecl evt_LogScriptError(char*, unsigned int, const char*);
 int __cdecl evt_ImportCommand(const char*, void*, int, int, ...);
 
 /* ADDRESS: GOLDTL 0x0040cae0 */
@@ -26,7 +26,7 @@ int __cdecl WalkToDummy(char** character, char** dummy)
                 return 1;
             }
         } else {
-            fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118),
+            evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118),
                 "WalkToDummy(): invalid character or dummy");
         }
     }
@@ -37,18 +37,18 @@ int __cdecl WalkToDummy(char** character, char** dummy)
 int __cdecl MoveCharacterCamera(char** character, char** view, int* mode)
 {
     if (*character == 0) {
-        fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118),
+        evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118),
             "MoveCharacterCamera(): Invalid character");
         return 1;
     }
     if (strcmp("CLOSEUP", *view) == 0) {
-        fcn_004056f0(*character, 0, *mode);
+        ch_AnimateCameraView(*character, 0, *mode);
     } else if (strcmp("LEFT_SHOULDER", *view) == 0) {
-        fcn_004056f0(*character, 1, *mode);
+        ch_AnimateCameraView(*character, 1, *mode);
     } else if (strcmp("RIGHT_SHOULDER", *view) == 0) {
-        fcn_004056f0(*character, 2, *mode);
+        ch_AnimateCameraView(*character, 2, *mode);
     } else if (strcmp("EGO", *view) == 0) {
-        fcn_004056f0(*character, 3, *mode);
+        ch_AnimateCameraView(*character, 3, *mode);
     }
     return 0;
 }

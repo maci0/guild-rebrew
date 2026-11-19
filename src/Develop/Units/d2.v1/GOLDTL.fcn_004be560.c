@@ -11,7 +11,7 @@ extern int g_14a79c0[];
 extern char g_679060[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -43,7 +43,7 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 	ret = a2;
 	src = lpGebaeudePROT + (unsigned char) *a0 * 0x24d;
 	a2 = fcn_00470820(0, 0, (char*) 0x6816e8);
-	fcn_00471b60(a2);
+	d2_CenterDialogWindows(a2);
 	d2_SetForm(a2, 4);
 	fcn_00472250(a2, 4, io_AppendText(0x7d));
 	d2_SetForm(a2, 2);

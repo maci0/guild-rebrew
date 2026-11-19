@@ -8,7 +8,7 @@ extern char g_6a3a04[];
 extern char g_6a2300[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_00472250(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -28,7 +28,7 @@ int __cdecl fcn_00539380(void)
 
 	result = 0;
 	h = fcn_00470820(0, 0, g_6a3a04);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d = fcn_00472250(h, 0, 0);
 	mode = *(unsigned char*) &(*(int*)&g_6a375c);
 	*(unsigned char*) &(*(int*)&g_6a375c) = 2;

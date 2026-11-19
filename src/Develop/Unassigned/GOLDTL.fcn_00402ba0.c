@@ -2,7 +2,7 @@
 extern char g_10432c0[];
 
 /* ADDRESS: GOLDTL 0x00402ba0 */
-int __cdecl fcn_00402ba0(int a1, int a2)
+int __cdecl ch_CountCharacters(int a1, int a2)
 {
 	int count;
 	void** p;

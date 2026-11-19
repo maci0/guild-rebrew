@@ -40,7 +40,7 @@ extern char* lpObjektePROT;
 extern int g_14a79c0[];
 
 void* __cdecl fcn_00502cd0(int, int, int, ...);
-void __cdecl fcn_00472880(int);
+void __cdecl d2_SelectFont(int);
 char __cdecl fcn_00443e10(void*, int*);
 void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
 Unit* __cdecl gm_NextEntityQueryMatch(void);
@@ -66,7 +66,7 @@ void __cdecl fcn_005329a0(void)
 			home = ((Player*)g_7746c8)->home;
 		}
 	}
-	fcn_00472880(0x54);
+	d2_SelectFont(0x54);
 	for (u = fcn_00502cd0(home, 1, 5); u != 0; u = gm_NextEntityQueryMatch()) {
 		w = &((Ware*)lpObjektePROT)[u->slot];
 		if (u->model != 0 && w->type != 6 && w->type != 2

@@ -8,7 +8,7 @@ void __cdecl fcn_00596d70(int a0, int a1, int* rect, int w, int n,
                           unsigned int a5);
 void __cdecl ResetDisplayCounters(void);
 int __cdecl fcn_00471f80(int element);
-void __cdecl fcn_00473750(int a1, int a2);
+void __cdecl d2_SetDisplayCounter(int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00596b10 */
 void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
@@ -96,7 +96,7 @@ void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
     do {
         if (*p != -1) {
             value = fcn_00471f80(*p);
-            fcn_00473750(p[-4] + 0xdf, value);
+            d2_SetDisplayCounter(p[-4] + 0xdf, value);
         }
         p += 0xe;
     } while ((int) p < 0x779130);
@@ -105,7 +105,7 @@ void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
     do {
         if (*p != -1) {
             value = fcn_00471f80(*p);
-            fcn_00473750(p[-4] + 0xdf, value);
+            d2_SetDisplayCounter(p[-4] + 0xdf, value);
         }
         p += 0xe;
     } while ((int) p < 0x7798b0);

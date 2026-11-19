@@ -54,9 +54,9 @@ extern char* g_77253c;
 extern char* g_772500;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void* __cdecl fcn_0047bf80(int x, int y, int w, int h, int a5, void* r);
-void __cdecl fcn_0047b9a0(void* p, int r, int g, int b);
-void __cdecl fcn_0047c9c0(int x, int y, int w, int h, int color, float alpha);
+void* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int a5, void* r);
+void __cdecl d2_SetQuadVertexColor(void* p, int r, int g, int b);
+void __cdecl d2_DrawTexturedQuad(int x, int y, int w, int h, int color, float alpha);
 void __cdecl fcn_0047cb60(int x, int y, int a3, int img);
 int __cdecl d2_GetResourceData(int id);
 void __cdecl fcn_0047a040(int a, int b, int c, int d);
@@ -82,18 +82,18 @@ void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
 	int rows;
 
 	if (w->flags & 0x400) {
-		p = fcn_0047bf80(w->x, w->y, w->w, w->h, (int) g_77256c->surface, 0);
+		p = d2_QueueTexturedQuad(w->x, w->y, w->w, w->h, (int) g_77256c->surface, 0);
 		if (p != 0)
-			fcn_0047b9a0(p, 0, 0, 0);
+			d2_SetQuadVertexColor(p, 0, 0, 0);
 	}
 	x0 = w->ml + w->x;
 	y0 = w->mt + w->y;
 	cw = w->w - w->mr - w->ml;
 	ch = w->h - w->mb - w->mt;
 	if (w->flags & 1)
-		fcn_0047c9c0(x0, y0, cw, ch, ((fcn_0046dd60_Pal*)g_77253c)->color, w->alpha);
+		d2_DrawTexturedQuad(x0, y0, cw, ch, ((fcn_0046dd60_Pal*)g_77253c)->color, w->alpha);
 	else if (w->pal != 0)
-		fcn_0047c9c0(x0, y0, cw, ch, w->pal->color, w->alpha);
+		d2_DrawTexturedQuad(x0, y0, cw, ch, w->pal->color, w->alpha);
 	else if (w->img != 0)
 		fcn_0047cb60(w->x - w->sx, w->y - w->sy, dst, w->img);
 	if (w->tex != -1 && (tex = d2_GetResourceData(w->tex)) != 0) {

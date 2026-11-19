@@ -2,7 +2,7 @@
 
 void __cdecl fcn_00473150(int);
 
-void __cdecl fcn_004732f0(void)
+void __cdecl d2_FreeAllSprites(void)
 {
 	int a;
 	int v;

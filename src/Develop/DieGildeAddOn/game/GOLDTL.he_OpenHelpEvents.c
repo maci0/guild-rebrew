@@ -16,7 +16,7 @@ struct helpev {
 extern char g_77e0a0[];
 extern char g_6a3550[];
 
-int __cdecl fcn_0042dc90(char*);
+int __cdecl txt_FindEntryIndex(char*);
 int __cdecl fcn_0064eeec(const char*);
 
 void __cdecl he_OpenHelpEvents(char* name)
@@ -47,7 +47,7 @@ void __cdecl he_OpenHelpEvents(char* name)
 			for (tok = strtok(line, delim); tok != 0; tok = strtok(0, delim)) {
 				if (i == 0) {
 					strcpy(label, tok);
-					((struct helpev*)g_77e0a0)[n].label = fcn_0042dc90(label);
+					((struct helpev*)g_77e0a0)[n].label = txt_FindEntryIndex(label);
 					if (((struct helpev*)g_77e0a0)[n].label == -1) {
 						sprintf(msg, "he_OpenHelpEvents(): invalid textlabel:%s", label);
 					}

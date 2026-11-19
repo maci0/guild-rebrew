@@ -5,8 +5,8 @@ extern Rec7dc6e0 g_7dc6e0[64];
 extern float g_6628c8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00455350(char*, float*, float*);
-int __cdecl fcn_004133e0(char*, float*, float*);
+void __cdecl d3_TransformPoint(char*, float*, float*);
+int __cdecl d3_GetObjectVerticalBounds(char*, float*, float*);
 void __cdecl fcn_00438b40(char*, int*);
 
 /* ADDRESS: GOLDTL 0x00546480 */
@@ -37,12 +37,12 @@ void __cdecl fcn_00546480(char* entity)
 	if (count != 1) {
 		t = 100.0f;
 	}
-	fcn_00455350(entity, (float*) (entity + 0x4c), pos);
-	fcn_004133e0(entity, &lo, &hi);
+	d3_TransformPoint(entity, (float*) (entity + 0x4c), pos);
+	d3_GetObjectVerticalBounds(entity, &lo, &hi);
 	pos[1] = hi;
 	for (i = 0; i < count; i++) {
 		slot = list[i];
-		fcn_004133e0((char*) slot->d, &lo, &hi);
+		d3_GetObjectVerticalBounds((char*) slot->d, &lo, &hi);
 		angle = (float) i * g_6628c8 / (float) count;
 		out[0] = (float) sin(angle) * t + pos[0];
 		out[1] = (hi - lo) * 0.5 + pos[1];

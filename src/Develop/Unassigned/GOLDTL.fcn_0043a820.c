@@ -46,7 +46,7 @@ struct Obj043a820 {
 
 
 void __cdecl fcn_00455450(Obj043a820* o, char* arg, int* p, Vec043a820* out);
-void __cdecl fcn_00438100(Obj043a820* o, char* arg, int z);
+void __cdecl d3_UpdateObjectCameraTransform(Obj043a820* o, char* arg, int z);
 
 char __cdecl fcn_0043a820(Obj043a820* o, char* arg, Vec043a820* out, float* radius)
 {
@@ -72,7 +72,7 @@ char __cdecl fcn_0043a820(Obj043a820* o, char* arg, Vec043a820* out, float* radi
 		}
 		ctx = o->ctx;
 		if (ctx != 0 && ctx->api != 0) {
-			fcn_00438100(o, arg, 0);
+			d3_UpdateObjectCameraTransform(o, arg, 0);
 			b = ctx->api->query(o, ctx, o->ov + 0x48);
 			if (b != 0) {
 				c.x = b->x;

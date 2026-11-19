@@ -3,8 +3,8 @@ extern int g_67a370;
 
 void __cdecl fcn_00438af0(unsigned char a);
 void __cdecl fcn_00438ac0(char* p, int a);
-void __cdecl fcn_00437ac0(int list, char* p, int mask, void(__cdecl* fn)(void));
-void __cdecl fcn_00456df0(void);
+void __cdecl d3_TraverseSceneObjects(int list, char* p, int mask, void(__cdecl* fn)(void));
+void __cdecl d3_ClearAuxSlotState(void);
 
 /* ADDRESS: GOLDTL 0x00438b40 */
 void __cdecl fcn_00438b40(char* p, int* v)
@@ -14,7 +14,7 @@ void __cdecl fcn_00438b40(char* p, int* v)
 	} else {
 		fcn_00438ac0(p, 1);
 	}
-	fcn_00437ac0(g_67a370, p, 0xc0, fcn_00456df0);
+	d3_TraverseSceneObjects(g_67a370, p, 0xc0, d3_ClearAuxSlotState);
 	*(int*) (p + 0x4c) = v[0];
 	*(int*) (p + 0x50) = v[1];
 	*(int*) (p + 0x54) = v[2];

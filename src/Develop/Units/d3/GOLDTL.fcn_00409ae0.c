@@ -18,7 +18,7 @@ struct anim_409ae0 {
 
 extern char g_6b5c28;
 
-void __cdecl fcn_00435500(char*, char*);
+void __cdecl d3_RemoveObjectAnimation(char*, char*);
 #include "Develop/Units/d3/d3_animation.h"
 void __cdecl d3_RemoveObjectAnim(void*);
 void __cdecl fcn_00402aa0(char*);
@@ -30,7 +30,7 @@ void __cdecl m_FreeTracked(void*);
 /* Starts a walk event: removes a pending morph, attaches the walk (or cart
  * pulling) motion and scales its speed to the event's step time. */
 /* ADDRESS: GOLDTL 0x00409ae0 */
-int __cdecl fcn_00409ae0(char* ev, char* step)
+int __cdecl ch_StartWalkAnimation(char* ev, char* step)
 {
 	char* obj;
 	float scale;
@@ -41,7 +41,7 @@ int __cdecl fcn_00409ae0(char* ev, char* step)
 	*(int*) (obj + 0x80) = 0;
 	if (*(int*) (obj + 0x7c) != 0) {
 		sprintf(name, "morph_%i", (int) obj);
-		fcn_00435500(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, name);
+		d3_RemoveObjectAnimation(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, name);
 		morph = d3_FindAnimByName(name);
 		d3_ReleaseAnim(morph, 1);
 		*(int*) (obj + 0x7c) = 0;

@@ -82,7 +82,7 @@ void __cdecl fcn_0052a7d0(void);
 void __cdecl fcn_0052a960(GAME_TIMESTAMP*);
 int* __cdecl fcn_00415310(int);
 void __cdecl fcn_004154e0(int);
-int* __cdecl fcn_00416060(int);
+int* __cdecl d3_CreateSnowEffect(int);
 void __cdecl fcn_004162c0(int);
 void __cdecl fcn_00416300(int*, int, ...);
 void __cdecl fcn_00415510(int*, int, ...);
@@ -159,7 +159,7 @@ void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
 			g_7e4538 = (int) fcn_00415310(maxv);
 		}
 		if (g_7e453c == 0) {
-			g_7e453c = (int) fcn_00416060(maxv);
+			g_7e453c = (int) d3_CreateSnowEffect(maxv);
 		}
 		fcn_00416300((int*) g_7e453c, 2, 0, 0, 3, 0xff);
 		fcn_00416300((int*) g_7e453c, 1, 0, 0);

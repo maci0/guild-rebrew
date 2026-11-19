@@ -51,7 +51,7 @@ int __cdecl evt_ImportCommand(const char* a, void* b, int c, int d, ...)
 	return 0;
 }
 
-int __cdecl fcn_0040c3f0(void)
+int __cdecl ecmd_Dummy(void)
 {
 	return 0;
 }
@@ -61,7 +61,7 @@ int __cdecl fcn_0040c400(void)
 	return 0;
 }
 
-int __cdecl fcn_0040c410(void)
+int __cdecl PrintInt(void)
 {
 	return 0;
 }
@@ -76,12 +76,12 @@ int __cdecl fcn_0040c4c0(void)
 	return 0;
 }
 
-int __cdecl fcn_0040c5a0(void)
+int __cdecl RunScriptString(void)
 {
 	return 0;
 }
 
-int __cdecl fcn_0040c610(void)
+int __cdecl StopScript(void)
 {
 	return 0;
 }

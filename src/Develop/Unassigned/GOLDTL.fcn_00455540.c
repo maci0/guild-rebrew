@@ -4,7 +4,7 @@
 #include "client_scene_transform.h"
 
 struct Node;
-void __cdecl fcn_00455350(struct Node*, float*, float*);
+void __cdecl d3_TransformPoint(struct Node*, float*, float*);
 
 void __cdecl fcn_00455540(char* o, float* v, float* out)
 {
@@ -25,5 +25,5 @@ void __cdecl fcn_00455540(char* o, float* v, float* out)
 	t[0] += *(float*) (o + 0x4c);
 	t[1] += *(float*) (o + 0x50);
 	t[2] += *(float*) (o + 0x54);
-	fcn_00455350((struct Node*) o, t, out);
+	d3_TransformPoint((struct Node*) o, t, out);
 }

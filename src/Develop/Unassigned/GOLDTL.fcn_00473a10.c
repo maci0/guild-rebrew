@@ -7,7 +7,7 @@ char* __cdecl d2_GetResourceData(int idx);
 void __cdecl fcn_00473800(int a, int x, int y, int w, int h);
 
 /* ADDRESS: GOLDTL 0x00473a10 */
-int __cdecl fcn_00473a10(int x, int y)
+int __cdecl d2_DrawMouseCursor(int x, int y)
 {
 	int px;
 	int py;

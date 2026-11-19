@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 
-int __cdecl fcn_004c4dc0(unsigned char* msg, int serial);
+int __cdecl cm_ResolveSpecialEntityId(unsigned char* msg, int serial);
 
 
 int __cdecl fcn_004c8a30(unsigned char* msg, char* done)
@@ -18,7 +18,7 @@ int __cdecl fcn_004c8a30(unsigned char* msg, char* done)
 	unsigned int k;
 	unsigned int off;
 
-	v = fcn_004c4dc0(msg, *(int*) (msg + 0x10));
+	v = cm_ResolveSpecialEntityId(msg, *(int*) (msg + 0x10));
 	{
 		char* x;
 

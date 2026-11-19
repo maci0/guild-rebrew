@@ -7,7 +7,7 @@ typedef struct {
 	unsigned char b2 : 1;
 } S40fe00;
 
-void __cdecl fcn_00425bf0(void*, int, char*);
+void __cdecl evt_LogScriptError(void*, int, char*);
 
 int __cdecl SetBlocked(S40fe00** a1, char* blocked)
 {
@@ -15,7 +15,7 @@ int __cdecl SetBlocked(S40fe00** a1, char* blocked)
 
 	p = *a1;
 	if (p == 0) {
-		fcn_00425bf0(*(void**) 0x6b7e98, *(int*) ((char*) *(void**) 0x6b7e98 + 0x118), (char*) 0x6769e8);
+		evt_LogScriptError(*(void**) 0x6b7e98, *(int*) ((char*) *(void**) 0x6b7e98 + 0x118), (char*) 0x6769e8);
 		return 0;
 	}
 	p->b2 = *blocked;

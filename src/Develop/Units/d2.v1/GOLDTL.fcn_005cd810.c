@@ -8,10 +8,10 @@ extern float g_664e88;
 extern float g_6660d4;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0046f2c0(int, int);
+int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_004e8b80(int, int, char*);
 int __cdecl fcn_004e8cb0(int, int, char*);
 int __cdecl gm_LookupEntityRecordById(int);
@@ -64,7 +64,7 @@ void __cdecl fcn_005cd810(int a0)
 	count = 0;
 	sel2 = 0;
 	dlg = fcn_00470820(0, 0, "special\\amt2");
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	sel = 0;
 	again = 1;
 	for (;;) {
@@ -78,7 +78,7 @@ void __cdecl fcn_005cd810(int a0)
 			d2_SetForm(dlg, 3);
 			io_AppendText(0x6811b0);
 			d2_SetForm(dlg, 1);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			for (i = 0; i < 8; i++) {
 				rec[i].ent = 0;
 				rec[i].h1 = -1;

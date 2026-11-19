@@ -8,7 +8,7 @@ extern char g_7f4ca0[];
 extern char s_6a99f4[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046f740(int, int, int, int);
@@ -22,7 +22,7 @@ int __cdecl fcn_005909d0(int i)
 
 	rec = ((char*)lpGebaeudePROT) + i * 589;
 	dlg = fcn_00470820(0, 0, s_6a99f4);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(0, 1);
 	if (rec[0] != 10) {
 		io_AppendText(0x27, i * 14 + 0x48e, roman[(unsigned char) rec[0x247]]);

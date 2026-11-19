@@ -23,8 +23,8 @@ void __cdecl gv_Free3Fields(char* p);
 void __cdecl fcn_004bdd40(int a);
 int __cdecl fcn_00597ff0(int a1, char* out);
 void __cdecl fcn_00455540(char* object, float* position, float* result);
-int __cdecl fcn_00455350(char* object, char* pos, float* result);
-char __cdecl fcn_004379a0(char* scene, char* node, unsigned int flags, char (__cdecl* cb)(char*, char*), char* ctx);
+int __cdecl d3_TransformPoint(char* object, char* pos, float* result);
+char __cdecl d3_VisitSceneObjects(char* scene, char* node, unsigned int flags, char (__cdecl* cb)(char*, char*), char* ctx);
 char* __cdecl rd_GetBKSize(char* name);
 void __cdecl fcn_004bdfb0(float* ox, float* oy, float* position, char* object, char** context);
 int __cdecl fcn_004bdbe0(int obj, int x, int y, int i, int j);
@@ -110,7 +110,7 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 	pos[2] = 0.0f;
 	fcn_00455540((char*) a0, pos, (float*)(ctx + 0x40));
 	*(int*) (ctx + 0x50) = 0;
-	fcn_004379a0((char*) g_67a370, 0, 0x180, fcn_004bdeb0, ctx);
+	d3_VisitSceneObjects((char*) g_67a370, 0, 0x180, fcn_004bdeb0, ctx);
 	if (*(int*) (ctx + 0x50) == 0) {
 		gv_Free3Fields(g_1005904);
 		return 0;
@@ -228,7 +228,7 @@ line:
 	if (dst == 0) {
 		dst = (char*) a0;
 	}
-	fcn_00455350(dst, dst + 0x4c, pos);
+	d3_TransformPoint(dst, dst + 0x4c, pos);
 	i = 0;
 	j = 0;
 	if (fcn_0045b990(g_1005904, pos, &i, &j, 0) != 0) {

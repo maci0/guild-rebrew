@@ -5,7 +5,7 @@
 char* __cdecl fcn_00401040(char* path);
 char* __cdecl d3_FindAnimByName(const char* name);
 char* __cdecl d3_LoadAnimStream(char* path, char* name, char loop);
-void __cdecl fcn_00435500(char* a, char* b);
+void __cdecl d3_RemoveObjectAnimation(char* a, char* b);
 
 /* ADDRESS: GOLDTL 0x0040eed0 */
 int __cdecl PreloadAnim(char*** arg1, char** arg2)
@@ -32,7 +32,7 @@ int __cdecl PreloadAnim(char*** arg1, char** arg2)
 		opt.reverse = 0;
 		opt.loop = 1;
 		fcn_00434970(*(char**) (obj + 0x1cc), anim, opt);
-		fcn_00435500(*(char**) (obj + 0x1cc), anim);
+		d3_RemoveObjectAnimation(*(char**) (obj + 0x1cc), anim);
 	}
 	return 0;
 }

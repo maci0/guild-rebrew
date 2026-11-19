@@ -21,7 +21,7 @@ extern char g_7f4ca0[];
 int __cdecl fcn_005b0f00(char*);
 int __cdecl fcn_005b10e0(char*);
 void __cdecl fcn_005918f0(char*);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 int __cdecl fcn_00469c30(int, int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl fcn_0046b2b0(int);
@@ -97,7 +97,7 @@ void __cdecl fcn_005b11f0(int* a0)
 			goto check;
 		}
 		e = *(char**) (obj + 0x34);
-		fcn_00455350(e, e + 0x4c, pos);
+		d3_TransformPoint(e, e + 0x4c, pos);
 		x = (float) (((double) pos[0] - *(float*) t) / *(float*) (t + 0x10)
 		    - *(int*) (view + 0x20) * 0.5);
 		x = x * g_6ab3e0;

@@ -40,7 +40,7 @@ typedef struct Sefde0Slot {
 } Sefde0Slot;
 
 extern int g_7731b8[];
-int __cdecl fcn_00500d20(char*, char*);
+int __cdecl gm_GetElapsedMinutes(char*, char*);
 void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_005e9870(Sefde0Entry*);
 int __cdecl fcn_005e9da0(Sefde0Entry*);
@@ -67,7 +67,7 @@ void __cdecl fcn_004efde0(void)
 	float z;
 
 
-	idx = fcn_00500d20((char*) 0x772fe8, (char*) 0x7f4c00);
+	idx = gm_GetElapsedMinutes((char*) 0x772fe8, (char*) 0x7f4c00);
 	if (idx < 0) {
 		idx = 0;
 	}

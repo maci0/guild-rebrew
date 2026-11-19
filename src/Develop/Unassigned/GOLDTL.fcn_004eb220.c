@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004eb220 */
-int __cdecl fcn_004eb220(char* entity)
+int __cdecl gm_CheckZunftPreismanipulation(char* entity)
 {
 	unsigned char kind;
 	int level;

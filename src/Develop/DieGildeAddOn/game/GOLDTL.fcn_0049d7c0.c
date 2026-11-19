@@ -22,7 +22,7 @@ typedef struct F8 {
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
 int __cdecl fcn_004a4fb0(int* a, int* b, char* q, int c);
-int __cdecl fcn_00495400(int kind, int id, int n, Blk24* b1, Blk24* b2);
+int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 
 int __cdecl fcn_0049d7c0(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 {
@@ -60,7 +60,7 @@ int __cdecl fcn_0049d7c0(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 				}
 				b2.b = 1;
 				b2.f = 0.44f;
-				r = fcn_00495400(0x15, *(unsigned short*) e, 1, &b1, &b2);
+				r = ai_SelectBestMethod(0x15, *(unsigned short*) e, 1, &b1, &b2);
 				if (r != 0) {
 					*o1 = b1;
 					*o2 = b2;

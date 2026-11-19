@@ -14,7 +14,7 @@ typedef struct {
 extern int g_7747ac;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00471a30(int, int);
+void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl fcn_00535560(Panel*);
 void __cdecl fcn_00535550(Panel*);
 void __cdecl fcn_00471490(int);
@@ -28,7 +28,7 @@ void __cdecl fcn_005350d0(Panel* p)
 	}
 	for (i = 0; i < p->count; i++) {
 		if (i < p->first || i > p->first + 1) {
-			fcn_00471a30(p->items[i], 0);
+			d2_SetGroupVisibility(p->items[i], 0);
 		}
 	}
 	if (p->owner1 != -1 && d2_CurrentElementId == p->owner1 && g_14ce8cc != 0) {

@@ -17,7 +17,7 @@
  * Returns 1 when a cell was stored through outX/outY.
  */
 
-char __cdecl fcn_0045b920(char*, int, int, float*);
+char __cdecl d3_GridPointToWorld(char*, int, int, float*);
 
 /* ADDRESS: GOLDTL 0x00407e30 */
 char __cdecl fcn_00407e30(char* map, float* from, float* to, int x, int y, int* outX, int* outY, int maxRows, int flags)
@@ -58,7 +58,7 @@ char __cdecl fcn_00407e30(char* map, float* from, float* to, int x, int y, int* 
 		pb[1] = to[1];
 		pb[2] = to[2];
 	} else {
-		fcn_0045b920(map, x, y, pb);
+		d3_GridPointToWorld(map, x, y, pb);
 	}
 	pa[0] = from[0];
 	pa[1] = from[1];
@@ -91,7 +91,7 @@ char __cdecl fcn_00407e30(char* map, float* from, float* to, int x, int y, int* 
 					if (row >= 0 && row < *(int*) (map + 0x20) && col >= 0 && col < *(int*) (map + 0x20)) {
 						type = ((int*) *(int**) (map + 0x24))[(*(int*) (map + 0x20) * row + col) * 7];
 						if (type != 0 && type != 0x0d) {
-							if (fcn_0045b920(map, col, row, p)) {
+							if (d3_GridPointToWorld(map, col, row, p)) {
 								dx = pa[0] - p[0];
 								ey = pa[1] - p[1];
 								ez = pa[2] - p[2];

@@ -8,7 +8,7 @@ typedef struct
 // SIZE 0x8024
 
 void __cdecl fcn_0043bf20(char*);
-int __cdecl fcn_0043f7e0(fcn_0043f9d0_Floor*, char* name, int slot);
+int __cdecl d3_LoadFloorTexture(fcn_0043f9d0_Floor*, char* name, int slot);
 
 /* ADDRESS: GOLDTL 0x0043f9d0 */
 void __cdecl fcn_0043f9d0(fcn_0043f9d0_Floor* o)
@@ -20,6 +20,6 @@ void __cdecl fcn_0043f9d0(fcn_0043f9d0_Floor* o)
 	}
 	fcn_0043bf20((char*) o);
 	for (i = 0; i < 8; i++) {
-		fcn_0043f7e0(o, o->names[i], i);
+		d3_LoadFloorTexture(o, o->names[i], i);
 	}
 }

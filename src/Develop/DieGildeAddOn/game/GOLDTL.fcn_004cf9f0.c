@@ -18,7 +18,7 @@ float __cdecl fcn_004ff040(char*);
 void __cdecl fcn_00417b50(int, int, float, float, float, float);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 int __cdecl fcn_004d4700(void);
-char* __cdecl fcn_0040c230(char*, int (__cdecl*)(void), int, int, int);
+char* __cdecl ch_CreateQueuedAction(char*, int (__cdecl*)(void), int, int, int);
 void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
 unsigned int __cdecl cut_RandMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -38,7 +38,7 @@ int __cdecl fcn_004d4790(char* e)
 	if (fcn_004ff040(e) < 0.05) {
 		fcn_00417b50(*(int*) (*(char**) (e + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
 		ch_CancelActionQueue(*(char**) (e + 0x184));
-		p = fcn_0040c230(*(char**) (e + 0x184), fcn_004d4700, 0x14, 0x36, 1);
+		p = ch_CreateQueuedAction(*(char**) (e + 0x184), fcn_004d4700, 0x14, 0x36, 1);
 		strcpy(p + 0xf0, "kampf/todumfallen");
 		e[8] = 0;
 		*(int*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x220) = 0;
@@ -65,7 +65,7 @@ int __cdecl fcn_004d4790(char* e)
 
 extern unsigned short* g_772e9c;
 
-char __cdecl fcn_00442d50(int, unsigned char);
+char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 
 
 /* ADDRESS: GOLDTL 0x004d4ee0 */
@@ -82,5 +82,5 @@ void __cdecl fcn_004d4ee0(char* e)
 		*(int*) (r + 0xa) = *g_772e9c;
 		*(char**) (o + 0x1ac) = q;
 	}
-	fcn_00442d50((int) q, 0);
+	d3_SetSubtreeVisible((int) q, 0);
 }

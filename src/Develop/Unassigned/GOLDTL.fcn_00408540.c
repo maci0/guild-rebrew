@@ -8,14 +8,14 @@ int __cdecl fcn_00405a50();
 int __cdecl fcn_00407760();
 char __cdecl fcn_00407e30();
 int __cdecl fcn_00408250();
-int __cdecl fcn_00408270();
+int __cdecl ch_WorldToGridCoordinates();
 int __cdecl fcn_004082d0();
 int __cdecl fcn_00408320();
-int __cdecl fcn_00413190();
+int __cdecl d3_GetContextIndex();
 int __cdecl fcn_0041db70();
 int __cdecl fcn_0041ddd0();
 int __cdecl fcn_00421350();
-int __cdecl fcn_0045b920();
+int __cdecl d3_GridPointToWorld();
 char __cdecl fcn_0045b990();
 int __cdecl fcn_0064d228();
 
@@ -62,7 +62,7 @@ int __cdecl fcn_00408540(int a0,int a1,int *a2)
   v27 = a0;
   v13 = 0;
   v28 = *(int *)(a0 + 0x128);
-  v6 = fcn_00413190(*(unsigned int *)(a0 + 0x88));
+  v6 = d3_GetContextIndex(*(unsigned int *)(a0 + 0x88));
   v37 = v6;
   if (*(char *)(v28 + 9) != '-')
     return -1;
@@ -81,8 +81,8 @@ int __cdecl fcn_00408540(int a0,int a1,int *a2)
   fcn_004082d0(v35,*v9,v9[1],((int)g_6b5c5c),&v15,&v14);
   v28 = ((int)g_6b5c5c);
   if (*(int **)(v27 + 0x124))
-    fcn_00408270(v28,**(int **)(v27 + 0x124) + 0x4c,&v17,&v16);
-  fcn_00408270(v28,*(int *)(v27 + 0x34) + 0x4c,&v19,&v18);
+    ch_WorldToGridCoordinates(v28,**(int **)(v27 + 0x124) + 0x4c,&v17,&v16);
+  ch_WorldToGridCoordinates(v28,*(int *)(v27 + 0x34) + 0x4c,&v19,&v18);
   v26 = 0;
   if (a1 <= 0)
     goto label_ret0;
@@ -363,7 +363,7 @@ label_40892d:
       v1 = (float *)(v28 + 0x124);
       v22 = (unsigned int)*(unsigned char *)(*(int *)(v28 + 0xf4) + -1 + *(int *)(v28 + 0xf0) * 2);
       v18 = v13;
-      fcn_0045b920(v13,v23,v22,v1);
+      d3_GridPointToWorld(v13,v23,v22,v1);
       v27 = *(int *)(v28 + 0xf0);
       *v1 = (*(float *)0x6b5c38) + *v1;
       *(float *)(v28 + 0x128) = (*(float *)0x6b5c3c) + *(float *)(v28 + 0x128);

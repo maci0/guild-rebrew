@@ -1,8 +1,8 @@
 void __cdecl fcn_00432120(char*, int*, int, float*, float*);
 void __cdecl fcn_00451340(float*, float*, float, float*);
-void __cdecl fcn_00451900(float*, float*);
+void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
 float* __stdcall fcn_005eb970(float*, const float*, const float*);
-void __cdecl fcn_004519d0(float*, float*);
+void __cdecl d3_MatrixToEulerAngles(float*, float*);
 
 
 /* Samples a model's current animation blend: interpolated position and the
@@ -33,10 +33,10 @@ int __cdecl fcn_004151d0(char* obj, float* pos, float* rot)
 	fcn_00432120(obj, blend, blend[1], pos1, rot1);
 	fcn_00451340(pos0, pos1,
 	    (float) blend[2] / *(int*) (*(char**) (blend[0x1a] + 0x15c) + blend[0] * 0xc0 + 4), pos);
-	fcn_00451900(rot0, m0);
-	fcn_00451900(rot1, m1);
+	d3_BuildEulerRotationMatrix(rot0, m0);
+	d3_BuildEulerRotationMatrix(rot1, m1);
 	fcn_005eb970(m, m0, m1);
-	fcn_004519d0(m, rot);
+	d3_MatrixToEulerAngles(m, rot);
 	return 1;
 }
 /* Layout scaffolding: shifts the next source object to its reference

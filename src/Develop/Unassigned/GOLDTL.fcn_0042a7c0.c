@@ -1,6 +1,6 @@
 
 
-int __cdecl fcn_0042b1c0(int);
+int __cdecl msx_FindSampleHandleIndex(int);
 typedef void (__stdcall* fcn_0042a7c0_f)(int);
 
 int __cdecl fcn_0042a7c0(int a1)
@@ -8,7 +8,7 @@ int __cdecl fcn_0042a7c0(int a1)
 	int r = 0;
 
 	if (*(int*) 0x6b7f90 != 0) {
-		if (fcn_0042b1c0(a1) >= 0) {
+		if (msx_FindSampleHandleIndex(a1) >= 0) {
 			(*(fcn_0042a7c0_f*) 0x6623c0)(a1);
 		} else {
 			r = -1;

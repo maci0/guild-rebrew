@@ -26,7 +26,7 @@ typedef struct Tex {
 extern char* g_104049c;
 extern unsigned int g_10404a0;
 
-Tex* __cdecl fcn_0045cb10(int idx, char kind)
+Tex* __cdecl d3_FindTextureVariant(int idx, char kind)
 {
 	Tex* p;
 	int id;

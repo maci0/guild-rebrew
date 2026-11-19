@@ -28,7 +28,7 @@ extern char g_7728d4;
 
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 int __cdecl fcn_0042d630(const char* name);
-int __cdecl fcn_0042d6b0(const char* name);
+int __cdecl txt_ReloadTextFile(const char* name);
 
 /* ADDRESS: GOLDTL 0x004b1e60 */
 void __cdecl fcn_004b1e60(void)
@@ -48,7 +48,7 @@ void __cdecl fcn_004b1e60(void)
 	hst_HistoryTextBase = -1;
 	g_67fca4 = -1;
 	sprintf(buf, "historie\\text_H_%s", ((char(*)[0x2f4])g_868060)[g_773d75]);
-	if (((Text*)txt_TextBanks)[fcn_0042d630(buf)].x68 == 0 && fcn_0042d6b0(buf) == 0) {
+	if (((Text*)txt_TextBanks)[fcn_0042d630(buf)].x68 == 0 && txt_ReloadTextFile(buf) == 0) {
 		g_7728d4 = 0;
 		return;
 	}

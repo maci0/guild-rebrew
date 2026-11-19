@@ -1,6 +1,6 @@
 #include "Develop/Units/d3/d3_camera.h"
 
-void __cdecl fcn_00438100(char* obj, char* cam, char force);
+void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, char force);
 
 /* ADDRESS: GOLDTL 0x00414ab0 */
 void __cdecl fcn_00414ab0(float* a0, float* a1, char* ent)
@@ -12,7 +12,7 @@ void __cdecl fcn_00414ab0(float* a0, float* a1, char* ent)
 		return;
 	}
 	if (!(*(unsigned char*) (ent + 0x216) & 0x20)) {
-		fcn_00438100(ent, d3_ActiveCamera, 0);
+		d3_UpdateObjectCameraTransform(ent, d3_ActiveCamera, 0);
 	}
 	p = (float*) ((float* (__cdecl*) (char*, char*, int))
 		*(int*) (*(int*) (*(int*) (ent + 0x1cc) + 0x318) + 0x1f0))

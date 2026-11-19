@@ -15,7 +15,7 @@ extern char g_6813dc[];
 
 int __cdecl fcn_004bc7f0(float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
-void __cdecl fcn_0040c120(char*, int, int);
+void __cdecl ch_CreateAction(char*, int, int);
 
 void __cdecl fcn_004bc1e0(AMBIENT_ANIMAL_SLOT* s)
 {
@@ -33,5 +33,5 @@ void __cdecl fcn_004bc1e0(AMBIENT_ANIMAL_SLOT* s)
 	s->kind = 1;
 	*(int*) (s->objekt + 4) = 2;
 	*(int*) (*(char**) (s->objekt + 0x34) + 0x224) = 0;
-	fcn_0040c120(s->objekt, 0x38, 1);
+	ch_CreateAction(s->objekt, 0x38, 1);
 }

@@ -23,7 +23,7 @@ int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c6940(void*, int, void*);
 int __cdecl fcn_004c67c0(int, void*);
 int __cdecl fcn_004cec00(int, int, int*, int*);
-void __cdecl fcn_0045b920(int, int, int, float*);
+void __cdecl d3_GridPointToWorld(int, int, int, float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
@@ -34,12 +34,12 @@ float __cdecl fcn_004cf000(void*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 unsigned int __cdecl cut_RandMod(int);
 int __cdecl fcn_005c6270(void*, int);
-char* __cdecl fcn_004ceac0(char*, char*);
+char* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl fcn_004d1020(char*, char*, char*, int, int);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
 int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
 char* __cdecl fcn_00445600(int, int, int, char*);
-void __cdecl fcn_00455350(char*, float*, float*);
+void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl fcn_004ce270(char*, char*);
 int __cdecl fcn_004c6820(int, void*);
 int __cdecl fcn_004c6680(char*, int, int, char*);
@@ -142,7 +142,7 @@ void __cdecl fcn_004d8d00(char* a0)
 				fcn_004c6940(obj, 6, msg.f);
 				p->timer = fcn_004c6680(be8, v10, v14, 0);
 			} else {
-				fcn_0045b920((int)base, p->f10, p->f14, vec);
+				d3_GridPointToWorld((int)base, p->f10, p->f14, vec);
 				if (!CompareVector3WithinTolerance(vec,
 					(float*)(ent34(obj) + 0x4c), 30.0f))
 					break;
@@ -192,7 +192,7 @@ void __cdecl fcn_004d8d00(char* a0)
 					}
 				} else if (*(int*)(*(int*)(obj + 0x184) + 0x128) == 0
 				    && p->c0c) {
-					fcn_0045b920((int)base, p->f14, p->f18, vec);
+					d3_GridPointToWorld((int)base, p->f14, p->f18, vec);
 					v24 = CompareVector3WithinTolerance(vec,
 					    (float*)((*(int*)(*(int*)(obj + 0x184) + 0x34)) + 0x4c), 120.0f) != 0;
 				}
@@ -270,7 +270,7 @@ void __cdecl fcn_004d8d00(char* a0)
 								break;
 							}
 						}
-						e = fcn_004ceac0((char*)v80, tgt);
+						e = gm_FindOrCreateEntitySlot((char*)v80, tgt);
 						if (*(int*)(e + 8) == -1 || fcn_004c4450(*(int*)(e + 8))) {
 							*(int*)(e + 8) = -1;
 							if (*(int*)(e + 4) == 0) {
@@ -376,7 +376,7 @@ tail1_body:
 					}
 				}
 			}
-			fcn_0045b920((int)base, p->f10, p->f14, vec);
+			d3_GridPointToWorld((int)base, p->f10, p->f14, vec);
 			if (!CompareVector3WithinTolerance(vec,
 				(float*)(ent34(obj) + 0x4c), 50.0f))
 				break;
@@ -405,7 +405,7 @@ tail1_body:
 					n = ent34(obj);
 					p->timer = fcn_004c6680((char*)n, v10, v14, 0);
 				} else {
-					fcn_0045b920((int)base, *((unsigned char*)p + 0x20),
+					d3_GridPointToWorld((int)base, *((unsigned char*)p + 0x20),
 					    *((unsigned char*)p + 0x21), vec);
 					if (!CompareVector3WithinTolerance(vec,
 						(float*)((*(int*)(*(int*)(obj + 0x184) + 0x34)) + 0x4c), 50.0f))
@@ -420,7 +420,7 @@ tail1_body:
 				n = (int)fcn_00445600(0, 0x100, 0,
 				    (char*)(*(int*)(obj + 0x16c) == *(int*)0x772e9c
 					? 0x68bf70 : 0x68bf58));
-				fcn_00455350((char*)n, (float*)(n + 0x4c), vec);
+				d3_TransformPoint((char*)n, (float*)(n + 0x4c), vec);
 				if (!fcn_0045b990(base, (float*)(n + 0x4c), &v10, &v14, &v28))
 					break;
 				if (!fcn_004cec00(v10, v14, &v10, &v14))
@@ -432,7 +432,7 @@ tail1_body:
 				n = (*(int*)(*(int*)(obj + 0x184) + 0x34));
 				p->timer = fcn_004c6680((char*)n, v10, v14, 0);
 			} else if (*((unsigned char*)p + 0x22) == 2) {
-				fcn_0045b920((int)base, *((unsigned char*)p + 0x20),
+				d3_GridPointToWorld((int)base, *((unsigned char*)p + 0x20),
 				    *((unsigned char*)p + 0x21), vec);
 				if (!CompareVector3WithinTolerance(vec,
 					(float*)(ent34(obj) + 0x4c), 50.0f))
@@ -451,7 +451,7 @@ tail1_body:
 			if (!e)
 				goto case4b;
 			v68 = *(int*)(e + 0x204);
-			fcn_00455350(e, (float*)(e + 0x4c), vec);
+			d3_TransformPoint(e, (float*)(e + 0x4c), vec);
 			if (v68) {
 				if (!fcn_004ce270(obj, (char*)v68))
 					goto case4b;
@@ -489,7 +489,7 @@ tail1_body:
 			p->timer = fcn_004c67c0(*(int*)(a0 + 0x10), msg.f);
 			break;
 case4b:
-			fcn_00455350(e, (float*)(e + 0x4c), vec);
+			d3_TransformPoint(e, (float*)(e + 0x4c), vec);
 			if (fcn_004ce270(obj, (char*)*(int*)(e + 0x204))) {
 				if (*((unsigned char*)v68 + 8) != 0
 				    && CompareVector3WithinTolerance(vec,
@@ -517,7 +517,7 @@ case4b:
 				fcn_004c6940(obj, 6, msg.f);
 				p->timer = fcn_004c6680(b118, v10, v14, 0);
 			} else {
-				fcn_0045b920((int)base, p->f10, p->f14, vec);
+				d3_GridPointToWorld((int)base, p->f10, p->f14, vec);
 				if (!CompareVector3WithinTolerance(vec,
 					(float*)(ent34(obj) + 0x4c), 30.0f))
 					break;

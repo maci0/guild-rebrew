@@ -34,7 +34,7 @@ int __cdecl fcn_00475830(const char* name);
 void* __cdecl fcn_004770a0(TexDesc* d, int fmt);
 void __cdecl fcn_00475fd0(void* t);
 void __cdecl fcn_00475a00(const char* name, void* t);
-void __cdecl fcn_00476060(void* t);
+void __cdecl d2_UnlockSurface(void* t);
 
 /* ADDRESS: GOLDTL 0x00475830 */
 int __cdecl fcn_00475830(const char* name)
@@ -87,6 +87,6 @@ void* __cdecl fcn_00475c10(const char* name)
 	}
 	fcn_00475fd0(t);
 	fcn_00475a00(name, t);
-	fcn_00476060(t);
+	d2_UnlockSurface(t);
 	return t;
 }

@@ -13,7 +13,7 @@ Voice* __cdecl fcn_004229b0(void);
 char* __cdecl fcn_00422530(int a, int b);
 void __cdecl fcn_0042a920(int h, int v);
 void __cdecl fcn_0042a9a0(int h, int v);
-void __cdecl fcn_0042aa20(int h, int v);
+void __cdecl msx_SetSampleLoopCount(int h, int v);
 
 Voice* __cdecl fcn_00422460(int a, int b)
 {
@@ -30,7 +30,7 @@ Voice* __cdecl fcn_00422460(int a, int b)
 				v->vol = 0x7f;
 				fcn_0042a920(v->h, 0x7f);
 				fcn_0042a9a0(v->h, v->pan);
-				fcn_0042aa20(v->h, v->loop);
+				msx_SetSampleLoopCount(v->h, v->loop);
 			} else {
 				v = 0;
 			}

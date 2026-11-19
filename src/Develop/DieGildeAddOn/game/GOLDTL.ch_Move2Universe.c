@@ -8,7 +8,7 @@ extern int g_675310;
 void __cdecl ReportClientMessage(const char* msg);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl fcn_00445600(char* a, int b, char* c, char* d);
-void __cdecl fcn_00455350(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe);
 char __cdecl SelectTextureSet(void* obj, void* ctx, unsigned char a, char b);
 #include "Develop/DieGildeAddOn/game/ch_action.h"
@@ -77,7 +77,7 @@ void __cdecl ch_Move2Universe(char* a0)
 			p = fcn_00445600(0, 0x100, 0, name);
 			if (p != 0 || (p = fcn_00445600(0, 0x100, 0, (char*) 0x675908)) != 0
 				|| (p = fcn_00445600(0, 0x100, 0, (char*) 0x675908)) != 0) {
-				fcn_00455350(p, p + 0x4c, (float*) v8);
+				d3_TransformPoint(p, p + 0x4c, (float*) v8);
 				ch_SetPosition(v3, (float*) v8, 0);
 			}
 		}

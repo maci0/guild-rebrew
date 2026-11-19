@@ -1,20 +1,20 @@
 #include <string.h>
 
 extern int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...);
-extern int __cdecl fcn_00435500();
+extern int __cdecl d3_RemoveObjectAnimation();
 extern int __cdecl d3_ReleaseAnim();
 extern int __cdecl d3_FindAnimByName();
 extern int __cdecl d3_RemoveObjectAnim();
-extern int __cdecl fcn_00413190();
+extern int __cdecl d3_GetContextIndex();
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-extern int __cdecl fcn_004032b0();
+extern int __cdecl ch_FindCharacterByName();
 extern char __cdecl fcn_0045b990();
 extern void __cdecl m_FreeTracked(void* ptr);
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern int __cdecl fcn_00407e30();
 extern short __cdecl fcn_00421350();
 extern int __cdecl fcn_00407760();
-extern int __cdecl fcn_0045b920();
+extern int __cdecl d3_GridPointToWorld();
 extern int __cdecl CompareVector3WithinTolerance();
 
 /* Rebuilds one object's render state from its definition record. Native
@@ -39,7 +39,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	obj = *(int*) (a0 + 0x14);
 	if (*(int*) (obj + 0x7c) != 0) {
 		fcn_0064d41a(buf, (char*) 0x67553c, obj);
-		fcn_00435500(*(int*) (*(int*) (obj + 0x34) + 0x1ec) + 0xf4, buf);
+		d3_RemoveObjectAnimation(*(int*) (*(int*) (obj + 0x34) + 0x1ec) + 0xf4, buf);
 		r = d3_FindAnimByName(buf);
 		d3_ReleaseAnim(r, 1);
 		*(int*) (obj + 0x7c) = 0;
@@ -57,13 +57,13 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	h = *(int*) (obj + 0x88);
 	v16 = *(unsigned int*) (rec + 0x30);
 	v17 = *(unsigned int*) (rec + 0x34);
-	n = fcn_00413190(h);
+	n = d3_GetContextIndex(h);
 	if (n != *(int*) (rec + 0x38)) {
 		ch_RemoveQueueEntry((char*) rec);
 		return 0;
 	}
 	if (*(unsigned char*) (rec + 0x160) & 8)
-		*(int*) (rec + 0x110) = fcn_004032b0(rec + 0x114);
+		*(int*) (rec + 0x110) = ch_FindCharacterByName(rec + 0x114);
 	r = fcn_0045b990(a1, *(int*) (*(int*) (rec + 0x14) + 0x34) + 0x4c,
 	    &v15, &v14, small);
 	if (r == 0) {
@@ -124,7 +124,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 	    (void*) *(int*) (rec + 0xf4), a1);
 	*(int*) (rec + 0xf8) = 0;
 	*(int*) (rec + 0xfc) = -1;
-	fcn_0045b920(a1, *(unsigned char*) *(int*) (rec + 0xf4),
+	d3_GridPointToWorld(a1, *(unsigned char*) *(int*) (rec + 0xf4),
 	    ((unsigned char*) *(int*) (rec + 0xf4))[1], (float*) (rec + 0x124));
 	*(float*) (rec + 0x124) = *(float*) 0x6b5c38 + *(float*) (rec + 0x124);
 	*(float*) (rec + 0x128) = *(float*) 0x6b5c3c + *(float*) (rec + 0x128);
@@ -136,7 +136,7 @@ unsigned int __cdecl fcn_004094c0(int a0, int a1)
 		*(int*) (rec + 0x13c) = *(int*) (obj + 0x40);
 	}
 	else {
-		fcn_0045b920(a1, v17, v16, (float*) (rec + 0x134));
+		d3_GridPointToWorld(a1, v17, v16, (float*) (rec + 0x134));
 		*(float*) (rec + 0x124) = *(float*) 0x6b5c38 + *(float*) (rec + 0x124);
 		*(float*) (rec + 0x128) = *(float*) 0x6b5c3c + *(float*) (rec + 0x128);
 		*(float*) (rec + 0x12c) = *(float*) 0x6b5c40 + *(float*) (rec + 0x12c);

@@ -1,5 +1,5 @@
 int __cdecl fcn_0041dd90(void*);
-void __cdecl fcn_00425bf0(void*, int, char*);
+void __cdecl evt_LogScriptError(void*, int, char*);
 
 
 /* ADDRESS: GOLDTL 0x004102a0 */
@@ -10,7 +10,7 @@ int __cdecl SetEmitterAcceleration(void** emitter, int* x, int* y, int* z)
 
     p = (char*) *emitter;
     if (!fcn_0041dd90(p)) {
-        fcn_00425bf0(*(void**) 0x6b7e98,
+        evt_LogScriptError(*(void**) 0x6b7e98,
             *(int*) ((char*) *(void**) 0x6b7e98 + 0x118),
             (char*) 0x676b0c);
         return 0;

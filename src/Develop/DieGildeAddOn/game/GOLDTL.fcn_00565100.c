@@ -13,7 +13,7 @@ void __cdecl fcn_00545780(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_GetOppositeStatIndex(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_00422700(char*);
+int __cdecl sb_FindBankByName(char*);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
 int __cdecl io_AppendText(int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -45,17 +45,17 @@ void __cdecl fcn_00565100(char* u)
 			n = gm_MapEntityStatRange(*(unsigned char*) (h + 0x164));
 			if (h[9] == 0) {
 				if (n <= 0xc) {
-					r = fcn_00422700("BERUF_TRAINING_SPIELER_MAENNLICH");
+					r = sb_FindBankByName("BERUF_TRAINING_SPIELER_MAENNLICH");
 					fcn_004c30a0(-8, r, "BERUF_TRAINING_SPIELER_MAENNLICH", n - 1, 0);
 				} else {
-					r = fcn_00422700("ADDON_BERUF_TRAINING_SPIELER_MAENNLICH");
+					r = sb_FindBankByName("ADDON_BERUF_TRAINING_SPIELER_MAENNLICH");
 					fcn_004c30a0(-8, r, "BERUF_TRAINING_SPIELER_MAENNLICH", n - 0xd, 0);
 				}
 			} else if (n <= 0xc) {
-				r = fcn_00422700("BERUF_TRAINING_SPIELER_WEIBLICH");
+				r = sb_FindBankByName("BERUF_TRAINING_SPIELER_WEIBLICH");
 				fcn_004c30a0(-8, r, "BERUF_TRAINING_SPIELER_WEIBLICH", n - 1, 0);
 			} else {
-				r = fcn_00422700("ADDON_BERUF_TRAINING_SPIELER_WEIBLICH");
+				r = sb_FindBankByName("ADDON_BERUF_TRAINING_SPIELER_WEIBLICH");
 				fcn_004c30a0(-8, r, "BERUF_TRAINING_SPIELER_WEIBLICH", n - 0xd, 0);
 			}
 			io_AppendText(0x159a, *(unsigned short*) h, lvl + 0x1556, n + text, 4);

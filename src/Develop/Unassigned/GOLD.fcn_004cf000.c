@@ -13,7 +13,7 @@ unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl fcn_004c6880(int, int, int);
 char* __cdecl fcn_004ce610(char*);
 int __cdecl fcn_004cef70(int, char*);
-unsigned char __cdecl fcn_00442d50(int, unsigned char);
+unsigned char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl fcn_0043d430(char*, char*, OBJECT_COLOR);
 int __cdecl fcn_004ce270(char*, char*);
 float __cdecl fcn_004ce1b0(char*, char*);
@@ -85,7 +85,7 @@ void __cdecl fcn_004cf000(void)
 				memset(&color, 0, sizeof(color));
 				color.c = 0; color.a = 0x80;
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
-				fcn_00442d50((int) e34, 1);
+				d3_SetSubtreeVisible((int) e34, 1);
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				*(unsigned char*) (e34 + 0x212) &= 0xfd;
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
@@ -112,7 +112,7 @@ void __cdecl fcn_004cf000(void)
 					}
 				}
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
-				fcn_00442d50((int) e34, (unsigned char) found);
+				d3_SetSubtreeVisible((int) e34, (unsigned char) found);
 				if (found) {
 					t = (int) (255.0f - best * 0.01f * 255.0f);
 					memset(&color, 0, sizeof(color));

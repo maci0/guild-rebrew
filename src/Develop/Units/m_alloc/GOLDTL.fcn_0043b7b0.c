@@ -14,7 +14,7 @@ int __cdecl fcn_0043b500(char*);
 char __cdecl fcn_0043b580(char*, int, int, char*);
 
 /* ADDRESS: GOLD 0x0043e970 */
-void __cdecl fcn_0043b7b0(void* r, char* o)
+void __cdecl d3_ReadObjectEvents(void* r, char* o)
 {
 	int n;
 	char val[0x100];

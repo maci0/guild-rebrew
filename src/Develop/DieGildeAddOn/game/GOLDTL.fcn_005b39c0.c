@@ -1,5 +1,5 @@
 int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
-void __cdecl fcn_00472900(int i, int v);
+void __cdecl d2_SetElementFont(int i, int v);
 int __cdecl fcn_005373e0(void* fn, int line);
 int __cdecl io_AppendText(int fmt, ...);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
@@ -43,7 +43,7 @@ void __cdecl fcn_005b39c0(void)
 	int v1c;
 
 	idx = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
-	fcn_00472900(((D2_WIN*)g_1015f40)[idx].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)g_1015f40)[idx].slot, 0x54);
 	if (fcn_005373e0((void*) 0x5b39c0, 0x657c7) != 0) {
 		do {
 			if (g_14ce8e0 != 0) {

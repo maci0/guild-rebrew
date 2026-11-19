@@ -6,7 +6,7 @@ extern int g_6b7d70;
 char* __cdecl fcn_004227c0(void);
 void __cdecl m_FreeTracked(void* p);
 
-int __cdecl fcn_00422910(int need)
+int __cdecl sb_EnsureSampleMemory(int need)
 {
 	char* s;
 

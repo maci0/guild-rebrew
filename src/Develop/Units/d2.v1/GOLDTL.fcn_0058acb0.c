@@ -20,7 +20,7 @@ extern int d2_CurrentElementId;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
@@ -48,7 +48,7 @@ void __cdecl fcn_0058acb0(int unused, char* p)
 	b = *(int*) (p + 0x20);
 	h = fcn_00470820(0, 0, "Locations\\Domizil\\kabinett");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);

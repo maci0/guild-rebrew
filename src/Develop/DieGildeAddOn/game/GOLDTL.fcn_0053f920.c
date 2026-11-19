@@ -28,7 +28,7 @@ void __cdecl fcn_004f6740(void);
 void __cdecl fcn_004fa690(void);
 int __cdecl fcn_0044c310(char*, char*);
 int __cdecl sb_LoadSampleBank(char*, int);
-void __cdecl fcn_00420200(int);
+void __cdecl msx_SetFadeDuration(int);
 void __cdecl fcn_005458b0(void);
 void __cdecl fcn_00533880(void);
 void __cdecl fcn_005338a0(void);
@@ -64,7 +64,7 @@ void __cdecl fcn_0053f920(void)
 		g_7747cc = sb_LoadSampleBank("objekte\\Transporter.sbf", 0);
 		g_6b5c2c = sb_LoadSampleBank("Lebewesen\\schritte.sbf", 1);
 	}
-	fcn_00420200(3000);
+	msx_SetFadeDuration(3000);
 	fcn_005458b0();
 	fcn_00533880();
 	fcn_005338a0();

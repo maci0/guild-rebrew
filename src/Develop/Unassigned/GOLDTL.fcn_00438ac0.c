@@ -6,9 +6,9 @@
 #define CAMERA_HELPER_CALLBACK 0x438a80
 #endif
 
-void __cdecl fcn_004379a0(int, int, int, int, int);
+void __cdecl d3_VisitSceneObjects(int, int, int, int, int);
 
 void __cdecl fcn_00438ac0(int a1, int a2)
 {
-	fcn_004379a0(*(int*) CAMERA_HELPER_LIST, a1, 0x1ff, CAMERA_HELPER_CALLBACK, a2 & 0xff);
+	d3_VisitSceneObjects(*(int*) CAMERA_HELPER_LIST, a1, 0x1ff, CAMERA_HELPER_CALLBACK, a2 & 0xff);
 }

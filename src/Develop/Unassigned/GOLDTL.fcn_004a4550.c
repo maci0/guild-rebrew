@@ -32,7 +32,7 @@ typedef struct Actor {
 extern AM_METHOD g_1008540[];
 
 /* ADDRESS: GOLDTL 0x004a4550 */
-int __cdecl fcn_004a4550(float* s1, float* s2, int idx, Actor* e)
+int __cdecl ai_CalculateMatchingMethodEffects(float* s1, float* s2, int idx, Actor* e)
 {
 	AM_METHOD* t;
 	float k;

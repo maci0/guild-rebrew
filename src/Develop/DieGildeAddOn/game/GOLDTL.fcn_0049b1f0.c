@@ -37,7 +37,7 @@ int __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl fcn_004a5340(char* e, int a, unsigned int* colors, int c, float r, unsigned short* ids);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
-int __cdecl fcn_00495400(int kind, int id, int a3, Msg* b, Msg* a);
+int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 
 /* ADDRESS: GOLDTL 0x0049b1f0 */
 int __cdecl fcn_0049b1f0(int kind, char* e, int busy, Msg* out1, Msg* out2)
@@ -98,7 +98,7 @@ int __cdecl fcn_0049b1f0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 		b.type = 7;
 		b.a = *(int*) (e + 4);
 		b.b = 1;
-		r = fcn_00495400(kind, *(unsigned short*) e, 2, &a, &b);
+		r = ai_SelectBestMethod(kind, *(unsigned short*) e, 2, &a, &b);
 		if (r == 0) {
 			return 0;
 		}
@@ -180,7 +180,7 @@ occupied:
 	b.d = 0x21;
 	r = 0x21;
 	if (i > 1) {
-		r = fcn_00495400(kind, *(unsigned short*) e, 4, &a, &b);
+		r = ai_SelectBestMethod(kind, *(unsigned short*) e, 4, &a, &b);
 		if (r == 0) {
 			return 0;
 		}

@@ -30,6 +30,6 @@ char* __cdecl fcn_004e4a80(char* resource, float* position);
 /* Character camera adapters use a game-object byte view and float vectors. */
 void __cdecl ch_GetCameraView(char* object, int view, float* position, float* rotation);
 void __cdecl ch_SetCameraView(char* object, int view);
-void __cdecl fcn_004056f0(char* object, int view, int mode);
+void __cdecl ch_AnimateCameraView(char* object, int view, int mode);
 
 #endif

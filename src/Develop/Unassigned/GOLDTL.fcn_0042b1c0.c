@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_0042b1c0(int key)
+int __cdecl msx_FindSampleHandleIndex(int key)
 {
 	int i;
 	int j;

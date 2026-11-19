@@ -18,10 +18,10 @@ struct tok_426680 {
 };
 
 int __cdecl _isctype(int, int);
-int __cdecl fcn_004265f0(char*, char*);
-void* __cdecl fcn_004260f0(char*, char*);
-int __cdecl fcn_00426490(char*);
-void* __cdecl fcn_004262b0(char*, char*);
+int __cdecl evt_MatchTokenPrefix(char*, char*);
+void* __cdecl evt_FindSymbol(char*, char*);
+int __cdecl evt_ClassifyScriptType(char*);
+void* __cdecl evt_FindDefinition(char*, char*);
 void* __cdecl fcn_00429e60(char*);
 void* __cdecl fcn_00426240(char*, char*);
 
@@ -77,7 +77,7 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 		if (j < 0x1e) {
 			if (i == start) {
 				for (j = 1; j < 0x1e; j++) {
-					if (fcn_004265f0(s + i, (char*) (0x14cb840 + j * 5))) {
+					if (evt_MatchTokenPrefix(s + i, (char*) (0x14cb840 + j * 5))) {
 						i += (int) strlen((char*) (0x14cb840 + j * 5));
 						break;
 					}
@@ -93,14 +93,14 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 
 	c = buf[0];
 	for (j = 1; j < 9; j++) {
-		if (c == *(char*) (g_14cb3b0 + (j - 1) * 0x10) && fcn_004265f0(buf, (char*) (g_14cb3b0 + (j - 1) * 0x10)) != 0) {
+		if (c == *(char*) (g_14cb3b0 + (j - 1) * 0x10) && evt_MatchTokenPrefix(buf, (char*) (g_14cb3b0 + (j - 1) * 0x10)) != 0) {
 			tok->type = 0xa;
 			tok->u.num = j;
 			return;
 		}
 	}
 	for (j = 1; j < 0x1e; j++) {
-		if (c == *(char*) (0x14cb840 + j * 5) && fcn_004265f0(buf, (char*) (0x14cb840 + j * 5)) != 0) {
+		if (c == *(char*) (0x14cb840 + j * 5) && evt_MatchTokenPrefix(buf, (char*) (0x14cb840 + j * 5)) != 0) {
 			tok->type = 1;
 			tok->u.num = j;
 			if (j == 0xe) {
@@ -138,17 +138,17 @@ void __cdecl fcn_00426680(char* s, struct tok_426680* t)
 			tok->u.num = atoi(buf);
 		}
 	} else {
-		if ((p = fcn_004260f0(evt_CurrentScript, buf)) != 0) {
+		if ((p = evt_FindSymbol(evt_CurrentScript, buf)) != 0) {
 			tok->type = 2;
 			tok->u.sym = p;
 			return;
 		}
-		if ((r = fcn_00426490(buf)) != 0) {
+		if ((r = evt_ClassifyScriptType(buf)) != 0) {
 			tok->type = 8;
 			tok->u.num = r;
 			return;
 		}
-		if ((p = fcn_004262b0(evt_CurrentScript, buf)) != 0) {
+		if ((p = evt_FindDefinition(evt_CurrentScript, buf)) != 0) {
 			tok->type = 3;
 			tok->u.sym = p;
 			return;

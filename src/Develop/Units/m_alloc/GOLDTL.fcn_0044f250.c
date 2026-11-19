@@ -12,7 +12,7 @@ void* __cdecl fcn_0044f190(unsigned int a0);
 char* __cdecl fcn_0064d530(char* dest, char* src, int count);
 void __cdecl fcn_004011f0(void* a0, void* a1);
 void __cdecl fcn_004011a0(void* a0, char* a1);
-void __cdecl fcn_00401180(void* a0, void* a1);
+void __cdecl vfs_ReadByte(void* a0, void* a1);
 void __cdecl fcn_004011d0(void* a0, void* a1);
 void __cdecl fcn_00401280(void* a0, void* a1);
 void* __cdecl fcn_0045c5b0(void* a0, Col44f250 a1, unsigned int a2, unsigned int a3);
@@ -93,7 +93,7 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 				if (*(int*)(v26 + 0x1e4) > 0xfe) {
 					fcn_004011f0(v4, (void*)(v10 + 0x28 + *(int*)(v26 + 0x48)));
 				} else {
-					fcn_00401180(v4, &v15);
+					vfs_ReadByte(v4, &v15);
 					if ((v15 & 0xff) != 0xff) {
 						*(unsigned int*)(v10 + 0x28 + *(int*)(v26 + 0x48)) = v15 & 0xff;
 					} else {
@@ -120,12 +120,12 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 				fcn_004011a0(v4, v16);
 				fcn_004011a0(v4, v17);
 				fcn_004011a0(v4, v18);
-				fcn_00401180(v4, &v19);
-				fcn_00401180(v4, &v20);
-				fcn_00401180(v4, &v21);
-				fcn_00401180(v4, &v22);
-				fcn_00401180(v4, &v23);
-				fcn_00401180(v4, v24);
+				vfs_ReadByte(v4, &v19);
+				vfs_ReadByte(v4, &v20);
+				vfs_ReadByte(v4, &v21);
+				vfs_ReadByte(v4, &v22);
+				vfs_ReadByte(v4, &v23);
+				vfs_ReadByte(v4, v24);
 				*(unsigned int*) &v27 = 0; v27.a = 0xff;
 				if (v19 != 0) {
 					v27.a = v20;

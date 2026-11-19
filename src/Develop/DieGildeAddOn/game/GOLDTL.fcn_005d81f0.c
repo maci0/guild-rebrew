@@ -39,7 +39,7 @@ extern void __cdecl fcn_004c57e0(int, int);
 extern char* __cdecl fcn_005bdc30(int, int*, char*, int, int);
 extern int __cdecl fcn_00470820(int, int, char*);
 extern void __cdecl d2_SetOverlayAnimation(int, int);
-extern void __cdecl fcn_00471b60(int);
+extern void __cdecl d2_CenterDialogWindows(int);
 extern void __cdecl d2_SetForm(int, int);
 extern int __cdecl io_AppendText(int, int, int, int);
 extern int __cdecl fcn_00472250(int, int, int);
@@ -131,7 +131,7 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 	state_ptr = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)];
 	j = fcn_00470820(0, 0, (char*) 0x6acd8c);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(j);
+	d2_CenterDialogWindows(j);
 	d2_SetForm(j, 1);
 	i = io_AppendText(0x1ddd, 5, *(unsigned short*) state_ptr, rec);
 	kid = fcn_00472250(j, 1, i);

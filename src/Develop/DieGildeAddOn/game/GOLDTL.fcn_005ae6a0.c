@@ -13,7 +13,7 @@ int __cdecl fcn_00525f60(char* a1, int a2);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 int __cdecl fcn_00470820(int a1, int a2, char* text);
-void __cdecl fcn_00471b60(int a1);
+void __cdecl d2_CenterDialogWindows(int a1);
 void __cdecl d2_SetOverlayAnimation(int a1, int a2);
 void __cdecl d2_SetForm(int a1, int a2);
 int __cdecl io_AppendText(int a1, int a2, int a3, int a4);
@@ -64,7 +64,7 @@ int __cdecl fcn_005ae6a0(void* a0)
 		p = gm_StartFilteredEntitySearch(1, 1, found);
 	}
 	v8 = fcn_00470820(0, 0, (char*) 0x6ab2b0);
-	fcn_00471b60(v8);
+	d2_CenterDialogWindows(v8);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(v8, 1);
 	v9 = io_AppendText(0x19b9, *(unsigned short*) a0, 3, *(unsigned short*) a0);

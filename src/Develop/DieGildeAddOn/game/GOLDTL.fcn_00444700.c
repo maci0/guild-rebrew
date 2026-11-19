@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00455540(char* o, float* v, float* out);
-void __cdecl fcn_00455350(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl fcn_004518a0(float* v);
 
 
@@ -21,7 +21,7 @@ float __cdecl fcn_00444700(char* obj, float* target)
 	float c;
 
 	fcn_00455540(obj, (float*) 0x662d40, a);
-	fcn_00455350(obj, obj + 0x4c, pos);
+	d3_TransformPoint(obj, obj + 0x4c, pos);
 	a[0] -= pos[0];
 	a[2] -= pos[2];
 	a[1] = 0.0f;

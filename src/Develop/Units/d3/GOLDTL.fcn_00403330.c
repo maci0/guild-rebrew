@@ -5,13 +5,13 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-int __cdecl fcn_00413190(int p);
+int __cdecl d3_GetContextIndex(int p);
 void __cdecl fcn_004432d0(int a, int b);
 void __cdecl d3_RemoveObjectAnim(int h);
 
 void __cdecl fcn_00403870(char* e);
 
-void __cdecl fcn_00403330(unsigned char mode)
+void __cdecl ch_SetLowPolyMode(unsigned char mode)
 {
 	int saved;
 	char** p;
@@ -22,7 +22,7 @@ void __cdecl fcn_00403330(unsigned char mode)
 	do {
 		e = *p;
 		if (e != 0) {
-			fcn_004432d0(fcn_00413190(*(int*) (e + 0x88)), 1);
+			fcn_004432d0(d3_GetContextIndex(*(int*) (e + 0x88)), 1);
 			if (mode == 2) {
 				if (*(int*) (e + 0x22c) != 0) {
 					d3_RemoveObjectAnim(*(int*) (e + 0x22c));

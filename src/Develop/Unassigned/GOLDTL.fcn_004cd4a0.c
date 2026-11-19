@@ -1,5 +1,5 @@
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004030e0(char*);
+void __cdecl ch_DestroyCharacter(char*);
 
 
 /* ADDRESS: GOLDTL 0x004cd4a0 */
@@ -14,7 +14,7 @@ int __cdecl fcn_004cd4a0(char* packet, char* reply)
 	}
 	e = gm_LookupEntityRecordById(*(int*) (packet + 0x10));
 	if (e != 0 && *(char**) (e + 0x184) != 0) {
-		fcn_004030e0(*(char**) (e + 0x184));
+		ch_DestroyCharacter(*(char**) (e + 0x184));
 		*(char**) (e + 0x184) = 0;
 		if (reply != 0)
 			reply[0] = 1;

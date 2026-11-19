@@ -17,7 +17,7 @@ typedef struct
 // SIZE 0x2d
 #pragma pack(pop)
 
-void __cdecl fcn_004f6780(int n, Rec2d* arr)
+void __cdecl d2_SortCrimeRecordsByKind(int n, Rec2d* arr)
 {
 	Rec2d tmp;
 	int i;

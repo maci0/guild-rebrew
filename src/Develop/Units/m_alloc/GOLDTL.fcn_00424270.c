@@ -1,7 +1,7 @@
 #include <string.h>
 
 char* __cdecl m_alloc(int size, char* tag);
-char* __cdecl fcn_00423ac0(int id);
+char* __cdecl sbs_FindSet(int id);
 int* __cdecl fcn_00423c50(int a0, int a1);
 char* __cdecl fcn_00423a10(int a1);
 int __cdecl fcn_00423920(unsigned int a0);
@@ -15,7 +15,7 @@ unsigned int __cdecl fcn_00424270(unsigned int a0, unsigned int a1)
 	char* v3;
 	char* v2;
 
-	v2 = fcn_00423ac0(a0);
+	v2 = sbs_FindSet(a0);
 	if (v2) {
 		if (!fcn_00423c50(a0, a1)) {
 	v3 = fcn_00423a10(a0);

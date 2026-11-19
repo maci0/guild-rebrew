@@ -9,7 +9,7 @@ int __cdecl fcn_0055c0f0(unsigned short*, int);
 int __cdecl fcn_0055c0a0(unsigned short*, int);
 int __cdecl fcn_00579640(unsigned short*, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00472250(int, int, int);
@@ -80,7 +80,7 @@ int __cdecl fcn_005bf9e0(unsigned short* entity)
 		return 0;
 	}
 	hwnd = fcn_00470820(0, 0, (char*) 0x6ac494);
-	fcn_00471b60(hwnd);
+	d2_CenterDialogWindows(hwnd);
 	d2_SetForm(hwnd, 1);
 	d2_SetOverlayAnimation(0, 0);
 	if (entity) {

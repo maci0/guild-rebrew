@@ -13,7 +13,7 @@ char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_00412e50(int, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
@@ -64,7 +64,7 @@ void __cdecl fcn_005a31b0(char* a0)
 					fcn_00471e30(idx);
 				}
 				idx = fcn_00470820(0, 0, "Handel\\Handel_Stadtinfo");
-				fcn_00471b60(idx);
+				d2_CenterDialogWindows(idx);
 				d2_SetForm(idx, 0);
 				win = d2_CurrentWindowId * 0x3cc;
 				*(int*) (win + 0x10162e8) = 0x18;

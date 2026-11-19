@@ -10,8 +10,8 @@ blk24 g_68bef4 = { { 0x7a657073, 0x2f6c6169, 0x686e6965, 0x646e6561, 0x765f6769,
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl fcn_004ce610(char*);
-char* __cdecl fcn_0040c230(char*, void (__cdecl*)(int), int, int, int);
-char* __cdecl fcn_0040c120(char*, int, ...);
+char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(int), int, int, int);
+char* __cdecl ch_CreateAction(char*, int, ...);
 int __cdecl fcn_00406340(char*, char*, int);
 void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 unsigned int __cdecl cut_RandMod(unsigned int);
@@ -101,10 +101,10 @@ make_task:
 		             1);
 	} else {
 		if (*(int*) r == 0) {
-			if (i != 0) task = fcn_0040c230(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 8, 0x2e, 1);
-			else task = fcn_0040c230(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 2, 0x2e, 1);
-		} else if (i != 0) task = fcn_0040c230(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 6, 0x2e, 1);
-		else task = fcn_0040c230(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 2, 0x2e, 1);
+			if (i != 0) task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 8, 0x2e, 1);
+			else task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 2, 0x2e, 1);
+		} else if (i != 0) task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 6, 0x2e, 1);
+		else task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 2, 0x2e, 1);
 		*(float*) (task + 0x178) = 1.4f;
 		*(int**) (task + 0x17c) = ent;
 		*(unsigned short**) (task + 0x180) = rec;
@@ -116,7 +116,7 @@ make_task:
 			p[1] = 0;
 		}
 	}
-	fcn_0040c120(*(char**) ((char*) rec + 0x184), 0x3b,
+	ch_CreateAction(*(char**) ((char*) rec + 0x184), 0x3b,
 	             cut_RandMod(0x1e) + 0x8c);
 check_174:
 	if (*(int*) r != 0x174) {
@@ -126,7 +126,7 @@ block_174:
 	if (p[8] == 0) {
 		goto label_4d84fc;
 	}
-	task = fcn_0040c230(*(char**) ((char*) rec + 0x184),
+	task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184),
 	                    (void (__cdecl*)(int)) 0x4d4d80, 6, 0x2e, 1);
 	*(int**) (task + 0x17c) = ent;
 	*(unsigned short**) (task + 0x180) = rec;
@@ -152,14 +152,14 @@ label_4d84fc:
 	if (*((char*) p + 0x1d) == 0) {
 		return;
 	}
-	task = fcn_0040c230(*(char**) ((char*) rec + 0x184),
+	task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184),
 	                    (void (__cdecl*)(int)) fcn_004d4e30, 5, 0x2e, 1);
 	*(unsigned short**) (task + 0x17c) = rec;
 	*(int*) (task + 0x180) = p[5];
 	*(int*) (task + 0x184) = p[6];
 	*(int*) (task + 0x188) = *(int*) (save + 4);
 	strcpy(task + 0xf0, r + 0x11);
-	fcn_0040c120(*(char**) ((char*) rec + 0x184), 0x3b,
+	ch_CreateAction(*(char**) ((char*) rec + 0x184), 0x3b,
 	             cut_RandMod(0x1e) + 0x8c);
 	fcn_004234e0((char*) g_772ec4, "topfwerfen_s", 1, 0x3f, 0x7f, 0, 0);
 	p[0] = -1;

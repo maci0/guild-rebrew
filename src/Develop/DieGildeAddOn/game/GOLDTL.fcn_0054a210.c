@@ -24,7 +24,7 @@ void __cdecl gm_ResolveEntityById(char**, int, int, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_00500d20(pos14_7f4c00*, pos14_7f4c00*);
+int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00549c50(int, char*, char*, int);
 int __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c4eb0(char*);
@@ -71,7 +71,7 @@ void __cdecl fcn_0054a210(char* a0)
         rec = g_7f4ca0 + *(unsigned short*) (a0 + 0x27) * 0x21c;
         if (rec != 0 && rec != (char*) gm_CityEntity && *(char*) (rec + 8) != 0 && *(char*) (rec + 2) != 0xf) {
             if (*(int*) (o + 0xc0) != 1) {
-                if (fcn_00500d20((pos14_7f4c00*) 0x7f4c00, (pos14_7f4c00*) (o + 0xb0)) >= 1) {
+                if (gm_GetElapsedMinutes((pos14_7f4c00*) 0x7f4c00, (pos14_7f4c00*) (o + 0xb0)) >= 1) {
                     fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 1, 0, 0);
                     fcn_004c5620(0, o);
                     return;

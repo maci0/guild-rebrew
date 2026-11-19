@@ -10,7 +10,7 @@ extern char g_7f4ca0[];
 
 int __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00533dc0(int, int, int);
 int __cdecl fcn_00472830(int, int, int, void*, void*, void*);
@@ -57,7 +57,7 @@ void __cdecl fcn_005a4e00(char* a0)
 	}
 	d2_SetOverlayAnimation(0, 0);
 	h = fcn_00470820(0, 0, (char*) 0x6aac2c);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	fcn_00533dc0(d2_CurrentWindowId, 0x73b, 0x73f);
 	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId,

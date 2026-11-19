@@ -51,7 +51,7 @@ extern unsigned char g_6b8304;
 void __cdecl fcn_00516de0(int, int);
 void __cdecl fcn_004432d0(int, int);
 #include "client_scene_loader.h"
-void __cdecl fcn_00403330(unsigned char);
+void __cdecl ch_SetLowPolyMode(unsigned char);
 void __cdecl fcn_0052ac60(int);
 void __cdecl fcn_0043bbf0(unsigned char);
 void __cdecl fcn_00598510(void);
@@ -108,7 +108,7 @@ void __cdecl fcn_005e22a0(void)
 			((Node**)ch_CharacterSlots)[i]->flags->mirror = g_6752a4;
 		}
 	}
-	fcn_00403330(g_77666b);
+	ch_SetLowPolyMode(g_77666b);
 	(*(Pair*)&g_6a2558) = g_6a2528[g_776669];
 	(*(Pair*)&g_6a2560) = g_6a2540[g_776669];
 	if ((*(unsigned char*)&g_774964)) {

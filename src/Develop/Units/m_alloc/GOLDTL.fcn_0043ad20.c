@@ -12,7 +12,7 @@ void __cdecl fcn_00450cb0(int ctx, unsigned char mask);
 void __cdecl fcn_004509c0(void);
 int __cdecl fcn_00450e90();
 int __cdecl fcn_00451df0();
-int __cdecl fcn_00452bc0();
+int __cdecl d3_RenderSceneList();
 int __cdecl fcn_00456e50();
 int __cdecl fcn_00458bf0();
 int __cdecl fcn_00459530();
@@ -137,7 +137,7 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 		}
 		m_pool_clear(0x6b8064);
 		*(int*) 0x6b8068 = 0;
-		fcn_00452bc0();
+		d3_RenderSceneList();
 		fcn_00437270();
 		if (*(float*) 0x10432a0 == *(float*) 0x662c94) {
 			*(int*) 0x10432a0 = 0;

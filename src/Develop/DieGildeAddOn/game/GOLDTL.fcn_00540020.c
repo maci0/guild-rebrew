@@ -147,7 +147,7 @@ int __cdecl fcn_00567170(void*, int*, int*, int*);
 void* __cdecl fcn_00426cc0(int);
 void __cdecl fcn_00428720(void*);
 void __cdecl fcn_00406120(void*);
-char* __cdecl fcn_0040c120(void*, int, ...);
+char* __cdecl ch_CreateAction(void*, int, ...);
 void __cdecl fcn_004ec660(void*);
 void __cdecl fcn_004c2d90(float, int);
 
@@ -589,7 +589,7 @@ next2:
 			}
 			fcn_00406120(*(char**) (SLOTPTR(i) + 0x184));
 			if (agebits != -1) {
-				char* r = fcn_0040c120(*(char**) (SLOTPTR(i) + 0x184), 0x33, left, cand, agebits);
+				char* r = ch_CreateAction(*(char**) (SLOTPTR(i) + 0x184), 0x33, left, cand, agebits);
 
 				if (r != 0) {
 					r += 0x70;

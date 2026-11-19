@@ -1,7 +1,7 @@
 
 
 
-void __cdecl fcn_0042ad00(void);
+void __cdecl msx_CloseAllStreams(void);
 void __cdecl fcn_0042a760(void);
 void __cdecl fcn_0042a350(void);
 __declspec(dllimport) void __stdcall AIL_shutdown(void);
@@ -12,7 +12,7 @@ int __cdecl msx_ShutdownAIL(void)
 	int r = 0;
 
 	if (g_6b7f90 != 0) {
-		fcn_0042ad00();
+		msx_CloseAllStreams();
 		fcn_0042a760();
 		fcn_0042a350();
 		AIL_shutdown();

@@ -22,15 +22,15 @@ extern char s_6ab5cc[];
 extern char s_6ab588[];
 
 int __cdecl fcn_0046e940(int, int, int, int, int);
-void __cdecl fcn_00472900(int, int);
-void __cdecl fcn_004379a0(char*, int, int, void*, int);
+void __cdecl d2_SetElementFont(int, int);
+void __cdecl d3_VisitSceneObjects(char*, int, int, void*, int);
 int __cdecl io_AppendText(char*, ...);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_005b0f00(char*);
 void __cdecl fcn_0046f280(int);
-void __cdecl fcn_005b3460(void);
+void __cdecl d2_CollectDebugObject(void);
 
 void __cdecl fcn_005b3490(void)
 {
@@ -47,9 +47,9 @@ void __cdecl fcn_005b3490(void)
 	D2_WIN* win;
 
 	w = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
-	fcn_00472900(((D2_WIN*)g_1015f40)[w].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)g_1015f40)[w].slot, 0x54);
 	g_775280 = 0;
-	fcn_004379a0(((char*)g_67a370), 0, 0x100, (void*) fcn_005b3460, 0);
+	d3_VisitSceneObjects(((char*)g_67a370), 0, 0x100, (void*) d2_CollectDebugObject, 0);
 	io_AppendText(s_6ab5f8);
 	io_AppendText(s_6ab5cc);
 	for (i = 0; i < g_775280; i++) {
@@ -57,7 +57,7 @@ void __cdecl fcn_005b3490(void)
 		d2_CurrentWindowId = w;
 		map = *(char**) (((char*)g_67a370) + 0xb0);
 		e = g_778b20[i];
-		fcn_00455350(e, e + 0x4c, v);
+		d3_TransformPoint(e, e + 0x4c, v);
 		if (map != 0 && fcn_0045b990(map, v, &x, &y, &z)) {
 			c = *(int*) (*(char**) (map + 0x24) + (*(int*) (map + 0x20) * y + x) * 28);
 			if (c == 0 || c == 10) {

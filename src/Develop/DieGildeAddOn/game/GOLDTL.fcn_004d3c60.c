@@ -12,7 +12,7 @@ extern float g_6628cc;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 float __cdecl fcn_004ce8b0(char*);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 
 /* ADDRESS: GOLDTL 0x004d3c60 */
 int __cdecl fcn_004d3c60(int id)
@@ -68,7 +68,7 @@ int __cdecl fcn_004d3c60(int id)
 	for (i = 0; i < g_772f08; i++) {
 		if (strstr((char*) *(int*) ((char*) g_9b9e40 + i * 4), "sp_CONQUER")) {
 			ent = *(int*) ((char*) g_9b9e40 + i * 4);
-			fcn_00455350((char*) ent, (char*) (ent + 0x4c), pos);
+			d3_TransformPoint((char*) ent, (char*) (ent + 0x4c), pos);
 			ent = *(int*) (*(int*) ((char*) g_9b9e40 + i * 4) + 0x204);
 			if (ent != 0 && *(int*) (ent + 0x16c) == g_772e9c) {
 				cnt++;

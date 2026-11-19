@@ -53,7 +53,7 @@ extern D2_WIN g_1015f40[0x60];
 
 int __cdecl d2_GetResourceData(int);
 int __cdecl fcn_0046bd00(int, int, int);
-void __cdecl fcn_00472880(int);
+void __cdecl d2_SelectFont(int);
 int __cdecl fcn_0047b620(char*, int);
 int __cdecl fcn_0047cba0(int, int, int, char*, int);
 int __cdecl fcn_0047ccd0(int, int, int, char*, int);
@@ -156,9 +156,9 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 			draw = fcn_0047cd20;
 			back = d2_CurrentFont;
 			if (d2_CurrentFont == 0x55) {
-				fcn_00472880(0x53);
+				d2_SelectFont(0x53);
 			} else if (d2_CurrentFont == 0x56) {
-				fcn_00472880(0x54);
+				d2_SelectFont(0x54);
 			}
 		} else {
 			draw = fcn_0047cba0;
@@ -239,7 +239,7 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 			}
 		}
 		if ((rec->b104 & 0x40) && d2_CurrentFont != back) {
-			fcn_00472880(back);
+			d2_SelectFont(back);
 		}
 	}
 	*(int*) 0x772530 = 0;

@@ -4,7 +4,7 @@ extern char g_14cb980[];
 
 /* ADDRESS: GOLD 0x00426630 */
 /* ADDRESS: GOLDTL 0x00422aa0 */
-char* __cdecl fcn_00422aa0(void)
+char* __cdecl sb_GetLastBank(void)
 {
 	char* p;
 

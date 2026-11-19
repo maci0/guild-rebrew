@@ -1,8 +1,8 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_00443bf0(float, float, int, int); int __cdecl fcn_00442c00(int, int);
+int __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int); int __cdecl fcn_00442c00(int, int);
 int __cdecl fcn_0045bad0(int, int, int, int*, int*);
-char __cdecl fcn_0045b920(int, int, int, float*);
+char __cdecl d3_GridPointToWorld(int, int, int, float*);
 int __cdecl fcn_004cef70(int, int);
 int* __cdecl fcn_004ce610(int);
 int __cdecl fcn_0064f170(char*, char*, int);
@@ -34,7 +34,7 @@ void __cdecl fcn_004d06d0(void)
 		&& d2_CurrentElementId == -1) {
 		x = *(short*) &g_14ce8c0;
 		y = *(short*) &g_14ce8c2;
-		*(int*) &g_7746a4 = fcn_00443bf0((float) x, (float) y, 0x40, 1);
+		*(int*) &g_7746a4 = d3_FindSceneObjectAtScreenPoint((float) x, (float) y, 0x40, 1);
 		if (*(int*) &g_7746a4 != 0 || *(int*) 0x772eb8 == 0) {
 
 
@@ -44,7 +44,7 @@ void __cdecl fcn_004d06d0(void)
 			}
 		}
 		else if ((fcn_0045bad0(v4, x + 0x1a, y + 0x1a, &x, &y) & 0xff) != 0xffffffff) {
-			fcn_0045b920(v4, x, y, buf);
+			d3_GridPointToWorld(v4, x, y, buf);
 			buf[1] = buf[1] + *(float*) 0x6640cc;
 			g_7725c4 = 0;
 		}

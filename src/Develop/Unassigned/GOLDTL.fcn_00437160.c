@@ -25,14 +25,14 @@ extern char g_6b7ffa;
 extern unsigned char g_6b7ffd;
 extern char g_67a2ac;
 
-void __cdecl fcn_00450b20(float a, char* b, int c, int d);
+void __cdecl d3_SetScaledMaterial(float a, char* b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00437160 */
 void __cdecl fcn_00437160(unsigned char fog, int color, char light)
 {
 	((Scene437160Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_00[34])(((D3D_DEVICE_VIEW*)g_6b5de0));
 	((Texture437160Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0);
-	fcn_00450b20(1.0f, &(*(char*)&g_67bbdc), 0, 0);
+	d3_SetScaledMaterial(1.0f, &(*(char*)&g_67bbdc), 0, 0);
 	g_1052bd8 = 1.0f;
 	g_1052bdc = 0;
 	g_1052c40 = 0;

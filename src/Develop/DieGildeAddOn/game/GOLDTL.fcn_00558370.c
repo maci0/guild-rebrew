@@ -4,10 +4,10 @@ extern volatile int g_6b7fac;
 
 extern int __cdecl gm_ResolveEntityById(void **a0, int a1, int a2, int a3);
 extern void __cdecl fcn_004432d0(int a0, int a1);
-extern void __cdecl fcn_00455350(int a0, int a1, float *a2);
+extern void __cdecl d3_TransformPoint(int a0, int a1, float *a2);
 extern float __cdecl fcn_004514d0(float *a0, float *a1);
 extern int __cdecl fcn_00442910(int a0, float *a1, float *a2, char *a3);
-extern void __cdecl fcn_00412f10(int a0, char *a1, int a2);
+extern void __cdecl d3_ApplyObjectAnimation(int a0, char *a1, int a2);
 
 typedef struct
 {
@@ -62,11 +62,11 @@ int __cdecl fcn_00558370(int a0)
             goto fail;
         if (*(int *)(v3 + 0xc4) == 0)
         {
-            fcn_00455350(*(int *)(v6 + 0x61), *(int *)(v6 + 0x61) + 0x4c,
+            d3_TransformPoint(*(int *)(v6 + 0x61), *(int *)(v6 + 0x61) + 0x4c,
                 &cur.x);
             cur.y = cur.y + *(float *)(*(int *)(*(int *)(*(int *)(v6 + 0x61)
                 + 0x1cc) + 0x318) + 0x1d4) + 80.0f;
-            fcn_00455350(*(int *)(v5 + 0x61), *(int *)(v5 + 0x61) + 0x4c,
+            d3_TransformPoint(*(int *)(v5 + 0x61), *(int *)(v5 + 0x61) + 0x4c,
                 &pos.x);
             pos.y = pos.y + *(float *)(*(int *)(*(int *)(*(int *)(v5 + 0x61)
                 + 0x1cc) + 0x318) + 0x1d4) + 80.0f;
@@ -86,7 +86,7 @@ int __cdecl fcn_00558370(int a0)
             cur.x = *(float *)(v3 + 0xd0);
             cur.y = *(float *)(v3 + 0xd4);
             cur.z = *(float *)(v3 + 0xd8);
-            fcn_00455350(*(int *)(v5 + 0x61), *(int *)(v5 + 0x61) + 0x4c,
+            d3_TransformPoint(*(int *)(v5 + 0x61), *(int *)(v5 + 0x61) + 0x4c,
                 &pos.x);
             pos.y = pos.y + *(float *)(*(int *)(*(int *)(*(int *)(v5 + 0x61)
                 + 0x1cc) + 0x318) + 0x1d4) + 80.0f;
@@ -108,7 +108,7 @@ int __cdecl fcn_00558370(int a0)
         *(unsigned char *)(v5 + 0x214) = *(unsigned char *)(v5 + 0x214) & 0x7f;
         *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x216) = *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x216) | 3;
         *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x217) = *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x217) & 0xfe;
-        fcn_00412f10(*(int *)(v3 + 0xc8), (char *)0x6a5fb4, 1);
+        d3_ApplyObjectAnimation(*(int *)(v3 + 0xc8), (char *)0x6a5fb4, 1);
         *(int *)(v3 + 0xec) = g_6b7fac;
         fcn_004432d0(v2, 1);
         return 1;

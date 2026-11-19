@@ -25,7 +25,7 @@ typedef struct BlitSurf {
 } BlitSurf;
 
 int __cdecl fcn_00475fd0(BlitSurf* s);
-int __cdecl fcn_00476060(BlitSurf* s);
+int __cdecl d2_UnlockSurface(BlitSurf* s);
 int __cdecl fcn_00476120(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst);
 int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst, int unused);
 
@@ -84,10 +84,10 @@ int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int 
 	if (dstLocked)
 		fcn_00475fd0(dst);
 	else
-		fcn_00476060(dst);
+		d2_UnlockSurface(dst);
 	if (srcLocked)
 		fcn_00475fd0(src);
 	else
-		fcn_00476060(src);
+		d2_UnlockSurface(src);
 	return 1;
 }

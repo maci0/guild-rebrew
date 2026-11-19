@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x004f5910 */
-int __cdecl fcn_004f5910(int a, int b)
+int __cdecl cm_HasStraftatEntry(int a, int b)
 {
 	int found;
 	int* p;

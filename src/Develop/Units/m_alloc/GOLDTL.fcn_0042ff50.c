@@ -41,7 +41,7 @@ extern char g_file_extension_names[]; extern int g_6b7fec;
 extern char g_6b7fe4[];
 char* __cdecl strupr(char*);
 char __cdecl vfs_MakeDirs(char*, struct VFS_DIR*);
-void __cdecl fcn_0042ed00(char*, struct VFS_DIR*, int, int, int, int, int);
+void __cdecl vfs_AddFilePath(char*, struct VFS_DIR*, int, int, int, int, int);
 void __cdecl ReportClientMessage(char*);
 int __cdecl sprintf(char*, const char*, ...);
 
@@ -181,7 +181,7 @@ opened:
 			if (!vfs_MakeDirs(entry, root))
 				return 0;
 			if (!file) {
-				fcn_0042ed00(name, root, 0, 0, 0, 0, -1);
+				vfs_AddFilePath(name, root, 0, 0, 0, 0, -1);
 				file = (VFS_FILE_42ff50*) vfs_LookupPath(name, root, &dir);
 			}
 		}

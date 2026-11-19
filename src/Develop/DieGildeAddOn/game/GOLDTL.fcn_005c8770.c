@@ -19,7 +19,7 @@ extern char s_6ac850[];
 extern char s_6ac848[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 
@@ -36,7 +36,7 @@ void __cdecl fcn_005c8770(unsigned char* a)
 
 	t = &((Shop*)lpGebaeudePROT)[a[0]];
 	dlg = fcn_00470820(0x3c, 0, s_6ac850);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 2);
 	io_AppendText((int) s_6ac848, a);
 	d2_SetForm(dlg, 1);

@@ -27,11 +27,11 @@ typedef struct Msg {
 } Msg;
 
 void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
-int __cdecl fcn_00495400(int kind, int id, int a3, Msg* a, Msg* b);
+int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* a, Msg* b);
 int __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x0049a880 */
-int __cdecl fcn_0049a880(int kind, char* e, int busy, Msg* out1, Msg* out2)
+int __cdecl ai_StartEducationObject(int kind, char* e, int busy, Msg* out1, Msg* out2)
 {
 	Slot slots[4];
 	Msg m2;
@@ -79,7 +79,7 @@ int __cdecl fcn_0049a880(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				m2.type = 7;
 				m2.a = *(int*) (e + 4);
 				m2.b = 1;
-				result = fcn_00495400(who, *(unsigned short*) e, 2, &m1, &m2);
+				result = ai_SelectBestMethod(who, *(unsigned short*) e, 2, &m1, &m2);
 				if (result != 0) {
 					*out1 = m1;
 					*out2 = m2;

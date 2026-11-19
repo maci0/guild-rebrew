@@ -15,7 +15,7 @@ typedef struct
 void __cdecl fcn_004bd150(fcn_004bceb0_Entry* tab);
 
 /* ADDRESS: GOLDTL 0x004bceb0 */
-void __cdecl fcn_004bceb0(fcn_004bceb0_Entry* tab)
+void __cdecl plt_UpdatePlantStages(fcn_004bceb0_Entry* tab)
 {
 	unsigned char* r;
 	int i;

@@ -20,7 +20,7 @@ extern char s_67d7d0[];
 
 void __cdecl fcn_00475fd0(void*);
 int __cdecl fcn_00476b10(int x, int y, unsigned char r, unsigned char g, unsigned char b, void* s);
-void __cdecl fcn_00476060(void*);
+void __cdecl d2_UnlockSurface(void*);
 
 /* ADDRESS: GOLDTL 0x0046e7a0 */
 void __cdecl d2_SetBackgroundTexture(const char* name, int win)

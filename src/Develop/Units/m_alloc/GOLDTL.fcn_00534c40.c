@@ -11,7 +11,7 @@ extern int __cdecl fcn_00442910(int a0, int a1, int a2, int a3);
 extern int __cdecl fcn_00471170(int a0, int a1, int a2);
 extern void __cdecl fcn_004713b0(int a0, char *a1, char *a2);
 extern void __cdecl fcn_00471490(int a0);
-extern void __cdecl fcn_00471a30(int a0, int a1);
+extern void __cdecl d2_SetGroupVisibility(int a0, int a1);
 extern void __cdecl fcn_00436f70(int a0);
 extern void __cdecl fcn_004234e0(int a0, char *a1, int a2, int a3, int a4, int a5, int a6);
 
@@ -93,7 +93,7 @@ int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
         }
         fcn_00471490(*v10);
         if (v5 > 2)
-            fcn_00471a30(*v10, 0);
+            d2_SetGroupVisibility(*v10, 0);
         v10 = v10 + 1;
         if (v5 <= v4)
             goto finish;

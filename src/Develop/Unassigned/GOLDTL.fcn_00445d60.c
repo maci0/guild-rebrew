@@ -5,7 +5,7 @@ typedef struct Rec {
 	int v[14];
 } Rec;
 
-char __cdecl fcn_00445d60(char* o, int i)
+char __cdecl d3_SaveObjectKeyframe(char* o, int i)
 {
 	if (i >= 0 && i < 7 && *(Rec**) (o + 0x1e8) != 0) {
 		(*(Rec**) (o + 0x1e8))[i].v[10] = *(int*) (o + 0x90);

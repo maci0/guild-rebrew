@@ -3,7 +3,7 @@
 extern char g_7f4ca0[];
 
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
-int __cdecl fcn_00495400(int who, int idx, int arg, int* out1, int* out2);
+int __cdecl ai_SelectBestMethod(int who, int idx, int arg, int* out1, int* out2);
 int __cdecl fcn_004aa7c0(char* e, int* a, int* b);
 float __cdecl fcn_00507e70(char* a, char* b, int c);
 double __cdecl gm_RandomFloat01(void);
@@ -56,7 +56,7 @@ int __cdecl ai_StartDrohen(int a0, unsigned short* a1, int a2, int* a3, int* a4)
 		v8[1] = *(int*) (*(char**) (p + 0x170) + 1);
 		v8[2] = 1;
 	}
-	v5 = fcn_00495400(0x28, *a1, 1, v7, v8);
+	v5 = ai_SelectBestMethod(0x28, *a1, 1, v7, v8);
 	goto done;
 retry:
 	memset(v7, 0, sizeof(v7));
@@ -76,7 +76,7 @@ retry:
 	*(unsigned char*) v8 = 0;
 	v8[1] = 0;
 	v8[2] = 0;
-	v5 = fcn_00495400(0x28, *a1, 0, v7, v8);
+	v5 = ai_SelectBestMethod(0x28, *a1, 0, v7, v8);
 done:
 	if (v5 == 0) {
 		return 0;

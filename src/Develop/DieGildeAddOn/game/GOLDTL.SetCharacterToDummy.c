@@ -5,11 +5,11 @@
 
 extern float g_662d40[3];
 extern char* evt_CurrentScript;
-void __cdecl fcn_00455350(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl fcn_00455140(char* src, float* v, float* out);
 float __cdecl fcn_00451380(float* a, float* b);
 void __cdecl fcn_00438cb0(char* h, float* v);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl SetCharacterToDummy(char** a, char** b)
 {
@@ -18,10 +18,10 @@ int __cdecl SetCharacterToDummy(char** a, char** b)
 	float p[4];
 
 	if (*a == 0 || *b == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 1;
 	}
-	fcn_00455350(*b, *b + 0x4c, p);
+	d3_TransformPoint(*b, *b + 0x4c, p);
 	ch_SetPosition(*a, p, 1);
 	v[0] = 0.0f;
 	v[1] = 0.0f;

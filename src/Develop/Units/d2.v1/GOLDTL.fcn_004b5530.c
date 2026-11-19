@@ -9,7 +9,7 @@ extern int g_100f1dc;
 
 char* __cdecl fcn_004b3c50(int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -28,7 +28,7 @@ void __cdecl fcn_004b5530(int a1, int flags)
 
 	r = fcn_004b3c50(a1);
 	h = fcn_00470820(0, 0, g_681130);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(*(int*) (r + 8) + 1);
 	io_AppendText((int) g_68112c);

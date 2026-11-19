@@ -14,7 +14,7 @@ int __cdecl fcn_00470820(char *, int, int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_004e4730(char *);
-int __cdecl fcn_00420780(char *, int);
+int __cdecl msx_StartAmbientTrack(char *, int);
 int __cdecl fcn_004fda30(int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 int __cdecl fcn_004e44b0(char *, char *);
@@ -28,7 +28,7 @@ void __cdecl fcn_004da510(int, int, int);
 int __cdecl fcn_004e4b40(int, ...);
 int __cdecl io_AppendText(char *, ...);
 unsigned int __cdecl cut_RandMod(unsigned int, ...);
-int __cdecl fcn_0046f2c0(int, int);
+int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_004e51d0(unsigned int *, void *);
 int __cdecl fcn_004e9180(void *, int);
 int __cdecl fcn_004e8240(unsigned char, unsigned char *, unsigned char *, int, int);
@@ -44,7 +44,7 @@ void __cdecl fcn_004da4d0(int, void *);
 
 int __cdecl fcn_004ea350(void);
 int __cdecl fcn_004e4b00(int);
-void __cdecl fcn_00420840(int);
+void __cdecl msx_StopAmbientTrack(int);
 int __cdecl fcn_004e4eb0(void);
 void __cdecl fcn_0057e880(int, int, int, int);
 
@@ -276,7 +276,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
     if (s1C != 0) {
         fcn_004e4730(sitzung[s30]);
         if (s2C == 0)
-            s2C = fcn_00420780((char *)0x68c1d0, 0x40);
+            s2C = msx_StartAmbientTrack((char *)0x68c1d0, 0x40);
         for (i = 0; i < s44; i++) {
             s04 = fcn_004fda30((int)*(unsigned short *)blkA.s84[i]);
             if (s04 != 0)
@@ -339,7 +339,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                               *(unsigned short *)s18, *(unsigned short *)s10);
                 fcn_004e4de0(0x9c4);
                 fcn_004727a0(s5C, 0);
-                fcn_0046f2c0(*(int *)0x772514, 1);
+                d2_ClearWindowChildren(*(int *)0x772514, 1);
                 if (k > 0) {
                     int *lane;
                     s08 = (0x320 - *(short *)(*(int *)0x772500 + 0x1ebd8) * k) / (k + 1);
@@ -509,7 +509,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
     if (s2C != 0 && s3C == 0) {
             fcn_004e4730(sitzung[s30]);
             if (s2C == 0)
-                s2C = fcn_00420780((char *)0x68c1d0, 0x40);
+                s2C = msx_StartAmbientTrack((char *)0x68c1d0, 0x40);
             for (i = 0; i < s44; i++) {
                 s04 = fcn_004fda30((int)*(unsigned short *)blkA.s84[i]);
                 if (s04 != 0)
@@ -607,7 +607,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                     }
                     fcn_004e4de0(0x9c4);
                     fcn_004727a0(s38, 0);
-                    fcn_0046f2c0(*(int *)0x772514, 1);
+                    d2_ClearWindowChildren(*(int *)0x772514, 1);
                     if (rs20 > 0) {
                         s08 = (0x320 - *(short *)(*(int *)0x772500 + 0x1ebd8) * rs20) / (rs20 + 1);
                         i = 0;
@@ -819,7 +819,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
     fcn_004e4b00(s34);
     fcn_004e4b00(s38);
     if (s2C != 0)
-        fcn_00420840(s2C);
+        msx_StopAmbientTrack(s2C);
     fcn_004e4eb0();
     memcpy(a0, a0c, 0x114);
     fcn_0057e880(0x30, 0, 0, 0);

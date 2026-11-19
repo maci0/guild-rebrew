@@ -17,7 +17,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 CH_ACTION* __cdecl ch_NewAction(char* e);
 
-CH_ACTION* __cdecl fcn_0040c230(char* e, void (__cdecl* done)(CH_ACTION* t), unsigned char level, int kind, ...)
+CH_ACTION* __cdecl ch_CreateQueuedAction(char* e, void (__cdecl* done)(CH_ACTION* t), unsigned char level, int kind, ...)
 {
 	CH_ACTION* t;
 	va_list ap;

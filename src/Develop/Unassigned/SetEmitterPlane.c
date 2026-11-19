@@ -1,7 +1,7 @@
 
 
 int __cdecl fcn_0041dd90(void* p);
-void __cdecl fcn_00425bf0(void* vm, int line, char* file);
+void __cdecl evt_LogScriptError(void* vm, int line, char* file);
 
 /* ADDRESS: GOLDTL 0x00410380 */
 int __cdecl SetEmitterPlane(void** pp, int* normalX, int* normalY, int* normalZ, int* distance)
@@ -13,7 +13,7 @@ int __cdecl SetEmitterPlane(void** pp, int* normalX, int* normalY, int* normalZ,
 
 	obj = *pp;
 	if (!fcn_0041dd90(obj)) {
-		fcn_00425bf0(*(void**) 0x6b7e98,
+		evt_LogScriptError(*(void**) 0x6b7e98,
 			*(int*) ((char*) *(void**) 0x6b7e98 + 0x118), (char*) 0x676b64);
 		return 0;
 	}

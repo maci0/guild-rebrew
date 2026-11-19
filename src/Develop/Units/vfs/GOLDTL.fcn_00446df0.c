@@ -25,7 +25,7 @@ void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* roo
 int __cdecl fcn_004011f0(void* stream, void* dst);
 int __cdecl fcn_004011d0(void* stream, void* dst);
 void __cdecl fcn_00401280(void* stream, void* dst);
-int __cdecl fcn_00401180(void* stream, void* dst);
+int __cdecl vfs_ReadByte(void* stream, void* dst);
 int __cdecl fcn_00446ca0(int);
 void __cdecl fcn_00438920(float, float, int);
 void __cdecl rd_object(void*, int, int, int);
@@ -74,10 +74,10 @@ void __cdecl fcn_00446df0(const char* name, void* stream)
 				fcn_004011d0(s, &((Slot*)g_1041d80)[i].pal[k].f8);
 			}
 		}
-		fcn_00401180(s, &more);
+		vfs_ReadByte(s, &more);
 		while (more) {
 			rd_object(s, 0, ver, 0);
-			fcn_00401180(s, &more);
+			vfs_ReadByte(s, &more);
 		}
 	}
 	if (stream == 0) {

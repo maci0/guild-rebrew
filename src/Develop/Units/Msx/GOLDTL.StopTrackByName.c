@@ -9,7 +9,7 @@ void __cdecl StopTrackByName(const char* name, int a2)
 		p = FindTrackByName(name);
 		LeaveCriticalSection(&msx_TrackLock);
 		if (p != 0) {
-			fcn_00420120(p, a2);
+			msx_StopTrack(p, a2);
 		}
 	}
 }

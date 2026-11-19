@@ -40,8 +40,8 @@ void __cdecl fcn_005392a0(char* name, int net)
 	fcn_004432d0(0, 0);
 	fcn_00442e30();
 	if (fcn_0051e070() == 0) {
-		fcn_00448360("scenes/*ChooseCity.ed3", 0, 0);
+		d3_LoadScene("scenes/*ChooseCity.ed3", 0, 0);
 	} else {
-		fcn_00448360("scenes/*ChooseCity_Europa.ed3", 0, 0);
+		d3_LoadScene("scenes/*ChooseCity_Europa.ed3", 0, 0);
 	}
 }

@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 #include "Develop/Units/d3/d3_animation.h"
 char* __cdecl fcn_00401040(char* path);
-void __cdecl fcn_00425bf0(char* script, unsigned int position, const char* message);
+void __cdecl evt_LogScriptError(char* script, unsigned int position, const char* message);
 
 /* ADDRESS: GOLDTL 0x0040eff0 */
 int __cdecl AttachAnimLooped(char** character, char** animation, int* kind)
@@ -59,7 +59,7 @@ int __cdecl AttachAnimLooped(char** character, char** animation, int* kind)
         options.reverse = 0;
         options.loop = 1;
         if (fcn_00434970(*(char**) (object + 0x1cc), name, options) == 0) {
-            fcn_00425bf0(evt_CurrentScript, *(unsigned int*) (evt_CurrentScript + 0x118),
+            evt_LogScriptError(evt_CurrentScript, *(unsigned int*) (evt_CurrentScript + 0x118),
                 "AttachAnimLooped(): Could not find animation-file...");
         }
     }

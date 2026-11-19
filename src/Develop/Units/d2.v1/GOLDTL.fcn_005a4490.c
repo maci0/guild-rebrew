@@ -24,7 +24,7 @@ void __cdecl fcn_0046f280(int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471af0(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -70,7 +70,7 @@ void __cdecl fcn_005a4490(char* p)
 		rows[i].line = 0;
 	}
 	dialog = fcn_00470820(0, 0, "locations\\geldleihe\\geldleihe_kreditaufnehmen");
-	fcn_00471b60(dialog);
+	d2_CenterDialogWindows(dialog);
 	d2_SetForm(dialog, 0);
 	arg = d2_CurrentWindowId * 0x3cc;
 	*(int*) (arg + 0x10162e8) = 0x18;

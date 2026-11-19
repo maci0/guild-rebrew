@@ -45,7 +45,7 @@ void __cdecl fcn_004e4730(char* a1)
 		s = fcn_00413160();
 		fcn_004432d0(s, 0);
 		fcn_0064d41a(buf, "scenes/*%s", a1);
-		fcn_00448360(buf, 0, 0);
+		d3_LoadScene(buf, 0, 0);
 		fcn_004432d0(0, 1);
 		fcn_004432d0(s, 0);
 	}

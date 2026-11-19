@@ -1,7 +1,7 @@
-int __cdecl fcn_0046f2c0();
+int __cdecl d2_ClearWindowChildren();
 int __cdecl fcn_0046f740();
 int __cdecl fcn_00471af0();
-int __cdecl fcn_00471b60();
+int __cdecl d2_CenterDialogWindows();
 int __cdecl fcn_00471e30();
 int __cdecl fcn_00472250();
 int __cdecl d2_SetForm();
@@ -36,9 +36,9 @@ int __cdecl fcn_005a1130(char* a0, int window)
 	int y;
 
 	d2_SetForm(window, 2);
-	fcn_0046f2c0(*(int*) &d2_CurrentWindowId, 1);
+	d2_ClearWindowChildren(*(int*) &d2_CurrentWindowId, 1);
 	d2_SetForm(window, 3);
-	fcn_0046f2c0(*(int*) &d2_CurrentWindowId, 1);
+	d2_ClearWindowChildren(*(int*) &d2_CurrentWindowId, 1);
 	self = a0;
 
 	if (*(unsigned char*) (*(char**) (self + 0xc) + 2) == 6) {
@@ -102,7 +102,7 @@ int __cdecl fcn_005a1130(char* a0, int window)
 	}
 
 	d2_SetForm(window, 4);
-	fcn_0046f2c0(*(int*) &d2_CurrentWindowId, 1);
+	d2_ClearWindowChildren(*(int*) &d2_CurrentWindowId, 1);
 	if ((*(int*) (self + 8) == 5 && *(unsigned char*) (*(char**) (self + 0xc) + 2) == 6)
 		|| (*(int*) (self + 8) == 6 && *(unsigned char*) (*(char**) (self + 0x30) + 2) == 6)) {
 		return io_AppendText(0x1887, *(int*) (self + 0x54));

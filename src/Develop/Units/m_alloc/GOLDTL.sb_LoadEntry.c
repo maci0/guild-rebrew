@@ -5,7 +5,7 @@ extern int g_6b7d70;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6b7d7c;
 extern volatile int g_6b7fac;
-extern int __cdecl fcn_00422910(int need);
+extern int __cdecl sb_EnsureSampleMemory(int need);
 
 typedef struct
 {
@@ -53,7 +53,7 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
         }
         count = *(int *)(hdr + 4);
         if (g_6b7d70 - MemUsed < count + 0xc)
-            fcn_00422910(count + 0xc);
+            sb_EnsureSampleMemory(count + 0xc);
         blk = m_alloc(count + 0xc, (char *)0x678e94);
         if (blk == 0)
         {
@@ -90,7 +90,7 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *a1)
     }
     size = *(int *)(hdr2 + 8);
     if (g_6b7d70 - MemUsed < size + 0xc)
-        rc = fcn_00422910(size + 0xc);
+        rc = sb_EnsureSampleMemory(size + 0xc);
     blk = m_alloc(size + 0xc, (char *)0x678e94);
     if (blk == 0)
     {

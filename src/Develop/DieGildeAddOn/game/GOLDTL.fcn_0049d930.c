@@ -25,7 +25,7 @@ int __cdecl gm_ResolveEntityById(void** out, int a, int b, int c);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int a, unsigned char b);
 int __cdecl fcn_004a4fb0(int* a, int* b, char* q, int c);
-int __cdecl fcn_00495400(int kind, int id, int n, Blk24* b1, Blk24* b2);
+int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 float __cdecl fcn_004fc460(char* p);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_0050d170(int n);
@@ -73,7 +73,7 @@ int __cdecl ai_StartBuergermeisterRathaus(int a1, char* e, char* q, Blk24* o1, B
 			b2.a = *(int*) (rec + 2);
 			b2.b = val;
 			b2.d = 1;
-			r = fcn_00495400(0xf, *(unsigned short*) e, 0, &b1, &b2);
+			r = ai_SelectBestMethod(0xf, *(unsigned short*) e, 0, &b1, &b2);
 			if (r != 0) {
 				*o1 = b1;
 				*o2 = b2;
@@ -94,7 +94,7 @@ int __cdecl ai_StartBuergermeisterRathaus(int a1, char* e, char* q, Blk24* o1, B
 		}
 		b2.b = 1;
 		b2.f = 0.44f;
-		r = fcn_00495400(0x15, *(unsigned short*) e, 1, &b1, &b2);
+		r = ai_SelectBestMethod(0x15, *(unsigned short*) e, 1, &b1, &b2);
 		if (r != 0) {
 			*o1 = b1;
 			*o2 = b2;

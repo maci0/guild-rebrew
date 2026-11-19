@@ -14,7 +14,7 @@ extern void __cdecl fcn_00500bb0(void* clock, int arg2, int arg3, int arg4);
 extern float __cdecl eval_ObjektPreis2Credits(int id, int pct);
 extern void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
 extern void __cdecl fcn_004c5530(int block);
-extern void* __cdecl fcn_004be320(int a, int b);
+extern void* __cdecl gm_GetChainNodeAtIndex(int a, int b);
 extern void* __cdecl gm_SearchTable67(int value);
 extern int __cdecl fcn_004be340(int a);
 extern void __cdecl fcn_004c4510(void* record, unsigned int value);
@@ -90,7 +90,7 @@ void __cdecl fcn_005705a0(int a0, char* rec)
 		fcn_004c5530((int) &job);
 		return;
 	}
-	entry = (char*) fcn_004be320(*(unsigned int*) (rec + 0x29),
+	entry = (char*) gm_GetChainNodeAtIndex(*(unsigned int*) (rec + 0x29),
 		*(unsigned int*) (rec + 0x2d));
 	if (entry != 0)
 		entry = (char*) gm_SearchTable67(*(unsigned int*) (entry + 4));

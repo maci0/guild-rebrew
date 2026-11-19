@@ -5,7 +5,7 @@
 #ifdef REBREW_GOLD
 void __cdecl fcn_00458a10(char* object, float* position, float* result);
 #else
-void __cdecl fcn_00455350(char* object, float* position, float* result);
+void __cdecl d3_TransformPoint(char* object, float* position, float* result);
 #endif
 
 /* ADDRESS: GOLDTL 0x00598550 */
@@ -20,7 +20,7 @@ char __cdecl fcn_00598550(char* object, void* context)
 #ifdef REBREW_GOLD
 		fcn_00458a10(object, (float*) (object + 0x4c), position);
 #else
-		fcn_00455350(object, (float*) (object + 0x4c), position);
+		d3_TransformPoint(object, (float*) (object + 0x4c), position);
 #endif
 		if (CompareVector3WithinTolerance(result->position, position, 100.0f)) {
 			result->node = object;

@@ -14,10 +14,10 @@ void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00426680(int, int*);
 int __cdecl fcn_00427830(char* g, int v);
-void __cdecl fcn_00427480(void);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_IncludeScript(void);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
-int __cdecl fcn_00427f00(char* g)
+int __cdecl evt_ParseScript(char* g)
 {
 	int tok[0x19];
 	int* a;
@@ -57,7 +57,7 @@ int __cdecl fcn_00427f00(char* g)
 			}
 		}
 		if (depth < 0) {
-			fcn_00425bf0(g, *(int*) (g + 0x118), g_679564);
+			evt_LogScriptError(g, *(int*) (g + 0x118), g_679564);
 			m_FreeTracked(a);
 			m_FreeTracked(b);
 			m_FreeTracked(*(void**) (g + 0x108));
@@ -68,14 +68,14 @@ int __cdecl fcn_00427f00(char* g)
 		}
 		if (tok[0] == 0xa) {
 			if (tok[1] == 5) {
-				fcn_00427480();
+				evt_IncludeScript();
 			}
 		} else if (tok[0] == 0xc) {
 			break;
 		}
 	}
 	if (depth != 0) {
-		fcn_00425bf0(g, 0, g_679584);
+		evt_LogScriptError(g, 0, g_679584);
 		m_FreeTracked(a);
 		m_FreeTracked(b);
 		m_FreeTracked(*(void**) (g + 0x108));

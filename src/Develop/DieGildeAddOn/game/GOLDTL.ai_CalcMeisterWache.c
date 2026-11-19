@@ -7,7 +7,7 @@ extern int g_7747b4;
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 void *__cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_00485650(char *, char *);
+void __cdecl ai_CollectGoodsResources(char *, char *);
 void __cdecl fcn_00486c40(char *, char *, int);
 void __cdecl fcn_00489010(char *, char *);
 void __cdecl ai_MeisterCollectTrans(char *);
@@ -56,7 +56,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 	if (res != 0) {
 		g_100b0ac = 0;
 		ai_ResourceCount = 0;
-		fcn_00485650(meister, res);
+		ai_CollectGoodsResources(meister, res);
 		fcn_00486c40(meister, res, *(int *) (*(int *) (meister + 0x16c) + 0x39));
 		fcn_00489010(meister, res);
 		ai_MeisterCollectTrans(meister);

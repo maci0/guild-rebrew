@@ -10,7 +10,7 @@ typedef struct {
 } Vec573d90;
 // SIZE 0xc
 
-void __cdecl fcn_00412cf0(char*, char*, Vec573d90*, int, int);
+void __cdecl d3_AnimateObjectTransform(char*, char*, Vec573d90*, int, int);
 
 void __cdecl fcn_00573d90(char* e, char* b)
 {
@@ -19,6 +19,6 @@ void __cdecl fcn_00573d90(char* e, char* b)
 	v.x = *(float*) (e + 0x84) + g_665e30;
 	v.y = *(int*) (e + 0x88);
 	v.z = *(int*) (e + 0x8c);
-	fcn_00412cf0(e, e + 0x4c, &v, 0x46, 0x20);
+	d3_AnimateObjectTransform(e, e + 0x4c, &v, 0x46, 0x20);
 	b[0xd0]--;
 }

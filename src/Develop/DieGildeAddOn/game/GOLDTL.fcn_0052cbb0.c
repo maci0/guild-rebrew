@@ -33,12 +33,12 @@ typedef struct {
 } Ent;
 #pragma pack(pop)
 
-int __cdecl fcn_004133e0(char* e, float* lo, float* hi);
+int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
 float* __stdcall fcn_005ebbb9(float* out, const float* in);
-void __cdecl fcn_00455350(char* e, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* e, char* pos, float* out);
 float __cdecl fcn_00413d10(float* p);
 void __cdecl fcn_00433780(char* cam);
-void __cdecl fcn_00412cf0(char* cam, float* a, float* b, int d, int e);
+void __cdecl d3_AnimateObjectTransform(char* cam, float* a, float* b, int d, int e);
 
 /* ADDRESS: GOLDTL 0x0052cbb0 */
 void __cdecl fcn_0052cbb0(Ent* e)
@@ -65,7 +65,7 @@ void __cdecl fcn_0052cbb0(Ent* e)
 	Save* s;
 
 	obj = e->obj;
-	fcn_004133e0(obj, &lo, &hi);
+	d3_GetObjectVerticalBounds(obj, &lo, &hi);
 	fcn_005ebbb9(m, (float*) ((char*) d3_ActiveCamera + 0x18c));
 	a = g_662d40[0] * -600.0f;
 	b = g_662d40[1] * -600.0f;
@@ -73,14 +73,14 @@ void __cdecl fcn_0052cbb0(Ent* e)
 	off[0] = m[8] * c + m[4] * b + m[0] * a;
 	off[1] = m[9] * c + m[5] * b + m[1] * a;
 	off[2] = m[10] * c + m[6] * b + m[2] * a;
-	fcn_00455350(obj, obj + 0x4c, p);
+	d3_TransformPoint(obj, obj + 0x4c, p);
 	q[0] = p[0] + off[0];
 	q[1] = p[1] + off[1];
 	q[2] = p[2] + off[2];
 	h = fcn_00413d10(q);
 	q[1] = ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558) + h;
 	d[1] = q[1] - p[1];
-	fcn_004133e0(obj, &lo, &hi);
+	d3_GetObjectVerticalBounds(obj, &lo, &hi);
 	n = off[1] / ((hi - lo) * 0.5f + d[1]);
 	q[0] = (float) (q[0] - (n * off[0] - off[0] * 1.8));
 	q[2] = (float) (q[2] - (n * off[2] - off[2] * 1.8));
@@ -99,7 +99,7 @@ void __cdecl fcn_0052cbb0(Ent* e)
 	dz = q[2] - *(float*) (cam + 0x54);
 	n = (float) g_6a256c;
 	len = (float) sqrt(dz * dz + dy * dy + dx * dx) * n * 0.0005f;
-	fcn_00412cf0(cam, q, rot, (int) MINV(MAXV(n, len), (float) (g_6a256c * 3)), 0x68);
+	d3_AnimateObjectTransform(cam, q, rot, (int) MINV(MAXV(n, len), (float) (g_6a256c * 3)), 0x68);
 	d3_CameraTargetRotation[0] = rot[0];
 	d3_CameraTargetRotation[1] = rot[1];
 	d3_CameraTargetRotation[2] = rot[2];

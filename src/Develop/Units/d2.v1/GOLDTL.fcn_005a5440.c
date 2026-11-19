@@ -48,7 +48,7 @@ unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00466ee0(int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_00508640(int a, int b);
@@ -91,8 +91,8 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 					r->icon = fcn_00466ee0((((Screen*)g_77255c)->w - 0x30) >> 1, j * 76, r->key + 0xdf, 0x82, d2_CurrentWindowId);
 					((Ent*)g_1015ea0)[r->icon].f54 = 1;
 					r->label = d2_ShowTxt((((Screen*)g_77255c)->w - 0xbe) >> 1, j * 76 + 0x2e, g_6b5c60, d2_CurrentWindowId);
-					fcn_00472900(r->icon, 0x54);
-					fcn_00472900(r->label, 0x54);
+					d2_SetElementFont(r->icon, 0x54);
+					d2_SetElementFont(r->label, 0x54);
 					((Ent*)g_1015ea0)[r->label].f6c = 1;
 					((Ent*)g_1015ea0)[r->label].f18 = 0xbe;
 					if (sel) {

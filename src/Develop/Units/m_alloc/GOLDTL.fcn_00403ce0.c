@@ -27,7 +27,7 @@ void __cdecl fcn_00438cb0(struct node_403ce0*, char*);
 
 /* Attaches a transport node to an object at the object's anchor point. */
 /* ADDRESS: GOLDTL 0x00403ce0 */
-struct link_403ce0* __cdecl fcn_00403ce0(char* obj, struct node_403ce0* node)
+struct link_403ce0* __cdecl ch_AttachTransport(char* obj, struct node_403ce0* node)
 {
 	struct link_403ce0* link;
 	char* n;

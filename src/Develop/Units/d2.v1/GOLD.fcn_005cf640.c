@@ -61,7 +61,7 @@ extern int d2_CurrentElementId;
 
 void __cdecl fcn_004942a0(ENTITY_RECORD*, Share*);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046f740(short, short, int, int);
@@ -86,7 +86,7 @@ int __cdecl fcn_005cf640(int unused, unsigned short* p)
 
 	fcn_004942a0(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], shares);
 	dlg = fcn_00470820(0, 0, s_6ace6c);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1a9d, (((unsigned char*) p)[9] != 0) + 0x1aa0, *p, 5);
 	d2_SetForm(dlg, 2);

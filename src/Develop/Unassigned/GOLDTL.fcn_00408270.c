@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00408270 */
-int __cdecl fcn_00408270(float* a, float* b, int* ox, int* oy)
+int __cdecl ch_WorldToGridCoordinates(float* a, float* b, int* ox, int* oy)
 {
 	float v[4];
 	float s;

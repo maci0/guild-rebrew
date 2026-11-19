@@ -7,9 +7,9 @@ extern double g_662c70;
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
-float __cdecl fcn_004353b0(float* v, int n);
+float __cdecl d3_GetMaxVertexDistance(float* v, int n);
 void __cdecl fcn_004518a0(float* v);
-void __cdecl fcn_00451d70(float* a, float* b, float* c, float* n);
+void __cdecl d3_CalculateTriangleNormal(float* a, float* b, float* c, float* n);
 
 /* ADDRESS: GOLDTL 0x00434ba0 */
 void __cdecl fcn_00434ba0(char* anim, char* mesh)
@@ -55,11 +55,11 @@ void __cdecl fcn_00434ba0(char* anim, char* mesh)
 			}
 		}
 		*(float*) (frame + 0x38) = *(float*) (mesh + 0x1d4)
-			- fcn_004353b0(points, *(int*) (mesh + 0x44));
+			- d3_GetMaxVertexDistance(points, *(int*) (mesh + 0x44));
 		for (j = 0; j < *(int*) (mesh + 0x4c); j++) {
 			unsigned short* tri = (unsigned short*) (*(int*) (mesh + 0x280) + j * 6);
 
-			fcn_00451d70(points + tri[0] * 4, points + tri[1] * 4,
+			d3_CalculateTriangleNormal(points + tri[0] * 4, points + tri[1] * 4,
 				points + tri[2] * 4, normals + j * 4);
 		}
 		pmin[0] = 1e+10f;

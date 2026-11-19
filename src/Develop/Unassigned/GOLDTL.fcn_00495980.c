@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00495980 */
-int __cdecl fcn_00495980(void)
+int __cdecl am_RunDummyRechtschaffenheit(void)
 {
 	return 6;
 }

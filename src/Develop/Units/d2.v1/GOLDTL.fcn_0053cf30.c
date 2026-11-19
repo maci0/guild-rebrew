@@ -11,7 +11,7 @@ extern int g_7e242c;
 __declspec(dllimport) unsigned int __stdcall timeGetTime(void);
 int __cdecl fcn_004b3db0(int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int);
 int __cdecl fcn_005373e0(void*, int);
@@ -27,7 +27,7 @@ int __cdecl fcn_0053cf30(void)
 	r = fcn_004b3db0(g_6a3440);
 	if (g_6a375c > 1) {
 		h = fcn_00470820(0, 0, "Menu\\GET_MISSION_WARNING");
-		fcn_00471b60(h);
+		d2_CenterDialogWindows(h);
 		d2_SetForm(h, 0);
 		io_AppendText(0x1adc);
 		io_AppendText(0x1add);

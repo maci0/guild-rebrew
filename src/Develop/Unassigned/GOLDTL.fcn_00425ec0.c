@@ -1,10 +1,10 @@
 #include <string.h>
 
-void __cdecl fcn_00425bf0(char* obj, int level, char* msg);
+void __cdecl evt_LogScriptError(char* obj, int level, char* msg);
 char* __cdecl fcn_00428720(char* obj);
 
 /* ADDRESS: GOLDTL 0x00425ec0 */
-char* __cdecl fcn_00425ec0(char* obj, int mode, int size, char* name)
+char* __cdecl evt_AllocateLocalVariable(char* obj, int mode, int size, char* name)
 {
 	int* slot;
 	char* rec;
@@ -21,7 +21,7 @@ char* __cdecl fcn_00425ec0(char* obj, int mode, int size, char* name)
 			goto found;
 		i++; slot++;
 	} while (i < 8);
-	fcn_00425bf0(obj, *(int*) (obj + 0x118) - 1, (char*) 0x67921c);
+	evt_LogScriptError(obj, *(int*) (obj + 0x118) - 1, (char*) 0x67921c);
 	goto done;
 found:
 	if (mode == 1) {
@@ -49,7 +49,7 @@ found:
 	sz = sz * size + 0x30;
 	*(int*) (obj + 0xc38) += sz;
 	if (*(unsigned int*) (obj + 0xc38) > *(unsigned int*) (obj + 0xc34) + 0x400) {
-		fcn_00425bf0(obj, *(int*) (obj + 0x118), (char*) 0x67920c);
+		evt_LogScriptError(obj, *(int*) (obj + 0x118), (char*) 0x67920c);
 		fcn_00428720(obj);
 	}
 	*(char**) (*(char**) (obj + 0xc28) + 0x10 + i * 4) = rec;

@@ -4,9 +4,9 @@ extern int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 extern void __cdecl fcn_004557c0(void*, void*, int, float*);
 extern float* __stdcall fcn_005ebbb9(float*, const float*);
 extern float __cdecl fcn_004514d0(float*, float*);
-extern void __cdecl fcn_00451900(float*, float*);
+extern void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
 extern float* __stdcall fcn_005eb970(float*, const float*, const float*);
-extern void __cdecl fcn_004519d0(float*, float*);
+extern void __cdecl d3_MatrixToEulerAngles(float*, float*);
 extern char g_6b85a0;
 extern float g_6628a8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -113,13 +113,13 @@ int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view
 		if (valid) {
 			fcn_004557c0(self,
 			             ((*(unsigned char*) (self + 0x214) & 0x20) ? 0 : view), 1, p);
-			fcn_00451900(pos, r);
+			d3_BuildEulerRotationMatrix(pos, r);
 			fcn_005eb970(q, p, r);
 			if (*(unsigned char*) (self + 0x214) & 0x20) {
-				fcn_004519d0(q, outB);
+				d3_MatrixToEulerAngles(q, outB);
 			} else {
 				fcn_005eb970(p, q, m);
-				fcn_004519d0(p, outB);
+				d3_MatrixToEulerAngles(p, outB);
 			}
 			flag = 1;
 		}

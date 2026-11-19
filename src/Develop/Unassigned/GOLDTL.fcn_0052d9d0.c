@@ -11,7 +11,7 @@ extern char g_7f4ca0[];
 
 
 
-void __cdecl fcn_004379a0(int, char*, int, void*, char*);
+void __cdecl d3_VisitSceneObjects(int, char*, int, void*, char*);
 char __cdecl fcn_0052d860(char*, char*);
 
 void __cdecl fcn_0052d9d0(char* e)
@@ -32,10 +32,10 @@ void __cdecl fcn_0052d9d0(char* e)
 		if ((o[0x214] & 1) == 0) {
 			saved = *(int*) (o + 0x1f4);
 			*(int*) (o + 0x1f4) = 0;
-			fcn_004379a0(g_67a370, *(char**) (e + 0x61), 0x100, (void*) fcn_0052d860, e);
+			d3_VisitSceneObjects(g_67a370, *(char**) (e + 0x61), 0x100, (void*) fcn_0052d860, e);
 			*(int*) (*(char**) (e + 0x61) + 0x1f4) = saved;
 		} else {
-			fcn_004379a0(g_67a370, o, 0x100, (void*) fcn_0052d860, e);
+			d3_VisitSceneObjects(g_67a370, o, 0x100, (void*) fcn_0052d860, e);
 		}
 	}
 }

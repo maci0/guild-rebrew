@@ -6,13 +6,13 @@ extern int g_14ce8e0, d2_CurrentElementId, g_7e2468;
 extern char g_6b5c60[], g_7e23e8;
 void __cdecl ch_SetVisible(void* obj, int value);
 void __cdecl fcn_00402b00(void* obj, void* dev);
-void __cdecl fcn_004030e0(void* obj);
+void __cdecl ch_DestroyCharacter(void* obj);
 void* __cdecl ch_CreateAtPosition(char* name, void* pos);
-void __cdecl fcn_0040c120(void* obj, int mode, int value);
+void __cdecl ch_CreateAction(void* obj, int mode, int value);
 void* __cdecl evt_LoadGfxScript(char* script);
 void __cdecl fcn_00428340(void* obj, int argc, ...);
 void* __cdecl fcn_00445600(void* dev, int flags, void* ptr, char* name);
-void __cdecl fcn_00455350(void* dev, void* pos, void* out);
+void __cdecl d3_TransformPoint(void* dev, void* pos, void* out);
 int __cdecl fcn_00469c30(int x, int y, int a3);
 void __cdecl fcn_0046b2b0(int kind);
 int __cdecl fcn_004fdec0(char* name);
@@ -57,7 +57,7 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 
 	dev = fcn_00445600(0, 0x100, 0, "dummy_SPIELER");
 	if (dev != 0) {
-		fcn_00455350(dev, (char*) dev + 0x4c, pos);
+		d3_TransformPoint(dev, (char*) dev + 0x4c, pos);
 	}
 
 	d = d2_UiScale;
@@ -133,13 +133,13 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 					0x28, 0x5a, g_6b5c60);
 			}
 			if (obj != 0) {
-				fcn_0040c120(obj, 0x38, 0);
+				ch_CreateAction(obj, 0x38, 0);
 				do {
 					if (!fcn_005373e0(0, 0x12d6)) {
 						break;
 					}
 				} while (*(int*) ((char*) obj + 0x128) != 0);
-				fcn_004030e0(obj);
+				ch_DestroyCharacter(obj);
 			}
 			if (g_7e23e8 == 0) {
 				idx = idx % count;
@@ -171,12 +171,12 @@ unsigned int __cdecl fcn_0053b6b0(int a0)
 			ch_SetVisible(obj, 0);
 			*(unsigned char*) (*(int*) ((char*) obj + 0x34) + 0x215) &= 0xfe;
 			*(unsigned char*) ((char*) obj + 0x8c) |= 8;
-			fcn_0040c120(obj, 0x38, 1);
+			ch_CreateAction(obj, 0x38, 1);
 			prev = idx;
 		}
 	}
 	if (obj != 0) {
-		fcn_004030e0(obj);
+		ch_DestroyCharacter(obj);
 	}
 	fcn_0046b2b0(id2);
 	fcn_0046b2b0(id1);

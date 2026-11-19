@@ -16,7 +16,7 @@ void __cdecl fcn_004d2f10(void)
 	char* p;
 
 	if (g_772efc != 0) {
-		fcn_00420840(g_772efc);
+		msx_StopAmbientTrack(g_772efc);
 	}
 	main_LoopFlags = 0x7d6c6;
 	d2_SuppressOverlay = 1;

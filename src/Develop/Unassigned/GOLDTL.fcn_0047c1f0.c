@@ -28,7 +28,7 @@ typedef struct Tex {
 #include "Develop/Unassigned/render_quad.h"
 
 int __cdecl fcn_0047b8b0(int x, int y, int w, int h, RENDER_QUAD* q);
-void __cdecl fcn_0047b9a0(RENDER_QUAD* q, unsigned char r, unsigned char g, unsigned char b);
+void __cdecl d2_SetQuadVertexColor(RENDER_QUAD* q, unsigned char r, unsigned char g, unsigned char b);
 
 RENDER_QUAD* __cdecl fcn_0047c1f0(float u, float v, int w, int h, Tex* tex, int x, int y)
 {
@@ -98,6 +98,6 @@ RENDER_QUAD* __cdecl fcn_0047c1f0(float u, float v, int w, int h, Tex* tex, int 
 	}
 	d2_QueuedQuadCount++;
 	d2_DrawDepthIndex++;
-	fcn_0047b9a0(q, 200, 200, 200);
+	d2_SetQuadVertexColor(q, 200, 200, 200);
 	return q;
 }

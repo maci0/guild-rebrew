@@ -35,9 +35,9 @@ extern int d2_ClipBottom;
 
 void __cdecl fcn_0047c560(int a, int b, int c);
 int __cdecl fcn_0047b8b0(int x, int y, int w, int h, RENDER_QUAD* q);
-void __cdecl fcn_0047b9a0(RENDER_QUAD* q, unsigned char r, unsigned char g, unsigned char b);
+void __cdecl d2_SetQuadVertexColor(RENDER_QUAD* q, unsigned char r, unsigned char g, unsigned char b);
 
-RENDER_QUAD* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* src)
+RENDER_QUAD* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex, Rect47bf* src)
 {
 	int cw;
 	int ch;
@@ -120,6 +120,6 @@ RENDER_QUAD* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf*
 	}
 	d2_QueuedQuadCount = quadIndex + 1;
 	d2_DrawDepthIndex++;
-	fcn_0047b9a0(quad, 200, 200, 200);
+	d2_SetQuadVertexColor(quad, 200, 200, 200);
 	return quad;
 }

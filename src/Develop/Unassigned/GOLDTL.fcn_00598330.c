@@ -9,12 +9,12 @@ char __cdecl fcn_00438d40(char*, char*, unsigned int, char (__cdecl*)(char*, voi
 #define lc_Collect fcn_0058fa00
 #define lc_WalkScene fcn_00438d40
 #else
-char __cdecl fcn_004379a0(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
+char __cdecl d3_VisitSceneObjects(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
 #define lc_Collect fcn_005982d0
-#define lc_WalkScene fcn_004379a0
+#define lc_WalkScene d3_VisitSceneObjects
 #endif
 /* 0x442d50 / Gold 0x447300 keeps a numeric object context. */
-char __cdecl fcn_00442d50(int, unsigned char);
+char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 
 void __cdecl fcn_00598330(char* node, int flag)
 {
@@ -27,10 +27,10 @@ void __cdecl fcn_00598330(char* node, int flag)
 	for (i = 0; i < list.count; i++) {
 		object = list.objects[i];
 		if (flag != 0 && (i < (g_776664 & 0xff) || (char) g_776664 == 2)) {
-			fcn_00442d50((int) object, 1);
+			d3_SetSubtreeVisible((int) object, 1);
 		}
 		else {
-			fcn_00442d50((int) object, 0);
+			d3_SetSubtreeVisible((int) object, 0);
 		}
 	}
 }

@@ -6,9 +6,9 @@ extern int d2_CurrentWindowId;
 
 int __cdecl fcn_0046f9b0();
 int __cdecl fcn_00470820();
-int __cdecl fcn_00471b60();
+int __cdecl d2_CenterDialogWindows();
 int __cdecl fcn_00471e30();
-int __cdecl fcn_00472170();
+int __cdecl d2_SetSlotVisibility();
 int __cdecl fcn_00472640();
 int __cdecl d2_SetForm();
 int __cdecl d2_SetOverlayAnimation();
@@ -131,7 +131,7 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
     return;
   fcn_0057e880(0x1d,v2,0,0);
   v5 = fcn_00470820(0,0,(char *)0x6ac468);
-  fcn_00471b60(v5);
+  d2_CenterDialogWindows(v5);
   d2_SetForm(v5,3);
   io_AppendText(0xfa);
   d2_SetForm(v5,0);
@@ -360,7 +360,7 @@ label_5bea6c:
     }
     if (((3 <= *(int *)&v4[7]) && ((int)v8 <= (int)(unsigned int)*(unsigned char *)&v4[0xe])) && ((int)v15 <= (int)(unsigned int)*(unsigned char *)((int)v4 + 0x1d))) {
       if (v28 != -1)
-        fcn_00472170(v28,0);
+        d2_SetSlotVisibility(v28,0);
       d2_SetForm(v5,4);
       io_AppendText(0x112);
       v28 = -1;

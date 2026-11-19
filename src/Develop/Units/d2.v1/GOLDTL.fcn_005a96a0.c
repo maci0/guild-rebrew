@@ -36,12 +36,12 @@ extern char g_6aae98[];
 
 int __cdecl fcn_004e8a80(int, void*);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
-void __cdecl fcn_0046f2c0(int, int);
+void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_005ca560(Item5a96* s);
 void __cdecl fcn_005ca740(int, int, int, int, Item5a96*, int);
 void __cdecl fcn_00472640(int i, int flag);
@@ -101,7 +101,7 @@ int __cdecl fcn_005a96a0(char* who, int id)
 				prev = n;
 				if (d == -1) {
 					d = fcn_00470820(0, 0, g_6aae98);
-					fcn_00471b60(d);
+					d2_CenterDialogWindows(d);
 					d2_SetOverlayAnimation(0, 0);
 					d2_SetForm(d, 1);
 					io_AppendText(0x1a07, id + 0x253);
@@ -112,7 +112,7 @@ int __cdecl fcn_005a96a0(char* who, int id)
 					hc = ids[2];
 				}
 				d2_SetForm(d, 2);
-				fcn_0046f2c0(d2_CurrentWindowId, 1);
+				d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 				io_AppendText(0x1a0b);
 				if (n <= 0) {
 					io_AppendText(0x1a0c);

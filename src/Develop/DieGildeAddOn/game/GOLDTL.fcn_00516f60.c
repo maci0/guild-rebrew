@@ -71,11 +71,11 @@ int __cdecl fcn_00500e20(char*);
 void __cdecl fcn_00438b40(Camera*, char*);
 void __cdecl fcn_0052ac60(float);
 void __cdecl fcn_00438cb0(Camera*, char*);
-int __cdecl fcn_00413190(int);
+int __cdecl d3_GetContextIndex(int);
 void __cdecl fcn_00402aa0(Obj*);
 void __cdecl ch_SetVisible(Obj*, int);
 void __cdecl fcn_004fdcf0(Entity*);
-void __cdecl fcn_00437ac0(Scene*, int, int, void (__cdecl*)(void));
+void __cdecl d3_TraverseSceneObjects(Scene*, int, int, void (__cdecl*)(void));
 void __cdecl fcn_00516550(void);
 void __cdecl fcn_005165b0(void);
 void __cdecl fcn_00516be0(void);
@@ -104,7 +104,7 @@ void __cdecl fcn_00516f60(void)
 		fcn_0052ac60(0.33f);
 	}
 	for (i = 0; i < 768; i++) {
-		if (((Entity*)g_7f4ca0)[i].obj != 0 && fcn_00413190(((Entity*)g_7f4ca0)[i].obj->model) == 0 && ((Entity*)g_7f4ca0)[i].obj->owner == -1) {
+		if (((Entity*)g_7f4ca0)[i].obj != 0 && d3_GetContextIndex(((Entity*)g_7f4ca0)[i].obj->model) == 0 && ((Entity*)g_7f4ca0)[i].obj->owner == -1) {
 			if (((Entity*)g_7f4ca0)[i].obj->body->visible == 0
 				|| (((Entity*)g_7f4ca0)[i].obj->rider != 0 && ((Entity*)g_7f4ca0)[i].obj->rider->visible == 0)) {
 				fcn_00402aa0(((Entity*)g_7f4ca0)[i].obj);
@@ -122,8 +122,8 @@ void __cdecl fcn_00516f60(void)
 	} else if (mode == 3) {
 		g_773dd4 = 3;
 	}
-	fcn_00437ac0((*(Scene**)&g_67a370), 0, 0xe0, fcn_00516550);
-	fcn_00437ac0((*(Scene**)&g_67a370), 0, 0xc0, fcn_005165b0);
+	d3_TraverseSceneObjects((*(Scene**)&g_67a370), 0, 0xe0, fcn_00516550);
+	d3_TraverseSceneObjects((*(Scene**)&g_67a370), 0, 0xc0, fcn_005165b0);
 	fcn_00516be0();
 	if ((*(Scene**)&g_67a370) != 0 && (*(Scene**)&g_67a370)->hook != 0 && (*(Scene**)&g_67a370)->hook->notify != 0) {
 		(*(Scene**)&g_67a370)->hook->notify((*(Scene**)&g_67a370), 4, (*(Scene**)&g_67a370)->hook->arg, 0);

@@ -9,11 +9,11 @@ int __cdecl fcn_0042b2e0(void);
 int __cdecl fcn_0042abd0(int* lib, char* path, int* out);
 int __cdecl fcn_0042b080(int h, int* len);
 int __cdecl fcn_0042ae10(int h, int v);
-int __cdecl fcn_0042ad60(int h);
+int __cdecl msx_StartStream(int h);
 int __cdecl fcn_0042aed0(int h, int pos);
 int __cdecl fcn_0042ae90(int h, int f);
 
-void __cdecl fcn_0041fc10(Chan_14cc460* p, int a2)
+void __cdecl msx_SetTrackVolume(Chan_14cc460* p, int a2)
 {
 	if (msx_TrackDriver != 0 && p != 0) {
 		EnterCriticalSection(&msx_TrackLock);
@@ -28,7 +28,7 @@ void __cdecl fcn_0041fc10(Chan_14cc460* p, int a2)
 	}
 }
 
-Chan_14cc460* __cdecl fcn_0041fd70(const char* name, int restart)
+Chan_14cc460* __cdecl msx_StartTrack(const char* name, int restart)
 {
 	Chan_14cc460* c;
 
@@ -48,13 +48,13 @@ Chan_14cc460* __cdecl fcn_0041fd70(const char* name, int restart)
 		LeaveCriticalSection(&msx_TrackLock);
 	}
 	c->bAmbient = 0;
-	if (fcn_0041fe10(c, restart) == -1) {
+	if (msx_StartTrackInternal(c, restart) == -1) {
 		c = 0;
 	}
 	return c;
 }
 
-int __cdecl fcn_0041fe10(Chan_14cc460* c, int restart)
+int __cdecl msx_StartTrackInternal(Chan_14cc460* c, int restart)
 {
 	char path[0x100];
 	int err;
@@ -94,7 +94,7 @@ int __cdecl fcn_0041fe10(Chan_14cc460* c, int restart)
 			c->f11c = c->f118;
 			c->f114 = 0;
 			fcn_0042ae10(c->handle, 0);
-			fcn_0042ad60(c->handle);
+			msx_StartStream(c->handle);
 			fcn_0042ad90(c->handle, 1);
 			fcn_0042aed0(c->handle, 0);
 			fcn_0042ae10(c->handle, c->f118);
@@ -117,7 +117,7 @@ int __cdecl fcn_0041fe10(Chan_14cc460* c, int restart)
 		else {
 			fcn_0042ae90(c->handle, 1);
 		}
-		cur = fcn_00420650();
+		cur = msx_FindActiveTrack();
 		if (c->bAmbient == 0 && cur != 0) {
 			sprintf(g_6b6f90, "Queuing Track %s after Track %s !", c->name, cur->name);
 			cur->next = c;
@@ -138,7 +138,7 @@ int __cdecl fcn_0041fe10(Chan_14cc460* c, int restart)
 	return 0;
 }
 
-void __cdecl fcn_00420120(Chan_14cc460* hTrack, int fade)
+void __cdecl msx_StopTrack(Chan_14cc460* hTrack, int fade)
 {
     if (msx_TrackDriver != 0) {
         EnterCriticalSection(&msx_TrackLock);
@@ -168,7 +168,7 @@ Chan_14cc460* __cdecl FindTrackByName(const char* name)
 	return 0;
 }
 
-Chan_14cc460* __cdecl fcn_00420650(void)
+Chan_14cc460* __cdecl msx_FindActiveTrack(void)
 {
 	int i;
 
@@ -219,7 +219,7 @@ void __cdecl SetTrackPath(const char* path)
 	strcpy(msx_TrackPath, path);
 }
 
-Chan_14cc460* __cdecl fcn_00420780(const char* name, int a)
+Chan_14cc460* __cdecl msx_StartAmbientTrack(const char* name, int a)
 {
 	Chan_14cc460* c;
 
@@ -241,8 +241,8 @@ Chan_14cc460* __cdecl fcn_00420780(const char* name, int a)
 			fcn_0042ac40(c->handle);
 			c->handle = 0;
 		}
-		if (fcn_0041fe10(c, 1) == 0) {
-			fcn_0041fc10(c, a);
+		if (msx_StartTrackInternal(c, 1) == 0) {
+			msx_SetTrackVolume(c, a);
 			LeaveCriticalSection(&msx_TrackLock);
 			return c;
 		}
@@ -251,14 +251,14 @@ Chan_14cc460* __cdecl fcn_00420780(const char* name, int a)
 	return 0;
 }
 
-void __cdecl fcn_00420840(Chan_14cc460* hTrack)
+void __cdecl msx_StopAmbientTrack(Chan_14cc460* hTrack)
 {
     if (msx_AmbientDriver != 0) {
         if (hTrack->bAmbient == 0) {
             _assert("hTrack->bAmbient", "D:\\develop\\units\\Msx\\msx.c", 0x2e5);
         }
         EnterCriticalSection(&msx_TrackLock);
-        fcn_00420120(hTrack, 0);
+        msx_StopTrack(hTrack, 0);
         LeaveCriticalSection(&msx_TrackLock);
     }
 }

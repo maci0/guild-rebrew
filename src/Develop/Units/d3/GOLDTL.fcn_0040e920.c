@@ -4,7 +4,7 @@ extern char g_6766f0[];
 
 
 
-void __cdecl fcn_00425bf0(int*, int, char*);
+void __cdecl evt_LogScriptError(int*, int, char*);
 
 int __cdecl ecmd_KillObject(void* objectRef)
 {
@@ -15,6 +15,6 @@ int __cdecl ecmd_KillObject(void* objectRef)
 		d3_DestroyObject((D3_OBJECT*) (p));
 		return 1;
 	}
-	fcn_00425bf0(((int*)evt_CurrentScript), *(int*) ((char*) ((int*)evt_CurrentScript) + 0x118), g_6766f0);
+	evt_LogScriptError(((int*)evt_CurrentScript), *(int*) ((char*) ((int*)evt_CurrentScript) + 0x118), g_6766f0);
 	return 1;
 }

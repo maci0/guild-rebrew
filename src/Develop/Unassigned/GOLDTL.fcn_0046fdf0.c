@@ -27,7 +27,7 @@ int __cdecl fcn_0046b520(char* s, int font);
 void __cdecl fcn_0046f650(int slot, D2_WIN* parent);
 
 /* ADDRESS: GOLDTL 0x0046fdf0 */
-int __cdecl fcn_0046fdf0(int x, int y, char* text, int win)
+int __cdecl d2_AddWindowText(int x, int y, char* text, int win)
 {
 	D2_WIN* w;
 	int id;

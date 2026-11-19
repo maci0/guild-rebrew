@@ -5,7 +5,7 @@
 
 #pragma intrinsic(strlen)
 
-void __cdecl fcn_0042b7e0(char* s)
+void __cdecl txt_TrimTrailingSpaces(char* s)
 {
 	int n;
 

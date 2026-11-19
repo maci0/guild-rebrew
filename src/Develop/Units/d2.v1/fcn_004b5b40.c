@@ -9,7 +9,7 @@ extern int g_7728dc;
 int __cdecl fcn_004b3c50(int a);
 void __cdecl fcn_004b5630(int a, int b);
 int __cdecl fcn_00470820(int a, int b, char* s);
-void __cdecl fcn_00471b60(int a);
+void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetForm(int a, int b);
 int __cdecl io_AppendText(int a, ...);
 int __cdecl fcn_00472250(int a, int b, int c);
@@ -67,7 +67,7 @@ void __cdecl fcn_004b5b40(int mode)
 	flags = (mode & ~9) | 0x100;
 	fcn_004b5630(h, flags);
 	dlg = fcn_00470820(0, 0, "special\\mission");
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1b95, *(unsigned short*) slot);
 	r1 = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b98));

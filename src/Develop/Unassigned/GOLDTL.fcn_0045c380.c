@@ -46,8 +46,8 @@ typedef struct Col {
 	unsigned char d;
 } Col;
 
-char __cdecl fcn_00401090(char*);
-char* __cdecl fcn_0045bde0(const char*);
+char __cdecl vfs_FileExists(char*);
+char* __cdecl d3_FindTextureByName(const char*);
 int __cdecl fcn_0045be40(char*);
 Tex* __cdecl fcn_0045c5b0(char*, Col, unsigned int, unsigned int);
 
@@ -94,7 +94,7 @@ void __cdecl fcn_0045c380(Tex* t, Col c, unsigned int flags, unsigned int flags2
 					*q = 0;
 				}
 				sprintf(name, "%s/%s%i.bmp", p, buf1, n + 1);
-				if (fcn_00401090(name) != 0) {
+				if (vfs_FileExists(name) != 0) {
 					sprintf(name, "%s%i", buf1, n + 1);
 					fcn_0045c5b0(name, out, flags, flags2);
 				} else {

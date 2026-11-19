@@ -3,10 +3,10 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004346f0(char*);
+int __cdecl d3_GetAnimSize(char*);
 #include "Develop/Units/d3/d3_animation.h"
 
-char __cdecl fcn_004348f0(int need, int have)
+char __cdecl d3_ReleaseUnusedAnimations(int need, int have)
 {
 	char* p;
 	char* best;
@@ -27,7 +27,7 @@ char __cdecl fcn_004348f0(int need, int have)
 		if (best == 0) {
 			return 0;
 		}
-		have -= fcn_004346f0(best);
+		have -= d3_GetAnimSize(best);
 		d3_ReleaseAnim(best, 1);
 	}
 	return 1;

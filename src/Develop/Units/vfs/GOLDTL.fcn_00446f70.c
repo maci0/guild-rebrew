@@ -37,19 +37,19 @@ extern int g_6b8300;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 void __cdecl fcn_00401360(void*, int);
-void __cdecl fcn_00401230(void*, int);
+void __cdecl vfs_WriteCString(void*, int);
 void __cdecl fcn_00401260(void*, float);
-void __cdecl fcn_004012f0(void*, Vec3*);
-void __cdecl fcn_00401210(void*, char);
+void __cdecl vfs_WriteVec3(void*, Vec3*);
+void __cdecl vfs_WriteByte(void*, char);
 void* __cdecl fcn_00437890(void*);
 void __cdecl fcn_00446540(void*, void*);
 void __cdecl fcn_004469e0(void*, int);
-void __cdecl fcn_0043b740(void*, int);
+void __cdecl d3_WriteEventTable(void*, int);
 #include "Develop/Units/vfs/vfs.h"
 
 
 /* ADDRESS: GOLDTL 0x00446f70 */
-void __cdecl fcn_00446f70(const char* name, void* stream)
+void __cdecl d3_SaveScene(const char* name, void* stream)
 {
 	void* s;
 	void* p;
@@ -65,17 +65,17 @@ void __cdecl fcn_00446f70(const char* name, void* stream)
 		}
 	}
 	fcn_00401360(s, 0x3a6c00bb);
-	fcn_00401230(s, g_6b8484);
+	vfs_WriteCString(s, g_6b8484);
 	fcn_00401260(s, 0.0f);
-	fcn_004012f0(s, &g_67bbdc);
-	fcn_004012f0(s, &g_6b86c4);
+	vfs_WriteVec3(s, &g_67bbdc);
+	vfs_WriteVec3(s, &g_6b86c4);
 	fcn_00401360(s, ((Cfg*)g_67a370)->xb4);
 	fcn_00401360(s, d3_FogColor);
 	fcn_00401260(s, g_10425fc);
 	fcn_00401260(s, g_104329c);
 	for (i = 0; i < 7; i++) {
-		fcn_004012f0(s, &((Slot*)g_1041d80)[i].a);
-		fcn_004012f0(s, &((Slot*)g_1041d80)[i].b);
+		vfs_WriteVec3(s, &((Slot*)g_1041d80)[i].a);
+		vfs_WriteVec3(s, &((Slot*)g_1041d80)[i].b);
 		for (k = 0; k < 6; k++) {
 			fcn_00401360(s, ((Slot*)g_1041d80)[i].pal[k].color);
 			fcn_00401260(s, ((Slot*)g_1041d80)[i].pal[k].f4);
@@ -90,11 +90,11 @@ void __cdecl fcn_00446f70(const char* name, void* stream)
 	for (p = ((void*)d3_ObjectListHead); p != &(*(char*)d3_SceneObjectSentinel); p = fcn_00437890(p)) {
 		fcn_00446540(s, p);
 	}
-	fcn_00401210(s, g_6b8300 != 0);
+	vfs_WriteByte(s, g_6b8300 != 0);
 	if (g_6b8300 != 0) {
 		fcn_004469e0(s, g_6b8300);
 	}
-	fcn_0043b740(s, ((Cfg*)g_67a370)->x3c8);
+	d3_WriteEventTable(s, ((Cfg*)g_67a370)->x3c8);
 	if (stream == 0) {
 		CloseVfsStream(s);
 	}

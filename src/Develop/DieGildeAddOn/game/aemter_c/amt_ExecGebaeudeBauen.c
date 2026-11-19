@@ -8,7 +8,7 @@ extern int g_6b7fdc;
 
 
 
-int __cdecl fcn_0042f690(char* a, int b, int c, char* out);
+int __cdecl vfs_ResolvePath(char* a, int b, int c, char* out);
 int __cdecl fcn_0050d200(int a, int b);
 char* __cdecl _strupr(char* s);
 void __cdecl fcn_005986f0(char* a, int b);
@@ -23,7 +23,7 @@ extern char g_68de2c[];
 void __cdecl ReportClientMessage(const char*);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004432d0(int, int);
-int __cdecl fcn_00455350(char*, char*, int*);
+int __cdecl d3_TransformPoint(char*, char*, int*);
 void __cdecl fcn_004c5530(int a1);
 int __cdecl fcn_004e8240(unsigned char, char*, char*, int, int);
 void __cdecl fcn_004ea4b0(void*, unsigned int);
@@ -82,7 +82,7 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 		else {
 			sprintf(v9, (char*) 0x67f0ac, (char*) 0x7e1ae0, v8);
 		}
-		v6 = fcn_0042f690(v9, g_6b7fdc, g_6b7fdc, v10);
+		v6 = vfs_ResolvePath(v9, g_6b7fdc, g_6b7fdc, v10);
 		if (v6) {
 			break;
 		}

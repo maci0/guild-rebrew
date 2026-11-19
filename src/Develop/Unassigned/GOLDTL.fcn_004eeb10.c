@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004eeb10 */
-int __cdecl fcn_004eeb10(int* a1, char* a2)
+int __cdecl ahm_SetMatchingSlotValue(int* a1, char* a2)
 {
 	int i;
 

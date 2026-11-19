@@ -19,15 +19,15 @@ void __cdecl fcn_005270c0(int);
 void __cdecl fcn_004432d0(int, char);
 void __cdecl fcn_00459710(char*, char);
 void __cdecl fcn_00414960(float*, float*, char*);
-void __cdecl fcn_00455350(char*, float*, float*);
+void __cdecl d3_TransformPoint(char*, float*, float*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
-int __cdecl fcn_00412f10(char*, char*, int);
+int __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 int __cdecl fcn_00476970(void*);
 void __cdecl fcn_00473150(char*);
 void __cdecl fcn_005893d0(int, int);
 void __cdecl fcn_00588200(char*, char*, char*);
 char __cdecl fcn_00442c00(char*, char);
-char __cdecl fcn_00442d50(int, unsigned char);
+char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl fcn_00546bb0(int, int);
 void __cdecl fcn_00587f40(char*);
 void __cdecl fcn_005875c0(char*, float);
@@ -172,7 +172,7 @@ void __cdecl fcn_00586c10(char* obj)
         g_9a9200[7] = 0;
     }
 
-    fcn_00455350((char*) *(int*) (obj + 0x61), (float*) (*(char**) (obj + 0x61) + 0x4c), (float*) S);
+    d3_TransformPoint((char*) *(int*) (obj + 0x61), (float*) (*(char**) (obj + 0x61) + 0x4c), (float*) S);
     dt = f1[1] - f0[1];
     *(int*) ((char*) S + 0x10) = g_9a9200[2];
     *(int*) ((char*) S + 0x14) = g_9a9200[3];
@@ -191,7 +191,7 @@ void __cdecl fcn_00586c10(char* obj)
     *(int*) ((char*) S + 0xa0) = g_9a9200[7];
     *(int*) ((char*) S + 0x20) = 0;
     *(char**) ((char*) S + 0x9c) = fcn_00442910((int) *(char**) ((char*) S + 0x98), (float*) 0x665f28, (float*) 0x662d80, (char*) 0x6a9418);
-    fcn_00412f10(*(char**) ((char*) S + 0x9c), (char*) 0x6a93f8, 1);
+    d3_ApplyObjectAnimation(*(char**) ((char*) S + 0x9c), (char*) 0x6a93f8, 1);
     *(u8*) (*(char**) ((char*) S + 0x9c) + 0x216) = (u8) (((u8) (*(char**) ((char*) S + 0x9c))[0x216] & 0xfd) | 1);
     *(u8*) (*(char**) ((char*) S + 0x9c) + 0x216) |= 0x10;
     *(u8*) (*(char**) ((char*) S + 0x9c) + 0x214) &= 0x7f;
@@ -208,7 +208,7 @@ void __cdecl fcn_00586c10(char* obj)
     for (i = 0; i < 3; i++)
         fcn_00442c00(*(char**) ((char*) S + 0x8c + i * 4), 0);
     fcn_00442c00(*(char**) ((char*) S + 0x8c + *(int*) ((char*) S + 0xa0) * 4), 1);
-    fcn_00442d50(*(int*) (obj + 0x61), 0);
+    d3_SetSubtreeVisible(*(int*) (obj + 0x61), 0);
     fcn_00546bb0(*(int*) (obj + 0x61), 0);
     g_100f1dc = -1;
     fcn_00587f40((char*) S);
@@ -269,7 +269,7 @@ void __cdecl fcn_00586c10(char* obj)
         d3_DestroyObject(*(int*) ((char*) S + 0x9c));
     if (*(int*) ((char*) S + 0x98) != 0)
         d3_DestroyObject(*(int*) ((char*) S + 0x98));
-    fcn_00442d50(*(int*) (obj + 0x61), 1);
+    d3_SetSubtreeVisible(*(int*) (obj + 0x61), 1);
     fcn_00546bb0(*(int*) (obj + 0x61), 1);
     for (i = 0; i < count; i++)
         *(int*) (g_1015ea0 + idx[i] * 0x2f4 + 0x48) = 0;

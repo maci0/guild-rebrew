@@ -24,8 +24,8 @@ extern float g_664168;
 extern float g_6628cc;
 
 int __cdecl fcn_00505840(void);
-void __cdecl fcn_004379a0(int h, int a, int b, int (__cdecl* cb)(void), Hits* out);
-void __cdecl fcn_00442d50(int id, int on);
+void __cdecl d3_VisitSceneObjects(int h, int a, int b, int (__cdecl* cb)(void), Hits* out);
+void __cdecl d3_SetSubtreeVisible(int id, int on);
 
 void __cdecl fcn_005058b0(int unused, int who, int id)
 {
@@ -44,12 +44,12 @@ void __cdecl fcn_005058b0(int unused, int who, int id)
 			want[i] = t;
 		}
 		memset(&hits, 0, sizeof(hits));
-		fcn_004379a0(g_67a370, 0, 0xc0, fcn_00505840, &hits);
+		d3_VisitSceneObjects(g_67a370, 0, 0xc0, fcn_00505840, &hits);
 		for (k = 0; k < hits.count; k++) {
-			fcn_00442d50(hits.ids[k], 0);
+			d3_SetSubtreeVisible(hits.ids[k], 0);
 			for (i = 0; i < 5; i++) {
 				if (hits.vals[k] == want[i]) {
-					fcn_00442d50(hits.ids[k], 1);
+					d3_SetSubtreeVisible(hits.ids[k], 1);
 				}
 			}
 		}

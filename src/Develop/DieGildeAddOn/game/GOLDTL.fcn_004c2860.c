@@ -27,9 +27,9 @@ int __cdecl fcn_004c27f0(void);
 int __cdecl fcn_004c2820(int);
 int __cdecl fcn_00500e20(int*);
 void __cdecl fcn_004c2100(void);
-void __cdecl fcn_004c2430(void);
+void __cdecl msx_SelectOutdoorTrack(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-int __cdecl fcn_00420120(int, int);
+int __cdecl msx_StopTrack(int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } BUILDING_ROW;
@@ -71,7 +71,7 @@ void __cdecl fcn_004c2860(void)
 				*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) - 0x1e);
 				*(char*) (0x68822a + idx) = 0;
 				if (p != 0) {
-					fcn_00420120((int) p, 1);
+					msx_StopTrack((int) p, 1);
 					strcpy(g_772d58, (char*) tp_msx_CurrentTrack);
 					p = 0;
 					g_689d20 = 1;
@@ -153,7 +153,7 @@ restart:
 		if (g_772e58 != 0) {
 			fcn_004c2100();
 		} else {
-			fcn_004c2430();
+			msx_SelectOutdoorTrack();
 		}
 	} else {
 		g_772e68 = now - 0x3a98;
@@ -172,7 +172,7 @@ noptr:
 	if (g_772e58 != 0) {
 		fcn_004c2100();
 	} else {
-		fcn_004c2430();
+		msx_SelectOutdoorTrack();
 	}
 }
 unsigned char _dpad_6ed98c[12768] = {

@@ -18,7 +18,7 @@ unsigned char* __cdecl gm_AddObjekt(void);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CheckEntityType(unsigned char* e);
 int __cdecl fcn_00505340(unsigned char* e);
-void __cdecl fcn_00455350(char* view, char* pos, Vec4* out);
+void __cdecl d3_TransformPoint(char* view, char* pos, Vec4* out);
 
 unsigned char* __cdecl fcn_00504c90(unsigned char* me, int kind)
 {
@@ -41,8 +41,8 @@ unsigned char* __cdecl fcn_00504c90(unsigned char* me, int kind)
 	for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
 		rec = lpGebaeudePROT + *e * 589;
 		if (!gm_CheckEntityType(e) && !fcn_00505340(e) && *(char**) (e + 0x61) != 0 && e != me && *rec == kind) {
-			fcn_00455350(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, &a);
-			fcn_00455350(*(char**) (me + 0x61), *(char**) (me + 0x61) + 0x4c, &b);
+			d3_TransformPoint(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, &a);
+			d3_TransformPoint(*(char**) (me + 0x61), *(char**) (me + 0x61) + 0x4c, &b);
 			dx = a.x - b.x;
 			dy = a.y - b.y;
 			dz = a.z - b.z;

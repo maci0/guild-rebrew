@@ -45,7 +45,7 @@ int __cdecl fcn_0057ec20(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 char* __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -97,7 +97,7 @@ void __cdecl fcn_005d4a20(void)
 	q.kind = 1;
 	dlg = fcn_00470820(0, 0, "panel\\privilegien");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60((int) dlg);
+	d2_CenterDialogWindows((int) dlg);
 	changed = 1;
 	for (i = 0; i < 0x3a; i++) {
 		state[i] = 1;

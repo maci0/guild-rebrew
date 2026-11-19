@@ -18,7 +18,7 @@ void __cdecl fcn_0043bcf0(int a);
 void __cdecl fcn_00459b40(int a);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00452300(void);
-void __cdecl fcn_00452280(void);
+void __cdecl d3_InitRenderVertexBuffer(void);
 #include "Develop/Units/d3/d3_animation.h"
 void __cdecl fcn_0045c110(void);
 
@@ -75,7 +75,7 @@ void __cdecl fcn_004392c0(void)
 		*(void**) (((char*)g_67a370) + 0x3c8) = 0;
 	}
 	fcn_00452300();
-	fcn_00452280();
+	d3_InitRenderVertexBuffer();
 	while (g_1042c38 != g_1042d00) {
 		(*(node_fn_4392c0*) (g_1042c38 + 0x1ec))(g_1042c38);
 	}

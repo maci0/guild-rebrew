@@ -5,7 +5,7 @@
 
 extern int gv_00675318;
 void __cdecl vfs_ToSlashes(char* name);
-int __cdecl fcn_00413190(int object);
+int __cdecl d3_GetContextIndex(int object);
 
 #pragma intrinsic(memcmp, memcpy, memset, strcmp, strcpy, strlen, abs, labs, fabs)
 #pragma auto_inline(off)
@@ -43,7 +43,7 @@ char* __cdecl ch_AttachAni(char* obj, char* name, unsigned char force)
             sprintf(msg, "ch_AttachAni(): Could not attach ani: %s", name);
             return 0;
         }
-        if (fcn_00413190(*(int*) (obj + 0x88)) == 0) {
+        if (d3_GetContextIndex(*(int*) (obj + 0x88)) == 0) {
             *(int*) (anim + 0x3c) = -1;
         } else {
             int frame = gv_00675318;

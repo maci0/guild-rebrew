@@ -5,7 +5,7 @@ extern char* evt_CurrentScript;
 
 void __cdecl fcn_00426680(int, int*);
 void __cdecl fcn_004263b0(int);
-void __cdecl fcn_00426340(void);
+void __cdecl evt_SeekSemicolon(void);
 
 int __cdecl fcn_004275a0(void)
 {
@@ -21,7 +21,7 @@ int __cdecl fcn_004275a0(void)
 			fcn_004263b0(1);
 			return 0;
 		}
-		fcn_00426340();
+		evt_SeekSemicolon();
 	}
 	return 0;
 }

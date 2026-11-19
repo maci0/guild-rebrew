@@ -22,7 +22,7 @@ extern char s_6a9a5c[]; /* "ToolTip\\ToolTip_Objekte_Waffen" */
 int* __cdecl fcn_004ce590(int);
 void __cdecl fcn_00469c40(int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_0046f7e0(int, int, int, int, int);
@@ -58,7 +58,7 @@ int __cdecl fcn_00590b80(int a0)
 	} else {
 		win = fcn_00470820(0, 0, s_6a9a38);
 	}
-	fcn_00471b60(win);
+	d2_CenterDialogWindows(win);
 	n = g_1038144[win].i[0];
 	val = ((D2_WIN*) g_1015f40)[n].width;
 	if (((D2_WIN*) g_1015f40)[n].left + val > g_1040494 - 0x10) {

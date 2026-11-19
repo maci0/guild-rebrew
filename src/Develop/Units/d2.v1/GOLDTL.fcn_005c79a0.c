@@ -73,7 +73,7 @@ extern short g_7f4c0c;
 
 void __cdecl d2_SetBackgroundTexture(const char*, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -123,7 +123,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	btnC = 0;
 	t = &((Shop*) lpGebaeudePROT)[obj[0]];
 	dlg = fcn_00470820(0, 0, s_6ac79c);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_00533dc0(d2_CurrentWindowId, 0x72f, 0);
 	d2_SetForm(dlg, 3);

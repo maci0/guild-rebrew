@@ -20,7 +20,7 @@ void __cdecl fcn_005b1ed0(int a, float v);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_SetForm(int a, int b);
 void __cdecl fcn_005340f0(int a);
-void __cdecl fcn_00471b60(int a);
+void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl fcn_0050b710(int a, unsigned char k);
 int __cdecl fcn_0050b750(int a, unsigned char k);
@@ -91,7 +91,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 	v28 = v5;
 	d2_SetForm(v5, 0);
 	fcn_005340f0(d2_CurrentWindowId);
-	fcn_00471b60(v5);
+	d2_CenterDialogWindows(v5);
 	d2_SetOverlayAnimation(0, 0);
 	v15 = fcn_0050b710(*(unsigned int*) ((char*) v3 + 0x39), g_773d75);
 	v8 = (int) v27;

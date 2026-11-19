@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 /* ADDRESS: GOLDTL 0x00405180 */
-void __cdecl fcn_00405180(void* a1, void* a2)
+void __cdecl ch_ValidateActionLinks(void* a1, void* a2)
 {
 	void* p;
 	void* q;

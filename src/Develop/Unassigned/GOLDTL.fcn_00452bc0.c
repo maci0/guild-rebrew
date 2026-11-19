@@ -24,7 +24,7 @@ extern unsigned int g_6b8710;
 
 void __cdecl fcn_00452740(char*);
 
-void __cdecl fcn_00452bc0(void)
+void __cdecl d3_RenderSceneList(void)
 {
 	char* p;
 	char* next;

@@ -23,7 +23,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl gm_AccumulateTyped2(Player*);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_00526120(int, int);
 int __cdecl fcn_00471f80(int);
@@ -49,7 +49,7 @@ int __cdecl fcn_005b5750(void)
 		v = 0x12c0;
 	}
 	d2_SetElementValue(ctl, 0xa, v / 32, 0xa);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	if (fcn_005373e0((void*) fcn_005b5750, timer) != 0) {
 		do {
 			if (g_100f1dc != 2) {

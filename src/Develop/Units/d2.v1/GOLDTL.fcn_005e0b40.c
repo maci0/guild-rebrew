@@ -11,8 +11,8 @@ extern char g_14cf950;
 #include "client_dialog_state.h"
 extern int tp_d2_SelectedControl;
 
-int __cdecl fcn_00467240(int, int, int, int, int);
-void __cdecl fcn_00472900(int, int);
+int __cdecl d2_OpenInputIcon(int, int, int, int, int);
+void __cdecl d2_SetElementFont(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00474cf0(int);
 void __cdecl d2_SetBildArgument(int, int);
@@ -26,8 +26,8 @@ int __cdecl fcn_005e0b40(int a, int b, char* text)
 	int h;
 
 	result = 0;
-	h = fcn_00467240(a, b, 0, d2_FontHeight, 1);
-	fcn_00472900(h, 0x53);
+	h = d2_OpenInputIcon(a, b, 0, d2_FontHeight, 1);
+	d2_SetElementFont(h, 0x53);
 	d2_SetElementValue(h, text);
 	fcn_00474cf0(h);
 	*(int*) (g_102d150 + *(int*) (g_1015ea0 + h * 0x2f4 + 0x88) * 0x160) = 0x80;

@@ -14,7 +14,7 @@ extern char* g_7e2aa0;
 extern unsigned char* lpGebaeudePROT;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_0046f740(int, int, int, int);
@@ -37,7 +37,7 @@ int __cdecl fcn_00591190(int id)
 		return -1;
 	}
 	dlg = fcn_00470820(0, 0, "ToolTip\\ToolTip_Objekte_Upgrades");
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	p = &((D2_WIN*)g_1015f40)[*(int*) (((char*)g_1038140) + dlg * 700 + 4)];
 	if (p->left + p->width > g_1040494 - 16) {
 		fcn_00469c40(g_1040494 - p->width - 16, p->top, p->slot);

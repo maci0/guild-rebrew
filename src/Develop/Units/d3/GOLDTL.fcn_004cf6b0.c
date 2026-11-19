@@ -23,7 +23,7 @@ int __cdecl fcn_00417d00(int a1, float* v, int n, float f1, float f2,
     float f3, float f4, int a8);
 int __cdecl fcn_004234e0(char* bank, const char* name, int loop, int pan,
     int vol, int a, int b);
-void __cdecl fcn_0045b920(int g, int x, int z, float* out);
+void __cdecl d3_GridPointToWorld(int g, int x, int z, float* out);
 unsigned int __cdecl cut_RandMod(unsigned int n);
 void __cdecl fcn_004cfc40(int a1, int a2, int a3);
 int __cdecl fcn_004d4790(char* e);
@@ -98,7 +98,7 @@ int __cdecl fcn_004cf6b0(void)
 					if (e != 0) {
 						other = *(int*) (e + 0x184);
 						if (e[8] != 0) {
-							fcn_0045b920(world, p->x, p->z, v8);
+							d3_GridPointToWorld(world, p->x, p->z, v8);
 							v8[0] -= *(float*) (*(int*) (other + 0x34) + 0x4c);
 							v8[1] -= *(float*) (*(int*) (other + 0x34) + 0x50);
 							v8[2] -= *(float*) (*(int*) (other + 0x34) + 0x54);

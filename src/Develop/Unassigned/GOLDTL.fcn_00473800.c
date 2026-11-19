@@ -44,8 +44,8 @@ extern char* g_14a567c;
 
 void __cdecl fcn_0047a040(int, int, int, int);
 void __cdecl fcn_0047cba0(int, int, Ctx*, int, int);
-void __cdecl fcn_0047cd70(int, Ctx*);
-void __cdecl fcn_00472880(int);
+void __cdecl d2_DrawAnimationSlot(int, Ctx*);
+void __cdecl d2_SelectFont(int);
 int __cdecl d2_GetResourceData(int);
 int __cdecl fcn_0047cc80(int, int, Ctx*, int, int, float, int);
 void __cdecl fcn_0046bd20(int, int, int, int, Ctx*, char*, int);
@@ -82,10 +82,10 @@ void __cdecl fcn_00473800(Ctx* c, int x, int y)
 	} else {
 		((Slot*)g_100e7a0)[g_67d8cc].x = (short) x;
 		((Slot*)g_100e7a0)[g_67d8cc].y = (short) y;
-		fcn_0047cd70(g_67d8cc, c);
+		d2_DrawAnimationSlot(g_67d8cc, c);
 	}
 	old = d2_CurrentFont;
-	fcn_00472880(d2_DefaultFont + 1);
+	d2_SelectFont(d2_DefaultFont + 1);
 	k = 0;
 	for (i = 0; i < 6; i++) {
 		p = &((Item*)d2_DisplayCounters)[i];
@@ -110,6 +110,6 @@ void __cdecl fcn_00473800(Ctx* c, int x, int y)
 			k++;
 		}
 	}
-	fcn_00472880(old);
+	d2_SelectFont(old);
 	fcn_0047a040(x0, y0, x1, y1);
 }

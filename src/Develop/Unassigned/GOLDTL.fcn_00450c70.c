@@ -5,7 +5,7 @@ typedef int(__stdcall* Fn3)(void* self, int a, int b);
 extern void* g_6b870c;
 
 /* ADDRESS: GOLDTL 0x00450c70 */
-void __cdecl fcn_00450c70(void)
+void __cdecl d3_DisableAllLights(void)
 {
 	int i;
 

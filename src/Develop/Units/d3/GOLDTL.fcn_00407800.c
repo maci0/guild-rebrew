@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_00413190(int);
+int __cdecl d3_GetContextIndex(int);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl d3_DestroyObject(int);
 int* __cdecl fcn_00442910(int, float*, float*, char*);
@@ -32,7 +32,7 @@ void __cdecl fcn_00407800(char* e, int mode, char* name)
 	}
 	saved_mode = d3_CurrentContextIndex;
 	if (name != 0) {
-		fcn_004432d0(fcn_00413190(*(int*) (e + 0x88)), 1);
+		fcn_004432d0(d3_GetContextIndex(*(int*) (e + 0x88)), 1);
 		if (*slot != 0) {
 			d3_DestroyObject(*slot);
 			*slot = 0;
@@ -62,7 +62,7 @@ void __cdecl fcn_00407800(char* e, int mode, char* name)
 		}
 		fcn_004432d0(saved_mode, 1);
 	} else {
-		fcn_004432d0(fcn_00413190(*(int*) (e + 0x88)), 1);
+		fcn_004432d0(d3_GetContextIndex(*(int*) (e + 0x88)), 1);
 		if (*slot != 0) {
 			d3_DestroyObject(*slot);
 			*slot = 0;

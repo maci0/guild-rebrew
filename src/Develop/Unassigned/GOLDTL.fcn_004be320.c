@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004be320 */
-void __cdecl fcn_004be320(char* p, int count)
+void __cdecl gm_GetChainNodeAtIndex(char* p, int count)
 {
 	int i;
 

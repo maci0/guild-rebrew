@@ -46,7 +46,7 @@ struct SaveHeaderTail {
 #pragma pack()
 extern char g_save_header_tail[]; /* 0x1002d4f0 */
 #include "Develop/DieGildeAddOn/game/game_data.h"
-int __cdecl fcn_0041bac0(char a, char b, char c);
+int __cdecl d2_PackColorForPixelFormat(char a, char b, char c);
 
 int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
 {
@@ -139,7 +139,7 @@ int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
 		}
 		for (y = 0; y < 120; y++) {
 			for (x = 0; x < 160; x++) {
-				ls_SavePreviewPixels[n] = (unsigned short) fcn_0041bac0(buf[n * 3], buf[n * 3 + 1], buf[n * 3 + 2]);
+				ls_SavePreviewPixels[n] = (unsigned short) d2_PackColorForPixelFormat(buf[n * 3], buf[n * 3 + 1], buf[n * 3 + 2]);
 				n++;
 			}
 		}

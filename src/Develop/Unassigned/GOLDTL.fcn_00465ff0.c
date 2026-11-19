@@ -11,7 +11,7 @@ typedef struct DirtyRect {
 extern DirtyRect* g_772588;
 
 /* ADDRESS: GOLDTL 0x00465ff0 */
-void __cdecl fcn_00465ff0(int x, int y, int w, int h, char* owner)
+void __cdecl d2_AddDirtyRect(int x, int y, int w, int h, char* owner)
 {
 	int i;
 

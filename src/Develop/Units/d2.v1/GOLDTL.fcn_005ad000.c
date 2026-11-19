@@ -7,7 +7,7 @@ int __cdecl fcn_00526120(int, int);
 int __cdecl fcn_005463a0(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 void* __cdecl fcn_00470820(int, int, void*);
-void __cdecl fcn_00471b60(void*);
+void __cdecl d2_CenterDialogWindows(void*);
 void __cdecl fcn_00471e30(void*);
 void __cdecl d2_SetForm(void*, int);
 int __cdecl fcn_00472250(void*, int, int);
@@ -60,7 +60,7 @@ void __cdecl fcn_005ad000(void)
 		return;
 	}
 	dlg = fcn_00470820(0, 0, (void*) 0x6ab180);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	h = *(unsigned char*) &g_773d75;
 	id = io_AppendText(0x19b1, h, h, *(unsigned short*) obj);

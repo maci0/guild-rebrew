@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00500c80 */
-void __cdecl fcn_00500c80(char* p)
+void __cdecl gm_CopyGameTime(char* p)
 {
 	char* q;
 

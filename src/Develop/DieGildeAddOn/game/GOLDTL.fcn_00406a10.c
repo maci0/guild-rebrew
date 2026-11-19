@@ -8,7 +8,7 @@ CH_ACTION* __cdecl ch_NewAction(char* e);
 void __cdecl ch_TakingObject(CH_ACTION* t);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
-int __cdecl fcn_00406a10(char* e, const char* name, char* src, int param)
+int __cdecl ch_QueueTakeObject(char* e, const char* name, char* src, int param)
 {
 	CH_ACTION* t;
 	char* s;

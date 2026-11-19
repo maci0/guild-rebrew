@@ -8,7 +8,7 @@ extern char g_7f4ca4[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-int* __cdecl fcn_004ceac0(char*, char*);
+int* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 
 int __cdecl fcn_004ccdf0(char* x, char* out)
 {
@@ -19,7 +19,7 @@ int __cdecl fcn_004ccdf0(char* x, char* out)
 		return 1;
 	for (i = 0; i < 16; i++) {
 		if (*(int*) (g_9b0e20 + i * 0x35c + 0x10) == *(int*) (x + 0x10)) {
-			d = fcn_004ceac0(g_9b0e20 + i * 0x35c, gm_LookupEntityRecordIn32SlotTable(*(int*) (x + 0x14)));
+			d = gm_FindOrCreateEntitySlot(g_9b0e20 + i * 0x35c, gm_LookupEntityRecordIn32SlotTable(*(int*) (x + 0x14)));
 			if (d[1] == *(int*) (x + 0x18) && (d[1] != 2 || d[4] == *(int*) (x + 0x24)))
 				memcpy(d, x + 0x14, 0x2c);
 			break;

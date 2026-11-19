@@ -11,7 +11,7 @@ extern char* g_104049c;
 extern unsigned int g_10404a0;
 extern int g_67a370;
 
-void __cdecl fcn_00437ac0(int, int, int, void*);
+void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 #include "Develop/Units/d3/d3_d3d.h"
 
 void __cdecl fcn_00443230(int flag)
@@ -21,5 +21,5 @@ void __cdecl fcn_00443230(int flag)
 	for (i = 0; i < g_10404a0; i++) {
 		((Item*)g_104049c)[i].flags &= 0xbf;
 	}
-	fcn_00437ac0(g_67a370, 0, 0x40, fcn_00443270);
+	d3_TraverseSceneObjects(g_67a370, 0, 0x40, fcn_00443270);
 }

@@ -14,7 +14,7 @@ extern float g_665ea0;
 
 void __cdecl fcn_004432d0(int, int);
 
-void __cdecl fcn_00455350(char*, char*, struct vec4*);
+void __cdecl d3_TransformPoint(char*, char*, struct vec4*);
 float __cdecl fcn_004514d0(struct vec4*, char*);
 
 int __cdecl fcn_005589d0(char* u)
@@ -33,9 +33,9 @@ int __cdecl fcn_005589d0(char* u)
 		gm_ResolveEntityById((void**) (&x), 0, 0, *(int*) (u + 0xb4));
 		if (x != 0 && *(char**) (x + 0x61) != 0 && *(char**) (*(char**) (x + 0x61) + 0x1cc) != 0
 		    && *(char**) (*(char**) (*(char**) (x + 0x61) + 0x1cc) + 0x318) != 0) {
-			fcn_00455350(*(char**) (x + 0x61), *(char**) (x + 0x61) + 0x4c, &a);
+			d3_TransformPoint(*(char**) (x + 0x61), *(char**) (x + 0x61) + 0x4c, &a);
 			a.y = (a.y + *(float*) (*(char**) (*(char**) (*(char**) (x + 0x61) + 0x1cc) + 0x318) + 0x1d4)) + g_665ea0;
-			fcn_00455350(*(char**) (u + 0xc8), *(char**) (u + 0xc8) + 0x4c, &b);
+			d3_TransformPoint(*(char**) (u + 0xc8), *(char**) (u + 0xc8) + 0x4c, &b);
 			d.x = a.x - b.x;
 			d.y = a.y - b.y;
 			d.z = a.z - b.z;

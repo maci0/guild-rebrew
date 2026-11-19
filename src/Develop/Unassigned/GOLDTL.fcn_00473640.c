@@ -2,7 +2,7 @@
 
 typedef void (__stdcall* f)(void*, int, int, int);
 
-void __cdecl fcn_00473640(void)
+void __cdecl d3_AcquireBackBuffer(void)
 {
 	void* obj;
 

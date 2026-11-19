@@ -7,7 +7,7 @@ extern char* g_7747b8;
 typedef struct { unsigned char unknown00[0x243]; unsigned int period; unsigned char unknown247[6]; } Building5744c0;
 #pragma pack(pop)
 extern char* gm_CityEntity;
-char __cdecl fcn_00413680(int, int, void*, void*);
+char __cdecl d3_ComputeObjectBoundingSphere(int, int, void*, void*);
 int __cdecl fcn_00415300(int);
 int __cdecl fcn_004234e0(int, int, int, int, int, int, int);
 int __cdecl fcn_00426cc0(int);
@@ -15,13 +15,13 @@ int __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(int, int, ...);
 int __cdecl fcn_00428720(int);
 void __cdecl fcn_00429670(int);
-void __cdecl fcn_004379a0(int, int, int, int, void*);
+void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
 char __cdecl d3_DestroyObject(int);
-void __cdecl fcn_00442d50(int, int);
+void __cdecl d3_SetSubtreeVisible(int, int);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_004550b0(int, int);
 void __cdecl fcn_004550e0(int, int);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 void __cdecl fcn_004bd4e0(int, int);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
@@ -214,7 +214,7 @@ LfailB:
 		do {
 			v14 = (unsigned char*) (v11 + (int) lpGebaeudeINST);
 			if (v14 != v15 && *v14 && (v24 = *(int*) (v14 + 0x61)) != 0) {
-				fcn_00455350((char*) v24, (char*) (v24 + 0x4c), v17);
+				d3_TransformPoint((char*) v24, (char*) (v24 + 0x4c), v17);
 				v17[0] = v17[0] - *(float*) (v16 + 0x40);
 				v17[1] = v17[1] - *(float*) (v16 + 0x44);
 				v17[2] = v17[2] - *(float*) (v16 + 0x48);
@@ -236,7 +236,7 @@ LfailB:
 		for (v11 = 0; v11 < 33; v11++) {
 			v18[v11] = 0;
 		}
-		fcn_004379a0(g_67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
+		d3_VisitSceneObjects(g_67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
 		*(unsigned char*) (v5 + 0xd0) = 0;
 		v21 = 0.0f;
 		if (v18[32] > 0) {
@@ -282,7 +282,7 @@ LfailB:
 		for (v11 = 0; v11 < 33; v11++) {
 			v18[v11] = 0;
 		}
-		fcn_004379a0(g_67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
+		d3_VisitSceneObjects(g_67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
 		for (v11 = 0; v11 < v18[32]; v11++) {
 			if (g_773dd8) {
 				fcn_004550b0(v18[v11], g_773dd8);
@@ -321,14 +321,14 @@ LfailB:
 			fcn_004432d0(0, 1);
 			fcn_0064d41a(v19, (char*) 0x6a7d60, *(int*) (v5 + 4));
 			v8 = fcn_00445600(0, 0x1c0, 0, v19);
-			fcn_00455350((char*) v8, (char*) (v8 + 0x4c), (float*) v20);
+			d3_TransformPoint((char*) v8, (char*) (v8 + 0x4c), (float*) v20);
 			v21 = 1e+35f;
 			v13 = 0;
 			v11 = 0;
 			do {
 				v14 = (unsigned char*) (v11 + (int) lpGebaeudeINST);
 				if (v14 != v15 && *v14 && (v24 = *(int*) (v14 + 0x61)) != 0) {
-					fcn_00455350((char*) v24, (char*) (v24 + 0x4c), v17);
+					d3_TransformPoint((char*) v24, (char*) (v24 + 0x4c), v17);
 					v17[0] = v17[0] - *(float*) (v20 + 0);
 					v17[1] = v17[1] - *(float*) (v20 + 4);
 					v17[2] = v17[2] - *(float*) (v20 + 8);
@@ -401,7 +401,7 @@ LfailB:
 			}
 			v8 = *(int*) (v15 + 0x61);
 			if (v8 && *(int*) (v8 + 0x218) == 1) {
-				fcn_00442d50(v8, 1);
+				d3_SetSubtreeVisible(v8, 1);
 			}
 			v9 = g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind;
 			if (v9 == 6 || v9 == 5 || v9 == 7) {
@@ -409,7 +409,7 @@ LfailB:
 			}
 			fcn_00598510();
 			if (*(int*) (*(int*) (v15 + 0x61) + 0x1ec)) {
-				if (fcn_00413680(*(int*) (v15 + 0x61), (int) d3_ActiveCamera, v17, &v21)) {
+				if (d3_ComputeObjectBoundingSphere(*(int*) (v15 + 0x61), (int) d3_ActiveCamera, v17, &v21)) {
 					v31 = (int) (v21 * 1.8);
 					v8 = evt_LoadGfxScript((char*) 0x6a7da0);
 					if (v8) {

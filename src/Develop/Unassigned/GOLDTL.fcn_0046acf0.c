@@ -1,6 +1,6 @@
 #include <string.h>
 extern int g_102d028, g_102d02c, g_67d388, d2_CurrentElementId; extern char* g_1015ea0;
-char* __cdecl fcn_0045bde0(char*);
+char* __cdecl d3_FindTextureByName(char*);
 char __cdecl fcn_00444860(float, float, int, char*, float*, float*);
 /* ADDRESS: GOLDTL 0x0046acf0 */
 int __cdecl fcn_0046acf0(int a0, int a1, int a2, int a3, int a4)
@@ -48,7 +48,7 @@ int __cdecl fcn_0046acf0(int a0, int a1, int a2, int a3, int a4)
 			if (!*name) {
 				continue;
 			}
-			obj = fcn_0045bde0(name);
+			obj = d3_FindTextureByName(name);
 			if (!obj) {
 				continue;
 			}

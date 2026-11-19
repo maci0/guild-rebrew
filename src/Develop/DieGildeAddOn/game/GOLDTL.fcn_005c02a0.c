@@ -15,13 +15,13 @@ extern char g_67eab0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00470820(short, short, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
-int __cdecl fcn_005c9030(int, int, int, int*);
+int __cdecl d2_ClampAmountToRange(int, int, int, int*);
 int __cdecl fcn_0050b710(int, unsigned char);
 void __cdecl fcn_005c9220(int*);
 int __cdecl fcn_00471f80(int);
@@ -62,7 +62,7 @@ int __cdecl fcn_005c02a0(char* entity)
     if (entity == 0)
         return 0;
     dlg = fcn_00470820(0, 0, "misc\\perga_rolle");
-    fcn_00471b60(dlg);
+    d2_CenterDialogWindows(dlg);
     d2_SetOverlayAnimation(0, 0);
     d2_SetForm(dlg, 1);
     text_id = io_AppendText(0x174d, *(unsigned short*)entity, g_773d75);
@@ -71,7 +71,7 @@ int __cdecl fcn_005c02a0(char* entity)
     amount = gm_WalkEntityChain(g_774970);
     amount = (int)(abs(amount + gm_WalkEntityChain(*(unsigned short*)entity)) * 0.0007843137136660516f);
     command = gm_AccumulateTyped2(g_7f4ca0 + g_774970 * 0x21c);
-    fcn_005c9030(amount, command, 0x20, &limit);
+    d2_ClampAmountToRange(amount, command, 0x20, &limit);
     d2_SetElementValue(edit, fcn_0050b710(amount, g_773d75),
         fcn_0050b710(limit, g_773d75), fcn_0050b710(amount, g_773d75));
     cancel = fcn_00472250(dlg, 1, io_AppendText(0x174e));

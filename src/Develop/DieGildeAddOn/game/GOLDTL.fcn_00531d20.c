@@ -21,7 +21,7 @@ extern double g_662930;
 unsigned short __cdecl fcn_0042e410(int a);
 int __cdecl fcn_005463a0(int n, ...);
 int __cdecl fcn_00506380(int a, int b, int c, int d);
-int __cdecl fcn_00403300(int a, ...);
+int __cdecl ch_FindCharacterByKey(int a, ...);
 int __cdecl fcn_00507c30(int a);
 int __cdecl gm_MapEntityStatRange(int a);
 int __cdecl gm_SearchTable67(int a);
@@ -70,7 +70,7 @@ void __cdecl fcn_00531d20(void)
 		kind = &((struct Building_531d20*) lpGebaeudePROT)[*sel];
 	if (g_7746b4 == 0
 	    || (fcn_00506380(g_774970, 0, 0, g_7746b4), g_7746b4 == 0))
-		rec = g_7746a4 != 0 ? fcn_00403300(g_7746a4) : 0;
+		rec = g_7746a4 != 0 ? ch_FindCharacterByKey(g_7746a4) : 0;
 	else
 		rec = *(int*) (g_7746b4 + 0x184);
 	if (rec != 0 && (*(unsigned char*) (rec + 4) & 1) == 0)
@@ -288,5 +288,5 @@ void __cdecl fcn_00531d20(void)
 		return;
 	}
 	if (g_7746a4 != 0)
-		fcn_00531c40(fcn_00403300(g_7746a4), obj, 0);
+		fcn_00531c40(ch_FindCharacterByKey(g_7746a4), obj, 0);
 }

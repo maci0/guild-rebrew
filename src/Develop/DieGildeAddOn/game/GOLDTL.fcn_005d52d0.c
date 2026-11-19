@@ -17,7 +17,7 @@ int __cdecl fcn_004c5150(int, int, char, int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00471b60(int);
+int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -77,7 +77,7 @@ int __cdecl fcn_005d52d0(char* p)
 	obj = gm_LookupEntityRecordById(*(int*) (p + 0x5c));
 	dlg = fcn_00470820(0, 0, "privillegien\\scheidung");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	base = 0x114 + (*(unsigned char*) (p + 9) ? 0xa : 0);
 	x = io_AppendText(0x1d8f, base + *(unsigned char*) (p + 0xd), 8, s.n - (int) (w * g_6629a0), *(unsigned short*) obj, *(unsigned short*) obj);

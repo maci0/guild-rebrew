@@ -68,7 +68,7 @@ typedef struct {
 extern char* g_104049c;
 
 void __cdecl fcn_0044a390(Obj44a770* m);
-void __cdecl fcn_0044a290(Obj44a770* m);
+void __cdecl d3_RecalculateMeshNormals(Obj44a770* m);
 int __cdecl fcn_0044aec0(Obj44a770* m);
 void __cdecl fcn_0044a9f0(Obj44a770* m);
 void* __cdecl m_alloc(int size, char* tag);
@@ -85,7 +85,7 @@ void __cdecl fcn_0044a770(Obj44a770* m, char normals)
 
 	fcn_0044a390(m);
 	if (normals) {
-		fcn_0044a290(m);
+		d3_RecalculateMeshNormals(m);
 	}
 	for (i = 0; i < 8; i++) {
 		m->box[i].x = m->verts[m->nverts + i].pos.x;

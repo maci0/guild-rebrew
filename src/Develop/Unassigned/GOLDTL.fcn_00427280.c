@@ -32,8 +32,8 @@ extern char g_14cb3c0[];
 void __cdecl fcn_00426680(int lex, struct tok_427280* t);
 int __cdecl fcn_00428800(int a);
 int __cdecl fcn_004263b0(char dir);
-int __cdecl fcn_00426340(void);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+int __cdecl evt_SeekSemicolon(void);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 #define FRAME_427280 (*(struct frame_427280**) (evt_CurrentScript + 0xc28))
 #define LEX_427280 (*(int*) (evt_CurrentScript + 0x118))
@@ -51,7 +51,7 @@ int __cdecl fcn_00427280(void)
 	pos = LEX_427280 - strlen(g_14cb3c0);
 	fcn_00426680(LEX_427280, &t);
 	if (t.type != 1 || t.u.num != 0xc) {
-		fcn_00425bf0(evt_CurrentScript, LEX_427280, "Syntax error: '(' missing!");
+		evt_LogScriptError(evt_CurrentScript, LEX_427280, "Syntax error: '(' missing!");
 		return 0;
 	}
 	cond = fcn_00428800(0);
@@ -71,7 +71,7 @@ int __cdecl fcn_00427280(void)
 	}
 	FRAME_427280->level++;
 	if (FRAME_427280->level > 8) {
-		fcn_00425bf0(evt_CurrentScript, LEX_427280, "Too many looplevel...");
+		evt_LogScriptError(evt_CurrentScript, LEX_427280, "Too many looplevel...");
 		FRAME_427280->level--;
 	}
 	if (cond == 0) {
@@ -81,8 +81,8 @@ int __cdecl fcn_00427280(void)
 			LEX_427280 = pos;
 			fcn_004263b0(type);
 		} else {
-			if (fcn_00426340() == 0) {
-				fcn_00425bf0(evt_CurrentScript, LEX_427280, "Syntax error: ';' missing!");
+			if (evt_SeekSemicolon() == 0) {
+				evt_LogScriptError(evt_CurrentScript, LEX_427280, "Syntax error: ';' missing!");
 				return 0;
 			}
 		}

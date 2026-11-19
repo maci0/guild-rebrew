@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-int __cdecl fcn_0042b1c0(int a);
+int __cdecl msx_FindSampleHandleIndex(int a);
 
 /* ADDRESS: GOLDTL 0x0042a850 */
 int __cdecl fcn_0042a850(int a)
@@ -7,7 +7,7 @@ int __cdecl fcn_0042a850(int a)
     int r = 0;
 
     if (g_6b7f90 != 0) {
-        if (fcn_0042b1c0(a) >= 0) {
+        if (msx_FindSampleHandleIndex(a) >= 0) {
             (*(void (__stdcall **)(int)) 0x6623cc)(a);
         } else {
             r = -1;

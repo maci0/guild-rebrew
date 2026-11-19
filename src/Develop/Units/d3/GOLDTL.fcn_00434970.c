@@ -7,7 +7,7 @@ extern volatile int g_6b7fac;
 
 void __cdecl fcn_00434ba0(char* anim, char* mesh);
 int __cdecl fcn_004321a0(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max);
-int __cdecl fcn_00435410(char* e);
+int __cdecl d3_CreateObjectMesh(char* e);
 char __cdecl fcn_004315c0(char* obj);
 void __cdecl fcn_004316c0(int obj);
 
@@ -87,7 +87,7 @@ char* __cdecl fcn_00434970(char* context, char* name, D3_ANIMATION_OPTIONS optio
 						if (*(int*) (table + 0x264) != 0) {
 							if (*(unsigned char*) (table + 0x2a1) & 2) {
 								if (*(int*) (table + 0x268) == 0) {
-									*(int*) (*(int*) (context + 0x318) + 0x268) = fcn_00435410(*(char**) (context + 0x318));
+									*(int*) (*(int*) (context + 0x318) + 0x268) = d3_CreateObjectMesh(*(char**) (context + 0x318));
 								}
 							}
 						}

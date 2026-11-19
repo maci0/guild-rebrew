@@ -11,7 +11,7 @@ extern char s_67d420[];
 
 #include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_004675f0(int x, int y, int a3, int a4, int a5, int a6, int a7);
-int __cdecl fcn_00465eb0(int id, int win);
+int __cdecl d2_AddWindowChild(int id, int win);
 
 /* ADDRESS: GOLDTL 0x004677e0 */
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win)
@@ -31,6 +31,6 @@ int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, i
 		return -1;
 	}
 	id = fcn_004675f0(window->left + x, window->top - (*(int*) &window->pad3c[0x21c]) + y, a3, a4, a5, a6, a7);
-	fcn_00465eb0(id, win);
+	d2_AddWindowChild(id, win);
 	return id;
 }

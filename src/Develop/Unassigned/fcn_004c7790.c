@@ -5,7 +5,7 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_0064d3f8(void);
 void __cdecl fcn_0042e4c0(int a0);
-int __cdecl fcn_004c4dc0(void* a0, int a1);
+int __cdecl cm_ResolveSpecialEntityId(void* a0, int a1);
 int __cdecl fcn_00503fe0(int a0, int a1, int a2);
 int __cdecl fcn_0050a7e0(int a0, int a1, int a2, unsigned short a3,
                         int a4, int a5, int a6, int a7);
@@ -27,7 +27,7 @@ int __cdecl fcn_004c7790(void* packet, char* reply)
 	if (v == -1) {
 		arg = 0;
 	} else {
-		v = fcn_004c4dc0(packet, v);
+		v = cm_ResolveSpecialEntityId(packet, v);
 		*(int*) ((char*) packet + 0x1f) = v;
 		arg = fcn_00503fe0(1, 1, v);
 		if (arg == 0)

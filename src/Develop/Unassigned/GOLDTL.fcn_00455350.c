@@ -15,7 +15,7 @@ struct Node {
 
 
 /* ADDRESS: GOLDTL 0x00455350 */
-void __cdecl fcn_00455350(char* object, float* in, float* out)
+void __cdecl d3_TransformPoint(char* object, float* in, float* out)
 {
 	Node* n;
 	float x;

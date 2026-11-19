@@ -51,7 +51,7 @@ extern unsigned short g_14cbcac;
 extern unsigned short g_14cbcae;
 extern int g_6b7d40;
 
-void __cdecl fcn_00420b70(void);
+void __cdecl nt_ResetPacketStats(void);
 void __cdecl nt_LogWinsockError(int err);
 
 
@@ -72,7 +72,7 @@ int __cdecl fcn_00420db0(char* host, int port)
 	int i;
 	int r;
 
-	fcn_00420b70();
+	nt_ResetPacketStats();
 	g_14cbca0 = -1;
 	g_14cbca4 = 0;
 	g_14cbca8 = 0;

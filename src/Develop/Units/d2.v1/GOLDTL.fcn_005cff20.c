@@ -71,18 +71,18 @@ extern char g_7f4ca0[];
 
 void* __cdecl fcn_00470820(short, short, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
-void __cdecl fcn_0046f2c0(int, int);
+void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_00469470(int, int);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
 int __cdecl fcn_0046fac0(int, int, char*, int);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl fcn_00472640(int, int);
@@ -168,7 +168,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 	}
 	dlg = (int) fcn_00470820(0, 0, "Gesetze\\Auswahl2");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	if (a3 != 0) {
 		d2_SetForm(dlg, 1);
 		io_AppendText(a3);
@@ -183,7 +183,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 	do {
 		if (flag) {
 			d2_SetForm(dlg, 2);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			width = *(short*) (g_772500 + 0x1ec2c);
 			dy = *(short*) (g_772500 + 0x1ec2e);
 			if (n != 0) {
@@ -218,7 +218,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 					s->name = name;
 					*(int*) (g_1015ea0 + name * 0x2f4 + 0x6c) = 1;
 					*(int*) (g_1015ea0 + name * 0x2f4 + 0x18) = 0xa0;
-					fcn_00472900(name, 0x56);
+					d2_SetElementFont(name, 0x56);
 					*(int*) (g_1015ea0 + btn * 0x2f4 + 0x5c) = shown;
 					*(int*) (g_1015ea0 + btn * 0x2f4 + 0x60) = (shown == 0);
 					slider = fcn_004677e0(0x8c, dy + y + 4, 0x40, 0, 0x64,

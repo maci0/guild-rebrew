@@ -10,9 +10,9 @@ int __cdecl fcn_00507870(char*);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_00426cc0(int);
 void __cdecl fcn_00428720(int);
-int __cdecl fcn_00413190(int);
+int __cdecl d3_GetContextIndex(int);
 void __cdecl fcn_004432d0(int, int);
-void __cdecl fcn_004030e0(char*);
+void __cdecl ch_DestroyCharacter(char*);
 char* __cdecl fcn_004fe2e0(char*, int, float*, float*, int, int);
 void __cdecl fcn_00407800(int, int, char*);
 char* __cdecl evt_LoadGfxScript(char*);
@@ -99,7 +99,7 @@ void __cdecl fcn_00566360(char* a0)
 			return;
 		}
 		v15 = d3_CurrentContextIndex;
-		v7 = fcn_00413190(*(unsigned int*) (v6 + 0x88));
+		v7 = d3_GetContextIndex(*(unsigned int*) (v6 + 0x88));
 		name[0] = g_6b5c60[0];
 		memset(name + 1, 0, 0x7f);
 		fcn_004432d0(v7, 1);
@@ -113,7 +113,7 @@ void __cdecl fcn_00566360(char* a0)
 		v3 = *(int*) (v6 + 0x2c);
 		v30 = *(int*) (v6 + 0x30);
 		strcpy(name, (char*) (v6 + 0x1a8));
-		fcn_004030e0((char*) v6);
+		ch_DestroyCharacter((char*) v6);
 		*(unsigned int*) (ent + 0x184) = 0;
 		*(char*) (ent + 0x1f4) = 0;
 		p = fcn_004fe2e0(ent, v7, pos, rot, 0, 0);

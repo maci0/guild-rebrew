@@ -24,7 +24,7 @@ typedef struct {
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
 
-int __cdecl fcn_004eb220(char*);
+int __cdecl gm_CheckZunftPreismanipulation(char*);
 int __cdecl fcn_00507910(int);
 int __cdecl fcn_004a40c0(Calc*);
 unsigned short __cdecl gm_RandomMod(int);
@@ -56,7 +56,7 @@ unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* a1, 
 
 	if (a0 != 0 || a2 != 0)
 		return 0;
-	if (fcn_004eb220((char*) a1) != 1)
+	if (gm_CheckZunftPreismanipulation((char*) a1) != 1)
 		return 0;
 	fn = sizeof(matched);
 	fp = matched;

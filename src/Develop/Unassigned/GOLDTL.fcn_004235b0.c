@@ -9,7 +9,7 @@ extern int g_6b7d7c;
 extern Voice_14cbbe0 g_14cbbe0;
 Voice* __cdecl fcn_004229b0(void);
 char* __cdecl fcn_00422530(char* bank, const char* name);
-char* __cdecl fcn_004228c0(char* sample);
+char* __cdecl sb_FindSampleBank(char* sample);
 void __cdecl sb_LoadEntry(char* bank, char* sample);
 int __cdecl fcn_00423670(Voice* v, int a, int b);
 
@@ -26,7 +26,7 @@ Voice* __cdecl fcn_004235b0(char* bank, const char* name, int prio, int loop, in
 		s = fcn_00422530(bank, name);
 		v->sample = s;
 		if (s != 0 && bank == 0) {
-			bank = fcn_004228c0(s);
+			bank = sb_FindSampleBank(s);
 		}
 		if (s == 0 || bank == 0 || s[0x36] != 2) {
 			v = 0;

@@ -1,7 +1,7 @@
-void __cdecl fcn_0047c450(void);
+void __cdecl d2_CreateQuadVertexBuffer(void);
 
 /* ADDRESS: GOLDTL 0x0047ce80 */
 void __cdecl fcn_0047ce80(void)
 {
-    fcn_0047c450();
+    d2_CreateQuadVertexBuffer();
 }

@@ -1,8 +1,8 @@
 
 
-void __cdecl fcn_004030e0(int);
+void __cdecl ch_DestroyCharacter(int);
 
-void __cdecl fcn_0040c070(void)
+void __cdecl ch_ClearCharacters(void)
 {
 	int a;
 	int v;
@@ -10,7 +10,7 @@ void __cdecl fcn_0040c070(void)
 	for (a = 0x14d0020; a < 0x14d0c20; a += 4) {
 		v = *(int*) a;
 		if (v != 0) {
-			fcn_004030e0(v);
+			ch_DestroyCharacter(v);
 			*(int*) a = 0;
 		}
 	}

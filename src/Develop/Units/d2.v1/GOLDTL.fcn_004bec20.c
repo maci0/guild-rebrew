@@ -5,7 +5,7 @@ extern int g_100f1dc;
 extern int g_774654;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -15,7 +15,7 @@ char* __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl fcn_00469470(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00476b60(void);
-int __cdecl fcn_0046f2c0(int, int);
+int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_00472830(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00469510(int);
@@ -55,7 +55,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 	ids[5] = 0x96;
 	ids[6] = 0x2db;
 	g = fcn_00470820(0, 0, "misc\\routing_choose_good_enhanced");
-	fcn_00471b60(g);
+	d2_CenterDialogWindows(g);
 	d2_SetForm(g, 1);
 	io_AppendText("$Z%2N3$A%1G", *(unsigned short*) (a0 + 0x27), a0);
 	d2_SetForm(g, 4);
@@ -78,7 +78,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 		}
 		if (*(int*) (0x102cbc8 + n) != v18 || v2) {
 			d2_SetForm(g, 2);
-			fcn_0046f2c0(fcn_00472830(g, 2), 0);
+			d2_ClearWindowChildren(fcn_00472830(g, 2), 0);
 			for (i = 0; i < 0x30; i++) {
 				list[i] = -1;
 			}

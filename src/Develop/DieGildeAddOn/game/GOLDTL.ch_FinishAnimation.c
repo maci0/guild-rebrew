@@ -1,6 +1,6 @@
 char* __cdecl ch_AttachMotion(char* obj, int kind);
 void __cdecl fcn_004311a0(char* node, char* an, int from, int to, int flags);
-void __cdecl fcn_00435500(char* o, char* name);
+void __cdecl d3_RemoveObjectAnimation(char* o, char* name);
 
 /* Finish the animation parked on the object. A fresh clip is started when
  * none is running and the event has no follow-up; otherwise the clip is
@@ -38,7 +38,7 @@ byte_ret:
 		if ((obj[0x8c] & 2) != 0) {
 			goto clear_anim;
 		}
-		fcn_00435500(*(char**) (*(char**) (*(char**) (ev + 0x14) + 0x34) + 0x1ec) + 0xf4, *(char**) (*(char**) (obj + 0x70) + 0x68));
+		d3_RemoveObjectAnimation(*(char**) (*(char**) (*(char**) (ev + 0x14) + 0x34) + 0x1ec) + 0xf4, *(char**) (*(char**) (obj + 0x70) + 0x68));
 		*(char**) (obj + 0x70) = 0;
 		return -1;
 	}
@@ -54,7 +54,7 @@ byte_ret:
 		if ((obj[0x8c] & 2) != 0) {
 			goto clear_anim;
 		}
-		fcn_00435500(*(char**) (*(char**) (*(char**) (ev + 0x14) + 0x34) + 0x1ec) + 0xf4, *(char**) (*(char**) (obj + 0x70) + 0x68));
+		d3_RemoveObjectAnimation(*(char**) (*(char**) (*(char**) (ev + 0x14) + 0x34) + 0x1ec) + 0xf4, *(char**) (*(char**) (obj + 0x70) + 0x68));
 clear_anim:
 		*(char**) (obj + 0x70) = 0;
 		return -1;

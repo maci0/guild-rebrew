@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00425940 */
-int __cdecl fcn_00425940(void)
+int __cdecl sb_CountFlaggedVoices(void)
 {
 	int count;
 	int i;

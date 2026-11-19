@@ -29,7 +29,7 @@ int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_0046f280(int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00500d20(void*, void*);
+int __cdecl gm_GetElapsedMinutes(void*, void*);
 
 /* ADDRESS: GOLDTL 0x0050ee80 */
 void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
@@ -229,8 +229,8 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 			goto next;
 fnd:
 			*(float*) (g_1015ea0 + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 * 0x2f4 + 0x1f4) =
-				(float) fcn_00500d20(q + 0x44, (void*) &gm_GameTime) /
-				(float) fcn_00500d20(q + 0x44, q + 0x52);
+				(float) gm_GetElapsedMinutes(q + 0x44, (void*) &gm_GameTime) /
+				(float) gm_GetElapsedMinutes(q + 0x44, q + 0x52);
 next:			;
 		}
 	}

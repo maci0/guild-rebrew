@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_678fd0[];
-void __cdecl fcn_00425810(void);
+void __cdecl sbs_DestroySB(void);
 char* __cdecl m_alloc(int size, char* tag);
 char* __cdecl fcn_0064d530(char* dst, const char* src, unsigned int n);
 
@@ -10,7 +10,7 @@ int __cdecl sbs_CreateSB(char* s)
 {
 	int n;
 
-	fcn_00425810();
+	sbs_DestroySB();
 	if (sbs_BankManager == 0 && s != 0) {
 		sbs_BankManager = m_alloc(0x40, g_678fd0);
 		if (sbs_BankManager != 0) {

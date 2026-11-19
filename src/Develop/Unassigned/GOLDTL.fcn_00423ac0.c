@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-char* __cdecl fcn_00423ac0(char* s)
+char* __cdecl sbs_FindSet(char* s)
 {
 	char* g;
 	char* p;

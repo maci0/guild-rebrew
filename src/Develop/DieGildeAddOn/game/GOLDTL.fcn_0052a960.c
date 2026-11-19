@@ -47,7 +47,7 @@ int __cdecl abs(int);
 
 char __cdecl fcn_0052a910(char* e, int flag);
 void __cdecl fcn_004463f0(int a, int b, float v);
-void __cdecl fcn_004379a0(int list, int a, int mask, char (__cdecl* fn)(char*, int), int arg);
+void __cdecl d3_VisitSceneObjects(int list, int a, int mask, char (__cdecl* fn)(char*, int), int arg);
 void __cdecl fcn_00445f50(int idx, float frac, float w, int changed);
 
 /* Day-light phase from the clock. v is reused for the truncated phase so it
@@ -109,10 +109,10 @@ void __cdecl fcn_0052a960(Stamp* now)
 	idx = v % 7;
 	if (g_6a2bd8 != idx && ((Slot_52a960*)g_1043340)[d3_CurrentContextIndex].f2c != 0) {
 		if (idx >= 0 && g_7746fc == 0) {
-			fcn_004379a0(g_67a370, 0, 6, fcn_0052a910, 0);
+			d3_VisitSceneObjects(g_67a370, 0, 6, fcn_0052a910, 0);
 			g_7746fc++;
 		} else if (idx >= 3 && g_7746fc == 1) {
-			fcn_004379a0(g_67a370, 0, 6, fcn_0052a910, 1);
+			d3_VisitSceneObjects(g_67a370, 0, 6, fcn_0052a910, 1);
 			g_7746fc++;
 		}
 		g_6a2bd8 = idx;

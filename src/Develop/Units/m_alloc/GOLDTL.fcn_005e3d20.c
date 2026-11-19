@@ -39,7 +39,7 @@ Tex* __cdecl fcn_004770a0(TexDesc*, int);
 void __cdecl fcn_00476620(int, int, int, int, int, int, int, Tex*);
 long __stdcall fcn_006114ff(void*, void*, Rect*, void*, void*, Rect*, int, unsigned int);
 void __cdecl fcn_00475fd0(Tex*);
-void __cdecl fcn_00476060(Tex*);
+void __cdecl d2_UnlockSurface(Tex*);
 void __cdecl fcn_00475f80(Tex*);
 
 void __cdecl fcn_005e3d20(void)
@@ -80,7 +80,7 @@ void __cdecl fcn_005e3d20(void)
 			ls_SavePreviewPixels[k++] = small->bits[small->pitch * y + x];
 		}
 	}
-	fcn_00476060(small);
+	d2_UnlockSurface(small);
 	fcn_00475f80(small);
 	fcn_00475f80(big);
 }

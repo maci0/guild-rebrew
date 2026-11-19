@@ -32,8 +32,8 @@ typedef struct {
 
 extern float g_662d70[4];
 
-void __cdecl fcn_00455350(char* object, float* in, float* out);
-int __cdecl fcn_004133e0(char* e, float* lo, float* hi);
+void __cdecl d3_TransformPoint(char* object, float* in, float* out);
+int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
 char* __cdecl fcn_00442910(int parent, float* pos, float* dir, char* name);
 void __cdecl fcn_0043a3f0(char* a, char* b, COLOR546590 c);
 void __cdecl fcn_00414be0(char* p, unsigned char r, unsigned char g, unsigned char b);
@@ -51,8 +51,8 @@ char* __cdecl fcn_00546590(char* a0, char* name, char* entity)
 	float hi;
 	char* obj;
 
-	fcn_00455350(entity, (float*) (entity + 0x4c), pos);
-	fcn_004133e0(entity, &lo, &hi);
+	d3_TransformPoint(entity, (float*) (entity + 0x4c), pos);
+	d3_GetObjectVerticalBounds(entity, &lo, &hi);
 	pos[1] = hi;
 	obj = fcn_00442910(0, pos, g_662d70, name);
 	*(char**) (a0 + 0xc) = obj;

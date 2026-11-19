@@ -37,7 +37,7 @@ typedef struct Ff01c0Vec {
 	float z;
 } Ff01c0Vec;
 
-int __cdecl fcn_00455350(char* src, char* pos, float* out);
+int __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl fcn_00414ab0(float* a, float* b, char* ent);
 int __cdecl fcn_00418000(int a1, float* pos, int n, float a4, float a5,
                          float a6, float a7, float a8, float a9, float* a10,
@@ -123,7 +123,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* a3)
 		if (*(int*) (rec + 0x61) == 0) {
 			continue;
 		}
-		fcn_00455350(*(char**) (rec + 0x61), *(char**) (rec + 0x61) + 0x4c,
+		d3_TransformPoint(*(char**) (rec + 0x61), *(char**) (rec + 0x61) + 0x4c,
 		             &pv.x);
 		s1 = cx - pv.x;
 		s2 = cy - pv.y;

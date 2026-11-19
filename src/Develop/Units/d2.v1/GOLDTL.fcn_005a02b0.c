@@ -10,7 +10,7 @@ extern int g_774654;
 extern char* g_77255c;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl io_AppendText(int, ...);
@@ -48,7 +48,7 @@ int __cdecl fcn_005a02b0(void)
 	slot = g_7f4ca0 + (unsigned int) g_774970 * 0x21c;
 	n = gm_GetOppositeStatIndex(*(unsigned char*) (slot + 0x164)) + 1;
 	h = fcn_00470820(0, 0, (char*) 0x6aa80c);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	fcn_00525ef0();

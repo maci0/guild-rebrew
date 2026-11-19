@@ -47,7 +47,7 @@ int __cdecl fcn_00469890(void);
 int __cdecl fcn_0046b520(char* s, int font);
 
 /* ADDRESS: GOLDTL 0x00467240 */
-int __cdecl fcn_00467240(int x, int y, int w, int h, unsigned char flags)
+int __cdecl d2_OpenInputIcon(int x, int y, int w, int h, unsigned char flags)
 {
 	int i;
 	int n;

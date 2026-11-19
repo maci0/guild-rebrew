@@ -6,7 +6,7 @@ extern char* g_1052ba4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/d3_animation.h"
 
-char* __cdecl fcn_00418b40(const char* name, char* a, int b)
+char* __cdecl d3_LoadAndRegisterBinaryAnim(const char* name, char* a, int b)
 {
 	char buf[0x100];
 	char* o;

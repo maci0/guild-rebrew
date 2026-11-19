@@ -13,7 +13,7 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl fcn_00445600(int, int, int, int*);
 void __cdecl fcn_004458a0(int, char*, char*);
 void __cdecl fcn_00442c00(int, int);
-char* __cdecl fcn_0040c120(int, int, int);
+char* __cdecl ch_CreateAction(int, int, int);
 
 void __cdecl fcn_004d8700(int* a)
 {
@@ -34,6 +34,6 @@ void __cdecl fcn_004d8700(int* a)
 		fcn_00442c00(h, 1);
 		*(int*) (e + 0x1ac) = 0;
 	}
-	o = fcn_0040c120(*(int*) (e + 0x184), 0x2e, 1);
+	o = ch_CreateAction(*(int*) (e + 0x184), 0x2e, 1);
 	*(blk24*) (o + 0xf0) = g_68bef4;
 }

@@ -2,7 +2,7 @@
 
 typedef int (__stdcall* fcn_0047c450_f)(void*, int, int, int, int, int);
 
-int __cdecl fcn_0047c450(void)
+int __cdecl d2_CreateQuadVertexBuffer(void)
 {
 	void* obj;
 

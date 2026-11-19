@@ -25,14 +25,14 @@ extern float g_662d40[3];
 extern int g_14abee0[];
 
 char* __cdecl fcn_00445600(char*, int, char*, char*);
-void __cdecl fcn_00455350(char*, float*, float*);
+void __cdecl d3_TransformPoint(char*, float*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00455140(char*, char*, float*);
 float __cdecl fcn_00451380(char*, float*);
 void __cdecl fcn_00438cb0(Model*, float*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 void __cdecl fcn_00438ac0(Model*, int);
-void __cdecl fcn_00404a00(Figure*, int, char*);
+void __cdecl ch_PreloadCharacterMotions(Figure*, int, char*);
 void __cdecl fcn_005338d0(Model*, int, int);
 
 Figure* __cdecl fcn_0053b090(char* res, char* kind, int anim)
@@ -45,7 +45,7 @@ Figure* __cdecl fcn_0053b090(char* res, char* kind, int anim)
 	if (h == 0) {
 		return 0;
 	}
-	fcn_00455350(h, (float*) (h + 0x4c), box);
+	d3_TransformPoint(h, (float*) (h + 0x4c), box);
 	f = (Figure*) ch_CreateAtPosition(kind, box);
 	if (f != 0) {
 		float pos[3];
@@ -60,7 +60,7 @@ Figure* __cdecl fcn_0053b090(char* res, char* kind, int anim)
 		ch_PlaceOnGround(f, 0);
 		f->model->owner = f;
 		fcn_00438ac0(f->model, 1);
-		fcn_00404a00(f, 1, "bewegung/gehen");
+		ch_PreloadCharacterMotions(f, 1, "bewegung/gehen");
 		f->model->x48 = 0;
 		f->speed = 0.7f;
 		f->target = -1;

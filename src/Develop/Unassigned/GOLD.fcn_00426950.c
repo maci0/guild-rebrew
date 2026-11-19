@@ -1,8 +1,8 @@
 extern int g_0063319c;
 #include <stdio.h>
 #include <string.h>
-char* __cdecl fcn_00422730(char*);
-char* __cdecl fcn_00422aa0(void);
+char* __cdecl sb_FindBankByPath(char*);
+char* __cdecl sb_GetLastBank(void);
 void* __cdecl m_alloc(unsigned int, char*);
 void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_00426660(char*, char*);
@@ -18,7 +18,7 @@ char* __cdecl fcn_00426950(char* name, int load)
     int i, count;
     char c;
     if (!g_0063319c) return (char*) 0x14607c0;
-    bank = fcn_00422730(name);
+    bank = sb_FindBankByPath(name);
     if (bank == 0) {
         i = 0;
         do {
@@ -41,7 +41,7 @@ char* __cdecl fcn_00426950(char* name, int load)
                         m_FreeTracked(bank);
                         bank = 0;
                     } else {
-                        tail = fcn_00422aa0();
+                        tail = sb_GetLastBank();
                         if (tail) *(char**) (tail + 0x13c) = bank;
                         else *(char**) 0x633198 = bank;
                         *(int*) 0x633194 += 0x144 + count * 0x40;

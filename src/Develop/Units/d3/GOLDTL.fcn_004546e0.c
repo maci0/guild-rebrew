@@ -3,7 +3,7 @@
 
 #include "Develop/Units/d3/d3_camera.h"
 
-void __cdecl fcn_00438100(char* e, char* cam, int f);
+void __cdecl d3_UpdateObjectCameraTransform(char* e, char* cam, int f);
 char* __cdecl fcn_00455910(char* e, int h, char* p);
 
 /* ADDRESS: GOLDTL 0x004546e0 */
@@ -14,7 +14,7 @@ char __cdecl fcn_004546e0(char* e, float* lo, float* hi)
 	int h;
 
 	if (!(*(unsigned char*) (e + 0x216) & 0x20))
-		fcn_00438100(e, *(char**) 0x6b8014, 0);
+		d3_UpdateObjectCameraTransform(e, *(char**) 0x6b8014, 0);
 	h = *(int*) (e + 0x1ec);
 	q = (float*) fcn_00455910(e, h + 0xf4, (char*) (h + 8));
 	if (q != 0) {

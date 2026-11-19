@@ -4,7 +4,7 @@ extern char* lpObjektePROT;
 
 
 int sprintf(char*, const char*, ...);
-void __cdecl fcn_00442d50(char*, int);
+void __cdecl d3_SetSubtreeVisible(char*, int);
 void __cdecl fcn_005105a0(char*);
 void __cdecl fcn_005107f0(void);
 
@@ -21,7 +21,7 @@ void __cdecl fcn_00510820(char* obj, unsigned char* ent, int kind)
 		if (*t != 10) {
 			*(int*) (obj + 0x220) = 3;
 			if (*(int*) (obj + 0x218) == 1 && (ent[0x5a] & 1) == 0) {
-				fcn_00442d50(obj, 1);
+				d3_SetSubtreeVisible(obj, 1);
 			}
 		} else {
 			*(int*) (obj + 0x220) = 0;

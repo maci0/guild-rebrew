@@ -39,9 +39,9 @@ void __cdecl txt_OpenText(char*, int);
 int __cdecl fcn_0042bd20(char*);
 #include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_004b2070(void);
-void __cdecl fcn_0046b4f0(void);
+void __cdecl d2_ClearScreen(void);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471c00(int, int);
+void __cdecl d2_PositionWindow(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl io_AppendText(int, char*);
 void __cdecl fcn_00420db0(int, int);
@@ -54,12 +54,12 @@ void __cdecl fcn_005b1ef0(void);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 void __cdecl msx_InitAIL(void);
 int __cdecl sb_Init(int, int, int, int, int);
-void __cdecl fcn_00418bc0(int);
-void __cdecl fcn_00419480(int);
+void __cdecl d3snd_InitSources(int);
+void __cdecl d3sndw_Init(int);
 void __cdecl fcn_004226b0(char*);
 int __cdecl sb_LoadSampleBank(char*, int);
 void __cdecl main_PreloadSound(char*);
-void __cdecl fcn_0041fad0(int, int, int);
+void __cdecl msx_InitDrivers(int, int, int);
 void __cdecl fcn_005e2590(void);
 void __cdecl fcn_00525eb0(void);
 void __cdecl fcn_00510900(void);
@@ -75,10 +75,10 @@ unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 void __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_00473150(unsigned char*);
 void __cdecl fcn_00429920(void);
-void __cdecl fcn_0040c7c0(void);
+void __cdecl evt_RegisterCoreCommands(void);
 void __cdecl fcn_00410870(void);
 void __cdecl ch_RegisterScriptCommands(void);
-void __cdecl fcn_00411130(void);
+void __cdecl evt_RegisterSoundCommands(void);
 void __cdecl fcn_0042a020(void);
 void __cdecl fcn_005e2510(void);
 int __cdecl fcn_005356e0(void);
@@ -109,7 +109,7 @@ extern int __cdecl fcn_0065f220(char* a, char* b);
 extern int __cdecl gm_RandomMod(int n);
 extern int __cdecl fcn_004fdec0(char* name);
 extern void __cdecl fcn_004b20d0(unsigned char v);
-extern void __cdecl fcn_0057ddc0(char* ini);
+extern void __cdecl main_LoadMessageFilterMask(char* ini);
 extern int __cdecl fcn_00538680(void** handle);
 extern int __cdecl fcn_00539090(HINSTANCE inst, int unused, int windowed);
 extern int __cdecl fcn_00538710(void);
@@ -145,12 +145,12 @@ int __cdecl main_OpenEngine(void)
 		}
 	}
 	fcn_004b2070();
-	fcn_0046b4f0();
+	d2_ClearScreen();
 	screen = fcn_00470820(0, 0, "Misc\\Loading_main");
-	fcn_00471c00(((Screen*)g_1038144)[screen].image, 3);
+	d2_PositionWindow(((Screen*)g_1038144)[screen].image, 3);
 	fcn_00469c40(0, d2_ScreenHeight - ((D2_WIN*)g_1015f40)[((Screen*)g_1038144)[screen].window].height - 0x30,
 		((D2_WIN*)g_1015f40)[((Screen*)g_1038144)[screen].window].slot);
-	fcn_00471c00(((Screen*)g_1038144)[screen].window, 1);
+	d2_PositionWindow(((Screen*)g_1038144)[screen].window, 1);
 	io_AppendText(0x73, g_7e25a0);
 	fcn_00420db0(0, 0);
 	fcn_004c3d50();
@@ -173,8 +173,8 @@ int __cdecl main_OpenEngine(void)
 			g_774934 = 0;
 			msx_MusicEnabled = 0;
 		}
-		fcn_00418bc0(0x40);
-		fcn_00419480(0x30);
+		d3snd_InitSources(0x40);
+		d3sndw_Init(0x30);
 		sprintf(path, "%ssfx\\", g_6a3550);
 		fcn_004226b0(path);
 		(*(int*)&g_7747b8) = sb_LoadSampleBank("system.sbf", 0);
@@ -182,7 +182,7 @@ int __cdecl main_OpenEngine(void)
 		main_PreloadSound(ini);
 	}
 	if (msx_MusicEnabled != 0) {
-		fcn_0041fad0(2, 0x10, 44100);
+		msx_InitDrivers(2, 0x10, 44100);
 		sprintf(path, "%smsx\\", g_6a3550);
 		SetTrackPath(path);
 	}
@@ -229,10 +229,10 @@ int __cdecl main_OpenEngine(void)
 	}
 	(*(unsigned char*)&g_774944) = 1;
 	fcn_00429920();
-	fcn_0040c7c0();
+	evt_RegisterCoreCommands();
 	fcn_00410870();
 	ch_RegisterScriptCommands();
-	fcn_00411130();
+	evt_RegisterSoundCommands();
 	g_67a590 = (int) fcn_0042a020;
 	(*(int*)&g_67a0d8) = 0x400000;
 	fcn_005e2510();

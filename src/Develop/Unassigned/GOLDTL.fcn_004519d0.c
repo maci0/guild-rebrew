@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-void __cdecl fcn_004519d0(float* m, float* e)
+void __cdecl d3_MatrixToEulerAngles(float* m, float* e)
 {
 	float c;
 

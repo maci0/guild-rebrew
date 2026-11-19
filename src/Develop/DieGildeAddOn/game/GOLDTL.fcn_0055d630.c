@@ -10,7 +10,7 @@ struct list_55d630 {
 
 #include <string.h>
 
-void __cdecl fcn_004379a0(int, char*, int, void*, struct list_55d630*);
+void __cdecl d3_VisitSceneObjects(int, char*, int, void*, struct list_55d630*);
 char __cdecl fcn_0055d5e0(char*, struct list_55d630*);
 unsigned short __cdecl gm_RandomMod(int);
 
@@ -24,10 +24,10 @@ char* __cdecl fcn_0055d630(char* o)
 	if (o != 0 && (o[0x214] & 1) == 0) {
 		saved = *(int*) (o + 0x1f4);
 		*(int*) (o + 0x1f4) = 0;
-		fcn_004379a0(g_67a370, o, 0x100, (void*) fcn_0055d5e0, &l);
+		d3_VisitSceneObjects(g_67a370, o, 0x100, (void*) fcn_0055d5e0, &l);
 		*(int*) (o + 0x1f4) = saved;
 	} else {
-		fcn_004379a0(g_67a370, o, 0x100, (void*) fcn_0055d5e0, &l);
+		d3_VisitSceneObjects(g_67a370, o, 0x100, (void*) fcn_0055d5e0, &l);
 	}
 	if (l.n == 0) {
 		return 0;

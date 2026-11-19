@@ -28,15 +28,15 @@ extern char s_68b1e0[];
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00473150(char*);
 void __cdecl fcn_004432d0(int, int);
-char __cdecl fcn_00448360(const char*, void*, SCENE_PROGRESS);
+char __cdecl d3_LoadScene(const char*, void*, SCENE_PROGRESS);
 void __cdecl gv_Free3Fields(int*);
 int __cdecl fcn_004026f0(char*);
 void __cdecl fcn_0045b290(char*, int);
-char __cdecl fcn_00437ac0(int, void*, int, void (__cdecl*)(void));
+char __cdecl d3_TraverseSceneObjects(int, void*, int, void (__cdecl*)(void));
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 char* __cdecl fcn_00445600(char*, int, char*, char*);
-char* __cdecl fcn_00407330(void);
-void __cdecl fcn_00455350(char*, float*, float*);
+char* __cdecl ch_SelectRandomDummy(void);
+void __cdecl d3_TransformPoint(char*, float*, float*);
 void __cdecl ch_SetPosition(char*, float*, int);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 int __cdecl fcn_00413160(void);
@@ -90,10 +90,10 @@ void __cdecl init_LoadObjektScene(int a0)
 		fcn_004432d0(type, 0);
 		sprintf(path, s_6a1c1c, name + 1);
 		strupr(path);
-		if (fcn_00448360(path, 0, (SCENE_PROGRESS) progress)) {
+		if (d3_LoadScene(path, 0, (SCENE_PROGRESS) progress)) {
 			fcn_004432d0(d3_CurrentContextIndex, 0);
-			fcn_00437ac0(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) fcn_005105a0);
-			fcn_00437ac0(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
+			d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) fcn_005105a0);
+			d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
 			init_SceneContextIndices[a0] = (char) type;
 			fcn_004432d0(saved, 0);
 		}
@@ -104,14 +104,14 @@ void __cdecl init_LoadObjektScene(int a0)
 			fcn_004432d0(type, 0);
 			sprintf(path, s_6a1c1c, name + 1);
 			strupr(path);
-			if (fcn_00448360(path, 0, (SCENE_PROGRESS) progress)) {
+			if (d3_LoadScene(path, 0, (SCENE_PROGRESS) progress)) {
 				fcn_004432d0(d3_CurrentContextIndex, 0);
 				gv_Free3Fields((int*) *(int*) (g_67a370 + 0xb0));
 				*(int*) (g_67a370 + 0xb0) = 0;
 				fcn_004026f0((char*) g_67a370);
 				fcn_0045b290((char*) *(int*) (g_67a370 + 0xb0), g_6b8300);
-				fcn_00437ac0(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) fcn_005105a0);
-				fcn_00437ac0(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
+				d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) fcn_005105a0);
+				d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
 				p = ch_CharacterSlots;
 				do {
 					obj = (char*) *p;
@@ -120,10 +120,10 @@ void __cdecl init_LoadObjektScene(int a0)
 						if (CompareVector3WithinTolerance((float*) (obj + 0x38), g_662d70, 0.5f) != 0) {
 							if ((*(int*) (obj + 0x124) != 0
 							     && (found = fcn_00445600(0, 0x100, 0, s_68b0f4)) != 0)
-							    || (found = fcn_00407330()) != 0
+							    || (found = ch_SelectRandomDummy()) != 0
 							    || ((found = fcn_00445600(0, 0x100, 0, s_675908)) != 0
 							        || (found = fcn_00445600(0, 0x100, 0, s_68b1e0)) != 0)) {
-								fcn_00455350(found, (float*) (found + 0x4c), (float*) buf);
+								d3_TransformPoint(found, (float*) (found + 0x4c), (float*) buf);
 								ch_SetPosition(obj, (float*) buf, 1);
 							}
 						} else {

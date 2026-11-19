@@ -16,7 +16,7 @@ extern char cm_LastEntityId[];
 extern int(__stdcall* g_662318)(void);
 
 void __cdecl srv_SeedRandom(int);
-int __cdecl fcn_004c4dc0(unsigned char*, int);
+int __cdecl cm_ResolveSpecialEntityId(unsigned char*, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned short __cdecl fcn_0050a7e0(int, int, int, int, int, int, int, int);
 char* __cdecl gm_FindRecordById(int);
@@ -45,7 +45,7 @@ int __cdecl fcn_004cc590(unsigned char* request, char* response)
 	if (*(int*) (request + 0x17) == -1) {
 		e = 0;
 	} else {
-		*(int*) (request + 0x17) = fcn_004c4dc0(request, *(int*) (request + 0x17));
+		*(int*) (request + 0x17) = cm_ResolveSpecialEntityId(request, *(int*) (request + 0x17));
 		e = gm_StartFilteredEntitySearch(1, 1, *(int*) (request + 0x17));
 		if (e == 0)
 			return 1;

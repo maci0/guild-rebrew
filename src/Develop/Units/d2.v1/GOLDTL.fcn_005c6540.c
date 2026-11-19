@@ -47,7 +47,7 @@ extern unsigned char g_773d75;
 
 Rec* __cdecl fcn_005c6220(int key, int* out);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 char* __cdecl fcn_005c61e0(int);
 int __cdecl io_AppendText(int, ...);
@@ -79,7 +79,7 @@ int __cdecl fcn_005c6540(unsigned short* item)
 	rec = fcn_005c6220(*item, &tmp);
 	if (rec != 0) {
 		dlg = fcn_00470820(0, 0, "panel\\useobj");
-		fcn_00471b60(dlg);
+		d2_CenterDialogWindows(dlg);
 		d2_SetForm(dlg, 1);
 		if ((rec->mask & ((Ent*)g_7f4ca0)[g_774970].mask) == 0 && fcn_005c61e0(id = *item) != 0) {
 			io_AppendText(0xfe3, id * 2 + 0x9a8, rec->price, id * 2 + 0x9a8);

@@ -17,16 +17,16 @@ int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004d1970(int, char *);
 void __cdecl SelectTextureSet(int, int, int, int);
-void __cdecl fcn_00437ac0(int, int, int, int);
+void __cdecl d3_TraverseSceneObjects(int, int, int, int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 int __cdecl fcn_00445600(int, int, int, char *);
 void __cdecl fcn_00442c00(int, int);
 void __cdecl fcn_00508c30(int, void *);
-void __cdecl fcn_00442d50(int, int);
+void __cdecl d3_SetSubtreeVisible(int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl gm_FindRecordById(int);
 int __cdecl gm_NextEntityQueryMatch(void);
-void __cdecl fcn_00455350(int, int, void *);
+void __cdecl d3_TransformPoint(int, int, void *);
 int __cdecl fcn_004488e0(char *, int, int);
 void __cdecl fcn_00438b40(int, void *);
 void __cdecl fcn_0045b290(int, int);
@@ -248,7 +248,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 			}
 		}
 	}
-	fcn_00437ac0(*(int *) &g_67a370, 0, 0xc0, 0x4d1fd0);
+	d3_TraverseSceneObjects(*(int *) &g_67a370, 0, 0xc0, 0x4d1fd0);
 	base = *(int *) &g_67a370;
 	pp = (int **) &ch_ContextCharacters;
 	for (i = 0x20; i != 0; i--)
@@ -277,7 +277,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 		h = fcn_00445600(0, 0x100, 0, buf);
 		if (h != 0) {
 			if (*p == -1) {
-				fcn_00442d50(h, 0);
+				d3_SetSubtreeVisible(h, 0);
 			} else {
 				ent = (int) fcn_00502cd0(0, 2, 7, 1, *p);
 				if (ent == 0) {
@@ -293,7 +293,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 						n++;
 						m = gm_NextEntityQueryMatch();
 					}
-					fcn_00455350(h, (int) h + 0x4c, pathbuf);
+					d3_TransformPoint(h, (int) h + 0x4c, pathbuf);
 					switch (*(short *) ent) {
 					case 0x134:
 						fcn_0064d41a(buf, "%s*ob_KARREN_KLEIN_KAMPF.ogr", g_7e1ae0);

@@ -43,7 +43,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_00466ee0(int, int, int, int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_0046b2b0(int);
 void __cdecl fcn_0046f280(int);
 void __cdecl fcn_0046f940(int, char*);
@@ -81,7 +81,7 @@ void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
 					v = 0xca;
 				}
 				r->icon = fcn_00466ee0(r->x + 0xf, r->y + 6, r->id + 0xdf, v, d2_CurrentWindowId);
-				fcn_00472900(r->icon, 0x54);
+				d2_SetElementFont(r->icon, 0x54);
 			} else {
 				r->icon = fcn_0046f740(r->x + 0xf, r->y + 6, r->id + 0xdf, d2_CurrentWindowId);
 				*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x5c) = 1;

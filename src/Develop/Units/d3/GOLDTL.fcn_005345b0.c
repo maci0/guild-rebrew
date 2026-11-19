@@ -40,7 +40,7 @@ extern int g_67a370;
 extern float g_1052c00[16];
 
 int __cdecl fcn_00506380(int, int, int, char*);
-void __cdecl fcn_00438100(char*, char*, int);
+void __cdecl d3_UpdateObjectCameraTransform(char*, char*, int);
 Vec3* __stdcall fcn_005eb2e4(Vec3*, Vec3*, char*, Mat4*, Mat4*, Mat4*);
 
 void __cdecl fcn_005345b0(void)
@@ -85,7 +85,7 @@ void __cdecl fcn_005345b0(void)
 			if (*(char**) (s + 0x1cc) == 0) {
 				continue;
 			}
-			fcn_00438100(s, d3_ActiveCamera, 0);
+			d3_UpdateObjectCameraTransform(s, d3_ActiveCamera, 0);
 			sub = *(char**) (s + 0x1cc);
 			p = (*(BoundsFn*) (*(char**) (sub + 0x318) + 0x1f0))(s, sub, *(int*) (s + 0x1ec) + 0x48);
 			if (p == 0) {

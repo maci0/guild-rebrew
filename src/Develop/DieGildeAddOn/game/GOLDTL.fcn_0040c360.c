@@ -4,7 +4,7 @@
 char* __cdecl ch_AttachAni(char* e, char* name, int flag);
 void __cdecl fcn_00436a00(int h, char* s, int n);
 
-void __cdecl fcn_0040c360(char* e, char* name)
+void __cdecl ch_StartLoopingAnimation(char* e, char* name)
 {
 	char* s;
 

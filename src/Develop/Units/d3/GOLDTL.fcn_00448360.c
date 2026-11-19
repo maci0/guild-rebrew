@@ -20,7 +20,7 @@ extern int g_6b89b0;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 int __cdecl CloseVfsStream(void* stream);
-int __cdecl fcn_00401180(void* stream, void* dst);
+int __cdecl vfs_ReadByte(void* stream, void* dst);
 char* __cdecl fcn_004011a0(void* stream, char* dst);
 int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
@@ -33,7 +33,7 @@ char* __cdecl fcn_00437890(char* object);
 void __cdecl d3_DisposeObject(char* object);
 void __cdecl fcn_00439aa0(char* object);
 void __cdecl fcn_00439c60(char* object);
-char* __cdecl fcn_0043a140(char* object);
+char* __cdecl d3_CloneObject(char* object);
 void __cdecl fcn_0043b850(void* stream);
 int __cdecl fcn_00446ca0(unsigned version);
 char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsigned char resources);
@@ -54,7 +54,7 @@ typedef struct {
 } VEC4;
 
 /* ADDRESS: GOLDTL 0x00448360 */
-char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS progress)
+char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS progress)
 {
 	char name[256];
 	VEC4 vec;
@@ -174,7 +174,7 @@ char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS pro
 				index++;
 			} while (index < count);
 		}
-		fcn_00401180(s, &present);
+		vfs_ReadByte(s, &present);
 		if (present != 0) {
 			g_6b8300 = fcn_00447e30(s, version);
 		}
@@ -204,7 +204,7 @@ char __cdecl fcn_00448360(const char* filename, void* stream, SCENE_PROGRESS pro
 		obj = d3_ObjectListHead;
 		while (obj != d3_SceneObjectSentinel) {
 			if (*(int*) (obj + 0x218) == 7) {
-				clone = fcn_0043a140(obj);
+				clone = d3_CloneObject(obj);
 				clone[0x215] |= 4;
 				strcat(clone, "boden");
 				fcn_00439aa0(clone);

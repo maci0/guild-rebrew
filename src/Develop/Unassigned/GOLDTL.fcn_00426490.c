@@ -3,7 +3,7 @@
 
 /* Classifies a script type keyword (up to the first blank or ')'). */
 /* ADDRESS: GOLDTL 0x00426490 */
-int __cdecl fcn_00426490(const char* s)
+int __cdecl evt_ClassifyScriptType(const char* s)
 {
 	char* p;
 	int type;

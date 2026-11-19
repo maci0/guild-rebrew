@@ -5,7 +5,7 @@ extern int g_100f1dc;
 extern signed char g_6a3440;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -14,7 +14,7 @@ void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
-int __cdecl fcn_004b3fe0(int);
+int __cdecl d2_ChooseMission(int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_004b41b0(void);
@@ -37,7 +37,7 @@ int __cdecl fcn_004b43f0(int n)
 
 	r = 0;
 	dlg = fcn_00470820(0, 0, "Menu\\CHOOSEHISTORY");
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	base = io_AppendText(0x1b9f);
 	b0 = fcn_00472250(dlg, 0, base);
@@ -95,7 +95,7 @@ int __cdecl fcn_004b43f0(int n)
 						g_6a3440 = 4;
 					}
 					d2_SelectRadioGroup(list, 0);
-					r = fcn_004b3fe0(g_6a3440);
+					r = d2_ChooseMission(g_6a3440);
 					if (r != 0 && r != 0xff) {
 						g_774654 = 1;
 					}

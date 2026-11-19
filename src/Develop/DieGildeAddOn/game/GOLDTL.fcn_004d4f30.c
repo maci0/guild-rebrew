@@ -21,8 +21,8 @@ extern char* g_9b9e40[];           /* 0x9b9e40, object pointer table */
 extern char g_9b0e20[];            /* 0x9b0e20, 0x35c-byte player records */
 
 int __cdecl gm_LookupEntityRecordIn32SlotTable(int search_id);
-void* __cdecl fcn_004ceac0(void* rec, char* entity);
-void __cdecl fcn_00455350(char* object, float* in, float* out);
+void* __cdecl gm_FindOrCreateEntitySlot(void* rec, char* entity);
+void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 void __cdecl fcn_004c67c0(int a1, void* a2);
 
 /* ADDRESS: GOLDTL 0x004d4f30 */
@@ -81,7 +81,7 @@ char* __cdecl fcn_004d4f30(fcn_004d4f30_World* world)
     if (g_772f08 > 0) {
         do {
             if (strstr(g_9b9e40[i], "sp_CONQUER") != 0) {
-                fcn_00455350(g_9b9e40[i],
+                d3_TransformPoint(g_9b9e40[i],
                              (float*) (g_9b9e40[i] + 0x4c), out);
                 countB++;
                 rec = *(char**) (g_9b9e40[i] + 0x204);
@@ -111,7 +111,7 @@ char* __cdecl fcn_004d4f30(fcn_004d4f30_World* world)
                 p++;
             } while (i < n);
         }
-        src = (fcn_004d4f30_Slot*) fcn_004ceac0(g_9b0e20 + i * 0x35c,
+        src = (fcn_004d4f30_Slot*) gm_FindOrCreateEntitySlot(g_9b0e20 + i * 0x35c,
                                                 result);
         slot = *src;
         slot.id = *(int*) (result + 4);

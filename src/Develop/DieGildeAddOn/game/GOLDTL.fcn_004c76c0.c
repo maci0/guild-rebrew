@@ -7,7 +7,7 @@ typedef struct {
 	int d[12];
 } copy_12_dwords;
 
-int __cdecl fcn_004c4dc0(char*, int);
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
 char* __cdecl gm_AllocGebaeude(unsigned char, int);
 
 
@@ -25,7 +25,7 @@ int __cdecl fcn_004c76c0(int cmd, char* result)
 		i = 0xffff;
 	}
 	else {
-		field_id = fcn_004c4dc0((char*) cmd, *(int*) (cmd + 0x16));
+		field_id = cm_ResolveSpecialEntityId((char*) cmd, *(int*) (cmd + 0x16));
 		*(int*) (cmd + 0x16) = field_id;
 		i = 0;
 		while ((unsigned short) i < 0x300) {

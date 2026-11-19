@@ -4,9 +4,9 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004c5620(int a, char* q);
-int __cdecl fcn_00413190(int x);
+int __cdecl d3_GetContextIndex(int x);
 void __cdecl fcn_004432d0(int a, int b);
-void __cdecl fcn_004030e0(char* r);
+void __cdecl ch_DestroyCharacter(char* r);
 char* __cdecl gm_EntityAccumulate(char* p);
 int __cdecl gm_RemoveLinkedNodeById(char* list, int id);
 
@@ -24,8 +24,8 @@ void __cdecl fcn_00506300(char* p)
 	}
 	r = *(char**) (p + 0x3b);
 	if (r != 0) {
-		fcn_004432d0(fcn_00413190(*(int*) (r + 0x88)), 1);
-		fcn_004030e0(r);
+		fcn_004432d0(d3_GetContextIndex(*(int*) (r + 0x88)), 1);
+		ch_DestroyCharacter(r);
 		fcn_004432d0(save, 1);
 	}
 	e = gm_EntityAccumulate(p);

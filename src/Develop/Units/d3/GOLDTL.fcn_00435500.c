@@ -16,7 +16,7 @@ typedef struct Slot {
 void __cdecl fcn_004315c0(int);
 void __cdecl fcn_004316c0(int);
 
-void __cdecl fcn_00435500(char* o, char* name)
+void __cdecl d3_RemoveObjectAnimation(char* o, char* name)
 {
 	int h;
 	Slot* slots;

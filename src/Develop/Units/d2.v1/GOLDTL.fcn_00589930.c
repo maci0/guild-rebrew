@@ -44,11 +44,11 @@ extern int d2_CurrentElementId;
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_0046fac0(int, int, int, int);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int);
@@ -89,7 +89,7 @@ void __cdecl fcn_00589930(char* a0)
 	act.amt[2] = (int) (f * 0.0199999996f);
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9514);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
@@ -97,7 +97,7 @@ void __cdecl fcn_00589930(char* a0)
 	*(int*) (*(int*) &g_1015ea0 + i * 0x2f4 + 0x6c) = 1;
 	*(int*) (*(int*) &g_1015ea0 + i * 0x2f4 + 0x18) =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c);
-	fcn_00472900(i, 0x54);
+	d2_SetElementFont(i, 0x54);
 	lst = fcn_004677e0(0x57, 0x14, 200, 0, 100, 0x7b, 2,
 	                   *(int*) &d2_CurrentWindowId);
 	act.item = lst;

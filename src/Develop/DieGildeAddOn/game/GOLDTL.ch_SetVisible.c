@@ -3,19 +3,19 @@
 
 
 extern char g_675328[];
-void __cdecl fcn_00442d50(void* p, int on);
+void __cdecl d3_SetSubtreeVisible(void* p, int on);
 void __cdecl fcn_00442c00(void* p, int on);
 #include "Develop/Units/Error/error_message.h"
 
 void __cdecl ch_SetVisible(char* e, int on)
 {
 	if (e != 0 && *(void**) (e + 0x34) != 0) {
-		fcn_00442d50(*(void**) (e + 0x34), on);
+		d3_SetSubtreeVisible(*(void**) (e + 0x34), on);
 		if (*(void**) (e + 0x64) != 0) {
 			fcn_00442c00(*(void**) (e + 0x64), on);
 		}
 		if (*(void***) (e + 0x124) != 0) {
-			fcn_00442d50(**(void***) (e + 0x124), on);
+			d3_SetSubtreeVisible(**(void***) (e + 0x124), on);
 		}
 		if (*(void**) (e + 0x22c) != 0) {
 			fcn_00442c00(*(void**) (e + 0x22c), on);

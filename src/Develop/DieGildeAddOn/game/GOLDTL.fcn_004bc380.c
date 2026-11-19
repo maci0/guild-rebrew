@@ -15,9 +15,9 @@ extern char g_681414[];
 extern char g_68140c[];
 
 char* __cdecl fcn_004bca30(char*);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
-void __cdecl fcn_0040c120(char*, int, int);
+void __cdecl ch_CreateAction(char*, int, int);
 
 void __cdecl fcn_004bc380(AMBIENT_ANIMAL_SLOT* s)
 {
@@ -27,7 +27,7 @@ void __cdecl fcn_004bc380(AMBIENT_ANIMAL_SLOT* s)
 	o = fcn_004bca30(g_681414);
 	if (o == 0)
 		return;
-	fcn_00455350(o, o + 0x4c, v);
+	d3_TransformPoint(o, o + 0x4c, v);
 	s->objekt = ch_CreateAtPosition(g_68140c, v);
 	if (s->objekt == 0)
 		return;
@@ -38,5 +38,5 @@ void __cdecl fcn_004bc380(AMBIENT_ANIMAL_SLOT* s)
 	s->kind = 3;
 	*(int*) (s->objekt + 4) = 2;
 	*(int*) (*(char**) (s->objekt + 0x34) + 0x224) = 0;
-	fcn_0040c120(s->objekt, 0x38, 1);
+	ch_CreateAction(s->objekt, 0x38, 1);
 }

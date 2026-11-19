@@ -5,7 +5,7 @@ extern unsigned short* g_772e9c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-char __cdecl fcn_0045b920(void*, int, int, float*);
+char __cdecl d3_GridPointToWorld(void*, int, int, float*);
 
 /* ADDRESS: GOLDTL 0x004d3070 */
 float __cdecl fcn_004d3070(char* self, int x, int z, float range)
@@ -32,7 +32,7 @@ float __cdecl fcn_004d3070(char* self, int x, int z, float range)
 		listB = (int*) (g_772eb4 + 0x80);
 		listA = (int*) (g_772eb4 + 0xc0);
 	}
-	fcn_0045b920(g, x, z, pos);
+	d3_GridPointToWorld(g, x, z, pos);
 	for (i = 0; i < 16; i++) {
 		if (listA[i] == -1) {
 			continue;

@@ -31,7 +31,7 @@ int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl gm_CheckEntityType(unsigned char*);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_004c5530(char*);
-void __cdecl fcn_00485650(char*, char*);
+void __cdecl ai_CollectGoodsResources(char*, char*);
 void __cdecl fcn_00486c40(char*, char*, int);
 void __cdecl fcn_00489010(char*, char*);
 void __cdecl ai_MeisterCollectTrans(char*);
@@ -82,7 +82,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 	if (res != 0) {
 		g_100b0ac = 0;
 		ai_ResourceCount = 0;
-		fcn_00485650(meister, res);
+		ai_CollectGoodsResources(meister, res);
 		fcn_00486c40(meister, res, *(int*) (*(char**) (meister + 0x16c) + 0x39));
 		fcn_00489010(meister, res);
 		ai_MeisterCollectTrans(meister);

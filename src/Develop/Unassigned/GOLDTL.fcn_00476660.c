@@ -40,7 +40,7 @@ char* __cdecl fcn_004770a0(Desc* d, int kind);
 int __cdecl fcn_00476120(int x, int y, int w, int h, void* a, int sx, int sy, void* b);
 void __cdecl fcn_00475f80(char* img);
 void __cdecl fcn_00475fd0(Target* t);
-void __cdecl fcn_00476060(Target* t);
+void __cdecl d2_UnlockSurface(Target* t);
 
 int __cdecl fcn_00476660(int x, int y, int w, int h, Target* t, int sx, int sy, char* src)
 {
@@ -98,7 +98,7 @@ int __cdecl fcn_00476660(int x, int y, int w, int h, Target* t, int sx, int sy, 
 	if (locked != 0) {
 		fcn_00475fd0(t);
 	} else {
-		fcn_00476060(t);
+		d2_UnlockSurface(t);
 	}
 	return 1;
 }

@@ -14,7 +14,7 @@ int __cdecl fcn_00510c90(int);
 void __cdecl fcn_0043a9c0(int);
 int __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_0043aa30(int);
-int __cdecl fcn_00437ac0(void*, int, int, void*);
+int __cdecl d3_TraverseSceneObjects(void*, int, int, void*);
 void __cdecl fcn_005166a0(char*);
 void __cdecl fcn_005167c0(char*, int);
 void __cdecl fcn_00516c50(char*, char*);
@@ -141,7 +141,7 @@ int __cdecl fcn_005a76b0(char* o, int p2)
                 *(u16*) (o + 0x29) = *(u16*) msg;
                 fcn_004432d0((int) (signed char) ((u8*) &init_SceneContextIndices)[*(u16*) msg], 0);
                 fcn_0043aa30(3);
-                fcn_00437ac0((void*) *(int*) &g_67a370, 0, 0xe0, (void*) 0x456df0);
+                d3_TraverseSceneObjects((void*) *(int*) &g_67a370, 0, 0xe0, (void*) 0x456df0);
                 fcn_005166a0(o);
                 t = *(int*) &g_7746c4;
                 fcn_005167c0((char*) t, (int) *(u16*) (t + 0x29));

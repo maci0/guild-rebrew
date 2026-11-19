@@ -9,10 +9,10 @@ extern int g_14cbc84;
 extern int (__stdcall* g_662384)(unsigned int s, char* buf, int len, int flags);
 extern int (__stdcall* g_662364)(void);
 
-void __cdecl fcn_00421050(void);
+void __cdecl nt_CloseClientConnection(void);
 void __cdecl nt_LogWinsockError(int err);
 void __cdecl fcn_0064d41a(char* buf, char* fmt, int a, int b);
-void __cdecl fcn_00420ba0(char* buf, int len, int flag);
+void __cdecl nt_RecordPacketStats(char* buf, int len, int flag);
 
 /* ADDRESS: GOLDTL 0x004210a0 */
 int __cdecl nt_Recv(void)
@@ -47,7 +47,7 @@ int __cdecl nt_Recv(void)
 	n = receive(g_14cbca0, g_14cbca4 + (g_14cbcac & 0xffff),
 	             *(unsigned short*) (g_14cbca4 + 1) - (g_14cbcac & 0xffff), 0);
 	if (n == 0) {
-		fcn_00421050();
+		nt_CloseClientConnection();
 		return 1;
 	}
 	if (n == -1) {
@@ -58,7 +58,7 @@ got_error:
 		}
 		nt_LogWinsockError(err);
 fail:
-		fcn_00421050();
+		nt_CloseClientConnection();
 		return 1;
 	}
 	(*(int *)&nt_ReceivedBytes) += n;
@@ -67,7 +67,7 @@ fail:
 		return 0;
 	}
 	if (*(int*) (g_14cbca4 + 4) == -1) {
-		fcn_00420ba0(g_14cbca4, g_14cbcac & 0xffff, 1);
+		nt_RecordPacketStats(g_14cbca4, g_14cbcac & 0xffff, 1);
 		g_14cbca4 = 0;
 		g_14cbcac = 0;
 		return 0;
@@ -87,7 +87,7 @@ fail:
 	}
 	g_14cbc84 = n;
 purge:
-	fcn_00420ba0(g_14cbca4, g_14cbcac & 0xffff, 1);
+	nt_RecordPacketStats(g_14cbca4, g_14cbcac & 0xffff, 1);
 	g_14cbca4 = 0;
 	g_14cbcac = 0;
 	return 0;

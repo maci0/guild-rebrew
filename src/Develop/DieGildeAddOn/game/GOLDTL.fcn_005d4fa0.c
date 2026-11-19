@@ -19,7 +19,7 @@ float __cdecl fcn_004ff210(unsigned short, int);
 int __cdecl fcn_00508890(unsigned char*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -64,7 +64,7 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 	money = (int) (gm_WalkEntityChain(*(unsigned short*) e) * 0.02f);
 	dlg = fcn_00470820(0, 0, s_6acc44);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	id = io_AppendText(0x1d3b, 2, money);
 	ok = fcn_00472250(dlg, 1, id);

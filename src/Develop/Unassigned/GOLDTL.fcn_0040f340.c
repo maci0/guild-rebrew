@@ -13,8 +13,8 @@ typedef struct {
 } Query;
 
 extern int g_67a370;
-void __cdecl fcn_004379a0(int a, int b, int c, void (__cdecl* cb)(void), Query* q);
-void __cdecl fcn_0040f1c0(void);
+void __cdecl d3_VisitSceneObjects(int a, int b, int c, void (__cdecl* cb)(void), Query* q);
+void __cdecl d3_AttachMatchingAnimation(void);
 
 int __cdecl AttachAnimLoopedToAll(char** name, char** name2, int* a, int* b)
 {
@@ -25,7 +25,7 @@ int __cdecl AttachAnimLoopedToAll(char** name, char** name2, int* a, int* b)
 	q.a = *a;
 	q.b = *b;
 	if (q.name[0] != 0) {
-		fcn_004379a0(g_67a370, 0, 0x40, fcn_0040f1c0, &q);
+		d3_VisitSceneObjects(g_67a370, 0, 0x40, d3_AttachMatchingAnimation, &q);
 	}
 	return 0;
 }

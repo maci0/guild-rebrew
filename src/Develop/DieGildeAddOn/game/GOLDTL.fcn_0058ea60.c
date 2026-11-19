@@ -40,7 +40,7 @@ float __cdecl fcn_004f4770(char*);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
@@ -102,7 +102,7 @@ void __cdecl fcn_0058ea60(char* e, char* res)
 	}
 	h = fcn_00470820(0, 0, "Locations\\Friedhof\\Friedhof");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	g_100f1dc = -1;

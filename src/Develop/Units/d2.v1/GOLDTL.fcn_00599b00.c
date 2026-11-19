@@ -36,15 +36,15 @@ extern int d2_CurrentElementId;
 
 int __cdecl fcn_0050e4a0(int a);
 int __cdecl fcn_00502cd0(int, int, ...);
-void __cdecl fcn_00471b60(int dlg);
+void __cdecl d2_CenterDialogWindows(int dlg);
 int __cdecl fcn_0050d200(int a, int b);
 int __cdecl fcn_0046f740(int a, int b, int c, int d);
 int __cdecl fcn_0046fac0(int a, int b, int c, int d);
-void __cdecl fcn_00472900(int a, int b);
+void __cdecl d2_SetElementFont(int a, int b);
 void __cdecl fcn_0046f940(int a, int b);
 int __cdecl fcn_00526070(int, int, int, int);
 int __cdecl lc_GebaeudeAusrichten(int, char*);
-void __cdecl fcn_00455350(int a, int b, void* c);
+void __cdecl d3_TransformPoint(int a, int b, void* c);
 void __cdecl fcn_00598740(void* a, int b);
 void __cdecl fcn_004c5530(void* a);
 void __cdecl fcn_0050bc10(int a, unsigned char b, char* c);
@@ -85,7 +85,7 @@ void __cdecl fcn_00599b00(void)
 	raw = *(int*) (raw + 0x5d);
 	query = fcn_00502cd0(raw, 2, 6, 0, 0x115);
 	dlg = fcn_00470820(0, 0, (char*) 0x6aa2a8);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	g_7746f8 = 1;
 	d2_SetForm(dlg, 0);
 	i = d2_CurrentWindowId * 0x3cc;
@@ -123,7 +123,7 @@ void __cdecl fcn_00599b00(void)
 		*(int*) (raw + 0x1cc + g_1015ea0) = 0x54;
 		fcn_0050bc10(cost, g_773d75, key);
 		ent = fcn_0046fac0(ofs + 2, row, 0x6b5c60, d2_CurrentWindowId);
-		fcn_00472900(ent, 0x54);
+		d2_SetElementFont(ent, 0x54);
 		fcn_0046f940(ent, key);
 		ofs += 0x60;
 		*(int*) (ent * 0x2f4 + 0x18 + g_1015ea0) = 0x8c;
@@ -154,7 +154,7 @@ void __cdecl fcn_00599b00(void)
 					msg.owner = *(int*)(gm_CityEntity + 4);
 					msg.category = i;
 					msg.cost = fcn_0050d200((int)(g_7f4ca0 + g_774970 * 0x21c), i);
-					fcn_00455350(ent, ent + 0x4c, msg.location);
+					d3_TransformPoint(ent, ent + 0x4c, msg.location);
 					fcn_00598740(msg.rotation, ent);
 					{
 						int k = 0;

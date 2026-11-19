@@ -4,7 +4,7 @@ extern char g_14cf950, g_1040600; extern char* d3_ObjectListHead;
 int __cdecl fcn_00436aa0(void *flags);
 int __cdecl fcn_00436f70(int enable);
 void *__cdecl fcn_00437890(void *node);
-int __cdecl fcn_00437ac0(int a, int b, int c, const char *s);
+int __cdecl d3_TraverseSceneObjects(int a, int b, int c, const char *s);
 int __cdecl fcn_00438af0(int a);
 
 /* ADDRESS: GOLDTL 0x00448b10 */
@@ -70,7 +70,7 @@ char __cdecl fcn_00448b10(void)
 				g_1040600 = 0;
 				flags[0] = (flags[0] & 0xe7) | 4;
 			}
-			fcn_00437ac0(*(int *) 0x67a370, 0, 0x1ff,
+			d3_TraverseSceneObjects(*(int *) 0x67a370, 0, 0x1ff,
 			             (const char *) 0x456df0);
 			fcn_00438af0(0);
 			fcn_00436aa0(flags);

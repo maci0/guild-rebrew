@@ -27,7 +27,7 @@ void __cdecl fcn_00546d10(void);
 void __cdecl fcn_004fc180(void);
 void __cdecl fcn_00500a40(void);
 void __cdecl fcn_0047da70(void);
-void __cdecl fcn_0047de50(char*);
+void __cdecl ai_EvaluateMeister(char*);
 void __cdecl fcn_0047da10(void);
 void __cdecl fcn_005c6310(void);
 void __cdecl fcn_00531b80(void);
@@ -52,7 +52,7 @@ int __cdecl fcn_004c9440(char* x, char* out)
 			g_772620 = 0;
 			for (i = 0; i < 0x300; i++) {
 				if (*(unsigned short*) (g_7f4ca0 + i * 0x21c) != 0xffff)
-					fcn_0047de50(g_7f4ca0 + i * 0x21c);
+					ai_EvaluateMeister(g_7f4ca0 + i * 0x21c);
 			}
 			fcn_0047da10();
 		}

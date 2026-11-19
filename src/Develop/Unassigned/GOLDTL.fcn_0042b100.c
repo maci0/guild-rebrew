@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_0042b100(void)
+int __cdecl msx_FindFreeWaveDriver(void)
 {
 	int i;
 

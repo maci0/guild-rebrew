@@ -21,7 +21,7 @@ typedef struct Face {
 	Vec3 n;
 } Face;
 
-void __cdecl fcn_00451d70(Vert*, Vert*, Vert*, Vec3*);
+void __cdecl d3_CalculateTriangleNormal(Vert*, Vert*, Vert*, Vec3*);
 void __cdecl fcn_004518a0(Vec3*);
 
 /* ADDRESS: GOLDTL 0x0044f7e0 */
@@ -35,7 +35,7 @@ void __cdecl fcn_0044f7e0(char* m)
 
 	f = *(Face**) (m + 0x48);
 	for (i = 0; i < *(int*) (m + 0x4c); i++) {
-		fcn_00451d70(&(*(Vert**) (m + 0x40))[f[i].idx[0]], &(*(Vert**) (m + 0x40))[f[i].idx[1]], &(*(Vert**) (m + 0x40))[f[i].idx[2]], &f[i].n);
+		d3_CalculateTriangleNormal(&(*(Vert**) (m + 0x40))[f[i].idx[0]], &(*(Vert**) (m + 0x40))[f[i].idx[1]], &(*(Vert**) (m + 0x40))[f[i].idx[2]], &f[i].n);
 	}
 	v = *(Vert**) (m + 0x40);
 	for (j = 0; j < *(int*) (m + 0x44); j++) {

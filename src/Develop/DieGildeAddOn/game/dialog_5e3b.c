@@ -6,7 +6,7 @@ extern int g_1040494;
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00533cf0(int);
-void __cdecl fcn_0046b4f0(void);
+void __cdecl d2_ClearScreen(void);
 void __cdecl fcn_00469e30(int);
 void __cdecl fcn_00473150(unsigned char*);
 void __cdecl fcn_005270c0(int);
@@ -49,7 +49,7 @@ void __cdecl fcn_005e3b70(void)
 	g_104048c = d2_ScreenHeight;
 	main_LoopFlags = 0x24087;
 	fcn_00533cf0(1);
-	fcn_0046b4f0();
+	d2_ClearScreen();
 	fcn_00469e30(0x794);
 	fcn_00473150(p);
 	fcn_005270c0(0);

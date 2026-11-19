@@ -4,7 +4,7 @@
 
 #include "client_lighting.h"
 
-int __cdecl fcn_0040dd50(int* a, int* b, int* c)
+int __cdecl d3_SetSceneLightColor(int* a, int* b, int* c)
 {
 	g_67bbdc.x = (float) *a;
 	g_67bbdc.y = (float) *b;

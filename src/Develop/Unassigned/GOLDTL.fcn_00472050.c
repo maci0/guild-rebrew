@@ -26,7 +26,7 @@ extern char* g_1015ea0;
 char* __cdecl d2_GetResourceData(int idx);
 
 /* ADDRESS: GOLDTL 0x00472050 */
-int __cdecl fcn_00472050(int slot, int* w, int* h)
+int __cdecl d2_GetElementResourceSize(int slot, int* w, int* h)
 {
 	Slot* s;
 	char* f;

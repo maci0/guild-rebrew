@@ -17,7 +17,7 @@ void* __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 int __cdecl fcn_004d4790(char*);
 int* __cdecl fcn_00417b50(int, int, int, int, int, int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-char* __cdecl fcn_004063b0(int, char*, int, float);
+char* __cdecl ch_NewAnimationAction(int, char*, int, float);
 int __cdecl io_FormatTextBuffer(void*, ...);
 void __cdecl fcn_00533a40(char*);
 
@@ -121,7 +121,7 @@ draw:
         v8 = *(int*) (*(int*)((char*)v4 + 0x184) + 0x128);
         if (!v8 || *(char*) (v8 + 9) == ';') {
             ch_CancelActionQueue((char*) *(int*) ((char*) v4 + 0x184));
-            fcn_004063b0(*(unsigned int*) ((char*) v4 + 0x184),
+            ch_NewAnimationAction(*(unsigned int*) ((char*) v4 + 0x184),
                          v12[cut_RandMod(2)], 1, 1.4f);
         }
         if (*v7 == 0x16e) {
@@ -135,11 +135,11 @@ draw:
         if (!v8 || *(char*) (v8 + 9) == ';') {
             ch_CancelActionQueue((char*) *(int*) ((char*) v4 + 0x184));
             if (*v7 != 0x15e && *v7 != 0x160) {
-                fcn_004063b0(*(unsigned int*) ((char*) v4 + 0x184),
+                ch_NewAnimationAction(*(unsigned int*) ((char*) v4 + 0x184),
                              (char*) 0x68be20, 1, 1.4f);
                 return;
             }
-            fcn_004063b0(*(unsigned int*) ((char*) v4 + 0x184),
+            ch_NewAnimationAction(*(unsigned int*) ((char*) v4 + 0x184),
                          (char*) 0x68be08, 1, 1.4f);
             return;
         }

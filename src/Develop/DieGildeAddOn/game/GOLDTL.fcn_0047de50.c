@@ -72,7 +72,7 @@ void __cdecl fcn_00483f20(Master47de*);
 void __cdecl fcn_0047e270(Master47de*);
 void __cdecl fcn_0047ebc0(Master47de*);
 
-void __cdecl fcn_0047de50(Master47de* m)
+void __cdecl ai_EvaluateMeister(Master47de* m)
 {
 	char buf[0x100];
 	unsigned char k;

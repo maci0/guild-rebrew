@@ -80,7 +80,7 @@ typedef struct Col0457290 {
 Tex0457290* __cdecl fcn_0045c5b0(char* name, Col0457290 c, unsigned int flags,
                                  unsigned int flags2);
 void __cdecl fcn_0045ce90(Tex0457290* t);
-void __cdecl fcn_00455350(char* object, float* in, float* out);
+void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 void __cdecl fcn_00455140(char* node, float* in, float* out);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 int __cdecl fcn_00456630(void* obj, char b, unsigned int key,
@@ -200,13 +200,13 @@ alloc:
 		if (m->f11f4 > 0 && m->f11f0 > 0) {
 			p1 = (char*) m + 0xee0;
 		}
-		fcn_00455350((char*) a1, (float*) ((char*) a1 + 0x4c), vb);
+		d3_TransformPoint((char*) a1, (float*) ((char*) a1 + 0x4c), vb);
 		if ((a1->f215 & 4) != 0) {
 			tol = 0.01f;
 			fcn_00455140((char*) a1, (float*) 0x662d40, va);
 		} else {
 			tol = 1.0f;
-			fcn_00455350((char*) a0, (float*) ((char*) a0 + 0x4c), vc);
+			d3_TransformPoint((char*) a0, (float*) ((char*) a0 + 0x4c), vc);
 			va[0] = vc[0] - vb[0];
 			va[1] = vc[1] - vb[1];
 			va[2] = vc[2] - vb[2];

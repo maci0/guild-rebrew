@@ -3,7 +3,7 @@
 extern int g_67fca4;
 extern unsigned char g_7728d4;
 int __cdecl hst_ParseDate(int, int, int*, int);
-int __cdecl fcn_004b2dd0(char*, int, int);
+int __cdecl hst_ParseTextPasses(char*, int, int);
 
 /* ADDRESS: GOLDTL 0x004b3720 */
 int __cdecl fcn_004b3720(int a0, char* a1, int a2)
@@ -24,7 +24,7 @@ int __cdecl fcn_004b3720(int a0, char* a1, int a2)
 		}
 		diff = gm_GameTime.a - slot[0];
 		if (diff == 1) {
-			pos = fcn_004b2dd0(a1, g_67fca8, a2);
+			pos = hst_ParseTextPasses(a1, g_67fca8, a2);
 			result = 1;
 			if (pos == 0) {
 				result = 5;

@@ -6,7 +6,7 @@ extern int g_1040494;
 
 void __cdecl fcn_00475f80(int);
 void __cdecl fcn_00475fd0(int);
-void __cdecl fcn_00476060(int);
+void __cdecl d2_UnlockSurface(int);
 int __cdecl fcn_00475c10(char*);
 char* __cdecl fcn_00475000(char*);
 int __cdecl gm_GetBuildingTypeCategory(int);
@@ -205,5 +205,5 @@ next_pixel:
 			v12 = *(int*) 0x774680;
 		}
 	}
-	fcn_00476060(v12);
+	d2_UnlockSurface(v12);
 }

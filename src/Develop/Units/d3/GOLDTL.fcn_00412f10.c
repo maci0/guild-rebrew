@@ -15,7 +15,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
  * it is absent and attaches it, falling back to loading a whole object
  * animation named "<prefix><name>.oam" when no stream context is set. */
 /* ADDRESS: GOLDTL 0x00412f10 */
-int __cdecl fcn_00412f10(char* obj, char* name, int flags)
+int __cdecl d3_ApplyObjectAnimation(char* obj, char* name, int flags)
 {
 	D3_ANIMATION_OPTIONS opt;
 	char* stream;

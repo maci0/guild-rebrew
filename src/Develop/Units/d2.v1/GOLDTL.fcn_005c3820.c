@@ -7,7 +7,7 @@ extern int g_100f1dc;
 
 void* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -20,7 +20,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00526120(void*, int);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_00471a30(int, int);
+void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetElementValue(int, ...);
 
@@ -54,7 +54,7 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 	}
 	table[0x24] = 0;
 	window = fcn_00470820(0, 0, "techtree\\auswirkungen");
-	fcn_00471b60(window);
+	d2_CenterDialogWindows(window);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(window, 1);
 	io_AppendText(0x17e0, a0);
@@ -118,9 +118,9 @@ void __cdecl fcn_005c3820(unsigned char* a0, unsigned char* a1)
 				if (wins[i] != -1 && d2_CurrentElementId == wins[i]) {
 					io_FormatTextBuffer(buf, "$Z$[%s$]$N%s", table[i] * 2 + 0xf98,
 					    table[i] * 2 + 0xf99);
-					fcn_00471a30(window, 0);
+					d2_SetGroupVisibility(window, 0);
 					fcn_00526120(buf, 0x10);
-					fcn_00471a30(window, 1);
+					d2_SetGroupVisibility(window, 1);
 				}
 			}
 		}

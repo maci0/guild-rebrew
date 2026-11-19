@@ -14,7 +14,7 @@ extern void* g_1015ea0;
 extern void* g_6a9b9c;
 
 extern void* __cdecl fcn_00470820(int, int, char*);
-extern void __cdecl fcn_00471b60(void*);
+extern void __cdecl d2_CenterDialogWindows(void*);
 extern void __cdecl io_AppendText(int);
 extern int __cdecl fcn_00471e30(void*);
 extern int __cdecl fcn_00471f80(void*);
@@ -92,7 +92,7 @@ int __cdecl fcn_005926f0(void)
 	g_779ce4 = (int*)fcn_004ce1c0();
 	if (g_779ce4 == 0) {
 		h = (void*)fcn_00470820(0, 0, (char*)0x68d714);
-		fcn_00471b60(h);
+		d2_CenterDialogWindows(h);
 		io_AppendText(0x87);
 		(*(int*)0x100f1dc) = -1;
 		do {
@@ -151,7 +151,7 @@ int __cdecl fcn_005926f0(void)
 	g_779cb8 = (char*)fcn_004ce1a0();
 	if (g_779cb8 == 0) {
 		h = (void*)fcn_00470820(0, 0, (char*)0x68d714);
-		fcn_00471b60(h);
+		d2_CenterDialogWindows(h);
 		io_AppendText(0x87);
 		(*(int*)0x100f1dc) = -1;
 		do {
@@ -166,7 +166,7 @@ int __cdecl fcn_005926f0(void)
 	}
 
 	g_6a9b9c = (void*)fcn_00470820(0x3c, 0, (char*)0x6a9ba0);
-	fcn_00471b60(g_6a9b9c);
+	d2_CenterDialogWindows(g_6a9b9c);
 	fcn_005931a0();
 	fcn_00593110();
 	fcn_00593200();

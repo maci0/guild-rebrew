@@ -35,6 +35,6 @@ CH_ACTION* __cdecl ch_NewAction(char* e)
 	t->ausfuehren = 0;
 	t->naechste = 0;
 	t->merkmale = 0;
-	fcn_00405180(e, t);
+	ch_ValidateActionLinks(e, t);
 	return t;
 }

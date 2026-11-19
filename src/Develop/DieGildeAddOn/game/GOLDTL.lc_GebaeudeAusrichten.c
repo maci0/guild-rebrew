@@ -91,18 +91,18 @@ int __cdecl fcn_00598150(char*, void**);
 void* __cdecl fcn_005987c0(float*, void**);
 void __cdecl fcn_00598740(float*, char*);
 void __cdecl fcn_00598860(char*, float*);
-void __cdecl fcn_00455350(char*, float*, float*);
+void __cdecl d3_TransformPoint(char*, float*, float*);
 void* __cdecl fcn_004488e0(char*, int, int);
-int __cdecl fcn_0042f690(char*, int, int, char*);
+int __cdecl vfs_ResolvePath(char*, int, int, char*);
 char __cdecl fcn_004143b0(char*, int, int);
 void __cdecl fcn_00438b40(char*, float*);
 void __cdecl fcn_00438cb0(char*, float*);
 void __cdecl fcn_00414960(float*, float*, char*);
-void __cdecl fcn_00451900(float*, float*);
-void __cdecl fcn_00412f10(char*, char*, int);
+void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
+void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 void __cdecl fcn_00415300(char*);
 char __cdecl d3_DestroyObject(char*);
-void __cdecl fcn_00414c90(char*, unsigned char, unsigned char, unsigned char);
+void __cdecl d3_SetSubtreeColor(char*, unsigned char, unsigned char, unsigned char);
 void __cdecl fcn_0043a3f0(char*, char*, Key4_5988b0);
 void __cdecl fcn_00533a40(char*);
 void __cdecl ReportClientMessage(char*);
@@ -110,7 +110,7 @@ void __cdecl fcn_00412830(char);
 void __cdecl UpdateSceneLighting(unsigned char);
 int __cdecl fcn_0050d200(int, int);
 char __cdecl fcn_0045bad0(int, int, int, int*, int*);
-char __cdecl fcn_0045b920(char*, int, int, float*);
+char __cdecl d3_GridPointToWorld(char*, int, int, float*);
 void __cdecl fcn_0052d4c0(char*);
 int __cdecl fcn_0052c9b0(void);
 void* __cdecl fcn_005bdc30(int, char*, int, void*, int);
@@ -165,7 +165,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		} else {
 			sprintf(f.cPfad, (char*) 0x67f0ac, (char*) 0x7e1ae0, f.cName);
 		}
-		if (fcn_0042f690(f.cPfad, g_6b7fdc, g_6b7fdc, f.cTmp) != 0) {
+		if (vfs_ResolvePath(f.cPfad, g_6b7fdc, g_6b7fdc, f.cTmp) != 0) {
 			strcpy(pTemp, f.cPfad);
 			pTemp += 0x60;
 			f.iAnzahl++;
@@ -202,7 +202,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		if (pAktuell == 0) {
 			continue;
 		}
-		fcn_00455350(pAktuell, (float*) (pAktuell + 0x4c), f.fPos);
+		d3_TransformPoint(pAktuell, (float*) (pAktuell + 0x4c), f.fPos);
 		sprintf(f.cBafPfad, (char*) 0x6aa228, (char*) 0x7e1ae0);
 		pTemp = (char*) fcn_004488e0(f.cBafPfad, 0, 0);
 		f.pObjekte[i] = pTemp;
@@ -213,7 +213,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		f.key.f.b0 = 1;
 		f.key.id = 0x80;
 		fcn_0043a3f0(pTemp, *(char**) (pTemp + 0x1cc), f.key);
-		fcn_00414c90(pTemp, 0xc0, 0xa0, 0x80);
+		d3_SetSubtreeColor(pTemp, 0xc0, 0xa0, 0x80);
 		dx = f.fPos[0] - *(float*) (d3_ActiveCamera + 0x4c);
 		dy = f.fPos[1] - *(float*) (d3_ActiveCamera + 0x50);
 		dz = f.fPos[2] - *(float*) (d3_ActiveCamera + 0x54);
@@ -222,7 +222,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 			f.fAbstand = fDistanz;
 			f.pPrev = pTemp;
 		}
-		fcn_00412f10(pTemp, (char*) 0x6a2eb8, 1);
+		d3_ApplyObjectAnimation(pTemp, (char*) 0x6a2eb8, 1);
 	}
 	if (f.pPrev == 0) {
 		fcn_00526120((char*) g_14ab2e0, 0);
@@ -261,14 +261,14 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 				fcn_004143b0(pAktuell, f.iRot, 0);
 				fcn_00533a40((char*) 0x677c94);
 				if (f.iRot != 1) {
-					fcn_00414c90(pAktuell, 0x40, 0xc0, 0x40);
+					d3_SetSubtreeColor(pAktuell, 0x40, 0xc0, 0x40);
 					f.iRot = 1;
 				}
 			}
 			else {
 				fcn_00533a40((char*) g_14ab2e4);
 				if (f.iRot != 2) {
-					fcn_00414c90(pAktuell, 0x40, 0x40, 0xc0);
+					d3_SetSubtreeColor(pAktuell, 0x40, 0x40, 0xc0);
 					f.iRot = 2;
 				}
 			}
@@ -298,7 +298,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		pTemp = (char*) fcn_005bdc30(8, 0, g_14ab2d0, 0, 0);
 		if (pTemp != 0) {
 			fcn_0052d4c0(pTemp);
-			fcn_00455350(pTemp, (float*) (pTemp + 0x4c), f.fPos);
+			d3_TransformPoint(pTemp, (float*) (pTemp + 0x4c), f.fPos);
 			fcn_00598860(pAktuell, f.fPos);
 		}
 		else {
@@ -313,19 +313,19 @@ platzieren:
 			f.pPrev = 0;
 			fcn_00533a40((char*) g_14ab2e4);
 			if (f.iRot != 2) {
-				fcn_00414c90(pAktuell, 0x40, 0x40, 0xc0);
+				d3_SetSubtreeColor(pAktuell, 0x40, 0x40, 0xc0);
 				f.iRot = 2;
 			}
 		}
 		else if (pNaechster == f.pPrev) {
 			fcn_00533a40((char*) 0x677c94);
 			if (f.iRot != 1) {
-				fcn_00414c90(pAktuell, 0x40, 0xc0, 0x40);
+				d3_SetSubtreeColor(pAktuell, 0x40, 0xc0, 0x40);
 				f.iRot = 1;
 			}
 		}
 		else {
-			fcn_00455350(pNaechster, (float*) (pNaechster + 0x4c), f.fPos);
+			d3_TransformPoint(pNaechster, (float*) (pNaechster + 0x4c), f.fPos);
 			f.pPrev = pNaechster;
 			fcn_00438b40(pAktuell, f.fPos);
 			fcn_00598740(f.fAusrichtung, pNaechster);
@@ -344,12 +344,12 @@ platzieren:
 				*(unsigned char*) (pAktuell + 0x215) |= 0x80;
 				if (pNaechster != 0) {
 					if (f.iRot != 1) {
-						fcn_00414c90(pAktuell, 0x40, 0xc0, 0x40);
+						d3_SetSubtreeColor(pAktuell, 0x40, 0xc0, 0x40);
 						f.iRot = 1;
 					}
 				} else {
 					if (f.iRot != 2) {
-						fcn_00414c90(pAktuell, 0x40, 0x40, 0xc0);
+						d3_SetSubtreeColor(pAktuell, 0x40, 0x40, 0xc0);
 						f.iRot = 2;
 					}
 				}
@@ -358,7 +358,7 @@ platzieren:
 		}
 		if (fcn_0052c9b0() == 0) {
 			fcn_0045bad0((int) f.pKontext, g_14ce8c0, g_14ce8c2, (int*) &f.fAbstand, &f.iKennung2);
-			if (fcn_0045b920(f.pKontext, f.iKennung2, *(int*) &f.fAbstand, f.fPos) != 0) {
+			if (d3_GridPointToWorld(f.pKontext, f.iKennung2, *(int*) &f.fAbstand, f.fPos) != 0) {
 				fcn_00438b40(pAktuell, f.fPos);
 				fcn_004143b0(pAktuell, 1, 0);
 			}
@@ -366,7 +366,7 @@ platzieren:
 			f.fVec[1] = *(float*) (pAktuell + 0x88);
 			f.fVec[2] = *(float*) (pAktuell + 0x8c);
 			f.fVec[1] = f.fVec[1] + 3.1415927f;
-			fcn_00451900(f.fVec, f.fMatrix);
+			d3_BuildEulerRotationMatrix(f.fVec, f.fMatrix);
 		}
 		if (g_14ce8cc != 0 && pNaechster != 0) {
 			i = fcn_0050d200((int) (0x7f4ca0 + g_774970 * 0x21c), gebaeudetyp);

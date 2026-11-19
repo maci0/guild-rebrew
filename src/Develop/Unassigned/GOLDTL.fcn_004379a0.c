@@ -7,7 +7,7 @@ char __cdecl fcn_004378c0(int, unsigned int);
 /* Walks a scene subtree and calls cb(node, ctx) for every node whose type
  * matches the flags; stops and returns 0 when cb returns 0. */
 /* ADDRESS: GOLDTL 0x004379a0 */
-char __cdecl fcn_004379a0(char* scene, char* node, unsigned int flags, char (__cdecl* cb)(char*, void*), void* ctx)
+char __cdecl d3_VisitSceneObjects(char* scene, char* node, unsigned int flags, char (__cdecl* cb)(char*, void*), void* ctx)
 {
 	char* n;
 	char ok;
@@ -25,7 +25,7 @@ char __cdecl fcn_004379a0(char* scene, char* node, unsigned int flags, char (__c
 				}
 			}
 			if (*(char**) (node + 0x200) != 0 && (ok & 0x80) == 0) {
-				ok = fcn_004379a0(scene, *(char**) (node + 0x200), flags & ~0x200, cb, ctx);
+				ok = d3_VisitSceneObjects(scene, *(char**) (node + 0x200), flags & ~0x200, cb, ctx);
 			}
 			if (!ok) {
 				return 0;
@@ -46,7 +46,7 @@ char __cdecl fcn_004379a0(char* scene, char* node, unsigned int flags, char (__c
 			*(int*) (scene + 0xa8) = (*(int*)&g_1040958);
 		}
 		for (n = *(char**) (scene + 0x80); n != 0 && n != d3_SceneObjectSentinel; n = *(char**) (n + 0x1f4)) {
-			if (!fcn_004379a0(scene, n, flags, cb, ctx)) {
+			if (!d3_VisitSceneObjects(scene, n, flags, cb, ctx)) {
 				return 0;
 			}
 		}

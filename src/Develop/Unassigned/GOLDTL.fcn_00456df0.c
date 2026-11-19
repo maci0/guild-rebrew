@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00456df0 */
-void __cdecl fcn_00456df0(char* a)
+void __cdecl d3_ClearAuxSlotState(char* a)
 {
 	int i;
 

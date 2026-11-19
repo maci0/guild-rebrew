@@ -9,8 +9,8 @@ extern double g_664f08;
 
 char __cdecl fcn_004d36b0(char*);
 int __cdecl fcn_004ce270(char*, char*);
-void __cdecl fcn_004379a0(char*, int, int, char(__cdecl*)(char*), char*);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_VisitSceneObjects(char*, int, int, char(__cdecl*)(char*), char*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 
 /* ADDRESS: GOLDTL 0x004d36e0 */
 char* __cdecl fcn_004d36e0(char* e)
@@ -29,9 +29,9 @@ char* __cdecl fcn_004d36e0(char* e)
     best = 1000000.0f;
     res = 0; i = 0;
     g_772f10 = 0;
-    fcn_004379a0(((char*) g_67a370), 0, 0x40, fcn_004d36b0, e);
+    d3_VisitSceneObjects(((char*) g_67a370), 0, 0x40, fcn_004d36b0, e);
     c = *(char**) (*(char**) (e + 0x184) + 0x34);
-    fcn_00455350(c, c + 0x4c, pos);
+    d3_TransformPoint(c, c + 0x4c, pos);
     for (; i < g_772f10; i++) {
         c = g_9b46c0[i];
         dx = pos[0] - *(float*) (c + 0x4c);

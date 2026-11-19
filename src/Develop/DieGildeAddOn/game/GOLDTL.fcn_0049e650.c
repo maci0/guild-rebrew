@@ -12,7 +12,7 @@ int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int job);
 int __cdecl fcn_004ab010(unsigned short* e, Blk24* o1, Blk24* o2);
 int __cdecl fcn_004a4410(float* o1, float* o2, int a3, unsigned short* e, int a5, Blk24* a6, Blk24* a7);
-int __cdecl fcn_004a4550(float* o1, float* o2, int a3, unsigned short* e, int a5, Blk24* a6, Blk24* a7);
+int __cdecl ai_CalculateMatchingMethodEffects(float* o1, float* o2, int a3, unsigned short* e, int a5, Blk24* a6, Blk24* a7);
 
 int __cdecl ai_ScoreDunkleEcke(float* o1, float* o2, int a3, unsigned short* e, int skip, Blk24* firstResult, Blk24* secondResult)
 {
@@ -28,7 +28,7 @@ int __cdecl ai_ScoreDunkleEcke(float* o1, float* o2, int a3, unsigned short* e, 
 	r = gm_CheckStatLevel(*e, 4);
 	if (r != 0 && gm_GetOppositeStatIndex(r) > 2) {
 		if (fcn_004ab010(e, &b1, &b2) != 0) {
-			fcn_004a4550(o1, o2, a3, e, 0, firstResult, secondResult);
+			ai_CalculateMatchingMethodEffects(o1, o2, a3, e, 0, firstResult, secondResult);
 			*firstResult = b1;
 			*secondResult = b2;
 			*o1 = *o1 * 6.0f;

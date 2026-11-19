@@ -16,7 +16,7 @@ int __cdecl fcn_00525fb0(void* obj);
 void* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
 void* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_00470820(int a, int b, char* name);
-void __cdecl fcn_00471b60(int dlg);
+void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int flag);
 void __cdecl fcn_00533dc0(int ctx, int a, int b);
 int __cdecl io_AppendText(int id, ...);
@@ -102,14 +102,14 @@ void __cdecl fcn_0059e740(unsigned char* a0, unsigned char* a1)
 		entity = he_fn_Handlung();
 	}
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9750);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_00533dc0(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x17fe);
 	fcn_0052a0c0(a0, 0);
 	fcn_00594340();
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 2);
 	if (count > 0) {
 		y = *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) / 2 - 0x80;

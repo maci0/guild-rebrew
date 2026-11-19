@@ -3,7 +3,7 @@ extern int main_LoopFlags;
 
 
 int __cdecl fcn_00470820(int, int, const char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_AppendText(int);
 void __cdecl fcn_005373e0(int, int);
 
@@ -18,7 +18,7 @@ int __cdecl fcn_005268c0(int a, char flags)
 	} else {
 		h = fcn_00470820(0, 0, "misc\\Messagebox");
 	}
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	io_AppendText(a);
 	fcn_005373e0(0, main_LoopFlags);
 	return h;

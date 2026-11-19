@@ -39,7 +39,7 @@ float __cdecl gm_RandomFloat01(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_005782f0(struct house*, int);
@@ -92,7 +92,7 @@ void __cdecl fcn_0058e790(char* e, char* res)
 	}
 	h = fcn_00470820(0, 0, g_6a96d8);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	g_100f1dc = -1;

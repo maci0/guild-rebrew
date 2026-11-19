@@ -9,7 +9,7 @@ char* __cdecl m_alloc(int, char*);
 void __cdecl fcn_0042f420(int, int, char*);
 unsigned char __cdecl fcn_00401590(char*, int*, int*, int);
 char __cdecl fcn_00401650(char*, unsigned char*, unsigned char*, int);
-void __cdecl fcn_0043f7e0(int*, char*, int);
+void __cdecl d3_LoadFloorTexture(int*, char*, int);
 void __cdecl fcn_0043f6b0(int*);
 void __cdecl fcn_0043bcf0(int*);
 int __cdecl sprintf(char*, const char*, ...);
@@ -160,7 +160,7 @@ int* __cdecl fcn_0043fa10(char* a0)
 	do {
 		*slot = g_6b5c60[0];
 		if (name && *name) {
-			fcn_0043f7e0(v6, name, -1);
+			d3_LoadFloorTexture(v6, name, -1);
 		}
 		slot += 0x40;
 		name += 0x40;

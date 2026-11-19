@@ -6,7 +6,7 @@
  * names this function. */
 
 void __cdecl fcn_00402aa0(void*);
-void __cdecl fcn_00435500(char*, char*);
+void __cdecl d3_RemoveObjectAnimation(char*, char*);
 
 void __cdecl ch_ClearSitting(unsigned char* ch)
 {
@@ -24,7 +24,7 @@ void __cdecl ch_ClearSitting(unsigned char* ch)
 			ent = *(int**) (ch + 0x34);
 			q = *(char**) (p + 0x68);
 			if (q != 0)
-				fcn_00435500((char*) ent[0x7b] + 0xf4, q);
+				d3_RemoveObjectAnimation((char*) ent[0x7b] + 0xf4, q);
 			*(void**) (ch + 0x74) = 0;
 		}
 		ch[0x8c] &= 0xef;

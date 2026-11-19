@@ -11,7 +11,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl fcn_00426cc0(int);
 char* __cdecl evt_LoadGfxScript(const char* name);
 void __cdecl fcn_004432d0(int, int);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 void __cdecl fcn_00428340(char* o, int n, ...);
 void __cdecl fcn_00428720(char*);
 void __cdecl fcn_00546190(char*);
@@ -60,7 +60,7 @@ void __cdecl fcn_0057ae50(char* u)
 	*(int*) (o + 4) = *(int*) (u + 0x10);
 	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
-	fcn_00455350(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, pos);
+	d3_TransformPoint(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, pos);
 	pos[1] += 500.0f;
 	fcn_00428340(o, 3, (int) pos[0], (int) pos[1], (int) pos[2]);
 	*(int*) (o + 0x104) = 0;

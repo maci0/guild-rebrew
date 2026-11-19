@@ -44,7 +44,7 @@ extern int g_67a370;
 extern Slot4cf450 g_9b9ec0[32];
 
 char* __cdecl fcn_00442910(int parent, float* pos, float* dir, char* name);
-char __cdecl fcn_0045b920(int map, int x, int y, float* out);
+char __cdecl d3_GridPointToWorld(int map, int x, int y, float* out);
 int __cdecl fcn_004339e0(char* obj, Flags4cf450 fl, int n, Ent4cf450* ents);
 
 #pragma optimize("y", off)
@@ -77,7 +77,7 @@ found:
 	o = fcn_00442910(0, p, d, "ob_BOMBE");
 	g_9b9ec0[i].obj = o;
 	o[0x215] |= 1;
-	fcn_0045b920(map, x, y, w);
+	d3_GridPointToWorld(map, x, y, w);
 	w[0] -= pos[0];
 	w[1] -= pos[1];
 	w[2] -= pos[2];

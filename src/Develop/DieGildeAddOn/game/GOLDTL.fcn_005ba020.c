@@ -2,7 +2,7 @@
 
 
 
-void __cdecl fcn_00455350(int, int, float*);
+void __cdecl d3_TransformPoint(int, int, float*);
 #include "client_scene_transform.h"
 
 
@@ -20,7 +20,7 @@ int __cdecl fcn_005ba020(char* a1, char* a2)
 		return 0;
 	}
 	if (*(int*) (a1 + 0x61) != 0) {
-		fcn_00455350(*(int*) (a1 + 0x61), *(int*) (a1 + 0x61) + 0x4c, pos);
+		d3_TransformPoint(*(int*) (a1 + 0x61), *(int*) (a1 + 0x61) + 0x4c, pos);
 		if (CompareVector3WithinTolerance((float*) (*(char**) (s + 0x34) + 0x4c), pos, 1350.0f) != 0 && *(int*) (s + 0x128) == 0) {
 			return 1;
 		}

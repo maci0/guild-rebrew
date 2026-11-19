@@ -15,7 +15,7 @@ extern int g_7e35c0[];
 void __cdecl fcn_0059a340(void);
 void __cdecl fcn_0057e880(int, int, int, int);
 #include "client_scene_transform.h"
-void __cdecl fcn_00412cf0(char*, float*, float*, int, int);
+void __cdecl d3_AnimateObjectTransform(char*, float*, float*, int, int);
 
 void __cdecl fcn_0059a2a0(void)
 {
@@ -30,7 +30,7 @@ void __cdecl fcn_0059a2a0(void)
 		x = *(float*) (d3_ActiveCamera + 0x8c);
 		v[2] = x;
 		if (CompareVector3WithinTolerance(v, (float*) (d3_ActiveCamera + 0x84), 0.1f) == 0) {
-			fcn_00412cf0(d3_ActiveCamera, (float*) (d3_ActiveCamera + 0x4c), v, 0x1e, 0x28);
+			d3_AnimateObjectTransform(d3_ActiveCamera, (float*) (d3_ActiveCamera + 0x4c), v, 0x1e, 0x28);
 		}
 	}
 }

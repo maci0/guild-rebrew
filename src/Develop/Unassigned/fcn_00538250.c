@@ -11,7 +11,7 @@ extern volatile int g_6b7fc0;
 
 int __cdecl fcn_0041baa0(void);
 void __cdecl fcn_00418640(void);
-void __cdecl fcn_00418680(void);
+void __cdecl d3_CreateRenderVertexBuffers(void);
 void __cdecl fcn_004117c0(int);
 void __cdecl fcn_004117f0(int);
 void __cdecl fcn_0042a3d0(void);
@@ -19,7 +19,7 @@ void __cdecl fcn_0042a410(int, int, int);
 void __cdecl fcn_0042a460(int, int);
 void __cdecl fcn_0043b360(void);
 void __cdecl fcn_00473610(void);
-void __cdecl fcn_00473640(void);
+void __cdecl d3_AcquireBackBuffer(void);
 void __cdecl fcn_00476970(int);
 void __cdecl fcn_004774a0(void);
 void __cdecl fcn_004774b0(void);
@@ -83,8 +83,8 @@ LRESULT CALLBACK fcn_00538250(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 			fcn_0043b360();
 			fcn_0047ce80();
 			fcn_004774b0();
-			fcn_00473640();
-			fcn_00418680();
+			d3_AcquireBackBuffer();
+			d3_CreateRenderVertexBuffers();
 		resume:
 			g_6b7fc0 = 0;
 			fcn_0042a460((int) hWnd, WM_PRIVATE_7E7);

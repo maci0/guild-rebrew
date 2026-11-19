@@ -28,14 +28,14 @@ extern int g_7e1d40;
 extern Page_1038144 g_1038144[];
 extern struct ctlinfo g_1015f50[];
 
-void __cdecl fcn_0046b4f0(void);
+void __cdecl d2_ClearScreen(void);
 void __cdecl fcn_00537320(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00469e30(int);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00469c40(int, int, int);
-void __cdecl fcn_00471c00(int, int);
+void __cdecl d2_PositionWindow(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_0046ac30(void);
@@ -45,7 +45,7 @@ void __cdecl fcn_0053f4b0(void);
 void __cdecl fcn_0053f4c0(void)
 {
 	d2_SuppressOverlay = 1;
-	fcn_0046b4f0();
+	d2_ClearScreen();
 	fcn_00537320(0x24087);
 	fcn_00469e30(gm_RandomMod(2) == 1 ? 0x78e : 0x791);
 	g_1040480 = -1;
@@ -59,7 +59,7 @@ void __cdecl fcn_0053f4c0(void)
 		g_7e1d40 = fcn_00470820(0, 0, g_6a41c0);
 	}
 	fcn_00469c40(0, d2_ScreenHeight - g_1015f50[((struct dlgslot*)g_1038144)[g_7e1d40].ctl].y - 0x30, g_1015f50[((struct dlgslot*)g_1038144)[g_7e1d40].ctl].h);
-	fcn_00471c00(((struct dlgslot*)g_1038144)[g_7e1d40].ctl, 1);
+	d2_PositionWindow(((struct dlgslot*)g_1038144)[g_7e1d40].ctl, 1);
 	d2_SetForm(g_7e1d40, 1);
 	fcn_004677e0(0, 0, 0x246, 0, 0x246, 0x83, 0x42, d2_CurrentWindowId);
 	fcn_0046ac30();

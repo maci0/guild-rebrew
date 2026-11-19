@@ -60,12 +60,12 @@ extern float g_1040c80[16];
 extern int g_67a370;
 extern char g_6b8000;
 
-void __cdecl fcn_00438100(Ent*, char*, int);
+void __cdecl d3_UpdateObjectCameraTransform(Ent*, char*, int);
 Mat* __stdcall fcn_005ebea2(Mat*, float*, Mat*);
 Mat* __stdcall fcn_005ebbb9(Mat*, Mat*);
 Plane* __stdcall fcn_005ee04a(Plane*, Plane*, Mat*);
 Plane* __stdcall fcn_005ed45f(void*, Plane*);
-void __cdecl fcn_004379a0(int, int, int, void (__cdecl*)(void), void*);
+void __cdecl d3_VisitSceneObjects(int, int, int, void (__cdecl*)(void), void*);
 void __cdecl fcn_00451f80(void);
 
 
@@ -80,7 +80,7 @@ void __cdecl fcn_00451df0(Ent* e)
 		return;
 	}
 	if (!(e->flags & 0x20) || !(e->flags & 0x40)) {
-		fcn_00438100(e, d3_ActiveCamera, 0);
+		d3_UpdateObjectCameraTransform(e, d3_ActiveCamera, 0);
 	}
 	fcn_005ebea2(&m, 0, &e->xf->a);
 	fcn_005ebbb9(&m, &m);
@@ -94,7 +94,7 @@ void __cdecl fcn_00451df0(Ent* e)
 	fcn_005ebbb9((Mat*) g_1040c80, (Mat*) g_1040c80);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x16, 2);
 	g_6b8000 = 1;
-	fcn_004379a0(g_67a370, 0, 0x40, fcn_00451f80, &big);
+	d3_VisitSceneObjects(g_67a370, 0, 0x40, fcn_00451f80, &big);
 	g_6b8000 = 0;
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x16, 3);
 }

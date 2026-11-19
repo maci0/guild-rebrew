@@ -2,7 +2,7 @@ extern int g_67a370;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 
-void __cdecl fcn_00437ac0(int, int, int, void (__cdecl*)(void));
+void __cdecl d3_TraverseSceneObjects(int, int, int, void (__cdecl*)(void));
 void __cdecl fcn_00511840(void);
 void __cdecl fcn_00454560(int);
 int __cdecl fcn_00454c00(int, int, int, int);
@@ -13,6 +13,6 @@ void __cdecl fcn_00514fc0(void)
 		fcn_00454560(g_773dd8);
 		g_773dd8 = 0;
 	}
-	fcn_00437ac0(g_67a370, 0, 0x40, fcn_00511840);
+	d3_TraverseSceneObjects(g_67a370, 0, 0x40, fcn_00511840);
 	g_773dd8 = fcn_00454c00(0, 0x40, 8, 7);
 }

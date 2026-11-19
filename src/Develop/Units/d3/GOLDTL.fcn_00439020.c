@@ -64,7 +64,7 @@ void __cdecl fcn_0043bc00(char a, char b);
 void __cdecl fcn_00456750(int, int, int, int, int, int, int);
 void __cdecl InitColorTable(void);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, unsigned int, unsigned int);
-void __cdecl fcn_00452280(void);
+void __cdecl d3_InitRenderVertexBuffer(void);
 
 /* ADDRESS: GOLDTL 0x00439020 */
 char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
@@ -158,7 +158,7 @@ char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
 			rep stosb
 		}
 	}
-	fcn_00452280();
+	d3_InitRenderVertexBuffer();
 	return 1;
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)

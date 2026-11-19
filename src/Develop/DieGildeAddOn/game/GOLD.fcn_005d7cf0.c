@@ -23,7 +23,7 @@ extern float g_6a24e4;
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00473150(unsigned char*);
-void __cdecl fcn_0046b4f0(void);
+void __cdecl d2_ClearScreen(void);
 void __cdecl fcn_00469e30(int);
 int __cdecl fcn_0046e940(int, int, int, int, int);
 void __cdecl fcn_00471c80(int, int);
@@ -44,7 +44,7 @@ void __cdecl fcn_005d7cf0(void)
 	}
 	fcn_00473150(fade);
 	fcn_004730c0(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 10);
-	fcn_0046b4f0();
+	d2_ClearScreen();
 	fcn_00469e30(0x7ad);
 	win = fcn_0046e940(100, 0, 0x258, g_fb9070, 0x10);
 	fcn_00471c80(win, 1);

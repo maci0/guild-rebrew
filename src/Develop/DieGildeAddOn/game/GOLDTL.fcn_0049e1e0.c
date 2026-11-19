@@ -22,7 +22,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl fcn_0050e4a0(int n);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int a, unsigned char b);
-int __cdecl fcn_00495400(int kind, int id, int n, Blk24* b1, Blk24* b2);
+int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 int __cdecl fcn_004a4bb0(char* a1, char* e, int a3, Blk24* b1, Blk24* b2, int want);
 
 /* The fallback's b1.kind is never written (as in the reference). The
@@ -74,7 +74,7 @@ int __cdecl ai_StartBaumeister(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
 				b2.b = val;
 				b2.kind = 1;
 				b2.d = 1;
-				r = fcn_00495400(0xf, *(unsigned short*) e, 0, &b1, &b2);
+				r = ai_SelectBestMethod(0xf, *(unsigned short*) e, 0, &b1, &b2);
 				if (r != 0) {
 					*o1 = b1;
 					*o2 = b2;

@@ -4,10 +4,10 @@
 extern int g_772f08;
 extern char* g_9b9e40[];
 
-void __cdecl fcn_00412f10(char* obj, char* name, int k);
+void __cdecl d3_ApplyObjectAnimation(char* obj, char* name, int k);
 char* __cdecl fcn_00442910(int parent, float* pos, float* dir, char* name);
 char __cdecl SelectTextureSet(void* obj, void* ctx, unsigned char a, char b);
-void __cdecl fcn_00455350(char* object, float* in, float* out);
+void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 
 /* ADDRESS: GOLDTL 0x004d1ad0 */
 char __cdecl fcn_004d1ad0(char* dummy)
@@ -20,7 +20,7 @@ char __cdecl fcn_004d1ad0(char* dummy)
 		dir[0] = 0.0f;
 		dir[1] = 0.0f;
 		dir[2] = 0.0f;
-		fcn_00455350(dummy, (float*) (dummy + 0x4c), pos);
+		d3_TransformPoint(dummy, (float*) (dummy + 0x4c), pos);
 		obj = fcn_00442910(0, pos, dir, "ub_FLUCHTFLAGGE");
 		g_9b9e40[g_772f08] = obj;
 		strcpy(obj, "sp_ESCAPE");
@@ -29,7 +29,7 @@ char __cdecl fcn_004d1ad0(char* dummy)
 		*(unsigned char*) (g_9b9e40[g_772f08] + 0x216) =
 			(*(unsigned char*) (g_9b9e40[g_772f08] + 0x216) & 0xfd) | 1;
 		*(unsigned char*) (g_9b9e40[g_772f08] + 0x216) |= 0x10;
-		fcn_00412f10(g_9b9e40[g_772f08],
+		d3_ApplyObjectAnimation(g_9b9e40[g_772f08],
 		             "sonstiges/anim_FLUCHTFLAGGE.baf", 1);
 		g_772f08++;
 		return 1;
@@ -38,7 +38,7 @@ char __cdecl fcn_004d1ad0(char* dummy)
 		dir[0] = 0.0f;
 		dir[1] = 0.0f;
 		dir[2] = 0.0f;
-		fcn_00455350(dummy, (float*) (dummy + 0x4c), pos);
+		d3_TransformPoint(dummy, (float*) (dummy + 0x4c), pos);
 		obj = fcn_00442910(0, pos, dir, "ub_CONQUER");
 		g_9b9e40[g_772f08] = obj;
 		SelectTextureSet(obj, *(void**) (obj + 0x1cc), 1, 1);

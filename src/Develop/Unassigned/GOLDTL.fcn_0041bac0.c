@@ -2,7 +2,7 @@
 
 extern int g_14ce86c;
 
-unsigned int __cdecl fcn_0041bac0(int r, int g, unsigned char b)
+unsigned int __cdecl d2_PackColorForPixelFormat(int r, int g, unsigned char b)
 {
 	unsigned int c;
 

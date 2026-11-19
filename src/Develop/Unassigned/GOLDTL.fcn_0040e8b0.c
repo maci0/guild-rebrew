@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_00455350(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 int __cdecl fcn_004488e0(char* name, int a, int b);
 void __cdecl fcn_00438b40(char* h, float* pos);
 void __cdecl fcn_00455240(char* src, float* out);
@@ -15,7 +15,7 @@ int __cdecl CreateObjectGroupAtDummy(char** name, char** a)
 	if (*a == 0) {
 		return 0;
 	}
-	fcn_00455350(*a, *a + 0x4c, pos);
+	d3_TransformPoint(*a, *a + 0x4c, pos);
 	h = fcn_004488e0(*name, 0, 0);
 	fcn_00438b40((char*)h, pos);
 	fcn_00455240(*a, rot);

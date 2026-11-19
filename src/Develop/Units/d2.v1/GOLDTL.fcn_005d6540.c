@@ -6,7 +6,7 @@ extern int g_100f1dc;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_00472250(int, int, int);
@@ -91,7 +91,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 	id = 0x13fd + *(unsigned char*) rec * 5;
 	dlg = fcn_00470820(0, 0, "privillegien\\gesetz");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1ba9);
 	switch (*(unsigned char*) ((char*) rec + 1)) {

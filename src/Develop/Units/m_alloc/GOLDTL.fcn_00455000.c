@@ -21,7 +21,7 @@ extern char g_6b89a4[];
 
 void __cdecl m_pool_free(void*, void*);
 
-char __cdecl fcn_00455000(char* e, Cell* c)
+char __cdecl d3_RemoveObjectFromCellTree(char* e, Cell* c)
 {
 	Link* l;
 	Link* prev;
@@ -51,7 +51,7 @@ char __cdecl fcn_00455000(char* e, Cell* c)
 	for (i = 0; i < 4; i++) {
 		ch = c->child[i];
 		if (ch != 0) {
-			fcn_00455000(e, ch);
+			d3_RemoveObjectFromCellTree(e, ch);
 			if (ch->count == 0) {
 				m_pool_free(g_6b89a0, ch);
 				c->child[i] = 0;

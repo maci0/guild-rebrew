@@ -24,7 +24,7 @@ extern Tex_102d278 g_102d278[];
 extern char s_67d420[];
 
 #include "Develop/Units/Error/error_message.h"
-int __cdecl fcn_00467240(int x, int y, int a3, int a4, int a5);
+int __cdecl d2_OpenInputIcon(int x, int y, int a3, int a4, int a5);
 void __cdecl fcn_0046f650(int slot, D2_WIN* parent);
 
 /* ADDRESS: GOLDTL 0x00467480 */
@@ -41,7 +41,7 @@ int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win)
 		ReportClientMessage(s_67d420);
 		return -1;
 	}
-	id = fcn_00467240(par->left + x, par->top - (*(int*) &par->pad3c[0x21c]) + y, a3, a4, a5);
+	id = d2_OpenInputIcon(par->left + x, par->top - (*(int*) &par->pad3c[0x21c]) + y, a3, a4, a5);
 	fcn_0046f650(id, par);
 	((fcn_00467480_Ent*)g_1015ea0)[id].i[0x40 / 4] = (int) par;
 	((fcn_00467480_Ent*)g_1015ea0)[id].i[0x50 / 4] = ((fcn_00467480_Ent*)g_1015ea0)[par->slot].i[0x50 / 4];

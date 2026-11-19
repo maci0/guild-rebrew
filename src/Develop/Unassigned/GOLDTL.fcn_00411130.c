@@ -23,7 +23,7 @@ void __cdecl fcn_00425d90(const char*, void*, ...);
 
 /* Registers the sound script commands and constants. */
 /* ADDRESS: GOLDTL 0x00411130 */
-void __cdecl fcn_00411130(void)
+void __cdecl evt_RegisterSoundCommands(void)
 {
 	evt_ImportCommand("LoadSampleBank", LoadSampleBank, 1, 1, 6);
 	evt_ImportCommand("KillSampleBank", KillSampleBank, 1, 1, 1);

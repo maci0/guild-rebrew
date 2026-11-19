@@ -6,7 +6,7 @@ int __cdecl fcn_00459d00(char* a, int b);
 
 /* Sums into *size the bytes the parts of o selected by flags occupy. */
 /* ADDRESS: GOLDTL 0x00459ea0 */
-unsigned char __cdecl fcn_00459ea0(char* o, unsigned int flags, int* size)
+unsigned char __cdecl d3_CalculateObjectMemorySize(char* o, unsigned int flags, int* size)
 {
 	unsigned char r;
 	int i;

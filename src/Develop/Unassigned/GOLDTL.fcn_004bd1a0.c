@@ -6,7 +6,7 @@ typedef struct {
 } fcn_004bd1a0_entry;
 // SIZE 0x18
 
-void __cdecl fcn_00442d50(void*, int);
+void __cdecl d3_SetSubtreeVisible(void*, int);
 
 
 /* ADDRESS: GOLDTL 0x004bd1a0 */
@@ -17,7 +17,7 @@ void __cdecl fcn_004bd1a0(fcn_004bd1a0_entry* tab)
 	if (tab != 0) {
 		for (i = 0; i < 64; i++) {
 			if (tab[i].state != 0xff && tab[i].obj != 0)
-				fcn_00442d50(tab[i].obj, 0);
+				d3_SetSubtreeVisible(tab[i].obj, 0);
 		}
 	}
 }

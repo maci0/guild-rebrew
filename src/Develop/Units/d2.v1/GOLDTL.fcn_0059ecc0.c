@@ -34,7 +34,7 @@ int __cdecl fcn_00525fb0(int);
 int __cdecl fcn_005463a0(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00533dc0(int, int, int);
 int __cdecl io_AppendText(int, ...);
@@ -96,14 +96,14 @@ void __cdecl fcn_0059ecc0(int a0, int a1)
 		h = he_fn_Handlung();
 	}
 	total = fcn_00470820(0, 0, (char*) 0x6a9750);
-	fcn_00471b60(total);
+	d2_CenterDialogWindows(total);
 	d2_SetForm(total, 0);
 	fcn_00533dc0(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(total, 3);
 	io_AppendText(0x1806);
 	fcn_0052a0c0(a0, 0);
 	fcn_00594340();
-	fcn_00471b60(total);
+	d2_CenterDialogWindows(total);
 	d2_SetForm(total, 2);
 	y = *(int*) (0x1015f4c + d2_CurrentWindowId * 0x3cc) / 2 - 0x80;
 	cnt = 0;

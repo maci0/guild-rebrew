@@ -34,7 +34,7 @@ void __cdecl fcn_004d0070(void);
 void __cdecl fcn_004cfc00(char*);
 void __cdecl fcn_004cf180(void);
 void __cdecl fcn_004cf6b0(void);
-ent2c* __cdecl fcn_004ceac0(char*, char*);
+ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl fcn_004c67c0(int, ent2c*);
 
 void __cdecl fcn_004d7d70(char* rec)
@@ -57,7 +57,7 @@ void __cdecl fcn_004d7d70(char* rec)
 	}
 	if (g_100f1dc == -1 || d2_CurrentElementId != g_68b7a8)
 		return;
-	l = *fcn_004ceac0(rec, ((char*)g_772f24));
+	l = *gm_FindOrCreateEntitySlot(rec, ((char*)g_772f24));
 	l.id = *(int*) (((char*)g_772f24) + 4);
 	l.f4 = 5;
 	fcn_004c67c0(*(int*) (rec + 0x10), &l);

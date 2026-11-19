@@ -22,7 +22,7 @@ extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 
 void __cdecl fcn_00530a00(unsigned char* home);
-void __cdecl fcn_00404a00(char* view, int n, ...);
+void __cdecl ch_PreloadCharacterMotions(char* view, int n, ...);
 
 void __cdecl fcn_005166a0(unsigned char* home)
 {
@@ -42,7 +42,7 @@ void __cdecl fcn_005166a0(unsigned char* home)
 	for (i = 0; i < 768; i++) {
 		if (((Obj*)g_7f4ca0)[i].view != 0 &&
 		    (((Obj*)g_7f4ca0)[i].home == home || *(int*) (((Obj*)g_7f4ca0)[i].view + 0x2c) == *(int*) (home + 1))) {
-			fcn_00404a00(((Obj*)g_7f4ca0)[i].view, 0x10, s->names[0], s->names[1], s->names[2], s->names[3],
+			ch_PreloadCharacterMotions(((Obj*)g_7f4ca0)[i].view, 0x10, s->names[0], s->names[1], s->names[2], s->names[3],
 				     s->names[4], s->names[5], s->names[6], s->names[7], s->names[8], s->names[9],
 				     s->names[10], s->names[11], s->names[12], s->names[13], s->names[14],
 				     s->names[15]);

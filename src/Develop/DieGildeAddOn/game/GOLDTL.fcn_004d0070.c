@@ -25,7 +25,7 @@ unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl fcn_004c6880(int, int, int);
 char* __cdecl fcn_004ce610(char*);
 int __cdecl fcn_004cef70(int, char*);
-unsigned char __cdecl fcn_00442d50(int, unsigned char);
+unsigned char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl fcn_0043a3f0(char*, char*, V43a3f0);
 int __cdecl fcn_004ce270(char*, char*);
 float __cdecl fcn_004cefb0(char*, char*);
@@ -97,7 +97,7 @@ void __cdecl fcn_004d0070(void)
 			o = *(char**) (e + 0x184);
 			if (t & 0x800) {
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
-				fcn_00442d50((int) e34, 1);
+				d3_SetSubtreeVisible((int) e34, 1);
 				c.r = 0x80;
 				c.g = 0;
 				c.f0 = 0;
@@ -129,7 +129,7 @@ void __cdecl fcn_004d0070(void)
 					}
 				}
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
-				fcn_00442d50((int) e34, (unsigned char) found);
+				d3_SetSubtreeVisible((int) e34, (unsigned char) found);
 				if (found) {
 					t = (int) (255.0f - best * 0.01f * 255.0f);
 					c.r = (unsigned char) t;

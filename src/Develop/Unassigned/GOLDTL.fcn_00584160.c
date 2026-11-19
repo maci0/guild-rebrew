@@ -4,7 +4,7 @@ extern int g_774650;
 extern volatile unsigned int g_6b7fac;
 
 void __cdecl fcn_0046f4c0(int);
-int __cdecl fcn_00472170(int, int);
+int __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00469c30(int, int, int);
 void __cdecl fcn_00469c40(int, int, int);
 int __cdecl fcn_0046b2b0(int);
@@ -57,9 +57,9 @@ void __cdecl fcn_00584160(int a0)
 		fcn_0046f4c0(handle);
 		o = g_665f08;
 		if (*(int*) (o + 0x64) != g_774650) {
-			fcn_00472170(*(int*) (o + 0x60), 0);
+			d2_SetSlotVisibility(*(int*) (o + 0x60), 0);
 		} else {
-			fcn_00472170(*(int*) (o + 0x60), 1);
+			d2_SetSlotVisibility(*(int*) (o + 0x60), 1);
 		}
 		o = g_665f08;
 	}

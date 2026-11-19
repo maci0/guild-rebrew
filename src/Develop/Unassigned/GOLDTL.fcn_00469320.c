@@ -20,8 +20,8 @@ typedef struct Rect4 {
 
 extern char* g_1015ea0;
 
-void* __cdecl fcn_0047bf80(int x, int y, int w, int h, int a5, Rect4* r);
-void __cdecl fcn_0047b9a0(void* p, int r, int g, int b);
+void* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int a5, Rect4* r);
+void __cdecl d2_SetQuadVertexColor(void* p, int r, int g, int b);
 
 /* ADDRESS: GOLDTL 0x00469320 */
 void __cdecl fcn_00469320(int slot)
@@ -33,8 +33,8 @@ void __cdecl fcn_00469320(int slot)
 	rc.right = *(int*) (((Slot*)g_1015ea0)[slot].surf + 0x54);
 	rc.top = 0;
 	rc.bottom = *(int*) (((Slot*)g_1015ea0)[slot].surf + 0x58);
-	p = fcn_0047bf80(((Slot*)g_1015ea0)[slot].x, ((Slot*)g_1015ea0)[slot].y, ((Slot*)g_1015ea0)[slot].w, ((Slot*)g_1015ea0)[slot].h, *(int*) (((Slot*)g_1015ea0)[slot].surf + 0x20), &rc);
+	p = d2_QueueTexturedQuad(((Slot*)g_1015ea0)[slot].x, ((Slot*)g_1015ea0)[slot].y, ((Slot*)g_1015ea0)[slot].w, ((Slot*)g_1015ea0)[slot].h, *(int*) (((Slot*)g_1015ea0)[slot].surf + 0x20), &rc);
 	if (p) {
-		fcn_0047b9a0(p, 0xff, 0xff, 0xff);
+		d2_SetQuadVertexColor(p, 0xff, 0xff, 0xff);
 	}
 }

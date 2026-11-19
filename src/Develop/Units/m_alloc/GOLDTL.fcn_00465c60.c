@@ -29,7 +29,7 @@ extern int g_7725ac;
 extern int g_1015ea0;
 extern int g_14ce728;
 
-void __cdecl fcn_004732f0(void);
+void __cdecl d2_FreeAllSprites(void);
 void __cdecl fcn_0046f280(int a1);
 void __cdecl fcn_0046b2b0(int id);
 void __cdecl fcn_0047b5d0(void* p);
@@ -52,7 +52,7 @@ void __cdecl fcn_00465c60(void)
 	VfsEntry* entry;
 	void* object;
 
-	fcn_004732f0();
+	d2_FreeAllSprites();
 	i = 0;
 	track = (int*) 0x10161d0;
 	do {

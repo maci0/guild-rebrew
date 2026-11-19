@@ -92,7 +92,7 @@ void __cdecl fcn_004c2100(void)
 		if (g_688118[n].ids[j] == 0) {
 			g_688118[n].score += 0x14;
 		}
-		track = fcn_0041fd70(name, 0);
+		track = msx_StartTrack(name, 0);
 		tp_msx_CurrentTrack = g_772d20 = track;
 		fcn_0064d41a(g_772c10, s_68a14c, name);
 		return;
@@ -123,7 +123,7 @@ void __cdecl fcn_004c2100(void)
 			if (g_688118[n].ids[j] == 0) {
 				g_688118[n].score += 0x14;
 			}
-			track = fcn_0041fd70(name, 0);
+			track = msx_StartTrack(name, 0);
 			tp_msx_CurrentTrack = g_772d20 = track;
 			fcn_0064d41a(g_772c10, s_68a130, name);
 			return;

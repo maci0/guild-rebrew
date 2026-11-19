@@ -8,7 +8,7 @@ extern char cm_LastObjectId[];
 
 /* ADDRESS: GOLD 0x004c4450 */
 /* ADDRESS: GOLDTL 0x004c4dc0 */
-int __cdecl fcn_004c4dc0(int a1, int value)
+int __cdecl cm_ResolveSpecialEntityId(int a1, int value)
 {
 	if (value == -2) {
 		return *(int*) cm_LastEntityId;
@@ -32,7 +32,7 @@ int __cdecl fcn_004c7a60(void* e, char* flag)
 	void* existing;
 	void* stat; unsigned short id;
 
-	id = (unsigned short) fcn_004c4dc0((int) e, (int) *(unsigned short*) ((char*) e + 0x10)); *(unsigned short*) ((char*) e + 0x10) = id;
+	id = (unsigned short) cm_ResolveSpecialEntityId((int) e, (int) *(unsigned short*) ((char*) e + 0x10)); *(unsigned short*) ((char*) e + 0x10) = id;
 	if (!gm_ResolveEntityById(&e, &existing, &stat, (int) id))
 		return 1;
 	if (e != 0) {

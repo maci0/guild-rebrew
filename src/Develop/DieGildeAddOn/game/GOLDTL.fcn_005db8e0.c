@@ -69,7 +69,7 @@ extern int g_14ce8d8;
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
@@ -95,7 +95,7 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 
 	n = (int)(gm_WalkEntityChain(e->id) * 0.015f);
 	dlg = fcn_00470820(0, 0, "privillegien\\CHOOSEPROFESSION2");
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	colw = (((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x40) / 5;
 	rowh = (((D2_WIN*) g_1015f40)[d2_CurrentWindowId].height - 0x84) / 3;

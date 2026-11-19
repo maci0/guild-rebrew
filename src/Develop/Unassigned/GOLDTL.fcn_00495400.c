@@ -34,7 +34,7 @@ int __cdecl fcn_00495150(int);
 void __cdecl fcn_00495120(int);
 void __cdecl fcn_00495140(void);
 
-int __cdecl fcn_00495400(int who, int idx, int arg, Pos *out1, Pos *out2)
+int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Pos *out1, Pos *out2)
 {
 	float best1;
 	float best2;

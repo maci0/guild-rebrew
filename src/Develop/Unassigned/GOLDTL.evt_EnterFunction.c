@@ -1,7 +1,7 @@
 #include <string.h>
 
-void __cdecl fcn_00425bf0(void*, int, char*);
-void* __cdecl fcn_00425ec0(void*, int, int, int*);
+void __cdecl evt_LogScriptError(void*, int, char*);
+void* __cdecl evt_AllocateLocalVariable(void*, int, int, int*);
 void __cdecl fcn_00428720(char*);
 void* __cdecl fcn_00428800(int);
 
@@ -60,7 +60,7 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 
 	pos = 0;
 	if (fn == 0) {
-		fcn_00425bf0(ip, ip->depth, (char*) 0x679518);
+		evt_LogScriptError(ip, ip->depth, (char*) 0x679518);
 		return;
 	}
 	while (pos < 0x10) {
@@ -70,7 +70,7 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 		pos++;
 	}
 	if (pos >= 0x10) {
-		fcn_00425bf0(ip, ip->depth, (char*) 0x6794ec);
+		evt_LogScriptError(ip, ip->depth, (char*) 0x6794ec);
 		return;
 	}
 	if (pos > 0) {
@@ -104,9 +104,9 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 	slot->splice = ip->splice;
 	slot->code = (char*) fn;
 	for (k = 0; k < fn->argc; k++) {
-		sym = (EvtSymbol*) fcn_00425ec0(ip, fn->types[k], 1, fn->params[k]);
+		sym = (EvtSymbol*) evt_AllocateLocalVariable(ip, fn->types[k], 1, fn->params[k]);
 		if (sym == 0) {
-			fcn_00425bf0(ip, ip->depth, (char*) 0x6794c0);
+			evt_LogScriptError(ip, ip->depth, (char*) 0x6794c0);
 			fcn_00428720((char*) ip);
 			return;
 		}

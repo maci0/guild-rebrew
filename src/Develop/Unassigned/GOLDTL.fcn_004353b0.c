@@ -13,7 +13,7 @@ typedef struct {
 
 
 
-float __cdecl fcn_004353b0(V4353b0* v, int n)
+float __cdecl d3_GetMaxVertexDistance(V4353b0* v, int n)
 {
 	float best;
 	float d;

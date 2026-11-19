@@ -3,7 +3,7 @@
 extern char* sbs_BankManager;
 extern int g_6b7d6c;
 
-char* __cdecl fcn_00423ac0(char* s);
+char* __cdecl sbs_FindSet(char* s);
 void* __cdecl fcn_004239b0(void);
 char* __cdecl m_alloc(int size, char* tag);
 char* __cdecl strncpy(char* dst, const char* src, unsigned int n);
@@ -16,7 +16,7 @@ int __cdecl fcn_00423e10(char* s)
 	char* fp;
 	int fn;
 
-	if (sbs_BankManager == 0 || fcn_00423ac0(s) != 0) {
+	if (sbs_BankManager == 0 || sbs_FindSet(s) != 0) {
 		return -1;
 	}
 	list = (char*) fcn_004239b0();

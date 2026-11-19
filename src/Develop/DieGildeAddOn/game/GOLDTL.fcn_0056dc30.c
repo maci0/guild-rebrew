@@ -15,7 +15,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00500d20(pos14_7f4c00*, pos14_7f4c00*);
+int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 double __cdecl fcn_004ff040(char*);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
@@ -39,7 +39,7 @@ void __cdecl fcn_0056dc30(char* u)
 		if (h == 0) {
 			break;
 		}
-		x = fcn_00500d20((pos14_7f4c00*) (u + 0x60), &gm_GameTime) * 0.1f;
+		x = gm_GetElapsedMinutes((pos14_7f4c00*) (u + 0x60), &gm_GameTime) * 0.1f;
 		x *= 5.0f;
 		r = fcn_004ff040(h) * 100.0;
 		if (*(unsigned int*) (u + 0xb0) > 0 && x + r < 100.0f) {

@@ -12,7 +12,7 @@ typedef struct {
 } tri12;
 // SIZE 0xc
 
-int __cdecl fcn_004c4dc0(char*, int);
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 
 int __cdecl fcn_004c8bf0(char* x, char* out)
@@ -22,7 +22,7 @@ int __cdecl fcn_004c8bf0(char* x, char* out)
 	int k;
 	unsigned int i;
 
-	*(int*) (x + 0x10) = fcn_004c4dc0(x, *(int*) (x + 0x10));
+	*(int*) (x + 0x10) = cm_ResolveSpecialEntityId(x, *(int*) (x + 0x10));
 	if (gm_ResolveEntityById(0, 0, (void**) (&e), *(int*) (x + 0x10)) == 0)
 		return 1;
 	q = (unsigned char*) x + 0x15;

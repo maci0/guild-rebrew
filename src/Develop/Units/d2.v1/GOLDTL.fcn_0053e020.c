@@ -11,7 +11,7 @@ int __cdecl d2_SelectRadioGroup();
 int __cdecl d2_UpdateRadioGroup();
 int __cdecl fcn_00470820();
 int __cdecl fcn_00471af0();
-int __cdecl fcn_00471b60();
+int __cdecl d2_CenterDialogWindows();
 int __cdecl fcn_00471e30();
 int __cdecl fcn_00472250();
 int __cdecl d2_SetForm();
@@ -54,7 +54,7 @@ int __cdecl fcn_0053e020(void)
 	v1 = 0;
 	v13 = -1;
 	v2 = fcn_00470820(0, 0, 0x68116c);
-	fcn_00471b60(v2);
+	d2_CenterDialogWindows(v2);
 	d2_SetForm(v2, 0);
 	v3 = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca);
 	v4 = fcn_00472250(v2, 0, v3);

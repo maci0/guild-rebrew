@@ -6,7 +6,7 @@ extern int g_6b7fa4, txt_EntryCount;
 #pragma intrinsic(memset, strlen, strcpy, strcat)
 
 char* __cdecl fcn_0042b790(char* s);
-void __cdecl fcn_0042b7e0(char* s);
+void __cdecl txt_TrimTrailingSpaces(char* s);
 char* __cdecl fcn_0064e790(const char* s, int c);
 
 /* ADDRESS: GOLDTL 0x0042b810 */
@@ -41,7 +41,7 @@ int __cdecl fcn_0042b810(char* text, int index)
 		if (count == 0) {
 			strcpy(v17, p);
 			q = fcn_0042b790(v17);
-			fcn_0042b7e0(q);
+			txt_TrimTrailingSpaces(q);
 			if (strcmpi(q, "(m)") == 0) {
 				kind = 0;
 			}
@@ -55,7 +55,7 @@ int __cdecl fcn_0042b810(char* text, int index)
 		else {
 			q = fcn_0042b790(p);
 			if (q != 0) {
-				fcn_0042b7e0(q);
+				txt_TrimTrailingSpaces(q);
 				r = fcn_0064e790(q, '[');
 				if (r == 0) {
 					strcpy(v18, q);

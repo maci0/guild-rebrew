@@ -22,12 +22,12 @@ struct sel {
 /* SIZE 0x38 */
 
 int __cdecl fcn_00470820(int a, int b, char* name);
-void __cdecl fcn_00471b60(int handle);
+void __cdecl d2_CenterDialogWindows(int handle);
 void __cdecl d2_SetForm(int handle, int page);
 void __cdecl fcn_005340f0(int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl fcn_004f7120(int id, char* record, int* out1, int* out2, int* idx);
-void __cdecl fcn_0046f2c0(int a, int b);
+void __cdecl d2_ClearWindowChildren(int a, int b);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_005ca560(struct sel* s);
 void __cdecl fcn_005ca740(int x, int y, int a, int b, struct sel* s, int c);
@@ -73,7 +73,7 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 	seen[2] = -1;
 	memset(sel, 0, sizeof(sel));
 	handle = fcn_00470820(0, 0, "locations\\Wirtshaus\\DUNKLEECKE");
-	fcn_00471b60(handle);
+	d2_CenterDialogWindows(handle);
 	d2_SetForm(handle, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
@@ -98,7 +98,7 @@ void __cdecl fcn_005a2970(char* a0, char* a1)
 		}
 		if (changed) {
 			d2_SetForm(handle, 1);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText(0x18a3);
 			line = 0x46;
 			x = *(int*) (g_77255c + 0xc) / 2;

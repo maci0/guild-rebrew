@@ -15,7 +15,7 @@ typedef struct {
 } Rec_44de70;
 
 int __cdecl fcn_004011f0(void* stream, void* dst);
-char* __cdecl fcn_00401180(void* stream, void* dst);
+char* __cdecl vfs_ReadByte(void* stream, void* dst);
 
 /* ADDRESS: GOLDTL 0x0044de70 */
 void __cdecl fcn_0044de70(void* stream, Ctx_44de70* c)
@@ -28,7 +28,7 @@ void __cdecl fcn_0044de70(void* stream, Ctx_44de70* c)
 		c->n++;
 		return;
 	}
-	fcn_00401180(stream, &b);
+	vfs_ReadByte(stream, &b);
 	if (b == 0xff) {
 		((Rec_44de70*) c->recs)[c->n].f28 = -1;
 		c->n++;

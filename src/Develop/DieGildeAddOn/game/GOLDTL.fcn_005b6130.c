@@ -7,7 +7,7 @@ extern int g_14abc14;    /* 0x14abc14 */
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
 void __cdecl fcn_0046f940(int element, char* text);
 void __cdecl fcn_0046f9b0(int element, int a2);
-void __cdecl fcn_00472900(int element, int a2);
+void __cdecl d2_SetElementFont(int element, int a2);
 char* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 char* __cdecl gm_EntityAccumulate(int entity);
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
@@ -55,7 +55,7 @@ void __cdecl fcn_005b6130(int a0, char* a1)
                     *(unsigned int*) (g_1015ea0 + 0x5c + v3 * 0x2f4) = 1;
                     *(char**) (g_1015ea0 + 0x2f0 +
                                *(int*) (v4 * 4 + 0x777cd0) * 0x2f4) = v2;
-                    fcn_00472900(*(unsigned int*) (v4 * 4 + 0x777cd0),
+                    d2_SetElementFont(*(unsigned int*) (v4 * 4 + 0x777cd0),
                                  0x56);
                     *(unsigned int*) (g_1015ea0 + 0x1d0 +
                                       *(int*) (v4 * 4 + 0x777cd0) * 0x2f4) = 3;

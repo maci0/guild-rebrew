@@ -23,7 +23,7 @@ struct d2_daterec {
 
 int __cdecl fcn_00470820(int, int, char *);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_00471e30(int);
@@ -87,7 +87,7 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 	msg = main_LoopFlags;
 	h = fcn_00470820(0, 0, "panel\\info_spieler");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1f53, *a0);
 	d2_SetForm(h, 2);

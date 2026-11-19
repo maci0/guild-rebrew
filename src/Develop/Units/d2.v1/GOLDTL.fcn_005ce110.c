@@ -3,7 +3,7 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_004e8b80(int, int, char*);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
@@ -37,7 +37,7 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 		return;
 	}
 	dialog = fcn_00470820(0, 0, "special\\tagesordnung");
-	fcn_00471b60(dialog);
+	d2_CenterDialogWindows(dialog);
 	d2_SetForm(dialog, 2);
 	w = d2_CurrentWindowId;
 	d2_SetForm(dialog, 4);

@@ -10,7 +10,7 @@ extern double g_662a50;
 extern double g_662a58;
 extern double g_662a60;
 
-void __cdecl fcn_00451900(float*, float*);
+void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
 
 /* SIZE 0x5c */
 typedef struct {
@@ -75,7 +75,7 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 	in[0] = self->x - *(float*) (cam + 0x84);
 	in[1] = self->y - *(float*) (cam + 0x88);
 	in[2] = self->z - *(float*) (cam + 0x8c);
-	fcn_00451900(in, out);
+	d3_BuildEulerRotationMatrix(in, out);
 	cam = d3_ActiveCamera; m = (float*) (cam + 0x18c);
 	b0 = (out[4] + out[0]) * 0.0f + out[8] * g_6629b0;
 	self->x = *(float*) (cam + 0x84);

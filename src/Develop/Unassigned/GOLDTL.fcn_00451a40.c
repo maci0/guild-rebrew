@@ -2,7 +2,7 @@ extern float g_6628a8;
 extern float g_662a34;
 
 void __cdecl fcn_004518a0(float* v);
-void __cdecl fcn_004519d0(float* m, float* e);
+void __cdecl d3_MatrixToEulerAngles(float* m, float* e);
 
 /* ADDRESS: GOLDTL 0x00451a40 */
 void __cdecl fcn_00451a40(float* m, float* out, float* e)
@@ -98,7 +98,7 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
     basis[10] = v[2] + u[2];
     fcn_004518a0(basis + 8);
 
-    fcn_004519d0(basis, e);
+    d3_MatrixToEulerAngles(basis, e);
 
     c[0] = g_6628a8;
     c[1] = g_6628a8;

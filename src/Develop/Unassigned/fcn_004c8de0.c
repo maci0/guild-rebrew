@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_matrices.h"
 
-int __cdecl fcn_004c4dc0(int a, int b);
+int __cdecl cm_ResolveSpecialEntityId(int a, int b);
 #define SLOT_DWORD(off) (*(int*) (g_7f4ca0 + (off) + 4))
 #define SLOT_WORD(off)  (*(unsigned short*) (g_7f4ca0 + (off)))
 
@@ -28,9 +28,9 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 	int loadd;
 
 	t = a;
-	r1 = fcn_004c4dc0((int) t, t[4]);
+	r1 = cm_ResolveSpecialEntityId((int) t, t[4]);
 	t[4] = r1;
-	idx5 = fcn_004c4dc0((int) t, t[5]);
+	idx5 = cm_ResolveSpecialEntityId((int) t, t[5]);
 	t[5] = idx5;
 	kind = t[7];
 

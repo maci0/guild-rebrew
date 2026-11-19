@@ -3,12 +3,12 @@ extern int g_67a370;
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 unsigned short __cdecl gm_RandomMod(int);
 char __cdecl fcn_00407e30(char*, float*, float*, int, int, int*, int*, int, int);
-void __cdecl fcn_0045b920(char*, int, int, int);
+void __cdecl d3_GridPointToWorld(char*, int, int, int);
 
 
 /* Places a marker on a free cell near a position of the current room map. */
 /* ADDRESS: GOLDTL 0x00405c70 */
-int __cdecl fcn_00405c70(float* pos, int marker)
+int __cdecl ch_SelectNearbyPosition(float* pos, int marker)
 {
 	char* map;
 	int col;
@@ -37,9 +37,9 @@ int __cdecl fcn_00405c70(float* pos, int marker)
 		y = 2;
 	}
 	if (fcn_00407e30(map, pos, pos, x, y, &x, &y, 600, 0)) {
-		fcn_0045b920(map, x, y, marker);
+		d3_GridPointToWorld(map, x, y, marker);
 	} else {
-		fcn_0045b920(map, col, row, marker);
+		d3_GridPointToWorld(map, col, row, marker);
 	}
 	return 1;
 }

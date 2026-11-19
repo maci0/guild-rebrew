@@ -13,7 +13,7 @@ typedef struct {
 	int f5;
 } Out495fe0;
 
-int __cdecl fcn_00495400(int a, int b, int c, Out495fe0* a4, Out495fe0* a5);
+int __cdecl ai_SelectBestMethod(int a, int b, int c, Out495fe0* a4, Out495fe0* a5);
 int* __cdecl fcn_00506d50(Sel495fe0* out, int id);
 int __cdecl fcn_005463a0(int a, ...);
 int __cdecl fcn_0042e410(unsigned short a);
@@ -71,7 +71,7 @@ int __cdecl fcn_00495fe0(int a0, char* obj, int flag, int* out1, int* out2)
 		extra.msg.mode = 0;
 		extra.msg.f1 = 0;
 		extra.msg.f2 = 0;
-		r = fcn_00495400(5, *(unsigned short*) obj, 0, &action.msg, &extra.msg);
+		r = ai_SelectBestMethod(5, *(unsigned short*) obj, 0, &action.msg, &extra.msg);
 		if (r == 0) {
 			return r;
 		}
@@ -90,7 +90,7 @@ int __cdecl fcn_00495fe0(int a0, char* obj, int flag, int* out1, int* out2)
 		extra.msg.mode = 0;
 		extra.msg.f1 = 0;
 		extra.msg.f2 = 0;
-		r = fcn_00495400(4, *(unsigned short*) obj, 1, &action.msg, &extra.msg);
+		r = ai_SelectBestMethod(4, *(unsigned short*) obj, 1, &action.msg, &extra.msg);
 		if (r == 0) {
 			return r;
 		}
@@ -190,7 +190,7 @@ int __cdecl fcn_00495fe0(int a0, char* obj, int flag, int* out1, int* out2)
 				extra.msg.mode = 4;
 				extra.msg.f1 = *(int*) (*(int*) (obj + 0x170) + 1);
 				extra.msg.f2 = 1;
-				r = fcn_00495400(5, *(unsigned short*) obj, 1, &action.msg, &extra.msg);
+				r = ai_SelectBestMethod(5, *(unsigned short*) obj, 1, &action.msg, &extra.msg);
 				goto tail;
 			}
 		}
@@ -207,7 +207,7 @@ int __cdecl fcn_00495fe0(int a0, char* obj, int flag, int* out1, int* out2)
 	extra.msg.mode = 0;
 	extra.msg.f1 = 0;
 	extra.msg.f2 = 0;
-	r = fcn_00495400(5, *(unsigned short*) obj, 0, &action.msg, &extra.msg);
+	r = ai_SelectBestMethod(5, *(unsigned short*) obj, 0, &action.msg, &extra.msg);
 tail:
 	if (r == 0) {
 		return r;

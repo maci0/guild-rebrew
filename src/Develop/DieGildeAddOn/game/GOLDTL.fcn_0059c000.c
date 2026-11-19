@@ -19,7 +19,7 @@ extern unsigned short g_7f3ee4;
 
 int __cdecl fcn_00525fb0(int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_0052a0c0(char*, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int);
@@ -99,7 +99,7 @@ int __cdecl fcn_0059c000(char* a0)
 	if (fcn_00525fb0((int) a0))
 		return 0;
 	h = fcn_00470820(0, 0, "Handel\\Handel_PRODUKTION");
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	fcn_0052a0c0(a0, 0);
 	d2_SetForm(h, 3);
 	io_AppendText(0xcb);

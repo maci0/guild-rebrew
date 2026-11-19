@@ -10,7 +10,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
@@ -34,7 +34,7 @@ int __cdecl fcn_0053e9a0(void)
 
 	result = 0;
 	h = fcn_00470820(0, 0, g_6a4120);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	g_7747b4 = g_77670a;
 	s = io_AppendText(0x1abf);
 	option0 = fcn_00472250(h, 0, s);

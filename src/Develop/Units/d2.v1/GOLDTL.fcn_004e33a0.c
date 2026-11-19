@@ -21,7 +21,7 @@ void* __cdecl fcn_004e4ae0(char* name, int a);
 void __cdecl fcn_004e4730(char* name);
 void* __cdecl fcn_00445600(int a, int b, int c, char* name);
 void __cdecl SelectTextureSet(int a, int b, int c, int d);
-void __cdecl fcn_00455350(int a, int b, int* c);
+void __cdecl d3_TransformPoint(int a, int b, int* c);
 void* __cdecl fcn_004e4a80(char* name, int* b);
 void __cdecl fcn_00402b00(int a, int b);
 int __cdecl fcn_004fda30(unsigned short a);
@@ -153,7 +153,7 @@ void __cdecl fcn_004e33a0(int* arg)
 	}
 	auctioneer = (int) fcn_00445600(0, 0x100, 0, "dummy_AUKTIONATOR");
 	if (auctioneer != 0)
-		fcn_00455350(auctioneer, auctioneer + 0x4c, bid);
+		d3_TransformPoint(auctioneer, auctioneer + 0x4c, bid);
 	auctioneer = (int) fcn_004e4a80(line, bid);
 	if (auctioneer != 0) {
 		fcn_00402b00(auctioneer, npc);
@@ -164,7 +164,7 @@ void __cdecl fcn_004e33a0(int* arg)
 		fcn_0064d41a(temp, (char*) 0x68d428, i);
 		npc2 = fcn_00445600(0, 0x100, 0, temp);
 		if (npc2 != 0)
-			fcn_00455350((int) npc2, (int) npc2 + 0x4c, bid);
+			d3_TransformPoint((int) npc2, (int) npc2 + 0x4c, bid);
 		foundName = bidders[i] != 0 ? fcn_004fda30(*(unsigned short*) (char*) bidders[i]) : 0;
 		if (bidders[i] != 0 && foundName != 0) {
 			fcn_0064d41a(temp, (char*) 0x679060,

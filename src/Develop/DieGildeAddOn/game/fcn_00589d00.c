@@ -10,11 +10,11 @@ void* __cdecl fcn_005cd440(void*, int, int, int);
 int __cdecl fcn_004e99c0(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_0046fac0(int, int, int, int);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int);
@@ -76,7 +76,7 @@ void __cdecl fcn_00589d00(int a0)
 	ids[2] = (int) ((float) total * 0.02f);
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9514);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
@@ -84,7 +84,7 @@ void __cdecl fcn_00589d00(int a0)
 	*(int*) (g_1015ea0 + elem * 0x2f4 + 0x6c) = 1;
 	*(int*) (g_1015ea0 + elem * 0x2f4 + 0x18) =
 	    *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c);
-	fcn_00472900(elem, 0x54);
+	d2_SetElementFont(elem, 0x54);
 	elem = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, d2_CurrentWindowId);
 	fcn_00472380(elem, 0, 2, 0, 1);
 	fcn_00468bb0(elem, 3, *(int*) 0x14b5364, *(int*) 0x14b5368,

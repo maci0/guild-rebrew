@@ -7,7 +7,7 @@ extern int main_LoopFlags;
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl io_AppendText(char*, ...);
 int __cdecl fcn_00472250(int, int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005373e0(void*, int);
 float __cdecl fcn_004ff210(unsigned short, int);
@@ -49,7 +49,7 @@ void __cdecl fcn_005b4660(char* e)
 	hShow = fcn_00472250(dialog, 0, io_AppendText("%it[Show He]$A"));
 	hMarriage = fcn_00472250(dialog, 0, io_AppendText("%it[Marriage]$A"));
 	hChild = fcn_00472250(dialog, 0, io_AppendText("%it[Get Child]$A"));
-	fcn_00471b60(dialog);
+	d2_CenterDialogWindows(dialog);
 	while (fcn_005373e0((void*) fcn_005b4660, flags) != 0) {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == hKill) {

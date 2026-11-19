@@ -3,10 +3,10 @@ extern float g_665ea0;
 
 void __cdecl fcn_004432d0(int, int);
 int __cdecl gm_ResolveEntityById(int*, int, int, int);
-void __cdecl fcn_00455350(void*, void*, float*);
+void __cdecl d3_TransformPoint(void*, void*, float*);
 void __cdecl fcn_00455140(void*, void*, float*);
 float __cdecl fcn_004514d0(float*, float*);
-void __cdecl fcn_00412cf0(void*, float*, float*, int, int);
+void __cdecl d3_AnimateObjectTransform(void*, float*, float*, int, int);
 
 /* Places the camera at the referenced entity's aim point once both the
  * camera chain and the resolved entity expose a view target. The aim vector
@@ -55,11 +55,11 @@ unsigned int __cdecl fcn_00558b70(char* a0)
 		goto fail;
 	}
 	view = *(char**) (ent + 0x61);
-	fcn_00455350(view, view + 0x4c, from);
+	d3_TransformPoint(view, view + 0x4c, from);
 
 	from[1] = from[1] + *(float*) (*(char**) (*(char**) (*(char**) (ent + 0x61) + 0x1cc) + 0x318) + 0x1d4) + g_665ea0;
 
-	fcn_00455350(*(char**) (a0 + 0xc8), *(char**) (a0 + 0xc8) + 0x4c, to);
+	d3_TransformPoint(*(char**) (a0 + 0xc8), *(char**) (a0 + 0xc8) + 0x4c, to);
 	delta[0] = from[0] - to[0];
 	delta[1] = from[1] - to[1];
 	delta[2] = from[2] - to[2];
@@ -73,7 +73,7 @@ unsigned int __cdecl fcn_00558b70(char* a0)
 	aim[1] = *(float*) (view + 0x88);
 	aim[2] = *(float*) (view + 0x8c);
 	aim[1] = aim[1] + angle;
-	fcn_00412cf0(view, to, aim, 0x78, 8);
+	d3_AnimateObjectTransform(view, to, aim, 0x78, 8);
 	fcn_004432d0(saved, 1);
 	return 1;
 fail:

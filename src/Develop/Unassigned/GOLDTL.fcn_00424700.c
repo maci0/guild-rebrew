@@ -1,6 +1,6 @@
 
 
-char* __cdecl fcn_00423ac0(char*);
+char* __cdecl sbs_FindSet(char*);
 
 int __cdecl fcn_00424700(char* name)
 {
@@ -10,7 +10,7 @@ int __cdecl fcn_00424700(char* name)
 
 	n = 0;
 	if (name != 0) {
-		p = fcn_00423ac0(name);
+		p = sbs_FindSet(name);
 		if (p != 0) {
 			for (q = *(char**) (p + 0x38); q != 0; q = *(char**) (q + 0x104)) {
 				n++;

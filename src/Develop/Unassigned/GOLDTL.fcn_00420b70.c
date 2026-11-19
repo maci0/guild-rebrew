@@ -5,7 +5,7 @@
 
 #pragma intrinsic(memcpy, memset)
 
-void __cdecl fcn_00420b70(void)
+void __cdecl nt_ResetPacketStats(void)
 {
 	memset(g_14cbcc0, 0, sizeof(g_14cbcc0));
 	nt_ReceivedPacketCount = 0;

@@ -11,7 +11,7 @@ typedef struct {
 	int f5;
 } Out495a80;
 
-int __cdecl fcn_00495400(int, int, int, Out495a80*, Out495a80*);
+int __cdecl ai_SelectBestMethod(int, int, int, Out495a80*, Out495a80*);
 int __cdecl fcn_004fa5b0(int, char*, int*);
 int __cdecl fcn_004f97a0(int); /* 0x4fbd20, metadata name is stale */
 int __cdecl fcn_00502cd0(int, int, int, int);
@@ -50,7 +50,7 @@ int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
 		action.msg.mode = 0;
 		action.msg.f1 = 0;
 		action.msg.f2 = 0;
-		r = fcn_00495400(4, *(unsigned short*) a1, 1, &extra.msg, &action.msg);
+		r = ai_SelectBestMethod(4, *(unsigned short*) a1, 1, &extra.msg, &action.msg);
 		if (r != 0) {
 			*(Out495a80*) a3 = extra.msg;
 			*(Out495a80*) a4 = action.msg;
@@ -173,7 +173,7 @@ int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
 			action.msg.mode = 4;
 			action.msg.f1 = *(int*) (*(char**) (a1 + 0x170) + 1);
 			action.msg.f2 = 1;
-			r = fcn_00495400(4, *(unsigned short*) a1, 1, &extra.msg, &action.msg);
+			r = ai_SelectBestMethod(4, *(unsigned short*) a1, 1, &extra.msg, &action.msg);
 			if (r != 0) {
 				*(Out495a80*) a3 = extra.msg;
 				*(Out495a80*) a4 = action.msg;

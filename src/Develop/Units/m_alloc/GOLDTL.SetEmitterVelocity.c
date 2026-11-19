@@ -1,7 +1,7 @@
 extern char* evt_CurrentScript;
 
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
-void __cdecl fcn_00425bf0(char*, int, const char*);
+void __cdecl evt_LogScriptError(char*, int, const char*);
 
 
 /* SetEmitterVelocity: sets a particle emitter's velocity in hundredths. */
@@ -15,7 +15,7 @@ int __cdecl SetEmitterVelocity(char** obj, int* x, int* y, int* z)
 
 	o = *obj;
 	if (!m_is_tracked(o)) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "SetEmitterVelocity: invalid handle...");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "SetEmitterVelocity: invalid handle...");
 		return 0;
 	}
 	vy = *y * 0.01f;

@@ -8,7 +8,7 @@ extern unsigned char* lpGebaeudePROT;
 extern char g_868060[];
 extern unsigned char g_773d75;
 
-int* __cdecl fcn_004be320(int, int);
+int* __cdecl gm_GetChainNodeAtIndex(int, int);
 char* __cdecl gm_ResolveParentEntity(char*);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_0050cce0(char*, Slots*, int);
@@ -46,7 +46,7 @@ void __cdecl fcn_004c0460(char* e, char who)
 	if (*(int*) (e + 0x29) == 0) {
 		return;
 	}
-	d = fcn_004be320(*(int*) (e + 0x29), *(int*) (e + 0x2d));
+	d = gm_GetChainNodeAtIndex(*(int*) (e + 0x29), *(int*) (e + 0x2d));
 	par = gm_ResolveParentEntity(e);
 	q = gm_SearchTable67(d[1]);
 	if (q == 0) {

@@ -1,7 +1,7 @@
 int __cdecl _strcmpi(const char*, const char*);
 extern int g_67a370;
 
-void __cdecl fcn_004379a0(int, char*, int, void*, void*);
+void __cdecl d3_VisitSceneObjects(int, char*, int, void*, void*);
 int __cdecl fcn_00445680(char*, char**);
 
 /* ADDRESS: GOLDTL 0x00445680 */
@@ -40,7 +40,7 @@ char* __cdecl fcn_004456e0(char* o, int flags, char* ptr, char* name)
 		saved = *(int*) (o + 0x1f4);
 		*(int*) (o + 0x1f4) = 0;
 	}
-	fcn_004379a0(g_67a370, o, flags | 0x200, fcn_00445680, st);
+	d3_VisitSceneObjects(g_67a370, o, flags | 0x200, fcn_00445680, st);
 	if (o != 0) {
 		*(int*) (o + 0x1f4) = saved;
 	}

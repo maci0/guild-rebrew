@@ -6,7 +6,7 @@ extern float g_10432a4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67a370;
 
-extern void __cdecl fcn_004379a0(int, int, int, void*, void*);
+extern void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 extern int __cdecl fcn_00444ff0(int, int*);
 
 typedef struct {
@@ -76,7 +76,7 @@ unsigned char __cdecl fcn_00444860(float x, float y, int obj, int index,
 	fr.ctx.edge[3].x = 0;
 	fr.ctx.edge[3].y = 0;
 	fr.ctx.found = 0;
-	fcn_004379a0(g_67a370, obj, 0x40, (void*) fcn_00444ff0, &fr.ctx);
+	d3_VisitSceneObjects(g_67a370, obj, 0x40, (void*) fcn_00444ff0, &fr.ctx);
 	if (!fr.ctx.found)
 		return 0;
 

@@ -27,16 +27,16 @@ void __cdecl fcn_0042b040(int handle, void* position);
 void __cdecl fcn_0042ad90(int handle, int mode);
 void __cdecl fcn_0042ac40(int handle);
 
-void __cdecl fcn_0041fc10(Chan_14cc460* track, int mode);
+void __cdecl msx_SetTrackVolume(Chan_14cc460* track, int mode);
 
 void __cdecl fcn_00420700(Chan_14cc460* hTrack, int mode);
-void __cdecl fcn_00420120(Chan_14cc460* hTrack, int fade);
-void __cdecl fcn_00420840(Chan_14cc460* hTrack);
-Chan_14cc460* __cdecl fcn_00420780(const char* name, int mode);
+void __cdecl msx_StopTrack(Chan_14cc460* hTrack, int fade);
+void __cdecl msx_StopAmbientTrack(Chan_14cc460* hTrack);
+Chan_14cc460* __cdecl msx_StartAmbientTrack(const char* name, int mode);
 
-int __cdecl fcn_0041fe10(Chan_14cc460* track, int restart);
-Chan_14cc460* __cdecl fcn_0041fd70(const char* name, int mode);
-Chan_14cc460* __cdecl fcn_00420650(void);
+int __cdecl msx_StartTrackInternal(Chan_14cc460* track, int restart);
+Chan_14cc460* __cdecl msx_StartTrack(const char* name, int mode);
+Chan_14cc460* __cdecl msx_FindActiveTrack(void);
 
 void __cdecl SetTrackPath(const char* path);
 

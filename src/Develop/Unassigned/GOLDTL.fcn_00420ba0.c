@@ -3,7 +3,7 @@
 
 extern int g_14cbcc0[][4];
 
-void __cdecl fcn_00420ba0(unsigned char* p, unsigned int n, char flag)
+void __cdecl nt_RecordPacketStats(unsigned char* p, unsigned int n, char flag)
 {
 	int k;
 

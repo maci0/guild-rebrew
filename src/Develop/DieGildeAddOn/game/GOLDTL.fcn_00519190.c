@@ -7,7 +7,7 @@ int __cdecl fcn_0042b2f0(char*, int, int);
 int __cdecl gm_RandomMod(int);
 void __cdecl fcn_0046ac30(void);
 void __cdecl fcn_0046dff0(int, int);
-void __cdecl fcn_0046f2c0(int, int);
+void __cdecl d2_ClearWindowChildren(int, int);
 void __cdecl fcn_00471490(int);
 void __cdecl d2_SetForm(char*, int, int);
 int __cdecl fcn_00500d60(int, char*);
@@ -120,7 +120,7 @@ int __cdecl io_AppendText(char* format_selector, ...)
 		memset(*(void**)(v14 + 0x1015f7c), 0, 0x80);
 		*(int*)(v14 + 0x10162d4) = 0;
 		memset((void*)(v14 + 0x10161d4), 0, 0x100);
-		fcn_0046f2c0(*(int*)(v14 + 0x1015f40), 0);
+		d2_ClearWindowChildren(*(int*)(v14 + 0x1015f40), 0);
 		text_index++;
 		continue;
 	case 'S':

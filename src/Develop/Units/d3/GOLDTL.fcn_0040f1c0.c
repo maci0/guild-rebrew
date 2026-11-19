@@ -5,7 +5,7 @@
 char* __cdecl fcn_00401040(char* path);
 
 /* ADDRESS: GOLDTL 0x0040f1c0 */
-char __cdecl fcn_0040f1c0(char* a0, char* a1)
+char __cdecl d3_AttachMatchingAnimation(char* a0, char* a1)
 {
 	D3_ANIMATION_OPTIONS options;
 	char path[256];

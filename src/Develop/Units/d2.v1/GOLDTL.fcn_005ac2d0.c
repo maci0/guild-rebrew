@@ -73,12 +73,12 @@ char* __cdecl fcn_005463a0(int kind, int first, int id, int arg, int entity_id);
 char* __cdecl gm_LookupEntityRecordById(int description_id);
 int __cdecl fcn_00470820(int x, int y, char* title);
 int __cdecl d2_SetOverlayAnimation(int a1, int a2);
-void __cdecl fcn_00471b60(int dlg);
+void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl fcn_00471e30(int dlg);
 void __cdecl d2_SetForm(int dlg, int page);
 int __cdecl fcn_00472250(int dlg, int page, int id);
 void __cdecl fcn_00472640(int button, int state);
-int __cdecl fcn_0046f2c0(int win, int keep);
+int __cdecl d2_ClearWindowChildren(int win, int keep);
 void __cdecl fcn_005340f0(int win);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_005373e0(void* fn, int msg);
@@ -173,7 +173,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 	}
 	dlg = fcn_00470820(0, 0, "Locations\\Kirche\\Predigt");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	flag = 1;
@@ -217,11 +217,11 @@ void __cdecl fcn_005ac2d0(char* a0)
 			btnCancel = fcn_00472250(dlg, 2, i + 1);
 		} else if (state == 1) {
 			d2_SetForm(dlg, 1);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText((int) g_6811b0);
 			io_AppendText(0x19a0, unit + 0x52);
 			d2_SetForm(dlg, 2);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText((int) g_6811b0);
 			i = io_AppendText(0x19a1);
 			btnState1 = fcn_00472250(dlg, 2, i);
@@ -233,7 +233,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 			}
 		} else if (state == 2) {
 			d2_SetForm(dlg, 1);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText((int) g_6811b0);
 			io_AppendText(0x198e, unit + 0x52, *(char*) (obj + 0x1c) + 0x1990,
 			    *(char*) (obj + 0x1d) + 0x1998, *(unsigned short*) info);
@@ -244,7 +244,7 @@ void __cdecl fcn_005ac2d0(char* a0)
 			fcn_005ca560(&sel);
 			fcn_005ca740(sel.x, sel.y, d2_CurrentWindowId, 0x54, &sel, 1);
 			d2_SetForm(dlg, 2);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText((int) g_6811b0);
 			i = io_AppendText(0x198f);
 			btnState2 = fcn_00472250(dlg, 2, i);

@@ -1,7 +1,7 @@
 extern volatile int g_6b7fb0;
 extern int g_772600;
 
-void __cdecl fcn_0047a2b0(int index);
+void __cdecl d2_ClearAnimationSlot(int index);
 
 /* ADDRESS: GOLDTL 0x0047a090 */
 void __cdecl fcn_0047a090(void)
@@ -55,7 +55,7 @@ void __cdecl fcn_0047a090(void)
 			if (obj[0x14] == 3) {
 				p[0] = 0;
 				*(short*) (p + 2) = 0;
-				fcn_0047a2b0(index);
+				d2_ClearAnimationSlot(index);
 			}
 			ebp = 0;
 		}
@@ -73,7 +73,7 @@ void __cdecl fcn_0047a090(void)
 			if (obj[0x14] == 3) {
 				p[0] = 0;
 				*(short*) (p + 2) = 0;
-				fcn_0047a2b0(index);
+				d2_ClearAnimationSlot(index);
 			}
 			ebp = 0;
 		} else if (ebp != 0) {

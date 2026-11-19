@@ -3,7 +3,7 @@
 
 extern char* evt_CurrentScript;
 
-void __cdecl fcn_00425bf0(char*, int, const char*);
+void __cdecl evt_LogScriptError(char*, int, const char*);
 void __cdecl ch_SetCameraView(char*, int);
 
 
@@ -12,7 +12,7 @@ void __cdecl ch_SetCameraView(char*, int);
 int __cdecl SetCharacterCamera(char** ch, char** view)
 {
 	if (*ch == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "SetCharacterCamera(): Invalid character");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "SetCharacterCamera(): Invalid character");
 		return 1;
 	}
 	if (strcmp("CLOSEUP", *view) == 0) {

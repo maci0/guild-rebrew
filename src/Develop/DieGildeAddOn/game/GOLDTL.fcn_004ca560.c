@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
-char* __cdecl fcn_004032b0(char*);
+char* __cdecl ch_FindCharacterByName(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl fcn_00515540(char*);
@@ -11,10 +11,10 @@ int __cdecl fcn_005155e0(char*);
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004fdcf0(char*);
-char* __cdecl fcn_0040c120(char*, int, ...);
+char* __cdecl ch_CreateAction(char*, int, ...);
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
-void __cdecl fcn_00455350(char*, char*, char*);
+void __cdecl d3_TransformPoint(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x004ca560 */
 int __cdecl fcn_004ca560(char* x, char* out)
@@ -35,7 +35,7 @@ int __cdecl fcn_004ca560(char* x, char* out)
 	d = 0;
 	id = -1;
 	fcn_0064d41a(buf, g_68b0d8, *(int*) (x + 0x10));
-	o = fcn_004032b0(buf);
+	o = ch_FindCharacterByName(buf);
 	if (o == 0)
 		return 1;
 	if (*(int*) (x + 0x14) != -1) {
@@ -67,19 +67,19 @@ int __cdecl fcn_004ca560(char* x, char* out)
 			if (t != 0)
 				fcn_004fdcf0(t);
 		}
-		fcn_0040c120(o, 0x38, 0);
+		ch_CreateAction(o, 0x38, 0);
 		if (k != 0) {
-			r = fcn_0040c120(o, 0x33, k, id, dk);
+			r = ch_CreateAction(o, 0x33, k, id, dk);
 			if (r != 0)
 				strcpy(r + 0xf0, x + 0x1c);
 		} else if (*(int*) (s + 0x61) != 0) {
-			r = fcn_0040c120(o, 0x33, 0, -1, -1);
+			r = ch_CreateAction(o, 0x33, 0, -1, -1);
 			if (r != 0) {
 				saved = d3_CurrentContextIndex;
 				fcn_004432d0(0, 1);
 				m = fcn_00445600(*(int*) (s + 0x61), 0x100, 0, x + 0x1c);
 				if (m != 0) {
-					fcn_00455350(m, m + 0x4c, r + 0x180);
+					d3_TransformPoint(m, m + 0x4c, r + 0x180);
 					r[0x17c] = 1;
 				} else {
 					strcpy(r + 0xf0, x + 0x1c);
@@ -87,7 +87,7 @@ int __cdecl fcn_004ca560(char* x, char* out)
 				fcn_004432d0(saved, 1);
 			}
 		}
-		fcn_0040c120(o, 0x38, 1);
+		ch_CreateAction(o, 0x38, 1);
 	}
 	if (out != 0) {
 		out[0] = 2;

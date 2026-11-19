@@ -6,7 +6,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char cm_LastObjectId[];
 
-int __cdecl fcn_004c4dc0(char*, int);
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
 char* __cdecl gm_AllocObjekt(int, int, int);
 
 int __cdecl fcn_004ca2e0(char* x, char* out)
@@ -16,7 +16,7 @@ int __cdecl fcn_004ca2e0(char* x, char* out)
 
 	if (g_14cbca0 != -1)
 		gm_NextEntityId = *(int*) (x + 0x10);
-	*(int*) (x + 0x14) = fcn_004c4dc0(x, *(int*) (x + 0x14));
+	*(int*) (x + 0x14) = cm_ResolveSpecialEntityId(x, *(int*) (x + 0x14));
 	obj = gm_AllocObjekt(*(int*) (x + 0x14), 0x1b5, 1);
 	if (obj == 0)
 		return 1;

@@ -9,7 +9,7 @@ typedef struct Tag {
 
 
 /* ADDRESS: GOLDTL 0x00473750 */
-void __cdecl fcn_00473750(int id, int val)
+void __cdecl d2_SetDisplayCounter(int id, int val)
 {
 	int i;
 

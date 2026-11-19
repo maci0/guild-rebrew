@@ -11,7 +11,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00406340(char* e, char* name, int param);
 int __cdecl fcn_004bc8a0(int, int, float (*)[4]);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
-char* __cdecl fcn_0040c120(char*, int, int, int, int);
+char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
 void __cdecl he_CharacterBehavior(char* u, int where)
 {
@@ -50,7 +50,7 @@ void __cdecl he_CharacterBehavior(char* u, int where)
 			n = fcn_004bc8a0(where, n, list);
 			for (i = 0; i < n; i++) {
 				if (fcn_0045b990(world, list[i], &b, &a, &c) != 0) {
-					r = fcn_0040c120(*(char**) (e + 0x184), 0x2d, b, a, 0);
+					r = ch_CreateAction(*(char**) (e + 0x184), 0x2d, b, a, 0);
 					strcpy(r + 0x70, "he_CharacterBehavior");
 				}
 			}

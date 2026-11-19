@@ -4,7 +4,7 @@ unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl fcn_00505340(unsigned char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_00455350(int, int, void*);
+void __cdecl d3_TransformPoint(int, int, void*);
 #include "client_scene_transform.h"
 #include "Develop/DieGildeAddOn/game/ambient_animal_slot.h"
 
@@ -39,13 +39,13 @@ void __cdecl fcn_004bc090(AMBIENT_ANIMAL_SLOT* result)
 			ents[n++] = it;
 	}
 	chosen = ents[gm_RandomMod(n)];
-	fcn_00455350(*(int*) (chosen + 0x61), *(int*) (chosen + 0x61) + 0x4c, &pa);
+	d3_TransformPoint(*(int*) (chosen + 0x61), *(int*) (chosen + 0x61) + 0x4c, &pa);
 	cnt = 0;
 	for (i = 0; i < n; i++) {
 		if (cnt >= 0x10)
 			break;
 		b = ents[i];
-		fcn_00455350(*(int*) (b + 0x61), *(int*) (b + 0x61) + 0x4c, &pb);
+		d3_TransformPoint(*(int*) (b + 0x61), *(int*) (b + 0x61) + 0x4c, &pb);
 		if (b != chosen && CompareVector3WithinTolerance((float*) &pa, (float*) &pb, 6000.0f) != 0) {
 			pts[cnt++].x = pb.x;
 			pts[cnt++].y = pb.y;

@@ -7,7 +7,7 @@ typedef struct {
 // SIZE 0x18
 
 void __cdecl init_SetPflanzenMap(fcn_004bd150_entry*, void*);
-void __cdecl fcn_00442d50(void*, int);
+void __cdecl d3_SetSubtreeVisible(void*, int);
 
 
 /* ADDRESS: GOLDTL 0x004bd150 */
@@ -23,7 +23,7 @@ void __cdecl fcn_004bd150(fcn_004bd150_entry* tab)
 					if (tab[i].obj == 0)
 						continue;
 				}
-				fcn_00442d50(tab[i].obj, 1);
+				d3_SetSubtreeVisible(tab[i].obj, 1);
 			}
 		}
 	}

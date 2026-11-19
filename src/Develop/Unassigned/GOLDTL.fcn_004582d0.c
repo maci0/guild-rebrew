@@ -15,7 +15,7 @@ extern void** g_1040610[];
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
 extern unsigned long g_14ce728;
 
-void __cdecl fcn_00455350(char* object, float* in, float* out);
+void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 void* __cdecl fcn_00436930(char* o, float* r);
 void __cdecl fcn_00436fd0(int a);
 void __stdcall fcn_005edf4a(float* plane, float* point, float* normal);
@@ -69,7 +69,7 @@ void __cdecl fcn_004582d0(char* a0, char* a1, char* a2, char* map, float* va,
     maxz = -1.0e10f;
     maxx = -1.0e10f;
     if (*(unsigned char*) &rec[0x26] != 0) {
-        fcn_00455350(a0, (float*) (a0 + 0x4c), d);
+        d3_TransformPoint(a0, (float*) (a0 + 0x4c), d);
         height = height + 5.0f;
         minx = d[0] - 16.0f;
         maxx = d[0] + 16.0f;

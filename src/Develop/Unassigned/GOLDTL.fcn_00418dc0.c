@@ -10,13 +10,13 @@
 
 
 /* ADDRESS: GOLD 0x00417710 */
-SOUND_SOURCE* __cdecl fcn_00418c80(char* voice, char* objekt, int volume, float range)
+SOUND_SOURCE* __cdecl d3snd_AttachSoundSource(char* voice, char* objekt, int volume, float range)
 {
     SOUND_SOURCE* source = 0;
     double scaled;
 
     if (voice != 0 && objekt != 0 && *(SOUND_SOURCE**)(objekt + sound_objekt_link_offset) == 0) {
-        source = fcn_00418dc0();
+        source = d3snd_FindFreeSource();
         if (source != 0 && *(char**)(voice + 4) != 0) {
             fcn_00426170((int*)voice, 1);
             strncpy(source->name, *(char**)(voice + 4) + 4, 50);
@@ -37,7 +37,7 @@ SOUND_SOURCE* __cdecl fcn_00418c80(char* voice, char* objekt, int volume, float 
 }
 
 
-SOUND_SOURCE* __cdecl fcn_00418dc0(void)
+SOUND_SOURCE* __cdecl d3snd_FindFreeSource(void)
 {
 	int i = 0;
 	SOUND_SOURCE* r = 0;

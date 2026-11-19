@@ -19,7 +19,7 @@ int __cdecl fcn_0047cba0(int x, int y, int surface, void* font, int c);
 int __cdecl fcn_0047cbf0(int x, int y, int surface, void* font, int c);
 int __cdecl fcn_0047ccd0(int x, int y, int surface, void* font, int c);
 int __cdecl fcn_0047cd20(int x, int y, int surface, void* font, int c);
-void __cdecl fcn_0047c9c0(int width, int y, int x, int height, int color, float alpha);
+void __cdecl d2_DrawTexturedQuad(int width, int y, int x, int height, int color, float alpha);
 
 /* ADDRESS: GOLDTL 0x0046bd20 */
 int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
@@ -97,7 +97,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
         if (bg_y + bg_height > d2_ClipBottom)
             bg_height = d2_ClipBottom - bg_y;
         if (visible)
-            fcn_0047c9c0(bg_width, bg_y, bg_x, bg_height,
+            d2_DrawTexturedQuad(bg_width, bg_y, bg_x, bg_height,
                          *(int*)(g_77253c + 0x50), 0.7f);
         g_772544 = bg_x;
         g_772548 = bg_height;

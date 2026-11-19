@@ -5,7 +5,7 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, char*);
 int __cdecl fcn_0046f740(int, int, int, int);
@@ -41,7 +41,7 @@ unsigned int __cdecl fcn_0053d020(int a0)
 	sel = -1;
 	changed = 0;
 	win = fcn_00470820(0, 0, (char*) 0x6a3fc8);
-	fcn_00471b60(win);
+	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 1);
 	io_AppendText(0x1acf, (char*) 0x7e1d00);
 	d2_SetForm(win, 2);

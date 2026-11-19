@@ -15,12 +15,12 @@ extern char s_675b04[]; /* "Erde_s" */
 extern char s_675b0c[]; /* "Normal_s" */
 extern char s_6752a8[]; /* "normal_s" */
 
-int __cdecl fcn_00413190(int);
+int __cdecl d3_GetContextIndex(int);
 char* __cdecl fcn_00422460(int, int);
 void __cdecl fcn_004193f0(char*, void*, unsigned char, float);
 
 /* ADDRESS: GOLDTL 0x004098e0 */
-void __cdecl fcn_004098e0(char* obj, int surface)
+void __cdecl ch_PlayFootstepSound(char* obj, int surface)
 {
 	char name[0x80];
 	char* e;
@@ -48,7 +48,7 @@ void __cdecl fcn_004098e0(char* obj, int surface)
 		return;
 	}
 	if ((*(unsigned char*) (e + 4) & 1) && g_6b5c30 < 3
-	    && fcn_00413190(*(int*) (e + 0x88)) != 0) {
+	    && d3_GetContextIndex(*(int*) (e + 0x88)) != 0) {
 		if (*(int*) (*(int*) (e + 0x88) + 0xac) != 0) {
 			memcpy(name, s_675b0c, 9);
 			if (surface == 6 || surface == 0xb) {

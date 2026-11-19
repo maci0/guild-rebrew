@@ -66,15 +66,15 @@ int __cdecl d2_ShowTxt(int, int, char*, int);
 int __cdecl fcn_00469c30(int, int, int);
 int __cdecl fcn_0046fcd0(int, int, char*);
 void __cdecl fcn_005279f0(int);
-char* __cdecl fcn_00472880(int);
+char* __cdecl d2_SelectFont(int);
 void __cdecl fcn_00500d60(int*, char*);
 int __cdecl fcn_0051e070(void);
 int __cdecl fcn_004fe330(char*, int);
-void __cdecl fcn_0046bbc0(int, int, int, char*, int);
+void __cdecl d2_DrawDefaultFontText(int, int, int, char*, int);
 void* __cdecl d2_GetResourceData(int);
 int __cdecl fcn_0047cba0(int, int, int, void*, int);
 int __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
-void __cdecl fcn_00472170(int, int);
+void __cdecl d2_SetSlotVisibility(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl fcn_0046f940(int, const char*);
 int __cdecl fcn_00517c00(int, int, int, char*);
@@ -262,7 +262,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 	}
 
 	fcn_005279f0(a1);
-	fcn_00472880(0x55);
+	d2_SelectFont(0x55);
 	fcn_00500d60((int*) 0x7f4c00, (char*) &fr.pos);
 	if (fcn_0051e070() == 2) {
 		sprintf(fr.text, (char*) 0x6a2e5c,
@@ -270,7 +270,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 				 + fcn_004fe330((char*) &fr.pos,
 						*(short*) ((char*) &fr.pos + 2))
 					 * 4));
-		fcn_0046bbc0(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x181,
+		d2_DrawDefaultFontText(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x181,
 			     0x17, g_77250c, fr.text, 0);
 	} else {
 		sprintf(fr.text, (char*) 0x6a2e5c,
@@ -278,7 +278,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 				 + fcn_004fe330((char*) &fr.pos,
 						*(short*) ((char*) &fr.pos + 2))
 					 * 4));
-		fcn_0046bbc0(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x195,
+		d2_DrawDefaultFontText(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x195,
 			     0x17, g_77250c, fr.text, 0);
 	}
 
@@ -296,16 +296,16 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 	if (g_67d8d4 == g_6a25a8) {
 		sprintf(fr.text, (char*) 0x6a2e50, *(int*) 0x7f4c04 & 0xffff,
 			*(int*) 0x7f4c06);
-		fcn_00472880(0x54);
+		d2_SelectFont(0x54);
 		fcn_0046bd20(g_1040494 - 0x50, 2, 0x2e, 0x14, g_77250c,
 			     fr.text, 0x28);
-		fcn_00472880(0x55);
+		d2_SelectFont(0x55);
 	}
 
 	if (g_7746c8 == 0 && g_7746c4 == 0 && g_6a2594 != -1) {
 		if (g_6a2590 != -1) {
-			fcn_00472170(g_6a2590, 0);
-			fcn_00472170(g_6a2594, 1);
+			d2_SetSlotVisibility(g_6a2590, 0);
+			d2_SetSlotVisibility(g_6a2594, 1);
 			EFIELD(g_6a2594, 0x88) =
 				(int) (fmod((double) *(float*) (d3_ActiveCamera + 0x88),
 					    *(double*) 0x662958)
@@ -315,13 +315,13 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 			goto hidden;
 		}
 	} else if (g_6a2590 != -1) {
-		fcn_00472170(g_6a2590, 1);
+		d2_SetSlotVisibility(g_6a2590, 1);
 	}
 	if (g_6a2594 != -1) {
-		fcn_00472170(g_6a2594, 0);
+		d2_SetSlotVisibility(g_6a2594, 0);
 	}
 hidden:
-	fcn_00472880(0x55);
+	d2_SelectFont(0x55);
 
 	if (g_6a25a0 != -1) {
 		fcn_00517c00(g_774970, 1, 2, fr.name);
@@ -330,7 +330,7 @@ hidden:
 	}
 	sprintf(fr.text, (char*) 0x67d444,
 		*(int*) (0x7f4e34 + g_774970 * 0x21c));
-	fcn_0046bbc0(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x23a, 0x17,
+	d2_DrawDefaultFontText(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x23a, 0x17,
 		     g_77250c, fr.text, 0);
 	if (g_6a257c != -1) {
 		fcn_00469c40(*(int*) (0x1015f44 + g_6a2598 * 0x3cc)
@@ -366,12 +366,12 @@ hidden:
 		} else if (g_6a2580 != -1) {
 			*(ELEM(g_6a2580) + 0xcc) = *g_6b5c60;
 		}
-		fcn_00472880(0x56);
+		d2_SelectFont(0x56);
 		strcpy(fr.name, (char*) (0x868080 + g_773d75 * 0x2f4));
 		fcn_0046bd20(g_1040494 - 0x70, 0x5d, 0x68, 0x14, g_77250c,
 			     fr.name, 8);
 	}
-	fcn_00472880(0x54);
+	d2_SelectFont(0x54);
 
 	if (g_7746f8 == 0) {
 		if (g_7746c8 != 0 && *g_7746c8 == 'G') {
@@ -417,10 +417,10 @@ hidden:
 		return;
 	}
 	if (g_6a4768 > three) {
-		fcn_00472170(g_6a25fc, 1);
+		d2_SetSlotVisibility(g_6a25fc, 1);
 		val = g_774720;
 	} else {
-		fcn_00472170(g_6a25fc, 0);
+		d2_SetSlotVisibility(g_6a25fc, 0);
 		g_774720 = 0;
 		val = 0;
 	}

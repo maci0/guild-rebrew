@@ -43,7 +43,7 @@ extern int g_14ce8d8;
 extern int d2_CurrentElementId;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -54,7 +54,7 @@ int __cdecl fcn_00472250(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0046f940(int, char*);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -79,7 +79,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 	ok = -1;
 	result = 0;
 	dlg = fcn_00470820(0, 0, s_6acf98);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 2);
 	io_AppendText(title);
@@ -105,7 +105,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 	}
 	_itoa(count, buf, 10);
 	fcn_0046f940(field, buf);
-	fcn_00472900(field, 0x54);
+	d2_SetElementFont(field, 0x54);
 	while (fcn_005373e0((void*) fcn_005dfb40, wait) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

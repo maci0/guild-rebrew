@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int __cdecl fcn_00401180(void* stream, void* dst);
+int __cdecl vfs_ReadByte(void* stream, void* dst);
 char* __cdecl fcn_004011a0(void* stream, char* dst);
 int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
@@ -9,12 +9,12 @@ void __cdecl fcn_00401280(void* stream, void* dst);
 void __cdecl ReportClientMessage(const char* msg);
 void __cdecl fcn_00438b40(char* object, void* vector);
 void __cdecl fcn_00438cb0(char* object, void* vector);
-char* __cdecl fcn_00439750(int kind, char* name);
+char* __cdecl d3_SpawnObject(int kind, char* name);
 void __cdecl fcn_00439aa0(char* object);
-void __cdecl fcn_00439ba0(char* object, char* sibling);
+void __cdecl d3_AppendObjectSibling(char* object, char* sibling);
 void __cdecl fcn_00439c00(char* object, char* child);
 void __cdecl fcn_00439fa0(char* object);
-void __cdecl fcn_0043b7b0(void* stream, char* object);
+void __cdecl d3_ReadObjectEvents(void* stream, char* object);
 char __cdecl fcn_00442c00(char* object, char on);
 int __cdecl fcn_00446ca0(unsigned int version);
 void __cdecl fcn_00449f90(char* object, void* part, char* name);
@@ -69,7 +69,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 	aux_b = 0;
 	aux_a = 0;
 	if (version >= 0x3a6c000bu) {
-		fcn_00401180(stream, &b);
+		vfs_ReadByte(stream, &b);
 		if (b != 0) {
 		fcn_004011a0(stream, name);
 		if (version >= 0x3a6c00b2u) {
@@ -115,13 +115,13 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 			}
 		} else {
 			kind = type;
-			fcn_00401180(stream, &marker);
+			vfs_ReadByte(stream, &marker);
 			if (name[0] == '!' && marker == 0) {
 				strcpy(tmp, name + 1);
 				strcpy(name, tmp);
 			}
 		}
-		object = fcn_00439750(kind, name);
+		object = d3_SpawnObject(kind, name);
 		kind = *(int*) (object + 0x218);
 		*(int*) (object + 0x204) = aux_a;
 		*(int*) (object + 0x220) = aux_b;
@@ -132,26 +132,26 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		switch (kind) {
 		case 1:
 		case 4:
-			fcn_00401180(stream, &b);
+			vfs_ReadByte(stream, &b);
 			object[0x214] = (char) ((object[0x214] & ~0x20) | ((b << 5) & 0x20));
-			fcn_00401180(stream, &b);
+			vfs_ReadByte(stream, &b);
 			if (version >= 0x3a6c000du) {
-				fcn_00401180(stream, &b);
+				vfs_ReadByte(stream, &b);
 				object[0x215] = (char) ((object[0x215] & ~0x01) | (b & 0x01));
 				if (version >= 0x3a6c00a6u) {
-					fcn_00401180(stream, &b);
+					vfs_ReadByte(stream, &b);
 					object[0x216] = (char) ((object[0x216] & ~0x03) | (b & 0x03));
 					if (version <= 0x3a6c00b8u) {
 						object[0x216] = (char) (object[0x216] | ((object[0x216] & 0x01) << 1));
 					}
-					fcn_00401180(stream, &b);
+					vfs_ReadByte(stream, &b);
 					object[0x216] = (char) ((object[0x216] & ~0x04) | ((b << 2) & 0x04));
 					if (version >= 0x3a6c00b4u) {
-						fcn_00401180(stream, &b);
+						vfs_ReadByte(stream, &b);
 						object[0x216] = (char) ((object[0x216] & ~0x08) | ((b << 3) & 0x08));
 					}
 					if (version >= 0x3a6c00b9u) {
-						fcn_00401180(stream, &b);
+						vfs_ReadByte(stream, &b);
 						object[0x216] = (char) ((object[0x216] & ~0x10) | ((b << 4) & 0x10));
 					}
 				}
@@ -178,7 +178,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 					fcn_00449f90(object, RD_DRAW(object) + i * 0x4a4 + 0xf4, name);
 				}
 				if (version >= 0x3a6c00a3u) {
-					fcn_00401180(stream, &b);
+					vfs_ReadByte(stream, &b);
 					if (b != 0) {
 						fcn_004011a0(stream, name);
 						fcn_0044c200(name, name);
@@ -199,7 +199,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		case 3:
 			fcn_00401280(stream, object + 0x4c);
 			fcn_00401280(stream, object + 0x84);
-			fcn_00401180(stream, &b);
+			vfs_ReadByte(stream, &b);
 			object[0x214] = (char) ((object[0x214] & ~0x40) | ((b << 6) & 0x40));
 			if (b != 0) {
 				fcn_00401280(stream, object + 0x5c);
@@ -214,7 +214,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 			}
 			break;
 		case 0:
-			fcn_00401180(stream, &b);
+			vfs_ReadByte(stream, &b);
 			object[0x214] = (char) ((object[0x214] & ~0x40) | ((b << 6) & 0x40));
 			if (version < 0x3a6c00a0u) {
 				object[0x214] = (char) (object[0x214] | 0x40);
@@ -228,11 +228,11 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		case 6:
 		case 7:
 		case 8:
-			fcn_00401180(stream, &b);
+			vfs_ReadByte(stream, &b);
 			if (version >= 0x3a6c00a8u) {
 				count = fcn_00446ca0(version);
 				if (version >= 0x3a6c00a9u) {
-					fcn_00401180(stream, &b);
+					vfs_ReadByte(stream, &b);
 					object[0x215] = (char) ((object[0x215] & ~0x04) | ((b << 2) & 0x04));
 				}
 				fcn_004011d0(stream, object + 0x90);
@@ -340,7 +340,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 			}
 		}
 	} else {
-		object = fcn_00439750(1, "STRANGEFUCK");
+		object = d3_SpawnObject(1, "STRANGEFUCK");
 		*(char**) (object + 0x1fc) = parent;
 		if (parent != 0) {
 			object[0x214] = (char) (object[0x214] & 0xfe);
@@ -348,16 +348,16 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		placeholder = 1;
 		object[0x214] = (char) (object[0x214] & 0x7f);
 	}
-	fcn_00401180(stream, &b);
+	vfs_ReadByte(stream, &b);
 	if (b != 0) {
 		fcn_00439c00(object, rd_object(stream, object, version, resources));
 	}
 	if (*(char**) (object + 0x1fc) == 0 && placeholder == 0) {
 		fcn_00439aa0(object);
 	}
-	fcn_00401180(stream, &sibling);
+	vfs_ReadByte(stream, &sibling);
 	if (sibling != 0) {
-		fcn_00439ba0(object, rd_object(stream, parent, version, resources));
+		d3_AppendObjectSibling(object, rd_object(stream, parent, version, resources));
 	}
 	if (b == 0 && sibling == 0 && placeholder == 1) {
 		m_FreeTracked(object);
@@ -366,7 +366,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		fcn_00439aa0(object);
 	}
 	if (version >= 0x3a6c00a7u) {
-		fcn_0043b7b0(stream, object);
+		d3_ReadObjectEvents(stream, object);
 	}
 	if (object != 0) {
 		if (*(int*) (object + 0x218) != 0 && *(int*) (object + 0x220) != 4 && *(int*) (object + 0x220) != 3 && *(int*) (object + 0x220) != 2) {

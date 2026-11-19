@@ -46,7 +46,7 @@ extern int g_1040494;
 int __cdecl fcn_00469890(void);
 Surf* __cdecl fcn_004770a0(Desc*, int);
 int __cdecl fcn_00475fd0(Surf*);
-void __cdecl fcn_00476060(Surf*);
+void __cdecl d2_UnlockSurface(Surf*);
 
 static __inline void fill0(char* dst, int size)
 {
@@ -109,7 +109,7 @@ int __cdecl fcn_00469140(int a1, int a2, int w, int h, char* src)
 		for (i = 0; i < h; i++) {
 			memcpy(s->bits + s->pitch * i, src + i * w * 2, w * 2);
 		}
-		fcn_00476060(((Tile*)g_1015ea0)[idx].surf);
+		d2_UnlockSurface(((Tile*)g_1015ea0)[idx].surf);
 	}
 	return idx;
 }

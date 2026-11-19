@@ -161,7 +161,7 @@ void __cdecl evt_RunScript(char* a)
 {
 }
 
-void __cdecl fcn_00404300(char* e, char* name, int n)
+void __cdecl ch_LoadCharacterMotion(char* e, char* name, int n)
 {
 }
 
@@ -179,18 +179,18 @@ int __cdecl fcn_0041f350(int a)
 	return 0;
 }
 
-int __cdecl fcn_00425fe0(char* a, int b)
+int __cdecl evt_ParseSymbolDeclaration(char* a, int b)
 {
 	return 0;
 }
 
-void __cdecl fcn_00427070(void)
+void __cdecl evt_ParseWhile(void)
 {
 }
 
 
 
-void __cdecl fcn_00428d50(int a)
+void __cdecl evt_ParseVariableAssignment(int a)
 {
 }
 
@@ -210,7 +210,7 @@ int __cdecl fcn_0042d630(const char* name)
 	return 0;
 }
 
-int __cdecl fcn_0042dc90(char* a)
+int __cdecl txt_FindEntryIndex(char* a)
 {
 	return 0;
 }
@@ -264,7 +264,7 @@ void __cdecl fcn_0046f9b0(int a0, char* a1)
 {
 }
 
-int __cdecl fcn_00472900(int a, int b)
+int __cdecl d2_SetElementFont(int a, int b)
 {
 	return 0;
 }
@@ -274,7 +274,7 @@ int __cdecl fcn_00473690(int a, int b)
 	return 0;
 }
 
-void __cdecl fcn_00473fe0(void)
+void __cdecl d2_ClearSelectedControl(void)
 {
 }
 
@@ -339,7 +339,7 @@ void __cdecl fcn_004a4410(unsigned int* a0, unsigned int* a1)
 {
 }
 
-int __cdecl fcn_004a4550(float* o1, float* o2, int a3, unsigned short* e, int a5, void* a6, void* a7)
+int __cdecl ai_CalculateMatchingMethodEffects(float* o1, float* o2, int a3, unsigned short* e, int a5, void* a6, void* a7)
 {
 	return 0;
 }

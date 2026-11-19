@@ -6,7 +6,7 @@ int __cdecl vfs_fseek(char* f, int off, int whence);
 void* __cdecl m_alloc(int size, const char* tag);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* f);
 
-int __cdecl fcn_00401470(void* f, int count, void** out, const char* tag)
+int __cdecl bio_rd_array_debug(void* f, int count, void** out, const char* tag)
 {
 	int size;
 	int n;

@@ -1,10 +1,10 @@
-extern void __cdecl fcn_00473fe0(void);
+extern void __cdecl d2_ClearSelectedControl(void);
 extern void __cdecl fcn_0046b2b0(int a);
 extern int __cdecl CountDisplayCounters(void);
 extern void __cdecl fcn_00469c40(int a, int b, int c);
 extern int __cdecl fcn_00469c30(short a, short b, int c);
 extern void __cdecl fcn_00474300(void);
-extern int __cdecl fcn_00474780(void);
+extern int __cdecl d2_UpdateSelectedControlDrag(void);
 extern void __cdecl fcn_00466fe0(int a, int b);
 extern void __cdecl fcn_00474040(void);
 extern void __cdecl fcn_00475220(void *p);
@@ -41,7 +41,7 @@ int __cdecl fcn_004748b0(void)
 			g_7725e8 = 0;
 			d2_MouseBottomBoundary = g_100f1d8;
 			d2_MouseTopBoundary = g_100f1e0;
-			fcn_00473fe0();
+			d2_ClearSelectedControl();
 		}
 	}
 	p = *(unsigned int **) &tp_d2_SelectedControl;
@@ -158,7 +158,7 @@ label_474b96:
 			g_14ce8d8 = 0;
 		}
 		fcn_00474300();
-		if (fcn_00474780()) {
+		if (d2_UpdateSelectedControlDrag()) {
 			return 1;
 		}
 		if (*(unsigned int **) &tp_d2_SelectedControl != 0

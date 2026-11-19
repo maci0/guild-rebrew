@@ -45,7 +45,7 @@ extern char g_6aaba0[];
 
 void __cdecl fcn_0050d6d0(char*, ENTITY_RECORD*, int, struct want*);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
@@ -54,7 +54,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
 int __cdecl fcn_004c5530(char* msg);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_00471a30(int k, int flag);
+void __cdecl d2_SetGroupVisibility(int k, int flag);
 void __cdecl fcn_00526120(int, int);
 void __cdecl fcn_00471e30(int);
 
@@ -81,7 +81,7 @@ void __cdecl fcn_005a4090(char* p)
 		}
 	}
 	h = fcn_00470820(0, 0, g_6aaba0);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x18d0);
 	d2_SetForm(h, 2);
@@ -124,9 +124,9 @@ found:
 			while (fcn_004c4450(r) == 0) {
 				fcn_005373e0(0, 0x677c7);
 			}
-			fcn_00471a30(h, 0);
+			d2_SetGroupVisibility(h, 0);
 			fcn_00526120(g_14ab670, 4);
-			fcn_00471a30(h, 1);
+			d2_SetGroupVisibility(h, 1);
 			*(int*) (p + list[i].slot * 0xc + 0x71) = -1;
 			g_774654 = 1;
 		}

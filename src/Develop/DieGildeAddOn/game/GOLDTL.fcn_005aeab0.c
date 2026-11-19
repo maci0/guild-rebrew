@@ -23,7 +23,7 @@ int __cdecl gm_WalkEntityChain(unsigned short);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl io_AppendText(int, ...);
@@ -103,7 +103,7 @@ void __cdecl fcn_005aeab0(char* rec)
 	cnt = (int) ((double) cnt * (double) weight);
 	ctx = (char*) fcn_00470820(0, 0, g_6ab2e0);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60((int) ctx);
+	d2_CenterDialogWindows((int) ctx);
 	d2_SetForm((int) ctx, 1);
 
 	v = io_AppendText(0x19c4, *(unsigned short*) ent, (int) (act + 0xb4),

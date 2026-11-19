@@ -22,9 +22,9 @@ void __cdecl sim_SetSyncParams(int*, int, int, int);
 int __cdecl fcn_00567030(char*, int*, int*);
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl gm_SearchTable67(int);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 int __cdecl gm_AccumulateTyped2(char*);
-int __cdecl fcn_00402ba0(int, int);
+int __cdecl ch_CountCharacters(int, int);
 void __cdecl fcn_004c6650(int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 void __cdecl fcn_004c5ba0(int, int, int, char*);
@@ -84,7 +84,7 @@ void __cdecl fcn_00567590(char* a0)
 					else {
 						kind = *(unsigned char*) (0x7f4ca2
 						       + *(unsigned short*) (*(int*) p + 0x27) * 0x21c);
-						if (kind != 6 && kind != 7 && (int) fcn_00402ba0(0, 0) < 0x20) {
+						if (kind != 6 && kind != 7 && (int) ch_CountCharacters(0, 0) < 0x20) {
 							other = gm_SearchTable67(*(int*) (*(int*) (p + 0x18) + 0x2c));
 							if (other != 0 && *(int*) (other + 0x61) != 0) {
 								char* src;
@@ -92,8 +92,8 @@ void __cdecl fcn_00567590(char* a0)
 
 								src = *(char**) (*(int*) p + 0x61);
 								dst = *(char**) (other + 0x61);
-								fcn_00455350(src, src + 0x4c, v10);
-								fcn_00455350(dst, dst + 0x4c, v11);
+								d3_TransformPoint(src, src + 0x4c, v10);
+								d3_TransformPoint(dst, dst + 0x4c, v11);
 								dist = (float) sqrt(
 								    (v10[0] - v11[0]) * (v10[0] - v11[0])
 								    + (v10[1] - v11[1]) * (v10[1] - v11[1])

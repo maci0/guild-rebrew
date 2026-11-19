@@ -8,7 +8,7 @@ extern char* evt_CurrentScript;
 char* __cdecl fcn_00412eb0(char* name, int kind);
 void __cdecl fcn_00438b40(char* h, char* pos);
 void __cdecl fcn_00438cb0(char* h, char* rot);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 /* ADDRESS: GOLD 0x0040ee10 */
 /* ADDRESS: GOLDTL 0x0040fd20 */
@@ -24,6 +24,6 @@ int __cdecl SetCameraToDummy(char** name)
 		return 0;
 	}
 	sprintf(buf, "SetCameraToDummy(): Could not find Cameradummy '%s'!", *name);
-	fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), buf);
+	evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), buf);
 	return 0;
 }

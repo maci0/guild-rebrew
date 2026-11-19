@@ -16,11 +16,11 @@ char __cdecl fcn_00438d40(char*, char*, unsigned int, char (__cdecl*)(char*, voi
 #define lc_SavedRender g_633444
 #else
 void __cdecl fcn_004432d0(int, int);
-void __cdecl fcn_00455350(char*, float*, float*);
-char __cdecl fcn_004379a0(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
+void __cdecl d3_TransformPoint(char*, float*, float*);
+char __cdecl d3_VisitSceneObjects(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
 #define lc_RenderState fcn_004432d0
-#define lc_ScenePoint fcn_00455350
-#define lc_WalkScene fcn_004379a0
+#define lc_ScenePoint d3_TransformPoint
+#define lc_WalkScene d3_VisitSceneObjects
 #define lc_SavedRender d3_CurrentContextIndex
 #endif
 int __cdecl lc_GetGebaeudeBauplatz(LC_GEBAEUDE_BAUPLATZ* out, unsigned char* obj)

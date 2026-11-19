@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_00435500(char*, int);
+void __cdecl d3_RemoveObjectAnimation(char*, int);
 
 int __cdecl d3_RemoveObjectAnim(char* p)
 {
@@ -10,7 +10,7 @@ int __cdecl d3_RemoveObjectAnim(char* p)
 	for (i = 0; i < 3; i++) {
 		q = *(char**) (p + 0x1ec);
 		if (q != 0 && *(int*) (q + i * 0x7c + 0x484) != 0) {
-			fcn_00435500(q + 0xf4, *(int*) (q + i * 0x7c + 0x484));
+			d3_RemoveObjectAnimation(q + 0xf4, *(int*) (q + i * 0x7c + 0x484));
 		}
 	}
 	return 1;

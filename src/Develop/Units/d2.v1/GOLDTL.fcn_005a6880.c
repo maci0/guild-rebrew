@@ -28,7 +28,7 @@ extern int g_14b5278;
 extern char g_6b5c60[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl io_AppendText(int, ...);
@@ -47,10 +47,10 @@ void __cdecl ResetDisplayCounters(void);
 int __cdecl fcn_005a5440(int, ListRow*, int, int, char);
 int __cdecl fcn_005a5980(ListRow*);
 int __cdecl fcn_005a66b0(char*, int, int, unsigned char);
-void __cdecl fcn_00473fe0(void);
+void __cdecl d2_ClearSelectedControl(void);
 void __cdecl fcn_00472380(int, int, int, int);
-int __cdecl fcn_0059c830(ListRow*);
-void __cdecl fcn_00472170(int, int);
+int __cdecl d2_CountActiveListRows(ListRow*);
+void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00657a73(int, void*, int);
 void __cdecl fcn_0046f940(int, void*);
 void __cdecl fcn_0046ed00(int, int, int);
@@ -94,7 +94,7 @@ void __cdecl fcn_005a6880(char* obj)
 		}
 	}
 	h = fcn_00470820(0, 0, g_6aac84);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	fcn_00533dc0(d2_CurrentWindowId, 0x73b, 0x73f);
 	w2 = fcn_00472250(h, 0, 2);
@@ -160,7 +160,7 @@ void __cdecl fcn_005a6880(char* obj)
 			ResetDisplayCounters();
 			if (fcn_005a66b0(obj, list2[selected].id, list2[selected].idx,
 			             *(unsigned char*)&list1[sel2].idx)) {
-				fcn_00473fe0();
+				d2_ClearSelectedControl();
 				for (i = 0; i < 16; i++) {
 					if (list2[i].sel != -1)
 						fcn_00472380(list2[i].sel, 0, 0, 0);
@@ -172,27 +172,27 @@ void __cdecl fcn_005a6880(char* obj)
 				fcn_00472640(list1[i].sel,
 				             selected != -1 ? 1 : 0);
 		}
-		sel1 = fcn_0059c830(list2);
-		sel2 = fcn_0059c830(list1);
+		sel1 = d2_CountActiveListRows(list2);
+		sel2 = d2_CountActiveListRows(list1);
 		if (sel1 <= 4) {
-			fcn_00472170(w1, 0);
-			fcn_00472170(w0, 0);
-			fcn_00472170(cb, 0);
+			d2_SetSlotVisibility(w1, 0);
+			d2_SetSlotVisibility(w0, 0);
+			d2_SetSlotVisibility(cb, 0);
 		} else {
-			fcn_00472170(w1, 1);
-			fcn_00472170(w0, 1);
-			fcn_00472170(cb, 1);
+			d2_SetSlotVisibility(w1, 1);
+			d2_SetSlotVisibility(w0, 1);
+			d2_SetSlotVisibility(cb, 1);
 			fcn_00657a73(sel1, text, 0xa);
 			fcn_0046f940(cb, text);
 		}
 		if (sel2 <= 4) {
-			fcn_00472170(w2, 0);
-			fcn_00472170(w3, 0);
-			fcn_00472170(label2, 0);
+			d2_SetSlotVisibility(w2, 0);
+			d2_SetSlotVisibility(w3, 0);
+			d2_SetSlotVisibility(label2, 0);
 		} else {
-			fcn_00472170(w2, 1);
-			fcn_00472170(w3, 1);
-			fcn_00472170(label2, 1);
+			d2_SetSlotVisibility(w2, 1);
+			d2_SetSlotVisibility(w3, 1);
+			d2_SetSlotVisibility(label2, 1);
 			fcn_00657a73(sel2, text, 0xa);
 			fcn_0046f940(label2, text);
 		}

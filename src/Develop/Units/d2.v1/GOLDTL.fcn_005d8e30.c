@@ -9,7 +9,7 @@ int __cdecl fcn_004f5e20(int, int);
 void __cdecl fcn_004c6ae0(int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -45,7 +45,7 @@ int __cdecl fcn_005d8e30(char* e, char* o)
 		r = 0;
 		dlg = fcn_00470820(0, 0, "privillegien\\abbitte");
 		d2_SetOverlayAnimation(0, 0);
-		fcn_00471b60(dlg);
+		d2_CenterDialogWindows(dlg);
 		d2_SetForm(dlg, 1);
 		id = io_AppendText(0x1dea);
 		ok = fcn_00472250(dlg, 1, id + 1);

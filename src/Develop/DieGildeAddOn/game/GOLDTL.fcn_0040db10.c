@@ -4,7 +4,7 @@ extern char g_6761c8[];
 
 
 
-void __cdecl fcn_00425bf0(int*, int, char*);
+void __cdecl evt_LogScriptError(int*, int, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 int __cdecl StopCharacter(void* actorRef)
@@ -13,7 +13,7 @@ int __cdecl StopCharacter(void* actorRef)
 
 	actor = *(void**) actorRef;
 	if (actor == 0) {
-		fcn_00425bf0(((int*)evt_CurrentScript), *(int*) ((char*) ((int*)evt_CurrentScript) + 0x118), g_6761c8);
+		evt_LogScriptError(((int*)evt_CurrentScript), *(int*) ((char*) ((int*)evt_CurrentScript) + 0x118), g_6761c8);
 	} else {
 		ch_CancelActionQueue(actor);
 	}

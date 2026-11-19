@@ -37,10 +37,10 @@ typedef struct {
 	Tex47bdd0 *tex;
 } Cell47bdd0;
 
-void __cdecl fcn_0047b9a0(Quad47bdd0 *q, unsigned char r, unsigned char g,
+void __cdecl d2_SetQuadVertexColor(Quad47bdd0 *q, unsigned char r, unsigned char g,
                           unsigned char b);
 int __cdecl fcn_0047ba20(int x, int y, char *sprite, float scale);
-Quad47bdd0 *__cdecl fcn_0047bf80(int x, int y, int w, int h, int tex,
+Quad47bdd0 *__cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex,
                                  void *src);
 Quad47bdd0 *__cdecl fcn_0047c1f0(float u, float v, int w, int h,
                                  Tex47bdd0 *tex, int x, int y);
@@ -60,7 +60,7 @@ int __cdecl fcn_0047bdd0(int x, int y, Sprite47bdd0 *sprite, float scale,
 	count = sprite->count; if (count == 1 && sprite->count2 == 1) {
 		q = (Quad47bdd0 *) fcn_0047ba20(x, y, (char *) sprite, scale);
 		if (q)
-			fcn_0047b9a0(q, r, g, b);
+			d2_SetQuadVertexColor(q, r, g, b);
 		return (int) q;
 	}
 	whole = sprite->size;
@@ -70,12 +70,12 @@ int __cdecl fcn_0047bdd0(int x, int y, Sprite47bdd0 *sprite, float scale,
 		i = 0;
 		if (count >= 1) {
 			do {
-				q = fcn_0047bf80(
+				q = d2_QueueTexturedQuad(
 				    (i % n) * tile + x, (i / n) * tile + y, tile,
 				    tile, *(int *) ((char *) sprite->lists[i] + 0x20),
 				    0);
 				if (q)
-					fcn_0047b9a0(q, r, g, b);
+					d2_SetQuadVertexColor(q, r, g, b);
 				i++;
 			} while (i < sprite->count);
 			return (int) q;
@@ -91,7 +91,7 @@ int __cdecl fcn_0047bdd0(int x, int y, Sprite47bdd0 *sprite, float scale,
 				    cell->u, cell->v, whole, whole, cell->tex,
 				    (i % n) * whole + x, (i / n) * whole + y);
 				if (q)
-					fcn_0047b9a0(q, r, g, b);
+					d2_SetQuadVertexColor(q, r, g, b);
 				i++;
 				off += 0xc;
 			} while (i < sprite->count2);

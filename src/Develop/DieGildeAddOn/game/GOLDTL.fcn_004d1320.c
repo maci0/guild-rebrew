@@ -19,9 +19,9 @@ typedef struct {
 extern int g_67a370;
 
 void __cdecl fcn_004ce610(char*);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
-ent2c* __cdecl fcn_004ceac0(char*, char*);
+ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 
 int __cdecl fcn_004d1320(char* rec, char* e, char* obj)
 {
@@ -34,10 +34,10 @@ int __cdecl fcn_004d1320(char* rec, char* e, char* obj)
 
 	h = *(int*) (((char*)g_67a370) + 0xb0);
 	fcn_004ce610(e);
-	fcn_00455350(obj, obj + 0x4c, v);
+	d3_TransformPoint(obj, obj + 0x4c, v);
 	if (fcn_0045b990(h, v, &c, &a, &b) == 0)
 		return 0;
-	r = fcn_004ceac0(rec, e);
+	r = gm_FindOrCreateEntitySlot(rec, e);
 	r->fc = 0;
 	strcpy(r->name, obj);
 	r->id = *(int*) (e + 4);

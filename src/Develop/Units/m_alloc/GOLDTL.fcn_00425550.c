@@ -9,14 +9,14 @@ char* __cdecl fcn_0064e2f9(char* path, char* mode);
 int __cdecl fcn_0064ebe4(void* buffer, int size, int count, char* file);
 int __cdecl fcn_0064e1fd(char* file);
 int __cdecl fcn_0064d3f8(void);
-int __cdecl fcn_0042a510(int handle, void* out);
+int __cdecl msx_AllocateSampleHandle(int handle, void* out);
 void __cdecl fcn_0042a7c0(int handle);
-void __cdecl fcn_0042a7f0(int handle);
+void __cdecl msx_StartSample(int handle);
 int __cdecl fcn_0042a5d0(int handle, char* flag, void* data, int size);
 int __cdecl fcn_00423920(char* path);
 int __cdecl fcn_00423b80(char* name);
 int __cdecl fcn_00424700(char* name);
-void* __cdecl fcn_00423ac0(char* name);
+void* __cdecl sbs_FindSet(char* name);
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* pointer);
 
@@ -35,7 +35,7 @@ int __cdecl fcn_00425550(char* name, char* ext)
 	file = strstr(name, ".");
 	if (file != 0) {
 		if ((int) g_6b7d80 == 0) {
-			if (fcn_0042a510(g_6b7d7c, &g_6b7d80) == -1) {
+			if (msx_AllocateSampleHandle(g_6b7d7c, &g_6b7d80) == -1) {
 				goto fail;
 			}
 		}
@@ -73,7 +73,7 @@ int __cdecl fcn_00425550(char* name, char* ext)
 		}
 		result = fcn_0042a5d0((int) g_6b7d80, found, g_6b7d84, size);
 		if (result == 0) {
-			fcn_0042a7f0((int) g_6b7d80);
+			msx_StartSample((int) g_6b7d80);
 			fcn_0064e1fd(file);
 			return result;
 		}
@@ -92,7 +92,7 @@ fail:
 	} else {
 		size = fcn_00424700(name);
 		index = fcn_0064d3f8() % size;
-		data = fcn_00423ac0(name);
+		data = sbs_FindSet(name);
 		if (data == 0) {
 			goto fail;
 		}

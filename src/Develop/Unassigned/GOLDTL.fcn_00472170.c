@@ -40,7 +40,7 @@ extern char* g_1015ea0;
 
 
 /* ADDRESS: GOLDTL 0x00472170 */
-void __cdecl fcn_00472170(int slot, int flag)
+void __cdecl d2_SetSlotVisibility(int slot, int flag)
 {
 	Slot* s;
 	D2_WIN* w;
@@ -51,7 +51,7 @@ void __cdecl fcn_00472170(int slot, int flag)
 	if (s->type == 0x40) {
 		w = &((D2_WIN*)g_1015f40)[s->result];
 		for (i = 0; i < w->count; i++) {
-			fcn_00472170(w->children[i], flag);
+			d2_SetSlotVisibility(w->children[i], flag);
 		}
 	}
 }

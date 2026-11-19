@@ -4,7 +4,7 @@ extern char* g_9b0dc0[];
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl fcn_00445600(int, int, int, char*);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 char* __cdecl fcn_004fda30(int);
 int __cdecl cut_RandMod(int);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
@@ -29,7 +29,7 @@ char* __cdecl fcn_004da2b0(unsigned short* entity, char* prefix, int idx)
 	w = fcn_00445600(0, 0x100, 0, name);
 	if (w == 0)
 		goto fail;
-	fcn_00455350(w, w + 0x4c, pos);
+	d3_TransformPoint(w, w + 0x4c, pos);
 	r = fcn_004fda30(*entity);
 	if (r == 0) {
 		k = cut_RandMod(3);

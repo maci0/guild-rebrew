@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-void __cdecl fcn_00455350(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
@@ -22,12 +22,12 @@ void __cdecl fcn_005983d0(char* e)
 	ok = 1;
 	o = *(char**) (e + 0x1fc);
 	if (o != 0) {
-		fcn_00455350(o, o + 0x4c, pa);
+		d3_TransformPoint(o, o + 0x4c, pa);
 		p = gm_StartFilteredEntitySearch(1, 6);
 		while (p != 0) {
 			q = *(char**) (p + 0x61);
 			if (q != 0) {
-				fcn_00455350(q, q + 0x4c, pb);
+				d3_TransformPoint(q, q + 0x4c, pb);
 				if (CompareVector3WithinTolerance(pb, pa, 100.0f)) {
 					ok = 0;
 					break;
@@ -38,12 +38,12 @@ void __cdecl fcn_005983d0(char* e)
 	}
 	for (s = *(char**) (e + 0x200); s != 0; s = *(char**) (s + 0x1f4)) {
 		if (strncmp(s, "bk_", 3) == 0 || strncmp(s, "!bk_", 4) == 0) {
-			fcn_00455350(s, s + 0x4c, pa);
+			d3_TransformPoint(s, s + 0x4c, pa);
 			p = gm_StartFilteredEntitySearch(1, 6);
 			while (p != 0) {
 				q = *(char**) (p + 0x61);
 				if (q != 0) {
-					fcn_00455350(q, q + 0x4c, pb);
+					d3_TransformPoint(q, q + 0x4c, pb);
 					if (CompareVector3WithinTolerance(pb, pa, 100.0f)) {
 						ok = 0;
 						goto done;

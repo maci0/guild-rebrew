@@ -29,7 +29,7 @@ int __cdecl fcn_00441ab0(char* a, int b, int c, float d, float* out);
 float* __stdcall fcn_005ebbb9(float* a, const float* b);
 void __cdecl fcn_00438b40(int h, float* p);
 int __cdecl plt_CheckZoneAvailability(int a, int b, int c, unsigned int d);
-void __cdecl fcn_00414c90(int a, int b, int c, int d);
+void __cdecl d3_SetSubtreeColor(int a, int b, int c, int d);
 int __cdecl fcn_004c5aa0(int a, int b, int c, int d, int e, int f);
 int __cdecl fcn_004c4450(int a);
 int __cdecl fcn_005373e0(void* fn, int msg);
@@ -38,7 +38,7 @@ float __cdecl eval_ObjektPreis2Credits(int, int);
 
 void __cdecl fcn_004c5150(int a, int b, unsigned char c, int d);
 int __cdecl init_SetPflanzenMap(int a, int b);
-void __cdecl fcn_00412cf0(int a, float* p, int b, int c, int d);
+void __cdecl d3_AnimateObjectTransform(int a, float* p, int b, int c, int d);
 void __cdecl d2_SelectRadioGroup(int a, int b);
 int __cdecl plt_FindPlantInfo(int a);
 void __cdecl d3_DestroyObject(int a);
@@ -216,7 +216,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 				v20 = 0;
 			}
 		}
-		fcn_00414c90(v6, v20, v21, v22);
+		d3_SetSubtreeColor(v6, v20, v21, v22);
 		v4 = v26;
 		if (g_14ce8cc && v18 != 0xffffffff && v1) {
 			v20 = fcn_004c5aa0(*(unsigned int*) ((char*) a0 + 1),
@@ -243,7 +243,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 					place[1] = world[1] - 60.0;
 					place[2] = world[2];
 					fcn_00438b40(v17, place);
-					fcn_00412cf0(v17, world, v17 + 0x84, 0x32, 0x20);
+					d3_AnimateObjectTransform(v17, world, v17 + 0x84, 0x32, 0x20);
 				}
 			}
 		}

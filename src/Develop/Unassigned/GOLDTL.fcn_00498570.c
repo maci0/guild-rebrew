@@ -10,7 +10,7 @@ typedef struct Msg {
 // SIZE 0x18
 
 int __cdecl fcn_004a4fb0(int* x, int* y, void* home, int a4);
-int __cdecl fcn_00495400(int kind, int id, int a3, Msg* b, Msg* a);
+int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 
 /* ADDRESS: GOLDTL 0x00498570 */
 int __cdecl fcn_00498570(int a1, char* e, int y, Msg* out1, Msg* out2)
@@ -33,7 +33,7 @@ int __cdecl fcn_00498570(int a1, char* e, int y, Msg* out1, Msg* out2)
 		}
 		a.b = 1;
 		a.f = 0.44f;
-		r = fcn_00495400(0x15, *(unsigned short*) e, 1, &b, &a);
+		r = ai_SelectBestMethod(0x15, *(unsigned short*) e, 1, &b, &a);
 		if (r) {
 			*out1 = b;
 			*out2 = a;

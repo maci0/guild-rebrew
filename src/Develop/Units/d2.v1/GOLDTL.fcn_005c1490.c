@@ -10,10 +10,10 @@ extern char g_6811b0[];
 extern char g_10161b4[];
 extern char g_1016198[];
 
-void __cdecl fcn_00420200(int);
+void __cdecl msx_SetFadeDuration(int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -42,7 +42,7 @@ void __cdecl fcn_005c1490(void)
 	h = fcn_00470820(0, 0, "special\\barde");
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	g_100f1dc = -1;
 	d2_SetForm(h, 1);
@@ -79,7 +79,7 @@ void __cdecl fcn_005c1490(void)
 			fcn_00532ef0();
 			return;
 		}
-		fcn_00420200(0x3e8);
+		msx_SetFadeDuration(0x3e8);
 		io_AppendText(0x1e2a, (int) *(unsigned short*) (rec + 0xc) + 1, e2);
 		sprintf(buf, "Gedichte_Announcement\\%s.mp3", rec + 0xe);
 		r = 0;
@@ -107,7 +107,7 @@ void __cdecl fcn_005c1490(void)
 		h = fcn_00470820(0, 0, "special\\barde2");
 		d2_SetForm(h, 0);
 		fcn_005340f0(d2_CurrentWindowId);
-		fcn_00471b60(h);
+		d2_CenterDialogWindows(h);
 		d2_SetOverlayAnimation(0, 0);
 		g_100f1dc = -1;
 		d2_SetForm(h, 1);

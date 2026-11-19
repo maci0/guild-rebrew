@@ -17,7 +17,7 @@ typedef struct MapPos {
 
 char* __cdecl gm_SearchTable67(unsigned int);
 int __cdecl fcn_004be300(char*, char*);
-void __cdecl fcn_00455350(char*, float*, float*);
+void __cdecl d3_TransformPoint(char*, float*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 void __cdecl fcn_005b00f0(char*, int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
@@ -50,7 +50,7 @@ int __cdecl fcn_004be3d0(int* a0, char* a1, char* a2, char* a3)
 		return -1;
 	}
 	obj = *(char**) (obj + 0x61);
-	fcn_00455350(obj, (float*) (obj + 0x4c), out);
+	d3_TransformPoint(obj, (float*) (obj + 0x4c), out);
 	/* The native fourth argument slot also holds the height output. */
 	if (!fcn_0045b990(map, out, &p.col, &p.row, (float*) &a3)) {
 		return -1;

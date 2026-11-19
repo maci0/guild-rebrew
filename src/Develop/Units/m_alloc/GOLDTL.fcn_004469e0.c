@@ -28,13 +28,13 @@ extern char g_6b5c60[];
 
 void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
-void __cdecl fcn_00401210(void* s, char v);
-void __cdecl fcn_00401230(void* s, void* str);
+void __cdecl vfs_WriteByte(void* s, char v);
+void __cdecl vfs_WriteCString(void* s, void* str);
 void __cdecl fcn_00401260(void* s, int v);
-void __cdecl fcn_004012f0(void* s, void* v);
+void __cdecl vfs_WriteVec3(void* s, void* v);
 void __cdecl fcn_004012e0(void* s, int* v);
 void __cdecl fcn_00401360(void* s, int v);
-void __cdecl fcn_00401430(void* s, int a, int b, void* data);
+void __cdecl vfs_WriteArray(void* s, int a, int b, void* data);
 
 #define PART(i) ((*(Part_4469e0**) (o + 0x7da0))[i])
 
@@ -45,35 +45,35 @@ void __cdecl fcn_004469e0(void* s, char* o)
 	void* buf;
 	int i;
 
-	fcn_00401230(s, o + 0x7da4);
+	vfs_WriteCString(s, o + 0x7da4);
 	if (o[0x7da4] != 0) {
 		fcn_00401360(s, *(int*) o);
-		fcn_00401430(s, *(int*) o, *(int*) o, *(void**) (o + 0x10));
+		vfs_WriteArray(s, *(int*) o, *(int*) o, *(void**) (o + 0x10));
 		buf = m_alloc(*(int*) o * *(int*) o * 4, "!d3:LOfs");
-		fcn_00401430(s, *(int*) o * 4, *(int*) o, buf);
+		vfs_WriteArray(s, *(int*) o * 4, *(int*) o, buf);
 		m_FreeTracked(buf);
-		fcn_00401210(s, *(int*) (o + 0x18) != 0);
+		vfs_WriteByte(s, *(int*) (o + 0x18) != 0);
 		if (*(int*) (o + 0x18) != 0) {
 			fcn_00401360(s, *(unsigned char*) (o + 0x8035));
 			if (*(unsigned char*) (o + 0x8035) > 0) {
-				fcn_00401430(s, *(int*) o, *(int*) o, *(void**) (o + 0x18));
+				vfs_WriteArray(s, *(int*) o, *(int*) o, *(void**) (o + 0x18));
 			}
 			for (i = 0; i < *(unsigned char*) (o + 0x8035); i++) {
 				if (PART(i).model != 0) {
-					fcn_00401230(s, PART(i).model);
-					fcn_00401210(s, 0);
-					fcn_00401210(s, PART(i).model->f5e & 0xf);
-					fcn_00401210(s, PART(i).model->f54 & 1);
+					vfs_WriteCString(s, PART(i).model);
+					vfs_WriteByte(s, 0);
+					vfs_WriteByte(s, PART(i).model->f5e & 0xf);
+					vfs_WriteByte(s, PART(i).model->f54 & 1);
 				} else {
-					fcn_00401230(s, g_6b5c60);
-					fcn_00401210(s, 0);
-					fcn_00401210(s, 0);
-					fcn_00401210(s, 0);
+					vfs_WriteCString(s, g_6b5c60);
+					vfs_WriteByte(s, 0);
+					vfs_WriteByte(s, 0);
+					vfs_WriteByte(s, 0);
 				}
-				fcn_00401210(s, PART(i).b8);
-				fcn_00401210(s, PART(i).b9);
-				fcn_00401210(s, PART(i).flags & 1);
-				fcn_00401210(s, (PART(i).flags >> 1) & 1);
+				vfs_WriteByte(s, PART(i).b8);
+				vfs_WriteByte(s, PART(i).b9);
+				vfs_WriteByte(s, PART(i).flags & 1);
+				vfs_WriteByte(s, (PART(i).flags >> 1) & 1);
 				fcn_00401260(s, PART(i).e);
 				fcn_00401260(s, PART(i).c);
 				fcn_00401260(s, PART(i).d);
@@ -83,16 +83,16 @@ void __cdecl fcn_004469e0(void* s, char* o)
 			}
 		}
 	} else {
-		fcn_00401210(s, 0);
+		vfs_WriteByte(s, 0);
 	}
-	fcn_00401230(s, o + 0x7de4);
+	vfs_WriteCString(s, o + 0x7de4);
 	if (o[0x7de4] != 0) {
-		fcn_00401430(s, *(int*) o, *(int*) o, *(void**) (o + 0x14));
+		vfs_WriteArray(s, *(int*) o, *(int*) o, *(void**) (o + 0x14));
 	}
 	for (i = 0; i < 8; i++) {
-		fcn_00401230(s, o + 0x7e24 + i * 0x40);
+		vfs_WriteCString(s, o + 0x7e24 + i * 0x40);
 	}
 	fcn_00401260(s, *(int*) (o + 0x60));
 	fcn_00401260(s, *(int*) (o + 0x84));
-	fcn_004012f0(s, o + 0x50);
+	vfs_WriteVec3(s, o + 0x50);
 }

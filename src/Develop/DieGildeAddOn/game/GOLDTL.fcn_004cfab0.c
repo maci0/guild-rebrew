@@ -3,7 +3,7 @@ extern int d2_CurrentWindowId;
 extern double g_662c38;
 
 char __cdecl fcn_00443e10(int, int*);
-void __cdecl fcn_004ceac0(int, int);
+void __cdecl gm_FindOrCreateEntitySlot(int, int);
 int __cdecl fcn_0046e940(int, int, int, int, int);
 void __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_00507e30(int, int, int);
@@ -34,7 +34,7 @@ void __cdecl fcn_004cfab0(int a0, int a1)
 	h = rect[3] - rect[1] + 0x20;
 	for (slot = 0; slot < 0x20; slot++) {
 		if (g_9ba2e0[slot] == -1) {
-			fcn_004ceac0(a0, a1);
+			gm_FindOrCreateEntitySlot(a0, a1);
 			g_9ba2e0[slot] = fcn_0046e940(x0, y0, w, h, 0x10);
 			fcn_0046f740(0, 0, 0x7b0, d2_CurrentWindowId);
 			fcn_0046f740(w - 0x18, 0, 0x7b1, d2_CurrentWindowId);

@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x005b3460 */
-char __cdecl fcn_005b3460(int value)
+char __cdecl d2_CollectDebugObject(int value)
 {
 	int count;
 

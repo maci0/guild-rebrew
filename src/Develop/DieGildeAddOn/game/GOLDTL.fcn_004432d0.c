@@ -7,7 +7,7 @@ extern void __cdecl fcn_00438cb0(int, char*);
 extern void __cdecl fcn_00439c60(int);
 extern void __cdecl fcn_0045b290(int, int);
 extern int __cdecl fcn_0045b700(int, int, int);
-extern void __cdecl fcn_00437ac0(int, int, int, int);
+extern void __cdecl d3_TraverseSceneObjects(int, int, int, int);
 extern void __cdecl gv_Free3Fields(int);
 extern int __cdecl fcn_00438920(int, int, int);
 
@@ -184,7 +184,7 @@ char __cdecl fcn_004432d0(int a0, char a1)
 			}
 			else {
 				*(int*) 0x6b89e4 = fcn_0045b700(0, -*(int*) 0x6b89b0, 1);
-				fcn_00437ac0(*(int*) 0x67a370, 0, 0xc0, 0x456df0);
+				d3_TraverseSceneObjects(*(int*) 0x67a370, 0, 0xc0, 0x456df0);
 			}
 		}
 		else if (*(int*) 0x6b89e4 != 0) {

@@ -9,10 +9,10 @@ extern unsigned char* g_14cbca8;
 extern unsigned short g_14cbcae;
 extern unsigned int g_6b7d5c;
 void __cdecl nt_LogWinsockError(int err);
-void __cdecl fcn_00421050(void);
-void __cdecl fcn_00420ba0(unsigned char* p, unsigned int n, char flag);
+void __cdecl nt_CloseClientConnection(void);
+void __cdecl nt_RecordPacketStats(unsigned char* p, unsigned int n, char flag);
 
-int __cdecl fcn_00421290(void)
+int __cdecl nt_FlushSend(void)
 {
 	int n;
 	int err;
@@ -30,13 +30,13 @@ int __cdecl fcn_00421290(void)
 			return 0;
 		}
 		nt_LogWinsockError(err);
-		fcn_00421050();
+		nt_CloseClientConnection();
 		return 1;
 	}
 	g_14cbcae += n;
 	(*(int *)&g_6b7d5c) += n;
 	if (g_14cbcae == *(unsigned short*) (g_14cbca8 + 1)) {
-		fcn_00420ba0(g_14cbca8, g_14cbcae, 0);
+		nt_RecordPacketStats(g_14cbca8, g_14cbcae, 0);
 		g_14cbca8 = 0;
 		g_14cbcae = 0;
 	}

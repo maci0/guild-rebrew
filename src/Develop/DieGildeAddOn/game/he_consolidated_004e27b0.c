@@ -28,7 +28,7 @@ int __cdecl cut_RandMod(int);
 void __cdecl fcn_004e4b40(int, int, char*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, char*);
@@ -122,7 +122,7 @@ void __cdecl fcn_004e2890(char* m)
 		}
 	}
 	sc = fcn_00470820(0, 0, "cutscenes\\geburt");
-	fcn_00471b60(sc);
+	d2_CenterDialogWindows(sc);
 	d2_SetForm(sc, 1);
 	if (b[9] == 0)
 		io_AppendText(0x1aae);

@@ -25,7 +25,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
-Figure* __cdecl fcn_00403270(int);
+Figure* __cdecl ch_AllocateCharacterSlot(int);
 
 Figure* __cdecl fcn_00523710(void* f)
 {
@@ -36,7 +36,7 @@ Figure* __cdecl fcn_00523710(void* f)
 	if (ls_ReadVfsDataChecked(&v, 4, 1, f) == 0) {
 		return 0;
 	}
-	o = fcn_00403270(v);
+	o = ch_AllocateCharacterSlot(v);
 	if (ls_ReadVfsDataChecked(o->name, 0x20, 1, f) == 0) {
 		return 0;
 	}

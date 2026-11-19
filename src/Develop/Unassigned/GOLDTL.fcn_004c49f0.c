@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00421050(void);
+void __cdecl nt_CloseClientConnection(void);
 unsigned short __cdecl fcn_004c3a50(char* n);
 
 /* ADDRESS: GOLDTL 0x004c49f0 */
@@ -15,7 +15,7 @@ int __cdecl fcn_004c49f0(char* src)
 	p = g_aed200;
 	if (p == 0) {
 		if (g_14cbca0 != -1) {
-			fcn_00421050();
+			nt_CloseClientConnection();
 		}
 		return 1;
 	}

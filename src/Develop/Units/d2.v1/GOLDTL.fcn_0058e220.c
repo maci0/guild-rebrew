@@ -26,7 +26,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl evt_LoadGfxScript(char* name);
 char* __cdecl fcn_004fd9d0(int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl fcn_004284d0(int, char*);
+void __cdecl evt_RunScriptLine(int, char*);
 int __cdecl fcn_004273c0(void);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
 int __cdecl fcn_00423460(int);
@@ -67,7 +67,7 @@ int __cdecl fcn_0058e220(int a1, S58* a2)
 		if (q == 0)
 			q = fcn_004fd9d0(a2->x4c, 0);
 		fcn_0064d41a(text, g_68b3f8, p + 4, q + 4);
-		fcn_004284d0(h, text);
+		evt_RunScriptLine(h, text);
 	}
 	k = fcn_004273c0();
 	i = 0;

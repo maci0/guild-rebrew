@@ -28,7 +28,7 @@ char* __cdecl d2_GetResourceData(int id);
 fcn_004663e0_Glyph* __cdecl fcn_0047b620(char* font, int c);
 void __cdecl fcn_0047a040(int a, int b, int c, int d);
 void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
-void __cdecl fcn_00472880(int font);
+void __cdecl d2_SelectFont(int font);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
 
 /* ADDRESS: GOLDTL 0x004663e0 */
@@ -62,7 +62,7 @@ void __cdecl fcn_004663e0(char* f, int surf)
 	g_102d028 = x;
 	g_102d02c = y;
 	if (*(int*) (f + 0x12c) < 100000 && *(int*) (f + 0x12c) > -100000) {
-		fcn_00472880(d2_DefaultFont + 1);
+		d2_SelectFont(d2_DefaultFont + 1);
 		_itoa(*(int*) (f + 0x12c), buf, 10);
 		fcn_0046bd20(x, y, g3->w, g3->h, surf, buf, 8);
 	}

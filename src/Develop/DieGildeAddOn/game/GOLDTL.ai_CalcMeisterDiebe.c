@@ -44,7 +44,7 @@ extern int g_7747b4;
 int __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_ResolveEntityById(int, int*, int, int);
-void __cdecl fcn_00485650(int, int);
+void __cdecl ai_CollectGoodsResources(int, int);
 void __cdecl fcn_00486c40(int, int, int);
 void __cdecl fcn_00489010(int, int);
 void __cdecl fcn_00489250(int);
@@ -120,7 +120,7 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 	}
 	g_100b0ac = 0;
 	ai_ResourceCount = 0;
-	fcn_00485650((int) rec, (int) handle);
+	ai_CollectGoodsResources((int) rec, (int) handle);
 	fcn_00486c40((int) rec, (int) handle, *(int*) (*(int*) (rec + 0x16c) + 0x39));
 	fcn_00489010((int) rec, (int) handle);
 	if (g_100dc20 == *(int*) (rec + 0x16c) && g_100dc38 < 4) {

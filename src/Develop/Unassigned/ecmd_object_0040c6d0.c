@@ -3,15 +3,15 @@ extern char* evt_CurrentScript;
 void __cdecl fcn_00428720(char*);
 extern char g_675bbc[];
 
-void __cdecl fcn_00425bf0(void*, int, void*);
+void __cdecl evt_LogScriptError(void*, int, void*);
 extern char g_675be8[];
 
-void __cdecl fcn_00425bf0(void*, int, void*);
+void __cdecl evt_LogScriptError(void*, int, void*);
 
 /* Iterate the 128 0xc98-byte records behind g_6b7e94 and call fcn_00428720
  * for each active record whose owner differs from g_6b7e98's record. */
 /* ADDRESS: GOLDTL 0x0040c6d0 */
-int __cdecl fcn_0040c6d0(void)
+int __cdecl KillLocalScripts(void)
 {
     int i;
     int id;
@@ -41,7 +41,7 @@ int __cdecl fcn_0040c740(int** pp, int** pp2)
 
 	if (*pp == 0) {
 		g = evt_CurrentScript;
-		fcn_00425bf0(g, *(int*) ((char*) g + 0x118), g_675bbc);
+		evt_LogScriptError(g, *(int*) ((char*) g + 0x118), g_675bbc);
 		return 0;
 	}
 	((int (__cdecl*) (int*)) * pp)(*pp2);
@@ -50,13 +50,13 @@ int __cdecl fcn_0040c740(int** pp, int** pp2)
 
 /* ADDRESS: GOLD 0x0040b860 */
 /* ADDRESS: GOLDTL 0x0040c780 */
-int __cdecl fcn_0040c780(int** pp, int** pp2, int** pp3)
+int __cdecl CallUserFunctionExtended(int** pp, int** pp2, int** pp3)
 {
 	void* g;
 
 	if (*pp == 0) {
 		g = evt_CurrentScript;
-		fcn_00425bf0(g, *(int*) ((char*) g + 0x118), g_675be8);
+		evt_LogScriptError(g, *(int*) ((char*) g + 0x118), g_675be8);
 		return 0;
 	}
 	((int (__cdecl*) (int*, int*)) * pp)(*pp2, *pp3);

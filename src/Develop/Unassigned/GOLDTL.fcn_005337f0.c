@@ -7,7 +7,7 @@ extern volatile int g_6b7fac;
 
 
 
-void __cdecl fcn_00472880(int);
+void __cdecl d2_SelectFont(int);
 void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
 
 void __cdecl fcn_005337f0(void)
@@ -16,7 +16,7 @@ void __cdecl fcn_005337f0(void)
 	int y;
 
 	if (g_7e5fc0[0] != 0) {
-		fcn_00472880(0x53);
+		d2_SelectFont(0x53);
 		if (main_LoopFlags & 0x8000) {
 			x = d2_CenterX - 0x12c;
 			y = (int) (d2_UiScale * 505.0f);

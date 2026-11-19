@@ -15,7 +15,7 @@ extern unsigned short g_7f4c04;
 int __cdecl fcn_004e8a80(int, Law*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -41,7 +41,7 @@ int __cdecl fcn_005dae70(char* e)
 	}
 	dlg = fcn_00470820(0, 0, "privillegien\\arbeiter_ausweisen");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1e24, (e[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (e + 0x166));
 	id = io_AppendText(0x1e25);

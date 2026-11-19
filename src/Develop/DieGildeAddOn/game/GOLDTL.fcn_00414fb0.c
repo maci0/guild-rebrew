@@ -16,7 +16,7 @@ typedef struct
 	unsigned char b[12];
 } FLAGS;
 
-void __cdecl fcn_00455350(char* object, float* in, float* out);
+void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 int __cdecl fcn_004339e0(char* obj, FLAGS fl, int n, FRAME* frames);
 
 #pragma optimize("y", off)
@@ -88,7 +88,7 @@ L2:
 	for (i = 0; i < b; i++) {
 		e = list[i];
 		if (e != 0) {
-			fcn_00455350(e, (float*) ((char*) e + 0x4c), frames[i + 1].pos);
+			d3_TransformPoint(e, (float*) ((char*) e + 0x4c), frames[i + 1].pos);
 			frames[i + 1].rot[0] -= *(float*) ((char*) obj + 0x84);
 			frames[i + 1].rot[1] -= *(float*) ((char*) obj + 0x88);
 			frames[i + 1].rot[2] -= *(float*) ((char*) obj + 0x8c);

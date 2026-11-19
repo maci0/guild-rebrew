@@ -22,7 +22,7 @@ typedef struct {
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl sim_SetSyncParams(GAME_TIMESTAMP*, unsigned char, unsigned char, unsigned char);
-int __cdecl fcn_00500d20(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
+int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
 
 int __cdecl fcn_004b52d0(holder* p, int flag, int limit)
 {
@@ -32,7 +32,7 @@ int __cdecl fcn_004b52d0(holder* p, int flag, int limit)
 			sim_SetSyncParams(&p->st, (unsigned char) (*(GAME_TIMESTAMP*)&gm_GameTime).hour, (unsigned char) (*(GAME_TIMESTAMP*)&gm_GameTime).minute,
 			    (unsigned char) (*(GAME_TIMESTAMP*)&gm_GameTime).second);
 		}
-		return fcn_00500d20(&p->st, &(*(GAME_TIMESTAMP*)&gm_GameTime)) >= limit;
+		return gm_GetElapsedMinutes(&p->st, &(*(GAME_TIMESTAMP*)&gm_GameTime)) >= limit;
 	}
 	p->st.unit_0 = 0;
 	sim_SetSyncParams(&p->st, 0, 0, 0);

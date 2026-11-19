@@ -3,7 +3,7 @@
 void __cdecl fcn_004557c0(char* obj, char* a, int b, char* m);
 float* __stdcall fcn_005eb970(float* out, const float* a, const float* b);
 
-void __cdecl fcn_00438100(char* obj, char* cam, char force)
+void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, char force)
 {
 	float m[16];
 	int n;

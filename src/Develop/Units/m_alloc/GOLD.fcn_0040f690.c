@@ -10,7 +10,7 @@ typedef struct {
 } S4105a0;
 
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
-void __cdecl fcn_00425bf0(void*, int, char*);
+void __cdecl evt_LogScriptError(void*, int, char*);
 
 int __cdecl fcn_0040f690(S4105a0** object, char* flag)
 {
@@ -18,7 +18,7 @@ int __cdecl fcn_0040f690(S4105a0** object, char* flag)
 
 	p = *object;
 	if (m_is_tracked(p) == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), g_676bfc);
+		evt_LogScriptError(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), g_676bfc);
 		return 0;
 	}
 	p->b5 = *flag;

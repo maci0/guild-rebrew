@@ -17,7 +17,7 @@ typedef struct {
 	int f40;
 } fcn_00475f80_obj;
 
-int __cdecl fcn_00476060(fcn_00475f80_obj*);
+int __cdecl d2_UnlockSurface(fcn_00475f80_obj*);
 void __cdecl m_FreeTracked(void*);
 
 
@@ -27,7 +27,7 @@ int __cdecl fcn_00475f80(fcn_00475f80_obj* o)
 	if (o == 0)
 		return 0;
 	if (o->f3c != 0)
-		fcn_00476060(o);
+		d2_UnlockSurface(o);
 	if (o->f40 == 0) {
 		if (o->f24 != 0)
 			o->f24->vtbl->release(o->f24);

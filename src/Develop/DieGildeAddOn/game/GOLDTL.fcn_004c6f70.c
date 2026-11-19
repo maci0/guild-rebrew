@@ -1,4 +1,4 @@
-int __cdecl fcn_004c4dc0(char*, int);
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
 int __cdecl gm_ResolveEntityById(int*, char**, int*, int);
 int __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
@@ -19,7 +19,7 @@ int __cdecl fcn_004c6f70(char* request)
 	char* record;
 
 	if (*(int*) (request + 0x14) != -1) {
-		id = fcn_004c4dc0(request, *(int*) (request + 0x14));
+		id = cm_ResolveSpecialEntityId(request, *(int*) (request + 0x14));
 		*(int*) (request + 0x14) = id;
 		if (gm_ResolveEntityById(&v13, &record, &v12, id) == 0) {
 			return 1;
@@ -40,7 +40,7 @@ int __cdecl fcn_004c6f70(char* request)
 		}
 	}
 	if (*(int*) (request + 0x10) != -1) {
-		id = fcn_004c4dc0(request, *(int*) (request + 0x10));
+		id = cm_ResolveSpecialEntityId(request, *(int*) (request + 0x10));
 		*(int*) (request + 0x10) = id;
 		if (gm_ResolveEntityById(&v14, &record, &v12, id) == 0) {
 			return 1;

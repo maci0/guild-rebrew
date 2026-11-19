@@ -1,9 +1,9 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_77253c;
 
-void __cdecl fcn_00472880(int font);
+void __cdecl d2_SelectFont(int font);
 void __cdecl fcn_0047c560(int a, int b, int c);
-void __cdecl fcn_0047c9c0(int x, int y, int w, int h, int color, float alpha);
+void __cdecl d2_DrawTexturedQuad(int x, int y, int w, int h, int color, float alpha);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
 
 /* ADDRESS: GOLDTL 0x00469fd0 */
@@ -39,10 +39,10 @@ void __cdecl fcn_00469fd0(char* e)
 		} else {
 			y -= 0x10;
 		}
-		fcn_00472880(*(int*) (e + 0x1cc) != 0 ? *(int*) (e + 0x1cc) : d2_DefaultFont + 1);
+		d2_SelectFont(*(int*) (e + 0x1cc) != 0 ? *(int*) (e + 0x1cc) : d2_DefaultFont + 1);
 		if (*(int*) (e + 0x1d0) & 0x20) {
 			fcn_0047c560(0, 0, 0);
-			fcn_0047c9c0(*(int*) (e + 0x10), *(int*) (e + 0x14), *(int*) (e + 0x1d4), *(int*) (e + 0x1d8), *(int*) (g_77253c + 0x50), 0.5f);
+			d2_DrawTexturedQuad(*(int*) (e + 0x10), *(int*) (e + 0x14), *(int*) (e + 0x1d4), *(int*) (e + 0x1d8), *(int*) (g_77253c + 0x50), 0.5f);
 		}
 		if (*(int*) (e + 0x1d0) & 4) {
 			fcn_0046bd20(*(int*) (e + 0x10) - 0x30, *(int*) (e + 0x14) + *(int*) (e + 0x1c), *(int*) (e + 0x1d4) + 0x60, *(int*) (e + 0x1c), g_77250c, name, fl);

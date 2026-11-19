@@ -45,7 +45,7 @@ void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_00422460(int, char *);
 void __cdecl fcn_004193f0(int, int, int, int);
 void *__cdecl fcn_00445600(void *, int, int, char *);
-void __cdecl fcn_00455350(char *, char *, float *);
+void __cdecl d3_TransformPoint(char *, char *, float *);
 void __cdecl fcn_004c5530(void *);
 void __cdecl fcn_00418000(int, float *, int, float, float, float, float, float, float, float *, int, int, int);
 void __cdecl fcn_004185a0(int, float *, int, float, float, float, float, float, float, float, float, int);
@@ -320,7 +320,7 @@ void __cdecl fcn_00561380(void *a0)
 				n = gm_RandomMod(3) & 0xffff;
 				model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, &names[n][0]);
 				if (model != 0)
-					fcn_00455350((char *)model, (char *)model + 0x4c, pos);
+					d3_TransformPoint((char *)model, (char *)model + 0x4c, pos);
 				else
 					model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, "dummy_TUER");
 			} else {
@@ -340,7 +340,7 @@ void __cdecl fcn_00561380(void *a0)
 			}
 			if (model == 0 || v10 != 0)
 				goto label_562049;
-			fcn_00455350((char *)model, (char *)model + 0x4c, pos);
+			d3_TransformPoint((char *)model, (char *)model + 0x4c, pos);
 			pos[0] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[0] - 32.0f;
 			pos[1] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[1];
 			pos[2] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[2] - 32.0f;

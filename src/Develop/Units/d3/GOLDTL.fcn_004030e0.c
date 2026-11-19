@@ -3,8 +3,8 @@ extern int g_67a370;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-void __cdecl fcn_00404560(char*);
-int __cdecl fcn_00413190(int);
+void __cdecl ch_ReleaseMorphAnimation(char*);
+int __cdecl d3_GetContextIndex(int);
 void __cdecl fcn_004432d0(int, int);
 
 void __cdecl fcn_00403df0(char*);
@@ -14,7 +14,7 @@ void __cdecl m_FreeTracked(char*);
 /* Removes an object from the live-object table and releases its scene
  * nodes. */
 /* ADDRESS: GOLDTL 0x004030e0 */
-int __cdecl fcn_004030e0(char* obj)
+int __cdecl ch_DestroyCharacter(char* obj)
 {
 	int i = 0;
 	int saved;
@@ -29,10 +29,10 @@ int __cdecl fcn_004030e0(char* obj)
 			ch_ClearActionQueue(obj);
 			if (*(int*) (obj + 0x34) != 0) {
 				saved = -1;
-				fcn_00404560(obj);
+				ch_ReleaseMorphAnimation(obj);
 				if (g_67a370 != *(int*) (obj + 0x88)) {
 					saved = d3_CurrentContextIndex;
-					fcn_004432d0(fcn_00413190(*(int*) (obj + 0x88)), 1);
+					fcn_004432d0(d3_GetContextIndex(*(int*) (obj + 0x88)), 1);
 				}
 				if (*(void (__cdecl**)(char*)) (obj + 0x228) != 0) {
 					(*(void (__cdecl**)(char*)) (obj + 0x228))(obj);

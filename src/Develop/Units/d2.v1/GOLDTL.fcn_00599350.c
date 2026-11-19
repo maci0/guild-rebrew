@@ -50,7 +50,7 @@ extern char g_6b5c60[];
 int __cdecl fcn_0057ec20(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
@@ -61,15 +61,15 @@ unsigned int __cdecl fcn_00504f30(int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 int __cdecl fcn_0050d200(unsigned char*, int);
 void __cdecl fcn_0050bc10(int, unsigned char, char*);
-int __cdecl fcn_00472900(int, int);
+int __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_0046f940(int, const char*);
-int __cdecl fcn_0046f2c0(int, int);
+int __cdecl d2_ClearWindowChildren(int, int);
 char* __cdecl fcn_00507ab0(int);
 int __cdecl fcn_00526070(int, int, int, int);
 int __cdecl fcn_00526010(void*, int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl lc_GebaeudeAusrichten(int, char*);
-void __cdecl fcn_00455350(char*, float*, float*);
+void __cdecl d3_TransformPoint(char*, float*, float*);
 void __cdecl fcn_00598740(float*, int);
 char* __cdecl strncpy(char*, const char*, unsigned int);
 char* __cdecl strcpy(char*, const char*);
@@ -111,7 +111,7 @@ void __cdecl fcn_00599350(void)
 	}
 	fcn_0057e880(0xe, 0, 0, 0);
 	hwnd = fcn_00470820(0, 0, (char*) 0x6aa298);
-	fcn_00471b60(hwnd);
+	d2_CenterDialogWindows(hwnd);
 	d2_SetForm(hwnd, 0);
 	i = d2_CurrentWindowId * 0x3cc;
 	*(int*) (i + 0x10162e8) = 0x18;
@@ -169,7 +169,7 @@ void __cdecl fcn_00599350(void)
 			char* rec;
 
 			d2_SetForm(hwnd, 3);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			mode = 0;
 			if (g_6aa0a8 == 3) {
 				g_7746f8 = 1;
@@ -195,7 +195,7 @@ void __cdecl fcn_00599350(void)
 							txt = fcn_0050d200((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), idx);
 							fcn_0050bc10(txt, g_773d75, buf);
 							txt = d2_ShowTxt((count % 3) * 0x46 + 2, (count / 3) * 0x5a + 0x3f, g_6b5c60, d2_CurrentWindowId);
-							fcn_00472900(txt, 0x54);
+							d2_SetElementFont(txt, 0x54);
 							fcn_0046f940(txt, buf);
 							*(int*) (g_1015ea0 + txt * 0x2f4 + 0x18) = 0x8c;
 							*(int*) (g_1015ea0 + txt * 0x2f4 + 0x6c) = 1;
@@ -254,7 +254,7 @@ void __cdecl fcn_00599350(void)
 				}
 				msg.f5c = i;
 				msg.f60 = fcn_0050d200((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), i);
-				fcn_00455350(obj, (float*) (obj + 0x4c), msg.pos);
+				d3_TransformPoint(obj, (float*) (obj + 0x4c), msg.pos);
 				fcn_00598740(msg.rot, (int) obj);
 				strncpy(msg.name, path, 0x3f);
 				fcn_004c5530((char*) &msg);

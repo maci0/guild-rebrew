@@ -11,7 +11,7 @@ typedef struct {
 
 extern char* evt_CurrentScript;
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl SetEmitterTriggerOnce(char** a, unsigned char* v)
 {
@@ -19,7 +19,7 @@ int __cdecl SetEmitterTriggerOnce(char** a, unsigned char* v)
 
 	e = *a;
 	if (!m_is_tracked(e)) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 0;
 	}
 	((Bits*) (e + 0xd4))->g0 = *v;

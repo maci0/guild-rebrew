@@ -5,7 +5,7 @@ typedef struct {
 	int d;
 } Unk438c80;
 
-void __cdecl fcn_00438c40(int, void*);
+void __cdecl d3_SetObjectPosition(int, void*);
 
 /* ADDRESS: GOLDTL 0x00438c80 */
 void __cdecl fcn_00438c80(int a, int b, int c, int d)
@@ -15,5 +15,5 @@ void __cdecl fcn_00438c80(int a, int b, int c, int d)
 	t.a = b;
 	t.b = c;
 	t.c = d;
-	fcn_00438c40(a, &t);
+	d3_SetObjectPosition(a, &t);
 }

@@ -6,7 +6,7 @@ void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl vfs_ReadData(char*, int, int, void*);
 int __cdecl fcn_0044d770(void*);
 int __cdecl fcn_004011f0(void*, void*);
-int __cdecl fcn_00401180(void*, void*);
+int __cdecl vfs_ReadByte(void*, void*);
 void __cdecl fcn_004011a0(void*, char*);
 void __cdecl fcn_00401280(void*, void*);
 void* __cdecl m_alloc(unsigned int, const char*);
@@ -93,11 +93,11 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 				v3 = fcn_0044d770(v2);
 			}
 			if (v3 == 0x33) {
-				fcn_00401180(v2, &v13);
+				vfs_ReadByte(v2, &v13);
 				v3 = fcn_0044d770(v2);
 			}
 			if (v3 == 0x24) {
-				fcn_00401180(v2, &v14);
+				vfs_ReadByte(v2, &v14);
 				v3 = fcn_0044d770(v2);
 			}
 			if (v3 == 0x37) {

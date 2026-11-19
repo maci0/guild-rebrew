@@ -20,7 +20,7 @@ extern char s_67d420[];
 void __cdecl fcn_0046f650(int slot, D2_WIN* parent);
 
 /* ADDRESS: GOLDTL 0x00465eb0 */
-int __cdecl fcn_00465eb0(int id, int win)
+int __cdecl d2_AddWindowChild(int id, int win)
 {
 	D2_WIN* w;
 	int bottom;

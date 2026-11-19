@@ -2,7 +2,7 @@
 
 void __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(char*, ...);
-void __cdecl fcn_0046f2c0(int, int);
+void __cdecl d2_ClearWindowChildren(int, int);
 void __cdecl fcn_0046e830(int x, int y, int win, int target, int id);
 
 extern int d2_CurrentWindowId;
@@ -17,7 +17,7 @@ int __cdecl fcn_005cc240(int dlg, int sel, int alt)
 	d2_SetForm(dlg, sel);
 	prev = ((int(*)[243])g_1016198)[d2_CurrentWindowId][0];
 	io_AppendText(s_6811b0);
-	fcn_0046f2c0(d2_CurrentWindowId, 1);
+	d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 	if (alt != -1) {
 		((int(*)[243])g_1016198)[d2_CurrentWindowId][0] = 0;
 		old = d2_CurrentWindowId;

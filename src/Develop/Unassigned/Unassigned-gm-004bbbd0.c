@@ -23,7 +23,7 @@ int __cdecl fcn_004bbce0(int);
 void __cdecl fcn_004c5530(void*);
 
 /* ADDRESS: GOLDTL 0x004bbbd0 */
-int __cdecl fcn_004bbbd0(fcn_004bbbd0_msg* msg)
+int __cdecl gm_DispatchEntityMessage(fcn_004bbbd0_msg* msg)
 {
 	char* entity;
 

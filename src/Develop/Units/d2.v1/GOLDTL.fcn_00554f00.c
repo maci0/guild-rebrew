@@ -30,7 +30,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl fcn_00545780(char*);
 void __cdecl fcn_00546190(char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4570(int, int, int, char*);
@@ -112,7 +112,7 @@ state_zero:
 		fcn_00546190(a0);
 		return;
 	}
-	fcn_00471b60(*(int*) (*(char**) (a0 + 0x74) + 8));
+	d2_CenterDialogWindows(*(int*) (*(char**) (a0 + 0x74) + 8));
 	d2_SetForm(*(int*) (*(char**) (a0 + 0x74) + 8), 1);
 	if (p == rec) {
 	if (*(int*) (a0 + 0xb4) == 0) {

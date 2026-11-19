@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00499db0 */
-int __cdecl fcn_00499db0(void)
+int __cdecl cm_RunApsSparen(void)
 {
     return 26;
 }

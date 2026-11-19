@@ -15,9 +15,9 @@ int __cdecl gm_CheckEntityType(char* e);
 int __cdecl fcn_005155e0(char* e);
 int __cdecl fcn_00515540(char* q);
 void __cdecl fcn_004432d0(int a, int b);
-char* __cdecl fcn_00407330(void);
+char* __cdecl ch_SelectRandomDummy(void);
 void __cdecl fcn_004fe2e0(char* o, int h, int x, int y, int view, char* name);
-void __cdecl fcn_00404a00(char* v, int n, ...);
+void __cdecl ch_PreloadCharacterMotions(char* v, int n, ...);
 void __cdecl ch_SetVisible(char* v, int a);
 
 char* __cdecl fcn_004fe470(int id, int type, int sub, int x, int y)
@@ -57,7 +57,7 @@ char* __cdecl fcn_004fe470(int id, int type, int sub, int x, int y)
 	}
 	fcn_004432d0(h, 1);
 	if (q != 0) {
-		m = fcn_00407330();
+		m = ch_SelectRandomDummy();
 		if (m != 0) {
 			fcn_004fe2e0(o, h, x, y, 0, m);
 		} else {
@@ -67,7 +67,7 @@ char* __cdecl fcn_004fe470(int id, int type, int sub, int x, int y)
 		fcn_004fe2e0(o, h, 0, 0, *(int*) (b + 0x61), g_68149c);
 	}
 	if (*(char**) (o + 0x184) != 0) {
-		fcn_00404a00(*(char**) (o + 0x184), 1, g_6753fc);
+		ch_PreloadCharacterMotions(*(char**) (o + 0x184), 1, g_6753fc);
 	}
 	fcn_004432d0(old, 1);
 	if (*(char**) (o + 0x184) == 0) {

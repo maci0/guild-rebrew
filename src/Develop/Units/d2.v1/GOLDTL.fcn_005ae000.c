@@ -7,7 +7,7 @@ int __cdecl fcn_00525fb0(char* obj);
 void __cdecl fcn_0052a0c0(char* obj, int a);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00529890(char* obj);
@@ -39,7 +39,7 @@ int __cdecl fcn_005ae000(char* obj)
 	fcn_0052a0c0(obj, 0);
 	dlg = fcn_00470820(0, 0, "locations\\diebesgilde\\taschendiebstahl");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x19f0);
 	g_100f1dc = -1;

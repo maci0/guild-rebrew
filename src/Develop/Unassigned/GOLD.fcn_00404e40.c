@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-int __cdecl fcn_00404e40(unsigned short si)
+int __cdecl ch_RandomIndex(unsigned short si)
 {
 	int r;
 	r = 0;

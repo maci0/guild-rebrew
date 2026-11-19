@@ -4,7 +4,7 @@ extern volatile int g_6b7fac;
 
 extern void __cdecl fcn_004c09b0(void);
 extern void *__cdecl fcn_00470820(int a, int b, const char *name);
-extern void __cdecl fcn_00471b60(void *obj);
+extern void __cdecl d2_CenterDialogWindows(void *obj);
 extern void __cdecl d2_SetForm(void *obj, int a);
 extern int __cdecl io_AppendText(int id);
 extern int __cdecl fcn_00472250(void *obj, int a, int b);
@@ -27,7 +27,7 @@ void __cdecl fcn_004b5630(int a0, unsigned a1)
 
 	fcn_004c09b0();
 	obj = fcn_00470820(0, 0, (const char *) 0x681130);
-	fcn_00471b60(obj);
+	d2_CenterDialogWindows(obj);
 	d2_SetForm(obj, 1);
 	io_AppendText(0x1b9b);
 	d2_SetForm(obj, 2);

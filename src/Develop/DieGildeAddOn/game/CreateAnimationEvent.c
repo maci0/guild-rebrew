@@ -4,7 +4,7 @@
 /* Name inferred from the task allocation and animation callback. */
 
 void* __cdecl ch_NewAction(char*);
-void __cdecl fcn_00406410(char*);
+void __cdecl ch_RunAnimationEvent(char*);
 
 char* __cdecl CreateAnimationEvent(char* owner, char* name)
 {
@@ -21,7 +21,7 @@ char* __cdecl CreateAnimationEvent(char* owner, char* name)
 		*(char**) (obj + 0x14) = owner;
 		d = (char*) obj + 0xf0;
 		*(int*) (obj + 0xc) = 0;
-		*(void (__cdecl**)(char*)) obj = fcn_00406410;
+		*(void (__cdecl**)(char*)) obj = ch_RunAnimationEvent;
 		obj[9] = 0x2f;
 		*(int*) (obj + 0x28) = 0;
 		obj[0x10] = 0;

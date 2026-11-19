@@ -8,7 +8,7 @@ void __cdecl fcn_00410430(int);
 
 /* Writes the Direct3D display options to the registry. */
 /* ADDRESS: GOLDTL 0x004375e0 */
-void __cdecl fcn_004375e0(unsigned char flags, int fill, const char* key)
+void __cdecl d3_SaveDisplayOptions(unsigned char flags, int fill, const char* key)
 {
 	int h;
 	char mode[0x100];

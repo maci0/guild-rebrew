@@ -31,7 +31,7 @@ void __cdecl fcn_004c4570(int, int, int, unsigned int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -90,7 +90,7 @@ int __cdecl fcn_005d8af0(House* e)
 		money = (int) (gm_WalkEntityChain(e->id) * g_662964);
 		dlg = fcn_00470820(0, 0, s_6acdcc);
 		d2_SetOverlayAnimation(0, 0);
-		fcn_00471b60(dlg);
+		d2_CenterDialogWindows(dlg);
 		d2_SetForm(dlg, 1);
 		id = io_AppendText(0x1de1, 6, money);
 		ok = fcn_00472250(dlg, 1, id);

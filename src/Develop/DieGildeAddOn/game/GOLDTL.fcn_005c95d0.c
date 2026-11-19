@@ -19,7 +19,7 @@ extern char s_6a4310[];
 extern char s_6a4304[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 /* Preserve the original declaration order for native register allocation. */
@@ -38,7 +38,7 @@ void __cdecl fcn_005c95d0(unsigned char* a)
 
 	t = &((Shop*)lpGebaeudePROT)[a[0]];
 	dlg = fcn_00470820(0x3c, 0, s_6a4320);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	*(int*) (g_77255c + 0x28c) = 0x56;
 	gm_GetBuildingTypeCategory(a[0]);

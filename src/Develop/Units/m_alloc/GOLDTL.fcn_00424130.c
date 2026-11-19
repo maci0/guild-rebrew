@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char* __cdecl fcn_00423ac0(char* name);
+char* __cdecl sbs_FindSet(char* name);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x00424130 */
@@ -16,7 +16,7 @@ int __cdecl fcn_00424130(char* set, char* name)
 
 	r = 0;
 	prev = 0;
-	scope = fcn_00423ac0(set);
+	scope = sbs_FindSet(set);
 	if (scope != 0) {
 		if (name != 0) {
 			for (e = *(char**) (scope + 0x38); e != 0; e = *(char**) (e + 0x104)) {

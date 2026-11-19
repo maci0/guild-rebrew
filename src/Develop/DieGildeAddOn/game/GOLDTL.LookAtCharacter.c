@@ -5,8 +5,8 @@
 extern char* evt_CurrentScript;
 float __cdecl fcn_00444700(int h, char* pos);
 void __cdecl fcn_00451720(float* out, char* base, float* a, float* b);
-char* __cdecl fcn_0040c120(char* e, int kind, ...);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+char* __cdecl ch_CreateAction(char* e, int kind, ...);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl LookAtCharacter(char** a, char** b)
 {
@@ -17,7 +17,7 @@ int __cdecl LookAtCharacter(char** a, char** b)
 	char* e;
 
 	if (*a == 0 || *b == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 1;
 	}
 	d = fcn_00444700(*(int*) (*a + 0x34), *(char**) (*b + 0x34) + 0x4c);
@@ -29,6 +29,6 @@ int __cdecl LookAtCharacter(char** a, char** b)
 	v[0] += *(float*) (*(char**) (e + 0x34) + 0x84);
 	v[1] += *(float*) (*(char**) (e + 0x34) + 0x88);
 	v[2] += *(float*) (*(char**) (e + 0x34) + 0x8c);
-	fcn_0040c120(e, 7, (int) (d * 57.29578f), 0);
+	ch_CreateAction(e, 7, (int) (d * 57.29578f), 0);
 	return 0;
 }

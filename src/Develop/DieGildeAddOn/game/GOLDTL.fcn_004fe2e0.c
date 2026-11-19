@@ -4,7 +4,7 @@
 
 void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_00445600(int, int, int, int*);
-void __cdecl fcn_00455350(char*, char*, int*);
+void __cdecl d3_TransformPoint(char*, char*, int*);
 int __cdecl fcn_004fda30(int);
 char* __cdecl ch_CreateAtPosition(char*, float*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -43,7 +43,7 @@ int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 	if (a5 != 0) {
 		v5 = fcn_00445600(a4, 0x100, 0, a5);
 		if (v5 != 0) {
-			fcn_00455350((char*) v5, (char*) v5 + 0x4c, (int*) opt);
+			d3_TransformPoint((char*) v5, (char*) v5 + 0x4c, (int*) opt);
 			goto have;
 		}
 	}

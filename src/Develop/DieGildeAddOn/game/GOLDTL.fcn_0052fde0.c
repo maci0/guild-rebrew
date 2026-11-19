@@ -35,8 +35,8 @@ extern char s_6a3004[];
 extern char s_6a300c[];
 extern char s_68b3f8[];
 
-char* __cdecl fcn_00443bf0(float a, float b, int flags, int mask);
-void __cdecl fcn_0047a2b0(int handle);
+char* __cdecl d3_FindSceneObjectAtScreenPoint(float a, float b, int flags, int mask);
+void __cdecl d2_ClearAnimationSlot(int handle);
 int __cdecl fcn_00506380(int a0, char* a1, unsigned short* a2, int a3);
 char* __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
@@ -68,13 +68,14 @@ void __cdecl fcn_0052fde0(void)
 	}
 	g_6a2bf0 = g_14ce8c0;
 	g_6a2bf4 = g_14ce8c2;
-	if (g_6a2bf0 <= g_6a3764 || g_6a376c <= g_6a2bf0 || g_6a2bf4 <= g_6a3768 || (g_6a3770 <= g_6a2bf4 || d2_HoveredWindow != -1) || g_67d8d4 != -1 || ((g_7746a4 = fcn_00443bf0((float) g_6a2bf0,
-	    (float) g_6a2bf4, 0x20, 1)) == 0 && (g_7746a4 = fcn_00443bf0((float) g_14ce8c0, (float) g_14ce8c2, 0x40, 1)) == 0)) {
+	if (g_6a2bf0 <= g_6a3764 || g_6a376c <= g_6a2bf0 || g_6a2bf4 <= g_6a3768 || (g_6a3770 <= g_6a2bf4 || d2_HoveredWindow != -1) || g_67d8d4 != -1
+	    || ((g_7746a4 = d3_FindSceneObjectAtScreenPoint((float) g_6a2bf0,
+	    (float) g_6a2bf4, 0x20, 1)) == 0 && (g_7746a4 = d3_FindSceneObjectAtScreenPoint((float) g_14ce8c0, (float) g_14ce8c2, 0x40, 1)) == 0)) {
 		if (d2_CurrentElementId == -1 || !(*(unsigned char*) (g_1015ea0 + d2_CurrentElementId * 0x2f4 + 0x1d0) & 0x40)) {
 			g_100f8c0[0] = 0;
 		}
 		if (g_67d8cc != -1) {
-			fcn_0047a2b0(g_67d8cc);
+			d2_ClearAnimationSlot(g_67d8cc);
 			g_67d8cc = -1;
 			g_774798 = -1;
 		}
@@ -274,7 +275,7 @@ done:
 		g_773dfc = cur;
 		return;
 	}
-	fcn_0047a2b0(g_67d8cc);
+	d2_ClearAnimationSlot(g_67d8cc);
 	g_67d8cc = -1;
 	g_773dfc = g_7746a4;
 	g_774798 = 0;

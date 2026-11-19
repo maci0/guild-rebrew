@@ -2,7 +2,7 @@ extern char* d3_ActiveCamera;
 extern void* __cdecl m_alloc(unsigned int, const char*);
 extern void __cdecl m_FreeTracked(void*);
 extern int __cdecl fcn_00413e00(float*, float*, float*, float*, float*);
-extern int __cdecl fcn_00438100(void*, char*, char);
+extern int __cdecl d3_UpdateObjectCameraTransform(void*, char*, char);
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
@@ -67,7 +67,7 @@ typedef struct A {
 } A;
 
 /* ADDRESS: GOLDTL 0x00413fb0 */
-int __cdecl fcn_00413fb0(A* bounds, B* b)
+int __cdecl d3_AccumulateMeshHeightRange(A* bounds, B* b)
 {
     int r;
     int i;
@@ -84,7 +84,7 @@ int __cdecl fcn_00413fb0(A* bounds, B* b)
             return r;
         }
         if ((b->flags & 0x20) == 0) {
-            fcn_00438100(b, d3_ActiveCamera, 0);
+            d3_UpdateObjectCameraTransform(b, d3_ActiveCamera, 0);
         }
         v = (V*) b->obj->itf->getv(b, b->obj, b->mat->m);
         bmin.x = v->x;
@@ -139,7 +139,7 @@ int __cdecl fcn_00413fb0(A* bounds, B* b)
         r = 0;
     }
     for (c = b->child; c != 0; c = c->next) {
-        r &= fcn_00413fb0(bounds, c);
+        r &= d3_AccumulateMeshHeightRange(bounds, c);
     }
     return r;
 }

@@ -4,7 +4,7 @@ void __cdecl fcn_00424040(int);
 void __cdecl fcn_004245b0(int);
 void __cdecl m_FreeTracked(int);
 
-int __cdecl fcn_00425810(void)
+int __cdecl sbs_DestroySB(void)
 {
 	int r = 0;
 

@@ -3,7 +3,7 @@ extern char g_1053000[][0x50];
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
 /* ADDRESS: GOLDTL 0x0042dc90 */
-int __cdecl fcn_0042dc90(const char* name)
+int __cdecl txt_FindEntryIndex(const char* name)
 {
 	int i;
 

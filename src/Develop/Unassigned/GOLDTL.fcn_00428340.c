@@ -3,9 +3,9 @@ extern void* g_6b7ea0;
 extern int* g_14cb8f0;
 extern int g_6b7eb0;
 
-int __cdecl fcn_00427f00(int a0);
-int __cdecl fcn_004262b0(int a0, char* a1);
-void __cdecl fcn_00425bf0(int a0, int a1, char* a2);
+int __cdecl evt_ParseScript(int a0);
+int __cdecl evt_FindDefinition(int a0, char* a1);
+void __cdecl evt_LogScriptError(int a0, int a1, char* a2);
 void __cdecl fcn_00428720(int a0);
 void __cdecl evt_EnterFunction(int a0, int a1);
 int __cdecl sprintf(char* a0, const char* a1, ...);
@@ -22,16 +22,16 @@ int __cdecl fcn_00428340(char* a0, int a1, ...)
 	if (a0 == 0) {
 		return 0;
 	}
-	if (fcn_00427f00((int) a0) == 0) {
+	if (evt_ParseScript((int) a0) == 0) {
 		return 0;
 	}
-	obj = fcn_004262b0((int) a0, (char*) 0x679608);
+	obj = evt_FindDefinition((int) a0, (char*) 0x679608);
 	if (obj == 0) {
-		fcn_00425bf0((int) a0, 0, (char*) 0x6795d0);
+		evt_LogScriptError((int) a0, 0, (char*) 0x6795d0);
 		return 0;
 	}
 	if (a1 != *(char*) (obj + 0x24)) {
-		fcn_00425bf0((int) a0, 0, (char*) 0x679610);
+		evt_LogScriptError((int) a0, 0, (char*) 0x679610);
 		fcn_00428720((int) a0);
 		return 0;
 	}

@@ -17,7 +17,7 @@ typedef long(__stdcall* Unlock435410)(Mesh435410* m);
 extern void* g_6b5de0;
 long __stdcall D3DXCreateMeshFVF(int nfaces, int nverts, int opts, int fvf, void* dev, Mesh435410** out);
 
-Mesh435410* __cdecl fcn_00435410(char* e)
+Mesh435410* __cdecl d3_CreateObjectMesh(char* e)
 {
 	Mesh435410* m;
 	void* vb;

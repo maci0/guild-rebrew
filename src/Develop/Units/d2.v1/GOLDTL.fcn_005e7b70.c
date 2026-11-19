@@ -63,7 +63,7 @@ extern int g_664454;
 
 char* __cdecl io_AppendText(int, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_0046f740(int x, int y, int gfx, int win);
 
 /* ADDRESS: GOLDTL 0x005e7b70 */
@@ -91,7 +91,7 @@ void __cdecl fcn_005e7b70(int row, int count, int* list)
 	c = d2_ShowTxt(0, 5, buf, g_6ad584[row].win);
 	((Ctl_5e7b70*)g_1015ea0)[c].w = w;
 	((Ctl_5e7b70*)g_1015ea0)[c].x6c = 1;
-	fcn_00472900(c, 0x54);
+	d2_SetElementFont(c, 0x54);
 	if (row != 0) {
 		icon = g_7765a0[row].icon;
 		y = h / 2;

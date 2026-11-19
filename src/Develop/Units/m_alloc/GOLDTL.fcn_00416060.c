@@ -61,7 +61,7 @@ void __cdecl m_FreeTracked(void* p);
 int __cdecl fcn_0045c5b0(char* name, LoadFlags flags, int a3, int a4);
 void __cdecl fcn_0045ce90(int h);
 
-Snow* __cdecl fcn_00416060(int count)
+Snow* __cdecl d3_CreateSnowEffect(int count)
 {
 	Snow* s;
 	Flake* f;

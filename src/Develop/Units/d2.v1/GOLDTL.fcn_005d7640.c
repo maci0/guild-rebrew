@@ -31,7 +31,7 @@ void __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -102,7 +102,7 @@ int __cdecl fcn_005d7640(ENTITY_RECORD* ent, Cmd* cmd)
 	}
 	h = fcn_00470820(0, 0, s_6acd38);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	s = io_AppendText(0x1dc9, 6, pb->entity_index, pa->entity_index);
 	yes = fcn_00472250(h, 1, s);

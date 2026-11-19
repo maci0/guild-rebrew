@@ -17,7 +17,7 @@ int __cdecl fcn_00476970();
 int __cdecl fcn_00495890();
 int __cdecl fcn_004ad8c0();
 int __cdecl fcn_004b3aa0();
-int __cdecl fcn_004bceb0();
+int __cdecl plt_UpdatePlantStages();
 int __cdecl fcn_004c30a0();
 int __cdecl fcn_004c54c0();
 int __cdecl fcn_004e4f10();
@@ -149,7 +149,7 @@ void __cdecl fcn_00543080(void)
 			if (v5 != -1) {
 				fcn_004432d0((int) *(char*) (((ResetProto*)lpGebaeudePROT)[*v3].kind + (unsigned long)&g_7f3b00), 1);
 				fcn_0043aa30(3);
-				fcn_004bceb0(*(unsigned int*) &v3[0x71]);
+				plt_UpdatePlantStages(*(unsigned int*) &v3[0x71]);
 				fcn_0043a9c0(3);
 				fcn_004432d0(v2, 1);
 			}

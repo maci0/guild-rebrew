@@ -4,7 +4,7 @@ typedef void (__stdcall* fcn_0046b4f0_m)(void*, int, int, int, int, float, int);
 
 void __cdecl fcn_00469e70(void);
 
-void __cdecl fcn_0046b4f0(void)
+void __cdecl d2_ClearScreen(void)
 {
 	void* obj;
 

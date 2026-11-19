@@ -8,7 +8,7 @@ extern float g_1052c00[];
 
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* ptr);
-extern void __cdecl fcn_00438100(int scene, char* data, int flag);
+extern void __cdecl d3_UpdateObjectCameraTransform(int scene, char* data, int flag);
 extern void __cdecl fcn_00435910(int device, unsigned int* flags, void* bbox, int mode);
 extern void __stdcall fcn_005eb225(float* dst, unsigned int* src, void* ctx);
 extern void __stdcall fcn_005eb2e4(float* dst, unsigned int* src, char* a, float* b,
@@ -72,7 +72,7 @@ unsigned char __cdecl fcn_00444ff0(int a0, int* a1)
 	view[10] = 1.0f;
 	view[5] = 1.0f;
 	view[0] = 1.0f;
-	fcn_00438100(a0, d3_ActiveCamera, 0);
+	d3_UpdateObjectCameraTransform(a0, d3_ActiveCamera, 0);
 	total = *(int*) (model + 0x44);
 	verts = (float*) m_alloc(total * 0x18, "!d3:TransformedPoints");
 	if (*(char*) (*(int*) (a0 + 0x1cc) + 0x4a0) != 0

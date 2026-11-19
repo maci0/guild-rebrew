@@ -1,8 +1,8 @@
 #include <string.h>
 int __cdecl fcn_0064f170(void*, char*, int);
 void* __cdecl fcn_00422460(int, char*);
-int __cdecl fcn_00418c80(void*, void*, int, float);
-int __cdecl fcn_004192b0(int, int, int, int);
+int __cdecl d3snd_AttachSoundSource(void*, void*, int, float);
+int __cdecl d3snd_PlaySource(int, int, int, int);
 extern int g_774934;
 /* ADDRESS: GOLDTL 0x00515e10 */
 void __cdecl fcn_00515e10(char* p)
@@ -37,9 +37,9 @@ void __cdecl fcn_00515e10(char* p)
 		si = (int) fcn_00422460(0, buf);
 		if (si != 0) {
 			v = (int)(*(float*)(p + 0x68)) + 0x32;
-			r = fcn_00418c80((void*) si, p, 0x7f, (float) v);
+			r = d3snd_AttachSoundSource((void*) si, p, 0x7f, (float) v);
 			if (r != 0)
-				fcn_004192b0(r, 0, bn, br);
+				d3snd_PlaySource(r, 0, bn, br);
 		}
 	}
 

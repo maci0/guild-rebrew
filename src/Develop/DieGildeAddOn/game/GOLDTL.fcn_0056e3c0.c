@@ -13,7 +13,7 @@ void __cdecl fcn_00529160(int, int, unsigned short, int);
 void __cdecl io_FormatTextBuffer(int*, unsigned int, ...);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, char*, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-char* __cdecl fcn_0040c120(int, int, int);
+char* __cdecl ch_CreateAction(int, int, int);
 char* __cdecl fcn_004934c0(char*);
 void __cdecl fcn_005099e0(char*, char*);
 void __cdecl fcn_004c4510(int, int);
@@ -95,7 +95,7 @@ void __cdecl fcn_0056e3c0(char* a0)
 		obj = *(char**) (s + 0x184);
 		if (obj != 0) {
 			ch_CancelActionQueue(obj);
-			p = fcn_0040c120((int) *(char**) (s + 0x184), 0x36, 1);
+			p = ch_CreateAction((int) *(char**) (s + 0x184), 0x36, 1);
 			if (p != 0) {
 				memcpy(p + 0xf0, g_68cb58, 0x19);
 			}

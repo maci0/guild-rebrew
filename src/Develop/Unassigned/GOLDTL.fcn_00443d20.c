@@ -19,10 +19,10 @@ extern char g_6b85a0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67a370;
 
-void __cdecl fcn_004379a0(int, int, int, void*, void*);
+void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 char __cdecl fcn_00443b00(char*, char*);
 
-char* __cdecl fcn_00443d20(int cam, float a, float b, int flags)
+char* __cdecl d3_PickObject(int cam, float a, float b, int flags)
 {
 	float best;
 	Ctx ctx;
@@ -43,7 +43,7 @@ char* __cdecl fcn_00443d20(int cam, float a, float b, int flags)
 		ctx.x = d3_ViewportCenterX - a;
 		ctx.y = g_1052bc8 - b;
 	}
-	fcn_004379a0(g_67a370, 0, flags, fcn_00443b00, &ctx);
+	d3_VisitSceneObjects(g_67a370, 0, flags, fcn_00443b00, &ctx);
 	for (i = 0; i < 9; i++) {
 		if (ctx.hits[i].e != 0 && ctx.hits[i].d < best) {
 			r = ctx.hits[i].e;

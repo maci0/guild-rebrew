@@ -6,12 +6,12 @@ extern char* g_14a5adc[15];
 
 void __cdecl fcn_0057e880(int, char*, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 int __cdecl gm_GetOppositeStatIndex(int, int);
 void __cdecl fcn_0046f9b0(int, int);
 void __cdecl fcn_00472640(int, int);
@@ -19,7 +19,7 @@ int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_005463a0(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(void*, ...);
 int __cdecl fcn_00526120(int, int);
-void __cdecl fcn_00471a30(int, int);
+void __cdecl d2_SetGroupVisibility(int, int);
 int __cdecl fcn_00525f60(char*, int);
 int __cdecl fcn_00507400(int, int);
 void __cdecl fcn_004c6470(int, int);
@@ -57,7 +57,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
     v19 = 0;
     fcn_0057e880(9, 0, 0, 0);
     v4 = fcn_00470820(0, 0, (char*) 0x6ace10);
-    fcn_00471b60(v4);
+    d2_CenterDialogWindows(v4);
     d2_SetForm(v4, 0);
     v15 = (*(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0x40) / 5;
     v7 = (*(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f50) - 0x84) / 3;
@@ -75,7 +75,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
         v16 = v6 * 0x2f4;
         *(unsigned int*) (v16 + 0x5c + (int) g_1015ea0) = 1;
         *(unsigned int*) (v16 + 0x1d0 + (int) g_1015ea0) = 3;
-        fcn_00472900(v6, 0x56);
+        d2_SetElementFont(v6, 0x56);
         *(unsigned int*) (v16 + 0x6c + (int) g_1015ea0) = 1;
         *(unsigned int*) (v16 + 0x1dc + (int) g_1015ea0) = 0xffffffce;
         *(unsigned int*) (v16 + 0x1e0 + (int) g_1015ea0) = 0x44;
@@ -122,7 +122,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
                                  - 1);
                 fcn_00526120((int) v12, 4);
             } else {
-                fcn_00471a30(v4, 0);
+                d2_SetGroupVisibility(v4, 0);
                 for (v8 = 0; v8 <= 0xf; v8++) {
                     if (g_100f1dc == v8 + 0x5a2) {
                         break;
@@ -153,7 +153,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
                         }
                     }
                 }
-                fcn_00471a30(v4, 1);
+                d2_SetGroupVisibility(v4, 1);
             }
         }
     }

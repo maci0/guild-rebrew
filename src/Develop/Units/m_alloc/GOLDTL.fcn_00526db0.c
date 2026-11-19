@@ -54,17 +54,17 @@ void __cdecl fcn_0047a040(int, int, int, int);
 int __cdecl fcn_00475290(int, int, int, int, int);
 int __cdecl fcn_0046e940(int, int, int, int, int);
 void __cdecl fcn_00471c80(int, unsigned char);
-char* __cdecl fcn_00465ba0(char*, int);
+char* __cdecl d2_LoadObj(char*, int);
 Surface* __cdecl fcn_004770a0(SurfaceDesc*, int);
 int __cdecl fcn_00475fd0(Surface*);
 void __cdecl fcn_0047a710(int, int, char*, Surface*);
-void __cdecl fcn_00476060(Surface*);
+void __cdecl d2_UnlockSurface(Surface*);
 int __cdecl fcn_0047b640(int, int, int, int, Surface*, int);
 void __cdecl fcn_00475f80(Surface*);
 void __cdecl m_FreeTracked(char*);
 void __cdecl fcn_00476970(Surface*);
 int __cdecl fcn_00469c30(int, int, int);
-void __cdecl fcn_00472170(int, int);
+void __cdecl d2_SetSlotVisibility(int, int);
 
 void __cdecl fcn_00526db0(char* name)
 {
@@ -79,7 +79,7 @@ void __cdecl fcn_00526db0(char* name)
 	g_6a25a8 = fcn_00475290(g_1040494 - 0x50, 0x11, 0x30, 0x30, 0);
 	g_6a2598 = fcn_0046e940(4, 0xa, 0x288, 0x30, 0);
 	fcn_00471c80(g_6a2598, 1);
-	data = fcn_00465ba0(name, 0);
+	data = d2_LoadObj(name, 0);
 	n = sizeof(desc);
 	p = &desc;
 	/*
@@ -110,7 +110,7 @@ void __cdecl fcn_00526db0(char* name)
 	if (s != 0) {
 		if (fcn_00475fd0(s) != 0) {
 			fcn_0047a710(0, 0, data + *(int*) (data + 0x45), s);
-			fcn_00476060(s);
+			d2_UnlockSurface(s);
 		}
 		g_774674 = fcn_0047b640(s->width - 0x80, 0, 0x80, s->height - 0x80, s, 0);
 		g_774678 = fcn_0047b640(s->width - 0x100, s->height - 0x80, 0x100, 0x80, s, 0);
@@ -132,5 +132,5 @@ void __cdecl fcn_00526db0(char* name)
 	fcn_00476970((*(Surface**)&g_774684));
 	g_6a25fc = fcn_00469c30(0x286, 0x23c, 0x544);
 	((Control*)g_1015ea0)[g_6a25fc].visible = 1;
-	fcn_00472170(g_6a25fc, 0);
+	d2_SetSlotVisibility(g_6a25fc, 0);
 }

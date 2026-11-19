@@ -11,7 +11,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int, unsigned char);
 float __cdecl fcn_004fc460(char*);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_00495400(int, int, int, void*, void*);
+int __cdecl ai_SelectBestMethod(int, int, int, void*, void*);
 int __cdecl fcn_0050d170(int);
 int __cdecl fcn_004a4bb0(int, char*, int, void*, void*, int);
 
@@ -128,7 +128,7 @@ int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 			vals[1] = *(int*) (r + 2);
 			vals[2] = a0;
 			vals[4] = 1;
-			n = fcn_00495400(0xf, *a1, 0, ptrs, vals);
+			n = ai_SelectBestMethod(0xf, *a1, 0, ptrs, vals);
 			if (n != 0) {
 				memcpy(a3, ptrs, 0x18);
 				memcpy(a4, vals, 0x18);

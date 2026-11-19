@@ -57,7 +57,7 @@ void __cdecl fcn_004237f0(int* handle, int fade);
 void __cdecl fcn_00423850(int* handle, int value);
 int __cdecl fcn_00423890(int* handle, int value);
 void __cdecl fcn_00426170(char* handle, int on);
-void __cdecl fcn_004192b0(char* voice, int a2, int vol, int pan);
+void __cdecl d3snd_PlaySource(char* voice, int a2, int vol, int pan);
 void* __cdecl fcn_004193d0(char* voice);
 
 /* ADDRESS: GOLDTL 0x00419990 */
@@ -248,7 +248,7 @@ void __cdecl fcn_00419990(void)
 				fcn_00423850((int*) voice->handle, entries[0].pan);
 			}
 			if (fcn_004193d0((char*) voice) == 0) {
-				fcn_004192b0((char*) voice, 0, 0, 0);
+				d3snd_PlaySource((char*) voice, 0, 0, 0);
 			}
 		}
 		id = state == 0 ? g_6b5da8 : g_6b5d54;
@@ -265,7 +265,7 @@ void __cdecl fcn_00419990(void)
 				fcn_00423850((int*) voice->handle, entries[i].pan);
 			}
 			if (fcn_004193d0((char*) voice) == 0) {
-				fcn_004192b0((char*) voice, 0, 0, 0);
+				d3snd_PlaySource((char*) voice, 0, 0, 0);
 			}
 		}
 	}

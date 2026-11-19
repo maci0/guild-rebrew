@@ -4,8 +4,8 @@
 extern char* evt_CurrentScript;
 extern float g_662d40[3];
 
-void __cdecl fcn_00425bf0(char*, int, const char*);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl evt_LogScriptError(char*, int, const char*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
@@ -24,10 +24,10 @@ char* __cdecl CreateCharacterAtDummy(char** file, char** dummy, char** name)
 	float pos[4];
 
 	if (*dummy == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "CreateCharacterAtDummy(): invalid dummy");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "CreateCharacterAtDummy(): invalid dummy");
 		return 0;
 	}
-	fcn_00455350(*dummy, *dummy + 0x4c, pos);
+	d3_TransformPoint(*dummy, *dummy + 0x4c, pos);
 	ch = ch_CreateAtPosition(*file, pos);
 	if (ch != 0) {
 		strcpy(ch + 8, *name);
@@ -41,7 +41,7 @@ char* __cdecl CreateCharacterAtDummy(char** file, char** dummy, char** name)
 		fcn_00438b40(*(void**) (ch + 0x34), pos);
 		*(int*) (ch + 0x30) = *(int*) (evt_CurrentScript + 0x104);
 	} else {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "CreateCharacterAtDummy(): Could not load character");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "CreateCharacterAtDummy(): Could not load character");
 	}
 	return ch;
 }

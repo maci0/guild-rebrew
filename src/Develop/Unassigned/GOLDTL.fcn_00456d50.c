@@ -1,7 +1,7 @@
 void __cdecl fcn_00456b10(void* entry);
 
 /* ADDRESS: GOLDTL 0x00456d50 */
-char __cdecl fcn_00456d50(char* this, int id)
+char __cdecl d3_ClearMatchingAuxSlot(char* this, int id)
 {
 	int i;
 

@@ -8,7 +8,7 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 extern float g_664174;
 
-int* __cdecl fcn_004be320(int, int);
+int* __cdecl gm_GetChainNodeAtIndex(int, int);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_0050cce0(char*, Slots*, int);
 char* __cdecl fcn_0050d490(char*);
@@ -40,7 +40,7 @@ void __cdecl fcn_004c0240(char* a0, int a1)
 	if (*(int*) (a0 + 0x29) == 0) {
 		return;
 	}
-	rec = (char*) fcn_004be320(*(int*) (a0 + 0x29), *(int*) (a0 + 0x2d));
+	rec = (char*) gm_GetChainNodeAtIndex(*(int*) (a0 + 0x29), *(int*) (a0 + 0x2d));
 	pkt = gm_SearchTable67(*(int*) (rec + 4));
 	if (pkt == 0) {
 		return;

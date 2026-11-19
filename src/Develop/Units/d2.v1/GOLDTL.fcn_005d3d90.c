@@ -28,7 +28,7 @@ typedef struct {
 	char buf[0x10];
 } Loc;
 
-void __cdecl fcn_00472e50(void);
+void __cdecl d2_ClearPaintbox(void);
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 int __cdecl fcn_0046fac0(int, int, char *, int);
 int __cdecl fcn_0046b520(char *, int);
@@ -55,8 +55,8 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 
 	m = 0;
 	saved = d2_PlotRadius;
-	fcn_00472e50();
-	fcn_0046f2c0(win, 1);
+	d2_ClearPaintbox();
+	d2_ClearWindowChildren(win, 1);
 	d2_PlotRadius = 1;
 	w = *(int *) ((char *) &g_1015f4c + win * 0x3cc);
 	h = *(int *) ((char *) &g_1015f50 + win * 0x3cc);

@@ -1,4 +1,4 @@
-int __cdecl fcn_004346f0(char* a);
+int __cdecl d3_GetAnimSize(char* a);
 
 /* ADDRESS: GOLDTL 0x00459cd0 */
 int __cdecl fcn_00459cd0(char* a)
@@ -7,7 +7,7 @@ int __cdecl fcn_00459cd0(char* a)
 
 	r = 0;
 	if (a != 0 && a[0x16a] == 0) {
-		r = fcn_004346f0(a);
+		r = d3_GetAnimSize(a);
 		a[0x16a] = 1;
 	}
 	return r;

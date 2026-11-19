@@ -17,7 +17,7 @@ typedef struct {
 
 extern char* g_6b7eb8;
 
-Def* __cdecl fcn_004262b0(Script* s, const char* name)
+Def* __cdecl evt_FindDefinition(Script* s, const char* name)
 {
 	Script* o;
 	Def* defs;

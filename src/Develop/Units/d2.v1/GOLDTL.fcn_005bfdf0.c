@@ -36,9 +36,9 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_004f63d0(int, int*, unsigned short);
-void __cdecl fcn_004f6780(int n, Rec5bfd* arr);
+void __cdecl d2_SortCrimeRecordsByKind(int n, Rec5bfd* arr);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_0046e830(int x, int y, int win, int target, int id);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -72,9 +72,9 @@ void __cdecl fcn_005bfdf0(unsigned short* who, unsigned short* e)
 	for (i = 0; i < n; i++) {
 		recs[i] = ((Rec5bfd*)g_9a3800)[list[i]];
 	}
-	fcn_004f6780(n, recs);
+	d2_SortCrimeRecordsByKind(n, recs);
 	h = fcn_00470820(0, 0, g_6ac4c8);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 2);
 	w = d2_CurrentWindowId;
 	d2_SetForm(h, 4);

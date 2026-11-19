@@ -27,7 +27,7 @@ void __cdecl fcn_00472380(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_00507c30(int);
 void __cdecl fcn_00473690(int, int);
 float __cdecl fcn_004ff040(int);
@@ -148,7 +148,7 @@ present:
 			*(int*) (g_7774a0[i].entity + 0x18c), d2_CurrentWindowId);
 		h = fcn_0046f100(0x40, i * 0x78, 0xb4, 0x50, 0x10, d2_CurrentWindowId);
 		g_7774a0[i].window = h;
-		fcn_00472900(*(int*) (g_10161bc + h * 0x3cc), 0x54);
+		d2_SetElementFont(*(int*) (g_10161bc + h * 0x3cc), 0x54);
 		io_AppendText(0x16ab, *(unsigned short*) g_7774a0[i].entity,
 			*(unsigned char*) (g_7774a0[i].entity + 0x83));
 	}

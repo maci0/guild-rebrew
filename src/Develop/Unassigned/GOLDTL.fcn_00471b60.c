@@ -41,7 +41,7 @@ extern char* g_1015ea0;
 void __cdecl fcn_00469c40(int x, int y, int slot);
 
 /* ADDRESS: GOLDTL 0x00471b60 */
-void __cdecl fcn_00471b60(int k)
+void __cdecl d2_CenterDialogWindows(int k)
 {
 	Obj* o;
 	D2_WIN* w;

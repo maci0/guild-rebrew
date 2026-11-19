@@ -3,7 +3,7 @@ int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
@@ -70,7 +70,7 @@ int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 	flag = (*(unsigned int*) ((char*) arg2 + 0x1c8) >> 5) & 1;
 	dlg = fcn_00470820(0, 0, (char*) 0x6acbac);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1f4c);
 	if (flag != 0) {

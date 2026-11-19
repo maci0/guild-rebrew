@@ -14,7 +14,7 @@ extern unsigned char g_773d75;
 int __cdecl fcn_00500e20(int*);
 void __cdecl fcn_00500bb0(int, int, int, int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_00455350(int, int, float*);
+void __cdecl d3_TransformPoint(int, int, float*);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5c80(int);
@@ -74,13 +74,13 @@ void __cdecl fcn_00560290(char* a0)
 				goto nearest_failed;
 			}
 			best = 1.0e8f;
-			fcn_00455350(*(int*) (e + 0x61), *(int*) (e + 0x61) + 0x4c, here);
+			d3_TransformPoint(*(int*) (e + 0x61), *(int*) (e + 0x61) + 0x4c, here);
 			e = (char*) gm_StartFilteredEntitySearch(1, 5, 0xb);
 			if (!e) {
 				goto nearest_failed;
 			}
 			do {
-				fcn_00455350(*(int*) (e + 0x61), *(int*) (e + 0x61) + 0x4c, nextp);
+				d3_TransformPoint(*(int*) (e + 0x61), *(int*) (e + 0x61) + 0x4c, nextp);
 				dist = sqrt((nextp[2] - here[2]) * (nextp[2] - here[2]) + (nextp[1] - here[1]) * (nextp[1] - here[1])
 					+ (nextp[0] - here[0]) * (nextp[0] - here[0]));
 				if (dist < best) {

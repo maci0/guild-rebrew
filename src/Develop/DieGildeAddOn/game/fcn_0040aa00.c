@@ -16,15 +16,15 @@ extern int g_67a370;
 
 extern int __cdecl fcn_00402610(char*);
 extern void __cdecl d3_RemoveObjectAnim(char*);
-extern int __cdecl fcn_00413190(int);
+extern int __cdecl d3_GetContextIndex(int);
 extern int __cdecl fcn_0041db70(int, const char*);
-extern void __cdecl fcn_0045b920(char*, int, int, float*);
+extern void __cdecl d3_GridPointToWorld(char*, int, int, float*);
 extern int __cdecl d3_FindAnimByName(char*);
 extern void __cdecl d3_ReleaseAnim(int, int);
-extern void __cdecl fcn_00435500(int, char*);
+extern void __cdecl d3_RemoveObjectAnimation(int, char*);
 extern char* __cdecl fcn_00404dc0(char*, char*, int);
 extern void __cdecl vfs_ToSlashes(char*);
-extern char* __cdecl fcn_00407610(char*);
+extern char* __cdecl ch_AdjustHeightToGround(char*);
 extern void __cdecl fcn_00402aa0(char*);
 extern void __cdecl fcn_004193f0(char*, char*, int, float);
 extern char* __cdecl fcn_00422460(int, char*);
@@ -67,7 +67,7 @@ void __cdecl fcn_0040aa00(char* obj)
 	if (*(int*) (obj + 0xc) == 0) {
 		if (*(int*) (inst + 0x7c) != 0) {
 			sprintf(buf, "morph_%i", (int) inst);
-			fcn_00435500(*(int*) (*(int*) (inst + 0x34) + 0x1ec) + 0xf4, buf);
+			d3_RemoveObjectAnimation(*(int*) (*(int*) (inst + 0x34) + 0x1ec) + 0xf4, buf);
 			r = d3_FindAnimByName(buf);
 			d3_ReleaseAnim(r, 1);
 			*(int*) (inst + 0x7c) = 0;
@@ -82,7 +82,7 @@ void __cdecl fcn_0040aa00(char* obj)
 		memset((void*) (inst + 0x90), 0, 0x80);
 		i = *(int*) (obj + 0x30);
 		j = *(int*) (obj + 0x34);
-		r = fcn_00413190(*(int*) (inst + 0x88));
+		r = d3_GetContextIndex(*(int*) (inst + 0x88));
 		if (r != *(int*) (obj + 0x38)) {
 			ch_RemoveQueueEntry(obj);
 			return;
@@ -101,9 +101,9 @@ void __cdecl fcn_0040aa00(char* obj)
 			*(unsigned char*) (t + 1 + *(int*) (obj + 0xf4)) = 0;
 			t += 2;
 		} while (t < 0x200);
-		fcn_0045b920((char*) v, *(unsigned char*) r, *(unsigned char*) (r + 1),
+		d3_GridPointToWorld((char*) v, *(unsigned char*) r, *(unsigned char*) (r + 1),
 		             (float*) (obj + 0x124));
-		fcn_0045b920((char*) v, i, j, (float*) (obj + 0x124));
+		d3_GridPointToWorld((char*) v, i, j, (float*) (obj + 0x124));
 		*(int*) (obj + 0x104) = 0;
 		return;
 	}
@@ -113,7 +113,7 @@ void __cdecl fcn_0040aa00(char* obj)
 			*(int*) (inst + 0x80) = 0;
 			if (*(int*) (inst + 0x7c) != 0) {
 				sprintf(buf, "morph_%i", (int) inst);
-				fcn_00435500(*(int*) (*(int*) (inst + 0x34) + 0x1ec) + 0xf4, buf);
+				d3_RemoveObjectAnimation(*(int*) (*(int*) (inst + 0x34) + 0x1ec) + 0xf4, buf);
 				r = d3_FindAnimByName(buf);
 				d3_ReleaseAnim(r, 1);
 				*(int*) (inst + 0x7c) = 0;
@@ -156,11 +156,11 @@ void __cdecl fcn_0040aa00(char* obj)
 		sprintf(name, "%s_%s", "bewegung/gehen", inst + 0x130);
 		vfs_ToSlashes(name);
 		if (*(int*) (inst + 0x70) != 0) {
-			fcn_00435500(*(int*) (*(int*) (inst + 0x34) + 0x1ec) + 0xf4,
+			d3_RemoveObjectAnimation(*(int*) (*(int*) (inst + 0x34) + 0x1ec) + 0xf4,
 			             *(int*) (*(int*) (inst + 0x70) + 0x68));
 		}
 		*(int*) (inst + 0x70) = 0;
-		fcn_00407610(obj);
+		ch_AdjustHeightToGround(obj);
 		if (g_6b5c28) {
 			*(unsigned short*) (*(int*) (obj + 0x14) + 0x8c) |= 8;
 		}
@@ -175,7 +175,7 @@ void __cdecl fcn_0040aa00(char* obj)
 		}
 		goto remove;
 	}
-	state = fcn_00407610(obj);
+	state = ch_AdjustHeightToGround(obj);
 	p = *(char**) (inst + 0x70);
 	if (p != 0 && g_6b5c2c != 0 && g_67a370 == *(int*) (inst + 0x88) &&
 	    g_67530c == *(int*) (inst + 0x2c) &&
@@ -183,7 +183,7 @@ void __cdecl fcn_0040aa00(char* obj)
 	    (*(int*) p == 4 || *(int*) p == 0x0c || *(int*) p == 0x12 ||
 	     *(int*) p == 0x18)) {
 		if ((*(unsigned char*) (inst + 4) & 1) && g_6b5c30 < 3 &&
-		    fcn_00413190(*(int*) (inst + 0x88)) != 0) {
+		    d3_GetContextIndex(*(int*) (inst + 0x88)) != 0) {
 			o = *(char**) (inst + 0x88);
 			if (*(int*) (o + 0xac) == 0) {
 				r = fcn_00422460(g_6b5c2c, "normal_s");
@@ -267,7 +267,7 @@ next:
 		}
 		o = *(char**) (obj + 0x14);
 		q = (char*) (obj + 0x124);
-		fcn_0045b920((char*) v, *(unsigned char*) (table + i * 2),
+		d3_GridPointToWorld((char*) v, *(unsigned char*) (table + i * 2),
 		             *(unsigned char*) (table + i * 2 + 1), (float*) q);
 		d = fcn_00444700(*(char**) (o + 0x34), (float*) q);
 		*(float*) (obj + 0x108) = d;

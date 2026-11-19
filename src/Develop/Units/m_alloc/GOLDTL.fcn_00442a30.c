@@ -38,7 +38,7 @@ typedef struct {
 	unsigned char flags;
 } Ent;
 
-void __cdecl fcn_0045cab0(Tex*, int*, int*);
+void __cdecl d3_PackTextureFlags(Tex*, int*, int*);
 Tex* __cdecl fcn_0045c5b0(Cell*, int, int, int);
 void __cdecl fcn_0045ce90(Tex*);
 void __cdecl fcn_0045bfb0(Tex*);
@@ -73,7 +73,7 @@ char __cdecl SelectTextureSet(Ent* e, Obj* o, unsigned char lod, char refresh)
 			if (d->used != 0) {
 				t = o->tex[i];
 				if (t != 0) {
-					fcn_0045cab0(t, &v18, &v14);
+					d3_PackTextureFlags(t, &v18, &v14);
 					r = fcn_0045c5b0(d, t->x58, v18, v14);
 					if (r != 0) {
 						if (refresh) {

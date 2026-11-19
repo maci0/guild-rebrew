@@ -8,7 +8,7 @@ extern int g_14ce8e0;
 int __cdecl fcn_00504f30(int, int);
 int __cdecl fcn_00526120(int, int);
 void* __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(void*);
+void __cdecl d2_CenterDialogWindows(void*);
 void __cdecl fcn_00471e30(void*);
 int __cdecl fcn_0050cf50(char*, int);
 int __cdecl fcn_0050b710(int, char);
@@ -40,7 +40,7 @@ void __cdecl fcn_005c35d0(char* e)
 		return;
 	}
 	dlg = fcn_00470820(0, 0, (char*) 0x6ac5d8);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	x = fcn_0050cf50(e, *(signed char*) (e + 0x5c));
 	w = fcn_0050b710(x, g_773d75);
 	d2_SetForm(dlg, 2);

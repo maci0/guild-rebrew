@@ -21,8 +21,8 @@ typedef struct Edge {
 } Edge;
 
 void __cdecl fcn_00451340(float* a, float* b, float t, float* out);
-void __cdecl fcn_00451900(float* a, float* out);
-void __cdecl fcn_004519d0(float* a, float* b);
+void __cdecl d3_BuildEulerRotationMatrix(float* a, float* out);
+void __cdecl d3_MatrixToEulerAngles(float* a, float* b);
 void __cdecl fcn_00438b40(int obj, float* v);
 void __cdecl fcn_00438cb0(int obj, float* v);
 int __cdecl strcmp(const char* a, const char* b);
@@ -136,8 +136,8 @@ void __cdecl fcn_004316c0(int obj)
 					rec[count].target[0] += rec[count].pos[0];
 					rec[count].target[1] += rec[count].pos[1];
 					rec[count].target[2] += rec[count].pos[2];
-					fcn_00451900((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x60), left);
-					fcn_00451900((float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x60), right);
+					d3_BuildEulerRotationMatrix((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x60), left);
+					d3_BuildEulerRotationMatrix((float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x60), right);
 					for (k = 0; k < 3; k++) {
 						fcn_00451340(left + k * 4, right + k * 4, t, rec[count].mat[k]);
 					}
@@ -153,8 +153,8 @@ void __cdecl fcn_004316c0(int obj)
 					rec[j].target[0] = edge->k * out[0] + rec[j].target[0];
 					rec[j].target[1] = edge->k * out[1] + rec[j].target[1];
 					rec[j].target[2] = edge->k * out[2] + rec[j].target[2];
-					fcn_00451900((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x60), left);
-					fcn_00451900((float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x60), right);
+					d3_BuildEulerRotationMatrix((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x60), left);
+					d3_BuildEulerRotationMatrix((float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x60), right);
 					for (k = 0; k < 3; k++) {
 						fcn_00451340(left + k * 4, right + k * 4, t, out);
 						rec[j].mat[k][0] = out[0] + rec[j].mat[k][0];
@@ -173,7 +173,7 @@ void __cdecl fcn_004316c0(int obj)
 					rec[i].mat[k][1] = w * rec[i].mat[k][1];
 					rec[i].mat[k][2] = w * rec[i].mat[k][2];
 				}
-				fcn_004519d0(rec[i].mat[0], q);
+				d3_MatrixToEulerAngles(rec[i].mat[0], q);
 				for (nblock = *(int*) (obj + 0x200); nblock != 0; nblock = *(int*) (nblock + 0x1f4)) {
 					if (*(int*) (nblock + 0x1ec) != 0
 					    && strcmp(rec[i].name, (char*) (*(int*) (nblock + 0x1ec) + 0xb4)) == 0) {

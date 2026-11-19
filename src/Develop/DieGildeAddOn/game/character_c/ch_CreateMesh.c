@@ -14,18 +14,18 @@ void __cdecl fcn_00453270(char*);
 
 #ifdef REBREW_GOLD
 #define fcn_00443900 fcn_00447fd0
-#define fcn_00413190 fcn_00411be0
+#define d3_GetContextIndex fcn_00411be0
 #define fcn_00402aa0 fcn_00402540
 #define fcn_0040cfb0 fcn_0040c090
 #endif
 
 char __cdecl fcn_00443900(void*, void*, void*);
-void __cdecl fcn_00438c40(void*, float*);
-int __cdecl fcn_00413190(void*);
+void __cdecl d3_SetObjectPosition(void*, float*);
+int __cdecl d3_GetContextIndex(void*);
 void __cdecl fcn_00402aa0(char*);
 void __cdecl ch_RunAnimationScript();
-char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
-void __cdecl fcn_00425bf0(char*, int, const char*);
+char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(), unsigned char, int, ...);
+void __cdecl evt_LogScriptError(char*, int, const char*);
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include <math.h>
@@ -56,7 +56,7 @@ int __cdecl d3_RemoveObjectAnim(char*);
 extern char g_6b5c60[];
 D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
 void __cdecl fcn_00438ac0(char*, int);
-void __cdecl fcn_00404a00(char*, int, ...);
+void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
 void __cdecl fcn_00404b60(char*, int, ...);
 
 #include <stdarg.h>
@@ -126,7 +126,7 @@ int __cdecl ch_CreateMesh(char* model, char* resource, float* position)
     *(int*) (model + 0x30) = -1;
     strcpy(model + 8, resource);
     (*(D3_OBJECT**) (model + 0x34))->zusatz_flag = 1;
-    if (fcn_00413190(*(void**) (model + 0x88)) == 0)
+    if (d3_GetContextIndex(*(void**) (model + 0x88)) == 0)
         (*(D3_OBJECT**) (model + 0x34))->darstellungsflag = g_6752a4;
     else
         (*(D3_OBJECT**) (model + 0x34))->darstellungsflag = 0;
@@ -149,7 +149,7 @@ int __cdecl ch_CreateMesh(char* model, char* resource, float* position)
             (*(D3_OBJECT**) (model + 0x34))->darstellungsflag = 0;
         }
     }
-    fcn_00404a00(model, 2, "bewegung/gehen", "stehen/stehen_newnoise");
+    ch_PreloadCharacterMotions(model, 2, "bewegung/gehen", "stehen/stehen_newnoise");
     if (ch_LowPolyMode != 0 && *(int*) (model + 0x22c) != 0) {
         fcn_00404b60(model, 1, "gehen");
         ch_Updatelowpoly(model);

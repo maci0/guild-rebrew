@@ -24,7 +24,7 @@ extern int g_774954;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl d2_SetForm(int, int);
@@ -50,7 +50,7 @@ void __cdecl fcn_005b3b60(void)
 
 	memset(msg, 0, sizeof(msg));
 	item[7] = fcn_00470820(0, 0, "misc\\theatre");
-	fcn_00471b60(item[7]);
+	d2_CenterDialogWindows(item[7]);
 	d2_SetForm(item[7], 0);
 	item[2] = fcn_00472250(item[7], 0, io_AppendText("%ia[Hochzeit]$N"));
 	item[4] = fcn_00472250(item[7], 0, io_AppendText("%ia[Tod]$N"));

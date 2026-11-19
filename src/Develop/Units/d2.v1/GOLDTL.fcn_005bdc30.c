@@ -40,7 +40,7 @@ void __cdecl fcn_005b11f0(MsgCtx*);
 void __cdecl fcn_0057e880(int, int, int, int);
 void __cdecl fcn_005b18c0(int*);
 void __cdecl fcn_00471af0(int, int);
-void __cdecl fcn_00472170(int, int);
+void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_005d0460(char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x005bdc30 */
@@ -80,10 +80,10 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 							v = *(int*) (g_1015ea0 + ctx.ids10[i] * 0x2f4 + 0x2f0);
 							if (v != 0 && cb != 0) {
 								fcn_00471af0(ctx.dlg, 0);
-								fcn_00472170(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
+								d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
 								cb(v, v);
 								fcn_00471af0(ctx.dlg, 1);
-								fcn_00472170(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
+								d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
 								id = d2_CurrentElementId;
 							}
 							else {
@@ -115,9 +115,9 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 								continue;
 							}
 							fcn_00471af0(ctx.dlg, 0);
-							fcn_00472170(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
+							d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
 							v = fcn_005d0460((char*) ctx.queue[i].value, (int) state, (int) name, (int) cb);
-							fcn_00472170(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
+							d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
 							fcn_00471af0(ctx.dlg, 1);
 							id = d2_CurrentElementId;
 						}
@@ -132,10 +132,10 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 							continue;
 						}
 						fcn_00471af0(ctx.dlg, 0);
-						fcn_00472170(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
+						d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
 						cb(v, ctx.queue[i].value);
 						fcn_00471af0(ctx.dlg, 1);
-						fcn_00472170(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
+						d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
 						break;
 					}
 				}

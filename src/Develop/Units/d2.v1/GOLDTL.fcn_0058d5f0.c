@@ -18,7 +18,7 @@ int __cdecl fcn_00525fb0(int);
 int __cdecl fcn_005463a0(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 void* __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00533dc0(int, int, int);
 int __cdecl io_AppendText(int, ...);
@@ -123,7 +123,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 	}
 	menu = (int) fcn_00470820(0, 0, "s_6a9750");
 	ids[3] = menu;
-	fcn_00471b60(menu);
+	d2_CenterDialogWindows(menu);
 	d2_SetForm(menu, 0);
 	fcn_00533dc0(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(menu, 3);
@@ -131,7 +131,7 @@ void __cdecl fcn_0058d5f0(unsigned char* a0)
 	io_AppendText(screen);
 	fcn_0052a0c0((int) a0, 0);
 	fcn_00594340();
-	fcn_00471b60(menu);
+	d2_CenterDialogWindows(menu);
 	d2_SetForm(menu, 2);
 	if (n) {
 		i = *(int*) (0x1015f4c + d2_CurrentWindowId * 0x3cc) / 2 - 0x80;

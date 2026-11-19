@@ -22,7 +22,7 @@ extern int g_66601c;
 int __cdecl fcn_00470820(int a, int b, const char* name);
 void __cdecl d2_SetForm(int dialog, int slot);
 void __cdecl fcn_005340f0(int screen);
-void __cdecl fcn_00471b60(int dialog);
+void __cdecl d2_CenterDialogWindows(int dialog);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl io_AppendText(const char* text, int value);
 void __cdecl fcn_00533a60(int screen, int a, int* out, int count, int b,
@@ -72,7 +72,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	v8 = fcn_00470820(0, 0, "locations\\wohnsitz\\geliebte2");
 	d2_SetForm(v8, 0);
 	fcn_005340f0(d2_CurrentWindowId);
-	fcn_00471b60(v8);
+	d2_CenterDialogWindows(v8);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(v8, 1);
 	io_AppendText("$C$Z$[%1N3$]", *v6);

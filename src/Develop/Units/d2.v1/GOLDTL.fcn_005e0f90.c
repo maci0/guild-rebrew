@@ -76,7 +76,7 @@ void __cdecl fcn_005e0140(int, int, Slot*, Rec*, char*, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl vfs_LookupPath(char*, int, int*);
-void __cdecl fcn_00472170(int, int);
+void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_005e0b40(int, int, char*);
 int __cdecl fcn_005dfe80(char*, int);
 int __cdecl fcn_005e4060(void);
@@ -133,9 +133,9 @@ int __cdecl fcn_005e0f90(void)
 				if (vfs_LookupPath(tmp, g_6b7fdc, &st)) {
 					flag = 1;
 				}
-				fcn_00472170(slots[i].h, 0);
+				d2_SetSlotVisibility(slots[i].h, 0);
 				if (!fcn_005e0b40(((Ctl*)g_1015ea0)[slots[i].h].f10, ((Ctl*)g_1015ea0)[slots[i].h].f14, slots[i].rec.text)) {
-					fcn_00472170(slots[i].h, 1);
+					d2_SetSlotVisibility(slots[i].h, 1);
 					break;
 				}
 				if (!flag || fcn_005dfe80(g_14ac64c, 0x101)) {
@@ -149,7 +149,7 @@ int __cdecl fcn_005e0f90(void)
 					}
 					g_774654 = 1;
 				}
-				fcn_00472170(slots[i].h, 1);
+				d2_SetSlotVisibility(slots[i].h, 1);
 			}
 		}
 	}

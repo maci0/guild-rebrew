@@ -29,7 +29,7 @@ int __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
@@ -49,7 +49,7 @@ void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c5530(char*);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00500d20(char*, char*);
+int __cdecl gm_GetElapsedMinutes(char*, char*);
 void __cdecl fcn_0046f940(int, int);
 
 /* ADDRESS: GOLDTL 0x005c2a40 */
@@ -125,7 +125,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 		p = gm_NextEntityQueryMatch();
 	}
 	han = fcn_00470820(0, 0, g_6ac628);
-	fcn_00471b60(han);
+	d2_CenterDialogWindows(han);
 	d2_SetForm(han, 1);
 	io_AppendText(0x17ce);
 	d2_SetForm(han, 0);
@@ -243,8 +243,8 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 						handle = slots[sel * 3 + 1];
 						*(int*) (g_1015ea0 + id * 0x2f4 + 0x5c) = 0;
 						fcn_0046f940(handle, *(int*) 0x14ab264);
-						lo = (float) fcn_00500d20(r + 0x44, r + 0x52);
-						hi = (float) fcn_00500d20(r + 0x44,
+						lo = (float) gm_GetElapsedMinutes(r + 0x44, r + 0x52);
+						hi = (float) gm_GetElapsedMinutes(r + 0x44,
 						                          (char*) 0x7f4c00);
 						*(float*) (g_1015ea0 + id * 0x2f4 + 0x1f4) =
 						    hi / lo;

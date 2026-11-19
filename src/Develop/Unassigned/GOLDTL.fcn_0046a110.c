@@ -42,10 +42,10 @@ void* __cdecl d2_GetResourceData(int idx);
 int __cdecl fcn_00465950(const char* name);
 void __cdecl fcn_004663e0(char* f, int surf);
 void __cdecl fcn_00469fd0(char* e);
-int __cdecl fcn_00473a10(int x, int y);
+int __cdecl d2_DrawMouseCursor(int x, int y);
 void __cdecl fcn_0047c560(int a, int b, int c);
 void __cdecl fcn_004732c0(void);
-void __cdecl fcn_00472880(int font);
+void __cdecl d2_SelectFont(int font);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
 void __cdecl fcn_00479cc0(int a, int b, int c, int d, char* e);
 void __cdecl fcn_00467920(int a0, int a1);
@@ -53,8 +53,8 @@ void __cdecl fcn_00468e40(int a0, int a1);
 void __cdecl fcn_00466550(int idx, int surf);
 void __cdecl fcn_0046dff0(int a0, int a1);
 void __cdecl fcn_00469320(int idx, int surf);
-void __cdecl fcn_0047cd70(int i, int tex);
-void __cdecl fcn_00472050(int a, int* w, int* h);
+void __cdecl d2_DrawAnimationSlot(int i, int tex);
+void __cdecl d2_GetElementResourceSize(int a, int* w, int* h);
 
 /* ADDRESS: GOLDTL 0x0046a110 */
 void __cdecl fcn_0046a110(int a1)
@@ -194,7 +194,7 @@ void __cdecl fcn_0046a110(int a1)
 				}
 				break;
 			case 4:
-				fcn_0047cd70(*(int*) (ent + 0x88), g_77250c);
+				d2_DrawAnimationSlot(*(int*) (ent + 0x88), g_77250c);
 				break;
 			case 5:
 			case 8:
@@ -241,7 +241,7 @@ label_46a7ab:
 						if (f > g_6629c8)
 							f = (float) g_6629c8;
 						sprintf(u.buf, (char*) 0x67d43c, (int) (f * 100.0));
-						fcn_00472880(d2_DefaultFont + 1);
+						d2_SelectFont(d2_DefaultFont + 1);
 						fcn_0046bd20(dx, dy + *(int*) (ent + 0x1c) - 0xf,
 						             *(unsigned short*) (*(char**) (ent + 0xc) + 6),
 						             *(int*) (ent + 0x1c), g_77250c, u.buf, 0x28);
@@ -249,7 +249,7 @@ label_46a7ab:
 				}
 				if (*(char*) (ent + 0x8c)) {
 					if (*(int*) (ent + 0x84))
-						fcn_00472880(*(int*) (ent + 0x84));
+						d2_SelectFont(*(int*) (ent + 0x84));
 					if (*(int*) (ent + 0x40))
 						fcn_0047a040(left, top, right, bottom);
 					else
@@ -263,7 +263,7 @@ label_46a7ab:
 						flags |= 8;
 					if (*(int*) (ent + 0x70))
 						flags |= 0x10;
-					fcn_00472050(*(int*) ent, &w2, &h2);
+					d2_GetElementResourceSize(*(int*) ent, &w2, &h2);
 					if (*(int*) (ent + 0x1dc) != -1)
 						t = dx + *(int*) (ent + 0x1dc);
 					else
@@ -309,7 +309,7 @@ label_46a7ab:
 				}
 				if (*(int*) (ent + 0x24) == 2)
 					*(int*) (ent + 0x24) = 1;
-				fcn_00472880(*(int*) (ent + 0x84));
+				d2_SelectFont(*(int*) (ent + 0x84));
 				flags = 0;
 				if (*(int*) (ent + 0x3c))
 					flags = 2;
@@ -324,7 +324,7 @@ label_46a7ab:
 				fcn_0046bd20(dx, dy, *(int*) (ent + 0x18), *(int*) (ent + 0x1c),
 				             g_77250c, (char*) *(int*) (ent + 0x88), flags);
 				*(int*) (ent + 0x1c) = g_772548;
-				fcn_00472880(d2_CurrentFont);
+				d2_SelectFont(d2_CurrentFont);
 				break;
 			case 0x45:
 				if (*(int*) (ent + 0x40)) {
@@ -359,7 +359,7 @@ label_46aadd:
 	    && *(int*) (tp_d2_SelectedControl + 0x1c) < *(int*) (tp_d2_SelectedControl + 0x18) && g_14ce8d4)
 		fcn_004663e0((char*) tp_d2_SelectedControl, g_77250c);
 	fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
-	fcn_00473a10(g_772570, g_772574);
+	d2_DrawMouseCursor(g_772570, g_772574);
 	fcn_0047c560(0, 0, 0);
 	fcn_004732c0();
 	g_772524 = (int) d2_GetResourceData(fcn_00465950((char*) 0x67d474));

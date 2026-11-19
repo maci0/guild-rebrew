@@ -14,7 +14,7 @@ extern void* g_14cb8f0;
 
 /* Reports a script error: logs the message with its source line. */
 /* ADDRESS: GOLDTL 0x00425bf0 */
-void __cdecl fcn_00425bf0(char* s, unsigned int pos, const char* msg)
+void __cdecl evt_LogScriptError(char* s, unsigned int pos, const char* msg)
 {
 	int line;
 	char buf[0x200];

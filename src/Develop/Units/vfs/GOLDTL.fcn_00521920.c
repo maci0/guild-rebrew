@@ -34,7 +34,7 @@ extern struct VFS_DIR* g_6b7fdc;
 
 void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* root);
 void __cdecl gm_KillAllSpieler(void);
-void __cdecl fcn_0040c070(void);
+void __cdecl ch_ClearCharacters(void);
 void __cdecl fcn_00510930(void);
 int __cdecl fcn_005222a0(void* stream);
 int __cdecl fcn_00524040(void* stream);
@@ -78,7 +78,7 @@ int __cdecl fcn_00521920(char* cpath)
 		goto ret0;
 	}
 	gm_KillAllSpieler();
-	fcn_0040c070();
+	ch_ClearCharacters();
 	gm_CityEntity = 0;
 	gm_RichterKatholisch = 0;
 	gm_RichterEvangelisch = 0;

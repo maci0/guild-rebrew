@@ -18,7 +18,7 @@ char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004de610(int);
 int __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_004e4c90(int);
-char* __cdecl fcn_0040c230(char*, void*, int, int, int);
+char* __cdecl ch_CreateQueuedAction(char*, void*, int, int, int);
 void __cdecl fcn_004dff50(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl cut_RandFloat(void);
@@ -47,7 +47,7 @@ void __cdecl fcn_004e0210(char* e, char* foe)
 			fcn_004c3030(*(unsigned short*) e, 0, "_DUELL_INTRO_C2_AUSWAHL_SCHIESSEN", t);
 			fcn_004e4c90(2);
 			io_AppendText((int) "$N");
-			o = fcn_0040c230(*(char**) (e + 0x184), (void*) fcn_004dff50, 6, 0x2e, 1);
+			o = ch_CreateQueuedAction(*(char**) (e + 0x184), (void*) fcn_004dff50, 6, 0x2e, 1);
 			*(char**) (o + 0x17c) = foe;
 			*(char**) (o + 0x180) = e;
 			*(Anim_4e0210*) (o + 0xf0) = g_68cc34;

@@ -22,7 +22,7 @@ int __cdecl gm_GetOppositeStatIndex(int stat);
 int __cdecl gm_MapEntityStatRange(int stat);
 float __cdecl gm_GetEntitySkill(Ent* e, int k);
 int __cdecl fcn_00500cb0(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
-int __cdecl fcn_00500d20(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
+int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
 void __cdecl fcn_00500bb0(GAME_TIMESTAMP* t, int a, int b, int c);
 
 /* ADDRESS: GOLDTL 0x00507540 */
@@ -78,7 +78,7 @@ float __cdecl fcn_00507540(int idx, GAME_TIMESTAMP* out)
 		b.unit_0 = d;
 		b.hour = h;
 		if (fcn_00500cb0(&b, &a) < 0) {
-			f = (float) fcn_00500d20(&z, &b) / (float) fcn_00500d20(&z, &a);
+			f = (float) gm_GetElapsedMinutes(&z, &b) / (float) gm_GetElapsedMinutes(&z, &a);
 			fcn_00500bb0(&a, gm_GameTime.a * 24 + h, 0, 0);
 			fcn_00500bb0(&a, -h - d * 24, 0, 0);
 			*out = a;

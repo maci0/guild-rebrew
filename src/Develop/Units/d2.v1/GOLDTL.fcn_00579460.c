@@ -24,7 +24,7 @@ int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
 void __cdecl fcn_00579410(char*, struct house*);
 void __cdecl fcn_00579390(char*, struct house*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
@@ -55,7 +55,7 @@ void __cdecl fcn_00579460(char* u)
 			fcn_00546190(u);
 			return;
 		}
-		fcn_00471b60(*(int*) (*(char**) (u + 0x74) + 8));
+		d2_CenterDialogWindows(*(int*) (*(char**) (u + 0x74) + 8));
 		d2_SetForm(*(int*) (*(char**) (u + 0x74) + 8), 0);
 		io_AppendText((int) g_6811b0);
 		io_AppendText(0x40fd, *(unsigned short*) h, *(int*) (u + 0xb8));

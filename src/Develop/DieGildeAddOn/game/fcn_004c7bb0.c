@@ -9,7 +9,7 @@ typedef struct Obj4c7bb0 {
 } Obj4c7bb0;
 #pragma pack(pop)
 
-int __cdecl fcn_004c4dc0(Obj4c7bb0* obj, int h);
+int __cdecl cm_ResolveSpecialEntityId(Obj4c7bb0* obj, int h);
 void __cdecl gm_SubObjectNoKill(int h, unsigned int w, int v);
 void __cdecl gm_AddObjekt(int h, unsigned int w, int v);
 
@@ -24,14 +24,14 @@ int __cdecl fcn_004c7bb0(Obj4c7bb0* obj, char* out)
 	}
 	h = obj->h14;
 	if (h != -1) {
-		h = fcn_004c4dc0(obj, h);
+		h = cm_ResolveSpecialEntityId(obj, h);
 		obj->h14 = h;
 		w = *(unsigned short*) (0x8680b4 + (unsigned int) obj->idx1c * 0x2f4);
 		gm_SubObjectNoKill(h, w, obj->f1d);
 	}
 	h = obj->h10;
 	if (h != -1) {
-		h = fcn_004c4dc0(obj, h);
+		h = cm_ResolveSpecialEntityId(obj, h);
 		obj->h10 = h;
 		w = *(unsigned short*) (0x8680b4 + (unsigned int) obj->idx1c * 0x2f4);
 		gm_AddObjekt(h, w, obj->f1d);

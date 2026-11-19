@@ -4,7 +4,7 @@ extern char g_14cf950;
 extern int g_6a81dc[5];
 #include "Develop/Units/d2.v1/d2_gui.h"
 char* __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(char*);
+void __cdecl d2_CenterDialogWindows(char*);
 void __cdecl fcn_00471e30(char*);
 int __cdecl fcn_00472250(char*, int, char*);
 void __cdecl fcn_00472640(int, int);
@@ -29,7 +29,7 @@ int __cdecl fcn_005845e0(void)
 
 	i = 0; flag = 0;
 	menu = fcn_00470820(0, 0, (char*) 0x6a9298);
-	fcn_00471b60(menu);
+	d2_CenterDialogWindows(menu);
 	d2_SetForm(menu, 1);
 	io_AppendText((char*) 0x6a2f5c, 0x3f1a);
 	d2_SetForm(menu, 2);

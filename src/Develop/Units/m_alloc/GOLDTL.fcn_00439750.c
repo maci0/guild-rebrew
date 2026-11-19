@@ -8,7 +8,7 @@ void __cdecl fcn_00439e70(char* o);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
 
 /* ADDRESS: GOLDTL 0x00439750 */
-char* __cdecl fcn_00439750(int kind, char* name)
+char* __cdecl d3_SpawnObject(int kind, char* name)
 {
 	char* o;
 

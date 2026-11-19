@@ -1,5 +1,5 @@
 extern int __cdecl fcn_00470820(int a, int b, char *name);
-void __cdecl fcn_00471b60(int obj);
+void __cdecl d2_CenterDialogWindows(int obj);
 void __cdecl d2_SetForm(int obj, int a);
 int __cdecl io_AppendText(int id, ...);
 void __cdecl fcn_005c4d00(int win, int sub, int idx, int flag);
@@ -17,7 +17,7 @@ void __cdecl fcn_005c4dc0(void)
 	int* q;
 
 	dlg = fcn_00470820(0, 0, (char *) 0x6ac6b4);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1ef9);
 	fcn_005c4d00(dlg, 0, *(unsigned short *) 0x774970, 0);

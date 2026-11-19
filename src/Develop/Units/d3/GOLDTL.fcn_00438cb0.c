@@ -6,9 +6,9 @@ extern int g_67a370;
 
 void __cdecl fcn_00438ac0(char*, int);
 void __cdecl fcn_00438af0(unsigned char);
-void __cdecl fcn_00451900(float*, char*);
-void __cdecl fcn_00437ac0(int, char*, int, void*);
-void __cdecl fcn_00456df0(void);
+void __cdecl d3_BuildEulerRotationMatrix(float*, char*);
+void __cdecl d3_TraverseSceneObjects(int, char*, int, void*);
+void __cdecl d3_ClearAuxSlotState(void);
 
 void __cdecl fcn_00438cb0(char* o, int* v)
 {
@@ -21,8 +21,8 @@ void __cdecl fcn_00438cb0(char* o, int* v)
 	*(int*) (o + 0x88) = v[1];
 	*(int*) (o + 0x8c) = v[2];
 	if (*(int*) (o + 0x218) != 3) {
-		fcn_00451900(p, o + 0x18c);
-		fcn_00437ac0(g_67a370, o, 0xc0, fcn_00456df0);
+		d3_BuildEulerRotationMatrix(p, o + 0x18c);
+		d3_TraverseSceneObjects(g_67a370, o, 0xc0, d3_ClearAuxSlotState);
 		return;
 	}
 	if (o == ((char*)d3_ActiveCamera)) {
@@ -31,5 +31,5 @@ void __cdecl fcn_00438cb0(char* o, int* v)
 	n[0] = -p[0];
 	n[1] = -*(float*) (o + 0x88);
 	n[2] = -*(float*) (o + 0x8c);
-	fcn_00451900(n, o + 0x18c);
+	d3_BuildEulerRotationMatrix(n, o + 0x18c);
 }

@@ -6,7 +6,7 @@ extern int g_10432a8;
 extern int g_1042a04;
 
 int __cdecl fcn_004382e0(unsigned int a0);
-void __cdecl fcn_00438100(unsigned int a0, char* a1, int a2);
+void __cdecl d3_UpdateObjectCameraTransform(unsigned int a0, char* a1, int a2);
 char __cdecl fcn_00438270(unsigned int a0, int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00438450 */
@@ -39,7 +39,7 @@ unsigned char __cdecl fcn_00438450(char* o)
 			return anim;
 		}
 		if (sel != 0 || (flags & 0x10) != 0) {
-			fcn_00438100((unsigned int) o, d3_ActiveCamera, 0);
+			d3_UpdateObjectCameraTransform((unsigned int) o, d3_ActiveCamera, 0);
 			*(unsigned char*) (p + 0x163d) = (unsigned char) fcn_00438270((unsigned int) o, v, *(int*) (o + 0x1ec) + 0x48);
 			*(int*) (v + 0x300) = 0;
 			*(int*) (v + 0x304) = 0;

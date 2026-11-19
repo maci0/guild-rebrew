@@ -4,7 +4,7 @@
 extern Rgb g_100f1a0;
 
 char* __cdecl m_alloc(unsigned int size, char* file);
-short __cdecl fcn_0041bac0(unsigned char r, unsigned char g, unsigned char b);
+short __cdecl d2_PackColorForPixelFormat(unsigned char r, unsigned char g, unsigned char b);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x004781e0 */
@@ -80,7 +80,7 @@ unsigned int* __cdecl fcn_004781e0(int a0, int a1, int a2, int a3, int a4, char 
 	*(unsigned short*) (v6 + 0x1a) = x0;
 	*(unsigned short*) (v6 + 0x1c) = y0;
 	*(unsigned int*) v6 = 0x32;
-	fcn_0041bac0(g_100f1a0.r, g_100f1a0.g, g_100f1a0.b);
+	d2_PackColorForPixelFormat(g_100f1a0.r, g_100f1a0.g, g_100f1a0.b);
 	dst = v6 + *(unsigned int*) v6;
 	i = 0;
 	if (*(unsigned short*) (v6 + 0xa) > 0) {

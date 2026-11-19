@@ -4,7 +4,7 @@
 extern char* evt_CurrentScript;
 extern char g_676330[];
 
-void __cdecl fcn_00425bf0(void*, int, void*);
+void __cdecl evt_LogScriptError(void*, int, void*);
 
 int __cdecl SetLowPoly(char** pp, int* on)
 {
@@ -12,7 +12,7 @@ int __cdecl SetLowPoly(char** pp, int* on)
 
 	if (*pp == 0) {
 		g = *(void**) ((char*)&evt_CurrentScript);
-		fcn_00425bf0(g, *(int*) ((char*) g + 0x118), (void*) g_676330);
+		evt_LogScriptError(g, *(int*) ((char*) g + 0x118), (void*) g_676330);
 		return 1;
 	}
 	if (*on != 0) {

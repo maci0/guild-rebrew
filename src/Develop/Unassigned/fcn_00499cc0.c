@@ -8,7 +8,7 @@ typedef struct B18_499cc0 {
 	int f14;
 } B18_499cc0;
 
-int __cdecl fcn_00495400(int kind, int id, int a3, B18_499cc0* b1, B18_499cc0* b2);
+int __cdecl ai_SelectBestMethod(int kind, int id, int a3, B18_499cc0* b1, B18_499cc0* b2);
 
 /* ADDRESS: GOLDTL 0x00499cc0 */
 int __cdecl fcn_00499cc0(int a1, unsigned short* a2, int a3, B18_499cc0* out1, B18_499cc0* out2)
@@ -28,7 +28,7 @@ int __cdecl fcn_00499cc0(int a1, unsigned short* a2, int a3, B18_499cc0* out1, B
 	b1.f4 = 0;
 	b2.c0 = 0;
 	b2.f4 = 0;
-	id = fcn_00495400(0x1a, *a2, 0, &b1, &b2);
+	id = ai_SelectBestMethod(0x1a, *a2, 0, &b1, &b2);
 	if (id != 0) {
 		rec = (unsigned char*) (0x1008540 + id * 0x94);
 		for (i = 0; i < 4; i++) {

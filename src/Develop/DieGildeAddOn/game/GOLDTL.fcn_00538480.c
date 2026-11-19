@@ -5,7 +5,7 @@ extern int g_774960;
 
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_005356b0(void*);
@@ -18,7 +18,7 @@ void __cdecl fcn_00538480(void)
 
 	h = fcn_00470820(0, 0, "Runde beenden");
 	q = 0;
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	do {
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {

@@ -94,9 +94,9 @@ int __cdecl fcn_004770a0(void* info, int kind);
 void __cdecl fcn_004760c0(int win, char* buf);
 int __cdecl fcn_00475fd0(int win);
 void __cdecl fcn_00476970(int win);
-void __cdecl fcn_00476060(int win);
+void __cdecl d2_UnlockSurface(int win);
 void __cdecl fcn_00476b10(int x, int y, int r, int g, int b, int win);
-void __cdecl fcn_00472880(int handle);
+void __cdecl d2_SelectFont(int handle);
 char* __cdecl fcn_0047ce00(char* name, int a1);
 
 /* ADDRESS: GOLDTL 0x004700a0 */
@@ -275,7 +275,7 @@ int __cdecl d2_Open(int a0, int a1, int a2, char* a3, char* a4)
 		fcn_004760c0(g_77250c, info + 0x5c);
 		if (fcn_00475fd0(g_77250c)) {
 			fcn_00476970(g_77250c);
-			fcn_00476060(g_77250c);
+			d2_UnlockSurface(g_77250c);
 		}
 		for (i = 0; i < 0x17; i++) {
 			((int*) info)[i] = 0;
@@ -291,8 +291,8 @@ int __cdecl d2_Open(int a0, int a1, int a2, char* a3, char* a4)
 					fcn_00476b10(j, i, 0xff, 0xff, 0xff, (int) g_77256c);
 				}
 			}
-			fcn_00476060((int) g_77256c);
-			fcn_00472880(fcn_00465950(s_67d474));
+			d2_UnlockSurface((int) g_77256c);
+			d2_SelectFont(fcn_00465950(s_67d474));
 			g_77253c = fcn_0047ce00(s_67d67c, 0);
 			if (g_77253c == 0) {
 				ReportClientMessage(s_67d654);

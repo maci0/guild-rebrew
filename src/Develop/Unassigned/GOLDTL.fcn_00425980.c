@@ -12,7 +12,7 @@ int __cdecl fcn_00423920(char* name);
 
 /* Loads every sample of the bank, substituting the language for "%lang". */
 /* ADDRESS: GOLDTL 0x00425980 */
-int __cdecl fcn_00425980(char* lang)
+int __cdecl sbs_UpdateSampleSizes(char* lang)
 {
 	char* v;
 	char name[0x100];

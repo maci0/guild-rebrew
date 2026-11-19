@@ -12,7 +12,7 @@ typedef struct {
 
 extern char* g_1015ea0;
 
-int __cdecl fcn_00472050(int, int*, int*);
+int __cdecl d2_GetElementResourceSize(int, int*, int*);
 
 /* ADDRESS: GOLDTL 0x00472680 */
 void __cdecl fcn_00472680(int id, int type)
@@ -26,8 +26,8 @@ void __cdecl fcn_00472680(int id, int type)
 	if (id == -1) {
 		return;
 	}
-	if (fcn_00472050(id, &h, &w) == 0) {
-		fcn_00472050(id, &h, &w);
+	if (d2_GetElementResourceSize(id, &h, &w) == 0) {
+		d2_GetElementResourceSize(id, &h, &w);
 		return;
 	}
 	w0 = w;

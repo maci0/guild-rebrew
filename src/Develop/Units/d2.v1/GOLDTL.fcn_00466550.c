@@ -31,9 +31,9 @@ extern int tp_d2_SelectedControl;
 extern float g_6628a8;
 
 int __cdecl fcn_0046b520(char* s, int font);
-void __cdecl fcn_0046bbc0(int x, int y, int surf, char* text, int flags);
+void __cdecl d2_DrawDefaultFontText(int x, int y, int surf, char* text, int flags);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
-void __cdecl fcn_00472880(int font);
+void __cdecl d2_SelectFont(int font);
 void __cdecl fcn_0047a040(int a, int b, int c, int d);
 fcn_00466550_Glyph* __cdecl fcn_0047b620(char* font, int c);
 void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
@@ -60,7 +60,7 @@ void __cdecl fcn_00466550(int idx, int surf)
 	char buf3[40];
 
 	f = &g_102d140[idx];
-	fcn_00472880(f->font);
+	d2_SelectFont(f->font);
 	flags = f->flags;
 	if (flags & 1) {
 		if (f->def == -1 && !(flags & 0x200)) {
@@ -81,9 +81,9 @@ void __cdecl fcn_00466550(int idx, int surf)
 		fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 		*(int*) (g_1015ea0 + f->ent * 0x2f4 + 0x18) = f->w;
 		if (*(int*) (g_1015ea0 + f->ent * 0x2f4 + 0x3c) != 0 || d2_CurrentElementId == f->ent) {
-			fcn_0046bbc0(f->x, f->y, surf, ((char*) f + 0x2c), 2);
+			d2_DrawDefaultFontText(f->x, f->y, surf, ((char*) f + 0x2c), 2);
 		} else {
-			fcn_0046bbc0(f->x, f->y, surf, ((char*) f + 0x2c), 0);
+			d2_DrawDefaultFontText(f->x, f->y, surf, ((char*) f + 0x2c), 0);
 		}
 	} else if (flags & 2) {
 		v = f->max;
@@ -130,7 +130,7 @@ void __cdecl fcn_00466550(int idx, int surf)
 					i++;
 				} while ((double) i < (double) (v / g2->w) + 0.5);
 			}
-			fcn_00472880(d2_DefaultFont);
+			d2_SelectFont(d2_DefaultFont);
 			fcn_0046bd20(f->x, e->i[0x14 / 4] + 1, v, e->i[0x1c / 4],
 			    surf, buf, 0x10);
 		} else {
@@ -156,7 +156,7 @@ void __cdecl fcn_00466550(int idx, int surf)
 					    ? *(double*) 0x6629c8
 					    : *(float*) (g_1015ea0 + f->ent * 0x2f4 + 0x1f4)) * *(double*) 0x662c38);
 					sprintf(buf3, (char*) 0x67d43c, width);
-					fcn_00472880(d2_DefaultFont + 1);
+					d2_SelectFont(d2_DefaultFont + 1);
 					fcn_0046bd20(f->x,
 					    e->i[0x14 / 4] + e->i[0x1c / 4] - 0xf,
 					    *(unsigned short*) (font + 6), f->h, surf,
@@ -167,11 +167,11 @@ void __cdecl fcn_00466550(int idx, int surf)
 		if (f->def != -1 && !(flags & 0x100) && f->f12c != 0
 		    && !(flags & 0x20)) {
 			if (e->i[0x3c / 4] != 0) {
-				fcn_0046bbc0(f->x,
+				d2_DrawDefaultFontText(f->x,
 				    f->y + *(short*) (g_772500 + f->def * 0x54 + 0x52),
 				    surf, buf, 2);
 			} else {
-				fcn_0046bbc0(f->x,
+				d2_DrawDefaultFontText(f->x,
 				    f->y + *(short*) (g_772500 + f->def * 0x54 + 0x52),
 				    surf, buf, 0);
 			}

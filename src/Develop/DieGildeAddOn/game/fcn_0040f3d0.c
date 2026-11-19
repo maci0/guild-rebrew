@@ -17,7 +17,7 @@ int __cdecl gm_RemoveLinkedNodeById(int*, int);
 
 int __cdecl d3_RemoveObjectAnim(int);
 
-char __cdecl fcn_0040f3d0(int a, int b)
+char __cdecl d3_RemoveAnimationIfNameContains(int a, int b)
 {
 	if (strstr((char*) a, (char*) b) != 0) {
 		d3_RemoveObjectAnim(a);

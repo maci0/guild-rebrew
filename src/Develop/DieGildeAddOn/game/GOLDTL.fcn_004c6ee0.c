@@ -2,7 +2,7 @@
 
 
 
-int __cdecl fcn_004c4dc0(char*, int);
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 int __cdecl gm_QueryEntitySum(int, char);
 
@@ -14,7 +14,7 @@ int __cdecl fcn_004c6ee0(char* x)
 	int* p;
 
 	if (*(int*) (x + 0x14) != -1) {
-		*(int*) (x + 0x14) = fcn_004c4dc0(x, *(int*) (x + 0x14));
+		*(int*) (x + 0x14) = cm_ResolveSpecialEntityId(x, *(int*) (x + 0x14));
 		if (gm_ResolveEntityById((void**) (&e1), (void**) (&e2), (void**) (&e3), *(int*) (x + 0x14)) == 0)
 			return 1;
 		if (e1 != 0)

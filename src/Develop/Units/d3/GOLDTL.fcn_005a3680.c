@@ -17,7 +17,7 @@ char* __cdecl fcn_005338d0(char*, char*, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
-char* __cdecl fcn_00443bf0(float, float, int, int);
+char* __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
@@ -49,7 +49,7 @@ void __cdecl fcn_005a3680(void)
 			for (i = 0; i < 3; i++) {
 				fcn_005338d0(items[i], g_868354[i], 0);
 			}
-			g_7746a4 = fcn_00443bf0((float) g_14ce8c0, (float) g_14ce8c2, 0x60, 1);
+			g_7746a4 = d3_FindSceneObjectAtScreenPoint((float) g_14ce8c0, (float) g_14ce8c2, 0x60, 1);
 			if (g_14ce8cc != 0 && g_7746a4 != 0) {
 				(*(char**)&g_7746a0) = g_7746a4;
 				for (i = 0; i < 3; i++) {

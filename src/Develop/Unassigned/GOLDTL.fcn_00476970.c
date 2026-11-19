@@ -47,7 +47,7 @@ typedef struct Tex {
 // SIZE 0x58
 
 int __cdecl fcn_00475fd0(Tex* t);
-void __cdecl fcn_00476060(Tex* t);
+void __cdecl d2_UnlockSurface(Tex* t);
 
 /* ADDRESS: GOLDTL 0x00476970 */
 int __cdecl fcn_00476970(Tex* t)
@@ -72,7 +72,7 @@ int __cdecl fcn_00476970(Tex* t)
 		if (was) {
 			fcn_00475fd0(t);
 		} else {
-			fcn_00476060(t);
+			d2_UnlockSurface(t);
 		}
 	}
 	return 1;

@@ -6,9 +6,9 @@
 extern int g_67a370;
 extern int g_6791c8;
 extern char* evt_CurrentScript;
-void __cdecl fcn_00455350(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 #include "client_scene_transform.h"
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 char* __cdecl DummyBlocked(char** a, int* range)
 {
@@ -20,11 +20,11 @@ char* __cdecl DummyBlocked(char** a, int* range)
 
 	result = 0;
 	if (*a == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 0;
 	}
 	i = 0;
-	fcn_00455350(*a, *a + 0x4c, pos);
+	d3_TransformPoint(*a, *a + 0x4c, pos);
 	for (; i < 0x300; i++) {
 		e = ((char**)ch_CharacterSlots)[i];
 		if (e != 0 && *(char**) (e + 0x88) == ((char*)g_67a370) && *(int*) (e + 0x2c) == g_6791c8) {

@@ -3,14 +3,14 @@
 extern int g_6b71a0;
 extern int msx_TrackDriver;
 extern int msx_AmbientDriver;
-void __cdecl fcn_0042ad00(void);
+void __cdecl msx_CloseAllStreams(void);
 int __cdecl fcn_0042a2d0(int);
 
-void __cdecl fcn_0041fb80(void)
+void __cdecl msx_ShutdownDrivers(void)
 {
 	g_6b71a0 = 1;
 	if (msx_TrackDriver != 0) {
-		fcn_0042ad00();
+		msx_CloseAllStreams();
 		fcn_0042a2d0(msx_TrackDriver);
 		msx_TrackDriver = 0;
 	}

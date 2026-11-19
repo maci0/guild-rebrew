@@ -36,10 +36,10 @@ int __cdecl fcn_00521eb0(int, char*);
 void __cdecl CloseVfsStream(int);
 char* __cdecl fcn_0053e7a0(char*);
 int __cdecl sprintf(char*, const char*, ...);
-int __cdecl fcn_0042dc90(char*);
+int __cdecl txt_FindEntryIndex(char*);
 void __cdecl fcn_005338d0(char*, char*, int);
 char* __cdecl fcn_00442910(int, void*, void*, char*);
-void __cdecl fcn_00412f10(char*, char*, int);
+void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 char __cdecl fcn_00442c00(char*, char);
 int __cdecl fcn_004e4470(char*);
 void __cdecl fcn_004e44f0(int);
@@ -51,7 +51,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl fcn_005373e0(void*, int);
-char* __cdecl fcn_00443bf0(float, float, int, int);
+char* __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int);
 int __cdecl fcn_0064f170(char*, char*, int);
 void __cdecl fcn_0053eb60(int);
 void __cdecl fcn_00471af0(int, int);
@@ -60,7 +60,7 @@ int __cdecl fcn_0053dc20(void);
 int __cdecl fcn_004130b0(char*, char*);
 void __cdecl fcn_00471e30(int);
 void __cdecl d3_DestroyObject(char*);
-void __cdecl fcn_00412cf0(char*, float*, float*, int, int);
+void __cdecl d3_AnimateObjectTransform(char*, float*, float*, int, int);
 
 /* Local frame layout; the 0x8984-byte frame is mostly the city name table. */
 /* ADDRESS: GOLDTL 0x0053ed60 */
@@ -125,7 +125,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 		if (city != 0) {
 			sprintf(data.keybuf, (char*) 0x6a22a8, data.hdr + 5);
 			_strupr(data.keybuf);
-			idx = fcn_0042dc90(data.keybuf);
+			idx = txt_FindEntryIndex(data.keybuf);
 			if (idx != -1) {
 				strcpy(data.langName, txt_TextEntries[idx]);
 			} else {
@@ -149,7 +149,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 		obj = fcn_00442910(0, pos, dir, (char*) 0x6a40a0);
 		*(char*) (obj + 0x215) = *(char*) (obj + 0x215) | 1;
 		*(char*) (obj + 0x216) = (*(char*) (obj + 0x216) & 0xfd) | 1;
-		fcn_00412f10(obj, (char*) 0x6a4080, 1);
+		d3_ApplyObjectAnimation(obj, (char*) 0x6a4080, 1);
 	}
 	fcn_00442c00(city, 0);
 	main_LoopFlags = 0x12d6;
@@ -170,7 +170,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	info_id = tmp_ids[1];
 	while (fcn_005373e0((void*) fcn_0053ed60, 0x10d6) != 0) {
 		g_7746a0 = 0;
-		image = fcn_00443bf0((float) g_14ce8c0, (float) g_14ce8c2, 0x60, 1);
+		image = d3_FindSceneObjectAtScreenPoint((float) g_14ce8c0, (float) g_14ce8c2, 0x60, 1);
 		g_7746a4 = image;
 		if (g_14ce8cc != 0) {
 			g_7746a0 = image;
@@ -193,14 +193,14 @@ int __cdecl fcn_0053ed60(int unused, int network)
 			pos[0] = pos[0] + *(float*) (sel + 0x4c);
 			pos[1] = pos[1] + *(float*) (sel + 0x50);
 			pos[2] = pos[2] + *(float*) (sel + 0x54);
-			fcn_00412cf0(obj, pos, dir, 0x28, 0x20);
+			d3_AnimateObjectTransform(obj, pos, dir, 0x28, 0x20);
 			for (i = 0; i < count; i++) {
 				if (sel == data.cities[i]) {
 					if (data.cities[i] != 0) {
 						strcpy(g_7e1d00, sel + 6);
 						sprintf(data.keybuf, (char*) 0x6a4170, g_7e1d00);
 						_strupr(data.keybuf);
-						idx = fcn_0042dc90(data.keybuf);
+						idx = txt_FindEntryIndex(data.keybuf);
 						if (idx != -1) {
 							d2_SetForm(win2, 1);
 							io_AppendText(idx);

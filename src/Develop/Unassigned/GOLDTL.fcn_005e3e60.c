@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00475fd0(char*);
-void __cdecl fcn_00476060(char*);
+void __cdecl d2_UnlockSurface(char*);
 
 void __cdecl fcn_005e3e60(int x0, int y0, char* surf)
 {
@@ -20,6 +20,6 @@ void __cdecl fcn_005e3e60(int x0, int y0, char* surf)
 				n++;
 			}
 		}
-		fcn_00476060(surf);
+		d2_UnlockSurface(surf);
 	}
 }

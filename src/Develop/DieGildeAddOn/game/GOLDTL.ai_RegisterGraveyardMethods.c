@@ -7,8 +7,8 @@ int __cdecl ai_StartGraveyardOwner(void);
 int __cdecl ai_RunGraveyardOwner(void);
 int __cdecl fcn_0048fe70(void);
 int __cdecl ai_RunHandleGrave(void);
-int __cdecl fcn_004901b0(void);
-int __cdecl fcn_004901c0(void);
+int __cdecl ai_StartUseSeance(void);
+int __cdecl ai_RunUseSeance(void);
 
 /* ADDRESS: GOLDTL 0x004901d0 */
 int __cdecl ai_RegisterGraveyardMethods(char* e)
@@ -111,8 +111,8 @@ int __cdecl ai_RegisterGraveyardMethods(char* e)
 	d.type = 0x3f;
 	strcpy(d.name, "Use Seance");
 	d.score = fcn_004a4410;
-	d.start = fcn_004901b0;
-	d.run = fcn_004901c0;
+	d.start = ai_StartUseSeance;
+	d.run = ai_RunUseSeance;
 	d.flags = 1;
 	return am_RegisterMethod(&d, e) != 0;
 }

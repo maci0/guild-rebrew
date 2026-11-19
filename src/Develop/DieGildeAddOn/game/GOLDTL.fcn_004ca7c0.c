@@ -5,9 +5,9 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
-char* __cdecl fcn_004032b0(char*);
+char* __cdecl ch_FindCharacterByName(char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-void __cdecl fcn_0040c120(char*, int, int);
+void __cdecl ch_CreateAction(char*, int, int);
 
 int __cdecl fcn_004ca7c0(char* x, char* out)
 {
@@ -15,7 +15,7 @@ int __cdecl fcn_004ca7c0(char* x, char* out)
 	char* o;
 
 	fcn_0064d41a(buf, g_68b0d8, *(int*) (x + 0x10));
-	o = fcn_004032b0(buf);
+	o = ch_FindCharacterByName(buf);
 	if (o == 0)
 		return 2;
 	ch_CancelActionQueue(o);

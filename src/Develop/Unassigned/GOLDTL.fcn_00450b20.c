@@ -27,7 +27,7 @@ extern float g_67bbf4;
 
 
 /* ADDRESS: GOLDTL 0x00450b20 */
-void __cdecl fcn_00450b20(float scale, float* v, unsigned int color, char tint)
+void __cdecl d3_SetScaledMaterial(float scale, float* v, unsigned int color, char tint)
 {
 	Material m;
 

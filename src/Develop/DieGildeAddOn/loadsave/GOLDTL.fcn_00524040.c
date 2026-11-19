@@ -7,7 +7,7 @@ extern char* txt_TextEntries[];
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 int sprintf(char* buf, const char* fmt, ...);
-int __cdecl fcn_0042dc90(const char* name);
+int __cdecl txt_FindEntryIndex(const char* name);
 
 /* ADDRESS: GOLDTL 0x00524040 */
 int __cdecl fcn_00524040(void* stream)
@@ -235,7 +235,7 @@ int __cdecl fcn_00524040(void* stream)
 
 	sprintf(buf, "_STADTAUSWAHL_%s_INFO+0", g_868060);
 	_strupr(buf);
-	ptr = fcn_0042dc90(buf);
+	ptr = txt_FindEntryIndex(buf);
 	if (ptr != -1) {
 		int delta;
 		char* s;

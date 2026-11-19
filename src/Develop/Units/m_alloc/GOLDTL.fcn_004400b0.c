@@ -3,7 +3,7 @@
 extern char g_6b5c60[];
 
 void* __cdecl m_alloc(int size, char* tag);
-void __cdecl fcn_0043f7e0(int* obj, char* name, int flag);
+void __cdecl d3_LoadFloorTexture(int* obj, char* name, int flag);
 void __cdecl fcn_0043f6b0(int* obj);
 
 #pragma optimize("y", off)
@@ -68,7 +68,7 @@ int* __cdecl fcn_004400b0(int a0, char* a1, char* a2, char** a3, float a4, float
 	for (i = 0; i < 8; i++) {
 		*p = g_6b5c60[0];
 		if (a3[i] != 0 && a3[i][0] != 0) {
-			fcn_0043f7e0(obj, a3[i], -1);
+			d3_LoadFloorTexture(obj, a3[i], -1);
 		}
 		p += 0x40;
 	}

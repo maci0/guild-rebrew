@@ -32,7 +32,7 @@ void __cdecl m_FreeTracked(void*);
 /* Loads a texture file through the VFS into a managed Direct3D texture,
  * scaled down by the texture detail shift. */
 /* ADDRESS: GOLDTL 0x00436ff0 */
-void __cdecl fcn_00436ff0(char* name, int format, struct unk_436ff0** tex, unsigned char mips, unsigned int width, unsigned int height)
+void __cdecl d3_LoadTextureFromFile(char* name, int format, struct unk_436ff0** tex, unsigned char mips, unsigned int width, unsigned int height)
 {
 	char* buf;
 	int size;

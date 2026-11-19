@@ -4,7 +4,7 @@
 #include <string.h>
 
 char* __cdecl ch_NewAction(char*);
-void __cdecl fcn_004065c0(void);
+void __cdecl ch_RunStandUpAnimation(void);
 
 int __cdecl fcn_00406670(char* p, char* s)
 {
@@ -19,7 +19,7 @@ int __cdecl fcn_00406670(char* p, char* s)
 	}
 	*(char**) (e + 0x14) = p;
 	*(int*) (e + 0xc) = 0;
-	*(void**) e = (void*) fcn_004065c0;
+	*(void**) e = (void*) ch_RunStandUpAnimation;
 	e[9] = 0x30;
 	*(int*) (e + 0x28) = 0;
 	e[0x10] = 0;

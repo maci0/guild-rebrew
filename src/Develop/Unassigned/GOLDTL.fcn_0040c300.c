@@ -14,7 +14,7 @@ typedef struct {
 
 extern char* g_6b5c20;
 
-void __cdecl fcn_0040c300(int key)
+void __cdecl ch_ClearSceneActionFinishCallbacks(int key)
 {
 	int i;
 

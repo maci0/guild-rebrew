@@ -19,7 +19,7 @@
 
 void __cdecl fcn_00469c40(int x, int y, int slot);
 
-void __cdecl fcn_00471c00(int k, unsigned char center)
+void __cdecl d2_PositionWindow(int k, unsigned char center)
 {
 	D2_WIN* w;
 	int x;

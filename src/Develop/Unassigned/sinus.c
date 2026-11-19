@@ -3,7 +3,7 @@
 extern int g_14cb8ec;
 
 /* ADDRESS: GOLDTL 0x0040c3b0 */
-float __cdecl fcn_0040c3b0(float* value)
+float __cdecl sinus(float* value)
 {
 	float result;
 

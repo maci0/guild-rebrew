@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x0040c3f0 */
-int __cdecl fcn_0040c3f0(void)
+int __cdecl ecmd_Dummy(void)
 {
     return 1;
 }

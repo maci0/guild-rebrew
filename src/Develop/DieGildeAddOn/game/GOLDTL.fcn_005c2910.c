@@ -3,7 +3,7 @@
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl io_AppendText(int, ...);
@@ -30,7 +30,7 @@ void __cdecl fcn_005c2910(char* e)
 		u = (char*) he_fn_Handlung();
 	}
 	win = fcn_00470820(0, 0, "Panel\\Gebaeude_Verkaufen_pergament");
-	fcn_00471b60(win);
+	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 2);
 	saved = fcn_00472250(win, 2, io_AppendText(0x17cc, e, *(int*) (u + 0xb0)));
 	d2_SetOverlayAnimation(0, 0);

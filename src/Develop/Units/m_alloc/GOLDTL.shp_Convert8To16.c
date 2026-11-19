@@ -2,7 +2,7 @@
 
 void __cdecl ReportClientMessage(char*);
 void* __cdecl m_alloc(unsigned int, char*);
-unsigned short __cdecl fcn_0041bac0(unsigned char, unsigned char, unsigned char);
+unsigned short __cdecl d2_PackColorForPixelFormat(unsigned char, unsigned char, unsigned char);
 void __cdecl fcn_00477560(int*, int*);
 extern char g_100eb80[];
 
@@ -38,7 +38,7 @@ int* __cdecl shp_Convert8To16(int* src, int unused, char* dest)
 	d2 = (unsigned char*) res + 0x36;
 	hdr = (unsigned int*) ((char*) res + 0x32);
 	for (i = 0; i < 0x100; i++) {
-		pal[i] = fcn_0041bac0(g_100eb80[i * 4], g_100eb80[i * 4 + 1], g_100eb80[i * 4 + 2]);
+		pal[i] = d2_PackColorForPixelFormat(g_100eb80[i * 4], g_100eb80[i * 4 + 1], g_100eb80[i * 4 + 2]);
 	}
 	for (i = 0; i < *(unsigned short*) ((char*) src + 0xa); i++) {
 		*hdr = *q;

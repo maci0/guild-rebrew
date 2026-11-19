@@ -34,7 +34,7 @@ float g_67db54 = 0.5f;
 extern unsigned char g_7747b0;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_00500d20(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
+int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00489920(fcn_0047da10_Ent* e);
 void __cdecl fcn_0047d810(fcn_0047da10_Ent* e);
@@ -56,7 +56,7 @@ void __cdecl fcn_0047da10(void)
 	int idx;
 
 	now = (*(GAME_TIMESTAMP*)&gm_GameTime);
-	d = fcn_00500d20(&g_100dc04, &now);
+	d = gm_GetElapsedMinutes(&g_100dc04, &now);
 	f = d * 12.8f;
 	n = (int) f;
 	g_67db50 = (float) g_7747b4;

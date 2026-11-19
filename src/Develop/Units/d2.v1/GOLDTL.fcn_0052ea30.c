@@ -40,14 +40,14 @@ void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_AppendText(char* fmt, ...);
 void __cdecl fcn_005186c0(int id, int a, int b, char* out);
 char* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
-int __cdecl fcn_00500d20(void* a, void* b);
+int __cdecl gm_GetElapsedMinutes(void* a, void* b);
 void __cdecl fcn_00500bb0(void* p, int a, int b, int c);
 int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
 int __cdecl fcn_0046f7e0(int x, int y, int z, int owner, int flag);
 void __cdecl fcn_0046b2b0(int element);
 int __cdecl fcn_00529800(char* s, int* out);
 float __cdecl fcn_004ff040(char* e);
-int __cdecl fcn_0046f2c0(int win, int keep);
+int __cdecl d2_ClearWindowChildren(int win, int keep);
 void __cdecl fcn_004bfe00(char* e);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
@@ -103,8 +103,8 @@ header_done:
 		if (e == 0) {
 			return;
 		}
-		ratio = (float) fcn_00500d20(e + 0x44, e + 0xb8);
-		ratio = (float) fcn_00500d20(e + 0x44, (char*) &gm_GameTime) / ratio;
+		ratio = (float) gm_GetElapsedMinutes(e + 0x44, e + 0xb8);
+		ratio = (float) gm_GetElapsedMinutes(e + 0x44, (char*) &gm_GameTime) / ratio;
 		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
@@ -135,8 +135,8 @@ header_done:
 		if (e == 0) {
 			return;
 		}
-		ratio = (float) fcn_00500d20(e + 0x44, e + 0x52);
-		ratio = (float) fcn_00500d20(e + 0x44, (char*) &gm_GameTime) / ratio;
+		ratio = (float) gm_GetElapsedMinutes(e + 0x44, e + 0x52);
+		ratio = (float) gm_GetElapsedMinutes(e + 0x44, (char*) &gm_GameTime) / ratio;
 		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
@@ -155,8 +155,8 @@ header_done:
 	if (e == 0) {
 		return;
 	}
-	ratio = (float) fcn_00500d20(e + 0x44, e + 0x52);
-	ratio = (float) fcn_00500d20(e + 0x44, (char*) &gm_GameTime) / ratio;
+	ratio = (float) gm_GetElapsedMinutes(e + 0x44, e + 0x52);
+	ratio = (float) gm_GetElapsedMinutes(e + 0x44, (char*) &gm_GameTime) / ratio;
 	*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 	if (g_6a25c4[0] == -1) {
 		d2_SetForm(g_6a25b8, 0);
@@ -217,41 +217,41 @@ no_header:
 	c = (unsigned char) *p;
 	switch (c) {
 	case 0x8f:
-		n = fcn_00500d20(p + 0x44, p + 0xb8);
+		n = gm_GetElapsedMinutes(p + 0x44, p + 0xb8);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
+			ratio = (float) gm_GetElapsedMinutes(p + 0x44, (char*) &gm_GameTime) / (float) n;
 		}
 		break;
 	case 0x16:
-		n = fcn_00500d20(p + 0x44, p + 0xb8);
+		n = gm_GetElapsedMinutes(p + 0x44, p + 0xb8);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
+			ratio = (float) gm_GetElapsedMinutes(p + 0x44, (char*) &gm_GameTime) / (float) n;
 		}
 		break;
 	case 0x40:
 		if (*(int*) (p + 0x70) < 2) {
 			ratio = 0.01f;
 		} else if (*(int*) (p + 0x70) == 2) {
-			n = fcn_00500d20(p + 0x44, p + 0x52);
+			n = gm_GetElapsedMinutes(p + 0x44, p + 0x52);
 			if (n != 0) {
-				ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
+				ratio = (float) gm_GetElapsedMinutes(p + 0x44, (char*) &gm_GameTime) / (float) n;
 			}
 		}
 		break;
 	case 0x61:
 		pos = *(pos14_7f4c00*) (p + 0xc4);
 		fcn_00500bb0(&pos, 8, 0, 0);
-		n = fcn_00500d20(p + 0xc4, &pos);
+		n = gm_GetElapsedMinutes(p + 0xc4, &pos);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0xc4, (char*) &gm_GameTime) / (float) n;
+			ratio = (float) gm_GetElapsedMinutes(p + 0xc4, (char*) &gm_GameTime) / (float) n;
 		}
 		break;
 	case 0x43:
 		pos = *(pos14_7f4c00*) (p + 0x44);
 		fcn_00500bb0(&pos, 0x18, 0, 0);
-		n = fcn_00500d20(p + 0x44, &pos);
+		n = gm_GetElapsedMinutes(p + 0x44, &pos);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
+			ratio = (float) gm_GetElapsedMinutes(p + 0x44, (char*) &gm_GameTime) / (float) n;
 		}
 		break;
 	case 0x62:
@@ -260,9 +260,9 @@ no_header:
 		} else if (*(int*) (p + 0x70) == 4) {
 			pos = *(pos14_7f4c00*) (p + 0x44);
 			fcn_00500bb0(&pos, 0x60, 0, 0);
-			n = fcn_00500d20(p + 0x44, &pos);
+			n = gm_GetElapsedMinutes(p + 0x44, &pos);
 			if (n != 0) {
-				ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
+				ratio = (float) gm_GetElapsedMinutes(p + 0x44, (char*) &gm_GameTime) / (float) n;
 			}
 		}
 		break;
@@ -272,9 +272,9 @@ no_header:
 		} else {
 			pos = *(pos14_7f4c00*) (p + 0x44);
 			fcn_00500bb0(&pos, 0x18, 0, 0);
-			n = fcn_00500d20(p + 0x44, &pos);
+			n = gm_GetElapsedMinutes(p + 0x44, &pos);
 			if (n != 0) {
-				ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
+				ratio = (float) gm_GetElapsedMinutes(p + 0x44, (char*) &gm_GameTime) / (float) n;
 			}
 		}
 		break;
@@ -282,16 +282,16 @@ no_header:
 		if (*(int*) (p + 0x70) < 1) {
 			ratio = 0.01f;
 		} else if (*(int*) (p + 0x70) == 1) {
-			n = fcn_00500d20(p + 0x44, p + 0xcc);
+			n = gm_GetElapsedMinutes(p + 0x44, p + 0xcc);
 			if (n != 0) {
-				ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
+				ratio = (float) gm_GetElapsedMinutes(p + 0x44, (char*) &gm_GameTime) / (float) n;
 			}
 		}
 		break;
 	case 0x6c:
-		n = fcn_00500d20(p + 0x44, p + 0xb4);
+		n = gm_GetElapsedMinutes(p + 0x44, p + 0xb4);
 		if (n != 0) {
-			ratio = (float) fcn_00500d20(p + 0x44, (char*) &gm_GameTime) / (float) n;
+			ratio = (float) gm_GetElapsedMinutes(p + 0x44, (char*) &gm_GameTime) / (float) n;
 		}
 		break;
 	}
@@ -334,7 +334,7 @@ no_target:
 			g_6a25c4[i] = -1;
 		}
 	}
-	fcn_0046f2c0(d2_CurrentWindowId, 1);
+	d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 	e = *(char**) ((char*) g_7e2a9c + 0x24);
 	if (e != 0) {
 		s = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb4));

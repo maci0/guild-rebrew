@@ -21,7 +21,7 @@ extern char s_6aa830[];
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl gm_AccumulateTyped2(ENTITY_RECORD*);
 int __cdecl fcn_0050d270(int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
@@ -48,7 +48,7 @@ void __cdecl fcn_005a3e10(void)
 	dlg = fcn_00470820(0, 0, s_6aa830);
 	have = gm_AccumulateTyped2(&((ENTITY_RECORD*)g_7f4ca0)[g_774970]);
 	stock = fcn_0050d270(*(int*) (g_7746cc + 0x14));
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 1);

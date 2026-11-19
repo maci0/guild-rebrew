@@ -30,7 +30,7 @@ int __cdecl fcn_0050b750(int timeout, char who);
 int __cdecl fcn_00413160(void);
 int __cdecl fcn_004432d0(int a0, int a1);
 int __cdecl fcn_00442e30(void);
-int __cdecl fcn_00448360(char *name, int a1, int a2);
+int __cdecl d3_LoadScene(char *name, int a1, int a2);
 int __cdecl fcn_00471af0(int a0, int a1);
 int __cdecl fcn_00476970(int a0);
 int __cdecl gm_RandomMod(unsigned short a0);
@@ -85,7 +85,7 @@ int __cdecl fcn_005145a0(char *path)
     engine = d3_CurrentContextIndex;
     *(int *) 0x7725c8 = 0;
     fcn_004432d0(fcn_00413160(), 0);
-    fcn_00448360("scenes/*network.ed3", 0, 0);
+    d3_LoadScene("scenes/*network.ed3", 0, 0);
     fcn_00471af0(*(int *) 0x7e1d40, 0);
     *(int *) 0x7725c8 = 1;
     fcn_00442e30();
@@ -172,7 +172,7 @@ int __cdecl fcn_005145a0(char *path)
     if (*(signed char *) &g_6a3440 > -1 && *(signed char *) &g_6a3440 < 6) {
         engine = d3_CurrentContextIndex;
         fcn_004432d0(fcn_00413160(), 0);
-        fcn_00448360("scenes/*network.ed3", 0, 0);
+        d3_LoadScene("scenes/*network.ed3", 0, 0);
         fcn_004b54e0(*(int *) (handle + 4));
         fcn_00442e30();
         fcn_004432d0(engine, 0);

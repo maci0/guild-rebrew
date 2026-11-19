@@ -21,9 +21,9 @@ typedef struct {
 typedef P413680* (__cdecl* Corners413680)(char* obj, char* m, char* p);
 
 extern float g_6628a8;
-void __cdecl fcn_00438100(char* obj, char* cam, int flag);
+void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, int flag);
 
-char __cdecl fcn_00413680(char* obj, char* cam, float* center, float* radius)
+char __cdecl d3_ComputeObjectBoundingSphere(char* obj, char* cam, float* center, float* radius)
 {
 	char r;
 	char* m;
@@ -39,7 +39,7 @@ char __cdecl fcn_00413680(char* obj, char* cam, float* center, float* radius)
 	r = 0;
 	if (obj != 0 && (center != 0 || radius != 0) && *(int*) (*(char**) (obj + 0x1ec) + 0x40c) != 0) {
 		m = *(char**) (obj + 0x1ec) + 0xf4;
-		fcn_00438100(obj, cam, 0);
+		d3_UpdateObjectCameraTransform(obj, cam, 0);
 		p = (*(Corners413680*) (*(char**) (m + 0x318) + 0x1f0))(obj, m, *(char**) (obj + 0x1ec) + 8);
 		if (p != 0) {
 			c.x = p[0].x;

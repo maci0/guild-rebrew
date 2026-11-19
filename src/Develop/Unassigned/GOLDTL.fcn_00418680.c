@@ -6,7 +6,7 @@ typedef struct {
 } fcn_00418680_vtbl;
 // SIZE 0x60
 
-void __cdecl fcn_00418680(void)
+void __cdecl d3_CreateRenderVertexBuffers(void)
 {
 	void* obj;
 	fcn_00418680_vtbl* vt;

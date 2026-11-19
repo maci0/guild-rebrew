@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004265f0 */
-int __cdecl fcn_004265f0(char* a, char* b)
+int __cdecl evt_MatchTokenPrefix(char* a, char* b)
 {
 	int i;
 

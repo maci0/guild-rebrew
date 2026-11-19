@@ -49,15 +49,15 @@ int __cdecl fcn_005373e0(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00433780(void *);
-void __cdecl fcn_00412cf0(char *, Vec3 *, Vec3 *, int, int);
+void __cdecl d3_AnimateObjectTransform(char *, Vec3 *, Vec3 *, int, int);
 char *__cdecl fcn_00445600(char *, int, char *, char *);
-void __cdecl fcn_0040b920(char *, char *);
+void __cdecl ch_QueueWalkToDummyRotate(char *, char *);
 int __cdecl fcn_0053b1b0(void);
 int __cdecl fcn_0053cd40(int);
 unsigned int __cdecl fcn_0053b6b0(int);
 void __cdecl fcn_00471af0(int, int);
 char *__cdecl fcn_004730c0(int, int, int, int, char *, int, int);
-int __cdecl fcn_004030e0(char *);
+int __cdecl ch_DestroyCharacter(char *);
 void *__cdecl fcn_00426cc0(int);
 int __cdecl fcn_00428720(char *);
 void __cdecl fcn_005312d0(int);
@@ -160,7 +160,7 @@ int __cdecl fcn_0053c560(void)
 					fcn_00433780(d3_ActiveCamera);
 					d3_CameraAnimating = 0;
 					d3_ActiveCameraAnimation = 0;
-					fcn_00412cf0(d3_ActiveCamera, &parentA, &parentB, 0x50, 8);
+					d3_AnimateObjectTransform(d3_ActiveCamera, &parentA, &parentB, 0x50, 8);
 				}
 				flag = 0;
 			}
@@ -196,7 +196,7 @@ slot_found:
 							obj2->slot = i;
 							found = fcn_00445600(0, 0x100, 0, buf[i]);
 							if (found != 0)
-								fcn_0040b920((char *) obj2, found);
+								ch_QueueWalkToDummyRotate((char *) obj2, found);
 						}
 					}
 					flag = 1;
@@ -209,7 +209,7 @@ slot_found:
 				fcn_00433780(d3_ActiveCamera);
 				d3_CameraAnimating = 0;
 				d3_ActiveCameraAnimation = 0;
-				fcn_00412cf0(d3_ActiveCamera,
+				d3_AnimateObjectTransform(d3_ActiveCamera,
 				    (Vec3 *) (d3_ActiveCamera + 0x114),
 				    (Vec3 *) (d3_ActiveCamera + 0x120), 0x50, 8);
 				if (fcn_0053b1b0()) {
@@ -235,23 +235,23 @@ slot_found:
 		}
 	}
 	if (nnMann != 0)
-		fcn_004030e0((char *) nnMann);
+		ch_DestroyCharacter((char *) nnMann);
 	if (nnFrau != 0)
-		fcn_004030e0((char *) nnFrau);
+		ch_DestroyCharacter((char *) nnFrau);
 	if (hwMann != 0)
-		fcn_004030e0((char *) hwMann);
+		ch_DestroyCharacter((char *) hwMann);
 	if (hwFrau != 0)
-		fcn_004030e0((char *) hwFrau);
+		ch_DestroyCharacter((char *) hwFrau);
 	if (kampfMann != 0)
-		fcn_004030e0((char *) kampfMann);
+		ch_DestroyCharacter((char *) kampfMann);
 	if (vhMann != 0)
-		fcn_004030e0((char *) vhMann);
+		ch_DestroyCharacter((char *) vhMann);
 	if (vhFrau != 0)
-		fcn_004030e0((char *) vhFrau);
+		ch_DestroyCharacter((char *) vhFrau);
 	if (rhFrau != 0)
-		fcn_004030e0((char *) rhFrau);
+		ch_DestroyCharacter((char *) rhFrau);
 	if (rhMann != 0)
-		fcn_004030e0((char *) rhMann);
+		ch_DestroyCharacter((char *) rhMann);
 	if (obj != -1)
 		fcn_00471e30(obj);
 	if (oldSound != -1) {

@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned short* g_772e9c;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-ent2c* __cdecl fcn_004ceac0(char*, char*);
+ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_004d4250(char*, char*);
 
@@ -46,7 +46,7 @@ void __cdecl fcn_004d4180(char* x)
 		e = gm_LookupEntityRecordIn32SlotTable(base[i]);
 		if (e == 0)
 			continue;
-		d = fcn_004ceac0(rec, e);
+		d = gm_FindOrCreateEntitySlot(rec, e);
 		if (d->f8 == 1 || fcn_004c4450(d->f8) != 0) {
 			d->f8 = -1;
 			if (d->f4 == 0 && *(int*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x218) != 1)

@@ -1,12 +1,12 @@
 #include <stdio.h>
 
-char* __cdecl fcn_00404300(char*, char*, char);
+char* __cdecl ch_LoadCharacterMotion(char*, char*, char);
 void __cdecl fcn_00407800(char*, int, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 int __cdecl fcn_004042b0(char*);
 void __cdecl ch_CheckAniMorph(char*);
 
-char* __cdecl fcn_00404300(char*, char*, char);
+char* __cdecl ch_LoadCharacterMotion(char*, char*, char);
 void __cdecl fcn_00407800(char*, int, char*);
 int __cdecl fcn_004042b0(char*);
 void __cdecl ch_CheckAniMorph(char*);
@@ -22,7 +22,7 @@ void __cdecl ch_TakingObject(char* ev)
 	obj = *(char**) (ev + 0x14);
 	if (*(int*) (ev + 0xc) == 0) {
 		if (ev[0xf0] != 0) {
-			*(char**) (ev + 0x170) = fcn_00404300(obj, ev + 0xf0, 1);
+			*(char**) (ev + 0x170) = ch_LoadCharacterMotion(obj, ev + 0xf0, 1);
 		} else {
 			fcn_00407800(obj, *(int*) (ev + 0x38), ev + 0x130);
 			ch_RemoveQueueEntry(ev);
@@ -66,7 +66,7 @@ void __cdecl ch_DroppingObject(char* ev)
 			return;
 		}
 		if (ev[0xf0] != 0) {
-			*(char**) (ev + 0x174) = fcn_00404300(obj, ev + 0xf0, 1);
+			*(char**) (ev + 0x174) = ch_LoadCharacterMotion(obj, ev + 0xf0, 1);
 		}
 		if (*(int*) (obj + 0x80) != 0) {
 			return;

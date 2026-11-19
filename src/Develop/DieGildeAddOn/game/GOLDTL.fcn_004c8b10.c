@@ -2,7 +2,7 @@
 
 
 
-int __cdecl fcn_004c4dc0(char*, int);
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 
 int __cdecl fcn_004c8b10(char* x, char* out)
@@ -19,7 +19,7 @@ int __cdecl fcn_004c8b10(char* x, char* out)
 	int type;
 	int n;
 
-	v = fcn_004c4dc0(x, *(int*) (x + 0x10));
+	v = cm_ResolveSpecialEntityId(x, *(int*) (x + 0x10));
 	*(int*) (x + 0x10) = v;
 	if (gm_ResolveEntityById((void**) (&e1), (void**) (&e2), (void**) (&e3), v) == 0)
 		return 1;

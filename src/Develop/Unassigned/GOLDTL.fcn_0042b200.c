@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_0042b200(int key)
+int __cdecl msx_FindStreamIndex(int key)
 {
 	int i;
 	int j;

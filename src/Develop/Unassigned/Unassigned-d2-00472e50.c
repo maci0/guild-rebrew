@@ -38,7 +38,7 @@ typedef struct Win {
 extern char s_67d844[];
 extern char s_67d818[];
 
-void __cdecl fcn_004772e0(int a, int b, int c, int d, int e);
+void __cdecl d2_ClearSurfaceRect(int a, int b, int c, int d, int e);
 typedef struct
 {
 	int i[0x3cc / 4];
@@ -51,10 +51,10 @@ extern char s_67d868[];
 int __cdecl d2_GetResourceData(int id);
 void __cdecl fcn_00475fd0(int surf);
 void __cdecl fcn_0047cba0(int x, int y, int surf, int src, int mode);
-void __cdecl fcn_00476060(int surf);
+void __cdecl d2_UnlockSurface(int surf);
 
 /* ADDRESS: GOLDTL 0x00472e50 */
-void __cdecl fcn_00472e50(void)
+void __cdecl d2_ClearPaintbox(void)
 {
 	char* m;
 
@@ -84,7 +84,7 @@ void __cdecl fcn_00472ea0(int a, int b, int c, int d)
 		ReportClientMessage(s_67d818);
 		return;
 	}
-	fcn_004772e0(a, b, c, d, w->surface);
+	d2_ClearSurfaceRect(a, b, c, d, w->surface);
 }
 
 /* ADDRESS: GOLDTL 0x00472f10 */
@@ -106,6 +106,6 @@ void __cdecl d2_DrawShape(int x, int y, int id)
 	if (src != 0) {
 		fcn_00475fd0(w->i[0x38 / 4]);
 		fcn_0047cba0(x, y, w->i[0x38 / 4], src, d2_ResourceOffset);
-		fcn_00476060(w->i[0x38 / 4]);
+		d2_UnlockSurface(w->i[0x38 / 4]);
 	}
 }

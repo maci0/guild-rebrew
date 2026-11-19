@@ -10,7 +10,7 @@ int __cdecl fcn_0050d320(char*, char);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_004fa5b0(int, char*, int*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_00495400(int, unsigned short, int, void*, void*);
+int __cdecl ai_SelectBestMethod(int, unsigned short, int, void*, void*);
 int __cdecl fcn_004f4830(int, void*);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
@@ -86,7 +86,7 @@ int __cdecl fcn_00499640(int unused0, char* e, int a2, Msg499640* out1, Msg49964
 		msg1.b = 1;
 	}
 send:
-	r = fcn_00495400(0x18, *(unsigned short*) e, 1, &msg0, &msg1);
+	r = ai_SelectBestMethod(0x18, *(unsigned short*) e, 1, &msg0, &msg1);
 	if (r == 0) {
 		goto fail;
 	}
@@ -125,7 +125,7 @@ main:
 		msg1.type = 0;
 		msg1.a = 0;
 		msg1.b = 0;
-		r = fcn_00495400(0x18, *(unsigned short*) e, 0, &msg0, &msg1);
+		r = ai_SelectBestMethod(0x18, *(unsigned short*) e, 0, &msg0, &msg1);
 		if (r == 0) {
 			goto fail;
 		}

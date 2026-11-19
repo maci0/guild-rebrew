@@ -4,12 +4,12 @@
 #include "Develop/DieGildeAddOn/game/ch_action.h"
 
 extern float g_6628a8;
-void __cdecl fcn_00404300(char* e, char* name, int n);
+void __cdecl ch_LoadCharacterMotion(char* e, char* name, int n);
 int __cdecl fcn_004042b0(char* e);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl ch_CheckAniMorph(char* e);
 
-void __cdecl fcn_00406280(CH_ACTION* t)
+void __cdecl ch_ExecPlayAnimation(CH_ACTION* t)
 {
 	char* e;
 	char* s;
@@ -23,7 +23,7 @@ void __cdecl fcn_00406280(CH_ACTION* t)
 		if (t->parameter == -1) {
 			*(unsigned short*) (e + 0x8c) |= 2;
 		}
-		fcn_00404300(e, t->name, t->parameter < 1 ? 1 : t->parameter);
+		ch_LoadCharacterMotion(e, t->name, t->parameter < 1 ? 1 : t->parameter);
 	} else if (t->unbekannt_190 != 0 || t->parameter != -1) {
 		if (t->parameter == -1) {
 			*(unsigned short*) (e + 0x8c) &= ~2;

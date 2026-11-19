@@ -5,7 +5,7 @@ extern char g_10432c0[];
 
 
 char* __cdecl fcn_00445600(char*, int, int, char*);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "client_scene_transform.h"
 
 int __cdecl fcn_00529710(char* a, unsigned char* b)
@@ -27,9 +27,9 @@ int __cdecl fcn_00529710(char* a, unsigned char* b)
 		if (*(char**) (d + 0x88) == g_10432c0) {
 			x = fcn_00445600(*(char**) (b + 0x61), 0x100, 0, "dummy_TUER");
 			if (x != 0) {
-				fcn_00455350(x, x + 0x4c, pos);
+				d3_TransformPoint(x, x + 0x4c, pos);
 			} else {
-				fcn_00455350(*(char**) (b + 0x61), *(char**) (b + 0x61) + 0x4c, pos);
+				d3_TransformPoint(*(char**) (b + 0x61), *(char**) (b + 0x61) + 0x4c, pos);
 				r = 3250.0f;
 			}
 			if (CompareVector3WithinTolerance((float*) (*(char**) (d + 0x34) + 0x4c), pos, r) != 0) {

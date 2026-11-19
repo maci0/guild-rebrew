@@ -4,7 +4,7 @@ extern int g_14a79c0[];
 int __cdecl fcn_0050dfd0(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_00466ee0(int, int, int, int, int);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 
@@ -23,7 +23,7 @@ int __cdecl fcn_004bf000(unsigned short* a1, int a2, int a3, int col, int x, int
 	py = y + 0x22;
 	r = fcn_004677e0(px - 8, py - 5, 0x2f, 0, k, 0x6a, 0x2d, layer);
 	id = fcn_00466ee0(px, py, a3 + 0xdf, 0x8a, layer);
-	fcn_00472900(id, 0x54);
+	d2_SetElementFont(id, 0x54);
 	out[0] = -1;
 	out[1] = id;
 	out[2] = r;

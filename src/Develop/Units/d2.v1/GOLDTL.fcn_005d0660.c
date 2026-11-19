@@ -33,11 +33,11 @@ void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl gm_LookupEntityRecordById(unsigned int);
 void* __cdecl fcn_00470820(short, short, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_00472e50(void);
-int __cdecl fcn_0046f2c0(int, int);
+void __cdecl d2_ClearPaintbox(void);
+int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -91,7 +91,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 	}
 	win = (int) fcn_00470820(0, 0, (char*) 0x6acab0);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(win);
+	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 2);
 	if (a2) {
 		io_AppendText(a2);
@@ -189,8 +189,8 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				}
 
 				d2_SetForm(win, 1);
-				fcn_00472e50();
-				fcn_0046f2c0(d2_CurrentWindowId, 1);
+				d2_ClearPaintbox();
+				d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 				posY[0] = rows2 - w;
 				tabA[0].text = fcn_0046f740(posY[0] - 0x5a, 0xa,
 				    0x5db, d2_CurrentWindowId);

@@ -13,7 +13,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_0050b710(int, char);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00472170(int, int);
+void __cdecl d2_SetSlotVisibility(int, int);
 
 void __cdecl fcn_005e6d10(int show)
 {
@@ -26,7 +26,7 @@ void __cdecl fcn_005e6d10(int show)
 			    fcn_0050b710(g_776644, (*(char*)&g_773d75)), 1);
 		}
 		else {
-			fcn_00472170(g_6ad580, show);
+			d2_SetSlotVisibility(g_6ad580, show);
 		}
 	}
 }

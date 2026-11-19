@@ -88,7 +88,7 @@ int __cdecl fcn_004aab30(char* actor, int a2, char* x)
 }
 
 /* ADDRESS: GOLDTL 0x004aac00 */
-int __cdecl fcn_004aac00(char* actor, int a2, char* x)
+int __cdecl aip_ExecAnschwaerzen(char* actor, int a2, char* x)
 {
 	char msg[0xf8];
 

@@ -26,7 +26,7 @@ int __cdecl fcn_00428800(int a);
 
 /* Parses an assignment, increment or decrement on a script variable. */
 /* ADDRESS: GOLDTL 0x00428d50 */
-int __cdecl fcn_00428d50(struct var_428d50* v)
+int __cdecl evt_ParseVariableAssignment(struct var_428d50* v)
 {
 	struct tok_428d50 t;
 	int idx;

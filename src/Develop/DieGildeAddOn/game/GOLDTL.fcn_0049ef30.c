@@ -1,7 +1,7 @@
 int __cdecl gm_GetOppositeStatIndex(int job);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
-int __cdecl fcn_004a4550(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
+int __cdecl ai_CalculateMatchingMethodEffects(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x0049ef30 */
 int __cdecl ai_ScoreChangeProfession(float* firstScore, float* secondScore, int a3, char* e, int skip, int a6, int a7)
@@ -21,7 +21,7 @@ int __cdecl ai_ScoreChangeProfession(float* firstScore, float* secondScore, int 
 					return fcn_004a4410(firstScore, secondScore, a3, e, 0, a6, a7);
 				}
 			} else {
-				fcn_004a4550(firstScore, secondScore, a3, e, 0, a6, a7);
+				ai_CalculateMatchingMethodEffects(firstScore, secondScore, a3, e, 0, a6, a7);
 				*firstScore = *firstScore + *firstScore;
 				*secondScore = *secondScore * 3.0f;
 				return 1;

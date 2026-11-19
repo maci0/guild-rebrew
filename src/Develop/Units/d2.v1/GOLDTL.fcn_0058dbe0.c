@@ -8,7 +8,7 @@ void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005bdc30(int, int*, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
@@ -88,7 +88,7 @@ void __cdecl fcn_0058dbe0(int a0)
 	}
 	v2 = fcn_00470820(0, 0, (char*) 0x6a9768);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(v2);
+	d2_CenterDialogWindows(v2);
 	d2_SetForm(v2, 0);
 	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(v2, 1);

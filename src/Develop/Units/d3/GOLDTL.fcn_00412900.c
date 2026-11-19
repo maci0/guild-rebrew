@@ -25,7 +25,7 @@ extern int d3_ActiveCameraAnimation;
 int* __cdecl fcn_004339e0(char* a0, flags_00412900 a1, int a2, frame_00412900* a3);
 
 /* ADDRESS: GOLDTL 0x00412900 */
-int* __cdecl fcn_00412900(char* obj, float* pos, int id)
+int* __cdecl d3_StartCameraAnimation(char* obj, float* pos, int id)
 {
 	flags_00412900 flags;
 	frame_00412900 frames[5];

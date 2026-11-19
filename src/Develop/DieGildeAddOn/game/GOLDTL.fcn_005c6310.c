@@ -1,6 +1,6 @@
 #include "client_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-int __cdecl fcn_00500d20(void*, void*);
+int __cdecl gm_GetElapsedMinutes(void*, void*);
 unsigned short* __cdecl fcn_00502cd0(int, int, int);
 int __cdecl fcn_005c61e0(int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
@@ -38,7 +38,7 @@ void __cdecl fcn_005c6310(void)
 	if (g_774970 >= 0x300) {
 		return;
 	}
-	fcn_00500d20((void*) 0x775320, &gm_GameTime);
+	gm_GetElapsedMinutes((void*) 0x775320, &gm_GameTime);
 	n = g_775330;
 	off = n * 0x21c;
 	for (; n < g_775330 + 0x20; n++) {
@@ -53,7 +53,7 @@ void __cdecl fcn_005c6310(void)
 					if (*(int*) (obj + 4) > 0) {
 						rec = (char*) item;
 						if (*(int*) (rec + 0x21) != 0) {
-							stamp = fcn_00500d20(rec + 0x2d, &gm_GameTime);
+							stamp = gm_GetElapsedMinutes(rec + 0x2d, &gm_GameTime);
 							left = *(int*) (rec + 0x1c) - stamp;
 							*(int*) (rec + 0x1c) = left;
 							*(pos14_7f4c00*) (rec + 0x2d) = gm_GameTime;

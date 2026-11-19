@@ -8,7 +8,7 @@ extern int g_100f1dc;
 extern char g_6b5c60[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -16,7 +16,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_00502cd0(int, ...);
-int __cdecl fcn_0046f2c0(int, int);
+int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_005ca560(void*);
 void __cdecl fcn_005ca740(int, int, int, int, void*, int);
@@ -57,7 +57,7 @@ void __cdecl fcn_005a2080(int a0, int a1)
 	}
 	btn = -1;
 	win = fcn_00470820(0, 0, "locations\\Wirtshaus\\Stammtisch");
-	fcn_00471b60(win);
+	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
@@ -115,7 +115,7 @@ void __cdecl fcn_005a2080(int a0, int a1)
 		}
 		if (changed) {
 			d2_SetForm(win, 1);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText((char*) 0x188c, a0);
 			if (n == 0) {
 				io_AppendText((char*) 0x188e);
@@ -132,7 +132,7 @@ void __cdecl fcn_005a2080(int a0, int a1)
 				}
 			}
 			d2_SetForm(win, 2);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText(g_6811b0);
 			btn = -1;
 			if (state != 2) {

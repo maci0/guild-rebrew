@@ -36,7 +36,7 @@ extern char *g_14b59f0, *g_14b59f4;
 void __cdecl fcn_005263d0(int, int, int);
 int __cdecl fcn_00470820(int, int, char *);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00533a60(int, int, int *, int, ...);
@@ -85,7 +85,7 @@ void __cdecl fcn_005e53b0(void *arg)
     }
     window = fcn_00470820(0, 0, "Locations\\zigeuner\\blutrache");
     d2_SetOverlayAnimation(0, 0);
-    fcn_00471b60(window);
+    d2_CenterDialogWindows(window);
     d2_SetForm(window, 0);
     fcn_005340f0(d2_CurrentWindowId);
     d2_SetForm(window, 1);

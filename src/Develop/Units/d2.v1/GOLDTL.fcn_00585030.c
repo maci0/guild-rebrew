@@ -37,7 +37,7 @@ extern List8c_102cbc8 g_102cbc8[];
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
@@ -49,7 +49,7 @@ void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472640(int, int);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00534160(int, int, int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -100,7 +100,7 @@ void __cdecl fcn_00585030(int a0)
 	g_100f1dc = -1;
 	win = fcn_00470820(0, 0, "Locations\\Domizil\\Alchemistry2");
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(win);
+	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(win, 2);
@@ -142,7 +142,7 @@ void __cdecl fcn_00585030(int a0)
 		io_FormatTextBuffer(buf, (char*) 0x679060, src[0] * 2 + 0x9a8);
 		item = d2_ShowTxt(x + 0x3c, y + 5, buf, wnd);
 		((Ctl*) g_1015ea0)[item].x18 = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
-		fcn_00472900(item, 0x54);
+		d2_SetElementFont(item, 0x54);
 		fcn_00534160(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
 		count++;
 	}
@@ -162,7 +162,7 @@ void __cdecl fcn_00585030(int a0)
 			item = d2_ShowTxt(0, 0, buf, d2_CurrentWindowId);
 			((Ctl*) g_1015ea0)[item].x18 = ((Screen*) g_77255c)->xc;
 			((Ctl*) g_1015ea0)[item].x6c = 1;
-			fcn_00472900(item, 0x54);
+			d2_SetElementFont(item, 0x54);
 			d2_SetElementValue(dlg, 0, 0x64, (int) (frac * g_662cf8));
 		}
 		fcn_00472640(btn1, g_102cbc8[list].n != -1 && count != 0 && sel == 0);
@@ -192,7 +192,7 @@ void __cdecl fcn_00585030(int a0)
 				io_FormatTextBuffer(buf2, (char*) 0x679060, src[0] * 2 + 0x9a8);
 				item = d2_ShowTxt(x + 0x3c, y + 5, buf2, wnd);
 				((Ctl*) g_1015ea0)[item].x18 = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
-				fcn_00472900(item, 0x54);
+				d2_SetElementFont(item, 0x54);
 				fcn_00534160(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
 				count++;
 			}

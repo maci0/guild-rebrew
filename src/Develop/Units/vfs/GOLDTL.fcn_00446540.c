@@ -74,13 +74,13 @@ struct Node {
 	int i220;
 };
 
-void __cdecl fcn_00401210(int, unsigned char);
-void __cdecl fcn_00401230(int, char*);
+void __cdecl vfs_WriteByte(int, unsigned char);
+void __cdecl vfs_WriteCString(int, char*);
 void __cdecl fcn_00401260(int, int);
-void __cdecl fcn_004012f0(int, float*);
+void __cdecl vfs_WriteVec3(int, float*);
 void __cdecl fcn_00401360(int, int);
 void __cdecl ReportClientMessage(const char*);
-void __cdecl fcn_0043b740(int, void*);
+void __cdecl d3_WriteEventTable(int, void*);
 
 /* ADDRESS: GOLDTL 0x00446540 */
 void __cdecl fcn_00446540(int stream, Node* n)
@@ -91,33 +91,33 @@ void __cdecl fcn_00446540(int stream, Node* n)
 	int i;
 	Node* p2;
 
-	fcn_00401210(stream, (unsigned char) n->flags >> 7);
+	vfs_WriteByte(stream, (unsigned char) n->flags >> 7);
 	if (((unsigned char) n->flags >> 7) == 0)
 		goto tail;
 	kind = n->type;
 	if (kind == 1) {
 		kind = n->kind;
 		if (n->name[0] == '!')
-			fcn_00401230(stream, n->name + 1);
+			vfs_WriteCString(stream, n->name + 1);
 		else
-			fcn_00401230(stream, n->name);
+			vfs_WriteCString(stream, n->name);
 	} else {
-		fcn_00401230(stream, n->name);
+		vfs_WriteCString(stream, n->name);
 	}
 	fcn_00401360(stream, n->i204);
 	fcn_00401360(stream, n->i220);
 	fcn_00401360(stream, kind);
-	fcn_00401210(stream, n->type == 1);
+	vfs_WriteByte(stream, n->type == 1);
 	switch (kind) {
 	case 1:
 	case 4:
-		fcn_00401210(stream, ((unsigned char) n->flags >> 5) & 1);
-		fcn_00401210(stream, 1);
-		fcn_00401210(stream, (unsigned char) n->b215 & 1);
-		fcn_00401210(stream, (unsigned char) n->b216 & 3);
-		fcn_00401210(stream, ((unsigned char) n->b216 >> 2) & 1);
-		fcn_00401210(stream, ((unsigned char) n->b216 >> 3) & 1);
-		fcn_00401210(stream, ((unsigned char) n->b216 >> 4) & 1);
+		vfs_WriteByte(stream, ((unsigned char) n->flags >> 5) & 1);
+		vfs_WriteByte(stream, 1);
+		vfs_WriteByte(stream, (unsigned char) n->b215 & 1);
+		vfs_WriteByte(stream, (unsigned char) n->b216 & 3);
+		vfs_WriteByte(stream, ((unsigned char) n->b216 >> 2) & 1);
+		vfs_WriteByte(stream, ((unsigned char) n->b216 >> 3) & 1);
+		vfs_WriteByte(stream, ((unsigned char) n->b216 >> 4) & 1);
 		fcn_00401360(stream, 0);
 		if (n->model != 0) {
 			fcn_00401360(stream, n->model->count);
@@ -126,7 +126,7 @@ void __cdecl fcn_00446540(int stream, Node* n)
 				p = strrchr(buf, '_');
 				if (p != 0 && strlen(p) == 2 && isdigit(p[1]))
 					p[0] = 0;
-				fcn_00401230(stream, buf);
+				vfs_WriteCString(stream, buf);
 			}
 		} else {
 			fcn_00401360(stream, 0);
@@ -134,46 +134,46 @@ void __cdecl fcn_00446540(int stream, Node* n)
 		/* Native flow continues into the 2/3 body: no break in the original. */
 	case 2:
 	case 3:
-		fcn_004012f0(stream, &n->pos.x);
-		fcn_004012f0(stream, &n->v84.x);
-		fcn_00401210(stream, ((unsigned char) n->flags >> 6) & 1);
+		vfs_WriteVec3(stream, &n->pos.x);
+		vfs_WriteVec3(stream, &n->v84.x);
+		vfs_WriteByte(stream, ((unsigned char) n->flags >> 6) & 1);
 		if (n->flags & 0x40) {
-			fcn_004012f0(stream, &n->v5c.x);
-			fcn_004012f0(stream, &n->v90.x);
+			vfs_WriteVec3(stream, &n->v5c.x);
+			vfs_WriteVec3(stream, &n->v90.x);
 		}
 		for (i = 0; i < 10; i++) {
-			fcn_004012f0(stream, &n->pairs[i].a.x);
-			fcn_004012f0(stream, &n->pairs[i].b.x);
+			vfs_WriteVec3(stream, &n->pairs[i].a.x);
+			vfs_WriteVec3(stream, &n->pairs[i].b.x);
 		}
 		break;
 	case 0:
-		fcn_00401210(stream, ((unsigned char) n->flags >> 6) & 1);
+		vfs_WriteByte(stream, ((unsigned char) n->flags >> 6) & 1);
 		fcn_00401260(stream, n->i68);
-		fcn_004012f0(stream, &n->pos.x);
-		fcn_004012f0(stream, &n->v5c.x);
-		fcn_004012f0(stream, &n->v90.x);
+		vfs_WriteVec3(stream, &n->pos.x);
+		vfs_WriteVec3(stream, &n->v5c.x);
+		vfs_WriteVec3(stream, &n->v90.x);
 		break;
 	case 5:
 	case 6:
 	case 7:
 	case 8:
-		fcn_00401210(stream, 1);
-		fcn_00401210(stream, ((unsigned char) n->b215 >> 2) & 1);
+		vfs_WriteByte(stream, 1);
+		vfs_WriteByte(stream, ((unsigned char) n->b215 >> 2) & 1);
 		fcn_00401260(stream, *(int*) &n->v90);
 		fcn_00401260(stream, *(int*) &n->v90.y);
 		fcn_00401260(stream, *(int*) &n->v90.z);
-		fcn_004012f0(stream, &n->v5c.x);
-		fcn_004012f0(stream, &n->pos.x);
-		fcn_004012f0(stream, &n->v84.x);
+		vfs_WriteVec3(stream, &n->v5c.x);
+		vfs_WriteVec3(stream, &n->pos.x);
+		vfs_WriteVec3(stream, &n->v84.x);
 		fcn_00401260(stream, n->data->i198);
 		fcn_00401360(stream, n->data->i19c);
 		for (i = 0; i < 0x188; i += 0x38) {
 			fcn_00401260(stream, *(int*) ((char*) n->data + i + 0x28));
 			fcn_00401260(stream, *(int*) ((char*) n->data + i + 0x24));
 			fcn_00401260(stream, *(int*) ((char*) n->data + i + 0x2c));
-			fcn_004012f0(stream, (float*) ((char*) n->data + i + 0x18));
-			fcn_004012f0(stream, (float*) ((char*) n->data + i));
-			fcn_004012f0(stream, (float*) ((char*) n->data + i + 0xc));
+			vfs_WriteVec3(stream, (float*) ((char*) n->data + i + 0x18));
+			vfs_WriteVec3(stream, (float*) ((char*) n->data + i));
+			vfs_WriteVec3(stream, (float*) ((char*) n->data + i + 0xc));
 			fcn_00401260(stream, *(int*) ((char*) n->data + i + 0x30));
 			fcn_00401360(stream, *(int*) ((char*) n->data + i + 0x34));
 		}
@@ -185,7 +185,7 @@ void __cdecl fcn_00446540(int stream, Node* n)
 tail:
 	for (p2 = n->child; p2 != 0 && ((unsigned char) p2->flags >> 7) == 0; p2 = p2->next)
 		;
-	fcn_00401210(stream, p2 != 0);
+	vfs_WriteByte(stream, p2 != 0);
 	if (p2 != 0)
 		fcn_00446540(stream, p2);
 	for (p2 = n->next; p2 != 0; p2 = p2->next) {
@@ -194,8 +194,8 @@ tail:
 		if (((unsigned char) p2->flags >> 7) != 0)
 			break;
 	}
-	fcn_00401210(stream, p2 != 0);
+	vfs_WriteByte(stream, p2 != 0);
 	if (p2 != 0)
 		fcn_00446540(stream, p2);
-	fcn_0043b740(stream, n->event);
+	d3_WriteEventTable(stream, n->event);
 }

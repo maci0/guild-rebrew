@@ -33,7 +33,7 @@ int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00472680(int, int);
 char* __cdecl fcn_004ce680(char*);
 void __cdecl fcn_0046b2b0(int);
-void __cdecl fcn_00472170(int, int);
+void __cdecl d2_SetSlotVisibility(int, int);
 
 /* ADDRESS: GOLDTL 0x004d0a20 */
 void __cdecl fcn_004d0a20(void)
@@ -63,8 +63,8 @@ void __cdecl fcn_004d0a20(void)
 		if (q->win != -1) {
 			v = q->unit;
 			if (*(int*) (*(int*) (*(int*) (v + 0x184) + 0x34) + 0x218) == 1) {
-				fcn_00472170(*(int*) (g_10161bc + q->win * 0x3cc), 0);
-				fcn_00472170(*(int*) (g_10161bc + q->frame * 0x3cc), 0);
+				d2_SetSlotVisibility(*(int*) (g_10161bc + q->win * 0x3cc), 0);
+				d2_SetSlotVisibility(*(int*) (g_10161bc + q->frame * 0x3cc), 0);
 			} else {
 				if (*(char*) (v + 0x188) != 0) {
 					fcn_00473690(*(int*) (v + 0x18c), 1);

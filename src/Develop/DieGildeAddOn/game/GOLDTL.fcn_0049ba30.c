@@ -15,7 +15,7 @@ float* __cdecl fcn_005c61e0(int id);
 int __cdecl fcn_005dbf10(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049ba30 */
-int __cdecl fcn_0049ba30(char* e, int* p)
+int __cdecl ai_RunSecurityObject(char* e, int* p)
 {
 	float* d;
 	unsigned short* s;

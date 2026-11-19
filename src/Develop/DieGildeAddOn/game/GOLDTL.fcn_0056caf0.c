@@ -10,7 +10,7 @@ extern char g_7f4ca4[];
 
 int* __cdecl fcn_004c30a0(int, int, char*, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl fcn_005463a0(int, ...);
 int __cdecl fcn_00546190(char*);
@@ -60,8 +60,8 @@ void __cdecl fcn_0056caf0(char* a0)
 			if (cand == 0) {
 				continue;
 			}
-			fcn_00455350((char*) *(int*) (rec + 0x61), (char*) (*(int*) (rec + 0x61) + 0x4c), p1);
-			fcn_00455350((char*) *(int*) (cand + 0x61), (char*) (*(int*) (cand + 0x61) + 0x4c), p2);
+			d3_TransformPoint((char*) *(int*) (rec + 0x61), (char*) (*(int*) (rec + 0x61) + 0x4c), p1);
+			d3_TransformPoint((char*) *(int*) (cand + 0x61), (char*) (*(int*) (cand + 0x61) + 0x4c), p2);
 			d = (float) sqrt((p1[2] - p2[2]) * (p1[2] - p2[2]) + (p1[1] - p2[1]) * (p1[1] - p2[1])
 			                 + (p1[0] - p2[0]) * (p1[0] - p2[0]));
 			if (d < best) {

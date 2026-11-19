@@ -51,7 +51,7 @@ void __cdecl fcn_00452420(void*);
 void __cdecl fcn_0043bcf0(int);
 void __cdecl fcn_00459b40(int);
 void __cdecl m_FreeTracked(int);
-void __cdecl fcn_00444040(void);
+void __cdecl d3_CreateSceneCameras(void);
 
 
 /* ADDRESS: GOLDTL 0x00442e30 */
@@ -128,7 +128,7 @@ void __cdecl fcn_00442e30(void)
 	(*(int*)&g_6b8480) = 0;
 	(*(int*)&g_6b847c) = 0;
 	(*(int*)&g_6b8478) = 0;
-	fcn_00444040();
+	d3_CreateSceneCameras();
 	g_6b8058 = 0;
 	g_67a37c = 4;
 	g_67a380 = 0xf;

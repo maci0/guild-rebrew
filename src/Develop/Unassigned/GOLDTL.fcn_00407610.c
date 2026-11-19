@@ -1,14 +1,14 @@
 char* __cdecl fcn_00402610(char*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 void __cdecl fcn_00441720(int, float*, int, int*, int*, float*);
-int __cdecl fcn_00413190(int);
+int __cdecl d3_GetContextIndex(int);
 void __cdecl fcn_00438b40(char*, float*);
 
 
 /* Eases a character's height towards the ground of its map cell; returns
  * the cell type. */
 /* ADDRESS: GOLDTL 0x00407610 */
-int __cdecl fcn_00407610(char* ev)
+int __cdecl ch_AdjustHeightToGround(char* ev)
 {
 	char* map;
 	char* obj;
@@ -38,7 +38,7 @@ int __cdecl fcn_00407610(char* ev)
 						height = ground;
 					}
 				}
-				if (fcn_00413190(*(int*) (obj + 0x88)) == 0) {
+				if (d3_GetContextIndex(*(int*) (obj + 0x88)) == 0) {
 					height += 3.0f;
 				}
 				*(float*) (node + 0x50) = (height - *(float*) (node + 0x50)) * 0.25f + *(float*) (node + 0x50);

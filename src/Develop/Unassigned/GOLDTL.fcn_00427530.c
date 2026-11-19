@@ -9,7 +9,7 @@ int __cdecl fcn_00428800(int);
 int __cdecl fcn_00427b40(int);
 void __cdecl fcn_00428720(int);
 
-void __cdecl fcn_00427530(void)
+void __cdecl evt_ReturnFromFunction(void)
 {
 	int x;
 

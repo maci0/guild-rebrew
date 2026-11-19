@@ -4,7 +4,7 @@ extern int g_14cbca0, gm_NextEntityId, g_773dd8; extern void* g_6b7fdc;
 void __cdecl fcn_004432d0(int a, int b);
 int __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl gm_AllocGebaeude(char typ, unsigned short id);
-int __cdecl fcn_0042f690(char* path, int a, int b, char* out);
+int __cdecl vfs_ResolvePath(char* path, int a, int b, char* out);
 int __cdecl fcn_004488e0(char* path, int a, int b);
 void __cdecl fcn_00438b40(int h, void* p);
 void __cdecl fcn_00438cb0(int h, void* p);
@@ -12,7 +12,7 @@ void __cdecl fcn_00598860(int h, void* p);
 void __cdecl fcn_00510820(int h, void* p, int n);
 void __cdecl fcn_00597ff0(int id, char* dst);
 int __cdecl lc_GetGebaeudeBauplatz(char* name, void* p);
-void __cdecl fcn_004379a0(int a, int b, int c, int d, void* out);
+void __cdecl d3_VisitSceneObjects(int a, int b, int c, int d, void* out);
 void __cdecl fcn_005982d0(void);
 void __cdecl ReportClientMessage(char* msg);
 void __cdecl fcn_004550b0(int a, int b);
@@ -62,7 +62,7 @@ int __cdecl cm_ExCreateGeb(char* a0, char* out)
 			        (char) (i + '@'));
 		else
 			sprintf(path, "%sgebaeude/*%s.ogr", (char*) 0x7e1ae0, name);
-		if (fcn_0042f690(path, (int) g_6b7fdc, (int) g_6b7fdc, found) != 0)
+		if (vfs_ResolvePath(path, (int) g_6b7fdc, (int) g_6b7fdc, found) != 0)
 			goto load;
 	}
 	goto done;
@@ -89,7 +89,7 @@ load:
 	sprintf(name, "cm_ExCreateGeb(): bauplatze name:%s", tmp);
 	if (lc_GetGebaeudeBauplatz(shortname, geb) != 0) {
 		memset(&list, 0, sizeof list);
-		fcn_004379a0(g_67a370, *(int*)(shortname + 0x50), 0x2c0, (int) fcn_005982d0, &list);
+		d3_VisitSceneObjects(g_67a370, *(int*)(shortname + 0x50), 0x2c0, (int) fcn_005982d0, &list);
 		for (i = 0; i < list.count; i++) {
 			if (g_773dd8 != 0)
 				fcn_004550b0(list.items[i], g_773dd8);

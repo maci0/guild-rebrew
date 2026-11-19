@@ -25,7 +25,7 @@ extern int g_14ce8d8;
 
 int __cdecl fcn_005d28e0(char*, int*, int*);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -35,7 +35,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 int __cdecl fcn_005d2d30(unsigned short*);
-void __cdecl fcn_00471a30(int, int);
+void __cdecl d2_SetGroupVisibility(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -55,7 +55,7 @@ int __cdecl fcn_005d2ec0(char* a0)
 	res = 2;
 	fcn_005d28e0(a0, &count, ids);
 	dlg = fcn_00470820(0, 0, (char*) 0x6acbd4);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1ce3);
 	d2_SetForm(dlg, 2);
@@ -81,13 +81,13 @@ int __cdecl fcn_005d2ec0(char* a0)
 		else if (g_100f1dc != -1 && g_14ce8d8 != 0) {
 			for (i = 0; i < count; i++) {
 				if (items[i].btn == d2_CurrentElementId) {
-					fcn_00471a30(dlg, 0);
+					d2_SetGroupVisibility(dlg, 0);
 					if (fcn_005d2d30((unsigned short*) items[i].e) != 0) {
 						res = 0x92;
 						g_774654 = 1;
 						break;
 					}
-					fcn_00471a30(dlg, 1);
+					d2_SetGroupVisibility(dlg, 1);
 				}
 			}
 		}

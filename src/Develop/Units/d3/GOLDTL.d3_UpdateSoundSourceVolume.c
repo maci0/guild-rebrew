@@ -2,13 +2,13 @@
 #include "client_sound.h"
 
 #include "Develop/Units/d3/d3_camera.h"
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 void __cdecl fcn_00423890(char*, int);
 int __cdecl fcn_00423460(char*);
 void __cdecl fcn_004237f0(char*, int);
 char* __cdecl fcn_00422460(int, char*);
 void __cdecl fcn_004238f0(char*, int);
-void __cdecl fcn_004192b0(char*, int, int, int);
+void __cdecl d3snd_PlaySource(char*, int, int, int);
 
 
 void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source)
@@ -22,7 +22,7 @@ void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source)
     if (source == 0 || source->objekt == 0) {
         return;
     }
-    fcn_00455350(source->objekt, source->objekt + 0x4c, position);
+    d3_TransformPoint(source->objekt, source->objekt + 0x4c, position);
     x = position[0] - *(float*)((char*)d3_ActiveCamera + 0x4c);
     y = position[1] - *(float*)((char*)d3_ActiveCamera + 0x50);
     z = position[2] - *(float*)((char*)d3_ActiveCamera + 0x54);
@@ -44,7 +44,7 @@ void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source)
                 if (source->replay != 0) {
                     *(int*)(source->voice + 0x14) &= ~8;
                 } else {
-                    fcn_004192b0((char*)source, 0, 0, 0);
+                    d3snd_PlaySource((char*)source, 0, 0, 0);
                 }
             }
         } else {
@@ -55,7 +55,7 @@ void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source)
                 *(int*)(source->voice + 0x18) = source->replay;
                 fcn_00423890(source->voice, volume);
                 fcn_004238f0(source->voice, source->playbackControl);
-                fcn_004192b0((char*)source, 0, source->playbackControl, source->replay);
+                d3snd_PlaySource((char*)source, 0, source->playbackControl, source->replay);
             }
         }
     } else if (source->voice != 0) {

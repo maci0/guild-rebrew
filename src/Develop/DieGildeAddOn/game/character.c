@@ -14,18 +14,18 @@ void __cdecl fcn_00453270(char*);
 
 #ifdef REBREW_GOLD
 #define fcn_00443900 fcn_00447fd0
-#define fcn_00413190 fcn_00411be0
+#define d3_GetContextIndex fcn_00411be0
 #define fcn_00402aa0 fcn_00402540
 #define fcn_0040cfb0 fcn_0040c090
 #endif
 
 char __cdecl fcn_00443900(void*, void*, void*);
-void __cdecl fcn_00438c40(void*, float*);
-int __cdecl fcn_00413190(void*);
+void __cdecl d3_SetObjectPosition(void*, float*);
+int __cdecl d3_GetContextIndex(void*);
 void __cdecl fcn_00402aa0(char*);
 void __cdecl ch_RunAnimationScript();
-char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
-void __cdecl fcn_00425bf0(char*, int, const char*);
+char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(), unsigned char, int, ...);
+void __cdecl evt_LogScriptError(char*, int, const char*);
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include <math.h>
@@ -56,7 +56,7 @@ int __cdecl d3_RemoveObjectAnim(char*);
 extern char g_6b5c60[];
 D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
 void __cdecl fcn_00438ac0(char*, int);
-void __cdecl fcn_00404a00(char*, int, ...);
+void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
 void __cdecl fcn_00404b60(char*, int, ...);
 
 
@@ -220,7 +220,7 @@ char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...)
         *(int*) (action + 0x30) = original_kind;
     }
     action[0x10] = 0;
-    fcn_00405180(object, action);
+    ch_ValidateActionLinks(object, action);
     return action;
 }
 
@@ -253,7 +253,7 @@ int __cdecl ch_PlaceOnGround(void* object, int force)
 				if (*(int*) (*(char**) (obj + 0x88) + 0xac) != 0) {
 					fcn_00441720(*(char**) (*(char**) (obj + 0x88) + 0xac), pos, 1, &col, &row, &height);
 				}
-				if (fcn_00413190(*(void**) (obj + 0x88)) == 0) {
+				if (d3_GetContextIndex(*(void**) (obj + 0x88)) == 0) {
 					pos[1] = height + 3.0f;
 				} else {
 					pos[1] = height;

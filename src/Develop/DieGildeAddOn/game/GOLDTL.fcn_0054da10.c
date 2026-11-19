@@ -21,7 +21,7 @@ void __cdecl fcn_00546190(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
-int __cdecl fcn_00500d20(char*, char*);
+int __cdecl gm_GetElapsedMinutes(char*, char*);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x0054da10 */
@@ -197,7 +197,7 @@ ent0:
 	case 3:
 		i = *(int*) (a + 0xd8);
 		if (i <= 3 && *(int*) (a + 0xb4 + i * 4) != -1) {
-			if (fcn_00500d20(a + 0x44, (char*) 0x7f4c00) > 0x1e0) {
+			if (gm_GetElapsedMinutes(a + 0x44, (char*) 0x7f4c00) > 0x1e0) {
 				*(pos14_7f4c00*) (a + 0x52) = gm_GameTime;
 				fcn_00500bb0(a + 0x52, 0, 2, 0);
 				*(int*) (a + 0x84) = fcn_004c5620(1, a);
@@ -241,7 +241,7 @@ ent0:
 			sprintf(text, (char*) 0x6a5a8c, *(int*) (ent + 1));
 			return;
 		}
-		if (fcn_00500d20(a + 0x44, (char*) 0x7f4c00) > 0x1e0) {
+		if (gm_GetElapsedMinutes(a + 0x44, (char*) 0x7f4c00) > 0x1e0) {
 			*(pos14_7f4c00*) (a + 0x52) = gm_GameTime;
 			fcn_00500bb0(a + 0x52, 0, 2, 0);
 			*(int*) (a + 0x84) = fcn_004c5620(1, a);

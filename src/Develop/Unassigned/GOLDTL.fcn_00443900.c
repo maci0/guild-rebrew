@@ -29,7 +29,7 @@ extern int g_67a370;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1043060;
 
-void __cdecl fcn_004379a0(fcn_00443900_Scene* s, fcn_00443900_Obj* o, int mask, void* fn, void* ctx);
+void __cdecl d3_VisitSceneObjects(fcn_00443900_Scene* s, fcn_00443900_Obj* o, int mask, void* fn, void* ctx);
 void __cdecl fcn_004438b0(void);
 void __cdecl fcn_00443030(fcn_00443900_Scene* s);
 
@@ -77,7 +77,7 @@ char __cdecl fcn_00443900(fcn_00443900_Obj* o, fcn_00443900_Scene* from, fcn_004
 	}
 	ctx.from = from;
 	ctx.to = to;
-	fcn_004379a0(from, o, 0x3ff, (void*) fcn_004438b0, &ctx);
+	d3_VisitSceneObjects(from, o, 0x3ff, (void*) fcn_004438b0, &ctx);
 	if (to == ((fcn_00443900_Scene*)g_67a370)) {
 		to->head = (*(fcn_00443900_Obj**)&d3_ObjectListHead);
 		to->tail = (*(fcn_00443900_Obj**)&g_1042538);

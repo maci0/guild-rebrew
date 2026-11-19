@@ -2047,7 +2047,7 @@ int __cdecl fcn_00403870(char* e)
 	return 0;
 }
 
-int __cdecl fcn_00403ce0(void* a, void* b)
+int __cdecl ch_AttachTransport(void* a, void* b)
 {
 	return 0;
 }
@@ -2091,7 +2091,7 @@ int __cdecl fcn_00406560(char* e)
 	return 0;
 }
 
-int __cdecl fcn_00406e70(void)
+int __cdecl ch_ExecuteAttachAnimation(void)
 {
 	return 0;
 }
@@ -2234,7 +2234,7 @@ int __cdecl fcn_0040e150(void)
 	return 0;
 }
 
-int __cdecl fcn_0040f1c0(void)
+int __cdecl d3_AttachMatchingAnimation(void)
 {
 	return 0;
 }
@@ -2252,12 +2252,12 @@ int __cdecl fcn_00412b10(char* e, float x, float y, float z, float rx, float ry,
 	return 0;
 }
 
-int __cdecl fcn_00412e80(void)
+int __cdecl d3_MatchObjectNameCallback(void)
 {
 	return 0;
 }
 
-void __cdecl fcn_00412f10(int a0, char* a1)
+void __cdecl d3_ApplyObjectAnimation(int a0, char* a1)
 {
 }
 
@@ -2271,7 +2271,7 @@ int __cdecl fcn_00413160(void)
 	return 0;
 }
 
-int __cdecl fcn_00413190(void)
+int __cdecl d3_GetContextIndex(void)
 {
 	return 0;
 }
@@ -2345,7 +2345,7 @@ int __cdecl fcn_00418fb0(void* a)
 	return 0;
 }
 
-int __cdecl fcn_0041bac0(unsigned char r, unsigned char g, unsigned char b)
+int __cdecl d2_PackColorForPixelFormat(unsigned char r, unsigned char g, unsigned char b)
 {
 	return 0;
 }
@@ -2385,7 +2385,7 @@ int __cdecl fcn_0041e680(char* a, int b, int c, int d, int e, int f, int g, int 
 	return 0;
 }
 
-int __cdecl fcn_0041fb80(void)
+int __cdecl msx_ShutdownDrivers(void)
 {
 	return 0;
 }
@@ -2395,7 +2395,7 @@ int __cdecl fcn_0041fd30(int a)
 	return 0;
 }
 
-int __cdecl fcn_00420200(int a)
+int __cdecl msx_SetFadeDuration(int a)
 {
 	return 0;
 }
@@ -2479,7 +2479,7 @@ int __cdecl fcn_00425bc0(int a, int b, int c, int d, int e)
 	return 0;
 }
 
-int __cdecl fcn_00425ec0(char* g, int arg, int kind, char* name)
+int __cdecl evt_AllocateLocalVariable(char* g, int arg, int kind, char* name)
 {
 	return 0;
 }
@@ -2538,7 +2538,7 @@ int __cdecl fcn_00427c40(char* a, int b)
 	return 0;
 }
 
-int __cdecl fcn_00427f00(char* s)
+int __cdecl evt_ParseScript(char* s)
 {
 	return 0;
 }
@@ -2547,7 +2547,7 @@ void __cdecl fcn_00428340(void* handle, int a, int b)
 {
 }
 
-int __cdecl fcn_004284d0(char* a, int b)
+int __cdecl evt_RunScriptLine(char* a, int b)
 {
 	return 0;
 }
@@ -2595,12 +2595,12 @@ int __cdecl fcn_0042a9a0(int h, int v)
 	return 0;
 }
 
-int __cdecl fcn_0042aa20(int h, int v)
+int __cdecl msx_SetSampleLoopCount(int h, int v)
 {
 	return 0;
 }
 
-int __cdecl fcn_0042ad60(int h)
+int __cdecl msx_StartStream(int h)
 {
 	return 0;
 }
@@ -2645,12 +2645,12 @@ int __cdecl fcn_0042b180(int* a)
 	return 0;
 }
 
-int __cdecl fcn_0042b1c0(int a)
+int __cdecl msx_FindSampleHandleIndex(int a)
 {
 	return 0;
 }
 
-int __cdecl fcn_0042b200(int a)
+int __cdecl msx_FindStreamIndex(int a)
 {
 	return 0;
 }
@@ -2770,7 +2770,7 @@ int __cdecl fcn_00434970(char* a, char* b, int c)
 	return 0;
 }
 
-int __cdecl fcn_00435500(void)
+int __cdecl d3_RemoveObjectAnimation(void)
 {
 	return 0;
 }
@@ -2790,11 +2790,11 @@ int __cdecl fcn_00436a00(int h, void* a, int n)
 	return 0;
 }
 
-void __cdecl fcn_004379a0(int a, int b, int c, void* d, void* e)
+void __cdecl d3_VisitSceneObjects(int a, int b, int c, void* d, void* e)
 {
 }
 
-void __cdecl fcn_00437ac0(int a, int b, int c, int d)
+void __cdecl d3_TraverseSceneObjects(int a, int b, int c, int d)
 {
 }
 
@@ -2803,7 +2803,7 @@ unsigned char __cdecl fcn_00437ee0(void* a, char* b, char* c)
 	return 0;
 }
 
-int __cdecl fcn_00438100(void* a, char* b, char c)
+int __cdecl d3_UpdateObjectCameraTransform(void* a, char* b, char c)
 {
 	return 0;
 }
@@ -2961,7 +2961,7 @@ int __cdecl fcn_00454850(char* a, int b, int c, int d)
 	return 0;
 }
 
-int __cdecl fcn_00455000(char* a, char* b)
+int __cdecl d3_RemoveObjectFromCellTree(char* a, char* b)
 {
 	return 0;
 }
@@ -2971,7 +2971,7 @@ int __cdecl fcn_00455140(char* a, float* b, float* c)
 	return 0;
 }
 
-void __cdecl fcn_00455350(void)
+void __cdecl d3_TransformPoint(void)
 {
 }
 
@@ -2985,7 +2985,7 @@ int __cdecl fcn_00456590(void* s, int a, char b, unsigned int key, unsigned int 
 	return 0;
 }
 
-int __cdecl fcn_00456df0(void)
+int __cdecl d3_ClearAuxSlotState(void)
 {
 	return 0;
 }
@@ -3156,7 +3156,7 @@ int __cdecl fcn_0046ac30(void)
 	return 0;
 }
 
-int __cdecl fcn_0046b4f0(void)
+int __cdecl d2_ClearScreen(void)
 {
 	return 0;
 }
@@ -3195,7 +3195,7 @@ int __cdecl fcn_0046f280(int a1)
 	return 0;
 }
 
-int __cdecl fcn_0046f2c0(int a, int b)
+int __cdecl d2_ClearWindowChildren(int a, int b)
 {
 	return 0;
 }
@@ -3229,7 +3229,7 @@ void __cdecl fcn_00471490(int a0)
 {
 }
 
-void __cdecl fcn_00471a30(int a0, int a1)
+void __cdecl d2_SetGroupVisibility(int a0, int a1)
 {
 }
 
@@ -3237,7 +3237,7 @@ void __cdecl fcn_00471af0(int obj, int a)
 {
 }
 
-void __cdecl fcn_00471b60(void* obj)
+void __cdecl d2_CenterDialogWindows(void* obj)
 {
 }
 
@@ -3265,7 +3265,7 @@ int __cdecl fcn_00471f80(int a)
 	return 0;
 }
 
-int __cdecl fcn_00472170(int slot, int flag)
+int __cdecl d2_SetSlotVisibility(int slot, int flag)
 {
 	return 0;
 }
@@ -3373,7 +3373,7 @@ int __cdecl fcn_0047a200(int a, int b, int c, int d)
 	return 0;
 }
 
-int __cdecl fcn_0047a2b0(int h)
+int __cdecl d2_ClearAnimationSlot(int h)
 {
 	return 0;
 }
@@ -3398,7 +3398,7 @@ int __cdecl fcn_0047da10(void)
 	return 0;
 }
 
-int __cdecl fcn_0047de50(char* a)
+int __cdecl ai_EvaluateMeister(char* a)
 {
 	return 0;
 }
@@ -3438,12 +3438,12 @@ int __cdecl fcn_0048fe70(void)
 	return 0;
 }
 
-int __cdecl fcn_004901b0(void)
+int __cdecl ai_StartUseSeance(void)
 {
 	return 0;
 }
 
-int __cdecl fcn_004901c0(void)
+int __cdecl ai_RunUseSeance(void)
 {
 	return 0;
 }
@@ -3463,7 +3463,7 @@ int __cdecl fcn_00494470(void* a, int b)
 	return 0;
 }
 
-int __cdecl fcn_00495400(int kind, int id, int a3, void* b, void* a)
+int __cdecl ai_SelectBestMethod(int kind, int id, int a3, void* b, void* a)
 {
 	return 0;
 }
@@ -3473,7 +3473,7 @@ int __cdecl fcn_00495960(void)
 	return 0;
 }
 
-int __cdecl fcn_00495980(void)
+int __cdecl am_RunDummyRechtschaffenheit(void)
 {
 	return 0;
 }
@@ -3498,12 +3498,12 @@ int __cdecl fcn_004959e0(void)
 	return 0;
 }
 
-int __cdecl fcn_00495a10(void)
+int __cdecl cm_RunDummyUnversehrtheit(void)
 {
 	return 0;
 }
 
-int __cdecl fcn_00495a20(void)
+int __cdecl ai_StartDummyBeruf(void)
 {
 	return 0;
 }
@@ -3558,7 +3558,7 @@ int __cdecl fcn_00497030(void)
 	return 0;
 }
 
-int __cdecl fcn_004974c0(void)
+int __cdecl am_StartBuyObjektAP(void)
 {
 	return 0;
 }
@@ -3658,7 +3658,7 @@ int __cdecl fcn_00499cc0(void)
 	return 0;
 }
 
-int __cdecl fcn_00499db0(void)
+int __cdecl cm_RunApsSparen(void)
 {
 	return 0;
 }
@@ -3683,7 +3683,7 @@ int __cdecl fcn_0049a7b0(void)
 	return 0;
 }
 
-int __cdecl fcn_0049a880(void)
+int __cdecl ai_StartEducationObject(void)
 {
 	return 0;
 }
@@ -3703,7 +3703,7 @@ int __cdecl fcn_0049b7c0(void)
 	return 0;
 }
 
-int __cdecl fcn_0049bba0(void)
+int __cdecl ai_StartUseParfuem(void)
 {
 	return 0;
 }
@@ -3713,7 +3713,7 @@ int __cdecl fcn_0049bd50(void)
 	return 0;
 }
 
-int __cdecl fcn_0049bdf0(void)
+int __cdecl cm_StartUseTrank(void)
 {
 	return 0;
 }
@@ -3788,7 +3788,7 @@ int __cdecl fcn_0049d300(void)
 	return 0;
 }
 
-int __cdecl fcn_0049d920(void)
+int __cdecl am_RunBuergermeisterUpgrade(void)
 {
 	return 0;
 }
@@ -3897,7 +3897,7 @@ int __cdecl fcn_004a57a0(char* a, int b, int c, char* d, int e, int f, unsigned 
 	return 0;
 }
 
-int __cdecl fcn_004a5960(char* e, int a2, int kind, float lo, float hi, unsigned short* ids)
+int __cdecl gm_FindSimilarEntities(char* e, int a2, int kind, float lo, float hi, unsigned short* ids)
 {
 	return 0;
 }
@@ -5394,7 +5394,7 @@ int __cdecl fcn_00572ff0(char* a)
 	return 0;
 }
 
-int __cdecl fcn_00573de0(void)
+int __cdecl d3_CollectObjectCallback(void)
 {
 	return 0;
 }

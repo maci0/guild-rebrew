@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_0046f2c0(int, int);
+void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(char*, ...);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_0046f740(int, int, int, int);
@@ -14,7 +14,7 @@ void __cdecl fcn_005a0a40(int a)
 	int x;
 	int y;
 
-	fcn_0046f2c0(d2_CurrentWindowId, 1);
+	d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 	io_AppendText(g_6a9694, a);
 	i = 0;
 	x = 0x1c;

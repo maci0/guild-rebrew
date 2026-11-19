@@ -1,6 +1,6 @@
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
-int __cdecl fcn_004eeb10(char*, int);
+int __cdecl ahm_SetMatchingSlotValue(char*, int);
 int __cdecl ahm_ApplyColorComponent(char*, int);
 int __cdecl fcn_004eec60(char*, int, char*);
 int __cdecl fcn_004eebb0(char*, int);
@@ -26,7 +26,7 @@ int __cdecl fcn_004cdb90(char* cfg, char* out)
 
 	switch (*(unsigned int*)(cfg + 0x10)) {
 	case 0x61535263:
-		r = fcn_004eeb10(cfg + 0x10, *(int*)(*(char**)(s + 0x16c) + 0x65));
+		r = ahm_SetMatchingSlotValue(cfg + 0x10, *(int*)(*(char**)(s + 0x16c) + 0x65));
 		break;
 	case 0x61437353:
 		r = ahm_ApplyColorComponent(cfg + 0x10, *(int*)(*(char**)(s + 0x16c) + 0x65));

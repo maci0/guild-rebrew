@@ -1,7 +1,7 @@
 
 
 
-char* __cdecl fcn_004032b0(char*);
+char* __cdecl ch_FindCharacterByName(char*);
 
 int __cdecl fcn_004ccc90(char* x, char* out)
 {
@@ -10,7 +10,7 @@ int __cdecl fcn_004ccc90(char* x, char* out)
 	int i;
 	int k;
 
-	a = fcn_004032b0(x + 0x10);
+	a = ch_FindCharacterByName(x + 0x10);
 	if (a == 0)
 		return 1;
 	c = *(char**) (a + 0x128);

@@ -2,9 +2,9 @@
 
 extern char* evt_CurrentScript;
 extern void __cdecl fcn_00426680(int stream, void *out);
-extern int __cdecl fcn_004260f0(int a0, char *text);
+extern int __cdecl evt_FindSymbol(int a0, char *text);
 extern int __cdecl fcn_00427740(int a0, unsigned int a1, int a2);
-extern void __cdecl fcn_00425bf0(int a0, int a1, char *text);
+extern void __cdecl evt_LogScriptError(int a0, int a1, char *text);
 extern int __cdecl fcn_00427600(int a0, void *rec);
 extern int __cdecl fcn_0064e790(int a0, int a1);
 
@@ -41,7 +41,7 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
         return 1;
     if (tok.data[0] == 10)
     {
-        v3 = fcn_004260f0(a0, name);
+        v3 = evt_FindSymbol(a0, name);
         if (v3)
             return 1;
         q = (char *)(fcn_00427740(v2, a1, 1) + 4);
@@ -50,7 +50,7 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     }
     if (tok.data[0] == 2)
     {
-        v3 = fcn_004260f0(a0, name);
+        v3 = evt_FindSymbol(a0, name);
         if (!v3)
         {
             record = fcn_00427740(v2, a1, 1);
@@ -93,9 +93,9 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     else
     {
         v3 = 1;
-        fcn_00425bf0(a0, *(unsigned int *)(a0 + 0x118), (char *)0x6794a0);
+        evt_LogScriptError(a0, *(unsigned int *)(a0 + 0x118), (char *)0x6794a0);
     }
-    if (!fcn_004260f0(v2, name))
+    if (!evt_FindSymbol(v2, name))
     {
         v3 = fcn_00427740(v2, a1, v3);
         q = (char *)(v3 + 4);
@@ -103,10 +103,10 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     }
     fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     if (tok.data[0] != 0x1c)
-        fcn_00425bf0(v2, *(unsigned int *)(v2 + 0x118), (char *)0x679490);
+        evt_LogScriptError(v2, *(unsigned int *)(v2 + 0x118), (char *)0x679490);
     fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     if (tok.data[0] == 10)
         return 1;
-    fcn_00425bf0(v2, *(unsigned int *)(v2 + 0x118), (char *)0x679480);
+    evt_LogScriptError(v2, *(unsigned int *)(v2 + 0x118), (char *)0x679480);
     return 1;
 }

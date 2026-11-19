@@ -7,13 +7,13 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_00406340(char*, char*, int);
 int __cdecl fcn_004bc8a0(int*, int, float*);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
-char* __cdecl fcn_0040c120(char*, int, int, int, int);
+char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_00406340(char*, char*, int);
 int __cdecl fcn_004bc8a0(int*, int, float*);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
-char* __cdecl fcn_0040c120(char*, int, int, int, int);
+char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004bc540 */
 void __cdecl fcn_004bc540(AMBIENT_ANIMAL_SLOT* state)
@@ -47,7 +47,7 @@ void __cdecl fcn_004bc540(AMBIENT_ANIMAL_SLOT* state)
 		return;
 	for (pt = pts[0]; n != 0; n--, pt += 4) {
 		if (fcn_0045b990(g, pt, &x, &y, &z) != 0) {
-			o = fcn_0040c120(state->objekt, 0x2d, x, y, 0);
+			o = ch_CreateAction(state->objekt, 0x2d, x, y, 0);
 			strcpy(o + 0x70, "anm_UpdateCat");
 		}
 	}
@@ -81,7 +81,7 @@ void __cdecl fcn_004bc6b0(AMBIENT_ANIMAL_SLOT* state)
 		return;
 	for (pt = pts[0]; n != 0; n--, pt += 4) {
 		if (fcn_0045b990(g, pt, &x, &y, &z) != 0) {
-			o = fcn_0040c120(state->objekt, 0x2d, x, y, 0);
+			o = ch_CreateAction(state->objekt, 0x2d, x, y, 0);
 			strcpy(o + 0x70, "anm_UpdateSheep");
 		}
 	}

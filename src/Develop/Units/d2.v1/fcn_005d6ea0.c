@@ -7,7 +7,7 @@ extern int g_14ce8e0;
 
 void* __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
-void __cdecl fcn_00471b60(int dlg);
+void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int a);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_00472250(int dlg, int a, int b);
@@ -45,7 +45,7 @@ int __cdecl fcn_005d6ea0(int entity)
     }
     dlg = (int) fcn_00470820(0, 0, "privillegien\\becircen");
     d2_SetOverlayAnimation(0, 0);
-    fcn_00471b60(dlg);
+    d2_CenterDialogWindows(dlg);
     d2_SetForm(dlg, 1);
     wnd = fcn_00472250(dlg, 1,
                        io_AppendText(0x1db4, *(u16*) entity, *(u16*) entity));

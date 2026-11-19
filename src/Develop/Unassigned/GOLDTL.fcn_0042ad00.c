@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl fcn_0042ac40(int);
 
-int __cdecl fcn_0042ad00(void)
+int __cdecl msx_CloseAllStreams(void)
 {
 	int r = 0;
 	int i;

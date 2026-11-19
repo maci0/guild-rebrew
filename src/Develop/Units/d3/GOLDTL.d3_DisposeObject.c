@@ -11,8 +11,8 @@ void __cdecl fcn_004432d0(int a, int b);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00452420(char* p);
 void __cdecl fcn_00433780(char* obj);
-void __cdecl fcn_00456d50(void);
-void __cdecl fcn_004379a0(char* u, int b, int c, void (__cdecl* cb)(void), char* obj);
+void __cdecl d3_ClearMatchingAuxSlot(void);
+void __cdecl d3_VisitSceneObjects(char* u, int b, int c, void (__cdecl* cb)(void), char* obj);
 
 void __cdecl fcn_00418f90(int a);
 
@@ -63,7 +63,7 @@ void __cdecl d3_DisposeObject(char* obj)
 		d3_RemoveObjectFromList((D3_OBJECT*) obj);
 	}
 	if (*(int*) (obj + 0x218) == 8) {
-		fcn_004379a0(u, 0, 0xc0, fcn_00456d50, obj);
+		d3_VisitSceneObjects(u, 0, 0xc0, d3_ClearMatchingAuxSlot, obj);
 	}
 	if (*(unsigned char*) (obj + 0x215) & 1) {
 		d3_CleanupObjectAuxSlots((D3_OBJECT*) (obj));

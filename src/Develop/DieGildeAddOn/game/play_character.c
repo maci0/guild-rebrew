@@ -5,20 +5,20 @@ extern char* g_6b7ebc;
 extern char* evt_CurrentScript;
 
 #include "../../../client_sound.h"
-char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
-void __cdecl fcn_00425bf0(char*, int, const char*);
+char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(), unsigned char, int, ...);
+void __cdecl evt_LogScriptError(char*, int, const char*);
 int __cdecl evt_LoadGfxScript(const char* name);
 int __cdecl evt_RunScript(char* script);
 
 extern int g_6791c8;
 
 void __cdecl ch_RunAnimationScript();
-char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
-void __cdecl fcn_00425bf0(char*, int, const char*);
+char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(), unsigned char, int, ...);
+void __cdecl evt_LogScriptError(char*, int, const char*);
 
 void __cdecl fcn_0040d0f0();
-char* __cdecl fcn_0040c230(char*, void (__cdecl*)(), unsigned char, int, ...);
-void __cdecl fcn_00425bf0(char*, int, const char*);
+char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(), unsigned char, int, ...);
+void __cdecl evt_LogScriptError(char*, int, const char*);
 #include "Develop/Units/Error/error_message.h"
 
 /* PlayCharacterAniSound(): queues a character animation task with a sound;
@@ -35,10 +35,10 @@ int __cdecl PlayCharacterAniSound(char** ch, char** ani, int* kind, unsigned cha
 		return 0;
 	}
 	if (*ch == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "PlayCharacterAniSound(): invalid character");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "PlayCharacterAniSound(): invalid character");
 		return 1;
 	}
-	task = fcn_0040c230(*ch, (void (__cdecl*)())PlayEntitySound, *level, 0x2e, *kind);
+	task = ch_CreateQueuedAction(*ch, (void (__cdecl*)())PlayEntitySound, *level, 0x2e, *kind);
 	if (task != 0) {
 		strcpy(task + 0xf0, *ani);
 		strcpy(task + 0x130, *sound);
@@ -77,13 +77,13 @@ int __cdecl PlayCharacterAniScript(char** ch, char** script, int* kind, unsigned
 		return 0;
 	}
 	if (*ch == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "PlayCharacterAniScript(): invalid character");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "PlayCharacterAniScript(): invalid character");
 		return 1;
 	}
-	task = fcn_0040c230(*ch, ch_RunAnimationScript, *level, 0x2e, *kind);
+	task = ch_CreateQueuedAction(*ch, ch_RunAnimationScript, *level, 0x2e, *kind);
 	if (task != 0) {
 		if (strlen(*script) >= 0x5f) {
-			fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "PlayCharacterAniScript(): script name too long");
+			evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "PlayCharacterAniScript(): script name too long");
 			return 1;
 		}
 		strncpy(task + 0xf0, *script, 0x3f);
@@ -110,10 +110,10 @@ int __cdecl PlayCharacterAniScriptInt(char** ch, char** script, int* kind, unsig
 		return 0;
 	}
 	if (*ch == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "PlayCharacterAniScriptInt(): invalid character");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "PlayCharacterAniScriptInt(): invalid character");
 		return 1;
 	}
-	task = fcn_0040c230(*ch, fcn_0040d0f0, *level, 0x2e, *kind);
+	task = ch_CreateQueuedAction(*ch, fcn_0040d0f0, *level, 0x2e, *kind);
 	if (task != 0) {
 		if (strlen(*script) >= 0x5f) {
 			ReportClientMessage("PlayCharacterAniScript(): script name too long");

@@ -22,11 +22,11 @@ struct anim_406410 {
 struct anim_406410* __cdecl ch_AttachAni(char* obj, char* name, int mode);
 void __cdecl fcn_00436a00(int h, struct anim_406410* a, int n);
 int __cdecl ch_FinishAnimation(char* ev);
-int __cdecl fcn_00413190(char* p);
+int __cdecl d3_GetContextIndex(char* p);
 void __cdecl fcn_004432d0(int a, int b);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
-void __cdecl fcn_00406410(char* ev)
+void __cdecl ch_RunAnimationEvent(char* ev)
 {
 	char* obj;
 	struct anim_406410* a;
@@ -54,7 +54,7 @@ void __cdecl fcn_00406410(char* ev)
 		}
 	} else if (ch_FinishAnimation(ev) == -1) {
 		saved = d3_CurrentContextIndex;
-		fcn_004432d0(fcn_00413190(*(char**) (obj + 0x88)), 1);
+		fcn_004432d0(d3_GetContextIndex(*(char**) (obj + 0x88)), 1);
 		*(short*) (*(char**) (ev + 0x14) + 0x8c) |= 0x10;
 		*(short*) (*(char**) (ev + 0x14) + 0x8c) &= ~2;
 		fcn_004432d0(saved, 1);

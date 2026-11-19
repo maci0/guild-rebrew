@@ -1,4 +1,4 @@
-int __cdecl fcn_00472880(int);
+int __cdecl d2_SelectFont(int);
 int __cdecl fcn_0046bd20(int, int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00532b40 */
@@ -9,7 +9,7 @@ void __cdecl fcn_00532b40(void)
 	int v;
 	int* tbl;
 
-	fcn_00472880(0x54);
+	d2_SelectFont(0x54);
 	for (rec = 0x1038144; rec < 0x1040484; rec += 0x2bc) {
 		if (*(int*) (rec + 0x18c) != 1) {
 			continue;

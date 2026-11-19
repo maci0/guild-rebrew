@@ -6,13 +6,13 @@ extern void fcn_00423890(int *voice, int vol);
 extern void fcn_004237f0(int *voice, int a2);
 extern void fcn_0064d41a();
 extern int fcn_0064d3f8(void);
-extern int fcn_00402ba0(int a, int b);
-extern int fcn_00402c00(int a, int b, char *buf, int d);
-extern void fcn_00455350(int a, int b, char *buf);
+extern int ch_CountCharacters(int a, int b);
+extern int ch_CountCharactersNear(int a, int b, char *buf, int d);
+extern void d3_TransformPoint(int a, int b, char *buf);
 extern void fcn_004193c0(int a, int b);
-extern int fcn_0041fc10(int handle, int value);
-extern int fcn_00420780(char *name, int value);
-extern void fcn_00420840(int handle);
+extern int msx_SetTrackVolume(int handle, int value);
+extern int msx_StartAmbientTrack(char *name, int value);
+extern void msx_StopAmbientTrack(int handle);
 
 extern char *g_6b8300;
 extern unsigned char g_772d10;
@@ -233,8 +233,8 @@ join:
 		}
 		if (g_772d30 != 0 && g_773d78 != 0) {
 			i = *(int *) ((char *) g_773d78 + 0x61);
-			fcn_00455350(i, i + 0x4c, buf);
-			i = fcn_00402c00(0, 0, buf, 0x44610000) * 0x14;
+			d3_TransformPoint(i, i + 0x4c, buf);
+			i = ch_CountCharactersNear(0, 0, buf, 0x44610000) * 0x14;
 			if (i >= 0x7f) {
 				i = 0x7f;
 			}
@@ -270,49 +270,49 @@ join:
 		c = *(unsigned char *) (lpGebaeudePROT + (unsigned) *g_7746c4 * 0x24d);
 		if (c == 0x16 && g_7746cc != 0 && *g_7746cc == 0x120) {
 			if (g_772d50 == 0) {
-				i = fcn_00420780(s_689dfc, 5);
+				i = msx_StartAmbientTrack(s_689dfc, 5);
 				g_772d50 = i;
 				return i;
 			}
-			i = fcn_00402ba0(d3_CurrentContextIndex, 0) * 9;
+			i = ch_CountCharacters(d3_CurrentContextIndex, 0) * 9;
 			fv = flt_64 < (float) i ? flt_64 : (float) i;
-			return fcn_0041fc10(g_772d50, (int) fv);
+			return msx_SetTrackVolume(g_772d50, (int) fv);
 		}
 		if (c != 0x12 && c != 0x14 && c != 8 && c != 0x15 && c != 0x0e) {
 			if (c != 7 || g_7746cc == 0 || *g_7746cc != 0xf7) {
 				goto label;
 			}
-			i = fcn_00402ba0(d3_CurrentContextIndex, 0) * 6;
+			i = ch_CountCharacters(d3_CurrentContextIndex, 0) * 6;
 			fv = flt_64 < (float) i ? flt_64 : (float) i;
 			if (g_772d50 == 0) {
-				i = fcn_00420780(s_689ddc, 5);
+				i = msx_StartAmbientTrack(s_689ddc, 5);
 				g_772d50 = i;
 				return i;
 			}
-			return fcn_0041fc10(g_772d50, (int) fv);
+			return msx_SetTrackVolume(g_772d50, (int) fv);
 		}
-		i = fcn_00402ba0(d3_CurrentContextIndex, 0) * 6;
+		i = ch_CountCharacters(d3_CurrentContextIndex, 0) * 6;
 		fv = flt_64 < (float) i ? flt_64 : (float) i;
 		if (g_772d50 == 0) {
 			if (*(int *) ((char *) g_7746c4 + 0x95) == -1) {
 				return 0;
 			}
-			i = fcn_00420780(s_689dc0, (int) fv);
+			i = msx_StartAmbientTrack(s_689dc0, (int) fv);
 			g_772d50 = i;
 			return i;
 		}
 		if (*(int *) ((char *) g_7746c4 + 0x95) == -1) {
-			fcn_00420840(g_772d50);
+			msx_StopAmbientTrack(g_772d50);
 			g_772d50 = 0;
 			return 0;
 		}
-		return fcn_0041fc10(g_772d50, (int) fv);
+		return msx_SetTrackVolume(g_772d50, (int) fv);
 	}
 label:
 	if (g_772d50 == 0) {
 		return 0;
 	}
-	fcn_00420840(g_772d50);
+	msx_StopAmbientTrack(g_772d50);
 	g_772d50 = 0;
 	return 0;
 }

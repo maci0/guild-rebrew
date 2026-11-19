@@ -42,7 +42,7 @@ void __cdecl fcn_00527420(void);
 void __cdecl gm_KillAllSpieler(void);
 void __cdecl gm_ResetAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
-void __cdecl fcn_004030e0(int p);
+void __cdecl ch_DestroyCharacter(int p);
 void __cdecl fcn_004162c0(int p);
 void __cdecl fcn_004154e0(int p);
 void __cdecl fcn_004597f0(int a, int b);
@@ -53,7 +53,7 @@ void __cdecl fcn_005c80d0(void);
 void __cdecl fcn_004bbd50(void);
 void __cdecl fcn_004c3e30(void);
 void __cdecl fcn_00402320(void);
-void __cdecl fcn_00421050(void);
+void __cdecl nt_CloseClientConnection(void);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 
 /* ADDRESS: GOLDTL 0x0053fa80 */
@@ -103,7 +103,7 @@ void __cdecl fcn_0053fa80(void)
 	gm_CleanupObjectEntities();
 	for (entry = (int*) 0x14d0020; (int) entry < 0x14d0c20; entry++) {
 		if (*entry != 0) {
-			fcn_004030e0(*entry);
+			ch_DestroyCharacter(*entry);
 		}
 	}
 	if (g_7e453c != 0) {
@@ -137,7 +137,7 @@ void __cdecl fcn_0053fa80(void)
 	fcn_004bbd50();
 	fcn_004c3e30();
 	fcn_00402320();
-	fcn_00421050();
+	nt_CloseClientConnection();
 	g_77497c = 0;
 	d2_SetOverlayAnimation(0, 0);
 	g_7e2aa0 = 0;

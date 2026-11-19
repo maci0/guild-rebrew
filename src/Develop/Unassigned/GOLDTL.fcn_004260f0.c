@@ -11,7 +11,7 @@ extern void* g_14cb8e0;
 extern int g_14cb8e4;
 
 /* ADDRESS: GOLDTL 0x004260f0 */
-void* __cdecl fcn_004260f0(char* ctx, char* name)
+void* __cdecl evt_FindSymbol(char* ctx, char* name)
 {
 	char* scope;
 	char** locals;

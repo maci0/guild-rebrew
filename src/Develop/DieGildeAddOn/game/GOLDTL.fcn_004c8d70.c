@@ -1,4 +1,4 @@
-int __cdecl fcn_004c4dc0(char*, int);
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 
 
@@ -10,7 +10,7 @@ int __cdecl fcn_004c8d70(char* m, char* out)
 	void* st;
 	char* p;
 
-	*(int*) (m + 0x10) = fcn_004c4dc0(m, *(int*) (m + 0x10));
+	*(int*) (m + 0x10) = cm_ResolveSpecialEntityId(m, *(int*) (m + 0x10));
 	if (gm_ResolveEntityById(&dyn, &ex, &st, *(int*) (m + 0x10)) == 0)
 		return 1;
 	p = st;

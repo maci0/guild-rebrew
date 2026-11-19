@@ -27,11 +27,11 @@ unsigned char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int a, char b);
 int __cdecl gm_AccumulateTyped2(ENTITY_RECORD* entity);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
-void __cdecl fcn_005c9030(int, int, int, int*);
+void __cdecl d2_ClampAmountToRange(int, int, int, int*);
 int __cdecl fcn_0050b710(int a, unsigned char b);
 int __cdecl fcn_00472250(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -79,7 +79,7 @@ void __cdecl fcn_005a9dd0(unsigned char* p)
 		ok = 0;
 	}
 	d = fcn_00470820(0, 0, g_6aae08);
-	fcn_00471b60(d);
+	d2_CenterDialogWindows(d);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(d, 1);
 	io_AppendText(0x1a1a, n);
@@ -87,7 +87,7 @@ void __cdecl fcn_005a9dd0(unsigned char* p)
 		int col;
 
 		b = io_AppendText(0x1a1b, *(unsigned short*) (((char(*)[0x2f4])g_868060)[g_773d75] + 0x54) * 2 + 0x9a8);
-		fcn_005c9030(0x640, acc, 0x20, &col);
+		d2_ClampAmountToRange(0x640, acc, 0x20, &col);
 		d2_SetElementValue(fcn_00472250(d, 1, b), fcn_0050b710(0x640, g_773d75), fcn_0050b710(col, g_773d75), fcn_0050b710(0x640, g_773d75));
 		h1 = fcn_00472250(d, 1, b + 1);
 		h2 = fcn_00472250(d, 1, b + 2);

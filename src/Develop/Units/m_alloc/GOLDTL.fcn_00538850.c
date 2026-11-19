@@ -5,11 +5,11 @@ extern void __cdecl fcn_005356e0(void);
 extern void __cdecl fcn_0041a380(int, int, int);
 extern char __cdecl fcn_0041a970(HWND, void*, int, int);
 extern void __cdecl ReportClientMessage(char*);
-extern void __cdecl fcn_0041a2a0(void);
+extern void __cdecl d3_ClearDisplayAdapterList(void);
 extern void __cdecl m_ShutdownAllocator(void);
 extern void __cdecl fcn_0041d850(void);
 extern char __cdecl fcn_00439020(void*, HWND, int);
-extern void __cdecl fcn_00444040(void);
+extern void __cdecl d3_CreateSceneCameras(void);
 extern void __cdecl fcn_00411820(HWND, int, int);
 extern void __cdecl fcn_00410610(int);
 extern int __cdecl fcn_005386e0(void);
@@ -153,15 +153,15 @@ int __cdecl fcn_00538850(int topmost)
 	fcn_0041a380(g_6acf80, g_6acf84, topmost == 1);
 	if (!fcn_0041a970(*(HWND*) 0x774940, (void*) 0x5387c0, topmost == 1, 1)) {
 		ReportClientMessage((char*) 0x6a3904);
-		fcn_0041a2a0();
+		d3_ClearDisplayAdapterList();
 		m_ShutdownAllocator();
 		fcn_0041d850();
 		return 0;
 	}
-	fcn_0041a2a0();
+	d3_ClearDisplayAdapterList();
 	if (!fcn_00439020(&g.w2, *(HWND*) 0x774940, main_Instance))
 		return 0;
-	fcn_00444040();
+	d3_CreateSceneCameras();
 	while (ShowCursor(0) > 0)
 		;
 	if (topmost == 0) {

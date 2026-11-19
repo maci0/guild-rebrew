@@ -1955,12 +1955,12 @@ extern int d3_CurrentContextIndex;
 int __cdecl fcn_005155e0(unsigned char*);
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00445600(char*, int, char*, char*);
-void __cdecl fcn_00455350(char*, float*, float*);
+void __cdecl d3_TransformPoint(char*, float*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
-void __cdecl fcn_00404a00(char*, int, ...);
+void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
 void __cdecl fcn_00510820(char*, unsigned char*, int);
 D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
-void* __cdecl fcn_00403ce0(char*, D3_OBJECT*);
+void* __cdecl ch_AttachTransport(char*, D3_OBJECT*);
 char __cdecl SelectTextureSet(D3_OBJECT*, void*, unsigned char, char);
 void __cdecl ch_SetVisible(char*, int);
 #endif
@@ -2148,7 +2148,7 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 		else
 			found = fcn_00445600(*(char**) ((char*) existing + 0x61), 0x100, NULL, "dummy_TRANSPORTER");
 		if (found != NULL) {
-			fcn_00455350(found, (float*) (found + 0x4c), position);
+			d3_TransformPoint(found, (float*) (found + 0x4c), position);
 		} else if (*(char**) ((char*) existing + 0x61) != NULL) {
 			position[0] = *(float*) (*(char**) ((char*) existing + 0x61) + 0x4c);
 			position[1] = *(float*) (*(char**) ((char*) existing + 0x61) + 0x50);
@@ -2170,7 +2170,7 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 			model = ch_CreateAtPosition("pferd_PFERD", position);
 		}
 		*(char**) (slot + 0x3b) = model;
-		fcn_00404a00(model, 1, "bewegung/karren_ziehen");
+		ch_PreloadCharacterMotions(model, 1, "bewegung/karren_ziehen");
 		fcn_00510820(*(char**) (model + 0x34), (unsigned char*) slot, 1);
 		sprintf(*(char**) (model + 0x34), "sp_%i", *(int*) (slot + 2));
 		scene = NULL;
@@ -2188,7 +2188,7 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 			scene->flags2 = (scene->flags2 & ~2) | 1;
 			scene->flags0 &= ~0x80;
 #endif
-			fcn_00403ce0(model, scene);
+			ch_AttachTransport(model, scene);
 			owner_entity = (char*) static_ptr;
 			if (owner_entity == NULL && dynamic != NULL && *(unsigned short*) ((char*) dynamic + 0x27) != 0xffff)
 				owner_entity = g_slot_table + *(unsigned short*) ((char*) dynamic + 0x27) * 0x21c;

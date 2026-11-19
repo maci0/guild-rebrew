@@ -21,7 +21,7 @@ extern int __cdecl fcn_004a5e60(unsigned short *a0, int a1, int a2, int a3, int 
 extern int __cdecl gm_ResolveEntityById(void **a0, void **a1, void **a2, int a3);
 extern int __cdecl fcn_0050b810(int a0, unsigned char a1);
 extern unsigned short __cdecl gm_RandomMod(int a0);
-extern int __cdecl fcn_00495400(int a0, int a1, int a2, void *a3, void *a4);
+extern int __cdecl ai_SelectBestMethod(int a0, int a1, int a2, void *a3, void *a4);
 extern int __cdecl fcn_004a4fb0(void *a0, void *a1, char *a2, int a3);
 extern float __cdecl fcn_004fc460(float *a0);
 extern int __cdecl fcn_0050d170(int a0);
@@ -70,7 +70,7 @@ int __cdecl ai_StartBuergermeisterKerker(int a0, unsigned short *a1, int a2, Msg
             v11.a = *(int *)(v6p + 2);
             v11.b = v7;
             v11.d = 1;
-            v6 = fcn_00495400(0xf, *a1, 0, &v12, &v11);
+            v6 = ai_SelectBestMethod(0xf, *a1, 0, &v12, &v11);
             if (v6 != 0)
                 goto label_49df97;
         }
@@ -91,7 +91,7 @@ int __cdecl ai_StartBuergermeisterKerker(int a0, unsigned short *a1, int a2, Msg
         v11.a = v13;
         v11.b = 1;
         v11.value = 0.44f;
-        v6 = fcn_00495400(0x15, *a1, 1, &v12, &v11);
+        v6 = ai_SelectBestMethod(0x15, *a1, 1, &v12, &v11);
         if (v6 != 0)
         {
 label_49df97:

@@ -20,7 +20,7 @@ extern int g_6a256c;
 
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_00433780(char*);
-void __cdecl fcn_00412cf0(char*, int*, int*, int, int);
+void __cdecl d3_AnimateObjectTransform(char*, int*, int*, int, int);
 
 /* ADDRESS: GOLDTL 0x0052ae80 */
 void __cdecl fcn_0052ae80(void)
@@ -159,7 +159,7 @@ void __cdecl fcn_0052ae80(void)
 	fcn_00433780(d3_ActiveCamera);
 	d3_CameraAnimating = 0;
 	d3_ActiveCameraAnimation = 0;
-	fcn_00412cf0(d3_ActiveCamera, cur, next, g_6a256c, 8);
+	d3_AnimateObjectTransform(d3_ActiveCamera, cur, next, g_6a256c, 8);
 	g_774734 = 1;
 }
 unsigned char _dpad_6b8014[748];

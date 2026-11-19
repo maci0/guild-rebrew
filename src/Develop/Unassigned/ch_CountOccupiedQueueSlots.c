@@ -2,7 +2,7 @@
 extern char* g_6b5c20;
 
 /* ADDRESS: GOLDTL 0x00402b80 */
-int __cdecl fcn_00402b80(void)
+int __cdecl ch_CountOccupiedQueueSlots(void)
 {
 	CH_QUEUE_SLOT* base;
 	int count;

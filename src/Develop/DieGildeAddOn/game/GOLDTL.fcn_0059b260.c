@@ -23,7 +23,7 @@ void* __cdecl memset(void*, int, unsigned int);
 char* __cdecl itoa(int, char*, int);
 int __cdecl fcn_00525fb0(int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
@@ -101,7 +101,7 @@ int __cdecl fcn_0059b260(char* a0)
 		return 0;
 	}
 	h = fcn_00470820(0, 0, (char*) 0x6aa148);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	fcn_0052a0c0((int) a0, 0);
 	d2_SetForm(h, 3);
 	io_AppendText(0xc7);

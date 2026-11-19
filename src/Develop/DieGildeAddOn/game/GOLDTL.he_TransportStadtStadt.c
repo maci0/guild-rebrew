@@ -9,7 +9,7 @@ extern void *__cdecl fcn_00502cd0(int, int, ...);
 extern char *__cdecl fcn_00402610(char *);
 extern char __cdecl fcn_0045b990(char *, float *, int *, int *, float *);
 extern void __cdecl fcn_004432d0(int, int);
-extern void __cdecl fcn_00455350(char *, char *, float *);
+extern void __cdecl d3_TransformPoint(char *, char *, float *);
 extern void __cdecl fcn_004c5d20(int, int);
 extern void __cdecl fcn_004c5b50(int, int, int, int);
 extern int __cdecl fcn_004c5290(int, int, int);
@@ -53,7 +53,7 @@ void __cdecl he_TransportStadtStadt(char *v2)
 		v6 = fcn_0055d630(*(char **)(v5 + 0x61));
 		if (!v6)
 			v6 = *(char **)(v5 + 0x61);
-		fcn_00455350(v6, v6 + 0x4c, l_pos);
+		d3_TransformPoint(v6, v6 + 0x4c, l_pos);
 		if (fcn_00505340((unsigned char *)v4))
 			v6 = (char *)fcn_00502cd0(*(int *)(v3 + 0x5d), 1, 1, *(int *)(v2 + 0xac));
 		else
@@ -79,7 +79,7 @@ void __cdecl he_TransportStadtStadt(char *v2)
 						*(int *)&l_v13[1] = *(int *)(v8 + 0x50);
 						*(int *)&l_v13[2] = *(int *)(v8 + 0x54);
 					} else {
-						fcn_00455350(v8, v8 + 0x4c, l_v13);
+						d3_TransformPoint(v8, v8 + 0x4c, l_v13);
 					}
 				}
 				fcn_004c5d20(*(int *)(v6 + 2), 1);

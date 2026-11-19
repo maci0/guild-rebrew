@@ -17,7 +17,7 @@ void __cdecl fcn_0047ce50(int tex);
 void __cdecl d2_SubRefcount(int id);
 
 /* ADDRESS: GOLDTL 0x0046f390 */
-int __cdecl fcn_0046f390(int win)
+int __cdecl d2_DestroyWindow(int win)
 {
 	fcn_0046f390_Win* w;
 

@@ -8,7 +8,7 @@ extern unsigned char* lpGebaeudePROT;
 extern char g_6ac690[];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_0050cf50(unsigned char*, int);
 void __cdecl fcn_00527f10(unsigned char* e);
@@ -51,7 +51,7 @@ void __cdecl fcn_005c49e0(unsigned char* p)
 	tbl = lpGebaeudePROT + p[0] * 0x24d;
 	id = *(int*) (p + 1);
 	d = fcn_00470820(0, 0, g_6ac690);
-	fcn_00471b60(d);
+	d2_CenterDialogWindows(d);
 	d2_SetOverlayAnimation(0, 0);
 	r = fcn_0050cf50(p, (char) p[0x5c]);
 	fcn_00527f10(p);

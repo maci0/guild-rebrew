@@ -36,7 +36,7 @@ extern int g_14ce8e0;
 
 int __cdecl fcn_005d2a40(int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004c5530(Packet*);
@@ -56,7 +56,7 @@ int __cdecl fcn_005d2d30(unsigned short* a1)
 
 	cost = fcn_005d2a40(*(int*) (g_7f4ca0 + g_774970 * 540 + 4), *(int*) (a1 + 2));
 	dlg = fcn_00470820(0, 0, "privillegien\\werbung2");
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1ce5, *a1, cost);
 	g_100f1dc = -1;

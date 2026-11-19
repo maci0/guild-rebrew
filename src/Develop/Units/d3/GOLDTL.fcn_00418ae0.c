@@ -1,7 +1,7 @@
 #include "Develop/Units/d3/d3_object.h"
 
 
-int __cdecl fcn_00413190(int);
+int __cdecl d3_GetContextIndex(int);
 void __cdecl fcn_004432d0(int, int);
 
 
@@ -13,7 +13,7 @@ void __cdecl fcn_00418ae0(char* p)
 	save = *(int*) 0x6b8010;
 	k = -1;
 	if (*(int*) (p + 0x20c) != *(int*) 0x67a370) {
-		k = fcn_00413190(*(int*) (p + 0x20c));
+		k = d3_GetContextIndex(*(int*) (p + 0x20c));
 		fcn_004432d0(k, 1);
 	}
 	d3_DestroyObject((D3_OBJECT*) (p));

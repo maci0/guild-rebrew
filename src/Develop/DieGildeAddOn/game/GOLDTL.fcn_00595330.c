@@ -11,7 +11,7 @@ int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_0046f7e0(int, int, int, int, int);
 void __cdecl fcn_0046f9b0(int, int);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_0046b2b0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00500e20(int*);
@@ -118,7 +118,7 @@ void __cdecl fcn_00595330(int a0, int a1, int a2, int a3, int a4)
 					                            *(int*) (slot - 0x38) + 0xdf,
 					                            g_row_handle(row), -2);
 					*(int*) (g_object(*(int*) slot) + 0x5c) = 1;
-					fcn_00472900(*(int*) slot, 0x54);
+					d2_SetElementFont(*(int*) slot, 0x54);
 					_itoa(g_id_field(row, key), numbuf, 10);
 					fcn_0046f9b0(*(int*) slot, (int) numbuf);
 					*(int*) (g_object(*(int*) slot) + 0x1dc) = -8;

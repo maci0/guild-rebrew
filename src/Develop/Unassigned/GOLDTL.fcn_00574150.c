@@ -18,8 +18,8 @@ extern int g_67a370;
 
 void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_00445600(int, int, int, char*);
-void __cdecl fcn_004379a0(int, int, int, void*, struct list*);
-char __cdecl fcn_00573de0(int v, int* list);
+void __cdecl d3_VisitSceneObjects(int, int, int, void*, struct list*);
+char __cdecl d3_CollectObjectCallback(int v, int* list);
 
 int __cdecl fcn_00574150(char* a)
 {
@@ -40,7 +40,7 @@ int __cdecl fcn_00574150(char* a)
 	sprintf(buf, "he_%i", *(int*) (a + 4));
 	l.handle = fcn_00445600(0, 0x1c0, 0, buf);
 	l.count = 0;
-	fcn_004379a0(g_67a370, l.handle, 0x2c0, fcn_00573de0, &l);
+	d3_VisitSceneObjects(g_67a370, l.handle, 0x2c0, d3_CollectObjectCallback, &l);
 	for (i = 1; i < l.count; i++) {
 		n = 0;
 		*(int*) (l.e[i] + 0x224) = 0;

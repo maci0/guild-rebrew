@@ -1,4 +1,4 @@
-void __cdecl fcn_00471c00(int, int);
+void __cdecl d2_PositionWindow(int, int);
 
 /* ADDRESS: GOLDTL 0x00471db0 */
 void __cdecl fcn_00471db0(int groupIndex, int a1)
@@ -16,7 +16,7 @@ void __cdecl fcn_00471db0(int groupIndex, int a1)
 		id = *(int*) (base + 4 + i * 4);
 		t = *(int*) (0x10161bc + id * 0x3cc);
 		if (*(int*) (*(int*) 0x1015ea0 + t * 756 + 0x40) == 0) {
-			fcn_00471c00(id, a1);
+			d2_PositionWindow(id, a1);
 		}
 	}
 }

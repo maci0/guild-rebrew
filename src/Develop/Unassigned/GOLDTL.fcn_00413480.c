@@ -3,7 +3,7 @@
 
 extern char* d3_ActiveCamera;
 
-void __cdecl fcn_00438100(char*, char*, int);
+void __cdecl d3_UpdateObjectCameraTransform(char*, char*, int);
 void __cdecl fcn_00455540(char*, float*, float*);
 
 /* ADDRESS: GOLDTL 0x00413480 */
@@ -23,7 +23,7 @@ int __cdecl fcn_00413480(char* a0, float a1, float* a2, float* a3, float* a4, fl
 	if (*(int*) (a0 + 0x218) != 4)
 		return 1;
 	if ((*(unsigned char*) (a0 + 0x216) & 0x20) == 0)
-		fcn_00438100(a0, d3_ActiveCamera, 0);
+		d3_UpdateObjectCameraTransform(a0, d3_ActiveCamera, 0);
 	m = *(char**) (*(char**) (a0 + 0x1cc) + 0x318);
 	n = *(int*) (m + 0x44);
 	i = 0;

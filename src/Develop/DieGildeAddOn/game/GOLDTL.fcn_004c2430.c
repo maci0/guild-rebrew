@@ -7,11 +7,11 @@ int __cdecl fcn_00500e20(char*);
 int __cdecl fcn_004c27f0(void);
 int __cdecl fcn_004c2820(int);
 extern char g_772d58[];
-void* __cdecl fcn_0041fd70(char*, int);
+void* __cdecl msx_StartTrack(char*, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x004c2430 */
-void __cdecl fcn_004c2430(void)
+void __cdecl msx_SelectOutdoorTrack(void)
 {
 	char* dst;
 	int season;
@@ -36,7 +36,7 @@ void __cdecl fcn_004c2430(void)
 		sprintf((char*) 0x772910, "Resuming Outdoor-Track %s !", dst);
 		*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) + 0x1e);
 		*(char*) (0x68822a + idx) = 1;
-		tp_msx_CurrentTrack = g_772d20 = (Chan_14cc460*) fcn_0041fd70(dst, 0);
+		tp_msx_CurrentTrack = g_772d20 = (Chan_14cc460*) msx_StartTrack(dst, 0);
 		return;
 	}
 	do {
@@ -108,6 +108,6 @@ void __cdecl fcn_004c2430(void)
 	*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) + 0x1e);
 	g_772d58[0] = 0;
 	*(char*) (0x68822a + idx) = 1;
-	tp_msx_CurrentTrack = g_772d20 = (Chan_14cc460*) fcn_0041fd70(dst, 0);
+	tp_msx_CurrentTrack = g_772d20 = (Chan_14cc460*) msx_StartTrack(dst, 0);
 	return;
 }

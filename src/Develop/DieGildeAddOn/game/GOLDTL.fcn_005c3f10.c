@@ -77,7 +77,7 @@ int __cdecl fcn_0057ec20(int a);
 void __cdecl fcn_0057e880(int a, int b, int c, int d);
 int __cdecl fcn_00504bd0(int a);
 int __cdecl fcn_00470820(int a, int b, char* name);
-void __cdecl fcn_00471b60(int a);
+void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl fcn_00473a90(int a, int b);
 int __cdecl fcn_0050cf50(char* ent, int kind);
 int __cdecl fcn_00504f30(int a, int b);
@@ -166,7 +166,7 @@ void __cdecl fcn_005c3f10(char* ent)
 	}
 	v.mode = fcn_00504bd0((unsigned char) ent[0]);
 	dlg = fcn_00470820(0, 0, (char*) 0x6ac690);
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	fcn_00473a90(0, 0);
 	v.ptr = fcn_0050cf50(ent, ent[0x5c]);
 	fcn_00504f30((unsigned char) ent[0], g_774970);

@@ -9,7 +9,7 @@ typedef struct Range14 {
 // SIZE 0x14
 
 /* ADDRESS: GOLDTL 0x0043c070 */
-int __cdecl fcn_0043c070(char* a, int x, int id, unsigned char tag)
+int __cdecl d3_MapWaterRangeIndex(char* a, int x, int id, unsigned char tag)
 {
 	Range14* e;
 	int k;

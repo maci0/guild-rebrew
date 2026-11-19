@@ -7,7 +7,7 @@ void __cdecl fcn_004238f0(char* o, int v);
 int __cdecl fcn_00423670(char* o, int a, int b);
 void __cdecl fcn_00423550(char* o);
 
-void __cdecl fcn_004192b0(char* r, int a2, int a3, int a4)
+void __cdecl d3snd_PlaySource(char* r, int a2, int a3, int a4)
 {
 	char buf[0x100];
 

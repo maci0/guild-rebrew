@@ -137,7 +137,7 @@ extern void fcn_00415d70();
 extern void fcn_005348a0();
 extern void fcn_005345b0();
 extern void fcn_00534b90();
-extern void fcn_00418e00();
+extern void d3snd_UpdateSoundSources();
 extern void fcn_00419990();
 extern void fcn_00422150();
 extern void fcn_0052fde0();
@@ -363,7 +363,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 		}
 	}
 	if (g_774934 != 0) {
-		fcn_00418e00();
+		d3snd_UpdateSoundSources();
 		if (g_774938 != 0) {
 			fcn_00419990();
 		}

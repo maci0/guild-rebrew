@@ -9,7 +9,7 @@ extern int __cdecl fcn_0050c490(int a0, int a1);
 extern int __cdecl io_FormatTextBuffer(char *a0, char *a1, ...);
 extern int __cdecl fcn_00526120(char *a0, int a1);
 extern int __cdecl fcn_00470820(int a0, int a1, char *a2);
-extern void __cdecl fcn_00471b60(int a0);
+extern void __cdecl d2_CenterDialogWindows(int a0);
 extern void __cdecl d2_SetForm(int a0, int a1);
 extern int __cdecl io_AppendText(int a0);
 extern int __cdecl fcn_00472250(int a0, int a1, int a2);
@@ -53,7 +53,7 @@ void __cdecl fcn_005b9980(int a0)
         return;
     }
     h = fcn_00470820(0, 0, (char *)0x6ac354);
-    fcn_00471b60(h);
+    d2_CenterDialogWindows(h);
     d2_SetForm(h, 2);
     io_AppendText(0xd8);
     v14[0] = fcn_00472250(h, 1, 0);

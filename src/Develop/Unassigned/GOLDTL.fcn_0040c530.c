@@ -5,7 +5,7 @@ extern char* evt_CurrentScript;
 char* __cdecl evt_LoadGfxScript(int id);
 void __cdecl fcn_00428340(char* o, int n, ...);
 
-char* __cdecl fcn_0040c530(int* a, int* b, int* c)
+char* __cdecl RunScriptInt2(int* a, int* b, int* c)
 {
 	char* o;
 

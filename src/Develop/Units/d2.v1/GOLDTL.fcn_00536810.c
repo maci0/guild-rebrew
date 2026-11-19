@@ -49,7 +49,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00468df0(int, int, int, int, int);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl d2_SetBildArgument(int, int);
@@ -92,7 +92,7 @@ void __cdecl fcn_00536810(void)
 		}
 	}
 	win = fcn_00468df0(0, 0, 0xc5, g_14ac628, d2_CurrentWindowId);
-	fcn_00472900(win, 0x54);
+	d2_SetElementFont(win, 0x54);
 	d2_SetForm(dlg, 2);
 	edit = fcn_00472250(dlg, 2, io_AppendText(0x1cc3, g_6b5c60));
 	d2_SetBildArgument(edit, 0x60);

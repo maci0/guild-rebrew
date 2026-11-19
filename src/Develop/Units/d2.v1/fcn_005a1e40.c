@@ -5,12 +5,12 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
 void* __cdecl fcn_00470820(int a, int b, char* name);
-void __cdecl fcn_00471b60(void* dlg);
+void __cdecl d2_CenterDialogWindows(void* dlg);
 void __cdecl d2_SetForm(void* dlg, int panel);
 int __cdecl fcn_005340f0(int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_0046f2c0(int a, int b);
+void __cdecl d2_ClearWindowChildren(int a, int b);
 int __cdecl io_AppendText();
 void __cdecl fcn_005ca560(void* slot);
 void __cdecl fcn_005ca740(int x, int y, int a, int b, void* slot, int c);
@@ -32,7 +32,7 @@ void __cdecl fcn_005a1e40(int a0, int* a1)
 
 	memset(sel, 0, sizeof(sel));
 	dlg = fcn_00470820(0, 0, "locations\\Wirtshaus\\Stammtisch");
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
@@ -59,7 +59,7 @@ void __cdecl fcn_005a1e40(int a0, int* a1)
 		}
 		if (changed) {
 			d2_SetForm(dlg, 1);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText((char*) 0x188c, a0);
 			if (n == 0) {
 				io_AppendText((char*) 0x188e);
@@ -78,7 +78,7 @@ void __cdecl fcn_005a1e40(int a0, int* a1)
 				}
 			}
 			d2_SetForm(dlg, 2);
-			fcn_0046f2c0(d2_CurrentWindowId, 1);
+			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			if (n == 4) {
 				io_AppendText((char*) 0x1892);
 			}

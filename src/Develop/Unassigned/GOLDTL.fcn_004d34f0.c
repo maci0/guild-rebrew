@@ -7,8 +7,8 @@ extern int g_67a370;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004d34b0(char*, char**);
-void __cdecl fcn_004379a0(char*, int, int, int(__cdecl*)(char*, char**), char**);
-void __cdecl fcn_00455350(char*, char*, float*);
+void __cdecl d3_VisitSceneObjects(char*, int, int, int(__cdecl*)(char*, char**), char**);
+void __cdecl d3_TransformPoint(char*, char*, float*);
 
 char* __cdecl fcn_004d34f0(char* e)
 {
@@ -26,9 +26,9 @@ char* __cdecl fcn_004d34f0(char* e)
 	res = 0;
 	best = 1000000.0f;
 	g_772f10 = 0;
-	fcn_004379a0(((char*)g_67a370), 0, 0xc0, fcn_004d34b0, list);
+	d3_VisitSceneObjects(((char*)g_67a370), 0, 0xc0, fcn_004d34b0, list);
 	c = *(char**) (*(char**) (e + 0x184) + 0x34);
-	fcn_00455350(c, c + 0x4c, pos);
+	d3_TransformPoint(c, c + 0x4c, pos);
 	for (i = 0; i < g_772f10; i++) {
 		c = list[i];
 		dx = pos[0] - *(float*) (c + 0x4c);

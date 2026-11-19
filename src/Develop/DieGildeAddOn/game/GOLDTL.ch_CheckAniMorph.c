@@ -12,10 +12,10 @@ extern int g_675314;
 extern int g_675318;
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl fcn_00435500(char*, char*);
+void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl fcn_004311a0(char*, char*, int, int, int);
 void __cdecl d3_ReleaseAnim(char*, char);
-int __cdecl fcn_00413190(char*);
+int __cdecl d3_GetContextIndex(char*);
 int __cdecl fcn_00433be0(char*, char*, int, int, int, int, char*, int);
 int __cdecl fcn_004316c0(char*);
 void __cdecl ReportClientMessage(const char*);
@@ -53,13 +53,13 @@ void __cdecl ch_CheckAniMorph(char* obj)
 			fcn_004311a0(entity, src, 0, *(int*) src, 3);
 		}
 		frames = *(char**) (src + 0x68);
-		fcn_00435500(*(char**) (entity + 0x1ec) + 0xf4, frames);
+		d3_RemoveObjectAnimation(*(char**) (entity + 0x1ec) + 0xf4, frames);
 		*(char**) (obj + 0x70) = 0;
 	}
 	if (*(char**) (obj + 0x7c) != 0) {
 		if ((*(char**) (obj + 0x7c))[0x6d] & 0x20) {
 			sprintf(buf, g_67553c, obj);
-			fcn_00435500(*(char**) (entity + 0x1ec) + 0xf4, buf);
+			d3_RemoveObjectAnimation(*(char**) (entity + 0x1ec) + 0xf4, buf);
 			d3_ReleaseAnim(d3_FindAnimByName(buf), 1);
 			*(char**) (obj + 0x7c) = 0;
 			cleared = 1;
@@ -99,7 +99,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 					                    buf, opt);
 					*(char**) (obj + 0x7c) = anim;
 					if (anim != 0) {
-						if (fcn_00413190(*(char**) (obj + 0x88)) != 0) {
+						if (d3_GetContextIndex(*(char**) (obj + 0x88)) != 0) {
 							*(int*) (*(char**) (obj + 0x7c) + 0x3c) = g_675314;
 						} else {
 							*(int*) (*(char**) (obj + 0x7c) + 0x3c) = -1;
@@ -114,7 +114,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 				fcn_004311a0(entity, src, 0, *(int*) src, 3);
 			}
 			frames = *(char**) (src + 0x68);
-			fcn_00435500(*(char**) (entity + 0x1ec) + 0xf4, frames);
+			d3_RemoveObjectAnimation(*(char**) (entity + 0x1ec) + 0xf4, frames);
 			name = *(char**) (entity + 0x1cc);
 			if (name != 0 && *(int*) (name + 0x390) != 0 &&
 			    *(int*) (name + 0x40c) != 0) {
@@ -139,7 +139,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 			*(char**) (obj + 0x70) = anim;
 			*(char*) (obj + 0x85) = -1;
 			if (anim != 0) {
-				if (fcn_00413190(*(char**) (obj + 0x88)) != 0) {
+				if (d3_GetContextIndex(*(char**) (obj + 0x88)) != 0) {
 					*(int*) (*(char**) (obj + 0x70) + 0x3c) = g_675318;
 				} else {
 					*(int*) (*(char**) (obj + 0x70) + 0x3c) = -1;

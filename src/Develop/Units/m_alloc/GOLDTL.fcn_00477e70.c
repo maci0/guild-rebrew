@@ -2,7 +2,7 @@
 
 int __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
-unsigned int __cdecl fcn_0041bac0(int r, int g, unsigned char b);
+unsigned int __cdecl d2_PackColorForPixelFormat(int r, int g, unsigned char b);
 void __cdecl fcn_00477560(const void* src, char* hdr);
 
 /* Block-encodes the colour-keyed sprite rectangle found inside the plane at
@@ -84,7 +84,7 @@ char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char
 	*(unsigned short*) (b + 0x1a) = maxx;
 	*(unsigned short*) (b + 0x1c) = maxy;
 	*(int*) b = 0x32;
-	color = fcn_0041bac0(*(unsigned char*) 0x100f1a0,
+	color = d2_PackColorForPixelFormat(*(unsigned char*) 0x100f1a0,
 	                                      *(unsigned short*) 0x100f1a1,
 	                                      *(unsigned char*) 0x100f1a2);
 	g = (char*) a5;

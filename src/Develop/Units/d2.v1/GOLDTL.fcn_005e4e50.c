@@ -27,7 +27,7 @@ int __cdecl fcn_004f65a0(ENTITY_RECORD*, int, int*, int*);
 int __cdecl fcn_0050c710(int, int, int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_005338a0(void);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -65,7 +65,7 @@ void __cdecl fcn_005e4e50(ENTITY_RECORD* other)
 		count = max + 1;
 	}
 	fcn_005340f0(fcn_00472830(h, 0));
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	fcn_005338a0();
 	d2_SetForm(h, 1);
 	io_AppendText(0x4227);

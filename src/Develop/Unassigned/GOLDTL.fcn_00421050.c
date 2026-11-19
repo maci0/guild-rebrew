@@ -6,7 +6,7 @@ extern void (__stdcall *g_662360)(void);
 
 /* ADDRESS: GOLD 0x00424c30 */
 /* ADDRESS: GOLDTL 0x00421050 */
-void __cdecl fcn_00421050(void)
+void __cdecl nt_CloseClientConnection(void)
 {
 	if (g_14cbca0 != -1) {
 		g_662374(g_14cbca0, 2);

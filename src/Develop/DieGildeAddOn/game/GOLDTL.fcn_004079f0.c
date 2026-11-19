@@ -45,7 +45,7 @@ float __cdecl fcn_00451380(float*, float*);
 char* __cdecl ch_AttachAni(char*, char*, unsigned char);
 int __cdecl fcn_004339e0(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_FRAME*);
 void __cdecl fcn_00433780(char*);
-void __cdecl fcn_00435500(char*, char*);
+void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl fcn_00438cb0(char*, float*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
@@ -159,7 +159,7 @@ void __cdecl fcn_004079f0(char* task)
 	}
 	if (*(char**) (owner + 0x70) != 0) {
 		if ((*(unsigned char*) (*(char**) (owner + 0x70) + 0x6d) & 0x20) != 0) {
-			fcn_00435500(*(char**) (*(char**) (*(char**) (task + 0x14) + 0x34) + 0x1ec) + 0xf4,
+			d3_RemoveObjectAnimation(*(char**) (*(char**) (*(char**) (task + 0x14) + 0x34) + 0x1ec) + 0xf4,
 				     *(char**) (*(char**) (owner + 0x70) + 0x68));
 			fcn_00438cb0(*(char**) (*(char**) (task + 0x14) + 0x34),
 				     (float*) (task + 0x18));

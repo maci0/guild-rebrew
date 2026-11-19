@@ -9,7 +9,7 @@ extern int g_100f1dc;
 extern int main_LoopFlags;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -18,7 +18,7 @@ void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00469470(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
-int __cdecl fcn_004b3fe0(int);
+int __cdecl d2_ChooseMission(int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
 
@@ -42,7 +42,7 @@ int __cdecl fcn_004b41b0(void)
 	result = 0;
 	b6 = -1;
 	h = fcn_00470820(0, 0, g_68116c);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	t = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca, 0x1acb, 0x1acc);
 	b0 = fcn_00472250(h, 0, t);
@@ -81,7 +81,7 @@ int __cdecl fcn_004b41b0(void)
 				else if (x == b6)
 					g_6a3440 = 5;
 				d2_SelectRadioGroup(lst, 0);
-				result = fcn_004b3fe0(g_6a3440);
+				result = d2_ChooseMission(g_6a3440);
 			}
 			if (result != 0xff)
 				g_774654 = 1;

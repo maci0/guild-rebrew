@@ -35,7 +35,7 @@ extern char* g_77255c;
 extern Win_1015f40 g_1015f40[0x60];
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
@@ -76,7 +76,7 @@ int __cdecl fcn_005c8400(void)
 		lines[k].e = 0;
 	}
 	h = fcn_00470820(0, 0, g_6ac820);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 2);

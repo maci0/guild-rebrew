@@ -16,7 +16,7 @@ extern int __cdecl fcn_004c4450(int);
 extern char* __cdecl fcn_004c4480(int);
 extern int __cdecl cut_FindCutsceneById(int);
 extern char* __cdecl fcn_00445600(int, int, int, char*);
-extern void __cdecl fcn_00455350(char*, char*, float*);
+extern void __cdecl d3_TransformPoint(char*, char*, float*);
 extern void __cdecl he_CharacterBehavior(char*, int);
 extern void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 extern int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
@@ -155,7 +155,7 @@ void __cdecl fcn_00554170(char* obj)
 			if (rec != 0) {
 				float pos[4];
 
-				fcn_00455350(rec, rec + 0x4c, pos);
+				d3_TransformPoint(rec, rec + 0x4c, pos);
 				he_CharacterBehavior(obj, (int) pos);
 			}
 		}

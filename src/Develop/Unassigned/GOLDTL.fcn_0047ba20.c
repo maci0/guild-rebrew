@@ -12,7 +12,7 @@ typedef struct {
 
 void __cdecl fcn_0047c560(int a, int b, int c);
 int __cdecl fcn_0047b8b0(int x, int y, int w, int h, Vtx47ba20* v);
-void __cdecl fcn_0047b9a0(Vtx47ba20* v, unsigned char r, unsigned char g,
+void __cdecl d2_SetQuadVertexColor(Vtx47ba20* v, unsigned char r, unsigned char g,
                           unsigned char b);
 
 /* ADDRESS: GOLDTL 0x0047ba20 */
@@ -126,7 +126,7 @@ int __cdecl fcn_0047ba20(int x, int y, char* a2, float scale)
 	v[5].u = ox + tex[0];
 	tex = (float*) *(int**) (a2 + 0x30);
 	v[5].v = fh + tex[1] + oy;
-	fcn_0047b9a0(v, 200, 200, 200);
+	d2_SetQuadVertexColor(v, 200, 200, 200);
 	d2_QueuedQuadCount = d2_QueuedQuadCount + 1;
 	d2_DrawDepthIndex = d2_DrawDepthIndex + 1;
 	return (int) rec;

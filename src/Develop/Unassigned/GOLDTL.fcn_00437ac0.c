@@ -7,7 +7,7 @@ char __cdecl fcn_004378c0(int, unsigned int);
 /* Walks a scene subtree and calls cb for every node whose type matches the
  * flags; flag 0x200 limits the walk to the given node. */
 /* ADDRESS: GOLDTL 0x00437ac0 */
-char __cdecl fcn_00437ac0(char* scene, char* node, unsigned int flags, void (__cdecl* cb)(char*))
+char __cdecl d3_TraverseSceneObjects(char* scene, char* node, unsigned int flags, void (__cdecl* cb)(char*))
 {
 	char* n;
 
@@ -20,7 +20,7 @@ char __cdecl fcn_00437ac0(char* scene, char* node, unsigned int flags, void (__c
 				cb(node);
 			}
 			if (*(char**) (node + 0x200) != 0) {
-				fcn_00437ac0(scene, *(char**) (node + 0x200), flags & ~0x200, cb);
+				d3_TraverseSceneObjects(scene, *(char**) (node + 0x200), flags & ~0x200, cb);
 			}
 			if (flags & 0x200) {
 				break;
@@ -38,7 +38,7 @@ char __cdecl fcn_00437ac0(char* scene, char* node, unsigned int flags, void (__c
 			*(int*) (scene + 0xa8) = (*(int*)&g_1040958);
 		}
 		for (n = *(char**) (scene + 0x80); n != 0 && n != d3_SceneObjectSentinel; n = *(char**) (n + 0x1f4)) {
-			fcn_00437ac0(scene, n, flags, cb);
+			d3_TraverseSceneObjects(scene, n, flags, cb);
 		}
 	}
 	return 1;

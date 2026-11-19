@@ -11,7 +11,7 @@ extern char g_67779c[];
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 
-int __cdecl fcn_00419480(unsigned short n)
+int __cdecl d3sndw_Init(unsigned short n)
 {
 	int cnt;
 	int len;

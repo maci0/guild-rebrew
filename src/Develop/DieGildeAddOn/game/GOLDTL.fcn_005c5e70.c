@@ -11,7 +11,7 @@ int __cdecl fcn_005c61e0(unsigned short id);
 int __cdecl fcn_00471f80(int handle);
 void __cdecl d2_SetElementValue(int handle, int element, int value, int extra);
 void __cdecl fcn_00472640(int handle, int value);
-void __cdecl fcn_00473750(int id, int value);
+void __cdecl d2_SetDisplayCounter(int id, int value);
 int __cdecl fcn_00466ee0(int x, int y, int id, int group, char* name);
 void __cdecl fcn_0046b2b0(int handle);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
@@ -53,7 +53,7 @@ unsigned int __cdecl fcn_005c5e70(void)
 					}
 				}
 				if (handle != 0) {
-					fcn_00473750(*(unsigned short*) *slot + 0xdf, handle);
+					d2_SetDisplayCounter(*(unsigned short*) *slot + 0xdf, handle);
 					result = 1;
 				}
 			}

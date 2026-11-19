@@ -20,7 +20,7 @@ extern void __cdecl fcn_00546190(char* record);
 extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 extern void* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
-extern int __cdecl fcn_00500d20(void* p, int v);
+extern int __cdecl gm_GetElapsedMinutes(void* p, int v);
 extern int __cdecl fcn_0050c710(void* p, int a, int b);
 extern int __cdecl fcn_005241f0(char* record);
 extern int __cdecl fcn_0050dc90(void* p);
@@ -95,7 +95,7 @@ void __cdecl fcn_005797a0(char* a0)
 		*(unsigned int*) (a0 + 0x70) = 0xffffffff;
 	}
 	if (*(int*) (a0 + 0x70) == 0) {
-		value = fcn_00500d20(a0 + 0xb8, 0x7f4c00);
+		value = gm_GetElapsedMinutes(a0 + 0xb8, 0x7f4c00);
 		if (*row == 0x1d) {
 			fvalue = (float) fcn_0050c710(search, 0x12, 1) * 0.01f;
 		} else {

@@ -16,10 +16,10 @@ typedef struct
 } fcn_0044dbd0_Ctx;
 // SIZE 0x14
 
-int __cdecl fcn_00401180(void* stream, void* dst);
+int __cdecl vfs_ReadByte(void* stream, void* dst);
 
 /* ADDRESS: GOLDTL 0x0044dbd0 */
 int __cdecl fcn_0044dbd0(void* stream, fcn_0044dbd0_Ctx* c)
 {
-	return fcn_00401180(stream, &c->recs[c->n].field);
+	return vfs_ReadByte(stream, &c->recs[c->n].field);
 }

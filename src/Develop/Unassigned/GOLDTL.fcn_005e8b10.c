@@ -34,7 +34,7 @@ extern float g_6ad634;
 
 double __cdecl sin(double);
 #pragma intrinsic(sin)
-int __cdecl fcn_00500d20(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
+int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
 
 void __cdecl fcn_005e8b10(void)
 {
@@ -47,7 +47,7 @@ void __cdecl fcn_005e8b10(void)
 	s.hour = (unsigned short) (*(Weather*)&g_7763a0).b;
 	s.minute = (*(Weather*)&g_7763a0).c;
 	s.second = 0;
-	r = fcn_00500d20(&s, &(*(GAME_TIMESTAMP*)&gm_GameTime));
+	r = gm_GetElapsedMinutes(&s, &(*(GAME_TIMESTAMP*)&gm_GameTime));
 	v = r * (1.0f / 60.0f);
 	if (!(v < 0.0f)) {
 		i = (*(GAME_TIMESTAMP*)&gm_GameTime).hour;

@@ -82,7 +82,7 @@ int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_004321f0(void*, void*, void*);
 void __cdecl fcn_004316c0(char*);
 void __cdecl fcn_00433780(char*);
-void __cdecl fcn_00435500(char*, char*);
+void __cdecl d3_RemoveObjectAnimation(char*, char*);
 char __cdecl fcn_0045cbe0(char*, unsigned int);
 
 
@@ -403,7 +403,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 								saved,
 								(SI(slot + 0x70) << 30) >> 30);
 						}
-						fcn_00435500(ext + boff + 0xf4, owner);
+						d3_RemoveObjectAnimation(ext + boff + 0xf4, owner);
 					} else {
 						SB(slot + 0x6d) |= 0x20;
 					}

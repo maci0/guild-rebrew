@@ -5,7 +5,7 @@ extern int* g_6b7d78;
 extern int g_6b7d7c;
 extern char g_14cb980[];
 
-char* __cdecl fcn_004228c0(char* key)
+char* __cdecl sb_FindSampleBank(char* key)
 {
 	char* p;
 	int i;

@@ -4,7 +4,7 @@ extern int g_6b71a0;
 extern __int64 g_6b7194;
 extern __int64 g_6b6f88;
 extern CRITICAL_SECTION msx_TrackLock;
-void __cdecl fcn_0041fb80(void);
+void __cdecl msx_ShutdownDrivers(void);
 void __cdecl fcn_00420210(void);
 #include <string.h>
 
@@ -14,17 +14,17 @@ extern int msx_TrackDriver;
 extern int msx_AmbientDriver;
 int __cdecl fcn_0042a120(int* out, int a, int b, int c);
 void __cdecl fcn_0042a2d0(int h);
-void __cdecl fcn_0041fa10(void* arg);
+void __cdecl msx_RunTrackThread(void* arg);
 
 /* ADDRESS: GOLD 0x00423770 */
 /* ADDRESS: GOLDTL 0x0041fa10 */
-void __cdecl fcn_0041fa10(void* arg)
+void __cdecl msx_RunTrackThread(void* arg)
 {
 	LARGE_INTEGER now;
 
 	while (g_6b71a0 == 0) {
 		if (!QueryPerformanceCounter(&now)) {
-			fcn_0041fb80();
+			msx_ShutdownDrivers();
 		} else if (now.QuadPart - g_6b7194 > g_6b6f88 / 20) {
 			g_6b7194 = now.QuadPart;
 			EnterCriticalSection(&msx_TrackLock);
@@ -38,7 +38,7 @@ void __cdecl fcn_0041fa10(void* arg)
 
 /* ADDRESS: GOLD 0x00423830 */
 /* ADDRESS: GOLDTL 0x0041fad0 */
-int __cdecl fcn_0041fad0(int a, int b, int c)
+int __cdecl msx_InitDrivers(int a, int b, int c)
 {
 	DWORD tid;
 
@@ -52,7 +52,7 @@ int __cdecl fcn_0041fad0(int a, int b, int c)
 		msx_TrackDriver = 0;
 		return -1;
 	}
-	if (CreateThread(0, 0, (LPTHREAD_START_ROUTINE) fcn_0041fa10, 0, 0, &tid) == 0) {
+	if (CreateThread(0, 0, (LPTHREAD_START_ROUTINE) msx_RunTrackThread, 0, 0, &tid) == 0) {
 		fcn_0042a2d0(msx_TrackDriver);
 		msx_TrackDriver = 0;
 		return -1;

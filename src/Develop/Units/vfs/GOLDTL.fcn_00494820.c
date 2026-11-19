@@ -35,7 +35,7 @@ void* __cdecl vfs_Tfopen(const char* name, const char* mode, VFS_DIR* root);
 unsigned int __cdecl vfs_fwrite(void* data, int size, int count, char* f);
 unsigned int __cdecl vfs_ReadData(char* buf, int size, int count, char* f);
 void __cdecl CloseVfsStream(char* f);
-int __cdecl fcn_004a1130(char* ini);
+int __cdecl am_RegisterGameMethods(char* ini);
 int __cdecl ai_RegisterGraveyardMethods(char* ini);
 int __cdecl ai_RegisterDomizilMethods(char* ini);
 int __cdecl fcn_004abff0(char* ini);
@@ -59,7 +59,7 @@ int __cdecl fcn_00494820(void)
 		GetModuleFileNameA((HMODULE) main_Instance, g_1008420, 0x104);
 		strrchr(g_1008420, '\\')[1] = 0;
 		strcat(g_1008420, "ai_method_addon.ini");
-		if (fcn_004a1130(g_77481c) == 0) {
+		if (am_RegisterGameMethods(g_77481c) == 0) {
 			goto bad;
 		}
 		if (ai_RegisterGraveyardMethods(g_77481c) == 0) {
@@ -160,7 +160,7 @@ int __cdecl fcn_00494820(void)
 	if (f == 0) {
 		goto bad;
 	}
-	if (fcn_004a1130(g_77481c) == 0) {
+	if (am_RegisterGameMethods(g_77481c) == 0) {
 		CloseVfsStream(f);
 		goto bad;
 	}

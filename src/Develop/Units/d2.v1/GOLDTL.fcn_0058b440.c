@@ -7,7 +7,7 @@ int __cdecl fcn_00468df0(int, int, int, int, int);
 void __cdecl fcn_00469110(int, int);
 void __cdecl fcn_0046c310(int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
-void __cdecl fcn_00472900(int, int);
+void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -115,19 +115,19 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
             *(unsigned int*) (v14 * 0x2f4 + 0x6c + (int) g_1015ea0) = 1;
             *(unsigned int*) (v14 * 0x2f4 + 0x18 + (int) g_1015ea0) =
                 *(unsigned int*) (v2[3] * 0x3cc + 0x1015f4c);
-            fcn_00472900(v14, 0x54);
+            d2_SetElementFont(v14, 0x54);
             v14 = fcn_0046fac0(0, v7 + 0x45, v13, v2[3]);
             *(unsigned int*) (v14 * 0x2f4 + 0x6c + (int) g_1015ea0) = 1;
             *(unsigned int*) (v14 * 0x2f4 + 0x18 + (int) g_1015ea0) =
                 *(unsigned int*) (v2[3] * 0x3cc + 0x1015f4c);
-            fcn_00472900(v14, 0x54);
+            d2_SetElementFont(v14, 0x54);
             v7 += 0x57;
             v14 = 0;
             do {
                 io_FormatTextBuffer(v12, 0x6a9688, v14 + 0x16b7);
                 v8 = fcn_0046fac0((void*) 0x28, v7, v12, v2[3]);
                 *(unsigned int*) ((int) g_1015ea0 + 0x18 + v8 * 0x2f4) = 300;
-                fcn_00472900(v8, 0x54);
+                d2_SetElementFont(v8, 0x54);
                 fcn_00534160(0xa0, v7, *(unsigned char*) (*v15 + 0x24 + v14), 0x4df);
                 v14 += 1;
                 v7 += 0xd;

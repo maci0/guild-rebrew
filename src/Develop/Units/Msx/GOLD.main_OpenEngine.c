@@ -80,10 +80,10 @@ unsigned char* __cdecl fcn_004767c0(int, int, int, int, char*, int, int);
 void __cdecl fcn_005309d0(int, int);
 #include "client_sprites.h"
 void __cdecl fcn_0042b050(void);
-void __cdecl fcn_0040c7c0(void);
+void __cdecl evt_RegisterCoreCommands(void);
 void __cdecl fcn_0040f960(void);
 void __cdecl fcn_0040d270(void);
-void __cdecl fcn_00411130(void);
+void __cdecl evt_RegisterSoundCommands(void);
 void __cdecl fcn_0042b700(void);
 void __cdecl fcn_005e2510(void);
 void __cdecl fcn_0052fbb0(void);
@@ -191,10 +191,10 @@ int __cdecl main_OpenEngine(void)
 	}
 	g_6f258c = 1;
 	fcn_0042b050();
-	fcn_0040c7c0();
+	evt_RegisterCoreCommands();
 	fcn_0040f960();
 	fcn_0040d270();
-	fcn_00411130();
+	evt_RegisterSoundCommands();
 	g_5fb920 = (int) fcn_0042b700;
 	g_5f927c = 0x400000;
 	fcn_005e2510();

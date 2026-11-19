@@ -6,7 +6,7 @@ extern float g_10432a4;
 float* __stdcall fcn_005ebbb9(float* out, const float* in);
 void __cdecl fcn_004518a0(float* v);
 
-void __cdecl fcn_004132a0(float x, float y, float y0, float y1, float* out)
+void __cdecl d3_ScreenRayToHeight(float x, float y, float y0, float y1, float* out)
 {
 	float v[4];
 	float m[16];

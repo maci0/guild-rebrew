@@ -4,8 +4,8 @@
 extern char* g_6b7ebc;
 extern char* evt_CurrentScript;
 
-void __cdecl fcn_0040b920(char* a, char* b);
-void __cdecl fcn_00425bf0(char* g, int h, const char* msg);
+void __cdecl ch_QueueWalkToDummyRotate(char* a, char* b);
+void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl WalkToDummyRotateVerified(char** a, char** b, int* c)
 {
@@ -16,14 +16,14 @@ int __cdecl WalkToDummyRotateVerified(char** a, char** b, int* c)
 		return 0;
 	}
 	if (*b == 0 || *a == 0) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 0;
 	}
 	if (DummyBlocked(b, c)) {
-		fcn_00425bf0(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "object busy");
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "object busy");
 		return 0;
 	}
-	fcn_0040b920(*a, *b);
+	ch_QueueWalkToDummyRotate(*a, *b);
 	if (*(int*) (evt_CurrentScript + 0xc84) == 1) {
 		*(void**) (evt_CurrentScript + 0xc60) = (void*) WalkToDummyRotateVerified;
 	}

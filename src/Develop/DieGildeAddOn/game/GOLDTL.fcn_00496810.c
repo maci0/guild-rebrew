@@ -1,6 +1,6 @@
 #include "client_dialog_helpers.h"
 
-int __cdecl fcn_00495400(int, int, int, Cmd*, Cmd*);
+int __cdecl ai_SelectBestMethod(int, int, int, Cmd*, Cmd*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
@@ -41,7 +41,7 @@ int __cdecl fcn_00496810(int a1, short* ent, int mode, Cmd* out1, Cmd* out2, int
         c2.kind = 0;
         c2.f1 = 0;
         c2.f2 = 0;
-        r = fcn_00495400(9, *(unsigned short*)ent, 1, &c1, &c2);
+        r = ai_SelectBestMethod(9, *(unsigned short*)ent, 1, &c1, &c2);
         goto sent;
     }
     if ((*(unsigned int*)((char*)ent + 0x1e8) & 0x400) != 0 &&
@@ -56,7 +56,7 @@ int __cdecl fcn_00496810(int a1, short* ent, int mode, Cmd* out1, Cmd* out2, int
         c2.kind = 4;
         c2.f1 = *(int*)(*(char**)((char*)ent + 0x170) + 1);
         c2.f2 = 1;
-        r = fcn_00495400(9, *(unsigned short*)ent, 1, &c1, &c2);
+        r = ai_SelectBestMethod(9, *(unsigned short*)ent, 1, &c1, &c2);
         goto sent;
     }
     strength = (int)((float)fcn_0050d320(ent, g_773d75) * 0.33f);

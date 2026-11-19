@@ -3,7 +3,7 @@
 
 void __cdecl fcn_004518a0(float*);
 
-void __cdecl fcn_00451d70(float* a, float* b, float* c, float* n)
+void __cdecl d3_CalculateTriangleNormal(float* a, float* b, float* c, float* n)
 {
 	float dx;
 	float dy;

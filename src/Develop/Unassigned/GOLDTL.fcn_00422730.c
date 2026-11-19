@@ -3,7 +3,7 @@ extern int* g_6b7d78;
 
 
 
-int* __cdecl fcn_00422730(int needle)
+int* __cdecl sb_FindBankByPath(int needle)
 {
 	int* node;
 

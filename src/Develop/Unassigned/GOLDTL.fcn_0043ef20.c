@@ -19,7 +19,7 @@ extern int g_67a370;
 
 void __cdecl fcn_0043bf20(char* a);
 void __cdecl fcn_00455140(char* node, float* in, float* out);
-char __cdecl fcn_004379a0(char* scene, char* node, unsigned int flags,
+char __cdecl d3_VisitSceneObjects(char* scene, char* node, unsigned int flags,
                           char (__cdecl* cb)(char*, void*), void* ctx);
 char __cdecl fcn_0043ed30(char* node, void* ctx);
 
@@ -104,7 +104,7 @@ void __cdecl fcn_0043ef20(char* a0)
 		}
 		it.obj = self;
 		it.item = 0;
-		fcn_004379a0((char*) g_67a370, 0, 0xe, fcn_0043ed30, &it);
+		d3_VisitSceneObjects((char*) g_67a370, 0, 0xe, fcn_0043ed30, &it);
 		if (it.item != 0) {
 			char* e;
 

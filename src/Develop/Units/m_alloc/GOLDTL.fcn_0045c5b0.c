@@ -47,7 +47,7 @@ typedef struct Col {
 	unsigned char d;
 } Col;
 
-char* __cdecl fcn_0045bde0(const char*);
+char* __cdecl d3_FindTextureByName(const char*);
 int __cdecl fcn_0045be40(char*);
 int __cdecl fcn_0045c290(unsigned int, int*);
 void __cdecl fcn_0045c310(Tex*, char);
@@ -85,7 +85,7 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 	c21 = ((unsigned char) flags >> 2) & 0xf;
 	c23 = ((unsigned char) flags >> 1) & 1;
 	c22 = (unsigned char) flags & 1;
-	found = (Tex*) fcn_0045bde0(name);
+	found = (Tex*) d3_FindTextureByName(name);
 	if (found != 0) {
 		index = found - (Tex*) g_104049c;
 		p = found;

@@ -25,13 +25,13 @@ unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl fcn_00516b70(void);
 void __cdecl fcn_00516be0(void);
 char* __cdecl fcn_00445600(char*, int, char*, char*);
-char __cdecl fcn_00442d50(int, unsigned char);
+char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 int __cdecl gm_CheckEntityType(char*);
-void __cdecl fcn_00437ac0(int, int, int, void (__cdecl*)(void));
+void __cdecl d3_TraverseSceneObjects(int, int, int, void (__cdecl*)(void));
 void __cdecl fcn_004bd150(int);
 void __cdecl fcn_00530a00(char*);
 void __cdecl fcn_00505c80(char*);
-int __cdecl fcn_00413190(int);
+int __cdecl d3_GetContextIndex(int);
 void __cdecl ch_SetVisible(char*, int);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 void __cdecl fcn_004fdcf0(char*);
@@ -76,7 +76,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	}
 	obj = (unsigned char*) fcn_00445600(0, 0x180, 0, s_6a1fdc);
 	if (obj != 0) {
-		fcn_00442d50((int) obj, g_776664 ? 1 : 0);
+		d3_SetSubtreeVisible((int) obj, g_776664 ? 1 : 0);
 	}
 	g_67530c = *(int*) (a0 + 1);
 	if (g_7746cc != 0) {
@@ -97,16 +97,16 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	g_67a964 = 1.0f;
 	g_6b86d8 = 0x800;
 	if (gm_CheckEntityType((char*) a0)) {
-		fcn_00437ac0(g_67a370, 0, 0xc0, fcn_00516550);
-		fcn_00437ac0(g_67a370, 0, 0xc0, fcn_005165b0);
+		d3_TraverseSceneObjects(g_67a370, 0, 0xc0, fcn_00516550);
+		d3_TraverseSceneObjects(g_67a370, 0, 0xc0, fcn_005165b0);
 	}
 	if (*a0 == 0x1e && a1 == 0xfd) {
 		fcn_004bd150(*(int*) (a0 + 0x71));
 	}
 	g_7f3ee0 = (char*) a0;
 	fcn_00530a00((char*) a0);
-	fcn_00437ac0(g_67a370, 0, 0x1e0, fcn_005156a0);
-	fcn_00437ac0(g_67a370, 0, 0x20, fcn_00515ef0);
+	d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, fcn_005156a0);
+	d3_TraverseSceneObjects(g_67a370, 0, 0x20, fcn_00515ef0);
 	fcn_00505c80((char*) a0);
 	i = 0;
 	if (rec->kind == 0x16) {
@@ -117,7 +117,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	p = (unsigned char**) ch_CharacterSlots;
 	do {
 		obj = *p;
-		if (obj != 0 && fcn_00413190(*(int*) (obj + 0x88)) == type) {
+		if (obj != 0 && d3_GetContextIndex(*(int*) (obj + 0x88)) == type) {
 			if (*(int*) (obj + 0x2c) != *(int*) (a0 + 1)
 			    && *(int*) (obj + 0x30) != *(int*) (entity + 2)) {
 				ch_SetVisible((char*) obj, 0);
@@ -131,7 +131,7 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1)
 	p = (unsigned char**) (g_7f4ca0 + 0x184);
 	do {
 		obj = *p;
-		if (obj != 0 && fcn_00413190(*(int*) (obj + 0x88)) == type) {
+		if (obj != 0 && d3_GetContextIndex(*(int*) (obj + 0x88)) == type) {
 			obj = *p;
 			if ((*(int*) (obj + 0x2c) != *(int*) (a0 + 1)
 			     && *(int*) (obj + 0x30) != *(int*) (entity + 2))

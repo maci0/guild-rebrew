@@ -8,7 +8,7 @@ char* __cdecl gm_LookupEntityRecordById(int a1);
 char* __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 char* __cdecl io_AppendText(int fmt, ...);
 int __cdecl fcn_00470820(int a, int b, char* name);
-int __cdecl fcn_00471b60(int);
+int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472250(char*, int, char*);
@@ -93,7 +93,7 @@ int __cdecl fcn_005d3120(int a0, int* a1)
 		return fcn_005d2ec0((char*) a0, a1);
 	}
 	h = fcn_00470820(0, 0, (char*) 0x6acbbc);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1cf3);

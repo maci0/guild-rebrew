@@ -22,7 +22,7 @@ typedef struct node99 {
 extern unsigned char* g_14cbca8;
 
 int __cdecl fcn_004c49f0(node99*);
-void __cdecl fcn_00421290(void);
+void __cdecl nt_FlushSend(void);
 
 int __cdecl fcn_004c3ff0(void)
 {
@@ -41,7 +41,7 @@ int __cdecl fcn_004c3ff0(void)
 	}
 	do {
 		if ((*(node99**)&g_14cbca8) != 0) {
-			fcn_00421290();
+			nt_FlushSend();
 			if ((*(node99**)&g_14cbca8) != 0)
 				return 0;
 		}
@@ -49,7 +49,7 @@ int __cdecl fcn_004c3ff0(void)
 		(*(node99**)&g_1005760) = (*(node99**)&g_1005760)->next;
 		if ((*(node99**)&g_1005760) != 0)
 			(*(node99**)&g_1005760)->prev = 0;
-		fcn_00421290();
+		nt_FlushSend();
 	} while ((*(node99**)&g_1005760) != 0);
 	return 0;
 }

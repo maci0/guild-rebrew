@@ -8,7 +8,7 @@ extern int g_14ce8e0;
 
 void* __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
-void __cdecl fcn_00471b60(int dlg);
+void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int a);
 int __cdecl io_AppendText(int id, ...);
 void __cdecl fcn_004fcda0(u16 id, int a, void* out);
@@ -69,7 +69,7 @@ int __cdecl fcn_005d6c50(int a0, int a1)
     dlg = (int) fcn_00470820(0, 0, "privillegien\\unterschlagung");
     *(int*) (frame + 0x8) = dlg;
     d2_SetOverlayAnimation(0, 0);
-    fcn_00471b60(dlg);
+    d2_CenterDialogWindows(dlg);
     d2_SetForm(dlg, 1);
     io_AppendText(0x1dc2, *(u16*) a0);
     g_100f1dc = -1;

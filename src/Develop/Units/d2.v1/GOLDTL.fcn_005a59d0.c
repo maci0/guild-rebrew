@@ -33,7 +33,7 @@ extern double g_6640e8;
 void __cdecl ResetDisplayCounters(void);
 int __cdecl CountDisplayCounters(void);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00533dc0(int, int, int);
@@ -45,13 +45,13 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00533a40(char*);
 int __cdecl fcn_005a5440(int, void*, int, int, int);
 int __cdecl fcn_005a5980(void*);
-int __cdecl fcn_0059c830(void*);
+int __cdecl d2_CountActiveListRows(void*);
 int __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_0046ed00(int, int, int);
-int __cdecl fcn_00472170(int, int);
+int __cdecl d2_SetSlotVisibility(int, int);
 void __cdecl d2_SetElementImage(int, int);
 void __cdecl d2_SetElementValue(int, int, int, int);
-void __cdecl fcn_00473fe0(void);
+void __cdecl d2_ClearSelectedControl(void);
 int __cdecl fcn_00508620(int, int);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4eb0(char*);
@@ -88,7 +88,7 @@ int __cdecl fcn_005a59d0(char* a0)
 		v7 += 0x1c;
 	} while (v7 < 0x1c0);
 	v8 = fcn_00470820(0, 0, g_6aac84);
-	fcn_00471b60(v8);
+	d2_CenterDialogWindows(v8);
 	e2 = fcn_00472250(v8, 0, 2);
 	e3 = fcn_00472250(v8, 0, 3);
 	e1 = fcn_00472250(v8, 0, 1);
@@ -124,7 +124,7 @@ int __cdecl fcn_005a59d0(char* a0)
 	do {
 		if (g_14ce8e0) {
 			if (CountDisplayCounters()) {
-				fcn_00473fe0();
+				d2_ClearSelectedControl();
 				for (v15 = 0; v15 < 0x1c0; v15 += 0x1c) {
 					if (*(int*)((char*)ownRows + v15) != -1)
 						d2_SetElementValue(*(int*)((char*)ownRows + v15), 0, 0, 0);
@@ -165,27 +165,27 @@ int __cdecl fcn_005a59d0(char* a0)
 			d2_SetElementImage(e4, 0x4f9);
 		}
 	label_image_done:
-		v15 = fcn_0059c830(ownRows);
-		v16 = fcn_0059c830(globRows);
+		v15 = d2_CountActiveListRows(ownRows);
+		v16 = d2_CountActiveListRows(globRows);
 		if (!(v15 > 4)) {
-			fcn_00472170(e1, 0);
-			fcn_00472170(e0, 0);
-			fcn_00472170(h1, 0);
+			d2_SetSlotVisibility(e1, 0);
+			d2_SetSlotVisibility(e0, 0);
+			d2_SetSlotVisibility(h1, 0);
 		} else {
-			fcn_00472170(e1, 1);
-			fcn_00472170(e0, 1);
-			fcn_00472170(h1, 1);
+			d2_SetSlotVisibility(e1, 1);
+			d2_SetSlotVisibility(e0, 1);
+			d2_SetSlotVisibility(h1, 1);
 			itoa(v15, buf, 10);
 			fcn_0046f940(h1, buf);
 		}
 		if (!(v16 > 4)) {
-			fcn_00472170(e2, 0);
-			fcn_00472170(e3, 0);
-			fcn_00472170(h2, 0);
+			d2_SetSlotVisibility(e2, 0);
+			d2_SetSlotVisibility(e3, 0);
+			d2_SetSlotVisibility(h2, 0);
 		} else {
-			fcn_00472170(e2, 1);
-			fcn_00472170(e3, 1);
-			fcn_00472170(h2, 1);
+			d2_SetSlotVisibility(e2, 1);
+			d2_SetSlotVisibility(e3, 1);
+			d2_SetSlotVisibility(h2, 1);
 			itoa(v16, buf, 10);
 			fcn_0046f940(h2, buf);
 		}
@@ -235,7 +235,7 @@ int __cdecl fcn_005a59d0(char* a0)
 						fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, v8, 4, 1);
 						fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, v8, 5, 1);
 						fcn_00533a40(g_14ab718);
-						fcn_00473fe0();
+						d2_ClearSelectedControl();
 						for (v15 = 0; v15 < 0x1c0; v15 += 0x1c) {
 							if (*(int*)((char*)ownRows + v15) != -1) d2_SetElementValue(*(int*)((char*)ownRows + v15), 0, 0, 0);
 							if (*(int*)((char*)globRows + v15) != -1) d2_SetElementValue(*(int*)((char*)globRows + v15), 0, 0, 0);
@@ -272,7 +272,7 @@ int __cdecl fcn_005a59d0(char* a0)
 						fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, v8, 4, 1);
 						fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, v8, 5, 1);
 						fcn_00533a40(g_14ab718);
-						fcn_00473fe0();
+						d2_ClearSelectedControl();
 						for (v15 = 0; v15 < 0x1c0; v15 += 0x1c) {
 							if (*(int*)((char*)ownRows + v15) != -1) d2_SetElementValue(*(int*)((char*)ownRows + v15), 0, 0, 0);
 							if (*(int*)((char*)globRows + v15) != -1) d2_SetElementValue(*(int*)((char*)globRows + v15), 0, 0, 0);

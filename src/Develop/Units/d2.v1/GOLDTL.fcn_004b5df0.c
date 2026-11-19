@@ -41,7 +41,7 @@ extern signed char g_6a3440;
 Spec* __cdecl fcn_004b3c50(int op);
 void __cdecl fcn_004b5630(Spec* s, int flags);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
@@ -90,7 +90,7 @@ void __cdecl fcn_004b5df0(int flags)
 	flags = (flags & ~9) | 0x100;
 	fcn_004b5630(s, flags);
 	dlg = fcn_00470820(0, 0, "special\\mission");
-	fcn_00471b60(dlg);
+	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1b94, ent->entity_index);
 	if (level > -1 && level < 4) {

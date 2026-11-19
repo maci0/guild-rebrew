@@ -11,7 +11,7 @@ void __cdecl fcn_00471af0(int h, int v);
 #define fcn_0046b2b0 fcn_0046e700
 #endif
 void __cdecl fcn_0046b2b0(int h);
-void __cdecl fcn_00472170(int h, int v);
+void __cdecl d2_SetSlotVisibility(int h, int v);
 
 void __cdecl fcn_005272e0(void)
 {
@@ -63,6 +63,6 @@ void __cdecl fcn_005272e0(void)
 		g_6a25a4 = -1;
 	}
 	if (g_6a25fc != -1) {
-		fcn_00472170(g_6a25fc, 0);
+		d2_SetSlotVisibility(g_6a25fc, 0);
 	}
 }

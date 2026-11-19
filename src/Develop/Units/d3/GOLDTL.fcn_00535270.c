@@ -38,10 +38,10 @@ extern char g_6b5c60[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_00401040(char*);
-void __cdecl fcn_00435500(char*, char*);
+void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl fcn_004712d0(int, char*, char*);
-void __cdecl fcn_00471a30(int, int);
-void __cdecl fcn_00412f10(Model*, char*, int);
+void __cdecl d2_SetGroupVisibility(int, int);
+void __cdecl d3_ApplyObjectAnimation(Model*, char*, int);
 void __cdecl fcn_00534c20(Book*);
 void* __cdecl fcn_004234e0(char*, const char*, int, int, int, int, int);
 
@@ -72,7 +72,7 @@ int __cdecl fcn_00535270(Book* b, signed char dir)
 			if (!(pg->flags & 0x20)) {
 				return 0;
 			}
-			fcn_00435500(b->model->pages->sounds, b->model->pages->pages[i].name);
+			d3_RemoveObjectAnimation(b->model->pages->sounds, b->model->pages->pages[i].name);
 		}
 		strcpy(name, "buch\\Buch_zurueckblaettern.baf");
 		r = fcn_00401040(name);
@@ -80,7 +80,7 @@ int __cdecl fcn_00535270(Book* b, signed char dir)
 			if (!(pg->flags & 0x20) && dir > 0) {
 				return 0;
 			}
-			fcn_00435500(b->model->pages->sounds, b->model->pages->pages[i].name);
+			d3_RemoveObjectAnimation(b->model->pages->sounds, b->model->pages->pages[i].name);
 		}
 	}
 	for (i = 0; i < 3; i++) {
@@ -93,16 +93,16 @@ int __cdecl fcn_00535270(Book* b, signed char dir)
 			sprintf(top, "Buch_Seite%i_oben_ns_nm", (i & 3) + 1);
 			sprintf(bottom, "Buch_Seite%i_unten_ns_nm", (i & 3) + 1);
 			fcn_004712d0(b->widgets[i], top, bottom);
-			fcn_00471a30(b->widgets[i], 1);
+			d2_SetGroupVisibility(b->widgets[i], 1);
 		} else {
 			fcn_004712d0(b->widgets[i], &(*(char*)g_6b5c60), &(*(char*)g_6b5c60));
-			fcn_00471a30(b->widgets[i], 0);
+			d2_SetGroupVisibility(b->widgets[i], 0);
 		}
 	}
 	if (dir > 0) {
-		fcn_00412f10(b->model, "buch\\Buch_vorblaettern.baf", 0x12);
+		d3_ApplyObjectAnimation(b->model, "buch\\Buch_vorblaettern.baf", 0x12);
 	} else {
-		fcn_00412f10(b->model, "buch\\Buch_zurueckblaettern.baf", 0x12);
+		d3_ApplyObjectAnimation(b->model, "buch\\Buch_zurueckblaettern.baf", 0x12);
 	}
 	b->page += dir;
 	fcn_00534c20(b);

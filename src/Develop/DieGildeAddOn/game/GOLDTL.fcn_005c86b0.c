@@ -5,7 +5,7 @@
 extern int g_775338;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
@@ -24,7 +24,7 @@ int __cdecl fcn_005c86b0(void)
 
 	p = (unsigned short*) &((EntityStruct*) g_slot_table)[g_774970];
 	h = fcn_00470820(0, 0, (char*) 0x6ac834);
-	fcn_00471b60(h);
+	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);

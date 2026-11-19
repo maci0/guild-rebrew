@@ -4,7 +4,7 @@
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-int __cdecl fcn_005c9030(int lo, int v, int n, int* out)
+int __cdecl d2_ClampAmountToRange(int lo, int v, int n, int* out)
 {
 	int hi;
 

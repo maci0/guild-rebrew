@@ -42,7 +42,7 @@ void __cdecl fcn_00545d40(int a, int b, char* text, int c, int d, char* file);
 int __cdecl fcn_005cd440(Query* q, char* text, int a, void* b);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
-void __cdecl fcn_00471b60(int h);
+void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl fcn_00471e30(int h);
 void __cdecl d2_SetForm(int h, int a);
 int __cdecl fcn_00472250(int h, int a, int b);
@@ -134,7 +134,7 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 	v = (int) (sum * g_6628ac);
 	dialog = fcn_00470820(0, 0, (char*) 0x6acd58);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471b60(dialog);
+	d2_CenterDialogWindows(dialog);
 	d2_SetForm(dialog, 1);
 	ret = io_AppendText(0x1dd1, 4, v, firstEntity->id, secondEntity->id);
 	r1 = fcn_00472250(dialog, 1, ret);

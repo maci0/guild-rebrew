@@ -4,7 +4,7 @@ extern char* g_entity_type_table;
 void __cdecl fcn_00506a70(void*);
 void __cdecl fcn_005b2a00(void*, void*);
 void __cdecl gm_FreeObjectListRecursive(int);
-void __cdecl fcn_004030e0(int*);
+void __cdecl ch_DestroyCharacter(int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x00506ab0 */
@@ -72,7 +72,7 @@ void __cdecl gm_KillSpieler(int a0, int a1)
 	}
 	gm_FreeObjectListRecursive((int) (ent + 0x178));
 	if (*(int*) (ent + 0x184) != 0) {
-		fcn_004030e0(*(int**) (ent + 0x184));
+		ch_DestroyCharacter(*(int**) (ent + 0x184));
 		*(int*) (ent + 0x184) = 0;
 	}
 	e2 = *(char**) (ent + 0x170);

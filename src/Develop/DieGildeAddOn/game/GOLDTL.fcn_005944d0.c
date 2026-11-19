@@ -9,7 +9,7 @@ typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } BUILDING_
 int __cdecl fcn_00525fb0(void*);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471b60(int);
+void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_0052a0c0(void*, unsigned int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -78,7 +78,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	fcn_0057e880(0x1f, 0, 0, 0);
 	window = fcn_00470820(0, 0, (char*) 0x6aa148);
 	saved = window;
-	fcn_00471b60(window);
+	d2_CenterDialogWindows(window);
 	if (((BUILDING_ROW*) lpGebaeudePROT)[*p].kind == 0x1e) {
 		fcn_0052a0c0(p, 2);
 	} else {

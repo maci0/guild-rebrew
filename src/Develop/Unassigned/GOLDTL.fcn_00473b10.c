@@ -47,7 +47,7 @@ extern int g_14ce900;
 extern int g_14ce904;
 
 void __cdecl fcn_00412830(unsigned char mask);
-char* __cdecl fcn_00472880(int idx);
+char* __cdecl d2_SelectFont(int idx);
 void __cdecl fcn_0046ed00(int delta, int step, int k);
 
 void __cdecl fcn_00473b10(void)
@@ -95,7 +95,7 @@ done:
 	}
 	for (i = 0; i < 0x60; i++) {
 		if ((((Win*)g_1015f40)[i].style & 0x200) != 0 && ((Win*)g_1015f40)[i].tip_on == 1 && ((Win*)g_1015f40)[i].tip != 0) {
-			fcn_00472880(((Win*)g_1015f40)[i].tip);
+			d2_SelectFont(((Win*)g_1015f40)[i].tip);
 		}
 	}
 	if (d2_HoveredWindow != -1 && (w = &((Win*)g_1015f40)[d2_HoveredWindow]) != 0 && g_14ce8d0 != 0 && w->up_btn != -1 && w->down_btn != -1 && tp_d2_SelectedControl == 0) {
@@ -121,6 +121,6 @@ done:
 		}
 	}
 	if (sel != -1) {
-		fcn_00472880(sel);
+		d2_SelectFont(sel);
 	}
 }

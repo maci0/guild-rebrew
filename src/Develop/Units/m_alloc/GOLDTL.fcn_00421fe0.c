@@ -12,7 +12,7 @@ extern char g_678df0[];
 extern char g_14cbae0[];
 int __cdecl fcn_0042a120(int* h, int a, int b, int c);
 char* __cdecl m_alloc(int size, char* tag);
-int __cdecl fcn_0042a510(int h, char* slot);
+int __cdecl msx_AllocateSampleHandle(int h, char* slot);
 long __cdecl fcn_0064e561(long* t);
 void __cdecl fcn_0064d3eb(unsigned int seed);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
@@ -57,7 +57,7 @@ int __cdecl sb_Init(int id, int count, int a, int b, int c)
 			rep stosb
 		}
 		for (i = 0; i < g_6b7e8c; i++) {
-			if (fcn_0042a510(g_6b7d7c, g_6b7e88 + i * 0x30) == -1) {
+			if (msx_AllocateSampleHandle(g_6b7d7c, g_6b7e88 + i * 0x30) == -1) {
 				r = -1;
 			}
 		}

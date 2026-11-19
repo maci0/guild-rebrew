@@ -10,7 +10,7 @@ struct vec4 {
 
 char* __cdecl fcn_00445600(int, int, int, char*);
 char* __cdecl fcn_00442910(int, struct vec4*, char*, char*);
-void __cdecl fcn_00412f10(char*, char*, int);
+void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 
 char* __cdecl fcn_0053e660(float tx, float tz)
 {
@@ -50,6 +50,6 @@ char* __cdecl fcn_0053e660(float tx, float tz)
 	*(int*) (r + 0x220) = 4;
 	r[0x216] = (r[0x216] & 0xfd) | 1;
 	*(int*) (r + 0x224) = 1;
-	fcn_00412f10(r, "sonstiges\\wimpel_STADTTURM.baf", 1);
+	d3_ApplyObjectAnimation(r, "sonstiges\\wimpel_STADTTURM.baf", 1);
 	return r;
 }

@@ -30,7 +30,7 @@ int __cdecl fcn_0046f740(int a, int b, int c, int d);
 int __cdecl fcn_00467480(int a, int b, int c, int d, int e, int f);
 int __cdecl fcn_004677e0(int a, int b, int c, int d, int e, int f,
 	int g, int h);
-int __cdecl fcn_0042dc90(const char* name);
+int __cdecl txt_FindEntryIndex(const char* name);
 int __cdecl fcn_0046fac0(int a, int b, int c, int d);
 void __cdecl fcn_00469c40(int x, int y, int slot);
 int __cdecl sprintf(char*, const char*, ...);
@@ -309,7 +309,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 						}
 					} else if (strcmp((char*) v19,
 						&g_6b5c60) != 0) {
-						v13 = fcn_0042dc90(
+						v13 = txt_FindEntryIndex(
 							(char*) v19);
 						if (v13 != -1) {
 							v12 = fcn_0046fac0(
@@ -321,7 +321,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 							v13 = v12 * 0x2f4;
 							*(unsigned int*) (v13 + 8
 								+ g_1015ea0) =
-								fcn_0042dc90(
+								txt_FindEntryIndex(
 								(char*) v19);
 							*(int*) (v13 + 0x50
 								+ g_1015ea0) =
@@ -335,7 +335,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* a2)
 				} while (v38 < (short) v33[0x33]);
 			}
 			if (*(char*) ((char*) v33 + 0xe50)) {
-				v13 = fcn_0042dc90(
+				v13 = txt_FindEntryIndex(
 					(char*) v33 + 0xe50);
 				if (v13 != -1) {
 					p = (int*) *(char**) (v13 * 4
