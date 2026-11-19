@@ -561319,33 +561319,31 @@ symbol = "_fcn_005d5930"
 name = "fcn_005d5930"
 kind = "FUNCTION"
 updated_by = "test"
-updated_at = "2026-11-12T20:48:37+00:00"
-status = "NEAR_MATCHING"
-blocker = "Faithful body kept: erpressung dialog, entity scan with fcn_005ca560/fcn_005ca740/fcn_005c9160 row layout, message loop with 0x525f60/0x5d5670 branches. Measured verdict stays STUB: obj 1070 vs 1079 (delta 9), 252 bytes matched; object size is 9 short and the statement/register shape diverges, so the tool classifies STUB and the promotion policy refuses STUB-to-SIZE_MISMATCH even with --force-status."
-blocker_delta = 9
-similarity = 97.06840390879479
+updated_at = "2026-11-19T13:06:40+00:00"
+status = "RELOC"
+similarity = 97.71986970684038
 
 ["GOLDTL.0x005d5930".verification]
-source_hash = "443ae05801f1c59c4d20577b01aa8f94608a89ceac458b316f0548cf635143c2"
+source_hash = "b30533a1fabe0dbed2bc2a4e4cd385823a6988ebcca4989d8b7dc58c3d61e770"
 reference_hash = "904135d0aa12c5a158ce4247631c3c5a76f78cf1dc8a921c104d721c2d69e37b"
 reference_size = "1079"
 headers_hash = "c3132b96d0c5373f677a1ef1851f6fffb857586572c160c0a3808bf2b0796367"
-compiler_hash = "604f3c2c79db2131eb969d1543c5eaaa00bd5df9265b1782b48a34d9a17523b5"
+compiler_hash = "74877f878b3f8e7289abbc942f2c4b585393e19c0fd2fe5fab9cd7d6748a4041"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x5d5930"
 context_hash = ""
 defines = "[]"
-input_hash = "f6313d58e09441caeb53a82f336c5bec0d88200f7589b9379876d32398016b4d"
-aligned_pairs = 298
+input_hash = "8da1dce660d91d2fbbb9e15b489d0265f0a539de611484f7dabd4711d6abcca8"
+aligned_pairs = 300
 target_instructions = 307
 candidate_instructions = 307
-hunks = 9
-similarity = 97.06840390879479
-status = "NEAR_MATCHING"
+hunks = 7
+similarity = 97.71986970684038
+status = "RELOC"
 writer = "test"
-measured_at = "2026-11-18T05:05:56+00:00"
+measured_at = "2026-11-19T13:06:40+00:00"
 
 [["GOLDTL.0x005d5930".status_history]]
 old_status = "STUB"
@@ -561357,6 +561355,12 @@ updated_by = "test"
 old_status = "SIZE_MISMATCH"
 new_status = "NEAR_MATCHING"
 changed_at = "2026-11-12T20:48:37.101595+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x005d5930".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "RELOC"
+changed_at = "2026-11-19T13:06:40.906059+00:00"
 updated_by = "test"
 ["GOLDTL.0x0041ad80"]
 size = 63
