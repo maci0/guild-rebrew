@@ -741349,11 +741349,10 @@ file = "src/Develop/DieGildeAddOn/command/fcn_0057f9a0.c"
 name = "fcn_0057f9a0"
 symbol = "_fcn_0057f9a0"
 updated_by = "test"
-updated_at = "2026-11-17T17:01:41+00:00"
-status = "SIZE_MISMATCH"
+updated_at = "2026-11-19T11:19:01+00:00"
+status = "RELOC"
 size = 153
-blocker = "GA_CEILING: register-only byte delta (effective match), not byte-reproducible from portable C (compiler register allocation); GA exhausted 80 generations at best score 9000.00; run `rebrew prove` for PROVEN"
-similarity = 87.27272727272727
+similarity = 90.9090909090909
 
 [["GOLDTL.0x0057f9a0".status_history]]
 old_status = "MISSING_SIZE"
@@ -741372,27 +741371,33 @@ old_status = "NEAR_MATCHING"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-11-17T17:01:41.584594+00:00"
 updated_by = "test"
+
+[["GOLDTL.0x0057f9a0".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "RELOC"
+changed_at = "2026-11-19T11:19:01.025177+00:00"
+updated_by = "test"
 ["GOLDTL.0x0057f9a0".verification]
-source_hash = "851643982f1c10120f62e5944551624559966bf5a239a9d28d8dda428167959d"
+source_hash = "3b1582453c63b869591625d51fcc0135df8ed7bfcb674db28b0b69e76c76b9a9"
 reference_hash = "cf006b05c631ad07076e29dd425c77ec69c0a7d21cf8b68b13e40ac8f1fb0dc2"
 reference_size = "153"
 headers_hash = "0d5849356b4192a48c4eb6d292829c0718036346deb5a71520cc6eb733083e72"
-compiler_hash = "604f3c2c79db2131eb969d1543c5eaaa00bd5df9265b1782b48a34d9a17523b5"
+compiler_hash = "f7884cca217174141243a451224de5c479221b5f4cb18d350e7949e0bd765b13"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x57f9a0"
 context_hash = ""
 defines = "[]"
-input_hash = "77e959c626f592a05d03b44f76d799d912a87538942af163cedafc0c28cc3af1"
-aligned_pairs = 48
+input_hash = "8015bc90447cbba6c0058fd90bb29ebf1f1427697f261e59b5a47e140377b7e0"
+aligned_pairs = 50
 target_instructions = 55
 candidate_instructions = 55
-hunks = 6
-similarity = 87.27272727272727
-status = "SIZE_MISMATCH"
+hunks = 5
+similarity = 90.9090909090909
+status = "RELOC"
 writer = "test"
-measured_at = "2026-11-17T17:01:41+00:00"
+measured_at = "2026-11-19T11:19:01+00:00"
 ["GOLDTL.0x00580a00"]
 note = "Inferred address-only identity for an inventory start admitted by the coverage repair; the stub body is an unreconstructed work item, not a match."
 updated_by = "rehome"
