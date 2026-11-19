@@ -13,7 +13,7 @@ char* __cdecl fcn_004011a0(void* stream, char* text);
 int __cdecl fcn_0043b500(char*);
 char __cdecl fcn_0043b660(char*, int, int, char*);
 
-/* ADDRESS: GOLD 0x0043ea10 */
+
 void __cdecl fcn_0043b850(void* r)
 {
 	int n;
