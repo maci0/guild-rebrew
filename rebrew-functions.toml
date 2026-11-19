@@ -740904,8 +740904,14 @@ updated_at = "2026-11-12T14:13:09+00:00"
 
 ["GOLDTL.0x004092d0"]
 size = 485
-updated_by = "fix-sizes"
-updated_at = "2026-11-12T14:13:45+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-19T20:29:25+00:00"
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004092d0.c"
+symbol = "_fcn_004092d0"
+name = "fcn_004092d0"
+kind = "FUNCTION"
+blocker = "Behavior is reconstructed from the sibling turn handler fcn_004079f0 (same dreh_90_links/rechts attach, same D3 option block and 2-frame pair, fcn_004339e0 by-value call): signature (owner, float angle), 0.2 / -0.2 heading test, attach result at owner+0x70, animation handle at owner+0x78, returns 1. The preamble and both attach calls match (first ~35 instructions). The rest diverges in how the 12-byte option block and the frame values are built and copied for the by-value call: native does read-modify-write 'or dl,0x14 / or dl,8' on option byte +1 and 'or bl,2' on byte +8 interleaved with the float stores and copies the block into the argument area with explicit dword stores; ours folds the bits into constant stores and emits 427 bytes against 485. The sibling fcn_004079f0 hits the same wall (SIZE_MISMATCH 352/915), so this is a family-level codegen problem, not specific to this function."
+blocker_delta = 58
 
 ["GOLDTL.0x00449120"]
 size = 3
