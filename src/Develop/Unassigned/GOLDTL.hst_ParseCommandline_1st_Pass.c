@@ -6,10 +6,8 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x44
 
-extern int g_1052de0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* txt_TextEntries[];
-extern char g_1007bc0[];
-extern int hst_HistoryTextBase;
 
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 int __cdecl atoi(const char* s);

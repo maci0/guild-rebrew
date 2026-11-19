@@ -2,7 +2,7 @@
 
 extern char* g_1015ea0;
 #include "GOLDTL.fcn_00529890_gconf.h"
-extern int d2_CurrentElementId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_CurrentWindowId;
 extern char g_6b5c60[]; extern int g_6a25b4; extern char g_774724;
 

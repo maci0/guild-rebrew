@@ -2,6 +2,7 @@
 
 extern char* lpObjektePROT;
 #include "client_types.h"
+#include "Develop/Units/d2.v1/d2_win.h"
 extern Obj_1038140 g_1038140[];
 extern Win_1015f40 g_1015f40[0x60];
 extern int g_1040494;
@@ -23,7 +24,7 @@ double __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl fcn_00591190(int id)
 {
 	int dlg;
-	char* p;
+	D2_WIN* p;
 	char* rec;
 	unsigned char* sel;
 	char* r;
@@ -37,9 +38,9 @@ int __cdecl fcn_00591190(int id)
 	}
 	dlg = fcn_00470820(0, 0, "ToolTip\\ToolTip_Objekte_Upgrades");
 	fcn_00471b60(dlg);
-	p = ((char*)g_1015f40) + *(int*) (((char*)g_1038140) + dlg * 700 + 4) * 972;
-	if (*(int*) (p + 4) + *(int*) (p + 0xc) > g_1040494 - 16) {
-		fcn_00469c40(g_1040494 - *(int*) (p + 0xc) - 16, *(int*) (p + 8), *(int*) (p + 0x27c));
+	p = &((D2_WIN*)g_1015f40)[*(int*) (((char*)g_1038140) + dlg * 700 + 4)];
+	if (p->left + p->width > g_1040494 - 16) {
+		fcn_00469c40(g_1040494 - p->width - 16, p->top, p->slot);
 	}
 	d2_SetForm(0, 2);
 	fcn_0046f740(0, 0, id + 0xdf, d2_CurrentWindowId);

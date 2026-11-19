@@ -127,9 +127,9 @@ void __cdecl d2_UpdateGauge(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x18 = 0xa0;
 	} else if (e[0x164] == 0) {
 		if (g->obj[0x165] == rec[0x230])
-			io_FormatTextBuffer(buf, g_679060, 0x1a3b);
+			io_FormatTextBuffer(buf, "%s", 0x1a3b);
 		else if (g->obj[0x165] == rec[0x22f])
-			io_FormatTextBuffer(buf, g_679060, 0x1a3c);
+			io_FormatTextBuffer(buf, "%s", 0x1a3c);
 		fcn_0046f940(g->value, buf);
 		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x6c = 1;
 		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x18 = 0xa0;

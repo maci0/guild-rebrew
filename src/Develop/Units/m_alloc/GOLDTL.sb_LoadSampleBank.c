@@ -29,7 +29,7 @@ typedef struct {
 } BankHeader;
 
 extern int g_6b7d7c;
-extern int MemUsed;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Bank* g_6b7d78;
 extern char g_6b7d88[];
 extern char g_14cb980[];

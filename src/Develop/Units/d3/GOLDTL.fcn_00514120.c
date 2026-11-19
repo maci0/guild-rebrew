@@ -31,7 +31,7 @@ typedef struct {
 	int kind;
 } Device;
 
-extern int gm_NextEntityId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67a370;
 extern char* gm_CityEntity;
 extern unsigned char g_773d75;

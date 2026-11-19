@@ -22,14 +22,14 @@ struct msg {
 };
 
 // SIZE 0x21c
-typedef struct {
-	int f0;
-	int f4;
-	char pad8[0x214];
-} House;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char s_6ac494[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -43,7 +43,7 @@ void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c9220(int*);
-int __cdecl fcn_00525f60(House*, int);
+int __cdecl fcn_00525f60(ENTITY_RECORD*, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5530(struct msg*);
 int __cdecl fcn_004c4450(int);
@@ -90,26 +90,26 @@ int __cdecl fcn_005d5d70(unsigned char* e)
 	do {
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				if (fcn_00525f60(&((House*)g_7f4ca0)[g_774970], 2)) {
+				if (fcn_00525f60(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 2)) {
 					struct msg m;
 
 					a = gm_RandomMod(9) + 0x1d76;
 					b = gm_RandomMod(9) + 0x1d6d;
 					memset(&m, 0, sizeof(m));
-					m.f8 = ((House*)g_7f4ca0)[g_774970].f4;
+					m.f8 = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
 					m.pos = gm_GameTime;
 					m.b4 = 0x47;
 					m.b36 = 2;
 					m.w60 = b;
 					m.w62 = a;
 					m.f5c = *(int*) (e + 4);
-					m.fc = ((House*)g_7f4ca0)[g_774970].f4;
-					m.f58 = ((House*)g_7f4ca0)[g_774970].f4;
+					m.fc = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+					m.f58 = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
 					h = fcn_004c5530(&m);
 					while (fcn_004c4450(h) == 0) {
 						fcn_00535960();
 					}
-					fcn_004c6ae0(((House*)g_7f4ca0)[g_774970].f4, -2);
+					fcn_004c6ae0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -2);
 					io_FormatTextBuffer(text, 0x1d6a, b, *(unsigned short*) e, a);
 					fcn_00526120(text, 0);
 					g_774654 = 3;

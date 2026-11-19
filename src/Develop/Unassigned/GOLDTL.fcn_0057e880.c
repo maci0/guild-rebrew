@@ -41,7 +41,7 @@ typedef struct {
 } Seq;
 // SIZE 0x54
 
-extern int d2_TutorialActive;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Seq* g_665f08;
 extern volatile unsigned int g_6b7fac;
 

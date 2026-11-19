@@ -1,4 +1,4 @@
-extern int d2_TutorialActive;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern volatile int g_6b7fc0;
 
 // SIZE 0x40

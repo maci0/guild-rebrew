@@ -7,16 +7,16 @@ typedef struct Req {
 } Req;
 // SIZE 0x8
 
-typedef struct Player {
-	char pad0[2];
-	unsigned char x2;
-	char pad3[0x162];
-	unsigned char x165;
-	char pad166[6];
-	char* x16c;
-	char pad170[0xac];
-} Player;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
+
+
+
 
 typedef struct Packet {
 	int x0;
@@ -36,7 +36,7 @@ typedef struct Packet {
 } Packet;
 // SIZE 0xf8
 
-extern char g_7f4ca0[];
+
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
@@ -100,8 +100,8 @@ int __cdecl fcn_004ba080(Req* r)
 		if (playerCount >= 6) {
 			break;
 		}
-		if (((Player*)g_7f4ca0)[i].x2 == 0 && ((Player*)g_7f4ca0)[i].x16c == building && ((Player*)g_7f4ca0)[i].x165 != 0) {
-			list[playerCount] = (char*) &((Player*)g_7f4ca0)[i];
+		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 0 && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_16c == building && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_165[0] != 0) {
+			list[playerCount] = (char*) &((ENTITY_RECORD*)g_7f4ca0)[i];
 			playerCount++;
 		}
 	}

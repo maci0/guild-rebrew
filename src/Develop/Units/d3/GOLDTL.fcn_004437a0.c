@@ -10,13 +10,7 @@ typedef struct {
 
 #include "client_types.h"
 extern Slot_1043340 g_1043340[64];
-extern char* d3_ObjectListHead;
-extern char d3_SceneObjectSentinel[];
-extern char* d3_SceneRenderListHead;
-extern char g_1040640[];
 extern int g_6b8300;
-extern int g_6b89c0;
-extern int g_6b8058;
 extern int g_6b8484;
 
 void __cdecl fcn_00442e30(void);

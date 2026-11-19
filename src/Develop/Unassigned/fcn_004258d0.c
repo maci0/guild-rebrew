@@ -3,7 +3,7 @@
 typedef Voice_14cbbe0 Voice;
 
 extern char* g_6b7e88;
-extern int g_6b7e8c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl fcn_0042aaa0(int h);
 
 /* ADDRESS: GOLDTL 0x004258d0 */

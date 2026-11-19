@@ -2,7 +2,7 @@ extern unsigned char g_773d75;
 extern int g_100f1dc;
 extern char* g_77255c;
 extern int d2_CurrentWindowId;
-extern int cut_EventLoopFlags;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);

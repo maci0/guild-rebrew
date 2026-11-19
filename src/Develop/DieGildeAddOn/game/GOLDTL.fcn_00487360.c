@@ -1,18 +1,18 @@
 
 
 
-typedef struct Ent {
-	unsigned short id;
-	unsigned char x2;
-	char pad3[0x165 - 3];
-	unsigned char x165;
-	char pad166[0x16c - 0x166];
-	char* owner;
-	char pad170[0x21c - 0x170];
-} Ent;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
+
+
+
 extern unsigned short g_7f4c04;
 extern unsigned char* lpGebaeudePROT;
 
@@ -37,13 +37,13 @@ void __cdecl fcn_00487360(char* e)
 	}
 	o = *(char**) (e + 0x16c);
 	*(int*) (e + 0x1b4) |= 0x40;
-	kind = ((Ent*)g_7f4ca0)[*(unsigned short*) (o + 0x27)].x2;
+	kind = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (o + 0x27)].entity_state;
 	if ((kind == 6 || kind == 7) && !(*(int*) (e + 0x1b4) & 2)) {
 		return;
 	}
 	n = 0;
 	for (i = 0; i < 768; i++) {
-		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].owner == o && ((Ent*)g_7f4ca0)[i].x165 != 0) {
+		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_16c == o && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_165[0] != 0) {
 			n++;
 		}
 	}

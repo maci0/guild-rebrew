@@ -90,14 +90,14 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 	v11 = (unsigned short) gm_RandomMod(0xff);
 	a1 = *(unsigned char*) (v4 + 0x83);
 	v9 = *(int*) (v4 + 0x16c);
-	v8 = (int) (*((unsigned char*) p + 4) * g_6640e8 * (int) a1);
+	v8 = (int) (*((unsigned char*) p + 4) * 0.01 * (int) a1);
 	if ((int) v11 <= 0xff - v8) {
 		hit = 0;
 		ev.amount = 0;
 	} else {
 		hit = 1;
 		ev.amount = (int) ((unsigned int) (cut_RandMod(*((unsigned char*) p + 6) - *((unsigned char*) p + 5))
-		    + *((unsigned char*) p + 5)) * *(float*) (a2 + 0x1c) * g_6640e8);
+		    + *((unsigned char*) p + 5)) * *(float*) (a2 + 0x1c) * 0.01);
 	}
 	if (v9 != 0 && fcn_005c6270(v9, 0x2b9))
 		ev.amount = (int) (ev.amount * g_664144);

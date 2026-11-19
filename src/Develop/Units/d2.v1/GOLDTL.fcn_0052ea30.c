@@ -1,4 +1,5 @@
 #include "client_types.h"
+#include "Develop/Units/d2.v1/d2_win.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 extern int g_6a25b8;
@@ -22,7 +23,7 @@ extern char g_868060[];
 extern Win_1015f40 g_1015f40[0x60];
 
 extern float g_6628a8;
-extern float g_662910;
+
 extern float g_662b10;
 extern double g_6640e8;
 extern double g_662c38;
@@ -107,7 +108,7 @@ header_done:
 		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
-			g_6a25c4[0] = fcn_0046f740(((((Win_1015f40*) g_1015f40)[d2_CurrentWindowId].xc - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
+			g_6a25c4[0] = fcn_0046f740(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 		}
 		return;
 	}
@@ -118,12 +119,12 @@ header_done:
 			if (*(int*) (e + 0x70) >= 4) {
 				ratio = (float) *(int*) (e + 0xc8) / (float) *(int*) (e + 0xc4);
 			}
-			if (ratio < g_6640e8) {
+			if (ratio < 0.01) {
 				ratio = (float) g_6640e8;
 			}
 			if (g_6a25c4[0] == -1) {
 				d2_SetForm(g_6a25b8, 0);
-				g_6a25c4[0] = fcn_0046f740(((((Win_1015f40*) g_1015f40)[d2_CurrentWindowId].xc - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
+				g_6a25c4[0] = fcn_0046f740(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 			}
 		}
 		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
@@ -139,7 +140,7 @@ header_done:
 		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
-			g_6a25c4[0] = fcn_0046f740(((((Win_1015f40*) g_1015f40)[d2_CurrentWindowId].xc - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
+			g_6a25c4[0] = fcn_0046f740(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 		}
 		return;
 	}
@@ -159,7 +160,7 @@ header_done:
 	*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
 	if (g_6a25c4[0] == -1) {
 		d2_SetForm(g_6a25b8, 0);
-		g_6a25c4[0] = fcn_0046f740(((((Win_1015f40*) g_1015f40)[d2_CurrentWindowId].xc - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
+		g_6a25c4[0] = fcn_0046f740(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 	}
 	return;
 
@@ -190,7 +191,7 @@ no_header:
 		}
 	}
 	d2_SetForm(g_6a25b8, 0);
-	x = (((Win_1015f40*) g_1015f40)[d2_CurrentWindowId].xc - 0x30) >> 1;
+	x = (((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1;
 	n = fcn_00529800(s, kinds);
 	if (n > 0) {
 		y = 0x38;
@@ -229,7 +230,7 @@ no_header:
 		break;
 	case 0x40:
 		if (*(int*) (p + 0x70) < 2) {
-			ratio = g_662910;
+			ratio = 0.01f;
 		} else if (*(int*) (p + 0x70) == 2) {
 			n = fcn_00500d20(p + 0x44, p + 0x52);
 			if (n != 0) {
@@ -255,7 +256,7 @@ no_header:
 		break;
 	case 0x62:
 		if (*(int*) (p + 0x70) < 4) {
-			ratio = g_662910;
+			ratio = 0.01f;
 		} else if (*(int*) (p + 0x70) == 4) {
 			pos = *(pos14_7f4c00*) (p + 0x44);
 			fcn_00500bb0(&pos, 0x60, 0, 0);
@@ -267,7 +268,7 @@ no_header:
 		break;
 	case 0x65:
 		if (*(int*) (p + 0x70) < 2) {
-			ratio = g_662910;
+			ratio = 0.01f;
 		} else {
 			pos = *(pos14_7f4c00*) (p + 0x44);
 			fcn_00500bb0(&pos, 0x18, 0, 0);
@@ -279,7 +280,7 @@ no_header:
 		break;
 	case 0x48:
 		if (*(int*) (p + 0x70) < 1) {
-			ratio = g_662910;
+			ratio = 0.01f;
 		} else if (*(int*) (p + 0x70) == 1) {
 			n = fcn_00500d20(p + 0x44, p + 0xcc);
 			if (n != 0) {
@@ -352,7 +353,7 @@ no_target:
 	k = 0;
 	for (i = 3; i < 0x83; i += 0x20) {
 		g_6a25c4[k] = fcn_0046f7e0(i, 0x28, *(unsigned short*) s + 0xdf, d2_CurrentWindowId, -2);
-		fcn_0064d41a(buf, g_67d444, gm_GetMsgField((int) e, (int) s));
+		fcn_0064d41a(buf, "%i", gm_GetMsgField((int) e, (int) s));
 		n = d2_ShowTxt(i - 2, 0x1c, buf, d2_CurrentWindowId);
 		*(int*) (g_1015ea0 + n * 0x2f4 + 0x5c) = 1;
 		*(int*) (g_1015ea0 + n * 0x2f4 + 0x6c) = 1;

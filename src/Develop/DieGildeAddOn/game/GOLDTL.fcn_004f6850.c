@@ -1,11 +1,10 @@
-typedef struct {
-	int day;
-	int hour;
-	int min;
-	unsigned short sec;
-} Time;
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
 
-extern int gm_GameTime;
+
+
+
+
+
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
@@ -17,7 +16,7 @@ extern char g_7f4ca4[];
 
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_00500bb0(Time*, int, int, int);
+void __cdecl fcn_00500bb0(GAME_TIMESTAMP*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_004c6b20(int, int, int);
 void __cdecl fcn_004c4510(void*, int);
@@ -45,11 +44,11 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 	case 0:
 		msg[4] = 0x5c;
 		msg[0x36] = 1;
-		*(int*) (msg + 0x28) = gm_GameTime;
+		*(int*) (msg + 0x28) = gm_GameTime.a;
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
-		fcn_00500bb0((Time*) (msg + 0x28), 1, 0, 0);
+		fcn_00500bb0((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
 		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = 3;
@@ -59,11 +58,11 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 	case 1:
 		msg[4] = 0x5b;
 		msg[0x36] = 1;
-		*(int*) (msg + 0x28) = gm_GameTime;
+		*(int*) (msg + 0x28) = gm_GameTime.a;
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
-		fcn_00500bb0((Time*) (msg + 0x28), 1, 0, 0);
+		fcn_00500bb0((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
 		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = (int) ((float) n * g_6652c8);
@@ -73,11 +72,11 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 	case 2:
 		msg[4] = 0x5c;
 		msg[0x36] = 1;
-		*(int*) (msg + 0x28) = gm_GameTime;
+		*(int*) (msg + 0x28) = gm_GameTime.a;
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
-		fcn_00500bb0((Time*) (msg + 0x28), 1, 0, 0);
+		fcn_00500bb0((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
 		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = 3;
@@ -87,11 +86,11 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 	case 3:
 		msg[4] = 0x5b;
 		msg[0x36] = 1;
-		*(int*) (msg + 0x28) = gm_GameTime;
+		*(int*) (msg + 0x28) = gm_GameTime.a;
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
-		fcn_00500bb0((Time*) (msg + 0x28), 1, 0, 0);
+		fcn_00500bb0((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
 		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = (int) ((float) n * g_6652c8);
@@ -135,11 +134,11 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		*(char*) (pkt + 0x30) = (char) n;
 		*(int*) (pkt + 0x0c) = *(int*) (g_7f4ca4 + (unsigned int) g_774970 * 0x21c);
 		*(int*) (pkt + 0x14) = -1;
-		*(int*) (pkt + 0x18) = gm_GameTime;
+		*(int*) (pkt + 0x18) = gm_GameTime.a;
 		*(int*) (pkt + 0x1c) = g_7f4c04;
 		*(int*) (pkt + 0x20) = g_7f4c08;
 		*(unsigned short*) (pkt + 0x24) = g_7f4c0c;
-		fcn_00500bb0((Time*) (pkt + 0x18), 0x18, 0, 0);
+		fcn_00500bb0((GAME_TIMESTAMP*) (pkt + 0x18), 0x18, 0, 0);
 		/* packed packet fields: 2-byte hour override, then 4 zeroed bytes */
 		*(unsigned short*) (pkt + 0x1c) = 10;
 		*(int*) (pkt + 0x1e) = 0;

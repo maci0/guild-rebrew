@@ -11,13 +11,13 @@ typedef struct {
 } Peer;
 
 // SIZE 0x21c
-typedef struct {
-	unsigned short id;
-	unsigned char kind;
-	char pad3;
-	int handle;
-	char pad8[0x214];
-} Ent;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 // SIZE 0x7c
 typedef struct {
@@ -31,7 +31,7 @@ extern Peer g_7f3ac0[8];
 extern unsigned char g_7747b0;
 extern char* g_14ac60c;
 extern unsigned char g_6a375c;
-extern char g_7f4ca0[];
+
 extern char g_7e2480[];
 extern int cm_SaveRequestSlot;
 extern char g_773de8;
@@ -71,7 +71,7 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 		fcn_00535850(main_LoopFlags, g_14ac60c);
 		g_6a375c = 0;
 		for (i = 0; i < 768; i++) {
-			if (((Ent*)g_7f4ca0)[i].id != 0xffff && (((Ent*)g_7f4ca0)[i].kind == 6 || ((Ent*)g_7f4ca0)[i].kind == 7)) {
+			if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7)) {
 				g_6a375c++;
 			}
 		}
@@ -91,7 +91,7 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 			CloseVfsStream(f);
 		}
 		memset(&m, 0, sizeof(m));
-		m.handle = ((Ent*)g_7f4ca0)[g_774970].handle;
+		m.handle = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
 		m.crc = crc;
 		fcn_004c5790(0x10, &m);
 		n = 0;

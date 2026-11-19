@@ -110,7 +110,7 @@ unsigned int __cdecl fcn_004be560(char* a0, int a1, unsigned int a2)
 				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1dc) = 4;
 				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1e0) = 0xf;
 				fcn_0064d41a((char*) (t * 0x2f4 + g_1015ea0 + 0xcc),
-					g_679060, g_14a79c0[g_90d520[n] * 2]);
+					"%s", g_14a79c0[g_90d520[n] * 2]);
 				n++;
 			}
 		}

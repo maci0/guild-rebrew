@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char txt_TextBanks[][0x74];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl m_FreeTracked(void* p);
 

@@ -3,13 +3,10 @@
 extern int g_772908;
 extern int g_772900;
 extern int d2_CurrentWindowId;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6ab3dc;
 extern int tp_d2_SelectedControl;
 extern int g_100f1dc;
-extern int d2_CurrentElementId;
-extern int g_6816d8;
-extern int g_14ce8d8;
 extern char* g_772904;
 #include <string.h>
 

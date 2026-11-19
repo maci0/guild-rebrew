@@ -15,11 +15,10 @@ typedef struct {
 } Cur;
 
 extern Sample_99ec20 g_99ec20[16];
-extern double g_662950;
 
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 
-#define CLAMP0(v) ((v) > g_662950 ? (v) : g_662950)
+#define CLAMP0(v) ((v) > 0.0 ? (v) : 0.0)
 
 void __cdecl fcn_005d3980(Cur cur, int w, int h)
 {

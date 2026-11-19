@@ -5,7 +5,7 @@ extern int g_772560;
 extern int g_1038580;
 extern int g_772528;
 extern int d2_CurrentWindowId;
-extern int g_772534;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6628a8;
 extern int g_67d3a0;
 extern int g_6b7fdc;

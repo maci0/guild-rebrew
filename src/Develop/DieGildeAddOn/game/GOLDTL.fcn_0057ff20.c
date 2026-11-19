@@ -1,3 +1,4 @@
+#include "client_types.h"
 
 
 
@@ -13,10 +14,10 @@ typedef struct {
 	int owner;
 	int h10;
 	int target;
-	int a;
-	int b;
-	int c;
-	short d;
+	pos14_7f4c00 timestamp;
+
+
+
 	unsigned char flags;
 	char p27[9];
 	unsigned char count;
@@ -60,10 +61,10 @@ void __cdecl fcn_0057ff20(int a)
 		msg.kind = 1;
 		msg.flags = 0xa0;
 		msg.target = -1;
-		msg.a = (*(int*)&gm_GameTime);
-		msg.b = (*(int*)&g_7f4c04);
-		msg.c = g_7f4c08;
-		msg.d = g_7f4c0c;
+		msg.timestamp.a = (*(int*)&gm_GameTime);
+		msg.timestamp.b = (*(int*)&g_7f4c04);
+		msg.timestamp.c = g_7f4c08;
+		msg.timestamp.d = g_7f4c0c;
 		fcn_004c5980(&msg);
 	}
 }

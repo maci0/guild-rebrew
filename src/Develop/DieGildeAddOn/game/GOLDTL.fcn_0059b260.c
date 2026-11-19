@@ -1,4 +1,5 @@
 #include "client_data.h"
+#include "Develop/Units/d2.v1/d2_win.h"
 extern char g_779160[];
 extern char* g_1015ea0;
 extern char* g_item_def_table;
@@ -61,10 +62,7 @@ typedef struct Msg59b {
 	int f14;
 	int f18;
 	char pad1c[0xc];
-	int f28;
-	int f2c;
-	int f30;
-	unsigned short f34;
+	pos14_7f4c00 timestamp;
 	unsigned char f36;
 	char pad37[1];
 	unsigned short f38;
@@ -112,10 +110,10 @@ int __cdecl fcn_0059b260(char* a0)
 	count = 1;
 	d2_SetForm(h, 0);
 	k = d2_CurrentWindowId * 0x3cc;
-	*(int*) (k + (int) g_1015f40 + 0x3a8) = 0xe;
-	*(int*) (k + (int) g_1015f40 + 0x3ac) = 0xe;
-	*(int*) (k + (int) g_1015f40 + 0x3b0) = 0xe;
-	*(int*) (k + (int) g_1015f40 + 0x3b4) = 0xe;
+	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[0] = 0xe;
+	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[4] = 0xe;
+	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[8] = 0xe;
+	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[12] = 0xe;
 	fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x742);
 	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
 	*(int*) (g_1015ea0 + item * 0x2f4 + 0x84) = 0x54;
@@ -181,16 +179,16 @@ int __cdecl fcn_0059b260(char* a0)
 								p = fcn_005463a0(2, 0, 9, 3, *(int*) (a0 + 1));
 								if (p == 0) {
 									memset(&msg, 0, 0xf8);
-									msg.f28 = gm_GameTime.a;
-									msg.f30 = g_7f4c08;
+									msg.timestamp.a = gm_GameTime.a;
+									msg.timestamp.c = g_7f4c08;
 									msg.type = 9;
 									msg.f08 = *(int*) (g_7f4ca4 + (unsigned) g_774970 * 0x21c);
 									msg.f0c = *(int*) (a0 + 1);
 									msg.f10 = 0;
 									msg.f14 = 0;
 									msg.f36 = 1;
-									msg.f2c = g_7f4c04;
-									msg.f34 = (unsigned short) g_7f4c0c;
+									msg.timestamp.b = g_7f4c04;
+									msg.timestamp.d = (unsigned short) g_7f4c0c;
 									msg.f58 = *(int*) (a0 + 1);
 									msg.f5c = *(int*) (p1 + 2);
 									msg.f60 = *(int*) (p3 + 2);
@@ -214,17 +212,17 @@ int __cdecl fcn_0059b260(char* a0)
 								}
 								if (p == 0) {
 									memset(&msg, 0, 0xf8);
-									msg.f28 = gm_GameTime.a;
+									msg.timestamp.a = gm_GameTime.a;
 									msg.type = 8;
-									msg.f30 = g_7f4c08;
+									msg.timestamp.c = g_7f4c08;
 									msg.f36 = 1;
 									*(unsigned short*) &msg.f58 = (unsigned short) *(int*) e;
 									msg.f08 = *(int*) (g_7f4ca4 + (unsigned) g_774970 * 0x21c);
 									msg.f10 = 0;
 									msg.f14 = 0;
 									msg.f0c = *(int*) (a0 + 1);
-									msg.f2c = g_7f4c04;
-									msg.f34 = (unsigned short) g_7f4c0c;
+									msg.timestamp.b = g_7f4c04;
+									msg.timestamp.d = (unsigned short) g_7f4c0c;
 									msg.f5c = *(int*) (a0 + 1);
 									msg.f60 = *(int*) (p3 + 2);
 									k = fcn_004c5530((char*) &msg);

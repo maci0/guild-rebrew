@@ -11,7 +11,7 @@ typedef struct {
 // SIZE 0x28
 
 extern Pt5d36_99ec2c g_99ec2c[16];
-extern float g_773d4c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 

@@ -10,7 +10,7 @@ typedef struct
 } fcn_0046a110_Rect;
 /* SIZE 0x10 */
 
-extern void* g_6b5de0;
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_ScreenHeight;
@@ -91,9 +91,9 @@ void __cdecl fcn_0046a110(int a1)
 	loc.screen.bottom = d2_ScreenHeight;
 	loc.uv[0] = 0.0f;
 	loc.uv[1] = 1.0f;
-	(*(void (__stdcall **)(void*, void*)) (*(int*) g_6b5de0 + 0xa0))(g_6b5de0, &loc.screen);
+	(*(void (__stdcall **)(void*, void*)) ((int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0xa0))(g_6b5de0, &loc.screen);
 	if (a1) {
-		(*(void (__stdcall **)(void*, int, void*, int, int, float, int)) (*(int*) g_6b5de0 + 0x90))(g_6b5de0, 0, 0, 1, 0, 1.0f, 0);
+		(*(void (__stdcall **)(void*, int, void*, int, int, float, int)) ((int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0x90))(g_6b5de0, 0, 0, 1, 0, 1.0f, 0);
 	}
 	else {
 		n = 0;
@@ -112,7 +112,7 @@ void __cdecl fcn_0046a110(int a1)
 			n++;
 		}
 		if (n) {
-			(*(void (__stdcall **)(void*, int, void*, int, int, float, int)) (*(int*) g_6b5de0 + 0x90))(g_6b5de0, n, u.clip, 1, 0, 1.0f, 0);
+			(*(void (__stdcall **)(void*, int, void*, int, int, float, int)) ((int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0x90))(g_6b5de0, n, u.clip, 1, 0, 1.0f, 0);
 		}
 	}
 	if ((*(int *)&g_7725a8)) {
@@ -240,7 +240,7 @@ label_46a7ab:
 						f = *(float*) (ent + 0x1f4);
 						if (f > g_6629c8)
 							f = (float) g_6629c8;
-						sprintf(u.buf, (char*) 0x67d43c, (int) (f * g_662c38));
+						sprintf(u.buf, (char*) 0x67d43c, (int) (f * 100.0));
 						fcn_00472880(d2_DefaultFont + 1);
 						fcn_0046bd20(dx, dy + *(int*) (ent + 0x1c) - 0xf,
 						             *(unsigned short*) (*(char**) (ent + 0xc) + 6),

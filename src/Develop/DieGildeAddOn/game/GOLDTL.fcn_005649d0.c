@@ -2,13 +2,13 @@
 
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int handle;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 // SIZE 0x2f4
 struct rec {
@@ -18,7 +18,7 @@ struct rec {
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -35,7 +35,7 @@ void __cdecl fcn_005649d0(char* e)
 	char* o;
 	char buf[0x200];
 	char* q;
-	struct house* h;
+	ENTITY_RECORD* h;
 	char* r;
 	int v;
 
@@ -50,9 +50,9 @@ void __cdecl fcn_005649d0(char* e)
 	if (q == 0 || (e[0x78] & 2) == 0) {
 		return;
 	}
-	h = &((struct house*)g_7f4ca0)[*(unsigned short*) (q + 0x27)];
+	h = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (q + 0x27)];
 	o = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
-	if (h->type != 6 && h->type != 7) {
+	if (h->entity_state != 6 && h->entity_state != 7) {
 		return;
 	}
 	v = 0;
@@ -61,6 +61,6 @@ void __cdecl fcn_005649d0(char* e)
 		v = *(int*) (r + 0xe);
 	}
 	io_FormatTextBuffer(buf, 0x18d7, *(unsigned short*) o, q, *(int*) (e + 0xb4), *(int*) (e + 0xc0), *(int*) (e + 0xb8), 0x5d, v);
-	he_MessageBoxQuickjump(h->handle, -1, buf, 0, 0x5ec, *(int*) (q + 1), -1, 0, 0);
-	fcn_004f4f60(0xe, *(int*) (e + 0xc0), h->handle, *(int*) (e + 0xb0), *(int*) (q + 1));
+	he_MessageBoxQuickjump(h->entity_id, -1, buf, 0, 0x5ec, *(int*) (q + 1), -1, 0, 0);
+	fcn_004f4f60(0xe, *(int*) (e + 0xc0), h->entity_id, *(int*) (e + 0xb0), *(int*) (q + 1));
 }

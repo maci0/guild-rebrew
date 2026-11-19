@@ -1,11 +1,12 @@
 
 
-typedef struct {
-	int x0;
-	char pad4[0x3a0];
-	float x3a4;
-	char pad3a8[0x24];
-} Slot;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
 // SIZE 0x3cc
 
 typedef struct {
@@ -74,7 +75,7 @@ void __cdecl fcn_0059e090(char* b)
 	int h;
 	int sel;
 	double d;
-	Slot* slot;
+	D2_WIN* slot;
 	Pick pick;
 	char buf[0x104];
 
@@ -101,10 +102,10 @@ void __cdecl fcn_0059e090(char* b)
 			fcn_00471b60(h);
 			d2_SetForm(h, 0);
 			fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x73f);
-			slot = (Slot*) &g_1015f40[((Dlg*)g_1038140)[h].slot];
+			slot = (D2_WIN*) &g_1015f40[((Dlg*)g_1038140)[h].slot];
 			fcn_0064d41a(buf, "ief_Wappen%li", *(int*) (b + 0x65));
-			d2_SetBackgroundTexture(buf, slot->x0);
-			slot->x3a4 = 0.0f;
+			d2_SetBackgroundTexture(buf, slot->pad0);
+			slot->alpha = 0.0f;
 			t0 = *(unsigned int*)&g_6b7fac;
 			d2_SetForm(h, 4);
 			fcn_00533a60(d2_CurrentWindowId, 0, &pick, 3, g_14a566c, "Import", "Export");
@@ -138,7 +139,7 @@ void __cdecl fcn_0059e090(char* b)
 		if (!(d < 0.25)) {
 			d = 0.25;
 		}
-		slot->x3a4 = (float) d;
+		slot->alpha = (float) d;
 		fcn_005974e0(b, grp);
 		fcn_00597940(h, 1, 0, b, grp);
 		if (g_100f1dc == 2) {

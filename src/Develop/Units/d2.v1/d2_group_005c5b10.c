@@ -1,10 +1,10 @@
 void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
 
-typedef struct
-{
-	char b[14];
-} Name14;
+#include "client_types.h"
+
+
+
 
 typedef struct
 {
@@ -14,7 +14,7 @@ typedef struct
 	int x8;
 	int xc;
 	char pad10[0x18];
-	Name14 name;
+	pos14_7f4c00 name;
 	unsigned char x36;
 	char pad37[0x21];
 	int x58;
@@ -28,15 +28,15 @@ typedef struct
 	char pad8[0x214];
 } Player;
 
-typedef struct
-{
-	char pad0[0x3a8];
-	int x3a8;
-	int x3ac;
-	int x3b0;
-	int x3b4;
-	char pad3b8[0x14];
-} Win;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
+
 
 extern char g_7f4ca0[];
 #include "client_types.h"
@@ -191,10 +191,10 @@ void __cdecl fcn_005c5b10(char* a)
 	dlg = fcn_00470820(0, 0, s_6ac738);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	((Win*)g_1015f40)[d2_CurrentWindowId].x3a8 = 0xe;
-	((Win*)g_1015f40)[d2_CurrentWindowId].x3ac = 0xe;
-	((Win*)g_1015f40)[d2_CurrentWindowId].x3b0 = 0xe;
-	((Win*)g_1015f40)[d2_CurrentWindowId].x3b4 = 0xe;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0] = 0xe;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[4] = 0xe;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[8] = 0xe;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[12] = 0xe;
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x19a9);
 	d2_SetForm(dlg, 2);
@@ -212,7 +212,7 @@ void __cdecl fcn_005c5b10(char* a)
 					pkt.type = 0x38;
 					pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
 					pkt.xc = *(int*) (a + 1);
-					pkt.name = (*(Name14*)&gm_GameTime);
+					pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 					pkt.x36 = 1;
 					pkt.x58 = v;
 					fcn_004c4eb0(s_6ac730);

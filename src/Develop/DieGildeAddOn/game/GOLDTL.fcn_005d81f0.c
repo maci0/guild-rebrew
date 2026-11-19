@@ -11,22 +11,22 @@ typedef struct {
 	int pad14[15];
 } Req5d81f0;
 
-typedef struct {
-	unsigned short id;
-	unsigned char kind;
-	unsigned char pad3;
-	int handle;
-	char pad8[0x164];
-	char* rec;
-	char pad170[0xac];
-} Slot5d81f0;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
+
+
 
 extern const int g_666018;
 extern int g_66601c;
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern int g_14ce8e0;
-extern char g_7f4ca0[];
+
 
 extern char* __cdecl gm_LookupEntityRecordById(int);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -93,8 +93,8 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 			goto fail60;
 		fcn_004c6ae0(*(int*) (entity + 4), -5);
 		fcn_004c5420(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
-		if (((Slot5d81f0*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)].kind == 6 ||
-		    ((Slot5d81f0*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)].kind == 7) {
+		if (((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)].entity_state == 6 ||
+		    ((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)].entity_state == 7) {
 			io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) entity, rec, *(unsigned short*) ent);
 			fcn_00545d40(*(unsigned short*) (rec + 0x27), *(unsigned short*) (rec + 0x27),
 				text, 0, 0x5fb, (char*) 0x6a59fc);
@@ -128,7 +128,7 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 		return 0;
 	if (*(unsigned short*) (rec + 0x27) == 0xffff)
 		return 0;
-	state_ptr = (char*) &((Slot5d81f0*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)];
+	state_ptr = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)];
 	j = fcn_00470820(0, 0, (char*) 0x6acd8c);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(j);
@@ -152,10 +152,10 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 					ent = 0;
 					count = 0x300;
 					do {
-						if (((Slot5d81f0*) g_7f4ca0)[r].id != 0xffff &&
-						    ((Slot5d81f0*) g_7f4ca0)[r].rec == rec &&
-						    ((Slot5d81f0*) g_7f4ca0)[r].kind == 0) {
-							ent = (char*) &((Slot5d81f0*) g_7f4ca0)[r];
+						if (((ENTITY_RECORD*) g_7f4ca0)[r].entity_index != 0xffff &&
+						    ((ENTITY_RECORD*) g_7f4ca0)[r].unk_16c == rec &&
+						    ((ENTITY_RECORD*) g_7f4ca0)[r].entity_state == 0) {
+							ent = (char*) &((ENTITY_RECORD*) g_7f4ca0)[r];
 							break;
 						}
 						count -= 1;

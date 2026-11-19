@@ -5,9 +5,8 @@
 extern int g_100f1dc;
 extern int g_100f1e4;
 extern char* g_1015ea0;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
-extern int d2_CurrentElementId;
 extern int d2_CurrentWindowId;
 #include "client_dialog_state.h"
 extern char g_7e22c0[];
@@ -17,7 +16,6 @@ extern int g_7e23e4;
 extern char g_7e23e8;
 extern char g_7e23e9; extern unsigned char g_7e23e1; extern unsigned char g_7e23e2;
 extern char g_7e23e0[];
-extern char g_7e1d00[];
 
 extern char s_6a1e4c[]; /* "Network" */
 extern char s_6a1e54[]; /* "Name" */

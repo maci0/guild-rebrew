@@ -27,10 +27,7 @@ extern HE_AP_EVENT g_7dcae0[256];	/* 0x007dcae0 */
 
 #pragma pack(2)
 typedef struct {
-	int a;
-	int b;
-	int c;
-	short d;
+	pos14_7f4c00 clock;
 	short e;
 	short f;
 	short out;			/* +0x12, written by fcn_004fd400 */
@@ -182,12 +179,12 @@ void __cdecl fcn_00540020(void)
 	v5 = (unsigned char*) fcn_00509570(SLOTPTR(g_774970 & 0xffff));
 	hp = 0;
 	fcn_00500e20((int*) &gm_GameTime);
-	pos.a = gm_GameTime.a;
-	pos.b = gm_GameTime.b;
-	pos.c = gm_GameTime.c;
-	pos.d = gm_GameTime.d;
+	pos.clock.a = gm_GameTime.a;
+	pos.clock.b = gm_GameTime.b;
+	pos.clock.c = gm_GameTime.c;
+	pos.clock.d = gm_GameTime.d;
 	if ((g_7747b0 & 4) && (g_774950 > 1)) {
-		pos.a++;
+		pos.clock.a++;
 	}
 	season = fcn_0052a310((pos14_7f4c00*) &pos);
 	fcn_004ec9e0();
@@ -219,7 +216,7 @@ void __cdecl fcn_00540020(void)
 	g_7e4314 = fcn_0052a310((pos14_7f4c00*) &pos);
 	fcn_004fd400(&pos.out, &i);
 	i = 0;
-	tm.stamp = pos.a;
+	tm.stamp = pos.clock.a;
 	tm.now = (*(int (__stdcall **) (void)) 0x662318) ();
 	wait = fcn_004c5790(0, &tm);
 	while (fcn_004c4450(wait) == 0) {

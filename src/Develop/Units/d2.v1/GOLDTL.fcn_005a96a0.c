@@ -1,16 +1,16 @@
 
 
 // SIZE 0x21c
-typedef struct {
-	unsigned short id;
-	char pad2[0x166];
-	unsigned char owner;
-	char pad169[0xb3];
-} House5a96;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
 
 // SIZE 0x38
 typedef struct {
-	House5a96* house;
+	ENTITY_RECORD* house;
 	char pad4[0xc];
 	int x;
 	int y;
@@ -21,7 +21,7 @@ typedef struct {
 
 #define HOUSES 768
 
-extern char g_7f4ca0[];
+
 extern char* g_772500;
 extern char* g_77255c;
 extern int d2_CurrentWindowId;
@@ -66,7 +66,7 @@ int __cdecl fcn_005a96a0(char* who, int id)
 	int prev;
 	int w;
 	int ids[3];
-	House5a96* houses[4];
+	ENTITY_RECORD* houses[4];
 	char info[0x18];
 	Item5a96 items[4];
 	int n;
@@ -92,8 +92,8 @@ int __cdecl fcn_005a96a0(char* who, int id)
 				if (n >= 4) {
 					break;
 				}
-				if (((House5a96*)g_7f4ca0)[j].id != 0xffff && ((House5a96*)g_7f4ca0)[j].owner == id) {
-					houses[n] = &((House5a96*)g_7f4ca0)[j];
+				if (((ENTITY_RECORD*)g_7f4ca0)[j].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[j].unk_165[3] == id) {
+					houses[n] = &((ENTITY_RECORD*)g_7f4ca0)[j];
 					n++;
 				}
 			}

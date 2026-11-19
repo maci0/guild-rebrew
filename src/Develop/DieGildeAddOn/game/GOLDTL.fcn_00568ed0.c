@@ -157,7 +157,7 @@ void __cdecl fcn_00568ed0(char* a1)
 		} while (--n != 0);
 		countf = (float) cnt;
 		t = fcn_0050c710((unsigned char*) ent, 0xf, 1);
-		if ((float) ((((float) t * g_662910 + g_6629c8) *
+		if ((float) ((((float) t * 0.01f + g_6629c8) *
 		              (countf * 0.1f + g_6628a0) *
 		              (total / countf)) /
 		             (float) *(unsigned char*) (obj + 0x83)) >
@@ -242,7 +242,7 @@ void __cdecl fcn_00568ed0(char* a1)
 					upto = fcn_0042e410((int) *(float*) (r + 0x1c));
 					fcn_004ff210(*(unsigned short*) r,
 					             (int) -((double) upto * g_6653f8 +
-					                     (double) *(float*) (r + 0x1c) * g_662908));
+					                     (double) *(float*) (r + 0x1c) * 0.5));
 				}
 				p += 4;
 			} while (--i != 0);

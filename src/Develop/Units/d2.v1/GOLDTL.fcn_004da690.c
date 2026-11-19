@@ -288,7 +288,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
             fcn_004e44b0((char *)0x68c184, (char *)&mid[0x298]);
         }
         for (i = 0; i < s44; i++) {
-            fcn_0064d41a((char *)&mid[0x298], (char *)0x67d444, blkB.sD0[i]);
+            fcn_0064d41a((char *)&mid[0x298], "%i", blkB.sD0[i]);
             fcn_004e44b0((char *)0x68c158, (char *)&mid[0x298]);
         }
         fcn_0051af00((char *)&mid[0x298], (char *)0x68c140, flug[s30]);
@@ -520,7 +520,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
                 fcn_004e44b0((char *)0x68c184, (char *)&mid[0x2a8]);
             }
             for (i = 0; i < s44; i++) {
-                fcn_0064d41a((char *)&mid[0x2a8], (char *)0x67d444, blkB.sD0[i]);
+                fcn_0064d41a((char *)&mid[0x2a8], "%i", blkB.sD0[i]);
                 fcn_004e44b0((char *)0x68c158, (char *)&mid[0x2a8]);
             }
             fcn_0051af00((char *)&mid[0x2a8], (char *)0x68c140, flug[s30]);

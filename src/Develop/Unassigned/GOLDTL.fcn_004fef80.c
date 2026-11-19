@@ -18,7 +18,6 @@ typedef struct
 // SIZE 0x28
 
 extern float g_662a94;
-extern double g_662950;
 
 float __cdecl fcn_004fef80(Obj28* p)
 {
@@ -26,10 +25,10 @@ float __cdecl fcn_004fef80(Obj28* p)
 	float v;
 
 	if (p->id == 0xffff) {
-		return g_662a94;
+		return -1.0f;
 	}
 	if (p->x8 == 0) {
-		return g_662a94;
+		return -1.0f;
 	}
 	x = p->xa;
 	if (x <= p->f20) {
@@ -38,7 +37,7 @@ float __cdecl fcn_004fef80(Obj28* p)
 		v = p->f1c;
 	}
 	v += p->x24;
-	return (float)(v > g_662950 ? v : g_662950);
+	return (float)(v > 0.0 ? v : 0.0);
 }
 
 
@@ -65,10 +64,10 @@ float __cdecl fcn_004feff0(Bar24* bar)
 	float v;
 
 	if (bar->id == 0xffff) {
-		return g_662a94;
+		return -1.0f;
 	}
 	if (bar->active == 0) {
-		return g_662a94;
+		return -1.0f;
 	}
 	v = bar->cur;
 	if (v <= bar->max) {

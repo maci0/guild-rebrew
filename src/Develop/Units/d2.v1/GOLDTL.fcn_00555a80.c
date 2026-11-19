@@ -16,7 +16,7 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_774964;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int g_100f884;
 extern char g_7749e8;
 extern int g_7749e4;
@@ -34,12 +34,12 @@ void __cdecl fcn_004c30a0(int a0, int a1, char* fmt, int a3, int a4);
 /* ADDRESS: GOLDTL 0x00555a80 */
 void __cdecl fcn_00555a80(Panel* p)
 {
-	char* rec;
+	ENTITY_RECORD* rec;
 	int id;
 	int v;
 
 	id = (int) p->id;
-	rec = (char*) g_7f4ca0 + id * 540;
+	rec = &((ENTITY_RECORD*)g_7f4ca0)[id];
 	if (g_774970 != p->id) {
 		return;
 	}
@@ -52,7 +52,7 @@ void __cdecl fcn_00555a80(Panel* p)
 	if (p->state == -2 || p->state == -1) {
 		goto update;
 	}
-	if (*(unsigned short*) rec == 0xffff) {
+	if (rec->entity_index == 0xffff) {
 		goto update;
 	}
 	switch (p->state) {

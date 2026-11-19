@@ -4,10 +4,7 @@ typedef unsigned char u8;
 
 extern int g_1041d0c;
 extern int g_1041d68;
-extern int g_14ce8d0;
-extern int g_14ce8e4;
-extern int g_14ce8cc;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned int g_14ce860;
 extern unsigned int g_14ce864;
 extern short g_14ce8c0;
@@ -26,7 +23,6 @@ extern int g_6b847c;
 extern int g_6b8480;
 extern int g_6b8484;
 extern float g_6628a8;
-extern float g_6628fc;
 
 int __cdecl fcn_00449600(int a);
 int __cdecl fcn_00448cc0(int self, float* dir, float* view, int pos,

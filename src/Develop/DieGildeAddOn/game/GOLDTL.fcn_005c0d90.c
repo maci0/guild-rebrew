@@ -4,13 +4,13 @@
 #pragma intrinsic(memset)
 
 // SIZE 0x21c
-typedef struct {
-	char f0[4];
-	int f4;
-	char pad[0x214];
-} Slot5c0d;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
@@ -56,12 +56,12 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 	if (*obj == g_774970) {
 		return 0;
 	}
-	if (fcn_0055c140(&((Slot5c0d*)g_7f4ca0)[g_774970], obj, &cnt) == 0) {
+	if (fcn_0055c140(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], obj, &cnt) == 0) {
 		io_FormatTextBuffer(text, 0x190f, *obj);
 		fcn_00526120(text, 0);
 		return 0;
 	}
-	if (fcn_00579640(obj, &((Slot5c0d*)g_7f4ca0)[g_774970]) == 0) {
+	if (fcn_00579640(obj, &((ENTITY_RECORD*)g_7f4ca0)[g_774970]) == 0) {
 		io_FormatTextBuffer(text, 0x409f, *obj);
 		fcn_00526120(text, 0);
 		return 0;
@@ -71,7 +71,7 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 		fcn_00526120(text, 0);
 		return 0;
 	}
-	if (fcn_00525f60(&((Slot5c0d*)g_7f4ca0)[g_774970], 1) == 0) {
+	if (fcn_00525f60(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 1) == 0) {
 		return 0;
 	}
 	d = fcn_00470820(0, 0, g_6ac494);
@@ -99,8 +99,8 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 				gm_StartFilteredEntitySearch(1, 5, 0xa);
 				ev[4] = 0x35;
 				ev[0x36] = 2;
-				*(int*) (ev + 8) = ((Slot5c0d*)g_7f4ca0)[g_774970].f4;
-				*(int*) (ev + 0xc) = ((Slot5c0d*)g_7f4ca0)[g_774970].f4;
+				*(int*) (ev + 8) = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+				*(int*) (ev + 0xc) = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
 				*(int*) (ev + 0x58) = (*(int*)&gm_GameTime);
 				*(int*) (ev + 0x5c) = (*(int*)&g_7f4c04);
 				*(int*) (ev + 0x60) = g_7f4c08;

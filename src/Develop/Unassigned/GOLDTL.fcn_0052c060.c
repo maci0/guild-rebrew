@@ -77,7 +77,6 @@ extern float g_66430c;
 extern double g_665df8;
 extern double g_665e08;
 extern double g_6629c8;
-extern double g_662950;
 extern float g_665e00;
 extern float g_665e04;
 extern float g_665e10;
@@ -200,7 +199,7 @@ main:
 		goto afterFirst;
 	}
 	dt = g_14ce904 - g_14ce900;
-	f = (float) dt * g_662a98;
+	f = (float) dt * 5.0f;
 	f = f + s902;
 	f = f - g_773e3c;
 	f = f * g_665e04;

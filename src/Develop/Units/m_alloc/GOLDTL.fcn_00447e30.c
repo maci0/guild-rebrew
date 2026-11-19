@@ -51,7 +51,7 @@ typedef struct S447e30Desc {
 	char strings[8][0x40];
 } S447e30Desc;
 
-extern float g_662a68;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl ReportClientMessage(char*);
 char* __cdecl fcn_004011a0(char*, char*);
 int __cdecl fcn_00401180(char*, char*);
@@ -167,10 +167,10 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 						fcn_004011d0(stream, &desc.recs[saved].f10);
 						ReadVfsFourDwords(stream, desc.recs[saved].block);
 						if (version < 0x3a6c00ac) {
-							desc.recs[saved].block[0] *= g_662a68;
-							desc.recs[saved].block[1] *= g_662a68;
-							desc.recs[saved].block[2] *= g_662a68;
-							desc.recs[saved].block[3] *= g_662a68;
+							desc.recs[saved].block[0] *= 0.33333334f;
+							desc.recs[saved].block[1] *= 0.33333334f;
+							desc.recs[saved].block[2] *= 0.33333334f;
+							desc.recs[saved].block[3] *= 0.33333334f;
 						}
 						ReadVfsFourDwords(stream, desc.recs[saved].extra);
 						if (version >= 0x3a6c00b9) {

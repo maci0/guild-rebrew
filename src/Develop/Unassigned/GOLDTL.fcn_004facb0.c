@@ -18,7 +18,7 @@ extern int g_99f5e4;
 extern int g_99f5e8;
 extern int g_99f5ec;
 extern int g_99f604;
-extern float g_773d4c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLD 0x4f88c0 */
 
 void __cdecl fcn_004facb0(void)

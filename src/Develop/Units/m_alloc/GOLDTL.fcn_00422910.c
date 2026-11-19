@@ -2,7 +2,7 @@
 
 
 extern int g_6b7d70;
-extern int MemUsed;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 char* __cdecl fcn_004227c0(void);
 void __cdecl m_FreeTracked(void* p);
 

@@ -3,10 +3,8 @@
 
 extern volatile int g_6b7fac;
 extern int g_772f3c;
-extern int cut_EventLoopFlags;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
-extern int* cut_ActiveCutscene;
 
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_004cfca0(void);

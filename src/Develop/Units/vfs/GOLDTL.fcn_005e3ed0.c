@@ -1,8 +1,7 @@
 
 
-extern unsigned short ls_SavePreviewPixels[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern struct VFS_DIR* g_6b7fdc;
-extern char g_6790b0[];
 extern char g_6a23b0[];
 
 void __cdecl fcn_00469e30(int);

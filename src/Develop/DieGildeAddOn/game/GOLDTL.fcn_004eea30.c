@@ -33,7 +33,7 @@ int __cdecl fcn_004eea30(void* a0, int a1, float a2)
 	m.obj = *(int*) ((char*) a0 + 4);
 	m.id = a1;
 	if (a2 > g_6628a8) {
-		if (a2 < g_6628a0) {
+		if (a2 < 1.0f) {
 			m.f = a2;
 			return fcn_004c6d30(&m);
 		}

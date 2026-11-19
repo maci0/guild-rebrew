@@ -93,7 +93,7 @@ int __cdecl hst_ParseText_Fake_1st_Pass(char* out, int id)
 		sprintf(msg, g_6808b0, id - hst_HistoryTextBase);
 		return 0;
 	}
-	sprintf(out, g_679060, buf);
+	sprintf(out, "%s", buf);
 	return 1;
 }
 

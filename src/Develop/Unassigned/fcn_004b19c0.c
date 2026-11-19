@@ -1,15 +1,16 @@
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
 #include <string.h>
 
 #include "client_types.h"
 
 #pragma pack(2)
-typedef struct
-{
-	int a;
-	short b;
-	int c;
-	int d;
-} stamp14;
+
+
+
+
+
+
+
 #pragma pack()
 // SIZE 0xe
 
@@ -23,15 +24,15 @@ void __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004b19c0(void)
 {
 	char msg[0xf8];
-	stamp14 stamp;
+	GAME_TIMESTAMP stamp;
 	char* rec;
 	int n;
 	int sent;
 	int id;
 
-	stamp = *(stamp14*) &gm_GameTime;
-	stamp.b = 0xc;
-	stamp.c = 0;
+	stamp = *(GAME_TIMESTAMP*) &gm_GameTime;
+	stamp.hour = 0xc;
+	stamp.minute = 0;
 	sent = 0;
 	n = 0;
 	rec = (char*) 0x7f4ca4;
@@ -46,7 +47,7 @@ int __cdecl fcn_004b19c0(void)
 			*(int*) (msg + 0xc) = id;
 			msg[4] = 0x54;
 			msg[0x36] = 9;
-			*(stamp14*) (msg + 0x28) = stamp;
+			*(GAME_TIMESTAMP*) (msg + 0x28) = stamp;
 			fcn_004c5530(msg);
 			sent++;
 		}

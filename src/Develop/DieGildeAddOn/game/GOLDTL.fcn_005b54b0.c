@@ -4,18 +4,18 @@
 #pragma intrinsic(memset)
 
 // SIZE 0x21c
-typedef struct {
-	unsigned short id;
-	char pad2[2];
-	int handle;
-	char pad8[0x164];
-	char* owner;
-	char pad170[0xac];
-} House5b54;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
+
 
 #define HOUSES 768
 
-extern char g_7f4ca0[];
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* gm_CityEntity;
 #include "client_types.h"
@@ -55,8 +55,8 @@ void __cdecl fcn_005b54b0(char* p)
 	msg[0x26] = (char) 0xa2;
 	*(int*) (msg + 0x14) = -1;
 	msg[0x30] = 2;
-	*(int*) (msg + 0xc) = ((House5b54*)g_7f4ca0)[g_774970].handle;
-	*(int*) (msg + 0x34) = ((House5b54*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].handle;
+	*(int*) (msg + 0xc) = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+	*(int*) (msg + 0x34) = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id;
 	*(int*) (msg + 0x38) = *(int*) (par + 4);
 	msg[0x7c] = 9;
 	for (i = 0; i < 16; i++) {
@@ -84,8 +84,8 @@ void __cdecl fcn_005b54b0(char* p)
 		if (n >= 4) {
 			break;
 		}
-		if (((House5b54*)g_7f4ca0)[i].id != 0xffff && ((House5b54*)g_7f4ca0)[i].owner == e) {
-			((int*) (msg + 0xc0))[n] = ((House5b54*)g_7f4ca0)[i].handle;
+		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_16c == e) {
+			((int*) (msg + 0xc0))[n] = ((ENTITY_RECORD*)g_7f4ca0)[i].entity_id;
 			n++;
 		}
 	}

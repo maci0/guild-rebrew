@@ -22,7 +22,7 @@ int __cdecl fcn_004f9d80(unsigned char* entity, int* command)
 		return 2;
 	}
 	if (*command == 1 && entity[2] == 6) {
-		io_FormatTextBuffer((char*) command + 0x14, (int) g_679060, 0x1e05);
+		io_FormatTextBuffer((char*) command + 0x14, (int) "%s", 0x1e05);
 	}
 	return 2;
 }

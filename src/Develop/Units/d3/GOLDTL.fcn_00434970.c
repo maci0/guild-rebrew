@@ -3,7 +3,7 @@
 #include "client_lighting.h"
 
 extern volatile int g_6b7fac;
-extern int g_6b8008;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00434ba0(char* anim, char* mesh);
 int __cdecl fcn_004321a0(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max);

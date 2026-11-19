@@ -3,15 +3,15 @@
 
 #include <string.h>
 
-#pragma pack(2)
-typedef struct {
-	int t;
-	unsigned short type;
-	int f6;
-	int f10;
-} stamp14;
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
+
+
+
+
+
+
 // SIZE 0xe
-#pragma pack()
+
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -22,7 +22,7 @@ extern int g_772620;
 extern LightState g_100dc20;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_00500cb0(stamp14*, stamp14*);
+int __cdecl fcn_00500cb0(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
 void __cdecl fcn_00546d10(void);
 void __cdecl fcn_004fc180(void);
 void __cdecl fcn_00500a40(void);
@@ -36,13 +36,13 @@ int __cdecl fcn_004c9440(char* x, char* out)
 {
 	int i;
 
-	if (fcn_00500cb0(&(*(stamp14*)&gm_GameTime), (stamp14*) (x + 0x10)) < 0) {
-		(*(stamp14*)&gm_GameTime) = *(stamp14*) (x + 0x10);
+	if (fcn_00500cb0(&(*(GAME_TIMESTAMP*)&gm_GameTime), (GAME_TIMESTAMP*) (x + 0x10)) < 0) {
+		(*(GAME_TIMESTAMP*)&gm_GameTime) = *(GAME_TIMESTAMP*) (x + 0x10);
 		if (g_6a3438 != 0)
 			fcn_00546d10();
 		if (g_6a3434 != 0) {
 			fcn_004fc180();
-			if ((*(stamp14*)&gm_GameTime).f6 % 6 == 0)
+			if ((*(GAME_TIMESTAMP*)&gm_GameTime).minute % 6 == 0)
 				fcn_00500a40();
 		}
 		if (g_6a3430 != 0)

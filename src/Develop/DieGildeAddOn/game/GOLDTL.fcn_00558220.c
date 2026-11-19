@@ -41,7 +41,7 @@ void __cdecl fcn_00558220(char* obj)
 	}
 	for (i = 0; i < 768; i++) {
 		rec = g_7f4ca4 + i * 0x21c;
-		if (*(unsigned char*) (rec + 4) > 0 && *(int*) (rec + 0x180) != 0 && *(void**) (rec + 0x168) == q && *(int*) (rec + 0x16c) != 0 && gm_RandomFloat01() > g_662908 &&
+		if (*(unsigned char*) (rec + 4) > 0 && *(int*) (rec + 0x180) != 0 && *(void**) (rec + 0x168) == q && *(int*) (rec + 0x16c) != 0 && gm_RandomFloat01() > 0.5 &&
 		    *(int*) (*(int*) (rec + 0x180) + 0x2c) == *(int*) (obj + 0xac)) {
 			e = (char*) sim_StartEntityQueryByType((unsigned char*) *(int*) (rec + 0x16c));
 			fcn_004c6430(*(int*) rec, 0, 0);

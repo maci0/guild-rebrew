@@ -31,7 +31,7 @@ int __cdecl fcn_004bb210(int* a)
 	}
 	v = fcn_0042e410(3) & 0xffff;
 	d = (double) v + *(double*) 0x6629c8;
-	v = (int) (((double) fcn_0050dac0(*(short*) e) * d) * g_6640e8);
+	v = (int) (((double) fcn_0050dac0(*(short*) e) * d) * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a + 4) + 0x12e7, v);
 	fcn_00545d40(e[1], e[1], buf, 0x100 < strlen(buf), 0x603, 0);
 	fcn_004c51a0(a[0], -1, g_773d75, v);

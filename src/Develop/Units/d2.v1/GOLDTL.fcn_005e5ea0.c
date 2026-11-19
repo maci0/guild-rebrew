@@ -19,16 +19,16 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_dialog_state.h"
 
-#pragma pack(push, 2)
-/* 0xe-byte UI time stamp: dword a, 16-bit type at +4, +6, dword d, 16-bit e. */
-typedef struct {
-	int a;
-	unsigned short b;
-	unsigned short c;
-	int d;
-	unsigned short e;
-} Stamp;
-#pragma pack(pop)
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
+
+
+
+
+
+
+
+
+
 
 /* 0xf8-byte dialog panel record handed to fcn_004c5530. */
 typedef struct {
@@ -96,7 +96,7 @@ void __cdecl fcn_00532ef0(void);
 /* ADDRESS: GOLDTL 0x005e5ea0 */
 void __cdecl fcn_005e5ea0(char* participant)
 {
-	Stamp st;
+	GAME_TIMESTAMP st;
 	int timer2;
 	int stage = 2;
 	int idx = 0;
@@ -109,9 +109,9 @@ void __cdecl fcn_005e5ea0(char* participant)
 	char* entity;
 	int dlg;
 
-	st = *(Stamp*) &gm_GameTime;
+	st = *(GAME_TIMESTAMP*) &gm_GameTime;
 	fcn_00500bb0(&st, 0x18, 0, 0);
-	st.b = (unsigned short) (fcn_0042e410(stage) + 0x15);
+	st.hour = (unsigned short) (fcn_0042e410(stage) + 0x15);
 	*(int*) ((char*) &st + 6) = 0;
 
 	dlg = fcn_00470820(0, 0, s_6ad434);
@@ -134,17 +134,17 @@ void __cdecl fcn_005e5ea0(char* participant)
 			last = g_6b7fac;
 			entity = (char*) fcn_0057c9d0(participant);
 			if (entity != 0) {
-				st = *(Stamp*) (entity + 0x52);
-				st.b += *(int*) (entity + 0x70) ? 0 : 2;
+				st = *(GAME_TIMESTAMP*) (entity + 0x52);
+				st.hour += *(int*) (entity + 0x70) ? 0 : 2;
 				value = fcn_00500d20(entity + 0x44, (void*) 0x7f4c00);
 				n = fcn_00500d20(entity + 0x44, &st);
 				d2_SetElementValue(timer1, 0, 100,
 					(int) ((((float) value / n < 1.0f) ? ((float) value / n) : 1.0f) * 100.0f));
 			}
 			else {
-				st = *(Stamp*) &gm_GameTime;
+				st = *(GAME_TIMESTAMP*) &gm_GameTime;
 				fcn_00500bb0(&st, 0x18, 0, 0);
-				st.b = (unsigned short) (fcn_0042e410(2) + 0x15);
+				st.hour = (unsigned short) (fcn_0042e410(2) + 0x15);
 				*(int*) ((char*) &st + 6) = 0;
 				d2_SetElementValue(timer1, 0, 100, 0);
 			}

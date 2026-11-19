@@ -2,8 +2,7 @@ extern int* g_665f08;
 extern int* g_665f08;
 extern volatile int g_6b7fc0;
 extern volatile int g_6b7fc0;
-extern int d2_TutorialActive;
-extern int d2_TutorialActive;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLD 0x00576680 */
 /* ADDRESS: GOLDTL 0x0057ec20 */

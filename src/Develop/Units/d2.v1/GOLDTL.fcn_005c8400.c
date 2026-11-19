@@ -31,6 +31,7 @@ extern int d2_CurrentWindowId;
 extern char* g_772500;
 extern char* g_77255c;
 #include "client_types.h"
+#include "Develop/Units/d2.v1/d2_win.h"
 extern Win_1015f40 g_1015f40[0x60];
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -111,8 +112,8 @@ int __cdecl fcn_005c8400(void)
 		lines[i].bar = fcn_0046f100((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a + 4, cy, 0x62, 0x10, d2_CurrentWindowId);
 		lines[i].e = list[i];
 		/* both fields through one symbol: c2 chains the two stores, which issues the bar store first */
-		*(int*) (((char*)g_1015f40) + lines[i].bar * 0x3cc + 0x28c) = 0x56;
-		*(int*) (((char*)g_1015f40) + lines[i].bar * 0x3cc + 0x18) = 0x10;
+		*(int*) &((D2_WIN*)g_1015f40)[lines[i].bar].pad280[12] = 0x56;
+		*(int*) &((D2_WIN*)g_1015f40)[lines[i].bar].pad14[4] = 0x10;
 		r = gm_SearchTable67(*(int*) (lines[i].e + 0xac));
 		if (r != 0) {
 			io_AppendText(0x1f41, r, *(int*) (lines[i].e + 0xb4), *(int*) (lines[i].e + 0xc0), lines[i].e + 0xc4);

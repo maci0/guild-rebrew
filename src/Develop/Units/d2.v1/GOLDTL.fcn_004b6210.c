@@ -1,10 +1,9 @@
 
 
 
-extern int g_6a3760;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_681130[];
 extern int g_100f1dc;
-extern int g_774954;
 #include "client_dialog_state.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int h);

@@ -30,19 +30,20 @@ typedef struct {
 	float Phi;
 } Light451150;
 
-typedef struct Device451150 Device451150;
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
+typedef int (__stdcall* Light451150Fn)(D3D_DEVICE_VIEW*, int, Light451150*);
 
-typedef struct {
-	char p0[0xb0];
-	int (__stdcall* SetLight)(Device451150*, int, Light451150*);
-} DeviceVtbl451150;
 
-// SIZE 0x4
-struct Device451150 {
-	DeviceVtbl451150* vtbl;
-};
 
-extern void* g_6b5de0;
+
+
+
+
+
+
+
+
+
 extern double g_662d38;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_662d30;
@@ -82,7 +83,7 @@ char __cdecl fcn_00451150(int index, char* e, float scale, float* m4, float* m7)
 			light.Ambient.r = (power * *(float*) (e + 0x5c)) * g_662d34;
 			light.Ambient.g = (power * *(float*) (e + 0x60)) * g_662d34;
 			light.Ambient.b = (power * *(float*) (e + 0x64)) * g_662d34;
-			power *= g_6628d8;
+			power *= 0.4f;
 		}
 	} else {
 		light.Type = 1;
@@ -107,6 +108,6 @@ char __cdecl fcn_00451150(int index, char* e, float scale, float* m4, float* m7)
 	light.Diffuse.g = power * *(float*) (e + 0x60);
 	light.Diffuse.b = power * *(float*) (e + 0x64);
 	light.Diffuse.a = 1.0f;
-	((Device451150*) g_6b5de0)->vtbl->SetLight(((Device451150*) g_6b5de0), index & 0x7fffffff, &light);
+	((Light451150Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[6])(((D3D_DEVICE_VIEW*)g_6b5de0), index & 0x7fffffff, &light);
 	return 1;
 }

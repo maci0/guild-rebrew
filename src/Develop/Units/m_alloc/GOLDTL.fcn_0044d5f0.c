@@ -1,7 +1,7 @@
 char g_67b63c[] = "d3_io_a:AGIPolyBuffer";
 extern char g_67b63c[];
 
-extern char g_662d18[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_0064f026(char* s, const char* delim);
 int __cdecl fcn_0064eeec(const char* s);
@@ -13,7 +13,7 @@ void __cdecl fcn_0044d5f0(int unused, char* s)
 {
 	int n;
 
-	n = fcn_0064eeec(fcn_0064f026(0, g_662d18));
+	n = fcn_0064eeec(fcn_0064f026(0, " "));
 	*(int*) (s + 0x14) = n;
 	if (n > 0 && *(void**) (s + 0x20) == 0) {
 		*(int*) (s + 0x18) = 0;

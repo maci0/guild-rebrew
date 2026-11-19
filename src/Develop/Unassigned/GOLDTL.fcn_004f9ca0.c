@@ -25,7 +25,7 @@ int __cdecl fcn_004f9ca0(unsigned char* entity, int* context)
 		return 2;
 	}
 	if (*context == 1 && entity[2] == 6) {
-		io_FormatTextBuffer((char*) context + 0x14, (int) g_679060, 0x1e03);
+		io_FormatTextBuffer((char*) context + 0x14, (int) "%s", 0x1e03);
 	}
 	return 2;
 }

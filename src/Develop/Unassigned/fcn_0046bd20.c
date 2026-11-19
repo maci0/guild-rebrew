@@ -6,15 +6,10 @@ extern int g_772544;
 extern int g_772548;
 extern int g_77254c;
 extern int g_772550;
-extern int g_7725fc;
-extern int d2_DrawDepthIndex;
-extern int d2_FontHeight;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_ScreenHeight;
 extern int g_1040494;
-extern int d2_CurrentFont;
-extern int g_67d380;
 extern int g_67d384;
-extern int d2_ClipBottom;
 
 int __cdecl fcn_00465950(char* name);
 void* __cdecl d2_GetResourceData(int handle);

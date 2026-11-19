@@ -64,7 +64,7 @@ void __cdecl fcn_004cf000(void)
 				d = fcn_004ce590(0x16e);
 				num = cut_RandMod((unsigned int) ((unsigned char) d[6] - (unsigned char) d[5]));
 				num += (unsigned char) d[5];
-				t = (int) ((double) num * *(float*) (e + 0x1c) * g_6640e8);
+				t = (int) ((double) num * *(float*) (e + 0x1c) * 0.01);
 				fcn_004c6880(*(int*) (e + 4), t, (int) *(unsigned char*) (e + 8));
 			}
 		}

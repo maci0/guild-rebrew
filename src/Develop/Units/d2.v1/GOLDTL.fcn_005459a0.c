@@ -1,4 +1,4 @@
-extern int g_77e8a0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_CurrentWindowId;
 extern int d2_ScreenHeight;
 extern int g_1040494;

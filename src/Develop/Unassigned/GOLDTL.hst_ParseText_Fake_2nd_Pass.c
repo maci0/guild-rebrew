@@ -7,7 +7,7 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x44
 
-extern int hst_HistoryTextBase;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_680ae0[]; /* hst_ParseText_Fake_2nd_Pass() failed: Syntax Error in Label %i < %s > */
 
 int __cdecl sprintf(char*, const char*, ...);

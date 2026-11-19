@@ -2,15 +2,15 @@
 
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int owner;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 #include "client_packet_builder.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -59,15 +59,15 @@ void __cdecl fcn_00566700(char* u)
 			}
 		}
 		v = -5;
-		fcn_004c54c0(((struct house*)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)].owner, *(int*) (h + 4), v, 1);
+		fcn_004c54c0(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)].entity_id, *(int*) (h + 4), v, 1);
 		q = fcn_005049a0(*(char**) (h + 0x16c));
 		io_FormatTextBuffer(text, 0x1bac, *(unsigned short*) h, *(char**) (h + 0x16c));
 		if (q != 0) {
 			h = *(char**) (h + 0x16c);
-			he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].owner, -1, text, 0, 0x5f2, *(int*) (h + 1), *(int*) (q + 2), 0,
+			he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].entity_id, -1, text, 0, 0x5f2, *(int*) (h + 1), *(int*) (q + 2), 0,
 			    "_NACHRICHTEN_HS_01");
 		} else {
-			fcn_00545d40(((struct house*)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)].owner, -1, text, 0, 0x5f2, "_NACHRICHTEN_HS_01");
+			fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)].entity_id, -1, text, 0, 0x5f2, "_NACHRICHTEN_HS_01");
 		}
 		fcn_00546190(u);
 		return;

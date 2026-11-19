@@ -95,7 +95,7 @@ relabel:
 						if (*(int*) (r + 0x16) == 1 || *(int*) (r + 0x16) == 2) {
 							v = fcn_004ce680(q->unit);
 							if (v != 0) {
-								sprintf(buf, g_67d444, *(int*) (v + 0x20));
+								sprintf(buf, "%i", *(int*) (v + 0x20));
 								fcn_0046f940(q->label, buf);
 								goto next;
 							}

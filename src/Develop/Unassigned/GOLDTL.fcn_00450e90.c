@@ -32,21 +32,22 @@ typedef struct {
 	float w;
 } Probe450e90;
 
-typedef struct Device450e90 Device450e90;
-typedef struct {
-	char pad0[0xb8];
-	int (__stdcall* SetTransform)(Device450e90*, int, int);
-} DeviceVtbl450e90;
-struct Device450e90 {
-	DeviceVtbl450e90* vtbl;
-};
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
+typedef int (__stdcall* Device450e90Fn)(D3D_DEVICE_VIEW*, int, int);
+
+
+
+
+
+
+
 
 extern float g_6628a8;
 extern float g_67bc1c;
 extern float g_67bc20;
 extern char g_67bc24;
 extern void* g_1041d04;
-extern Device450e90* g_6b5de0;
+
 extern void* g_6b86e4;
 extern void* g_6b86e8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -122,11 +123,11 @@ void __cdecl fcn_00450e90(float a, float b, char* c, float* d, float* e)
 		n = d3_MaxActiveLights;
 	}
 	for (i = n; i < d3_MaxActiveLights; i++) {
-		g_6b5de0->vtbl->SetTransform(g_6b5de0, i, 0);
+		((Device450e90Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[8])((D3D_DEVICE_VIEW*)g_6b5de0, i, 0);
 	}
 	for (i = 0; i < n; i++) {
 		fcn_00451150(sign + i, ((SortEntry450e90*) g_1041d04)[i].e, b, d, e);
-		g_6b5de0->vtbl->SetTransform(g_6b5de0, i, 1);
+		((Device450e90Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[8])((D3D_DEVICE_VIEW*)g_6b5de0, i, 1);
 	}
 }
 unsigned char _dpad_1041d04[1180];

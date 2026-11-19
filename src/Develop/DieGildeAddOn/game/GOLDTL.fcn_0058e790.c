@@ -69,13 +69,13 @@ void __cdecl fcn_0058e790(char* e, char* res)
 	t = fcn_004c2db0(*(int*) (res + 0x14), *(int*) (res + 0x4c));
 	m = fcn_0058e220(e, res);
 	f = fcn_004f4770(e);
-	if (gm_RandomFloat01() + f - g_6628d8 < g_6628a0) {
+	if (gm_RandomFloat01() + f - 0.4f < 1.0f) {
 		mode = 2;
 	}
 	else {
 		char ev[0xf8];
 
-		amt = MIN(MAX((int) (gm_WalkEntityChain(g_774970) * g_6628bc), 0x27100), 0xc3500);
+		amt = MIN(MAX((int) (gm_WalkEntityChain(g_774970) * 0.25f), 0x27100), 0xc3500);
 		fcn_004c5150(((struct house*)g_7f4ca0)[g_774970].handle, -1, g_773d75, amt);
 		memset(ev, 0, sizeof(ev));
 		ev[4] = (char) 0x8e;

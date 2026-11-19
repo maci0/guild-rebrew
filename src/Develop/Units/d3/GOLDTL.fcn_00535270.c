@@ -35,7 +35,7 @@ typedef struct {
 } Book;
 
 extern char g_6b5c60[];
-extern int g_7747c4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_00401040(char*);
 void __cdecl fcn_00435500(char*, char*);

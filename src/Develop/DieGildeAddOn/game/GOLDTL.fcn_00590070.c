@@ -2,19 +2,19 @@
 
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int handle;
-	char pad8[0x180];
-	unsigned char grave;
-	char pad189[0x93];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
+
+
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+
 extern int g_774800;
 extern int d2_CurrentWindowId;
 extern int g_100f1dc;
@@ -40,7 +40,7 @@ void __cdecl fcn_0052a0c0(char*, int);
 int __cdecl fcn_005373e0(void*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00472640(int, int);
-int __cdecl fcn_0058ff60(char*, struct house*, int);
+int __cdecl fcn_0058ff60(char*, ENTITY_RECORD*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
@@ -49,7 +49,7 @@ void __cdecl fcn_00590070(char* who)
 {
 	int b2;
 	char buf[0x400];
-	struct house* hh;
+	ENTITY_RECORD* hh;
 	int st;
 	int h;
 	int s;
@@ -93,8 +93,8 @@ void __cdecl fcn_00590070(char* who)
 			g_774654 = 1;
 		}
 		for (i = 0; i < 768; i++) {
-			if (((struct house*)g_7f4ca0)[i].grave != 0) {
-				hh = &((struct house*)g_7f4ca0)[i];
+			if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_17c[12] != 0) {
+				hh = &((ENTITY_RECORD*)g_7f4ca0)[i];
 				break;
 			}
 		}

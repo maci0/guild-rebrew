@@ -1,6 +1,5 @@
-extern int g_6a25b8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6a25bc;
-extern int d2_CurrentValueBar;
 extern int g_6a25c4[4];
 extern int g_6a25d4;
 extern int g_6a25d8;
@@ -8,7 +7,6 @@ extern int g_6a25dc;
 extern int g_6a25e0;
 extern int g_6a25e4;
 extern int g_6a25e8;
-extern int g_6a25ec;
 extern int g_6a25f0;
 
 

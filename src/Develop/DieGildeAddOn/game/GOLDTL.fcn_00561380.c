@@ -214,7 +214,7 @@ void __cdecl fcn_00561380(void *a0)
 			recA = (unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0);
 			recB = (unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0);
 			dist = fcn_00507e70(recB, recA, 2);
-			if (!(gm_RandomFloat01() + dist >= g_6628a0))
+			if (!(gm_RandomFloat01() + dist >= 1.0f))
 				goto label_561a7a;
 			if (fcn_005c6270(recA, 0x2c0) == 0) {
 			io_FormatTextBuffer(text, 0x1735, *(unsigned short *)recA, r);

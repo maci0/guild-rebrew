@@ -112,7 +112,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 								need = fcn_0050d200(a1, cmd.f1);
 								if (p < need) {
 									rem = need - p;
-									if ((float) rem / (float) need < g_6628bc) {
+									if ((float) rem / (float) need < 0.25f) {
 										a3->kind = 0x12;
 										a3->f2 = rem;
 										return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
@@ -134,7 +134,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 						need = fcn_0050d200(a1, cmd.f1);
 						if (p < need) {
 							rem = need - p;
-							if ((float) rem / (float) need < g_6628bc) {
+							if ((float) rem / (float) need < 0.25f) {
 								a3->kind = 0x12;
 								a3->f2 = rem;
 								return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
@@ -153,7 +153,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 					a0 = fcn_0050d200(a1, cmd.f1);
 					if (p < a0) {
 						rem = a0 - p;
-						if ((float) rem / (float) a0 < g_6628bc) {
+						if ((float) rem / (float) a0 < 0.25f) {
 							a3->kind = 0x12;
 							a3->f2 = rem;
 							return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
@@ -187,7 +187,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 						return 0;
 					if (p < need) {
 						rem = need - p;
-						if ((float) rem / (float) need < g_6628bc) {
+						if ((float) rem / (float) need < 0.25f) {
 							a3->kind = 0x12;
 							a3->f2 = rem;
 							return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);
@@ -207,7 +207,7 @@ int __cdecl fcn_00497ec0(int a0, short* a1, int a2, Cmd* a3, Cmd* a4)
 				need = fcn_0050d200(a1, cmd.f1);
 				if (p < need) {
 					rem = need - p;
-					if ((float) rem / (float) need < g_6628bc) {
+					if ((float) rem / (float) need < 0.25f) {
 						a3->kind = 0x12;
 						a3->f2 = rem;
 						return ai_StartKreditNehmen(0x11, a1, a2, a3, a4);

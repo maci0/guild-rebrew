@@ -9,7 +9,7 @@ char* __cdecl fcn_00434970(char* context, char* name, D3_ANIMATION_OPTIONS optio
 char* __cdecl d3_LoadObjectAnim(char* path, char* object, char loop);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
-extern int g_1041d08;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* Builds the animation stream name from the object name, loads the stream when
  * it is absent and attaches it, falling back to loading a whole object

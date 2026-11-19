@@ -3,11 +3,7 @@
 extern int g_67fba8;
 extern Entry2c* g_67fbb0;
 extern Entry2c* g_67fbb4;
-extern int g_7728c0;
-extern int g_7728c4;
-extern int g_7728c8;
-extern int g_7728cc;
-extern int g_7728d0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004acc00(int*);
 

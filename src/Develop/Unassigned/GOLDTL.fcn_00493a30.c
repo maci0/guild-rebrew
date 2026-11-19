@@ -28,8 +28,8 @@ int __cdecl fcn_00493a30(unsigned short* key, char* e)
 	}
 	p1 = gm_LookupEntityRecordById(*(int*) (e + 0x18));
 	p2 = gm_LookupEntityRecordById(*(int*) (e + 0x14));
-	f1 = fcn_0050f980(*(unsigned short*) p1, *key, 1) * g_662910;
-	f2 = fcn_0050f980(*(unsigned short*) p2, *key, 1) * g_662910;
+	f1 = fcn_0050f980(*(unsigned short*) p1, *key, 1) * 0.01f;
+	f2 = fcn_0050f980(*(unsigned short*) p2, *key, 1) * 0.01f;
 	if (fcn_005c6270(p1, 0x22e) != 0) {
 		f1 = f1 + 0.1f;
 		f2 = f2 - 0.1f;

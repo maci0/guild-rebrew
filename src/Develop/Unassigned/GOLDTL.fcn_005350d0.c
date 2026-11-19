@@ -12,8 +12,7 @@ typedef struct {
 } Panel;
 
 extern int g_7747ac;
-extern int d2_CurrentElementId;
-extern int g_14ce8cc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00471a30(int, int);
 void __cdecl fcn_00535560(Panel*);

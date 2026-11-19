@@ -93,7 +93,7 @@ int __cdecl fcn_004cf180(void)
                                 t += (unsigned char) r[5];
                                 d = (int) ((double) (unsigned int) t *
                                            (*(float*) (e + 0x1c) *
-                                            g_6640e8));
+                                            0.01));
                                 t = (int) ((double) d *
                                            (g_6629c8 - dist * g_664ed0));
                                 node = *q;

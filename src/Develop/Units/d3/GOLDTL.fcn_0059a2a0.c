@@ -9,7 +9,7 @@ typedef struct {
 
 extern char g_14cf950;
 #include "Develop/Units/d3/d3_camera.h"
-extern int g_774650;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7e35c0[];
 
 void __cdecl fcn_0059a340(void);

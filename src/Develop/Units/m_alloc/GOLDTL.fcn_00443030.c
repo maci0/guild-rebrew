@@ -57,9 +57,8 @@ typedef struct {
 	int x3d8;
 } Level;
 
-extern char d3_SceneObjectSentinel[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1043060;
-extern char g_1040640[];
 extern char g_1040960[];
 
 Ent* __cdecl fcn_00439750(int, const char*);

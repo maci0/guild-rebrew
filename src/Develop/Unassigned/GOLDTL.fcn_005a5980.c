@@ -1,8 +1,7 @@
 
 
 
-extern int g_14ce8d8;
-extern int d2_CurrentElementId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 // SIZE 0x1c
 typedef struct {

@@ -18,7 +18,7 @@ typedef struct {
 } Map5b52;
 
 extern volatile int g_6b7fc0;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774654;
 extern char g_6abaec[];
 

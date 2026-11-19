@@ -29,7 +29,7 @@ extern __declspec(dllimport) long __stdcall CoCreateInstance(void*, void*, unsig
 
 extern short g_14cc5b8;
 extern int g_14cc5bc;
-extern char g_6750e8[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6b5c60[];
 
 LRESULT CALLBACK fcn_0041e530(HWND, UINT, WPARAM, LPARAM);

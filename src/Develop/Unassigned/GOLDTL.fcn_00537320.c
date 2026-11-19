@@ -2,9 +2,7 @@ extern float g_10529d8;
 extern float g_10529c4;
 extern float g_10529d4;
 extern float g_1043288;
-extern float d2_UiScale;
-extern int d2_CenterX;
-extern int d2_DialogCenterY;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_ScreenHeight;
 extern int g_1040494;
 

@@ -16,16 +16,17 @@ extern float g_10529d8;
 
 void __cdecl fcn_00438da0(float, float, float, float, float, float, float, float, float);
 void __cdecl fcn_00438af0(unsigned char);
-typedef struct IDev IDev;
-typedef struct IDevVtbl {
-	void* slots[50];
-	long (__stdcall* SetRenderState)(IDev*, int, float);
-} IDevVtbl;
-struct IDev {
-	IDevVtbl* v;
-};
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
+typedef long (__stdcall* FloatRenderStateFn)(D3D_DEVICE_VIEW*, int, float);
 
-extern void* g_6b5de0;
+
+
+
+
+
+
+
+
 extern int d3_FogColor;
 extern float g_10425fc;
 extern float g_104329c;
@@ -68,8 +69,8 @@ void __cdecl fcn_00438920(float a, float b, int c)
 		fcn_00438840(a, b);
 		g_10425fc = a;
 		g_104329c = b;
-		((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x24, g_1042ce4);
-		((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x25, g_1042a14);
+		((FloatRenderStateFn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState)(((D3D_DEVICE_VIEW*)g_6b5de0), 0x24, g_1042ce4);
+		((FloatRenderStateFn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState)(((D3D_DEVICE_VIEW*)g_6b5de0), 0x25, g_1042a14);
 	} else {
 		on = 0;
 		if (g_6b8060 != 0) {

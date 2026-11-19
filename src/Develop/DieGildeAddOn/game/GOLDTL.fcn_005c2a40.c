@@ -144,7 +144,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 		ep = slots;
 		do {
 			id = ep[0];
-			scale = (float) ((double) g_7747b4 * g_662ad8 +
+			scale = (float) ((double) g_7747b4 * 0.25 +
 			                 0.5);
 			val = (int) (eval_ObjektPreis2Credits(id, 100) * scale);
 			handle = fcn_0046f740(0x10, cnt, (char*) (id + 0xdf), d2_CurrentWindowId);
@@ -178,7 +178,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			sel = 0;
 			do {
 				if (d2_CurrentElementId == *ep) {
-					scale = (float) ((double) g_7747b4 * g_662ad8 +
+					scale = (float) ((double) g_7747b4 * 0.25 +
 					                 0.5);
 					val = (int) (eval_ObjektPreis2Credits(slots[sel * 3], 100) * scale);
 					if ((int) (unsigned char) *(base + 0x21) <=

@@ -1,10 +1,6 @@
 extern int g_7e2468;
 extern int g_7e2430;
 extern int g_774654;
-extern int d2_SuppressOverlay;
-extern int cut_EventLoopFlags;
-extern int d2_CurrentElementId;
-extern int g_14ce8e0;
 extern int g_1040494;
 extern int d2_ScreenHeight;
 int __cdecl fcn_004432d0();

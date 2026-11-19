@@ -2,8 +2,7 @@
 
 extern char g_6b5c60[];
 extern char g_1052f00[];
-extern int g_1052de0;
-extern int txt_EntryCount;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern void* txt_TextBuffer;
 
 char* __cdecl fcn_0064d1a0(char*, int);

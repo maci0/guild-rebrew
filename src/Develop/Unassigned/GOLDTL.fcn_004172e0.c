@@ -1,6 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_662930;
-extern double g_662950;
 extern double g_662aa0;
 extern float g_662aac;
 extern float g_662ab0;
@@ -63,23 +62,23 @@ unsigned char __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, unsigned int t)
         e->f20 = 0;
         for (; i < e->count; i++, p++) {
             if (!(p->flags & 1)) {
-                p->f38 = (float) rand() * g_662a18 * g_662ad0 - g_662918;
-                p->f3c = (float) rand() * g_662a18 * g_662930 - g_662acc;
-                p->f40 = (float) rand() * g_662a18 * g_662ad0 - g_662918;
-                p->f00 = (float) rand() * g_662a18 * g_662aa0 - g_662a98;
-                p->f04 = (float) rand() * g_662a18 * g_662ac8 + g_6628cc;
-                p->f08 = (float) rand() * g_662a18 * g_662ac0 - g_662ab8;
+                p->f38 = (float) rand() * 3.0518509447574615e-05f * g_662ad0 - g_662918;
+                p->f3c = (float) rand() * 3.0518509447574615e-05f * g_662930 - g_662acc;
+                p->f40 = (float) rand() * 3.0518509447574615e-05f * g_662ad0 - g_662918;
+                p->f00 = (float) rand() * 3.0518509447574615e-05f * g_662aa0 - g_662a98;
+                p->f04 = (float) rand() * 3.0518509447574615e-05f * g_662ac8 + g_6628cc;
+                p->f08 = (float) rand() * 3.0518509447574615e-05f * g_662ac0 - g_662ab8;
                 p->f10 = (float) ((rand() & 0x7f) + 0x7f);
                 p->f30 = t;
                 p->flags = p->flags | 1;
-                p->f48 = (float) rand() * g_662a18 + g_6628a0;
+                p->f48 = (float) rand() * 3.0518509447574615e-05f + g_6628a0;
             }
         }
     }
     p = e->particles;
     for (i = 0; i < e->count; i++, p++) {
         if (p->flags & 1) {
-            dt = (double) (t - p->f30) * g_662a68;
+            dt = (double) (t - p->f30) * 0.33333334f;
             p->f30 = t;
             p->f38 = dt * p->f00 + p->f38;
             p->f3c = dt * p->f04 + p->f3c;
@@ -91,7 +90,7 @@ unsigned char __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, unsigned int t)
                 p->f08 = p->f08 - p->f08 * g_662aac;
             } else { p->f04 = p->f04 - dt * e->f00; }
             p->f10 = p->f10 - dt * e->f04;
-            if (p->f10 > g_662950) {
+            if (p->f10 > 0.0) {
                 p->f4f = (char) (int) p->f10;
             } else {
                 p->flags = p->flags & 0xfe;

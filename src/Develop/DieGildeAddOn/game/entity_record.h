@@ -1,7 +1,7 @@
 #ifndef CLIENT_ENTITY_RECORD_H
 #define CLIENT_ENTITY_RECORD_H
 
-/* Client records advance by 0x21c at 0x55073b. Unknown regions retain offsets. */
+/* SIZE 0x21c: client records advance by 0x21c at 0x55073b. Unknown regions retain offsets. */
 typedef struct ENTITY_RECORD {
     unsigned short entity_index;
     unsigned char entity_state;
@@ -32,8 +32,8 @@ typedef struct ENTITY_RECORD {
     unsigned char unk_133[0x31];
     unsigned char unk_164;
     unsigned char unk_165[7];
-    int unk_16c;
-    int unk_170;
+    char *unk_16c;
+    char *unk_170;
     unsigned char unk_174[4];
     void *object_list;
     unsigned char unk_17c[0x10];

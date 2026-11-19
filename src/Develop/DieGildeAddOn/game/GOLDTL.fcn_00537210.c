@@ -43,7 +43,7 @@ void __cdecl fcn_00537210(void)
 		}
 		g_7766a8 = saved;
 		g_774660 = 0;
-		g_675308 = (float) (saved * g_665e40 + g_662ad8);
+		g_675308 = (float) (saved * g_665e40 + 0.25);
 		fcn_00471e30(h);
 		fcn_0057e880(0xb, 0, 1, 0);
 	}

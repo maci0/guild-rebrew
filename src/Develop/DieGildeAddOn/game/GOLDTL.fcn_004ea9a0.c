@@ -14,34 +14,34 @@ typedef struct {
 } Rec;
 
 // SIZE 0x21c
-typedef struct {
-	unsigned short id;
-	char pad2[0x164 - 2];
-	unsigned char group;
-	char pad165[0x21c - 0x165];
-} Obj;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
 
 #include "client_types.h"
 extern Rec18_68da68 amt_OfficeSlots[42];
-extern char g_7f4ca0[];
+
 
 char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int type);
 char* __cdecl gm_AddObjekt(void);
-Obj* __cdecl gm_LookupEntityRecordById(int id);
+ENTITY_RECORD* __cdecl gm_LookupEntityRecordById(int id);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include "Develop/DieGildeAddOn/game/aemter.h"
-void __cdecl fcn_004ea560(Obj* o, int v);
-void __cdecl fcn_004ea4b0(Obj* o, int v);
+void __cdecl fcn_004ea560(ENTITY_RECORD* o, int v);
+void __cdecl fcn_004ea4b0(ENTITY_RECORD* o, int v);
 
 void __cdecl fcn_004ea9a0(void)
 {
 	int k;
-	Obj* cur;
+	ENTITY_RECORD* cur;
 	Rec rec;
-	Obj* list[16];
+	ENTITY_RECORD* list[16];
 	char* e;
-	Obj* o;
-	Obj* best;
+	ENTITY_RECORD* o;
+	ENTITY_RECORD* best;
 	int total;
 	int found;
 	int best_v;
@@ -57,8 +57,8 @@ void __cdecl fcn_004ea9a0(void)
 	for (e = gm_StartFilteredEntitySearch(1, 5, 7); e != 0 && k < 16; e = gm_FindNextFilteredEntity()) {
 		if (*(unsigned short*) (e + 0x27) != 0xffff && !(e[0x5a] & 1)) {
 			total++;
-			o = &((Obj*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
-			if (o->group >= 0xd && o->group <= 0x12) {
+			o = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
+			if (o->unk_164 >= 0xd && o->unk_164 <= 0x12) {
 				for (j = 0; j < 16; j++) {
 					if (list[j] == o) {
 						break;
@@ -82,13 +82,13 @@ void __cdecl fcn_004ea9a0(void)
 	}
 	cur = 0;
 	if (rec.b != -1 && (cur = gm_LookupEntityRecordById(rec.b)) != 0) {
-		best_v = gm_WalkEntityChain(cur->id);
+		best_v = gm_WalkEntityChain(cur->entity_index);
 	} else {
 		best_v = 0;
 	}
 	best = 0;
 	for (j = 0; j < k; j++) {
-		v = gm_WalkEntityChain(list[j]->id);
+		v = gm_WalkEntityChain(list[j]->entity_index);
 		if (v > best_v) {
 			best = list[j];
 			best_v = v;

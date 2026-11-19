@@ -1,6 +1,7 @@
-typedef struct {
-	char b[14];
-} Name14;
+#include "client_types.h"
+
+
+
 // SIZE 0xe
 
 typedef struct {
@@ -10,7 +11,7 @@ typedef struct {
 	int x8;
 	int xc;
 	char pad10[0x18];
-	Name14 name;
+	pos14_7f4c00 name;
 	unsigned char x36;
 	char pad37;
 	int ids[8];
@@ -37,7 +38,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern Name14 gm_GameTime;
+extern pos14_7f4c00 gm_GameTime;
 extern char s_6aa490[];
 
 int __cdecl fcn_00526120(int, int);

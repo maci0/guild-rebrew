@@ -30,7 +30,7 @@ int __cdecl fcn_004baf60(void* a1)
 	unsigned int len;
 
 	n = gm_RandomMod(0x14) & 0xffff;
-	f = (float) (((double) n + g_664e78) * g_6640e8);
+	f = (float) (((double) n + g_664e78) * 0.01);
 	p = gm_LookupEntityRecordById(*(int*) a1);
 	if (p == 0) {
 		return 1;

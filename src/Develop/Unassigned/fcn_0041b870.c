@@ -4,7 +4,7 @@ extern float g_6777b0[3];
 extern float g_6777bc[3];
 extern float g_6b5df8[3];
 /* 1/255 is written as a float literal below. */
-extern void* g_6b5de0;
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
 
 /* ADDRESS: GOLDTL 0x0041b870 */
 int __cdecl fcn_0041b870(void)
@@ -13,7 +13,7 @@ int __cdecl fcn_0041b870(void)
     int i;
     float m;
     double lo, mid, hi, st;
-    void **obj;
+    D3D_DEVICE_VIEW *obj;
 
     lo = 1.0 / g_6777bc[0];
     mid = 1.0 / g_6777bc[1];
@@ -44,7 +44,7 @@ int __cdecl fcn_0041b870(void)
         table[0][i] = (unsigned short)(st * 65535.0);
     }
 
-    obj = (void**)g_6b5de0;
+    obj = (D3D_DEVICE_VIEW*)g_6b5de0;
     return ((int (__stdcall *)(void *, int, void *))
-        (*(void ***)obj)[0x12])(obj, 0, table);
+        obj->vtbl->unk_00[0x12])(obj, 0, table);
 }

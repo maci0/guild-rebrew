@@ -10,17 +10,17 @@ struct good {
 #pragma pack()
 
 // SIZE 0x21c
-struct house {
-	char pad[0x21c];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
 
 extern unsigned char* lpGebaeudePROT;
-extern char g_7f4ca0[];
+
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_004f2a10(int, unsigned char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_005b2e50(struct house*, char*, unsigned char*, int);
+void __cdecl fcn_005b2e50(ENTITY_RECORD*, char*, unsigned char*, int);
 
 void __cdecl fcn_0057b160(char* u)
 {
@@ -32,7 +32,7 @@ void __cdecl fcn_0057b160(char* u)
 		fcn_004f2a10(0, e, *(int*) (u + 0xb0), *(unsigned char*) (u + 0xb4));
 		h = gm_LookupEntityRecordById(*(int*) (u + 0xc));
 		if (h != 0) {
-			fcn_005b2e50(&((struct house*)g_7f4ca0)[*(unsigned short*) (e + 0x27)], h, e, *(int*) (u + 0xb0));
+			fcn_005b2e50(&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)], h, e, *(int*) (u + 0xb0));
 		}
 	}
 }

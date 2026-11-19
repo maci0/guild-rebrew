@@ -6,7 +6,7 @@
 extern char g_67ac98[];
 extern char g_67b04c[];
 extern char* g_1052ba4;
-extern char g_1052a40[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include "Develop/Units/d3/d3_animation.h"
 

@@ -112,7 +112,7 @@ no_track:
 				*(float*) (o + 0x54) -= dt * g_6628bc;
 			*(float*) (o + 0x54) = *(float*) (o + 0x54) > (-1.0f) ? *(float*) (o + 0x54) : (-1.0f);
 		}
-		*(float*) (o + 0x5c) = dt * *(float*) (o + 0x54) * g_662acc;
+		*(float*) (o + 0x5c) = dt * *(float*) (o + 0x54) * 1.5f;
 	}
 	if (*(float*) (o + 0x58) != g_6628a8 || v != 0) {
 		if (v == 0) {

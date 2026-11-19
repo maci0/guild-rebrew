@@ -21,7 +21,7 @@ typedef struct {
 	char x7c[0x98];
 } Rec;
 
-extern char cut_Cutscenes[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, int f);
 

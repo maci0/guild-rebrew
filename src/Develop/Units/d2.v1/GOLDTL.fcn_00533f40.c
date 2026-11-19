@@ -1,17 +1,18 @@
 
 
 // SIZE 0x3cc
-typedef struct {
-	char pad0[0x258];
-	int f258;
-	char pad25c[0x274 - 0x25c];
-	int f274;
-	char pad278[0x3b8 - 0x278];
-	int h0;
-	int h1;
-	int h2;
-	char pad3c4[0x3cc - 0x3c4];
-} Slot;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
+
+
+
+
 
 // SIZE 0x2f4
 typedef struct {
@@ -40,25 +41,25 @@ int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
 
 int __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3)
 {
-	Slot* s;
+	D2_WIN* s;
 
-	s = &((Slot*)g_1015f40)[other];
+	s = &((D2_WIN*)g_1015f40)[other];
 	*id1 = fcn_0046f740(x, y, 3, owner);
-	((Slot*)g_1015f40)[owner].h0 = *id1;
+	*(int*) &((D2_WIN*)g_1015f40)[owner].pad3a8[0x10] = *id1;
 	((Ent*)g_1015ea0)[*id1].f5c = 1;
 	((Ent*)g_1015ea0)[*id1].f1d0 = 3;
 	*id2 = fcn_0046f740(x, y + 0x2a, 4, owner);
-	((Slot*)g_1015f40)[owner].h1 = *id2;
+	*(int*) &((D2_WIN*)g_1015f40)[owner].pad3a8[0x14] = *id2;
 	((Ent*)g_1015ea0)[*id2].f5c = 1;
 	((Ent*)g_1015ea0)[*id2].f1d0 = 3;
 	((Ent*)g_1015ea0)[*id2].f1f0 = other;
 	((Ent*)g_1015ea0)[*id1].f1f0 = other;
 	*id3 = d2_ShowTxt(x - 0x13, y + 0x19, g_6b5c60, owner);
-	((Slot*)g_1015f40)[owner].h2 = *id3;
+	*(int*) &((D2_WIN*)g_1015f40)[owner].pad3a8[0x18] = *id3;
 	((Ent*)g_1015ea0)[*id3].f84 = 0x54;
 	((Ent*)g_1015ea0)[*id3].f6c = 1;
 	((Ent*)g_1015ea0)[*id3].f18 = 0x30;
-	s->f258 = 0;
-	s->f274 = arg5;
+	*(int*) &s->pad3c[0x21c] = 0;
+	*(int*) &s->pad3c[0x238] = arg5;
 	return 1;
 }

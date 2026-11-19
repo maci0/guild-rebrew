@@ -1,5 +1,5 @@
 extern char g_774944;
-extern int d2_SuppressOverlay;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 void __cdecl fcn_00473ed0(void);

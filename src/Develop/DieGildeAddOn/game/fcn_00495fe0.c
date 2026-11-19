@@ -126,7 +126,7 @@ int __cdecl fcn_00495fe0(int a0, char* obj, int flag, int* out1, int* out2)
 		if ((extra.values[loop] & 0xff) == 0) {
 			extra.values[loop] = 0xfc;
 		}
-		r = fcn_004fa5b0(cands[loop], obj, frame); bonus = (r & 2) ? g_662a94 : g_6628a8;
+		r = fcn_004fa5b0(cands[loop], obj, frame); bonus = (r & 2) ? -1.0f : g_6628a8;
 		tmp8 = (unsigned char) obj[loop + 0x80];
 		if (tmp8 < 0x2a) {
 			costs[loop] = 1;

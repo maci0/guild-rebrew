@@ -39,7 +39,7 @@ typedef struct {
 } Entry;
 
 extern Entry g_85a0a0[16];
-extern int ls_SaveVersion;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
 

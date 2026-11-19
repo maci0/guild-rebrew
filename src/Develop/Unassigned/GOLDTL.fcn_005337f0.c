@@ -1,7 +1,6 @@
 extern char g_7e5fc0[];
 extern int main_LoopFlags;
-extern float d2_UiScale;
-extern int d2_CenterX;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_77250c;
 extern int g_6a251c;
 extern volatile int g_6b7fac;

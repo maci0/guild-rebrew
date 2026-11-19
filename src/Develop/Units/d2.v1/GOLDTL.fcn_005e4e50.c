@@ -1,16 +1,16 @@
 
 
 
-typedef struct Ent {
-	unsigned short id;
-	unsigned char kind;
-	char pad3;
-	int handle;
-	char pad8[0x21c - 8];
-} Ent;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char s_6ad3c4[];
 extern char s_681140[];
@@ -23,7 +23,7 @@ extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_00470820(int, int, char*);
-int __cdecl fcn_004f65a0(Ent*, int, int*, int*);
+int __cdecl fcn_004f65a0(ENTITY_RECORD*, int, int*, int*);
 int __cdecl fcn_0050c710(int, int, int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_005340f0(int);
@@ -41,21 +41,21 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005e4e50(Ent* other)
+void __cdecl fcn_005e4e50(ENTITY_RECORD* other)
 {
 	int count;
 	int yes;
 	int found;
 	int list[4];
 	char text[0x400];
-	Ent* me;
+	ENTITY_RECORD* me;
 	int h;
 	int max;
 	int i;
 
-	me = &((Ent*)g_7f4ca0)[g_774970];
+	me = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 	h = fcn_00470820(0, 0, s_6ad3c4);
-	found = fcn_004f65a0(&((Ent*)g_7f4ca0)[g_774970], 4, list, &count);
+	found = fcn_004f65a0(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 4, list, &count);
 	if ((*(int*)&g_7746c4)) {
 		max = fcn_0050c710((*(int*)&g_7746c4), 0x24, 1);
 	} else {
@@ -69,7 +69,7 @@ void __cdecl fcn_005e4e50(Ent* other)
 	fcn_005338a0();
 	d2_SetForm(h, 1);
 	io_AppendText(0x4227);
-	io_AppendText(0x422b, other->id, count, 0x422c, other->id, 1);
+	io_AppendText(0x422b, other->entity_index, count, 0x422c, other->entity_index, 1);
 	d2_SetForm(h, 2);
 	yes = fcn_00472250(h, 2, io_AppendText((int) s_681140, 0x422d));
 	io_AppendText((int) s_6ad3bc, 0x422e);
@@ -83,20 +83,20 @@ void __cdecl fcn_005e4e50(Ent* other)
 		if (g_100f1dc != -1 && d2_CurrentElementId == yes) {
 			if (found) {
 				for (i = 0; i < count; i++) {
-					fcn_004c58b0(list[i], ((Ent*)g_7f4ca0)[g_774970].handle);
+					fcn_004c58b0(list[i], ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id);
 				}
-				fcn_004c6ae0(((Ent*)g_7f4ca0)[g_774970].handle, -1);
-				fcn_004c6ae0(other->handle, -1);
-				fcn_004c5420(me->handle, 0x1cc, 4, 0x20000, 0);
-				io_FormatTextBuffer(text, 0x422f, other->id);
-				fcn_00545d40(((Ent*)g_7f4ca0)[g_774970].handle, -1, text, 0, 0x5ec, 0);
-				if (other->kind == 6 || other->kind == 7) {
+				fcn_004c6ae0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1);
+				fcn_004c6ae0(other->entity_id, -1);
+				fcn_004c5420(me->entity_id, 0x1cc, 4, 0x20000, 0);
+				io_FormatTextBuffer(text, 0x422f, other->entity_index);
+				fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1, text, 0, 0x5ec, 0);
+				if (other->entity_state == 6 || other->entity_state == 7) {
 					io_FormatTextBuffer(text, 0x4230, g_774970, 1);
-					fcn_00545d40(other->handle, -1, text, 0, 0x5ec, s_6ad3a8);
+					fcn_00545d40(other->entity_id, -1, text, 0, 0x5ec, s_6ad3a8);
 				}
 				g_774654 = 3;
 			} else {
-				fcn_004c6ae0(other->handle, -1);
+				fcn_004c6ae0(other->entity_id, -1);
 				g_774654 = 3;
 			}
 		}

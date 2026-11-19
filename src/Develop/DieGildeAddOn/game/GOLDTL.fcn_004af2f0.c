@@ -1,5 +1,5 @@
-extern float g_662910;
-extern float g_662910;
+
+
 
 /* Owned (both targets) by src/GOLDTL.fcn_005b24b0.c. */
 extern unsigned char g_773d75;
@@ -727,7 +727,7 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 	fcn_004ae080(a4, buf, &n, (int*) &p);
 	n = fcn_0064eeec(a4 + n);
 	io_FormatTextBuffer((void*) a5, (int) buf,
-	    fcn_0050b710((int) (((float) n * g_662910) * (float) r),
+	    fcn_0050b710((int) (((float) n * 0.01f) * (float) r),
 	    g_773d75),
 	    g_773d75);
 	return 1;
@@ -928,15 +928,15 @@ send:
 }
 #pragma optimize("", on)
 
-#pragma pack(push, 2)
-typedef struct Pos14 {
-	int a;
-	short b0;
-	short b1;
-	int c;
-	short d;
-} Pos14;
-#pragma pack(pop)
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
+
+
+
+
+
+
+
+
 // SIZE 0xe
 
 typedef struct Msg {
@@ -947,7 +947,7 @@ typedef struct Msg {
 	int owner;
 	int h10;
 	int target;
-	Pos14 when;
+	GAME_TIMESTAMP when;
 	unsigned char flags;
 	char p27[9];
 	unsigned char count;
@@ -966,7 +966,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
 
-void __cdecl fcn_00500bb0(Pos14*, int, int, int);
+void __cdecl fcn_00500bb0(GAME_TIMESTAMP*, int, int, int);
 void __cdecl fcn_004c5980(Msg*);
 
 /* In this file for the same reason as fcn_004af2f0: with the bodies of
@@ -1043,9 +1043,9 @@ int __cdecl fcn_004b0780(int* pairs, int idx, char* text)
 		}
 		msg.count = (unsigned char) n;
 		msg.flags = 0x22;
-		msg.when = (*(Pos14*)&gm_GameTime);
+		msg.when = (*(GAME_TIMESTAMP*)&gm_GameTime);
 		fcn_00500bb0(&msg.when, 0x18, 0, 0);
-		msg.when.b0 = 0xa;
+		msg.when.hour = 0xa;
 		fcn_004c5980(&msg);
 	}
 	return 1;

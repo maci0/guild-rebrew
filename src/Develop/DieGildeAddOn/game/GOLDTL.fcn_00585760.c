@@ -1,3 +1,4 @@
+#include "client_types.h"
 
 
 
@@ -12,10 +13,10 @@ typedef struct {
 	int owner;
 	int entity;
 	char p10[0x18];
-	int a;
-	int b;
-	int c;
-	short d;
+	pos14_7f4c00 timestamp;
+
+
+
 	unsigned char flag;
 	char p37[0x21];
 	int v58;
@@ -49,10 +50,10 @@ int __cdecl fcn_00585760(char* e, int* list, int idx)
 	msg.kind = 0x96;
 	msg.owner = *(int*) (g_7f4ca0 + *(unsigned short*) (e + 0x27) * 540 + 4);
 	msg.entity = *(int*) (e + 1);
-	msg.a = (*(int*)&gm_GameTime);
-	msg.b = (*(int*)&g_7f4c04);
-	msg.c = g_7f4c08;
-	msg.d = g_7f4c0c;
+	msg.timestamp.a = (*(int*)&gm_GameTime);
+	msg.timestamp.b = (*(int*)&g_7f4c04);
+	msg.timestamp.c = g_7f4c08;
+	msg.timestamp.d = g_7f4c0c;
 	msg.flag = 1;
 	msg.v5c = list[idx * 2 + 3];
 	msg.v58 = list[0];

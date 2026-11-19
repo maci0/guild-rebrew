@@ -25,7 +25,6 @@ extern char s_68dee8[];
 extern char s_68dee0[];
 extern char s_6b5c60[];
 
-extern double g_662950;
 extern double g_6629c8;
 extern double g_6640e8;
 extern int main_Instance;
@@ -119,9 +118,9 @@ unsigned int __cdecl fcn_004ed240(void)
 	for (i = 0; i < g_772fe0; i++) {
 		sprintf(app, s_68def0, i);
 		GetPrivateProfileStringA(app, s_68df78, s_68deec, out, 0x100, path);
-		f = atof(out) * g_6640e8;
-		if (f > g_662950) {
-			f = atof(out) * g_6640e8;
+		f = atof(out) * 0.01;
+		if (f > 0.0) {
+			f = atof(out) * 0.01;
 			if (f < g_6629c8) {
 				goto clamp_low;
 			}
@@ -129,19 +128,19 @@ unsigned int __cdecl fcn_004ed240(void)
 		}
 		else {
 clamp_low:
-			f = atof(out) * g_6640e8;
-			if (f <= g_662950) {
-				f = g_662950;
+			f = atof(out) * 0.01;
+			if (f <= 0.0) {
+				f = 0.0;
 			}
 			else {
-				f = atof(out) * g_6640e8;
+				f = atof(out) * 0.01;
 			}
 		}
 		*(float*) (g_772fe4 + i * 0xc + 4) = (float) f;
 		GetPrivateProfileStringA(app, s_68df70, s_68dee8, out, 0x100, path);
-		f = atof(out) * g_6640e8;
-		if (f > g_662950) {
-			f = atof(out) * g_6640e8;
+		f = atof(out) * 0.01;
+		if (f > 0.0) {
+			f = atof(out) * 0.01;
 			if (f < g_6629c8) {
 				goto clamp_low2;
 			}
@@ -149,12 +148,12 @@ clamp_low:
 		}
 		else {
 clamp_low2:
-			f = atof(out) * g_6640e8;
-			if (f <= g_662950) {
-				f = g_662950;
+			f = atof(out) * 0.01;
+			if (f <= 0.0) {
+				f = 0.0;
 			}
 			else {
-				f = atof(out) * g_6640e8;
+				f = atof(out) * 0.01;
 			}
 		}
 		*(float*) (g_772fe4 + i * 0xc + 8) = (float) f;

@@ -34,6 +34,6 @@ int __cdecl fcn_00494740(int a0, int entity, int* level_out, int unused)
 		if (level_out != 0) {
 			*level_out = level;
 		}
-		return (w + f) > g_6628a0;
+		return (w + f) > 1.0f;
 	}
 }

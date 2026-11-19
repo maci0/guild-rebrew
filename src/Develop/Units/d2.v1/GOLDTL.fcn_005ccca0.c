@@ -32,6 +32,7 @@ typedef struct {
 
 extern TabRec_5ccca0 g_6ac8a8[];
 #include "client_data.h"
+#include "Develop/Units/d2.v1/d2_win.h"
 int __cdecl fcn_00468df0(int, int, int, int, int);
 void __cdecl fcn_00469110(int, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -94,13 +95,13 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 	d2_SetForm(h, 1);
 	io_AppendText(name);
 	d2_SetForm(h, 4);
-	rem = *(int*) ((unsigned long)&g_1015f40 + d2_CurrentWindowId * 0x3cc + 0x10) - 0x107;
+	rem = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].height - 0x107;
 	step = rem / 7;
 	rem = rem % 7;
 	y = 0;
 	for (i = 0; i < 8;) {
 		g_6ac8a8[i].element = fcn_00468df0(
-				(*(int*) ((unsigned long)&g_1015f40 + d2_CurrentWindowId * 0x3cc + 0xc) - 0xb9) / 2, y, 0xbf,
+				(((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0xb9) / 2, y, 0xbf,
 				*(int*) (0x14aad40 + g_6ac8a8[i].bild * 4), d2_CurrentWindowId);
 		fcn_00469110(g_6ac8a8[i].element, 0xb9);
 		i++;
@@ -236,7 +237,7 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 				}
 			}
 		} else if (time0 <= g_6b7fac &&
-				*(int*) ((unsigned long)&g_1015f40 + win * 0x3cc + 0x260) == 0) {
+				*(int*) &((D2_WIN*)g_1015f40)[win].pad3c[0x224] == 0) {
 			state = 3;
 			time0 = g_6b7fac + 0xd8;
 		}

@@ -1,25 +1,25 @@
-typedef struct fcn_0047c520_dev fcn_0047c520_dev;
-typedef struct {
-	char pad0[0xf4];
-	int(__stdcall* ff4)(fcn_0047c520_dev*, int, int);
-	char padf8[0x54];
-	int(__stdcall* f14c)(fcn_0047c520_dev*, int, int, int);
-} fcn_0047c520_vtbl;
-// SIZE 0x150
-struct fcn_0047c520_dev {
-	fcn_0047c520_vtbl* vtbl;
-};
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
+typedef int (__stdcall* Texture47c520Fn)(D3D_DEVICE_VIEW*, int, int);
+typedef int (__stdcall* Stream47c520Fn)(D3D_DEVICE_VIEW*, int, int, int);
+
+
+
+
+
+
+
+
 
 extern int g_772618;
-extern void* g_6b5de0;
+
 
 
 /* ADDRESS: GOLDTL 0x0047c520 */
 void __cdecl fcn_0047c520(void)
 {
 	if (g_772618 != 0) {
-		((fcn_0047c520_dev*)g_6b5de0)->vtbl->f14c(((fcn_0047c520_dev*)g_6b5de0), 0, 0, 0);
-		((fcn_0047c520_dev*)g_6b5de0)->vtbl->ff4(((fcn_0047c520_dev*)g_6b5de0), 0, 0);
+		((Stream47c520Fn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x14c / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0, 0);
+		((Texture47c520Fn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0xf4 / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0);
 		g_772618 = 0;
 	}
 }

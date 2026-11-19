@@ -1,15 +1,15 @@
 
 
 
-typedef struct
-{
-	int x0;
-	int x4;
-	char pad8[0x214];
-} Player;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
 extern int g_14ab930;
@@ -29,9 +29,9 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00471f80(int);
-int __cdecl fcn_00525f60(Player*, int);
+int __cdecl fcn_00525f60(ENTITY_RECORD*, int);
 void __cdecl fcn_005100f0(int, int);
-void __cdecl fcn_005b21d0(Player*, Player*, unsigned char*);
+void __cdecl fcn_005b21d0(ENTITY_RECORD*, ENTITY_RECORD*, unsigned char*);
 void __cdecl fcn_004f5e20(int, int);
 int __cdecl fcn_00526120(int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -47,7 +47,7 @@ void __cdecl fcn_005abfd0(unsigned char* e)
 	int dlg;
 	int amt;
 	int v;
-	Player* me;
+	ENTITY_RECORD* me;
 
 	flag = 0;
 	btnA = -1;
@@ -56,7 +56,7 @@ void __cdecl fcn_005abfd0(unsigned char* e)
 	if (*(unsigned short*) (e + 0x27) == 0xffff) {
 		return;
 	}
-	amt = fcn_004f39b0(((Player*)g_7f4ca0)[g_774970].x4);
+	amt = fcn_004f39b0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id);
 	dlg = fcn_00470820(0, 0, s_6ab060);
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
@@ -81,15 +81,15 @@ void __cdecl fcn_005abfd0(unsigned char* e)
 		}
 		if (g_100f1dc != -1 && flag != 0) {
 			if (d2_CurrentElementId == btnA) {
-				me = &((Player*)g_7f4ca0)[g_774970];
+				me = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 				v = fcn_00471f80(btnB);
 				if (fcn_00525f60(me, v) != 0) {
-					fcn_005100f0(me->x4, -v);
+					fcn_005100f0(me->entity_id, -v);
 					if (*(unsigned short*) (e + 0x27) != 0xffff && *(unsigned short*) (e + 0x27) != g_774970) {
-						fcn_005100f0(((Player*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].x4, 1);
-						fcn_005b21d0(&((Player*)g_7f4ca0)[g_774970], &((Player*)g_7f4ca0)[*(unsigned short*) (e + 0x27)], e);
+						fcn_005100f0(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id, 1);
+						fcn_005b21d0(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)], e);
 					}
-					fcn_004f5e20(me->x4, v / 2);
+					fcn_004f5e20(me->entity_id, v / 2);
 					fcn_00526120(g_14ab930, 0);
 					g_774654 = 1;
 				}

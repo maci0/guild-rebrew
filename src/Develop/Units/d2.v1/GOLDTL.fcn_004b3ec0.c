@@ -1,7 +1,7 @@
 extern char g_681130[];
 extern char g_68112c[];
 extern char g_681110[];
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 

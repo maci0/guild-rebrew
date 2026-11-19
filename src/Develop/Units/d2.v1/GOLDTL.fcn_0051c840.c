@@ -355,7 +355,7 @@ body:
 					strlen(buf) - i + 1);
 				memcpy(buf + i - 2, num, strlen(num));
 			} else {
-				sprintf(num, g_67d444, 0x3e7);
+				sprintf(num, "%i", 0x3e7);
 				flag = 2;
 				res = (strlen(num) - 2) / 3 + strlen(num);
 				p = tmp + res;
@@ -386,7 +386,7 @@ body:
 					strlen(buf) - i + 1);
 				memcpy(buf + i - 2, tmp, strlen(tmp));
 			} else {
-				sprintf(tmp, g_67d444, 0x270f);
+				sprintf(tmp, "%i", 0x270f);
 				memmove(buf + i - 1 + strlen(tmp), buf + i + 1,
 					strlen(buf) - i + 1);
 				strcpy(buf + i - 1, tmp);

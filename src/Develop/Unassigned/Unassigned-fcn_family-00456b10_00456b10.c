@@ -14,7 +14,7 @@ void __cdecl fcn_0045bfb0(int);
 typedef int(__stdcall* Fn1)(void* self);
 
 extern unsigned int g_10405fc;
-extern unsigned int g_104061c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern void** g_1040610[];
 
 /* ADDRESS: GOLDTL 0x00456b10 */

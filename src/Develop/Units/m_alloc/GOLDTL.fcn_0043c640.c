@@ -17,7 +17,7 @@
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* ptr);
 
-extern float g_662a18;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int __cdecl fcn_0064d3f8(void);
 
 #define MATERIALS	8

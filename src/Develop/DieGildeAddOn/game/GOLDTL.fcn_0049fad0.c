@@ -9,14 +9,14 @@ typedef struct F8 {
 } F8;
 // SIZE 0x8
 
-typedef struct Ent {
-	char pad0[0x16c];
-	char* home;
-	char pad170[0x21c - 0x170];
-} Ent;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
 extern unsigned char g_773d75;
 
 unsigned short __cdecl gm_RandomMod(int n);
@@ -59,7 +59,7 @@ int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 	}
 	count = 0;
 	for (i = 0; i < 768; i++) {
-		if (((Ent*)g_7f4ca0)[i].home == target) {
+		if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_16c == target) {
 			count++;
 		}
 	}

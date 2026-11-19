@@ -2,15 +2,15 @@
 // SIZE 0xe
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int owner;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 #include "client_packet_builder.h"
@@ -102,9 +102,9 @@ void __cdecl fcn_0055fd10(char* u)
 		w = fcn_005049a0(p);
 		io_FormatTextBuffer(text, 0x1bba, p);
 		if (w != 0) {
-			he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -1, text, 0, msg, *(int*) (p + 1), *(int*) (w + 2), 0, 0);
+			he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, msg, *(int*) (p + 1), *(int*) (w + 2), 0, 0);
 		} else {
-			he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -1, text, 0, msg, *(int*) (p + 1), -1, 0, 0);
+			he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, msg, *(int*) (p + 1), -1, 0, 0);
 		}
 		fcn_00546190(u);
 		break;

@@ -3,7 +3,7 @@ extern int g_6b8708;
 extern int g_6b8704;
 extern void* g_6b870c;
 extern int g_6b8700;
-extern int d3_MaxActiveLights;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_lighting.h"
 
 

@@ -91,7 +91,7 @@ void __cdecl fcn_005609c0(char* jobState)
 	ent = fcn_00502cd0(*(int*) (rec + 0x5d), 2, 6, 0, 0x2a);
 	if (ent != 0) {
 		tmp = fcn_0050dc90(rec);
-		f = (double) fcn_0050c710(rec, 0xb, 1) * g_6640e8 + g_6629c8;
+		f = (double) fcn_0050c710(rec, 0xb, 1) * 0.01 + g_6629c8;
 		len = (int) ((gm_RandomMod(5) + 5) * f);
 		fcn_004c51f0(*(int*) (ent + 2), -1, *(unsigned short*) (jobState + 0xae),
 			len, *(unsigned char*) 0x773d75, 0);

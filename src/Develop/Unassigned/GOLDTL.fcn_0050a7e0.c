@@ -5,8 +5,7 @@ typedef struct { unsigned char kind; char rest[0x24c]; } SpawnBuilding;
 
 extern int rand(void);
 extern int gm_CurrentHumanFamilyCount;
-extern int gm_EntityCount;
-extern int gm_NextEntityId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_773d68;
 
 unsigned short __cdecl gm_RandomMod(int n);

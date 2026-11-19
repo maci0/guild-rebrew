@@ -31,15 +31,15 @@ void __cdecl d2_UpdateRadioGroup(int);
 char __cdecl fcn_00507400(int, int);
 void __cdecl fcn_00469510(int);
 void __cdecl fcn_00471e30(int);
-typedef struct
-{
-	char pad0[0x10];
-	int x10;
-	char pad14[0x240];
-	int x254;
-	int x258;
-	char pad25c[0x3cc - 0x25c];
-} Win;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
+
 
 extern int g_6a9b9c;
 #include "client_types.h"
@@ -136,7 +136,7 @@ void __cdecl fcn_005941e0(void)
 	last = -1;
 	e = fcn_004ce000();
 	d2_SetForm(g_6a9b9c, 5);
-	h = ((Win*)g_1015f40)[d2_CurrentWindowId].x254;
+	h = *(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x218];
 	io_AppendText((int) "$C");
 	g_774a3c = 0;
 	while (e != 0) {
@@ -157,11 +157,11 @@ void __cdecl fcn_005941e0(void)
 		last = io_AppendText((int) buf);
 		e = fcn_004ce040();
 	}
-	if (g_774a3c > g_774a38 && last >= 0 && h > ((Win*)g_1015f40)[d2_CurrentWindowId].x10) {
+	if (g_774a3c > g_774a38 && last >= 0 && h > ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].height) {
 		g_774a38 = g_774a3c;
 		n = h + 0x18;
-		((Win*)g_1015f40)[d2_CurrentWindowId].x254 = n;
-		((Win*)g_1015f40)[d2_CurrentWindowId].x258 = n - ((Win*)g_1015f40)[d2_CurrentWindowId].x10;
+		*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x218] = n;
+		*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x21c] = n - ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].height;
 		fcn_0046c310(d2_CurrentWindowId);
 	}
 }

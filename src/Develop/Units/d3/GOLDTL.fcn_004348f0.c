@@ -1,9 +1,7 @@
 
 
 
-extern char* g_1042320;
-extern char g_1052a40[];
-extern int g_6b8008;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004346f0(char*);
 #include "Develop/Units/d3/d3_animation.h"

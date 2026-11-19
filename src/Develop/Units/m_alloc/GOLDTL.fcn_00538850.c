@@ -24,16 +24,9 @@ extern int __cdecl sprintf(char*, const char*, ...);
 extern int g_1015ce0;
 extern int d2_ScreenHeight;
 extern int g_1040494;
-extern int d2_MouseRightBoundary;
-extern int d2_MouseBottomBoundary;
-extern int d3_LODMode;
-extern int g_6a3764;
-extern int g_6a3768;
-extern int g_6a376c;
-extern int g_6a3770;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6acf80;
 extern int g_6acf84;
-extern int main_Instance;
 
 typedef struct Gfx538 {
 	int width;

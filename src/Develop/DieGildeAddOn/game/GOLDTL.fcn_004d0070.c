@@ -14,7 +14,7 @@ extern int g_68b79c;
 extern volatile int g_6b7fac;
 extern char* ch_ContextCharacters[32];
 extern float g_6628a4;
-extern float g_662910;
+
 extern float g_662cf8;
 extern double g_6640e8;
 extern double g_664ee8;
@@ -78,7 +78,7 @@ void __cdecl fcn_004d0070(void)
 				d = fcn_004ce590(0x16e);
 				num = cut_RandMod((unsigned int) ((unsigned char) d[6] - (unsigned char) d[5]));
 				num += (unsigned char) d[5];
-				fcn_004c6880(*(int*) (e + 4), (int) ((double) num * *(float*) (e + 0x1c) * g_6640e8), (int) *(unsigned char*) (e + 8));
+				fcn_004c6880(*(int*) (e + 4), (int) ((double) num * *(float*) (e + 0x1c) * 0.01), (int) *(unsigned char*) (e + 8));
 			}
 		}
 	}

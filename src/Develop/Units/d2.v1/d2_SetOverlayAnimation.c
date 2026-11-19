@@ -1,5 +1,4 @@
-extern int d2_MouseX;
-extern int d2_MouseY;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d8cc;
 extern short g_7725c4;
 

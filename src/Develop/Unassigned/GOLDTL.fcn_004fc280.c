@@ -1,6 +1,6 @@
 
 
-extern float g_773d4c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_773d58;
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))

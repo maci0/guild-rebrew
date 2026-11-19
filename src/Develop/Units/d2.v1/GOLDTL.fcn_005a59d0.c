@@ -12,6 +12,7 @@ typedef struct {
 extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_win.h"
 extern char g_1015f40[];
 extern char g_6b5c60[];
 extern char g_6aac84[];
@@ -108,10 +109,10 @@ int __cdecl fcn_005a59d0(char* a0)
 	*(int*)(g_1015ea0 + 0x84 + h2 * 0x2f4) = 0x54;
 	*(int*)(g_1015ea0 + 0x54 + e4 * 0x2f4) = 1;
 	d2_SetForm(v8, 0);
-	*(int*)(g_1015f40 + d2_CurrentWindowId * 0x3cc + 0x3a8) = 0xe;
-	*(int*)(g_1015f40 + d2_CurrentWindowId * 0x3cc + 0x3ac) = 0x18;
-	*(int*)(g_1015f40 + d2_CurrentWindowId * 0x3cc + 0x3b0) = 0xe;
-	*(int*)(g_1015f40 + d2_CurrentWindowId * 0x3cc + 0x3b4) = 0xe;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0] = 0xe;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[4] = 0x18;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[8] = 0xe;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[12] = 0xe;
 	d2_SetForm(v8, 1);
 	io_AppendText(0x18f5);
 	d2_SetForm(v8, 2);
@@ -210,7 +211,7 @@ int __cdecl fcn_005a59d0(char* a0)
 				v3 = ownRows[v30].val;
 				if (v2 != v3) {
 					v4 = ownRows[v30].x14;
-					factor = (float) (*(int*)(a0 + 0x6d) * g_6640e8);
+					factor = (float) (*(int*)(a0 + 0x6d) * 0.01);
 					value = (float) fcn_00508620(v4, v3);
 					if (g_774970 != *(unsigned short*)(a0 + 0x27)) {
 						fee = value * factor;
@@ -252,7 +253,7 @@ int __cdecl fcn_005a59d0(char* a0)
 					v1 = ownRows[v16].x18 < v4 ? ownRows[v16].x18 : v4;
 					value = (float) fcn_00508620(v1, v2);
 					if (g_774970 != *(unsigned short*)(a0 + 0x27)) {
-						fee = (float) (*(int*)(a0 + 0x6d) * g_6640e8 * value);
+						fee = (float) (*(int*)(a0 + 0x6d) * 0.01 * value);
 						v17 = fcn_00508620(1, v3);
 						if (!((float) v17 < fee)) fee = (float) fcn_00508620(1, v3);
 					} else fee = 0.0f;

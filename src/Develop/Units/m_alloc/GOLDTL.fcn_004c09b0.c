@@ -8,7 +8,7 @@ struct fcn_004c09b0_node {
 // SIZE 0x10
 
 extern int g_772d2c;
-extern char* g_772d34;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_004c24c0(float, int);
 void __cdecl fcn_00426170(int*, int);

@@ -25,13 +25,13 @@ typedef struct {
 #pragma pack(pop)
 
 // SIZE 0x21c
-typedef struct {
-	unsigned short slot;
-	unsigned char type;
-	char pad3;
-	int id;
-	char pad8[0x214];
-} Entity_551f90;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 // SIZE 0xd4
 typedef struct {
@@ -54,7 +54,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_7f4ca0[];
+
 
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5620(int, Order_551f90*);
@@ -113,8 +113,8 @@ void __cdecl fcn_00551f90(Order_551f90* o)
 			m[0x36] = 9;
 			*(pos14_7f4c00*) (m + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 			for (i = 0; i < 0x300; i++) {
-				if (((Entity_551f90*)g_7f4ca0)[i].type == 6 || ((Entity_551f90*)g_7f4ca0)[i].type == 7) {
-					*(int*) (m + 8) = ((Entity_551f90*)g_7f4ca0)[i].id;
+				if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7) {
+					*(int*) (m + 8) = ((ENTITY_RECORD*)g_7f4ca0)[i].entity_id;
 					fcn_004c5530(m);
 				}
 			}

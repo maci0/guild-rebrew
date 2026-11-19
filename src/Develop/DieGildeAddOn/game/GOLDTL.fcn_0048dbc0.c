@@ -36,7 +36,7 @@ int __cdecl fcn_0048dbc0(char* e, char* a2, char* a3)
 	t = &((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx];
 	have = (int) (fcn_0050b810(*(int*) (e + 0x178), (*(char*)&g_773d75)) * 0.25f);
 	need = gm_WalkEntityChain(*(unsigned short*) e);
-	need = (int) ((gm_WalkEntityChain(t->entity_index) + need) * g_6628ac);
+	need = (int) ((gm_WalkEntityChain(t->entity_index) + need) * 0.02f);
 	if (have < need) {
 		return 0;
 	}

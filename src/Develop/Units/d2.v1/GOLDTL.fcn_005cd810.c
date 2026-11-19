@@ -1,11 +1,8 @@
 extern int d2_CurrentWindowId;
-extern int d2_CurrentElementId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f1dc;
-extern int g_14ce8d8;
-extern int g_14ce8e0;
-extern int g_14ce8e8;
 extern float g_662cf8;
 extern float g_664e88;
 extern float g_6660d4;

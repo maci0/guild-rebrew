@@ -7,7 +7,6 @@ extern int d2_CurrentElementId;
 extern int tp_d2_SelectedControl;
 extern int g_7725fc;
 extern int d2_ClipBottom;
-extern double g_662950;
 extern double g_662908;
 
 typedef struct Glyph {
@@ -72,12 +71,12 @@ void __cdecl fcn_00468e40(int slotIndex, int surface)
 
 	fcn_0047a040(*(int*) (slot + 0x10) + leftGlyph->w - 1, g_7725fc, *(int*) (slot + 0x10) + leftGlyph->w + innerWidth, d2_ClipBottom);
 	i = 0;
-	if (g_662950 < (double) (innerWidth / middleGlyph->w) + g_662908) {
+	if (0.0 < (double) (innerWidth / middleGlyph->w) + 0.5) {
 		do {
 			fcn_0047cba0(middleGlyph->w * i + leftGlyph->w + *(int*) (slot + 0x10),
 			    *(int*) (slot + 0x14), surface, font, glyphBase + 2);
 			i++;
-		} while ((double) i < (double) (innerWidth / middleGlyph->w) + g_662908);
+		} while ((double) i < (double) (innerWidth / middleGlyph->w) + 0.5);
 	}
 	fcn_0046bd20(*(int*) (slot + 0x10),
 	    ((leftGlyph->h >> 1) - d2_FontHeight / 2) + 1 + *(int*) (slot + 0x14),

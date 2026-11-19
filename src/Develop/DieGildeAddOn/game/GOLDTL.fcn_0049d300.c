@@ -107,7 +107,7 @@ int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 			memcpy(a4, vals, 0x18);
 			return 0x2e;
 		}
-		if ((double) a0 < (double) n * g_6628d8)
+		if ((double) a0 < (double) n * 0.4f)
 			return 0;
 		a3[2] = 1;
 		*(unsigned char*) a4 = 4;

@@ -37,7 +37,7 @@ void __cdecl fcn_005639a0(int a)
 			return;
 		}
 		t = fcn_00500d20((void*) (a + 0x60), (void*) &gm_GameTime);
-		t = (int) ((double) t * g_6629f8 + 0.5);
+		t = (int) ((double) t * 0.1 + 0.5);
 		*(int*) (a + 0xb0) -= t;
 		fcn_0050ff70(r, t);
 		if (*(int*) (a + 0xb0) > 0) {

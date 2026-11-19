@@ -1,13 +1,13 @@
-#pragma pack(2)
-typedef struct
-{
-	int t;
-	unsigned short hour;
-	unsigned int f6;
-	unsigned int f10;
-} fcn_0047da10_Stamp;
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
+
+
+
+
+
+
+
 // SIZE 0xe
-#pragma pack()
+
 
 // SIZE 0x21c
 typedef struct
@@ -25,7 +25,7 @@ typedef struct
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern fcn_0047da10_Stamp g_100dc04;
+extern GAME_TIMESTAMP g_100dc04;
 extern int g_100dc00;
 extern int g_100dc14;
 extern int g_7747b4;
@@ -34,7 +34,7 @@ float g_67db54 = 0.5f;
 extern unsigned char g_7747b0;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_00500d20(fcn_0047da10_Stamp* a, fcn_0047da10_Stamp* b);
+int __cdecl fcn_00500d20(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00489920(fcn_0047da10_Ent* e);
 void __cdecl fcn_0047d810(fcn_0047da10_Ent* e);
@@ -48,22 +48,22 @@ void __cdecl fcn_0047da10(void)
 {
 	float f;
 	int n;
-	fcn_0047da10_Stamp now;
+	GAME_TIMESTAMP now;
 	char buf[0x400];
 	fcn_0047da10_Ent* e;
 	int d;
 	int k;
 	int idx;
 
-	now = (*(fcn_0047da10_Stamp*)&gm_GameTime);
+	now = (*(GAME_TIMESTAMP*)&gm_GameTime);
 	d = fcn_00500d20(&g_100dc04, &now);
 	f = d * 12.8f;
 	n = (int) f;
 	g_67db50 = (float) g_7747b4;
 	g_67db54 = g_7747b4 * 0.0625f + 0.5f;
-	if (d <= 0 || (*(fcn_0047da10_Stamp*)&gm_GameTime).hour > 0x16 || (*(fcn_0047da10_Stamp*)&gm_GameTime).hour < 6)
+	if (d <= 0 || (*(GAME_TIMESTAMP*)&gm_GameTime).hour > 0x16 || (*(GAME_TIMESTAMP*)&gm_GameTime).hour < 6)
 		return;
-	if (g_100dc04.t < now.t) {
+	if (g_100dc04.unit_0 < now.unit_0) {
 		g_100dc04 = now;
 		return;
 	}
@@ -84,8 +84,8 @@ void __cdecl fcn_0047da10(void)
 		if (((fcn_0047da10_Ent*)g_7f4ca0)[idx].id != 0xffff) {
 			e = &((fcn_0047da10_Ent*)g_7f4ca0)[idx];
 			fcn_00489920(e);
-			if ((*(fcn_0047da10_Stamp*)&gm_GameTime).hour > 6 && (*(fcn_0047da10_Stamp*)&gm_GameTime).hour < 0x16 && (g_7747b0 & 0x80) == 0 && (e->kind == 5
-			    || ((e->id ^ (*(fcn_0047da10_Stamp*)&gm_GameTime).hour) & 1) == 0))
+			if ((*(GAME_TIMESTAMP*)&gm_GameTime).hour > 6 && (*(GAME_TIMESTAMP*)&gm_GameTime).hour < 0x16 && (g_7747b0 & 0x80) == 0 && (e->kind == 5
+			    || ((e->id ^ (*(GAME_TIMESTAMP*)&gm_GameTime).hour) & 1) == 0))
 				fcn_0047d810(e);
 			if ((fcn_0047dca0(e) != 0 && e->gold != 0) || (e->flags & 0x3000)) {
 				int v;
@@ -102,8 +102,8 @@ void __cdecl fcn_0047da10(void)
 	if (g_100dc00 == 0x300) {
 		g_100dc00 = 0;
 		g_100dc04.hour++;
-		g_100dc04.f6 = 0;
-		g_100dc04.f10 = 0;
+		g_100dc04.minute = 0;
+		g_100dc04.second = 0;
 		(*(float *)&g_100dc14) = 0;
 	}
 	fcn_0064d41a(buf, "Next Player: %i", g_100dc00);

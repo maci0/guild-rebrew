@@ -1,10 +1,6 @@
 extern short g_14ce8c0;
 extern short g_14ce8c2;
-extern int g_1042570;
-extern int g_1042574;
-extern int d3_ViewportRight;
-extern int d3_ViewportBottom;
-extern int d3_SelectionBoxActive;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7e4304;
 extern int g_7e4308;
 extern int g_7e430c;

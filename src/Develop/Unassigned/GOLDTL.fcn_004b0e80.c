@@ -6,18 +6,18 @@
 // SIZE 0xe
 
 // SIZE 0x21c
-typedef struct {
-	unsigned short slot;
-	unsigned char type;
-	char pad3[9];
-	unsigned char faith;
-	char padd[0x21c - 0xd];
-} Entity_4b0e80;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char* gm_CityEntity;
-extern char g_7f4ca0[];
+
 
 int __cdecl fcn_0064eeec(char*);
 void __cdecl fcn_004c5530(void*);
@@ -96,7 +96,7 @@ int __cdecl fcn_004b0e80(int a1, int a2, char* argumentText)
 	}
 	cnt = 0;
 	for (i = 0; i < 0x300; i++) {
-		if (((Entity_4b0e80*)g_7f4ca0)[i].slot != 0xffff && ((Entity_4b0e80*)g_7f4ca0)[i].type <= 4 && ((Entity_4b0e80*)g_7f4ca0)[i].faith == faith) {
+		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state <= 4 && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_00c == faith) {
 			cnt++;
 		}
 	}

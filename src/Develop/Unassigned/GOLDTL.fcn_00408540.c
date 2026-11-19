@@ -1,7 +1,7 @@
 /* Reconstructed from native disassembly; frame slots follow the decompiler map. */
 #include <math.h>
 extern void* g_6b5c5c; extern int g_67a370; extern char* g_6b8300;
-extern double g_662908; extern float g_662914; extern const float g_662910; extern float g_6628cc; extern const float g_6628a0;
+extern double g_662908; extern float g_662914;  extern float g_6628cc; extern const float g_6628a0;
 int __cdecl fcn_00402610();
 int __cdecl fcn_00405960();
 int __cdecl fcn_00405a50();
@@ -68,7 +68,7 @@ int __cdecl fcn_00408540(int a0,int a1,int *a2)
     return -1;
   v35 = fcn_00402610(v27);
   fcn_00408250(((int)g_6b5c5c),v35);
-  v36 = (int)(g_662908 + (g_662914 / *(float *)(v35 + 0x10)));
+  v36 = (int)(0.5 + (g_662914 / *(float *)(v35 + 0x10)));
   if (v36 > 10)
     v36 = 10;
   v10 = *(int *)(v28 + 0xf8);
@@ -153,7 +153,7 @@ label_40874a:
             v31 = *(float *)(v10 + 0x4c) - *(float *)(v2 + 0x4c);
             v32 = *(float *)(v10 + 0x50) - *(float *)(v2 + 0x50);
             v33 = *(float *)(v10 + 0x54) - *(float *)(v2 + 0x54);
-            v31 = sqrt(v31 * v31 + v32 * v32 + v33 * v33) * g_662910 * g_6628cc;
+            v31 = sqrt(v31 * v31 + v32 * v32 + v33 * v33) * 0.01f * g_6628cc;
             *(float *)(v27 + 0x1a4) = v31;
             if (g_6628a0 < v31)
               v31 = g_6628a0;
@@ -180,7 +180,7 @@ label_408870:
   v31 = *(float *)(v28 + 0x4c) - *(float *)(v6 + 0x4c);
   v32 = *(float *)(v28 + 0x50) - *(float *)(v6 + 0x50);
   v33 = *(float *)(v28 + 0x54) - *(float *)(v6 + 0x54);
-  v31 = sqrt(v31 * v31 + v32 * v32 + v33 * v33) * g_662910 * g_6628cc;
+  v31 = sqrt(v31 * v31 + v32 * v32 + v33 * v33) * 0.01f * g_6628cc;
   *(float *)(v27 + 0x1a4) = v31;
   if (g_6628a0 < v31)
     v31 = g_6628a0;
@@ -216,7 +216,7 @@ label_40892d:
   } while (v28 < a1);
   if (!(v13 & 1))
     goto label_ret0;
-  if (*(float *)(v27 + 0x1a4) < g_662908)
+  if (*(float *)(v27 + 0x1a4) < 0.5)
     *(unsigned int *)(v27 + 0x1a4) = 0x3f000000;
   v26 = 0;
   do {

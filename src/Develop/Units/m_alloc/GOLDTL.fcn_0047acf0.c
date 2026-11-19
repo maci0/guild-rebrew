@@ -12,7 +12,7 @@ typedef struct { int word[6]; } ShapeHeader47acf0;
 extern int g_67dab8;
 extern int g_67dabc;
 extern int g_67dac0;
-extern float g_662918;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_77260c;
 extern int g_772610;
 extern char g_772c44[];

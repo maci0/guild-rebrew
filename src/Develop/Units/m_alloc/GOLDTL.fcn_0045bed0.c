@@ -5,7 +5,7 @@
 extern int g_10405cc;
 extern unsigned int g_10404a0;
 extern int g_67bd2c;
-extern int g_10405c4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_104049c;
 extern int g_10404c0[32];
 extern int g_10405c0;

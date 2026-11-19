@@ -2,9 +2,8 @@
 
 
 extern int g_77494c;
-extern int g_14cbca0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1007cd0;
-extern int g_14cbcb0;
 extern char g_7728d4;
 
 __declspec(dllimport) unsigned long __stdcall GetTickCount(void);

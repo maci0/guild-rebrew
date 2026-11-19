@@ -1,8 +1,7 @@
 extern char g_100f8c0[];
 extern char g_7766ba;
 extern int g_77250c;
-extern int d2_MouseY;
-extern int d2_MouseX;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 void __cdecl fcn_00472880(int);

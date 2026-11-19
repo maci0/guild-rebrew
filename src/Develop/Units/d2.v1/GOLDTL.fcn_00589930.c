@@ -37,7 +37,7 @@ struct act {
 };
 
 extern pos14_7f4c00 gm_GameTime;
-extern float g_662910;
+
 extern float g_664150;
 extern int d2_CurrentElementId;
 #include "client_data.h"
@@ -84,7 +84,7 @@ void __cdecl fcn_00589930(char* a0)
 
 	act.count = gm_WalkEntityChain(*(unsigned short*) &g_774970);
 	f = (float) act.count;
-	act.amt[0] = (int) (f * g_662910);
+	act.amt[0] = (int) (f * 0.01f);
 	act.amt[1] = (int) (f * g_664150);
 	act.amt[2] = (int) (f * 0.0199999996f);
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9514);

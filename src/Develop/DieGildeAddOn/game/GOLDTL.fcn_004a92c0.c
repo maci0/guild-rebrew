@@ -1,12 +1,12 @@
-typedef struct Ent {
-	unsigned short id;
-	char pad2[2];
-	int seed;
-	char pad8[0x21c - 8];
-} Ent;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
@@ -35,7 +35,7 @@ int __cdecl fcn_004a92c0(int a1, char* e, int a3, int a4, char* out)
 		n = fcn_004a5960(e, 0xc, kind, 30.0f, 100.0f, ids);
 		if (n) {
 			out[0] = 7;
-			*(int*) (out + 4) = ((Ent*)g_7f4ca0)[ids[gm_RandomMod(n)]].seed;
+			*(int*) (out + 4) = ((ENTITY_RECORD*)g_7f4ca0)[ids[gm_RandomMod(n)]].entity_id;
 			return 1;
 		}
 	}

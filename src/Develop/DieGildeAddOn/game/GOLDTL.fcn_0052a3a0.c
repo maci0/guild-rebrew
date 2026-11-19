@@ -1,11 +1,11 @@
-#pragma pack(2)
-typedef struct {
-	int day;
-	unsigned short hour;
-	int minute;
-	int second;
-} Stamp;
-#pragma pack()
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
+
+
+
+
+
+
+
 
 typedef struct {
 	float v[24];
@@ -79,7 +79,7 @@ void __cdecl fcn_004597f0(int, int);
 void __cdecl fcn_005e8870(int, int, Vec24*, Vec24*);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_0052a7d0(void);
-void __cdecl fcn_0052a960(Stamp*);
+void __cdecl fcn_0052a960(GAME_TIMESTAMP*);
 int* __cdecl fcn_00415310(int);
 void __cdecl fcn_004154e0(int);
 int* __cdecl fcn_00416060(int);
@@ -88,7 +88,7 @@ void __cdecl fcn_00416300(int*, int, ...);
 void __cdecl fcn_00415510(int*, int, ...);
 
 /* ADDRESS: GOLDTL 0x0052a3a0 */
-void __cdecl fcn_0052a3a0(Stamp* now, int flag)
+void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
 {
 	char buf[12];
 	float step;

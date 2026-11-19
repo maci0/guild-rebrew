@@ -20,7 +20,7 @@ extern int g_6b86d4;
 #include "client_types.h"
 extern VECTOR3 g_67bbdc;
 extern VECTOR3 g_6b86c4;
-extern int d3_FogColor;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_10425fc;
 extern float g_104329c;
 extern char g_1041d80[];

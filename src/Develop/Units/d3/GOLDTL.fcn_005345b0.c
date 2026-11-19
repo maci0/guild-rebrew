@@ -26,7 +26,7 @@ typedef float* (__cdecl* BoundsFn)(char*, char*, int);
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-extern int d3_SelectionBoxActive;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7e4304;
 extern int g_7e4308;
 extern int g_7e430c;
@@ -34,14 +34,9 @@ extern int g_7e4310;
 extern char* ch_ContextCharacters[32];
 extern short g_14ce8c0;
 extern short g_14ce8c2;
-extern int g_1042570;
-extern int g_1042574;
-extern int d3_ViewportRight;
-extern int d3_ViewportBottom;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_67a370;
 #include "Develop/Units/d3/d3_camera.h"
-extern char g_1052be0[];
 extern float g_1052c00[16];
 
 int __cdecl fcn_00506380(int, int, int, char*);

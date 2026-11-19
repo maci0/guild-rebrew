@@ -7,11 +7,9 @@
 #include "rgb.h"
 
 extern Rgb g_100f1a0;
-extern int g_773d40;
-extern char* g_773d44;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1015da0[];
 extern char g_696528[];
-extern char g_6750e8[];
 extern char g_67d940[];
 
 char* __cdecl m_alloc(int size, char* tag);

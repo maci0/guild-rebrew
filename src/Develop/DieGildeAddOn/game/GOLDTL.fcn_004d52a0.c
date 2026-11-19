@@ -56,7 +56,7 @@ int __cdecl fcn_004d52a0(int* a0, char* a1, int* a2, int a3, float scale)
 				ent = gm_NextEntityQueryMatch();
 			}
 			if (rec == 0) {
-				total = (int) ((double) total * g_662908);
+				total = (int) ((double) total * 0.5);
 				fcn_004c5150(a2[1], -1, g_773d75, total);
 			}
 			ent = gm_GetEntityTableEntry(g_772e9c);

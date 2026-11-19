@@ -25,13 +25,14 @@ typedef struct {
 	int f34;
 } DlgRow_596d70;
 
-/* Native window stride 0x3cc. */
-typedef struct {
-	char pad0[4];
-	int x;
-	int y;
-	unsigned char remaining[0x3cc - 0xc];
-} DlgWin_596d70;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
 
 /* g_1038144 is the page index table; g_1015f40 the window pool. */
 extern int g_1038144[];
@@ -60,7 +61,7 @@ int __cdecl sprintf(char*, const char*, ...);
 void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
                           unsigned int flags, unsigned char* p)
 {
-	DlgWin_596d70* w;
+	D2_WIN* w;
 	char text[0x20];
 	char* obj;
 	double f;
@@ -68,7 +69,7 @@ void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
 	int n;
 
 	d2_SetForm(a0, a1);
-	w = &((DlgWin_596d70*) g_1015f40)[g_1038144[a0 * 175 + a1]];
+	w = &((D2_WIN*) g_1015f40)[g_1038144[a0 * 175 + a1]];
 	if (r->id != 0) {
 		if (r->title == -1) {
 			r->title = fcn_004677e0(r->x + 6, r->y, 0x30, 0, 100, 0x6a, 0x3d, d2_CurrentWindowId);
@@ -189,22 +190,22 @@ void __cdecl fcn_00596d70(int a0, int a1, DlgRow_596d70* r, int makeIcon,
 		sprintf(g_1015ea0 + r->icon * 0x2f4 + 0xcc, "%s~ %li %s",
 				((unsigned int*) g_14a79c0)[r->id * 2], r->f30, *(char**) 0x14b52c0);
 		if (r->icon >= 0) {
-			fcn_00469c40(w->x + r->x + 0xf, w->y + r->y + 6, r->icon);
+			fcn_00469c40(w->left + r->x + 0xf, w->top + r->y + 6, r->icon);
 		}
 		if (r->icon2 >= 0) {
-			fcn_00469c40(w->x + r->x + 0xf, w->y + r->y + 0x3a, r->icon2);
+			fcn_00469c40(w->left + r->x + 0xf, w->top + r->y + 0x3a, r->icon2);
 		}
 		if (r->text1 >= 0) {
-			fcn_00469c40(w->x + r->x + 0x12, w->y + r->y + 0x3f, r->text1);
+			fcn_00469c40(w->left + r->x + 0x12, w->top + r->y + 0x3f, r->text1);
 		}
 		if (r->text2 >= 0) {
-			fcn_00469c40(w->x + r->x + 0x12, w->y + r->y + 0x49, r->text2);
+			fcn_00469c40(w->left + r->x + 0x12, w->top + r->y + 0x49, r->text2);
 		}
 		if (r->title >= 0) {
-			fcn_00469c40(w->x + r->x + 6, w->y + r->y, r->title);
+			fcn_00469c40(w->left + r->x + 6, w->top + r->y, r->title);
 		}
 		if (r->obj >= 0) {
-			fcn_00469c40(w->x + r->x + 0xf, w->y + r->y + 6,
+			fcn_00469c40(w->left + r->x + 0xf, w->top + r->y + 6,
 					*(int*) (g_1015f40 + r->obj * 0x3cc + 0x27c));
 		}
 		return;

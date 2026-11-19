@@ -20,15 +20,9 @@ extern int g_100f898;
 extern int g_100f89c;
 extern int g_100f940;
 extern int g_100f950;
-extern int g_14ce8d0;
-extern int g_14ce8d8;
 extern int g_14ce8dc;
-extern int g_14ce8e0;
-extern int d2_MouseBottomBoundary;
-extern int d2_CurrentElementId;
 extern int g_67d3b0;
 extern int g_67d8ec;
-extern int d2_MouseTopBoundary;
 extern int g_7725e4;
 extern int g_7725e8;
 /* ADDRESS: GOLDTL 0x004748b0 */

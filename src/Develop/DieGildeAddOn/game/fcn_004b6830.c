@@ -67,9 +67,9 @@ int __cdecl fcn_004b6830(int* a0)
 	return 0x400;
 found:
 	v = fcn_0042e410(4) & 0xffff;
-	d = (double) v + g_662a48;
+	d = (double) v + 2.0;
 	w = fcn_0050dac0(*(short*) hit);
-	v = (int) (((double) w * d) * g_6640e8);
+	v = (int) (((double) w * d) * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a0 + 4) + 0x12e7,
 	    *(unsigned short*) hit, *(unsigned short*) ent,
 	    *(unsigned char*) (msg + 8 + i * 0x18) + 0x253, v);

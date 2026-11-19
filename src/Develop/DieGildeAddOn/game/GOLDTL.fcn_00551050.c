@@ -2,15 +2,15 @@
 
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int owner;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, unsigned short);
 unsigned char* __cdecl gm_AddObjekt(void);
@@ -44,9 +44,9 @@ void __cdecl fcn_00551050(char* u)
 			if (e != 0) {
 				fcn_0050ff70(e, -0x32);
 			}
-			if (((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].type == 6) {
+			if (((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_state == 6) {
 				io_FormatTextBuffer(text, 0x10b8, e);
-				he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, text, 0,
+				he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, text, 0,
 				    0x5ec, *(int*) (e + 1), -1, 0, 0);
 			}
 		}

@@ -223,7 +223,7 @@ void __cdecl fcn_00541620(void)
 	i = 0; k = 0;
 	if (n > 0) {
 		do {
-			dbl = (double) *(int*) ((char*) (int) v1d0[i] + 0xc0) * g_6640e8
+			dbl = (double) *(int*) ((char*) (int) v1d0[i] + 0xc0) * 0.01
 				* *(int*) ((char*) (int) v1d0[i] + 0xb4);
 			c1fc = (int) (c1fc + dbl);
 			k = (int) (k + dbl);
@@ -275,7 +275,7 @@ void __cdecl fcn_00541620(void)
 	i = 0;
 	if (n > 0) {
 		do {
-			dbl = (double) *(int*) ((char*) (int) v1d0[i] + 0xc0) * g_6640e8
+			dbl = (double) *(int*) ((char*) (int) v1d0[i] + 0xc0) * 0.01
 				* *(int*) ((char*) (int) v1d0[i] + 0xb4);
 			b200 = (int) (b200 + dbl);
 			a7 = (int) (a7 + dbl);

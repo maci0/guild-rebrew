@@ -3,7 +3,7 @@
 
 extern int* g_665f08;
 extern char g_6b5c60[];
-extern char g_6811b0[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00533a40(char*);
 void __cdecl d2_SetForm(int, int);

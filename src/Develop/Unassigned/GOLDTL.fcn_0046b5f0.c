@@ -25,14 +25,15 @@ typedef struct {
 } Rec46b5f0;
 
 // SIZE 0x3cc
-typedef struct {
-	char pad0[0x14];
-	int flags;
-	char pad18[0x10];
-	int* layers;
-	int count;
-	char pad30[0x3cc - 0x30];
-} TextWin46b5f0;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
+
 
 #pragma pack(push, 1)
 typedef struct {
@@ -48,7 +49,7 @@ extern char* g_1015ea0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d384;
 extern int g_772554;
-extern TextWin46b5f0 g_1015f40[0x60];
+extern D2_WIN g_1015f40[0x60];
 
 int __cdecl d2_GetResourceData(int);
 int __cdecl fcn_0046bd00(int, int, int);
@@ -61,7 +62,7 @@ int __cdecl fcn_0047cd20(int, int, int, char*, int);
 /* ADDRESS: GOLDTL 0x0046b5f0 */
 void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newflags, int xstart, int xlimit)
 {
-	TextWin46b5f0* w;
+	D2_WIN* w;
 	Rec46b5f0* rec;
 	Tile46b5f0* tile;
 	Glyph46b5f0* glyph;
@@ -85,7 +86,7 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 	char c;
 
 	w = &g_1015f40[win];
-	savedFlags = w->flags;
+	savedFlags = (*(int*) &w->pad14[0]);
 	sum = 0;
 	rem = 0;
 	hflag = 0;
@@ -93,7 +94,7 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 	special = -1;
 	step = g_67d380;
 	if (newflags != 0) {
-		w->flags = newflags;
+		(*(int*) &w->pad14[0]) = newflags;
 	}
 	if (g_772554 == 1) {
 		goto out;
@@ -102,10 +103,10 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 	for (n = 0; n < cnt; n++) {
 		sum += *(int*) (0x1011ae8 + n * 0x10c);
 	}
-	base = ((w->flags & 8) >> 3) + ((w->flags & 0x20) ? 2 : 0);
+	base = (((*(int*) &w->pad14[0]) & 8) >> 3) + (((*(int*) &w->pad14[0]) & 0x20) ? 2 : 0);
 	if (base < w->count) {
 		for (k = base; k < w->count; k++) {
-			tile = &((Tile46b5f0*) g_1015ea0)[w->layers[k]];
+			tile = &((Tile46b5f0*) g_1015ea0)[w->children[k]];
 			if (tile->skip78 == 0 && tile->y14 < y + d2_FontHeight
 			    && y < tile->y14 + tile->h1c && newflags != 0x40) {
 				sum += 6 + tile->w18 + g_67d384;
@@ -113,18 +114,18 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 		}
 	}
 	x = xstart;
-	if ((w->flags & 0x80) && *(int*) 0x772530 > 1 && (char) flag == 0) {
+	if (((*(int*) &w->pad14[0]) & 0x80) && *(int*) 0x772530 > 1 && (char) flag == 0) {
 		n = (xlimit - sum) - xstart;
 		step = n / (*(int*) 0x772530 - 1);
 		rem = n % (*(int*) 0x772530 - 1);
-	} else if (w->flags & 0x40) {
+	} else if ((*(int*) &w->pad14[0]) & 0x40) {
 		x = (xlimit - (*(int*) 0x772530 - 1) * step) - sum;
-	} else if (w->flags & 0x100) {
+	} else if ((*(int*) &w->pad14[0]) & 0x100) {
 		x = xstart + (((xlimit - (*(int*) 0x772530 - 1) * step) - sum) - xstart) / 2;
 	}
 	for (i = 0; i < *(int*) 0x772530; i++) {
 		rec = (Rec46b5f0*) (0x10119e0 + i * 0x10c);
-		base = ((w->flags & 8) >> 3) + ((w->flags & 0x20) ? 2 : 0);
+		base = (((*(int*) &w->pad14[0]) & 8) >> 3) + (((*(int*) &w->pad14[0]) & 0x20) ? 2 : 0);
 		c = rec->text[0];
 		flag = 0;
 		special = -1;
@@ -165,7 +166,7 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 		if (flag == 0) {
 			if (base < w->count) {
 				for (k = base; k < w->count; k++) {
-					tile = &((Tile46b5f0*) g_1015ea0)[w->layers[k]];
+					tile = &((Tile46b5f0*) g_1015ea0)[w->children[k]];
 					if (tile->skip78 == 0) {
 						while (tile->x10 < rec->f108 + x
 						       && x < tile->x10 + tile->w18 + 6
@@ -243,5 +244,5 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 	}
 	*(int*) 0x772530 = 0;
 out:
-	w->flags = savedFlags;
+	(*(int*) &w->pad14[0]) = savedFlags;
 }

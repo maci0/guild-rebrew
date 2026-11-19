@@ -1,4 +1,4 @@
-extern void* ch_CharacterSlots[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_0065f220(int, int);
 

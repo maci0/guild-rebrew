@@ -2,7 +2,7 @@
 
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_6a9694[];
 
 int __cdecl fcn_004f4830(int, int*);
@@ -27,7 +27,7 @@ void __cdecl fcn_005c9220(int* o)
 			d2_SetForm(o[0], o[2]);
 			io_AppendText(g_6a9694, o[4] + 0x16b7);
 			d2_SetForm(o[0], o[3]);
-			fcn_00534210(0, 6, g_7f4ca0 + g_774970 * 540, o[4], 0x4df);
+			fcn_00534210(0, 6, (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], o[4], 0x4df);
 		}
 	}
 }

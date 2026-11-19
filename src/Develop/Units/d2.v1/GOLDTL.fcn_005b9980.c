@@ -1,10 +1,9 @@
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 extern int g_100f1dc;
-extern int d2_CurrentElementId;
 
 extern int __cdecl fcn_0050c490(int a0, int a1);
 extern int __cdecl io_FormatTextBuffer(char *a0, char *a1, ...);

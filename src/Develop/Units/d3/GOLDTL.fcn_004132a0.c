@@ -1,8 +1,7 @@
 
 
 #include "Develop/Units/d3/d3_camera.h"
-extern float d3_ViewportCenterX;
-extern float g_1052bc8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_10432a4;
 float* __stdcall fcn_005ebbb9(float* out, const float* in);
 void __cdecl fcn_004518a0(float* v);

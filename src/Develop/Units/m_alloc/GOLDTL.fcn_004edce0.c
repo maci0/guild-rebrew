@@ -2,7 +2,7 @@
 
 #include "g_772f90.h"
 
-extern int ahm_PlayerPrototypeCount;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Draw772* g_772fdc;
 extern int g_772fe0;
 extern Rec772fe4* g_772fe4;

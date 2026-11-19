@@ -23,7 +23,7 @@ typedef struct {
     char unbekannt_020[0x58 - 0x20];
 } D3_OBJ_ANIM_FRAME;
 
-extern int d3_CameraAnimating;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d3_ActiveCameraAnimation;
 #include "Develop/Units/d3/d3_camera.h"
 int __cdecl fcn_004339e0(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_FRAME*);

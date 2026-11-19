@@ -20,7 +20,7 @@ void __cdecl fcn_004cfc40(char* owner, int a2, int arg)
 
 	for (i = 0; i < 16; i++) {
 		if (g_9b4900[i].ticks == 0) {
-			g_9b4900[i].ticks = (int) (a2 / (*(float*) (owner + 0x1c) * g_6640e8));
+			g_9b4900[i].ticks = (int) (a2 / (*(float*) (owner + 0x1c) * 0.01));
 			g_9b4900[i].owner = owner;
 			g_9b4900[i].speed = 64.0f;
 			g_9b4900[i].arg = arg;

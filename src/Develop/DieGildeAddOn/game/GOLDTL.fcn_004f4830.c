@@ -18,7 +18,7 @@ int __cdecl fcn_004f4830(int idx, void* dst)
 }
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004f5110(char* buf, int k);
@@ -36,7 +36,7 @@ int __cdecl fcn_004f48e0(char* s)
 		return 0;
 	}
 	*(int*) (g_68ff68 + *(unsigned char*) (s + 4) * 36 + 0x18) = *(int*) (s + 5);
-	if (*(int*) (g_7f4ca0 + g_774970 * 0x21c + 4) != *(int*) s) {
+	if (((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id != *(int*) s) {
 		o = gm_LookupEntityRecordById(*(int*) s);
 		if (o != 0) {
 			fcn_004f5110(buf, *(unsigned char*) (s + 4));

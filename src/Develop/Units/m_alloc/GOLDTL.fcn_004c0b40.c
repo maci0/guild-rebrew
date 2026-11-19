@@ -12,7 +12,7 @@ struct snd_4c0b40 {
 };
 // SIZE 0x10
 
-extern char* g_772d34;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_004c24c0(float, int);
 int __cdecl fcn_00423670(char**, int, int);

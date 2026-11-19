@@ -1,7 +1,7 @@
 
 
 
-extern int g_6b7f90;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_005eaad0(void);
 __declspec(dllimport) int __stdcall AIL_startup(void);
 __declspec(dllimport) char* __stdcall AIL_last_error(void);

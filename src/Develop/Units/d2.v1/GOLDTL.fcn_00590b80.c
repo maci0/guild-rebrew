@@ -1,4 +1,5 @@
 #include "client_data.h"
+#include "Develop/Units/d2.v1/d2_win.h"
 /*
  * Rebuild the trade-goods tooltip list for object a0: item name, weight,
  * quality bar and the "contains" product rows, then place the window.
@@ -59,11 +60,11 @@ int __cdecl fcn_00590b80(int a0)
 	}
 	fcn_00471b60(win);
 	n = g_1038144[win].i[0];
-	val = *(int*) ((char*) &g_1015f40[n] + 0xc);
-	if (*(int*) ((char*) &g_1015f40[n] + 0x4) + val > g_1040494 - 0x10) {
+	val = ((D2_WIN*) g_1015f40)[n].width;
+	if (((D2_WIN*) g_1015f40)[n].left + val > g_1040494 - 0x10) {
 		fcn_00469c40(g_1040494 - 0x10 - val,
-				*(int*) ((char*) &g_1015f40[n] + 0x8),
-				*(int*) ((char*) &g_1015f40[n] + 0x27c));
+				((D2_WIN*) g_1015f40)[n].top,
+				((D2_WIN*) g_1015f40)[n].slot);
 	}
 	d2_SetForm(0, 2);
 	fcn_0046f740(0, 0, a0 + 0xdf, d2_CurrentWindowId);

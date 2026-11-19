@@ -129,8 +129,8 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 	d2_SetForm(h, 2);
 	x = ((struct s_1015f4c*) g_1015f4c)[d2_CurrentWindowId].x;
 	f = (float) *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2) * 0.023809524f;
-	if (!(f < g_662a98)) {
-		f = g_662a98;
+	if (!(f < 5.0f)) {
+		f = 5.0f;
 	}
 	found = fcn_0046f740(x / 2 - 0x18, 4, (int) ((float) yoff[a2] + f), d2_CurrentWindowId);
 	fcn_00534160(x / 2 - 0x23, 0x3c, *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2), 0x4df);

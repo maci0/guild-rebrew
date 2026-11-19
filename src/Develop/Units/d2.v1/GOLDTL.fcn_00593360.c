@@ -16,7 +16,7 @@ extern unsigned char g_779c6b;
 extern unsigned char g_779c71;
 extern char g_779c72[];
 extern char g_779c82[];
-extern char g_6811b0[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004ce190(int);
 int __cdecl d2_SetForm(int, int);

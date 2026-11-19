@@ -90,7 +90,7 @@ void __cdecl fcn_00548d50(void)
 	m.amount = *(int*) (pick + 0x69) + amount;
 	if (m.amount <= 0) {
 		n = fcn_0050cf50(pick, 0x64);
-		m.amount = (int) ((gm_RandomFloat01() + g_6628a0) * n);
+		m.amount = (int) ((gm_RandomFloat01() + 1.0f) * n);
 	}
 	m.mode = 2;
 	fcn_004c5530(&m);

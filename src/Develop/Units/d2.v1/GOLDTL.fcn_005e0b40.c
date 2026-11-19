@@ -3,13 +3,12 @@
 #include <string.h>
 
 extern char* g_1015ea0;
-extern int d2_FontHeight;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_102d150[];
 extern char g_102d29c[];
 extern int main_LoopFlags;
 extern char g_14cf950;
 #include "client_dialog_state.h"
-extern int g_14ce8e0;
 extern int tp_d2_SelectedControl;
 
 int __cdecl fcn_00467240(int, int, int, int, int);

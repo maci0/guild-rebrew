@@ -14,12 +14,10 @@
 
 extern int evt_LastGfxScriptId;
 extern int g_67a370;
-extern int d3_CameraAnimating;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d3_ActiveCameraAnimation;
 extern int d2_ScreenHeight;
 extern int g_1040494;
-extern int g_14ce8e0;
-extern int d2_SuppressOverlay;
 extern int g_774654;
 extern int g_7746a0;
 

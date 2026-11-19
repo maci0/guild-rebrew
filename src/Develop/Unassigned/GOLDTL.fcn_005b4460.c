@@ -1,6 +1,6 @@
 
 
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
 void __cdecl d2_CreateScrollPerga(void);

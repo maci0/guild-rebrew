@@ -2,7 +2,6 @@ extern float g_662a18;
 extern float g_662a68;
 extern float g_662918;
 extern double g_662908;
-extern double g_662950;
 extern double g_662ad8;
 extern double g_662ae0;
 extern double g_662ae8;
@@ -35,7 +34,7 @@ unsigned char __cdecl fcn_00417570(char* obj, int now)
 			*(float*) (rec + 0x3c) = (float) (*(float*) (rec + 4) * f1 + *(float*) (rec + 0x3c));
 			*(float*) (rec + 0x40) = (float) (*(float*) (rec + 8) * f1 + *(float*) (rec + 0x40));
 			*(float*) (rec + 0x10) = fv = (float) (*(float*) (rec + 0x10) - *(float*) (obj + 4) * f1);
-			if (g_662950 < fv) {
+			if (0.0 < fv) {
 				*(unsigned char*) (rec + 0x4f) = (unsigned char) (int) fv;
 			} else {
 				*(unsigned char*) (rec + 0x51) = flags & 0xfe;

@@ -10,14 +10,12 @@ typedef struct {
 } View;
 
 extern int d3_ActiveCameraAnimation;
-extern int d3_CameraAnimating;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_14ce880[3];
 extern float g_7e3a40[3];
 extern float d3_CameraTargetRotation[3];
 #include "Develop/Units/d3/d3_camera.h"
-extern int g_774650;
 #include "client_dialog_state.h"
-extern int g_774658;
 extern int g_77465c;
 extern char* g_7746a8;
 extern int g_7e2a9c;

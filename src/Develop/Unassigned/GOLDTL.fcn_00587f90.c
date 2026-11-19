@@ -2,7 +2,7 @@
 
 
 extern int g_100f1dc;
-extern int d2_CurrentElementId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf732;
 
 int __cdecl fcn_00587f90(char* o)

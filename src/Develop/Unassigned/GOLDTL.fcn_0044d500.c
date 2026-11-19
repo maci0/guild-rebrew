@@ -16,7 +16,7 @@ void __cdecl fcn_0044d500(int unused, char* s)
 {
 	char* t;
 
-	t = fcn_0064f026(0, g_662d18);
+	t = fcn_0064f026(0, " ");
 	(*(Rec38**) (s + 0x20))[*(int*) (s + 0x18)].a = -1;
 	(*(Rec38**) (s + 0x20))[*(int*) (s + 0x18)].b = fcn_0064eeec(t);
 	*(int*) (s + 0x18) += 1;

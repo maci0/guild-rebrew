@@ -31,7 +31,6 @@ extern float g_6628a8;			/* 0x006628a8 */
 extern float g_6628a0;			/* 0x006628a0 */
 extern float g_662cf8;			/* 0x00662cf8 */
 extern double g_662908;			/* 0x00662908 */
-extern double g_662950;			/* 0x00662950 */
 extern int d2_FontHeight;			/* 0x01015ea4 */
 extern int d2_CurrentElementId;			/* 0x0067d370 */
 extern int d2_CurrentFont;			/* 0x0067d378 */
@@ -322,7 +321,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 			else {
 				f.w0.b.v00 = 0xdc - (int) ((ratio - 1.0) * 194.0);
 				f.w0.b.v01 = 0xdc - (int) ((ratio - 1.0) * 135.0);
-				f.w0.b.v02 = (int) ((ratio - 1.0) * g_662950);
+				f.w0.b.v02 = (int) ((ratio - 1.0) * 0.0);
 			}
 			fcn_00479e00((unsigned char) f.w0.b.v00,
 				     (unsigned char) f.w0.b.v01,
@@ -485,7 +484,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 					sprintf(f.buf, str_67d43c,
 						(int) ((float) f.v30 * g_662cf8
 						       / (float) f.v10
-						       + g_662908));
+						       + 0.5));
 				}
 				else {
 					sprintf(f.buf, str_67d444, f.v30);

@@ -9,14 +9,14 @@
 
 // SIZE 0xe
 
-typedef struct {
-	int pad0;
-	int f4;
-	char pad8[0x214];
-} Ent5b9d;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
 
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -48,7 +48,7 @@ int __cdecl fcn_005b9df0(int idx, char* p, char* q, char* r)
 	if (fcn_0057eba0(0x24, r, 0, 0) == 1) {
 		memset(msg, 0, sizeof(msg));
 		msg[4] = 0xf;
-		*(int*) (msg + 8) = ((Ent5b9d*)g_7f4ca0)[idx].f4;
+		*(int*) (msg + 8) = ((ENTITY_RECORD*)g_7f4ca0)[idx].entity_id;
 		*(int*) (msg + 0xc) = -1;
 		msg[0x36] = 2;
 		*(pos14_7f4c00*) (msg + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
@@ -62,7 +62,7 @@ int __cdecl fcn_005b9df0(int idx, char* p, char* q, char* r)
 		if (p[0x28] != 0) {
 			fcn_0050de80(p, info);
 			res = fcn_0050ddf0(*(int*) (info + 0xb0), p[0x28]);
-			fcn_004c51a0(-1, ((Ent5b9d*)g_7f4ca0)[idx].f4, g_773d75, res);
+			fcn_004c51a0(-1, ((ENTITY_RECORD*)g_7f4ca0)[idx].entity_id, g_773d75, res);
 		}
 		if (idx == g_774970) {
 			fcn_0057e880(0x24, r, 0, 0);

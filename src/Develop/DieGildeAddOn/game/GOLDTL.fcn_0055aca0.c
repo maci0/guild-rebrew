@@ -1,18 +1,19 @@
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
 
 
 #pragma pack(push, 2)
-typedef struct {
-	int day;
-	unsigned short hour;
-	int min;
-	int sec;
-} Time;
+
+
+
+
+
+
 // SIZE 0xe
 #pragma pack(pop)
 
 typedef struct {
 	char pad0[0x52];
-	Time t;
+	GAME_TIMESTAMP t;
 	char pad60[0x10];
 	int state;
 	char pad74[4];
@@ -34,7 +35,7 @@ void __cdecl fcn_00546190(Ent *);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
 void __cdecl fcn_004e97f0(int, int);
-void __cdecl fcn_00500bb0(Time *, int, int, int);
+void __cdecl fcn_00500bb0(GAME_TIMESTAMP *, int, int, int);
 int __cdecl fcn_004c5620(int, Ent *);
 int __cdecl fcn_004e9530(int);
 int __cdecl fcn_004e9730(int);
@@ -61,7 +62,7 @@ void __cdecl fcn_0055aca0(Ent *e)
 		if (e->b0 == 0) {
 			fcn_00500bb0(&e->t, 0x18, 0, 0);
 			e->t.hour = 0x11;
-			e->t.min = 0;
+			e->t.minute = 0;
 			e->ac = 0;
 			e->b0 = 0x1b;
 			e->b4 = -1;
@@ -73,7 +74,7 @@ void __cdecl fcn_0055aca0(Ent *e)
 		if (e->ac == 0) {
 			fcn_00500bb0(&e->t, 0x18, 0, 0);
 			e->t.hour = 0x11;
-			e->t.min = 0;
+			e->t.minute = 0;
 			e->ac = 0;
 			e->b0 = 0x1b;
 			e->b4 = -1;
@@ -115,7 +116,7 @@ void __cdecl fcn_0055aca0(Ent *e)
 			n++;
 		}
 		if (n == 2) {
-			e->t = (*(Time*)&gm_GameTime);
+			e->t = (*(GAME_TIMESTAMP*)&gm_GameTime);
 			fcn_00500bb0(&e->t, 0, 5, 0);
 			e->wait = fcn_004c5620(0, e);
 			return;
@@ -124,6 +125,6 @@ void __cdecl fcn_0055aca0(Ent *e)
 	default:
 		return;
 	}
-	e->t = (*(Time*)&gm_GameTime);
+	e->t = (*(GAME_TIMESTAMP*)&gm_GameTime);
 	e->wait = fcn_004c5620(1, e);
 }

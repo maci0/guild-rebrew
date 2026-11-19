@@ -17,7 +17,7 @@ typedef struct
 // SIZE 0x50
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int g_14aad38;
 extern int g_14aad18;
 extern int g_14aacf8;
@@ -39,16 +39,16 @@ void __cdecl fcn_005aac20(void)
 	int r;
 	char lvl;
 
-	r = fcn_004eb320(g_7f4ca0 + g_774970 * 540);
+	r = fcn_004eb320((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]);
 	if (r != 1) {
 		if (r == -1) {
 			fcn_00526120(g_14aad38, 0);
 			return;
 		}
-		fcn_00525f60(g_7f4ca0 + g_774970 * 540, 8);
+		fcn_00525f60((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 8);
 		return;
 	}
-	lvl = g_7f4ca0[g_774970 * 540 + 0x169];
+	lvl = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_165[4];
 	if (lvl == 0x1e) {
 		memset(&q, 0, sizeof(q));
 		q.x4 = 0xc00;

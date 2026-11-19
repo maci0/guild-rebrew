@@ -1,6 +1,6 @@
 #include "Develop/Units/d3/d3_object.h"
 extern int g_67a370;
-extern int g_773dd8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 // SIZE 0x84
 struct list_52dd80 {

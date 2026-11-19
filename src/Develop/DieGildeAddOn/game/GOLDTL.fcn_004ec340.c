@@ -1,7 +1,7 @@
 
 
 
-extern float g_662910;
+
 extern float g_6628a8;
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
@@ -27,7 +27,7 @@ float __cdecl fcn_004ec340(unsigned short* p, int kind)
 		if (recs[i].mplayerid != *(int*) (p + 2) && recs[i].mplayerid != -1) {
 			q = gm_LookupEntityRecordById(recs[i].mplayerid);
 			if (q != 0) {
-				sum += fcn_0050f980(*p, *q, 1) * g_662910;
+				sum += fcn_0050f980(*p, *q, 1) * 0.01f;
 				count++;
 			}
 		}

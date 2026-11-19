@@ -24,16 +24,16 @@ typedef struct
 
 extern char g_7f4ca0[];
 #include "client_packet_builder.h"
-#pragma pack(2)
-typedef struct
-{
-	int t;
-	unsigned short hour;
-	unsigned int f6;
-	unsigned int f10;
-} fcn_004ff210_Stamp;
+#include "client_types.h"
+
+
+
+
+
+
+
 // SIZE 0xe
-#pragma pack()
+
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -70,7 +70,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 			*(int*) (msg + 8) = e->h;
 			*(int*) (msg + 0xc) = -1;
 			msg[0x36] = 2;
-			*(fcn_004ff210_Stamp*) (msg + 0x28) = (*(fcn_004ff210_Stamp*)&gm_GameTime);
+			*(pos14_7f4c00*) (msg + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 			*(int*) (msg + 0x58) = e->h;
 			fcn_004c5530(msg);
 			return 0.0f;
@@ -96,7 +96,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 			*(int*) (msg + 8) = e->h;
 			*(int*) (msg + 0xc) = -1;
 			msg[0x36] = 2;
-			*(fcn_004ff210_Stamp*) (msg + 0x28) = (*(fcn_004ff210_Stamp*)&gm_GameTime);
+			*(pos14_7f4c00*) (msg + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 			*(int*) (msg + 0x58) = e->h;
 			fcn_004c5530(msg);
 			return 0.0f;

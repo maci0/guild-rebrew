@@ -341,7 +341,7 @@ fmt:
 		if (v28 > 1 || v28 == 0) {
 			v32 = 2;
 		}
-		fcn_0064d41a(sbuf, (char*)0x67d444, v28);
+		fcn_0064d41a(sbuf, "%i", v28);
 		v04 = -1;
 		v08 = ((unsigned)strlen(sbuf) - 1) / 3;
 		v0c = (int)strlen(sbuf);
@@ -413,7 +413,7 @@ fmt:
 		}
 		v24 = *(int*)ap;
 		ap += 4;
-		fcn_0064d41a(S.work, (char*)0x67d444, v24);
+		fcn_0064d41a(S.work, "%i", v24);
 	join:
 		memmove(S.text + text_index + strlen(S.work) - 1,
 			S.text + text_index + 1,

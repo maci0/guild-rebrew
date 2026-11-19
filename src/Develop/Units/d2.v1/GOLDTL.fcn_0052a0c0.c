@@ -1,14 +1,15 @@
 
 
 // SIZE 0x3cc
-typedef struct {
-	char pad0[0x274];
-	int mode;
-	char pad278[0x3b8 - 0x278];
-	int h0;
-	int h1;
-	char pad3c0[0x3cc - 0x3c0];
-} Slot;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
+
 
 // SIZE 0x2f4
 typedef struct {
@@ -81,13 +82,13 @@ void __cdecl fcn_0052a0c0(int unused, char arg)
 		d2_SetForm(g_6a25b4, 2);
 		id = fcn_00472250(g_6a25b4, 2, 0);
 		((Ent*)g_1015ea0)[id].f1d0 = 3;
-		((Slot*)g_1015f40)[d2_CurrentWindowId].h0 = id;
+		*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0x10] = id;
 		((Ent*)g_1015ea0)[id].owner = owner;
 		id = fcn_00472250(g_6a25b4, 2, 1);
 		((Ent*)g_1015ea0)[id].f1d0 = 3;
-		((Slot*)g_1015f40)[d2_CurrentWindowId].h1 = id;
+		*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0x14] = id;
 		((Ent*)g_1015ea0)[id].owner = owner;
-		((Slot*)g_1015f40)[owner].mode = 0x4e;
+		*(int*) &((D2_WIN*)g_1015f40)[owner].pad3c[0x238] = 0x4e;
 		if (g_6a25b4 != -1) {
 			if (g_6a25b8 != -1) {
 				fcn_00471af0(g_6a25b8, 0);

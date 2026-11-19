@@ -5,12 +5,10 @@ extern void __cdecl sub_64ed28(void *, int, int, void *);
 extern void __cdecl sub_64e1fd(void *);
 extern void __cdecl sub_41ddd0(unsigned long);
 #include "GOLDTL.txt_OpenText_gconf.h"
-extern char txt_TextBanks[][0x74];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1052f00[];
 extern char g_1053000[][0x50];
 extern char* txt_TextEntries[];
-extern int g_11bb000[];
-extern char g_6790b0[];
 extern char g_679888[];
 __declspec(dllimport) int __stdcall MessageBoxA(void*, const char*, const char*, unsigned int);
 

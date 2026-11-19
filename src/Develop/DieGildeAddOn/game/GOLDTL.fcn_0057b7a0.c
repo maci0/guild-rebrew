@@ -4,15 +4,15 @@
 #include <string.h>
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int handle;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 extern unsigned char g_773d75;
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -81,7 +81,7 @@ void __cdecl fcn_0057b7a0(char* e)
 					io_FormatTextBuffer(buf, 0x414b, 0x229, *(unsigned short*) sel * 2 + 0x9a8, *(int*) (o + 0x16c));
 					break;
 				}
-				he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle, -1, buf, 0, 0x5f2, *(int*) (p + 1),
+				he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, buf, 0, 0x5f2, *(int*) (p + 1),
 				    *(int*) (q + 2), 0, "_NACHRICHTEN_FRIEDHOF_06");
 			}
 		}

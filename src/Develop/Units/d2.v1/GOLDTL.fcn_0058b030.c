@@ -32,7 +32,7 @@ extern char* g_1015ea0;
 extern char* lpObjektePROT;
 extern int g_665f58[4];
 extern int g_665f84[4];
-extern char g_6811b0[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);

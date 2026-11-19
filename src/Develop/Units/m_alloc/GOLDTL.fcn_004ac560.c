@@ -5,7 +5,7 @@
 #include "Develop/Units/m_alloc/m_alloc.h"
 
 extern char g_6b5c60[];
-extern int main_Instance;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 typedef struct HistRec {
 	int id;

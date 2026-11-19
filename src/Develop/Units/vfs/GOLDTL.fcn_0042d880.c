@@ -2,7 +2,7 @@
 
 struct VFS_DIR;
 extern struct VFS_DIR* g_6b7fdc;
-extern int txt_EntryCount;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 extern int __cdecl CloseVfsStream(void* stream);
 extern int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);

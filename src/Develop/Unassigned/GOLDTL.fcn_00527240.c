@@ -1,12 +1,5 @@
-extern int g_6a2578;
-extern int g_6a257c;
-extern int g_6a2580;
-extern int g_6a2584;
-extern int g_6a2588;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6a259c;
-extern int g_6a2590;
-extern int g_6a2594;
-extern int g_6a25a0;
 extern int g_6a25a4;
 
 

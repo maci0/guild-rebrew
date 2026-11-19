@@ -76,5 +76,5 @@ void __cdecl fcn_004e4730(char* a1)
 		fcn_00473150((*(int*)&g_772f50));
 		(*(int*)&g_772f50) = 0;
 	}
-	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x5a, 0xa);
+	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x5a, 0xa);
 }

@@ -2,11 +2,10 @@ extern char g_68116c[];
 extern char g_681164[];
 extern unsigned char g_6a375c;
 signed char g_6a3440 = 254;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
-extern int d2_CurrentElementId;
 extern int main_LoopFlags;
 
 int __cdecl fcn_00470820(int, int, char*);

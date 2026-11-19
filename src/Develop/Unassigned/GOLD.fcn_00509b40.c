@@ -1,5 +1,5 @@
 extern unsigned char* g_7e3f30;
-extern float g_662910;
+
 extern char* g_item_def_table;
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 float __cdecl fcn_00508820(int, int);
@@ -61,5 +61,5 @@ int __cdecl fcn_00509b40(unsigned char* a0, int scale)
 			}
 		}
 	}
-	return (int) (acc * (scale * g_662910));
+	return (int) (acc * (scale * 0.01f));
 }

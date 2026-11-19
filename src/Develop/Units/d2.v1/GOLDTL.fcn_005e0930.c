@@ -20,6 +20,7 @@ extern int g_14ce8d8;
 extern int d2_HoveredWindow;
 extern char* g_1015ea0;
 #include "client_types.h"
+#include "Develop/Units/d2.v1/d2_win.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern int d2_CurrentElementId;
 extern char g_774964;
@@ -75,8 +76,8 @@ int __cdecl fcn_005e0930(void)
 				    && (d2_CurrentElementId == items[i].id || d2_HoveredWindow == items[i].slot
 				        || (d2_HoveredWindow != -1
 				            && *(char**) (g_1015ea0
-				                   + *(int*) (((char*)g_1015f40) + d2_HoveredWindow * 0x3cc + 0x27c) * 0x2f4 + 0x40)
-				                == ((char*)g_1015f40) + items[i].slot * 0x3cc))) {
+				                   + ((D2_WIN*)g_1015f40)[d2_HoveredWindow].slot * 0x2f4 + 0x40)
+				                == (char*) &((D2_WIN*)g_1015f40)[items[i].slot]))) {
 					goto found;
 				}
 			}

@@ -317,8 +317,8 @@ void __cdecl fcn_00569ff0(char* e)
 				fv = 0.001f;
 			} else {
 				num = *(unsigned char*) (cnt2 + 0x37);
-				fv = (float) num * g_6640e8;
-				if (g_662a2c > fv) {
+				fv = (float) num * 0.01;
+				if (0.001f > fv) {
 					fv = 0.001f;
 				}
 			}

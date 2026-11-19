@@ -1,4 +1,4 @@
-extern int d2_CurrentElementId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int main_LoopFlags;
 extern int g_100f1dc;
 #include "client_dialog_state.h"

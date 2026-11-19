@@ -28,7 +28,7 @@ int __cdecl fcn_004b6af0(int* a0)
 	}
 	v = 0xffff & (fcn_0042e410)(4);
 	d = (double) v + 1.0;
-	v = (int) ((double) fcn_0050dac0(*(short*) ent) * d * g_6640e8);
+	v = (int) ((double) fcn_0050dac0(*(short*) ent) * d * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a0 + 4) + 0x12e7, v);
 	fcn_004c51a0(*a0, -1, g_773d75, v);
 	fcn_00545d40(1[ent], ent[1], buf, 0x100 < strlen(buf), 0x603, 0);

@@ -1,7 +1,7 @@
 
 
 
-extern float g_6628cc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);

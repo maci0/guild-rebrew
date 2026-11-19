@@ -22,9 +22,7 @@ typedef struct {
 } View;
 
 #include "Develop/Units/d3/d3_camera.h"
-extern float d3_CameraHeightFraction;
-extern float g_6a2558;
-extern float g_6a2560;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d3_ActiveCameraAnimation;
 extern float g_774730;
 

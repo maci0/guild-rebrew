@@ -1,14 +1,14 @@
 
 
-#pragma pack(push, 2)
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
 // SIZE 0xe
-typedef struct {
-	int day;
-	unsigned short hour;
-	int min;
-	int sec;
-} Time499a;
-#pragma pack(pop)
+
+
+
+
+
+
+
 
 // SIZE 0xf8
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
 	int owner;
 	int target;
 	char pad10[0x18];
-	Time499a at;
+	GAME_TIMESTAMP at;
 	unsigned char code;
 	char pad37[0x21];
 	unsigned char who;
@@ -49,14 +49,14 @@ void __cdecl fcn_004c4570(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_00500bb0(Time499a*, int, int, int);
+void __cdecl fcn_00500bb0(GAME_TIMESTAMP*, int, int, int);
 void __cdecl fcn_004c5530(Msg499a*);
 
 #pragma optimize("y", off)
 int __cdecl fcn_00499ad0(char* e)
 {
 	Msg499a m;
-	Time499a st;
+	GAME_TIMESTAMP st;
 	int ret;
 	char* s;
 	char* r;
@@ -77,7 +77,7 @@ int __cdecl fcn_00499ad0(char* e)
 	fcn_004c4570(1, 1, 0xd, &ret);
 	fcn_004c5360();
 	fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0, 0x4000);
-	st = (*(Time499a*)&gm_GameTime);
+	st = (*(GAME_TIMESTAMP*)&gm_GameTime);
 	fcn_00500bb0(&st, gm_RandomMod(4) + 1, gm_RandomMod(8) * 7, 0);
 	if (e[2] == 5) {
 		i = 0;

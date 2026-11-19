@@ -3,10 +3,9 @@
 
 extern char* g_77255c;
 extern int d2_CurrentWindowId;
-extern int cut_EventLoopFlags;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc;
 #include "client_dialog_state.h"
-extern int d2_CurrentElementId;
 
 int __cdecl fcn_004e8af0(char*, void*);
 int __cdecl fcn_004e8b40(int, void*);

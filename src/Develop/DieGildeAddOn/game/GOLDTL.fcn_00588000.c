@@ -18,15 +18,15 @@ struct deal {
 };
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int owner;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 extern char g_77dda0[];
 extern char* gm_CityEntity;
 extern int g_774a1c;
@@ -73,7 +73,7 @@ void __cdecl fcn_00588000(char* w)
 			} else {
 				io_AppendText((int) "$C");
 			}
-			if (*(unsigned short*) (o + 0x27) != 0xffff && &((struct house*)g_7f4ca0)[*(unsigned short*) (o + 0x27)] != ((struct house*)gm_CityEntity)) {
+			if (*(unsigned short*) (o + 0x27) != 0xffff && &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (o + 0x27)] != ((ENTITY_RECORD*)gm_CityEntity)) {
 				io_AppendText(0x406d, *(unsigned short*) (o + 0x27), o, msg);
 			} else {
 				io_AppendText(0x406c, o, msg);

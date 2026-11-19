@@ -1,4 +1,5 @@
 #include "client_types.h"
+#include "Develop/Units/d2.v1/d2_win.h"
 
 extern Obj_1038140 g_1038140[];
 extern Win_1015f40 g_1015f40[0x60];
@@ -34,7 +35,7 @@ void __cdecl fcn_00471490(int k)
 	int flags;
 	int ybase;
 	int col;
-	char* win;
+	D2_WIN* win;
 	int row;
 	int w;
 	int right;
@@ -66,15 +67,15 @@ void __cdecl fcn_00471490(int k)
 		}
 		fcn_004767f0(0, 0, *(int*) (pp[0] + 4), *(int*) (pp[0] + 8), *(int*) (pp[0] + 0x20), 0, 0, surf);
 		for (row = 0; row < *(int*) (base + 0x184); row++) {
-			win = (char*) &g_1015f40[((int*) (base + 4))[row]];
-			oh2 = *(int*) (win + 8);
-			oh1 = *(int*) (win + 4);
-			*(int*) (win + 8) = ybase + oh2;
+			win = &((D2_WIN*)g_1015f40)[((int*) (base + 4))[row]];
+			oh2 = win->top;
+			oh1 = win->left;
+			win->top = ybase + oh2;
 			fcn_0046dff0(((int*) (base + 4))[row], surf);
-			*(int*) (win + 4) = oh1;
-			*(int*) (win + 8) = oh2;
-			for (col = 0; col < *(int*) (win + 0x2c); col++) {
-				obj = g_1015ea0 + ((int*) *(char**) (win + 0x28))[col] * 0x2f4;
+			win->left = oh1;
+			win->top = oh2;
+			for (col = 0; col < win->count; col++) {
+				obj = g_1015ea0 + win->children[col] * 0x2f4;
 				sx = *(int*) (obj + 0x10) - *(int*) (base + 0x188);
 				sy = ybase - *(int*) (base + 0x18c) + *(int*) (obj + 0x14);
 				if (*(int*) (obj + 4) != 0) {

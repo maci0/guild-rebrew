@@ -2,8 +2,7 @@
 
 
 extern int* g_665f08;
-extern int d2_CurrentElementId;
-extern int d2_TutorialActive;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc;
 
 int __cdecl fcn_00580960(void)

@@ -1,7 +1,7 @@
 
 
 
-extern char g_85ab90[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 float __cdecl eval_ObjektPreis2Credits(int, int);
 

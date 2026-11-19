@@ -7,7 +7,7 @@ void __cdecl m_FreeTracked(void* p);
 int __cdecl _ftol(void);
 
 extern char* g_1052ba4;
-extern char g_1052a40[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* The reference frame keeps EBP; /O2 /Gd omits the frame pointer, so restore
  * it here instead of overriding the locked CFLAGS. */

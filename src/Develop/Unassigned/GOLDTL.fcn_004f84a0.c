@@ -25,7 +25,7 @@ int __cdecl fcn_004f84a0(char* a, int* b)
 		return 2;
 	}
 	if (*b == 1 && a[2] == 6) {
-		io_FormatTextBuffer(b + 5, g_679060, 0x1d9f);
+		io_FormatTextBuffer(b + 5, "%s", 0x1d9f);
 	}
 	return 2;
 }

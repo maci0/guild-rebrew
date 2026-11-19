@@ -119,7 +119,7 @@ label_49df97:
             if ((float)rv + v15[6] < g_664368)
                 return 0;
         }
-        if ((float)fcn_0050d170(v19) * g_6628d8 <= (float)v7)
+        if ((float)fcn_0050d170(v19) * 0.4f <= (float)v7)
         {
             a3->type = 4;
             a3->a = v19;

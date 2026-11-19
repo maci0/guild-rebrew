@@ -1,10 +1,9 @@
 struct VFS_DIR;
 #include "g_772f90.h"
-extern int ahm_PlayerPrototypeCount;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Draw772* g_772fdc;
 extern int g_772fe0;
 extern Rec772fe4* g_772fe4;
-extern char g_6790b0[];
 extern struct VFS_DIR* g_6b7fdc;
 void* __cdecl vfs_Tfopen(char* path, char* mode, struct VFS_DIR* root);
 unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);

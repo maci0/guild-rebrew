@@ -4,15 +4,15 @@
 typedef Btn_776c60 Btn;
 // SIZE 0x8
 
-typedef struct
-{
-	char pad0[0x3a8];
-	int x3a8;
-	int x3ac;
-	int x3b0;
-	int x3b4;
-	char pad3b8[0x14];
-} Win;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
+
 // SIZE 0x3cc
 
 extern int g_6abb00;
@@ -62,10 +62,10 @@ void __cdecl fcn_005c67d0(void)
 	fcn_0057e880(0x14, 0, 0, 0);
 	dlg = fcn_00470820(g_1040494 - 0x158, d2_ScreenHeight - 0x108, s_6ac77c);
 	d2_SetForm(dlg, 0);
-	((Win*)g_1015f40)[d2_CurrentWindowId].x3a8 = 0x18;
-	((Win*)g_1015f40)[d2_CurrentWindowId].x3ac = 0x18;
-	((Win*)g_1015f40)[d2_CurrentWindowId].x3b0 = 0x18;
-	((Win*)g_1015f40)[d2_CurrentWindowId].x3b4 = 0x18;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0] = 0x18;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[4] = 0x18;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[8] = 0x18;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[12] = 0x18;
 	d2_SetForm(dlg, 0);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_005c5da0(d2_CurrentWindowId, 0, 0, g_774970, 0x1f3b);

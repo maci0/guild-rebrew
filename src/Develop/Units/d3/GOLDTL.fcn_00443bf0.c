@@ -16,8 +16,7 @@ typedef struct Ctx {
 	float y;
 } Ctx;
 
-extern float d3_ViewportCenterX;
-extern float g_1052bc8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/d3_camera.h"
 extern int g_67a370;
 

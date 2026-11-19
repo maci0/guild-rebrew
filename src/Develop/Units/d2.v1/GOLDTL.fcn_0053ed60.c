@@ -7,18 +7,14 @@ extern int g_10421a0;
 extern int g_10529c8;
 extern short g_14ce8c0;
 extern short g_14ce8c2;
-extern int g_14ce8cc;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
 #include "client_dialog_state.h"
 extern char* g_7746a0;
 extern char* g_7746a4;
-extern int d2_CurrentElementId;
 extern int g_100f1dc;
 extern char* txt_TextEntries[];
-extern char g_7e1d00[];
 extern int main_LoopFlags;
-extern int cut_EventLoopFlags;
 extern unsigned char g_6a375c;
 extern int g_6b7fdc;
 extern int g_14b5e50;

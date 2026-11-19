@@ -1,7 +1,7 @@
 
 
 extern int* g_665f08;
-extern int d2_TutorialActive;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_6a8204[];
 extern char* g_6a8238[];
 extern char g_6a935c[];

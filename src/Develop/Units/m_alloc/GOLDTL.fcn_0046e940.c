@@ -78,7 +78,7 @@ extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern int g_77259c;
 extern int g_67d390;
-extern int d2_DefaultFont;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d3a0;
 
 int __cdecl fcn_004770a0(int* p, int kind);

@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int d2_CurrentElementId;
 extern volatile int g_6b7fac;
 
 extern void __cdecl fcn_004c09b0(void);

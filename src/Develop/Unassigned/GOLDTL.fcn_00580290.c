@@ -4,7 +4,7 @@
 extern int* g_665f08;
 extern unsigned char** g_7749e4;
 extern int g_100f1dc;
-extern int d2_CurrentElementId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
 
 int __cdecl fcn_00423460(int);

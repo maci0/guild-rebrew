@@ -8,13 +8,14 @@ typedef struct {
 	char pad8[0x2bc - 8];
 } Screen;
 
-typedef struct {
-	char pad0[0x10];
-	int height;
-	char pad14[0x27c - 0x14];
-	int id;
-	char pad280[0x3cc - 0x280];
-} Window;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
 
 extern int g_774818;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -147,8 +148,8 @@ int __cdecl main_OpenEngine(void)
 	fcn_0046b4f0();
 	screen = fcn_00470820(0, 0, "Misc\\Loading_main");
 	fcn_00471c00(((Screen*)g_1038144)[screen].image, 3);
-	fcn_00469c40(0, d2_ScreenHeight - ((Window*)g_1015f40)[((Screen*)g_1038144)[screen].window].height - 0x30,
-		((Window*)g_1015f40)[((Screen*)g_1038144)[screen].window].id);
+	fcn_00469c40(0, d2_ScreenHeight - ((D2_WIN*)g_1015f40)[((Screen*)g_1038144)[screen].window].height - 0x30,
+		((D2_WIN*)g_1015f40)[((Screen*)g_1038144)[screen].window].slot);
 	fcn_00471c00(((Screen*)g_1038144)[screen].window, 1);
 	io_AppendText(0x73, g_7e25a0);
 	fcn_00420db0(0, 0);

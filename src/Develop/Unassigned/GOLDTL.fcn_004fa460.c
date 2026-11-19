@@ -23,7 +23,7 @@ int __cdecl fcn_004fa460(void* a1, void* a2)
 		return 2;
 	}
 	if (*(int*) a2 == 1 && *(char*) ((char*) a1 + 2) == 6) {
-		io_FormatTextBuffer((char*) a2 + 0x14, (int) g_679060, 0x1e21);
+		io_FormatTextBuffer((char*) a2 + 0x14, (int) "%s", 0x1e21);
 	}
 	return 2;
 }

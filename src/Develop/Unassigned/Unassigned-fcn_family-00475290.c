@@ -1,7 +1,7 @@
 #include "g_100f200.h"
 
 extern int g_100f804;
-extern int g_67d8d4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern Slot100f200 g_100f200[];
 #include <string.h>
 

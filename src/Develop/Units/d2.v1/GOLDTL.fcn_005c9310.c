@@ -1,13 +1,14 @@
 
 
-typedef struct
-{
-	char pad0[0x18];
-	int x18;
-	char pad1c[0x270];
-	int x28c;
-	char pad290[0x3cc - 0x290];
-} Win;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
+
 // SIZE 0x3cc
 
 typedef struct
@@ -59,8 +60,8 @@ void __cdecl fcn_005c9310(unsigned short* who, int max, Row* rows, int dlg, int 
 		rows[i].icon = fcn_0046f740((((Screen*)g_77255c)->width - w) >> 1, i * 0x80, 0x75a, d2_CurrentWindowId);
 		rows[i].text = fcn_0046f100((((Screen*)g_77255c)->width - w) >> 1, i * 0x80 + 4, w, 0x72, 0x10, d2_CurrentWindowId);
 		rows[i].obj = list[i];
-		((Win*)g_1015f40)[rows[i].text].x28c = 0x56;
-		((Win*)g_1015f40)[rows[i].text].x18 = 0x10;
+		*(int*) &((D2_WIN*)g_1015f40)[rows[i].text].pad280[12] = 0x56;
+		*(int*) &((D2_WIN*)g_1015f40)[rows[i].text].pad14[4] = 0x10;
 		t = gm_SearchTable67(*(int*) (rows[i].obj + 0xac));
 		if (t != 0) {
 			io_AppendText(0x1f41, t, *(int*) (rows[i].obj + 0xb4), *(int*) (rows[i].obj + 0xc0), rows[i].obj + 0xc4);

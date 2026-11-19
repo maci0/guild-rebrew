@@ -1,7 +1,6 @@
 
 
-extern char* sbs_BankManager;
-extern int g_6b7d6c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_678fd0[];
 void __cdecl fcn_00425810(void);
 char* __cdecl m_alloc(int size, char* tag);

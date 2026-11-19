@@ -4,7 +4,7 @@
 
 extern int g_6b86d4;
 extern float g_1040d00[0x400];
-extern int d3_MaxActiveLights;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6b8700;
 extern void* g_6b870c;
 extern int g_6b8704;

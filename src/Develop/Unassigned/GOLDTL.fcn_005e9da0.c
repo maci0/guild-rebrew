@@ -1,7 +1,7 @@
 extern float g_6ad620;
 extern float g_6660f0;
 extern float g_6660e8;
-extern float g_6628cc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1043370;
 extern volatile int g_6b7fac;
 

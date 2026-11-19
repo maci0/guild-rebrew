@@ -1,5 +1,4 @@
-extern char g_662d18[];
-extern char g_662d18[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 char g_67b608[] = "d3_io_a:AGIMaterialBuffer";
 extern char g_67b608[];
 
@@ -13,7 +12,7 @@ void __cdecl fcn_0044d390(int unused, char* s)
 {
 	int n;
 
-	n = fcn_0064eeec(fcn_0064f026(0, g_662d18));
+	n = fcn_0064eeec(fcn_0064f026(0, " "));
 	*(int*) (s + 0xc) = n;
 	*(int*) (s + 8) = 0;
 	if (n > 0) {

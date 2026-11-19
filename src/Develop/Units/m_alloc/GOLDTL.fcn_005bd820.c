@@ -5,8 +5,7 @@ extern unsigned char g_773d75;
 extern char g_868060[];
 extern char g_1015da0[];
 extern char g_6ac3d0[];
-extern int g_778d24;
-extern int g_778d20;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6ab3e0;
 
 void __cdecl fcn_0047ac60(int, int);

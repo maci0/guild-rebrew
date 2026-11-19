@@ -2,7 +2,7 @@
 #include "Develop/Units/m_alloc/m_alloc.h"
 
 extern int g_6b7d70;
-extern int MemUsed;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6b7d7c;
 extern volatile int g_6b7fac;
 extern int __cdecl fcn_00422910(int need);

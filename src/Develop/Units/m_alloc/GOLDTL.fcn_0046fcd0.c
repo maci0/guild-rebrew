@@ -5,10 +5,9 @@ typedef struct
 // SIZE 0x2f4
 
 extern char* g_1015ea0;
-extern int d2_FontHeight;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_ScreenHeight;
 extern int g_1040494;
-extern int d2_DefaultFont;
 extern char g_67d5bc[];
 
 int __cdecl fcn_00469890(void);

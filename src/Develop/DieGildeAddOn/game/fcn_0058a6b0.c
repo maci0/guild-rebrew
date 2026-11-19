@@ -85,7 +85,7 @@ void __cdecl fcn_0058a6b0(char *a0)
     if (sel == 0)
         return;
     tmp = gm_WalkEntityChain(*(unsigned short *) sel) + base;
-    price = (int) (tmp * g_6628ac);
+    price = (int) (tmp * 0.02f);
     dlg = fcn_00470820(0, 0, "Locations\\Domizil\\kabinett");
     d2_SetOverlayAnimation(0, 0);
     fcn_00471b60(dlg);

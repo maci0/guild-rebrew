@@ -1,7 +1,7 @@
 
 
 
-extern int d2_TutorialActive;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int* g_665f08;
 extern volatile int g_6b7fc0;
 

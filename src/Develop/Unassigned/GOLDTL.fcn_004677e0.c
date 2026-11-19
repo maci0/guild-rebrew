@@ -1,7 +1,8 @@
-typedef struct
-{
-	int i[0x3cc / 4];
-} fcn_004677e0_Win;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
 // SIZE 0x3cc
 
 #include "client_types.h"
@@ -15,21 +16,21 @@ int __cdecl fcn_00465eb0(int id, int win);
 /* ADDRESS: GOLDTL 0x004677e0 */
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win)
 {
-	fcn_004677e0_Win* window;
+	D2_WIN* window;
 	int id;
 
 	if (win < 0 || win > 0x60) {
 		return -1;
 	}
-	window = &((fcn_004677e0_Win*)g_1015f40)[win];
-	if (window->i[0x290 / 4] == 0) {
+	window = &((D2_WIN*)g_1015f40)[win];
+	if (window->active == 0) {
 		return -1;
 	}
-	if (window->i[0x2c / 4] >= 0x180) {
+	if (window->count >= 0x180) {
 		ReportClientMessage(s_67d420);
 		return -1;
 	}
-	id = fcn_004675f0(window->i[0x4 / 4] + x, window->i[0x8 / 4] - window->i[0x258 / 4] + y, a3, a4, a5, a6, a7);
+	id = fcn_004675f0(window->left + x, window->top - (*(int*) &window->pad3c[0x21c]) + y, a3, a4, a5, a6, a7);
 	fcn_00465eb0(id, win);
 	return id;
 }

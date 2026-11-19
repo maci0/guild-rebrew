@@ -17,7 +17,7 @@
  * so the compiler cannot share those tails either.
  */
 extern int g_772ea4;		/* 0x00772ea4 */
-extern int g_67a370, g_68b79c, g_772f24; extern double g_6640e8, g_6629f8, g_664128; extern float g_664144;
+extern int g_67a370, g_68b79c, g_772f24; extern double g_6640e8, g_664128; extern float g_664144;
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c6940(void*, int, void*);
@@ -201,14 +201,14 @@ void __cdecl fcn_004d8d00(char* a0)
 					if (fcn_004cefb0(obj, ent34(tgt)) > *(float*)(ent + 0xc))
 						v24 = 0;
 					if (!p->c0c) {
-						if (fcn_004cefb0(obj, ent34(tgt)) > *(float*)(ent + 0xc) * g_6629f8)
+						if (fcn_004cefb0(obj, ent34(tgt)) > *(float*)(ent + 0xc) * 0.1)
 							v24 = 0;
 					}
 				} else {
 					if (fcn_004cf000(obj, p->f14, p->f18) > *(float*)(ent + 0xc))
 						v24 = 0;
 					if (!p->c0c) {
-						if (fcn_004cf000(obj, p->f14, p->f18) > *(float*)(ent + 0xc) * g_6629f8)
+						if (fcn_004cf000(obj, p->f14, p->f18) > *(float*)(ent + 0xc) * 0.1)
 							v24 = 0;
 					}
 				}
@@ -229,12 +229,12 @@ void __cdecl fcn_004d8d00(char* a0)
 						n = gm_RandomMod(0xff) & 0xffff;
 						if (*(int*)(obj + 0x16c) == *(int*)0x772e98)
 							v80 = (int)((double)(unsigned int)*((unsigned char*)ent + 4)
-							    * g_6640e8
+							    * 0.01
 							    * (double)(unsigned int)*((unsigned char*)obj + 0x83)
 							    * *(float*)0x68b798);
 						else
 							v80 = (int)((double)(unsigned int)*((unsigned char*)ent + 4)
-							    * g_6640e8
+							    * 0.01
 							    * (double)(unsigned int)*((unsigned char*)obj + 0x83));
 						if (n <= 0xff - v80)
 							v24 = 0;
@@ -248,7 +248,7 @@ void __cdecl fcn_004d8d00(char* a0)
 						if (tgt)
 							p->f24 = (int)((double)u
 							    * *(float*)(tgt + 0x1c)
-							    * g_6640e8);
+							    * 0.01);
 						else
 							p->f24 = (int)((double)u
 							    * *(double*)0x664f20);

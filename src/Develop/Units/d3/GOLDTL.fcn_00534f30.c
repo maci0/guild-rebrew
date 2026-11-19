@@ -27,7 +27,7 @@ typedef struct {
 } Item;
 
 extern Item g_10382e0[];
-extern int g_7747c4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6a3194[];
 
 void __cdecl d3_RemoveObjectAnim(char* o);

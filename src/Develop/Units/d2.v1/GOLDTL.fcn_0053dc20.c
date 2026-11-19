@@ -25,9 +25,7 @@ extern int __cdecl fcn_005268c0(int a, int b);
 extern int __cdecl fcn_0053c560(int a);
 extern char g_14cf950;
 extern int g_100f1dc;
-extern int g_14ce8e0;
-extern int d2_CurrentElementId;
-extern int d2_SuppressOverlay;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774654;
 extern int g_7e242c;
 extern int g_7e2468;

@@ -78,7 +78,7 @@ void __cdecl fcn_005aaf60(char* a0)
 	m = gm_WalkEntityChain(g_774970) > 1 ? gm_WalkEntityChain(g_774970) : 1;
 	n = gm_WalkEntityChain(*(unsigned short*) (a0 + 0x27)) > 1
 		? gm_WalkEntityChain(*(unsigned short*) (a0 + 0x27)) : 1;
-	cnt = (int) ((total = (float) (m + n)) * g_662910);
+	cnt = (int) ((total = (float) (m + n)) * 0.01f);
 	v = gm_AccumulateTyped2((char*) (g_774970 * 0x21c + (int) g_7f4ca0));
 	if (v >= cnt) {
 		ok = 1;

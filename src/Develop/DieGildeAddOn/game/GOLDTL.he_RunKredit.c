@@ -51,7 +51,7 @@ void __cdecl he_RunKredit(int a0)
 				return;
 			}
 			f = (float) (*(int*) (a0 + 0xb4) *
-			             (*(int*) (a0 + 0xc0) * g_6640e8));
+			             (*(int*) (a0 + 0xc0) * 0.01));
 			time = gm_AccumulateTyped2(n);
 			if ((float) time < f) {
 				time = (int) f;

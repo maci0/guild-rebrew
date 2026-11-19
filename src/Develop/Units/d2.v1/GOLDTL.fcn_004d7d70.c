@@ -19,7 +19,7 @@ extern int g_68bfbc;
 extern int g_68b7a4;
 extern int g_772ea4;
 extern int g_100f1dc;
-extern int d2_CurrentElementId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_68b7a8;
 extern unsigned short* g_772f24;
 #include "client_dialog_state.h"

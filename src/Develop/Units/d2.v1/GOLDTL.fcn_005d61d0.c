@@ -1,11 +1,12 @@
+#include "client_types.h"
 
 
 #include <string.h>
 
-typedef struct
-{
-	char b[14];
-} Name14;
+
+
+
+
 // SIZE 0xe
 
 typedef struct
@@ -16,7 +17,7 @@ typedef struct
 	int x8;
 	int xc;
 	char pad10[0x18];
-	Name14 name;
+	pos14_7f4c00 name;
 	unsigned char x36;
 	char pad37[0x21];
 	int x58;
@@ -41,7 +42,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00525f60(char*, int);
 void __cdecl fcn_004c6ae0(int, int);
 int __cdecl fcn_004c5530(Packet*);
-void __cdecl fcn_00500bb0(Name14*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -50,7 +51,7 @@ void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005d61d0(unsigned short* a1)
 {
 	int dlg;
-	Name14 nm;
+	pos14_7f4c00 nm;
 	Packet pkt;
 	char buf[0x100];
 	int r;
@@ -71,12 +72,12 @@ int __cdecl fcn_005d61d0(unsigned short* a1)
 					pkt.type = 0x4b;
 					pkt.x8 = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
 					pkt.xc = pkt.x8;
-					pkt.name = (*(Name14*)&gm_GameTime);
+					pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 					pkt.x36 = 2;
 					pkt.x5c = *(int*) (a1 + 2);
 					pkt.x58 = pkt.x8;
 					fcn_004c5530(&pkt);
-					nm = (*(Name14*)&gm_GameTime);
+					nm = (*(pos14_7f4c00*)&gm_GameTime);
 					fcn_00500bb0(&nm, 0x18, 0, 0);
 					io_FormatTextBuffer(buf, 0x1d63, &nm, *a1);
 					fcn_00526120(buf, 0);

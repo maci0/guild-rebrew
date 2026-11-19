@@ -35,7 +35,7 @@ void __cdecl fcn_004fc180(void)
 	}
 	if (g_773d50 != g_6628a8 && (*(Blob14*)&gm_GameTime).b > 6 && (*(Blob14*)&gm_GameTime).b < 0x15) {
 		g_773d4c += r * g_99ec14;
-		lim = g_773d50 * g_662ad8;
+		lim = g_773d50 * 0.25;
 		if (g_773d4c < lim) {
 			g_773d4c = (float) lim;
 		}

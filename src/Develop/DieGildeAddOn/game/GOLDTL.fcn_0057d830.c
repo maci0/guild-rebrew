@@ -33,13 +33,13 @@ void __cdecl fcn_0057d830(char* u, int count)
 		return;
 	}
 	n = fcn_0050c710(found, 0x1d, 1);
-	mult = n * g_6652c4 + g_6628a0;
+	mult = n * g_6652c4 + 1.0f;
 	g = gm_GetEntitySkill(h, 2);
 	sq = g * g;
 	for (i = count; i > 0; i--) {
 		*(int*) (u + 0xac) += (int) (((gm_RandomFloat01() + sq) * g_665f00 + g_664f08) * mult) << 5;
 	}
-	if (gm_RandomFloat01() + g_6628a0 < mult) {
+	if (gm_RandomFloat01() + 1.0f < mult) {
 		for (i = 0; i < 4; i++) {
 			if (*(unsigned short*) (u + 0xc8 + i * 2) == 0) {
 				if (gm_RandomFloat01() > 0.4) {

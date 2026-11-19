@@ -29,12 +29,10 @@ extern int g_6b8484;
 extern VECTOR3 g_67bbdc;
 extern VECTOR3 g_6b86c4;
 extern int g_67a370;
-extern int d3_FogColor;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_10425fc;
 extern float g_104329c;
 extern char g_1041d80[];
-extern char* d3_ObjectListHead;
-extern char d3_SceneObjectSentinel[];
 extern int g_6b8300;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);

@@ -8,7 +8,7 @@ double __cdecl cos(double);
 extern float g_1052bbc;
 extern float g_1052bb4;
 extern float g_10432a4;
-extern float d3_ProjectionScaleY;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_1042ce8;
 extern float g_1042fa4;
 extern float g_10529c8;

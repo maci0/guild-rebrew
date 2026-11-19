@@ -1,19 +1,20 @@
-typedef struct IDev IDev;
-// SIZE 0xf8
-typedef struct IDevVtbl {
-	void* slots0[34];
-	long (__stdcall* m88)(IDev*);
-	void* slots8c[15];
-	long (__stdcall* SetRenderState)(IDev*, int, int);
-	void* slotscc[10];
-	long (__stdcall* mf4)(IDev*, int, int);
-} IDevVtbl;
-// SIZE 0x4
-struct IDev {
-	IDevVtbl* v;
-};
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
+typedef long (__stdcall* Scene437160Fn)(D3D_DEVICE_VIEW*);
+typedef long (__stdcall* Texture437160Fn)(D3D_DEVICE_VIEW*, int, int);
 
-extern void* g_6b5de0;
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include "client_types.h"
 extern VECTOR3 g_67bbdc;
 extern float g_1052bd8;
@@ -29,20 +30,20 @@ void __cdecl fcn_00450b20(float a, char* b, int c, int d);
 /* ADDRESS: GOLDTL 0x00437160 */
 void __cdecl fcn_00437160(unsigned char fog, int color, char light)
 {
-	((IDev*)g_6b5de0)->v->m88(((IDev*)g_6b5de0));
-	((IDev*)g_6b5de0)->v->mf4(((IDev*)g_6b5de0), 0, 0);
+	((Scene437160Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_00[34])(((D3D_DEVICE_VIEW*)g_6b5de0));
+	((Texture437160Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0);
 	fcn_00450b20(1.0f, &(*(char*)&g_67bbdc), 0, 0);
 	g_1052bd8 = 1.0f;
 	g_1052bdc = 0;
 	g_1052c40 = 0;
-	((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x1c, fog);
+	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x1c, fog);
 	if (fog) {
-		((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x22, color);
+		((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x22, color);
 	}
-	((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 7, light ? ((*(char *)&g_6b7ff9) != 0) + 1 : 0);
+	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 7, light ? ((*(char *)&g_6b7ff9) != 0) + 1 : 0);
 	if (light) {
-		((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0xe, light && g_6b7ffa == 0);
-		((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x2f, g_6b7ffa ? 0x10 : 0);
+		((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0xe, light && g_6b7ffa == 0);
+		((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x2f, g_6b7ffa ? 0x10 : 0);
 	}
 	g_6b7ffd = fog;
 	g_67a2ac = light;

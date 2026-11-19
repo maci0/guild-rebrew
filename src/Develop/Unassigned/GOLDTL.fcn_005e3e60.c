@@ -1,6 +1,6 @@
 
 
-extern unsigned short ls_SavePreviewPixels[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00475fd0(char*);
 void __cdecl fcn_00476060(char*);

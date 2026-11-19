@@ -5,13 +5,10 @@ extern int d2_CurrentWindowId;
 extern char g_773d75;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
-extern int d2_CurrentElementId;
-extern int g_14ce8d0;
-extern int g_14ce8d8;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_1015ea0;
 extern int g_aed32c;
-extern float g_662910;
+
 extern int g_14a90a0;
 extern int g_14b5874;
 
@@ -128,7 +125,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 			if (g_775348 != 1) {
 				if (!g_775348 && v13 != -1 && d2_CurrentElementId == v13) {
 					v18[0] = fcn_00471f80(v13);
-					fcn_005b1ed0(v3, (float) v18[0] * g_662910);
+					fcn_005b1ed0(v3, (float) v18[0] * 0.01f);
 				}
 			}
 			else {

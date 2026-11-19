@@ -1,4 +1,4 @@
-extern int d3_SelectionBoxActive;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7e4304;
 extern int g_7e4308;
 extern int g_7e430c;

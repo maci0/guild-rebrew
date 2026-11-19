@@ -44,10 +44,8 @@ extern char* ch_ContextCharacters[32];
 extern int g_67a370;
 extern char g_6b5c60[];
 extern char* g_14a97d4;
-extern char* g_772eb4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned short* g_772f24;
-extern int g_68b79c;
-extern char g_9b0e20[];
 
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004d1a80(void);

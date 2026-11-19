@@ -2,7 +2,7 @@
 
 
 extern char g_7f4ca0[];
-extern float g_662910;
+
 extern float g_6628a8;
 extern int g_773d48;
 extern int g_99f7f0;

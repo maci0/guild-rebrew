@@ -27,13 +27,14 @@ typedef struct {
 } Msg;
 
 // SIZE 0x3cc
-typedef struct {
-	char pad0[0x260];
-	int f260;
-	char pad264[0x18];
-	int f27c;
-	char pad280[0x14c];
-} Win;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
 
 // SIZE 0x2f4
 typedef struct {
@@ -41,7 +42,7 @@ typedef struct {
 	int f10;
 	int f14;
 	char pad18[0x28];
-	Win* f40;
+	D2_WIN* f40;
 	char pad44[0x2b0];
 } Ctl;
 
@@ -117,13 +118,13 @@ int __cdecl fcn_005e0f90(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		if (g_14ce8d8 != 0 && ((Win*)g_1015f40)[sel].f260 == 0) {
+		if (g_14ce8d8 != 0 && *(int*) &((D2_WIN*)g_1015f40)[sel].pad3c[0x224] == 0) {
 			for (i = 2; i < 16; i++) {
 				if (d2_CurrentElementId != slots[i].h && d2_HoveredWindow != slots[i].f8) {
 					if (d2_HoveredWindow == -1) {
 						continue;
 					}
-					if (((Ctl*)g_1015ea0)[((Win*)g_1015f40)[d2_HoveredWindow].f27c].f40 != &((Win*)g_1015f40)[slots[i].f8]) {
+					if (((Ctl*)g_1015ea0)[((D2_WIN*)g_1015f40)[d2_HoveredWindow].slot].f40 != &((D2_WIN*)g_1015f40)[slots[i].f8]) {
 						continue;
 					}
 				}

@@ -1,5 +1,5 @@
 #include <string.h>
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #pragma intrinsic(memset)
 
 extern int g_100f1dc;

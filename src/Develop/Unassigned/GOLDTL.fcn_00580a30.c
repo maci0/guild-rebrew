@@ -3,7 +3,7 @@
 
 typedef char* (__cdecl* pagefn)(void);
 
-extern int d2_TutorialActive;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774a18;
 extern char* g_774a10;
 extern int g_6a81dc[5];

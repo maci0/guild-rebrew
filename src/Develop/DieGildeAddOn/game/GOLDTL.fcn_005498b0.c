@@ -2,15 +2,15 @@
 
 #include <string.h>
 
-#pragma pack(push, 2)
-typedef struct {
-	int day;
-	unsigned short hour;
-	int min;
-	int sec;
-} Time;
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
+
+
+
+
+
+
 // SIZE 0xe
-#pragma pack(pop)
+
 
 typedef struct {
 	int f0;
@@ -19,7 +19,7 @@ typedef struct {
 	int who;
 	int fc;
 	char pad10[0x18];
-	Time t;
+	GAME_TIMESTAMP t;
 	unsigned char f36;
 	char pad37[0x21];
 	int f58;
@@ -28,7 +28,6 @@ typedef struct {
 // SIZE 0xf8
 
 extern char g_7f4ca4[];
-extern Time gm_GameTime;
 
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, int);
@@ -61,7 +60,7 @@ void __cdecl fcn_005498b0(char *a1, char *entity, char *a3, char *a4, int a5, fl
 			m.who = *(int *) (a3 + 4);
 		}
 		m.fc = -1;
-		m.t = gm_GameTime;
+		m.t = *(GAME_TIMESTAMP*) &gm_GameTime;
 		m.f36 = 2;
 		m.f58 = *(int *) (entity + 4);
 		fcn_004c5530(&m);

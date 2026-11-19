@@ -23,7 +23,7 @@ int __cdecl ai_ScoreBuergermeister(float* scoreFirst, float* scoreSecond, int a2
     *scoreFirst = 0.0f;
     *scoreSecond = 0.0f;
     fcn_004fc460((char*) buf);
-    if ((float) ((*(float*) (candidateRecord + 0x100) - g_662a48) * g_664360) < buf[3]) {
+    if ((float) ((*(float*) (candidateRecord + 0x100) - 2.0) * g_664360) < buf[3]) {
         fcn_004a4550(scoreFirst, scoreSecond, a2, candidateRecord, a4, a5, a6);
         t = *scoreFirst;
         *scoreFirst = t * g_6628b0;

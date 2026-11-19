@@ -1,11 +1,7 @@
 
 
 
-extern int g_7728c0;
-extern int g_7728c4;
-extern int g_7728c8;
-extern int g_7728cc;
-extern int g_7728d0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
 

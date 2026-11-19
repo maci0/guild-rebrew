@@ -8,7 +8,7 @@ typedef struct {
 
 extern int g_772f3c;
 extern int g_772f68;
-extern int g_6b89c0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_772f64;
 
 int __cdecl fcn_00459ae0(float a, float b, float c);

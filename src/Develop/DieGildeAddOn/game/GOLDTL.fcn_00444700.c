@@ -32,7 +32,7 @@ float __cdecl fcn_00444700(char* obj, float* target)
 	fcn_004518a0(a);
 	y = td[1] * a[1];
 	dot = y + td[0] * a[0] + td[2] * a[2];
-	dot = ((-1.0f) > dot) ? -1.0f : ((dot < g_6628a0) ? (((-1.0f) > dot) ? -1.0f : dot) : 1.0f);
+	dot = ((-1.0f) > dot) ? -1.0f : ((dot < 1.0f) ? (((-1.0f) > dot) ? -1.0f : dot) : 1.0f);
 	ang = (float) acos(dot);
 	s = (float) sin(*(double*) 0x662988);
 	c = (float) cos(*(double*) 0x662988);

@@ -15,12 +15,11 @@ typedef struct {
 } Cur;
 
 extern Sample_99ec20 g_99ec20[16];
-extern double g_662950;
 extern float g_662a94;
 
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 
-#define CLAMP0(v) ((v) > g_662950 ? (v) : g_662950)
+#define CLAMP0(v) ((v) > 0.0 ? (v) : 0.0)
 
 void __cdecl fcn_005d3c20(Cur cur, int w, int h)
 {
@@ -35,7 +34,7 @@ void __cdecl fcn_005d3c20(Cur cur, int w, int h)
 	float maxValue;
 
 	step = (w - 0x69) / 16;
-	maxValue = g_662a94;
+	maxValue = -1.0f;
 	for (i = 0; i < 16; i++) {
 		if (g_99ec20[i].d > maxValue) {
 			maxValue = g_99ec20[i].d;

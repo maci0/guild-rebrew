@@ -43,7 +43,7 @@ int __cdecl fcn_004d3330(char* self, int a1, int a2, int a3,
 			}
 		}
 	}
-	if (best != 0.0f && best > g_662a98) {
+	if (best != 0.0f && best > 5.0f) {
 		return 1;
 	}
 	return 0;

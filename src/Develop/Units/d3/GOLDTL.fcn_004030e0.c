@@ -1,5 +1,4 @@
 #include "Develop/Units/d3/d3_object.h"
-extern void* ch_CharacterSlots[];
 extern int g_67a370;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 

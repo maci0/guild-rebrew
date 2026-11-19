@@ -17,18 +17,18 @@ typedef struct
 } Packet;
 // SIZE 0xf8
 
-typedef struct
-{
-	unsigned short x0;
-	char pad2[2];
-	int x4;
-	char pad8[0x180];
-	unsigned char x188;
-	char pad189[0x93];
-} Player;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
+
+
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* g_7746c4;
 extern int g_14abab4;
@@ -61,7 +61,7 @@ int __cdecl fcn_005ad380(int unused, char* e)
 	int btn1;
 	Packet pkt;
 	char buf[0x400];
-	Player* p;
+	ENTITY_RECORD* p;
 	int dlg;
 	int s;
 	int btn2;
@@ -72,7 +72,7 @@ int __cdecl fcn_005ad380(int unused, char* e)
 	if (e == 0) {
 		return 0;
 	}
-	p = &((Player*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
+	p = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
 	if (fcn_0055c050(e) == 0) {
 		io_FormatTextBuffer(buf, 0x1a92, *(unsigned short*) (e + 0x27), e);
 		fcn_00526120(buf, 0);
@@ -86,7 +86,7 @@ int __cdecl fcn_005ad380(int unused, char* e)
 	fcn_00471b60(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
-	s = io_AppendText(0x19e4, p->x0, e);
+	s = io_AppendText(0x19e4, p->entity_index, e);
 	btn1 = fcn_00472250(dlg, 1, s);
 	btn2 = fcn_00472250(dlg, 1, s + 1);
 	g_100f1dc = -1;
@@ -99,15 +99,15 @@ int __cdecl fcn_005ad380(int unused, char* e)
 				pkt.type = 0x3f;
 				pkt.x36 = 1;
 				n = 0;
-				pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
+				pkt.x8 = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
 				pkt.x58 = *(int*) (e + 1);
 				pkt.x5c = *(int*) (g_7746c4 + 1);
 				for (i = 0; i < 8; i++) {
 					pkt.ids[i] = -1;
 				}
 				for (i = 0; i < 768; i++) {
-					if (((Player*)g_7f4ca0)[i].x188 != 0) {
-						pkt.ids[n] = ((Player*)g_7f4ca0)[i].x4;
+					if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_17c[12] != 0) {
+						pkt.ids[n] = ((ENTITY_RECORD*)g_7f4ca0)[i].entity_id;
 						n++;
 					}
 				}

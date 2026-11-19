@@ -1,5 +1,5 @@
 extern int g_67a370;
-extern int g_773dd8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 void __cdecl fcn_00437ac0(int, int, int, void (__cdecl*)(void));

@@ -4,13 +4,10 @@ extern int d2_CurrentWindowId;
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern char g_8680b4[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc;
-extern int d2_CurrentElementId;
-extern int g_14ce8e0;
 extern int g_14ab658;
 extern int g_14ab65c;
-extern char g_6811b0[];
 
 struct loan_offer {
 	int image;

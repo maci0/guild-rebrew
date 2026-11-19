@@ -27,7 +27,7 @@ void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source)
     y = position[1] - *(float*)((char*)d3_ActiveCamera + 0x50);
     z = position[2] - *(float*)((char*)d3_ActiveCamera + 0x54);
     distance = (float)sqrt(z * z + y * y + x * x);
-    distance = (float)(distance * g_662b40);
+    distance = (float)(distance * 0.025400050800101603);
     remaining = source->range - distance;
     if (remaining > 0.0f) {
         linearVolume = (int)(remaining / source->range * source->volume);

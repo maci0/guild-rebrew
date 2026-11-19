@@ -62,9 +62,9 @@ scan:
 		id = g_102cbc4[a0].ids[sel];
 		alt = *(int*) &g_1015ea0 + id * 0x2f4;
 		fcn_004125c0(
-			(int) (*(int*) (alt + 0x18) * g_662908
+			(int) (*(int*) (alt + 0x18) * 0.5
 				+ *(int*) (alt + 0x10)),
-			(int) (*(int*) (alt + 0x1c) * g_662908
+			(int) (*(int*) (alt + 0x1c) * 0.5
 				+ *(int*) (alt + 0x14)));
 	}
 skip:

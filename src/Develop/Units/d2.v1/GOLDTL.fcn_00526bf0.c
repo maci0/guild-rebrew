@@ -1,21 +1,22 @@
 
 
-typedef struct Device Device;
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
+typedef void (__stdcall* ClearFn)(D3D_DEVICE_VIEW*, int, int, int, int, float, int);
 
-// SIZE 0x94
-typedef struct {
-	char pad0[0x90];
-	void(__stdcall* clear)(Device* self, int a, int b, int c, int d, float e, int f);
-} DeviceVtbl;
 
-// SIZE 0x4
-struct Device {
-	DeviceVtbl* vtbl;
-};
+
+
+
+
+
+
+
+
+
 
 extern int g_6a2bdc;
 extern int d2_SuppressOverlay;
-extern void* g_6b5de0;
+
 extern int g_774710;
 extern int d2_ScreenHeight;
 extern int g_1040494;
@@ -39,7 +40,7 @@ void __cdecl fcn_00526bf0(int phase, int cur, int max)
 		d2_SuppressOverlay = 1;
 		fcn_005270c0(0);
 		fcn_00533cf0(1);
-		((Device*)g_6b5de0)->vtbl->clear(((Device*)g_6b5de0), 0, 0, 1, 0, 1.0f, 0);
+		((ClearFn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_00[36])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0, 1, 0, 1.0f, 0);
 		g_774710 = 0;
 		g_6a2bdc = fcn_004675f0(g_1040494 / 2 - 0xcd, d2_ScreenHeight - 0x40, 0x190, 0, 0x190, 0x83, 0x42);
 		d2_SetElementValue(g_6a2bdc, 0, 0x190, 0);

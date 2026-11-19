@@ -28,7 +28,6 @@ typedef struct {
 } Script;
 // SIZE 0xc98
 
-extern char* g_6b7e94;
 extern struct VFS_DIR* g_6b7fdc;
 extern int g_14cb430;
 extern int g_14c93a0[0x800];

@@ -3,7 +3,7 @@
 
 
 
-extern int msx_MusicEnabled;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6819b0;
 extern float g_6628a8;
 

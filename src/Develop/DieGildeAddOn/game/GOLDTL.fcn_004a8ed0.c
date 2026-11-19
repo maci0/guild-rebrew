@@ -1,16 +1,16 @@
 
-typedef struct Ent {
-	unsigned short id;
-	unsigned char x2;
-	char pad3;
-	int x4;
-	char pad8[0x16c - 8];
-	char* owner;
-	char pad170[0x21c - 0x170];
-} Ent;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
+
+
+
 extern char* g_77261c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -30,7 +30,7 @@ int __cdecl fcn_004a8ed0(char* a1, char* e, char* a3, char* a4, char* out)
 {
 	int found;
 	char* q;
-	Ent* t;
+	ENTITY_RECORD* t;
 	int i;
 	int n;
 	F8 f;
@@ -50,8 +50,8 @@ int __cdecl fcn_004a8ed0(char* a1, char* e, char* a3, char* a4, char* out)
 	t = 0;
 	i = gm_RandomMod(0x300);
 	for (n = 0x300; n != 0;) {
-		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].owner == q && ((Ent*)g_7f4ca0)[i].x2 == 0) {
-			t = &((Ent*)g_7f4ca0)[i];
+		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_16c == q && ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 0) {
+			t = &((ENTITY_RECORD*)g_7f4ca0)[i];
 			break;
 		}
 		n--;
@@ -61,7 +61,7 @@ int __cdecl fcn_004a8ed0(char* a1, char* e, char* a3, char* a4, char* out)
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = t->x4;
+	*(int*) (out + 4) = t->entity_id;
 	*(int*) (out + 8) = *(int*) (q + 1);
 	return 1;
 }

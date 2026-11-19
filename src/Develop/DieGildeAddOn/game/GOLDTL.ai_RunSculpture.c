@@ -35,7 +35,7 @@ int __cdecl ai_RunSculpture(char* a1, char* a2, char* a3)
 		*(short*) (msg + 0x34) = g_7f4c0c;
 		*(int*) (msg + 0x58) = *(int*) (a3 + 4);
 		fcn_004c4eb0(g_67e968);
-		fcn_004c5150(-1, *(int*) (a1 + 4), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (a2 + 4)) * g_66414c));
+		fcn_004c5150(-1, *(int*) (a1 + 4), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (a2 + 4)) * 0.3f));
 		fcn_004c5530(msg);
 		fcn_004c4ef0(g_67e968);
 		return 0x43;

@@ -16,7 +16,7 @@ typedef struct {
 
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
-extern float g_662910;
+
 
 float __cdecl eval_ObjektPreis2Credits(int, unsigned char);
 char* __cdecl fcn_00502cd0(int, int, int, int);
@@ -73,5 +73,5 @@ int __cdecl fcn_0050cf50(unsigned char* a0, int a1)
 			}
 		}
 	}
-	return (int) (acc[0] * (g_662910 * a1));
+	return (int) (acc[0] * (0.01f * a1));
 }

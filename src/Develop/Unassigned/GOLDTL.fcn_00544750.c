@@ -5,7 +5,7 @@
 #include <windows.h>
 
 extern char g_6a3658[];
-extern int main_Instance;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7747d4;
 
 void __cdecl fcn_00422d60(void);

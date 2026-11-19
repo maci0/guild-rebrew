@@ -3,7 +3,7 @@
 
 #include "client_sound.h"
 extern int main_LoopFlags;
-extern int d2_SuppressOverlay;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_68bd78[];
 
 #include "Develop/Units/Msx/msx.h"

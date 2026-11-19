@@ -15,12 +15,13 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-typedef struct
-{
-	char pad0[0x274];
-	int x274;
-	char pad278[0x154];
-} Win;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
 // SIZE 0x3cc
 
 extern char g_7f4ca0[];
@@ -72,7 +73,7 @@ void __cdecl fcn_005a8e20(void)
 	d2_SetForm(dlg, 0);
 	fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
 	d2_SetOverlayAnimation(0, 0);
-	((Win*)g_1015f40)[w].x274 = 0x5a;
+	*(int*) &((D2_WIN*)g_1015f40)[w].pad3c[0x238] = 0x5a;
 	do {
 		if (flag != 0) {
 			d2_SetForm(dlg, 1);

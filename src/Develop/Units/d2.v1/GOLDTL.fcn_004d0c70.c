@@ -25,13 +25,14 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-typedef struct Win {
-	char pad0[0x20];
-	int border;
-	char pad24[0x28c - 0x24];
-	int color;
-	char pad290[0x3cc - 0x290];
-} Win;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
 // SIZE 0x3cc
 
 typedef struct Game {
@@ -93,8 +94,8 @@ void __cdecl fcn_004d0c70(void)
 				((Slot*)g_1015ea0)[g_9b4840[k].label].centered = 1;
 			}
 			g_9b4840[k].unit = unit;
-			((Win*)g_1015f40)[g_9b4840[k].win].border = 0;
-			((Win*)g_1015f40)[g_9b4840[k].win].color = 0x54;
+			*(int*) &((D2_WIN*)g_1015f40)[g_9b4840[k].win].pad14[0xc] = 0;
+			*(int*) &((D2_WIN*)g_1015f40)[g_9b4840[k].win].pad280[12] = 0x54;
 			g_9b4840[k].icon = fcn_0046f740(0x28, 0x11, *(int*) (unit + 0x18c), d2_CurrentWindowId);
 			((Slot*)g_1015ea0)[g_9b4840[k].icon].shadow = 1;
 			g_9b4840[k].text = d2_ShowTxt(0, 0, &(*(char*)g_6b5c60), d2_CurrentWindowId);

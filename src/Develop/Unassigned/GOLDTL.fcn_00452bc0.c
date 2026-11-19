@@ -1,21 +1,23 @@
 
 
-typedef struct IDev IDev;
-// SIZE 0x150
-typedef struct IDevVtbl {
-	void* slots[50];
-	long (__stdcall* SetRenderState)(IDev*, int, int);
-	void* slots2[25];
-	long (__stdcall* SetVertexShader)(IDev*, unsigned int);
-	void* slots3[6];
-	long (__stdcall* SetStreamSource)(IDev*, unsigned int, void*, unsigned int);
-} IDevVtbl;
-// SIZE 0x4
-struct IDev {
-	IDevVtbl* v;
-};
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
+typedef long (__stdcall* SetVertexShaderFn)(D3D_DEVICE_VIEW*, unsigned int);
+typedef long (__stdcall* SetStreamSourceFn)(D3D_DEVICE_VIEW*, unsigned int, void*, unsigned int);
 
-extern void* g_6b5de0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 extern unsigned int g_6b8714;
 extern unsigned int g_6b8710;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -27,13 +29,13 @@ void __cdecl fcn_00452bc0(void)
 	char* p;
 	char* next;
 
-	((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x8d, 1);
-	((IDev*)g_6b5de0)->v->SetStreamSource(((IDev*)g_6b5de0), 0, tp_d3_RenderVertexBuffer, g_6b8714);
-	((IDev*)g_6b5de0)->v->SetVertexShader(((IDev*)g_6b5de0), g_6b8710);
+	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x8d, 1);
+	((SetStreamSourceFn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x14c / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, tp_d3_RenderVertexBuffer, g_6b8714);
+	((SetVertexShaderFn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x130 / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), g_6b8710);
 	for (p = d3_SceneRenderListHead; p != g_1040640; p = next) {
 		next = *(char**) (p + 0x314);
 		fcn_00452740(p);
 	}
-	((IDev*)g_6b5de0)->v->SetStreamSource(((IDev*)g_6b5de0), 0, 0, 0);
-	((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x8d, 0);
+	((SetStreamSourceFn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x14c / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0, 0);
+	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x8d, 0);
 }

@@ -22,7 +22,7 @@ int __cdecl fcn_004fa3b0(void* obj, void* request)
 		return 1;
 	}
 	if (*(char*) ((char*) obj + 2) == 6) {
-		io_FormatTextBuffer((char*) request + 0x14, (int) g_679060, 0x1e1c);
+		io_FormatTextBuffer((char*) request + 0x14, (int) "%s", 0x1e1c);
 	}
 	if ((*(unsigned int*) ((char*) obj + 0x1c8) & 0x200) != 0) {
 		return 9;

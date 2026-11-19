@@ -1,12 +1,13 @@
-typedef struct Win {
-	char pad0[0x258];
-	int x258;
-	char pad25c[0x14];
-	char x270;
-	char pad271[3];
-	int style;
-	char pad278[0x3cc - 0x278];
-} Win;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
+
+
 // SIZE 0x3cc
 
 #include "client_types.h"
@@ -94,7 +95,7 @@ void __cdecl fcn_004b3490(void)
 	d2_SetForm(h, 2);
 	io_AppendText(0x10b0);
 	fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
-	((Win*)g_1015f40)[w].style = 0x18;
+	*(int*) &((D2_WIN*)g_1015f40)[w].pad3c[0x238] = 0x18;
 	d2_SetForm(h, 1);
 	io_AppendText((int) "$C%s", text);
 	d2_SetForm(h, 3);
@@ -159,11 +160,11 @@ void __cdecl fcn_004b3490(void)
 				d2_SetForm(h, 2);
 				io_AppendText(0x10b0);
 				fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
-				((Win*)g_1015f40)[w].style = 0x18;
+				*(int*) &((D2_WIN*)g_1015f40)[w].pad3c[0x238] = 0x18;
 				d2_SetForm(h, 1);
 				io_AppendText((int) "$C%s", text);
-				((Win*)g_77255c)->x258 = 0;
-				((Win*)g_77255c)->x270 = 2;
+				*(int*) &((D2_WIN*)g_77255c)->pad3c[0x21c] = 0;
+				((D2_WIN*)g_77255c)->pad3c[0x234] = 2;
 				d2_SetForm(h, 3);
 				io_AppendText((int) "$C$Z$[%s$]", name);
 			}

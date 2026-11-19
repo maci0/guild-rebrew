@@ -188,11 +188,11 @@ void __cdecl fcn_005522d0(char* ev)
 			}
 			f = gm_RandomFloat01Squared();
 			if (f > g_662948) {
-				f = g_6628a0;
+				f = 1.0f;
 			}
 			f = f * nent;
-			if (!(f > g_6628a0)) {
-				f = g_6628a0;
+			if (!(f > 1.0f)) {
+				f = 1.0f;
 			}
 			count = (int) f;
 			if (count > 0) {

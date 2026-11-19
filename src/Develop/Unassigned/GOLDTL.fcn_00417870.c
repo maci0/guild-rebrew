@@ -49,7 +49,7 @@ char __cdecl fcn_00417870(char* a0, int a1)
 			rec = (Rec*) base + i;
 			if (rec->fl & 1) {
 				t = (unsigned int) (a1 - ((Rec*) *(char**) (a0 + 0x28) + i)->t);
-				v = (float) t * g_662a2c;
+				v = (float) t * 0.001f;
 				((Rec*) *(char**) (a0 + 0x28) + i)->nx = ((Rec*) *(char**) (a0 + 0x28) + i)->vx + ((Rec*) *(char**) (a0 + 0x28) + i)->px;
 				((Rec*) *(char**) (a0 + 0x28) + i)->ny = ((Rec*) *(char**) (a0 + 0x28) + i)->vy + ((Rec*) *(char**) (a0 + 0x28) + i)->py;
 				((Rec*) *(char**) (a0 + 0x28) + i)->nz = ((Rec*) *(char**) (a0 + 0x28) + i)->vz + *(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 8);
@@ -93,7 +93,7 @@ char __cdecl fcn_00417870(char* a0, int a1)
 				                          rec->py) *
 				                         *(float*) a0 +
 				                     (float) fcn_0064d3f8() * g_662a40 +
-				                     g_6628d8;
+				                     0.4f;
 				rec->t = a1;
 				rec->vx = rec->nx;
 				rec->w = *(int*) (a0 + 0xe4);

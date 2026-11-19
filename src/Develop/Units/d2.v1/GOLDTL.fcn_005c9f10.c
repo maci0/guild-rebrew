@@ -111,7 +111,7 @@ label_5ca044:
 				}
 				io_FormatTextBuffer(v13, 0x6ac96c, *(unsigned short*) v15[-6]);
 				fcn_005c9090(v13, v6, v15[-1], 0xca, 0x56);
-				io_FormatTextBuffer(v13, g_679060, (-(unsigned int) (*(char*) (v15[-6] + 9) != 0) & 0x28) + 0x253 + v12);
+				io_FormatTextBuffer(v13, "%s", (-(unsigned int) (*(char*) (v15[-6] + 9) != 0) & 0x28) + 0x253 + v12);
 				fcn_005c9090(v13, v6, v15[-1] + 0xf, 0xca, 0x56);
 			} else {
 				v3 = (unsigned short*) v15[-6];
@@ -143,7 +143,7 @@ label_5ca044:
 			}
 		} else {
 			fcn_0046f740((v6 - (int) *(short*) ((int) g_772500 + 0x1a2ac) / 2) - 3, v10 + 1, 0x4fb, d2_CurrentWindowId);
-			io_FormatTextBuffer(v13, g_679060, v15[-3] + 0x253);
+			io_FormatTextBuffer(v13, "%s", v15[-3] + 0x253);
 			fcn_005c9090(v13, v6, v15[-1], 0xca, 0x56);
 			*(int*) ((int) g_1015ea0 + 0x5c + v15[-5] * 0x2f4) = 1;
 			*(int*) ((int) g_1015ea0 + 0x2f0 + v15[-5] * 0x2f4) = 0;

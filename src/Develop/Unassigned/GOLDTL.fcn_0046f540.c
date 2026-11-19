@@ -1,16 +1,17 @@
 #include <string.h>
 
-typedef struct
-{
-	int i[0x3cc / 4];
-} fcn_0046f540_Win;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
 // SIZE 0x3cc
 
 typedef struct
 {
 	int id;
 	char pad04[0x40 - 0x4];
-	fcn_0046f540_Win* parent;
+	D2_WIN* parent;
 	char pad44[0x2f4 - 0x44];
 } fcn_0046f540_Ent;
 // SIZE 0x2f4
@@ -24,7 +25,7 @@ void __cdecl fcn_0046f4c0(int id);
 /* ADDRESS: GOLDTL 0x0046f540 */
 void __cdecl fcn_0046f540(int win)
 {
-	fcn_0046f540_Win* w;
+	D2_WIN* w;
 	fcn_0046f540_Ent* tmp[0x181];
 	int i;
 	int first;
@@ -33,9 +34,9 @@ void __cdecl fcn_0046f540(int win)
 
 	first = -1;
 	last = -1;
-	w = &((fcn_0046f540_Win*)g_1015f40)[win];
+	w = &((D2_WIN*)g_1015f40)[win];
 	for (i = 0x3ff; i >= 0; i--) {
-		if (((fcn_0046f540_Ent**)g_772540)[i] != 0 && ((fcn_0046f540_Ent**)g_772540)[i]->id == w->i[0x27c / 4]) {
+		if (((fcn_0046f540_Ent**)g_772540)[i] != 0 && ((fcn_0046f540_Ent**)g_772540)[i]->id == w->slot) {
 			last = i;
 			break;
 		}
@@ -55,7 +56,7 @@ void __cdecl fcn_0046f540(int win)
 		}
 	}
 	memcpy(&((fcn_0046f540_Ent**)g_772540)[i + 1], tmp, n);
-	for (i = 0; i < w->i[0x2c / 4]; i++) {
-		fcn_0046f4c0(((int*) w->i[0x28 / 4])[i]);
+	for (i = 0; i < w->count; i++) {
+		fcn_0046f4c0(w->children[i]);
 	}
 }

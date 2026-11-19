@@ -12,7 +12,7 @@ extern unsigned char g_1040600;
 extern float* g_6b89e4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern void** g_1040610[];
-extern void* g_6b5de0;
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
 extern unsigned long g_14ce728;
 
 void __cdecl fcn_00455350(char* object, float* in, float* out);
@@ -70,7 +70,7 @@ void __cdecl fcn_004582d0(char* a0, char* a1, char* a2, char* map, float* va,
     maxx = -1.0e10f;
     if (*(unsigned char*) &rec[0x26] != 0) {
         fcn_00455350(a0, (float*) (a0 + 0x4c), d);
-        height = height + g_662a98;
+        height = height + 5.0f;
         minx = d[0] - 16.0f;
         maxx = d[0] + 16.0f;
         minz = d[2] - 16.0f;
@@ -225,13 +225,13 @@ void __cdecl fcn_004582d0(char* a0, char* a1, char* a2, char* map, float* va,
         idx++;
     if ((*(int (__stdcall**) (void*, void*, int*)) ((char*) *g_1040610[idx] + 0x14))(
             g_1040610[idx], surf, vp) >= 0) {
-        (*(int (__stdcall**) (void*, int, float*)) (*(char**) g_6b5de0 + 0x94))(
+        (*(int (__stdcall**) (void*, int, float*)) ((char*) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0x94))(
             g_6b5de0, 0x100, m);
         fcn_005ed39b(t, minx, maxx, minz, maxz, 0.5f, 1.5f);
-        (*(int (__stdcall**) (void*, int, float*)) (*(char**) g_6b5de0 + 0x94))(
+        (*(int (__stdcall**) (void*, int, float*)) ((char*) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0x94))(
             g_6b5de0, 3, t);
         (*(int (__stdcall**) (void*, int, void*, int, int, float, int))
-            (*(char**) g_6b5de0 + 0x90))(g_6b5de0, 0, 0, 1, 0, 1.0f, 0);
+            ((char*) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0x90))(g_6b5de0, 0, 0, 1, 0, 1.0f, 0);
         mesh = fcn_00436930(a2, 0);
         for (n = 0; n < *(unsigned int*) (*(char**) (a2 + 0x318) + 0x1e4); n++)
             (*(int (__stdcall**) (void*, unsigned int)) (*(char**) mesh + 0xc))(mesh, n);

@@ -1,13 +1,14 @@
 
 
-typedef struct Player {
-	char pad0[0x10];
-	int lines;
-	char pad14[0x254 - 0x14];
-	int limit;
-	int scroll;
-	char pad25c[0x3cc - 0x25c];
-} Player;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
+
 // SIZE 0x3cc
 
 extern int d2_ScreenHeight;
@@ -50,19 +51,20 @@ void __cdecl fcn_005e4970(void)
 	win = fcn_0046e940(100, 0, 0x258, d2_ScreenHeight, 0x10);
 	fcn_00471c80(win, 1);
 	io_AppendText(0x2004);
-	(*(Player**)&g_77255c)->scroll = -d2_ScreenHeight;
+	*(int*) &(*(D2_WIN**)&g_77255c)->pad3c[0x21c] = -d2_ScreenHeight;
 	i = 0;
 	d2_SuppressOverlay = 1;
 	while (fcn_005373e0(fcn_005e4970, 0x24087)) {
 		if (g_14ce8e0 || g_14cf950) {
 			g_774654 = 1;
 		}
-		(*(Player**)&g_77255c) = &((Player*)g_1015f40)[win];
+		(*(D2_WIN**)&g_77255c) = &((D2_WIN*)g_1015f40)[win];
 		if (i % speed == 0) {
-			(*(Player**)&g_77255c)->scroll++;
+			(*(int*) &(*(D2_WIN**)&g_77255c)->pad3c[0x21c])++;
 		}
 		i++;
-		if ((*(Player**)&g_77255c)->lines * 1.5 + (*(Player**)&g_77255c)->scroll > (*(Player**)&g_77255c)->limit) {
+		if ((*(D2_WIN**)&g_77255c)->height * 1.5
+		    + *(int*) &(*(D2_WIN**)&g_77255c)->pad3c[0x21c] > *(int*) &(*(D2_WIN**)&g_77255c)->pad3c[0x218]) {
 			g_774654 = 1;
 		}
 		if (g_6a24e4 >= 80.0f) {
@@ -76,9 +78,9 @@ void __cdecl fcn_005e4970(void)
 	fade = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x3c, 1);
 	while ((*fade & 4) == 0) {
 		fcn_005373e0(0, 0x24087);
-		(*(Player**)&g_77255c) = &((Player*)g_1015f40)[win];
+		(*(D2_WIN**)&g_77255c) = &((D2_WIN*)g_1015f40)[win];
 		if (i % speed == 0) {
-			(*(Player**)&g_77255c)->scroll++;
+			(*(int*) &(*(D2_WIN**)&g_77255c)->pad3c[0x21c])++;
 		}
 		if (g_6a24e4 >= 80.0f) {
 			speed = 4;

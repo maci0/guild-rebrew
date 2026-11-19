@@ -37,7 +37,7 @@ int __cdecl ai_StartSpionage(int code, short* target, int zero, char* out1, char
 	first = (float) gm_WalkEntityChain(*target) * g_664138;
 	v5 = (int) ((float) gm_WalkEntityChain(*(unsigned short*) p) * g_664138 + first);
 	fv = (float) v5;
-	v5 = (int) (fv * ((float) rnd * g_664188 + g_6628a0));
+	v5 = (int) (fv * ((float) rnd * g_664188 + 1.0f));
 	if ((float) thr * g_664160 >= (float) v5) {
 		return 0;
 	}

@@ -30,14 +30,14 @@ int __cdecl fcn_0048ddd0(char* e, char* thresholdOut, char* resultOut)
 	mask = 0xf00500;
 	{
 		int idx;
-		if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + *(float*) 0x664154, &idx) == 0) {
+		if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + 32.0f, &idx) == 0) {
 			return 0;
 		}
 		t = &((ENTITY_RECORD*) g_7f4ca0)[(unsigned short) idx];
 	}
 	n = fcn_004e99c0(t->unk_165[1]) / 3 + 2;
 	thr[0] = (int) (float) n;
-	thr[1] = (int) ((float) n * *(float*) 0x662acc);
+	thr[1] = (int) ((float) n * 1.5f);
 	thr[2] = (int) ((float) n * 2);
 	if (*(int*) (e + 0x194) >= thr[2]) {
 		n = 2;

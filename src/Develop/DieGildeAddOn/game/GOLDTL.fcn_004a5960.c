@@ -13,16 +13,16 @@ typedef struct Query {
 // SIZE 0x50
 
 // SIZE 0x21c
-typedef struct {
-	unsigned short slot;
-	unsigned char type;
-	char pad3[0x161];
-	unsigned char job;
-	char pad165[0xb7];
-} Entity_4a5960;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 extern int gm_RandomSearchSteps[];
-extern char g_7f4ca0[];
+
 
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508f80(unsigned short, int);
@@ -60,9 +60,9 @@ unsigned int __cdecl fcn_004a5960(unsigned short* e, unsigned int max, int a2, f
 	cnt = 0;
 	i = gm_RandomMod(0x300);
 	while (cnt < max && tries != 0) {
-		t = ((Entity_4a5960*)g_7f4ca0)[i].type;
+		t = ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state;
 		if (t != 8 && t != 7 && t != 5 && t != 9 && t != 0x14) {
-			job = ((Entity_4a5960*)g_7f4ca0)[i].job;
+			job = ((ENTITY_RECORD*)g_7f4ca0)[i].unk_164;
 			if (job != 0 && job != 0x52 && fcn_005cf720(*e, (unsigned short) i, &q, 0) != 0
 			    && abs(a2 - fcn_00508f80((unsigned short) i, 0)) < 6) {
 				if (!ranged || (f = fcn_0050f980(i, *e, 1), !(f < lo) && !(f > hi))) {
@@ -76,9 +76,9 @@ unsigned int __cdecl fcn_004a5960(unsigned short* e, unsigned int max, int a2, f
 	tries = 0x300;
 	i = gm_RandomMod(0x300);
 	while (cnt < max && tries != 0) {
-		t = ((Entity_4a5960*)g_7f4ca0)[i].type;
+		t = ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state;
 		if (t != 8 && t != 7 && t != 5 && t != 9 && t != 0x14) {
-			if (((Entity_4a5960*)g_7f4ca0)[i].job == 0 && fcn_005cf720(*e, (unsigned short) i, &q, 0) != 0
+			if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_164 == 0 && fcn_005cf720(*e, (unsigned short) i, &q, 0) != 0
 			    && abs(a2 - fcn_00508f80((unsigned short) i, 0)) < 6) {
 				if (!ranged || (f = fcn_0050f980(i, *e, 1), !(f < lo) && !(f > hi))) {
 					out[cnt++] = (unsigned short) i;

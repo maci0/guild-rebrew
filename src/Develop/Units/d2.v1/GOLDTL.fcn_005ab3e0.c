@@ -4,7 +4,7 @@
 extern int g_774654;
 extern int d2_CurrentElementId;
 extern int g_14ce8e0;
-extern float g_662910;
+
 
 int __cdecl fcn_004f39b0(int a);
 int __cdecl fcn_004f5dd0(int a);
@@ -62,7 +62,7 @@ void __cdecl fcn_005ab3e0(char* a0)
 		scale = (float) gm_WalkEntityChain(g_774970) * 0.005f;
 		factor = 1.5f;
 		if (*(unsigned short*) (a0 + 0x27) != g_774970)
-			factor = (200.0f - fcn_0050f980(g_774970, *(unsigned short*) (a0 + 0x27), 1)) * g_662910;
+			factor = (200.0f - fcn_0050f980(g_774970, *(unsigned short*) (a0 + 0x27), 1)) * 0.01f;
 		cost = (int) ((float) kind * factor * scale);
 		v = (double) cost * 0.1;
 		cost = (int) (320000.0 < (v > 3200.0 ? v : 3200.0) ? 320000.0 : (v > 3200.0 ? v : 3200.0));

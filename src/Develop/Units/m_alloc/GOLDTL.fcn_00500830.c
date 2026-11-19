@@ -3,8 +3,7 @@
 #include <string.h>
 
 extern int g_773d3c;
-extern int g_773d40;
-extern char* g_773d44;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00475830(char* path);
 int __cdecl fcn_00475c10(char* path);

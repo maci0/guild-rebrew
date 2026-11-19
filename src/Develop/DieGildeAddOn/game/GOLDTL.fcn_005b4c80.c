@@ -1,13 +1,14 @@
 #include <string.h>
 
 // SIZE 0x3cc
-typedef struct {
-	char pad0[0x258];
-	int x258;
-	char pad25c[0x20];
-	int x27c;
-	char pad280[0x14c];
-} Win_5b4c80;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
+
+
 
 // SIZE 0x2f4
 typedef struct {
@@ -38,7 +39,7 @@ void __cdecl fcn_005b4660(void*);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005b44b0(Ent_5b4c80*);
 int __cdecl fcn_00472250(int, int, char*);
-void __cdecl fcn_005b0f00(Win_5b4c80*);
+void __cdecl fcn_005b0f00(D2_WIN*);
 int __cdecl fcn_0046f280(int);
 
 
@@ -48,7 +49,7 @@ int __cdecl fcn_0046f280(int);
 void __cdecl fcn_005b4c80(void)
 {
 	int ids[0x300];
-	Win_5b4c80* rp;
+	D2_WIN* rp;
 	int left;
 	int win;
 	int right;
@@ -61,11 +62,11 @@ void __cdecl fcn_005b4c80(void)
 	fill = 1;
 	left = fcn_0046f100(0, 0, 0x140, 0x190, 0x10, win = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414));
 	right = fcn_0046f100(0x140, 0, 0x140, 0x190, 0x10, win);
-	fcn_00472900(((Win_5b4c80*)g_1015f40)[win].x27c, 0x54);
-	fcn_00472900(((Win_5b4c80*)g_1015f40)[left].x27c, 0x54);
-	fcn_00472900(((Win_5b4c80*)g_1015f40)[right].x27c, 0x54);
+	fcn_00472900(((D2_WIN*)g_1015f40)[win].slot, 0x54);
+	fcn_00472900(((D2_WIN*)g_1015f40)[left].slot, 0x54);
+	fcn_00472900(((D2_WIN*)g_1015f40)[right].slot, 0x54);
 	if (fcn_005373e0((void*) fcn_005b4c80, 0x657c7)) {
-		rp = &((Win_5b4c80*)g_1015f40)[right];
+		rp = &((D2_WIN*)g_1015f40)[right];
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
@@ -82,7 +83,7 @@ void __cdecl fcn_005b4c80(void)
 			}
 			if (fill) {
 				d2_CurrentWindowId = left;
-				saved = ((Win_5b4c80*)g_1015f40)[left].x258;
+				saved = *(int*) &((D2_WIN*)g_1015f40)[left].pad3c[0x21c];
 				io_AppendText((int) "$C");
 				ids[0] = fcn_00472250(-1, d2_CurrentWindowId, io_AppendText((int) "%ib[NIEMAND]$6THeCnt:%i$A", 2, fcn_005b44b0(0)));
 				((Ctl_5b4c80*)g_1015ea0)[ids[0]].ent = 0;
@@ -108,10 +109,10 @@ void __cdecl fcn_005b4c80(void)
 						n = 0;
 					}
 				}
-				((Win_5b4c80*)g_1015f40)[left].x258 = saved;
+				*(int*) &((D2_WIN*)g_1015f40)[left].pad3c[0x21c] = saved;
 				fill = 0;
 			}
-			fcn_005b0f00(&((Win_5b4c80*)g_1015f40)[left]);
+			fcn_005b0f00(&((D2_WIN*)g_1015f40)[left]);
 			fcn_005b0f00(rp);
 		} while (fcn_005373e0((void*) fcn_005b4c80, 0x657c7));
 	}

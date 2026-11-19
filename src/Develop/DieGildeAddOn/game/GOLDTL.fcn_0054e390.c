@@ -191,11 +191,11 @@ label_54e6a1:
 			ownrow = g_7f4ca0 + *(unsigned short*) (own + 0x27) * 0x21c;
 			p = g_7f4ca0 + *(unsigned short*) (e + 8) * 0x21c;
 			v = fcn_0050c710(own, 5, 1);
-			limit = (float) ((double) v * g_6640e8 + g_6629c8);
+			limit = (float) ((double) v * 0.01 + g_6629c8);
 			rec = fcn_00502cd0(*(int*) (gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0)) + 0x5d), 1, 0, 0xca);
 			while (rec != 0) {
 				if (*(int*) (rec + 0x2a) == *(int*) (own + 1)) {
-					f = (float) ((*(unsigned char*) (rec + 0x37) + g_662c38) * g_6640e8);
+					f = (float) ((*(unsigned char*) (rec + 0x37) + 100.0) * 0.01);
 					break;
 				}
 				rec = gm_NextEntityQueryMatch();

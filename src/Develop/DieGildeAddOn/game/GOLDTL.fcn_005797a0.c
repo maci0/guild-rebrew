@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern float g_6628cc;
-extern float g_662910;
+
 extern float g_665ef8;
 extern int gm_GameTime;
 extern int g_7f4c04;
@@ -97,9 +97,9 @@ void __cdecl fcn_005797a0(char* a0)
 	if (*(int*) (a0 + 0x70) == 0) {
 		value = fcn_00500d20(a0 + 0xb8, 0x7f4c00);
 		if (*row == 0x1d) {
-			fvalue = (float) fcn_0050c710(search, 0x12, 1) * g_662910;
+			fvalue = (float) fcn_0050c710(search, 0x12, 1) * 0.01f;
 		} else {
-			fvalue = (float) fcn_0050c710(search, 0x1e, 1) * g_662910;
+			fvalue = (float) fcn_0050c710(search, 0x1e, 1) * 0.01f;
 			if (handle == 3 && (search[0x5b] & 0x20) == 0)
 				fvalue = fvalue - g_6628cc;
 		}

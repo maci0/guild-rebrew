@@ -14,10 +14,8 @@ typedef struct Spin {
 
 extern int tp_d2_SelectedControl;
 extern int g_14ce8dc;
-extern int g_14ce8d0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7725e8;
-extern int d2_MouseTopBoundary;
-extern int d2_MouseBottomBoundary;
 extern int g_100f1e0;
 extern int g_100f1d8;
 extern short g_14ce8c0;

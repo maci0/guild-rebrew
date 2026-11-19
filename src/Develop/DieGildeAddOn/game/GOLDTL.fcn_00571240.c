@@ -79,7 +79,7 @@ void __cdecl fcn_00571240(char* self)
 			return;
 		}
 		gm_ResolveEntityById(&node, 0, 0, *(int*) (self + 0xb8));
-		total = fcn_0050c710(node, 1, 1) * g_6640e8 + g_6629c8;
+		total = fcn_0050c710(node, 1, 1) * 0.01 + g_6629c8;
 		if (*(unsigned char*) (self + 0xc8) >= 0x3c) {
 			if (map != 0) {
 				for (i = 0; i < 8; i++) {
@@ -88,7 +88,7 @@ void __cdecl fcn_00571240(char* self)
 							2 - *(int*) (node + 0x41), 0);
 				}
 				*(float*) (self + 0xc4) = (float) ((fcn_0050fdb0(*(unsigned short*) map, 8, self + 0x8c)
-					- g_662908) * g_662ad8);
+					- g_662908) * 0.25);
 			}
 			*(unsigned char*) (self + 0xc8) = 0;
 		}

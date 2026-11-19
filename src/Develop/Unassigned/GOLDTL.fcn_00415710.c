@@ -106,7 +106,7 @@ void __cdecl fcn_00415710(Rain415710* self, float dt)
 		return;
 	}
 	dz = a2 + a2;
-	k = half * g_662a68;
+	k = half * 0.33333334f;
 	s = self->segs;
 	for (i = 0; i < self->count; i++, s += 10) {
 		wx = t0 * s[4] + u0 * s[5];

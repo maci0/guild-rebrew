@@ -1,4 +1,5 @@
 #include "client_data.h"
+#include "Develop/Units/d2.v1/d2_win.h"
 extern int main_LoopFlags;
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -179,7 +180,7 @@ void __cdecl fcn_005d1790(unsigned short *a0, int a1)
 		io_AppendText("$3>$L-$A$0>");
 	}
 	d2_SetForm(h, 3);
-	stamp = g_1015f40[d2_CurrentWindowId].xc;
+	stamp = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width;
 	io_FormatTextBuffer(buf12, 0x1f61);
 	idx = d2_ShowTxt(0, 1, buf12, d2_CurrentWindowId);
 	*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;

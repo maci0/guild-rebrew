@@ -4,14 +4,14 @@
 
 #include <string.h>
 
-typedef struct Ent {
-	char pad0[4];
-	int x4;
-	char pad8[0x21c - 8];
-} Ent;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
@@ -43,7 +43,7 @@ int __cdecl ai_RunKreditNehmen(char* actor, char* action, char* terms)
 			gm_ResolveEntityById((void**) (&p2), 0, 0, *(int*) (action + 8));
 			memset(msg, 0, sizeof(msg));
 			msg[4] = 0x23;
-			*(int*) (msg + 8) = ((Ent*)g_7f4ca0)[*(unsigned short*) (p1 + 0x27)].x4;
+			*(int*) (msg + 8) = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (p1 + 0x27)].entity_id;
 			*(int*) (msg + 0xc) = *(int*) (p1 + 1);
 			*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
 			*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);

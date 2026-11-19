@@ -7,8 +7,7 @@
 extern char g_69649c[];
 extern char g_6964b4[];
 extern char g_696488[];
-extern int g_773d40;
-extern char* g_773d44;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl _strcmpi(const char* a, const char* b);
 

@@ -1,32 +1,4 @@
-typedef struct Win {
-	int pad0;
-	int left;
-	int x;
-	short h;
-	short pad0e;
-	int margin;
-	unsigned char flags;
-	char pad15[0x28 - 0x15];
-	int* children;
-	int count;
-	char pad30[0x3c - 0x30];
-	char* text;
-	char pad40[0x254 - 0x40];
-	int view;
-	int base;
-	int sel;
-	int off;
-	int pos;
-	int scroll;
-	char pad26c[0x290 - 0x26c];
-	int used;
-	char pad294[0x3a0 - 0x294];
-	void* tex;
-	float alpha;
-	char pad3a8[0x3b8 - 0x3a8];
-	int hot[3];
-	char pad3c4[0x3cc - 0x3c4];
-} Win;
+#include "Develop/Units/d2.v1/d2_win.h"
 // SIZE 0x3cc
 
 typedef struct Slot {
@@ -50,26 +22,26 @@ int __cdecl fcn_0046f2c0(int win, int keep)
 	if (win > 0x60) {
 		return 0;
 	}
-	if (!((Win*)g_1015f40)[win].used) {
+	if (!((D2_WIN*)g_1015f40)[win].active) {
 		return 0;
 	}
-	for (i = ((Win*)g_1015f40)[win].count - 1; i >= 0; i--) {
-		if (((Win*)g_1015f40)[win].children[i] == ((Win*)g_1015f40)[win].hot[0]) {
-			((Win*)g_1015f40)[win].hot[0] = -1;
-		} else if (((Win*)g_1015f40)[win].children[i] == ((Win*)g_1015f40)[win].hot[1]) {
-			((Win*)g_1015f40)[win].hot[1] = -1;
-		} else if (((Win*)g_1015f40)[win].children[i] == ((Win*)g_1015f40)[win].hot[2]) {
-			((Win*)g_1015f40)[win].hot[2] = -1;
+	for (i = ((D2_WIN*)g_1015f40)[win].count - 1; i >= 0; i--) {
+		if (((D2_WIN*)g_1015f40)[win].children[i] == ((int*)((D2_WIN*)g_1015f40)[win].pad3a8)[4 + 0]) {
+			((int*)((D2_WIN*)g_1015f40)[win].pad3a8)[4 + 0] = -1;
+		} else if (((D2_WIN*)g_1015f40)[win].children[i] == ((int*)((D2_WIN*)g_1015f40)[win].pad3a8)[4 + 1]) {
+			((int*)((D2_WIN*)g_1015f40)[win].pad3a8)[4 + 1] = -1;
+		} else if (((D2_WIN*)g_1015f40)[win].children[i] == ((int*)((D2_WIN*)g_1015f40)[win].pad3a8)[4 + 2]) {
+			((int*)((D2_WIN*)g_1015f40)[win].pad3a8)[4 + 2] = -1;
 		}
-		if (((Slot*)g_1015ea0)[((Win*)g_1015f40)[win].children[i]].type != 0x40 || keep) {
-			fcn_0046b2b0(((Win*)g_1015f40)[win].children[i]);
+		if (((Slot*)g_1015ea0)[((D2_WIN*)g_1015f40)[win].children[i]].type != 0x40 || keep) {
+			fcn_0046b2b0(((D2_WIN*)g_1015f40)[win].children[i]);
 		}
 	}
-	if (((Win*)g_1015f40)[win].text) {
-		((Win*)g_1015f40)[win].text[0] = 0;
+	if ((*(char**) &((D2_WIN*)g_1015f40)[win].pad3c[0])) {
+		(*(char**) &((D2_WIN*)g_1015f40)[win].pad3c[0])[0] = 0;
 	}
-	((Win*)g_1015f40)[win].sel = -1;
-	((Win*)g_1015f40)[win].base = 0;
-	((Win*)g_1015f40)[win].view = 0;
+	*(int*) &((D2_WIN*)g_1015f40)[win].pad3c[0x220] = -1;
+	*(int*) &((D2_WIN*)g_1015f40)[win].pad3c[0x21c] = 0;
+	*(int*) &((D2_WIN*)g_1015f40)[win].pad3c[0x218] = 0;
 	return 1;
 }

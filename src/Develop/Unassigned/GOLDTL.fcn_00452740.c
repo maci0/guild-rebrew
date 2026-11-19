@@ -6,7 +6,7 @@ extern int g_6b8718;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned int g_6b8710;
 extern unsigned int g_6b8714;
-extern void* g_6b5de0;
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
 extern volatile unsigned int g_6b7fac; void __cdecl fcn_00452420(void*);
 int __cdecl fcn_0045cb10(int, char);
 void __cdecl fcn_004557c0(char*, char*, int, float*);
@@ -56,7 +56,7 @@ void __cdecl fcn_00452740(void *arg)
 	}
 	fcn_004557c0((char*) obj + 0xe8,
 				 (char*) (~-((*(unsigned char *) (obj + 0x2fc) & 0x20) != 0) & (unsigned int) d3_ActiveCamera), 0, matrix);
-	first = *(int *) g_6b5de0;
+	first = (int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl;
 	(*(int (__stdcall **) (int, int, float*)) (first + 0x94))((int) g_6b5de0, 0x100, matrix);
 	if (cnt > 0) {
 		for (k = 0; k < cnt; k++) {
@@ -67,7 +67,7 @@ void __cdecl fcn_00452740(void *arg)
 				int vobj;
 
 
-				vidx = *(int *) g_6b5de0;
+				vidx = (int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl;
 				(*(int (__stdcall **) (int, int, int)) (vidx + 0xf4))((int) g_6b5de0, 0, *(int*) (item + 0x50));
 				color = (*(unsigned char *) (item + 0x5a) >> 1) & 1;
 				fcn_004372d0(*(unsigned char*) (item + 0x58),
@@ -109,7 +109,7 @@ void __cdecl fcn_00452740(void *arg)
 						}
 					}
 					sum /= emitted;
-					(*(int (__stdcall **) (int, int, int)) (*(int *) g_6b5de0 + 0xc8))(
+					(*(int (__stdcall **) (int, int, int)) ((int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0xc8))(
 						(int) g_6b5de0, 0x9a, *(int*) &sum);
 				} else { int vert;
 					v = (-(g_6b8718 != 0) & 0xfffff000) + 0x2000;
@@ -143,7 +143,7 @@ void __cdecl fcn_00452740(void *arg)
 					}
 				}
 				(*(int (__stdcall **) (int)) (*(int *) tp_d3_RenderVertexBuffer + 0x30))((int) tp_d3_RenderVertexBuffer);
-				(*(int (__stdcall **) (int, int, int, int)) (*(int *) g_6b5de0 + 0x118))(
+				(*(int (__stdcall **) (int, int, int, int)) ((int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0x118))(
 					(int) g_6b5de0, 1, g_6b8718, emitted);
 				g_6b8718 += cnt;
 				*(int *) (*(int *) (obj + 0x2c) + k * 4) = 0;

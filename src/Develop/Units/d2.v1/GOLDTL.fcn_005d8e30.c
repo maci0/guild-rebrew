@@ -2,9 +2,8 @@
 
 
 extern int g_100f1dc;
-extern int d2_CurrentElementId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
-extern int g_14ce8e0;
 
 int __cdecl fcn_004f5e20(int, int);
 void __cdecl fcn_004c6ae0(int, int);

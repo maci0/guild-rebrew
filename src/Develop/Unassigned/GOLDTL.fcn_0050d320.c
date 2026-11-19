@@ -1,4 +1,4 @@
-extern char g_8680b4[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 

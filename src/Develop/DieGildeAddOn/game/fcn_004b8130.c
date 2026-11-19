@@ -54,7 +54,7 @@ int __cdecl fcn_004b8130(int* arg)
     t = gm_RandomMod(4) & 0xffff;
     d = (double) t + g_6629c8;
     v = gm_WalkEntityChain(*(unsigned short*) rec);
-    r = (int) (g_6640e8 * ((double) v * d));
+    r = (int) (0.01 * ((double) v * d));
     fcn_004c51a0(-1, arg[0], g_773d75, r);
     if (rec[0x169] == 0x1e) {
         mode = 0;

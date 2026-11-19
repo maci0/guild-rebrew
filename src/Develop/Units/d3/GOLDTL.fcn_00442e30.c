@@ -30,14 +30,8 @@ typedef struct {
 	int x3c8;
 } Cfg;
 
-extern char* d3_ObjectListHead;
-extern char d3_SceneObjectSentinel[];
-extern char* g_1042538;
 extern char g_1043060;
-extern char* d3_SceneRenderListHead;
-extern char g_1040640[];
 extern int g_6b8300;
-extern int g_6b89c0;
 extern int g_67a370;
 extern VECTOR3 g_6b86c4;
 VECTOR3 g_67bbdc = { 200.0f };
@@ -47,7 +41,6 @@ extern int g_6b8484;
 extern char* g_6b8480;
 extern char* g_6b847c;
 extern char* g_6b8478;
-extern int g_6b8058;
 extern int g_67a37c;
 extern int g_67a380;
 #include "Develop/DieGildeAddOn/game/game_data.h"

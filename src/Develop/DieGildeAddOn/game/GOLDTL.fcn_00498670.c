@@ -161,7 +161,7 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 					t = t / 2 + t % 2;
 					if (type < t && v != 7) {
 						tmp = fcn_0050d170(*p + 1);
-						tmp = (int) ((float) tmp * g_66414c);
+						tmp = (int) ((float) tmp * 0.3f);
 						if (tmp <= ratio) {
 							out1->kind = 5;
 							out1->f1 = *p + 1;

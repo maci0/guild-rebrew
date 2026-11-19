@@ -46,11 +46,8 @@ extern int g_77467c;
 extern unsigned char g_77534c;
 extern int g_6a24d8[];
 extern int g_7ea380[15];
-extern int g_6a25ac;
-extern int g_1040480;
-extern int g_6a3764;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774684;
-extern int g_6a25fc;
 extern char* g_1015ea0;
 
 void __cdecl fcn_0047a040(int, int, int, int);

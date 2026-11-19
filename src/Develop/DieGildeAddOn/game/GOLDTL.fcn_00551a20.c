@@ -12,15 +12,15 @@
 #pragma pack(pop)
 
 // SIZE 0x21c
-typedef struct
-{
-	unsigned short id;
-	char pad2[0x21c - 2];
-} fcn_00551a20_Ent;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
 
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+
 
 int __cdecl fcn_004c4450(int id);
 void __cdecl fcn_00546190(char* t);
@@ -30,12 +30,12 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_005dcf40(fcn_00551a20_Ent* e, int v);
+void __cdecl fcn_005dcf40(ENTITY_RECORD* e, int v);
 
 void __cdecl fcn_00551a20(char* t)
 {
 	char buf[0x100];
-	fcn_00551a20_Ent* e;
+	ENTITY_RECORD* e;
 	char* p;
 	char* q;
 
@@ -50,7 +50,7 @@ void __cdecl fcn_00551a20(char* t)
 	*(int*) (t + 0x84) = -1;
 	switch (*(int*) (t + 0x70)) {
 	case 0:
-		e = &((fcn_00551a20_Ent*) g_7f4ca0)[*(unsigned short*) (t + 8)];
+		e = &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (t + 8)];
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
 			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
@@ -59,20 +59,20 @@ void __cdecl fcn_00551a20(char* t)
 		}
 		fcn_005dcf40(e, *(unsigned char*) (t + 0xb8));
 		fcn_005dcf40(e, *(unsigned char*) (t + 0xb9));
-		io_FormatTextBuffer(buf, 0x1a9e, e->id);
+		io_FormatTextBuffer(buf, 0x1a9e, e->entity_index);
 		*(int*) (t + 0x70) = (unsigned char) (++t[0xba]) >= 5;
 		*(short*) (t + 0x56) += 0x18;
 		he_RegisterApEvent(*(unsigned short*) p, buf, 0, -*(int*) (t + 0xb4));
 		return;
 	case 1:
-		e = &((fcn_00551a20_Ent*) g_7f4ca0)[*(unsigned short*) (t + 8)];
+		e = &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (t + 8)];
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
 			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 			fcn_004c5620(-1, t);
 			return;
 		}
-		io_FormatTextBuffer(buf, 0x1a9f, e->id);
+		io_FormatTextBuffer(buf, 0x1a9f, e->entity_index);
 		fcn_00545d40(*(int*) (p + 4), *(int*) (p + 4), buf, 0, 0x5f4, 0);
 		q = (char*) gm_GetEntityTableEntry((char*) (p));
 		if (q != 0) {

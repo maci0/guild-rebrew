@@ -39,7 +39,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 	char buf2[0x400];
 
 	f = gm_RandomFloat01();
-	sign = (f > g_66414c) ? 1 : -1;
+	sign = (f > 0.3f) ? 1 : -1;
 
 	if (e[0x169] == 0x1e) {
 		if (a1[0] != 1)
@@ -53,11 +53,11 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 			return 0;
 		if (srv_GetEntityOfficeSlot(h, role, slot) == 0)
 			return 0;
-		if (f > g_66414c)
+		if (f > 0.3f)
 			fcn_004e8240(slot[0], 0, 0, 4, 0xff);
 		fcn_005100f0(*(int*) (e + 4), -8);
 		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
-		if (f > g_66414c) {
+		if (f > 0.3f) {
 			if (7 == h[2] || 6 == h[2]) {
 				io_FormatTextBuffer(buf, 0x1684);
 				fcn_00545d40(*(int*) (h + 4), -1, buf, 0, 0x5fb, g_6b5c60);
@@ -100,7 +100,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 			return 0;
 		if (a1[1] < 1 || a1[1] > 6)
 			return 0;
-		if (f > g_66414c) {
+		if (f > 0.3f) {
 			float g;
 			n = fcn_004e8b80(a1[1], 6, arr);
 			g = gm_GetEntitySkill(e, 4);
@@ -113,7 +113,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 		}
 		fcn_005100f0(*(int*) (e + 4), -8);
 		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
-		if (f > g_66414c) {
+		if (f > 0.3f) {
 			io_FormatTextBuffer(buf, 0x167a, a1[1] + 0x1663);
 			p = g_7f4ca4;
 			do {
@@ -143,7 +143,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 			return 0;
 		if (a1[1] < 1 || a1[1] > 6)
 			return 0;
-		if (f > g_66414c) {
+		if (f > 0.3f) {
 			float g;
 			n = fcn_004e8b80(a1[1], 6, arr);
 			g = gm_GetEntitySkill(e, 4);
@@ -165,7 +165,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* a1)
 		}
 		fcn_005100f0(*(int*) (e + 4), -8);
 		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
-		if (f > g_66414c) {
+		if (f > 0.3f) {
 			io_FormatTextBuffer(buf, 0x1672, a1[1] + 0x1663);
 			io_FormatTextBuffer(buf2, 0x1670, a1[1] + 0x1663);
 			p = g_7f4ca4;

@@ -66,7 +66,7 @@ void __cdecl fcn_004dff50(char* task)
 		} else {
 			g_772f59 = g_772f59 + n;
 		}
-		fcn_004cfc40(foe, (int) (*(float*) (foe + 0x1c) * g_6640e8 * n), 0);
+		fcn_004cfc40(foe, (int) (*(float*) (foe + 0x1c) * 0.01 * n), 0);
 	} else {
 		hit = 0;
 		n = 0;
@@ -91,7 +91,7 @@ void __cdecl fcn_004dff50(char* task)
 			float x;
 			float y;
 
-			y = *(float*) (foe + 0x1c) * g_6640e8 * n;
+			y = *(float*) (foe + 0x1c) * 0.01 * n;
 			x = (float) *(int*) (foe + 0x24) - y;
 			*(int*) (foe + 0x24) = (int) x;
 			fcn_004ff210(*(unsigned short*) foe, (int) -y);

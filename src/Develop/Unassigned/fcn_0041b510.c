@@ -1,6 +1,6 @@
 typedef void* Obj41b510;
 
-extern void* g_6b5de0;
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
 extern void* g_6b5de4;
 extern int g_14ce860;
 extern int g_14ce864;
@@ -21,7 +21,7 @@ void __cdecl fcn_0041b510(int viewportX, int viewportY, int a3, int a4, int a5, 
 	vp[2] = g_14ce860 - 1;
 	vp[3] = g_14ce864 - 1;
 	obj = g_6b5de0;
-	vtbl = *(void***) obj;
+	vtbl = (void**) ((D3D_DEVICE_VIEW*) obj)->vtbl;
 	((void (__stdcall*) (Obj41b510)) vtbl[0x88 / 4])(obj);
 	packed = (unsigned int) (unsigned char) a4 | 0xffffff00;
 	packed <<= 8;
@@ -32,6 +32,6 @@ void __cdecl fcn_0041b510(int viewportX, int viewportY, int a3, int a4, int a5, 
 	vtbl = *(void***) obj;
 	((void (__stdcall*) (Obj41b510, int, int, int*, int, unsigned int)) vtbl[0x18 / 4])(obj, a3, -1, vp, 0x20, packed);
 	obj = g_6b5de0;
-	vtbl = *(void***) obj;
+	vtbl = (void**) ((D3D_DEVICE_VIEW*) obj)->vtbl;
 	((void (__stdcall*) (Obj41b510)) vtbl[0x8c / 4])(obj);
 }

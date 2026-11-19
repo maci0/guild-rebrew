@@ -7,7 +7,7 @@ typedef struct {
 	int fac;
 } fcn_004a8770_game;
 
-extern char* g_1007cd4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 
 void __cdecl fcn_004c51a0(int, int, char, int);

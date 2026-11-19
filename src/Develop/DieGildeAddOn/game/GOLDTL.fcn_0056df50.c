@@ -2,15 +2,15 @@
 
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int owner;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 extern unsigned char g_773d75;
 extern char g_699874[];
 extern char g_6a6b70[];
@@ -34,7 +34,7 @@ void __cdecl fcn_0056df50(char* u)
 	char text[0x400];
 	char* p;
 	char* t;
-	struct house* h;
+	ENTITY_RECORD* h;
 
 	switch (*(int*) (u + 0x70)) {
 	case 0:
@@ -47,7 +47,7 @@ void __cdecl fcn_0056df50(char* u)
 			goto kill;
 		}
 		if (*(unsigned short*) (t + 0x25) != 0xffff) {
-			fcn_004c5f60(*(int*) (t + 1), ((struct house*)g_7f4ca0)[*(unsigned short*) (t + 0x25)].owner, *(int*) (p + 4));
+			fcn_004c5f60(*(int*) (t + 1), ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (t + 0x25)].entity_id, *(int*) (p + 4));
 		} else {
 			fcn_004c5f60(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
 		}
@@ -55,13 +55,13 @@ void __cdecl fcn_0056df50(char* u)
 		if (*(int*) (u + 0xbc) == 0) {
 			goto kill;
 		}
-		h = &((struct house*)g_7f4ca0)[*(unsigned short*) (t + 0x25)];
+		h = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (t + 0x25)];
 		if (h != 0) {
-			if (h->type == 6 || h->type == 7) {
+			if (h->entity_state == 6 || h->entity_state == 7) {
 				io_FormatTextBuffer(text, 0x17e6, t, *(unsigned short*) p, *(int*) (u + 0xbc));
-				he_MessageBoxQuickjump(h->owner, -1, text, 0, 0x5ec, *(int*) (t + 1), -1, 0, g_699874);
+				he_MessageBoxQuickjump(h->entity_id, -1, text, 0, 0x5ec, *(int*) (t + 1), -1, 0, g_699874);
 			}
-			fcn_004c5150(h->owner, -1, g_773d75, *(int*) (u + 0xbc));
+			fcn_004c5150(h->entity_id, -1, g_773d75, *(int*) (u + 0xbc));
 		}
 		fcn_004c5f60(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
 		if (fcn_00567030(p, &site, &target) != 0) {

@@ -1,15 +1,15 @@
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 
 
-#pragma pack(push, 2)
-typedef struct {
-	int day;
-	unsigned short hour;
-	int min;
-	int sec;
-} Time;
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
+
+
+
+
+
+
 // SIZE 0xe
-#pragma pack(pop)
+
 
 typedef struct {
 	int id;
@@ -18,7 +18,7 @@ typedef struct {
 	char pad9[3];
 	int key;
 	char pad10[8];
-	Time t;
+	GAME_TIMESTAMP t;
 	unsigned char flags;
 	char pad27;
 	int busy;
@@ -42,15 +42,15 @@ extern unsigned char g_7747b0;
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_00500bb0(Time *, int, int, int);
-int __cdecl fcn_00500cb0(Time *, Time *);
+void __cdecl fcn_00500bb0(GAME_TIMESTAMP *, int, int, int);
+int __cdecl fcn_00500cb0(GAME_TIMESTAMP *, GAME_TIMESTAMP *);
 void __cdecl fcn_004c6a70(int);
 #include "Develop/DieGildeAddOn/game/cutscene.h"
 
 /* ADDRESS: GOLDTL 0x004e6650 */
 int __cdecl cut_UpdateCutscenes(void)
 {
-	Time t;
+	GAME_TIMESTAMP t;
 	int i;
 	int r;
 
@@ -62,7 +62,7 @@ int __cdecl cut_UpdateCutscenes(void)
 				((Ent*)cut_Cutscenes)[i].key = *(int *) (g_7f4ca4 + g_774970 * 0x21c);
 			}
 			if (*(int *) (g_7f4ca4 + g_774970 * 0x21c) == ((Ent*)cut_Cutscenes)[i].key && ((Ent*)cut_Cutscenes)[i].busy == 0 &&
-			    fcn_00500cb0(&(*(Time*)&gm_GameTime), &t) > 0) {
+			    fcn_00500cb0(&(*(GAME_TIMESTAMP*)&gm_GameTime), &t) > 0) {
 				r = cut_CutsceneReady((int*) &((Ent*)cut_Cutscenes)[i]);
 				if (r == -1) {
 					fcn_00500bb0(&((Ent*)cut_Cutscenes)[i].t, 0, 5, 0);
@@ -83,10 +83,10 @@ int __cdecl cut_UpdateCutscenes(void)
 					continue;
 				}
 			}
-			if (((Kind*) (g_9b0840 + 0x10))[((Ent*)cut_Cutscenes)[i].type].fn == 0 && fcn_00500cb0(&(*(Time*)&gm_GameTime), &((Ent*)cut_Cutscenes)[i].t) > 0) {
+			if (((Kind*) (g_9b0840 + 0x10))[((Ent*)cut_Cutscenes)[i].type].fn == 0 && fcn_00500cb0(&(*(GAME_TIMESTAMP*)&gm_GameTime), &((Ent*)cut_Cutscenes)[i].t) > 0) {
 				((Ent*)cut_Cutscenes)[i].done = 1;
 			}
-			if (fcn_00500cb0(&(*(Time*)&gm_GameTime), &((Ent*)cut_Cutscenes)[i].t) > 0 && ((Ent*)cut_Cutscenes)[i].done == 0) {
+			if (fcn_00500cb0(&(*(GAME_TIMESTAMP*)&gm_GameTime), &((Ent*)cut_Cutscenes)[i].t) > 0 && ((Ent*)cut_Cutscenes)[i].done == 0) {
 				if (cut_IsParticipant(*(int *) (g_7f4ca4 + g_774970 * 0x21c), (unsigned char*) &((Ent*)cut_Cutscenes)[i]) != 0 &&
 				    (((Ent*)cut_Cutscenes)[i].flags & 0x80) != 0) {
 					if (*(int *) (g_7f4ca4 + g_774970 * 0x21c + 0x208) == ((Ent*)cut_Cutscenes)[i].id) {
@@ -99,7 +99,7 @@ int __cdecl cut_UpdateCutscenes(void)
 					cut_FreeCutscene(((Ent*)cut_Cutscenes)[i].id);
 				}
 			}
-			if (fcn_00500cb0(&(*(Time*)&gm_GameTime), &t) > 0 && ((Ent*)cut_Cutscenes)[i].done != 0) {
+			if (fcn_00500cb0(&(*(GAME_TIMESTAMP*)&gm_GameTime), &t) > 0 && ((Ent*)cut_Cutscenes)[i].done != 0) {
 				g_7e2700 = 0;
 				fcn_004e5a00((int*) &((Ent*)cut_Cutscenes)[i]);
 				cut_FreeCutscene(((Ent*)cut_Cutscenes)[i].id);

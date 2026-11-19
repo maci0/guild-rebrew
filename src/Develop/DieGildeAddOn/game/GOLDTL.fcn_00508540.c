@@ -54,7 +54,7 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 	if (fcn_00508220(mode, avail) == 0) {
 		return 0;
 	}
-	r = gm_RandomMod((int) ((double) (unsigned int) avail[2] * g_662908)) & 0xffff;
+	r = gm_RandomMod((int) ((double) (unsigned int) avail[2] * 0.5)) & 0xffff;
 	if (r == 0) {
 		return 0;
 	}

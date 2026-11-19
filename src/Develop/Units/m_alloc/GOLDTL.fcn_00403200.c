@@ -1,4 +1,4 @@
-extern void* ch_CharacterSlots[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_67536c[];
 extern char g_67534c[];
 

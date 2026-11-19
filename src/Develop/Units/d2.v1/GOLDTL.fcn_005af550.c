@@ -21,19 +21,19 @@ typedef struct {
 } Packet;
 /* SIZE 0xf8 */
 
-typedef struct {
-	char pad0[4];
-	int x4;
-	char pad8[0x180];
-	unsigned char x188;
-	char pad189[0x93];
-} Player;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 /* SIZE 0x21c */
 
 void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
 
-extern char g_7f4ca0[];
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* g_7746c4;
 extern int g_14abc98;
@@ -75,7 +75,7 @@ int __cdecl fcn_005af550(int unused, char* param)
 		return 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((Player*) g_7f4ca0)[i].x188 != 0)
+		if (((ENTITY_RECORD*) g_7f4ca0)[i].unk_17c[12] != 0)
 			break;
 	}
 	if (i >= 768) {
@@ -102,15 +102,15 @@ int __cdecl fcn_005af550(int unused, char* param)
 					if (n >= 6) {
 						break;
 					}
-					if (((Player*) g_7f4ca0)[i].x188 != 0) {
-						pkt.ids[n] = ((Player*) g_7f4ca0)[i].x4;
+					if (((ENTITY_RECORD*) g_7f4ca0)[i].unk_17c[12] != 0) {
+						pkt.ids[n] = ((ENTITY_RECORD*) g_7f4ca0)[i].entity_id;
 						n++;
 					}
 				}
 				if (n != 0) {
 					count = 0;
 					pkt.type = 0x44;
-					pkt.x8 = ((Player*) g_7f4ca0)[g_774970].x4;
+					pkt.x8 = ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id;
 					pkt.x36 = 2;
 					pkt.x58 = *(int*) (param + 1);
 					pkt.x5c = *(int*) (g_7746c4 + 1);
@@ -118,7 +118,7 @@ int __cdecl fcn_005af550(int unused, char* param)
 					cm_ExProdObjekt();
 					flag = 1;
 					for (i = 0; i < 768; i++) {
-						if (((Player*) g_7f4ca0)[i].x188 != 0)
+						if (((ENTITY_RECORD*) g_7f4ca0)[i].unk_17c[12] != 0)
 							count++;
 					}
 					if (count > 6) {

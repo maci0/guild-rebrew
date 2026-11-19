@@ -42,7 +42,7 @@ int __cdecl fcn_004f7e70(unsigned char* entity, int* context)
 			io_FormatTextBuffer(buf + strlen(buf), 0x1d97, info.b2 + base, info.fc);
 		fcn_004fa5f0(buf, 1, 0x657c7);
 	} else if (*context == 1 && entity[2] == 6) {
-		io_FormatTextBuffer((char*) context + 0x14, (int) g_679060, 0x1d96);
+		io_FormatTextBuffer((char*) context + 0x14, (int) "%s", 0x1d96);
 	}
 	return 2;
 }

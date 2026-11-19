@@ -1,7 +1,7 @@
 
 
 #include "client_types.h"
-typedef Win_1015f40 Win;
+#include "Develop/Units/d2.v1/d2_win.h"
 // SIZE 0x3cc
 
 typedef struct
@@ -33,15 +33,15 @@ int __cdecl fcn_005cc620(int a1, int a2, int a3, unsigned int n, Item* items)
 		return 0;
 	}
 	y = fcn_005cc240(a1, a2, a3);
-	half = g_1015f40[d2_CurrentWindowId].xc / 2;
+	half = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width / 2;
 	fcn_005c9090(g_14aad94, half, 8, half * 2, 0x55);
 	for (i = 0; i < n; i++) {
-		items[i].x10 = (g_1015f40[d2_CurrentWindowId].xc - *(short*) (g_772500 + 0x1ebd8)) / 2;
+		items[i].x10 = (((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - *(short*) (g_772500 + 0x1ebd8)) / 2;
 		items[i].x14 = i * 0x70 + 0x28;
 		fcn_005ca740(items[i].x10, i * 0x70 + 0x28, d2_CurrentWindowId, 0x56, &items[i], 1);
 	}
 	fcn_005cc2f0(n, items);
-	g_1015f40[d2_CurrentWindowId].x258 = y;
-	g_1015f40[d2_CurrentWindowId].x274 = 0x70;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x21c] = y;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x238] = 0x70;
 	return 1;
 }

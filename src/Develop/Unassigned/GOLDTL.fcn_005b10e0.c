@@ -2,18 +2,9 @@
 
 extern short g_14ce8c0;
 extern short g_14ce8c2;
-extern int g_6b5c80;
-extern int d2_MouseTopBoundary;
-extern int d2_MouseRightBoundary;
-extern int d2_MouseBottomBoundary;
-extern char g_14cf7c8;
-extern char g_14cf7d0;
-extern char g_14cf7cb;
-extern char g_14cf7cd;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774a58;
 extern int g_774a4c;
-extern int g_778d24;
-extern int g_778d20;
 
 int __cdecl fcn_005b10e0(char* w)
 {

@@ -3,8 +3,8 @@
 
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
-extern float g_662910;
-extern float g_662a6c;
+
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_0050c710(unsigned char* rec, int a, int b);
 
@@ -28,5 +28,5 @@ float __cdecl fcn_004f4ed0(unsigned short* key)
 			}
 		}
 	}
-	return best * g_662910;
+	return best * 0.01f;
 }

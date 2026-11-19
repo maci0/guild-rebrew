@@ -1,8 +1,5 @@
-extern int g_14cbca0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6b8300;
-extern int g_6b89c0;
-extern int g_772f08;
 extern unsigned short g_774970;
 /* Release the client path/mode tables and reset the scene clock state. */
 

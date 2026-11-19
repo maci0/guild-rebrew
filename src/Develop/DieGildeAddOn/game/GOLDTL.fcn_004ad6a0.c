@@ -1,4 +1,5 @@
 #include <string.h>
+#include "client_types.h"
 
 typedef struct Hit4ad6a0 {
 	char* p;
@@ -18,10 +19,7 @@ typedef struct Msg4ad6a0 {
 	int unk_1c;           /* +0x1c */
 	int unk_20;           /* +0x20 */
 	int unk_24;           /* +0x24 */
-	int year;             /* +0x28 */
-	int month;            /* +0x2c */
-	int day;              /* +0x30 */
-	unsigned short hour;  /* +0x34 */
+	pos14_7f4c00 timestamp; /* +0x28 */
 	unsigned char flag;   /* +0x36 */
 	char pad37[0x31];     /* +0x37 */
 	int unk_68;           /* +0x68 */
@@ -111,11 +109,11 @@ void __cdecl fcn_004ad6a0(void)
 	if (best != 0) {
 		fcn_004e8240((unsigned char) info[0], best, 0, 1, 0xff);
 		if (best[2] == 6 || best[2] == 7 || best[2] == 5) {
-			msg.year = gm_GameTime;
-			msg.month = g_7f4c04;
+			msg.timestamp.a = gm_GameTime;
+			msg.timestamp.b = g_7f4c04;
 			v = *(int*) (best + 4);
-			msg.day = g_7f4c08;
-			msg.hour = g_7f4c0c;
+			msg.timestamp.c = g_7f4c08;
+			msg.timestamp.d = g_7f4c0c;
 			msg.type = 0xa5;
 			msg.id = v;
 			msg.unk_c = -1;

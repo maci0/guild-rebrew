@@ -73,14 +73,14 @@ int __cdecl fcn_004fd4f0(char* a1, fcn_004fd4f0_Out* out)
 	me = &g_7f4ca0[*(unsigned short*) (a1 + 0x27)];
 	gm_GetEntitySkill(me, 4);
 	fcn_004f4830(2, &st);
-	mult = fcn_0050c710(a1, 9, 1) * g_665370 + g_6628a0;
+	mult = fcn_0050c710(a1, 9, 1) * g_665370 + 1.0f;
 	for (i = 0; i < 768; i++) {
 		ent = &g_7f4ca0[i];
 		if (ent->id == 0xffff || ent->kind == 6 || ent->kind == 7 || ent->kind == 8 || ent->kind >= 10)
 			continue;
 		if (ent->h == me->h)
 			continue;
-		r = ent->rank * g_6628bc;
+		r = ent->rank * 0.25f;
 		if (ent->side == me->side) {
 			v = r * mult;
 			sign = 0.05f;

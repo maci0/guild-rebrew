@@ -23,7 +23,7 @@ int __cdecl fcn_004fa2e0(void* entity, void* params)
 		return 2;
 	}
 	if (*(int*) params == 1 && *(char*) ((char*) entity + 2) == 6) {
-		io_FormatTextBuffer((char*) params + 0x14, (int) g_679060, 0x1e1a);
+		io_FormatTextBuffer((char*) params + 0x14, (int) "%s", 0x1e1a);
 	}
 	return 2;
 }

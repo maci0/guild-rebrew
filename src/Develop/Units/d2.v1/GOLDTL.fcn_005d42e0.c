@@ -14,6 +14,7 @@ typedef struct Ent {
 // SIZE 0x2f4
 
 extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_win.h"
 extern char g_1015f40[];
 extern int d2_CurrentWindowId;
 extern unsigned char g_773d75;
@@ -26,7 +27,6 @@ extern double dbl_1_0;
 extern double g_662cc0;
 extern float g_662a98;
 extern float g_662cf8;
-extern double g_662950;
 extern double g_662c38;
 
 int __cdecl fcn_0057ec20(int a);
@@ -105,8 +105,8 @@ void __cdecl fcn_005d42e0(void)
 		n = 4;
 	}
 	io_AppendText(0x1f1b, n + 0x1f1c);
-	io_AppendText(0x1f21, (int) (gfx.f[1] * 100.0f > g_662950 ? gfx.f[1] * 100.0f : g_662950));
-	n = (int) ((gfx.f[3] > g_662950 ? gfx.f[3] : g_662950) * g_662c38);
+	io_AppendText(0x1f21, (int) (gfx.f[1] * 100.0f > 0.0 ? gfx.f[1] * 100.0f : 0.0));
+	n = (int) ((gfx.f[3] > 0.0 ? gfx.f[3] : 0.0) * g_662c38);
 	io_AppendText(0x1f22, n);
 	d2_SetForm(dlg, 3);
 	fcn_005d3d90((unsigned short) g_775340, gfx, d2_CurrentWindowId);
@@ -127,8 +127,8 @@ void __cdecl fcn_005d42e0(void)
 		*(char*) &g = cp[0];
 		*(char*) &b = cp[1];
 		for (j = i + 5; j < i + 15; j++) {
-			fcn_00472c30(*(int*) (g_1015f40 + d2_CurrentWindowId * 0x3cc + 0xc) - 1, j,
-				*(int*) (g_1015f40 + d2_CurrentWindowId * 0x3cc + 0xc) - 0xb, j, r, g, b);
+			fcn_00472c30(((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 1, j,
+				((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0xb, j, r, g, b);
 		}
 		row++;
 		cp += 3;

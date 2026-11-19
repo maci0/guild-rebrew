@@ -12,7 +12,7 @@ extern char g_99f620[];
 extern Cell_99ef80 g_99ef80[9][8];
 extern Sample_99ec20 g_99ec20[16];
 extern char g_99f5e0[];
-extern float g_773d4c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_004fa690(void)
 {

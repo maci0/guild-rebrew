@@ -1,10 +1,6 @@
 #include "client_types.h"
 extern char g_6b5c60[];
-extern int g_6772c4;
-extern int g_6b5c80;
-extern int d2_MouseTopBoundary;
-extern int d2_MouseRightBoundary;
-extern int d2_MouseBottomBoundary;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1040494;
 extern int d2_ScreenHeight;
 

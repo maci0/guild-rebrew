@@ -57,12 +57,10 @@ typedef struct {
 } PickResult;                           /* SIZE 0x14 */
 
 extern int d2_CurrentWindowId;
-extern int d2_CurrentElementId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern volatile int g_6b7fac;
-extern int g_14ce8e0;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
-extern char g_6a9694[];
 extern char g_6a969c[];
 
 int __cdecl fcn_00470820(int, int, char*);

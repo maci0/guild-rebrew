@@ -68,7 +68,7 @@ void __cdecl fcn_004fd0a0(void)
 		if (!(*(double*) dmem < g_6629c8)) {
 			*(double*) dmem = 1.0;
 		}
-		inv = g_6628a0 - (float) r / (float) n;
+		inv = 1.0f - (float) r / (float) n;
 		fcn_004c5360();
 		g_773d48++;
 		fcn_004c5480(*(int*) (e + 4), 0x1e4, -(*(float*) (e + 0x1e4) - (*(double*) dmem + inv) * 0.5));

@@ -103,7 +103,7 @@ void __cdecl fcn_00567590(char* a0)
 									goto next0;
 								}
 							}
-							if ((float) (g_7f4c04 & 0xffff) < g_696540[hour] - g_6628a0) {
+							if ((float) (g_7f4c04 & 0xffff) < g_696540[hour] - 1.0f) {
 								fcn_004c6650(*(int*) (p - 0x168));
 								fcn_004c5da0(*(int*) (p - 0x168), out1, out2, 0, 0, "Go to work");
 								found += 1;

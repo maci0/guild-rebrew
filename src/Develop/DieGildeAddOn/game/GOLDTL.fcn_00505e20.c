@@ -36,11 +36,11 @@ typedef struct {
 } Unit;
 
 // SIZE 0x21c
-typedef struct {
-	char pad0[4];
-	int id;
-	char pad8[0x21c - 8];
-} Entity;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
 
 // SIZE 0x88
 typedef struct {
@@ -51,7 +51,7 @@ typedef struct {
 } Order;
 
 extern unsigned char* lpGebaeudePROT;
-extern char g_7f4ca0[];
+
 extern unsigned char g_773d75;
 
 extern pos14_7f4c00 gm_GameTime;
@@ -83,8 +83,8 @@ void __cdecl fcn_00505e20(int search, int buyer, int price, Order* o, int notify
 	fcn_004c4eb0("buy_building");
 	if (s->slot != 0xffff) {
 		io_FormatTextBuffer(msg, 0x17e6, s, u->slot, price);
-		he_MessageBoxQuickjump(((Entity*)g_7f4ca0)[s->slot].id, -1, msg, 0, 0x5ff, s->id, -1, 0, "_NACHRICHTEN_HS_30");
-		fcn_004c51a0(((Entity*)g_7f4ca0)[s->slot].id, buyer, (*(char*)&g_773d75), price);
+		he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[s->slot].entity_id, -1, msg, 0, 0x5ff, s->id, -1, 0, "_NACHRICHTEN_HS_30");
+		fcn_004c51a0(((ENTITY_RECORD*)g_7f4ca0)[s->slot].entity_id, buyer, (*(char*)&g_773d75), price);
 		fcn_004c5f60(s->id, u->id, u->id);
 		if (notify != 0 && office->kind == 2) {
 			fcn_004c6000(u->id, s->id);

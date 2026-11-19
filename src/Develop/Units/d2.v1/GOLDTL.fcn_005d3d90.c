@@ -82,7 +82,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	}
 	for (i = 0, n = 0x64; n > 0; i++, n -= 0x19) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x6acbec, n);
-		id = fcn_0046fac0(3, (int) ((float) i * g_6628bc * y + g_662a98), loc.buf, d2_CurrentWindowId);
+		id = fcn_0046fac0(3, (int) ((float) i * g_6628bc * y + 5.0f), loc.buf, d2_CurrentWindowId);
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = 0x23;
 		*(int *) (g_1015ea0 + id * 0x2f4 + 0x70) = 1;
 	}

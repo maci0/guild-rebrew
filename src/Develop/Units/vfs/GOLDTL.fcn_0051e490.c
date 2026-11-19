@@ -8,7 +8,7 @@ extern char g_6a375c;
 extern char gm_GameTime[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_773de8;
 extern char g_7747b4[];
 extern char g_7e2480[];
@@ -102,33 +102,33 @@ int __cdecl fcn_0051e490(void* a0, int a1)
 	}
 	if (g_774970 != 0xffff) {
 		n = g_774970;
-		p = g_7f4ca0 + n * 0x21c;
-		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x30, 0x10, 1, a0) <= 0) {
+		p = (char*)&((ENTITY_RECORD*)g_7f4ca0)[n];
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_02c[4], 0x10, 1, a0) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x40, 0x10, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_02c[0x14], 0x10, 1, a0) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x0c, 1, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_00c, 1, 1, a0) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x54, 4, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_052[2], 4, 1, a0) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x164, 1, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_164, 1, 1, a0) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x166, 1, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_165[1], 1, 1, a0) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(g_7f4ca0 + g_774970 * 0x21c + 0x0d, 1, 1, a0) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_00d, 1, 1, a0) <= 0) {
 			goto fail;
 		}
 		tmp = fcn_0050b710(gm_WalkEntityChain(g_774970), g_773d75);
 		if (vfs_fwrite(&tmp, 4, 1, a0) <= 0) {
 			goto fail;
 		}
-		s = g_7f4ca0 + g_774970 * 0x21c + 9;
+		s = &((ENTITY_RECORD*)g_7f4ca0)[g_774970].gender;
 	} else {
 		/* Native prologue initializes all four default bytes. */
 		if (vfs_fwrite(hdr, 0x10, 1, a0) <= 0) {

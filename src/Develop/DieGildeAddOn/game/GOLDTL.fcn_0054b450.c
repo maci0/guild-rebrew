@@ -82,7 +82,7 @@ void __cdecl fcn_0054b450(char* a0)
 		return;
 	case 2:
 		dist = fcn_00507e70((char*) v4, (char*) entityA, 4);
-		if (g_6628a0 <= gm_RandomFloat01() + dist) {
+		if (1.0f <= gm_RandomFloat01() + dist) {
 			io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) entityC, *(unsigned short*) entityA);
 			v4 = (unsigned short*) *(int*) (v4 + 2);
 			fcn_00545d40((int) v4, (int) v4, buf, 0, 0x5fa, 0);

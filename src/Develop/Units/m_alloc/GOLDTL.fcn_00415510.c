@@ -87,9 +87,9 @@ void __cdecl fcn_00415510(Rain* r, int n, ...)
 					if (r->count < k) {
 						k -= r->count;
 						do {
-							d->x = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
-							d->y = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
-							d->z = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
+							d->x = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
+							d->y = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
+							d->z = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
 							d->size = (float) rand() * g_662a44 + g_6628bc;
 							d->drift_a = (float) rand() * g_662a40 + g_6628bc;
 							d->drift_b = (float) rand() * g_662a40 + g_6628bc;

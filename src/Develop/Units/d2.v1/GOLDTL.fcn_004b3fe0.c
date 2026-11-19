@@ -2,11 +2,10 @@ extern char g_68114c[];
 extern char g_681140[];
 extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
-extern int d2_CurrentElementId;
 extern int main_LoopFlags;
 
 struct list_4b3fe0 {

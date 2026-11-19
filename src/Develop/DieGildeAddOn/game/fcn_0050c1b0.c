@@ -67,7 +67,7 @@ int __cdecl fcn_0050c1b0(unsigned char* e, int id, char* out)
 			if (row[i + 0x223] != 0 && row[i + 0x223] == *(unsigned char*) (t + 0x164) &&
 			    *(unsigned char*) (t + 2) != 0x14) {
 				v = (int) (fcn_0050b8d0((unsigned char*) slot, *e, i, -1) *
-					   ((double) *(int*) (e + 0x3d) * g_6640e8));
+					   ((double) *(int*) (e + 0x3d) * 0.01));
 				*(int*) (out + 0x18 + i * 4) += v;
 				total += v;
 				found = 1;
@@ -77,7 +77,7 @@ int __cdecl fcn_0050c1b0(unsigned char* e, int id, char* out)
 			if (row[i + 0x22f] != 0 && row[i + 0x22f] == *(unsigned char*) (t + 0x165) &&
 			    *(unsigned char*) (t + 2) != 0x14) {
 				v = (int) (fcn_0050b8d0((unsigned char*) slot, *e, -1, i) *
-					   ((double) *(int*) (e + 0x3d) * g_6640e8));
+					   ((double) *(int*) (e + 0x3d) * 0.01));
 				*(int*) (out + 0x10 + i * 4) += v;
 				total += v;
 				found = 1;
@@ -85,7 +85,7 @@ int __cdecl fcn_0050c1b0(unsigned char* e, int id, char* out)
 		}
 		if (found == 0 && *(unsigned char*) (t + 2) != 0x14) {
 			v = (int) (fcn_0050b8d0((unsigned char*) slot, *e, -1, 0) *
-				   ((double) *(int*) (e + 0x3d) * g_6640e8));
+				   ((double) *(int*) (e + 0x3d) * 0.01));
 			*(int*) (out + 0x10) += v;
 			total += v;
 		}

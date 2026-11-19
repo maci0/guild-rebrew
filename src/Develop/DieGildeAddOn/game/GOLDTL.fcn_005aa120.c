@@ -24,7 +24,7 @@ typedef struct {
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
-extern float g_662910;
+
 extern float g_664388;
 extern char g_6aaf58[];
 extern int d2_CurrentWindowId;
@@ -56,7 +56,7 @@ int __cdecl fcn_005aa120(int unused, char* p)
 	int t;
 	int w1;
 
-	cost = (int) MAX5AA1(gm_WalkEntityChain(((Ent5aa1*)g_7f4ca0)[g_774970].id) * g_662910, g_664388);
+	cost = (int) MAX5AA1(gm_WalkEntityChain(((Ent5aa1*)g_7f4ca0)[g_774970].id) * 0.01f, g_664388);
 	if (fcn_00526010(&((Ent5aa1*)g_7f4ca0)[g_774970], cost, g_773d75) == 0) {
 		return 0;
 	}

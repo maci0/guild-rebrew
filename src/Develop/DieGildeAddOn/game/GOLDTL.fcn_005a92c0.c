@@ -5,21 +5,21 @@
 
 // SIZE 0xe
 
-typedef struct {
-	unsigned short id;
-	unsigned char b2;
-	char pad3;
-	int f4;
-	char pad8[0x214];
-} Ent5a92;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
+
 
 typedef struct {
 	char b[0x2f4];
 } Row5a92;
 // SIZE 0x2f4
 
-extern char g_7f4ca0[];
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 extern pos14_7f4c00 gm_GameTime;
@@ -30,7 +30,7 @@ extern char g_6aae78[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-int __cdecl gm_AccumulateTyped2(Ent5a92*);
+int __cdecl gm_AccumulateTyped2(ENTITY_RECORD*);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
@@ -40,7 +40,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00526010(Ent5a92*, int, unsigned char);
+int __cdecl fcn_00526010(ENTITY_RECORD*, int, unsigned char);
 int __cdecl fcn_005809f0(void);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
@@ -53,7 +53,7 @@ void __cdecl fcn_00471e30(int);
 
 void __cdecl fcn_005a92c0(char* p)
 {
-	Ent5a92* ent;
+	ENTITY_RECORD* ent;
 	char* q;
 	int h;
 	int ok;
@@ -61,7 +61,7 @@ void __cdecl fcn_005a92c0(char* p)
 	int i;
 	pos14_7f4c00 st;
 
-	ent = &((Ent5a92*)g_7f4ca0)[g_774970];
+	ent = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 	n = gm_AccumulateTyped2(ent);
 	q = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 	ok = 0;
@@ -77,7 +77,7 @@ void __cdecl fcn_005a92c0(char* p)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 1);
-	io_AppendText(0x19fe, ent->id, 0x3e80, &((Row5a92*)g_868080)[g_773d75]);
+	io_AppendText(0x19fe, ent->entity_index, 0x3e80, &((Row5a92*)g_868080)[g_773d75]);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -113,7 +113,7 @@ void __cdecl fcn_005a92c0(char* p)
 						rep stosb
 					}
 				}
-				*(int*) (msg + 8) = ent->f4;
+				*(int*) (msg + 8) = ent->entity_id;
 				msg[4] = 0x69;
 				*(int*) (msg + 0xc) = -1;
 				msg[0x36] = 9;
@@ -125,10 +125,10 @@ void __cdecl fcn_005a92c0(char* p)
 				}
 				st = *(pos14_7f4c00*) (msg + 0x28);
 				msg[0x58] = 2;
-				*(int*) (msg + 0x5c) = ent->f4;
+				*(int*) (msg + 0x5c) = ent->entity_id;
 				fcn_004c5530(msg);
 				for (i = 0; i < 768 && n < g_6a375c; i++) {
-					if ((((Ent5a92*)g_7f4ca0)[i].b2 == 6 || ((Ent5a92*)g_7f4ca0)[i].b2 == 7) && &((Ent5a92*)g_7f4ca0)[i] != ent) {
+					if ((((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7) && &((ENTITY_RECORD*)g_7f4ca0)[i] != ent) {
 						{
 							char* fdest;
 							int flen;
@@ -153,19 +153,19 @@ void __cdecl fcn_005a92c0(char* p)
 								rep stosb
 							}
 						}
-						*(int*) (msg + 8) = ((Ent5a92*)g_7f4ca0)[i].f4;
+						*(int*) (msg + 8) = ((ENTITY_RECORD*)g_7f4ca0)[i].entity_id;
 						msg[4] = 0x69;
 						*(int*) (msg + 0xc) = -1;
 						msg[0x36] = 9;
 						*(pos14_7f4c00*) (msg + 0x28) = st;
 						msg[0x58] = 2;
-						*(int*) (msg + 0x5c) = ent->f4;
+						*(int*) (msg + 0x5c) = ent->entity_id;
 						fcn_004c5530(msg);
 						n++;
 					}
 				}
-				fcn_004c51a0(*(int*) (q + 2), ent->f4, 0, 0x3e80);
-				fcn_004c5420(ent->f4, 0x1c8, 4, 0, 0x4000);
+				fcn_004c51a0(*(int*) (q + 2), ent->entity_id, 0, 0x3e80);
+				fcn_004c5420(ent->entity_id, 0x1c8, 4, 0, 0x4000);
 				io_FormatTextBuffer(text, 0x19ff);
 				fcn_0057e880(0x2e, 0, 0, 0);
 				ok = 1;

@@ -157,7 +157,7 @@ int __cdecl fcn_004c53b0(void);
 int __cdecl fcn_00505d00(int, void*);
 int __cdecl fcn_005b5750(void);
 int __cdecl fcn_0050b750(int, char);
-extern double g_6640e8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 float __cdecl fcn_0050b8d0(unsigned char*, int, int, int);
 int __cdecl fcn_00526010(int, int);
 int __cdecl fcn_0051af00(char*, int, ...);
@@ -654,9 +654,9 @@ L6fa2:
 			} else {
 				t = (int) (fcn_0050b8d0(
 					(unsigned char*) (*(unsigned short*) (a1 + 0x27) * 0x21c + 0x7f4ca0),
-					*a1, -1, 1) * ((double) *(int*) (a1 + 0x3d) * g_6640e8));
+					*a1, -1, 1) * ((double) *(int*) (a1 + 0x3d) * 0.01));
 				x = (int) (fcn_0050b8d0((unsigned char*) e, *a1, -1, 0) *
-					((double) *(int*) (a1 + 0x3d) * g_6640e8));
+					((double) *(int*) (a1 + 0x3d) * 0.01));
 				if (*(char*) (e + 9)) {
 					fcn_0051af00(f.txt9fc, 0x1a29,
 						*(unsigned short*) e,

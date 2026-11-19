@@ -36,14 +36,14 @@ typedef struct {
 #pragma pack()
 
 // SIZE 0x21c
-typedef struct {
-	int f0;
-	int f4;
-	char pad8[0x214];
-} House;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+
 extern char s_6acd1c[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
@@ -96,7 +96,7 @@ int __cdecl fcn_005d71f0(unsigned char* e)
 				p->pos52 = gm_GameTime;
 				p->posc8 = gm_GameTime;
 				fcn_004c5620(p->f70, p);
-				m.f70 = ((House*)g_7f4ca0)[p->w8].f4;
+				m.f70 = ((ENTITY_RECORD*)g_7f4ca0)[p->w8].entity_id;
 				fcn_004c5530(&m);
 			}
 		}
@@ -129,7 +129,7 @@ int __cdecl fcn_005d71f0(unsigned char* e)
 							p->pos52 = gm_GameTime;
 							found |= 1;
 							fcn_004c5620(0, p);
-							m.f70 = ((House*)g_7f4ca0)[p->w8].f4;
+							m.f70 = ((ENTITY_RECORD*)g_7f4ca0)[p->w8].entity_id;
 							fcn_004c5530(&m);
 							io_FormatTextBuffer(t, 0x1db9, p->w8);
 							t = text + strlen(text);

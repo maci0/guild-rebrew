@@ -6,7 +6,6 @@ typedef void (__cdecl* dispose_fn_4398d0)(char* obj);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67a370;
 extern char g_10432c0[];
-extern char g_1040640[];
 
 void __cdecl fcn_004432d0(int a, int b);
 void __cdecl m_FreeTracked(void* p);

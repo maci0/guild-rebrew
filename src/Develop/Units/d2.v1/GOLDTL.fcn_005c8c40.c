@@ -14,8 +14,6 @@ extern int g_777ca0;
 extern int g_776c90;
 extern int g_775338;
 extern int g_774654;
-extern int d2_CurrentElementId;
-extern int g_14ce8e0;
 int __cdecl fcn_0057ec20(int); void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);

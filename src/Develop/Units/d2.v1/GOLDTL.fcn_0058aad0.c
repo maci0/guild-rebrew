@@ -1,15 +1,13 @@
 
 
 
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 extern int g_7746d8;
 extern int g_7746a0;
 extern int g_14b5458;
 extern int g_14ad0f8;
 extern int g_14b5400;
-extern int g_14ad0f0;
-extern int g_14ad100;
 extern int g_14b53fc;
 extern int g_14b59d0[];
 

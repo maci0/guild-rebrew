@@ -2,17 +2,12 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* Scene camera; inferred owner in d3_camera.h. */
 
-extern double g_662950;
 extern double g_662958;
 extern double g_662cc0;
 extern double g_662a50;
 extern float g_6628a8;
 extern char g_14cf70f;
 extern float g_662a70;
-extern int g_14ce8d0;
-extern int g_14ce8e8;
-extern int g_774650;
-extern int g_774658;
 
 float* __stdcall fcn_005ebbb9(float*, const float*);
 void __cdecl fcn_00438cb0(char*, float*);
@@ -102,7 +97,7 @@ int __cdecl fcn_0052b230(void)
 	v[2] = m[2] * t + (m[6] * s + m[10] * s);
 	if (g_14cf70f != 0) {
 		y = (float) ((double) (*(int*) 0x77473c - (int) *(short*) &g_14cf902) * g_662cc0);
-		x = (float) ((double) y * g_662950);
+		x = (float) ((double) y * 0.0);
 		v[0] = v[0] + x;
 		v[1] = v[1] + y;
 		v[2] = v[2] + x;
@@ -111,7 +106,7 @@ int __cdecl fcn_0052b230(void)
 		v[2] = v[2] + *(float*) (p + 0x54);
 	} else {
 		y = (float) ((double) ((int) *(short*) &g_14cf902 - *(int*) 0x77473c) * g_662cc0);
-		n = (float) ((double) y * g_662950);
+		n = (float) ((double) y * 0.0);
 		s = (float) ((double) y * g_662a50);
 		b8 = m[0] * n + (m[4] * n + m[8] * s);
 		b10 = m[1] * n + (m[5] * n + m[9] * s);

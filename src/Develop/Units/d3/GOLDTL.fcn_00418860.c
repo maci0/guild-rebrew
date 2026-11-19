@@ -9,10 +9,9 @@ extern volatile int g_6b7fac;
 extern int SonnenstrahlenStartZeit;
 extern float flt_1;
 extern float g_6628a8;
-extern float g_6628fc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_662a7c;
 extern float g_662b28;
-extern double g_662950;
 extern double g_662958;
 extern double g_662b38;
 extern double dbl_1_0;
@@ -89,7 +88,7 @@ void __cdecl fcn_00418860(char* obj)
 		}
 	} else if (g_6b5cfc == -1) {
 		a = flt_1 - (float) (((double) (unsigned int) g_6b7fac - SonnenstrahlenStartZeit) * g_662b28);
-		if (a <= g_662950) {
+		if (a <= 0.0) {
 			g_6b5cfc = 0;
 			fcn_00418ae0(obj);
 			g_6b5cf8 = 0;

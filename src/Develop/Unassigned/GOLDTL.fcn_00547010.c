@@ -1,16 +1,17 @@
+#include "client_types.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 #pragma pack(2)
 // SIZE 0xe
-struct pos14_547010 {
-	int a;
-	int b;
-	int c;
-	short d;
-};
+
+
+
+
+
+
 #pragma pack()
 
-#include "client_types.h"
+
 extern pos14_7f4c00 gm_GameTime;
 
 // SIZE 0xf8
@@ -21,19 +22,19 @@ struct msg_547010 {
 	int f8;
 	int fc;
 	char pad2[0x18];
-	struct pos14_547010 pos;
+	pos14_7f4c00 pos;
 	char b36;
 	char pad3[0xc1];
 };
 
 // SIZE 0x21c
-struct s_7f4ca0 {
-	int f0;
-	int f4;
-	char pad[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
 
 
 
@@ -52,8 +53,8 @@ void __cdecl fcn_00547010(void)
 		m.b4 = 0x6d;
 		m.fc = -1;
 		m.b36 = 2;
-		m.f8 = ((struct s_7f4ca0*)g_7f4ca0)[g_774970].f4;
-		m.pos = (*(struct pos14_547010*)&gm_GameTime);
+		m.f8 = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+		m.pos = (*(pos14_7f4c00*)&gm_GameTime);
 		fcn_004c5530(&m);
 	}
 }

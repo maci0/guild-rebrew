@@ -52,7 +52,7 @@ extern int g_772f54;
 extern char g_14cf71d;
 extern char g_14cf738;
 extern int g_7746cc;
-extern int g_6b5de0;
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
 extern char g_1052be0[];
 extern char g_7747b0;
 extern unsigned char g_14cf950;
@@ -438,7 +438,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 		fcn_005337f0();
 		fcn_00526b70();
 		fcn_0047c560(0, 0, 0);
-		(*(void (__stdcall **) (int, int)) (*(int *) g_6b5de0 + 0xa0))(g_6b5de0, (int) g_1052be0);
+		(*(void (__stdcall **) (int, int)) ((int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0xa0))((int) g_6b5de0, (int) g_1052be0);
 		fcn_0047cdf0();
 	} else if (g_7e2700 != 0) {
 		fcn_00472a50();
@@ -454,8 +454,8 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 	}
 	if (g_14cf950 == 1 && (flags & 0x2000)) {
 		t = (float) (g_7766a0 & 0xff) * g_665e44;
-		SetMasterVolume((int) (((float) *((unsigned char *) &g_7766a0 + 2) * t) * g_662a68));
-		fcn_00427370((int) (((float) *((unsigned char *) &g_7766a0 + 1) * t) * g_662a68));
+		SetMasterVolume((int) (((float) *((unsigned char *) &g_7766a0 + 2) * t) * 0.33333334f));
+		fcn_00427370((int) (((float) *((unsigned char *) &g_7766a0 + 1) * t) * 0.33333334f));
 		fcn_5e43f0();
 		t = (float) (g_7766a0 & 0xff) * g_665e44;
 		SetMasterVolume((int) ((float) *((unsigned char *) &g_7766a0 + 2) * t));

@@ -1,5 +1,5 @@
 extern int g_7746d8;
-extern int g_14ce8d8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 extern char* lpObjektePROT;

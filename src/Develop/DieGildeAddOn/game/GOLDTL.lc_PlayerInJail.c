@@ -2,7 +2,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* g_7746cc;
 
 char* __cdecl fcn_005463a0(int, int, int);
@@ -21,9 +21,9 @@ void __cdecl lc_PlayerInJail(void)
 	char* d;
 
 	for (p = fcn_005463a0(1, 0, 0x3d); p != 0; p = he_fn_Handlung()) {
-		if (*(int*) (p + 0xac) == *(int*) (g_7f4ca0 + g_774970 * 540 + 4)) {
+		if (*(int*) (p + 0xac) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id) {
 			for (e = gm_StartFilteredEntitySearch(1, 5, 4); e != 0; e = gm_FindNextFilteredEntity()) {
-				if (*(int*) (e + 0x65) == *(int*) (g_7f4ca0 + g_774970 * 540 + 4)) {
+				if (*(int*) (e + 0x65) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id) {
 					d = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0x65);
 					if (d != 0 && g_7746cc != d) {
 						fcn_00526920(e, *(int*) (d + 2), "");

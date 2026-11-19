@@ -68,12 +68,12 @@ int* __cdecl fcn_00415310(int count)
 	if (rain[0] > 0) {
 		i = 0;
 		do {
-			drop[0] = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
-			drop[1] = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
-			drop[2] = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
-			drop[3] = (float) rand() * g_662a44 + g_6628bc;
-			drop[4] = (float) rand() * g_662a40 + g_6628bc;
-			drop[5] = (float) rand() * g_662a40 + g_6628bc;
+			drop[0] = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
+			drop[1] = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
+			drop[2] = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
+			drop[3] = (float) rand() * g_662a44 + 0.25f;
+			drop[4] = (float) rand() * g_662a40 + 0.25f;
+			drop[5] = (float) rand() * g_662a40 + 0.25f;
 			drop += 10;
 			i++;
 		} while (i < rain[0]);

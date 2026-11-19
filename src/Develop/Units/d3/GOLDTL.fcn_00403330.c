@@ -4,9 +4,7 @@
 
 
 
-extern void* ch_CharacterSlots[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int ch_LowPolyMode;
 int __cdecl fcn_00413190(int p);
 void __cdecl fcn_004432d0(int a, int b);
 void __cdecl d3_RemoveObjectAnim(int h);

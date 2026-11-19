@@ -3,7 +3,7 @@
 #pragma optimize("y", off)
 
 extern char s_689d24[];
-extern char* g_772d34;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl m_alloc(int, char*);
 void __cdecl fcn_00426170(char*, int);

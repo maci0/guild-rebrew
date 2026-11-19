@@ -1,5 +1,4 @@
 #include "Develop/Units/d3/d3_object.h"
-extern int g_14cbca0;
 extern int g_7728f8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char* lpGebaeudePROT;

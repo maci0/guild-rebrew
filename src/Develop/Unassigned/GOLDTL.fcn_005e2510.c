@@ -3,12 +3,11 @@
 
 extern unsigned char g_7747b0;
 extern int g_6b5c94;
-extern char g_68a9cc[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7766a8;
 extern float g_675308;
 extern int g_7766b0;
 extern int g_7766ac;
-extern int g_6a256c;
 
 void __cdecl fcn_00410610(int);
 

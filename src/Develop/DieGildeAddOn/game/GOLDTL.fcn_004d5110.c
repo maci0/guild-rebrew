@@ -34,7 +34,7 @@ int __cdecl fcn_004d5110(char* a1, char* a2, char* entity, char* otherEntity)
 	if (p2 != 0 && p1 != 0) {
 		match = fcn_00502cd0(*(int*) (p2 + 0x14), 1, 5);
 		while (match != 0) {
-			delay = (int) (((double) (cut_RandMod(0x14) + 0x50) * g_6640e8) * *(int*) (match + 0xe));
+			delay = (int) (((double) (cut_RandMod(0x14) + 0x50) * 0.01) * *(int*) (match + 0xe));
 			if (delay < 1) {
 				delay = 1;
 			}

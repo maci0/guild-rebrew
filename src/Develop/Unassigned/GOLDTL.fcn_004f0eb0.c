@@ -32,7 +32,7 @@ float __cdecl fcn_004f0eb0(int level, int percent, int count)
 	else {
 		pc = 100;
 	}
-	percent_term = pc * g_6628bc + g_662da8;
+	percent_term = pc * 0.25f + 25.0f;
 	if (count < 3) {
 		if (count <= 1) {
 			count = 1;

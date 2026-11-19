@@ -16,19 +16,19 @@ typedef struct {
 } Req;
 
 // SIZE 0x21c
-typedef struct {
-	unsigned short id;
-	unsigned char b2;
-	char pad3;
-	int f4;
-	char pad8[0x15e];
-	unsigned char b166;
-	char pad167[0xb5];
-} House;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
+
+
 
 extern __int64 g_666018;
 extern char* g_14a5590;
-extern char g_7f4ca0[];
+
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
@@ -40,31 +40,31 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005de630(House* obj, int* arg)
+int __cdecl fcn_005de630(ENTITY_RECORD* obj, int* arg)
 {
-	House* picks[3];
+	ENTITY_RECORD* picks[3];
 	Req req;
 	char text[0x800];
 	char text2[0x200];
-	House* e;
+	ENTITY_RECORD* e;
 	int start;
 	int step;
 	int n;
 	int i;
 
-	if (obj->b2 == 6) {
+	if (obj->entity_state == 6) {
 		memset(&req, 0, sizeof(req));
 		memset(req.ids, 0xff, sizeof(req.ids));
 		req.f14 = 3;
 		req.size = 0x400;
 		req.kind = 6;
 		req.cd = g_666018;
-		e = (House*) fcn_005cd440(&req, g_14a5590, 0, 0);
+		e = (ENTITY_RECORD*) fcn_005cd440(&req, g_14a5590, 0, 0);
 		if (e == 0) {
 			return 0;
 		}
 	} else {
-		e = (House*) gm_LookupEntityRecordById(arg[1]);
+		e = (ENTITY_RECORD*) gm_LookupEntityRecordById(arg[1]);
 		if (e == 0) {
 			return 0;
 		}
@@ -73,36 +73,36 @@ int __cdecl fcn_005de630(House* obj, int* arg)
 	step = gm_RandomSearchSteps[gm_RandomMod(0x10)];
 	n = 3;
 	do {
-		if (((House*)g_7f4ca0)[start].id != 0xffff && ((House*)g_7f4ca0)[start].b166 && &((House*)g_7f4ca0)[start] != obj &&
-			&((House*)g_7f4ca0)[start] != e) {
+		if (((ENTITY_RECORD*)g_7f4ca0)[start].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[start].unk_165[1] && &((ENTITY_RECORD*)g_7f4ca0)[start] != obj &&
+			&((ENTITY_RECORD*)g_7f4ca0)[start] != e) {
 			n--;
-			picks[n] = &((House*)g_7f4ca0)[start];
+			picks[n] = &((ENTITY_RECORD*)g_7f4ca0)[start];
 		}
 		start = (start + step) % 0x300;
 	} while (n != 0);
 	for (i = 0; i < 3; i++) {
-		fcn_004c54c0(e->f4, picks[i]->f4, gm_RandomMod(0x20) + 0x14, 1);
+		fcn_004c54c0(e->entity_id, picks[i]->entity_id, gm_RandomMod(0x20) + 0x14, 1);
 	}
-	fcn_004ff210(e->id, -0x32 - gm_RandomMod(0x40));
-	if (e->b2 == 6 || e->b2 == 7) {
-		io_FormatTextBuffer(text, 0x100d, picks[0]->id, picks[0]->id, picks[1]->id, picks[2]->id);
-		fcn_00545d40(e->f4, -1, text, 1, 0x5fb, 0);
+	fcn_004ff210(e->entity_index, -0x32 - gm_RandomMod(0x40));
+	if (e->entity_state == 6 || e->entity_state == 7) {
+		io_FormatTextBuffer(text, 0x100d, picks[0]->entity_index, picks[0]->entity_index, picks[1]->entity_index, picks[2]->entity_index);
+		fcn_00545d40(e->entity_id, -1, text, 1, 0x5fb, 0);
 	}
-	if (picks[0]->b2 == 6 || picks[0]->b2 == 7) {
-		io_FormatTextBuffer(text, 0x100e, e->id, picks[1]->id, picks[2]->id);
-		fcn_00545d40(picks[0]->f4, -1, text, 1, 0x5fb, 0);
+	if (picks[0]->entity_state == 6 || picks[0]->entity_state == 7) {
+		io_FormatTextBuffer(text, 0x100e, e->entity_index, picks[1]->entity_index, picks[2]->entity_index);
+		fcn_00545d40(picks[0]->entity_id, -1, text, 1, 0x5fb, 0);
 	}
-	if (picks[1]->b2 == 6 || picks[1]->b2 == 7) {
-		io_FormatTextBuffer(text, 0x100f, e->id, picks[0]->id, picks[2]->id);
-		fcn_00545d40(picks[1]->f4, -1, text, 1, 0x5fb, 0);
+	if (picks[1]->entity_state == 6 || picks[1]->entity_state == 7) {
+		io_FormatTextBuffer(text, 0x100f, e->entity_index, picks[0]->entity_index, picks[2]->entity_index);
+		fcn_00545d40(picks[1]->entity_id, -1, text, 1, 0x5fb, 0);
 	}
-	if (picks[2]->b2 == 6 || picks[2]->b2 == 7) {
-		io_FormatTextBuffer(text, 0x100f, e->id, picks[0]->id, picks[1]->id);
-		fcn_00545d40(picks[2]->f4, -1, text, 1, 0x5fb, 0);
+	if (picks[2]->entity_state == 6 || picks[2]->entity_state == 7) {
+		io_FormatTextBuffer(text, 0x100f, e->entity_index, picks[0]->entity_index, picks[1]->entity_index);
+		fcn_00545d40(picks[2]->entity_id, -1, text, 1, 0x5fb, 0);
 	}
 	arg[4] = 1;
-	if (obj->b2 == 6) {
-		io_FormatTextBuffer(text2, 0x10a1, e->id, picks[0]->id, picks[1]->id, picks[2]->id);
+	if (obj->entity_state == 6) {
+		io_FormatTextBuffer(text2, 0x10a1, e->entity_index, picks[0]->entity_index, picks[1]->entity_index, picks[2]->entity_index);
 		io_FormatTextBuffer(text, 0xfe8, text2);
 		fcn_005dbe90(text);
 	}

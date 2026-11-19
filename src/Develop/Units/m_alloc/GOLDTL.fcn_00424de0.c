@@ -1,6 +1,6 @@
 #pragma optimize("y", off)
 
-extern char* sbs_BankManager;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl fopen(char*, char*);
 int __cdecl fscanf(void*, char*, ...);

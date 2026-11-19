@@ -31,9 +31,9 @@ void __cdecl fcn_00405760(unsigned char* e)
 	v[2] = *(float*) (e + 0x11c) - v[2];
 	fcn_004518a0(v);
 	p = *(char**) (e + 0x34);
-	v[0] *= g_6628d8;
-	v[1] *= g_6628d8;
-	v[2] *= g_6628d8;
+	v[0] *= 0.4f;
+	v[1] *= 0.4f;
+	v[2] *= 0.4f;
 	v[0] += *(float*) (p + 0x78);
 	v[1] += *(float*) (p + 0x7c);
 	v[2] += *(float*) (p + 0x80);

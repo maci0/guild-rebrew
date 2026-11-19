@@ -2,7 +2,7 @@
 
 
 extern int g_7766a8;
-extern float g_6628cc;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
 extern int g_7e2700;
 extern int tp_d2_SelectedControl;

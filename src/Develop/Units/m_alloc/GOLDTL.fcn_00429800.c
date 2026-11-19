@@ -12,7 +12,7 @@ typedef struct {
 	char name[0x4c];
 } Var;
 
-extern char* g_6b7e94;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern void* g_6b7e9c;
 extern void* g_14cb8e0;
 extern void* g_6b7ea0;

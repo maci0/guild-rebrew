@@ -1,13 +1,14 @@
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
 
 
 #pragma pack(push, 2)
 // SIZE 0xe
-typedef struct {
-	int day;
-	unsigned short hour;
-	int min;
-	int sec;
-} Time5cbb;
+
+
+
+
+
+
 #pragma pack(pop)
 
 // SIZE 0x38
@@ -92,7 +93,7 @@ int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, i
 	}
 	for (t = fcn_005463a0(1, 0, 0x2c); t != 0; t = he_fn_Handlung()) {
 		found = 0;
-		if (*(int*) (t + 0xc5) - (*(Time5cbb*)&gm_GameTime).day > mindays) {
+		if (*(int*) (t + 0xc5) - (*(GAME_TIMESTAMP*)&gm_GameTime).unit_0 > mindays) {
 			continue;
 		}
 		if ((ps[0] = gm_LookupEntityRecordById(*(int*) (t + 0xac))) == 0) {
@@ -139,7 +140,7 @@ int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, i
 		if (!found) {
 			continue;
 		}
-		mindays = *(int*) (t + 0xc5) - (*(Time5cbb*)&gm_GameTime).day;
+		mindays = *(int*) (t + 0xc5) - (*(GAME_TIMESTAMP*)&gm_GameTime).unit_0;
 		o = out;
 		for (i = 0, k = 0; i < 6 && (unsigned int) i < max; i++) {
 			if (ps[i] != 0) {

@@ -51,7 +51,7 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 			return 0;
 		}
 		half = abs(*(int*) (e + 0x24)) / 2;
-		money = (int) (gm_WalkEntityChain(*(unsigned short*) e) * g_6628ac);
+		money = (int) (gm_WalkEntityChain(*(unsigned short*) e) * 0.02f);
 		fcn_004c6ae0(*(int*) (e + 4), -2);
 		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x40, 0);
 		if (gm_RandomMod(2)) {
@@ -61,7 +61,7 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 		}
 		return 0x11;
 	}
-	money = (int) (gm_WalkEntityChain(*(unsigned short*) e) * g_6628ac);
+	money = (int) (gm_WalkEntityChain(*(unsigned short*) e) * 0.02f);
 	dlg = fcn_00470820(0, 0, s_6acc44);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);

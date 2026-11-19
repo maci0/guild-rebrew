@@ -13,6 +13,6 @@ float __cdecl fcn_00507e70(char* a, char* b, int c)
 
 	x = gm_GetEntitySkill(a, c);
 	y = gm_GetEntitySkill(b, c);
-	t = (x - y * y) * g_662d34 + g_6628d8;
-	return (t + ((x * x - y) * g_6628d8 + g_662d34)) * g_6628cc;
+	t = (x - y * y) * g_662d34 + 0.4f;
+	return (t + ((x * x - y) * 0.4f + g_662d34)) * g_6628cc;
 }

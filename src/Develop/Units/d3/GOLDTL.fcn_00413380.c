@@ -1,7 +1,7 @@
 
 
 extern int d3_ActiveCameraAnimation;
-extern int d3_CameraAnimating;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/d3_camera.h"
 extern char* g_6b5cf8;
 extern int g_67a370;

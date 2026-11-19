@@ -18,7 +18,7 @@ extern char* g_14a5ad8[];
 extern int d2_CurrentWindowId;
 extern char g_6a3f8c[];
 extern int g_100f1dc;
-extern int d2_CurrentElementId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7e23e3;
 #include "client_dialog_state.h"
 

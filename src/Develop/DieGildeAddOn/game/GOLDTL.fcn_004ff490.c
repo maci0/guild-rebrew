@@ -1,18 +1,17 @@
 #include <string.h>
 
-#pragma pack(push, 2)
-typedef struct {
-	int day;
-	unsigned short hour;
-	int min;
-	int sec;
-} Time;
-#pragma pack(pop)
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
+
+
+
+
+
+
+
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_664158;
 extern int g_773d48;
-extern int gm_GameTime;
 extern float g_696444[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -41,7 +40,7 @@ void __cdecl fcn_004ff490(char* a0)
 	int count;
 	int i;
 	int extra;
-	Time t;
+	GAME_TIMESTAMP t;
 	int mode;
 	char pkt[0x110];
 	float f;
@@ -70,13 +69,13 @@ void __cdecl fcn_004ff490(char* a0)
 			return;
 		}
 
-		t = *(Time*) &gm_GameTime;
+		t = *(GAME_TIMESTAMP*) &gm_GameTime;
 		extra = 2;
 		fcn_00500bb0(&t, 8, 0, 0);
 
 		other = 0;
 		t.hour = gm_RandomMod(4) + 8;
-		t.min = 0;
+		t.minute = 0;
 		handle = *(int*) (a0 + 0x170);
 		if (handle != 0) {
 			id = *(int*) (handle + 1);
@@ -136,7 +135,7 @@ void __cdecl fcn_004ff490(char* a0)
 		if (other != 0) {
 			mode = 0x12;
 			memset(pkt, 0, 0x114);
-			*(Time*) (pkt + 0x18) = t;
+			*(GAME_TIMESTAMP*) (pkt + 0x18) = t;
 			*(int*) (pkt + 0xc) = *(int*) (other + 4);
 			pkt[8] = 7;
 			*(int*) (pkt + 0x14) = -1;

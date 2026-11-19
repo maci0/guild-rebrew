@@ -2,7 +2,7 @@
 
 
 extern int d2_CurrentWindowId;
-extern char g_6a9694[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_0046f2c0(int, int);
 int __cdecl io_AppendText(char*, ...);

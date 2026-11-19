@@ -103,9 +103,9 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 			offer = (float) v17;
 			for (v11 = 0; v11 < a2; v11++) {
 				v17 = -(gm_RandomMod(0x1e) & 0xffff);
-				v17 = (int) (((double) v17 * g_6640e8 + g_6629c8) * offer);
+				v17 = (int) (((double) v17 * 0.01 + g_6629c8) * offer);
 				if (v11 == 0) {
-					v17 = (int) ((double) v17 * g_662ad8);
+					v17 = (int) ((double) v17 * 0.25);
 				} else if (v11 == 1) {
 					v17 = (int) ((double) v17 * g_662908);
 				}
@@ -123,7 +123,7 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 					v18 = (int) (ratio -
 					    (float) (((double) (fcn_0050f980(*a1,
 					        *(unsigned short*) (a0 + 0x27), 1) - g_662914)
-					    * g_6640e8) * g_662a98));
+					    * 0.01) * g_662a98));
 				}
 				a3[v11 * 3 + 2] = v18;
 				a3[v11 * 3] = v17;

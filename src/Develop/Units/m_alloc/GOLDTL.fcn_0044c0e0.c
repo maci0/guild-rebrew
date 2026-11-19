@@ -2,7 +2,7 @@
 
 extern char s_67ade8[];
 extern char* g_1042efc;
-extern char g_1042d00[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_00449ac0(char* s, char* sub);
 void __cdecl fcn_0044b340(char* name, int* a, int* b, int* c);

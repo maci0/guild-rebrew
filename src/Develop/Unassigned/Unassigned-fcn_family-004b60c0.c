@@ -8,7 +8,7 @@ int __cdecl fcn_004b6210(void);
 extern int g_14cbca0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_6a3760;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 int __cdecl fcn_004b60c0(void);
 int __cdecl fcn_004b62c0(void);
@@ -34,7 +34,7 @@ int __cdecl fcn_004b62c0(void)
 int __cdecl fcn_004b6470(void)
 {
 	if (g_14cbca0 != -1) {
-		if (*(int*) (g_7f4ca0 + g_774970 * 540 + 4) == g_6a3760)
+		if (((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id == g_6a3760)
 			return fcn_004b60c0();
 		return fcn_004b62c0();
 	}

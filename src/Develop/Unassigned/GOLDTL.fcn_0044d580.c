@@ -7,6 +7,6 @@ void __cdecl fcn_0044d580(int a1, char* a2)
 {
 	void* p;
 
-	p = fcn_0064f026(0, (void*) &g_662d18);
+	p = fcn_0064f026(0, (void*) " ");
 	*(int*) (a2 + 4) = fcn_0064eeec(p);
 }

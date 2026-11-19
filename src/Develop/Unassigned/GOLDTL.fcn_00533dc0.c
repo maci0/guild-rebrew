@@ -1,11 +1,12 @@
 
 
 // SIZE 0x3cc
-typedef struct {
-	char pad0[0x3a8];
-	int margin[4];
-	char pad3b8[0x3cc - 0x3b8];
-} Window;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
 
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
@@ -56,8 +57,8 @@ void __cdecl fcn_00533dc0(int wnd, int page, int icon)
 		fcn_0046f740(0x1f7, 0x43, 0x73e, wnd);
 		fcn_0046f740(0, 0x1a8, 0x73c, wnd);
 	}
-	((Window*)g_1015f40)[d2_CurrentWindowId].margin[0] = 0x18;
-	((Window*)g_1015f40)[d2_CurrentWindowId].margin[1] = 0x18;
-	((Window*)g_1015f40)[d2_CurrentWindowId].margin[2] = 0x18;
-	((Window*)g_1015f40)[d2_CurrentWindowId].margin[3] = 0x18;
+	((int*) ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8)[0] = 0x18;
+	((int*) ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8)[1] = 0x18;
+	((int*) ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8)[2] = 0x18;
+	((int*) ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8)[3] = 0x18;
 }

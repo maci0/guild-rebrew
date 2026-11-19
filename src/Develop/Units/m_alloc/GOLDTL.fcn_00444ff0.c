@@ -2,11 +2,8 @@ extern char* d3_ActiveCamera;
 extern float g_6628a0;
 extern int g_14ce860;
 extern int g_14ce864;
-extern float d3_ProjectionScaleY;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_10432a4;
-extern float d3_ViewportCenterX;
-extern float g_1052bc8;
-extern char g_1052be0[];
 extern float g_1052c00[];
 
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);

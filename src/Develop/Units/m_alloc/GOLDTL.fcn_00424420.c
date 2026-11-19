@@ -1,6 +1,5 @@
 #include <string.h>
-extern char* sbs_BankManager;
-extern int g_6b7d6c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00423a50(unsigned int a0);
 int __cdecl fcn_004239e0(void);

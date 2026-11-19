@@ -71,9 +71,9 @@ void __cdecl fcn_00589d00(int a0)
 	amt[0] = (int) (float) n;
 	amt[1] = (int) (1.5f * (float) n);
 	amt[2] = (int) ((float) n + (float) n);
-	ids[0] = (int) (g_662910 * (float) total);
+	ids[0] = (int) (0.01f * (float) total);
 	ids[1] = (int) (g_664150 * (float) total);
-	ids[2] = (int) ((float) total * g_6628ac);
+	ids[2] = (int) ((float) total * 0.02f);
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9514);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(dlg);

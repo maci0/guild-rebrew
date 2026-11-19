@@ -1,7 +1,7 @@
 extern int g_14cf900[];
 extern int g_14ce920[];
 extern short g_14ce8c0;
-extern int g_6772c4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_00411fe0(void);
 
 struct cam_412610 {

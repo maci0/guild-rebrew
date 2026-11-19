@@ -101,7 +101,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 			io_AppendText(0x112e, rec, *g_772e98);
 			d2_SetForm(win, 2);
 			io_AppendText(0x112f, count, 0xc10);
-			if (v >= g_662908) {
+			if (v >= 0.5) {
 				if (*(int*) (a0 + 0x110)) {
 					io_AppendText(0x1134);
 				} else {
@@ -223,7 +223,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 		} while (i);
 		d2_SetForm(win, 2);
 		io_AppendText(0x6811b0);
-		t = io_AppendText(0x1141, (int) (total * g_6629f8), (int) (total * 0.5), (int) (total * g_664108));
+		t = io_AppendText(0x1141, (int) (total * 0.1), (int) (total * 0.5), (int) (total * g_664108));
 		sel = fcn_00472250(win, 2, t);
 		r = fcn_00472250(win, 2, t + 1);
 		n = fcn_00472250(win, 2, t + 2);
@@ -268,7 +268,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 						g_774654 = 1;
 						answer = 0;
 						g_772ea8 = 1;
-						g_772eac = fcn_004d52a0((int) g_772eb4, rec, (char*) g_772e9c, (char*) g_772e98, (float) count * g_6640e8);
+						g_772eac = fcn_004d52a0((int) g_772eb4, rec, (char*) g_772e9c, (char*) g_772e98, (float) count * 0.01);
 					} else {
 						io_FormatTextBuffer(str, 0x1143);
 						fcn_004e6eb0(str, 0);
@@ -305,7 +305,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 				rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (a0 + 0x10c));
 				answer = 0;
 				g_772ea8 = 1;
-				g_772eac = fcn_004d52a0((int) g_772eb4, rec, (char*) g_772e9c, (char*) g_772e98, (float) count * g_6640e8);
+				g_772eac = fcn_004d52a0((int) g_772eb4, rec, (char*) g_772e9c, (char*) g_772e98, (float) count * 0.01);
 			} else {
 				g_772eac = -1;
 				answer = 1;

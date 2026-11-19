@@ -7,8 +7,7 @@ extern int g_7746a0;
 extern char* g_7746a4;
 extern short g_14ce8c0;
 extern short g_14ce8c2;
-extern int g_14ce8cc;
-extern int g_14ce8e0;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 extern char s_6a41a4[];
 

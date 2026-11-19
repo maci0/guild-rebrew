@@ -47,8 +47,8 @@ extern float g_664e88;
 #define flt_500 g_664330
 #define flt_350 g_664e88
 #define flt_127 g_664e80
-#define flt_1 g_6628a0
-#define flt_inv32768 g_662a18
+#define flt_1 1.0f
+#define flt_inv32768 3.0518509447574615e-05f
 
 /* ADDRESS: GOLDTL 0x004c0cd0 */
 void __cdecl fcn_004c0cd0(void)

@@ -1,12 +1,12 @@
 #include <string.h>
 
-typedef struct Ent {
-	unsigned short id;
-	char pad2[2];
-	int x4;
-	char pad8[0x21c - 8];
-} Ent;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 typedef struct Job {
 	int op;
@@ -30,7 +30,7 @@ typedef struct Req {
 } Req;
 // SIZE 0x7c
 
-extern char g_7f4ca0[];
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_10069a0[];
 extern int d2_CurrentElementId;
@@ -66,7 +66,7 @@ void __cdecl fcn_004b5df0(int flags)
 	int b_quit;
 	Req m2;
 	Req m1;
-	Ent* ent;
+	ENTITY_RECORD* ent;
 	Spec* s;
 	int dlg;
 	int h;
@@ -78,9 +78,9 @@ void __cdecl fcn_004b5df0(int flags)
 	s = 0;
 	done = 0;
 	cancel = 0;
-	ent = &((Ent*)g_7f4ca0)[g_774970];
+	ent = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 	for (i = 0; i < 128; i++) {
-		if (((Job*)g_10069a0)[i].op != 0 && ((Job*)g_10069a0)[i].id == ent->x4) {
+		if (((Job*)g_10069a0)[i].op != 0 && ((Job*)g_10069a0)[i].id == ent->entity_id) {
 			s = fcn_004b3c50(((Job*)g_10069a0)[i].op);
 			level = s->level + 1;
 			memset(&((Job*)g_10069a0)[i], 0, sizeof(Job));
@@ -92,7 +92,7 @@ void __cdecl fcn_004b5df0(int flags)
 	dlg = fcn_00470820(0, 0, "special\\mission");
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 1);
-	io_AppendText(0x1b94, ent->id);
+	io_AppendText(0x1b94, ent->entity_index);
 	if (level > -1 && level < 4) {
 		b_ok = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b98));
 	}
@@ -107,7 +107,7 @@ void __cdecl fcn_004b5df0(int flags)
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == b_back) {
 				g_6a3440 = -1;
-				m1.id = ent->x4;
+				m1.id = ent->entity_id;
 				m1.x10 = 0;
 				h = fcn_004c5790(10, &m1);
 				while (fcn_004c4450(h) == 0) {
@@ -116,7 +116,7 @@ void __cdecl fcn_004b5df0(int flags)
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == b_quit) {
 				g_6a3440 = -1;
-				m2.id = ent->x4;
+				m2.id = ent->entity_id;
 				cancel = 1;
 				m2.x10 = 1;
 				h = fcn_004c5790(10, &m2);
@@ -129,8 +129,8 @@ void __cdecl fcn_004b5df0(int flags)
 	} while (fcn_005373e0(fcn_004b5df0, mode) != 0);
 	fcn_00471e30(dlg);
 	if (done) {
-		p = fcn_004b3d80(ent->x4, level, 1);
-		m2.id = ent->x4;
+		p = fcn_004b3d80(ent->entity_id, level, 1);
+		m2.id = ent->entity_id;
 		m2.x10 = 0;
 		h = fcn_004c5790(10, &m2);
 		while (fcn_004c4450(h) == 0) {

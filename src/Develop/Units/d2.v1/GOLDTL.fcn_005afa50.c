@@ -1,13 +1,14 @@
+#include "client_types.h"
 
 
 
 void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
 
-typedef struct
-{
-	char b[14];
-} Name14;
+
+
+
+
 // SIZE 0xe
 
 typedef struct
@@ -18,7 +19,7 @@ typedef struct
 	int x8;
 	int xc;
 	char pad10[0x18];
-	Name14 name;
+	pos14_7f4c00 name;
 	unsigned char x36;
 	char pad37[0x21];
 	int x58;
@@ -111,7 +112,7 @@ int __cdecl fcn_005afa50(int unused, char* e)
 				pkt.type = 0x64;
 				pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
 				pkt.xc = *(int*) (g_7746c4 + 1);
-				pkt.name = (*(Name14*)&gm_GameTime);
+				pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 				pkt.x36 = 1;
 				pkt.x5c = *(int*) (e + 1);
 				pkt.x60 = *(int*) (g_7746c4 + 1);

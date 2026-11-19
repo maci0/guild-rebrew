@@ -1,6 +1,5 @@
 #pragma optimize("y", off)
-extern char* sbs_BankManager;
-extern int MemUsed;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_6b7d78;
 extern char g_679010[]; /* %lang */
 extern char g_679018[]; /* sbs_Compile */

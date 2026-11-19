@@ -14,7 +14,7 @@ typedef struct Rec {
 extern char g_7f4ca0[];
 extern int gm_GameTime;
 extern float g_662cf8;
-extern float g_662910;
+
 extern float g_665bf0;
 extern double g_6628f0;
 
@@ -75,7 +75,7 @@ void __cdecl fcn_00553cd0(char* event)
 			*(int*) (event + 0x70) = 1;
 			return;
 		}
-		f = (g_662cf8 - (float) fcn_00508da0(e)) * g_662910;
+		f = (g_662cf8 - (float) fcn_00508da0(e)) * 0.01f;
 		found = 0;
 		for (q = fcn_00502cd0(0, 2, 7, 4, 0x1d); q != 0; q = gm_NextEntityQueryMatch()) {
 			if (*(int*) (q + 0x1c) == *(int*) (e + 1)

@@ -19,23 +19,16 @@ typedef struct
 
 extern Fld_102d140 g_102d140[];
 extern char* g_1015ea0;
-extern int d2_CurrentElementId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d374;
-extern int d2_DefaultFont;
 extern int g_67d39c;
 extern int g_7725a0;
 extern int g_7725a4;
-extern int d2_ClipRight;
-extern int d2_ClipBottom;
 extern char* g_772500;
 extern int g_77250c;
 extern int d2_ResourceOffset;
 extern int tp_d2_SelectedControl;
-extern int d2_ClipLeft;
-extern int g_7725fc;
 extern float g_6628a8;
-extern double g_662908;
-extern double g_662950;
 
 int __cdecl fcn_0046b520(char* s, int font);
 void __cdecl fcn_0046bbc0(int x, int y, int surf, char* text, int flags);
@@ -130,7 +123,7 @@ void __cdecl fcn_00466550(int idx, int surf)
 			w0 = e->i[0x10 / 4] + g0->w;
 			fcn_0047a040(w0 - 1, g_7725fc, w0 + v, d2_ClipBottom);
 			i = 0;
-			if (g_662950 < (double) (v / g2->w) + 0.5) {
+			if (0.0 < (double) (v / g2->w) + 0.5) {
 				do {
 					fcn_0047cba0(g2->w * i + g0->w + e->i[0x10 / 4],
 					    e->i[0x14 / 4], surf, font, 2);

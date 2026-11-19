@@ -21,12 +21,12 @@ void __cdecl fcn_00420bf0(void)
 	for (i = 0; i < 0x6a; i++, p += 4) {
 		sprintf(buf, (char*) 0x678a40, i,
 		        p[0],
-		        ((double) p[0] * g_662c38) / nt_ReceivedPacketCount,
+		        ((double) p[0] * 100.0) / nt_ReceivedPacketCount,
 		        p[1],
-		        ((double) p[1] * g_662c38) / nt_ReceivedBytes,
+		        ((double) p[1] * 100.0) / nt_ReceivedBytes,
 		        p[2],
-		        ((double) p[2] * g_662c38) / g_6b7d60,
+		        ((double) p[2] * 100.0) / g_6b7d60,
 		        p[3],
-		        ((double) p[3] * g_662c38) / g_6b7d5c);
+		        ((double) p[3] * 100.0) / g_6b7d5c);
 	}
 }

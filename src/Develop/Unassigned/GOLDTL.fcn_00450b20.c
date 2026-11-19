@@ -9,20 +9,21 @@ typedef struct {
 	float power;
 } Material;
 
-typedef struct Device Device;
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
+typedef int (__stdcall* Material450b20Fn)(D3D_DEVICE_VIEW*, Material*);
 
-typedef struct {
-	char p0[0xa8];
-	int (__stdcall* SetMaterial)(Device*, Material*);
-} DeviceVtbl;
 
-struct Device {
-	DeviceVtbl* vtbl;
-};
+
+
+
+
+
+
+
 
 extern float g_67bbf0;
 extern float g_67bbf4;
-extern void* g_6b5de0;
+
 
 
 /* ADDRESS: GOLDTL 0x00450b20 */
@@ -52,5 +53,5 @@ void __cdecl fcn_00450b20(float scale, float* v, unsigned int color, char tint)
 	m.specular[1] = 0.0f;
 	m.specular[0] = 0.0f;
 	m.power = 0.0f;
-	((Device*)g_6b5de0)->vtbl->SetMaterial(((Device*)g_6b5de0), &m);
+	((Material450b20Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[4])(((D3D_DEVICE_VIEW*)g_6b5de0), &m);
 }

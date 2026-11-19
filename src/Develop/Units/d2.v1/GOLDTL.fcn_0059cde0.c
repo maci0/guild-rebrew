@@ -1,12 +1,13 @@
+#include "client_types.h"
 
 
 
 #include <string.h>
 
-typedef struct
-{
-	char b[14];
-} Name14;
+
+
+
+
 // SIZE 0xe
 
 typedef struct
@@ -17,7 +18,7 @@ typedef struct
 	int x8;
 	int xc;
 	char pad10[0x18];
-	Name14 name;
+	pos14_7f4c00 name;
 	unsigned char x36;
 	char pad37;
 	int ids[8];
@@ -100,7 +101,7 @@ int __cdecl fcn_0059cde0(char* name)
 					pkt.type = 0x48;
 					pkt.x8 = ((Player*)g_7f4ca0)[*(unsigned short*) (((char*)g_7746c8) + 0x27)].x4;
 					pkt.xc = *(int*) (((char*)g_7746c8) + 1);
-					pkt.name = (*(Name14*)&gm_GameTime);
+					pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 					pkt.x36 = 2;
 					strcpy(pkt.str, name);
 					for (i = 0; i < 8; i++) {

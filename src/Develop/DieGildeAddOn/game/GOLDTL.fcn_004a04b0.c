@@ -140,7 +140,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 		return 0;
 	}
 	flag = *(unsigned char*) w + 1;
-	t = (int) (fcn_0050d170(flag) * g_6628d8);
+	t = (int) (fcn_0050d170(flag) * 0.4f);
 	if (t < price) {
 		o1->kind = 4;
 		o1->a = flag;

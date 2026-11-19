@@ -1,4 +1,4 @@
-extern char txt_TextBanks[][0x74];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_0065f220(const char* a, const char* b);
 #include <stdio.h>
@@ -12,7 +12,6 @@ typedef struct {
 } TextBank_42d6b0;
 
 extern char g_1053000[][0x50];
-extern int g_11bb000[];
 extern char* txt_TextEntries[];
 typedef struct VFS_DIR VFS_DIR;
 extern VFS_DIR* g_6b7fdc;

@@ -10,20 +10,10 @@ extern char g_6b8018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
 extern Slot_1043340 g_1043340[64];
-extern char* d3_ObjectListHead;
-extern char d3_SceneObjectSentinel[];
-extern char* d3_SceneRenderListHead;
-extern char g_1040640[];
 extern int g_6b8484;
 extern int g_6b8300;
-extern int g_6b89c0;
 extern int g_67a370;
-extern char* g_1042c38;
-extern char g_1042d00[];
-extern char* g_1042320;
-extern char g_1052a40[];
 extern int g_6b8064;
-extern int g_1041d08;
 
 void __cdecl fcn_004432d0(int a, int b);
 void __cdecl d3_DisposeObject(char* p);

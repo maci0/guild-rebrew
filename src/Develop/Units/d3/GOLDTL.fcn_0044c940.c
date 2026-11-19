@@ -30,7 +30,7 @@ int __cdecl fcn_00411490(int h, const char* name, float* out);
 void __cdecl fcn_00410430(int h);
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
-extern int d3_LODMode;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 /* Reads the Direct3D screen and window options from the registry over the

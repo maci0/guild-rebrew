@@ -1,8 +1,7 @@
 
 
 #include "Develop/Units/d3/d3_camera.h"
-extern char d3_SceneObjectSentinel[];
-extern char* g_1042538;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67a370;
 
 

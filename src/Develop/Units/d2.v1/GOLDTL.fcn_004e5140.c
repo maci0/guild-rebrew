@@ -12,7 +12,7 @@ typedef struct
 } Player35c;
 // SIZE 0x35c
 
-extern char g_9b0e20[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_68b300[];
 
 void __cdecl d2_SetForm(int, int);

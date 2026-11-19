@@ -33,7 +33,7 @@ extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_14ce86c;
 extern int g_77250c;
-extern unsigned short ls_SavePreviewPixels[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 Tex* __cdecl fcn_004770a0(TexDesc*, int);
 void __cdecl fcn_00476620(int, int, int, int, int, int, int, Tex*);

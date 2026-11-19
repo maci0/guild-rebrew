@@ -20,13 +20,13 @@ typedef struct {
 #pragma pack(pop)
 
 // SIZE 0x21c
-typedef struct {
-	unsigned short slot;
-	unsigned char type;
-	char pad3;
-	int id;
-	char pad8[0x214];
-} Entity_5635b0;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 // SIZE 0xbc
 typedef struct {
@@ -50,7 +50,7 @@ typedef struct {
 
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
-extern char g_7f4ca0[];
+
 
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c4450(int);
@@ -99,7 +99,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 					if (*(unsigned short*) (p + 0x27) == 0xffff) {
 						goto next;
 					}
-					if (((Entity_5635b0*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].type != 6 && ((Entity_5635b0*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].type != 7) {
+					if (((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].entity_state != 6 && ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].entity_state != 7) {
 						goto next;
 					}
 				}
@@ -111,7 +111,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 					m[4] = 0x6e;
 					*(int*) (m + 0xc) = -1;
 					m[0x36] = 1;
-					*(int*) (m + 8) = ((Entity_5635b0*)g_7f4ca0)[o->ent].id;
+					*(int*) (m + 8) = ((ENTITY_RECORD*)g_7f4ca0)[o->ent].entity_id;
 					*(pos14_7f4c00*) (m + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 					*(int*) (m + 0x60) = o->who;
 					*(int*) (m + 0x68) = o->value;

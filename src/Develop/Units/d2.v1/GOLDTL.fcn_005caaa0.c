@@ -7,12 +7,12 @@ typedef struct
 // SIZE 0x54
 
 // SIZE 0x21c
-typedef struct
-{
-	char pad0[4];
-	int id;
-	char pad8[0x21c - 8];
-} fcn_005caaa0_Ent;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
 
 // SIZE 0x2f4
 typedef struct
@@ -43,7 +43,7 @@ typedef struct
 extern char* g_772500;
 extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
-extern char g_7f4ca0[];
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 int __cdecl fcn_0046f740(int x, int y, int a3, int win);
@@ -78,7 +78,7 @@ int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* selection)
 				d2_SetElementValue(selection->bar, 0, 0x64, (int) fcn_0050f980(g_774970, *(unsigned short*) selection->e, 1));
 			fcn_00472640(selection->bar, 0);
 		}
-		if (*(int*) (selection->e + 0x210) == ((fcn_005caaa0_Ent*)g_7f4ca0)[g_774970].id)
+		if (*(int*) (selection->e + 0x210) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id)
 			fcn_0046f740(((fcn_005caaa0_Def*)g_772500)[1498].w + x, y, 0x6d3, d2_CurrentWindowId);
 		if (selection->f30 != 0) {
 			((fcn_005caaa0_Tile*)g_1015ea0)[selection->tile].f5c = 1;

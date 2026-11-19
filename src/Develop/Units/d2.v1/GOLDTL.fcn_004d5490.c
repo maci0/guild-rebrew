@@ -33,7 +33,7 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern char* g_772eb4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
 extern char g_6b5c60[];

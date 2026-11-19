@@ -22,9 +22,9 @@ void __cdecl fcn_0044d640(void* r, char* o)
 
 	for (i = 0; i < *(int*) (o + 0x24); i++) {
 		line = fcn_004010b0(r);
-		(*(Vert**) (o + 0x30))[*(int*) (o + 0x28)].x = (float) fcn_0064d62e(fcn_0064f026(line, g_662d18));
-		(*(Vert**) (o + 0x30))[*(int*) (o + 0x28)].y = (float) fcn_0064d62e(fcn_0064f026(0, g_662d18));
-		(*(Vert**) (o + 0x30))[*(int*) (o + 0x28)].z = (float) fcn_0064d62e(fcn_0064f026(0, g_662d18));
+		(*(Vert**) (o + 0x30))[*(int*) (o + 0x28)].x = (float) fcn_0064d62e(fcn_0064f026(line, " "));
+		(*(Vert**) (o + 0x30))[*(int*) (o + 0x28)].y = (float) fcn_0064d62e(fcn_0064f026(0, " "));
+		(*(Vert**) (o + 0x30))[*(int*) (o + 0x28)].z = (float) fcn_0064d62e(fcn_0064f026(0, " "));
 		(*(int*) (o + 0x28))++;
 	}
 	fcn_004010b0(r);

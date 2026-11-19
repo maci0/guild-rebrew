@@ -9,19 +9,19 @@ typedef struct
 } Ent;
 // SIZE 0xc
 
-typedef struct
-{
-	int x0;
-	int x4;
-	char pad8[5];
-	unsigned char xd;
-	char pade[0x15a];
-	unsigned char x168;
-	char pad169[0xb3];
-} Player;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
+
+
+
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14abb2c;
 extern int g_14abb28;
@@ -35,13 +35,13 @@ extern int g_14ce8e0;
 extern char s_6aaebc[];
 
 int __cdecl fcn_00526120(int, int);
-int __cdecl fcn_005a96a0(Player*, int);
+int __cdecl fcn_005a96a0(ENTITY_RECORD*, int);
 void __cdecl fcn_00532ef0(void);
-int __cdecl fcn_004e8ee0(Player*, int, Ent*, int*);
+int __cdecl fcn_004e8ee0(ENTITY_RECORD*, int, Ent*, int*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_004e8d10(Player*, int, Ent*);
+int __cdecl fcn_004e8d10(ENTITY_RECORD*, int, Ent*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_0046f2c0(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -53,7 +53,7 @@ void __cdecl fcn_005a9a10(void)
 {
 	int flag;
 	int cnt;
-	Player* p;
+	ENTITY_RECORD* p;
 	int prev;
 	int btns[6];
 	Ent list[6];
@@ -65,13 +65,13 @@ void __cdecl fcn_005a9a10(void)
 	prev = -1;
 	cnt = 0;
 	flag = 1;
-	p = &((Player*)g_7f4ca0)[g_774970];
-	if (p->xd < 2) {
+	p = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
+	if (p->unk_00d < 2) {
 		fcn_00526120(g_14abb2c, 0);
 		return;
 	}
-	if (p->x168 != 0) {
-		fcn_005a96a0(p, p->x168);
+	if (p->unk_165[3] != 0) {
+		fcn_005a96a0(p, p->unk_165[3]);
 		fcn_00532ef0();
 		return;
 	}

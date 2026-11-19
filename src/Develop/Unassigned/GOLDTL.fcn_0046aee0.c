@@ -32,11 +32,12 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-typedef struct Win {
-	char pad0[0x274];
-	int active;
-	char pad278[0x3cc - 0x278];
-} Win;
+#include "Develop/Units/d2.v1/d2_win.h"
+
+
+
+
+
 // SIZE 0x3cc
 
 extern char* g_1015ea0;
@@ -76,7 +77,7 @@ int __cdecl fcn_0046aee0(int x, int y)
 				hidden = *(int*) (s->owner + 0x198);
 			}
 			if (x >= s->x && x <= s->x + s->w && y >= s->y && y <= s->y + s->h && !hidden
-				&& y >= s->top && y <= s->bottom && !s->hidden4c && !s->hidden48 && ((Slot*)g_1015ea0)[s->id].type == 0x40 && ((Win*)g_1015f40)[s->result].active) {
+				&& y >= s->top && y <= s->bottom && !s->hidden4c && !s->hidden48 && ((Slot*)g_1015ea0)[s->id].type == 0x40 && *(int*) &((D2_WIN*)g_1015f40)[s->result].pad3c[0x238]) {
 				g_67d38c = s->result;
 				break;
 			}

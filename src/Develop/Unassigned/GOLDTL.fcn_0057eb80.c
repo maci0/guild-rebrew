@@ -1,6 +1,6 @@
 
 
-extern int d2_TutorialActive;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int* g_665f08;
 
 int __cdecl fcn_0057eb80(void)

@@ -1,24 +1,24 @@
 
 
 
-typedef struct Ent {
-	unsigned short id;
-	unsigned char kind;
-	char pad3[0x166 - 3];
-	unsigned char rank;
-	char pad167[0x194 - 0x167];
-	int level;
-	char pad198[0x21c - 0x198];
-} Ent;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
+
+
+
 
 typedef struct Cmd {
 	int type;
 	char pad4[0x21c - 4];
-	Ent* target;
+	ENTITY_RECORD* target;
 } Cmd;
 
-extern char g_7f4ca0[];
+
 extern char s_6a2f5c[];
 extern char s_6acd38[];
 extern int g_100f1dc;
@@ -26,7 +26,7 @@ extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
 
-int __cdecl fcn_005d75d0(Ent*, Ent*, Ent*);
+int __cdecl fcn_005d75d0(ENTITY_RECORD*, ENTITY_RECORD*, ENTITY_RECORD*);
 void __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -35,16 +35,16 @@ void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_00525f60(Ent*, int);
+int __cdecl fcn_00525f60(ENTITY_RECORD*, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005d71f0();
 
-int __cdecl fcn_005d7640(Ent* ent, Cmd* cmd)
+int __cdecl fcn_005d7640(ENTITY_RECORD* ent, Cmd* cmd)
 {
-	Ent* pa;
+	ENTITY_RECORD* pa;
 	char text[0x200];
-	Ent* pb;
+	ENTITY_RECORD* pb;
 	int i;
 	int left;
 	int rank;
@@ -59,9 +59,9 @@ int __cdecl fcn_005d7640(Ent* ent, Cmd* cmd)
 	left = 2;
 	pa = 0;
 	if (cmd->type == 3) {
-		rank = ent->rank;
+		rank = ent->unk_165[1];
 	} else if (cmd->type == 4 && cmd->target != 0) {
-		rank = cmd->target->rank;
+		rank = cmd->target->unk_165[1];
 	} else {
 		return 0x60;
 	}
@@ -81,16 +81,16 @@ int __cdecl fcn_005d7640(Ent* ent, Cmd* cmd)
 		if (left == 0) {
 			break;
 		}
-		if (((Ent*)g_7f4ca0)[i].rank == want_a) {
-			pa = &((Ent*)g_7f4ca0)[i];
+		if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_165[1] == want_a) {
+			pa = &((ENTITY_RECORD*)g_7f4ca0)[i];
 			left--;
-		} else if (((Ent*)g_7f4ca0)[i].rank == want_b) {
-			pb = &((Ent*)g_7f4ca0)[i];
+		} else if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_165[1] == want_b) {
+			pb = &((ENTITY_RECORD*)g_7f4ca0)[i];
 			left--;
 		}
 	}
-	if (ent->kind != 6 && ent->kind != 7) {
-		if (ent->level < 6 || left > 0) {
+	if (ent->entity_state != 6 && ent->entity_state != 7) {
+		if (ent->unk_194 < 6 || left > 0) {
 			return 0x20;
 		}
 		return fcn_005d75d0(ent, pb, pa) ? 0x10 : 0x20;
@@ -104,7 +104,7 @@ int __cdecl fcn_005d7640(Ent* ent, Cmd* cmd)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471b60(h);
 	d2_SetForm(h, 1);
-	s = io_AppendText(0x1dc9, 6, pb->id, pa->id);
+	s = io_AppendText(0x1dc9, 6, pb->entity_index, pa->entity_index);
 	yes = fcn_00472250(h, 1, s);
 	no = fcn_00472250(h, 1, s + 1);
 	g_100f1dc = -1;

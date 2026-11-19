@@ -4,7 +4,7 @@
 
 extern char* g_104049c;
 extern unsigned int g_10404a0;
-extern int g_10405c4;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* SIZE 0x70 */
 typedef struct Tex {

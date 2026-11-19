@@ -1,13 +1,14 @@
-extern char gm_GameTime[];
+#include "client_types.h"
+extern pos14_7f4c00 gm_GameTime;
 extern double g_6629c8;
-#pragma pack(push, 2)
-typedef struct {
-	int a;
-	int b;
-	int c;
-	short d;
-} NAME14;
-#pragma pack(pop)
+
+
+
+
+
+
+
+
 extern char g_7f4ca0[];
 #include "game_data.h"
 typedef struct CrimeProto { char pad0[0x247]; unsigned char field247; char tail[5]; } CrimeProto;
@@ -71,10 +72,10 @@ int __cdecl fcn_00578a10(char* a1)
 		}
 		r = *(char**) (p + 0x184);
 		if (*(int*) (r + 0x128) != 0) {
-			*(NAME14*) (a1 + 0x52) = *(NAME14*) gm_GameTime;
+			*(pos14_7f4c00*) (a1 + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 			return fcn_00500bb0((int*) (a1 + 0x52), 0, 4, 0);
 		}
-		*(NAME14*) (a1 + 0x52) = *(NAME14*) gm_GameTime;
+		*(pos14_7f4c00*) (a1 + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 		fcn_00500bb0((int*) (a1 + 0x52), 1, 0, 0);
 		n = gm_LookupEntityRecordById(*(int*) (a1 + 0xb0));
 		m = gm_LookupEntityRecordById(*(int*) (a1 + 0xb4));
@@ -108,7 +109,7 @@ int __cdecl fcn_00578a10(char* a1)
 		}
 		r = *(char**) (m + 0x184);
 		if (*(int*) (r + 0x128) != 0) {
-			*(NAME14*) (a1 + 0x52) = *(NAME14*) gm_GameTime;
+			*(pos14_7f4c00*) (a1 + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 			return fcn_00500bb0((int*) (a1 + 0x52), 0, 4, 0);
 		}
 		gm_StartFilteredEntitySearch(1, 1, *(int*) (a1 + 0xac));

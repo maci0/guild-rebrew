@@ -7,7 +7,7 @@ struct fcn_004c0a10_node {
 };
 // SIZE 0x10
 
-extern char* g_772d34;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00426170(int*, int);
 void __cdecl m_FreeTracked(void*);

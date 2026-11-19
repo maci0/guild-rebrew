@@ -14,12 +14,7 @@ typedef struct {
 } Group;
 
 extern char g_7728d4;
-extern int hst_HistoryTextBase;
-extern int g_67fca8;
-extern int g_67fcac;
-extern int g_67fcb4;
-extern char g_1007ba0[];
-extern char g_1007bc0[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, void* file);
 

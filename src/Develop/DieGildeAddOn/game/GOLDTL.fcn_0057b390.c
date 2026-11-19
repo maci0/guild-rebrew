@@ -1,12 +1,12 @@
-#pragma pack(push, 2)
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
 /* SIZE 0xe */
-typedef struct {
-	int day;
-	unsigned short hour;
-	int min;
-	int sec;
-} Time5;
-#pragma pack(pop)
+
+
+
+
+
+
+
 
 /* SIZE 0xf8 */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 	int owner;
 	int target;
 	char pad10[0x18];
-	Time5 at;
+	GAME_TIMESTAMP at;
 	unsigned char code;
 	char pad37[0x21];
 	unsigned char who;
@@ -26,7 +26,6 @@ typedef struct {
 } Msg5;
 
 extern char g_7f4ca0[];
-extern char gm_GameTime[];
 extern float g_662a70;
 extern float g_662a6c;
 extern double g_662908;
@@ -40,7 +39,7 @@ int __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_0050f950(int a, int b);
 void __cdecl fcn_005904a0(char* s, int v);
 void __cdecl fcn_004c5530(Msg5* m);
-void __cdecl fcn_00500bb0(Time5* t, int a, int b, int c);
+void __cdecl fcn_00500bb0(GAME_TIMESTAMP* t, int a, int b, int c);
 void __cdecl fcn_00546190(char* e);
 
 /* ADDRESS: GOLDTL 0x0057b390 */
@@ -91,7 +90,7 @@ void __cdecl fcn_0057b390(char* e)
 								m.target = *(int*) (u + 1);
 								m.owner = *(unsigned short*) (e + 8);
 								m.kind = 0x94;
-								m.at = *(Time5*) gm_GameTime;
+								m.at = *(GAME_TIMESTAMP*) &gm_GameTime;
 								m.code = 1;
 								*(int*) &m.who = *(int*) (s + 4);
 								fcn_004c5530(&m);
@@ -134,13 +133,13 @@ void __cdecl fcn_0057b390(char* e)
 		}
 		break;
 	case 2:
-		*(Time5*) (e + 0x52) = *(Time5*) gm_GameTime;
-		fcn_00500bb0((Time5*) (e + 0x52), 0, 0x1e, 0);
+		*(GAME_TIMESTAMP*) (e + 0x52) = *(GAME_TIMESTAMP*) &gm_GameTime;
+		fcn_00500bb0((GAME_TIMESTAMP*) (e + 0x52), 0, 0x1e, 0);
 		*(int*) (e + 0x70) += 1;
 		return;
 	case 3:
-		*(Time5*) (e + 0x52) = *(Time5*) gm_GameTime;
-		fcn_00500bb0((Time5*) (e + 0x52), 0, 0x1e, 0);
+		*(GAME_TIMESTAMP*) (e + 0x52) = *(GAME_TIMESTAMP*) &gm_GameTime;
+		fcn_00500bb0((GAME_TIMESTAMP*) (e + 0x52), 0, 0x1e, 0);
 		*(int*) (e + 0x70) = 0;
 		return;
 	case -1:
@@ -150,7 +149,7 @@ void __cdecl fcn_0057b390(char* e)
 	default:
 		return;
 	}
-	*(Time5*) (e + 0x52) = *(Time5*) gm_GameTime;
-	fcn_00500bb0((Time5*) (e + 0x52), 0, gm_RandomMod(0x14) + 0x14, 0);
+	*(GAME_TIMESTAMP*) (e + 0x52) = *(GAME_TIMESTAMP*) &gm_GameTime;
+	fcn_00500bb0((GAME_TIMESTAMP*) (e + 0x52), 0, gm_RandomMod(0x14) + 0x14, 0);
 	*(int*) (e + 0x70) += 1;
 }

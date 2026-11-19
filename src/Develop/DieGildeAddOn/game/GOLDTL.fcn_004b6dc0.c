@@ -51,9 +51,9 @@ int __cdecl fcn_004b6dc0(void* a1)
 	{
 		gm_StartFilteredEntitySearch(1, 1, arr[gm_RandomMod(i) & 0xffff]);
 		n = gm_RandomMod(5) & 0xffff;
-		d = (double) n + g_662a48;
+		d = (double) n + 2.0;
 		n = gm_WalkEntityChain(*(short*) p);
-		r = (int) (((double) n * d) * g_6640e8);
+		r = (int) (((double) n * d) * 0.01);
 		io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, r);
 		fcn_004c51a0(*(int*) a1, -1, g_773d75, r);
 		len = strlen(buf);

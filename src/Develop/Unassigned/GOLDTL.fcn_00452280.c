@@ -1,15 +1,16 @@
 
 
-typedef struct IDev IDev;
-// SIZE 0x60
-typedef struct IDevVtbl {
-	void* slots[23];
-	long (__stdcall* CreateVertexBuffer)(IDev*, unsigned int, unsigned long, unsigned long, int, void**);
-} IDevVtbl;
-// SIZE 0x4
-struct IDev {
-	IDevVtbl* v;
-};
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
+typedef long (__stdcall* CreateVertexBufferFn)(D3D_DEVICE_VIEW*, unsigned int, unsigned long, unsigned long, int, void**);
+
+
+
+
+
+
+
+
+
 
 extern unsigned int g_14ce7cc;
 extern unsigned int g_6b8710;
@@ -35,6 +36,6 @@ void __cdecl fcn_00452280(void)
 	g_1040c78 = 0;
 	g_1040958 = g_1040960;
 	g_6b8714 = stride;
-	((IDev*)g_6b5de0)->v->CreateVertexBuffer(((IDev*)g_6b5de0), g_67bc4c * stride, 0x248, fvf, 0, &tp_d3_RenderVertexBuffer);
+	((CreateVertexBufferFn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_00[23])(((D3D_DEVICE_VIEW*)g_6b5de0), g_67bc4c * stride, 0x248, fvf, 0, &tp_d3_RenderVertexBuffer);
 	g_6b8718 = 0;
 }

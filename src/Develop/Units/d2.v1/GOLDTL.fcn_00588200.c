@@ -55,7 +55,7 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 	    *(int*) (panel + 0xa0) == 2;
 	rec = fcn_004f0ff0((char*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0), level,
 	                   percent, *(int*) (panel + 0xa0) + 1, (int*) &v1, (int*) &v2);
-	show = *(float*) (panel + 0x20) <= *(float*) &g_662910 && rec != 0 &&
+	show = *(float*) (panel + 0x20) <= 0.01f && rec != 0 &&
 	       *(float*) (a2 + 8 + *(int*) (panel + 0xa0) * 4) >= f &&
 	       (*(unsigned char*) (a2 + 4) & 2) == 0;
 	fcn_00472640(*(int*) (panel + 0xb8), show);

@@ -31,18 +31,18 @@ typedef struct GOLDTL_EntType5c30 {
 } GOLDTL_EntType5c30;
 
 /* One player/house slot, stride 0x21c. */
-typedef struct GOLDTL_House5c30 {
-	int f0;
-	int f4;
-	char pad8[0x214];
-} GOLDTL_House5c30;
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
 
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+
 extern double g_664e60;
 
 int __cdecl gm_GetBuildingTypeCategory(int);
@@ -120,7 +120,7 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 		if (fcn_00526120(buf, 0x11) == 0) {
 			return;
 		}
-		if (fcn_00526010(&((GOLDTL_House5c30*) g_7f4ca0)[g_774970], v,
+		if (fcn_00526010(&((ENTITY_RECORD*) g_7f4ca0)[g_774970], v,
 		                 (char) g_773d75) == 0) {
 			return;
 		}
@@ -133,7 +133,7 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 		}
 		memset(&msg, 0, sizeof msg);
 		msg.f4 = 0x1e;
-		msg.f8 = ((GOLDTL_House5c30*) g_7f4ca0)[g_774970].f4;
+		msg.f8 = ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id;
 		msg.fc = *(int*) (a1 + 1);
 		msg.f36 = 1;
 		msg.f28 = gm_GameTime.a;
@@ -142,7 +142,7 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 		msg.f34 = gm_GameTime.d;
 		msg.f58 = msg.fc;
 		fcn_004c4eb0(g_67e968);
-		fcn_004c5150(-1, ((GOLDTL_House5c30*) g_7f4ca0)[g_774970].f4,
+		fcn_004c5150(-1, ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id,
 		             (char) g_773d75, v);
 		fcn_004c5530((char*) &msg);
 		fcn_004c4ef0(g_67e968);
@@ -173,7 +173,7 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 	msg.f34 = gm_GameTime.d;
 	msg.f36 = 1;
 	msg.fc = *(int*) (a1 + 1);
-	msg.f8 = ((GOLDTL_House5c30*) g_7f4ca0)[g_774970].f4;
+	msg.f8 = ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id;
 	msg.f30 = gm_GameTime.c;
 	msg.f2c = gm_GameTime.b;
 	msg.f28 = gm_GameTime.a;

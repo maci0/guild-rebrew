@@ -113,7 +113,7 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 	ops = *(GOLDTL_BufferVtbl**) vb;
 	ops->Unlock(vb);
 	verts = 0;
-	th = (int) (g_662da8 / scale[1]);
+	th = (int) (25.0f / scale[1]);
 
 	i = 0;
 	while (i < h) {

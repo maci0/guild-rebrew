@@ -5,16 +5,17 @@ typedef struct Mat_451f80 {
 } Mat_451f80;
 // SIZE 0x40
 
-typedef struct Dev_451f80 Dev_451f80;
-typedef struct DevVtbl_451f80 {
-	char pad0[0x94];
-	int (__stdcall* SetTransform)(Dev_451f80* self, int state, void* m);
-	char pad98[0xf4 - 0x98];
-	int (__stdcall* SetTexture)(Dev_451f80* self, int stage, int tex);
-} DevVtbl_451f80;
-struct Dev_451f80 {
-	DevVtbl_451f80* vtbl;
-};
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
+typedef int (__stdcall* Transform451f80Fn)(D3D_DEVICE_VIEW*, int, void*);
+typedef int (__stdcall* Texture451f80Fn)(D3D_DEVICE_VIEW*, int, int);
+
+
+
+
+
+
+
+
 
 typedef struct Mesh_451f80 Mesh_451f80;
 typedef struct MeshVtbl_451f80 {
@@ -43,7 +44,7 @@ typedef struct Node_451f80 {
 // SIZE 0x2c
 
 #include "Develop/Units/d3/d3_camera.h"
-extern Dev_451f80* g_6b5de0;
+
 extern int g_6b8064;
 extern Node_451f80* g_6b8068;
 extern int d3_RenderedVertexCount;
@@ -115,10 +116,10 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 				} else {
 					if (!set) {
 						fcn_00450e90(f, g, o + 0x280, (Mat_451f80*) g_1040cc0, (Mat_451f80*) g_1040c80);
-						g_6b5de0->vtbl->SetTransform(g_6b5de0, 0x100, *(char**) (e + 0x1ec) + 0x15fc);
+						((Transform451f80Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetTransform)((D3D_DEVICE_VIEW*)g_6b5de0, 0x100, *(char**) (e + 0x1ec) + 0x15fc);
 						set = 1;
 					}
-					g_6b5de0->vtbl->SetTexture(g_6b5de0, 0, *(int*) (mat + 0x50));
+					((Texture451f80Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])((D3D_DEVICE_VIEW*)g_6b5de0, 0, *(int*) (mat + 0x50));
 					fcn_004372d0(mat[0x58], ((mat[0x54] & 1) << 1) | (mat[0x5a] & 1), *(int*) (mat + 0x6c), (mat[0x5a] >> 1) & 1, (mat[0x54] >> 3) & 1);
 					mesh->vtbl->DrawSubset(mesh, i);
 				}

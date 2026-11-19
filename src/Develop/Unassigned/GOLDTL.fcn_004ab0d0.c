@@ -1,14 +1,15 @@
 
 
 
+#include "client_types.h"
 #pragma pack(push, 1)
 // SIZE 0xe
-typedef struct {
-	int a;
-	int b;
-	int c;
-	short d;
-} Stamp0e;
+
+
+
+
+
+
 
 // SIZE 0xf8
 typedef struct {
@@ -18,7 +19,7 @@ typedef struct {
 	int from;
 	int to;
 	char pad1[0x18];
-	Stamp0e stamp;
+	pos14_7f4c00 stamp;
 	unsigned char mode;
 	char pad2[0x25];
 	int to2;

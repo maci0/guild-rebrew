@@ -10,15 +10,15 @@
 #include <string.h>
 
 /* g_7f4c00: 14-byte market stamp, word view of the second field is compared. */
-#pragma pack(push, 2)
-typedef struct {
-	int a;
-	unsigned short b;
-	short b2;
-	int c;
-	short d;
-} pos14m;
-#pragma pack(pop)
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
+
+
+
+
+
+
+
+
 
 /* one market slot record, 0x80 bytes */
 typedef struct {
@@ -41,7 +41,6 @@ typedef struct {
 	char pad3c[0x44];
 } MarktSlot;
 
-extern pos14m gm_GameTime;
 extern char* g_773d78;
 extern unsigned char g_773d75;
 extern char* gm_CityEntity;
@@ -104,14 +103,14 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 		return;
 	}
 	v = fcn_00500d20((void*) (a0 + 0x60), (void*) &gm_GameTime);
-	if (gm_GameTime.b > 0x14) {
+	if ((unsigned short) gm_GameTime.b > 0x14) {
 		fcn_00546190(a0);
 		return;
 	}
 	if (v == 0) {
 		return;
 	}
-	*(pos14m*) (a0 + 0x60) = gm_GameTime;
+	*(GAME_TIMESTAMP*) (a0 + 0x60) = *(GAME_TIMESTAMP*) &gm_GameTime;
 	if (*(int*) (a0 + 0x70) < -2) {
 		return;
 	}
@@ -157,7 +156,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 		d = (double) v * g_665dd0;
 		uf.f = (float) (rec.f34 * 0.0714285746f * d);
 		up.n = gm_RandomMod(100) & 0xffff;
-		uf.f = (up.n + g_665ea0) * uf.f * g_662910;
+		uf.f = (up.n + g_665ea0) * uf.f * 0.01f;
 		if (uf.f != g_6628a8) {
 			if (g_6628a0 > uf.f) {
 				uf.f = 1.0f;
@@ -173,8 +172,8 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 		} else if (ub.n > rec.f34 * g_6640f8) {
 			uf.f = (float) (rec.f34 * 0.0714285746f * d);
 			rec.f24 = rec.f24 - uf.f * g_662d34;
-			if (rec.f20 * g_662ad8 > rec.f24) {
-				rec.f24 = rec.f20 * g_662ad8;
+			if (rec.f20 * 0.25 > rec.f24) {
+				rec.f24 = rec.f20 * 0.25;
 			}
 			if (g_6628a0 > rec.f24) {
 				rec.f24 = 1.0f;
@@ -189,7 +188,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 				rec.f24 = rec.f20 * 1.5f;
 			}
 		}
-		if ((unsigned short) gm_RandomMod(100) > 0xa || gm_GameTime.b == 0xc) {
+		if ((unsigned short) gm_RandomMod(100) > 0xa || (unsigned short) gm_GameTime.b == 0xc) {
 			rec.f38 = fcn_005025a0(g_773d75, i);
 		}
 		fcn_004c61d0(&rec, g_773d75);
@@ -252,7 +251,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 			}
 		} else {
 			rec.f24 = rec.f24 + g * g_662948;
-			if (gm_RandomFloat01() < g_662ad8) {
+			if (gm_RandomFloat01() < 0.25) {
 				t = (gm_RandomMod(3) & 0xffff) + 1;
 				fcn_004c51f0(*(int*) (ent + 2), -1,
 				    rec.id, t, g_773d75, 0);
@@ -279,7 +278,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 				}
 			}
 		}
-		if ((unsigned short) gm_RandomMod(100) > 0xa || gm_GameTime.b == 0xc) {
+		if ((unsigned short) gm_RandomMod(100) > 0xa || (unsigned short) gm_GameTime.b == 0xc) {
 			rec.f38 = fcn_005025a0(g_773d75, i);
 		}
 		fcn_004c61d0(&rec, g_773d75);
@@ -341,8 +340,8 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 				}
 			} else {
 				rec.f24 = rec.f24 - g * g_662908;
-				if (rec.f20 * g_662ad8 > rec.f24) {
-					rec.f24 = rec.f20 * g_662ad8;
+				if (rec.f20 * 0.25 > rec.f24) {
+					rec.f24 = rec.f20 * 0.25;
 				}
 				if (g_6628a0 > rec.f24) {
 					rec.f24 = 1.0f;
@@ -401,11 +400,11 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 				}
 			} else {
 				((MarktSlot*) scratch)->f24 =
-				    ((MarktSlot*) scratch)->f24 - g * g_6629f8;
-				if (((MarktSlot*) scratch)->f20 * g_662ad8
+				    ((MarktSlot*) scratch)->f24 - g * 0.1;
+				if (((MarktSlot*) scratch)->f20 * 0.25
 				    > ((MarktSlot*) scratch)->f24) {
 					((MarktSlot*) scratch)->f24 =
-					    ((MarktSlot*) scratch)->f20 * g_662ad8;
+					    ((MarktSlot*) scratch)->f20 * 0.25;
 				}
 				if (g_6628a0 > ((MarktSlot*) scratch)->f24) {
 					((MarktSlot*) scratch)->f24 = 1.0f;
@@ -421,11 +420,11 @@ next_lager:
 		bar += 0x2f4;
 		lager += 0x2a90;
 	} while (bar < (char*) 0x868c30);
-	if (gm_GameTime.b >= 0x16) {
+	if ((unsigned short) gm_GameTime.b >= 0x16) {
 		fcn_00546190(a0);
 		return;
 	}
-	*(pos14m*) (a0 + 0x52) = gm_GameTime;
+	*(GAME_TIMESTAMP*) (a0 + 0x52) = *(GAME_TIMESTAMP*) &gm_GameTime;
 	fcn_00500bb0(a0 + 0x52, 1, 0, 0);
 	*(int*) (a0 + 0x70) = 0;
 }

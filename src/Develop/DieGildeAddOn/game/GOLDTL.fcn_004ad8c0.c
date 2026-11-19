@@ -1,19 +1,19 @@
 
 
-typedef struct {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int handle;
-	char pad8[5];
-	unsigned char rank;
-	char pade[0x1be];
-	int mask;
-	char pad1d0[0x4c];
-} Player;
-// SIZE 0x21c
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
+
+
+
+
+
 extern int g_664e1c[3];
 extern int g_664e28[3];
 extern int g_6653bc;
@@ -53,7 +53,7 @@ void __cdecl fcn_004ad8c0(void)
 	int v;
 	int mask;
 	char *o;
-	Player *p;
+	ENTITY_RECORD *p;
 
 	ids[0] = 1;
 	ids[1] = 2;
@@ -80,17 +80,17 @@ void __cdecl fcn_004ad8c0(void)
 	kinds[1] = 21;
 	kinds[2] = 27;
 	for (i = 0; i < 768; i++) {
-		p = &((Player*) g_7f4ca0)[i];
-		if (p->rank >= 7 &&
-		    (p->type == 6 || p->type == 7 || p->type == 5 || p->type == 4 ||
-			p->type == 3 || p->type == 2)) {
+		p = &((ENTITY_RECORD*) g_7f4ca0)[i];
+		if (p->unk_00d >= 7 &&
+		    (p->entity_state == 6 || p->entity_state == 7 || p->entity_state == 5 || p->entity_state == 4 ||
+			p->entity_state == 3 || p->entity_state == 2)) {
 			k = 3;
 			do {
 				j = k - 1;
-				if ((p->mask & g_664e28[j]) == 0 && (p->mask & g_664e1c[j]) != 0) {
-					if (p->handle != owner[(j + 1) % 3] && p->handle != owner[(j + 2) % 3]) {
+				if ((p->entity_flags & g_664e28[j]) == 0 && (p->entity_flags & g_664e1c[j]) != 0) {
+					if (p->entity_id != owner[(j + 1) % 3] && p->entity_id != owner[(j + 2) % 3]) {
 						score[j] += 0.67f;
-						owner[j] = p->handle;
+						owner[j] = p->entity_id;
 					}
 					score[j] += 0.33f;
 				}

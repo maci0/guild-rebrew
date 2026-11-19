@@ -1,7 +1,7 @@
 
 
 #include "client_types.h"
-typedef Win_1015f40 Win;
+#include "Develop/Units/d2.v1/d2_win.h"
 // SIZE 0x3cc
 
 typedef struct
@@ -36,7 +36,7 @@ int __cdecl fcn_005ccad0(int a1, int a2, int a3, unsigned int n, Item* items)
 		return 0;
 	}
 	y = fcn_005cc240(a1, a2, a3);
-	half = g_1015f40[d2_CurrentWindowId].xc / 2;
+	half = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width / 2;
 	fcn_005c9090(g_14aadc8, half, 8, half * 2, 0x55);
 	pos = 0x28;
 	cat = 0x28;
@@ -52,7 +52,7 @@ int __cdecl fcn_005ccad0(int a1, int a2, int a3, unsigned int n, Item* items)
 		pos += 0x70;
 	}
 	fcn_005cc2f0(n, items);
-	g_1015f40[d2_CurrentWindowId].x258 = y;
-	g_1015f40[d2_CurrentWindowId].x274 = 0x70;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x21c] = y;
+	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x238] = 0x70;
 	return 1;
 }

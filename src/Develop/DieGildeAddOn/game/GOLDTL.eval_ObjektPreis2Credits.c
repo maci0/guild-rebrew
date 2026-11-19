@@ -72,7 +72,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int percent)
     } else {
         acc = g_662ac8;
     }
-    price = q * (acc * g_662908);
+    price = q * (acc * 0.5);
 
     if (r->type == 0x17) {
         return price * 2.2f;

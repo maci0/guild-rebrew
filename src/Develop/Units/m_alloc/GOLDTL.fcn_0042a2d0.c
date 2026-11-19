@@ -1,7 +1,4 @@
-extern int g_6b7f90;
-extern int* msx_WaveDrivers[16];
-extern int* g_6b7f10[16];
-extern int* g_6b7f50[16];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern void (__stdcall* g_6623a8)(int);
 
 int __cdecl fcn_0042b120(int a1);

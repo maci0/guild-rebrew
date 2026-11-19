@@ -7,7 +7,7 @@ extern float g_7e3a48;
 extern float d3_CameraTargetRotation[3];
 extern float g_7e3a54;
 extern float g_7e3a58;
-extern int g_6a256c;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00412b10(char* a, float b, float c, float d, float e, float f, float g, int h, int i);
 

@@ -1,7 +1,7 @@
 
 
 extern struct VFS_DIR* g_6b7fdc;
-extern char g_6750e8[];
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);

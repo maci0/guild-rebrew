@@ -240,7 +240,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					for (a = 0; a < 2; a++) {
 						for (j = 0; j < 12; j++) {
 							f = fcn_0050b8d0(tile, *p, -1, a);
-							v = (int) (((double) *(int*) (p + 0x3d) * g_6640e8) * f);
+							v = (int) (((double) *(int*) (p + 0x3d) * 0.01) * f);
 							id2 = ((int*) msg)[1 + a * 12 + j];
 							if (id2 == 0xffff) {
 								continue;
@@ -362,7 +362,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					}
 					for (j = 0; j < 12; j++) {
 						f = fcn_0050b8d0(tile, *p, -1, 0);
-						v = (int) (((double) *(int*) (p + 0x3d) * g_6640e8) * f);
+						v = (int) (((double) *(int*) (p + 0x3d) * 0.01) * f);
 						id2 = ((int*) msg)[0x19 + j];
 						if (id2 != 0xffff) {
 							tile2 = g_7f4ca0 + id2 * 0x21c;

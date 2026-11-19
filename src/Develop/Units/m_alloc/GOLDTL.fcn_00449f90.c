@@ -12,7 +12,7 @@ typedef struct
 } fcn_00449f90_Mesh;
 // SIZE 0x1384
 
-extern int d3_LODMode;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00449b60(char* s);
 void __cdecl fcn_00439fa0(char* o);

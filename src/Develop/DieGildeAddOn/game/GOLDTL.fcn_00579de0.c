@@ -1,11 +1,11 @@
-#pragma pack(2)
-typedef struct Pos14 {
-	int a;
-	int b;
-	int c;
-	short d;
-} Pos14;
-#pragma pack()
+#include "client_types.h"
+
+
+
+
+
+
+
 
 typedef struct Place579 {
 	char pad0[8];
@@ -14,7 +14,7 @@ typedef struct Place579 {
 	int xc;                  /* 0x0c */
 	int x10;                 /* 0x10 */
 	char pad14[0x52 - 0x14];
-	Pos14 pos52;             /* 0x52 */
+	pos14_7f4c00 pos52;             /* 0x52 */
 	char pad60[0x70 - 0x60];
 	int status;              /* 0x70 */
 	char pad74[0x8c - 0x74];
@@ -25,21 +25,21 @@ typedef struct Place579 {
 	unsigned char xb4;       /* 0xb4 */
 	char padb5[0xb8 - 0xb5];
 	int xb8;                 /* 0xb8 */
-	Pos14 posBC;             /* 0xbc */
+	pos14_7f4c00 posBC;             /* 0xbc */
 } Place579;
 
-extern Pos14 gm_GameTime;
+extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern float g_696540[];
 extern float g_696550[];
 
 int __cdecl fcn_00500e20(int* pos);
-void __cdecl fcn_00500bb0(Pos14* pos, int a, int b, int c);
+void __cdecl fcn_00500bb0(pos14_7f4c00* pos, int a, int b, int c);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int a, int b, int id, int d);
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl gv_GetSlotEntry(int a, int b, unsigned char c);
-int __cdecl fcn_00500d20(Pos14* a, Pos14* b);
+int __cdecl fcn_00500d20(pos14_7f4c00* a, pos14_7f4c00* b);
 
 int __cdecl fcn_004f2d30(char* p, int a, int b, int c);
 char* __cdecl fcn_0050dc90(char* p);

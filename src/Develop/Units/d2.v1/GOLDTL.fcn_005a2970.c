@@ -5,9 +5,8 @@ extern char* g_772500;
 extern char* g_77255c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_dialog_state.h"
-extern int d2_CurrentElementId;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc;
-extern int g_14ce8e0;
 extern unsigned char g_773d75;
 
 /* Slot row passed to fcn_005ca560/fcn_005ca740. */

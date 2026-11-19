@@ -2,9 +2,9 @@
 
 
 // SIZE 0x21c
-struct house {
-	char pad0[0x21c];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
 
 // SIZE 0x8
 typedef struct F8 {
@@ -14,13 +14,13 @@ typedef struct F8 {
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+
 extern __int64 g_666018;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
-int __cdecl fcn_004a5e60(struct house* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl fcn_004a5e60(ENTITY_RECORD* p, int kind, F8 f, int c, float r, int* out);
 
 void __cdecl fcn_00562a60(char* e)
 {
@@ -45,7 +45,7 @@ void __cdecl fcn_00562a60(char* e)
 		t = gm_StartFilteredEntitySearch(1, 4, *(unsigned short*) h);
 	}
 	if (t == 0) {
-		if (fcn_004a5e60(&((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)], 6, (*(F8*)&g_666018), 0, 100.0f, &found) != 0) {
+		if (fcn_004a5e60(&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 8)], 6, (*(F8*)&g_666018), 0, 100.0f, &found) != 0) {
 			t = gm_StartFilteredEntitySearch(1, 1, found);
 		}
 	}

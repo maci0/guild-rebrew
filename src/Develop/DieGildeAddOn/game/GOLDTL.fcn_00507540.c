@@ -1,13 +1,13 @@
 #include <math.h>
 #include <string.h>
-#pragma pack(push, 2)
-typedef struct {
-	int day;
-	unsigned short hour;
-	int min;
-	int sec;
-} Time;
-#pragma pack(pop)
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
+
+
+
+
+
+
+
 typedef struct {
 	char pad0[0x164];
 	unsigned char stat;
@@ -17,17 +17,16 @@ typedef struct {
 } Ent;
 
 extern Ent g_7f4ca0[];
-extern Time gm_GameTime;
 
 int __cdecl gm_GetOppositeStatIndex(int stat);
 int __cdecl gm_MapEntityStatRange(int stat);
 float __cdecl gm_GetEntitySkill(Ent* e, int k);
-int __cdecl fcn_00500cb0(Time* a, Time* b);
-int __cdecl fcn_00500d20(Time* a, Time* b);
-void __cdecl fcn_00500bb0(Time* t, int a, int b, int c);
+int __cdecl fcn_00500cb0(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
+int __cdecl fcn_00500d20(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
+void __cdecl fcn_00500bb0(GAME_TIMESTAMP* t, int a, int b, int c);
 
 /* ADDRESS: GOLDTL 0x00507540 */
-float __cdecl fcn_00507540(int idx, Time* out)
+float __cdecl fcn_00507540(int idx, GAME_TIMESTAMP* out)
 {
 	int r;
 	int k;
@@ -59,28 +58,28 @@ float __cdecl fcn_00507540(int idx, Time* out)
 	num = (float) r * 16.0f + 72.0f;
 	n = (int) (num / (v + 1.0f));
 	{
-		Time a;
-		Time b;
-		Time z;
+		GAME_TIMESTAMP a;
+		GAME_TIMESTAMP b;
+		GAME_TIMESTAMP z;
 		memset(&a, 0, sizeof(a));
 		memset(&b, 0, sizeof(b));
 		memset(&z, 0, sizeof(z));
 
-		a.day = (int) ((double) n * 0.041666666666666664);
+		a.unit_0 = (int) ((double) n * 0.041666666666666664);
 		a.hour = (unsigned short) (int) fmod((double) n, 24.0);
 		if ((float) a.hour > 21.0f) {
-			a.day++;
+			a.unit_0++;
 			a.hour = (unsigned short) (int) ((float) a.hour - 21.0f + 7.0f);
 		} else if ((float) a.hour < 7.0f) {
 			a.hour += 6;
 		}
 		d = g_7f4ca0[idx].day;
-		h = gm_GameTime.hour;
-		b.day = d;
+		h = (unsigned short) gm_GameTime.b;
+		b.unit_0 = d;
 		b.hour = h;
 		if (fcn_00500cb0(&b, &a) < 0) {
 			f = (float) fcn_00500d20(&z, &b) / (float) fcn_00500d20(&z, &a);
-			fcn_00500bb0(&a, gm_GameTime.day * 24 + h, 0, 0);
+			fcn_00500bb0(&a, gm_GameTime.a * 24 + h, 0, 0);
 			fcn_00500bb0(&a, -h - d * 24, 0, 0);
 			*out = a;
 			return f;

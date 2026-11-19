@@ -97,9 +97,9 @@ void __cdecl fcn_00416300(Snow* r, int n, ...)
 					k -= r->count;
 					remaining = k;
 					do {
-						d->x = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
-						d->y = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
-						d->z = ((float) rand() * g_662a18 - g_6628cc) * 2.0f;
+						d->x = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
+						d->y = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
+						d->z = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
 						d->speed = (float) rand() * g_662a88 + g_662a6c;
 						d->drift_a = (float) rand() * g_662a84 + g_662a74;
 						d->drift_b = (float) rand() * g_662a84 + g_662a74;

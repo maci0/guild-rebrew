@@ -81,7 +81,7 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 	entry = &((FxRow_4a6550*) 0x665288)[g_77289c];
 	bits = entry->f08;
 	speed = (factor * entry->f04 - entry->f00)
-		* ((float) g_772898 * g_662910) + entry->f00;
+		* ((float) g_772898 * 0.01f) + entry->f00;
 	kind = g_772894;
 	if (kind == 1) {
 		pos.x = g_662914 * g_772860;
@@ -111,9 +111,9 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 		pos2.x = tx;
 		pos2.y = ty;
 		pos2.z = tz;
-		delta.x = g_662a98 * g_772870;
-		delta.y = g_662a98 * g_772874;
-		delta.z = g_662a98 * g_772878;
+		delta.x = 5.0f * g_772870;
+		delta.y = 5.0f * g_772874;
+		delta.z = 5.0f * g_772878;
 		pos.x += delta.x;
 		pos.y += delta.y;
 		pos.z += delta.z;
@@ -151,9 +151,9 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 		pos.x = tx;
 		pos.y = ty;
 		pos.z = tz;
-		delta.x = g_662a98 * g_772880;
-		delta.y = g_662a98 * g_772884;
-		delta.z = g_662a98 * g_772888;
+		delta.x = 5.0f * g_772880;
+		delta.y = 5.0f * g_772884;
+		delta.z = 5.0f * g_772888;
 		pos.x += delta.x;
 		pos.y += delta.y;
 		pos.z += delta.z;
@@ -166,9 +166,9 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 		pos2.x += delta.x;
 		pos2.y += delta.y;
 		pos2.z += delta.z;
-		delta.x = g_662a98 * g_772870;
-		delta.y = g_662a98 * g_772874;
-		delta.z = g_662a98 * g_772878;
+		delta.x = 5.0f * g_772870;
+		delta.y = 5.0f * g_772874;
+		delta.z = 5.0f * g_772878;
 		pos3.x += delta.x;
 		pos3.y += delta.y;
 		pos3.z += delta.z;
