@@ -15,7 +15,7 @@ int __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_0057e880(int, int, int, int);
 void __cdecl fcn_005ba910(int, int);
 
-void __cdecl fcn_005a3a40(int a1, int a2)
+void __cdecl fcn_005a3a40(int buildingArg, int queryTypeId)
 {
 	(*(int*)&g_7e2aa0) = 0;
 	g_7746c0 = 0;
@@ -25,16 +25,16 @@ void __cdecl fcn_005a3a40(int a1, int a2)
 	if (g_6a25b8 != -1) {
 		fcn_00471af0(g_6a25b8, 0);
 	}
-	(*(int*)&g_7746cc) = fcn_00502cd0(*(int*) (g_773d78 + 0x5d), 1, 0, a2);
+	(*(int*)&g_7746cc) = fcn_00502cd0(*(int*) (g_773d78 + 0x5d), 1, 0, queryTypeId);
 	if ((*(int*)&g_7746cc) != 0) {
-		fcn_0057e880(0x17, (*(int*)&g_7746cc), 0, a2);
+		fcn_0057e880(0x17, (*(int*)&g_7746cc), 0, queryTypeId);
 		while ((*(int*)&g_7746cc) != 0) {
 			g_7746d4 = 1;
-			fcn_005ba910(a1, 9);
+			fcn_005ba910(buildingArg, 9);
 		}
 	}
-	fcn_0057e880(0x18, (*(int*)&g_7746cc), 0, a2);
-	fcn_0057e880(0x17, (*(int*)&g_7746cc), 1, a2);
+	fcn_0057e880(0x18, (*(int*)&g_7746cc), 0, queryTypeId);
+	fcn_0057e880(0x17, (*(int*)&g_7746cc), 1, queryTypeId);
 	(*(int*)&g_7746cc) = 0;
 	if (g_6a25b8 != -1) {
 		fcn_00471af0(g_6a25b8, 1);

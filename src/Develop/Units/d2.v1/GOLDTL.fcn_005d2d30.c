@@ -46,7 +46,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00412830(int);
 
-int __cdecl fcn_005d2d30(unsigned short* a1)
+int __cdecl fcn_005d2d30(unsigned short* target)
 {
 	Packet pkt;
 	int cost;
@@ -54,11 +54,11 @@ int __cdecl fcn_005d2d30(unsigned short* a1)
 	int r;
 	int h;
 
-	cost = fcn_005d2a40(*(int*) (g_7f4ca0 + g_774970 * 540 + 4), *(int*) (a1 + 2));
+	cost = fcn_005d2a40(*(int*) (g_7f4ca0 + g_774970 * 540 + 4), *(int*) (target + 2));
 	dlg = fcn_00470820(0, 0, "privillegien\\werbung2");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
-	io_AppendText(0x1ce5, *a1, cost);
+	io_AppendText(0x1ce5, *target, cost);
 	g_100f1dc = -1;
 	r = 0;
 	do {
@@ -73,7 +73,7 @@ int __cdecl fcn_005d2d30(unsigned short* a1)
 				pkt.xc = pkt.x8;
 				pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 				pkt.x36 = 2;
-				pkt.x5c = *(int*) (a1 + 2);
+				pkt.x5c = *(int*) (target + 2);
 				pkt.x58 = pkt.x8;
 				h = fcn_004c5530(&pkt);
 				while (fcn_004c4450(h) == 0) {

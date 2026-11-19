@@ -34,7 +34,7 @@ void __cdecl fcn_00471e30(int);
 
 
 /* ADDRESS: GOLDTL 0x004b3fe0 */
-int __cdecl d2_ChooseMission(int a1)
+int __cdecl d2_ChooseMission(int missionKey)
 {
 	int result;
 	int h;
@@ -55,7 +55,7 @@ int __cdecl d2_ChooseMission(int a1)
 	fcn_0046e830(-1, -1, d2_CurrentWindowId, prev, 0x767);
 	d2_SetForm(h, 2);
 	lst = d2_CreateRadioGroup(0);
-	for (it = fcn_004b3ce0(a1, 0); it != 0; it = fcn_004b3ce0(a1, it)) {
+	for (it = fcn_004b3ce0(missionKey, 0); it != 0; it = fcn_004b3ce0(missionKey, it)) {
 		k = fcn_00472250(h, 2, io_AppendText((int) g_681140, it[2]));
 		*(int**) (g_1015ea0 + k * 756 + 0x2f0) = it;
 		fcn_00469470(lst, k);

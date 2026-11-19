@@ -13,7 +13,7 @@ int __cdecl vfs_fwrite(void*, int, int, void*);
 void __cdecl m_FreeTracked(void*);
 #include "Develop/Units/vfs/vfs.h"
 
-void __cdecl fcn_005e3ed0(int a1, char* name)
+void __cdecl fcn_005e3ed0(int previewModeArg, char* name)
 {
 	void* fh;
 	unsigned char* buf;
@@ -22,7 +22,7 @@ void __cdecl fcn_005e3ed0(int a1, char* name)
 	int y;
 
 	n = 0;
-	fcn_00469e30(a1);
+	fcn_00469e30(previewModeArg);
 	fcn_005e3d20();
 	fh = vfs_Tfopen(name, g_6790b0, g_6b7fdc);
 	if (fh != 0) {

@@ -36,7 +36,7 @@ void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005d86a0(unsigned char* e, unsigned char* a2)
+int __cdecl fcn_005d86a0(unsigned char* e, unsigned char* ctx)
 {
 	int result;
 	int dlg;
@@ -56,11 +56,11 @@ int __cdecl fcn_005d86a0(unsigned char* e, unsigned char* a2)
 		if (*(int*) (e + 0x194) < 3) {
 			return 0x20;
 		}
-		o1 = gm_LookupEntityRecordById(*(int*) (a2 + 0x214));
+		o1 = gm_LookupEntityRecordById(*(int*) (ctx + 0x214));
 		if (o1 == 0) {
 			return 0x60;
 		}
-		o2 = gm_LookupEntityRecordById(*(int*) (a2 + 0x218));
+		o2 = gm_LookupEntityRecordById(*(int*) (ctx + 0x218));
 		if (o2 == 0) {
 			return 0x60;
 		}

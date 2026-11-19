@@ -17,7 +17,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
 int __cdecl fcn_004e99c0(int k);
 
-int __cdecl fcn_0048dcd0(char* e, char* a2, char* a3)
+int __cdecl fcn_0048dcd0(char* e, char* action, char* target)
 {
 	int mask;
 	int idx;
@@ -44,9 +44,9 @@ int __cdecl fcn_0048dcd0(char* e, char* a2, char* a3)
 	} else {
 		return 0;
 	}
-	*(int*) (a2 + 8) = thr[k];
-	*(int*) (a3 + 0xc) = t->entity_id;
-	*(int*) (a3 + 0x10) = k;
-	*(int*) (a2 + 0x10) = 1;
+	*(int*) (action + 8) = thr[k];
+	*(int*) (target + 0xc) = t->entity_id;
+	*(int*) (target + 0x10) = k;
+	*(int*) (action + 0x10) = 1;
 	return 1;
 }

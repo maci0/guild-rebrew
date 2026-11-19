@@ -59,8 +59,8 @@ void __cdecl fcn_004ad6a0(void)
 	int mask;
 	int count;
 	int i;
-	int v;
-	float bv;
+	int selectedOwnerId;
+	float highestScore;
 
 	if ((unsigned int) g_7728d0 >= 3) {
 		return;
@@ -95,14 +95,14 @@ void __cdecl fcn_004ad6a0(void)
 		return;
 	}
 	best = 0;
-	bv = -1.0;
+	highestScore = -1.0;
 	for (i = 0; i < count; i++) {
 		hits[i].f = fcn_004ad500((unsigned char*) hits[i].p,
 		    (unsigned short*) obj, id, 1);
 	}
 	for (i = 0; i < count; i++) {
-		if (hits[i].f > bv) {
-			bv = hits[i].f;
+		if (hits[i].f > highestScore) {
+			highestScore = hits[i].f;
 			best = hits[i].p;
 		}
 	}
@@ -111,15 +111,15 @@ void __cdecl fcn_004ad6a0(void)
 		if (best[2] == 6 || best[2] == 7 || best[2] == 5) {
 			msg.timestamp.a = gm_GameTime;
 			msg.timestamp.b = g_7f4c04;
-			v = *(int*) (best + 4);
+			selectedOwnerId = *(int*) (best + 4);
 			msg.timestamp.c = g_7f4c08;
 			msg.timestamp.d = g_7f4c0c;
 			msg.type = 0xa5;
-			msg.id = v;
+			msg.id = selectedOwnerId;
 			msg.unk_c = -1;
 			msg.flag = 1;
 			msg.unk_6c = id;
-			msg.unk_68 = v;
+			msg.unk_68 = selectedOwnerId;
 			fcn_004c5530((char*) &msg);
 			for (rec = g_7f4ca0 + 2; (int) rec < (int) g_7f4ca0 + 0x65402; rec += 0x21c) {
 				if (*(unsigned short*) (rec - 2) != 0xffff && rec - 2 != best &&

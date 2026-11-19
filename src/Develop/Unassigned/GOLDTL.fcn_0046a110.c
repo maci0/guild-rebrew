@@ -57,7 +57,7 @@ void __cdecl d2_DrawAnimationSlot(int i, int tex);
 void __cdecl d2_GetElementResourceSize(int a, int* w, int* h);
 
 /* ADDRESS: GOLDTL 0x0046a110 */
-void __cdecl fcn_0046a110(int a1)
+void __cdecl fcn_0046a110(int clearAll)
 {
 	struct { fcn_0046a110_Rect screen; float uv[2]; } loc;
 	union { fcn_0046a110_Rect clip[2]; char buf[40]; } u;
@@ -92,7 +92,7 @@ void __cdecl fcn_0046a110(int a1)
 	loc.uv[0] = 0.0f;
 	loc.uv[1] = 1.0f;
 	(*(void (__stdcall **)(void*, void*)) ((int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0xa0))(g_6b5de0, &loc.screen);
-	if (a1) {
+	if (clearAll) {
 		(*(void (__stdcall **)(void*, int, void*, int, int, float, int)) ((int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0x90))(g_6b5de0, 0, 0, 1, 0, 1.0f, 0);
 	}
 	else {

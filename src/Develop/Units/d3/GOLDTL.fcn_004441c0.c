@@ -9,9 +9,9 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_004441c0(void)
 {
 	int v4;
-	int v5;
+	int displayValue;
 	int* p;
-	char v9[260];
+	char formatBuffer[260];
 
 	if (!*(char*) 0x6b85a1 && *(char*) 0x6b8018 && *(int*) 0x6b86d4 <= 0) {
 		*(char*) 0x6b85a1 = 1;
@@ -50,43 +50,43 @@ void __cdecl fcn_004441c0(void)
 		if (p) {
 			switch (p[0x86]) {
 			case 0:
-				v5 = (int) *((float*) p + 0x1a);
-				fcn_0064d41a(v9, (char*) 0x67aa40, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15),
-					v5, p);
+				displayValue = (int) *((float*) p + 0x1a);
+				fcn_0064d41a(formatBuffer, (char*) 0x67aa40, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15),
+					displayValue, p);
 				*(char*) 0x6b85a1 = 0;
 				return;
 			case 1:
 			case 2:
 			case 3:
 			case 4:
-				fcn_0064d41a(v9, (char*) 0x67aab8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15),
+				fcn_0064d41a(formatBuffer, (char*) 0x67aab8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15),
 					(double) (*((float*) p + 0x21) * 57.2957764f), (double) (*((float*) p + 0x22) * 57.2957764f), (double) (*((float*) p + 0x23) * 57.2957764f), p);
 				*(char*) 0x6b85a1 = 0;
 				return;
 			case 5:
 			case 6:
-				v5 = (int) *((float*) p + 0x24);
-				fcn_0064d41a(v9, (char*) 0x67aa70,
+				displayValue = (int) *((float*) p + 0x24);
+				fcn_0064d41a(formatBuffer, (char*) 0x67aa70,
 				             (double) *((float*) p + 0x13), (double) *((float*) p + 0x14),
-				             (double) *((float*) p + 0x15), v5,
+				             (double) *((float*) p + 0x15), displayValue,
 				             (int) *((float*) p + 0x25), (double) *((float*) p + 0x26), p);
 				*(char*) 0x6b85a1 = 0;
 				return;
 			case 7:
-				v5 = (int) *((float*) p + 0x25);
-				fcn_0064d41a(v9, (char*) 0x67a9f8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15),
-					(double) (*((float*) p + 0x21) * 57.2957764f), (double) (*((float*) p + 0x22) * 57.2957764f), (double) (*((float*) p + 0x23) * 57.2957764f), v5, p);
+				displayValue = (int) *((float*) p + 0x25);
+				fcn_0064d41a(formatBuffer, (char*) 0x67a9f8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15),
+					(double) (*((float*) p + 0x21) * 57.2957764f), (double) (*((float*) p + 0x22) * 57.2957764f), (double) (*((float*) p + 0x23) * 57.2957764f), displayValue, p);
 				break;
 			case 8:
 				if (!(*((unsigned char*) p + 0x215) & 4)) {
-					v5 = (int) *((float*) p + 0x25);
-					fcn_0064d41a(v9, (char*) 0x67a9cc, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), v5, p);
+					displayValue = (int) *((float*) p + 0x25);
+					fcn_0064d41a(formatBuffer, (char*) 0x67a9cc, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15), displayValue, p);
 					*(char*) 0x6b85a1 = 0;
 					return;
 				}
-				v5 = (int) *((float*) p + 0x25);
-				fcn_0064d41a(v9, (char*) 0x67a9f8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15),
-					(double) (*((float*) p + 0x21) * 57.2957764f), (double) (*((float*) p + 0x22) * 57.2957764f), (double) (*((float*) p + 0x23) * 57.2957764f), v5, p);
+				displayValue = (int) *((float*) p + 0x25);
+				fcn_0064d41a(formatBuffer, (char*) 0x67a9f8, (double) *((float*) p + 0x13), (double) *((float*) p + 0x14), (double) *((float*) p + 0x15),
+					(double) (*((float*) p + 0x21) * 57.2957764f), (double) (*((float*) p + 0x22) * 57.2957764f), (double) (*((float*) p + 0x23) * 57.2957764f), displayValue, p);
 				*(char*) 0x6b85a1 = 0;
 				return;
 			}

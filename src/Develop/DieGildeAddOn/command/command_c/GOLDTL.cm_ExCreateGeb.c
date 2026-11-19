@@ -23,7 +23,7 @@ void __cdecl fcn_0052d9d0(void* p);
 void __cdecl fcn_004bd4e0(int a, int b);
 
 /* ADDRESS: GOLDTL 0x004cc820 */
-int __cdecl cm_ExCreateGeb(char* a0, char* out)
+int __cdecl cm_ExCreateGeb(char* request, char* out)
 {
 	char name[260];
 	char tmp[128];
@@ -42,12 +42,12 @@ int __cdecl cm_ExCreateGeb(char* a0, char* out)
 	int i;
 	int handle;
 
-	model = (unsigned char*) gm_LookupEntityRecordById(*(int*) (a0 + 0x10));
+	model = (unsigned char*) gm_LookupEntityRecordById(*(int*) (request + 0x10));
 	if (model == 0)
 		return 1;
 	if (g_14cbca0 != -1)
-		gm_NextEntityId = *(int*) (a0 + 0x14);
-	geb = (unsigned char*) gm_AllocGebaeude(*(char*) (a0 + 0x18),
+		gm_NextEntityId = *(int*) (request + 0x14);
+	geb = (unsigned char*) gm_AllocGebaeude(*(char*) (request + 0x18),
 	                                        *(unsigned short*) model);
 	if (geb == 0)
 		return 1;
@@ -69,9 +69,9 @@ int __cdecl cm_ExCreateGeb(char* a0, char* out)
 load:
 	saved = d3_CurrentContextIndex;
 	fcn_004432d0(0, 1);
-	pos[0] = *(int*) (a0 + 0x19);
-	pos[1] = *(int*) (a0 + 0x1d);
-	pos[2] = *(int*) (a0 + 0x21);
+	pos[0] = *(int*) (request + 0x19);
+	pos[1] = *(int*) (request + 0x1d);
+	pos[2] = *(int*) (request + 0x21);
 	handle = fcn_004488e0(path, 0, 0);
 	if (handle == 0) {
 		sprintf(name,
@@ -81,7 +81,7 @@ load:
 	}
 	memset(shortname, 0, sizeof shortname);
 	fcn_00438b40(handle, &pos[0]);
-	fcn_00438cb0(handle, a0 + 0x29);
+	fcn_00438cb0(handle, request + 0x29);
 	fcn_00598860(handle, pos);
 	fcn_00510820(handle, geb, 2);
 	fcn_00597ff0(*geb, tmp);

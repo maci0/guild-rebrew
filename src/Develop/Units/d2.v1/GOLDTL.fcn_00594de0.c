@@ -36,7 +36,7 @@ void* __cdecl he_fn_Handlung(void);
 void __cdecl io_AppendText(int a, ...);
 
 /* ADDRESS: GOLDTL 0x00594de0 */
-void __cdecl fcn_00594de0(int a0, int a1, int a2)
+void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 {
 	Panel* p;
 	unsigned char* st;
@@ -64,11 +64,11 @@ void __cdecl fcn_00594de0(int a0, int a1, int a2)
 	} else if (g_7746c8 != 0) {
 		obj = g_7746c8;
 	}
-	d2_SetForm(a0, 0);
-	d2_SetForm(a0, a1);
+	d2_SetForm(formIdArg, 0);
+	d2_SetForm(formIdArg, formTabArg);
 	fcn_0050cce0((char*) obj, stock, 1);
 
-	for (i = 0; i < a2; i++) {
+	for (i = 0; i < panelCountArg; i++) {
 		p = (Panel*) (g_779160 + i * 0x58);
 		if (p->c[1] < 0) {
 			w = fcn_0046f100(p->x24, p->x28, 0xcd, 0x57, 0x10, d2_CurrentWindowId);
@@ -160,7 +160,7 @@ void __cdecl fcn_00594de0(int a0, int a1, int a2)
 			d2_CurrentWindowId = p->x4c;
 			io_AppendText(0xc9, span, 0x51e, p->x0 * 2 + 0x9a8);
 		}
-		d2_SetForm(a0, a1);
+		d2_SetForm(formIdArg, formTabArg);
 	}
 
 	/* Tear down the remaining entries. The reference stops when the c[1]

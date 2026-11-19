@@ -69,7 +69,7 @@ void __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_00532ef0(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00589930 */
-void __cdecl fcn_00589930(char* a0)
+void __cdecl fcn_00589930(char* building)
 {
 	struct act act;
 	struct msg m;
@@ -125,7 +125,7 @@ void __cdecl fcn_00589930(char* a0)
 				                 (unsigned int) *(unsigned short*) &g_774970 *
 				                     0x21c),
 				        amt, *(char*) &g_773d75) &&
-				    fcn_005898f0(a0)) {
+				    fcn_005898f0(building)) {
 					p = gm_GetEntityTableEntry(
 					    (char*) ((unsigned long)&g_7f4ca0 +
 					             (unsigned int) *(unsigned short*)
@@ -148,10 +148,10 @@ void __cdecl fcn_00589930(char* a0)
 					m.f68 = 3;
 					m.f6c = j;
 					act.count = -1;
-					m.owner = ((struct house*) &g_7f4ca0)[*(unsigned short*) (a0 + 0x27)].owner;
+					m.owner = ((struct house*) &g_7f4ca0)[*(unsigned short*) (building + 0x27)].owner;
 					m.when = gm_GameTime;
-					m.target = *(int*) (a0 + 1);
-					m.f5c = *(int*) (a0 + 1);
+					m.target = *(int*) (building + 1);
+					m.f5c = *(int*) (building + 1);
 					fcn_004a5e60(
 					    (unsigned short*) ((unsigned long)&g_7f4ca0 +
 					                       (unsigned int) *(unsigned short*)

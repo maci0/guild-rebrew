@@ -22,21 +22,21 @@ int __cdecl fcn_005373e0(int, int);
 int __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005a6e90 */
-int __cdecl fcn_005a6e90(unsigned short *a1)
+int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
 {
-    int s10, s14;
+    int activeTab, refreshNeeded;
     int s18, s1c, s20, s24;
     int arr[9][3];
     int i;
-    int edi, ebx, esi, r;
+    int edi, ebx, dialogWindow, r;
     int q1, q2;
     int g;
     int *p;
 
-    s14 = 1;
-    s10 = 1;
+    refreshNeeded = 1;
+    activeTab = 1;
 
-    if (a1 == 0)
+    if (subjectRecord == 0)
         return 1;
 
     for (i = 0; i < 9; i++)
@@ -46,10 +46,10 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
         arr[i][2] = 0;
     }
 
-    edi = gm_WalkEntityChain(*a1);
-    r = gm_AccumulateTyped2((int)a1);
-    esi = fcn_00470820(0, 0, 0x6aad0c);
-    d2_SetForm(esi, 0);
+    edi = gm_WalkEntityChain(*subjectRecord);
+    r = gm_AccumulateTyped2((int)subjectRecord);
+    dialogWindow = fcn_00470820(0, 0, 0x6aad0c);
+    d2_SetForm(dialogWindow, 0);
 
     g = d2_CurrentWindowId;
     *(int *)(0x10162e8 + g * 0x3cc) = 0xc;
@@ -57,21 +57,21 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
     *(int *)(0x10162f0 + g * 0x3cc) = 0xc;
     *(int *)(0x10162f4 + g * 0x3cc) = 0xc;
 
-    d2_SetForm(esi, 1);
+    d2_SetForm(dialogWindow, 1);
     io_AppendText(0x18ed);
-    d2_SetForm(esi, 4);
-    io_AppendText(0x18ee, *a1);
+    d2_SetForm(dialogWindow, 4);
+    io_AppendText(0x18ee, *subjectRecord);
     io_AppendText(0x18ef, edi, r);
 
-    d2_SetForm(esi, 3);
-    q1 = fcn_00472250(esi, 3, io_AppendText(0x18f0));
-    d2_SetForm(esi, 5);
-    q2 = fcn_00472250(esi, 5, io_AppendText(0x18f1));
-    d2_SetForm(esi, 0);
+    d2_SetForm(dialogWindow, 3);
+    q1 = fcn_00472250(dialogWindow, 3, io_AppendText(0x18f0));
+    d2_SetForm(dialogWindow, 5);
+    q2 = fcn_00472250(dialogWindow, 5, io_AppendText(0x18f1));
+    d2_SetForm(dialogWindow, 0);
 
-    r = fcn_00472830(esi, 2, 0x100, (int)&s20, (int)&s24, (int)&s1c);
+    r = fcn_00472830(dialogWindow, 2, 0x100, (int)&s20, (int)&s24, (int)&s1c);
     fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, r);
-    d2_CenterDialogWindows(esi);
+    d2_CenterDialogWindows(dialogWindow);
 
     g_100f1dc = -1;
     d2_CurrentElementId = -1;
@@ -79,12 +79,12 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
     while (1)
     {
         int k;
-        if (s14 != 0) {
-        s14 = 0;
+        if (refreshNeeded != 0) {
+        refreshNeeded = 0;
 
         for (k = 0; k < 9; k++)
         {
-            if (s10 == 1)
+            if (activeTab == 1)
             {
                 p = &arr[k][0];
                 if (*p != -1)
@@ -98,25 +98,25 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
             }
         }
 
-        d2_SetForm(esi, 2);
+        d2_SetForm(dialogWindow, 2);
         d2_ClearPaintbox();
         d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 
-        edi = s10;
+        edi = activeTab;
         if (edi == 1)
         {
-            if (fcn_005c9450((int)a1, 0, 0) <= 0)
-                io_AppendText(0x18f2, *a1);
+            if (fcn_005c9450((int)subjectRecord, 0, 0) <= 0)
+                io_AppendText(0x18f2, *subjectRecord);
         }
         else if (edi == 2)
         {
-            r = fcn_005c9310((int)a1, 9, (int)arr, esi, edi);
+            r = fcn_005c9310((int)subjectRecord, 9, (int)arr, dialogWindow, edi);
             if (r == 0)
-                io_AppendText(0x18f3, *a1);
+                io_AppendText(0x18f3, *subjectRecord);
         }
 
         }
-        edi = s10;
+        edi = activeTab;
         if (g_100f1dc != -1)
         {
             int eax = d2_CurrentElementId;
@@ -124,16 +124,16 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
             {
                 if (edi != 1)
                 {
-                    s10 = 1;
-                    s14 = 1;
+                    activeTab = 1;
+                    refreshNeeded = 1;
                 }
             }
             else if (eax == q2)
             {
                 if (edi != 2)
                 {
-                    s10 = 2;
-                    s14 = 1;
+                    activeTab = 2;
+                    refreshNeeded = 1;
                 }
             }
         }
@@ -157,7 +157,7 @@ int __cdecl fcn_005a6e90(unsigned short *a1)
             }
         }
 
-        return fcn_00471e30(esi);
+        return fcn_00471e30(dialogWindow);
     }
 
 done:

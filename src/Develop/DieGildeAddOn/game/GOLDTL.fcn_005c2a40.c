@@ -53,7 +53,7 @@ int __cdecl gm_GetElapsedMinutes(char*, char*);
 void __cdecl fcn_0046f940(int, int);
 
 /* ADDRESS: GOLDTL 0x005c2a40 */
-void __cdecl fcn_005c2a40(unsigned char* a0)
+void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 {
 	int slots[96];
 	int coord_x;
@@ -87,7 +87,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	removed = 0;
 	others = 0;
 	total = 0;
-	owner = *(int*) (a0 + 1);
+	owner = *(int*) (productionBuilding + 1);
 	ep = slots;
 	for (i = 0x20; i != 0; i--) {
 		ep[1] = -1;
@@ -100,7 +100,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			total++;
 		} while (he_fn_Handlung() != 0);
 	}
-	base = g_entity_type_table + (int) (*a0) * 0x24d;
+	base = g_entity_type_table + (int) (*productionBuilding) * 0x24d;
 	p = (unsigned short*) (base + 0x23);
 	for (i = 0; i < 0x40; i++) {
 		if (nslots >= 0x20) {
@@ -116,7 +116,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 		}
 		p++;
 	}
-	p = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 5, 0);
+	p = fcn_00502cd0(*(int*) (productionBuilding + 0x5d), 1, 5, 0);
 	while (p != 0) {
 		if ((g_item_def_table[(int) (*p) * 0x41] == 2 || g_item_def_table[(int) (*p) * 0x41] == 6)
 		    && *p != 0xfd) {
@@ -167,7 +167,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 	fcn_00476b60();
 	do {
 		r = gm_SearchTable67(owner);
-		if ((a0[0x5b] & 4) != 0 || r == 0) {
+		if ((productionBuilding[0x5b] & 4) != 0 || r == 0) {
 			g_774654 = 1;
 		}
 		if (g_14ce8e0 != 0 || g_100f1dc == 1) {
@@ -192,7 +192,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 						*(int*) (msg + 8) =
 						    *(int*) (g_7f4ca4 +
 						             (int) g_774970 * 0x21c);
-						*(int*) (msg + 0xc) = *(int*) (a0 + 1);
+						*(int*) (msg + 0xc) = *(int*) (productionBuilding + 1);
 						*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
 						*(int*) (msg + 0x2c) = g_7f4c04;
 						*(int*) (msg + 0x30) = g_7f4c08;
@@ -200,7 +200,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 						msg[0x36] = 1;
 						*(short*) (msg + 0x5c) =
 						    (short) slots[sel * 3];
-						*(int*) (msg + 0x58) = *(int*) (a0 + 1);
+						*(int*) (msg + 0x58) = *(int*) (productionBuilding + 1);
 						fcn_004c4eb0(g_6ac618);
 						fcn_004c5150(-1,
 						             *(int*) (g_7f4ca4 +
@@ -216,7 +216,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			} while (sel < nslots);
 		}
 		total = 0;
-		if (fcn_005463a0(2, 0, 0x1f, 3, *(int*) (a0 + 1)) != 0) {
+		if (fcn_005463a0(2, 0, 0x1f, 3, *(int*) (productionBuilding + 1)) != 0) {
 			cur = 0;
 			for (;;) {
 				r = he_fn_Handlung();
@@ -263,7 +263,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			ep = slots;
 			idx = nslots;
 			do {
-				if (fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, ep[0]) != 0) {
+				if (fcn_00502cd0(*(int*) (productionBuilding + 0x5d), 1, 0, ep[0]) != 0) {
 					*(int*) (g_1015ea0 + ep[1] * 0x2f4 + 0x5c) = 0;
 					fcn_0046f940(ep[2], *(int*) 0x14ab268);
 					removed++;
@@ -273,7 +273,7 @@ void __cdecl fcn_005c2a40(unsigned char* a0)
 			} while (idx != 0);
 		}
 		d2_SetForm(han, 3);
-		io_AppendText(0x17cf, a0,
+		io_AppendText(0x17cf, productionBuilding,
 		             (int) (unsigned char) *(cur + 0x21) - others - removed,
 		             0x17d4);
 	} while (fcn_005373e0((void*) 0x5c2a40, 0x657c7) != 0);

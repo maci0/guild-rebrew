@@ -190,7 +190,7 @@ extern void fcn_00535850();
 
 
 /* ADDRESS: GOLDTL 0x005373e0 */
-int __cdecl fcn_005373e0(int a0, unsigned int flags)
+int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 {
 	int result;
 	float t;
@@ -206,8 +206,8 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 	main_LoopFlags = flags;
 	fcn_005356e0();
 	fcn_412630();
-	if (a0 != 0) {
-		if (*(int *) ((char *) g_7e35c0 + g_774650 * 8) != a0) {
+	if (loopId != 0) {
+		if (*(int *) ((char *) g_7e35c0 + g_774650 * 8) != loopId) {
 			fcn_004116d0();
 		}
 		if (g_774970 != 0xffff) {
@@ -233,16 +233,16 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 	if (g_774654 == 0 && (flags & 0x100) && !(flags & 0x100000)) {
 		fcn_00533090(flags);
 	}
-	g_774708 = a0;
-	if (a0 != 0) {
-		if (*(int *) ((char *) g_7e35c0 + g_774650 * 8) == a0) {
+	g_774708 = loopId;
+	if (loopId != 0) {
+		if (*(int *) ((char *) g_7e35c0 + g_774650 * 8) == loopId) {
 			result = 1;
 		} else if (g_774654 != 0) {
 			result = 0;
 		} else {
 			result = 1;
 			for (addr = 0x7e35c0; addr < 0x7e39c0; addr += 8) {
-				if (*(int *) addr == a0) {
+				if (*(int *) addr == loopId) {
 					ReportClientMessage(g_6a33f4);
 					result = 0;
 					break;
@@ -250,7 +250,7 @@ int __cdecl fcn_005373e0(int a0, unsigned int flags)
 			}
 			if (result != 0) {
 				g_774650++;
-				*(int *) ((char *) g_7e35c0 + g_774650 * 8) = a0;
+				*(int *) ((char *) g_7e35c0 + g_774650 * 8) = loopId;
 			}
 		}
 		if (g_774654 != 0 && result != 0) {

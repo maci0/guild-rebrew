@@ -22,7 +22,7 @@ float __cdecl eval_ObjektPreis2Credits(int, unsigned char);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0050cf50 */
-int __cdecl fcn_0050cf50(unsigned char* a0, int a1)
+int __cdecl fcn_0050cf50(unsigned char* buildingRecordArg, int percentScale)
 {
 	Lvl50cf* lvl;
 	char* t;
@@ -35,7 +35,7 @@ int __cdecl fcn_0050cf50(unsigned char* a0, int a1)
 	int i;
 	int id;
 
-	lvl = (Lvl50cf*) (lpGebaeudePROT + a0[0] * 0x24d);
+	lvl = (Lvl50cf*) (lpGebaeudePROT + buildingRecordArg[0] * 0x24d);
 	acc[0] = lvl->value * 0xf00;
 	t = 0;
 	flag = 0;
@@ -47,7 +47,7 @@ int __cdecl fcn_0050cf50(unsigned char* a0, int a1)
 		k = ((Kind50cf*) lpObjektePROT)[id].kind;
 		if (!flag) {
 			if (k == 2 || k == 6) {
-				t = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, id);
+				t = fcn_00502cd0(*(int*) (buildingRecordArg + 0x5d), 1, 0, id);
 				if (t != 0) {
 					acc[0] = (int) (acc[0] + eval_ObjektPreis2Credits(*(unsigned short*) t, *(unsigned char*) (t + 0x12)));
 					if (i < 0x3f) {
@@ -73,5 +73,5 @@ int __cdecl fcn_0050cf50(unsigned char* a0, int a1)
 			}
 		}
 	}
-	return (int) (acc[0] * (0.01f * a1));
+	return (int) (acc[0] * (0.01f * percentScale));
 }

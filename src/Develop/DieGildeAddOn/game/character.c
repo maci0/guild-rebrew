@@ -132,18 +132,18 @@ clear:
 #include "Develop/Units/m_alloc/m_alloc.h"
 
 
-int __cdecl ch_ClearActionQueue(void* a1)
+int __cdecl ch_ClearActionQueue(void* character)
 {
 	void* e;
 
-	e = *(void**) ((char*) a1 + 0x128);
+	e = *(void**) ((char*) character + 0x128);
 	while (e != 0) {
 		if (*(char*) ((char*) e + 9) == 0x2d && *(int*) ((char*) e + 0xf4) != 0) {
 			m_FreeTracked((void*) *(int*) ((char*) e + 0xf4));
 			*(int*) ((char*) e + 0xf4) = 0;
 		}
 		ch_RemoveQueueEntry(e);
-		e = *(void**) ((char*) a1 + 0x128);
+		e = *(void**) ((char*) character + 0x128);
 	}
 	return 1;
 }

@@ -33,7 +33,7 @@ int __cdecl fcn_004c4090(void);
 
 
 /* ADDRESS: GOLDTL 0x004c4330 */
-int __cdecl fcn_004c4330(CLIENT_QUEUED_PACKET* a1)
+int __cdecl fcn_004c4330(CLIENT_QUEUED_PACKET* queuedInput)
 {
 	CLIENT_QUEUED_PACKET* p;
 	CLIENT_QUEUED_PACKET* q;
@@ -53,13 +53,13 @@ int __cdecl fcn_004c4330(CLIENT_QUEUED_PACKET* a1)
 			return -1;
 	}
 	g_1005768 = n;
-	*p = *a1;
+	*p = *queuedInput;
 	p->crc = fcn_004c3a50(p);
 	p->flag = 0;
 	p->seq = seq;
 	p->cur = g_1005768;
 	p->nextseq = 0;
-	if (a1->type == 0x20 && a1->data[0] == 0xe)
+	if (queuedInput->type == 0x20 && queuedInput->data[0] == 0xe)
 		g_aecde0 = p->cur;
 	g_fb5760[seq].f0 = 0;
 	g_fb5760[seq].f2 = seq;

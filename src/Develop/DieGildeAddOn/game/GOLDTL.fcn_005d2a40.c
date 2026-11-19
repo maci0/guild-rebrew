@@ -22,7 +22,7 @@ float __cdecl fcn_00505e30(int a)
 
 #ifndef REBREW_GOLD
 /* ADDRESS: GOLDTL 0x005d2a40 */
-int __cdecl fcn_005d2a40(int a0, int a1)
+int __cdecl fcn_005d2a40(int sourceId, int targetId)
 {
 	char* p;
 	char* q;
@@ -40,8 +40,8 @@ int __cdecl fcn_005d2a40(int a0, int a1)
 	f10 = 0.0f;
 	memset(buf, 0, sizeof buf);
 	buf[0] = 1;
-	p = gm_LookupEntityRecordById(a0);
-	q = gm_LookupEntityRecordById(a1);
+	p = gm_LookupEntityRecordById(sourceId);
+	q = gm_LookupEntityRecordById(targetId);
 	if (p == 0 || q == 0) {
 		return 0;
 	}

@@ -9,7 +9,7 @@ int __cdecl fcn_004ceba0(int, int);
 void __cdecl d3_GridPointToWorld(char*, int, int, float*);
 
 /* ADDRESS: GOLDTL 0x004cecf0 */
-unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
+unsigned int __cdecl fcn_004cecf0(char* originNode, int* outColumn, int* outRow, int selectFarthest)
 {
 	char* m;
 	float start[4];
@@ -43,7 +43,7 @@ unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
 	y2 = 0;
 	found = 0;
 	i = 0;
-	d3_TransformPoint(a0, a0 + 0x4c, start);
+	d3_TransformPoint(originNode, originNode + 0x4c, start);
 	if (!fcn_0045b990(m, start, &col, &row, &height)) {
 		return 0;
 	}
@@ -90,12 +90,12 @@ unsigned int __cdecl fcn_004cecf0(char* a0, int* a1, int* a2, int a3)
 	if (!found) {
 		return 0;
 	}
-	if (a3 == 0) {
-		*a1 = x1;
-		*a2 = y1;
+	if (selectFarthest == 0) {
+		*outColumn = x1;
+		*outRow = y1;
 		return 1;
 	}
-	*a1 = x2;
-	*a2 = y2;
+	*outColumn = x2;
+	*outRow = y2;
 	return 1;
 }

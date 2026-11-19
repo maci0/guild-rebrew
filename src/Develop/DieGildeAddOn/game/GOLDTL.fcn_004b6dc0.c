@@ -17,7 +17,7 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 
 /* ADDRESS: GOLD 0x004b6bf0 */
 /* ADDRESS: GOLDTL 0x004b6dc0 */
-int __cdecl fcn_004b6dc0(void* a1)
+int __cdecl fcn_004b6dc0(void* request)
 {
 	int arr[0xc];
 	char buf[0x400];
@@ -30,7 +30,7 @@ int __cdecl fcn_004b6dc0(void* a1)
 	unsigned int len;
 
 	i = 0;
-	p = gm_LookupEntityRecordById(*(int*) a1);
+	p = gm_LookupEntityRecordById(*(int*) request);
 	if (p == 0) {
 		return 1;
 	}
@@ -54,8 +54,8 @@ int __cdecl fcn_004b6dc0(void* a1)
 		d = (double) n + 2.0;
 		n = gm_WalkEntityChain(*(short*) p);
 		r = (int) (((double) n * d) * 0.01);
-		io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, r);
-		fcn_004c51a0(*(int*) a1, -1, g_773d75, r);
+		io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, r);
+		fcn_004c51a0(*(int*) request, -1, g_773d75, r);
 		len = strlen(buf);
 		fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 		    0x100 < len, 0x603, 0);

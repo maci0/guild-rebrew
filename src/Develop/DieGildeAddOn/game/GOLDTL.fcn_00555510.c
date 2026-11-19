@@ -26,7 +26,7 @@ void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00500bb0(int*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00555510 */
-void __cdecl fcn_00555510(char* a0)
+void __cdecl fcn_00555510(char* action)
 {
 	struct {
 		unsigned char* p0;
@@ -45,8 +45,8 @@ void __cdecl fcn_00555510(char* a0)
 	char* p;
 	char* q;
 
-	if (*(int*) (a0 + 0x70) == -2) {
-		fcn_00546190(a0);
+	if (*(int*) (action + 0x70) == -2) {
+		fcn_00546190(action);
 		return;
 	}
 	p = (char*) ent; count = sizeof(ent);
@@ -85,10 +85,10 @@ void __cdecl fcn_00555510(char* a0)
 			p += 0xc;
 		} while ((*(int*) p = (int) gm_FindNextFilteredEntity()) != 0);
 	}
-	if (*(int*) (a0 + 0x70) != 0) {
+	if (*(int*) (action + 0x70) != 0) {
 		return;
 	}
-	i = *(int*) (a0 + 0xac);
+	i = *(int*) (action + 0xac);
 	end = i + 0x180;
 	for (; i < end; i++) {
 		if (fcn_00555490((short*) (g_7f4ca0 + i * 0x21c), (int*) ent, &idx) != 0) {
@@ -163,14 +163,14 @@ void __cdecl fcn_00555510(char* a0)
 			}
 		}
 	}
-	*(int*) (a0 + 0xac) = end;
+	*(int*) (action + 0xac) = end;
 	if (end >= 0x300) {
-		*(int*) (a0 + 0xac) = 0;
-		*(int*) (a0 + 0xb0) = 0;
-		*(int*) (a0 + 0x52) = *(int*) (a0 + 0x52) + 1;
-		*(unsigned short*) (a0 + 0x56) = 0x16;
-		*(int*) (a0 + 0x58) = 0x1e;
+		*(int*) (action + 0xac) = 0;
+		*(int*) (action + 0xb0) = 0;
+		*(int*) (action + 0x52) = *(int*) (action + 0x52) + 1;
+		*(unsigned short*) (action + 0x56) = 0x16;
+		*(int*) (action + 0x58) = 0x1e;
 		return;
 	}
-	fcn_00500bb0((int*) (a0 + 0x52), 0, 0xf, 0);
+	fcn_00500bb0((int*) (action + 0x52), 0, 0xf, 0);
 }

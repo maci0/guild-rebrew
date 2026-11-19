@@ -21,7 +21,7 @@ int* __cdecl fcn_004ce610(char*);
 void __cdecl fcn_00472680(int, int);
 
 /* ADDRESS: GOLDTL 0x004d5740 */
-void __cdecl fcn_004d5740(char* a0, int a1, int a2)
+void __cdecl fcn_004d5740(char* ids, int originX, int originY)
 {
 	char buf[0x100];
 	int total;
@@ -38,16 +38,16 @@ void __cdecl fcn_004d5740(char* a0, int a1, int a2)
 
 	total = 0;
 	for (i = 0; i < 0x10; i++)
-		if (*(int*) (a0 + i * 4) != -1)
+		if (*(int*) (ids + i * 4) != -1)
 			total++;
 	div = (((Screen*) g_77255c)->f_c - 0x30) / (total + 1);
 	for (i = 0; i < 0x10; i++) {
-		id = *(int*) (a0 + i * 4);
+		id = *(int*) (ids + i * 4);
 		if (id == -1)
 			continue;
 		rec = gm_LookupEntityRecordIn32SlotTable(id);
-		x = (i % 6 + 1) * div + a1;
-		y = a2 + (i / 6) * 100;
+		x = (i % 6 + 1) * div + originX;
+		y = originY + (i / 6) * 100;
 		fcn_0046f740(x - 0x10, y, 0x5da, d2_CurrentWindowId);
 		fcn_0046f740(x - 4, y, *(int*) (rec + 0x18c), d2_CurrentWindowId);
 		f = (float) fcn_00507e30(rec, 3);

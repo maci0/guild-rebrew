@@ -16,7 +16,7 @@ unsigned char __cdecl fcn_00438450(char* o)
 	unsigned char sel;
 	unsigned char flags;
 	unsigned char anim;
-	int v;
+	int transformObject;
 	int p;
 	float* dst;
 	float* src;
@@ -24,12 +24,12 @@ unsigned char __cdecl fcn_00438450(char* o)
 
 	result = *(unsigned char*) &o | 0x40;
 	g_6b8050 = g_6b8050 + 1;
-	v = fcn_004382e0((unsigned int) o);
-	if (v != 0) {
-		g_10432a8 = g_10432a8 + *(int*) (v + 0x314);
-		g_1042a04 = g_1042a04 + *(int*) (v + 0x310);
+	transformObject = fcn_004382e0((unsigned int) o);
+	if (transformObject != 0) {
+		g_10432a8 = g_10432a8 + *(int*) (transformObject + 0x314);
+		g_1042a04 = g_1042a04 + *(int*) (transformObject + 0x310);
 		p = *(int*) (o + 0x1ec);
-		*(int*) (o + 0x1cc) = v;
+		*(int*) (o + 0x1cc) = transformObject;
 		sel = (*(unsigned char*) (o + 0x214) >> 2) & 1;
 		flags = (unsigned char) (((sel & 1) << 3) ^ (*(unsigned char*) (o + 0x214) & 0xf3));
 		*(unsigned char*) (o + 0x214) = flags;
@@ -40,25 +40,25 @@ unsigned char __cdecl fcn_00438450(char* o)
 		}
 		if (sel != 0 || (flags & 0x10) != 0) {
 			d3_UpdateObjectCameraTransform((unsigned int) o, d3_ActiveCamera, 0);
-			*(unsigned char*) (p + 0x163d) = (unsigned char) fcn_00438270((unsigned int) o, v, *(int*) (o + 0x1ec) + 0x48);
-			*(int*) (v + 0x300) = 0;
-			*(int*) (v + 0x304) = 0;
-			*(int*) (v + 0x308) = 0;
-			dst = (float*) (v + 0x284);
-			src = (float*) (v + 8);
+			*(unsigned char*) (p + 0x163d) = (unsigned char) fcn_00438270((unsigned int) o, transformObject, *(int*) (o + 0x1ec) + 0x48);
+			*(int*) (transformObject + 0x300) = 0;
+			*(int*) (transformObject + 0x304) = 0;
+			*(int*) (transformObject + 0x308) = 0;
+			dst = (float*) (transformObject + 0x284);
+			src = (float*) (transformObject + 8);
 			for (i = 8; i != 0; i--) {
 				dst[-1] = src[-2];
 				dst[0] = src[-1];
 				dst[1] = src[0];
-				*(float*) (v + 0x300) = src[-2] + *(float*) (v + 0x300);
-				*(float*) (v + 0x304) = dst[0] + *(float*) (v + 0x304);
-				*(float*) (v + 0x308) = *(float*) (v + 0x308) + dst[1];
+				*(float*) (transformObject + 0x300) = src[-2] + *(float*) (transformObject + 0x300);
+				*(float*) (transformObject + 0x304) = dst[0] + *(float*) (transformObject + 0x304);
+				*(float*) (transformObject + 0x308) = *(float*) (transformObject + 0x308) + dst[1];
 				src += 20;
 				dst += 4;
 			}
-			*(float*) (v + 0x300) = *(float*) (v + 0x300) * g_662a34;
-			*(float*) (v + 0x304) = *(float*) (v + 0x304) * g_662a34;
-			*(float*) (v + 0x308) = *(float*) (v + 0x308) * g_662a34;
+			*(float*) (transformObject + 0x300) = *(float*) (transformObject + 0x300) * g_662a34;
+			*(float*) (transformObject + 0x304) = *(float*) (transformObject + 0x304) * g_662a34;
+			*(float*) (transformObject + 0x308) = *(float*) (transformObject + 0x308) * g_662a34;
 		}
 		return *(unsigned char*) (p + 0x163d);
 	}

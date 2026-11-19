@@ -65,7 +65,7 @@ void __cdecl fcn_00532ef0(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x00585030 */
-void __cdecl fcn_00585030(int a0)
+void __cdecl fcn_00585030(int alchemyObjectArg)
 {
 	char* e;
 	char* data;
@@ -92,8 +92,8 @@ void __cdecl fcn_00585030(int a0)
 	int item;
 	int dlg;
 
-	e = (char*) a0;
-	data = fcn_004ec7d0((unsigned char*) a0);
+	e = (char*) alchemyObjectArg;
+	data = fcn_004ec7d0((unsigned char*) alchemyObjectArg);
 	records = *(int**) (e + 0x65);
 	prev = fcn_004ecf00(e, &owner, &frac, 0);
 	stamp = g_6b7fac;

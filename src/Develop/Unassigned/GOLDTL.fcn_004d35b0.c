@@ -6,13 +6,13 @@ extern char g_68bda0[];
 
 int __cdecl fcn_0064f170(char*, char*, int);
 
-char __cdecl fcn_004d35b0(char* a1, char* a2)
+char __cdecl fcn_004d35b0(char* node, char* entity)
 {
 	unsigned short* w;
 
-	w = *(unsigned short**) (a2 + 0x16c);
-	if (fcn_0064f170(a1, g_68bda0, 5) == 0 && *(int*) (*(char**) (a1 + 0x204) + 0xa) != *w) {
-		g_9b46c0[g_772f10] = a1;
+	w = *(unsigned short**) (entity + 0x16c);
+	if (fcn_0064f170(node, g_68bda0, 5) == 0 && *(int*) (*(char**) (node + 0x204) + 0xa) != *w) {
+		g_9b46c0[g_772f10] = node;
 		g_772f10++;
 	}
 	return 1;

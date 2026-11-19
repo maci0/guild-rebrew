@@ -23,7 +23,7 @@ extern float g_662a94; extern float g_6628a8; extern float g_66413c;
 int __cdecl fcn_00502cd0(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00495fe0 */
-int __cdecl fcn_00495fe0(int a0, char* obj, int flag, int* out1, int* out2)
+int __cdecl fcn_00495fe0(int unused, char* obj, int flag, int* out1, int* out2)
 {
 	union { Out495fe0 msg; float ratios[5]; } action;
 	Sel495fe0 sel; Sel495fe0 attributes; union { Out495fe0 msg; unsigned int values[5]; } extra;
@@ -48,7 +48,7 @@ int __cdecl fcn_00495fe0(int a0, char* obj, int flag, int* out1, int* out2)
 	unsigned char tmp8; float bonus;
 	int* pi;
 
-	(void) a0;
+	(void) unused;
 	best1 = 0;
 
 	maxIdx = 0;

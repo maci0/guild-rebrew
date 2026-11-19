@@ -32,7 +32,7 @@ char* __cdecl fcn_00445600(char* o, int flags, char* ptr, char* name);
 char __cdecl fcn_0045b990(char* map, float* pos, int* x, int* y, int* z);
 char __cdecl fcn_004bdeb0(char* e, char* obj);
 /* ADDRESS: GOLDTL 0x004bd4e0 */
-int __cdecl fcn_004bd4e0(int a0, int a1)
+int __cdecl fcn_004bd4e0(int sceneObjectArg, int typeIdArg)
 {
 	char name[0x40];
 	char ctx[0x54];
@@ -100,7 +100,7 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 		g_1005908 = 2;
 	}
 	fcn_004bdd40((int) &g_1005900);
-	i = fcn_00597ff0(a1, ctx);
+	i = fcn_00597ff0(typeIdArg, ctx);
 	if (i == 0) {
 		gv_Free3Fields(g_1005904);
 		return 0;
@@ -108,7 +108,7 @@ int __cdecl fcn_004bd4e0(int a0, int a1)
 	pos[0] = 0.0f;
 	pos[1] = 0.0f;
 	pos[2] = 0.0f;
-	fcn_00455540((char*) a0, pos, (float*)(ctx + 0x40));
+	fcn_00455540((char*) sceneObjectArg, pos, (float*)(ctx + 0x40));
 	*(int*) (ctx + 0x50) = 0;
 	d3_VisitSceneObjects((char*) g_67a370, 0, 0x180, fcn_004bdeb0, ctx);
 	if (*(int*) (ctx + 0x50) == 0) {
@@ -224,9 +224,9 @@ line:
 			}
 		}
 	}
-	dst = fcn_00445600((char*) a0, 0x100, 0, s_68149c);
+	dst = fcn_00445600((char*) sceneObjectArg, 0x100, 0, s_68149c);
 	if (dst == 0) {
-		dst = (char*) a0;
+		dst = (char*) sceneObjectArg;
 	}
 	d3_TransformPoint(dst, dst + 0x4c, pos);
 	i = 0;

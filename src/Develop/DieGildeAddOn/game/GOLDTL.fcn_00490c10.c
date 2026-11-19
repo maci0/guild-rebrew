@@ -6,14 +6,14 @@ struct BUF_490c10 { char pad_00[0x18]; int idx; char pad_1c[8]; };
 int __cdecl gm_MapEntityStatRange(int stat_id);
 int __cdecl fcn_004f4830(int idx, void* dst);
 /* ADDRESS: GOLDTL 0x00490c10 */
-int __cdecl fcn_00490c10(ENT_490c10* a0, int unused, int* out)
+int __cdecl fcn_00490c10(ENT_490c10* entity, int unused, int* out)
 {
     BUF_490c10 buf;
     int v;
     int t;
 
-    gm_MapEntityStatRange((unsigned char) a0->f164);
-    v = (int) ((a0->fac - 2.0f) * 5.0f);
+    gm_MapEntityStatRange((unsigned char) entity->f164);
+    v = (int) ((entity->fac - 2.0f) * 5.0f);
     t = v < 4 ? v : 4;
     t = t < 1 ? 1 : t;
     fcn_004f4830(7, &buf);

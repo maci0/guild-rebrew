@@ -3,8 +3,8 @@ extern int g_67a370;
 float __cdecl fcn_004d3070(char* self, int x, int z, float range);
 
 /* ADDRESS: GOLDTL 0x004d31d0 */
-int __cdecl fcn_004d31d0(char* self, int a1, int a2, int a3,
-	unsigned int* a4, unsigned int* a5)
+int __cdecl fcn_004d31d0(char* self, int centerColumn, int centerRow, int searchRadius,
+	unsigned int* resultColumn, unsigned int* resultRow)
 {
 	char* map;
 	float best;
@@ -21,16 +21,16 @@ int __cdecl fcn_004d31d0(char* self, int a1, int a2, int a3,
 	map = *(char**) (((char*) g_67a370) + 0xb0);
 	best = 1e9f;
 	i = 0;
-	if (a3 > 0) {
-		k = a2;
+	if (searchRadius > 0) {
+		k = centerRow;
 		do {
-			row_hi = *(int*) (map + 0x20) - 1 > i + a2 ? i + a2 : *(int*) (map + 0x20) - 1;
+			row_hi = *(int*) (map + 0x20) - 1 > i + centerRow ? i + centerRow : *(int*) (map + 0x20) - 1;
 			lo = k < 0 ? 0 : k;
-			n = a2 - lo;
+			n = centerRow - lo;
 			for (r = lo; r <= row_hi; r++, n--) {
 				d = i - abs(n);
-				lo = a1 - d;
-				hi = a1 + d;
+				lo = centerColumn - d;
+				hi = centerColumn + d;
 				lo = lo < 0 ? 0 : lo;
 				if (hi > *(int*) (map + 0x20) - 1) {
 					hi = *(int*) (map + 0x20) - 1;
@@ -41,18 +41,18 @@ int __cdecl fcn_004d31d0(char* self, int a1, int a2, int a3,
 						&& *(int*) (*(char**) (map + 0x24)
 							+ (*(int*) (map + 0x20) * r + c) * 0x1c) != 0xd) {
 						f = fcn_004d3070(self, c, r,
-							(float) a3 * *(float*) (map + 0x10) * 2.0f);
+							(float) searchRadius * *(float*) (map + 0x10) * 2.0f);
 						if (f < best) {
 							best = f;
-							*a4 = c;
-							*a5 = r;
+							*resultColumn = c;
+							*resultRow = r;
 						}
 					}
 				}
 			}
 			i++;
 			k--;
-		} while (i < a3);
+		} while (i < searchRadius);
 	}
 	if (best != 1e9f) {
 		return 1;

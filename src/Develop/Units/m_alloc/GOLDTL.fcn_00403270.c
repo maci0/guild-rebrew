@@ -7,16 +7,16 @@ extern char g_67536c[];
 
 int __cdecl m_alloc(int, char*);
 
-void* __cdecl ch_AllocateCharacterSlot(int a1)
+void* __cdecl ch_AllocateCharacterSlot(int index)
 {
 	void* p;
 
 	p = (void*) m_alloc(0x244, g_67536c);
 	memset(p, 0, 0x244);
-	if (ch_CharacterSlots[a1] != 0) {
+	if (ch_CharacterSlots[index] != 0) {
 		return 0;
 	}
-	ch_CharacterSlots[a1] = p;
-	*(int*) p = a1;
+	ch_CharacterSlots[index] = p;
+	*(int*) p = index;
 	return p;
 }

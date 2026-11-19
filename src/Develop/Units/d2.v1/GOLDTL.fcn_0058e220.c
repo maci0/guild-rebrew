@@ -37,7 +37,7 @@ void __cdecl fcn_00471e30(int);
 typedef struct { char pad[0x48]; int x48; int x4c; } S58;
 
 /* ADDRESS: GOLDTL 0x0058e220 */
-int __cdecl fcn_0058e220(int a1, S58* a2)
+int __cdecl fcn_0058e220(int a1, S58* scriptSubject)
 {
 	int h;
 	unsigned int wait[9];
@@ -63,9 +63,9 @@ int __cdecl fcn_0058e220(int a1, S58* a2)
 		p = fcn_004fd9d0(g_7f4ca0[g_774970].b9, g_7f4ca0[g_774970].b164);
 		if (p == 0)
 			fcn_004fd9d0(g_7f4ca0[g_774970].b9, 0);
-		q = fcn_004fd9d0(a2->x4c, a2->x48);
+		q = fcn_004fd9d0(scriptSubject->x4c, scriptSubject->x48);
 		if (q == 0)
-			q = fcn_004fd9d0(a2->x4c, 0);
+			q = fcn_004fd9d0(scriptSubject->x4c, 0);
 		fcn_0064d41a(text, g_68b3f8, p + 4, q + 4);
 		evt_RunScriptLine(h, text);
 	}

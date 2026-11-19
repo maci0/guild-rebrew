@@ -3,7 +3,7 @@ extern int __cdecl gm_RandomMod(int);
 extern float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x004929e0 */
-void __cdecl fcn_004929e0(char* a0, char* a1, int a2)
+void __cdecl fcn_004929e0(char* gameContext, char* playerEntity, int initialRoll)
 {
 	unsigned char* p;
 	unsigned char* c;
@@ -24,22 +24,22 @@ void __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 	float f;
 	float r;
 
-	if (a1 == *(char**) (a0 + 0xc)) {
-		p = a0 + 0x18;
-		c = a0 + 0x10;
-	} else if (a1 == *(char**) (a0 + 0x30)) {
-		p = a0 + 0x3c;
-		c = a0 + 0x34;
+	if (playerEntity == *(char**) (gameContext + 0xc)) {
+		p = gameContext + 0x18;
+		c = gameContext + 0x10;
+	} else if (playerEntity == *(char**) (gameContext + 0x30)) {
+		p = gameContext + 0x3c;
+		c = gameContext + 0x34;
 	} else {
-		p = a1;
-		c = a1;
+		p = playerEntity;
+		c = playerEntity;
 	}
-	f = gm_GetEntitySkill(a1, 2);
+	f = gm_GetEntitySkill(playerEntity, 2);
 	ix = (unsigned char) ((int) (f * 100.0f) / 20);
 	if (ix >= 4) {
 		ix = 4;
 	}
-	if (a2 != 0) {
+	if (initialRoll != 0) {
 		md = gm_RandomMod(3) & 0xffff;
 		*c = 3;
 		if (f > 0.8888f) {
@@ -114,7 +114,7 @@ void __cdecl fcn_004929e0(char* a0, char* a1, int a2)
 			p[n] = (unsigned char) v;
 		}
 	} else {
-		f = gm_GetEntitySkill(a1, 0);
+		f = gm_GetEntitySkill(playerEntity, 0);
 		r = gm_RandomFloat01();
 		sum = 0;
 		n = *c;

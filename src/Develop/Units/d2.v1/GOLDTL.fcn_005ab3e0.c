@@ -38,7 +38,7 @@ void __cdecl fcn_005abd60(void);
 /* Church indulgence ("Ablass") dialog: offers the indulgence for the current
  * player and, once bought, continues with the results screen. */
 /* ADDRESS: GOLDTL 0x005ab3e0 */
-void __cdecl fcn_005ab3e0(char* a0)
+void __cdecl fcn_005ab3e0(char* churchBuilding)
 {
 	char text[0x200];
 	char* rec;
@@ -52,7 +52,7 @@ void __cdecl fcn_005ab3e0(char* a0)
 	int changed;
 	float scale;
 	float factor;
-	double v;
+	double scaledPrice;
 
 	item = -1;
 	cost = 0;
@@ -61,11 +61,11 @@ void __cdecl fcn_005ab3e0(char* a0)
 	if (kind != 0) {
 		scale = (float) gm_WalkEntityChain(g_774970) * 0.005f;
 		factor = 1.5f;
-		if (*(unsigned short*) (a0 + 0x27) != g_774970)
-			factor = (200.0f - fcn_0050f980(g_774970, *(unsigned short*) (a0 + 0x27), 1)) * 0.01f;
+		if (*(unsigned short*) (churchBuilding + 0x27) != g_774970)
+			factor = (200.0f - fcn_0050f980(g_774970, *(unsigned short*) (churchBuilding + 0x27), 1)) * 0.01f;
 		cost = (int) ((float) kind * factor * scale);
-		v = (double) cost * 0.1;
-		cost = (int) (320000.0 < (v > 3200.0 ? v : 3200.0) ? 320000.0 : (v > 3200.0 ? v : 3200.0));
+		scaledPrice = (double) cost * 0.1;
+		cost = (int) (320000.0 < (scaledPrice > 3200.0 ? scaledPrice : 3200.0) ? 320000.0 : (scaledPrice > 3200.0 ? scaledPrice : 3200.0));
 		if (fcn_005c6270(g_7f4ca0 + g_774970 * 0x21c, 0x2c6) != 0)
 			cost = cost / 2;
 	}
@@ -95,13 +95,13 @@ void __cdecl fcn_005ab3e0(char* a0)
 			fcn_004c4670(4, 1, 0x1ac, &cost);
 			fcn_004c5360();
 			fcn_004f5e20(*(int*) (rec + 4), count);
-			if (*(unsigned short*) (a0 + 0x27) != 0xffff
-				&& *(unsigned short*) (a0 + 0x27) != g_774970) {
+			if (*(unsigned short*) (churchBuilding + 0x27) != 0xffff
+				&& *(unsigned short*) (churchBuilding + 0x27) != g_774970) {
 				val = (int) (cost / log10((double) cost));
 				fcn_004c5150(-1, *(int*) (rec + 4), g_773d75, cost);
-				sel = fcn_004c5150(*(int*) (g_7f4ca0 + *(unsigned short*) (a0 + 0x27) * 0x21c + 4),
+				sel = fcn_004c5150(*(int*) (g_7f4ca0 + *(unsigned short*) (churchBuilding + 0x27) * 0x21c + 4),
 					-1, g_773d75, val);
-				fcn_005b2150(rec, g_7f4ca0 + *(unsigned short*) (a0 + 0x27) * 0x21c, a0, val, cost);
+				fcn_005b2150(rec, g_7f4ca0 + *(unsigned short*) (churchBuilding + 0x27) * 0x21c, churchBuilding, val, cost);
 			} else {
 				sel = fcn_004c5150(-1, *(int*) (rec + 4), g_773d75, cost);
 			}

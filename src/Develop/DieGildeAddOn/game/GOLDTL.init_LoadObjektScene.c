@@ -48,7 +48,7 @@ void __cdecl fcn_00538060(void);
 char* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00510c90 */
-void __cdecl init_LoadObjektScene(int a0)
+void __cdecl init_LoadObjektScene(int objectTypeIndex)
 {
 	char path[0x100];
 	char buf[0x10];
@@ -63,7 +63,7 @@ void __cdecl init_LoadObjektScene(int a0)
 	void** p;
 
 	saved = d3_CurrentContextIndex;
-	name = lpObjektePROT + a0 * 0x41;
+	name = lpObjektePROT + objectTypeIndex * 0x41;
 	progress = 0;
 	paused = 0;
 	if (g_774964 && g_774670 <= 0) {
@@ -82,7 +82,7 @@ void __cdecl init_LoadObjektScene(int a0)
 		fcn_0042df30((TIMER_CALLBACK) fcn_00538060, 1);
 		paused = 1;
 	}
-	if (init_SceneContextIndices[a0] == -1) {
+	if (init_SceneContextIndices[objectTypeIndex] == -1) {
 		type = fcn_00413160();
 		if (type == -1) {
 			ReportClientMessage(s_6a1c30);
@@ -94,11 +94,11 @@ void __cdecl init_LoadObjektScene(int a0)
 			fcn_004432d0(d3_CurrentContextIndex, 0);
 			d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) fcn_005105a0);
 			d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
-			init_SceneContextIndices[a0] = (char) type;
+			init_SceneContextIndices[objectTypeIndex] = (char) type;
 			fcn_004432d0(saved, 0);
 		}
 	} else {
-		type = (signed char) init_SceneContextIndices[a0];
+		type = (signed char) init_SceneContextIndices[objectTypeIndex];
 		if (g_10432c0[type * 0xf7 * 4 + 0x3d5] != 0) {
 			slot = type * 0xf7;
 			fcn_004432d0(type, 0);
@@ -133,7 +133,7 @@ void __cdecl init_LoadObjektScene(int a0)
 					}
 					p++;
 				} while ((int) p < 0x14d0c20);
-				g_10432c0[(signed char) init_SceneContextIndices[a0] * 0x3dc + 0x3d5] = 0;
+				g_10432c0[(signed char) init_SceneContextIndices[objectTypeIndex] * 0x3dc + 0x3d5] = 0;
 				fcn_004432d0(saved, 0);
 			}
 		}

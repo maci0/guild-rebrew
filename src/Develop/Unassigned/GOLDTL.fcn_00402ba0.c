@@ -2,7 +2,7 @@
 extern char g_10432c0[];
 
 /* ADDRESS: GOLDTL 0x00402ba0 */
-int __cdecl ch_CountCharacters(int a1, int a2)
+int __cdecl ch_CountCharacters(int contextIndexArg, int includeTypeOne)
 {
 	int count;
 	void** p;
@@ -13,9 +13,9 @@ int __cdecl ch_CountCharacters(int a1, int a2)
 	do {
 		e = *p;
 		if (e != 0) {
-			if (a1 == -1 ||
-			    *(int*) ((char*) e + 0x88) == (int) (g_10432c0 + a1 * 0x3dc)) {
-				if (a2 != 0 ||
+			if (contextIndexArg == -1 ||
+			    *(int*) ((char*) e + 0x88) == (int) (g_10432c0 + contextIndexArg * 0x3dc)) {
+				if (includeTypeOne != 0 ||
 				    *(int*) (*(int*) ((char*) e + 0x34) + 0x218) != 1) {
 					count++;
 				}

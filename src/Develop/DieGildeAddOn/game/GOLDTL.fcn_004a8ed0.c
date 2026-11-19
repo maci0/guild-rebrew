@@ -26,7 +26,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
 
 
 /* ADDRESS: GOLDTL 0x004a8ed0 */
-int __cdecl fcn_004a8ed0(char* a1, char* e, char* a3, char* a4, char* out)
+int __cdecl fcn_004a8ed0(char* unused1, char* e, char* unused3, char* unused4, char* out)
 {
 	int found;
 	char* q;

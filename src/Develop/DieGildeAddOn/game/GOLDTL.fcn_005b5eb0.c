@@ -16,9 +16,9 @@ void __cdecl io_AppendText(int a1, ...);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 
 /* ADDRESS: GOLDTL 0x005b5eb0 */
-void __cdecl fcn_005b5eb0(int a0, char* a1)
+void __cdecl fcn_005b5eb0(int windowContext, char* entityName)
 {
-    int v8[4];
+    int workerIcons[4];
     char buf[512];
     int* p;
     int i;
@@ -34,11 +34,11 @@ void __cdecl fcn_005b5eb0(int a0, char* a1)
         p[0] = -1;
         p++;
     } while ((int) p < 0x777ce8);
-    d2_SetForm(*(int*) (a0 + 0x234), 1);
+    d2_SetForm(*(int*) (windowContext + 0x234), 1);
     io_AppendText(0x6811b0);
     io_AppendText(0x1a1f);
-    d2_SetForm(*(int*) (a0 + 0x234), 3);
-    v = fcn_0050c490(a1, (void**) 0x777cc4);
+    d2_SetForm(*(int*) (windowContext + 0x234), 3);
+    v = fcn_0050c490(entityName, (void**) 0x777cc4);
     *(int*) 0x777cc0 = v;
     if (v > 3) {
         v = 3;
@@ -51,13 +51,13 @@ void __cdecl fcn_005b5eb0(int a0, char* a1)
     y = 10;
     i = 0;
     do {
-        v8[0] = fcn_004fdec0("arbeiter_MANN");
-        v8[1] = fcn_004fdec0("handwerker_MANN");
-        v8[2] = fcn_004fdec0("handwerker2_MANN");
-        v8[3] = fcn_004fdec0("handwerker3_MANN");
+        workerIcons[0] = fcn_004fdec0("arbeiter_MANN");
+        workerIcons[1] = fcn_004fdec0("handwerker_MANN");
+        workerIcons[2] = fcn_004fdec0("handwerker2_MANN");
+        workerIcons[3] = fcn_004fdec0("handwerker3_MANN");
         fcn_0046f740(0xe, y - 2, 0x5db, d2_CurrentWindowId);
         fcn_0046f740(0x10, y,
-                     v8[*(int*) (*(int*) (i * 4 + 0x777cc4) + 2) & 3] + 0x639,
+                     workerIcons[*(int*) (*(int*) (i * 4 + 0x777cc4) + 2) & 3] + 0x639,
                      d2_CurrentWindowId);
         fcn_0046f740(0x50, x - 0x5a,
                      *(unsigned short*) (*(int*) (i * 4 + 0x777cc4)) + 0x4b1,
@@ -78,7 +78,7 @@ void __cdecl fcn_005b5eb0(int a0, char* a1)
         v = fcn_0046fac0(0, x - 0x12, buf, d2_CurrentWindowId);
         *(int*) (i * 4 + 0x777cdc) = v;
         d2_SetElementFont(v, 0x56);
-        if (a1 != name) {
+        if (entityName != name) {
             v = fcn_0046f740(0, x, 5, d2_CurrentWindowId);
             *(int*) (i * 4 + 0x777cd0) = v;
             *(unsigned int*) (g_1015ea0 + 0x5c + v * 0x2f4) = 1;

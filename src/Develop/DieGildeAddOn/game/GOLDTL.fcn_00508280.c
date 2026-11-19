@@ -15,7 +15,7 @@ void __cdecl fcn_004c5360(void);
 float __cdecl fcn_004ff210(unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x00508280 */
-int __cdecl fcn_00508280(char* p, unsigned int* a1, float* a2)
+int __cdecl fcn_00508280(char* p, unsigned int* selectionOut, float* valueOut)
 {
 	int flags;
 	int avail[8];
@@ -86,8 +86,8 @@ found:
 	}
 	r = (unsigned short) gm_RandomMod(s.c);
 	cost = (int) (r * s.b);
-	if (a1 != 0) {
-		*a1 = r != 0 ? i : 0;
+	if (selectionOut != 0) {
+		*selectionOut = r != 0 ? i : 0;
 	}
 	if (r == 0) {
 		goto fail;
@@ -116,10 +116,10 @@ found:
 	fcn_004c4570(4, 1, 0x2c, &v);
 	fcn_004c5360();
 	f = fcn_004ff210(*(unsigned short*) p, -cost);
-	if (a2 == 0) {
+	if (valueOut == 0) {
 		goto fail_1;
 	}
-	*a2 = f;
+	*valueOut = f;
 	goto fail_1;
 fail_1:
 	return 1;

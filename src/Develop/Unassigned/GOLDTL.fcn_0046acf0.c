@@ -3,7 +3,7 @@ extern int g_102d028, g_102d02c, g_67d388, d2_CurrentElementId; extern char* g_1
 char* __cdecl d3_FindTextureByName(char*);
 char __cdecl fcn_00444860(float, float, int, char*, float*, float*);
 /* ADDRESS: GOLDTL 0x0046acf0 */
-int __cdecl fcn_0046acf0(int a0, int a1, int a2, int a3, int a4)
+int __cdecl fcn_0046acf0(int a0, int screenY, int a2, int a3, int a4)
 {
 	char* q;
 	char* name;
@@ -52,7 +52,7 @@ int __cdecl fcn_0046acf0(int a0, int a1, int a2, int a3, int a4)
 			if (!obj) {
 				continue;
 			}
-			if (!fcn_00444860((float) a0, (float) a1, 0, obj, &f1, &f2)) {
+			if (!fcn_00444860((float) a0, (float) screenY, 0, obj, &f1, &f2)) {
 				continue;
 			}
 			goto found;

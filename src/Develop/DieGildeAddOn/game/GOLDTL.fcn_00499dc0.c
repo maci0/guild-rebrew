@@ -36,7 +36,7 @@ int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Pos* b, Pos* a);
 int __cdecl gm_RandomMod(unsigned short n);
 
 /* ADDRESS: GOLDTL 0x00499dc0 */
-int __cdecl fcn_00499dc0(int a1, char* e, int busy, Pos* out1, Pos* out2)
+int __cdecl fcn_00499dc0(int methodKindArg, char* e, int busy, Pos* out1, Pos* out2)
 {
 	Pos a;
 	Pos b;
@@ -52,11 +52,11 @@ int __cdecl fcn_00499dc0(int a1, char* e, int busy, Pos* out1, Pos* out2)
 	int r;
 	char* q;
 
-	kind = a1;
+	kind = methodKindArg;
 	if (kind == 0) {
 		kind = 0x1c;
 	}
-	if (busy == 0 && a1 == 0) {
+	if (busy == 0 && methodKindArg == 0) {
 		f.mask = 0x90010;
 		f.b = 0;
 		if (fcn_004a5e60(e, 4, f, 0, 100.0f, &found) != 0) {

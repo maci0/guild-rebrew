@@ -23,7 +23,7 @@ void __cdecl fcn_004c5530(int);
 /* Entity event handler: state 0 builds and posts the event message, state -1
  * clears the entity's event flag and frees its track. */
 /* ADDRESS: GOLDTL 0x00569760 */
-void __cdecl fcn_00569760(char* a0)
+void __cdecl fcn_00569760(char* eventTrack)
 {
 	float f;
 	char* p;
@@ -36,18 +36,18 @@ void __cdecl fcn_00569760(char* a0)
 		char text[0x200];
 	} b;
 
-	if (*(int*) (a0 + 0x70) < -2) {
+	if (*(int*) (eventTrack + 0x70) < -2) {
 		return;
 	}
-	if (*(int*) (a0 + 0x70) >= 0) {
-		if (*(int*) (a0 + 0x70) != 0) {
+	if (*(int*) (eventTrack + 0x70) >= 0) {
+		if (*(int*) (eventTrack + 0x70) != 0) {
 			return;
 		}
 
-		e = gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
-		rec = gm_StartFilteredEntitySearch(1, 1, *(int*) (a0 + 0xb0));
+		e = gm_LookupEntityRecordById(*(int*) (eventTrack + 0xac));
+		rec = gm_StartFilteredEntitySearch(1, 1, *(int*) (eventTrack + 0xb0));
 		if (rec == 0 || e == 0) {
-			*(int*) (a0 + 0x70) = -1;
+			*(int*) (eventTrack + 0x70) = -1;
 			return;
 		}
 		p = g_7f4ca0 + (*(unsigned short*) (rec + 0x27)) * 0x21c;
@@ -57,7 +57,7 @@ void __cdecl fcn_00569760(char* a0)
 		if (*(unsigned char*) (e + 0x1b1) <= 0) {
 			int idx;
 			idx = -1;
-			if ((*(unsigned char*) (a0 + 0x78) & 2) != 0) {
+			if ((*(unsigned char*) (eventTrack + 0x78) & 2) != 0) {
 				io_FormatTextBuffer(b.text, (char*) 0x19da);
 				fcn_00545d40(*(int*) (e + 4), *(int*) (e + 4), b.text, 0, 0x5fb, 0);
 				if (*(int*) (e + 0x184) != 0) {
@@ -70,16 +70,16 @@ void __cdecl fcn_00569760(char* a0)
 				             (char*) &idx);
 				fcn_004c5360();
 			}
-			fcn_00546190(a0);
+			fcn_00546190(eventTrack);
 			return;
 		}
 
 		pl = fcn_0050dc90((int) rec);
-		if ((*(unsigned char*) (a0 + 0x78) & 2) == 0) {
+		if ((*(unsigned char*) (eventTrack + 0x78) & 2) == 0) {
 			return;
 		}
 		he_RegisterApEvent(*(unsigned short*) p, (char*) g_14b5280, -2, 0);
-		io_FormatTextBuffer(b.text, (char*) 0x19c2, a0 + 0xb4);
+		io_FormatTextBuffer(b.text, (char*) 0x19c2, eventTrack + 0xb4);
 		fcn_00545d40(*(int*) (e + 4), *(int*) (e + 4), b.text, 0, 0x5f0, 0);
 		if (pl == 0) {
 			return;
@@ -104,13 +104,13 @@ void __cdecl fcn_00569760(char* a0)
 		*(int*) (b.msg + 0x58) = *(int*) (e + 4);
 		*(int*) (b.msg + 0x60) = (int) ((flt_665ecc < (float) n ? flt_665ecc : (float) n) * f);
 		*(int*) (b.msg + 0x5c) = *(int*) (g_7f4ca0
-		                                  + (*(unsigned short*) (a0 + 8)) * 0x21c + 4);
+		                                  + (*(unsigned short*) (eventTrack + 8)) * 0x21c + 4);
 		fcn_004c5530((int) b.msg);
 	} else {
-		e = gm_LookupEntityRecordById(*(int*) (a0 + 0xac));
+		e = gm_LookupEntityRecordById(*(int*) (eventTrack + 0xac));
 		if (e != 0) {
 			e[0x1b1] = 0;
 		}
-		fcn_00546190(a0);
+		fcn_00546190(eventTrack);
 	}
 }

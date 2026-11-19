@@ -6,7 +6,7 @@ extern float g_662cf8;
 /* Scores an entity's slot chain: matching slot types 2 and 6, plus links of the
  * queried chain that repeat with the same type, scaled by g_662cf8. */
 /* ADDRESS: GOLDTL 0x0050bff0 */
-int __cdecl fcn_0050bff0(unsigned char* a0)
+int __cdecl fcn_0050bff0(unsigned char* building)
 {
 	unsigned char* base;
 	unsigned short* slot;
@@ -30,7 +30,7 @@ int __cdecl fcn_0050bff0(unsigned char* a0)
 	match_count = 0;
 	seen = 0;
 	i = 0;
-	base = (unsigned char*) (lpGebaeudePROT + *a0 * 0x24d);
+	base = (unsigned char*) (lpGebaeudePROT + *building * 0x24d);
 	slot = (unsigned short*) (base + 0x23);
 	while (i < 0x40) {
 		if (*slot == 0)
@@ -42,7 +42,7 @@ int __cdecl fcn_0050bff0(unsigned char* a0)
 		if (*def == 2
 			|| *def == 6) {
 			seen = 1;
-			handle = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, id);
+			handle = fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, id);
 			if (handle != 0) {
 				match_count += 1;
 				p = (unsigned short*) fcn_00502cd0(*(int*) (handle + 0x14), 1, 5);

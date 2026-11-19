@@ -4,7 +4,7 @@ extern int __cdecl ReportClientMessage(char* text);
 int __cdecl fcn_00429e60(char* name);
 
 /* ADDRESS: GOLD 0x0042b5b0 */
-int __cdecl fcn_0042b5b0(char* name, int a1, int a2, int n, ...)
+int __cdecl fcn_0042b5b0(char* name, int handlerAddress, int handlerKind, int n, ...)
 {
 	char* tab;
 	int* va;
@@ -32,9 +32,9 @@ int __cdecl fcn_0042b5b0(char* name, int a1, int a2, int n, ...)
 		return 0;
 	}
 	off = i * 0x4c;
-	*(int*) (tab + off + 0x44) = a1;
+	*(int*) (tab + off + 0x44) = handlerAddress;
 	*(int*) (*(char**) 0x6332bc + off + 0x20) = n;
-	*(int*) (*(char**) 0x6332bc + off + 0x48) = a2;
+	*(int*) (*(char**) 0x6332bc + off + 0x48) = handlerKind;
 	if (0 < n) {
 		va = &n;
 		dst = (int*) (off + 0x24);

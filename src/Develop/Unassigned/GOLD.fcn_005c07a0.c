@@ -35,7 +35,7 @@ void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
 void __cdecl fcn_005c9160(int, int, int, int, int);
 void __cdecl fcn_005cc2f0(unsigned int, Item*);
 
-int __cdecl fcn_005c07a0(int a1, int a2, int a3, unsigned int n, Item* items)
+int __cdecl fcn_005c07a0(int dialogId, int formId, int altFormId, unsigned int n, Item* items)
 {
 	int y;
 	char buf[0x200];
@@ -45,7 +45,7 @@ int __cdecl fcn_005c07a0(int a1, int a2, int a3, unsigned int n, Item* items)
 	if (n == 0) {
 		return 0;
 	}
-	y = fcn_005cc240(a1, a2, a3);
+	y = fcn_005cc240(dialogId, formId, altFormId);
 	half = g_f8f120[d2_CurrentWindowId].width / 2;
 	io_FormatTextBuffer(buf, 0x16a7, items[0].x34 + 0x253);
 	fcn_005c9090((int) buf, half, 8, half * 2, 0x55);

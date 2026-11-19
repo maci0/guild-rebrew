@@ -63,9 +63,9 @@ void __cdecl fcn_004c4ef0(char*);
 int __cdecl fcn_0065f220(const char*, const char*);
 
 /* ADDRESS: GOLDTL 0x005c30e0 */
-void __cdecl fcn_005c30e0(unsigned char* a1)
+void __cdecl fcn_005c30e0(unsigned char* buildingEntry)
 {
-	int v;
+	int quotedCost;
 	GOLDTL_Msg5c30 msg;
 	LC_GEBAEUDE_BAUPLATZ bp;
 	char buf[0x200];
@@ -75,57 +75,57 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 	int m;
 	int id;
 
-	rec = &((GOLDTL_EntType5c30*) lpGebaeudePROT)[*(unsigned char*) a1];
-	id = *(int*) (a1 + 1);
+	rec = &((GOLDTL_EntType5c30*) lpGebaeudePROT)[*(unsigned char*) buildingEntry];
+	id = *(int*) (buildingEntry + 1);
 	if (rec->f247 >= rec->f248) {
 		io_FormatTextBuffer(buf, 0x17d7);
 		fcn_00526120(buf, 0);
 		return;
 	}
-	kind = gm_GetBuildingTypeCategory(*(unsigned char*) a1);
+	kind = gm_GetBuildingTypeCategory(*(unsigned char*) buildingEntry);
 	if (g_774800 == 0) {
 		if (kind == 1 || kind == 4 || kind == 8) {
-			if (fcn_00504f30(*(unsigned char*) a1 + 1, g_774970) != 1) {
+			if (fcn_00504f30(*(unsigned char*) buildingEntry + 1, g_774970) != 1) {
 				io_FormatTextBuffer(buf, 0x17d6);
 				fcn_00526120(buf, 0);
 				return;
 			}
 		} else {
-			if (fcn_00504f30(*(unsigned char*) a1 + 1, g_774970) != 1) {
+			if (fcn_00504f30(*(unsigned char*) buildingEntry + 1, g_774970) != 1) {
 				io_FormatTextBuffer(buf, 0x17d9);
 				fcn_00526120(buf, 0);
 				return;
 			}
 		}
 	}
-	lc_GetGebaeudeBauplatz(&bp, a1);
+	lc_GetGebaeudeBauplatz(&bp, buildingEntry);
 	if (bp.node != 0) {
-		fcn_00597ff0(*(unsigned char*) a1 + 1, (char*) &msg);
+		fcn_00597ff0(*(unsigned char*) buildingEntry + 1, (char*) &msg);
 		if (strstr((char*) &msg, bp.node) == 0) {
-			io_FormatTextBuffer(buf, 0x17d8, *(unsigned char*) a1 * 14 + 0x49c);
+			io_FormatTextBuffer(buf, 0x17d8, *(unsigned char*) buildingEntry * 14 + 0x49c);
 			fcn_00526120(buf, 0);
 			return;
 		}
 	} else {
-		fcn_00597ff0(*(unsigned char*) a1 + 1, (char*) &msg);
+		fcn_00597ff0(*(unsigned char*) buildingEntry + 1, (char*) &msg);
 		if (fcn_0065f220((char*) &msg, bp.name) != 0) {
-			io_FormatTextBuffer(buf, 0x17d8, *(unsigned char*) a1 * 14 + 0x49c);
+			io_FormatTextBuffer(buf, 0x17d8, *(unsigned char*) buildingEntry * 14 + 0x49c);
 			fcn_00526120(buf, 0);
 			return;
 		}
 	}
-	v = (int) (fcn_0050d170(*(unsigned char*) a1 + 1) * g_664e60);
-	io_FormatTextBuffer(buf, 0x17d5, v, a1, *(unsigned char*) a1 * 14 + 0x49c);
+	quotedCost = (int) (fcn_0050d170(*(unsigned char*) buildingEntry + 1) * g_664e60);
+	io_FormatTextBuffer(buf, 0x17d5, quotedCost, buildingEntry, *(unsigned char*) buildingEntry * 14 + 0x49c);
 	if (kind != 3 && kind != 5) {
 		if (fcn_00526120(buf, 0x11) == 0) {
 			return;
 		}
-		if (fcn_00526010(&((ENTITY_RECORD*) g_7f4ca0)[g_774970], v,
+		if (fcn_00526010(&((ENTITY_RECORD*) g_7f4ca0)[g_774970], quotedCost,
 		                 (char) g_773d75) == 0) {
 			return;
 		}
 		m = gm_SearchTable67(id);
-		if (*(unsigned char*) (a1 + 0x5b) & 4) {
+		if (*(unsigned char*) (buildingEntry + 0x5b) & 4) {
 			return;
 		}
 		if (!m) {
@@ -134,7 +134,7 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 		memset(&msg, 0, sizeof msg);
 		msg.f4 = 0x1e;
 		msg.f8 = ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id;
-		msg.fc = *(int*) (a1 + 1);
+		msg.fc = *(int*) (buildingEntry + 1);
 		msg.f36 = 1;
 		msg.f28 = gm_GameTime.a;
 		msg.f2c = gm_GameTime.b;
@@ -143,10 +143,10 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 		msg.f58 = msg.fc;
 		fcn_004c4eb0(g_67e968);
 		fcn_004c5150(-1, ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id,
-		             (char) g_773d75, v);
+		             (char) g_773d75, quotedCost);
 		fcn_004c5530((char*) &msg);
 		fcn_004c4ef0(g_67e968);
-		io_FormatTextBuffer(text, 0x17da, *(unsigned char*) a1 * 14 + 0x49c);
+		io_FormatTextBuffer(text, 0x17da, *(unsigned char*) buildingEntry * 14 + 0x49c);
 		fcn_00526120(text, 4);
 		return;
 	}
@@ -156,7 +156,7 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 			return;
 		}
 	} else {
-		m = fcn_00507a10(a1);
+		m = fcn_00507a10(buildingEntry);
 		if (fcn_00526120(buf, 0x11) == 0) {
 			return;
 		}
@@ -164,21 +164,21 @@ void __cdecl fcn_005c30e0(unsigned char* a1)
 			return;
 		}
 	}
-	if (fcn_00526070(m, *(int*) (m + 0x14), v, (char) g_773d75) == 0) {
+	if (fcn_00526070(m, *(int*) (m + 0x14), quotedCost, (char) g_773d75) == 0) {
 		return;
 	}
 	memset(&msg, 0, sizeof msg);
 	msg.f4 = 0x1e;
-	msg.f58 = *(int*) (a1 + 1);
+	msg.f58 = *(int*) (buildingEntry + 1);
 	msg.f34 = gm_GameTime.d;
 	msg.f36 = 1;
-	msg.fc = *(int*) (a1 + 1);
+	msg.fc = *(int*) (buildingEntry + 1);
 	msg.f8 = ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id;
 	msg.f30 = gm_GameTime.c;
 	msg.f2c = gm_GameTime.b;
 	msg.f28 = gm_GameTime.a;
 	fcn_004c4eb0(g_67e968);
-	fcn_004c5150(-1, *(int*) (m + 2), (char) g_773d75, v);
+	fcn_004c5150(-1, *(int*) (m + 2), (char) g_773d75, quotedCost);
 	fcn_004c5530((char*) &msg);
 	fcn_004c4ef0(g_67e968);
 }

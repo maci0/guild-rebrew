@@ -18,7 +18,7 @@ int __cdecl fcn_005373e0(void (*fn)(void), int code);
 void __cdecl fcn_00471e30(void* dlg);
 
 /* ADDRESS: GOLDTL 0x005a1e40 */
-void __cdecl fcn_005a1e40(int a0, int* a1)
+void __cdecl fcn_005a1e40(int gebaeude, int* objekt)
 {
 	int changed;
 	void* dlg;
@@ -36,7 +36,7 @@ void __cdecl fcn_005a1e40(int a0, int* a1)
 	d2_SetForm(dlg, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
-	src = (int*) ((char*) a1 + 0x1c);
+	src = (int*) ((char*) objekt + 0x1c);
 	for (;;) {
 		changed = 0;
 		n = 0;
@@ -60,7 +60,7 @@ void __cdecl fcn_005a1e40(int a0, int* a1)
 		if (changed) {
 			d2_SetForm(dlg, 1);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-			io_AppendText((char*) 0x188c, a0);
+			io_AppendText((char*) 0x188c, gebaeude);
 			if (n == 0) {
 				io_AppendText((char*) 0x188e);
 			} else {
