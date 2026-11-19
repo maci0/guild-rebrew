@@ -740929,14 +740929,49 @@ updated_at = "2026-11-12T14:16:09+00:00"
 
 ["GOLDTL.0x004d4430"]
 size = 391
-updated_by = "fix-sizes"
-updated_at = "2026-11-12T14:16:46+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-19T20:14:49+00:00"
+file = "src/Develop/Unassigned/GOLDTL.fcn_004d4430.c"
+symbol = "_fcn_004d4430"
+name = "fcn_004d4430"
+kind = "FUNCTION"
+blocker = "Control flow and every call match the native body (two loops over 16 slots, the 100.0-scaled threshold with a rand(100) <= 30 retry, the two branches filling the 0x2c-byte entries). Remaining difference is register allocation: native spills the argument (a0) and keeps the entry pointer base in ebp with i in ebx; ours keeps a0 in ebp. The frame now matches (0x1c, with a 4-float pos), but 138/391 bytes agree because the allocation shifts every later offset. Not yet tried: other local layouts, folding the first fcn_004ceac0 call into the loop header."
+blocker_delta = 6
 
 ["GOLDTL.0x004d4d80"]
 size = 170
-updated_by = "fix-sizes"
-updated_at = "2026-11-12T14:17:22+00:00"
+updated_by = "blocker"
+updated_at = "2026-11-19T20:09:55+00:00"
+file = "src/Develop/Unassigned/GOLDTL.fcn_004d4d80.c"
+symbol = "_fcn_004d4d80"
+name = "fcn_004d4d80"
+kind = "FUNCTION"
+status = "NEAR_MATCHING"
+similarity = 98.30508474576271
+blocker = "Body and every call match; the only difference is the order of two instructions before the fcn_004c4510 call: native loads eax=[esi+2] first and then stores v=-1 at [esp+0xc]; ours stores v first. Tried a local for the loaded value (157/170) and storing v after the call (151/170); neither reproduces the native order."
+blocker_delta = 10
 
+["GOLDTL.0x004d4d80".verification]
+source_hash = "91d920857ff2e5610cf8c1a70e51b3e6606a56b22ba21ee387d42bc9e597158a"
+reference_hash = "7f8ff68996294d546f80977a67b82d9242ee372f9741fdf71f6437a809ed23fb"
+reference_size = "170"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "6420e8dd1ef15325a42854be50d3d64a30034a67dae3714f4361cb7c06489e20"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x4d4d80"
+context_hash = ""
+defines = "[]"
+input_hash = "21963b989ba5f36588b2b544e6fef3b6a0b8280e3278e9945dcbfe84a3346cfd"
+aligned_pairs = 58
+target_instructions = 59
+candidate_instructions = 59
+hunks = 2
+similarity = 98.30508474576271
+status = "NEAR_MATCHING"
+writer = "test"
+measured_at = "2026-11-19T20:09:31+00:00"
 ["GOLDTL.0x0050ccd0"]
 size = 6
 updated_by = "fix-sizes"
