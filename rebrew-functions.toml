@@ -535452,33 +535452,31 @@ symbol = "_fcn_0050be50"
 name = "fcn_0050be50"
 kind = "FUNCTION"
 updated_by = "test"
-updated_at = "2026-11-12T22:43:05+00:00"
-status = "NEAR_MATCHING"
-blocker = "Quick-win wall, measured. Best body at SIZE_MISMATCH 24/102, obj 100: n=0; base = g_868050 + building[0]*0x24d; slot = base+0x23; for (i=0; i<0x40 && *slot; i++, slot++) { store = fcn_00502cd0(building[0x5d],2,6,0,*slot&0x7fff); if (store) out[n++]=store; } return n. Remaining delta is codegen class only: the reference keeps building in esi and the incremented slot pointer in edi, while this build keeps building in edi and slot in esi, and the reference splits the base address into two leas (lea eax,[edx+eax*4]; lea edi,[eax+0x23]) where this build folds them into one (lea esi,[edx+eax*4+0x23]), leaving the object 2 bytes short. Tried and measured identical or worse: single-expression address, type-local, e-alias, /G6 (7), /G5 //GB (24), /Oy- (9), /O1 (5)."
-blocker_delta = 78
-similarity = 81.81818181818183
+updated_at = "2026-11-19T21:48:34+00:00"
+status = "RELOC"
+similarity = 100.0
 
 ["GOLDTL.0x0050be50".verification]
-source_hash = "404ef2e3a4c13d912483b5ea02a32e75237ef1cd21b7c88979af23256fbce401"
+source_hash = "768a153a68de8bd7fa69a6551c4cb812ae69362cfd37dd434bbee04894f5efa3"
 reference_hash = "cc10e5c815897bc323fc16a037f20743ff24d580d5b9bfd95a64e13b53cba961"
 reference_size = "102"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "95104fbd80c1e609e30b13ef20b27b243f71e781f432fa5d79e9b296b7365371"
+compiler_hash = "fc41148f2e7e9ee0c72c98c79a165f654dfbdf91765fc52f7de3c9c813de3aab"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x50be50"
 context_hash = ""
 defines = "[]"
-input_hash = "477ecb4d068112663b7ae4c99e124fa4ca7ae522fa0041b1df544a923af0af65"
-aligned_pairs = 36
+input_hash = "1266b339b12c5197219dd638dd2082a6786221e11cb4617213dbf87f2e886f9c"
+aligned_pairs = 44
 target_instructions = 44
 candidate_instructions = 44
-hunks = 6
-similarity = 81.81818181818183
-writer = "verify"
-status = "NEAR_MATCHING"
-measured_at = "2026-11-13T12:22:04+00:00"
+hunks = 0
+similarity = 100.0
+status = "RELOC"
+writer = "test"
+measured_at = "2026-11-19T21:48:34+00:00"
 
 [["GOLDTL.0x0050be50".status_history]]
 old_status = "STUB"
@@ -535490,6 +535488,12 @@ updated_by = "test"
 old_status = "SIZE_MISMATCH"
 new_status = "NEAR_MATCHING"
 changed_at = "2026-11-12T22:43:05.260632+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0050be50".status_history]]
+old_status = "NEAR_MATCHING"
+new_status = "RELOC"
+changed_at = "2026-11-19T21:48:34.228077+00:00"
 updated_by = "test"
 ["GOLDTL.0x0060d860"]
 size = 103
