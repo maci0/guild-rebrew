@@ -37,7 +37,7 @@ int __cdecl fcn_0050db40(Entity* e, int extra)
 	d = -v;
 	d += gm_WalkEntityChain(e->slot);
 	if (e->type != 6 && e->type != 7) {
-		if (abs((int) v) / d > g_6628f0) {
+		if (abs((int) v) / d > 0.2) {
 			return 1;
 		}
 		return 0;

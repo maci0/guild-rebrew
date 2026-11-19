@@ -2,6 +2,7 @@
 
 #include <string.h>
 #include <stdio.h>
+#include "Develop/DieGildeAddOn/game/goods_plan.h"
 
 typedef struct GOLDTL_Msg481 {
 	int f0;                         /* 0x00 */
@@ -37,7 +38,6 @@ extern int g_100dc20;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100dc24;
 extern char* g_100df20;
-extern unsigned char g_100b0c0[];
 extern unsigned short* gm_CityEntity;
 extern int g_7747b4;
 
@@ -126,7 +126,7 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 	if (g_100dc20 == *(int*) (rec + 0x16c) && g_100dc38 < 4) {
 		j = 0;
 		n = ai_ResourceCount;
-		e = g_100b0c0;
+		e = (unsigned char*) g_100b0c0;
 		do {
 			if (j >= n) {
 				break;

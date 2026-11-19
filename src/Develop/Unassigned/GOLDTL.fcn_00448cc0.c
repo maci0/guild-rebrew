@@ -77,7 +77,7 @@ int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view
 				t[2] = m[2] * g_662d40[0] + m[6] * g_662d40[1]
 				    + m[10] * g_662d40[2];
 				t[1] = 0.0f; len = (float) sqrt(t[0] * t[0] + t[2] * t[2]);
-				if (!(len < g_662a3c)) {
+				if (!(len < 0.1f)) {
 					ang = -(float) fcn_004514d0((float*) 0x662d40, t);
 					t[0] = dir[0]; t[2] = dir[1];
 					x = (float) cos(ang) * t[0] + (float) sin(ang) * t[2];

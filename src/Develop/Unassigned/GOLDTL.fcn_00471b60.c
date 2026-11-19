@@ -1,16 +1,16 @@
-typedef struct Win {
-	int pad0;
-	int left;
-	int top;
-	int width;
-	int height;
-	char pad14[0x28 - 0x14];
-	int* children;
-	int count;
-	char pad30[0x27c - 0x30];
-	int slot;
-	char pad280[0x3cc - 0x280];
-} Win;
+#include "Develop/Units/d2.v1/d2_window_view.h"
+
+
+
+
+
+
+
+
+
+
+
+
 // SIZE 0x3cc
 typedef struct Obj {
 	int pad0;
@@ -34,7 +34,7 @@ typedef struct Slot {
 
 #include "client_types.h"
 extern Obj_1038140 g_1038140[];
-extern Win_1015f40 g_1015f40[0x60];
+
 extern char* g_1015ea0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -44,12 +44,12 @@ void __cdecl fcn_00469c40(int x, int y, int slot);
 void __cdecl fcn_00471b60(int k)
 {
 	Obj* o;
-	Win* w;
+	D2_WIN* w;
 	int i;
 
 	o = &((Obj*)g_1038140)[k];
 	for (i = 0; i < o->count; i++) {
-		w = &((Win*)g_1015f40)[o->wins[i]];
+		w = &((D2_WIN*)g_1015f40)[o->wins[i]];
 		if (((Slot*)g_1015ea0)[w->slot].link == 0) {
 			fcn_00469c40(d2_CenterX - w->width / 2, d2_DialogCenterY - w->height / 2, w->slot);
 		}

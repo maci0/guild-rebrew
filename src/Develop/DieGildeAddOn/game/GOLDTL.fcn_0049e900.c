@@ -14,7 +14,7 @@ typedef struct {
 extern int g_6643d8[];
 extern int g_7f4c04;
 extern unsigned char* lpGebaeudePROT;
-extern float g_662a3c;
+
 extern float g_662a94;
 extern float g_6628a8;
 
@@ -62,7 +62,7 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 			}
 		} else
 			t = 10;
-		d = (10 - t) * g_662a3c;
+		d = (10 - t) * 0.1f;
 		d = d * d;
 		v[1] = (int) (*(float*) 0x664378 * d);
 		v[2] = (int) (*(float*) 0x664374 * d);

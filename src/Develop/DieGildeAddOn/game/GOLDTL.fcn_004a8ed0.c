@@ -40,7 +40,7 @@ int __cdecl fcn_004a8ed0(char* a1, char* e, char* a3, char* a4, char* out)
 	if (g_77261c != 0) {
 		fcn_004a5e60(g_77261c, 4, f, 0, 100.0f, &found);
 	}
-	if (found == -1 && fcn_004a5e60(e, 6, f, 0, gm_RandomMod(0x20) + g_664154, &found) == 0) {
+	if (found == -1 && fcn_004a5e60(e, 6, f, 0, gm_RandomMod(0x20) + 32.0f, &found) == 0) {
 		return 0;
 	}
 	q = gm_StartFilteredEntitySearch(1, 1, found);

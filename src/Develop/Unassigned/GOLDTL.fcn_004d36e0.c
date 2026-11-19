@@ -41,7 +41,7 @@ char* __cdecl fcn_004d36e0(char* e)
         d = sqrt(dz * dz + dy * dy + dx * dx);
         if (parent != 0) {
             if (fcn_004ce270(e, parent) != 0) {
-                d = d * g_662aa0;
+                d = d * 10.0;
             } else if (parent != 0) {
                 if (fcn_004ce270(e, parent) != 0 || parent == e) {
                     if (parent != 0) {

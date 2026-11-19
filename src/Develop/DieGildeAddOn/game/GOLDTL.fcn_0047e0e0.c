@@ -1,17 +1,4 @@
-typedef struct Seg {
-	int id;
-	int next;
-	int owner;
-	char padc[8];
-	int want;
-	char pad18[0xc];
-	int busy;
-	int stock;
-	int cap;
-	char pad30[0xc];
-	int flags;
-} Seg;
-// SIZE 0x40
+#include "Develop/DieGildeAddOn/game/goods_plan.h"
 
 typedef struct Ware {
 	unsigned short id;
@@ -19,7 +6,6 @@ typedef struct Ware {
 	int unit;
 } Ware;
 
-extern Seg g_100b0c0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 extern char* g_773d78;
@@ -41,22 +27,22 @@ void __cdecl fcn_0047e0e0(int a1, char* pkt)
 	int i;
 
 	for (i = 0; i < ai_ResourceCount; i++) {
-		if ((g_100b0c0[i].flags & 0x20) == 0 && (g_100b0c0[i].flags & 0x200) == 0 && g_100b0c0[i].busy == 0 && g_100b0c0[i].stock < fcn_0050dfd0(pkt, g_100b0c0[i].id) / 4) {
-			ratio = fcn_0050bb50(g_100b0c0[i].id, g_773d75) / eval_ObjektPreis2Credits(g_100b0c0[i].id, 100);
+		if ((g_100b0c0[i].flags & 0x20) == 0 && (g_100b0c0[i].flags & 0x200) == 0 && g_100b0c0[i].allocated == 0 && g_100b0c0[i].stock < fcn_0050dfd0(pkt, g_100b0c0[i].goods_id) / 4) {
+			ratio = fcn_0050bb50(g_100b0c0[i].goods_id, g_773d75) / eval_ObjektPreis2Credits(g_100b0c0[i].goods_id, 100);
 			if (ratio < 0.8f) {
-				g_100b0c0[i].owner = 0;
-				want = (int) ((1.0f - ratio) * g_100b0c0[i].cap);
-				g_100b0c0[i].want = want;
-				if (want >= g_100b0c0[i].cap) {
-					want = g_100b0c0[i].cap;
+				g_100b0c0[i].supplier = 0;
+				want = (int) ((1.0f - ratio) * g_100b0c0[i].capacity);
+				g_100b0c0[i].requested = want;
+				if (want >= g_100b0c0[i].capacity) {
+					want = g_100b0c0[i].capacity;
 				}
-				g_100b0c0[i].want = want;
-				town = fcn_00503d10(g_100b0c0[i].id);
+				g_100b0c0[i].requested = want;
+				town = fcn_00503d10(g_100b0c0[i].goods_id);
 				if (town != 0) {
-					w = fcn_00502cd0(*(int*) (town + 0x14), 1, 0, g_100b0c0[i].id);
+					w = fcn_00502cd0(*(int*) (town + 0x14), 1, 0, g_100b0c0[i].goods_id);
 					if (w != 0) {
 						if (gm_GetMsgField(town, w) - (int) ((unsigned int) (fcn_0050dfd0(town, w->id) * w->unit) >> 2) >= 5) {
-							g_100b0c0[i].owner = (*(int*)&g_773d78);
+							g_100b0c0[i].supplier = g_773d78;
 						}
 					}
 				}

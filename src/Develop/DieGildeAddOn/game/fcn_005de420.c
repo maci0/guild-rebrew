@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern float g_6629d0;
-extern float g_662a3c;
+
 extern unsigned char g_773d75;
 extern void* g_14a558c;
 
@@ -56,9 +56,9 @@ int __cdecl fcn_005de420(char* a0, char* a1)
 		f = (int*) fcn_00502cd0(*(int*) ((char*) e + 0x14), one, 5);
 		while (f != 0) {
 			if (*(int*) ((char*) f + 0xe) > one) {
-				quantity = (((int) ((fcn_0042e450() * g_6629d0 + g_662a3c)
+				quantity = (((int) ((fcn_0042e450() * g_6629d0 + 0.1f)
 				    * *(int*) ((char*) f + 0xe))) < one) ? one
-				    : (int) ((fcn_0042e450() * g_6629d0 + g_662a3c)
+				    : (int) ((fcn_0042e450() * g_6629d0 + 0.1f)
 				    * *(int*) ((char*) f + 0xe));
 				fcn_004c51f0(-1, *(int*) ((char*) e + 2),
 				    *(unsigned short*) f, quantity, g_773d75, 0);

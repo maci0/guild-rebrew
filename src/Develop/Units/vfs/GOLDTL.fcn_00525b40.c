@@ -6,11 +6,11 @@
 #include "client_types.h"
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char state;
-	char pad3[0x219];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
 
 extern char* cm_LoadBuf;
 extern unsigned int g_aed328;
@@ -29,7 +29,7 @@ extern int gm_EntityCount;
 extern int g_773d7c;
 extern int cm_LastCrimeId;
 extern int g_100dc00;
-extern char g_7f4ca0[];
+
 
 void __cdecl fcn_005356e0(void);
 void __cdecl fcn_00535960(void);
@@ -121,8 +121,8 @@ int __cdecl fcn_00525b40(void)
 		return 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((struct house*)g_7f4ca0)[i].id != 0xffff && ((struct house*)g_7f4ca0)[i].state == 6) {
-			((struct house*)g_7f4ca0)[i].state = 5;
+		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6) {
+			((ENTITY_RECORD*)g_7f4ca0)[i].entity_state = 5;
 		}
 	}
 	if (fcn_00524040(f) == 0) {

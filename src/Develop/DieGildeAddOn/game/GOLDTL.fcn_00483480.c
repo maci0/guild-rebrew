@@ -1,4 +1,4 @@
-extern char g_100d0c0[];
+#include "production_goods.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100dc20;
 extern int g_100dc3c;
@@ -27,9 +27,9 @@ void __cdecl ai_MeisterCollectTrans(int);
 void __cdecl ai_MeisterTrade(int, int);
 void __cdecl fcn_00487f90(void *);
 
-typedef struct {
-	int v[0x16];
-} ENTRY;
+
+
+
 typedef struct {
 	int v[0x10];
 } RECORD;
@@ -312,7 +312,7 @@ tail:
 
 			src = pp - 1;
 			dst = g_100dc38 * 0x58 + 0x100dc60;
-			*(ENTRY *) dst = *(ENTRY *) src;
+			*(PRODUCTION_GOODS_RECORD *) dst = *(PRODUCTION_GOODS_RECORD *) src;
 			for (j = 0; j < 4; j++) {
 				int id;
 
@@ -400,7 +400,7 @@ tail:
 					int dst;
 
 					dst = g_100dc3c * 0x58 + 0x100ddc0;
-					*(ENTRY *) dst = *(ENTRY *) arg.entry;
+					*(PRODUCTION_GOODS_RECORD *) dst = *(PRODUCTION_GOODS_RECORD *) arg.entry;
 					g_100dc3c += 1;
 				}
 			}
@@ -412,7 +412,7 @@ tail:
 				int dst;
 
 				dst = g_100dc3c * 0x58 + 0x100ddc0;
-				*(ENTRY *) dst = *(ENTRY *) arg.entry;
+				*(PRODUCTION_GOODS_RECORD *) dst = *(PRODUCTION_GOODS_RECORD *) arg.entry;
 				g_100dc3c += 1;
 			}
 		}

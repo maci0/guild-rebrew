@@ -2,16 +2,16 @@
 
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3[0x219];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
-extern char g_7f4ca0[];
+
 extern int g_7747f0;
 extern char g_774964;
 extern char* g_773d78;
@@ -40,7 +40,7 @@ void __cdecl fcn_005703b0(char* u)
 	switch (*(int*) (u + 0x70)) {
 	case 0:
 		if (g_774964 != 0) {
-			((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].type = 5;
+			((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_state = 5;
 			(*(int*) (u + 0x70))++;
 		}
 		break;
@@ -66,7 +66,7 @@ void __cdecl fcn_005703b0(char* u)
 		*(int*) (u + 0x58) = gm_RandomMod(0x3c);
 		break;
 	case 2:
-		((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].type = 6;
+		((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_state = 6;
 	case -2:
 	case -1:
 		fcn_00546190(u);

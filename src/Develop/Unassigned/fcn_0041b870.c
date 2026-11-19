@@ -3,7 +3,7 @@
 extern float g_6777b0[3];
 extern float g_6777bc[3];
 extern float g_6b5df8[3];
-extern float g_662c30;
+/* 1/255 is written as a float literal below. */
 extern void* g_6b5de0;
 
 /* ADDRESS: GOLDTL 0x0041b870 */
@@ -20,7 +20,7 @@ int __cdecl fcn_0041b870(void)
     hi = 1.0 / g_6777bc[2];
 
     for (i = 0; i < 0x100; i++) {
-        m = i * g_662c30;
+        m = i * 0.0039215689f;
 
         st = __min(1.0, __max(0.0,
             pow(g_6777b0[0] * m, hi) + g_6b5df8[0]));

@@ -57,7 +57,7 @@ void __cdecl fcn_004d5740(char* a0, int a1, int a2)
 		*(int*) (g_1015ea0 + h * 0x2f4 + 0x6c) = 1;
 		*(int*) (g_1015ea0 + h * 0x2f4 + 0x84) = 0x56;
 		io_FormatTextBuffer(buf, "%1N1 %i%", *(unsigned short*) rec,
-			     (int) (fcn_004ff040(rec) * g_662c38));
+			     (int) (fcn_004ff040(rec) * 100.0));
 		fcn_0046f940(h, buf);
 		p = fcn_004ce610(rec);
 		if (p != 0 && *p != 0) {

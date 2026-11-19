@@ -1,11 +1,11 @@
 
 
 // SIZE 0x3cc
-typedef struct {
-	char pad0[0xc];
-	int width;
-	char pad10[0x3cc - 0x10];
-} Slot;
+#include "Develop/Units/d2.v1/d2_window_view.h"
+
+
+
+
 
 extern int g_6a25b8;
 extern char* g_7746c4;
@@ -26,7 +26,7 @@ extern int d2_CurrentValueBar;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
 #include "client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+
 
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
@@ -66,7 +66,7 @@ void __cdecl fcn_0052e5a0(void)
 	fcn_005186c0(*(unsigned short*) (g_7746c8 + 0x27), 2, 1, name);
 	io_AppendText(g_6a2f9c, name, *g_7746c8 * 14 + 0x48e, g_7746c8 + 5);
 	d2_SetForm(g_6a25b8, 0);
-	fcn_0046f740(((((Slot*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1, 0x4c, *g_7746c8 + 0x427, d2_CurrentWindowId);
+	fcn_0046f740(((((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1, 0x4c, *g_7746c8 + 0x427, d2_CurrentWindowId);
 	d2_CurrentValueBar = fcn_004677e0(0x15, 0x7a, 0x30, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 	d2_SetElementValue(d2_CurrentValueBar, 0, 0x64, pct);
 	g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0cc);

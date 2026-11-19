@@ -11,20 +11,20 @@ struct step {
 };
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int owner;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char g_77e0a0[];
 extern char g_776709;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+
 extern char* txt_TextEntries[];
 
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
@@ -42,7 +42,7 @@ void __cdecl fcn_005700d0(char* u)
 	case 0:
 		t = ((struct step*)g_77e0a0)[*(int*) (u + 0xac)].msg;
 		if (t != 0 && t != -1 && g_776709 != 0) {
-			fcn_00545d40(((struct house*)g_7f4ca0)[g_774970].owner, -1, txt_TextEntries[t], 0x40, 0x5f9, 0);
+			fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1, txt_TextEntries[t], 0x40, 0x5f9, 0);
 		}
 		(*(int*) (u + 0xac))++;
 		if (((struct step*)g_77e0a0)[*(int*) (u + 0xac)].msg == 0) {

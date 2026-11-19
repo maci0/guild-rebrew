@@ -5,20 +5,7 @@
 #ifndef CLIENT_TYPES_H
 #define CLIENT_TYPES_H
 
-/* g_100b0c0 */
-typedef struct Seg {
-	int id;
-	int next;
-	int owner;
-	char padc[8];
-	int want;
-	char pad18[0xc];
-	int busy;
-	int stock;
-	int cap;
-	char pad30[0xc];
-	int flags;
-} Seg;
+#include "Develop/DieGildeAddOn/game/goods_plan.h"
 
 /* g_100dc20 */
 typedef struct {
@@ -26,7 +13,7 @@ typedef struct {
 	char pad4[0x14];
 	int count;
 	char pad1c[0x2e4];
-	Seg lights[4];
+	GOODS_PLAN_ENTRY lights[4];
 } LightState;
 
 /* g_1007ce0 */
@@ -258,13 +245,13 @@ typedef struct {
 	char* item;
 } Btn_776c60;
 
-/* g_7774a0 */
-typedef struct {
-	int x0;
-	int x4;
-	int btn;
-	char padc[0x34];
-} Loot_7774a0;
+
+
+
+
+
+
+
 
 /* g_778da0, g_7796e0 */
 typedef struct {
@@ -298,15 +285,15 @@ typedef struct {
 	int x8;
 } s_77e8c0;
 
-/* g_77e980 */
-typedef struct {
-	unsigned char kind;
-	char pad1[7];
-	unsigned short house;
-	char pada[0x66];
-	int target;
-	char pad74[0xd8];
-} unit_77e980;
+
+
+
+
+
+
+
+
+
 
 /* g_7e2ac0 */
 typedef struct {

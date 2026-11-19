@@ -3,7 +3,7 @@
 extern char g_6811b0[];
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern float g_662cf8; extern int g_6652f8[]; extern float g_662c30;
+extern float g_662cf8; extern int g_6652f8[];
 
 int __cdecl d2_SetForm(int win, int layer);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
@@ -129,6 +129,6 @@ void __cdecl fcn_0058bfd0(int* a0)
 	io_AppendText("$7<$R%s$0<$4>$L%s$A$0>", 0x4102, buf);
 	io_FormatTextBuffer(buf, "%i %%",
 	             (int) ((float) *(unsigned char*) ((char*) v1 + 0xc) *
-	                    g_662c30 * g_662cf8));
+	                    0.0039215689f * g_662cf8));
 	io_AppendText("$7<$R%s$0<$4>$L%s$A$0>", 0x4103, buf);
 }

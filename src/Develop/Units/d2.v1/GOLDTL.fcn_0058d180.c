@@ -4,15 +4,15 @@
 #include <string.h>
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int handle;
-	char pad8[0x180];
-	unsigned char grave;
-	char pad189[0x93];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
+
+
 
 // SIZE 0xf8
 #include "client_types.h"
@@ -34,7 +34,7 @@ struct msg {
 };
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+
 extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
@@ -72,7 +72,7 @@ int __cdecl fcn_0058d180(char* who, char* a2)
 	int s;
 	int i;
 	int id;
-	struct house* hh;
+	ENTITY_RECORD* hh;
 
 	r = 0;
 	if (fcn_0057b9d0(who, *(int*) (a2 + 4), *(unsigned char*) (a2 + 8)) != 0) {
@@ -99,8 +99,8 @@ int __cdecl fcn_0058d180(char* who, char* a2)
 			if (d2_CurrentElementId == ok) {
 				hh = 0;
 				for (i = 0; i < 768; i++) {
-					if (((struct house*)g_7f4ca0)[i].grave != 0) {
-						hh = &((struct house*)g_7f4ca0)[i];
+					if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_17c[12] != 0) {
+						hh = &((ENTITY_RECORD*)g_7f4ca0)[i];
 						break;
 					}
 				}
@@ -110,12 +110,12 @@ int __cdecl fcn_0058d180(char* who, char* a2)
 					memset(&m, 0, sizeof(m));
 					m.kind = 0x8d;
 					m.code = 1;
-					m.owner = ((struct house*)g_7f4ca0)[*(unsigned short*) (who + 0x27)].handle;
+					m.owner = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (who + 0x27)].entity_id;
 					m.target = *(int*) (who + 1);
 					m.when = gm_GameTime;
 					m.who = *(int*) (a2 + 4);
 					m.slot = a2[8];
-					m.field = hh->handle;
+					m.field = hh->entity_id;
 					id = fcn_004c5530(&m);
 					while (id != -1 && fcn_004c4450(id) == 0) {
 						fcn_005373e0(0, 0x20007);

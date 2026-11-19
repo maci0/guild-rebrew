@@ -1,15 +1,15 @@
-typedef struct {
-	int ent;
-	int a4;
-	int a8;
-	int ac;
-	struct {
-		int btn;
-		int item;
-	} s[6];
-} Slot_5c6a10;
+#include "Develop/Units/d2.v1/d2_training_rows.h"
 
-extern Slot_5c6a10 g_7774a0[32];
+
+
+
+
+
+
+
+
+
+
 extern char* g_1015ea0;
 extern char* lpObjektePROT;
 extern unsigned char g_10161bc[];
@@ -35,7 +35,7 @@ float __cdecl fcn_004ff040(int);
 /* ADDRESS: GOLDTL 0x005c6a10 */
 unsigned int __cdecl fcn_005c6a10(unsigned int a0, unsigned int a1)
 {
-	Slot_5c6a10* slot;
+	D2_TRAINING_ROW* slot;
 	unsigned short* item;
 	int* list;
 	int* p;
@@ -55,58 +55,58 @@ unsigned int __cdecl fcn_005c6a10(unsigned int a0, unsigned int a1)
 	p = (int*) ((char*) g_7774a0 + 0x10);
 	for (button_base = 0, row_offset = 0, row_y = 0x28; row_y < 0xf28;
 	     row_y += 0x78, row_offset += 0x40, button_base += 8) {
-		slot = (Slot_5c6a10*) ((char*) g_7774a0 + row_offset);
-		if (!slot->ent)
+		slot = (D2_TRAINING_ROW*) ((char*) g_7774a0 + row_offset);
+		if (!slot->entity)
 			continue;
 		g_775334++;
 		for (list = (int*) 0x7e4260; (int) list < 0x7e42e0; list++) {
-			if (*list == slot->ent)
+			if (*list == slot->entity)
 				break;
 		}
 		if ((int) list >= 0x7e42e0) {
-			slot->ent = 0;
-			if (slot->a4 != -1) {
-				fcn_0046b2b0(slot->a4);
-				slot->a4 = -1;
+			slot->entity = 0;
+			if (slot->portrait_element != -1) {
+				fcn_0046b2b0(slot->portrait_element);
+				slot->portrait_element = -1;
 			}
-			if (slot->a8 != -1) {
-				fcn_0046b2b0(slot->a8);
-				slot->a8 = -1;
+			if (slot->row_element != -1) {
+				fcn_0046b2b0(slot->row_element);
+				slot->row_element = -1;
 			}
-			if (slot->ac != -1) {
-				fcn_0046b2b0(slot->ac);
-				slot->ac = -1;
+			if (slot->window != -1) {
+				fcn_0046b2b0(slot->window);
+				slot->window = -1;
 			}
 			continue;
 		}
-		d2_CurrentWindowId = slot->ac;
+		d2_CurrentWindowId = slot->window;
 		for (j = 0; j < 6; j++) {
-			if (slot->s[j].item != 0
-			    && !fcn_00502cd0(*(int*) (slot->ent + 0x178), 1, 0, slot->s[j].item)) {
-				fcn_0046b2b0(slot->s[j].btn);
-				slot->s[j].btn = -1;
-				slot->s[j].item = 0;
+			if (slot->item[j].objekt_id != 0
+			    && !fcn_00502cd0(*(int*) (slot->entity + 0x178), 1, 0, slot->item[j].objekt_id)) {
+				fcn_0046b2b0(slot->item[j].button);
+				slot->item[j].button = -1;
+				slot->item[j].objekt_id = 0;
 			}
 		}
-		d2_CurrentWindowId = slot->ac;
-		io_AppendText(0x6ac790, *(unsigned short*) slot->ent,
-			(int) (fcn_004ff040(slot->ent) * 100.0));
+		d2_CurrentWindowId = slot->window;
+		io_AppendText(0x6ac790, *(unsigned short*) slot->entity,
+			(int) (fcn_004ff040(slot->entity) * 100.0));
 		io_AppendText(0x16ac);
-		fcn_00534160(0x50, 0x16, *(unsigned char*) (slot->ent + 0x83), 0x4f1);
+		fcn_00534160(0x50, 0x16, *(unsigned char*) (slot->entity + 0x83), 0x4f1);
 		io_AppendText(0x16ad);
-		fcn_00534160(0x50, 0x25, *(unsigned char*) (slot->ent + 0x82), 0x4f1);
-		item = fcn_00502cd0(*(int*) (slot->ent + 0x178), 1, 5);
+		fcn_00534160(0x50, 0x25, *(unsigned char*) (slot->entity + 0x82), 0x4f1);
+		item = fcn_00502cd0(*(int*) (slot->entity + 0x178), 1, 5);
 		while (item) {
 			if (*(char*) (lpObjektePROT + *item * 0x41) != '\t') {
 				for (j = 0; j < 6; j++) {
-					if (slot->s[j].item == *item)
+					if (slot->item[j].objekt_id == *item)
 						break;
 				}
 				if (j < 6)
 					goto present;
 				d2_SetForm(a0, a1);
 				for (j = 0; j < 6; j++) {
-					if (!slot->s[j].item)
+					if (!slot->item[j].objekt_id)
 						break;
 				}
 				if (j < 6) {
@@ -128,37 +128,37 @@ present:
 		if (k < 10 || k > 12)
 			continue;
 		for (i = 0; i < 32; i++) {
-			if (g_7774a0[i].ent == *list)
+			if (g_7774a0[i].entity == *list)
 				break;
 		}
 		if (i < 32)
 			continue;
 		for (i = 0; i < 32; i++) {
-			if (!g_7774a0[i].ent)
+			if (!g_7774a0[i].entity)
 				break;
 		}
 		if (i >= 32)
 			continue;
 		d2_SetForm(a0, a1);
-		g_7774a0[i].ent = *list;
+		g_7774a0[i].entity = *list;
 		h = fcn_0046f740(0, i * 0x78, 0x74c, d2_CurrentWindowId);
-		g_7774a0[i].a8 = h;
+		g_7774a0[i].row_element = h;
 		*(int*) (g_1015ea0 + h * 0x2f4 + 0x5c) = 1;
-		g_7774a0[i].a4 = fcn_0046f740(0x10, i * 0x78 + 5,
-			*(int*) (g_7774a0[i].ent + 0x18c), d2_CurrentWindowId);
+		g_7774a0[i].portrait_element = fcn_0046f740(0x10, i * 0x78 + 5,
+			*(int*) (g_7774a0[i].entity + 0x18c), d2_CurrentWindowId);
 		h = fcn_0046f100(0x40, i * 0x78, 0xb4, 0x50, 0x10, d2_CurrentWindowId);
-		g_7774a0[i].ac = h;
+		g_7774a0[i].window = h;
 		fcn_00472900(*(int*) (g_10161bc + h * 0x3cc), 0x54);
-		io_AppendText(0x16ab, *(unsigned short*) g_7774a0[i].ent,
-			*(unsigned char*) (g_7774a0[i].ent + 0x83));
+		io_AppendText(0x16ab, *(unsigned short*) g_7774a0[i].entity,
+			*(unsigned char*) (g_7774a0[i].entity + 0x83));
 	}
 	for (i = 0; i < 32; i++) {
-		if (!g_7774a0[i].ent)
+		if (!g_7774a0[i].entity)
 			continue;
 		for (j = 0; j < 6; j++) {
-			if (g_7774a0[i].s[j].btn != -1 && fcn_00471f80(g_7774a0[i].s[j].btn)) {
-				fcn_00473690(g_7774a0[i].s[j].item + 0xdf,
-					fcn_00471f80(g_7774a0[i].s[j].btn));
+			if (g_7774a0[i].item[j].button != -1 && fcn_00471f80(g_7774a0[i].item[j].button)) {
+				fcn_00473690(g_7774a0[i].item[j].objekt_id + 0xdf,
+					fcn_00471f80(g_7774a0[i].item[j].button));
 				built = 1;
 			}
 		}

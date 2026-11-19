@@ -22,16 +22,16 @@ struct msg {
 };
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int owner;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+
 
 char* __cdecl fcn_005463a0(int, ...);
 char* __cdecl he_fn_Handlung(void);
@@ -73,7 +73,7 @@ void __cdecl fcn_0057a700(char* u)
 	if (*(int*) (u + 0xb0) > 2) {
 		*(int*) (u + 0xb0) = 2;
 	}
-	fcn_005100f0(((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, -((*(int*) (u + 0xb4) + 2) * (*(int*) (u + 0xb0) + 2)));
+	fcn_005100f0(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -((*(int*) (u + 0xb4) + 2) * (*(int*) (u + 0xb0) + 2)));
 	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
 	fcn_004c5620(0, u);
 }

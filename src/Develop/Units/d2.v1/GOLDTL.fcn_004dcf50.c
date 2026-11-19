@@ -3,7 +3,7 @@ extern int g_68bfc0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern float g_662b28;
-extern unsigned char g_9a3800[];
+#include "client_straftat.h"
 extern char g_9b0eb4[];
 extern char g_9b1210[];
 extern char g_9b156c[];
@@ -253,7 +253,7 @@ int __cdecl fcn_004dcf50(int a0)
 		}
 		cnt = 0;
 		for (i = 0; i < n; i++) {
-			sel[i] = *(int*) (g_9a3800 + list[i] * 45);
+			sel[i] = g_9a3800[list[i]].id;
 			cnt++;
 		}
 		for (; cnt < 0x20; cnt++) {
@@ -264,13 +264,13 @@ int __cdecl fcn_004dcf50(int a0)
 				if (flags[i] == -1) {
 					continue;
 				}
-				memcpy(rec.c, g_9a3800 + list[i] * 45, 45);
+				memcpy(rec.c, &g_9a3800[list[i]], 45);
 				flags[i] = 1;
 				for (j = i + 1; j < n; j++) {
 					if (flags[j] == -1) {
 						continue;
 					}
-					memcpy(tbl.c, g_9a3800 + list[j] * 45, 45);
+					memcpy(tbl.c, &g_9a3800[list[j]], 45);
 					if (rec.c[0x1c] == tbl.c[0x1c]) {
 						flags[j] = -1;
 						flags[i] += 1;
@@ -280,7 +280,7 @@ int __cdecl fcn_004dcf50(int a0)
 		}
 		fsum = 0.0f;
 		for (j = 0; j < n; j++) {
-			memcpy(rec.c, g_9a3800 + list[j] * 45, 45);
+			memcpy(rec.c, &g_9a3800[list[j]], 45);
 			fcn_004f4830(rec.c[0x1c] & 0xff, tbl.i);
 			if (flags[j] != -1) {
 				fsum += (float) tbl.i[3] * f;

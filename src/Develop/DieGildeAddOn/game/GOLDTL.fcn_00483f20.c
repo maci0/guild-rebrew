@@ -13,17 +13,17 @@ typedef struct {
 } Ent483f20;
 
 /* SIZE 0x58, production entry */
-typedef struct {
-	int id;				/* +0x00 */
-	char pad04[0x18];
-	int min1;			/* +0x1c */
-	int min2;			/* +0x20 */
-	char pad24[0x18];
-	int cost;			/* +0x3c */
-	int limit;			/* +0x40 */
-	char pad44[0x10];
-	int flags;			/* +0x54 */
-} Prod483f20;
+#include "production_goods.h"
+
+
+
+
+
+
+
+
+
+
 
 /* SIZE 0x40, resource entry */
 typedef struct {
@@ -41,7 +41,7 @@ typedef struct {
 
 extern char* lpObjektePROT;			/* entity type table, entry stride 0x41 */
 extern char g_7f4ca0[];			/* slot table, stride 0x21c */
-extern Prod483f20 g_100d0c0[];		/* production entries */
+ 
 extern int g_100b0ac;			/* production entry count */
 extern char g_100b0c4[];		/* resource entry table, stride 0x40 */
 extern int ai_ResourceCount;			/* resource entry count */
@@ -59,8 +59,8 @@ void __cdecl fcn_00487000(Ent483f20*);
 void __cdecl fcn_00487970(void*, Ent483f20*, int);
 void __cdecl fcn_00487c00(void*, Ent483f20*, int);
 void __cdecl fcn_00487470(Ent483f20*);
-int __cdecl fcn_00486640(Ent483f20*, Prod483f20*, int);
-void __cdecl fcn_004868d0(Ent483f20*, Prod483f20*);
+int __cdecl fcn_00486640(Ent483f20*, PRODUCTION_GOODS_RECORD*, int);
+void __cdecl fcn_004868d0(Ent483f20*, PRODUCTION_GOODS_RECORD*);
 int __cdecl fcn_005b1e40(int);
 void* __cdecl fcn_00503d10(int);
 int __cdecl gm_eval_SlotVoll(void*, int, int);
@@ -78,7 +78,7 @@ int __cdecl wsprintfA(char*, char*, ...);
 #define slot_at(id) (g_7f4ca0 + (id) * 0x21c)
 
 /* Runs the start preconditions and returns fcn_00486640's answer. */
-static __inline int can_start(Ent483f20* e, void* rec, Prod483f20* p, int human)
+static __inline int can_start(Ent483f20* e, void* rec, PRODUCTION_GOODS_RECORD* p, int human)
 {
 	char* type;
 	void* obj;
@@ -87,45 +87,45 @@ static __inline int can_start(Ent483f20* e, void* rec, Prod483f20* p, int human)
 	if ((p->flags & 0x400) != 0) {
 		return 0;
 	}
-	type = type_entry(p->id);
-	if ((*type == 0x17 || *type == 0x25) && p->cost >= 5) {
+	type = type_entry(p->goods_id);
+	if ((*type == 0x17 || *type == 0x25) && p->unk_3c >= 5) {
 		return 0;
 	}
-	if (*(unsigned char*) ((char*) rec + 0x1c) < p->min1) {
+	if (*(unsigned char*) ((char*) rec + 0x1c) < p->min_1) {
 		return 0;
 	}
-	if (*(unsigned char*) ((char*) rec + 0x1d) < p->min2) {
+	if (*(unsigned char*) ((char*) rec + 0x1d) < p->min_2) {
 		return 0;
 	}
-	if (*(unsigned short*) (type + 0x36) > p->limit) {
+	if (*(unsigned short*) (type + 0x36) > p->unk_40) {
 		return 0;
 	}
-	obj = fcn_00503d10(p->id);
+	obj = fcn_00503d10(p->goods_id);
 	if (obj == 0) {
 		return 0;
 	}
-	amount = gm_eval_SlotVoll(obj, p->id, 1000000);
-	if (amount < *(unsigned short*) (type_entry(p->id) + 0x36) + p->cost) {
+	amount = gm_eval_SlotVoll(obj, p->goods_id, 1000000);
+	if (amount < *(unsigned short*) (type_entry(p->goods_id) + 0x36) + p->unk_3c) {
 		return 0;
 	}
 	return fcn_00486640(e, p, human);
 }
 
-static __inline void start_production(Ent483f20* e, Prod483f20* p, char* fmt, char* msg)
+static __inline void start_production(Ent483f20* e, PRODUCTION_GOODS_RECORD* p, char* fmt, char* msg)
 {
 	p->flags |= 8;
 	fcn_004868d0(e, p);
-	e->item = (unsigned short) p->id;
+	e->item = (unsigned short) p->goods_id;
 	if (fmt != 0) {
-		wsprintfA(msg, fmt, type_entry(p->id) + 1);
+		wsprintfA(msg, fmt, type_entry(p->goods_id) + 1);
 	}
 }
 
 /* ADDRESS: GOLDTL 0x00483f20 */
 void __cdecl fcn_00483f20(Ent483f20* e)
 {
-	Prod483f20* prod;
-	Prod483f20* scan;
+	PRODUCTION_GOODS_RECORD* prod;
+	PRODUCTION_GOODS_RECORD* scan;
 	Res483f20* res;
 	Plan483f20 plan;
 	char* slot;
@@ -164,10 +164,10 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 			e->flags |= 0x100;
 		} else if (e->item != 0) {
 			for (i = 0; i < g_100b0ac; i++) {
-				if (g_100d0c0[i].id != e->item) {
+				if (g_100d0c0[i].goods_id != e->item) {
 					continue;
 				}
-				if (g_100d0c0[i].limit >= *(unsigned short*) (type_entry(g_100d0c0[i].id) + 0x36) &&
+				if (g_100d0c0[i].unk_40 >= *(unsigned short*) (type_entry(g_100d0c0[i].goods_id) + 0x36) &&
 				    fcn_00486640(e, &g_100d0c0[i], 1) != 0) {
 					start_production(e, &g_100d0c0[i], 0, msg);
 					goto after_start;
@@ -178,10 +178,10 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 	} else {
 		found = 0;
 		for (i = 0; i < g_100b0ac; i++) {
-			if (g_100d0c0[i].id != e->item) {
+			if (g_100d0c0[i].goods_id != e->item) {
 				continue;
 			}
-			if (g_100d0c0[i].limit >= *(unsigned short*) (type_entry(g_100d0c0[i].id) + 0x36) &&
+			if (g_100d0c0[i].unk_40 >= *(unsigned short*) (type_entry(g_100d0c0[i].goods_id) + 0x36) &&
 			    fcn_00486640(e, &g_100d0c0[i], 1) != 0) {
 				start_production(e, &g_100d0c0[i], 0, msg);
 				found = 1;
@@ -197,8 +197,8 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 	slot = slot_at(*(unsigned short*) ((char*) e->root + 0x27));
 	if (*(char*) (slot + 2) == 6 &&
 	    (id = fcn_005b1e40(e->root)) != 0) {
-		for (scan = g_100d0c0, i = 0; (char*) scan < (char*) 0x100dbc0; scan = (Prod483f20*) ((char*) scan + 0x58), i++) {
-			if (scan->id == id) {
+		for (scan = g_100d0c0, i = 0; (char*) scan < (char*) 0x100dbc0; scan = (PRODUCTION_GOODS_RECORD*) ((char*) scan + 0x58), i++) {
+			if (scan->goods_id == id) {
 				if (can_start(e, stk, scan, 1)) {
 					start_production(e, scan, (char*) 0x67dcc0, msg);
 					goto after_start;
@@ -254,7 +254,7 @@ after_start:
 			for (k = 0; k < 4; k++) {
 				id = *(int*) ((char*) prod + 4 + k * 4);
 				if (*(int*) (g_100b0e8 + id * 0x40) <
-				    (int) *(unsigned short*) (type_entry(prod->id) + 0x26 + k * 2)) {
+				    (int) *(unsigned short*) (type_entry(prod->goods_id) + 0x26 + k * 2)) {
 					prod->flags &= ~8;
 				}
 			}

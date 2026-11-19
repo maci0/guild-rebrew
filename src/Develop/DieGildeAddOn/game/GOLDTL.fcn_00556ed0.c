@@ -109,10 +109,10 @@ void __cdecl fcn_00556ed0(char* s)
 				if (*(unsigned char*) (lpGebaeudePROT + *(unsigned char*) home * 0x24d) == 2) {
 					x = (float) fcn_0050c710(home, 8, 1) * g_665370 * g_66430c;
 				} else {
-					x = (float) fcn_0050c710(home, 8, 1) * g_6628ac * g_66430c;
+					x = (float) fcn_0050c710(home, 8, 1) * 0.02f * g_66430c;
 				}
 			} else {
-				y = g_664f08 - gm_RandomFloat01() * g_66430c * g_662908;
+				y = g_664f08 - gm_RandomFloat01() * g_66430c * 0.5;
 			}
 			m = fcn_005c6270((char*) p, 0x2b3) != 0 ? y * 0.75f : y;
 			if (f < m - x) {

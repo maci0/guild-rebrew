@@ -4,13 +4,12 @@
 typedef Btn_776c60 Btn;
 // SIZE 0x8
 
-typedef Win_f8f120 Win;
+#include "Develop/Units/d2.v1/gold_window.h"
 // SIZE 0x3c4
 
 extern int g_6abb00;
 extern short g_fb9070;
 extern short g_fb9072;
-extern Win_f8f120 g_f8f120[];
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern Btn_776c60 g_776c60[6];
@@ -54,10 +53,10 @@ void __cdecl fcn_005bad60(void)
 	fcn_0057e880(0x14, 0, 0, 0);
 	dlg = fcn_00470820(g_fb9072 - 0x158, g_fb9070 - 0x108, s_6ac77c);
 	d2_SetForm(dlg, 0);
-	g_f8f120[d2_CurrentWindowId].x398 = 0x18;
-	g_f8f120[d2_CurrentWindowId].x39c = 0x18;
-	g_f8f120[d2_CurrentWindowId].x3a0 = 0x18;
-	g_f8f120[d2_CurrentWindowId].x3a4 = 0x18;
+	g_f8f120[d2_CurrentWindowId].margin[0] = 0x18;
+	g_f8f120[d2_CurrentWindowId].margin[1] = 0x18;
+	g_f8f120[d2_CurrentWindowId].margin[2] = 0x18;
+	g_f8f120[d2_CurrentWindowId].margin[3] = 0x18;
 	d2_SetForm(dlg, 0);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_005c5da0(d2_CurrentWindowId, 0, 0, g_774970, 0x1f3b);

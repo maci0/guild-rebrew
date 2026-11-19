@@ -28,7 +28,7 @@ int __cdecl fcn_004f7890(void* entity, void* request)
 		fcn_004fa5f0(buf, 0, 0x657c7);
 		return 2;
 	} else if (*(int*) request == 1 && *(char*) ((char*) entity + 2) == 6) {
-		io_FormatTextBuffer((char*) request + 0x14, (int) g_679060, 0x1d86);
+		io_FormatTextBuffer((char*) request + 0x14, (int) "%s", 0x1d86);
 	}
 	return 2;
 }

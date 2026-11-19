@@ -40,7 +40,6 @@ extern float g_100b0e0;
 extern int g_100d10c;
 extern float g_100d0f4;
 extern LightState g_100dc20;
-extern Seg g_100b0c0[];
 
 char *__cdecl fcn_00502cd0(int, int, int, int, int, ...);
 void __cdecl fcn_00487970(char *, char *, int);

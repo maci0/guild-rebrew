@@ -229,7 +229,7 @@ void __cdecl ob_HandleBepflanzung(int a0)
 			v17 = fcn_004c4480(v20);
 			if (v17) {
 				v39 = (int) eval_ObjektPreis2Credits(*v4, 100);
-				v3 = (int) ((int) v39 * g_662908);
+				v3 = (int) ((int) v39 * 0.5);
 				if (v3 <= 0x400) {
 					v3 = 0x400;
 				}

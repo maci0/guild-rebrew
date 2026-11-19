@@ -2,15 +2,15 @@
 
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int handle;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern int d2_CurrentWindowId;
@@ -33,7 +33,7 @@ int __cdecl fcn_0050b710(int, unsigned char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_0050b750(int, unsigned char);
-int __cdecl fcn_00526010(struct house*, int, unsigned char);
+int __cdecl fcn_00526010(ENTITY_RECORD*, int, unsigned char);
 void __cdecl fcn_004eeb50(char*, float);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -87,11 +87,11 @@ int __cdecl fcn_00586800(char* e, int* unused)
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
 				c = fcn_0050b750(fcn_00471f80(line), g_773d75);
-				if (fcn_00526010(&((struct house*)g_7f4ca0)[g_774970], c, g_773d75) != 0) {
+				if (fcn_00526010(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], c, g_773d75) != 0) {
 					fcn_004eeb50(p, (float) c / n * f * 0.75f);
 					r = 1;
 					g_774654 = 1;
-					fcn_004c5150(*(int*) (p + 4), ((struct house*)g_7f4ca0)[g_774970].handle, g_773d75, c);
+					fcn_004c5150(*(int*) (p + 4), ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, g_773d75, c);
 				}
 			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;

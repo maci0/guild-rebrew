@@ -62,7 +62,7 @@ unsigned int __cdecl fcn_005086f0(unsigned short* a0)
 	}
 	slots[1] = 0;
 	slots[0] = slots[6];
-	value = gm_RandomMod((int) ((double) slots[0] * g_662908)) & 0xffff;
+	value = gm_RandomMod((int) ((double) slots[0] * 0.5)) & 0xffff;
 	if (value == 0) {
 		return 0;
 	}

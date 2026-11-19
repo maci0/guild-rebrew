@@ -6,7 +6,7 @@ extern float g_6652c4;
 extern float g_6628a0;
 extern double g_665f00;
 extern double g_664f08;
-extern double g_662b20;
+
 
 char* __cdecl gm_LookupEntityRecordById(int);
 
@@ -42,7 +42,7 @@ void __cdecl fcn_0057d830(char* u, int count)
 	if (gm_RandomFloat01() + g_6628a0 < mult) {
 		for (i = 0; i < 4; i++) {
 			if (*(unsigned short*) (u + 0xc8 + i * 2) == 0) {
-				if (gm_RandomFloat01() > g_662b20) {
+				if (gm_RandomFloat01() > 0.4) {
 					*(unsigned short*) (u + 0xc8 + i * 2) = fcn_005b5660(i, (unsigned short*) (u + 0xc8));
 				}
 				break;

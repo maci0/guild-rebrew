@@ -69,7 +69,7 @@ void __cdecl fcn_00589d00(int a0)
 	total += gm_WalkEntityChain(*(unsigned short*) v6);
 	n = fcn_004e99c0(*(unsigned char*) (v6 + 0x166)) / 3 + 2;
 	amt[0] = (int) (float) n;
-	amt[1] = (int) (g_662acc * (float) n);
+	amt[1] = (int) (1.5f * (float) n);
 	amt[2] = (int) ((float) n + (float) n);
 	ids[0] = (int) (g_662910 * (float) total);
 	ids[1] = (int) (g_664150 * (float) total);

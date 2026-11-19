@@ -30,7 +30,7 @@ int __cdecl ai_StartSpionage(int code, short* target, int zero, char* out1, char
 	if (zero != 0) {
 		return 0;
 	}
-	if (fcn_004a5340(target, 1, &mask, 0, (float) ((double) (gm_RandomMod(0x19) & 0xffff) + g_662aa0), &idx) == 0) {
+	if (fcn_004a5340(target, 1, &mask, 0, (float) ((double) (gm_RandomMod(0x19) & 0xffff) + 10.0), &idx) == 0) {
 		return 0;
 	}
 	p = &g_7f4ca0[(unsigned short) idx * 0x21c];

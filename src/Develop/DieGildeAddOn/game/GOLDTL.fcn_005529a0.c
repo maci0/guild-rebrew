@@ -1,21 +1,22 @@
+#include "client_types.h"
 
 
 
 #pragma pack(push, 2)
 // SIZE 0xe
-typedef struct {
-	int a;
-	int b;
-	int c;
-	short d;
-} Stamp;
+
+
+
+
+
+
 #pragma pack(pop)
 
-#include "client_types.h"
+
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_00546190(char* p);
-void __cdecl fcn_00500bb0(Stamp* s, int a, int b, int c);
+void __cdecl fcn_00500bb0(pos14_7f4c00* s, int a, int b, int c);
 
 void __cdecl fcn_005529a0(char* p)
 {
@@ -37,7 +38,7 @@ void __cdecl fcn_005529a0(char* p)
 		((int*) (p + 0xac))[i] = -1;
 	}
 	p[0xd2] = 0;
-	*(Stamp*) (p + 0xc4) = (*(Stamp*)&gm_GameTime);
-	*(Stamp*) (p + 0x52) = (*(Stamp*)&gm_GameTime);
-	fcn_00500bb0((Stamp*) (p + 0x52), 0, 2, 0);
+	*(pos14_7f4c00*) (p + 0xc4) = (*(pos14_7f4c00*)&gm_GameTime);
+	*(pos14_7f4c00*) (p + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
+	fcn_00500bb0((pos14_7f4c00*) (p + 0x52), 0, 2, 0);
 }

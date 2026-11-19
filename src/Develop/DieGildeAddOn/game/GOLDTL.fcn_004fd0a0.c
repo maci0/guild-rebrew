@@ -71,7 +71,7 @@ void __cdecl fcn_004fd0a0(void)
 		inv = g_6628a0 - (float) r / (float) n;
 		fcn_004c5360();
 		g_773d48++;
-		fcn_004c5480(*(int*) (e + 4), 0x1e4, -(*(float*) (e + 0x1e4) - (*(double*) dmem + inv) * g_662908));
+		fcn_004c5480(*(int*) (e + 4), 0x1e4, -(*(float*) (e + 0x1e4) - (*(double*) dmem + inv) * 0.5));
 		inv = (float) (-(*(float*) (e + 0xb4) - g_6640f0 * *(float*) (e + 0xb4)));
 		fcn_004c47e0((int*) e);
 		fcn_004c4820(3, inv);

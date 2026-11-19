@@ -52,9 +52,9 @@ int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, flo
             *(float*) (rec + 0x14) = p[1];
             *(float*) (rec + 0x18) = p[2];
             *(float*) (rec + 0x14) = f6;
-            v[0] = (float) fcn_0064d3f8() * g_662a18;
-            v[1] = (float) fcn_0064d3f8() * g_662a18;
-            v[2] = (float) fcn_0064d3f8() * g_662a18;
+            v[0] = (float) fcn_0064d3f8() * 3.0518509447574615e-05f;
+            v[1] = (float) fcn_0064d3f8() * 3.0518509447574615e-05f;
+            v[2] = (float) fcn_0064d3f8() * 3.0518509447574615e-05f;
             v[0] *= f8;
             v[1] *= f8;
             v[2] *= f8;

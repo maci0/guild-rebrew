@@ -3,13 +3,13 @@
 
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int handle;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 #pragma pack(1)
 // SIZE 0x24d
@@ -19,7 +19,7 @@ struct good {
 };
 #pragma pack()
 
-extern char g_7f4ca0[];
+
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 
@@ -89,9 +89,9 @@ void __cdecl cm_RequestSellObjekt(char* e)
 						}
 					}
 				}
-				if (((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].type == 6 && amt != 0) {
+				if (((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_state == 6 && amt != 0) {
 					io_FormatTextBuffer(msg, 0x10b7, sel, amt);
-					he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle, ((struct house*)g_7f4ca0)[*(unsigned short*) (e + 8)].handle,
+					he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id,
 					    msg, 0, 0x5ec, *(int*) (sel + 1), -1, 0, 0);
 				}
 			}

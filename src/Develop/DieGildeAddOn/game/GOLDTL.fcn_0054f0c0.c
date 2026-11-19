@@ -1,11 +1,12 @@
+#include "client_types.h"
 #pragma pack(push, 2)
 // SIZE 0xe
-typedef struct {
-	int a;
-	int b;
-	int c;
-	short d;
-} Stamp_54f0c0;
+
+
+
+
+
+
 #pragma pack(pop)
 
 // SIZE 0x8
@@ -19,7 +20,7 @@ typedef struct {
 // SIZE 0xb8
 typedef struct {
 	char pad0[0x52];
-	Stamp_54f0c0 stamp;
+	pos14_7f4c00 stamp;
 	char pad60[0x10];
 	int state;
 	char pad74[4];
@@ -32,7 +33,7 @@ typedef struct {
 	int mode;
 } Order_54f0c0;
 
-#include "client_types.h"
+
 extern pos14_7f4c00 gm_GameTime;
 
 Entity_54f0c0* __cdecl gm_LookupEntityRecordById(int);
@@ -40,7 +41,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
-void __cdecl fcn_00500bb0(Stamp_54f0c0*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, Order_54f0c0*);
 void __cdecl fcn_00546190(Order_54f0c0*);
 
@@ -100,7 +101,7 @@ void __cdecl fcn_0054f0c0(Order_54f0c0* o)
 					}
 				}
 			}
-			o->stamp = (*(Stamp_54f0c0*)&gm_GameTime);
+			o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
 			fcn_00500bb0(&o->stamp, 0, 2, 0);
 			o->event = fcn_004c5620(-1, o);
 		}

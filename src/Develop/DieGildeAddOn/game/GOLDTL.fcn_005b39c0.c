@@ -6,7 +6,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int pct);
 int __cdecl fcn_005b0f00(void* win);
 void __cdecl fcn_0046f280(int);
 
-extern char g_1015f40[];
+#include "Develop/Units/d2.v1/d2_window_view.h"
 extern char* lpObjektePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
@@ -43,7 +43,7 @@ void __cdecl fcn_005b39c0(void)
 	int v1c;
 
 	idx = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
-	fcn_00472900(*(int*) (g_1015f40 + idx * 0x3cc + 0x27c), 0x54);
+	fcn_00472900(((D2_WIN*)g_1015f40)[idx].slot, 0x54);
 	if (fcn_005373e0((void*) 0x5b39c0, 0x657c7) != 0) {
 		do {
 			if (g_14ce8e0 != 0) {
@@ -77,7 +77,7 @@ void __cdecl fcn_005b39c0(void)
 				base += 0x2f4;
 				save += 0x2a90;
 			} while ((int) base < 0x868c30);
-			fcn_005b0f00(g_1015f40 + idx * 0x3cc);
+			fcn_005b0f00(&((D2_WIN*)g_1015f40)[idx]);
 		} while (fcn_005373e0((void*) 0x5b39c0, 0x657c7) != 0);
 	}
 	fcn_0046f280(idx);

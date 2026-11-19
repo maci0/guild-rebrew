@@ -184,7 +184,7 @@ found:
 	}
 fraction:
 	r = fcn_0050cf50((char*) e, (int) *(signed char*) (e + 0x5c));
-	if ((double) (B - A) / (double) B < (double) (B - r) / (double) r * g_664158 + g_6628bc) {
+	if ((double) (B - A) / (double) B < (double) (B - r) / (double) r * g_664158 + 0.25f) {
 		*(int*) (a4 + 8) = B - A;
 		*(char*) a4 = 0x12;
 		return ai_StartKreditNehmen(0x10, a2, a3, a4, a5);

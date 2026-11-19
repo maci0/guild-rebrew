@@ -259,7 +259,7 @@ after1:
 			*(unsigned short*) (a0 + 0x5e) = g_7f4c0c;
 			fcn_00500bb0(a0 + 0x52, 0, 5, 0);
 		}
-		if ((float) (g_7f4c04 & 0xffff) <= g_696550[hour] + g_662918) {
+		if ((float) (g_7f4c04 & 0xffff) <= g_696550[hour] + 2.0f) {
 			return;
 		}
 		p = (char*) 0x7f4e04;

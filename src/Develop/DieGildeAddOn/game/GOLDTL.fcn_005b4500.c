@@ -1,11 +1,11 @@
 
 
-typedef struct
-{
-	char pad0[0x27c];
-	int x27c;
-	char pad280[0x14c];
-} Win;
+#include "Develop/Units/d2.v1/d2_window_view.h"
+
+
+
+
+
 // SIZE 0x3cc
 
 typedef struct
@@ -19,7 +19,7 @@ typedef struct
 // SIZE 0x21c
 
 #include "client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
@@ -35,21 +35,21 @@ int __cdecl io_AppendText(char*, ...);
 char* __cdecl fcn_00502cd0(int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_005c61e0(int);
-void __cdecl fcn_005b0f00(Win*);
+int __cdecl fcn_005b0f00(char*);
 void __cdecl fcn_0046f280(int);
 
 void __cdecl fcn_005b4500(void)
 {
 	int w;
-	Win* win;
+	D2_WIN* win;
 	int i;
 	char* e;
 	int n;
 
 	w = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
-	fcn_00472900(((Win*)g_1015f40)[w].x27c, 0x54);
+	fcn_00472900(((D2_WIN*)g_1015f40)[w].slot, 0x54);
 	if (fcn_005373e0((void*) fcn_005b4500, 0x657c7) != 0) {
-		win = &((Win*)g_1015f40)[w];
+		win = &((D2_WIN*)g_1015f40)[w];
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
@@ -71,7 +71,7 @@ void __cdecl fcn_005b4500(void)
 					}
 				}
 			}
-			fcn_005b0f00(win);
+			fcn_005b0f00((char*)win);
 		} while (fcn_005373e0((void*) fcn_005b4500, 0x657c7) != 0);
 	}
 	fcn_0046f280(w);

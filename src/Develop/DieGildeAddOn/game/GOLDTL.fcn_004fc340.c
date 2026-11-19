@@ -13,5 +13,5 @@ double __cdecl fcn_004fc340(void)
 
 	fcn_004f4830(0, a);
 	fcn_004f4830(1, b);
-	return (4 - a[6]) * g_6628bc * g_6640f8 + (1 - b[6]) * g_662ad8;
+	return (4 - a[6]) * 0.25f * g_6640f8 + (1 - b[6]) * 0.25;
 }

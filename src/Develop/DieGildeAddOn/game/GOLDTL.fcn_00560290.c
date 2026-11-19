@@ -205,7 +205,7 @@ void __cdecl fcn_00560290(char* a0)
 			t = gm_RandomMod(6) & 0xffff;
 			t = (int) ((double) ((t + 9) * (unsigned char) *(a0 + 0xac)) * scale);
 			if (win == 3 && !(*(v9 + 0x5b) & 0x20)) {
-				t = (int) ((double) t * g_662908);
+				t = (int) ((double) t * 0.5);
 			}
 			rec = gm_eval_SlotVoll(q, *(unsigned short*) (a0 + 0xae), t);
 			if (!*(unsigned short*) (a0 + 0xae)) {

@@ -81,7 +81,7 @@ void __cdecl fcn_004e3020(void* arg)
 	fcn_00445f50(state, 0, 1.0f, 1);
 	fcn_004463f0(0, 0, 0.0f);
 	fcn_004e4b60((char*) 0x68d308);
-	sprintf(f.path, g_67d444, state);
+	sprintf(f.path, "%i", state);
 	h2 = fcn_004e44b0((char*) 0x68d2e4, f.path);
 	r = fcn_004e4d00(0x1770, 0, 0);
 	if (r == 0) {

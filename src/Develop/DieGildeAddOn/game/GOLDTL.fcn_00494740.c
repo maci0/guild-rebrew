@@ -28,7 +28,7 @@ int __cdecl fcn_00494740(int a0, int entity, int* level_out, int unused)
 			level = 0xd;
 		}
 		else if ((fcn_004fa5b0(0xa, (char*) entity, (int) buf) & 2) != 0) {
-			f = g_662a3c;
+			f = 0.1f;
 			level = 0xa;
 		}
 		if (level_out != 0) {

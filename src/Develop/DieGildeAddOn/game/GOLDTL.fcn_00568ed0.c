@@ -158,7 +158,7 @@ void __cdecl fcn_00568ed0(char* a1)
 		countf = (float) cnt;
 		t = fcn_0050c710((unsigned char*) ent, 0xf, 1);
 		if ((float) ((((float) t * g_662910 + g_6629c8) *
-		              (countf * g_662a3c + g_6628a0) *
+		              (countf * 0.1f + g_6628a0) *
 		              (total / countf)) /
 		             (float) *(unsigned char*) (obj + 0x83)) >
 		    (gm_RandomFloat01() + g_6628cc)) {

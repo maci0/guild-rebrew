@@ -65,7 +65,7 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 	if (fcn_004133e0(self, &box.lo, &box.hi) != 0) {
 		goto fail;
 	}
-	box.level = (box.hi - box.lo) * g_662a3c + box.lo;
+	box.level = (box.hi - box.lo) * 0.1f + box.lo;
 	if (fcn_00413480(self, box.level, box.pt[0], box.pt[1], box.pt[2], box.pt[3]) != 0) {
 		goto fail;
 	}

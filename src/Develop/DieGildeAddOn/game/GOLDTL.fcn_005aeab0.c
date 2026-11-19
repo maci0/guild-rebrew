@@ -95,9 +95,9 @@ void __cdecl fcn_005aeab0(char* rec)
 	}
 	v = gm_WalkEntityChain(*(unsigned short*) ent);
 	prob = (double) v;
-	if (((double) gm_RandomFloat01() * g_662908 + g_6640f8) * g_665fc0
+	if (((double) gm_RandomFloat01() * 0.5 + g_6640f8) * g_665fc0
 	    < prob) {
-		prob = ((double) gm_RandomFloat01() * g_662908 + g_6640f8) * g_665fc0;
+		prob = ((double) gm_RandomFloat01() * 0.5 + g_6640f8) * g_665fc0;
 	}
 	cnt = (int) prob;
 	cnt = (int) ((double) cnt * (double) weight);

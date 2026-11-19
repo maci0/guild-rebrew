@@ -19,7 +19,7 @@ int __cdecl fcn_004f73e0(void* entity, void* context)
 	if (*(int*) context == 3 && *(char*) ((char*) entity + 2) == 6) {
 		result = fcn_005d97f0(entity, context) | 2;
 	} else if (*(int*) context == 1 && *(char*) ((char*) entity + 2) == 6) {
-		io_FormatTextBuffer((char*) context + 0x14, (int) g_679060, 0x1d35);
+		io_FormatTextBuffer((char*) context + 0x14, (int) "%s", 0x1d35);
 	}
 	return result;
 }

@@ -3,9 +3,9 @@
 
 #include <string.h>
 
-typedef struct {
-	short v[7];
-} stamp14;
+
+
+
 // SIZE 0xe
 
 #include "client_types.h"
@@ -28,7 +28,7 @@ int __cdecl fcn_004aff10(int a1, int a2, char* arg)
 		*(int*) (m + 0xc) = -1;
 		m[0x36] = 1;
 		m[0x58] = 0;
-		*(stamp14*) (m + 0x28) = (*(stamp14*)&gm_GameTime);
+		*(pos14_7f4c00*) (m + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 		*(short*) (m + 0x2c) = 0xc;
 		*(int*) (m + 0x2e) = 0;
 		fcn_004c5530(m);

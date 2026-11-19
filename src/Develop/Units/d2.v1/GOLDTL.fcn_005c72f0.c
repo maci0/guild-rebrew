@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern Loot_7774a0 g_7774a0[32];
+#include "Develop/Units/d2.v1/d2_training_rows.h"
 extern Slot_778da0 g_778da0[16];
 extern Slot_778da0 g_7796e0[16];
 #include "client_data.h"
@@ -143,7 +143,7 @@ label_5c7466:
 		p4 = (int*) ((int) g_7774a0 + 0x8);
 		for (;;) {
 			if (p4[-2] != 0 && *p4 == d2_CurrentElementId) {
-				selected = g_7774a0[v7].x0;
+				selected = g_7774a0[v7].entity;
 				if (selected != 0) {
 					fcn_004c44a0();
 					fcn_00473fe0();

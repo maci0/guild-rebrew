@@ -104,8 +104,8 @@ char* __cdecl fcn_0047acf0(char* list)
 				minh = h;
 			i++;
 		}
-		if (g_662918 < (float) maxw / (float) minw ||
-		    g_662918 < (float) maxh / (float) minh)
+		if (2.0f < (float) maxw / (float) minw ||
+		    2.0f < (float) maxh / (float) minh)
 			flag = 1;
 	}
 	w = (int) *(unsigned short*) (bank + 6);

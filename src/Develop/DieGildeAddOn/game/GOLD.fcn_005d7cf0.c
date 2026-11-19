@@ -1,20 +1,19 @@
 
 
-typedef struct Player {
-	char pad0[0xa];
-	short lines;
-	char padc[0x244 - 0xc];
-	int limit;
-	int scroll;
-	char pad24c[0x3c4 - 0x24c];
-} Player;
+#include "Develop/Units/d2.v1/gold_window.h"
+
+
+
+
+
+
+
 // SIZE 0x3c4
 
 extern short g_fb9070;
 extern short g_fb9072;
 extern char s_67d67c[];
 #include "client_types.h"
-extern Win_f8f120 g_f8f120[];
 extern char* g_77255c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
@@ -50,19 +49,19 @@ void __cdecl fcn_005d7cf0(void)
 	win = fcn_0046e940(100, 0, 0x258, g_fb9070, 0x10);
 	fcn_00471c80(win, 1);
 	io_AppendText(0x2004);
-	(*(Player**)&g_77255c)->scroll = -g_fb9070;
+	(*(GOLD_GUI_WINDOW**)&g_77255c)->scroll = -g_fb9070;
 	i = 0;
 	d2_SuppressOverlay = 1;
 	while (fcn_005373e0(fcn_005d7cf0, 0x24087)) {
 		if (g_14ce8e0 || g_14cf950) {
 			g_774654 = 1;
 		}
-		(*(Player**)&g_77255c) = &((Player*)g_f8f120)[win];
+		(*(GOLD_GUI_WINDOW**)&g_77255c) = &g_f8f120[win];
 		if (i % speed == 0) {
-			(*(Player**)&g_77255c)->scroll++;
+			(*(GOLD_GUI_WINDOW**)&g_77255c)->scroll++;
 		}
 		i++;
-		if ((*(Player**)&g_77255c)->lines * 1.5 + (*(Player**)&g_77255c)->scroll > (*(Player**)&g_77255c)->limit) {
+		if ((*(GOLD_GUI_WINDOW**)&g_77255c)->height * 1.5 + (*(GOLD_GUI_WINDOW**)&g_77255c)->scroll > (*(GOLD_GUI_WINDOW**)&g_77255c)->limit) {
 			g_774654 = 1;
 		}
 		if (g_6a24e4 >= 80.0f) {
@@ -76,9 +75,9 @@ void __cdecl fcn_005d7cf0(void)
 	fade = fcn_004730c0(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 1);
 	while ((*fade & 4) == 0) {
 		fcn_005373e0(0, 0x24087);
-		(*(Player**)&g_77255c) = &((Player*)g_f8f120)[win];
+		(*(GOLD_GUI_WINDOW**)&g_77255c) = &g_f8f120[win];
 		if (i % speed == 0) {
-			(*(Player**)&g_77255c)->scroll++;
+			(*(GOLD_GUI_WINDOW**)&g_77255c)->scroll++;
 		}
 		if (g_6a24e4 >= 80.0f) {
 			speed = 4;

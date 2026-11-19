@@ -1,8 +1,8 @@
 
 
-typedef struct {
-	short s[7];
-} Stamp5a92;
+#include "client_types.h"
+
+
 // SIZE 0xe
 
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-#include "client_types.h"
+
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 extern trade_868080 g_868080[];
@@ -43,7 +43,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00526010(Ent5a92*, int, unsigned char);
 int __cdecl fcn_005809f0(void);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_00500bb0(Stamp5a92*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_004c51a0(int, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -59,7 +59,7 @@ void __cdecl fcn_005a92c0(char* p)
 	int ok;
 	int n;
 	int i;
-	Stamp5a92 st;
+	pos14_7f4c00 st;
 
 	ent = &((Ent5a92*)g_7f4ca0)[g_774970];
 	n = gm_AccumulateTyped2(ent);
@@ -117,13 +117,13 @@ void __cdecl fcn_005a92c0(char* p)
 				msg[4] = 0x69;
 				*(int*) (msg + 0xc) = -1;
 				msg[0x36] = 9;
-				*(Stamp5a92*) (msg + 0x28) = (*(Stamp5a92*)&gm_GameTime);
+				*(pos14_7f4c00*) (msg + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 				if (fcn_005809f0() == 0) {
-					fcn_00500bb0((Stamp5a92*) (msg + 0x28), 0, 5, 0);
+					fcn_00500bb0((pos14_7f4c00*) (msg + 0x28), 0, 5, 0);
 				} else {
-					fcn_00500bb0((Stamp5a92*) (msg + 0x28), gm_RandomMod(3) + 1, 0, 0);
+					fcn_00500bb0((pos14_7f4c00*) (msg + 0x28), gm_RandomMod(3) + 1, 0, 0);
 				}
-				st = *(Stamp5a92*) (msg + 0x28);
+				st = *(pos14_7f4c00*) (msg + 0x28);
 				msg[0x58] = 2;
 				*(int*) (msg + 0x5c) = ent->f4;
 				fcn_004c5530(msg);
@@ -157,7 +157,7 @@ void __cdecl fcn_005a92c0(char* p)
 						msg[4] = 0x69;
 						*(int*) (msg + 0xc) = -1;
 						msg[0x36] = 9;
-						*(Stamp5a92*) (msg + 0x28) = st;
+						*(pos14_7f4c00*) (msg + 0x28) = st;
 						msg[0x58] = 2;
 						*(int*) (msg + 0x5c) = ent->f4;
 						fcn_004c5530(msg);

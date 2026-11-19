@@ -32,12 +32,12 @@ typedef struct Req {
 	unsigned char female;
 } Req;
 
-typedef struct Win {
-	char pad0[0xc];
-	int w;
-	int h;
-	char pad14[0x3cc - 0x14];
-} Win;
+#include "Develop/Units/d2.v1/d2_window_view.h"
+
+
+
+
+
 // SIZE 0x3cc
 
 typedef struct Slot {
@@ -56,7 +56,7 @@ typedef struct Font {
 	short w;
 } Font;
 
-extern Win_1015f40 g_1015f40[0x60];
+
 extern Slot* g_1015ea0;
 extern char* g_772500;
 extern int d2_CurrentWindowId;
@@ -97,8 +97,8 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 	dlg = fcn_00470820(0, 0, "privillegien\\CHOOSEPROFESSION2");
 	fcn_00471b60(dlg);
 	d2_SetForm(dlg, 0);
-	colw = (((Win*) g_1015f40)[d2_CurrentWindowId].w - 0x40) / 5;
-	rowh = (((Win*) g_1015f40)[d2_CurrentWindowId].h - 0x84) / 3;
+	colw = (((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x40) / 5;
+	rowh = (((D2_WIN*) g_1015f40)[d2_CurrentWindowId].height - 0x84) / 3;
 	x0 = (colw - ((Font*) g_772500)->w) / 2;
 	io_AppendText(0x1a9a, (p->female != 0) + 0x1aa0, p->id, n);
 	for (i = 1; i <= 15; i++) {

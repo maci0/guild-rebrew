@@ -30,11 +30,11 @@ int __cdecl fcn_0048dbc0(char* e, char* a2, char* a3)
 		return 0;
 	}
 	mask = 0xf00500;
-	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + g_662da8, &idx) == 0) {
+	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + 25.0f, &idx) == 0) {
 		return 0;
 	}
 	t = &((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx];
-	have = (int) (fcn_0050b810(*(int*) (e + 0x178), (*(char*)&g_773d75)) * g_6628bc);
+	have = (int) (fcn_0050b810(*(int*) (e + 0x178), (*(char*)&g_773d75)) * 0.25f);
 	need = gm_WalkEntityChain(*(unsigned short*) e);
 	need = (int) ((gm_WalkEntityChain(t->entity_index) + need) * g_6628ac);
 	if (have < need) {

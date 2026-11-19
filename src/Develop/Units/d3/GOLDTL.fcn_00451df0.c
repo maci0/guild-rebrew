@@ -42,21 +42,21 @@ typedef struct {
 	unsigned char flags;
 } Ent;
 
-typedef struct Device Device;
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
 
-typedef struct {
-	char p0[0xc8];
-	int (__stdcall* SetRenderState)(Device*, int, int);
-} DeviceVtbl;
 
-struct Device {
-	DeviceVtbl* vtbl;
-};
+
+
+
+
+
+
+
 
 #include "Develop/Units/d3/d3_camera.h"
 extern float g_1040cc0[16];
 extern float g_1040c80[16];
-extern void* g_6b5de0;
+
 extern int g_67a370;
 extern char g_6b8000;
 
@@ -92,9 +92,9 @@ void __cdecl fcn_00451df0(Ent* e)
 	fcn_005ed45f((Mat*) g_1040cc0, &p);
 	fcn_005ebea2((Mat*) g_1040c80, 0, (Mat*) g_1040cc0);
 	fcn_005ebbb9((Mat*) g_1040c80, (Mat*) g_1040c80);
-	((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x16, 2);
+	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x16, 2);
 	g_6b8000 = 1;
 	fcn_004379a0(g_67a370, 0, 0x40, fcn_00451f80, &big);
 	g_6b8000 = 0;
-	((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x16, 3);
+	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x16, 3);
 }

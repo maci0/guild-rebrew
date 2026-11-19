@@ -32,7 +32,7 @@ extern float g_662cf8;
 extern float g_66413c;
 
 #include "client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+#include "Develop/Units/d2.v1/d2_window_view.h"
 extern List8c_102cbc8 g_102cbc8[];
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -141,7 +141,7 @@ void __cdecl fcn_00585030(int a0)
 		fcn_00469470(list, item);
 		io_FormatTextBuffer(buf, (char*) 0x679060, src[0] * 2 + 0x9a8);
 		item = d2_ShowTxt(x + 0x3c, y + 5, buf, wnd);
-		((Ctl*) g_1015ea0)[item].x18 = g_1015f40[wnd].xc / 2 - 10;
+		((Ctl*) g_1015ea0)[item].x18 = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
 		fcn_00472900(item, 0x54);
 		fcn_00534160(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
 		count++;
@@ -191,7 +191,7 @@ void __cdecl fcn_00585030(int a0)
 				fcn_00469470(list, item);
 				io_FormatTextBuffer(buf2, (char*) 0x679060, src[0] * 2 + 0x9a8);
 				item = d2_ShowTxt(x + 0x3c, y + 5, buf2, wnd);
-				((Ctl*) g_1015ea0)[item].x18 = g_1015f40[wnd].xc / 2 - 10;
+				((Ctl*) g_1015ea0)[item].x18 = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
 				fcn_00472900(item, 0x54);
 				fcn_00534160(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
 				count++;

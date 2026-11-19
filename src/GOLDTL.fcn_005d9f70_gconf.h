@@ -1,6 +1,6 @@
 #ifndef GOLDTL_FCN_005D9F70_GCONF_H
 #define GOLDTL_FCN_005D9F70_GCONF_H
 
-extern Kind5d9f g_14aa314[];
+#include "Develop/Units/d2.v1/crime_description.h"
 
 #endif /* GOLDTL_FCN_005D9F70_GCONF_H */

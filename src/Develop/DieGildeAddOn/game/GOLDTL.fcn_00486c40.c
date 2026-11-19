@@ -1,38 +1,19 @@
-typedef struct Seg {
-	int id;              /* 0x00 */
-	int next;            /* 0x04 */
-	int x8;              /* 0x08 */
-	int xc;              /* 0x0c */
-	int x10;             /* 0x10 */
-	int x14;             /* 0x14 */
-	int x18;             /* 0x18 */
-	float price;         /* 0x1c */
-	int x20;             /* 0x20 */
-	int stock;           /* 0x24 */
-	int buy;             /* 0x28 */
-	int full;            /* 0x2c */
-	int flags;           /* 0x30 */
-	int x34;             /* 0x34 */
-	int x38;             /* 0x38 */
-	int x3c;             /* 0x3c */
-} Seg;
-// SIZE 0x40
+#include "Develop/DieGildeAddOn/game/goods_plan.h"
 
-typedef struct ClientRec {
-	int v0;              /* 0x00 */
-	int v4;              /* 0x04 */
-	int v8;              /* 0x08 */
-	int vc;              /* 0x0c */
-	char pad10[8];
-} ClientRec;
-// SIZE 0x18
+#include "Develop/DieGildeAddOn/game/ai_supply_candidate.h"
+
+
+
+
+
+
+
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern Seg g_100b0c0[];
 extern int g_100e720[];
 extern int g_100e760[];
 extern int g_86805c;
-extern ClientRec g_868c40[];
+
 
 /* 768 building records of 540 bytes; g_7f4ca4 points four bytes into the first. */
 extern char g_7f4ca4[];
@@ -45,8 +26,8 @@ int __cdecl fcn_00503a70(int id);
 /* ADDRESS: GOLDTL 0x00486c40 */
 void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 {
-	Seg* seg;
-	ClientRec* rec;
+	GOODS_PLAN_ENTRY* seg;
+	AI_SUPPLY_CANDIDATE* rec;
 	int* lp;
 	char* p;
 	char* q;
@@ -77,9 +58,9 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 				lp[-1] = *(unsigned short*) q;
 				if (lp[-1] != 0) {
 					for (k = 0; k < n; k++) {
-						if (g_100b0c0[k].id == lp[0]) {
-							g_100b0c0[k].x14++;
-							g_100b0c0[k].x3c |= 2;
+						if (g_100b0c0[k].goods_id == lp[0]) {
+							g_100b0c0[k].requested++;
+							g_100b0c0[k].flags |= 2;
 							found = 1;
 							break;
 						}
@@ -91,9 +72,9 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 					lp[-1] = *(unsigned short*) q;
 					if (lp[-1] != 0) {
 						for (k = 0; k < n; k++) {
-							if (g_100b0c0[k].id == lp[0]) {
-								g_100b0c0[k].x14++;
-								g_100b0c0[k].x3c |= 2;
+							if (g_100b0c0[k].goods_id == lp[0]) {
+								g_100b0c0[k].requested++;
+								g_100b0c0[k].flags |= 2;
 								found = 1;
 								break;
 							}
@@ -103,9 +84,9 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 			}
 		} else if (n >= 1) {
 			for (k = 0; k < n; k++) {
-				if (g_100b0c0[k].id == g_100e760[0]) {
-					g_100b0c0[k].x14++;
-					g_100b0c0[k].x3c |= 2;
+				if (g_100b0c0[k].goods_id == g_100e760[0]) {
+					g_100b0c0[k].requested++;
+					g_100b0c0[k].flags |= 2;
 					break;
 				}
 			}
@@ -114,14 +95,14 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 	n = ai_ResourceCount;
 	for (i = 0; i < n; i++) {
 		seg = &g_100b0c0[i];
-		if (seg->x14 != 0) {
+		if (seg->requested != 0) {
 			found = 0;
 			for (k = 0; g_100e760[k] != 0; k++) {
-				if (seg->id == g_100e760[k]) {
-					v = seg->x14 - (seg->stock + seg->buy);
-					seg->x14 = v;
-					if (seg->x14 < 0) {
-						seg->x14 = 0;
+				if (seg->goods_id == g_100e760[k]) {
+					v = seg->requested - (seg->allocated + seg->stock);
+					seg->requested = v;
+					if (seg->requested < 0) {
+						seg->requested = 0;
 					}
 					found = 1;
 					break;
@@ -129,30 +110,30 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 			}
 			if (found == 0) {
 				for (k = 0; g_100e720[k] != 0; k++) {
-					if (seg->id == g_100e720[k]) {
-						v = seg->x14 - (seg->stock + seg->buy);
-						seg->x14 = v;
-						if (seg->x14 < 0) {
-							seg->x14 = 0;
+					if (seg->goods_id == g_100e720[k]) {
+						v = seg->requested - (seg->allocated + seg->stock);
+						seg->requested = v;
+						if (seg->requested < 0) {
+							seg->requested = 0;
 						}
 						found = 1;
 						break;
 					}
 				}
 			}
-			if (seg->x14 != 0) {
-				fcn_00503a70(seg->id);
+			if (seg->requested != 0) {
+				fcn_00503a70(seg->goods_id);
 				for (k = 0; k < g_86805c; k++) {
 					rec = &g_868c40[k];
-					if (rec->v8 != 0 && rec->vc >= 1) {
-						seg->x8 = rec->v0;
+					if (rec->unk_08 != 0 && rec->limit >= 1) {
+						seg->supplier = rec->entity;
 					}
 				}
 				n = ai_ResourceCount;
 			}
 		}
-		if (seg->x8 == 0) {
-			seg->x14 = 0;
+		if (seg->supplier == 0) {
+			seg->requested = 0;
 		}
 	}
 	sum = 0;
@@ -160,14 +141,14 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 		for (k = 0; g_100e760[k] != 0; k++) {
 			for (i = 0; i < ai_ResourceCount; i++) {
 				seg = &g_100b0c0[i];
-				if (g_100e760[k] == seg->id && seg->x14 != 0) {
-					while (seg->x14 > 0) {
-						if (!((double) seg->x14 * seg->price + (float) sum > (float) a2)) {
+				if (g_100e760[k] == seg->goods_id && seg->requested != 0) {
+					while (seg->requested > 0) {
+						if (!((double) seg->requested * seg->price + (float) sum > (float) a2)) {
 							break;
 						}
-						seg->x14--;
+						seg->requested--;
 					}
-					sum = (int) ((double) seg->x14 * seg->price + sum);
+					sum = (int) ((double) seg->requested * seg->price + sum);
 				}
 			}
 		}
@@ -178,14 +159,14 @@ void __cdecl fcn_00486c40(char* a0, unsigned int a1, int a2)
 	for (k = 0; g_100e720[k] != 0; k++) {
 		for (i = 0; i < ai_ResourceCount; i++) {
 			seg = &g_100b0c0[i];
-			if (g_100e720[k] == seg->id && seg->x14 != 0) {
-				while (seg->x14 > 0) {
-					if (!((double) seg->x14 * seg->price + (float) sum > (float) a2)) {
+			if (g_100e720[k] == seg->goods_id && seg->requested != 0) {
+				while (seg->requested > 0) {
+					if (!((double) seg->requested * seg->price + (float) sum > (float) a2)) {
 						break;
 					}
-					seg->x14--;
+					seg->requested--;
 				}
-				sum = (int) ((double) seg->x14 * seg->price + sum);
+				sum = (int) ((double) seg->requested * seg->price + sum);
 			}
 		}
 	}

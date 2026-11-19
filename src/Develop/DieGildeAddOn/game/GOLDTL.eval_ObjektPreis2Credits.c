@@ -54,7 +54,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int percent)
     if (r->cache != 0) {
         price = (float) (r->cache << 5) * (percent & 0xff) * 0.01f;
         if (r->sub == 3) {
-            return price * g_662acc;
+            return price * 1.5f;
         }
         return price;
     }

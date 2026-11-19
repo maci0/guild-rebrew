@@ -39,7 +39,7 @@ int __cdecl fcn_004ef250(Set* p)
 				e = g_7f4ca0 + *(unsigned short*) (r + 0x27) * 0x21c;
 				if (p->recs[i].kind == 1) {
 					mode = 2;
-					if (!(p->recs[i].f > g_662da8)) {
+					if (!(p->recs[i].f > 25.0f)) {
 						mode = 1;
 					}
 				}

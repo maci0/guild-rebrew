@@ -1,11 +1,11 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include "client_types.h"
 // SIZE 0x3cc
-typedef struct {
-	char pad0[0xc];
-	int width;
-	char pad10[0x3cc - 0x10];
-} Slot_52df40;
+#include "Develop/Units/d2.v1/d2_window_view.h"
+
+
+
+
 
 // SIZE 0x2f4
 typedef struct {
@@ -37,7 +37,7 @@ extern char g_6a2f30[];
 extern char g_6a2f24[];
 extern char g_6a2f18[];
 extern int d2_CurrentWindowId;
-extern Win_1015f40 g_1015f40[0x60];
+
 
 extern House_52df40 g_7f4ca0[];
 extern Dyn_52df40 g_868060[];
@@ -86,7 +86,7 @@ void __cdecl fcn_0052df40(unsigned char* s)
 		io_AppendText(g_6a2f24, 0x870, &g_868060[*(int*) (s + 0x65)]);
 	}
 	d2_SetForm(g_6a25b8, 0);
-	g_6a25bc = fcn_0046f740((((Slot_52df40*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1, 0x48, *s + 0x427, d2_CurrentWindowId);
+	g_6a25bc = fcn_0046f740((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1, 0x48, *s + 0x427, d2_CurrentWindowId);
 	((Ctl_52df40*)g_1015ea0)[g_6a25bc].shown = 1;
 	if (*(unsigned short*) (s + 0x27) != 0xffff && *(unsigned short*) (s + 0x27) != *(unsigned short*) gm_CityEntity) {
 		((Ctl_52df40*)g_1015ea0)[g_6a25bc].link = &g_7f4ca0[*(unsigned short*) (s + 0x27)];

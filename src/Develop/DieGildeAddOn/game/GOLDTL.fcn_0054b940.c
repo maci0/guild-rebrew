@@ -1,3 +1,4 @@
+#include "client_types.h"
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 
@@ -6,12 +7,12 @@
 
 #pragma pack(push, 2)
 // SIZE 0xe
-typedef struct {
-	int a;
-	int b;
-	int c;
-	short d;
-} Stamp;
+
+
+
+
+
+
 #pragma pack(pop)
 
 // SIZE 0x21c
@@ -46,7 +47,7 @@ typedef struct {
 	char padA[6];
 	int owner;
 	char pad14[0x3e];
-	Stamp stamp;
+	pos14_7f4c00 stamp;
 	char pad60[0x10];
 	int state;
 	char pad74[4];
@@ -73,7 +74,7 @@ typedef struct {
 	unsigned char count;
 } Party;
 
-#include "client_types.h"
+
 extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern char g_6b5c60[];
@@ -116,7 +117,7 @@ void __cdecl fcn_0054b940(Order* o)
 	if (pl != 0) {
 		g = fcn_00502cd0(pl->home, 1, 0, 0x17);
 		if (g == 0) {
-			o->stamp = (*(Stamp*)&gm_GameTime);
+			o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
 			fcn_004c5620(-1, o);
 			return;
 		}
@@ -182,11 +183,11 @@ void __cdecl fcn_0054b940(Order* o)
 			}
 			fcn_00545d40(party.ent->id, -1, msg, 0x20, 0x5fd, g_6b5c60);
 		}
-		o->stamp = (*(Stamp*)&gm_GameTime);
+		o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
 		fcn_004c5620(-1, o);
 		return;
 	case 1:
-		o->stamp = (*(Stamp*)&gm_GameTime);
+		o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
 		fcn_004c5620(-1, o);
 		return;
 	}

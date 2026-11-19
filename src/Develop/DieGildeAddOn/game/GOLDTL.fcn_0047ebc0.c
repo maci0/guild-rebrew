@@ -4,6 +4,7 @@
  * order looking for a producer that can start.
  */
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/goods_plan.h"
 #include <stdio.h>
 
 typedef struct {
@@ -15,18 +16,18 @@ typedef struct {
 	unsigned short id; /* +0x1bc: current goods record id */
 } Bld;
 
-typedef struct {
-	int id;            /* +0x00 */
-	int cand[4];       /* +0x04 */
-	char pad14[0x1c - 0x14];
-	int x1c;           /* +0x1c */
-	int x20;           /* +0x20 */
-	char pad24[0x3c - 0x24];
-	int f3c;           /* +0x3c */
-	int f40;           /* +0x40 */
-	char pad44[0x54 - 0x44];
-	int f54;           /* +0x54: state flags */
-} BldRec; /* 0x58 */
+#include "Develop/DieGildeAddOn/game/production_goods.h"
+
+
+
+
+
+
+
+
+
+
+
 
 typedef struct {
 	char pad0[0x1c];
@@ -47,8 +48,7 @@ typedef struct {
 } Req; /* 0x24 */
 
 extern char* lpObjektePROT;  /* +0x41 stride goods records: type byte, name */
-extern char g_100d0c0[];     /* +0x58 stride building records */
-extern char g_100b0c0[];     /* +0x40 stride ware records */
+ 
 extern int ai_ResourceCount;        /* ware count */
 extern int g_100b0ac;        /* building count */
 extern int g_100dc20;
@@ -67,8 +67,8 @@ void __cdecl fcn_00487000(Bld*);
 void __cdecl fcn_00487970(int, Bld*, int);
 void __cdecl fcn_00487c00(int, Bld*, int);
 void __cdecl fcn_00487470(Bld*);
-int __cdecl fcn_00486640(Bld*, BldRec*, int);
-void __cdecl fcn_004868d0(Bld*, BldRec*);
+int __cdecl fcn_00486640(Bld*, PRODUCTION_GOODS_RECORD*, int);
+void __cdecl fcn_004868d0(Bld*, PRODUCTION_GOODS_RECORD*);
 int __cdecl fcn_005b1e40(int);
 int __cdecl fcn_00503d10(int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
@@ -98,7 +98,7 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 	int r;
 	int n;
 	int val;
-	BldRec* rec;
+	PRODUCTION_GOODS_RECORD* rec;
 
 	hit = 0;
 	prod = fcn_00502cd0(*(int*) (bld->x16c + 0x5d), 2, 6, 0, 0xff);
@@ -114,14 +114,14 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 	fcn_00487470(bld);
 	if (g_7f4c04 != 0xd && g_7f4c04 != 8) {
 		for (i = 0; i < g_100b0ac; i++) {
-			rec = (BldRec*) (g_100d0c0 + i * 0x58);
-			if (rec->id != (int) bld->id)
+			rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);
+			if (rec->goods_id != (int) bld->id)
 				continue;
-			if ((int) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36) <= rec->f40 &&
+			if ((int) *(unsigned short*) ((lpObjektePROT + rec->goods_id * 0x41) + 0x36) <= rec->unk_40 &&
 			    fcn_00486640(bld, rec, 1)) {
-				rec->f54 = rec->f54 | 8;
+				rec->flags = rec->flags | 8;
 				fcn_004868d0(bld, rec);
-				bld->id = (unsigned short) rec->id;
+				bld->id = (unsigned short) rec->goods_id;
 				hit = 1;
 			}
 			break;
@@ -133,14 +133,14 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 	else if (bld->f1b4 & 0x100) {
 		if (bld->id != 0) {
 			for (i = 0; i < g_100b0ac; i++) {
-				rec = (BldRec*) (g_100d0c0 + i * 0x58);
-				if (rec->id != (int) bld->id)
+				rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);
+				if (rec->goods_id != (int) bld->id)
 					continue;
-				if ((int) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36) <= rec->f40 &&
+				if ((int) *(unsigned short*) ((lpObjektePROT + rec->goods_id * 0x41) + 0x36) <= rec->unk_40 &&
 				    fcn_00486640(bld, rec, 1)) {
-					rec->f54 = rec->f54 | 8;
+					rec->flags = rec->flags | 8;
 					fcn_004868d0(bld, rec);
-					bld->id = (unsigned short) rec->id;
+					bld->id = (unsigned short) rec->goods_id;
 					goto done;
 				}
 				break;
@@ -154,30 +154,30 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 	if (*(unsigned char*) (g_7f4ca0 + *(unsigned short*) (bld->x16c + 0x27) * 0x21c + 2) == 6) {
 		n = fcn_005b1e40(bld->x16c);
 		if (n != 0) {
-			for (rec = (BldRec*) g_100d0c0; (char*) rec < g_100d0c0 + 0xb00; rec = (BldRec*) ((char*) rec + 0x58)) {
-				if (rec->id != n)
+			for (rec = (PRODUCTION_GOODS_RECORD*) g_100d0c0; (char*) rec < (char*) g_100d0c0 + 0xb00; rec = (PRODUCTION_GOODS_RECORD*) ((char*) rec + 0x58)) {
+				if (rec->goods_id != n)
 					continue;
-				if ((int) ((Craft*) craft)->x1c < rec->x1c)
+				if ((int) ((Craft*) craft)->x1c < rec->min_1)
 					break;
-				if ((int) ((Craft*) craft)->x1d < rec->x20)
+				if ((int) ((Craft*) craft)->x1d < rec->min_2)
 					break;
-				if (rec->f40 < (int) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36))
+				if (rec->unk_40 < (int) *(unsigned short*) ((lpObjektePROT + rec->goods_id * 0x41) + 0x36))
 					break;
-				val = fcn_00503d10(rec->id);
+				val = fcn_00503d10(rec->goods_id);
 				if (val == 0)
 					break;
-				if ((int) ((unsigned short) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36) + rec->f3c) <= gm_eval_SlotVoll(val, rec->id, 1000000)) {
+				if ((int) ((unsigned short) *(unsigned short*) ((lpObjektePROT + rec->goods_id * 0x41) + 0x36) + rec->unk_3c) <= gm_eval_SlotVoll(val, rec->goods_id, 1000000)) {
 					if (fcn_00486640(bld, rec, 1)) {
-						rec->f54 = rec->f54 | 8;
+						rec->flags = rec->flags | 8;
 						fcn_004868d0(bld, rec);
-						bld->id = (unsigned short) rec->id;
-						sprintf(name, "Produktion von %s starten, da Humanplayer es so will.", (lpObjektePROT + rec->id * 0x41) + 1);
+						bld->id = (unsigned short) rec->goods_id;
+						sprintf(name, "Produktion von %s starten, da Humanplayer es so will.", (lpObjektePROT + rec->goods_id * 0x41) + 1);
 						goto done;
 					}
 					if (fcn_00486640(bld, rec, 0)) {
 						fcn_004868d0(bld, rec);
-						bld->id = (unsigned short) rec->id;
-						sprintf(name, "Produktion von %s starten obwohl Rohstoffe fehlen, da der spieler es so will", (lpObjektePROT + rec->id * 0x41) + 1);
+						bld->id = (unsigned short) rec->goods_id;
+						sprintf(name, "Produktion von %s starten obwohl Rohstoffe fehlen, da der spieler es so will", (lpObjektePROT + rec->goods_id * 0x41) + 1);
 						goto done;
 					}
 				}
@@ -194,52 +194,52 @@ void __cdecl fcn_0047ebc0(Bld* bld)
 		order[r] = val;
 	}
 	for (i = 0; i < g_100b0ac; i++) {
-		rec = (BldRec*) (g_100d0c0 + order[i] * 0x58);
-		if ((rec->f54 & 0x20) || (rec->f54 & 0x200))
+		rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + order[i] * 0x58);
+		if ((rec->flags & 0x20) || (rec->flags & 0x200))
 			continue;
-		if ((*(unsigned char*) (lpObjektePROT + rec->id * 0x41) == 0x17 || *(unsigned char*) (lpObjektePROT + rec->id * 0x41) == 0x25) && rec->f3c >= 5)
+		if ((*(unsigned char*) (lpObjektePROT + rec->goods_id * 0x41) == 0x17 || *(unsigned char*) (lpObjektePROT + rec->goods_id * 0x41) == 0x25) && rec->unk_3c >= 5)
 			continue;
-		if ((int) ((Craft*) craft)->x1c < rec->x1c)
+		if ((int) ((Craft*) craft)->x1c < rec->min_1)
 			continue;
-		if ((int) ((Craft*) craft)->x1d < rec->x20)
+		if ((int) ((Craft*) craft)->x1d < rec->min_2)
 			continue;
-		if (rec->f40 < (int) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36))
+		if (rec->unk_40 < (int) *(unsigned short*) ((lpObjektePROT + rec->goods_id * 0x41) + 0x36))
 			continue;
-		n = fcn_00503d10(rec->id);
+		n = fcn_00503d10(rec->goods_id);
 		if (n == 0)
 			continue;
-		if ((int) ((unsigned short) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36) + rec->f3c) > gm_eval_SlotVoll(n, rec->id, 1000000))
+		if ((int) ((unsigned short) *(unsigned short*) ((lpObjektePROT + rec->goods_id * 0x41) + 0x36) + rec->unk_3c) > gm_eval_SlotVoll(n, rec->goods_id, 1000000))
 			continue;
 		if (!fcn_00486640(bld, rec, 1))
 			continue;
-		rec->f54 = rec->f54 | 8;
+		rec->flags = rec->flags | 8;
 		fcn_004868d0(bld, rec);
-		bld->id = (unsigned short) rec->id;
-		sprintf(name, "Produktion von %s starten", (lpObjektePROT + rec->id * 0x41) + 1);
+		bld->id = (unsigned short) rec->goods_id;
+		sprintf(name, "Produktion von %s starten", (lpObjektePROT + rec->goods_id * 0x41) + 1);
 		goto done;
 	}
 	for (i = 0; i < g_100b0ac; i++) {
-		rec = (BldRec*) (g_100d0c0 + order[i] * 0x58);
-		if ((rec->f54 & 0x20) || (rec->f54 & 0x200))
+		rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + order[i] * 0x58);
+		if ((rec->flags & 0x20) || (rec->flags & 0x200))
 			continue;
-		if ((*(unsigned char*) (lpObjektePROT + rec->id * 0x41) == 0x17 || *(unsigned char*) (lpObjektePROT + rec->id * 0x41) == 0x25) && rec->f3c >= 5)
+		if ((*(unsigned char*) (lpObjektePROT + rec->goods_id * 0x41) == 0x17 || *(unsigned char*) (lpObjektePROT + rec->goods_id * 0x41) == 0x25) && rec->unk_3c >= 5)
 			continue;
-		if ((int) ((Craft*) craft)->x1c < rec->x1c)
+		if ((int) ((Craft*) craft)->x1c < rec->min_1)
 			continue;
-		if ((int) ((Craft*) craft)->x1d < rec->x20)
+		if ((int) ((Craft*) craft)->x1d < rec->min_2)
 			continue;
-		if (rec->f40 < (int) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36))
+		if (rec->unk_40 < (int) *(unsigned short*) ((lpObjektePROT + rec->goods_id * 0x41) + 0x36))
 			continue;
-		n = fcn_00503d10(rec->id);
+		n = fcn_00503d10(rec->goods_id);
 		if (n == 0)
 			continue;
-		if ((int) ((unsigned short) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x36) + rec->f3c) > gm_eval_SlotVoll(n, rec->id, 1000000))
+		if ((int) ((unsigned short) *(unsigned short*) ((lpObjektePROT + rec->goods_id * 0x41) + 0x36) + rec->unk_3c) > gm_eval_SlotVoll(n, rec->goods_id, 1000000))
 			continue;
 		if (!fcn_00486640(bld, rec, 0))
 			continue;
 		fcn_004868d0(bld, rec);
-		bld->id = (unsigned short) rec->id;
-		sprintf(name, "Produktion von %s starten obwohl Rohstoffe fehlen", (lpObjektePROT + rec->id * 0x41) + 1);
+		bld->id = (unsigned short) rec->goods_id;
+		sprintf(name, "Produktion von %s starten obwohl Rohstoffe fehlen", (lpObjektePROT + rec->goods_id * 0x41) + 1);
 		goto done;
 	}
 	bld->id = 0;
@@ -248,42 +248,42 @@ done:
 	fcn_0047e0e0(bld, craft);
 	if (0 < g_100b0ac) {
 		for (i = 0; i < g_100b0ac; i++) {
-			rec = (BldRec*) (g_100d0c0 + i * 0x58);
-			if (rec->f54 & 8) {
+			rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);
+			if (rec->flags & 8) {
 				for (j = 0; j < 4; j++) {
-					if (*(int*) (g_100b0c0 + rec->cand[j] * 0x40 + 0x28) < (int) *(unsigned short*) ((lpObjektePROT + rec->id * 0x41) + 0x26 + j * 2))
-						rec->f54 = rec->f54 & 0xfffffff7;
+					if (g_100b0c0[rec->building_indices[j]].stock < (int) *(unsigned short*) ((lpObjektePROT + rec->goods_id * 0x41) + 0x26 + j * 2))
+						rec->flags = rec->flags & 0xfffffff7;
 				}
 			}
 		}
 	}
 	if (g_100b0ac > 0) {
 		for (i = 0; i < g_100b0ac; i++) {
-			rec = (BldRec*) (g_100d0c0 + i * 0x58);
-			val = rec->f54;
+			rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);
+			val = rec->flags;
 			if ((val & 0x20) || (val & 0x200))
-				rec->f54 = val & 0xfffffff7;
+				rec->flags = val & 0xfffffff7;
 		}
 	}
 	if (ai_ResourceCount > 0) {
 		for (i = 0; i < ai_ResourceCount; i++) {
-			val = *(int*) (g_100b0c0 + 4 + i * 0x40 + 0x38);
+			val = g_100b0c0[i].flags;
 			if (((val & 0x20) || (val & 0x200)) && (val & 0x10) &&
-			    *(int*) (g_100b0c0 + 4 + i * 0x40) >= 0) {
-				rec = (BldRec*) (g_100d0c0 + *(int*) (g_100b0c0 + 4 + i * 0x40) * 0x58);
-				rec->f54 = rec->f54 | 0x10;
+			    g_100b0c0[i].parent_index >= 0) {
+				rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + g_100b0c0[i].parent_index * 0x58);
+				rec->flags = rec->flags | 0x10;
 			}
 		}
 	}
 	if (g_100dc20 == bld->x16c && g_100dc38 < 4) {
 		i = 0;
 		while (i < g_100b0ac && g_100dc38 < 4) {
-			rec = (BldRec*) (g_100d0c0 + i * 0x58);
+			rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);
 			memcpy(g_100dc60 + g_100dc38 * 0x58, rec, 0x58);
 			for (j = 0; j < 4; j++) {
-				if (rec->cand[j] >= 0) {
+				if (rec->building_indices[j] >= 0) {
 					n = *(int*) (g_100dc40 + g_100dc38 * 4);
-					memcpy(g_100df20 + (n + g_100dc38 * 4) * 0x40, g_100b0c0 + rec->cand[j] * 0x40, 0x40);
+					memcpy(g_100df20 + (n + g_100dc38 * 4) * 0x40, &g_100b0c0[rec->building_indices[j]], 0x40);
 					*(int*) (g_100dc40 + g_100dc38 * 4) = *(int*) (g_100dc40 + g_100dc38 * 4) + 1;
 				}
 			}
@@ -322,10 +322,10 @@ done:
 	put.flags = 0;
 	if (g_100b0ac > 0) {
 		for (i = 0; i < g_100b0ac; i++) {
-			rec = (BldRec*) (g_100d0c0 + i * 0x58);
-			if (rec->f54 & 8)
+			rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);
+			if (rec->flags & 8)
 				put.flags = put.flags + 1;
-			if (rec->f54 & 0x10)
+			if (rec->flags & 0x10)
 				put.flags = put.flags + 1;
 		}
 	}
@@ -344,16 +344,16 @@ done:
 		put.x1c = 0;
 		i = 0;
 		for (; i < g_100b0ac; i++) {
-			val = *(int*) (g_100d0c0 + i * 0x58 + 0x54);
+			val = *(int*) ((char*) g_100d0c0 + i * 0x58 + 0x54);
 			if (val & 0x10) {
 				if (val & 0x20) {
 					put.kind = 0x14;
-					put.rec = (int) (g_100d0c0 + i * 0x58);
+					put.rec = (int) ((char*) g_100d0c0 + i * 0x58);
 					fcn_00487f90(&put);
 				}
 				else if (val & 0x200) {
 					put.kind = 0x15;
-					put.rec = (int) (g_100d0c0 + i * 0x58);
+					put.rec = (int) ((char*) g_100d0c0 + i * 0x58);
 					fcn_00487f90(&put);
 				}
 				else
@@ -361,7 +361,7 @@ done:
 			}
 			else if (val & 8) {
 				put.kind = 4;
-				put.rec = (int) (g_100d0c0 + i * 0x58);
+				put.rec = (int) ((char*) g_100d0c0 + i * 0x58);
 				fcn_00487f90(&put);
 			}
 			else

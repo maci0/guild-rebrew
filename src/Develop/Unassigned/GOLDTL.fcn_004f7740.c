@@ -18,7 +18,7 @@ int __cdecl fcn_004f7740(void* entity, void* params)
 				return 2;
 			}
 			if (mode == 1 && *(char*) ((char*) entity + 2) == 6) {
-				io_FormatTextBuffer((char*) params + 0x14, (int) g_679060, 0x1d65);
+				io_FormatTextBuffer((char*) params + 0x14, (int) "%s", 0x1d65);
 			}
 			return 2;
 		}

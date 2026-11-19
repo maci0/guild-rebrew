@@ -14,7 +14,7 @@ typedef struct {
 
 #include "client_types.h"
 extern Pt5d36_99ec2c g_99ec2c[16];
-extern float g_662a94;
+
 extern float g_6640cc;
 
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
@@ -32,7 +32,7 @@ void __cdecl fcn_005d3880(Arg5d38 s, int w, int h)
 	float u;
 
 	step = (w - 0x69) / 16;
-	m = g_662a94;
+	m = (-1.0f);
 	for (i = 0; i < 16; i++) {
 		if (m < ((Pt5d38*)g_99ec2c)[i].v) {
 			m = ((Pt5d38*)g_99ec2c)[i].v;

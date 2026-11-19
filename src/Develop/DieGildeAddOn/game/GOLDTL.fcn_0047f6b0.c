@@ -1,42 +1,31 @@
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/goods_plan.h"
 
 /* g_100d0c0: 0x58-byte object records.  The four dwords at +4 select the
  * building instances; +0x54 carries the state flags. */
 #pragma pack(push, 1)
-typedef struct Ord {
-	int f0;               /* 0x00 */
-	int bld[4];           /* 0x04 */
-	int f14;              /* 0x14 */
-	int f18;              /* 0x18 */
-	int f1c;              /* 0x1c */
-	int f20;              /* 0x20 */
-	int f24;              /* 0x24 */
-	int f28;              /* 0x28 */
-	int f2c;              /* 0x2c */
-	int f30;              /* 0x30 */
-	int f34;              /* 0x34 */
-	int f38;              /* 0x38 */
-	int f3c;              /* 0x3c */
-	int f40;              /* 0x40 */
-	int f44;              /* 0x44 */
-	int f48;              /* 0x48 */
-	int f4c;              /* 0x4c */
-	int f50;              /* 0x50 */
-	int flags;            /* 0x54 */
-} Ord;
+#include "production_goods.h"
 
-/* g_100b0c0: 0x40-byte building instances. */
-typedef struct Bld {
-	int type;             /* 0x00 */
-	int parent;           /* 0x04 */
-	int owner;            /* 0x08 */
-	int f0c;              /* 0x0c */
-	int f10;              /* 0x10 */
-	char pad14[0x14];
-	int busy;             /* 0x28 */
-	char pad2c[0x10];
-	int flags;            /* 0x3c */
-} Bld;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* g_7f4ca0: 0x21c-byte map records. */
 typedef struct Ent {
@@ -87,8 +76,7 @@ typedef struct Msg {
 } Msg;
 #pragma pack(pop)
 
-extern Ord g_100d0c0[];
-extern Bld g_100b0c0[];
+ 
 extern Ent g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
@@ -157,15 +145,15 @@ int __cdecl fcn_0047f6b0(char* a)
 	fcn_004849b0(a, t1, t2);
 
 	if (g_100b0ac > 0) {
-		p2 = (int*) &g_100d0c0[0].bld[0];
+		p2 = (int*) &g_100d0c0[0].building_indices[0];
 		for (n = g_100b0ac; n != 0; n--) {
 			q = (char*) p2;
 			for (i = 4; i != 0; i--) {
-				if (*(int*) q >= 0 && g_100b0c0[*(int*) q].parent >= 0) {
-					g_100d0c0[g_100b0c0[*(int*) q].parent].flags |= 4;
+				if (*(int*) q >= 0 && g_100b0c0[*(int*) q].parent_index >= 0) {
+					g_100d0c0[g_100b0c0[*(int*) q].parent_index].flags |= 4;
 					for (j = 0; j < ai_ResourceCount; j++) {
-						if (g_100d0c0[g_100b0c0[*(int*) q].parent].f0
-						    == g_100b0c0[j].type) {
+						if (g_100d0c0[g_100b0c0[*(int*) q].parent_index].goods_id
+						    == g_100b0c0[j].goods_id) {
 							g_100b0c0[j].flags |= 4;
 						}
 					}
@@ -231,7 +219,7 @@ int __cdecl fcn_0047f6b0(char* a)
 	if (g_7f4ca0[*(unsigned short*) (h + 0x27)].f2 == 6 && q != 0) {
 		v = fcn_005b1e40((int) h);
 		for (i = 0; i < 0x20; i++) {
-			if (g_100d0c0[i].f0 == v) {
+			if (g_100d0c0[i].goods_id == v) {
 				goto found;
 			}
 		}
@@ -239,29 +227,29 @@ int __cdecl fcn_0047f6b0(char* a)
 	goto scan;
 
 found:
-	if ((int) *(unsigned char*) (t2 + 0x1c) < g_100d0c0[i].f1c) {
+	if ((int) *(unsigned char*) (t2 + 0x1c) < g_100d0c0[i].min_1) {
 		goto scan;
 	}
-	if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].f20) {
+	if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].min_2) {
 		goto scan;
 	}
-	if (g_100d0c0[i].f40 < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36) {
+	if (g_100d0c0[i].unk_40 < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36) {
 		goto scan;
 	}
-	v = (int) fcn_00503d10(g_100d0c0[i].f0);
+	v = (int) fcn_00503d10(g_100d0c0[i].goods_id);
 	if (v == 0) {
 		goto scan;
 	}
-	t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].f0, 0xf4240);
-	if (t < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36 + g_100d0c0[i].f3c) {
+	t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].goods_id, 0xf4240);
+	if (t < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36 + g_100d0c0[i].unk_3c) {
 		goto scan;
 	}
-	if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].kind == 0x17) {
-		q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].f0);
+	if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
+		q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].goods_id);
 		if (q == 0) {
 			goto scan;
 		}
-		if (*(int*) (q + 0xe) < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36) {
+		if (*(int*) (q + 0xe) < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36) {
 			goto scan;
 		}
 		g_100d0c0[i].flags |= 8;
@@ -281,24 +269,24 @@ scan:
 		if (g_100d0c0[i].flags & 4) {
 			continue;
 		}
-		if ((int) *(unsigned char*) (t2 + 0x1c) < g_100d0c0[i].f1c) {
+		if ((int) *(unsigned char*) (t2 + 0x1c) < g_100d0c0[i].min_1) {
 			continue;
 		}
-		if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].f20) {
+		if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].min_2) {
 			continue;
 		}
-		if (g_100d0c0[i].f40 < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36) {
+		if (g_100d0c0[i].unk_40 < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36) {
 			continue;
 		}
-		v = (int) fcn_00503d10(g_100d0c0[i].f0);
+		v = (int) fcn_00503d10(g_100d0c0[i].goods_id);
 		if (v == 0) {
 			continue;
 		}
-		t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].f0, 0xf4240);
-		if (t < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36 + g_100d0c0[i].f3c) {
+		t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].goods_id, 0xf4240);
+		if (t < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36 + g_100d0c0[i].unk_3c) {
 			continue;
 		}
-		if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].kind != 0x17) {
+		if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].kind != 0x17) {
 			if (fcn_00486640(a, (int*) &g_100d0c0[i], 1)) {
 				g_100d0c0[i].flags |= 8;
 				fcn_004868d0(a, (int*) &g_100d0c0[i]);
@@ -306,11 +294,11 @@ scan:
 			}
 			continue;
 		}
-		q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].f0);
+		q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].goods_id);
 		if (q == 0) {
 			continue;
 		}
-		if (*(int*) (q + 0xe) < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36) {
+		if (*(int*) (q + 0xe) < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36) {
 			continue;
 		}
 		g_100d0c0[i].flags |= 8;
@@ -326,24 +314,24 @@ after:
 		if (g_100d0c0[i].flags & 4) {
 			continue;
 		}
-		if ((int) *(unsigned char*) (t2 + 0x1c) < g_100d0c0[i].f1c) {
+		if ((int) *(unsigned char*) (t2 + 0x1c) < g_100d0c0[i].min_1) {
 			continue;
 		}
-		if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].f20) {
+		if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].min_2) {
 			continue;
 		}
-		if (g_100d0c0[i].f40 < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36) {
+		if (g_100d0c0[i].unk_40 < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36) {
 			continue;
 		}
-		v = (int) fcn_00503d10(g_100d0c0[i].f0);
+		v = (int) fcn_00503d10(g_100d0c0[i].goods_id);
 		if (v == 0) {
 			continue;
 		}
-		t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].f0, 0xf4240);
-		if (t < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36 + g_100d0c0[i].f3c) {
+		t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].goods_id, 0xf4240);
+		if (t < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36 + g_100d0c0[i].unk_3c) {
 			continue;
 		}
-		if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].kind == 0x17) {
+		if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
 			g_100d0c0[i].flags |= 0x10;
 			break;
 		}
@@ -357,21 +345,21 @@ after:
 		if ((g_100d0c0[i].flags & 8) == 0) {
 			continue;
 		}
-		if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].kind == 0x17) {
+		if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
 			if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) h].kind == 0xb) {
 				g_100d0c0[i].flags |= 0x10;
 			} else {
-				q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].f0);
+				q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].goods_id);
 				if (q == 0
-				    || *(int*) (q + 0xe) < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f36) {
+				    || *(int*) (q + 0xe) < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36) {
 					g_100d0c0[i].flags =
 					    (g_100d0c0[i].flags & ~8) | 0x10;
 				}
 			}
 		} else {
 			for (j = 0; j != 4; j++) {
-				if (g_100b0c0[g_100d0c0[i].bld[j]].busy
-				    < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].f0].f26) {
+				if (g_100b0c0[g_100d0c0[i].building_indices[j]].stock
+				    < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f26) {
 					g_100d0c0[i].flags &= ~8;
 				}
 			}
@@ -459,14 +447,14 @@ after:
 		}
 		for (i = 0; i < g_100b0ac * 4; i++) {
 			j = gm_RandomMod(g_100b0ac) & 0xffff;
-			if (((ItemDef*) lpObjektePROT)[g_100d0c0[j].f0].kind == 0x17) {
+			if (((ItemDef*) lpObjektePROT)[g_100d0c0[j].goods_id].kind == 0x17) {
 				break;
 			}
 		}
-		if (((ItemDef*) lpObjektePROT)[g_100d0c0[j].f0].kind != 0x17) {
+		if (((ItemDef*) lpObjektePROT)[g_100d0c0[j].goods_id].kind != 0x17) {
 			goto lflag;
 		}
-		g = plt_FindPlantInfo(g_100d0c0[j].f0);
+		g = plt_FindPlantInfo(g_100d0c0[j].goods_id);
 		v = 0;
 		for (i = 0; i < *(int*) p2 && v < 4; i++) {
 			for (j = 0; j < *(int*) p2 && v < 4; j++) {
@@ -491,15 +479,15 @@ ltail:
 
 		rec = (char*) &g_100d0c0[0];
 		for (i = 0; i < g_100b0ac; i++) {
-			if (((Ord*) rec)->flags & 0x10) {
+			if (((PRODUCTION_GOODS_RECORD*) rec)->flags & 0x10) {
 				if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].kind != 0xb) {
 					st.kind = 8;
 					st.rec = rec;
 					fcn_00487f90((int*) &st);
 				}
 			}
-			if (((Ord*) rec)->flags & 8) {
-					if (((ItemDef*) lpObjektePROT)[((Ord*) rec)->f0].kind == 0x17) {
+			if (((PRODUCTION_GOODS_RECORD*) rec)->flags & 8) {
+					if (((ItemDef*) lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) rec)->goods_id].kind == 0x17) {
 						st.rec = rec;
 						if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].kind == 0xb) {
 							st.kind = 0x28;
@@ -514,8 +502,8 @@ ltail:
 						fcn_00487f90((int*) &st);
 					}
 					if (*(char**) 0x100dc20 == *(char**)(a + 0x16c) && *(int*) 0x100dc3c < 4) {
-						*(Ord*) (0x100ddc0 + *(int*) 0x100dc3c * 0x58) =
-						    *(Ord*) st.rec;
+						*(PRODUCTION_GOODS_RECORD*) (0x100ddc0 + *(int*) 0x100dc3c * 0x58) =
+						    *(PRODUCTION_GOODS_RECORD*) st.rec;
 						*(int*) 0x100dc3c = *(int*) 0x100dc3c + 1;
 					}
 				}

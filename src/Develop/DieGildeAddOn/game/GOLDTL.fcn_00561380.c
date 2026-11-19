@@ -341,9 +341,9 @@ void __cdecl fcn_00561380(void *a0)
 			if (model == 0 || v10 != 0)
 				goto label_562049;
 			fcn_00455350((char *)model, (char *)model + 0x4c, pos);
-			pos[0] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[0] - g_664154;
+			pos[0] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[0] - 32.0f;
 			pos[1] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[1];
-			pos[2] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[2] - g_664154;
+			pos[2] = (float)(gm_RandomMod(0x40) & 0xffff) + pos[2] - 32.0f;
 			color[3] = 0x3f;
 			color[2] = 0xc0;
 			color[1] = 0xc0;

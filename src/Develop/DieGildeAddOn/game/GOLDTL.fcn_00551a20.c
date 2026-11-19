@@ -1,12 +1,13 @@
+#include "client_types.h"
 
 #pragma pack(push, 1)
-typedef struct
-{
-	int a;
-	int b;
-	int c;
-	short d;
-} fcn_00551a20_Stamp;
+
+
+
+
+
+
+
 // SIZE 0xe
 #pragma pack(pop)
 
@@ -17,7 +18,7 @@ typedef struct
 	char pad2[0x21c - 2];
 } fcn_00551a20_Ent;
 
-#include "client_types.h"
+
 extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 
@@ -52,7 +53,7 @@ void __cdecl fcn_00551a20(char* t)
 		e = &((fcn_00551a20_Ent*) g_7f4ca0)[*(unsigned short*) (t + 8)];
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
-			*(fcn_00551a20_Stamp*) (t + 0x52) = (*(fcn_00551a20_Stamp*) &gm_GameTime);
+			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 			fcn_004c5620(-1, t);
 			return;
 		}
@@ -67,7 +68,7 @@ void __cdecl fcn_00551a20(char* t)
 		e = &((fcn_00551a20_Ent*) g_7f4ca0)[*(unsigned short*) (t + 8)];
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
-			*(fcn_00551a20_Stamp*) (t + 0x52) = (*(fcn_00551a20_Stamp*) &gm_GameTime);
+			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 			fcn_004c5620(-1, t);
 			return;
 		}
@@ -77,7 +78,7 @@ void __cdecl fcn_00551a20(char* t)
 		if (q != 0) {
 			(*(int*) (q + 0x64))++;
 		}
-		*(fcn_00551a20_Stamp*) (t + 0x52) = (*(fcn_00551a20_Stamp*) &gm_GameTime);
+		*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 		fcn_004c5620(-1, t);
 		return;
 	}

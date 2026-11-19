@@ -1,10 +1,11 @@
+#include "client_types.h"
 #pragma pack(push, 2)
-typedef struct Pos5a2db0 {
-	int a;
-	int b;
-	int c;
-	short d;
-} Pos5a2db0;
+
+
+
+
+
+
 
 typedef struct Msg5a2db0 {
 	int pad0;
@@ -13,7 +14,7 @@ typedef struct Msg5a2db0 {
 	int seed;
 	int id;
 	char pad10[0x28 - 0x10];
-	Pos5a2db0 pos;
+	pos14_7f4c00 pos;
 	unsigned char flag;
 	char pad37[0x58 - 0x37];
 	unsigned char mode;
@@ -25,7 +26,7 @@ typedef struct Msg5a2db0 {
 #pragma pack(pop)
 
 #include <string.h>
-#include "client_types.h"
+
 
 extern char* g_14ab4ec;
 extern char* g_14ab54c;
@@ -102,7 +103,7 @@ void __cdecl fcn_005a2db0(char* a0, char* a1)
 				m.type = 0x74;
 				m.seed = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
 				m.id = -1;
-				m.pos = *(Pos5a2db0*) &gm_GameTime;
+				m.pos = *(pos14_7f4c00*) &gm_GameTime;
 				m.flag = 2;
 				m.target = *(int*) (a0 + 1);
 				m.from = *(int*) (a1 + 2);

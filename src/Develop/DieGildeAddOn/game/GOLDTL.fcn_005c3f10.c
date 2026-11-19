@@ -220,7 +220,7 @@ void __cdecl fcn_005c3f10(char* ent)
 				goto build_other;
 			}
 			n2 = (int) ((double) v.len * g_662a3c
-			    - g_665c0c + g_662908);
+			    - g_665c0c + 0.5);
 			fcn_00519190(
 			    (v.rec[0] == 0x21) ? 0x17fb : 0x17a0,
 			    (unsigned short) *(unsigned short*) (ent + 0x25),
@@ -241,7 +241,7 @@ void __cdecl fcn_005c3f10(char* ent)
 			goto after_build;
 build_other:
 			n2 = (int) ((double) v.len * g_662a3c
-			    - g_665c0c + g_662908);
+			    - g_665c0c + 0.5);
 			fcn_00519190(
 			    (v.rec[0] == 0x21) ? 0x17f9 : 0x179e,
 			    (int) ent, n2 + 0x17b1, n2 + 0x17bb, v.ptr);
@@ -429,7 +429,7 @@ after_build:
 			v.len = *(int*) (ent + 0x69)
 			    + *(int*) (ent + 0x65);
 			fcn_00471af0(dlg, 0);
-			v.len = (int) ((double) v.len * g_662908);
+			v.len = (int) ((double) v.len * 0.5);
 			io_FormatTextBuffer(text3, 0x17e3, (int) ent,
 			    (int) ent, v.len);
 			if (fcn_00526120(text3, 1) != 0) {

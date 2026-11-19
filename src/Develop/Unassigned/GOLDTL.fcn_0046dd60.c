@@ -1,11 +1,11 @@
-typedef struct
-{
-	int x0;
-	int w;
-	int h;
-	char padc[0x14];
-	int x20;
-} fcn_0046dd60_Surf;
+#include "Develop/Units/d2.v1/d2_surface.h"
+
+
+
+
+
+
+
 
 typedef struct
 {
@@ -31,7 +31,7 @@ typedef struct
 	int h;
 	int flags;
 	char pad18[0x38 - 0x18];
-	fcn_0046dd60_Surf* surf;
+	D2_SURFACE* surf;
 	char pad3c[0x258 - 0x3c];
 	int sy;
 	char pad25c[0x268 - 0x25c];
@@ -49,7 +49,7 @@ typedef struct
 	int img;
 } fcn_0046dd60_Win;
 
-extern fcn_0046dd60_Surf* g_77256c;
+
 extern char* g_77253c;
 extern char* g_772500;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -82,7 +82,7 @@ void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
 	int rows;
 
 	if (w->flags & 0x400) {
-		p = fcn_0047bf80(w->x, w->y, w->w, w->h, g_77256c->x20, 0);
+		p = fcn_0047bf80(w->x, w->y, w->w, w->h, (int) g_77256c->surface, 0);
 		if (p != 0)
 			fcn_0047b9a0(p, 0, 0, 0);
 	}
@@ -114,5 +114,5 @@ void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
 		fcn_0047a040(s1, s2, s3, s4);
 	}
 	if (w->surf != 0)
-		fcn_0047c7b0(w->x, w->y, w->surf->w, w->surf->h, w->surf->x20, 1.0f);
+		fcn_0047c7b0(w->x, w->y, w->surf->width, w->surf->height, (int) w->surf->surface, 1.0f);
 }

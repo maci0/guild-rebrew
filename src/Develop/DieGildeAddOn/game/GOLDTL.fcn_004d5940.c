@@ -110,7 +110,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 			}
 			if (v >= g_6640f8) {
 				t = fcn_00507e30((char*) g_772e98, 3);
-				t = (int) ((float) t * g_664168);
+				t = (int) ((float) t * 0.023809524f);
 				if (t > 4) {
 					t = 4;
 				}
@@ -192,7 +192,7 @@ unsigned int __cdecl fcn_004d5940(int a0)
 			}
 		}
 		t = fcn_00507e30((char*) g_772e98, 3);
-		t = (int) ((float) t * g_664168);
+		t = (int) ((float) t * 0.023809524f);
 		if (t > 4) {
 			t = 4;
 		}

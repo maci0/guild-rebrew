@@ -4,9 +4,9 @@
 #include <string.h>
 #pragma intrinsic(memset)
 
-typedef struct {
-	short s[7];
-} Stamp5c59;
+
+
+
 // SIZE 0xe
 
 typedef struct {
@@ -67,7 +67,7 @@ void __cdecl fcn_005c5990(char* who, int id)
 					*(int*) (msg + 0x14) = 0;
 					msg[0x36] = 1;
 					*(int*) (msg + 0xc) = *(int*) (who + 1);
-					*(Stamp5c59*) (msg + 0x28) = (*(Stamp5c59*)&gm_GameTime);
+					*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 					*(int*) (msg + 0x64) = *(int*) e;
 					*(int*) (msg + 0x5c) = ((Ent5c59*)g_7f4ca0)[i].f4;
 					*(int*) (msg + 0x58) = *(int*) (who + 1);

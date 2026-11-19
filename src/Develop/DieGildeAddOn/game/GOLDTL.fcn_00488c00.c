@@ -1,3 +1,4 @@
+#include "client_types.h"
 
 
 // The second scan indexes g_7f4ca0[i] directly and decrements cnt inside each
@@ -37,12 +38,12 @@ typedef struct Ent0488c00 {
 // SIZE 0x21c
 
 #pragma pack(push, 2)
-typedef struct Pos0488c00 {
-	int a;
-	int b;
-	int c;
-	short d;
-} Pos0488c00;
+
+
+
+
+
+
 
 typedef struct Msg0488c00 {
 	int pad0;
@@ -51,7 +52,7 @@ typedef struct Msg0488c00 {
 	int seed;
 	int id;
 	char pad10[0x28 - 0x10];
-	Pos0488c00 pos;
+	pos14_7f4c00 pos;
 	unsigned char flag;
 	char pad37[0x58 - 0x37];
 	unsigned char mode;
@@ -68,7 +69,7 @@ typedef struct Unit0488c00 {
 } Unit0488c00;
 
 extern char g_7f4ca0[];
-#include "client_types.h"
+
 extern pos14_7f4c00 gm_GameTime;
 #pragma pack(push, 1)
 typedef struct Race0488c00 {
@@ -112,7 +113,7 @@ void __cdecl fcn_00488c00(Unit0488c00* u)
 	m.type = 0x16;
 	m.seed = ((Ent0488c00*)g_7f4ca0)[*(unsigned short*)(u->info + 0x27)].seed;
 	m.id = *(int*)(u->info + 1);
-	m.pos = (*(Pos0488c00*)&gm_GameTime);
+	m.pos = (*(pos14_7f4c00*)&gm_GameTime);
 	m.flag = 1;
 	if (res != 0) {
 		m.from = *(int*)(res + 2);

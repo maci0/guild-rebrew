@@ -4,6 +4,7 @@
  * order looking for a producer that can start.
  */
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/goods_plan.h"
 
 typedef struct {
 	char pad0[0x16c];
@@ -47,7 +48,6 @@ typedef struct {
 
 extern char* lpObjektePROT;  /* +0x41 stride goods records: type byte, name */
  
-extern char g_100b0c0[];
 extern int g_100b0ac;       /* building count */
 extern int g_100dc20;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -256,7 +256,7 @@ done:
 			for (j = 0; j < 4; j++) {
 				if (rec->building_indices[j] >= 0) {
 					n = *(int*) (g_100dc40 + g_100dc38 * 4);
-					memcpy(g_100df20 + (n + g_100dc38 * 4) * 0x40, g_100b0c0 + rec->building_indices[j] * 0x40, 0x40);
+					memcpy(g_100df20 + (n + g_100dc38 * 4) * 0x40, &g_100b0c0[rec->building_indices[j]], 0x40);
 					*(int*) (g_100dc40 + g_100dc38 * 4) = *(int*) (g_100dc40 + g_100dc38 * 4) + 1;
 				}
 			}

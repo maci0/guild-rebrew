@@ -202,7 +202,7 @@ void __cdecl fcn_00543080(void)
 		if (st[1] != -1) {
 			fcn_004fb7a0();
 		} else {
-			fcn_004fb650(1, 0x3f800000, 0x3f000000, (float)(g_662aa0 - (double)(4 - g_7747b4) * g_662cc0));
+			fcn_004fb650(1, 0x3f800000, 0x3f000000, (float)(10.0 - (double)(4 - g_7747b4) * g_662cc0));
 		}
 		fcn_00547770();
 		fcn_00535960();

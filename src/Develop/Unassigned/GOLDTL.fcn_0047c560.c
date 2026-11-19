@@ -30,11 +30,11 @@ struct Snd {
 	SndVtbl* vtbl;
 };
 
-/* table entry, stride 0xac */
-typedef struct {
-	char p0[0xa8];
-	int key;
-} BankRec;
+
+
+
+
+
 
 /* the 0xa8 byte prefix copied per entry */
 typedef struct {
@@ -54,7 +54,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern Device* g_772614;
 extern Device* g_6b5de0;
-extern BankRec g_1552020[];
+#include "Develop/Unassigned/render_quad.h"
 
 void __cdecl fcn_0047c4e0(void);
 void __cdecl fcn_0047c520(void);
@@ -68,7 +68,7 @@ int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
 	int i;
 	int j;
 	int id;
-	BankRec* rec;
+	RENDER_QUAD* rec;
 	char* data;
 	char* p;
 	Sample s;

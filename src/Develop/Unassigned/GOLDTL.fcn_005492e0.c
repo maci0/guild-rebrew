@@ -1,9 +1,9 @@
 
 
 
-typedef struct {
-	short w[7];
-} Rec14;
+
+
+
 // SIZE 0xe
 
 #include "client_types.h"
@@ -13,7 +13,7 @@ void __cdecl fcn_004c5620(int, char*);
 
 void __cdecl fcn_005492e0(char* e)
 {
-	*(Rec14*) (e + 0x52) = (*(Rec14*)&gm_GameTime);
+	*(pos14_7f4c00*) (e + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
 	if (e[0x78] & 2) {
 		fcn_004c5620(-1, e);
 	}

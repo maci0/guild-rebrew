@@ -23,7 +23,7 @@
 #include "client_types.h"
 #include "he_tables.h"
 
-extern ApEvent g_7dcae0[256];	/* 0x007dcae0 */
+extern HE_AP_EVENT g_7dcae0[256];	/* 0x007dcae0 */
 
 #pragma pack(2)
 typedef struct {
@@ -333,31 +333,31 @@ void __cdecl fcn_00540020(void)
 		fcn_00519190(0x1eff, *(int*) (SLOTPTR(g_774970 & 0xffff) + 0x190));
 		i = 0;
 		while (i < 0x100) {
-			if ((*(int*) ((char*) g_7dcae0 + i * 0x50 + 8) != 0
-			     || *(int*) ((char*) g_7dcae0 + i * 0x50 + 0xc) != 0
-			     || *(char*) ((char*) g_7dcae0 + i * 0x50 + 0x10) != 0)
-			    && *(int*) ((char*) g_7dcae0 + i * 0x50 + 4) == (g_774970 & 0xffff)) {
-				if (*(int*) ((char*) g_7dcae0 + i * 0x50 + 8) != 0) {
-					if (*(int*) ((char*) g_7dcae0 + i * 0x50 + 8) >= 0) {
+			if ((g_7dcae0[i].value_08 != 0
+			     || g_7dcae0[i].value_0c != 0
+			     || g_7dcae0[i].name[0] != 0)
+			    && g_7dcae0[i].subject_id == (g_774970 & 0xffff)) {
+				if (g_7dcae0[i].value_08 != 0) {
+					if (g_7dcae0[i].value_08 >= 0) {
 						fcn_00519190(0x1efc,
-							     (char*) g_7dcae0 + i * 0x50 + 0x10,
-							     *(int*) ((char*) g_7dcae0 + i * 0x50 + 8));
+							     g_7dcae0[i].name,
+							     g_7dcae0[i].value_08);
 					} else {
 						fcn_00519190(0x1efb,
-							     (char*) g_7dcae0 + i * 0x50 + 0x10,
-							     *(int*) ((char*) g_7dcae0 + i * 0x50 + 8));
+							     g_7dcae0[i].name,
+							     g_7dcae0[i].value_08);
 					}
-				} else if (*(int*) ((char*) g_7dcae0 + i * 0x50 + 0xc) > 0) {
+				} else if (g_7dcae0[i].value_0c > 0) {
 					fcn_00519190(0x1efe,
-						     (char*) g_7dcae0 + i * 0x50 + 0x10,
-						     *(int*) ((char*) g_7dcae0 + i * 0x50 + 0xc));
-				} else if (*(int*) ((char*) g_7dcae0 + i * 0x50 + 0xc) < 0) {
+						     g_7dcae0[i].name,
+						     g_7dcae0[i].value_0c);
+				} else if (g_7dcae0[i].value_0c < 0) {
 					fcn_00519190(0x1efd,
-						     (char*) g_7dcae0 + i * 0x50 + 0x10,
-						     *(int*) ((char*) g_7dcae0 + i * 0x50 + 0xc));
+						     g_7dcae0[i].name,
+						     g_7dcae0[i].value_0c);
 				} else {
 					fcn_00519190(0x1efb,
-						     (char*) g_7dcae0 + i * 0x50 + 0x10);
+						     g_7dcae0[i].name);
 				}
 			}
 			i++;
@@ -479,7 +479,7 @@ void __cdecl fcn_00540020(void)
 
 						cand = fcn_0050cf50(obj, 0x64);
 						*(float*) &agebits = (float) cand * g_664138;
-						if (g_664154 > *(float*) &agebits) {
+						if (32.0f > *(float*) &agebits) {
 							*(float*) &agebits = 32.0f;
 						}
 						if ((*(float*) &cand = (float) left) * g_662a6c > *(float*) &agebits) {

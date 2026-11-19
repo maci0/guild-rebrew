@@ -41,7 +41,7 @@ void __cdecl fcn_004cfab0(int a0, int a1)
 			*(int*) (0x10161cc + d2_CurrentWindowId * 0x3cc) = 0x54;
 			fcn_00534160(4, 4, fcn_00507e30(a1, 3, 0x4df));
 			fcn_00472380(fcn_004677e0(0, 0xe, 0x40, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId), 0, 0x64,
-			    (int) (fcn_004ff040(a1) * g_662c38));
+			    (int) (fcn_004ff040(a1) * 100.0));
 			return;
 		}
 	}

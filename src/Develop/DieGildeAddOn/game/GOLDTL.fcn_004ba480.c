@@ -1,9 +1,9 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include <string.h>
 
-typedef struct {
-	short v[7];
-} stamp14;
+
+
+
 // SIZE 0xe
 
 typedef struct Kind {
@@ -82,7 +82,7 @@ int __cdecl fcn_004ba480(int* a1)
 		message[0x36] = 1;
 		*(int*) (message + 0x5c) = v;
 		*(int*) (message + 8) = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
-		*(stamp14*) (message + 0x28) = (*(stamp14*)&gm_GameTime);
+		*(pos14_7f4c00*) (message + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 		*(short*) (message + 0x64) = *(unsigned short*) (a1 + 1) + 0x12e7;
 		*(int*) (message + 0x58) = *(int*) (e + 2);
 		*(int*) (message + 0x60) = *(int*) (p + 2);

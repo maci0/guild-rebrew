@@ -172,7 +172,7 @@ sell:
 	}
 	val += 0x20;
 	a0 = r - 80000;
-	if ((int) (a0 * g_6628bc) < val) {
+	if ((int) (a0 * 0.25f) < val) {
 		return 0;
 	}
 	o1->kind = 1;

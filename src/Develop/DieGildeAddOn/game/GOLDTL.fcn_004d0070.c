@@ -165,7 +165,7 @@ void __cdecl fcn_004d0070(void)
 					if (s == 0 || (*(char*) (s + 9) != 0x2d && *(char*) (s + 9) != 0x3a)) {
 						if (g_664ee8 < (double) fabs(v)) {
 							e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
-							fcn_00438d70(e34, *(int*) (e34 + 0x84), *(float*) (e34 + 0x88) + v * g_662ad8, *(int*) (e34 + 0x8c));
+							fcn_00438d70(e34, *(int*) (e34 + 0x84), *(float*) (e34 + 0x88) + v * 0.25, *(int*) (e34 + 0x8c));
 						}
 					}
 				}

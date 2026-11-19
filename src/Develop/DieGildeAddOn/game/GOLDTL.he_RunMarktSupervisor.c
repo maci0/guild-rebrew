@@ -335,7 +335,7 @@ void __cdecl he_RunMarktSupervisor(char* a0)
 				}
 			}
 			if (ub.n < g) {
-				rec.f24 = rec.f24 + (g - ub.n) * g_662b20;
+				rec.f24 = rec.f24 + (g - ub.n) * 0.4;
 				if (rec.f20 * g_662930 < rec.f24) {
 					rec.f24 = rec.f20 * g_662930;
 				}

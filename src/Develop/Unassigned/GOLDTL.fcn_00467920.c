@@ -43,12 +43,12 @@ extern int d2_MouseX;			/* 0x0100f1e8 */
 extern int d2_ScreenHeight;			/* 0x01040490 */
 extern int g_1040494;			/* 0x01040494 */
 
-typedef struct {
-	char pad20[0x20];
-	int x20;
-} fcn_00467920_Surf;
+#include "Develop/Units/d2.v1/d2_surface.h"
 
-extern fcn_00467920_Surf* g_77256c;	/* 0x0077256c */
+
+
+
+
 
 extern char str_67d43c[];
 extern char str_67d444[];
@@ -331,7 +331,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 			/* 0x46802e: label bitmap clipped into the bar rect */
 			n = fcn_0047bf80(e[4],
 					 e[5] + (GLYPH_H(H3) - GLYPH_H(h1)) / 2,
-					 e[6], e[7], g_77256c->x20, 0);
+					 e[6], e[7], (int) g_77256c->surface, 0);
 			if (n) {
 				fcn_0047b9a0((int*) n, 1, 1, 1);
 			}
@@ -343,7 +343,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 			/* 0x4680b3: clamped label bitmap */
 			n = fcn_0047bf80(e[4] + GLYPH_W(h0),
 					 e[5] + (GLYPH_H(H3) - GLYPH_H(h1)) / 2,
-					 (int) f.v18, e[7], g_77256c->x20, 0);
+					 (int) f.v18, e[7], (int) g_77256c->surface, 0);
 			if (n) {
 				fcn_0047b9a0((int*) n, f.w0.b.v00, f.w0.b.v01,
 					     f.w0.b.v02);

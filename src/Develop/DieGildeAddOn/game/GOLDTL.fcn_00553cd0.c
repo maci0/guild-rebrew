@@ -84,7 +84,7 @@ void __cdecl fcn_00553cd0(char* event)
 				break;
 			}
 		}
-		if (!(f > g_6628f0) && found == 0) {
+		if (!(f > 0.2) && found == 0) {
 			io_FormatTextBuffer(buf, 0x1a76, *(unsigned short*) (e + 0x27), e);
 			a = ((Rec*) g_7f4ca0)[*(unsigned short*) (event + 8)].owner;
 			fcn_00545d40(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_88");

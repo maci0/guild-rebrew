@@ -101,7 +101,7 @@ char __cdecl fcn_00457630(void* obj, void* map)
 
 	entity = *(unsigned char**) (s + 0x08);
 	if (g_6b89bc == 0) {
-		scale = *(float*) (entity + 0x94) * 0.5f * g_662c30;
+		scale = *(float*) (entity + 0x94) * 0.5f * 0.0039215689f;
 		c[2] = (unsigned char) (int) ((g_6628a4
 			- *(float*) (entity + 0x5c)) * scale);
 		c[1] = (unsigned char) (int) ((g_6628a4
@@ -151,11 +151,11 @@ char __cdecl fcn_00457630(void* obj, void* map)
 		 * dimension, spread over the cell rectangle */
 		q = g_6628cc / (float) (unsigned long) *(int*) (*(char**) s + 0x64);
 		u0 = q;
-		v0 = g_6628a0 - q;
+		v0 = 1.0f - q;
 		fw = (float) w;
-		du = (g_6628a0 - (q + q)) / fw;
+		du = (1.0f - (q + q)) / fw;
 		fh = (float) h;
-		dv = -(g_6628a0 - (q + q)) / fh;
+		dv = -(1.0f - (q + q)) / fh;
 
 		if (x0 < 0) {
 			u0 = (float) (0 - x0) / fw;

@@ -308,7 +308,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				if (j > 1 || j == 0) {
 					flag = 1;
 				}
-				sprintf(text.tmp, g_67d444, j);
+				sprintf(text.tmp, "%i", j);
 				cp_src = text.tmp;
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + i - 1;
@@ -355,9 +355,9 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					flag = 1;
 				}
 				if (j < 0) {
-					sprintf(num, g_67d444, -j);
+					sprintf(num, "%i", -j);
 				} else {
-					sprintf(num, g_67d444, j);
+					sprintf(num, "%i", j);
 				}
 				e = (int) strlen(num) + ((int) strlen(num) - 1) / 3;
 				k = (int) strlen(num);

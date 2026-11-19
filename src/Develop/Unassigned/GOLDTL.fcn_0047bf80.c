@@ -1,21 +1,21 @@
 
 
-// SIZE 0x1c
-typedef struct {
-	float x;
-	float y;
-	float z;
-	float rhw;
-	unsigned int color;
-	float u;
-	float v;
-} Vtx;
 
-// SIZE 0xac
-typedef struct {
-	Vtx v[6];
-	int tex;
-} Quad;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // SIZE 0x10
 typedef struct {
@@ -31,13 +31,13 @@ extern int d2_ClipLeft;
 extern int g_7725fc;
 extern int d2_ClipRight;
 extern int d2_ClipBottom;
-extern Quad g_1552020[0x400];
+#include "Develop/Unassigned/render_quad.h"
 
 void __cdecl fcn_0047c560(int a, int b, int c);
-int __cdecl fcn_0047b8b0(int x, int y, int w, int h, Quad* q);
-void __cdecl fcn_0047b9a0(Quad* q, unsigned char r, unsigned char g, unsigned char b);
+int __cdecl fcn_0047b8b0(int x, int y, int w, int h, RENDER_QUAD* q);
+void __cdecl fcn_0047b9a0(RENDER_QUAD* q, unsigned char r, unsigned char g, unsigned char b);
 
-Quad* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* src)
+RENDER_QUAD* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* src)
 {
 	int cw;
 	int ch;
@@ -52,7 +52,7 @@ Quad* __cdecl fcn_0047bf80(int x, int y, int w, int h, int tex, Rect47bf* src)
 	float depth;
 	int i;
 	int quadIndex;
-	Quad* quad;
+	RENDER_QUAD* quad;
 
 	fu = 0.0f;
 	fv = 0.0f;

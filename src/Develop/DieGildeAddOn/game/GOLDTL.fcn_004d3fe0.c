@@ -70,7 +70,7 @@ void __cdecl fcn_004d3fe0(char* a0)
 				}
 			}
 			e = ent[chosen];
-			if (e[0x1c4] == 0 || cut_RandFloat() > g_662ad8) {
+			if (e[0x1c4] == 0 || cut_RandFloat() > 0.25) {
 				e[0x1c4] = (char) auswahl;
 				ent[chosen] = 0;
 			}

@@ -35,7 +35,7 @@ void __cdecl fcn_005b9cb0(int n, char** items)
 	for (i = 0; i < n; i++) {
 		total = (int)(total + (eval_ObjektPreis2Credits(*(unsigned short*) items[i], items[i][0x12])));
 	}
-	price = (int) (total * g_662b20);
+	price = (int) (total * 0.4);
 	switch (fcn_0051e070()) {
 	case 0:
 		if (n > 1) {

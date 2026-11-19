@@ -3,11 +3,11 @@
 #include <stdio.h>
 
 // SIZE 0x3cc
-typedef struct {
-	char pad0[0xc];
-	int width;
-	char pad10[0x3cc - 0x10];
-} Slot;
+#include "Develop/Units/d2.v1/d2_window_view.h"
+
+
+
+
 
 // SIZE 0x2f4
 typedef struct {
@@ -26,7 +26,7 @@ extern int g_14b5f10;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
 #include "client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+
 extern char* g_1015ea0;
 extern char g_6a2fc8[];
 extern char g_6a2e8c[];
@@ -67,7 +67,7 @@ void __cdecl fcn_0052e7b0(char* e)
 		fcn_005186c0(*(unsigned short*) e, 1, 4, buf);
 		io_AppendText(g_6a2e8c, buf, pct);
 		d2_SetForm(g_6a25b8, 0);
-		x = (((Slot*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1;
+		x = (((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1;
 		d2_CurrentValueBar = fcn_004677e0(0x18, 0x6c, 0x30, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 		d2_SetElementValue(d2_CurrentValueBar, -0x7f, 0x7f, rel);
 		if (e[2] == 5 || e[2] == 6 || e[2] == 7) {
@@ -86,7 +86,7 @@ void __cdecl fcn_0052e7b0(char* e)
 		io_AppendText(buf);
 	}
 	d2_SetForm(g_6a25b8, 0);
-	x = (((Slot*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1;
+	x = (((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1;
 	if (e != 0) {
 		g_6a25d8 = fcn_0046f740(x, 0x38, *(int*) (e + 0x18c), d2_CurrentWindowId);
 		((Ctl*)g_1015ea0)[g_6a25d8].owner = e;

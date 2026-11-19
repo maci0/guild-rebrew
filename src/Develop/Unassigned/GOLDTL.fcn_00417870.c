@@ -79,11 +79,11 @@ char __cdecl fcn_00417870(char* a0, int a1)
 			rec = (Rec*) base + i;
 			if (!(rec->fl & 1)) {
 				rec->fl |= 1;
-				rec->nx = (float) fcn_0064d3f8() * g_662a18 - g_6628cc;
+				rec->nx = (float) fcn_0064d3f8() * 3.0518509447574615e-05f - g_6628cc;
 				rec->ny = (*(float*) (a0 + 4) + 1.0f) *
-				                            (float) fcn_0064d3f8() * g_662a18 +
+				                            (float) fcn_0064d3f8() * 3.0518509447574615e-05f +
 				                        *(float*) (a0 + 0xc);
-				rec->nz = (float) fcn_0064d3f8() * g_662a18 - g_6628cc;
+				rec->nz = (float) fcn_0064d3f8() * 3.0518509447574615e-05f - g_6628cc;
 				rec->px = (float) fcn_0064d3f8() * *(float*) (a0 + 4) * 6.10370189e-05f -
 				                *(float*) (a0 + 4);
 				v = (rec->ny - 55.0f) * *(float*) (a0 + 8);

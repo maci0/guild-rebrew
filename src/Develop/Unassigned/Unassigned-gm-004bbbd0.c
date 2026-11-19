@@ -12,9 +12,9 @@ extern fcn_004bbbd0_handler g_6811b8[];
 char* __cdecl gm_LookupEntityRecordById(int);
 #include <string.h>
 
-typedef struct {
-	short v[7];
-} stamp14;
+
+
+
 
 extern int g_7728e0;
 
@@ -53,7 +53,7 @@ int __cdecl fcn_004bbc30(int a1, int a2)
 	packet[4] = 0x42;
 	*(int*) (packet + 8) = a2;
 	*(int*) (packet + 0xc) = -1;
-	*(stamp14*) (packet + 0x28) = (*(stamp14*)&gm_GameTime);
+	*(pos14_7f4c00*) (packet + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 	packet[0x36] = 1;
 	for (i = 0; i < count; i++) {
 		*(short*) (packet + 0x5c) = fcn_004bbce0(0x45);

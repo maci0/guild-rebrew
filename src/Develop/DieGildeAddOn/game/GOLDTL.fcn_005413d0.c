@@ -33,11 +33,11 @@ struct building {
 
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern unit_77e980 g_77e980[1024];
+#include "Develop/DieGildeAddOn/game/he_action.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_773d68;
 
-void __cdecl fcn_00546190(unit_77e980*);
+void __cdecl fcn_00546190(HE_ACTION*);
 unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 #include "Develop/DieGildeAddOn/game/cutscene.h"
@@ -50,7 +50,7 @@ void __cdecl fcn_005413d0(int idx)
 	int j;
 	int found;
 	struct house* h;
-	unit_77e980* u;
+	HE_ACTION* u;
 
 	kill[0] = 0x5d;
 	kill[1] = 0x11;
@@ -94,7 +94,7 @@ void __cdecl fcn_005413d0(int idx)
 				}
 				for (i = 0; keep[i] != 0; i++) {
 					if (kill[i] == u->kind) {
-						u->target = -1;
+						u->unk_70 = -1;
 						break;
 					}
 				}

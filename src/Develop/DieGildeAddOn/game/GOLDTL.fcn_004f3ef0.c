@@ -6,7 +6,7 @@ extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
-extern float g_6628a0;
+ 
 extern float g_6628cc;
 extern float g_662c30;
 extern float g_664178;
@@ -95,7 +95,7 @@ void __cdecl fcn_004f3ef0(char* a0)
 					handle = fcn_004f2a10(0, (int) a0, result,
 						fcn_004f1790((char*) *(int*) (a0 + 0x65), entry));
 				} else {
-					a = (gm_RandomFloat01() + g_6628a0) * g_6628cc;
+					a = (gm_RandomFloat01() + 1.0f) * g_6628cc;
 					value = (int) (*(unsigned char*) ((char*) entry + 0xc) * g_662c30
 						* g_6652e8[entry[0]] * a);
 					if (value <= 0)
@@ -109,7 +109,7 @@ void __cdecl fcn_004f3ef0(char* a0)
 				continue;
 			}
 			result = entry[0];
-			a = (gm_RandomFloat01() + g_6628a0) * g_6628cc;
+			a = (gm_RandomFloat01() + 1.0f) * g_6628cc;
 			value = (int) (*(unsigned char*) ((char*) entry + 0xc) * g_662c30
 				* g_6652e8[entry[0]] * a);
 			if (value > 0) {

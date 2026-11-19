@@ -2,16 +2,16 @@
 
 #include <string.h>
 
-typedef struct
-{
-	char pad0[0x27c];
-	int x27c;
-	char pad280[0x14c];
-} Win;
+#include "Develop/Units/d2.v1/d2_window_view.h"
+
+
+
+
+
 // SIZE 0x3cc
 
 #include "client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+
 extern int g_67a370;
 extern int g_775280;
 extern char* g_778b20[];
@@ -28,7 +28,7 @@ int __cdecl io_AppendText(char*, ...);
 void __cdecl fcn_00455350(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_005b0f00(Win*);
+int __cdecl fcn_005b0f00(char*);
 void __cdecl fcn_0046f280(int);
 void __cdecl fcn_005b3460(void);
 
@@ -44,10 +44,10 @@ void __cdecl fcn_005b3490(void)
 	char* map;
 	char* e;
 	int c;
-	Win* win;
+	D2_WIN* win;
 
 	w = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
-	fcn_00472900(((Win*)g_1015f40)[w].x27c, 0x54);
+	fcn_00472900(((D2_WIN*)g_1015f40)[w].slot, 0x54);
 	g_775280 = 0;
 	fcn_004379a0(((char*)g_67a370), 0, 0x100, (void*) fcn_005b3460, 0);
 	io_AppendText(s_6ab5f8);
@@ -70,12 +70,12 @@ void __cdecl fcn_005b3490(void)
 		io_AppendText(s_6ab588, g_778b20[i], buf);
 	}
 	if (fcn_005373e0((void*) fcn_005b3490, 0x657c7) != 0) {
-		win = &((Win*)g_1015f40)[w];
+		win = &((D2_WIN*)g_1015f40)[w];
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-			fcn_005b0f00(win);
+			fcn_005b0f00((char*)win);
 		} while (fcn_005373e0((void*) fcn_005b3490, 0x657c7) != 0);
 	}
 	fcn_0046f280(w);

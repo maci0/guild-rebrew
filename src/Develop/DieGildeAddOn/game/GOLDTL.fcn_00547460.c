@@ -28,13 +28,13 @@ struct msg {
 };
 
 // SIZE 0x21c
-struct s_7f4ca0 {
-	int f0;
-	int f4;
-	char pad[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
 
 
 
@@ -57,7 +57,7 @@ void __cdecl fcn_00547460(void)
 			}
 		}
 		m.b4 = 0x22;
-		m.f8 = ((struct s_7f4ca0*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].f4;
+		m.f8 = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id;
 		m.fc = *(int*) (e + 1);
 		m.b36 = 2;
 		m.b58 = 1;

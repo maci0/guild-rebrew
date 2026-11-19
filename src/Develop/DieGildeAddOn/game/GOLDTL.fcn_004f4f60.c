@@ -85,7 +85,7 @@ int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5)
 		goto fail;
 	}
 	if (fcn_005c6270(h1, 0x22a) != 0) {
-		if (gm_RandomFloat01() > g_662908) {
+		if (gm_RandomFloat01() > 0.5) {
 			goto fail;
 		}
 	}

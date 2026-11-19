@@ -7,13 +7,13 @@ extern short g_77e0a4;
 extern int g_77e0a8;
 
 // SIZE 0x21c
-struct s_7f4ca0 {
-	char pad[0x164];
-	unsigned char b164;
-	char pad2[0xb7];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
 
 
 
@@ -25,7 +25,7 @@ void __cdecl fcn_00570000(char* o)
 {
 	int k;
 
-	k = gm_MapEntityStatRange(((struct s_7f4ca0*)g_7f4ca0)[g_774970].b164);
+	k = gm_MapEntityStatRange(((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_164);
 	if (k == 1 || k == 2 || k == 3) {
 		he_OpenHelpEvents("help_events_hw");
 	} else if (k == 5 || k == 6) {

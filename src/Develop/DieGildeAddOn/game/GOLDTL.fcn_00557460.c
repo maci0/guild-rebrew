@@ -5,7 +5,7 @@
  * the neighbouring entities as the next target and books the skill checks
  * that decide whether the corner stays dark. */
 
-extern char g_9a3800[];
+#include "client_straftat.h"
 extern int gm_RandomSearchSteps[];
 extern char* g_aed32c;
 typedef struct BuildingRow557460 { unsigned char kind; char fields[0x24c]; } BuildingRow557460;
@@ -220,7 +220,7 @@ void __cdecl fcn_00557460(char* dlg)
 				if (i >= *(int*) (dlg + 0xc0)) {
 					break;
 				}
-				rec = g_9a3800 + idx * 0x2d;
+				rec = (char*) &g_9a3800[idx];
 				if (*(int*) rec != -1 && *(int*) (rec + 0x25) == 1
 				    && *(int*) (rec + 0x16) != *(int*) (g_7f4ca0
 				    + *(unsigned short*) (hit + 0x27) * 0x21c + 4)
@@ -300,7 +300,7 @@ fail:
 				if (i >= *(int*) (dlg + 0xc0)) {
 					break;
 				}
-				rec = g_9a3800 + idx * 0x2d;
+				rec = (char*) &g_9a3800[idx];
 				if (*(int*) rec != -1 && *(int*) (rec + 0x25) == 1
 				    && *(int*) (rec + 0x16) != *(int*) (g_7f4ca0
 				    + *(unsigned short*) (hit + 0x27) * 0x21c + 4)

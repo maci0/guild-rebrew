@@ -62,7 +62,7 @@ unsigned char __cdecl fcn_00417570(char* obj, int now)
 			*(float*) (rec + 0x10) = (float) (rand() & 0x3f);
 			*(int*) (rec + 0x30) = now;
 			*(unsigned char*) (rec + 0x51) = *(unsigned char*) (rec + 0x51) | 1;
-			fv = *(float*) (obj + 0xe4) - g_662918;
+			fv = *(float*) (obj + 0xe4) - 2.0f;
 			*(float*) (rec + 0x48) = (float) ((double) rand() * g_662a18 * ((double) fv + (double) fv) - (double) fv + *(float*) (obj + 0xe4));
 		}
 		i++;

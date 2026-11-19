@@ -64,9 +64,9 @@ int* __cdecl fcn_00417d00(char* a0, float* pos, int n, float a3, float a4, float
 		s->z = a5;
 		for (i = 0, v4 = (float*) (s->particles + 0x14); i < s->count; i++, v4 += 0x15) {
 			*(unsigned char*) ((char*) v4 + 0x3d) |= 1;
-			v[0] = rand() * g_662a18;
-			v[1] = rand() * g_662a18;
-			v[2] = rand() * g_662a18;
+			v[0] = rand() * 3.0518509447574615e-05f;
+			v[1] = rand() * 3.0518509447574615e-05f;
+			v[2] = rand() * 3.0518509447574615e-05f;
 		v[0] = v[0] * (s->y * 0.1f);
 		v[1] = v[1] * (s->y * 0.1f);
 		v[2] = (s->y * 0.1f) * v[2];

@@ -130,12 +130,12 @@ void __cdecl fcn_00466550(int idx, int surf)
 			w0 = e->i[0x10 / 4] + g0->w;
 			fcn_0047a040(w0 - 1, g_7725fc, w0 + v, d2_ClipBottom);
 			i = 0;
-			if (g_662950 < (double) (v / g2->w) + g_662908) {
+			if (g_662950 < (double) (v / g2->w) + 0.5) {
 				do {
 					fcn_0047cba0(g2->w * i + g0->w + e->i[0x10 / 4],
 					    e->i[0x14 / 4], surf, font, 2);
 					i++;
-				} while ((double) i < (double) (v / g2->w) + g_662908);
+				} while ((double) i < (double) (v / g2->w) + 0.5);
 			}
 			fcn_00472880(d2_DefaultFont);
 			fcn_0046bd20(f->x, e->i[0x14 / 4] + 1, v, e->i[0x1c / 4],

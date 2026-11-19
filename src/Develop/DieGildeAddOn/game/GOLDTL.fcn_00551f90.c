@@ -1,3 +1,4 @@
+#include "client_types.h"
 #pragma pack(push, 1)
 // SIZE 0xa9
 typedef struct {
@@ -15,12 +16,12 @@ typedef struct {
 
 #pragma pack(push, 2)
 // SIZE 0xe
-typedef struct {
-	int a;
-	int b;
-	int c;
-	short d;
-} Stamp_551f90;
+
+
+
+
+
+
 #pragma pack(pop)
 
 // SIZE 0x21c
@@ -35,7 +36,7 @@ typedef struct {
 // SIZE 0xd4
 typedef struct {
 	char pad0[0x52];
-	Stamp_551f90 stamp;
+	pos14_7f4c00 stamp;
 	char pad60[0x24];
 	int event;
 	char pad88[0x24];
@@ -48,7 +49,7 @@ typedef struct {
 	int player;
 } Order_551f90;
 
-#include "client_types.h"
+
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
@@ -59,7 +60,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5620(int, Order_551f90*);
 void __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c64b0(int, int, int, int, int, int, const char*);
-void __cdecl fcn_00500bb0(Stamp_551f90*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_005b2790(void);
 
 
@@ -72,7 +73,7 @@ void __cdecl fcn_00551f90(Order_551f90* o)
 	Player_551f90* p;
 	int i;
 
-	o->stamp = (*(Stamp_551f90*)&gm_GameTime);
+	o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
 	n = 0x100;
 	i = gm_RandomMod(0x100);
 	do {
@@ -110,7 +111,7 @@ void __cdecl fcn_00551f90(Order_551f90* o)
 			*(int*) (m + 0xc) = -1;
 			m[4] = 0x78;
 			m[0x36] = 9;
-			*(Stamp_551f90*) (m + 0x28) = (*(Stamp_551f90*)&gm_GameTime);
+			*(pos14_7f4c00*) (m + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 			for (i = 0; i < 0x300; i++) {
 				if (((Entity_551f90*)g_7f4ca0)[i].type == 6 || ((Entity_551f90*)g_7f4ca0)[i].type == 7) {
 					*(int*) (m + 8) = ((Entity_551f90*)g_7f4ca0)[i].id;

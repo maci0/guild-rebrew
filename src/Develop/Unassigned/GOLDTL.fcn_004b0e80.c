@@ -1,8 +1,8 @@
 #include <string.h>
 
-typedef struct {
-	short v[7];
-} stamp14_4b0e80;
+
+
+
 // SIZE 0xe
 
 // SIZE 0x21c
@@ -113,7 +113,7 @@ int __cdecl fcn_004b0e80(int a1, int a2, char* argumentText)
 	m[0x36] = 2;
 	*(int*) (m + 0x58) = k;
 	*(int*) (m + 0x5c) = num;
-	*(stamp14_4b0e80*) (m + 0x28) = (*(stamp14_4b0e80*)&gm_GameTime);
+	*(pos14_7f4c00*) (m + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 	*(short*) (m + 0x2c) = 8;
 	*(int*) (m + 0x2e) = 0;
 	fcn_004c5530(m);

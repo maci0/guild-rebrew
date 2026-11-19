@@ -22,7 +22,7 @@ int __cdecl fcn_004f7a50(unsigned char* a1, int* a2)
 		return 2;
 	}
 	if (*a2 == 1 && a1[2] == 6) {
-		io_FormatTextBuffer((char*) a2 + 0x14, (int) g_679060, 0x1d8a);
+		io_FormatTextBuffer((char*) a2 + 0x14, (int) "%s", 0x1d8a);
 	}
 	return 2;
 }

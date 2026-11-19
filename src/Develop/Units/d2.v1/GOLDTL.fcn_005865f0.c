@@ -23,15 +23,15 @@ struct msg {
 };
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int owner;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 extern pos14_7f4c00 gm_GameTime;
 extern int d2_CurrentWindowId;
 extern int g_100f1dc;
@@ -95,7 +95,7 @@ int __cdecl fcn_005865f0(char* e, int* who, int kind)
 				memset(&m, 0, sizeof(m));
 				m.kind = 0x97;
 				m.code = 1;
-				m.owner = ((struct house*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner;
+				m.owner = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id;
 				m.target = *(int*) (e + 1);
 				m.when = gm_GameTime;
 				m.who = *who;

@@ -2,31 +2,30 @@
 // One call after both if/else pairs: msvc6 duplicates the call tail into
 // each arm of the second test, as the reference does.
 
-typedef struct Win0471c00 {
-	int pad0;
-	int left;
-	int top;
-	int width;
-	int height;
-	char pad14[0x27c - 0x14];
-	int slot;
-	char pad280[0x3cc - 0x280];
-} Win0471c00;
+#include "Develop/Units/d2.v1/d2_window_view.h"
+
+
+
+
+
+
+
+
 // SIZE 0x3cc
 
 #include "client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00469c40(int x, int y, int slot);
 
 void __cdecl fcn_00471c00(int k, unsigned char center)
 {
-	Win0471c00* w;
+	D2_WIN* w;
 	int x;
 	int y;
 
-	w = &((Win0471c00*)g_1015f40)[k];
+	w = &((D2_WIN*)g_1015f40)[k];
 	if (center & 1) {
 		x = d2_CenterX - w->width / 2;
 	} else {

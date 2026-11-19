@@ -95,7 +95,7 @@ int __cdecl fcn_004a6210(char* a0, char* a1, int a2)
 	if (spread > *(float*) (p + 2 + row)) return 0;
 	if (fcn_004f0ff0((int) a0, col, state, row + 1, &res.amount, &res.cost) == 0) return 0;
 	value.cash = fcn_0050b810(*(int*) (a0 + 0x178), g_773d75);
-	if ((int) (value.cash * g_6628bc) < res.cost) return 0;
+	if ((int) (value.cash * 0.25f) < res.cost) return 0;
 	g_772850 = origin[0];
 	g_772854 = origin[1];
 	g_772858 = origin[2];

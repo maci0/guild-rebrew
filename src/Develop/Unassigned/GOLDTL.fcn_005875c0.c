@@ -14,7 +14,7 @@ extern float g_6628a0;
 extern float g_6628a8;
 extern float g_6628bc;
 extern float g_662948;
-extern float g_662a94;
+
 extern float g_662acc;
 extern float g_665f14;
 extern float g_665f18;
@@ -110,7 +110,7 @@ no_track:
 				*(float*) (o + 0x54) -= dt * g_662948;
 			else
 				*(float*) (o + 0x54) -= dt * g_6628bc;
-			*(float*) (o + 0x54) = *(float*) (o + 0x54) > g_662a94 ? *(float*) (o + 0x54) : g_662a94;
+			*(float*) (o + 0x54) = *(float*) (o + 0x54) > (-1.0f) ? *(float*) (o + 0x54) : (-1.0f);
 		}
 		*(float*) (o + 0x5c) = dt * *(float*) (o + 0x54) * g_662acc;
 	}
@@ -139,7 +139,7 @@ no_track:
 				*(float*) (o + 0x58) -= dt * g_662948;
 			else
 				*(float*) (o + 0x58) -= dt * g_6628bc;
-			*(float*) (o + 0x58) = *(float*) (o + 0x58) > g_662a94 ? *(float*) (o + 0x58) : g_662a94;
+			*(float*) (o + 0x58) = *(float*) (o + 0x58) > (-1.0f) ? *(float*) (o + 0x58) : (-1.0f);
 		}
 		*(float*) (o + 0x60) = dt * *(float*) (o + 0x58) * g_662948;
 	}

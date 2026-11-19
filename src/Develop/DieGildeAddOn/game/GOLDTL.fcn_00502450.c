@@ -25,7 +25,7 @@ int __cdecl fcn_00502450(int a, int b)
 		return 0;
 	}
 	if (a == 0) {
-		return (int) (g_773d4c * g_85ab80[0].slots[b].unk_08 * g_665b80 + g_662908);
+		return (int) (g_773d4c * g_85ab80[0].slots[b].unk_08 * g_665b80 + 0.5);
 	}
 	return (int) (g_85ab80[a].unk_00 * g_85ab80[a].slots[b].unk_08 * g_665b78);
 }
@@ -55,7 +55,7 @@ int __cdecl fcn_005024e0(int a, int b)
 			}
 		}
 	}
-	sum = (int) (sum * g_662908);
+	sum = (int) (sum * 0.5);
 	if (*(float*) (c + 0x24) != g_6628a8) {
 		sum = (int) (*(float*) (c + 0x24) / *(float*) (c + 0x20) * sum);
 	}

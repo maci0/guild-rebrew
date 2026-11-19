@@ -128,7 +128,7 @@ void __cdecl fcn_005bebe0(int a0, int a1, int a2)
 	io_AppendText(a2 + 0x16c3);
 	d2_SetForm(h, 2);
 	x = ((struct s_1015f4c*) g_1015f4c)[d2_CurrentWindowId].x;
-	f = (float) *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2) * g_664168;
+	f = (float) *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + a2) * 0.023809524f;
 	if (!(f < g_662a98)) {
 		f = g_662a98;
 	}

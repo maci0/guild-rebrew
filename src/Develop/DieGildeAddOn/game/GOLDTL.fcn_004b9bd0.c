@@ -1,18 +1,19 @@
+#include "client_types.h"
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include <string.h>
 
 #pragma pack(push, 2)
-typedef struct Date {
-	int a;
-	int b;
-	int c;
-	short d;
-} Date;
+
+
+
+
+
+
 #pragma pack(pop)
 // SIZE 0xe
 
 extern char g_868060[];
-#include "client_types.h"
+
 extern pos14_7f4c00 gm_GameTime;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
@@ -31,7 +32,7 @@ int __cdecl fcn_004b9bd0(int* a1)
 	char* x1;
 	char* x2;
 	char* y;
-	Date d;
+	pos14_7f4c00 d;
 	char* ys[8];
 	char* ss[8];
 	char buf[0x200];
@@ -62,7 +63,7 @@ int __cdecl fcn_004b9bd0(int* a1)
 	}
 	if (count == 0)
 		return 0x400;
-	d = (*(Date*)&gm_GameTime);
+	d = (*(pos14_7f4c00*)&gm_GameTime);
 	d.a++;
 	index = gm_RandomMod(count);
 	s = ss[index];

@@ -71,7 +71,7 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 					while (sub != 0 && remaining > 0) {
 						if (((Rec*) lpObjektePROT)[*sub].type != 0x17
 							&& ((Rec*) lpObjektePROT)[*sub].type != 0x25) {
-							div = (int) (fcn_0050bb50(*sub, g_773d75) * g_662908);
+							div = (int) (fcn_0050bb50(*sub, g_773d75) * 0.5);
 							if (div != 0) {
 								amount = remaining / div;
 								if (amount <= 1) {
@@ -120,7 +120,7 @@ int __cdecl fcn_005c4ec0(int a0, char* a1, int a2, char* a3)
 					while (sub != 0 && remaining > 0) {
 						if (((Rec*) lpObjektePROT)[*sub].type == 0x17
 							|| ((Rec*) lpObjektePROT)[*sub].type == 0x25) {
-							div = (int) (fcn_0050bb50(*sub, g_773d75) * g_662908);
+							div = (int) (fcn_0050bb50(*sub, g_773d75) * 0.5);
 							if (div != 0) {
 								amount = remaining / div;
 								if (amount <= 1) {

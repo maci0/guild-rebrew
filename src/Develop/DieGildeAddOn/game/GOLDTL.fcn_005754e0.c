@@ -12,13 +12,13 @@ typedef struct {
 } rec24;
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int owner;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 // SIZE 0x7c
 struct req {
@@ -28,7 +28,7 @@ struct req {
 
 extern signed char g_6a3440;
 extern char g_10069a0[];
-extern char g_7f4ca0[];
+
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -50,7 +50,7 @@ void __cdecl fcn_005754e0(char* u)
 		return;
 	}
 	for (i = 0; i < 128; i++) {
-		if (((rec24*)g_10069a0)[i].f0 != 0 && ((rec24*)g_10069a0)[i].f4 == ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner) {
+		if (((rec24*)g_10069a0)[i].f0 != 0 && ((rec24*)g_10069a0)[i].f4 == ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id) {
 			break;
 		}
 	}

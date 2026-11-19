@@ -90,7 +90,7 @@ void __cdecl fcn_0054da10(char* a)
 			if (*(int*) p != -1) {
 				e = gm_LookupEntityRecordById(*(int*) p);
 				if (e != 0 && *(int*) (e + 0x184) != 0) {
-					base = (int) ((float) *(unsigned char*) (e + 0x82) * g_664168
+					base = (int) ((float) *(unsigned char*) (e + 0x82) * 0.023809524f
 					    + 1.0f);
 					kind = (gm_RandomMod(4) & 0xffff) + 3;
 					while (kind > 0) {

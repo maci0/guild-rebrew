@@ -1,11 +1,11 @@
 
 
 // SIZE 0x3cc
-typedef struct {
-	char pad0[0xc];
-	int width;
-	char pad10[0x3cc - 0x10];
-} Slot;
+#include "Develop/Units/d2.v1/d2_window_view.h"
+
+
+
+
 
 // SIZE 0x2f4
 typedef struct {
@@ -20,7 +20,7 @@ extern char g_6a2f80[];
 extern char g_6a2f74[];
 extern int d2_CurrentWindowId;
 #include "client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+
 extern char* g_1015ea0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14b5e84;
@@ -51,7 +51,7 @@ void __cdecl fcn_0052e450(unsigned short* e)
 			d2_SetForm(g_6a25b8, 1);
 			io_AppendText(g_6a2f74, *parent, *e * 2 + 0x9a8);
 			d2_SetForm(g_6a25b8, 0);
-			x = ((((Slot*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1;
+			x = ((((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1;
 			id = fcn_0046f740(x, 0x30, *e + 0xdf, d2_CurrentWindowId);
 			((Ent*)g_1015ea0)[id].f5c = 1;
 			if (*parent == g_774970) {

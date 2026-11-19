@@ -27,7 +27,7 @@ int __cdecl fcn_0048dcd0(char* e, char* a2, char* a3)
 	int k;
 
 	mask = 0xf00500;
-	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + g_662da8, &idx) == 0) {
+	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + 25.0f, &idx) == 0) {
 		return 0;
 	}
 	t = &((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx];

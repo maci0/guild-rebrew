@@ -1,4 +1,4 @@
-extern float g_662a94; /* -1.0f */
+
 extern float g_66413c; /* 252.0f */
 
 typedef struct {
@@ -70,7 +70,7 @@ int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
 		}
 		buf[0] = 1;
 		r = fcn_004fa5b0(keep[i], a1, buf);
-		f = (r & 2) ? g_662a94 : 0.0f;
+		f = (r & 2) ? (-1.0f) : 0.0f;
 		if (*(unsigned char*) (a1 + i + 0x80) < 0x2a) {
 			slot = 1;
 		} else if (*(unsigned char*) (a1 + i + 0x80) < 0x54) {
@@ -108,7 +108,7 @@ int __cdecl fcn_00495a80(int a0, char* a1, int a2, char* a3, char* a4)
 			action.count[i] = 0xfc;
 		}
 		r = fcn_004fa5b0(keep[i], a1, buf);
-		f = (r & 2) ? g_662a94 : 0.0f;
+		f = (r & 2) ? (-1.0f) : 0.0f;
 		if (*(unsigned char*) (a1 + 0x80 + i) < 0x2a) {
 			weight[i] = 1;
 		} else if (*(unsigned char*) (a1 + 0x80 + i) < 0x54) {

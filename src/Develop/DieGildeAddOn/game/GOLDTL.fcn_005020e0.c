@@ -131,7 +131,7 @@ void __cdecl fcn_005020e0(int a0, char* a1)
 	for (i = 0; i < 85; i++) {
 		kind = lpObjektePROT[g_85ab80[a0].slots[i].objekt_id * 0x41];
 		if (kind != 0x17 && kind != 0x25) {
-			g_85ab80[a0].slots[i].unk_20 = (float) (((double) fcn_00502450(a0, i) - g_85ab80[a0].slots[i].unk_20) * g_662908 + g_85ab80[a0].slots[i].unk_20);
+			g_85ab80[a0].slots[i].unk_20 = (float) (((double) fcn_00502450(a0, i) - g_85ab80[a0].slots[i].unk_20) * 0.5 + g_85ab80[a0].slots[i].unk_20);
 		}
 		if (a0 == g_773d75) {
 			g_85ab80[a0].slots[i].unk_34 = fcn_005024e0(a0, i);

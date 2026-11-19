@@ -1,21 +1,21 @@
 
 
-typedef struct Vtx {
-	float x;
-	float y;
-	float z;
-	float rhw;
-	unsigned int color;
-	float u;
-	float v;
-} Vtx;
-// SIZE 0x1c
 
-typedef struct Quad {
-	Vtx v[6];
-	int tex;
-} Quad;
-// SIZE 0xac
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 typedef struct Tex {
 	char pad0[0x20];
@@ -25,12 +25,12 @@ typedef struct Tex {
 } Tex;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern Quad g_1552020[0x400];
+#include "Develop/Unassigned/render_quad.h"
 
-int __cdecl fcn_0047b8b0(int x, int y, int w, int h, Quad* q);
-void __cdecl fcn_0047b9a0(Quad* q, unsigned char r, unsigned char g, unsigned char b);
+int __cdecl fcn_0047b8b0(int x, int y, int w, int h, RENDER_QUAD* q);
+void __cdecl fcn_0047b9a0(RENDER_QUAD* q, unsigned char r, unsigned char g, unsigned char b);
 
-Quad* __cdecl fcn_0047c1f0(float u, float v, int w, int h, Tex* tex, int x, int y)
+RENDER_QUAD* __cdecl fcn_0047c1f0(float u, float v, int w, int h, Tex* tex, int x, int y)
 {
 	int cw;
 	int ch;
@@ -40,7 +40,7 @@ Quad* __cdecl fcn_0047c1f0(float u, float v, int w, int h, Tex* tex, int x, int 
 	int th;
 	float z;
 	float rhw;
-	Quad* q;
+	RENDER_QUAD* q;
 	int i;
 
 	du = 0.0f;

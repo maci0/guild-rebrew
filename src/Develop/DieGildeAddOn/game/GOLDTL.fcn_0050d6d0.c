@@ -46,7 +46,7 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 				v6 = (int) *(unsigned short*) (a0 + 0x27);
 				v2 = *(char*) ((unsigned int) v6 * 0x21c + 0x7f4ca2);
 				if (v2 != 6 && v2 != 7) {
-					offer = gm_WalkEntityChain(*a1) * g_6628f0;
+					offer = gm_WalkEntityChain(*a1) * 0.2;
 					ratio = (float) v21;
 					if (ratio < offer) {
 						if (!(offer < 64000.0f))

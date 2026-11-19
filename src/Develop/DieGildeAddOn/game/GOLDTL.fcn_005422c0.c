@@ -345,12 +345,12 @@ void __cdecl fcn_005422c0(unsigned int arg)
 								if (v == 2 || v == 1 || v == 0x13 || v == 0x14 || v == 0x10 || v == 0xf) {
 									fcn_004c4510((char*) tile2, *(int*) (tile2 + 4));
 									b1 = *(unsigned char*) (tile2 + 0x82);
-									cv = (char) (int) ((double) b1 * g_664128 + g_662908);
+									cv = (char) (int) ((double) b1 * g_664128 + 0.5);
 									if (b1 > g_665368) {
 										fcn_004c4570(1, 1, (int) (tile2 - g_aed32c) + 0x82, &cv);
 									}
 									b1 = *(unsigned char*) (tile2 + 0x83);
-									cv = (char) (int) ((double) b1 * g_664128 + g_662908);
+									cv = (char) (int) ((double) b1 * g_664128 + 0.5);
 									if (b1 > g_665368) {
 										fcn_004c4570(1, 1, (int) (tile2 - g_aed32c) + 0x83, &cv);
 									}

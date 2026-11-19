@@ -1,14 +1,15 @@
+#include "client_types.h"
 
 
 
 #pragma pack(push, 2)
 // SIZE 0xe
-typedef struct {
-	int a;
-	int b;
-	int c;
-	short d;
-} Stamp;
+
+
+
+
+
+
 #pragma pack(pop)
 
 #pragma pack(push, 1)
@@ -44,7 +45,7 @@ typedef struct {
 // SIZE 0x88
 typedef struct {
 	char pad0[0x52];
-	Stamp stamp;
+	pos14_7f4c00 stamp;
 	char pad60[0x24];
 	int event;
 } Order;
@@ -52,7 +53,7 @@ typedef struct {
 extern unsigned char* lpGebaeudePROT;
 extern char g_7f4ca0[];
 extern unsigned char g_773d75;
-#include "client_types.h"
+
 extern pos14_7f4c00 gm_GameTime;
 
 Estate* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -64,7 +65,7 @@ void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c5f60(int, int, int);
 void __cdecl fcn_004c6000(int, int);
-void __cdecl fcn_00500bb0(Stamp*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, Order*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c4ef0(char*);
@@ -96,7 +97,7 @@ void __cdecl fcn_00505e20(int search, int buyer, int price, Order* o, int notify
 		}
 	}
 	if (o != 0) {
-		o->stamp = (*(Stamp*)&gm_GameTime);
+		o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
 		fcn_00500bb0(&o->stamp, 0, 0, 1);
 		o->event = fcn_004c5620(-1, o);
 	}

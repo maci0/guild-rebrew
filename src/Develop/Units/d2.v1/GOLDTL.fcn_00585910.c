@@ -33,7 +33,7 @@ extern char g_6a93c0[];
 
 #include "client_types.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern Win_1015f40 g_1015f40[0x60];
+#include "Develop/Units/d2.v1/d2_window_view.h"
 
 void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
@@ -113,7 +113,7 @@ void __cdecl fcn_00585910(char* e)
 	d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 	io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
 	item = d2_ShowTxt(0, 0, buf, ids[1]);
-	((Ctl*) g_1015ea0)[item].x18 = g_1015f40[ids[1]].xc;
+	((Ctl*) g_1015ea0)[item].x18 = ((D2_WIN*)g_1015f40)[ids[1]].width;
 	((Ctl*) g_1015ea0)[item].x6c = 1;
 	fcn_00472900(item, 0x53);
 	io_FormatTextBuffer(buf, (char*) 0x403f, *(unsigned short*) (data + 0xa));
@@ -128,28 +128,28 @@ void __cdecl fcn_00585910(char* e)
 	((Ctl*) g_1015ea0)[item].x18 = 0xc8;
 	io_FormatTextBuffer(buf, g_679060, g_14b58e8);
 	ids[4] = fcn_00468df0(0x14a, 0xbe, 0xc5, g_14b5f04, ids[1]);
-	fcn_00469110(ids[4], g_1015f40[ids[1]].xc / 3 - 0x14);
+	fcn_00469110(ids[4], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	fcn_00472900(ids[4], 0x54);
 	io_FormatTextBuffer(buf, g_679060, g_14b58e8);
 	ids[5] = fcn_00468df0(10, 0x64, 0xc5, buf, ids[1]);
-	fcn_00469110(ids[5], g_1015f40[ids[1]].xc / 3 - 0x14);
+	fcn_00469110(ids[5], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	fcn_00472900(ids[5], 0x54);
-	fcn_00534160(g_1015f40[ids[1]].xc / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
+	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
 	io_FormatTextBuffer(buf, g_679060, g_14b58ec);
 	ids[6] = fcn_00468df0(10, 0x82, 0xc5, buf, ids[1]);
-	fcn_00469110(ids[6], g_1015f40[ids[1]].xc / 3 - 0x14);
+	fcn_00469110(ids[6], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	fcn_00472900(ids[6], 0x54);
-	fcn_00534160(g_1015f40[ids[1]].xc / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
+	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
 	io_FormatTextBuffer(buf, g_679060, g_14b58f0);
 	ids[7] = fcn_00468df0(10, 0xa0, 0xc5, buf, ids[1]);
-	fcn_00469110(ids[7], g_1015f40[ids[1]].xc / 3 - 0x14);
+	fcn_00469110(ids[7], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	fcn_00472900(ids[7], 0x54);
-	fcn_00534160(g_1015f40[ids[1]].xc / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
+	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
 	io_FormatTextBuffer(buf, g_679060, g_14b58f4);
 	ids[8] = fcn_00468df0(10, 0xbe, 0xc5, buf, ids[1]);
-	fcn_00469110(ids[8], g_1015f40[ids[1]].xc / 3 - 0x14);
+	fcn_00469110(ids[8], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	fcn_00472900(ids[8], 0x54);
-	fcn_00534160(g_1015f40[ids[1]].xc / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
+	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
 	d2_SetForm(ids[0], 3);
 	ids[3] = fcn_00472250(ids[0], 3, io_AppendText(0x4049));
 	do {
@@ -187,7 +187,7 @@ void __cdecl fcn_00585910(char* e)
 			d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 			io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
 			item = d2_ShowTxt(0, 0, buf, ids[1]);
-			((Ctl*) g_1015ea0)[item].x18 = g_1015f40[ids[1]].xc;
+			((Ctl*) g_1015ea0)[item].x18 = ((D2_WIN*)g_1015f40)[ids[1]].width;
 			((Ctl*) g_1015ea0)[item].x6c = 1;
 			fcn_00472900(item, 0x53);
 			io_FormatTextBuffer(buf, (char*) 0x403f, *(unsigned short*) (data + 0xa));
@@ -202,28 +202,28 @@ void __cdecl fcn_00585910(char* e)
 			((Ctl*) g_1015ea0)[item].x18 = 0xc8;
 			io_FormatTextBuffer(buf, g_679060, g_14b58e8);
 			ids[4] = fcn_00468df0(0x14a, 0xbe, 0xc5, g_14b5f04, ids[1]);
-			fcn_00469110(ids[4], g_1015f40[ids[1]].xc / 3 - 0x14);
+			fcn_00469110(ids[4], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			fcn_00472900(ids[4], 0x54);
 			io_FormatTextBuffer(buf, g_679060, g_14b58e8);
 			ids[5] = fcn_00468df0(10, 0x64, 0xc5, buf, ids[1]);
-			fcn_00469110(ids[5], g_1015f40[ids[1]].xc / 3 - 0x14);
+			fcn_00469110(ids[5], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			fcn_00472900(ids[5], 0x54);
-			fcn_00534160(g_1015f40[ids[1]].xc / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
+			fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
 			io_FormatTextBuffer(buf, g_679060, g_14b58ec);
 			ids[6] = fcn_00468df0(10, 0x82, 0xc5, buf, ids[1]);
-			fcn_00469110(ids[6], g_1015f40[ids[1]].xc / 3 - 0x14);
+			fcn_00469110(ids[6], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			fcn_00472900(ids[6], 0x54);
-			fcn_00534160(g_1015f40[ids[1]].xc / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
+			fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
 			io_FormatTextBuffer(buf, g_679060, g_14b58f0);
 			ids[7] = fcn_00468df0(10, 0xa0, 0xc5, buf, ids[1]);
-			fcn_00469110(ids[7], g_1015f40[ids[1]].xc / 3 - 0x14);
+			fcn_00469110(ids[7], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			fcn_00472900(ids[7], 0x54);
-			fcn_00534160(g_1015f40[ids[1]].xc / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
+			fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
 			io_FormatTextBuffer(buf, g_679060, g_14b58f4);
 			ids[8] = fcn_00468df0(10, 0xbe, 0xc5, buf, ids[1]);
-			fcn_00469110(ids[8], g_1015f40[ids[1]].xc / 3 - 0x14);
+			fcn_00469110(ids[8], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			fcn_00472900(ids[8], 0x54);
-			fcn_00534160(g_1015f40[ids[1]].xc / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
+			fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
 		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

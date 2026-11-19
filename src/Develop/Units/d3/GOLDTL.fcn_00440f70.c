@@ -1,17 +1,17 @@
 
 
-typedef struct IDev IDev;
-// SIZE 0xcc
-typedef struct IDevVtbl {
-	void* slots[37];
-	long (__stdcall* SetTransform)(IDev*, int, float*);
-	void* slots2[12];
-	long (__stdcall* SetRenderState)(IDev*, int, int);
-} IDevVtbl;
-// SIZE 0x4
-struct IDev {
-	IDevVtbl* v;
-};
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
+
+
+
+
+
+
+
+
+
+
+
 
 // SIZE 0x1f4
 typedef struct Cell {
@@ -21,7 +21,7 @@ typedef struct Cell {
 } Cell;
 
 #include "Develop/Units/d3/d3_camera.h"
-extern void* g_6b5de0;
+
 extern volatile int g_6b7fac;
 
 float* __stdcall fcn_005ec410(float*, float, float, float);
@@ -39,7 +39,7 @@ void __cdecl fcn_00440f70(char* o, char flag)
 	fcn_005ec410(m, *(float*) (o + 0x50) - *(float*) (((char*)d3_ActiveCamera) + 0x4c), *(float*) (o + 0x54) - *(float*) (((char*)d3_ActiveCamera) + 0x50),
 	             *(float*) (o + 0x58) - *(float*) (((char*)d3_ActiveCamera) + 0x54));
 	fcn_005eb970(m, m, (float*) (((char*)d3_ActiveCamera) + 0x18c));
-	((IDev*)g_6b5de0)->v->SetTransform(((IDev*)g_6b5de0), 0x100, m);
+	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetTransform(((D3D_DEVICE_VIEW*)g_6b5de0), 0x100, m);
 	if (flag != 0) {
 		fcn_00440670(g_6b7fac, *(unsigned char*) (o + 0x8035), *(int*) (o + 0x7da0));
 	}
@@ -51,5 +51,5 @@ void __cdecl fcn_00440f70(char* o, char flag)
 			}
 		}
 	}
-	((IDev*)g_6b5de0)->v->SetRenderState(((IDev*)g_6b5de0), 0x2f, 0x10);
+	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x2f, 0x10);
 }

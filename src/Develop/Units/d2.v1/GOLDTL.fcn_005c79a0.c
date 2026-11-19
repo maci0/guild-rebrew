@@ -56,7 +56,7 @@ extern char* g_7746cc;
 extern int g_7746f0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_7ea360;
-extern double g_662b20;
+
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 extern char s_6aa194[];
@@ -157,7 +157,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 		d2_SetForm(dlg, 1);
 		i = g_6b7fac - start;
 		alpha = (double) (unsigned int) i * 0.0013333333333333333;
-		if (!(alpha < g_662b20)) { alpha = g_662b20; }
+		if (!(alpha < 0.4)) { alpha = 0.4; }
 		*(float*) (g_77255c + 0x3a4) = (float) alpha;
 
 

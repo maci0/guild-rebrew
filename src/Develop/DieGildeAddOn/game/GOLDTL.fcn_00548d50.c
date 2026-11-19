@@ -27,7 +27,7 @@ struct stats {
 
 extern pos14_7f4c00 gm_GameTime;
 extern char* gm_CityEntity;
-extern float g_662a3c;
+
 extern float g_6629c0;
 extern float g_6628cc;
 extern float g_6628a0;
@@ -81,7 +81,7 @@ void __cdecl fcn_00548d50(void)
 	idx = gm_RandomMod(n);
 	fcn_004f4830(7, &info);
 	pick = cand[idx];
-	amount = (int) ((*(int*) (pick + 0x65) + *(int*) (pick + 0x69)) * (((5 - info.level) * g_662a3c + g_6629c0) * g_6628cc));
+	amount = (int) ((*(int*) (pick + 0x65) + *(int*) (pick + 0x69)) * (((5 - info.level) * 0.1f + g_6629c0) * g_6628cc));
 	m.kind = 0x67;
 	m.when = gm_GameTime;
 	m.player = *(int*) (gm_CityEntity + 4);

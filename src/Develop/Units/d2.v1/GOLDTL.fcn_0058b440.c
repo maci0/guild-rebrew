@@ -14,7 +14,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl io_FormatTextBuffer(void*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_CurrentWindowId;
-extern float g_662c30;
+/* The color scale is a binary32 literal. */
 extern const float g_662cf8;
 /* Fill and draw the eight trade-goods rows of the market window: compact the
    non-empty entries from the supplier record, build one icon plus five price
@@ -168,7 +168,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
         io_AppendText((int) 0x6a9668, 0x4102, (int) v12);
         io_FormatTextBuffer(v12, 0x6a9658,
                      (int) (*(unsigned char*) ((char*) v1 + 0xc) *
-                            g_662c30 * g_662cf8));
+                            0.0039215689f * g_662cf8));
         io_AppendText((int) 0x6a9668, 0x4103, (int) v12);
         if (a3 == 1) {
             v6 = fcn_00468df0(

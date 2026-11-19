@@ -2,15 +2,15 @@
 
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int handle;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
 extern int g_100f1dc;
@@ -25,7 +25,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_00525f60(struct house*, int);
+int __cdecl fcn_00525f60(ENTITY_RECORD*, int);
 void __cdecl fcn_005100f0(int, int);
 #include "client_packet_builder.h"
 void __cdecl fcn_004c4570(int, int, int, int*);
@@ -63,9 +63,9 @@ void __cdecl fcn_0058acb0(int unused, char* p)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				if (fcn_00525f60(&((struct house*)g_7f4ca0)[g_774970], b) == 1) {
+				if (fcn_00525f60(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], b) == 1) {
 					v = 0;
-					fcn_005100f0(((struct house*)g_7f4ca0)[g_774970].handle, -b);
+					fcn_005100f0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -b);
 					fcn_004c4510(p, *(int*) (p + 2));
 					fcn_004c4570(4, 1, 0x1c, &v);
 					fcn_004c4570(4, 1, 0x20, &v);

@@ -67,7 +67,7 @@ void __cdecl fcn_005c49e0(unsigned char* p)
 		last = fl;
 		if (redraw != 0) {
 			d2_SetForm(d, 1);
-			k = (int) (9 - fcn_00508da0(p) / 10 + g_662908);
+			k = (int) (9 - fcn_00508da0(p) / 10 + 0.5);
 			if (*(unsigned short*) (p + 0x27) != g_774970 && *(unsigned short*) (p + 0x25) != g_774970) {
 				io_AppendText(0x17a0, *(unsigned short*) (p + 0x25), p, k + 0x17b1, k + 0x17bb, r);
 				if (*tbl == 1) {

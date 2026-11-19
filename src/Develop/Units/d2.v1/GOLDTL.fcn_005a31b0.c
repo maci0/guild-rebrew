@@ -5,7 +5,7 @@ extern int d2_CurrentWindowId;
 extern int g_14ce8e0;
 extern char g_1015f40[];
 extern char g_868060[];
-#include "client_town.h"
+#include "Develop/DieGildeAddOn/game/season_slots.h"
 extern double g_665ed0;
 extern char g_6a40b0[];
 
@@ -74,7 +74,7 @@ void __cdecl fcn_005a31b0(char* a0)
 				d2_SetForm(idx, 1);
 				io_AppendText((char*) 0x1a11);
 				d2_SetForm(idx, 5);
-				io_AppendText((char*) 0x1a14, *(int*) (a0 + 0x65) * 0x2f4 + g_868060, g_85ab80[*(int*) (a0 + 0x65)].c[0].x0);
+				io_AppendText((char*) 0x1a14, *(int*) (a0 + 0x65) * 0x2f4 + g_868060, g_85ab80[*(int*) (a0 + 0x65)].unk_00);
 				win = *(int*) (idx * 700 + 0x103814c) * 0x3cc;
 				v12p = g_1015f40 + win;
 				sprintf(name, "Wappen128_ns_Stadt_%s", (char*) (*(int*) (a0 + 0x65) * 0x2f4 + (int) g_868060));

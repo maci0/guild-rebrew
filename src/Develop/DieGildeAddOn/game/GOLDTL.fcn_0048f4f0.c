@@ -49,7 +49,7 @@ int __cdecl fcn_0048f4f0(char* e, char* q, Blk24* b1, Blk24* b2)
 	if (fcn_005463a0(2, 0, 0x88, 3, *(int*) (q + 1)) != 0)
 		return 0;
 	t = 0xf00500;
-	if (fcn_004a5340(e, 1, &t, 0, gm_RandomMod(0x20) + g_664154, &idx) == 0)
+	if (fcn_004a5340(e, 1, &t, 0, gm_RandomMod(0x20) + 32.0f, &idx) == 0)
 		return 0;
 	p = g_7f4ca0 + idx * 0x21c;
 	v = *(int*) (p + 0x170);

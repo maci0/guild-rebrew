@@ -26,7 +26,7 @@ void __cdecl fcn_004c35f0(void)
 	quietId = 0xffff;
 	average = 0;
 
-	if (gm_RandomFloat01() > g_662b20) {
+	if (gm_RandomFloat01() > 0.4) {
 		return;
 	}
 	if (g_772e6c == 0) {

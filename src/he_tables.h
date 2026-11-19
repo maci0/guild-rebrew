@@ -2,7 +2,7 @@
 #define HE_TABLES_H
 
 /* GOLDTL tables cleared together by fcn_00545430:
- * g_7d2020 Deal[256], g_7dcae0 ApEvent[256], g_7dc6e0 Rec7dc6e0[64]. */
+ * g_7d2020 Deal[256], g_7dcae0 HE_AP_EVENT[256], g_7dc6e0 Rec7dc6e0[64]. */
 
 #pragma pack(2)
 typedef struct {
@@ -27,7 +27,7 @@ typedef struct {
 // SIZE 0xa4
 
 #include "Develop/DieGildeAddOn/game/he_ap_event.h"
-typedef HE_AP_EVENT ApEvent;
+
 
 typedef struct {
 	int a;

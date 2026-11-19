@@ -25,7 +25,7 @@ int __cdecl fcn_004f7cd0(void* entity, void* context)
 		fcn_004fa5f0(buf, 1, 0x657c7);
 		return 2;
 	} else if (*(int*) context == 1 && *(char*) ((char*) entity + 2) == 6) {
-		io_FormatTextBuffer((char*) context + 0x14, (int) g_679060, 0x1d92);
+		io_FormatTextBuffer((char*) context + 0x14, (int) "%s", 0x1d92);
 	}
 	return 2;
 }

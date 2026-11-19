@@ -21,7 +21,7 @@ int __cdecl fcn_004f76d0(void* entity, void* command)
 		return 2;
 	}
 	if (kind == 1 && *(char*) ((char*) entity + 2) == 6) {
-		io_FormatTextBuffer((char*) command + 0x14, (int) g_679060, 0x1d60);
+		io_FormatTextBuffer((char*) command + 0x14, (int) "%s", 0x1d60);
 	}
 	return 2;
 }

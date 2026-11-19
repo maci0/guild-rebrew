@@ -36,15 +36,15 @@ typedef struct {
 	int budget;
 } Master47de;
 
-#pragma pack(push, 2)
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
 // SIZE 0xe
-typedef struct {
-	int day;
-	unsigned short hour;
-	int min;
-	int sec;
-} Time47de;
-#pragma pack(pop)
+
+
+
+
+
+
+
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -77,7 +77,7 @@ void __cdecl fcn_0047de50(Master47de* m)
 	char buf[0x100];
 	unsigned char k;
 
-	if ((*(Time47de*)&gm_GameTime).hour < 6 || ((*(Time47de*)&gm_GameTime).hour == 6 && (*(Time47de*)&gm_GameTime).min < 30)) {
+	if ((*(GAME_TIMESTAMP*)&gm_GameTime).hour < 6 || ((*(GAME_TIMESTAMP*)&gm_GameTime).hour == 6 && (*(GAME_TIMESTAMP*)&gm_GameTime).minute < 30)) {
 		return;
 	}
 	if (gm_CanEvaluateMaster((char*) m) == 0) {

@@ -40,7 +40,7 @@ extern int d2_DialogCenterY;
 extern int g_77250c;
 extern void* g_6b5de0;
 extern int g_67dab8;
-extern int g_77256c;
+#include "Develop/Units/d2.v1/d2_surface.h"
 extern char* g_77253c;
 extern int g_67d390;
 extern int g_67d394;
@@ -283,15 +283,15 @@ int __cdecl d2_Open(int a0, int a1, int a2, char* a3, char* a4)
 		*(int*) (info + 4) = 0x20;
 		*(int*) (info + 8) = 0x20;
 		*(int*) (info + 0x28) = g_67dab8;
-		g_77256c = fcn_004770a0(info, 2);
+		g_77256c = (D2_SURFACE*) fcn_004770a0(info, 2);
 		if (g_77256c) {
-			fcn_00475fd0(g_77256c);
+			fcn_00475fd0((int) g_77256c);
 			for (i = 0; i < 0x20; i++) {
 				for (j = 0; j < 0x20; j++) {
-					fcn_00476b10(j, i, 0xff, 0xff, 0xff, g_77256c);
+					fcn_00476b10(j, i, 0xff, 0xff, 0xff, (int) g_77256c);
 				}
 			}
-			fcn_00476060(g_77256c);
+			fcn_00476060((int) g_77256c);
 			fcn_00472880(fcn_00465950(s_67d474));
 			g_77253c = fcn_0047ce00(s_67d67c, 0);
 			if (g_77253c == 0) {

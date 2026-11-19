@@ -21,13 +21,13 @@ struct unit {
 };
 
 // SIZE 0x21c
-struct house {
-	char pad0[0xd];
-	unsigned char level;
-	char pade[0x21c - 0xe];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
 extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -38,7 +38,7 @@ void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_00563850(struct unit* u)
 {
 	char* e;
-	struct house* h;
+	ENTITY_RECORD* h;
 
 	e = gm_StartFilteredEntitySearch(1, 1, u->search);
 	if (e == 0) {
@@ -52,6 +52,6 @@ void __cdecl fcn_00563850(struct unit* u)
 	u->p44 = gm_GameTime;
 	fcn_00500bb0(&u->p52, 0, 10, 0);
 	u->pb8 = u->p52;
-	h = &((struct house*) g_7f4ca0)[u->house];
-	fcn_00500bb0(&u->pb8, 0, (int) (10.0 * (h->level >= 9 ? 0.4f : h->level == 8 ? 0.6f : h->level == 7 ? 0.8f : 1.0f) * u->dist), 0);
+	h = &((ENTITY_RECORD*) g_7f4ca0)[u->house];
+	fcn_00500bb0(&u->pb8, 0, (int) (10.0 * (h->unk_00d >= 9 ? 0.4f : h->unk_00d == 8 ? 0.6f : h->unk_00d == 7 ? 0.8f : 1.0f) * u->dist), 0);
 }

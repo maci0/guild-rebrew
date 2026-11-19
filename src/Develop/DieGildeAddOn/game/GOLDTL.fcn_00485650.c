@@ -4,25 +4,7 @@
 // segments. The second list prices its entries by the first list's id at the
 // same index.
 
-typedef struct Seg {
-	int id;
-	int next;
-	int x8;
-	int xc;
-	int x10;
-	int x14;
-	int x18;
-	float price;
-	int x20;
-	int stock;
-	int buy;
-	int full;
-	int flags;
-	int x34;
-	int x38;
-	int x3c;
-} Seg;
-// SIZE 0x40
+#include "Develop/DieGildeAddOn/game/goods_plan.h"
 
 typedef struct Stats {
 	int x0;
@@ -38,7 +20,6 @@ typedef struct Stats {
 // SIZE 0xb8
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern Seg g_100b0c0[];
 extern int g_100e720[];
 extern int g_100e760[];
 extern unsigned char g_773d75;
@@ -66,47 +47,47 @@ void __cdecl fcn_00485650(char* a, char* b)
 
 	for (j = 0; g_100e760[j] != 0; j++) {
 		for (i = 0; i < ai_ResourceCount; i++) {
-			if (g_100b0c0[i].id == g_100e760[j]) {
+			if (g_100b0c0[i].goods_id == g_100e760[j]) {
 				break;
 			}
 		}
 		if (i >= ai_ResourceCount) {
-			g_100b0c0[ai_ResourceCount].id = g_100e760[j];
-			g_100b0c0[ai_ResourceCount].next = -1;
-			g_100b0c0[ai_ResourceCount].x8 = 0;
-			g_100b0c0[ai_ResourceCount].x10 = 0;
-			g_100b0c0[ai_ResourceCount].x14 = 0;
-			g_100b0c0[ai_ResourceCount].x18 = 0;
+			g_100b0c0[ai_ResourceCount].goods_id = g_100e760[j];
+			g_100b0c0[ai_ResourceCount].parent_index = -1;
+			g_100b0c0[ai_ResourceCount].supplier = 0;
+			g_100b0c0[ai_ResourceCount].unk_10 = 0;
+			g_100b0c0[ai_ResourceCount].requested = 0;
+			g_100b0c0[ai_ResourceCount].unk_18 = 0;
 			g_100b0c0[ai_ResourceCount].price = fcn_0050bb50(g_100e760[j], g_773d75);
+			g_100b0c0[ai_ResourceCount].allocated = 0;
 			g_100b0c0[ai_ResourceCount].stock = 0;
-			g_100b0c0[ai_ResourceCount].buy = 0;
-			g_100b0c0[ai_ResourceCount].flags = 0x81;
-			g_100b0c0[ai_ResourceCount].x3c = 0;
-			g_100b0c0[ai_ResourceCount].buy = fcn_0050dfa0(b, g_100e760[j]);
-			g_100b0c0[ai_ResourceCount].full = gm_eval_SlotVoll(b, g_100e760[j], 1000000);
+			g_100b0c0[ai_ResourceCount].state_30 = 0x81;
+			g_100b0c0[ai_ResourceCount].flags = 0;
+			g_100b0c0[ai_ResourceCount].stock = fcn_0050dfa0(b, g_100e760[j]);
+			g_100b0c0[ai_ResourceCount].capacity = gm_eval_SlotVoll(b, g_100e760[j], 1000000);
 			ai_ResourceCount++;
 		}
 	}
 	for (j = 0; g_100e720[j] != 0; j++) {
 		for (i = 0; i < ai_ResourceCount; i++) {
-			if (g_100b0c0[i].id == g_100e720[j]) {
+			if (g_100b0c0[i].goods_id == g_100e720[j]) {
 				break;
 			}
 		}
 		if (i >= ai_ResourceCount) {
-			g_100b0c0[ai_ResourceCount].id = g_100e720[j];
-			g_100b0c0[ai_ResourceCount].next = -1;
-			g_100b0c0[ai_ResourceCount].x8 = 0;
-			g_100b0c0[ai_ResourceCount].x10 = 0;
-			g_100b0c0[ai_ResourceCount].x14 = 0;
-			g_100b0c0[ai_ResourceCount].x18 = 0;
+			g_100b0c0[ai_ResourceCount].goods_id = g_100e720[j];
+			g_100b0c0[ai_ResourceCount].parent_index = -1;
+			g_100b0c0[ai_ResourceCount].supplier = 0;
+			g_100b0c0[ai_ResourceCount].unk_10 = 0;
+			g_100b0c0[ai_ResourceCount].requested = 0;
+			g_100b0c0[ai_ResourceCount].unk_18 = 0;
 			g_100b0c0[ai_ResourceCount].price = fcn_0050bb50(g_100e760[j], g_773d75);
+			g_100b0c0[ai_ResourceCount].allocated = 0;
 			g_100b0c0[ai_ResourceCount].stock = 0;
-			g_100b0c0[ai_ResourceCount].buy = 0;
-			g_100b0c0[ai_ResourceCount].flags = 0x81;
-			g_100b0c0[ai_ResourceCount].x3c = 0;
-			g_100b0c0[ai_ResourceCount].buy = fcn_0050dfa0(b, g_100e720[j]);
-			g_100b0c0[ai_ResourceCount].full = gm_eval_SlotVoll(b, g_100e720[j], 1000000);
+			g_100b0c0[ai_ResourceCount].state_30 = 0x81;
+			g_100b0c0[ai_ResourceCount].flags = 0;
+			g_100b0c0[ai_ResourceCount].stock = fcn_0050dfa0(b, g_100e720[j]);
+			g_100b0c0[ai_ResourceCount].capacity = gm_eval_SlotVoll(b, g_100e720[j], 1000000);
 			ai_ResourceCount++;
 		}
 	}
@@ -129,8 +110,8 @@ void __cdecl fcn_00485650(char* a, char* b)
 			}
 			if (found == 0) {
 				for (i = 0; i < ai_ResourceCount; i++) {
-					if (id == g_100b0c0[i].id) {
-						g_100b0c0[i].stock += st.x68[k];
+					if (id == g_100b0c0[i].goods_id) {
+						g_100b0c0[i].allocated += st.x68[k];
 					}
 				}
 			}
@@ -138,8 +119,8 @@ void __cdecl fcn_00485650(char* a, char* b)
 		for (m = 0; m < 3; m++) {
 			if (((unsigned short*) (e + 0xd6))[m] != 0) {
 				for (i = 0; i < ai_ResourceCount; i++) {
-					if (((unsigned short*) (e + 0xd6))[m] == g_100b0c0[i].id) {
-						g_100b0c0[i].stock += ((int*) (e + 0xdc))[m];
+					if (((unsigned short*) (e + 0xd6))[m] == g_100b0c0[i].goods_id) {
+						g_100b0c0[i].allocated += ((int*) (e + 0xdc))[m];
 					}
 				}
 			}

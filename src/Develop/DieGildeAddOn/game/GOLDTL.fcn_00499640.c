@@ -108,7 +108,7 @@ main:
 	}
 	mask = 0xf00500;
 	if (fcn_004a5340(e, 1, &mask, 0,
-			(float) (gm_RandomMod(0x20) & 0xffff) + g_664154,
+			(float) (gm_RandomMod(0x20) & 0xffff) + 32.0f,
 			(unsigned short*) &idx) == 0) {
 		goto fail;
 	}

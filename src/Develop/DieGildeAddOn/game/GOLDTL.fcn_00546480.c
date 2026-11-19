@@ -45,7 +45,7 @@ void __cdecl fcn_00546480(char* entity)
 		fcn_004133e0((char*) slot->d, &lo, &hi);
 		angle = (float) i * g_6628c8 / (float) count;
 		out[0] = (float) sin(angle) * t + pos[0];
-		out[1] = (hi - lo) * g_662908 + pos[1];
+		out[1] = (hi - lo) * 0.5 + pos[1];
 		out[2] = (float) cos(angle) * t + pos[2];
 		fcn_00438b40((char*) slot->d, (int*) out);
 	}

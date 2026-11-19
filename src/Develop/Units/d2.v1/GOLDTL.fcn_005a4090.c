@@ -4,13 +4,13 @@
 #pragma intrinsic(memset)
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int handle;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 // SIZE 0xc
 struct want {
@@ -28,7 +28,7 @@ struct line {
 	int slot;
 };
 
-extern char g_7f4ca0[];
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern int g_100f1dc;
@@ -43,7 +43,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char g_6aaba0[];
 
-void __cdecl fcn_0050d6d0(char*, struct house*, int, struct want*);
+void __cdecl fcn_0050d6d0(char*, ENTITY_RECORD*, int, struct want*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471b60(int);
 void __cdecl d2_SetForm(int, int);
@@ -69,7 +69,7 @@ void __cdecl fcn_005a4090(char* p)
 	int j;
 
 	memset(list, 0, sizeof(list));
-	fcn_0050d6d0(p, &((struct house*)g_7f4ca0)[g_774970], 3, src);
+	fcn_0050d6d0(p, &((ENTITY_RECORD*)g_7f4ca0)[g_774970], 3, src);
 	j = 0;
 	for (i = 0; i < 3; i++) {
 		if (src[i].n > 0) {
@@ -107,7 +107,7 @@ void __cdecl fcn_005a4090(char* p)
 found:
 			memset(ev, 0, sizeof(ev));
 			ev[4] = 0x23;
-			*(int*) (ev + 8) = ((struct house*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].handle;
+			*(int*) (ev + 8) = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].entity_id;
 			*(int*) (ev + 0xc) = *(int*) (p + 1);
 			*(int*) (ev + 0x28) = (*(int*)&gm_GameTime);
 			*(int*) (ev + 0x2c) = (*(int*)&g_7f4c04);
@@ -115,11 +115,11 @@ found:
 			*(short*) (ev + 0x34) = g_7f4c0c;
 			ev[0x36] = 0x12;
 			*(int*) (ev + 0x58) = *(int*) (p + 1);
-			*(int*) (ev + 0x5c) = ((struct house*)g_7f4ca0)[g_774970].handle;
+			*(int*) (ev + 0x5c) = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
 			*(int*) (ev + 0x60) = list[i].n;
 			*(int*) (ev + 0x64) = list[i].x;
 			*(int*) (ev + 0x6c) = list[i].y;
-			fcn_004c51a0(((struct house*)g_7f4ca0)[g_774970].handle, *(int*) (p + 1), g_773d75, list[i].n);
+			fcn_004c51a0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, *(int*) (p + 1), g_773d75, list[i].n);
 			r = fcn_004c5530(ev);
 			while (fcn_004c4450(r) == 0) {
 				fcn_005373e0(0, 0x677c7);

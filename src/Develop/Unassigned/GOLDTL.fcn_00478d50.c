@@ -52,7 +52,7 @@ void __cdecl fcn_00478d50(int x, int y, Surf16* s, Block* b)
 			p += seg->offset >> 1;
 			for (k = 0; k < seg->count; k++) {
 				fcn_0041bb70(((unsigned short*) (seg + 1))[k], &cb, &cg, &cr);
-				v = (int) (((double) cr + (double) cb) * g_6628f0 + (double) cg * g_664088);
+				v = (int) (((double) cr + (double) cb) * 0.2 + (double) cg * g_664088);
 				*p = fcn_0041bac0(v, v, v);
 				p++;
 			}

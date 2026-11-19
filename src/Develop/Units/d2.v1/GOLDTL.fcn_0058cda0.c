@@ -2,15 +2,15 @@
 
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int handle;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
-extern char g_7f4ca0[];
+
+
+
+
+
+
+
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern int d2_CurrentWindowId;
@@ -21,7 +21,7 @@ extern int d2_CurrentElementId;
 extern int g_665f78[];
 extern int main_LoopFlags;
 
-int __cdecl fcn_004f4440(struct house*, int, int, int, int*);
+int __cdecl fcn_004f4440(ENTITY_RECORD*, int, int, int, int*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471b60(int);
@@ -29,8 +29,8 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_00526010(struct house*, int, unsigned char);
-int __cdecl fcn_004f0430(struct house*, char*, int, int, int);
+int __cdecl fcn_00526010(ENTITY_RECORD*, int, unsigned char);
+int __cdecl fcn_004f0430(ENTITY_RECORD*, char*, int, int, int);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -53,7 +53,7 @@ int __cdecl fcn_0058cda0(char* who, int k)
 	if (*(unsigned short*) (who + 0x27) == g_774970) {
 		x = 0;
 	} else {
-		x = fcn_004f4440(&((struct house*)g_7f4ca0)[g_774970], 0xff, k, 1, &got);
+		x = fcn_004f4440(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0xff, k, 1, &got);
 	}
 	h = fcn_00470820(0, 0, "Locations\\Friedhof\\Friedhof");
 	d2_SetOverlayAnimation(0, 0);
@@ -76,8 +76,8 @@ int __cdecl fcn_0058cda0(char* who, int k)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				if (x == 0 || fcn_00526010(&((struct house*)g_7f4ca0)[g_774970], x, g_773d75) != 0) {
-					id = fcn_004f0430(&((struct house*)g_7f4ca0)[g_774970], who, k, 10, x);
+				if (x == 0 || fcn_00526010(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], x, g_773d75) != 0) {
+					id = fcn_004f0430(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], who, k, 10, x);
 					while (id != -1 && fcn_004c4450(id) == 0) {
 						fcn_005373e0(0, 0x20007);
 					}

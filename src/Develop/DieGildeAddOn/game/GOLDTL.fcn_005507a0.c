@@ -1,17 +1,17 @@
 
 
 // SIZE 0x21c
-struct house {
-	unsigned short id;
-	unsigned char type;
-	char pad3;
-	int owner;
-	char pad8[0x214];
-};
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+
+
+
+
+
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+
 extern unsigned char g_773d75;
 extern char* gm_CityEntity;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -56,7 +56,7 @@ void __cdecl fcn_005507a0(char* u)
 				return;
 			}
 			if (g_100f1dc == 2) {
-				fcn_004c5150(*(int*) (gm_CityEntity + 4), ((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].owner, g_773d75,
+				fcn_004c5150(*(int*) (gm_CityEntity + 4), ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, g_773d75,
 				    (int) (gm_WalkEntityChain(*(unsigned short*) (u + 8)) * g_6652c8));
 				fcn_0050fe40(*(unsigned short*) (u + 8), 8);
 				fcn_00545780(u);

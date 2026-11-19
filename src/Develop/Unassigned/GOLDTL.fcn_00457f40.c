@@ -80,7 +80,7 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 		goto cleanup;
 	}
 
-	fy = (g_6b7ff9 ? g_6629b0 : g_662acc) + offset[1];
+	fy = (g_6b7ff9 ? g_6629b0 : 1.5f) + offset[1];
 	fx = (float) rect[0] * scale[0] + offset[0];
 	y = rect[2];
 	fz = (float) y * scale[2] + offset[2];

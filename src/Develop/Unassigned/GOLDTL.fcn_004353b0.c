@@ -11,7 +11,7 @@ typedef struct {
 	float w;
 } V4353b0;
 
-extern float g_662a94;
+
 
 float __cdecl fcn_004353b0(V4353b0* v, int n)
 {
@@ -19,7 +19,7 @@ float __cdecl fcn_004353b0(V4353b0* v, int n)
 	float d;
 	int i;
 
-	best = g_662a94;
+	best = (-1.0f);
 	for (i = 0; i < n; i++) {
 		d = v[i].x * v[i].x + v[i].z * v[i].z + v[i].y * v[i].y;
 		if (!(best > d)) {

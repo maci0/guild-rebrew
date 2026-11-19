@@ -1,13 +1,13 @@
-typedef struct Slot {
-	char* obj;
-	int kind;
-	char pad8[4];
-	unsigned char done;
-	char padd[0x13];
-	unsigned int t;
-	char pad24[0x100];
-} Slot;
-/* SIZE 0x124 */
+#include "Develop/DieGildeAddOn/game/ambient_animal_slot.h"
+
+
+
+
+
+
+
+
+
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char gm_GameTime[];
@@ -15,23 +15,23 @@ extern unsigned char g_776664;
 extern volatile unsigned int g_6b7fac;
 extern unsigned int g_7728f0;
 extern int g_7728e4;
-extern Slot* g_7728e8;
+extern AMBIENT_ANIMAL_SLOT* g_7728e8;
 extern int g_7728ec;
 
 int __cdecl fcn_00500e20(char*);
 void __cdecl fcn_004432d0(int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
-Slot* __cdecl fcn_004bc010(void);
-void __cdecl fcn_004bc060(Slot*);
-void __cdecl fcn_004bc090(Slot*);
-void __cdecl fcn_004bc1e0(Slot*);
-void __cdecl fcn_004bc270(Slot*);
-void __cdecl fcn_004bc2f0(Slot*);
-void __cdecl fcn_004bc380(Slot*);
-void __cdecl fcn_004bc410(Slot*, int);
-void __cdecl fcn_004bc540(Slot*);
-void __cdecl fcn_004bc6b0(Slot*);
+AMBIENT_ANIMAL_SLOT* __cdecl fcn_004bc010(void);
+void __cdecl fcn_004bc060(AMBIENT_ANIMAL_SLOT*);
+void __cdecl fcn_004bc090(AMBIENT_ANIMAL_SLOT*);
+void __cdecl fcn_004bc1e0(AMBIENT_ANIMAL_SLOT*);
+void __cdecl fcn_004bc270(AMBIENT_ANIMAL_SLOT*);
+void __cdecl fcn_004bc2f0(AMBIENT_ANIMAL_SLOT*);
+void __cdecl fcn_004bc380(AMBIENT_ANIMAL_SLOT*);
+void __cdecl fcn_004bc410(AMBIENT_ANIMAL_SLOT*, int);
+void __cdecl fcn_004bc540(AMBIENT_ANIMAL_SLOT*);
+void __cdecl fcn_004bc6b0(AMBIENT_ANIMAL_SLOT*);
 
 
 /* Per-tick driver for the 32 ambient slots: may spawn one, then updates and
@@ -42,7 +42,7 @@ void __cdecl fcn_004bbd70(void)
 	int saved;
 	int r;
 	int lim;
-	Slot* s;
+	AMBIENT_ANIMAL_SLOT* s;
 
 	saved = d3_CurrentContextIndex;
 	r = fcn_00500e20(gm_GameTime);
@@ -81,7 +81,7 @@ void __cdecl fcn_004bbd70(void)
 		g_7728f0 = g_6b7fac;
 	}
 	s = &g_7728e8[g_7728ec];
-	if (s->obj != 0) {
+	if (s->objekt != 0) {
 		switch (s->kind) {
 		case 0:
 		case 1:
@@ -101,13 +101,13 @@ void __cdecl fcn_004bbd70(void)
 		if (r == 3) {
 			g_7728e8[g_7728ec].done = 1;
 		}
-		if (g_6b7fac > g_7728e8[g_7728ec].t + 0x834 &&
-		    gm_RandomFloat01() > (g_7728e8[g_7728ec].t + 0x834) / (g_6b7fac - (g_7728e8[g_7728ec].t + 0x834))) {
+		if (g_6b7fac > g_7728e8[g_7728ec].created_tick + 0x834 &&
+		    gm_RandomFloat01() > (g_7728e8[g_7728ec].created_tick + 0x834) / (g_6b7fac - (g_7728e8[g_7728ec].created_tick + 0x834))) {
 			g_7728e8[g_7728ec].done = 1;
 		}
 		s = &g_7728e8[g_7728ec];
 		if (s->done != 0 &&
-		    ((*(unsigned char*) (*(char**) (*(char**) (s->obj + 0x34) + 0x1ec) + 0x163d) & 0x40) || r == 3 ||
+		    ((*(unsigned char*) (*(char**) (*(char**) (s->objekt + 0x34) + 0x1ec) + 0x163d) & 0x40) || r == 3 ||
 		     g_7728e4 > lim)) {
 			fcn_004bc060(s);
 		}

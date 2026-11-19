@@ -1,15 +1,16 @@
+#include "client_types.h"
 
 
 #include <string.h>
 
 #pragma pack(push, 2)
 // SIZE 0xe
-typedef struct {
-	int a;
-	int b;
-	int c;
-	short d;
-} Pos55a5;
+
+
+
+
+
+
 #pragma pack(pop)
 
 // SIZE 0xf8
@@ -20,22 +21,22 @@ typedef struct {
 	int owner;
 	int target;
 	char pad10[0x18];
-	Pos55a5 at;
+	pos14_7f4c00 at;
 	unsigned char code;
 	char pad37[0x21];
 	int owner2;
 	int other;
-	Pos55a5 due;
+	pos14_7f4c00 due;
 	char pad6e[0x8a];
 } Msg55a5;
 
 extern char g_7f4ca0[];
-#include "client_types.h"
+
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 extern char g_6b5c60[];
 
-void __cdecl fcn_00500bb0(Pos55a5*, int, int, int);
+void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5530(Msg55a5*);
 void __cdecl fcn_00546190(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -61,16 +62,16 @@ void __cdecl fcn_0055a5b0(char* u)
 			m.kind = 0x7e;
 			m.owner = *(int*) (u + 0xac);
 			m.target = -1;
-			m.at = (*(Pos55a5*)&gm_GameTime);
+			m.at = (*(pos14_7f4c00*)&gm_GameTime);
 			m.code = 9;
 			m.owner2 = *(int*) (u + 0xac);
 			m.other = *(int*) (u + 4);
-			m.due = (*(Pos55a5*)&gm_GameTime);
+			m.due = (*(pos14_7f4c00*)&gm_GameTime);
 			fcn_00500bb0(&m.due, 2, 0, 0);
 			fcn_004c5530(&m);
 			*(int*) (u + 0x70) = 1;
-			*(Pos55a5*) (u + 0x52) = (*(Pos55a5*)&gm_GameTime);
-			fcn_00500bb0((Pos55a5*) (u + 0x52), 8, 0, 0);
+			*(pos14_7f4c00*) (u + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
+			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 8, 0, 0);
 			return;
 		}
 		if (*(int*) (u + 0x70) != 1) {
