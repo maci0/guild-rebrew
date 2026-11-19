@@ -50,6 +50,50 @@ typedef struct {
 } TIME_JOB;
 #pragma pack(pop)
 
+extern char g_774964;
+extern void* g_7749f0;
+extern int __cdecl fcn_004c4450(int);
+extern void __cdecl fcn_00546190(char*);
+extern void* __cdecl gm_StartFilteredEntitySearch(int, ...);
+extern unsigned short* __cdecl gm_NextEntityQueryMatch(void);
+extern char* __cdecl fcn_00502cd0(int, int, int, int, int);
+void __cdecl fcn_005705a0(int a0, char* rec);
+
+/* Timed action 0xA6 (route supervisor) FINISH: once the linked record is gone or the
+ * phase is 0, walks every matching cart and hands it to fcn_005705a0, then reschedules. */
+/* ADDRESS: GOLDTL 0x00570870 */
+void __cdecl fcn_00570870(char* h)
+{
+	char* e;
+	int phase;
+
+	if (!g_774964)
+		return;
+	if (*(int*) (h + 0x84) != -1 && !fcn_004c4450(*(int*) (h + 0x84)))
+		return;
+	phase = *(int*) (h + 0x70);
+	*(int*) (h + 0x84) = -1;
+	if (phase >= -2) {
+		if (phase >= 0) {
+			if (phase == 0) {
+				g_7749f0 = gm_StartFilteredEntitySearch(1, 0, 0x44);
+				e = fcn_00502cd0(0, 2, 7, 4, 0x1d);
+				if (e) {
+					do {
+						if (*(int*) (e + 0x29) && !(e[0x20] & 1) && !(e[0x13] & 0x20) && e[0x33])
+							fcn_005705a0((int) h, e);
+						e = (char*) gm_NextEntityQueryMatch();
+					} while (e);
+				}
+				*(pos14_7f4c00*) (h + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
+				fcn_00500bb0(h + 0x52, 0, 0xf, 0);
+			}
+		} else {
+			fcn_00546190(h);
+		}
+	}
+}
+
 /* ADDRESS: GOLDTL 0x005705a0 */
 void __cdecl fcn_005705a0(int a0, char* rec)
 {

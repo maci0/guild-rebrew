@@ -5,6 +5,18 @@ extern void __cdecl fcn_00500bb0(char*, int, int, int);
 extern unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* Night-watchman action 0x73 START: due and start are now, picks a random id offset and
+ * the announce hour from the table. */
+/* ADDRESS: GOLDTL 0x0056e8e0 */
+void __cdecl fcn_0056e8e0(char* a0)
+{
+	*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
+	*(pos14_7f4c00*) (a0 + 0x44) = gm_GameTime;
+	*(int*) (a0 + 0xac) = (int) gm_RandomMod(5) - 5;
+	*(unsigned short*) (a0 + 0x56) = (unsigned short) (int) *(float*) (fcn_00500e20((char*) &gm_GameTime) * 4 + 0x696540);
+	*(int*) (a0 + 0x58) = 0;
+}
+
 /* Night-watchman clock action: starts the evening/morning announce sequence
  * when the game time enters the action's window. */
 /* ADDRESS: GOLDTL 0x0056e980 */
