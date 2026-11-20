@@ -99,7 +99,7 @@ typedef struct {
 
 extern int lpGebaeudePROT;
 #include "Develop/Units/d2.v1/d2_gui.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 void* __cdecl fcn_00534c40(unsigned int, int, int, ...);
 void __cdecl fcn_005350d0(char*);
 void __cdecl fcn_00534c20(char*);
@@ -138,7 +138,7 @@ void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00534f30(char*);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00505370(char*);
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x005b7880 */
 void __cdecl fcn_005b7880(unsigned char* building, int a1)
 {
@@ -158,7 +158,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 	f.hD = -1;
 	f.hA = -1;
 	f.hRadio = -1;
-	f.ent = (unsigned char*) (lpGebaeudePROT + building[0] * 0x24d);
+	f.ent = (unsigned char*) ((int) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[building[0]]);
 	f.win = (char*) fcn_00534c40(a1, 0x6a42c8, 4, 0x6ac340, 0x6ac300,
 	                           0x6ac314, 0x6ac328);
 	fcn_005350d0(f.win);
@@ -276,8 +276,8 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 			perRow = n / f.nSlots;
 			y = perRow / 3;
 			if (fcn_00526010(
-			        (void*) (0x7f4ca0
-			                 + *(unsigned short*) 0x774970 * 0x21c),
+			        (void*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
+						]),
 			        fcn_0050b750(n, *(unsigned char*) 0x773d75),
 			        *(unsigned char*) 0x773d75)) {
 				f.pIt = (int*) &f.rows[0].obj;
@@ -294,10 +294,10 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 						        *(unsigned char*)
 						            0x773d75));
 						fcn_004c54c0(
-						    *(int*) (0x7f4ca4
-						             + *(unsigned short*)
+						    *(int*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*)
 						                   0x774970
-						                   * 0x21c),
+						
+						] + 4),
 						    *(int*) (p + 4), y, 0);
 						fcn_004c4ef0(0x6ac2bc);
 					}
@@ -307,8 +307,8 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 			}
 			fcn_004c5150(
 			    -1,
-			    *(int*) (0x7f4ca4
-			             + *(unsigned short*) 0x774970 * 0x21c),
+			    *(int*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
+						] + 4),
 			    *(unsigned char*) 0x773d75,
 			    fcn_0050b750(n, *(unsigned char*) 0x773d75));
 		}
@@ -328,8 +328,8 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 			if (entityId == 0xffff) {
 				continue;
 			}
-			p = (char*) (0x7f4ca0 + entityId * 0x21c);
-			if (*(char*) (0x7f4e04 + entityId * 0x21c) != 0) {
+			p = (char*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[entityId]);
+			if (*(char*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[entityId] + 0x164) != 0) {
 				continue;
 			}
 			for (y = 0; y < n; y++) {
@@ -475,9 +475,9 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 			f.hD = -1;
 			if (f.rows[i].obj == 0) {
 				n = (int) fcn_005101e0(
-				    (unsigned char*) (0x7f4ca0
-				                      + *(unsigned short*) (building + 0x27)
-				                            * 0x21c),
+				    (unsigned char*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (building + 0x27)
+						
+						]),
 				    building[0], -1, 1);
 				d2_SetForm(f.rows[i].win, 2);
 				f.hC = fcn_00472250(f.rows[i].win, 2,
@@ -513,9 +513,9 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 				f.msg.type = 6;
 				f.msg.b36 = 1;
 				f.msg.f30 = *(int*) 0x7f4c08;
-				f.msg.f08 = *(int*) (0x7f4ca4
-				                     + *(unsigned short*) 0x774970
-				                           * 0x21c);
+				f.msg.f08 = *(int*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
+						
+						] + 4);
 				f.msg.f28 = *(int*) 0x7f4c00;
 				f.msg.f2c = *(int*) 0x7f4c04;
 				f.msg.w34 = *(short*) 0x7f4c0c;
@@ -547,9 +547,9 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 				memset(&f.msg, 0, 0xf8);
 				f.msg.type = 0x31;
 				f.msg.b36 = 1;
-				f.msg.f08 = *(int*) (0x7f4ca4
-				                     + *(unsigned short*) 0x774970
-				                           * 0x21c);
+				f.msg.f08 = *(int*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
+						
+						] + 4);
 				f.msg.f0c = *(int*) (building + 1);
 				f.msg.f28 = *(int*) 0x7f4c00;
 				f.msg.f2c = *(int*) 0x7f4c04;
@@ -570,9 +570,9 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 				memset(&f.msg, 0, 0xf8);
 				f.msg.type = 0x32;
 				f.msg.b36 = 2;
-				f.msg.f08 = *(int*) (0x7f4ca4
-				                     + *(unsigned short*) 0x774970
-				                           * 0x21c);
+				f.msg.f08 = *(int*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
+						
+						] + 4);
 				f.msg.f0c = *(int*) (building + 1);
 				f.msg.f28 = *(int*) 0x7f4c00;
 				f.msg.f2c = *(int*) 0x7f4c04;

@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 
 typedef Rec2d_9a3800 Rec2d;
@@ -43,7 +43,7 @@ int __cdecl fcn_004f6040(int* ids, int* d, unsigned short k)
 		d[i] = 0;
 	}
 	memset(list, 0xff, 0x200 * 4);
-	e = g_7f4ca0 + k * 0x21c;
+	e = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[k]);
 
 	for (i = 0; i < 0x800; i++) {
 		if (g_99f800[i].owner == *(int*) (e + 4)) {

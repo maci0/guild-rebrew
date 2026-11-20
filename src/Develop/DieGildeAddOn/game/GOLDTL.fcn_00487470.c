@@ -29,7 +29,7 @@ void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c5530(void*);
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* Picks a trade partner for the selected market stall and sends the offer.
  * The candidate list of the stall belongs to the entity table row of the
  * current shop; the first pass prefers a partner that the guild filter does
@@ -67,7 +67,7 @@ void __cdecl fcn_00487470(char* actor)
 	}
 	p = (char*) *(int*) (actor + 0x16c);
 	*(int*) (actor + 0x1b4) |= 0x400;
-	kind = g_7f4ca2[*(unsigned short*) (p + 0x27) * 0x21c];
+	kind = (char)((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].entity_state;
 	if (kind != 6 && kind != 7) {
 		return;
 	}
@@ -85,19 +85,19 @@ void __cdecl fcn_00487470(char* actor)
 			pkt1[4] = 0x1c;
 			*(int*) (pkt1 + 0xc) = -1;
 			pkt1[0x36] = 1;
-			*(int*) (pkt1 + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) (p + 0x27) * 0x21c);
+			*(int*) (pkt1 + 8) = ((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (p + 0x27)].entity_id;
 			*(int*) (pkt1 + 0x58) = *(int*) (p + 1);
 			*(int*) (pkt1 + 0x5c) = 100 - *(char*) (p + 0x5c);
 			fcn_004c4eb0(g_67e330);
 			p = *(char**)(actor + 0x16c);
 			fcn_004c5150(-1,
-						 *(int*) (0x7f4ca4 + *(unsigned short*) (p + 0x27) * 0x21c),
+						 ((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (p + 0x27)].entity_id,
 						 (char) g_773d75,
 						 (int) amountf);
 			fcn_004c5530(pkt1);
 			fcn_004c4ef0(g_67e330);
 			p = *(char**)(actor + 0x16c);
-			other = gm_GetEntityTableEntry(g_7f4ca0 + *(unsigned short*) (p + 0x27) * 0x21c);
+			other = gm_GetEntityTableEntry(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (p + 0x27)]));
 			if (other != 0) {
 				*(int*) (other + 0x44) = (int) ((float) *(int*) (other + 0x44) + amountf);
 			}
@@ -170,7 +170,7 @@ have:
 			memset(pkt2, 0, 0xf8);
 			building = *(char**)(actor + 0x16c);
 			pkt2[4] = 2;
-			*(int*) (pkt2 + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) (building + 0x25) * 0x21c);
+			*(int*) (pkt2 + 8) = ((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (building + 0x25)].entity_id;
 			*(int*) (pkt2 + 0xc) = *(int*) (building + 1);
 			*(int*) (pkt2 + 0x28) = gm_GameTime;
 			*(int*) (pkt2 + 0x2c) = g_7f4c04;
@@ -180,14 +180,14 @@ have:
 			*(unsigned short*) (pkt2 + 0x58) = (unsigned short) found;
 			*(int*) (pkt2 + 0x5c) = *(int*) (p + 2);
 			*(int*) (pkt2 + 0x64) = 1;
-			other = gm_GetEntityTableEntry(g_7f4ca0 + *(unsigned short*) (building + 0x25) * 0x21c);
+			other = gm_GetEntityTableEntry(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (building + 0x25)]));
 			if (other != 0) {
 				*(int*) (other + 0x40) = *(int*) (other + 0x40) + amount;
 			}
 			fcn_004c4eb0((char*) 0x67e31c);
 			building = *(char**)(actor + 0x16c);
 			fcn_004c5150(-1,
-						 *(int*) (0x7f4ca4 + *(unsigned short*) (building + 0x25) * 0x21c),
+						 ((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (building + 0x25)].entity_id,
 						 (char) g_773d75,
 						 amount);
 			fcn_004c5530(pkt2);

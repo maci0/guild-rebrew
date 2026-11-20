@@ -1,6 +1,6 @@
 #include "client_types.h"
 extern char gm_GameTime[];
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_68cb58[];
 extern char g_6b5c60[];
 extern int gm_CityEntity;
@@ -73,11 +73,11 @@ void __cdecl fcn_0056e3c0(char* eventState)
 			p = *(char**) (s + 0x16c);
 			if (p != 0) {
 				idx = *(unsigned short*) (p + 0x27);
-				c = *(char*) (g_7f4ca0 + 2 + idx * 0x21c);
+				c = *(char*)&((ENTITY_RECORD*)g_7f4ca0)[idx].entity_state;
 				if (c == 6 || c == 7) {
 					io_FormatTextBuffer((int*) (buf + 0x114), 0x42f4, *(unsigned short*) s, (int) p);
 					v = *(int*) (p + 1);
-					he_MessageBoxQuickjump(*(unsigned int*) (g_7f4ca0 + 4 + idx * 0x21c), v, buf + 0x114, 0, 0x60a, v, -1, g_6b5c60, g_6b5c60);
+					he_MessageBoxQuickjump(*(unsigned int*)&((ENTITY_RECORD*)g_7f4ca0)[idx].entity_id, v, buf + 0x114, 0, 0x60a, v, -1, g_6b5c60, g_6b5c60);
 				}
 			}
 		}

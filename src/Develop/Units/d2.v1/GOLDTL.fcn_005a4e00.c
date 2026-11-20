@@ -7,7 +7,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -94,7 +94,7 @@ void __cdecl fcn_005a4e00(char* building)
 			for (j = 0; j < n; j++) {
 				v = *(int*) (out[j] + 0xb0);
 				for (i = 0; i < count; i++) {
-					if (*(int*) (g_7f4ca0 + 4 + ids[i] * 0x21c) == v) {
+					if (((ENTITY_RECORD*) g_7f4ca0)[ids[i]].entity_id == v) {
 						break;
 					}
 					if (ids[i] == -1) {

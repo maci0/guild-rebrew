@@ -7,8 +7,8 @@ extern int g_14ce8e0;
 extern int g_14ce8e8;
 #include "client_dialog_state.h"
 extern volatile unsigned int g_6b7fac;
-extern char* g_1015ea0;
-extern char g_7f4ca0[];
+#include "Develop/Units/d2.v1/d2_gui.h"
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 /* Private layout views inferred from native accesses; they allocate no
  * storage and are visible only to this translation unit. */
@@ -77,7 +77,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 	}
 	for (i = 0; i < 8; i++) {
 		g_6ac8a8[i].count = g_6ac8a8[i].create(
-				(char*) &g_7f4ca0 + g_774970 * 0x21c, 0, rows, ent);
+				(char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0, rows, ent);
 	}
 	if (g_6ac8a8[g_775344].count == 0) {
 		g_775344 = 8;
@@ -110,12 +110,12 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 	if (g_775344 < 8) {
 		d2_SetForm(h, 2);
 		g_6ac8a8[g_775344].count = g_6ac8a8[g_775344].create(
-				(char*) &g_7f4ca0 + g_774970 * 0x21c, 0x10, rows, ent);
+				(char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0x10, rows, ent);
 		g_6ac8a8[g_775344].present(h, 2, 3, g_6ac8a8[g_775344].count, rows);
 	}
 	g_100f1dc = -1;
 	state = 3;
-	cur = (char*) &g_7f4ca0 + g_774970 * 0x21c;
+	cur = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 	do {
 		if (state == 3) {
 			old = -1;
@@ -126,7 +126,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 			}
 			for (i = 0; i < 8; i++) {
 				g_6ac8a8[i].count = g_6ac8a8[i].create(
-						(char*) &g_7f4ca0 + g_774970 * 0x21c, 0, rows, ent);
+						(char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0, rows, ent);
 			}
 			if (g_6ac8a8[g_775344].count == 0) {
 				g_775344 = 8;
@@ -139,12 +139,12 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 			}
 			for (i = 0; i < 8; i++) {
 				fcn_00472640(g_6ac8a8[i].element, g_6ac8a8[i].count > 0);
-				*(int*) (g_1015ea0 + g_6ac8a8[i].element * 0x2f4 + 0x38) =
+				*(int*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[g_6ac8a8[i].element] + 0x38) =
 						i == g_775344;
 			}
 			if (g_775344 < 8) {
 				n = g_6ac8a8[g_775344].create(
-						(char*) &g_7f4ca0 + g_774970 * 0x21c, 0x10, rows, ent);
+						(char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0x10, rows, ent);
 				g_6ac8a8[g_775344].count = n;
 				if (n != old) {
 					g_6ac8a8[g_775344].present(h, 2, 3, n, rows);
@@ -154,18 +154,18 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 				fcn_005ccc00(cur, g_6ac8a8[g_775344].count, rows);
 			} else {
 				fcn_005cc240(h, 2, 3);
-				cur = (char*) &g_7f4ca0 + g_774970 * 0x21c;
+				cur = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 			}
 		} else if (state == 1) {
 			i = g_6ac8a8[sel].create(
-					(char*) &g_7f4ca0 + g_774970 * 0x21c, 0, 0, ent);
+					(char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0, 0, ent);
 			g_6ac8a8[sel].count = i;
 			if (i != 0) {
-				*(int*) (g_1015ea0 + g_6ac8a8[g_775344].element * 0x2f4 + 0x38) = 0;
+				*(int*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[g_6ac8a8[g_775344].element] + 0x38) = 0;
 				g_775344 = sel;
-				*(int*) (g_1015ea0 + g_6ac8a8[sel].element * 0x2f4 + 0x38) = 1;
+				*(int*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[g_6ac8a8[sel].element] + 0x38) = 1;
 				n = g_6ac8a8[g_775344].create(
-						(char*) &g_7f4ca0 + g_774970 * 0x21c, 0x10, rows, ent);
+						(char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0x10, rows, ent);
 				g_6ac8a8[g_775344].count = n;
 				g_6ac8a8[g_775344].present(h, 2, 3, n, rows);
 			} else {
@@ -181,7 +181,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_14ce8e8 != 0) {
-			if (cur == (void*) ((char*) &g_7f4ca0 + g_774970 * 0x21c)) {
+			if (cur == (void*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970])) {
 				result = 0;
 				cur = 0;
 				for (i = 0; i < g_6ac8a8[g_775344].count; i++) {
@@ -200,9 +200,9 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 			}
 			goto hit;
 		} else {
-			if (cur != (void*) ((char*) &g_7f4ca0 + g_774970 * 0x21c)) {
+			if (cur != (void*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970])) {
 				state = 4;
-				cur = (char*) &g_7f4ca0 + g_774970 * 0x21c;
+				cur = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 			} else {
 				goto hit;
 			}

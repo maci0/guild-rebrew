@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 /* 12-byte block copied to a task record at +0xf0 (fields 4+4+2+1 = 11 bytes). */
 typedef struct {
 	int a;
@@ -101,7 +101,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			q = fcn_00502cd0(*(int*) (C + 0x5d), 1, 1, *(int*) (o + 0x30));
 			if (q != 0 && *(unsigned short*) q != 0xfd) {
 				fcn_0064d41a(buf, g_68b214,
-				    strupr(lpObjektePROT + *(unsigned short*) q * 0x41 + 1));
+				    strupr((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[*(unsigned short*) q] + 1));
 				q = fcn_00502cd0(*(int*) (C + 0x5d), 1, 0, 0xfd);
 				k = fcn_005155e0(C);
 				if (k >= 0 && q != 0) {
@@ -305,7 +305,7 @@ b3:
 	} else if (*(unsigned short*) q != 0xfd) {
 		k = init_EnsureObjektSceneContext(q);
 		fcn_0064d41a(buf, g_68b214,
-		    strupr(lpObjektePROT + *(unsigned short*) q * 0x41 + 1));
+		    strupr((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[*(unsigned short*) q] + 1));
 		if (C != 0) {
 			r = ch_UseGate(o, buf, g_675908, k, *(int*) (C + 1),
 			    *(int*) (q + 2));

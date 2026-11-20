@@ -39,7 +39,7 @@ void __cdecl fcn_00578860(char* e)
 		if (o != e && *(unsigned short*) (o + 8) == *(unsigned short*) (e + 8) && *(int*) (o + 0xb0) == *(int*) (e + 0xb0)) {
 			if (p != 0) {
 				io_FormatTextBuffer(buf, 0x40a2, *(unsigned short*) p);
-				fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, buf, 0, 0x5fa, 0);
+				fcn_00545d40(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 8)])->entity_id, -1, buf, 0, 0x5fa, 0);
 			}
 			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 			he_FreeAction(e);
@@ -53,8 +53,8 @@ void __cdecl fcn_00578860(char* e)
 	*(int*) (e + 0xbc) = 0;
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
-	fcn_005100f0(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -*(int*) (e + 0xb8));
+	fcn_005100f0(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 8)])->entity_id, -*(int*) (e + 0xb8));
 	*(int*) (e + 0x70) = 0;
-	fcn_004f4f60(0x1b, 1, ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, p != 0 ? *(int*) (p + 4) : -1,
+	fcn_004f4f60(0x1b, 1, ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 8)])->entity_id, p != 0 ? *(int*) (p + 4) : -1,
 	    p != 0 && *(char**) (p + 0x170) != 0 ? *(int*) (*(char**) (p + 0x170) + 1) : -1);
 }

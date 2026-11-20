@@ -1,7 +1,7 @@
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 extern unsigned char g_773d75;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl io_FormatTextBuffer(char* dst, int id, ...);
 int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
@@ -22,21 +22,21 @@ void __cdecl fcn_00550be0(char* entity)
 		return;
 	}
 	if ((double) (gm_RandomMod(0x100) & 0xffff) <
-	    (double) (*(unsigned char*) (g_7f4ca0 + 0x80 + *(unsigned short*) (entity + 8) * 0x21c)) *
+	    (double) (((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].unk_07c[4]) *
 	        0.5 + 64.0) {
 
 		io_FormatTextBuffer(buf, 0x10b5, *(unsigned int*) (entity + 0xb0) * 2);
-		fcn_00545d40(*(int*) (g_7f4ca4 + *(unsigned short*) (entity + 8) * 0x21c),
-		             *(int*) (g_7f4ca4 + *(unsigned short*) (entity + 8) * 0x21c),
+		fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
+		             ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             buf, 0, 0x5ff, 0);
-		fcn_004c5150(*(int*) (g_7f4ca4 + *(unsigned short*) (entity + 8) * 0x21c),
+		fcn_004c5150(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             -1, g_773d75, *(unsigned int*) (entity + 0xb0) * 2);
 	} else {		io_FormatTextBuffer(buf, 0x10b6,
 		             (int) (*(unsigned int*) (entity + 0xb0) * 0.5f));
-		fcn_00545d40(*(int*) (g_7f4ca4 + *(unsigned short*) (entity + 8) * 0x21c),
-		             *(int*) (g_7f4ca4 + *(unsigned short*) (entity + 8) * 0x21c),
+		fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
+		             ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             buf, 0, 0x5ff, 0);
-		fcn_004c5150(*(int*) (g_7f4ca4 + *(unsigned short*) (entity + 8) * 0x21c),
+		fcn_004c5150(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             -1, g_773d75,
 		             (int) (*(unsigned int*) (entity + 0xb0) * 0.5f));
 	}

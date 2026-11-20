@@ -50,7 +50,7 @@ void __cdecl fcn_00551a20(char* t)
 	*(int*) (t + 0x84) = -1;
 	switch (*(int*) (t + 0x70)) {
 	case 0:
-		e = &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (t + 8)];
+		e = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (t + 8)]);
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
 			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
@@ -65,7 +65,7 @@ void __cdecl fcn_00551a20(char* t)
 		he_RegisterApEvent(*(unsigned short*) p, buf, 0, -*(int*) (t + 0xb4));
 		return;
 	case 1:
-		e = &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (t + 8)];
+		e = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (t + 8)]);
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
 			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);

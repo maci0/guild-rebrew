@@ -47,7 +47,7 @@ extern char* gm_CityEntity;
 extern char* lpObjektePROT;
 extern unsigned char g_7747b0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern float g_6628a8;
 extern float g_662948;
 extern float g_664198;
@@ -135,7 +135,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		if (((MARKET_STOCK_SLOT*)slot)->active == 0) {
 			continue;
 		}
-		kind = *(unsigned char*) (lpObjektePROT + ((MARKET_STOCK_SLOT*)slot)->objekt_id * 0x41);
+		kind = *(unsigned char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[((MARKET_STOCK_SLOT*)slot)->objekt_id].kind;
 		if (kind != 0x25 && kind != 0x17) {
 			continue;
 		}
@@ -202,7 +202,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		if (((MARKET_STOCK_SLOT*)slot)->active == 0) {
 			continue;
 		}
-		kind = *(unsigned char*) (lpObjektePROT + ((MARKET_STOCK_SLOT*)slot)->objekt_id * 0x41);
+		kind = *(unsigned char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[((MARKET_STOCK_SLOT*)slot)->objekt_id].kind;
 		if (kind == 0x25 || kind == 0x17) {
 			continue;
 		}

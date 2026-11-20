@@ -76,7 +76,7 @@ typedef struct {
 
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_6b5c60[];
 
 
@@ -148,7 +148,7 @@ void __cdecl fcn_0054b940(Order* o)
 			rep stosb
 		}
 		n = 0;
-		party.ent = &((Entity*)g_7f4ca0)[o->ent];
+		party.ent = ((Entity*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[o->ent]);
 		if (g != 0) {
 			first = g->a;
 			party.b = g->b;

@@ -2,6 +2,7 @@ extern char* lpObjektePROT;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 char* __cdecl gm_FindRecordById(unsigned int);
 char* __cdecl gm_SearchTable67(unsigned int);
@@ -54,8 +55,8 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 		if (ent == 0) {
 			goto fail;
 		}
-		tbl = (unsigned char*) lpGebaeudePROT + (unsigned int) *ent * 0x24d;
-		cnt = *(unsigned char*) (tbl + 0x22);
+		tbl = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned int) *ent];
+		cnt = ((BUILDING_PROTOTYPE*)tbl)->component_count;
 		i = 0;
 		while (i < cnt && (*(unsigned short*) (tbl + 0x23 + i * 2) & 0x7fff) != *(unsigned short*) rec) {
 			i++;
@@ -91,8 +92,8 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 		if (fcn_00502cd0(*(int*) (ent + 0x5d), 1, 0, *(unsigned int*) (a3 + 4)) != 0) {
 			goto fail;
 		}
-		tbl = (unsigned char*) lpGebaeudePROT + (unsigned int) *ent * 0x24d;
-		cnt = *(unsigned char*) (tbl + 0x22);
+		tbl = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned int) *ent];
+		cnt = ((BUILDING_PROTOTYPE*)tbl)->component_count;
 		i = 0;
 		while (i < cnt && (*(unsigned short*) (tbl + 0x23 + i * 2) & 0x7fff) != *(unsigned int*) (a3 + 4)) {
 			i++;

@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern int g_775318;
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* lpObjektePROT;
@@ -15,7 +16,6 @@ void __cdecl d2_SetDisplayCounter(int id, int value);
 int __cdecl fcn_00466ee0(int x, int y, int id, int group, char* name);
 void __cdecl d2_DestroyElement(int handle);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
-
 /* ADDRESS: GOLDTL 0x005c5e70 */
 unsigned int __cdecl fcn_005c5e70(void)
 {
@@ -69,7 +69,7 @@ unsigned int __cdecl fcn_005c5e70(void)
 		if (match == 0) {
 			return result;
 		}
-		if (lpObjektePROT[*match * 0x41] != 9) {
+		if ((*(char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[*match].kind) != 9) {
 			for (i = 0; i < 6; i++) {
 				if (*(unsigned short**) (i * 8 + 0x776c64) == match) {
 					break;

@@ -18,7 +18,7 @@ typedef struct {
 extern char g_85ab90[];
 extern char* lpObjektePROT;
 extern unsigned char g_773d75;
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 int __cdecl fcn_0064eeec(char*);
 char* __cdecl fcn_004ce590(int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
@@ -94,7 +94,7 @@ int __cdecl fcn_004b1320(int a1, int a2, char* argumentText)
 						continue;
 					if (((MARKET_STOCK_SLOT*)row)->active == 0)
 						continue;
-					if (*(char*) (lpObjektePROT + ((MARKET_STOCK_SLOT*)row)->objekt_id * 0x41) != 8)
+					if (*(char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[((MARKET_STOCK_SLOT*)row)->objekt_id].kind != 8)
 						continue;
 					f = factor + 1.0f;
 					copy = *(Ent80*) row;
@@ -111,7 +111,7 @@ int __cdecl fcn_004b1320(int a1, int a2, char* argumentText)
 						continue;
 					if (((MARKET_STOCK_SLOT*)row)->active == 0)
 						continue;
-					if (*(char*) (lpObjektePROT + ((MARKET_STOCK_SLOT*)row)->objekt_id * 0x41) != 0x20)
+					if (*(char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[((MARKET_STOCK_SLOT*)row)->objekt_id].kind != 0x20)
 						continue;
 					f = factor + 1.0f;
 					copy = *(Ent80*) row;

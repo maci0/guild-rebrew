@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 typedef struct Req {
 	unsigned short* s;
@@ -81,7 +81,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 		dlg = fcn_00470820(0, 0, "panel\\useobj");
 		d2_CenterDialogWindows(dlg);
 		d2_SetForm(dlg, 1);
-		if ((rec->mask & ((Ent*)g_7f4ca0)[g_774970].mask) == 0 && fcn_005c61e0(id = *item) != 0) {
+		if ((rec->mask & ((Ent *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->mask) == 0 && fcn_005c61e0(id = *item) != 0) {
 			io_AppendText(0xfe3, id * 2 + 0x9a8, rec->price, id * 2 + 0x9a8);
 		} else {
 			io_AppendText(0xfe4, *item * 2 + 0x9a8);
@@ -125,7 +125,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 		r.arg = -1;
 		r.dir = 0;
 		r.pad = 0;
-		fcn_005dbf10(&((Ent*)g_7f4ca0)[g_774970], &r);
+		fcn_005dbf10(((Ent *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), &r);
 	}
 	return r.dir;
 }

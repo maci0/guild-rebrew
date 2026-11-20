@@ -61,7 +61,7 @@ void __cdecl fcn_005a92c0(char* p)
 	int i;
 	pos14_7f4c00 st;
 
-	ent = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
+	ent = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]);
 	n = gm_AccumulateTyped2(ent);
 	q = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 	ok = 0;
@@ -128,7 +128,7 @@ void __cdecl fcn_005a92c0(char* p)
 				*(int*) (msg + 0x5c) = ent->entity_id;
 				fcn_004c5530(msg);
 				for (i = 0; i < 768 && n < g_6a375c; i++) {
-					if ((((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7) && &((ENTITY_RECORD*)g_7f4ca0)[i] != ent) {
+					if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 7) && ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]) != ent) {
 						{
 							char* fdest;
 							int flen;
@@ -153,7 +153,7 @@ void __cdecl fcn_005a92c0(char* p)
 								rep stosb
 							}
 						}
-						*(int*) (msg + 8) = ((ENTITY_RECORD*)g_7f4ca0)[i].entity_id;
+						*(int*) (msg + 8) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id;
 						msg[4] = 0x69;
 						*(int*) (msg + 0xc) = -1;
 						msg[0x36] = 9;

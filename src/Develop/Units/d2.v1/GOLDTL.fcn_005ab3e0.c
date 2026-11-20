@@ -1,6 +1,6 @@
 #include <math.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int g_774654;
 extern int d2_CurrentElementId;
 extern int g_14ce8e0;
@@ -56,8 +56,8 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 
 	item = -1;
 	cost = 0;
-	count = fcn_004f39b0(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 4));
-	kind = fcn_004f5dd0(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 4));
+	count = fcn_004f39b0(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4));
+	kind = fcn_004f5dd0(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4));
 	if (kind != 0) {
 		scale = (float) gm_WalkEntityChain(g_774970) * 0.005f;
 		factor = 1.5f;
@@ -66,7 +66,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 		cost = (int) ((float) kind * factor * scale);
 		scaledPrice = (double) cost * 0.1;
 		cost = (int) (320000.0 < (scaledPrice > 3200.0 ? scaledPrice : 3200.0) ? 320000.0 : (scaledPrice > 3200.0 ? scaledPrice : 3200.0));
-		if (fcn_005c6270(g_7f4ca0 + g_774970 * 0x21c, 0x2c6) != 0)
+		if (fcn_005c6270((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0x2c6) != 0)
 			cost = cost / 2;
 	}
 	dlg = fcn_00470820(0, 0, (char*) 0x6ab014);
@@ -89,8 +89,8 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1 && d2_CurrentElementId == item
-			&& fcn_00526010(g_7f4ca0 + g_774970 * 0x21c, cost, g_773d75) != 0) {
-			rec = g_7f4ca0 + g_774970 * 0x21c;
+			&& fcn_00526010((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], cost, g_773d75) != 0) {
+			rec = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 			fcn_004c4510(rec, *(int*) (rec + 4));
 			fcn_004c4670(4, 1, 0x1ac, &cost);
 			fcn_004c5360();
@@ -99,9 +99,9 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 				&& *(unsigned short*) (churchBuilding + 0x27) != g_774970) {
 				val = (int) (cost / log10((double) cost));
 				fcn_004c5150(-1, *(int*) (rec + 4), g_773d75, cost);
-				sel = fcn_004c5150(*(int*) (g_7f4ca0 + *(unsigned short*) (churchBuilding + 0x27) * 0x21c + 4),
+				sel = fcn_004c5150(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(churchBuilding + 0x27)] + 4),
 					-1, g_773d75, val);
-				fcn_005b2150(rec, g_7f4ca0 + *(unsigned short*) (churchBuilding + 0x27) * 0x21c, churchBuilding, val, cost);
+				fcn_005b2150(rec, (char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(churchBuilding + 0x27)], churchBuilding, val, cost);
 			} else {
 				sel = fcn_004c5150(-1, *(int*) (rec + 4), g_773d75, cost);
 			}

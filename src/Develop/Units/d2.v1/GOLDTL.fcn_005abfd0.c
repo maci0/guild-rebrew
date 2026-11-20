@@ -56,7 +56,7 @@ void __cdecl d2_OpenBeichteDialog(unsigned char* e)
 	if (*(unsigned short*) (e + 0x27) == 0xffff) {
 		return;
 	}
-	amt = fcn_004f39b0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id);
+	amt = fcn_004f39b0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
 	dlg = fcn_00470820(0, 0, s_6ab060);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
@@ -81,13 +81,13 @@ void __cdecl d2_OpenBeichteDialog(unsigned char* e)
 		}
 		if (g_100f1dc != -1 && flag != 0) {
 			if (d2_CurrentElementId == btnA) {
-				me = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
+				me = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]);
 				v = fcn_00471f80(btnB);
 				if (fcn_00525f60(me, v) != 0) {
 					fcn_005100f0(me->entity_id, -v);
 					if (*(unsigned short*) (e + 0x27) != 0xffff && *(unsigned short*) (e + 0x27) != g_774970) {
-						fcn_005100f0(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id, 1);
-						fcn_005b21d0(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)], e);
+						fcn_005100f0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id, 1);
+						fcn_005b21d0(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)]), e);
 					}
 					fcn_004f5e20(me->entity_id, v / 2);
 					fcn_00526120(g_14ab930, 0);

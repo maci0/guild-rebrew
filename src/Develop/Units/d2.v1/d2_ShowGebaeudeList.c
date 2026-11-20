@@ -5,7 +5,7 @@ extern int g_14ce8e0;
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern char* g_1015ea0;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 typedef struct {
 	int out0;
@@ -36,7 +36,7 @@ void __cdecl d2_ShowGebaeudeList(void)
 	int n;
 	int j;
 
-	table = g_7f4ca0 + (unsigned short) g_774970 * 0x21c;
+	table = (char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) g_774970];
 	obj = fcn_00470820(0, 0, (char*) 0x6ac94c);
 	d2_CenterDialogWindows(obj);
 	d2_SetForm(obj, 0);

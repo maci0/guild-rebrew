@@ -1,9 +1,9 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_matrices.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl cm_ResolveSpecialEntityId(int a, int b);
-#define SLOT_DWORD(off) (*(int*) (g_7f4ca0 + (off) + 4))
-#define SLOT_WORD(off)  (*(unsigned short*) (g_7f4ca0 + (off)))
+#define SLOT_DWORD(off) (*(int*)&((ENTITY_RECORD*)(g_7f4ca0 + (off)))->entity_id)
+#define SLOT_WORD(off) (*(unsigned short*)&((ENTITY_RECORD*)(g_7f4ca0 + (off)))->entity_index)
 
 /* Updates one slot's relation matrix for the given update kind and mode.
  * Native body: 889 bytes at 0x004c8de0. */
@@ -53,8 +53,8 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 			p = (char*) g_869480 + i * 0x300;
 			for (j = 0; j < 0x300; j++) {
 				v = (signed char) p[j];
-				if (i != j && SLOT_WORD(i * 0x21c) != 0xffff &&
-				    SLOT_WORD(j * 0x21c) != 0xffff) {
+				if (i != j && (*(unsigned short*)&((ENTITY_RECORD*)g_7f4ca0)[i].entity_index) != 0xffff &&
+				    (*(unsigned short*)&((ENTITY_RECORD*)g_7f4ca0)[j].entity_index) != 0xffff) {
 						if (v > hi) {
 						v += hiadd;
 					} else if (v < lo) {
@@ -71,7 +71,7 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 		}
 	} else {
 		idx4 = 0;
-		for (i = 0; (unsigned int) i < 0x65400; i += 0x21c) {
+		for (i = 0; (unsigned int) i < 0x65400; i += sizeof(ENTITY_RECORD)) {
 			if (SLOT_DWORD(i) == idx5) {
 				break;
 			}
@@ -83,14 +83,14 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 		if ((unsigned int) idx4 >= 0x300) {
 			return 1;
 		}
-		if (SLOT_WORD(idx4 * 0x21c) == 0xffff) {
+		if ((*(unsigned short*)&((ENTITY_RECORD*)g_7f4ca0)[idx4].entity_index) == 0xffff) {
 			return 1;
 		}
 		if (kind == 3) {
-			e = *(int*) (g_7f4ca0 + idx4 * 0x21c + 0x210);
+			e = *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[idx4]) + 0x210);
 			p = (char*) g_90e0a0 + idx4;
 			for (i = 0; i < 0x300; i++) {
-				if (SLOT_DWORD(i * 0x21c) != e) {
+				if ((*(int*)&((ENTITY_RECORD*)g_7f4ca0)[i].entity_id) != e) {
 					*p = (char) (int) ((float) *p * *(float*) (t + 8));
 				}
 				p += 0x300;
@@ -98,7 +98,7 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 		} else {
 			idx5idx = idx4;
 			idx4 = 0;
-			for (i = 0; (unsigned int) i < 0x65400; i += 0x21c) {
+			for (i = 0; (unsigned int) i < 0x65400; i += sizeof(ENTITY_RECORD)) {
 				if (SLOT_DWORD(i) == r1) {
 					break;
 				}
@@ -110,7 +110,7 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 			if ((unsigned int) idx4 >= 0x300) {
 				return 1;
 			}
-			if (SLOT_WORD(idx4 * 0x21c) == 0xffff) {
+			if ((*(unsigned short*)&((ENTITY_RECORD*)g_7f4ca0)[idx4].entity_index) == 0xffff) {
 				return 1;
 			}
 			p = (char*) g_869480 + idx4 * 0x300 + idx5idx;

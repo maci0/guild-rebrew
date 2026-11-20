@@ -11,7 +11,7 @@ typedef struct {
     char name[0x3f], unknowndb[0x1d];
 } BuildingMsg599b00;
 extern int gm_GameTime;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 /* City construction dialog ("BAUEN\\STADT_BAUEN"). Builds the category
  * list, keeps one hotkey row per building category, then runs the message
@@ -106,21 +106,21 @@ void __cdecl fcn_00599b00(void)
 			row += 0x50;
 			ofs = 0;
 		}
-		cost = fcn_0050d200((int) ((unsigned short) g_774970 * 0x21c
-		    + 0x7f4ca0), cat);
+		cost = fcn_0050d200((int)&((ENTITY_RECORD*)g_7f4ca0)[
+		    (unsigned short)g_774970], cat);
 		last = rec->kind;
 		raw = fcn_0046f740(ofs + 0x30, row - 0x30, cat + 0x427,
 		    d2_CurrentWindowId);
-		raw *= 0x2f4;
-		(*(D2_CONTROL_TL*) ((char*) (g_1015ea0) + raw)).value_05c = 1;
-		(*(D2_CONTROL_TL*) ((char*) (g_1015ea0) + raw)).flags_1d0 = 3;
+		/* raw is the control index. */
+		((D2_CONTROL_TL*)g_1015ea0)[raw].value_05c = 1;
+		((D2_CONTROL_TL*)g_1015ea0)[raw].flags_1d0 = 3;
 		src = *(char**) (cat * 0x38 + 0x14a6558);
-		dst = (char*) ((char*) &(*(D2_CONTROL_TL*) ((char*) (g_1015ea0) + raw)) + 0xcc);
+		dst = (char*) ((char*) &((D2_CONTROL_TL*)g_1015ea0)[raw] + 0xcc);
 		do {
 			c = *src++;
 			*dst++ = c;
 		} while (c != 0);
-		(*(D2_CONTROL_TL*) ((char*) (g_1015ea0) + raw)).value_1cc = 0x54;
+		((D2_CONTROL_TL*)g_1015ea0)[raw].value_1cc = 0x54;
 		fcn_0050bc10(cost, g_773d75, key);
 		ent = fcn_0046fac0(ofs + 2, row, 0x6b5c60, d2_CurrentWindowId);
 		d2_SetElementFont(ent, 0x54);
@@ -138,14 +138,14 @@ void __cdecl fcn_00599b00(void)
 			}
 			selected = d2_CurrentElementId;
 			ent = fcn_00526070(query, *(int*) (query + 0x14),
-			    fcn_0050d200((int)(g_7f4ca0 + g_774970 * 0x21c), i), g_773d75);
+			    fcn_0050d200((int)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), i), g_773d75);
 			if (ent != 0) {
 				fcn_00471af0(dlg, 0);
 				ent = lc_GebaeudeAusrichten(i, name);
 				if (ent != 0) {
 					msg.kind = 0x0d;
 					msg.mode = 2;
-					msg.actor = *(int*)(g_7f4ca0 + g_774970 * 0x21c + 4);
+					msg.actor = *(int*)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4);
 					msg.target = msg.actor;
 					msg.pos.a = gm_GameTime;
 					msg.pos.b = g_7f4c04;
@@ -153,7 +153,7 @@ void __cdecl fcn_00599b00(void)
 					msg.pos.d = g_7f4c0c;
 					msg.owner = *(int*)(gm_CityEntity + 4);
 					msg.category = i;
-					msg.cost = fcn_0050d200((int)(g_7f4ca0 + g_774970 * 0x21c), i);
+					msg.cost = fcn_0050d200((int)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), i);
 					d3_TransformPoint(ent, ent + 0x4c, msg.location);
 					fcn_00598740(msg.rotation, ent);
 					{

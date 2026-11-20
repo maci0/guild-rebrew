@@ -1,5 +1,5 @@
-int __cdecl fcn_0046f740(int, int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl fcn_0046f740(int, int, int, int); int __cdecl fcn_00470820(int, int, char*);
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetForm(int, int);
@@ -35,14 +35,14 @@ void __cdecl fcn_005aa480(void)
 	int j;
 	int n;
 	int h;
-
-	n = gm_CheckZunftPreismanipulation((char*) ((unsigned long)&g_7f4ca0 + (unsigned int) *(unsigned short*) &g_774970 * 0x21c));
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+	n = gm_CheckZunftPreismanipulation((char*) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) &g_774970]));
 	if (n != 1) {
 		if (n == -1) {
 			fcn_00526120((void*) *(int*) 0x14aad38, 0);
 			return;
 		}
-		fcn_00525f60((void*) ((unsigned long)&g_7f4ca0 + (unsigned int) *(unsigned short*) &g_774970 * 0x21c), 3);
+		fcn_00525f60((void*) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) &g_774970]), 3);
 		return;
 	}
 	h = fcn_00470820(0, 0, "LOCATIONS\\ZUNFTHAUS\\LEVEL1");
@@ -58,16 +58,16 @@ void __cdecl fcn_005aa480(void)
 		n = fcn_0046f740(pos[i][0] - 0x28, pos[i][1] - 0x46, i + 0x5a2, *(int*) &d2_CurrentWindowId);
 		ids[i] = n;
 		i++;
-		*(int*) ((char*) *(void**) &g_1015ea0 + n * 0x2f4 + 0x5c) = 1;
+		((D2_CONTROL_TL*)*(void**)&g_1015ea0)[n].value_05c = 1;
 	} while (i < 7);
 	cur = 0;
-	*(int*) ((char*) *(void**) &g_1015ea0 + ids[0] * 0x2f4 + 0x3c) = 1;
+	((D2_CONTROL_TL*)*(void**)&g_1015ea0)[ids[0]].value_03c = 1;
 	d2_SetForm(h, 3);
-	n = (unsigned int) *(unsigned short*) &g_774970 * 0x21c;
-	if (*(char*) ((unsigned long)&g_7f4ca0 + n + 9) == 0) {
-		n = *(unsigned char*) ((unsigned long)&g_7f4ca0 + n + 0x169) + 0x253;
+	n = (unsigned int) *(unsigned short*) &g_774970;
+	if (((ENTITY_RECORD*)g_7f4ca0)[n].gender == 0) {
+		n = ((ENTITY_RECORD*)g_7f4ca0)[n].unk_165[4] + 0x253;
 	} else {
-		n = *(unsigned char*) ((unsigned long)&g_7f4ca0 + n + 0x169) + 0x27b;
+		n = ((ENTITY_RECORD*)g_7f4ca0)[n].unk_165[4] + 0x27b;
 	}
 	io_AppendText(0x1644, n, 3, 0x1649);
 	d2_SetForm(h, 4);
@@ -87,28 +87,28 @@ void __cdecl fcn_005aa480(void)
 				pb[0] = 3;
 				pb[1] = cur + 1;
 				pb[2] = 1;
-				fcn_004eb3e0((int) ((unsigned long)&g_7f4ca0 + (unsigned int) n * 0x21c), pb);
+				fcn_004eb3e0((int) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) n]), pb);
 				*(int*) 0x774654 = 1;
 			} else if (n == sel[1]) {
 				pa[0] = 3;
 				pa[1] = cur + 1;
 				pa[2] = -1;
-				fcn_004eb3e0((int) ((unsigned long)&g_7f4ca0 + (unsigned int) *(unsigned short*) &g_774970 * 0x21c), pa);
+				fcn_004eb3e0((int) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) &g_774970]), pa);
 				*(int*) 0x774654 = 1;
 			} else {
 				j = 0;
 				do {
 					if (n == ids[j] && cur != j) {
-						*(int*) ((char*) *(void**) &g_1015ea0 + ids[cur] * 0x2f4 + 0x3c) = 0;
+						((D2_CONTROL_TL*)*(void**)&g_1015ea0)[ids[cur]].value_03c = 0;
 						cur = j;
-						*(int*) ((char*) *(void**) &g_1015ea0 + ids[j] * 0x2f4 + 0x3c) = 1;
+						((D2_CONTROL_TL*)*(void**)&g_1015ea0)[ids[j]].value_03c = 1;
 						d2_SetForm(h, 3);
 						io_AppendText(0x6811b0);
-						n = (unsigned int) *(unsigned short*) &g_774970 * 0x21c;
-						if (*(char*) ((unsigned long)&g_7f4ca0 + n + 9) == 0) {
-							n = *(unsigned char*) ((unsigned long)&g_7f4ca0 + n + 0x169) + 0x253;
+						n = (unsigned int) *(unsigned short*) &g_774970;
+						if (((ENTITY_RECORD*)g_7f4ca0)[n].gender == 0) {
+							n = ((ENTITY_RECORD*)g_7f4ca0)[n].unk_165[4] + 0x253;
 						} else {
-							n = *(unsigned char*) ((unsigned long)&g_7f4ca0 + n + 0x169) + 0x27b;
+							n = ((ENTITY_RECORD*)g_7f4ca0)[n].unk_165[4] + 0x27b;
 						}
 						io_AppendText(0x1644, n, 3, j + 0x1649);
 						break;

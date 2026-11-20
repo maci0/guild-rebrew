@@ -1,9 +1,9 @@
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include <stdio.h>
 #include <string.h>
 #include "client_data.h"
 extern unsigned char* lpGebaeudePROT;
 extern int g_6b7fdc;
-
 
 
 
@@ -71,7 +71,7 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 	}
 	v3 = *(unsigned int*) (a2 + 4);
 	*(int*) buildingName = g_6798d4;
-	strcat(buildingName, (char*) (lpGebaeudePROT + *(int*) (a1 + 4) * 0x24d + 1));
+	strcat(buildingName, (char*) ((char *)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(int*) (a1 + 4)] + 1));
 	_strupr(buildingName + 2);
 	v4 = 0;
 	for (;;) {
@@ -88,7 +88,7 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 		}
 		if (v4) {
 			sprintf(buildingName, (char*) 0x67f074,
-				(char*) (lpGebaeudePROT + *(int*) (a1 + 4) * 0x24d + 1));
+				(char*) ((char *)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(int*) (a1 + 4)] + 1));
 			return 0;
 		}
 		v4 = 1;

@@ -1,5 +1,5 @@
 #include "client_dialog_helpers.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* Auction house dialog. Opens the "Versteigerung" cutscene set, builds the
  * auctioneer and bidder actors, runs the bidding rounds and cleans the
  * scene up again. arg is the auction record: player at +0x30 (bidder
@@ -262,8 +262,8 @@ void __cdecl cut_RunAuction(int* arg)
 		    200);
 		d2_SetForm(dlg, 0);
 		io_AppendText((void*) 0x1aa5, (void*) building);
-		if (arg[3] == *(int*) ((unsigned short) g_774970 * 0x21c
-		    + 0x7f4ca4)) {
+		if (arg[3] == *(int*) (&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short)g_774970]
+		    .entity_id)) {
 			fcn_004c5f60(*(int*) ((char*) building + 1),
 			    *(int*) (gm_CityEntity + 4),
 			    *(int*) (gm_CityEntity + 4));
@@ -275,12 +275,12 @@ void __cdecl cut_RunAuction(int* arg)
 		io_AppendText((void*) 0x1aa4,
 		    (void*) (*(short*) (char*) bidders[besti]),
 		    (void*) price);
-		if (arg[3] == *(int*) ((unsigned short) g_774970 * 0x21c
-		    + 0x7f4ca4)) {
+		if (arg[3] == *(int*) (&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short)g_774970]
+		    .entity_id)) {
 						found = 0;
 			for (j = 0; j < 0x300; j++) {
-				if (g_7f4ca0[j * 0x21c + 0x166] == 0x0b) {
-					found = (int) (g_7f4ca0 + j * 0x21c);
+				if (((char*)&((ENTITY_RECORD*)g_7f4ca0)[j])[0x166] == 0x0b) {
+					found = (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[j]));
 					break;
 				}
 			}

@@ -13,7 +13,7 @@ struct house {
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c4450(int);
@@ -61,11 +61,11 @@ void __cdecl fcn_0054c500(char* e)
 	idx = *(int*) (e + 0xc4);
 	i = 0;
 	while (*(int*) (e + 0xcc) != 0 && i < 16) {
-		if (((struct house*)g_7f4ca0)[idx].id != 0xffff && ((struct house*)g_7f4ca0)[idx].handle != *(int*) (e + 0xbc) && ((struct house*)g_7f4ca0)[idx].type < 10
-		    && ((struct house*)g_7f4ca0)[idx].level > 0) {
-			f = -fcn_00507ed0(*(float*) (e + 0xd0), gm_GetEntitySkill((char*) &((struct house*)g_7f4ca0)[idx], 4));
+		if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_index) != 0xffff && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_id) != *(int*) (e + 0xbc) && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_type) < 10
+		    && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].health) > 0) {
+			f = -fcn_00507ed0(*(float*) (e + 0xd0), gm_GetEntitySkill((char*) ((struct house*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]), 4));
 			v = (int) (f * 10.0f + 1.0f) * mult;
-			fcn_004c54c0(*(int*) (e + 0xbc), ((struct house*)g_7f4ca0)[idx].handle, v, 1);
+			fcn_004c54c0(*(int*) (e + 0xbc), (((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_id), v, 1);
 		}
 		i++;
 		*(int*) (e + 0xcc) = *(int*) (e + 0xcc) - 1;

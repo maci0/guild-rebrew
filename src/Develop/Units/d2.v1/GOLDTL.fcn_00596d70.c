@@ -3,7 +3,7 @@ extern unsigned int g_7746d8;
 extern unsigned char g_773d75;
 extern char* g_1015ea0;
 extern char* lpGebaeudePROT;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* Private layout views inferred from native accesses; they allocate no
  * storage and are visible only to this translation unit. */
 
@@ -97,7 +97,7 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 		if (flags & 2) {
 			if (*p == 0x47) {
 				f = fcn_0050bb50(r->id, p[0x65]);
-			} else if (*(lpGebaeudePROT + *p * 0x24d) == '\n') {
+			} else if (*((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p]) == '\n') {
 				f = fcn_0050bb50(r->id, g_773d75) * 1.1;
 			} else {
 				f = fcn_0050bb50(r->id, g_773d75) * *(float*) (p + 0x49);

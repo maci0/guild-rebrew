@@ -1,8 +1,8 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 #include "client_packet_builder.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned short* gm_CityEntity;
@@ -88,7 +88,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 	rec = lpGebaeudeINST;
 	do {
 		if (*rec != 0 && *(unsigned short*) (rec + 0x27) == (unsigned short) arg) {
-			def = lpGebaeudePROT + *rec * 0x24d;
+			def = ((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*rec]);
 			*(int*) (rec + 0x4d) = 0;
 			*(int*) (rec + 0x51) = 0;
 			*(int*) (rec + 0x55) = 0;
@@ -106,11 +106,11 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					}
 					fcn_004c53a0();
 					count++;
-					off = (arg & 0xffff) * 0x21c;
-					v = *(unsigned char*) (g_7f4ca0 + off + 2);
+					off = (arg & 0xffff);
+					v = *(unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_state;
 					if (v != 6 && v != 7) {
-						if (gm_AccumulateTyped2(g_7f4ca0 + off) < 160000) {
-							fcn_004c5150(*(int*) (g_7f4ca0 + off + 4), -1, (char) g_773d75, *(unsigned char*) (def + 0x247) * 16000);
+						if (gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[off]) < 160000) {
+							fcn_004c5150(*(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id, -1, (char) g_773d75, *(unsigned char*) (def + 0x247) * 16000);
 							count++;
 						}
 					}
@@ -175,9 +175,9 @@ void __cdecl fcn_005422c0(unsigned int arg)
 				*(int*) ((msg + 0xf8) + 0x5c) = fcn_0050cf50((char*) rec, *(signed char*) (rec + 0x5c));
 				fcn_004c5530((msg + 0xf8));
 			}
-			off = (arg & 0xffff) * 0x21c;
-			v = *(unsigned char*) (g_7f4ca0 + off + 2);
-			if (v == 0xd || v == 0 || *(int*) (g_7f4ca0 + off + 4) == -1) {
+			off = (arg & 0xffff);
+			v = *(unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_state;
+			if (v == 0xd || v == 0 || *(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id == -1) {
 				fcn_004c5f60(*(int*) (rec + 1), *(int*) (gm_CityEntity + 2), *(int*) (gm_CityEntity + 2));
 				count++;
 				v = *def;
@@ -191,7 +191,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					fcn_004c5530(msg);
 					count++;
 					for (i = 0; i < 768; i++) {
-						slot = g_7f4ca0 + i * 0x21c;
+						slot = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]);
 						if (*(unsigned char**) (slot + 0x16c) == rec) {
 							memset(msg, 0, 0xf8);
 							msg[4] = 0x31;
@@ -219,16 +219,16 @@ void __cdecl fcn_005422c0(unsigned int arg)
 	} while (n != 0);
 
 	idx = arg & 0xffff;
-	off = idx * 0x21c;
-	v = fcn_00507380(*(unsigned char*) (g_7f4ca0 + off + 0x164));
+	off = idx;
+	v = fcn_00507380(*(unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[off].unk_164);
 	if (v >= 2 && v <= 5) {
 		fcn_005049c0(v);
 	}
 	p = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 	while (p != 0) {
 		if (*(unsigned short*) (p + 0x27) == (unsigned short) arg) {
-			tile = g_7f4ca0 + (*(unsigned short*) (p + 0x27)) * 0x21c;
-			if (*(lpGebaeudePROT + *p * 0x24d) == 0x1e) {
+			tile = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]);
+			if (*(((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p])) == 0x1e) {
 				r = (unsigned char*) fcn_004ec7d0(p);
 				if (r != 0) {
 					v = fcn_004ee160((char*) p);
@@ -245,7 +245,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 							if (id2 == 0xffff) {
 								continue;
 							}
-							tile2 = g_7f4ca0 + id2 * 0x21c;
+							tile2 = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[id2]);
 							r = (unsigned char*) *(int*) (tile2 + 0x184);
 							if (r != 0) {
 								r[0x8c] &= 0xfb;
@@ -319,7 +319,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 									if (gm_RandomMod(100) > 0x32) {
 										memset((msg + 0x1f0), 0, 0xf8);
 										(msg + 0x1f0)[4] = 0x33;
-										*(int*) ((msg + 0x1f0) + 8) = *(int*) (g_7f4ca0 + off + 4);
+										*(int*) ((msg + 0x1f0) + 8) = *(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id;
 										*(int*) ((msg + 0x1f0) + 0xc) = *(int*) (p + 1);
 										*(pos14_7f4c00*) ((msg + 0x1f0) + 0x28) = gm_GameTime;
 										(msg + 0x1f0)[0x36] = 1;
@@ -331,7 +331,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 									else {
 										memset((msg + 0xf8), 0, 0xf8);
 										(msg + 0xf8)[4] = 0x34;
-										*(int*) ((msg + 0xf8) + 8) = *(int*) (g_7f4ca0 + off + 4);
+										*(int*) ((msg + 0xf8) + 8) = *(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id;
 										*(int*) ((msg + 0xf8) + 0xc) = *(int*) (p + 1);
 										*(pos14_7f4c00*) ((msg + 0xf8) + 0x28) = gm_GameTime;
 										(msg + 0xf8)[0x36] = 1;
@@ -365,7 +365,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 						v = (int) (((double) *(int*) (p + 0x3d) * 0.01) * f);
 						id2 = ((int*) msg)[0x19 + j];
 						if (id2 != 0xffff) {
-							tile2 = g_7f4ca0 + id2 * 0x21c;
+							tile2 = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[id2]);
 							fcn_004c51a0(*(int*) (tile2 + 4), *(int*) (tile + 4), g_773d75, v);
 							fcn_004c4510((char*) tile2, *(int*) (tile2 + 4));
 							cm_AppendPacketFieldDelta(4, 1, 0x19c, &v);
@@ -394,7 +394,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					v = fcn_0050b810(*(int*) (r + 0x14), (char) g_773d75);
 					if (v > 0) {
 						count++;
-						fcn_004c5150(*(int*) (g_7f4ca0 + (*(unsigned short*) (p + 0x27)) * 0x21c + 4), *(int*) (r + 2), (char) g_773d75, v);
+						fcn_004c5150(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]) + 4), *(int*) (r + 2), (char) g_773d75, v);
 					}
 				}
 			}
@@ -404,7 +404,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					v = fcn_0050b810(*(int*) (r + 0x14), (char) g_773d75);
 					if (v > 0) {
 						count++;
-						fcn_004c5150(*(int*) (g_7f4ca0 + (*(unsigned short*) (p + 0x27)) * 0x21c + 4), *(int*) (r + 2), (char) g_773d75, v);
+						fcn_004c5150(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]) + 4), *(int*) (r + 2), (char) g_773d75, v);
 					}
 				}
 			}

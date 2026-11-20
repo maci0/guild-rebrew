@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 void* __cdecl memset(void*, int, unsigned int);
@@ -37,7 +37,7 @@ void __cdecl fcn_005ad950(unsigned char* e)
 			fcn_0052a0c0(e, 0);
 			req.id = 0x727;
 			req.kind = 7;
-			if (((char*)lpGebaeudePROT)[*e * 589] == 0x13) {
+			if (*(char *)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category == 0x13) {
 				req.c = 0x90010;
 				req.d = 0;
 			}

@@ -1,7 +1,7 @@
 /* Build the trade/shop inventory page: a header record with the five column
  * captions, the player's name and the two total labels, then one detail record
  * per listed entity, each handed to the page builder fcn_00402340. */
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include <string.h>
 #include "client_types.h"
 
@@ -62,7 +62,7 @@ void __cdecl fcn_00559200(char* o)
 			*(unsigned short*) (g + 0) = 1;
 			*(unsigned short*) (g + 2) = 2;
 			*(unsigned short*) (g + 4) = 0xb9;
-			e = g_7f4ca0 + *(unsigned short*) rows[i] * 0x21c;
+			e = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) rows[i]]);
 			*(int*) (g + 6) = *(int*) (e + 4);
 			*(int*) (g + 0xa) = fcn_0050b710(*(int*) (rows[i] + 4), g_773d75);
 			*(int*) (g + 0xe) = *(int*) (rows[i] + 0x20);

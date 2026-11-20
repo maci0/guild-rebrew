@@ -5,14 +5,14 @@ extern char g_7f4ca4[];
 extern unsigned char* lpGebaeudePROT;
 extern char g_699adc[];
 extern char g_699af0[];
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_packet_builder.h"
 void __cdecl fcn_004c4670(int a, int b, int off, char* v);
 void __cdecl fcn_004c5360(void);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int h, int a, char* text, int b, int c, char* snd);
 void __cdecl fcn_004c5fd0(int h);
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl fcn_0050ff70(char* o, int delta)
 {
 	char d;
@@ -32,9 +32,9 @@ void __cdecl fcn_0050ff70(char* o, int delta)
 	fcn_004c4670(1, 1, 0x5c, &d);
 	fcn_004c5360();
 	if (*o != 0 && d + o[0x5c] <= 0) {
-		rec = lpGebaeudePROT + (unsigned char) *o * 589;
+		rec = (unsigned char*) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[(unsigned char) *o];
 		if (*rec != 0xf && *rec != 0x1c && *rec != 0x1b && *rec != 0xa && *rec != 6 && *rec < 0x17 && *rec != 0x10) {
-			for (p = g_7f4ca4; (int) p < (int) (g_7f4ca4 + 0x65400); p += 0x21c) {
+			for (p = g_7f4ca4; (int) p < (int) (g_7f4ca4 + 0x65400); p += sizeof(ENTITY_RECORD)) {
 				if (*(unsigned char*) (p - 2) == 6 || *(unsigned char*) (p - 2) == 7) {
 					if (*(unsigned short*) (p - 4) != *(unsigned short*) (o + 0x27)) {
 						io_FormatTextBuffer(other, 0x1c52, *(unsigned short*) (o + 0x27), o);

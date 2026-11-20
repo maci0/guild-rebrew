@@ -73,10 +73,10 @@ int __cdecl fcn_005de630(ENTITY_RECORD* obj, int* arg)
 	step = gm_RandomSearchSteps[gm_RandomMod(0x10)];
 	n = 3;
 	do {
-		if (((ENTITY_RECORD*)g_7f4ca0)[start].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[start].unk_165[1] && &((ENTITY_RECORD*)g_7f4ca0)[start] != obj &&
-			&((ENTITY_RECORD*)g_7f4ca0)[start] != e) {
+		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[start].entity_index != 0xffff && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[start].class_166 && ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[start]) != obj &&
+			((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[start]) != e) {
 			n--;
-			picks[n] = &((ENTITY_RECORD*)g_7f4ca0)[start];
+			picks[n] = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[start]);
 		}
 		start = (start + step) % 0x300;
 	} while (n != 0);

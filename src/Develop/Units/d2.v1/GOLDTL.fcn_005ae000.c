@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc, g_14abaac, g_14ce8e0;
 #include "client_dialog_state.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl fcn_00525fb0(char* obj);
 void __cdecl fcn_0052a0c0(char* obj, int a);
 int __cdecl fcn_00470820(int, int, char*);
@@ -66,14 +66,14 @@ int __cdecl fcn_005ae000(char* obj)
 				if (n != 0) {
 					idx = *(unsigned short*) (obj + 0x27);
 					*(char*) (packet + 4) = 0x61;
-					*(int*) (packet + 8) = *(int*) (g_7f4ca0 + idx * 0x21c + 4);
+					*(int*) (packet + 8) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]) + 4);
 					*(int*) (packet + 0xc) = *(int*) (obj + 1);
 					*(int*) (packet + 0x28) = gm_GameTime.a;
 					*(int*) (packet + 0x2c) = gm_GameTime.b;
 					*(int*) (packet + 0x30) = gm_GameTime.c;
 					*(unsigned short*) (packet + 0x34) = gm_GameTime.d;
 					*(char*) (packet + 0x36) = 1;
-					*(int*) (packet + 0x80) = *(int*) (g_7f4ca0 + idx * 0x21c + 4);
+					*(int*) (packet + 0x80) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]) + 4);
 					fcn_004c5530((int) packet);
 					fcn_004c35f0();
 					sv_ClearObjectSelection();

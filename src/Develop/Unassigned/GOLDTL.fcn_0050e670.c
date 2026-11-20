@@ -13,7 +13,7 @@ typedef struct
 } Ent21c;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 void __cdecl fcn_0050e670(int* ids, int* vals)
 {
@@ -25,17 +25,17 @@ void __cdecl fcn_0050e670(int* ids, int* vals)
 		vals[i] = 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((Ent21c*)g_7f4ca0)[i].x4 != -1 && ((Ent21c*)g_7f4ca0)[i].x2 < 10 && ((Ent21c*)g_7f4ca0)[i].x1ac > vals[4]) {
-			vals[4] = ((Ent21c*)g_7f4ca0)[i].x1ac;
-			ids[4] = ((Ent21c*)g_7f4ca0)[i].id;
+		if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id) != -1 && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type) < 10 && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].value_1ac) > vals[4]) {
+			vals[4] = (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].value_1ac);
+			ids[4] = (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index);
 			for (j = 3; j > -1; j--) {
-				if (((Ent21c*)g_7f4ca0)[i].x1ac <= vals[j] || ((Ent21c*)g_7f4ca0)[i].x2 >= 10) {
+				if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].value_1ac) <= vals[j] || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type) >= 10) {
 					break;
 				}
 				vals[j + 1] = vals[j];
 				ids[j + 1] = ids[j];
-				vals[j] = ((Ent21c*)g_7f4ca0)[i].x1ac;
-				ids[j] = ((Ent21c*)g_7f4ca0)[i].id;
+				vals[j] = (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].value_1ac);
+				ids[j] = (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index);
 			}
 		}
 	}

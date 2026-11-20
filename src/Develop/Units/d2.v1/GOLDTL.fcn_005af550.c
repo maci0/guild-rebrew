@@ -75,7 +75,7 @@ int __cdecl fcn_005af550(int unused, char* param)
 		return 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((ENTITY_RECORD*) g_7f4ca0)[i].unk_17c[12] != 0)
+		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected != 0)
 			break;
 	}
 	if (i >= 768) {
@@ -102,15 +102,15 @@ int __cdecl fcn_005af550(int unused, char* param)
 					if (n >= 6) {
 						break;
 					}
-					if (((ENTITY_RECORD*) g_7f4ca0)[i].unk_17c[12] != 0) {
-						pkt.ids[n] = ((ENTITY_RECORD*) g_7f4ca0)[i].entity_id;
+					if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected != 0) {
+						pkt.ids[n] = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id;
 						n++;
 					}
 				}
 				if (n != 0) {
 					count = 0;
 					pkt.type = 0x44;
-					pkt.x8 = ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id;
+					pkt.x8 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
 					pkt.x36 = 2;
 					pkt.x58 = *(int*) (param + 1);
 					pkt.x5c = *(int*) (g_7746c4 + 1);
@@ -118,7 +118,7 @@ int __cdecl fcn_005af550(int unused, char* param)
 					cm_ExProdObjekt();
 					flag = 1;
 					for (i = 0; i < 768; i++) {
-						if (((ENTITY_RECORD*) g_7f4ca0)[i].unk_17c[12] != 0)
+						if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected != 0)
 							count++;
 					}
 					if (count > 6) {

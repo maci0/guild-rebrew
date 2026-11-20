@@ -27,7 +27,7 @@ typedef struct
 // SIZE 0xf8
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern int g_100f1dc;
@@ -66,11 +66,11 @@ int __cdecl d2_ShowIntimidationDialog(unsigned short* target)
 	do {
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				if (fcn_00525f60(g_7f4ca0 + g_774970 * 540, 2) != 0) {
-					fcn_004c6ae0(*(int*) (g_7f4ca0 + g_774970 * 540 + 4), -2);
+				if (fcn_00525f60(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2) != 0) {
+					fcn_004c6ae0(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -2);
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 0x4b;
-					pkt.x8 = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
+					pkt.x8 = *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
 					pkt.xc = pkt.x8;
 					pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 					pkt.x36 = 2;

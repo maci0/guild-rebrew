@@ -1,4 +1,5 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 #pragma pack(push, 1)
@@ -98,7 +99,7 @@ void __cdecl fcn_005059b0(Estate* s, unsigned short owner, int slot)
 	int sc;
 	int i;
 
-	rec = ((char*)lpGebaeudePROT) + s->type * 0x24d;
+	rec = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[s->type];
 	s->owner = owner;
 	if (slot == 0xffff) {
 		return;
@@ -115,9 +116,9 @@ void __cdecl fcn_005059b0(Estate* s, unsigned short owner, int slot)
 		((Entity*)g_7f4ca0)[s->slot].best = 0;
 	}
 	s->slot = slot;
-	if (*rec == 2) {
+	if (((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 2) {
 		fcn_00505c80(s);
-		if (*rec == 2) {
+		if (((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 2) {
 			if (((Entity*)g_7f4ca0)[s->slot].best == 0 || ((Entity*)g_7f4ca0)[s->slot].best->type <= s->type) {
 				((Entity*)g_7f4ca0)[s->slot].best = s;
 			}
@@ -128,7 +129,7 @@ void __cdecl fcn_005059b0(Estate* s, unsigned short owner, int slot)
 		if (f != 0) {
 			f->busy = 0;
 			f->flags &= ~1;
-			if (*rec == 5 || *rec == 9) {
+			if (((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 5 || ((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 9) {
 				f->task = 0;
 			}
 		}

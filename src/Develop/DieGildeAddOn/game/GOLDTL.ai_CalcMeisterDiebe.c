@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "Develop/DieGildeAddOn/game/goods_plan.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 typedef struct GOLDTL_Msg481 {
 	int f0;                         /* 0x00 */
 	unsigned char f4;               /* 0x04 */
@@ -25,7 +25,7 @@ typedef struct GOLDTL_Msg481 {
 	int f80;                        /* 0x80 */
 	char pad84[0x74];
 } GOLDTL_Msg481;                    /* SIZE 0xf8 */
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_7f4ca0[];
 extern unsigned short g_7f4c04;
 extern int gm_GameTime;
@@ -159,7 +159,7 @@ common:
 	match = 0;
 	total = 0;
 	*(unsigned int*) (rec + 0x1b4) = *(unsigned int*) (rec + 0x1b4) | 0x20;
-	for (e = (unsigned char*) g_7f4ca0; (int) e < 0x85a0a0; e = e + 0x21c) {
+	for (e = (unsigned char*) g_7f4ca0; (int) e < 0x85a0a0; e = e + sizeof(ENTITY_RECORD)) {
 		if (e[8] > 0 && *(unsigned short*) e != 0xffff && e[2] != 0x0a
 		    && *(int*) (e + 0x16c) == *(int*) (rec + 0x16c)
 		    && e[0x165] != 0
@@ -383,7 +383,7 @@ L176c:
 		e = lpGebaeudeINST;
 		for (;;) {
 			if (*e != 0) {
-				unsigned char* bld = lpGebaeudePROT + (unsigned int) *e * 0x24d;
+				unsigned char* bld = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned int)*e];
 				unsigned short hid = *(unsigned short*) (e + 0x27);
 				unsigned short hsel = *(unsigned short*) (*(int*) (rec + 0x16c) + 0x27);
 				if (hid != hsel && hid != 0xffff && (e[0x5a] & 1) == 0

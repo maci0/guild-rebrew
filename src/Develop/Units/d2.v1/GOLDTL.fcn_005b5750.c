@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 typedef struct
 {
@@ -39,12 +39,12 @@ int __cdecl fcn_005b5750(void)
 
 	r = 0;
 	timer = main_LoopFlags;
-	if (fcn_00526010(&((Player*)g_7f4ca0)[g_774970], 0x140, (*(char*)&g_773d75)) == 0) {
+	if (fcn_00526010(((Player *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), 0x140, (*(char*)&g_773d75)) == 0) {
 		return 0;
 	}
 	dlg = fcn_00470820(0, 0, s_68d704);
 	ctl = fcn_00472250(dlg, 0, io_AppendText(0x1a34, (unsigned char) (*(char*)&g_773d75)));
-	v = gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]);
+	v = gm_AccumulateTyped2(((Player *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]));
 	if (v >= 0x12c0) {
 		v = 0x12c0;
 	}

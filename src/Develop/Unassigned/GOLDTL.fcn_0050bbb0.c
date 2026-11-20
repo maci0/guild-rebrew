@@ -1,16 +1,16 @@
 extern char g_7f4ca0[];
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x0050bbb0 */
 float __cdecl fcn_0050bbb0(int idx)
 {
 	char* p;
 	float v;
 
-	p = g_7f4ca0 + idx * 0x21c;
+	p = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]);
 	if (p == 0) {
 		return 1.0f;
 	}
-	v = *(unsigned char*) (p + 0x80);
+	v = *(unsigned char*)&((ENTITY_RECORD_VIEW*)p)->levels[0];
 	if (v <= 42.0f) {
 		return 1.0f;
 	}

@@ -15,7 +15,7 @@ void __cdecl fcn_005039e0(int);
 void __cdecl io_FormatTextBuffer(char*, int, int, int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 /* Advances a message action through its states, resolves the sender entity
  * and updates the message-table entry it belongs to. */
@@ -97,7 +97,7 @@ void __cdecl fcn_00572a50(char* obj)
 				io_FormatTextBuffer(msg, 0x1bb8, *(unsigned short*) ent * 2 + 0x9a8,
 					ref1, total);
 				he_MessageBoxQuickjump(
-					*(int*) (g_7f4ca0 + *(unsigned short*) ((char*) ref1 + 0x27) * 0x21c + 4),
+					*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) ((char*) ref1 + 0x27)]) + 4),
 					-1, msg, 0, 0x5f1, *(int*) ((char*) ref1 + 1), -1, 0,
 					"_NACHRICHTEN_HS_08");
 			}

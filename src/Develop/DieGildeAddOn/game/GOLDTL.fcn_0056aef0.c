@@ -1,5 +1,5 @@
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 #pragma pack(1)
@@ -160,7 +160,7 @@ void __cdecl fcn_0056aef0(char* action)
 			return;
 		}
 		i = *(unsigned short*)(h + 0x27);
-		ent = (char*)gm_LookupEntityRecordById(*(int*)(g_7f4ca0 + i * 0x21c + 4));
+		ent = (char*)gm_LookupEntityRecordById(((ENTITY_RECORD*)g_7f4ca0)[i].entity_id);
 		q = (char*)gm_SetupEntityQuery((unsigned char*)h);
 		t = 0;
 		k = 0;
@@ -191,7 +191,7 @@ void __cdecl fcn_0056aef0(char* action)
 			return;
 		}
 		i = *(unsigned short*)(h2 + 0x27);
-		r = g_7f4ca0 + i * 0x21c;
+		r = (char*)&((ENTITY_RECORD*)g_7f4ca0)[i];
 		q = (char*)fcn_00502cd0(*(int*)(h2 + 0x5d), 2, 6, 0, 0x2a);
 		i = gm_WalkEntityChain(*(unsigned short*)r);
 		if (i >= 1600000) {

@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_675908[];
 extern char g_6b5c60[];
 
@@ -30,12 +30,12 @@ void __cdecl fcn_0057f9a0(int a0)
 		if (rec != 0 && *(unsigned short*) (rec + 0x27) == key) {
 			break;
 		}
-		p += 0x21c;
+		p += sizeof(ENTITY_RECORD);
 		if ((int) p >= (int)(g_7f4ca0 + 0x6556c)) {
 			return;
 		}
 	}
-	slot = g_7f4ca0 + idx * 0x21c;
+	slot = (char*)&((ENTITY_RECORD*)g_7f4ca0)[idx];
 	if (slot == 0) {
 		return;
 	}

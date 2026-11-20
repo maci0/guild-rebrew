@@ -1,9 +1,9 @@
 #include <stdlib.h>
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int g_773d48;
 extern unsigned char g_773d75;
 extern unsigned char* lpGebaeudePROT;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 char* __cdecl fcn_00507ab0(int a);
 int __cdecl fcn_004f4830(int idx, void* dst);
 int __cdecl fcn_0050b750(int a, unsigned char b);
@@ -38,7 +38,7 @@ void __cdecl fcn_004fcc20(void)
 			g_773d48 = 0;
 		}
 		if (*(unsigned short*) rec != 0xffff && *(unsigned char*) (rec + 8) != 0 && *(unsigned char*) (rec + 2) == 0 && *(int*) (rec + 0x170) != 0) {
-			e = (char*) (lpGebaeudePROT + *(unsigned char*) *(int*) (rec + 0x170) * 0x24d);
+			e = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) *(int*) (rec + 0x170)];
 			r = gm_AccumulateTyped2(rec);
 			if (r < 0) {
 				int obj;
@@ -52,7 +52,7 @@ void __cdecl fcn_004fcc20(void)
 					}
 				}
 				if (obj != 0) {
-					fcn_004c54c0(*(int*) (*(unsigned short*) (obj + 0x27) * 0x21c + 0x7f4ca4),
+					fcn_004c54c0(((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (obj + 0x27)].entity_id,
 					    *(int*) (rec + 4), -0xa, 1);
 					g_773d48++;
 				}
@@ -63,7 +63,7 @@ void __cdecl fcn_004fcc20(void)
 				g_773d48++;
 			}
 		}
-		q += 0x21c;
+		q += sizeof(ENTITY_RECORD);
 		i++;
 	} while ((int) q < 0x85a210);
 	g_773d48 = 0;

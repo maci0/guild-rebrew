@@ -1,8 +1,8 @@
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* Settlement/party interaction step: resolves the current interaction entity,
  * scores the houses around the actor on the 0x90e0a0/0x869480 influence
  * matrices, then raises the script events (0x210..0x218) and the ambient
  * dialogue for the chosen house. */
-
 #include <stdlib.h>
 #include "Develop/DieGildeAddOn/game/game_matrices.h"
 extern int g_7747b4;
@@ -43,7 +43,7 @@ int __cdecl fcn_0047d2a0(char* e)
 		best = -1;
 		bestscore = 128.0f;
 		i = 0;
-		for (h = g_7f4ca0 + 2; (int) h < 0x85a0a2; h += 0x21c, i++) {
+		for (h = g_7f4ca0 + 2; (int) h < 0x85a0a2; h += (int)sizeof(ENTITY_RECORD), i++) {
 			if (!((i != (int) *(unsigned short*) e && h[0] == 6) || h[0] == 7)) {
 				if (fcn_0047dd60(h - 2) == 0 || (h[0x164] == 0 && h[0x167] == 0)) {
 					continue;
@@ -78,7 +78,7 @@ int __cdecl fcn_0047d2a0(char* e)
 			b = (unsigned char) (g_7747b4 + g_7747b4 + 0x23);
 		}
 		cm_AppendPacketFieldDelta(1, 1, 0x216, &b);
-		h = g_7f4ca0 + best * 0x21c;
+		h = (char *)&((ENTITY_RECORD*)g_7f4ca0)[best];
 		cm_AppendPacketFieldDelta(4, 1, 0x210, h + 4);
 		cm_AppendPacketFieldDelta(1, 1, 0x214, &g_90e0a0[best][*(unsigned short*) e]);
 		fcn_004c5360();

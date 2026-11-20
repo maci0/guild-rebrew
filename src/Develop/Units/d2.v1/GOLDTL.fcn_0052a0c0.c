@@ -56,7 +56,7 @@ extern int d2_CurrentWindowId;
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern Row g_7e30c0[32];
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
@@ -108,8 +108,8 @@ void __cdecl fcn_0052a0c0(int unused, char arg)
 			((D2_CONTROL_TL*) g_1015ea0)[id].value_05c = 1;
 			((D2_CONTROL_TL*) g_1015ea0)[id].flags_1d0 = 3;
 			for (i = 0; i < 768; i++) {
-				if (((Obj*)g_7f4ca0)[i].marked != 0 && ((Obj*)g_7f4ca0)[i].group != 0) {
-					((Obj*)g_7f4ca0)[i].marked = 0;
+				if ((*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected) != 0 && (*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].stat_category) != 0) {
+					(*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected) = 0;
 				}
 			}
 		}

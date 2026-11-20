@@ -1,7 +1,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -80,7 +80,7 @@ int __cdecl fcn_004ccf10(int cmd, char* result)
 		}
 		*(int*) ((char*) entity + 0x1c + i * 4) = -1;
 		if (g_774970 == *(unsigned short*) ((char*) site + 0x27))
-			fcn_005b2220(rec, g_7f4ca0 + g_774970 * 540, site, *(int*) (cmd + 0x20));
+			fcn_005b2220(rec, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), site, *(int*) (cmd + 0x20));
 	}
 
 	if (result != (char*) 0x0) {
@@ -163,7 +163,7 @@ int __cdecl fcn_004cd090(T_4cd090* s, char* out)
 			return 1;
 		}
 		if (*(unsigned short*) (h + 0x27) != 0xffff) {
-			e = g_7f4ca0 + *(unsigned short*) (h + 0x27) * 0x21c;
+			e = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (h + 0x27)]);
 			if (e != 0 && e != gm_CityEntity &&
 			    *(char*) (e + 8) != 0 &&
 			    *(unsigned char*) (e + 2) != 0xf) {

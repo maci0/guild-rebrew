@@ -1,6 +1,6 @@
 #include "Develop/Units/d3/d3_object.h"
 #include "client_sound.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 // Plague event ("Sensenmann") state step: plays the plague track, then walks
 // the event state at +0x70 (0 = pick the next target building, 2 = act on
@@ -59,7 +59,7 @@ void __cdecl EvtSensenmann(char* e)
 	unsigned int lo;
 	unsigned int hi;
 	Bld* p;
-	Level* q;
+	BUILDING_PROTOTYPE* q;
 
 	if (*(int*) (e + 0x70) == -2 || *(int*) (e + 0x70) == -1) {
 		if (*(int*) (e + 0xc8) != 0) {
@@ -118,12 +118,12 @@ void __cdecl EvtSensenmann(char* e)
 			do {
 				lo = 0;
 				p = &((Bld*) lpGebaeudeINST)[idx];
-				q = &((Level*) lpGebaeudePROT)[p->kind];
+				q = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[p->kind];
 				hi = 0;
-				if (q->kind > 0x1f) {
-					hi = 1 << (q->kind - 0x20);
+				if (q->category > 0x1f) {
+					hi = 1 << (q->category - 0x20);
 				} else {
-					lo = 1 << q->kind;
+					lo = 1 << q->category;
 				}
 				if (p->x27 != 0xffff && ((lo & 0x807c4110) || (hi & 1))) {
 					break;

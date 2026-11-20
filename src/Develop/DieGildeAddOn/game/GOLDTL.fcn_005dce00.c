@@ -14,7 +14,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_packet_builder.h"
 
 void __cdecl io_FormatTextBuffer(char*, int);
@@ -56,10 +56,10 @@ int __cdecl fcn_005dce00(char* cmd, char* arg)
 		ok = 1;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((Ent*)g_7f4ca0)[i].owner == obj) {
-			val = ((Ent*)g_7f4ca0)[i].level % 2 + ((Ent*)g_7f4ca0)[i].level / 2;
-			fcn_004c4510((char*) &((Ent*)g_7f4ca0)[i], ((Ent*)g_7f4ca0)[i].f4);
-			cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((char*) &((Ent*)g_7f4ca0)[i].level - g_aed32c), &val);
+		if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == obj) {
+			val = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].level_1c5) % 2 + (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].level_1c5) / 2;
+			fcn_004c4510((char*) ((Ent*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id));
+			cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((char*) &(*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].level_1c5) - g_aed32c), &val);
 			fcn_004c5360();
 		}
 	}

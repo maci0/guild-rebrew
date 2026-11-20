@@ -1,7 +1,7 @@
 #include "client_types.h"
 void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 
@@ -114,14 +114,14 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	int sum;
 	int i; double alpha;
 	int hwnd;
-	Shop* t;
+	BUILDING_PROTOTYPE* t;
 	Player* pl;
 	unsigned int* q;
 	char* p;
 	unsigned char* e;
 
 	btnC = 0;
-	t = &((Shop*) lpGebaeudePROT)[obj[0]];
+	t = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[obj[0]];
 	dlg = fcn_00470820(0, 0, s_6ac79c);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
@@ -135,7 +135,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	fcn_005c78f0(1, 0x763, out + 3, hwnd);
 	fcn_005c78f0(2, 0x764, out + 6, hwnd);
 	d2_SetForm(dlg, 1);
-	if (t->x0 != 4 && t->x0 != 0x10) {
+	if (t->category != 4 && t->category != 0x10) {
 		d2_SetBackgroundTexture(s_6ac7fc, *(int*) g_77255c);
 	}
 	else {
@@ -145,10 +145,10 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	*(int*) (g_77255c + 0x3a4) = 0;
 	btnA = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x35) != 0;
 	btnB = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x34);
-	if (t->x0 == 4) {
+	if (t->category == 4) {
 		btnC = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x5d) != 0;
 	}
-	else if (t->x0 == 0x10) {
+	else if (t->category == 0x10) {
 		btnC = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x5e) != 0;
 	} else { btnC = 1; }
 	fcn_00472640(out[0], btnA);

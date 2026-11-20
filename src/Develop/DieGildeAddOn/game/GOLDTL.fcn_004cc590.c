@@ -9,7 +9,7 @@ struct rec_4cc590 {
 };
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int g_14cbca0;
 extern int gm_NextEntityId;
 extern char cm_LastEntityId[];
@@ -54,20 +54,20 @@ int __cdecl fcn_004cc590(unsigned char* request, char* response)
 	if (id == 0xffff)
 		return 1;
 	if (*(int*) (request + 0x1b) != -1 && (r = gm_FindRecordById(*(int*) (request + 0x1b))) != 0)
-		fcn_004fe470(((struct rec_4cc590*)g_7f4ca0)[id].id, *(int*) (e + 1), *(int*) (r + 2), 0, 0);
+		fcn_004fe470((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), *(int*) (e + 1), *(int*) (r + 2), 0, 0);
 	else
-		fcn_004fe470(((struct rec_4cc590*)g_7f4ca0)[id].id, *(int*) (e + 1), -1, 0, 0);
-	((struct rec_4cc590*)g_7f4ca0)[id].owner = 0;
-	((struct rec_4cc590*)g_7f4ca0)[id].kind = 0xd;
+		fcn_004fe470((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), *(int*) (e + 1), -1, 0, 0);
+	(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].ptr_16c) = 0;
+	(*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_type) = 0xd;
 	if (request[0x21] != 0) {
-		gm_AllocObjekt(((struct rec_4cc590*)g_7f4ca0)[id].id, request[0x21], 1);
-		fcn_004ce9e0(&((struct rec_4cc590*)g_7f4ca0)[id]);
+		gm_AllocObjekt((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), request[0x21], 1);
+		fcn_004ce9e0(((struct rec_4cc590*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]));
 	}
-	(*(int*)cm_LastEntityId) = ((struct rec_4cc590*)g_7f4ca0)[id].id;
+	(*(int*)cm_LastEntityId) = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id);
 	if (response != 0) {
 		response[0] = 1;
 		response[1] = 1;
-		*(struct rec_4cc590**) (response + 6) = &((struct rec_4cc590*)g_7f4ca0)[id];
+		*(struct rec_4cc590**) (response + 6) = ((struct rec_4cc590*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]);
 	}
 	return 0;
 }

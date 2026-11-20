@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char* g_entity_type_table;
 extern char* g_1015ea0;
 extern int d2_CurrentWindowId;
@@ -10,7 +10,7 @@ extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl fcn_00502cd0(int a, int b, ...);
 int __cdecl fcn_00525fb0(void* obj);
 void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
@@ -38,7 +38,7 @@ void __cdecl fcn_004c4480(int handle);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00526120(char* buf, int flag);
 void __cdecl fcn_00532ef0(void);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0059e740 */
 void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a1)
 {
@@ -65,7 +65,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 	ids[2] = 0x1c6;
 	ids[6] = fcn_00502cd0(*(int*) (targetBuilding + 0x5d), 2, 6, 0, 0x2a);
 	type = *(unsigned char*) targetBuilding;
-	rec = g_entity_type_table + type * 0x24d;
+	rec = (char*)&((BUILDING_PROTOTYPE*)g_entity_type_table)[type];
 	kind = *(unsigned char*) rec;
 	if (kind == 0x20) {
 		ids[0] = 0x2af;
@@ -116,11 +116,11 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 		x = 0x19;
 		for (i = 0; i < count; i++) {
 			h = fcn_0046f740(y, x, ids[i] + 0xdf, d2_CurrentWindowId);
-			*(int*) (g_1015ea0 + h * 0x2f4 + 0x5c) = 1;
-			*(int*) (g_1015ea0 + h * 0x2f4 + 0x1d0) = 3;
-			*(int*) (g_1015ea0 + h * 0x2f4 + 0x1dc) = 100;
-			*(int*) (g_1015ea0 + h * 0x2f4 + 0x1e0) = 0x10;
-			*(int*) (g_1015ea0 + h * 0x2f4 + 0x84) = 0x54;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x5c) = 1;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x1d0) = 3;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x1dc) = 100;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x1e0) = 0x10;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x84) = 0x54;
 			fcn_0046f9b0(h, (char*) *(int*) (ids[i] * 8 + 0x14a79c0));
 			handles[i] = h;
 			fcn_00472640(h, 1);
@@ -164,7 +164,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 					memset(pkt, 0, sizeof(pkt));
 					pkt[4] = 0x14;
 					pkt[0x36] = 1;
-					*(int*) (pkt + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) (targetBuilding + 0x27) * 0x21c);
+					*(int*) (pkt + 8) = *(int*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (targetBuilding + 0x27)].entity_id;
 					*(int*) (pkt + 0x28) = gm_GameTime;
 					*(int*) (pkt + 0xc) = *(int*) (targetBuilding + 1);
 					*(int*) (pkt + 0x30) = g_7f4c08;

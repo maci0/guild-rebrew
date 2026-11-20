@@ -1,6 +1,6 @@
 #include <string.h>
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 struct house {
 	unsigned short id;
 	unsigned char type;
@@ -8,7 +8,7 @@ struct house {
 	int owner;
 	char pad8[0x214];
 };
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 struct msg {
 	char pad0[4];
 	unsigned char kind;
@@ -94,8 +94,8 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
 	i = fcn_0046fac0(0, 3, *(int*) 0x14b53a0, *(int*) &d2_CurrentWindowId);
-	*(int*) (*(int*) &g_1015ea0 + i * 0x2f4 + 0x6c) = 1;
-	*(int*) (*(int*) &g_1015ea0 + i * 0x2f4 + 0x18) =
+	((D2_CONTROL_TL*)g_1015ea0)[i].value_06c = 1;
+	((D2_CONTROL_TL*)g_1015ea0)[i].width =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c);
 	d2_SetElementFont(i, 0x54);
 	lst = fcn_004677e0(0x57, 0x14, 200, 0, 100, 0x7b, 2,
@@ -121,24 +121,24 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 		} else if (*(int*) &g_100f1dc != -1) {
 			if (d2_CurrentElementId == act.no) {
 				if (fcn_00526010(
-				        (char*) ((unsigned long)&g_7f4ca0 +
-				                 (unsigned int) *(unsigned short*) &g_774970 *
-				                     0x21c),
+				        (char*) (unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970]
+
+,
 				        amt, *(char*) &g_773d75) &&
 				    fcn_005898f0(building)) {
 					p = gm_GetEntityTableEntry(
-					    (char*) ((unsigned long)&g_7f4ca0 +
-					             (unsigned int) *(unsigned short*)
-					                     &g_774970 *
-					                 0x21c));
+					    (char*) (unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970]
+
+
+);
 					if (p)
 						*(int*) (p + 0x28) += amt;
 					fcn_004c51a0(
 					    -1,
-					    *(int*) ((unsigned long)&g_7f4ca4 +
-					             (unsigned int) *(unsigned short*)
-					                     &g_774970 *
-					                 0x21c),
+					    ((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id
+
+
+,
 					    *(char*) &g_773d75, amt);
 					memset(&m, 0, sizeof(m));
 					m.kind = 0x99;
@@ -148,15 +148,15 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 					m.f68 = 3;
 					m.f6c = j;
 					act.count = -1;
-					m.owner = ((struct house*) &g_7f4ca0)[*(unsigned short*) (building + 0x27)].owner;
+					m.owner = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (building + 0x27)].entity_id;
 					m.when = gm_GameTime;
 					m.target = *(int*) (building + 1);
 					m.f5c = *(int*) (building + 1);
 					fcn_004a5e60(
-					    (unsigned short*) ((unsigned long)&g_7f4ca0 +
-					                       (unsigned int) *(unsigned short*)
-					                               &g_774970 *
-					                           0x21c),
+					    (unsigned short*) (unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970]
+
+
+,
 					    0, 0x7b4c4a0, 0, 0.0f, 100.0f, &act.count);
 					m.f58 = act.count;
 					i = fcn_004c5530(&m);

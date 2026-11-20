@@ -85,7 +85,7 @@ void __cdecl fcn_0058ea60(char* e, char* res)
 	list[12].id = 0x2c0;
 	list[13].id = 0x2be;
 	list[14].id = 0x2b9;
-	fcn_004a51d0(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0xf, list, &lv);
+	fcn_004a51d0(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 0xf, list, &lv);
 	if ((lv.n == 6 && lv.x == 0) || lv.total == 0xf) {
 		mode = 1;
 	} else {
@@ -108,13 +108,13 @@ void __cdecl fcn_0058ea60(char* e, char* res)
 	g_100f1dc = -1;
 	d2_SetForm(h, 1);
 	if (mode == 0) {
-		fcn_004c51f0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1, id, 1, g_773d75, 0);
-		fcn_005782f0(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 2);
+		fcn_004c51f0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1, id, 1, g_773d75, 0);
+		fcn_005782f0(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2);
 		io_AppendText(0x40f2, 0x40cc, id * 2 + 0x9a8);
 		fcn_004c3030(t, 0, "GEIST_KOMMT", gm_RandomMod(8));
 	} else if (mode == 1) {
 		v = (gm_RandomMod(0x400) + 1000) << 5;
-		fcn_004c5150(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1, g_773d75, v);
+		fcn_004c5150(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1, g_773d75, v);
 		io_AppendText(0x40f3, 0x40cc, v);
 		fcn_004c3030(t, 0, "GEIST_KOMMT", gm_RandomMod(8));
 	} else {

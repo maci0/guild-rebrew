@@ -36,7 +36,7 @@ extern int g_773d78;
 extern int g_7e2700;
 extern int g_7e2704;
 extern int g_7e2708;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl fcn_00500e20(char*);
 void __cdecl fcn_00516f60(void);
 void __cdecl fcn_0043c2c0(int* a0);
@@ -105,10 +105,10 @@ void __cdecl fcn_0059a340(void)
 		v12 = g_7f4ca0 + 2;
 		do {
 			if (*(unsigned short*) (v12 - 2) != 0xffff
-				&& *(int*) (v12 + 0x52) == *(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x54)
+				&& *(int*) (v12 + 0x52) == *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x54)
 				&& *(unsigned short*) (v12 - 2) != g_774970
 				&& (c = *v12, c == 6 || c == 7 || c == 5)
-				&& *(unsigned int*) (g_7f4ca0 + g_774970 * 0x21c + 0x4) < *(unsigned int*) (v12 + 2)) {
+				&& *(unsigned int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x4) < *(unsigned int*) (v12 + 2)) {
 				d2_ChooseWappen();
 				v13 = g_774970;
 				break;
@@ -119,7 +119,7 @@ void __cdecl fcn_0059a340(void)
 	if ((g_7747b0 & 1) && g_774950 == 1) {
 		v8 = (int) gm_StartFilteredEntitySearch(1, 4, v13);
 		while (v8) {
-			if (v8 != *(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x170)) {
+			if (v8 != *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x170)) {
 				fcn_0052cf20(v8);
 				break;
 			}
@@ -150,7 +150,7 @@ void __cdecl fcn_0059a340(void)
 			return;
 		}
 		g_774658 = g_774650;
-		if (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x1b1) > 0)
+		if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_198[0x19]) > 0)
 			lc_PlayerInJail();
 		fcn_0052c9b0();
 

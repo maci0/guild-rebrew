@@ -65,7 +65,7 @@ void __cdecl d2_ShowOfficeApplicationDialog(void)
 	prev = -1;
 	cnt = 0;
 	flag = 1;
-	p = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
+	p = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]);
 	if (p->unk_00d < 2) {
 		fcn_00526120(g_14abb2c, 0);
 		return;

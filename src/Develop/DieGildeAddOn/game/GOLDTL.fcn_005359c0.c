@@ -1,4 +1,4 @@
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* g_7e2aa0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
@@ -62,11 +62,11 @@ int __cdecl fcn_005359c0(void)
 		}
 		return;
 	case 0x25:
-		e = gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x60));
+		e = gm_LookupEntityRecordById(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 0x60));
 		if (e != 0) {
 			fcn_004ff210(*(unsigned short*) e, -1000);
 		} else {
-			e = gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x60));
+			e = gm_LookupEntityRecordById(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 0x60));
 			if (e != 0) {
 				fcn_004ff210(*(unsigned short*) e, -1000);
 			}
@@ -76,7 +76,7 @@ int __cdecl fcn_005359c0(void)
 		if (g_7e2aa0 == 0) {
 			return;
 		}
-		ai_StartGraveyardOwner(0, g_7f4ca0 + g_774970 * 0x21c, 0, &b2, &b1);
+		ai_StartGraveyardOwner(0, (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0, &b2, &b1);
 		return;
 	case 0x16:
 		o = g_7e2aa0;
@@ -87,10 +87,10 @@ int __cdecl fcn_005359c0(void)
 		if (e == 0) {
 			return;
 		}
-		if (fcn_004a6210(g_7f4ca0 + g_774970 * 0x21c, o, (int) e) == 0) {
+		if (fcn_004a6210((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], o, (int) e) == 0) {
 			return;
 		}
-		fcn_004a6550(g_7f4ca0 + g_774970 * 0x21c, o);
+		fcn_004a6550((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], o);
 		return;
 	case 0x2f:
 		o = g_7e2aa0;

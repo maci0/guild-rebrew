@@ -46,7 +46,7 @@ void __cdecl fcn_005a3e10(void)
 	int v;
 
 	dlg = fcn_00470820(0, 0, s_6aa830);
-	have = gm_AccumulateTyped2(&((ENTITY_RECORD*)g_7f4ca0)[g_774970]);
+	have = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]));
 	stock = fcn_0050d270(*(int*) (g_7746cc + 0x14));
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
@@ -67,10 +67,10 @@ void __cdecl fcn_005a3e10(void)
 			if (g_100f1dc == 2) {
 				v = fcn_0050b750(fcn_00471f80(sl), g_773d75);
 				if (stock < v) {
-					fcn_004c5150(*(int*) (g_7746cc + 2), ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, g_773d75, v - stock);
+					fcn_004c5150(*(int*) (g_7746cc + 2), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, g_773d75, v - stock);
 				}
 				else {
-					fcn_004c5150(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, *(int*) (g_7746cc + 2), g_773d75, stock - v);
+					fcn_004c5150(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*) (g_7746cc + 2), g_773d75, stock - v);
 				}
 				g_774654 = 1;
 			}

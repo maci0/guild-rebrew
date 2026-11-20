@@ -3,7 +3,7 @@
 extern char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 extern int g_1040494;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 void __cdecl fcn_00475f80(int);
 void __cdecl fcn_00475fd0(int);
 void __cdecl d2_UnlockSurface(int);
@@ -68,7 +68,7 @@ void __cdecl fcn_00527540(void)
 		fcn_00475f80(*(int*) 0x774684);
 		*(int*) 0x774684 = 0;
 	}
-	q = (char*) (lpGebaeudePROT + (unsigned int) *v8 * 0x24d);
+	q = (char*) (((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned int) *v8]));
 	p = q + 1;
 	r = q;
 	sprintf(buf, "%sbmp\\groundplans\\riss_%s.bmp", prefix, p);

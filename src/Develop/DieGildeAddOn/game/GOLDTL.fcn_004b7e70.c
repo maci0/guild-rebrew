@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 extern char g_7f4ca0[];
@@ -26,7 +26,7 @@ int __cdecl fcn_004b7e70(void* request)
 	if (fcn_004a55c0(p, 1, &d2, 33.0f, 100.0f, &w1) == 0) {
 		return 0x400;
 	}
-	e = (void*) ((int) g_7f4ca0 + 540 * w1);
+	e = (void*) ((int) ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[w1]));
 	n = 2 * gm_RandomMod(7) + 6;
 	fcn_004c54c0(*(int*) ((char*) p + 4), *(int*) ((char*) e + 4), n, 1);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,

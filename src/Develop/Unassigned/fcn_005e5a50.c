@@ -28,7 +28,7 @@ extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 extern int g_100f1dc;
 extern int g_666018;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_005263d0(int, int, int);
 char* __cdecl fcn_005cd440(int*, int, int, void*);
@@ -68,7 +68,7 @@ void __cdecl fcn_005e5a50(char* entity)
 	int max_val;
 	int val;
 
-	if ((unsigned char) g_7f4ca0[g_774970 * 0x21c + 0x1cc] & 0x10) {
+	if (*(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_flags & 0x10) {
 		fcn_004c3030(-7, 0, (char*) 0x6ad46c, -1);
 		fcn_005263d0(*(int*) 0x14b5a24, *(int*) 0x14b5a28, 0);
 		return;
@@ -117,10 +117,10 @@ void __cdecl fcn_005e5a50(char* entity)
 		} else if (g_100f1dc != -1) {
 			int clicked = *(int*) 0x67d370;
 			if (clicked == ids[0]) {
-				if (fcn_00526010(g_7f4ca0 + g_774970 * 0x21c, val, g_773d75) != 0) {
-					fcn_004c5420(*(int*) (g_7f4ca4 + g_774970 * 0x21c), 0x1cc, 4, 0x10, 0);
+				if (fcn_00526010((char*) &((ENTITY_RECORD*) g_7f4ca0)[g_774970], val, g_773d75) != 0) {
+					fcn_004c5420(((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id, 0x1cc, 4, 0x10, 0);
 					if (g_774970 != *(unsigned short*) (entity + 0x27)) {
-						fcn_004c51a0(-1, *(int*) (g_7f4ca4 + g_774970 * 0x21c),
+						fcn_004c51a0(-1, ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id,
 						             g_773d75, (val > 1 ? val : 1) * 32000);
 					}
 					memset(&pkt, 0, sizeof(pkt));
@@ -128,7 +128,7 @@ void __cdecl fcn_005e5a50(char* entity)
 					pkt.fc = -1;
 					pkt.b36 = 2;
 					pkt.val = val;
-					pkt.f8 = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+					pkt.f8 = ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id;
 					pkt.pos = gm_GameTime;
 					pkt.target_id = *(int*) (target + 4);
 					fcn_004c5530(&pkt);

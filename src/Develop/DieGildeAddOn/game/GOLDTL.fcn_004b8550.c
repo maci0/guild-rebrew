@@ -1,6 +1,6 @@
 /* Owned (both targets) by src/GOLDTL.fcn_004cef70.c. */
 extern char g_7f4ca0[];
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include <string.h>
 
 void* __cdecl gm_LookupEntityRecordById(int);
@@ -33,7 +33,7 @@ int __cdecl fcn_004b8550(void* a1)
 	if (fcn_004a55c0(actor, 1, &d2, 0.0f, 100.0f, &w1) == 0) {
 		return 0x400;
 	}
-	target = (void*) (g_7f4ca0 + 540 * w1);
+	target = (void*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[w1]));
 	n = 2 * gm_RandomMod(8) + 4;
 	fcn_004c54c0(*(int*) ((char*) actor + 4), *(int*) ((char*) target + 4), -n, 1);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7,

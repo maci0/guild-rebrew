@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* gm_CityEntity;
 extern unsigned char g_773d75;
 extern int gm_GameTime;
@@ -66,7 +66,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 	handle = -1;
 	if (*(unsigned short*) (entity + 0x27) != 0xffff
 	    && *(unsigned short*) (entity + 0x27) != *(unsigned short*) gm_CityEntity) {
-		home = g_7f4ca0 + *(unsigned short*) (entity + 0x27) * 0x21c;
+		home = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 0x27)]);
 	}
 	entry = (int*) FindSlotEntryFiltered(0, entity, 0, (void*) fcn_004f1850, 0xff);
 	if (entry != 0) {

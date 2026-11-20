@@ -21,9 +21,9 @@ void __cdecl lc_PlayerInJail(void)
 	char* d;
 
 	for (p = he_StartHandlungSearch(1, 0, 0x3d); p != 0; p = he_fn_Handlung()) {
-		if (*(int*) (p + 0xac) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id) {
+		if (*(int*) (p + 0xac) == ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id) {
 			for (e = gm_StartFilteredEntitySearch(1, 5, 4); e != 0; e = gm_FindNextFilteredEntity()) {
-				if (*(int*) (e + 0x65) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id) {
+				if (*(int*) (e + 0x65) == ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id) {
 					d = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0x65);
 					if (d != 0 && g_7746cc != d) {
 						fcn_00526920(e, *(int*) (d + 2), "");

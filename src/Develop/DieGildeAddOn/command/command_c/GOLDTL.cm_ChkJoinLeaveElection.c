@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wint-to-pointer-cast"
@@ -63,7 +63,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 		if (query_result == 0) return 1;
 		slot_index = *(unsigned short *) (query_result + 0x27);
 		if (slot_index != 0xffff) {
-			rec = (char *) (g_7f4ca0 + slot_index * 0x21c);
+			rec = (char *) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[slot_index]));
 			if (rec == 0) goto cler_query;
 			if (rec == (char *) g_entity_table_end) goto cler_query;
 			if (*(unsigned char *) (rec + 8) == 0) goto cler_query;

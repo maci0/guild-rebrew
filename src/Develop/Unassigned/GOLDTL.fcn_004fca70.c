@@ -2,7 +2,7 @@
 
 
 extern char g_7f4ca0[];
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern float g_6628a8;
 extern int g_773d48;
 extern int g_99f7f0;
@@ -27,7 +27,7 @@ int __cdecl fcn_004fca70(unsigned short id, unsigned char* s, unsigned char flag
 	if (i >= 6) {
 		return 0;
 	}
-	n = *(int*) (g_7f4ca0 + 0x19c + id * 0x21c);
+	n = ((ENTITY_RECORD_VIEW*) g_7f4ca0)[id].value_19c;
 	v = n * (info[6] * 0.01f);
 	if (!(v > g_6628a8)) {
 		v = g_6628a8;
@@ -38,7 +38,7 @@ int __cdecl fcn_004fca70(unsigned short id, unsigned char* s, unsigned char flag
 		*(int*) (s + 8 + i * 4) = amt;
 		*(int*) (s + 0x20 + i * 4) = info[6];
 		if (flags & 1) {
-			fcn_004c51a0(-1, *(int*) (g_7f4ca0 + 4 + id * 0x21c), 0, amt);
+			fcn_004c51a0(-1, ((ENTITY_RECORD*) g_7f4ca0)[id].entity_id, 0, amt);
 			g_773d48++;
 		}
 		if (flags & 2) {

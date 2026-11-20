@@ -2,7 +2,7 @@ typedef struct {
 	unsigned char kind;
 	unsigned char remaining[0x24c];
 } BuildingProto599350;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 typedef struct {
 	char pad0[4];
 	unsigned char type;
@@ -93,7 +93,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 	int hwnd;
 	int prevIdx;
 	int off;
-	BuildingProto599350* p;
+	BUILDING_PROTOTYPE* p;
 	char* mode;
 	int prev;
 	int id;
@@ -183,10 +183,10 @@ void __cdecl d2_ShowBuildingMenu(void)
 			rec = (char*) 0x14a6558;
 			do {
 				if (gm_GetBuildingTypeCategory(idx) == g_6aa0a8) {
-					p = &((BuildingProto599350*) lpGebaeudePROT)[idx];
+					p = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[idx];
 					avail = fcn_00504f30(idx, g_774970);
 					if (avail == 1) {
-						if (p->kind != 0x0f && p->kind != 6) {
+						if (p->category != 0x0f && p->category != 6) {
 							id = fcn_0046f740((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, idx + 0x427, d2_CurrentWindowId);
 							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_058)) = 1;
 							strcpy((char*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0x0cc)), *(char**) rec);

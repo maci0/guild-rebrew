@@ -90,26 +90,26 @@ int __cdecl fcn_005d5d70(unsigned char* e)
 	do {
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				if (fcn_00525f60(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 2)) {
+				if (fcn_00525f60(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2)) {
 					struct msg m;
 
 					a = gm_RandomMod(9) + 0x1d76;
 					b = gm_RandomMod(9) + 0x1d6d;
 					memset(&m, 0, sizeof(m));
-					m.f8 = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+					m.f8 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
 					m.pos = gm_GameTime;
 					m.b4 = 0x47;
 					m.b36 = 2;
 					m.w60 = b;
 					m.w62 = a;
 					m.f5c = *(int*) (e + 4);
-					m.fc = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
-					m.f58 = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+					m.fc = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
+					m.f58 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
 					h = fcn_004c5530(&m);
 					while (fcn_004c4450(h) == 0) {
 						fcn_00535960();
 					}
-					fcn_004c6ae0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -2);
+					fcn_004c6ae0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -2);
 					io_FormatTextBuffer(text, 0x1d6a, b, *(unsigned short*) e, a);
 					fcn_00526120(text, 0);
 					g_774654 = 3;

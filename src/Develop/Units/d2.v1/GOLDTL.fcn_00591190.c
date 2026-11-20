@@ -1,4 +1,5 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 extern char* lpObjektePROT;
 #include "client_types.h"
@@ -64,11 +65,11 @@ int __cdecl d2_OpenObjektUpgradeTooltip(int id)
 		sel = ((unsigned char*)g_7e2aa0);
 	}
 	if (sel != 0 && rec[0] != 2 && rec[0] != 6) {
-		r = ((char*)lpGebaeudePROT) + *sel * 589;
+		r = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*sel];
 		for (k = 0; k < 64; k++) {
-			if ((*(unsigned short*) (r + 0x23 + k * 2) & 0x7fff) == id) {
-				a = (unsigned char) r[k + 0x1a3];
-				b = (unsigned char) r[k + 0x1e3];
+			if ((((BUILDING_PROTOTYPE*)r)->components[k] & 0x7fff) == id) {
+				a = (unsigned char) ((BUILDING_PROTOTYPE*)r)->component_kind[k];
+				b = (unsigned char) ((BUILDING_PROTOTYPE*)r)->component_value[k];
 				if (a != 0 && a != -1 && a != 0xff) {
 					io_AppendText(0x24);
 					if (a == 3) {

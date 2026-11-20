@@ -1,6 +1,7 @@
 #include "client_packet_builder.h"
 #include "Develop/DieGildeAddOn/game/season_slots.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_773d78;
 extern unsigned char g_773d75;
@@ -67,7 +68,7 @@ void __cdecl fcn_005017a0(int player)
 		}
 		e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 		while (e != 0) {
-			if (*(char*) (lpGebaeudePROT + *e + *e * 0x24c) != 0x0a) {
+			if ((char)((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category != 0x0a) {
 				ent = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0xff);
 				i = 0;
 				if (ent != 0) {

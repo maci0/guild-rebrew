@@ -44,7 +44,7 @@ extern char g_7f4ca0[];
 extern char s_6a3004[];
 extern char s_6a301c[];
 extern int g_6a256c;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* __cdecl fcn_00445600(int, int, int, char*);
 extern int __cdecl fcn_0064d41a(char*, char*, ...);
 extern void __cdecl fcn_00412e50(char*, int);
@@ -196,13 +196,13 @@ L744:
 		if ((r & 0x800) != 0
 		    && (*(char*) (p + 0x165) != 0x1c || (*(unsigned char*) (p + 0x1b4) & 1) == 0)) {
 			g_7ea360 = p;
-			*(char*) (g_7f4ca0 + (unsigned short) *(unsigned short*) p * 0x21c + 0x188) = 1;
+			*(char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) p].unk_17c[12] = 1;
 			g_7746f0 = 1;
-			g_6b5c48 = *(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) p * 0x21c + 0x184);
+			g_6b5c48 = *(int*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) p].unk_17c[8];
 			fcn_004c3540(p);
 			p = g_7746b4;
 		}
-		g_6b5c48 = *(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) p * 0x21c + 0x184);
+		g_6b5c48 = *(int*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) p].unk_17c[8];
 		selected = g_7746a4;
 		list = sv_HoveredObjekt;
 	}

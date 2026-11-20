@@ -30,8 +30,8 @@ int __cdecl fcn_005e0b40(int a, int b, char* text)
 	d2_SetElementFont(h, 0x53);
 	d2_SetElementValue(h, text);
 	d2_SelectControl(h);
-	*(int*) (g_102d150 + *(int*) (g_1015ea0 + h * 0x2f4 + 0x88) * 0x160) = 0x80;
-	*(int*) (g_102d29c + *(int*) (g_1015ea0 + h * 0x2f4 + 0x88) * 0x160) = 0x110;
+	*(int*) (g_102d150 + *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_088)) * 0x160) = 0x80;
+	*(int*) (g_102d29c + *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_088)) * 0x160) = 0x110;
 	d2_SetBildArgument(h, 0x1f);
 	while (fcn_005373e0(fcn_005e0b40, main_LoopFlags) != 0) {
 		if ((*(unsigned char*)&g_14cf950) == 0x1c) {

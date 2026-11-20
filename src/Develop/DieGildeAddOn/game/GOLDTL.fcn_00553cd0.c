@@ -11,7 +11,7 @@ typedef struct Rec {
 } Rec;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int gm_GameTime;
 extern float g_662cf8;
 
@@ -86,28 +86,28 @@ void __cdecl fcn_00553cd0(char* event)
 		}
 		if (!(f > 0.2) && found == 0) {
 			io_FormatTextBuffer(buf, 0x1a76, *(unsigned short*) (e + 0x27), e);
-			a = ((Rec*) g_7f4ca0)[*(unsigned short*) (event + 8)].owner;
+			a = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_id);
 			fcn_00545d40(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_88");
 			io_FormatTextBuffer(buf, 0x1a78, *(unsigned short*) (event + 8), e);
-			b = ((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner;
+			b = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id);
 			he_MessageBoxQuickjump(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
 				"_NACHRICHTEN_HS_86");
 			*(int*) (event + 0x70) = 2;
 			return;
 		}
 		x = (int) (fcn_0050cf50(e, 100) * f * 0.07f);
-		fcn_004c51a0(((Rec*) g_7f4ca0)[*(unsigned short*) (event + 8)].owner,
-			((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner, 0, x);
-		type = ((Rec*) g_7f4ca0)[*(unsigned short*) (event + 8)].type;
+		fcn_004c51a0((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_id),
+			(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id), 0, x);
+		type = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_type);
 		if (type == 6 || type == 7) {
 			io_FormatTextBuffer(buf, 0x1a75, x, *(unsigned short*) (e + 0x27), e);
-			a = ((Rec*) g_7f4ca0)[*(unsigned short*) (event + 8)].owner;
+			a = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_id);
 			fcn_00545d40(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_87");
 		}
-		type = ((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].type;
+		type = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_type);
 		if (type == 6 || type == 7) {
 			io_FormatTextBuffer(buf, 0x1a77, *(unsigned short*) (event + 8), e, x);
-			b = ((Rec*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].owner;
+			b = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id);
 			he_MessageBoxQuickjump(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
 				"_NACHRICHTEN_HS_86");
 		}

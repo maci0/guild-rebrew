@@ -1,6 +1,6 @@
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_GetElapsedMinutes(void*, void*);
@@ -46,9 +46,9 @@ int __cdecl gm_HasThreeFullyEquippedBuildings(unsigned short* a1)
 	e = gm_StartFilteredEntitySearch(2, 4, a1[0], 5, x);
 	while (cnt < 3 && e != 0) {
 		ok = 1;
-		row = ((char*)lpGebaeudePROT) + *e * 0x24d;
+		row = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e];
 		for (j = 0; j < 0x40; j++) {
-			v = *(unsigned short*) (row + 0x23 + j * 2);
+			v = ((BUILDING_PROTOTYPE*)row)->components[j];
 			if (v == 0)
 				break;
 			if (fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, v & 0x7fff) == 0) {

@@ -51,7 +51,7 @@ void __cdecl fcn_0055cc80(char* self)
 	int state, started, count;
 	int t;
 	int src; BUILDING_PROTOTYPE* proto; unsigned char job;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 	state = *(int*) (self + 0x70);
 	switch (state) {
 	case 1:
@@ -63,10 +63,10 @@ void __cdecl fcn_0055cc80(char* self)
 			he_FreeAction(self);
 			return;
 		}
-		row = (char*) &g_7f4ca0 + packet->slot * 0x21c;
+		row = (char*)&((ENTITY_RECORD*)g_7f4ca0)[packet->slot];
 		t = (int)fcn_005101e0(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
 		proto = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[packet->idx0];
-		src = gm_AccumulateTyped2((char*) &g_7f4ca0 + packet->slot * 0x21c);
+		src = gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[packet->slot]);
 		if (t > src) {
 			io_FormatTextBuffer(buf, 0x1a41, (char*) packet);
 			he_MessageBoxQuickjump(*(int*) ((unsigned long)&g_7f4ca4 + packet->slot * 0x21c), *(int*) (self + 0x10), buf, 0, 0x5f2, packet->handle, *(int*) (self + 0xb4), 0, 0);
@@ -120,7 +120,7 @@ void __cdecl fcn_0055cc80(char* self)
 			if (((int*) (self + 0xb0))[count] <= 0) {
 				continue;
 			}
-			row = (char*) &g_7f4ca0 + packet->slot * 0x21c;
+			row = (char*)&((ENTITY_RECORD*)g_7f4ca0)[packet->slot];
 			t = (int)fcn_005101e0(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
 			((int*) (self + 0xb0))[count] = ((int*) (self + 0xb0))[count] - 1;
 			if (*(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 6 || *(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {

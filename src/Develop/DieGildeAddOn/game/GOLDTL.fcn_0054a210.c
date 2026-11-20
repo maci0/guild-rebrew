@@ -1,7 +1,7 @@
 #include "client_types.h"
 #pragma pack(push, 2)
 /* SIZE 0xe */
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 
@@ -68,8 +68,8 @@ void __cdecl fcn_0054a210(char* a0)
         return;
     }
     if (*(unsigned short*) (a0 + 0x27) != 0xffff) {
-        rec = g_7f4ca0 + *(unsigned short*) (a0 + 0x27) * 0x21c;
-        if (rec != 0 && rec != (char*) gm_CityEntity && *(char*) (rec + 8) != 0 && *(char*) (rec + 2) != 0xf) {
+        rec = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (a0 + 0x27)]);
+        if (rec != 0 && rec != (char*) gm_CityEntity && *(char*)&((ENTITY_RECORD_VIEW*)rec)->health != 0 && *(char*)&((ENTITY_RECORD_VIEW*)rec)->entity_type != 0xf) {
             if (*(int*) (o + 0xc0) != 1) {
                 if (gm_GetElapsedMinutes((pos14_7f4c00*) 0x7f4c00, (pos14_7f4c00*) (o + 0xb0)) >= 1) {
                     fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 1, 0, 0);

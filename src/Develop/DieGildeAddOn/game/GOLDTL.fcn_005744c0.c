@@ -56,7 +56,7 @@ int __cdecl fcn_00508e40(int);
 int __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl fcn_0064d228();
 int __cdecl fcn_0064d41a(char*, char*, ...);
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 double __cdecl sqrt(double);
 
 /* ADDRESS: GOLDTL 0x005744c0 */
@@ -434,13 +434,13 @@ LfailB:
 				if (g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind == 6) {
 					if (*(unsigned char*) v15 >= 4 && *(unsigned char*) v15 <= 7) {
 						fcn_0051af00(messageText, 0x1c2f, v15);
-						fcn_00545e80(*(int*) (g_7f4ca0 + *(unsigned short*) (v15 + 0x27) * 0x21c + 4),
+						fcn_00545e80(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)].entity_id,
 							*(int*) (buildAction + 0x10), messageText, 1, 0x5f6, *(int*) (v15 + 1), -1, 0,
 							(char*) 0x6a7d8c);
 					}
 					else {
 						fcn_0051af00(messageText, 0x1c27, v15);
-						fcn_00545e80(*(int*) (g_7f4ca0 + *(unsigned short*) (v15 + 0x27) * 0x21c + 4),
+						fcn_00545e80(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)].entity_id,
 							*(int*) (buildAction + 0x10), messageText, 0, 0x5f6, *(int*) (v15 + 1), -1, 0,
 							(char*) 0x6a7d8c);
 					}
@@ -451,13 +451,13 @@ LfailB:
 					v27 = (int) (g_7f4ca0 + 4);
 					do {
 						if ((*(char*) (v27 - 2) == 6 || *(char*) (v27 - 2) == 7)
-							&& *(int*) v27 != *(int*) (g_7f4ca0 + *(unsigned short*) (v15 + 0x27) * 0x21c + 4)) {
+							&& *(int*) v27 != ((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)].entity_id) {
 							fcn_0051af00(messageText, 0x1c30, *(unsigned short*) (v15 + 0x27),
 								(void*) (*(unsigned char*) v15 * 0xe + 0x48e));
 							fcn_00545e80(*(int*) v27, -1, messageText, 0, 0x607, *(int*) (v15 + 1), -1, 0,
 								(char*) 0x6a7d68);
 						}
-						v27 += 0x21c;
+						v27 += sizeof(ENTITY_RECORD);
 					} while (v27 < (int) (g_7f4ca0 + 0x65404));
 				}
 				for (v11 = 0; v11 < 31; v11++) {
@@ -467,13 +467,13 @@ LfailB:
 			}
 			v9 = *(unsigned char*) v15;
 			if (v9 >= 4 && v9 <= 7) {
-				v27 = *(unsigned short*) (v15 + 0x27) * 0x21c + (int) (g_7f4ca0 + 0x170);
+				v27 = (int) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)].unk_170;
 				v8 = *(int*) v27;
 				if (!v8 || *(unsigned char*) v8 > (unsigned char) v9) {
 					*(int*) v27 = (int) v15;
 				}
 			}
-			fcn_005001e0((void*) (*(unsigned short*) (v15 + 0x27) * 0x21c + (int) g_7f4ca0),
+			fcn_005001e0((void*) ((int) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)]),
 				(int) v15);
 			fcn_004432d0(savedContext, 1);
 			*(int*) (buildAction + 0x7c) = 0;

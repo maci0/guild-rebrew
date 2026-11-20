@@ -40,7 +40,7 @@ ENTITY_RECORD* __cdecl fcn_0049fc80(ENTITY_RECORD* subject)
 
 		fcn_004e8b40(subject->unk_165[2], &q);
 		for (i = 0; i < 768; i++) {
-			candidate = &((ENTITY_RECORD*)g_7f4ca0)[i];
+			candidate = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[i]);
 			if (candidate->unk_165[1] != 0 && srv_GetEntityOfficeSlot((unsigned char*) candidate, &q, &r) != 0 && q.x8 <= 1) {
 				if (best == 0) {
 					best = candidate;
@@ -88,7 +88,7 @@ ENTITY_RECORD* __cdecl fcn_0049fc80(ENTITY_RECORD* subject)
 
 			mask = 0xc00;
 			if (fcn_004a5340(subject, 1, &mask, 0, 25.0f, &idx) != 0) {
-				return &((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx];
+				return ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(unsigned short) idx]);
 			}
 		}
 	}

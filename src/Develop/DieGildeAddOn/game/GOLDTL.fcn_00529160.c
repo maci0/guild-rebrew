@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 
 extern char g_7f4ca0[];
@@ -73,8 +73,8 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 	if ((int) index >= 0x300) {
 		return;
 	}
-	slot = (Slot_529160*) (g_7f4ca0 + index * 0x21c);
-	old = *(char**) (g_7f4ca0 + index * 0x21c + 0x17c);
+	slot = (Slot_529160*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[index]));
+	old = *(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[index]) + 0x17c);
 	if ((char*) newShown == old) {
 		return;
 	}

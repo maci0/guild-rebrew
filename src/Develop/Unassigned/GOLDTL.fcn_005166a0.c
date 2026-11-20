@@ -18,7 +18,7 @@ typedef struct {
 } Obj;
 
 extern NameSet g_699b18[];
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern unsigned char* lpGebaeudePROT;
 
 void __cdecl ch_CollectContextCharacters(unsigned char* home);
@@ -40,9 +40,9 @@ void __cdecl fcn_005166a0(unsigned char* home)
 	s = &g_699b18[k];
 	ch_CollectContextCharacters(home);
 	for (i = 0; i < 768; i++) {
-		if (((Obj*)g_7f4ca0)[i].view != 0 &&
-		    (((Obj*)g_7f4ca0)[i].home == home || *(int*) (((Obj*)g_7f4ca0)[i].view + 0x2c) == *(int*) (home + 1))) {
-			ch_PreloadCharacterMotions(((Obj*)g_7f4ca0)[i].view, 0x10, s->names[0], s->names[1], s->names[2], s->names[3],
+		if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_184) != 0 &&
+		    ((*(unsigned char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == home || *(int*) ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_184) + 0x2c) == *(int*) (home + 1))) {
+			ch_PreloadCharacterMotions((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_184), 0x10, s->names[0], s->names[1], s->names[2], s->names[3],
 				     s->names[4], s->names[5], s->names[6], s->names[7], s->names[8], s->names[9],
 				     s->names[10], s->names[11], s->names[12], s->names[13], s->names[14],
 				     s->names[15]);

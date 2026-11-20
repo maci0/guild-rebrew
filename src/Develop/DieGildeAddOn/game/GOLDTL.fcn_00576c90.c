@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include "client_types.h"
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char* g_14b5304;
 
@@ -47,7 +47,7 @@ void __cdecl fcn_00576c90(char* e)
 		return;
 	}
 	*(int*) (e + 0x84) = -1;
-	h = g_7f4ca0 + *(unsigned short*) (e + 8) * 0x21c;
+	h = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 8)]);
 	switch (*(int*) (e + 0x70)) {
 	case 0:
 		if (fcn_004c4450(*(int*) (e + 0xcc)) != 1) {
@@ -245,7 +245,7 @@ state_minus:
 			fcn_004c57e0(*(int*) (e + 0xb8), 1);
 		}
 		if (*(int*) (e + 0x70) == -1) {
-			fcn_00545d40(*(int*) (g_7f4ca0 + *(unsigned short*) (e + 8) * 0x21c + 4), -1, g_14b5304, 1, 0x5fa, (char*) 0x6a7e24);
+			fcn_00545d40(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, g_14b5304, 1, 0x5fa, (char*) 0x6a7e24);
 		}
 	}
 	he_FreeAction(e);

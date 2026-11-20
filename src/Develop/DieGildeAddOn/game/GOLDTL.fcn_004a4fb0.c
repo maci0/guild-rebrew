@@ -1,5 +1,6 @@
 #include "game_data.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
@@ -20,10 +21,10 @@ unsigned int __cdecl fcn_004a4fb0(unsigned int* outItem, unsigned int* a1, unsig
 	int idx;
 
 	container = *(int*) (building + 0x5d);
-	rec = (unsigned char*) (lpGebaeudePROT + *building * 0x24d);
+	rec = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building];
 	v11 = 0;
 	idx = 0;
-	if ((unsigned char) rec[0x22] <= 0) {
+	if ((unsigned char) ((BUILDING_PROTOTYPE*)rec)->component_count <= 0) {
 		return 0;
 	}
 	v12 = (unsigned short*) (rec + 0xa5);
@@ -65,7 +66,7 @@ label:
 					}
 					v5 = gm_NextEntityQueryMatch();
 				}
-				if (v7 < (int) (unsigned char) rec[0x21] && !v4) {
+				if (v7 < (int) (unsigned char) ((BUILDING_PROTOTYPE*)rec)->count_021 && !v4) {
 					v5 = fcn_00502cd0(*(int*) (building + 0x5d), 1, 4, 6);
 					do {
 						if (!v5) {
@@ -79,7 +80,7 @@ label:
 						}
 						v5 = gm_NextEntityQueryMatch();
 					} while (1);
-					if (v7 < (int) (unsigned char) rec[0x21] && !v4) {
+					if (v7 < (int) (unsigned char) ((BUILDING_PROTOTYPE*)rec)->count_021 && !v4) {
 						goto label;
 					}
 				}
@@ -89,7 +90,7 @@ label:
 		v12 += 2;
 		idx += 1;
 		v10 += 1;
-		if (idx >= (int) (unsigned char) rec[0x22]) {
+		if (idx >= (int) (unsigned char) ((BUILDING_PROTOTYPE*)rec)->component_count) {
 			return 0;
 		}
 	} while (1);

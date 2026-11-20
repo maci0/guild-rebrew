@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 // SIZE 0x21c
@@ -59,20 +59,20 @@ void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 	h2 = -1;
 	h1 = -1;
 	b = 0;
-	tbl = lpGebaeudePROT + p[0] * 0x24d;
+	tbl = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p[0]];
 	obj = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x142);
 	n = fcn_0050b810(*(int*) (obj + 0x14), g_773d75);
-	acc = gm_AccumulateTyped2(&((ENTITY_RECORD*)g_7f4ca0)[g_774970]);
-	if (*tbl == 0x17 && ((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_165[4] == 0x1e) {
+	acc = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]));
+	if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x17 && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].grade == 0x1e) {
 		ok = 1;
 	}
-	else if (*tbl == 0x18 && ((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_165[4] == 0x1f) {
+	else if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x18 && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].grade == 0x1f) {
 		ok = 1;
 	}
-	else if (*tbl == 0x19 && ((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_165[4] == 0x20) {
+	else if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x19 && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].grade == 0x20) {
 		ok = 1;
 	}
-	else if (*tbl == 0x1a && ((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_165[4] == 0x21) {
+	else if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x1a && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].grade == 0x21) {
 		ok = 1;
 	}
 	else {
@@ -101,8 +101,8 @@ void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 			if (d2_CurrentElementId == h1) {
 				v = fcn_00471f80(fcn_00472250(d, 1, b));
 				v = fcn_0050b750(v, g_773d75);
-				if (fcn_00526010(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], v, g_773d75) != 0) {
-					fcn_004c5150(*(int*) (obj + 2), ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, g_773d75, v);
+				if (fcn_00526010(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), v, g_773d75) != 0) {
+					fcn_004c5150(*(int*) (obj + 2), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, g_773d75, v);
 					g_774654 = 1;
 				}
 			}

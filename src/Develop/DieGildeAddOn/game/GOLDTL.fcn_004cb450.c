@@ -1,9 +1,9 @@
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern char g_68b0d8[];
 extern char g_68b1f8[];
 extern char g_68b214[];
 extern char* lpObjektePROT;
-
 int __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl ch_FindCharacterByName(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
@@ -41,11 +41,11 @@ int __cdecl fcn_004cb450(char* command, char* result)
 		k = fcn_005155e0(s);
 		fcn_0064d41a(gate, g_68b1f8);
 	} else {
-		name = lpObjektePROT + *(unsigned short*) d * 0x41;
+		name = (char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[*(unsigned short*) d];
 		k = init_EnsureObjektSceneContext(d);
 		fcn_0064d41a(gate, g_68b214, strupr(name + 1));
 	}
-	name = lpObjektePROT + *(unsigned short*) v4 * 0x41;
+	name = (char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[*(unsigned short*) v4];
 	fcn_0064d41a(gate2, g_68b214, strupr(name + 1));
 	if (k >= 0)
 		ch_UseGate(o, gate2, gate, k, *(int*) (s + 1), *(int*) (d + 2));

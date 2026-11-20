@@ -1,5 +1,5 @@
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f1dc;
@@ -93,13 +93,13 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 				flag = 0;
 				n = fcn_00471f80(b1);
 
-				if (fcn_00525f60(g_7f4ca0 + g_774970 * 0x21c, n) == 0) {
+				if (fcn_00525f60(((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), n) == 0) {
 					flag = 1;
 				}
 				hh = 0;
 				for (i = 0; i < 768; i++) {
-					if (*(unsigned char*) (g_7f4ca0 + i * 0x21c + 0x188) != 0) {
-						hh = g_7f4ca0 + i * 0x21c;
+					if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[i].unk_17c[0xc]) != 0) {
+						hh = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]);
 						break;
 					}
 				}
@@ -112,7 +112,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 					req[4] = (char) 0x88;
 					req[0x36] = 2;
 					*(int*) (req + 0x64) = n;
-					*(int*) (req + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (subject + 0x27) * 0x21c);
+					*(int*) (req + 8) = *(int*)&((ENTITY_RECORD*)(g_7f4ca4 - 4))[*(unsigned short*) (subject + 0x27)].entity_id;
 					*(int*) (req + 0xc) = *(int*) (subject + 1);
 					*(int*) (req + 0x28) = gm_GameTime;
 					*(int*) (req + 0x2c) = g_7f4c04;
@@ -127,7 +127,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 						flag = *(int*) (*(int*) (v + 0x16c) + 1);
 					} else {
 						flag = -1;
-						fcn_004a5e60((unsigned short*) (g_7f4ca0 + g_774970 * 0x21c), 0, 0x7b4c4a0, 0, 0.0f,
+						fcn_004a5e60((unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970])), 0, 0x7b4c4a0, 0, 0.0f,
 						    100.0f, &flag);
 					}
 					*(int*) (req + 0x58) = flag;

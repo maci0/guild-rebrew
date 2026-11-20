@@ -1,3 +1,4 @@
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern void __cdecl d2_ClearSelectedControl(void);
 extern void __cdecl d2_DestroyElement(int a);
 extern int __cdecl CountDisplayCounters(void);
@@ -33,7 +34,6 @@ int __cdecl fcn_004748b0(void)
 	int v7;
 	int v8;
 	int i;
-
 	if (g_7725e8 && !g_14ce8dc) {
 		p = *(unsigned int **) &tp_d2_SelectedControl;
 		if (!g_14ce8d0 || p == 0
@@ -55,7 +55,7 @@ int __cdecl fcn_004748b0(void)
 		p = *(unsigned int **) &tp_d2_SelectedControl;
 	}
 	if (d2_CurrentElementId != -1) {
-		v8 = *(int *) &g_1015ea0 + d2_CurrentElementId * 0x2f4;
+		v8 = (int)&((D2_CONTROL_TL*) *(int *)&g_1015ea0)[d2_CurrentElementId];
 		if (*(int *) (v8 + 0x20) == 0x41) {
 			candidateControl = *(unsigned int **) (v8 + 0xc);
 			if (d2_CurrentElementId == (int) candidateControl[0x4d]) {
@@ -66,10 +66,10 @@ int __cdecl fcn_004748b0(void)
 					goto label_474afe;
 				}
 				if (p != 0) {
-					*(int *) (*(int *) &g_1015ea0 + 0x3c + p[0x4d] * 0x2f4) = 0;
+					((D2_CONTROL_TL*) *(int *)&g_1015ea0)[p[0x4d]].value_03c = 0;
 				}
-				*(int *) (*(int *) &g_1015ea0 + 0x3c + candidateControl[0x4d] * 0x2f4) = 1;
-				v8 = *(int *) (*(int *) &g_1015ea0 + 0x40 + candidateControl[0x4d] * 0x2f4);
+				((D2_CONTROL_TL*) *(int *)&g_1015ea0)[candidateControl[0x4d]].value_03c = 1;
+				v8 = *(int *)&((D2_CONTROL_TL*) *(int *)&g_1015ea0)[candidateControl[0x4d]].parent;
 				g_100f940 = candidateControl[0x4b];
 				g_100f950 = 0;
 				g_100f1d4 = d2_MouseBottomBoundary - v7;
@@ -142,7 +142,7 @@ label_474b96:
 			fcn_00412830(0x10);
 			p = *(unsigned int **) &tp_d2_SelectedControl;
 		}
-		*(int *) (*(int *) &g_1015ea0 + 0x3c + p[0x4d] * 0x2f4) = 0;
+		((D2_CONTROL_TL*) *(int *)&g_1015ea0)[p[0x4d]].value_03c = 0;
 		*(unsigned int **) &tp_d2_SelectedControl = 0;
 		g_7725e4 = 0;
 		if (g_67d8ec == -1) {
@@ -176,7 +176,7 @@ label_474b96:
 label_474ca4:
 	fcn_00474040();
 	if (d2_CurrentElementId != -1) {
-		v7 = *(int *) &g_1015ea0 + d2_CurrentElementId * 0x2f4;
+		v7 = (int)&((D2_CONTROL_TL*) *(int *)&g_1015ea0)[d2_CurrentElementId];
 		if (*(unsigned char *) (v7 + 0x1d0) & 0x40) {
 			fcn_00475220((void *) (v7 + 0xcc));
 		}

@@ -20,7 +20,7 @@ int __cdecl fcn_00471f80(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 extern int g_14ce8e0, d2_CurrentElementId, g_774654;
-#define SHP_REC (g_7f4ca0 + g_774970 * 0x21c)
+#define SHP_REC (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]))
 #define SHP_ID (*(unsigned short*) SHP_REC)
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005d2470 */
@@ -40,7 +40,7 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 	int hv;
 	int uv;
 	int slider;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 	v14 = (int) ((float) gm_WalkEntityChain(SHP_ID) * 0.005f);
 	if (v14 < 0x640) {
 		v14 = 0x640;
@@ -98,8 +98,8 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 		if (d2_CurrentElementId == confirm) {
 			hv = fcn_00471f80(slider);
 			uv = fcn_0050b750(hv, *(unsigned char*) &g_773d75);
-			if (fcn_00526010((void*) ((unsigned long)&g_7f4ca0 +
-				*(unsigned short*) &g_774970 * 0x21c), uv,
+			if (fcn_00526010((void*) ((unsigned long)((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+*(unsigned short*) &g_774970])), uv,
 				*(unsigned char*) &g_773d75) != 0) {
 				flags = *(unsigned int*) ((char*) arg2 + 0x1c8) | 0x20;
 				fcn_004c4eb0((char*) 0x6acba4);

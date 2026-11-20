@@ -53,7 +53,7 @@ int __cdecl fcn_0058cda0(char* who, int k)
 	if (*(unsigned short*) (who + 0x27) == g_774970) {
 		x = 0;
 	} else {
-		x = fcn_004f4440(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0xff, k, 1, &got);
+		x = fcn_004f4440(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), 0xff, k, 1, &got);
 	}
 	h = fcn_00470820(0, 0, "Locations\\Friedhof\\Friedhof");
 	d2_SetOverlayAnimation(0, 0);
@@ -76,8 +76,8 @@ int __cdecl fcn_0058cda0(char* who, int k)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				if (x == 0 || fcn_00526010(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], x, g_773d75) != 0) {
-					id = fcn_004f0430(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], who, k, 10, x);
+				if (x == 0 || fcn_00526010(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), x, g_773d75) != 0) {
+					id = fcn_004f0430(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), who, k, 10, x);
 					while (id != -1 && fcn_004c4450(id) == 0) {
 						fcn_005373e0(0, 0x20007);
 					}

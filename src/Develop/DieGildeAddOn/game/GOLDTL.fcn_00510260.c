@@ -1,12 +1,12 @@
 extern char* lpGebaeudePROT;
 extern char g_7f4ca0[];
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl fcn_0050c710(unsigned char* p, int a, int b);
 char* __cdecl fcn_0050dc90(int arg1);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_004ff040(char* e);
 float __cdecl fcn_0050fdb0(int k, int n, int* ids);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x00510260 */
 float __cdecl fcn_00510260(unsigned char* buildingData, int countArg, int idsAddress)
 {
@@ -28,11 +28,11 @@ float __cdecl fcn_00510260(unsigned char* buildingData, int countArg, int idsAdd
 	count = 0;
 	sum = 0.0f;
 	bonus = 0.0f;
-	typePrototype = lpGebaeudePROT + (int) *buildingData * 0x24d;
+	typePrototype = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(int) *buildingData];
 	a = fcn_0050c710(buildingData, 1, 1) * 0.01 + 1.0;
 	e = fcn_0050dc90((int) buildingData);
 	if (e == 0) {
-		e = (char*) 0x7f4ca0 + (int) *(unsigned short*) (buildingData + 0x27) * 0x21c;
+		e = (char*)&((ENTITY_RECORD*)0x7f4ca0)[(int) *(unsigned short*) (buildingData + 0x27)];
 	}
 	if (*(unsigned char*) (e + 2) == 6 || *(unsigned char*) (e + 2) == 7) {
 		f = (float) (*(unsigned char*) (e + 0x81) * 0.000992063492063492);

@@ -1,5 +1,6 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char* d3_ActiveCamera;
 extern char* lpObjektePROT;
 extern unsigned char* lpGebaeudePROT;
@@ -94,11 +95,11 @@ void __cdecl fcn_005156a0(char* record)
 								int best;
 								int second;
 								char* row;
-								row = (char*) lpGebaeudePROT
-									+ *(unsigned char*) 0x7f3ee0 * 0x24d;
+								row = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)
+									[*(unsigned char*) 0x7f3ee0];
 								best = -1;
 								second = -1;
-								count = *(unsigned char*) (row + 0x22);
+								count = ((BUILDING_PROTOTYPE*)row)->component_count;
 								if (count != 0) {
 									char* p;
 									p = row + 0x23;

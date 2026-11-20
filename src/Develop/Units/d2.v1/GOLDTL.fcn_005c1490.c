@@ -9,7 +9,7 @@ extern int g_14ce8e0;
 extern char g_6811b0[];
 extern char g_10161b4[];
 extern char g_1016198[];
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl msx_SetFadeDuration(int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -55,7 +55,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 		if (e2 != 0) {
 			*(int*) (e2 + 0x70) = -1;
 		}
-		if (*(int*) (g_7f4ca0 + 0x1c8 + (int) g_774970 * 0x21c) & 0x20000) {
+		if (*(int*) &((ENTITY_RECORD_VIEW*) g_7f4ca0)[(int) g_774970].flags_1c8 & 0x20000) {
 			io_AppendText(0x1e27);
 			do {
 				if (g_14ce8e0 != 0) {
@@ -67,7 +67,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 			return;
 		}
 		e2 = (char*) fcn_004ac320((unsigned short*)
-		    (g_7f4ca0 + (int) g_774970 * 0x21c));
+		    ((char*) &((ENTITY_RECORD*) g_7f4ca0)[(int) g_774970]));
 		if (e2 == 0) {
 			io_AppendText(0x1e28);
 			do {
@@ -89,7 +89,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 			} else if (g_100f1dc != -1) {
 				if (g_100f1dc == 2) {
 					fcn_004ac410((unsigned char*)
-					    (g_7f4ca0 + (int) g_774970 * 0x21c), (int) e2,
+					    ((char*) &((ENTITY_RECORD*) g_7f4ca0)[(int) g_774970]), (int) e2,
 					    *(unsigned short*) (elem + 0xac));
 					r = 1;
 					g_774654 = 1;

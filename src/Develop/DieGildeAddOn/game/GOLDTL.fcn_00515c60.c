@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "game_data.h"
 extern int g_699b10;
 extern void* g_6b7fdc;
@@ -12,7 +13,6 @@ int __cdecl evt_LoadScript(char*);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 void __cdecl fcn_00428340(int, int, int, int);
-
 /* ADDRESS: GOLDTL 0x00515c60 */
 void __cdecl fcn_00515c60(unsigned char* a0, unsigned char* a1)
 {
@@ -54,7 +54,7 @@ found:
 		return;
 	}
 	if (gm_CheckEntityType(a0)) {
-		v3 = (int) lpGebaeudePROT + *a0 * 0x24d;
+		v3 = (int) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*a0];
 	}
 	else {
 		v3 = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) a1]);

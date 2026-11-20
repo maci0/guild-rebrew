@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char g_6b5c60[];
 extern char g_7f4ca4[];
 extern char g_7f4ca0[];
@@ -195,7 +195,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	io_AppendText((int) "$C");
 	io_AppendText(0x1191);
 	ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10c));
-	kind = ((Building4d6170*) lpGebaeudePROT)[(unsigned char) *ent].kind;
+	kind = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *ent].category;
 	if (kind == 0x13) {
 		mode = 0;
 	} else if (kind == 0x10) {
@@ -209,7 +209,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	if (ent == 0) {
 		mode = 0;
 	} else {
-		kind = ((Building4d6170*) lpGebaeudePROT)[(unsigned char) *ent].kind;
+		kind = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *ent].category;
 		if (kind == 0x13) {
 			mode = 0;
 		} else if (kind == 0x10) {
@@ -291,7 +291,7 @@ sync:
 			choice++;
 		}
 		if (choice == 1) {
-			kind = ((Building4d6170*) lpGebaeudePROT)[(unsigned char) *ent].kind;
+			kind = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *ent].category;
 			if (kind == 4 || kind == 0x10) {
 				fcn_004b4650(g_772e9c, 0x1c);
 			}
@@ -363,7 +363,7 @@ reduce:
 		}
 	} else if (flags & 4) {
 		ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10c));
-		if (((Building4d6170*) lpGebaeudePROT)[(unsigned char) *ent].kind == 0x13) {
+		if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *ent].category == 0x13) {
 			sum = 0;
 			for (id = (int*) (self + 0x80), i = 0; i < 16; i++, id++) {
 				if (*id == -1) {

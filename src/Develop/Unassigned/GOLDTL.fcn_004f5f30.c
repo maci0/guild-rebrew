@@ -24,7 +24,7 @@ typedef struct {
 
 extern Rec2d_9a3800 g_9a3800[512];
 extern Pair_99f800 g_99f800[0x800];
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004c5870(int id, int v);
@@ -49,9 +49,9 @@ int __cdecl fcn_004f5f30(int target, int count, int* ids)
 	m = 0;
 	if (p != 0) {
 		for (k = 0; k < 768 && m < 8; k++) {
-			if ((((Obj*)g_7f4ca0)[k].type == 6 || ((Obj*)g_7f4ca0)[k].type == 7) && ((Obj*)g_7f4ca0)[k].owner != target) {
+			if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[k].entity_type == 6 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[k].entity_type == 7) && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[k].entity_id != target) {
 				flag[m] = 0;
-				who[m] = (char*) &((Obj*)g_7f4ca0)[k];
+				who[m] = (char*) ((Obj*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[k]);
 				m++;
 			}
 		}

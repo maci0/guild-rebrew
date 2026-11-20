@@ -1,5 +1,5 @@
 extern unsigned char* lpGebaeudePROT;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl fcn_00500480(char*, int*, int*);
 char* __cdecl gm_FindRecordById(int);
@@ -26,7 +26,7 @@ int __cdecl fcn_00567170(char* h, int* out1, int* out2, int* out3)
 		return 0;
 	}
 	if (*(unsigned char**) (h + 0x16c) != 0) {
-		ty = lpGebaeudePROT + **(unsigned char**) (h + 0x16c) * 0x24d;
+		ty = ((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[**(unsigned char**) (h + 0x16c)]);
 		if (*ty == 4 || *ty == 0x10 || *ty == 0x13 || *ty == 0x1d || *ty == 0x1e) {
 			return 0;
 		}

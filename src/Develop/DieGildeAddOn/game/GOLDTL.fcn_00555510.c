@@ -1,6 +1,6 @@
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #pragma optimize("y", off)
 #include <string.h>
-
 extern char g_7f4ca0[];
 extern char g_6a5e88[];
 extern char g_773d75;
@@ -91,11 +91,11 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 	i = *(int*) (action + 0xac);
 	end = i + 0x180;
 	for (; i < end; i++) {
-		if (fcn_00555490((short*) (g_7f4ca0 + i * 0x21c), (int*) ent, &idx) != 0) {
+		if (fcn_00555490((short*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i]), (int*) ent, &idx) != 0) {
 			x1 = (int) (fcn_0050bb50(0x179, g_773d75) * g_662a08);
 			y1 = (int) (fcn_0050bb50(0x17a, g_773d75) * g_662a08);
 			v = gm_RandomMod(4) + 3;
-			w = gm_AccumulateTyped2((int) (g_7f4ca0 + i * 0x21c));
+			w = gm_AccumulateTyped2((int) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i]));
 			mx = x1;
 			if (x1 <= y1) {
 				mx = y1;
@@ -104,8 +104,8 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 				if ((unsigned short) gm_RandomMod(2) != 0) {
 					fcn_004c4eb0((unsigned int) g_6a5e88);
 					fcn_004c51f0(-1, *(int*) (ent[idx].p4 + 6), 0x179, 1, g_773d75, 0);
-					fcn_004c51a0(-1, *(unsigned int*) (g_7f4ca0 + 4 + i * 0x21c), g_773d75, (int) ((float) x1 * g_665e9c));
-					fcn_004c51a0(*(unsigned int*) (g_7f4ca0 + 4 + *(unsigned short*) (ent[idx].p0 + 0x27) * 0x21c), -1, g_773d75, x1);
+					fcn_004c51a0(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i] + 4), g_773d75, (int) ((float) x1 * g_665e9c));
+					fcn_004c51a0(*(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, g_773d75, x1);
 					fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 					fcn_004c4670(4, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x65, &x1);
 					fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x6b, &v);
@@ -117,8 +117,8 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 				} else {
 					fcn_004c4eb0((unsigned int) g_6a5e88);
 					fcn_004c51f0(-1, *(int*) (ent[idx].p8 + 6), 0x17a, 1, g_773d75, 0);
-					fcn_004c51a0(-1, *(unsigned int*) (g_7f4ca0 + 4 + i * 0x21c), g_773d75, (int) ((float) y1 * g_665e9c));
-					fcn_004c51a0(*(unsigned int*) (g_7f4ca0 + 4 + *(unsigned short*) (ent[idx].p0 + 0x27) * 0x21c), -1, g_773d75, y1);
+					fcn_004c51a0(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i] + 4), g_773d75, (int) ((float) y1 * g_665e9c));
+					fcn_004c51a0(*(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, g_773d75, y1);
 					fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 					fcn_004c4670(4, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x65, &y1);
 					fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x6b, &v);
@@ -131,8 +131,8 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 			} else if (w > x1 && ent[idx].p4 != 0) {
 				fcn_004c4eb0((unsigned int) g_6a5e88);
 				fcn_004c51f0(-1, *(int*) (ent[idx].p4 + 6), 0x179, 1, g_773d75, 0);
-				fcn_004c51a0(-1, *(unsigned int*) (g_7f4ca0 + 4 + i * 0x21c), g_773d75, (int) ((float) x1 * g_665e9c));
-				fcn_004c51a0(*(unsigned int*) (g_7f4ca0 + 4 + *(unsigned short*) (ent[idx].p0 + 0x27) * 0x21c), -1, g_773d75, x1);
+				fcn_004c51a0(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i] + 4), g_773d75, (int) ((float) x1 * g_665e9c));
+				fcn_004c51a0(*(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, g_773d75, x1);
 				fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 				fcn_004c4670(4, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x65, &x1);
 				fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x6b, &v);
@@ -145,8 +145,8 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 				if (ent[idx].p8 != 0) {
 					fcn_004c4eb0((unsigned int) g_6a5e88);
 					fcn_004c51f0(-1, *(int*) (ent[idx].p8 + 6), 0x17a, 1, g_773d75, 0);
-					fcn_004c51a0(-1, *(unsigned int*) (g_7f4ca0 + 4 + i * 0x21c), g_773d75, (int) ((float) y1 * g_665e9c));
-					fcn_004c51a0(*(unsigned int*) (g_7f4ca0 + 4 + *(unsigned short*) (ent[idx].p0 + 0x27) * 0x21c), -1, g_773d75, y1);
+					fcn_004c51a0(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i] + 4), g_773d75, (int) ((float) y1 * g_665e9c));
+					fcn_004c51a0(*(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, g_773d75, y1);
 					fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 					fcn_004c4670(4, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x65, &y1);
 					fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x6b, &v);

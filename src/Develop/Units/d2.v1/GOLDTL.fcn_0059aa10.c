@@ -1,6 +1,7 @@
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include <string.h>
 #include "client_types.h"
-
 /* SIZE 0x21c */
 typedef struct {
 	unsigned short f0;
@@ -9,7 +10,6 @@ typedef struct {
 	char pad8[0x18c];
 	int f194;
 } House;
-
 extern char* lpObjektePROT;
 extern char* g_7746c4;
 extern int g_7746c8;
@@ -89,7 +89,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 			return;
 		fcn_0057e880(0x11, (int) a0, 0, a1);
 	}
-	house = &g_7f4ca0[(unsigned int) g_774970 * 0x21c];
+	house = (char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970];
 	q = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, a1);
 	if (!q) {
 		q = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 4, 2);
@@ -120,14 +120,14 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 				sel = g_100f1dc - 0xdf;
 				memset(msg, 0, sizeof msg);
 				if (!d2_DispatchTutorialEvent(0x2b, (int) a0, 0, sel)) continue; {
-					node = lpObjektePROT + sel * 0x41;
+					node = (char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[sel];
 					if (q)
 						item = (int) fcn_00502cd0(*(int*) ((char*) q + 0x14), 1, 0, sel);
 					else
 						item = (int) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, sel);
 					if (!item) {
 						*(unsigned char*) (msg + 0x36) = 1;
-						if (*(unsigned char*) (lpObjektePROT + sel * 0x41) == 6) {
+						if (*(unsigned char*) ((char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[sel]) == 6) {
 							*(int*) (msg + 0x0c) = *(int*) (a0 + 1);
 							*(unsigned char*) (msg + 4) = 0x0c;
 							*(int*) (msg + 0x58) = *(int*) (a0 + 1);
@@ -135,14 +135,14 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 							*(int*) (msg + 0x28) = gm_GameTime.a;
 							*(int*) (msg + 0x2c) = gm_GameTime.b;
 							*(int*) (msg + 0x30) = gm_GameTime.c;
-							*(int*) (msg + 8) = *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (a0 + 0x25) * 0x21c + 4);
+							*(int*) (msg + 8) = *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (a0 + 0x25)] + 4);
 							*(short*) (msg + 0x34) = gm_GameTime.d;
 							*(int*) (msg + 0x5c) = *(int*) (msg + 8);
 						} else {
 							*(int*) (msg + 0x0c) = *(int*) (a0 + 1);
 							*(int*) (msg + 0x30) = gm_GameTime.c;
 							*(unsigned char*) (msg + 4) = 2;
-							*(int*) (msg + 8) = *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (a0 + 0x25) * 0x21c + 4);
+							*(int*) (msg + 8) = *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (a0 + 0x25)] + 4);
 							*(int*) (msg + 0x28) = gm_GameTime.a;
 							*(int*) (msg + 0x2c) = gm_GameTime.b;
 							*(short*) (msg + 0x34) = gm_GameTime.d;
@@ -156,7 +156,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 							amount = (int) (n * f);
 							ok = 0;
 							if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
-								if (fcn_00526010(&g_7f4ca0[(unsigned int) g_774970 * 0x21c], amount, g_773d75))
+								if (fcn_00526010((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970], amount, g_773d75))
 									ok = 1;
 								io_FormatTextBuffer(buf, 0x1a, amount, a0, sel * 2 + 0x9a8);
 							} else {
@@ -171,7 +171,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 								fcn_0057e880(0x2b, (int) a0, 0, sel);
 								fcn_004c4eb0(s_6aa328);
 								if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
-									fcn_004c5150(-1, *(int*) (g_7f4ca0 + (unsigned int) *(unsigned short*) (a0 + 0x27) * 0x21c + 4), (char) g_773d75, amount);
+									fcn_004c5150(-1, *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (a0 + 0x27)] + 4), (char) g_773d75, amount);
 									p = gm_GetEntityTableEntry(house);
 									if (p)
 										*(int*) (p + 0x40) += amount;

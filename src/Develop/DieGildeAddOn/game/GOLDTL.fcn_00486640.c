@@ -87,7 +87,7 @@ int __cdecl fcn_00486640(char* a0, int* goodsPlan, int a2)
 									if (sc < 1) {
 										sc = 1;
 									}
-									w = *(unsigned short*) ((char*) lpObjektePROT + goodsPlan[0] * 0x41 + i);
+									w = *(unsigned short*) ((char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[goodsPlan[0]] + i);
 									t = w * sc - seg->stock - seg->allocated;
 									n = (seg->capacity >> 1) - seg->allocated;
 									if (t <= n) {

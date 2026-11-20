@@ -31,7 +31,7 @@ struct house {
 	char pad180[0x9c];
 };
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* lpObjektePROT;
 
 char* __cdecl gm_SearchTable67(int);
@@ -64,8 +64,8 @@ void __cdecl he_AllocProduktion(char* e)
 	*(int*) (e + 0xc4) = -1;
 	*(int*) (e + 0xc8) = 0;
 	for (i = 0; i < 768; i++) {
-		if (((struct house*)g_7f4ca0)[i].who == e) {
-			fcn_00529160(r, 0, ((struct house*)g_7f4ca0)[i].id, e);
+		if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_17c) == e) {
+			fcn_00529160(r, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), e);
 		}
 	}
 	*(float*) (e + 0xcc) = (fcn_0050fdb0(*(unsigned short*) (e + 8), 8, e + 0x8c) - 0.5) * 0.25;

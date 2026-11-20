@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 #include <string.h>
@@ -29,10 +29,10 @@ int __cdecl fcn_004a4bb0(char* a1, char* e, char* a3, char* cmd, char* out, int 
 		return 0;
 	}
 	k = *(int*) (cmd + 4);
-	t = lpGebaeudePROT + k * 0x24d;
+	t = ((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[k]);
 	if (t[0] == 2) {
 		if (*(unsigned char**) (e + 0x170) != 0) {
-			t2 = lpGebaeudePROT + **(unsigned char**) (e + 0x170) * 0x24d;
+			t2 = ((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[**(unsigned char**) (e + 0x170)]);
 			if (t2[0x247] >= t[0x247] && t2[0] == 2) {
 				return 0;
 			}

@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char g_7f4ca0[];
@@ -9,7 +10,6 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, void* d, int e);
 int __cdecl fcn_004f1840(void*, int*);
@@ -38,7 +38,7 @@ int __cdecl fcn_004f25a0(char* req)
 
 	gm_ResolveEntityById((void**) (&entity1), 0, 0, *(int*) (req + 8));
 	if (entity1 == 0 || *(unsigned short*) ((char*) entity1 + 0x27) == 0xffff ||
-	    g_7f4ca0 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c == gm_CityEntity) {
+	    (char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) ((char*) entity1 + 0x27)] == gm_CityEntity) {
 		return -1;
 	}
 	type = *(unsigned char*) entity1;
@@ -73,10 +73,10 @@ int __cdecl fcn_004f25a0(char* req)
 	if (*(int*) (req + 0x13) > 0) {
 		gm_SubObjectNoKill(*(int*) ((char*) entity2 + 4), (unsigned short) ((int*)g_8680b4)[g_773d75 * 189],
 			*(int*) (req + 0x13));
-		gm_AddObjekt(*(int*) (g_7f4ca0 + 4 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c),
+		gm_AddObjekt(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) ((char*) entity1 + 0x27)] + 4),
 			(unsigned short) ((int*)g_8680b4)[g_773d75 * 189],
 			(int) (*(int*) (req + 0x13) * g_6652d8[*(int*) (req + 0xc)]));
-		off = *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c;
+		off = *(unsigned short*) ((char*) entity1 + 0x27) * (int)sizeof(ENTITY_RECORD);
 		player = g_7f4ca0 + off;
 		if ((char*) entity2 != player && g_7f4ca0[off + 2] == 6) {
 			fcn_005b2cb0(player, entity2, entity1, *(int*) (req + 0xc), *(int*) (req + 0x13),

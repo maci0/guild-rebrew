@@ -10,7 +10,7 @@ typedef struct {
 } Ent;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -49,8 +49,8 @@ int __cdecl fcn_004ba690(int* request)
 		return 0x400;
 	chosen = ents[gm_RandomMod(n)];
 	for (i = 0; i < 768; i++) {
-		if (((Ent*)g_7f4ca0)[i].kind == 1 && ((Ent*)g_7f4ca0)[i].owner == chosen) {
-			rec = (char*) &((Ent*)g_7f4ca0)[i];
+		if ((*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type) == 1 && (*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == chosen) {
+			rec = (char*) ((Ent*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 			break;
 		}
 	}

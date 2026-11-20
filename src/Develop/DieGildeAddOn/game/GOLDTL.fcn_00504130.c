@@ -11,7 +11,7 @@ typedef struct {
 	char pad174[0x21c - 0x174];
 } Obj;
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 void __cdecl fcn_005b1c90(int h);
 void __cdecl m_FreeTracked(void* p);
@@ -28,7 +28,7 @@ int __cdecl gm_FreeGebaeude(unsigned char* o)
 	if (*o == 0) {
 		return -2;
 	}
-	if (*(unsigned short*) (o + 0x27) != 0xffff && ((Obj*)g_7f4ca0)[*(unsigned short*) (o + 0x27)].type == 6) {
+	if (*(unsigned short*) (o + 0x27) != 0xffff && (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (o + 0x27)].entity_type) == 6) {
 		fcn_005b1c90(*(int*) (o + 1));
 	}
 	switch (*o) {
@@ -53,11 +53,11 @@ int __cdecl gm_FreeGebaeude(unsigned char* o)
 		break;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((Obj*)g_7f4ca0)[i].work == o) {
-			((Obj*)g_7f4ca0)[i].work = 0;
+		if ((*(unsigned char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_170) == o) {
+			(*(unsigned char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_170) = 0;
 		}
-		if (((Obj*)g_7f4ca0)[i].home == o) {
-			((Obj*)g_7f4ca0)[i].home = 0;
+		if ((*(unsigned char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == o) {
+			(*(unsigned char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) = 0;
 		}
 	}
 	if (*(char**) (o + 0x5d) != 0) {

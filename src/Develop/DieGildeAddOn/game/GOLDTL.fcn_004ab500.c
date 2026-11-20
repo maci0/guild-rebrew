@@ -1,9 +1,9 @@
 /* Select a placement candidate for an entity and fill the caller's packet
  * with the chosen node's keys. */
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00510400(char*);
@@ -44,8 +44,8 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 		v11 = lpGebaeudeINST;
 		do {
 			if (*v11 != 0 && *(unsigned short*) (v11 + 0x27) == *entity &&
-			    *(unsigned char*) (lpGebaeudePROT +
-			                       (unsigned int) *v11 * 0x24d) == 0x1f &&
+			    *(unsigned char*) ((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)
+			                       [(unsigned int) *v11]) == 0x1f &&
 			    fcn_00502cd0(*(int*) (v11 + 0x5d), 2, 6, 0, 0x27c) != 0) {
 				if (v12 == 0) {
 					v12 = (unsigned short*) v11;
@@ -66,8 +66,8 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 			if (fcn_004a5340((int*) entity, 1, (int*) &v4, 0,
 			                 (float) (gm_RandomMod(0x20) & 0xffff) + 25.0f,
 			                 (unsigned short*) &v8) != 0) {
-				v1 = *(unsigned char*) (g_7f4ca0 + (v8 & 0xffff) * 0x21c + 0x166);
-				a2 = (int) (g_7f4ca0 + (v8 & 0xffff) * 0x21c);
+				v1 = *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[v8 & 0xffff]) + 0x166);
+				a2 = (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[v8 & 0xffff]));
 				v5 = fcn_004e99c0((unsigned char) v1) / 3 + 2;
 				if (v5 + 2 <= *(int*) ((char*) entity + 0x194) &&
 				    (a0 = fcn_004a5c40((int*) entity, 4, (int) v4, 25.0f,
@@ -77,13 +77,13 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 					if ((int) a0 > 0) {
 						do {
 							v1 = *(unsigned char*) (
-							    g_7f4ca0 + (unsigned int) v9[v7] * 0x21c + 0x166);
+							    ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)v9[v7]]) + 0x166);
 							v1 = fcn_004e99c0((unsigned char) v1) / 3 +
 							     2 + v5;
 							if (v1 >= *(int*) ((char*) entity + 0x194)) {
 								v5 = v1;
-								v10[v6] = (int) (g_7f4ca0 +
-								                 (unsigned int) v9[v7] * 0x21c);
+								v10[v6] = (int) ((char*)&((ENTITY_RECORD*)g_7f4ca0)
+								                 [(unsigned int)v9[v7]]);
 								v6 += 1;
 							}
 							v7 += 1;

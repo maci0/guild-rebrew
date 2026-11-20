@@ -1,4 +1,5 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 #include <string.h>
@@ -45,7 +46,7 @@ int __cdecl fcn_005105a0(char* o)
 		return 0;
 	}
 	for (i = 0; i < 88; i++) {
-		if (_strcmpi(type, ((char*)lpGebaeudePROT) + i * 589 + 1) == 0) {
+		if (_strcmpi(type, ((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[i] + 1)) == 0) {
 			*(int*) (o + 0x48) = i | 0x2000000;
 			return 1;
 		}

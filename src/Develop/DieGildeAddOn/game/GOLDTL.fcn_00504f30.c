@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* Location record: 0x24d-byte entries in the g_868050 table. */
 typedef struct Loc {
 	unsigned char kind;      /* 0x000 */
@@ -10,7 +11,6 @@ typedef struct Loc {
 	char pad229[0x24];       /* 0x229..0x24c */
 } Loc;
 // SIZE 0x24d
-
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 
@@ -38,7 +38,7 @@ unsigned int __cdecl fcn_00504f30(int buildingType, int playerIndex)
 	if (playerIndex == 0xffff) {
 		return 0;
 	}
-	rb = (unsigned char*) (g_7f4ca0 + playerIndex * 0x21c);
+	rb = (unsigned char*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[playerIndex]);
 	if (g_774800 != 0 && (rb[2] == 6 || rb[2] == 7)) {
 		return 1;
 	}

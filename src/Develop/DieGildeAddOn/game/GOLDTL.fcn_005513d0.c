@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int gm_GameTime;
 #include "client_actions.h"
 
@@ -29,7 +29,7 @@ void __cdecl fcn_005513d0(char* action)
 	float threshold; int rec_id;
 
 	v20 = -1;
-	entry = g_7f4ca0 + *(unsigned short*) (action + 8) * 0x21c;
+	entry = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (action + 8)]);
 	rec = gm_LookupEntityRecordById(*(int*) (entry + 0x5c));
 	if (rec == 0 || rec[8] == 0 || entry[8] == 0)
 		goto tail;

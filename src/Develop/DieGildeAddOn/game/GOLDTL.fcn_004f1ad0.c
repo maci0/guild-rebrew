@@ -1,5 +1,5 @@
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include <string.h>
-
 extern char* lpGebaeudePROT;
 extern int gm_NextEntityId;
 extern int gm_GameTime;
@@ -21,7 +21,7 @@ int __cdecl fcn_004f1ad0(void* building, int count)
 	int idx;
 
 	idx = (unsigned char) *(char*) building;
-	tbl = lpGebaeudePROT + idx * 589;
+	tbl = (char *)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[idx];
 	if (*tbl != 0x1d) {
 		return 0;
 	}

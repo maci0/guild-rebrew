@@ -11,12 +11,12 @@ extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "game_player.h"
 extern char* g_7746cc;
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char g_7f4ca4[];
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int g_774654;
 
 void* __cdecl memset(void*, int, unsigned int);
@@ -116,7 +116,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[12] = 0xe;
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x742);
 	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
-	*(int*) (g_1015ea0 + item * 0x2f4 + 0x84) = 0x54;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[item].font)) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
 	do {
 		d2_SetForm(h, 2);
@@ -159,16 +159,16 @@ int __cdecl d2_ShowProductionDialog(char* building)
 								if (n == 0xffff) {
 									break;
 								}
-								p = *(char**) (((int) g_7f4ca0 + 0x17c) + n * 0x21c);
+								p = *(char**) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[n] + 0x17c);
 								if (i == 0) {
 									if (p != 0 && *(char*) p == 9 && *(int*) (p + 0x10) == *(int*) (building + 1)) {
-										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 0;
+										*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[n] + 0x188) = 0;
 									}
 								}
 								else {
 									if (p != 0 && *(char*) p == 8 && *(int*) (p + 0x10) == *(int*) (building + 1)
 										&& *(unsigned short*) (p + 0xac) == *(int*) e) {
-										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 1;
+										*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[n] + 0x188) = 1;
 									}
 								}
 								q += 0x28;
@@ -182,7 +182,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 									msg.timestamp.a = gm_GameTime.a;
 									msg.timestamp.c = g_7f4c08;
 									msg.type = 9;
-									msg.f08 = *(int*) (g_7f4ca4 + (unsigned) g_774970 * 0x21c);
+									msg.f08 = *(int*) (&((ENTITY_RECORD*)g_7f4ca0)[(unsigned)g_774970].entity_id);
 									msg.f0c = *(int*) (building + 1);
 									msg.f10 = 0;
 									msg.f14 = 0;
@@ -217,7 +217,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 									msg.timestamp.c = g_7f4c08;
 									msg.f36 = 1;
 									*(unsigned short*) &msg.f58 = (unsigned short) *(int*) e;
-									msg.f08 = *(int*) (g_7f4ca4 + (unsigned) g_774970 * 0x21c);
+									msg.f08 = *(int*) (&((ENTITY_RECORD*)g_7f4ca0)[(unsigned)g_774970].entity_id);
 									msg.f10 = 0;
 									msg.f14 = 0;
 									msg.f0c = *(int*) (building + 1);
@@ -243,7 +243,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 									}
 									if (*(int*) (q + 0x10) != 0) {
 										fcn_00529160(building, g_7746cc, n, p);
-										*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 0;
+										*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[n] + 0x188) = 0;
 									}
 									q += 0x28;
 								} while (q < (char*) 0x7e35d0);
@@ -279,7 +279,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 					if (n == 0xffff) {
 						break;
 					}
-					*(unsigned char*) (((int) g_7f4ca0 + 0x188) + n * 0x21c) = 0;
+					*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[n] + 0x188) = 0;
 					q += 0x28;
 				} while (q < (char*) 0x7e35d0);
 			}

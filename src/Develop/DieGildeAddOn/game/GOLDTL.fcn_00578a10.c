@@ -1,7 +1,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern double g_6629c8;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 
@@ -114,7 +114,7 @@ int __cdecl he_RunHauchDesVerfalls(char* event)
 		}
 		gm_StartFilteredEntitySearch(1, 1, *(int*) (event + 0xac));
 		n = gm_LookupEntityRecordById(*(int*) (event + 0xb0));
-		tbl = (char*) g_7f4ca0 + *(unsigned short*) (event + 8) * 0x21c;
+		tbl = (char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(event + 8)];
 		m = gm_LookupEntityRecordById(*(int*) (event + 0xb4));
 		if (n == 0 || tbl == 0 || m == 0) {
 			*(int*) (event + 0x70) = -1;

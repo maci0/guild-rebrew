@@ -1,5 +1,5 @@
 extern unsigned char* lpGebaeudePROT;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
@@ -27,7 +27,7 @@ void __cdecl fcn_0056de60(char* o)
 		he_FreeAction(o);
 		return;
 	}
-	t = lpGebaeudePROT + *r * 0x24d;
+	t = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*r];
 	if (*t != 2) {
 		for (i = 5; i >= 0; i--) {
 			if (t[0x223 + i] != 0) {

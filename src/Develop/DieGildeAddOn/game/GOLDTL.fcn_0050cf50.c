@@ -7,6 +7,7 @@ typedef struct {
 	int value;
 } Lvl50cf;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* SIZE 0x41 */
 typedef struct {
 	unsigned char kind;
@@ -24,7 +25,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int);
 /* ADDRESS: GOLDTL 0x0050cf50 */
 int __cdecl fcn_0050cf50(unsigned char* buildingRecordArg, int percentScale)
 {
-	Lvl50cf* lvl;
+	BUILDING_PROTOTYPE* lvl;
 	char* t;
 	char* q;
 	unsigned char k;
@@ -35,15 +36,15 @@ int __cdecl fcn_0050cf50(unsigned char* buildingRecordArg, int percentScale)
 	int i;
 	int id;
 
-	lvl = (Lvl50cf*) (lpGebaeudePROT + buildingRecordArg[0] * 0x24d);
-	acc[0] = lvl->value * 0xf00;
+	lvl = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[buildingRecordArg[0]];
+	acc[0] = lvl->base_value * 0xf00;
 	t = 0;
 	flag = 0;
 	for (i = 0; i < 0x40; i++) {
-		if (lvl->ids[i] == 0) {
+		if (lvl->components[i] == 0) {
 			break;
 		}
-		id = lvl->ids[i] & 0x7fff;
+		id = lvl->components[i] & 0x7fff;
 		k = ((OBJECT_PROTOTYPE*) lpObjektePROT)[id].kind;
 		if (!flag) {
 			if (k == 2 || k == 6) {
@@ -51,7 +52,7 @@ int __cdecl fcn_0050cf50(unsigned char* buildingRecordArg, int percentScale)
 				if (t != 0) {
 					acc[0] = (int) (acc[0] + eval_ObjektPreis2Credits(*(unsigned short*) t, *(unsigned char*) (t + 0x12)));
 					if (i < 0x3f) {
-						k = ((OBJECT_PROTOTYPE*) lpObjektePROT)[lvl->ids[i + 1] & 0x7fff].kind;
+						k = ((OBJECT_PROTOTYPE*) lpObjektePROT)[lvl->components[i + 1] & 0x7fff].kind;
 						if (k != 2 && k != 6) {
 							flag = 1;
 						}
@@ -65,7 +66,7 @@ int __cdecl fcn_0050cf50(unsigned char* buildingRecordArg, int percentScale)
 					acc[0] = (int) (acc[0] + eval_ObjektPreis2Credits(*(unsigned short*) q, *(unsigned char*) (q + 0x12)));
 				}
 				if (i < 0x3f) {
-					k = ((OBJECT_PROTOTYPE*) lpObjektePROT)[lvl->ids[i + 1] & 0x7fff].kind;
+					k = ((OBJECT_PROTOTYPE*) lpObjektePROT)[lvl->components[i + 1] & 0x7fff].kind;
 					if (k == 2 || k == 6) {
 						flag = 0;
 					}

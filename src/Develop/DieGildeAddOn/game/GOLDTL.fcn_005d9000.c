@@ -1,7 +1,7 @@
 #pragma intrinsic(strcat)
 #include "client_data.h"
-int __cdecl fcn_004a5e60(void *, int, int, int, float, float, int *);
-int __cdecl gm_ResolveEntityById(void *, int, int, int);
+int __cdecl fcn_004a5e60(void *, int, int, int, float, float, int *); int __cdecl gm_ResolveEntityById(void *, int, int, int);
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_WalkEntityChain(int);
 void __cdecl fcn_004c51a0(int, int, int, int);
@@ -48,7 +48,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 			return;
 		gm_ResolveEntityById(&ent, 0, 0, found);
 		w = *(unsigned short *) (ent + 0x27);
-		best = (unsigned char *) &g_7f4ca0 + w * 0x21c;
+		best = (unsigned char *)&((ENTITY_RECORD*)g_7f4ca0)[w];
 		v = gm_WalkEntityChain(*(unsigned short *) best);
 		r = gm_RandomMod(3) + 2;
 		score = (int) ((double) r * ((double) v * 0.01));
@@ -84,7 +84,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 					fcn_00545d40(*(int *) (p + 2), -1, msg, 1, 0x601, 0);
 				}
 			}
-			p += 0x21c;
+			p = (unsigned char *) ((ENTITY_RECORD *)(p - 2) + 1) + 2;
 			if ((int) p > (int) 0x85a0a1)
 				return;
 		} while (1);
@@ -100,13 +100,13 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		fcn_004c4510(ent, *(int *) (ent + 1));
 		cm_AppendPacketFieldDelta(1, 1, 0x5c, &delta);
 		fcn_004c5360();
-		io_FormatTextBuffer(t1, 0x1dfc, *(unsigned short *) ((unsigned char *) &g_7f4ca0 + w * 0x21c),
+		io_FormatTextBuffer(t1, 0x1dfc, *(unsigned short *) ((unsigned char *)&((ENTITY_RECORD*)g_7f4ca0)[w]),
 					 ent);
 	} else if (mode == 3) {
 		a = 0x400800;
 		if (fcn_004a55c0(e, 1, (unsigned int*) &a, 0.0f, 100.0f, &b) == 0)
 			return;
-		best = (unsigned char *) &g_7f4ca0 + (b & 0xffff) * 0x21c;
+		best = (unsigned char *)&((ENTITY_RECORD*)g_7f4ca0)[b & 0xffff];
 		if (srv_GetEntityOfficeSlot(best, &n, &i) == 0)
 			return;
 		fcn_004e8240((void *) i, 0, 0, 4, 0xff);
@@ -117,7 +117,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		delta = (char) gm_RandomMod(0x15);
 		if (fcn_004a55c0(e, 1, (unsigned int*) &a, 0.0f, 100.0f, &b) == 0)
 			return;
-		best = (unsigned char *) &g_7f4ca0 + (b & 0xffff) * 0x21c;
+		best = (unsigned char *)&((ENTITY_RECORD*)g_7f4ca0)[b & 0xffff];
 		n = gm_RandomMod(5) & 0xffff;
 		for (i = 5; i != 0; i--) {
 			if (*(unsigned char *) (best + 0x80 + n) < 0xe7)
@@ -141,7 +141,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 				slots[n] = p - 2;
 				n++;
 			}
-			p += 0x21c;
+			p = (unsigned char *) ((ENTITY_RECORD *)(p - 2) + 1) + 2;
 		} while ((int) p < (int) 0x85a0a2);
 		best = (unsigned char *) slots[0];
 		bv = gm_WalkEntityChain(*(unsigned short *) best);
@@ -165,6 +165,6 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 	do {
 		if (*p == 6 || *p == 7)
 			fcn_00545d40(*(int *) (p + 2), -1, msg, 1, 0x5fe, 0);
-		p += 0x21c;
+		p = (unsigned char *) ((ENTITY_RECORD *)(p - 2) + 1) + 2;
 	} while ((int) p < (int) 0x85a0a2);
 }

@@ -30,10 +30,10 @@ int __cdecl fcn_004aa580(char* e, char* a2, char* out)
 	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x40), &idx) == 0) {
 		return 0;
 	}
-	if (fcn_0055c140(e, &((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx], &cnt) == 0) {
+	if (fcn_0055c140(e, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx]), &cnt) == 0) {
 		return 0;
 	}
-	if (fcn_00579640(&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx], e) == 0) {
+	if (fcn_00579640(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx]), e) == 0) {
 		return 0;
 	}
 	if (cnt > 3) {
@@ -43,6 +43,6 @@ int __cdecl fcn_004aa580(char* e, char* a2, char* out)
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = ((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx].entity_id;
+	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx].entity_id;
 	return 1;
 }

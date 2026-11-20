@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /*
  * Production start for one building: probes the two crafting slots, resolves
  * the production goods record, then walks the building table in a random
@@ -14,7 +15,6 @@ typedef struct {
 	int pad1b8;
 	unsigned short id; /* +0x1bc: current goods record id */
 } Bld;
-
 #include "Develop/DieGildeAddOn/game/production_goods.h"
 
 
@@ -153,7 +153,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 		bld->f1b4 = bld->f1b4 | 0x100;
 	}
 pick:
-	if (*(unsigned char*) (g_7f4ca0 + *(unsigned short*) (bld->x16c + 0x27) * 0x21c + 2) == 6) {
+	if (*(unsigned char*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (bld->x16c + 0x27)]) + 2) == 6) {
 		n = fcn_005b1e40(bld->x16c);
 		if (n != 0) {
 			for (rec = (PRODUCTION_GOODS_RECORD*) g_100d0c0; (char*) rec < (char*) g_100d0c0 + 0xb00; rec = (PRODUCTION_GOODS_RECORD*) ((char*) rec + 0x58)) {
@@ -268,7 +268,7 @@ done:
 	}
 	fcn_00487e60(bld, 4);
 	put.count = 0;
-	for (n = 0x7f4ca2; n < 0x85a0a2; n += 0x21c) {
+	for (n = 0x7f4ca2; n < 0x85a0a2; n += (int)sizeof(ENTITY_RECORD)) {
 		if (*(unsigned char*) (n + 6) == 0)
 			continue;
 		if (*(unsigned short*) (n - 2) == 0xffff)

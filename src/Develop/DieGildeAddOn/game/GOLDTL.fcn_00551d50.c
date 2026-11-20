@@ -8,7 +8,7 @@ extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char s_6a5b74[];
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl he_FreeAction(void* u);
@@ -44,7 +44,7 @@ void __cdecl fcn_00551d50(char* actionRecord)
 		delay = *(unsigned char*) (actionRecord + 0xac) - (gm_RandomMod(*(unsigned char*) (actionRecord + 0xad)) & 0xffff);
 		index = *(unsigned short*) (actionRecord + 8);
 		byte = *(unsigned char*) (actionRecord + 0xae);
-		row = g_7f4ca0 + index * 0x21c;
+		row = (char*)&((ENTITY_RECORD*)g_7f4ca0)[index];
 		id = *(unsigned char*) (row + 0x80 + byte);
 		if ((float) (id + delay) > 252.0f) {
 			delay = (int) (252.0f - (float) id);
@@ -88,7 +88,7 @@ void __cdecl fcn_00551d50(char* actionRecord)
 			} else {
 				sprintf(msg, s_6a5b74, byte);
 				io_FormatTextBuffer(buf, 0x67728c, 0x16f2, *(unsigned char*) (actionRecord + 0xae) + 0x16f3);
-				id = *(int*) (0x7f4ca4 + *(unsigned short*) (actionRecord + 8) * 0x21c);
+				id = ((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(actionRecord + 8)].entity_id;
 				fcn_00545d40(id, id, buf, 0, 0x5fd, msg);
 			}
 		}

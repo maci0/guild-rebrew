@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -45,7 +45,7 @@ int __cdecl fcn_005a02b0(void)
 	int base;
 	int r;
 
-	slot = g_7f4ca0 + (unsigned int) g_774970 * 0x21c;
+	slot = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970]);
 	n = gm_GetOppositeStatIndex(*(unsigned char*) (slot + 0x164)) + 1;
 	h = fcn_00470820(0, 0, (char*) 0x6aa80c);
 	d2_CenterDialogWindows(h);

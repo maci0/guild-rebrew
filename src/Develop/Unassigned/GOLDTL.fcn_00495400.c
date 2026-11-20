@@ -59,7 +59,7 @@ int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Pos *out1, Pos *out2)
 	res2 = 0;
 	primaryFirst.valid = 0;
 	secondaryFirst.valid = 0;
-	me = &((ENTITY_RECORD*)g_7f4ca0)[idx];
+	me = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
 	primarySecond.valid = 0;
 	secondarySecond.valid = 0;
 	if (fcn_00495150(who) != 0) {

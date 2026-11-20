@@ -1,13 +1,13 @@
 #include <string.h>
 #pragma intrinsic(memset)
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* Entity action dialog for one entity record. Opens the panel, rebuilds its
  * controls while the record or the hovered slot changes, dispatches the
  * dialog message ids, then runs the close/cleanup sequence.
  * ent is the entity record: kind byte at +0, action id at +1, short at
  * +0x25 and +0x27, flags at +0x5a/+0x5b, side byte at +0x5c, byte at
  * +0x65, int at +0x69. */
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 typedef struct {
 	int len;
 	int other;
@@ -148,7 +148,7 @@ void __cdecl fcn_005c3f10(char* ent)
 	v.h5c = -1;
 	v.h48 = -1;
 	v.h58 = -1;
-	v.rec = (char*) lpGebaeudePROT + (unsigned char) ent[0] * 0x24d;
+	v.rec = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)ent[0]];
 	v.id = *(int*) (ent + 1);
 	changed = 1;
 	v.other = 0;
@@ -292,8 +292,8 @@ build_other:
 			if (*(unsigned short*) (ent + 0x27) == g_774970) {
 				fcn_004727a0(dlg, 1);
 				if (v.rec[0] == 2
-				    && *(int*) ((char*) g_7f4ca0
-					+ (unsigned int) g_774970 * 0x21c
+				    && *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+
 					+ 0x170) != (int) ent)
 					v.h4c = fcn_00472250(dlg, 1,
 					    fcn_00519190(0x17a9));
@@ -354,8 +354,8 @@ after_build:
 		if (d2_CurrentElementId == v.h4c) {
 			fcn_00471af0(dlg, 0);
 			fcn_004c6000(
-			    *(int*) ((char*) g_7f4ca0
-				+ (unsigned int) g_774970 * 0x21c + 4),
+			    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+ + 4),
 			    *(int*) (ent + 1));
 			fcn_00471af0(dlg, 1);
 			goto tail_changed;
@@ -371,8 +371,8 @@ after_build:
 			if (fcn_00526120(text1, 1) != 0) {
 				memset(&st, 0, sizeof(st));
 				st.f04 = 0x20;
-				st.f08 = *(int*) ((char*) g_7f4ca0
-					+ (unsigned int) g_774970 * 0x21c + 4);
+				st.f08 = *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+ + 4);
 				st.f0c = *(int*) (ent + 1);
 				st.f28 = gm_GameTime;
 				st.f2c = g_7f4c04;
@@ -393,8 +393,8 @@ after_build:
 				goto loop_test;
 			}
 			fcn_00471af0(dlg, 0);
-			if (fcn_0050d2a0((char*) g_7f4ca0
-				+ (unsigned int) g_774970 * 0x21c)
+			if (fcn_0050d2a0((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+)
 			    > *(int*) (v.other + 0xb0)) {
 				io_FormatTextBuffer(text2, 0x17db,
 				    (unsigned short) *(unsigned short*)
@@ -402,9 +402,9 @@ after_build:
 				    *(int*) (v.other + 0xb0));
 				if (fcn_00526120(text2, 1) != 0) {
 					gm_BuyBuilding(*(int*) (ent + 1),
-					    *(int*) ((char*) g_7f4ca0
-						+ (unsigned int) g_774970
-						* 0x21c + 4),
+					    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+
+ + 4),
 					    *(int*) (v.other + 0xb0),
 					    v.other, 0);
 				}
@@ -419,10 +419,10 @@ after_build:
 		}
 		if (d2_CurrentElementId == v.h5c) {
 			fcn_004c5f60(*(int*) (ent + 1),
-			    *(int*) ((char*) g_7f4ca0
-				+ (unsigned int) g_774970 * 0x21c + 4),
-			    *(int*) ((char*) g_7f4ca0
-				+ (unsigned int) g_774970 * 0x21c + 4));
+			    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+ + 4),
+			    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+ + 4));
 			goto tail_changed;
 		}
 		if (d2_CurrentElementId == v.h48) {
@@ -433,8 +433,8 @@ after_build:
 			io_FormatTextBuffer(text3, 0x17e3, (int) ent,
 			    (int) ent, v.len);
 			if (fcn_00526120(text3, 1) != 0) {
-				fcn_004c5150(*(int*) ((char*) g_7f4ca0
-					+ (unsigned int) g_774970 * 0x21c
+				fcn_004c5150(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+
 					+ 4), -1, g_773d75, v.len);
 				fcn_004c5f60(*(int*) (ent + 1),
 				    *(int*) (gm_CityEntity + 4),

@@ -1,4 +1,5 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 extern unsigned short* g_7e431c;
@@ -60,8 +61,8 @@ void __cdecl fcn_0059a0e0(void)
 		fcn_00516c50(g_7746c8, x);
 	}
 	e = g_7746c8;
-	r = ((char*)lpGebaeudePROT) + *e * 589;
-	if (*e == 0x20 || *e == 0x1f || *e == 0x1e || r[0] == 0x1f || r[0] == 0x1d) {
+	r = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e];
+	if (*e == 0x20 || *e == 0x1f || *e == 0x1e || ((char)((BUILDING_PROTOTYPE*)r)->category) == 0x1f || ((char)((BUILDING_PROTOTYPE*)r)->category) == 0x1d) {
 		fcn_00597ec0(e);
 	}
 }

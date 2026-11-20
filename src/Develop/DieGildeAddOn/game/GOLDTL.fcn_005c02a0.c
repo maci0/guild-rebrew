@@ -8,7 +8,7 @@
 #pragma intrinsic(memset)
 
 extern unsigned char g_773d75;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern float g_664164;
 extern float g_662ac8;
 extern char g_67eab0[];
@@ -70,7 +70,7 @@ int __cdecl fcn_005c02a0(char* entity)
     accept = fcn_00472250(dlg, 1, text_id + 1);
     amount = gm_WalkEntityChain(g_774970);
     amount = (int)(abs(amount + gm_WalkEntityChain(*(unsigned short*)entity)) * 0.0007843137136660516f);
-    command = gm_AccumulateTyped2(g_7f4ca0 + g_774970 * 0x21c);
+    command = gm_AccumulateTyped2(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]));
     d2_ClampAmountToRange(amount, command, 0x20, &limit);
     d2_SetElementValue(edit, fcn_0050b710(amount, g_773d75),
         fcn_0050b710(limit, g_773d75), fcn_0050b710(amount, g_773d75));
@@ -91,24 +91,24 @@ int __cdecl fcn_005c02a0(char* entity)
             if (d2_CurrentElementId == accept) {
                 amount = fcn_00471f80(edit);
                 amount = fcn_0050b750(amount, g_773d75);
-                if (fcn_00526010(g_7f4ca0 + g_774970 * 0x21c, amount, g_773d75)) {
-                    stats = gm_GetEntityTableEntry(g_7f4ca0 + g_774970 * 0x21c);
+                if (fcn_00526010(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), amount, g_773d75)) {
+                    stats = gm_GetEntityTableEntry(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]));
                     if (stats != 0)
                         *(int*)((char*)stats + 0x28) += amount;
-                    fcn_004c5150(*(int*)(entity + 4), *(int*)(g_7f4ca0 + g_774970 * 0x21c + 4), g_773d75, amount);
-                    duration = amount * ((*(int*)(g_7f4ca0 + g_774970 * 0x21c + 0x1cc) & 0x800)
+                    fcn_004c5150(*(int*)(entity + 4), *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, g_773d75, amount);
+                    duration = amount * ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].flags_1cc & 0x800)
                         ? (double) g_664164 : (double) g_662ac8) * g_664330;
                     command = gm_WalkEntityChain(g_774970);
                     command += gm_WalkEntityChain(*(unsigned short*)entity);
                     command = (int)(duration / command);
-                    command = fcn_004c54c0(*(int*)(g_7f4ca0 + g_774970 * 0x21c + 4), *(int*)(entity + 4), command, 1);
+                    command = fcn_004c54c0(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*)(entity + 4), command, 1);
                     while (!fcn_004c4450(command))
                         fcn_00535960();
                     if (entity[2] == 6 || entity[2] == 7) {
                         io_FormatTextBuffer(text, 0x1751, g_774970, amount);
                         fcn_00545d40(*(int*)(entity + 4), -1, text, 0, 0x5fb, g_67eab0);
                     }
-                    fcn_004f4f60(0x10, 1, *(int*)(g_7f4ca0 + g_774970 * 0x21c + 4), *(int*)(entity + 4), -1);
+                    fcn_004f4f60(0x10, 1, *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*)(entity + 4), -1);
                     g_774654 = 1;
                     result = 1;
                 }

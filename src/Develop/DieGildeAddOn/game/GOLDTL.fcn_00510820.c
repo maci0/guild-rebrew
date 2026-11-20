@@ -1,6 +1,7 @@
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 int sprintf(char*, const char*, ...);
@@ -15,10 +16,10 @@ void __cdecl fcn_00510820(char* obj, unsigned char* ent, int kind)
 
 	switch (kind) {
 	case 2:
-		t = lpGebaeudePROT + *ent * 0x24d;
+		t = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*ent];
 		sprintf(obj, "gb_%s", t + 1);
 		*(char**) (ent + 0x61) = obj;
-		if (*t != 10) {
+		if ((((BUILDING_PROTOTYPE*)t)->category) != 10) {
 			*(int*) (obj + 0x220) = 3;
 			if (*(int*) (obj + 0x218) == 1 && (ent[0x5a] & 1) == 0) {
 				d3_SetSubtreeVisible(obj, 1);

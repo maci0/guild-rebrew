@@ -1,5 +1,6 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_types.h"
 
 typedef struct { unsigned char kind; unsigned char rest[0x24c]; } BuildingProto572ff0;
@@ -172,7 +173,7 @@ void __cdecl fcn_00572ff0(char* a)
 			if (r2 == 0) {
 				goto i1next;
 			}
-			if (((BuildingProto572ff0*) lpGebaeudePROT)[*(unsigned char*) pktB].kind == '\n') {
+			if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) pktB].category == '\n') {
 				e2 = fcn_00503d10(ps[0]);
 			} else {
 				e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
@@ -229,7 +230,7 @@ i1next:
 		if (ps[0] == 0 || pi[0] != *(int*) (pktB + 1)) {
 			goto i2advance;
 		}
-		if (((BuildingProto572ff0*) lpGebaeudePROT)[*(unsigned char*) pktB].kind == '\n') {
+		if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) pktB].category == '\n') {
 			e2 = fcn_00503d10(ps[0]);
 		} else {
 			e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
@@ -245,7 +246,7 @@ i1next:
 		if (r2 == 0) {
 			goto i2advance;
 		}
-		if (((BuildingProto572ff0*) lpGebaeudePROT)[*(unsigned char*) pktB].kind != '\n') {
+		if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) pktB].category != '\n') {
 			amt = (int) (fcn_0050bb50(*(unsigned short*) r2, g_773d75)
 			    * *(float*) (pktB + 0x49));
 		} else {

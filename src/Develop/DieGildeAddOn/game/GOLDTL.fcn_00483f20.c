@@ -40,7 +40,7 @@ typedef struct {
 } Plan483f20;
 
 extern char* lpObjektePROT;			/* entity type table, entry stride 0x41 */
-extern char g_7f4ca0[];			/* slot table, stride 0x21c */
+#include "Develop/DieGildeAddOn/game/entity_record.h"
  
 extern int g_100b0ac;			/* production entry count */
 extern char g_100b0c4[];		/* resource entry table, stride 0x40 */
@@ -75,7 +75,7 @@ void __cdecl fcn_00487f90(Plan483f20*);
 int __cdecl wsprintfA(char*, char*, ...);
 
 #define type_entry(id) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(id)]))
-#define slot_at(id) (g_7f4ca0 + (id) * 0x21c)
+#define slot_at(id) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(id)])
 
 /* Runs the start preconditions and returns fcn_00486640's answer. */
 static __inline int can_start(Ent483f20* e, void* rec, PRODUCTION_GOODS_RECORD* p, int human)
@@ -295,7 +295,7 @@ after_start:
 	fcn_00487e60(e, 4);
 
 	built = 0;
-	for (slot = g_7f4ca0; slot < g_7f4ca0 + 0x300 * 0x21c; slot += 0x21c) {
+	for (slot = g_7f4ca0; slot < (char*)&((ENTITY_RECORD*)g_7f4ca0)[0x300]; slot = (char*)((ENTITY_RECORD*)slot + 1)) {
 		if (*(unsigned char*) (slot + 8) <= 0) {
 			continue;
 		}

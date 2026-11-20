@@ -78,7 +78,7 @@ void __cdecl fcn_004b5df0(int flags)
 	s = 0;
 	done = 0;
 	cancel = 0;
-	ent = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
+	ent = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]);
 	for (i = 0; i < 128; i++) {
 		if (((Job*)g_10069a0)[i].op != 0 && ((Job*)g_10069a0)[i].id == ent->entity_id) {
 			s = fcn_004b3c50(((Job*)g_10069a0)[i].op);

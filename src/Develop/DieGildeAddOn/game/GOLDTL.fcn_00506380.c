@@ -8,7 +8,7 @@ int __cdecl gm_CheckStatLevel(int a0, int typ);
 int __cdecl fcn_005903d0(void* geb, void* a1, void* a2);
 int __cdecl gm_MapEntityStatRange(int typ);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int, int, int);
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x00506380 */
 int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2, int a3)
 {
@@ -20,18 +20,18 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 	int i;
 	unsigned char ch;
 	unsigned short id;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 	result = 0;
 	rec = 0;
 	if (a1 != 0) {
-		rec = (unsigned char*) (lpGebaeudePROT +
-		                       (unsigned int) *a1 * 0x24d);
+		rec = (unsigned char*) (((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[
+(unsigned int) *a1]));
 		found = gm_CheckStatLevel(playerIndex, fcn_00507910(*rec));
 		typ = *rec;
 		if (typ == 0x1d)
-			return fcn_005903d0((void*) (g_7f4ca0 + playerIndex * 0x21c), a1, a2);
+			return fcn_005903d0((void*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex])), a1, a2);
 		if ((unsigned int) (typ - 1) <= 0x20) {
-			geb = (unsigned char*) (g_7f4ca0 + playerIndex * 0x21c);
+			geb = (unsigned char*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex]));
 			switch (typ) {
 			case 1:
 			case 3:

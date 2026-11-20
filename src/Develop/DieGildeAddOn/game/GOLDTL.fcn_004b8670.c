@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include <string.h>
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(void*, int);
@@ -50,7 +50,7 @@ int __cdecl fcn_004b8670(int* input)
 	for (i = 0; i < 768; i++) {
 		if (m >= 6)
 			break;
-		rec = g_7f4ca0 + i * 540;
+		rec = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 		if (*(unsigned char*) (rec + 2) != 0xffff && *(char**) (rec + 0x16c) == chosen
 		    && rec[0x165] != 0)
 			ents[m++] = rec;

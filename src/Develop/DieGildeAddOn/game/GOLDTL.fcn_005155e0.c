@@ -1,7 +1,7 @@
 extern unsigned char* lpGebaeudePROT;
 extern signed char g_7f3b00[];
 extern unsigned char* g_7746c8;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 // SIZE 0x3dc
 struct s_10432c0 {
 	char name[0x3d5];
@@ -24,7 +24,7 @@ int __cdecl fcn_005155e0(unsigned char* e)
 	int r;
 	char *dst, *src;
 
-	k = lpGebaeudePROT[*e * 0x24d];
+	k = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category;
 	if (((signed char*)g_7f3b00)[k] == -1) {
 		if (e != g_7746c8 && *e != 0x1e) {
 			r = fcn_00413160();
@@ -34,7 +34,7 @@ int __cdecl fcn_005155e0(unsigned char* e)
 			((signed char*)g_7f3b00)[k] = (signed char) r;
 			((struct s_10432c0*)g_10432c0)[r].used = 1;
 			dst = ((struct s_10432c0*)g_10432c0)[r].name;
-			src = (char*) lpGebaeudePROT + *e * 0x24d + 1;
+			src = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e] + 1;
 			while ((*dst++ = *src++) != 0) { }
 			return ((signed char*)g_7f3b00)[k];
 		}

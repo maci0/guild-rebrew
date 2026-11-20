@@ -8,7 +8,7 @@ typedef struct Blk24 {
 	float f;
 } Blk24;
 // SIZE 0x18
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 typedef struct F8 {
 	int mask;
 	int b;
@@ -51,12 +51,12 @@ int __cdecl fcn_0048f4f0(char* e, char* q, Blk24* b1, Blk24* b2)
 	t = 0xf00500;
 	if (fcn_004a5340(e, 1, &t, 0, gm_RandomMod(0x20) + 32.0f, &idx) == 0)
 		return 0;
-	p = g_7f4ca0 + idx * 0x21c;
-	v = *(int*) (p + 0x170);
+	p = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]);
+	v = *(int*)&((ENTITY_RECORD_VIEW*)p)->ptr_170;
 	if (v != 0) {
 		b2->b = *(int*) (v + 1);
 	} else {
-		v = *(int*) (p + 0x16c);
+		v = *(int*)&((ENTITY_RECORD_VIEW*)p)->ptr_16c;
 		if (v != 0) {
 			b2->b = *(int*) (v + 1);
 		} else {
@@ -70,7 +70,7 @@ int __cdecl fcn_0048f4f0(char* e, char* q, Blk24* b1, Blk24* b2)
 			b2->b = found;
 		}
 	}
-	b2->c = *(int*) (p + 4);
+	b2->c = *(int*)&((ENTITY_RECORD_VIEW*)p)->entity_id;
 	b2->a = h[1];
 	b2->d = 4;
 	return 1;

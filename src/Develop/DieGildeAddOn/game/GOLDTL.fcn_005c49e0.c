@@ -1,5 +1,5 @@
 
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -48,7 +48,7 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 	h2 = -1;
 	h3 = -1;
 	h4 = -1;
-	tbl = lpGebaeudePROT + p[0] * 0x24d;
+	tbl = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p[0]];
 	id = *(int*) (p + 1);
 	d = fcn_00470820(0, 0, g_6ac690);
 	d2_CenterDialogWindows(d);

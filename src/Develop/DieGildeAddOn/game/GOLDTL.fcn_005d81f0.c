@@ -93,8 +93,8 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 			goto fail60;
 		fcn_004c6ae0(*(int*) (entity + 4), -5);
 		fcn_004c5420(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
-		if (((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)].entity_state == 6 ||
-		    ((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)].entity_state == 7) {
+		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)].entity_type == 6 ||
+		    ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)].entity_type == 7) {
 			io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) entity, rec, *(unsigned short*) ent);
 			fcn_00545d40(*(unsigned short*) (rec + 0x27), *(unsigned short*) (rec + 0x27),
 				text, 0, 0x5fb, (char*) 0x6a59fc);
@@ -128,7 +128,7 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 		return 0;
 	if (*(unsigned short*) (rec + 0x27) == 0xffff)
 		return 0;
-	state_ptr = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)];
+	state_ptr = (char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]);
 	j = fcn_00470820(0, 0, (char*) 0x6acd8c);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(j);
@@ -152,10 +152,10 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 					ent = 0;
 					count = 0x300;
 					do {
-						if (((ENTITY_RECORD*) g_7f4ca0)[r].entity_index != 0xffff &&
-						    ((ENTITY_RECORD*) g_7f4ca0)[r].unk_16c == rec &&
-						    ((ENTITY_RECORD*) g_7f4ca0)[r].entity_state == 0) {
-							ent = (char*) &((ENTITY_RECORD*) g_7f4ca0)[r];
+						if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[r].entity_index != 0xffff &&
+						    (*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[r].ptr_16c) == rec &&
+						    ((ENTITY_RECORD_VIEW*)g_7f4ca0)[r].entity_type == 0) {
+							ent = (char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[r]);
 							break;
 						}
 						count -= 1;

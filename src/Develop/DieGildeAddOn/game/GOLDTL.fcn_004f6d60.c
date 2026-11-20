@@ -5,7 +5,7 @@
 extern char g_7f4ca0[];
 extern pos14_7f4c00 gm_GameTime;
 extern int d3_CurrentContextIndex;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int __cdecl gm_WalkEntityChain(int);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
@@ -40,7 +40,7 @@ void __cdecl fcn_004f6d60(unsigned int entityIndex)
 	char* fill_dst;
 	int fill_count;
 
-	slot = g_7f4ca0 + (entityIndex & 0xffff) * 0x21c;
+	slot = (char*) &((ENTITY_RECORD*) g_7f4ca0)[entityIndex & 0xffff];
 	if (*(short*) slot == -1) {
 		return;
 	}
@@ -172,7 +172,7 @@ void __cdecl fcn_004f6d60(unsigned int entityIndex)
 			fcn_004c5530(msg);
 			v++;
 		}
-		other += 0x21c;
+		other += sizeof(ENTITY_RECORD);
 	} while ((int) other < 0x85a0a2);
 }
 

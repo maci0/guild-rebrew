@@ -6,6 +6,7 @@ typedef struct {
 } BuildingProto5279f0;
 #pragma pack(pop)
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 typedef struct {
 	int left;
 	int top;
@@ -160,7 +161,7 @@ void __cdecl fcn_005279f0(unsigned int inputFlags)
 	if (g_7746c4) {
 		v8 = 0;
 		v9 = 0;
-		if (((BuildingProto5279f0*)lpGebaeudePROT)[(unsigned char)*g_7746c4].kind == 2) {
+		if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)*g_7746c4].category == 2) {
 			v8 = fcn_00502cd0(*(int*) (g_7746c4 + 0x5d),
 				1, 4, 2);
 			while (v8) {
@@ -173,7 +174,7 @@ void __cdecl fcn_005279f0(unsigned int inputFlags)
 			}
 		} else {
 			v7 = 0;
-			e = ((BuildingProto5279f0*)lpGebaeudePROT)[(unsigned char)*g_7746c4].entries;
+			e = (short*)((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)*g_7746c4].components;
 			do {
 				if (*e != (short) 0xffff) {
 					id = *e & 0x7fff;
@@ -215,7 +216,7 @@ label_527db2:
 	v8 = 0;
 	v7 = 0;
 	v9 = 0;
-	e = ((BuildingProto5279f0*)lpGebaeudePROT)[(unsigned char)*g_7746c8].entries;
+	e = (short*)((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)*g_7746c8].components;
 	do {
 		if (*e != (short) 0xffff) {
 			id = *e & 0x7fff;

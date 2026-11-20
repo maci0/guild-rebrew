@@ -1,5 +1,5 @@
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include <string.h>
-
 #pragma intrinsic(memcpy, memset, strcpy, strlen, strcat)
 
 #include "client_types.h"
@@ -134,7 +134,7 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 		if (rec1 == 0) {
 			goto label_1bc;
 		}
-		row = (int) ((unsigned short) *(unsigned short*) (rec1 + 0x27) * 0x21c + (int) g_7f4ca0);
+		row = (int) ((int)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (rec1 + 0x27)]);
 		req[0] = rec1;
 		req[1] = 0x451c4000;
 		req[2] = (int) actionRecord;
@@ -142,7 +142,7 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 		if (fcn_0055be70(req) != 0) {
 			h = req[3];
 			*(int*) (actionRecord + 0xb4) = fcn_004f4f60(0x17, 1,
-			    *(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (actionRecord + 8) * 0x21c + 4),
+			    *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4),
 			    *(int*) (row + 4), *(int*) (rec1 + 1));
 			*(int*) (actionRecord + 0xb8) = *(int*) (h + 4);
 			*(int*) (actionRecord + 0xbc) = *(int*) (h + 0xb0);
@@ -196,8 +196,8 @@ label_1bc:
 		}
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		if (rec1 != 0) {
-			val = (int) gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (actionRecord + 8) * 0x21c + 4));
-			row = (int) ((unsigned short) *(unsigned short*) (q + 8) * 0x21c + (int) g_7f4ca0);
+			val = (int) gm_LookupEntityRecordById(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4));
+			row = (int) ((int)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (q + 8)]);
 			if (row != 0 && val != 0) {
 				ent = fcn_0050b750(gm_RandomMod(200) + 0x226, g_773d75);
 				io_FormatTextBuffer(buf, 0x19ea, rec1, ent, *(unsigned short*) row);
@@ -236,12 +236,12 @@ label_1bc:
 		return;
 	case 5:
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
-		ent = (int) gm_LookupEntityRecordById(*(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (actionRecord + 8) * 0x21c + 4));
+		ent = (int) gm_LookupEntityRecordById(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4));
 		if (rec1 == 0 || ent == 0) {
 			*(int*) (actionRecord + 0x70) = 0xfffffffe;
 			return;
 		}
-		row = (int) ((unsigned short) *(unsigned short*) (rec1 + 0x27) * 0x21c + (int) g_7f4ca0);
+		row = (int) ((int)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (rec1 + 0x27)]);
 		h = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xb0));
 		if (h != 0) {
 			q = (int) gm_SetupEntityQuery((char*) h);
@@ -262,7 +262,7 @@ label_1bc:
 			} while (cnt != 0);
 			val = 1;
 			fcn_004f4f60(0x17, 1,
-			    *(int*) (g_7f4ca0 + (unsigned short) *(unsigned short*) (actionRecord + 8) * 0x21c + 4),
+			    *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4),
 			    *(int*) (row + 4), *(int*) (h + 1));
 		} else {
 			val = 0;

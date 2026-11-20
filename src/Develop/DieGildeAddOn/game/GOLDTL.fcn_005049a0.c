@@ -4,7 +4,7 @@ extern char* lpObjektePROT;
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl fcn_00502cd0(int, int, int, int);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 /* ADDRESS: GOLDTL 0x005049a0 */
 int __cdecl fcn_005049a0(unsigned char* building)
@@ -18,7 +18,7 @@ int __cdecl fcn_005049a0(unsigned char* building)
 
 	found = 0;
 	category = gm_GetBuildingTypeCategory(building[0]);
-	type = lpGebaeudePROT + building[0] * 0x24d;
+	type = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[building[0]];
 	if (category != 1 && category != 7 && category != 8) {
 		if (category == 4) {
 			return fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0xf7);

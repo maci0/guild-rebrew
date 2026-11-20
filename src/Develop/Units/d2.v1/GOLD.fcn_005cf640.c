@@ -84,7 +84,7 @@ int __cdecl fcn_005cf640(int unused, unsigned short* p)
 	int result;
 	int i;
 
-	fcn_004942a0(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], shares);
+	fcn_004942a0(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), shares);
 	dlg = fcn_00470820(0, 0, s_6ace6c);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
@@ -122,7 +122,7 @@ int __cdecl fcn_005cf640(int unused, unsigned short* p)
 						m.b4 = 0x5f;
 						m.f8 = *(int*) (p + 2);
 						m.fc = -1;
-						m.f58 = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+						m.f58 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
 						m.b64 = (char) shares[i].kind;
 						m.b65 = (char) shares[i].goal;
 						m.f60 = shares[i].amount;

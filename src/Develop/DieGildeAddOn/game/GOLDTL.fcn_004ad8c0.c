@@ -80,7 +80,7 @@ void __cdecl fcn_004ad8c0(void)
 	kinds[1] = 21;
 	kinds[2] = 27;
 	for (i = 0; i < 768; i++) {
-		p = &((ENTITY_RECORD*) g_7f4ca0)[i];
+		p = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 		if (p->unk_00d >= 7 &&
 		    (p->entity_state == 6 || p->entity_state == 7 || p->entity_state == 5 || p->entity_state == 4 ||
 			p->entity_state == 3 || p->entity_state == 2)) {

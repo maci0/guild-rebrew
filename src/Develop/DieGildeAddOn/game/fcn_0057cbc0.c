@@ -1,6 +1,6 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6b5c60[];
@@ -47,7 +47,7 @@ void __cdecl fcn_0057cbc0(char* p)
         fcn_00500bb0(p + 0x52, 2, 0, 0);
         if (wnd != 0) {
             w = *(unsigned short*) (s + 0x27);
-            tbl = g_7f4ca0 + w * 0x21c;
+            tbl = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[w]);
             io_FormatTextBuffer(buf, 0x4205, s);
             he_MessageBoxQuickjump(*(int*) (tbl + 4), *(int*) (tbl + 4), buf, 0, 0x5fc,
                          *(int*) (s + 1), *(int*) (wnd + 2), g_6b5c60,

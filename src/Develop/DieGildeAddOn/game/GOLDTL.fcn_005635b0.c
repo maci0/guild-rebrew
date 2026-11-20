@@ -99,7 +99,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 					if (*(unsigned short*) (p + 0x27) == 0xffff) {
 						goto next;
 					}
-					if (((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].entity_state != 6 && ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].entity_state != 7) {
+					if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].entity_type != 6 && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].entity_type != 7) {
 						goto next;
 					}
 				}
@@ -111,7 +111,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 					m[4] = 0x6e;
 					*(int*) (m + 0xc) = -1;
 					m[0x36] = 1;
-					*(int*) (m + 8) = ((ENTITY_RECORD*)g_7f4ca0)[o->ent].entity_id;
+					*(int*) (m + 8) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[o->ent].entity_id;
 					*(pos14_7f4c00*) (m + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 					*(int*) (m + 0x60) = o->who;
 					*(int*) (m + 0x68) = o->value;

@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 typedef struct
@@ -36,14 +36,14 @@ int __cdecl fcn_004ef250(Set* p)
 			r = gm_StartFilteredEntitySearch(1, 1, p->recs[i].id);
 			mode = 0;
 			if (r != 0 && *(unsigned short*) (r + 0x27) != 0xffff) {
-				e = g_7f4ca0 + *(unsigned short*) (r + 0x27) * 0x21c;
+				e = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (r + 0x27)]);
 				if (p->recs[i].kind == 1) {
 					mode = 2;
 					if (!(p->recs[i].f > 25.0f)) {
 						mode = 1;
 					}
 				}
-				if (e[2] == 6) {
+				if ((*(char*)&((ENTITY_RECORD_VIEW*)e)->entity_type) == 6) {
 					fcn_005b3410(e, r, mode);
 				}
 			}

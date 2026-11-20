@@ -12,7 +12,7 @@ extern int g_774654;
 extern int main_LoopFlags;
 extern int d2_CurrentElementId;
 extern int g_14ce8e0;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_00525fb0(int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -84,18 +84,18 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 	ids[2] = 0x227;
 	handles[3] = fcn_00502cd0(*(unsigned int*) (gebaeude + 0x5d), 2, 6, 0, 0x2a);
 	n = 2;
-	ents = (char*) (lpGebaeudePROT + (unsigned int) *gebaeude * 0x24d);
-	if (*ents == 0x1f) {
+	ents = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned int) *gebaeude];
+	if (((char)(((BUILDING_PROTOTYPE*)ents)->category)) == 0x1f) {
 		ids[0] = 0x293;
 		ids[1] = 0x294;
-		if ((unsigned char) ents[0x247] >= 2) {
+		if ((unsigned char) ((char)(((BUILDING_PROTOTYPE*)ents)->level)) >= 2) {
 			ids[2] = 0x295;
 			n = 3;
 		}
 	} else {
 		ids[0] = 0x225;
 		ids[1] = 0x226;
-		if ((unsigned char) ents[0x247] >= 2) {
+		if ((unsigned char) ((char)(((BUILDING_PROTOTYPE*)ents)->level)) >= 2) {
 			ids[2] = 0x227;
 			n = 3;
 		}
@@ -127,7 +127,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 	d2_SetForm(menu, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(menu, 3);
-	screen = (*ents != 0x1f) ? 0x4128 : 0x421e;
+	screen = (((char)(((BUILDING_PROTOTYPE*)ents)->category)) != 0x1f) ? 0x4128 : 0x421e;
 	io_AppendText(screen);
 	fcn_0052a0c0((int) gebaeude, 0);
 	fcn_00594340();
@@ -181,7 +181,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 		if (n) {
 			for (i = 0; i < n; i++) {
 				fcn_00472640(handles[i], 1);
-				if (*ents != 0x1f) {
+				if (((char)(((BUILDING_PROTOTYPE*)ents)->category)) != 0x1f) {
 					h = ids[i] * 2 + 0x9a8;
 					if (counts[i] == 1) {
 						io_FormatTextBuffer(text, 0x4129, 0x228, h);

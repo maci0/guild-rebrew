@@ -41,7 +41,7 @@ typedef struct {
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 extern char* gm_CityEntity;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_6b5c60[];
 
 int __cdecl fcn_0057a890(Unit57aa*, float, int, int*);
@@ -129,12 +129,12 @@ void __cdecl fcn_0057aab0(Bld57aa* self, int mode, int who, int side)
 		dv.x = p.x - q.x;
 		dv.y = p.y - q.y;
 		dv.z = p.z - q.z;
-		house = &((Unit57aa*)g_7f4ca0)[b->owner];
+		house = ((Unit57aa*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[b->owner]);
 		if ((d = v3len(&dv)) > range) {
 			continue;
 		}
 		for (j = 0; j < 768; j++) {
-			u = &((Unit57aa*)g_7f4ca0)[j];
+			u = ((Unit57aa*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[j]);
 			if (u->id == 0xffff || u->type >= 10 || (u->owner & 3) != side) {
 				continue;
 			}

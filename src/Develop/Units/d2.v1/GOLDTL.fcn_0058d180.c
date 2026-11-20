@@ -99,8 +99,8 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 			if (d2_CurrentElementId == ok) {
 				hh = 0;
 				for (i = 0; i < 768; i++) {
-					if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_17c[12] != 0) {
-						hh = &((ENTITY_RECORD*)g_7f4ca0)[i];
+					if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected != 0) {
+						hh = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 						break;
 					}
 				}
@@ -110,7 +110,7 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 					memset(&m, 0, sizeof(m));
 					m.kind = 0x8d;
 					m.code = 1;
-					m.owner = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (who + 0x27)].entity_id;
+					m.owner = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (who + 0x27)].entity_id;
 					m.target = *(int*) (who + 1);
 					m.when = gm_GameTime;
 					m.who = *(int*) (request + 4);

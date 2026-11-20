@@ -37,7 +37,7 @@ extern char g_6a2f30[];
 extern char g_6a2f24[];
 extern char g_6a2f18[];
 extern int d2_CurrentWindowId;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 extern House_52df40 g_7f4ca0[];
 extern Dyn_52df40 g_868060[];
@@ -104,7 +104,7 @@ void __cdecl fcn_0052df40(unsigned char* s)
 		return;
 	}
 	kind = gm_GetBuildingTypeCategory(*s);
-	t = lpGebaeudePROT + *s * 0x24d;
+	t = (unsigned char*) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*s];
 	r = fcn_00506380(g_774970, s, 0, 0);
 	if (*(unsigned short*) (s + 0x27) == g_774970 || *(unsigned short*) (s + 0x25) == g_774970 || (r & 0x10) != 0) {
 		g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0cc);

@@ -49,7 +49,7 @@ extern int d2_CurrentWindowId;
 extern char* g_772500;
 extern char* g_77255c;
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_7f4ca4[];
 char g_6811b0[] = "$C";
 extern volatile int g_6b7fac;
@@ -261,9 +261,9 @@ void __cdecl fcn_005ac2d0(char* building)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == btnState0) {
-				if (fcn_00525f60(g_7f4ca0 + g_774970 * 0x21c, 1) != 0) {
+				if (fcn_00525f60((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 1) != 0) {
 					v12 = 1;
-					fcn_005100f0(*(int*) (g_7f4ca4 + g_774970 * 0x21c), -1);
+					fcn_005100f0(((ENTITY_RECORD*)(g_7f4ca4 - 4))[g_774970].entity_id, -1);
 					fcn_004c4510(obj, *(int*) (obj + 2));
 					cm_AppendPacketFieldDelta(1, 1, 0x22, &v12);
 					rc = fcn_004c5360();

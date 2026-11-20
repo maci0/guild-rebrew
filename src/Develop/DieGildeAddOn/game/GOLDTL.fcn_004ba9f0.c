@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_7f4ca0[]; extern unsigned char g_773d75;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
@@ -58,8 +58,8 @@ int __cdecl fcn_004ba9f0(int* noticeRequest)
 			step = -1;
 		}
 
-		stride = step * 0x21c;
-		for (rp = (unsigned char*) g_7f4ca0 + 2 + i * 0x21c; i < end;
+		stride = step * (int)sizeof(ENTITY_RECORD);
+		for (rp = &((ENTITY_RECORD*)g_7f4ca0)[i].entity_state; i < end;
 		    i += step, rp += stride) {
 			if (rp[0] == 6 || rp[0] == 7 || rp[0] >= 0xa)
 				continue;

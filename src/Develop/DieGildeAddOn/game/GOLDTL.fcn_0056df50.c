@@ -47,7 +47,7 @@ void __cdecl fcn_0056df50(char* u)
 			goto kill;
 		}
 		if (*(unsigned short*) (t + 0x25) != 0xffff) {
-			fcn_004c5f60(*(int*) (t + 1), ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (t + 0x25)].entity_id, *(int*) (p + 4));
+			fcn_004c5f60(*(int*) (t + 1), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (t + 0x25)].entity_id, *(int*) (p + 4));
 		} else {
 			fcn_004c5f60(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
 		}
@@ -55,7 +55,7 @@ void __cdecl fcn_0056df50(char* u)
 		if (*(int*) (u + 0xbc) == 0) {
 			goto kill;
 		}
-		h = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (t + 0x25)];
+		h = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (t + 0x25)]);
 		if (h != 0) {
 			if (h->entity_state == 6 || h->entity_state == 7) {
 				io_FormatTextBuffer(text, 0x17e6, t, *(unsigned short*) p, *(int*) (u + 0xbc));

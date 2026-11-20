@@ -5,7 +5,7 @@ extern char* gm_CityEntity;
 extern int g_6652f8[];
 extern int gm_GameTime;
 extern char g_7f4ca0[];
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 int __cdecl gv_CheckSlotActive(int, int);
 void* __cdecl gv_GetSlotEntry(int, int, char);
@@ -33,7 +33,7 @@ int __cdecl fcn_004f2350(int e)
 
 	gm_ResolveEntityById((void**) &p, 0, 0, *(int*) (e + 8));
 	if (p == 0 || *(unsigned short*) (p + 0x27) == 0xffff
-		|| g_7f4ca0 + *(unsigned short*) (p + 0x27) * 0x21c == gm_CityEntity) {
+		|| ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (p + 0x27)]) == gm_CityEntity) {
 		return -1;
 	}
 	kind = *(unsigned char*) p;

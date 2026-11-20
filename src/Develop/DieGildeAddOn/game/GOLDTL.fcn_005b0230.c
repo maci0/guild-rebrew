@@ -1,10 +1,10 @@
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_data.h"
 #include "game_data.h"
 extern char* g_774a68;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_1043370;
 extern char* g_77255c;
-
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl d3_TransformPoint(char*, float*, float*);
@@ -32,7 +32,7 @@ typedef struct ScrollSlot {
 #define g_town_count(t) (*(int*) ((t) + 0x27a4))
 #define g_cur_dir d2_CurrentWindowId
 #define g_cur_building g_77255c
-#define g_entity_type(t) ((unsigned char*) (g_7f4ca0 + (t) * 0x21c))
+#define g_entity_type(t) ((unsigned char*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(t)]))
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005b0230 */
 void __cdecl fcn_005b0230(char* town)
@@ -152,7 +152,7 @@ void __cdecl fcn_005b0230(char* town)
 					j = g_7f4ca2[kind].kind;
 					if (j == 5 || j == 6 || j == 7) {
 						fcn_0046f740(bld_x - 8, bld_y - 8,
-						             *(int*) (g_7f4ca0 + kind * 0x21c + 0x54),
+						             *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[kind] + 0x54),
 						             g_cur_dir);
 					}
 				}
@@ -213,7 +213,7 @@ void __cdecl fcn_005b0230(char* town)
 				slot->y = bld_y - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].height / 2;
 				fcn_00469c40(*(int*) (g_cur_building + 4) + bld_x,
 				             *(int*) (g_cur_building + 8) + bld_y, slot->handle);
-				if (!fcn_005cfd00((unsigned short*) (g_7f4ca0 + g_774970 * 0x21c),
+				if (!fcn_005cfd00((unsigned short*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]),
 				                  (int*) (town + 0xc), (unsigned char*) slot->ent)) {
 					((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_05c = 0;
 					((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].flags_1d0 = 0;
@@ -234,7 +234,7 @@ void __cdecl fcn_005b0230(char* town)
 					j = g_7f4ca2[kind].kind;
 					if (j == 5 || j == 6 || j == 7) {
 						fcn_0046f740(slot->x - 8, slot->y - 8,
-						             *(int*) (g_7f4ca0 + kind * 0x21c + 0x54),
+						             *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[kind] + 0x54),
 						             g_cur_dir);
 					}
 				}

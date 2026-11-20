@@ -72,7 +72,7 @@ int __cdecl d2_ConfirmEinbruch(int unused, char* e)
 	if (e == 0) {
 		return 0;
 	}
-	p = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
+	p = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 0x27)]);
 	if (fcn_0055c050(e) == 0) {
 		io_FormatTextBuffer(buf, 0x1a92, *(unsigned short*) (e + 0x27), e);
 		fcn_00526120(buf, 0);
@@ -99,15 +99,15 @@ int __cdecl d2_ConfirmEinbruch(int unused, char* e)
 				pkt.type = 0x3f;
 				pkt.x36 = 1;
 				n = 0;
-				pkt.x8 = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+				pkt.x8 = ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id;
 				pkt.x58 = *(int*) (e + 1);
 				pkt.x5c = *(int*) (g_7746c4 + 1);
 				for (i = 0; i < 8; i++) {
 					pkt.ids[i] = -1;
 				}
 				for (i = 0; i < 768; i++) {
-					if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_17c[12] != 0) {
-						pkt.ids[n] = ((ENTITY_RECORD*)g_7f4ca0)[i].entity_id;
+					if (((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[i])->unk_17c[12] != 0) {
+						pkt.ids[n] = ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[i])->entity_id;
 						n++;
 					}
 				}

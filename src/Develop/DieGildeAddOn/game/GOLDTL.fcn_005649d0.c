@@ -50,7 +50,7 @@ void __cdecl fcn_005649d0(char* e)
 	if (q == 0 || (e[0x78] & 2) == 0) {
 		return;
 	}
-	h = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (q + 0x27)];
+	h = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (q + 0x27)]);
 	o = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 	if (h->entity_state != 6 && h->entity_state != 7) {
 		return;

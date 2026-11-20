@@ -13,7 +13,7 @@
  */
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl gm_ResolveEntityById(void*, void*, int, int);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl he_FreeAction(char*);
@@ -58,14 +58,14 @@ void __cdecl fcn_00571240(char* self)
 	gm_ResolveEntityById(&node, 0, 0, *(int*) (self + 0xb8));
 	if (node == 0) {
 		for (i = 0; i < 768; i++) {
-			if (*(char**) (g_7f4ca0 + i * 0x21c + 0x17c) == self)
-				fcn_00529160(0, 0, *(unsigned short*) (g_7f4ca0 + i * 0x21c), 0);
+			if (*(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x17c) == self)
+				fcn_00529160(0, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
 		}
 		he_FreeAction(self);
 		return;
 	}
 	if (*(unsigned short*) (node + 0x27) != 0xffff) {
-		row = g_7f4ca0 + *(unsigned short*) (node + 0x27) * 0x21c;
+		row = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (node + 0x27)]);
 		if (row != gm_CityEntity)
 			map = row;
 	}
@@ -110,11 +110,11 @@ void __cdecl fcn_00571240(char* self)
 				gm_ResolveEntityById(0, &o2, 0, *(int*) (self + 0xc0));
 				if (q == 0) {
 					io_FormatTextBuffer(buf, 0x1bb7, *(unsigned short*) (self + 0xac) * 2 + 0x9a8, node);
-					he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (self + 8) * 0x21c + 4),
+					he_MessageBoxQuickjump(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (self + 8)]) + 4),
 						-1, buf, 0, 0x5f1, *(int*) (node + 1), -1, 0, "_NACHRICHTEN_HS_07");
 					for (i = 0; i < 768; i++) {
-						if (*(char**) (g_7f4ca0 + i * 0x21c + 0x17c) == self)
-							fcn_00529160(node, 0, *(unsigned short*) (g_7f4ca0 + i * 0x21c), 0);
+						if (*(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x17c) == self)
+							fcn_00529160(node, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
 					}
 					he_FreeAction(self);
 					return;
@@ -142,16 +142,16 @@ void __cdecl fcn_00571240(char* self)
 			return;
 		}
 		for (i = 0; i < 768; i++) {
-			if (*(char**) (g_7f4ca0 + i * 0x21c + 0x17c) == self)
-				fcn_00529160(node, 0, *(unsigned short*) (g_7f4ca0 + i * 0x21c), 0);
+			if (*(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x17c) == self)
+				fcn_00529160(node, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
 		}
 		he_FreeAction(self);
 		return;
 	case -2:
 	case -1:
 		for (i = 0; i < 768; i++) {
-			if (*(char**) (g_7f4ca0 + i * 0x21c + 0x17c) == self)
-				fcn_00529160(0, 0, *(unsigned short*) (g_7f4ca0 + i * 0x21c), 0);
+			if (*(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x17c) == self)
+				fcn_00529160(0, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
 		}
 		he_FreeAction(self);
 		return;

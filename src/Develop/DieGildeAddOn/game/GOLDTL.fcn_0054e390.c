@@ -10,7 +10,7 @@ extern char g_7f4ca4[];
 extern double g_6629c8;
 extern float g_662cf8;
 extern float g_665e88;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl fcn_00502cd0(int, int, ...);
@@ -188,8 +188,8 @@ label_54e6a1:
 			float limit;
 
 			own = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
-			ownrow = g_7f4ca0 + *(unsigned short*) (own + 0x27) * 0x21c;
-			p = g_7f4ca0 + *(unsigned short*) (e + 8) * 0x21c;
+			ownrow = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)];
+			p = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)];
 			v = fcn_0050c710(own, 5, 1);
 			limit = (float) ((double) v * 0.01 + g_6629c8);
 			rec = fcn_00502cd0(*(int*) (gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0)) + 0x5d), 1, 0, 0xca);
@@ -210,7 +210,7 @@ label_54e6a1:
 				*(int*) (pkt + 0x14) = *(int*) (own + 1);
 				pkt[0x30] = 2;
 				pkt[0x7c] = 2;
-				*(int*) (pkt + 0x0c) = *(int*) (g_7f4ca4 + (unsigned short) g_774970 * 0x21c);
+				*(int*) (pkt + 0x0c) = ((ENTITY_RECORD*) g_7f4ca0)[(unsigned short) g_774970].entity_id;
 				*(int*) (pkt + 0x34) = *(int*) (p + 4);
 				*(int*) (pkt + 0x38) = *(int*) (ownrow + 4);
 				i = 0;
@@ -220,7 +220,7 @@ label_54e6a1:
 					i++;
 				} while (i < 16);
 				i = 0;
-				for (p = (char*) 0x7f4e0c; (int) p < 0x85a20c; p += 0x21c) {
+				for (p = (char*) 0x7f4e0c; (int) p < 0x85a20c; p += sizeof(ENTITY_RECORD)) {
 					if (i >= 0x10 || i >= 6) {
 						break;
 					}
@@ -258,18 +258,18 @@ label_54e6a1:
 				}
 				other = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 				own = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
-				m = fcn_004d5110(own, other, g_7f4ca0 + *(unsigned short*) (e + 8) * 0x21c,
-				                 g_7f4ca0 + *(unsigned short*) (own + 0x27) * 0x21c);
-				kc = *(unsigned char*) (g_7f4ca4 + *(unsigned short*) (own + 0x27) * 0x21c - 2);
+				m = fcn_004d5110(own, other, (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)],
+				                 (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)]);
+				kc = *(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)].entity_state;
 				if (kc == 6 || kc == 7) {
 					io_FormatTextBuffer(text, 0x1c54, own, m);
-					he_MessageBoxQuickjump(*(int*) (g_7f4ca4 + *(unsigned short*) (own + 0x27) * 0x21c), -1, text, 0,
+					he_MessageBoxQuickjump(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)].entity_id, -1, text, 0,
 					             0x5f0, *(int*) (own + 1), -1, 0, 0);
 				}
-				kc = *(unsigned char*) (g_7f4ca4 + *(unsigned short*) (e + 8) * 0x21c - 2);
+				kc = *(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_state;
 				if (kc == 6 || kc == 7) {
 					io_FormatTextBuffer(text, 0x1c55, *(unsigned short*) (own + 0x27), own, m);
-					fcn_00545d40(*(int*) (g_7f4ca4 + *(unsigned short*) (e + 8) * 0x21c), -1, text, 0, 0x5f0, 0);
+					fcn_00545d40(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, text, 0, 0x5f0, 0);
 				}
 				*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 				fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
@@ -279,11 +279,11 @@ label_54e6a1:
 			other = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 			m = fcn_004d5450(other) + 0x1125;
 			io_FormatTextBuffer(text, 0x114b, m, *(unsigned short*) (own + 0x27), own, m);
-			fcn_00545d40(*(int*) (g_7f4ca4 + *(unsigned short*) (e + 8) * 0x21c), -1, text, 0, 0x5f0, 0);
-			kc = *(unsigned char*) (g_7f4ca4 + *(unsigned short*) (own + 0x27) * 0x21c - 2);
+			fcn_00545d40(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, text, 0, 0x5f0, 0);
+			kc = *(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)].entity_state;
 			if (kc == 6 || kc == 7) {
 				io_FormatTextBuffer(text, 0x1c56, own);
-				he_MessageBoxQuickjump(*(int*) (g_7f4ca4 + *(unsigned short*) (own + 0x27) * 0x21c), -1, text, 0,
+				he_MessageBoxQuickjump(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)].entity_id, -1, text, 0,
 				             0x5f0, *(int*) (own + 1), -1, 0, 0);
 			}
 			*(int*) (e + 0x70) = -1;

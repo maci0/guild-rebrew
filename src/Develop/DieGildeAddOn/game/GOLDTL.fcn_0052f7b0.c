@@ -14,7 +14,7 @@ extern int g_7746d8;
 extern int g_7746dc;
 extern char g_7746f4;
 extern char g_6b5c60[];
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 void* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl fcn_00472640(int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
@@ -136,7 +136,7 @@ refresh:
     item = (unsigned short*)g_7e2a9c;
     focus = g_7ea360;
     count = g_7746f0;
-    if (item != 0 && *(u8*)(lpObjektePROT + *item * 0x41) == 0x1d &&
+    if (item != 0 && ((OBJECT_PROTOTYPE*)lpObjektePROT)[*item].kind == 0x1d &&
         count == 0 && focus == 0) {
         d2_OpenTransporterInfoPanel(item);
         goto reload;

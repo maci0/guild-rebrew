@@ -32,7 +32,7 @@ extern int g_7747b4;
 float g_67db50 = 1.0f;
 float g_67db54 = 0.5f;
 extern unsigned char g_7747b0;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -81,8 +81,8 @@ void __cdecl fcn_0047da10(void)
 	fcn_0064d41a(buf, "Player count: %i, Starting with: %i Count: %i Deltatime: %i", n, g_100dc00, n, d);
 	idx = g_100dc00;
 	for (k = n; k != 0; k--) {
-		if (((fcn_0047da10_Ent*)g_7f4ca0)[idx].id != 0xffff) {
-			e = &((fcn_0047da10_Ent*)g_7f4ca0)[idx];
+		if ((*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_index) != 0xffff) {
+			e = ((fcn_0047da10_Ent*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
 			fcn_00489920(e);
 			if ((*(GAME_TIMESTAMP*)&gm_GameTime).hour > 6 && (*(GAME_TIMESTAMP*)&gm_GameTime).hour < 0x16 && (g_7747b0 & 0x80) == 0 && (e->kind == 5
 			    || ((e->id ^ (*(GAME_TIMESTAMP*)&gm_GameTime).hour) & 1) == 0))

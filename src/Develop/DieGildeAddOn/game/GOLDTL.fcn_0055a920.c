@@ -1,5 +1,5 @@
 #include <math.h>
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
@@ -52,11 +52,11 @@ void __cdecl fcn_0055a920(char* rec)
 		if (cnt >= want) {
 			break;
 		}
-		slot = g_7f4ca0 + si * 0x21c;
+		slot = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[si]);
 		if (*(unsigned short*) slot != 0xffff &&
-		    *(unsigned char*) (slot + 2) <= 4 &&
-		    *(unsigned char*) (slot + 0xc) == *(int*) (rec + 0xb4)) {
-			fcn_004c4510(slot, *(int*) (slot + 4));
+		    *(unsigned char*)&((ENTITY_RECORD_VIEW*)slot)->entity_type <= 4 &&
+		    *(unsigned char*)&((ENTITY_RECORD_VIEW*)slot)->side == *(int*) (rec + 0xb4)) {
+			fcn_004c4510(slot, *(int*)&((ENTITY_RECORD_VIEW*)slot)->entity_id);
 			cm_AppendPacketFieldDelta(1, 1, 0xc, (char*) &flag);
 			fcn_004c5360();
 			cnt++;

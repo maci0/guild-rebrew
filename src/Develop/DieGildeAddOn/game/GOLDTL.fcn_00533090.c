@@ -36,7 +36,7 @@ extern char* g_7747b8;
 extern int g_7747c8;
 extern unsigned char** g_7749e4;
 extern char g_7749e8;
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_004116d0(void);
 void __cdecl fcn_005de62f(void);
 void __cdecl fcn_00412830(unsigned char mask);
@@ -104,7 +104,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 		ip = (int*) 0x77e8c4;
 		do {
 			if (*ip != -1 && (ip - 1) != 0
-			    && d2_CurrentElementId == *(int*) (g_1015ea0 + *ip * 0x2f4)) {
+			    && d2_CurrentElementId == *(int*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[*ip])) {
 				*(int*) (*(int*) (i * 0xc + 0x77e8c0) + 0x70) = -1;
 				g_7749e8 = 0;
 				fcn_004116d0();

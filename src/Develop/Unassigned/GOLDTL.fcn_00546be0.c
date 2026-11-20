@@ -26,7 +26,7 @@ struct house {
 	char pad9[0x213];
 };
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_00546be0(struct unit* u)
@@ -34,8 +34,8 @@ void __cdecl fcn_00546be0(struct unit* u)
 	if (u->house == 0xffff) {
 		return;
 	}
-	if (((struct house*)g_7f4ca0)[u->house].owner == u->owner && ((struct house*)g_7f4ca0)[u->house].type != 0xf) {
-		if (((struct house*)g_7f4ca0)[u->house].active > 0) {
+	if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[u->house].entity_id) == u->owner && (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[u->house].entity_type) != 0xf) {
+		if ((*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[u->house].health) > 0) {
 			return;
 		}
 		switch (u->kind) {

@@ -1,5 +1,5 @@
 
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 extern unsigned char* lpGebaeudePROT;
 extern int d2_CurrentWindowId;
@@ -20,7 +20,7 @@ int __cdecl d2_CreateGebaeudeTooltip(int i)
 	char* rec;
 	int dlg;
 
-	rec = ((char*)lpGebaeudePROT) + i * 589;
+	rec = ((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[i]);
 	dlg = fcn_00470820(0, 0, s_6a99f4);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(0, 1);

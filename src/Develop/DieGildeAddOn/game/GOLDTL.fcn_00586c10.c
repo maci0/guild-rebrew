@@ -1,8 +1,8 @@
 typedef unsigned char u8;
-extern int g_100f1dc, g_1015ea0, g_1040480, g_1040484, g_1040488, g_104048c, d2_ScreenHeight, g_1040494, g_14ce8e0,
+extern int g_100f1dc, g_1040480, g_1040484, g_1040488, g_104048c, d2_ScreenHeight, g_1040494, g_14ce8e0,
 	d2_CurrentElementId, g_6a3764, g_6a3768, g_6a376c, g_6a3770, g_6b7fac, d3_CurrentContextIndex, d3_ActiveCamera, g_6b89c0, g_77250c, g_774654, g_7e2700, main_LoopFlags;
 extern int g_9a9200[8]; extern char g_77dda0[]; extern char* g_6b8300; extern char g_100f8c0[];
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 void* __cdecl memset(void*, int, unsigned int);
 int __cdecl fcn_004efd30(int);
 int __cdecl fcn_004f08d0(char*);
@@ -118,14 +118,14 @@ void __cdecl fcn_00586c10(char* obj)
     while (!(*(u8*) sp & 4))
         fcn_005373e0(0, flags | 0x100);
 
-    j = g_1015ea0;
+    j = (int)g_1015ea0;
     count = 0;
     for (tbl = 0x10382e0; tbl < 0x1040620; tbl += 0x2bc) {
         if (*(int*) (tbl - 0x10) == 0)
             continue;
         if (*(int*) tbl == 0)
             continue;
-        for (i = 0, id = 0; i < 0xbd000; i += 0x2f4, id++) {
+        for (i = 0, id = 0; i < 0xbd000; i += sizeof(D2_CONTROL_TL), id++) {
             if (*(int*) (j + i + 0x20) == 0)
                 continue;
             if (*(int*) (j + i + 0x50) != tbl - 0x1a0)
@@ -135,7 +135,7 @@ void __cdecl fcn_00586c10(char* obj)
             *(int*) (j + i + 0x48) = 1;
             idx[count] = (short) id;
             count++;
-            j = g_1015ea0;
+            j = (int)g_1015ea0;
         }
     }
 
@@ -272,7 +272,7 @@ void __cdecl fcn_00586c10(char* obj)
     d3_SetSubtreeVisible(*(int*) (obj + 0x61), 1);
     he_SetGfxInfoEnabledByKey(*(int*) (obj + 0x61), 1);
     for (i = 0; i < count; i++)
-        *(int*) (g_1015ea0 + idx[i] * 0x2f4 + 0x48) = 0;
+        ((D2_CONTROL_TL*)g_1015ea0)[idx[i]].value_048 = 0;
     fcn_00438da0((float) (g_6a376c - g_6a3764),
                  (float) (g_6a3770 - g_6a3768),
                  (float) g_6a3764, (float) g_6a3768,

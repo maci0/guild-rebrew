@@ -15,10 +15,10 @@
  * tabC the records whose +2 byte is below 0xa. The last three passes print
  * the labels and the visibility bit comes from the a1 flag bits.
  */
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include <string.h>
-
-extern int* g_772500;			/* 0x00772500 */
+#include "Develop/Units/d2.v1/d2_gui.h"
+extern char* g_772500;			/* 0x00772500 */
 extern int d2_CurrentWindowId;			/* 0x00772514 */
 #include "client_data.h"
 extern int g_100f1dc;			/* 0x0100f1dc */
@@ -202,12 +202,12 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				if (tabA[0].id != -1) {
 					id = tabA[0].id & 0xffff;
 					fcn_0046f740(idx, 0xc,
-					    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
+					    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]) + 0x18c),
 					    d2_CurrentWindowId);
 					
-					*(int*) (g_1015ea0 + tabA[0].text * 756 + 0x1d0) = 3;
-					*(int*) (g_1015ea0 + tabA[0].text * 756 + 0x2f0) =
-					    (int) (g_7f4ca0 + id * 0x21c);
+					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabA[0].text]) + 0x1d0) = 3;
+					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabA[0].text]) + 0x2f0) =
+					    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
 				} else {
 					fcn_0046f740(idx, 0xc, 0x4fb, d2_CurrentWindowId);
 					tabA[0].text = -1;
@@ -223,12 +223,12 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				} else {
 					id = tabA[1].id & 0xffff;
 					fcn_0046f740(idx, 0xc,
-					    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
+					    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]) + 0x18c),
 					    d2_CurrentWindowId);
 					
-					*(int*) (g_1015ea0 + tabA[1].text * 756 + 0x1d0) = 3;
-					*(int*) (g_1015ea0 + tabA[1].text * 756 + 0x2f0) =
-					    (int) (g_7f4ca0 + id * 0x21c);
+					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabA[1].text]) + 0x1d0) = 3;
+					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabA[1].text]) + 0x2f0) =
+					    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
 				}
 
 				if (flag) {
@@ -243,11 +243,11 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 					} else {
 						id = tabB[2].id & 0xffff;
 						fcn_0046f740(idx, 0x98,
-						    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
+						    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]) + 0x18c),
 						    d2_CurrentWindowId);
-						*(int*) (g_1015ea0 + tabB[2].text * 756 + 0x1d0) = 3;
-						*(int*) (g_1015ea0 + tabB[2].text * 756 + 0x2f0) =
-						    (int) (g_7f4ca0 + id * 0x21c);
+						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabB[2].text]) + 0x1d0) = 3;
+						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabB[2].text]) + 0x2f0) =
+						    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
 					}
 					tabB[3].text = fcn_0046f740(rows2 + 0x10,
 					    0x96, 0x5db, d2_CurrentWindowId);
@@ -257,11 +257,11 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 					if ((unsigned short) tabB[3].id != 0xffff) {
 						id = tabB[3].id & 0xffff;
 						fcn_0046f740(idx, 0x98,
-						    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
+						    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]) + 0x18c),
 						    d2_CurrentWindowId);
-						*(int*) (g_1015ea0 + tabB[3].text * 756 + 0x1d0) = 3;
-						*(int*) (g_1015ea0 + tabB[3].text * 756 + 0x2f0) =
-						    (int) (g_7f4ca0 + id * 0x21c);
+						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabB[3].text]) + 0x1d0) = 3;
+						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabB[3].text]) + 0x2f0) =
+						    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
 					} else {
 						fcn_0046f740(idx, 0x98, 0x4fb, d2_CurrentWindowId);
 						tabB[3].text = -1;
@@ -276,11 +276,11 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 					if (tabB[2].id != -1) {
 						id = tabB[2].id & 0xffff;
 						fcn_0046f740(idx, 0x98,
-						    *(int*) (g_7f4ca0 + id * 0x21c + 0x18c),
+						    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]) + 0x18c),
 						    d2_CurrentWindowId);
-						*(int*) (g_1015ea0 + tabB[2].text * 756 + 0x1d0) = 3;
-						*(int*) (g_1015ea0 + tabB[2].text * 756 + 0x2f0) =
-						    (int) (g_7f4ca0 + id * 0x21c);
+						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabB[2].text]) + 0x1d0) = 3;
+						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabB[2].text]) + 0x2f0) =
+						    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
 					} else {
 						fcn_0046f740(idx, 0x98, 0x4fb, d2_CurrentWindowId);
 						tabB[2].text = -1;
@@ -310,13 +310,13 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 							    (short) (posX[k] + n3);
 							id = *(short*) p & 0xffff;
 							fcn_0046f740(posX[k] + 2, 0x98,
-							    *(int*) (g_7f4ca0 +
-							    id * 0x21c + 0x18c), d2_CurrentWindowId);
-							*(int*) (g_1015ea0 +
-							    *(int*) (p + 4) * 756 + 0x1d0) = 3;
-							*(int*) (g_1015ea0 +
-							    *(int*) (p + 4) * 756 + 0x2f0) =
-							    (int) (g_7f4ca0 + id * 0x21c);
+							    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+id]) + 0x18c), d2_CurrentWindowId);
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+*(int*) (p + 4)]) + 0x1d0) = 3;
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+*(int*) (p + 4)]) + 0x2f0) =
+							    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
 							p += 0x10;
 						}
 						posX[0] = nb - w - 0x10;
@@ -334,13 +334,13 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 							    (short) (*px + n3);
 							id = *(short*) p & 0xffff;
 							fcn_0046f740(*px + 2, 0x98,
-							    *(int*) (g_7f4ca0 +
-							    id * 0x21c + 0x18c), d2_CurrentWindowId);
-							*(int*) (g_1015ea0 +
-							    *(int*) (p + 4) * 756 + 0x1d0) = 3;
-							*(int*) (g_1015ea0 +
-							    *(int*) (p + 4) * 756 + 0x2f0) =
-							    (int) (g_7f4ca0 + id * 0x21c);
+							    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+id]) + 0x18c), d2_CurrentWindowId);
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+*(int*) (p + 4)]) + 0x1d0) = 3;
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+*(int*) (p + 4)]) + 0x2f0) =
+							    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
 							px++;
 							p += 0x10;
 						}
@@ -411,13 +411,13 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 							    (short) (posC[k] + n3);
 							id = *(short*) p & 0xffff;
 							fcn_0046f740(posC[k] + 2, 0x124,
-							    *(int*) (g_7f4ca0 +
-							    id * 0x21c + 0x18c), d2_CurrentWindowId);
-							*(int*) (g_1015ea0 +
-							    *(int*) (p + 4) * 756 + 0x1d0) = 3;
-							*(int*) (g_1015ea0 +
-							    *(int*) (p + 4) * 756 + 0x2f0) =
-							    (int) (g_7f4ca0 + id * 0x21c);
+							    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+id]) + 0x18c), d2_CurrentWindowId);
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+*(int*) (p + 4)]) + 0x1d0) = 3;
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+*(int*) (p + 4)]) + 0x2f0) =
+							    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
 							p += 0x10;
 						}
 					} else {
@@ -437,13 +437,13 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 							    (short) (posB[k] + n3);
 							id = *(short*) p & 0xffff;
 							fcn_0046f740(posB[k] + 2, 0x124,
-							    *(int*) (g_7f4ca0 +
-							    id * 0x21c + 0x18c), d2_CurrentWindowId);
-							*(int*) (g_1015ea0 +
-							    *(int*) (p + 4) * 756 + 0x1d0) = 3;
-							*(int*) (g_1015ea0 +
-							    *(int*) (p + 4) * 756 + 0x2f0) =
-							    (int) (g_7f4ca0 + id * 0x21c);
+							    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+id]) + 0x18c), d2_CurrentWindowId);
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+*(int*) (p + 4)]) + 0x1d0) = 3;
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+*(int*) (p + 4)]) + 0x2f0) =
+							    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
 							p += 0x10;
 						}
 					}
@@ -516,7 +516,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 						if (*(short*) p == -1) {
 							break;
 						}
-						*(int*) (g_1015ea0 + *(int*) (p + 4) * 756 + 0x5c) =
+						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (p + 4)]) + 0x5c) =
 						    ((a1 & 1) && !(a1 & 0xc)) ||
 						    (a1 & 0x10) ? 1 : 0;
 						io_FormatTextBuffer(buf + 0x100, 0x6ac96c,
@@ -538,7 +538,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 						if (*(short*) p == -1) {
 							break;
 						}
-						*(int*) (g_1015ea0 + *(int*) (p + 4) * 756 + 0x5c) =
+						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (p + 4)]) + 0x5c) =
 						    (a1 & 0xc) ? 0 : 1;
 						io_FormatTextBuffer(buf, 0x6ac96c,
 						    *(unsigned short*) p);
@@ -559,11 +559,11 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 						if (*(short*) p == -1) {
 							break;
 						}
-						*(int*) (g_1015ea0 + *(int*) (p + 4) * 756 + 0x5c) =
+						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (p + 4)]) + 0x5c) =
 						    ((a1 & 1) && !(a1 & 0xc)) ||
 						    ((a1 & 2) && (a1 & 8) &&
-						    *(unsigned short*) (g_7f4ca0 +
-						    (*(short*) p & 0xffff) * 0x21c + 0xa) > 0xa)
+						    *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+(*(short*) p & 0xffff)]) + 0xa) > 0xa)
 						    ? 1 : 0;
 						io_FormatTextBuffer(buf + 0x200, 0x6ac96c,
 						    *(unsigned short*) p);
@@ -598,8 +598,8 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				if (d2_CurrentElementId == *(int*) q) {
 					hid = k;
 					rec = gm_LookupEntityRecordById(
-					    *(int*) (g_7f4ca0 +
-					    (tabB[k].id & 0xffff) * 0x21c + 4));
+					    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+(tabB[k].id & 0xffff)]) + 4));
 					break;
 				}
 				q += 0x10;
@@ -609,8 +609,8 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 				if (d2_CurrentElementId == *(int*) q) {
 					hid = k;
 					rec = gm_LookupEntityRecordById(
-					    *(int*) (g_7f4ca0 +
-					    (tabA[k].id & 0xffff) * 0x21c + 4));
+					    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+(tabA[k].id & 0xffff)]) + 4));
 					break;
 				}
 				q += 0x10;
@@ -619,8 +619,8 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 			for (k = 0; hid == -1 && k < 5; k++) {
 				if (d2_CurrentElementId == *(int*) q) {
 					rec = gm_LookupEntityRecordById(
-					    *(int*) (g_7f4ca0 +
-					    (tabC[k].id & 0xffff) * 0x21c + 4));
+					    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+(tabC[k].id & 0xffff)]) + 4));
 					break;
 				}
 				q += 0x10;

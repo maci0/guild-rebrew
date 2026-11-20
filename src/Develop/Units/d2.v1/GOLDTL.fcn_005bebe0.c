@@ -2,9 +2,9 @@
  * Draw the tooltip of record broadcast slot a2 (0..4) at the house of
  * g_774970.
  */
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include <string.h>
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "client_types.h"
 typedef pos14_7f4c00 Tbebe;
 
@@ -102,8 +102,8 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 	if (broadcastSlot >= 5) {
 		return;
 	}
-	miss = (fcn_004fa5b0(ids[broadcastSlot], (char*) g_7f4ca0 + g_774970 * 0x21c, (int) big) & 2) != 0 ? -1 : 0;
-	color = *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + broadcastSlot);
+	miss = (fcn_004fa5b0(ids[broadcastSlot], (char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), (int) big) & 2) != 0 ? -1 : 0;
+	color = *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x80 + broadcastSlot);
 	if (color < 0x2a) {
 		color = 1;
 	} else if (color < 0x54) {
@@ -128,18 +128,18 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 	io_AppendText(broadcastSlot + 0x16c3);
 	d2_SetForm(h, 2);
 	x = ((struct s_1015f4c*) g_1015f4c)[d2_CurrentWindowId].x;
-	f = (float) *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + broadcastSlot) * 0.023809524f;
+	f = (float) *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x80 + broadcastSlot) * 0.023809524f;
 	if (!(f < 5.0f)) {
 		f = 5.0f;
 	}
 	found = fcn_0046f740(x / 2 - 0x18, 4, (int) ((float) yoff[broadcastSlot] + f), d2_CurrentWindowId);
-	fcn_00534160(x / 2 - 0x23, 0x3c, *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + broadcastSlot), 0x4df);
+	fcn_00534160(x / 2 - 0x23, 0x3c, *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x80 + broadcastSlot), 0x4df);
 	d2_SetForm(h, 3);
 	if (slot != 0) {
 		io_AppendText(0x16b3, *(unsigned char*) (slot + 0xae) + 0x16b7, broadcastSlot + 0x16b7);
-	} else if (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x80 + broadcastSlot) >= 0xfc) {
+	} else if (*(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x80 + broadcastSlot) >= 0xfc) {
 		io_AppendText(0x16b2);
-	} else if (*(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x194) >= (int) color) {
+	} else if (*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x194) >= (int) color) {
 		if (miss == 0) {
 			switch (fcn_0051e070()) {
 			case 0:
@@ -154,14 +154,14 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 			switch (fcn_0051e070()) {
 			case 0:
 				io_AppendText(0x16b0,
-					     (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 9) != 0 ? 0x28 : 0) + 0x253 +
-						     *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x169),
+					     (*(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 9) != 0 ? 0x28 : 0) + 0x253 +
+						     *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x169),
 					     color, broadcastSlot + 0x16b7);
 				break;
 			case 1:
 				io_AppendText(0x16b0,
-					     (*(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 9) != 0 ? 0x28 : 0) + 0x253 +
-						     *(unsigned char*) (g_7f4ca0 + g_774970 * 0x21c + 0x169),
+					     (*(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 9) != 0 ? 0x28 : 0) + 0x253 +
+						     *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x169),
 					     broadcastSlot + 0x16b7, color);
 				break;
 			}
@@ -178,7 +178,7 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 			t = *(Tbebe*) (slot + 0x44);
 			fcn_00500bb0(&t, 5, 0, 0);
 			dur = (float) gm_GetElapsedMinutes(slot + 0x44, slot + 0x52);
-			*(float*) (g_1015ea0 + found * 0x2f4 + 500) =
+			*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[found].value_1f4)) =
 				(float) gm_GetElapsedMinutes(slot + 0x44, (void*) &gm_GameTime) / dur;
 		}
 		if (g_14ce8e0 != 0 && tp_d2_SelectedControl == 0) {
@@ -186,12 +186,12 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 		}
 		if (g_100f1dc == 2) {
 			if (flag) {
-				fcn_004c6ae0(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 4), -color);
+				fcn_004c6ae0(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 4), -color);
 				msg.b36 = 1;
 				msg.b4 = 0x60;
 				msg.b5a = (unsigned char) broadcastSlot;
-				msg.f8 = *(int*) (g_7f4ca0 + g_774970 * 0x21c + 4);
-				msg.fc = *(int*) (g_7f4ca0 + g_774970 * 0x21c + 4);
+				msg.f8 = *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 4);
+				msg.fc = *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 4);
 				fcn_004c5530(&msg);
 				fcn_0057e880(0x2c, 0, 0, broadcastSlot);
 				g_774654 = 1;

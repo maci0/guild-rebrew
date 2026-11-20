@@ -7,8 +7,8 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00471e30(int);
 void __cdecl fcn_004116d0(void);
 int __cdecl fcn_005373e0(int, int);
-
-extern void* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
+extern char* g_1015ea0;
 extern int d2_CurrentWindowId;
 extern int g_14ce8e0;
 extern int g_100f1dc;
@@ -68,17 +68,17 @@ int __cdecl fcn_004bea00(int ctx, RouteNode* list)
 			d2_CurrentWindowId);
 		entries[i] = entry;
 
-		*(int*) ((char*) g_1015ea0 + entry * 0x2f4 + 0x5c) = 1;
-		*(int*) ((char*) g_1015ea0 + entry * 0x2f4 + 0x1d0) = 3;
-		*(int*) ((char*) g_1015ea0 + entry * 0x2f4 + 0x1e4) = 0x525;
+		*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x5c) = 1;
+		*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x1d0) = 3;
+		*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x1e4) = 0x525;
 	}
 	values[i] = 0;
 	entry = fcn_0046f740((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527,
 		d2_CurrentWindowId);
 	entries[i] = entry;
 
-	*(int*) ((char*) g_1015ea0 + entry * 0x2f4 + 0x5c) = 1;
-	*(int*) ((char*) g_1015ea0 + entry * 0x2f4 + 0x1d0) = 3;
+	*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x5c) = 1;
+	*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x1d0) = 3;
 
 	while (fcn_005373e0(0x4bea00, 0x657c7) != 0) {
 

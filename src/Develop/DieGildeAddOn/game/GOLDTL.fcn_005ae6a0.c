@@ -2,7 +2,7 @@
 /* Kidnapping message handler: validates the request against the current
  * location slot, builds and posts the stealing-guild packet, and pumps the
  * message queue until the dialog reports no further action. */
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 typedef struct F8 {
 	int mask;
 	int b;
@@ -47,7 +47,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 
 	res = 0;
 	if (a0 != 0 &&
-	    fcn_00525f60((char*) ((unsigned long)&g_7f4ca0 + *(unsigned short*) &g_774970 * 0x21c), 3) != 0 &&
+	    fcn_00525f60((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970], 3) != 0 &&
 	    (*(int*) ((char*) a0 + 0x16c) == 0 ||
 	     *(unsigned short*) (*(int*) ((char*) a0 + 0x16c) + 0x27) != *(unsigned short*) a0)) {
 	if (*(unsigned char*) ((char*) a0 + 0x1b1) != 0) {
@@ -80,7 +80,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 					((int*) msg)[i] = 0;
 				*(unsigned char*) (msg + 4) = 0x3c;
 				*(unsigned char*) (msg + 0x36) = 1;
-				slot = *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c);
+				slot = ((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id;
 				*(int*) (msg + 8) = slot;
 				*(int*) (msg + 0x58) = *(int*) ((char*) a0 + 4);
 				*(int*) (msg + 0x5c) = *(int*) ((char*) p + 1);
@@ -88,7 +88,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 				for (i = 0; i < 8; i++)
 					*(int*) (msg + 0x38 + i * 4) = -1;
 				k = 0;
-				for (q = (char*) &g_7f4ca4; (int) q < (int) 0x85a0a4; q += 0x21c) {
+				for (q = (char*) &g_7f4ca4; (int) q < (int) 0x85a0a4; q += sizeof(ENTITY_RECORD)) {
 					if (*(unsigned char*) (q + 0x184) != 0) {
 						*(int*) (msg + 0x38 + k * 4) = *(int*) q;
 						k++;
@@ -96,8 +96,8 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 				}
 				if (k != 0) {
 					fcn_004c5530(msg);
-					fcn_004c6ae0(*(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c), -3);
-					fcn_004f4f60(0x1a, 1, *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c),
+					fcn_004c6ae0(((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id, -3);
+					fcn_004f4f60(0x1a, 1, ((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id,
 						*(int*) ((char*) a0 + 4), -1);
 					fcn_004c35f0();
 					sv_ClearObjectSelection();

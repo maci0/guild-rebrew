@@ -1,3 +1,4 @@
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern char* g_1015ea0;
@@ -5,7 +6,6 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 extern char s_6ac994[];
-
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -65,22 +65,22 @@ int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
 	for (i = 0; i < 9; i++) {
 		if (i != 1 || *(int*) (a0 + 0x18) == 0) {
 			e = btn[i];
-			*(int*) (g_1015ea0 + e * 0x2f4 + 0x5c) = 1;
-			*(int*) (g_1015ea0 + e * 0x2f4 + 0x1d0) = 3;
+			((D2_CONTROL_TL*)g_1015ea0)[e].value_05c = 1;
+			((D2_CONTROL_TL*)g_1015ea0)[e].flags_1d0 = 3;
 		}
 		e = btn[i];
-		*(int*) (g_1015ea0 + e * 0x2f4 + 0x84) = 0x55;
+		((D2_CONTROL_TL*)g_1015ea0)[e].font = 0x55;
 		fcn_005c9090(*(int*) (0x14a9de8 + order[i] * 4),
-			     *(int*) (g_1015ea0 + e * 0x2f4 + 0x10)
+			     ((D2_CONTROL_TL*)g_1015ea0)[e].x
 				 - *(int*) (g_77255c + 4) + 0x20,
-			     *(int*) (g_1015ea0 + e * 0x2f4 + 0x14)
+			     ((D2_CONTROL_TL*)g_1015ea0)[e].y
 				 - *(int*) (g_77255c + 8) - 0x19,
 			     200, 0x55);
 	}
 	result = 0;
 	d2_SetOverlayAnimation(0, 0);
 	g_100f1dc = -1;
-	scale = btn[8] * 0x2f4;
+	scale = btn[8] * (int)sizeof(D2_CONTROL_TL);
 	do {
 		result = 0;
 		if (!amt_HasOccupiedOfficeType7()) {

@@ -2,7 +2,7 @@ extern char g_7f4ca0[];
 extern int g_14b5280;
 extern int g_aed32c;
 extern float flt_665ecc;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
@@ -50,7 +50,7 @@ void __cdecl fcn_00569760(char* eventTrack)
 			*(int*) (eventTrack + 0x70) = -1;
 			return;
 		}
-		p = g_7f4ca0 + (*(unsigned short*) (rec + 0x27)) * 0x21c;
+		p = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)];
 		if (*(int*) (rec + 0x65) == -1) {
 			*(int*) (rec + 0x65) = *(int*) (e + 4);
 		}
@@ -103,8 +103,8 @@ void __cdecl fcn_00569760(char* eventTrack)
 		*(unsigned char*) (b.msg + 0x36) = 9;
 		*(int*) (b.msg + 0x58) = *(int*) (e + 4);
 		*(int*) (b.msg + 0x60) = (int) ((flt_665ecc < (float) n ? flt_665ecc : (float) n) * f);
-		*(int*) (b.msg + 0x5c) = *(int*) (g_7f4ca0
-		                                  + (*(unsigned short*) (eventTrack + 8)) * 0x21c + 4);
+		*(int*) (b.msg + 0x5c) = ((ENTITY_RECORD*) g_7f4ca0)[
+		                                  *(unsigned short*) (eventTrack + 8)].entity_id;
 		fcn_004c5530((int) b.msg);
 	} else {
 		e = gm_LookupEntityRecordById(*(int*) (eventTrack + 0xac));

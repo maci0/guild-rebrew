@@ -1,6 +1,6 @@
 #include "client_sound.h"
 #include "Develop/Units/Msx/msx.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include <string.h>
 
 // SIZE 0x24c
@@ -57,7 +57,7 @@ void __cdecl fcn_004c2100(void)
 		}
 	}
 	j = 0;
-	kind = lpGebaeudePROT[*e * 0x24d];
+	kind = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category;
 	cls = fcn_00500e20((int*) &gm_GameTime);
 	i = fcn_004c27f0();
 	if (i >= 0) {

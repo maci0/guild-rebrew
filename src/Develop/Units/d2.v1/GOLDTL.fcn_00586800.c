@@ -87,11 +87,11 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
 				c = fcn_0050b750(fcn_00471f80(line), g_773d75);
-				if (fcn_00526010(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], c, g_773d75) != 0) {
+				if (fcn_00526010(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), c, g_773d75) != 0) {
 					fcn_004eeb50(p, (float) c / n * f * 0.75f);
 					r = 1;
 					g_774654 = 1;
-					fcn_004c5150(*(int*) (p + 4), ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, g_773d75, c);
+					fcn_004c5150(*(int*) (p + 4), ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, g_773d75, c);
 				}
 			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;

@@ -10,7 +10,7 @@ typedef struct {
 } Cell99ef80;
 
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_7f4ca4[];
 extern char g_7f4ca2[];
 extern pos14_7f4c00 gm_GameTime;
@@ -101,7 +101,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 		*(int*) (meister + 0x1b4) |= 0x20;
 		hits = 0;
 		freehits = 0;
-		for (p = g_7f4ca0; (int) p < 0x85a0a0; p += 0x21c) {
+		for (p = g_7f4ca0; (int) p < 0x85a0a0; p += sizeof(ENTITY_RECORD)) {
 			if (*(unsigned char*) (p + 8) == 0) {
 				continue;
 			}
@@ -143,7 +143,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 			return;
 		}
 		bld = *(char**) (meister + 0x16c);
-		kind = *(unsigned char*) (g_7f4ca2 + *(unsigned short*) (bld + 0x27) * 0x21c);
+		kind = ((ENTITY_RECORD*)(g_7f4ca2 - 2))[*(unsigned short*)(bld + 0x27)].entity_state;
 		if (kind != 6 && kind != 7) {
 			if (gm_RandomFloat01() > 0.85) {
 				if (freehits >= 3 && *(int*) &gm_GameTime >= 7 - g_7747b4) {
@@ -217,8 +217,8 @@ attack:
 				if (cand == 0) {
 					best = w;
 				} else {
-					v = (float) gm_AccumulateTyped2(g_7f4ca0 + *(unsigned short*) (p + 0x27) * 0x21c) * w;
-					if ((float) gm_AccumulateTyped2(g_7f4ca0 + *(unsigned short*) (cand + 0x27) * 0x21c) * best < v) {
+					v = (float) gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (p + 0x27)]) * w;
+					if ((float) gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (cand + 0x27)]) * best < v) {
 						best = w;
 					} else {
 						continue;
@@ -232,7 +232,7 @@ attack:
 			msg[4] = 0x62;
 			bld = *(char**) (meister + 0x16c);
 			idx = *(unsigned short*) (bld + 0x27);
-			*(int*) (msg + 8) = *(int*) (g_7f4ca4 + idx * 0x21c);
+			*(int*) (msg + 8) = ((ENTITY_RECORD*)(g_7f4ca4 - 4))[idx].entity_id;
 			*(int*) (msg + 0xc) = *(int*) (bld + 1);
 			*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
 			*(int*) (msg + 0x2c) = gm_GameTime.b;
@@ -248,7 +248,7 @@ attack:
 				return;
 			}
 			*(int*) (msg + 0x6c) = *(int*) (query + 2);
-			for (p = g_7f4ca0 + 0x165; (int) p < 0x85a205; p += 0x21c) {
+			for (p = g_7f4ca0 + 0x165; (int) p < 0x85a205; p += sizeof(ENTITY_RECORD)) {
 				if (*(short*) (p - 0x165) != -1 && *(int*) (p + 7) == *(int*) (meister + 0x16c) && *(unsigned char*) p != 0 && *(int*) (p + 0x17) == 0 && *(int*) (p + 0x1f) != 0 &&
 				    *(int*) (*(int*) (p + 0x1f) + 0x2c) == *(int*) (*(int*) (p + 7) + 1)) {
 					*(int*) (msg + 0x58) = *(int*) (p - 0x161);
@@ -273,7 +273,7 @@ send48:
 		msg[4] = 0x48;
 		bld = *(char**) (meister + 0x16c);
 		idx = *(unsigned short*) (bld + 0x27);
-		*(int*) (msg + 8) = *(int*) (g_7f4ca4 + idx * 0x21c);
+		*(int*) (msg + 8) = ((ENTITY_RECORD*)(g_7f4ca4 - 4))[idx].entity_id;
 		*(int*) (msg + 0xc) = *(int*) (bld + 1);
 		*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
 		*(int*) (msg + 0x2c) = gm_GameTime.b;
@@ -303,7 +303,7 @@ send48:
 					found++;
 					scanned++;
 				}
-				p += 0x21c;
+				p += sizeof(ENTITY_RECORD);
 			} while (scanned < limit);
 		}
 		if (found < 8) {

@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 
 
@@ -120,7 +120,7 @@ void __cdecl fcn_005b3b60(void)
 				*(char*) (m + 0x30) = 2;
 				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
-				*(int*) (m + 0x38) = *(int*) ((char*) g_7f4ca0 + g_774970 * 0x21c + 0x658);
+				*(int*) (m + 0x38) = *(int*) ((char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x658);
 				cut_ExecuteCutscene(m);
 			} else if (k == item[8]) {
 				*(char*) (m + 8) = 9;

@@ -33,7 +33,7 @@ int __cdecl fcn_0048ddd0(char* e, char* thresholdOut, char* resultOut)
 		if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + 32.0f, &idx) == 0) {
 			return 0;
 		}
-		t = &((ENTITY_RECORD*) g_7f4ca0)[(unsigned short) idx];
+		t = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(unsigned short) idx]);
 	}
 	n = fcn_004e99c0(t->unk_165[1]) / 3 + 2;
 	thr[0] = (int) (float) n;

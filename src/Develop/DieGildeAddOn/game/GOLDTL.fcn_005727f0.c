@@ -24,7 +24,7 @@ struct house {
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* lpObjektePROT;
 extern unsigned char g_773d75;
 
@@ -66,11 +66,11 @@ void __cdecl fcn_005727f0(char* e)
 		    * (*(int*) (e + 0x18) + *(int*) (e + 0x14));
 		fcn_004c51f0(*(int*) (e + 0xb4), -1, *(unsigned short*) (e + 0xac), amt, g_773d75, 0);
 		io_FormatTextBuffer(buf, 0x1bb8, *(unsigned short*) (e + 0xac) * 2 + 0x9a8, r, amt);
-		he_MessageBoxQuickjump(((struct house*)g_7f4ca0)[*(unsigned short*) (r + 0x27)].handle, -1, buf, 0, 0x5f1, *(int*) (r + 1), -1, 0,
+		he_MessageBoxQuickjump((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (r + 0x27)].entity_id), -1, buf, 0, 0x5f1, *(int*) (r + 1), -1, 0,
 		    "_NACHRICHTEN_HS_08");
 		for (i = 0; i < 768; i++) {
-			if (((struct house*)g_7f4ca0)[i].who == e) {
-				fcn_00529160(r, 0, ((struct house*)g_7f4ca0)[i].id, 0);
+			if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_17c) == e) {
+				fcn_00529160(r, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), 0);
 			}
 		}
 		he_FreeAction(e);
@@ -78,8 +78,8 @@ void __cdecl fcn_005727f0(char* e)
 	case -2:
 	case -1:
 		for (i = 0; i < 768; i++) {
-			if (((struct house*)g_7f4ca0)[i].who == e) {
-				fcn_00529160(0, 0, ((struct house*)g_7f4ca0)[i].id, 0);
+			if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_17c) == e) {
+				fcn_00529160(0, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), 0);
 			}
 		}
 		break;

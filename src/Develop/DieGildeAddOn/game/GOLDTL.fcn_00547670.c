@@ -34,17 +34,17 @@ void __cdecl fcn_00547670(void)
 		limit = (g_7747b4 * 5 + 20) * 1600;
 		n = 0;
 		for (i = 0; i < 768; i++) {
-			if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 5) {
-				v = gm_AccumulateTyped2(&((ENTITY_RECORD*)g_7f4ca0)[i]);
+			if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 5) {
+				v = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]));
 				if (v < limit) {
-					h = fcn_004c5150(((ENTITY_RECORD*)g_7f4ca0)[i].entity_id, -1, (*(char*)&g_773d75), limit - v);
+					h = fcn_004c5150(((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -1, (*(char*)&g_773d75), limit - v);
 					n++;
 				}
-			} else if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 4
-				|| (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 2 && (*(int*)&gm_GameTime) % 4 == (((ENTITY_RECORD*)g_7f4ca0)[i].entity_id & 3))) {
-				v = gm_AccumulateTyped2(&((ENTITY_RECORD*)g_7f4ca0)[i]);
+			} else if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 4
+				|| (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 2 && (*(int*)&gm_GameTime) % 4 == (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id & 3))) {
+				v = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]));
 				if (v < limit) {
-					h = fcn_004c5150(((ENTITY_RECORD*)g_7f4ca0)[i].entity_id, -1, (*(char*)&g_773d75), limit - v);
+					h = fcn_004c5150(((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -1, (*(char*)&g_773d75), limit - v);
 					n++;
 				}
 			}

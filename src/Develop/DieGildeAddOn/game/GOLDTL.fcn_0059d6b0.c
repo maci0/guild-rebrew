@@ -3,8 +3,8 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 extern int g_14abaac;
-int __cdecl fcn_0055c050(char* obj);
-void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+int __cdecl fcn_0055c050(char* obj); void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 void* __cdecl gm_NextEntityQueryMatch(void);
 void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 void* __cdecl he_fn_Handlung(void);
@@ -21,7 +21,7 @@ void __cdecl fcn_004c35f0(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl fcn_005373e0(int a, int b);
 void __cdecl fcn_00471e30(int dlg);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0059d6b0 */
 void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 {
@@ -51,7 +51,7 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 		return;
 	}
 	count = 0;
-	profile = lpGebaeudePROT + *(unsigned char*) obj * 0x24d;
+	profile = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)obj];
 	entity = (int) g_7746c4;
 	if (g_7746c4 != 0 || (entity = (int) g_7746c8) != 0) {
 		other = (int) fcn_00502cd0(*(int*) (entity + 0x5d), 1, 0, 0xca);
@@ -81,7 +81,7 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 		fcn_00526120(msg2, 0);
 		return;
 	}
-	choice = g_7f4ca0 + *(unsigned short*) (obj + 0x27) * 0x21c;
+	choice = (char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(obj + 0x27)];
 	option = fcn_00470820(0, 0, "misc\\Bestechung");
 	d2_CenterDialogWindows(option);
 	d2_SetOverlayAnimation(0, 0);

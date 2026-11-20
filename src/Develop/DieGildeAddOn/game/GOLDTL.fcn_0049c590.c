@@ -1,6 +1,6 @@
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* Command handler for the entity selection dialog: reacts to the show (0x12)
  * and hide (0x0f) command of the dialog record and drives the GUI helpers. */
-
 #include <math.h>
 
 #pragma intrinsic(log10)
@@ -54,12 +54,12 @@ int __cdecl ai_RunAblassKaufen(int entityArg, char* purchaseReq, char* commandAr
 		fcn_004c5360();
 		fcn_004c51a0(-1, *(int*) (entityArg + 4), g_773d75,
 		    *(int*) (purchaseReq + 0x10));
-		fcn_004c51a0(*(int*) (g_7f4ca0
-			+ *(unsigned short*) (rec + 0x27) * 0x21c + 4),
+		fcn_004c51a0(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]
+			+ 4),
 		    -1, g_773d75, computedAmount);
 		fcn_004f5e20(*(int*) (entityArg + 4), (int) *(float*) (purchaseReq + 0x14));
 		fcn_005b2150(entityArg,
-		    g_7f4ca0 + *(unsigned short*) (rec + 0x27) * 0x21c,
+		    (char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)],
 		    rec, computedAmount, *(int*) (purchaseReq + 0x10));
 		g_1009b8c = g_1009b6c * *(float*) (purchaseReq + 0x14);
 		g_1009b94 = g_1009b74 * *(float*) (purchaseReq + 0x14);
@@ -69,10 +69,10 @@ int __cdecl ai_RunAblassKaufen(int entityArg, char* purchaseReq, char* commandAr
 	if (cmd == 0x0f && itemMatch != 0) {
 		fcn_004f5e20(*(int*) (entityArg + 4), (int) *(float*) (purchaseReq + 0x14));
 		fcn_005100f0(*(int*) (entityArg + 4), -*(int*) (purchaseReq + 0x10));
-		fcn_005100f0(*(int*) (g_7f4ca0
-			+ *(unsigned short*) (rec + 0x27) * 0x21c + 4), 1);
+		fcn_005100f0(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]
+			+ 4), 1);
 		fcn_005b21d0(entityArg,
-		    g_7f4ca0 + *(unsigned short*) (rec + 0x27) * 0x21c, rec);
+		    (char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)], rec);
 		return 0x26;
 	}
 	return 0;

@@ -1,5 +1,5 @@
 #include <math.h>
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* SIZE 0xc */
 typedef struct {
 	float x;
@@ -218,7 +218,7 @@ main:
 	    || CompareVector3WithinTolerance((float*) &cam->rot, (float*) &rot, 0.001f) == 0) {
 		fcn_00438b40((void*) d3_ActiveCamera, &pos);
 		d3_SetObjectRotation((void*) d3_ActiveCamera, &rot);
-		ent = fcn_00509570(&((Entity*) g_7f4ca0)[g_774970]);
+		ent = fcn_00509570(((Entity *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]));
 		if (ent != 0) {
 			*(float*) (ent + 0x88) = g_774694;
 			*(int*) (ent + 0x8c) = *(int*) &((View*) d3_ActiveCamera)->pos.x;
@@ -249,7 +249,7 @@ afterFirst:
 		d3_CameraHeightFraction = (float) 0.0;
 	}
 	d3_SetCameraHeightFraction(d3_CameraHeightFraction);
-	ent = fcn_00509570(&((Entity*) g_7f4ca0)[g_774970]);
+	ent = fcn_00509570(((Entity *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]));
 	if (ent != 0) {
 		*(float*) (ent + 0x88) = g_774694;
 		*(int*) (ent + 0x8c) = *(int*) &((View*) d3_ActiveCamera)->pos.x;
@@ -316,7 +316,7 @@ predict:
 			}
 		}
 		fcn_00438b40((void*) d3_ActiveCamera, &v);
-		ent = fcn_00509570(&((Entity*) g_7f4ca0)[g_774970]);
+		ent = fcn_00509570(((Entity *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]));
 		if (ent != 0) {
 			*(int*) (ent + 0x8c) = *(int*) &((View*) d3_ActiveCamera)->pos.x;
 			*(int*) (ent + 0x90) = *(int*) &((View*) d3_ActiveCamera)->pos.y;

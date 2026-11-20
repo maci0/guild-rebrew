@@ -4,10 +4,10 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern unsigned char* lpGebaeudePROT;
 extern cell10_fb5760 g_fb5760[0x8000];
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 struct unit;
 void* __cdecl gm_SearchTable67(int id);
 int __cdecl gm_GetMsgField(char* objekt, char* eintrag);
@@ -91,12 +91,12 @@ void __cdecl he_RunProduktion(char* e)
                 *(int*) (e + 0x70) = -1;
                 return;
             }
-            typ = lpGebaeudePROT + *(unsigned char*) gebaeude * 0x24d;
+            typ = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)gebaeude];
             if (fcn_004c4450(*(int*) (e + 0xc4)) == 2) {
                 haushalt = 0;
                 bild[0] = 0;
                 haus = fcn_0050dc90((int) gebaeude);
-                for (arbeiter = g_7f4ca0; (int) arbeiter < (int) (g_7f4ca0 + 768 * 0x21c); arbeiter += 0x21c) {
+                for (arbeiter = g_7f4ca0; (int) arbeiter < (int) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[768]); arbeiter += sizeof(ENTITY_RECORD)) {
                     if (*(char**) (arbeiter + 0x17c) == e) {
                         haushalt = arbeiter;
                     }
@@ -131,19 +131,19 @@ void __cdecl he_RunProduktion(char* e)
                     else if (*typ == 30) strcpy(bild, "_NACHRICHTEN_DOMIZIL_02");
                     else if (*typ == 32 || *typ == 31 || *typ == 29) strcpy(bild, "_NACHRICHTEN_ROHSTOFFMANGEL_HS_20");
                 }
-                if (*(unsigned char*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 2) == 6 ||
-                    *(unsigned char*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 2) == 7) {
+                if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 2) == 6 ||
+                    *(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 2) == 7) {
                     nachricht_typ = 0x5f1;
                     haus = fcn_0050dc90((int) gebaeude);
                     if (haus != 0 && (haus[0x1b4] & 1)) {
                         nachricht_typ = 0x60d;
                     }
                     if (bild[0]) {
-                        he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
+                        he_MessageBoxQuickjump(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 4),
                             *(int*) (e + 4), text, 0, nachricht_typ,
                             *(int*) (gebaeude + 1), *(int*) (haushalt + 2), 0, bild);
                     } else {
-                        he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
+                        he_MessageBoxQuickjump(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 4),
                             *(int*) (e + 4), text, 0, nachricht_typ,
                             *(int*) (gebaeude + 1), *(int*) (haushalt + 2), 0, 0);
                     }
@@ -166,11 +166,11 @@ warten:
         if (*(int*) (gebaeude + 0x95) == -1) {
             fcn_004c6300(*(int*) (gebaeude + 1));
         }
-        typ = lpGebaeudePROT + *(unsigned char*) gebaeude * 0x24d;
+        typ = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)gebaeude];
         leistung = fcn_0050c710((unsigned char*) gebaeude, 1, 1) * 0.01 + 1.0;
         haus = fcn_0050dc90((int) gebaeude);
         if (haus == 0) {
-            haus = g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c;
+            haus = (char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)];
         }
         leistung = leistung + ((haus[2] == 6 || haus[2] == 7)
             ? (float) (*(unsigned char*) (haus + 0x81) * (1.0 / 1008.0)) : 0.0f);
@@ -184,7 +184,7 @@ warten:
             for (i = 8; i != 0; --i, ++arbeiter_id) {
                 if (*arbeiter_id != -1) {
                     if (*(int*) (gebaeude + 0x41) != 2) {
-                        fcn_004c54c0(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
+                        fcn_004c54c0(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 4),
                             *arbeiter_id, 2 - *(int*) (gebaeude + 0x41), 0);
                     }
                     arbeiter = gm_LookupEntityRecordById(*arbeiter_id);
@@ -199,7 +199,7 @@ warten:
                         if (arbeiter[0x1cc] & 4) {
                             arbeitsleistung = fcn_004eceb0(arbeiter, *(unsigned short*) (e + 0xac)) * arbeitsleistung;
                         }
-                        if (fcn_005c6270(g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c, 0x2ba)) {
+                        if (fcn_005c6270((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)], 0x2ba)) {
                             summe += arbeitsleistung * 1.25f;
                         } else {
                             summe += arbeitsleistung;
@@ -210,7 +210,7 @@ warten:
             }
             if (anzahl != 0) {
                 *(float*) (e + 0xd4) = summe / anzahl;
-                if (fcn_005743b0(g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c)) {
+                if (fcn_005743b0((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)])) {
                     *(float*) (e + 0xd4) *= 0.9f;
                 }
             }
@@ -305,19 +305,19 @@ lager_done:
 mangel:
         haushalt = fcn_005049a0(gebaeude);
         if (!*(int*) (e + 0xc8) &&
-            (*(unsigned char*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 2) == 6 ||
-             *(unsigned char*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 2) == 7)) {
+            (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 2) == 6 ||
+             *(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 2) == 7)) {
             nachricht_typ = 0x5f1;
             haus = fcn_0050dc90((int) gebaeude);
             if (haus != 0 && (haus[0x1b4] & 1)) {
                 nachricht_typ = 0x60d;
             }
             if (haushalt != 0) {
-                he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
+                he_MessageBoxQuickjump(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 4),
                     *(int*) (e + 4), text, 0, nachricht_typ,
                     *(int*) (gebaeude + 1), *(int*) (haushalt + 2), 0, bild);
             } else {
-                he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (gebaeude + 0x27) * 0x21c + 4),
+                he_MessageBoxQuickjump(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 4),
                     *(int*) (e + 4), text, 0, nachricht_typ,
                     *(int*) (gebaeude + 1), -1, 0, bild);
             }
@@ -343,7 +343,7 @@ mangel:
             *(int*) (e + 0x70) = -1;
             return;
         }
-        for (arbeiter = g_7f4ca0; (int) arbeiter < (int) (g_7f4ca0 + 768 * 0x21c); arbeiter += 0x21c) {
+        for (arbeiter = g_7f4ca0; (int) arbeiter < (int) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[768]); arbeiter += sizeof(ENTITY_RECORD)) {
             if (*(char**) (arbeiter + 0x17c) == e) {
                 fcn_00529160(gebaeude, 0, *(unsigned short*) arbeiter, 0);
             }
@@ -359,7 +359,7 @@ mangel:
         if (gebaeude != 0) {
             fcn_004c6300(*(int*) (gebaeude + 1));
         }
-        for (arbeiter = g_7f4ca0; (int) arbeiter < (int) (g_7f4ca0 + 768 * 0x21c); arbeiter += 0x21c) {
+        for (arbeiter = g_7f4ca0; (int) arbeiter < (int) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[768]); arbeiter += sizeof(ENTITY_RECORD)) {
             if (*(char**) (arbeiter + 0x17c) == e) {
                 fcn_00529160(0, 0, *(unsigned short*) arbeiter, 0);
             }

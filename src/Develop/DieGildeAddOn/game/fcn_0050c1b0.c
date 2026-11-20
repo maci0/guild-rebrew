@@ -1,7 +1,7 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #pragma intrinsic(memset)
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* SIZE 0x54 */
 typedef struct {
 	char pad0[0xc];
@@ -45,11 +45,11 @@ int __cdecl fcn_0050c1b0(unsigned char* e, int id, char* out)
 	total = 0;
 	var = 0;
 	memset(out, 0, 0x54);
-	row = (unsigned char*) lpGebaeudePROT + (unsigned int) *e * 0x24d;
+	row = (unsigned char*) ((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned int) *e]);
 	if (id != *(unsigned short*) (e + 0x27)) {
 		goto tail;
 	}
-	slot = 0x7f4ca0 + id * 0x21c;
+	slot = (int)&((ENTITY_RECORD*)0x7f4ca0)[id];
 	if (*row == 0x1e) {
 		if (fcn_004ec7d0(e) != 0) {
 			v = fcn_004ee160((char*) e);

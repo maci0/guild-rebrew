@@ -3,7 +3,7 @@
 #include "Develop/Units/d2.v1/d2_window_view.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char g_7f4ca0[];
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
 extern int g_14ce8e0;
@@ -109,7 +109,7 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 		} else {
 			v = fcn_00471f80(row2);
 			f = (float) v * 0.33f + 1.0f;
-			w1 = gm_WalkEntityChain(*(unsigned short*) (g_7f4ca0 + g_774970 * 0x21c));
+			w1 = gm_WalkEntityChain(*(unsigned short*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])));
 			f2 = (float) w1 * 0.005f;
 			w2 = gm_WalkEntityChain(*(unsigned short*) rec);
 			n = (int) ((float) w2 * 0.005f + f2);
@@ -119,13 +119,13 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 			io_AppendText(0x42b8, n, *(unsigned short*) rec);
 			if (g_100f1dc != -1) {
 				if (d2_CurrentElementId == sel[0]
-					&& fcn_00526010(g_7f4ca0 + g_774970 * 0x21c, n, g_773d75) != 0) {
+					&& fcn_00526010(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), n, g_773d75) != 0) {
 					pkt[4] = 0x18;
-					*(int*) (pkt + 8) = *(int*) (g_7f4ca0 + g_774970 * 0x21c + 4);
+					*(int*) (pkt + 8) = *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
 					*(int*) (pkt + 0xc) = -1;
 					pkt[0x36] = 2;
 					*(int*) (pkt + 0x70) = *(int*) (rec + 4);
-					ea = *(int*) (g_7f4ca0 + g_774970 * 0x21c + 0x170);
+					ea = *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].ptr_170;
 					*(int*) (pkt + 0x58) = ea != 0 ? *(int*) (ea + 1) : -1;
 					*(int*) (pkt + 0x90) = n;
 					fcn_004c4eb0("spionage");

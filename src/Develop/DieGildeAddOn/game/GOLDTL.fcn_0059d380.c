@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 
 /* SIZE 0xf8 */
@@ -77,7 +77,7 @@ int __cdecl fcn_0059d380(int a0, char* object)
 		event = he_fn_Handlung();
 	}
 	for (i = 0; i < 0x300; i++) {
-		if (*(char*) (g_7f4ca0 + i * 0x21c + 0x188) != 0) {
+		if ((char)((ENTITY_RECORD*)g_7f4ca0)[i].unk_17c[12] != 0) {
 			break;
 		}
 	}
@@ -108,8 +108,8 @@ int __cdecl fcn_0059d380(int a0, char* object)
 		if (d2_CurrentElementId == item1) {
 			fcn_004c35f0();
 			message.b4 = 0x62;
-			slot = g_774970 * 0x21c;
-			message.f8 = *(int*) (g_7f4ca0 + slot + 4);
+			slot = g_774970;
+			message.f8 = ((ENTITY_RECORD*)g_7f4ca0)[slot].entity_id;
 			if (g_7746c4 != 0) {
 				message.fc = *(int*) (g_7746c4 + 1);
 			} else {

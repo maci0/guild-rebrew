@@ -1,8 +1,9 @@
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include <stdio.h>
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "client_types.h"
-
 extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
@@ -13,7 +14,6 @@ extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 extern void* g_6b7fdc;
 extern int d3_CurrentContextIndex;
-
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_004bcc50(char*, int);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -64,7 +64,7 @@ void __cdecl he_UpdateErnten(char* ev)
 						}
 						if (d3_CurrentContextIndex == fcn_005155e0((unsigned char*) v4)) {
 							void* found;
-							char* ent = (char*) lpGebaeudePROT + (unsigned char) *v4 * 0x24d;
+							char* ent = (char *)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)*v4];
 
 							sprintf(erm, "Ernten_start_%s", plantInfo + 2);
 							sprintf(path, "%slocations/%s/%s_%s.esc", "x:\\engine\\gfx\\scripts\\",
@@ -107,7 +107,7 @@ void __cdecl he_UpdateErnten(char* ev)
 						}
 						if (d3_CurrentContextIndex == fcn_005155e0((unsigned char*) v4)) {
 							void* found;
-							char* ent = (char*) lpGebaeudePROT + (unsigned char) *v4 * 0x24d;
+							char* ent = (char *)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)*v4];
 
 							sprintf(erm, "Ernten_end_%s", plantInfo + 2);
 							sprintf(path, "%slocations/%s/%s_%s.esc", "x:\\engine\\gfx\\scripts\\",
@@ -160,7 +160,7 @@ void __cdecl he_UpdateErnten(char* ev)
 
 											memset(pkt, 0, 0xf8);
 											pkt[4] = 0x28;
-											*(int*) (pkt + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (ev + 8) * 0x21c);
+											*(int*) (pkt + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (ev + 8) * (int)sizeof(ENTITY_RECORD));
 											id = *(int*) (v4 + 1);
 											*(int*) (pkt + 0x0c) = id;
 											*(int*) (pkt + 0x10) = 1;

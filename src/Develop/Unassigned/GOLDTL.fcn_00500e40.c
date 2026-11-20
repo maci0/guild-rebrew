@@ -1,5 +1,6 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #pragma pack(push, 1)
 typedef struct Rec500e {
 	char kind;
@@ -60,7 +61,7 @@ void __cdecl fcn_00500e40(void)
 	((int*) 0x8f9480)[9] = 0x14;
 	prev = 0x58;
 	do {
-		type = bld[0];
+		type = ((BUILDING_PROTOTYPE*)bld)->category;
 		if (type != prev) {
 			run = 0;
 			count = 0;
@@ -69,7 +70,7 @@ void __cdecl fcn_00500e40(void)
 				j = i;
 				r = bld;
 				do {
-					if (r[0] != type) {
+					if (((BUILDING_PROTOTYPE*)r)->category != type) {
 						break;
 					}
 					count++;
@@ -82,19 +83,19 @@ void __cdecl fcn_00500e40(void)
 			run++;
 		}
 		k = 0;
-		if (bld[0x22] > 0) {
+		if (((BUILDING_PROTOTYPE*)bld)->component_count > 0) {
 			r = bld + 0x23;
 			do {
 				if (*(unsigned short*) r != 0xffff) {
 					id = *(unsigned short*) r & 0x7fff;
 					tgt = ((int*) 0x8f9480)[((OBJECT_PROTOTYPE*) lpObjektePROT)[id].subtype];
-					t = (unsigned char*) lpGebaeudePROT + tgt * 0x24d;
-					kind = t[0];
+					t = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[tgt];
+					kind = ((BUILDING_PROTOTYPE*)t)->category;
 					cnt = 0;
 					j = tgt;
 					if (tgt < 0x58) {
 						do {
-							if (t[0] != kind) {
+							if (((BUILDING_PROTOTYPE*)t)->category != kind) {
 								break;
 							}
 							cnt++;
@@ -109,7 +110,7 @@ void __cdecl fcn_00500e40(void)
 				}
 				k++;
 				r += 2;
-			} while (k < (int) bld[0x22]);
+			} while (k < (int) ((BUILDING_PROTOTYPE*)bld)->component_count);
 		}
 		bld += 0x24d;
 		i++;

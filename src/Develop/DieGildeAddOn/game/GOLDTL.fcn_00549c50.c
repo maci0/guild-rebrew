@@ -1,5 +1,5 @@
-char *__cdecl gm_LookupEntityRecordById(int);
-void __cdecl io_FormatTextBuffer(char *, int, ...);
+char *__cdecl gm_LookupEntityRecordById(int); void __cdecl io_FormatTextBuffer(char *, int, ...);
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, char *);
 float __cdecl fcn_0050bb50(int, unsigned char);
 void __cdecl fcn_004c51a0(int, int, int, int);
@@ -25,7 +25,7 @@ void __cdecl fcn_00549c50(int cmd, int obj, int arr, int id, int extra)
 	float fy;
 
 	n = 0;
-	slot = g_7f4ca0 + *(unsigned short *) (obj + 0x27) * 0x21c;
+	slot = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short *) (obj + 0x27)]);
 	for (i = 0; i < 4; i++) {
 		char *e;
 

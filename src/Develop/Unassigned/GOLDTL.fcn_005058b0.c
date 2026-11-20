@@ -18,7 +18,7 @@ typedef struct {
 } Hits;
 
 extern char* g_7746cc;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int g_67a370;
 extern float g_664168;
 extern float g_6628cc;
@@ -37,8 +37,8 @@ void __cdecl fcn_005058b0(int unused, int who, int id)
 
 	if ((*(int*)&g_7746cc) == who) {
 		for (i = 0; i < 5; i++) {
-			t = (int) (((Obj*)g_7f4ca0)[id].levels[i] * g_664168 - g_6628cc) + i * 6 + 0x17f;
-			if (((Obj*)g_7f4ca0)[id].levels[i] == 0) {
+			t = (int) (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].levels[i] * g_664168 - g_6628cc) + i * 6 + 0x17f;
+			if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].levels[i] == 0) {
 				t = 0;
 			}
 			want[i] = t;

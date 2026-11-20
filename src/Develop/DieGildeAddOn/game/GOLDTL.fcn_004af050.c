@@ -14,7 +14,7 @@ typedef struct {
 	char pad3[0xb2];
 } Rec21c;
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 Rec21c* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
@@ -96,11 +96,11 @@ int __cdecl fcn_004af050(int mode, int* pairs, int idx, char* text, void* out)
 		goto send;
 	}
 	for (i = 0; i < 768; i++) {
-		if (fcn_004ae130((unsigned short) i) != 0 && (n == 0 || ((Rec21c*)g_7f4ca0)[i].side == want)) {
+		if (fcn_004ae130((unsigned short) i) != 0 && (n == 0 || (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].gender) == want)) {
 			v = gm_WalkEntityChain((unsigned short) i);
-			if (v > best && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[i].key) != 0) {
+			if (v > best && fcn_004ae0f0((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id)) != 0) {
 				best = v;
-				r = &((Rec21c*)g_7f4ca0)[i];
+				r = ((Rec21c*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 			}
 		}
 	}

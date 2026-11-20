@@ -14,7 +14,7 @@ typedef struct {
 	char pad3[0xb2];
 } Rec21c;
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 Rec21c* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
@@ -111,10 +111,10 @@ int __cdecl fcn_004af800(int mode, int* pairs, int idx, char* text, void* out)
 	for (i = 0; i < 768; i++) {
 		if (test(i) != 0) {
 			v = gm_WalkEntityChain((unsigned short) i);
-			if (v > score[4] && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[i].key) != 0) {
+			if (v > score[4] && fcn_004ae0f0((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id)) != 0) {
 				score[4] = v;
 				found |= 1;
-				ids[4] = ((Rec21c*)g_7f4ca0)[i].id;
+				ids[4] = (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index);
 				for (k = 3; k >= 0; k--) {
 					if (score[k + 1] > score[k]) {
 						t = score[k];
@@ -131,7 +131,7 @@ int __cdecl fcn_004af800(int mode, int* pairs, int idx, char* text, void* out)
 	if (found == 0) {
 		return 0;
 	}
-	r = &((Rec21c*)g_7f4ca0)[ids[(unsigned short) gm_RandomMod(5)]];
+	r = (Rec21c*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[ids[(unsigned short) gm_RandomMod(5)]];
 	if (mode == 0) {
 		pairs[idx * 2 + 1] = r->key;
 	}

@@ -38,7 +38,7 @@ typedef struct {
 	char pad68[0x90];
 } Msg;
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 #include "client_packet_builder.h"
 void __cdecl fcn_004c4670(int, int, int, int*);
@@ -59,24 +59,24 @@ void __cdecl fcn_00541ff0(int index)
 	int step;
 	int busy;
 
-	if (((Entity*)g_7f4ca0)[index].type != 6 && ((Entity*)g_7f4ca0)[index].type != 7 && ((Entity*)g_7f4ca0)[index].type < 10) {
+	if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) != 6 && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) != 7 && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) < 10) {
 		int one;
 
-		e = &((Entity*)g_7f4ca0)[index];
+		e = ((Entity*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[index]);
 		one = 1;
-		if (((Entity*)g_7f4ca0)[index].apprentice != 0 || ((Entity*)g_7f4ca0)[index].type == 5 || ((Entity*)g_7f4ca0)[index].type == 1
-			|| ((Entity*)g_7f4ca0)[index].type == 2 || ((Entity*)g_7f4ca0)[index].type == 4) {
+		if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].ptr_16c) != 0 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 5 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 1
+			|| (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 2 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 4) {
 			fcn_004c4510((char*) e, e->id);
 			fcn_004c4670(4, 1, 0x174, &one);
 			fcn_004c5360();
 		}
-		if (((Entity*)g_7f4ca0)[index].trade != 0) {
-			step = gm_GetOppositeStatIndex(((Entity*)g_7f4ca0)[index].trade);
+		if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].stat_category) != 0) {
+			step = gm_GetOppositeStatIndex((((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].stat_category));
 			busy = he_StartHandlungSearch(2, 2, e->slot, 0, 0x24);
 			e->busy++;
 			grade = fcn_00507540(index, info);
 			e->busy--;
-			if (busy == 0 && step != 0 && step < 6 && grade >= 1.0 && ((Entity*)g_7f4ca0)[index].rank >= 0) {
+			if (busy == 0 && step != 0 && step < 6 && grade >= 1.0 && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].value_194) >= 0) {
 				memset(&msg, 0, sizeof(msg));
 				msg.x64 = 0;
 				msg.x5c = 0;
@@ -91,10 +91,10 @@ void __cdecl fcn_00541ff0(int index)
 				fcn_005100f0(e->id, -4);
 			}
 		}
-	} else if (((Entity*)g_7f4ca0)[index].type == 6 || ((Entity*)g_7f4ca0)[index].type == 7) {
+	} else if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 6 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 7) {
 		int flag;
 
-		e = &((Entity*)g_7f4ca0)[index];
+		e = ((Entity*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[index]);
 		flag = 1;
 		fcn_004c4510((char*) e, e->id);
 		fcn_004c4670(4, 1, 0x174, &flag);

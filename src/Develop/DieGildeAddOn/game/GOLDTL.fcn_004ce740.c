@@ -1,7 +1,7 @@
 #include "client_packet_builder.h"
 /* Owned (both targets) by src/GOLDTL.fcn_004cef70.c. */
 extern char g_7f4ca0[];
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004ce6e0(void*);
 
@@ -43,14 +43,14 @@ char __cdecl fcn_004ce740(char* entity)
 		if (e != 0) {
 			idx = *(unsigned short*) ((char*) e + 0x27);
 			if (idx != 0xffff) {
-				p = g_7f4ca0 + idx * 540;
-				if (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7) {
+				p = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]);
+				if (*(char*)&((ENTITY_RECORD_VIEW*)p)->entity_type == 6 || *(char*)&((ENTITY_RECORD_VIEW*)p)->entity_type == 7) {
 					q = fcn_004ce610(entity);
 					r = *(int*) q;
 					if (r != 0) {
 						io_FormatTextBuffer(buf, 0x1bca, r * 2 + 0x9a8,
 						    *(unsigned short*) entity, *(int*) (entity + 0x16c));
-						fcn_00545d40(*(int*) (p + 4), -1, buf, 0, 0x5f2, 0);
+						fcn_00545d40(*(int*)&((ENTITY_RECORD_VIEW*)p)->entity_id, -1, buf, 0, 0x5f2, 0);
 					}
 				}
 			}

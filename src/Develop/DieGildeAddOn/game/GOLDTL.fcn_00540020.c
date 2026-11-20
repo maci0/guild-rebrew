@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /*
  * Round/day refresh for the town view.
  *
@@ -22,7 +23,6 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_types.h"
 #include "he_tables.h"
-
 extern HE_AP_EVENT g_7dcae0[256];	/* 0x007dcae0 */
 
 #pragma pack(2)
@@ -151,7 +151,7 @@ char* __cdecl ch_CreateAction(void*, int, ...);
 void __cdecl fcn_004ec660(void*);
 void __cdecl fcn_004c2d90(float, int);
 
-#define SLOTPTR(k) ((char*) g_7f4ca0 + (k) * 0x21c)
+#define SLOTPTR(k) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(k)])
 #define SLOT4(k) (*(int *) (SLOTPTR(k) + 4))
 #define ENTTYPE(t) (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(t)].category)
 #define ENTCLASS(t) (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(t)].level)

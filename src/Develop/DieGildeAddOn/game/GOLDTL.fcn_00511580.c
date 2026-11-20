@@ -51,9 +51,9 @@ void __cdecl fcn_00511580(void)
 
 	fcn_0064d3f8();
 	for (i = 0; i < 16; i++) {
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state < 5) {
+		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type < 5) {
 			money = fcn_0050b750(gm_RandomMod(0x122) + 10, (*(char*)&g_773d75));
-			fcn_004c4510((char*) &((ENTITY_RECORD*)g_7f4ca0)[i], ((ENTITY_RECORD*)g_7f4ca0)[i].entity_id);
+			fcn_004c4510((char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
 			fcn_004c4670(4, 1, 0x1ac, &money);
 			fcn_004c5360();
 		}

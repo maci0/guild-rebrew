@@ -1,6 +1,6 @@
 #include <string.h>
 #pragma intrinsic(strcpy)
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_7f4ca0[];
 extern char g_774964;
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -32,7 +32,7 @@ void __cdecl d2_ShowTitleAward(char* o)
 	int end;
 	int id;
 
-	slot = (short*) (g_7f4ca0 + *(unsigned short*) (o + 8) * 0x21c);
+	slot = (short*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(o + 8)]);
 	if (g_774970 != *(unsigned short*) (o + 8))
 		return;
 	if (g_774964 == 0)

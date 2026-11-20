@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
@@ -14,7 +14,7 @@ int __cdecl fcn_0050d170(int k)
 	unsigned short w;
 	int rec;
 
-	t = lpGebaeudePROT + k * 0x24d;
+	t = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[k];
 	total = *(int*) (t + 0x249) * 0xf00;
 	for (i = 0; i < 0x40; i++) {
 		w = ((unsigned short*) (t + 0x23))[i];

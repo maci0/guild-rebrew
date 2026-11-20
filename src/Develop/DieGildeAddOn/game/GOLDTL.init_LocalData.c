@@ -50,20 +50,20 @@ void __cdecl init_LocalData(void)
 		if (n == 0) {
 			break;
 		}
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 0xc) {
-			if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_00c == 0) {
-				(*(ENTITY_RECORD**)&gm_RichterKatholisch) = &((ENTITY_RECORD*)g_7f4ca0)[i];
+		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 0xc) {
+			if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].side == 0) {
+				(*(ENTITY_RECORD**)&gm_RichterKatholisch) = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 				n--;
-			} else if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_00c == 1) {
-				(*(ENTITY_RECORD**)&gm_RichterEvangelisch) = &((ENTITY_RECORD*)g_7f4ca0)[i];
+			} else if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].side == 1) {
+				(*(ENTITY_RECORD**)&gm_RichterEvangelisch) = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 				n--;
 			}
 		}
 	}
 	p = ((ENTITY_RECORD**)g_773db4);
 	for (i = 0; i < 768; i++) {
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 0xb) {
-			*p++ = &((ENTITY_RECORD*)g_7f4ca0)[i];
+		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 0xb) {
+			*p++ = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 		}
 	}
 	if ((*(ENTITY_RECORD**)&gm_RichterKatholisch) == 0) {

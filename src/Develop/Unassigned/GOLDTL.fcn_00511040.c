@@ -1,5 +1,5 @@
 extern unsigned char* lpGebaeudePROT;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 
@@ -9,7 +9,7 @@ int __cdecl init_GetGebaeudeSceneName(int idx, char* out)
 {
 	unsigned char* t;
 
-	t = lpGebaeudePROT + idx * 0x24d;
+	t = ((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[idx]);
 	if (*t == 0x1d) {
 		strcpy(out, "FRIEDHOF");
 		return 1;

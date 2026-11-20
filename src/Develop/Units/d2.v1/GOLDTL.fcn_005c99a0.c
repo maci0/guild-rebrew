@@ -13,7 +13,7 @@ typedef struct Item_5c99a0 {
 	int cw28;		/* +0x28 */
 	int pad2c[3];		/* +0x2c */
 } Item_5c99a0;			/* SIZE 0x38 */
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_0046f740();
 int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_005c9090();
@@ -164,15 +164,15 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, int cells,
 					fcn_00472380(items->win2, 0, 100, v);
 				}
 				fcn_00472640(items->win2, 1);
-				*(int*) (*(int*) &g_1015ea0 + 0x5c + items->win2 * 0x2f4) = 1;
+				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[items->win2].value_05c = 1;
 			}
 			if (owner != 0 && *(char*) (owner + 2) == 6 && *(int*) ((int) items->obj + 0x210) == *(int*) (owner + 4)) {
 				fcn_0046f740((int) *(short*) (*(int*) &g_772500 + 0x1ebd8) + (left), y, 0x6d3, *(int*) &d2_CurrentWindowId);
 			}
 			if (filter == 0 || fcn_005cf720(*(unsigned short*) &g_774970, *(unsigned short*) items->obj, filter, 0) != 0) {
-				*(int*) (*(int*) &g_1015ea0 + 0x5c + items->win * 0x2f4) = 1;
-				*(int*) (*(int*) &g_1015ea0 + 0x1d0 + items->win * 0x2f4) = 3;
-				*(int*) (*(int*) &g_1015ea0 + 0x2f0 + items->win * 0x2f4) = (int) items->obj;
+				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[items->win].value_05c = 1;
+				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[items->win].flags_1d0 = 3;
+				*(int*)&((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[items->win].associated_object = (int) items->obj;
 			}
 		}
 		items++;

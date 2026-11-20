@@ -1,4 +1,5 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -87,12 +88,12 @@ int __cdecl fcn_00501040(char* dir)
 	do {
 		count = 0;
 		left = 0x40;
-		slot = (unsigned short*) ((*(char**)&lpGebaeudePROT) + row * 0x24d + 0x23);
+		slot = ((BUILDING_PROTOTYPE*)(*(char**)&lpGebaeudePROT))[row].components;
 		do {
 			entry = *slot;
 			if (entry != 0xffff) {
 				idx = entry & 0x7fff;
-				def_row = lpObjektePROT + idx * 0x40;
+				def_row = (char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[idx] - idx;
 				cat_p = (char*) idx;
 				cat_p += (int) def_row;
 				category = *(char*) cat_p;
@@ -103,7 +104,7 @@ int __cdecl fcn_00501040(char* dir)
 			slot++;
 			left--;
 		} while (left != 0);
-		total = (*(char**)&lpGebaeudePROT) + row * 0x24d + 0x21;
+		total = (char*)&((BUILDING_PROTOTYPE*)(*(char**)&lpGebaeudePROT))[row].count_021;
 		row++;
 		*total += (char) count;
 	} while (row < 0x58);

@@ -1,5 +1,5 @@
 
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 #include <string.h>
 
@@ -34,7 +34,7 @@ int __cdecl fcn_004f6470(int id, int* out, unsigned short k)
 	if (gm_LookupEntityRecordById(id) == 0) {
 		return 0;
 	}
-	e = g_7f4ca0 + k * 0x21c;
+	e = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[k]);
 	if (e == 0) {
 		return 0;
 	}

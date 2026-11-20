@@ -55,8 +55,8 @@ void __cdecl fcn_005b54b0(char* p)
 	msg[0x26] = (char) 0xa2;
 	*(int*) (msg + 0x14) = -1;
 	msg[0x30] = 2;
-	*(int*) (msg + 0xc) = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
-	*(int*) (msg + 0x34) = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id;
+	*(int*) (msg + 0xc) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
+	*(int*) (msg + 0x34) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id;
 	*(int*) (msg + 0x38) = *(int*) (par + 4);
 	msg[0x7c] = 9;
 	for (i = 0; i < 16; i++) {
@@ -84,8 +84,8 @@ void __cdecl fcn_005b54b0(char* p)
 		if (n >= 4) {
 			break;
 		}
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_16c == e) {
-			((int*) (msg + 0xc0))[n] = ((ENTITY_RECORD*)g_7f4ca0)[i].entity_id;
+		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index != 0xffff && (*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == e) {
+			((int*) (msg + 0xc0))[n] = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id;
 			n++;
 		}
 	}

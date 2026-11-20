@@ -10,7 +10,7 @@ extern char* gm_CityEntity;
 typedef struct StateProto { unsigned char kind; unsigned char rest[0x24c]; } StateProto;
 extern char g_7f4ca0[];
 extern pos14_7f4c00 gm_GameTime;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 typedef struct Msg55c270 {
 	char pad0[4];
 	unsigned char kind;
@@ -88,13 +88,13 @@ void __cdecl fcn_0055c270(char* o)
 			return;
 		}
 		if (*(unsigned short*) rec == 0x1f9) {
-			fcn_004f2ba0((char*) 0x7f4ca0 + *(unsigned short*) (e + 0x27) * 0x21c,
+			fcn_004f2ba0((char*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (e + 0x27)],
 				(char*) e, 1);
 		} else if (*(unsigned short*) rec == 0x1fd) {
-			fcn_004f2ba0((char*) 0x7f4ca0 + *(unsigned short*) (e + 0x27) * 0x21c,
+			fcn_004f2ba0((char*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (e + 0x27)],
 				(char*) e, 2);
 		} else if (*(unsigned short*) rec == 0x201) {
-			fcn_004f2ba0((char*) 0x7f4ca0 + *(unsigned short*) (e + 0x27) * 0x21c,
+			fcn_004f2ba0((char*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (e + 0x27)],
 				(char*) e, 3);
 		} else if (*(unsigned short*) rec == 0x12d) {
 			Msg55c270 msg;
@@ -124,7 +124,7 @@ void __cdecl fcn_0055c270(char* o)
 			msg.x58 = *(int*) (e + 1);
 			fcn_004c5530((char*) &msg);
 		}
-		if (g_7f4ca0[*(unsigned short*) (e + 0x27) * 0x21c + 2] == 6) {
+		if (*(char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_state == 6) {
 			char tmp[0x80];
 			char name[0x80];
 
@@ -143,8 +143,8 @@ void __cdecl fcn_0055c270(char* o)
 				_strupr(tmp);
 				sprintf(name, (char*) 0x68b7ac, tmp);
 				io_FormatTextBuffer(buf, 0x1c2b, e, *(unsigned short*) (o + 0xac) * 2 + 0x9a8);
-				he_MessageBoxQuickjump(*(int*) (0x7f4ca0 +
-						*(unsigned short*) (e + 0x27) * 0x21c + 4),
+				he_MessageBoxQuickjump(*(int*) &((ENTITY_RECORD*) 0x7f4ca0)[
+						*(unsigned short*) (e + 0x27)].entity_id,
 					*(int*) (o + 0x10), buf, 0, kind, *(int*) (e + 1),
 					*(int*) (o + 0xb0), name, (char*) 0x6a6248);
 			} else {
@@ -156,8 +156,8 @@ void __cdecl fcn_0055c270(char* o)
 						kind = 0x60b;
 				}
 				io_FormatTextBuffer(buf, 0x1c2d, e, *(unsigned short*) (o + 0xac) * 2 + 0x9a8);
-				he_MessageBoxQuickjump(*(int*) (0x7f4ca0 +
-						*(unsigned short*) (e + 0x27) * 0x21c + 4),
+				he_MessageBoxQuickjump(*(int*) &((ENTITY_RECORD*) 0x7f4ca0)[
+						*(unsigned short*) (e + 0x27)].entity_id,
 					*(int*) (o + 0x10), buf, 0, kind, *(int*) (e + 1),
 					-1, 0, (char*) 0x6a6234);
 			}

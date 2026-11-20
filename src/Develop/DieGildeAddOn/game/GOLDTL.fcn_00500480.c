@@ -1,5 +1,5 @@
 
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 extern int g_773d64;
 extern unsigned char* lpGebaeudeINST;
@@ -28,7 +28,7 @@ char* __cdecl fcn_00500480(char* obj, int* id, int* sub)
 	k = g_773d64;
 	do {
 		if (((char*)lpGebaeudeINST)[k * 169] != 0) {
-			d = ((char*)lpGebaeudePROT) + (unsigned char) ((char*)lpGebaeudeINST)[k * 169] * 589;
+			d = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)((char*)lpGebaeudeINST)[k * 169]];
 			if (*d == 3 || *d == 0x16 || *d == 0xf) {
 				g_773d64 = k + 1;
 				*sub = -1;

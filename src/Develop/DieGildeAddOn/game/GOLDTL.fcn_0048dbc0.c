@@ -33,7 +33,7 @@ int __cdecl fcn_0048dbc0(char* e, char* a2, char* a3)
 	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + 25.0f, &idx) == 0) {
 		return 0;
 	}
-	t = &((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx];
+	t = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(unsigned short) idx]);
 	have = (int) (fcn_0050b810(*(int*) (e + 0x178), (*(char*)&g_773d75)) * 0.25f);
 	need = gm_WalkEntityChain(*(unsigned short*) e);
 	need = (int) ((gm_WalkEntityChain(t->entity_index) + need) * 0.02f);

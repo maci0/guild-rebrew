@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stddef.h>
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* Private inferred views; only the accessed offsets and extents are known. */
 typedef struct {
     char *entity;
@@ -78,7 +78,7 @@ void __cdecl fcn_005e53b0(void *arg)
     refresh = 1;
     cost = 0;
     last = 0;
-    house = g_7f4ca0 + g_774970 * 0x21c;
+    house = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
     if (house[0x1cc] & 8) {
         fcn_005263d0(g_14b59e8, g_14b59ec, 0);
         return;
@@ -136,20 +136,20 @@ void __cdecl fcn_005e53b0(void *arg)
         if (g_14ce8e0) g_774654 = 1;
         else if (g_100f1dc != -1) {
             if (d2_CurrentElementId == buttons[0]) {
-                house = g_7f4ca0 + g_774970 * 0x21c;
+                house = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
                 if (fcn_00525f60(house, cost) == 1) {
                     p = items[0].entity;
                     io_FormatTextBuffer(text, 0x41bf, *(unsigned short *)p);
                     n = 0;
                     for (i = 1; i < 5; ++i) {
                         if (items[i].entity) {
-                            j = (int)(fcn_00507e70(g_7f4ca0 + g_774970 * 0x21c, items[i].entity, 4) * -50.0f);
+                            j = (int)(fcn_00507e70((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], items[i].entity, 4) * -50.0f);
                             fcn_004c54c0(*(unsigned short *)items[0].entity, *(unsigned short *)items[i].entity, j - 50, 1);
                             selected[n++] = items[i].entity;
                         }
                     }
-                    fcn_005100f0(*(int *)(g_7f4ca0 + g_774970 * 0x21c + 4), -cost);
-                    fcn_004c5420(*(int *)(g_7f4ca0 + g_774970 * 0x21c + 4), 0x1cc, 4, 8, 0);
+                    fcn_005100f0(*(int *)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4), -cost);
+                    fcn_004c5420(*(int *)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4), 0x1cc, 4, 8, 0);
                     he_ShowZigeunerGroupMessage((unsigned short *)p, n, selected);
                     io_FormatTextBuffer(text, 0x41b9, 0x41b2);
                     fcn_00526120(text, 0);

@@ -10,7 +10,7 @@ struct s_7f4ca0 {
 	char pad3[0x1c4];
 };
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 
@@ -35,7 +35,7 @@ void __cdecl fcn_0052da70(int idx)
 	int n;
 
 	save = d3_CurrentContextIndex;
-	r = &((struct s_7f4ca0*)g_7f4ca0)[idx];
+	r = ((struct s_7f4ca0*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
 	fcn_004432d0(0, 1);
 	for (e = gm_StartFilteredEntitySearch(1, 4, idx); e != 0; e = gm_FindNextFilteredEntity()) {
 		if (*(char**) (e + 0x61) != 0) {

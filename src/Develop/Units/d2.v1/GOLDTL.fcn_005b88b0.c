@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /*
  * Personnel book window builder.
  *
@@ -138,7 +138,7 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 	Row* r;
 
 	cnt = 0;
-	ent = lpGebaeudePROT + *(unsigned char*) building * 0x24d;
+	ent = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) building];
 	nSlots = 0;
 	hA = -1;
 	sel = -1;
@@ -189,7 +189,7 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 	pg = 1;
 	i = 0;
 	while (1) {
-		if ((int) (ent[0x232] + ent[0x231]) <= i) {
+		if ((int) ((((BUILDING_PROTOTYPE*)ent)->capacity_232) + (((BUILDING_PROTOTYPE*)ent)->capacity_231)) <= i) {
 			break;
 		}
 		if (cnt / 2 >= 2) {
@@ -334,7 +334,7 @@ after_gage:
 				                                (int) fcn_005101e0(
 				                                    (unsigned char*) building, building[0],
 				                                    0, -1),
-				                                ent[0x223] + 0x130));
+				                                (((BUILDING_PROTOTYPE*)ent)->worker_kind[0]) + 0x130));
 			}
 			if (gage.state == 1) {
 				d2_SetForm(gage.win, 2);
@@ -383,7 +383,7 @@ after_gage:
 		}
 		*(unsigned char*) (pkt + 0x58) = 0;
 		fcn_004c5530(pkt);
-		fcn_0051af00(textA, (char*) 0x1939, ent[0x223] + 0x130);
+		fcn_0051af00(textA, (char*) 0x1939, (((BUILDING_PROTOTYPE*)ent)->worker_kind[0]) + 0x130);
 		fcn_00526120(textA, 0);
 
 packet2:

@@ -1,5 +1,5 @@
 #include "Develop/Units/d2.v1/d2_training_rows.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 
@@ -97,7 +97,7 @@ unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int for
 		fcn_00534160(0x50, 0x25, *(unsigned char*) (slot->entity + 0x82), 0x4f1);
 		item = fcn_00502cd0(*(int*) (slot->entity + 0x178), 1, 5);
 		while (item) {
-			if (*(char*) (lpObjektePROT + *item * 0x41) != '\t') {
+			if ((char)((OBJECT_PROTOTYPE*)lpObjektePROT)[*item].kind != '\t') {
 				for (j = 0; j < 6; j++) {
 					if (slot->item[j].objekt_id == *item)
 						break;

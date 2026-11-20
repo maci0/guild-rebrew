@@ -12,7 +12,7 @@ extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00525fb0(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -42,7 +42,7 @@ void __cdecl fcn_005963f0(int, int, int, char*);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0052a2d0(void);
 char* __cdecl itoa(int, char*, int);
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 typedef struct {
 	int kind;
 	char flag4;
@@ -106,7 +106,7 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 	*(int*) (m + 0x10162f4) = 0xe;
 	d2_DrawPanelFrame(k, 0x70b, 0x742);
 	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
-	*(unsigned int*) (g_1015ea0 + 0x84 + item * 0x2f4) = 0x54;
+	*(unsigned int*) &((D2_CONTROL_TL*) g_1015ea0)[item].font = 0x54;
 	do {
 		d2_SetForm(h, 2);
 		t = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0xff);
@@ -138,9 +138,9 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 							do {
 								if (*p == 0xffff)
 									break;
-								row = *(char**) (*p * 0x21c + 0x7f4e1c);
+								row = *(char**) &((ENTITY_RECORD_VIEW*) 0x7f4ca0)[*p].ptr_17c;
 								if (row && (*row == 3) && (*(int*) (row + 0x10) == *(int*) (building + 1)) && (*(unsigned short*) (row + 0xac) == *(unsigned int*) (0x779160 + k * 0x58)))
-									*(char*) (*p * 0x21c + 0x7f4e28) = 1;
+									*(char*) &((ENTITY_RECORD_VIEW*) 0x7f4ca0)[*p].selected = 1;
 								p += 10;
 							} while ((int) p < 0x7e35d0);
 						} else {
@@ -156,7 +156,7 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 							req.f16 = 0;
 							req.f20 = 0;
 							req.flag36 = 1;
-							req.f8 = *(unsigned int*) (*(unsigned short*) (building + 0x27) * 0x21c + 0x7f4ca4);
+							req.f8 = *(unsigned int*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (building + 0x27)].entity_id;
 							req.f12 = *(unsigned int*) (building + 1);
 							req.c28 = gm_GameTime;
 							req.c2c = g_7f4c04;
@@ -177,7 +177,7 @@ located:
 									break;
 								if (p[4]) {
 									fcn_00529160(building, g_7746cc, *p, found);
-									*(char*) (*p * 0x21c + 0x7f4e28) = 0;
+									*(char*) &((ENTITY_RECORD_VIEW*) 0x7f4ca0)[*p].selected = 0;
 								}
 								p += 10;
 							} while ((int) p < 0x7e35d0);
@@ -205,7 +205,7 @@ located:
 				do {
 					if (*p == 0xffff)
 						break;
-					*(char*) (*p * 0x21c + 0x7f4e28) = 0;
+					*(char*) &((ENTITY_RECORD_VIEW*) 0x7f4ca0)[*p].selected = 0;
 					p += 10;
 				} while ((int) p < 0x7e35d0);
 			} else {

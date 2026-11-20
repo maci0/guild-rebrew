@@ -15,7 +15,7 @@ extern char g_6a654c[];
 extern char g_6a6538[];
 extern char g_68bef4[];
 extern char g_677640[];
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
 void *__cdecl gm_GetEntityTableEntry(void *);
@@ -51,7 +51,7 @@ void __cdecl fcn_00418000(int, float *, int, float, float, float, float, float, 
 void __cdecl fcn_004185a0(int, float *, int, float, float, float, float, float, float, float, float, int);
 void __cdecl fcn_00417d00(int, float *, int, float, float, float, float, int);
 int __cdecl gm_RandomMod(unsigned short);
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #pragma pack(push, 1)
 typedef struct {
 	int field_00;
@@ -82,12 +82,12 @@ void __cdecl fcn_00561380(void *action)
 				return;
 			hand = (unsigned char *)fcn_004c4480(*(int *)(p + 0xc8));
 			if (hand != 0) {
-				e = (unsigned char *)gm_GetEntityTableEntry((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0));
+				e = (unsigned char *)gm_GetEntityTableEntry((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)]);
 				if (e != 0)
 					*(int *)(e + 0x28) = *(int *)(e + 0x28) + *(int *)(p + 0xd0);
 				*(int *)(p + 0xc4) = *(int *)(hand + 4);
 				fcn_00529160(0, 0, *(unsigned short *)hand, p);
-				fcn_004c51a0(-1, *(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4), g_773d75, *(int *)(p + 0xd0));
+				fcn_004c51a0(-1, *(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4), g_773d75, *(int *)(p + 0xd0));
 				*(int *)(p + 0xc8) = -1;
 				*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 				return;
@@ -142,8 +142,8 @@ void __cdecl fcn_00561380(void *action)
 			if (fcn_0055be70(pos) != 0) {
 				q = (unsigned char *)(p + 0x52);
 				*(int *)(p + 0xc8) = fcn_004f4f60(0x18, 1,
-					*(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4),
-					*(int *)((unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0) + 4),
+					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4),
+					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(r + 0x27)] + 4),
 					*(int *)(p + 0xac));
 				*(int *)(q + 0x7a) = *(int *)(*(unsigned char **)(pos + 3) + 4);
 				*(int *)(q + 0x1e) = 7;
@@ -211,8 +211,8 @@ void __cdecl fcn_00561380(void *action)
 			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
 			if (r == 0 || *(unsigned short *)(r + 0x27) == 0xffff)
 				goto label_56148f;
-			recA = (unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0);
-			recB = (unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0);
+			recA = (unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(r + 0x27)];
+			recB = (unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)];
 			dist = fcn_00507e70(recB, recA, 2);
 			if (!(gm_RandomFloat01() + dist >= 1.0f))
 				goto label_561a7a;
@@ -227,8 +227,8 @@ void __cdecl fcn_00561380(void *action)
 					he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, g_6a654c);
 				}
 				fcn_004f4f60(0x18, 1,
-					*(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4),
-					*(int *)((unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0) + 4),
+					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4),
+					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(r + 0x27)] + 4),
 					*(int *)(r + 1));
 			}
 			v22 = (unsigned char *)0x7f4ca4;
@@ -247,8 +247,8 @@ void __cdecl fcn_00561380(void *action)
 			return;
 			}
 		label_561a7a:
-			recA = (unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0);
-			recB = (unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0);
+			recA = (unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(r + 0x27)];
+			recB = (unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)];
 			if (fcn_005c6270(recA, 0x2c0)) {
 				fcn_005100f0(*(int *)(recB + 4), -1);
 				if (*(unsigned char *)(recB + 2) == 6 || *(unsigned char *)(recB + 2) == 7) {
@@ -269,8 +269,8 @@ void __cdecl fcn_00561380(void *action)
 				io_FormatTextBuffer(text, 0x1739, r);
 				he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 				fcn_004f4f60(0x18, 1,
-					*(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4),
-					*(int *)((unsigned char *)(*(unsigned short *)(r + 0x27) * 0x21c + 0x7f4ca0) + 4),
+					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4),
+					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(r + 0x27)] + 4),
 					*(int *)(r + 1));
 				*(int *)(p + 0x70) = -1;
 				return;
@@ -325,7 +325,7 @@ void __cdecl fcn_00561380(void *action)
 					model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, "dummy_TUER");
 			} else {
 				*(unsigned char *)(msg + 4) = 0x4f;
-				*(int *)(msg + 8) = *(int *)((unsigned char *)(*(unsigned short *)(p + 8) * 0x21c + 0x7f4ca0) + 4);
+				*(int *)(msg + 8) = *(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4);
 				*(int *)(msg + 0xc) = -1;
 				*(int *)(msg + 0x28) = gm_GameTime;
 				*(int *)(msg + 0x2c) = g_7f4c04;
@@ -334,7 +334,7 @@ void __cdecl fcn_00561380(void *action)
 				*(unsigned char *)(msg + 0x36) = 2;
 				*(int *)(msg + 0x58) = *(int *)(r + 1);
 				*(unsigned char *)(msg + 0xb0) = 0;
-				query = (unsigned char *)(lpGebaeudePROT + (unsigned char)*(unsigned char *)r * 0x24d);
+				query = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)r];
 				*(int *)(msg + 0x5c) = (gm_RandomMod(0x10) & 0xffff) - *(unsigned char *)(query + 0x247) * 3 + 0x14;
 				fcn_004c5530(msg);
 			}

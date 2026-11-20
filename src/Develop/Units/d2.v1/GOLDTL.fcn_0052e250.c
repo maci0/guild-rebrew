@@ -24,7 +24,7 @@ extern char* g_7746c4;
 extern unsigned char* g_7746c8;
 extern int d2_CurrentWindowId;
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* lpObjektePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -77,7 +77,7 @@ void __cdecl fcn_0052e250(unsigned short* item)
 	d2_SetForm(g_6a25b8, 0);
 	id = fcn_0046f740(((((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1, 0x48, *item + 0xdf, d2_CurrentWindowId);
 	((D2_CONTROL_TL*)g_1015ea0)[id].value_05c = 1;
-	rec = lpObjektePROT + *item * 0x41;
+	rec = (char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[*item];
 	if (store != 0 && (*rec == 2 || *rec == 6)) {
 		parent = gm_ResolveParentEntity(item);
 		fl = fcn_00506380(g_774970, store, 0, 0);

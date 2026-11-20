@@ -62,7 +62,7 @@ void __cdecl fcn_005516e0(char* t)
 	*(int*) (t + 0x84) = -1;
 	switch (*(int*) (t + 0x70)) {
 	case 1:
-		e = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (t + 8)];
+		e = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (t + 8)]);
 		fcn_00507130(gm_MapEntityStatRange(*(unsigned char*) (t + 0xb0)), &a, &b);
 		fcn_004c4510((char*) e, e->entity_id);
 		c = gm_RandomMod(0x10) + 0x10;
@@ -84,7 +84,7 @@ void __cdecl fcn_005516e0(char* t)
 		fcn_004c5620(-1, t);
 		return;
 	case 0:
-		e = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (t + 8)];
+		e = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (t + 8)]);
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
 			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
