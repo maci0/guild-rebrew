@@ -1,7 +1,7 @@
 #include <string.h>
 
 void __cdecl evt_LogScriptError(char* obj, int level, char* msg);
-char* __cdecl fcn_00428720(char* obj);
+char* __cdecl evt_RequestScriptExit(char* obj);
 
 /* ADDRESS: GOLDTL 0x00425ec0 */
 char* __cdecl evt_AllocateLocalVariable(char* obj, int mode, int size, char* name)
@@ -50,7 +50,7 @@ found:
 	*(int*) (obj + 0xc38) += sz;
 	if (*(unsigned int*) (obj + 0xc38) > *(unsigned int*) (obj + 0xc34) + 0x400) {
 		evt_LogScriptError(obj, *(int*) (obj + 0x118), (char*) 0x67920c);
-		fcn_00428720(obj);
+		evt_RequestScriptExit(obj);
 	}
 	*(char**) (*(char**) (obj + 0xc28) + 0x10 + i * 4) = rec;
 done:

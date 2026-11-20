@@ -52,7 +52,7 @@ float __cdecl fcn_00507e70(char *, char *, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_005b2a40(unsigned short *, int, char **);
+void __cdecl he_ShowZigeunerGroupMessage(unsigned short *, int, char **);
 void __cdecl fcn_00526120(char *, int);
 char *__cdecl fcn_005cd440(REQUEST *, char *, int, int);
 int __cdecl fcn_005373e0(void (__cdecl *)(void *), int);
@@ -150,7 +150,7 @@ void __cdecl fcn_005e53b0(void *arg)
                     }
                     fcn_005100f0(*(int *)(g_7f4ca0 + g_774970 * 0x21c + 4), -cost);
                     fcn_004c5420(*(int *)(g_7f4ca0 + g_774970 * 0x21c + 4), 0x1cc, 4, 8, 0);
-                    fcn_005b2a40((unsigned short *)p, n, selected);
+                    he_ShowZigeunerGroupMessage((unsigned short *)p, n, selected);
                     io_FormatTextBuffer(text, 0x41b9, 0x41b2);
                     fcn_00526120(text, 0);
                     g_774654 = 1;

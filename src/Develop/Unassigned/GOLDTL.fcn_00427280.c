@@ -29,8 +29,8 @@ struct frame_427280 {
 extern char* evt_CurrentScript;
 extern char g_14cb3c0[];
 
-void __cdecl fcn_00426680(int lex, struct tok_427280* t);
-int __cdecl fcn_00428800(int a);
+void __cdecl evt_ReadToken(int lex, struct tok_427280* t);
+int __cdecl evt_EvaluateExpression(int a);
 int __cdecl fcn_004263b0(char dir);
 int __cdecl evt_SeekSemicolon(void);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
@@ -40,7 +40,7 @@ void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 /* Parses an if head: evaluates the condition and pushes a block level. */
 /* ADDRESS: GOLDTL 0x00427280 */
-int __cdecl fcn_00427280(void)
+int __cdecl evt_ParseIfHead(void)
 {
 	struct tok_427280 t;
 	int pos;
@@ -49,18 +49,18 @@ int __cdecl fcn_00427280(void)
 	int num;
 
 	pos = LEX_427280 - strlen(g_14cb3c0);
-	fcn_00426680(LEX_427280, &t);
+	evt_ReadToken(LEX_427280, &t);
 	if (t.type != 1 || t.u.num != 0xc) {
 		evt_LogScriptError(evt_CurrentScript, LEX_427280, "Syntax error: '(' missing!");
 		return 0;
 	}
-	cond = fcn_00428800(0);
+	cond = evt_EvaluateExpression(0);
 	memset(&FRAME_427280->loop[FRAME_427280->level], 0, sizeof(struct loop_427280));
 	FRAME_427280->loop[FRAME_427280->level].active = 2;
 	FRAME_427280->loop[FRAME_427280->level].pos = pos;
 	FRAME_427280->loop[FRAME_427280->level].cond = cond;
 	pos = LEX_427280;
-	fcn_00426680(pos, &t);
+	evt_ReadToken(pos, &t);
 	type = t.type;
 	num = t.u.num;
 	if (type == 1 && num == 8) {

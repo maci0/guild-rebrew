@@ -19,9 +19,9 @@ int __cdecl ai_StartGraveyardOwner(int, char*, int, Blk24*, Blk24*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004a6210(char*, char*, int);
 int __cdecl fcn_004a6550(char*, char*);
-void __cdecl fcn_005e6650(char*);
+void __cdecl d2_OpenBlutracheDialog(char*);
 void __cdecl fcn_005e5a50(int);
-void __cdecl fcn_005e5ea0(int);
+void __cdecl d2_ShowBlutracheDialog(int);
 void __cdecl fcn_005e6360(int);
 void __cdecl fcn_00586c10(int);
 int __cdecl fcn_005e6e00(void);
@@ -46,7 +46,7 @@ int __cdecl fcn_005359c0(void)
 	case 0x2e:
 		o = g_7e2aa0;
 		if (o != 0) {
-			fcn_005e5ea0((int) o);
+			d2_ShowBlutracheDialog((int) o);
 		}
 		return;
 	case 0x20:
@@ -58,7 +58,7 @@ int __cdecl fcn_005359c0(void)
 	case 0x12:
 		o = g_7e2aa0;
 		if (o != 0) {
-			fcn_005e6650(o);
+			d2_OpenBlutracheDialog(o);
 		}
 		return;
 	case 0x25:

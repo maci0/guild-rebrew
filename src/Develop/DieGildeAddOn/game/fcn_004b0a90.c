@@ -4,7 +4,7 @@ extern unsigned char g_773d75;
 
 int __cdecl fcn_004ae130(unsigned short);
 int __cdecl fcn_0064fcaf(char*);
-int __cdecl fcn_00501490(char*);
+int __cdecl gm_FindObjektPrototypeByName(char*);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x004b0a90 */
@@ -24,7 +24,7 @@ int __cdecl fcn_004b0a90(int a0, int a1, char* arg)
 	}
 	s += 3;
 	fcn_0064fcaf(s + 1);
-	r = fcn_00501490(s);
+	r = gm_FindObjektPrototypeByName(s);
 	if (r == 0) {
 		return 0;
 	}

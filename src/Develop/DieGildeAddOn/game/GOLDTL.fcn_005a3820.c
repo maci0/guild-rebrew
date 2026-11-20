@@ -6,10 +6,10 @@ void __cdecl d3_SetSubtreeVisible(void*, int);
 int __cdecl fcn_0051e070(void);
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(int, int);
-char* __cdecl fcn_005338d0(char*, int, int);
+char* __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_00597ec0(char*);
-void __cdecl fcn_005ba8e0(char*);
-void __cdecl fcn_005be140(char*, int);
+void __cdecl d2_OpenTransportPanel(char*);
+void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl fcn_005cf560(char*);
 void __cdecl fcn_005a3680(void);
 
@@ -77,19 +77,19 @@ ready:
 	for (;;) {
 		fcn_00597ec0(app);
 		if ((g_7746d8 & 0x200) != 0) {
-			first = fcn_005338d0(g_6a956c, g_14ad100, 0x15);
-			second = fcn_005338d0(g_6a9580, g_14ad0f0, 0xe);
-			third = fcn_005338d0(g_6a9924, g_14a7d28, 0x16);
-			fourth = fcn_005338d0(name, g_14abb60, 0x16);
+			first = RegisterStatusText(g_6a956c, g_14ad100, 0x15);
+			second = RegisterStatusText(g_6a9580, g_14ad0f0, 0xe);
+			third = RegisterStatusText(g_6a9924, g_14a7d28, 0x16);
+			fourth = RegisterStatusText(name, g_14abb60, 0x16);
 		}
 		active = g_7746a0;
 		if (active != 0) {
 			if (active == first) {
-				fcn_005ba8e0(app);
+				d2_OpenTransportPanel(app);
 				active = g_7746a0;
 			}
 			if (active == second) {
-				fcn_005be140(app, *(int*) (app + 0x5d));
+				d2_ShowLagerOptions(app, *(int*) (app + 0x5d));
 			} else if (active == third) {
 				fcn_005cf560(app);
 			} else if (active == fourth) {

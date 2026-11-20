@@ -5,7 +5,7 @@ extern int g_f8a668;
 extern int g_6f22a0;
 char* __cdecl fcn_004b3c50(int);
 int __cdecl fcn_004741e0(int, int, char*);
-void __cdecl fcn_004755f0(int);
+void __cdecl d2_CenterTopLevelWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004c3030(int, int, int, int);
@@ -24,7 +24,7 @@ void __cdecl fcn_004b5360(int id, int flags)
 
 	rec = fcn_004b3c50(id);
 	window = fcn_004741e0(0, 0, "special\\mission");
-	fcn_004755f0(window);
+	d2_CenterTopLevelWindows(window);
 	d2_SetForm(window, 1);
 	io_AppendText(*(int*) (rec + 8) + 1);
 	io_AppendText((int) "$N");

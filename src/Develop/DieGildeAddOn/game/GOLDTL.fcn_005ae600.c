@@ -9,7 +9,7 @@ extern char s_6ab2a0[];
 
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_005338d0(char*, int, int);
+int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_005c79a0(int);
 
 void __cdecl fcn_005ae600(int arg)
@@ -23,8 +23,8 @@ void __cdecl fcn_005ae600(int arg)
 	if (fcn_005373e0((void*) fcn_005ae600, 0x67fff) != 0) {
 		do {
 			if (g_7746d8 & 0x200) {
-				a = fcn_005338d0(s_6aa3b0, g_14abc2c, 0xc);
-				b = fcn_005338d0(s_6ab2a0, g_14abc30, 0xc);
+				a = RegisterStatusText(s_6aa3b0, g_14abc2c, 0xc);
+				b = RegisterStatusText(s_6ab2a0, g_14abc30, 0xc);
 			}
 			if ((g_7746d8 & 0x200) && g_7746a0 != 0) {
 				if (g_7746a0 == a || g_7746a0 == b) {

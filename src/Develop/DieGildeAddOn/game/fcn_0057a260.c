@@ -3,7 +3,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00529160(char*, int, int, char*);
 int __cdecl fcn_00500bb0(char*, int, int, int);
-int __cdecl fcn_00546190(char*);
+int __cdecl he_FreeAction(char*);
 
 #include "client_types.h"
 
@@ -34,5 +34,5 @@ int __cdecl fcn_0057a260(char* p)
 		*(pos14_7f4c00*) (p + 0xb8) = *(pos14_7f4c00*) (p + 0x52);
 		return fcn_00500bb0(p + 0xb8, 3, 0, 0);
 	}
-	return fcn_00546190(p);
+	return he_FreeAction(p);
 }

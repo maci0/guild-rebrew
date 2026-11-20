@@ -8,7 +8,7 @@ extern Rec18_68da68 amt_OfficeSlots[42];
 
 #pragma intrinsic(memcpy, memset)
 
-int __cdecl fcn_004e8af0(unsigned char key, void* dst)
+int __cdecl amt_FindOfficeSlotByKey(unsigned char key, void* dst)
 {
 	int i;
 	int a;

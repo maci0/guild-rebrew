@@ -24,7 +24,7 @@ int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c4510(int, int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5980(void*);
 
@@ -144,7 +144,7 @@ void __cdecl fcn_004ff490(char* entity)
 			*(int*) (pkt + 0x34) = *(int*) (other + 4);
 			*(int*) (pkt + 0x38) = *(int*) (handle + 4);
 			fcn_004c4510(handle, *(int*) (handle + 4));
-			fcn_004c4570(1, 1, 2, &mode);
+			cm_AppendPacketFieldDelta(1, 1, 2, &mode);
 			fcn_004c5360();
 			fcn_004c5980(pkt);
 			g_773d48++;

@@ -41,7 +41,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00526010(ENTITY_RECORD*, int, unsigned char);
-int __cdecl fcn_005809f0(void);
+int __cdecl d2_IsTutorialInactive(void);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5530(char*);
@@ -118,7 +118,7 @@ void __cdecl fcn_005a92c0(char* p)
 				*(int*) (msg + 0xc) = -1;
 				msg[0x36] = 9;
 				*(pos14_7f4c00*) (msg + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
-				if (fcn_005809f0() == 0) {
+				if (d2_IsTutorialInactive() == 0) {
 					fcn_00500bb0((pos14_7f4c00*) (msg + 0x28), 0, 5, 0);
 				} else {
 					fcn_00500bb0((pos14_7f4c00*) (msg + 0x28), gm_RandomMod(3) + 1, 0, 0);

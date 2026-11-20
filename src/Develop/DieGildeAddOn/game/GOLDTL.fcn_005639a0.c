@@ -12,7 +12,7 @@ void __cdecl fcn_00500bb0(void*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, void*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_00546190(void*);
+void __cdecl he_FreeAction(void*);
 
 /* ADDRESS: GOLDTL 0x005639a0 */
 void __cdecl fcn_005639a0(int a)
@@ -33,7 +33,7 @@ void __cdecl fcn_005639a0(int a)
 		}
 		r = gm_StartFilteredEntitySearch(1, 1, *(int*) (a + 0xac));
 		if (r == 0) {
-			fcn_00546190((void*) a);
+			he_FreeAction((void*) a);
 			return;
 		}
 		t = gm_GetElapsedMinutes((void*) (a + 0x60), (void*) &gm_GameTime);
@@ -65,5 +65,5 @@ void __cdecl fcn_005639a0(int a)
 	if (r != 0) {
 		fcn_004c5420(*(int*) (r + 1), 0x5a, 2, 0, 4);
 	}
-	fcn_00546190((void*) a);
+	he_FreeAction((void*) a);
 }

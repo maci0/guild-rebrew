@@ -33,7 +33,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_00533dc0(int, int, int);
+int __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_0046fac0(int, int, void*, int);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl fcn_0050d270(int);
@@ -41,7 +41,7 @@ void __cdecl fcn_005a5760(void*, int, int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
-int __cdecl fcn_005463a0(int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
 void __cdecl ResetDisplayCounters(void);
 int __cdecl fcn_005a5440(int, ListRow*, int, int, char);
@@ -55,10 +55,10 @@ int __cdecl fcn_00657a73(int, void*, int);
 void __cdecl fcn_0046f940(int, void*);
 void __cdecl fcn_0046ed00(int, int, int);
 void __cdecl fcn_005a6570(char*);
-void __cdecl fcn_005a59d0(char*);
+void __cdecl d2_ShowMoneyExchangeDialog(char*);
 
 /* ADDRESS: GOLDTL 0x005a6880 */
-void __cdecl fcn_005a6880(char* obj)
+void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 {
 	ListRow list1[16];
 	ListRow list2[16];
@@ -96,7 +96,7 @@ void __cdecl fcn_005a6880(char* obj)
 	h = fcn_00470820(0, 0, g_6aac84);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_00533dc0(d2_CurrentWindowId, 0x73b, 0x73f);
+	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);
 	w2 = fcn_00472250(h, 0, 2);
 	w3 = fcn_00472250(h, 0, 3);
 	w1 = fcn_00472250(h, 0, 1);
@@ -137,7 +137,7 @@ void __cdecl fcn_005a6880(char* obj)
 			fcn_00472640(list1[i].sel, 0);
 	}
 	while (fcn_005373e0((void*) 0x5a6880, 0x677c7) != 0) {
-		cur = fcn_005463a0(1, 0, 0x27);
+		cur = he_StartHandlungSearch(1, 0, 0x27);
 		if (cur != 0) {
 			while (cur != 0 && *(int*) (cur + 0xac) != *(int*) (obj + 1))
 				cur = he_fn_Handlung();
@@ -217,7 +217,7 @@ void __cdecl fcn_005a6880(char* obj)
 			if (cur == buttons[0])
 				fcn_005a6570(obj);
 			else if (cur == buttons[1])
-				fcn_005a59d0(obj);
+				d2_ShowMoneyExchangeDialog(obj);
 		}
 	}
 	ResetDisplayCounters();

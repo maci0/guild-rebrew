@@ -39,7 +39,7 @@ extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 
 int __cdecl fcn_00558370(char* e);
-void __cdecl fcn_00546190(char* e);
+void __cdecl he_FreeAction(char* e);
 void __cdecl fcn_004e3640(void);
 void __cdecl fcn_004e4e90(char* name);
 void __cdecl fcn_00500bb0(char* t, int a, int b, int c);
@@ -69,11 +69,11 @@ void __cdecl EvtSensenmann(char* e)
 			fcn_004e3640();
 		}
 		g_7749ec = 0;
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 	if (*(int*) (e + 0xc8) == 0 && fcn_00558370(e) == 0) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 		if (g_7749ec != 0) {
 			fcn_004e3640();
 		}

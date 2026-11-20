@@ -36,7 +36,7 @@ int __cdecl fcn_004488e0(char*, int, int);
 void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_00438cb0(char*, int*);
+void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl fcn_00598860(int, void*);
 void __cdecl fcn_004550b0(int, int);
 void __cdecl d3_DestroyObject(int);
@@ -49,8 +49,8 @@ int __cdecl fcn_00500e20(char*);
 void __cdecl fcn_005165b0(int);
 char __cdecl d3_TraverseSceneObjects(char*, char*, unsigned int, void (__cdecl*)(char*));
 void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
-void* __cdecl fcn_00426cc0(int);
-int __cdecl fcn_00428720(int);
+void* __cdecl evt_FindScriptById(int);
+int __cdecl evt_RequestScriptExit(int);
 void __cdecl fcn_0052db70(char*);
 void __cdecl fcn_00501d20(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -133,7 +133,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		angles[2] = 0;
 		angles[1] = fcn_00451380(g_662d40, direction);
 		fcn_00438b40((char*) obj, (int*) vec);
-		fcn_00438cb0((char*) obj, (int*) angles);
+		d3_SetObjectRotation((char*) obj, (int*) angles);
 		fcn_00598860(obj, vec);
 		if (g_773dd8 != 0) {
 			fcn_004550b0(*(int*)(upgradeBuilding + 0x61), g_773dd8);
@@ -163,9 +163,9 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		f = (float) g_774728 + g_6a2bec;
 		d3_VisitSceneObjects(g_67a370, *(int*)(upgradeBuilding + 0x61), 0x21e, 0x445d20, &f);
 		if (*(int*) (upgradeBuilding + 0x95) != -1) {
-			obj = (int) fcn_00426cc0(*(int*) (upgradeBuilding + 0x95));
+			obj = (int) evt_FindScriptById(*(int*) (upgradeBuilding + 0x95));
 			if (obj != 0) {
-				fcn_00428720(obj);
+				evt_RequestScriptExit(obj);
 			}
 			*(int*) (upgradeBuilding + 0x95) = -1;
 			fcn_0052db70((char*) upgradeBuilding);

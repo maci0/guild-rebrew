@@ -8,17 +8,17 @@ char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00507870(char*);
 int __cdecl fcn_004c5620(int, char*);
-int __cdecl fcn_00426cc0(int);
-void __cdecl fcn_00428720(int);
+int __cdecl evt_FindScriptById(int);
+void __cdecl evt_RequestScriptExit(int);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl ch_DestroyCharacter(char*);
 char* __cdecl fcn_004fe2e0(char*, int, float*, float*, int, int);
-void __cdecl fcn_00407800(int, int, char*);
+void __cdecl ch_SetBodyAttachment(int, int, char*);
 char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(char*, int, ...);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x00566360 */
 void __cdecl fcn_00566360(char* action)
@@ -44,7 +44,7 @@ void __cdecl fcn_00566360(char* action)
 	}
 	ent = gm_LookupEntityRecordById(*(unsigned int*) (o + 0xac));
 	if (ent == 0) {
-		fcn_00546190(o);
+		he_FreeAction(o);
 		return;
 	}
 	if (*(int*) (ent + 0x184) != 0) {
@@ -77,12 +77,12 @@ void __cdecl fcn_00566360(char* action)
 			if ((unsigned char) o[0x78] & 2) {
 				fcn_004c5420(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);
 			}
-			fcn_00546190(o);
+			he_FreeAction(o);
 			return;
 		}
 		handle = (char*) *(int*) (*(int*) (ent + 0x184) + 0x28);
 		if (handle != (char*) -1) {
-			fcn_00428720(fcn_00426cc0((int) handle));
+			evt_RequestScriptExit(evt_FindScriptById((int) handle));
 		}
 		*(int*) (o + 0x70) = *(int*) (o + 0x70) + 1;
 		return;
@@ -95,7 +95,7 @@ void __cdecl fcn_00566360(char* action)
 			if ((unsigned char) o[0x78] & 2) {
 				fcn_004c5420(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);
 			}
-			fcn_00546190(o);
+			he_FreeAction(o);
 			return;
 		}
 		v15 = d3_CurrentContextIndex;
@@ -122,7 +122,7 @@ void __cdecl fcn_00566360(char* action)
 			*(unsigned int*) (p + 0x2c) = v3;
 			*(int*) (*(int*) (ent + 0x184) + 0x30) = v30;
 			if (name[0]) {
-				fcn_00407800(*(int*) (ent + 0x184), 2, name);
+				ch_SetBodyAttachment(*(int*) (ent + 0x184), 2, name);
 			}
 			p = evt_LoadGfxScript((char*) 0x6a68bc);
 			if (p != 0) {
@@ -140,14 +140,14 @@ void __cdecl fcn_00566360(char* action)
 		if ((unsigned char) o[0x78] & 2) {
 			fcn_004c5420(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);
 		}
-		fcn_00546190(o);
+		he_FreeAction(o);
 		return;
 	case -2:
 	case -1:
 		if ((unsigned char) o[0x78] & 2) {
 			fcn_004c5420(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);
 		}
-		fcn_00546190(o);
+		he_FreeAction(o);
 		return;
 	default:
 		return;

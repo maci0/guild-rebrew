@@ -19,7 +19,7 @@ extern char g_7728d4;
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 void __cdecl fcn_004b1e60(void);
 
-int __cdecl fcn_005251c0(void* file)
+int __cdecl ls_LoadHistoryState(void* file)
 {
 	int v;
 	int i;

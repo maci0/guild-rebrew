@@ -6,7 +6,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl ch_FindCharacterByName(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
-int __cdecl fcn_00515540(char*);
+int __cdecl init_EnsureObjektSceneContext(char*);
 int __cdecl fcn_005155e0(char*);
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -49,7 +49,7 @@ int __cdecl fcn_004ca560(char* x, char* out)
 			return 3;
 	}
 	if (d != 0 && *(short*) d != 0xfd) {
-		k = fcn_00515540(d);
+		k = init_EnsureObjektSceneContext(d);
 	} else if (s != 0 && gm_CheckEntityType(s) != 0) {
 		k = fcn_005155e0(s);
 		d = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0xfd);

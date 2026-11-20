@@ -29,7 +29,7 @@ extern char s_6a3fe0[]; /* "Menu\\CHOOSEPLAYER" */
 
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_00469470(int, int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl fcn_0046f740(int, int, int, int);
@@ -43,14 +43,14 @@ void __cdecl fcn_00472380(int, ...);
 void __cdecl d2_SetBildArgument(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00476b60(void);
-void __cdecl fcn_00474cf0(int);
+void __cdecl d2_SelectControl(int);
 int __cdecl fcn_00517b10(char*, char*);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00533a60(int, int, int*, int, int, int);
 int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
 
 /* ADDRESS: GOLDTL 0x0053d490 */
-int __cdecl fcn_0053d490(int a0, int a1)
+int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 {
 	int list;
 	int glyphs;
@@ -162,9 +162,9 @@ int __cdecl fcn_0053d490(int a0, int a1)
 			d2_SetSlotVisibility(fcn_00472250(dlg, 0, i), i <= v9);
 		}
 		if (v9 == 0) {
-			fcn_00474cf0(firstNameField);
+			d2_SelectControl(firstNameField);
 		} else if (v9 == 1) {
-			fcn_00474cf0(surnameField);
+			d2_SelectControl(surnameField);
 		}
 		redraw = 0;
 	state_machine:
@@ -238,12 +238,12 @@ int __cdecl fcn_0053d490(int a0, int a1)
 			result = 1;
 			g_774654 = 1;
 		}
-		if (fcn_005373e0((int (__cdecl*)(void)) fcn_0053d490, a0) != 0) {
+		if (fcn_005373e0((int (__cdecl*)(void)) d2_RunChoosePlayerDialog, a0) != 0) {
 			continue;
 		}
-		fcn_00469510(list1);
-		fcn_00469510(list2);
-		fcn_00469510(list);
+		d2_ClearRadioGroup(list1);
+		d2_ClearRadioGroup(list2);
+		d2_ClearRadioGroup(list);
 		fcn_00471e30(dlg);
 		WritePrivateProfileStringA(s_6a1e4c, s_6a1e54, g_7e23ea,
 		    g_7e22c0);

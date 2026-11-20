@@ -37,11 +37,11 @@ int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
 char* __cdecl fcn_00442910(int parent, float* pos, float* dir, char* name);
 void __cdecl fcn_0043a3f0(char* a, char* b, COLOR546590 c);
 void __cdecl fcn_00414be0(char* p, unsigned char r, unsigned char g, unsigned char b);
-int __cdecl fcn_004339e0(char* obj, FLAGS546590 fl, int n, FRAME546590* frames);
+int __cdecl d3_CreateObjectAnimation(char* obj, FLAGS546590 fl, int n, FRAME546590* frames);
 int __cdecl fcn_00546480(char* entity);
 
 /* ADDRESS: GOLDTL 0x00546590 */
-char* __cdecl fcn_00546590(char* effectState, char* name, char* entity)
+char* __cdecl he_CreateAnimatedEntityMarker(char* effectState, char* name, char* entity)
 {
 	FRAME546590 frames[2];
 	FLAGS546590 flags;
@@ -84,7 +84,7 @@ char* __cdecl fcn_00546590(char* effectState, char* name, char* entity)
 		frames[1].rot[0] = 0.0f;
 		frames[1].rot[1] = 60.0f;
 		frames[1].rot[2] = 0.0f;
-		fcn_004339e0(obj, flags, 2, frames);
+		d3_CreateObjectAnimation(obj, flags, 2, frames);
 		fcn_00546480(entity);
 	}
 	return obj;

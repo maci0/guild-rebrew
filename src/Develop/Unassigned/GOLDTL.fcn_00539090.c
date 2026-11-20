@@ -10,10 +10,10 @@ extern HWND g_774940;
 extern int g_6acf80;
 extern int g_6acf84;
 
-LRESULT CALLBACK fcn_00538250(HWND, UINT, WPARAM, LPARAM);
-void __cdecl fcn_00538500(char*);
+LRESULT CALLBACK main_WindowProc(HWND, UINT, WPARAM, LPARAM);
+void __cdecl main_FormatGameVersion(char*);
 
-int __cdecl fcn_00539090(HINSTANCE inst, int unused, int windowed)
+int __cdecl main_CreateWindow(HINSTANCE inst, int unused, int windowed)
 {
 	RECT work;
 	WNDCLASSA wc;
@@ -28,7 +28,7 @@ int __cdecl fcn_00539090(HINSTANCE inst, int unused, int windowed)
 
 	memset(&wc, 0, sizeof(wc));
 	wc.style = 0;
-	wc.lpfnWndProc = fcn_00538250;
+	wc.lpfnWndProc = main_WindowProc;
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
 	wc.hInstance = inst;
@@ -40,7 +40,7 @@ int __cdecl fcn_00539090(HINSTANCE inst, int unused, int windowed)
 	if (RegisterClassA(&wc) == 0) {
 		return 0;
 	}
-	fcn_00538500(g_7e25a0);
+	main_FormatGameVersion(g_7e25a0);
 	sprintf(title, " %s", g_7e25a0);
 	SystemParametersInfoA(SPI_GETWORKAREA, 0, &work, 0);
 	w = work.right - work.left;

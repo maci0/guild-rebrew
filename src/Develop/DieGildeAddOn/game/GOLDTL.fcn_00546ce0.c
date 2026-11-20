@@ -1,6 +1,6 @@
 /* fcn_00546ce0 — drain the entries selected by the record's first word. */
 
-void* __cdecl fcn_005463a0(int, int, int);
+void* __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl fcn_00546be0(void*);
 void* __cdecl he_fn_Handlung(void);
 
@@ -9,7 +9,7 @@ void __cdecl fcn_00546ce0(unsigned short* record)
 {
 	void* entry;
 
-	entry = fcn_005463a0(1, 2, *record);
+	entry = he_StartHandlungSearch(1, 2, *record);
 	while (entry != 0) {
 		fcn_00546be0(entry);
 		entry = he_fn_Handlung();

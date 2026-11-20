@@ -4,7 +4,7 @@ extern char g_868060[];
 
 void* __cdecl gm_LookupEntityRecordById(int);
 
-void* __cdecl fcn_005463a0(int, int, int);
+void* __cdecl he_StartHandlungSearch(int, int, int);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_005015e0(void*, void*, void*, int);
 int __cdecl fcn_00505370(char*);
@@ -40,7 +40,7 @@ int __cdecl fcn_004b9320(char* request)
 
 
 
-	it = (char*) fcn_005463a0(1, 0, 0xf);
+	it = (char*) he_StartHandlungSearch(1, 0, 0xf);
 	while (it != 0) {
 		if (n >= 8) {
 			break;

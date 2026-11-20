@@ -1,9 +1,9 @@
 #include <string.h>
 
 extern char* evt_CurrentScript;
-extern void __cdecl fcn_00426680(int stream, void *out);
+extern void __cdecl evt_ReadToken(int stream, void *out);
 extern int __cdecl evt_FindSymbol(int a0, char *text);
-extern int __cdecl fcn_00427740(int a0, unsigned int a1, int a2);
+extern int __cdecl evt_AllocVariable(int a0, unsigned int a1, int a2);
 extern void __cdecl evt_LogScriptError(int a0, int a1, char *text);
 extern int __cdecl fcn_00427600(int a0, void *rec);
 extern int __cdecl fcn_0064e790(int a0, int a1);
@@ -25,7 +25,7 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     char copiedChar;
     char *q; int record;
 
-    fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
+    evt_ReadToken(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     if (tok.status)
         return 1;
     v2 = 0;
@@ -35,7 +35,7 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
         name[v2] = copiedChar;
         v2++;
     } while (copiedChar);
-    fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
+    evt_ReadToken(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     v2 = a0;
     if (tok.status != 1)
         return 1;
@@ -44,7 +44,7 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
         v3 = evt_FindSymbol(a0, name);
         if (v3)
             return 1;
-        q = (char *)(fcn_00427740(v2, a1, 1) + 4);
+        q = (char *)(evt_AllocVariable(v2, a1, 1) + 4);
         strcpy(q, name);
         return 1;
     }
@@ -53,12 +53,12 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
         v3 = evt_FindSymbol(a0, name);
         if (!v3)
         {
-            record = fcn_00427740(v2, a1, 1);
+            record = evt_AllocVariable(v2, a1, 1);
             q = (char *)(record + 4); strcpy(q, name);
         } else {
             __asm { int 3 }
         }
-        fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
+        evt_ReadToken(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
         if (tok.status != 5)
             return 1;
         **(int **)(record + 0x2c) = tok.data[0];
@@ -86,7 +86,7 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     }
     if (tok.data[0] != 0x1b)
         return 1;
-    fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
+    evt_ReadToken(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     v2 = a0;
     if (tok.status == 5)
         v3 = tok.data[0];
@@ -97,14 +97,14 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     }
     if (!evt_FindSymbol(v2, name))
     {
-        v3 = fcn_00427740(v2, a1, v3);
+        v3 = evt_AllocVariable(v2, a1, v3);
         q = (char *)(v3 + 4);
         strcpy(q, name);
     }
-    fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
+    evt_ReadToken(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     if (tok.data[0] != 0x1c)
         evt_LogScriptError(v2, *(unsigned int *)(v2 + 0x118), (char *)0x679490);
-    fcn_00426680(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
+    evt_ReadToken(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     if (tok.data[0] == 10)
         return 1;
     evt_LogScriptError(v2, *(unsigned int *)(v2 + 0x118), (char *)0x679480);

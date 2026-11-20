@@ -1,7 +1,7 @@
 #include <string.h>
 
 void __cdecl io_FormatTextBuffer(char* out, int a, int b);
-void __cdecl fcn_004fa5f0(void* buf, int a, int b);
+void __cdecl d2_ShowPrivilegMessage(void* buf, int a, int b);
 
 /* ADDRESS: GOLDTL 0x004f8e60 */
 int __cdecl fcn_004f8e60(char* a1, int* a2)
@@ -19,7 +19,7 @@ int __cdecl fcn_004f8e60(char* a1, int* a2)
 		if (*(unsigned char*) (a1 + 2) == 6) {
 			memset(buf, 0, sizeof(buf));
 			io_FormatTextBuffer(buf, 0x1dc0, *(unsigned short*) a1);
-			fcn_004fa5f0(buf, 1, 0x657c7);
+			d2_ShowPrivilegMessage(buf, 1, 0x657c7);
 			return 2;
 		}
 	}

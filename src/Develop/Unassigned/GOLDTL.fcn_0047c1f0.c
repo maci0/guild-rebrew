@@ -30,7 +30,7 @@ typedef struct Tex {
 int __cdecl fcn_0047b8b0(int x, int y, int w, int h, RENDER_QUAD* q);
 void __cdecl d2_SetQuadVertexColor(RENDER_QUAD* q, unsigned char r, unsigned char g, unsigned char b);
 
-RENDER_QUAD* __cdecl fcn_0047c1f0(float u, float v, int w, int h, Tex* tex, int x, int y)
+RENDER_QUAD* __cdecl d2_QueueClippedTexturedQuad(float u, float v, int w, int h, Tex* tex, int x, int y)
 {
 	int cw;
 	int ch;

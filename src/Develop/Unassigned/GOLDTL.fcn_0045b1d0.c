@@ -7,7 +7,7 @@ typedef struct Cell {
 	int pad[6];
 } Cell;
 
-void __cdecl fcn_0045b1d0(char* g, int from, int to)
+void __cdecl d3_RelabelMatchingCells(char* g, int from, int to)
 {
 	int j;
 	int i;

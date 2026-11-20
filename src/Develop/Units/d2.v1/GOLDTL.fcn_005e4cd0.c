@@ -20,7 +20,7 @@ int __cdecl fcn_00471f80(int);
 void __cdecl fcn_0057df50(int, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005e4cd0(void)
+void __cdecl d2_RunMessageFilterDialog(void)
 {
 	int h;
 	int btn[16];
@@ -42,7 +42,7 @@ void __cdecl fcn_005e4cd0(void)
 		*(int*) (g_1015ea0 + b * 0x2f4 + 0x1e0) = 3;
 		d2_SetElementValue(b, fcn_0057de80(0x605 + i) == 0);
 	}
-	while (fcn_005373e0(fcn_005e4cd0, 0x677c7) != 0) {
+	while (fcn_005373e0(d2_RunMessageFilterDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0 || (*(unsigned char*)&g_14cf950) == 1) {
 			g_774654 = 1;
 			for (i = 0; i < 9; i++) {

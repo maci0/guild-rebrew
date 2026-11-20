@@ -11,9 +11,9 @@ extern int g_7747d4;
 void __cdecl fcn_00422d60(void);
 int __cdecl fcn_0041e680(char*, int, int, int, int, int, int, int);
 void __cdecl fcn_0041f350(int);
-void __cdecl fcn_005356e0(void);
+void __cdecl main_PumpWindowMessages(void);
 
-void __cdecl fcn_00544750(void)
+void __cdecl main_PlayIntroMovies(void)
 {
 	char path[0x104];
 
@@ -26,7 +26,7 @@ void __cdecl fcn_00544750(void)
 	Sleep(400);
 	sprintf(path, "%s4head.mpg", g_6a3658);
 	g_7747d4 = fcn_0041e680(path, 0, main_Instance, 10, 10, 0xdc, 0xdc, 0x8a);
-	fcn_005356e0();
+	main_PumpWindowMessages();
 	Sleep(100);
 	fcn_0041f350(g_7747d4);
 	Sleep(400);
@@ -38,5 +38,5 @@ void __cdecl fcn_00544750(void)
 	g_7747d4 = fcn_0041e680(path, 0, main_Instance, 10, 10, 0xdc, 0xdc, 0x8a);
 	Sleep(100);
 	fcn_0041f350(g_7747d4);
-	fcn_005356e0();
+	main_PumpWindowMessages();
 }

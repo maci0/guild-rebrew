@@ -8,7 +8,7 @@ int __cdecl fcn_00500cb0(void*, char*);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 void __cdecl ReportClientMessage(const char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl fcn_004c4510(char*, int);
 int __cdecl fcn_004c4670(unsigned char, unsigned char, int, void*);
 void __cdecl fcn_004c5360(void);
@@ -41,7 +41,7 @@ void __cdecl he_RunLagerErweitern(char* action)
 		break;
 	case 0xfffffffe:
 	case 0xffffffff:
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	default:
 		return;
@@ -83,5 +83,5 @@ void __cdecl he_RunLagerErweitern(char* action)
 	else {
 		ReportClientMessage("he_RunLagerErweitern():Wrong LagerID...");
 	}
-	fcn_00546190(action);
+	he_FreeAction(action);
 }

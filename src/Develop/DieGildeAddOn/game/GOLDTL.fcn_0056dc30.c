@@ -23,7 +23,7 @@ char* __cdecl gm_SearchTable67(int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_0056dc30(char* u)
 {
@@ -62,7 +62,7 @@ void __cdecl fcn_0056dc30(char* u)
 		io_FormatTextBuffer(text, 0x1a18, b, *(unsigned short*) h);
 		he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, 0x5f2, *(int*) (u + 0x10), -1, 0,
 		    "_NACHRICHTEN_HS_80");
-		fcn_00546190(u);
+		he_FreeAction(u);
 		return;
 	case -2:
 	case -1:
@@ -74,5 +74,5 @@ void __cdecl fcn_0056dc30(char* u)
 	default:
 		return;
 	}
-	fcn_00546190(u);
+	he_FreeAction(u);
 }

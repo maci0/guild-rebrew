@@ -30,7 +30,7 @@ extern char g_868060[];
 
 Ent* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(Ent*, int);
-Obj* __cdecl fcn_005463a0(int a, int b, int c);
+Obj* __cdecl he_StartHandlungSearch(int a, int b, int c);
 Obj* __cdecl he_fn_Handlung(void);
 
 int __cdecl gm_CheckEntityType(char*);
@@ -63,7 +63,7 @@ int __cdecl fcn_004b9530(Cmd* cmd)
 	if (fcn_005c6270(e, 0x290) != 0) {
 		return 0x400;
 	}
-	for (o = fcn_005463a0(1, 0, 0xf); o != 0; o = he_fn_Handlung()) {
+	for (o = he_StartHandlungSearch(1, 0, 0xf); o != 0; o = he_fn_Handlung()) {
 		if (n >= 8) {
 			break;
 		}

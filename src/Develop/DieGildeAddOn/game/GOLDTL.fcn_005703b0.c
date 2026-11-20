@@ -24,7 +24,7 @@ unsigned short __cdecl gm_RandomMod(int);
 char* __cdecl fcn_005049a0(char*);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_00526920(char*, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_005703b0(char* u)
 {
@@ -69,7 +69,7 @@ void __cdecl fcn_005703b0(char* u)
 		((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_state = 6;
 	case -2:
 	case -1:
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	}
 }

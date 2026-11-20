@@ -14,7 +14,7 @@ extern char g_7f4ca0[];
 typedef struct CrimeProto { char pad0[0x247]; unsigned char field247; char tail[5]; } CrimeProto;
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, unsigned int, int);
-int __cdecl fcn_00546190(char*);
+int __cdecl he_FreeAction(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_004c5da0(int, unsigned int, int, int, int, int);
 int __cdecl fcn_00500bb0(int*, int, int, int);
@@ -26,10 +26,10 @@ void __cdecl fcn_005b2f60(char*);
 void __cdecl fcn_005b2fb0(char*);
 float __cdecl gm_GetEntitySkill(char*, int);
 void __cdecl fcn_005b3000(char*, char*, char*, int);
-void __cdecl fcn_005b30c0(char*, char*, char*);
+void __cdecl he_ShowFriedhofMessage(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x00578a10 */
-int __cdecl fcn_00578a10(char* event)
+int __cdecl he_RunHauchDesVerfalls(char* event)
 {
 	char* p;
 	char* q;
@@ -126,7 +126,7 @@ int __cdecl fcn_00578a10(char* event)
 			*(int*) (event + 0x70) = -1;
 			return;
 		}
-		fcn_005b30c0(tbl, m, n);
+		he_ShowFriedhofMessage(tbl, m, n);
 		*(int*) (event + 0x70) = -1;
 		return;
 	}
@@ -136,5 +136,5 @@ tail1:
 		fcn_00529160(0, 0, *(unsigned short*) p, 0);
 	}
 tail2:
-	return fcn_00546190(event);
+	return he_FreeAction(event);
 }

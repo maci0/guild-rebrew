@@ -8,7 +8,7 @@ extern unsigned char g_773d75;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004ae130(unsigned short);
 int __cdecl fcn_0064fcaf(char*);
-int __cdecl fcn_00501490(char*);
+int __cdecl gm_FindObjektPrototypeByName(char*);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
 int __cdecl fcn_004b1dd0(char* tbl, int idx, char* arg)
@@ -23,7 +23,7 @@ int __cdecl fcn_004b1dd0(char* tbl, int idx, char* arg)
 		if (strlen(s) >= 4) {
 			s += 3;
 			fcn_0064fcaf(s + 1);
-			r = fcn_00501490(s);
+			r = gm_FindObjektPrototypeByName(s);
 			if (r != 0) {
 				fcn_004c51f0(*(int*) (e + 4), -1, r, 1, g_773d75, 0);
 				return 1;

@@ -21,12 +21,12 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c4510(void*, int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c5480(int, int, float);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl fcn_0054c720(char*, char*, char*);
 int __cdecl fcn_004c4fa0(void*);
 int __cdecl fcn_004f25d0(int, unsigned char**, void**);
@@ -165,11 +165,11 @@ void __cdecl fcn_00544a90(char* e)
 	case 1:
 		fcn_004c4eb0(g_6a5a48);
 		fcn_004c4510(b, *(int*) (b + 4));
-		fcn_004c4570(4, 1, 0x5c, a + 4);
-		fcn_004c4570(2, 1, 0x50, a + 0x50);
+		cm_AppendPacketFieldDelta(4, 1, 0x5c, a + 4);
+		cm_AppendPacketFieldDelta(2, 1, 0x50, a + 0x50);
 		fcn_004c5360();
 		fcn_004c4510(a, *(int*) (a + 4));
-		fcn_004c4570(4, 1, 0x5c, b + 4);
+		cm_AppendPacketFieldDelta(4, 1, 0x5c, b + 4);
 		fcn_004c5360();
 		fcn_004c5420(*(int*) (b + 4), 0x1c8, 4, 0x40000, 0);
 		fcn_004c5420(*(int*) (a + 4), 0x1c8, 4, 0x40000, 0);
@@ -288,7 +288,7 @@ tail_locked:
 		}
 	}
 tail_done:
-	fcn_00546190(e);
+	he_FreeAction(e);
 	return;
 Lneg:
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;

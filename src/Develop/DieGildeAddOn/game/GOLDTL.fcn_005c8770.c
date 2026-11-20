@@ -28,7 +28,7 @@ int __cdecl fcn_00508da0(unsigned char*);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005c8770(unsigned char* a)
+void __cdecl d2_ShowBuildingStatsDetail(unsigned char* a)
 {
 	int st[21];
 	Shop* t;
@@ -90,12 +90,12 @@ void __cdecl fcn_005c8770(unsigned char* a)
 	else if (st[20] < 0) {
 		io_AppendText(0xb1, st[20] + st[18]);
 	}
-	if (fcn_005373e0((void*) fcn_005c8770, 0x677c7) != 0) {
+	if (fcn_005373e0((void*) d2_ShowBuildingStatsDetail, 0x677c7) != 0) {
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (fcn_005373e0((void*) fcn_005c8770, 0x677c7) != 0);
+		} while (fcn_005373e0((void*) d2_ShowBuildingStatsDetail, 0x677c7) != 0);
 	}
 	fcn_00471e30(dlg);
 }

@@ -43,7 +43,7 @@ extern int g_100f89c;
 extern int g_100f940;
 extern int g_100f950;
 
-void __cdecl fcn_0046b2b0(int id);
+void __cdecl d2_DestroyElement(int id);
 int __cdecl fcn_0046b520(char* s, int font);
 void __cdecl fcn_00469c40(int x, int y, int slot);
 int __cdecl fcn_00469c30(int x, int y, int a3);
@@ -51,7 +51,7 @@ char __cdecl fcn_00411610(int shift, int ctrl, int alt, char key);
 
 
 /* ADDRESS: GOLDTL 0x00474300 */
-void __cdecl fcn_00474300(void)
+void __cdecl d2_HandleTextInput(void)
 {
 	int saved;
 	unsigned int c;
@@ -83,7 +83,7 @@ void __cdecl fcn_00474300(void)
 		(*(Combo**) &tp_d2_SelectedControl) = 0;
 		g_7725e4 = 0;
 		if (g_67d8ec != -1) {
-			fcn_0046b2b0(g_67d8ec);
+			d2_DestroyElement(g_67d8ec);
 			g_67d8ec = -1;
 		}
 		/* fall through */
@@ -184,7 +184,7 @@ found15:
 		g_100f950 = 0;
 tail15:
 		if (g_67d8ec != -1) {
-			fcn_0046b2b0(g_67d8ec);
+			d2_DestroyElement(g_67d8ec);
 			w = (*(Combo**) &tp_d2_SelectedControl);
 			g_67d8ec = -1;
 		}

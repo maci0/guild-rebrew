@@ -6,7 +6,7 @@ extern Rec18_68da68 g_68da68[];
 extern char* __cdecl gm_LookupEntityRecordById(int id);
 
 /* ADDRESS: GOLDTL 0x004e8c00 */
-int __cdecl fcn_004e8c00(int group, int max, OFFICE_SLOT* out)
+int __cdecl amt_CollectOfficeSlotsByGroup(int group, int max, OFFICE_SLOT* out)
 {
 	int n;
 	int i;

@@ -39,7 +39,7 @@ void __cdecl fcn_00428340(int, int, char*);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_0058d3f0(int a1, Req* request)
+int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 {
 	int cancel;
 	int info;
@@ -99,7 +99,7 @@ int __cdecl fcn_0058d3f0(int a1, Req* request)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_0058d3f0, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_ShowFriedhofGehilfenDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return result;
 }

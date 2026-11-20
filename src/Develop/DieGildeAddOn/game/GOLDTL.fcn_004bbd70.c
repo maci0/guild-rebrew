@@ -27,8 +27,8 @@ void __cdecl fcn_004bc060(AMBIENT_ANIMAL_SLOT*);
 void __cdecl fcn_004bc090(AMBIENT_ANIMAL_SLOT*);
 void __cdecl fcn_004bc1e0(AMBIENT_ANIMAL_SLOT*);
 void __cdecl fcn_004bc270(AMBIENT_ANIMAL_SLOT*);
-void __cdecl fcn_004bc2f0(AMBIENT_ANIMAL_SLOT*);
-void __cdecl fcn_004bc380(AMBIENT_ANIMAL_SLOT*);
+void __cdecl gm_SpawnAmbientSheep(AMBIENT_ANIMAL_SLOT*);
+void __cdecl ch_SpawnAmbientCow(AMBIENT_ANIMAL_SLOT*);
 void __cdecl fcn_004bc410(AMBIENT_ANIMAL_SLOT*, int);
 void __cdecl fcn_004bc540(AMBIENT_ANIMAL_SLOT*);
 void __cdecl fcn_004bc6b0(AMBIENT_ANIMAL_SLOT*);
@@ -64,10 +64,10 @@ void __cdecl fcn_004bbd70(void)
 					fcn_004bc270(s);
 					break;
 				case 4:
-					fcn_004bc2f0(s);
+					gm_SpawnAmbientSheep(s);
 					break;
 				case 3:
-					fcn_004bc380(s);
+					ch_SpawnAmbientCow(s);
 					break;
 				case 6:
 					fcn_004bc410(s, 6);

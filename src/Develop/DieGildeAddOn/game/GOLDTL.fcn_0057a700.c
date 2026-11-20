@@ -33,7 +33,7 @@ struct msg {
 extern pos14_7f4c00 gm_GameTime;
 
 
-char* __cdecl fcn_005463a0(int, ...);
+char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_004c5530(struct msg*);
@@ -50,7 +50,7 @@ void __cdecl fcn_0057a700(char* u)
 		return;
 	}
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-	for (o = fcn_005463a0(2, 0, 0x90, 3, *(int*) (u + 0x10)); o != 0; o = he_fn_Handlung()) {
+	for (o = he_StartHandlungSearch(2, 0, 0x90, 3, *(int*) (u + 0x10)); o != 0; o = he_fn_Handlung()) {
 		if (o != u) {
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
 			return;

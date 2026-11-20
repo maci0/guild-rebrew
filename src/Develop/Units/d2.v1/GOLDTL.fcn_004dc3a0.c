@@ -7,7 +7,7 @@ extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_004e8af0(char*, void*);
+int __cdecl amt_FindOfficeSlotByKey(char*, void*);
 int __cdecl fcn_004e8b40(int, void*);
 int __cdecl fcn_004e9310(int, int, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -23,7 +23,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x004dc3a0 */
-int __cdecl fcn_004dc3a0(char* a0, int a1, int* entityIds, int* a3)
+int __cdecl cut_ShowSessionDialog(char* a0, int a1, int* entityIds, int* a3)
 {
 	char info[0x18];
 	char buf[24];
@@ -37,7 +37,7 @@ int __cdecl fcn_004dc3a0(char* a0, int a1, int* entityIds, int* a3)
 	int result;
 
 	*a3 = 0;
-	if (fcn_004e8af0(a0, info) == 0) {
+	if (amt_FindOfficeSlotByKey(a0, info) == 0) {
 		return -1;
 	}
 	if (fcn_004e8b40(*(int*) (info + 8) & 0xff, buf) == 0) {

@@ -2,7 +2,7 @@
  * input until the page is closed. */
 #include "client_data.h"
 void __cdecl io_FormatTextBuffer(char*, int, int);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005bdc30(int, int*, int, int, int);
@@ -47,7 +47,7 @@ void __cdecl fcn_0058dbe0(int a0)
 	char* fill;
 
 	io_FormatTextBuffer(text, 0x40c8, 0x40b6);
-	if (fcn_005463a0(2, 0, 0x90, 3, *(int*) (a0 + 1))) {
+	if (he_StartHandlungSearch(2, 0, 0x90, 3, *(int*) (a0 + 1))) {
 		fcn_004c30a0(0xffffffff, 0, (char*) 0x6a9780, 0, 100);
 		fcn_00526120(text, 0);
 		return;

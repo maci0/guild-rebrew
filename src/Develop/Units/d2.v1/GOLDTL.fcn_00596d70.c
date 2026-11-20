@@ -44,13 +44,13 @@ int __cdecl fcn_00466ee0(int, int, int, int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetElementFont(int, int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 void __cdecl fcn_0046f280(int);
 void __cdecl fcn_0046f940(int, char*);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 void __cdecl fcn_0050bc10(int, unsigned char, char*);
-void* __cdecl fcn_005463a0(int, int, int, int, int);
+void* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_00471f80(int);
 void __cdecl d2_SetElementValue(int, ...);
@@ -128,7 +128,7 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 			*(int*) (g_1015ea0 + r->text2 * 0x2f4 + 0x84) = 0x54;
 			*(int*) (g_1015ea0 + r->text2 * 0x2f4 + 0x70) = 1;
 		}
-		obj = (char*) fcn_005463a0(2, 0, 4, 3, *(unsigned int*) (p + 1));
+		obj = (char*) he_StartHandlungSearch(2, 0, 4, 3, *(unsigned int*) (p + 1));
 		while (obj != 0) {
 			if (*(unsigned short*) (obj + 0xac) == r->id) {
 				break;
@@ -136,7 +136,7 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 			obj = (char*) he_fn_Handlung();
 		}
 		if (obj == 0) {
-			obj = (char*) fcn_005463a0(2, 0, 3, 3, *(unsigned int*) (p + 1));
+			obj = (char*) he_StartHandlungSearch(2, 0, 3, 3, *(unsigned int*) (p + 1));
 			while (obj != 0) {
 				if (*(unsigned short*) (obj + 0xac) == r->id) {
 					break;
@@ -211,23 +211,23 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 		return;
 	}
 	if (r->icon != -1) {
-		fcn_0046b2b0(r->icon);
+		d2_DestroyElement(r->icon);
 		r->icon = -1;
 	}
 	if (r->icon2 != -1) {
-		fcn_0046b2b0(r->icon2);
+		d2_DestroyElement(r->icon2);
 		r->icon2 = -1;
 	}
 	if (r->text1 != -1) {
-		fcn_0046b2b0(r->text1);
+		d2_DestroyElement(r->text1);
 		r->text1 = -1;
 	}
 	if (r->text2 != -1) {
-		fcn_0046b2b0(r->text2);
+		d2_DestroyElement(r->text2);
 		r->text2 = -1;
 	}
 	if (r->title != -1) {
-		fcn_0046b2b0(r->title);
+		d2_DestroyElement(r->title);
 		r->title = -1;
 	}
 	if (r->obj != -1) {

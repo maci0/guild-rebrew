@@ -6,7 +6,7 @@ void __cdecl ReportClientMessage(char*);
 int __cdecl fcn_0042b2f0(char*, int, int);
 int __cdecl gm_RandomMod(int);
 void __cdecl fcn_0046ac30(void);
-void __cdecl fcn_0046dff0(int, int);
+void __cdecl d2_DrawWindow(int, int);
 void __cdecl d2_ClearWindowChildren(int, int);
 void __cdecl fcn_00471490(int);
 void __cdecl d2_SetForm(char*, int, int);
@@ -14,7 +14,7 @@ int __cdecl fcn_00500d60(int, char*);
 int __cdecl fcn_004fe330(char*, int);
 int __cdecl fcn_0050bc10(int, int, char*);
 int __cdecl fcn_00517c00(int, unsigned char, int, char*);
-int __cdecl fcn_00517b90(char*, int, char*);
+int __cdecl io_CopyTrailingDigits(char*, int, char*);
 int __cdecl fcn_0051e070(void);
 char* __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl fcn_0064d530(char*, char*, unsigned);
@@ -198,7 +198,7 @@ fmt:
 			}
 			v24 = fcn_0042b2f0((char*)*(int*)(v1c * 4 + 0x14a540c), digit, v08);
 			if (v20 >= 0) {
-				v20 = fcn_00517b90(S.text, v20, abuf[6]);
+				v20 = io_CopyTrailingDigits(S.text, v20, abuf[6]);
 				fcn_0064d41a(S.work, (char*)0x6a22d8, (char*)v24,
 					     abuf[6], (char*)v18);
 			} else {
@@ -217,7 +217,7 @@ fmt:
 			}
 			v24 = fcn_0042b2f0((char*)*(int*)(v1c * 4 + 0x14a5400), digit, v08);
 			if (v20 >= 0) {
-				v20 = fcn_00517b90(S.text, v20, abuf[5]);
+				v20 = io_CopyTrailingDigits(S.text, v20, abuf[5]);
 				fcn_0064d41a(S.work, (char*)0x6a22d8, (char*)v24,
 					     abuf[5], (char*)v18);
 			} else {
@@ -236,7 +236,7 @@ fmt:
 			}
 			v24 = fcn_0042b2f0((char*)*(int*)(v1c * 4 + 0x14a5418), digit, v08);
 			if (v20 >= 0) {
-				v20 = fcn_00517b90(S.text, v20, abuf[4]);
+				v20 = io_CopyTrailingDigits(S.text, v20, abuf[4]);
 				fcn_0064d41a(S.work, (char*)0x6a22d8, (char*)v24,
 					     abuf[4], (char*)v18);
 			} else {
@@ -798,12 +798,12 @@ carry:
 	v28 = ((v28 << 6) - v28) * 3;
 	v20 = *(int*)(*(int*)0x1015ea0 + v28 * 4 + 0x50);
 	if (v20 == 0) {
-		fcn_0046dff0(*(int*)0x772514, *(int*)0x77250c);
+		d2_DrawWindow(*(int*)0x772514, *(int*)0x77250c);
 		*(int*)0x772554 = v08;
 		return v24;
 	}
 	if (*(int*)(v20 + 0x198) == 0) {
-		fcn_0046dff0(*(int*)0x772514, *(int*)0x77250c);
+		d2_DrawWindow(*(int*)0x772514, *(int*)0x77250c);
 		*(int*)0x772554 = v08;
 		return v24;
 	}

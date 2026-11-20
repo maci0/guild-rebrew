@@ -1,6 +1,6 @@
 void __cdecl fcn_00454500(float*);
 void __cdecl fcn_00458cd0(int, int, float*, float*);
-void __cdecl fcn_00453ed0(float*, float*, float*);
+void __cdecl d3_MultiplyAffineMatrices(float*, float*, float*);
 
 /* ADDRESS: GOLD 0x00458d90 */
 void __cdecl fcn_00458d90(int source, char* view, int flags, float* out)
@@ -17,7 +17,7 @@ void __cdecl fcn_00458d90(int source, char* view, int flags, float* out)
         transform[12] -= *(float*) (view + 0x78);
         transform[13] -= *(float*) (view + 0x7c);
         transform[14] -= *(float*) (view + 0x80);
-        fcn_00453ed0(transform, (float*) (view + 0x18c), out);
+        d3_MultiplyAffineMatrices(transform, (float*) (view + 0x18c), out);
     } else {
         fcn_00458cd0(source, flags, identity, out);
     }

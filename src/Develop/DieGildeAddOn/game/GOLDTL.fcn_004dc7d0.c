@@ -3,7 +3,7 @@
 
 struct unit;
 char* __cdecl gm_LookupEntityRecordById(int);
-struct unit* __cdecl fcn_005463a0(int, ...);
+struct unit* __cdecl he_StartHandlungSearch(int, ...);
 struct unit* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_004e6240(int*, char*, char*, char*);
@@ -34,7 +34,7 @@ int __cdecl fcn_004dc7d0(char* cmd)
         if (a[0x1b1] != 0) {
             bad = a;
             error = 7;
-            unit = (char*) fcn_005463a0(1, 0, 0x3d);
+            unit = (char*) he_StartHandlungSearch(1, 0, 0x3d);
             while (unit != 0) {
                 if (*(int*) (unit + 0xac) == *(int*) (a + 4)) {
                     error = 6;
@@ -53,7 +53,7 @@ int __cdecl fcn_004dc7d0(char* cmd)
             if (a[0x1b1] != 0) {
                 bad = a;
                 error = 7;
-                unit = (char*) fcn_005463a0(1, 0, 0x3d);
+                unit = (char*) he_StartHandlungSearch(1, 0, 0x3d);
                 while (unit != 0) {
                     if (*(int*) (unit + 0xac) == *(int*) (a + 4)) {
                         error = 6;
@@ -72,7 +72,7 @@ int __cdecl fcn_004dc7d0(char* cmd)
             if (c[0x1b1] != 0) {
                 bad = c;
                 error = 7;
-                unit = (char*) fcn_005463a0(1, 0, 0x3d);
+                unit = (char*) he_StartHandlungSearch(1, 0, 0x3d);
                 while (unit != 0) {
                     if (*(int*) (unit + 0xac) == *(int*) (c + 4)) {
                         error = 6;
@@ -91,7 +91,7 @@ int __cdecl fcn_004dc7d0(char* cmd)
             if (d[0x1b1] != 0) {
                 bad = d;
                 error = 7;
-                unit = (char*) fcn_005463a0(1, 0, 0x3d);
+                unit = (char*) he_StartHandlungSearch(1, 0, 0x3d);
                 while (unit != 0) {
                     if (*(int*) (unit + 0xac) == *(int*) (d + 4)) {
                         error = 6;
@@ -110,7 +110,7 @@ int __cdecl fcn_004dc7d0(char* cmd)
             if (e[0x1b1] != 0) {
                 bad = e;
                 error = 7;
-                unit = (char*) fcn_005463a0(1, 0, 0x3d);
+                unit = (char*) he_StartHandlungSearch(1, 0, 0x3d);
                 while (unit != 0) {
                     if (*(int*) (unit + 0xac) == *(int*) (e + 4)) {
                         error = 6;
@@ -129,7 +129,7 @@ int __cdecl fcn_004dc7d0(char* cmd)
             if (f[0x1b1] != 0) {
                 bad = f;
                 error = 7;
-                unit = (char*) fcn_005463a0(1, 0, 0x3d);
+                unit = (char*) he_StartHandlungSearch(1, 0, 0x3d);
                 while (unit != 0) {
                     if (*(int*) (unit + 0xac) == *(int*) (f + 4)) {
                         error = 6;

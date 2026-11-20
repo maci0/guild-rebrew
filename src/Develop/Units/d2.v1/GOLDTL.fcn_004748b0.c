@@ -1,9 +1,9 @@
 extern void __cdecl d2_ClearSelectedControl(void);
-extern void __cdecl fcn_0046b2b0(int a);
+extern void __cdecl d2_DestroyElement(int a);
 extern int __cdecl CountDisplayCounters(void);
 extern void __cdecl fcn_00469c40(int a, int b, int c);
 extern int __cdecl fcn_00469c30(short a, short b, int c);
-extern void __cdecl fcn_00474300(void);
+extern void __cdecl d2_HandleTextInput(void);
 extern int __cdecl d2_UpdateSelectedControlDrag(void);
 extern void __cdecl fcn_00466fe0(int a, int b);
 extern void __cdecl fcn_00474040(void);
@@ -50,7 +50,7 @@ int __cdecl fcn_004748b0(void)
 		g_7725e4 = 0;
 	}
 	if (p == 0 && g_67d8ec != -1) {
-		fcn_0046b2b0(g_67d8ec);
+		d2_DestroyElement(g_67d8ec);
 		g_67d8ec = -1;
 		p = *(unsigned int **) &tp_d2_SelectedControl;
 	}
@@ -103,7 +103,7 @@ int __cdecl fcn_004748b0(void)
 						    g_67d3b0 + 8);
 					}
 				} else if (g_67d8ec != -1) {
-					fcn_0046b2b0(g_67d8ec);
+					d2_DestroyElement(g_67d8ec);
 					g_67d8ec = -1;
 				}
 				p = *(unsigned int **) &tp_d2_SelectedControl;
@@ -148,7 +148,7 @@ label_474b96:
 		if (g_67d8ec == -1) {
 			goto label_474ca4;
 		}
-		fcn_0046b2b0(g_67d8ec);
+		d2_DestroyElement(g_67d8ec);
 		g_67d8ec = -1;
 		p = *(unsigned int **) &tp_d2_SelectedControl;
 	}
@@ -157,7 +157,7 @@ label_474b96:
 			g_100f950 = 1;
 			g_14ce8d8 = 0;
 		}
-		fcn_00474300();
+		d2_HandleTextInput();
 		if (d2_UpdateSelectedControlDrag()) {
 			return 1;
 		}

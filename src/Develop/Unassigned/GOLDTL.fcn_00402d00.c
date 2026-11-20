@@ -6,7 +6,7 @@ extern float g_6628a8;
 extern float g_6628b0;
 
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
-void __cdecl fcn_004518a0(float* v);
+void __cdecl d3_NormalizeVector(float* v);
 char __cdecl fcn_0045b990(float* tex, float* pt, int* col, int* row, float* out);
 
 /* ADDRESS: GOLDTL 0x00402d00 */
@@ -94,7 +94,7 @@ next:
 		direction[0] = -direction[0];
 		direction[1] = -direction[1];
 		direction[2] = -direction[2];
-		fcn_004518a0(direction);
+		d3_NormalizeVector(direction);
 		k = t * g_6628b0;
 		s = *(char**) (character + 0x34);
 		pt[0] = *(float*) (s + 0x4c) + k * direction[0];

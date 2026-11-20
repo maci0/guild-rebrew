@@ -9,8 +9,8 @@ int __cdecl gm_CheckEntityType(void*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl vfs_LookupPath(char*, int, char*);
 int __cdecl evt_LoadScript(char*);
-int __cdecl fcn_00426cc0(int);
-void __cdecl fcn_00428720(int);
+int __cdecl evt_FindScriptById(int);
+void __cdecl evt_RequestScriptExit(int);
 void __cdecl fcn_00428340(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00515c60 */
@@ -76,9 +76,9 @@ found:
 	}
 	v3 = *(int*) (*(int*) (v8 + 0x184) + 0x28);
 	if (v3 != -1) {
-		v3 = fcn_00426cc0(v3);
+		v3 = evt_FindScriptById(v3);
 		if (v3) {
-			fcn_00428720(v3);
+			evt_RequestScriptExit(v3);
 		}
 	}
 	fcn_00428340(r, 2, *(int*) (v8 + 0x184), 0x4c3800);

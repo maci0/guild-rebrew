@@ -46,7 +46,7 @@ Entity_54fd60* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl fcn_004c5620(int, Order_54fd60*);
 void __cdecl fcn_00500bb0(Stamp_54fd60*, int, int, int);
-void __cdecl fcn_00546190(Order_54fd60*);
+void __cdecl he_FreeAction(Order_54fd60*);
 int __cdecl fcn_004c5980(void*);
 int __cdecl fcn_004c4450(int);
 
@@ -126,7 +126,7 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
             fcn_00500bb0(&o->stamp, 0, 2, 0);
             o->event = fcn_004c5620(-1, o);
         }
-        fcn_00546190(o);
+        he_FreeAction(o);
         return;
     }
 }

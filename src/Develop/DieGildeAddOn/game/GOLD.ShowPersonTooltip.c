@@ -21,7 +21,7 @@ float __cdecl fcn_00505e30(unsigned short);
 int __cdecl gm_GetOppositeStatIndex(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 char* __cdecl gm_LookupEntityRecordById(int);
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -77,7 +77,7 @@ void __cdecl ShowPersonTooltip(char* w)
 	if (q != 0 && *(unsigned char*) (q + 8) > 0) {
 		io_AppendText(0x30, *(unsigned short*) q);
 	} else {
-		for (e = fcn_005463a0(1, 0, 0x41); e != 0; e = he_fn_Handlung()) {
+		for (e = he_StartHandlungSearch(1, 0, 0x41); e != 0; e = he_fn_Handlung()) {
 			if (*(int*) (e + 0xac) == *(int*) (w + 4)) {
 				break;
 			}

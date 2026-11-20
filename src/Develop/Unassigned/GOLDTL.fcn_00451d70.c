@@ -1,7 +1,7 @@
 
 
 
-void __cdecl fcn_004518a0(float*);
+void __cdecl d3_NormalizeVector(float*);
 
 void __cdecl d3_CalculateTriangleNormal(float* a, float* b, float* c, float* n)
 {
@@ -19,5 +19,5 @@ void __cdecl d3_CalculateTriangleNormal(float* a, float* b, float* c, float* n)
 	n[0] = dy * e[2] - dz * e[1];
 	n[1] = dz * e[0] - dx * e[2];
 	n[2] = dx * e[1] - dy * e[0];
-	fcn_004518a0(n);
+	d3_NormalizeVector(n);
 }

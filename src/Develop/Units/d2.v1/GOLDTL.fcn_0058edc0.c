@@ -7,7 +7,7 @@ extern int g_100f1dc;
 
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471af0(int, int);
-int __cdecl fcn_0058dfb0(int, char*, int);
+int __cdecl d2_OpenSeanceDialog(int, char*, int);
 
 int __cdecl fcn_0058edc0(int entity, char* s, int resultOut)
 {
@@ -25,7 +25,7 @@ int __cdecl fcn_0058edc0(int entity, char* s, int resultOut)
 				if (d2_CurrentElementId == *(int*) (s + 0x28 + i * 0xc)) {
 					*(int*) (s + 0x88) = i;
 					fcn_00471af0(*(int*) s, 0);
-					r = fcn_0058dfb0(entity, s, resultOut);
+					r = d2_OpenSeanceDialog(entity, s, resultOut);
 					fcn_00471af0(*(int*) s, 1);
 					break;
 				}

@@ -3,7 +3,7 @@
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
-void __cdecl fcn_00508cf0(unsigned char n, int* arr)
+void __cdecl gm_GenerateShuffledIndices(unsigned char n, int* arr)
 {
 	int i;
 	int j;

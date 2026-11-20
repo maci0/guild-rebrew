@@ -14,7 +14,7 @@ extern float g_1042a10;
 extern float g_1042a18;
 extern float g_1042fa4;
 
-void __cdecl fcn_00437bc0(void);
+void __cdecl d3_UpdateViewFrustum(void);
 void __cdecl fcn_00436df0(float fov, float aspect, float width, float height, float x, float y, float znear, float zfar);
 void __cdecl fcn_00438af0(unsigned char);
 
@@ -57,7 +57,7 @@ void __cdecl fcn_00438da0(float w, float h, float x, float y, float znear, float
 		d3_ViewportRight = right;
 		d3_ViewportBottom = bottom;
 	}
-	fcn_00437bc0();
+	d3_UpdateViewFrustum();
 	fcn_00436df0(g_1042fa4 + g_1042fa4, w / h, w, h, x, y, znear, zfar);
 	fcn_00438af0(0);
 }

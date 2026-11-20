@@ -8,7 +8,7 @@ extern void (__cdecl* g_7dc440[])(unsigned char*);
 
 void __cdecl fcn_00546be0(unsigned char*);
 
-void __cdecl fcn_00546de0(void)
+void __cdecl he_DispatchFlaggedEvents(void)
 {
 	int i;
 	unsigned char* p;

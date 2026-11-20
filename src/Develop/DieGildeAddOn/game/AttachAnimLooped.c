@@ -58,7 +58,7 @@ int __cdecl AttachAnimLooped(char** character, char** animation, int* kind)
         options.mode = (unsigned char) *kind;
         options.reverse = 0;
         options.loop = 1;
-        if (fcn_00434970(*(char**) (object + 0x1cc), name, options) == 0) {
+        if (d3_AttachAnimationToContext(*(char**) (object + 0x1cc), name, options) == 0) {
             evt_LogScriptError(evt_CurrentScript, *(unsigned int*) (evt_CurrentScript + 0x118),
                 "AttachAnimLooped(): Could not find animation-file...");
         }

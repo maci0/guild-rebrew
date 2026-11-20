@@ -1,13 +1,13 @@
 #include <stdio.h>
 
 char* __cdecl ch_LoadCharacterMotion(char*, char*, char);
-void __cdecl fcn_00407800(char*, int, char*);
+void __cdecl ch_SetBodyAttachment(char*, int, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 int __cdecl fcn_004042b0(char*);
 void __cdecl ch_CheckAniMorph(char*);
 
 char* __cdecl ch_LoadCharacterMotion(char*, char*, char);
-void __cdecl fcn_00407800(char*, int, char*);
+void __cdecl ch_SetBodyAttachment(char*, int, char*);
 int __cdecl fcn_004042b0(char*);
 void __cdecl ch_CheckAniMorph(char*);
 
@@ -24,7 +24,7 @@ void __cdecl ch_TakingObject(char* ev)
 		if (ev[0xf0] != 0) {
 			*(char**) (ev + 0x170) = ch_LoadCharacterMotion(obj, ev + 0xf0, 1);
 		} else {
-			fcn_00407800(obj, *(int*) (ev + 0x38), ev + 0x130);
+			ch_SetBodyAttachment(obj, *(int*) (ev + 0x38), ev + 0x130);
 			ch_RemoveQueueEntry(ev);
 			return;
 		}
@@ -34,14 +34,14 @@ void __cdecl ch_TakingObject(char* ev)
 			return;
 		}
 		if (*(int**) (obj + 0x70) != 0 && **(int**) (obj + 0x70) >= *(int*) (ev + 0x30)) {
-			fcn_00407800(*(char**) (ev + 0x14), *(int*) (ev + 0x38), ev + 0x130);
+			ch_SetBodyAttachment(*(char**) (ev + 0x14), *(int*) (ev + 0x38), ev + 0x130);
 			*(int*) (ev + 0x30) = 99999999;
 		}
 	}
 	if (*(int*) (obj + 0x80) == 0 && fcn_004042b0(obj)) {
 		if (*(int*) (ev + 0x30) != 99999999) {
 			sprintf(msg, "ch_TakingObject(): object not taken yet (should be in frame:%i)!", *(int*) (ev + 0x30));
-			fcn_00407800(*(char**) (ev + 0x14), *(int*) (ev + 0x38), ev + 0x130);
+			ch_SetBodyAttachment(*(char**) (ev + 0x14), *(int*) (ev + 0x38), ev + 0x130);
 		}
 		if (*(int*) (obj + 0x80) != 0) {
 			sprintf(msg, "ch_TakingObject(): c->NextAnim still valid %s!\n", *(int*) (obj + 0x80));
@@ -71,7 +71,7 @@ void __cdecl ch_DroppingObject(char* ev)
 		if (*(int*) (obj + 0x80) != 0) {
 			return;
 		}
-		fcn_00407800(*(char**) (ev + 0x14), *(int*) (ev + 0x38), 0);
+		ch_SetBodyAttachment(*(char**) (ev + 0x14), *(int*) (ev + 0x38), 0);
 		ch_RemoveQueueEntry(ev);
 		return;
 	}
@@ -79,12 +79,12 @@ void __cdecl ch_DroppingObject(char* ev)
 		return;
 	}
 	if (*(int**) (obj + 0x70) != 0 && **(int**) (obj + 0x70) >= *(int*) (ev + 0x30)) {
-		fcn_00407800(*(char**) (ev + 0x14), *(int*) (ev + 0x38), 0);
+		ch_SetBodyAttachment(*(char**) (ev + 0x14), *(int*) (ev + 0x38), 0);
 		*(int*) (ev + 0x30) = 99999999;
 	}
 	if (*(int*) (obj + 0x80) == 0 && fcn_004042b0(obj)) {
 		if (*(int*) (ev + 0x30) != 99999999) {
-			fcn_00407800(*(char**) (ev + 0x14), *(int*) (ev + 0x38), 0);
+			ch_SetBodyAttachment(*(char**) (ev + 0x14), *(int*) (ev + 0x38), 0);
 			sprintf(msg, "ch_DroppingObject(): object not dropped yet (should be in frame:%i)!", *(int*) (ev + 0x30));
 		}
 		ch_CheckAniMorph(obj);

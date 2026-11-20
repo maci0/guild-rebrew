@@ -24,7 +24,7 @@ int __cdecl fcn_005c6270(char*, int);
 float __cdecl fcn_00507ed0(float, float);
 void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_00500cb0(char*, pos14_7f4c00*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_0054c500(char* e)
 {
@@ -40,7 +40,7 @@ void __cdecl fcn_0054c500(char* e)
 	b = gm_LookupEntityRecordById(*(int*) (e + 0xc));
 	mult = 1;
 	if (*(int*) (e + 0x70) == -1 || *(int*) (e + 0x70) == -2) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 	if ((e[0x78] & 4) != 0) {

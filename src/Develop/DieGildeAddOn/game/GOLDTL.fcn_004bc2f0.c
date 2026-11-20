@@ -19,7 +19,7 @@ void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl ch_CreateAction(char*, int, int);
 
-void __cdecl fcn_004bc2f0(AMBIENT_ANIMAL_SLOT* s)
+void __cdecl gm_SpawnAmbientSheep(AMBIENT_ANIMAL_SLOT* s)
 {
 	float v[4];
 	char* o;

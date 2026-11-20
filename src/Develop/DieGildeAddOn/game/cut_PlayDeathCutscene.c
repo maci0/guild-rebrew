@@ -11,7 +11,7 @@ void __cdecl fcn_004e4b60(char* s);
 void __cdecl fcn_00445f50(int a, int b, float f, int c);
 void __cdecl fcn_004463f0(int a, int b, float f);
 int __cdecl fcn_004e44b0(char* s, void* p);
-int __cdecl fcn_004e4d00(int a, int b, int c);
+int __cdecl cut_WaitForTimeoutOrInput(int a, int b, int c);
 void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
 void __cdecl fcn_005373e0(int a, int b);
 void __cdecl fcn_004234e0(int a, char* s, int b, int c, int d, int e, int f);
@@ -20,7 +20,7 @@ void __cdecl io_FormatTextBuffer(char* buf, ...);
 int __cdecl fcn_004e6eb0(void* buf, int n);
 void __cdecl fcn_005d0660(int a, int b, int c, int d);
 void __cdecl fcn_004c4510(void* a, int b);
-void __cdecl fcn_004c4570(int a, int b, int c, void* p);
+void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* p);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 void __cdecl fcn_005356b0(int p);
@@ -35,7 +35,7 @@ void __cdecl fcn_004230e0(void* h);
 void __cdecl fcn_004e4eb0(void);
 
 /* ADDRESS: GOLDTL 0x004e2b70 */
-void __cdecl fcn_004e2b70(void* arg)
+void __cdecl cut_PlayDeathCutscene(void* arg)
 {
 	float f10;
 	int yslot;
@@ -79,7 +79,7 @@ void __cdecl fcn_004e2b70(void* arg)
 	fcn_00445f50(state, 0, 1.0f, 1);
 	fcn_004463f0(0, 0, 0.0f);
 	xslot = fcn_004e44b0((char*) 0x68d29c, (void*) 0x6b5c60);
-	r = fcn_004e4d00(3000, 0, 0);
+	r = cut_WaitForTimeoutOrInput(3000, 0, 0);
 	if (r == 0) {
 		fcn_004e4b40(-8, handle, (char*) 0x68d294, 0, 0);
 		fcn_004e4b40(-8, handle, (char*) 0x68d294, 2, 4000);
@@ -87,7 +87,7 @@ void __cdecl fcn_004e2b70(void* arg)
 		fcn_004e4b40(-8, handle, (char*) 0x68d294, 4, 2000);
 		fcn_004e4b40(-8, handle, (char*) 0x68d294, 5, 4000);
 		fcn_004e4b40(-8, handle, (char*) 0x68d294, 6, 500);
-		state = fcn_004e4d00(0x2af8, 0, 0);
+		state = cut_WaitForTimeoutOrInput(0x2af8, 0, 0);
 		if (state == 0) {
 			start = *(int*) 0x6b7fac;
 			while (*(volatile unsigned int*) 0x6b7fac < (unsigned int) (start + 0x339) && state == 0) {
@@ -103,7 +103,7 @@ void __cdecl fcn_004e2b70(void* arg)
 				fcn_004463f0(0, 1, f10);
 			}
 			fcn_004463f0(0, 1, 1.0f);
-			fcn_004e4d00(0x2cec, 0, 0);
+			cut_WaitForTimeoutOrInput(0x2cec, 0, 0);
 		}
 	}
 	fcn_004234e0(0, (char*) 0x68d288, 1, 0x3f, 0x7f, 0, 0);
@@ -125,8 +125,8 @@ void __cdecl fcn_004e2b70(void* arg)
 			alo = 0;
 			r = *(int*) ((char*) obj + 4);
 			fcn_004c4510(obj, r);
-			fcn_004c4570(4, 1, 0x1c, &f10);
-			fcn_004c4570(4, 1, 0x24, &alo);
+			cm_AppendPacketFieldDelta(4, 1, 0x1c, &f10);
+			cm_AppendPacketFieldDelta(4, 1, 0x24, &alo);
 			*(char*) ((char*) obj + 8) = 100;
 			fcn_004c5360();
 			fcn_004c5420(*(int*) ((char*) obj + 4), 0x1cc, 4, 2, 0);
@@ -140,8 +140,8 @@ void __cdecl fcn_004e2b70(void* arg)
 			io_FormatTextBuffer(buf1, 0x40fc, 0x40f5, idxval);
 			fcn_004e6eb0(buf1, 0x10);
 			fcn_004c4510(obj, *(int*) ((char*) obj + 4));
-			fcn_004c4570(4, 1, 0x1c, &alo);
-			fcn_004c4570(4, 1, 0x24, &f10);
+			cm_AppendPacketFieldDelta(4, 1, 0x1c, &alo);
+			cm_AppendPacketFieldDelta(4, 1, 0x24, &f10);
 			fcn_004c5360();
 			fcn_004c5420(*(int*) ((char*) obj + 4), 0x1cc, 4, 2, 0);
 			*(char*) ((char*) obj + 8) = 100;

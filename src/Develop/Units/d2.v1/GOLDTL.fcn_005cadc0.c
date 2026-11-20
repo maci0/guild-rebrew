@@ -31,10 +31,10 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_ClearWindowChildren(int, int);
-int __cdecl fcn_004e8b80(int, int, char*);
-int __cdecl fcn_004e8cb0(int, int, char*);
+int __cdecl amt_FindOfficeSlotsByKind(int, int, char*);
+int __cdecl amt_CollectOfficeGroup7(int, int, char*);
 int __cdecl gm_LookupEntityRecordById(int);
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 float __cdecl fcn_004fef80(char*);
@@ -95,7 +95,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 				}
 			} else if (1 <= a0 && a0 <= 6) {
 				char buf[0x90];
-				count = fcn_004e8b80(a0, 6, buf);
+				count = amt_FindOfficeSlotsByKind(a0, 6, buf);
 				if (count > 0) {
 					for (i = 0; i < count; i++) {
 						rec[i].ent = (char*) gm_LookupEntityRecordById(*(int*) (buf + i * 0x18 + 4));
@@ -104,7 +104,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 				}
 			} else if (a0 == 7) {
 				char buf[0x90];
-				count = fcn_004e8cb0(0, 6, buf);
+				count = amt_CollectOfficeGroup7(0, 6, buf);
 				if (count > 0) {
 					for (i = 0; i < count; i++) {
 						rec[i].ent = (char*) gm_LookupEntityRecordById(*(int*) (buf + i * 0x18 + 4));
@@ -113,7 +113,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 				}
 			} else if (a0 == 8) {
 				char buf[0x78];
-				count = fcn_004e8b80(a0, 5, buf);
+				count = amt_FindOfficeSlotsByKind(a0, 5, buf);
 				if (count > 0) {
 					for (i = 0; i < count; i++) {
 						rec[i].ent = (char*) gm_LookupEntityRecordById(*(int*) (buf + i * 0x18 + 4));
@@ -134,7 +134,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 				if ((*(unsigned char*) (g_774970 * 0x21c + 0x7f4ca9) != *(unsigned char*) (ent + 9))
 				    && (*(unsigned int*) (ent + 0x1c8) & 0x800000)) {
 					j = 0;
-					for (j = fcn_005463a0(1, 0, 0x6f); j; j = he_fn_Handlung()) {
+					for (j = he_StartHandlungSearch(1, 0, 0x6f); j; j = he_fn_Handlung()) {
 						if ((*(int*) (j + 0xac) == *(int*) (g_774970 * 0x21c + 0x7f4ca4))
 						    && (*(int*) (ent + 4) == *(int*) (j + 0xb0))) {
 							rec[i].text2 = 0x6cc;
@@ -146,7 +146,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 				if (CountMatchingStraftatEntries(*(int*) (ent + 4), g_774970) > 0) {
 					rec[i].text3 = 0x6cd;
 				} else {
-					for (j = fcn_005463a0(1, 0, 0x18); j; j = he_fn_Handlung()) {
+					for (j = he_StartHandlungSearch(1, 0, 0x18); j; j = he_fn_Handlung()) {
 						if ((*(unsigned short*) (j + 8) == g_774970) && (*(int*) (ent + 4) == *(int*) (j + 0xc4))) {
 							rec[i].text3 = 0x6ce;
 							break;
@@ -154,7 +154,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 					}
 				}
 				rec[i].text4 = 0;
-				for (j = fcn_005463a0(1, 0, 0x45); j; j = he_fn_Handlung()) {
+				for (j = he_StartHandlungSearch(1, 0, 0x45); j; j = he_fn_Handlung()) {
 					if ((*(int*) (j + 0xac) == *(int*) (g_774970 * 0x21c + 0x7f4ca4))
 					    && (*(int*) (ent + 4) == *(int*) (j + 0xb0))) {
 						rec[i].text4 = 0x6cb;

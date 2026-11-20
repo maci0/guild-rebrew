@@ -31,7 +31,7 @@ typedef struct {
 extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 
-void __cdecl fcn_00546190(char* s);
+void __cdecl he_FreeAction(char* s);
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_005547c0(Player* p);
@@ -43,7 +43,7 @@ void __cdecl fcn_00500bb0(Clock* c, int a, int b, int d);
 
 /* One step of the accident simulation: walks twelve players in a
  * pseudo-random order and rolls an accident for each. */
-void __cdecl fcn_00554820(char* s)
+void __cdecl RunSimUnfall(char* s)
 {
 	float f;
 	int count;
@@ -56,7 +56,7 @@ void __cdecl fcn_00554820(char* s)
 	Player* p;
 
 	if (*(int*) (s + 0x70) == -2) {
-		fcn_00546190(s);
+		he_FreeAction(s);
 		return;
 	}
 	io_FormatTextBuffer(buf, "-------> RunSimUnfall: calculating at <Day = %i Time = %i.2:%i.2>", ((Clock*) &gm_GameTime)->day,

@@ -7,7 +7,7 @@ extern int __cdecl fcn_00472250(int obj, int a, int b);
 extern int __cdecl d2_CreateRadioGroup(int a, int b, int c, int d);
 extern void __cdecl d2_SelectRadioGroup(int obj, int a);
 extern int __cdecl fcn_005373e0(int proc, int a);
-extern void __cdecl fcn_00469510(int obj);
+extern void __cdecl d2_ClearRadioGroup(int obj);
 extern void __cdecl fcn_00471e30(int obj);
 extern void __cdecl d2_UpdateRadioGroup(int obj);
 extern void __cdecl fcn_004b20d0(int a);
@@ -16,13 +16,13 @@ extern int __cdecl fcn_004b41b0(void);
 extern int __cdecl fcn_004e4470(const char *name);
 extern void __cdecl fcn_004e44f0(int a);
 extern int __cdecl fcn_004fdec0(const char *name);
-extern int __cdecl fcn_0053d490(int a, int b);
+extern int __cdecl d2_RunChoosePlayerDialog(int a, int b);
 extern int __cdecl fcn_0053e8a0(int a);
-extern int __cdecl fcn_0053cd40(int a);
+extern int __cdecl d2_ShowChooseProfessionDialog(int a);
 extern unsigned int *__cdecl fcn_00506d50(char *buf, unsigned char a);
 extern void __cdecl fcn_004432d0(int a, int b);
-extern int __cdecl fcn_005268c0(int a, int b);
-extern int __cdecl fcn_0053c560(int a);
+extern int __cdecl d2_OpenMessageBox(int a, int b);
+extern int __cdecl d2_RunParentProfessionSelection(int a);
 extern char g_14cf950;
 extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -84,7 +84,7 @@ label_53dd68:
 	r = fcn_005373e0(0x53dc20, 0xc6);
 	for (;;) {
 		if (!r) {
-			fcn_00469510(dlg);
+			d2_ClearRadioGroup(dlg);
 			fcn_00471e30(obj);
 			if (!again) {
 				*(int *) 0x7747b0 = 0;
@@ -140,7 +140,7 @@ label_53de5c:
 					fcn_004e44f0(fcn_004e4470((const char *) 0x6a4040));
 				}
 				v2 = 0;
-				again = fcn_0053d490(0xc6, 0);
+				again = d2_RunChoosePlayerDialog(0xc6, 0);
 				if (again == 0) {
 					main_LoopFlags = 0x12d6;
 					fcn_004e44f0(fcn_004e4470((const char *) 0x6a4024));
@@ -149,8 +149,8 @@ label_53de5c:
 					v4 = fcn_0053e8a0(0);
 					if (v4 == 1) {
 						d2_SuppressOverlay = v4;
-						*(int *) 0x6a37f8 = fcn_005268c0(*(int *) 0x14abf04, 0);
-						if (fcn_0053c560(0)) {
+						*(int *) 0x6a37f8 = d2_OpenMessageBox(*(int *) 0x14abf04, 0);
+						if (d2_RunParentProfessionSelection(0)) {
 label_53df85:
 							again = 1;
 							g_774654 = 1;
@@ -160,7 +160,7 @@ label_53df85:
 						}
 					} else {
 						if (v4 == 0) {
-							if (fcn_0053cd40(0xc6)) {
+							if (d2_ShowChooseProfessionDialog(0xc6)) {
 								p = fcn_00506d50(buf, *(unsigned char *) 0x7e23e3);
 								*(int *) 0x7e2430 = *p;
 								*(char *) 0x7e2434 = (char) *(unsigned short *) &p[1];

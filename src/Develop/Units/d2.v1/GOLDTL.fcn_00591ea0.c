@@ -21,7 +21,7 @@ int __cdecl fcn_00472830(int, int);
 int __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl fcn_00533a60(int, int, int*, int, int, int);
 void __cdecl fcn_00476b60(void);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
@@ -88,7 +88,7 @@ void __cdecl fcn_00591ea0(void)
 			d2_SetForm(win, 1);
 			if (last_win != -1) {
 				old_sel = *(int*) (y + (unsigned long)&g_102cbc8);
-				fcn_00469510(last_win);
+				d2_ClearRadioGroup(last_win);
 			}
 			d2_ClearWindowChildren(*(int*) &d2_CurrentWindowId, 1);
 			last_win = d2_CreateRadioGroup(0);
@@ -154,6 +154,6 @@ void __cdecl fcn_00591ea0(void)
 		fcn_00472640(clicks[0], *(int*) (y + (unsigned long)&g_102cbc8) != -1);
 		fcn_00591d00();
 	} while (fcn_005373e0((int) fcn_00591ea0, 0x657c7));
-	fcn_00469510(last_win);
+	d2_ClearRadioGroup(last_win);
 	fcn_00471e30(win);
 }

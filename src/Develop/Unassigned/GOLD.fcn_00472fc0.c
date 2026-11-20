@@ -8,7 +8,7 @@
 extern GOLD_GUI_WINDOW g_00f8f120[]; /* 0x00f8f120 */
 extern GuiEnt** g_006ed964; /* 0x006ed964 */
 
-void __cdecl fcn_00472f40(int id);
+void __cdecl d2_ReorderControlStack(int id);
 
 void __cdecl fcn_00472fc0(int win)
 {
@@ -44,6 +44,6 @@ void __cdecl fcn_00472fc0(int win)
 	}
 	memcpy(&g_006ed964[i + 1], tmp, n);
 	for (i = 0; i < w->count; i++) {
-		fcn_00472f40(w->list[i]);
+		d2_ReorderControlStack(w->list[i]);
 	}
 }

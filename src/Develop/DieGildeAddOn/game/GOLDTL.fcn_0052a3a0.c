@@ -73,7 +73,7 @@ double __cdecl cos(double);
 #pragma intrinsic(sin, cos)
 
 int* __cdecl fcn_00459ae0(float, float, float);
-int __cdecl fcn_00459870(int, int, int, Col, float, int, float, float);
+int __cdecl d3_CreateSkyLayer(int, int, int, Col, float, int, float, float);
 void __cdecl fcn_00459940(int, int, float);
 void __cdecl fcn_004597f0(int, int);
 void __cdecl fcn_005e8870(int, int, Vec24*, Vec24*);
@@ -85,7 +85,7 @@ void __cdecl fcn_004154e0(int);
 int* __cdecl d3_CreateSnowEffect(int);
 void __cdecl fcn_004162c0(int);
 void __cdecl fcn_00416300(int*, int, ...);
-void __cdecl fcn_00415510(int*, int, ...);
+void __cdecl d3_SetRainEffectOptions(int*, int, ...);
 
 /* ADDRESS: GOLDTL 0x0052a3a0 */
 void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
@@ -171,7 +171,7 @@ void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
 		if (g_7e4538 == 0) {
 			g_7e4538 = (int) fcn_00415310(maxv);
 		}
-		fcn_00415510((int*) g_7e4538, 1, 0, 0);
+		d3_SetRainEffectOptions((int*) g_7e4538, 1, 0, 0);
 	}
 	if (g_6b89c0 == 0) {
 		g_6b89c0 = (int) fcn_00459ae0(-0.95f, -0.2f, 600.0f);
@@ -184,15 +184,15 @@ void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
 	}
 	*(int*) &col = 0xff;
 	col.b = 0;
-	g_7e4540[0] = fcn_00459870(g_6b89c0, 0, (int) "Sky_Schoen_01", col, g_6a2640, 0, g_6a2644, g_6a2648);
+	g_7e4540[0] = d3_CreateSkyLayer(g_6b89c0, 0, (int) "Sky_Schoen_01", col, g_6a2640, 0, g_6a2644, g_6a2648);
 	fcn_00459940(g_6b89c0, g_7e4540[0], 0);
 	*(int*) &col = 0;
 	col.b = 0;
-	g_7e4540[1] = fcn_00459870(g_6b89c0, 0, (int) "Sky_Schoen_02", col, g_6a268c, 0, g_6a2690, g_6a2694);
+	g_7e4540[1] = d3_CreateSkyLayer(g_6b89c0, 0, (int) "Sky_Schoen_02", col, g_6a268c, 0, g_6a2690, g_6a2694);
 	fcn_00459940(g_6b89c0, g_7e4540[1], 0);
 	*(int*) &col = 0;
 	col.b = 0;
-	g_7e4540[2] = fcn_00459870(g_6b89c0, 0, (int) "sky_dunkel_01", col, g_6a28f0, 0, g_6a28f4, g_6a28f8);
+	g_7e4540[2] = d3_CreateSkyLayer(g_6b89c0, 0, (int) "sky_dunkel_01", col, g_6a28f0, 0, g_6a28f4, g_6a28f8);
 	fcn_00459940(g_6b89c0, g_7e4540[2], 0);
 	player = d3_CurrentContextIndex;
 	for (i = 0; i < 64; i++) {

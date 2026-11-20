@@ -46,7 +46,7 @@ void __cdecl fcn_004be380(void);
 void __cdecl fcn_004be3d0(int*, char*, int, int);
 int __cdecl fcn_004bea00(char*, int);
 unsigned int __cdecl fcn_004be560(char*, int, unsigned int);
-unsigned int __cdecl fcn_004bec20(char*, int, unsigned int);
+unsigned int __cdecl d2_ChooseRoutingGood(char*, int, unsigned int);
 int __cdecl fcn_004bf3e0(int*);
 void __cdecl fcn_004bfc70(int);
 
@@ -197,7 +197,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 				if (kind == 1) {
 					n = *cur;
 					if (*types == 0x0a) {
-						k = (int) fcn_004bec20(tbl, 1, n);
+						k = (int) d2_ChooseRoutingGood(tbl, 1, n);
 					}
 					else {
 						k = (int) fcn_004be560(tbl, 1, n);

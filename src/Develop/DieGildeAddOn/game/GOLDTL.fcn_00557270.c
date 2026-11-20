@@ -10,12 +10,12 @@ extern char g_67ec2c[];
 
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
-char* __cdecl fcn_005463a0(int, int, int, ...);
+char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 
 char* __cdecl fcn_00502cd0(int, int, ...);
 
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
@@ -40,7 +40,7 @@ void __cdecl fcn_00557270(char* u)
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	*(pos14_7f4c00*) (u + 0x44) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
-	for (e = fcn_005463a0(1, 0, 0x74); e != 0; e = he_fn_Handlung()) {
+	for (e = he_StartHandlungSearch(1, 0, 0x74); e != 0; e = he_fn_Handlung()) {
 		if (*(int*) (e + 4) != *(int*) (u + 4) && *(int*) (e + 0xb0) == *(int*) (u + 0xb0)) {
 			break;
 		}
@@ -53,7 +53,7 @@ void __cdecl fcn_00557270(char* u)
 				int t = gm_GameTime.a;
 
 				fcn_004c4510(q, *(int*) (q + 2));
-				fcn_004c4570(4, 1, q - g_aed32c + 0x28, &t);
+				cm_AppendPacketFieldDelta(4, 1, q - g_aed32c + 0x28, &t);
 				fcn_004c5360();
 				fcn_004c4eb0(g_67ec2c);
 				*(int*) (u + 0xac) = fcn_004c64b0(0xe, *(int*) (o + 1), -1, 0, 0, 0, "DunkleEcke");

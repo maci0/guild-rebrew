@@ -29,7 +29,7 @@ void __cdecl fcn_004c35f0(void);
 void __cdecl sv_ClearObjectSelection(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005ae6a0 */
-int __cdecl fcn_005ae6a0(void* a0)
+int __cdecl d2_RunEntfuehrungDialog(void* a0)
 {
 	char msg[0xf8];
 	char text[2048];

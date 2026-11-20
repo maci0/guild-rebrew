@@ -43,21 +43,21 @@ void __cdecl fcn_00412830(unsigned char mask);
 void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 void __cdecl fcn_00433780(void*);
 void __cdecl fcn_00438b40(char*, float*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_004bbd70(void);
 int* __cdecl gm_SetupEntityQuery(char*);
 int __cdecl fcn_00506380(int, void*, void*, int);
-void __cdecl fcn_0052ae80(void);
-void __cdecl fcn_0052d820(void);
+void __cdecl d3_UpdateCameraAtScreenEdges(void);
+void __cdecl d3_AnimateCameraToStoredTransform(void);
 void __cdecl fcn_0052f7b0(void);
 void __cdecl fcn_00530510(void);
 void __cdecl fcn_005338a0(void);
 void __cdecl fcn_00545c50(int);
 void __cdecl fcn_0057e0a0(void);
-int __cdecl fcn_0057eba0(int, int, int, int);
-void __cdecl fcn_00599f90(void);
-void __cdecl fcn_005a7320(int, int);
+int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
+void __cdecl d2_HandleEntityChooser(void);
+void __cdecl gm_ChangeBuildingRoom(int, int);
 
 /* ADDRESS: GOLDTL 0x00533090 */
 void __cdecl fcn_00533090(unsigned int flags)
@@ -115,7 +115,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 		} while ((int) ip < 0x77e984);
 	}
 	if (flags & 0x800) {
-		fcn_00599f90();
+		d2_HandleEntityChooser();
 		fcn_004bbd70();
 		if (g_14ce8e0 && g_7e2aa0
 		    && *(int*) (g_774650 * 8 + 0x7e35c0) == 0x59a340) {
@@ -128,7 +128,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 				*(unsigned short*) (g_7746c4 + 0x29) = *(unsigned short*) g_7746b8;
 				g_774654 = (g_774650 - g_774658) + 1;
 				fcn_00438b40(d3_ActiveCamera, g_7e3a40);
-				fcn_00438cb0(d3_ActiveCamera, d3_CameraTargetRotation);
+				d3_SetObjectRotation(d3_ActiveCamera, d3_CameraTargetRotation);
 				d3_CameraHorizontalIndex = 0;
 				d3_CameraVerticalStep = 0;
 			}
@@ -136,7 +136,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 		    && g_7746f0 == 0 && g_7746f4 == 0) {
 			g_774654 = (g_774650 - g_774658) + 1;
 			fcn_00438b40(d3_ActiveCamera, g_7e3a40);
-			fcn_00438cb0(d3_ActiveCamera, d3_CameraTargetRotation);
+			d3_SetObjectRotation(d3_ActiveCamera, d3_CameraTargetRotation);
 			d3_CameraHorizontalIndex = 0;
 			d3_CameraVerticalStep = 0;
 		}
@@ -146,8 +146,8 @@ void __cdecl fcn_00533090(unsigned int flags)
 			fcn_00412830(0x10);
 		}
 		if ((g_7746c4 != 0
-		    && fcn_0057eba0(0x1a, (int) g_7746c4, 0, *(unsigned short*) g_7746cc) == 0)
-		    || (g_7746c8 != 0 && fcn_0057eba0(0x1c, (int) g_7746c8, 0, 0) == 0)) {
+		    && d2_DispatchTutorialEvent(0x1a, (int) g_7746c4, 0, *(unsigned short*) g_7746cc) == 0)
+		    || (g_7746c8 != 0 && d2_DispatchTutorialEvent(0x1c, (int) g_7746c8, 0, 0) == 0)) {
 			fcn_005de62f();
 		}
 		if (g_7746f0 || g_7746f4 || g_14ce8e0 == 0) {
@@ -164,7 +164,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 				d3_CameraAnimating = 0;
 				v2 = 1;
 				fcn_00438b40(d3_ActiveCamera, g_7e3a40);
-				fcn_00438cb0(d3_ActiveCamera, d3_CameraTargetRotation);
+				d3_SetObjectRotation(d3_ActiveCamera, d3_CameraTargetRotation);
 			} else {
 				fcn_00433780(d3_ActiveCamera);
 				d3_ActiveCameraAnimation = 0;
@@ -183,21 +183,21 @@ void __cdecl fcn_00533090(unsigned int flags)
 				v5 = 0;
 				if (g_7746cc != 0) {
 					if (g_7746c4 != 0) {
-						i = fcn_0057eba0(0x1a, (int) g_7746c4, 0,
+						i = d2_DispatchTutorialEvent(0x1a, (int) g_7746c4, 0,
 						    *(unsigned short*) g_7746cc);
 						if (i == 1 && g_7f4e51[g_774970 * 0x21c] == 0
 						    && g_7746c4 != 0 && *(unsigned short*) g_7746cc == 0xf2) {
 							v5 = (char*) gm_SetupEntityQuery(g_7746c4);
 						}
 					} else if (g_7746c8 != 0) {
-						i = fcn_0057eba0(0x1c, (int) g_7746c8, 0, 0);
+						i = d2_DispatchTutorialEvent(0x1c, (int) g_7746c8, 0, 0);
 						if (i == 1 && g_7f4e51[g_774970 * 0x21c] == 0
 						    && g_7746c8 != 0 && *(unsigned short*) g_7746cc == 0xf2) {
 							v5 = (char*) gm_SetupEntityQuery(g_7746c8);
 						}
 					}
 					if (g_7746c4 != 0 && v5 != 0 && v5 != g_7746cc) {
-						fcn_005a7320(-1, (int) *(unsigned short*) v5);
+						gm_ChangeBuildingRoom(-1, (int) *(unsigned short*) v5);
 					} else {
 						g_7746cc = 0;
 					}
@@ -213,13 +213,13 @@ void __cdecl fcn_00533090(unsigned int flags)
 					g_7746c4 = 0;
 				}
 				fcn_00438b40(d3_ActiveCamera, g_7e3a40);
-				fcn_00438cb0(d3_ActiveCamera, d3_CameraTargetRotation);
+				d3_SetObjectRotation(d3_ActiveCamera, d3_CameraTargetRotation);
 				d3_CameraHorizontalIndex = 0;
 				d3_CameraVerticalStep = 0;
 				goto done;
 			}
 			if (g_7746c4 != 0 || g_7746c8 != 0) {
-				fcn_0052d820();
+				d3_AnimateCameraToStoredTransform();
 			}
 		} else {
 			g_774654 = 1;
@@ -227,7 +227,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 				goto done;
 			}
 			if (g_7746c4 != 0 || g_7746c8 != 0) {
-				fcn_0052d820();
+				d3_AnimateCameraToStoredTransform();
 			}
 			g_77465c = g_774650 - g_774654;
 		}
@@ -256,7 +256,7 @@ done:
 			g_7746dc = fcn_00506380(g_774970, v4, 0, 0);
 		}
 		if (*(unsigned short*) (v4 + 0x27) == g_774970 || (g_7746dc & 0x1000)) {
-			fcn_0052ae80();
+			d3_UpdateCameraAtScreenEdges();
 		}
 	}
 	if (g_7747a0 == v4 && g_7747a4 == g_7746cc && g_7746d4 == 0) {

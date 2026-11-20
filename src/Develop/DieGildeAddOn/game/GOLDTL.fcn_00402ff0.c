@@ -4,7 +4,7 @@
 
 void __cdecl d3_SetObjectPosition(int, void*);
 
-void __cdecl fcn_00402ff0(void)
+void __cdecl ch_UpdateCharacterObjectPositions(void)
 {
 	void** p;
 	void* e;

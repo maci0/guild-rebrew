@@ -20,7 +20,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_005463a0();
+int __cdecl he_StartHandlungSearch();
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
@@ -76,7 +76,7 @@ int __cdecl fcn_005c1110(void)
 			a[3] = -1;
 			b[2] = -1;
 			b[3] = -1;
-			ent = (Ent5c1110*) fcn_005463a0(n, 0, 0x35);
+			ent = (Ent5c1110*) he_StartHandlungSearch(n, 0, 0x35);
 			if (ent != 0) {
 				i = 2;
 				for (k = 0; ; ) {
@@ -131,7 +131,7 @@ done:;
 				}
 			}
 			if (k < 4) {
-				o = fcn_005463a0(1, 1, b[k]);
+				o = he_StartHandlungSearch(1, 1, b[k]);
 				if (o != 0) {
 					if (fcn_00525f60((char*) &g_7f4ca0 + 0x21c
 					    * (unsigned int) *(unsigned short*) &g_774970, 2) != 0) {

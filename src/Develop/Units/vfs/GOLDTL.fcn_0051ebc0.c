@@ -5,7 +5,7 @@ extern unsigned short* lpObjekteINST;
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, void* file);
 
-int __cdecl fcn_0051ebc0(void* file)
+int __cdecl ls_fio_SaveObjekteINST(void* file)
 {
 	int count;
 	int i;

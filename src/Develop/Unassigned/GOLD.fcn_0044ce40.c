@@ -1,7 +1,7 @@
 #include <math.h>
 
 /* ADDRESS: GOLD 0x0044ce40 */
-void __cdecl fcn_0044ce40(char* object)
+void __cdecl d3_RecalculateObjectBounds(char* object)
 {
 	float radius;
 	float length;

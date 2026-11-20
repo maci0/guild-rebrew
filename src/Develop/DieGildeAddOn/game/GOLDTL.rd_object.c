@@ -2,13 +2,13 @@
 #include <string.h>
 
 int __cdecl vfs_ReadByte(void* stream, void* dst);
-char* __cdecl fcn_004011a0(void* stream, char* dst);
+char* __cdecl vfs_ReadCString(void* stream, char* dst);
 int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 void __cdecl fcn_00401280(void* stream, void* dst);
 void __cdecl ReportClientMessage(const char* msg);
 void __cdecl fcn_00438b40(char* object, void* vector);
-void __cdecl fcn_00438cb0(char* object, void* vector);
+void __cdecl d3_SetObjectRotation(char* object, void* vector);
 char* __cdecl d3_SpawnObject(int kind, char* name);
 void __cdecl fcn_00439aa0(char* object);
 void __cdecl d3_AppendObjectSibling(char* object, char* sibling);
@@ -71,7 +71,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 	if (version >= 0x3a6c000bu) {
 		vfs_ReadByte(stream, &b);
 		if (b != 0) {
-		fcn_004011a0(stream, name);
+		vfs_ReadCString(stream, name);
 		if (version >= 0x3a6c00b2u) {
 			fcn_004011f0(stream, &aux_a);
 		}
@@ -160,7 +160,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 			fcn_004011f0(stream, &type);
 			if (version >= 0x3a6c00a4u) {
 				if (type > 0) {
-					fcn_004011a0(stream, name);
+					vfs_ReadCString(stream, name);
 					if (fcn_0044c200(name, name) != 0) {
 						fcn_00449f90(object, 0, name);
 					} else {
@@ -173,14 +173,14 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 					fcn_00439fa0(object);
 				}
 				for (i = 0; i < type; i++) {
-					fcn_004011a0(stream, name);
+					vfs_ReadCString(stream, name);
 					fcn_0044c200(name, name);
 					fcn_00449f90(object, RD_DRAW(object) + i * 0x4a4 + 0xf4, name);
 				}
 				if (version >= 0x3a6c00a3u) {
 					vfs_ReadByte(stream, &b);
 					if (b != 0) {
-						fcn_004011a0(stream, name);
+						vfs_ReadCString(stream, name);
 						fcn_0044c200(name, name);
 						fcn_00449f90(object, RD_DRAW(object) + 0xee0, name);
 					}
@@ -328,7 +328,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 			ReportClientMessage("Unkown Object-Type in rd_object()!");
 			break;
 		}
-		fcn_00438cb0(object, object + 0x84);
+		d3_SetObjectRotation(object, object + 0x84);
 		fcn_00438b40(object, object + 0x4c);
 		object[0x214] = (char) (object[0x214] | 0x80);
 		if (marker != 0) {

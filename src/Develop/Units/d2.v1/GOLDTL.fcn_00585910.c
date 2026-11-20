@@ -59,7 +59,7 @@ void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005865f0(char*, int*, int);
-int __cdecl fcn_00586800(char*, int*);
+int __cdecl d2_RunDomizilSkillDialog(char*, int*);
 int __cdecl fcn_00586a80(char*, int*);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00585030(int);
@@ -238,7 +238,7 @@ void __cdecl fcn_00585910(char* e)
 			}
 			if (d2_CurrentElementId == ids[4]) {
 				fcn_00471af0(ids[0], 0);
-				fcn_00586800(e, src);
+				d2_RunDomizilSkillDialog(e, src);
 				fcn_00471af0(ids[0], 1);
 			} else if (d2_CurrentElementId == ids[3]) {
 				fcn_00471af0(ids[0], 0);

@@ -35,7 +35,7 @@ extern int g_1040494;
 extern int d2_ScreenHeight;
 extern int g_77250c;
 
-int __cdecl fcn_00539380(void);
+int __cdecl d2_ChoosePlayerCount(void);
 void __cdecl fcn_00469e70(void);
 int __cdecl fcn_0053ed60(int, int);
 int __cdecl sprintf(char*, const char*, ...);
@@ -45,7 +45,7 @@ void __cdecl fcn_00469e30(int);
 
 int __cdecl fcn_00539490(void)
 {
-	if (fcn_00539380() != 0) {
+	if (d2_ChoosePlayerCount() != 0) {
 		fcn_00469e70();
 		if (fcn_0053ed60(1, 1) != 0) {
 			sprintf(g_7e21a0, g_6a3a28, g_6a3778, g_7e1d00);

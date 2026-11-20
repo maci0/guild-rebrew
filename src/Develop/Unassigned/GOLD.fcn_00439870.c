@@ -1,5 +1,5 @@
 void __cdecl fcn_00458d90(char* object, int a, int b, float* output);
-void __cdecl fcn_00453ed0(float* a, float* b, float* output);
+void __cdecl d3_MultiplyAffineMatrices(float* a, float* b, float* output);
 
 /* ADDRESS: GOLD 0x00439870 */
 void __cdecl fcn_00439870(char* object, char* parent, int force)
@@ -42,7 +42,7 @@ void __cdecl fcn_00439870(char* object, char* parent, int force)
 		matrix[12] = matrix[12] - *(float*) (parent + 0x78);
 		matrix[13] = matrix[13] - *(float*) (parent + 0x7c);
 		matrix[14] = matrix[14] - *(float*) (parent + 0x80);
-		fcn_00453ed0(matrix, (float*) (parent + 0x18c),
+		d3_MultiplyAffineMatrices(matrix, (float*) (parent + 0x18c),
 			(float*) (*(char**) (object + 0x1ec) + 0x48));
 	} else {
 		force = 0x40;

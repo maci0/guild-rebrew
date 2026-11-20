@@ -1,4 +1,4 @@
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 
-char* __cdecl fcn_005463a0(int, int, int, ...);
+char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
@@ -17,9 +17,9 @@ void __cdecl fcn_005662a0(char* o)
 	char* p;
 	char* e;
 
-	for (p = fcn_005463a0(1, 0, 0x32); p != 0; p = he_fn_Handlung()) {
+	for (p = he_StartHandlungSearch(1, 0, 0x32); p != 0; p = he_fn_Handlung()) {
 		if (p != o && *(int*) (o + 0xac) == *(int*) (p + 0xac)) {
-			fcn_00546190(o);
+			he_FreeAction(o);
 			return;
 		}
 	}
@@ -28,7 +28,7 @@ void __cdecl fcn_005662a0(char* o)
 	fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
 	e = gm_LookupEntityRecordById(*(int*) (o + 0xac));
 	if (e == 0) {
-		fcn_00546190(o);
+		he_FreeAction(o);
 		return;
 	}
 	if (o[0x78] & 2) {

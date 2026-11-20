@@ -69,7 +69,7 @@ void __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_00532ef0(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00589930 */
-void __cdecl fcn_00589930(char* building)
+void __cdecl d2_ShowCabinetSpyDialog(char* building)
 {
 	struct act act;
 	struct msg m;

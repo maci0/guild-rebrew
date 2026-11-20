@@ -4,7 +4,7 @@ int __cdecl fcn_004b5b40(void);
 int __cdecl fcn_004b5df0(void);
 
 int __cdecl fcn_004b60e0(void);
-int __cdecl fcn_004b6210(void);
+int __cdecl d2_ShowMissionDialog(void);
 extern int g_14cbca0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_6a3760;
@@ -27,7 +27,7 @@ int __cdecl fcn_004b62c0(void)
 {
 	if (g_6a3440 == 5)
 		return fcn_004b60e0();
-	return fcn_004b6210();
+	return d2_ShowMissionDialog();
 }
 
 /* ADDRESS: GOLDTL 0x004b6470 */

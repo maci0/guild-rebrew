@@ -8,9 +8,9 @@ typedef struct FRAME_412B10 {
 	char unknown_020[0x58 - 0x20];
 } FRAME_412B10;
 extern int d3_ActiveCamera;
-int* __cdecl fcn_004339e0(char* a0, D3_ANIMATION_OPTIONS flags, int count, void* frames);
+int* __cdecl d3_CreateObjectAnimation(char* a0, D3_ANIMATION_OPTIONS flags, int count, void* frames);
 void __cdecl fcn_00451720(void* a0, void* a1, void* a2, void* a3);
-void __cdecl fcn_00438cb0(void* a0, void* a1);
+void __cdecl d3_SetObjectRotation(void* a0, void* a1);
 
 /* The native body keeps an EBP frame (/Oy-, non-frame-omitted build). */
 #pragma optimize("y", off)
@@ -61,7 +61,7 @@ unsigned int __cdecl fcn_00412b10(char* object, float targetX, float targetY, fl
 	rotation[1] = targetRotY;
 	if ((a8 & 8) != 0) {
 		fcn_00451720(object + 0x84, rotation, v6, rotation);
-		fcn_00438cb0(object, v6);
+		d3_SetObjectRotation(object, v6);
 	}
 	if (object == (char*) d3_ActiveCamera) {
 		*(float*) 0x14ce890 = rotation[0];
@@ -81,7 +81,7 @@ unsigned int __cdecl fcn_00412b10(char* object, float targetX, float targetY, fl
 	frames[1].rotation[0] = rotation[0];
 	frames[1].rotation[1] = rotation[1];
 	frames[1].rotation[2] = rotation[2];
-	v3 = fcn_004339e0(object, z, 2, frames);
+	v3 = d3_CreateObjectAnimation(object, z, 2, frames);
 	if (object != (char*) d3_ActiveCamera) {
 		return 1;
 	}

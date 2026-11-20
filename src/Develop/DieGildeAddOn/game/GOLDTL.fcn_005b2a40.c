@@ -9,7 +9,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
 /* ADDRESS: GOLDTL 0x005b2a40 */
-void __cdecl fcn_005b2a40(unsigned short* senderEntity, int n, char** arr)
+void __cdecl he_ShowZigeunerGroupMessage(unsigned short* senderEntity, int n, char** arr)
 {
 	char buf[0x80];
 	char* e;

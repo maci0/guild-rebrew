@@ -12,8 +12,8 @@ extern unsigned char g_773d75;
 extern float g_66414c;
 extern char g_67e968[];
 
-char* __cdecl fcn_005463a0(int, int, int);
-void __cdecl fcn_00505e20(int, int, int, char*, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
+void __cdecl gm_BuyBuilding(int, int, int, char*, int);
 void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
 int __cdecl fcn_0050d170(int k);
@@ -28,11 +28,11 @@ int __cdecl fcn_00498c90(char* a1, char* a2, char* a3)
 	char* q;
 
 	if (*a2 == 4 && *a3 == 8) {
-		q = fcn_005463a0(1, 1, *(int*) (a3 + 4));
+		q = he_StartHandlungSearch(1, 1, *(int*) (a3 + 4));
 		if (q == 0) {
 			return 0;
 		}
-		fcn_00505e20(*(int*) (a2 + 4), *(int*) (a1 + 4), *(int*) (q + 0xb0), q, 1);
+		gm_BuyBuilding(*(int*) (a2 + 4), *(int*) (a1 + 4), *(int*) (q + 0xb0), q, 1);
 		return 0x13;
 	}
 	if (*a3 == 4) {

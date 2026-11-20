@@ -7,7 +7,7 @@ void __cdecl fcn_0046f4c0(int);
 int __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00469c30(int, int, int);
 void __cdecl fcn_00469c40(int, int, int);
-int __cdecl fcn_0046b2b0(int);
+int __cdecl d2_DestroyElement(int);
 
 void __cdecl fcn_005840d0(float*, float*, float*, float*, float, float*);
 
@@ -119,7 +119,7 @@ void __cdecl fcn_00584160(int a0)
 	} else if (v == 2) {
 		handle = *(int*) (o + 0x60);
 		if (handle != -1) {
-			fcn_0046b2b0(handle);
+			d2_DestroyElement(handle);
 			o = g_665f08;
 		}
 		*(int*) (o + 0x60) = -1;

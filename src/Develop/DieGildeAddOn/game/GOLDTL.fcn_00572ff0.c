@@ -23,7 +23,7 @@ int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 int __cdecl fcn_004c5530(char*);
 void __cdecl fcn_00500bb0(char*, int, int, int);
 void __cdecl fcn_00549330(char*, int);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl fcn_005ba020(char*, char*);
 char* __cdecl fcn_00503d10(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
@@ -31,7 +31,7 @@ int __cdecl fcn_0050dfd0(char*, int);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 int __cdecl fcn_0050d320(char*, unsigned char);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x00572ff0 */
@@ -85,14 +85,14 @@ void __cdecl fcn_00572ff0(char* a)
 	gm_ResolveEntityById((void**) &pktB, 0, 0, *(int*) (a + 0xb0));
 	gm_ResolveEntityById(0, 0, (void**) &itm, *(int*) (a + 0xb4));
 	if (pktA == 0 || pktB == 0) {
-		fcn_00546190(a);
+		he_FreeAction(a);
 		return;
 	}
-	ent = fcn_005463a0(2, 0, 0xf, 2, *(unsigned short*) (a + 8));
+	ent = he_StartHandlungSearch(2, 0, 0xf, 2, *(unsigned short*) (a + 8));
 	while (ent != 0) {
 		if (*(int*) (ent + 0xac) == *(int*) (a + 0xac)) {
 			if (*(int*) (ent + 0xb4) != *(int*) (a + 0xb0)) {
-				fcn_00546190(a);
+				he_FreeAction(a);
 				return;
 			}
 			fcn_00500bb0(a + 0x52, 0, 5, 0);
@@ -102,7 +102,7 @@ void __cdecl fcn_00572ff0(char* a)
 	}
 	if (*(char*) (a + 0xf1) == 0 && fcn_005ba020(pktB, pktA) == 0) {
 		fcn_005ba020(pktB, pktA);
-		fcn_00546190(a);
+		he_FreeAction(a);
 		return;
 	}
 	q = fcn_00502cd0(*(int*) (pktA + 0x14), 1, 0, 0x1dd);
@@ -141,7 +141,7 @@ void __cdecl fcn_00572ff0(char* a)
 			fcn_00500bb0(a + 0x52, 0, 5, 0);
 			return;
 		}
-		fcn_00546190(a);
+		he_FreeAction(a);
 		return;
 	}
 	found = 0;

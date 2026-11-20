@@ -21,14 +21,14 @@ void __cdecl fcn_00534160(int, int, int, int);
 void __cdecl fcn_00533a60(int, int, void *, int, int, int);
 void __cdecl fcn_00472640(void *, int);
 int __cdecl fcn_005373e0(int, int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(void *);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00584f00(int, void *, int);
 void __cdecl fcn_005263d0(void *, char *, int);
 
 /* ADDRESS: GOLDTL 0x5848b0 */
-void __cdecl fcn_005848b0(int a0)
+void __cdecl d2_RunAlchemyDialog(int a0)
 {
 	char msg[992];
 	char buf[256];
@@ -167,7 +167,7 @@ void __cdecl fcn_005848b0(int a0)
 			}
 		}
 	} while (fcn_005373e0(0x5848b0, 0x677c7));
-	fcn_00469510(idx);
+	d2_ClearRadioGroup(idx);
 	fcn_00471e30(w);
 	fcn_00532ef0();
 }

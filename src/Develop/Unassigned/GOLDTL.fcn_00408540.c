@@ -3,13 +3,13 @@
 extern void* g_6b5c5c; extern int g_67a370; extern char* g_6b8300;
 extern double g_662908; extern float g_662914;  extern float g_6628cc; extern const float g_6628a0;
 int __cdecl fcn_00402610();
-int __cdecl fcn_00405960();
+int __cdecl ch_RestoreGridRegion();
 int __cdecl fcn_00405a50();
 int __cdecl fcn_00407760();
-char __cdecl fcn_00407e30();
+char __cdecl ch_FindWalkableCell();
 int __cdecl fcn_00408250();
 int __cdecl ch_WorldToGridCoordinates();
-int __cdecl fcn_004082d0();
+int __cdecl ch_ConvertGridPointToCharacterGrid();
 int __cdecl fcn_00408320();
 int __cdecl d3_GetContextIndex();
 int __cdecl fcn_0041db70();
@@ -20,7 +20,7 @@ char __cdecl fcn_0045b990();
 int __cdecl fcn_0064d228();
 
 /* ADDRESS: GOLDTL 0x00408540 */
-int __cdecl fcn_00408540(int a0,int a1,int *a2)
+int __cdecl ch_ReplanBlockedPath(int a0,int a1,int *a2)
 {
   float *v1;
   int v10;
@@ -78,7 +78,7 @@ int __cdecl fcn_00408540(int a0,int a1,int *a2)
     *(unsigned int *)(((int)g_6b5c5c) + 0x10) = 0x42700000;
   }
   v9 = (unsigned char *)(*(int *)(v28 + 0xf4) + v10 * 2);
-  fcn_004082d0(v35,*v9,v9[1],((int)g_6b5c5c),&v15,&v14);
+  ch_ConvertGridPointToCharacterGrid(v35,*v9,v9[1],((int)g_6b5c5c),&v15,&v14);
   v28 = ((int)g_6b5c5c);
   if (*(int **)(v27 + 0x124))
     ch_WorldToGridCoordinates(v28,**(int **)(v27 + 0x124) + 0x4c,&v17,&v16);
@@ -304,10 +304,10 @@ label_40892d:
       v22 = (unsigned int)*(unsigned char *)(*(int *)(v28 + 0xf4) + 1 + v27 * 2);
       if ((*(int *)(a0 + 0x88) == 0x10432c0) || (v27 = 2, g_6b8300))
         v27 = 5;
-      v4 = fcn_00407e30(v35,*(int *)(a0 + 0x34) + 0x4c,v28 + 0x144,v23,v22,&v14,&v26,v36 * v27,*(unsigned int *)(v28 + 0x160) | 1);
+      v4 = ch_FindWalkableCell(v35,*(int *)(a0 + 0x34) + 0x4c,v28 + 0x144,v23,v22,&v14,&v26,v36 * v27,*(unsigned int *)(v28 + 0x160) | 1);
       v13 = v35;
       if (!v4) {
-        fcn_00405960(v35);
+        ch_RestoreGridRegion(v35);
         return -1;
       }
       v23 = v14;
@@ -321,7 +321,7 @@ label_40892d:
       else {
         if ((*(int *)(a0 + 0x88) == 0x10432c0) || (v27 = 2, g_6b8300))
           v27 = 5;
-        v4 = fcn_00407e30(v35,*(int *)(a0 + 0x34) + 0x4c,v28 + 0x144,v24,v15,&v14,&v26,v36 * v27,*(unsigned int *)(v28 + 0x160) | 1);
+        v4 = ch_FindWalkableCell(v35,*(int *)(a0 + 0x34) + 0x4c,v28 + 0x144,v24,v15,&v14,&v26,v36 * v27,*(unsigned int *)(v28 + 0x160) | 1);
         if (v4) { 
           v24 = v14;
           v15 = v26;
@@ -335,7 +335,7 @@ label_40892d:
       v5 = fcn_00421350(0x14d0c20,v13,v14,v8,v23,v22,*(unsigned char *)(a0 + 0x240));
       v27 = (*(int *)0x14d0c20);
       if (v5 == -1) {
-        fcn_00405960(v13);
+        ch_RestoreGridRegion(v13);
         return -1;
       }
       if (*(int *)(v28 + 0xf4)) {
@@ -370,7 +370,7 @@ label_40892d:
       *(float *)(v28 + 300) = (*(float *)0x6b5c40) + *(float *)(v28 + 300);
       if (((2 <= v27) && (v6 = *(int *)(v28 + 0xf4), *(char *)(v6 + -2 + v27 * 2) == *(char *)(v6 + -4 + v27 * 2))) && (*(char *)(v6 + -1 + v27 * 2) == *(char *)(v6 + -3 + v27 * 2)))
         *(int *)(v28 + 0xf0) = v27 + -1;
-      fcn_00405960(v13);
+      ch_RestoreGridRegion(v13);
       *(char *)(a0 + 0x8e) = 4;
       if ((v24 == v23) && (v15 == v22))
         return -2;

@@ -25,7 +25,7 @@ void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl ConfirmProductionSelection(int, char*);
 
-void __cdecl fcn_005af4e0(char* a)
+void __cdecl d2_ShowProductionSelection(char* a)
 {
 	Req req;
 

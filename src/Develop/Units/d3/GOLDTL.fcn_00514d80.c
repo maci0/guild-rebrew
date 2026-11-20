@@ -22,7 +22,7 @@ struct list_514d80 {
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, struct list_514d80*);
 void __cdecl d3_ReparentObject(char*, int);
 
-char __cdecl fcn_00514d30(char*, struct list_514d80*);
+char __cdecl d3_CollectFackelObjects(char*, struct list_514d80*);
 
 void __cdecl fcn_00514d80(int x)
 {
@@ -32,7 +32,7 @@ void __cdecl fcn_00514d80(int x)
 	int i;
 
 	l.n = 0;
-	d3_VisitSceneObjects(g_67a370, x, 0x2c0, (void*) fcn_00514d30, &l);
+	d3_VisitSceneObjects(g_67a370, x, 0x2c0, (void*) d3_CollectFackelObjects, &l);
 	for (i = 0; i < l.n; i++) {
 		for (o = *(char**) (l.a[i] + OFF_LIST_NEXT); o != 0; o = next) {
 			next = *(char**) (o + OFF_OBJ_NEXT);

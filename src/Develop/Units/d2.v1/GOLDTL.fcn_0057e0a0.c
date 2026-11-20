@@ -26,7 +26,7 @@ int __cdecl fcn_00580290(void);
 void __cdecl fcn_00580320(void);
 void __cdecl fcn_005803f0(void);
 void __cdecl fcn_00580420(void);
-void __cdecl fcn_005804f0(void);
+void __cdecl d2_HideTutorialPrompt(void);
 void __cdecl fcn_00580610(void);
 void __cdecl fcn_005806d0(void);
 int __cdecl fcn_00580960(void);
@@ -58,7 +58,7 @@ int __cdecl fcn_0057e0a0(void)
 	}
 	if (g_665f08[0xc] == 1 && g_665f08[0] != 9) {
 		g_665f08[0xc] = 0;
-		fcn_005804f0();
+		d2_HideTutorialPrompt();
 		fcn_00584160(2);
 	}
 	if (g_774a18 == 0) {

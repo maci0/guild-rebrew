@@ -30,8 +30,8 @@ int __cdecl fcn_005c62c0(char* objekt, int id);
 int __cdecl fcn_005743b0(char* objekt);
 void __cdecl fcn_005290d0(char* objekt);
 float __cdecl fcn_0050fdb0(int besitzer, int anzahl, int* ids);
-struct unit* __cdecl fcn_005463a0(int anzahl, ...);
-void __cdecl fcn_00546190(struct unit* objekt);
+struct unit* __cdecl he_StartHandlungSearch(int anzahl, ...);
+void __cdecl he_FreeAction(struct unit* objekt);
 void __cdecl fcn_005467e0(int* objekt);
 int __cdecl fcn_004c51f0(int a, int b, short ware, int menge, char besitzer, int modus);
 int __cdecl fcn_004c5250(int objekt, unsigned short ware, int menge);
@@ -261,9 +261,9 @@ warten:
                 }
             }
             if (*(int*) (e + 0xc8)) {
-                nachricht = fcn_005463a0(2, 0, 0x11, 3, *(int*) (e + 4));
+                nachricht = he_StartHandlungSearch(2, 0, 0x11, 3, *(int*) (e + 4));
                 if (nachricht != 0) {
-                    fcn_00546190(nachricht);
+                    he_FreeAction(nachricht);
                 }
                 *(int*) (e + 0xc8) = 0;
                 if (*(int**) (e + 0x88) != 0) {
@@ -351,7 +351,7 @@ mangel:
         if (gebaeude != 0) {
             fcn_004c6300(*(int*) (gebaeude + 1));
         }
-        fcn_00546190((struct unit*) e);
+        he_FreeAction((struct unit*) e);
         return;
     case -2:
     case -1:
@@ -369,5 +369,5 @@ mangel:
         return;
     }
     }
-    fcn_00546190((struct unit*) e);
+    he_FreeAction((struct unit*) e);
 }

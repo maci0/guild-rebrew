@@ -12,10 +12,10 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_ClearWindowChildren(int, int);
-int __cdecl fcn_004e8b80(int, int, char*);
-int __cdecl fcn_004e8cb0(int, int, char*);
+int __cdecl amt_FindOfficeSlotsByKind(int, int, char*);
+int __cdecl amt_CollectOfficeGroup7(int, int, char*);
 int __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005463a0(int, int, ...);
+int __cdecl he_StartHandlungSearch(int, int, ...);
 int __cdecl he_fn_Handlung(void);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 float __cdecl fcn_004fef80(char*);
@@ -23,7 +23,7 @@ int __cdecl fcn_005c9f10(int, int, int, int, int, short*);
 int __cdecl fcn_005c99a0(int, int, int, int, int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00471af0(int, int);
-void __cdecl fcn_005cdd90(int, int);
+void __cdecl d2_ShowAmtInfo(int, int);
 int __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_00471e30(int);
 
@@ -85,7 +85,7 @@ void __cdecl fcn_005cd810(int office)
 				rec[i].text = 0;
 			}
 			if (((0 < office) && (office < 7)) || (office == 8)) {
-				count = fcn_004e8b80(office, 6, src1);
+				count = amt_FindOfficeSlotsByKind(office, 6, src1);
 				if (count > 0) {
 					for (i = 0; i < count; i++) {
 						rec[i].ent = gm_LookupEntityRecordById(*(int*) (src1 + i * 0x18 + 4));
@@ -95,7 +95,7 @@ void __cdecl fcn_005cd810(int office)
 			} else {
 				if (office != 7)
 					return;
-				count = fcn_004e8cb0(0, 6, src2);
+				count = amt_CollectOfficeGroup7(0, 6, src2);
 				if (count > 0) {
 					for (i = 0; i < count; i++) {
 						rec[i].ent = gm_LookupEntityRecordById(*(int*) (src2 + i * 0x18 + 4));
@@ -112,7 +112,7 @@ void __cdecl fcn_005cd810(int office)
 				rec[i].text2 = 0;
 				rec[i].text1 = 0x6ca - (*(unsigned char*) (ent + 0xc) != 0);
 				if ((*(unsigned char*) (g_774970 * 0x21c + 0x7f4ca9) != *(unsigned char*) (ent + 9)) && (*(unsigned int*) (ent + 0x1c8) & 0x800000)) {
-					j = fcn_005463a0(1, 0, 0x6f);
+					j = he_StartHandlungSearch(1, 0, 0x6f);
 					while (j) {
 						if ((*(int*) (j + 0xac) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) && (*(int*) (ent + 4) == *(int*) (j + 0xb0))) {
 							rec[i].text2 = 0x6cc;
@@ -125,7 +125,7 @@ void __cdecl fcn_005cd810(int office)
 				if (CountMatchingStraftatEntries(*(int*) (ent + 4), g_774970) >= 1) {
 					rec[i].text3 = 0x6cd;
 				} else {
-					j = fcn_005463a0(1, 0, 0x18);
+					j = he_StartHandlungSearch(1, 0, 0x18);
 					while (j) {
 						if ((*(unsigned short*) (j + 8) == g_774970) && (*(int*) (ent + 4) == *(int*) (j + 0xc4))) {
 							rec[i].text3 = 0x6ce;
@@ -135,7 +135,7 @@ void __cdecl fcn_005cd810(int office)
 					}
 				}
 				rec[i].text4 = 0;
-				j = fcn_005463a0(1, 0, 0x45);
+				j = he_StartHandlungSearch(1, 0, 0x45);
 				while (j) {
 					if ((*(int*) (j + 0xac) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) && (*(int*) (ent + 4) == *(int*) (j + 0xb0))) {
 						rec[i].text4 = 0x6cb;
@@ -223,7 +223,7 @@ select:
 						sel = 0;
 					}
 					fcn_00471af0(dlg, 0);
-					fcn_005cdd90(rec[i].text, (int) ent);
+					d2_ShowAmtInfo(rec[i].text, (int) ent);
 					fcn_00471af0(dlg, 1);
 				}
 			}

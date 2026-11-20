@@ -10,7 +10,7 @@ extern int __cdecl gm_RandomMod(int);
 extern void __cdecl fcn_00579390(char*, char*);
 extern void __cdecl fcn_00579410(char*, char*);
 extern void __cdecl fcn_004c5530(char*);
-extern void __cdecl fcn_00546190(char*);
+extern void __cdecl he_FreeAction(char*);
 extern void __cdecl fcn_00500bb0(char*, int, int, int);
 
 typedef struct Req578 {
@@ -62,7 +62,7 @@ void __cdecl fcn_00578ed0(char* event)
 	state = *(int*) (event + 0x70);
 	if (state != -1 && state != -2) {
 		if (ent == 0) {
-			fcn_00546190(event);
+			he_FreeAction(event);
 			return;
 		}
 		if (*(unsigned char*) (ent + 8) != 0) {
@@ -172,5 +172,5 @@ found_one:
 	}
 	if (ent != 0)
 		fcn_00529160(0, 0, *(unsigned short*) ent, 0);
-	fcn_00546190(event);
+	he_FreeAction(event);
 }

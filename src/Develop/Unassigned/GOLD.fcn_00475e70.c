@@ -4,7 +4,7 @@ extern GuiEnt* g_00f8f080;
 int __cdecl fcn_004759e0(int, int*, int*);
 
 /* ADDRESS: GOLD 0x00475e70 */
-void __cdecl fcn_00475e70(int id, int scale)
+void __cdecl d2_SetElementScale(int id, int scale)
 {
 	int w;
 	int idx;

@@ -15,7 +15,7 @@ void __cdecl fcn_004458a0(int, char*, char*);
 void __cdecl fcn_00442c00(int, int);
 char* __cdecl ch_CreateAction(int, int, int);
 
-void __cdecl fcn_004d8700(int* a)
+void __cdecl gm_StartGroundPickupAnimation(int* a)
 {
 	char* e;
 	char* q;

@@ -48,7 +48,7 @@ void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005d61d0(unsigned short* target)
+int __cdecl d2_ShowIntimidationDialog(unsigned short* target)
 {
 	int dlg;
 	pos14_7f4c00 nm;
@@ -91,7 +91,7 @@ int __cdecl fcn_005d61d0(unsigned short* target)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005d61d0, 0x657c7) != 0);
+	} while (fcn_005373e0((void*) d2_ShowIntimidationDialog, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

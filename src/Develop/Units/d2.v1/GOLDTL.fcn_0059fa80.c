@@ -31,7 +31,7 @@ void __cdecl fcn_005ca560(void* desc);
 void __cdecl fcn_005ca740(int x, int y, int screen, int id, void* desc,
 	int flag);
 int __cdecl gm_LookupEntityRecordById(unsigned int id);
-int __cdecl fcn_005463a0(int a, int b, int c);
+int __cdecl he_StartHandlungSearch(int a, int b, int c);
 void __cdecl fcn_00472640(int value, int flag);
 char* __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl fcn_00526120(char* text, int flag);
@@ -89,7 +89,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	fcn_005ca740(*(int*) (cmd + 0x10), *(int*) (cmd + 0x14), d2_CurrentWindowId, 0x54, cmd, 1);
 	g_100f1dc = -1;
 	for (;;) {
-		v5 = gm_LookupEntityRecordById(v3) && fcn_005463a0(1, 1, v4);
+		v5 = gm_LookupEntityRecordById(v3) && he_StartHandlungSearch(1, 1, v4);
 		fcn_00472640(id_b, v5 && *(int*) (v7 + 0xbc) < gm_GameTime.a);
 		if (!g_14ce8e0 && v5) {
 			if (g_100f1dc != -1) {

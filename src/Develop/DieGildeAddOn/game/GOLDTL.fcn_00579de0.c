@@ -46,13 +46,13 @@ char* __cdecl fcn_0050dc90(char* p);
 void __cdecl io_FormatTextBuffer(char* buf, int a, int b, int c, char* p);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e,
 	int f, int g, char* fmt);
-void __cdecl fcn_00546190(char* a0);
+void __cdecl he_FreeAction(char* a0);
 
 /* Placement step for the transport/warehouse action: validates the current
    map cell, advances the hauled amount along the way, places the icon and
    reports the action text. */
 /* ADDRESS: GOLDTL 0x00579de0 */
-void __cdecl fcn_00579de0(char* a0)
+void __cdecl he_RunGrabpflege(char* a0)
 {
 	Place579* place;
 	char text[1024];
@@ -123,7 +123,7 @@ void __cdecl fcn_00579de0(char* a0)
 	if (slot != 0 && v > 0) {
 		fcn_004f2d30(rec, place->xb0, place->xb4, v);
 		if (!entity) {
-			fcn_00546190(a0);
+			he_FreeAction(a0);
 			return;
 		}
 		fig = fcn_0050dc90(rec);
@@ -139,5 +139,5 @@ void __cdecl fcn_00579de0(char* a0)
 		fcn_00529160(0, 0, *(unsigned short*) entity, 0);
 	}
 end:
-	fcn_00546190(a0);
+	he_FreeAction(a0);
 }

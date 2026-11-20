@@ -35,8 +35,8 @@ void __cdecl fcn_004c5530(Msg *);
 float __cdecl fcn_004feff0(char *);
 int __cdecl fcn_00567170(char *, int *, int *, int);
 void __cdecl fcn_00529160(int, int, int, int);
-char *__cdecl fcn_00426cc0(int);
-int __cdecl fcn_00428720(char *);
+char *__cdecl evt_FindScriptById(int);
+int __cdecl evt_RequestScriptExit(char *);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char *);
 
 void __cdecl fcn_005498b0(char *a1, char *entity, char *a3, char *a4, int a5, float value)
@@ -69,7 +69,7 @@ void __cdecl fcn_005498b0(char *a1, char *entity, char *a3, char *a4, int a5, fl
 		if (value < f && fcn_00567170(entity, &x0, &x4, 0) != 0 && *(char **) (entity + 0x184) != 0) {
 			fcn_00529160(0, 0, *(unsigned short *) entity, 0);
 			if (*(int *) (*(char **) (entity + 0x184) + 0x28) != -1) {
-				fcn_00428720(fcn_00426cc0(*(int *) (*(char **) (entity + 0x184) + 0x28)));
+				evt_RequestScriptExit(evt_FindScriptById(*(int *) (*(char **) (entity + 0x184) + 0x28)));
 			}
 			if (x4 == -1) {
 				fcn_004c5da0(*(int *) (entity + 4), x0, x4, 0, 1, "Unfall");

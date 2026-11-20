@@ -9,7 +9,7 @@ void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
-void __cdecl fcn_00438cb0(void*, float*);
+void __cdecl d3_SetObjectRotation(void*, float*);
 void __cdecl fcn_00438b40(void*, float*);
 
 
@@ -37,7 +37,7 @@ char* __cdecl CreateCharacterAtDummy(char** file, char** dummy, char** name)
 		rot[2] = 0.0f;
 		fcn_00455140(*dummy, g_662d40, dir);
 		rot[1] = fcn_00451380(g_662d40, dir);
-		fcn_00438cb0(*(void**) (ch + 0x34), rot);
+		d3_SetObjectRotation(*(void**) (ch + 0x34), rot);
 		fcn_00438b40(*(void**) (ch + 0x34), pos);
 		*(int*) (ch + 0x30) = *(int*) (evt_CurrentScript + 0x104);
 	} else {

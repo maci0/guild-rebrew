@@ -13,11 +13,11 @@ int __cdecl fcn_00500bb0(char*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*,
                           char*);
-int __cdecl fcn_00515540(int);
+int __cdecl init_EnsureObjektSceneContext(int);
 void __cdecl fcn_004432d0(int, int);
 void* __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(void*, int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl fcn_0057c9f0(char*);
 int __cdecl fcn_004c5620(int, char*);
 
@@ -36,7 +36,7 @@ void __cdecl fcn_0057cbc0(char* p)
     if (*(int*) (p + 0x84) != -1 && fcn_004c4450(*(int*) (p + 0x84)) == 0)
         return;
     if (*(int*) (p + 0x70) == -1 || *(int*) (p + 0x70) == -2) {
-        fcn_00546190(p);
+        he_FreeAction(p);
         return;
     }
     if (*(int*) (p + 0x70) == 0) {
@@ -53,7 +53,7 @@ void __cdecl fcn_0057cbc0(char* p)
                          *(int*) (s + 1), *(int*) (wnd + 2), g_6b5c60,
                          g_6b5c60);
             gfx = d3_CurrentContextIndex;
-            r = fcn_00515540((int) wnd);
+            r = init_EnsureObjektSceneContext((int) wnd);
             fcn_004432d0(r, 1);
             e = (char*) evt_LoadGfxScript(g_6a80c0);
             if (e != 0) {

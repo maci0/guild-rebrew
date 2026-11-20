@@ -48,10 +48,10 @@ int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004c5790(int, void*);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_00469510(int i);
+void __cdecl d2_ClearRadioGroup(int i);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005c80f0(void)
+void __cdecl d2_ChooseWappen(void)
 {
 	int back;
 	int grp;
@@ -132,7 +132,7 @@ void __cdecl fcn_005c80f0(void)
 				fcn_004c5790(0xd, ev);
 			}
 		}
-	} while (fcn_005373e0(fcn_005c80f0, 0x677c7) != 0);
-	fcn_00469510(grp);
+	} while (fcn_005373e0(d2_ChooseWappen, 0x677c7) != 0);
+	d2_ClearRadioGroup(grp);
 	fcn_00471e30(d);
 }

@@ -16,12 +16,12 @@ void* __cdecl fcn_005cd440(void*, char*, int, int);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c4510(void*, int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c4fc0(char, int, int, short, int, char, char, char);
 
 /* ADDRESS: GOLDTL 0x005b4660 */
-void __cdecl fcn_005b4660(char* e)
+void __cdecl d2_RunCharacterDebugDialog(char* e)
 {
 	int flags;
 	int hKill;
@@ -50,7 +50,7 @@ void __cdecl fcn_005b4660(char* e)
 	hMarriage = fcn_00472250(dialog, 0, io_AppendText("%it[Marriage]$A"));
 	hChild = fcn_00472250(dialog, 0, io_AppendText("%it[Get Child]$A"));
 	d2_CenterDialogWindows(dialog);
-	while (fcn_005373e0((void*) fcn_005b4660, flags) != 0) {
+	while (fcn_005373e0((void*) d2_RunCharacterDebugDialog, flags) != 0) {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == hKill) {
 				fcn_004ff210(*(unsigned short*) e, -2000);
@@ -68,10 +68,10 @@ void __cdecl fcn_005b4660(char* e)
 					if (p != 0) {
 						fcn_004c4eb0("marriage");
 						fcn_004c4510(p, *(int*) ((char*) p + 4));
-						fcn_004c4570(4, 1, 0x5c, e + 4);
+						cm_AppendPacketFieldDelta(4, 1, 0x5c, e + 4);
 						fcn_004c5360();
 						fcn_004c4510(e, *(int*) (e + 4));
-						fcn_004c4570(4, 1, 0x5c,
+						cm_AppendPacketFieldDelta(4, 1, 0x5c,
 							(char*) p + 4);
 						fcn_004c5360();
 						fcn_004c4ef0("marriage");

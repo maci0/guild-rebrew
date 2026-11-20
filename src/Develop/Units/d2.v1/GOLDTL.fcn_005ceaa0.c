@@ -14,7 +14,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 /* ADDRESS: GOLD 0x5c2880 */
 
-void __cdecl fcn_005ceaa0(void)
+void __cdecl d2_ShowMeisterbriefDialog(void)
 {
 	int h;
 
@@ -29,6 +29,6 @@ void __cdecl fcn_005ceaa0(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(fcn_005ceaa0, 0x677c7) != 0);
+	} while (fcn_005373e0(d2_ShowMeisterbriefDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 }

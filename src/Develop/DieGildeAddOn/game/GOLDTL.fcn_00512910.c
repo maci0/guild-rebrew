@@ -32,13 +32,13 @@ extern unsigned char g_773d75;
 Estate* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 Shop* __cdecl fcn_00502cd0(int, int, int, int, int);
 
-void __cdecl fcn_004c4570(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 Estate* __cdecl gm_AddObjekt(void);
 Estate* __cdecl gm_FindNextFilteredEntity(void);
 
-void __cdecl fcn_00512910(void)
+void __cdecl gm_InitializeShopInventory(void)
 {
 	Estate* s;
 	int count;
@@ -62,9 +62,9 @@ void __cdecl fcn_00512910(void)
 				}
 			}
 			fcn_004c4510((char*) w, w->id);
-			fcn_004c4570(1, 1, (char*) w - g_aed32c + 0x1c, &count);
+			cm_AppendPacketFieldDelta(1, 1, (char*) w - g_aed32c + 0x1c, &count);
 			count = 4;
-			fcn_004c4570(4, 1, (char*) w - g_aed32c + 0xe, &count);
+			cm_AppendPacketFieldDelta(4, 1, (char*) w - g_aed32c + 0xe, &count);
 			fcn_004c5360();
 			p = ((Variant*)g_868060)[kind].buy;
 			for (i = 16; i != 0; i--) {
@@ -84,9 +84,9 @@ void __cdecl fcn_00512910(void)
 				}
 			}
 			fcn_004c4510((char*) w, w->id);
-			fcn_004c4570(1, 1, (char*) w - g_aed32c + 0x1c, &count);
+			cm_AppendPacketFieldDelta(1, 1, (char*) w - g_aed32c + 0x1c, &count);
 			count = 4;
-			fcn_004c4570(4, 1, (char*) w - g_aed32c + 0xe, &count);
+			cm_AppendPacketFieldDelta(4, 1, (char*) w - g_aed32c + 0xe, &count);
 			fcn_004c5360();
 			p = ((Variant*)g_868060)[kind].sell;
 			for (i = 16; i != 0; i--) {

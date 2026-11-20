@@ -8,7 +8,7 @@ void __cdecl d3_TransformPoint(char*, char*, int*);
 int __cdecl fcn_004fda30(int);
 char* __cdecl ch_CreateAtPosition(char*, float*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl fcn_00438cb0(char*, int*);
+void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl fcn_004fdcf0(char*);
 void __cdecl fcn_004fdfe0(char*);
 
@@ -64,7 +64,7 @@ have:
 			*(void**) (*(char**) (*(char**) (a0 + 0x184) + 0x34) + 0x204) = a0;
 			*(int*) (*(char**) (*(char**) (a0 + 0x184) + 0x34) + 0x48) = *(unsigned short*) a0 | 0x3000000;
 			if (a3 != 0) {
-				fcn_00438cb0(*(char**) (*(char**) (a0 + 0x184) + 0x34), a3);
+				d3_SetObjectRotation(*(char**) (*(char**) (a0 + 0x184) + 0x34), a3);
 			}
 			strcpy(a0 + 0x1f4, v6);
 			fcn_004fdcf0(a0);

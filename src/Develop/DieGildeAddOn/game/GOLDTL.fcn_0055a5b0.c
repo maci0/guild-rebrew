@@ -38,7 +38,7 @@ extern char g_6b5c60[];
 
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5530(Msg55a5*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl fcn_004fef80(char*);
 float __cdecl fcn_004ff210(unsigned short, int);
@@ -86,11 +86,11 @@ void __cdecl fcn_0055a5b0(char* u)
 			fcn_004c51a0(*(int*) (u + 0xac), -1, g_773d75, d);
 			io_FormatTextBuffer(buf, 0x10ba, d);
 			fcn_00545d40(*(int*) (u + 0xac), -1, buf, 0x20, 0x5fd, g_6b5c60);
-			fcn_00546190(u);
+			he_FreeAction(u);
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x10bb);
 		fcn_00545d40(*(int*) (u + 0xac), -1, buf, 0x20, 0x5fd, g_6b5c60);
 	}
-	fcn_00546190(u);
+	he_FreeAction(u);
 }

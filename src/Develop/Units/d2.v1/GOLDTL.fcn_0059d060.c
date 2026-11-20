@@ -48,7 +48,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_005463a0(int, int, int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl fcn_004c35f0(void);
@@ -58,7 +58,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x0059d060 */
-int __cdecl fcn_0059d060(int unused, char* param)
+int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 {
 	Packet pkt;
 	char buf[0x400];
@@ -87,7 +87,7 @@ int __cdecl fcn_0059d060(int unused, char* param)
 			g_774654 = 1;
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == btn1) {
-				dlg2 = fcn_005463a0(3, 0, 0x49, 2,
+				dlg2 = he_StartHandlungSearch(3, 0, 0x49, 2,
 					*(unsigned short*) (g_7746c8 + 0x27), 3,
 					*(int*) (g_7746c8 + 1));
 				while (dlg2 != 0) {
@@ -150,7 +150,7 @@ int __cdecl fcn_0059d060(int unused, char* param)
 				g_774654 = 1;
 			}
 		}
-		if (fcn_005373e0((void*) fcn_0059d060, 0x677c7) == 0) {
+		if (fcn_005373e0((void*) d2_RunTaschendiebstahlDialog, 0x677c7) == 0) {
 			fcn_00471e30(dlg);
 			return flag;
 		}

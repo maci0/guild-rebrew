@@ -44,7 +44,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl d2_ClearWindowChildren(int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00532ef0(void);
@@ -53,7 +53,7 @@ void __cdecl fcn_00526920(char*, int, char*);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005a8e20(void)
+void __cdecl d2_OpenRathausGebInfo(void)
 {
 	int flag;
 	Row rows[128];
@@ -84,7 +84,7 @@ void __cdecl fcn_005a8e20(void)
 			n = 0;
 			for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
 				if (e[0x5a] & 2) {
-					for (r = fcn_005463a0(1, 0, 0x1b); r != 0; r = he_fn_Handlung()) {
+					for (r = he_StartHandlungSearch(1, 0, 0x1b); r != 0; r = he_fn_Handlung()) {
 						if (*(int*) (r + 0xac) == *(int*) (e + 1)) {
 							rows[n].rel = r;
 							rows[n].btn = fcn_00472250(dlg, 2, io_AppendText(0x17f5, (unsigned char) e[0] + 0x427, *(unsigned short*) (e + 0x27), e, *(int*) (r + 0xb0)));
@@ -116,6 +116,6 @@ void __cdecl fcn_005a8e20(void)
 				}
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005a8e20, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_OpenRathausGebInfo, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 }

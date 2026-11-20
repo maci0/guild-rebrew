@@ -58,7 +58,7 @@ void __cdecl d2_SetGroupVisibility(int k, int flag);
 void __cdecl fcn_00526120(int, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005a4090(char* p)
+void __cdecl d2_ChooseNewLoan(char* p)
 {
 	struct line list[3];
 	char ev[0xf8];
@@ -93,7 +93,7 @@ void __cdecl fcn_005a4090(char* p)
 	}
 	io_AppendText(0x18d3);
 	d2_SetOverlayAnimation(0, 0);
-	while (fcn_005373e0(fcn_005a4090, 0x677c7) != 0) {
+	while (fcn_005373e0(d2_ChooseNewLoan, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

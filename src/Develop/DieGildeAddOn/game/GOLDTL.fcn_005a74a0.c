@@ -26,7 +26,7 @@ int __cdecl fcn_005a7400(unsigned char* p, int* lo, int* hi);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005263d0(char*, char*, int);
 
-int __cdecl fcn_005a74a0(unsigned char* p)
+int __cdecl gm_CanEnterGebaeude(unsigned char* p)
 {
 	int a;
 	int b;

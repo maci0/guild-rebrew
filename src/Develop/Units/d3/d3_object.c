@@ -3,7 +3,7 @@
 #include "d3_camera.h"
 
 #ifdef REBREW_GOLD
-void __cdecl fcn_0043cc90(char*);
+void __cdecl d3_ClearObjectDrawRecord(char*);
 #else
 void __cdecl fcn_00439c90(char*);
 #endif
@@ -44,13 +44,13 @@ void __cdecl d3_CleanupObjectDrawData(D3_OBJECT* object)
 	if (object->zeichendaten != 0) {
 		for (i = 0; i < object->zeichendaten->teile_anzahl; i++) {
 #ifdef REBREW_GOLD
-			fcn_0043cc90((char*) &object->zeichendaten->teile[i]);
+			d3_ClearObjectDrawRecord((char*) &object->zeichendaten->teile[i]);
 #else
 			fcn_00439c90((char*) &object->zeichendaten->teile[i]);
 #endif
 		}
 #ifdef REBREW_GOLD
-		fcn_0043cc90((char*) &object->zeichendaten->teile[3]);
+		d3_ClearObjectDrawRecord((char*) &object->zeichendaten->teile[3]);
 #else
 		fcn_00439c90((char*) &object->zeichendaten->teile[3]);
 #endif

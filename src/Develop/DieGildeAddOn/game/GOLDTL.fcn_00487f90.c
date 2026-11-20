@@ -8,7 +8,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char g_7f4ca4[];
 
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl fcn_004bcc50(char*, int);
 char* __cdecl fcn_005049a0(unsigned char*);
@@ -39,7 +39,7 @@ void __cdecl fcn_00487f90(int* actionCtx)
 		} else {
 			n = actionCtx[6] / actionCtx[5] + actionCtx[8];
 		}
-		for (rec = fcn_005463a0(2, 0, 0x28, 3,
+		for (rec = he_StartHandlungSearch(2, 0, 0x28, 3,
 		                        *(int*) (*(int*) (actionCtx[1] + 0x16c) + 1));
 		     rec != 0; rec = he_fn_Handlung()) {
 			v = (int) fcn_004bcc50((char*) base, *(int*) (rec + 0xb8));
@@ -254,7 +254,7 @@ void __cdecl fcn_00487f90(int* actionCtx)
 		actionCtx[7] = actionCtx[7] + 1;
 		return;
 	}
-	rec = fcn_005463a0(2, 0, actionCtx[0], 3,
+	rec = he_StartHandlungSearch(2, 0, actionCtx[0], 3,
 	                   *(int*) (*(int*) (actionCtx[1] + 0x16c) + 1));
 	while (rec != 0) {
 		if (actionCtx[0] == 4 &&

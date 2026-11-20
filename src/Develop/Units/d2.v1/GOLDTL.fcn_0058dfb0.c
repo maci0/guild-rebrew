@@ -50,7 +50,7 @@ int __cdecl fcn_00525f60(struct house*, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_0058dfb0(int a1, char* s, struct result* out)
+int __cdecl d2_OpenSeanceDialog(int a1, char* s, struct result* out)
 {
 	int b8;
 	int price[3];
@@ -114,7 +114,7 @@ int __cdecl fcn_0058dfb0(int a1, char* s, struct result* out)
 				}
 			}
 		}
-	} while (fcn_005373e0(fcn_0058dfb0, 0x677c7) != 0);
+	} while (fcn_005373e0(d2_OpenSeanceDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 	return r;
 }

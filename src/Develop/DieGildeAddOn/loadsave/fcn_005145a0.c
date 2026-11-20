@@ -21,9 +21,9 @@ void __cdecl init_LocalData(void);
 void __cdecl fcn_00515340(char a0);
 int __cdecl ls_SendGame(char *path);
 int __cdecl fcn_00525b40(void);
-void __cdecl fcn_005356e0(void);
+void __cdecl main_PumpWindowMessages(void);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_00535770(int id);
+void __cdecl sv_WaitForNetworkSync(int id);
 void __cdecl fcn_005017a0(int i);
 void __cdecl fcn_00501fe0(int i);
 int __cdecl fcn_0050b750(int timeout, char who);
@@ -65,7 +65,7 @@ int __cdecl fcn_005145a0(char *path)
     fcn_00514570((unsigned int) text);
     *(int *) &g_77494c = 0;
     do {
-        fcn_005356e0();
+        main_PumpWindowMessages();
         fcn_00535960();
     } while (*(int *) &g_77494c == 0);
     if (*(int *) &g_77494c & 1) {
@@ -107,7 +107,7 @@ int __cdecl fcn_005145a0(char *path)
                            *(unsigned char *) 0x7e23e9,
                            (char *) 0x7e23ea, (char *) 0x7e240a);
     while (session == -1) {
-        fcn_005356e0();
+        main_PumpWindowMessages();
         fcn_00535960();
         session = fcn_004c5040(0xffff, 0xffff, *(unsigned char *) 0x7e23e2,
                                *(unsigned char *) 0x7e23e3,
@@ -117,7 +117,7 @@ int __cdecl fcn_005145a0(char *path)
                                (char *) 0x7e23ea, (char *) 0x7e240a);
     }
     while (fcn_004c4450(session) == 0) {
-        fcn_005356e0();
+        main_PumpWindowMessages();
         fcn_00535960();
     }
     handle = fcn_004c4480(session);
@@ -130,7 +130,7 @@ int __cdecl fcn_005145a0(char *path)
         fcn_004c5790(9, (char *) msg);
     }
     while (*(unsigned char *) &g_6a3440 == 0xfe) {
-        fcn_005356e0();
+        main_PumpWindowMessages();
         fcn_00535960();
     }
     if (*(unsigned char *) &g_6a3440 != 0xff) {
@@ -143,17 +143,17 @@ int __cdecl fcn_005145a0(char *path)
     fcn_004c5150(*(int *) (handle + 4), -1, *(unsigned char *) &g_773d75,
                  result);
     while ((*(int *) &g_77494c & 4) == 0) {
-        fcn_005356e0();
+        main_PumpWindowMessages();
         fcn_00535960();
     }
     if (flag != 0) {
         fcn_00514570(*(unsigned int *) 0x14ac5f8);
         fcn_00514b50(*(unsigned char *) &g_773d75);
     }
-    fcn_00535770(0x24087);
+    sv_WaitForNetworkSync(0x24087);
     fcn_00514570(*(unsigned int *) 0x14ac5fc);
     init_LocalData();
-    fcn_00535770(0x24087);
+    sv_WaitForNetworkSync(0x24087);
     if (flag != 0) {
         fcn_00515340(*(unsigned char *) &g_773d75);
         i = 0;

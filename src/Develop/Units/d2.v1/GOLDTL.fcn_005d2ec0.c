@@ -34,7 +34,7 @@ int __cdecl fcn_005d2a40(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
-int __cdecl fcn_005d2d30(unsigned short*);
+int __cdecl d2_RunWerbungDialog(unsigned short*);
 void __cdecl d2_SetGroupVisibility(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -82,7 +82,7 @@ int __cdecl fcn_005d2ec0(char* a0)
 			for (i = 0; i < count; i++) {
 				if (items[i].btn == d2_CurrentElementId) {
 					d2_SetGroupVisibility(dlg, 0);
-					if (fcn_005d2d30((unsigned short*) items[i].e) != 0) {
+					if (d2_RunWerbungDialog((unsigned short*) items[i].e) != 0) {
 						res = 0x92;
 						g_774654 = 1;
 						break;

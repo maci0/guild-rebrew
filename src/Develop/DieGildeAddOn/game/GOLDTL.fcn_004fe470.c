@@ -13,7 +13,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int type);
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
 int __cdecl gm_CheckEntityType(char* e);
 int __cdecl fcn_005155e0(char* e);
-int __cdecl fcn_00515540(char* q);
+int __cdecl init_EnsureObjektSceneContext(char* q);
 void __cdecl fcn_004432d0(int a, int b);
 char* __cdecl ch_SelectRandomDummy(void);
 void __cdecl fcn_004fe2e0(char* o, int h, int x, int y, int view, char* name);
@@ -48,7 +48,7 @@ char* __cdecl fcn_004fe470(int id, int type, int sub, int x, int y)
 	if (gm_CheckEntityType(b)) {
 		h = fcn_005155e0(b);
 	} else if (q != 0) {
-		h = fcn_00515540(q);
+		h = init_EnsureObjektSceneContext(q);
 	} else {
 		h = 0;
 	}

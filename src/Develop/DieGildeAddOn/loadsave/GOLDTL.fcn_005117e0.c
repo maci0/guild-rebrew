@@ -13,10 +13,10 @@ void __cdecl fcn_004c4940(void);
 void __cdecl ls_ID2Ptr(void);
 int* __cdecl fcn_004c4480(int h);
 
-void __cdecl fcn_004c4570(int a, int b, int off, int* v);
+void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, int* v);
 void __cdecl fcn_004c5360(void);
 
-void __cdecl fcn_005117e0(void)
+void __cdecl gm_CreateReligiousJudges(void)
 {
 	int a;
 	int b;
@@ -36,11 +36,11 @@ void __cdecl fcn_005117e0(void)
 	fcn_004c44a0();
 	v = 0;
 	fcn_004c4510(gm_RichterKatholisch, *(int*) (gm_RichterKatholisch + 4));
-	fcn_004c4570(1, 1, gm_RichterKatholisch - g_aed32c + 0xc, &v);
+	cm_AppendPacketFieldDelta(1, 1, gm_RichterKatholisch - g_aed32c + 0xc, &v);
 	fcn_004c5360();
 	v = 1;
 	fcn_004c4510(gm_RichterEvangelisch, *(int*) (gm_RichterEvangelisch + 4));
-	fcn_004c4570(1, 1, gm_RichterEvangelisch - g_aed32c + 0xc, &v);
+	cm_AppendPacketFieldDelta(1, 1, gm_RichterEvangelisch - g_aed32c + 0xc, &v);
 	fcn_004c5360();
 	fcn_004c44b0();
 	while (!fcn_004c44c0()) {

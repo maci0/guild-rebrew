@@ -13,8 +13,8 @@ extern char g_6811b0[];
 
 int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
 void __cdecl fcn_00545780(char*);
-void __cdecl fcn_00546190(char*);
-char* __cdecl fcn_005463a0(int, ...);
+void __cdecl he_FreeAction(char*);
+char* __cdecl he_StartHandlungSearch(int, ...);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -31,7 +31,7 @@ void __cdecl fcn_0055a3d0(char* u)
 				fcn_00545670(u, 0, 0, g_6a5a10, 0x5ec);
 			}
 			if (*(char**) (u + 0x74) == 0) {
-				fcn_00546190(u);
+				he_FreeAction(u);
 				return;
 			}
 			d2_CenterDialogWindows(*(int*) (*(char**) (u + 0x74) + 8));
@@ -43,7 +43,7 @@ void __cdecl fcn_0055a3d0(char* u)
 		case 1:
 			if (fcn_00500cb0(&gm_GameTime, u + 0x52) > 0) {
 				fcn_00545780(u);
-				fcn_00546190(u);
+				he_FreeAction(u);
 				return;
 			}
 			if (*(char**) (u + 0x74) == 0) {
@@ -54,15 +54,15 @@ void __cdecl fcn_0055a3d0(char* u)
 				return;
 			}
 			if (g_100f1dc == 2) {
-				o = fcn_005463a0(2, 2, *(unsigned short*) (u + 8), 1, *(int*) (u + 0xb0));
+				o = he_StartHandlungSearch(2, 2, *(unsigned short*) (u + 8), 1, *(int*) (u + 0xb0));
 				*(int*) (o + 0xb0) = 1;
 				fcn_00545780(u);
-				fcn_00546190(u);
+				he_FreeAction(u);
 				return;
 			}
 			if (g_100f1dc == 1) {
 				fcn_00545780(u);
-				fcn_00546190(u);
+				he_FreeAction(u);
 			}
 			break;
 		}
@@ -70,6 +70,6 @@ void __cdecl fcn_0055a3d0(char* u)
 		if (*(char**) (u + 0x74) != 0) {
 			fcn_00545780(u);
 		}
-		fcn_00546190(u);
+		he_FreeAction(u);
 	}
 }

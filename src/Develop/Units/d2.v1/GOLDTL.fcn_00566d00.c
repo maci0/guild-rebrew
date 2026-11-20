@@ -4,7 +4,7 @@ void __cdecl fcn_00545670(int, int, int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, int, int, int, int);
 void __cdecl fcn_00545780(int);
-void __cdecl fcn_00546190(int);
+void __cdecl he_FreeAction(int);
 void __cdecl io_FormatTextBuffer(char*, int, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_004c6b20(int, int, int);
@@ -26,7 +26,7 @@ void __cdecl fcn_00566d00(int action)
 	a = (unsigned short*) gm_LookupEntityRecordById(*(int*) (action + 0xac));
 	b = (unsigned short*) gm_LookupEntityRecordById(*(int*) (action + 0xb0));
 	if (!a || !b) {
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	}
 	if (*(char*) ((char*) b + 2) != 6 && *(char*) ((char*) b + 2) != 7) {
@@ -61,12 +61,12 @@ void __cdecl fcn_00566d00(int action)
 			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 		}
 		fcn_00545780(action);
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	case -1:
 	case -2:
 		fcn_00545780(action);
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	case 2:
 
@@ -81,7 +81,7 @@ void __cdecl fcn_00566d00(int action)
 			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 			fcn_004c54c0(*(int*) (a + 2), *(int*) (b + 2), 10, 1);
 		}
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	}
 	return;

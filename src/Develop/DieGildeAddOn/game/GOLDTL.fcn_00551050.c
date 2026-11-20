@@ -20,7 +20,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_0050ff70(unsigned char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00551050(char* u)
 {
@@ -51,5 +51,5 @@ void __cdecl fcn_00551050(char* u)
 			}
 		}
 	}
-	fcn_00546190(u);
+	he_FreeAction(u);
 }

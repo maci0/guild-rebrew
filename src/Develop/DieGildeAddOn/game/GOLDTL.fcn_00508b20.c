@@ -3,7 +3,7 @@
 
 unsigned short __cdecl gm_RandomMod(int n);
 #include "client_packet_builder.h"
-void __cdecl fcn_004c4570(int a, int b, int off, unsigned int* v);
+void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, unsigned int* v);
 void __cdecl fcn_004c5360(void);
 
 int __cdecl fcn_00508b20(char* o)
@@ -62,7 +62,7 @@ int __cdecl fcn_00508b20(char* o)
 	}
 	flags = f;
 	fcn_004c4510(o, *(int*) (o + 4));
-	fcn_004c4570(4, 1, 0x2c, &flags);
+	cm_AppendPacketFieldDelta(4, 1, 0x2c, &flags);
 	fcn_004c5360();
 	return result;
 }

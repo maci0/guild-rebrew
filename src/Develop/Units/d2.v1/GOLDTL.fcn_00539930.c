@@ -41,11 +41,11 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00533a60(int, int, int*, int, int, int, int);
 int __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005373e0(int, int);
-int __cdecl fcn_005268c0(int, int);
+int __cdecl d2_OpenMessageBox(int, int);
 int __cdecl nt_ListenForServerAnnouncements(int, int, char*, int);
 int __cdecl fcn_00471e30(int);
 int __cdecl d2_ClearWindowChildren(int, int);
-int __cdecl fcn_00469510(int);
+int __cdecl d2_ClearRadioGroup(int);
 int* __cdecl d2_CreateRadioGroup(int);
 int __cdecl vfs_Tfopen(char*, int, int);
 int __cdecl fcn_00521eb0(int, char*);
@@ -58,12 +58,12 @@ int __cdecl fcn_00469470(int, int);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_00471af0(int, int);
-int __cdecl fcn_005397c0(void);
+int __cdecl d2_PromptNetworkHost(void);
 int __cdecl d2_SelectRadioGroup(int, int);
 __declspec(dllimport) int __stdcall WritePrivateProfileStringA(char*, char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x00539930 */
-unsigned int __cdecl fcn_00539930(int a0)
+unsigned int __cdecl d2_ShowServerBrowser(int a0)
 {
 	int v17[24];
 	char hosts[8][0x80];
@@ -128,7 +128,7 @@ unsigned int __cdecl fcn_00539930(int a0)
 				int v6;
 				v4 = 1;
 				d2_SuppressOverlay = 1;
-				v6 = fcn_005268c0(g_14ac5e4, 0);
+				v6 = d2_OpenMessageBox(g_14ac5e4, 0);
 				v36 = nt_ListenForServerAnnouncements(0x3039, 3000, ((char*) hosts), 8);
 				fcn_00471e30(v6);
 				v32 = 0;
@@ -136,7 +136,7 @@ unsigned int __cdecl fcn_00539930(int a0)
 				d2_SetForm(dialog, 2);
 				d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 				if (group != -1) {
-					fcn_00469510(group);
+					d2_ClearRadioGroup(group);
 				}
 				group = (int) d2_CreateRadioGroup(0);
 				if (v36 >= 1) {
@@ -245,7 +245,7 @@ label_539d27:
 					if (d2_CurrentElementId != v39b) {
 						if (d2_CurrentElementId == v40b) {
 							fcn_00471af0(dialog, 0);
-							if (fcn_005397c0() != 0) {
+							if (d2_PromptNetworkHost() != 0) {
 								g_774654 = 1;
 								v38 = 1;
 							}
@@ -354,7 +354,7 @@ label_539d27:
 			fcn_00472640(buttons[0], *(int*) (group * 0x8c + 0x102cbc8) != -1);
 		} while (fcn_005373e0(0x539930, 0x24087) != 0);
 		if (group != -1) {
-			fcn_00469510(group);
+			d2_ClearRadioGroup(group);
 		}
 	}
 	fcn_00471e30(dialog);

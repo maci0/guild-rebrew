@@ -15,7 +15,7 @@ void __cdecl fcn_00545d40(int id, int arg, char* text1, int flags, int value, ch
 int __cdecl fcn_00526120(char* text, int arg);
 int __cdecl srv_GetEntityOfficeSlot(char* entity, void* role_out, void* slot_out);
 int __cdecl fcn_004e8240(int id, char* ea, char* eb, int x1, int x2);
-int __cdecl fcn_004e8b80(int kind, int max, OFFICE_SLOT* out);
+int __cdecl amt_FindOfficeSlotsByKind(int kind, int max, OFFICE_SLOT* out);
 
 /* ADDRESS: GOLDTL 0x004eba60 */
 unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
@@ -102,7 +102,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 			return 0;
 		if (f > 0.3f) {
 			float g;
-			n = fcn_004e8b80(target[1], 6, arr);
+			n = amt_FindOfficeSlotsByKind(target[1], 6, arr);
 			g = gm_GetEntitySkill(e, 4);
 			value = (int) (((gm_RandomFloat01() + 1.0f) * g * 15.0f + 5.0) * 2.55f);
 			for (k = 0; k < n; k++) {
@@ -145,7 +145,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 			return 0;
 		if (f > 0.3f) {
 			float g;
-			n = fcn_004e8b80(target[1], 6, arr);
+			n = amt_FindOfficeSlotsByKind(target[1], 6, arr);
 			g = gm_GetEntitySkill(e, 4);
 			value = (int) (((gm_RandomFloat01() + 1.0f) * g * 15.0f + 5.0) * 2.55f);
 			for (i = 0; i < n - 1; i++) {
@@ -161,7 +161,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 				}
 			}
 		} else {
-			n = fcn_004e8b80(target[1], 6, arr);
+			n = amt_FindOfficeSlotsByKind(target[1], 6, arr);
 		}
 		fcn_005100f0(*(int*) (e + 4), -8);
 		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);

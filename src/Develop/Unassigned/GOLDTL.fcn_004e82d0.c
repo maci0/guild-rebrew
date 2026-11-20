@@ -18,7 +18,7 @@ extern Rec18_68da68 amt_OfficeSlots[42];
 
 char* __cdecl gm_LookupEntityRecordById(int);
 
-int __cdecl fcn_004e82d0(unsigned char* m)
+int __cdecl amt_ValidateOfficeRequest(unsigned char* m)
 {
 	int i;
 

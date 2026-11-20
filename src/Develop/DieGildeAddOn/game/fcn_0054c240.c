@@ -4,7 +4,7 @@ typedef unsigned int   u32;
 
 void* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl fcn_004c5620(char a1, unsigned char* e);
-void* __cdecl fcn_005463a0(int n, ...);
+void* __cdecl he_StartHandlungSearch(int n, ...);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_005b22d0(void* a1);
 void __cdecl fcn_00500bb0(void* clock, int a2, int a3, int a4);
@@ -38,7 +38,7 @@ void __cdecl fcn_0054c240(u8* o)
         return;
     }
 
-    if (fcn_005463a0(1, 0, 0x35) != 0) {
+    if (he_StartHandlungSearch(1, 0, 0x35) != 0) {
         do {
             cnt++;
         } while (he_fn_Handlung() != 0);

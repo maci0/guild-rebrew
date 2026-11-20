@@ -94,15 +94,15 @@ int __cdecl io_AppendText(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00402220(int);
-void __cdecl fcn_00420db0(int, int);
+void __cdecl nt_ConnectTcp(int, int);
 void __cdecl fcn_004c3d50(void);
 int __cdecl fcn_005926f0(void);
 void __cdecl fcn_0053f4c0(void);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_0053f630(int, int);
-void __cdecl fcn_005356e0(void);
-void __cdecl fcn_0053f920(void);
-void __cdecl fcn_005435e0(void);
+void __cdecl d2_SetProgressPercent(int, int);
+void __cdecl main_PumpWindowMessages(void);
+void __cdecl gm_InitGameSession(void);
+void __cdecl gm_CreateSetupFamily(void);
 void __cdecl fcn_0053fa80(void);
 void __cdecl fcn_0053f720(void);
 void __cdecl fcn_00538220(void);
@@ -111,7 +111,7 @@ void __cdecl fcn_00514b50(unsigned char);
 void __cdecl init_LocalData(void);
 void __cdecl fcn_00515340(unsigned char);
 void __cdecl fcn_005153f0(void);
-int __cdecl fcn_00521920(void*, int);
+int __cdecl ls_LoadSavegame(void*, int);
 void __cdecl fcn_0052a890(void*);
 int __cdecl fcn_0052a310(void*);
 void __cdecl fcn_0052a3a0(void*, int);
@@ -121,7 +121,7 @@ void __cdecl fcn_00540020(void);
 int __cdecl fcn_004c5790(int, void*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_00535770(int);
+void __cdecl sv_WaitForNetworkSync(int);
 void __cdecl fcn_004c44a0(void);
 void __cdecl fcn_004c44b0(void);
 int __cdecl fcn_004c44c0(void);
@@ -142,7 +142,7 @@ int __cdecl fcn_004c5980(void*);
 void __cdecl fcn_00543080(void);
 void __cdecl fcn_004c5150(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
-void __cdecl fcn_00514a20(void*);
+void __cdecl ls_LoadNetworkGame(void*);
 void __cdecl fcn_005145a0(void*);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 void* __cdecl fcn_0064e2f9(char*, const char*);
@@ -153,8 +153,8 @@ void __cdecl fcn_0064ed28(void*, int, int, void*);
 void __cdecl fcn_0064e1fd(void*);
 void* __cdecl m_alloc(int, const char*);
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_005e3fa0(char*);
-void __cdecl fcn_0051e080(char*, char*, int);
+void __cdecl ls_LoadSavePreview(char*);
+void __cdecl ls_SaveGame(char*, char*, int);
 void __cdecl fcn_005bd820(void);
 void __cdecl fcn_00592630(void);
 void __cdecl fcn_00514f10(void);
@@ -261,10 +261,10 @@ void __cdecl fcn_005438c0(int a0)
 			fcn_00402220(0x3039);
 			g_77497c = 1;
 		}
-		fcn_00420db0((int) g_7e2000, g_7e2510);
+		nt_ConnectTcp((int) g_7e2000, g_7e2510);
 		fcn_00471e30(h);
 	} else {
-		fcn_00420db0(0, 0);
+		nt_ConnectTcp(0, 0);
 		if (fcn_005435d0() != 1) {
 			for (;;) {
 				d2_SuppressOverlay = 0;
@@ -304,27 +304,27 @@ void __cdecl fcn_005438c0(int a0)
 	} else {
 		n = g_14a54d4;
 	}
-	fcn_0053f630(n, 5);
-	fcn_005356e0();
-	fcn_0053f630(g_14a54d0, 5);
-	fcn_0053f920();
+	d2_SetProgressPercent(n, 5);
+	main_PumpWindowMessages();
+	d2_SetProgressPercent(g_14a54d0, 5);
+	gm_InitGameSession();
 	if ((g_7747b0 & 1) && (g_7747e0 != 0)) {
-		fcn_005435e0();
+		gm_CreateSetupFamily();
 	}
-	fcn_0053f630(0, 10);
+	d2_SetProgressPercent(0, 10);
 	if (g_7747b0 & 0x41) {
 		if (!(g_7747b0 & 4)) {
 			fcn_0064d41a(name, g_6a44e8, g_6a3778, g_7e1d00);
-			if (fcn_00521920(name, 2) == 0) {
+			if (ls_LoadSavegame(name, 2) == 0) {
 				fcn_00538220();
 				return;
 			}
-			fcn_005435e0();
+			gm_CreateSetupFamily();
 			fcn_00514b50(g_773d75);
 			init_LocalData();
 			fcn_00515340(g_773d75);
-			fcn_0053f630(0, 100);
-			fcn_0053f630(0, 100);
+			d2_SetProgressPercent(0, 100);
+			d2_SetProgressPercent(0, 100);
 			if (g_7747f8 != 0) {
 				fcn_005153f0();
 			}
@@ -336,7 +336,7 @@ void __cdecl fcn_005438c0(int a0)
 				return;
 			}
 			if (g_7747b0 & 0x40) {
-				fcn_00514a20(g_7e254a);
+				ls_LoadNetworkGame(g_7e254a);
 			} else {
 				fcn_005145a0(g_7e21a0);
 			}
@@ -350,10 +350,10 @@ void __cdecl fcn_005438c0(int a0)
 			fcn_0053f720();
 			return;
 		}
-		fcn_00514a20(g_7e21a0);
+		ls_LoadNetworkGame(g_7e21a0);
 	} else if (g_7747b0 & 2) {
 		g_7747b4 = g_77670a;
-		if (fcn_00521920(g_7e21a0, 1) == 0) {
+		if (ls_LoadSavegame(g_7e21a0, 1) == 0) {
 			main_LoopFlags = 0x46086;
 			fcn_00526120(g_14ac630, 0);
 			g_774954 = 1;
@@ -392,9 +392,9 @@ void __cdecl fcn_005438c0(int a0)
 			fcn_004b1e60();
 		}
 	}
-	fcn_005356e0();
+	main_PumpWindowMessages();
 	fcn_005bd820();
-	fcn_005356e0();
+	main_PumpWindowMessages();
 	fcn_0053f720();
 	d2_SuppressOverlay = 0;
 	fcn_00526db0(fcn_00527000());
@@ -435,7 +435,7 @@ void __cdecl fcn_005438c0(int a0)
 		g_774970++;
 	}
 	if ((signed char) g_7747b0 < 0) {
-		fcn_00580a30();
+		d2_StartTutorial();
 		memset(buf, 0, 0xf8);
 		buf[4] = 0x87;
 		*(int*) (buf + 0xc) = -1;
@@ -503,7 +503,7 @@ void __cdecl fcn_005438c0(int a0)
 			if (g_7747b0 & 4) {
 				fcn_004c5790(1, 0);
 				if (g_7747b0 & 4) {
-					fcn_00535770(0x67fff);
+					sv_WaitForNetworkSync(0x67fff);
 				}
 			}
 		}
@@ -546,8 +546,8 @@ void __cdecl fcn_005438c0(int a0)
 					fcn_0064e1fd(fp);
 				}
 				fcn_0064d41a(name, g_6a4498, g_6a3778);
-				fcn_005e3fa0(name);
-				fcn_0051e080(g_6a4470, g_6a448c, 1);
+				ls_LoadSavePreview(name);
+				ls_SaveGame(g_6a4470, g_6a448c, 1);
 			} else {
 				if (g_7747b0 & 0x10) {
 					memset(buf, 0, 0x7c);
@@ -651,7 +651,7 @@ l_gate:
 			}
 		}
 		if (g_7747b0 & 4) {
-			fcn_00535770(0x24087);
+			sv_WaitForNetworkSync(0x24087);
 		}
 		fcn_00543080();
 l_step:
@@ -670,7 +670,7 @@ l_step:
 		}
 	}
 	if ((signed char) g_7747b0 < 0) {
-		fcn_00580c20();
+		d2_ShutdownTutorial();
 	}
 	fcn_0053fa80();
 }

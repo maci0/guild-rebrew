@@ -32,7 +32,7 @@ int __cdecl fcn_004ce5c0(char*);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00472680(int, int);
 char* __cdecl fcn_004ce680(char*);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 void __cdecl d2_SetSlotVisibility(int, int);
 
 /* ADDRESS: GOLDTL 0x004d0a20 */
@@ -81,7 +81,7 @@ void __cdecl fcn_004d0a20(void)
 					if (q->name != -1) {
 						if (*(int*) (g_1015ea0 + q->name * 0x2f4 + 8) != *r + 0xdf) {
 							if (q->name != -1) {
-								fcn_0046b2b0(q->name);
+								d2_DestroyElement(q->name);
 							}
 							goto relabel;
 						}

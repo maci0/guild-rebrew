@@ -36,7 +36,7 @@ float __cdecl fcn_0042e450();
 int __cdecl fcn_004c4450();
 int __cdecl fcn_004c4480();
 int __cdecl fcn_004c4510();
-int __cdecl fcn_004c4570();
+int __cdecl cm_AppendPacketFieldDelta();
 int __cdecl fcn_004c4fc0();
 int __cdecl fcn_004c5150();
 int __cdecl fcn_004c5360();
@@ -218,7 +218,7 @@ void __cdecl fcn_00547770(void)
                 p = (int *)fcn_004c4480(u);
                 fcn_004c5150(p[1], -1, g_773d75, e2);
                 fcn_004c4510(p, p[1]);
-                fcn_004c4570(1, 1, 0xd, &two);
+                cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
                 fcn_004c5360();
                 return;
             }
@@ -352,7 +352,7 @@ void __cdecl fcn_00547770(void)
                 p = (int *)fcn_004c4480(u);
                 fcn_004c5150(p[1], -1, g_773d75, e2);
                 fcn_004c4510(p, p[1]);
-                fcn_004c4570(1, 1, 0xd, &two);
+                cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
                 fcn_004c5360();
             }
         }
@@ -438,7 +438,7 @@ void __cdecl fcn_00547770(void)
                 p = (int *)fcn_004c4480(u);
                 fcn_004c5150(p[1], -1, g_773d75, e2);
                 fcn_004c4510(p, p[1]);
-                fcn_004c4570(1, 1, 0xd, &two);
+                cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
                 fcn_004c5360();
             }
         }
@@ -548,8 +548,8 @@ void __cdecl fcn_00547770(void)
                 p = (int *)fcn_004c4480(u);
                 fcn_004c5150(p[1], -1, g_773d75, e2);
                 fcn_004c4510(p, p[1]);
-                fcn_004c4570(1, 1, 0xd, &two);
-                fcn_004c4570(1, 1, 0xc, &v);
+                cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
+                cm_AppendPacketFieldDelta(1, 1, 0xc, &v);
                 fcn_004c5360();
             }
         }
@@ -658,7 +658,7 @@ void __cdecl fcn_00547770(void)
                 p = (int *)fcn_004c4480(u);
                 fcn_004c5150(p[1], -1, g_773d75, e2);
                 fcn_004c4510(p, p[1]);
-                fcn_004c4570(1, 1, 0xd, &two);
+                cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
                 fcn_004c5360();
             }
         }

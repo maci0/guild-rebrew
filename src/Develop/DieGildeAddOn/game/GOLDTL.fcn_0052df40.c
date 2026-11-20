@@ -51,7 +51,7 @@ extern int g_14ad0d4;
 int __cdecl fcn_00508da0(unsigned char* s);
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
-void __cdecl fcn_005186c0(int id, int a, int b, char* out);
+void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
 void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
@@ -76,7 +76,7 @@ void __cdecl fcn_0052df40(unsigned char* s)
 	g_6a25b8 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2f40);
 	d2_SetForm(g_6a25b8, 1);
 	if (*s != 0x47) {
-		fcn_005186c0(*(unsigned short*) (s + 0x27), 2, 1, name);
+		io_FormatEntityNameMarkup(*(unsigned short*) (s + 0x27), 2, 1, name);
 		if (s[5] != 0) {
 			io_AppendText(g_6a2f30, name, *s * 14 + 0x48e, s + 5);
 		} else {

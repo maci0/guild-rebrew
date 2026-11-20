@@ -25,7 +25,7 @@ extern unsigned short* g_772f24;
 #include "client_dialog_state.h"
 
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_0052ae80(void);
+void __cdecl d3_UpdateCameraAtScreenEdges(void);
 void __cdecl fcn_004d0a20(void);
 void __cdecl fcn_004d06d0(void);
 void __cdecl fcn_004d0f00(void);
@@ -42,7 +42,7 @@ void __cdecl fcn_004d7d70(char* rec)
 	ent2c l;
 
 	d2_SetElementValue(g_68b7a4, 0, g_68bfbc, cut_ClockDeadline - cut_CurrentTick + 1);
-	fcn_0052ae80();
+	d3_UpdateCameraAtScreenEdges();
 	fcn_004d0a20();
 	fcn_004d06d0();
 	fcn_004d0f00();

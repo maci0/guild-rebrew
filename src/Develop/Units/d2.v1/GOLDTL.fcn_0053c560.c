@@ -39,7 +39,7 @@ typedef void (__cdecl *VirtFn)(int, int, int, int);
 int __cdecl fcn_00533880(void);
 int __cdecl fcn_005338a0(void);
 int __cdecl fcn_004432d0(int, int);
-Figure *__cdecl fcn_0053b090(char *, char *, int);
+Figure *__cdecl ch_CreateCharacterAtSceneObject(char *, char *, int);
 int __cdecl fcn_00470820(int, int, char *);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_004e4b60(char *);
@@ -53,20 +53,20 @@ void __cdecl d3_AnimateObjectTransform(char *, Vec3 *, Vec3 *, int, int);
 char *__cdecl fcn_00445600(char *, int, char *, char *);
 void __cdecl ch_QueueWalkToDummyRotate(char *, char *);
 int __cdecl fcn_0053b1b0(void);
-int __cdecl fcn_0053cd40(int);
+int __cdecl d2_ShowChooseProfessionDialog(int);
 unsigned int __cdecl fcn_0053b6b0(int);
 void __cdecl fcn_00471af0(int, int);
 char *__cdecl fcn_004730c0(int, int, int, int, char *, int, int);
 int __cdecl ch_DestroyCharacter(char *);
-void *__cdecl fcn_00426cc0(int);
-int __cdecl fcn_00428720(char *);
+void *__cdecl evt_FindScriptById(int);
+int __cdecl evt_RequestScriptExit(char *);
 void __cdecl fcn_005312d0(int);
 void __cdecl gv_Free3Fields(void *);
 void __cdecl fcn_004e4c00(void);
 void __cdecl fcn_00473150(char *);
 
 /* ADDRESS: GOLDTL 0x0053c560 */
-int __cdecl fcn_0053c560(void)
+int __cdecl d2_RunParentProfessionSelection(void)
 {
 	int ret = 0;
 	Figure *rhFrau;
@@ -120,15 +120,15 @@ int __cdecl fcn_0053c560(void)
 		*(unsigned char *) (base + 0x8036) =
 		    (unsigned char) ((*(unsigned char *) (base + 0x8036) & 0xeb) | 8);
 	}
-	nnMann = fcn_0053b090((char *) 0x6a3ecc, (char *) 0x6a3ee8, 0);
-	nnFrau = fcn_0053b090((char *) 0x6a3eb0, (char *) 0x6a3c34, 8);
-	hwMann = fcn_0053b090((char *) 0x6a3e84, (char *) 0x6a3ea0, 1);
-	hwFrau = fcn_0053b090((char *) 0x6a3e68, (char *) 0x6a3ccc, 7);
-	kampfMann = fcn_0053b090((char *) 0x6a3e54, (char *) 0x6a3d7c, 4);
-	vhMann = fcn_0053b090((char *) 0x6a3e3c, (char *) 0x67fa28, 3);
-	vhFrau = fcn_0053b090((char *) 0x6a3e24, (char *) 0x68d45c, 5);
-	rhMann = fcn_0053b090((char *) 0x6a3e00, (char *) 0x6a3e14, 2);
-	rhFrau = fcn_0053b090((char *) 0x6a3dec, (char *) 0x6a3c78, 6);
+	nnMann = ch_CreateCharacterAtSceneObject((char *) 0x6a3ecc, (char *) 0x6a3ee8, 0);
+	nnFrau = ch_CreateCharacterAtSceneObject((char *) 0x6a3eb0, (char *) 0x6a3c34, 8);
+	hwMann = ch_CreateCharacterAtSceneObject((char *) 0x6a3e84, (char *) 0x6a3ea0, 1);
+	hwFrau = ch_CreateCharacterAtSceneObject((char *) 0x6a3e68, (char *) 0x6a3ccc, 7);
+	kampfMann = ch_CreateCharacterAtSceneObject((char *) 0x6a3e54, (char *) 0x6a3d7c, 4);
+	vhMann = ch_CreateCharacterAtSceneObject((char *) 0x6a3e3c, (char *) 0x67fa28, 3);
+	vhFrau = ch_CreateCharacterAtSceneObject((char *) 0x6a3e24, (char *) 0x68d45c, 5);
+	rhMann = ch_CreateCharacterAtSceneObject((char *) 0x6a3e00, (char *) 0x6a3e14, 2);
+	rhFrau = ch_CreateCharacterAtSceneObject((char *) 0x6a3dec, (char *) 0x6a3c78, 6);
 	obj = fcn_00470820(0, 0, (char *) 0x6a3dd4);
 	fcn_00471d80(obj, 1);
 	fcn_004e4b60((char *) 0x6a3dc4);
@@ -139,7 +139,7 @@ int __cdecl fcn_0053c560(void)
 		*(int *) 0x6a37f8 = -1;
 	}
 	d2_SuppressOverlay = 0;
-	if (fcn_005373e0((int) fcn_0053c560, 0x12d6) != 0) {
+	if (fcn_005373e0((int) d2_RunParentProfessionSelection, 0x12d6) != 0) {
 		do {
 			if (flag) {
 				for (i = 4; i < 6; i++) {
@@ -213,7 +213,7 @@ slot_found:
 				    (Vec3 *) (d3_ActiveCamera + 0x114),
 				    (Vec3 *) (d3_ActiveCamera + 0x120), 0x50, 8);
 				if (fcn_0053b1b0()) {
-					if (fcn_0053cd40(0xc6) &&
+					if (d2_ShowChooseProfessionDialog(0xc6) &&
 					    fcn_0053b6b0(*(unsigned char *) 0x7e23e3)) {
 						g_774654 = 1;
 						ret = 1;
@@ -226,7 +226,7 @@ slot_found:
 					fcn_00471af0(obj, 1);
 				}
 			}
-		} while (fcn_005373e0((int) fcn_0053c560, 0x12d6) != 0);
+		} while (fcn_005373e0((int) d2_RunParentProfessionSelection, 0x12d6) != 0);
 		if (ret == 1) {
 			spr = fcn_004730c0(0, 0, g_1040494,
 			    d2_ScreenHeight, (char *) 0x67d67c, 0x5a, 1);
@@ -255,9 +255,9 @@ slot_found:
 	if (obj != -1)
 		fcn_00471e30(obj);
 	if (oldSound != -1) {
-		found = fcn_00426cc0(oldSound);
+		found = evt_FindScriptById(oldSound);
 		if (found != 0)
-			fcn_00428720(found);
+			evt_RequestScriptExit(found);
 		fcn_005312d0(oldSound);
 	}
 	if (*(int *) (g_67a370 + 0xb0) != 0) {

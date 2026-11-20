@@ -8,7 +8,7 @@ void __cdecl fcn_00500bb0(void* clock, int arg2, int arg3, int arg4);
 void __cdecl fcn_005100f0(int a, int b);
 void __cdecl io_FormatTextBuffer(int a, int b, ...);
 void __cdecl fcn_00545d40(int a, int b, void* buf, int d, int e, void* f);
-void __cdecl fcn_00546190(char* a);
+void __cdecl he_FreeAction(char* a);
 
 
 void __cdecl fcn_0057d9e0(char* a)
@@ -19,7 +19,7 @@ void __cdecl fcn_0057d9e0(char* a)
 
 	e = gm_LookupEntityRecordById(*(int*) (a + 0xc));
 	if (*(int*) (a + 0x70) == -1 || *(int*) (a + 0x70) == -2 || *(int*) (a + 0x70) > 3 || e == 0) {
-		fcn_00546190(a);
+		he_FreeAction(a);
 		return;
 	}
 	*(int*) (a + 0x70) = *(int*) (a + 0x70) + 1;

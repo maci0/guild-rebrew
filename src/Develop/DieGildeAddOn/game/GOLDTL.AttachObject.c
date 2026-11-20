@@ -4,7 +4,7 @@
 
 #include <string.h>
 
-void __cdecl fcn_00407800(char* e, int slot, int v);
+void __cdecl ch_SetBodyAttachment(char* e, int slot, int v);
 
 /* `slot` is left unset for an unknown name; the reference reads it from the
  * homed parameter slot. */
@@ -22,6 +22,6 @@ int __cdecl AttachObject(char** a, const char* name, int* v)
 	} else if (strcmp(name, "d3_Head") == 0) {
 		slot = 3;
 	}
-	fcn_00407800(*a, slot, *v);
+	ch_SetBodyAttachment(*a, slot, *v);
 	return 1;
 }

@@ -45,7 +45,7 @@ typedef struct {
 extern Seq* g_665f08;
 extern volatile unsigned int g_6b7fac;
 
-void __cdecl fcn_005804f0(void);
+void __cdecl d2_HideTutorialPrompt(void);
 void __cdecl fcn_00584160(int);
 
 void __cdecl fcn_0057e880(int a, int b, int c, int d)
@@ -112,7 +112,7 @@ void __cdecl fcn_0057e880(int a, int b, int c, int d)
 			g_665f08->want = 4;
 			g_665f08->since = g_6b7fac;
 			g_665f08->busy = 0;
-			fcn_005804f0();
+			d2_HideTutorialPrompt();
 			fcn_00584160(2);
 		}
 		g_665f08->state = g_665f08->want;
@@ -137,7 +137,7 @@ void __cdecl fcn_0057e880(int a, int b, int c, int d)
 		g_665f08->want = 4;
 		g_665f08->since = g_6b7fac;
 		g_665f08->busy = 0;
-		fcn_005804f0();
+		d2_HideTutorialPrompt();
 		fcn_00584160(2);
 		g_665f08->ticks++;
 		return;

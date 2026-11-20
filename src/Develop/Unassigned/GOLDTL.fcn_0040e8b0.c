@@ -4,7 +4,7 @@ void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 int __cdecl fcn_004488e0(char* name, int a, int b);
 void __cdecl fcn_00438b40(char* h, float* pos);
 void __cdecl fcn_00455240(char* src, float* out);
-void __cdecl fcn_00438cb0(char* h, float* v);
+void __cdecl d3_SetObjectRotation(char* h, float* v);
 
 int __cdecl CreateObjectGroupAtDummy(char** name, char** a)
 {
@@ -19,6 +19,6 @@ int __cdecl CreateObjectGroupAtDummy(char** name, char** a)
 	h = fcn_004488e0(*name, 0, 0);
 	fcn_00438b40((char*)h, pos);
 	fcn_00455240(*a, rot);
-	fcn_00438cb0((char*)h, rot);
+	d3_SetObjectRotation((char*)h, rot);
 	return h;
 }

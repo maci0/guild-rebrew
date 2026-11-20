@@ -10,7 +10,7 @@ void __cdecl fcn_0041b5b0(void);
 void __cdecl dd_Line(int, int, int, int, int);
 void __cdecl dd_EndLines(void);
 
-void __cdecl fcn_00534b90(void)
+void __cdecl d3_DrawSelectionBox(void)
 {
 	if (d3_SelectionBoxActive != 0) {
 		fcn_0041b5b0();

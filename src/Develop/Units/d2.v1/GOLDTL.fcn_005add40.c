@@ -54,7 +54,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
-char* __cdecl fcn_005463a0(int, int, int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl cm_ExProdObjekt(void);
@@ -90,7 +90,7 @@ int __cdecl fcn_005add40(int unused, char* e)
 		}
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == btn1) {
-				for (p = fcn_005463a0(3, 0, 0x49, 2, *(unsigned short*) (g_7746c4 + 0x27), 3, *(int*) (g_7746c4 + 1)); p != 0; p = he_fn_Handlung()) {
+				for (p = he_StartHandlungSearch(3, 0, 0x49, 2, *(unsigned short*) (g_7746c4 + 0x27), 3, *(int*) (g_7746c4 + 1)); p != 0; p = he_fn_Handlung()) {
 					if (*(int*) (p + 0xac) == *(int*) (e + 1)) {
 						break;
 					}

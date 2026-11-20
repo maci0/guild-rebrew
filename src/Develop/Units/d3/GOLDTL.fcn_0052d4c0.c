@@ -21,7 +21,7 @@ float __cdecl fcn_00413d10(float* p);
 void __cdecl fcn_00433780(char* cam);
 void __cdecl d3_AnimateObjectTransform(char* cam, float* a, float* b, int d, int e);
 
-void __cdecl fcn_0052d4c0(char* entity)
+void __cdecl d3_AnimateCameraToObject(char* entity)
 {
 	float lo;
 	float hi;

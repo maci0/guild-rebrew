@@ -4,7 +4,7 @@ extern int msx_TrackDriver;
 __declspec(dllimport) void __stdcall EnterCriticalSection(void* lpCriticalSection);
 __declspec(dllimport) void __stdcall LeaveCriticalSection(void* lpCriticalSection);
 
-int __cdecl fcn_0042af10(int h);
+int __cdecl msx_GetStreamStatus(int h);
 
 /* Guarded MSX channel lookup under the global lock: returns 1 when the handle
  * is idle (state 4), and also 1 when the subsystem is not initialised.
@@ -21,7 +21,7 @@ int __cdecl fcn_004201a0(void* p)
 	EnterCriticalSection(msx_TrackLock);
 	v = *(int*) ((char*) p + 0x100);
 	if (v != 0) {
-		if (fcn_0042af10(v) == 4) {
+		if (msx_GetStreamStatus(v) == 4) {
 			LeaveCriticalSection(msx_TrackLock);
 			return 1;
 		}

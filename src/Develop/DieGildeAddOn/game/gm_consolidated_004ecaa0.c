@@ -10,7 +10,7 @@ extern int g_68dec0[];
 
 void __cdecl srand(unsigned int seed);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
-void __cdecl fcn_004ecb40(void);
+void __cdecl ahm_ShufflePlayerPrototypes(void);
 #include "g_772f90.h"
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -33,7 +33,7 @@ void __cdecl fcn_004ecaa0(int reseed)
 		*(unsigned short*) &g_772f8c = (unsigned short) (timeGetTime() % 0x7fff + 1);
 	}
 	srand((unsigned short) g_772f8c);
-	fcn_004ecb40();
+	ahm_ShufflePlayerPrototypes();
 	if (reseed) {
 		g_772f78 = gm_RandomMod(0x19);
 		g_772f7c = g_68dec0[gm_RandomMod(8)];
@@ -45,7 +45,7 @@ void __cdecl fcn_004ecaa0(int reseed)
 
 /* ADDRESS: GOLD 0x004eadc0 */
 /* ADDRESS: GOLDTL 0x004ecb40 */
-void __cdecl fcn_004ecb40(void)
+void __cdecl ahm_ShufflePlayerPrototypes(void)
 {
 	int n;
 	int i;

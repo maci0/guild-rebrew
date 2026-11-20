@@ -10,9 +10,9 @@ int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 int __cdecl fcn_00567170(char*, int*, int*, int);
 int __cdecl fcn_004c5da0(int, int, int, int, int, int);
 void __cdecl fcn_004c4510(char*, int);
-int __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
+int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 char* __cdecl fcn_0050dc90(int);
 char* __cdecl he_RegisterApEvent(int, char*, int, int);
 int __cdecl gm_WalkEntityChain(unsigned short);
@@ -66,11 +66,11 @@ void __cdecl fcn_00569760(char* eventTrack)
 					}
 				}
 				fcn_004c4510(rec, *(int*) (rec + 1));
-				fcn_004c4570(4, 1, (unsigned short) ((int) rec - g_aed32c + 0x65),
+				cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) rec - g_aed32c + 0x65),
 				             (char*) &idx);
 				fcn_004c5360();
 			}
-			fcn_00546190(eventTrack);
+			he_FreeAction(eventTrack);
 			return;
 		}
 
@@ -111,6 +111,6 @@ void __cdecl fcn_00569760(char* eventTrack)
 		if (e != 0) {
 			e[0x1b1] = 0;
 		}
-		fcn_00546190(eventTrack);
+		he_FreeAction(eventTrack);
 	}
 }

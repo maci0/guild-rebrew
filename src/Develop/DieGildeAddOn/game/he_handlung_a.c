@@ -1,9 +1,9 @@
 extern char g_7f4ca0[];
 
-char* __cdecl fcn_005463a0(int a, int b, int c);
+char* __cdecl he_StartHandlungSearch(int a, int b, int c);
 char* __cdecl he_fn_Handlung(void);
 
-char* __cdecl fcn_005463a0(int a, int b, int c);
+char* __cdecl he_StartHandlungSearch(int a, int b, int c);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 
@@ -15,7 +15,7 @@ int __cdecl fcn_0050d5d0(int id, char* owner, char** out)
 	int n;
 
 	n = 0;
-	p = fcn_005463a0(1, n, 0x23);
+	p = he_StartHandlungSearch(1, n, 0x23);
 	while (p != 0) {
 		if (n >= 9) {
 			break;
@@ -37,7 +37,7 @@ int __cdecl fcn_0050d640(int key, char* obj, unsigned int id, char** out)
 	int n;
 
 	n = 0;
-	p = fcn_005463a0(1, n, 0x23);
+	p = he_StartHandlungSearch(1, n, 0x23);
 	while (p != 0) {
 		if (n >= 9) {
 			break;

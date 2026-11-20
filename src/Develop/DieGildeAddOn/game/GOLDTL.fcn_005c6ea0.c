@@ -56,7 +56,7 @@ extern int g_14abc44;
 #include "client_dialog_state.h"
 extern char s_6ac79c[];
 
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
@@ -98,7 +98,7 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 	else {
 		kind = t->x0 == 0x10 ? 0xf : 0x13;
 	}
-	for (p = fcn_005463a0(2, 0, 0x16, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
+	for (p = he_StartHandlungSearch(2, 0, 0x16, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
 		cnt++;
 	}
 	if (cnt >= 3) {

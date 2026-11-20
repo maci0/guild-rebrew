@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <string.h>
 
-int __cdecl fcn_00517b90(char* s, int end, char* out)
+int __cdecl io_CopyTrailingDigits(char* s, int end, char* out)
 {
 	int i;
 

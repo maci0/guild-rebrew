@@ -7,7 +7,7 @@ extern char g_102cbc0[];
 
 #pragma intrinsic(memcpy, memset)
 
-void __cdecl fcn_00469510(int i)
+void __cdecl d2_ClearRadioGroup(int i)
 {
 	memset((void*) (g_102cbc0 + i * 140), 0, 0x8c);
 }

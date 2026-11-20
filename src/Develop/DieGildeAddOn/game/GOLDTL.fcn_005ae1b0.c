@@ -31,12 +31,12 @@ void __cdecl fcn_005338a0(void);
 int __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl d3_SetSubtreeVisible(int, int);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_005338d0(char*, int, int);
+int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_005ad5a0(unsigned char*);
 void __cdecl fcn_005ad950(unsigned char*);
 void __cdecl fcn_005adfa0(unsigned char*);
 void __cdecl fcn_005ae000(unsigned char*);
-void __cdecl fcn_005b6300(unsigned char*, char*);
+void __cdecl d2_ShowPersonalbuch(unsigned char*, char*);
 void __cdecl fcn_005ada30(unsigned char*);
 void __cdecl fcn_005cf560(unsigned char*);
 
@@ -76,17 +76,17 @@ void __cdecl fcn_005ae1b0(unsigned char* arg)
 	if (fcn_005373e0((void*) fcn_005ae1b0, 0x67fff) != 0) {
 		do {
 			if (g_7746d8 & 0x200) {
-				a = fcn_005338d0(s_6ab24c, g_14abaa4, 0x17);
-				b = fcn_005338d0(s_6aa544, g_14abaf4, 0x17);
+				a = RegisterStatusText(s_6ab24c, g_14abaa4, 0x17);
+				b = RegisterStatusText(s_6aa544, g_14abaf4, 0x17);
 				if (t->x247 >= 2) {
-					c = fcn_005338d0(s_6aa584, g_14ad108, 0x17);
+					c = RegisterStatusText(s_6aa584, g_14ad108, 0x17);
 				}
-				d = fcn_005338d0(s_6ab230, g_14ad178, 0x17);
-				e = fcn_005338d0(s_6ab214, g_14a7c98, 0x16);
+				d = RegisterStatusText(s_6ab230, g_14ad178, 0x17);
+				e = RegisterStatusText(s_6ab214, g_14a7c98, 0x16);
 			}
 			if (g_7746d8 & 0x400) {
-				f = fcn_005338d0(s_6aa34c, g_14a7b50, 0xc);
-				g = fcn_005338d0(s_6a9924, g_14a7d28, 0x16);
+				f = RegisterStatusText(s_6aa34c, g_14a7b50, 0xc);
+				g = RegisterStatusText(s_6a9924, g_14a7d28, 0x16);
 			}
 			if (g_7746a0 != 0) {
 				if (g_7746a0 == a) {
@@ -102,7 +102,7 @@ void __cdecl fcn_005ae1b0(unsigned char* arg)
 					fcn_005ae000(arg);
 				}
 				else if (g_7746a0 == f) {
-					fcn_005b6300(arg, s_6aa34c);
+					d2_ShowPersonalbuch(arg, s_6aa34c);
 				}
 				else if (g_7746a0 == e) {
 					fcn_005ada30(arg);

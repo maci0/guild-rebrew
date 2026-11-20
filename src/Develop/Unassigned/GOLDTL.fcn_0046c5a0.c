@@ -55,7 +55,7 @@ int __cdecl d2_GetResourceData(int table, int index);
  * glyph buffer and emits the runs through the draw helpers. */
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0046c5a0 */
-void __cdecl fcn_0046c5a0(int a0, int a1)
+void __cdecl d2_RenderMarkupText(int a0, int a1)
 {
 	int i;
 	int nImg;

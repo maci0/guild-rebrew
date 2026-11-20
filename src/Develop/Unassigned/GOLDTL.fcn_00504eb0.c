@@ -4,7 +4,7 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl fcn_0065f220(const char*, const char*);
 
-int __cdecl fcn_00504eb0(const char* name)
+int __cdecl gm_FindGebaeudePrototypeByName(const char* name)
 {
 	int i;
 

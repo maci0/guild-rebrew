@@ -7,7 +7,7 @@ void __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl fcn_00545780(char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00572da0(char* e)
 {
@@ -29,6 +29,6 @@ void __cdecl fcn_00572da0(char* e)
 	case -2:
 	case -1:
 		fcn_00545780(e);
-		fcn_00546190(e);
+		he_FreeAction(e);
 	}
 }

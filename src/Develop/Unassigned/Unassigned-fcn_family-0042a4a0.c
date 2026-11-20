@@ -8,7 +8,7 @@ extern int g_6b7f90;
 int __cdecl fcn_0042b2c0(void);
 extern int* g_6b7f10[16];
 
-int __cdecl fcn_0042b120(int*);
+int __cdecl msx_FindWaveDriverIndex(int*);
 int __cdecl fcn_0042b140(int*);
 __declspec(dllimport) int __stdcall AIL_allocate_sample_handle(int);
 
@@ -56,7 +56,7 @@ int __cdecl msx_AllocateSampleHandle(int* device, int* outHandle)
 	int i;
 	int j;
 
-	if (g_6b7f90 != 0 && (i = fcn_0042b120(device)) >= 0 && (j = fcn_0042b140(device)) >= 0 &&
+	if (g_6b7f90 != 0 && (i = msx_FindWaveDriverIndex(device)) >= 0 && (j = fcn_0042b140(device)) >= 0 &&
 	    (*outHandle = AIL_allocate_sample_handle(*device)) != 0) {
 		device[5]++;
 		g_6b7f10[i][j] = *outHandle;

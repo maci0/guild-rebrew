@@ -7,7 +7,7 @@ extern unsigned int g_1005820;
 
 int __cdecl m_alloc(int, char*);
 
-int __cdecl fcn_004c7630(void* packet, char* reply)
+int __cdecl cm_AllocateLoadBuffer(void* packet, char* reply)
 {
 	int n;
 

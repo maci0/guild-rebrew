@@ -27,7 +27,7 @@ void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c6ae0(int, int);
 unsigned short __cdecl gm_RandomMod(int);
 #include "client_packet_builder.h"
-void __cdecl fcn_004c4570(int, int, int, unsigned int*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, unsigned int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -67,7 +67,7 @@ int __cdecl fcn_005d8af0(House* e)
 				((House*)g_7f4ca0)[i].bc != e->bc) {
 				if ((unsigned char) rank > gm_RandomMod(0x7e) + ((House*)g_7f4ca0)[i].b84) {
 					fcn_004c4510((char*) &((House*)g_7f4ca0)[i], ((House*)g_7f4ca0)[i].f4);
-					fcn_004c4570(1, 1, 0xc, &who);
+					cm_AppendPacketFieldDelta(1, 1, 0xc, &who);
 					fcn_004c5360();
 				}
 			}
@@ -112,7 +112,7 @@ int __cdecl fcn_005d8af0(House* e)
 								if (rank > gm_RandomMod(0x7e) + h->b84) {
 									n++;
 									fcn_004c4510((char*) h, h->f4);
-									fcn_004c4570(1, 1, 0xc, &who);
+									cm_AppendPacketFieldDelta(1, 1, 0xc, &who);
 									fcn_004c5360();
 								}
 							}

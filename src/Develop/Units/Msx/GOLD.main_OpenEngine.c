@@ -46,13 +46,13 @@ void __cdecl fcn_004222b0(char*);
 void __cdecl fcn_004b1f30(void);
 void __cdecl fcn_0046e980(void);
 int __cdecl fcn_004741e0(int, int, char*);
-void __cdecl fcn_004756a0(int, int);
+void __cdecl d2_CenterWindowAxes(int, int);
 void __cdecl fcn_0046cd90(int, short, int);
 void __cdecl fcn_00515990(int, char*);
-void __cdecl fcn_00424990(int, int);
+void __cdecl nt_ConnectToHost(int, int);
 void __cdecl fcn_004c3480(void);
 void __cdecl fcn_00590650(void);
-void __cdecl fcn_004fe570(char*);
+void __cdecl gm_InitializeGameTables(char*);
 void __cdecl fcn_004eddf0(void);
 void __cdecl fcn_004fde90(void);
 void __cdecl fcn_005a8a70(void);
@@ -65,7 +65,7 @@ void __cdecl fcn_004226b0(char*);
 int __cdecl fcn_00426950(char*, int);
 void __cdecl main_PreloadSound(char*);
 void __cdecl fcn_00423830(int, int, int);
-void __cdecl fcn_005e2590(void);
+void __cdecl msx_ApplyAudioSettings(void);
 void __cdecl fcn_00520f10(void);
 void __cdecl fcn_0050d460(void);
 void __cdecl fcn_0040afb0(void);
@@ -79,7 +79,7 @@ void __cdecl fcn_004758e0(int);
 unsigned char* __cdecl fcn_004767c0(int, int, int, int, char*, int, int);
 void __cdecl fcn_005309d0(int, int);
 #include "client_sprites.h"
-void __cdecl fcn_0042b050(void);
+void __cdecl evt_InitScriptEngine(void);
 void __cdecl evt_RegisterCoreCommands(void);
 void __cdecl fcn_0040f960(void);
 void __cdecl fcn_0040d270(void);
@@ -109,16 +109,16 @@ int __cdecl main_OpenEngine(void)
 	fcn_004b1f30();
 	fcn_0046e980();
 	screen = fcn_004741e0(0, 0, "Misc\\Loading_main");
-	fcn_004756a0(g_fb1024[screen].image, 3);
+	d2_CenterWindowAxes(g_fb1024[screen].image, 3);
 	fcn_0046cd90(0, g_fb9070 - ((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_fb1024[screen].window].height - 0x30,
 		((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_fb1024[screen].window].id);
-	fcn_004756a0(g_fb1024[screen].window, 1);
+	d2_CenterWindowAxes(g_fb1024[screen].window, 1);
 	fcn_00515990(0x73, g_75e760);
-	fcn_00424990(0, 0);
+	nt_ConnectToHost(0, 0);
 	fcn_004c3480();
 	fcn_00590650();
 	sprintf(path, "%sdata\\", g_624698);
-	fcn_004fe570(path);
+	gm_InitializeGameTables(path);
 	fcn_004eddf0();
 	fcn_004fde90();
 	fcn_005a8a70();
@@ -148,7 +148,7 @@ int __cdecl main_OpenEngine(void)
 		sprintf(path, "%smsx\\", g_624698);
 		SetTrackPath(path);
 	}
-	fcn_005e2590();
+	msx_ApplyAudioSettings();
 	fcn_00520f10();
 	fcn_0050d460();
 	fcn_0040afb0();
@@ -190,7 +190,7 @@ int __cdecl main_OpenEngine(void)
 		rep stosb
 	}
 	g_6f258c = 1;
-	fcn_0042b050();
+	evt_InitScriptEngine();
 	evt_RegisterCoreCommands();
 	fcn_0040f960();
 	fcn_0040d270();

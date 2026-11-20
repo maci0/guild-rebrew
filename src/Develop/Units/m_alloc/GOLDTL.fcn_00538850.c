@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <stdlib.h>
 extern void __cdecl fcn_005e1ca0(void);
-extern void __cdecl fcn_005356e0(void);
+extern void __cdecl main_PumpWindowMessages(void);
 extern void __cdecl fcn_0041a380(int, int, int);
 extern char __cdecl fcn_0041a970(HWND, void*, int, int);
 extern void __cdecl ReportClientMessage(char*);
@@ -15,7 +15,7 @@ extern void __cdecl fcn_00410610(int);
 extern int __cdecl fcn_005386e0(void);
 extern void __cdecl fcn_005386c0(int);
 extern void __cdecl fcn_005e2510(void);
-extern void __cdecl fcn_005e22a0(void);
+extern void __cdecl d3_ApplyGraphicsOptions(void);
 extern void __cdecl fcn_0045bf50(char*);
 extern void __cdecl fcn_00449aa0(char*);
 extern int __cdecl d2_Open(HWND, int, int, char*, char*);
@@ -130,7 +130,7 @@ int __cdecl fcn_00538850(int topmost)
 	}
 	SetWindowPos(*(HWND*) 0x774940, topmost == 0 ? HWND_TOPMOST : HWND_TOP,
 		abs(w - dx) / 2, abs(h - dy) / 2, dx, dy, 0);
-	fcn_005356e0();
+	main_PumpWindowMessages();
 	g.width = g_6acf80;
 	g.height0 = 0;
 	g.w2 = g_6acf80;
@@ -187,7 +187,7 @@ int __cdecl fcn_00538850(int topmost)
 	*(int*) 0x6790cc = *(int*) 0x6a38d0;
 	*(unsigned char*) 0x6790d0 = *(unsigned char*) 0x6a38d4;
 	sprintf((char*) 0x67d268, (char*) 0x6a38c4);
-	fcn_005e22a0();
+	d3_ApplyGraphicsOptions();
 	sprintf(g.text, (char*) 0x6a38b0, (char*) 0x679888);
 	if (!d2_Open(*(HWND*) 0x774940, g_6acf80, g_6acf84,
 			(char*) 0x6a3550, g.text))
@@ -196,6 +196,6 @@ int __cdecl fcn_00538850(int topmost)
 	d2_MouseRightBoundary = g_1040494 - 8;
 	d2_MouseBottomBoundary = d2_ScreenHeight;
 	fcn_00473df0();
-	fcn_005356e0();
+	main_PumpWindowMessages();
 	return 1;
 }

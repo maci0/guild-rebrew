@@ -19,7 +19,7 @@ extern float g_662a94;
 extern float g_6628a8;
 
 extern unsigned short __cdecl gm_RandomMod(int);
-extern char* __cdecl fcn_005463a0(int, int, int, int, int);
+extern char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
 extern int __cdecl fcn_0050d6d0(char*, short*, int, int*);
 extern int __cdecl fcn_004f4830(int, int*);
@@ -47,7 +47,7 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 	if (code != 0x33 && code != 0x13 && code != 0x10 && code != 0x11)
 		return 0;
 	n = 0;
-	if (fcn_005463a0(2, 0, 0x23, 2, *(unsigned short*) ent) != 0) {
+	if (he_StartHandlungSearch(2, 0, 0x23, 2, *(unsigned short*) ent) != 0) {
 		do {
 			n++;
 		} while (he_fn_Handlung() != 0);

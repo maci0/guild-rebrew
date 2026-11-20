@@ -17,7 +17,7 @@ extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int d2_DefaultFont;
 
-int __cdecl fcn_00469890(void);
+int __cdecl d2_AllocateElement(void);
 int __cdecl d2_GetResourceData(int);
 void __cdecl fcn_0046f9b0(int, int);
 void __cdecl d2_AddRefcount(int);
@@ -27,7 +27,7 @@ int __cdecl fcn_00468cf0(int a1, int a2, int resourceId, int a4)
 {
 	int idx;
 
-	idx = fcn_00469890();
+	idx = d2_AllocateElement();
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x20 / 4] = 9;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x5c / 4] = 1;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x1d0 / 4] = 3;

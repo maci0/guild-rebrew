@@ -11,7 +11,7 @@ typedef struct Hdr14 {
 #pragma pack(pop)
 // SIZE 0xe
 
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 
 /* Serializes one entity (cmd+0x14..cmd+0x3e) into the fresh record returned by
  * fcn_005463a0 and copies the 0xa0-byte message template into it. Native extent
@@ -27,7 +27,7 @@ int __cdecl cm_ExSetHE(char* cmd, char* result)
 		result[1] = 4;
 		*(int*) (result + 6) = 0;
 	}
-	p = fcn_005463a0(1, 1, *(int*) (cmd + 0x10));
+	p = he_StartHandlungSearch(1, 1, *(int*) (cmd + 0x10));
 	if (p == 0) {
 		sprintf(buf, "cm_ExSetHE(): He not found. id:%i name:%s",
 		        *(int*) (cmd + 0x10), cmd + 0x3f);

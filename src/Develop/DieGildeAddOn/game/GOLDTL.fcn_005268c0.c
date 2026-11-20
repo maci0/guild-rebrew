@@ -7,7 +7,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_AppendText(int);
 void __cdecl fcn_005373e0(int, int);
 
-int __cdecl fcn_005268c0(int a, char flags)
+int __cdecl d2_OpenMessageBox(int a, char flags)
 {
 	int h;
 

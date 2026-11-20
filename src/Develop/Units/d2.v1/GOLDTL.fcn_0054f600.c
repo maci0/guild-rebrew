@@ -25,13 +25,13 @@ extern int g_100f1dc;
 extern char g_774964;
 extern char* g_7747b8;
 
-int __cdecl fcn_005463a0(int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00500cb0(void*, void*);
 void __cdecl fcn_0054f4a0(char*, char*, unsigned char*);
 void __cdecl fcn_0054f3b0(char*, char*, char*);
 void __cdecl fcn_00545780(char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 int __cdecl d2_SetForm(int, int);
@@ -52,7 +52,7 @@ void __cdecl fcn_0054f600(char* o)
 
 	v6 = 0;
 	v4 = 0;
-	entity = fcn_005463a0(1, 1, *(int*) (o + 0xac));
+	entity = he_StartHandlungSearch(1, 1, *(int*) (o + 0xac));
 	if (entity != 0) {
 		v6 = gm_LookupEntityRecordById(*(int*) (entity + 0xb0));
 		v4 = gm_LookupEntityRecordById(*(int*) (entity + 0xac));
@@ -64,7 +64,7 @@ void __cdecl fcn_0054f600(char* o)
 			if (fcn_00500cb0(&gm_GameTime, o + 0x52) > 0) {
 				fcn_0054f4a0(entity, v4, (unsigned char*) v6);
 				fcn_00545780(o);
-				fcn_00546190(o);
+				he_FreeAction(o);
 				return;
 			}
 			if (g_100f884 != *(int*) (*(int*) (o + 0x74) + 8)) {
@@ -79,7 +79,7 @@ void __cdecl fcn_0054f600(char* o)
 				fcn_0054f4a0(entity, v4, (unsigned char*) v6);
 			}
 			fcn_00545780(o);
-			fcn_00546190(o);
+			he_FreeAction(o);
 			return;
 		case 0:
 			fcn_00545670(o, 0, 0, "_DUELL_INTRO_EVENT_DUELLANTEN_HS_00", 0x5ec);
@@ -120,5 +120,5 @@ void __cdecl fcn_0054f600(char* o)
 			fcn_004c5620(-1, entity);
 		}
 	}
-	fcn_00546190(o);
+	he_FreeAction(o);
 }

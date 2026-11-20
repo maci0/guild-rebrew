@@ -38,13 +38,13 @@ extern char g_67d444[];
 int __cdecl fcn_00508da0(char* a);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_AppendText(char* fmt, ...);
-void __cdecl fcn_005186c0(int id, int a, int b, char* out);
-char* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
+void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
+char* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 int __cdecl gm_GetElapsedMinutes(void* a, void* b);
 void __cdecl fcn_00500bb0(void* p, int a, int b, int c);
 int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
 int __cdecl fcn_0046f7e0(int x, int y, int z, int owner, int flag);
-void __cdecl fcn_0046b2b0(int element);
+void __cdecl d2_DestroyElement(int element);
 int __cdecl fcn_00529800(char* s, int* out);
 float __cdecl fcn_004ff040(char* e);
 int __cdecl d2_ClearWindowChildren(int win, int keep);
@@ -86,7 +86,7 @@ void __cdecl fcn_0052ea30(void)
 	d2_SetForm(g_6a25b8, 1);
 	io_AppendText(g_6811b0);
 	if (*g_7e2aa0 != 0x47) {
-		fcn_005186c0(*(unsigned short*) (g_7e2aa0 + 0x27), 2, 1, name);
+		io_FormatEntityNameMarkup(*(unsigned short*) (g_7e2aa0 + 0x27), 2, 1, name);
 		if (g_7e2aa0[5] != 0) {
 			io_AppendText(g_6a2f30, name, *g_7e2aa0 * 0xe + 0x48e, g_7e2aa0 + 5);
 			goto header_done;
@@ -99,7 +99,7 @@ header_done:
 	d2_SetElementValue(d2_CurrentValueBar, 0, 100, pct);
 	flags = *(unsigned short*) (g_7e2aa0 + 0x5a);
 	if (flags & 4) {
-		e = fcn_005463a0(2, 0, 0x1c, 3, *(int*) (g_7e2aa0 + 1));
+		e = he_StartHandlungSearch(2, 0, 0x1c, 3, *(int*) (g_7e2aa0 + 1));
 		if (e == 0) {
 			return;
 		}
@@ -113,7 +113,7 @@ header_done:
 		return;
 	}
 	if (flags & 1) {
-		e = fcn_005463a0(2, 0, 0xd, 3, *(int*) (g_7e2aa0 + 1));
+		e = he_StartHandlungSearch(2, 0, 0xd, 3, *(int*) (g_7e2aa0 + 1));
 		ratio = g_662b10;
 		if (e != 0) {
 			if (*(int*) (e + 0x70) >= 4) {
@@ -131,7 +131,7 @@ header_done:
 		return;
 	}
 	if (flags & 0x40) {
-		e = fcn_005463a0(2, 0, 0x1e, 3, *(int*) (g_7e2aa0 + 1));
+		e = he_StartHandlungSearch(2, 0, 0x1e, 3, *(int*) (g_7e2aa0 + 1));
 		if (e == 0) {
 			return;
 		}
@@ -146,12 +146,12 @@ header_done:
 	}
 	if ((signed char) flags >= 0) {
 		if (g_6a25c4[0] != -1) {
-			fcn_0046b2b0(g_6a25c4[0]);
+			d2_DestroyElement(g_6a25c4[0]);
 			g_6a25c4[0] = -1;
 		}
 		return;
 	}
-	e = fcn_005463a0(2, 0, 0x1f, 3, *(int*) (g_7e2aa0 + 1));
+	e = he_StartHandlungSearch(2, 0, 0x1f, 3, *(int*) (g_7e2aa0 + 1));
 	if (e == 0) {
 		return;
 	}
@@ -172,7 +172,7 @@ no_header:
 	if (g_7746f0 < 2) {
 		d2_SetForm(g_6a25b8, 1);
 		pct = (int) (fcn_004ff040(s) * g_662c38);
-		fcn_005186c0(*(unsigned short*) s, 1, 4, name);
+		io_FormatEntityNameMarkup(*(unsigned short*) s, 1, 4, name);
 		io_AppendText(g_6a2fec, name, pct);
 	}
 	if (*(int*) (s + 0x16c) == 0) {
@@ -186,7 +186,7 @@ no_header:
 	}
 	for (i = 0; i < 4; i++) {
 		if (g_6a25c4[i] != -1) {
-			fcn_0046b2b0(g_6a25c4[i]);
+			d2_DestroyElement(g_6a25c4[i]);
 			g_6a25c4[i] = -1;
 		}
 	}
@@ -301,7 +301,7 @@ no_header:
 drop_elements:
 	for (i = 0; i < 4; i++) {
 		if (g_6a25c4[i] != -1) {
-			fcn_0046b2b0(g_6a25c4[i]);
+			d2_DestroyElement(g_6a25c4[i]);
 			g_6a25c4[i] = -1;
 		}
 	}
@@ -313,7 +313,7 @@ no_target:
 	}
 	for (i = 0; i < 4; i++) {
 		if (g_6a25c4[i] != -1) {
-			fcn_0046b2b0(g_6a25c4[i]);
+			d2_DestroyElement(g_6a25c4[i]);
 			g_6a25c4[i] = -1;
 		}
 	}
@@ -330,7 +330,7 @@ no_target:
 	d2_SetForm(g_6a25b8, 2);
 	for (i = 0; i < 4; i++) {
 		if (g_6a25c4[i] != -1) {
-			fcn_0046b2b0(g_6a25c4[i]);
+			d2_DestroyElement(g_6a25c4[i]);
 			g_6a25c4[i] = -1;
 		}
 	}

@@ -1,11 +1,11 @@
 
 
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 
 void __cdecl fcn_004be360(void)
 {
 	if (*(int*) 0x6816d8 != -1) {
-		fcn_00469510(*(int*) 0x6816d8);
+		d2_ClearRadioGroup(*(int*) 0x6816d8);
 	}
 	*(int*) 0x6816d8 = -1;
 }

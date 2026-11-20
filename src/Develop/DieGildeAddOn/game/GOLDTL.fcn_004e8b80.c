@@ -6,7 +6,7 @@
 extern Rec18_68da68 amt_OfficeSlots[42];
 extern Rec18_68da68 g_68da68[];
 
-int __cdecl fcn_004e8b80(int kind, int max, OFFICE_SLOT* out)
+int __cdecl amt_FindOfficeSlotsByKind(int kind, int max, OFFICE_SLOT* out)
 {
 	int n;
 	int i;

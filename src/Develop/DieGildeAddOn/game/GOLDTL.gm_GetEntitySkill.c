@@ -24,7 +24,7 @@ typedef struct {
 } Mod;
 // SIZE 0xb8
 
-Mod* __cdecl fcn_005463a0(int, int, int, ...);
+Mod* __cdecl he_StartHandlungSearch(int, int, int, ...);
 Mod* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_005c6270(void*, int);
 int __cdecl fcn_00577ab0(Unit*);
@@ -48,7 +48,7 @@ float __cdecl gm_GetEntitySkill(char* entity, int skill_index)
 	skill_value = entity_view->level[skill_index] * 0.003968254f;
 	if (skill_index != 1) {
 		bonus = 0.0f;
-		for (modifier = fcn_005463a0(2, 2, entity_view->id, 0, 0x82); modifier != 0; modifier = he_fn_Handlung()) {
+		for (modifier = he_StartHandlungSearch(2, 2, entity_view->id, 0, 0x82); modifier != 0; modifier = he_fn_Handlung()) {
 			if (modifier->slot_a == skill_index) {
 				bonus += modifier->bonus_a;
 			} else if (modifier->slot_b == skill_index) {

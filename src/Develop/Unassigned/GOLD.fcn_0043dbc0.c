@@ -39,7 +39,7 @@ typedef struct {
 } INFLATED_BANK;
 
 /* ADDRESS: GOLD 0x0043dbc0 */
-void __cdecl fcn_0043dbc0(char* object)
+void __cdecl d3_InflateObject(char* object)
 {
     INFLATED_BANK* bank;
     INFLATED_FACE* face;

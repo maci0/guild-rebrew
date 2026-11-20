@@ -24,7 +24,7 @@ void __cdecl fcn_00445f50(int a, int b, float f, int c);
 void __cdecl fcn_004463f0(int a, int b, float f);
 void __cdecl fcn_004e4b60(char* s);
 int __cdecl fcn_004e44b0(char* s, char* buf);
-int __cdecl fcn_004e4d00(int a, int b, int c);
+int __cdecl cut_WaitForTimeoutOrInput(int a, int b, int c);
 void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
 void __cdecl fcn_004e4c40(int a);
 int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
@@ -40,7 +40,7 @@ void __cdecl fcn_004230e0(void* h);
 void __cdecl fcn_004e4eb0(void);
 void __cdecl fcn_005356b0(int p);
 void __cdecl fcn_00509fc0(void* a, void* b, int c);
-void __cdecl fcn_004e7160(void);
+void __cdecl cut_RegisterEventCallbacks(void);
 
 /* ADDRESS: GOLDTL 0x004e3020 */
 void __cdecl fcn_004e3020(void* arg)
@@ -83,20 +83,20 @@ void __cdecl fcn_004e3020(void* arg)
 	fcn_004e4b60((char*) 0x68d308);
 	sprintf(f.path, "%i", state);
 	h2 = fcn_004e44b0((char*) 0x68d2e4, f.path);
-	r = fcn_004e4d00(0x1770, 0, 0);
+	r = cut_WaitForTimeoutOrInput(0x1770, 0, 0);
 	if (r == 0) {
 		fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 0, 0);
 		fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 1, 2500);
 		fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 2, 500);
-		r = fcn_004e4d00(0x3e80, 0, 0);
+		r = cut_WaitForTimeoutOrInput(0x3e80, 0, 0);
 		if (r == 0) {
 			fcn_004e4c40(250);
-			r = fcn_004e4d00(0x2af8, 0, 0);
+			r = cut_WaitForTimeoutOrInput(0x2af8, 0, 0);
 			if (r == 0) {
 				fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 3, 0x251c);
 				fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 4, 0x1194);
 				fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 5, 500);
-				fcn_004e4d00(0x5dc0, 0, 0);
+				cut_WaitForTimeoutOrInput(0x5dc0, 0, 0);
 			}
 		}
 	}

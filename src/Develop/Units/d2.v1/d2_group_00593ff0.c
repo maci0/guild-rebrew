@@ -26,10 +26,10 @@ int __cdecl d2_CreateRadioGroup(int);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00469470(int, int);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_0053cd40(void);
+void __cdecl d2_ShowChooseProfessionDialog(void);
 void __cdecl d2_UpdateRadioGroup(int);
 char __cdecl fcn_00507400(int, int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 #include "Develop/Units/d2.v1/d2_win.h"
 
@@ -58,7 +58,7 @@ int __cdecl sprintf(char*, const char*, ...);
 void __cdecl fcn_0046c310(int);
 
 /* ADDRESS: GOLDTL 0x00593ff0 */
-int __cdecl fcn_00593ff0(int a1)
+int __cdecl d2_ChooseProfession(int a1)
 {
 	int grp;
 	int r;
@@ -105,7 +105,7 @@ int __cdecl fcn_00593ff0(int a1)
 		fcn_00469470(grp, h);
 	}
 	g_100f1dc = -1;
-	while (fcn_005373e0((void*) fcn_0053cd40, a1) != 0) {
+	while (fcn_005373e0((void*) d2_ShowChooseProfessionDialog, a1) != 0) {
 		d2_UpdateRadioGroup(grp);
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 11; i++) {
@@ -118,7 +118,7 @@ int __cdecl fcn_00593ff0(int a1)
 			}
 		}
 	}
-	fcn_00469510(grp);
+	d2_ClearRadioGroup(grp);
 	fcn_00471e30(dlg);
 	return r;
 }

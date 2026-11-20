@@ -15,7 +15,7 @@ void __cdecl fcn_00427370(int);
 void __cdecl SetMasterVolume(int);
 void __cdecl fcn_004c3140(int);
 
-void __cdecl fcn_005e2590(void)
+void __cdecl msx_ApplyAudioSettings(void)
 {
 	float s;
 

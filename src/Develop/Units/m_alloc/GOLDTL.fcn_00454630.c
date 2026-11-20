@@ -13,7 +13,7 @@ void* __cdecl m_PoolAlloc(void*, int, int);
 void __cdecl m_pool_free(void*, void*);
 char __cdecl fcn_004545c0(char*, char*);
 
-char* __cdecl fcn_00454630(char* src, float* lo, float* hi)
+char* __cdecl d3_CollectObjectsInBounds(char* src, float* lo, float* hi)
 {
 	char* ctx;
 	Link* l;

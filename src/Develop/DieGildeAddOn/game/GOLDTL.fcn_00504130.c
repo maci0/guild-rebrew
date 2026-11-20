@@ -18,7 +18,7 @@ void __cdecl m_FreeTracked(void* p);
 void __cdecl gv_FreeFieldAllocs(int* slot);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-int __cdecl fcn_00504130(unsigned char* o)
+int __cdecl gm_FreeGebaeude(unsigned char* o)
 {
 	int i;
 

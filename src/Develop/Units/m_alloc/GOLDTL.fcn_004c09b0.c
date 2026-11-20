@@ -10,7 +10,7 @@ struct fcn_004c09b0_node {
 extern int g_772d2c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_004c24c0(float, int);
+void __cdecl msx_FadeMasterVolumeIfTrackActive(float, int);
 void __cdecl fcn_00426170(int*, int);
 void __cdecl m_FreeTracked(void*);
 
@@ -22,7 +22,7 @@ void __cdecl fcn_004c09b0(void)
 
 	if (g_772d2c != 0) {
 		g_772d2c = 0;
-		fcn_004c24c0(1.0f, 2000);
+		msx_FadeMasterVolumeIfTrackActive(1.0f, 2000);
 	}
 	while ((*(fcn_004c09b0_node**)&g_772d34) != 0) {
 		next = (*(fcn_004c09b0_node**)&g_772d34)->next;

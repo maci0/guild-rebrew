@@ -20,7 +20,7 @@ extern int g_7747b4;
 
 int __cdecl fcn_004e99c0(int c);
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
-int __cdecl fcn_004e8c00(int group, int max, Rec18* out);
+int __cdecl amt_CollectOfficeSlotsByGroup(int group, int max, Rec18* out);
 int __cdecl fcn_004e9310(int k, int max, char** out);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
@@ -50,7 +50,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 	g_7728bc = 0;
 	memset(g_10082a0, 0, 0x180);
 	if (0 == *(unsigned char*) (subjectEnt + 0x166)) {
-		cnt = fcn_004e8c00(1, 6, out);
+		cnt = amt_CollectOfficeSlotsByGroup(1, 6, out);
 		for (i = 0; i < cnt; i++) {
 			if (fcn_004e99c0(out[i].x8) >= 3)
 				continue;
@@ -62,7 +62,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			g_10082a0[n].entity = e;
 			n++;
 		}
-		cnt = fcn_004e8c00(2, 6, out);
+		cnt = amt_CollectOfficeSlotsByGroup(2, 6, out);
 		for (i = 0; i < cnt; i++) {
 			if (fcn_004e99c0(out[i].x8) >= 3)
 				continue;
@@ -74,7 +74,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			g_10082a0[n].entity = e;
 			n++;
 		}
-		cnt = fcn_004e8c00(3, 6, out);
+		cnt = amt_CollectOfficeSlotsByGroup(3, 6, out);
 		for (i = 0; i < cnt; i++) {
 			if (fcn_004e99c0(out[i].x8) >= 3)
 				continue;
@@ -126,7 +126,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			arr[2] = 4;
 			arr[3] = 5;
 		}
-		cnt = fcn_004e8c00(x10, 6, out);
+		cnt = amt_CollectOfficeSlotsByGroup(x10, 6, out);
 		for (i = 0; i < cnt; i++) {
 			if (n >= 32)
 				break;
@@ -138,7 +138,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			g_10082a0[n].entity = e;
 			n++;
 		}
-		cnt = fcn_004e8c00(flag, 6, out);
+		cnt = amt_CollectOfficeSlotsByGroup(flag, 6, out);
 		for (i = 0; i < cnt; i++) {
 			if (n >= 32)
 				break;
@@ -150,7 +150,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			g_10082a0[n].entity = e;
 			n++;
 		}
-		cnt = fcn_004e8c00(grp, 6, out);
+		cnt = amt_CollectOfficeSlotsByGroup(grp, 6, out);
 		for (i = 0; i < cnt; i++) {
 			if (n >= 32)
 				break;
@@ -163,7 +163,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			n++;
 		}
 		if (cls == 3 || cls == 6) {
-			cnt = fcn_004e8c00(arr[0], 6, out);
+			cnt = amt_CollectOfficeSlotsByGroup(arr[0], 6, out);
 			for (i = 0; i < cnt; i++) {
 				if (n >= 32)
 					break;
@@ -177,7 +177,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 				g_10082a0[n].entity = e;
 				n++;
 			}
-			cnt = fcn_004e8c00(arr[1], 6, out);
+			cnt = amt_CollectOfficeSlotsByGroup(arr[1], 6, out);
 			for (i = 0; i < cnt; i++) {
 				if (n >= 32)
 					break;
@@ -193,7 +193,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			}
 		}
 		if (cls == 4 || cls == 7) {
-			cnt = fcn_004e8c00(arr[2], 6, out);
+			cnt = amt_CollectOfficeSlotsByGroup(arr[2], 6, out);
 			for (i = 0; i < cnt; i++) {
 				if (n >= 32)
 					break;
@@ -207,7 +207,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 				g_10082a0[n].entity = e;
 				n++;
 			}
-			cnt = fcn_004e8c00(arr[3], 6, out);
+			cnt = amt_CollectOfficeSlotsByGroup(arr[3], 6, out);
 			for (i = 0; i < cnt; i++) {
 				if (n >= 32)
 					break;
@@ -221,7 +221,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 				g_10082a0[n].entity = e;
 				n++;
 			}
-			cnt = fcn_004e8c00(arr[4], 6, out);
+			cnt = amt_CollectOfficeSlotsByGroup(arr[4], 6, out);
 			for (i = 0; i < cnt; i++) {
 				if (n >= 32)
 					break;

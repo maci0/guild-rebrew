@@ -10,10 +10,10 @@ void __cdecl fcn_004c6430(int a0, int a1, int a2);
 void __cdecl fcn_004c6650(int a0);
 int __cdecl fcn_00500480(char* a0, int* a1, int* a2);
 void __cdecl fcn_004c5da0(int a0, int a1, int a2, int a3, int a4, char* a5);
-void __cdecl fcn_00546190(int a0);
+void __cdecl he_FreeAction(int a0);
 
 /* ADDRESS: GOLDTL 0x00566110 */
-void __cdecl fcn_00566110(int event)
+void __cdecl he_HandleEntlassen(int event)
 {
 	char* ent;
 	int v6;
@@ -58,7 +58,7 @@ void __cdecl fcn_00566110(int event)
 		}
 	}
 tail:
-	fcn_00546190(event);
+	he_FreeAction(event);
 	return;
 fail:
 	*(int*) (event + 0x70) = -1;

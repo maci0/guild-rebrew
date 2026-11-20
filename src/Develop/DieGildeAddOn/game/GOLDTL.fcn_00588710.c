@@ -3,7 +3,7 @@
 
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_00588200(int, int, int);
-void __cdecl fcn_004518a0(float*);
+void __cdecl d3_NormalizeVector(float*);
 void __cdecl fcn_00438b40(char*, int*);
 char __cdecl fcn_00442c00(char*, char);
 
@@ -32,7 +32,7 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
 			vec[0] = *(float*) (a1 + 0x24);
 			vec[2] = *(float*) (a1 + 0x2c);
 			vec[1] = 0.0f;
-			fcn_004518a0(vec);
+			d3_NormalizeVector(vec);
 			factor = *(float*) 0x665f40;
 			factor *= f;
 			vec[0] *= factor; vec[1] *= factor; vec[2] *= factor;
@@ -68,7 +68,7 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
 			f = 1.0f -
 			    (float) (*(unsigned int*) 0x6b7fac - start) /
 			        *(float*) 0x665f3c;
-			fcn_004518a0(vec);
+			d3_NormalizeVector(vec);
 			factor = *(float*) 0x665f40;
 			factor *= f;
 			vec[0] *= factor; vec[1] *= factor; vec[2] *= factor;

@@ -4,12 +4,12 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c4510(char*, int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl fcn_0054c720(char*, unsigned short*, unsigned short*);
 int __cdecl fcn_005d2a40(int, int);
 
@@ -36,17 +36,17 @@ void __cdecl fcn_0054c800(char* e)
 		int v = -1;
 
 		fcn_004c4510(a, *(int*) (a + 4));
-		fcn_004c4570(4, 1, 0x5c, &v);
+		cm_AppendPacketFieldDelta(4, 1, 0x5c, &v);
 		fcn_004c5360();
 	}
 	if (*(int*) (b + 0x5c) != -1) {
 		int v = -1;
 
 		fcn_004c4510(b, *(int*) (b + 4));
-		fcn_004c4570(4, 1, 0x5c, &v);
+		cm_AppendPacketFieldDelta(4, 1, 0x5c, &v);
 		fcn_004c5360();
 	}
-	f = fcn_005463a0(1, 0, 0x41);
+	f = he_StartHandlungSearch(1, 0, 0x41);
 	for (; f != 0; f = he_fn_Handlung()) {
 		if (*(int*) (f + 0xb0) == *(int*) (a + 4)) {
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;

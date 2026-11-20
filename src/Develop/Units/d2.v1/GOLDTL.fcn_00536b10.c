@@ -12,7 +12,7 @@ extern int g_6a2c20;
 extern char g_6811b0[];
 extern char g_7e3a60[];
 
-void __cdecl fcn_00536810(void);
+void __cdecl d2_RunChatConsole(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_00471e30(int);
@@ -22,7 +22,7 @@ int __cdecl io_AppendText(int, ...);
 /* ADDRESS: GOLDTL 0x00536b10 */
 void __cdecl fcn_00536b10(void)
 {
-	if (g_7e35c0[g_774650].fn != fcn_00536810 &&
+	if (g_7e35c0[g_774650].fn != d2_RunChatConsole &&
 	    g_6a2c1c > g_6b7fac - 0x23a &&
 	    g_6a2c1c != -1) {
 		if (g_6a2c20 == -1) {

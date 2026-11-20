@@ -35,11 +35,11 @@ int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
 int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_005b4660(void*);
+void __cdecl d2_RunCharacterDebugDialog(void*);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005b44b0(Ent_5b4c80*);
 int __cdecl fcn_00472250(int, int, char*);
-void __cdecl fcn_005b0f00(D2_WIN*);
+void __cdecl d2_UpdateWindowDrag(D2_WIN*);
 int __cdecl fcn_0046f280(int);
 
 
@@ -75,7 +75,7 @@ void __cdecl fcn_005b4c80(void)
 				for (i = 0; i < 0x300; i++) {
 					if (ids[i] != -1 && d2_CurrentElementId == ids[i]) {
 						if (((Ctl_5b4c80*)g_1015ea0)[d2_CurrentElementId].ent != 0) {
-							fcn_005b4660(((Ctl_5b4c80*)g_1015ea0)[d2_CurrentElementId].ent);
+							d2_RunCharacterDebugDialog(((Ctl_5b4c80*)g_1015ea0)[d2_CurrentElementId].ent);
 						}
 						break;
 					}
@@ -112,8 +112,8 @@ void __cdecl fcn_005b4c80(void)
 				*(int*) &((D2_WIN*)g_1015f40)[left].pad3c[0x21c] = saved;
 				fill = 0;
 			}
-			fcn_005b0f00(&((D2_WIN*)g_1015f40)[left]);
-			fcn_005b0f00(rp);
+			d2_UpdateWindowDrag(&((D2_WIN*)g_1015f40)[left]);
+			d2_UpdateWindowDrag(rp);
 		} while (fcn_005373e0((void*) fcn_005b4c80, 0x657c7));
 	}
 	fcn_0046f280(win);

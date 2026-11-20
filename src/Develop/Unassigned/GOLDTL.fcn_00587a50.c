@@ -11,9 +11,9 @@ struct node98 {
 extern float g_662d40[3];
 extern float g_662b08;
 
-extern void __cdecl fcn_00438cb0(void*, float*);
+extern void __cdecl d3_SetObjectRotation(void*, float*);
 extern void __cdecl fcn_00438b40(void*, float*);
-extern void __cdecl fcn_004518a0(float*);
+extern void __cdecl d3_NormalizeVector(float*);
 extern float __cdecl fcn_004514d0(int, int);
 extern void* __cdecl fcn_005e8850(void);
 extern void __stdcall fcn_005ebbb9(float*, float*);
@@ -38,13 +38,13 @@ void __cdecl fcn_00587a50(char* o)
 	a[1] = *(float*) (o + 0x14);
 	a[2] = 0.0f;
 	a[0] = 0.0f;
-	fcn_00438cb0(*(void**) (o + 0x98), a);
+	d3_SetObjectRotation(*(void**) (o + 0x98), a);
 
 	v[4] = *(float*) (o + 0x10);
 	v[5] = 0.0f;
 	v[6] = 0.0f;
 	for (i = 0; i < 3; i++) {
-		fcn_00438cb0(*(void**) (o + 0x8c + i * 4), v + 4);
+		d3_SetObjectRotation(*(void**) (o + 0x8c + i * 4), v + 4);
 	}
 
 	v[4] = 0.0f;
@@ -58,7 +58,7 @@ void __cdecl fcn_00587a50(char* o)
 	v[4] = 0.0f;
 	v[3] = fcn_004514d0((int) g_662d40, (int) c) - g_662b08 -
 	       *(float*) (o + 0x14);
-	fcn_00438cb0(*(void**) (o + 0x9c), v + 2);
+	d3_SetObjectRotation(*(void**) (o + 0x9c), v + 2);
 
 	if (*(int*) (o + 0x7c) == 0) {
 		fcn_00587f40(o);
@@ -73,7 +73,7 @@ void __cdecl fcn_00587a50(char* o)
 	v[2] = g_662d40[0] * ((struct node98*) *(void**) (o + 0x98))->m[2] +
 	       (g_662d40[1] * ((struct node98*) *(void**) (o + 0x98))->m[6] +
 	        g_662d40[2] * ((struct node98*) *(void**) (o + 0x98))->m[10]);
-	fcn_004518a0(v);
+	d3_NormalizeVector(v);
 
 	v[4] = *(float*) o - v[0] * 30.0f;
 	v[5] = *(float*) (o + 4) - v[1] * 30.0f + 20.0f;
@@ -100,7 +100,7 @@ void __cdecl fcn_00587a50(char* o)
 	v[4] = v[4] + u * *(float*) (o + 0x24);
 	v[6] = v[6] + u * z;
 	fcn_00438b40(d3_ActiveCamera, v + 4);
-	fcn_00438cb0(d3_ActiveCamera, v);
+	d3_SetObjectRotation(d3_ActiveCamera, v);
 
 	if (*(int*) (o + 0x7c) == 0) {
 		fcn_00587f40(o);
@@ -122,7 +122,7 @@ void __cdecl fcn_00587a50(char* o)
 		v[1] = 0.0f;
 		v[0] = *(float*) (o + 0x24);
 		v[2] = *(float*) (o + 0x2c);
-		fcn_004518a0(v);
+		d3_NormalizeVector(v);
 		u = 1.0f;
 		if (*(float*) (o + 0x10) > 0.0f) {
 			u = 1.0f - *(float*) (o + 0x10) / 0.7853982f;

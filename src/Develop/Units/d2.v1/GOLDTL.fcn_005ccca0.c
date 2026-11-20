@@ -48,7 +48,7 @@ void __cdecl fcn_005ccbe0(void);
 void __cdecl fcn_005ccc00(int, int, void*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005ccca0 */
-int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
+int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int callback)
 {
 	SelRow_5ccca0 rows[16];
 	void* cur;
@@ -242,7 +242,7 @@ int __cdecl fcn_005ccca0(void* ent, char* name, int tab, int callback)
 			time0 = g_6b7fac + 0xd8;
 		}
 	after:
-		if (fcn_005373e0((void*) fcn_005ccca0, 0x657c7) == 0) {
+		if (fcn_005373e0((void*) d2_ShowTabbedSelectionDialog, 0x657c7) == 0) {
 			break;
 		}
 	} while (1);

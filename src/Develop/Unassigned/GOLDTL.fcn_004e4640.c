@@ -14,7 +14,7 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00428720(Obj*);
+void __cdecl evt_RequestScriptExit(Obj*);
 
 int __cdecl fcn_004e4640(void)
 {
@@ -24,7 +24,7 @@ int __cdecl fcn_004e4640(void)
 	for (i = 0; i < 128; i++) {
 		o = &((Obj*)g_6b7e94)[i];
 		if (o->id != -1 && (o->flags & 1) != 0 && o->state == -2) {
-			fcn_00428720(o);
+			evt_RequestScriptExit(o);
 		}
 	}
 	return 0;

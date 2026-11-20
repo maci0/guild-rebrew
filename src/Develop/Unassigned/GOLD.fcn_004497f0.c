@@ -20,9 +20,9 @@ void __cdecl d3_MatrixToEulerAngles(void* a, int b);
 void __cdecl fcn_00458d90(Obj04497f0* o, int a, int b, Mat04497f0* out);
 void __cdecl fcn_00454060(Mat04497f0*, Mat04497f0*);
 void __cdecl fcn_00454030(Mat04497f0*, Mat04497f0*);
-void __cdecl fcn_00453ed0(void*, Mat04497f0*, void*);
+void __cdecl d3_MultiplyAffineMatrices(void*, Mat04497f0*, void*);
 
-void __cdecl fcn_004497f0(Obj04497f0* o, Vec04497f0* in, void* dir, Vec04497f0* out, int arg)
+void __cdecl d3_TransformWorldToParent(Obj04497f0* o, Vec04497f0* in, void* dir, Vec04497f0* out, int arg)
 {
 	Obj04497f0* p;
 	Mat04497f0 inv;
@@ -43,6 +43,6 @@ void __cdecl fcn_004497f0(Obj04497f0* o, Vec04497f0* in, void* dir, Vec04497f0* 
 	out->z = inv.m[1][2] * in->y + inv.m[0][2] * in->x + inv.m[2][2] * in->z + inv.m[3][2];
 	fcn_00458d90(p, 0, 1, &m);
 	fcn_00454030(&m, &inv);
-	fcn_00453ed0(dir, &inv, &m);
+	d3_MultiplyAffineMatrices(dir, &inv, &m);
 	d3_MatrixToEulerAngles(&m, arg);
 }

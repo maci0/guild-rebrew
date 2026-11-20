@@ -8,7 +8,7 @@ extern g_662428_f g_662428;
 
 int __cdecl msx_FindStreamIndex(int);
 
-int __cdecl fcn_0042af10(int streamIdArg)
+int __cdecl msx_GetStreamStatus(int streamIdArg)
 {
 	if (g_6b7f90 != 0) {
 		if (msx_FindStreamIndex(streamIdArg) >= 0) {

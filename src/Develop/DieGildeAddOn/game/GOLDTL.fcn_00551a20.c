@@ -23,7 +23,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 int __cdecl fcn_004c4450(int id);
-void __cdecl fcn_00546190(char* t);
+void __cdecl he_FreeAction(char* t);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004c5620(int a1, char* e);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -40,7 +40,7 @@ void __cdecl fcn_00551a20(char* t)
 	char* q;
 
 	if (*(int*) (t + 0x70) == -2 || *(int*) (t + 0x70) == -1) {
-		fcn_00546190(t);
+		he_FreeAction(t);
 		return;
 	}
 	if (t[0x78] & 4)

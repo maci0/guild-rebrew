@@ -18,7 +18,7 @@ int __cdecl fcn_004c4450(int h);
 int* __cdecl fcn_004c4480(int h);
 char* __cdecl cut_FindCutsceneById(int h);
 char* __cdecl fcn_00504b30(char* p);
-void __cdecl fcn_00546190(char* e);
+void __cdecl he_FreeAction(char* e);
 int __cdecl fcn_004d5450(char* e);
 int __cdecl fcn_004d5110(char* a, char* b, char* c, char* d);
 int __cdecl memset(void* dst, int c, unsigned int n);
@@ -70,7 +70,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 			*(int*) (ent + 0x70) = 1;
 			return;
 		}
-		fcn_00546190(ent);
+		he_FreeAction(ent);
 		return;
 	case 1:
 		for (i = 0; i < 8; i++) {
@@ -305,7 +305,7 @@ tail:
 			ids++;
 			count--;
 		} while (count != 0);
-		fcn_00546190(ent);
+		he_FreeAction(ent);
 		return;
 	}
 	(void) prob;

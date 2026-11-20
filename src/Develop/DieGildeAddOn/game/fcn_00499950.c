@@ -2,7 +2,7 @@
 #pragma intrinsic(memset)
 
 int __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_004faaf0(int e);
+int __cdecl gm_SelectRandomEntityCandidate(int e);
 int __cdecl fcn_004c4eb0(char* name);
 int __cdecl fcn_004c5530(char* msg);
 int __cdecl fcn_004c4ef0(char* name);
@@ -29,7 +29,7 @@ int __cdecl fcn_00499950(int a, char* b)
     *(char*) (buf + 0x36) = 1;
     *(int*) (buf + 0x84) = v;
     *(int*) (buf + 0x60) = *(int*) (e + 4);
-    v = fcn_004faaf0(e);
+    v = gm_SelectRandomEntityCandidate(e);
     scale = *(float*) 0x1009354; *(int*) (buf + 0x58) = v;
     *(float*) 0x1009374 = scale * *(float*) (b + 0x14);
     scale = *(float*) 0x100935c;

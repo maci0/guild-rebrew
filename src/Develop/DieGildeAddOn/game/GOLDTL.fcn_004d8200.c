@@ -12,7 +12,7 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl fcn_004ce610(char*);
 char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(int), int, int, int);
 char* __cdecl ch_CreateAction(char*, int, ...);
-int __cdecl fcn_00406340(char*, char*, int);
+int __cdecl ch_QueuePlayAnimation(char*, char*, int);
 void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 unsigned int __cdecl cut_RandMod(unsigned int);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
@@ -97,7 +97,7 @@ make_task:
 		*(int*) ((char*) ent + 0x24) -= ext;
 	}
 	if (r == 0) {
-		fcn_00406340(*(char**) ((char*) rec + 0x184), "kampf/schlagen1",
+		ch_QueuePlayAnimation(*(char**) ((char*) rec + 0x184), "kampf/schlagen1",
 		             1);
 	} else {
 		if (*(int*) r == 0) {

@@ -14,7 +14,7 @@ void __cdecl fcn_00428340(void* obj, int argc, ...);
 void* __cdecl fcn_00445600(void* dev, int flags, void* ptr, char* name);
 void __cdecl d3_TransformPoint(void* dev, void* pos, void* out);
 int __cdecl fcn_00469c30(int x, int y, int a3);
-void __cdecl fcn_0046b2b0(int kind);
+void __cdecl d2_DestroyElement(int kind);
 int __cdecl fcn_004fdec0(char* name);
 int __cdecl gm_MapEntityStatRange(int arg);
 int __cdecl fcn_005373e0(int task, int time);
@@ -178,8 +178,8 @@ unsigned int __cdecl fcn_0053b6b0(int jobCode)
 	if (obj != 0) {
 		ch_DestroyCharacter(obj);
 	}
-	fcn_0046b2b0(id2);
-	fcn_0046b2b0(id1);
-	fcn_0046b2b0(id3);
+	d2_DestroyElement(id2);
+	d2_DestroyElement(id1);
+	d2_DestroyElement(id3);
 	return selected;
 }

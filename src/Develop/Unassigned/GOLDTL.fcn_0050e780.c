@@ -8,7 +8,7 @@
 
 extern int g_85ab60;
 
-int __cdecl fcn_0050e780(int i)
+int __cdecl d2_CalculateDependencyDepth(int i)
 {
 	int a;
 	int b;
@@ -27,7 +27,7 @@ int __cdecl fcn_0050e780(int i)
 	n = g_85ab60;
 	for (k = 0; k < n; k++) {
 		if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_a == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[k].item_id) {
-			a = fcn_0050e780(k) + 1;
+			a = d2_CalculateDependencyDepth(k) + 1;
 			break;
 		}
 	}
@@ -37,7 +37,7 @@ int __cdecl fcn_0050e780(int i)
 	}
 	for (k = 0; k < n; k++) {
 		if (p == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[k].item_id) {
-			b = fcn_0050e780(k) + 1;
+			b = d2_CalculateDependencyDepth(k) + 1;
 			break;
 		}
 	}

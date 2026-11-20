@@ -26,7 +26,7 @@ extern House_554b90 g_7f4ca0[768];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern Pos_554b90 gm_GameTime;
 
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl gm_AccumulateTyped2(House_554b90*);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 void __cdecl fcn_004c5980(void*);
@@ -51,7 +51,7 @@ void __cdecl fcn_00554b90(char* e)
 	int r;
 
 	if (*(int*) (e + 0x70) == -1) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 	if ((e[0x78] & 4) != 0) {

@@ -74,7 +74,7 @@ extern void* g_6b5de0;
 extern VBuf *g_6b5cb4;
 extern volatile int g_6b7fac;
 
-void __cdecl fcn_00415710(Lines *, float);
+void __cdecl d3_UpdateRain(Lines *, float);
 void __cdecl fcn_00437160(int, int, int);
 void __cdecl fcn_004372d0(int, int, int, int, int);
 void __cdecl fcn_00437270(void);
@@ -123,7 +123,7 @@ void __cdecl fcn_00415d70(Lines *l)
 	if (l->count == 0) {
 		return;
 	}
-	fcn_00415710(l, dt);
+	d3_UpdateRain(l, dt);
 	fcn_00437160(0, 0, 0);
 	fcn_004372d0(0x80, 0, 0, 0, 0);
 	((Device*)g_6b5de0)->vtbl->SetVertexShader(((Device*)g_6b5de0), 0x44);

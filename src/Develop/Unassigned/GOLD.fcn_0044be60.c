@@ -13,25 +13,25 @@ extern char g_fc2700[];
 void* __cdecl fcn_00430470(const char*, const char*, void*);
 int __cdecl fcn_00430aa0(void*);
 int __cdecl vfs_ReadByte(void*, void*);
-void __cdecl fcn_004011a0(void*, char*);
+void __cdecl vfs_ReadCString(void*, char*);
 int __cdecl fcn_004011d0(void*, void*);
 void __cdecl fcn_00401280(void*, void*);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl fcn_0043a6f0(float, float, int);
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_00438cb0(char*, int*);
+void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl fcn_00439c60(char*);
 void __cdecl fcn_0043c7a0(char*);
 char* __cdecl fcn_0044abb0(void*, char*, unsigned int, unsigned char);
 int __cdecl fcn_0044a9e0(unsigned int);
-char* __cdecl fcn_0044b920(void*, int);
+char* __cdecl d3_int_io_LoadFloor(void*, int);
 void __cdecl fcn_0043ea10(void*);
 char* __cdecl fcn_00438c30(char*);
 char* __cdecl fcn_0043d180(char*);
 void __cdecl fcn_0043ca20(char*);
 void __cdecl fcn_0045e610(char*, int);
-char* __cdecl fcn_0045eea0(int, int, int);
-void __cdecl fcn_0045ef50(char*);
+char* __cdecl d3sm_Create(int, int, int);
+void __cdecl d3sm_Destroy(char*);
 
 /* Reader scratch. The reference frame reserves sixteen bytes for it and never
  * touches the fourth float; only x/y/z reach the scene tables. */
@@ -80,7 +80,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 	}
 	g_6b86d4++;
 	if (version >= 0x3a6c000b) {
-		fcn_004011a0(s, name);
+		vfs_ReadCString(s, name);
 		fcn_004011d0(s, &discarded);
 		fcn_00401280(s, &vec);
 		*(float*) 0x5fcc74 = discarded;
@@ -166,7 +166,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 		}
 		vfs_ReadByte(s, &present);
 		if (present != 0) {
-			g_6b8300 = fcn_0044b920(s, version);
+			g_6b8300 = d3_int_io_LoadFloor(s, version);
 		}
 		obj = g_fc52f0;
 		while (obj != g_fc2700) {
@@ -174,7 +174,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 				g_6338c4 = obj;
 				if ((obj[0x211] & 1) != 0) {
 					fcn_00438b40(obj, (int*) (obj + 0x5c));
-					fcn_00438cb0(obj, (int*) (obj + 0x90));
+					d3_SetObjectRotation(obj, (int*) (obj + 0x90));
 				}
 				fcn_00439c60(obj);
 				break;
@@ -207,10 +207,10 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 		if ((*(char**) 0x633df8) != 0) {
 			fcn_0045e610((*(char**) 0x633df8), 0);
 		} else {
-			(*(char**) 0x633df8) = fcn_0045eea0(0, -(*(int*) 0x633dcc), 1);
+			(*(char**) 0x633df8) = d3sm_Create(0, -(*(int*) 0x633dcc), 1);
 		}
 	} else if ((*(char**) 0x633df8) != 0) {
-		fcn_0045ef50((*(char**) 0x633df8));
+		d3sm_Destroy((*(char**) 0x633df8));
 		(*(char**) 0x633df8) = 0;
 	}
 	universe = g_67a370;

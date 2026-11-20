@@ -21,7 +21,7 @@ int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
 char* __cdecl fcn_00471f80(int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005397c0(void)
+int __cdecl d2_PromptNetworkHost(void)
 {
 	int ok;
 	char buf[0x104];
@@ -40,7 +40,7 @@ int __cdecl fcn_005397c0(void)
 	d2_SetElementValue(e, buf);
 	d2_SetForm(h, 1);
 	ok = fcn_00472250(h, 1, io_AppendText(0x1cb0));
-	while (fcn_005373e0(fcn_005397c0, 0x24087) != 0) {
+	while (fcn_005373e0(d2_PromptNetworkHost, 0x24087) != 0) {
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;
 		}

@@ -14,7 +14,7 @@ typedef struct
 } Rec18;
 // SIZE 0x18
 
-int __cdecl fcn_004e8a80(int, Rec18*);
+int __cdecl amt_FindOfficeSlotByType(int, Rec18*);
 
 int __cdecl fcn_004e9530(int n)
 {
@@ -27,7 +27,7 @@ int __cdecl fcn_004e9530(int n)
 		n = 0x1b;
 	}
 	while (n > 0) {
-		if (fcn_004e8a80(n, &r) != 0 && r.x10 == 3 && r.xc <= 1) {
+		if (amt_FindOfficeSlotByType(n, &r) != 0 && r.x10 == 3 && r.xc <= 1) {
 			break;
 		}
 		n--;

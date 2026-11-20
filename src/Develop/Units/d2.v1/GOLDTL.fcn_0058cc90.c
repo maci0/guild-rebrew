@@ -22,7 +22,7 @@ void __cdecl fcn_00533a60(int, int, int*, int, int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_0058c670(char*, int, unsigned char);
-int __cdecl fcn_0058cae0(char*, int, unsigned char);
+int __cdecl d2_RunRentGraveDialog(char*, int, unsigned char);
 int __cdecl fcn_005373e0(void*, int);
 
 void __cdecl fcn_0058cc90(char* input, Req* s)
@@ -50,7 +50,7 @@ void __cdecl fcn_0058cc90(char* input, Req* s)
 				fcn_00471af0(s->x0, 1);
 			} else if (d2_CurrentElementId == cancel) {
 				fcn_00471af0(s->x0, 0);
-				if (fcn_0058cae0(input, s->x20, s->x24) == 1) {
+				if (d2_RunRentGraveDialog(input, s->x20, s->x24) == 1) {
 					g_774654 = 1;
 				}
 				fcn_00471af0(s->x0, 1);

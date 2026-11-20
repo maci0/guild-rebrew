@@ -35,7 +35,7 @@ int __cdecl fcn_004e9270(int k)
 
 	if (fcn_004e8b40(k, &a) == 0)
 		return 0;
-	n = fcn_004e8b80(a.id, 6, list);
+	n = amt_FindOfficeSlotsByKind(a.id, 6, list);
 	if (n == 0)
 		return 0;
 	for (i = 0; i < n; i++) {

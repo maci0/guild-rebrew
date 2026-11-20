@@ -1,5 +1,5 @@
 int __cdecl fcn_004c5870(int id, int v);
-char* __cdecl fcn_005463a0(int a1, int a2, int a3);
+char* __cdecl he_StartHandlungSearch(int a1, int a2, int a3);
 int __cdecl fcn_004c4450(int i);
 void __cdecl fcn_00535960(void);
 
@@ -17,7 +17,7 @@ void __cdecl fcn_004f5830(void)
 			handle = fcn_004c5870(*(int*) (cursor - 0x25), 0);
 			count++;
 		} else if (*(unsigned int*) cursor > 1) {
-			if (fcn_005463a0(1, 1, *(int*) cursor) == 0) {
+			if (he_StartHandlungSearch(1, 1, *(int*) cursor) == 0) {
 				handle = fcn_004c5870(*(int*) (cursor - 0x25), 1);
 				count++;
 			}

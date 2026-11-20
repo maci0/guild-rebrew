@@ -14,7 +14,7 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(char*, ...);
 int __cdecl fcn_00472250(int, int, int);
 
-int __cdecl fcn_0057ffd0(void)
+int __cdecl d2_OpenTutorialMainDialog(void)
 {
 	int o;
 	int v;

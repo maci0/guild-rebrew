@@ -25,7 +25,7 @@ char __cdecl fcn_0043aad0(char* object, SCENE_PROGRESS_CONTEXT* context);
 char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS progress);
 #endif
 
-void __cdecl fcn_0053f6a0(int mode, int done, int total);
+void __cdecl d2_UpdateSceneLoadProgress(int mode, int done, int total);
 int __cdecl fcn_005222a0(void* stream);
 int __cdecl ecmd_LoadScene(char** filename);
 

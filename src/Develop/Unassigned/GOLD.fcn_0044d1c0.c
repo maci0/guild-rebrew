@@ -1,10 +1,10 @@
-int __cdecl fcn_0044ce40(int);
-int __cdecl fcn_0044f7e0(int);
+int __cdecl d3_RecalculateObjectBounds(int);
+int __cdecl d3_CalculateMeshNormals(int);
 
 void __cdecl fcn_0044d1c0(int a, char b)
 {
-	fcn_0044ce40(a);
+	d3_RecalculateObjectBounds(a);
 	if (b != 0) {
-		fcn_0044f7e0(a);
+		d3_CalculateMeshNormals(a);
 	}
 }

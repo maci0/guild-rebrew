@@ -3,7 +3,7 @@ extern int g_fc52f0, g_fc28f4, g_fb98f4, g_fb9598;
 char __cdecl fcn_004378c0(int, unsigned int);
 
 /* ADDRESS: GOLD 0x00438e60 */
-char __cdecl fcn_00438e60(char* scene, char* node, unsigned int flags, void (__cdecl* callback)(char*))
+char __cdecl d3_VisitSceneNodes(char* scene, char* node, unsigned int flags, void (__cdecl* callback)(char*))
 {
     char* p;
     unsigned int single;
@@ -17,7 +17,7 @@ char __cdecl fcn_00438e60(char* scene, char* node, unsigned int flags, void (__c
             if (fcn_004378c0(*(int*) (p + 0x218), flags))
                 callback(p);
             if (*(char**) (p + 0x1fc) != 0)
-                fcn_00438e60(scene, *(char**) (p + 0x1fc), flags & ~0x200U, callback);
+                d3_VisitSceneNodes(scene, *(char**) (p + 0x1fc), flags & ~0x200U, callback);
             if (single != 0)
                 break;
             p = *(char**) (p + 0x1f0);
@@ -33,7 +33,7 @@ char __cdecl fcn_00438e60(char* scene, char* node, unsigned int flags, void (__c
         }
         p = *(char**) (scene + 0x80);
         while (p != 0 && p != (char*) 0xfc2700) {
-            fcn_00438e60(scene, p, flags, callback);
+            d3_VisitSceneNodes(scene, p, flags, callback);
             p = *(char**) (p + 0x1f0);
         }
     }

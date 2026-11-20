@@ -15,7 +15,7 @@ void __cdecl io_AppendText(char* x);
 int __cdecl fcn_005373e0(void* fn, int y);
 void __cdecl fcn_00471e30(int h);
 
-void __cdecl fcn_004fa5f0(char* x, int mode, int y)
+void __cdecl d2_ShowPrivilegMessage(char* x, int mode, int y)
 {
 	int h;
 
@@ -30,7 +30,7 @@ void __cdecl fcn_004fa5f0(char* x, int mode, int y)
 	d2_SetForm(h, 1);
 	io_AppendText(x);
 	g_100f1dc = -1;
-	while (fcn_005373e0((void*) fcn_004fa5f0, y)) {
+	while (fcn_005373e0((void*) d2_ShowPrivilegMessage, y)) {
 		if (g_14ce8e0) {
 			g_774654 = 1;
 		}

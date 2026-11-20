@@ -5,7 +5,7 @@ void __cdecl fcn_0041e650(void);
 void __cdecl fcn_004c2d90(float, int);
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 void __cdecl fcn_005373e0(int, int);
-void __cdecl fcn_005356e0(void);
+void __cdecl main_PumpWindowMessages(void);
 void __cdecl fcn_004124b0(void);
 void __cdecl fcn_004117c0(int);
 void __cdecl fcn_004117f0(int);
@@ -20,7 +20,7 @@ extern int g_7747d4, main_LoopFlags, g_1040494, d2_ScreenHeight, main_Instance;
 extern unsigned char g_772d10;
 
 /* ADDRESS: GOLDTL 0x005448e0 */
-void __cdecl fcn_005448e0(void)
+void __cdecl main_PlayOutroMovie(void)
 {
 	char buf[0x104];
 	unsigned char* h;
@@ -48,13 +48,13 @@ void __cdecl fcn_005448e0(void)
 	*(int*) 0x6b5c90 = 0;
 	fcn_004117c0(0);
 	fcn_004117f0(0);
-	fcn_005356e0();
+	main_PumpWindowMessages();
 	Sleep(0x1f4);
 	g_7747d4 = fcn_0041e680(b, 0, (void*) main_Instance, 0, 0, 0, 0, 0x8a);
 	Sleep(0xc8);
 	fcn_0041f350(g_7747d4);
 	fcn_00473150(h);
-	fcn_005356e0();
+	main_PumpWindowMessages();
 	g_662264(*(int*) 0x774940);
 	fcn_004117c0(1);
 	fcn_004117f0(1);

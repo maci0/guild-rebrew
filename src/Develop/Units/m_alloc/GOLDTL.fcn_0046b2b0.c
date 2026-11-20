@@ -19,7 +19,7 @@ void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 /* Releases one entity slot: runs the state-specific teardown, detaches it from
  * its window list and panel, then clears the slot record. */
 /* ADDRESS: GOLDTL 0x0046b2b0 */
-void __cdecl fcn_0046b2b0(int id)
+void __cdecl d2_DestroyElement(int id)
 {
 	char* e;
 	char* list;

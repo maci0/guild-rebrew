@@ -17,7 +17,7 @@ extern int* g_665f08;
 
 
 /* ADDRESS: GOLDTL 0x0057eba0 */
-int __cdecl fcn_0057eba0(int a, int b, int c, int d)
+int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d)
 {
 	int buf[4];
 

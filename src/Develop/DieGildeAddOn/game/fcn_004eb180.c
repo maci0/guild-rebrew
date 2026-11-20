@@ -1,4 +1,4 @@
-extern int __cdecl fcn_005463a0(int, int, int);
+extern int __cdecl he_StartHandlungSearch(int, int, int);
 extern void __cdecl amt_calc_zuenfte(int);
 extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 
@@ -8,7 +8,7 @@ int __cdecl fcn_004eb180(int v)
 	int w;
 	void* p;
 
-	if (fcn_005463a0(1, 0, 0x80) != 0) {
+	if (he_StartHandlungSearch(1, 0, 0x80) != 0) {
 		amt_calc_zuenfte(0x1e);
 		amt_calc_zuenfte(0x1f);
 		amt_calc_zuenfte(0x20);

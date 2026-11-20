@@ -33,7 +33,7 @@ void __cdecl evt_LogScriptError(char*, int, const char*);
 char* __cdecl fcn_00402610(char*);
 #include "../client_scene_transform.h"
 float __cdecl fcn_00444700(char*, float*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 void __cdecl fcn_00441720(char*, float*, int, int*, int*, float*);
 extern float g_6628a8;
@@ -45,7 +45,7 @@ extern char g_10432c0[];
 char __cdecl fcn_00442c00(char*, char);
 
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl vfs_ToSlashes(char*);
 int __cdecl d3_RemoveObjectAnim(char*);
 
@@ -134,7 +134,7 @@ void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force)
 	*(int*) &rotation[1] = *(int*) (attachment + 0x88);
 	*(int*) &rotation[2] = *(int*) (attachment + 0x8c);
 	rotation[1] += angle;
-	fcn_00438cb0(attachment, rotation);
+	d3_SetObjectRotation(attachment, rotation);
 	if (fcn_0045b990(map, (float*) (attachment + 0x4c), &col, &row, &height)) {
 		cell = *(int*) (*(char**) (map + 0x24) + (*(int*) (map + 0x20) * row + col) * 0x1c);
 		if ((cell == 0 || cell == 13) && *(char**) (*(char**) (obj + 0x88) + 0xac) == 0) {

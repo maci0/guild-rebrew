@@ -45,12 +45,12 @@ int __cdecl fcn_00556e80(unsigned short*);
 void __cdecl fcn_005498b0(char*, char*, char*, char*, int, float);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 /* One step of the disease simulation: walks twelve towns in a pseudo-random
  * order and rolls an illness for each one. */
 /* ADDRESS: GOLDTL 0x00556ed0 */
-void __cdecl fcn_00556ed0(char* s)
+void __cdecl RunSimKrankheiten(char* s)
 {
 	float x;
 	float y;
@@ -68,7 +68,7 @@ void __cdecl fcn_00556ed0(char* s)
 	unsigned char* q;
 
 	if (*(int*) (s + 0x70) == -2) {
-		fcn_00546190(s);
+		he_FreeAction(s);
 		return;
 	}
 	io_FormatTextBuffer(buf, "-------> RunSimKrankheiten: calculating at <Day = %i Time = %i.2:%i.2>",

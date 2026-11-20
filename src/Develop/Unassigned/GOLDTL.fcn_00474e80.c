@@ -25,7 +25,7 @@ void __cdecl fcn_00472380(int object, int selected);
 void __cdecl fcn_0046e790(int index);
 
 /* ADDRESS: GOLDTL 0x00474e80 */
-void __cdecl fcn_00474e80(void)
+void __cdecl d2_ProcessMouseInput(void)
 {
 	int v4;
 	int v7;

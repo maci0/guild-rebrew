@@ -44,7 +44,7 @@ extern char g_7f4ca0[];
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl gm_GetOppositeStatIndex(int);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 float __cdecl fcn_00507540(int, int*);
 void __cdecl fcn_004c5530(Msg*);
 void __cdecl fcn_005100f0(int, int);
@@ -72,7 +72,7 @@ void __cdecl fcn_00541ff0(int index)
 		}
 		if (((Entity*)g_7f4ca0)[index].trade != 0) {
 			step = gm_GetOppositeStatIndex(((Entity*)g_7f4ca0)[index].trade);
-			busy = fcn_005463a0(2, 2, e->slot, 0, 0x24);
+			busy = he_StartHandlungSearch(2, 2, e->slot, 0, 0x24);
 			e->busy++;
 			grade = fcn_00507540(index, info);
 			e->busy--;

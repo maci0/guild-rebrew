@@ -19,11 +19,11 @@ void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005e3520(void);
 void __cdecl fcn_005e2b60(void);
-void __cdecl fcn_005e3150(void);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ShowSoundOptions(void);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005e4820(void)
+void __cdecl d2_ShowOptionsMenu(void)
 {
 	int h;
 	int b1;
@@ -39,7 +39,7 @@ void __cdecl fcn_005e4820(void)
 	b2 = fcn_005e3b10(2, g_14ac49c, d2_CurrentWindowId);
 	b3 = fcn_005e3b10(3, g_14ac4a0, d2_CurrentWindowId);
 	p = d2_CreateRadioGroup(3, b1, b2, b3);
-	while (fcn_005373e0(fcn_005e4820, 0x24087) != 0) {
+	while (fcn_005373e0(d2_ShowOptionsMenu, 0x24087) != 0) {
 		if (g_14ce8e0 != 0 || (*(unsigned char*)&g_14cf950) == 1) {
 			g_774654 = 1;
 		}
@@ -55,11 +55,11 @@ void __cdecl fcn_005e4820(void)
 				fcn_00471af0(h, 1);
 			} else if (d2_CurrentElementId == b3) {
 				fcn_00471af0(h, 0);
-				fcn_005e3150();
+				d2_ShowSoundOptions();
 				fcn_00471af0(h, 1);
 			}
 		}
 	}
-	fcn_00469510(p);
+	d2_ClearRadioGroup(p);
 	fcn_00471e30(h);
 }

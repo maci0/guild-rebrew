@@ -21,13 +21,13 @@ void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_00471af0(int, int);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00526120(int, int);
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004c5620(int, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005c3cc0 */
-void __cdecl fcn_005c3cc0(char* e)
+void __cdecl d2_RunFireExtinguishDialog(char* e)
 {
 	char* ent;
 	int id;
@@ -77,7 +77,7 @@ void __cdecl fcn_005c3cc0(char* e)
 				fcn_005100f0(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 4), -n);
 				fcn_00471af0(win, 0);
 				if (gm_RandomFloat01() < p) {
-					ent = fcn_005463a0(1, 0, 0x4f);
+					ent = he_StartHandlungSearch(1, 0, 0x4f);
 					if (ent != 0) {
 						do {
 							if (*(int*) (ent + 0xac) == *(int*) (e + 1)) {
@@ -100,7 +100,7 @@ done:
 			g_774654 = n;
 		}
 next:
-		if (fcn_005373e0((void*) fcn_005c3cc0, 0x677c7) == 0) {
+		if (fcn_005373e0((void*) d2_RunFireExtinguishDialog, 0x677c7) == 0) {
 			break;
 		}
 	} while (1);

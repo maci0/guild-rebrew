@@ -21,7 +21,7 @@ typedef struct {
 } tbl18;
 // SIZE 0x18
 
-int __cdecl fcn_004e8a80(int, rec18*);
+int __cdecl amt_FindOfficeSlotByType(int, rec18*);
 char* __cdecl gm_LookupEntityRecordById(int);
 
 char* __cdecl fcn_004e9110(int kind)
@@ -29,11 +29,11 @@ char* __cdecl fcn_004e9110(int kind)
 	rec18 r;
 
 	if (kind == 0x24) {
-		if (fcn_004e8a80(0x27, &r) != 0)
+		if (amt_FindOfficeSlotByType(0x27, &r) != 0)
 			return gm_LookupEntityRecordById(r.id);
 	}
 	else if (kind == 0x25 || kind == 0x23) {
-		if (fcn_004e8a80(0x26, &r) != 0)
+		if (amt_FindOfficeSlotByType(0x26, &r) != 0)
 			return gm_LookupEntityRecordById(r.id);
 	}
 	return 0;

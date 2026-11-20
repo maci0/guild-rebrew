@@ -36,7 +36,7 @@ extern unsigned char g_773d75;
 
 
 
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5f60(int, int, int);
 int __cdecl fcn_004c6090(Player*, int, int, int);
@@ -67,7 +67,7 @@ void __cdecl fcn_005153f0(void)
 				int value = 0xfa00;
 
 				fcn_004c4510((char*) p, p->id);
-				fcn_004c4570(4, 1, (char*) p - g_aed32c + 0x39, &value);
+				cm_AppendPacketFieldDelta(4, 1, (char*) p - g_aed32c + 0x39, &value);
 				fcn_004c5360();
 				fcn_004c5f60(p->id, e->entity_id, e->entity_id);
 				fcn_004c6090(p, 1, 0, ((Office*)lpGebaeudePROT)[p->office].level);

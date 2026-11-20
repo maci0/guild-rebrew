@@ -9,7 +9,7 @@ typedef struct {
 } Item5cba60;
 // SIZE 0x38
 
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005ca560(Item5cba60*);
@@ -26,7 +26,7 @@ int __cdecl fcn_005cba60(unsigned short* who, unsigned int max, Item5cba60* out,
 	int i;
 
 	count = 0;
-	for (t = fcn_005463a0(1, 0, 0x6f); t != 0 && count < 4; t = he_fn_Handlung()) {
+	for (t = he_StartHandlungSearch(1, 0, 0x6f); t != 0 && count < 4; t = he_fn_Handlung()) {
 		if (*(int*) (t + 0xac) == *(int*) (who + 2)) {
 			q = gm_LookupEntityRecordById(*(int*) (t + 0xb0));
 			if (q != 0) {

@@ -1,10 +1,10 @@
 /* Master-dialog message loop: reads the 0x11 request packet, resolves the
    object, shows the 0x6ab180 dialog and forwards the 0x39 reply while
    fcn_005373e0 keeps the loop alive. */
-int __cdecl fcn_004e8a80(int, void*);
+int __cdecl amt_FindOfficeSlotByType(int, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00526120(int, int);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 void* __cdecl fcn_00470820(int, int, void*);
 void __cdecl d2_CenterDialogWindows(void*);
@@ -34,7 +34,7 @@ typedef struct Dlg005ad000 {
 extern int g_14ce8e0;
 extern int d2_CurrentElementId;
 /* ADDRESS: GOLDTL 0x005ad000 */
-void __cdecl fcn_005ad000(void)
+void __cdecl d2_RunKerkermeisterBribeDialog(void)
 {
 	Dlg005ad000 msg;
 	char* obj;
@@ -44,7 +44,7 @@ void __cdecl fcn_005ad000(void)
 	int h;
 	int id;
 
-	if (fcn_004e8a80(0x11, msg.pkt) == 0) {
+	if (amt_FindOfficeSlotByType(0x11, msg.pkt) == 0) {
 		return;
 	}
 	obj = gm_LookupEntityRecordById(*(int*) (msg.pkt + 4));
@@ -53,7 +53,7 @@ void __cdecl fcn_005ad000(void)
 		fcn_00532ef0();
 		return;
 	}
-	if (fcn_005463a0(2, 0, 0x39, 2, *(unsigned short*) &g_774970) != 0) {
+	if (he_StartHandlungSearch(2, 0, 0x39, 2, *(unsigned short*) &g_774970) != 0) {
 		io_FormatTextBuffer(msg.pkt + 0x110, 0x19b6, *(unsigned short*) obj);
 		fcn_00526120((int) (msg.pkt + 0x110), 0);
 		fcn_00532ef0();

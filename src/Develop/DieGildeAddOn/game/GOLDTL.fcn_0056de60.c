@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 unsigned char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_004c6090(unsigned char*, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -24,7 +24,7 @@ void __cdecl fcn_0056de60(char* o)
 	k = 0;
 	r = gm_SearchTable67(*(int*) (o + 0xb4));
 	if (r == 0) {
-		fcn_00546190(o);
+		he_FreeAction(o);
 		return;
 	}
 	t = lpGebaeudePROT + *r * 0x24d;

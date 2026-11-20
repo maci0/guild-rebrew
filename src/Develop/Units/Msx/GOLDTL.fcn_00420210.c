@@ -11,7 +11,7 @@ extern int g_678160;
 extern int g_6b7190;
 extern volatile int g_6b7fac;
 
-int __cdecl fcn_0042af10(int h);
+int __cdecl msx_GetStreamStatus(int h);
 int __cdecl fcn_0042ae10(int h, int v);
 void __cdecl SetMasterVolume(int vol);
 
@@ -45,10 +45,10 @@ void __cdecl fcn_00420210(void)
 			if (c->bAmbient != 0) {
 				continue;
 			}
-			if (fcn_0042af10(c->handle) != 4 && fcn_0042af10(c->handle) != 0x10) {
+			if (msx_GetStreamStatus(c->handle) != 4 && msx_GetStreamStatus(c->handle) != 0x10) {
 				c->active = 0;
 				c->f114 = 0;
-				fcn_0042ac40(c->handle);
+				msx_CloseStream(c->handle);
 				c->handle = 0;
 				if (c->next != 0 && c->next->handle != 0) {
 					fcn_0042ad90(c->next->handle, 0);
@@ -92,7 +92,7 @@ void __cdecl fcn_00420210(void)
 						c->f114 = 0;
 						c->f11c = 0;
 						fcn_0042ae10(c->handle, 0);
-						fcn_0042ac40(c->handle);
+						msx_CloseStream(c->handle);
 						c->handle = 0;
 						c->active = 0;
 						if (c->next != 0) {
@@ -106,7 +106,7 @@ void __cdecl fcn_00420210(void)
 					c->f114 = v;
 					c->f11c = v;
 					fcn_0042ae10(c->handle, v);
-					fcn_0042ac40(c->handle);
+					msx_CloseStream(c->handle);
 					c->handle = 0;
 					c->active = 0;
 					if (c->next != 0) {

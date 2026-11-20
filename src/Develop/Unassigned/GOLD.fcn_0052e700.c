@@ -13,24 +13,24 @@ extern int g_6ed938;
 extern unsigned char* g_6f2308;
 extern unsigned char* g_6f230c;
 
-void __cdecl fcn_004731c0(int, int, int, int);
+void __cdecl d2_AddElementToWindow(int, int, int, int);
 
-void __cdecl fcn_0052e700(int wnd, int page, int icon)
+void __cdecl d2_DrawWindowFrame(int wnd, int page, int icon)
 {
 	unsigned char* p;
 
-	fcn_004731c0(0x257, 9, 0x520, wnd);
+	d2_AddElementToWindow(0x257, 9, 0x520, wnd);
 	if (icon != 0) {
-		fcn_004731c0(0xb, 9, icon, wnd);
+		d2_AddElementToWindow(0xb, 9, icon, wnd);
 	} else {
 		p = g_6f2308;
 		if (p == 0) {
 			p = g_6f230c;
 		}
 		if (p == 0) {
-			fcn_004731c0(0xb, 9, 0x520, wnd);
+			d2_AddElementToWindow(0xb, 9, 0x520, wnd);
 		} else {
-			fcn_004731c0(0xb, 9, *p + 0x427, wnd);
+			d2_AddElementToWindow(0xb, 9, *p + 0x427, wnd);
 		}
 	}
 	p = g_6f2308;
@@ -38,23 +38,23 @@ void __cdecl fcn_0052e700(int wnd, int page, int icon)
 		p = g_6f230c;
 	}
 	if (p == 0) {
-		fcn_004731c0(0x257, 9, 0x444, wnd);
+		d2_AddElementToWindow(0x257, 9, 0x444, wnd);
 	} else if (page != 0x73b) {
-		fcn_004731c0(0x257, 9, *p + 0x427, wnd);
+		d2_AddElementToWindow(0x257, 9, *p + 0x427, wnd);
 	} else {
-		fcn_004731c0(0x1eb, 9, 0x520, wnd);
-		fcn_004731c0(0x1eb, 9, *p + 0x427, wnd);
+		d2_AddElementToWindow(0x1eb, 9, 0x520, wnd);
+		d2_AddElementToWindow(0x1eb, 9, *p + 0x427, wnd);
 	}
 	if (page != 0x73b) {
-		fcn_004731c0(0, 0, page, wnd);
-		fcn_004731c0(0, 0x190, page + 1, wnd);
-		fcn_004731c0(0, 0x4d, page + 2, wnd);
-		fcn_004731c0(0x247, 0x4d, page + 3, wnd);
+		d2_AddElementToWindow(0, 0, page, wnd);
+		d2_AddElementToWindow(0, 0x190, page + 1, wnd);
+		d2_AddElementToWindow(0, 0x4d, page + 2, wnd);
+		d2_AddElementToWindow(0x247, 0x4d, page + 3, wnd);
 	} else {
-		fcn_004731c0(0, 0, 0x73b, wnd);
-		fcn_004731c0(0, 0x43, 0x73d, wnd);
-		fcn_004731c0(0x1f7, 0x43, 0x73e, wnd);
-		fcn_004731c0(0, 0x1a8, 0x73c, wnd);
+		d2_AddElementToWindow(0, 0, 0x73b, wnd);
+		d2_AddElementToWindow(0, 0x43, 0x73d, wnd);
+		d2_AddElementToWindow(0x1f7, 0x43, 0x73e, wnd);
+		d2_AddElementToWindow(0, 0x1a8, 0x73c, wnd);
 	}
 	((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_6ed938].margin[0] = 0x18;
 	((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_6ed938].margin[1] = 0x18;

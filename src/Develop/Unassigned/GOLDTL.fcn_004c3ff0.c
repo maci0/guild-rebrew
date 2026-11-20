@@ -21,7 +21,7 @@ typedef struct node99 {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char* g_14cbca8;
 
-int __cdecl fcn_004c49f0(node99*);
+int __cdecl cm_EnqueueCommand(node99*);
 void __cdecl nt_FlushSend(void);
 
 int __cdecl fcn_004c3ff0(void)
@@ -30,7 +30,7 @@ int __cdecl fcn_004c3ff0(void)
 		return 0;
 	if (g_14cbca0 == -1) {
 		while (1) {
-			if (fcn_004c49f0((*(node99**)&g_1005760)) != 0)
+			if (cm_EnqueueCommand((*(node99**)&g_1005760)) != 0)
 				break;
 			(*(node99**)&g_1005760) = (*(node99**)&g_1005760)->next;
 			if ((*(node99**)&g_1005760) == 0)

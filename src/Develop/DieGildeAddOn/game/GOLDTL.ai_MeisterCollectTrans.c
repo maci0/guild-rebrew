@@ -17,7 +17,7 @@ typedef struct BuildingRow489250 { unsigned char kind; char fields[0x246]; unsig
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_ResolveEntityById(void**, void**, int, int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c51f0(int, int, int, int, char, int);
@@ -65,14 +65,14 @@ void __cdecl ai_MeisterCollectTrans(char* e)
 				if (v3 == 0x136) {
 					n136++;
 				}
-				u = fcn_005463a0(2, 0, 0xb, 3, *(int*) (*(char**) (e + 0x16c) + 1));
+				u = he_StartHandlungSearch(2, 0, 0xb, 3, *(int*) (*(char**) (e + 0x16c) + 1));
 				while (u != 0) {
 					if (*(int*) (u + 0xac) == *(int*) (slot + 2)) {
 						goto next;
 					}
 					u = he_fn_Handlung();
 				}
-				u = fcn_005463a0(2, 0, 0xf, 2,
+				u = he_StartHandlungSearch(2, 0, 0xf, 2,
 				                 *(unsigned short*) (*(char**) (e + 0x16c) + 0x27));
 				while (u != 0) {
 					if (*(int*) (u + 0xac) == *(int*) (slot + 2)) {

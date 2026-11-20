@@ -6,7 +6,7 @@ void* __cdecl gm_LookupEntityRecordById(int id);
  * 0x20c of every entity named in the 0x34 count table, then tears the record
  * down and reports success into the result packet. */
 /* ADDRESS: GOLDTL 0x004cd500 */
-int __cdecl fcn_004cd500(int* cmd, unsigned char* result)
+int __cdecl cut_RemoveCutsceneCommand(int* cmd, unsigned char* result)
 {
 	unsigned char* rec;
 	int h;

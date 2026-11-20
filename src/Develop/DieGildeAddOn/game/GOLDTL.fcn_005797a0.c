@@ -16,7 +16,7 @@ extern unsigned char g_773d75;
 
 extern int __cdecl fcn_00500e20(int* p);
 extern void __cdecl fcn_00500bb0(void* clock, int a, int b, int c);
-extern void __cdecl fcn_00546190(char* record);
+extern void __cdecl he_FreeAction(char* record);
 extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 extern void* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
@@ -67,7 +67,7 @@ void __cdecl fcn_005797a0(char* event)
 		return;
 	}
 	if (*(unsigned short*) (event + 8) == 0xffff || *(int*) (event + 0xc) == -1) {
-		fcn_00546190(event);
+		he_FreeAction(event);
 		return;
 	}
 	count = 0;
@@ -178,5 +178,5 @@ void __cdecl fcn_005797a0(char* event)
 			fcn_00529160(0, 0, *(unsigned short*) entity, 0);
 		p8c++;
 	}
-	fcn_00546190(event);
+	he_FreeAction(event);
 }

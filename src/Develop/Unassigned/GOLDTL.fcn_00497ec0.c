@@ -22,7 +22,7 @@ typedef struct {
 	char rest[0x24c];
 } BldProt_497ec0;
 
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl fcn_0050d320(short*, unsigned char);
 int __cdecl fcn_0050d200(short*, int);
 int __cdecl fcn_0050d170(int);
@@ -56,7 +56,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 				return 0;
 		}
 	}
-	if (fcn_005463a0(2, 0, 0xd, 2, *(unsigned short*) entity) != 0)
+	if (he_StartHandlungSearch(2, 0, 0xd, 2, *(unsigned short*) entity) != 0)
 		return 0;
 	p = (int) g_entity_ptr;
 	n = 0;

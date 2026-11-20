@@ -22,7 +22,7 @@ typedef struct
 
 void* __cdecl cut_FindCutsceneById(unsigned int);
 
-void* __cdecl fcn_004e68d0(void)
+void* __cdecl cut_FindLowestIdFlaggedCutscene(void)
 {
 	unsigned int best;
 	int i;

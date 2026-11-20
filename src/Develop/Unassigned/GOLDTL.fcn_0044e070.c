@@ -1,10 +1,10 @@
 
 
-char* __cdecl fcn_004011a0(void* stream, char* text);
+char* __cdecl vfs_ReadCString(void* stream, char* text);
 
-void __cdecl fcn_0044e070(void* inputStream)
+void __cdecl vfs_SkipCString(void* inputStream)
 {
 	char buf[0x100];
 
-	fcn_004011a0(inputStream, buf);
+	vfs_ReadCString(inputStream, buf);
 }

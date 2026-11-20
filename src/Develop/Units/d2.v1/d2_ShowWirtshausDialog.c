@@ -10,7 +10,7 @@ extern int g_100f1dc; extern int d2_CurrentWindowId; extern unsigned char g_773d
 float __cdecl fcn_0042e450(void);
 int __cdecl fcn_00433780();
 int __cdecl fcn_00438b40();
-int __cdecl fcn_00438cb0();
+int __cdecl d3_SetObjectRotation();
 int __cdecl CompareVector3WithinTolerance();
 int __cdecl d2_ClearWindowChildren();
 int __cdecl fcn_00470820();
@@ -34,11 +34,11 @@ int __cdecl fcn_0050b710(int a,unsigned char b);
 int __cdecl fcn_0050dac0(unsigned short a);
 int __cdecl io_AppendText();
 int __cdecl io_FormatTextBuffer();
-int __cdecl fcn_0052d820();
+int __cdecl d3_AnimateCameraToStoredTransform();
 int __cdecl fcn_00530510();
 int __cdecl fcn_005340f0();
 int __cdecl fcn_005373e0();
-int __cdecl fcn_005a0960();
+int __cdecl d2_ShowWirtshausRules();
 int __cdecl fcn_005a0cd0();
 int __cdecl fcn_005a1130();
 void __cdecl fcn_00532ef0(void);
@@ -75,7 +75,7 @@ void __cdecl fcn_00532ef0(void);
 #define v47 (*(unsigned int *)(frame + 0x388))
 
 /* ADDRESS: GOLDTL 0x005a1430 */
-void __cdecl fcn_005a1430(void)
+void __cdecl d2_ShowWirtshausDialog(void)
 {
 	unsigned int *  v1;
 	int *  v10;
@@ -149,7 +149,7 @@ label_5a15b5:
         if ((*(int *)0x67d370) != v28) { // branch-flip
           if ((*(int *)0x67d370) == v29) {
             fcn_00471af0(windowId,0);
-            fcn_005a0960();
+            d2_ShowWirtshausRules();
             fcn_00471af0(windowId,1);
           }
         }

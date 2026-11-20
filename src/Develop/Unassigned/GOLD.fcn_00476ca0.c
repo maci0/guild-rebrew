@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int __cdecl fcn_00479010(void*);
+int __cdecl d2_LockSurface(void*);
 int __cdecl fcn_004790d0(void*);
 int __cdecl fcn_0047cb30(int, int, int, int);
 void __cdecl fcn_0047c6e0(int, int, void*, int, unsigned char);
@@ -33,7 +33,7 @@ void __cdecl fcn_00476ca0(char* obj, int x, int y)
     if (*(int*) 0x6ed9d4 != 0)
         return;
     had_surface = *(int*) (obj + 0x34);
-    if (had_surface == 0 && fcn_00479010(obj) == 0)
+    if (had_surface == 0 && d2_LockSurface(obj) == 0)
         return;
     old_y = *(int*) 0x6f045c;
     old_width = *(int*) 0x5fed5c;

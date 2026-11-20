@@ -43,14 +43,14 @@ extern double g_6628f0;
 void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
 char* __cdecl ch_AttachAni(char*, char*, unsigned char);
-int __cdecl fcn_004339e0(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_FRAME*);
+int __cdecl d3_CreateObjectAnimation(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_FRAME*);
 void __cdecl fcn_00433780(char*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 /* ADDRESS: GOLDTL 0x004079f0 */
-void __cdecl fcn_004079f0(char* task)
+void __cdecl ch_ExecuteTurn90(char* task)
 {
 	D3_OBJ_ANIM_FRAME frames[2];
 	int type;
@@ -121,7 +121,7 @@ void __cdecl fcn_004079f0(char* task)
 			frames[1].position[0] = 0.0f;
 			frames[1].position[1] = 0.0f;
 			frames[1].position[2] = 0.0f;
-			*(int*) (owner + 0x78) = fcn_004339e0(*(char**) (*(char**) (task + 0x14) + 0x34),
+			*(int*) (owner + 0x78) = d3_CreateObjectAnimation(*(char**) (*(char**) (task + 0x14) + 0x34),
 							      flags, 2, frames);
 			return;
 		}
@@ -144,7 +144,7 @@ void __cdecl fcn_004079f0(char* task)
 		frames[1].position[0] = 0.0f;
 		frames[1].position[1] = 0.0f;
 		frames[1].position[2] = 0.0f;
-		*(int*) (owner + 0x78) = fcn_004339e0(*(char**) (*(char**) (task + 0x14) + 0x34),
+		*(int*) (owner + 0x78) = d3_CreateObjectAnimation(*(char**) (*(char**) (task + 0x14) + 0x34),
 						      flags, 2, frames);
 		return;
 	}
@@ -161,7 +161,7 @@ void __cdecl fcn_004079f0(char* task)
 		if ((*(unsigned char*) (*(char**) (owner + 0x70) + 0x6d) & 0x20) != 0) {
 			d3_RemoveObjectAnimation(*(char**) (*(char**) (*(char**) (task + 0x14) + 0x34) + 0x1ec) + 0xf4,
 				     *(char**) (*(char**) (owner + 0x70) + 0x68));
-			fcn_00438cb0(*(char**) (*(char**) (task + 0x14) + 0x34),
+			d3_SetObjectRotation(*(char**) (*(char**) (task + 0x14) + 0x34),
 				     (float*) (task + 0x18));
 			fcn_00433780(*(char**) (*(char**) (task + 0x14) + 0x34));
 			*(int*) (owner + 0x78) = 0;

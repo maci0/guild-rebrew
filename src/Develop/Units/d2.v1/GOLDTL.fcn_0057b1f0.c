@@ -3,7 +3,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_00545780(char* a);
-void __cdecl fcn_00546190(char* a);
+void __cdecl he_FreeAction(char* a);
 int __cdecl fcn_00545670(char* a, int b, int c, char* d, int e);
 void __cdecl fcn_0057b070(char* a);
 void __cdecl fcn_0057b160(char* a);
@@ -22,7 +22,7 @@ void __cdecl fcn_0057b1f0(char* a)
 	if (state == -2) {
 		if (*(int*) (a + 0x74) != 0)
 			fcn_00545780(a);
-		fcn_00546190(a);
+		he_FreeAction(a);
 		return;
 	}
 	switch (state) {
@@ -40,7 +40,7 @@ void __cdecl fcn_0057b1f0(char* a)
 		if (*(int*) 0x100f1dc == 2) {
 			fcn_0057b070(a);
 			fcn_00545780(a);
-			fcn_00546190(a);
+			he_FreeAction(a);
 			return;
 		}
 		if (*(int*) 0x100f1dc != 1)
@@ -48,13 +48,13 @@ void __cdecl fcn_0057b1f0(char* a)
 	activate:
 		fcn_0057b160(a);
 		fcn_00545780(a);
-		fcn_00546190(a);
+		he_FreeAction(a);
 		return;
 	case 0:
 		if (*(int*) (a + 0x74) == 0)
 			fcn_00545670(a, 0, 0, (char*) 0x6a5a10, 0x5ec);
 	if (*(int*) (a + 0x74) == 0) {
-		fcn_00546190(a);
+		he_FreeAction(a);
 		return;
 	}
 	d2_CenterDialogWindows(*(int*) (*(int*) (a + 0x74) + 8));

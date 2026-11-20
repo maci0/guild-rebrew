@@ -8,8 +8,8 @@ extern char g_6ab07c[];
 
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_005338d0(char*, int, int);
-void __cdecl fcn_005abfd0(int);
+int __cdecl RegisterStatusText(char*, int, int);
+void __cdecl d2_OpenBeichteDialog(int);
 
 void __cdecl fcn_005ac250(int a)
 {
@@ -19,10 +19,10 @@ void __cdecl fcn_005ac250(int a)
 	fcn_005338a0();
 	while (fcn_005373e0(fcn_005ac250, 0x67fff) != 0) {
 		if (!(g_7746d8 & 0x200)) {
-			x = fcn_005338d0(g_6ab07c, g_14ab918, 0x16);
+			x = RegisterStatusText(g_6ab07c, g_14ab918, 0x16);
 		}
 		if (g_7746a0 != 0 && !(g_7746d8 & 0x200) && g_7746a0 == x) {
-			fcn_005abfd0(a);
+			d2_OpenBeichteDialog(a);
 		}
 	}
 }

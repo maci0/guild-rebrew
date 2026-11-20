@@ -1,4 +1,4 @@
-char* __cdecl fcn_005463a0(int, ...);
+char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 /* ADDRESS: GOLD 0x004eb180 */
 int __cdecl fcn_004eb180(char* owner, int* id, float* fraction, int include)
@@ -6,7 +6,7 @@ int __cdecl fcn_004eb180(char* owner, int* id, float* fraction, int include)
     char* event;
     float value;
     float rest;
-    event = fcn_005463a0(1, 3, *(int*) (owner + 1));
+    event = he_StartHandlungSearch(1, 3, *(int*) (owner + 1));
     while (event) {
         switch (*(unsigned char*) event) {
         case 149:

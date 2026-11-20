@@ -22,7 +22,7 @@ void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_005bdc30(int, Req*, int, void*, int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
-void __cdecl fcn_0059d060(void);
+void __cdecl d2_RunTaschendiebstahlDialog(void);
 
 void __cdecl fcn_0059d310(int a)
 {
@@ -34,7 +34,7 @@ void __cdecl fcn_0059d310(int a)
 	req.kind = 7;
 	req.c = 0x93810;
 	fcn_0052a0c0(a, 0);
-	fcn_005bdc30(1, &req, g_14abad4, (void*) fcn_0059d060, 0);
+	fcn_005bdc30(1, &req, g_14abad4, (void*) d2_RunTaschendiebstahlDialog, 0);
 	fcn_0052a2d0();
 	sv_ClearObjectSelection();
 }

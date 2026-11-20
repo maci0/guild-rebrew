@@ -13,7 +13,7 @@
 
 /* Builds the item to building assignment tables. */
 /* ADDRESS: GOLD 0x004fe370 */
-void __cdecl fcn_004fe370(void)
+void __cdecl gm_InitItemBuildingMap(void)
 {
 	unsigned char* p;
 	unsigned char* q;

@@ -36,7 +36,7 @@ extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
 
-int __cdecl fcn_004e8a80(int id, int* out);
+int __cdecl amt_FindOfficeSlotByType(int id, int* out);
 char* __cdecl fcn_004e9110(int kind);
 float __cdecl fcn_004ad500(unsigned char* a1, unsigned short* a2, int a3, int a4);
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
@@ -67,7 +67,7 @@ void __cdecl fcn_004ad6a0(void)
 	}
 	id = g_664e10[g_7728d0];
 	mask = g_664e34[g_7728d0];
-	if (fcn_004e8a80(id, info) == 0) {
+	if (amt_FindOfficeSlotByType(id, info) == 0) {
 		return;
 	}
 	memset(hits, 0, sizeof(hits));

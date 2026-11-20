@@ -16,10 +16,10 @@ void __cdecl fcn_00545d40(int a0, int a1, char* buf, int a3, int a4, char* text)
 int __cdecl fcn_004f4f60(int a0, int a1, int a2, int a3, int a4);
 void __cdecl fcn_004c54c0(int a0, int a1, int a2, int a3);
 int __cdecl fcn_0055be70(int* a0);
-int __cdecl fcn_005463a0(int a0, int a1, int a2);
+int __cdecl he_StartHandlungSearch(int a0, int a1, int a2);
 int __cdecl fcn_004c58b0(int a0, int a1);
 void __cdecl fcn_004c57e0(int a0, int a1);
-void __cdecl fcn_00546190(int a0);
+void __cdecl he_FreeAction(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00562ba0 */
 void __cdecl fcn_00562ba0(int eventCursor)
@@ -113,7 +113,7 @@ label_562e74:
 			return;
 		}
 		v6 = gm_StartFilteredEntitySearch(1, 1, *(int*) (eventBase + 0xac));
-		v4 = fcn_005463a0(1, 1, *(int*) (eventBase + 0xd4));
+		v4 = he_StartHandlungSearch(1, 1, *(int*) (eventBase + 0xd4));
 		if (v6 != 0 && v4 != 0 && *(int*) (v4 + 0xd4) == *(int*) (eventBase + 4) && *(int*) (eventBase + 0xcc) != -1) {
 			v6 = gm_LookupEntityRecordById(*(int*) (eventBase + 0xd4));
 			v7 = fcn_004c4480(*(int*) (eventBase + 0xcc));
@@ -127,7 +127,7 @@ label_562e74:
 		*(int*) (eventBase + 0x70) = -1;
 		return;
 	case 9:
-		v6 = fcn_005463a0(1, 1, *(int*) (eventBase + 0xd4));
+		v6 = he_StartHandlungSearch(1, 1, *(int*) (eventBase + 0xd4));
 		if (v6 == 0) {
 			*(int*) (eventBase + 0x70) = -1;
 			return;
@@ -228,7 +228,7 @@ label_563129:
 		if (*(int*) (eventBase + 0xc8) != -1) {
 			fcn_004c57e0(*(int*) (eventBase + 0xc8), 1);
 		}
-		fcn_00546190(eventBase);
+		he_FreeAction(eventBase);
 		return;
 	}
 }

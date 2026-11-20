@@ -23,9 +23,9 @@ extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 extern char g_77531c;
 
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_0057eba0(int, char*, int, int);
+int __cdecl d2_DispatchTutorialEvent(int, char*, int, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_0050de80(char*, char*);
@@ -41,11 +41,11 @@ int __cdecl fcn_005b9df0(int idx, char* p, char* q, char* r)
 	char info[0xb8];
 
 	res = 0;
-	for (e = fcn_005463a0(2, 3, *(int*) (p + 2), 0, 0x11); e != 0; e = he_fn_Handlung()) {
+	for (e = he_StartHandlungSearch(2, 3, *(int*) (p + 2), 0, 0x11); e != 0; e = he_fn_Handlung()) {
 		*(pos14_7f4c00*) (e + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
 		*(int*) (e + 0x70) = -1;
 	}
-	if (fcn_0057eba0(0x24, r, 0, 0) == 1) {
+	if (d2_DispatchTutorialEvent(0x24, r, 0, 0) == 1) {
 		memset(msg, 0, sizeof(msg));
 		msg[4] = 0xf;
 		*(int*) (msg + 8) = ((ENTITY_RECORD*)g_7f4ca0)[idx].entity_id;

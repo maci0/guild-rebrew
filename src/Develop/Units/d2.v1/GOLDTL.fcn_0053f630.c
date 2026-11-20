@@ -8,7 +8,7 @@ int __cdecl fcn_00472250(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0046ac30(void);
 
-void __cdecl fcn_0053f630(int a, int pct)
+void __cdecl d2_SetProgressPercent(int a, int pct)
 {
 	int t;
 

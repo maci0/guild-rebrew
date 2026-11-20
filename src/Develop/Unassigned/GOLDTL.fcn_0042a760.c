@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl fcn_0042a6a0(int);
 
-int __cdecl fcn_0042a760(void)
+int __cdecl msx_ReleaseAllWaveSamples(void)
 {
 	int r = 0;
 	int i;

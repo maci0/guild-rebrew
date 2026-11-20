@@ -13,7 +13,7 @@ int __cdecl fcn_00472a90(short, short, short, short, unsigned int, int);
 void __cdecl fcn_004721d0(char*, int);
 int __cdecl fcn_00468880(char*);
 void __cdecl d2_AddRefcount(int);
-int __cdecl fcn_004731c0(short, short, int, int);
+int __cdecl d2_AddElementToWindow(short, short, int, int);
 int __cdecl fcn_0042e770(char*);
 int __cdecl d2_ShowTxt(short, short, char*, int);
 int __cdecl fcn_0046a350(int, int, int, int, unsigned char, int);
@@ -136,7 +136,7 @@ int __cdecl fcn_004741e0(short x, short y, char* name)
             if (I32(record + 0xd0 + j * 4) <= 0x3f) {
                 resource = fcn_00468880(imageName);
                 if (resource != -1) {
-                    element = fcn_004731c0(S16(record + 0xc + j * 2), S16(record + 0x6c + j * 2), resource, windowID);
+                    element = d2_AddElementToWindow(S16(record + 0xc + j * 2), S16(record + 0x6c + j * 2), resource, windowID);
                     if (I32(aux) == 0x12) {
                         g_00f8f080[element].dirty = 1;
                         g_00f8f080[element].f4c = 0;

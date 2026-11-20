@@ -22,7 +22,7 @@ int __cdecl fcn_004c3100(char*, int);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x00581e20 */
-TaskNode* __cdecl fcn_00581e20(void)
+TaskNode* __cdecl d2_CreateTutorialChapter3(void)
 {
 	int* first;
 	int* p;

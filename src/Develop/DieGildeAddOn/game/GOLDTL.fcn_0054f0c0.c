@@ -43,7 +43,7 @@ void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, Order_54f0c0*);
-void __cdecl fcn_00546190(Order_54f0c0*);
+void __cdecl he_FreeAction(Order_54f0c0*);
 
 
 /* ADDRESS: GOLDTL 0x0054f0c0 */
@@ -66,7 +66,7 @@ void __cdecl fcn_0054f0c0(Order_54f0c0* o)
 				fcn_004c5420(b->id, 0x1c8, 4, 0, 0x200);
 			}
 		}
-		fcn_00546190(o);
+		he_FreeAction(o);
 		break;
 	case 2:
 		if (o->flags & 2) {

@@ -21,14 +21,14 @@ extern int g_6b89b0;
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 int __cdecl CloseVfsStream(void* stream);
 int __cdecl vfs_ReadByte(void* stream, void* dst);
-char* __cdecl fcn_004011a0(void* stream, char* dst);
+char* __cdecl vfs_ReadCString(void* stream, char* dst);
 int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 void __cdecl fcn_00401280(void* stream, void* dst);
 void __cdecl ReportClientMessage(const char* msg);
 void __cdecl fcn_00438920(float a, float b, int c);
 void __cdecl fcn_00438b40(char* object, int* vector);
-void __cdecl fcn_00438cb0(char* object, int* vector);
+void __cdecl d3_SetObjectRotation(char* object, int* vector);
 char* __cdecl fcn_00437890(char* object);
 void __cdecl d3_DisposeObject(char* object);
 void __cdecl fcn_00439aa0(char* object);
@@ -91,7 +91,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 	}
 	g_6b86d4++;
 	if (version >= 0x3a6c000b) {
-		fcn_004011a0(s, name);
+		vfs_ReadCString(s, name);
 		fcn_004011d0(s, &discarded);
 		fcn_00401280(s, &vec);
 		g_67bbdc.x = vec.x;
@@ -184,7 +184,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 				g_6b8484 = obj;
 				if ((obj[0x214] & 0x40) != 0) {
 					fcn_00438b40(obj, (int*) (obj + 0x5c));
-					fcn_00438cb0(obj, (int*) (obj + 0x90));
+					d3_SetObjectRotation(obj, (int*) (obj + 0x90));
 				}
 				fcn_00439c60(obj);
 				break;

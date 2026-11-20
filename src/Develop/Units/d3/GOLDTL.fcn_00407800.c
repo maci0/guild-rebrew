@@ -7,7 +7,7 @@ int* __cdecl fcn_00442910(int, float*, float*, char*);
 void __cdecl fcn_0043a720(int*, char*);
 
 /* ADDRESS: GOLDTL 0x00407800 */
-void __cdecl fcn_00407800(char* e, int mode, char* name)
+void __cdecl ch_SetBodyAttachment(char* e, int mode, char* name)
 {
 	int* slot;
 

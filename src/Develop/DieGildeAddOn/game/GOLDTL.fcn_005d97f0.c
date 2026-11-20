@@ -16,7 +16,7 @@ int __cdecl gm_GetOppositeStatIndex(int, int);
 void __cdecl fcn_0046f9b0(int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(void*, ...);
 int __cdecl fcn_00526120(int, int);
 void __cdecl d2_SetGroupVisibility(int, int);
@@ -114,7 +114,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
             g_774654 = 1;
         }
         if (g_14ce8d8 && d2_CurrentElementId != -1) {
-            if (fcn_005463a0(2, 2, g_774970, 0, 0x26)) {
+            if (he_StartHandlungSearch(2, 2, g_774970, 0, 0x26)) {
                 v7 = (unsigned int) g_774970 * 0x21c;
                 io_FormatTextBuffer(v12, 0x15bd, g_774970,
                              *(unsigned char*) (v7 + 0x7f4e04) +

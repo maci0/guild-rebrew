@@ -10,14 +10,14 @@ extern int g_14b5ab4;
 
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_005338d0(char*, int, int);
+int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_0058d5f0(int);
-void __cdecl fcn_005ba8e0(int);
+void __cdecl d2_OpenTransportPanel(int);
 void __cdecl fcn_005944d0(int);
-void __cdecl fcn_005be140(int, int);
+void __cdecl d2_ShowLagerOptions(int, int);
 void __cdecl fcn_005cf560(int);
-void __cdecl fcn_005e6650(int);
-void __cdecl fcn_005b6300(int, char*);
+void __cdecl d2_OpenBlutracheDialog(int);
+void __cdecl d2_ShowPersonalbuch(int, char*);
 void __cdecl fcn_0059a0e0(void);
 
 void __cdecl fcn_005e69f0(int a)
@@ -40,34 +40,34 @@ void __cdecl fcn_005e69f0(int a)
 	fcn_005338a0();
 	while (fcn_005373e0(fcn_005e69f0, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
-			zig = fcn_005338d0("contact_ZUTATEN_SUCHEN_ZIGEUNER", g_14b5b94, 0x16);
-			trans = fcn_005338d0("contact_TRANSPORT", g_14ad100, 0x15);
-			prod = fcn_005338d0("contact_PRODUKTION_ZIGEUNER", g_14ad0f8, 0x13);
-			lager = fcn_005338d0("contact_LAGER", g_14ad0f0, 0xe);
-			betteln = fcn_005338d0("contact_BETTELN", g_14b5ab4, 0x2c);
+			zig = RegisterStatusText("contact_ZUTATEN_SUCHEN_ZIGEUNER", g_14b5b94, 0x16);
+			trans = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
+			prod = RegisterStatusText("contact_PRODUKTION_ZIGEUNER", g_14ad0f8, 0x13);
+			lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
+			betteln = RegisterStatusText("contact_BETTELN", g_14b5ab4, 0x2c);
 		}
 		if (g_7746d8 & 0x400) {
-			personal = fcn_005338d0("contact_PERSONALBUCH", g_14a7b50, 0xc);
-			meister = fcn_005338d0("contact_MEISTERBRIEF", g_14a7d28, 0xc);
+			personal = RegisterStatusText("contact_PERSONALBUCH", g_14a7b50, 0xc);
+			meister = RegisterStatusText("contact_MEISTERBRIEF", g_14a7d28, 0xc);
 		}
 		if (g_7746a0 != 0) {
 			if (g_7746d8 & 0x200) {
 				if (g_7746a0 == zig) {
 					fcn_0058d5f0(a);
 				} else if (g_7746a0 == trans) {
-					fcn_005ba8e0(a);
+					d2_OpenTransportPanel(a);
 				} else if (g_7746a0 == prod) {
 					fcn_005944d0(a);
 				} else if (g_7746a0 == lager) {
-					fcn_005be140(a, 0);
+					d2_ShowLagerOptions(a, 0);
 				} else if (g_7746a0 == meister) {
 					fcn_005cf560(a);
 				} else if (g_7746a0 == betteln) {
-					fcn_005e6650(a);
+					d2_OpenBlutracheDialog(a);
 				}
 			}
 			if (g_7746a0 == personal) {
-				fcn_005b6300(a, "ob_PERSONALBUCH");
+				d2_ShowPersonalbuch(a, "ob_PERSONALBUCH");
 			}
 		}
 		fcn_0059a0e0();

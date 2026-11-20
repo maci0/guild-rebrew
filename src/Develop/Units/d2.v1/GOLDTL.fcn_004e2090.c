@@ -14,12 +14,12 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_004e44b0(char*, char*);
-int __cdecl fcn_004e4d00(int, int, int*);
+int __cdecl cut_WaitForTimeoutOrInput(int, int, int*);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_004e4b20(int, int, char*, int);
 int __cdecl fcn_00423460(int);
-int __cdecl fcn_004e4540(int, void*, int*);
+int __cdecl cut_WaitForScriptOrInput(int, void*, int*);
 int __cdecl fcn_004e1ff0(int*);
 
 /* ADDRESS: GOLDTL 0x004e2090 */
@@ -76,7 +76,7 @@ void __cdecl fcn_004e2090(int event)
 	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-create.esc", text);
 	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-intro.esc", g_6b5c60);
 	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden1.esc", g_6b5c60);
-	if (fcn_004e4d00(0x5dc, (int) fcn_004e1ff0, scene)) {
+	if (cut_WaitForTimeoutOrInput(0x5dc, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
 	fcn_00471af0(scene[1], 1);
@@ -85,22 +85,22 @@ void __cdecl fcn_004e2090(int event)
 	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_00", 0);
 	value = fcn_00423460(scene[3]);
 	while (value != 0) {
-		if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
+		if (cut_WaitForTimeoutOrInput(1000, (int) fcn_004e1ff0, scene)) {
 			return;
 		}
 		value = fcn_00423460(scene[3]);
 	}
-	if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
+	if (cut_WaitForTimeoutOrInput(1000, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
 	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
 	fcn_00471af0(scene[1], 0);
-	value = fcn_004e4540(scene[0], (void*) fcn_004e1ff0, scene);
+	value = cut_WaitForScriptOrInput(scene[0], (void*) fcn_004e1ff0, scene);
 	if (value != 0) {
 		return;
 	}
-	if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
+	if (cut_WaitForTimeoutOrInput(1000, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
 	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden2.esc", g_6b5c60);
@@ -110,18 +110,18 @@ void __cdecl fcn_004e2090(int event)
 	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_03", 0);
 	value = fcn_00423460(scene[3]);
 	while (value != 0) {
-		if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
+		if (cut_WaitForTimeoutOrInput(1000, (int) fcn_004e1ff0, scene)) {
 			return;
 		}
 		value = fcn_00423460(scene[3]);
 	}
-	if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
+	if (cut_WaitForTimeoutOrInput(1000, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
 	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
 	fcn_00471af0(scene[1], 0);
-	if (fcn_004e4d00(500, (int) fcn_004e1ff0, scene)) {
+	if (cut_WaitForTimeoutOrInput(500, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
 	fcn_00471af0(scene[1], 1);
@@ -130,15 +130,15 @@ void __cdecl fcn_004e2090(int event)
 	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_M", 0);
 	value = fcn_00423460(scene[3]);
 	while (value != 0) {
-		if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
+		if (cut_WaitForTimeoutOrInput(1000, (int) fcn_004e1ff0, scene)) {
 			return;
 		}
 		value = fcn_00423460(scene[3]);
 	}
-	if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
+	if (cut_WaitForTimeoutOrInput(1000, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	value = fcn_004e4540(scene[0], (void*) fcn_004e1ff0, scene);
+	value = cut_WaitForScriptOrInput(scene[0], (void*) fcn_004e1ff0, scene);
 	if (value != 0) {
 		return;
 	}
@@ -146,7 +146,7 @@ void __cdecl fcn_004e2090(int event)
 	fcn_00471af0(scene[1], 0);
 	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
-	if (fcn_004e4d00(0x5dc, (int) fcn_004e1ff0, scene)) {
+	if (cut_WaitForTimeoutOrInput(0x5dc, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
 	fcn_00471af0(scene[1], 1);
@@ -155,18 +155,18 @@ void __cdecl fcn_004e2090(int event)
 	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_01", 0);
 	value = fcn_00423460(scene[3]);
 	while (value != 0) {
-		if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
+		if (cut_WaitForTimeoutOrInput(1000, (int) fcn_004e1ff0, scene)) {
 			return;
 		}
 		value = fcn_00423460(scene[3]);
 	}
-	if (fcn_004e4d00(500, (int) fcn_004e1ff0, scene)) {
+	if (cut_WaitForTimeoutOrInput(500, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
 	fcn_00471af0(scene[1], 0);
 	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
-	if (fcn_004e4d00(500, (int) fcn_004e1ff0, scene)) {
+	if (cut_WaitForTimeoutOrInput(500, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
 	fcn_00471af0(scene[1], 1);
@@ -175,15 +175,15 @@ void __cdecl fcn_004e2090(int event)
 	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_W", 0);
 	value = fcn_00423460(scene[3]);
 	while (value != 0) {
-		if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
+		if (cut_WaitForTimeoutOrInput(1000, (int) fcn_004e1ff0, scene)) {
 			return;
 		}
 		value = fcn_00423460(scene[3]);
 	}
-	if (fcn_004e4d00(500, (int) fcn_004e1ff0, scene)) {
+	if (cut_WaitForTimeoutOrInput(500, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
-	value = fcn_004e4540(scene[0], (void*) fcn_004e1ff0, scene);
+	value = cut_WaitForScriptOrInput(scene[0], (void*) fcn_004e1ff0, scene);
 	if (value != 0) {
 		return;
 	}
@@ -193,18 +193,18 @@ void __cdecl fcn_004e2090(int event)
 	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_04", 0);
 	value = fcn_00423460(scene[3]);
 	while (value != 0) {
-		if (fcn_004e4d00(1000, (int) fcn_004e1ff0, scene)) {
+		if (cut_WaitForTimeoutOrInput(1000, (int) fcn_004e1ff0, scene)) {
 			return;
 		}
 		value = fcn_00423460(scene[3]);
 	}
-	if (fcn_004e4d00(500, (int) fcn_004e1ff0, scene)) {
+	if (cut_WaitForTimeoutOrInput(500, (int) fcn_004e1ff0, scene)) {
 		return;
 	}
 	fcn_00471af0(scene[1], 0);
 	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
-	if (fcn_004e4540(scene[0], (void*) fcn_004e1ff0, scene)) {
+	if (cut_WaitForScriptOrInput(scene[0], (void*) fcn_004e1ff0, scene)) {
 		return;
 	}
 	scene[0] = 0xffffffff;

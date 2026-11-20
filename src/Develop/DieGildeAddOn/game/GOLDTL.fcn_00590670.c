@@ -1,10 +1,10 @@
 #include "client_data.h"
 extern int g_100f888, g_6a99e8, g_14ce8e8, g_6772c4, d2_MouseX, d2_MouseY, d2_CurrentElementId, d2_SuppressOverlay;
 void __cdecl fcn_00471e30(int); void __cdecl fcn_004125c0(int, int);
-int __cdecl fcn_00591190(int);
-int __cdecl fcn_00590b80(int);
-int __cdecl fcn_005909d0(int);
-int __cdecl fcn_005913e0(int);
+int __cdecl d2_OpenObjektUpgradeTooltip(int);
+int __cdecl d2_ShowObjectTooltip(int);
+int __cdecl d2_CreateGebaeudeTooltip(int);
+int __cdecl d2_ShowContactTooltip(int);
 int __cdecl fcn_00591490(int*);
 void __cdecl fcn_004707d0(int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -110,21 +110,21 @@ void __cdecl fcn_00590670(void)
 		if (v4 != 0) {
 			b = *(unsigned char*) (*(int*) &lpObjektePROT + v4 * 0x41);
 			if (b != 0x20 && b != 0x17 && b != 0x25 && b != 0x27) {
-				tooltipWindow = fcn_00591190(v4);
+				tooltipWindow = d2_OpenObjektUpgradeTooltip(v4);
 			}
 			else {
-				tooltipWindow = fcn_00590b80(v4);
+				tooltipWindow = d2_ShowObjectTooltip(v4);
 			}
 			v3 = g_100f888;
 			g_6a99e8 = tooltipWindow;
 		}
 		else if (v6 != 0) {
-			tooltipWindow = fcn_005909d0(v6);
+			tooltipWindow = d2_CreateGebaeudeTooltip(v6);
 			v3 = g_100f888;
 			g_6a99e8 = tooltipWindow;
 		}
 		else if (v7 != 0) {
-			tooltipWindow = fcn_005913e0(v7);
+			tooltipWindow = d2_ShowContactTooltip(v7);
 			v3 = g_100f888;
 			g_6a99e8 = tooltipWindow;
 		}

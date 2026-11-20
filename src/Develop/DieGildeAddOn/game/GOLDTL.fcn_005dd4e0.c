@@ -1,7 +1,7 @@
 
 
 
-void __cdecl fcn_00508cf0(int, int*);
+void __cdecl gm_GenerateShuffledIndices(int, int*);
 void __cdecl fcn_005dcf40(unsigned char*, int);
 void __cdecl fcn_004c6330(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -17,7 +17,7 @@ int __cdecl fcn_005dd4e0(unsigned char* e, int* a2)
 
 	last = 0;
 	a2[4] = 1;
-	fcn_00508cf0(5, ids);
+	gm_GenerateShuffledIndices(5, ids);
 	i = 0;
 	count = 0;
 	while (count < 1 && i < 5) {

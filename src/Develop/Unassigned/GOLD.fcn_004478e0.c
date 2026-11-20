@@ -3,13 +3,13 @@
 void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_004475f0(char*);
 void __cdecl fcn_00438b40(char*, float*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl fcn_00439c60(char*);
-void __cdecl fcn_0045ef50(void*);
+void __cdecl d3sm_Destroy(void*);
 void __cdecl fcn_0045e610(void*, int);
-void* __cdecl fcn_0045eea0(int, int, int);
+void* __cdecl d3sm_Create(int, int, int);
 void __cdecl fcn_0045cdf0(char*);
-void __cdecl fcn_00438e60(char*, int, int, void*);
+void __cdecl d3_VisitSceneNodes(char*, int, int, void*);
 void __cdecl fcn_0043a6f0(int, int, int);
 #define I32(p) (*(int*)(p))
 #define U32(p) (*(unsigned int*)(p))
@@ -181,7 +181,7 @@ char __cdecl fcn_004478e0(int index, char force)
         camera = (char*)I32(0x6338c4);
         if (camera != 0) {
             fcn_00438b40(camera, (float*)(next + 0x8c));
-            fcn_00438cb0((char*)I32(0x6338c4), (float*)(next + 0x98));
+            d3_SetObjectRotation((char*)I32(0x6338c4), (float*)(next + 0x98));
             fcn_00439c60((char*)I32(0x6338c4));
         }
         if (force) {
@@ -189,14 +189,14 @@ char __cdecl fcn_004478e0(int index, char force)
         }
         if (I32(0x633738) != 0) {
             if (I32(0x633df8) != 0) {
-                fcn_0045ef50((void*)I32(0x633df8));
+                d3sm_Destroy((void*)I32(0x633df8));
                 I32(0x633df8) = 0;
             }
         } else if (I32(0x633df8) != 0) {
             fcn_0045e610((void*)I32(0x633df8), 0);
         } else {
-            I32(0x633df8) = (int)fcn_0045eea0(0, -I32(0x633dcc), 1);
-            fcn_00438e60((char*)I32(0x5fb5b0), 0, 0xc0, (void*)fcn_0045cdf0);
+            I32(0x633df8) = (int)d3sm_Create(0, -I32(0x633dcc), 1);
+            d3_VisitSceneNodes((char*)I32(0x5fb5b0), 0, 0xc0, (void*)fcn_0045cdf0);
         }
         I32(0xfc2dc8) = I32(0xfc2de0);
         I32(0xfc2dcc) = 0;

@@ -21,7 +21,7 @@ void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005d8e30(char* e, char* o)
+int __cdecl gm_HandleAbbitte(char* e, char* o)
 {
 	int ok;
 	int cancel;
@@ -71,7 +71,7 @@ int __cdecl fcn_005d8e30(char* e, char* o)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (fcn_005373e0((void*) fcn_005d8e30, 0x657c7) != 0);
+		} while (fcn_005373e0((void*) gm_HandleAbbitte, 0x657c7) != 0);
 		fcn_00471e30(dlg);
 		return r;
 	}

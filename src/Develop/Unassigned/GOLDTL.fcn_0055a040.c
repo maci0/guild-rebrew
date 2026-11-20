@@ -3,7 +3,7 @@
 
 extern pos14_7f4c00 gm_GameTime;
 
-extern void __cdecl fcn_00508cf0(int a, void* p);
+extern void __cdecl gm_GenerateShuffledIndices(int a, void* p);
 
 
 /* ADDRESS: GOLDTL 0x0055a040 */
@@ -12,7 +12,7 @@ void __cdecl fcn_0055a040(char* action)
 	int* p;
 	int n;
 
-	fcn_00508cf0(6, action + 0xb0);
+	gm_GenerateShuffledIndices(6, action + 0xb0);
 	p = (int*)(action + 0xb0);
 	n = 6;
 	do {

@@ -2,7 +2,7 @@
 
 /* ADDRESS: GOLD 0x004284a0 */
 /* ADDRESS: GOLDTL 0x00426cc0 */
-void* __cdecl fcn_00426cc0(int recordId)
+void* __cdecl evt_FindScriptById(int recordId)
 {
 	int i;
 	char* base;

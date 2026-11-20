@@ -25,10 +25,10 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0042a030(void);
 int __cdecl fcn_00429ce0(char*);
 int __cdecl sprintf(char*, const char*, ...);
-int __cdecl fcn_005b0f00(char*);
+int __cdecl d2_UpdateWindowDrag(char*);
 void __cdecl fcn_0046f280(int);
 
-void __cdecl fcn_005b3660(void)
+void __cdecl d2_ShowScriptMemory(void)
 {
 	D2_WIN* w;
 	char buf[0x100];
@@ -39,7 +39,7 @@ void __cdecl fcn_005b3660(void)
 
 	h = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[h].slot, 0x54);
-	while (fcn_005373e0((void*) fcn_005b3660, 0x657c7) != 0) {
+	while (fcn_005373e0((void*) d2_ShowScriptMemory, 0x657c7) != 0) {
 		w = &((D2_WIN*)g_1015f40)[h];
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
@@ -59,7 +59,7 @@ void __cdecl fcn_005b3660(void)
 			}
 		}
 		io_AppendText((int) s_6ab610, total);
-		fcn_005b0f00((char*)w);
+		d2_UpdateWindowDrag((char*)w);
 	}
 	fcn_0046f280(h);
 }

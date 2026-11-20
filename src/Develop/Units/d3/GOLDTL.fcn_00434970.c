@@ -14,7 +14,7 @@ void __cdecl fcn_004316c0(int obj);
 /* Claims the first free animation slot of the context, fills it from the
  * named animation and the 12-byte options block, and returns the slot. */
 /* ADDRESS: GOLDTL 0x00434970 */
-char* __cdecl fcn_00434970(char* context, char* name, D3_ANIMATION_OPTIONS options)
+char* __cdecl d3_AttachAnimationToContext(char* context, char* name, D3_ANIMATION_OPTIONS options)
 {
 	char* object;
 	char* base;

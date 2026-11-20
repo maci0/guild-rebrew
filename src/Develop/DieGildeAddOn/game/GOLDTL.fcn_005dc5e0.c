@@ -12,7 +12,7 @@ int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_005bdc30(int, int*, char*, int, int);
 int __cdecl fcn_004c5530(char*);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
+int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -112,7 +112,7 @@ int __cdecl fcn_005dc5e0(char* entity, int* target)
 	fcn_004c5530(buf);
 
 	fcn_004c4510((char*) *target, *(int*) (*target + 2));
-	fcn_004c4570(4, 1, (char*) *target + 0x25 - g_aed32c, pkt + 1);
+	cm_AppendPacketFieldDelta(4, 1, (char*) *target + 0x25 - g_aed32c, pkt + 1);
 	fcn_004c5360();
 	fcn_004c5420(*(int*) (pkt + 1), 0x5a, 2, 0x20, 0);
 

@@ -13,7 +13,7 @@ void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005aceb0 */
-void __cdecl fcn_005aceb0(char* obj)
+void __cdecl d2_RunKerkerplanDialog(char* obj)
 {
 	char* entry;
 	int h;
@@ -44,7 +44,7 @@ void __cdecl fcn_005aceb0(char* obj)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(fcn_005aceb0, 0x677c7) != 0);
+	} while (fcn_005373e0(d2_RunKerkerplanDialog, 0x677c7) != 0);
 	fcn_00532ef0();
 	fcn_00471e30(h);
 }

@@ -9,7 +9,7 @@ int __cdecl fcn_004011d0(void* stream, void* dst);
 #else
 int __cdecl fcn_004011f0(void* stream, void* dst);
 #endif
-char* __cdecl fcn_004011a0(void* stream, char* text);
+char* __cdecl vfs_ReadCString(void* stream, char* text);
 int __cdecl fcn_0043b500(char*);
 char __cdecl d3e_RegisterSceneEvent(char*, int, int, char*);
 
@@ -28,9 +28,9 @@ void __cdecl fcn_0043b850(void* r)
 	fcn_004011f0(r, &n);
 #endif
 	for (i = 0; i < n; i++) {
-		fcn_004011a0(r, name);
+		vfs_ReadCString(r, name);
 		id = fcn_0043b500(name);
-		fcn_004011a0(r, val);
+		vfs_ReadCString(r, val);
 		d3e_RegisterSceneEvent(((char*)g_67a370), id, (*(fcn_0043b850_f*)&g_67a590)(((char*)g_67a370), id, val), val);
 	}
 }

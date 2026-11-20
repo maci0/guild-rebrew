@@ -7,7 +7,7 @@ int __cdecl fcn_00508280(char*, int*, int*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
-void __cdecl fcn_0057bf60(char* a, char* b)
+void __cdecl he_ShowZigeunerMessage(char* a, char* b)
 {
 	int v0;
 	int v1;

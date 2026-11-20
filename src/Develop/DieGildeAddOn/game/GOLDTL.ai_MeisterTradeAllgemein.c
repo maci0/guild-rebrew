@@ -121,7 +121,7 @@ int __cdecl gm_AccumulateTyped2(void*);
 int __cdecl fcn_0050de80(char*, Stats*);
 int __cdecl fcn_0050dfd0(void*, int);
 char* __cdecl he_fn_Handlung(void);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0048b220 */
 int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld)
@@ -321,7 +321,7 @@ next_request:
 		}
 		/* 0x572-0x5f0: is the cart already unloaded? */
 		{
-			char* x = fcn_005463a0(
+			char* x = he_StartHandlungSearch(
 			    *(int*) (*(char**) (o + 0x16c) + 1),
 			    2, 0, 0xb, 3);
 

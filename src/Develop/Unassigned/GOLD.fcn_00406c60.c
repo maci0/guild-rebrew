@@ -6,7 +6,7 @@ void __cdecl fcn_00453270(char*);
 void __cdecl fcn_0043d6c0(char*, char*);
 extern int g_633444;
 /* ADDRESS: GOLD 0x00406c60 */
-void __cdecl fcn_00406c60(char* owner, int selector, int id)
+void __cdecl ch_SetAttachedObject(char* owner, int selector, int id)
 {
     char** slot = 0;
     float position[4] = {0,0,0,0};

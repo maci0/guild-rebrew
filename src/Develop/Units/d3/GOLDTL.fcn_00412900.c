@@ -22,7 +22,7 @@ extern char* d3_ActiveCamera;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d3_ActiveCameraAnimation;
 
-int* __cdecl fcn_004339e0(char* a0, flags_00412900 a1, int a2, frame_00412900* a3);
+int* __cdecl d3_CreateObjectAnimation(char* a0, flags_00412900 a1, int a2, frame_00412900* a3);
 
 /* ADDRESS: GOLDTL 0x00412900 */
 int* __cdecl d3_StartCameraAnimation(char* obj, float* pos, int id)
@@ -67,7 +67,7 @@ int* __cdecl d3_StartCameraAnimation(char* obj, float* pos, int id)
 	frames[4].drehung[0] = pos[0] - *(float*) (d3_ActiveCamera + 0x84);
 	frames[4].drehung[1] = pos[1] - *(float*) (d3_ActiveCamera + 0x88);
 	frames[4].drehung[2] = pos[2] - *(float*) (d3_ActiveCamera + 0x8c);
-	r = (unsigned char*) fcn_004339e0(d3_ActiveCamera, flags, 5, frames);
+	r = (unsigned char*) d3_CreateObjectAnimation(d3_ActiveCamera, flags, 5, frames);
 	d3_CameraAnimating = 1;
 	d3_ActiveCameraAnimation = (int) r;
 	r[0x2d] |= 8;

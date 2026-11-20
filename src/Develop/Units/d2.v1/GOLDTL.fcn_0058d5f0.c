@@ -15,12 +15,12 @@ extern int g_14ce8e0;
 
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_00525fb0(int);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 void* __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_00594340(void);
@@ -105,7 +105,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 	counts[0] = 0;
 	counts[1] = 0;
 	counts[2] = 0;
-	h = fcn_005463a0(2, 0, 0x8c, 3, *(unsigned int*) (gebaeude + 1));
+	h = he_StartHandlungSearch(2, 0, 0x8c, 3, *(unsigned int*) (gebaeude + 1));
 	while (h) {
 		j = 0;
 		do {
@@ -125,7 +125,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 	ids[3] = menu;
 	d2_CenterDialogWindows(menu);
 	d2_SetForm(menu, 0);
-	fcn_00533dc0(d2_CurrentWindowId, 0x70f, 0x741);
+	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(menu, 3);
 	screen = (*ents != 0x1f) ? 0x4128 : 0x421e;
 	io_AppendText(screen);
@@ -161,7 +161,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 		counts[0] = 0;
 		counts[1] = 0;
 		counts[2] = 0;
-		h = fcn_005463a0(2, 0, 0x8c, 3, *(unsigned int*) (gebaeude + 1));
+		h = he_StartHandlungSearch(2, 0, 0x8c, 3, *(unsigned int*) (gebaeude + 1));
 		while (h) {
 			j = 0;
 			do {

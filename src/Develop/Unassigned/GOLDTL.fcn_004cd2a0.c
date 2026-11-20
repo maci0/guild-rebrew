@@ -3,7 +3,7 @@
 
 #include "client_scene_transform.h"
 void __cdecl fcn_00438b40(char*, float*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 
 void __cdecl fcn_004cd2a0(char* e, float* pos, float* rot, int v)
 {
@@ -11,7 +11,7 @@ void __cdecl fcn_004cd2a0(char* e, float* pos, float* rot, int v)
 		if (CompareVector3WithinTolerance((float*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c), pos, 8.0f) == 0)
 			fcn_00438b40(*(char**) (*(char**) (e + 0x184) + 0x34), pos);
 		if (CompareVector3WithinTolerance((float*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x84), rot, 8.0f) == 0)
-			fcn_00438cb0(*(char**) (*(char**) (e + 0x184) + 0x34), rot);
+			d3_SetObjectRotation(*(char**) (*(char**) (e + 0x184) + 0x34), rot);
 		*(int*) (e + 0x24) = v;
 	}
 }

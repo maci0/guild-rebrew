@@ -2,7 +2,7 @@ extern int g_772ea4;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_0052ae80(void);
+void __cdecl d3_UpdateCameraAtScreenEdges(void);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl fcn_004cf180(void);
 int __cdecl fcn_004cf6b0(void);
@@ -25,7 +25,7 @@ void __cdecl fcn_004d4640(char* context)
 	int i;
 
 	while (g_772ea4 == 0 && fcn_005373e0(fcn_004d4640, 0x7d6c6) != 0) {
-		fcn_0052ae80();
+		d3_UpdateCameraAtScreenEdges();
 		busy = 0;
 		for (i = 0; i < 16; i++) {
 			s = (struct slot_4d4640*) (context + 0x94) + i;

@@ -15,11 +15,11 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
 int __cdecl d2_CreateRadioGroup(int, int, int);
 void __cdecl d2_UpdateRadioGroup(int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00539600(void);
-int __cdecl fcn_00539930(int);
+int __cdecl d2_ShowServerBrowser(int);
 
 int __cdecl fcn_0053a020(void)
 {
@@ -53,7 +53,7 @@ int __cdecl fcn_0053a020(void)
 				fcn_00471af0(h, 1);
 			} else if (d2_CurrentElementId == b) {
 				fcn_00471af0(h, 0);
-				if (fcn_00539930(1) != 0) {
+				if (d2_ShowServerBrowser(1) != 0) {
 					g_774654 = 1;
 					result = 1;
 				}
@@ -61,7 +61,7 @@ int __cdecl fcn_0053a020(void)
 			}
 		}
 	}
-	fcn_00469510(list);
+	d2_ClearRadioGroup(list);
 	fcn_00471e30(h);
 	return result;
 }

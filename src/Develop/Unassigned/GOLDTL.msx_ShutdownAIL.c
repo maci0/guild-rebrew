@@ -2,7 +2,7 @@
 
 
 void __cdecl msx_CloseAllStreams(void);
-void __cdecl fcn_0042a760(void);
+void __cdecl msx_ReleaseAllWaveSamples(void);
 void __cdecl fcn_0042a350(void);
 __declspec(dllimport) void __stdcall AIL_shutdown(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -13,7 +13,7 @@ int __cdecl msx_ShutdownAIL(void)
 
 	if (g_6b7f90 != 0) {
 		msx_CloseAllStreams();
-		fcn_0042a760();
+		msx_ReleaseAllWaveSamples();
 		fcn_0042a350();
 		AIL_shutdown();
 		g_6b7f90 = r;

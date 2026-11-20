@@ -29,7 +29,7 @@ void __cdecl fcn_00469470(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl fcn_004b3ec0(int, int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 
 
@@ -73,7 +73,7 @@ int __cdecl d2_ChooseMission(int missionKey)
 			}
 		}
 	}
-	fcn_00469510(lst);
+	d2_ClearRadioGroup(lst);
 	fcn_00471e30(h);
 	return result;
 }

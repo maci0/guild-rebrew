@@ -1,7 +1,7 @@
 /* Owned (both targets) by src/GOLDTL.fcn_004f7890.c. */
 extern char g_679060[];
 
-int  __cdecl fcn_004fa5f0(void*, int, int);
+int  __cdecl d2_ShowPrivilegMessage(void*, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 
@@ -19,7 +19,7 @@ int __cdecl fcn_004fa460(void* a1, void* a2)
 	if (*(int*) a2 == 3 && *(char*) ((char*) a1 + 2) == 6) {
 		io_FormatTextBuffer(buf, 0x1e22,
 		    0x277 + (*(char*) ((char*) a1 + 9) != 0 ? 0x28 : 0), 0x16bb);
-		fcn_004fa5f0(buf, 0, 0x657c7);
+		d2_ShowPrivilegMessage(buf, 0, 0x657c7);
 		return 2;
 	}
 	if (*(int*) a2 == 1 && *(char*) ((char*) a1 + 2) == 6) {

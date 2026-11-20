@@ -29,7 +29,7 @@ extern char* g_1015ea0;
 extern char* g_14abbb0;
 extern char* g_14abc28;
 
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_00517c00(int, int, int, char*);
 void __cdecl fcn_005b5c70(Gauge*);
@@ -41,7 +41,7 @@ void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
 	char* src;
 	char* dst;
 
-	p = fcn_005463a0(2, 0, a3, 3, *(int*) (e + 1));
+	p = he_StartHandlungSearch(2, 0, a3, 3, *(int*) (e + 1));
 	if (p != 0 && *(int*) (p + a4 * 4 + 0xb0) != 0) {
 		src = g_14abbb0;
 		dst = buf;

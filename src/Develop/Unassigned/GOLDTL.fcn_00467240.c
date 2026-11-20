@@ -43,7 +43,7 @@ extern char s_67d46c[];
 
 #include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_00465950(char* name);
-int __cdecl fcn_00469890(void);
+int __cdecl d2_AllocateElement(void);
 int __cdecl fcn_0046b520(char* s, int font);
 
 /* ADDRESS: GOLDTL 0x00467240 */
@@ -83,7 +83,7 @@ int __cdecl d2_OpenInputIcon(int x, int y, int w, int h, unsigned char flags)
 	f->font = fcn_00465950(s_67d474);
 	f->def = -1;
 	f->f154 = 0;
-	id = fcn_00469890();
+	id = d2_AllocateElement();
 	if (flags & 2) {
 		v = f->max;
 		for (n = 0; n < 10; n++) {

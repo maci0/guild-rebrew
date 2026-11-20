@@ -33,7 +33,7 @@ void __cdecl fcn_00534210(int x, int y, char* p, int idx, int bar)
 	int i;
 
 	w = ((BarImg*) g_772500)[bar].w + 2;
-	cur = fcn_00507e30(p, idx);
+	cur = gm_GetScaledEntitySkill(p, idx);
 	max = (unsigned char) p[idx + 0x80];
 	if (cur > max) {
 		m = cur;

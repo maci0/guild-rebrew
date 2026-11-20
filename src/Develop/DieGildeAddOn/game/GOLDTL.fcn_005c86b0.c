@@ -14,7 +14,7 @@ int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 
 /* ADDRESS: GOLDTL 0x005c86b0 */
-int __cdecl fcn_005c86b0(void)
+int __cdecl d2_CreateGebaeudeListPanel(void)
 {
 	int a;
 	int b;

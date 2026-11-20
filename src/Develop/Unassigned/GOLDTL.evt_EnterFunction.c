@@ -2,8 +2,8 @@
 
 void __cdecl evt_LogScriptError(void*, int, char*);
 void* __cdecl evt_AllocateLocalVariable(void*, int, int, int*);
-void __cdecl fcn_00428720(char*);
-void* __cdecl fcn_00428800(int);
+void __cdecl evt_RequestScriptExit(char*);
+void* __cdecl evt_EvaluateExpression(int);
 
 extern void* g_6b7ea0;
 
@@ -76,7 +76,7 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 	if (pos > 0) {
 		ip->depth++;
 		for (k = 0; k < fn->argc; k++) {
-			sym = (EvtSymbol*) fcn_00428800(0);
+			sym = (EvtSymbol*) evt_EvaluateExpression(0);
 			if (fn->types[k] == 6) {
 				strcpy(&storage[k * 0x60], (char*) sym);
 			} else {
@@ -107,7 +107,7 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 		sym = (EvtSymbol*) evt_AllocateLocalVariable(ip, fn->types[k], 1, fn->params[k]);
 		if (sym == 0) {
 			evt_LogScriptError(ip, ip->depth, (char*) 0x6794c0);
-			fcn_00428720((char*) ip);
+			evt_RequestScriptExit((char*) ip);
 			return;
 		}
 		switch (sym->kind) {

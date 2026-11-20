@@ -40,9 +40,9 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
-char* __cdecl fcn_005338d0(char* name, char* path, int arg);
+char* __cdecl RegisterStatusText(char* name, char* path, int arg);
 void __cdecl fcn_00597ec0(char* e);
-void __cdecl fcn_005a1430(char* e);
+void __cdecl d2_ShowWirtshausDialog(char* e);
 void __cdecl fcn_005a2500(char* a, char* b);
 void __cdecl fcn_005a2d60(char* a, char* b);
 void __cdecl fcn_004c5530(Msg5a2db0* m);
@@ -63,12 +63,12 @@ void __cdecl fcn_005a2db0(char* a0, char* a1)
 	fcn_005338a0();
 	while (fcn_005373e0(fcn_005a2db0, 0x67fff)) {
 		fcn_00597ec0(a0);
-		p1 = fcn_005338d0("contact_WUERFELSPIEL", g_14ab4ec, 0x16);
-		p2 = fcn_005338d0("contact_STAMMTISCH", g_14ab54c, 0x16);
-		p3 = fcn_005338d0("ob_DUNKLE_ECKE", g_14ab5cc, 0x16);
+		p1 = RegisterStatusText("contact_WUERFELSPIEL", g_14ab4ec, 0x16);
+		p2 = RegisterStatusText("contact_STAMMTISCH", g_14ab54c, 0x16);
+		p3 = RegisterStatusText("ob_DUNKLE_ECKE", g_14ab5cc, 0x16);
 		if (g_7746a0) {
 			if (g_7746a0 == p1) {
-				fcn_005a1430(a0);
+				d2_ShowWirtshausDialog(a0);
 			} else if (g_7746a0 == p2) {
 				fcn_005a2500(a0, a1);
 			} else if (g_7746a0 == p3) {

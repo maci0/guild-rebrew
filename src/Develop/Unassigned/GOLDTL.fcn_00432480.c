@@ -71,7 +71,7 @@ typedef struct Frame {
 int __cdecl fcn_004321a0(ClampBlk flags, int v, int lo, int hi, int max);
 void __cdecl fcn_00438ac0(char*, int);
 void __cdecl fcn_00438b40(char*, float*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl fcn_004311a0(char*, char*, int, int, int);
 void __cdecl fcn_00431330(char*, char*, int, int, int);
 void __cdecl fcn_00431dd0(char*, char*, int, int, float*);
@@ -483,7 +483,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 				fs->vec[0] += SF(st + 0x20);
 				fs->vec[1] += SF(st + 0x24);
 				fs->vec[2] += SF(st + 0x28);
-				fcn_00438cb0(o, fs->vec);
+				d3_SetObjectRotation(o, fs->vec);
 			}
 		} else {
 			prev = SI(st + 4);
@@ -521,7 +521,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 				fs->vec[0] += SF(st + 0x20);
 				fs->vec[1] += SF(st + 0x24);
 				fs->vec[2] += SF(st + 0x28);
-				fcn_00438cb0(o, fs->vec);
+				d3_SetObjectRotation(o, fs->vec);
 			}
 		}
 	} else {
@@ -549,7 +549,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 			fs->vec[2] = SF(WR(prev) + 0x1c) * fs->f18 +
 				SF(WR(cur) + 0x1c) * fs->f14 +
 				SF(st + 0x28);
-			fcn_00438cb0(o, fs->vec);
+			d3_SetObjectRotation(o, fs->vec);
 		}
 	}
 
@@ -726,7 +726,7 @@ place2:
 		fs->vec[0] = SF(frames + 0x14) + SF(st + 0x20);
 		fs->vec[1] = SF(frames + 0x18) + SF(st + 0x24);
 		fs->vec[2] = SF(frames + 0x1c) + SF(st + 0x28);
-		fcn_00438cb0(o, fs->vec);
+		d3_SetObjectRotation(o, fs->vec);
 		if (SB(st + 0x2d) & 8) {
 			SB(st + 0x34) &= ~2;
 			SB(st + 0x2d) |= 0x20;

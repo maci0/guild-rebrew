@@ -1,7 +1,7 @@
 extern void* g_6b5c5c;
 
 int __cdecl ch_WorldToGridCoordinates(float*, float*, int*, int*);
-int __cdecl fcn_004082d0(int, int, int, int, int, int);
+int __cdecl ch_ConvertGridPointToCharacterGrid(int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00408320 */
 int __cdecl fcn_00408320(int a0, char* a1, int* a2)
@@ -35,7 +35,7 @@ int __cdecl fcn_00408320(int a0, char* a1, int* a2)
 		end = n + (*(int**) (obj + 0x124) != 0 ? 2 : 1);
 		while (n < end && n < *(int*) (b + 0xf0)) {
 			s = (unsigned char*) (*(int*) (b + 0xf4) + n * 2);
-			fcn_004082d0(a0, s[0], s[1], (int) g_6b5c5c, (int) p, (int) (p + 1));
+			ch_ConvertGridPointToCharacterGrid(a0, s[0], s[1], (int) g_6b5c5c, (int) p, (int) (p + 1));
 			p[2] = 2;
 			p += 3;
 			n++;

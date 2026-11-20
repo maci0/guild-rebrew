@@ -63,7 +63,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl fcn_004c5530(Packet*);
@@ -73,7 +73,7 @@ int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005ceb20(unsigned char* obj, int mode)
+void __cdecl d2_ConfirmMeisterbrief(unsigned char* obj, int mode)
 {
 	int btn2;
 	int btn1;
@@ -111,7 +111,7 @@ void __cdecl fcn_005ceb20(unsigned char* obj, int mode)
 		}
 		else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == btn1) {
-				for (p = fcn_005463a0(2, 0, 7, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
+				for (p = he_StartHandlungSearch(2, 0, 7, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
 					if (p[0xac] == 0) {
 						break;
 					}
@@ -142,6 +142,6 @@ void __cdecl fcn_005ceb20(unsigned char* obj, int mode)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005ceb20, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_ConfirmMeisterbrief, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 }

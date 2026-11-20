@@ -6,7 +6,7 @@ extern char g_665c18[5][64];
 
 #include <string.h>
 
-int __cdecl fcn_0051dfe0(char* s)
+int __cdecl main_SetLanguageByName(char* s)
 {
 	char buf[64];
 	int i;

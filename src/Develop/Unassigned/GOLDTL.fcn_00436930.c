@@ -2,7 +2,7 @@ void* __cdecl d3_CreateObjectMesh(char* e);
 void __cdecl fcn_00435910(char* a0, int a1, int a2, int* a3);
 
 /* ADDRESS: GOLDTL 0x00436930 */
-void* __cdecl fcn_00436930(char* sceneObject, int* out)
+void* __cdecl d3_GetObjectMesh(char* sceneObject, int* out)
 {
 	char* v1;
 	char* v2;

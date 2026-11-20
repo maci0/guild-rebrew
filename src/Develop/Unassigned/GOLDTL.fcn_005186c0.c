@@ -14,7 +14,7 @@ char* __cdecl fcn_0042b2f0(char*, int, int);
 #define ENDS_APOSTROPHE(x) ((x)[strlen(x) - 1] == 's' || (x)[strlen(x) - 1] == 'z' || (unsigned char) (x)[strlen(x) - 1] == -0x21 || (x)[strlen(x) - 1] == 'x')
 
 /* ADDRESS: GOLDTL 0x005186c0 */
-int __cdecl fcn_005186c0(int entityIndex, unsigned char a2, unsigned char format, char* out)
+int __cdecl io_FormatEntityNameMarkup(int entityIndex, unsigned char a2, unsigned char format, char* out)
 {
 	unsigned char b1[0x100];
 	unsigned char b3[0x100];

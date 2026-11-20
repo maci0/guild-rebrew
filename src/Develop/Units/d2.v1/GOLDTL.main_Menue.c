@@ -33,7 +33,7 @@ struct Handler {
 
 void __cdecl fcn_00412630(void);
 char *__cdecl fcn_004730c0(int, int, int, int, char *, int, int);
-int __cdecl fcn_005356e0(void);
+int __cdecl main_PumpWindowMessages(void);
 int __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_00442e30(void);
@@ -55,23 +55,23 @@ void __cdecl msx_SetFadeDuration(int);
 void __cdecl fcn_0042a070(void);
 int __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_SetSlotVisibility(int, int);
-int __cdecl fcn_005dfb40(int, int, char *, char *, char *, char *);
+int __cdecl d2_OpenFileSelector(int, int, char *, char *, char *, char *);
 int __cdecl fcn_0064d41a(char *, char *, char *, ...);
-int __cdecl fcn_005392a0(char *, int);
+int __cdecl main_LoadCitySelectionScene(char *, int);
 int __cdecl fcn_005e4970(void);
 void __cdecl msx_StartTrackInternal(int, int);
-void __cdecl fcn_0053a2f0(void);
+void __cdecl d2_ShowAmountDialog(void);
 void __cdecl fcn_005e3520(void);
-void __cdecl fcn_005e3150(void);
+void __cdecl d2_ShowSoundOptions(void);
 void __cdecl fcn_005e2b60(void);
-int __cdecl fcn_005e0700(void);
+int __cdecl d2_ShowLoadGameMenu(void);
 int __cdecl fcn_0053a160(void);
-int __cdecl fcn_005845e0(void);
+int __cdecl d2_ChooseTutorial(void);
 void __cdecl fcn_00584530(void);
 void __cdecl fcn_00469e70(void);
 void __cdecl fcn_004acee0(void);
 int __cdecl fcn_0053f460(void);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl msx_StopTrack(int, int);
 
@@ -114,7 +114,7 @@ void __cdecl main_Menue(void)
 	v18 = -1;
 	v21 = -1;
 	v16 = -1;
-	fcn_005356e0();
+	main_PumpWindowMessages();
 	fcn_00412630();
 	*(unsigned char*) &g_14cf950 = 0;
 	fcn_0042a070();
@@ -131,7 +131,7 @@ void __cdecl main_Menue(void)
 		v14 = "scenes/*ChooseCity.ed3";
 	}
 	d3_LoadScene(v14, 0, 0);
-	fcn_005356e0();
+	main_PumpWindowMessages();
 	fcn_004432d0(1, 0);
 	fcn_00442e30();
 	if (!d3_LoadScene((char *)0x6a3b98, 0, 0)) {
@@ -222,7 +222,7 @@ void __cdecl main_Menue(void)
 				}
 			} else if (d2_CurrentElementId == v26) {
 				d2_SetSlotVisibility(v5, 0);
-				if (fcn_005845e0()) {
+				if (d2_ChooseTutorial()) {
 					fcn_00584530();
 					*(unsigned char*) &g_6a375c = 1;
 					*(int*) g_7e1d00 = *(int *)0x6a3ad0;
@@ -236,23 +236,23 @@ label_53a8e3:
 				}
 			} else if (d2_CurrentElementId == v18) {
 				d2_SetSlotVisibility(v5, 0);
-				if (fcn_005dfb40(0x24087, 1, (char *)0x6a3ab8, (char *)0x6a3778, (char *)0x6a3ac8, v7)) {
+				if (d2_OpenFileSelector(0x24087, 1, (char *)0x6a3ab8, (char *)0x6a3778, (char *)0x6a3ac8, v7)) {
 					fcn_0064d41a(v8, (char *)0x67728c, (char *)0x6a3448, v7);
 					read_profile((char *)0x6a2278, (char *)0x6a2288, (char *)0x6a2294, profileValueA, 0x60, v8);
-					fcn_005392a0(profileValueA, 0);
+					main_LoadCitySelectionScene(profileValueA, 0);
 				}
 				goto label_53a8e3;
 			} else if (d2_CurrentElementId == v21) {
 				d2_SetSlotVisibility(v5, 0);
-				if (fcn_005dfb40(0x24087, 1, (char *)0x6a3ab8, (char *)0x6a3778, (char *)0x6a3ac8, v10)) {
+				if (d2_OpenFileSelector(0x24087, 1, (char *)0x6a3ab8, (char *)0x6a3778, (char *)0x6a3ac8, v10)) {
 					fcn_0064d41a(v11, (char *)0x67728c, (char *)0x6a3448, v10);
 					read_profile((char *)0x6a2278, (char *)0x6a2288, (char *)0x6a2294, profileValueB, 0x60, v11);
-					fcn_005392a0(profileValueB, 1);
+					main_LoadCitySelectionScene(profileValueB, 1);
 				}
 				d2_SetSlotVisibility(v5, 1);
 			} else if (d2_CurrentElementId == v23) {
 				d2_SetSlotVisibility(v5, 0);
-				if (fcn_005e0700()) {
+				if (d2_ShowLoadGameMenu()) {
 					g_774654 = 1;
 				}
 				d2_SetSlotVisibility(v5, 1);
@@ -274,7 +274,7 @@ label_53a8e3:
 				}
 			} else if (d2_CurrentElementId == v17) {
 				d2_SetSlotVisibility(v5, 0);
-				fcn_005e3150();
+				d2_ShowSoundOptions();
 				d2_SetSlotVisibility(v5, 1);
 			} else if (d2_CurrentElementId == v24) {
 				d2_SetSlotVisibility(v5, 0);
@@ -285,7 +285,7 @@ label_53a8e3:
 				g_77496c = 1;
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == v16) {
-				fcn_0053a2f0();
+				d2_ShowAmountDialog();
 			} else if (d2_CurrentElementId == v27) {
 				d2_SetSlotVisibility(v5, 0);
 				if (msx_MusicEnabled != 0) {
@@ -305,7 +305,7 @@ label_53a8e3:
 			g_774654 = 1;
 		}
 	} while (fcn_005373e0((int)(void *)0x53a400, 0x24087) != 0);
-	fcn_00469510(v28);
+	d2_ClearRadioGroup(v28);
 	fcn_00471e30(v15);
 	d2_ClearScreen();
 	fcn_004432d0(0, 0);

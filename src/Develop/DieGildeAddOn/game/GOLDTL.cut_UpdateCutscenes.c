@@ -101,7 +101,7 @@ int __cdecl cut_UpdateCutscenes(void)
 			}
 			if (fcn_00500cb0(&(*(GAME_TIMESTAMP*)&gm_GameTime), &t) > 0 && ((Ent*)cut_Cutscenes)[i].done != 0) {
 				g_7e2700 = 0;
-				fcn_004e5a00((int*) &((Ent*)cut_Cutscenes)[i]);
+				cut_ExecuteCutscene((int*) &((Ent*)cut_Cutscenes)[i]);
 				cut_FreeCutscene(((Ent*)cut_Cutscenes)[i].id);
 			}
 		}

@@ -46,7 +46,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00412830(int);
 
-int __cdecl fcn_005d2d30(unsigned short* target)
+int __cdecl d2_RunWerbungDialog(unsigned short* target)
 {
 	Packet pkt;
 	int cost;
@@ -85,7 +85,7 @@ int __cdecl fcn_005d2d30(unsigned short* target)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005d2d30, 0x657c7) != 0);
+	} while (fcn_005373e0((void*) d2_RunWerbungDialog, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	g_100f1dc = -1;
 	fcn_00412830(0x11);

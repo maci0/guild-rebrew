@@ -55,8 +55,8 @@ extern short g_14ce8c2;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00414c30(int, int);
-void* __cdecl fcn_00426cc0(int);
-int __cdecl fcn_00428720(char*);
+void* __cdecl evt_FindScriptById(int);
+int __cdecl evt_RequestScriptExit(char*);
 int __cdecl fcn_00445600(char*, int, char*, char*);
 char __cdecl fcn_0045bad0(int, int, int, int*, int*);
 void __cdecl fcn_00473690(int, int);
@@ -69,9 +69,9 @@ int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_00531320(void);
-int __cdecl fcn_00515540(char*);
+int __cdecl init_EnsureObjektSceneContext(char*);
 int __cdecl fcn_005155e0(unsigned char*);
-void __cdecl fcn_00534520(void);
+void __cdecl d3_BeginSelectionBox(void);
 void __cdecl fcn_005345a0(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
@@ -124,7 +124,7 @@ L684:
 	if (g_14ce8e4 == 0) {
 		if (d3_SelectionBoxActive == 0 && g_6772c4 != 0 && *(int*) 0x100f894 == -1
 		    && ent != 0 && *(unsigned short*) (ent + 0x27) == g_774970) {
-			fcn_00534520();
+			d3_BeginSelectionBox();
 		}
 		goto La5d;
 	}
@@ -210,9 +210,9 @@ L6d3:
 		f = s->owner;
 		w = *(int*) (f + 0x28);
 		if (w != -1) {
-			f = (char*) fcn_00426cc0(w);
+			f = (char*) evt_FindScriptById(w);
 			if (f != 0) {
-				fcn_00428720(f);
+				evt_RequestScriptExit(f);
 			}
 		}
 		fcn_004c5b50(s->handle, ix, iy, d3_CurrentContextIndex);
@@ -253,7 +253,7 @@ L192f:
 				goto L1a0d;
 			}
 		} else {
-			ei = fcn_00515540((char*) g_7746b8);
+			ei = init_EnsureObjektSceneContext((char*) g_7746b8);
 		}
 		if (g_7746c8 != 0) {
 			p = (char*) g_7746c8;

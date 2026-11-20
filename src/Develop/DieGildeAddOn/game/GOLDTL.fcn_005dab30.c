@@ -19,7 +19,7 @@ void __cdecl fcn_005dab30(unsigned short* who, char* e)
 	char* o;
 
 	n = fcn_004e6f10(*(unsigned char*) (e + 0x166));
-	n = fcn_004e8b80(n, 6, list);
+	n = amt_FindOfficeSlotsByKind(n, 6, list);
 	for (i = 0; i < n; i++) {
 		if (list[i].mplayerid == -1) {
 			continue;

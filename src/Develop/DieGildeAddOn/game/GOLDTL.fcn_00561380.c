@@ -37,10 +37,10 @@ void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, c
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_00545d40(int, int, char *, int, int, char *);
-void *__cdecl fcn_005463a0(int, int, int);
+void *__cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl fcn_004c58b0(int, int);
 void __cdecl fcn_004c57e0(int, int);
-void __cdecl fcn_00546190(void *);
+void __cdecl he_FreeAction(void *);
 void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_00422460(int, char *);
 void __cdecl fcn_004193f0(int, int, int, int);
@@ -165,7 +165,7 @@ void __cdecl fcn_00561380(void *action)
 			if (*(int *)(p + 0xc8) != -1 && !fcn_004c4450(*(int *)(p + 0xc8)))
 				return;
 			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
-			e = (unsigned char *)fcn_005463a0(1, 1, *(int *)(p + 0xcc));
+			e = (unsigned char *)he_StartHandlungSearch(1, 1, *(int *)(p + 0xcc));
 			if (r == 0 || e == 0 || *(int *)(e + 0xd4) != *(int *)(p + 4) || *(int *)(p + 0xc8) == -1)
 				goto label_56148f;
 			query = (unsigned char *)gm_LookupEntityRecordById(*(int *)(p + 0xcc));
@@ -180,7 +180,7 @@ void __cdecl fcn_00561380(void *action)
 		{
 			unsigned char *r;
 
-			r = (unsigned char *)fcn_005463a0(1, 1, *(int *)(p + 0xcc));
+			r = (unsigned char *)he_StartHandlungSearch(1, 1, *(int *)(p + 0xcc));
 			if (r == 0) {
 				*(int *)(p + 0x70) = -1;
 				return;
@@ -383,7 +383,7 @@ void __cdecl fcn_00561380(void *action)
 	case -1:
 		if (*(int *)(p + 0xc4) != -1)
 			fcn_004c57e0(*(int *)(p + 0xc4), 1);
-		fcn_00546190(p);
+		he_FreeAction(p);
 		return;
 	default:
 		return;

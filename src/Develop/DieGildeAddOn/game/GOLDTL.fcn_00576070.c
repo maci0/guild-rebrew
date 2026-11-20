@@ -11,7 +11,7 @@ void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl fcn_004c35f0(void);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00576070(char* u)
 {
@@ -32,5 +32,5 @@ void __cdecl fcn_00576070(char* u)
 			return;
 		}
 	}
-	fcn_00546190(u);
+	he_FreeAction(u);
 }

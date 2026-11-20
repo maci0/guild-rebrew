@@ -7,14 +7,14 @@
 extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00426cc0(int);
-void __cdecl fcn_00428720(int);
+int __cdecl evt_FindScriptById(int);
+void __cdecl evt_RequestScriptExit(int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl ch_CreateAction(char*, int, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c57e0(int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_0056e170(char* u)
 {
@@ -27,7 +27,7 @@ void __cdecl fcn_0056e170(char* u)
 			goto kill;
 		}
 		if (*(char**) (h + 0x184) != 0 && *(int*) (*(char**) (h + 0x184) + 0x28) != -1) {
-			fcn_00428720(fcn_00426cc0(*(int*) (*(char**) (h + 0x184) + 0x28)));
+			evt_RequestScriptExit(evt_FindScriptById(*(int*) (*(char**) (h + 0x184) + 0x28)));
 		}
 		fcn_00529160(0, 0, *(unsigned short*) h, 0);
 		(*(int*) (u + 0x70))++;
@@ -66,7 +66,7 @@ void __cdecl fcn_0056e170(char* u)
 	case -2:
 	case -1:
 kill:
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	}
 }

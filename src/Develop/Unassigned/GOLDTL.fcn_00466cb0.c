@@ -31,7 +31,7 @@ extern char s_67d46c[];
 #include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_00465950(char* name);
 void __cdecl d2_AddRefcount(int def);
-int __cdecl fcn_00469890(void);
+int __cdecl d2_AllocateElement(void);
 
 /* ADDRESS: GOLDTL 0x00466cb0 */
 int __cdecl fcn_00466cb0(int x, int y, int def, unsigned char flags)
@@ -84,7 +84,7 @@ int __cdecl fcn_00466cb0(int x, int y, int def, unsigned char flags)
 	if (flags & 0x80) {
 		f->max = f->max > 0x19 ? f->max : 0x19;
 	}
-	id = fcn_00469890();
+	id = d2_AllocateElement();
 	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x20 / 4] = 0x41;
 	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x10 / 4] = f->x;
 	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x14 / 4] = f->y;

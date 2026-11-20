@@ -62,7 +62,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int a);
 int __cdecl fcn_0050dfa0(int a, int b);
 int __cdecl gm_eval_SlotVoll(int a, int b, int c);
 char* __cdecl fcn_00503d10(int id);
-char* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
+char* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_FindRecordById(int id);
 void __cdecl fcn_0050de80(int a, int* out);
@@ -296,7 +296,7 @@ label_485f7e:
 		}
 		idx++;
 	}
-	rec = fcn_005463a0(2, 0, 0xb, 3, *(int*) (*(char**) (a0 + 0x16c) + 1));
+	rec = he_StartHandlungSearch(2, 0, 0xb, 3, *(int*) (*(char**) (a0 + 0x16c) + 1));
 	while (rec) {
 		recs2 = gm_FindRecordById(*(int*) (rec + 0xac));
 		if (recs2) {

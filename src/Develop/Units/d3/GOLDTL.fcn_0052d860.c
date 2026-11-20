@@ -7,7 +7,7 @@ char __cdecl SelectTextureSet(void*, int, unsigned char, char);
 int __cdecl d3_ApplyObjectAnimation(void*, const char*, int);
 
 /* ADDRESS: GOLDTL 0x0052d860 */
-char __cdecl fcn_0052d860(char* e, char* o)
+char __cdecl d3_CreatePennantAtFlagDummy(char* e, char* o)
 {
 	float rot[3];
 	char name[16];

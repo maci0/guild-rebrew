@@ -13,7 +13,7 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl fcn_0058bfd0(int*);
 
-int __cdecl fcn_0058c410(int* s, int a2)
+int __cdecl d2_CreateRentAGraveDialog(int* s, int a2)
 {
 	if (s[7] == 0) {
 		return 0;

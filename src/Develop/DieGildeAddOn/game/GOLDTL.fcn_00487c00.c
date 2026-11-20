@@ -9,7 +9,7 @@ extern char g_67e348[];
 
 unsigned short __cdecl gm_RandomMod(int n);
 struct unit;
-struct unit* __cdecl fcn_005463a0(int n, ...);
+struct unit* __cdecl he_StartHandlungSearch(int n, ...);
 void __cdecl fcn_004c4eb0(int a1);
 void __cdecl fcn_004c5530(int a1);
 void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
@@ -29,7 +29,7 @@ void __cdecl fcn_00487c00(char* a0, char* entity, int chance)
 	if ((gm_RandomMod(100) & 0xffff) < chance) {
 		return;
 	}
-	if (fcn_005463a0(2, 0, 0x13, 3, *(int*) (*(char**) (entity + 0x16c) + 1)) != 0) {
+	if (he_StartHandlungSearch(2, 0, 0x13, 3, *(int*) (*(char**) (entity + 0x16c) + 1)) != 0) {
 		return;
 	}
 	if (*(int*) (a0 + 0xe) >= 3) {

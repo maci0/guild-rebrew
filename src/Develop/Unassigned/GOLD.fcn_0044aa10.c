@@ -10,7 +10,7 @@ void __cdecl vfs_WriteCString(int, char*);
 void __cdecl vfs_WriteVec3(int, int*);
 void __cdecl fcn_004011f0(int, unsigned char);
 int __cdecl fcn_00438c30(int);
-void __cdecl fcn_0044a2c0(int, int);
+void __cdecl wr_object(int, int);
 void __cdecl fcn_0044a770(int, char*);
 struct Event;
 void __cdecl d3_WriteEventTable(int, struct Event*);
@@ -61,7 +61,7 @@ void __cdecl fcn_0044aa10(char* path, int supplied)
     fcn_00401320(stream, count);
     node = g_fc52f0;
     while (node != (int) g_fc2700) {
-        fcn_0044a2c0(stream, node);
+        wr_object(stream, node);
         node = fcn_00438c30(node);
     }
     fcn_004011f0(stream, g_6b8300 != 0);

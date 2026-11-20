@@ -21,7 +21,7 @@ void __cdecl fcn_0054c500(void);
 void __cdecl fcn_0054c800(void);
 void __cdecl fcn_0054ca10(void);
 void __cdecl fcn_0054d7b0(void);
-void __cdecl fcn_0054d840(void);
+void __cdecl he_InitStreife(void);
 void __cdecl fcn_0054da10(void);
 void __cdecl fcn_0054e2d0(void);
 void __cdecl fcn_0054e390(void);
@@ -60,7 +60,7 @@ void __cdecl fcn_00551a20(void);
 void __cdecl fcn_00551c20(void);
 void __cdecl fcn_00551d50(void);
 void __cdecl fcn_00552220(void);
-void __cdecl fcn_005522d0(void);
+void __cdecl he_RunPlagueEvent(void);
 void __cdecl fcn_005529a0(void);
 void __cdecl fcn_00552a60(void);
 void __cdecl fcn_00553420(void);
@@ -70,22 +70,22 @@ void __cdecl fcn_00553cd0(void);
 void __cdecl fcn_005540d0(void);
 void __cdecl fcn_00554170(void);
 void __cdecl fcn_00554770(void);
-void __cdecl fcn_00554820(void);
+void __cdecl RunSimUnfall(void);
 void __cdecl fcn_00554b20(void);
 void __cdecl fcn_00554b90(void);
 void __cdecl fcn_00554ed0(void);
 void __cdecl fcn_00554f00(void);
 void __cdecl fcn_00555440(void);
-void __cdecl fcn_00555510(void);
+void __cdecl gm_SimulateWirtshaus(void);
 void __cdecl fcn_00555a40(void);
-void __cdecl fcn_00555a80(void);
+void __cdecl d2_HandleTalentLevelDialog(void);
 void __cdecl fcn_00555cd0(void);
 void __cdecl fcn_00555d30(void);
 void __cdecl fcn_00556110(void);
 void __cdecl fcn_00556170(void);
 void __cdecl fcn_00556b40(void);
 void __cdecl fcn_00556e30(void);
-void __cdecl fcn_00556ed0(void);
+void __cdecl RunSimKrankheiten(void);
 void __cdecl fcn_00557270(void);
 void __cdecl fcn_00557460(void);
 void __cdecl fcn_00557e50(void);
@@ -115,10 +115,10 @@ void __cdecl fcn_0055aca0(void);
 void __cdecl fcn_0055af10(void);
 void __cdecl fcn_0055af40(void);
 void __cdecl fcn_0055afb0(void);
-void __cdecl fcn_0055b020(void);
+void __cdecl d2_ShowTitleAward(void);
 
 /* ADDRESS: GOLDTL 0x0055b3e0 */
-int __cdecl fcn_0055b3e0(void)
+int __cdecl he_RegisterEventHandlers(void)
 {
 	if (he_RegisterHandler(34, (void*) 0x549b30, (void*) 0x549b40) != 0) {
 		return 1;
@@ -162,7 +162,7 @@ int __cdecl fcn_0055b3e0(void)
 	if (he_RegisterHandler(66, (void*) fcn_0054d7b0, (void*) 0x0054d810) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(67, (void*) fcn_0054d840, (void*) fcn_0054da10) != 0) {
+	if (he_RegisterHandler(67, (void*) he_InitStreife, (void*) fcn_0054da10) != 0) {
 		return 1;
 	}
 	fcn_00530ab0(67, 0, 0, 1287, -1);
@@ -229,7 +229,7 @@ int __cdecl fcn_0055b3e0(void)
 	if (he_RegisterHandler(96, (void*) fcn_00551c20, (void*) fcn_00551d50) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(89, (void*) fcn_00552220, (void*) fcn_005522d0) != 0) {
+	if (he_RegisterHandler(89, (void*) fcn_00552220, (void*) he_RunPlagueEvent) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(97, (void*) fcn_005529a0, (void*) fcn_00552a60) != 0) {
@@ -251,19 +251,19 @@ int __cdecl fcn_0055b3e0(void)
 		return 1;
 	}
 	fcn_00530ab0(101, 0, 0, 1287, -1);
-	if (he_RegisterHandler(102, (void*) fcn_00554770, (void*) fcn_00554820) != 0) {
+	if (he_RegisterHandler(102, (void*) fcn_00554770, (void*) RunSimUnfall) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(103, (void*) fcn_00554b20, (void*) fcn_00554b90) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(104, (void*) fcn_00555440, (void*) fcn_00555510) != 0) {
+	if (he_RegisterHandler(104, (void*) fcn_00555440, (void*) gm_SimulateWirtshaus) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(105, (void*) fcn_00554ed0, (void*) fcn_00554f00) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(106, (void*) fcn_00555a40, (void*) fcn_00555a80) != 0) {
+	if (he_RegisterHandler(106, (void*) fcn_00555a40, (void*) d2_HandleTalentLevelDialog) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(107, (void*) fcn_00555cd0, (void*) fcn_00555d30) != 0) {
@@ -275,7 +275,7 @@ int __cdecl fcn_0055b3e0(void)
 	if (he_RegisterHandler(111, (void*) 0x556a20, (void*) fcn_00556b40) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(112, (void*) fcn_00556e30, (void*) fcn_00556ed0) != 0) {
+	if (he_RegisterHandler(112, (void*) fcn_00556e30, (void*) RunSimKrankheiten) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(116, (void*) fcn_00557270, (void*) fcn_00557460) != 0) {
@@ -323,5 +323,5 @@ int __cdecl fcn_0055b3e0(void)
 	if (he_RegisterHandler(135, (void*) fcn_0055af10, (void*) fcn_0055af40) != 0) {
 		return 1;
 	}
-	return he_RegisterHandler(165, (void*) fcn_0055afb0, (void*) fcn_0055b020) != 0;
+	return he_RegisterHandler(165, (void*) fcn_0055afb0, (void*) d2_ShowTitleAward) != 0;
 }

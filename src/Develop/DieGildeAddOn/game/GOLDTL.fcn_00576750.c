@@ -9,7 +9,7 @@ extern float g_662b10;
 unsigned short __cdecl gm_RandomMod(int range);
 float __cdecl gm_RandomFloat01(void);
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
-void __cdecl fcn_004c4570(int a, int b, int offset, void* value);
+void __cdecl cm_AppendPacketFieldDelta(int a, int b, int offset, void* value);
 void __cdecl fcn_004c4670(int a, int b, int offset, void* value);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004eea30(int city, int id, float value);
@@ -82,8 +82,8 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 				mode = 1;
 				amount = (gm_RandomMod(4) & 0xffff) + 3;
 				fcn_004c4510((char*) found[index], *(int*) ((char*) found[index] + 2));
-				fcn_004c4570(4, 1, 0x1c, &mode);
-				fcn_004c4570(4, 1, 0x20, &amount);
+				cm_AppendPacketFieldDelta(4, 1, 0x1c, &mode);
+				cm_AppendPacketFieldDelta(4, 1, 0x20, &amount);
 				fcn_004c5360();
 				fcn_005b3330((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
 				    city, object, found[index]);

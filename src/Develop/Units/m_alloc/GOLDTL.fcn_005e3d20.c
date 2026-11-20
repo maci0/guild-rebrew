@@ -42,7 +42,7 @@ void __cdecl fcn_00475fd0(Tex*);
 void __cdecl d2_UnlockSurface(Tex*);
 void __cdecl fcn_00475f80(Tex*);
 
-void __cdecl fcn_005e3d20(void)
+void __cdecl ls_CaptureSavePreview(void)
 {
 	Rect src;
 	Rect dst;

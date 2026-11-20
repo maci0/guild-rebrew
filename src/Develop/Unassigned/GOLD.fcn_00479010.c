@@ -23,7 +23,7 @@ typedef struct SURFACE_DESC479010 {
 } SURFACE_DESC479010;
 
 /* ADDRESS: GOLD 0x00479010 */
-int __cdecl fcn_00479010(char *s)
+int __cdecl d2_LockSurface(char *s)
 {
 	SURFACE_DESC479010 ddsd;
 	SURFACE479010 *surf;

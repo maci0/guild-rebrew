@@ -34,7 +34,7 @@ void __cdecl fcn_004c51a0(int, int, char, int);
 int __cdecl fcn_0050cf50(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00553490 */
 void __cdecl fcn_00553490(char* self)
@@ -58,7 +58,7 @@ void __cdecl fcn_00553490(char* self)
 		if (p != 0 && (*(unsigned char*) (self + 0x78) & 2)) {
 			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 0x100);
 		}
-		fcn_00546190(self);
+		he_FreeAction(self);
 		return;
 	}
 	step = 4;

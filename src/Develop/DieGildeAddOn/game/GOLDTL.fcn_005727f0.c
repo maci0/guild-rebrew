@@ -35,7 +35,7 @@ int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00529160(char*, int, int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_005727f0(char* e)
 {
@@ -73,7 +73,7 @@ void __cdecl fcn_005727f0(char* e)
 				fcn_00529160(r, 0, ((struct house*)g_7f4ca0)[i].id, 0);
 			}
 		}
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	case -2:
 	case -1:
@@ -86,5 +86,5 @@ void __cdecl fcn_005727f0(char* e)
 	default:
 		return;
 	}
-	fcn_00546190(e);
+	he_FreeAction(e);
 }

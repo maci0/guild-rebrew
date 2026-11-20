@@ -28,14 +28,14 @@ int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00525f60(ENTITY_RECORD*, int);
 void __cdecl fcn_005100f0(int, int);
 #include "client_packet_builder.h"
-void __cdecl fcn_004c4570(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 int __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
-void __cdecl fcn_0058acb0(int unused, char* p)
+void __cdecl d2_RunDomizilKabinettDialog(int unused, char* p)
 {
 	int ok;
 	int cancel;
@@ -67,8 +67,8 @@ void __cdecl fcn_0058acb0(int unused, char* p)
 					v = 0;
 					fcn_005100f0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -b);
 					fcn_004c4510(p, *(int*) (p + 2));
-					fcn_004c4570(4, 1, 0x1c, &v);
-					fcn_004c4570(4, 1, 0x20, &v);
+					cm_AppendPacketFieldDelta(4, 1, 0x1c, &v);
+					cm_AppendPacketFieldDelta(4, 1, 0x20, &v);
 					id = fcn_004c5360();
 					while (id != -1 && fcn_004c4450(id) == 0) {
 						fcn_005373e0(0, 0x20007);
@@ -79,7 +79,7 @@ void __cdecl fcn_0058acb0(int unused, char* p)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(fcn_0058acb0, 0x677c7) != 0);
+	} while (fcn_005373e0(d2_RunDomizilKabinettDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_00532ef0();
 }

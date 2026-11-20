@@ -5,7 +5,7 @@
 #include "client_dialog_state.h"
 
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_0052ae80(void);
+void __cdecl d3_UpdateCameraAtScreenEdges(void);
 void __cdecl fcn_004d06d0(void);
 void __cdecl fcn_004cf180(void);
 void __cdecl fcn_004cf6b0(void);
@@ -18,7 +18,7 @@ void __cdecl fcn_004d45c0(int dur)
 	start = cut_CurrentTick;
 	if (fcn_005373e0(fcn_004d45c0, 0x7d6c6) != 0) {
 		do {
-			fcn_0052ae80();
+			d3_UpdateCameraAtScreenEdges();
 			fcn_004d06d0();
 			fcn_004cf180();
 			fcn_004cf6b0();

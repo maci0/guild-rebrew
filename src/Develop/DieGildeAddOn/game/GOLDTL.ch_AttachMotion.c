@@ -41,7 +41,7 @@ char* __cdecl ch_AttachMotion(char* obj, int kind)
 		if (d3_FindAnimByName(ani) == 0) {
 			d3_LoadAnimStream(path, ani, 1);
 		}
-		anim = fcn_00434970(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, ani, opt);
+		anim = d3_AttachAnimationToContext(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, ani, opt);
 		if (anim == 0) {
 			sprintf(msg, "ch_AttachMotion(): Could not attach ani: %s", path);
 			return 0;

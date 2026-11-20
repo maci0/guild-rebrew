@@ -24,7 +24,7 @@ extern int g_100f1dc;
 extern char g_6ac628[];
 extern char g_6ac618[];
 
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
@@ -95,7 +95,7 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 		ep[0] = 0;
 		ep += 3;
 	}
-	if (fcn_005463a0(2, 0, 0x1f, 3, owner) != 0) {
+	if (he_StartHandlungSearch(2, 0, 0x1f, 3, owner) != 0) {
 		do {
 			total++;
 		} while (he_fn_Handlung() != 0);
@@ -216,7 +216,7 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 			} while (sel < nslots);
 		}
 		total = 0;
-		if (fcn_005463a0(2, 0, 0x1f, 3, *(int*) (productionBuilding + 1)) != 0) {
+		if (he_StartHandlungSearch(2, 0, 0x1f, 3, *(int*) (productionBuilding + 1)) != 0) {
 			cur = 0;
 			for (;;) {
 				r = he_fn_Handlung();

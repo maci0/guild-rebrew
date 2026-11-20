@@ -38,9 +38,9 @@ extern float g_7e3a58;
 
 float __cdecl fcn_00413d10(Vec3* p);
 void __cdecl fcn_00438b40(View* v, Vec4* p);
-void __cdecl fcn_00438cb0(View* v, Vec3* r);
+void __cdecl d3_SetObjectRotation(View* v, Vec3* r);
 
-void __cdecl fcn_0052ac60(float t)
+void __cdecl d3_SetCameraHeightFraction(float t)
 {
 	float h;
 	Vec4 p;
@@ -59,7 +59,7 @@ void __cdecl fcn_0052ac60(float t)
 		r.y = ((View*)d3_ActiveCamera)->rot.y;
 		r.z = ((View*)d3_ActiveCamera)->rot.z;
 		r.x = (g_6a2564 - g_6a255c) * g_774694 + g_6a255c;
-		fcn_00438cb0(((View*)d3_ActiveCamera), &r);
+		d3_SetObjectRotation(((View*)d3_ActiveCamera), &r);
 		(*(float*)d3_CameraTargetRotation) = ((View*)d3_ActiveCamera)->rot.x;
 		g_7e3a54 = ((View*)d3_ActiveCamera)->rot.y;
 		g_7e3a58 = ((View*)d3_ActiveCamera)->rot.z;

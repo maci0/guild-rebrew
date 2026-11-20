@@ -35,7 +35,7 @@ void __cdecl fcn_00442c00(char* o, int v);
 
 void __cdecl fcn_00471340(int h);
 void __cdecl fcn_00471e30(int h);
-void __cdecl fcn_0046b2b0(int h);
+void __cdecl d2_DestroyElement(int h);
 void __cdecl fcn_00436f70(int v);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_004234e0(int h, char* s, int a, int b, int c, int d, int e);
@@ -68,10 +68,10 @@ void __cdecl fcn_00534f30(Pager* p)
 			fcn_00471e30(p->items[i]);
 		}
 		if (p->cb_a != -1) {
-			fcn_0046b2b0(p->cb_a);
+			d2_DestroyElement(p->cb_a);
 		}
 		if (p->cb_b != -1) {
-			fcn_0046b2b0(p->cb_b);
+			d2_DestroyElement(p->cb_b);
 		}
 		if (p->sound != 0) {
 			fcn_00436f70(1);

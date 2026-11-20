@@ -15,7 +15,7 @@ void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl d2_ChooseMission(int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_004b41b0(void);
 
@@ -103,7 +103,7 @@ int __cdecl fcn_004b43f0(int n)
 			}
 		} while (fcn_005373e0(fcn_004b41b0, main_LoopFlags) != 0);
 	}
-	fcn_00469510(list);
+	d2_ClearRadioGroup(list);
 	fcn_00471e30(dlg);
 	return r;
 }

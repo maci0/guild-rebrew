@@ -29,7 +29,7 @@ char* __cdecl fcn_0050dc90(unsigned char*);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 /* One step of the building placement state machine: validate the current
  * cell, pick the nearest matching entity or neighbour, place the icon and
@@ -222,7 +222,7 @@ void __cdecl fcn_00560290(char* a0)
 			}
 			if ((*(char*) (*(unsigned short*) (a0 + 8) * 0x21c + 0x7f4ca2) == 6 || *(char*) (*(unsigned short*) (a0 + 8) * 0x21c + 0x7f4ca2) == 7) && (!id || !(*(unsigned char*) ((int) id + 0x1b4) & 1))) {
 				he_MessageBoxQuickjump(*(int*) (*(unsigned short*) (a0 + 8) * 0x21c + 0x7f4ca4), -1, text, 0, 0x5ec, *(int*) (v9 + 1), *(int*) (a0 + 0xb0), 0, 0);
-				fcn_00546190(a0);
+				he_FreeAction(a0);
 				return;
 			}
 			break;
@@ -245,5 +245,5 @@ void __cdecl fcn_00560290(char* a0)
 			break;
 		}
 	}
-	fcn_00546190(a0);
+	he_FreeAction(a0);
 }

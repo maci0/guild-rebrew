@@ -13,7 +13,7 @@ extern int g_772ee8;
 extern char g_68b844[];
 
 void __cdecl fcn_005345a0(void);
-void __cdecl fcn_00534520(void);
+void __cdecl d3_BeginSelectionBox(void);
 int __cdecl fcn_004cef70(int, char*);
 char __cdecl fcn_004d15c0(int, char*);
 int __cdecl fcn_004c3030(int, int, int, int);
@@ -34,7 +34,7 @@ void __cdecl fcn_004d1790(int a0)
 	if (g_14ce8d4 != 0 && g_14ce8e4 == 0) {
 		if (d3_SelectionBoxActive == 0 && g_6772c4 != 0 && d2_CurrentElementId == -1) {
 			fcn_004d1910();
-			fcn_00534520();
+			d3_BeginSelectionBox();
 		}
 	} else {
 		if (g_14ce8cc != 0) {

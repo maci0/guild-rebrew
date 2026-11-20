@@ -12,7 +12,7 @@ typedef struct Slot {
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 
-void __cdecl fcn_0046b2b0(int slot);
+void __cdecl d2_DestroyElement(int slot);
 
 /* ADDRESS: GOLDTL 0x0046f2c0 */
 int __cdecl d2_ClearWindowChildren(int win, int keep)
@@ -34,7 +34,7 @@ int __cdecl d2_ClearWindowChildren(int win, int keep)
 			((int*)((D2_WIN*)g_1015f40)[win].pad3a8)[4 + 2] = -1;
 		}
 		if (((Slot*)g_1015ea0)[((D2_WIN*)g_1015f40)[win].children[i]].type != 0x40 || keep) {
-			fcn_0046b2b0(((D2_WIN*)g_1015f40)[win].children[i]);
+			d2_DestroyElement(((D2_WIN*)g_1015f40)[win].children[i]);
 		}
 	}
 	if ((*(char**) &((D2_WIN*)g_1015f40)[win].pad3c[0])) {

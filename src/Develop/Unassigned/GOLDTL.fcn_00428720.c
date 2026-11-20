@@ -3,11 +3,11 @@
 
 char* __cdecl evt_FindDefinition(char* c, const char* name);
 void __cdecl evt_EnterFunction(char* c, char* d);
-void __cdecl fcn_00429670(char* c);
+void __cdecl evt_RunGfxScript(char* c);
 void __cdecl evt_LogScriptError(char* c, int h, const char* msg);
 void __cdecl evt_LogScriptError(char* c, int h, const char* msg);
 
-int __cdecl fcn_00428720(char* c)
+int __cdecl evt_RequestScriptExit(char* c)
 {
 	unsigned int flags;
 	char* d;
@@ -25,7 +25,7 @@ int __cdecl fcn_00428720(char* c)
 			*(unsigned int*) (c + 0x124) = flags | 3;
 			evt_EnterFunction(c, d);
 			*(int*) (c + 0xc84) = 2;
-			fcn_00429670(c);
+			evt_RunGfxScript(c);
 			return 0;
 		}
 	}

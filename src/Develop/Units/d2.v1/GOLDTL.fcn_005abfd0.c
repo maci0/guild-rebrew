@@ -38,7 +38,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005abfd0(unsigned char* e)
+void __cdecl d2_OpenBeichteDialog(unsigned char* e)
 {
 	int flag;
 	int btnA;
@@ -98,7 +98,7 @@ void __cdecl fcn_005abfd0(unsigned char* e)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005abfd0, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_OpenBeichteDialog, 0x677c7) != 0);
 	fcn_00532ef0();
 	fcn_00471e30(dlg);
 }

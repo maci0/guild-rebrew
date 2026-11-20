@@ -6,7 +6,7 @@ float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_0057dc30(char*);
 void __cdecl fcn_0057dd40(char*);
 void __cdecl fcn_0057dd70(char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_0057dba0(char* o)
 {
@@ -24,5 +24,5 @@ void __cdecl fcn_0057dba0(char* o)
 			fcn_0057dd70(x);
 		}
 	}
-	fcn_00546190(o);
+	he_FreeAction(o);
 }

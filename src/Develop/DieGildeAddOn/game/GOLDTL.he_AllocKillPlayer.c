@@ -13,9 +13,9 @@ struct pos14 {
 
 char* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/Units/Error/error_message.h"
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl he_AllocKillPlayer(char* e)
 {
@@ -23,12 +23,12 @@ void __cdecl he_AllocKillPlayer(char* e)
 
 	if (gm_LookupEntityRecordById(*(int*) (e + 0xac)) == 0) {
 		ReportClientMessage("he_AllocKillPlayer: player not found!");
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
-	for (o = fcn_005463a0(1, 0, 0x72); o != 0; o = he_fn_Handlung()) {
+	for (o = he_StartHandlungSearch(1, 0, 0x72); o != 0; o = he_fn_Handlung()) {
 		if (o != e && *(int*) (o + 0xac) == *(int*) (e + 0xac)) {
-			fcn_00546190(e);
+			he_FreeAction(e);
 			return;
 		}
 	}

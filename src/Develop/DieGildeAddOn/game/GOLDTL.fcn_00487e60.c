@@ -21,7 +21,7 @@ extern char g_7f4ca0[];
  
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_00529160(char* o, int a, int id, int b);
 
@@ -31,7 +31,7 @@ void __cdecl fcn_00487e60(char* e, int k)
 	int found;
 	int i;
 
-	for (q = fcn_005463a0(2, 0, k, 3, *(int*) (*(char**) (e + 0x16c) + 1)); q != 0; q = he_fn_Handlung()) {
+	for (q = he_StartHandlungSearch(2, 0, k, 3, *(int*) (*(char**) (e + 0x16c) + 1)); q != 0; q = he_fn_Handlung()) {
 		found = 0;
 		if (k == 4) {
 			for (i = 0; i < g_100b0ac; i++) {

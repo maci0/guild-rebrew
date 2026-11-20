@@ -1,9 +1,9 @@
 
 
-int __cdecl fcn_00428720(int);
+int __cdecl evt_RequestScriptExit(int);
 
 int __cdecl StopScript(int* p)
 {
-	fcn_00428720(*p);
+	evt_RequestScriptExit(*p);
 	return 0;
 }

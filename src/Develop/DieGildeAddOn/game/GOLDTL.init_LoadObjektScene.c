@@ -43,7 +43,7 @@ int __cdecl fcn_00413160(void);
 void __cdecl ReportClientMessage(const char*);
 int __cdecl fcn_005105a0(char*);
 void __cdecl fcn_00510bd0(char*);
-void __cdecl fcn_00526bf0(int, int, int);
+void __cdecl d2_UpdateProgressOverlay(int, int, int);
 void __cdecl fcn_00538060(void);
 char* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
 
@@ -76,7 +76,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 			fcn_005373e0(0, flags);
 		}
 		fcn_00473150((char*) ch);
-		progress = (int) fcn_00526bf0;
+		progress = (int) d2_UpdateProgressOverlay;
 	}
 	if ((g_7747b0 & 8) && !fcn_0042df70((TIMER_CALLBACK) fcn_00538060)) {
 		fcn_0042df30((TIMER_CALLBACK) fcn_00538060, 1);

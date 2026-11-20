@@ -18,7 +18,7 @@ int __cdecl GetSampleHandle();
 int __cdecl SpeechQueued();
 int __cdecl WaitForSample();
 void __cdecl evt_ImportCommand(const char*, void*, ...);
-void __cdecl fcn_00425d90(const char*, void*, ...);
+void __cdecl evt_RegisterVariable(const char*, void*, ...);
 
 
 /* Registers the sound script commands and constants. */
@@ -35,12 +35,12 @@ void __cdecl evt_RegisterSoundCommands(void)
 	evt_ImportCommand("GetSampleHandle", GetSampleHandle, 1, 2, 1, 6);
 	evt_ImportCommand("SpeechQueued", SpeechQueued, 1, 5, 1, 1, 6, 1, 1);
 	evt_ImportCommand("WaitForSample", WaitForSample, 5, 1, 1);
-	fcn_00425d90("SND_W2", &g_677188, 1);
-	fcn_00425d90("SND_W1", &g_67718c, 1);
-	fcn_00425d90("SND_M1", &g_677198, 1);
-	fcn_00425d90("SND_M2", &g_677194, 1);
-	fcn_00425d90("SND_M3", &g_677190, 1);
-	fcn_00425d90("SND_HS", &g_67719c, 1);
-	fcn_00425d90("SND_NONE", &g_6771a0, 1);
-	fcn_00425d90("SND_VAR", &g_6771a4, 1);
+	evt_RegisterVariable("SND_W2", &g_677188, 1);
+	evt_RegisterVariable("SND_W1", &g_67718c, 1);
+	evt_RegisterVariable("SND_M1", &g_677198, 1);
+	evt_RegisterVariable("SND_M2", &g_677194, 1);
+	evt_RegisterVariable("SND_M3", &g_677190, 1);
+	evt_RegisterVariable("SND_HS", &g_67719c, 1);
+	evt_RegisterVariable("SND_NONE", &g_6771a0, 1);
+	evt_RegisterVariable("SND_VAR", &g_6771a4, 1);
 }

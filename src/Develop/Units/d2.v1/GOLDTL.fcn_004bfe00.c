@@ -20,7 +20,7 @@ void __cdecl fcn_004bf1b0(int, void *);
 void __cdecl fcn_004bf8e0(void *, void *);
 void __cdecl fcn_004bfc10(void);
 void __cdecl fcn_004bfca0(void *, void *);
-int __cdecl fcn_00469510(int);
+int __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -157,7 +157,7 @@ int __cdecl fcn_004bfe00(char *obj)
 	}
 	fcn_005b18c0(town);
 	if (g_6816d8 != -1) {
-		fcn_00469510(g_6816d8);
+		d2_ClearRadioGroup(g_6816d8);
 		g_6816d8 = -1;
 	}
 	fcn_004be280((void *) g_772908);

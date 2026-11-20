@@ -29,7 +29,7 @@ int __cdecl fcn_004b4860(unsigned short* key, char* x)
 
 /* ADDRESS: GOLD 0x004b4760 */
 /* ADDRESS: GOLDTL 0x004b48d0 */
-int __cdecl fcn_004b48d0(unsigned short* a1)
+int __cdecl gm_HasThreeFullyEquippedBuildings(unsigned short* a1)
 {
 	unsigned char* e;
 	int x;

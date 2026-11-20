@@ -25,7 +25,7 @@ typedef struct {
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, int f);
 
-int __cdecl fcn_005212c0(int f)
+int __cdecl ls_SaveCutscenes(int f)
 {
 	int count;
 	int i;

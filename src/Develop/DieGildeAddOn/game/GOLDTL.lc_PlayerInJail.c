@@ -5,7 +5,7 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* g_7746cc;
 
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
@@ -20,7 +20,7 @@ void __cdecl lc_PlayerInJail(void)
 	char* e;
 	char* d;
 
-	for (p = fcn_005463a0(1, 0, 0x3d); p != 0; p = he_fn_Handlung()) {
+	for (p = he_StartHandlungSearch(1, 0, 0x3d); p != 0; p = he_fn_Handlung()) {
 		if (*(int*) (p + 0xac) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id) {
 			for (e = gm_StartFilteredEntitySearch(1, 5, 4); e != 0; e = gm_FindNextFilteredEntity()) {
 				if (*(int*) (e + 0x65) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id) {

@@ -20,7 +20,7 @@ extern char g_6a5a10[];
 
 int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
 void __cdecl fcn_00545780(char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl fcn_0050fe40(unsigned short, int);
@@ -60,13 +60,13 @@ void __cdecl fcn_005507a0(char* u)
 				    (int) (gm_WalkEntityChain(*(unsigned short*) (u + 8)) * g_6652c8));
 				fcn_0050fe40(*(unsigned short*) (u + 8), 8);
 				fcn_00545780(u);
-				fcn_00546190(u);
+				he_FreeAction(u);
 				return;
 			}
 			if (g_100f1dc == 1) {
 				fcn_0050fe40(*(unsigned short*) (u + 8), -6);
 				fcn_00545780(u);
-				fcn_00546190(u);
+				he_FreeAction(u);
 			}
 			break;
 		}
@@ -74,6 +74,6 @@ void __cdecl fcn_005507a0(char* u)
 		if (*(char**) (u + 0x74) != 0) {
 			fcn_00545780(u);
 		}
-		fcn_00546190(u);
+		he_FreeAction(u);
 	}
 }

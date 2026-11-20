@@ -9,7 +9,7 @@ struct path_421350 {
 char* __cdecl fcn_00402610(int);
 char __cdecl fcn_0045b990(float*, float*, int*, int*, float*);
 int __cdecl fcn_0045b7e0(int, int, int, int*, int*);
-char __cdecl fcn_00407e30(char*, float*, float*, int, int, int*, int*, int, int);
+char __cdecl ch_FindWalkableCell(char*, float*, float*, int, int, int*, int*, int, int);
 unsigned short __cdecl fcn_00421350(struct path_421350*, char*, int, int, int, int, int);
 void __cdecl m_FreeTracked(int);
 int __cdecl m_alloc(int, char*);
@@ -62,7 +62,7 @@ unsigned int __cdecl fcn_004090d0(int self)
 	fcn_0045b7e0((int) v4, a0, v10, &v14, &v13);
 	a0 = v14;
 	v10 = v13;
-	fcn_00407e30(v4, (float*) (*(int*) (v1 + 0x34) + 0x4c),
+	ch_FindWalkableCell(v4, (float*) (*(int*) (v1 + 0x34) + 0x4c),
 	             (float*) (self + 0x144), v12, v11, &v14, &v13, 4, 0);
 	v12 = v14;
 	v11 = v13;

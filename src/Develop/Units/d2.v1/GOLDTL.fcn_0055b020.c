@@ -11,7 +11,7 @@ extern int g_7749e4;
 
 int __cdecl fcn_00545670(char*, short, short, char*, int);
 void __cdecl fcn_00545780(char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int* __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -20,7 +20,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00500cb0(void*, void*);
 
 /* ADDRESS: GOLDTL 0x0055b020 */
-void __cdecl fcn_0055b020(char* o)
+void __cdecl d2_ShowTitleAward(char* o)
 {
 	short* slot;
 	char* g;
@@ -44,7 +44,7 @@ void __cdecl fcn_0055b020(char* o)
 	if (state == -2 || state == -1 || *slot == -1 || g == 0) {
 		if (*(int*) (o + 0x74))
 			fcn_00545780(o);
-		fcn_00546190(o);
+		he_FreeAction(o);
 		return;
 	}
 	if (state != 0) {
@@ -59,7 +59,7 @@ void __cdecl fcn_0055b020(char* o)
 			return;
 		if (g_100f1dc == 2) {
 			fcn_00545780(o);
-			fcn_00546190(o);
+			he_FreeAction(o);
 			return;
 		}
 		if (g_7749e8 == 0)
@@ -68,7 +68,7 @@ void __cdecl fcn_0055b020(char* o)
 			return;
 		g_7749e8 = 0;
 		fcn_00545780(o);
-		fcn_00546190(o);
+		he_FreeAction(o);
 		return;
 	}
 	if (*(int*) (o + 0x74) == 0) {
@@ -78,7 +78,7 @@ void __cdecl fcn_0055b020(char* o)
 			fcn_00545670(o, 0, 0, "SPECIAL\\TITEL_ANDERE", 0x5fe);
 	}
 	if (*(int*) (o + 0x74) == 0) {
-		fcn_00546190(o);
+		he_FreeAction(o);
 		return;
 	}
 	d2_CenterDialogWindows(*(int*) (*(int*) (o + 0x74) + 8));

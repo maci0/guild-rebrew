@@ -25,7 +25,7 @@ extern CRITICAL_SECTION msx_TrackLock;
 
 void __cdecl fcn_0042b040(int handle, void* position);
 void __cdecl fcn_0042ad90(int handle, int mode);
-void __cdecl fcn_0042ac40(int handle);
+void __cdecl msx_CloseStream(int handle);
 
 void __cdecl msx_SetTrackVolume(Chan_14cc460* track, int mode);
 

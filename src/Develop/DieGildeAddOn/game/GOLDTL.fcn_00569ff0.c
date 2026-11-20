@@ -35,11 +35,11 @@ void __cdecl fcn_00529160(char*, int, int, int);
 int __cdecl fcn_00529670(char*, char*);
 int __cdecl fcn_0055be70(int*);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
-int __cdecl fcn_005463a0(int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_00507e30(char*, int);
+int __cdecl gm_GetScaledEntitySkill(char*, int);
 char* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl fcn_0050c5d0(char*, int*);
 int __cdecl fcn_0050c710(char*, int, int);
@@ -48,7 +48,7 @@ int __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl _ftol(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_0055c050(char*);
 float __cdecl fcn_004ff210(short, int);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
@@ -179,7 +179,7 @@ void __cdecl fcn_00569ff0(char* e)
 			return;
 		}
 		pa = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
-		pb = (char*) fcn_005463a0(1, 1, *(int*) (e + 0xb8));
+		pb = (char*) he_StartHandlungSearch(1, 1, *(int*) (e + 0xb8));
 		if (pa == 0 || pb == 0) {
 			goto fail;
 		}
@@ -198,7 +198,7 @@ void __cdecl fcn_00569ff0(char* e)
 		fcn_00500bb0(e + 0x52, 0, 0xa, 0);
 		return;
 	case 4:
-		pb = (char*) fcn_005463a0(1, 1, *(int*) (e + 0xb8));
+		pb = (char*) he_StartHandlungSearch(1, 1, *(int*) (e + 0xb8));
 		if (pb == 0) {
 			*(int*) (e + 0x70) = -1;
 			return;
@@ -297,7 +297,7 @@ void __cdecl fcn_00569ff0(char* e)
 							fcn_004c5da0(*p, *(int*) (pb + 1), *(int*) (q + 2), 0,
 							        0, "Einbruch");
 							hits++;
-							fcn_00507e30(o, 2);
+							gm_GetScaledEntitySkill(o, 2);
 							fcn_00529160(pb, 0, *(unsigned short*) o, 0);
 						}
 					}
@@ -432,11 +432,11 @@ void __cdecl fcn_00569ff0(char* e)
 			q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 			if (q != 0) {
 				fcn_004c5a60(*(int*) (q + 1), -1, *(int*) (cnt2 + 2));
-				fcn_00546190(e);
+				he_FreeAction(e);
 				return;
 			}
 		}
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	case -2:
 	case -1:
@@ -466,7 +466,7 @@ void __cdecl fcn_00569ff0(char* e)
 				p++;
 			} while (--n);
 		}
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	default:
 		return;

@@ -22,8 +22,8 @@ char* __cdecl gm_SearchTable67(int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00500bb0(int*, int, int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-void __cdecl fcn_00546190(char*);
-char* __cdecl fcn_005463a0(int, int, int);
+void __cdecl he_FreeAction(char*);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl fcn_0050c710(unsigned char*, int, int);
@@ -111,7 +111,7 @@ void __cdecl he_AllocTransport(char* action)
 			if (best != second) {
 				type = *(int*) (action + 0xf4);
 				if (type != 0 && type != -1) {
-					rec = fcn_005463a0(1, 1, type);
+					rec = he_StartHandlungSearch(1, 1, type);
 					if (rec != 0) {
 						for (i = 0; i < 3; i++) {
 							node = rec + 0xb8 + i * 4;
@@ -145,7 +145,7 @@ void __cdecl he_AllocTransport(char* action)
 			*(int*) (action + 0xc8) = 4;
 			if (first == second) {
 				ReportClientMessage((char*) 0x6a62dc);
-				fcn_00546190(action);
+				he_FreeAction(action);
 				return;
 			}
 		} else {
@@ -223,5 +223,5 @@ void __cdecl he_AllocTransport(char* action)
 	return;
 
 done:
-	fcn_00546190(action);
+	he_FreeAction(action);
 }

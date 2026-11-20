@@ -27,7 +27,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
-char *__cdecl fcn_005463a0(int, int, int);
+char *__cdecl he_StartHandlungSearch(int, int, int);
 char *__cdecl he_fn_Handlung(void);
 char *__cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00472640(int, int);
@@ -86,7 +86,7 @@ void __cdecl fcn_0059fe60(char *a0)
 		ids[2] = -1;
 		ids[3] = -1;
 		n = 0;
-		for (ent = fcn_005463a0(1, 0, 0x6f); ent != 0 && n < 4; ent = he_fn_Handlung()) {
+		for (ent = he_StartHandlungSearch(1, 0, 0x6f); ent != 0 && n < 4; ent = he_fn_Handlung()) {
 			if (*(int *) (ent + 0xac) == g_7f4ca0[g_774970].f4) {
 				acts[n] = *(int *) (ent + 4);
 				if (*(int *) (ent + 0x70) == 0) {
@@ -144,7 +144,7 @@ void __cdecl fcn_0059fe60(char *a0)
 				for (i = 0; i < 4; i++) {
 					if (d2_CurrentElementId == buttons[i]) {
 						ent = gm_LookupEntityRecordById(ids[i]);
-						act = fcn_005463a0(1, 1, acts[i]);
+						act = he_StartHandlungSearch(1, 1, acts[i]);
 						fcn_00471af0(dlg, 0);
 						fcn_0059fa80(&g_7f4ca0[g_774970], ent, act);
 						fcn_00471af0(dlg, 1);

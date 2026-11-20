@@ -6,7 +6,7 @@ void __cdecl nt_CloseClientConnection(void);
 unsigned short __cdecl fcn_004c3a50(char* n);
 
 /* ADDRESS: GOLDTL 0x004c49f0 */
-int __cdecl fcn_004c49f0(char* src)
+int __cdecl cm_EnqueueCommand(char* src)
 {
 	char* p;
 	char* q;

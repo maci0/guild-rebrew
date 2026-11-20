@@ -5,7 +5,7 @@ void __cdecl fcn_00442c00(char*, int);
 void __cdecl fcn_00453270(char*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_00438b40(char*, float*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 int __cdecl fcn_00433f40(char*);
 void __cdecl fcn_0044e4a0(char*, char*, int);
 char* __cdecl fcn_00435550(char*, char*, int, int, int);
@@ -76,7 +76,7 @@ void __cdecl fcn_00402ba0(char* character)
             high = *(char**)(character + 0x34);
             low = *(char**)(character + 0x22c);
             if (I32(high + 0x1cc) && !CompareVector3WithinTolerance((float*)(low + 0x84), (float*)(high + 0x84), 0.05f))
-                fcn_00438cb0(low, (float*)(high + 0x84));
+                d3_SetObjectRotation(low, (float*)(high + 0x84));
         update_animation:
             animation = *(char**)(*(char**)(character + 0x22c) + 0x1cc);
             if (!animation || (signed char)character[0x8c] < 0)

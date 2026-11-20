@@ -1,4 +1,4 @@
-int __cdecl fcn_0042b120(int);
+int __cdecl msx_FindWaveDriverIndex(int);
 int __cdecl fcn_0042a6a0(int);
 
 /* ADDRESS: GOLDTL 0x0042a700 */
@@ -10,7 +10,7 @@ int __cdecl fcn_0042a700(int obj)
 	int r = 0;
 
 	if (*(int*) 0x6b7f90 != 0) {
-		i = fcn_0042b120(obj);
+		i = msx_FindWaveDriverIndex(obj);
 		if (i >= 0) {
 			for (k = 0; k < *(int*) (obj + 0x18); k++) {
 				v = (*(int**) (0x6b7f10 + i * 4))[k];

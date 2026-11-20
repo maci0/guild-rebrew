@@ -69,8 +69,8 @@ extern char g_6b859b;
 int __cdecl fcn_00500e20(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00438b40(Camera*, char*);
-void __cdecl fcn_0052ac60(float);
-void __cdecl fcn_00438cb0(Camera*, char*);
+void __cdecl d3_SetCameraHeightFraction(float);
+void __cdecl d3_SetObjectRotation(Camera*, char*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl fcn_00402aa0(Obj*);
 void __cdecl ch_SetVisible(Obj*, int);
@@ -97,11 +97,11 @@ void __cdecl fcn_00516f60(void)
 	v = (View*) gm_GetEntityTableEntry((char*) (&((Entity*)g_7f4ca0)[g_774970]));
 	if (v != 0 && v->zoom != -1.0f) {
 		fcn_00438b40(((Camera*)d3_ActiveCamera), v->pos);
-		fcn_0052ac60(v->zoom);
+		d3_SetCameraHeightFraction(v->zoom);
 		((Camera*)d3_ActiveCamera)->angle = v->angle;
-		fcn_00438cb0(((Camera*)d3_ActiveCamera), ((Camera*)d3_ActiveCamera)->pos);
+		d3_SetObjectRotation(((Camera*)d3_ActiveCamera), ((Camera*)d3_ActiveCamera)->pos);
 	} else {
-		fcn_0052ac60(0.33f);
+		d3_SetCameraHeightFraction(0.33f);
 	}
 	for (i = 0; i < 768; i++) {
 		if (((Entity*)g_7f4ca0)[i].obj != 0 && d3_GetContextIndex(((Entity*)g_7f4ca0)[i].obj->model) == 0 && ((Entity*)g_7f4ca0)[i].obj->owner == -1) {

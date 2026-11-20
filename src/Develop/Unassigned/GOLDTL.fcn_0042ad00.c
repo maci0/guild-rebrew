@@ -2,7 +2,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-int __cdecl fcn_0042ac40(int);
+int __cdecl msx_CloseStream(int);
 
 int __cdecl msx_CloseAllStreams(void)
 {
@@ -14,7 +14,7 @@ int __cdecl msx_CloseAllStreams(void)
 		for (i = 0; i < 0x10; i++) {
 			if (msx_WaveDrivers[i] != 0) {
 				for (j = 0; j < msx_WaveDrivers[i][6]; j++) {
-					if (g_6b7f50[i][j] != 0 && fcn_0042ac40(g_6b7f50[i][j]) != 0) {
+					if (g_6b7f50[i][j] != 0 && msx_CloseStream(g_6b7f50[i][j]) != 0) {
 						r = -1;
 					}
 				}

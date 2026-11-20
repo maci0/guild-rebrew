@@ -7,7 +7,7 @@ extern float g_662d40[3];
 
 void __cdecl fcn_00455540(char* o, float* v, float* out);
 void __cdecl fcn_00458a10(char* src, char* pos, float* out);
-void __cdecl fcn_004518a0(float* v);
+void __cdecl d3_NormalizeVector(float* v);
 
 
 /* ADDRESS: GOLD 0x00448ac0 */
@@ -31,8 +31,8 @@ float __cdecl fcn_00448ac0(char* obj, float* target)
 	td[0] = target[0] - pos[0];
 	td[2] = target[2] - pos[2];
 	td[1] = 0.0f;
-	fcn_004518a0(td);
-	fcn_004518a0(a);
+	d3_NormalizeVector(td);
+	d3_NormalizeVector(a);
 	y = td[1] * a[1];
 	dot = (td[0] * a[0] + td[2] * a[2]) + y;
 	dot = (-1.0f > dot ? -1.0f : dot) < 1.0f ? (-1.0f > dot ? -1.0f : dot) : 1.0f;

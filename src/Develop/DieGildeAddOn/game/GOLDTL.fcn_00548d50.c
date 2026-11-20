@@ -33,7 +33,7 @@ extern float g_6628cc;
 extern float g_6628a0;
 
 unsigned short __cdecl gm_RandomMod(int);
-void* __cdecl fcn_005463a0(int, ...);
+void* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl fcn_004f4830(int, struct stats*);
 int __cdecl fcn_0050cf50(char*, int);
@@ -59,7 +59,7 @@ void __cdecl fcn_00548d50(void)
 	if (gm_RandomMod(4) != 0) {
 		return;
 	}
-	if (fcn_005463a0(1, 0, 0x67) != 0) {
+	if (he_StartHandlungSearch(1, 0, 0x67) != 0) {
 		return;
 	}
 	a = gm_StartFilteredEntitySearch(1, 0, 0x20);

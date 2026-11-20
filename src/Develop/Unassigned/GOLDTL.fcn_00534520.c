@@ -12,7 +12,7 @@ extern int g_7e4310;
 #define MAX_(a, b) ((a) > (b) ? (a) : (b))
 #define MIN_(a, b) ((a) < (b) ? (a) : (b))
 
-void __cdecl fcn_00534520(void)
+void __cdecl d3_BeginSelectionBox(void)
 {
 	int a;
 	int b;

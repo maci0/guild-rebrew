@@ -17,10 +17,10 @@ void* __cdecl FindSlotEntryFiltered(int a, unsigned char* rec, void* prev,
 int __cdecl fcn_004f1790(char* a, Elem* e);
 int __cdecl fcn_004f46e0(int a, unsigned char** out1, void** out2);
 void __cdecl io_FormatTextBuffer(void* dest, int id, ...);
-int __cdecl fcn_0058c410(View* view, char* text);
+int __cdecl d2_CreateRentAGraveDialog(View* view, char* text);
 void __cdecl fcn_0058cc90(unsigned char* a1, View* view);
 void __cdecl fcn_00471e30(int a);
-void __cdecl fcn_0058d020(unsigned char* a1);
+void __cdecl d2_OpenRentAGraveDialog(unsigned char* a1);
 int __cdecl fcn_00526120(int a, int b);
 void __cdecl fcn_00532ef0(void);
 
@@ -41,7 +41,7 @@ void __cdecl fcn_0058fa40(unsigned char* input)
 		view.x24 = (unsigned char) fcn_004f1790((char*) *(int*) (input + 0x65),
 			(Elem*) obj);
 		io_FormatTextBuffer(text, 0x4107, ((char**) 0x665f78)[*(int*) obj]);
-		if (fcn_0058c410(&view, (char*) text) != 0) {
+		if (d2_CreateRentAGraveDialog(&view, (char*) text) != 0) {
 			fcn_0058cc90(input, &view);
 			fcn_00471e30(view.x0);
 			fcn_00532ef0();
@@ -51,7 +51,7 @@ void __cdecl fcn_0058fa40(unsigned char* input)
 	}
 	if (fcn_004f46e0((int) (0x7f4ca0 + (*(unsigned short*) 0x774970) * 0x21c),
 			&rec, &obj) == 0) {
-		fcn_0058d020(input);
+		d2_OpenRentAGraveDialog(input);
 		fcn_00532ef0();
 		return;
 	}

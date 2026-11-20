@@ -2,7 +2,7 @@
 #include <string.h>
 
 extern int __cdecl fcn_00407d90(void *, char *);
-extern int __cdecl fcn_00408540(void *, int, char *);
+extern int __cdecl ch_ReplanBlockedPath(void *, int, char *);
 extern void __cdecl ch_FinishAni(void *);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
@@ -44,7 +44,7 @@ unsigned int __cdecl ch_UpdateWalkOnPath(int a0, int a1)
     v8 = fcn_00407d90(character, buffer);
     if (!v8)
         goto Lafter;
-    v8 = fcn_00408540(character, v8, buffer);
+    v8 = ch_ReplanBlockedPath(character, v8, buffer);
     if (v8 > 0) {
         if (!*(int *)(character + 0x70))
             goto Lafter;

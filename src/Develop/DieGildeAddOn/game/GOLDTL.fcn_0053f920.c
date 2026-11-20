@@ -20,16 +20,16 @@ extern char* g_7746cc;
 extern char* g_7746c4;
 extern unsigned char* g_7746c8;
 
-void __cdecl fcn_00545430(void);
+void __cdecl he_InitEventSystem(void);
 void __cdecl fcn_00538060(void);
 #include "client_timer.h"
 void __cdecl fcn_0053f100(void);
-void __cdecl fcn_004f6740(void);
+void __cdecl cm_InitCrimeRecords(void);
 void __cdecl fcn_004fa690(void);
 int __cdecl fcn_0044c310(char*, char*);
 int __cdecl sb_LoadSampleBank(char*, int);
 void __cdecl msx_SetFadeDuration(int);
-void __cdecl fcn_005458b0(void);
+void __cdecl d2_CreateEventBar(void);
 void __cdecl fcn_00533880(void);
 void __cdecl fcn_005338a0(void);
 void __cdecl fcn_005c80c0(void);
@@ -39,9 +39,9 @@ void __cdecl fcn_00591c40(void);
 void __cdecl fcn_00510900(void);
 void __cdecl fcn_004e71a0(void);
 
-void __cdecl fcn_0053f920(void)
+void __cdecl gm_InitGameSession(void)
 {
-	fcn_00545430();
+	he_InitEventSystem();
 	g_774714 = 1;
 	g_774950 = 1;
 	(*(int*)&gm_GameTime) = 2;
@@ -52,7 +52,7 @@ void __cdecl fcn_0053f920(void)
 	tb_OpenFunction(fcn_00538060, 0x47);
 	fcn_0042df30(fcn_00538060, 1);
 	fcn_0053f100();
-	fcn_004f6740();
+	cm_InitCrimeRecords();
 	fcn_004fa690();
 	g_7749cc = fcn_0044c310("Buch", "Buch");
 	if (g_774934 != 0) {
@@ -65,7 +65,7 @@ void __cdecl fcn_0053f920(void)
 		g_6b5c2c = sb_LoadSampleBank("Lebewesen\\schritte.sbf", 1);
 	}
 	msx_SetFadeDuration(3000);
-	fcn_005458b0();
+	d2_CreateEventBar();
 	fcn_00533880();
 	fcn_005338a0();
 	g_774978 = 0;

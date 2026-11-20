@@ -19,15 +19,15 @@ extern char* g_14ac5fc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00514570(char* s);
-void __cdecl fcn_005356e0(void);
+void __cdecl main_PumpWindowMessages(void);
 void __cdecl fcn_00535960(void);
 int __cdecl ls_SendGame(char* s);
 void __cdecl fcn_004c5790(int kind, Msg* m);
-void __cdecl fcn_00521920(char* s, int n);
-void __cdecl fcn_00535770(int v);
+void __cdecl ls_LoadSavegame(char* s, int n);
+void __cdecl sv_WaitForNetworkSync(int v);
 void __cdecl init_LocalData(void);
 
-int __cdecl fcn_00514a20(char* name)
+int __cdecl ls_LoadNetworkGame(char* name)
 {
 	Msg msg;
 	char save[260];
@@ -39,7 +39,7 @@ int __cdecl fcn_00514a20(char* name)
 	fcn_00514570(text);
 	g_77494c = 0;
 	do {
-		fcn_005356e0();
+		main_PumpWindowMessages();
 		fcn_00535960();
 	} while (g_77494c == 0);
 	if (g_77494c & 1) {
@@ -54,11 +54,11 @@ int __cdecl fcn_00514a20(char* name)
 		}
 	}
 	while (!(g_77494c & 4)) {
-		fcn_005356e0();
+		main_PumpWindowMessages();
 		fcn_00535960();
 	}
-	fcn_00521920(path, 5);
-	fcn_00535770(0x24087);
+	ls_LoadSavegame(path, 5);
+	sv_WaitForNetworkSync(0x24087);
 	fcn_00514570(g_14ac5fc);
 	init_LocalData();
 	d2_SuppressOverlay = 0;

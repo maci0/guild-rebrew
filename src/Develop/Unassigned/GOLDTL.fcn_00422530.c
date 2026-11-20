@@ -23,7 +23,7 @@ extern int g_6b7d7c;
 extern int* g_6b7d78;
 extern char g_14cbc20[];
 
-Sample* __cdecl fcn_00422530(Bank* bank, const char* name)
+Sample* __cdecl sb_FindSampleByName(Bank* bank, const char* name)
 {
 	Sample* r;
 	int i;
@@ -45,7 +45,7 @@ Sample* __cdecl fcn_00422530(Bank* bank, const char* name)
 		}
 	} else {
 		for (b = ((Bank*)g_6b7d78); b != 0; b = b->next) {
-			r = fcn_00422530(b, name);
+			r = sb_FindSampleByName(b, name);
 			if (r != 0) {
 				break;
 			}

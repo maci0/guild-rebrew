@@ -6,7 +6,7 @@ void __cdecl fcn_004d8200(int*);
 void __cdecl fcn_004d85c0(int*);
 void __cdecl fcn_004d85f0(int*);
 void __cdecl fcn_004d8660(int*);
-void __cdecl fcn_004d8700(int*);
+void __cdecl gm_StartGroundPickupAnimation(int*);
 void __cdecl fcn_004d87b0(int*);
 void __cdecl fcn_004d87f0(int*);
 
@@ -42,7 +42,7 @@ int __cdecl fcn_004cd330(unsigned char* command, char* result)
 		break;
 	case 5:
 		if (e[8] != 0)
-			fcn_004d8700((int*) (command + 0x35));
+			gm_StartGroundPickupAnimation((int*) (command + 0x35));
 		break;
 	case 7:
 		fcn_004d87b0((int*) (command + 0x35));

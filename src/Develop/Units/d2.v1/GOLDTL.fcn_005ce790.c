@@ -13,7 +13,7 @@ int __cdecl io_AppendText(char*, ...);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005ce790(char* text)
+void __cdecl d2_ShowApplicationError(char* text)
 {
 	int h;
 
@@ -30,6 +30,6 @@ void __cdecl fcn_005ce790(char* text)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(fcn_005ce790, 0x677c7) != 0);
+	} while (fcn_005373e0(d2_ShowApplicationError, 0x677c7) != 0);
 	fcn_00471e30(h);
 }

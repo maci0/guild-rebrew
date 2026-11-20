@@ -7,7 +7,7 @@ extern int g_1040494;
 extern int g_67d3a0;
 extern int g_67d3a4;
 
-void __cdecl fcn_0046c5a0(int, int);
+void __cdecl d2_RenderMarkupText(int, int);
 void __cdecl fcn_0046c310(int);
 void __cdecl fcn_0046dd60(int, int);
 void __cdecl fcn_00472640(int, int);
@@ -21,7 +21,7 @@ char* __cdecl itoa(int, char*, int);
 /* Draw one window slot: sync the item states, size the frame, then blit the
  * border and the hatch pattern for the selected building. */
 /* ADDRESS: GOLDTL 0x0046dff0 */
-void __cdecl fcn_0046dff0(int windowIndex, int a1)
+void __cdecl d2_DrawWindow(int windowIndex, int a1)
 {
 	char* b;
 	int saved;
@@ -57,14 +57,14 @@ void __cdecl fcn_0046dff0(int windowIndex, int a1)
 			if (*(int*) (g_1015ea0 + 0x20 + id * 0x2f4) == 0x40) {
 				rec = *(int*) (g_1015ea0 + id * 0x2f4 + 0x88);
 				if (*(unsigned int*) ((char*) &g_1015f40[rec] + 0x14) & 0x4000) {
-					fcn_0046c5a0(0, rec);
+					d2_RenderMarkupText(0, rec);
 				}
 			}
 			i++;
 		} while (i < *(int*) (b + 0x2c));
 	}
 	if (*(unsigned int*) (b + 0x14) & 0x4000) {
-		fcn_0046c5a0(0, windowIndex);
+		d2_RenderMarkupText(0, windowIndex);
 	}
 	rec = *(int*) (b + 0x274);
 	g_772554 = saved;
@@ -104,7 +104,7 @@ void __cdecl fcn_0046dff0(int windowIndex, int a1)
 		fcn_0046dd60((int) b, vert);
 	}
 	if (*(unsigned char*) (b + 0x14) & 0x10) {
-		fcn_0046c5a0(vert, windowIndex);
+		d2_RenderMarkupText(vert, windowIndex);
 	}
 	fcn_0047a040(*(int*) (b + 4), *(int*) (b + 8), *(int*) (b + 0xc) + *(int*) (b + 4), *(int*) (b + 0x10) + *(int*) (b + 8));
 	if ((*(unsigned char*) (b + 0x14) & 4) && !g_772554) {

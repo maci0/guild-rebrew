@@ -19,20 +19,20 @@ void* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl fcn_00472640(int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);
-int __cdecl fcn_0057ec20(int);
+int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_005cd440(char*, int, int, void*);
 int __cdecl fcn_005ba910(int, int);
 void __cdecl fcn_00525ef0(void);
-void __cdecl fcn_0059aa10(char*, int);
+void __cdecl d2_RunTechTreeDialog(char*, int);
 void __cdecl fcn_005c3f10(char*);
-void __cdecl fcn_005c49e0(char*);
+void __cdecl d2_ShowGebaeudeOptions(char*);
 int __cdecl fcn_0052f7a0(void);
 void __cdecl fcn_0052ea30(void);
 void __cdecl fcn_0052f710(void);
-void __cdecl fcn_0052e450(unsigned short*);
-void __cdecl fcn_0052e7b0(char*);
-void __cdecl fcn_0052e5a0(void);
+void __cdecl d2_OpenTransporterInfoPanel(unsigned short*);
+void __cdecl d2_OpenPersonInfoPanel(char*);
+void __cdecl d2_OpenBuildingInfoPanel(void);
 void __cdecl fcn_0052e250(unsigned short*);
 void __cdecl fcn_0052df40(unsigned char*);
 
@@ -79,16 +79,16 @@ void __cdecl fcn_0052f7b0(void)
                 g_7746dc = fcn_00506380(g_774970, (u8*)selected, 0, 0);
             }
             if (g_7746c4 != 0 && (g_7746dc & 0x10)) {
-                fcn_0059aa10(g_7746c4, *(unsigned short*)(g_7746c4 + 0x29));
+                d2_RunTechTreeDialog(g_7746c4, *(unsigned short*)(g_7746c4 + 0x29));
             } else if (g_7746c8 != 0 && g_7746cc == 0) {
                 fcn_005c3f10((char*)g_7746c8);
             } else if (g_7746c8 != 0 && (g_7746dc & 0x10)) {
-                fcn_0059aa10((char*)g_7746c8, *(unsigned short*)g_7746cc);
+                d2_RunTechTreeDialog((char*)g_7746c8, *(unsigned short*)g_7746cc);
             } else if (g_7e2aa0 != 0) {
                 kind = gm_GetBuildingTypeCategory(*(u8*)g_7e2aa0);
                 g_7746dc = fcn_00506380(g_774970, (u8*)g_7e2aa0, 0, 0);
                 if ((kind == 3 || kind == 5) && (g_7746dc & 0x10))
-                    fcn_005c49e0(g_7e2aa0);
+                    d2_ShowGebaeudeOptions(g_7e2aa0);
                 else
                     fcn_005c3f10(g_7e2aa0);
             }
@@ -98,7 +98,7 @@ void __cdecl fcn_0052f7b0(void)
                 if (kind == 1 || kind == 2 || kind == 4 || kind == 7 || kind == 8 ||
                     ((SelectProto*)lpGebaeudePROT)[*(u8*)selected].kind == 0x10 ||
                     ((SelectProto*)lpGebaeudePROT)[*(u8*)selected].kind == 0x1e) {
-                    if (fcn_0057ec20(0x400) == 1) {
+                    if (d2_TutorialAllowsFlag(0x400) == 1) {
                         g_7746d8 = fcn_00506380(g_774970, (u8*)selected, 0, 0);
                         fcn_0057e880(0x12, (int)selected, 0, 0);
                         fcn_005ba910((int)selected, 1);
@@ -109,7 +109,7 @@ void __cdecl fcn_0052f7b0(void)
                 }
             }
         } else if (g_6a25e0 != -1 && d2_CurrentElementId == g_6a25e0) {
-            if (fcn_0057ec20(0x80) == 1) {
+            if (d2_TutorialAllowsFlag(0x80) == 1) {
                 memset(query, 0, sizeof(query));
                 query[1] = 0;
                 query[5] = 4;
@@ -138,20 +138,20 @@ refresh:
     count = g_7746f0;
     if (item != 0 && *(u8*)(lpObjektePROT + *item * 0x41) == 0x1d &&
         count == 0 && focus == 0) {
-        fcn_0052e450(item);
+        d2_OpenTransporterInfoPanel(item);
         goto reload;
     }
     if (g_7746c0 == 0 && g_7746f4 == 0 && count == 0) {
         if (g_7746cc != 0 || focus != 0)
             goto snapshot;
-        fcn_0052e5a0();
+        d2_OpenBuildingInfoPanel();
         goto reload;
     }
     if (count != 0 && (focus != *(int*)0x77478c || count != *(int*)0x774794)) {
         if (count > 1) {
-            fcn_0052e7b0(0);
+            d2_OpenPersonInfoPanel(0);
         } else {
-            fcn_0052e7b0((char*)focus);
+            d2_OpenPersonInfoPanel((char*)focus);
             *(int*)0x77478c = g_7ea360;
             fcn_0052ea30();
         }

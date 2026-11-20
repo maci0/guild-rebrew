@@ -17,12 +17,12 @@ int __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004de610(int);
 int __cdecl fcn_004c3030(int, int, char*, int);
-void __cdecl fcn_004e4c90(int);
+void __cdecl cut_WaitTicks(int);
 char* __cdecl ch_CreateQueuedAction(char*, void*, int, int, int);
 void __cdecl fcn_004dff50(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl cut_RandFloat(void);
-int __cdecl fcn_00406340(char*, const char*, int);
+int __cdecl ch_QueuePlayAnimation(char*, const char*, int);
 
 
 /* Duel intro: plays the challenger's opening move chosen by the duel kind. */
@@ -45,7 +45,7 @@ void __cdecl fcn_004e0210(char* e, char* foe)
 			t = fcn_004de610(7);
 			io_AppendText(t + 0x10fa, *(unsigned short*) e);
 			fcn_004c3030(*(unsigned short*) e, 0, "_DUELL_INTRO_C2_AUSWAHL_SCHIESSEN", t);
-			fcn_004e4c90(2);
+			cut_WaitTicks(2);
 			io_AppendText((int) "$N");
 			o = ch_CreateQueuedAction(*(char**) (e + 0x184), (void*) fcn_004dff50, 6, 0x2e, 1);
 			*(char**) (o + 0x17c) = foe;
@@ -82,8 +82,8 @@ void __cdecl fcn_004e0210(char* e, char* foe)
 			io_AppendText(t + 0x10e9);
 			fcn_004c3030(*(unsigned short*) e, 0, "_DUELL_INTRO_C2_AUSWAHL_LAESTERN", t);
 			io_AppendText((int) "$N");
-			fcn_00406340(*(char**) (e + 0x184), "gestik/abfaellig", 1);
-			fcn_004e4c90(2);
+			ch_QueuePlayAnimation(*(char**) (e + 0x184), "gestik/abfaellig", 1);
+			cut_WaitTicks(2);
 			a = gm_GetEntitySkill(e, 4);
 			b = gm_GetEntitySkill(foe, 4);
 			a += cut_RandFloat();
@@ -110,6 +110,6 @@ void __cdecl fcn_004e0210(char* e, char* foe)
 			io_AppendText((int) "$N");
 			break;
 		}
-		fcn_004e4c90(4);
+		cut_WaitTicks(4);
 	}
 }

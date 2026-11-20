@@ -1,7 +1,7 @@
 extern int d2_CurrentWindowId;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_004e8b80(int, int, char*);
+int __cdecl amt_FindOfficeSlotsByKind(int, int, char*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -32,7 +32,7 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 	int found;
 	int w;
 
-	n = fcn_004e8b80(a0, 6, rec);
+	n = amt_FindOfficeSlotsByKind(a0, 6, rec);
 	if (n <= 0) {
 		return;
 	}

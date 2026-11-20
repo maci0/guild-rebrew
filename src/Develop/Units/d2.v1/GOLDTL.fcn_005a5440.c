@@ -55,7 +55,7 @@ int __cdecl fcn_00508640(int a, int b);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_0046f940(int, char*);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 void __cdecl fcn_00473690(int key, int amt);
 void __cdecl fcn_005a51c0(int);
 
@@ -128,9 +128,9 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 			((Ent*)g_1015ea0)[r->label].f18 = 0xbe;
 			r->count = amount;
 		} else {
-			fcn_0046b2b0(r->label);
+			d2_DestroyElement(r->label);
 			r->label = -1;
-			fcn_0046b2b0(r->icon);
+			d2_DestroyElement(r->icon);
 			r->icon = -1;
 			r->count = 0;
 			r->key = 0;

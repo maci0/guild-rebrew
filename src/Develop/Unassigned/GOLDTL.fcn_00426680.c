@@ -28,7 +28,7 @@ void* __cdecl fcn_00426240(char*, char*);
 
 /* Lexes the next token of the script text at s. */
 /* ADDRESS: GOLDTL 0x00426680 */
-void __cdecl fcn_00426680(char* s, struct tok_426680* t)
+void __cdecl evt_ReadToken(char* s, struct tok_426680* t)
 {
 	char buf[0x100];
 	char found;

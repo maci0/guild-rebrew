@@ -13,13 +13,13 @@ extern void __cdecl d2_CenterDialogWindows(int a0);
 extern void __cdecl d2_SetForm(int a0, int a1);
 extern int __cdecl io_AppendText(int a0);
 extern int __cdecl fcn_00472250(int a0, int a1, int a2);
-extern void __cdecl fcn_00533dc0(int a0, int a1, int a2);
+extern void __cdecl d2_DrawPanelFrame(int a0, int a1, int a2);
 extern int __cdecl d2_CreateRadioGroup(int a0, int a1, int a2, int a3);
 extern int __cdecl d2_SelectRadioGroup(int a0, int a1);
 
 extern int __cdecl fcn_005373e0(void *a0, int a1);
 extern void __cdecl fcn_00471e30(int a0);
-extern int __cdecl fcn_00469510(int a0);
+extern int __cdecl d2_ClearRadioGroup(int a0);
 extern float __cdecl eval_ObjektPreis2Credits(int a0, int a1);
 extern int __cdecl fcn_00526010(char *a0, int a1, unsigned char a2);
 extern int __cdecl fcn_0051e070(void);
@@ -31,7 +31,7 @@ extern int __cdecl gm_GetEntityTableEntry(int a0);
 extern void __cdecl fcn_004c51f0(int a0, int a1, int a2, int a3, char a4, int a5);
 
 /* ADDRESS: GOLDTL 0x005b9980 */
-void __cdecl fcn_005b9980(int sourceObj)
+void __cdecl d2_ShowNewCartDialog(int sourceObj)
 {
     int choiceIndex;
     int confirmButton;
@@ -60,7 +60,7 @@ void __cdecl fcn_005b9980(int sourceObj)
     optionButtons[1] = fcn_00472250(h, 1, 1);
     optionButtons[2] = fcn_00472250(h, 1, 2);
     d2_SetForm(h, 0);
-    fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x741);
+    d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x741);
     d2_SetForm(h, 3);
     confirmButton = fcn_00472250(h, 3, io_AppendText(0xdb));
     groupId = d2_CreateRadioGroup(3, optionButtons[0], optionButtons[1], optionButtons[2]);
@@ -118,5 +118,5 @@ void __cdecl fcn_005b9980(int sourceObj)
             g_774654 = 1;
     } while (fcn_005373e0((void *)0x5b9980, 0x677c7) != 0);
     fcn_00471e30(h);
-    fcn_00469510(groupId);
+    d2_ClearRadioGroup(groupId);
 }

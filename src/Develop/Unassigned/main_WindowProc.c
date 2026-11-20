@@ -15,7 +15,7 @@ void __cdecl d3_CreateRenderVertexBuffers(void);
 void __cdecl fcn_004117c0(int);
 void __cdecl fcn_004117f0(int);
 void __cdecl fcn_0042a3d0(void);
-void __cdecl fcn_0042a410(int, int, int);
+void __cdecl msx_ReacquireWaveDriver(int, int, int);
 void __cdecl fcn_0042a460(int, int);
 void __cdecl fcn_0043b360(void);
 void __cdecl fcn_00473610(void);
@@ -34,7 +34,7 @@ void __cdecl fcn_0047ce80(void);
 #define D3DERR_DEVICELOST_VALUE 0x88760869
 
 /* ADDRESS: GOLDTL 0x00538250 */
-LRESULT CALLBACK fcn_00538250(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK main_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	int hr;
 	int active;
@@ -117,7 +117,7 @@ LRESULT CALLBACK fcn_00538250(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 	default:
 		return DefWindowProcA(hWnd, uMsg, wParam, lParam);
 	case WM_PRIVATE_7E7:
-		fcn_0042a410((int) wParam, (int) hWnd, WM_PRIVATE_7E7);
+		msx_ReacquireWaveDriver((int) wParam, (int) hWnd, WM_PRIVATE_7E7);
 		goto exit0;
 	}
 exit0:

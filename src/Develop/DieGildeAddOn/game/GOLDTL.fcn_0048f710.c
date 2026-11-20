@@ -7,7 +7,7 @@ typedef struct F8 {
 extern char* g_77261c;
 
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
-int __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
+int __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
@@ -29,7 +29,7 @@ int __cdecl fcn_0048f710(char* a1, char* e, char* r, char* out)
 	if (!fcn_00502cd0(*(int*) (e + 0x5d), 2, 0, 0x211, 6)) {
 		return 0;
 	}
-	if (fcn_005463a0(2, 0, 0x90, 3, *(int*) (e + 1))) {
+	if (he_StartHandlungSearch(2, 0, 0x90, 3, *(int*) (e + 1))) {
 		return 0;
 	}
 	found = -1;

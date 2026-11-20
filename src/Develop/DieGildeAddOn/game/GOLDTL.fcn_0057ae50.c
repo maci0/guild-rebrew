@@ -6,17 +6,17 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char* __cdecl fcn_005463a0(int, int, int, ...);
+char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
-char* __cdecl fcn_00426cc0(int);
+char* __cdecl evt_FindScriptById(int);
 char* __cdecl evt_LoadGfxScript(const char* name);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 void __cdecl fcn_00428340(char* o, int n, ...);
-void __cdecl fcn_00428720(char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl evt_RequestScriptExit(char*);
+void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_0057ae50(char* u)
+void __cdecl he_UpdateNecromancerFog(char* u)
 {
 	float pos[4];
 	char* q;
@@ -24,21 +24,21 @@ void __cdecl fcn_0057ae50(char* u)
 	char* o;
 	int saved;
 
-	q = fcn_005463a0(1, 1, *(int*) (u + 0xac));
+	q = he_StartHandlungSearch(1, 1, *(int*) (u + 0xac));
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (u + 0x10));
 	if (e == 0 || *(char**) (e + 0x61) == 0 || q == 0 || *(int*) (q + 0x70) == -2 || *(int*) (q + 0x70) == -1) {
-		o = fcn_00426cc0(*(int*) (u + 0xb0));
+		o = evt_FindScriptById(*(int*) (u + 0xb0));
 		if (o != 0 && *(int*) o == FX_MAGIC && *(int*) (o + 4) == *(int*) (u + 0x10)) {
 			saved = d3_CurrentContextIndex;
 			fcn_004432d0(0, 1);
-			fcn_00428720(o);
+			evt_RequestScriptExit(o);
 			fcn_004432d0(saved, 1);
 		}
-		fcn_00546190(u);
+		he_FreeAction(u);
 		return;
 	}
 	if (*(int*) (u + 0xb0) != -1) {
-		o = fcn_00426cc0(*(int*) (u + 0xb0));
+		o = evt_FindScriptById(*(int*) (u + 0xb0));
 		if (o != 0) {
 			if (*(int*) o == FX_MAGIC && *(int*) (o + 4) == *(int*) (u + 0x10)) {
 				return;

@@ -84,7 +84,7 @@ void __cdecl fcn_00533a40(char*);
 int __cdecl fcn_004c5790(int, Msg*);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005e0f90(void)
+int __cdecl d2_ShowNetworkLoadGame(void)
 {
 	int i;
 	int dlg;
@@ -114,7 +114,7 @@ int __cdecl fcn_005e0f90(void)
 	fcn_005e0140(dlg, 1, slots, recs, s_6acff0, 1);
 	fcn_00472640(slots[0].h, 0);
 	sel = fcn_00472830(dlg, 1);
-	while (fcn_005373e0((void*) fcn_005e0f90, wait) != 0) {
+	while (fcn_005373e0((void*) d2_ShowNetworkLoadGame, wait) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

@@ -1,8 +1,8 @@
 
 
-void __cdecl fcn_00546190(void*);
+void __cdecl he_FreeAction(void*);
 
 void __cdecl fcn_0054b800(void* u)
 {
-	fcn_00546190(u);
+	he_FreeAction(u);
 }

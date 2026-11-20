@@ -21,7 +21,7 @@ void __cdecl io_FormatTextBuffer(char*, int);
 int __cdecl fcn_005bdc30(int, int*, char*, int, int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
-int __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
+int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
 
 int __cdecl fcn_005dce00(char* cmd, char* arg)
@@ -59,7 +59,7 @@ int __cdecl fcn_005dce00(char* cmd, char* arg)
 		if (((Ent*)g_7f4ca0)[i].owner == obj) {
 			val = ((Ent*)g_7f4ca0)[i].level % 2 + ((Ent*)g_7f4ca0)[i].level / 2;
 			fcn_004c4510((char*) &((Ent*)g_7f4ca0)[i], ((Ent*)g_7f4ca0)[i].f4);
-			fcn_004c4570(1, 1, (unsigned short) ((char*) &((Ent*)g_7f4ca0)[i].level - g_aed32c), &val);
+			cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((char*) &((Ent*)g_7f4ca0)[i].level - g_aed32c), &val);
 			fcn_004c5360();
 		}
 	}

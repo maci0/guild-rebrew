@@ -17,8 +17,8 @@ struct loan_offer {
 
 int __cdecl fcn_0050d5d0(int, char*, char**);
 int __cdecl d2_CreateRadioGroup(int, ...);
-void __cdecl fcn_00469510(int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_ClearRadioGroup(int);
+void __cdecl d2_DestroyElement(int);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 void __cdecl fcn_0046f280(int);
 int __cdecl fcn_0046f740(int, int, int, int);
@@ -33,12 +33,12 @@ int __cdecl io_AppendText();
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_005a4090(char*);
+void __cdecl d2_ChooseNewLoan(char*);
 void __cdecl fcn_005a4360(char*, char*);
 
 /* Inferred name and source home; the native registry selects this callback. */
 /* ADDRESS: GOLDTL 0x005a4490 */
-void __cdecl fcn_005a4490(char* p)
+void __cdecl d2_ShowLoanDialog(char* p)
 {
 	struct loan_offer rows[9];
 	char* lines[9];
@@ -80,12 +80,12 @@ void __cdecl fcn_005a4490(char* p)
 	d2_SetForm(dialog, 1);
 	io_AppendText(0x18c9, *(unsigned short*) (g_8680b4 + g_773d75 * 0x2f4) * 2 + 0x9a8);
 	d2_SetOverlayAnimation(0, 0);
-	while (fcn_005373e0(fcn_005a4490, 0x677c7) != 0) {
+	while (fcn_005373e0(d2_ShowLoanDialog, 0x677c7) != 0) {
 		if (refresh) {
 			for (i = 0; i < 9; i++) {
 				if (rows[i].image != -1) {
 					fcn_0046f280(rows[i].image);
-					fcn_0046b2b0(rows[i].text);
+					d2_DestroyElement(rows[i].text);
 					rows[i].image = -1;
 					rows[i].text = -1;
 					rows[i].line = 0;
@@ -139,7 +139,7 @@ void __cdecl fcn_005a4490(char* p)
 				}
 			}
 			if (prev != -1) {
-				fcn_00469510(prev);
+				d2_ClearRadioGroup(prev);
 				prev = -1;
 			}
 			if (count == 1) {
@@ -169,7 +169,7 @@ void __cdecl fcn_005a4490(char* p)
 				}
 			} else {
 				fcn_00471af0(dialog, 0);
-				fcn_005a4090(p);
+				d2_ChooseNewLoan(p);
 				fcn_00471af0(dialog, 1);
 				refresh = 1;
 			}
@@ -177,7 +177,7 @@ void __cdecl fcn_005a4490(char* p)
 	}
 	fcn_00471e30(dialog);
 	if (slot != -1) {
-		fcn_00469510(slot);
+		d2_ClearRadioGroup(slot);
 	}
 	return fcn_00532ef0();
 }

@@ -2,7 +2,7 @@
 #include <string.h>
 int __cdecl fcn_0051e070(void);
 
-void __cdecl fcn_00538500(char* out)
+void __cdecl main_FormatGameVersion(char* out)
 {
 	char sep[2] = " ";
 	char months[12][4] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };

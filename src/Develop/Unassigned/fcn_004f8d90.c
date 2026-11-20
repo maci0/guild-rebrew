@@ -3,7 +3,7 @@
 #pragma intrinsic(memset)
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_004fa5f0(void*, int, char*);
+void __cdecl d2_ShowPrivilegMessage(void*, int, char*);
 
 /* ADDRESS: GOLDTL 0x004f8d90 */
 int __cdecl fcn_004f8d90(char* entity, int* command)
@@ -23,7 +23,7 @@ int __cdecl fcn_004f8d90(char* entity, int* command)
 			memset(buf, 0, 0x400);
 			io_FormatTextBuffer(buf, 0x1dbe,
 				*(unsigned char*) (entity + 9) ? 0x28c : 0x264);
-			fcn_004fa5f0(buf, 1, (char*) 0x657c7);
+			d2_ShowPrivilegMessage(buf, 1, (char*) 0x657c7);
 			return 2;
 		}
 	}

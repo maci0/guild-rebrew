@@ -20,7 +20,7 @@ int __cdecl gm_RandomMod(unsigned short);
 char* __cdecl gm_SearchTable67(int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0055c050(char*);
 int __cdecl fcn_004fa6f0(int, int*, int*);
@@ -142,17 +142,17 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 		if (a2 < 3) {
 			return 0;
 		}
-		for (t = fcn_005463a0(2, 0, 0x40, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
+		for (t = he_StartHandlungSearch(2, 0, 0x40, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
 			if (*(int*) (t + 0xac) == *(int*) (cand + 1)) {
 				goto log2;
 			}
 		}
-		for (t = fcn_005463a0(2, 0, 0x3f, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
+		for (t = he_StartHandlungSearch(2, 0, 0x3f, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
 			if (*(int*) (t + 0xac) == *(int*) (cand + 1)) {
 				goto log2;
 			}
 		}
-		for (t = fcn_005463a0(2, 0, 0x49, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
+		for (t = he_StartHandlungSearch(2, 0, 0x49, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
 			if (*(int*) (t + 0xac) == *(int*) (cand + 1)) {
 				goto log2;
 			}
@@ -200,17 +200,17 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 		*(int*) (attackerRec + 0x1c0) = -1;
 		return 1;
 	}
-	for (t = fcn_005463a0(2, 0, 0x40, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
+	for (t = he_StartHandlungSearch(2, 0, 0x40, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
 		if (*(int*) (t + 0xac) == *(int*) (cand + 1)) {
 			goto log1;
 		}
 	}
-	for (t = fcn_005463a0(2, 0, 0x3f, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
+	for (t = he_StartHandlungSearch(2, 0, 0x3f, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
 		if (*(int*) (t + 0xac) == *(int*) (cand + 1)) {
 			goto log1;
 		}
 	}
-	for (t = fcn_005463a0(2, 0, 0x49, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
+	for (t = he_StartHandlungSearch(2, 0, 0x49, 3, *(int*) (*(char**) (attackerRec + 0x16c) + 1)); t != 0; t = he_fn_Handlung()) {
 		if (*(int*) (t + 0xac) == *(int*) (cand + 1)) {
 			goto log1;
 		}

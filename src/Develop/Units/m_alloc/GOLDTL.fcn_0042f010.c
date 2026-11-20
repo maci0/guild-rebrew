@@ -11,7 +11,7 @@ char* __cdecl fcn_0064e790(const char* s, int c);
 int __cdecl vfs_CompareNames(char* name, NODE042F010* p);
 
 /* ADDRESS: GOLDTL 0x0042f010 */
-char* __cdecl fcn_0042f010(char* name, NODE042F010* node)
+char* __cdecl vfs_FindPathNode(char* name, NODE042F010* node)
 {
 	char buf[0x100];
 	char path[0x100];

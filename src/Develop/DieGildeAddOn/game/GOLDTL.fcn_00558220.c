@@ -12,7 +12,7 @@ void __cdecl fcn_004c6650(int a1);
 int __cdecl fcn_004c5da0(int who, int key, int target, char* name, int mode, char* text);
 void __cdecl fcn_00500bb0(void* clock, int arg2, int arg3, int arg4);
 int __cdecl fcn_00500cb0(void* a, void* b);
-void __cdecl fcn_00546190(char* u);
+void __cdecl he_FreeAction(char* u);
 
 /* ADDRESS: GOLDTL 0x00558220 */
 void __cdecl fcn_00558220(char* obj)
@@ -28,7 +28,7 @@ void __cdecl fcn_00558220(char* obj)
 		return;
 	}
 	if (v < 0) {
-		fcn_00546190(obj);
+		he_FreeAction(obj);
 		return;
 	}
 	if (v != 0) {
@@ -36,7 +36,7 @@ void __cdecl fcn_00558220(char* obj)
 	}
 	q = gm_SearchTable67(*(int*) (obj + 0xac));
 	if (q == 0) {
-		fcn_00546190(obj);
+		he_FreeAction(obj);
 		return;
 	}
 	for (i = 0; i < 768; i++) {
@@ -54,6 +54,6 @@ void __cdecl fcn_00558220(char* obj)
 	*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 	fcn_00500bb0(obj + 0x52, 0, 0x1e, 0);
 	if (fcn_00500cb0(&gm_GameTime, obj + 0xb0) == 1) {
-		fcn_00546190(obj);
+		he_FreeAction(obj);
 	}
 }

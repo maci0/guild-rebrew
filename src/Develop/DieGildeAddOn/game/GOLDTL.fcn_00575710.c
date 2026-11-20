@@ -26,7 +26,7 @@ void __cdecl fcn_00572ff0(char*);
 void __cdecl fcn_00573a10(char*);
 void __cdecl fcn_00573a80(char*);
 void __cdecl he_AllocGebaeudeBauen(char*);
-void __cdecl fcn_005744c0(char*);
+void __cdecl gm_HandleHausbau(char*);
 void __cdecl fcn_00575450(char*);
 void __cdecl fcn_00575460(char*);
 void __cdecl fcn_00575470(char*);
@@ -64,7 +64,7 @@ int __cdecl fcn_00575710(void)
 	if (he_RegisterHandler(0xc, fcn_00573a10, fcn_00573a80) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(0xd, he_AllocGebaeudeBauen, fcn_005744c0) != 0) {
+	if (he_RegisterHandler(0xd, he_AllocGebaeudeBauen, gm_HandleHausbau) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(0xe, fcn_00575450, fcn_00575460) != 0) {

@@ -6,8 +6,8 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 
-char* __cdecl fcn_005463a0(int, int, int, ...);
-void __cdecl fcn_00508cf0(int, char*);
+char* __cdecl he_StartHandlungSearch(int, int, int, ...);
+void __cdecl gm_GenerateShuffledIndices(int, char*);
 
 void __cdecl fcn_005701d0(char* o)
 {
@@ -15,12 +15,12 @@ void __cdecl fcn_005701d0(char* o)
 
 	p = (pos14_7f4c00*) (o + 0x52);
 	*p = gm_GameTime;
-	if (fcn_005463a0(1, 0, 0x83) != 0) {
+	if (he_StartHandlungSearch(1, 0, 0x83) != 0) {
 		p->a = gm_GameTime.a + 4;
 	} else {
 		p->a = gm_GameTime.a;
 	}
 	*(short*) (o + 0x56) = 8;
 	*(int*) (o + 0x58) = 0;
-	fcn_00508cf0(0x1a, g_77e020);
+	gm_GenerateShuffledIndices(0x1a, g_77e020);
 }

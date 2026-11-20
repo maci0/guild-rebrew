@@ -16,7 +16,7 @@ extern void** g_1040610[];
 extern unsigned long g_14ce728;
 
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
-void* __cdecl fcn_00436930(char* o, float* r);
+void* __cdecl d3_GetObjectMesh(char* o, float* r);
 void __cdecl fcn_00436fd0(int a);
 void __stdcall fcn_005edf4a(float* plane, float* point, float* normal);
 void __stdcall fcn_005ed44c(float* out, float* light, float* plane);
@@ -232,7 +232,7 @@ void __cdecl fcn_004582d0(char* a0, char* a1, char* a2, char* map, float* va,
             g_6b5de0, 3, t);
         (*(int (__stdcall**) (void*, int, void*, int, int, float, int))
             ((char*) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0x90))(g_6b5de0, 0, 0, 1, 0, 1.0f, 0);
-        mesh = fcn_00436930(a2, 0);
+        mesh = d3_GetObjectMesh(a2, 0);
         for (n = 0; n < *(unsigned int*) (*(char**) (a2 + 0x318) + 0x1e4); n++)
             (*(int (__stdcall**) (void*, unsigned int)) (*(char**) mesh + 0xc))(mesh, n);
         (*(int (__stdcall**) (void*)) ((char*) *g_1040610[idx] + 0x18))(g_1040610[idx]);

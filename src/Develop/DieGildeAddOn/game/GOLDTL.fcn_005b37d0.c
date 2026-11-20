@@ -37,7 +37,7 @@ int __cdecl fcn_00459d50(int);
 int __cdecl fcn_00459d90(int, int);
 int __cdecl d3_GetAnimSize(char*);
 int __cdecl ch_CountCharacters(int, int);
-int __cdecl fcn_005b0f00(char*);
+int __cdecl d2_UpdateWindowDrag(char*);
 void __cdecl fcn_0046f280(int);
 
 void __cdecl fcn_005b37d0(void)
@@ -85,7 +85,7 @@ void __cdecl fcn_005b37d0(void)
 		io_AppendText((int) s_6ab6f8, ch_CountCharacters(-1, 1));
 		io_AppendText((int) s_6ab6e4, gm_EntityCount);
 		io_AppendText((int) s_6ab6d0, g_773d8c);
-		fcn_005b0f00((char*)w);
+		d2_UpdateWindowDrag((char*)w);
 	}
 	fcn_0046f280(h);
 }

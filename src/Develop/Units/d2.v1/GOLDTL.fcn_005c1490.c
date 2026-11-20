@@ -25,10 +25,10 @@ int __cdecl io_AppendText();
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_005463a0();
+int __cdecl he_StartHandlungSearch();
 
 /* ADDRESS: GOLDTL 0x005c1490 */
-void __cdecl fcn_005c1490(void)
+void __cdecl d2_ShowBardPoemDialog(void)
 {
 	int h;
 	char buf[0x100];
@@ -38,7 +38,7 @@ void __cdecl fcn_005c1490(void)
 	int r;
 	int idx;
 
-	elem = (char*) fcn_005463a0(1, 0, 0x6b);
+	elem = (char*) he_StartHandlungSearch(1, 0, 0x6b);
 	h = fcn_00470820(0, 0, "special\\barde");
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);
@@ -50,7 +50,7 @@ void __cdecl fcn_005c1490(void)
 		rec = (char*) fcn_004ac1e0(*(unsigned short*) (elem + 0xac));
 		fcn_004ac2c0(*(unsigned short*) (elem + 0xac),
 		    *(unsigned short*) (elem + 0xae));
-		e2 = (char*) fcn_005463a0(3, 0, 0x11, 3, *(int*) (elem + 4), 2,
+		e2 = (char*) he_StartHandlungSearch(3, 0, 0x11, 3, *(int*) (elem + 4), 2,
 		    (int) g_774970);
 		if (e2 != 0) {
 			*(int*) (e2 + 0x70) = -1;
@@ -61,7 +61,7 @@ void __cdecl fcn_005c1490(void)
 				if (g_14ce8e0 != 0) {
 					g_774654 = 1;
 				}
-			} while (fcn_005373e0((void*) fcn_005c1490, 0x677c7) != 0);
+			} while (fcn_005373e0((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 			fcn_00471e30(h);
 			fcn_00532ef0();
 			return;
@@ -74,7 +74,7 @@ void __cdecl fcn_005c1490(void)
 				if (g_14ce8e0 != 0) {
 					g_774654 = 1;
 				}
-			} while (fcn_005373e0((void*) fcn_005c1490, 0x677c7) != 0);
+			} while (fcn_005373e0((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 			fcn_00471e30(h);
 			fcn_00532ef0();
 			return;
@@ -97,7 +97,7 @@ void __cdecl fcn_005c1490(void)
 					g_774654 = 1;
 				}
 			}
-		} while (fcn_005373e0((void*) fcn_005c1490, 0x677c7) != 0);
+		} while (fcn_005373e0((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 		if (r == 0) {
 			fcn_00471e30(h);
 			fcn_00532ef0();
@@ -125,7 +125,7 @@ void __cdecl fcn_005c1490(void)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (fcn_005373e0((void*) fcn_005c1490, 0x677c7) != 0);
+		} while (fcn_005373e0((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 		d2_SetForm(h, 3);
 		io_AppendText(g_6811b0);
 		d2_SetForm(h, 1);
@@ -145,7 +145,7 @@ void __cdecl fcn_005c1490(void)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (fcn_005373e0((void*) fcn_005c1490, 0x677c7) != 0);
+		} while (fcn_005373e0((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 		fcn_00471e30(h);
 		fcn_00532ef0();
 		return;
@@ -155,7 +155,7 @@ void __cdecl fcn_005c1490(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005c1490, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_00532ef0();
 }

@@ -24,9 +24,9 @@ int __cdecl gm_CheckEntityType(char*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_00515540(char*);
+int __cdecl init_EnsureObjektSceneContext(char*);
 int __cdecl fcn_005155e0(char*);
-int __cdecl fcn_00406670(char*, char*);
+int __cdecl ch_QueueStandUpAnimation(char*, char*);
 char* __cdecl ch_UseGate(char*, char*, char*, int, int, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
 char* __cdecl fcn_004456e0(char*, int, int, char*);
@@ -105,7 +105,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 				q = fcn_00502cd0(*(int*) (C + 0x5d), 1, 0, 0xfd);
 				k = fcn_005155e0(C);
 				if (k >= 0 && q != 0) {
-					fcn_00406670(o, g_6756b8);
+					ch_QueueStandUpAnimation(o, g_6756b8);
 					r = ch_UseGate(o, buf, g_68b1f8, k, *(int*) (C + 1),
 					    *(int*) (q + 2));
 					if (r != 0)
@@ -164,7 +164,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			fcn_004432d0(k, 1);
 			if (k < 0)
 				goto end;
-			fcn_00406670(o, g_6756b8);
+			ch_QueueStandUpAnimation(o, g_6756b8);
 			u = fcn_00445600(0, 0x100, 0, g_675908);
 			if (u != 0) {
 				m = g_1043370[k * 247];
@@ -238,7 +238,7 @@ after:
 	if (e[0x1c] != 0)
 		goto saved_exit;
 	if (*(int*) (e + 0x18) != -1) {
-		k = fcn_00515540(fcn_00502cd0(*(int*) (B + 0x5d), 1, 1,
+		k = init_EnsureObjektSceneContext(fcn_00502cd0(*(int*) (B + 0x5d), 1, 1,
 		    *(int*) (e + 0x18)));
 		if (k < 0) {
 			ReportClientMessage(g_68b108);
@@ -303,7 +303,7 @@ b3:
 		}
 		ch_CreateAction(o, 0x38, 1);
 	} else if (*(unsigned short*) q != 0xfd) {
-		k = fcn_00515540(q);
+		k = init_EnsureObjektSceneContext(q);
 		fcn_0064d41a(buf, g_68b214,
 		    strupr(lpObjektePROT + *(unsigned short*) q * 0x41 + 1));
 		if (C != 0) {

@@ -62,7 +62,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
 
-int __cdecl fcn_0058d180(char* who, char* request)
+int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 {
 	int r;
 	int ok;
@@ -127,7 +127,7 @@ int __cdecl fcn_0058d180(char* who, char* request)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(fcn_0058d180, 0x677c7) != 0);
+	} while (fcn_005373e0(d2_ConfirmGrabpflege, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_0052a2d0();
 	sv_ClearObjectSelection();

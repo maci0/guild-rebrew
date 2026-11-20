@@ -4,7 +4,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004c5fa0(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 extern char g_7f4ca0[];
 /* ADDRESS: GOLDTL 0x00563cc0 */
 void __cdecl fcn_00563cc0(char* action)
@@ -29,7 +29,7 @@ void __cdecl fcn_00563cc0(char* action)
 		}
 		ent = (char*) fcn_00503fe0(1, 1, *(int*) (action + 0xac));
 		if (ent == 0) {
-			fcn_00546190(action);
+			he_FreeAction(action);
 			return;
 		}
 		p = fcn_0050dc90(ent);
@@ -74,5 +74,5 @@ void __cdecl fcn_00563cc0(char* action)
 		}
 
 	}
-	fcn_00546190(action);
+	he_FreeAction(action);
 }

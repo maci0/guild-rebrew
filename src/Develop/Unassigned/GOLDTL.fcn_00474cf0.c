@@ -1,6 +1,6 @@
 int __cdecl CountDisplayCounters(void);
 int __cdecl fcn_0046b520(char*, int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 int __cdecl fcn_00469c30(int, int, int);
 void __cdecl fcn_00469c40(int, int, int);
 typedef struct List0474cf0 {
@@ -43,7 +43,7 @@ extern int g_67d3b0;
 
 /* Selects one GUI pool record */
 /* ADDRESS: GOLDTL 0x00474cf0 */
-void __cdecl fcn_00474cf0(int slot)
+void __cdecl d2_SelectControl(int slot)
 {
 	Item0474cf0* it;
 	Slot0474cf0* slots;
@@ -102,7 +102,7 @@ void __cdecl fcn_00474cf0(int slot)
 		return;
 	}
 	if (g_67d8ec != -1) {
-		fcn_0046b2b0(g_67d8ec);
+		d2_DestroyElement(g_67d8ec);
 		g_67d8ec = -1;
 	}
 }

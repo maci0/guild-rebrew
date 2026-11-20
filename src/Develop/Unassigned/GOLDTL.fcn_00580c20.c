@@ -11,7 +11,7 @@ void __cdecl fcn_004230e0(int);
 void __cdecl fcn_00580cf0(int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_00580c20(void)
+void __cdecl d2_ShutdownTutorial(void)
 {
 	int i;
 

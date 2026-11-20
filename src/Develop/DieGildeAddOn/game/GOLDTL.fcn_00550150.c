@@ -7,7 +7,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
@@ -29,7 +29,7 @@ void __cdecl fcn_00550150(char* e)
 	gm_ResolveEntityById((void**) (&a), 0, 0, *(int*) (e + 0xb0));
 	gm_ResolveEntityById(0, 0, (void**) (&b), *(int*) (e + 0xac));
 	if (*(int*) (e + 0x70) == -2 || a == 0) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 	}
 	if (*(int*) (e + 0x70) == 0 && fcn_004c4450(*(int*) (e + 0xbc)) != 0) {
 		h = fcn_004c4480(*(int*) (e + 0xbc));
@@ -40,6 +40,6 @@ void __cdecl fcn_00550150(char* e)
 			he_MessageBoxQuickjump(*(int*) (e + 0xac), *(int*) (e + 0xac), buf, 0, 0x5ec, *(int*) (e + 0xb0), *(int*) (e + 0xb4), 0,
 			    "_NACHRICHTEN_HS_00");
 		}
-		fcn_00546190(e);
+		he_FreeAction(e);
 	}
 }

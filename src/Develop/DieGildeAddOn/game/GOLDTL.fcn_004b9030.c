@@ -12,7 +12,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char *__cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(char *, int);
-char *__cdecl fcn_005463a0(int, int, int);
+char *__cdecl he_StartHandlungSearch(int, int, int);
 char *__cdecl he_fn_Handlung(void);
 int __cdecl gm_FindRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -50,7 +50,7 @@ int __cdecl fcn_004b9030(int *msg)
 	if (fcn_005c6270(p, 0x290) != 0) {
 		return 0x400;
 	}
-	for (e = fcn_005463a0(1, 0, 0xf); e != 0 && n < 8; e = he_fn_Handlung()) {
+	for (e = he_StartHandlungSearch(1, 0, 0xf); e != 0 && n < 8; e = he_fn_Handlung()) {
 		r = (char *) gm_FindRecordById(*(int *) (e + 0xac));
 		if (r != 0 && *(int *) (r + 0xa) == *(unsigned short *) p) {
 			gm_ResolveEntityById((void **) (&a), 0, 0, *(int *) (e + 0xb4));

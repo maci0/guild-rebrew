@@ -152,7 +152,7 @@ VFS_DIR* __cdecl vfs_MountPath(char* path, VFS_DIR* parent)
 
 /* ADDRESS: GOLD 0x00430d90 */
 /* ADDRESS: GOLDTL 0x00430870 */
-int __cdecl fcn_00430870(void* stream)
+int __cdecl vfs_GetChar(void* stream)
 {
 	char c;
 

@@ -19,10 +19,10 @@ extern int g_100f884;
 extern int g_100f1dc;
 extern int g_14cbca0;
 
-int __cdecl fcn_005463a0(int, ...);
+int __cdecl he_StartHandlungSearch(int, ...);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_00545780(int a);
-void __cdecl fcn_00546190(int a);
+void __cdecl he_FreeAction(int a);
 int __cdecl fcn_00500cb0(void* sel, int* out);
 void __cdecl fcn_00545670(int a, int b, int c, char* caption, int d);
 int __cdecl fcn_0051e070(void);
@@ -32,21 +32,21 @@ void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 void __cdecl fcn_004c30a0(int a, int b, char* name, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00553110 */
-void __cdecl fcn_00553110(int dlg, int a1, int a2)
+void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 {
 	int msg;
 	int actor;
 	int n;
 
 	msg = 0;
-	actor = fcn_005463a0(1, 1, *(int*) (dlg + 0xac));
+	actor = he_StartHandlungSearch(1, 1, *(int*) (dlg + 0xac));
 	if (actor != 0)
 		msg = gm_StartFilteredEntitySearch(1, 1, *(int*) (actor + 0xb0));
 	if (*(int*) (dlg + 0x70) == -2 || *(int*) (dlg + 0x70) == -1
 	    || actor == 0 || msg == 0) {
 		if (*(int*) (dlg + 0x74) != 0)
 			fcn_00545780(dlg);
-		fcn_00546190(dlg);
+		he_FreeAction(dlg);
 	}
 	switch (*(int*) (dlg + 0x70)) {
 	case 0:
@@ -62,7 +62,7 @@ void __cdecl fcn_00553110(int dlg, int a1, int a2)
 		n = fcn_00500cb0(&gm_GameTime, (int*) (dlg + 0x52));
 		if (n > 0) {
 			fcn_00545780(dlg);
-			fcn_00546190(dlg);
+			he_FreeAction(dlg);
 			return;
 		}
 		if (g_100f884 != *(int*) (*(int*) (dlg + 0x74) + 8))
@@ -97,13 +97,13 @@ void __cdecl fcn_00553110(int dlg, int a1, int a2)
 			fcn_004c5620(3, actor);
 		}
 		fcn_00545780(dlg);
-		fcn_00546190(dlg);
+		he_FreeAction(dlg);
 		return;
 	}
 open:
 	fcn_00545670(dlg, 0, 0, "Berufe\\Messagebox_SCHUTZGELD", 0x5f3);
 	if (*(int*) (dlg + 0x74) == 0) {
-		fcn_00546190(dlg);
+		he_FreeAction(dlg);
 		return;
 	}
 	d2_SetForm(*(int*) (*(int*) (dlg + 0x74) + 8), 0);

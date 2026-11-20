@@ -8,7 +8,7 @@ extern int g_67a370;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_00406340(char* e, char* name, int param);
+int __cdecl ch_QueuePlayAnimation(char* e, char* name, int param);
 int __cdecl fcn_004bc8a0(int, int, float (*)[4]);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
@@ -42,8 +42,8 @@ void __cdecl he_CharacterBehavior(char* u, int where)
 		if (gm_RandomMod(100) > 40) {
 			char g[3][0x20] = { "gestik/durch_haar_fahr", "gestik/kopf_kratzen", "gestik/mit_faust_droh" };
 
-			fcn_00406340(*(char**) (e + 0x184), g[gm_RandomMod(3)], gm_RandomMod(3) + 1);
-			fcn_00406340(*(char**) (e + 0x184), g[gm_RandomMod(3)], gm_RandomMod(3) + 1);
+			ch_QueuePlayAnimation(*(char**) (e + 0x184), g[gm_RandomMod(3)], gm_RandomMod(3) + 1);
+			ch_QueuePlayAnimation(*(char**) (e + 0x184), g[gm_RandomMod(3)], gm_RandomMod(3) + 1);
 		} else {
 			world = *(int*) (((char*)g_67a370) + 0xb0);
 			n = gm_RandomMod(3) + 1;

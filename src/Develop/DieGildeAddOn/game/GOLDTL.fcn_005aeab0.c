@@ -16,7 +16,7 @@ extern char g_6ab2e0[];
 int __cdecl fcn_00525fb0(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00526120(char*, int);
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl gm_WalkEntityChain(unsigned short);
@@ -29,7 +29,7 @@ int __cdecl fcn_00472250(int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_004c4510(char*, int);
-void __cdecl fcn_004c4570(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c6b20(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
@@ -65,7 +65,7 @@ void __cdecl fcn_005aeab0(char* rec)
 		fcn_00526120((char*) g_14aba40, 0);
 		return;
 	}
-	act = fcn_005463a0(1, 0, 0x3e);
+	act = he_StartHandlungSearch(1, 0, 0x3e);
 	while (act != 0) {
 		if (*(int*) (act + 0xac) == *(int*) (ent + 4)) {
 			io_FormatTextBuffer(text, 0x19c9, *(unsigned short*) ent);
@@ -74,7 +74,7 @@ void __cdecl fcn_005aeab0(char* rec)
 		}
 		act = he_fn_Handlung();
 	}
-	act = fcn_005463a0(1, 0, 0x3d);
+	act = he_StartHandlungSearch(1, 0, 0x3d);
 	while (act != 0) {
 		if (*(int*) (act + 0xac) == *(int*) (ent + 4)) {
 			break;
@@ -132,7 +132,7 @@ void __cdecl fcn_005aeab0(char* rec)
 			} else if (d2_CurrentElementId == b2) {
 				flags = -1;
 				fcn_004c4510(rec, *(int*) (rec + 1));
-				fcn_004c4570(4, 1, (int) (rec - g_aed32c) + 0x65,
+				cm_AppendPacketFieldDelta(4, 1, (int) (rec - g_aed32c) + 0x65,
 				    &flags);
 				fcn_004c5360();
 				fcn_004c6b20(*(int*) (ent + 4),

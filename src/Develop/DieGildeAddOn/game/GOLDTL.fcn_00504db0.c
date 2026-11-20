@@ -7,7 +7,7 @@ int __cdecl gm_CheckEntityType(unsigned char* geb);
 int __cdecl fcn_00505340(unsigned char* geb);
 
 /* ADDRESS: GOLDTL 0x00504db0 */
-unsigned char* __cdecl fcn_00504db0(unsigned char* self, int kind)
+unsigned char* __cdecl gm_FindNearestEligibleEntity(unsigned char* self, int kind)
 {
 	float best;
 	unsigned char* r;

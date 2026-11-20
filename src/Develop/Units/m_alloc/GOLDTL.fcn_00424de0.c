@@ -16,7 +16,7 @@ void* __cdecl m_alloc(unsigned int, char*);
 int __cdecl fcn_00423920(char*);
 
 /* ADDRESS: GOLDTL 0x00424de0 */
-int __cdecl fcn_00424de0(char* sampleListPath, char* languageSuffix)
+int __cdecl sbs_LoadSampleBanks(char* sampleListPath, char* languageSuffix)
 {
 	void* fp;
 	char buf[0x100];

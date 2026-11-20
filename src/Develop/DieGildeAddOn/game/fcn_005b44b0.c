@@ -1,4 +1,4 @@
-int __cdecl fcn_005463a0(int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
 
 /* ADDRESS: GOLDTL 0x005b44b0 */
@@ -9,9 +9,9 @@ int __cdecl fcn_005b44b0(int* filter)
 
 	n = 0;
 	if (filter != 0)
-		ok = fcn_005463a0(1, 2, *(unsigned short*) filter);
+		ok = he_StartHandlungSearch(1, 2, *(unsigned short*) filter);
 	else
-		ok = fcn_005463a0(1, 2, 0xffff);
+		ok = he_StartHandlungSearch(1, 2, 0xffff);
 	if (ok != 0) {
 		do {
 			n++;

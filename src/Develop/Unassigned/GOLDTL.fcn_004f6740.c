@@ -18,7 +18,7 @@ extern int cm_LastCrimeId;
 extern Rec2d_9a3800 g_9a3800[512];
 extern Pair_99f800 g_99f800[0x800];
 
-void __cdecl fcn_004f6740(void)
+void __cdecl cm_InitCrimeRecords(void)
 {
 	int i;
 

@@ -39,7 +39,7 @@ int __cdecl fcn_00526120(int, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005c23b0 */
-void __cdecl fcn_005c23b0(char* e)
+void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 {
 	Msg5c23b0 m;
 	int id;
@@ -84,6 +84,6 @@ void __cdecl fcn_005c23b0(char* e)
 		else if (g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005c23b0, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_ShowSellGebaeudeDialog, 0x677c7) != 0);
 	fcn_00471e30(win);
 }

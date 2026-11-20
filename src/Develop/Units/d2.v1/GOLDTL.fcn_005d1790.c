@@ -44,9 +44,9 @@ int __cdecl fcn_00526120(char *, int);
 void __cdecl fcn_00533a60(int, int, int *, int, char *, char *);
 void __cdecl fcn_00534210(int, int, char *, int, int);
 int __cdecl fcn_005373e0(int, int);
-char *__cdecl fcn_005463a0(int, ...);
+char *__cdecl he_StartHandlungSearch(int, ...);
 char *__cdecl he_fn_Handlung(void);
-int __cdecl fcn_005d2470(void *, void *);
+int __cdecl d2_ShowGiftDialog(void *, void *);
 int __cdecl fcn_005db8e0(void *, void *);
 int __cdecl fcn_005dbb60(void *, void *);
 int __cdecl _ftol(void);
@@ -139,7 +139,7 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 		io_FormatTextBuffer(buf12, 0x1f5f, *(unsigned short *)p);
 		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f59, buf12);
 	} else {
-		q = fcn_005463a0(1, 0, 0x41);
+		q = he_StartHandlungSearch(1, 0, 0x41);
 		while (q != 0) {
 			if (*(int *)(q + 0xac) == *(int *)((char *)person + 4)) {
 				r = gm_LookupEntityRecordById(*(int *)(q + 0xb0));
@@ -272,7 +272,7 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 		    (*((char *)g_7f4ca0 + 540 * g_774970 + 9) == 1 &&
 		     *(int *)(g_7f4ca0 + 540 * g_774970 + 4) == *(int *)((char *)person + 0x64))) {
 			if (!(*((char *)person + 0x164) != 0)) {
-				if (fcn_005463a0(2, 2, *person, 0, 0x5e) == 0) {
+				if (he_StartHandlungSearch(2, 2, *person, 0, 0x5e) == 0) {
 					v15 = person[5] + 4;
 					if (v15 >= *(float *)((char *)person + 0x20)) {
 						if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
@@ -340,7 +340,7 @@ label_2281:
 					} else if (fcn_005db8e0(g_7f4ca0 + 540 * g_774970, person) != 0) {
 						fcn_00472640(r2, 0);
 					}
-				} else if (fcn_005d2470(g_7f4ca0 + 540 * g_774970, person) != 0) {
+				} else if (d2_ShowGiftDialog(g_7f4ca0 + 540 * g_774970, person) != 0) {
 					fcn_00472640(r1, 0);
 				}
 			} else {

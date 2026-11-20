@@ -11,8 +11,8 @@ int __cdecl fcn_00500e20(int*);
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void* __cdecl evt_LoadGfxScript(char*);
-void* __cdecl fcn_00426cc0(int);
-char __cdecl fcn_00428720(char*);
+void* __cdecl evt_FindScriptById(int);
+char __cdecl evt_RequestScriptExit(char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl fcn_00428340(int, int, int, int, int);
 
@@ -77,9 +77,9 @@ void __cdecl fcn_0052db70(char* buildingRecord)
 		idx++;
 	} while ((int) ent < (int) g_slot_table + 0x65400);
 	if (*(int*) (buildingRecord + 0x95) != -1) {
-		p = fcn_00426cc0(*(int*) (buildingRecord + 0x95));
+		p = evt_FindScriptById(*(int*) (buildingRecord + 0x95));
 		if (p != 0) {
-			fcn_00428720((char*) p);
+			evt_RequestScriptExit((char*) p);
 		}
 		*(int*) (buildingRecord + 0x95) = -1;
 	}

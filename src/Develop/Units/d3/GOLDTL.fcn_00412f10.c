@@ -5,7 +5,7 @@
 char* __cdecl fcn_00401040(char* path);
 char* __cdecl d3_FindAnimByName(const char* name);
 char* __cdecl d3_LoadAnimStream(char* path, char* name, char loop);
-char* __cdecl fcn_00434970(char* context, char* name, D3_ANIMATION_OPTIONS options);
+char* __cdecl d3_AttachAnimationToContext(char* context, char* name, D3_ANIMATION_OPTIONS options);
 char* __cdecl d3_LoadObjectAnim(char* path, char* object, char loop);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
@@ -72,7 +72,7 @@ int __cdecl d3_ApplyObjectAnimation(char* obj, char* name, int flags)
 	}
 	opt.queue = 1;
 	if (*(int*) (obj + 0x1ec) != 0) {
-		if (fcn_00434970(*(char**) (obj + 0x1ec) + 0xf4, stream, opt) != 0) {
+		if (d3_AttachAnimationToContext(*(char**) (obj + 0x1ec) + 0xf4, stream, opt) != 0) {
 			return 1;
 		}
 	}

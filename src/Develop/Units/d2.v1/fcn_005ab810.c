@@ -32,7 +32,7 @@ int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00526010(void*, int, char);
 int __cdecl fcn_004c51a0(int, int, int, int);
 void __cdecl fcn_004c4510(char*, int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -90,7 +90,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 						x = 1 - p->state;
 						fcn_004c51a0(-1, p->handle, 0, d);
 						fcn_004c4510((char*) p, p->handle);
-						fcn_004c4570(1, 1, 0xc, &x);
+						cm_AppendPacketFieldDelta(1, 1, 0xc, &x);
 						fcn_004c5360();
 						for (i = 3; i <= 7; i++) {
 							h = (char*) ((struct house*) g_7f4ca0)[g_774970].ref_table[i];
@@ -98,7 +98,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 								h = (char*) gm_LookupEntityRecordById((int) h);
 								if (h != 0) {
 									fcn_004c4510(h, *(int*) (h + 4));
-									fcn_004c4570(1, 1, 0xc, &x);
+									cm_AppendPacketFieldDelta(1, 1, 0xc, &x);
 									fcn_004c5360();
 								}
 							}
@@ -151,7 +151,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 						x = q->state;
 						fcn_004c51a0(q->handle, p->handle, 0, t);
 						fcn_004c4510((char*) p, p->handle);
-						fcn_004c4570(1, 1, 0xc, &x);
+						cm_AppendPacketFieldDelta(1, 1, 0xc, &x);
 						fcn_004c5360();
 						if (q->type == 6 || q->type == 7) {
 							io_FormatTextBuffer(buf, 0x1974, p->id, t);

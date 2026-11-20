@@ -6,7 +6,7 @@ extern char* g_1015ea0;
 extern int d2_CurrentWindowId;
 extern char g_6b5c60[]; extern int g_6a25b4; extern char g_774724;
 
-void fcn_0046b2b0(int id);
+void d2_DestroyElement(int id);
 int fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
 void fcn_0046f280(int id);
 int fcn_0046f740(int x, int y, int id, int win);
@@ -57,18 +57,18 @@ void __cdecl fcn_00529890(char* building)
 				v3 = v13[1] * 0x21c;
 				if (!*(int*) (v3 + 0x7f4e24) || !*(char*) (v3 + 0x7f4ca8)) {
 					if (v13[-1] != -1) {
-						fcn_0046b2b0(v13[-1]);
+						d2_DestroyElement(v13[-1]);
 						v13[-1] = -1;
 					}
 					if (*v13 != -1) {
-						fcn_0046b2b0(*v13);
+						d2_DestroyElement(*v13);
 						*v13 = -1;
 					}
-					fcn_0046b2b0(v13[-3]);
+					d2_DestroyElement(v13[-3]);
 					v13[-3] = -1;
-					fcn_0046b2b0(v13[2]);
+					d2_DestroyElement(v13[2]);
 					v13[2] = -1;
-					fcn_0046b2b0(v13[-2]);
+					d2_DestroyElement(v13[-2]);
 					v13[-2] = -1;
 					if (v13[3] != -1) {
 						fcn_0046f280(v13[3]);
@@ -215,11 +215,11 @@ label_529cf0:
 					d2_SetElementValue(v13[-2], 1);
 				}
 				if (*v13 != -1) {
-					fcn_0046b2b0(*v13);
+					d2_DestroyElement(*v13);
 					*v13 = -1;
 				}
 				if (v13[1] != -1) {
-					fcn_0046b2b0(v13[1]);
+					d2_DestroyElement(v13[1]);
 					v13[1] = -1;
 				}
 				d2_SetForm(g_6a25b4, 1);
@@ -258,7 +258,7 @@ label_529cf0:
 								+ v5 * 0x2f4)) {
 								goto label_529f4c;
 							}
-							fcn_0046b2b0(v5);
+							d2_DestroyElement(v5);
 							*v13 = -1;
 							if (out[0] >= 0xdf && out[0] <= 0x3bb) {
 								v6 = fcn_0046f7e0(0x38, v3 - 0x18,
@@ -279,7 +279,7 @@ label_529f4c:
 								+ v6 * 0x2f4)) {
 								goto label_529fe5;
 							}
-							fcn_0046b2b0(v6);
+							d2_DestroyElement(v6);
 							v13[1] = -1;
 							if (v15 != 0) {
 								v6 = fcn_0046f7e0(0x38, v3, v15,

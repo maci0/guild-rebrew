@@ -3,7 +3,7 @@
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_00507e70(char*, char*, int);
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl fcn_00545780(char*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
@@ -32,7 +32,7 @@ void __cdecl fcn_0054b450(char* a0)
 	v4 = gm_LookupEntityRecordById(*(int*) (a + 0xb0));
 	entityC = gm_LookupEntityRecordById(*(int*) (a + 0xb4));
 	if (*(int*) (a + 0x70) == -2 || entityA == 0 || v4 == 0 || entityC == 0) {
-		fcn_00546190(a);
+		he_FreeAction(a);
 		if (*(int*) (a + 0x74) != 0)
 			fcn_00545780(a);
 		return;
@@ -44,7 +44,7 @@ void __cdecl fcn_0054b450(char* a0)
 	case 0:
 		fcn_00545670(a, 0, 0, (char*) 0x6a5a10, 0x5ec);
 		if (*(int*) (a + 0x74) == 0) {
-			fcn_00546190(a);
+			he_FreeAction(a);
 			return;
 		}
 		d2_SetForm(*(int*) (*(int*) (a + 0x74) + 8), 0);
@@ -76,7 +76,7 @@ void __cdecl fcn_0054b450(char* a0)
 				fcn_004c54c0(*(int*) (entityC + 2), *(int*) (v4 + 2), -0xf, 1);
 			}
 			fcn_00545780(a);
-			fcn_00546190(a);
+			he_FreeAction(a);
 			return;
 		}
 		return;
@@ -93,6 +93,6 @@ void __cdecl fcn_0054b450(char* a0)
 			fcn_004c54c0(*(int*) (v4 + 2), *(int*) (entityC + 2), -0xf, 1);
 			fcn_004c54c0(*(int*) (entityC + 2), *(int*) (v4 + 2), -0xf, 1);
 		}
-		fcn_00546190(a);
+		he_FreeAction(a);
 	}
 }

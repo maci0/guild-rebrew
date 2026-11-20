@@ -17,7 +17,7 @@ void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_005373e0(void* fn, int y);
 void __cdecl fcn_00471e30(int h);
 
-void __cdecl fcn_004fc490(void)
+void __cdecl d2_ShowTaxStatistics(void)
 {
 	int h;
 	int i;
@@ -33,6 +33,6 @@ void __cdecl fcn_004fc490(void)
 		if (g_14ce8e0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_004fc490, 0x677c7));
+	} while (fcn_005373e0((void*) d2_ShowTaxStatistics, 0x677c7));
 	fcn_00471e30(h);
 }

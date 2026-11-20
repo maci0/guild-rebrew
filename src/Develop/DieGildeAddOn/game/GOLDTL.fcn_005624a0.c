@@ -20,7 +20,7 @@ int __cdecl fcn_0050d320(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_00546190(void*);
+void __cdecl he_FreeAction(void*);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
@@ -53,7 +53,7 @@ void __cdecl fcn_005624a0(char* ctx)
 				fcn_004c57e0(*(int*) (ent + 4), 1);
 			}
 		}
-		fcn_00546190(ctx);
+		he_FreeAction(ctx);
 		return;
 	}
 	if (*(unsigned char*) (ctx + 0x78) & 4) {

@@ -10,7 +10,7 @@ int __cdecl gm_RandomMod(int a0);
 int __cdecl fcn_0050d320(short* ent, unsigned char player);
 int __cdecl fcn_004a5340(short* a0, int a1, int* a2, int a3, float a4, int* a5);
 int __cdecl gm_WalkEntityChain(unsigned short a0);
-int __cdecl fcn_005463a0(int a0, int a1, int a2, int a3, int a4);
+int __cdecl he_StartHandlungSearch(int a0, int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x0049bfa0 */
 int __cdecl ai_StartSpionage(int code, short* target, int zero, char* out1, char* out2)
@@ -41,7 +41,7 @@ int __cdecl ai_StartSpionage(int code, short* target, int zero, char* out1, char
 	if ((float) thr * g_664160 >= (float) score) {
 		return 0;
 	}
-	if (fcn_005463a0(2, 0, 0x18, 2, *(unsigned short*) target) != 0) {
+	if (he_StartHandlungSearch(2, 0, 0x18, 2, *(unsigned short*) target) != 0) {
 		return 0;
 	}
 	*out1 = 7;

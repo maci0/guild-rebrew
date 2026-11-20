@@ -87,7 +87,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00469c40(int, int, int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 
@@ -251,7 +251,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 							cb(chosen, (int) rec);
 							flag = 1;
 							if (holder != -1) {
-								fcn_00469510(holder);
+								d2_ClearRadioGroup(holder);
 							}
 							holder = -1;
 						}
@@ -262,7 +262,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 		}
 	} while (fcn_005373e0((void*) fcn_005cff20, 0x677c7) != 0);
 	if (holder != -1) {
-		fcn_00469510(holder);
+		d2_ClearRadioGroup(holder);
 	}
 	fcn_00471e30(dlg);
 	return result;

@@ -18,14 +18,14 @@ void __cdecl fcn_00476b60(void);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_00472830(int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004116d0(void);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_005373e0(void* fn, int arg);
 
 /* ADDRESS: GOLDTL 0x004bec20 */
-unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
+unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 {
 	int handles[7];
 	int ids[7];
@@ -120,7 +120,7 @@ unsigned int __cdecl fcn_004bec20(int a0, int a1, unsigned int a2)
 			}
 		}
 		if (!fcn_005373e0((void*) 0x4bec20, 0x657c7)) {
-			fcn_00469510(k);
+			d2_ClearRadioGroup(k);
 			fcn_00471e30(g);
 			fcn_004116d0();
 			return selection;

@@ -7,7 +7,7 @@
 extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
 extern GuiEnt** g_006ed964; /* 0x006ed964 */
 
-void __cdecl fcn_00472f40(int slot)
+void __cdecl d2_ReorderControlStack(int slot)
 {
 	GuiEnt* s;
 	int i;

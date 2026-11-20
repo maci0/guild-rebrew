@@ -17,7 +17,7 @@ extern int g_14b5e10;
 extern int g_14b5e14;
 extern int g_14b5e18;
 
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
@@ -45,7 +45,7 @@ void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c5530(void*);
 
 /* ADDRESS: GOLDTL 0x005bf580 */
-int __cdecl fcn_005bf580(char* rec)
+int __cdecl d2_RunSpionageDialog(char* rec)
 {
 	char* q;
 	char* h;
@@ -65,7 +65,7 @@ int __cdecl fcn_005bf580(char* rec)
 	float f2;
 
 	ret = 0; tries = 0;
-	q = fcn_005463a0(2, 2, g_774970, 0, 0x18);
+	q = he_StartHandlungSearch(2, 2, g_774970, 0, 0x18);
 	if (q != 0) {
 		for (;;) {
 			if (*(int*) (q + 0xc4) == *(int*) (rec + 4)) {
@@ -103,7 +103,7 @@ int __cdecl fcn_005bf580(char* rec)
 	fcn_00468bb0(row2, 3, g_14b5e0c, g_14b5e10, g_14b5e14);
 	d2_SetForm((int) h, 3);
 	fcn_00533a60(d2_CurrentWindowId, 0, sel, 2, g_14b5e04, g_14b5e08);
-	while (fcn_005373e0((void*) fcn_005bf580, 0x677c7) != 0) {
+	while (fcn_005373e0((void*) d2_RunSpionageDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0 || *(unsigned short*) rec == 0xffff) {
 			g_774654 = 1;
 		} else {

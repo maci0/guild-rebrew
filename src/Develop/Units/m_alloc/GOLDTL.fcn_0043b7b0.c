@@ -9,7 +9,7 @@ int __cdecl fcn_004011d0(void* a, void* b);
 #else
 int __cdecl fcn_004011f0(void* stream, void* dst);
 #endif
-char* __cdecl fcn_004011a0(void* stream, char* text);
+char* __cdecl vfs_ReadCString(void* stream, char* text);
 int __cdecl fcn_0043b500(char*);
 char __cdecl fcn_0043b580(char*, int, int, char*);
 
@@ -28,9 +28,9 @@ void __cdecl d3_ReadObjectEvents(void* r, char* o)
 	fcn_004011f0(r, &n);
 #endif
 	for (i = 0; i < n; i++) {
-		fcn_004011a0(r, name);
+		vfs_ReadCString(r, name);
 		id = fcn_0043b500(name);
-		fcn_004011a0(r, val);
+		vfs_ReadCString(r, val);
 		if (o != 0) {
 			fcn_0043b580(o, id, (*(fcn_0043b7b0_f*)&g_67a590)(o, id, val), val);
 		}

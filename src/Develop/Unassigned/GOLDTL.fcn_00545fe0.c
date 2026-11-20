@@ -67,7 +67,7 @@ extern int g_7dc424;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 
-HE_ACTION* __cdecl fcn_00545fe0(struct spawn* t)
+HE_ACTION* __cdecl he_CreateEventFromRequest(struct spawn* t)
 {
 	char* e;
 	int i;

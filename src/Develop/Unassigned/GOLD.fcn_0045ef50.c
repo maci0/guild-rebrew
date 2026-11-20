@@ -2,7 +2,7 @@
 #include "Develop/Units/m_alloc/m_alloc.h"
 
 /* ADDRESS: GOLD 0x0045ef50 */
-void __cdecl fcn_0045ef50(char* object)
+void __cdecl d3sm_Destroy(char* object)
 {
     if (!object)
         return;

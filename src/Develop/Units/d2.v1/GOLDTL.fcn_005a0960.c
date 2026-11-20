@@ -16,7 +16,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005a0960(void)
+void __cdecl d2_ShowWirtshausRules(void)
 {
 	int h;
 	int a;
@@ -34,7 +34,7 @@ void __cdecl fcn_005a0960(void)
 	io_AppendText(0x1889);
 	d2_SetForm(h, 2);
 	io_AppendText(0x188a);
-	while (fcn_005373e0(fcn_005a0960, 0x677c7) != 0) {
+	while (fcn_005373e0(d2_ShowWirtshausRules, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

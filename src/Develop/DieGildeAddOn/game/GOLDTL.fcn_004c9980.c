@@ -3,8 +3,8 @@
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, int, int);
-int __cdecl fcn_00426cc0(int);
-void __cdecl fcn_00428720(int);
+int __cdecl evt_FindScriptById(int);
+void __cdecl evt_RequestScriptExit(int);
 void __cdecl gm_KillSpieler(int, int);
 
 int __cdecl fcn_004c9980(char* x, char* out)
@@ -20,7 +20,7 @@ int __cdecl fcn_004c9980(char* x, char* out)
 		ok = 1;
 		fcn_00529160(0, 0, *e, 0);
 		if (*(char**) ((char*) e + 0x184) != 0 && *(int*) (*(char**) ((char*) e + 0x184) + 0x28) != -1)
-			fcn_00428720(fcn_00426cc0(*(int*) (*(char**) ((char*) e + 0x184) + 0x28)));
+			evt_RequestScriptExit(evt_FindScriptById(*(int*) (*(char**) ((char*) e + 0x184) + 0x28)));
 		gm_KillSpieler(*e, *(int*) (x + 0x14));
 	}
 	if (out != 0 && ok != 0)

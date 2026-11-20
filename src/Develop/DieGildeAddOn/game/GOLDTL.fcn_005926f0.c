@@ -22,7 +22,7 @@ extern int __cdecl fcn_00472250(void*, int, int);
 extern int __cdecl fcn_00472380(void*, char*);
 extern int __cdecl d2_SetBildArgument(void*, int);
 extern int __cdecl fcn_004727a0(void*, int);
-extern int __cdecl fcn_00474cf0(void*);
+extern int __cdecl d2_SelectControl(void*);
 extern int __cdecl fcn_00469e30(int);
 extern int __cdecl fcn_00469e70(void);
 extern int __cdecl fcn_004ce080(void);
@@ -50,7 +50,7 @@ extern int __cdecl fcn_00593360(void);
 extern int __cdecl fcn_005934d0(void);
 extern int __cdecl fcn_00593550(void);
 extern int __cdecl fcn_005936f0(int, int);
-extern int __cdecl fcn_00593ff0(int);
+extern int __cdecl d2_ChooseProfession(int);
 extern int __cdecl fcn_005941e0(void);
 extern int __cdecl fcn_0064d41a(char*, char*, int);
 
@@ -189,7 +189,7 @@ int __cdecl fcn_005926f0(void)
 			if (*(int*)0x7725d0 != 0) {
 				flag = 1;
 			} else if (*(char*)0x14cf950 == 0x1c) {
-				fcn_00474cf0(h);
+				d2_SelectControl(h);
 				flag = 1;
 			}
 		} else {
@@ -248,7 +248,7 @@ int __cdecl fcn_005926f0(void)
 					d = fcn_004ce380((void*)0x779c60);
 					while (fcn_004c4450(d) == 0)
 						fcn_00535960();
-					if (fcn_00593ff0(0x24087)) {
+					if (d2_ChooseProfession(0x24087)) {
 						*(unsigned char*)0x779c6b = *(unsigned char*)0x7e23e3;
 						d = fcn_004ce380((void*)0x779c60);
 						while (fcn_004c4450(d) == 0)

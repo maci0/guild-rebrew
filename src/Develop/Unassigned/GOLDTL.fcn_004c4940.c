@@ -7,7 +7,7 @@ extern int g_772e80;
 extern char g_1005780;
 
 void __cdecl nt_Recv(void);
-int __cdecl fcn_004c49f0(char*);
+int __cdecl cm_EnqueueCommand(char*);
 
 int __cdecl fcn_004c4940(void)
 {
@@ -22,7 +22,7 @@ int __cdecl fcn_004c4940(void)
 	}
 	do {
 		g_772e80++;
-		if (fcn_004c49f0(((char*)&g_1005780)) != 0) {
+		if (cm_EnqueueCommand(((char*)&g_1005780)) != 0) {
 			return 1;
 		}
 		g_14cbca4 = ((char*)&g_1005780);

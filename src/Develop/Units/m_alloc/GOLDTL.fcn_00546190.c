@@ -31,7 +31,7 @@ extern int g_7dc424;
 void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_00545780(HE_ACTION*);
 
-void __cdecl fcn_00546190(HE_ACTION* u)
+void __cdecl he_FreeAction(HE_ACTION* u)
 {
 	int i;
 	int n;

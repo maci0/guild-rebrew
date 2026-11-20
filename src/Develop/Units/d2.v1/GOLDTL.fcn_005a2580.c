@@ -58,7 +58,7 @@ int __cdecl fcn_005ca560(struct sel* s);
 void __cdecl fcn_005ca740(int x, int y, int a, int b, struct sel* s, int c);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_005c91c0(char* buf, int x, int y, int a, int b);
-char* __cdecl fcn_005463a0(int a, int b, int c);
+char* __cdecl he_StartHandlungSearch(int a, int b, int c);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_00472250(int h, int a, int b);
 void __cdecl fcn_004c5530(Rec* r);
@@ -149,7 +149,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 			changed = 0;
 			found = 0;
 			y = -1;
-			for (e = fcn_005463a0(1, 0, 0x74); e != 0; e = he_fn_Handlung()) {
+			for (e = he_StartHandlungSearch(1, 0, 0x74); e != 0; e = he_fn_Handlung()) {
 				if (*(int*) (e + 0xb0) == *(int*) (a0 + 1)) {
 					found = 1;
 					break;

@@ -13,7 +13,7 @@ unsigned short __cdecl d2_PackColorForPixelFormat(unsigned char, unsigned char, 
 void __cdecl m_FreeTracked(void*);
 #include "Develop/Units/vfs/vfs.h"
 
-void __cdecl fcn_005e3fa0(char* name)
+void __cdecl ls_LoadSavePreview(char* name)
 {
 	void* fh;
 	unsigned char* buf;

@@ -34,7 +34,7 @@ extern Rec18_68da68 g_68da68[];
 
 
 /* ADDRESS: GOLDTL 0x004e8ee0 */
-int __cdecl fcn_004e8ee0(char* who, int n, Pick* picks, int* full_out)
+int __cdecl amt_RankAvailableOffices(char* who, int n, Pick* picks, int* full_out)
 {
 	int count;
 	int len;

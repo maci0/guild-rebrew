@@ -17,7 +17,7 @@ void __cdecl fcn_0057e880(int, int, int, int);
 #include "client_scene_transform.h"
 void __cdecl d3_AnimateObjectTransform(char*, float*, float*, int, int);
 
-void __cdecl fcn_0059a2a0(void)
+void __cdecl d3_HandleCameraLevelKey(void)
 {
 	float v[3];
 	float x;

@@ -33,7 +33,7 @@ int __cdecl fcn_005373e0(void*, int);
  * polls its own dialog until the user closes it and dispatches the order to
  * the owning building or to the local player entity. */
 /* ADDRESS: GOLDTL 0x005c2580 */
-void __cdecl fcn_005c2580(char* e)
+void __cdecl d2_ShowRenovationDialog(char* e)
 {
 	char msg[0xf8];
 	float x;
@@ -136,6 +136,6 @@ void __cdecl fcn_005c2580(char* e)
 				}
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005c2580, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_ShowRenovationDialog, 0x677c7) != 0);
 	fcn_00471e30(win);
 }

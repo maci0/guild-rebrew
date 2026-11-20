@@ -6,7 +6,7 @@ extern int g_00f8f088;
 void __cdecl fcn_0046cd90(int, int, int);
 
 /* ADDRESS: GOLD 0x004756a0 */
-void __cdecl fcn_004756a0(int index, unsigned char flags)
+void __cdecl d2_CenterWindowAxes(int index, unsigned char flags)
 {
     GOLD_GUI_WINDOW* window;
     int x;

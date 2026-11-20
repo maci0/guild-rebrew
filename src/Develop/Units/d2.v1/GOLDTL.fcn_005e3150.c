@@ -45,10 +45,10 @@ void __cdecl fcn_00427370(int);
 void __cdecl SetMasterVolume(int);
 int __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 void __cdecl fcn_005e12d0(void);
-void __cdecl fcn_005e2590(void);
+void __cdecl msx_ApplyAudioSettings(void);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005e3150(void)
+void __cdecl d2_ShowSoundOptions(void)
 {
 	int s2;
 	int s0;
@@ -104,7 +104,7 @@ void __cdecl fcn_005e3150(void)
 	fcn_00533a60(d2_CurrentWindowId, 0, btn, 2, g_14ac5a8, g_14ac5ac);
 	ok = btn[0];
 	cancel = btn[1];
-	while (fcn_005373e0((void*) fcn_005e3150, wait) != 0) {
+	while (fcn_005373e0((void*) d2_ShowSoundOptions, wait) != 0) {
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;
 		}
@@ -134,7 +134,7 @@ void __cdecl fcn_005e3150(void)
 		g_7766a0[3] = (unsigned char) fcn_00471f80(s3);
 		g_7766a4[0] = (unsigned char) fcn_00471f80(s4);
 		fcn_005e12d0();
-		fcn_005e2590();
+		msx_ApplyAudioSettings();
 	}
 	fcn_00471e30(dlg);
 }

@@ -36,7 +36,7 @@ extern unsigned char g_773d75;
 
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00545780(char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
@@ -54,7 +54,7 @@ void __cdecl fcn_00550980(char* u)
 		if (*(char**) (u + 0x74) != 0) {
 			fcn_00545780(u);
 		}
-		fcn_00546190(u);
+		he_FreeAction(u);
 		return;
 	}
 	if (fcn_00500cb0(&gm_GameTime, (pos14_7f4c00*) (u + 0x44)) == -1) {
@@ -69,7 +69,7 @@ void __cdecl fcn_00550980(char* u)
 			fcn_00545670(u, 0, 0, "Berufe\\Messagebox_Meisterpruef", 0x5ec);
 		}
 		if (*(char**) (u + 0x74) == 0) {
-			fcn_00546190(u);
+			he_FreeAction(u);
 			return;
 		}
 		d2_SetForm(*(int*) (*(char**) (u + 0x74) + 8), 0);
@@ -80,7 +80,7 @@ void __cdecl fcn_00550980(char* u)
 	case 1:
 		if (fcn_00500cb0(&gm_GameTime, (pos14_7f4c00*) (u + 0x52)) > 0) {
 			fcn_00545780(u);
-			fcn_00546190(u);
+			he_FreeAction(u);
 			return;
 		}
 		if (*(char**) (u + 0x74) == 0) {
@@ -102,12 +102,12 @@ void __cdecl fcn_00550980(char* u)
 			m.owner = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id;
 			fcn_004c5530(&m);
 			fcn_00545780(u);
-			fcn_00546190(u);
+			he_FreeAction(u);
 			return;
 		}
 		if (g_100f1dc == 1) {
 			fcn_00545780(u);
-			fcn_00546190(u);
+			he_FreeAction(u);
 			return;
 		}
 		break;

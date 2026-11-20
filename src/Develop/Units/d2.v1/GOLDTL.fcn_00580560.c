@@ -11,7 +11,7 @@ void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 
-void __cdecl fcn_00580560(void)
+void __cdecl d2_OpenTutorialProgress(void)
 {
 	g_665f08[26] = fcn_00470820(0, 0, g_6a8364);
 	fcn_00471d80(g_665f08[26], 3);

@@ -44,7 +44,7 @@ void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x00415510 */
-void __cdecl fcn_00415510(Rain* r, int n, ...)
+void __cdecl d3_SetRainEffectOptions(Rain* r, int n, ...)
 {
 	Drop* d;
 	Drop* buf;

@@ -50,7 +50,7 @@ float __cdecl fcn_00413d10(float* pos);
 unsigned char __cdecl fcn_00441720(int* world, float* pos, unsigned int flag, unsigned int* grid_x, unsigned int* grid_y, float* radius);
 int __cdecl fcn_00441f10(int* world, int x, int y);
 float* __stdcall fcn_005ebbb9(float* matrix, const float* camera);
-void __cdecl fcn_004518a0(float* v);
+void __cdecl d3_NormalizeVector(float* v);
 char* __cdecl fcn_00419640(int id, int* which);
 char* __cdecl fcn_004234e0(char* bank, char* name, int loop, int pan, int vol, int a, int b);
 void __cdecl fcn_004237f0(int* handle, int fade);
@@ -61,7 +61,7 @@ void __cdecl d3snd_PlaySource(char* voice, int a2, int vol, int pan);
 void* __cdecl fcn_004193d0(char* voice);
 
 /* ADDRESS: GOLDTL 0x00419990 */
-void __cdecl fcn_00419990(void)
+void __cdecl d3snd_UpdateAmbientSources(void)
 {
 	int i;
 	int slot;
@@ -121,7 +121,7 @@ void __cdecl fcn_00419990(void)
 	dir[1] = 0.0f;
 	dir[0] = g_662d40[0] * matrix[0][0] + (g_662d40[1] * matrix[1][0] + g_662d40[2] * matrix[2][0]);
 	dir[2] = g_662d40[0] * matrix[0][2] + (g_662d40[1] * matrix[1][2] + g_662d40[2] * matrix[2][2]);
-	fcn_004518a0(dir);
+	d3_NormalizeVector(dir);
 	run = fcn_00441f10(g_6b8300, raw_x, raw_y);
 	if (run >= 0) {
 		cell = *(int*) ((char*) g_6b8300 + 0x7da0);

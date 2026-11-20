@@ -54,7 +54,7 @@ extern float g_664168;
 extern pos14_7f4c00 gm_GameTime;
 extern s_1015f4c g_1015f4c[];
 
-char* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
+char* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 int __cdecl fcn_004fa5b0(int a1, char* a2, int a3);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int h);
@@ -75,7 +75,7 @@ void __cdecl fcn_004c6ae0(int a, int b);
 void __cdecl fcn_004c5530(MsgBebe* msg);
 
 /* ADDRESS: GOLDTL 0x005bebe0 */
-void __cdecl fcn_005bebe0(int a0, int a1, int broadcastSlot)
+void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 {
 	int big[0x88];
 	MsgBebe msg;
@@ -90,7 +90,7 @@ void __cdecl fcn_005bebe0(int a0, int a1, int broadcastSlot)
 	int h;
 	int x;
 
-	slot = fcn_005463a0(2, 2, g_774970, 0, 0x60);
+	slot = he_StartHandlungSearch(2, 2, g_774970, 0, 0x60);
 	memset(big, 0, sizeof(big));
 	flag = 0;
 	ids[0] = 0x3a;
@@ -199,7 +199,7 @@ void __cdecl fcn_005bebe0(int a0, int a1, int broadcastSlot)
 		} else if (g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005bebe0, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_RunTalenteDialog, 0x677c7) != 0);
 	fcn_00532ef0();
 	fcn_00471e30(h);
 }

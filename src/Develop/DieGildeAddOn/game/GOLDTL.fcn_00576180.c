@@ -14,7 +14,7 @@ void __cdecl fcn_005b3120(char*, char*, int, int);
 float __cdecl fcn_004ec8a0(char*, int);
 void __cdecl fcn_004ee6d0(char*, int, float);
 void __cdecl fcn_00529160(char*, int, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_005764a0(char*, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
@@ -45,7 +45,7 @@ void __cdecl fcn_00576180(char* u)
 				}
 				fcn_004ee6d0(h, *(int*) (u + 0xb0), f + *(float*) (u + 0xb4));
 				fcn_00529160(0, 0, *(unsigned short*) h, 0);
-				fcn_00546190(u);
+				he_FreeAction(u);
 				return;
 			}
 			if (fcn_005764a0(*(char**) (h + 0x16c), 0x24b) != 0) {
@@ -69,5 +69,5 @@ void __cdecl fcn_00576180(char* u)
 		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 1, 0, 0);
 		return;
 	}
-	fcn_00546190(u);
+	he_FreeAction(u);
 }

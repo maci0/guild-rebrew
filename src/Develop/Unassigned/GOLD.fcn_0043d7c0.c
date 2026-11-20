@@ -1,4 +1,4 @@
-void* __cdecl fcn_0043a000(void*);
+void* __cdecl d3_SelectObjectLod(void*);
 int __cdecl fcn_00458d90(void*, int, int, void*);
 extern int d3_ActiveCamera;
 
@@ -8,7 +8,7 @@ void __cdecl fcn_0043d7c0(void *obj)
 	char buf1[0x40];
 	typedef int (__cdecl *method_t)(void*, void*, void*);
 
-	r = fcn_0043a000(obj);
+	r = d3_SelectObjectLod(obj);
 	if (r != 0) {
 		if ((int)r != *(int *)((char*)obj + 0x1cc))
 			*(int *)((char*)obj + 0x1cc) = (int)r;

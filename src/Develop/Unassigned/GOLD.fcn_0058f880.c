@@ -6,7 +6,7 @@ extern int g_6f2688;
 extern char** g_6f5308;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00438d40(int, int, int, void*, int);
+void __cdecl d3_VisitSceneObjectsUntilStopped(int, int, int, void*, int);
 char __cdecl fcn_0058f780(char* e, char* pfx);
 void __cdecl fcn_00458a10(char* src, char* pos, float* out);
 char* __cdecl fcn_00501190(int, int);
@@ -25,7 +25,7 @@ void __cdecl fcn_0058f880(int a1, char** list)
 
 	g_6f2688 = 0;
 	g_6f5308 = list;
-	fcn_00438d40((int) g_5fb5b0, 0, 0x180, (void*) fcn_0058f780, a1);
+	d3_VisitSceneObjectsUntilStopped((int) g_5fb5b0, 0, 0x180, (void*) fcn_0058f780, a1);
 	for (i = 0; i < g_6f2688; i++) {
 		e = g_6f5308[i];
 		if (e == 0) {

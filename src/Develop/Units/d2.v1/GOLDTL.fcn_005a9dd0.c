@@ -43,7 +43,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005a9dd0(unsigned char* p)
+void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 {
 	int h2;
 	int n;
@@ -93,7 +93,7 @@ void __cdecl fcn_005a9dd0(unsigned char* p)
 		h2 = fcn_00472250(d, 1, b + 2);
 	}
 	g_100f1dc = -1;
-	while (fcn_005373e0(fcn_005a9dd0, 0x677c7) != 0) {
+	while (fcn_005373e0(d2_RunGildenkasseDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

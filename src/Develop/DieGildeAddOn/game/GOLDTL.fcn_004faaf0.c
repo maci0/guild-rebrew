@@ -6,7 +6,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int type);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 
-int __cdecl fcn_004faaf0(char* o)
+int __cdecl gm_SelectRandomEntityCandidate(char* o)
 {
 	int types[20];
 	int cand[16];

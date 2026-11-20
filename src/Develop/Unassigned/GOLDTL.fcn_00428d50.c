@@ -20,8 +20,8 @@ struct var_428d50 {
 extern char* evt_CurrentScript;
 extern char g_14cb440[];
 
-void __cdecl fcn_00426680(int lex, struct tok_428d50* t);
-int __cdecl fcn_00428800(int a);
+void __cdecl evt_ReadToken(int lex, struct tok_428d50* t);
+int __cdecl evt_EvaluateExpression(int a);
 
 
 /* Parses an assignment, increment or decrement on a script variable. */
@@ -32,24 +32,24 @@ int __cdecl evt_ParseVariableAssignment(struct var_428d50* v)
 	int idx;
 
 	idx = 0;
-	fcn_00426680(*(int*) (evt_CurrentScript + 0x118), &t);
+	evt_ReadToken(*(int*) (evt_CurrentScript + 0x118), &t);
 	if (t.type != 1) {
 		goto done;
 	}
 	if (t.u.num == 0x1b) {
-		idx = fcn_00428800(idx);
-		fcn_00426680(*(int*) (evt_CurrentScript + 0x118), &t);
+		idx = evt_EvaluateExpression(idx);
+		evt_ReadToken(*(int*) (evt_CurrentScript + 0x118), &t);
 	}
 	switch (t.u.num) {
 	case 2:
 		if (v->type == 1) {
-			((int*) v->data)[idx] = fcn_00428800(0);
+			((int*) v->data)[idx] = evt_EvaluateExpression(0);
 		} else if (v->type == 2) {
-			v->data[idx] = (char) fcn_00428800(0);
+			v->data[idx] = (char) evt_EvaluateExpression(0);
 		} else if (v->type == 7) {
-			((float*) v->data)[idx] = (float) fcn_00428800(0);
+			((float*) v->data)[idx] = (float) evt_EvaluateExpression(0);
 		} else if (v->type == 6) {
-			if (fcn_00428800(0) != 0) {
+			if (evt_EvaluateExpression(0) != 0) {
 				strcpy(v->data + idx * 0x60, g_14cb440);
 			}
 		}

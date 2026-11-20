@@ -1,4 +1,4 @@
-int __cdecl fcn_00500240(int a, int b, int c);
+int __cdecl gm_FindAndReserveEntity(int a, int b, int c);
 void* __cdecl fcn_004ffff0(int a, int b);
 int __cdecl fcn_004c4330(void* req);
 
@@ -13,7 +13,7 @@ int __cdecl fcn_004c6090(int a0, char a1, int a2, int a3)
 	if (a0 == 0) {
 		return -1;
 	}
-	t = fcn_00500240(a0, a2, a3);
+	t = gm_FindAndReserveEntity(a0, a2, a3);
 	*(int*) (buf + 0x10) = *(int*) (a0 + 1);
 	if (t != 0) {
 		*(int*) (buf + 0x19) = *(int*) (t + 4);

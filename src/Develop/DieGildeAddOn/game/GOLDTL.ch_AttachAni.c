@@ -38,7 +38,7 @@ char* __cdecl ch_AttachAni(char* obj, char* name, unsigned char force)
                 d3_LoadAnimStream(path, ani, 0);
             }
         }
-        anim = fcn_00434970(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, ani, opt);
+        anim = d3_AttachAnimationToContext(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, ani, opt);
         if (!anim) {
             sprintf(msg, "ch_AttachAni(): Could not attach ani: %s", name);
             return 0;

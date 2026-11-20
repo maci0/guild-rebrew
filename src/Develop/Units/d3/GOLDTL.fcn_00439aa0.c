@@ -5,13 +5,13 @@
 extern int g_67a370;
 
 
-void __cdecl fcn_00438cb0(char*, char*);
+void __cdecl d3_SetObjectRotation(char*, char*);
 
 void __cdecl fcn_00439aa0(char* o)
 {
 	if (*(int*) (o + 0x218) == 3 && d3_ActiveCamera == 0) {
 		fcn_00439c60(o);
-		fcn_00438cb0(o, o + 0x84);
+		d3_SetObjectRotation(o, o + 0x84);
 	}
 	if (*(int*) (o + 0x218) != 0) {
 		*(char**) (o + 0x1f8) = g_1042538;

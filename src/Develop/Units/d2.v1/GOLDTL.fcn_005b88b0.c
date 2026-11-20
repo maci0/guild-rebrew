@@ -80,8 +80,8 @@ void __cdecl fcn_005b5c70(Row*);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00505d00(unsigned char*, int*);
-void __cdecl fcn_0046b2b0(int);
-void* __cdecl fcn_005463a0(int, ...);
+void __cdecl d2_DestroyElement(int);
+void* __cdecl he_StartHandlungSearch(int, ...);
 void* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0050f950(int, int);
 void __cdecl fcn_0046f940(int, const char*);
@@ -92,7 +92,7 @@ extern double dbl_0_00392156862745098;
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00534f30(char*);
 void __cdecl fcn_00532ef0(void);
 float __cdecl fcn_004ff210(unsigned short, int);
@@ -350,7 +350,7 @@ after_gage:
 		if (*(int*) 0x67d370 != hD || gage.obj != 0) {
 			goto packet2;
 		}
-		p = (char*) fcn_005463a0(2, 0, 7, 3, *(int*) (building + 1));
+		p = (char*) he_StartHandlungSearch(2, 0, 7, 3, *(int*) (building + 1));
 		if (p != 0) {
 			if (p[0xac] == 0) {
 				goto packet2;
@@ -456,21 +456,21 @@ after2:
 				continue;
 			}
 			if (rows[i].x1c != -1) {
-				fcn_0046b2b0(rows[i].x1c);
+				d2_DestroyElement(rows[i].x1c);
 				rows[i].x1c = -1;
 			}
 			if (rows[i].bar != -1) {
-				fcn_0046b2b0(rows[i].bar);
+				d2_DestroyElement(rows[i].bar);
 				rows[i].bar = -1;
 			}
 			for (tv = 0; tv < 6; tv++) {
 				if (rows[i].a[tv] != -1) {
-					fcn_0046b2b0(rows[i].a[tv]);
+					d2_DestroyElement(rows[i].a[tv]);
 					rows[i].a[tv] = -1;
 				}
 			}
 		}
-		p = (char*) fcn_005463a0(2, 0, 6, 3, *(int*) (building + 1));
+		p = (char*) he_StartHandlungSearch(2, 0, 6, 3, *(int*) (building + 1));
 		pIt = (int*) (p + 0xb0);
 		hC = tv2;
 		i = 0;
@@ -514,16 +514,16 @@ after2:
 					GUI(r->label).h = 0x28;
 				} else {
 					if (r->x1c != -1) {
-						fcn_0046b2b0(r->x1c);
+						d2_DestroyElement(r->x1c);
 						r->x1c = -1;
 					}
 					if (r->bar != -1) {
-						fcn_0046b2b0(r->bar);
+						d2_DestroyElement(r->bar);
 						r->bar = -1;
 					}
 					for (tv = 0; tv < 6; tv++) {
 						if (r->a[tv] != -1) {
-							fcn_0046b2b0(r->a[tv]);
+							d2_DestroyElement(r->a[tv]);
 							r->a[tv] = -1;
 						}
 					}
@@ -582,7 +582,7 @@ after2:
 	}
 
 	if (hD != -1) {
-		fcn_00469510(hD);
+		d2_ClearRadioGroup(hD);
 	}
 	fcn_00534f30(win);
 	fcn_00532ef0();

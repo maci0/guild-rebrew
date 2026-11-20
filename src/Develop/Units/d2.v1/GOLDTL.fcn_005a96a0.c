@@ -34,7 +34,7 @@ extern int g_14ce8e0;
 extern int d2_CurrentElementId;
 extern char g_6aae98[];
 
-int __cdecl fcn_004e8a80(int, void*);
+int __cdecl amt_FindOfficeSlotByType(int, void*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -45,18 +45,18 @@ void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_005ca560(Item5a96* s);
 void __cdecl fcn_005ca740(int, int, int, int, Item5a96*, int);
 void __cdecl fcn_00472640(int i, int flag);
-int __cdecl fcn_004e7d40(char*, int);
+int __cdecl amt_ApplyForOffice(char*, int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_004e6f10(int a);
 void __cdecl fcn_005cadc0(int, int, int, int, void*);
 void __cdecl fcn_0052f7a0(void);
-void __cdecl fcn_005cdd90(int, int);
+void __cdecl d2_ShowAmtInfo(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005a96a0(char* who, int id)
+int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 {
 	int d;
 	int ha;
@@ -83,7 +83,7 @@ int __cdecl fcn_005a96a0(char* who, int id)
 	prev = -1;
 	g_100f1dc = -1;
 	do {
-		if (fcn_004e8a80(id, info) == 0) {
+		if (amt_FindOfficeSlotByType(id, info) == 0) {
 			g_774654 = 1;
 		}
 		else {
@@ -142,7 +142,7 @@ int __cdecl fcn_005a96a0(char* who, int id)
 		}
 		else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ha) {
-				r = fcn_004e7d40(who, id);
+				r = amt_ApplyForOffice(who, id);
 				if (r != -1) {
 					do {
 						if (fcn_004c4450(r) != 0) {
@@ -161,10 +161,10 @@ int __cdecl fcn_005a96a0(char* who, int id)
 				fcn_005cadc0(r, 0, 0, 0, fcn_0052f7a0);
 			}
 			else if (d2_CurrentElementId == hc) {
-				fcn_005cdd90(id, 0);
+				d2_ShowAmtInfo(id, 0);
 			}
 		}
-	} while (fcn_005373e0(fcn_005a96a0, 0x677c7) != 0);
+	} while (fcn_005373e0(d2_RunAmtsbewerbungDialog, 0x677c7) != 0);
 	if (d != -1) {
 		fcn_00471e30(d);
 	}

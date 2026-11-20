@@ -8,7 +8,7 @@
 CH_ACTION* __cdecl ch_NewAction(char* e);
 void __cdecl ch_ExecPlayAnimation(CH_ACTION* t);
 
-int __cdecl fcn_00406340(char* e, const char* name, int param)
+int __cdecl ch_QueuePlayAnimation(char* e, const char* name, int param)
 {
 	CH_ACTION* t;
 

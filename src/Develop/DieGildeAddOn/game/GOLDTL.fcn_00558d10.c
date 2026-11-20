@@ -4,7 +4,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00558370(char*);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
@@ -46,13 +46,13 @@ void __cdecl fcn_00558d10(char* e)
 	} while (n != 0);
 	*(int*) (e + 0xb8) = (*(int*) (e + 0xbc) + idx) % 0x100;
 	if (p == 0) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 	} else {
 		io_FormatTextBuffer(buf, "EvtSensenmann: next target = %G", p);
 	}
 	*(int*) (e + 0xb4) = *(int*) (p + 1);
 	if (fcn_00558370(e) == 0) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 	}
 	fcn_00500bb0(clock, 0, 0xf, 0);
 }

@@ -59,7 +59,7 @@ void __cdecl d3_TransformPoint(char* src, char* pos, Vec3* out);
 float __cdecl fcn_00413d10(Vec3* p);
 void __cdecl fcn_00433780(View* v);
 void __cdecl fcn_00438b40(View* v, Vec3* p);
-void __cdecl fcn_00438cb0(View* v, Vec3* r);
+void __cdecl d3_SetObjectRotation(View* v, Vec3* r);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 void __cdecl fcn_0052cf20(Ent* e)
@@ -116,7 +116,7 @@ void __cdecl fcn_0052cf20(Ent* e)
 	g_7e3a40[1] = q.y;
 	g_7e3a40[2] = q.z;
 	fcn_00438b40((View*)d3_ActiveCamera, (Vec3*) &q);
-	fcn_00438cb0((View*)d3_ActiveCamera, &rot);
+	d3_SetObjectRotation((View*)d3_ActiveCamera, &rot);
 	s = (Save*) gm_GetEntityTableEntry((char*) (&((House*)g_7f4ca0)[g_774970]));
 	if (s != 0) {
 		*(int*) &s->pos.x = *(int*) &q.x;

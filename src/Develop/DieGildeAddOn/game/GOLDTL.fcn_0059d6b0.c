@@ -6,7 +6,7 @@ extern int g_14abaac;
 int __cdecl fcn_0055c050(char* obj);
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
-void* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
+void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00526120(char* buf, int flag);
@@ -23,7 +23,7 @@ int __cdecl fcn_005373e0(int a, int b);
 void __cdecl fcn_00471e30(int dlg);
 
 /* ADDRESS: GOLDTL 0x0059d6b0 */
-void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
+void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 {
 	char msg[0x400];
 	char msg2[0x100];
@@ -63,7 +63,7 @@ void __cdecl fcn_0059d6b0(unsigned int id, char* obj)
 			other = (int) gm_NextEntityQueryMatch();
 		}
 	}
-	other = (int) fcn_005463a0(2, 2, g_774970, 0, 0x40);
+	other = (int) he_StartHandlungSearch(2, 2, g_774970, 0, 0x40);
 	while (other != 0) {
 		for (index = 0; index < count; index++) {
 			if (*(int*) (other + 0xac) == *(int*) (list[index] + 0x2a)) {

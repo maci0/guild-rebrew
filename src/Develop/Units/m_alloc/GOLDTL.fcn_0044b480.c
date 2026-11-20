@@ -95,7 +95,7 @@ typedef struct BGF_OBJ {
 	char unbekannt_2a2[2];
 } BGF_OBJ;
 
-BGF_OBJ* __cdecl fcn_0044f250(char*, char*, char*, int, int);
+BGF_OBJ* __cdecl d3_LoadFastChunk(char*, char*, char*, int, int);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0044b480 */
@@ -152,10 +152,10 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* objectName, char* nametab, int n
 		goto done;
 	}
 	ok = fcn_0044f0e0(buf);
-	obj = fcn_0044f250(buf, objectName, nametab, namestep, namecount);
+	obj = d3_LoadFastChunk(buf, objectName, nametab, namestep, namecount);
 	if (obj == 0) {
 		d3_AddFLChunk(buf, ok);
-		obj = fcn_0044f250(buf, objectName, nametab, namestep, namecount);
+		obj = d3_LoadFastChunk(buf, objectName, nametab, namestep, namecount);
 		res = (int) obj;
 	}
 	if (obj != 0) {

@@ -53,7 +53,7 @@ extern char* g_77261c;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
-char* __cdecl fcn_005463a0(int type, int a, int b);
+char* __cdecl he_StartHandlungSearch(int type, int a, int b);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004f4830(int idx, void* dst);
 int __cdecl fcn_004a4410(float* a0, float* a1, int idx, Actor* e, int a4,
@@ -93,7 +93,7 @@ int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
 	if (e->kind166 != 0xd) {
 		v = gm_RichterKatholisch != 0 ? *(int*) (gm_RichterKatholisch + 4) : -1;
 		w = gm_RichterEvangelisch != 0 ? *(int*) (gm_RichterEvangelisch + 4) : -1;
-		for (p = (Entry*) fcn_005463a0(1, 0, 0x2c); p != 0;
+		for (p = (Entry*) he_StartHandlungSearch(1, 0, 0x2c); p != 0;
 			p = (Entry*) he_fn_Handlung()) {
 			if (p->id != e->id4) {
 				continue;

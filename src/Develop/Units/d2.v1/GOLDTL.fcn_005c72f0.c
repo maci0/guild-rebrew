@@ -34,10 +34,10 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_005c69d0(int);
+void __cdecl d2_ResetTrainingRows(int);
 int __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00594340(void);
-int __cdecl fcn_00533dc0(int, int, int);
+int __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
 int __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl fcn_00595e20(int, int);
@@ -56,7 +56,7 @@ int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_00535960(void);
 void __cdecl d2_ClearSelectedControl(void);
 int __cdecl fcn_004ce9e0(int);
-int __cdecl fcn_005c6a10(int, int);
+int __cdecl d2_UpdateTrainingRows(int, int);
 int __cdecl fcn_0046f940(int, char*);
 int __cdecl fcn_00471e30(int);
 int __cdecl fcn_005373e0(int, int);
@@ -117,11 +117,11 @@ int __cdecl fcn_005c72f0(int objectArg)
 	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 3);
 	io_AppendText(0x19db);
-	fcn_005c69d0(v7);
+	d2_ResetTrainingRows(v7);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00594340();
 	d2_SetForm(win, 0);
-	fcn_00533dc0(d2_CurrentWindowId, 0x72f, 0);
+	d2_DrawPanelFrame(d2_CurrentWindowId, 0x72f, 0);
 	fcn_00533f40(0x270, 0x15c, d2_CurrentWindowId,
 			fcn_00472830(win, 2, 0x78, v10, v9buf, &v8));
 	*(int*) (g_1015ea0 + 0x84 + v8 * 0x2f4) = 0x54;
@@ -232,7 +232,7 @@ label_5c7572:
 	}
 	fcn_004ce9e0(selected);
 label_5c76eb:
-	v7 = fcn_005c6a10(win, 2);
+	v7 = d2_UpdateTrainingRows(win, 2);
 	if (d2_HoveredWindow == g_1038140[win].wins[1] && v7 != 0 && g_14ce8cc != 0) {
 		fcn_004c44a0();
 		p4 = (int*) ((int) g_7774a0 + 0x0);

@@ -3,7 +3,7 @@ extern char g_773d75;
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl fcn_0050d320(char* entity, char season);
 void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
-void __cdecl fcn_00546190(void* u);
+void __cdecl he_FreeAction(void* u);
 float __cdecl fcn_004ff210(unsigned short id, int delta);
 
 /* Releases every played sound of the behaviour when its counter ran out. */
@@ -28,7 +28,7 @@ void __cdecl fcn_0057a180(char* action)
 		count = fcn_0050d320(entity, g_773d75);
 		if (count > *(int*) (action + 0xac)) {
 			fcn_004c5150(-1, *(int*) (entity + 4), g_773d75, *(int*) (action + 0xac));
-			fcn_00546190(action);
+			he_FreeAction(action);
 			return;
 		}
 		found = 0;
@@ -46,7 +46,7 @@ void __cdecl fcn_0057a180(char* action)
 		if (found == 0) {
 			fcn_004ff210(*(unsigned short*) entity, -1001);
 		}
-		fcn_00546190(action);
+		he_FreeAction(action);
 	}
-	fcn_00546190(action);
+	he_FreeAction(action);
 }

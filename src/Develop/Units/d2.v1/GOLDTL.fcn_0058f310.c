@@ -40,7 +40,7 @@ void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
 
 /* ADDRESS: GOLDTL 0x0058f310 */
-int __cdecl fcn_0058f310(char* subject)
+int __cdecl d2_ShowHauntingDialog(char* subject)
 {
 	int q[20];
 	char req[0xf8];
@@ -145,7 +145,7 @@ int __cdecl fcn_0058f310(char* subject)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_0058f310, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_ShowHauntingDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_0052a2d0();
 	sv_ClearObjectSelection();

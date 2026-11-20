@@ -63,7 +63,7 @@ extern char g_1040960[];
 
 Ent* __cdecl d3_SpawnObject(int, const char*);
 void __cdecl fcn_00438b40(Ent*, Vec3*);
-void __cdecl fcn_00438cb0(Ent*, Vec3*);
+void __cdecl d3_SetObjectRotation(Ent*, Vec3*);
 
 
 /* ADDRESS: GOLDTL 0x00443030 */
@@ -86,7 +86,7 @@ char __cdecl fcn_00443030(Level* lv)
 	lv->rot.y = 0.0f;
 	lv->rot.x = 0.0f;
 	lv->rot.z = 0.0f;
-	fcn_00438cb0(e, &lv->rot);
+	d3_SetObjectRotation(e, &lv->rot);
 	e->level = lv;
 	e->flags |= 3;
 	e->next = &(*(char*)d3_SceneObjectSentinel);

@@ -10,13 +10,13 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_00546190(void*);
+void __cdecl he_FreeAction(void*);
 void* __cdecl he_fn_Handlung(void);
-void* __cdecl fcn_005463a0(int, ...);
+void* __cdecl he_StartHandlungSearch(int, ...);
 void* __cdecl gm_SearchTable67(int);
 
 /* ADDRESS: GOLDTL 0x005c2910 */
-void __cdecl fcn_005c2910(char* e)
+void __cdecl d2_ShowGebaeudeSaleDialog(char* e)
 {
 	int win;
 	char* u;
@@ -25,7 +25,7 @@ void __cdecl fcn_005c2910(char* e)
 	int r;
 
 	id = *(int*) (e + 1);
-	u = (char*) fcn_005463a0(1, 0, 0x1b);
+	u = (char*) he_StartHandlungSearch(1, 0, 0x1b);
 	while (u != 0 && *(int*) (u + 0xac) != *(int*) (e + 1)) {
 		u = (char*) he_fn_Handlung();
 	}
@@ -46,12 +46,12 @@ void __cdecl fcn_005c2910(char* e)
 		if (g_100f1dc == 2) {
 			if (d2_CurrentElementId == saved) {
 				fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 0, 2);
-				fcn_00546190(u);
+				he_FreeAction(u);
 				g_774654 = 1;
 			}
 		} else if (g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005c2910, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_ShowGebaeudeSaleDialog, 0x677c7) != 0);
 	fcn_00471e30(win);
 }

@@ -27,7 +27,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 
-int __cdecl fcn_0058c890(char* entity, int a2, unsigned char a3, int choice)
+int __cdecl d2_RunFriedhofDialog(char* entity, int a2, unsigned char a3, int choice)
 {
 	int r;
 	int ok;
@@ -80,7 +80,7 @@ int __cdecl fcn_0058c890(char* entity, int a2, unsigned char a3, int choice)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_0058c890, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_RunFriedhofDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

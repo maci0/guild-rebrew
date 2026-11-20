@@ -23,7 +23,7 @@ extern int g_7f4c10;
 
 
 int __cdecl fcn_00502cd0(int, int, ...);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
@@ -53,7 +53,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 		if (*(unsigned char*) (lpObjektePROT + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id * 0x40 + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) == 6) {
 			if (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) != 0) {
 				st = 1;
-				for (q = fcn_005463a0(2, 0, 0xc, 3, *(int*) (a + 1)); q != 0;
+				for (q = he_StartHandlungSearch(2, 0, 0xc, 3, *(int*) (a + 1)); q != 0;
 				     q = he_fn_Handlung()) {
 					if (*(int*) (q + 0xb4) == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) {
 						st = 3;
@@ -108,7 +108,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				    (found == 1 && ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_b == 0) ||
 				    found == 2) {
 					st = 2;
-					for (q = fcn_005463a0(2, 0, 2, 3, *(int*) (a + 1)); q != 0;
+					for (q = he_StartHandlungSearch(2, 0, 2, 3, *(int*) (a + 1)); q != 0;
 					     q = he_fn_Handlung()) {
 						if (*(int*) (q + 0xb0) == *(int*) ((char*) b + 2) &&
 						    *(unsigned short*) (q + 0xac) == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) {
@@ -209,7 +209,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 		if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].state == 3) {
 			if (*(unsigned char*) (lpObjektePROT + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id * 0x40 + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) == 6) {
 				if (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) != 0) {
-					for (q = fcn_005463a0(2, 0, 0xc, 3, *(int*) (a + 1)); q != 0;
+					for (q = he_StartHandlungSearch(2, 0, 0xc, 3, *(int*) (a + 1)); q != 0;
 					     q = he_fn_Handlung()) {
 						if (*(int*) (q + 0xb4) == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) {
 							goto fnd;
@@ -217,7 +217,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 					}
 				}
 			} else {
-				for (q = fcn_005463a0(2, 0, 2, 3, *(int*) (a + 1)); q != 0;
+				for (q = he_StartHandlungSearch(2, 0, 2, 3, *(int*) (a + 1)); q != 0;
 				     q = he_fn_Handlung()) {
 					if (*(int*) (q + 0xb0) == *(int*) ((char*) b + 2) &&
 					    *(unsigned short*) (q + 0xac) == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) {

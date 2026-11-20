@@ -26,7 +26,7 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_CheckEntityType(unsigned char*);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 
@@ -105,7 +105,7 @@ void __cdecl fcn_00487000(char* e)
 		}
 		n++;
 	}
-	slot = fcn_005463a0(2, 0, 6, 3, *(int*) (*(char**) (e + 0x16c) + 1));
+	slot = he_StartHandlungSearch(2, 0, 6, 3, *(int*) (*(char**) (e + 0x16c) + 1));
 	if (slot != 0) {
 		sp = slot + 0xb0;
 		for (i = 0xc; i != 0; i--) {

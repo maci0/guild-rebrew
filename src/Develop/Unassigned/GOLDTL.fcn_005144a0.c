@@ -10,16 +10,16 @@ extern char g_7e23e3;
 
 #include <string.h>
 
-void __cdecl fcn_0053d490(int, int);
-void __cdecl fcn_0053cd40(int);
+void __cdecl d2_RunChoosePlayerDialog(int, int);
+void __cdecl d2_ShowChooseProfessionDialog(int);
 
 int __cdecl fcn_005144a0(char* p, char* s)
 {
 	strcpy(g_7e23ea, p + 0x30);
 	strcpy(g_7e240a, s);
 	strcpy(g_7e1d00, "Eurer Stadt");
-	fcn_0053d490(0xc6, 1);
-	fcn_0053cd40(0xc6);
+	d2_RunChoosePlayerDialog(0xc6, 1);
+	d2_ShowChooseProfessionDialog(0xc6);
 	strcpy(p + 0x30, g_7e23ea);
 	strcpy(s, g_7e240a);
 	*(short*) (p + 0xa) = 0x12;

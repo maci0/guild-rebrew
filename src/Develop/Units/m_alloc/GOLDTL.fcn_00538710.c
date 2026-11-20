@@ -16,7 +16,7 @@ void __cdecl fcn_0042dde0(int, int);
 void __cdecl fcn_00538220(void);
 void __cdecl fcn_00538700(void);
 
-int __cdecl fcn_00538710(void)
+int __cdecl main_InitRuntime(void)
 {
 	char path[0x104];
 

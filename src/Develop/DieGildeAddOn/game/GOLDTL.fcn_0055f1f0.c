@@ -8,7 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_0055f1f0(char* e)
 {
@@ -22,7 +22,7 @@ void __cdecl fcn_0055f1f0(char* e)
 	gm_ResolveEntityById(0, (void**) (&r), 0, *(int*) (e + 0xac));
 	if (r != 0) {
 		if ((r[0x13] & 0x20) != 0) {
-			fcn_00546190(e);
+			he_FreeAction(e);
 			return;
 		}
 		fcn_004c5420(*(int*) (r + 2), 0x13, 1, 0x20, 0);

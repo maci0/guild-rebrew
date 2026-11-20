@@ -17,7 +17,7 @@ extern int d2_CurrentWindowId;
 extern int g_775334;
 
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00534160(int, int, int, int);
@@ -33,7 +33,7 @@ void __cdecl fcn_00473690(int, int);
 float __cdecl fcn_004ff040(int);
 
 /* ADDRESS: GOLDTL 0x005c6a10 */
-unsigned int __cdecl fcn_005c6a10(unsigned int dialog, unsigned int form)
+unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int form)
 {
 	D2_TRAINING_ROW* slot;
 	unsigned short* item;
@@ -66,15 +66,15 @@ unsigned int __cdecl fcn_005c6a10(unsigned int dialog, unsigned int form)
 		if ((int) list >= 0x7e42e0) {
 			slot->entity = 0;
 			if (slot->portrait_element != -1) {
-				fcn_0046b2b0(slot->portrait_element);
+				d2_DestroyElement(slot->portrait_element);
 				slot->portrait_element = -1;
 			}
 			if (slot->row_element != -1) {
-				fcn_0046b2b0(slot->row_element);
+				d2_DestroyElement(slot->row_element);
 				slot->row_element = -1;
 			}
 			if (slot->window != -1) {
-				fcn_0046b2b0(slot->window);
+				d2_DestroyElement(slot->window);
 				slot->window = -1;
 			}
 			continue;
@@ -83,7 +83,7 @@ unsigned int __cdecl fcn_005c6a10(unsigned int dialog, unsigned int form)
 		for (j = 0; j < 6; j++) {
 			if (slot->item[j].objekt_id != 0
 			    && !fcn_00502cd0(*(int*) (slot->entity + 0x178), 1, 0, slot->item[j].objekt_id)) {
-				fcn_0046b2b0(slot->item[j].button);
+				d2_DestroyElement(slot->item[j].button);
 				slot->item[j].button = -1;
 				slot->item[j].objekt_id = 0;
 			}

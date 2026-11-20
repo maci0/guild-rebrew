@@ -121,9 +121,9 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CreateGauge(void*, int, int);
 int __cdecl d2_ShowTxt(int, int, int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 
-int __cdecl fcn_0057ecc0(void);
+int __cdecl d2_CanCloseWindowDuringTutorial(void);
 void __cdecl fcn_005b6130(int, int);
 void __cdecl fcn_00534c20(int);
 void __cdecl fcn_00535550(int);
@@ -131,7 +131,7 @@ void __cdecl fcn_00535560(int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_004c4510(int, int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 int __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c4eb0(int);
@@ -146,7 +146,7 @@ int __cdecl fcn_0050c1b0(int, int, void*);
 int __cdecl fcn_004693b0(void);
 void __cdecl fcn_00469470(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_005b5eb0(char*, char*);
 void __cdecl d2_UpdateGauge(int, int, int);
 void __cdecl fcn_005b5c70(int);
@@ -161,7 +161,7 @@ int __cdecl fcn_0050b750(int, char);
 float __cdecl fcn_0050b8d0(unsigned char*, int, int, int);
 int __cdecl fcn_00526010(int, int);
 int __cdecl fcn_0051af00(char*, int, ...);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl fcn_005462a0(void);
 int __cdecl fcn_00505370(void*);
 char* __cdecl fcn_0064d228(void);
@@ -174,7 +174,7 @@ int __cdecl fcn_00532ef0(void);
 
 
 /* ADDRESS: GOLDTL 0x005b6300 */
-int __cdecl fcn_005b6300(unsigned char* a1, int a2, int a3)
+int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 {
 	FRAME f;
 	char* book;
@@ -259,8 +259,8 @@ int __cdecl fcn_005b6300(unsigned char* a1, int a2, int a3)
 	if (f.row[0] == 4 || f.row[0] == 0x13 || f.row[0] == 0x10) {
 		el = fcn_00472250(G(book + 0x228), 3, 3);
 		f.v44 = fcn_00472250(G(book + 0x228), 3, 1);
-		fcn_0046b2b0(el);
-		fcn_0046b2b0(f.v44);
+		d2_DestroyElement(el);
+		d2_DestroyElement(f.v44);
 		f.v44 = -1;
 	}
 	d2_SetForm(G(book + 0x230), 3);
@@ -310,8 +310,8 @@ int __cdecl fcn_005b6300(unsigned char* a1, int a2, int a3)
 	fcn_005b5eb0(f.book, a1);
 	fcn_00473a90(0, 0);
 
-	while (fcn_005373e0((int) fcn_005b6300, 0x677c7)) {
-		if (G(0x14ce8e0) != 0 && fcn_0057ecc0() == 1)
+	while (fcn_005373e0((int) d2_ShowPersonalbuch, 0x677c7)) {
+		if (G(0x14ce8e0) != 0 && d2_CanCloseWindowDuringTutorial() == 1)
 			G(0x774654) = 1;
 		fcn_005b6130((int) f.book, (int) a1);
 		fcn_005350d0((int) f.book);
@@ -328,7 +328,7 @@ int __cdecl fcn_005b6300(unsigned char* a1, int a2, int a3)
 				if (f.v4c != -1 && fcn_004c4450(f.v4c) == 0)
 					goto L6901;
 				fcn_004c4510((int) a1, G(a1 + 1));
-				fcn_004c4570(4, 1, 0x3d, &f.v3c);
+				cm_AppendPacketFieldDelta(4, 1, 0x3d, &f.v3c);
 				f.v4c = fcn_004c5360();
 			}
 		}
@@ -435,7 +435,7 @@ L6cb7:
 			e = (char*) f.v2c;
 			if (e != 0 && *(char*) (e + 8) != 0)
 				goto L6fa2;
-			t = fcn_005463a0(2, 0, 7, 3, G(a1 + 1));
+			t = he_StartHandlungSearch(2, 0, 7, 3, G(a1 + 1));
 			if (t != 0) {
 				do {
 					if (*(char*) (t + 0xac) == 0)
@@ -538,7 +538,7 @@ L6fa2:
 					fcn_005b5c70((int) &f.rows[i]);
 			}
 		}
-		el = fcn_005463a0(2, 0, 6, 3, G(a1 + 1));
+		el = he_StartHandlungSearch(2, 0, 6, 3, G(a1 + 1));
 		for (i = 0; f.v10 = i, i < f.v30; i++) {
 			if (f.rows[i].a08 != 0) {
 				if (f.rows[i].a1c != -1)
@@ -595,7 +595,7 @@ L6fa2:
 		f.v10 = 0xc;
 		c = G(0x67d370);
 		if (c == f.v28 && f.v18 != -1) {
-			el = fcn_005463a0(2, 0, 6, 3, G(a1 + 1));
+			el = he_StartHandlungSearch(2, 0, 6, 3, G(a1 + 1));
 			if (el != 0) {
 				G(el + f.v18 * 4 + 0xb0) = 1;
 			} else {
@@ -695,15 +695,15 @@ L77c4:
 	}
 L77de:
 	if (f.v40 != -1)
-		fcn_00469510(f.v40);
+		d2_ClearRadioGroup(f.v40);
 	fcn_004c4510((int) a1, G(a1 + 1));
 	if (f.v4c != -1) {
 		f.v3c = fcn_00471f80(f.v4c);
-		fcn_004c4570(4, 1, 0x41, &f.v3c);
+		cm_AppendPacketFieldDelta(4, 1, 0x41, &f.v3c);
 	}
 	if (f.v50 != -1) {
 		f.v3c = fcn_00471f80(f.v50);
-		fcn_004c4570(4, 1, 0x3d, &f.v3c);
+		cm_AppendPacketFieldDelta(4, 1, 0x3d, &f.v3c);
 	}
 	fcn_004c5360();
 	fcn_0057e880(0x21, 0, 1, 0);

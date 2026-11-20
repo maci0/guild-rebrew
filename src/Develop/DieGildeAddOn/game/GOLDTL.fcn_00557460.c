@@ -15,7 +15,7 @@ int* __cdecl fcn_004c4480(int h);
 int __cdecl fcn_004c5620(int a, char* dlg);
 void __cdecl fcn_004c5c80(int a);
 void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* s);
-void __cdecl fcn_00546190(char* dlg);
+void __cdecl he_FreeAction(char* dlg);
 void __cdecl fcn_005015e0(int* out, int a, int b, int c);
 int __cdecl fcn_00529670(char* e, char* h);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
@@ -42,7 +42,7 @@ void __cdecl fcn_00557460(char* dlg)
 				fcn_004c57e0(*(int*) (e + 4), 1);
 			}
 		}
-		fcn_00546190(dlg);
+		he_FreeAction(dlg);
 		return;
 	}
 	if (*(unsigned char*) (dlg + 0x78) & 4) {
@@ -244,7 +244,7 @@ void __cdecl fcn_00557460(char* dlg)
 				j = 0;
 				while (j < 3) {
 					off = (unsigned int) (rec + 0x1c + j * 4 - g_aed32c);
-					fcn_004c4570(4, 1, (int) off, &found[j]);
+					cm_AppendPacketFieldDelta(4, 1, (int) off, &found[j]);
 					j++;
 				}
 				fcn_004c5360();
@@ -323,7 +323,7 @@ fail:
 				fcn_004c4510(rec, *(int*) (rec + 2));
 				j = 0;
 				while (j < 3) {
-					fcn_004c4570(4, 1, (int) (rec + 0x1c + j * 4 - g_aed32c),
+					cm_AppendPacketFieldDelta(4, 1, (int) (rec + 0x1c + j * 4 - g_aed32c),
 					    &found[j]);
 					j++;
 				}

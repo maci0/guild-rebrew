@@ -120,13 +120,13 @@ void __cdecl fcn_004c5150(int, int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c4ef0(int);
 void __cdecl fcn_004c5530(void*);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 int __cdecl fcn_00505d00(unsigned char*, int*);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_0046f940(int, char*);
 int __cdecl fcn_0046fac0(int, int, char*, int);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_0051af00(char*, char*, ...);
@@ -134,7 +134,7 @@ int __cdecl fcn_0050f950(int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 int __cdecl fcn_004693b0(int, int);
 void __cdecl fcn_00469470(int, int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00534f30(char*);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00505370(char*);
@@ -353,16 +353,16 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 			while (f.pg > 0) {
 				if (f.rows[i].obj != f.old[i].obj) {
 					if (f.rows[i].x1c != -1) {
-						fcn_0046b2b0(f.rows[i].x1c);
+						d2_DestroyElement(f.rows[i].x1c);
 						f.rows[i].x1c = -1;
 					}
 					if (f.rows[i].bar != -1) {
-						fcn_0046b2b0(f.rows[i].bar);
+						d2_DestroyElement(f.rows[i].bar);
 						f.rows[i].bar = -1;
 					}
 					for (y = 0; y < 6; y++) {
 						if (f.rows[i].a[y] != -1) {
-							fcn_0046b2b0(
+							d2_DestroyElement(
 							    f.rows[i].a[y]);
 							f.rows[i].a[y] = -1;
 						}
@@ -373,7 +373,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 			}
 		}
 
-		f.pg = (int) fcn_005463a0(2, 0, 6, 3, *(int*) (building + 1));
+		f.pg = (int) he_StartHandlungSearch(2, 0, 6, 3, *(int*) (building + 1));
 		f.pIt = (int*) (f.pg + 0xb0);
 		f.tv3 = n;
 		i = 0;
@@ -420,16 +420,16 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 					GUI(r->label).h = 0x28;
 				} else {
 					if (r->x1c != -1) {
-						fcn_0046b2b0(r->x1c);
+						d2_DestroyElement(r->x1c);
 						r->x1c = -1;
 					}
 					if (r->bar != -1) {
-						fcn_0046b2b0(r->bar);
+						d2_DestroyElement(r->bar);
 						r->bar = -1;
 					}
 					for (y = 0; y < 6; y++) {
 						if (r->a[y] != -1) {
-							fcn_0046b2b0(r->a[y]);
+							d2_DestroyElement(r->a[y]);
 							r->a[y] = -1;
 						}
 					}
@@ -503,7 +503,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 			}
 		}
 		if (*(int*) 0x67d370 == f.hC && f.hA != -1) {
-			p = (char*) fcn_005463a0(2, 0, 6, 3,
+			p = (char*) he_StartHandlungSearch(2, 0, 6, 3,
 			                         *(int*) (building + 1));
 			if (p != 0) {
 				*(int*) (p + 0xb0 + f.hA * 4) = 1;
@@ -588,7 +588,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 	}
 
 	if (f.hRadio != -1) {
-		fcn_00469510(f.hRadio);
+		d2_ClearRadioGroup(f.hRadio);
 	}
 	fcn_00534f30(f.win);
 	fcn_00532ef0();

@@ -36,10 +36,10 @@ int __cdecl fcn_004c5da0(int, int, int, char *, int, char *);
 int __cdecl fcn_004c5620(int, char *);
 void __cdecl fcn_004c5c80(int);
 int __cdecl sprintf(char *, char *, ...);
-int __cdecl fcn_00426d00(char *);
-int __cdecl fcn_00428720(char *);
+int __cdecl evt_FindScriptByName(char *);
+int __cdecl evt_RequestScriptExit(char *);
 void __cdecl fcn_00418f90(int);
-void __cdecl fcn_00546190(char *);
+void __cdecl he_FreeAction(char *);
 void __cdecl fcn_004432d0(int, int);
 char *__cdecl fcn_00422460(int, char *);
 int __cdecl d3snd_AttachSoundSource(int, int, int, float);
@@ -50,7 +50,7 @@ int __cdecl he_MessageBoxQuickjump(int, int, char *, unsigned char, int, int, in
 int __cdecl gm_RandomMod(unsigned short);
 char *__cdecl evt_LoadGfxScript(char *);
 int __cdecl fcn_00428340(int, int, int, int, int);
-char *__cdecl fcn_00504c90(char *, int);
+char *__cdecl gm_FindNearestBuildingByKind(char *, int);
 void __cdecl fcn_004c6430(int, int, int);
 void __cdecl fcn_004c5ed0(int, char *, int);
 
@@ -161,7 +161,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 		if ((*(unsigned char *)(a0 + 0x78) & 2) &&
 		    *(unsigned char *)(a0 + 0xb4) == 1) {
 			i = 0;
-			n = (int)fcn_00504c90(e, 3);
+			n = (int)gm_FindNearestBuildingByKind(e, 3);
 			if (n != 0) {
 				h = g_7f4ca4 + 0x180;
 				q = (int *)(a0 + 0xb8);
@@ -239,7 +239,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 						if (i == 0) {
 							e = gm_StartFilteredEntitySearch(1, 1,
 										 *(int *)(a0 + 0xac));
-							i = (int)fcn_00504c90(e, 3);
+							i = (int)gm_FindNearestBuildingByKind(e, 3);
 						}
 						r = gm_LookupEntityRecordById(*p);
 						if (r != 0 &&
@@ -286,15 +286,15 @@ void __cdecl fcn_0056cfc0(char *a0)
 			} while (--i);
 			for (i = 0; i < 3; i++) {
 				sprintf(buf, g_6a6afc, *(int *)(a0 + 4), i);
-				n = fcn_00426d00(buf);
+				n = evt_FindScriptByName(buf);
 				if (n != 0)
-					fcn_00428720((char *)n);
+					evt_RequestScriptExit((char *)n);
 			}
 		}
 		if (e != 0 && *(int *)(e + 0x61) != 0 &&
 		    (n = *(int *)(*(int *)(e + 0x61) + 0x210)) != 0)
 			fcn_00418f90(n);
-		fcn_00546190(a0);
+		he_FreeAction(a0);
 		break;
 	}
 	default:

@@ -20,7 +20,7 @@ int __cdecl gm_CheckEntityType(unsigned char* e);
 int __cdecl fcn_00505340(unsigned char* e);
 void __cdecl d3_TransformPoint(char* view, char* pos, Vec4* out);
 
-unsigned char* __cdecl fcn_00504c90(unsigned char* me, int kind)
+unsigned char* __cdecl gm_FindNearestBuildingByKind(unsigned char* me, int kind)
 {
 	float best_d;
 	Vec4 a;

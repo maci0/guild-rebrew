@@ -15,7 +15,7 @@ void __cdecl fcn_004eeb50(char*, float);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_004ecf00(char*, int*, int*, int);
 void __cdecl sub_00576750(char*, char*, char*, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_005764f0(char* e)
 {
@@ -30,7 +30,7 @@ void __cdecl fcn_005764f0(char* e)
 	k = (fcn_00500e20(&gm_GameTime) + 1) % 4;
 	o = gm_LookupEntityRecordById(*(int*) (e + 0xc));
 	if (*(int*) (e + 0x70) == -1 || *(int*) (e + 0x70) == -2) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 	if ((e[0x78] & 4) != 0) {

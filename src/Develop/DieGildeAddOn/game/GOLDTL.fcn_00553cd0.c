@@ -20,7 +20,7 @@ extern double g_6628f0;
 
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_00546190(char* e);
+void __cdecl he_FreeAction(char* e);
 void __cdecl fcn_00529160(char* e, int a, int id, char* rec);
 void __cdecl fcn_004c5c80(int owner);
 void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* tag);
@@ -55,7 +55,7 @@ void __cdecl fcn_00553cd0(char* event)
 	record = (unsigned short*) gm_LookupEntityRecordById(*(int*) (event + 0xac));
 	state = *(int*) (event + 0x70);
 	if (state == -2 || record == 0 || e == 0 || *(unsigned short*) (e + 0x27) == 0xffff) {
-		fcn_00546190(event);
+		he_FreeAction(event);
 		return;
 	}
 	switch (state) {
@@ -118,7 +118,7 @@ void __cdecl fcn_00553cd0(char* event)
 		fcn_004c5c80(*(int*) (record + 2));
 		fcn_004c5da0(*(int*) (record + 2), *(int*) (event + 0xb4), *(int*) (event + 0xb8), 0,
 			0, "BetriebsPr");
-		fcn_00546190(event);
+		he_FreeAction(event);
 		return;
 	}
 }

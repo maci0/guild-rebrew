@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -27,5 +27,5 @@ void __cdecl fcn_00557e50(char* o)
 			return;
 		}
 	}
-	fcn_00546190(o);
+	he_FreeAction(o);
 }

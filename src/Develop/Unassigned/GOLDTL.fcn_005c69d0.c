@@ -16,7 +16,7 @@
  
  
 
-void __cdecl fcn_005c69d0(void)
+void __cdecl d2_ResetTrainingRows(void)
 {
 	int i;
 	int j;

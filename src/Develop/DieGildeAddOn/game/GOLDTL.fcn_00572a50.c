@@ -6,7 +6,7 @@ extern int g_90d520[];
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_00500cb0(char*, int);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -107,7 +107,7 @@ void __cdecl fcn_00572a50(char* obj)
 					fcn_00529160(ref1, 0, *p, 0);
 				}
 			}
-			fcn_00546190(obj);
+			he_FreeAction(obj);
 			return;
 		}
 		break;
@@ -123,5 +123,5 @@ void __cdecl fcn_00572a50(char* obj)
 	default:
 		return;
 	}
-	fcn_00546190(obj);
+	he_FreeAction(obj);
 }

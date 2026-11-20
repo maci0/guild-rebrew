@@ -10,7 +10,7 @@ int __cdecl fcn_00526120(char* text, int flags);
 int __cdecl fcn_00471e30(int k);
 
 /* ADDRESS: GOLDTL 0x005a06a0 */
-void __cdecl fcn_005a06a0(void)
+void __cdecl d2_ShowWeinkellerDialog(void)
 {
 	char* slot;
 	int h;
@@ -24,7 +24,7 @@ void __cdecl fcn_005a06a0(void)
 	io_AppendText(0x42cf);
 	d2_SetForm(h, 2);
 	io_AppendText(0x42d1);
-	while (fcn_005373e0((void*) fcn_005a06a0, 0x677c7) != 0) {
+	while (fcn_005373e0((void*) d2_ShowWeinkellerDialog, 0x677c7) != 0) {
 		if (*(int*) 0x14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;
 		}

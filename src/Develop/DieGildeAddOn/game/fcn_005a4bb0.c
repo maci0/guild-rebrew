@@ -21,7 +21,7 @@ int __cdecl gm_AccumulateTyped2(int a);
 void __cdecl fcn_00472380(int a, ...);
 void __cdecl fcn_004c5150(int a, int b, char c, int d);
 void __cdecl fcn_004c4510(void* a, int b);
-void __cdecl fcn_004c4570(int a, int b, int c, void* d);
+void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* d);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00471e30(int a);
 
@@ -69,7 +69,7 @@ void __cdecl fcn_005a4bb0(char* o)
             }
             r = fcn_00471f80(it1);
             fcn_004c4510(o, *(int*)(o + 1));
-            fcn_004c4570(4, 1, 0x65, &r);
+            cm_AppendPacketFieldDelta(4, 1, 0x65, &r);
             fcn_004c5360();
             g_774654 = 1;
         }

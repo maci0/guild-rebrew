@@ -11,7 +11,7 @@ extern double g_6640f0;
 void __cdecl fcn_004fd400(short*, int*);
 int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl fcn_004c4510(char*, int);
-void __cdecl fcn_004c4570(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_004c5480(int, int, float);
@@ -60,10 +60,10 @@ void __cdecl fcn_004fd0a0(void)
 			v = *(int*) (e + 0x1d8 + i * 4);
 			total += v;
 			count += v != 0;
-			fcn_004c4570(4, 1, (int) e + 0x1d4 + i * 4 - g_aed32c, &v);
+			cm_AppendPacketFieldDelta(4, 1, (int) e + 0x1d4 + i * 4 - g_aed32c, &v);
 		}
 		count = (r + total) / (count + 1);
-		fcn_004c4570(4, 1, (int) e + 0x1e0 - g_aed32c, &r);
+		cm_AppendPacketFieldDelta(4, 1, (int) e + 0x1e0 - g_aed32c, &r);
 		*(double*) dmem = (double) count / (double) r;
 		if (!(*(double*) dmem < g_6629c8)) {
 			*(double*) dmem = 1.0;

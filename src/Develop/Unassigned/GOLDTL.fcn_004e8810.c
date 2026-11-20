@@ -15,7 +15,7 @@ void __cdecl fcn_005b2900(char*, char*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004e8810 */
-int __cdecl fcn_004e8810(unsigned char* request)
+int __cdecl amt_SwapOfficeOccupants(unsigned char* request)
 {
 	char* e;
 	char* w1;

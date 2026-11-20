@@ -10,7 +10,7 @@ void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_00423460(int);
 void __cdecl fcn_004237f0(int, int);
 
-void __cdecl fcn_005804f0(void)
+void __cdecl d2_HideTutorialPrompt(void)
 {
 	d2_SetForm(g_665f08[13], 0);
 	io_AppendText(g_6811b0);

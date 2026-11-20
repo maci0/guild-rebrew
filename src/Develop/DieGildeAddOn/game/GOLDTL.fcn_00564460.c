@@ -14,7 +14,7 @@ extern float g_662910;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl gm_SearchTable67(int id);
-void __cdecl fcn_00546190(char* e);
+void __cdecl he_FreeAction(char* e);
 void __cdecl fcn_00545670(char* e, int a, int b, char* tag, int c);
 void __cdecl d2_SetForm(int dlg, int page);
 int __cdecl io_AppendText(int id, ...);
@@ -51,7 +51,7 @@ void __cdecl fcn_00564460(char* e)
 		q = (unsigned short*) gm_LookupEntityRecordById(*(int*) (e + 0xb4));
 		p = (unsigned char*) gm_SearchTable67(*(int*) (e + 0xac));
 		if (q == 0 || p == 0) {
-			fcn_00546190(e);
+			he_FreeAction(e);
 			return;
 		}
 		type = *(unsigned char*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca2);
@@ -120,15 +120,15 @@ void __cdecl fcn_00564460(char* e)
 			}
 			fcn_004c5f60(a, b, c);
 			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 2);
-			fcn_00546190(e);
+			he_FreeAction(e);
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x17ea, *(unsigned short*) (p + 0x27), p);
 		he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
 		fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 0x200);
 		fcn_00545780(e);
-		fcn_00546190(e);
-		fcn_00546190(e);
+		he_FreeAction(e);
+		he_FreeAction(e);
 		return;
 	case 1:
 		if (g_100f884 != *(int*) (*(char**) (e + 0x74) + 8)) {
@@ -157,7 +157,7 @@ void __cdecl fcn_00564460(char* e)
 			fcn_004c5f60(a, b, c);
 			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 2);
 			fcn_00545780(e);
-			fcn_00546190(e);
+			he_FreeAction(e);
 			return;
 		}
 		if (g_100f1dc != 1) {
@@ -178,5 +178,5 @@ void __cdecl fcn_00564460(char* e)
 		return;
 	}
 	fcn_00545780(e);
-	fcn_00546190(e);
+	he_FreeAction(e);
 }

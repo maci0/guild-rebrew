@@ -1,6 +1,6 @@
 extern int g_772504,d2_ClipLeft,d2_ClipRight,g_7725fc,d2_ClipBottom,d2_DefaultFont,d2_ResourceOffset;
 typedef struct { char b[0x2f4]; } Slot;
-int __cdecl fcn_00469890(void);
+int __cdecl d2_AllocateElement(void);
 int __cdecl fcn_00466260(int, int*, int*);
 void __cdecl d2_AddRefcount(int);
 int __cdecl fcn_0047a200(int, int, int, int);
@@ -22,7 +22,7 @@ int __cdecl fcn_004699c0(unsigned int x, int y, int resourceId)
 	if (resourceId > g_772504) {
 		return -1;
 	}
-	idx = fcn_00469890();
+	idx = d2_AllocateElement();
 
 	slot = (char*) ((char*) ((Slot*) g_1015ea0 + idx));
 	if (idx >= 0x400) {

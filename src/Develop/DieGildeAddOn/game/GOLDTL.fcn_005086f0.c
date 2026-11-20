@@ -3,7 +3,7 @@ extern double g_662908;
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508220(int, int*);
 void __cdecl fcn_004c4510(unsigned short*, int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 float __cdecl fcn_004c5360(void);
 void __cdecl fcn_004ff210(unsigned short, int);
 int __cdecl _ftol(void);
@@ -80,7 +80,7 @@ unsigned int __cdecl fcn_005086f0(unsigned short* objectContext)
 	flags = flags ^ value;
 	slots[5] = flags;
 	fcn_004c4510(objectContext, *(int*) ((char*) objectContext + 4));
-	fcn_004c4570(4, 1, 0x2c, &slots[5]);
+	cm_AppendPacketFieldDelta(4, 1, 0x2c, &slots[5]);
 	fcn_004c5360();
 	fcn_004ff210(*objectContext, -n);
 	return id;

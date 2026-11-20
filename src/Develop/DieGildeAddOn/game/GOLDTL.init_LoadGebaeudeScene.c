@@ -17,7 +17,7 @@ int __cdecl fcn_0042df70(void*);
 int __cdecl fcn_0042df30(void*, int);
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 void __cdecl fcn_00473150(unsigned char*);
-int __cdecl fcn_00511040(int idx, char* out);
+int __cdecl init_GetGebaeudeSceneName(int idx, char* out);
 void __cdecl fcn_004432d0(int a, int b);
 char __cdecl d3_LoadScene(const char* filename, void* stream, int progress);
 void __cdecl fcn_00516de0(char* a1, unsigned char a2);
@@ -79,7 +79,7 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 			ReportClientMessage("init_LoadGebaeudeScene:Could not find a free universe...");
 		}
 		fcn_004432d0(v, 0);
-		fcn_00511040(prototypeIndex, tmp);
+		init_GetGebaeudeSceneName(prototypeIndex, tmp);
 		sprintf(name, "scenes/*gb_%s.ed3", tmp);
 		strupr(name);
 		sprintf(tmp, "init_LoadGebaeudeScene: %s", name);
@@ -112,7 +112,7 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 	}
 	obj = *p;
 	fcn_004432d0(obj, 0);
-	fcn_00511040(prototypeIndex, scene);
+	init_GetGebaeudeSceneName(prototypeIndex, scene);
 	sprintf(name, "scenes/*gb_%s.ed3", scene);
 	strupr(name);
 	if (!d3_LoadScene(name, 0, progress)) {

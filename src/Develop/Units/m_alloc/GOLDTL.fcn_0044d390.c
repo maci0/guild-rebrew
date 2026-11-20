@@ -8,7 +8,7 @@ void* __cdecl m_alloc(int size, char* tag);
 
 /* ADDRESS: GOLD 0x0044eb20 */
 /* ADDRESS: GOLDTL 0x0044d390 */
-void __cdecl fcn_0044d390(int unused, char* s)
+void __cdecl d3_io_a_AllocateMaterialBuffer(int unused, char* s)
 {
 	int n;
 

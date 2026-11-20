@@ -17,7 +17,7 @@ typedef struct {
 
 Img* __cdecl fcn_00477590(int, int, int, int, int, int, int);
 char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char a8, int a7);
-Img* __cdecl fcn_00478400(int, int, int, int, int, int, int);
+Img* __cdecl d2_GrabBit8(int, int, int, int, int, int, int);
 Img* __cdecl fcn_00477ae0(int, int, int, int, int, int, int);
 Img* __cdecl fcn_004781e0(int, int, int, int, int, int, int);
 
@@ -40,7 +40,7 @@ Img* __cdecl fcn_004788b0(int a1, int a2, int a3, int a4, Surf* surface, int mod
 			kind = 1;
 			break;
 		case 8:
-			imageResult = fcn_00478400(a1, a2, a3, a4, surface->x1c, mode, surface->x4);
+			imageResult = d2_GrabBit8(a1, a2, a3, a4, surface->x1c, mode, surface->x4);
 			kind = 0;
 			break;
 		default:

@@ -5,7 +5,7 @@
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004e8a80(int, int*);
+int __cdecl amt_FindOfficeSlotByType(int, int*);
 char* __cdecl fcn_004ad130(int, int*);
 char* __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c4fc0(int, int, int, char*, int, int, int, int);
@@ -19,9 +19,9 @@ void __cdecl fcn_004ad1c0(void)
 	char* p;
 
 	limit = (*(int*)&gm_GameTime) + 0x578;
-	if (fcn_004e8a80(0x26, a) == 0)
+	if (amt_FindOfficeSlotByType(0x26, a) == 0)
 		return;
-	if (fcn_004e8a80(0x27, b) == 0)
+	if (amt_FindOfficeSlotByType(0x27, b) == 0)
 		return;
 	if (a[1] == -1 && g_7728cc != -1) {
 		p = fcn_004ad130(g_7728cc, &kind);

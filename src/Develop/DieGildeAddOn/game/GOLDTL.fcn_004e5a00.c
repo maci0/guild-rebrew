@@ -45,7 +45,7 @@ void __cdecl fcn_004c53a0(void);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x004e5a00 */
-void __cdecl fcn_004e5a00(int* event)
+void __cdecl cut_ExecuteCutscene(int* event)
 {
     unsigned char* e;
     int flag = 0;

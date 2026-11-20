@@ -22,7 +22,7 @@ extern int __cdecl fcn_004f2810(int slot, int record, int item, int value, int a
 extern int __cdecl fcn_004f2a10(int a, int record, int item, int value);
 extern int __cdecl fcn_004f2d30(int record, int item, int value, int delta);
 extern int __cdecl fcn_004f4440(int slot, int byte, int item, int zero, int* out);
-extern int __cdecl fcn_004f13a0(char* record);
+extern int __cdecl cm_CountOccupiedBuildingStats(char* record);
 extern void __cdecl fcn_004f2e80(char* record, int value);
 extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern int __cdecl fcn_0050d320(char* slot, char mode);
@@ -166,7 +166,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 			n++;
 		} while ((entry = (int*) FindSlotEntryFiltered(0, entity, entry, (void*) fcn_004f1850, 0xff)) != 0);
 	}
-	if (fcn_004f13a0(entity) < 4)
+	if (cm_CountOccupiedBuildingStats(entity) < 4)
 		fcn_004f2e80(entity, gm_RandomMod(2) + 1);
 	if (home != 0 && (*(char*) (home + 2) == 6 || *(char*) (home + 2) == 7)) {
 		if (count > 0)

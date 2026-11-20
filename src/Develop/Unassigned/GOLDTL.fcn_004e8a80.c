@@ -7,7 +7,7 @@ typedef Rec18_68da68 Rec18;
 
 extern Rec18_68da68 amt_OfficeSlots[42];
 
-int __cdecl fcn_004e8a80(int type, Rec18* out)
+int __cdecl amt_FindOfficeSlotByType(int type, Rec18* out)
 {
 	int i;
 

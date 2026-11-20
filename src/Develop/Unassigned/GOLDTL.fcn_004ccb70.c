@@ -2,8 +2,8 @@
 
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00426cc0(int);
-void __cdecl fcn_00428720(int);
+int __cdecl evt_FindScriptById(int);
+void __cdecl evt_RequestScriptExit(int);
 
 int __cdecl fcn_004ccb70(char* a1, char* response)
 {
@@ -19,7 +19,7 @@ int __cdecl fcn_004ccb70(char* a1, char* response)
 	if (q != 0) {
 		v = *(int*) (q + 0x28);
 		if (v != -1) {
-			fcn_00428720(fcn_00426cc0(v));
+			evt_RequestScriptExit(evt_FindScriptById(v));
 		}
 	}
 	if (response != 0) {

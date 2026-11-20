@@ -29,7 +29,7 @@ void __cdecl fcn_004fa850(int, char, unsigned int*, unsigned int*);
 void __cdecl fcn_004faa90(unsigned int, unsigned int, Area*);
 int __cdecl gm_ResolveEntityById(char**, int, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005463a0(int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
 void __cdecl fcn_005b2740(char*, char*);
 
@@ -93,7 +93,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 				area.c = *(unsigned int*) (*(char**) (p + 0x61) + 0x54);
 			}
 		}
-		for (ent = (Straftat*) fcn_005463a0(1, 0, 0x18); ent != 0;
+		for (ent = (Straftat*) he_StartHandlungSearch(1, 0, 0x18); ent != 0;
 			ent = (Straftat*) he_fn_Handlung()) {
 			if (*(int*) ((char*) ent + 0xc4) != g_9a3800[idx].target_id) {
 				continue;

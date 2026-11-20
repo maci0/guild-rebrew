@@ -25,7 +25,7 @@ int __cdecl d2_SetSlotVisibility(int, int);
 float __cdecl fcn_0050bbb0(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
-void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl d2_DrawPanelFrame(int, int, int);
 void __cdecl fcn_00533f40(int, int, int, int);
 void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00594340(void);
@@ -46,7 +46,7 @@ int __cdecl fcn_005ba020(int, int);
 void __cdecl fcn_0046e700(int);
 void __cdecl fcn_00469880(int);
 void __cdecl fcn_0046f280(int);
-int __cdecl fcn_005463a0(int, int, int, int, int, ...);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int, ...);
 int __cdecl fcn_004677e0(int, ...);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl d2_SetElementFont(int, int);
@@ -72,7 +72,7 @@ void __cdecl ResetDisplayCounters(void);
 int __cdecl fcn_00473690(int, int);
 int __cdecl CountDisplayCounters(void);
 void __cdecl d2_ClearSelectedControl(void);
-int __cdecl fcn_0057ecc0(void);
+int __cdecl d2_CanCloseWindowDuringTutorial(void);
 void __cdecl fcn_00532ef0(void);
 float __cdecl fcn_0050bb50(int, int);
 float __cdecl gm_RandomFloat01(void);
@@ -94,10 +94,10 @@ void __cdecl fcn_005c61c0(void);
 int __cdecl fcn_005b9cb0(int, int);
 int __cdecl fcn_005b9df0(int, int, int, int);
 void __cdecl fcn_005b9fb0(int);
-int __cdecl fcn_005b9980(int);
+int __cdecl d2_ShowNewCartDialog(int);
 void __cdecl fcn_005af160(int, float, int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
-int __cdecl fcn_0057eba0(int, int, int, int);
+int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl fcn_004c52d0(int, int);
 int __cdecl fcn_005bdc30(int, int, int, int, int);
@@ -208,7 +208,7 @@ typedef struct {
 } frame_t;
 
 /* ADDRESS: GOLD 0x005af320 */
-int __cdecl fcn_005af320(int entity, int flags)
+int __cdecl d2_RunTradeTransportPanel(int entity, int flags)
 {
 	frame_t f;
 	int idx;
@@ -436,7 +436,7 @@ l_after:
 
 	/* 0x5baec2: status-line message id for the current container state */
 	if (*(int*) 0x7746c4 == 0 && *(int*) 0x7746c8 == 0) {
-		fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x73f);
+		d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x73f);
 	} else {
 		int msg;
 		unsigned char kind;
@@ -458,9 +458,9 @@ l_after:
 		}
 		/* the native arms push 0x73f when the trade flag is set */
 		if (f.v3c == 0) {
-			fcn_00533dc0(d2_CurrentWindowId, msg, 0x741);
+			d2_DrawPanelFrame(d2_CurrentWindowId, msg, 0x741);
 		} else {
-			fcn_00533dc0(d2_CurrentWindowId, msg, 0x73f);
+			d2_DrawPanelFrame(d2_CurrentWindowId, msg, 0x73f);
 		}
 	}
 
@@ -644,7 +644,7 @@ l_next:
 		if (i >= 16) {
 			goto l_fill_next;
 		}
-		if (fcn_005463a0(3, 0, 0xf, 2, (int) (g_774970), 3,
+		if (he_StartHandlungSearch(3, 0, 0xf, 2, (int) (g_774970), 3,
 		                 *(int*) (f.v20 + 2)) != 0) {
 			goto l_fill_next;
 		}
@@ -683,7 +683,7 @@ l_next:
 		e->f10 = fcn_0046f100(0x10, j, 0xc8, 0x40, 0x10, d2_CurrentWindowId);
 		d2_SetElementFont(*(int*) (0x10161bc + e->f10 * 0x3cc), 0x53);
 		*(int*) ((int) g_00f8f080 + f.v1c * 0x2f4 + 0x5c) = 1;
-		i = fcn_005463a0(2, 3, *(int*) (f.v20 + 2), 0, 0x11);
+		i = he_StartHandlungSearch(2, 3, *(int*) (f.v20 + 2), 0, 0x11);
 		while (i != 0) {
 			*(int*) (i + 0x52) = *(int*) 0x7f4c00;
 			*(int*) (i + 0x56) = g_7f4c04;
@@ -703,7 +703,7 @@ l_fill_next:
 	for (e = f.v6D8; e < f.v6D8 + 16; e++) {
 		e->f04 = 0;
 	}
-	i = fcn_005463a0(2, 0, 0xf, 2, (int) (g_774970));
+	i = he_StartHandlungSearch(2, 0, 0xf, 2, (int) (g_774970));
 	if (i != 0) {
 		do {
 			for (j = 0; j < 16; j++) {
@@ -1041,7 +1041,7 @@ l_da9:
 			if (fcn_00471f80(i) != 0) {
 				fcn_00472380(i, 0);
 				f.v90 = 0;
-			} else if (fcn_0057ecc0() == 1) {
+			} else if (d2_CanCloseWindowDuringTutorial() == 1) {
 				g_774654 = 1;
 				if (f.v88 == 0 && *(int*) 0x7e2aa0 == 0) {
 					fcn_00532ef0();
@@ -1158,12 +1158,12 @@ l_5bc253:
 			*(float*) &f.v64 = 1.0f;
 		}
 		if (f.v80 != 0) {
-			if (fcn_0057eba0(0x28, f.v14, 0, slot_value) == 0) {
+			if (d2_DispatchTutorialEvent(0x28, f.v14, 0, slot_value) == 0) {
 				continue;
 			}
 			fcn_0057e880(0x28, f.v14, 0, slot_value);
 		} else if (f.v70 != 0) {
-			if (fcn_0057eba0(0x26, f.v14, 0, slot_value) == 0) {
+			if (d2_DispatchTutorialEvent(0x26, f.v14, 0, slot_value) == 0) {
 				continue;
 			}
 			fcn_0057e880(0x26, f.v14, 0, slot_value);
@@ -1722,7 +1722,7 @@ l_5bd26b:
 	} else if (f.vD0 == f.v6c && (signed char) g_7747b0 >= 0) {
 		/* 0x5bd550: the slot list of the owning dialog is redrawn */
 		fcn_00471af0(f.v2c, 0);
-		fcn_005b9980(f.vCC);
+		d2_ShowNewCartDialog(f.vCC);
 		fcn_00471af0(f.v2c, 1);
 		if (f.v94 == 0) {
 			goto l_5bd632;
@@ -1785,7 +1785,7 @@ l_5bd632:
 	} else {
 		*(int*) 0x774698 = 0;
 	}
-	if (fcn_005309d0((void*) fcn_005af320, 0x657c7) != 0) {
+	if (fcn_005309d0((void*) d2_RunTradeTransportPanel, 0x657c7) != 0) {
 		goto l_5bb193;
 	}
 	fcn_005c61c0();

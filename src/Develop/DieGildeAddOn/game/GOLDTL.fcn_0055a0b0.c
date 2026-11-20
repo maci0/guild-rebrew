@@ -8,7 +8,7 @@ struct EvRec {
 };
 #include "client_actions.h"
 int __cdecl fcn_004e8b40(unsigned char, int*);
-int __cdecl fcn_004e8b80(int, int, EvRec*);
+int __cdecl amt_FindOfficeSlotsByKind(int, int, EvRec*);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004e8240(unsigned char, unsigned char*, unsigned char*, int, int);
@@ -16,7 +16,7 @@ void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00500bb0(void*, int, int, int);
-void __cdecl fcn_00546190(void*);
+void __cdecl he_FreeAction(void*);
 
 /* ADDRESS: GOLDTL 0x0055a0b0 */
 void __cdecl fcn_0055a0b0(char* action)
@@ -51,7 +51,7 @@ void __cdecl fcn_0055a0b0(char* action)
 		return;
 	} else {
 		if (idx >= 0 && idx < 6) {
-			cnt = fcn_004e8b80(*(int*) (action + 0xb0 + idx * 4), 6, arr);
+			cnt = amt_FindOfficeSlotsByKind(*(int*) (action + 0xb0 + idx * 4), 6, arr);
 			if (cnt > 0) {
 				r = (unsigned char*) arr;
 				do {
@@ -97,6 +97,6 @@ void __cdecl fcn_0055a0b0(char* action)
 			fcn_00500bb0((unsigned char*) action + 0x52, 1, 0, 0);
 			return;
 		}
-		fcn_00546190((unsigned char*) action);
+		he_FreeAction((unsigned char*) action);
 	}
 }

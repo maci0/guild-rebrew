@@ -5,7 +5,7 @@ int __cdecl d3snd_AttachSoundSource(void*, void*, int, float);
 int __cdecl d3snd_PlaySource(int, int, int, int);
 extern int g_774934;
 /* ADDRESS: GOLDTL 0x00515e10 */
-void __cdecl fcn_00515e10(char* p)
+void __cdecl d3snd_PlayNamedSceneSound(char* p)
 {
 	char buf[0x100];
 	int bn, br, si, v, r;

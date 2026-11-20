@@ -5,7 +5,7 @@ extern s_77e8c0 g_77e8c0[16];
 
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00545780(char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x005455b0 */
 unsigned int __cdecl fcn_005455b0(void)
@@ -32,7 +32,7 @@ unsigned int __cdecl fcn_005455b0(void)
 	}
 	if (found != 0) {
 		fcn_00545780(found);
-		fcn_00546190(found);
+		he_FreeAction(found);
 		return 0xf;
 	}
 	if (foundi != -1) {

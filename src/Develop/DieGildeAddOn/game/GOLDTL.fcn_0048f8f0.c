@@ -21,7 +21,7 @@ extern char g_7f4ca0[];
 
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int* __cdecl fcn_0048f450(char* q);
 int __cdecl fcn_004a5340(char* e, int a, int* p, int b, float r, unsigned short* out);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
@@ -43,7 +43,7 @@ int __cdecl fcn_0048f8f0(char* e, char* q, Blk24* b1, Blk24* b2)
 	h = fcn_0048f450(q);
 	if (h == 0)
 		return 0;
-	if (fcn_005463a0(2, 0, 0x89, 3, *(int*) (q + 1)) != 0)
+	if (he_StartHandlungSearch(2, 0, 0x89, 3, *(int*) (q + 1)) != 0)
 		return 0;
 	t = 0xf00500;
 	if (fcn_004a5340(e, 1, &t, 0, gm_RandomMod(0x20) + 32.0f, &idx) == 0)

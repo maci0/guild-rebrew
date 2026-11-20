@@ -35,7 +35,7 @@ int __cdecl io_AppendText(char*, ...);
 char* __cdecl fcn_00502cd0(int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_005c61e0(int);
-int __cdecl fcn_005b0f00(char*);
+int __cdecl d2_UpdateWindowDrag(char*);
 void __cdecl fcn_0046f280(int);
 
 void __cdecl fcn_005b4500(void)
@@ -71,7 +71,7 @@ void __cdecl fcn_005b4500(void)
 					}
 				}
 			}
-			fcn_005b0f00((char*)win);
+			d2_UpdateWindowDrag((char*)win);
 		} while (fcn_005373e0((void*) fcn_005b4500, 0x657c7) != 0);
 	}
 	fcn_0046f280(w);

@@ -25,10 +25,10 @@ extern unsigned short g_7f4c20[];
 
 
 
-int __cdecl fcn_0050e780(int i);
+int __cdecl d2_CalculateDependencyDepth(int i);
 
 /* ADDRESS: GOLDTL 0x0050e830 */
-int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int width, int height)
+int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int width, int height)
 {
 	char* rec;
 	DEPENDENCY_DIAGRAM_NODE tmp;
@@ -92,7 +92,7 @@ int __cdecl fcn_0050e830(unsigned char* a0, unsigned short* a1, int width, int h
 	}
 	max = 0;
 	for (i = 0; i < n; i++) {
-		v = fcn_0050e780(i);
+		v = d2_CalculateDependencyDepth(i);
 		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].depth = (unsigned short) v;
 		if (max <= (v & 0xffff)) {
 			max = v & 0xffff;

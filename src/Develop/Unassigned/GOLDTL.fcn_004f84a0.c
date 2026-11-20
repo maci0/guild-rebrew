@@ -6,7 +6,7 @@
 extern char g_679060[];
 
 void __cdecl io_FormatTextBuffer(void* p, ...);
-void __cdecl fcn_004fa5f0(char* text, int a, int b);
+void __cdecl d2_ShowPrivilegMessage(char* text, int a, int b);
 
 int __cdecl fcn_004f84a0(char* a, int* b)
 {
@@ -21,7 +21,7 @@ int __cdecl fcn_004f84a0(char* a, int* b)
 	if (*b == 3 && a[2] == 6) {
 		memset(buf, 0, sizeof(buf));
 		io_FormatTextBuffer(buf, 0x1da0, a[9] != 0 ? 0x286 : 0x25e);
-		fcn_004fa5f0(buf, 0, 0x657c7);
+		d2_ShowPrivilegMessage(buf, 0, 0x657c7);
 		return 2;
 	}
 	if (*b == 1 && a[2] == 6) {

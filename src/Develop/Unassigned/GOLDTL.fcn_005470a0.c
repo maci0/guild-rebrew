@@ -41,14 +41,14 @@ struct msg_005470a0 {
 
 #include <string.h>
 
-int __cdecl fcn_005463a0(int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl fcn_004c5530(struct msg_005470a0*);
 
 void __cdecl fcn_005470a0(void)
 {
 	struct msg_005470a0 m;
 
-	if (fcn_005463a0(1, 0, 0x6b) == 0) {
+	if (he_StartHandlungSearch(1, 0, 0x6b) == 0) {
 		memset(&m, 0, sizeof(m));
 		m.b4 = 0x6b;
 		m.fc = -1;

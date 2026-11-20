@@ -44,7 +44,7 @@ extern int g_7ea380[15];
 
 extern char* g_14a79c0[];
 
-void __cdecl fcn_0046b2b0(int id);
+void __cdecl d2_DestroyElement(int id);
 void __cdecl fcn_00527540(void);
 int __cdecl fcn_00465950(const char* name);
 void* __cdecl d2_GetResourceData(int idx);
@@ -58,9 +58,9 @@ int __cdecl fcn_00475780(char* a1, char* a2);
 int __cdecl d2_UnlockSurface(void* o);
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_0057eba0(int a, int b, int c, int d);
+int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d);
 int __cdecl fcn_00506380(int a, int b, void* c, int d);
-void __cdecl fcn_005a7320(int n, int v);
+void __cdecl gm_ChangeBuildingRoom(int n, int v);
 void __cdecl fcn_00475220(char* a);
 void __cdecl fcn_00526920(int a, int b, int c);
 int __cdecl sprintf(char*, const char*, ...);
@@ -94,7 +94,7 @@ void __cdecl fcn_005279f0(unsigned int inputFlags)
 		p = (char*)g_7ea380;
 		do {
 			if (*(int*) p != -1) {
-				fcn_0046b2b0(*(int*) p);
+				d2_DestroyElement(*(int*) p);
 				*(int*) p = -1;
 			}
 			p += 4;
@@ -197,12 +197,12 @@ void __cdecl fcn_005279f0(unsigned int inputFlags)
 			if (!v8)
 				goto label_527db2;
 			if (*v8 != *(short*) g_7746cc
-				&& fcn_0057eba0(0x19, (int) g_7746c4, 0,
+				&& d2_DispatchTutorialEvent(0x19, (int) g_7746c4, 0,
 					(int) *v8) == 1
 				&& g_7f4e51[g_774970 * 0x21c] == 0) {
 				if (fcn_00506380(g_774970,
 					(int) g_7746c4, v8, 0) & 0x4000)
-					fcn_005a7320(-1, (int) *v8);
+					gm_ChangeBuildingRoom(-1, (int) *v8);
 				goto label_527db2;
 			}
 		}
@@ -237,7 +237,7 @@ label_527db2:
 		if (!v8)
 			goto done;
 		if ((!g_7746cc || (*v8 != *(short*) g_7746cc
-			&& fcn_0057eba0(0x19, (int) g_7746c8, 0,
+			&& d2_DispatchTutorialEvent(0x19, (int) g_7746c8, 0,
 				(int) *v8) == 1))
 			&& g_7f4e51[g_774970 * 0x21c] == 0) {
 			if (!(fcn_00506380(g_774970,

@@ -16,14 +16,14 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
 void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel);
 int __cdecl fcn_0058c780(char* a1, int a2, int a3, int* a4, int* a5);
-int __cdecl fcn_0058c890(char* a1, int a2, int a3, int a4);
+int __cdecl d2_RunFriedhofDialog(char* a1, int a2, int a3, int a4);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472640(int i, int flag);
 void __cdecl fcn_00471af0(int k, int flag);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_0058cae0(char* p, int a1, int a2)
+int __cdecl d2_RunRentGraveDialog(char* p, int a1, int a2)
 {
 	int sel;
 	int res;
@@ -53,7 +53,7 @@ int __cdecl fcn_0058cae0(char* p, int a1, int a2)
 		else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == back) {
 				fcn_00471af0(d, 0);
-				if (fcn_0058c890(p, a1, a2, sel) == 1) {
+				if (d2_RunFriedhofDialog(p, a1, a2, sel) == 1) {
 					res = 1;
 					g_774654 = 1;
 				}
@@ -72,7 +72,7 @@ found:
 				fcn_00472640(back, fcn_0058c780(p, a1, a2, ids, &sel));
 			}
 		}
-	} while (fcn_005373e0(fcn_0058cae0, 0x677c7) != 0);
+	} while (fcn_005373e0(d2_RunRentGraveDialog, 0x677c7) != 0);
 	fcn_00471e30(d);
 	return res;
 }

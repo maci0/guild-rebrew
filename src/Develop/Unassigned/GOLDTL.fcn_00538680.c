@@ -4,7 +4,7 @@
 __declspec(dllimport) void* __stdcall CreateMutexA(void*, int, const char*);
 __declspec(dllimport) unsigned long __stdcall GetLastError(void);
 
-int __cdecl fcn_00538680(void** mutexOut)
+int __cdecl main_CheckExistingInstance(void** mutexOut)
 {
 	void* mutex;
 

@@ -103,7 +103,7 @@ int __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_00469e30(int);
 void __cdecl fcn_00469e70(void);
 void __cdecl fcn_00473150(void*);
-void __cdecl fcn_00535770(int);
+void __cdecl sv_WaitForNetworkSync(int);
 void __cdecl fcn_005355f0(void);
 void __cdecl fcn_0050e380(int, void*);
 void __cdecl fcn_004fd400(short*, int*);
@@ -111,7 +111,7 @@ void* __cdecl fcn_004c5790(int, void*);
 int __cdecl fcn_004c4450(void*);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_0042df30(int, int);
-int __cdecl fcn_005463a0(int, ...);
+int __cdecl he_StartHandlungSearch(int, ...);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c4eb0(int);
 void __cdecl fcn_004c4ef0(int);
@@ -144,8 +144,8 @@ int __cdecl fcn_00508da0(void*);
 int __cdecl fcn_0050cf50(void*, int);
 int __cdecl fcn_0047dd60(void*);
 int __cdecl fcn_00567170(void*, int*, int*, int*);
-void* __cdecl fcn_00426cc0(int);
-void __cdecl fcn_00428720(void*);
+void* __cdecl evt_FindScriptById(int);
+void __cdecl evt_RequestScriptExit(void*);
 void __cdecl fcn_00406120(void*);
 char* __cdecl ch_CreateAction(void*, int, ...);
 void __cdecl fcn_004ec660(void*);
@@ -208,7 +208,7 @@ void __cdecl fcn_00540020(void)
 		}
 	}
 	if (g_7747b0 & 4) {
-		fcn_00535770(0x24087);
+		sv_WaitForNetworkSync(0x24087);
 	}
 
 	fcn_0050e380(g_774970 & 0xffff, arr);
@@ -225,7 +225,7 @@ void __cdecl fcn_00540020(void)
 	fcn_0042df30(0x538060, 1);
 
 	if ((g_7747b0 & 0x80) == 0) {
-		if (fcn_005463a0(1, 0, 0x66) == 0) {
+		if (he_StartHandlungSearch(1, 0, 0x66) == 0) {
 			memset(evs, 0, sizeof(evs));
 			evs[0].ent = SLOT4(g_774970 & 0xffff);
 			evs[0].year = gm_GameTime.a;
@@ -237,7 +237,7 @@ void __cdecl fcn_00540020(void)
 			evs[0].wd = gm_GameTime.d;
 			fcn_004c5530(&evs[0]);
 		}
-		if (fcn_005463a0(1, 0, 0x70) == 0) {
+		if (he_StartHandlungSearch(1, 0, 0x70) == 0) {
 			memset(evs, 0, sizeof(evs));
 			evs[0].ent = SLOT4(g_774970 & 0xffff);
 			evs[0].year = gm_GameTime.a;
@@ -249,7 +249,7 @@ void __cdecl fcn_00540020(void)
 			evs[0].wd = gm_GameTime.d;
 			fcn_004c5530(&evs[0]);
 		}
-		if (fcn_005463a0(1, 0, 0x68) == 0) {
+		if (he_StartHandlungSearch(1, 0, 0x68) == 0) {
 			memset(evs, 0, sizeof(evs));
 			evs[0].ent = SLOT4(g_774970 & 0xffff);
 			evs[0].year = gm_GameTime.a;
@@ -263,7 +263,7 @@ void __cdecl fcn_00540020(void)
 		}
 	}
 	if (g_7747f0 != 0) {
-		if (fcn_005463a0(1, 0, 0x85) == 0) {
+		if (he_StartHandlungSearch(1, 0, 0x85) == 0) {
 			memset(evs, 0, sizeof(evs));
 			evs[0].ent = SLOT4(g_774970 & 0xffff);
 			evs[0].year = gm_GameTime.a;
@@ -276,7 +276,7 @@ void __cdecl fcn_00540020(void)
 			fcn_004c5530(&evs[0]);
 		}
 	}
-	if (fcn_005463a0(1, 0, 0x7c) == 0) {
+	if (he_StartHandlungSearch(1, 0, 0x7c) == 0) {
 		memset(evs, 0, sizeof(evs));
 		evs[0].ent = SLOT4(g_774970 & 0xffff);
 		evs[0].year = gm_GameTime.a;
@@ -288,7 +288,7 @@ void __cdecl fcn_00540020(void)
 		evs[0].wd = gm_GameTime.d;
 		fcn_004c5530(&evs[0]);
 	}
-	if (fcn_005463a0(1, 0, 0x93) == 0) {
+	if (he_StartHandlungSearch(1, 0, 0x93) == 0) {
 		memset(evs, 0, sizeof(evs));
 		evs[0].ent = SLOT4(g_774970 & 0xffff);
 		evs[0].year = gm_GameTime.a;
@@ -300,7 +300,7 @@ void __cdecl fcn_00540020(void)
 		evs[0].wd = gm_GameTime.d;
 		fcn_004c5530(&evs[0]);
 	}
-	if (fcn_005463a0(1, 0, 0x84) == 0 && g_77670b != 0) {
+	if (he_StartHandlungSearch(1, 0, 0x84) == 0 && g_77670b != 0) {
 		memset(evs, 0, sizeof(evs));
 		evs[0].ent = SLOT4(g_774970 & 0xffff);
 		evs[0].year = gm_GameTime.a;
@@ -383,7 +383,7 @@ void __cdecl fcn_00540020(void)
 	fcn_004bbc30(3, SLOT4(g_774970 & 0xffff));
 	fcn_004c5790(1, 0);
 	if (g_7747b0 & 4) {
-		fcn_00535770(0x24087);
+		sv_WaitForNetworkSync(0x24087);
 	}
 	g_1040488 = g_6a376c;
 	g_1040480 = g_6a3764;
@@ -402,7 +402,7 @@ void __cdecl fcn_00540020(void)
 		fcn_00471af0(g_6a25b8, 1);
 	}
 	if (g_6a3440 != 5 && g_6a3440 > -1) {
-		if (fcn_005463a0(2, 0, 0x4c, 2, g_774970 & 0xffff) == 0) {
+		if (he_StartHandlungSearch(2, 0, 0x4c, 2, g_774970 & 0xffff) == 0) {
 			memset(evs, 0, sizeof(evs));
 			evs[0].id = 0x4c;
 			evs[0].ent = SLOT4(g_774970 & 0xffff);
@@ -585,7 +585,7 @@ next2:
 		    && (cand != *(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x2c)
 			|| agebits != *(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x30))) {
 			if (*(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x28) != -1) {
-				fcn_00428720(fcn_00426cc0(*(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x28)));
+				evt_RequestScriptExit(evt_FindScriptById(*(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x28)));
 			}
 			fcn_00406120(*(char**) (SLOTPTR(i) + 0x184));
 			if (agebits != -1) {

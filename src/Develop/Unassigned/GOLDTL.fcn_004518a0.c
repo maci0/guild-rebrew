@@ -4,7 +4,7 @@ extern float g_6628a8;
 extern float g_6628a0;
 
 /* ADDRESS: GOLDTL 0x004518a0 */
-void __cdecl fcn_004518a0(float* v)
+void __cdecl d3_NormalizeVector(float* v)
 {
 	float x;
 	float y;

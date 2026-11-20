@@ -13,7 +13,7 @@ void __cdecl d2_SetElementValue(int handle, int element, int value, int extra);
 void __cdecl fcn_00472640(int handle, int value);
 void __cdecl d2_SetDisplayCounter(int id, int value);
 int __cdecl fcn_00466ee0(int x, int y, int id, int group, char* name);
-void __cdecl fcn_0046b2b0(int handle);
+void __cdecl d2_DestroyElement(int handle);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 
 /* ADDRESS: GOLDTL 0x005c5e70 */
@@ -59,7 +59,7 @@ unsigned int __cdecl fcn_005c5e70(void)
 			}
 			else {
 				*slot = 0;
-				fcn_0046b2b0(slot[-1]);
+				d2_DestroyElement(slot[-1]);
 				slot[-1] = -1;
 			}
 		}

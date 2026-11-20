@@ -41,7 +41,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 
-int __cdecl fcn_0057ec20(int);
+int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 char* __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -50,17 +50,17 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_004fa5b0(int, char*, Query*);
-void __cdecl fcn_004fa5f0(char*, int, int);
+void __cdecl d2_ShowPrivilegMessage(char*, int, int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
-char* __cdecl fcn_005463a0(int, ...);
+char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005373e0(void*, int);
 
 /* ADDRESS: GOLDTL 0x005d4a20 */
-void __cdecl fcn_005d4a20(void)
+void __cdecl d2_ShowPrivilegien(void)
 {
 	char* ptr;
 	int changed;
@@ -84,10 +84,10 @@ void __cdecl fcn_005d4a20(void)
 	mode = 2;
 	ptr = 0;
 	if (((House*) g_7f4ca0)[g_774970].f1b1 != 0) {
-		fcn_004fa5f0(*(char**)0x14ac69c, 0, 0x657c7);
+		d2_ShowPrivilegMessage(*(char**)0x14ac69c, 0, 0x657c7);
 		return;
 	}
-	if (!fcn_0057ec20(2)) {
+	if (!d2_TutorialAllowsFlag(2)) {
 		return;
 	}
 	fcn_0057e880(8, 0, 0, 0);
@@ -110,7 +110,7 @@ void __cdecl fcn_005d4a20(void)
 		if (now <= (unsigned) g_6b7fac || changed) {
 			now = (unsigned)g_6b7fac + 500;
 			if (((((House*) g_7f4ca0)[g_774970].f1c8) & 0x100) != 0 || ptr != 0) {
-				e = fcn_005463a0(1, 0, 0x45);
+				e = he_StartHandlungSearch(1, 0, 0x45);
 				while (e != 0) {
 					if (*(int*) (e + 0xac) == ((House*) g_7f4ca0)[g_774970].f4) {
 						ptr = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
@@ -225,7 +225,7 @@ void __cdecl fcn_005d4a20(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005d4a20, 0x657c7) != 0);
+	} while (fcn_005373e0((void*) d2_ShowPrivilegien, 0x657c7) != 0);
 	fcn_00471e30((int) dlg);
 	fcn_0057e880(8, 0, 1, 0);
 }

@@ -41,7 +41,7 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005a5440(int, Tab5c84*, int, int, int);
 void __cdecl fcn_0046f280(int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 int __cdecl fcn_0050d5d0(int, int, char**);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3);
@@ -90,7 +90,7 @@ int __cdecl fcn_005c8400(void)
 	for (k = 0; k < 9; k++) {
 		if (lines[k].bar != -1) {
 			fcn_0046f280(lines[k].bar);
-			fcn_0046b2b0(lines[k].btn);
+			d2_DestroyElement(lines[k].btn);
 			lines[k].bar = -1;
 			lines[k].btn = -1;
 			lines[k].e = 0;

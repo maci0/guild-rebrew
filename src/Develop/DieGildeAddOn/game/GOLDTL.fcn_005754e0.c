@@ -33,7 +33,7 @@ extern char g_10069a0[];
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004b5070(rec24*);
 int __cdecl fcn_004c5790(int, struct req*);
@@ -46,7 +46,7 @@ void __cdecl fcn_005754e0(char* u)
 	int r;
 
 	if ((*(char*)&g_6a3440) <= -1) {
-		fcn_00546190(u);
+		he_FreeAction(u);
 		return;
 	}
 	for (i = 0; i < 128; i++) {
@@ -95,7 +95,7 @@ void __cdecl fcn_005754e0(char* u)
 		return;
 	case -2:
 	case -1:
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	}
 }

@@ -41,7 +41,7 @@ extern VFS_DIR* g_6b7fdc;
 extern char g_6b5c60[];
 
 void __cdecl fcn_00535850(int, char*);
-void __cdecl fcn_005e3fa0(char*);
+void __cdecl ls_LoadSavePreview(char*);
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 int __cdecl fcn_0051e490(void* stream, int flags);
 #include "Develop/Units/vfs/vfs.h"
@@ -49,10 +49,10 @@ int __cdecl fcn_0051e490(void* stream, int flags);
 unsigned int __cdecl fcn_00401000(unsigned char*, unsigned int);
 int __cdecl fcn_004c5790(int, void*);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_0051e080(char*, char*, int);
+void __cdecl ls_SaveGame(char*, char*, int);
 void __cdecl fcn_00533a40(char*);
 
-void __cdecl fcn_005e41b0(char* name, char* title)
+void __cdecl ls_SaveNetworkGame(char* name, char* title)
 {
 	unsigned int crc;
 	Hello m;
@@ -77,7 +77,7 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 		}
 		strcpy(g_7e2480, title);
 		g_773de8 = (*(char *)&cm_SaveRequestSlot);
-		fcn_005e3fa0("Gamedata/cities/standard.scr");
+		ls_LoadSavePreview("Gamedata/cities/standard.scr");
 		sprintf(path, "Gamedata\\network\\%s.SAV", name);
 		f = vfs_Tfopen(path, "wb", g_6b7fdc);
 		if (f != 0) {
@@ -106,9 +106,9 @@ void __cdecl fcn_005e41b0(char* name, char* title)
 		}
 		fcn_00535850(main_LoopFlags, g_14ac60c);
 		sprintf(path, "Gamedata\\network\\%s.SRV", name);
-		fcn_0051e080(path, title, 6);
+		ls_SaveGame(path, title, 6);
 		sprintf(path, "Gamedata\\network\\%s.SAV", name);
-		fcn_0051e080(path, title, 5);
+		ls_SaveGame(path, title, 5);
 		fcn_00533a40(g_6b5c60);
 	}
 }

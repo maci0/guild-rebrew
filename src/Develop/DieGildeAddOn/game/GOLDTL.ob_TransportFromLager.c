@@ -24,7 +24,7 @@ int __cdecl fcn_0050e170(int, int, int);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 int __cdecl fcn_00526010(void*, int, int);
 int __cdecl fcn_0050b750(int, int);
-int __cdecl fcn_0057eba0(int, int, int, int);
+int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_004c51f0(int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
@@ -97,24 +97,24 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 					}
 					if (a7 & 8) {
 						if (a4) {
-							if (!fcn_0057eba0(0x29, (int)a2, 0, *stockSlot)) {
+							if (!d2_DispatchTutorialEvent(0x29, (int)a2, 0, *stockSlot)) {
 								goto next;
 							}
 							fcn_0057e880(0x29, (int)a2, 0, *stockSlot);
 						} else {
-							if (!fcn_0057eba0(0x27, (int)a2, 0, *stockSlot)) {
+							if (!d2_DispatchTutorialEvent(0x27, (int)a2, 0, *stockSlot)) {
 								goto next;
 							}
 							fcn_0057e880(0x27, (int)a2, 0, *stockSlot);
 						}
 					} else if (a7 & 1) {
 						if (a4) {
-							if (!fcn_0057eba0(0x2a, (int)a2, 0, *stockSlot)) {
+							if (!d2_DispatchTutorialEvent(0x2a, (int)a2, 0, *stockSlot)) {
 								goto next;
 							}
 							fcn_0057e880(0x2a, (int)a2, 0, *stockSlot);
 						} else {
-							if (!fcn_0057eba0(0x25, (int)a2, 0, *stockSlot)) {
+							if (!d2_DispatchTutorialEvent(0x25, (int)a2, 0, *stockSlot)) {
 								goto next;
 							}
 							fcn_0057e880(0x25, (int)a2, 0, *stockSlot);
@@ -161,24 +161,24 @@ next:
 					}
 					if (a7 & 8) {
 						if (a4) {
-							if (!fcn_0057eba0(0x29, (int)a2, 0, *stockSlot)) {
+							if (!d2_DispatchTutorialEvent(0x29, (int)a2, 0, *stockSlot)) {
 								goto next2;
 							}
 							fcn_0057e880(0x29, (int)a2, 0, *stockSlot);
 						} else {
-							if (!fcn_0057eba0(0x27, (int)a2, 0, *stockSlot)) {
+							if (!d2_DispatchTutorialEvent(0x27, (int)a2, 0, *stockSlot)) {
 								goto next2;
 							}
 							fcn_0057e880(0x27, (int)a2, 0, *stockSlot);
 						}
 					} else if (a7 & 1) {
 						if (a4) {
-							if (!fcn_0057eba0(0x2a, (int)a2, 0, *stockSlot)) {
+							if (!d2_DispatchTutorialEvent(0x2a, (int)a2, 0, *stockSlot)) {
 								goto next2;
 							}
 							fcn_0057e880(0x2a, (int)a2, 0, *stockSlot);
 						} else {
-							if (!fcn_0057eba0(0x25, (int)a2, 0, *stockSlot)) {
+							if (!d2_DispatchTutorialEvent(0x25, (int)a2, 0, *stockSlot)) {
 								goto next2;
 							}
 							fcn_0057e880(0x25, (int)a2, 0, *stockSlot);

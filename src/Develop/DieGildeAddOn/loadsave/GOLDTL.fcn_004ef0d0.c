@@ -11,7 +11,7 @@ extern char g_68fea0[];
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
-int __cdecl fcn_004ef0d0(void* file)
+int __cdecl ls_LoadAvatarStates(void* file)
 {
 	unsigned char val;
 	char fc[5];

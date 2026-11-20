@@ -8,7 +8,7 @@ extern char* evt_CurrentScript;
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl fcn_00455140(char* src, float* v, float* out);
 float __cdecl fcn_00451380(float* a, float* b);
-void __cdecl fcn_00438cb0(char* h, float* v);
+void __cdecl d3_SetObjectRotation(char* h, float* v);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl SetCharacterToDummy(char** a, char** b)
@@ -28,6 +28,6 @@ int __cdecl SetCharacterToDummy(char** a, char** b)
 	v[2] = 0.0f;
 	fcn_00455140(*b, g_662d40, c);
 	v[1] = fcn_00451380(g_662d40, c);
-	fcn_00438cb0(*(char**) (*a + 0x34), v);
+	d3_SetObjectRotation(*(char**) (*a + 0x34), v);
 	return 0;
 }

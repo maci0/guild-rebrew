@@ -21,7 +21,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 
 void __cdecl fcn_00548f00(void)
@@ -53,10 +53,10 @@ void __cdecl fcn_00548f00(void)
 				}
 			}
 			fcn_004c4510(e, *(int*) (e + 1));
-			fcn_004c4570(4, 1, e - g_aed32c + 0x6d, e + 0x65);
-			fcn_004c4570(4, 1, e - g_aed32c + 0x65, &zero4);
-			fcn_004c4570(2, 1, e - g_aed32c + 0x6b, &zero2);
-			fcn_004c4570(2, 1, e - g_aed32c + 0x69, &zero2);
+			cm_AppendPacketFieldDelta(4, 1, e - g_aed32c + 0x6d, e + 0x65);
+			cm_AppendPacketFieldDelta(4, 1, e - g_aed32c + 0x65, &zero4);
+			cm_AppendPacketFieldDelta(2, 1, e - g_aed32c + 0x6b, &zero2);
+			cm_AppendPacketFieldDelta(2, 1, e - g_aed32c + 0x69, &zero2);
 			fcn_004c5360();
 		}
 		e = gm_FindNextFilteredEntity();

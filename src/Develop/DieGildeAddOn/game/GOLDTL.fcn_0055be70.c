@@ -14,7 +14,7 @@ struct search {
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-char* __cdecl fcn_005463a0(int, int, int, ...);
+char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5c80(int);
@@ -41,7 +41,7 @@ int __cdecl fcn_0055be70(struct search* s)
 	if (s->who == 0 || *(char**) (s->who + 0x61) == 0) {
 		return 0;
 	}
-	for (u = fcn_005463a0(1, 0, 0x43); u != 0; u = he_fn_Handlung()) {
+	for (u = he_StartHandlungSearch(1, 0, 0x43); u != 0; u = he_fn_Handlung()) {
 		if (found != 0) {
 			break;
 		}

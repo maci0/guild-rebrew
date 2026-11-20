@@ -12,7 +12,7 @@ void __cdecl fcn_0050e380(int id, char* out);
 int __cdecl fcn_0050c710(int a1, int a2, int a3);
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 void* __cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_00546fb0(int id);
+int __cdecl he_SumEventValuesForSubject(int id);
 void __cdecl fcn_004c6ae0(int a1, int a2);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00420bf0(void);
@@ -126,7 +126,7 @@ void __cdecl main_RundenBeginn(void)
 			p = (char*) gm_FindNextFilteredEntity();
 		}
 		tmp = *(int*) (disp + 0x31) + 4;
-		tmp += fcn_00546fb0(*(unsigned short*) slot);
+		tmp += he_SumEventValuesForSubject(*(unsigned short*) slot);
 		fcn_004c6ae0(*(int*) (slot + 4), tmp);
 next:
 		slot2 += 0x21c;

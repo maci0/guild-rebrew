@@ -16,7 +16,7 @@ void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl fcn_004311a0(char*, char*, int, int, int);
 void __cdecl d3_ReleaseAnim(char*, char);
 int __cdecl d3_GetContextIndex(char*);
-int __cdecl fcn_00433be0(char*, char*, int, int, int, int, char*, int);
+int __cdecl d3_CreateMorphAnimation(char*, char*, int, int, int, int, char*, int);
 int __cdecl fcn_004316c0(char*);
 void __cdecl ReportClientMessage(const char*);
 
@@ -85,7 +85,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 			interp = (int) ((float) ((prev + d) / 2) + g_6628cc);
 			name = *(char**) (entity + 0x1cc);
 			if (name != 0) {
-				if (fcn_00433be0(*(char**) (name + 0x318), frames,
+				if (d3_CreateMorphAnimation(*(char**) (name + 0x318), frames,
 				                 *(int*) src * 0xc0 + *(int*) (frames + 0x15c),
 				                 anim,
 				                 *(int*) (anim + 0x15c) + step * 0xc0, 0,
@@ -95,7 +95,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 					opt.loop = 0;
 					opt.reverse = 0;
 					opt.queue = 1;
-					anim = fcn_00434970(*(char**) (entity + 0x1ec) + 0xf4,
+					anim = d3_AttachAnimationToContext(*(char**) (entity + 0x1ec) + 0xf4,
 					                    buf, opt);
 					*(char**) (obj + 0x7c) = anim;
 					if (anim != 0) {
@@ -135,7 +135,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 				sprintf(path, g_675584, obj + 0x130, *(char**) (obj + 0x80), obj + 0x130);
 				d3_LoadAnimStream(path, *(char**) (obj + 0x80), 0);
 			}
-			anim = fcn_00434970(*(char**) (entity + 0x1ec) + 0xf4, *(char**) (obj + 0x80), opt);
+			anim = d3_AttachAnimationToContext(*(char**) (entity + 0x1ec) + 0xf4, *(char**) (obj + 0x80), opt);
 			*(char**) (obj + 0x70) = anim;
 			*(char*) (obj + 0x85) = -1;
 			if (anim != 0) {

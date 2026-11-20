@@ -10,7 +10,7 @@ extern unsigned char g_aed224;
 
 
 /* ADDRESS: GOLDTL 0x004c4570 */
-int __cdecl fcn_004c4570(unsigned char size, unsigned char count, unsigned short off, char* src)
+int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, unsigned short off, char* src)
 {
 	unsigned char* p;
 	char* base;

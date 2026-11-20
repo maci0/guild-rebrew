@@ -3,7 +3,7 @@
 void* __cdecl m_alloc(int size, const char* tag);
 
 /* ADDRESS: GOLD 0x0042b050 */
-int __cdecl fcn_0042b050(void)
+int __cdecl evt_InitScriptEngine(void)
 {
 	int offset;
 	*(void**) 0x6332bc = m_alloc(0x4c00, "evt:command_entry");

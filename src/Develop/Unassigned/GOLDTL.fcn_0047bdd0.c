@@ -39,10 +39,10 @@ typedef struct {
 
 void __cdecl d2_SetQuadVertexColor(Quad47bdd0 *q, unsigned char r, unsigned char g,
                           unsigned char b);
-int __cdecl fcn_0047ba20(int x, int y, char *sprite, float scale);
+int __cdecl d2_QueueScaledQuad(int x, int y, char *sprite, float scale);
 Quad47bdd0 *__cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex,
                                  void *src);
-Quad47bdd0 *__cdecl fcn_0047c1f0(float u, float v, int w, int h,
+Quad47bdd0 *__cdecl d2_QueueClippedTexturedQuad(float u, float v, int w, int h,
                                  Tex47bdd0 *tex, int x, int y);
 
 /* ADDRESS: GOLDTL 0x0047bdd0 */
@@ -58,7 +58,7 @@ int __cdecl fcn_0047bdd0(int x, int y, Sprite47bdd0 *sprite, float scale,
 	int off;
 
 	count = sprite->count; if (count == 1 && sprite->count2 == 1) {
-		q = (Quad47bdd0 *) fcn_0047ba20(x, y, (char *) sprite, scale);
+		q = (Quad47bdd0 *) d2_QueueScaledQuad(x, y, (char *) sprite, scale);
 		if (q)
 			d2_SetQuadVertexColor(q, r, g, b);
 		return (int) q;
@@ -87,7 +87,7 @@ int __cdecl fcn_0047bdd0(int x, int y, Sprite47bdd0 *sprite, float scale,
 		if (sprite->count2 > 0) {
 			do {
 				cell = (Cell47bdd0 *) ((char *) sprite->cells + off); whole = sprite->size;
-				q = fcn_0047c1f0(
+				q = d2_QueueClippedTexturedQuad(
 				    cell->u, cell->v, whole, whole, cell->tex,
 				    (i % n) * whole + x, (i / n) * whole + y);
 				if (q)

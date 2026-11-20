@@ -3,7 +3,7 @@
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
-void __cdecl fcn_00508d80(unsigned int n, int* arr)
+void __cdecl gm_RandomizeIntArray(unsigned int n, int* arr)
 {
 	unsigned int c;
 	int cnt;

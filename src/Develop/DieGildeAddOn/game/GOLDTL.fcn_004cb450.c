@@ -8,7 +8,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl ch_FindCharacterByName(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
-int __cdecl fcn_00515540(char*);
+int __cdecl init_EnsureObjektSceneContext(char*);
 int __cdecl fcn_005155e0(char*);
 void __cdecl ch_UseGate(char*, char*, char*, int, int, int);
 char* __cdecl strupr(char*);
@@ -42,7 +42,7 @@ int __cdecl fcn_004cb450(char* command, char* result)
 		fcn_0064d41a(gate, g_68b1f8);
 	} else {
 		name = lpObjektePROT + *(unsigned short*) d * 0x41;
-		k = fcn_00515540(d);
+		k = init_EnsureObjektSceneContext(d);
 		fcn_0064d41a(gate, g_68b214, strupr(name + 1));
 	}
 	name = lpObjektePROT + *(unsigned short*) v4 * 0x41;

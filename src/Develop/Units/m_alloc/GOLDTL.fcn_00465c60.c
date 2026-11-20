@@ -31,7 +31,7 @@ extern int g_14ce728;
 
 void __cdecl d2_FreeAllSprites(void);
 void __cdecl fcn_0046f280(int a1);
-void __cdecl fcn_0046b2b0(int id);
+void __cdecl d2_DestroyElement(int id);
 void __cdecl fcn_0047b5d0(void* p);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00475f80(void* o);
@@ -64,7 +64,7 @@ void __cdecl fcn_00465c60(void)
 	} while ((int) track < 0x102ce50);
 	i = 0;
 	do {
-		fcn_0046b2b0(i);
+		d2_DestroyElement(i);
 		i++;
 	} while (i < 0x3ff);
 	off = 0;

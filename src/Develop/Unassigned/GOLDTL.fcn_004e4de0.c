@@ -8,7 +8,7 @@ extern int g_772f3c;
 
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_004cfca0(void);
-void __cdecl fcn_004e5140(int);
+void __cdecl d2_AppendPendingPlayerNames(int);
 
 void __cdecl fcn_004e4de0(int secs)
 {
@@ -25,6 +25,6 @@ void __cdecl fcn_004e4de0(int secs)
 		if ((*(unsigned int*)&g_6b7fac) >= end)
 			g_774654 = 1;
 		fcn_004cfca0();
-		fcn_004e5140((*(int*)&cut_ActiveCutscene));
+		d2_AppendPendingPlayerNames((*(int*)&cut_ActiveCutscene));
 	} while (fcn_005373e0(fcn_004e4de0, cut_EventLoopFlags | 0x8000) != 0);
 }

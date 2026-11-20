@@ -44,7 +44,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_00469470(int, int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
@@ -171,7 +171,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 			stamp = g_6b7fac;
 			prev = sel;
 			owner = g_102cbc8[list].n;
-			fcn_00469510(list);
+			d2_ClearRadioGroup(list);
 			d2_SetForm(win, 2);
 			io_AppendText(0x6811b0);
 			list = d2_CreateRadioGroup(0);
@@ -218,7 +218,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 			}
 		}
 	} while (fcn_005373e0((void*) fcn_00585030, 0x677c7) != 0);
-	fcn_00469510(list);
+	d2_ClearRadioGroup(list);
 	fcn_00471e30(win);
 	fcn_00532ef0();
 }

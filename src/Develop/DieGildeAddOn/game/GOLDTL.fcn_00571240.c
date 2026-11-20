@@ -16,7 +16,7 @@
 
 void __cdecl gm_ResolveEntityById(void*, void*, int, int);
 void __cdecl fcn_00529160(char*, int, int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_0050c710(char*, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 double __cdecl fcn_0050fdb0(int, int, char*);
@@ -61,7 +61,7 @@ void __cdecl fcn_00571240(char* self)
 			if (*(char**) (g_7f4ca0 + i * 0x21c + 0x17c) == self)
 				fcn_00529160(0, 0, *(unsigned short*) (g_7f4ca0 + i * 0x21c), 0);
 		}
-		fcn_00546190(self);
+		he_FreeAction(self);
 		return;
 	}
 	if (*(unsigned short*) (node + 0x27) != 0xffff) {
@@ -116,7 +116,7 @@ void __cdecl fcn_00571240(char* self)
 						if (*(char**) (g_7f4ca0 + i * 0x21c + 0x17c) == self)
 							fcn_00529160(node, 0, *(unsigned short*) (g_7f4ca0 + i * 0x21c), 0);
 					}
-					fcn_00546190(self);
+					he_FreeAction(self);
 					return;
 				}
 				n = *(unsigned short*) (entry + 0x36);
@@ -145,7 +145,7 @@ void __cdecl fcn_00571240(char* self)
 			if (*(char**) (g_7f4ca0 + i * 0x21c + 0x17c) == self)
 				fcn_00529160(node, 0, *(unsigned short*) (g_7f4ca0 + i * 0x21c), 0);
 		}
-		fcn_00546190(self);
+		he_FreeAction(self);
 		return;
 	case -2:
 	case -1:
@@ -153,7 +153,7 @@ void __cdecl fcn_00571240(char* self)
 			if (*(char**) (g_7f4ca0 + i * 0x21c + 0x17c) == self)
 				fcn_00529160(0, 0, *(unsigned short*) (g_7f4ca0 + i * 0x21c), 0);
 		}
-		fcn_00546190(self);
+		he_FreeAction(self);
 		return;
 	}
 }

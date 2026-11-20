@@ -6,13 +6,13 @@ int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00525f60(char*, int);
 float __cdecl gm_GetEntitySkill(char*, int);
 void __cdecl fcn_004c4510(char*, int);
-int __cdecl fcn_004c4570(int, int, int, int*);
+int __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_004c6b20(int, int, int);
 int __cdecl fcn_00567170(char*, int*, int*, int*);
 int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
-int __cdecl fcn_005463a0(int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
@@ -51,7 +51,7 @@ void __cdecl fcn_005aee90(char* rec)
 		int flags = -1;
 
 		fcn_004c4510(rec, *(int*) (rec + 1));
-		fcn_004c4570(4, 1, (int) (rec - g_aed32c) + 0x65, &flags);
+		cm_AppendPacketFieldDelta(4, 1, (int) (rec - g_aed32c) + 0x65, &flags);
 		fcn_004c5360();
 		fcn_004c6b20(*(int*) (ent + 4), -(int) *(unsigned char*) (ent + 0x1b1), 0);
 		if (*(int*) (ent + 0x184) != 0) {
@@ -60,7 +60,7 @@ void __cdecl fcn_005aee90(char* rec)
 				    (char*) 0x6a69c8);
 			}
 		}
-		act = fcn_005463a0(1, 0, 0x3d);
+		act = he_StartHandlungSearch(1, 0, 0x3d);
 		while (act != 0) {
 			if (*(int*) (act + 0xb0) == *(int*) (rec + 1)
 			    && *(int*) (ent + 4) == *(int*) (act + 0xac)) {

@@ -10,7 +10,7 @@ typedef struct
 extern Win_1015f40 g_1015f40[0x60];
 extern int g_77259c;
 
-void __cdecl fcn_0046b2b0(int id);
+void __cdecl d2_DestroyElement(int id);
 void __cdecl m_FreeTracked(int p);
 void __cdecl fcn_00475f80(int surf);
 void __cdecl fcn_0047ce50(int tex);
@@ -29,7 +29,7 @@ int __cdecl d2_DestroyWindow(int win)
 		return 0;
 	}
 	while (w->i[0x2c / 4] != 0) {
-		fcn_0046b2b0(*(int*) w->i[0x28 / 4]);
+		d2_DestroyElement(*(int*) w->i[0x28 / 4]);
 	}
 	if (w->i[0x28 / 4] != 0) {
 		m_FreeTracked(w->i[0x28 / 4]);

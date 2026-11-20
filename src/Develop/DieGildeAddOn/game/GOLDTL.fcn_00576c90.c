@@ -22,9 +22,9 @@ void __cdecl fcn_004c5c80(int);
 int __cdecl fcn_00577af0(int, char*);
 char* __cdecl fcn_00577d00(char*, char*, int);
 int __cdecl fcn_00577e70(char*, char*, char*);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl fcn_004a5e60(unsigned short*, int, int, int, float, float, int*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x00576c90 */
 void __cdecl fcn_00576c90(char* e)
@@ -226,7 +226,7 @@ void __cdecl fcn_00576c90(char* e)
 			*(int*) (e + 0x84) = fcn_004c5620(4, e);
 			goto done;
 		}
-		r = fcn_005463a0(2, 0, 0x18, 1, *(int*) (e + 0xc4));
+		r = he_StartHandlungSearch(2, 0, 0x18, 1, *(int*) (e + 0xc4));
 		if (fcn_00577e70(q, e, r) != 0) {
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(int*) (e + 0x84) = fcn_004c5620(6, e);
@@ -248,5 +248,5 @@ state_minus:
 			fcn_00545d40(*(int*) (g_7f4ca0 + *(unsigned short*) (e + 8) * 0x21c + 4), -1, g_14b5304, 1, 0x5fa, (char*) 0x6a7e24);
 		}
 	}
-	fcn_00546190(e);
+	he_FreeAction(e);
 }

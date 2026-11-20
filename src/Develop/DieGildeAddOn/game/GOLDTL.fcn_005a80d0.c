@@ -1,7 +1,7 @@
 typedef void (__cdecl* Cb5a80d0a)(int a0, int a1, int a2, int a3);
 typedef void (__cdecl* Cb5a80d0b)(int a0, int a1, int a2, int a3);
 
-int __cdecl fcn_005a74a0(unsigned char* a0);
+int __cdecl gm_CanEnterGebaeude(unsigned char* a0);
 void __cdecl fcn_00530510(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl fcn_005155e0(unsigned char* a0);
@@ -15,11 +15,11 @@ void __cdecl fcn_005167c0(unsigned char* a0, int a1);
 void __cdecl fcn_00516c50(int a0, unsigned char* a1);
 int __cdecl gm_GetBuildingTypeCategory(int a0);
 void __cdecl fcn_00438b40(char* p, int* v);
-void __cdecl fcn_00438cb0(int a0, int a1);
+void __cdecl d3_SetObjectRotation(int a0, int a1);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl fcn_0058f700(int a0);
-void* __cdecl fcn_00426cc0(int a1);
-void __cdecl fcn_00428720(void* p);
+void* __cdecl evt_FindScriptById(int a1);
+void __cdecl evt_RequestScriptExit(void* p);
 void __cdecl fcn_005312d0(int a0);
 void __cdecl fcn_004c34d0(void);
 void __cdecl fcn_00516ed0(int a0);
@@ -31,7 +31,7 @@ void __cdecl fcn_004bd1a0(int a0);
 void __cdecl fcn_0059cb40(int a0);
 void __cdecl fcn_0059de00(int a0);
 void __cdecl fcn_0059e390(int a0);
-void __cdecl fcn_0058f0a0(int a0);
+void __cdecl d2_RunFriedhofActions(int a0);
 void __cdecl fcn_005e69f0(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774658, d3_CameraHorizontalIndex, d3_CameraVerticalStep, d2_SuppressOverlay, g_67530c, g_675310;
@@ -56,7 +56,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 
 	buildingPtr = a0;
 	id = -1;
-	n = fcn_005a74a0(a0);
+	n = gm_CanEnterGebaeude(a0);
 	if (n == 0) {
 		*(int*) &g_7e2700 = n;
 		return;
@@ -117,7 +117,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 			fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x5c));
 			v10 = *(int*) &d3_ActiveCamera + 0x90;
 			v11 = *(int*) &d3_ActiveCamera;
-			fcn_00438cb0(v11, v10);
+			d3_SetObjectRotation(v11, v10);
 		} else {
 			v10 = gm_GetBuildingTypeCategory(*buildingPtr);
 			c = *buildingPtr;
@@ -126,18 +126,18 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 				if (*(char*) rec == 0x1c) {
 					fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x5c));
 					v10 = *(int*) &d3_ActiveCamera + 0x90;
-					fcn_00438cb0(*(int*) &d3_ActiveCamera, v10);
+					d3_SetObjectRotation(*(int*) &d3_ActiveCamera, v10);
 				} else if (CompareVector3WithinTolerance((float*) (*(int*) &d3_ActiveCamera + 0x114), (float*) &g_662d70, 0.1f) == 0
 				           && CompareVector3WithinTolerance((float*) (*(int*) &d3_ActiveCamera + 0x120), (float*) &g_662d70, 0.1f) == 0) {
 					fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x114));
 					v10 = *(int*) &d3_ActiveCamera + 0x120;
-					fcn_00438cb0(*(int*) &d3_ActiveCamera, v10);
+					d3_SetObjectRotation(*(int*) &d3_ActiveCamera, v10);
 				}
 			} else if (CompareVector3WithinTolerance((float*) (*(int*) &d3_ActiveCamera + 0x114), (float*) &g_662d70, 0.1f) == 0
 			           && CompareVector3WithinTolerance((float*) (*(int*) &d3_ActiveCamera + 0x120), (float*) &g_662d70, 0.1f) == 0) {
 				fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x114));
 				v10 = *(int*) &d3_ActiveCamera + 0x120;
-				fcn_00438cb0(*(int*) &d3_ActiveCamera, v10);
+				d3_SetObjectRotation(*(int*) &d3_ActiveCamera, v10);
 			}
 		}
 		*(int*) &g_7e3a40 = *(int*) (*(int*) &d3_ActiveCamera + 0x4c);
@@ -169,7 +169,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	case 0x48:
 	case 0x49:
 	case 0x4a:
-		fcn_0058f0a0(*(int*) &g_7746c8);
+		d2_RunFriedhofActions(*(int*) &g_7746c8);
 		break;
 	case 0x4e:
 	case 0x4f:
@@ -189,9 +189,9 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	d3_CameraHorizontalIndex = 0;
 	d3_CameraVerticalStep = 0;
 	if (id != -1) {
-		p = (unsigned char*) fcn_00426cc0(id);
+		p = (unsigned char*) evt_FindScriptById(id);
 		if (p != 0) {
-			fcn_00428720(p);
+			evt_RequestScriptExit(p);
 			fcn_005312d0(*(int*) (p + 0x100));
 		}
 	}

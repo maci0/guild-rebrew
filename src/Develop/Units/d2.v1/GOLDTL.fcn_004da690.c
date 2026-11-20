@@ -2,7 +2,7 @@
 #include <stddef.h>
 
 int __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004e8b80(int, int, void *);
+int __cdecl amt_FindOfficeSlotsByKind(int, int, void *);
 int __cdecl fcn_004e4ae0(char *, int);
 int __cdecl fcn_004e4e90(int);
 void __cdecl fcn_004e4de0(int, ...);
@@ -50,7 +50,7 @@ void __cdecl fcn_0057e880(int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004da690 */
-void __cdecl fcn_004da690(unsigned int *a0)
+void __cdecl cut_RunOfficeSessions(unsigned int *a0)
 {
     int s00;
     int s04;
@@ -183,7 +183,7 @@ void __cdecl fcn_004da690(unsigned int *a0)
     s30 = 0;
     do {
     s20 = order[s30];
-    s28 = fcn_004e8b80(s20, 6, (char *)&mid[0x38]);
+    s28 = amt_FindOfficeSlotsByKind(s20, 6, (char *)&mid[0x38]);
     s0C = 0;
     k = 0;
     n = 0;

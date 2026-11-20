@@ -13,7 +13,7 @@ int __cdecl fcn_00508eb0(int, int);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c4510(int, int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c4670(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c54c0(int, int, int, int);
@@ -68,7 +68,7 @@ int __cdecl fcn_0047d2a0(char* e)
 		}
 		b = 0;
 		fcn_004c4510((int) e, *(int*) (e + 4));
-		fcn_004c4570(1, 1, 0x215, &b);
+		cm_AppendPacketFieldDelta(1, 1, 0x215, &b);
 		d = abs((int) bestscore);
 		b = (unsigned char) (d / 3 + 1);
 		if ((((int) b < g_7747b4 + g_7747b4 + 0x23) ? (int) b : (g_7747b4 + g_7747b4 + 0x23))
@@ -77,10 +77,10 @@ int __cdecl fcn_0047d2a0(char* e)
 		} else if ((int) b >= g_7747b4 + g_7747b4 + 0x23) {
 			b = (unsigned char) (g_7747b4 + g_7747b4 + 0x23);
 		}
-		fcn_004c4570(1, 1, 0x216, &b);
+		cm_AppendPacketFieldDelta(1, 1, 0x216, &b);
 		h = g_7f4ca0 + best * 0x21c;
-		fcn_004c4570(4, 1, 0x210, h + 4);
-		fcn_004c4570(1, 1, 0x214, &g_90e0a0[best][*(unsigned short*) e]);
+		cm_AppendPacketFieldDelta(4, 1, 0x210, h + 4);
+		cm_AppendPacketFieldDelta(1, 1, 0x214, &g_90e0a0[best][*(unsigned short*) e]);
 		fcn_004c5360();
 		fcn_004c54c0(*(int*) (h + 4), *(int*) (e + 4), 0, 2);
 		fcn_005b2560(e, h);
@@ -111,7 +111,7 @@ int __cdecl fcn_0047d2a0(char* e)
 	fcn_004c4510((int) e, *(int*) (e + 4));
 	fcn_004c4670(1, 1, 0x215, &b);
 	if ((int) (unsigned char) e[0x215] + b > 3) {
-		fcn_004c4570(1, 1, 0x218, e + 0x217);
+		cm_AppendPacketFieldDelta(1, 1, 0x218, e + 0x217);
 	}
 	fcn_004c5360();
 	if ((int) (unsigned char) e[0x215] + b <= 3) {
@@ -126,13 +126,13 @@ reset:
 	best = -1;
 	v11 = 0;
 	fcn_004c4510((int) e, *(int*) (e + 4));
-	fcn_004c4570(1, 1, 0x215, &b);
-	fcn_004c4570(1, 1, 0x216, &b2);
-	fcn_004c4570(4, 1, 0x210, &best);
-	fcn_004c4570(1, 1, 0x214, &v11);
+	cm_AppendPacketFieldDelta(1, 1, 0x215, &b);
+	cm_AppendPacketFieldDelta(1, 1, 0x216, &b2);
+	cm_AppendPacketFieldDelta(4, 1, 0x210, &best);
+	cm_AppendPacketFieldDelta(1, 1, 0x214, &v11);
 	fcn_004c5360();
 	b = 1;
-	fcn_004c4570(1, 1, 0x218, &b);
+	cm_AppendPacketFieldDelta(1, 1, 0x218, &b);
 	fcn_004c5360();
 	if (other != 0) {
 		fcn_004c54c0(*(int*) (e + 0x210), *(int*) (e + 4), 0x3c, 2);
@@ -145,7 +145,7 @@ pulse:
 	b2 = 1;
 	fcn_004c4510((int) e, *(int*) (e + 4));
 	fcn_004c4670(1, 1, 0x215, &b);
-	fcn_004c4570(1, 1, 0x218, &b2);
+	cm_AppendPacketFieldDelta(1, 1, 0x218, &b2);
 	fcn_004c5360();
 	return 0;
 
@@ -153,8 +153,8 @@ pulse2:
 	b = (unsigned char) (e[0x216] + 1);
 	b2 = 1;
 	fcn_004c4510((int) e, *(int*) (e + 4));
-	fcn_004c4570(1, 1, 0x215, &b);
-	fcn_004c4570(1, 1, 0x218, &b2);
+	cm_AppendPacketFieldDelta(1, 1, 0x215, &b);
+	cm_AppendPacketFieldDelta(1, 1, 0x218, &b2);
 	fcn_004c5360();
 	return 0;
 }

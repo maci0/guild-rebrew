@@ -34,10 +34,10 @@ extern void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 extern void* __cdecl gm_FindNextFilteredEntity(void);
 extern int __cdecl fcn_00567410(char* entity, int count, void** list, int* out, int* flag);
 extern void __cdecl gm_SearchTable67(int value);
-extern void __cdecl fcn_005599c0(char* entity);
+extern void __cdecl ch_PlayRandomGesture(char* entity);
 
 /* ADDRESS: GOLDTL 0x00559aa0 */
-void __cdecl fcn_00559aa0(struct job* job)
+void __cdecl gm_SimulatePoliticians(struct job* job)
 {
 	char* entity;
 	char* record;
@@ -102,7 +102,7 @@ void __cdecl fcn_00559aa0(struct job* job)
 			divisor = divisor / 2 + 1;
 			if ((int) (type + 2) % divisor == 0 && found == 0) {
 				job->f8 = (unsigned char) (type + 1);
-				fcn_005599c0(entity);
+				ch_PlayRandomGesture(entity);
 				job->flags |= 0x10;
 				return;
 			}

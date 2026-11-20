@@ -54,12 +54,12 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl d2_SetBildArgument(int, int);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_00474cf0(int);
+void __cdecl d2_SelectControl(int);
 char* __cdecl fcn_00471f80(int);
 void __cdecl fcn_004c6560(Chat*);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_00536810(void)
+void __cdecl d2_RunChatConsole(void)
 {
 	int ids[8];
 	Chat chat;
@@ -96,14 +96,14 @@ void __cdecl fcn_00536810(void)
 	d2_SetForm(dlg, 2);
 	edit = fcn_00472250(dlg, 2, io_AppendText(0x1cc3, g_6b5c60));
 	d2_SetBildArgument(edit, 0x60);
-	while (fcn_005373e0(fcn_00536810, 0x657c7)) {
+	while (fcn_005373e0(d2_RunChatConsole, 0x657c7)) {
 		d2_SetForm(dlg, 1);
 		io_AppendText((int) "$C");
 		io_AppendText((int) g_7e3a60);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;
 		}
-		fcn_00474cf0(edit);
+		d2_SelectControl(edit);
 		if ((g_100f1dc != -1 || g_14cf950 == 0x1c) && (d2_CurrentElementId == win || g_14cf950 == 0x1c)) {
 			for (i = 0; i < 8; i++) {
 				if (ids[i] != -1 && fcn_00471f80(ids[i]) != 0) {

@@ -2,13 +2,13 @@
 
 #include "client_types.h"
 
-extern void __cdecl fcn_00546190(char*);
+extern void __cdecl he_FreeAction(char*);
 extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl fcn_00529160(int, int, int, char*);
 extern void __cdecl fcn_004c5c80(int);
 extern int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 extern int __cdecl fcn_004c5620(int, char*);
-extern char* __cdecl fcn_005463a0(int, int, int);
+extern char* __cdecl he_StartHandlungSearch(int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
 extern unsigned short __cdecl gm_RandomMod(unsigned short);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -41,14 +41,14 @@ void __cdecl fcn_00554170(char* obj)
 
 	if (*(int*) (obj + 0x70) == -2) {
 		if (*(unsigned char*) (obj + 0x78) & 4) {
-			fcn_00546190(obj);
+			he_FreeAction(obj);
 			return;
 		}
 		*(int*) (obj + 0x70) = 5;
 		added = 1;
 	}
 	if (*(int*) (obj + 0x70) == -1) {
-		fcn_00546190(obj);
+		he_FreeAction(obj);
 		return;
 	}
 	if (*(unsigned char*) (obj + 0x78) & 4)
@@ -94,7 +94,7 @@ void __cdecl fcn_00554170(char* obj)
 			*(int*) (obj + 0x84) = fcn_004c5620(5, obj);
 			return;
 		}
-		found = fcn_005463a0(1, 0, 0x48);
+		found = he_StartHandlungSearch(1, 0, 0x48);
 		if (found != 0) {
 			for (;;) {
 				if (strcmp(obj + 0xac, found + 0xac) == 0 &&
@@ -197,7 +197,7 @@ void __cdecl fcn_00554170(char* obj)
 		}
 		fcn_00500bb0(time, 0, 2, 0);
 		if (added) {
-			fcn_00546190(obj);
+			he_FreeAction(obj);
 			return;
 		}
 		*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);

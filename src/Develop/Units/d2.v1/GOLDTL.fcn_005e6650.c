@@ -58,7 +58,7 @@ void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_00532ef0(void);
 
-void __cdecl fcn_005e6650(char* e)
+void __cdecl d2_OpenBlutracheDialog(char* e)
 {
 	int ids[2];
 	int list[4];
@@ -112,7 +112,7 @@ void __cdecl fcn_005e6650(char* e)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005e6650, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_OpenBlutracheDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	fcn_0052a2d0();
 	sv_ClearObjectSelection();

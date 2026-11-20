@@ -68,8 +68,8 @@ int __cdecl fcn_004c5b00(int entity_id, tag7 key);
 int __cdecl fcn_004c5530(msg005ac2d0* m);
 int __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c4510(char* base, int entity_id);
-int __cdecl fcn_004c4570(unsigned char size, unsigned char count, unsigned short off, char* src);
-char* __cdecl fcn_005463a0(int kind, int first, int id, int arg, int entity_id);
+int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, unsigned short off, char* src);
+char* __cdecl he_StartHandlungSearch(int kind, int first, int id, int arg, int entity_id);
 char* __cdecl gm_LookupEntityRecordById(int description_id);
 int __cdecl fcn_00470820(int x, int y, char* title);
 int __cdecl d2_SetOverlayAnimation(int a1, int a2);
@@ -143,7 +143,7 @@ void __cdecl fcn_005ac2d0(char* building)
 			cm_ExecCommand();
 		}
 	}
-	unit = fcn_005463a0(2, 0, 0x2b, 3, *(int*) (building + 1));
+	unit = he_StartHandlungSearch(2, 0, 0x2b, 3, *(int*) (building + 1));
 	if (unit == 0) {
 		pkt.pos = gm_GameTime;
 		pkt.b4 = 0x2b;
@@ -265,7 +265,7 @@ void __cdecl fcn_005ac2d0(char* building)
 					v12 = 1;
 					fcn_005100f0(*(int*) (g_7f4ca4 + g_774970 * 0x21c), -1);
 					fcn_004c4510(obj, *(int*) (obj + 2));
-					fcn_004c4570(1, 1, 0x22, &v12);
+					cm_AppendPacketFieldDelta(1, 1, 0x22, &v12);
 					rc = fcn_004c5360();
 					flag = 1;
 					state = 1;
@@ -288,13 +288,13 @@ void __cdecl fcn_005ac2d0(char* building)
 					v15 = (char) gm_RandomMod(8);
 					v16 = (char) gm_RandomMod(8);
 					fcn_004c4510(obj, *(int*) (obj + 2));
-					fcn_004c4570(4, 1, 0x1e, info + 4);
+					cm_AppendPacketFieldDelta(4, 1, 0x1e, info + 4);
 					fcn_004c5360();
 					fcn_004c4510(obj, *(int*) (obj + 2));
-					fcn_004c4570(1, 1, 0x1c, &v15);
+					cm_AppendPacketFieldDelta(1, 1, 0x1c, &v15);
 					fcn_004c5360();
 					fcn_004c4510(obj, *(int*) (obj + 2));
-					fcn_004c4570(1, 1, 0x1d, &v16);
+					cm_AppendPacketFieldDelta(1, 1, 0x1d, &v16);
 					rc = fcn_004c5360();
 					state = 2;
 					flag = 1;
@@ -311,13 +311,13 @@ void __cdecl fcn_005ac2d0(char* building)
 				v18 = -1;
 				id = -1;
 				fcn_004c4510(obj, *(int*) (obj + 2));
-				fcn_004c4570(4, 1, 0x1e, (char*) &id);
+				cm_AppendPacketFieldDelta(4, 1, 0x1e, (char*) &id);
 				fcn_004c5360();
 				fcn_004c4510(obj, *(int*) (obj + 2));
-				fcn_004c4570(1, 1, 0x1c, &v12);
+				cm_AppendPacketFieldDelta(1, 1, 0x1c, &v12);
 				fcn_004c5360();
 				fcn_004c4510(obj, *(int*) (obj + 2));
-				fcn_004c4570(1, 1, 0x1d, &v18);
+				cm_AppendPacketFieldDelta(1, 1, 0x1d, &v18);
 				rc = fcn_004c5360();
 				flag = 1;
 				state = 1;

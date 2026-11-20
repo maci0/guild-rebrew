@@ -19,10 +19,10 @@ int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_UpdateRadioGroup(int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_0053e420(void)
+int __cdecl d2_ChooseHistory(void)
 {
 	int option1;
 	int option2;
@@ -57,7 +57,7 @@ int __cdecl fcn_0053e420(void)
 	} else {
 		d2_SelectRadioGroup(radioGroup, 0);
 	}
-	while (fcn_005373e0(fcn_0053e420, 0xc6) != 0) {
+	while (fcn_005373e0(d2_ChooseHistory, 0xc6) != 0) {
 		d2_UpdateRadioGroup(radioGroup);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;
@@ -90,7 +90,7 @@ int __cdecl fcn_0053e420(void)
 			g_774654 = 1;
 		}
 	}
-	fcn_00469510(radioGroup);
+	d2_ClearRadioGroup(radioGroup);
 	fcn_00471e30(dialogHandle);
 	return result;
 }

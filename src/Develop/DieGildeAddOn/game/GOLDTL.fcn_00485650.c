@@ -27,7 +27,7 @@ extern unsigned char g_773d75;
 float __cdecl fcn_0050bb50(int id, unsigned char k);
 int __cdecl fcn_0050dfa0(char* b, int id);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_FindRecordById(int);
 int __cdecl fcn_0050de80(char* e, Stats* s);
@@ -91,7 +91,7 @@ void __cdecl ai_CollectGoodsResources(char* a, char* b)
 			ai_ResourceCount++;
 		}
 	}
-	for (e = fcn_005463a0(2, 0, 0xb, 3, *(int*) (*(char**) (a + 0x16c) + 1)); e != 0; e = he_fn_Handlung()) {
+	for (e = he_StartHandlungSearch(2, 0, 0xb, 3, *(int*) (*(char**) (a + 0x16c) + 1)); e != 0; e = he_fn_Handlung()) {
 		r = gm_FindRecordById(*(int*) (e + 0xac));
 		if (r == 0) {
 			continue;

@@ -14,7 +14,7 @@ int __cdecl io_AppendText(char*, ...);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005cdd90(int k)
+void __cdecl d2_ShowAmtInfo(int k)
 {
 	int h;
 
@@ -30,6 +30,6 @@ void __cdecl fcn_005cdd90(int k)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(fcn_005cdd90, 0x657c7) != 0);
+	} while (fcn_005373e0(d2_ShowAmtInfo, 0x657c7) != 0);
 	fcn_00471e30(h);
 }

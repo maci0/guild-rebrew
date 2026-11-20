@@ -22,7 +22,7 @@ extern int g_675324;
 extern int g_6b5c4c;
 extern int g_6b5c50;
 
-void __cdecl fcn_00405960(Grid* m)
+void __cdecl ch_RestoreGridRegion(Grid* m)
 {
 	int* dst;
 	int i;

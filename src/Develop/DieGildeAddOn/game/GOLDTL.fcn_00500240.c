@@ -26,7 +26,7 @@ int __cdecl gm_EntityClassCheck(int kind);
 int __cdecl gm_IsInRange(int cls);
 int __cdecl fcn_0050f950(int a, int i);
 
-Obj* __cdecl fcn_00500240(char* who, int kind, int group)
+Obj* __cdecl gm_FindAndReserveEntity(char* who, int kind, int group)
 {
 	int i;
 	int c;

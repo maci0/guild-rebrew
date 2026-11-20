@@ -45,7 +45,7 @@ void __cdecl fcn_00471e30(int handle);
 void __cdecl fcn_005a2580(char* a, char* b, char* c);
 
 /* ADDRESS: GOLDTL 0x005a2970 */
-void __cdecl fcn_005a2970(char* building, char* a1)
+void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 {
 	struct sel sel[3];
 	unsigned int out2[6];

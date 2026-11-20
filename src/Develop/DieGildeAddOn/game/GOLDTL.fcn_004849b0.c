@@ -58,7 +58,7 @@ extern float g_664124;
 
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_FindRecordById(int);
 int __cdecl gm_GetMsgField(char*, char*);
@@ -280,7 +280,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		    gm_eval_SlotVoll(craft, g_100b0c0[k].goods_id, 0xf4240);
 	}
 
-	for (e = fcn_005463a0(2, 0, 0xb, 3,
+	for (e = he_StartHandlungSearch(2, 0, 0xb, 3,
 	                     *(int*) (*(char**) (a + 0x16c) + 1));
 	     e != 0;
 	     e = he_fn_Handlung()) {
@@ -334,7 +334,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 
 	kind = ((Lvl*) lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].kind;
 	if (kind == 8 || kind == 0xe) {
-		for (e = fcn_005463a0(2, 0, 0x14, 3,
+		for (e = he_StartHandlungSearch(2, 0, 0x14, 3,
 		                     *(int*) (*(char**) (a + 0x16c) + 1));
 		     e != 0;
 		     e = he_fn_Handlung()) {
@@ -354,7 +354,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 
 	kind = ((Lvl*) lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].kind;
 	if (kind == 8) {
-		for (e = fcn_005463a0(2, 0, 0x15, 3,
+		for (e = he_StartHandlungSearch(2, 0, 0x15, 3,
 		                     *(int*) (*(char**) (a + 0x16c) + 1));
 		     e != 0;
 		     e = he_fn_Handlung()) {
@@ -374,7 +374,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 
 	kind = ((Lvl*) lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].kind;
 	if (kind == 0x1d || kind == 0x1f) {
-		for (e = fcn_005463a0(2, 0, 0x8c, 3,
+		for (e = he_StartHandlungSearch(2, 0, 0x8c, 3,
 		                     *(int*) (*(char**) (a + 0x16c) + 1));
 		     e != 0;
 		     e = he_fn_Handlung()) {

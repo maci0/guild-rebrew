@@ -98,12 +98,12 @@ extern float g_662a68;
 
 extern void *memcpy(void *, const void *, unsigned int);
 
-extern void fcn_005356e0();
+extern void main_PumpWindowMessages();
 extern void fcn_412630();
 extern void fcn_004116d0();
 extern int cut_FindCutsceneById();
 extern void fcn_00533a40();
-extern void fcn_00474e80();
+extern void d2_ProcessMouseInput();
 extern void fcn_00533090();
 extern void ReportClientMessage();
 extern void fcn_00545aa0();
@@ -119,12 +119,12 @@ extern void fcn_0052a960();
 extern void fcn_00454f80();
 extern void fcn_00413380();
 extern void fcn_00444190();
-extern void fcn_00530a00();
+extern void ch_CollectContextCharacters();
 extern void fcn_00530c60();
 extern void fcn_00529890();
 extern void ch_UpdatePendingPositions();
 extern void ch_Update();
-extern void fcn_00402ff0();
+extern void ch_UpdateCharacterObjectPositions();
 extern void fcn_005e8b10();
 extern void fcn_004efde0();
 extern void fcn_00536bb0();
@@ -134,13 +134,13 @@ extern void fcn_004c0b40();
 extern void fcn_004c2860();
 extern void fcn_00537080();
 extern void fcn_00415d70();
-extern void fcn_005348a0();
-extern void fcn_005345b0();
-extern void fcn_00534b90();
+extern void d3_UpdateSelectionBoxCharacters();
+extern void d3_UpdateCharacterBoxSelection();
+extern void d3_DrawSelectionBox();
 extern void d3snd_UpdateSoundSources();
-extern void fcn_00419990();
+extern void d3snd_UpdateAmbientSources();
 extern void fcn_00422150();
-extern void fcn_0052fde0();
+extern void sv_UpdateSceneHover();
 extern void fcn_00475220();
 extern void d2_SetOverlayAnimation();
 extern void sv_HandleObjects();
@@ -168,24 +168,24 @@ extern void SetMasterVolume();
 extern void fcn_00427370();
 extern void fcn_5e43f0();
 extern void fcn_00536b10();
-extern void fcn_00536810();
-extern void fcn_00537210();
+extern void d2_RunChatConsole();
+extern void main_RunAdvanceGameDialog();
 extern void fcn_005356b0();
 extern void fcn_005e4c50();
 extern void fcn_005924d0();
-extern void fcn_00592470();
-extern void fcn_005d4a20();
+extern void main_ProcessGameHotkeys();
+extern void d2_ShowPrivilegien();
 extern void fcn_005d46d0();
-extern void fcn_005c67d0();
-extern void fcn_005c8c40();
-extern void fcn_005e4cd0();
+extern void d2_ShowInventoryDialog();
+extern void d2_OpenPlayerStats();
+extern void d2_RunMessageFilterDialog();
 extern void fcn_005d42e0();
 extern void fcn_005d0660();
 extern void fcn_0042df30();
-extern void fcn_00526660();
+extern void d2_RunMessageBox();
 extern void fcn_004b6470();
 extern void fcn_64d41a();
-extern void fcn_005e41b0();
+extern void ls_SaveNetworkGame();
 extern void fcn_00535850();
 
 
@@ -204,7 +204,7 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 
 	z = 0;
 	main_LoopFlags = flags;
-	fcn_005356e0();
+	main_PumpWindowMessages();
 	fcn_412630();
 	if (loopId != 0) {
 		if (*(int *) ((char *) g_7e35c0 + g_774650 * 8) != loopId) {
@@ -225,7 +225,7 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 		}
 	}
 	if (flags & 4) {
-		fcn_00474e80();
+		d2_ProcessMouseInput();
 	}
 	if (g_77493c != 0) {
 		g_774670 = 1;
@@ -312,7 +312,7 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 	}
 	z = flags & 0x8000;
 	if (z == 0 && g_774964 != 0) {
-		fcn_00530a00(i);
+		ch_CollectContextCharacters(i);
 	}
 	if (i != 0 && !(flags & 0x10000)) {
 		fcn_00530c60(i);
@@ -324,7 +324,7 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 	if (g_6a2c04 != 0) {
 		ch_UpdatePendingPositions();
 		ch_Update();
-		fcn_00402ff0();
+		ch_UpdateCharacterObjectPositions();
 	}
 	if (g_774964 != 0) {
 		fcn_005e8b10();
@@ -354,24 +354,24 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 			}
 			if (g_774670 == 0 && d3_SelectionBoxActive != 0) {
 				if (z != 0) {
-					fcn_005348a0();
+					d3_UpdateSelectionBoxCharacters();
 				} else {
-					fcn_005345b0();
+					d3_UpdateCharacterBoxSelection();
 				}
-				fcn_00534b90();
+				d3_DrawSelectionBox();
 			}
 		}
 	}
 	if (g_774934 != 0) {
 		d3snd_UpdateSoundSources();
 		if (g_774938 != 0) {
-			fcn_00419990();
+			d3snd_UpdateAmbientSources();
 		}
 		fcn_00422150();
 	}
 	if (g_774654 == 0 && !(flags & 0x100000)) {
 		if (z == 0) {
-			fcn_0052fde0();
+			sv_UpdateSceneHover();
 		}
 		f = flags & 0x10;
 		if (f == 0) {
@@ -464,13 +464,13 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 	fcn_00536b10();
 	if (g_774964 != 0) {
 		if ((g_7747b0 & 4) && tp_d2_SelectedControl == 0 && g_14cf950 == 0x1c && (flags & 0x2000)) {
-			fcn_00536810();
+			d2_RunChatConsole();
 		}
 		if (g_774964 != 0) {
 			if (g_14cf950 == 0xcf || (g_14ce8cc != 0 && g_67d8d4 == g_6a25a8)) {
 				if (!(flags & 0x10000) && g_774660 == 0 && !(g_7747b0 & 4)) {
 					if (g_774800 == 0) {
-						fcn_00537210();
+						main_RunAdvanceGameDialog();
 					} else {
 						g_774960 = 1;
 						fcn_005356b0(g_5438c0);
@@ -490,21 +490,21 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 	if (g_6a25ac != -1 && (flags & 0x2000) && !(flags & 0x100000) &&
 		g_774650 == g_774658) {
 		if (g_774964 != 0) {
-			fcn_00592470();
+			main_ProcessGameHotkeys();
 		}
 		if (g_774970 != 0xffff && (unsigned char) g_7f4ca0[(unsigned short) g_774970 * 540 + 8] > 0) {
 			if (g_100f1dc != -1) {
 				i = d2_CurrentElementId;
 				if (i == g_6a25a0) {
-					fcn_005d4a20();
+					d2_ShowPrivilegien();
 				} else if (i == g_6a257c) {
 					fcn_005d46d0();
 				} else if (i == g_6a2584) {
-					fcn_005c67d0();
+					d2_ShowInventoryDialog();
 				} else if (i == g_6a2588) {
-					fcn_005c8c40();
+					d2_OpenPlayerStats();
 				} else if (i == g_6a258c) {
-					fcn_005e4cd0();
+					d2_RunMessageFilterDialog();
 				} else if (i == g_6a2580) {
 					fcn_005d42e0();
 				} else if (i == g_6a2578) {
@@ -529,7 +529,7 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 				g_774960 = 1;
 				fcn_0042df30(g_538060, 1);
 				main_LoopFlags |= 0x100000;
-				fcn_00526660(g_14a5524, 0xc4);
+				d2_RunMessageBox(g_14a5524, 0xc4);
 				fcn_005356b0(g_5438c0);
 			}
 		}
@@ -558,7 +558,7 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 			buf[i] = g_774988[i];
 		} while (g_774988[i++] != 0);
 		g_774988[0] = 0;
-		fcn_005e41b0(s, buf);
+		ls_SaveNetworkGame(s, buf);
 	}
 	if (g_772e84 > 0 && !(main_LoopFlags & 0x200000)) {
 		g_772e84--;

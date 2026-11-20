@@ -70,7 +70,7 @@ int __cdecl fcn_004c5620(int, Order*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c4ef0(char*);
 
-void __cdecl fcn_00505e20(int search, int buyer, int price, Order* o, int notify)
+void __cdecl gm_BuyBuilding(int search, int buyer, int price, Order* o, int notify)
 {
 	Office* office;
 	char msg[0x100];

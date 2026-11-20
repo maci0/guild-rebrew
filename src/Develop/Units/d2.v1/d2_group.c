@@ -46,7 +46,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_005373e0(void *, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLD 0x004e53e0 */
@@ -145,7 +145,7 @@ int __cdecl fcn_004e6eb0(char *text, unsigned int flags)
 		}
 	}
 	g_772f74 = 0;
-	fcn_00469510(list);
+	d2_ClearRadioGroup(list);
 	fcn_00471e30(h);
 	return result;
 }

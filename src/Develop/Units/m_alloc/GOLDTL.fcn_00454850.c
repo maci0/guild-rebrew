@@ -3,7 +3,7 @@
  * limit is reached.  Leaves that survive one level are collapsed. */
 
 char __cdecl fcn_004546e0(char* e, float* lo, float* hi);
-char* __cdecl fcn_00454630(char* src, float* lo, float* hi);
+char* __cdecl d3_CollectObjectsInBounds(char* src, float* lo, float* hi);
 void __cdecl fcn_00454560(char** n);
 
 /* ADDRESS: GOLDTL 0x00454850 */
@@ -69,22 +69,22 @@ void __cdecl fcn_00454850(unsigned int* node, unsigned int a1, unsigned int dept
 		lo[2] = *((float*) (node + 6));
 		hi[0] = dx + *((float*) (node + 4));
 		hi[2] = dz + *((float*) (node + 6));
-		node[0] = (unsigned int) fcn_00454630((char*) node, lo, hi);
+		node[0] = (unsigned int) d3_CollectObjectsInBounds((char*) node, lo, hi);
 		lo[0] = dx + *((float*) (node + 4));
 		lo[2] = *((float*) (node + 6));
 		hi[0] = *((float*) (node + 8));
 		hi[2] = dz + *((float*) (node + 6));
-		node[1] = (unsigned int) fcn_00454630((char*) node, lo, hi);
+		node[1] = (unsigned int) d3_CollectObjectsInBounds((char*) node, lo, hi);
 		lo[0] = dx + *((float*) (node + 4));
 		lo[2] = dz + *((float*) (node + 6));
 		hi[0] = *((float*) (node + 8));
 		hi[2] = *((float*) (node + 10));
-		node[2] = (unsigned int) fcn_00454630((char*) node, lo, hi);
+		node[2] = (unsigned int) d3_CollectObjectsInBounds((char*) node, lo, hi);
 		lo[0] = *((float*) (node + 4));
 		lo[2] = dx + *((float*) (node + 6));
 		hi[0] = dx + *((float*) (node + 4));
 		hi[2] = *((float*) (node + 10));
-		node[3] = (unsigned int) fcn_00454630((char*) node, lo, hi);
+		node[3] = (unsigned int) d3_CollectObjectsInBounds((char*) node, lo, hi);
 		first = 0xffffffff;
 		for (i = 0; i < 4; i++) {
 			v = node[i];

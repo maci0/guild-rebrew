@@ -36,7 +36,7 @@ void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_004c5530(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_005cd440(Req*, char*, int, void*);
-void __cdecl fcn_005d61d0(void);
+void __cdecl d2_ShowIntimidationDialog(void);
 
 /* The message struct is local to the branch that sends it: with it at function
    scope the header stores before the e+4 load issue ahead of the push. */
@@ -74,7 +74,7 @@ int __cdecl fcn_005d63e0(unsigned char* obj, char* arg)
 	req.kind = 6;
 	req.cd = g_666018;
 	io_FormatTextBuffer(text, 0x1d61);
-	if (fcn_005cd440(&req, text, 0, fcn_005d61d0)) {
+	if (fcn_005cd440(&req, text, 0, d2_ShowIntimidationDialog)) {
 		result = 1;
 	}
 	return result;

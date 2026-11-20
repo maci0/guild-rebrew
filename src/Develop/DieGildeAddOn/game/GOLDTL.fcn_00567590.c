@@ -16,7 +16,7 @@ extern char g_6b5c60[];
 extern unsigned char g_7747b0;
 
 int __cdecl fcn_00500e20(int*);
-void __cdecl fcn_00546190(void*);
+void __cdecl he_FreeAction(void*);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 void __cdecl sim_SetSyncParams(int*, int, int, int);
 int __cdecl fcn_00567030(char*, int*, int*);
@@ -152,11 +152,11 @@ next0:
 		return;
 	case 1:
 		if ((signed char) g_7747b0 < 0) {
-			fcn_00546190(action);
+			he_FreeAction(action);
 			return;
 		}
 		if (*(int*) &gm_GameTime != *(int*) (action + 0x44)) {
-			fcn_00546190(action);
+			he_FreeAction(action);
 			return;
 		}
 		q = (char*) gm_StartFilteredEntitySearch(1, 5, 0x16);
@@ -294,11 +294,11 @@ after1:
 			}
 			p += 0x21c;
 		}
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	case -2:
 	case -1:
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	default:
 		return;

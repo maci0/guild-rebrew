@@ -11,7 +11,7 @@ char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl evt_RunScript(char*);
 void __cdecl fcn_004cfa00(int);
 
-void __cdecl fcn_004d2f10(void)
+void __cdecl cut_RunCombatFlightOutro(void)
 {
 	char* p;
 

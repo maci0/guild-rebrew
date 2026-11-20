@@ -73,7 +73,7 @@ extern float g_662a3c;
 extern float g_665c0c;
 extern double g_662908;
 
-int __cdecl fcn_0057ec20(int a);
+int __cdecl d2_TutorialAllowsFlag(int a);
 void __cdecl fcn_0057e880(int a, int b, int c, int d);
 int __cdecl fcn_00504bd0(int a);
 int __cdecl fcn_00470820(int a, int b, char* name);
@@ -81,7 +81,7 @@ void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl fcn_00473a90(int a, int b);
 int __cdecl fcn_0050cf50(char* ent, int kind);
 int __cdecl fcn_00504f30(int a, int b);
-int __cdecl fcn_005463a0(int a, int b, int c);
+int __cdecl he_StartHandlungSearch(int a, int b, int c);
 int __cdecl fcn_005462a0(void);
 void* __cdecl gm_SearchTable67(int a);
 int __cdecl fcn_00508da0(char* ent);
@@ -103,17 +103,17 @@ void __cdecl fcn_004c53a0(void);
 void __cdecl fcn_004c5530(void* msg);
 void __cdecl fcn_004c5f60(int a, int b, int c);
 void __cdecl fcn_004c6000(int a, int b);
-void __cdecl fcn_00505e20(int a, int b, int c, int d, int e);
+void __cdecl gm_BuyBuilding(int a, int b, int c, int d, int e);
 int __cdecl fcn_0050d2a0(char* a);
-void __cdecl fcn_0059aa10(int a, int b);
-void __cdecl fcn_005c23b0(int a);
-void __cdecl fcn_005c2580(int a);
-void __cdecl fcn_005c2910(int a);
+void __cdecl d2_RunTechTreeDialog(int a, int b);
+void __cdecl d2_ShowSellGebaeudeDialog(int a);
+void __cdecl d2_ShowRenovationDialog(int a);
+void __cdecl d2_ShowGebaeudeSaleDialog(int a);
 void __cdecl fcn_005c2a40(int a);
 void __cdecl fcn_005c30e0(int a);
-void __cdecl fcn_005c35d0(int a);
-void __cdecl fcn_005c3820(int a);
-void __cdecl fcn_005c3cc0(int a);
+void __cdecl d2_RunSellGebaeudeDialog(int a);
+void __cdecl d2_ShowTechTreeEffects(int a);
+void __cdecl d2_RunFireExtinguishDialog(int a);
 int __cdecl fcn_005373e0(void* fn, int message);
 
 /* ADDRESS: GOLDTL 0x005c3f10 */
@@ -156,12 +156,12 @@ void __cdecl fcn_005c3f10(char* ent)
 	if ((*(unsigned char*) (ent + 0x5b) & 4) != 0)
 		return;
 	if (*(unsigned short*) (ent + 0x25) == g_774970) {
-		if (fcn_0057ec20(0x100) == 0)
+		if (d2_TutorialAllowsFlag(0x100) == 0)
 			return;
 		if (*(unsigned short*) (ent + 0x25) == g_774970)
 			fcn_0057e880(0x10, (int) ent, 0, 0);
 	} else {
-		if (fcn_0057ec20(0x4000) == 0)
+		if (d2_TutorialAllowsFlag(0x4000) == 0)
 			return;
 	}
 	v.mode = fcn_00504bd0((unsigned char) ent[0]);
@@ -172,7 +172,7 @@ void __cdecl fcn_005c3f10(char* ent)
 	fcn_00504f30((unsigned char) ent[0], g_774970);
 	if ((*(unsigned char*) (ent + 0x5a) & 2) != 0
 	    && *(unsigned short*) (ent + 0x25) != g_774970) {
-		v.other = fcn_005463a0(1, 0, 0x1b);
+		v.other = he_StartHandlungSearch(1, 0, 0x1b);
 		while (v.other != 0
 		    && *(int*) (v.other + 0xac) != *(int*) (ent + 1))
 			v.other = fcn_005462a0();
@@ -184,7 +184,7 @@ void __cdecl fcn_005c3f10(char* ent)
 		if (*(unsigned short*) (ent + 0x5a) != v.prev)
 			changed = 1;
 		if (*(unsigned short*) (ent + 0x27) == g_774970) {
-			h = fcn_005463a0(1, 0, 0x4f);
+			h = he_StartHandlungSearch(1, 0, 0x4f);
 			while (h != 0
 			    && *(int*) (h + 0xac) != *(int*) (ent + 1))
 				h = fcn_005462a0();
@@ -322,28 +322,28 @@ after_build:
 			goto loop_test;
 		if (d2_CurrentElementId == v.h34) {
 			fcn_00471af0(dlg, 0);
-			fcn_0059aa10((int) ent, 0xfd);
+			d2_RunTechTreeDialog((int) ent, 0xfd);
 			fcn_00471af0(dlg, 1);
 			goto loop_test;
 		}
 		if (d2_CurrentElementId == v.h1c && g_7747b0 >= 0) {
 			fcn_00471af0(dlg, 0);
-			fcn_005c23b0((int) ent);
+			d2_ShowSellGebaeudeDialog((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h3c && g_7747b0 >= 0) {
 			fcn_00471af0(dlg, 0);
-			fcn_005c2580((int) ent);
+			d2_ShowRenovationDialog((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h20 && g_7747b0 >= 0) {
 			fcn_00471af0(dlg, 0);
-			fcn_005c35d0((int) ent);
+			d2_RunSellGebaeudeDialog((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h44 && g_7747b0 >= 0) {
 			fcn_00471af0(dlg, 0);
-			fcn_005c2910((int) ent);
+			d2_ShowGebaeudeSaleDialog((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h28 && g_7747b0 >= 0) {
@@ -401,7 +401,7 @@ after_build:
 					(ent + 0x25), (int) ent,
 				    *(int*) (v.other + 0xb0));
 				if (fcn_00526120(text2, 1) != 0) {
-					fcn_00505e20(*(int*) (ent + 1),
+					gm_BuyBuilding(*(int*) (ent + 1),
 					    *(int*) ((char*) g_7f4ca0
 						+ (unsigned int) g_774970
 						* 0x21c + 4),
@@ -414,7 +414,7 @@ after_build:
 		}
 		if (d2_CurrentElementId == -1) {
 			fcn_00471af0(dlg, 0);
-			fcn_005c3820((int) ent);
+			d2_ShowTechTreeEffects((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h5c) {
@@ -450,7 +450,7 @@ after_build:
 		}
 		if (d2_CurrentElementId == v.h58) {
 			fcn_00471af0(dlg, 0);
-			fcn_005c3cc0((int) ent);
+			d2_RunFireExtinguishDialog((int) ent);
 			goto tail_on;
 		}
 		goto loop_test;

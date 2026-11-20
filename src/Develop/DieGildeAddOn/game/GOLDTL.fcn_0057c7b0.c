@@ -11,7 +11,7 @@ typedef struct Node {
 void* __cdecl gm_LookupEntityRecordById(int a);
 void __cdecl fcn_005100f0(int a, int b);
 void __cdecl fcn_00500bb0(char* p, int a, int b, int c);
-void __cdecl fcn_00546190(Node* n);
+void __cdecl he_FreeAction(Node* n);
 
 /* ADDRESS: GOLDTL 0x0057c7b0 */
 void __cdecl fcn_0057c7b0(Node* o)
@@ -51,5 +51,5 @@ void __cdecl fcn_0057c7b0(Node* o)
 		fcn_00500bb0(o->f52, 0x18, 0, 0);
 		return;
 	}
-cleanup: fcn_00546190(o);
+cleanup: he_FreeAction(o);
 }

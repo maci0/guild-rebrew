@@ -10,7 +10,7 @@ int __cdecl fcn_005bd7c0(int max, int a, int* out)
 	int i;
 	int r;
 
-	n = fcn_004e8b80(a, 6, (OFFICE_SLOT*) 0x775288);
+	n = amt_FindOfficeSlotsByKind(a, 6, (OFFICE_SLOT*) 0x775288);
 	cnt = 0;
 	for (i = 0; i < n; i++) {
 		if (cnt >= max) {

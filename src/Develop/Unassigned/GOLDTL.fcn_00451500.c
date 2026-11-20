@@ -6,7 +6,7 @@ extern float g_662d68;
 extern float g_662ce8;
 extern float g_662d40[3];
 
-void __cdecl fcn_004518a0(float*);
+void __cdecl d3_NormalizeVector(float*);
 
 /* ADDRESS: GOLDTL 0x00451500 */
 void __cdecl fcn_00451500(float* a, float angle, float* m)
@@ -26,7 +26,7 @@ void __cdecl fcn_00451500(float* a, float angle, float* m)
 	m[8] = a[0];
 	m[9] = a[1];
 	m[10] = a[2];
-	fcn_004518a0(m + 8);
+	d3_NormalizeVector(m + 8);
 	dotOffset = -(v[0] * m[8] + v[2] * m[10] + v[1] * m[9]);
 	m[4] = v[0] = dotOffset * m[8] + v[0];
 	m[5] = v[1] = dotOffset * m[9] + v[1];
@@ -64,7 +64,7 @@ void __cdecl fcn_00451500(float* a, float angle, float* m)
 			}
 		}
 	}
-	fcn_004518a0(m + 4);
+	d3_NormalizeVector(m + 4);
 	m[0xb] = 0.0f;
 	m[7] = 0.0f;
 	m[3] = 0.0f;

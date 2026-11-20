@@ -27,7 +27,7 @@ char* __cdecl fcn_005049a0(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00566700(char* u)
 {
@@ -69,12 +69,12 @@ void __cdecl fcn_00566700(char* u)
 		} else {
 			fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)].entity_id, -1, text, 0, 0x5f2, "_NACHRICHTEN_HS_01");
 		}
-		fcn_00546190(u);
+		he_FreeAction(u);
 		return;
 	case -2:
 	case -1:
 kill:
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	}
 }

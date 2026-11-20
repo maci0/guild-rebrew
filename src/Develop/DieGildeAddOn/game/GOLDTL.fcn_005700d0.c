@@ -28,7 +28,7 @@ extern char g_776709;
 extern char* txt_TextEntries[];
 
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_005700d0(char* u)
 {
@@ -37,7 +37,7 @@ void __cdecl fcn_005700d0(char* u)
 	switch (*(int*) (u + 0x70)) {
 	case -2:
 	case -1:
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	case 0:
 		t = ((struct step*)g_77e0a0)[*(int*) (u + 0xac)].msg;

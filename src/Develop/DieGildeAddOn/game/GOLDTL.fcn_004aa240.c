@@ -9,7 +9,7 @@ typedef struct
 
 extern int __cdecl fcn_004fa5b0(int cmd, int obj, void *rec);
 extern int __cdecl gm_RandomMod(int limit);
-extern void *__cdecl fcn_005463a0(int a, int b, int c);
+extern void *__cdecl he_StartHandlungSearch(int a, int b, int c);
 extern void *__cdecl he_fn_Handlung(void);
 extern void *__cdecl gm_LookupEntityRecordById(int a);
 extern int __cdecl fcn_004a92c0(int a0, int obj, void *rec, char *out, int a4);
@@ -37,7 +37,7 @@ unsigned int __cdecl fcn_004aa240(int a0, int entity, int a2, char *request, int
     rec.ptr = 0;
     if (*(int *)(entity + 0x1c8) & 0x100)
     {
-        q = (char *)fcn_005463a0(1, 0, 0x45);
+        q = (char *)he_StartHandlungSearch(1, 0, 0x45);
         while (q)
         {
             if (*(int *)(q + 0xac) == *(int *)(entity + 4))

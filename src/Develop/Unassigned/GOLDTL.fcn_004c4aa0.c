@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_004c4aa0(char* node)
+void __cdecl cm_RecycleCommandQueueNode(char* node)
 {
 	char* prev;
 	char* next;

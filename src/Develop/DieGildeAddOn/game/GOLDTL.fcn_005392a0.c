@@ -9,7 +9,7 @@ int sprintf(char*, const char*, ...);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_00442e30(void);
 void __cdecl fcn_00514120(char*);
-void __cdecl fcn_0051e080(char*, char*, int);
+void __cdecl ls_SaveGame(char*, char*, int);
 void __cdecl gm_KillAllSpieler(void);
 void __cdecl gm_ResetAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
@@ -17,7 +17,7 @@ void __cdecl fcn_00510930(void);
 int __cdecl fcn_0051e070(void);
 #include "client_scene_loader.h"
 
-void __cdecl fcn_005392a0(char* name, int net)
+void __cdecl main_LoadCitySelectionScene(char* name, int net)
 {
 	char path[0x104];
 
@@ -32,7 +32,7 @@ void __cdecl fcn_005392a0(char* name, int net)
 	(*(int*)&gm_GameTime) = 0;
 	(*(short*)&g_7f4c04) = 6;
 	g_7f4c06 = 0;
-	fcn_0051e080(path, "city", 2);
+	ls_SaveGame(path, "city", 2);
 	gm_KillAllSpieler();
 	gm_ResetAllEntities();
 	gm_CleanupObjectEntities();

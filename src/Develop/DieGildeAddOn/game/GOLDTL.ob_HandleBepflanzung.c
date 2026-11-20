@@ -46,7 +46,7 @@ int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 int __cdecl fcn_004488e0(char* a, int b, int c);
 void __cdecl fcn_0043a5a0(int a, int p);
 void __cdecl ReportClientMessage(char* a);
-void __cdecl fcn_00469510(int a);
+void __cdecl d2_ClearRadioGroup(int a);
 void __cdecl fcn_00471e30(int a);
 
 /* ADDRESS: GOLDTL 0x005c5310 */
@@ -308,7 +308,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			if (v6) {
 				d3_DestroyObject(v6);
 			}
-			fcn_00469510(v24);
+			d2_ClearRadioGroup(v24);
 			if (g_6a25b8 != -1) {
 				fcn_00471af0(g_6a25b8, 1);
 			}

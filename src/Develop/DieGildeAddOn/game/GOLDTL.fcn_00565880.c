@@ -25,7 +25,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00565880(char* u)
 {
@@ -40,11 +40,11 @@ void __cdecl fcn_00565880(char* u)
 			fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, 0x5ff, 0);
 			fcn_004c51f0(*(int*) (e + 1), -1, ((struct player*)g_868060)[*(unsigned char*) (u + 0xb0)].id, *(int*) (u + 0xb4), g_773d75, 0);
 		}
-		fcn_00546190(u);
+		he_FreeAction(u);
 		return;
 	case -2:
 	case -1:
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	}
 }

@@ -8,7 +8,7 @@ char* __cdecl m_alloc(int, const char*);
 void __cdecl fcn_0045f600(int);
 
 /* ADDRESS: GOLD 0x0045fa70 */
-void __cdecl fcn_0045fa70(int textures, int hicol, int flags, int mode)
+void __cdecl d3_InitTextureStorage(int textures, int hicol, int flags, int mode)
 {
     g_fb9084 = textures;
     *(int*) 0xfb91b8 = 0;

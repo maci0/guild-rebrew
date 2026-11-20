@@ -33,7 +33,7 @@ extern float g_6628a0;
 extern float g_6628bc;
 
 int __cdecl fcn_004c2db0(int, int);
-char* __cdecl fcn_0058e220(char*, char*);
+char* __cdecl d2_RunSeance(char*, char*);
 float __cdecl fcn_004f4770(char*);
 float __cdecl gm_RandomFloat01(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -50,7 +50,7 @@ void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl fcn_004c5530(char* msg);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00428720(char*);
+void __cdecl evt_RequestScriptExit(char*);
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
@@ -67,7 +67,7 @@ void __cdecl fcn_0058e790(char* e, char* res)
 	amt = 0;
 	mode = 0;
 	t = fcn_004c2db0(*(int*) (res + 0x14), *(int*) (res + 0x4c));
-	m = fcn_0058e220(e, res);
+	m = d2_RunSeance(e, res);
 	f = fcn_004f4770(e);
 	if (gm_RandomFloat01() + f - 0.4f < 1.0f) {
 		mode = 2;
@@ -112,6 +112,6 @@ void __cdecl fcn_0058e790(char* e, char* res)
 	} while (fcn_005373e0(fcn_0058e790, 0x777c7) != 0);
 	fcn_00471e30(h);
 	if (m != 0) {
-		fcn_00428720(m);
+		evt_RequestScriptExit(m);
 	}
 }

@@ -17,7 +17,7 @@ extern char* g_77255c;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_004b33c0(char* name, char* text);
+int __cdecl hst_ReadDueText(char* name, char* text);
 int __cdecl d2_CreateScrollPerga(void);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_SetForm(int k, int i);
@@ -85,7 +85,7 @@ void __cdecl fcn_004b3490(void)
 			rep stosb
 		}
 	}
-	if (fcn_004b33c0(name, text) != 1) {
+	if (hst_ReadDueText(name, text) != 1) {
 		return;
 	}
 	h = d2_CreateScrollPerga();
@@ -154,7 +154,7 @@ void __cdecl fcn_004b3490(void)
 					rep stosb
 				}
 			}
-			if (fcn_004b33c0(name, text) != 1) {
+			if (hst_ReadDueText(name, text) != 1) {
 				g_774654 = 1;
 			} else {
 				d2_SetForm(h, 2);

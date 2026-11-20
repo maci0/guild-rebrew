@@ -1,6 +1,6 @@
 #include "client_data.h"
 extern int __cdecl fcn_00500e20(char*); extern void __cdecl fcn_004c30a0(int, int, char*, int, int);
-extern void __cdecl fcn_00546190(char*);
+extern void __cdecl he_FreeAction(char*);
 extern void __cdecl fcn_00500bb0(char*, int, int, int);
 extern unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -8,14 +8,14 @@ extern unsigned short __cdecl gm_RandomMod(int);
 /* Night-watchman clock action: starts the evening/morning announce sequence
  * when the game time enters the action's window. */
 /* ADDRESS: GOLDTL 0x0056e980 */
-void __cdecl fcn_0056e980(char* action)
+void __cdecl he_RunNightWatchmanAnnouncements(char* action)
 {
 	int idx;
 	int w;
 
 
 	if (*(int*) &gm_GameTime != *(int*) (action + 0x44)) {
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	}
 	idx = fcn_00500e20((char*) &gm_GameTime);
@@ -94,11 +94,11 @@ void __cdecl fcn_0056e980(char* action)
 			if (*(char*) 0x7766b9 != 0 && (gm_RandomMod(10) & 0xffff) > 7)
 				fcn_004c30a0(*(int*) (action + 0xac), 0, (char*) 0x6a6bcc, -1, 0xfa);
 		}
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	case -2:
 	case -1:
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	default:
 		return;

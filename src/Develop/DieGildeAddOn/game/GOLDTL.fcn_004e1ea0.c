@@ -15,7 +15,7 @@ void __cdecl fcn_004e6240(void*, void*, char*, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
-int __cdecl fcn_004e1ea0(char* event)
+int __cdecl gm_NotifyHochzeit(char* event)
 {
 	char buf[0x200];
 	void* e1;

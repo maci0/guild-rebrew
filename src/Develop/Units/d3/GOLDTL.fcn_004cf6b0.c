@@ -27,7 +27,7 @@ void __cdecl d3_GridPointToWorld(int g, int x, int z, float* out);
 unsigned int __cdecl cut_RandMod(unsigned int n);
 void __cdecl fcn_004cfc40(int a1, int a2, int a3);
 int __cdecl fcn_004d4790(char* e);
-int __cdecl fcn_00406340(char* e, const char* name, int param);
+int __cdecl ch_QueuePlayAnimation(char* e, const char* name, int param);
 void __cdecl d3_DestroyObject(int p);
 int __cdecl fcn_0043c2c0(int m);
 int __cdecl fcn_0043ef20(int m);
@@ -114,7 +114,7 @@ int __cdecl fcn_004cf6b0(void)
 									fcn_004cfc40(*q, dmg2, 2);
 								}
 								if (!fcn_004d4790(e)) {
-									fcn_00406340((char*) other, "kampf/arm_greifen", 1);
+									ch_QueuePlayAnimation((char*) other, "kampf/arm_greifen", 1);
 								}
 							}
 						}

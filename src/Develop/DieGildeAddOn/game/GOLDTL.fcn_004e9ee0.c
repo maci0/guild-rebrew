@@ -26,7 +26,7 @@ int __cdecl fcn_004e9ee0(void)
 
 	result = 0;
 	for (i = 0; i < 6; i++) {
-		n = fcn_004e8b80(order[i], 6, recs);
+		n = amt_FindOfficeSlotsByKind(order[i], 6, recs);
 		if (n > 0) {
 			for (j = 0; j < n; j++) {
 				if (recs[j].status == 2) {

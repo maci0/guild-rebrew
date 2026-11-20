@@ -6,7 +6,7 @@ extern unsigned char g_773d75;
 
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl fcn_00500bb0(void*, int, int, int);
-void __cdecl fcn_00546190(void*);
+void __cdecl he_FreeAction(void*);
 
 /* ADDRESS: GOLDTL 0x00551250 */
 void __cdecl fcn_00551250(char* u)
@@ -16,7 +16,7 @@ void __cdecl fcn_00551250(char* u)
 		fcn_004c5150(-1, g_7f4ca4[*(unsigned short*) (u + 8) * 135], g_773d75,
 		    *(int*) (u + 0xac));
 		if (--*(int*) (u + 0xb0) == 0) {
-			fcn_00546190(u);
+			he_FreeAction(u);
 			return;
 		}
 		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
@@ -24,7 +24,7 @@ void __cdecl fcn_00551250(char* u)
 		break;
 	case -1:
 	case -2:
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	}
 }

@@ -1,4 +1,4 @@
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 
 #define MINV(a, b) ((a) < (b) ? (a) : (b))
@@ -12,7 +12,7 @@ int __cdecl fcn_004ecf00(char* e, int* owner, float* frac, int want_idle)
 {
 	char* p;
 
-	for (p = fcn_005463a0(1, 3, *(int*) (e + 1)); p != 0; p = he_fn_Handlung()) {
+	for (p = he_StartHandlungSearch(1, 3, *(int*) (e + 1)); p != 0; p = he_fn_Handlung()) {
 		switch (*(unsigned char*) p) {
 		case 4:
 			*frac = ((float) *(int*) (p + 0xb8) - *(int*) (p + 0xb4)) / *(int*) (p + 0xb8);

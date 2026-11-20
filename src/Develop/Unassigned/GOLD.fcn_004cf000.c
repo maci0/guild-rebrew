@@ -14,7 +14,7 @@ void __cdecl fcn_004c6880(int, int, int);
 char* __cdecl fcn_004ce610(char*);
 int __cdecl fcn_004cef70(int, char*);
 unsigned char __cdecl d3_SetSubtreeVisible(int, unsigned char);
-void __cdecl fcn_0043d430(char*, char*, OBJECT_COLOR);
+void __cdecl d3_ChangeObjectTransparency(char*, char*, OBJECT_COLOR);
 int __cdecl fcn_004ce270(char*, char*);
 float __cdecl fcn_004ce1b0(char*, char*);
 char* __cdecl fcn_004ceb40(char*);
@@ -89,7 +89,7 @@ void __cdecl fcn_004cf000(void)
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				*(unsigned char*) (e34 + 0x212) &= 0xfd;
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
-				fcn_0043d430(e34, *(char**) (e34 + 0x1cc), color);
+				d3_ChangeObjectTransparency(e34, *(char**) (e34 + 0x1cc), color);
 			} else {
 				best = 999999.0f;
 				found = 0;
@@ -120,7 +120,7 @@ void __cdecl fcn_004cf000(void)
 					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 					*(unsigned char*) (e34 + 0x212) &= 0xfd;
 					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
-					fcn_0043d430(e34, *(char**) (e34 + 0x1cc), color);
+					d3_ChangeObjectTransparency(e34, *(char**) (e34 + 0x1cc), color);
 				} else {
 					goto other_effect;
 				}

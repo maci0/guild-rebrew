@@ -34,7 +34,7 @@ int __cdecl fcn_004ea2b0(int kind, char* x)
 
 	if (x[0x10] != 2)
 		return 0;
-	n = fcn_004e8b80(kind, 6, list);
+	n = amt_FindOfficeSlotsByKind(kind, 6, list);
 	a = gm_LookupEntityRecordById(*(int*) (x + 0x14));
 	b = gm_LookupEntityRecordById(*(int*) (x + 4));
 	if (a == 0 || a[8] <= 0 || a[0x1b1] != 0 || b == 0 || b[8] <= 0)

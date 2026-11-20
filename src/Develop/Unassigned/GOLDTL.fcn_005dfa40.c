@@ -26,9 +26,9 @@ typedef struct {
 typedef struct VFS_DIR VFS_DIR;
 extern VFS_DIR* g_6b7fdc;
 
-DirList* __cdecl fcn_0042f010(char*, int);
+DirList* __cdecl vfs_FindPathNode(char*, int);
 
-int __cdecl fcn_005dfa40(char* dir, char* ext, FileSlot* out)
+int __cdecl vfs_ListFilesByExtension(char* dir, char* ext, FileSlot* out)
 {
 	int n;
 	int i;
@@ -37,7 +37,7 @@ int __cdecl fcn_005dfa40(char* dir, char* ext, FileSlot* out)
 	DirEntry* e;
 	char* p;
 
-	list = fcn_0042f010(dir, (int) g_6b7fdc);
+	list = vfs_FindPathNode(dir, (int) g_6b7fdc);
 	if (list == 0) {
 		return 0;
 	}

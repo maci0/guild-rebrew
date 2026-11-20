@@ -16,7 +16,7 @@ extern unsigned char* g_7746c8;
 
 void __cdecl fcn_0046f740(int, int, int, int);
 
-void __cdecl fcn_00533dc0(int wnd, int page, int icon)
+void __cdecl d2_DrawPanelFrame(int wnd, int page, int icon)
 {
 	unsigned char* p;
 

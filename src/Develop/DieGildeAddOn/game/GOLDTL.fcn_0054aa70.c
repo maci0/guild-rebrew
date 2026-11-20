@@ -4,7 +4,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -31,7 +31,7 @@ void __cdecl fcn_0054aa70(char* u)
 	if ((u[0x78] & 2) == 0) {
 		return;
 	}
-	for (p = fcn_005463a0(1, 0, 0x2c); p != 0; p = he_fn_Handlung()) {
+	for (p = he_StartHandlungSearch(1, 0, 0x2c); p != 0; p = he_fn_Handlung()) {
 		if (*(int*) (p + 4) == *(int*) (u + 4)) {
 			continue;
 		}

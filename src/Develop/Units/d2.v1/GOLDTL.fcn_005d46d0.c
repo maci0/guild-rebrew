@@ -42,7 +42,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
 void __cdecl fcn_005091d0(int*, Entry*);
-int __cdecl fcn_0057ec20(int);
+int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -80,7 +80,7 @@ void __cdecl fcn_005d46d0(void)
 	if (count == 0) {
 		return;
 	}
-	if (!fcn_0057ec20(4)) {
+	if (!d2_TutorialAllowsFlag(4)) {
 		return;
 	}
 	fcn_0057e880(10, 0, 0, 0);

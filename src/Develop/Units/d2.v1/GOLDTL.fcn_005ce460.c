@@ -26,7 +26,7 @@ int __cdecl io_AppendText();
 void __cdecl fcn_004f5110(char *, int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_004f4830(int, Law *);
-void __cdecl fcn_005ce710(int, int);
+void __cdecl d2_RunGesetzbuchInfoDialog(int, int);
 void __cdecl fcn_005350d0(Book *);
 int __cdecl fcn_005373e0(void *, int);
 void __cdecl fcn_00534f30(Book *);
@@ -106,16 +106,16 @@ void __cdecl fcn_005ce460(int cmd)
 				fcn_004f4830(sel + first, &law);
 				switch (law.kind) {
 				case 0:
-					fcn_005ce710(base + sel * 5, law.text);
+					d2_RunGesetzbuchInfoDialog(base + sel * 5, law.text);
 					break;
 				case 1:
-					fcn_005ce710(base + sel * 5, law.text + 0x13dd);
+					d2_RunGesetzbuchInfoDialog(base + sel * 5, law.text + 0x13dd);
 					break;
 				case 2:
-					fcn_005ce710(base + sel * 5, law.text + 0x13e6);
+					d2_RunGesetzbuchInfoDialog(base + sel * 5, law.text + 0x13e6);
 					break;
 				case 3:
-					fcn_005ce710(base + sel * 5, law.text + 0x13ec);
+					d2_RunGesetzbuchInfoDialog(base + sel * 5, law.text + 0x13ec);
 					break;
 				}
 			}

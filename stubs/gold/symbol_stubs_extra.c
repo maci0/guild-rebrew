@@ -252,7 +252,7 @@ void __cdecl fcn_0046c310(int a)
 {
 }
 
-void __cdecl fcn_0046c5a0(int a, int b)
+void __cdecl d2_RenderMarkupText(int a, int b)
 {
 }
 
@@ -439,7 +439,7 @@ void __cdecl fcn_004e71a0(void)
 
 
 
-int __cdecl fcn_004e8ee0(void* a, int b, void* c, int* d)
+int __cdecl amt_RankAvailableOffices(void* a, int b, void* c, int* d)
 {
 	return 0;
 }
@@ -472,7 +472,7 @@ int __cdecl fcn_0050c4e0(unsigned char* a)
 
 
 
-int __cdecl fcn_00515540(char* a)
+int __cdecl init_EnsureObjektSceneContext(char* a)
 {
 	return 0;
 }
@@ -495,7 +495,7 @@ void __cdecl fcn_00533cf0(int a)
 {
 }
 
-void __cdecl fcn_00533dc0(int a0, int a1, int a2)
+void __cdecl d2_DrawPanelFrame(int a0, int a1, int a2)
 {
 }
 
@@ -551,11 +551,11 @@ int __cdecl fcn_00597940(int a, int b, int c, int d, int e)
 
 
 
-void __cdecl fcn_005b6300(int a, char* b)
+void __cdecl d2_ShowPersonalbuch(int a, char* b)
 {
 }
 
-int __cdecl fcn_005b9980(int a)
+int __cdecl d2_ShowNewCartDialog(int a)
 {
 	return 0;
 }

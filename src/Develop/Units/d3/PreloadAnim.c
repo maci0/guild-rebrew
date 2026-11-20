@@ -31,7 +31,7 @@ int __cdecl PreloadAnim(char*** arg1, char** arg2)
 		opt.queue = 1;
 		opt.reverse = 0;
 		opt.loop = 1;
-		fcn_00434970(*(char**) (obj + 0x1cc), anim, opt);
+		d3_AttachAnimationToContext(*(char**) (obj + 0x1cc), anim, opt);
 		d3_RemoveObjectAnimation(*(char**) (obj + 0x1cc), anim);
 	}
 	return 0;

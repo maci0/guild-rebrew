@@ -1,6 +1,6 @@
 extern char* evt_CurrentScript;
 
-void __cdecl fcn_00428720(char*);
+void __cdecl evt_RequestScriptExit(char*);
 extern char g_675bbc[];
 
 void __cdecl evt_LogScriptError(void*, int, void*);
@@ -28,14 +28,14 @@ int __cdecl KillLocalScripts(void)
             continue;
         if (id == *(int*) (evt_CurrentScript + 0x100))
             continue;
-        fcn_00428720(obj);
+        evt_RequestScriptExit(obj);
     }
     return 0;
 }
 
 /* ADDRESS: GOLD 0x0040b820 */
 /* ADDRESS: GOLDTL 0x0040c740 */
-int __cdecl fcn_0040c740(int** pp, int** pp2)
+int __cdecl CallUserFunction(int** pp, int** pp2)
 {
 	void* g;
 

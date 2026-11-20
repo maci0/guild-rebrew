@@ -12,6 +12,6 @@ extern int cut_ClockDeadline;
 /* ADDRESS: GOLD 0x006f0d88 */
 extern int cut_ClockExpired;
 
-void __cdecl fcn_004e4a60(void);
+void __cdecl cut_UpdateClock(void);
 
 #endif

@@ -14,7 +14,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_UpdateRadioGroup(int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_0053e8a0(void)
@@ -48,7 +48,7 @@ int __cdecl fcn_0053e8a0(void)
 			g_774654 = 1;
 		}
 	}
-	fcn_00469510(list);
+	d2_ClearRadioGroup(list);
 	fcn_00471e30(h);
 	return result;
 }

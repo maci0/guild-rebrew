@@ -35,7 +35,7 @@ int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl cm_RequestSellObjekt(char* e)
 {
@@ -97,5 +97,5 @@ void __cdecl cm_RequestSellObjekt(char* e)
 			}
 		}
 	}
-	fcn_00546190(e);
+	he_FreeAction(e);
 }

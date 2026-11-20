@@ -4,7 +4,7 @@
 extern int* g_665f08;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_0057ecc0(void)
+int __cdecl d2_CanCloseWindowDuringTutorial(void)
 {
 	int* p;
 

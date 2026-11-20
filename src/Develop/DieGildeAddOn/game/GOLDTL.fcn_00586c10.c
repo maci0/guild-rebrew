@@ -24,11 +24,11 @@ char* __cdecl fcn_00442910(int, float*, float*, char*);
 int __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 int __cdecl fcn_00476970(void*);
 void __cdecl fcn_00473150(char*);
-void __cdecl fcn_005893d0(int, int);
+void __cdecl d2_CreateCannonControls(int, int);
 void __cdecl fcn_00588200(char*, char*, char*);
 char __cdecl fcn_00442c00(char*, char);
 char __cdecl d3_SetSubtreeVisible(int, unsigned char);
-void __cdecl fcn_00546bb0(int, int);
+void __cdecl he_SetGfxInfoEnabledByKey(int, int);
 void __cdecl fcn_00587f40(char*);
 void __cdecl fcn_005875c0(char*, float);
 void __cdecl fcn_00587a50(char*);
@@ -37,11 +37,11 @@ void __cdecl fcn_00588710(int, int, int, int, int);
 int __cdecl fcn_00587f90(char*);
 int __cdecl fcn_00588aa0(void*, char*);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 char __cdecl d3_DestroyObject(int);
 void __cdecl fcn_00533a40(char*);
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_00438cb0(char*, int*);
+void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl fcn_00516de0(int, int);
 void __cdecl fcn_00443230(int);
 void __cdecl fcn_00528fd0(void);
@@ -187,7 +187,7 @@ void __cdecl fcn_00586c10(char* obj)
     *(char**) ((char*) S + 0x90) = fcn_00442910((int) *(char**) ((char*) S + 0x98), (float*) 0x662d70, (float*) 0x662d80, (char*) 0x6a9444);
     *(char**) ((char*) S + 0x94) = fcn_00442910((int) *(char**) ((char*) S + 0x98), (float*) 0x662d70, (float*) 0x662d80, (char*) 0x6a942c);
     fcn_00438b40(*(char**) ((char*) S + 0x98), (int*) S);
-    fcn_00438cb0(*(char**) ((char*) S + 0x98), (int*) ((char*) S + 0x10));
+    d3_SetObjectRotation(*(char**) ((char*) S + 0x98), (int*) ((char*) S + 0x10));
     *(int*) ((char*) S + 0xa0) = g_9a9200[7];
     *(int*) ((char*) S + 0x20) = 0;
     *(char**) ((char*) S + 0x9c) = fcn_00442910((int) *(char**) ((char*) S + 0x98), (float*) 0x665f28, (float*) 0x662d80, (char*) 0x6a9418);
@@ -201,7 +201,7 @@ void __cdecl fcn_00586c10(char* obj)
     fcn_00473150(sp);
 
     sp = (char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 0xa);
-    fcn_005893d0((int) S, (int) res);
+    d2_CreateCannonControls((int) S, (int) res);
     fcn_00588200(obj, (char*) S, res);
     if (*(int*) ((char*) S + 0xa0) > *(int*) ((char*) S + 0xdc))
         *(int*) ((char*) S + 0xa0) = *(int*) ((char*) S + 0xdc);
@@ -209,7 +209,7 @@ void __cdecl fcn_00586c10(char* obj)
         fcn_00442c00(*(char**) ((char*) S + 0x8c + i * 4), 0);
     fcn_00442c00(*(char**) ((char*) S + 0x8c + *(int*) ((char*) S + 0xa0) * 4), 1);
     d3_SetSubtreeVisible(*(int*) (obj + 0x61), 0);
-    fcn_00546bb0(*(int*) (obj + 0x61), 0);
+    he_SetGfxInfoEnabledByKey(*(int*) (obj + 0x61), 0);
     g_100f1dc = -1;
     fcn_00587f40((char*) S);
     *(int*)(g_77dda0 + 0x70) = -1;
@@ -257,8 +257,8 @@ void __cdecl fcn_00586c10(char* obj)
     fcn_00471e30(*(int*) ((char*) S + 0xa4));
     fcn_00471e30(*(int*) ((char*) S + 0xc0));
     fcn_00471e30(*(int*) ((char*) S + 0x74));
-    fcn_0046b2b0(*(int*) ((char*) S + 0xd4));
-    fcn_0046b2b0(*(int*) ((char*) S + 0xd8));
+    d2_DestroyElement(*(int*) ((char*) S + 0xd4));
+    d2_DestroyElement(*(int*) ((char*) S + 0xd8));
     if (*(int*) ((char*) S + 0x8c) != 0)
         d3_DestroyObject(*(int*) ((char*) S + 0x8c));
     if (*(int*) ((char*) S + 0x90) != 0)
@@ -270,7 +270,7 @@ void __cdecl fcn_00586c10(char* obj)
     if (*(int*) ((char*) S + 0x98) != 0)
         d3_DestroyObject(*(int*) ((char*) S + 0x98));
     d3_SetSubtreeVisible(*(int*) (obj + 0x61), 1);
-    fcn_00546bb0(*(int*) (obj + 0x61), 1);
+    he_SetGfxInfoEnabledByKey(*(int*) (obj + 0x61), 1);
     for (i = 0; i < count; i++)
         *(int*) (g_1015ea0 + idx[i] * 0x2f4 + 0x48) = 0;
     fcn_00438da0((float) (g_6a376c - g_6a3764),
@@ -289,7 +289,7 @@ void __cdecl fcn_00586c10(char* obj)
         fcn_00459710((char*) g_6b89c0, 1);
     g = (int*) d3_ActiveCamera;
     fcn_00438b40((char*) g, p);
-    fcn_00438cb0((char*) g, v);
+    d3_SetObjectRotation((char*) g, v);
     fcn_00516de0(g_6b8300, 0);
     fcn_00443230(1);
     fcn_00473150(sp);

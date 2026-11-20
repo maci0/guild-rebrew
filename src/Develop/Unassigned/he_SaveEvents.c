@@ -34,7 +34,7 @@ unsigned int __cdecl vfs_fwrite(void* data, int size, int count, void* stream);
 extern HE_AP_EVENT g_7dcae0[256];
 
 /* ADDRESS: GOLDTL 0x00520d90 */
-int __cdecl fcn_00520d90(void* stream)
+int __cdecl he_SaveEvents(void* stream)
 {
 	int i;
 	int k;

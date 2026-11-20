@@ -45,7 +45,7 @@ char *__cdecl fcn_00502cd0(int, int, int, int, int, ...);
 void __cdecl fcn_00487970(char *, char *, int);
 void __cdecl fcn_00487c00(char *, char *, int);
 char *__cdecl gm_NextEntityQueryMatch(void);
-char *__cdecl fcn_005463a0(int, int, int, int, int);
+char *__cdecl he_StartHandlungSearch(int, int, int, int, int);
 char *__cdecl he_fn_Handlung(void);
 void __cdecl ai_MeisterCollectTrans(char *);
 void __cdecl fcn_00485970(char *, char *, int);
@@ -89,7 +89,7 @@ void __cdecl fcn_00482f20(char *a)
 			if (*(int *) (m + 0x1c) != *(int *) (*(char **) (a + 0x16c) + 1)) {
 				continue;
 			}
-			for (e = fcn_005463a0(2, 0, 0xb, 3, *(int *) (*(char **) (a + 0x16c) + 1)); e != 0; e = he_fn_Handlung()) {
+			for (e = he_StartHandlungSearch(2, 0, 0xb, 3, *(int *) (*(char **) (a + 0x16c) + 1)); e != 0; e = he_fn_Handlung()) {
 				if (*(int *) (e + 0xac) == *(int *) (m + 2)) {
 					break;
 				}

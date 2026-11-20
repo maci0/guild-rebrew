@@ -2101,7 +2101,7 @@ int __cdecl fcn_00407390(void)
 	return 0;
 }
 
-void __cdecl fcn_00407800(void* a, int b, void* c)
+void __cdecl ch_SetBodyAttachment(void* a, int b, void* c)
 {
 }
 
@@ -2110,12 +2110,12 @@ int __cdecl fcn_004079d0(void)
 	return 0;
 }
 
-int __cdecl fcn_004079f0(void)
+int __cdecl ch_ExecuteTurn90(void)
 {
 	return 0;
 }
 
-int __cdecl fcn_00407e30(void)
+int __cdecl ch_FindWalkableCell(void)
 {
 	return 0;
 }
@@ -2484,7 +2484,7 @@ int __cdecl evt_AllocateLocalVariable(char* g, int arg, int kind, char* name)
 	return 0;
 }
 
-void __cdecl fcn_00426680(int stream, void* out)
+void __cdecl evt_ReadToken(int stream, void* out)
 {
 }
 
@@ -2498,7 +2498,7 @@ void* __cdecl fcn_00426fd0(char* name)
 	return (void*) 0;
 }
 
-int __cdecl fcn_00427280(void)
+int __cdecl evt_ParseIfHead(void)
 {
 	return 0;
 }
@@ -2552,7 +2552,7 @@ int __cdecl evt_RunScriptLine(char* a, int b)
 	return 0;
 }
 
-int __cdecl fcn_00428800(int a)
+int __cdecl evt_EvaluateExpression(int a)
 {
 	return 0;
 }
@@ -2725,7 +2725,7 @@ int __cdecl fcn_0042ea10(int a, int b)
 	return 0;
 }
 
-int __cdecl fcn_0042f010(char* a, void* b)
+int __cdecl vfs_FindPathNode(char* a, void* b)
 {
 	return 0;
 }
@@ -2760,12 +2760,12 @@ int __cdecl fcn_00430e30(void* buf, int size, int count, char* stream)
 	return 0;
 }
 
-int __cdecl fcn_00433be0(char* a, char* b, char* c, int d, int e, char* f, char* g, int h)
+int __cdecl d3_CreateMorphAnimation(char* a, char* b, char* c, int d, int e, char* f, char* g, int h)
 {
 	return 0;
 }
 
-int __cdecl fcn_00434970(char* a, char* b, int c)
+int __cdecl d3_AttachAnimationToContext(char* a, char* b, int c)
 {
 	return 0;
 }
@@ -3314,7 +3314,7 @@ int __cdecl fcn_00473660(void)
 	return 0;
 }
 
-int __cdecl fcn_00474cf0(int a)
+int __cdecl d2_SelectControl(int a)
 {
 	return 0;
 }
@@ -3947,7 +3947,7 @@ int __cdecl fcn_004aa240(int a1, int a2, int a3, void* a, void* b)
 	return 0;
 }
 
-int __cdecl fcn_004aa550(int a1, int a2, int a3)
+int __cdecl ai_DispatchPrivilege(int a1, int a2, int a3)
 {
 	return 0;
 }
@@ -4082,7 +4082,7 @@ int __cdecl fcn_004bbd20(void)
 	return 0;
 }
 
-int __cdecl fcn_004bcda0(void* a, unsigned int b, unsigned int c, unsigned int d, unsigned int e)
+int __cdecl plt_SetPlantMapSlot(void* a, unsigned int b, unsigned int c, unsigned int d, unsigned int e)
 {
 	return 0;
 }
@@ -4136,7 +4136,7 @@ int __cdecl fcn_004c44b0(void)
 	return 0;
 }
 
-int __cdecl fcn_004c49f0(void* a)
+int __cdecl cm_EnqueueCommand(void* a)
 {
 	return 0;
 }
@@ -4300,7 +4300,7 @@ int __cdecl fcn_004dc6e0(void)
 	return 0;
 }
 
-int __cdecl fcn_004dcf50(void)
+int __cdecl cut_RunProzess(void)
 {
 	return 0;
 }
@@ -4330,7 +4330,7 @@ int __cdecl fcn_004e1960(void)
 	return 0;
 }
 
-int __cdecl fcn_004e1b00(void)
+int __cdecl cut_PlayHinrichtung(void)
 {
 	return 0;
 }
@@ -4350,7 +4350,7 @@ int __cdecl fcn_004e32c0(void)
 	return 0;
 }
 
-int __cdecl fcn_004e33a0(void)
+int __cdecl cut_RunAuction(void)
 {
 	return 0;
 }
@@ -4405,7 +4405,7 @@ int __cdecl fcn_004e50a0(int a)
 	return 0;
 }
 
-int __cdecl fcn_004e5a00(void* a)
+int __cdecl cut_ExecuteCutscene(void* a)
 {
 	return 0;
 }
@@ -4430,7 +4430,7 @@ int __cdecl fcn_004e6f80(void* a, void* b)
 	return 0;
 }
 
-int __cdecl fcn_004e7d40(int a, int b)
+int __cdecl amt_ApplyForOffice(int a, int b)
 {
 	return 0;
 }
@@ -4444,7 +4444,7 @@ int __cdecl fcn_004e89e0(unsigned char* a, int b)
 	return 0;
 }
 
-int __cdecl fcn_004e8c00(int k, int max, void* out)
+int __cdecl amt_CollectOfficeSlotsByGroup(int k, int max, void* out)
 {
 	return 0;
 }
@@ -4992,7 +4992,7 @@ int __cdecl fcn_00515c60(void* a, void* b)
 	return 0;
 }
 
-int __cdecl fcn_00515e10(void)
+int __cdecl d3snd_PlayNamedSceneSound(void)
 {
 	return 0;
 }
@@ -5032,7 +5032,7 @@ int __cdecl fcn_0051e070(void)
 	return 0;
 }
 
-int __cdecl fcn_0051e080(char* a, char* b, int c)
+int __cdecl ls_SaveGame(char* a, char* b, int c)
 {
 	return 0;
 }
@@ -5042,7 +5042,7 @@ int __cdecl fcn_0051e490(void* stream, int flags)
 	return 0;
 }
 
-int __cdecl fcn_00521920(char* s, int n)
+int __cdecl ls_LoadSavegame(char* s, int n)
 {
 	return 0;
 }
@@ -5086,7 +5086,7 @@ int __cdecl fcn_0052a960(char* a)
 	return 0;
 }
 
-int __cdecl fcn_0052ae80(void)
+int __cdecl d3_UpdateCameraAtScreenEdges(void)
 {
 	return 0;
 }
@@ -5096,7 +5096,7 @@ int __cdecl fcn_0052cbb0(unsigned char* a)
 	return 0;
 }
 
-int __cdecl fcn_0052d820(void)
+int __cdecl d3_AnimateCameraToStoredTransform(void)
 {
 	return 0;
 }
@@ -5180,7 +5180,7 @@ int __cdecl fcn_00535550(void)
 
 
 
-void __cdecl fcn_005356e0(void)
+void __cdecl main_PumpWindowMessages(void)
 {
 }
 
@@ -5216,7 +5216,7 @@ int __cdecl fcn_00538700(void)
 	return 0;
 }
 
-int __cdecl fcn_00539380(void)
+int __cdecl d2_ChoosePlayerCount(void)
 {
 	return 0;
 }
@@ -5231,7 +5231,7 @@ int __cdecl fcn_00539600(void)
 	return 0;
 }
 
-int __cdecl fcn_00539930(int a)
+int __cdecl d2_ShowServerBrowser(int a)
 {
 	return 0;
 }
@@ -5246,7 +5246,7 @@ int __cdecl fcn_0053e450(int a)
 	return 0;
 }
 
-int __cdecl fcn_0053e660(int a, int b, int c, int d, int e)
+int __cdecl d3_CreateMapTableTowerMarker(int a, int b, int c, int d, int e)
 {
 	return 0;
 }
@@ -5294,7 +5294,7 @@ void __cdecl fcn_00545780(char* a)
 {
 }
 
-int __cdecl fcn_005458b0(void)
+int __cdecl d2_CreateEventBar(void)
 {
 	return 0;
 }
@@ -5309,7 +5309,7 @@ int __cdecl fcn_00546480(char* entity)
 	return 0;
 }
 
-int __cdecl fcn_00546850(void* a)
+int __cdecl he_CreateEventGfxInfo(void* a)
 {
 	return 0;
 }
@@ -5319,12 +5319,12 @@ int __cdecl fcn_00546ed0(void)
 	return 0;
 }
 
-int __cdecl fcn_00559aa0(void* a)
+int __cdecl gm_SimulatePoliticians(void* a)
 {
 	return 0;
 }
 
-int __cdecl fcn_0055b3e0(void)
+int __cdecl he_RegisterEventHandlers(void)
 {
 	return 0;
 }
@@ -5334,7 +5334,7 @@ int __cdecl fcn_0055bc30(void)
 	return 0;
 }
 
-int __cdecl fcn_00570960(void)
+int __cdecl he_RegisterActionHandlers(void)
 {
 	return 0;
 }
@@ -5399,7 +5399,7 @@ int __cdecl d3_CollectObjectCallback(void)
 	return 0;
 }
 
-int __cdecl fcn_005744c0(char* a)
+int __cdecl gm_HandleHausbau(char* a)
 {
 	return 0;
 }
@@ -5464,7 +5464,7 @@ int __cdecl fcn_005784d0(void)
 	return 0;
 }
 
-int __cdecl fcn_00578a10(void)
+int __cdecl he_RunHauchDesVerfalls(void)
 {
 	return 0;
 }
@@ -5499,7 +5499,7 @@ int __cdecl fcn_005797a0(void)
 	return 0;
 }
 
-int __cdecl fcn_00579de0(void)
+int __cdecl he_RunGrabpflege(void)
 {
 	return 0;
 }
@@ -5626,7 +5626,7 @@ int __cdecl fcn_0057f3b0(void)
 	return 0;
 }
 
-int __cdecl fcn_00580560(void)
+int __cdecl d2_OpenTutorialProgress(void)
 {
 	return 0;
 }
@@ -5637,7 +5637,7 @@ int __cdecl fcn_00580560(void)
 
 
 
-int __cdecl fcn_005848b0(char* a)
+int __cdecl d2_RunAlchemyDialog(char* a)
 {
 	return 0;
 }
@@ -5647,7 +5647,7 @@ int __cdecl fcn_00585910(char* a)
 	return 0;
 }
 
-int __cdecl fcn_00589930(int a)
+int __cdecl d2_ShowCabinetSpyDialog(int a)
 {
 	return 0;
 }
@@ -5657,7 +5657,7 @@ int __cdecl fcn_00589d00(int a)
 	return 0;
 }
 
-int __cdecl fcn_0058a250(int a)
+int __cdecl d2_RunSpyCabinetDialog(int a)
 {
 	return 0;
 }
@@ -5697,12 +5697,12 @@ int __cdecl fcn_0058dbe0(int a)
 	return 0;
 }
 
-int __cdecl fcn_0058e220(char* a, char* b)
+int __cdecl d2_RunSeance(char* a, char* b)
 {
 	return 0;
 }
 
-int __cdecl fcn_0058f310(int a)
+int __cdecl d2_ShowHauntingDialog(int a)
 {
 	return 0;
 }
@@ -5772,17 +5772,17 @@ int __cdecl fcn_0059a340(void)
 	return 0;
 }
 
-int __cdecl fcn_0059aa10(int a, int b)
+int __cdecl d2_RunTechTreeDialog(int a, int b)
 {
 	return 0;
 }
 
-int __cdecl fcn_0059b260(int a)
+int __cdecl d2_ShowProductionDialog(int a)
 {
 	return 0;
 }
 
-int __cdecl fcn_0059ba40(int a)
+int __cdecl d2_RunProductionTradeDialog(int a)
 {
 	return 0;
 }
@@ -5797,7 +5797,7 @@ int __cdecl fcn_0059d020(char* a)
 	return 0;
 }
 
-int __cdecl fcn_0059d060(void)
+int __cdecl d2_RunTaschendiebstahlDialog(void)
 {
 	return 0;
 }
@@ -5807,12 +5807,12 @@ int __cdecl fcn_0059d380(void)
 	return 0;
 }
 
-int __cdecl fcn_0059d6b0(void)
+int __cdecl d2_ShowBriberyDialog(void)
 {
 	return 0;
 }
 
-int __cdecl fcn_0059e740(char* a, int b)
+int __cdecl d2_ShowHandelSearch(char* a, int b)
 {
 	return 0;
 }
@@ -5837,12 +5837,12 @@ int __cdecl fcn_005a0630(char* a)
 	return 0;
 }
 
-int __cdecl fcn_005a06a0(char* a)
+int __cdecl d2_ShowWeinkellerDialog(char* a)
 {
 	return 0;
 }
 
-int __cdecl fcn_005a1e40(char* a, char* b)
+int __cdecl d2_RunStammtischDialog(char* a, char* b)
 {
 	return 0;
 }
@@ -5857,7 +5857,7 @@ int __cdecl fcn_005a2580(char* a, char* b, char* c)
 	return 0;
 }
 
-int __cdecl fcn_005a2970(char* a, char* b)
+int __cdecl d2_ShowDunkleEcke(char* a, char* b)
 {
 	return 0;
 }
@@ -5882,7 +5882,7 @@ int __cdecl fcn_005a86a0(int a)
 	return 0;
 }
 
-int __cdecl fcn_005a8e20(void)
+int __cdecl d2_OpenRathausGebInfo(void)
 {
 	return 0;
 }
@@ -5892,7 +5892,7 @@ int __cdecl fcn_005a92c0(int a)
 	return 0;
 }
 
-int __cdecl fcn_005a96a0(void* a, int b)
+int __cdecl d2_RunAmtsbewerbungDialog(void* a, int b)
 {
 	return 0;
 }
@@ -5932,7 +5932,7 @@ int __cdecl fcn_005ab810(char* a, int b)
 	return 0;
 }
 
-int __cdecl fcn_005abd60(void)
+int __cdecl d2_ShowKircheTop5(void)
 {
 	return 0;
 }
@@ -5942,7 +5942,7 @@ int __cdecl fcn_005ac2d0(char* a)
 	return 0;
 }
 
-int __cdecl fcn_005ad640(void)
+int __cdecl d2_ShowThievesGuildSpyDialog(void)
 {
 	return 0;
 }
@@ -5962,7 +5962,7 @@ int __cdecl fcn_005ae000(unsigned char* a)
 	return 0;
 }
 
-int __cdecl fcn_005ae6a0(void)
+int __cdecl d2_RunEntfuehrungDialog(void)
 {
 	return 0;
 }
@@ -6018,12 +6018,12 @@ char* __cdecl fcn_005bdc30(int a, int* b, char* c, int d, int e)
 	return (void*) 0;
 }
 
-int __cdecl fcn_005be140(char* a, int b)
+int __cdecl d2_ShowLagerOptions(char* a, int b)
 {
 	return 0;
 }
 
-int __cdecl fcn_005bebe0(int a, int b, int c)
+int __cdecl d2_RunTalenteDialog(int a, int b, int c)
 {
 	return 0;
 }
@@ -6053,17 +6053,17 @@ int __cdecl fcn_005c1110(void)
 	return 0;
 }
 
-int __cdecl fcn_005c1490(void)
+int __cdecl d2_ShowBardPoemDialog(void)
 {
 	return 0;
 }
 
-int __cdecl fcn_005c18e0(int a, int b)
+int __cdecl d2_ShowFestInvitation(int a, int b)
 {
 	return 0;
 }
 
-int __cdecl fcn_005c2580(unsigned char* a)
+int __cdecl d2_ShowRenovationDialog(unsigned char* a)
 {
 	return 0;
 }
@@ -6108,7 +6108,7 @@ int __cdecl fcn_005c6310(void)
 	return 0;
 }
 
-int __cdecl fcn_005c6540(char* a)
+int __cdecl d2_ConfirmUseObjekt(char* a)
 {
 	return 0;
 }
@@ -6158,7 +6158,7 @@ int __cdecl fcn_005cc240(int a, int b, int c)
 	return 0;
 }
 
-int __cdecl fcn_005ccca0(void* a, int b, int c, int d)
+int __cdecl d2_ShowTabbedSelectionDialog(void* a, int b, int c, int d)
 {
 	return 0;
 }
@@ -6193,7 +6193,7 @@ int __cdecl fcn_005cea10(unsigned char* a)
 	return 0;
 }
 
-int __cdecl fcn_005ceaa0(unsigned char* a)
+int __cdecl d2_ShowMeisterbriefDialog(unsigned char* a)
 {
 	return 0;
 }
@@ -6248,7 +6248,7 @@ int __cdecl fcn_005d6c50(char* a, int* b)
 	return 0;
 }
 
-int __cdecl fcn_005d6ea0(unsigned short* a)
+int __cdecl d2_ShowBecircenDialog(unsigned short* a)
 {
 	return 0;
 }
@@ -6303,7 +6303,7 @@ int __cdecl fcn_005e12d0(void)
 	return 0;
 }
 
-int __cdecl fcn_005e3d20(void)
+int __cdecl ls_CaptureSavePreview(void)
 {
 	return 0;
 }
@@ -6313,7 +6313,7 @@ int __cdecl fcn_005e5990(void* a)
 	return 0;
 }
 
-int __cdecl fcn_005e5ea0(int a)
+int __cdecl d2_ShowBlutracheDialog(int a)
 {
 	return 0;
 }

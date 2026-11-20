@@ -15,7 +15,7 @@ int __cdecl fcn_0050cf50(unsigned char *, int);
 int __cdecl fcn_0050d200(short *, int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_005463a0(int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
 
 /* ADDRESS: GOLDTL 0x00498670 */
@@ -251,7 +251,7 @@ use_slot:
 		p = (unsigned char *) gm_StartFilteredEntitySearch(1, 5, t);
 		while (c1.kind == 0 && p != 0) {
 			if ((int) lpGebaeudePROT[(int) *p * 0x24d + 0x247] <= limit && (p[0x5a] & 2) != 0) {
-				e = fcn_005463a0(1, 0, 0x1b);
+				e = he_StartHandlungSearch(1, 0, 0x1b);
 				while (e != 0) {
 					if (*(int *) (e + 0xac) == *(int *) (p + 1)) {
 						type = *(int *) (e + 0xb0);

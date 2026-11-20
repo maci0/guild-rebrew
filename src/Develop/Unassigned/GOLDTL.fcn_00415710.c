@@ -35,7 +35,7 @@ typedef struct {
    record (stride 0x28: x, y, z, u, v, then the two projected end points) and
    rebuilds the screen positions. Out-of-range records are logged and reset. */
 /* ADDRESS: GOLDTL 0x00415710 */
-void __cdecl fcn_00415710(Rain415710* self, float dt)
+void __cdecl d3_UpdateRain(Rain415710* self, float dt)
 {
 	char* cam;
 	float* m;

@@ -3,7 +3,7 @@
 
 int __cdecl cm_GetBuildingStatCount(char*);
 
-int __cdecl fcn_004f13a0(char* building)
+int __cdecl cm_CountOccupiedBuildingStats(char* building)
 {
 	int n;
 	int c;

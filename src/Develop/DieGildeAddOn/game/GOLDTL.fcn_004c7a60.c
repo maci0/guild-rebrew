@@ -23,7 +23,7 @@ int __cdecl cm_ResolveSpecialEntityId(int a1, int value)
 }
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-int __cdecl fcn_00504130(void* entity);
+int __cdecl gm_FreeGebaeude(void* entity);
 void __cdecl gm_KillSpieler(int entity_id, int flag);
 
 /* ADDRESS: GOLDTL 0x004c7a60 */
@@ -36,7 +36,7 @@ int __cdecl fcn_004c7a60(void* e, char* flag)
 	if (!gm_ResolveEntityById(&e, &existing, &stat, (int) id))
 		return 1;
 	if (e != 0) {
-		if (fcn_00504130(e))
+		if (gm_FreeGebaeude(e))
 			return 1;
 	}
 	else {

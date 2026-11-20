@@ -7,7 +7,7 @@ void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLD 0x00413b30 */
-int* __cdecl fcn_00413b30(int count)
+int* __cdecl d3_CreateRain(int count)
 {
 	int* info;
 	float* drop;

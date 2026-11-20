@@ -20,7 +20,7 @@ extern unsigned char* lpGebaeudePROT;
 int __cdecl fcn_00525fb0(unsigned char*);
 void __cdecl fcn_0052a0c0(unsigned char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_005ad640(void);
+void __cdecl d2_ShowThievesGuildSpyDialog(void);
 void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
@@ -46,7 +46,7 @@ void __cdecl fcn_005ad950(unsigned char* e)
 				req.d = 1;
 			}
 			io_FormatTextBuffer(text, 0x19f6);
-			fcn_005bdc30(1, &req, text, fcn_005ad640, 0);
+			fcn_005bdc30(1, &req, text, d2_ShowThievesGuildSpyDialog, 0);
 			fcn_0052a2d0();
 			sv_ClearObjectSelection();
 		}

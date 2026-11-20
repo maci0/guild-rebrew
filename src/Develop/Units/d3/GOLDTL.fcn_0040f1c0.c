@@ -47,7 +47,7 @@ char __cdecl d3_AttachMatchingAnimation(char* a0, char* a1)
 		options.mode = (unsigned char) *(int*) (motion + 0xc0);
 		options.reverse = 0;
 		options.loop = 1;
-		anim = fcn_00434970(*(char**) (object + 0x1cc), name, options);
+		anim = d3_AttachAnimationToContext(*(char**) (object + 0x1cc), name, options);
 		if (anim != 0 && *(int*) (motion + 0xc4) != 0) {
 			frame = rand() % (*(int*) (*(int*) (anim + 0x68) + 0x148) - 1);
 			*(int*) anim = frame;

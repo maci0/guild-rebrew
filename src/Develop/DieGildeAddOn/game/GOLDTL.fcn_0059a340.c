@@ -40,7 +40,7 @@ extern int g_7e2708;
 int __cdecl fcn_00500e20(char*);
 void __cdecl fcn_00516f60(void);
 void __cdecl fcn_0043c2c0(int* a0);
-void __cdecl fcn_005c80f0(void);
+void __cdecl d2_ChooseWappen(void);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl fcn_0052cf20(int a0);
@@ -49,18 +49,18 @@ void __cdecl fcn_0042df30(int a1, int a2);
 int __cdecl fcn_005373e0(int a1, int a2);
 void __cdecl lc_PlayerInJail(void);
 void __cdecl fcn_0052c9b0(void);
-void* __cdecl fcn_00426cc0(int a1);
-int __cdecl fcn_00428720(int a1);
+void* __cdecl evt_FindScriptById(int a1);
+int __cdecl evt_RequestScriptExit(int a1);
 void __cdecl fcn_0052db70(int a0);
-void __cdecl fcn_0059a2a0(void);
+void __cdecl d3_HandleCameraLevelKey(void);
 void __cdecl fcn_0052cbb0(int a0);
-void __cdecl fcn_00599350(void);
+void __cdecl d2_ShowBuildingMenu(void);
 int __cdecl fcn_00506380(int a, int b, int c, int d);
 int __cdecl gm_CheckEntityType(void* a0);
-int __cdecl fcn_0057eba0(int a, int b, int c, int d);
+int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d);
 void __cdecl fcn_005a80d0(int a0);
 int __cdecl fcn_00505340(void* a0);
-void __cdecl fcn_005a76b0(int a, int b);
+void __cdecl gm_RunGebaeudeVisit(int a, int b);
 void __cdecl fcn_005a3b30(int a0);
 void __cdecl fcn_004c3a10(void);
 void __cdecl fcn_00475220(char* a);
@@ -109,7 +109,7 @@ void __cdecl fcn_0059a340(void)
 				&& *(unsigned short*) (v12 - 2) != g_774970
 				&& (c = *v12, c == 6 || c == 7 || c == 5)
 				&& *(unsigned int*) (g_7f4ca0 + g_774970 * 0x21c + 0x4) < *(unsigned int*) (v12 + 2)) {
-				fcn_005c80f0();
+				d2_ChooseWappen();
 				v13 = g_774970;
 				break;
 			}
@@ -161,9 +161,9 @@ void __cdecl fcn_0059a340(void)
 				v8 = (int) gm_StartFilteredEntitySearch(1, 6);
 				while (v8) {
 					if (*(int*) (v8 + 0x95) != -1) {
-						v9 = (int) fcn_00426cc0(*(int*) (v8 + 0x95));
+						v9 = (int) evt_FindScriptById(*(int*) (v8 + 0x95));
 						if (v9)
-							fcn_00428720(v9);
+							evt_RequestScriptExit(v9);
 						*(int*) (v8 + 0x95) = -1;
 					}
 					v8 = (int) gm_FindNextFilteredEntity();
@@ -189,9 +189,9 @@ void __cdecl fcn_0059a340(void)
 				v8 = (int) gm_StartFilteredEntitySearch(1, 6);
 				while (v8) {
 					if (*(int*) (v8 + 0x95) != -1) {
-						v9 = (int) fcn_00426cc0(*(int*) (v8 + 0x95));
+						v9 = (int) evt_FindScriptById(*(int*) (v8 + 0x95));
 						if (v9)
-							fcn_00428720(v9);
+							evt_RequestScriptExit(v9);
 						*(int*) (v8 + 0x95) = -1;
 					}
 					v8 = (int) gm_FindNextFilteredEntity();
@@ -199,11 +199,11 @@ void __cdecl fcn_0059a340(void)
 				state = 3;
 			}
 		}
-		fcn_0059a2a0();
+		d3_HandleCameraLevelKey();
 		if (g_14ce8d4 && !g_14ce8e4 && g_7746b0 && !d3_ActiveCameraAnimation)
 			fcn_0052cbb0(g_7746b0);
 		if (g_100f1dc != -1 && d2_CurrentElementId == g_6a25dc)
-			fcn_00599350();
+			d2_ShowBuildingMenu();
 		if (g_7e2aa0) {
 			v10 = fcn_00506380(g_774970, g_7e2aa0, 0, 0);
 			v9 = g_7e2aa0;
@@ -213,12 +213,12 @@ void __cdecl fcn_0059a340(void)
 				&& (v10 & 1)
 				&& !(*(unsigned char*) (v9 + 0x5a) & 1)) {
 				v11 = gm_CheckEntityType((void*) v9);
-				if (v11 && fcn_0057eba0(0x1b, v9, 0, 0) == 1)
+				if (v11 && d2_DispatchTutorialEvent(0x1b, v9, 0, 0) == 1)
 					fcn_005a80d0(v9);
 				else if (!fcn_00505340((void*) v9)
-					&& fcn_0057eba0(0x19, v9, 0,
+					&& d2_DispatchTutorialEvent(0x19, v9, 0,
 						*(unsigned short*) (v9 + 0x29)) == 1)
-					fcn_005a76b0(v9,
+					gm_RunGebaeudeVisit(v9,
 						*(unsigned short*) (v9 + 0x29));
 			}
 		}
@@ -239,7 +239,7 @@ void __cdecl fcn_0059a340(void)
 						goto label_59a83a;
 					}
 					if (!fcn_00505340((void*) v9)) {
-						fcn_005a76b0(v9,
+						gm_RunGebaeudeVisit(v9,
 							*(unsigned short*) (v9 + 0x29));
 						goto label_59a83a;
 					}

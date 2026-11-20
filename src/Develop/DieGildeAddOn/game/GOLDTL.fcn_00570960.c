@@ -4,10 +4,10 @@ extern char s_6a6ed0[];
 
 unsigned int __cdecl he_RegisterHandler(int, unsigned int, unsigned int);
 unsigned int __cdecl fcn_00530ab0(unsigned int, char *, unsigned int, unsigned int, unsigned int);
-void __cdecl fcn_00508cf0(unsigned int, unsigned int);
+void __cdecl gm_GenerateShuffledIndices(unsigned int, unsigned int);
 
 /* ADDRESS: GOLDTL 0x00570960 */
-unsigned int __cdecl fcn_00570960(void)
+unsigned int __cdecl he_RegisterActionHandlers(void)
 {
 	if (he_RegisterHandler(2, 0x55c1f0, 0x55c270)) {
 		return 1;
@@ -188,6 +188,6 @@ unsigned int __cdecl fcn_00570960(void)
 	if (he_RegisterHandler(0xa6, 0x570550, 0x570870)) {
 		return 1;
 	}
-	fcn_00508cf0(0x1a, 0x77e020);
+	gm_GenerateShuffledIndices(0x1a, 0x77e020);
 	return 0;
 }

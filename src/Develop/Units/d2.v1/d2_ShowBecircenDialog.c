@@ -23,7 +23,7 @@ void __cdecl fcn_004c6ae0(int a, int b);
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005d6ea0 */
-int __cdecl fcn_005d6ea0(int entity)
+int __cdecl d2_ShowBecircenDialog(int entity)
 {
     int dlg;
     int wnd;

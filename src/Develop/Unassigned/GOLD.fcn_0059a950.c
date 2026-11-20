@@ -16,10 +16,10 @@ extern int g_14a7e80;
 extern int g_14a554c;
 extern int g_14a7860;
 
-char* __cdecl fcn_005338d0(char*, int, int);
+char* __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_005a3a40(int, int);
 void __cdecl fcn_005c1110(void);
-void __cdecl fcn_005c1490(void);
+void __cdecl d2_ShowBardPoemDialog(void);
 
 void __cdecl fcn_0059a950(int arg)
 {
@@ -31,19 +31,19 @@ void __cdecl fcn_0059a950(int arg)
 	a = 0;
 	c = 0;
 	b = 0;
-	fcn_005338d0("ob_MARKTSTAND_TISCHLER_SCHMIEDE", g_14a7e50, 0x10);
-	fcn_005338d0("ob_MARKTSTAND_STEINMETZ_WIRT", g_14a7e58, 0x10);
-	fcn_005338d0("ob_MARKTSTAND_PARFUM_KRAEUTER", g_14a7e60, 0x10);
-	fcn_005338d0("ob_MARKTSTAND_ROHSTOFFE", g_14a7e68, 0x10);
-	fcn_005338d0("ob_MARKTSTAND_IMPORTEUR", g_14a7e70, 0x10);
-	fcn_005338d0("ob_MARKTSTAND_KIRCHE", g_14a7e78, 0x10);
-	fcn_005338d0("ob_MARKTSTAND_OKKULT", g_14a9098, 0x10);
-	fcn_005338d0("ob_SCHWARZES_BRETT", g_14a7e80, 0x10);
-	fcn_005338d0("ob_TRIBUENE", g_14a554c, 0x10);
+	RegisterStatusText("ob_MARKTSTAND_TISCHLER_SCHMIEDE", g_14a7e50, 0x10);
+	RegisterStatusText("ob_MARKTSTAND_STEINMETZ_WIRT", g_14a7e58, 0x10);
+	RegisterStatusText("ob_MARKTSTAND_PARFUM_KRAEUTER", g_14a7e60, 0x10);
+	RegisterStatusText("ob_MARKTSTAND_ROHSTOFFE", g_14a7e68, 0x10);
+	RegisterStatusText("ob_MARKTSTAND_IMPORTEUR", g_14a7e70, 0x10);
+	RegisterStatusText("ob_MARKTSTAND_KIRCHE", g_14a7e78, 0x10);
+	RegisterStatusText("ob_MARKTSTAND_OKKULT", g_14a9098, 0x10);
+	RegisterStatusText("ob_SCHWARZES_BRETT", g_14a7e80, 0x10);
+	RegisterStatusText("ob_TRIBUENE", g_14a554c, 0x10);
 	if (strcmp(((char(*)[0x2f4])g_868060)[g_773d75], "Nuernberg") == 0) {
-		a = fcn_005338d0("contact_MARKTFLECKEN_01", g_14a7860, 0x10);
-		b = fcn_005338d0("contact_MARKTFLECKEN_02", g_14a7860, 0x10);
-		c = fcn_005338d0("contact_MARKTFLECKEN_03", g_14a7860, 0x10);
+		a = RegisterStatusText("contact_MARKTFLECKEN_01", g_14a7860, 0x10);
+		b = RegisterStatusText("contact_MARKTFLECKEN_02", g_14a7860, 0x10);
+		c = RegisterStatusText("contact_MARKTFLECKEN_03", g_14a7860, 0x10);
 	}
 	if (((char*)g_7746a0) == 0) {
 		return;
@@ -73,7 +73,7 @@ void __cdecl fcn_0059a950(int arg)
 		fcn_005c1110();
 	}
 	else if (strcmp(((char*)g_7746a0), "ob_TRIBUENE") == 0) {
-		fcn_005c1490();
+		d2_ShowBardPoemDialog();
 	}
 	else if (((char*)g_7746a0) == a || ((char*)g_7746a0) == b || ((char*)g_7746a0) == c) {
 		q = *(int*) (*(char**) (((char*)g_7746a0) + 0x1f8) + 0x200);

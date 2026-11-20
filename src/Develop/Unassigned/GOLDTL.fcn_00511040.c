@@ -5,7 +5,7 @@ extern unsigned char* lpGebaeudePROT;
 
 #include <string.h>
 
-int __cdecl fcn_00511040(int idx, char* out)
+int __cdecl init_GetGebaeudeSceneName(int idx, char* out)
 {
 	unsigned char* t;
 

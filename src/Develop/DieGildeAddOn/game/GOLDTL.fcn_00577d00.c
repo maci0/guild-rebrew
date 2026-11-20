@@ -5,7 +5,7 @@
 #include <math.h>
 #pragma intrinsic(sqrt)
 
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 
 
@@ -35,8 +35,8 @@ char* __cdecl fcn_00577d00(char* who, char* self, int skip)
 	p[1] = t;
 	t = *(float*) (m + 0x54);
 	p[2] = t;
-	fcn_005463a0(1, 0, 0x18);
-	e = fcn_005463a0(1, 0, 0x18);
+	he_StartHandlungSearch(1, 0, 0x18);
+	e = he_StartHandlungSearch(1, 0, 0x18);
 	while (e != 0) {
 		if (*(int*) (e + 0x70) != -1 && *(int*) (e + 0x70) != -2 && skip != *(int*) (e + 4) && *(int*) (e + 0xc4) == *(int*) (who + 4)) {
 			gm_ResolveEntityById((void**) (&r), 0, 0, *(int*) (e + 0xb4));

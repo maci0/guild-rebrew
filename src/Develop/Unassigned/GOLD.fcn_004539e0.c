@@ -1,6 +1,6 @@
 #include <math.h>
 
-void __cdecl fcn_004518a0(float*);
+void __cdecl d3_NormalizeVector(float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 extern char g_6628f8[];
 
@@ -18,8 +18,8 @@ float __cdecl fcn_004539e0(const float* a, const float* b)
     first[2] = a[2];
     second[0] = b[0];
     second[2] = b[2];
-    fcn_004518a0(first);
-    fcn_004518a0(second);
+    d3_NormalizeVector(first);
+    d3_NormalizeVector(second);
     if (CompareVector3WithinTolerance(first, second, 1.0e-7f))
         return 0.0f;
     opposite[0] = -second[0];

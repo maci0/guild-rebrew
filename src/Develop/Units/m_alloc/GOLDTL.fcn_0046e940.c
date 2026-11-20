@@ -83,7 +83,7 @@ extern int g_67d3a0;
 
 int __cdecl fcn_004770a0(int* p, int kind);
 void __cdecl fcn_00476970(int h);
-int __cdecl fcn_00469890(void);
+int __cdecl d2_AllocateElement(void);
 int __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_0046f740(int x, int y, int id, int layer);
 
@@ -168,7 +168,7 @@ found:
 			return 0;
 		}
 	}
-	ei = fcn_00469890();
+	ei = d2_AllocateElement();
 	((Ent*) g_1015ea0)[ei].x20 = 0x40;
 	((Ent*) g_1015ea0)[ei].x10 = rec->x4;
 	((Ent*) g_1015ea0)[ei].x14 = rec->x8;

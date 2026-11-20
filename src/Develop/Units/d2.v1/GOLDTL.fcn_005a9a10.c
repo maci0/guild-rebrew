@@ -35,13 +35,13 @@ extern int g_14ce8e0;
 extern char s_6aaebc[];
 
 int __cdecl fcn_00526120(int, int);
-int __cdecl fcn_005a96a0(ENTITY_RECORD*, int);
+int __cdecl d2_RunAmtsbewerbungDialog(ENTITY_RECORD*, int);
 void __cdecl fcn_00532ef0(void);
-int __cdecl fcn_004e8ee0(ENTITY_RECORD*, int, Ent*, int*);
+int __cdecl amt_RankAvailableOffices(ENTITY_RECORD*, int, Ent*, int*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_004e8d10(ENTITY_RECORD*, int, Ent*);
+int __cdecl amt_SelectOfficeCandidates(ENTITY_RECORD*, int, Ent*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -49,7 +49,7 @@ int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005a9a10(void)
+void __cdecl d2_ShowOfficeApplicationDialog(void)
 {
 	int flag;
 	int cnt;
@@ -71,11 +71,11 @@ void __cdecl fcn_005a9a10(void)
 		return;
 	}
 	if (p->unk_165[3] != 0) {
-		fcn_005a96a0(p, p->unk_165[3]);
+		d2_RunAmtsbewerbungDialog(p, p->unk_165[3]);
 		fcn_00532ef0();
 		return;
 	}
-	if (fcn_004e8ee0(p, 6, list, &cnt) == 0) {
+	if (amt_RankAvailableOffices(p, 6, list, &cnt) == 0) {
 		if (cnt == 0) {
 			fcn_00526120(g_14abb28, 0);
 		}
@@ -89,7 +89,7 @@ void __cdecl fcn_005a9a10(void)
 	d2_SetOverlayAnimation(0, 0);
 	g_100f1dc = prev;
 	do {
-		n = fcn_004e8d10(p, 6, list);
+		n = amt_SelectOfficeCandidates(p, 6, list);
 		if (n != prev) {
 			flag = 1;
 		}
@@ -118,13 +118,13 @@ void __cdecl fcn_005a9a10(void)
 				}
 			}
 			if (sel > -1 && sel < n) {
-				if (fcn_005a96a0(p, list[sel].x0) == 1) {
+				if (d2_RunAmtsbewerbungDialog(p, list[sel].x0) == 1) {
 					fcn_00526120(g_14abb54, 0);
 					g_774654 = 1;
 				}
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005a9a10, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_ShowOfficeApplicationDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	fcn_00532ef0();
 }

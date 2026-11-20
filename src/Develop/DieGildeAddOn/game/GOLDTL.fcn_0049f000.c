@@ -6,7 +6,7 @@ extern char g_773d75;
 
 int __cdecl gm_GetEntityTableEntry(int);
 int __cdecl fcn_0050d320(int, signed char);
-int __cdecl fcn_005463a0(int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
 int __cdecl gm_GetOppositeStatIndex(int);
 int __cdecl fcn_00507910(int);
@@ -45,7 +45,7 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 	if (v8 / 0x20 < 5000) {
 		return 0;
 	}
-	v9 = fcn_005463a0(1, 0, 0x24);
+	v9 = he_StartHandlungSearch(1, 0, 0x24);
 	while (v9 != 0) {
 		if (*(int*) (v9 + 0xac) == *(int*) (a1 + 4)) {
 			return 0;

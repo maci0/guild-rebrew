@@ -2,7 +2,7 @@
 
 
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004e8af0(char, char*);
+void __cdecl amt_FindOfficeSlotByKey(char, char*);
 int __cdecl fcn_004e99c0(int);
 
 void __cdecl fcn_00511b70(int n, int* dst, int* src)
@@ -29,7 +29,7 @@ void __cdecl fcn_00511b70(int n, int* dst, int* src)
 	t[14] = 0x2d;
 	j = gm_RandomMod(15);
 	for (i = 0; i < n; i++) {
-		fcn_004e8af0((char) src[i], buf);
+		amt_FindOfficeSlotByKey((char) src[i], buf);
 		dst[i] = t[j] - fcn_004e99c0((unsigned char) buf[8]) / 2;
 		j = (j + 1) % 15;
 	}

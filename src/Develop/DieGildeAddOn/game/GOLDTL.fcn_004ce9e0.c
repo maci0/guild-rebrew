@@ -5,7 +5,7 @@ extern char g_68b7ac[];
 int* __cdecl fcn_004ce610(char*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl fcn_0065f220(char*, char*);
-void __cdecl fcn_00407800(char*, int, char*);
+void __cdecl ch_SetBodyAttachment(char*, int, char*);
 
 void __cdecl fcn_004ce9e0(char* e)
 {
@@ -25,10 +25,10 @@ void __cdecl fcn_004ce9e0(char* e)
 		    fcn_0065f220(*(char**) (*(char**) (e + 0x184) + 0x64), buf) == 0)
 			return;
 		if (*(char**) (*(char**) (e + 0x184) + 0x64) != 0)
-			fcn_00407800(*(char**) (e + 0x184), 2, 0);
-		fcn_00407800(*(char**) (e + 0x184), 2, buf);
+			ch_SetBodyAttachment(*(char**) (e + 0x184), 2, 0);
+		ch_SetBodyAttachment(*(char**) (e + 0x184), 2, buf);
 		return;
 	}
 	if (*(char**) (e + 0x184) != 0 && *(char**) (*(char**) (e + 0x184) + 0x64) != 0)
-		fcn_00407800(*(char**) (e + 0x184), 2, 0);
+		ch_SetBodyAttachment(*(char**) (e + 0x184), 2, 0);
 }

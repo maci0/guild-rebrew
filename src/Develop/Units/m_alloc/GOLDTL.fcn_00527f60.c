@@ -60,7 +60,7 @@ extern int d3_ActiveCamera;
 
 void __cdecl fcn_0047a040(int, int, int, int);
 int __cdecl fcn_0047cb60(int, int, int, int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 int __cdecl fcn_00469c30(int, int, int);
@@ -133,43 +133,43 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 
 	if (a0 & 1) {
 		if (g_6a2578 != -1) {
-			fcn_0046b2b0(g_6a2578);
+			d2_DestroyElement(g_6a2578);
 			g_6a2578 = -1;
 		}
 		if (g_6a257c != -1) {
-			fcn_0046b2b0(g_6a257c);
+			d2_DestroyElement(g_6a257c);
 			g_6a257c = -1;
 		}
 		if (g_6a2580 != -1) {
-			fcn_0046b2b0(g_6a2580);
+			d2_DestroyElement(g_6a2580);
 			g_6a2580 = -1;
 		}
 		if (g_6a25a0 != -1) {
-			fcn_0046b2b0(g_6a25a0);
+			d2_DestroyElement(g_6a25a0);
 			g_6a25a0 = -1;
 		}
 		if (g_6a25a4 != -1) {
-			fcn_0046b2b0(g_6a25a4);
+			d2_DestroyElement(g_6a25a4);
 			g_6a25a4 = -1;
 		}
 		if (g_6a2584 != -1) {
-			fcn_0046b2b0(g_6a2584);
+			d2_DestroyElement(g_6a2584);
 			g_6a2584 = -1;
 		}
 		if (g_6a2588 != -1) {
-			fcn_0046b2b0(g_6a2588);
+			d2_DestroyElement(g_6a2588);
 			g_6a2588 = -1;
 		}
 		if (g_6a258c != -1) {
-			fcn_0046b2b0(g_6a258c);
+			d2_DestroyElement(g_6a258c);
 			g_6a258c = -1;
 		}
 		if (g_6a2590 != -1) {
-			fcn_0046b2b0(g_6a2590);
+			d2_DestroyElement(g_6a2590);
 			g_6a2590 = -1;
 		}
 		if (g_6a2594 != -1) {
-			fcn_0046b2b0(g_6a2594);
+			d2_DestroyElement(g_6a2594);
 			g_6a2594 = -1;
 		}
 
@@ -339,7 +339,7 @@ hidden:
 
 	if (g_7746c4 != 0 || g_7746c8 != 0) {
 		if (g_6a2580 != -1) {
-			fcn_0046b2b0(g_6a2580);
+			d2_DestroyElement(g_6a2580);
 			g_6a2580 = -1;
 		}
 	} else {
@@ -402,7 +402,7 @@ hidden:
 	if (g_6a2578 != -1) {
 		if (EFIELD(g_6a2578, 8)
 		    != *(int*) (g_slot_table + 0x54 + g_774970 * 0x21c)) {
-			fcn_0046b2b0(g_6a2578);
+			d2_DestroyElement(g_6a2578);
 			g_6a2578 = -1;
 			g_6a2578 = fcn_0046f740(
 				0x10, 8,

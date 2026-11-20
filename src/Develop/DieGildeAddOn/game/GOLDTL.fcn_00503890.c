@@ -10,7 +10,7 @@ char* __cdecl gm_AllocObjekt(int a, int b, int c);
 int __cdecl gm_RemoveObjectByType(char* list, int b);
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 
-int __cdecl fcn_00503890(int a, int b, int c)
+int __cdecl gm_RemoveObjectQuantity(int a, int b, int c)
 {
 	char* list_head;
 	void* exi;

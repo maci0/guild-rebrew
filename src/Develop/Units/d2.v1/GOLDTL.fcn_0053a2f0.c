@@ -12,7 +12,7 @@ int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_0046f280(int);
 
-void __cdecl fcn_0053a2f0(void)
+void __cdecl d2_ShowAmountDialog(void)
 {
 	int w;
 	int t;
@@ -24,7 +24,7 @@ void __cdecl fcn_0053a2f0(void)
 	w = fcn_0046e940(0x20, 0x60, 0x26c, 0x190, 0x15);
 	t = fcn_00472250(-1, w, io_AppendText("$3ABetrag:%m"));
 	d2_SetElementValue(t, 0, 0x2710, 0);
-	while (fcn_005373e0((void*) fcn_0053a2f0, 0x24087) != 0) {
+	while (fcn_005373e0((void*) d2_ShowAmountDialog, 0x24087) != 0) {
 		if (g_14cf950 == 1) {
 			g_774654 = 1;
 		}

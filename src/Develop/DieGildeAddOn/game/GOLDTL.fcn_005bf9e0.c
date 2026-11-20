@@ -1,6 +1,6 @@
 int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl fcn_004fa5b0(int, int, void*);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
@@ -17,7 +17,7 @@ int __cdecl io_AppendText(int, int, int, int);
 void __cdecl fcn_005c9220(int*);
 int __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_004faaf0(unsigned short*);
+int __cdecl gm_SelectRandomEntityCandidate(unsigned short*);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c5530(void*);
@@ -52,7 +52,7 @@ int __cdecl fcn_005bf9e0(unsigned short* entity)
 	if (fcn_004fa5b0(0x1b, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0, data) & 2) {
 		timeout /= 2;
 	}
-	query = fcn_005463a0(2, 2, *(unsigned short*) &g_774970, 0, 0x1a);
+	query = he_StartHandlungSearch(2, 2, *(unsigned short*) &g_774970, 0, 0x1a);
 	while (query) {
 		if (*(int*) (query + 0xb4) == *(int*) (entity + 2)) {
 			io_FormatTextBuffer(text, 0x170a, *entity);
@@ -108,7 +108,7 @@ int __cdecl fcn_005bf9e0(unsigned short* entity)
 			*(unsigned char*) (evt + 0x36) = 1;
 			*(unsigned int*) (evt + 0x84) = timeout;
 			*(unsigned int*) (evt + 0x60) = *(unsigned int*) (entity + 2);
-			*(unsigned int*) (evt + 0x58) = fcn_004faaf0(entity);
+			*(unsigned int*) (evt + 0x58) = gm_SelectRandomEntityCandidate(entity);
 			fcn_004c4eb0((char*) 0x6ac4c0);
 			fcn_004c5530(evt);
 			fcn_004c4ef0((char*) 0x6ac4c0);

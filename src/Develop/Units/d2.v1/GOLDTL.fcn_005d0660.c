@@ -28,7 +28,7 @@ extern int g_774654;			/* 0x00774654 */
 extern int d2_CurrentElementId;			/* 0x0067d370 */
 extern char g_7f4ca0[];			/* 0x007f4ca0 */
 
-int __cdecl fcn_0057ec20(int);
+int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl gm_LookupEntityRecordById(unsigned int);
 void* __cdecl fcn_00470820(short, short, char*);
@@ -81,7 +81,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 	int idx;
 	unsigned int t0;
 
-	if (!fcn_0057ec20(1)) {
+	if (!d2_TutorialAllowsFlag(1)) {
 		return;
 	}
 	fcn_0057e880(6, 0, 0, 0);

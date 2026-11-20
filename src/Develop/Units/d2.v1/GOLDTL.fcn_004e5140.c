@@ -18,7 +18,7 @@ extern char g_68b300[];
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(char*);
 
-void __cdecl fcn_004e5140(unsigned char* ctx)
+void __cdecl d2_AppendPendingPlayerNames(unsigned char* ctx)
 {
 	int i;
 

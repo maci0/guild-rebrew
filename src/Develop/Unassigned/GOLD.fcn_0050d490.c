@@ -16,7 +16,7 @@ extern struct s_fd7c50 g_fd7c50[64];
 void __cdecl fcn_004478e0(int, int);
 void __cdecl fcn_00457c20(int);
 void __cdecl fcn_004473f0(void);
-void __cdecl fcn_0045ef50(int);
+void __cdecl d3sm_Destroy(int);
 
 void __cdecl fcn_0050d490(void)
 {
@@ -44,7 +44,7 @@ void __cdecl fcn_0050d490(void)
 	}
 	for (i = 0; i < 64; i++) {
 		if (g_fd7c50[i].p != 0) {
-			fcn_0045ef50(g_fd7c50[i].p);
+			d3sm_Destroy(g_fd7c50[i].p);
 			g_fd7c50[i].p = 0;
 		}
 	}

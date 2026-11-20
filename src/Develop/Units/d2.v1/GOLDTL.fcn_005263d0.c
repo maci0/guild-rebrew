@@ -46,7 +46,7 @@ int __cdecl fcn_005373e0(void *, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
@@ -120,7 +120,7 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 		}
 	}
 	g_77470d = 0;
-	fcn_00469510(list);
+	d2_ClearRadioGroup(list);
 	fcn_00471e30(h);
 	return result;
 }

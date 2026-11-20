@@ -60,7 +60,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c5620(int, Order_5635b0*);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_00546190(Order_5635b0*);
+void __cdecl he_FreeAction(Order_5635b0*);
 
 
 /* Order step: from the third try on, sends message 0x6e with a chance
@@ -86,12 +86,12 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 		if (o->tries >= 2) {
 			p = gm_StartFilteredEntitySearch(1, 1, o->who);
 			if (p == 0) {
-				fcn_00546190(o);
+				he_FreeAction(o);
 				return;
 			}
 			k = &((Kind_5635b0*)lpGebaeudePROT)[*(unsigned char*) p];
 			if (k->type == 0xd || k->type == 0xc || k->type == 0xb) {
-				fcn_00546190(o);
+				he_FreeAction(o);
 				return;
 			}
 			if (o->flags & 2) {
@@ -130,11 +130,11 @@ next:
 	case -1:
 		p = gm_StartFilteredEntitySearch(1, 1, o->who);
 		if (p == 0) {
-			fcn_00546190(o);
+			he_FreeAction(o);
 			return;
 		}
 		fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 2);
-		fcn_00546190(o);
+		he_FreeAction(o);
 		return;
 	}
 }

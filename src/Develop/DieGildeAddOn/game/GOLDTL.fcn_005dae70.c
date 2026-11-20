@@ -12,7 +12,7 @@ typedef struct
 #include "client_dialog_state.h"
 extern unsigned short g_7f4c04;
 
-int __cdecl fcn_004e8a80(int, Law*);
+int __cdecl amt_FindOfficeSlotByType(int, Law*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -23,7 +23,7 @@ int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005dae70(char* e)
+int __cdecl d2_ShowExpelWorkersDialog(char* e)
 {
 	Law x;
 	int r;
@@ -36,7 +36,7 @@ int __cdecl fcn_005dae70(char* e)
 	if (e[2] != 6 && e[2] != 7) {
 		return 0x20;
 	}
-	if (fcn_004e8a80(*(unsigned char*) (e + 0x166), &x) == 0) {
+	if (amt_FindOfficeSlotByType(*(unsigned char*) (e + 0x166), &x) == 0) {
 		return 0x40;
 	}
 	dlg = fcn_00470820(0, 0, "privillegien\\arbeiter_ausweisen");
@@ -60,7 +60,7 @@ int __cdecl fcn_005dae70(char* e)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005dae70, 0x657c7) != 0);
+	} while (fcn_005373e0((void*) d2_ShowExpelWorkersDialog, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

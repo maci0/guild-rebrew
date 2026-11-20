@@ -40,7 +40,7 @@ void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
 void __cdecl fcn_0047cbf0(int x, int y, int surf, char* font, int c);
 
 /* ADDRESS: GOLDTL 0x00466550 */
-void __cdecl fcn_00466550(int idx, int surf)
+void __cdecl d2_DrawField(int idx, int surf)
 {
 	Fld_102d140* f;
 	fcn_00466550_Ent* e;

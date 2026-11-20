@@ -21,7 +21,7 @@ extern NameSet g_699b18[];
 extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 
-void __cdecl fcn_00530a00(unsigned char* home);
+void __cdecl ch_CollectContextCharacters(unsigned char* home);
 void __cdecl ch_PreloadCharacterMotions(char* view, int n, ...);
 
 void __cdecl fcn_005166a0(unsigned char* home)
@@ -38,7 +38,7 @@ void __cdecl fcn_005166a0(unsigned char* home)
 		}
 	}
 	s = &g_699b18[k];
-	fcn_00530a00(home);
+	ch_CollectContextCharacters(home);
 	for (i = 0; i < 768; i++) {
 		if (((Obj*)g_7f4ca0)[i].view != 0 &&
 		    (((Obj*)g_7f4ca0)[i].home == home || *(int*) (((Obj*)g_7f4ca0)[i].view + 0x2c) == *(int*) (home + 1))) {

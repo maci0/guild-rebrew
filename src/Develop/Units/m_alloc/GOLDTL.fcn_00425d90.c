@@ -20,7 +20,7 @@ void __cdecl m_FreeTracked(void*);
 /* Registers a named script variable bound to a C variable. */
 /* ADDRESS: GOLD 0x00427570 */
 /* ADDRESS: GOLDTL 0x00425d90 */
-struct var_425d90* __cdecl fcn_00425d90(char* name, void* ptr, int type)
+struct var_425d90* __cdecl evt_RegisterVariable(char* name, void* ptr, int type)
 {
 	struct var_425d90* vars;
 

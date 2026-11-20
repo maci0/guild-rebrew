@@ -28,7 +28,7 @@ extern char s_6ace58[];
 #include "client_dialog_state.h"
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004e8a80(int, Info*);
+int __cdecl amt_FindOfficeSlotByType(int, Info*);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004c5420(int, int, int, int, int);
@@ -75,7 +75,7 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 		if (o[0x166] == 0) {
 			return 0x60;
 		}
-		if (!fcn_004e8a80(o[0x166], &info)) {
+		if (!amt_FindOfficeSlotByType(o[0x166], &info)) {
 			return 0x40;
 		}
 		fcn_004e8240(info.f0, 0, 0, g_7f4c04 > 0xd ? 0xff : 3, 0xff);
@@ -100,7 +100,7 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 	if (o == 0) {
 		return 2;
 	}
-	if (!fcn_004e8a80(o[0x166], &info)) {
+	if (!amt_FindOfficeSlotByType(o[0x166], &info)) {
 		return 0x40;
 	}
 	dlg = fcn_00470820(0, 0, s_6acd74);

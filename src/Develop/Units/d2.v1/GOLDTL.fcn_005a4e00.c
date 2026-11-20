@@ -12,14 +12,14 @@ int __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_00472830(int, int, int, void*, void*, void*);
 void __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl io_AppendText();
 int __cdecl fcn_00533a60(int, int, int*, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_0046f280(int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 int __cdecl fcn_0050d640(int, char*, unsigned int, char**);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_0050dd00(int, int*, int);
@@ -59,7 +59,7 @@ void __cdecl fcn_005a4e00(char* building)
 	h = fcn_00470820(0, 0, (char*) 0x6aac2c);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_00533dc0(d2_CurrentWindowId, 0x73b, 0x73f);
+	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);
 	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId,
 	    fcn_00472830(h, 2, 0x78, &v3, &v2, &v1));
 	*(int*) (0x10162e8 + d2_CurrentWindowId * 0x3cc) = 0xe;
@@ -79,7 +79,7 @@ void __cdecl fcn_005a4e00(char* building)
 			for (i = 0; i < 16; i++) {
 				if (items[i][0] != -1) {
 					fcn_0046f280(items[i][0]);
-					fcn_0046b2b0(items[i][1]);
+					d2_DestroyElement(items[i][1]);
 					items[i][0] = -1;
 					items[i][1] = -1;
 					items[i][2] = 0;

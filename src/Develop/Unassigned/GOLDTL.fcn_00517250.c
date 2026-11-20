@@ -6,8 +6,8 @@
 extern char g_6b5c60[];
 
 int __cdecl fcn_005171a0(char*, int*, int);
-int __cdecl fcn_00501490(char*);
-int __cdecl fcn_00504eb0(const char*);
+int __cdecl gm_FindObjektPrototypeByName(char*);
+int __cdecl gm_FindGebaeudePrototypeByName(const char*);
 int __cdecl _isctype(int, int);
 
 /* ADDRESS: GOLDTL 0x00517250 */
@@ -40,7 +40,7 @@ int __cdecl fcn_00517250(char* name, int idx)
 	GetPrivateProfileStringA("A - ALLGEMEIN", "HistorieEnde", "1400", buf, 0x100, datei);
 	*(int*) (p + 0x50) = atoi(buf);
 	GetPrivateProfileStringA("A - ALLGEMEIN", "Waehrung", "ob_GOLDGULDEN", buf, 0x100, datei);
-	*(unsigned short*) (p + 0x54) = (unsigned short) fcn_00501490((char*) (buf + 3));
+	*(unsigned short*) (p + 0x54) = (unsigned short) gm_FindObjektPrototypeByName((char*) (buf + 3));
 	GetPrivateProfileStringA("A - ALLGEMEIN", "Land", "0", buf, 0x100, datei);
 	p[0x60] = (unsigned char) atoi(buf);
 	GetPrivateProfileStringA("A - ALLGEMEIN", "Sprache", "0", buf, 0x100, datei);
@@ -107,11 +107,11 @@ int __cdecl fcn_00517250(char* name, int idx)
 				tok++;
 			}
 			if (k == 0) {
-				q[-1] = (unsigned char) fcn_00504eb0((char*) (tok + 3));
+				q[-1] = (unsigned char) gm_FindGebaeudePrototypeByName((char*) (tok + 3));
 			} else if (k == 1) {
 				q[0] = (unsigned char) atoi(tok);
 			} else {
-				*(unsigned short*) (p + 0x142 + i * 0x12 + k * 2) = (unsigned short) fcn_00501490((char*) (tok + 3));
+				*(unsigned short*) (p + 0x142 + i * 0x12 + k * 2) = (unsigned short) gm_FindObjektPrototypeByName((char*) (tok + 3));
 			}
 			tok = strtok(0, ",");
 			k++;
@@ -143,7 +143,7 @@ int __cdecl fcn_00517250(char* name, int idx)
 			    : (*(unsigned char*) (*(unsigned char**) 0x6b23a4 + *tok * 2) & 8)) {
 				tok++;
 			}
-			((unsigned short*) (p + 0x2ac))[k] = (unsigned short) fcn_00501490((char*) (tok + 3));
+			((unsigned short*) (p + 0x2ac))[k] = (unsigned short) gm_FindObjektPrototypeByName((char*) (tok + 3));
 			tok = strtok(0, sep);
 			k++;
 		}
@@ -162,7 +162,7 @@ int __cdecl fcn_00517250(char* name, int idx)
 			    : (*(unsigned char*) (*(unsigned char**) 0x6b23a4 + *tok * 2) & 8)) {
 				tok++;
 			}
-			((unsigned short*) (p + 0x2cc))[k] = (unsigned short) fcn_00501490((char*) (tok + 3));
+			((unsigned short*) (p + 0x2cc))[k] = (unsigned short) gm_FindObjektPrototypeByName((char*) (tok + 3));
 			tok = strtok(0, sep);
 			k++;
 		}

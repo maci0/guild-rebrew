@@ -1,6 +1,6 @@
 int __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl he_fn_Handlung(void);
-int __cdecl fcn_005463a0(int a, ...);
+int __cdecl he_StartHandlungSearch(int a, ...);
 void __cdecl fcn_005ca560(int *out);
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, int c, int d);
 
@@ -14,7 +14,7 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 	count = 0;
 	if (limit == 0) {
 		if (src[0x72] & 0x400) {
-			rec = (int *) fcn_005463a0(1, 0, 0x47);
+			rec = (int *) he_StartHandlungSearch(1, 0, 0x47);
 			while (rec) {
 				if (rec[0x2b] == src[1]) {
 					found = gm_LookupEntityRecordById(rec[0x2c]);
@@ -29,7 +29,7 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 				break;
 			}
 		}
-		rec = (int *) fcn_005463a0(2, 2, *(unsigned short *) src, 0,
+		rec = (int *) he_StartHandlungSearch(2, 2, *(unsigned short *) src, 0,
 		                           0x18);
 		while (rec) {
 			if (gm_LookupEntityRecordById(rec[0x31]))
@@ -44,7 +44,7 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 
 		count = 0;
 		if (src[0x72] & 0x400) {
-			rec = (int *) fcn_005463a0(1, 0, 0x47);
+			rec = (int *) he_StartHandlungSearch(1, 0, 0x47);
 			while (rec) {
 				if (rec[0x2b] == src[1]) {
 					found = gm_LookupEntityRecordById(rec[0x2c]);
@@ -62,7 +62,7 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 				break;
 			}
 		}
-		rec = (int *) fcn_005463a0(2, 2, *(unsigned short *) src, 0,
+		rec = (int *) he_StartHandlungSearch(2, 2, *(unsigned short *) src, 0,
 		                           0x18);
 		if (rec) {
 			dst = (int *) ((char *) out + count * 0x38);

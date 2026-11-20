@@ -16,17 +16,17 @@ extern void __cdecl fcn_00529000(int, char*);
 extern void __cdecl fcn_00529060(int, char*);
 extern void __cdecl fcn_005290d0(char*);
 extern int __cdecl fcn_005241f0(char*);
-extern void __cdecl fcn_00546190(char*);
+extern void __cdecl he_FreeAction(char*);
 extern int __cdecl fcn_004c5620(char, char*);
 extern void __cdecl fcn_004c4510(char*, int);
 extern int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 extern void __cdecl fcn_004c53a0(void);
 extern char* __cdecl ch_CreateAction(char*, int, ...);
 extern int __cdecl fcn_00500e20(int*);
-extern int __cdecl fcn_00515540(char*);
+extern int __cdecl init_EnsureObjektSceneContext(char*);
 extern int __cdecl fcn_005155e0(unsigned char*);
-extern void* __cdecl fcn_00426cc0(int);
-extern void __cdecl fcn_00428720(char*);
+extern void* __cdecl evt_FindScriptById(int);
+extern void __cdecl evt_RequestScriptExit(char*);
 extern int __cdecl fcn_005373e0(void);
 
 /* SIZE 0x188 */
@@ -84,7 +84,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 	if (a2 != 0) {
 		rec = (Rec_529160*) ((unsigned char*) g_entity_type_table + (unsigned int) *activeRec * 0x24d);
 		if (*(short*) a2 != 0xfd) {
-			contextIdx = fcn_00515540(a2);
+			contextIdx = init_EnsureObjektSceneContext(a2);
 		} else {
 			contextIdx = fcn_005155e0(activeRec);
 		}
@@ -108,9 +108,9 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 
 			obj = ((Rec_529160*) slot->owner)->object;
 			if (obj != -1) {
-				o = fcn_00426cc0(obj);
+				o = evt_FindScriptById(obj);
 				if (o != 0) {
-					fcn_00428720((char*) o);
+					evt_RequestScriptExit((char*) o);
 				}
 			}
 		}
@@ -130,7 +130,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 			if (slot->owner != 0) {
 				obj = ((Rec_529160*) slot->owner)->object;
 				if (obj != -1) {
-					fcn_00428720((char*) fcn_00426cc0(obj));
+					evt_RequestScriptExit((char*) evt_FindScriptById(obj));
 				}
 			}
 			if (*(int*) (old + 0x70) < 3) {
@@ -158,14 +158,14 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		case 73:
 		case 117:
 		case 161:
-			fcn_00546190(old);
+			he_FreeAction(old);
 			break;
 		}
 	} else if (slot->owner != 0 && ((Rec_529160*) slot->owner)->object != -1) {
 		obj = ((Rec_529160*) slot->owner)->object;
-		o = fcn_00426cc0(obj);
+		o = evt_FindScriptById(obj);
 		if (o != 0 && (strstr((char*) o, s_6a2e70) != 0 || strstr((char*) o, s_6a2e68) != 0)) {
-			fcn_00428720((char*) o);
+			evt_RequestScriptExit((char*) o);
 		}
 	}
 	if (newShown != 0) {

@@ -26,7 +26,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d3_ActiveCameraAnimation;
 #include "Develop/Units/d3/d3_camera.h"
-int __cdecl fcn_004339e0(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_FRAME*);
+int __cdecl d3_CreateObjectAnimation(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_FRAME*);
 
 /* ADDRESS: GOLDTL 0x00412d30 */
 int __cdecl StartObjectTransformAnimation(char* objekt, float x, float y, float z,
@@ -57,7 +57,7 @@ int __cdecl StartObjectTransformAnimation(char* objekt, float x, float y, float 
     frames[0].position[0] = 0.0f;
     frames[0].position[1] = 0.0f;
     frames[0].position[2] = 0.0f;
-    ergebnis = fcn_004339e0(objekt, flags, 2, frames);
+    ergebnis = d3_CreateObjectAnimation(objekt, flags, 2, frames);
     if (objekt == d3_ActiveCamera) {
         d3_CameraAnimating = 1;
         d3_ActiveCameraAnimation = ergebnis;

@@ -19,7 +19,7 @@ extern int g_664e28[3];
 extern int g_6653bc;
 extern unsigned char g_773d75;
 
-void __cdecl fcn_00508d80(int, int *);
+void __cdecl gm_RandomizeIntArray(int, int *);
 int __cdecl _ftol(void);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_00507400(int, int);
@@ -31,7 +31,7 @@ float __cdecl gm_RandomFloat01(void);
 char *__cdecl fcn_004c4480(int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 #include "client_packet_builder.h"
-void __cdecl fcn_004c4570(int, int, int, int *);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, int *);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
@@ -97,7 +97,7 @@ void __cdecl fcn_004ad8c0(void)
 			} while (--k != 0);
 		}
 	}
-	fcn_00508d80(15, ids);
+	gm_RandomizeIntArray(15, ids);
 	for (j = 0, k = 0; j < 3; j++) {
 		for (cnt = (int) score[j]; cnt < 2; cnt++) {
 			x = fcn_00507400(ids[k++], (unsigned short) gm_RandomMod(3) + 4);
@@ -119,8 +119,8 @@ void __cdecl fcn_004ad8c0(void)
 			o = fcn_004c4480(h);
 			fcn_004c5150(*(int *) (o + 4), -1, g_773d75, v);
 			fcn_004c4510(o, *(int *) (o + 4));
-			fcn_004c4570(1, 1, 0xd, &seven);
-			fcn_004c4570(1, 1, 0x167, &kind);
+			cm_AppendPacketFieldDelta(1, 1, 0xd, &seven);
+			cm_AppendPacketFieldDelta(1, 1, 0x167, &kind);
 			fcn_004c5360();
 			mask = g_664e1c[j];
 			if (j == 2) {

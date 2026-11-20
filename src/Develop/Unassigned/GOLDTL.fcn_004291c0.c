@@ -29,12 +29,12 @@ struct stack_4291c0 {
 extern int g_6b7ec4;
 extern char* g_6b7eb8;
 
-void __cdecl fcn_00426680(int lex, struct tok_4291c0* t);
+void __cdecl evt_ReadToken(int lex, struct tok_4291c0* t);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
-void __cdecl fcn_00428720(char* g);
-int __cdecl fcn_00427b40(char* g);
+void __cdecl evt_RequestScriptExit(char* g);
+int __cdecl evt_PopCallFrame(char* g);
 void __cdecl evt_ParseWhile(void);
-void __cdecl fcn_00427280(void);
+void __cdecl evt_ParseIfHead(void);
 void __cdecl evt_IncludeScript(void);
 void __cdecl evt_ReturnFromFunction(void);
 void __cdecl fcn_00427570(void);
@@ -60,7 +60,7 @@ int __cdecl evt_ExecuteStatements(char* g)
 
 	g_6b7ec4 = 0;
 	do {
-		fcn_00426680(*(int*) (g + 0x118), &t);
+		evt_ReadToken(*(int*) (g + 0x118), &t);
 		if (t.type == 1) {
 			(*(int*)&g_6b7eb8) = 0;
 			if (t.u.num == 9) {
@@ -73,8 +73,8 @@ int __cdecl evt_ExecuteStatements(char* g)
 					}
 					return 0;
 				}
-				if (fcn_00427b40(g) == 0) {
-					fcn_00428720(g);
+				if (evt_PopCallFrame(g) == 0) {
+					evt_RequestScriptExit(g);
 				}
 				return 0;
 			}
@@ -85,7 +85,7 @@ int __cdecl evt_ExecuteStatements(char* g)
 				evt_ParseWhile();
 				break;
 			case 2:
-				fcn_00427280();
+				evt_ParseIfHead();
 				break;
 			case 4:
 				fcn_004275a0();
@@ -108,7 +108,7 @@ int __cdecl evt_ExecuteStatements(char* g)
 			default:
 				sprintf(msg2, "Keyword is not surported!");
 				evt_LogScriptError(g, *(int*) (g + 0x118), msg2);
-				fcn_00428720(g);
+				evt_RequestScriptExit(g);
 				return 0;
 			}
 		} else if (t.type == 4) {
@@ -125,7 +125,7 @@ int __cdecl evt_ExecuteStatements(char* g)
 		} else if (t.type != 12) {
 			sprintf(msg, "Unknown symbol : '%s'", t.u.text);
 			evt_LogScriptError(g, *(int*) (g + 0x118), msg);
-			fcn_00428720(g);
+			evt_RequestScriptExit(g);
 		}
 	} while ((*(unsigned char*) (g + 0x124) & 1) && t.type != 12 && !(t.type == 1 && t.u.num == 10));
 	if (t.type == 1 && t.u.num == 10) {

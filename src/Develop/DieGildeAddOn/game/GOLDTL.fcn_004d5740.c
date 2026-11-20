@@ -12,7 +12,7 @@ extern char g_6b5c60[];
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
-int __cdecl fcn_00507e30(char*, int);
+int __cdecl gm_GetScaledEntitySkill(char*, int);
 void __cdecl fcn_00534160(int, int, int, int);
 float __cdecl fcn_004ff040(char*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
@@ -50,7 +50,7 @@ void __cdecl fcn_004d5740(char* ids, int originX, int originY)
 		y = originY + (i / 6) * 100;
 		fcn_0046f740(x - 0x10, y, 0x5da, d2_CurrentWindowId);
 		fcn_0046f740(x - 4, y, *(int*) (rec + 0x18c), d2_CurrentWindowId);
-		f = (float) fcn_00507e30(rec, 3);
+		f = (float) gm_GetScaledEntitySkill(rec, 3);
 		fcn_00534160(x, y + 0x3c, (int) f, 0x4eb);
 		h = d2_ShowTxt(x - 0x24, y - 0x11, g_6b5c60, d2_CurrentWindowId);
 		*(int*) (g_1015ea0 + h * 0x2f4 + 0x18) = 0x78;

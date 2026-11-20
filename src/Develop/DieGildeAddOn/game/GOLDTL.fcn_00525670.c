@@ -17,7 +17,7 @@ extern int __cdecl gm_LookupEntityRecordById(int);
 extern int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern int __cdecl gm_ResolveEntityById(int*, int, int, int);
 extern int __cdecl gm_FindRecordById(int);
-extern int __cdecl fcn_005463a0(int, int, int);
+extern int __cdecl he_StartHandlungSearch(int, int, int);
 extern int __cdecl gm_SearchTable67(int);
 extern int __cdecl cut_FindCutsceneById(int);
 extern void __cdecl fcn_004432d0(int, int);
@@ -31,7 +31,7 @@ extern int ls_SaveVersion, g_773d8c;
  * from the owner chains of the loaded objects, every live game object runs its
  * per-kind reset handler, and the remaining reference tables are rebuilt. */
 /* ADDRESS: GOLDTL 0x00525670 */
-unsigned int __cdecl fcn_00525670(void)
+unsigned int __cdecl gm_RebuildLoadedReferences(void)
 {
 	char* p;
 	Ent525670* e;
@@ -69,7 +69,7 @@ unsigned int __cdecl fcn_00525670(void)
 			if (v9 == -1)
 				e->f17c = 0;
 			else
-				e->f17c = fcn_005463a0(1, 1, v9);
+				e->f17c = he_StartHandlungSearch(1, 1, v9);
 			e->f184 = 0;
 		}
 	}
@@ -173,7 +173,7 @@ unsigned int __cdecl fcn_00525670(void)
 	for (q = (int*) 0x7d2020; (int) q < 0x7dc420; q += 0x29) {
 		v9 = *q;
 		if (v9)
-			*q = fcn_005463a0(1, 1, v9);
+			*q = he_StartHandlungSearch(1, 1, v9);
 	}
 	for (rec = (char*) 0xfb5766; (int) rec < 0x1005766; rec += 10) {
 		v9 = *(int*) rec;

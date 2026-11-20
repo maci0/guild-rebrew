@@ -23,7 +23,7 @@ extern LightState g_100dc20;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_00500cb0(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
-void __cdecl fcn_00546d10(void);
+void __cdecl he_RunDueActions(void);
 void __cdecl fcn_004fc180(void);
 void __cdecl fcn_00500a40(void);
 void __cdecl fcn_0047da70(void);
@@ -39,7 +39,7 @@ int __cdecl fcn_004c9440(char* x, char* out)
 	if (fcn_00500cb0(&(*(GAME_TIMESTAMP*)&gm_GameTime), (GAME_TIMESTAMP*) (x + 0x10)) < 0) {
 		(*(GAME_TIMESTAMP*)&gm_GameTime) = *(GAME_TIMESTAMP*) (x + 0x10);
 		if (g_6a3438 != 0)
-			fcn_00546d10();
+			he_RunDueActions();
 		if (g_6a3434 != 0) {
 			fcn_004fc180();
 			if ((*(GAME_TIMESTAMP*)&gm_GameTime).minute % 6 == 0)

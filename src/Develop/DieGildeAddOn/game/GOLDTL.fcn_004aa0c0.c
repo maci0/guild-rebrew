@@ -14,7 +14,7 @@ typedef struct Query {
 } Query;
 // SIZE 0x220
 
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004fa5b0(int k, char* e, Query* q);
@@ -31,7 +31,7 @@ int __cdecl fcn_004aa0c0(char* entity, char* cmd, char* params)
 	memset(&query, 0, sizeof(query));
 	query.p = 0;
 	if ((*(int*) (entity + 0x1c8) & 0x100) && *(int*) (cmd + 8) == 4) {
-		for (r = fcn_005463a0(1, 0, 0x45); r != 0; r = he_fn_Handlung()) {
+		for (r = he_StartHandlungSearch(1, 0, 0x45); r != 0; r = he_fn_Handlung()) {
 			if (*(int*) (r + 0xac) == *(int*) (entity + 4)) {
 				break;
 			}

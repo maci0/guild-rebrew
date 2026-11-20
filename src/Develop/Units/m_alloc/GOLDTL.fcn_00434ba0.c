@@ -8,7 +8,7 @@ extern double g_662c70;
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
 float __cdecl d3_GetMaxVertexDistance(float* v, int n);
-void __cdecl fcn_004518a0(float* v);
+void __cdecl d3_NormalizeVector(float* v);
 void __cdecl d3_CalculateTriangleNormal(float* a, float* b, float* c, float* n);
 
 /* ADDRESS: GOLDTL 0x00434ba0 */
@@ -99,7 +99,7 @@ void __cdecl fcn_00434ba0(char* anim, char* mesh)
 					sum[2] = sum[2] + normals[k * 4 + 2];
 				}
 			}
-			fcn_004518a0(sum);
+			d3_NormalizeVector(sum);
 			sum[0] = sum[0] + g_6628a0;
 			sum[1] = sum[1] + g_6628a0;
 			sum[2] = sum[2] + g_6628a0;

@@ -4,7 +4,7 @@
 #define GOLDTL_MAX(a, b) ((a) > (b) ? (a) : (b))
 
 int __cdecl rand(void);
-void __cdecl fcn_004518a0(float* v);
+void __cdecl d3_NormalizeVector(float* v);
 
 typedef struct fcn_00452c60_Particle {
 	float f00;
@@ -107,7 +107,7 @@ typedef struct fcn_00452c60_Sub {
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-void __cdecl fcn_004518a0(float* v);
+void __cdecl d3_NormalizeVector(float* v);
 
 #pragma data_seg(".text")
 
@@ -164,7 +164,7 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
 			v[0] = (float) rand() * *(float*) 0x662a18 - 0.5f;
 			v[1] = (float) rand() * *(float*) 0x662a18 - 0.5f;
 			v[2] = (float) rand() * *(float*) 0x662a18 - 0.5f;
-			fcn_004518a0(v);
+			d3_NormalizeVector(v);
 			if (!(e->d4 & 0x60)) {
 				p->f34 = t;
 				p->f20 = v[0] * (e->f68 * 1.0f);
@@ -351,7 +351,7 @@ char __cdecl fcn_00453470(void* a1, unsigned int tick)
 			v[0] = (float) rand() * RAND_UNIT_453470 - 0.5f;
 			v[1] = (float) rand() * RAND_UNIT_453470 - 0.5f;
 			v[2] = 0.0f;
-			fcn_004518a0(v);
+			d3_NormalizeVector(v);
 			if (!(*(unsigned char*) (e + 0xd4) & 0x60)) {
 				*(unsigned int*) (p + 0x34) = tick;
 				r = (float) rand() * RAND_UNIT_453470 *
@@ -374,7 +374,7 @@ char __cdecl fcn_00453470(void* a1, unsigned int tick)
 				v[0] -= *(float*) (p + 0x20);
 				v[1] -= *(float*) (p + 0x24);
 				v[2] -= *(float*) (p + 0x28);
-				fcn_004518a0(v);
+				d3_NormalizeVector(v);
 			} else {
 				if (*(float*) (e + 0x68) != *(float*) 0x6628a8) {
 					r = (float) rand() * RAND_UNIT_453470 *
@@ -396,7 +396,7 @@ char __cdecl fcn_00453470(void* a1, unsigned int tick)
 				v[0] -= *(float*) (p + 0x20);
 				v[1] -= *(float*) (p + 0x24);
 				v[2] -= *(float*) (p + 0x28);
-				fcn_004518a0(v);
+				d3_NormalizeVector(v);
 				r = (float) rand() * RAND_UNIT_453470;
 				*(int*) (p + 0x34) = (int) ((double) tick -
 					(float) *(int*) (e + 0xcc) * r);

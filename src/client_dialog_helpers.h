@@ -128,7 +128,7 @@ int __cdecl fcn_00471f80(int handle, int player);
 
 /* Entity value accessors. fcn_004c51a0 additionally returns int. */
 void __cdecl fcn_004c4510(char* base, int entity_id);
-void __cdecl fcn_004c4570(int a, int b, int off, void* value);
+void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, void* value);
 void __cdecl fcn_004c4670(int a, int b, int off, void* value);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c54c0(int a, int b, int value, int flag);

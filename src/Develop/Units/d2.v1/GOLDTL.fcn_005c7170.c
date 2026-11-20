@@ -11,9 +11,9 @@ extern int g_100f1dc;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_005c69d0(int);
+void __cdecl d2_ResetTrainingRows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_005c6a10(int, int);
+void __cdecl d2_UpdateTrainingRows(int, int);
 
 int __cdecl fcn_00471f80(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -29,10 +29,10 @@ void __cdecl fcn_005c7170(int a1)
 
 	dlg = fcn_00470820(0, 0, "locations\\diebesgilde\\diebesgilde_trainieren");
 	d2_CenterDialogWindows(dlg);
-	fcn_005c69d0(a1);
+	d2_ResetTrainingRows(a1);
 	d2_SetOverlayAnimation(0, 0);
 	do {
-		fcn_005c6a10(dlg, 2);
+		d2_UpdateTrainingRows(dlg, 2);
 		if (g_14ce8e0 != 0) {
 			if (CountDisplayCounters() == 0) {
 				g_774654 = 1;

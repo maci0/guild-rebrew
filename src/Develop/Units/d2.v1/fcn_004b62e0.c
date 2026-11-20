@@ -37,7 +37,7 @@ extern signed char g_6a3440;
 
 Spec* __cdecl fcn_004b3c50(int op);
 void __cdecl fcn_004b5630(Spec* s, int flags);
-void __cdecl fcn_005448e0(void);
+void __cdecl main_PlayOutroMovie(void);
 int __cdecl fcn_004b43f0(int n);
 int __cdecl fcn_004b3e10(int a1, int a2, int a3);
 int __cdecl fcn_004c5790(int, Req*);
@@ -69,7 +69,7 @@ void __cdecl fcn_004b62e0(int flags)
 	}
 	flags = (flags & ~9) | 0x100;
 	fcn_004b5630(s, flags);
-	fcn_005448e0();
+	main_PlayOutroMovie();
 	r = fcn_004b43f0(level);
 	if (r == 0) {
 		g_6a3440 = -1;

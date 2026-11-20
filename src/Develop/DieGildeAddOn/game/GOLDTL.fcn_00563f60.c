@@ -33,7 +33,7 @@ char* __cdecl fcn_0050dc90(unsigned char* e);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, char* h);
 void __cdecl fcn_00500bb0(pos14_7f4c00* t, int a, int b, int c);
 int __cdecl fcn_004c5790(int kind, Req* r);
-void __cdecl fcn_00546190(char* o);
+void __cdecl he_FreeAction(char* o);
 
 void __cdecl fcn_00563f60(char* o)
 {
@@ -80,7 +80,7 @@ void __cdecl fcn_00563f60(char* o)
 				fcn_004c5790(4, &m);
 			}
 		}
-		fcn_00546190(o);
+		he_FreeAction(o);
 		break;
 	case -2:
 	case -1:
@@ -88,7 +88,7 @@ void __cdecl fcn_00563f60(char* o)
 		if (e != 0) {
 			fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 0, 0x80);
 		}
-		fcn_00546190(o);
+		he_FreeAction(o);
 		break;
 	}
 }

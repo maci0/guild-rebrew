@@ -3,7 +3,7 @@
 
 int __cdecl fcn_004028a0(int);
 
-void __cdecl fcn_0040b240(void)
+void __cdecl ch_DestroyAllCharacters(void)
 {
 	int p;
 	for (p = 0x1468ae0; p < 0x14696e0; p += 4) {

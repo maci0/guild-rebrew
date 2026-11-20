@@ -7,7 +7,7 @@ void __cdecl fcn_004232f0(void);
 void __cdecl m_FreeTracked(int);
 int __cdecl fcn_0042a2d0(int);
 
-void __cdecl fcn_00422100(void)
+void __cdecl d3snd_Shutdown(void)
 {
 	fcn_004232f0();
 	if ((*(int*)&g_6b7e88) != 0) {

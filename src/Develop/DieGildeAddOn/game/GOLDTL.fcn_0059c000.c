@@ -24,11 +24,11 @@ void __cdecl fcn_0052a0c0(char*, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int);
 void __cdecl fcn_00594340(void);
-void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
 void __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004c35f0(void);
 int __cdecl fcn_004c5530(void*);
@@ -111,7 +111,7 @@ int __cdecl fcn_0059c000(char* building)
 	p[1] = 0xe;
 	p[2] = 0xe;
 	p[3] = 0xe;
-	fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x742);
+	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x742);
 	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
 	*(unsigned int*) (g_1015ea0 + 0x84 + item * 0x2f4) = 0x54;
 	do {
@@ -149,7 +149,7 @@ int __cdecl fcn_0059c000(char* building)
 								p += 10;
 							} while ((int) p < 0x7e35d0);
 						} else {
-							found = fcn_005463a0(2, 0, 4, 3, *(unsigned int*) (building + 1));
+							found = he_StartHandlungSearch(2, 0, 4, 3, *(unsigned int*) (building + 1));
 							while (found) {
 								if (*(unsigned short*) (found + 0xac) == *rows)
 									goto located;

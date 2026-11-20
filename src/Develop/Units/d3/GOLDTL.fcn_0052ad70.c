@@ -29,7 +29,7 @@ extern float g_774730;
 float __cdecl fcn_00413d10(float* p);
 void __cdecl fcn_00438b40(View* v, Vec4* p);
 
-void __cdecl fcn_0052ad70(void)
+void __cdecl d3_AdjustCameraHeight(void)
 {
 	float step;
 	Vec4 p;

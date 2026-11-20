@@ -11,7 +11,7 @@ int __cdecl gm_RandomMod(unsigned short);
 float __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl fcn_0042e410(unsigned short);
 int __cdecl fcn_004c4510(char*, int);
-void __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
+void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5530(int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
@@ -31,7 +31,7 @@ void __cdecl fcn_00529160(unsigned char*, char*, unsigned int, unsigned char*);
 int __cdecl fcn_00529670(char*, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_00546190(int);
+void __cdecl he_FreeAction(int);
 int __cdecl fcn_005c6270(char*, int);
 
 /* queued scene action handed to the packet builder */
@@ -209,7 +209,7 @@ void __cdecl fcn_00568ed0(char* a1)
 				}
 			}
 			fcn_004c4510(ent, *(int*) (ent + 1));
-			fcn_004c4570(4, 1, (unsigned short) (ent - g_aed32c + 0x65), obj + 4);
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) (ent - g_aed32c + 0x65), obj + 4);
 			fcn_004c5360();
 			fcn_004c6b20(*(int*) (obj + 4), 5, 0);
 			{
@@ -257,7 +257,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			}
 			p += 4;
 		}
-		fcn_00546190((int) a1);
+		he_FreeAction((int) a1);
 		return;
 	case -2:
 	case -1:
@@ -283,7 +283,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			}
 			p += 4;
 		} while (--n != 0);
-		fcn_00546190((int) a1);
+		he_FreeAction((int) a1);
 		return;
 	}
 }

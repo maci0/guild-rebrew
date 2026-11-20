@@ -8,7 +8,7 @@ int __cdecl ahm_SlotClearMatch(char*, int, char*);
 int __cdecl fcn_004ee8c0(char*, int, char*);
 
 /* ADDRESS: GOLDTL 0x004cdb90 */
-int __cdecl fcn_004cdb90(char* cfg, char* out)
+int __cdecl ahm_DispatchCommand(char* cfg, char* out)
 {
 	char* s;
 	int r;

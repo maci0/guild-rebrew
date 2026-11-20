@@ -6,7 +6,7 @@
 
 extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
 
-void __cdecl fcn_0046bd20(int slot, int n, char* out)
+void __cdecl d2_DrawWrappedText(int slot, int n, char* out)
 {
 	char buf[0x400];
 	char* p;

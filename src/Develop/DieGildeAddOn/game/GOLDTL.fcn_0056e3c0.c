@@ -7,8 +7,8 @@ extern int gm_CityEntity;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00500bb0(int*, int, int, int);
-int __cdecl fcn_00426cc0(int);
-void __cdecl fcn_00428720(int);
+int __cdecl evt_FindScriptById(int);
+void __cdecl evt_RequestScriptExit(int);
 void __cdecl fcn_00529160(int, int, unsigned short, int);
 void __cdecl io_FormatTextBuffer(int*, unsigned int, ...);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, char*, char*);
@@ -17,7 +17,7 @@ char* __cdecl ch_CreateAction(int, int, int);
 char* __cdecl fcn_004934c0(char*);
 void __cdecl fcn_005099e0(char*, char*);
 void __cdecl fcn_004c4510(int, int);
-void __cdecl fcn_004c4570(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_0050a710(char*);
 void __cdecl fcn_004c57e0(int, int);
@@ -25,7 +25,7 @@ int __cdecl fcn_004c4450(int);
 int* __cdecl fcn_004c4480(int);
 int __cdecl fcn_004c5980(int);
 int __cdecl cut_FindCutsceneById(int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x0056e3c0 */
 void __cdecl fcn_0056e3c0(char* eventState)
@@ -66,7 +66,7 @@ void __cdecl fcn_0056e3c0(char* eventState)
 			return;
 		}
 		if (*(int*) (obj + 0x28) != -1) {
-			fcn_00428720(fcn_00426cc0(*(int*) (obj + 0x28)));
+			evt_RequestScriptExit(evt_FindScriptById(*(int*) (obj + 0x28)));
 		}
 		fcn_00529160(0, 0, *(unsigned short*) s, 0);
 		if ((*(unsigned char*) (eventState + 0x78) & 2) != 0) {
@@ -143,16 +143,16 @@ void __cdecl fcn_0056e3c0(char* eventState)
 		c = *(char*) (s + 2);
 		if ((c == 6 || c == 7 || c == 5) && *(unsigned char*) (p + 0xd) < *(unsigned char*) (s + 0xd)) {
 			fcn_004c4510((int) p, *(int*) (p + 4));
-			fcn_004c4570(1, 1, 0xd, (int*) (s + 0xd));
+			cm_AppendPacketFieldDelta(1, 1, 0xd, (int*) (s + 0xd));
 			fcn_004c5360();
 		}
 		fcn_004c57e0(*(int*) (s + 4), fcn_0050a710(s));
-		fcn_00546190(eventState);
+		he_FreeAction(eventState);
 		return;
 	case 5:
 		fcn_005099e0(s, (char*) gm_CityEntity);
 		fcn_004c57e0(*(int*) (s + 4), fcn_0050a710(s));
-		fcn_00546190(eventState);
+		he_FreeAction(eventState);
 		return;
 	case 6:
 		v = fcn_004c4450(*(int*) (eventState + 0xb4));
@@ -190,5 +190,5 @@ label_7b3:
 	*(unsigned short*) (eventState + 0x5e) = *(unsigned short*) (gm_GameTime + 0xc);
 	return;
 tail:
-	fcn_00546190(eventState);
+	he_FreeAction(eventState);
 }

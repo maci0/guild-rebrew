@@ -31,7 +31,7 @@ struct unit {
 extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_00546190(struct unit*);
+void __cdecl he_FreeAction(struct unit*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 
@@ -42,7 +42,7 @@ void __cdecl fcn_00563850(struct unit* u)
 
 	e = gm_StartFilteredEntitySearch(1, 1, u->search);
 	if (e == 0) {
-		fcn_00546190(u);
+		he_FreeAction(u);
 		return;
 	}
 	u->target = *(int*) (e + 1);

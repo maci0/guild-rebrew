@@ -23,8 +23,8 @@ extern int g_7e2a9c;
 #include "client_scene_transform.h"
 void __cdecl fcn_00433780(View* v);
 void __cdecl fcn_00438b40(View* v, float* p);
-void __cdecl fcn_00438cb0(View* v, float* r);
-void __cdecl fcn_0052d820(void);
+void __cdecl d3_SetObjectRotation(View* v, float* r);
+void __cdecl d3_AnimateCameraToStoredTransform(void);
 void __cdecl fcn_00530510(void);
 
 void __cdecl fcn_00532ef0(void)
@@ -40,7 +40,7 @@ void __cdecl fcn_00532ef0(void)
 			d3_CameraAnimating = 0;
 			done = 1;
 			fcn_00438b40(((View*)d3_ActiveCamera), g_7e3a40);
-			fcn_00438cb0(((View*)d3_ActiveCamera), d3_CameraTargetRotation);
+			d3_SetObjectRotation(((View*)d3_ActiveCamera), d3_CameraTargetRotation);
 		} else {
 			fcn_00433780(((View*)d3_ActiveCamera));
 			d3_ActiveCameraAnimation = 0;
@@ -49,7 +49,7 @@ void __cdecl fcn_00532ef0(void)
 	}
 	if (g_774650 > g_774658 && done == 0) {
 		if (g_77465c >= g_774650 - g_774654) {
-			fcn_0052d820();
+			d3_AnimateCameraToStoredTransform();
 			g_77465c = g_774650 - g_774654;
 			if (g_7746a8 != 0) {
 				e = *(char**) (g_7746a8 + 0x1d4);
@@ -64,7 +64,7 @@ void __cdecl fcn_00532ef0(void)
 		}
 	} else if ((!CompareVector3WithinTolerance(((View*)d3_ActiveCamera)->rot, d3_CameraTargetRotation, 0.1f) || !CompareVector3WithinTolerance(((View*)d3_ActiveCamera)->pos, g_7e3a40, 0.1f)) &&
 		   done == 0) {
-		fcn_0052d820();
+		d3_AnimateCameraToStoredTransform();
 		if (g_7746a8 != 0) {
 			e = *(char**) (g_7746a8 + 0x1d4);
 			if (e != 0 && *(void**) (e + 0x18c) != 0) {

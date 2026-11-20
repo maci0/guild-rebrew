@@ -18,7 +18,7 @@ typedef struct {
 
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_004c4510(char* base, int entity_id);
-int __cdecl fcn_004c4570(unsigned char size, unsigned char count, unsigned short off, char* src);
+int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, unsigned short off, char* src);
 void __cdecl fcn_004c5360(void);
 float __cdecl fcn_004fe5f0(void*);
 void __cdecl fcn_004c6150(int a1, char* a2);
@@ -44,7 +44,7 @@ void __cdecl fcn_004ff0f0(void)
 			id = p->id;
 			v = 8;
 			fcn_004c4510((char*) p - 2, id);
-			fcn_004c4570(1, 1, 2, (char*) &v);
+			cm_AppendPacketFieldDelta(1, 1, 2, (char*) &v);
 			fcn_004c5360();
 			++g_773d48;
 		}

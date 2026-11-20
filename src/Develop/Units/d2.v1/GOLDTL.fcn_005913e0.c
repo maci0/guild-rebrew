@@ -12,7 +12,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char*, ...);
 
-int __cdecl fcn_005913e0(char* name)
+int __cdecl d2_ShowContactTooltip(char* name)
 {
 	char base[0x80];
 	char path[0x100];

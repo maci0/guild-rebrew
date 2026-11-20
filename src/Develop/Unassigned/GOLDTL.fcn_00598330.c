@@ -5,9 +5,9 @@ extern int g_67a370;
 extern int g_776664;
 
 #ifdef REBREW_GOLD
-char __cdecl fcn_00438d40(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
+char __cdecl d3_VisitSceneObjectsUntilStopped(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
 #define lc_Collect fcn_0058fa00
-#define lc_WalkScene fcn_00438d40
+#define lc_WalkScene d3_VisitSceneObjectsUntilStopped
 #else
 char __cdecl d3_VisitSceneObjects(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
 #define lc_Collect fcn_005982d0

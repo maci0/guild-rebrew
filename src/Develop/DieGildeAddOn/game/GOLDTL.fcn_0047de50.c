@@ -70,7 +70,7 @@ void __cdecl fcn_00482f20(Master47de*);
 void __cdecl fcn_00483480(Master47de*);
 void __cdecl fcn_00483f20(Master47de*);
 void __cdecl fcn_0047e270(Master47de*);
-void __cdecl fcn_0047ebc0(Master47de*);
+void __cdecl ai_StartMeisterProduction(Master47de*);
 
 void __cdecl ai_EvaluateMeister(Master47de* m)
 {
@@ -103,7 +103,7 @@ void __cdecl ai_EvaluateMeister(Master47de* m)
 	if (gm_GetBuildingTypeCategory(m->bld->office) == 1 || gm_GetBuildingTypeCategory(m->bld->office) == 4) {
 		k = ((Office47de*)lpGebaeudePROT)[m->bld->office].kind;
 		if (k == 0xe || k == 8 || k == 0x20) {
-			fcn_0047ebc0(m);
+			ai_StartMeisterProduction(m);
 		} else if (k == 0x1d) {
 			fcn_00483480(m);
 		} else if (k == 0x1f) {

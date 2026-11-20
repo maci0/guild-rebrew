@@ -28,7 +28,7 @@ float __cdecl fcn_005101e0(char*, int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c6090(char*, int, int, int);
 int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
@@ -60,7 +60,7 @@ void __cdecl fcn_0055cc80(char* self)
 		}
 		packet = (S55cc80Packet*) gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10));
 		if (packet == 0) {
-			fcn_00546190(self);
+			he_FreeAction(self);
 			return;
 		}
 		row = (char*) &g_7f4ca0 + packet->slot * 0x21c;
@@ -70,7 +70,7 @@ void __cdecl fcn_0055cc80(char* self)
 		if (t > src) {
 			io_FormatTextBuffer(buf, 0x1a41, (char*) packet);
 			he_MessageBoxQuickjump(*(int*) ((unsigned long)&g_7f4ca4 + packet->slot * 0x21c), *(int*) (self + 0x10), buf, 0, 0x5f2, packet->handle, *(int*) (self + 0xb4), 0, 0);
-			fcn_00546190(self);
+			he_FreeAction(self);
 			return;
 		}
 		started = 0;
@@ -86,7 +86,7 @@ void __cdecl fcn_0055cc80(char* self)
 			}
 		}
 		if (started >= 1) {
-			fcn_00546190(self);
+			he_FreeAction(self);
 			return;
 		}
 		state = *(int*) (self + 0x70);
@@ -101,14 +101,14 @@ void __cdecl fcn_0055cc80(char* self)
 		answer = (unsigned short*) fcn_004c4480(*(int*) (self + 0xb8));
 		if (answer == 0) {
 			fcn_00545d40(*(int*) ((unsigned long)&g_7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), -1, (char*) 0x6a628c, 0, 0x5f8, 0);
-			fcn_00546190(self);
+			he_FreeAction(self);
 			return;
 		}
 		g_7746d4 = 1;
 		*(int*) (self + 0xbc) = *(int*) (answer + 2);
 		packet = (S55cc80Packet*) gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10));
 		if (packet == 0) {
-			fcn_00546190(self);
+			he_FreeAction(self);
 			return;
 		}
 		proto = &((S55cc80Proto*)lpGebaeudePROT)[packet->idx0];
@@ -150,7 +150,7 @@ void __cdecl fcn_0055cc80(char* self)
 			if (((int*) (self + 0xb0))[count] > 0) break;
 		}
 		if (count >= 1) {
-			fcn_00546190(self);
+			he_FreeAction(self);
 			return;
 		}
 		fcn_00500bb0(self + 0x52, 0, (gm_RandomMod(10) & 0xffff) + 10, 0);
@@ -158,7 +158,7 @@ void __cdecl fcn_0055cc80(char* self)
 		return;
 	case -2:
 	case -1:
-		fcn_00546190(self);
+		he_FreeAction(self);
 		return;
 	}
 }

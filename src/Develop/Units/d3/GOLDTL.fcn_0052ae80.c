@@ -23,7 +23,7 @@ void __cdecl fcn_00433780(char*);
 void __cdecl d3_AnimateObjectTransform(char*, int*, int*, int, int);
 
 /* ADDRESS: GOLDTL 0x0052ae80 */
-void __cdecl fcn_0052ae80(void)
+void __cdecl d3_UpdateCameraAtScreenEdges(void)
 {
 	int minx;
 	int maxx;

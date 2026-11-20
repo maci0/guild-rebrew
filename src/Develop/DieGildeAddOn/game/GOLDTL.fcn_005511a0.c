@@ -2,7 +2,7 @@
 
 extern pos14_7f4c00 gm_GameTime;
 
-extern void __cdecl fcn_00546190(void* a0);
+extern void __cdecl he_FreeAction(void* a0);
 extern void __cdecl fcn_00500bb0(unsigned int* p, int a, int b, int c);
 extern int __cdecl fcn_004c5620(int a, void* b);
 
@@ -23,7 +23,7 @@ void __cdecl fcn_005511a0(char* a0)
 				}
 			}
 		} else {
-			fcn_00546190(a0);
+			he_FreeAction(a0);
 		}
 	}
 }

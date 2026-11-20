@@ -43,7 +43,7 @@ int __cdecl fcn_00506380(int, int, int, char*);
 void __cdecl d3_UpdateObjectCameraTransform(char*, char*, int);
 Vec3* __stdcall fcn_005eb2e4(Vec3*, Vec3*, char*, Mat4*, Mat4*, Mat4*);
 
-void __cdecl fcn_005345b0(void)
+void __cdecl d3_UpdateCharacterBoxSelection(void)
 {
 	int x0;
 	int x1;

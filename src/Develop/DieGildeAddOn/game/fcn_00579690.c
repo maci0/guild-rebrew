@@ -4,7 +4,7 @@ int __cdecl fcn_00503fe0(int a, int b, int c);
 void* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int a, int b, int c, void* d);
-void __cdecl fcn_00546190(void* p);
+void __cdecl he_FreeAction(void* p);
 void __cdecl fcn_00500bb0(void* p, int a, int b, int c);
 
 extern pos14_7f4c00 gm_GameTime;
@@ -32,7 +32,7 @@ void __cdecl fcn_00579690(char* event)
 		p++;
 	}
 	if (found == 0) {
-		fcn_00546190(event);
+		he_FreeAction(event);
 		return;
 	}
 	*(int*) (event + 0xb0) = 0;

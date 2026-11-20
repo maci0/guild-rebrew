@@ -4,7 +4,7 @@ void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl _ftol(void);
 void __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_005b2a40(void *, int, int *);
+void __cdecl he_ShowZigeunerGroupMessage(void *, int, int *);
 
 /* ADDRESS: GOLDTL 0x004ab7d0 */
 int __cdecl ai_RunBlutrache(int actor, char *a2, char *a3)
@@ -41,6 +41,6 @@ int __cdecl ai_RunBlutrache(int actor, char *a2, char *a3)
 		t = 0x32 - (int) (fcn_00507e70((char *) actor, (char *) participants[i], 4) * -50.0f);
 		fcn_004c54c0(*(unsigned short *) entity, *(unsigned short *) participants[i], -t, 1);
 	}
-	fcn_005b2a40(entity, count, participants);
+	he_ShowZigeunerGroupMessage(entity, count, participants);
 	return 0x44;
 }

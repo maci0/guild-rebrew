@@ -33,7 +33,7 @@ void __cdecl evt_LogScriptError(char*, int, const char*);
 char* __cdecl fcn_00402610(char*);
 #include "client_scene_transform.h"
 float __cdecl fcn_00444700(char*, float*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 void __cdecl fcn_00441720(char*, float*, int, int*, int*, float*);
 extern float g_6628a8;
@@ -45,7 +45,7 @@ extern char g_10432c0[];
 char __cdecl fcn_00442c00(char*, char);
 
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl vfs_ToSlashes(char*);
 int __cdecl d3_RemoveObjectAnim(char*);
 
@@ -295,7 +295,7 @@ int __cdecl ch_ExecuteAction(char* e)
 }
 
 
-int __cdecl fcn_00406670(char* p, char* s);
+int __cdecl ch_QueueStandUpAnimation(char* p, char* s);
 
 
 int __cdecl ch_CancelActionQueue(char* e)
@@ -314,7 +314,7 @@ int __cdecl ch_CancelActionQueue(char* e)
 		ch_RemoveQueueEntry((char*) t->naechste);
 	}
 	if ((*(unsigned char*) (e + 0x8c) & 0x10) != 0) {
-		fcn_00406670(e, "sitzend/aufstehen");
+		ch_QueueStandUpAnimation(e, "sitzend/aufstehen");
 	}
 	return 1;
 }

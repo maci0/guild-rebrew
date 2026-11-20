@@ -30,7 +30,7 @@ int __cdecl fcn_004e93d0(unsigned char* a1, int max, int* out)
 		return 0;
 	if (fcn_004e8b40(a1[0x166], &r) == 0)
 		return 0;
-	n = fcn_004e8b80(r.id, 6, arr);
+	n = amt_FindOfficeSlotsByKind(r.id, 6, arr);
 	if (n == 0)
 		return 0;
 	if (r.kind % 3 == 1)

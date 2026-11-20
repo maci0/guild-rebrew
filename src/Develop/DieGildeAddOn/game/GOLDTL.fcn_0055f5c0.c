@@ -23,7 +23,7 @@ extern int g_7f4ca4;
 
 int __cdecl fcn_00500cb0(void*, void*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
@@ -47,7 +47,7 @@ void __cdecl fcn_0055f590(char* e)
     *(int*) (e + 0xec) = 0;
     if (g_7f4ca2[*(unsigned short*) (e + 8)].kind == 6)
         return;
-    fcn_00546190(e);
+    he_FreeAction(e);
 }
 
 /* One stage of the event message-box tick; state lives at +0x70. */
@@ -74,7 +74,7 @@ void __cdecl fcn_0055f5c0(char* e)
             else
                 fcn_00545670(e, 0, 0, "misc\\EventMessagebox_QJ", *(int*) (e + 0xac));
             if (*(int*) (e + 0x74) == 0) {
-                fcn_00546190(e);
+                he_FreeAction(e);
                 return;
             }
             if (g_7746c4 != 0)
@@ -113,7 +113,7 @@ void __cdecl fcn_0055f5c0(char* e)
         }
 done:
         if (*(int*) (e + 0x74) == 0) {
-            fcn_00546190(e);
+            he_FreeAction(e);
             return;
         }
         d2_CenterDialogWindows(*(int*) (*(int*) (e + 0x74) + 8));
@@ -225,7 +225,7 @@ body1:
             fcn_004116d0();
         }
         fcn_00545780(e);
-        fcn_00546190(e);
+        he_FreeAction(e);
 exit_a:
         g_7749e8 = 0;
         return;
@@ -263,7 +263,7 @@ exit_clear:
         }
 exit_b:
         fcn_00545780(e);
-        fcn_00546190(e);
+        he_FreeAction(e);
         return;
     case -2:
     case -1:

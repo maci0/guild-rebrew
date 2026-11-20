@@ -10,11 +10,11 @@ extern char* gm_CityEntity;
 char __cdecl d3_ComputeObjectBoundingSphere(int, int, void*, void*);
 int __cdecl fcn_00415300(int);
 int __cdecl fcn_004234e0(int, int, int, int, int, int, int);
-int __cdecl fcn_00426cc0(int);
+int __cdecl evt_FindScriptById(int);
 int __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(int, int, ...);
-int __cdecl fcn_00428720(int);
-void __cdecl fcn_00429670(int);
+int __cdecl evt_RequestScriptExit(int);
+void __cdecl evt_RunGfxScript(int);
 void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
 char __cdecl d3_DestroyObject(int);
 void __cdecl d3_SetSubtreeVisible(int, int);
@@ -26,7 +26,7 @@ void __cdecl fcn_004bd4e0(int, int);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c4510(void*, int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 int __cdecl fcn_004c4f30(unsigned char, int, int, int);
 int __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c5360();
@@ -46,7 +46,7 @@ int __cdecl fcn_00510820(int, void*, int);
 void __cdecl fcn_005165b0(int);
 void __cdecl fcn_0052d9d0(void*);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_00546190(int);
+void __cdecl he_FreeAction(int);
 void __cdecl fcn_00573e10(int);
 int __cdecl fcn_00574150();
 int __cdecl fcn_005742e0(void*, void*, void*, void*, void*);
@@ -60,7 +60,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 double __cdecl sqrt(double);
 
 /* ADDRESS: GOLDTL 0x005744c0 */
-void __cdecl fcn_005744c0(int a0)
+void __cdecl gm_HandleHausbau(int a0)
 {
 	int buildAction;
 	int v8;
@@ -250,7 +250,7 @@ LfailB:
 						fcn_00428340(v24, 4, v14, v8, 0x573d90, buildAction);
 						*(int*) (v24 + 0x104) = 0;
 						*(int*) (v24 + 0xc8c) = 1;
-						fcn_00429670(v24);
+						evt_RunGfxScript(v24);
 					}
 					*(unsigned char*) (buildAction + 0xd0) = *(unsigned char*) (buildAction + 0xd0) + 1;
 				}
@@ -347,7 +347,7 @@ LfailB:
 				*(int*) (v24 + 0xc8c) = 1;
 				*(int*) (v24 + 0x104) = 0;
 				*(int*) (buildAction + 0xbc) = *(int*) (v24 + 0x100);
-				fcn_00429670(v24);
+				evt_RunGfxScript(v24);
 			}
 			fcn_004432d0(savedContext, 1);
 		}
@@ -369,9 +369,9 @@ LfailB:
 		if (*(int*) (buildAction + 0xc8) > *(int*) (buildAction + 0xc4)) {
 			fcn_004432d0(0, 1);
 			if (*(int*) (buildAction + 0xbc) != -1) {
-				v8 = fcn_00426cc0(*(int*) (buildAction + 0xbc));
+				v8 = evt_FindScriptById(*(int*) (buildAction + 0xbc));
 				if (v8) {
-					fcn_00428720(v8);
+					evt_RequestScriptExit(v8);
 				}
 				*(int*) (buildAction + 0xbc) = -1;
 			}
@@ -428,7 +428,7 @@ LfailB:
 					*(int*) (v20 + 8) = gm_GameTime.c;
 					*(unsigned short*) (v20 + 12) = (unsigned short) gm_GameTime.d;
 					fcn_004c4510(v15, *(int*) (v15 + 1));
-					fcn_004c4570(1, 0xe, 0x69, v20);
+					cm_AppendPacketFieldDelta(1, 0xe, 0x69, v20);
 					fcn_004c5360();
 				}
 				if (g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind == 6) {
@@ -477,7 +477,7 @@ LfailB:
 				(int) v15);
 			fcn_004432d0(savedContext, 1);
 			*(int*) (buildAction + 0x7c) = 0;
-			fcn_00546190(buildAction);
+			he_FreeAction(buildAction);
 			return;
 		}
 		break;
@@ -487,9 +487,9 @@ LfailB:
 		fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
 		fcn_004432d0(0, 1);
 		if (*(int*) (buildAction + 0xbc) != -1) {
-			v8 = fcn_00426cc0(*(int*) (buildAction + 0xbc));
+			v8 = evt_FindScriptById(*(int*) (buildAction + 0xbc));
 			if (v8) {
-				fcn_00428720(v8);
+				evt_RequestScriptExit(v8);
 			}
 			*(int*) (buildAction + 0xbc) = -1;
 		}
@@ -503,7 +503,7 @@ LfailB:
 			fcn_004c5790(0xc, v19);
 		}
 		fcn_004432d0(savedContext, 1);
-		fcn_00546190(buildAction);
+		he_FreeAction(buildAction);
 		return;
 	}
 	return;

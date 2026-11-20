@@ -20,7 +20,7 @@ int __cdecl fcn_00417d00(int a1, float* pos, int n, float a4, float a5,
 unsigned int __cdecl cut_RandMod(unsigned int n);
 void __cdecl fcn_004cfc40(char* a1, int a2, int a3);
 int __cdecl fcn_004d4790(char* e);
-int __cdecl fcn_00406340(char* e, const char* name, int param);
+int __cdecl ch_QueuePlayAnimation(char* e, const char* name, int param);
 char __cdecl d3_DestroyObject(void* object);
 double __cdecl sqrt(double x);
 
@@ -104,7 +104,7 @@ int __cdecl fcn_004cf180(void)
                                     flag = 2;
                                 fcn_004cfc40((char*) node, t, flag);
                                 if (!fcn_004d4790((char*) e)) {
-                                    fcn_00406340((char*) m, "Explosion_s", 1);
+                                    ch_QueuePlayAnimation((char*) m, "Explosion_s", 1);
                                 }
                             }
                         }

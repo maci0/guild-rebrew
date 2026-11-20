@@ -17,7 +17,7 @@ int __cdecl fcn_0058cda0(char*, int);
 void __cdecl fcn_00471af0(int, int);
 
 /* ADDRESS: GOLDTL 0x0058d020 */
-void __cdecl fcn_0058d020(char* a0)
+void __cdecl d2_OpenRentAGraveDialog(char* a0)
 {
 	int sel; int selected;
 	int ids[4];

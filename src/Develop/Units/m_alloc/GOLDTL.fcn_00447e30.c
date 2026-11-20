@@ -53,7 +53,7 @@ typedef struct S447e30Desc {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl ReportClientMessage(char*);
-char* __cdecl fcn_004011a0(char*, char*);
+char* __cdecl vfs_ReadCString(char*, char*);
 int __cdecl vfs_ReadByte(char*, char*);
 int __cdecl fcn_004011f0(char*, int*);
 int __cdecl fcn_004011d0(char*, float*);
@@ -113,7 +113,7 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 			add ecx, ebx
 			rep stosb
 		}
-		fcn_004011a0(stream, desc.name);
+		vfs_ReadCString(stream, desc.name);
 		if (desc.name[0] != 0 && version >= 0x3a6c00ad) {
 			fcn_004011f0(stream, &desc.listA);
 			bio_rd_array_quick(stream, desc.listA, &desc.listB);
@@ -135,7 +135,7 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 					while (saved < desc.count) {
 						last = 0;
 
-						fcn_004011a0(stream, recName);
+						vfs_ReadCString(stream, recName);
 						vfs_ReadByte(stream, &kind);
 						vfs_ReadByte(stream, &b1);
 						vfs_ReadByte(stream, &b2);
@@ -184,13 +184,13 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 				}
 			}
 		}
-		fcn_004011a0(stream, desc.texture);
+		vfs_ReadCString(stream, desc.texture);
 		if (version >= 0x3a6c00ad && desc.texture[0] != 0) {
 			bio_rd_array_quick(stream, desc.listA, &desc.listE);
 		}
 		if (version <= 0x3a6c000f) {
 			for (i = 0; i < 5; i++) {
-				fcn_004011a0(stream, skip);
+				vfs_ReadCString(stream, skip);
 			}
 		}
 		if (version >= 0x3a6c00b0) {
@@ -199,13 +199,13 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 			i = 6;
 		}
 		for (saved = 0; saved < i; saved++) {
-			fcn_004011a0(stream, desc.strings[saved]);
+			vfs_ReadCString(stream, desc.strings[saved]);
 		}
 		fcn_004011d0(stream, &desc.scale);
 		fcn_004011d0(stream, &desc.height);
 		if (version <= 0x3a6c000f) {
 			for (i = 0; i < 0x100; i++) {
-				fcn_004011a0(stream, skip);
+				vfs_ReadCString(stream, skip);
 			}
 		}
 		obj = fcn_0043fa10((char*) &desc);

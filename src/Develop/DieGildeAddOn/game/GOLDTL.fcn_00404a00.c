@@ -12,7 +12,7 @@ void __cdecl d3_RemoveObjectAnimation(char*, char*);
 
 #include "ch_motion.h"
 
-char* __cdecl fcn_00433be0(char*, char*, char*, int, int, char*, char*, int);
+char* __cdecl d3_CreateMorphAnimation(char*, char*, char*, int, int, char*, char*, int);
 void __cdecl fcn_004311a0(char*, char*, int, int, int);
 #ifdef REBREW_GOLD
 int __cdecl fcn_00411be0(char*);
@@ -45,7 +45,7 @@ void __cdecl ch_FinishAni(char* obj)
         stream = *(char**) (*(char**) (node + 0x1cc) + 0x318);
 #endif
         ani = *(char**) (obj + 0x70);
-        if (fcn_00433be0(stream, *(char**) (ani + 0x68),
+        if (d3_CreateMorphAnimation(stream, *(char**) (ani + 0x68),
             *(char**) (*(char**) (ani + 0x68) + 0x15c) + 0xc0 * *(int*) ani,
             0, 0, stream, name, 4) != 0) {
             *(int*) &opt = 0;
@@ -53,7 +53,7 @@ void __cdecl ch_FinishAni(char* obj)
             opt.reverse = 0;
             opt.loop = 0;
             opt.layer = 0x18;
-            *(char**) (obj + 0x7c) = fcn_00434970(
+            *(char**) (obj + 0x7c) = d3_AttachAnimationToContext(
                 *(char**) (node + 0x1ec) + 0xf4, name, opt);
             if (*(char**) (obj + 0x7c) != 0) {
 #ifdef REBREW_GOLD
@@ -112,7 +112,7 @@ void __cdecl ch_PreloadCharacterMotions(char* obj, int n, ...)
 		*(int*) &opt = 0;
 		opt.layer = 0x18;
 		opt.mode = 0;
-		fcn_00434970(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, ani, opt);
+		d3_AttachAnimationToContext(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, ani, opt);
 		d3_RemoveObjectAnimation(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, ani);
 	}
 	va_end(ap);
@@ -148,7 +148,7 @@ void __cdecl ch_PreloadModelMotions(char* model, int n, ...)
         *(int*) &opt = 0;
         opt.layer = 0x18;
         opt.mode = 0;
-        fcn_00434970(*(char**) (*(char**) 0x34 + 0x1ec) + 0xf4, ani, opt);
+        d3_AttachAnimationToContext(*(char**) (*(char**) 0x34 + 0x1ec) + 0xf4, ani, opt);
         d3_RemoveObjectAnimation(*(char**) (*(char**) 0x34 + 0x1ec) + 0xf4, ani);
     }
     va_end(ap);

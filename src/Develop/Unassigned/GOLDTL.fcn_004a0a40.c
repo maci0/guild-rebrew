@@ -14,7 +14,7 @@ typedef struct Unit {
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_0047dd60(char* e);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl fcn_004a4410(float* s1, float* s2, int idx, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x004a0a40 */
@@ -45,7 +45,7 @@ int __cdecl ai_ScoreBerufsausbildung(float* s1, float* s2, int idx, char* actor,
 	best = 0;
 	for (i = 0; i < 5; i++) {
 		unit = (Unit*) gm_LookupEntityRecordById(((int*) (actor + 0x68))[i]);
-		if (unit != 0 && unit->hp > 0 && unit->level + 4 >= unit->need && unit->locked == 0 && fcn_005463a0(2, 2, unit->id, 0, 0x5e) == 0) {
+		if (unit != 0 && unit->hp > 0 && unit->level + 4 >= unit->need && unit->locked == 0 && he_StartHandlungSearch(2, 2, unit->id, 0, 0x5e) == 0) {
 			if (best == 0 || unit->level > best->level) {
 				best = unit;
 			}

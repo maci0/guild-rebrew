@@ -11,7 +11,7 @@ void* __cdecl m_alloc(int size, char* tag);
 void* __cdecl fcn_0044f190(unsigned int a0);
 char* __cdecl fcn_0064d530(char* dest, char* src, int count);
 void __cdecl fcn_004011f0(void* a0, void* a1);
-void __cdecl fcn_004011a0(void* a0, char* a1);
+void __cdecl vfs_ReadCString(void* a0, char* a1);
 void __cdecl vfs_ReadByte(void* a0, void* a1);
 void __cdecl fcn_004011d0(void* a0, void* a1);
 void __cdecl fcn_00401280(void* a0, void* a1);
@@ -21,7 +21,7 @@ void __cdecl CloseVfsStream(void* a0);
 extern char* g_104049c;
 
 /* ADDRESS: GOLDTL 0x0044f250 */
-int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a4)
+int __cdecl d3_LoadFastChunk(unsigned int a0, unsigned int a1, int a2, int a3, int a4)
 {
 	unsigned char* chunk;
 	void* inputStream;
@@ -117,9 +117,9 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 			v6 = (char*)v15;
 			do {
 				v10 = v28 * 0x40;
-				fcn_004011a0(inputStream, v16);
-				fcn_004011a0(inputStream, v17);
-				fcn_004011a0(inputStream, v18);
+				vfs_ReadCString(inputStream, v16);
+				vfs_ReadCString(inputStream, v17);
+				vfs_ReadCString(inputStream, v18);
 				vfs_ReadByte(inputStream, &v19);
 				vfs_ReadByte(inputStream, &v20);
 				vfs_ReadByte(inputStream, &v21);
@@ -194,7 +194,7 @@ int __cdecl fcn_0044f250(unsigned int a0, unsigned int a1, int a2, int a3, int a
 		if (v25 > 0) {
 			v10 = (int)(chunk + 0xb4);
 			do {
-				fcn_004011a0(inputStream, (char*)(v10 - 0x40));
+				vfs_ReadCString(inputStream, (char*)(v10 - 0x40));
 				fcn_00401280(inputStream, (void*)v10);
 				fcn_00401280(inputStream, (void*)(v10 + 0xc));
 				v11 += 1;

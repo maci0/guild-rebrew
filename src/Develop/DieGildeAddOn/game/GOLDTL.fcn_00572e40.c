@@ -1,8 +1,8 @@
 #include <string.h>
 
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl fcn_00500bb0(char*, int, int, int);
 void* __cdecl gm_FindRecordById(int);
 int __cdecl fcn_004c5530(char*);
@@ -16,12 +16,12 @@ void __cdecl fcn_00572e40(char* c)
 	char* p44;
 	char* p52;
 
-	x = fcn_005463a0(2, 0, 0xb, 3, *(int*) (c + 0x10));
+	x = he_StartHandlungSearch(2, 0, 0xb, 3, *(int*) (c + 0x10));
 	if (x != 0) {
 		do {
 			if (*(int*) (x + 0xac) == *(int*) (c + 0xac) &&
 			    *(int*) (x + 4) != *(int*) (c + 4)) {
-				fcn_00546190(c);
+				he_FreeAction(c);
 				return;
 			}
 			x = he_fn_Handlung();
@@ -54,7 +54,7 @@ void __cdecl fcn_00572e40(char* c)
 			*(int*) (c + 0xec) = fcn_004c5530(buf);
 		}
 	} else {
-		fcn_00546190(c);
+		he_FreeAction(c);
 	}
 	*(char*) (c + 0xf0) = 0;
 	if (gm_LookupEntityRecordById(*(int*) (c + 0xb4))) {

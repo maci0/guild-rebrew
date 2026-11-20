@@ -11,7 +11,7 @@ extern int g_6a25f0;
 
 
 
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 void __cdecl fcn_00471e30(int);
 /* ADDRESS: GOLD 0x529ff0 */
 
@@ -22,7 +22,7 @@ void __cdecl fcn_0052f710(void)
 	if (g_6a25b8 != -1) {
 		for (i = 0; i < 4; i++) {
 			if (g_6a25c4[i] != -1) {
-				fcn_0046b2b0(g_6a25c4[i]);
+				d2_DestroyElement(g_6a25c4[i]);
 				g_6a25c4[i] = -1;
 			}
 		}

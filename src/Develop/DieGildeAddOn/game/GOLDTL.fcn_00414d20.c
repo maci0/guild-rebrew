@@ -30,7 +30,7 @@ extern int d3_ActiveCameraAnimation;
 extern void* d3_ActiveCamera;
 
 int __cdecl fcn_00445600(int a1, int a2, int a3, char* name);
-int __cdecl fcn_004339e0(char* obj, Flags4cf450 fl, int n, void* ents);
+int __cdecl d3_CreateObjectAnimation(char* obj, Flags4cf450 fl, int n, void* ents);
 
 /* ADDRESS: GOLDTL 0x00414d20 */
 int __cdecl fcn_00414d20(int a1, int count, ...)
@@ -169,7 +169,7 @@ int __cdecl fcn_00414d20(int a1, int count, ...)
 		}
 		ents[m].type = 0;
 	}
-	d3_ActiveCameraAnimation = fcn_004339e0((char*) d3_ActiveCamera, fl, n + 1, rec);
+	d3_ActiveCameraAnimation = d3_CreateObjectAnimation((char*) d3_ActiveCamera, fl, n + 1, rec);
 	d3_CameraAnimating = 1;
 	return 1;
 }

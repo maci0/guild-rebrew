@@ -40,7 +40,7 @@ int __cdecl fcn_0050f950(int a, int b);
 void __cdecl fcn_005904a0(char* s, int v);
 void __cdecl fcn_004c5530(Msg5* m);
 void __cdecl fcn_00500bb0(GAME_TIMESTAMP* t, int a, int b, int c);
-void __cdecl fcn_00546190(char* e);
+void __cdecl he_FreeAction(char* e);
 
 /* ADDRESS: GOLDTL 0x0057b390 */
 void __cdecl fcn_0057b390(char* e)
@@ -144,7 +144,7 @@ void __cdecl fcn_0057b390(char* e)
 		return;
 	case -1:
 	case -2:
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	default:
 		return;

@@ -25,7 +25,7 @@ typedef struct GOLDTL_Msg493 {
 extern float g_664150;
 
 void* __cdecl gm_LookupEntityRecordById(unsigned int);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl gm_MapEntityStatRange(unsigned char);
 int __cdecl gm_WalkEntityChain(unsigned short);
 unsigned char __cdecl fcn_00507400(int, int);
@@ -97,7 +97,7 @@ void __cdecl fcn_00493f80(void)
 					} else if (e1[8] > 0
 					 && (float) (*(unsigned short*) (e1 + 0xa) + 3) >= *(float*) (e1 + 0x20)
 					 && !e1[0x164]
-					 && !fcn_005463a0(2, 2, *(unsigned short*) e1, 0, 0x5e)) {
+					 && !he_StartHandlungSearch(2, 2, *(unsigned short*) e1, 0, 0x5e)) {
 						cand[candidateCount] = e1;
 						candidateCount++;
 					} else {

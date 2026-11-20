@@ -39,11 +39,11 @@ void __cdecl fcn_00469470(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_SetBildArgument(int, int);
 void __cdecl fcn_00476b60(void);
-void __cdecl fcn_00474cf0(int);
+void __cdecl d2_SelectControl(int);
 int __cdecl d2_SetSlotVisibility(int, int);
 char* __cdecl fcn_00471f80(int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl fcn_004ce190(int);
 int __cdecl fcn_004ce1d0(void);
@@ -201,9 +201,9 @@ update:
 		for (i = 0; i < 5; i++)
 			d2_SetSlotVisibility(fcn_00472250(h, 0, i), i <= sel);
 		if (sel == 0)
-			fcn_00474cf0(first);
+			d2_SelectControl(first);
 		else if (sel == 1)
-			fcn_00474cf0(second);
+			d2_SelectControl(second);
 		redraw = 0;
 dispatch:
 		if (sel == 0) {
@@ -280,9 +280,9 @@ dispatch:
 			g_774654 = 1;
 		}
 		if (fcn_005373e0((int (__cdecl*)(void)) 0x53d490, msg) == 0) {
-			fcn_00469510(w8);
-			fcn_00469510(w24);
-			fcn_00469510(group);
+			d2_ClearRadioGroup(w8);
+			d2_ClearRadioGroup(w24);
+			d2_ClearRadioGroup(group);
 			fcn_00471e30(h);
 			WritePrivateProfileStringA("Network", "Name", g_7e23ea, g_7e22c0);
 			WritePrivateProfileStringA("Network", "Familienname", g_7e240a, g_7e22c0);

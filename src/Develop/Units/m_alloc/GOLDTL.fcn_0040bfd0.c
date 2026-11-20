@@ -17,7 +17,7 @@ void __cdecl fcn_00408240(void* p);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl ch_DestroyCharacter(char* e);
 
-void __cdecl fcn_0040bfd0(void)
+void __cdecl ch_ShutdownCharacters(void)
 {
 	int i;
 	char** p;

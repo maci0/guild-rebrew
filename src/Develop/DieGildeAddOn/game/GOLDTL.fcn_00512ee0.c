@@ -72,7 +72,7 @@ void __cdecl fcn_004c44a0(void);
 void __cdecl fcn_004c44b0(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_004c4510(char *, int);
-int __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char *);
+int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char *);
 void __cdecl fcn_004c4940(void);
 void __cdecl cm_ExecCommand(void);
 void __cdecl fcn_004c5150(int, int, char, int);
@@ -87,7 +87,7 @@ int __cdecl cm_RequestCreateGeb(int, int, char *, float *);
 void __cdecl fcn_004fb390(void);
 int __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
-int __cdecl fcn_00504db0(unsigned char *, int);
+int __cdecl gm_FindNearestEligibleEntity(unsigned char *, int);
 int __cdecl gm_CheckEntityType(unsigned char *);
 int __cdecl fcn_005072c0(int);
 int __cdecl fcn_0050b750(int, char);
@@ -97,7 +97,7 @@ void __cdecl fcn_00511c60(int);
 void __cdecl init_Betrieb(unsigned char *);
 void __cdecl fcn_00512d20(unsigned char *);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_0053f630(int, int);
+void __cdecl d2_SetProgressPercent(int, int);
 void __cdecl fcn_00547010(void);
 void __cdecl fcn_005470a0(void);
 void __cdecl fcn_00547130(void);
@@ -208,7 +208,7 @@ void __cdecl fcn_00512ee0(void)
 		}
 	}
 
-	fcn_0053f630(0, 0x55);
+	d2_SetProgressPercent(0, 0x55);
 	for (i = 0; i < total; i++) {
 		e = (char *)found[i];
 		if (e == 0)
@@ -218,9 +218,9 @@ void __cdecl fcn_00512ee0(void)
 			h = 0;
 		if (*(unsigned char *)(e + 2) != 5 && *(unsigned char *)(e + 2) != 4) {
 			if (h) {
-				q = fcn_00504db0((unsigned char *)h, 4);
+				q = gm_FindNearestEligibleEntity((unsigned char *)h, 4);
 				if (!q) {
-					q = fcn_00504db0((unsigned char *)h, 5);
+					q = gm_FindNearestEligibleEntity((unsigned char *)h, 5);
 					if (!q)
 						break;
 				}
@@ -233,9 +233,9 @@ void __cdecl fcn_00512ee0(void)
 				}
 			}
 		} else if (h) {
-			q = fcn_00504db0((unsigned char *)h, 5);
+			q = gm_FindNearestEligibleEntity((unsigned char *)h, 5);
 			if (!q) {
-				q = fcn_00504db0((unsigned char *)h, 4);
+				q = gm_FindNearestEligibleEntity((unsigned char *)h, 4);
 				if (!q)
 					break;
 			}
@@ -254,16 +254,16 @@ void __cdecl fcn_00512ee0(void)
 		}
 	}
 
-	fcn_0053f630(0, 0x5a);
+	d2_SetProgressPercent(0, 0x5a);
 	for (k = 0xb; k <= 0xd; k++) {
 		e = (char *)gm_StartFilteredEntitySearch(2, 4, 0xffff, 5, k);
 		if (e == 0)
 			continue;
 		count = fcn_0050cf50((unsigned char *)e, 100);
 		fcn_004c4510(e, *(int *)(e + 1));
-		fcn_004c4570(4, 1, 0x65, (char *)&count);
+		cm_AppendPacketFieldDelta(4, 1, 0x65, (char *)&count);
 		count = count * 2;
-		fcn_004c4570(4, 1, 0x69, (char *)&count);
+		cm_AppendPacketFieldDelta(4, 1, 0x69, (char *)&count);
 		fcn_004c5360();
 		o = (Office *)(lpGebaeudePROT + *(unsigned char *)e * 0x24d);
 		fcn_004c5f60(*(int *)(e + 1), *(int *)(gm_CityEntity + 4),
@@ -275,7 +275,7 @@ void __cdecl fcn_00512ee0(void)
 		counts[k]++;
 	}
 
-	fcn_0053f630(0, 0x5f);
+	d2_SetProgressPercent(0, 0x5f);
 	e = (char *)gm_StartFilteredEntitySearch(2, 4, 0xffff, 5, 0x10);
 	if (e) {
 		o = (Office *)(lpGebaeudePROT + *(unsigned char *)e * 0x24d);
@@ -357,9 +357,9 @@ void __cdecl fcn_00512ee0(void)
 						goto release_handles;
 				}
 			} else {
-				q = fcn_00504db0((unsigned char *)h, 5);
+				q = gm_FindNearestEligibleEntity((unsigned char *)h, 5);
 				if (!q) {
-					q = fcn_00504db0((unsigned char *)h, 4);
+					q = gm_FindNearestEligibleEntity((unsigned char *)h, 4);
 					if (!q)
 						goto release_handles;
 				}

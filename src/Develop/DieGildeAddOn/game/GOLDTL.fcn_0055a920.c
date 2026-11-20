@@ -7,9 +7,9 @@ extern char g_7f4ca0[];
 
 
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl fcn_004c4510(char*, int);
-void __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
+void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(char, char*);
@@ -31,7 +31,7 @@ void __cdecl fcn_0055a920(char* rec)
 	flag = 1 - *(int*) (rec + 0xb4);
 	if (*(int*) (rec + 0x70) < 0 || *(int*) (rec + 0xb0) <= 0 ||
 	    *(int*) (rec + 0xac) <= 0) {
-		fcn_00546190(rec);
+		he_FreeAction(rec);
 		return;
 	}
 	if ((*(unsigned char*) (rec + 0x78) & 4) != 0) {
@@ -57,7 +57,7 @@ void __cdecl fcn_0055a920(char* rec)
 		    *(unsigned char*) (slot + 2) <= 4 &&
 		    *(unsigned char*) (slot + 0xc) == *(int*) (rec + 0xb4)) {
 			fcn_004c4510(slot, *(int*) (slot + 4));
-			fcn_004c4570(1, 1, 0xc, (char*) &flag);
+			cm_AppendPacketFieldDelta(1, 1, 0xc, (char*) &flag);
 			fcn_004c5360();
 			cnt++;
 		}

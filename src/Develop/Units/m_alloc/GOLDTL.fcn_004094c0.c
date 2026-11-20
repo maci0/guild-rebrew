@@ -11,7 +11,7 @@ extern int __cdecl ch_FindCharacterByName();
 extern char __cdecl fcn_0045b990();
 extern void __cdecl m_FreeTracked(void* ptr);
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
-extern int __cdecl fcn_00407e30();
+extern int __cdecl ch_FindWalkableCell();
 extern short __cdecl fcn_00421350();
 extern int __cdecl fcn_00407760();
 extern int __cdecl d3_GridPointToWorld();
@@ -95,10 +95,10 @@ unsigned int __cdecl fcn_004094c0(int a0, int gridContext)
 	if (*(unsigned char*) (obj + 4) & 4)
 		*(unsigned int*) (rec + 0x160) &= 0xffffffef;
 	if (*(unsigned int*) (rec + 0x160) & 0x10)
-		fcn_00407e30(gridContext, *(int*) (obj + 0x34) + 0x4c, rec + 0x144, v16, v17,
+		ch_FindWalkableCell(gridContext, *(int*) (obj + 0x34) + 0x4c, rec + 0x144, v16, v17,
 		    &v17, &v16, 8, *(unsigned int*) (rec + 0x160));
 	else
-		fcn_00407e30(gridContext, *(int*) (obj + 0x34) + 0x4c,
+		ch_FindWalkableCell(gridContext, *(int*) (obj + 0x34) + 0x4c,
 		    *(int*) (obj + 0x34) + 0x4c, v16, v17,
 		    &v17, &v16, 8, *(unsigned int*) (rec + 0x160));
 	*(unsigned int*) 0x14d0c28 = 0x14cfc20;

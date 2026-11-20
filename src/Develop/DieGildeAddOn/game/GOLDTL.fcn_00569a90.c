@@ -12,7 +12,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, int, char*, int, int);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004c4510(char*, int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c4670(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c51a0(int, int, char, int);
@@ -21,13 +21,13 @@ int __cdecl fcn_004c6b20(int, int, int);
 int __cdecl fcn_00567170(unsigned short*, int*, int*, int);
 int __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl fcn_004c5620(int, void*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl he_fn_Handlung(void);
-int __cdecl fcn_005463a0(int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x00569a90 */
-void __cdecl fcn_00569a90(char* action)
+void __cdecl gm_HandleLoesegeld(char* action)
 {
 	unsigned short* v3;
 	unsigned short* v4;
@@ -67,7 +67,7 @@ void __cdecl fcn_00569a90(char* action)
 				    buf, 0, 0x5fa, 0);
 				if (pkt != 0) {
 					fcn_004c4510((char*) pkt, *(int*) (pkt + 1));
-					fcn_004c4570(4, 1,
+					cm_AppendPacketFieldDelta(4, 1,
 					    (pkt - g_aed32c) + 0x65, (void*) &v[2]);
 					fcn_004c5360();
 				}
@@ -114,7 +114,7 @@ void __cdecl fcn_00569a90(char* action)
 				fcn_00545d40(*(int*) ((char*) v4 + 4), *(int*) (action + 0x10),
 				    buf, 0, 0x5fa, 0);
 				fcn_004c4510((char*) pkt, *(int*) (pkt + 1));
-				fcn_004c4570(4, 1, (pkt - g_aed32c) + 0x65, (void*) &v[1]);
+				cm_AppendPacketFieldDelta(4, 1, (pkt - g_aed32c) + 0x65, (void*) &v[1]);
 				fcn_004c5360();
 				fcn_004c6b20(*(int*) ((char*) v3 + 4),
 				    -(int) *(unsigned char*) ((char*) v3 + 0x1b1), 0);
@@ -137,16 +137,16 @@ void __cdecl fcn_00569a90(char* action)
 			io_FormatTextBuffer(buf, 0x19d5, *(unsigned short*) v3);
 			entity = *(int*) ((char*) v4 + 4);
 			fcn_00545d40(entity, entity, buf, 0, 0x5fb, 0);
-			fcn_00546190(action);
+			he_FreeAction(action);
 			return;
 		case 3:
-			pkt = fcn_005463a0(1, 0, 0x3d);
+			pkt = he_StartHandlungSearch(1, 0, 0x3d);
 			if (pkt != 0) {
 				while (*(int*) (pkt + 0xac) != *(int*) (action + 0xac)) {
 					pkt = he_fn_Handlung();
 					if (pkt != 0)
 						continue;
-					fcn_00546190(action);
+					he_FreeAction(action);
 					return;
 				}
 				*(int*) (action + 0x84) = fcn_004c5620(-1, action);
@@ -159,5 +159,5 @@ void __cdecl fcn_00569a90(char* action)
 			return;
 		}
 	}
-	fcn_00546190(action);
+	he_FreeAction(action);
 }

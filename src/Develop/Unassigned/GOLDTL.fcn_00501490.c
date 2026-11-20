@@ -12,7 +12,7 @@ extern char* lpObjektePROT;
 
 int __cdecl fcn_0065f220(char*, char*);
 
-int __cdecl fcn_00501490(char* name)
+int __cdecl gm_FindObjektPrototypeByName(char* name)
 {
 	int i;
 

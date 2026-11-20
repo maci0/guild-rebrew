@@ -2,7 +2,7 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 #include <string.h>
 int __cdecl fcn_0048d610(char*, char**);
-int __cdecl fcn_005463a0(int, ...);
+int __cdecl he_StartHandlungSearch(int, ...);
 int __cdecl fcn_0050d170(int);
 int __cdecl fcn_0050d200(char*, int);
 int __cdecl fcn_0050b810(int, unsigned char);
@@ -20,7 +20,7 @@ int __cdecl ai_StartDomizil(int a0, char* a1, int a2, int* a3, int* a4)
 	char* entity = a1;
 
 	if (fcn_0048d610(a1, (char**) &a1) && a2 == 0 && (a0 == 0x40 || a0 == 0) &&
-	    fcn_005463a0(2, 0, 0xd, 2, *(unsigned short*) entity) == 0) {
+	    he_StartHandlungSearch(2, 0, 0xd, 2, *(unsigned short*) entity) == 0) {
 		if (a1 != 0) {
 			if (*(unsigned char*) (lpGebaeudePROT + *(unsigned char*) a1 * 0x24d + 0x247) < 3 &&
 			    !(a1[0x5a] & 0x41)) {

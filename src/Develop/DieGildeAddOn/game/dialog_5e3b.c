@@ -29,8 +29,8 @@ int __cdecl fcn_004c5790(int, void*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_005e3d20(void);
-void __cdecl fcn_0051e080(char*, char*, int);
+void __cdecl ls_CaptureSavePreview(void);
+void __cdecl ls_SaveGame(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x005e3b70 */
 void __cdecl fcn_005e3b70(void)
@@ -58,7 +58,7 @@ void __cdecl fcn_005e3b70(void)
 
 /* ADDRESS: GOLD 0x005d7580 */
 /* ADDRESS: GOLDTL 0x005e40b0 */
-void __cdecl fcn_005e40b0(void)
+void __cdecl ls_QuickSave(void)
 {
 	SaveReq s;
 	int r;
@@ -82,9 +82,9 @@ void __cdecl fcn_005e40b0(void)
 	} else if (!(g_7747b0 & 0x80)) {
 		fcn_00533a40("Quicksave");
 		fcn_005373e0(0, 0x657c7);
-		fcn_005e3d20();
+		ls_CaptureSavePreview();
 		g_773de8 = 1;
-		fcn_0051e080("Gamedata\\Saves\\Quicksave.SAV", "Quicksave", 1);
+		ls_SaveGame("Gamedata\\Saves\\Quicksave.SAV", "Quicksave", 1);
 		fcn_00533a40(g_6b5c60);
 	}
 }

@@ -33,7 +33,7 @@ int __cdecl fcn_004a9820(char* a1, char* entity, char* a3, char* a4, char* out)
 	} else {
 		return 0;
 	}
-	n = fcn_004e8b80(4, 6, recs);
+	n = amt_FindOfficeSlotsByKind(4, 6, recs);
 	for (i = 0; i < n; i++) {
 		cands[i] = gm_LookupEntityRecordById(recs[i].mplayerid);
 	}

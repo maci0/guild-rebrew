@@ -36,7 +36,7 @@ void __cdecl fcn_00469470(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_005dfe80(int arg, unsigned int flags)
@@ -102,7 +102,7 @@ int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 		}
 	}
 	g_77534d = 0;
-	fcn_00469510(ctx);
+	d2_ClearRadioGroup(ctx);
 	fcn_00471e30(h);
 	return result;
 }

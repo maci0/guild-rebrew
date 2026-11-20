@@ -51,13 +51,13 @@ extern char g_770b80[];
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 unsigned char* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_00509b40(int, int);
+int __cdecl gm_CalculateGebaeudeValue(int, int);
 int __cdecl gm_SumTreasury(unsigned short*);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_005085f0(int, unsigned char);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_004c4510(char*, int);
-void __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
+void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c4700(int, int, int, char*);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c5360(void);
@@ -113,7 +113,7 @@ void __cdecl fcn_00506e70(unsigned short* entity, char* outputText, int a2)
 		send = 0;
 		cur = 0;
 		if (((*(unsigned int*) 0x5eed78) & mask) != 0 || ((*(unsigned int*) 0x5eed7c) & bit) != 0) {
-			score = fcn_00509b40((int) p, (int) (char) p[0x5c]);
+			score = gm_CalculateGebaeudeValue((int) p, (int) (char) p[0x5c]);
 			if (score > best) {
 				if (prev != 0) {
 					list[n] = prev;
@@ -145,7 +145,7 @@ void __cdecl fcn_00506e70(unsigned short* entity, char* outputText, int a2)
 			pkt.x8 = *(int*) (*(char**) 0x6f1bf8 + 4);
 			pkt.xc = -1;
 			pkt.x36 = 2;
-			pkt.x5c = fcn_00509b40((int) cur, (int) (char) cur[0x5c]);
+			pkt.x5c = gm_CalculateGebaeudeValue((int) cur, (int) (char) cur[0x5c]);
 			fcn_004c5530(&pkt);
 			q = (char*) (g_770b80 + 4);
 			do {
@@ -189,26 +189,26 @@ void __cdecl fcn_00506e70(unsigned short* entity, char* outputText, int a2)
 		ui_f30 = 0;
 		ui_pos = (unsigned char) i;
 		fcn_004c4510((char*) entity, *(int*) (entity + 2));
-		fcn_004c4570(1, 1, (unsigned short) ((int) entity + (8 - (*(int*) 0xa68d2c))), (char*) &ui_pos);
-		fcn_004c4570(2, 1, (unsigned short) ((int) entity + (10 - (*(int*) 0xa68d2c))), (char*) &ui_f08);
-		fcn_004c4570(4, 1, (unsigned short) ((int) entity + (0x194 - (*(int*) 0xa68d2c))), (char*) &ui_f14);
-		fcn_004c4570(4, 1, (unsigned short) ((int) entity + (0x198 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
-		fcn_004c4570(4, 1, (unsigned short) ((int) entity + (0x19c - (*(int*) 0xa68d2c))), (char*) &ui_f30);
-		fcn_004c4570(4, 1, (unsigned short) ((int) entity + (0x1a0 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
-		fcn_004c4570(4, 1, (unsigned short) ((int) entity + (0x1a4 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
-		fcn_004c4570(4, 1, (unsigned short) ((int) entity + (0x1a8 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
-		fcn_004c4570(1, 1, (unsigned short) ((int) entity + (0x1b0 - (*(int*) 0xa68d2c))), (char*) &ui_b0b);
-		fcn_004c4570(1, 1, (unsigned short) ((int) entity + (0x1b1 - (*(int*) 0xa68d2c))), (char*) &ui_b0a);
+		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) entity + (8 - (*(int*) 0xa68d2c))), (char*) &ui_pos);
+		cm_AppendPacketFieldDelta(2, 1, (unsigned short) ((int) entity + (10 - (*(int*) 0xa68d2c))), (char*) &ui_f08);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) entity + (0x194 - (*(int*) 0xa68d2c))), (char*) &ui_f14);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) entity + (0x198 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) entity + (0x19c - (*(int*) 0xa68d2c))), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) entity + (0x1a0 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) entity + (0x1a4 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) entity + (0x1a8 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) entity + (0x1b0 - (*(int*) 0xa68d2c))), (char*) &ui_b0b);
+		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) entity + (0x1b1 - (*(int*) 0xa68d2c))), (char*) &ui_b0a);
 		fcn_004c5420(*(int*) (entity + 2), 0x1c8, 4, 0x800000, 0);
 		fcn_004c5360();
 		fcn_004c4510((char*) entity, *(int*) (entity + 2));
 		for (i = 0; i < 8; i++) {
-			fcn_004c4570(4, 1, (unsigned short) ((i * 4 + 0x5c - (*(int*) 0xa68d2c)) + (int) entity), (char*) &ui_f0c);
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((i * 4 + 0x5c - (*(int*) 0xa68d2c)) + (int) entity), (char*) &ui_f0c);
 		}
-		fcn_004c4570(4, 1, (unsigned short) ((int) entity + (0x24 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) entity + (0x24 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
 		ui_f0c = 0;
-		fcn_004c4570(4, 1, (unsigned short) ((int) entity + (0x2c - (*(int*) 0xa68d2c))), (char*) &ui_f0c);
-		fcn_004c4570(2, 1, (unsigned short) ((int) entity + (0x28 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) entity + (0x2c - (*(int*) 0xa68d2c))), (char*) &ui_f0c);
+		cm_AppendPacketFieldDelta(2, 1, (unsigned short) ((int) entity + (0x28 - (*(int*) 0xa68d2c))), (char*) &ui_f30);
 		fcn_004c5360();
 		fcn_004c5480(*(int*) (entity + 2), 0x7c, -*(float*) (entity + 0x3e));
 		h = gm_RandomQuadratic();

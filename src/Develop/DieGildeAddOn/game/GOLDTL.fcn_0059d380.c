@@ -31,7 +31,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6aa4b8[];
 
-extern char* __cdecl fcn_005463a0(int, int, int);
+extern char* __cdecl he_StartHandlungSearch(int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
 extern int __cdecl fcn_0055c050(char*);
 extern void __cdecl io_FormatTextBuffer(char*, char*, ...);
@@ -67,7 +67,7 @@ int __cdecl fcn_0059d380(int a0, char* object)
 	if (object == 0) {
 		return 0;
 	}
-	event = fcn_005463a0(1, 0, 0x62);
+	event = he_StartHandlungSearch(1, 0, 0x62);
 	while (event != 0) {
 		if (*(int*) (event + 0xb0) == *(int*) (object + 1)) {
 			io_FormatTextBuffer(buf, (char*) 0x1a91, *(unsigned short*) (object + 0x27), object);

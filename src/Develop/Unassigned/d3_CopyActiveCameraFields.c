@@ -1,7 +1,7 @@
 extern char* d3_ActiveCamera;
 
 /* ADDRESS: GOLDTL 0x0052d760 */
-void __cdecl fcn_0052d760(char* out)
+void __cdecl d3_CopyActiveCameraFields(char* out)
 {
 	if (d3_ActiveCamera == 0) {
 		return;

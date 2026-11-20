@@ -15,7 +15,7 @@ typedef struct D3SM {
 } D3SM;
 
 /* ADDRESS: GOLD 0x0045eea0 */
-D3SM* __cdecl fcn_0045eea0(int src, int n, int flag)
+D3SM* __cdecl d3sm_Create(int src, int n, int flag)
 {
 	D3SM* sm;
 

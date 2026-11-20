@@ -3,7 +3,7 @@ extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7f4ca0[];
 
-int __cdecl fcn_004e8a80(int, void*);
+int __cdecl amt_FindOfficeSlotByType(int, void*);
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int* __cdecl fcn_004ad130(int, int*);
 #include "Develop/DieGildeAddOn/game/aemter.h"
@@ -33,9 +33,9 @@ void __cdecl fcn_004acf60(void)
 	int i;
 
 	lim = (*(int*)&gm_GameTime) + 0x578;
-	if (fcn_004e8a80(0x26, &a) == 0)
+	if (amt_FindOfficeSlotByType(0x26, &a) == 0)
 		return;
-	if (fcn_004e8a80(0x27, &b) == 0)
+	if (amt_FindOfficeSlotByType(0x27, &b) == 0)
 		return;
 	e1 = gm_LookupEntityRecordById(a.id);
 	e2 = gm_LookupEntityRecordById(b.id);

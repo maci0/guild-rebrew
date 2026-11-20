@@ -41,8 +41,8 @@ int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471af0(int k, int flag);
-void __cdecl fcn_005b3490(void);
-void __cdecl fcn_005b3660(void);
+void __cdecl d2_ShowSmapDiagnostics(void);
+void __cdecl d2_ShowScriptMemory(void);
 void __cdecl fcn_005b37d0(void);
 void __cdecl fcn_005b39c0(void);
 void __cdecl fcn_005b3b60(void);
@@ -51,7 +51,7 @@ void __cdecl fcn_005b4c80(void);
 void __cdecl d2_Plot(int, int, unsigned char, unsigned char, unsigned char);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005b4f70(void)
+void __cdecl d2_RunSceneChecker(void)
 {
 	int frame;
 	int h5;
@@ -85,13 +85,13 @@ void __cdecl fcn_005b4f70(void)
 	h5 = fcn_00472250(d, 0, io_AppendText(g_6aba70, 2));
 	h6 = fcn_00472250(d, 0, io_AppendText(g_6aba5c, 2));
 	h7 = fcn_00472250(d, 0, io_AppendText(g_6aba48, 2));
-	while (fcn_005373e0(fcn_005b4f70, t) != 0) {
+	while (fcn_005373e0(d2_RunSceneChecker, t) != 0) {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == h1) {
-				fcn_005b3490();
+				d2_ShowSmapDiagnostics();
 			}
 			if (d2_CurrentElementId == h2) {
-				fcn_005b3660();
+				d2_ShowScriptMemory();
 			}
 			if (d2_CurrentElementId == h3) {
 				fcn_005b37d0();

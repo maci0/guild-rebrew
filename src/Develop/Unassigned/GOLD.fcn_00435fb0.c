@@ -10,7 +10,7 @@ typedef struct Vec4Words {
 typedef int (__stdcall* ObjFn)(void*, int, Vec4Words*, int, int, float, int);
 
 /* ADDRESS: GOLD 0x00435fb0 */
-void __cdecl fcn_00435fb0(void)
+void __cdecl d3_ClearViewport(void)
 {
 	Vec4Words v;
 	void* obj;

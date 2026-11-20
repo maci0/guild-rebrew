@@ -24,7 +24,7 @@ void __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4700(int, int, char*, void*);
 void __cdecl fcn_004c53a0(void);
 void __cdecl fcn_004c5530(char*);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -174,7 +174,7 @@ double __cdecl fcn_004fe5f0(char* entity)
 		v10 = *(float*) (entity + 0x1c) -
 		      (float) (int) ((gm_RandomMod(0x10) & 0xffff) + 0x11);
 		fcn_004c4510(entity, *(int*) (entity + 4));
-		fcn_004c4570(4, 1, 0x1c, &v10);
+		cm_AppendPacketFieldDelta(4, 1, 0x1c, &v10);
 		fcn_004c5360();
 		g_773d48 += 1;
 		if (v10 <= 0.0f) {
@@ -227,7 +227,7 @@ double __cdecl fcn_004fe5f0(char* entity)
 		}
 		v10 = (*(float*) (entity + 0x1c) - adjusted) + adjusted / *(float*) (entity + 0x1c);
 		fcn_004c4510(entity, *(int*) (entity + 4));
-		fcn_004c4570(4, 1, 0x1c, &v10);
+		cm_AppendPacketFieldDelta(4, 1, 0x1c, &v10);
 		fcn_004c5360();
 		g_773d48 += 1;
 	}
@@ -240,8 +240,8 @@ double __cdecl fcn_004fe5f0(char* entity)
 			float v14 = 0.0f;
 			v10 = 100.0f;
 			fcn_004c4510(entity, *(int*) (entity + 4));
-			fcn_004c4570(4, 1, 0x1c, &v10);
-			fcn_004c4570(4, 1, 0x24, &v14);
+			cm_AppendPacketFieldDelta(4, 1, 0x1c, &v10);
+			cm_AppendPacketFieldDelta(4, 1, 0x24, &v14);
 			fcn_004c5360();
 			g_773d48 += 1;
 			fcn_004c5420(*(int*) (entity + 4), 0x1cc, 4, 2, 0);
@@ -296,7 +296,7 @@ double __cdecl fcn_004fe5f0(char* entity)
 	}
 	w = *(unsigned short*) (entity + 0xa) + 1;
 	fcn_004c4510(entity, *(int*) (entity + 4));
-	fcn_004c4570(2, 1, 10, &w);
+	cm_AppendPacketFieldDelta(2, 1, 10, &w);
 	fcn_004c5360();
 	g_773d48 = g_773d48 + 1;
 	return v11;

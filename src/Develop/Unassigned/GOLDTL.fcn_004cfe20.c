@@ -14,9 +14,9 @@ typedef struct
 extern Timer14 g_9b4900[16];
 
 #ifdef REBREW_GOLD
-#define fcn_0046b2b0 fcn_0046e700
+#define d2_DestroyElement fcn_0046e700
 #endif
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 
 void __cdecl fcn_004cfe20(void)
 {
@@ -24,7 +24,7 @@ void __cdecl fcn_004cfe20(void)
 
 	for (i = 0; i < 16; i++) {
 		if (g_9b4900[i].handle != -1) {
-			fcn_0046b2b0(g_9b4900[i].handle);
+			d2_DestroyElement(g_9b4900[i].handle);
 		}
 		g_9b4900[i].handle = -1;
 		g_9b4900[i].ticks = 0;

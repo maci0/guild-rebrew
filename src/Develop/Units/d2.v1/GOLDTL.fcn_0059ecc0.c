@@ -31,12 +31,12 @@ typedef struct Req_59ecc0 {
 
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_00525fb0(int);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_00594340(void);
@@ -83,7 +83,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 	for (i = 3; i < 6; i++) {
 		ids[i] = 0;
 	}
-	h = fcn_005463a0(2, 0, 0x15, 3, *(int*) (gebaeude + 1));
+	h = he_StartHandlungSearch(2, 0, 0x15, 3, *(int*) (gebaeude + 1));
 	while (h) {
 		i = 0;
 		do {
@@ -98,7 +98,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 	total = fcn_00470820(0, 0, (char*) 0x6a9750);
 	d2_CenterDialogWindows(total);
 	d2_SetForm(total, 0);
-	fcn_00533dc0(d2_CurrentWindowId, 0x70f, 0x741);
+	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(total, 3);
 	io_AppendText(0x1806);
 	fcn_0052a0c0(gebaeude, 0);
@@ -129,7 +129,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 		for (i = 3; i < 6; i++) {
 			ids[i] = 0;
 		}
-		h = fcn_005463a0(2, 0, 0x15, 3, *(int*) (gebaeude + 1));
+		h = he_StartHandlungSearch(2, 0, 0x15, 3, *(int*) (gebaeude + 1));
 		while (h) {
 			i = 0;
 			do {

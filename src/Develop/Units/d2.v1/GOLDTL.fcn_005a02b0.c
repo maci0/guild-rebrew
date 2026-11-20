@@ -20,7 +20,7 @@ float __cdecl fcn_00507540(int, int*);
 int __cdecl gm_MapEntityStatRange(int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00525ef0(void);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
@@ -53,7 +53,7 @@ int __cdecl fcn_005a02b0(void)
 	fcn_005340f0(d2_CurrentWindowId);
 	fcn_00525ef0();
 	grade = fcn_00507540(g_774970, info);
-	r = (int) fcn_005463a0(2, 2, g_774970, 0, 0x26);
+	r = (int) he_StartHandlungSearch(2, 2, g_774970, 0, 0x26);
 	if (r == 0 && grade >= 1.0 && n <= 6) {
 		base = *(char*) (slot + 9) != 0 ? 0x18f : 0x130;
 		gm_MapEntityStatRange(*(unsigned char*) (slot + 0x164));

@@ -25,13 +25,13 @@ int __cdecl fcn_00526010();
 int __cdecl fcn_00526120();
 int __cdecl fcn_00532ef0();
 int __cdecl fcn_00533a60();
-int __cdecl fcn_00533dc0();
+int __cdecl d2_DrawPanelFrame();
 int __cdecl fcn_00535960();
 int __cdecl fcn_005373e0();
 int __cdecl he_fn_Handlung();
-int __cdecl fcn_005463a0();
+int __cdecl he_StartHandlungSearch();
 int __cdecl fcn_0057e880();
-int __cdecl fcn_0057ecc0();
+int __cdecl d2_CanCloseWindowDuringTutorial();
 int __cdecl fcn_00594340();
 int __cdecl fcn_00595e20();
 int __cdecl fcn_005963f0();
@@ -85,7 +85,7 @@ int __cdecl fcn_005bdfc0();
    begins at 0x324. Keep the full 0x724-byte extent addressable. */
 
 /* ADDRESS: GOLDTL 0x005be140 */
-void __cdecl fcn_005be140(unsigned char *a0,int a1)
+void __cdecl d2_ShowLagerOptions(unsigned char *a0,int a1)
 {
 	unsigned int *  v1;
 	int v3;
@@ -135,7 +135,7 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
   d2_SetForm(dialogId,3);
   io_AppendText(0xfa);
   d2_SetForm(dialogId,0);
-  fcn_00533dc0(d2_CurrentWindowId,0x70b,0x740);
+  d2_DrawPanelFrame(d2_CurrentWindowId,0x70b,0x740);
   d2_SetForm(dialogId,4);
   fcn_00533a60(d2_CurrentWindowId,0,&v23,2,(*(int *)0x14a570c),(*(int *)0x14a5710));
   v29 = v23;
@@ -145,15 +145,15 @@ void __cdecl fcn_005be140(unsigned char *a0,int a1)
   fcn_00594340();
   d2_SetOverlayAnimation(0,0);
   do {
-    v3 = fcn_005463a0(2,0,0x12,3,*(unsigned int *)&v2[1]);
+    v3 = he_StartHandlungSearch(2,0,0x12,3,*(unsigned int *)&v2[1]);
     while ((v3 && (!*(int *)(v3 + 0xb0)))) {
       v3 = he_fn_Handlung();
     }
-    v6 = fcn_005463a0(2,0,0x12,3,*(unsigned int *)&v2[1]);
+    v6 = he_StartHandlungSearch(2,0,0x12,3,*(unsigned int *)&v2[1]);
     while ((v6 && (!*(int *)(v6 + 0xb4)))) {
       v6 = he_fn_Handlung();
     }
-    v7 = fcn_005463a0(2,0,0x13,3,*(unsigned int *)&v2[1]);
+    v7 = he_StartHandlungSearch(2,0,0x13,3,*(unsigned int *)&v2[1]);
     d2_SetForm(dialogId,2);
     if (*v4 != 0x116) { // branch-flip
       io_AppendText(0xfe,(unsigned char)v4[0xe],*(unsigned char *)(v18 + 0x240));
@@ -373,7 +373,7 @@ label_5bea6c:
       fcn_00595e20(v2,v4);
       fcn_005963f0(dialogId,1,0,v2);
     }
-    if (((*(int *)0x14ce8e0)) && (fcn_0057ecc0() == 1))
+    if (((*(int *)0x14ce8e0)) && (d2_CanCloseWindowDuringTutorial() == 1))
       (*(int *)0x774654) = 1;
     if (!fcn_005373e0(0x5be140,0x657c7)) {
       fcn_00532ef0();

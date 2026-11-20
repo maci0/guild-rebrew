@@ -21,7 +21,7 @@ int __cdecl fcn_0050d320(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_00546190(void*);
+void __cdecl he_FreeAction(void*);
 int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
 int __cdecl fcn_004c6090(unsigned char*, int, int, int);
@@ -69,7 +69,7 @@ void __cdecl fcn_0055c740(char* ctx)
 			he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + *(unsigned short*) (rec + 0x27) * 0x21c + 4),
 			    *(int*) (ctx + 0x10), text, 0, 0x5f2, *(int*) (rec + 1),
 			    *(int*) (ctx + 0xe0), 0, 0);
-			fcn_00546190(ctx);
+			he_FreeAction(ctx);
 			return;
 		}
 		for (i = 0; i < 0xc; i++) {
@@ -100,7 +100,7 @@ void __cdecl fcn_0055c740(char* ctx)
 			fcn_00545d40(*(int*) (g_7f4ca0
 			    + *(unsigned short*) (ctx + 8) * 0x21c + 4),
 			    -1, s_6a625c, 0, 0x5f2, 0);
-			fcn_00546190(ctx);
+			he_FreeAction(ctx);
 			return;
 		}
 		*(int*) (ctx + 0xe8) = *(int*) (ent + 4);
@@ -164,7 +164,7 @@ void __cdecl fcn_0055c740(char* ctx)
 			}
 		}
 		if (i >= 0xc) {
-			fcn_00546190(ctx);
+			he_FreeAction(ctx);
 			return;
 		}
 		*(pos14_7f4c00*) (ctx + 0x52) = gm_GameTime;
@@ -180,5 +180,5 @@ void __cdecl fcn_0055c740(char* ctx)
 	default:
 		return;
 	}
-	fcn_00546190(ctx);
+	he_FreeAction(ctx);
 }

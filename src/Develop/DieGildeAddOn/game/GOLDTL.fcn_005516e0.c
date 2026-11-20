@@ -26,7 +26,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 int __cdecl fcn_004c4450(int id);
-void __cdecl fcn_00546190(char* t);
+void __cdecl he_FreeAction(char* t);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00507130(int k, int* a, int* b);
 #include "client_packet_builder.h"
@@ -52,7 +52,7 @@ void __cdecl fcn_005516e0(char* t)
 	int h;
 
 	if (*(int*) (t + 0x70) == -2 || *(int*) (t + 0x70) == -1) {
-		fcn_00546190(t);
+		he_FreeAction(t);
 		return;
 	}
 	if (t[0x78] & 4)

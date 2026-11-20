@@ -16,7 +16,7 @@ typedef struct {
 extern __int64 g_666018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_005ccca0(Desc*, int, int, int);
+void __cdecl d2_ShowTabbedSelectionDialog(Desc*, int, int, int);
 
 void __cdecl fcn_005cad70(int unused, int a)
 {
@@ -27,5 +27,5 @@ void __cdecl fcn_005cad70(int unused, int a)
 	d.w = (*(int*)&g_666018);
 	d.caps = 6;
 	d.h = g_66601c;
-	fcn_005ccca0(&d, a, 0, 0);
+	d2_ShowTabbedSelectionDialog(&d, a, 0, 0);
 }

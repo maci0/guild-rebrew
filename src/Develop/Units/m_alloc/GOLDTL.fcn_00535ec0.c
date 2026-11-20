@@ -16,10 +16,10 @@ extern int g_7747b0;
 extern int g_774804;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
-void __cdecl fcn_00406340(char*, char*, int);
+void __cdecl ch_QueuePlayAnimation(char*, char*, int);
 char* __cdecl CreateAnimationEvent(char*, char*);
-int __cdecl fcn_00406670(char*, char*);
-void __cdecl fcn_00407800(char*, int, char*);
+int __cdecl ch_QueueStandUpAnimation(char*, char*);
+void __cdecl ch_SetBodyAttachment(char*, int, char*);
 void __cdecl m_FreeTracked(void*);
 int __cdecl gm_RandomMod(int);
 void __cdecl d3_DestroyObject(int);
@@ -177,9 +177,9 @@ void __cdecl fcn_00535ec0(void)
 		m = *(char**) (p + 0x184);
 		if (m != 0) {
 			m[0x8d] |= 0x10;
-			fcn_00407800(m, 2, "ub_BIERKRUG");
+			ch_SetBodyAttachment(m, 2, "ub_BIERKRUG");
 			CreateAnimationEvent(*(char**) (p + 0x184), "sitzend/hinsetzen");
-			fcn_00406340(*(char**) (p + 0x184), "sitzend/sitz_schreiben", 4);
+			ch_QueuePlayAnimation(*(char**) (p + 0x184), "sitzend/sitz_schreiben", 4);
 		}
 		return;
 	}
@@ -256,11 +256,11 @@ void __cdecl fcn_00535ec0(void)
 		ch_CancelActionQueue(*(char**) (g_7ea360 + 0x184));
 		m = *(char**) (g_7ea360 + 0x184);
 		if (*(unsigned char*) (m + 0x8c) & 0x10) {
-			fcn_00406670(m, "sitzend/aufstehen");
+			ch_QueueStandUpAnimation(m, "sitzend/aufstehen");
 			return;
 		}
 		CreateAnimationEvent(m, "sitzend/hinsetzen");
-		fcn_00406340(*(char**) (g_7ea360 + 0x184), "sitzend/sitz_schreiben", 6);
+		ch_QueuePlayAnimation(*(char**) (g_7ea360 + 0x184), "sitzend/sitz_schreiben", 6);
 		return;
 	}
 	case 0x1f: {

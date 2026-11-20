@@ -33,7 +33,7 @@ int __cdecl fcn_005ca740(int, int, int, int, Rec38*, int);
 void __cdecl fcn_005c9160(char*, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_005bfdf0(char*, int);
+int __cdecl d2_ShowBeweiseDetails(char*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
@@ -114,7 +114,7 @@ void __cdecl fcn_005c0020(void)
 				if (d2_CurrentElementId == recs[i].x4) { selected = i; break; }
 			}
 			if (selected > -1)
-				fcn_005bfdf0((char*) 0x7f4ca0 + g_774970 * 0x21c,
+				d2_ShowBeweiseDetails((char*) 0x7f4ca0 + g_774970 * 0x21c,
 				    recs[selected].x0);
 		}
 	} while (fcn_005373e0((void*) fcn_005c0020, 0x657c7) != 0);

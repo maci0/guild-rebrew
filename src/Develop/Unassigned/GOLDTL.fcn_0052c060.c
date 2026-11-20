@@ -90,14 +90,14 @@ extern float g_773e1c;
 void __cdecl fcn_004125c0(int, int);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_00438b40(void*, void*);
-void __cdecl fcn_00438cb0(void*, void*);
+void __cdecl d3_SetObjectRotation(void*, void*);
 char* __cdecl fcn_00509570(void*);
-void __cdecl fcn_0052ac60(float);
+void __cdecl d3_SetCameraHeightFraction(float);
 float* __stdcall fcn_005ebbb9(float*, const float*);
 float __cdecl fcn_004514d0(float*, float*);
 
 /* ADDRESS: GOLDTL 0x0052c060 */
-int __cdecl fcn_0052c060(void)
+int __cdecl d3_UpdateCameraFromMouse(void)
 {
 	Vec4 v;
 	Vec4 q;
@@ -217,7 +217,7 @@ main:
 	if (CompareVector3WithinTolerance((float*) &cam->pos, (float*) &pos, 0.1f) == 0
 	    || CompareVector3WithinTolerance((float*) &cam->rot, (float*) &rot, 0.001f) == 0) {
 		fcn_00438b40((void*) d3_ActiveCamera, &pos);
-		fcn_00438cb0((void*) d3_ActiveCamera, &rot);
+		d3_SetObjectRotation((void*) d3_ActiveCamera, &rot);
 		ent = fcn_00509570(&((Entity*) g_7f4ca0)[g_774970]);
 		if (ent != 0) {
 			*(float*) (ent + 0x88) = g_774694;
@@ -248,7 +248,7 @@ afterFirst:
 	if (d3_CameraHeightFraction < 0.0) {
 		d3_CameraHeightFraction = (float) 0.0;
 	}
-	fcn_0052ac60(d3_CameraHeightFraction);
+	d3_SetCameraHeightFraction(d3_CameraHeightFraction);
 	ent = fcn_00509570(&((Entity*) g_7f4ca0)[g_774970]);
 	if (ent != 0) {
 		*(float*) (ent + 0x88) = g_774694;

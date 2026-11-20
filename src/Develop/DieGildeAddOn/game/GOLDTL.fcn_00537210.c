@@ -10,7 +10,7 @@ extern char g_14cf950;
 extern float g_665e40;
 extern char g_6a33b4[];
 
-int __cdecl fcn_0057ec20(int);
+int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -19,7 +19,7 @@ int __cdecl fcn_005373e0(void (__cdecl*)(void), int);
 void __cdecl fcn_00471e30(int);
 /* ADDRESS: GOLD 0x530820 */
 
-void __cdecl fcn_00537210(void)
+void __cdecl main_RunAdvanceGameDialog(void)
 {
 	int saved;
 	int flags;
@@ -27,7 +27,7 @@ void __cdecl fcn_00537210(void)
 
 	saved = g_7766a8;
 	flags = main_LoopFlags;
-	if (fcn_0057ec20(8) != 0) {
+	if (d2_TutorialAllowsFlag(8) != 0) {
 		fcn_0057e880(0xb, 0, 0, 0);
 		flags = (flags & 0xffffc3e7) | 0xc0;
 		g_774660 = 1;
@@ -36,7 +36,7 @@ void __cdecl fcn_00537210(void)
 		h = fcn_00470820(0, 0, g_6a33b4);
 		d2_CenterDialogWindows(h);
 		io_AppendText(0x82);
-		while (fcn_005373e0(fcn_00537210, flags) != 0) {
+		while (fcn_005373e0(main_RunAdvanceGameDialog, flags) != 0) {
 			if (g_14cf950 != 0 || g_14ce8cc != 0 || g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}

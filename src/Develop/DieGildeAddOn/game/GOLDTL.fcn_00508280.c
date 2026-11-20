@@ -10,7 +10,7 @@ typedef struct
 int __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_00508220(int, S0c*);
 void __cdecl fcn_004c4510(char*, int);
-void __cdecl fcn_004c4570(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 float __cdecl fcn_004ff210(unsigned short, int);
 
@@ -113,7 +113,7 @@ found:
 	flags ^= mask;
 	v = flags;
 	fcn_004c4510(p, *(int*) (p + 4));
-	fcn_004c4570(4, 1, 0x2c, &v);
+	cm_AppendPacketFieldDelta(4, 1, 0x2c, &v);
 	fcn_004c5360();
 	f = fcn_004ff210(*(unsigned short*) p, -cost);
 	if (valueOut == 0) {

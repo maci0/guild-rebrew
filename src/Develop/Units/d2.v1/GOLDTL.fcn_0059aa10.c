@@ -31,10 +31,10 @@ extern char s_6aa328[];
 extern char s_68b7ac[];
 extern pos14_7f4c00 gm_GameTime;
 
-int __cdecl fcn_0057ec20(int);
+int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 void* __cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_0050f780(char*, char*, void*);
+int __cdecl d2_OpenDependencyDiagram(char*, char*, void*);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -42,8 +42,8 @@ int __cdecl fcn_00472250(int, int, int);
 int __cdecl io_AppendText(int);
 void __cdecl fcn_00527f10(char*);
 int __cdecl fcn_005373e0(void*, int);
-void __cdecl fcn_005c3820(char*);
-int __cdecl fcn_0057eba0(int, int, int, int);
+void __cdecl d2_ShowTechTreeEffects(char*);
+int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 void __cdecl fcn_0050f900(void);
 void __cdecl fcn_0050ee80(char*, char*);
 float __cdecl eval_ObjektPreis2Credits(int, int);
@@ -63,7 +63,7 @@ char* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x0059aa10 */
-void __cdecl fcn_0059aa10(char* a0, int a1)
+void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 {
 	char msg[0xf8];
 	char buf[0x100];
@@ -85,7 +85,7 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 	int s;
 
 	if (a0 == g_7746c4) {
-		if (!fcn_0057ec20(0x200))
+		if (!d2_TutorialAllowsFlag(0x200))
 			return;
 		fcn_0057e880(0x11, (int) a0, 0, a1);
 	}
@@ -96,7 +96,7 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 		if (!q)
 			return;
 	}
-	h = fcn_0050f780(s_6aa330, a0, q);
+	h = d2_OpenDependencyDiagram(s_6aa330, a0, q);
 	if (h <= -1) {
 		fcn_00526120(g_14a5398, 0);
 		return;
@@ -109,7 +109,7 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 		if (g_14ce8e0)
 			g_774654 = 1;
 		if (g_100f1dc != -1 && d2_CurrentElementId == h)
-			fcn_005c3820(a0);
+			d2_ShowTechTreeEffects(a0);
 		if (g_100f1dc >= 0xdf && g_100f1dc <= 0x3bb && g_85ab60 > 0) {
 			for (i = 0; i < g_85ab60; i++) {
 				p = &g_7f3f24[i * 0x34];
@@ -119,7 +119,7 @@ void __cdecl fcn_0059aa10(char* a0, int a1)
 			if (i < g_85ab60) {
 				sel = g_100f1dc - 0xdf;
 				memset(msg, 0, sizeof msg);
-				if (!fcn_0057eba0(0x2b, (int) a0, 0, sel)) continue; {
+				if (!d2_DispatchTutorialEvent(0x2b, (int) a0, 0, sel)) continue; {
 					node = lpObjektePROT + sel * 0x41;
 					if (q)
 						item = (int) fcn_00502cd0(*(int*) ((char*) q + 0x14), 1, 0, sel);

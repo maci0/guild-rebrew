@@ -33,8 +33,8 @@ extern char s_6a5968[];
 extern char s_6a597c[];
 
 void __cdecl fcn_00529160(int a, int b, int id, int c);
-int __cdecl fcn_00426cc0(int a);
-void __cdecl fcn_00428720(int a);
+int __cdecl evt_FindScriptById(int a);
+void __cdecl evt_RequestScriptExit(int a);
 int __cdecl fcn_004c5530(GOLDTL_Msg549* msg);
 void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 int __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* text);
@@ -62,7 +62,7 @@ void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
 		if (t != 0) {
 			t = *(int*) (t + 0x28);
 			if (t != -1) {
-				fcn_00428720(fcn_00426cc0(t));
+				evt_RequestScriptExit(evt_FindScriptById(t));
 			}
 		}
 		memset(&msg, 0, 0xf8);
@@ -103,7 +103,7 @@ void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
 				fcn_00529160(0, 0, *(unsigned short*) p, 0);
 				t = *(int*) (*(int*) (p + 0x184) + 0x28);
 				if (t != -1) {
-					fcn_00428720(fcn_00426cc0(t));
+					evt_RequestScriptExit(evt_FindScriptById(t));
 				}
 				fcn_004c5420(*(int*) (p + 4), 0x1c8, 4, 0x800, 0);
 				if (v8 == -1) {

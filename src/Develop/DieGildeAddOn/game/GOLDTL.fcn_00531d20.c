@@ -19,7 +19,7 @@ extern double g_664e78;
 extern double g_662930;
 
 unsigned short __cdecl fcn_0042e410(int a);
-int __cdecl fcn_005463a0(int n, ...);
+int __cdecl he_StartHandlungSearch(int n, ...);
 int __cdecl fcn_00506380(int a, int b, int c, int d);
 int __cdecl ch_FindCharacterByKey(int a, ...);
 int __cdecl fcn_00507c30(int a);
@@ -243,7 +243,7 @@ void __cdecl fcn_00531d20(void)
 		id = obj;
 	}
 	if ((short) fcn_0042e410(2) == 0) {
-		if (fcn_005463a0(1, 0, 0x52) != 0)
+		if (he_StartHandlungSearch(1, 0, 0x52) != 0)
 			idx = 5;
 	}
 	fcn_004fc460((char*) f);

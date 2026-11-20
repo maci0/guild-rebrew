@@ -23,11 +23,11 @@ extern unsigned char* lpGebaeudePROT;
 void* __cdecl fcn_0050dc90(unsigned char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl gm_CheckStatLevel(int, int);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_005ceb20(unsigned char*, int);
+void __cdecl d2_ConfirmMeisterbrief(unsigned char*, int);
 void __cdecl fcn_005ceef0(unsigned char*, void*);
-void __cdecl fcn_005ceaa0(unsigned char*);
+void __cdecl d2_ShowMeisterbriefDialog(unsigned char*);
 void __cdecl fcn_005cea10(unsigned char*);
 void __cdecl fcn_00532ef0(void);
 
@@ -66,7 +66,7 @@ void __cdecl fcn_005cf560(unsigned char* obj)
 			}
 		}
 	}
-	for (p = fcn_005463a0(2, 0, 7, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
+	for (p = he_StartHandlungSearch(2, 0, 7, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
 		if (p[0xac] == 0) {
 			mode = 0x50;
 			break;
@@ -75,13 +75,13 @@ void __cdecl fcn_005cf560(unsigned char* obj)
 	switch (mode) {
 	case 0x10:
 	case 0x20:
-		fcn_005ceb20(obj, mode);
+		d2_ConfirmMeisterbrief(obj, mode);
 		break;
 	case 0x30:
 		fcn_005ceef0(obj, x);
 		break;
 	case 0x40:
-		fcn_005ceaa0(obj);
+		d2_ShowMeisterbriefDialog(obj);
 		break;
 	case 0x50:
 		fcn_005cea10(obj);

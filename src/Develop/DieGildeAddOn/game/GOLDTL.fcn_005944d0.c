@@ -14,15 +14,15 @@ void __cdecl fcn_0052a0c0(void*, unsigned int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00594340(void);
-void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl fcn_00472830(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_eval_SlotVoll(int, int, int);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
-int __cdecl fcn_0057eba0(int, void*, int, unsigned int);
+int __cdecl d2_DispatchTutorialEvent(int, void*, int, unsigned int);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_005373e0(void*, int);
@@ -30,7 +30,7 @@ int __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c35f0(void);
 void __cdecl fcn_00529160(void*, int, int, int);
 void __cdecl fcn_00526120(int, int);
-int __cdecl fcn_0057ecc0(void);
+int __cdecl d2_CanCloseWindowDuringTutorial(void);
 void __cdecl fcn_00532ef0(void);
 int __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(int, int);
@@ -112,7 +112,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 		id = 0x717;
 		break;
 	}
-	fcn_00533dc0(d2_CurrentWindowId, id, 0x742);
+	d2_DrawPanelFrame(d2_CurrentWindowId, id, 0x742);
 	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId,
 	             fcn_00472830(window, 2), 0x78, &rect2, &rect1, &listControl);
 	*(unsigned int*) (*(int*) 0x1015ea0 + 0x84 + listControl * 0x2f4) = 0x54;
@@ -217,7 +217,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 								} else {
 									int found;
 
-									found = fcn_005463a0(2, 0, 4, 3, *(int*) (p + 1));
+									found = he_StartHandlungSearch(2, 0, 4, 3, *(int*) (p + 1));
 									while (found) {
 										if (*(unsigned short*) (found + 0xac) ==
 										    *(unsigned int*) (row + 0x779160)) {
@@ -225,7 +225,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 										}
 										found = he_fn_Handlung();
 									}
-									if (fcn_0057eba0(0x20, p, 0,
+									if (d2_DispatchTutorialEvent(0x20, p, 0,
 									                 *(unsigned int*) (row + 0x779160)) == 1) {
 										for (i = 0; i < 0x3e; i++) {
 											*(int*) (tmpl + i * 4) = 0;
@@ -299,7 +299,7 @@ found_row:
 				r += 10;
 			} while (!any);
 			if (!any) {
-				if (fcn_0057ecc0() == 1) {
+				if (d2_CanCloseWindowDuringTutorial() == 1) {
 					*(int*) 0x774654 = 1;
 					fcn_00532ef0();
 				}

@@ -25,7 +25,7 @@ extern int d2_MouseY;
 void __cdecl fcn_004125c0(int x, int y);
 
 /* ADDRESS: GOLDTL 0x005b0f00 */
-int __cdecl fcn_005b0f00(char* w)
+int __cdecl d2_UpdateWindowDrag(char* w)
 {
 	int r;
 

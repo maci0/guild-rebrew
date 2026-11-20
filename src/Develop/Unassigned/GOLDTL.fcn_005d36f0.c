@@ -15,7 +15,7 @@ extern Pt5d36_99ec2c g_99ec2c[16];
 
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 
-int __cdecl fcn_005d36f0(Arg5d36 s, int w, int h)
+int __cdecl d2_DrawHistoryGraph(Arg5d36 s, int w, int h)
 {
 	int steps[9];
 	int step;

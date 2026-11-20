@@ -7,7 +7,7 @@ int __cdecl vfs_ReadData(char*, int, int, void*);
 int __cdecl fcn_0044d770(void*);
 int __cdecl fcn_004011f0(void*, void*);
 int __cdecl vfs_ReadByte(void*, void*);
-void __cdecl fcn_004011a0(void*, char*);
+void __cdecl vfs_ReadCString(void*, char*);
 void __cdecl fcn_00401280(void*, void*);
 void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl m_FreeTracked(void*);
@@ -260,7 +260,7 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 					v29 = (int) (animation + 0x40);
 					do {
 						if (v3 == 0x38) {
-							fcn_004011a0(stream, (char*) v29);
+							vfs_ReadCString(stream, (char*) v29);
 							v3 = fcn_0044d770(stream);
 						}
 						if (v3 == 0x39) {

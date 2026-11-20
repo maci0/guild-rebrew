@@ -9,7 +9,7 @@ extern g_662408_f g_662408;
 int __cdecl fcn_0042b280(int);
 int __cdecl msx_FindStreamIndex(int);
 
-int __cdecl fcn_0042ac40(int streamId)
+int __cdecl msx_CloseStream(int streamId)
 {
 	int r = 0;
 	int i;

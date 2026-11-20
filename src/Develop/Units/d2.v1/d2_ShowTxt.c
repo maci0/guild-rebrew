@@ -79,7 +79,7 @@ extern int d2_DefaultFont;
 extern char g_67d5bc[];
 extern char s_67d420[];
 
-int __cdecl fcn_00469890(void);
+int __cdecl d2_AllocateElement(void);
 int __cdecl fcn_0046b520(char* text, int font);
 void __cdecl fcn_0046f650(int slot, D2_TEXT_WINDOW* parent);
 
@@ -88,7 +88,7 @@ void __cdecl fcn_0046f650(int slot, D2_TEXT_WINDOW* parent);
 #define d2_TEXT_ERROR s_67d420
 #define d2_TEXT_DEFAULT_FONT d2_DefaultFont
 #define d2_TEXT_TAG g_67d5bc
-#define d2_TEXT_ALLOCATE_INDEX fcn_00469890
+#define d2_TEXT_ALLOCATE_INDEX d2_AllocateElement
 #define d2_TEXT_MEASURE fcn_0046b520
 #define d2_TEXT_INSERT fcn_0046f650
 #endif

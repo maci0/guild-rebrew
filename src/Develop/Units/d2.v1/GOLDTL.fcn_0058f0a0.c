@@ -16,23 +16,23 @@ extern int g_14ad100;
 extern int g_14b5734;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005338d0(char*, int, int);
+int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00590500(int);
 void __cdecl fcn_0058f020(int);
 void __cdecl fcn_0058f6a0(int);
-void __cdecl fcn_0058f310(int);
+void __cdecl d2_ShowHauntingDialog(int);
 void __cdecl fcn_0058d5f0(int);
 void __cdecl fcn_0058fb60(int);
 void __cdecl fcn_0058fba0(int);
 void __cdecl fcn_0058fbd0(int);
 void __cdecl fcn_0058fa20(int);
-void __cdecl fcn_005ba8e0(int);
+void __cdecl d2_OpenTransportPanel(int);
 void __cdecl fcn_0058fa40(int);
 void __cdecl fcn_0058dbe0(int);
 void __cdecl fcn_0059a0e0(void);
 
-void __cdecl fcn_0058f0a0(int arg)
+void __cdecl d2_RunFriedhofActions(int arg)
 {
 	int graveCareAction;
 	int createHelperAction;
@@ -53,26 +53,26 @@ void __cdecl fcn_0058f0a0(int arg)
 	insuranceAction = 0;
 	transportAction = 0;
 	fcn_005338a0();
-	while (fcn_005373e0(fcn_0058f0a0, 0x67fff) != 0) {
+	while (fcn_005373e0(d2_RunFriedhofActions, 0x67fff) != 0) {
 		fcn_00590500(arg);
 		if ((g_7746d8 & 0x200) != 0) {
-			ageAction = fcn_005338d0("contact_ALTERN_LASSEN", g_14b55a0, 0x2f);
-			hauntAction = fcn_005338d0("contact_HEIMSUCHUNG", g_14b5570, 0x29);
-			ingredientAction = fcn_005338d0("contact_ZUTATEN_SUCHEN", g_14b57bc, 0x13);
-			graveCareAction = fcn_005338d0("contact_GRAEBER_PFLEGEN", g_14b5794, 0x2a);
-			createHelperAction = fcn_005338d0("contact_GEHILFEN_ERSCHAFFEN", g_14b57e0, 0x28);
-			insuranceAction = fcn_005338d0("contact_VERSICHERUNG", g_14b56f0, 0x2b);
-			burialPlanAction = fcn_005338d0("contact_LIEGEPLAN", g_14b5730, 0x13);
-			transportAction = fcn_005338d0("contact_TRANSPORT", g_14ad100, 0x15);
+			ageAction = RegisterStatusText("contact_ALTERN_LASSEN", g_14b55a0, 0x2f);
+			hauntAction = RegisterStatusText("contact_HEIMSUCHUNG", g_14b5570, 0x29);
+			ingredientAction = RegisterStatusText("contact_ZUTATEN_SUCHEN", g_14b57bc, 0x13);
+			graveCareAction = RegisterStatusText("contact_GRAEBER_PFLEGEN", g_14b5794, 0x2a);
+			createHelperAction = RegisterStatusText("contact_GEHILFEN_ERSCHAFFEN", g_14b57e0, 0x28);
+			insuranceAction = RegisterStatusText("contact_VERSICHERUNG", g_14b56f0, 0x2b);
+			burialPlanAction = RegisterStatusText("contact_LIEGEPLAN", g_14b5730, 0x13);
+			transportAction = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
 		}
-		rentGraveAction = fcn_005338d0("contact_GRAB_MIETEN", g_14b5734, 0x16);
+		rentGraveAction = RegisterStatusText("contact_GRAB_MIETEN", g_14b5734, 0x16);
 		if (g_7746a0 != 0) {
 			if ((g_7746d8 & 0x200) != 0) {
 				fcn_0058f020(arg);
 				if (g_7746a0 == ageAction) {
 					fcn_0058f6a0(arg);
 				} else if (g_7746a0 == hauntAction) {
-					fcn_0058f310(arg);
+					d2_ShowHauntingDialog(arg);
 				} else if (g_7746a0 == ingredientAction) {
 					fcn_0058d5f0(arg);
 				} else if (g_7746a0 == graveCareAction) {
@@ -84,7 +84,7 @@ void __cdecl fcn_0058f0a0(int arg)
 				} else if (g_7746a0 == burialPlanAction) {
 					fcn_0058fa20(arg);
 				} else if (g_7746a0 == transportAction) {
-					fcn_005ba8e0(arg);
+					d2_OpenTransportPanel(arg);
 				}
 			}
 			if ((g_7746d8 & 0x80) != 0 && g_7746a0 == rentGraveAction) {
@@ -98,7 +98,7 @@ void __cdecl fcn_0058f0a0(int arg)
 			} else if ((*(unsigned char*)&g_14cf950) == 0x22) {
 				fcn_0058dbe0(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x23) {
-				fcn_0058f310(arg);
+				d2_ShowHauntingDialog(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x19) {
 				fcn_0058fb60(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x16) {

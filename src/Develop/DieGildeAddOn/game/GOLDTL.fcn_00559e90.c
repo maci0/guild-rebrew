@@ -16,10 +16,10 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_00559660(struct job*);
-void __cdecl fcn_00559aa0(struct job*);
+void __cdecl gm_SimulatePoliticians(struct job*);
 int __cdecl fcn_00559760(struct job*, int, int);
 int __cdecl fcn_004c5620(int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00559e90(char* u)
 {
@@ -54,7 +54,7 @@ void __cdecl fcn_00559e90(char* u)
 			if (((struct job*) (u + 0xac))[i].flags & 4) {
 				fcn_00559660(&((struct job*) (u + 0xac))[i]);
 			} else {
-				fcn_00559aa0(&((struct job*) (u + 0xac))[i]);
+				gm_SimulatePoliticians(&((struct job*) (u + 0xac))[i]);
 			}
 			if (((struct job*) (u + 0xac))[i].flags & 1) {
 				n++;
@@ -70,6 +70,6 @@ void __cdecl fcn_00559e90(char* u)
 		}
 		fcn_004c5620(0, u);
 	} else {
-		fcn_00546190(u);
+		he_FreeAction(u);
 	}
 }

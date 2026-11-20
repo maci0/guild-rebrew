@@ -52,7 +52,7 @@ void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl d2_SetBackgroundTexture(char*, int);
 void __cdecl fcn_00533a60(int, int, Pick*, int, int, char*, char*);
@@ -101,7 +101,7 @@ void __cdecl fcn_0059e090(char* b)
 			h = fcn_00470820(0, 0, "Handel\\Handel_Transport");
 			d2_CenterDialogWindows(h);
 			d2_SetForm(h, 0);
-			fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x73f);
+			d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x73f);
 			slot = (D2_WIN*) &g_1015f40[((Dlg*)g_1038140)[h].slot];
 			fcn_0064d41a(buf, "ief_Wappen%li", *(int*) (b + 0x65));
 			d2_SetBackgroundTexture(buf, slot->pad0);

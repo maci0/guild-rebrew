@@ -11,7 +11,7 @@ extern double g_662a08;
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl fcn_00502cd0(int, ...);
 char* __cdecl gm_FindNextFilteredEntity(void);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_00555490(short*, int*, int*);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl gm_RandomMod(unsigned short);
@@ -26,7 +26,7 @@ void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00500bb0(int*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00555510 */
-void __cdecl fcn_00555510(char* action)
+void __cdecl gm_SimulateWirtshaus(char* action)
 {
 	struct {
 		unsigned char* p0;
@@ -46,7 +46,7 @@ void __cdecl fcn_00555510(char* action)
 	char* q;
 
 	if (*(int*) (action + 0x70) == -2) {
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	}
 	p = (char*) ent; count = sizeof(ent);

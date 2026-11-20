@@ -2,7 +2,7 @@ extern int g_774654;
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-int __cdecl fcn_005a74a0(char*);
+int __cdecl gm_CanEnterGebaeude(char*);
 void __cdecl fcn_00525ef0(void);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00530510(void);
@@ -19,12 +19,12 @@ void __cdecl fcn_005166a0(char*);
 void __cdecl fcn_005167c0(char*, int);
 void __cdecl fcn_00516c50(char*, char*);
 void __cdecl fcn_00438b40(void*, void*);
-void __cdecl fcn_00438cb0(void*, void*);
+void __cdecl d3_SetObjectRotation(void*, void*);
 int __cdecl fcn_00504bd0(int);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl fcn_0057e880(int, void*, int, int);
-int __cdecl fcn_00426cc0(int);
-void __cdecl fcn_00428720(void*);
+int __cdecl evt_FindScriptById(int);
+void __cdecl evt_RequestScriptExit(void*);
 void __cdecl fcn_005312d0(int);
 void __cdecl fcn_00516ed0(char*);
 void __cdecl fcn_004c34d0(void);
@@ -39,10 +39,10 @@ void __cdecl fcn_005a0250(int, void*);
 void __cdecl fcn_005a3820(int, void*);
 void __cdecl fcn_0059e430(int, void*);
 void __cdecl fcn_0059e5f0(int, void*);
-void __cdecl fcn_0059f3e0(int, void*);
+void __cdecl d2_RunMixingProductionMenu(int, void*);
 void __cdecl fcn_0059f320(int, void*);
 void __cdecl fcn_0059f340(int, void*);
-void __cdecl fcn_0059f570(int, void*);
+void __cdecl d2_RunSteinmetzMenu(int, void*);
 void __cdecl fcn_005a7200(int, void*);
 void __cdecl fcn_005acc80(int, void*);
 void __cdecl fcn_005ace20(int, void*);
@@ -57,19 +57,19 @@ void __cdecl fcn_005af140(int, void*);
 void __cdecl fcn_005ac250(int, void*);
 void __cdecl fcn_0059f190(int, void*);
 void __cdecl fcn_005a2db0(int, void*);
-void __cdecl fcn_005a2f70(int, void*);
+void __cdecl d2_RunBrauenMenu(int, void*);
 void __cdecl fcn_005a91b0(int, void*);
 void __cdecl fcn_005a9c50(int, void*);
 void __cdecl fcn_005a9120(int, void*);
 void __cdecl fcn_005aad40(int, void*);
 void __cdecl fcn_005acb30(int, void*);
 void __cdecl fcn_005aaed0(int, void*);
-void __cdecl fcn_005aadd0(int, void*);
+void __cdecl d2_RunZunftMenu(int, void*);
 void __cdecl fcn_005b0010(int, void*);
 void __cdecl fcn_005afd20(int, void*);
 void __cdecl fcn_005afea0(int, void*);
-void __cdecl fcn_0058aad0(int, void*);
-void __cdecl fcn_005e51f0(int, void*);
+void __cdecl d2_RunAlchemistMenu(int, void*);
+void __cdecl d2_RunSchneiderMenu(int, void*);
 void __cdecl fcn_0058af00(int, void*);
 void __cdecl fcn_0058ae60(int, void*);
 extern int g_6a2520;
@@ -77,7 +77,7 @@ extern char g_6752a8[];
 char* __cdecl strcpy(char*, const char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005a76b0 */
-int __cdecl fcn_005a76b0(char* o, int p2)
+int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
 {
     int r;
     int x;
@@ -88,7 +88,7 @@ int __cdecl fcn_005a76b0(char* o, int p2)
     u8 c;
 
     r = -1;
-    if (fcn_005a74a0(o) == 0) {
+    if (gm_CanEnterGebaeude(o) == 0) {
         *(int*) &g_7e2700 = 0;
         return 0;
     }
@@ -149,7 +149,7 @@ int __cdecl fcn_005a76b0(char* o, int p2)
                 t = *(int*) &d3_ActiveCamera;
                 fcn_00438b40((void*) t, (char*) t + 0x5c);
                 t = *(int*) &d3_ActiveCamera;
-                fcn_00438cb0((void*) t, (char*) t + 0x90);
+                d3_SetObjectRotation((void*) t, (char*) t + 0x90);
                 t = *(int*) &g_67a370;
                 if (t != 0) {
                     i = *(int*) (t + 0x3c8);
@@ -170,7 +170,7 @@ int __cdecl fcn_005a76b0(char* o, int p2)
                                 t = *(int*) &d3_ActiveCamera;
                                 fcn_00438b40((void*) t, (char*) t + 0x114);
                                 t = *(int*) &d3_ActiveCamera;
-                                fcn_00438cb0((void*) t, (char*) t + 0x120);
+                                d3_SetObjectRotation((void*) t, (char*) t + 0x120);
                             }
                         }
                     }
@@ -215,7 +215,7 @@ int __cdecl fcn_005a76b0(char* o, int p2)
         fcn_0059e5f0(*(int*)&g_7746c4, msg);
         break;
     case 0xcf:
-        fcn_0059f3e0(*(int*)&g_7746c4, msg);
+        d2_RunMixingProductionMenu(*(int*)&g_7746c4, msg);
         break;
     case 0xd6:
         fcn_0059f320(*(int*)&g_7746c4, msg);
@@ -224,7 +224,7 @@ int __cdecl fcn_005a76b0(char* o, int p2)
         fcn_0059f340(*(int*)&g_7746c4, msg);
         break;
     case 0x9b:
-        fcn_0059f570(*(int*)&g_7746c4, msg);
+        d2_RunSteinmetzMenu(*(int*)&g_7746c4, msg);
         break;
     case 0xa5:
         fcn_005a7200(*(int*)&g_7746c4, msg);
@@ -270,7 +270,7 @@ int __cdecl fcn_005a76b0(char* o, int p2)
         fcn_005a2db0(*(int*)&g_7746c4, msg);
         break;
     case 0x12e:
-        fcn_005a2f70(*(int*)&g_7746c4, msg);
+        d2_RunBrauenMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x10e:
         fcn_005a91b0(*(int*)&g_7746c4, msg);
@@ -291,7 +291,7 @@ int __cdecl fcn_005a76b0(char* o, int p2)
         fcn_005aaed0(*(int*)&g_7746c4, msg);
         break;
     case 0x139:
-        fcn_005aadd0(*(int*)&g_7746c4, msg);
+        d2_RunZunftMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x145:
         fcn_005b0010(*(int*)&g_7746c4, msg);
@@ -303,10 +303,10 @@ int __cdecl fcn_005a76b0(char* o, int p2)
         fcn_005afea0(*(int*)&g_7746c4, msg);
         break;
     case 0x24b:
-        fcn_0058aad0(*(int*)&g_7746c4, msg);
+        d2_RunAlchemistMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x29e:
-        fcn_005e51f0(*(int*)&g_7746c4, msg);
+        d2_RunSchneiderMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x266:
         fcn_0058af00(*(int*)&g_7746c4, msg);
@@ -321,9 +321,9 @@ int __cdecl fcn_005a76b0(char* o, int p2)
             fcn_0057e880(0x1a, msg, 0, 0);
             *(int*) 0x7746d0 = (int) msg;
             if (r != -1) {
-                msg = (char*) fcn_00426cc0(r);
+                msg = (char*) evt_FindScriptById(r);
                 if (msg != 0) {
-                    fcn_00428720(msg);
+                    evt_RequestScriptExit(msg);
                     fcn_005312d0(*(int*) (msg + 0x100));
                 }
             }

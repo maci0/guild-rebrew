@@ -11,7 +11,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/Units/Error/error_message.h"
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl he_AllocDiePlayer(char* e)
 {
@@ -20,7 +20,7 @@ void __cdecl he_AllocDiePlayer(char* e)
 	p = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 	if (p == 0) {
 		ReportClientMessage("he_AllocDiePlayer: player not found!");
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 	p[8] = 0;

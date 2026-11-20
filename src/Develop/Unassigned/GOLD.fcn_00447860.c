@@ -1,7 +1,7 @@
 extern unsigned char* g_fb9074;
 extern unsigned int g_fb9084;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-int __cdecl fcn_00438e60(int, int, int, void*);
+int __cdecl d3_VisitSceneNodes(int, int, int, void*);
 int __cdecl fcn_00446180(int);
 int __cdecl fcn_00447800();
 
@@ -16,7 +16,7 @@ void __cdecl fcn_00447860(char arg)
 		g_fb9074[i * 0x80 + 0x68] &= 0x7f;
 	obj = *(void**) 0x633418;
 	((method_t) (*(void**) (*(char**) obj + 0x24)))(obj);
-	fcn_00438e60((int) g_5fb5b0, 0, 0x40, (void*) fcn_00447800);
+	d3_VisitSceneNodes((int) g_5fb5b0, 0, 0x40, (void*) fcn_00447800);
 	obj = *(void**) 0x633738;
 	if (obj != 0 && arg != 0)
 		fcn_00446180((int) obj);

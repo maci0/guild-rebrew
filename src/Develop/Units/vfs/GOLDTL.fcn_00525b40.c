@@ -31,7 +31,7 @@ extern int cm_LastCrimeId;
 extern int g_100dc00;
 
 
-void __cdecl fcn_005356e0(void);
+void __cdecl main_PumpWindowMessages(void);
 void __cdecl fcn_00535960(void);
 #include "Develop/Units/vfs/vfs.h"
 void __cdecl m_FreeTracked(char*);
@@ -45,7 +45,7 @@ int __cdecl fcn_00522510(void* stream);
 int __cdecl fcn_00524040(void* stream);
 int __cdecl amt_fio_LoadAemter(void* stream, int version);
 #include "client_scene_loader.h"
-int __cdecl fcn_00525670(void);
+int __cdecl gm_RebuildLoadedReferences(void);
 
 int __cdecl fcn_00525b40(void)
 {
@@ -55,7 +55,7 @@ int __cdecl fcn_00525b40(void)
 	int i;
 
 	while (cm_LoadBuf == 0 || g_1005820 < g_aed328) {
-		fcn_005356e0();
+		main_PumpWindowMessages();
 		fcn_00535960();
 	}
 	f = vfs_OpenStream((unsigned char*) cm_LoadBuf, g_aed328, "rb");
@@ -143,7 +143,7 @@ int __cdecl fcn_00525b40(void)
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (fcn_00525670() == 0) {
+	if (gm_RebuildLoadedReferences() == 0) {
 		CloseVfsStream(f);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;

@@ -25,9 +25,9 @@ extern void __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 extern void __cdecl fcn_00529160(char*, char*, unsigned int, char*);
 extern void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 extern int __cdecl fcn_00529670(char*, char*);
-extern int __cdecl fcn_00507e30(char*, int);
+extern int __cdecl gm_GetScaledEntitySkill(char*, int);
 extern int __cdecl fcn_0050c4e0(unsigned char*);
-extern void __cdecl fcn_00546190(char*);
+extern void __cdecl he_FreeAction(char*);
 extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 extern int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
 extern int __cdecl gm_GetMsgField(char*, char*);
@@ -123,14 +123,14 @@ void __cdecl fcn_0056aef0(char* action)
 		do {
 			e = (char*)gm_LookupEntityRecordById(*p);
 			if (e != 0) {
-				t += fcn_00507e30(e, 2);
+				t += gm_GetScaledEntitySkill(e, 2);
 				k++;
 			}
 			p++;
 			n--;
 		} while (n != 0);
 		if (k == 0) {
-			fcn_00546190(action);
+			he_FreeAction(action);
 			return;
 		}
 		t = t / k;
@@ -169,7 +169,7 @@ void __cdecl fcn_0056aef0(char* action)
 		do {
 			e = (char*)gm_LookupEntityRecordById(*p);
 			if (e != 0) {
-				t += fcn_00507e30(e, 2);
+				t += gm_GetScaledEntitySkill(e, 2);
 				u = e;
 				fcn_004c5c80(*p);
 				fcn_004c5da0(*p, *(int*)(h + 1), *(int*)(q + 2), 0, 0, "GebSpionage");
@@ -180,7 +180,7 @@ void __cdecl fcn_0056aef0(char* action)
 			n--;
 		} while (n != 0);
 		if (k == 0) {
-			fcn_00546190(action);
+			he_FreeAction(action);
 			return;
 		}
 		t = t / k;
@@ -232,7 +232,7 @@ void __cdecl fcn_0056aef0(char* action)
 				}
 			}
 		}
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 
 	case -2:
@@ -255,11 +255,11 @@ void __cdecl fcn_0056aef0(char* action)
 			p++;
 			n--;
 		} while (n != 0);
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 
 	default:
 		break;
 	}
-	fcn_00546190(action);
+	he_FreeAction(action);
 }

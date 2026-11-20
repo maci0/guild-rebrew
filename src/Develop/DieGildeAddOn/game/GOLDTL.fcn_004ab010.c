@@ -11,7 +11,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id, int c, int d);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d);
-int __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
+int __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 
 /* ADDRESS: GOLDTL 0x004ab010 */
 int __cdecl fcn_004ab010(unsigned short* e, char* o1, char* o2)
@@ -22,7 +22,7 @@ int __cdecl fcn_004ab010(unsigned short* e, char* o1, char* o2)
 	for (s = gm_StartFilteredEntitySearch(2, 4, *e, 5, 0x16); s; s = gm_FindNextFilteredEntity()) {
 		if (((Kind*)lpGebaeudePROT)[*(unsigned char*) s].cap > 1) {
 			q = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0x120);
-			if (q && fcn_00502cd0(*(int*) (q + 0x14), 1, 0, 0x12c) && !fcn_005463a0(2, 0, 0x74, 3, *(int*) (s + 1))) {
+			if (q && fcn_00502cd0(*(int*) (q + 0x14), 1, 0, 0x12c) && !he_StartHandlungSearch(2, 0, 0x74, 3, *(int*) (s + 1))) {
 				o1[0] = 4;
 				*(int*) (o1 + 4) = *(int*) (s + 1);
 				o2[0] = 1;

@@ -31,7 +31,7 @@ typedef struct {
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_00546190(Ent *);
+void __cdecl he_FreeAction(Ent *);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
 void __cdecl fcn_004e97f0(int, int);
@@ -47,7 +47,7 @@ void __cdecl fcn_0055aca0(Ent *e)
 	int r;
 
 	if (e->state == -1 || e->state == -2) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 	if (e->flags & 4) {

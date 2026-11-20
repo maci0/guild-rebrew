@@ -85,7 +85,7 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 	if (fcn_004e8b40(k, &info) == 0) {
 		return 0;
 	}
-	n = fcn_004e8b80(info.id, 6, recs);
+	n = amt_FindOfficeSlotsByKind(info.id, 6, recs);
 	for (i = 0, cnt = 0; i < n; i++) {
 		if (recs[i].status == 2) {
 			cnt++;

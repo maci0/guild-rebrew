@@ -4,7 +4,7 @@ extern int g_6a4768;
 extern char* g_1015ea0;
 
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_0046b2b0(int slot);
+void __cdecl d2_DestroyElement(int slot);
 void __cdecl fcn_00471e30(int h);
 void __cdecl fcn_00469c40(int x, int y, int slot);
 
@@ -21,7 +21,7 @@ void __cdecl fcn_00545780(char* obj)
     }
     if (*(int*) (*(int*) (obj + 0x74) + 4) != -1) {
         d2_SetForm(g_77e8a0, 0);
-        fcn_0046b2b0(*(int*) (*(int*) (obj + 0x74) + 4));
+        d2_DestroyElement(*(int*) (*(int*) (obj + 0x74) + 4));
         *(int*) (*(int*) (obj + 0x74) + 4) = -1;
     } else {
         __asm { int 3 }

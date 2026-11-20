@@ -28,7 +28,7 @@ int __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl gm_AccumulateTyped2(int);
 int __cdecl fcn_004c5c80(int);
-int __cdecl fcn_00546190(int);
+int __cdecl he_FreeAction(int);
 
 /* ADDRESS: GOLDTL 0x00552a60 */
 void __cdecl fcn_00552a60(int event)
@@ -143,7 +143,7 @@ void __cdecl fcn_00552a60(int event)
 					}
 				}
 			}
-			fcn_00546190(event);
+			he_FreeAction(event);
 			return;
 		}
 	} else if (v14 != 0

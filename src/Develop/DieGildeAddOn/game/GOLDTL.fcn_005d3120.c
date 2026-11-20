@@ -2,7 +2,7 @@
 
 #include "client_types.h"
 
-char* __cdecl fcn_005463a0(int n, ...);
+char* __cdecl he_StartHandlungSearch(int n, ...);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int a1);
 char* __cdecl io_FormatTextBuffer(char* buf, int id, ...);
@@ -55,7 +55,7 @@ int __cdecl fcn_005d3120(int entity, int* request)
 	mode = 1;
 	base = 0;
 	id = -1;
-	e = fcn_005463a0(1, 0, 0x41);
+	e = he_StartHandlungSearch(1, 0, 0x41);
 	while (e != 0) {
 		if (*(int*) (e + 0xac) == *(int*) (entity + 4)) {
 			mode = 2;

@@ -13,7 +13,7 @@ extern char g_679888[];
 __declspec(dllimport) int __stdcall MessageBoxA(void*, const char*, const char*, unsigned int);
 
 /* ADDRESS: GOLDTL 0x0042dac0 */
-int __cdecl fcn_0042dac0(int a)
+int __cdecl txt_SaveTextFile(int a)
 {
     char *p;
     char buf[0x104];

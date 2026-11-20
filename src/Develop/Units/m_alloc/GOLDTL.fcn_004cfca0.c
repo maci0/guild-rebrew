@@ -15,7 +15,7 @@ extern Timer14 g_9b4900[16];
 char __cdecl fcn_00443e10(void*, int*);
 int __cdecl fcn_0046fcd0(int x, int y, char* name);
 void __cdecl fcn_00469c40(int x, int y, int slot);
-void __cdecl fcn_0046b2b0(int slot);
+void __cdecl d2_DestroyElement(int slot);
 void __cdecl d2_SetSlotVisibility(int slot, int flag);
 
 /* ADDRESS: GOLDTL 0x004cfca0 */
@@ -58,7 +58,7 @@ void __cdecl fcn_004cfca0(void)
 		}
 		g_9b4900[i].speed = g_9b4900[i].speed - 0.5;
 		if (g_9b4900[i].speed <= 0.0f) {
-			fcn_0046b2b0(g_9b4900[i].handle);
+			d2_DestroyElement(g_9b4900[i].handle);
 			g_9b4900[i].ticks = 0;
 			g_9b4900[i].handle = -1;
 			g_9b4900[i].owner = 0;

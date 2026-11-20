@@ -4,7 +4,7 @@
 
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, void*);
@@ -12,10 +12,10 @@ void __cdecl fcn_00500bb0(char*, int, int, int);
 int __cdecl fcn_004ac150(short);
 unsigned short __cdecl fcn_004ac290(int);
 char* __cdecl fcn_004ac1e0(short);
-char* __cdecl fcn_00426cc0(int);
+char* __cdecl evt_FindScriptById(int);
 char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(char*, int, int);
-void __cdecl fcn_00428720(char*);
+void __cdecl evt_RequestScriptExit(char*);
 void __cdecl fcn_004432d0(int, int);
 int __cdecl sprintf(char*, const char*, ...);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -39,7 +39,7 @@ void __cdecl fcn_00555d30(char* obj)
 	int j;
 
 	if (*(int*) (obj + 0x70) == -1 || *(int*) (obj + 0x70) == -2) {
-		fcn_00546190(obj);
+		he_FreeAction(obj);
 		return;
 	}
 	if (*(int*) (obj + 0x84) != -1 && fcn_004c4450(*(int*) (obj + 0x84)) == 0) {
@@ -84,7 +84,7 @@ void __cdecl fcn_00555d30(char* obj)
 		base = (int*) (obj + 0x52);
 		*(pos14_7f4c00*) base = gm_GameTime;
 		fcn_00500bb0((char*) base, 0, 5, 0);
-		e = fcn_00426cc0(*(int*) (obj + 0xb4));
+		e = evt_FindScriptById(*(int*) (obj + 0xb4));
 		if (*(unsigned short*) (obj + 0x56) < 0x14) {
 			if (e == 0 || *(int*) e != 0x68427244) {
 				*(int*) (obj + 0xb4) = -1;
@@ -103,7 +103,7 @@ void __cdecl fcn_00555d30(char* obj)
 			}
 		} else {
 			if (e != 0 && *(int*) e == 0x68427244) {
-				fcn_00428720(e);
+				evt_RequestScriptExit(e);
 			}
 			fcn_00500bb0((char*) base, 0, 5, 0);
 			*(int*) (obj + 0x70) = 3;

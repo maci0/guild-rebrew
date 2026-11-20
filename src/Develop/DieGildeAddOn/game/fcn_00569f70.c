@@ -2,7 +2,7 @@
 
 extern pos14_7f4c00 gm_GameTime;
 
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 
@@ -14,7 +14,7 @@ void __cdecl fcn_00569f70(char* ent)
 	pos14_7f4c00* q;
 	char* p;
 
-	p = fcn_005463a0(1, 0, 0x3f);
+	p = he_StartHandlungSearch(1, 0, 0x3f);
 	if (p != 0) {
 		do {
 			if (p != ent && *(int*) (p + 0xac) == *(int*) (ent + 0xac)) {

@@ -43,7 +43,7 @@ extern char* g_1015ea0;
 extern int d2_ScreenHeight;
 extern int g_1040494;
 
-int __cdecl fcn_00469890(void);
+int __cdecl d2_AllocateElement(void);
 Surf* __cdecl fcn_004770a0(Desc*, int);
 int __cdecl fcn_00475fd0(Surf*);
 void __cdecl d2_UnlockSurface(Surf*);
@@ -88,7 +88,7 @@ int __cdecl fcn_00469140(int a1, int a2, int w, int h, char* src)
 	Surf* s;
 	int i;
 
-	idx = fcn_00469890();
+	idx = d2_AllocateElement();
 	((Tile*)g_1015ea0)[idx].x20 = 0x47;
 	((Tile*)g_1015ea0)[idx].x10 = a1;
 	((Tile*)g_1015ea0)[idx].x14 = a2;

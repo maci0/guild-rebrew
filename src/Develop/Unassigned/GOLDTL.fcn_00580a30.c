@@ -12,13 +12,13 @@ extern int* g_665f08;
 extern volatile int g_6b7fac;
 
 char* __cdecl fcn_00580d50(void);
-char* __cdecl fcn_00584010(void);
-void __cdecl fcn_00580c20(void);
+char* __cdecl d2_InitTutorialMainOutro(void);
+void __cdecl d2_ShutdownTutorial(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_00471d80(int, int);
 
-int __cdecl fcn_00580a30(void)
+int __cdecl d2_StartTutorial(void)
 {
 	char* p;
 	int n;
@@ -55,10 +55,10 @@ int __cdecl fcn_00580a30(void)
 			}
 		}
 	}
-	*(char**) (p + 0x70) = fcn_00584010();
+	*(char**) (p + 0x70) = d2_InitTutorialMainOutro();
 	if (*(char**) (p + 0x70) == 0) {
 fail:
-		fcn_00580c20();
+		d2_ShutdownTutorial();
 		return -1;
 	}
 	g_665f08[0] = 1;

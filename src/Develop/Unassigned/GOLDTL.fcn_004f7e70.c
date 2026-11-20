@@ -15,7 +15,7 @@ extern char g_679060[];
 
 void __cdecl fcn_004fcda0(short, int, Info*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-int __cdecl fcn_004fa5f0(void*, int, int);
+int __cdecl d2_ShowPrivilegMessage(void*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004f7e70 */
@@ -40,7 +40,7 @@ int __cdecl fcn_004f7e70(unsigned char* entity, int* context)
 			io_FormatTextBuffer(buf + strlen(buf), 0x1d97, entity[0x169] + base, info.f8);
 		if (info.b2 != 0)
 			io_FormatTextBuffer(buf + strlen(buf), 0x1d97, info.b2 + base, info.fc);
-		fcn_004fa5f0(buf, 1, 0x657c7);
+		d2_ShowPrivilegMessage(buf, 1, 0x657c7);
 	} else if (*context == 1 && entity[2] == 6) {
 		io_FormatTextBuffer((char*) context + 0x14, (int) "%s", 0x1d96);
 	}

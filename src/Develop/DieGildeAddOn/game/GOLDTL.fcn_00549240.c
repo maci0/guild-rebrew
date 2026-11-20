@@ -32,8 +32,8 @@ struct msg {
 
 
 
-char* __cdecl fcn_005463a0(int, int, int, ...);
-void __cdecl fcn_00546190(char*);
+char* __cdecl he_StartHandlungSearch(int, int, int, ...);
+void __cdecl he_FreeAction(char*);
 void __cdecl fcn_004c5530(struct msg*);
 
 void __cdecl fcn_00549240(void)
@@ -41,9 +41,9 @@ void __cdecl fcn_00549240(void)
 	struct msg m;
 	char* p;
 
-	p = fcn_005463a0(1, 0, 0xa6);
+	p = he_StartHandlungSearch(1, 0, 0xa6);
 	if (p != 0) {
-		fcn_00546190(p);
+		he_FreeAction(p);
 	}
 	m.b4 = (char) 0xa6;
 	m.fc = -1;

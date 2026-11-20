@@ -19,7 +19,7 @@ unsigned char __cdecl fcn_00471f80(int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_00539380(void)
+int __cdecl d2_ChoosePlayerCount(void)
 {
 	int result;
 	int h;
@@ -41,7 +41,7 @@ int __cdecl fcn_00539380(void)
 	io_AppendText(0x1ab5);
 	d2_SetForm(h, 2);
 	io_AppendText((int) g_6a2300, 0x7d, 0x7e);
-	while (fcn_005373e0(fcn_00539380, 0x24087) != 0) {
+	while (fcn_005373e0(d2_ChoosePlayerCount, 0x24087) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

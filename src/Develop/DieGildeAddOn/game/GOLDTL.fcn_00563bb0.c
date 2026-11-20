@@ -17,7 +17,7 @@ extern int g_774800;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00563bb0(char* e)
 {
@@ -29,7 +29,7 @@ void __cdecl fcn_00563bb0(char* e)
 	*(pos14_7f4c00*) (e + 0x44) = gm_GameTime;
 	t = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 	if (t == 0) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 	if (g_774800 == 0) {
@@ -44,7 +44,7 @@ void __cdecl fcn_00563bb0(char* e)
 	}
 	*(int*) (e + 0x10) = *(int*) (t + 1);
 	if ((*(unsigned short*) (t + 0x5a) & 0x40) != 0) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 	*(unsigned short*) (t + 0x5a) |= 0x40;

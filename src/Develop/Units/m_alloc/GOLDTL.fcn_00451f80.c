@@ -52,7 +52,7 @@ extern int g_1042a08;
 extern float g_1040c80[16];
 extern float g_1040cc0[16];
 
-Mesh_451f80* __cdecl fcn_00436930(char* o, float* r);
+Mesh_451f80* __cdecl d3_GetObjectMesh(char* o, float* r);
 void __cdecl d3_UpdateObjectCameraTransform(char* e, char* cam, int force);
 unsigned char __cdecl fcn_00438270(char* e, char* o, char* world);
 void* __cdecl m_PoolAlloc(int* pool, int size, int grow);
@@ -76,7 +76,7 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 
 	o = *(char**) (e + 0x1cc);
 	if (*(char**) (o + 0x318) != 0 && *(int*) (*(char**) (o + 0x318) + 0x264) != 0 && *(int*) (e + 0x1ec) != 0) {
-		mesh = fcn_00436930(o, &f);
+		mesh = d3_GetObjectMesh(o, &f);
 		prev = 0;
 		set = 0;
 		if (!(e[0x216] & 0x20)) {

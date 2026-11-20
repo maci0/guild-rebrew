@@ -29,7 +29,7 @@ int __cdecl d2_Show(int idx, char* path);
 /* Loads one entry from the named resource file into the shared entry table,
  * appending one sub-entry per sub-resource for the multi-part kinds. */
 /* ADDRESS: GOLDTL 0x00473400 */
-int __cdecl fcn_00473400(char* path, char* name)
+int __cdecl d2_LoadResourceFile(char* path, char* name)
 {
 	int size;
 	FILE* f;

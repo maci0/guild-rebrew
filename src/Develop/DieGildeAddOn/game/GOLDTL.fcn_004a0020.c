@@ -21,7 +21,7 @@ typedef struct
 // SIZE 0x18
 
 int __cdecl fcn_004e8b40(int idx, fcn_004a0020_Rec* out);
-int __cdecl fcn_004e8c00(int k, int max, fcn_004a0020_Rec* out);
+int __cdecl amt_CollectOfficeSlotsByGroup(int k, int max, fcn_004a0020_Rec* out);
 fcn_004a0020_Ent* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
@@ -84,7 +84,7 @@ int __cdecl fcn_004a0020(fcn_004a0020_Ent* e)
 	for (i = 0; i < 5; i++) {
 		cnt = 0;
 		sum = 0;
-		n = fcn_004e8c00(ord[i], 6, list);
+		n = amt_CollectOfficeSlotsByGroup(ord[i], 6, list);
 		if (n >= 3) {
 			for (j = 0; j < n - 1; j++) {
 				if (list[j].id != e->h && list[j].id != -1) {

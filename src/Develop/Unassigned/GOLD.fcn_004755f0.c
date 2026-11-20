@@ -11,7 +11,7 @@ extern int g_00f8f08c; /* 0x00f8f08c */
 
 void __cdecl fcn_0046cd90(int x, int y, int slot);
 
-void __cdecl fcn_004755f0(int k)
+void __cdecl d2_CenterTopLevelWindows(int k)
 {
 	GuiObj* o;
 	GOLD_GUI_WINDOW* w;

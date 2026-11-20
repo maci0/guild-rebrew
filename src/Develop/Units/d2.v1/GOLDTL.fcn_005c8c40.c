@@ -14,14 +14,14 @@ extern int g_777ca0;
 extern int g_776c90;
 extern int g_775338;
 extern int g_774654;
-int __cdecl fcn_0057ec20(int); void __cdecl fcn_0057e880(int, int, int, int);
+int __cdecl d2_TutorialAllowsFlag(int); void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00533a60(int, int, int*, int, int, int, int);
 int __cdecl fcn_005c8400(void);
-int __cdecl fcn_005c86b0(void);
+int __cdecl d2_CreateGebaeudeListPanel(void);
 int __cdecl fcn_005c89a0(void);
 int __cdecl d2_CreateRadioGroup(int, int, int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
@@ -29,22 +29,22 @@ void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005a5440(int, char*, int, int, int);
 void __cdecl d2_SetGroupVisibility(int, int);
-void __cdecl fcn_005c8770(int);
+void __cdecl d2_ShowBuildingStatsDetail(int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_0046ed00(int, int, int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_0050b750(int, char);
 void __cdecl fcn_004c4510(int, int);
-void __cdecl fcn_004c4570(int, int, unsigned short, int*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, unsigned short, int*);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_0050dc90(int);
 int __cdecl fcn_005373e0(int, int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 #include "client_packet_builder.h"
 /* ADDRESS: GOLDTL 0x005c8c40 */
-void __cdecl fcn_005c8c40(void)
+void __cdecl d2_OpenPlayerStats(void)
 {
 	int out[3];
 	int idx;
@@ -64,7 +64,7 @@ void __cdecl fcn_005c8c40(void)
 	int delta;
 	int state;
 
-	if (fcn_0057ec20(0x800) == 0) {
+	if (d2_TutorialAllowsFlag(0x800) == 0) {
 		return;
 	}
 	fcn_0057e880(0x13, 0, 0, 0);
@@ -75,7 +75,7 @@ void __cdecl fcn_005c8c40(void)
 	d2_SetForm(save, 3);
 	fcn_00533a60(*(int*) &d2_CurrentWindowId, 0, out, 3, *(int*) 0x14b5294, *(int*) 0x14b5298, *(int*) 0x14b529c);
 	firstWindow = fcn_005c8400();
-	v3 = fcn_005c86b0();
+	v3 = d2_CreateGebaeudeListPanel();
 	v4 = fcn_005c89a0();
 	idx = d2_CreateRadioGroup(3, out[0], out[1], out[2]);
 	ofs = idx * 0x8c;
@@ -110,7 +110,7 @@ void __cdecl fcn_005c8c40(void)
 			for (i = 0; i < g_775338; i++) {
 				if (d2_CurrentElementId == *(int*) (0x778900 + i * 4)) {
 					d2_SetGroupVisibility(save, 0);
-					fcn_005c8770(*(int*) (*(int*) &g_1015ea0 + 0x2f0 + d2_CurrentElementId * 0x2f4));
+					d2_ShowBuildingStatsDetail(*(int*) (*(int*) &g_1015ea0 + 0x2f0 + d2_CurrentElementId * 0x2f4));
 					d2_SetGroupVisibility(save, 1);
 					break;
 				}
@@ -140,7 +140,7 @@ void __cdecl fcn_005c8c40(void)
 						obj = *(int*) i;
 						fcn_004c4510(obj, *(int*) (obj + 1));
 						delta = *(unsigned short*) i - *(unsigned short*) &g_aed32c + 0x39;
-						fcn_004c4570(4, 1, (unsigned short) delta, &n);
+						cm_AppendPacketFieldDelta(4, 1, (unsigned short) delta, &n);
 						fcn_004c5360();
 						q = fcn_0050dc90(*(int*) i);
 						n = n - *(int*) (*(int*) i + 0x39);
@@ -153,11 +153,11 @@ void __cdecl fcn_005c8c40(void)
 				i += 0x18;
 			}
 		}
-		if (fcn_005373e0((int) fcn_005c8c40, 0x657c7) != 0) {
+		if (fcn_005373e0((int) d2_OpenPlayerStats, 0x657c7) != 0) {
 			continue;
 		}
 		*(int*) 0x77533c = *(int*) (ofs + (unsigned long)&g_102cbc8);
-		fcn_00469510(idx);
+		d2_ClearRadioGroup(idx);
 		fcn_00471e30(save);
 		if (firstWindow != -1) {
 			fcn_00471e30(firstWindow);

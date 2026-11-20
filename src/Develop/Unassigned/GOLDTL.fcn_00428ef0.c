@@ -30,9 +30,9 @@ extern int g_6b7eb4;
 extern char g_14cb440[];
 extern int g_14cb8ec;
 
-int __cdecl fcn_00428800(int);
+int __cdecl evt_EvaluateExpression(int);
 void __cdecl evt_LogScriptError(Vm* g, int h, const char* msg);
-void __cdecl fcn_00428720(Vm*);
+void __cdecl evt_RequestScriptExit(Vm*);
 int __cdecl fcn_0040c630();
 
 int __cdecl evt_ExecuteCommand(Cmd* c)
@@ -53,7 +53,7 @@ int __cdecl evt_ExecuteCommand(Cmd* c)
 	((Vm*) evt_CurrentScript)->line++;
 	result = -99;
 	for (i = 0; i < c->argc; i++) {
-		v = fcn_00428800(0);
+		v = evt_EvaluateExpression(0);
 		result = v;
 		if (c->types[i] == 7) {
 			args[i] = v;
@@ -69,7 +69,7 @@ int __cdecl evt_ExecuteCommand(Cmd* c)
 	}
 	if (c->argc != 0 && g_6b7eb4 != 0xd) {
 		evt_LogScriptError((Vm*) evt_CurrentScript, ((Vm*) evt_CurrentScript)->line, "Expecting ')'...possible wrong parameter-count");
-		fcn_00428720((Vm*) evt_CurrentScript);
+		evt_RequestScriptExit((Vm*) evt_CurrentScript);
 		return 0;
 	}
 	if (c->argc == 0) {

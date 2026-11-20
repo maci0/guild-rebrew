@@ -39,12 +39,12 @@ int __cdecl fcn_00470820(int a, int b, int c);
 void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_AppendText(char* fmt, int a, int b);
-int __cdecl fcn_0050e830(unsigned char* a, unsigned short* b, int w, int h);
+int __cdecl d2_BuildDependencyDiagram(unsigned char* a, unsigned short* b, int w, int h);
 void __cdecl fcn_00471e30(int h);
 void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b);
 void __cdecl fcn_0050f750(int a, int b, int c, int d);
 
-int __cdecl fcn_0050f780(int arg, unsigned char* a, unsigned short* b)
+int __cdecl d2_OpenDependencyDiagram(int arg, unsigned char* a, unsigned short* b)
 {
 	Slot* s;
 	int i;
@@ -61,7 +61,7 @@ int __cdecl fcn_0050f780(int arg, unsigned char* a, unsigned short* b)
 		io_AppendText(g_699a9c, 0x19, *b * 2 + 0x9a8);
 	}
 	d2_SetForm(0, 3);
-	if (fcn_0050e830(a, b, s->width, s->height)) {
+	if (d2_BuildDependencyDiagram(a, b, s->width, s->height)) {
 		fcn_00471e30(g_7f4c10);
 		return -1;
 	}

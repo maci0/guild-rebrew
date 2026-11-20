@@ -28,13 +28,13 @@ void __cdecl fcn_005270c0(int show);
 void __cdecl fcn_00533cf0(int v);
 int __cdecl fcn_004675f0(int x, int y, int w, int a, int b, int c, int d);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_0046b2b0(int h);
+void __cdecl d2_DestroyElement(int h);
 void __cdecl fcn_004730c0(int a, int b, int w, int h, char* s, int c, int d);
 void __cdecl fcn_00527f60(int a, int b);
 void __cdecl fcn_0046a110(int v);
 void __cdecl fcn_0041bcb0(void);
 
-void __cdecl fcn_00526bf0(int phase, int cur, int max)
+void __cdecl d2_UpdateProgressOverlay(int phase, int cur, int max)
 {
 	if (g_6a2bdc == -1) {
 		d2_SuppressOverlay = 1;
@@ -54,7 +54,7 @@ void __cdecl fcn_00526bf0(int phase, int cur, int max)
 	} else if (phase == 1) {
 		d2_SetElementValue(g_6a2bdc, 0, 0x190, cur * 200 / max + 200);
 		if (cur >= max - 1) {
-			fcn_0046b2b0(g_6a2bdc);
+			d2_DestroyElement(g_6a2bdc);
 			g_6a2bdc = -1;
 			d2_SuppressOverlay = 0;
 			fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x5a, 2);

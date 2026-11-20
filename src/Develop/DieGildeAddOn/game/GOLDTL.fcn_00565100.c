@@ -8,7 +8,7 @@ extern char g_6b5c60[];
 
 int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl fcn_00545780(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_GetOppositeStatIndex(int);
@@ -35,7 +35,7 @@ void __cdecl fcn_00565100(char* u)
 	case 0:
 		fcn_00545670(u, 0, 0, g_6a5a10, 0x5fd);
 		if (*(char**) (u + 0x74) == 0) {
-			fcn_00546190(u);
+			he_FreeAction(u);
 			return;
 		}
 		h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
@@ -73,7 +73,7 @@ void __cdecl fcn_00565100(char* u)
 				fcn_00526920(*(char**) (h + 0x170), *(int*) (q + 2), g_6b5c60);
 			}
 			fcn_00545780(u);
-			fcn_00546190(u);
+			he_FreeAction(u);
 			return;
 		} else if (g_100f1dc != 1) {
 			break;
@@ -81,7 +81,7 @@ void __cdecl fcn_00565100(char* u)
 	case -2:
 	case -1:
 		fcn_00545780(u);
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	}
 }

@@ -49,7 +49,7 @@ extern char s_6acd1c[];
 #include "client_dialog_state.h"
 
 void __cdecl fcn_004c6ae0(int, int);
-Obj* __cdecl fcn_005463a0(int, int, int);
+Obj* __cdecl he_StartHandlungSearch(int, int, int);
 Obj* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004c5620(int, Obj*);
 void __cdecl fcn_004c5530(struct msg*);
@@ -90,7 +90,7 @@ int __cdecl fcn_005d71f0(unsigned char* e)
 		m.b36 = 2;
 		m.pos = gm_GameTime;
 		fcn_004c6ae0(*(int*) (e + 4), -4);
-		for (p = fcn_005463a0(1, 0, 0x18); p != 0; p = he_fn_Handlung()) {
+		for (p = he_StartHandlungSearch(1, 0, 0x18); p != 0; p = he_fn_Handlung()) {
 			if (p->fc4 == *(int*) (e + 4)) {
 				result |= 0x10;
 				p->pos52 = gm_GameTime;
@@ -124,7 +124,7 @@ int __cdecl fcn_005d71f0(unsigned char* e)
 					m.b36 = 2;
 					m.pos = gm_GameTime;
 					fcn_004c6ae0(*(int*) (e + 4), -4);
-					for (p = fcn_005463a0(1, 0, 0x18); p != 0; p = he_fn_Handlung()) {
+					for (p = he_StartHandlungSearch(1, 0, 0x18); p != 0; p = he_fn_Handlung()) {
 						if (p->fc4 == *(int*) (e + 4)) {
 							p->pos52 = gm_GameTime;
 							found |= 1;

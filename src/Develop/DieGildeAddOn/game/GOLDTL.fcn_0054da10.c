@@ -17,7 +17,7 @@ void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 void __cdecl fcn_004c5ed0(int, char*, int);
 void __cdecl fcn_00529160(int, int, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
@@ -44,14 +44,14 @@ void __cdecl fcn_0054da10(char* a)
 	int dmg;
 
 	if (*(int*) (a + 0x70) == -1) {
-		fcn_00546190(a);
+		he_FreeAction(a);
 		return;
 	}
 	if (*(unsigned char*) (a + 0x78) & 4) {
 		if (*(int*) (a + 0x70) != -2) {
 			return;
 		}
-		fcn_00546190(a);
+		he_FreeAction(a);
 		return;
 	}
 	p = a + 0xc4;
@@ -110,7 +110,7 @@ void __cdecl fcn_0054da10(char* a)
 			p += 4;
 		}
 		if (flags) {
-			fcn_00546190(a);
+			he_FreeAction(a);
 			return;
 		}
 		if (hits != 0) {

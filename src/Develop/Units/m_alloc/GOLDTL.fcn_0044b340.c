@@ -6,7 +6,7 @@ void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl fcn_004011f0(void*, void*);
 void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl m_FreeTracked(void*);
-char* __cdecl fcn_004011a0(void*, char*);
+char* __cdecl vfs_ReadCString(void*, char*);
 void __cdecl CloseVfsStream(void*);
 
 /* ADDRESS: GOLDTL 0x0044b340 */
@@ -37,7 +37,7 @@ void __cdecl fcn_0044b340(char* name, char** tex, int* width, int* height)
 						*height = h;
 						for (w = 0; w < *width; w++) {
 							for (h = 0; h < *height; h++) {
-								fcn_004011a0(f, *tex + (w * *height + h) * 0x40);
+								vfs_ReadCString(f, *tex + (w * *height + h) * 0x40);
 							}
 						}
 					}

@@ -9,7 +9,7 @@ extern char g_868080[];
 
 
 
-void __cdecl fcn_00546190(void*);
+void __cdecl he_FreeAction(void*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004a5e60(unsigned short*, int, int, int, float, float, int*);
@@ -33,7 +33,7 @@ void __cdecl fcn_005505b0(int a)
 
 
 	if (*(int*) (a + 0x70) == -2) {
-		fcn_00546190((void*) a);
+		he_FreeAction((void*) a);
 		return;
 	}
 	io_FormatTextBuffer(buf, 0x10c2, g_868080 + (unsigned char) g_773d75 * 0x2f4, (gm_RandomMod(3) & 0xffff) + 0x10c4);
@@ -61,5 +61,5 @@ void __cdecl fcn_005505b0(int a)
 		}
 		q += 0x21c;
 	} while ((int) q < 0x85a0a2);
-	fcn_00546190((void*) a);
+	he_FreeAction((void*) a);
 }

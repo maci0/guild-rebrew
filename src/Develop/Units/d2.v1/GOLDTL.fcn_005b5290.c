@@ -29,7 +29,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_Plot(int, int, unsigned char, unsigned char, unsigned char);
 
-void __cdecl fcn_005b5290(Map5b52* m, int x0, int y0, int x1, int y1)
+void __cdecl d2_ShowSupermap(Map5b52* m, int x0, int y0, int x1, int y1)
 {
 	int frame;
 	int h;
@@ -46,7 +46,7 @@ void __cdecl fcn_005b5290(Map5b52* m, int x0, int y0, int x1, int y1)
 	fcn_00471d80(h, 3);
 	g_6b7fc0 = 1;
 	*(int*) 0x6a2c04 = 0;
-	while (fcn_005373e0((void*) fcn_005b5290, 0x277c7) != 0) {
+	while (fcn_005373e0((void*) d2_ShowSupermap, 0x277c7) != 0) {
 		d2_SetForm(h, 1);
 		if (m != 0) {
 			if (frame % 8 == 0) {

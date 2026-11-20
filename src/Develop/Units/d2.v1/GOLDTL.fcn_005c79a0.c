@@ -82,7 +82,7 @@ void __cdecl fcn_004c35f0(void);
 int __cdecl fcn_004c5530(Packet*);
 int __cdecl fcn_005373e0(void*, int);
 char* __cdecl he_fn_Handlung(void);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl io_AppendText(int, ...);
@@ -92,7 +92,7 @@ void __cdecl fcn_0052a0c0(unsigned char*, int);
 void __cdecl fcn_0052a2d0(void);
 int __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_00532ef0(void);
-void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_005c78f0(int, int, int*, int);
 
 /* ADDRESS: GOLDTL 0x005c79a0 */
@@ -125,7 +125,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	dlg = fcn_00470820(0, 0, s_6ac79c);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_00533dc0(d2_CurrentWindowId, 0x72f, 0);
+	d2_DrawPanelFrame(d2_CurrentWindowId, 0x72f, 0);
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x1a46);
 	fcn_0052a0c0(obj, 1);
@@ -172,7 +172,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 		cnt3 = 0;
 		cnt2 = 0;
 		sum = 0;
-		p = fcn_005463a0(2, 0, 0x16, 3, *(int*) (obj + 1));
+		p = he_StartHandlungSearch(2, 0, 0x16, 3, *(int*) (obj + 1));
 		if (p != 0) {
 			while (p != 0) {
 				if (*(char*) (p + 0xac) == 2) {
@@ -187,7 +187,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 			cnt3 = cnt3;
 		}
 		cnt6c = 0;
-		p = fcn_005463a0(2, 0, 0x6c, 3, *(int*) (obj + 1));
+		p = he_StartHandlungSearch(2, 0, 0x6c, 3, *(int*) (obj + 1));
 		while (p != 0) {
 			cnt6c++;
 			p = he_fn_Handlung();
@@ -284,7 +284,7 @@ send:
 				do {
 					if (out[i * 3] != -1 && d2_CurrentElementId == out[i * 3]) {
 						if (i != 2) {
-							for (p = fcn_005463a0(2, 0, 0x16, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
+							for (p = he_StartHandlungSearch(2, 0, 0x16, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
 								if (*(char*) (p + 0xac) == (char) (i + 2)) {
 									e = gm_LookupEntityRecordById(*(int*) (p + 0xb0));
 									if (e != 0) {
@@ -294,7 +294,7 @@ send:
 							}
 						}
 						else {
-							for (p = fcn_005463a0(2, 0, 0x6c, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
+							for (p = he_StartHandlungSearch(2, 0, 0x6c, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
 								e = gm_LookupEntityRecordById(*(int*) (p + 0xac));
 								if (e != 0) {
 									*(char*) (e + 0x188) = 1;

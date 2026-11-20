@@ -1,7 +1,7 @@
 extern float g_6628a8;
 extern float g_662a34;
 
-void __cdecl fcn_004518a0(float* v);
+void __cdecl d3_NormalizeVector(float* v);
 void __cdecl d3_MatrixToEulerAngles(float* m, float* e);
 
 /* ADDRESS: GOLDTL 0x00451a40 */
@@ -50,7 +50,7 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
     basis[0] = v[0] + u[0];
     basis[1] = v[1] + u[1];
     basis[2] = v[2] + u[2];
-    fcn_004518a0(basis + 0);
+    d3_NormalizeVector(basis + 0);
 
     u[0] = m[0x1c] - m[0x14];
     u[1] = m[0x1d] - m[0x15];
@@ -73,7 +73,7 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
     basis[4] = v[0] + u[0];
     basis[5] = v[1] + u[1];
     basis[6] = v[2] + u[2];
-    fcn_004518a0(basis + 4);
+    d3_NormalizeVector(basis + 4);
 
     u[0] = m[4] - m[0x14];
     u[1] = m[5] - m[0x15];
@@ -96,7 +96,7 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
     basis[8] = v[0] + u[0];
     basis[9] = v[1] + u[1];
     basis[10] = v[2] + u[2];
-    fcn_004518a0(basis + 8);
+    d3_NormalizeVector(basis + 8);
 
     d3_MatrixToEulerAngles(basis, e);
 

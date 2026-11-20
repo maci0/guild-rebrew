@@ -29,7 +29,7 @@ void* __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_00439e70(Obj* o);
 void __cdecl fcn_00439fa0(Obj* o);
 void __cdecl fcn_00438b40(Obj* o, V8* v);
-void __cdecl fcn_00438cb0(Obj* o, V6* v);
+void __cdecl d3_SetObjectRotation(Obj* o, V6* v);
 void __cdecl fcn_00449f90(Obj* o, int a, int id);
 
 /* ADDRESS: GOLDTL 0x0043a140 */
@@ -166,7 +166,7 @@ Obj* __cdecl d3_CloneObject(Obj* src)
 		p[0] = (a & 0xfc) | 4;
 	}
 	fcn_00438b40(o, &o->a);
-	fcn_00438cb0(o, &o->c);
+	d3_SetObjectRotation(o, &o->c);
 	r = o;
 	}
 	return r;

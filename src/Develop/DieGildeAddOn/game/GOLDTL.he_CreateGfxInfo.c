@@ -6,7 +6,7 @@ extern Rec7dc6e0 g_7dc6e0[64];
 
 void __cdecl fcn_004432d0(int, int);
 char* __cdecl fcn_00445600(char*, int, char*, char*);
-char* __cdecl fcn_00546590(char*, char*, char*);
+char* __cdecl he_CreateAnimatedEntityMarker(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x00546720 */
 void __cdecl he_CreateGfxInfo(unsigned char* p, char* name, char* entity)
@@ -37,7 +37,7 @@ void __cdecl he_CreateGfxInfo(unsigned char* p, char* name, char* entity)
 		slot->a = *(int*) (p + 4);
 		slot->c = 0;
 		*(unsigned char**) (p + 0x88) = (unsigned char*) slot;
-		fcn_00546590((char*) slot, name, entity);
+		he_CreateAnimatedEntityMarker((char*) slot, name, entity);
 		fcn_004432d0(saved, 1);
 	}
 done:

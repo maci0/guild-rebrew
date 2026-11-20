@@ -29,7 +29,7 @@ void __cdecl fcn_00473150(unsigned char*);
 int __cdecl fcn_005373e0(int, int);
 int __cdecl fcn_00509570(int);
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_00438cb0(char*, int*);
+void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_005272e0(void);
 void __cdecl fcn_00537320(int);
@@ -54,7 +54,7 @@ void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 void __cdecl d2_UpdateScrollPerga(void);
 void __cdecl fcn_005355f0(void);
 int __cdecl fcn_0050db40(char*, int);
-void __cdecl fcn_004e5a00(void*);
+void __cdecl cut_ExecuteCutscene(void*);
 void __cdecl fcn_005413d0(int);
 
 
@@ -107,7 +107,7 @@ void __cdecl fcn_00541620(void)
 	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
 	*(int*) (sel + 0x3c) += *(int*) (k + 0x7f4e44) + *(int*) (k + 0x7f4e40);
 	fcn_00438b40((char*) d3_ActiveCamera, (int*) (sel + 0x8c));
-	fcn_00438cb0((char*) d3_ActiveCamera, (int*) (sel + 0x9c));
+	d3_SetObjectRotation((char*) d3_ActiveCamera, (int*) (sel + 0x9c));
 	if (g_6a3420 == 0) {
 		goto fold;
 	}
@@ -353,7 +353,7 @@ fold:
 		if (g1f4 != 0) {
 			fcn_00473150((unsigned char*) g1f4);
 		}
-		fcn_004e5a00(panel);
+		cut_ExecuteCutscene(panel);
 		if (g_774968 != 0) {
 			fcn_005413d0(((unsigned short)g_774970) & 0xffff);
 		}

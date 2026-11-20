@@ -13,7 +13,7 @@ extern char s_6a41a4[];
 
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl fcn_005a3580(char*);
-char* __cdecl fcn_005338d0(char*, char*, int);
+char* __cdecl RegisterStatusText(char*, char*, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
@@ -39,7 +39,7 @@ void __cdecl fcn_005a3680(void)
 	for (i = 0; i < 3; i++) {
 		items[i] = fcn_005a3580(g_868354[i]);
 		sprintf(items[i], s_6a41a4, g_868354[i]);
-		fcn_005338d0(items[i], g_868354[i], 0);
+		RegisterStatusText(items[i], g_868354[i], 0);
 	}
 	d2_SetOverlayAnimation(0, 0);
 	fcn_005338a0();
@@ -47,7 +47,7 @@ void __cdecl fcn_005a3680(void)
 		do {
 			(*(char**)&g_7746a0) = 0;
 			for (i = 0; i < 3; i++) {
-				fcn_005338d0(items[i], g_868354[i], 0);
+				RegisterStatusText(items[i], g_868354[i], 0);
 			}
 			g_7746a4 = d3_FindSceneObjectAtScreenPoint((float) g_14ce8c0, (float) g_14ce8c2, 0x60, 1);
 			if (g_14ce8cc != 0 && g_7746a4 != 0) {

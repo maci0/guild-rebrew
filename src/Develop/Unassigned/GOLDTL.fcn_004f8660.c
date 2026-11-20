@@ -1,6 +1,6 @@
 #include <string.h>
 extern void __cdecl io_FormatTextBuffer(char *buf, int id, ...);
-extern void __cdecl fcn_004fa5f0(char *buf, int a1, int a2);
+extern void __cdecl d2_ShowPrivilegMessage(char *buf, int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x004f8660 */
 int __cdecl fcn_004f8660(char *obj, int *msg)
@@ -16,7 +16,7 @@ int __cdecl fcn_004f8660(char *obj, int *msg)
 
 		memset(buf, 0, sizeof buf);
 		io_FormatTextBuffer(buf, 0x1da4, obj[9] ? 0x297 : 0x26f);
-		fcn_004fa5f0(buf, 0, 0x657c7);
+		d2_ShowPrivilegMessage(buf, 0, 0x657c7);
 		return 2;
 	}
 	if (*msg == 1 && obj[2] == 6) {

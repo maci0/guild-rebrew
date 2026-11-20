@@ -12,7 +12,7 @@ int __cdecl fcn_004c4450(int id);
 int __cdecl fcn_004c5620(int a, char* unit);
 void __cdecl fcn_004c5980(void* msg);
 void __cdecl fcn_00500bb0(pos14_7f4c00* when, int h, int m, int s);
-void __cdecl fcn_00546190(char* unit);
+void __cdecl he_FreeAction(char* unit);
 char* __cdecl gm_LookupEntityRecordById(int id);
 
 /* ADDRESS: GOLDTL 0x0054ac70 */
@@ -32,7 +32,7 @@ void __cdecl fcn_0054ac70(char* e)
 	int w;
 
 	if (*(int*) (e + 0x70) == -1 || *(int*) (e + 0x70) == -2) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 	if (*(unsigned char*) (e + 0x78) & 4)

@@ -2,7 +2,7 @@ extern char g_10161d0[];
 extern char g_10161bc[];
 
 
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 
 int __cdecl fcn_0046f280(int index)
 {
@@ -10,7 +10,7 @@ int __cdecl fcn_0046f280(int index)
 
 	p = g_10161d0 + index * 0x3cc;
 	if (*(int*) p != 0) {
-		fcn_0046b2b0(*(int*) (g_10161bc + index * 0x3cc));
+		d2_DestroyElement(*(int*) (g_10161bc + index * 0x3cc));
 		return 1;
 	}
 	return 0;

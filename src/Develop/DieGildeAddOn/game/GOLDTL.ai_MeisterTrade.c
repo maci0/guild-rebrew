@@ -116,13 +116,13 @@ void* __cdecl fcn_00502cd0(int list, int mode, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_0050cce0(char* o, Stock* out, int producers);
 int __cdecl fcn_0050de80(char* e, Stock* s);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0047d1b0(void);
 int __cdecl fcn_0047d1e0(void);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 void __cdecl fcn_004c4510(char* a, int b);
-int __cdecl fcn_004c4570(unsigned char size, unsigned char count,
+int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count,
 	unsigned short off, char* src);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c51f0(int a1, int a2, short a3, int a4, char a5, int a6);
@@ -326,7 +326,7 @@ dump_stock:
 			continue;
 		}
 		fcn_004c4510(r, *(int*) (r + 2));
-		fcn_004c4570(4, 1,
+		cm_AppendPacketFieldDelta(4, 1,
 		    (unsigned short) ((r - *(char**) 0xaed32c) + 0x1c),
 		    (char*) &tmp);
 		fcn_004c5360();
@@ -351,7 +351,7 @@ dump_stock:
 			}
 			tmp = 0;
 			fcn_004c4510(r, *(int*) (r + 2));
-			fcn_004c4570(4, 1,
+			cm_AppendPacketFieldDelta(4, 1,
 			    (unsigned short) ((r - *(char**) 0xaed32c) + 0x1c),
 			    (char*) &tmp);
 			fcn_004c5360();
@@ -392,7 +392,7 @@ next_request:
 	}
 
 	/* 0x0572-0x05f0: is the cart already unloaded? */
-	x = fcn_005463a0(2, 0, 0xb, 3, *(int*) (*(char**) (o + 0x16c) + 1));
+	x = he_StartHandlungSearch(2, 0, 0xb, 3, *(int*) (*(char**) (o + 0x16c) + 1));
 	while (x != 0) {
 		if (*(int*) (x + 0xac) == *(int*) (r + 2)) {
 			goto tail;

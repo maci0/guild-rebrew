@@ -8,7 +8,7 @@ typedef Rec18_68da68 Rec18;
 extern Rec18_68da68 amt_OfficeSlots[42];
 extern Rec18_68da68 g_68da68[];
 
-int __cdecl fcn_004e8cb0(int all, int max, Rec18* out)
+int __cdecl amt_CollectOfficeGroup7(int all, int max, Rec18* out)
 {
 	int n;
 	int i;

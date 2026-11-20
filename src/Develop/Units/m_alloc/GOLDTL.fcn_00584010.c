@@ -8,7 +8,7 @@ int* __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_00580cf0(int);
 
 #pragma optimize("y", off)
-int* __cdecl fcn_00584010(void)
+int* __cdecl d2_InitTutorialMainOutro(void)
 {
 	int* p;
 	char* fdest;

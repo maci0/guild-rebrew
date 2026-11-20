@@ -1,11 +1,11 @@
 #include "client_data.h"
 extern void __cdecl gm_ResolveEntityById(char**, int, int, int); extern char* __cdecl fcn_00502cd0(int, ...);
-extern void __cdecl fcn_00546190(char*);
-extern char* __cdecl fcn_005463a0(int, int, int, ...);
+extern void __cdecl he_FreeAction(char*);
+extern char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 extern int __cdecl fcn_004943e0(unsigned short*, unsigned short*);
 extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl fcn_004c4510(char*, unsigned int);
-extern int __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
+extern int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 extern void __cdecl fcn_004c5360(void);
 extern int __cdecl fcn_004c5620(int, char*);
 extern int __cdecl fcn_00500cb0(char*, char*);
@@ -53,12 +53,12 @@ void __cdecl fcn_0054bc90(char* action)
 		if (v5 == 0xffff)
 			goto close;
 	} else if (*(int*) (action + 0xbc) == 1) {
-		v15 = fcn_005463a0(2, 1, *(unsigned int*) (action + 0xc0), 0, 0x37);
+		v15 = he_StartHandlungSearch(2, 1, *(unsigned int*) (action + 0xc0), 0, 0x37);
 		if (v15 == 0)
 			goto close;
 		v5 = *(unsigned short*) (v15 + 8);
 	} else {
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	}
 	v1 = (unsigned int) v5 * 0x21c;
@@ -90,13 +90,13 @@ void __cdecl fcn_0054bc90(char* action)
 			break;
 		idx++;
 		if (idx >= 4) {
-			fcn_00546190(action);
+			he_FreeAction(action);
 			return;
 		}
 	}
 	if (idx >= 4) {
 	close2:
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	}
 	io_FormatTextBuffer(text, 0x1785, *v3);
@@ -112,12 +112,12 @@ state2_unequal:
 				break;
 			idx++;
 			if (idx >= 4) {
-				fcn_00546190(action);
+				he_FreeAction(action);
 				return;
 			}
 		}
 		fcn_004c4510(v13, *(unsigned int*) (v13 + 2));
-		fcn_004c4570(4, 1, idx * 4 + 0x1c, (char*) &v11);
+		cm_AppendPacketFieldDelta(4, 1, idx * 4 + 0x1c, (char*) &v11);
 		fcn_004c5360();
 	} else {
 		v16 = *(int*) (v3 + 2);
@@ -127,7 +127,7 @@ state2_unequal:
 				break;
 			idx++;
 			if (idx >= 4) {
-				fcn_00546190(action);
+				he_FreeAction(action);
 				return;
 			}
 		}
@@ -140,7 +140,7 @@ state2_unequal:
 state2_report:
 	v16 = *(int*) (v1 + (unsigned long)&g_7f4ca4);
 	fcn_00545d40(v16, -1, text, 0, 0x5ec, 0);
-	fcn_00546190(action);
+	he_FreeAction(action);
 	return;
 state1:
 	if (fcn_00500cb0((char*) &gm_GameTime, action + 0x52) > 0) {
@@ -186,7 +186,7 @@ state1:
 				}
 			}
 			fcn_004c4510(v13, *(unsigned int*) (v13 + 2));
-			fcn_004c4570(4, 1, idx * 4 + 0x1c, (char*) &v11);
+			cm_AppendPacketFieldDelta(4, 1, idx * 4 + 0x1c, (char*) &v11);
 			fcn_004c5360();
 		} else {
 			arr = v15 + 0xac;
@@ -213,12 +213,12 @@ state1:
 	goto st1_close;
 st1_close:
 	fcn_00545780(action);
-	fcn_00546190(action);
+	he_FreeAction(action);
 	return;
 dialog:
 	fcn_00545670(action, 0, 0, (char*) 0x6a5a10, 0x5ec);
 	if (*(int*) (action + 0x74) == 0) {
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	}
 	d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 0);
@@ -236,7 +236,7 @@ dialog:
 close:
 		if (*(int*) (action + 0x74))
 			fcn_00545780(action);
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 
 }

@@ -47,7 +47,7 @@ extern char g_7f4ca0[];
 extern char* g_14a7898[];
 extern char g_6b5c60[];
 
-int __cdecl fcn_0057ec20(int);
+int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -78,7 +78,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x00599350 */
-void __cdecl fcn_00599350(void)
+void __cdecl d2_ShowBuildingMenu(void)
 {
 	char path[0x104];
 	char buf[0x80];
@@ -106,7 +106,7 @@ void __cdecl fcn_00599350(void)
 	prevIdx = -1;
 	prev = -1;
 	mode = 0;
-	if (!fcn_0057ec20(0x40)) {
+	if (!d2_TutorialAllowsFlag(0x40)) {
 		return;
 	}
 	fcn_0057e880(0xe, 0, 0, 0);
@@ -267,7 +267,7 @@ skip_place:
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(fcn_00599350, 0x657c7) != 0);
+	} while (fcn_005373e0(d2_ShowBuildingMenu, 0x657c7) != 0);
 	if (hwnd != -1) {
 		fcn_00471e30(hwnd);
 	}

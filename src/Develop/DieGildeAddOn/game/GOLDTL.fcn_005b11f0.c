@@ -18,13 +18,13 @@ extern int g_778d20;
 extern int g_778d24;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_005b0f00(char*);
+int __cdecl d2_UpdateWindowDrag(char*);
 int __cdecl fcn_005b10e0(char*);
 void __cdecl fcn_005918f0(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 int __cdecl fcn_00469c30(int, int, int);
 void __cdecl fcn_00469c40(int, int, int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 void __cdecl fcn_0046ed00(int, int, int);
 char* __cdecl fcn_0050d490(char*);
 
@@ -61,7 +61,7 @@ void __cdecl fcn_005b11f0(int* state)
 	t = g_77255c;
 	if (g_6ab3dc) {
 		state[0x9e7] = 0;
-		state[0x9e7] = fcn_005b0f00((char*) (state[2] * 0x3cc + 0x1015f40));
+		state[0x9e7] = d2_UpdateWindowDrag((char*) (state[2] * 0x3cc + 0x1015f40));
 		state[0x9e7] |= fcn_005b10e0((char*) (state[2] * 0x3cc + 0x1015f40));
 		if (state[0x9e7] != 0) {
 			state[0x9e8] = g_6b7fac;
@@ -189,7 +189,7 @@ check:
 		    && (*(int*) (*(int*) (obj + 0x34) + 0x218) == 1
 		        || *(int*) (obj + 0x88) != 0x10432c0)
 		    && *(int*) (obj + 0x124) == 0) {
-			fcn_0046b2b0(*slot);
+			d2_DestroyElement(*slot);
 			*slot = -1;
 		}
 next:

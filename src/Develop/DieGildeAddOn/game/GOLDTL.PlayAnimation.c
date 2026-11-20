@@ -4,7 +4,7 @@
 
 extern char* g_6b7ebc;
 extern char* evt_CurrentScript;
-int __cdecl fcn_00406340(char* e, char* name, int param);
+int __cdecl ch_QueuePlayAnimation(char* e, char* name, int param);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl PlayAnimation(char** a, char** name, int* param)
@@ -19,7 +19,7 @@ int __cdecl PlayAnimation(char** a, char** name, int* param)
 		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 1;
 	}
-	fcn_00406340(*a, *name, *param);
+	ch_QueuePlayAnimation(*a, *name, *param);
 	if (*(int*) (evt_CurrentScript + 0xc84) == 1) {
 		*(void**) (evt_CurrentScript + 0xc60) = (void*) PlayAnimation;
 	}

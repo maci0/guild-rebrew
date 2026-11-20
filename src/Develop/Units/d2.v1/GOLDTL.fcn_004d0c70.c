@@ -102,7 +102,7 @@ void __cdecl fcn_004d0c70(void)
 			((Slot*)g_1015ea0)[g_9b4840[k].text].color = 0x54;
 			((Slot*)g_1015ea0)[g_9b4840[k].text].h = 0x80;
 			((Slot*)g_1015ea0)[g_9b4840[k].text].centered = 1;
-			length = (float)(fcn_00507e30((char*) unit, 3));
+			length = (float)(gm_GetScaledEntitySkill((char*) unit, 3));
 			fcn_00534160(0x24, 0x41, (int)length, 0x4df);
 			k++;
 		}

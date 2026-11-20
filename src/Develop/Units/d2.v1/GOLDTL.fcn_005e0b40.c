@@ -14,11 +14,11 @@ extern int tp_d2_SelectedControl;
 int __cdecl d2_OpenInputIcon(int, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00474cf0(int);
+void __cdecl d2_SelectControl(int);
 void __cdecl d2_SetBildArgument(int, int);
 int __cdecl fcn_005373e0(void*, int);
 char* __cdecl fcn_00471f80(int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 
 int __cdecl fcn_005e0b40(int a, int b, char* text)
 {
@@ -29,7 +29,7 @@ int __cdecl fcn_005e0b40(int a, int b, char* text)
 	h = d2_OpenInputIcon(a, b, 0, d2_FontHeight, 1);
 	d2_SetElementFont(h, 0x53);
 	d2_SetElementValue(h, text);
-	fcn_00474cf0(h);
+	d2_SelectControl(h);
 	*(int*) (g_102d150 + *(int*) (g_1015ea0 + h * 0x2f4 + 0x88) * 0x160) = 0x80;
 	*(int*) (g_102d29c + *(int*) (g_1015ea0 + h * 0x2f4 + 0x88) * 0x160) = 0x110;
 	d2_SetBildArgument(h, 0x1f);
@@ -43,6 +43,6 @@ int __cdecl fcn_005e0b40(int a, int b, char* text)
 			g_774654 = 1;
 		}
 	}
-	fcn_0046b2b0(h);
+	d2_DestroyElement(h);
 	return result;
 }

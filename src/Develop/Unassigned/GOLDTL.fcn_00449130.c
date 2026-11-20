@@ -38,7 +38,7 @@ void __cdecl fcn_004125c0(int x, int y);
 char __cdecl fcn_00448cc0(int obj, float* a1, float* a2, int g, char* a5,
 	char* a6);
 void __cdecl fcn_00438b40(int h, char* p);
-void __cdecl fcn_00438cb0(int h, char* p);
+void __cdecl d3_SetObjectRotation(int h, char* p);
 void __cdecl UpdateSceneLighting(int a);
 char __cdecl fcn_00448b10(void);
 
@@ -189,7 +189,7 @@ int __cdecl fcn_00449130(void)
 		if (v14 != 0)
 			fcn_00438b40(g_1041d0c, v8);
 		if (v15 != 0)
-			fcn_00438cb0(g_1041d0c, v7);
+			d3_SetObjectRotation(g_1041d0c, v7);
 	}
 label_4495a3:
 	if (g_14ce8cc != 0) {

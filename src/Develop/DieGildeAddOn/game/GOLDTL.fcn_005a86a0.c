@@ -7,10 +7,10 @@ void __cdecl fcn_0043aa30(int);
 void __cdecl fcn_005167c0(void*, int);
 void __cdecl fcn_00516c50(void*, void*);
 void __cdecl fcn_00438b40(void*, void*);
-void __cdecl fcn_00438cb0(void*, void*);
+void __cdecl d3_SetObjectRotation(void*, void*);
 void __cdecl fcn_005338a0(void);
-void* __cdecl fcn_00426cc0(int);
-void __cdecl fcn_00428720(void*);
+void* __cdecl evt_FindScriptById(int);
+void __cdecl evt_RequestScriptExit(void*);
 void __cdecl fcn_005312d0(int);
 void __cdecl fcn_0043a9c0(int);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -82,7 +82,7 @@ void __cdecl fcn_005a86a0(void* a0)
 		}
 		sub = *(int*) &evt_LastGfxScriptId;
 		fcn_00438b40(*(void**) &d3_ActiveCamera, (char*) *(void**) &d3_ActiveCamera + 0x5c);
-		fcn_00438cb0(*(void**) &d3_ActiveCamera, (char*) *(void**) &d3_ActiveCamera + 0x90);
+		d3_SetObjectRotation(*(void**) &d3_ActiveCamera, (char*) *(void**) &d3_ActiveCamera + 0x90);
 		saved688 = (char*)d3_CameraHorizontalIndex;
 		*(int*) &g_7e3a40 = *(int*) ((char*) *(void**) &d3_ActiveCamera + 0x4c);
 		*(int*) &g_7e3a44 = *(int*) ((char*) *(void**) &d3_ActiveCamera + 0x50);
@@ -142,9 +142,9 @@ void __cdecl fcn_005a86a0(void* a0)
 	fcn_005338a0();
 	*(void**) &g_7ea360 = 0;
 	if (sub != -1) {
-		t = fcn_00426cc0(sub);
+		t = evt_FindScriptById(sub);
 		if (t != 0) {
-			fcn_00428720(t);
+			evt_RequestScriptExit(t);
 			fcn_005312d0(*(int*) ((char*) t + 0x100));
 		}
 	}

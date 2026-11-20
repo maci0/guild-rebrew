@@ -4,7 +4,7 @@
 extern char g_7f4ca4[];
 #include "client_packet_builder.h"
 
-int* __cdecl fcn_004e68d0(void);
+int* __cdecl cut_FindLowestIdFlaggedCutscene(void);
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 #include "Develop/DieGildeAddOn/game/cutscene.h"
 
@@ -19,16 +19,16 @@ char __cdecl fcn_004e6910(int idx)
 
 	ok = 0;
 	saved = *(int*) (g_7f4ca4 + idx * 0x21c + 0x208);
-	p = fcn_004e68d0();
+	p = cut_FindLowestIdFlaggedCutscene();
 	while (p != 0) {
 		if (cut_IsParticipant(*(int*) (g_7f4ca4 + idx * 0x21c), (unsigned char*) p) != 0) {
 			*(int*) (g_7f4ca4 + idx * 0x21c + 0x208) = *p;
-			fcn_004e5a00(p);
+			cut_ExecuteCutscene(p);
 			*(int*) (g_7f4ca4 + idx * 0x21c + 0x208) = -1;
 			ok = 1;
 		}
 		cut_FreeCutscene(*p);
-		p = fcn_004e68d0();
+		p = cut_FindLowestIdFlaggedCutscene();
 	}
 	fcn_004c4510(g_7f4ca4 + idx * 0x21c - 4, *(int*) (g_7f4ca4 + idx * 0x21c));
 	fcn_004c4700(4, 1, (short) (g_7f4ca4 + idx * 0x21c + 0x208 - g_aed32c), &saved);

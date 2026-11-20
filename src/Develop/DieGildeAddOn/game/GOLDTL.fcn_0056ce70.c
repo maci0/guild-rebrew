@@ -13,8 +13,8 @@ extern float g_6628a0;
 extern float g_6628a8;
 
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
-unsigned char* __cdecl fcn_00504c90(unsigned char*, int);
-void __cdecl fcn_00546190(char*);
+unsigned char* __cdecl gm_FindNearestBuildingByKind(unsigned char*, int);
+void __cdecl he_FreeAction(char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 
 /* ADDRESS: GOLDTL 0x0056ce70 */
@@ -46,10 +46,10 @@ void __cdecl fcn_0056ce70(char* obj)
 	*(char*) (obj + 0xb4) = 0;
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0xac));
 	if (e == 0) {
-		fcn_00546190(obj);
+		he_FreeAction(obj);
 		return;
 	}
-	target = fcn_00504c90(e, 3);
+	target = gm_FindNearestBuildingByKind(e, 3);
 	if (target != 0) {
 		a = *(char**) (e + 0x61);
 		d3_TransformPoint(a, (float*) (a + 0x4c), posA);

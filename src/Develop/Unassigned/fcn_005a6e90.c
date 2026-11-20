@@ -13,7 +13,7 @@ int __cdecl fcn_00472830(int, int, ...);
 int __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_0046f280(int);
-int __cdecl fcn_0046b2b0(int);
+int __cdecl d2_DestroyElement(int);
 void __cdecl d2_ClearPaintbox(void);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_005c9450(int, int, int);
@@ -90,7 +90,7 @@ int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
                 if (*p != -1)
                 {
                     fcn_0046f280(*p);
-                    fcn_0046b2b0(p[1]);
+                    d2_DestroyElement(p[1]);
                     p[0] = -1;
                     p[1] = -1;
                     p[2] = 0;
@@ -150,7 +150,7 @@ int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
             if (*p != -1)
             {
                 fcn_0046f280(*p);
-                fcn_0046b2b0(p[1]);
+                d2_DestroyElement(p[1]);
                 p[0] = -1;
                 p[1] = -1;
                 p[2] = 0;

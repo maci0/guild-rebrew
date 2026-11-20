@@ -21,7 +21,7 @@ extern __int64 g_666018;
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00508cf0(int, int*);
+void __cdecl gm_GenerateShuffledIndices(int, int*);
 void __cdecl fcn_004c6ba0(int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_005dbe90(char*);
@@ -53,7 +53,7 @@ int __cdecl fcn_005de010(unsigned char* e, char* request)
 	if (r == 0) {
 		return 0;
 	}
-	fcn_00508cf0(5, ids);
+	gm_GenerateShuffledIndices(5, ids);
 	for (i = 0; i < 5; i++) {
 		if (e[ids[i] + 0x80] > 0x15) {
 			goto found;

@@ -10,9 +10,9 @@ struct tok_425fe0 {
 	} u;
 };
 
-void __cdecl fcn_00426680(int lex, struct tok_425fe0* t);
+void __cdecl evt_ReadToken(int lex, struct tok_425fe0* t);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
-void __cdecl fcn_00428720(char* g);
+void __cdecl evt_RequestScriptExit(char* g);
 int __cdecl evt_AllocateLocalVariable(char* g, int arg, int kind, char* name);
 
 /* ADDRESS: GOLDTL 0x00425fe0 */
@@ -25,23 +25,23 @@ int __cdecl evt_ParseSymbolDeclaration(char* g, int arg)
 
 	kind = 1;
 	r = 0;
-	fcn_00426680(*(int*) (g + 0x118), &t);
+	evt_ReadToken(*(int*) (g + 0x118), &t);
 	if (t.type != 0 && (t.type != 2 || *(int*) (t.u.sym + 0x28) != 0)) {
 		if (t.type == 2) {
 			evt_LogScriptError(g, *(int*) (g + 0x118), "Syntax error: Propably duplicate symbol...");
 		} else {
 			evt_LogScriptError(g, *(int*) (g + 0x118), "Syntax error: unknown");
 		}
-		fcn_00428720(g);
+		evt_RequestScriptExit(g);
 	} else {
 		if (t.type == 0) {
 			strcpy(name, t.u.text);
 		} else {
 			strcpy(name, t.u.sym + 4);
 		}
-		fcn_00426680(*(int*) (g + 0x118), &t);
+		evt_ReadToken(*(int*) (g + 0x118), &t);
 		if (t.type == 1 && t.u.num == 0x1b) {
-			fcn_00426680(*(int*) (g + 0x118), &t);
+			evt_ReadToken(*(int*) (g + 0x118), &t);
 			if (t.type == 5) {
 				kind = t.u.num;
 			}

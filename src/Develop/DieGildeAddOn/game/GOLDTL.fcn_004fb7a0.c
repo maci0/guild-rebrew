@@ -13,7 +13,7 @@ typedef struct Time14 {
 
 unsigned short __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_005463a0(int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl fcn_00500bb0(Time14* t, int hours, int minutes, int seconds);
 void __cdecl fcn_004c5530(void* msg);
 int __cdecl fcn_004c6a00(void* msg);
@@ -40,15 +40,15 @@ void __cdecl fcn_004fb7a0(void)
 	phase = *(int*) 0x99f5bc;
 	if (phase > 0) {
 		if (phase == 1) {
-			if (fcn_005463a0(1, 0, 0x59)) {
+			if (he_StartHandlungSearch(1, 0, 0x59)) {
 				return;
 			}
 		} else if (phase == 2) {
-			if (fcn_005463a0(1, 0, 0x4e)) {
+			if (he_StartHandlungSearch(1, 0, 0x4e)) {
 				return;
 			}
 		} else if (phase == 3) {
-			if (fcn_005463a0(1, 0, 0x50)) {
+			if (he_StartHandlungSearch(1, 0, 0x50)) {
 				return;
 			}
 		}

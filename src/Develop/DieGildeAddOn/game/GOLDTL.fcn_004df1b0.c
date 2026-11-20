@@ -11,7 +11,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00508cf0(unsigned char, int*);
+void __cdecl gm_GenerateShuffledIndices(unsigned char, int*);
 int __cdecl fcn_00472250(int, int, int);
 unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl fcn_004c54c0(int, int, int, int);
@@ -108,7 +108,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         return;
     case 2:
         if (*(int*) (participant + 0x10) != action[5]) return;
-        fcn_00508cf0(7, order);
+        gm_GenerateShuffledIndices(7, order);
         value = (gm_WalkEntityChain(*(unsigned short*) own)
             + gm_WalkEntityChain(*(unsigned short*) other)) / 2000;
         dialog = fcn_00470820(0, 0, "cutscenes\\folterwahl");

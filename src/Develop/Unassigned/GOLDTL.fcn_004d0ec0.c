@@ -16,7 +16,7 @@ int __cdecl fcn_00472cd0(int slot);
 void __cdecl fcn_0046e700(int slot);
 #else
 int __cdecl fcn_0046f280(int slot);
-void __cdecl fcn_0046b2b0(int slot);
+void __cdecl d2_DestroyElement(int slot);
 #endif
 
 /* ADDRESS: GOLDTL 0x004d0ec0 */
@@ -35,7 +35,7 @@ void __cdecl fcn_004d0ec0(void)
 #ifdef REBREW_GOLD
             fcn_0046e700(g_9b4840[i].frame);
 #else
-            fcn_0046b2b0(g_9b4840[i].frame);
+            d2_DestroyElement(g_9b4840[i].frame);
 #endif
         }
     }

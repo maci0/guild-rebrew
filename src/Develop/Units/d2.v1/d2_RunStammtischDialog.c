@@ -18,7 +18,7 @@ int __cdecl fcn_005373e0(void (*fn)(void), int code);
 void __cdecl fcn_00471e30(void* dlg);
 
 /* ADDRESS: GOLDTL 0x005a1e40 */
-void __cdecl fcn_005a1e40(int gebaeude, int* objekt)
+void __cdecl d2_RunStammtischDialog(int gebaeude, int* objekt)
 {
 	int changed;
 	void* dlg;
@@ -86,7 +86,7 @@ void __cdecl fcn_005a1e40(int gebaeude, int* objekt)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		if (fcn_005373e0((void (*)(void)) fcn_005a1e40, 0x677c7) == 0) {
+		if (fcn_005373e0((void (*)(void)) d2_RunStammtischDialog, 0x677c7) == 0) {
 			break;
 		}
 	}

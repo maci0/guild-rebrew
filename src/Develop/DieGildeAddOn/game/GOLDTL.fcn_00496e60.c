@@ -11,7 +11,7 @@ typedef struct Msg {
 } Msg;
 
 extern int __cdecl fcn_004fef00(char* p);
-extern int __cdecl fcn_004e8d10(void* p, int n, void* out);
+extern int __cdecl amt_SelectOfficeCandidates(void* p, int n, void* out);
 extern int __cdecl fcn_004a9b20(int a1, char* e, int a3, Msg* in, Msg* out);
 extern int __cdecl ai_SelectBestMethod(int kind, unsigned short id, int a3, Msg* b, Msg* a);
 extern unsigned short __cdecl gm_RandomMod(unsigned short n);
@@ -73,7 +73,7 @@ int __cdecl fcn_00496e60(int a1, char* e, int y, Msg* out1, Msg* out2)
 	if (fcn_004fef00(e) - *(unsigned short*) (e + 0xa) < 3) {
 		return 0;
 	}
-	r = fcn_004e8d10(e, 2, items);
+	r = amt_SelectOfficeCandidates(e, 2, items);
 	if (r == 0) {
 		if (gm_RandomMod(4) != 0) return 0;
 		a.type = 0x10;

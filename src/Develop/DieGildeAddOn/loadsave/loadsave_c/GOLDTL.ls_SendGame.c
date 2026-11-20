@@ -17,7 +17,7 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 void __cdecl m_FreeTracked(char*);
 void __cdecl fcn_004c4e40(int);
 int __cdecl fcn_004c4e70(char*);
-void __cdecl fcn_005356e0(void);
+void __cdecl main_PumpWindowMessages(void);
 void __cdecl fcn_00535960(void);
 
 int __cdecl ls_SendGame(char* path)
@@ -60,11 +60,11 @@ int __cdecl ls_SendGame(char* path)
 				Sleep(15);
 			}
 		}
-		fcn_005356e0();
+		main_PumpWindowMessages();
 		fcn_00535960();
 	}
 	while (g_1005760 != 0) {
-		fcn_005356e0();
+		main_PumpWindowMessages();
 		fcn_00535960();
 	}
 	m_FreeTracked(buf);

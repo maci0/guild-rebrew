@@ -6,7 +6,7 @@ extern int g_6b7eb0;
 int __cdecl evt_ParseScript(int a0);
 int __cdecl evt_FindDefinition(int a0, char* a1);
 void __cdecl evt_LogScriptError(int a0, int a1, char* a2);
-void __cdecl fcn_00428720(int a0);
+void __cdecl evt_RequestScriptExit(int a0);
 void __cdecl evt_EnterFunction(int a0, int a1);
 int __cdecl sprintf(char* a0, const char* a1, ...);
 char* __cdecl strcpy(char* a0, const char* a1);
@@ -32,7 +32,7 @@ int __cdecl fcn_00428340(char* scriptCtx, int a1, ...)
 	}
 	if (a1 != *(char*) (obj + 0x24)) {
 		evt_LogScriptError((int) scriptCtx, 0, (char*) 0x679610);
-		fcn_00428720((int) scriptCtx);
+		evt_RequestScriptExit((int) scriptCtx);
 		return 0;
 	}
 	argp = &a1;

@@ -29,9 +29,9 @@ int __cdecl fcn_0050cce0(char* o, void* out, int producers);
 int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
 int __cdecl fcn_0046f740(int x, int y, int a3, int win);
 int __cdecl fcn_0046f7e0(int x, int y, int a3, int win, int a5);
-void __cdecl fcn_0046b2b0(int id);
+void __cdecl d2_DestroyElement(int id);
 int __cdecl gm_GetElapsedMinutes(void* a, void* b);
-void* __cdecl fcn_005463a0(int n, ...);
+void* __cdecl he_StartHandlungSearch(int n, ...);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl io_AppendText(int a, ...);
 
@@ -128,9 +128,9 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 
 		span = 0;
 		if (i == 0) {
-			row = fcn_005463a0(2, 0, 9, 3, *(int*) (obj + 1));
+			row = he_StartHandlungSearch(2, 0, 9, 3, *(int*) (obj + 1));
 		} else {
-			row = fcn_005463a0(2, 0, 8, 3, *(int*) (obj + 1));
+			row = he_StartHandlungSearch(2, 0, 8, 3, *(int*) (obj + 1));
 			while (row != 0 && (int) *(unsigned short*) ((char*) row + 0xac) != p->x0) {
 				row = he_fn_Handlung();
 			}
@@ -145,7 +145,7 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 			*(float*) (g_1015ea0 + p->c[2] * 0x2f4 + 0x1f4) = (float) t2 / (float) t1;
 		} else {
 			if (p->c[3] != -1) {
-				fcn_0046b2b0(p->c[3]);
+				d2_DestroyElement(p->c[3]);
 				p->c[3] = -1;
 			}
 			if (p->c[2] != -1) {
@@ -171,7 +171,7 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 			p = (Panel*) (g_779160 + k * 0x58);
 			if (p->c[1] >= 0) {
 				p->c[0] = -1;
-				fcn_0046b2b0(p->c[1]);
+				d2_DestroyElement(p->c[1]);
 				p->c[1] = -1;
 				p->c[2] = -1;
 				p->c[3] = -1;

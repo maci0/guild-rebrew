@@ -5,7 +5,7 @@ extern int lpGebaeudePROT;
 extern unsigned char g_773d75;
 extern char gm_GameTime[];
 
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_00500bb0(char*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 float __cdecl fcn_004fc460(char*);
@@ -17,7 +17,7 @@ char* __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c6000(int, int);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_004c4510(char*, int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004fac80(int, int*);
 float __cdecl fcn_004ff210(unsigned short, int);
@@ -54,7 +54,7 @@ void __cdecl fcn_00556170(char* p)
 
 	state = *(int*) (p + 0x70);
 	if (state == -1 || state == -2) {
-		fcn_00546190(p);
+		he_FreeAction(p);
 		return;
 	}
 	if (*(unsigned char*) (p + 0x78) & 4) {
@@ -150,8 +150,8 @@ void __cdecl fcn_00556170(char* p)
 		key = *(int*) (obj + 4);
 		fcn_004c51a0(key, -1, g_773d75, ((i & 0xffff) + 0x33) * 0x20);
 		fcn_004c4510(obj, key);
-		fcn_004c4570(1, 1, 2, &v38);
-		fcn_004c4570(1, 1, 0xc, &v34);
+		cm_AppendPacketFieldDelta(1, 1, 2, &v38);
+		cm_AppendPacketFieldDelta(1, 1, 0xc, &v34);
 		fcn_004c5360();
 		COPY_UI(p);
 		fcn_00500bb0(p + 0x52, 1, 0, 0);

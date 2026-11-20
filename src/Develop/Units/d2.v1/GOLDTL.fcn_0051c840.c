@@ -49,7 +49,7 @@ int sprintf(char*, const char*, ...);
 int __cdecl fcn_0042b2f0(char*, int, int);
 int __cdecl fcn_0064d530(char*, const char*, unsigned int);
 int __cdecl fcn_0064eeec(char*);
-int __cdecl fcn_00517b90(char*, int, char*);
+int __cdecl io_CopyTrailingDigits(char*, int, char*);
 int __cdecl fcn_0051e070(void);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_SetForm(int, int);
@@ -203,7 +203,7 @@ body:
 				if (e < 0) {
 					sprintf(tmp, g_68b3f8, res, st.tmpl);
 				} else {
-					k = i - fcn_00517b90(buf, e, b3);
+					k = i - io_CopyTrailingDigits(buf, e, b3);
 					sprintf(tmp, g_6a22d8, res, b3, st.tmpl);
 				}
 				if (fcn_0051e070() == 0 && state == 2) {
@@ -217,7 +217,7 @@ body:
 					res = fcn_0042b2f0(g_14a5400[0], r, 8);
 				}
 				if (e > -1) {
-					k = i - fcn_00517b90(buf, e, b1);
+					k = i - io_CopyTrailingDigits(buf, e, b1);
 					sprintf(tmp, g_6a22d8, res, b1, st.tmpl);
 				} else {
 					sprintf(tmp, g_68b3f8, res, st.tmpl);
@@ -233,7 +233,7 @@ body:
 					res = fcn_0042b2f0(g_14a5418[0], r, 8);
 				}
 				if (e > -1) {
-					k = i - fcn_00517b90(buf, e, b2);
+					k = i - io_CopyTrailingDigits(buf, e, b2);
 					sprintf(tmp, g_6a22d8, res, b2, st.tmpl);
 				} else {
 					sprintf(tmp, g_68b3f8, res, st.tmpl);

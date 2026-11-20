@@ -14,7 +14,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_0050d200(void*, int);
 
-int __cdecl fcn_005909d0(int i)
+int __cdecl d2_CreateGebaeudeTooltip(int i)
 {
 	char roman[7][4] = { "", "I", "II", "III", "IV", "V", "VI" };
 	char* rec;

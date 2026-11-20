@@ -1,4 +1,4 @@
-int __cdecl fcn_004e8af0(int, void*);
+int __cdecl amt_FindOfficeSlotByKey(int, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
@@ -28,7 +28,7 @@ int __cdecl fcn_004aae50(int a1, unsigned short* referenceId, int* candidateIds,
 	int k;
 
 	*a4 = 0;
-	if (fcn_004e8af0(a1, &info) == 0)
+	if (amt_FindOfficeSlotByKey(a1, &info) == 0)
 		return -1;
 	for (i = 0; i < 4; i++) {
 		e = gm_LookupEntityRecordById(candidateIds[i]);

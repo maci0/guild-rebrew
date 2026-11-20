@@ -39,7 +39,7 @@ extern char* __cdecl fcn_004c4480(int);
 extern void __cdecl fcn_004f2ba0(char*, char*, int);
 extern void __cdecl fcn_004c5530(char*);
 extern char* __cdecl fcn_0050dc90(char*);
-extern void __cdecl fcn_00546190(char*);
+extern void __cdecl he_FreeAction(char*);
 extern void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 extern void __cdecl fcn_004c5790(int, Req55c270*);
 extern void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -69,7 +69,7 @@ void __cdecl fcn_0055c270(char* o)
 		if (fcn_00500cb0(o + 0x52, (char*) 0x7f4c00) < 0) {
 			e = (unsigned char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0x10));
 			if (e == 0) {
-				fcn_00546190(o);
+				he_FreeAction(o);
 				return;
 			}
 			h = fcn_00502cd0(*(int*) (e + 0x5d), 1, 1, *(int*) (o + 0xb0));
@@ -84,7 +84,7 @@ void __cdecl fcn_0055c270(char* o)
 		rec = (unsigned char*) fcn_004c4480(*(int*) (o + 0xb4));
 		e = (unsigned char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0x10));
 		if (e == 0 || rec == 0) {
-			fcn_00546190(o);
+			he_FreeAction(o);
 			return;
 		}
 		if (*(unsigned short*) rec == 0x1f9) {
@@ -173,7 +173,7 @@ void __cdecl fcn_0055c270(char* o)
 			m.x4 = *(int*) (h + 2);
 			fcn_004c5790(4, &m);
 		}
-		fcn_00546190(o);
+		he_FreeAction(o);
 		return;
 	}
 }

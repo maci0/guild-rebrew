@@ -60,11 +60,11 @@ extern Obj g_770b80[];
 
 int __cdecl fcn_004741e0(short a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
-int __cdecl fcn_00475b70(int h, int a, int b);
+int __cdecl d2_GetWindowListItem(int h, int a, int b);
 void __cdecl fcn_00475580(int h, int v);
-int __cdecl fcn_00473340(int a, int b, int c, int d, int e);
+int __cdecl d2_AddWindowImage(int a, int b, int c, int d, int e);
 
-void __cdecl fcn_00525260(int unused, char arg)
+void __cdecl d2_OpenPlayerBar(int unused, char arg)
 {
 	int owner;
 	int id;
@@ -80,11 +80,11 @@ void __cdecl fcn_00525260(int unused, char arg)
 		d2_SetForm(g_623864, 1);
 		owner = g_6ed938;
 		d2_SetForm(g_623864, 2);
-		id = fcn_00475b70(g_623864, 2, 0);
+		id = d2_GetWindowListItem(g_623864, 2, 0);
 		((Ent*)g_f8f080)[id].f1d0 = 3;
 		((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_6ed938].child[0] = id;
 		((Ent*)g_f8f080)[id].owner = owner;
-		id = fcn_00475b70(g_623864, 2, 1);
+		id = d2_GetWindowListItem(g_623864, 2, 1);
 		((Ent*)g_f8f080)[id].f1d0 = 3;
 		((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_6ed938].child[1] = id;
 		((Ent*)g_f8f080)[id].owner = owner;
@@ -104,7 +104,7 @@ void __cdecl fcn_00525260(int unused, char arg)
 				g_75f280[i].g = 0;
 			}
 			d2_SetForm(g_623864, 2);
-			id = fcn_00473340(0x11, 4, 0x51d, g_6ed938, -2);
+			id = d2_AddWindowImage(0x11, 4, 0x51d, g_6ed938, -2);
 			((Ent*)g_f8f080)[id].f5c = 1;
 			((Ent*)g_f8f080)[id].f1d0 = 3;
 			for (i = 0; i < 768; i++) {

@@ -19,7 +19,7 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_00445600(int a, int b, int c, char* name);
 void __cdecl he_CreateGfxInfo(unsigned char* p, char* fmt, int v);
 
-void __cdecl fcn_00546850(unsigned char* p)
+void __cdecl he_CreateEventGfxInfo(unsigned char* p)
 {
 	char* r;
 	unsigned short* o;

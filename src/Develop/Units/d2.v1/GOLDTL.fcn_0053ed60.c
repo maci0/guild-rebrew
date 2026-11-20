@@ -25,19 +25,19 @@ void __cdecl fcn_00533880(void);
 void __cdecl fcn_005338a0(void);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_00438cb0(char*, int*);
+void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl fcn_00445f50(int, int, float, int);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strcpy(char*, const char*);
 typedef struct { char unknown00[9]; char name[0x100]; char path[0x107]; } FileSlot53ed60;
-int __cdecl fcn_005dfa40(char*, char*, FileSlot53ed60*);
+int __cdecl vfs_ListFilesByExtension(char*, char*, FileSlot53ed60*);
 int __cdecl vfs_Tfopen(char*, char*, int);
 int __cdecl fcn_00521eb0(int, char*);
 void __cdecl CloseVfsStream(int);
 char* __cdecl fcn_0053e7a0(char*);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl txt_FindEntryIndex(char*);
-void __cdecl fcn_005338d0(char*, char*, int);
+void __cdecl RegisterStatusText(char*, char*, int);
 char* __cdecl fcn_00442910(int, void*, void*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 char __cdecl fcn_00442c00(char*, char);
@@ -102,12 +102,12 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	fcn_005338a0();
 	fcn_004432d0(0, 0);
 	fcn_00438b40(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x5c));
-	fcn_00438cb0(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x90));
+	d3_SetObjectRotation(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x90));
 	fcn_00445f50(0, 0, 1.0f, 0);
 	if (network == 0) {
-		count = fcn_005dfa40((char*) 0x6a3778, (char*) 0x6a41b8, data.names);
+		count = vfs_ListFilesByExtension((char*) 0x6a3778, (char*) 0x6a41b8, data.names);
 	} else {
-		count = fcn_005dfa40((char*) 0x6a3778, (char*) 0x6a41b0, data.names);
+		count = vfs_ListFilesByExtension((char*) 0x6a3778, (char*) 0x6a41b0, data.names);
 	}
 	for (i = 0; i < count; i++) {
 		h = vfs_Tfopen(data.names[i].path, (char*) 0x6750e8, g_6b7fdc);
@@ -133,7 +133,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 			}
 			sprintf(data.namebuf, (char*) 0x6a41a4, data.hdr + 5);
 			strcpy(city, data.namebuf);
-			fcn_005338d0(data.namebuf, data.langName, 0);
+			RegisterStatusText(data.namebuf, data.langName, 0);
 		}
 	}
 	city = (char*) data.cities[4];

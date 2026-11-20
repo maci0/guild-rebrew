@@ -22,7 +22,7 @@ typedef struct Face {
 } Face;
 
 void __cdecl d3_CalculateTriangleNormal(Vert*, Vert*, Vert*, Vec3*);
-void __cdecl fcn_004518a0(Vec3*);
+void __cdecl d3_NormalizeVector(Vec3*);
 
 void __cdecl d3_RecalculateMeshNormals(char* m)
 {
@@ -49,7 +49,7 @@ void __cdecl d3_RecalculateMeshNormals(char* m)
 				n[2] += f[i].n.z;
 			}
 		}
-		fcn_004518a0((Vec3*) n);
+		d3_NormalizeVector((Vec3*) n);
 		v[j].n.x = n[0];
 		v[j].n.y = n[1];
 		v[j].n.z = n[2];

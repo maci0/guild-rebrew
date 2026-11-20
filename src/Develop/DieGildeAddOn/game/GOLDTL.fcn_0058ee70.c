@@ -37,7 +37,7 @@ extern int g_665f78[];
 void* __cdecl FindSlotEntryFiltered(int, char*, unsigned char*, void*, int);
 int __cdecl fcn_004f1790(int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-int __cdecl fcn_0058c410(int*, int);
+int __cdecl d2_CreateRentAGraveDialog(int*, int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_0058edc0(int, char*, int);
 void __cdecl fcn_00471e30(int);
@@ -65,7 +65,7 @@ void __cdecl fcn_0058ee70(char* e)
 		v = (unsigned char) fcn_004f1790(*(int*) (e + 0x65), rec);
 		dlg.rec_state = v;
 		io_FormatTextBuffer(text, 0x4107, g_665f78[*(int*) rec]);
-		if (!fcn_0058c410((int*) &dlg, g_14b5650)) {
+		if (!d2_CreateRentAGraveDialog((int*) &dlg, g_14b5650)) {
 			fcn_00532ef0();
 			return;
 		}

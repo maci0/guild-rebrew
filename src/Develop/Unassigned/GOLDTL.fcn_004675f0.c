@@ -3,7 +3,7 @@ extern char* g_1015ea0;
 extern int d2_ScreenHeight;
 extern int g_1040494;
 
-int __cdecl fcn_00469890(void);
+int __cdecl d2_AllocateElement(void);
 int __cdecl d2_GetResourceData(int);
 
 /* ADDRESS: GOLDTL 0x004675f0 */
@@ -19,7 +19,7 @@ int __cdecl fcn_004675f0(int a0, int a1, int a2, int a3, int a4, int resourceId,
 	int m;
 	int v;
 
-	id = fcn_00469890();
+	id = d2_AllocateElement();
 	p1 = g_772500 + (resourceId + 1) * 0x54;
 	p0 = g_772500 + resourceId * 0x54;
 	p3 = g_772500 + (resourceId + 3) * 0x54;

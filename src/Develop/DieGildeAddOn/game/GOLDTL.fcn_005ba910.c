@@ -11,7 +11,7 @@ int __cdecl d2_SetSlotVisibility(int, int);
 float __cdecl fcn_0050bbb0(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
-void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl d2_DrawPanelFrame(int, int, int);
 void __cdecl fcn_00533f40(int, int, int, int);
 void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00594340(void);
@@ -29,10 +29,10 @@ int __cdecl fcn_005974e0(int, int);
 int __cdecl fcn_00597940(int, int, int, int, int);
 int __cdecl fcn_00505340(int);
 int __cdecl fcn_005ba020(int, int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 void __cdecl fcn_00469880(int);
 void __cdecl fcn_0046f280(int);
-int __cdecl fcn_005463a0(int, int, int, int, int, ...);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int, ...);
 int __cdecl fcn_004677e0(int, ...);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl d2_SetElementFont(int, int);
@@ -58,7 +58,7 @@ void __cdecl ResetDisplayCounters(void);
 int __cdecl fcn_00473690(int, int);
 int __cdecl CountDisplayCounters(void);
 void __cdecl d2_ClearSelectedControl(void);
-int __cdecl fcn_0057ecc0(void);
+int __cdecl d2_CanCloseWindowDuringTutorial(void);
 void __cdecl fcn_00532ef0(void);
 float __cdecl fcn_0050bb50(int, int);
 double __cdecl gm_RandomFloat01(void);
@@ -80,10 +80,10 @@ void __cdecl fcn_005c61c0(void);
 int __cdecl fcn_005b9cb0(int, int);
 int __cdecl fcn_005b9df0(int, int, int, int);
 void __cdecl fcn_005b9fb0(int);
-int __cdecl fcn_005b9980(int);
+int __cdecl d2_ShowNewCartDialog(int);
 void __cdecl fcn_005af160(int, float, int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
-int __cdecl fcn_0057eba0(int, int, int, int);
+int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl fcn_004c52d0(int, int);
 int __cdecl fcn_005bdc30(int, int, int, int, int);
@@ -422,7 +422,7 @@ l_after:
 
 	/* 0x5baec2: status-line message id for the current container state */
 	if (*(int*) 0x7746c4 == 0 && *(int*) 0x7746c8 == 0) {
-		fcn_00533dc0(*(int*) 0x772514, 0x70b, 0x73f);
+		d2_DrawPanelFrame(*(int*) 0x772514, 0x70b, 0x73f);
 	} else {
 		int msg;
 		unsigned char kind;
@@ -444,9 +444,9 @@ l_after:
 		}
 		/* the native arms push 0x73f when the trade flag is set */
 		if (f.v3c != 0) {
-			fcn_00533dc0(*(int*) 0x772514, msg, 0x73f);
+			d2_DrawPanelFrame(*(int*) 0x772514, msg, 0x73f);
 		} else {
-			fcn_00533dc0(*(int*) 0x772514, msg, 0x741);
+			d2_DrawPanelFrame(*(int*) 0x772514, msg, 0x741);
 		}
 	}
 
@@ -569,7 +569,7 @@ l_sel:
 			}
 			if (e->f0c != -1) {
 				e->f00 = 0;
-				fcn_0046b2b0(e->f0c);
+				d2_DestroyElement(e->f0c);
 				e->f0c = -1;
 				e->f04 = 0;
 			}
@@ -577,7 +577,7 @@ l_sel:
 			idx = (int) e->fD8;
 			do {
 				if (*(int*) idx != -1) {
-					fcn_0046b2b0(*(int*) idx);
+					d2_DestroyElement(*(int*) idx);
 					fcn_00469880(*(int*) (idx + 0xc));
 					*(int*) idx = -1;
 					*(int*) (idx + 0xc) = -1;
@@ -585,8 +585,8 @@ l_sel:
 				idx += 4;
 			} while (--j != 0);
 			fcn_00469880(e->f14);
-			fcn_0046b2b0(e->f18);
-			fcn_0046b2b0(e->f1c);
+			d2_DestroyElement(e->f18);
+			d2_DestroyElement(e->f1c);
 			e->f14 = -1;
 			e->f18 = -1;
 			e->f1c = -1;
@@ -630,7 +630,7 @@ l_next:
 		if (i >= 16) {
 			goto l_fill_next;
 		}
-		if (fcn_005463a0(3, 0, 0xf, 2, (int) (*(unsigned short*) 0x774970), 3,
+		if (he_StartHandlungSearch(3, 0, 0xf, 2, (int) (*(unsigned short*) 0x774970), 3,
 		                 *(int*) (f.v20 + 2)) != 0) {
 			goto l_fill_next;
 		}
@@ -669,7 +669,7 @@ l_next:
 		e->f10 = fcn_0046f100(0x10, j, 0xc8, 0x40, 0x10, *(int*) 0x772514);
 		d2_SetElementFont(*(int*) (0x10161bc + e->f10 * 0x3cc), 0x53);
 		*(int*) (*(int*) 0x1015ea0 + f.v1c * 0x2f4 + 0x5c) = 1;
-		i = fcn_005463a0(2, 3, *(int*) (f.v20 + 2), 0, 0x11);
+		i = he_StartHandlungSearch(2, 3, *(int*) (f.v20 + 2), 0, 0x11);
 		while (i != 0) {
 			*(int*) (i + 0x52) = *(int*) 0x7f4c00;
 			*(int*) (i + 0x56) = *(int*) 0x7f4c04;
@@ -689,7 +689,7 @@ l_fill_next:
 	for (e = f.v6D8; e < f.v6D8 + 16; e++) {
 		e->f04 = 0;
 	}
-	i = fcn_005463a0(2, 0, 0xf, 2, (int) (*(unsigned short*) 0x774970));
+	i = he_StartHandlungSearch(2, 0, 0xf, 2, (int) (*(unsigned short*) 0x774970));
 	if (i != 0) {
 		do {
 			for (j = 0; j < 16; j++) {
@@ -796,7 +796,7 @@ l_slot_handles:
 		}
 		if (j >= *(int*) &f.v15C) {
 			if (*(int*) ((char*) e + 0xd8 + f.v20 * 4) != -1) {
-				fcn_0046b2b0(*(int*) ((char*) e + 0xd8 + f.v20 * 4));
+				d2_DestroyElement(*(int*) ((char*) e + 0xd8 + f.v20 * 4));
 				if (*(int*) ((char*) e + 0xe4 + f.v20 * 4) != -1) {
 					fcn_00469880(*(int*) ((char*) e + 0xe4 + f.v20 * 4));
 				}
@@ -1027,7 +1027,7 @@ l_da9:
 			if (fcn_00471f80(i) != 0) {
 				fcn_00472380(i, 0);
 				f.v90 = 0;
-			} else if (fcn_0057ecc0() == 1) {
+			} else if (d2_CanCloseWindowDuringTutorial() == 1) {
 				*(int*) 0x774654 = 1;
 				if (f.v88 == 0 && *(int*) 0x7e2aa0 == 0) {
 					fcn_00532ef0();
@@ -1143,12 +1143,12 @@ l_5bc253:
 			*(float*) &f.v64 = 1.0f;
 		}
 		if (f.v80 != 0) {
-			if (fcn_0057eba0(0x28, f.v14, 0, slot_value) == 0) {
+			if (d2_DispatchTutorialEvent(0x28, f.v14, 0, slot_value) == 0) {
 				continue;
 			}
 			fcn_0057e880(0x28, f.v14, 0, slot_value);
 		} else if (f.v70 != 0) {
-			if (fcn_0057eba0(0x26, f.v14, 0, slot_value) == 0) {
+			if (d2_DispatchTutorialEvent(0x26, f.v14, 0, slot_value) == 0) {
 				continue;
 			}
 			fcn_0057e880(0x26, f.v14, 0, slot_value);
@@ -1707,7 +1707,7 @@ l_5bd26b:
 	} else if (f.vD0 == f.v6c && *(signed char*) 0x7747b0 >= 0) {
 		/* 0x5bd550: the slot list of the owning dialog is redrawn */
 		fcn_00471af0(f.v2c, 0);
-		fcn_005b9980(f.vCC);
+		d2_ShowNewCartDialog(f.vCC);
 		fcn_00471af0(f.v2c, 1);
 		if (f.v94 == 0) {
 			goto l_5bd632;

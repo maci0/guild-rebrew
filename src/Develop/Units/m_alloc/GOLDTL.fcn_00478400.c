@@ -11,7 +11,7 @@ void __cdecl fcn_00477560(const void* src, char* hdr);
    replace the two row markers with blanks, pack the glyph runs into the
    block and return a right-sized copy. */
 /* ADDRESS: GOLDTL 0x00478400 */
-unsigned int* __cdecl fcn_00478400(int a0, int a1, unsigned int width,
+unsigned int* __cdecl d2_GrabBit8(int a0, int a1, unsigned int width,
                                    unsigned int height, int a4, char a5, int stride)
 {
     int* v1;

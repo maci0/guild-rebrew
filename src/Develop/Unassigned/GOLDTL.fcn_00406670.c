@@ -6,7 +6,7 @@
 char* __cdecl ch_NewAction(char*);
 void __cdecl ch_RunStandUpAnimation(void);
 
-int __cdecl fcn_00406670(char* p, char* s)
+int __cdecl ch_QueueStandUpAnimation(char* p, char* s)
 {
 	char* e;
 

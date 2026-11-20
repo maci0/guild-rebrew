@@ -87,7 +87,7 @@ int __cdecl fcn_00494470(Party*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_00546190(Order*);
+void __cdecl he_FreeAction(Order*);
 
 void __cdecl fcn_0054b940(Order* o)
 {
@@ -107,7 +107,7 @@ void __cdecl fcn_0054b940(Order* o)
 	pl = 0;
 	g = 0;
 	if (o->state == -2 || o->state == -1) {
-		fcn_00546190(o);
+		he_FreeAction(o);
 		return;
 	}
 	if (o->flags & 4) {

@@ -20,7 +20,7 @@ void __cdecl fcn_00500bb0(GAME_TIMESTAMP*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_004c6b20(int, int, int);
 void __cdecl fcn_004c4510(void*, int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5980(void*);
 int __cdecl srv_GetEntityOfficeSlot(unsigned char*, void*, void*);
@@ -109,7 +109,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 	case 7:
 		level = (char) (((unsigned char*) entity)[0xd] > 2 ? 2 : 1);
 		fcn_004c4510(entity, *(int*) (entity + 2));
-		fcn_004c4570(1, 1, 0xd, &level);
+		cm_AppendPacketFieldDelta(1, 1, 0xd, &level);
 		fcn_004c5360();
 		return;
 	case 8:

@@ -4,7 +4,7 @@
 extern char g_868060[];
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 
 int __cdecl gm_CheckEntityType(char*);
@@ -32,7 +32,7 @@ int __cdecl fcn_004b9e60(int* a1)
 	e = gm_LookupEntityRecordById(a1[0]);
 	if (e == 0)
 		return 1;
-	for (s = fcn_005463a0(1, 0, 0xf); s != 0 && n < 8; s = he_fn_Handlung()) {
+	for (s = he_StartHandlungSearch(1, 0, 0xf); s != 0 && n < 8; s = he_fn_Handlung()) {
 		gm_ResolveEntityById(0, (void**) (&y), 0, *(int*) (s + 0xac));
 		if (y != 0 && *(int*) (y + 0xa) == *e) {
 			gm_ResolveEntityById((void**) (&x1), 0, 0, *(int*) (s + 0xb4));

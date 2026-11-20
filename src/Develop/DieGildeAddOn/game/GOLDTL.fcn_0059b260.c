@@ -33,7 +33,7 @@ void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl fcn_00532ef0(void);
-void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl d2_DrawPanelFrame(int, int, int);
 void __cdecl fcn_00533f40(int, int, int, int);
 void __cdecl fcn_00594340(void);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
@@ -45,7 +45,7 @@ void __cdecl fcn_00594de0(int, int, int, char*);
 int __cdecl fcn_00595e20(int, int);
 void __cdecl fcn_005963f0(int, int, int, int);
 void __cdecl fcn_004c35f0(void);
-char* __cdecl fcn_005463a0(int, ...);
+char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004c5530(char*);
 int __cdecl fcn_004c4450(int);
@@ -75,7 +75,7 @@ typedef struct Msg59b {
 } Msg59b;
 
 /* ADDRESS: GOLDTL 0x0059b260 */
-int __cdecl fcn_0059b260(char* building)
+int __cdecl d2_ShowProductionDialog(char* building)
 {
 	Msg59b msg;
 	char buf[4];
@@ -114,7 +114,7 @@ int __cdecl fcn_0059b260(char* building)
 	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[4] = 0xe;
 	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[8] = 0xe;
 	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[12] = 0xe;
-	fcn_00533dc0(d2_CurrentWindowId, 0x70b, 0x742);
+	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x742);
 	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
 	*(int*) (g_1015ea0 + item * 0x2f4 + 0x84) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
@@ -176,7 +176,7 @@ int __cdecl fcn_0059b260(char* building)
 						} else {
 							if (i == 0) {
 								fcn_004c35f0();
-								p = fcn_005463a0(2, 0, 9, 3, *(int*) (building + 1));
+								p = he_StartHandlungSearch(2, 0, 9, 3, *(int*) (building + 1));
 								if (p == 0) {
 									memset(&msg, 0, 0xf8);
 									msg.timestamp.a = gm_GameTime.a;
@@ -203,7 +203,7 @@ int __cdecl fcn_0059b260(char* building)
 							}
 							else {
 								fcn_004c35f0();
-								p = fcn_005463a0(2, 0, 8, 3, *(int*) (building + 1));
+								p = he_StartHandlungSearch(2, 0, 8, 3, *(int*) (building + 1));
 								while (p != 0) {
 									if (*(unsigned short*) (p + 0xac) == *(int*) e) {
 										break;

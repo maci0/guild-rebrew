@@ -5,7 +5,7 @@
 #include "Develop/Units/d3/d3_camera.h"
 
 /* ADDRESS: GOLD 0x0043a000 */
-char* __cdecl fcn_0043a000(char* object)
+char* __cdecl d3_SelectObjectLod(char* object)
 {
     char* model;
     char* eye;

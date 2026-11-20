@@ -65,7 +65,7 @@ int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl gm_GetBuildingTypeCategory(unsigned int);
 int __cdecl fcn_0055c050(unsigned char*);
 void __cdecl fcn_004c5530(GOLDTL_Msg481*);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
@@ -277,7 +277,7 @@ L1a0c:
 		    || *(int*) (*(int*) (rec + 0x16c) + 0x65) != -1) {
 			goto L2267;
 		}
-		if (fcn_005463a0(2, 0, 0x3c, 3, *(int*) (*(int*) (rec + 0x16c) + 1)) != 0) {
+		if (he_StartHandlungSearch(2, 0, 0x3c, 3, *(int*) (*(int*) (rec + 0x16c) + 1)) != 0) {
 			return;
 		}
 		owner = (char*) (rec + 0x30);
@@ -449,7 +449,7 @@ L1a0c2:
 		}
 		found = gm_NextEntityQueryMatch();
 	}
-	found = fcn_005463a0(2, 0, 0x40, 3, *(int*) (*(int*) (rec + 0x16c) + 1));
+	found = he_StartHandlungSearch(2, 0, 0x40, 3, *(int*) (*(int*) (rec + 0x16c) + 1));
 	for (;;) {
 		if (found == 0) {
 			break;
@@ -459,7 +459,7 @@ L1a0c2:
 		}
 		found = he_fn_Handlung();
 	}
-	found = fcn_005463a0(2, 0, 0x3f, 3, *(int*) (*(int*) (rec + 0x16c) + 1));
+	found = he_StartHandlungSearch(2, 0, 0x3f, 3, *(int*) (*(int*) (rec + 0x16c) + 1));
 	for (;;) {
 		if (found == 0) {
 			break;
@@ -472,7 +472,7 @@ L1a0c2:
 	goto Lb45;
 
 Lcae:
-	found = fcn_005463a0(2, 0, 0x40, 3, *(int*) (*(int*) (rec + 0x16c) + 1));
+	found = he_StartHandlungSearch(2, 0, 0x40, 3, *(int*) (*(int*) (rec + 0x16c) + 1));
 	for (;;) {
 		if (found == 0) {
 			break;
@@ -482,7 +482,7 @@ Lcae:
 		}
 		found = he_fn_Handlung();
 	}
-	found = fcn_005463a0(2, 0, 0x3f, 3, *(int*) (*(int*) (rec + 0x16c) + 1));
+	found = he_StartHandlungSearch(2, 0, 0x3f, 3, *(int*) (*(int*) (rec + 0x16c) + 1));
 	for (;;) {
 		if (found == 0) {
 			break;

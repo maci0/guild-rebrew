@@ -8,14 +8,14 @@ extern int SonnenstrahlenStartZeit;
 
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_00438b40(char*, float*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 char* __cdecl fcn_00449690(char*, int, char*, char*);
 float __cdecl fcn_004187f0(float, float, float);
 void __cdecl fcn_00417560(char*);
 typedef struct SUNRAY_COLOR {
 	unsigned char a, b, c, d;
 } SUNRAY_COLOR;
-void __cdecl fcn_0043d430(char*, char*, SUNRAY_COLOR);
+void __cdecl d3_ChangeObjectTransparency(char*, char*, SUNRAY_COLOR);
 
 /* ADDRESS: GOLD 0x004172e0 */
 void __cdecl fcn_004172e0(char* object)
@@ -47,7 +47,7 @@ void __cdecl fcn_004172e0(char* object)
 			rotation[0] = 0.0f;
 			rotation[1] = (delta > 0.0 ? 0.0002f : -0.0002f) + *(float*) (object + 0x88);
 			rotation[2] = 0.0f;
-			fcn_00438cb0(object, rotation);
+			d3_SetObjectRotation(object, rotation);
 		}
 	}
 	camera = d3_ActiveCamera;
@@ -84,5 +84,5 @@ void __cdecl fcn_004172e0(char* object)
 	color.b = 0;
 	color.c = 1;
 	color.d = 0;
-	fcn_0043d430(object, *(char**) (object + 0x1cc), color);
+	d3_ChangeObjectTransparency(object, *(char**) (object + 0x1cc), color);
 }

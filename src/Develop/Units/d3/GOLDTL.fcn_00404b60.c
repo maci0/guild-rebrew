@@ -34,7 +34,7 @@ void __cdecl fcn_00404b60(char* obj, int n, ...)
 		opt.layer = 8;
 		opt.mode = 0;
 		if (animation == 0 && d3_LoadAnimStream(path, low, 1) == 0) { continue; }
-		fcn_00434970(*(char**) (*(char**) (obj + 0x22c) + 0x1ec) + 0xf4, low, opt);
+		d3_AttachAnimationToContext(*(char**) (*(char**) (obj + 0x22c) + 0x1ec) + 0xf4, low, opt);
 		d3_RemoveObjectAnimation(*(char**) (*(char**) (obj + 0x22c) + 0x1ec) + 0xf4, low);
 	}
 	va_end(ap);

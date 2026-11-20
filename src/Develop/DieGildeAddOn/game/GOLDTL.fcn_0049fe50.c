@@ -17,7 +17,7 @@ typedef struct Rec18 {
 // SIZE 0x18
 
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
-int __cdecl fcn_004e8c00(int k, int max, Rec18* out);
+int __cdecl amt_CollectOfficeSlotsByGroup(int k, int max, Rec18* out);
 Ent* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
@@ -74,7 +74,7 @@ int __cdecl fcn_0049fe50(Ent* e)
 		ord[b] = t;
 	}
 	for (i = 0; i < 5; i++) {
-		n = fcn_004e8c00(ord[i], 6, list);
+		n = amt_CollectOfficeSlotsByGroup(ord[i], 6, list);
 		if (n >= 3) {
 			sum = 0;
 			for (j = 0; j < n; j++) {

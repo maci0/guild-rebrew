@@ -22,13 +22,13 @@ void* __cdecl gm_LookupEntityRecordById(unsigned int slot_id);
 void __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int id);
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 int __cdecl fcn_00529670(char* a, char* b);
-void __cdecl fcn_00546190(void* ev);
+void __cdecl he_FreeAction(void* ev);
 void __cdecl fcn_005498b0(char* a1, char* a2, char* a3, char* a4, int a5, float a6);
 void __cdecl fcn_00551f90(void* ev);
 void __cdecl fcn_005b2810(char* a1, char* a2);
 typedef struct { unsigned char kind; char unknown[0x24c]; } BUILDING_PROT_5522;
 /* ADDRESS: GOLDTL 0x005522d0 */
-void __cdecl fcn_005522d0(char* ev)
+void __cdecl he_RunPlagueEvent(char* ev)
 {
 	char buf[512];
 	int picks[16];
@@ -62,7 +62,7 @@ void __cdecl fcn_005522d0(char* ev)
 				}
 			}
 		}
-		fcn_00546190(ev);
+		he_FreeAction(ev);
 		return;
 	}
 	if (*(unsigned char*) (ev + 0x78) & 4) {

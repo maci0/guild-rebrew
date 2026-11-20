@@ -7,7 +7,7 @@ extern char* d3_ActiveCamera;
 
 void __cdecl fcn_00451340(float*, float*, float, float*);
 float __cdecl fcn_00451380(float*, float*);
-void __cdecl fcn_004518a0(float*);
+void __cdecl d3_NormalizeVector(float*);
 float* __stdcall fcn_005ebbb9(float*, const float*);
 
 /* Rebuild one 6x8 terrain patch: place every lattice vertex through the
@@ -71,7 +71,7 @@ void __cdecl fcn_00459050(int self)
 		fcn_00451340(cr, ar, u, o2);
 		for (c = 0; c < 8; c++) {
 			fcn_00451340(o1, o2, (float) c * 0.14285715f, vp - 1);
-			fcn_004518a0(vp - 1);
+			d3_NormalizeVector(vp - 1);
 			p[0x30 + i] = *(float*) (p + 0x18) < vp[0];
 			u = (vp[0] - *(float*) (p + 0x1c)) * *(float*) (p + 0x20);
 			if (u < 0.0f) {

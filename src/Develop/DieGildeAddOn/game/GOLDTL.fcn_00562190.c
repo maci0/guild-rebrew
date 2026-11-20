@@ -26,7 +26,7 @@ extern char g_6a656c[];
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 
 int __cdecl fcn_004a5e60(House* h, int kind, __int64 f, int c, float r, int* out);
@@ -38,7 +38,7 @@ int __cdecl fcn_004c5620(int, char*);
 
 /* `close` is set in two if arms: one combined condition keeps it in a
  * register, three arms give it more slot weight than `o`. */
-void __cdecl fcn_00562190(char* u)
+void __cdecl he_InitSpionage(char* u)
 {
 	Query q;
 	char* o;
@@ -66,7 +66,7 @@ void __cdecl fcn_00562190(char* u)
 	*(int*) (u + 0xb4) = -1;
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
-	for (e = fcn_005463a0(1, 0, 0x18); e != 0; e = he_fn_Handlung()) {
+	for (e = he_StartHandlungSearch(1, 0, 0x18); e != 0; e = he_fn_Handlung()) {
 		if (*(unsigned short*) (u + 8) == *(unsigned short*) (e + 8) && *(int*) (e + 4) != *(int*) (u + 4) && *(int*) (e + 0xc4) == *(int*) (u + 0xc4)) {
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
 			return;

@@ -39,7 +39,7 @@ struct msg {
 
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-char* __cdecl fcn_005463a0(int, int, int, ...);
+char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004c5530(struct msg*);
 
@@ -51,7 +51,7 @@ void __cdecl fcn_00547460(void)
 
 	e = gm_StartFilteredEntitySearch(1, 5, 0xf);
 	if (e != 0 && *(unsigned short*) (e + 0x27) != 0xffff) {
-		for (p = fcn_005463a0(1, 0, 0x22); p != 0; p = he_fn_Handlung()) {
+		for (p = he_StartHandlungSearch(1, 0, 0x22); p != 0; p = he_fn_Handlung()) {
 			if (*(int*) (p + 0x10) == *(int*) (e + 1)) {
 				return;
 			}

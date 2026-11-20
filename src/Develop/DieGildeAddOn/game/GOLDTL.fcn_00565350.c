@@ -12,7 +12,7 @@ int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_GetOppositeStatIndex(int);
 void __cdecl fcn_00545670(char*, int, int, char*, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_AppendText(int, ...);
@@ -24,7 +24,7 @@ void __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl fcn_00545780(int);
 
 /* ADDRESS: GOLDTL 0x00565350 */
-void __cdecl fcn_00565350(int action)
+void __cdecl he_RunMeisterpruefungPassed(int action)
 {
 	unsigned char* ent;
 	char* p;
@@ -61,7 +61,7 @@ void __cdecl fcn_00565350(int action)
 	case 0:
 		fcn_00545670((char*) action, 0, 0, "Berufe\\Meisterpruefung_BESTANDEN", 0x5ec);
 		if (!*(int*) (action + 0x74)) {
-			fcn_00546190((char*) action);
+			he_FreeAction((char*) action);
 			return;
 		}
 		d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 0);
@@ -142,7 +142,7 @@ void __cdecl fcn_00565350(int action)
 	case 0xfffffffe:
 	case 0xffffffff:
 		fcn_00545780(action);
-		fcn_00546190((char*) action);
+		he_FreeAction((char*) action);
 		return;
 	default:
 		return;
@@ -166,12 +166,12 @@ void __cdecl fcn_00565350(int action)
 	} else {
 		if (g_100f1dc == 2) {
 			fcn_00545780(action);
-			fcn_00546190((char*) action);
+			he_FreeAction((char*) action);
 			return;
 		}
 		if (g_100f1dc == 1) {
 			fcn_00545780(action);
-			fcn_00546190((char*) action);
+			he_FreeAction((char*) action);
 			g_7749e8 = 0;
 			return;
 		}
@@ -179,6 +179,6 @@ void __cdecl fcn_00565350(int action)
 	if (!g_7749e8)
 		return;
 	fcn_00545780(action);
-	fcn_00546190((char*) action);
+	he_FreeAction((char*) action);
 	g_7749e8 = 0;
 }

@@ -24,7 +24,7 @@ struct IDev {
 	IDevVtbl* v;
 };
 
-void __cdecl fcn_004518a0(float* v);
+void __cdecl d3_NormalizeVector(float* v);
 void __cdecl fcn_004372d0(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00440870 */
@@ -73,7 +73,7 @@ void __cdecl fcn_00440870(char* o, char* c)
 	v[0] = *(float*) 0x1042160;
 	v[1] = *(float*) 0x1042164;
 	v[2] = *(float*) 0x1042168;
-	fcn_004518a0(v);
+	d3_NormalizeVector(v);
 	d = 0.5f
 	    - (float) fabs(*(float*) 0x662d40 * v[0] + *(float*) 0x662d44 * v[1] + *(float*) 0x662d48 * v[2]);
 	mask = *(int*) (m + 0xc);

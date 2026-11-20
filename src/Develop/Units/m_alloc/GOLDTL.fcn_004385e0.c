@@ -3,7 +3,7 @@
  * active list, or re-submits an already lit slot through the device. */
 extern int d3_RenderedVertexCount, g_1042a08; extern void* g_6b8068;
 void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
-void* __cdecl fcn_00436930(char* o, float* r);
+void* __cdecl d3_GetObjectMesh(char* o, float* r);
 void __cdecl fcn_004372d0(unsigned char a, unsigned char b, int c, unsigned char d, unsigned char e);
 void __cdecl fcn_00450e90(float a, float b, char* c, void* d, void* e);
 
@@ -26,7 +26,7 @@ unsigned char __cdecl fcn_004385e0(int a0)
 	    || *(int*) (a0 + 0x1ec) == 0) {
 		goto tail;
 	}
-	v16 = (int) fcn_00436930((char*) v1, &v14);
+	v16 = (int) d3_GetObjectMesh((char*) v1, &v14);
 	v17 = 0;
 	flag = 0;
 	if (*(unsigned char*) (*(int*) (v1 + 0x318) + 0x2a1) & 4) {

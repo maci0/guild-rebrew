@@ -4,7 +4,7 @@ extern float g_662d60;
 extern float g_662d64;
 extern float g_662d68;
 
-void __cdecl fcn_004518a0(float* v);
+void __cdecl d3_NormalizeVector(float* v);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 
 /* ADDRESS: GOLDTL 0x00451380 */
@@ -22,8 +22,8 @@ float __cdecl fcn_00451380(float* a, float* b)
 	va[2] = a[2];
 	vb[0] = b[0];
 	vb[2] = b[2];
-	fcn_004518a0(va);
-	fcn_004518a0(vb);
+	d3_NormalizeVector(va);
+	d3_NormalizeVector(vb);
 	if (CompareVector3WithinTolerance(va, vb, 1.0e-7f)) {
 		return *(float*) 0x6628a8;
 	}

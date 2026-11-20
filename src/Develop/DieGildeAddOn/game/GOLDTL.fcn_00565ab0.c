@@ -19,10 +19,10 @@ char* __cdecl fcn_004bcc50(char*, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c4450(unsigned int);
 int __cdecl fcn_005155e0(unsigned char*);
-void __cdecl fcn_00546190(void*);
+void __cdecl he_FreeAction(void*);
 void __cdecl fcn_00529160(char*, int, int, int);
-char* __cdecl fcn_00426cc0(int);
-void __cdecl fcn_00428720(char*);
+char* __cdecl evt_FindScriptById(int);
+void __cdecl evt_RequestScriptExit(char*);
 char* __cdecl evt_LoadScript(char*);
 int __cdecl vfs_LookupPath(char*, void*, void**);
 int __cdecl fcn_00428340(char*, int, ...);
@@ -34,7 +34,7 @@ void __cdecl fcn_00500bb0(void*, int, int, int);
 char* __cdecl plt_FindPlantInfo(int);
 
 /* ADDRESS: GOLDTL 0x00565ab0 */
-void __cdecl fcn_00565ab0(char* ev)
+void __cdecl he_UpdateErnten(char* ev)
 {
 	char* v8;
 	char* plantInfo;
@@ -103,7 +103,7 @@ void __cdecl fcn_00565ab0(char* ev)
 						return;
 					case 2:
 						if (*(int*) (ev + 0xb4) != -1) {
-							fcn_00428720(fcn_00426cc0(*(int*) (ev + 0xb4)));
+							evt_RequestScriptExit(evt_FindScriptById(*(int*) (ev + 0xb4)));
 						}
 						if (d3_CurrentContextIndex == fcn_005155e0((unsigned char*) v4)) {
 							void* found;
@@ -185,14 +185,14 @@ void __cdecl fcn_00565ab0(char* ev)
 								}
 							}
 							fcn_00529160(v4, 0, *(unsigned short*) v15, 0);
-							fcn_00546190(ev);
+							he_FreeAction(ev);
 							return;
 						}
 					case -1:
 					case -2:
 						fcn_004c5aa0(*(int*) (ev + 0xac), *(char*) (v5 + 8), *(char*) (v5 + 9),
 						             *(unsigned short*) (v5 + 0xa), 0, *(int*) (ev + 4));
-						fcn_00546190(ev);
+						he_FreeAction(ev);
 						return;
 					default:
 						return;
@@ -204,5 +204,5 @@ void __cdecl fcn_00565ab0(char* ev)
 			fcn_00529160(v4, 0, *(unsigned short*) v15, 0);
 		}
 	}
-	fcn_00546190(ev);
+	he_FreeAction(ev);
 }

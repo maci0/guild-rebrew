@@ -7,7 +7,7 @@ int __cdecl hst_ParseDate(int pos, int n, int* out, int a1);
 void __cdecl hst_ParseText_Real(char* out, int pos);
 
 /* ADDRESS: GOLDTL 0x004b33c0 */
-int __cdecl fcn_004b33c0(int a0, char* textOut)
+int __cdecl hst_ReadDueText(int a0, char* textOut)
 {
 	int v5;
 	int v4[4];

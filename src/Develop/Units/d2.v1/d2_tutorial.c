@@ -4,7 +4,7 @@ void __cdecl fcn_00471af0(int, int);
 extern int* g_665f08; extern char d2_TutorialActive[];
 
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00580a30();
+int __cdecl d2_StartTutorial();
 
 /* ADDRESS: GOLDTL 0x005803f0 */
 void __cdecl fcn_005803f0(void)
@@ -15,7 +15,7 @@ void __cdecl fcn_005803f0(void)
 }
 
 /* ADDRESS: GOLDTL 0x005805e0 */
-void __cdecl fcn_005805e0(void)
+void __cdecl d2_CloseTutorialProgress(void)
 {
 	int dialog;
 
@@ -34,7 +34,7 @@ void __cdecl fcn_005809d0(void)
 }
 
 /* ADDRESS: GOLDTL 0x005809f0 */
-int __cdecl fcn_005809f0(void)
+int __cdecl d2_IsTutorialInactive(void)
 {
 	return *(int*) &d2_TutorialActive == 0;
 }
@@ -47,5 +47,5 @@ int __cdecl fcn_00580a00(int a1, int a2)
 	}
 	*(int*) 0x6a81dc = *(int*) a2;
 	*(char*) 0x6a81e0 = *(char*) (a2 + 4);
-	return fcn_00580a30();
+	return d2_StartTutorial();
 }

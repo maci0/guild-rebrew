@@ -6,7 +6,7 @@ extern volatile int g_6b7fc0;
 
 /* ADDRESS: GOLD 0x00576680 */
 /* ADDRESS: GOLDTL 0x0057ec20 */
-int __cdecl fcn_0057ec20(int a1)
+int __cdecl d2_TutorialAllowsFlag(int a1)
 {
 	int* p;
 

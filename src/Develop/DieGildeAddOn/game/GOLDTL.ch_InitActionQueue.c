@@ -17,7 +17,7 @@ int __cdecl ch_DroppingObject();
 int __cdecl ch_ExecTurnTowards();
 int __cdecl ch_ExecuteAttachAnimation();
 int __cdecl ch_Move2Universe();
-int __cdecl fcn_004079f0();
+int __cdecl ch_ExecuteTurn90();
 int __cdecl ch_WalkOnPath();
 int __cdecl fcn_0040aa00();
 int __cdecl ch_RunWalkToRandomDummy();
@@ -39,7 +39,7 @@ int __cdecl ch_InitActionQueue(void)
 	}
 	memset(((int*)ch_ActionDefinitions), 0, sizeof(int[0x4c0]));
 	memset(((int*)ch_CharacterSlots), 0, sizeof(int[0x300]));
-	ch_DeclareAction(7, fcn_004079f0, 1, "bewegung/dreh_90_rechts", 2);
+	ch_DeclareAction(7, ch_ExecuteTurn90, 1, "bewegung/dreh_90_rechts", 2);
 	ch_DeclareAction(0, ch_ExecFinishAnimation, 1, &(*(char*)g_6b5c60), 0);
 	ch_DeclareAction(23, ch_ExecPlayAnimation, 1, &(*(char*)g_6b5c60), 0);
 	ch_DeclareAction(45, ch_WalkOnPath, 1, "bewegung/gehen", 3);

@@ -11,7 +11,7 @@ extern unsigned char g_7747b0;
 extern int g_14a5538;
 
 void __cdecl fcn_00592400(void);
-void __cdecl fcn_005e40b0(void);
+void __cdecl ls_QuickSave(void);
 void __cdecl fcn_004c4890(void);
 void __cdecl fcn_004c48c0(void);
 void __cdecl fcn_005e2510(void);
@@ -29,7 +29,7 @@ void __cdecl fcn_005924d0(void)
 		fcn_00592400();
 	}
 	if (g_14cf950 == 0x10 && tp_d2_SelectedControl == 0 && (main_LoopFlags & 0x10000) == 0) {
-		fcn_005e40b0();
+		ls_QuickSave();
 	}
 	if ((g_7747b0 & 4) == 0) {
 		if (g_14cf950 == 0x4e) {

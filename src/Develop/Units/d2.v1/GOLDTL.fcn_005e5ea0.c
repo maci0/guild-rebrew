@@ -94,7 +94,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
 /* ADDRESS: GOLDTL 0x005e5ea0 */
-void __cdecl fcn_005e5ea0(char* participant)
+void __cdecl d2_ShowBlutracheDialog(char* participant)
 {
 	GAME_TIMESTAMP st;
 	int timer2;
@@ -196,7 +196,7 @@ void __cdecl fcn_005e5ea0(char* participant)
 				g_774654 = 1;
 			}
 		}
-		if (fcn_005373e0((void*) fcn_005e5ea0, 0x677c7) == 0) {
+		if (fcn_005373e0((void*) d2_ShowBlutracheDialog, 0x677c7) == 0) {
 			break;
 		}
 	}

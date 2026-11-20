@@ -16,7 +16,7 @@ int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, i
 float __cdecl fcn_005e8860(int a0);
 extern char * g_1015ea0; extern char g_10161bc[]; extern float g_662cf8; extern int g_6b7fac; extern char * g_772500; extern int d2_CurrentWindowId;
 /* ADDRESS: GOLDTL 0x005893d0 */
-void __cdecl fcn_005893d0(int w, int a1)
+void __cdecl d2_CreateCannonControls(int w, int a1)
 {
 	int width;
 	int height;

@@ -1,7 +1,7 @@
 extern char s_679060[];
 
 void __cdecl io_FormatTextBuffer(void* dst, void* fmt, ...);
-void __cdecl fcn_004fa5f0(void* buf, int mode, int y);
+void __cdecl d2_ShowPrivilegMessage(void* buf, int mode, int y);
 
 /* ADDRESS: GOLDTL 0x004f7310 */
 int __cdecl fcn_004f7310(char* entity, int* command)
@@ -19,7 +19,7 @@ int __cdecl fcn_004f7310(char* entity, int* command)
 		if (v == 3 && *(char*) (entity + 2) == 6) {
 			io_FormatTextBuffer(buf, (void*) 0x1d34,
 			    (*(char*) (entity + 9) ? 10 : 0) + 0x114 + *(unsigned char*) (entity + 0xd));
-			fcn_004fa5f0(buf, 0, 0x657c7);
+			d2_ShowPrivilegMessage(buf, 0, 0x657c7);
 			return r;
 		}
 		if (v == 1 && *(char*) (entity + 2) == 6) {

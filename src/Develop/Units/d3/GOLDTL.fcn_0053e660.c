@@ -12,7 +12,7 @@ char* __cdecl fcn_00445600(int, int, int, char*);
 char* __cdecl fcn_00442910(int, struct vec4*, char*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 
-char* __cdecl fcn_0053e660(float tx, float tz)
+char* __cdecl d3_CreateMapTableTowerMarker(float tx, float tz)
 {
 	struct vec4 v;
 	char* p;

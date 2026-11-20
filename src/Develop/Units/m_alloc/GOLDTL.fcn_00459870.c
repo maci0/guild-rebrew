@@ -3,7 +3,7 @@ void* __cdecl fcn_0045c5b0(int a0, unsigned int a1, int a2, int a3);
 void __cdecl fcn_0045ce90(void* a0);
 
 /* ADDRESS: GOLDTL 0x00459870 */
-unsigned int* __cdecl fcn_00459870(char* a0, unsigned int a1, int a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, unsigned int a7)
+unsigned int* __cdecl d3_CreateSkyLayer(char* a0, unsigned int a1, int a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, unsigned int a7)
 {
 	unsigned int* node;
 	int v3;

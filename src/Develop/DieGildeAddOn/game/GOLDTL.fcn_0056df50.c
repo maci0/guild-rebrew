@@ -25,7 +25,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_00567030(char*, int*, int*);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_0056df50(char* u)
 {
@@ -70,7 +70,7 @@ void __cdecl fcn_0056df50(char* u)
 	case -2:
 	case -1:
 kill:
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	}
 }

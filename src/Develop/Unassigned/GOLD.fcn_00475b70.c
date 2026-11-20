@@ -5,7 +5,7 @@ extern GuiObj g_00fb1020[];
 extern GOLD_GUI_WINDOW g_00f8f120[];
 
 /* ADDRESS: GOLD 0x00475b70 */
-int __cdecl fcn_00475b70(int group, int item, int index)
+int __cdecl d2_GetWindowListItem(int group, int item, int index)
 {
 	GOLD_GUI_WINDOW* p;
 

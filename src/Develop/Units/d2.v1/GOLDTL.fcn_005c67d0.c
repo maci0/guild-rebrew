@@ -29,7 +29,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6ac77c[];
 
-int __cdecl fcn_0057ec20(int);
+int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetForm(int, int);
@@ -40,7 +40,7 @@ void __cdecl fcn_005c5e70(void);
 
 int __cdecl fcn_005c61e0(int);
 void __cdecl fcn_00471af0(int, int);
-void __cdecl fcn_005c6540(char*);
+void __cdecl d2_ConfirmUseObjekt(char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_00526120(int, int);
@@ -48,7 +48,7 @@ int __cdecl fcn_00471f80(int);
 void __cdecl fcn_005c61c0(void);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005c67d0(void)
+void __cdecl d2_ShowInventoryDialog(void)
 {
 	int dlg;
 	int i;
@@ -56,7 +56,7 @@ void __cdecl fcn_005c67d0(void)
 	if (g_6abb00 != -1) {
 		return;
 	}
-	if (fcn_0057ec20(0x1000) == 0) {
+	if (d2_TutorialAllowsFlag(0x1000) == 0) {
 		return;
 	}
 	fcn_0057e880(0x14, 0, 0, 0);
@@ -69,7 +69,7 @@ void __cdecl fcn_005c67d0(void)
 	d2_SetForm(dlg, 0);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_005c5da0(d2_CurrentWindowId, 0, 0, g_774970, 0x1f3b);
-	if (fcn_005373e0((void*) fcn_005c67d0, 0x657c7) != 0) {
+	if (fcn_005373e0((void*) d2_ShowInventoryDialog, 0x657c7) != 0) {
 		do {
 			fcn_005c5e70();
 			if (g_100f1dc != -1 || CountDisplayCounters() != 0) {
@@ -77,7 +77,7 @@ void __cdecl fcn_005c67d0(void)
 					if (g_776c60[i].item != 0 && d2_CurrentElementId == g_776c60[i].btn) {
 						if (fcn_005c61e0(*(unsigned short*) g_776c60[i].item) != 0) {
 							fcn_00471af0(dlg, 0);
-							fcn_005c6540(g_776c60[i].item);
+							d2_ConfirmUseObjekt(g_776c60[i].item);
 							d2_SetElementValue(g_776c60[i].btn, 0, 0x3e7, 0);
 							ResetDisplayCounters();
 							fcn_00471af0(dlg, 1);
@@ -101,7 +101,7 @@ void __cdecl fcn_005c67d0(void)
 					g_774654 = 1;
 				}
 			}
-		} while (fcn_005373e0((void*) fcn_005c67d0, 0x657c7) != 0);
+		} while (fcn_005373e0((void*) d2_ShowInventoryDialog, 0x657c7) != 0);
 	}
 	fcn_005c61c0();
 	fcn_00471e30(dlg);

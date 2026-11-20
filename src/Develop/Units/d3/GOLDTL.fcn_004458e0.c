@@ -45,7 +45,7 @@ struct Ent {
 
 int __cdecl fcn_00445600(Ent*, int, Ent*, int);
 void __cdecl d3_TransformPoint(Ent*, void*, Vec4*);
-void __cdecl fcn_00438cb0(Ent*, void*);
+void __cdecl d3_SetObjectRotation(Ent*, void*);
 void __cdecl fcn_004557c0(Ent*, char*, int, Mat*);
 
 void __cdecl fcn_00439aa0(Ent*);
@@ -84,10 +84,10 @@ char __cdecl d3_ReparentObject(Ent* e, Ent* parent)
 		v.z = e->x84.z;
 		for (i = 0; i < 7; i++) {
 			d3_TransformPoint(e, &e->slots[i], &tmp[i]);
-			fcn_00438cb0(e, e->slots[i].xc);
+			d3_SetObjectRotation(e, e->slots[i].xc);
 			fcn_004557c0(e, 0, 1, &mats[i]);
 		}
-		fcn_00438cb0(e, &v);
+		d3_SetObjectRotation(e, &v);
 	}
 	d3_TransformPoint(e, &e->pos, &wpos);
 	fcn_004557c0(e, 0, 1, &wm);

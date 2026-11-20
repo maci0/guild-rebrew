@@ -44,13 +44,13 @@ int __cdecl io_AppendText();
 int __cdecl fcn_00522c0();
 int __cdecl fcn_00526120();
 int __cdecl fcn_005356b0();
-int __cdecl fcn_00535770();
+int __cdecl sv_WaitForNetworkSync();
 int __cdecl fcn_005373e0();
 int __cdecl fcn_005421f0();
 int __cdecl fcn_005422c0();
 int __cdecl fcn_005435d0();
-int __cdecl fcn_005448e0();
-int __cdecl fcn_00546de0();
+int __cdecl main_PlayOutroMovie();
+int __cdecl he_DispatchFlaggedEvents();
 int __cdecl fcn_0053f100();
 int __cdecl fcn_00546f80();
 int __cdecl fcn_00547770();
@@ -96,7 +96,7 @@ void __cdecl fcn_00543080(void)
 		v11 += 1;
 	} while ((int) v8 < 0x85a268);
 	*(short*) &g_774970 = (short) v5;
-	fcn_00546de0();
+	he_DispatchFlaggedEvents();
 	if (!(g_7747b0 & 4) && 7 <= (unsigned short) gm_RandomMod(10)) {
 		v11 = fcn_005435d0();
 		while (v11 != 1) {
@@ -115,7 +115,7 @@ void __cdecl fcn_00543080(void)
 	}
 	*(int*) &main_LoopFlags = 0x24087;
 	if (g_7747b0 & 4) {
-		fcn_00535770(0x24087);
+		sv_WaitForNetworkSync(0x24087);
 	}
 	fcn_004e4f10(0);
 	if (fcn_004e6910(v5) && g_6a3420) {
@@ -238,7 +238,7 @@ void __cdecl fcn_00543080(void)
 				v5 = fcn_005373e0(0x543080, 0x66087);
 			}
 			fcn_00471e30(v2);
-			fcn_005448e0();
+			main_PlayOutroMovie();
 			g_774954 = 1;
 		}
 		if (g_6a3420 && !g_774954) {

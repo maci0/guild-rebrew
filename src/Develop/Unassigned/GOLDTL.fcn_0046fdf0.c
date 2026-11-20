@@ -22,7 +22,7 @@ extern int g_1040494;
 extern char s_67d420[];
 
 #include "Develop/Units/Error/error_message.h"
-int __cdecl fcn_00469890(void);
+int __cdecl d2_AllocateElement(void);
 int __cdecl fcn_0046b520(char* s, int font);
 void __cdecl fcn_0046f650(int slot, D2_WIN* parent);
 
@@ -40,7 +40,7 @@ int __cdecl d2_AddWindowText(int x, int y, char* text, int win)
 		ReportClientMessage(s_67d420);
 		return -1;
 	}
-	id = fcn_00469890();
+	id = d2_AllocateElement();
 	strcpy((char*) &((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x90 / 4], text);
 	if ((*(int*) &w->pad280[12]) != 0) {
 		((fcn_0046fdf0_Ent*)g_1015ea0)[id].i[0x84 / 4] = (*(int*) &w->pad280[12]);

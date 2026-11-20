@@ -13,7 +13,7 @@ extern void __cdecl fcn_004c5420(int, int, int, int, int);
 extern void __cdecl io_FormatTextBuffer(char*, char*, ...);
 extern void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 extern void __cdecl fcn_004c4510(char*, int);
-extern void __cdecl fcn_004c4570(unsigned char, unsigned char, short, void*);
+extern void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, short, void*);
 extern void __cdecl fcn_004c5360(void);
 extern void __cdecl fcn_004c5530(void*);
 extern unsigned short __cdecl gm_RandomMod(int);
@@ -87,7 +87,7 @@ void __cdecl fcn_004f6d60(unsigned int entityIndex)
 	*((unsigned char*)&entityIndex + 3) = count + 1;
 	if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
 		fcn_004c4510(slot, *(int*) (slot + 4));
-		fcn_004c4570(1, 1, 0xd, ((unsigned char*)&entityIndex + 3));
+		cm_AppendPacketFieldDelta(1, 1, 0xd, ((unsigned char*)&entityIndex + 3));
 		fcn_004c5360();
 	} else {
 		fill_dst = msg;

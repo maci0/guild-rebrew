@@ -33,7 +33,7 @@ void __cdecl evt_LogScriptError(char*, int, const char*);
 char* __cdecl fcn_00402610(char*);
 #include "../client_scene_transform.h"
 float __cdecl fcn_00444700(char*, float*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 void __cdecl fcn_00441720(char*, float*, int, int*, int*, float*);
 extern float g_6628a8;
@@ -45,7 +45,7 @@ extern char g_10432c0[];
 char __cdecl fcn_00442c00(char*, char);
 
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl vfs_ToSlashes(char*);
 int __cdecl d3_RemoveObjectAnim(char*);
 
@@ -129,7 +129,7 @@ void __cdecl ch_Updatelowpoly(char* obj)
 				if (*(char**) (*(char**) (obj + 0x34) + 0x1cc) != 0
 				    && !CompareVector3WithinTolerance((float*) (*(char**) (obj + 0x22c) + 0x84),
 				                       (float*) (*(char**) (obj + 0x34) + 0x84), 0.05f)) {
-					fcn_00438cb0(*(char**) (obj + 0x22c), (float*) (*(char**) (obj + 0x34) + 0x84));
+					d3_SetObjectRotation(*(char**) (obj + 0x22c), (float*) (*(char**) (obj + 0x34) + 0x84));
 				}
 			} else {
 				if (*(int*) (*(char**) (obj + 0x34) + 0x218) == 1 && (flags & 0x20) == 0) {
@@ -161,7 +161,7 @@ void __cdecl ch_Updatelowpoly(char* obj)
 				if (d3_FindAnimByName(ani) == 0) {
 					d3_LoadAnimStream(path, ani, 1);
 				}
-				anim = fcn_00434970(*(char**) (*(char**) (obj + 0x22c) + 0x1ec) + 0xf4, ani, opt);
+				anim = d3_AttachAnimationToContext(*(char**) (*(char**) (obj + 0x22c) + 0x1ec) + 0xf4, ani, opt);
 				if (anim == 0) {
 					sprintf(msg, "ch_Updatelowpoly(): Could not attach ani: %s", path);
 					*(unsigned short*) (obj + 0x8c) |= 0x80;

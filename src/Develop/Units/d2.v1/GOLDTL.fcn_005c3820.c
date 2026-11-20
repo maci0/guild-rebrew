@@ -25,7 +25,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetElementValue(int, ...);
 
 /* ADDRESS: GOLDTL 0x005c3820 */
-void __cdecl fcn_005c3820(unsigned char* building, unsigned char* a1)
+void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 {
 	int table[37] = { 1, 2, 0xb, 0xc, 9, 5, 6, 3, 4, 0xa, 0xd, 0xe, 0xf,
 		0x10, 0x11, 7, 8, 0 };
@@ -143,7 +143,7 @@ void __cdecl fcn_005c3820(unsigned char* building, unsigned char* a1)
 				}
 			}
 		}
-		if (fcn_005373e0((void*) fcn_005c3820, 0x677c7) == 0) {
+		if (fcn_005373e0((void*) d2_ShowTechTreeEffects, 0x677c7) == 0) {
 			fcn_00471e30(window);
 			return;
 		}

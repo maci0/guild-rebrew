@@ -44,7 +44,7 @@ int __cdecl fcn_0050c710(char *, int, int);
 void __cdecl gm_ChangeObjektZustand(char *, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl fcn_00545d40(int, int, char *, int, int, int);
-void __cdecl fcn_00546190(char *);
+void __cdecl he_FreeAction(char *);
 void __cdecl fcn_00549330(char *, int);
 void __cdecl fcn_0055d770(char *);
 void __cdecl fcn_0055dab0(char *);
@@ -278,5 +278,5 @@ ret_minus1:
 	*(int *)(e + 0x84) = fcn_004c5620(-1, e);
 	return;
 ret190:
-	fcn_00546190(e);
+	he_FreeAction(e);
 }

@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 char* __cdecl m_alloc(int, const char*);
-void __cdecl fcn_004fe370(void);
+void __cdecl gm_InitItemBuildingMap(void);
 void __cdecl gm_KillAllSpieler(void);
 void __cdecl srv_SeedRandomWithTime(void);
 extern char *g_entity_type_table, *g_item_def_table; extern unsigned char *g_entity_ptr; extern unsigned short *g_query_base;
 /* ADDRESS: GOLD 0x004fe570 */
-int __cdecl fcn_004fe570(char* prefix)
+int __cdecl gm_InitializeGameTables(char* prefix)
 {
     char path[0x200];
     char* d; char* src;
@@ -56,7 +56,7 @@ int __cdecl fcn_004fe570(char* prefix)
         return -6;
     fread(g_item_def_table, 0x41, 0x2dc, file);
     fclose(file);
-    fcn_004fe370();
+    gm_InitItemBuildingMap();
     gm_KillAllSpieler();
     for (i = 0; i < 0xca78; i += 0x24d) {
         p = g_entity_type_table + i;

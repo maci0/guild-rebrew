@@ -10,12 +10,12 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_StartFilteredEntitySearch();
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
-void __cdecl fcn_00508cf0(int, int*);
+void __cdecl gm_GenerateShuffledIndices(int, int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
-void __cdecl fcn_0054d840(char* e)
+void __cdecl he_InitStreife(char* e)
 {
 	int cand[8];
 	int order[8];
@@ -54,7 +54,7 @@ void __cdecl fcn_0054d840(char* e)
 	}
 	if (n != 0) {
 		memset(e + 0xb4, 0xff, 16);
-		fcn_00508cf0(n, order);
+		gm_GenerateShuffledIndices(n, order);
 		for (i = 0; i < n; i++) {
 			if (i >= 4) {
 				break;

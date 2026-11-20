@@ -1,5 +1,5 @@
 extern void __cdecl d3_TransformPoint(char*, char*, float*);
-extern void __cdecl fcn_004518a0(float*);
+extern void __cdecl d3_NormalizeVector(float*);
 #include <math.h>
 extern void __cdecl d3_AnimateObjectTransform(int, float*, float*, int, int);
 
@@ -41,7 +41,7 @@ void __cdecl fcn_0052d1f0(char* effectNode)
 	dir[0] = base[0] - pos[0];
 	dir[1] = 0.0f;
 	dir[2] = base[2] - pos[2];
-	fcn_004518a0(dir);
+	d3_NormalizeVector(dir);
 	dot = *(float*) 0x662d48 * dir[2] + *(float*) 0x662d44 * dir[1] + *(float*) 0x662d40 * dir[0];
 	angles[1] = (float) acos(dot < -1.0 || !(dot < 1.0) ? (dot < -1.0 ? -1.0 : 1.0) : dot);
 	if (dir[0] > 0.0f)
@@ -52,8 +52,8 @@ void __cdecl fcn_0052d1f0(char* effectNode)
 	dir[0] = base[0] - pos[0];
 	dir[1] = base[1] - pos[1];
 	dir[2] = base[2] - pos[2];
-	fcn_004518a0(dir);
-	fcn_004518a0(level);
+	d3_NormalizeVector(dir);
+	d3_NormalizeVector(level);
 	dot = dir[2] * level[2] + dir[1] * level[1] + dir[0] * level[0];
 	angles[0] = (float) acos(dot < -1.0 || !(dot < 1.0) ? (dot < -1.0 ? -1.0 : 1.0) : dot);
 	if (0.0f > dir[1])

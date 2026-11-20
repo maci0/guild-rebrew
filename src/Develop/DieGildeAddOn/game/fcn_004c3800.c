@@ -1,7 +1,7 @@
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_0050cce0(void *, void *, int);
-int __cdecl fcn_0050ce20(void *, void *, int);
+int __cdecl gm_CollectStockEntries(void *, void *, int);
 void __cdecl fcn_004c3030(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004c3800 */
@@ -23,7 +23,7 @@ void __cdecl fcn_004c3800(void *arg)
 	ent = *(unsigned char **) ((char *) obj + 0x16c);
 	score = (int) fcn_0050f980(*(unsigned short *) 0x774970, *(unsigned short *) (ent + 0x27), 1) / 33;
 	if (*ent == 0x20 || *ent == 0x1f || *ent == 0x1e)
-		ret = fcn_0050ce20(ent, slot, 0);
+		ret = gm_CollectStockEntries(ent, slot, 0);
 	else
 		ret = fcn_0050cce0(ent, slot, 0);
 	if (ret != 0) {

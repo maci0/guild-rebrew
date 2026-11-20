@@ -29,7 +29,7 @@ char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 int __cdecl gm_CheckEntityType(char*);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void (__cdecl*)(void));
 void __cdecl fcn_004bd150(int);
-void __cdecl fcn_00530a00(char*);
+void __cdecl ch_CollectContextCharacters(char*);
 void __cdecl fcn_00505c80(char*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl ch_SetVisible(char*, int);
@@ -104,7 +104,7 @@ void __cdecl fcn_005167c0(unsigned char* building, int queryId)
 		fcn_004bd150(*(int*) (building + 0x71));
 	}
 	g_7f3ee0 = (char*) building;
-	fcn_00530a00((char*) building);
+	ch_CollectContextCharacters((char*) building);
 	d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, fcn_005156a0);
 	d3_TraverseSceneObjects(g_67a370, 0, 0x20, fcn_00515ef0);
 	fcn_00505c80((char*) building);

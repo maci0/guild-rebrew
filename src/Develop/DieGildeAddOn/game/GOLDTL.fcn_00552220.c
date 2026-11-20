@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 
-char* __cdecl fcn_005463a0(int, int, int, ...);
+char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 
 void __cdecl fcn_00552220(char* o)
@@ -16,7 +16,7 @@ void __cdecl fcn_00552220(char* o)
 	if (o[0x78] & 4) {
 		return;
 	}
-	for (p = fcn_005463a0(1, 0, 0x59); p != 0; p = he_fn_Handlung()) {
+	for (p = he_StartHandlungSearch(1, 0, 0x59); p != 0; p = he_fn_Handlung()) {
 		if (p != o) {
 			*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 			*(int*) (o + 0x84) = fcn_004c5620(-1, o);

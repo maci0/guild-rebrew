@@ -17,7 +17,7 @@ typedef struct
 } FLAGS;
 
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
-int __cdecl fcn_004339e0(char* obj, FLAGS fl, int n, FRAME* frames);
+int __cdecl d3_CreateObjectAnimation(char* obj, FLAGS fl, int n, FRAME* frames);
 
 #pragma optimize("y", off)
 
@@ -100,5 +100,5 @@ L2:
 		}
 	}
 	frames[cnt].type = 0;
-	return fcn_004339e0((char*) obj, fl, b + 1, frames);
+	return d3_CreateObjectAnimation((char*) obj, fl, b + 1, frames);
 }

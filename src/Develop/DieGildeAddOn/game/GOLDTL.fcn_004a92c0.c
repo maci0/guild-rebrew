@@ -11,7 +11,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-char* __cdecl fcn_005463a0(int a, int b, int c);
+char* __cdecl he_StartHandlungSearch(int a, int b, int c);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl gm_FindSimilarEntities(char* e, int a2, int kind, float lo, float hi, unsigned short* ids);
 unsigned short __cdecl gm_RandomMod(int n);
@@ -26,7 +26,7 @@ int __cdecl fcn_004a92c0(int a1, char* e, int a3, int a4, char* out)
 	int kind;
 
 	if ((*(int*)&gm_GameTime) % 4 == (*(int*) (e + 4) & 3) && !gm_LookupEntityRecordById(*(int*) (e + 0x5c))) {
-		for (p = fcn_005463a0(1, 0, 0x41); p; p = he_fn_Handlung()) {
+		for (p = he_StartHandlungSearch(1, 0, 0x41); p; p = he_fn_Handlung()) {
 			if (*(int*) (p + 0xb0) == *(int*) (e + 4) || *(int*) (p + 0xac) == *(int*) (e + 4)) {
 				return 0;
 			}

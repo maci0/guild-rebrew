@@ -47,7 +47,7 @@ typedef struct {
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
 
-int __cdecl fcn_0051fd50(Figure* o, int value, void* f)
+int __cdecl vfs_WriteFigure(Figure* o, int value, void* f)
 {
 	float pos[3];
 	float rot[4];

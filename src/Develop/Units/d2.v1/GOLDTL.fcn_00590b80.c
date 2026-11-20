@@ -34,7 +34,7 @@ int __cdecl fcn_0050dc90(int);
 float __cdecl fcn_00510260(int, int, int*);
 
 /* ADDRESS: GOLDTL 0x00590b80 */
-int __cdecl fcn_00590b80(int itemId)
+int __cdecl d2_ShowObjectTooltip(int itemId)
 {
 	int arr[32];
 	char* def;

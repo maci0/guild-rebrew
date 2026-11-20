@@ -6,7 +6,7 @@ extern char* cm_CommandQueueHead;
 extern unsigned char g_aed340[];
 
 /* ADDRESS: GOLDTL 0x004c4250 */
-int __cdecl fcn_004c4250(char* obj)
+int __cdecl cm_ReassembleQueuedCommand(char* obj)
 {
 	char* e;
 	char* prev;

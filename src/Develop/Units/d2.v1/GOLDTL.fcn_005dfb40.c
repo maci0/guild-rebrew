@@ -49,7 +49,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
-int __cdecl fcn_005dfa40(int, int, Rec*);
+int __cdecl vfs_ListFilesByExtension(int, int, Rec*);
 int __cdecl fcn_00472250(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -59,7 +59,7 @@ int __cdecl fcn_00471f80(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* out)
+int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, char* out)
 {
 	int list;
 	int field;
@@ -86,7 +86,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 	d2_SetForm(dlg, 0);
 	fcn_00533f40(0x140, 0x100, d2_CurrentWindowId, fcn_00472830(dlg, 1), 0x18, &w, &h, &field);
 	memset(recs, 0, sizeof(recs));
-	count = fcn_005dfa40(a4, a5, recs);
+	count = vfs_ListFilesByExtension(a4, a5, recs);
 	flag = mode & 1;
 	if (!flag) {
 		d2_SetForm(dlg, 3);
@@ -106,7 +106,7 @@ int __cdecl fcn_005dfb40(int wait, int mode, int title, int a4, int a5, char* ou
 	_itoa(count, buf, 10);
 	fcn_0046f940(field, buf);
 	d2_SetElementFont(field, 0x54);
-	while (fcn_005373e0((void*) fcn_005dfb40, wait) != 0) {
+	while (fcn_005373e0((void*) d2_OpenFileSelector, wait) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

@@ -3,7 +3,7 @@
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_004273d0(void*, int, char*);
 
-int __cdecl fcn_0040f2c0(char** objectRef, int* firstValue, int* secondValue, int* thirdValue)
+int __cdecl SetEmitterSize(char** objectRef, int* firstValue, int* secondValue, int* thirdValue)
 {
 	char* p;
 

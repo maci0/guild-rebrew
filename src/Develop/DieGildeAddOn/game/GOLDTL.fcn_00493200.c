@@ -3,12 +3,12 @@ extern char g_7f4ca0[];
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004e8b40(int kind, int* out);
-int __cdecl fcn_004e8b80(int kind, int max, void* out);
+int __cdecl amt_FindOfficeSlotsByKind(int kind, int max, void* out);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned int* a2,
 				  float a3, float a4, unsigned short* a5);
 void __cdecl fcn_004c4510(char* obj, int id);
-void __cdecl fcn_004c4570(int a, int b, int offset, void* value);
+void __cdecl cm_AppendPacketFieldDelta(int a, int b, int offset, void* value);
 void __cdecl fcn_004c5360(void);
 
 /* ADDRESS: GOLDTL 0x00493200 */
@@ -45,7 +45,7 @@ int __cdecl fcn_00493200(char* actorEntity, char* a2)
 		if (fcn_004e8b40(*(unsigned char*) (actorEntity + 0x166), rec) == 0) {
 			return 0;
 		}
-		count = fcn_004e8b80(rec[1], 6, slots);
+		count = amt_FindOfficeSlotsByKind(rec[1], 6, slots);
 		if (count == 0) {
 			return 0;
 		}
@@ -77,12 +77,12 @@ int __cdecl fcn_00493200(char* actorEntity, char* a2)
 	if (pick != 0) {
 		b = 1;
 		fcn_004c4510(a2, *(int*) (a2 + 2));
-		fcn_004c4570(4, 1, 0x1e, pick + 4);
-		fcn_004c4570(1, 1, 0x22, &b);
+		cm_AppendPacketFieldDelta(4, 1, 0x1e, pick + 4);
+		cm_AppendPacketFieldDelta(1, 1, 0x22, &b);
 		b = (unsigned char) gm_RandomMod(8);
-		fcn_004c4570(1, 1, 0x1c, &b);
+		cm_AppendPacketFieldDelta(1, 1, 0x1c, &b);
 		b = (unsigned char) gm_RandomMod(8);
-		fcn_004c4570(1, 1, 0x1d, &b);
+		cm_AppendPacketFieldDelta(1, 1, 0x1d, &b);
 		fcn_004c5360();
 		return 1;
 	}
@@ -95,11 +95,11 @@ other:
 	m = -1;
 	b = 1;
 	fcn_004c4510(a2, *(int*) (a2 + 2));
-	fcn_004c4570(4, 1, 0x1e, &m);
-	fcn_004c4570(1, 1, 0x22, &b);
+	cm_AppendPacketFieldDelta(4, 1, 0x1e, &m);
+	cm_AppendPacketFieldDelta(1, 1, 0x22, &b);
 	b = 0xff;
-	fcn_004c4570(1, 1, 0x1c, &b);
-	fcn_004c4570(1, 1, 0x1d, &b);
+	cm_AppendPacketFieldDelta(1, 1, 0x1c, &b);
+	cm_AppendPacketFieldDelta(1, 1, 0x1d, &b);
 	fcn_004c5360();
 	return 1;
 }

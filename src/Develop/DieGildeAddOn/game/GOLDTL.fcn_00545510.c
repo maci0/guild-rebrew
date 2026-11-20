@@ -4,7 +4,7 @@
 
 
 
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00545510(void)
 {
@@ -12,7 +12,7 @@ void __cdecl fcn_00545510(void)
 
 	for (i = 0; i <= he_LastEventSlot && i < 0x400; i++) {
 		if (g_77e980[i].kind != 0) {
-			fcn_00546190((char*) &g_77e980[i]);
+			he_FreeAction((char*) &g_77e980[i]);
 		}
 	}
 }

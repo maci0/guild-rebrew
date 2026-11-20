@@ -64,7 +64,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005dbf10(Ent* e, Req* r);
 
-int __cdecl fcn_005c6540(unsigned short* item)
+int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 {
 	Req r = {0};
 	int tmp;
@@ -115,7 +115,7 @@ int __cdecl fcn_005c6540(unsigned short* item)
 					g_774654 = 1;
 				}
 			}
-		} while (fcn_005373e0(fcn_005c6540, 0x677c7) != 0);
+		} while (fcn_005373e0(d2_ConfirmUseObjekt, 0x677c7) != 0);
 		fcn_00471e30(dlg);
 		if (buy == 0) {
 			return 0;

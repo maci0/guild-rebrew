@@ -5,7 +5,7 @@
 int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 
-int __cdecl fcn_004c8cb0(char* x, char* out)
+int __cdecl cm_ExModifyEntityFieldBits(char* x, char* out)
 {
 	char* e1;
 	char* e2;

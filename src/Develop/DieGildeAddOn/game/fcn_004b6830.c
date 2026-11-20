@@ -5,7 +5,7 @@ extern unsigned char g_773d75;
 
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004e8ad0(int);
-int __cdecl fcn_004e8b80(int, int, void*);
+int __cdecl amt_FindOfficeSlotsByKind(int, int, void*);
 int __cdecl fcn_0042e410(int);
 int __cdecl fcn_0050dac0(short);
 void __cdecl io_FormatTextBuffer(char*, int, int, int, int, int);
@@ -40,7 +40,7 @@ int __cdecl fcn_004b6830(int* request)
 	if (r == 0 || r >= 7) {
 		return 0x400;
 	}
-	n = fcn_004e8b80(r, 6, msg);
+	n = amt_FindOfficeSlotsByKind(r, 6, msg);
 	if (n == 0) {
 		return 0x400;
 	}

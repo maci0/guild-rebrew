@@ -41,7 +41,7 @@ extern float g_662c6c;
 /* Rebuilds the view frustum: the four side planes from the half-angles of the
  * viewport, the four corner rays and the near and far planes. */
 /* ADDRESS: GOLDTL 0x00437bc0 */
-void __cdecl fcn_00437bc0(void)
+void __cdecl d3_UpdateViewFrustum(void)
 {
 	double angle_x;
 	double angle_y;

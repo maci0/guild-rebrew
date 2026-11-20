@@ -20,7 +20,7 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-Ent114* __cdecl fcn_004e69e0(int type, int key)
+Ent114* __cdecl cut_FindCutscene(int type, int key)
 {
 	int i;
 

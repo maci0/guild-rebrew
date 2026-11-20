@@ -11,13 +11,13 @@ typedef struct Rec {
 } Rec;
 /* SIZE 0x18 */
 
-int __cdecl fcn_004e8cb0(int all, int max, Rec* out);
+int __cdecl amt_CollectOfficeGroup7(int all, int max, Rec* out);
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004ea560(Rec* r, int type);
 int __cdecl fcn_004e8240(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
 int __cdecl fcn_004c4450(int v);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_005463a0(int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl amt_calc_zuenfte(int n);
 void __cdecl fcn_004ea620(void);
 void __cdecl fcn_004ea9a0(void);
@@ -37,7 +37,7 @@ void __cdecl fcn_004eafe0(void)
 	int x;
 	int tt;
 
-	n = fcn_004e8cb0(1, 7, out);
+	n = amt_CollectOfficeGroup7(1, 7, out);
 	if (n > 0) {
 		for (i = 0; i < n; i++) {
 			x = out[i].x4;
@@ -98,7 +98,7 @@ void __cdecl fcn_004eafe0(void)
 			;
 		}
 	}
-	if (fcn_005463a0(1, 0, 0x80) == 0) {
+	if (he_StartHandlungSearch(1, 0, 0x80) == 0) {
 		amt_calc_zuenfte(0x1e);
 		amt_calc_zuenfte(0x1f);
 		amt_calc_zuenfte(0x20);

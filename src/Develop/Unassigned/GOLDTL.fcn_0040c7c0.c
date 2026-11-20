@@ -13,7 +13,7 @@ int __cdecl StopScript();
 int __cdecl fcn_0040c630();
 int __cdecl FindScript();
 int __cdecl KillLocalScripts();
-int __cdecl fcn_0040c740();
+int __cdecl CallUserFunction();
 int __cdecl CallUserFunctionExtended();
 void __cdecl evt_ImportCommand(const char*, void*, ...);
 
@@ -36,6 +36,6 @@ void __cdecl evt_RegisterCoreCommands(void)
 	evt_ImportCommand("Sleep", fcn_0040c630, 5, 1, 1);
 	evt_ImportCommand("FindScript", FindScript, 1, 1, 6);
 	evt_ImportCommand("KillLocalScripts", KillLocalScripts, 1, 0);
-	evt_ImportCommand("CallUserFunction", fcn_0040c740, 1, 2, 1, 1);
+	evt_ImportCommand("CallUserFunction", CallUserFunction, 1, 2, 1, 1);
 	evt_ImportCommand("CallUserFunctionExtended", CallUserFunctionExtended, 1, 3, 1, 1, 1);
 }

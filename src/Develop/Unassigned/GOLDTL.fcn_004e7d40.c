@@ -20,7 +20,7 @@ typedef struct
 extern char g_68da68[];
 
 /* ADDRESS: GOLDTL 0x004e7d40 */
-int __cdecl fcn_004e7d40(char* entityRecord, int officeKind)
+int __cdecl amt_ApplyForOffice(char* entityRecord, int officeKind)
 {
 	Info4e7d40 info;
 	int i;

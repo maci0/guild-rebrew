@@ -15,7 +15,7 @@ int __cdecl fcn_005373e0(void (__cdecl* cb)(int), int flags);
 void __cdecl fcn_00471e30(int h);
 void __cdecl fcn_004b5b20(int arg);
 
-void __cdecl fcn_004b6210(int arg)
+void __cdecl d2_ShowMissionDialog(int arg)
 {
 	int mode;
 	unsigned short* p;
@@ -33,7 +33,7 @@ void __cdecl fcn_004b6210(int arg)
 			mode = (g_774954 != 0) + 1;
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(fcn_004b6210, arg | 0x80) != 0);
+	} while (fcn_005373e0(d2_ShowMissionDialog, arg | 0x80) != 0);
 	fcn_00471e30(h);
 	if (mode == 2) {
 		fcn_004b5b20(arg);

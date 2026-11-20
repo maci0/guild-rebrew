@@ -1,4 +1,4 @@
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -22,5 +22,5 @@ void __cdecl fcn_00565800(char* o)
 		*(int*) (o + 0x58) = 0;
 		return;
 	}
-	fcn_00546190(o);
+	he_FreeAction(o);
 }

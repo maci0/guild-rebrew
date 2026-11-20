@@ -12,10 +12,10 @@ extern char s_67d7a0[];
 
 void __cdecl ReportClientMessage(char* text);
 void __cdecl fcn_00465e60(char* base);
-void __cdecl fcn_00466550(int idx, int surf);
+void __cdecl d2_DrawField(int idx, int surf);
 void __cdecl fcn_00467920(int idx, int surf);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, char* surf, char* text, int flags);
-void __cdecl fcn_0046dff0(int idx, char* surf);
+void __cdecl d2_DrawWindow(int idx, char* surf);
 int __cdecl d2_GetElementResourceSize(int slot, int* w, int* h);
 void __cdecl d2_SelectFont(int idx);
 int __cdecl fcn_004767f0(int x, int y, int w, int h, char* src, int sx, int sy, char* t);
@@ -71,7 +71,7 @@ void __cdecl fcn_00471490(int k)
 			oh2 = win->top;
 			oh1 = win->left;
 			win->top = ybase + oh2;
-			fcn_0046dff0(((int*) (base + 4))[row], surf);
+			d2_DrawWindow(((int*) (base + 4))[row], surf);
 			win->left = oh1;
 			win->top = oh2;
 			for (col = 0; col < win->count; col++) {
@@ -154,7 +154,7 @@ void __cdecl fcn_00471490(int k)
 						             obj + 0x8c, flags);
 						break;
 					case 0x41:
-						fcn_00466550(*(int*) (obj + 0x88), (int) surf);
+						d2_DrawField(*(int*) (obj + 0x88), (int) surf);
 						break;
 					case 0x43:
 						if (*(int*) (obj + 0x24) > 0) {

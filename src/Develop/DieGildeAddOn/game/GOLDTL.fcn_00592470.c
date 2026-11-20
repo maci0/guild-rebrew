@@ -13,7 +13,7 @@ void __cdecl fcn_00591ea0(void);
 void __cdecl fcn_00591d00(void);
 void __cdecl fcn_00591da0(int);
 
-void __cdecl fcn_00592470(void)
+void __cdecl main_ProcessGameHotkeys(void)
 {
 	char c;
 	int i;

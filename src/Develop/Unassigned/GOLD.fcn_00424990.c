@@ -8,7 +8,7 @@ void __cdecl nt_ResetPacketStats(void);
 void __cdecl fcn_00424510(int);
 
 /* ADDRESS: GOLD 0x00424990 */
-int __cdecl fcn_00424990(const char* host, unsigned short port)
+int __cdecl nt_ConnectToHost(const char* host, unsigned short port)
 {
     WSADATA startup;
     unsigned long value;

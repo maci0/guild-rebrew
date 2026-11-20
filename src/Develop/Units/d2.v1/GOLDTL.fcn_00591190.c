@@ -21,7 +21,7 @@ void __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 double __cdecl eval_ObjektPreis2Credits(int, int);
 
-int __cdecl fcn_00591190(int id)
+int __cdecl d2_OpenObjektUpgradeTooltip(int id)
 {
 	int dlg;
 	D2_WIN* p;

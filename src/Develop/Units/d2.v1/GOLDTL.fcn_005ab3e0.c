@@ -33,7 +33,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_0050e600(int, int);
 void __cdecl fcn_00532ef0(void);
-void __cdecl fcn_005abd60(void);
+void __cdecl d2_ShowKircheTop5(void);
 
 /* Church indulgence ("Ablass") dialog: offers the indulgence for the current
  * player and, once bought, continues with the results screen. */
@@ -115,7 +115,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 	} while (fcn_005373e0((void*) fcn_005ab3e0, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	if (changed)
-		fcn_005abd60();
+		d2_ShowKircheTop5();
 	else
 		fcn_00532ef0();
 }

@@ -44,7 +44,7 @@ double __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_0057e880(int, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
-int __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, void*);
+int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, void*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
@@ -95,13 +95,13 @@ int __cdecl fcn_005dbf10(Ent* ent, Cmd* cmd)
 			v8 = 1;
 			one = 1;
 			fcn_004c4510((char*) cmd->rec, *(int*) (cmd->rec + 1));
-			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x1c), &vc);
-			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x21), &v8);
-			fcn_004c4570(1, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x20), &one);
-			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x2d), &(*(int*)&gm_GameTime));
-			fcn_004c4570(2, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x31), &(*(short*)&g_7f4c04));
-			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x33), &g_7f4c06);
-			fcn_004c4570(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x37), &g_7f4c0a);
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x1c), &vc);
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x21), &v8);
+			cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x20), &one);
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x2d), &(*(int*)&gm_GameTime));
+			cm_AppendPacketFieldDelta(2, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x31), &(*(short*)&g_7f4c04));
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x33), &g_7f4c06);
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x37), &g_7f4c0a);
 			fcn_004c5360();
 		}
 		if (d->value == 0) {

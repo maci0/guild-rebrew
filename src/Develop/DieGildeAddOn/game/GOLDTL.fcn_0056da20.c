@@ -11,7 +11,7 @@ extern unsigned short g_7f4c04;
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_0050ff70(char* o, int delta);
-void __cdecl fcn_00546190(char* p);
+void __cdecl he_FreeAction(char* p);
 
 void __cdecl fcn_0056da20(char* p)
 {
@@ -42,11 +42,11 @@ void __cdecl fcn_0056da20(char* p)
 			}
 			p[0xec] = 0;
 		}
-		fcn_00546190(p);
+		he_FreeAction(p);
 		return;
 	case -1:
 	case -2:
-		fcn_00546190(p);
+		he_FreeAction(p);
 		return;
 	}
 }

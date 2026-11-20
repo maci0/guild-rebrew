@@ -45,7 +45,7 @@ extern Slot4cf450 g_9b9ec0[32];
 
 char* __cdecl fcn_00442910(int parent, float* pos, float* dir, char* name);
 char __cdecl d3_GridPointToWorld(int map, int x, int y, float* out);
-int __cdecl fcn_004339e0(char* obj, Flags4cf450 fl, int n, Ent4cf450* ents);
+int __cdecl d3_CreateObjectAnimation(char* obj, Flags4cf450 fl, int n, Ent4cf450* ents);
 
 #pragma optimize("y", off)
 Slot4cf450* __cdecl fcn_004cf450(float* pos, int x, int y)
@@ -136,7 +136,7 @@ found:
 	ents[0].type = 0x12;
 	ents[1].type = 0x12;
 	ents[2].type = 1;
-	g_9b9ec0[i].handle = fcn_004339e0(g_9b9ec0[i].obj, fl, 4, ents);
+	g_9b9ec0[i].handle = d3_CreateObjectAnimation(g_9b9ec0[i].obj, fl, 4, ents);
 	g_9b9ec0[i].a = x;
 	g_9b9ec0[i].b = y;
 	return &g_9b9ec0[i];

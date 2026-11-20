@@ -5,7 +5,7 @@ extern int evt_LastGfxScriptId;
 void* __cdecl evt_LoadGfxScript(int);
 void __cdecl evt_RunScript(void*);
 
-int __cdecl fcn_00429fe0(int a1, int a2, int a3)
+int __cdecl evt_LoadAndRunGfxScript(int a1, int a2, int a3)
 {
 	int result;
 	void* script;

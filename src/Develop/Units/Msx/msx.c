@@ -147,7 +147,7 @@ void __cdecl msx_StopTrack(Chan_14cc460* hTrack, int fade)
                 fcn_00420700(hTrack, 2);
             } else {
                 fcn_0042ad90(hTrack->handle, 1);
-                fcn_0042ac40(hTrack->handle);
+                msx_CloseStream(hTrack->handle);
                 hTrack->handle = 0;
                 hTrack->active = 0;
             }
@@ -238,7 +238,7 @@ Chan_14cc460* __cdecl msx_StartAmbientTrack(const char* name, int a)
 	if (c != 0) {
 		c->bAmbient = 1;
 		if (c->handle != 0) {
-			fcn_0042ac40(c->handle);
+			msx_CloseStream(c->handle);
 			c->handle = 0;
 		}
 		if (msx_StartTrackInternal(c, 1) == 0) {

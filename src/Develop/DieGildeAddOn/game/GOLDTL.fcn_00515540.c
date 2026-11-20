@@ -22,7 +22,7 @@ int __cdecl fcn_00413160(void);
 void __cdecl init_LoadObjektScene(int object_type);
 
 /* ADDRESS: GOLDTL 0x00515540 */
-int __cdecl fcn_00515540(char* object)
+int __cdecl init_EnsureObjektSceneContext(char* object)
 {
     int index;
 

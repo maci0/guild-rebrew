@@ -7,7 +7,7 @@ extern Rec7dc6e0 g_7dc6e0[64];
 
 void __cdecl fcn_00442c00(int, int);
 
-void __cdecl fcn_00546bb0(int k, int v)
+void __cdecl he_SetGfxInfoEnabledByKey(int k, int v)
 {
 	int i;
 

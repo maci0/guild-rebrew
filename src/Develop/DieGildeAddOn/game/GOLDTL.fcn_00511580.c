@@ -36,7 +36,7 @@ void __cdecl fcn_004c3ff0(void);
 void __cdecl fcn_004c4940(void);
 void __cdecl ls_ID2Ptr(void);
 Figure* __cdecl fcn_004c4480(int);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
@@ -72,11 +72,11 @@ void __cdecl fcn_00511580(void)
 	fcn_004c44a0();
 	flag = 0;
 	fcn_004c4510(gm_RichterKatholisch, ((Figure*) gm_RichterKatholisch)->owner);
-	fcn_004c4570(1, 1, gm_RichterKatholisch - g_aed32c + 0xc, &flag);
+	cm_AppendPacketFieldDelta(1, 1, gm_RichterKatholisch - g_aed32c + 0xc, &flag);
 	fcn_004c5360();
 	flag = 1;
 	fcn_004c4510(gm_RichterEvangelisch, ((Figure*) gm_RichterEvangelisch)->owner);
-	fcn_004c4570(1, 1, gm_RichterEvangelisch - g_aed32c + 0xc, &flag);
+	cm_AppendPacketFieldDelta(1, 1, gm_RichterEvangelisch - g_aed32c + 0xc, &flag);
 	fcn_004c5360();
 	fcn_004c44b0();
 	while (fcn_004c44c0() == 0) {

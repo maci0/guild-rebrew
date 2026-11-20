@@ -3,7 +3,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00500bb0(void*, int, int, int);
@@ -23,12 +23,12 @@ void __cdecl fcn_00556b40(char* e)
 	a = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 	b = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 	if (*(int*) (e + 0x70) == -1) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 	if (*(int*) (e + 0x70) == -2) {
 		if ((e[0x78] & 4) != 0) {
-			fcn_00546190(e);
+			he_FreeAction(e);
 			return;
 		}
 		if (a != 0) {
@@ -37,7 +37,7 @@ void __cdecl fcn_00556b40(char* e)
 				fcn_004c54c0(*(int*) (b + 4), *(int*) (a + 4), (-8 - *(int*) (e + 0xb4)) * 5, 1);
 			}
 		}
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 	if ((e[0x78] & 4) != 0) {

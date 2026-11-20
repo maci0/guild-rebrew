@@ -5,7 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int, int, int, char*);
 int __cdecl fcn_00529670(char*, char*);
-void __cdecl fcn_00546190(char* unit);
+void __cdecl he_FreeAction(char* unit);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 void __cdecl fcn_004c5c80(int);
@@ -55,7 +55,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 		for (i = 0; i < n; i++) {
 			fcn_00529160(0, 0, *(unsigned short*) objs[i], 0);
 		}
-		fcn_00546190(entity);
+		he_FreeAction(entity);
 		return;
 	}
 	if (v == 0) {

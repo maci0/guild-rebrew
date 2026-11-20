@@ -19,12 +19,12 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl fcn_00500e20(int*);
 int __cdecl fcn_00530b20(char*, int, char*);
 int __cdecl fcn_004c4450(unsigned int);
-int __cdecl fcn_00426cc0(int);
-void __cdecl fcn_00428720(void*);
+int __cdecl evt_FindScriptById(int);
+void __cdecl evt_RequestScriptExit(void*);
 char* __cdecl evt_LoadScript(char*);
 int __cdecl vfs_LookupPath(char*, void*, void**);
 int __cdecl fcn_00428340(char*, int, ...);
-void __cdecl fcn_00511040(int, char*);
+void __cdecl init_GetGebaeudeSceneName(int, char*);
 
 /* ADDRESS: GOLDTL 0x00530c60 */
 void __cdecl fcn_00530c60(unsigned char* building)
@@ -153,7 +153,7 @@ after:
 			}
 			if (job[0] != 0) {
 				if (*(int*) (info + 0x28) != -1) {
-					if (fcn_00426cc0(*(int*) (info + 0x28)) != 0) {
+					if (evt_FindScriptById(*(int*) (info + 0x28)) != 0) {
 						goto next;
 					}
 				}
@@ -167,7 +167,7 @@ after:
 						info2 = *(char**) q;
 						if (info2 != 0 && (info2 = *(char**) (info2 + 0x184)) != 0
 						    && (id = *(int*) (info2 + 0x28)) != -1
-						    && (h = fcn_00426cc0(id)) != 0
+						    && (h = evt_FindScriptById(id)) != 0
 						    && (s = strstr(h, job)) != 0) {
 							n = strlen(job);
 							c = s[n] - '0';
@@ -188,7 +188,7 @@ after:
 						strcpy(name, "Training_Allgemein");
 					} else {
 						if (itemdef == 0) {
-							fcn_00511040((int) *building, name);
+							init_GetGebaeudeSceneName((int) *building, name);
 						} else {
 							strcpy(name, itemdef + 1);
 						}
@@ -225,7 +225,7 @@ bottom:
 				p = *(char**) (ent + 0x17c);
 				if ((p != 0 && *p == 4 && *(int*) (p + 0xc8) != 0) || mode) {
 					mode = 0;
-					h = fcn_00426cc0(*(int*) (info + 0x28));
+					h = evt_FindScriptById(*(int*) (info + 0x28));
 					if (h != 0) {
 						for (q = (char*) 0x7e2ac4; q < (char*) 0x7e30c4; q += 0x20) {
 							if (mode) {
@@ -236,7 +236,7 @@ bottom:
 							}
 						}
 						if (mode) {
-							fcn_00428720(h);
+							evt_RequestScriptExit(h);
 						}
 					}
 				}

@@ -43,15 +43,15 @@ int __cdecl fcn_00522510(void* stream);
 void __cdecl m_FreeTracked(char* p);
 int __cdecl amt_fio_LoadAemter(void* stream, int version);
 int __cdecl fcn_004f4c40(void* stream);
-int __cdecl fcn_00524610(void* stream);
+int __cdecl ls_LoadGameMatrices(void* stream);
 int __cdecl fcn_005246e0(unsigned int stream);
 int __cdecl fcn_00524b40(void* stream);
 int __cdecl fcn_00524b50(void* stream);
 int __cdecl fcn_00524fc0(void* stream);
-int __cdecl fcn_005251c0(void* stream);
+int __cdecl ls_LoadHistoryState(void* stream);
 int __cdecl fcn_005252d0(void* stream);
 int __cdecl fcn_005255b0(void* stream);
-unsigned int __cdecl fcn_00525670(void);
+unsigned int __cdecl gm_RebuildLoadedReferences(void);
 int __cdecl fcn_004432d0(int a, int b);
 void __cdecl fcn_00514f10(void);
 void __cdecl fcn_00514fc0(void);
@@ -68,7 +68,7 @@ void __cdecl fcn_00516f60(void);
 void __cdecl fcn_00516de0(int a, char b);
 
 /* ADDRESS: GOLDTL 0x00521920 */
-int __cdecl fcn_00521920(char* cpath)
+int __cdecl ls_LoadSavegame(char* cpath)
 {
 	void* stream;
 	int version;
@@ -158,7 +158,7 @@ int __cdecl fcn_00521920(char* cpath)
 		CloseVfsStream(stream);
 		gm_RichterKatholisch = 0;
 		gm_RichterEvangelisch = 0;
-		if (fcn_00525670()) {
+		if (gm_RebuildLoadedReferences()) {
 			return 1;
 		}
 		goto fail;
@@ -169,7 +169,7 @@ int __cdecl fcn_00521920(char* cpath)
 	if (fcn_004f4c40(stream) == 0) {
 		goto fail;
 	}
-	if (ls_SaveVersion >= 0x10016 && fcn_00524610(stream) == 0) {
+	if (ls_SaveVersion >= 0x10016 && ls_LoadGameMatrices(stream) == 0) {
 		goto fail;
 	}
 	if (fcn_005246e0((unsigned int) stream) == 0) {
@@ -184,18 +184,18 @@ int __cdecl fcn_00521920(char* cpath)
 	if (fcn_00524fc0(stream) == 0) {
 		goto fail;
 	}
-	if (fcn_005251c0(stream) == 0) {
+	if (ls_LoadHistoryState(stream) == 0) {
 		goto fail;
 	}
 	if (fcn_005252d0(stream) == 0) {
 		CloseVfsStream(stream);
-		fcn_00525670();
+		gm_RebuildLoadedReferences();
 		return 0;
 	}
 	if (ls_SaveVersion >= 0x1002e && fcn_005255b0(stream) == 0) {
 		goto fail;
 	}
-	if (fcn_00525670() == 0) {
+	if (gm_RebuildLoadedReferences() == 0) {
 		goto fail;
 	}
 	fcn_004432d0(0, 1);

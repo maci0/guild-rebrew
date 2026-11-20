@@ -31,19 +31,19 @@ extern char* __cdecl fcn_004c4480(int);
 extern int __cdecl cut_FindCutsceneById(int);
 extern void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 extern int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
-extern void __cdecl fcn_00546190(char*);
+extern void __cdecl he_FreeAction(char*);
 extern void __cdecl fcn_004432d0(int, int);
 extern char* __cdecl fcn_00445600(int, int, int, char*);
 extern void __cdecl d3_TransformPoint(char*, char*, float*);
 extern int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 extern void __cdecl he_CharacterBehavior(char*, int);
-extern char* __cdecl fcn_005463a0(int, int, int);
+extern char* __cdecl he_StartHandlungSearch(int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
 extern char* __cdecl gm_FindRecordById(int);
 extern int __cdecl fcn_0050de80(char*, Stats*);
 extern char* __cdecl fcn_00502cd0(int, ...);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern void* __cdecl fcn_004e69e0(int, int);
+extern void* __cdecl cut_FindCutscene(int, int);
 extern int __cdecl gm_RandomMod(unsigned short);
 extern void __cdecl fcn_004d1d40(char*, unsigned char);
 extern int __cdecl fcn_004c5980(void*);
@@ -148,7 +148,7 @@ void __cdecl fcn_0056b700(char* obj)
 				iter += 4;
 			}
 		}
-		fcn_00546190(obj);
+		he_FreeAction(obj);
 		return;
 	default:
 		return;
@@ -180,8 +180,8 @@ label_56b858:
 			}
 		}
 		he_CharacterBehavior(obj, (int) &pos);
-		list[3] = fcn_005463a0(1, 0, 0x51);
-		ent = fcn_005463a0(1, 0, 0xf);
+		list[3] = he_StartHandlungSearch(1, 0, 0x51);
+		ent = he_StartHandlungSearch(1, 0, 0xf);
 		if (nearby) {
 			while (door != 0 && ent != 0 && count < 3) {
 				if (*(char*) (ent + 0xf0) == 0 &&
@@ -252,7 +252,7 @@ label_56b858:
 		if (*(int*) &g_774800)
 			limit = 0;
 		fcn_004432d0(saved, 1);
-		if (door != 0 && fcn_004e69e0(3, -1) == 0 &&
+		if (door != 0 && cut_FindCutscene(3, -1) == 0 &&
 		    limit < (int) (gm_RandomMod(100) & 0xffff)) {
 			slot = gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0x10));
 			if (slot != 0) {
@@ -296,7 +296,7 @@ label_56b858:
 				*(int*) (obj + 0x70) = 2;
 				return;
 			}
-			fcn_00546190(obj);
+			he_FreeAction(obj);
 			return;
 		}
 	}

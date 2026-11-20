@@ -30,12 +30,12 @@ extern char s_6aa6d0[];
 
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_005338d0(char*, int, int);
+int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
 int __cdecl fcn_005cd440(Req*, char*, int, void*);
 void __cdecl fcn_00532ef0(void);
-void __cdecl fcn_005bebe0(int, int, int);
+void __cdecl d2_RunTalenteDialog(int, int, int);
 void __cdecl fcn_005c0670(int);
 void __cdecl fcn_005bf0d0(void);
 void __cdecl fcn_005bf9e0(void);
@@ -53,10 +53,10 @@ void __cdecl fcn_0059f6c0(int a0, int a1)
 	fcn_005338a0();
 	if (fcn_005373e0((void*) fcn_0059f6c0, 0x67fff) != 0) {
 		do {
-			a = fcn_005338d0(s_6aa714, g_14aaf18, 0x17);
-			b = fcn_005338d0(s_6aa700, g_14aaf38, 0xd);
-			c = fcn_005338d0(s_6aa6e4, g_14ad2c0, 0xc);
-			d = fcn_005338d0(s_6aa6d0, g_14ab04c, 0x10);
+			a = RegisterStatusText(s_6aa714, g_14aaf18, 0x17);
+			b = RegisterStatusText(s_6aa700, g_14aaf38, 0xd);
+			c = RegisterStatusText(s_6aa6e4, g_14ad2c0, 0xc);
+			d = RegisterStatusText(s_6aa6d0, g_14ab04c, 0x10);
 			if (g_7746a0 != 0) {
 				if (g_7746a0 == a) {
 					Req req;
@@ -107,7 +107,7 @@ void __cdecl fcn_0059f6c0(int a0, int a1)
 					fcn_00532ef0();
 				}
 				else if (g_7746a0 == c) {
-					fcn_005bebe0(a0, a1, 2);
+					d2_RunTalenteDialog(a0, a1, 2);
 				}
 				else if (g_7746a0 == d) {
 					fcn_005c0670(a0);

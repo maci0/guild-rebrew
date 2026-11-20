@@ -10,7 +10,7 @@ extern unsigned char g_773dd4;
 extern void* __cdecl fcn_00502cd0(int list, int a, int b, ...);
 extern void* __cdecl gm_NextEntityQueryMatch(void);
 extern int __cdecl fcn_005014d0(unsigned short handle);
-extern int __cdecl fcn_00501490(char* key);
+extern int __cdecl gm_FindObjektPrototypeByName(char* key);
 extern int __cdecl fcn_00506380(int a, void* table, void* record, int mode);
 extern void __cdecl d3_SetSubtreeVisible(char* record, int mode);
 extern int __cdecl d3_ComputeObjectBoundingSphere(char* record, char* scene, char* out, int* value);
@@ -219,7 +219,7 @@ tail:
 		SelectTextureSet(record, *(int*) (record + 0x1cc), (char) g_773dd4, 1);
 		return;
 	}
-	idx = fcn_00501490(record + 6);
+	idx = gm_FindObjektPrototypeByName(record + 6);
 	if (idx == -1)
 		return;
 	if (lpObjektePROT[idx * 0x41] != 2)

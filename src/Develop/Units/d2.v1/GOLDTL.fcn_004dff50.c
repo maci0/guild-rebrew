@@ -20,7 +20,7 @@ int __cdecl cut_RandMod(int);
 void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 int __cdecl fcn_004dfe40(char*, int);
 void __cdecl fcn_00417b50(char*, int, float, float, float, float);
-int __cdecl fcn_00406340(char*, char*, int);
+int __cdecl ch_QueuePlayAnimation(char*, char*, int);
 int __cdecl fcn_004de610(int);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004c3030(int, int, char*, int);
@@ -81,7 +81,7 @@ void __cdecl fcn_004dff50(char* task)
 	if (hit) {
 		fcn_00417b50(*(char**) (*(char**) (foe + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
 		if (*(int*) (*(char**) (foe + 0x184) + 0x128) == 0) {
-			fcn_00406340(*(char**) (foe + 0x184), (char*) 0x68cbe4, 1);
+			ch_QueuePlayAnimation(*(char**) (foe + 0x184), (char*) 0x68cbe4, 1);
 		}
 		d2_SetForm(g_68bfc0, 0);
 		task = (char*) fcn_004de610(6);
@@ -98,7 +98,7 @@ void __cdecl fcn_004dff50(char* task)
 		}
 	} else {
 		if (*(int*) (*(char**) (foe + 0x184) + 0x128) == 0) {
-			fcn_00406340(*(char**) (foe + 0x184), (char*) 0x68cba0, 1);
+			ch_QueuePlayAnimation(*(char**) (foe + 0x184), (char*) 0x68cba0, 1);
 		}
 		task = (char*) fcn_004de610(9);
 		io_AppendText((int) task + 0x1109, *(unsigned short*) foe);

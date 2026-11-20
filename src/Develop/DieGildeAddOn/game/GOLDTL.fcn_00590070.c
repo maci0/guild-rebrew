@@ -25,7 +25,7 @@ extern int g_14b556c;
 
 int __cdecl fcn_00500e20(pos14_7f4c00*);
 int __cdecl fcn_00525fb0(char*);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(int, int);
 void __cdecl fcn_00532ef0(void);
@@ -45,7 +45,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
 
-void __cdecl fcn_00590070(char* who)
+void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 {
 	int b2;
 	char buf[0x400];
@@ -69,7 +69,7 @@ void __cdecl fcn_00590070(char* who)
 		fcn_00532ef0();
 		return;
 	}
-	if (fcn_005463a0(2, 0, 0x8f, 3, *(int*) (who + 1)) != 0) {
+	if (he_StartHandlungSearch(2, 0, 0x8f, 3, *(int*) (who + 1)) != 0) {
 		io_FormatTextBuffer(buf, 0x413c);
 		fcn_00526120((int) buf, 4);
 		fcn_00532ef0();
@@ -88,7 +88,7 @@ void __cdecl fcn_00590070(char* who)
 	b2 = fcn_00472250(h, 3, s + 1);
 	b4 = fcn_00472250(h, 3, s + 2);
 	fcn_0052a0c0(who, 0);
-	while (fcn_005373e0(fcn_00590070, 0x677c7) != 0) {
+	while (fcn_005373e0(d2_RunFriedhofUpgradeWorkerDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

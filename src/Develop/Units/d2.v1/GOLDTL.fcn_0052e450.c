@@ -38,7 +38,7 @@ int __cdecl fcn_0052dee0(int x, int y, int z);
 int __cdecl fcn_004677e0(int a, int b, int c, int d, int e, int f, int g, int h);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-void __cdecl fcn_0052e450(unsigned short* e)
+void __cdecl d2_OpenTransporterInfoPanel(unsigned short* e)
 {
 	unsigned short* parent;
 	int x;

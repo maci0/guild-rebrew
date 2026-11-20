@@ -37,7 +37,7 @@ extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_773d68;
 
-void __cdecl fcn_00546190(HE_ACTION*);
+void __cdecl he_FreeAction(HE_ACTION*);
 unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 #include "Develop/DieGildeAddOn/game/cutscene.h"
@@ -88,7 +88,7 @@ void __cdecl fcn_005413d0(int idx)
 			if (u->kind != 0 && u->house == idx) {
 				for (i = 0; kill[i] != 0; i++) {
 					if (kill[i] == u->kind) {
-						fcn_00546190(u);
+						he_FreeAction(u);
 						break;
 					}
 				}

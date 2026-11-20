@@ -1,7 +1,7 @@
 #include <string.h>
 
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
-void __cdecl fcn_004fa5f0(void* buf, int a, char* b);
+void __cdecl d2_ShowPrivilegMessage(void* buf, int a, char* b);
 
 /* ADDRESS: GOLDTL 0x004f8570 */
 int __cdecl fcn_004f8570(char* entity, int* request)
@@ -18,7 +18,7 @@ int __cdecl fcn_004f8570(char* entity, int* request)
     if (*request == 3 && entity[2] == 6) {
         memset(buf, 0, 0x200);
         io_FormatTextBuffer(buf, 0x1da2, (entity[9] ? 0x27b : 0x253) + (unsigned char) entity[0x166]);
-        fcn_004fa5f0(buf, 0, (char*) 0x657c7);
+        d2_ShowPrivilegMessage(buf, 0, (char*) 0x657c7);
         return 2;
     }
     if (*request == 1 && entity[2] == 6) {

@@ -31,12 +31,12 @@ extern int d3_FogColor;
 extern float g_10425fc;
 extern float g_104329c;
 
-void __cdecl fcn_00438840(float, float);
+void __cdecl d3_SetFogRange(float, float);
 void __cdecl fcn_00438da0(float, float, float, float, float, float, float, float, float);
 
 /* ADDRESS: GOLD 0x0043a610 */
 /* ADDRESS: GOLDTL 0x00438840 */
-void __cdecl fcn_00438840(float a, float b)
+void __cdecl d3_SetFogRange(float a, float b)
 {
 	float lim;
 
@@ -66,7 +66,7 @@ void __cdecl fcn_00438920(float a, float b, int c)
 
 	if (a < b) {
 		on = 1;
-		fcn_00438840(a, b);
+		d3_SetFogRange(a, b);
 		g_10425fc = a;
 		g_104329c = b;
 		((FloatRenderStateFn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState)(((D3D_DEVICE_VIEW*)g_6b5de0), 0x24, g_1042ce4);

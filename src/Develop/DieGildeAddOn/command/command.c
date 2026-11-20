@@ -4072,9 +4072,9 @@ void __cdecl fcn_00506300(char*);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl fcn_004550b0(int, int*);
 #include "../../Units/d3/d3_object.h"
-void* __cdecl fcn_00426cc0(int);
-int __cdecl fcn_00428720(char*);
-int __cdecl fcn_00504130(unsigned char*);
+void* __cdecl evt_FindScriptById(int);
+int __cdecl evt_RequestScriptExit(char*);
+int __cdecl gm_FreeGebaeude(unsigned char*);
 #endif
 
 int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
@@ -4141,9 +4141,9 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 	}
 	d3_DestroyObject((D3_OBJECT*) (*(void**) ((char*) building + 0x61)));
 	if (*(int*) ((char*) building + 0x95) != -1) {
-		handle = fcn_00426cc0(*(int*) ((char*) building + 0x95));
+		handle = evt_FindScriptById(*(int*) ((char*) building + 0x95));
 		if (handle != 0) {
-			fcn_00428720((char*) handle);
+			evt_RequestScriptExit((char*) handle);
 		}
 		*(int*) ((char*) building + 0x95) = -1;
 	}
@@ -4152,7 +4152,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 #ifdef REBREW_SERVER
 	gm_CleanupBuildingEntity((uchar*) building);
 #else
-	fcn_00504130((uchar*) building);
+	gm_FreeGebaeude((uchar*) building);
 #endif
 
 	if (result != (char*) 0x0) {

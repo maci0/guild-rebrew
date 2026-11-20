@@ -5,7 +5,7 @@
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_slot_table[2];
 
-void __cdecl fcn_00546190(char* e);
+void __cdecl he_FreeAction(char* e);
 float __cdecl fcn_00507540(int idx, int* info);
 void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_00500bb0(void*, int, int, int);
@@ -50,6 +50,6 @@ void __cdecl fcn_0056fcb0(char* e)
 		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		fcn_00500bb0(e + 0x52, 0, 0x14, 0);
 	} else {
-		fcn_00546190(e);
+		he_FreeAction(e);
 	}
 }

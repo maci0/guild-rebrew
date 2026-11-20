@@ -34,7 +34,7 @@ extern char g_68da68[];
 
 
 /* ADDRESS: GOLDTL 0x004e8d10 */
-int __cdecl fcn_004e8d10(char* who, int n, Pick* picks)
+int __cdecl amt_SelectOfficeCandidates(char* who, int n, Pick* picks)
 {
 	float score;
 	int count;

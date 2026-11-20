@@ -9,7 +9,7 @@ void __cdecl io_AppendText(void* id, ...);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl fcn_005373e0(void* a, int b);
 void __cdecl fcn_0046f280(int w);
-int __cdecl fcn_0046b2b0(int id);
+int __cdecl d2_DestroyElement(int id);
 int __cdecl fcn_0050d5d0(int id, char* owner, char** out);
 int __cdecl fcn_0046f740(int a, int b, int c, int d);
 int __cdecl fcn_0046f100(int a, int b, int c, int d, int e, int f);
@@ -49,7 +49,7 @@ void __cdecl fcn_005a4960(char* owner, int id)
             for (i = 0; i < 9; i++) {
                 if (slot[i][0] != -1) {
                     fcn_0046f280(slot[i][0]);
-                    fcn_0046b2b0(slot[i][1]);
+                    d2_DestroyElement(slot[i][1]);
                     slot[i][0] = -1;
                     slot[i][1] = -1;
                     slot[i][2] = 0;

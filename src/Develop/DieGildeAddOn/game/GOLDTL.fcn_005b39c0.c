@@ -3,7 +3,7 @@ void __cdecl d2_SetElementFont(int i, int v);
 int __cdecl fcn_005373e0(void* fn, int line);
 int __cdecl io_AppendText(int fmt, ...);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
-int __cdecl fcn_005b0f00(void* win);
+int __cdecl d2_UpdateWindowDrag(void* win);
 void __cdecl fcn_0046f280(int);
 
 #include "Develop/Units/d2.v1/d2_window_view.h"
@@ -77,7 +77,7 @@ void __cdecl fcn_005b39c0(void)
 				base += 0x2f4;
 				save += 0x2a90;
 			} while ((int) base < 0x868c30);
-			fcn_005b0f00(&((D2_WIN*)g_1015f40)[idx]);
+			d2_UpdateWindowDrag(&((D2_WIN*)g_1015f40)[idx]);
 		} while (fcn_005373e0((void*) 0x5b39c0, 0x657c7) != 0);
 	}
 	fcn_0046f280(idx);

@@ -1,4 +1,4 @@
-void __cdecl fcn_00453ed0(float* a, float* b, float* output);
+void __cdecl d3_MultiplyAffineMatrices(float* a, float* b, float* output);
 
 /* Composes the object's matrix (+0x18c) with m and recurses up the parent
  * chain (+0x1f8). Unless flags is set, the +0x6c offset is added to the
@@ -27,9 +27,9 @@ void __cdecl fcn_00458cd0(char* o, int flags, float* m, float* out)
 			+ *(float*) (o + 0x80);
 	}
 	if (parent != 0) {
-		fcn_00453ed0(m, (float*) (o + 0x18c), t);
+		d3_MultiplyAffineMatrices(m, (float*) (o + 0x18c), t);
 		fcn_00458cd0(parent, flags, t, out);
 	} else {
-		fcn_00453ed0(m, (float*) (o + 0x18c), out);
+		d3_MultiplyAffineMatrices(m, (float*) (o + 0x18c), out);
 	}
 }

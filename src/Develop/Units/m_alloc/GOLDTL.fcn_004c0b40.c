@@ -14,7 +14,7 @@ struct snd_4c0b40 {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_004c24c0(float, int);
+void __cdecl msx_FadeMasterVolumeIfTrackActive(float, int);
 int __cdecl fcn_00423670(char**, int, int);
 int __cdecl fcn_00423460(char**);
 void __cdecl fcn_00426170(char**, int);
@@ -40,7 +40,7 @@ void __cdecl fcn_004c0b40(void)
 			if (cur->voice != 0 && cur->voice[1] != 0) {
 				one = 1;
 				if (strstr(cur->voice[1] + 4, "Fanfare") != 0 && g_772d2c == 0) {
-					fcn_004c24c0(0.0f, 0x7d0);
+					msx_FadeMasterVolumeIfTrackActive(0.0f, 0x7d0);
 					g_772d2c = one;
 				}
 				fcn_00423670((*(struct snd_4c0b40**)&g_772d34)->voice, 0, 0);
@@ -68,7 +68,7 @@ void __cdecl fcn_004c0b40(void)
 		fcn_00426170((*(struct snd_4c0b40**)&g_772d34)->voice, 0);
 		m_FreeTracked((*(struct snd_4c0b40**)&g_772d34));
 		(*(struct snd_4c0b40**)&g_772d34) = next;
-		fcn_004c24c0(1.0f, 0x7d0);
+		msx_FadeMasterVolumeIfTrackActive(1.0f, 0x7d0);
 		g_772d2c = 0;
 	}
 }

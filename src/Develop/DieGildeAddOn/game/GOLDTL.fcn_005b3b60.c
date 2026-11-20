@@ -30,7 +30,7 @@ int __cdecl fcn_00472250(int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c5980(void*);
-void __cdecl fcn_004e5a00(void*);
+void __cdecl cut_ExecuteCutscene(void*);
 void __cdecl fcn_00500bb0(void*, int, int, int);
 int __cdecl io_AppendText(char*);
 int __cdecl fcn_005373e0(int, int);
@@ -121,7 +121,7 @@ void __cdecl fcn_005b3b60(void)
 				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(int*) (m + 0x38) = *(int*) ((char*) g_7f4ca0 + g_774970 * 0x21c + 0x658);
-				fcn_004e5a00(m);
+				cut_ExecuteCutscene(m);
 			} else if (k == item[8]) {
 				*(char*) (m + 8) = 9;
 				*(char*) (m + 0x26) = 0x20;
@@ -129,7 +129,7 @@ void __cdecl fcn_005b3b60(void)
 				*(char*) (m + 0x30) = 1;
 				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
-				fcn_004e5a00(m);
+				cut_ExecuteCutscene(m);
 			} else if (k == item[4]) {
 				*(char*) (m + 8) = 8;
 				*(char*) (m + 0x30) = 1;
@@ -137,7 +137,7 @@ void __cdecl fcn_005b3b60(void)
 				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
-				fcn_004e5a00(m);
+				cut_ExecuteCutscene(m);
 				g_774954 = 0;
 			} else if (k == item[10]) {
 				memset(m, 0, sizeof(m));
@@ -149,7 +149,7 @@ void __cdecl fcn_005b3b60(void)
 				*(pos14_7f4c00*) &m[0x18] = *(pos14_7f4c00*) &gm_GameTime;
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
-				fcn_004e5a00(m);
+				cut_ExecuteCutscene(m);
 				g_774954 = 0;
 			} else if (k == item[6]) {
 				types[0] = 0xb;

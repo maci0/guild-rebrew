@@ -13,7 +13,7 @@ extern int g_7749d0;
 
 char *__cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0057de80(int);
-char *__cdecl fcn_00545fe0(Msg *);
+char *__cdecl he_CreateEventFromRequest(Msg *);
 char *__cdecl m_alloc(int, char *);
 
 int __cdecl fcn_004c9160(char *packet, char *reply)
@@ -43,7 +43,7 @@ int __cdecl fcn_004c9160(char *packet, char *reply)
 	if (m.type == 0x11 && fcn_0057de80(m.f58) != 0) {
 		return 0;
 	}
-	w = fcn_00545fe0(&m);
+	w = he_CreateEventFromRequest(&m);
 	if (w == 0) {
 		return 1;
 	}

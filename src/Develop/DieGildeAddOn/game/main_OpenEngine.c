@@ -36,7 +36,7 @@ extern int g_67a590;
 extern unsigned int g_67a0d8;
 
 void __cdecl txt_OpenText(char*, int);
-int __cdecl fcn_0042bd20(char*);
+int __cdecl txt_LoadTextFileDefinition(char*);
 #include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_004b2070(void);
 void __cdecl d2_ClearScreen(void);
@@ -44,7 +44,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_PositionWindow(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl io_AppendText(int, char*);
-void __cdecl fcn_00420db0(int, int);
+void __cdecl nt_ConnectTcp(int, int);
 void __cdecl fcn_004c3d50(void);
 void __cdecl fcn_00590650(void);
 void __cdecl fcn_00501040(char*);
@@ -60,7 +60,7 @@ void __cdecl fcn_004226b0(char*);
 int __cdecl sb_LoadSampleBank(char*, int);
 void __cdecl main_PreloadSound(char*);
 void __cdecl msx_InitDrivers(int, int, int);
-void __cdecl fcn_005e2590(void);
+void __cdecl msx_ApplyAudioSettings(void);
 void __cdecl fcn_00525eb0(void);
 void __cdecl fcn_00510900(void);
 void __cdecl ch_InitActionQueue(void);
@@ -81,7 +81,7 @@ void __cdecl ch_RegisterScriptCommands(void);
 void __cdecl evt_RegisterSoundCommands(void);
 void __cdecl fcn_0042a020(void);
 void __cdecl fcn_005e2510(void);
-int __cdecl fcn_005356e0(void);
+int __cdecl main_PumpWindowMessages(void);
 #include <windows.h>
 #include <stdlib.h>
 #include <string.h>
@@ -110,17 +110,17 @@ extern int __cdecl gm_RandomMod(int n);
 extern int __cdecl fcn_004fdec0(char* name);
 extern void __cdecl fcn_004b20d0(unsigned char v);
 extern void __cdecl main_LoadMessageFilterMask(char* ini);
-extern int __cdecl fcn_00538680(void** handle);
-extern int __cdecl fcn_00539090(HINSTANCE inst, int unused, int windowed);
-extern int __cdecl fcn_00538710(void);
-extern void __cdecl fcn_00544750(void);
+extern int __cdecl main_CheckExistingInstance(void** handle);
+extern int __cdecl main_CreateWindow(HINSTANCE inst, int unused, int windowed);
+extern int __cdecl main_InitRuntime(void);
+extern void __cdecl main_PlayIntroMovies(void);
 extern int __cdecl fcn_00538850(int topmost);
 extern int __cdecl main_OpenEngine(void);
 extern void __cdecl fcn_00538220(void);
 extern void __cdecl fcn_00538160(void);
-extern int __cdecl fcn_005356e0(void);
+extern int __cdecl main_PumpWindowMessages(void);
 extern void __cdecl main_Menue(void);
-extern void __cdecl fcn_0051dfe0(char* language);
+extern void __cdecl main_SetLanguageByName(char* language);
 extern Rec6* __cdecl fcn_00506d50(Rec6* dst, int idx);
 extern void __cdecl fcn_005438c0(int v);
 extern void __cdecl fcn_005386c0(void* p);
@@ -140,7 +140,7 @@ int __cdecl main_OpenEngine(void)
 		txt_OpenText(path, 0);
 	} else {
 		sprintf(path, "%s%s", g_6a3550, "die_gilde_add_on_text.def");
-		if (fcn_0042bd20(path) == 0) {
+		if (txt_LoadTextFileDefinition(path) == 0) {
 			ReportClientMessage("main_OpenEngine(): could not open txt-engine!");
 		}
 	}
@@ -152,7 +152,7 @@ int __cdecl main_OpenEngine(void)
 		((D2_WIN*)g_1015f40)[((Screen*)g_1038144)[screen].window].slot);
 	d2_PositionWindow(((Screen*)g_1038144)[screen].window, 1);
 	io_AppendText(0x73, g_7e25a0);
-	fcn_00420db0(0, 0);
+	nt_ConnectTcp(0, 0);
 	fcn_004c3d50();
 	fcn_00590650();
 	sprintf(path, "%sdata\\", g_6a3550);
@@ -186,7 +186,7 @@ int __cdecl main_OpenEngine(void)
 		sprintf(path, "%smsx\\", g_6a3550);
 		SetTrackPath(path);
 	}
-	fcn_005e2590();
+	msx_ApplyAudioSettings();
 	fcn_00525eb0();
 	fcn_00510900();
 	ch_InitActionQueue();
@@ -236,6 +236,6 @@ int __cdecl main_OpenEngine(void)
 	g_67a590 = (int) fcn_0042a020;
 	(*(int*)&g_67a0d8) = 0x400000;
 	fcn_005e2510();
-	fcn_005356e0();
+	main_PumpWindowMessages();
 	return 1;
 }

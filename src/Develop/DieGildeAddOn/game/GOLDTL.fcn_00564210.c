@@ -35,7 +35,7 @@ void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004c5fd0(int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00564210(char* e)
 {
@@ -80,11 +80,11 @@ void __cdecl fcn_00564210(char* e)
 			}
 			fcn_004c5fd0(*(int*) (t + 1));
 		}
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	case -2:
 	case -1:
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 }

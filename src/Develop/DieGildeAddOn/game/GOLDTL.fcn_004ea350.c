@@ -8,7 +8,7 @@ int __cdecl fcn_004e81a0(unsigned char);
 int __cdecl fcn_004e8240(unsigned char, char*, char*, int, int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_004c4510(char*, int);
-void __cdecl fcn_004c4570(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00535960(void);
 
@@ -38,7 +38,7 @@ void __cdecl fcn_004ea350(void)
 				int v;
 				v = 0;
 				fcn_004c4510(e, n);
-				fcn_004c4570(1, 1, 0x166, &v);
+				cm_AppendPacketFieldDelta(1, 1, 0x166, &v);
 				fcn_004c5360();
 			}
 		}
@@ -55,7 +55,7 @@ void __cdecl fcn_004ea350(void)
 		if (*(unsigned char*) p != 0) {
 			int v = 0;
 			fcn_004c4510(p - 0x168, *(int*) (p - 0x164));
-			fcn_004c4570(1, 1, 0x168, &v);
+			cm_AppendPacketFieldDelta(1, 1, 0x168, &v);
 			fcn_004c5360();
 		}
 	}

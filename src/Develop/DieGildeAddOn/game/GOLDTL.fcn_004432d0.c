@@ -3,7 +3,7 @@
 
 extern void __cdecl fcn_00443030(char*);
 extern void __cdecl fcn_00438b40(int, char*);
-extern void __cdecl fcn_00438cb0(int, char*);
+extern void __cdecl d3_SetObjectRotation(int, char*);
 extern void __cdecl fcn_00439c60(int);
 extern void __cdecl fcn_0045b290(int, int);
 extern int __cdecl fcn_0045b700(int, int, int);
@@ -174,7 +174,7 @@ char __cdecl fcn_004432d0(int contextIndex, char a1)
 	*(int*) 0x6b8484 = *(int*) (g_10432c0 + off + 0x88);
 	if (*(int*) 0x6b8484 != 0) {
 		fcn_00438b40(*(int*) 0x6b8484, g_10432c0 + off + 0x8c);
-		fcn_00438cb0(*(int*) 0x6b8484, g_10432c0 + off + 0x98);
+		d3_SetObjectRotation(*(int*) 0x6b8484, g_10432c0 + off + 0x98);
 		fcn_00439c60(*(int*) 0x6b8484);
 	}
 	if (a1 == 0) {

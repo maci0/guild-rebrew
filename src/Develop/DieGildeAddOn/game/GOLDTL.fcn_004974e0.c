@@ -9,7 +9,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_0050d320(char*, unsigned char);
 float __cdecl fcn_0050bb50(int, unsigned char);
 struct unit;
-struct unit* __cdecl fcn_005463a0(int, ...);
+struct unit* __cdecl he_StartHandlungSearch(int, ...);
 struct unit* __cdecl he_fn_Handlung(void);
 
 /* ADDRESS: GOLDTL 0x004974e0 */
@@ -53,7 +53,7 @@ int __cdecl fcn_004974e0(int unused, char* e, int unused2, char* out, char* out2
 	}
 	if (i >= limit->x21)
 		return 0;
-	ent = (unsigned short*) fcn_005463a0(2, 0, 0x1f, 3, *(int*) (r + 1));
+	ent = (unsigned short*) he_StartHandlungSearch(2, 0, 0x1f, 3, *(int*) (r + 1));
 	while (ent != 0) {
 		i++;
 		ent = (unsigned short*) he_fn_Handlung();

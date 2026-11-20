@@ -16,7 +16,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern int g_666018, g_66601c, d2_CurrentWindowId, g_774654; extern unsigned short g_774970;
 int __cdecl fcn_00433780();
 int __cdecl fcn_00438b40();
-int __cdecl fcn_00438cb0();
+int __cdecl d3_SetObjectRotation();
 int __cdecl CompareVector3WithinTolerance();
 int __cdecl fcn_00470820();
 int __cdecl d2_CenterDialogWindows();
@@ -27,7 +27,7 @@ int __cdecl d2_SetForm();
 int __cdecl d2_SetOverlayAnimation();
 int __cdecl fcn_00494470();
 int __cdecl fcn_004c4510();
-int __cdecl fcn_004c4570();
+int __cdecl cm_AppendPacketFieldDelta();
 int __cdecl fcn_004c5360();
 int __cdecl fcn_004c5530();
 int __cdecl fcn_00500bb0();
@@ -37,18 +37,18 @@ int __cdecl fcn_00503fe0();
 int __cdecl gm_LookupEntityRecordById();
 int __cdecl io_AppendText();
 int __cdecl io_FormatTextBuffer();
-int __cdecl fcn_0052d820();
+int __cdecl d3_AnimateCameraToStoredTransform();
 int __cdecl fcn_00530510();
 int __cdecl fcn_00532ef0();
 int __cdecl fcn_00533a60();
 int __cdecl fcn_005340f0();
 int __cdecl fcn_005373e0();
 int __cdecl he_fn_Handlung();
-int __cdecl fcn_005463a0();
+int __cdecl he_StartHandlungSearch();
 int __cdecl fcn_005cd440();
 
 /* ADDRESS: GOLDTL 0x005c18e0 */
-void __cdecl fcn_005c18e0(int a0,int a1)
+void __cdecl d2_ShowFestInvitation(int a0,int a1)
 {
   unsigned int *v1;
   int v10;
@@ -110,7 +110,7 @@ void __cdecl fcn_005c18e0(int a0,int a1)
   fcn_00500bb0(&timer,0x18,0,0);
   timer.b = 0x14;
   *(unsigned short*) &timer.c = 0;
-  v12 = fcn_005463a0(1,0,0x37);
+  v12 = he_StartHandlungSearch(1,0,0x37);
   v10 = a0;
   while ((v12 && (*(int *)(v12 + 0x10) != *(int *)(v10 + 1)))) {
     v12 = he_fn_Handlung();
@@ -203,7 +203,7 @@ label_5c221e:
         do {
           if ((*(int *)0x67d370) == v17[v18 & 0xff]) {
             fcn_004c4510(v12,*(unsigned int *)(v12 + 2));
-            fcn_004c4570(1,1,0x2c,&v18);
+            cm_AppendPacketFieldDelta(1,1,0x2c,&v18);
             fcn_004c5360();
             g_774654 = 1;
             v29 = v18 & 0xff;
@@ -247,7 +247,7 @@ label_5c221e:
             do {
               if ((*(int *)0x67d370) == v17[v18 & 0xff]) {
                 fcn_004c4510(v10,*(unsigned int *)(v10 + 2));
-                fcn_004c4570(1,1,0x2d,&v18);
+                cm_AppendPacketFieldDelta(1,1,0x2d,&v18);
                 fcn_004c5360();
                 g_774654 = 1;
                 v30 = v18 & 0xff;
@@ -264,7 +264,7 @@ label_5c221e:
       else {
         v19 = 5;
         fcn_004c4510(a1,*(unsigned int *)(a1 + 2));
-        fcn_004c4570(1,1,0x2d,&v19);
+        cm_AppendPacketFieldDelta(1,1,0x2d,&v19);
         fcn_004c5360();
         v12 = v27;
       }
@@ -363,7 +363,7 @@ label_5c221e:
                   v12 = v20[v8];
                   if (v12) {
                     fcn_004c4510(a1,*(unsigned int *)(a1 + 2));
-                    fcn_004c4570(4,1,v10 * 4 + 0x1c,(unsigned int *)(v12 + 4));
+                    cm_AppendPacketFieldDelta(4,1,v10 * 4 + 0x1c,(unsigned int *)(v12 + 4));
                     fcn_004c5360();
                     *(unsigned char*) (message + 4) = 0x36;
                     *(unsigned int*) (message + 8) = *(unsigned int *)(v12 + 4);
@@ -385,7 +385,7 @@ label_5c221e:
                 } while (v8 < 4);
                 while (v28 = v9, v36 = v12, v10 <= 3) {
                   fcn_004c4510(v4,*(unsigned int *)(v4 + 2));
-                  fcn_004c4570(4,1,v10 * 4 + 0x1c,&v27);
+                  cm_AppendPacketFieldDelta(4,1,v10 * 4 + 0x1c,&v27);
                   fcn_004c5360();
                   v10 += 1;
                   v9 = v28;

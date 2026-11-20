@@ -39,7 +39,7 @@ int __cdecl fcn_004e9310(int k, int max, unsigned char** out)
 
 	if (fcn_004e8b40(k, &a) == 0)
 		return 0;
-	n = fcn_004e8b80(a.id, MIN(max, 6), list);
+	n = amt_FindOfficeSlotsByKind(a.id, MIN(max, 6), list);
 	if (n == 0)
 		return 0;
 	n = MIN(n, max);

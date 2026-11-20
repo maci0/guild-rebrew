@@ -19,7 +19,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl fcn_00471af0(int, int);
 
-void __cdecl fcn_005458b0(void)
+void __cdecl d2_CreateEventBar(void)
 {
 	int i;
 

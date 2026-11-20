@@ -24,7 +24,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5530(struct msg*);
 void __cdecl fcn_004c6470(int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00564fc0(char* u)
 {
@@ -34,7 +34,7 @@ void __cdecl fcn_00564fc0(char* u)
 	switch (*(int*) (u + 0x70)) {
 	case -2:
 	case -1:
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	case 0:
 		(*(int*) (u + 0xb8))--;
@@ -51,7 +51,7 @@ void __cdecl fcn_00564fc0(char* u)
 				fcn_004c5530(&m);
 			}
 			fcn_004c6470(*(int*) (h + 4), *(unsigned char*) (h + 0x164) - 1);
-			fcn_00546190(u);
+			he_FreeAction(u);
 		}
 		break;
 	}

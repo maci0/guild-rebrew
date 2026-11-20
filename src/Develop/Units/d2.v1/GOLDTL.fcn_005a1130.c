@@ -19,7 +19,7 @@ int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_00532ef0();
 int __cdecl fcn_005340f0();
 int __cdecl fcn_005373e0();
-int __cdecl fcn_005a0960();
+int __cdecl d2_ShowWirtshausRules();
 int __cdecl fcn_005a0cd0();
 int __cdecl fcn_005a1130();
 int __cdecl fcn_005ca560();

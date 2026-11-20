@@ -26,7 +26,7 @@ extern float g_662cf8;
 extern float g_664e88;
 extern float g_6660d4;
 
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 float __cdecl fcn_004fef80(char*);
@@ -44,7 +44,7 @@ int __cdecl fcn_005ca560(Sel* s)
 	s->x1c = e[0xc] != 0 ? 0x6c9 : 0x6ca;
 	s->x20 = 0;
 	if (SND_TABLE[SND_INDEX * 540 + 9] != e[9] && (*(int*) (e + 0x1c8) & 0x800000)) {
-		for (p = fcn_005463a0(1, 0, 0x6f); p != 0; p = he_fn_Handlung()) {
+		for (p = he_StartHandlungSearch(1, 0, 0x6f); p != 0; p = he_fn_Handlung()) {
 			if (*(int*) (p + 0xac) == *(int*) (SND_TABLE + SND_INDEX * 540 + 4)
 			    && *(int*) (s->e + 4) == *(int*) (p + 0xb0)) {
 				s->x20 = 0x6cc;
@@ -56,7 +56,7 @@ int __cdecl fcn_005ca560(Sel* s)
 	if (CountMatchingStraftatEntries(*(int*) (s->e + 4), SND_INDEX) > 0) {
 		s->x24 = 0x6cd;
 	} else {
-		for (p = fcn_005463a0(1, 0, 0x18); p != 0; p = he_fn_Handlung()) {
+		for (p = he_StartHandlungSearch(1, 0, 0x18); p != 0; p = he_fn_Handlung()) {
 			if (*(unsigned short*) (p + 8) == SND_INDEX && *(int*) (s->e + 4) == *(int*) (p + 0xc4)) {
 				s->x24 = 0x6ce;
 				break;
@@ -64,7 +64,7 @@ int __cdecl fcn_005ca560(Sel* s)
 		}
 	}
 	s->x28 = 0;
-	for (p = fcn_005463a0(1, 0, 0x45); p != 0; p = he_fn_Handlung()) {
+	for (p = he_StartHandlungSearch(1, 0, 0x45); p != 0; p = he_fn_Handlung()) {
 		if (*(int*) (p + 0xac) == *(int*) (SND_TABLE + SND_INDEX * 540 + 4)
 		    && *(int*) (s->e + 4) == *(int*) (p + 0xb0)) {
 			s->x28 = 0x6cb;

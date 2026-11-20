@@ -4,7 +4,7 @@ int __cdecl gm_CheckEntityType(char*);
 char* __cdecl fcn_00500480(char*, int*, int*);
 char* __cdecl gm_FindRecordById(int);
 int __cdecl fcn_005155e0(char*);
-int __cdecl fcn_00515540(char*);
+int __cdecl init_EnsureObjektSceneContext(char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl sim_StartEntityQueryByType(char*);
 
@@ -51,7 +51,7 @@ int __cdecl fcn_00567170(char* h, int* out1, int* out2, int* out3)
 				return 1;
 			}
 			if (r != 0) {
-				*out3 = fcn_00515540(r);
+				*out3 = init_EnsureObjektSceneContext(r);
 				return 1;
 			}
 			*out3 = 0;
@@ -83,7 +83,7 @@ int __cdecl fcn_00567170(char* h, int* out1, int* out2, int* out3)
 			if (gm_CheckEntityType(t) != 0) {
 				*out3 = fcn_005155e0(t);
 			} else if (q != 0) {
-				*out3 = fcn_00515540(q);
+				*out3 = init_EnsureObjektSceneContext(q);
 			} else {
 				*out3 = -1;
 			}

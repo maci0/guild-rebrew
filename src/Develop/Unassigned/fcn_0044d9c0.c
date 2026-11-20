@@ -5,7 +5,7 @@ typedef struct {
 	int base;
 } Ctx_44d9c0;
 
-char* __cdecl fcn_004011a0(void* stream, char* text);
+char* __cdecl vfs_ReadCString(void* stream, char* text);
 char* __cdecl strchr(const char* s, int c);
 
 /* ADDRESS: GOLDTL 0x0044d9c0 */
@@ -17,7 +17,7 @@ void __cdecl fcn_0044d9c0(void* stream, Ctx_44d9c0* c)
 	char* d;
 	char ch;
 
-	fcn_004011a0(stream, buf);
+	vfs_ReadCString(stream, buf);
 	dot = strchr(buf, '.');
 	if (dot != 0) {
 		*dot = 0;

@@ -21,7 +21,7 @@ extern int g_6a4764;
 
 HE_ACTION* __cdecl he_fn_Handlung(void);
 
-HE_ACTION* __cdecl fcn_005463a0(int n, ...)
+HE_ACTION* __cdecl he_StartHandlungSearch(int n, ...)
 {
 	va_list ap;
 	int i;

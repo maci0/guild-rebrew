@@ -5,7 +5,7 @@ extern struct VFS_DIR* g_6b7fdc;
 extern char g_6a23b0[];
 
 void __cdecl fcn_00469e30(int);
-void __cdecl fcn_005e3d20(void);
+void __cdecl ls_CaptureSavePreview(void);
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 unsigned char* __cdecl m_alloc(int, char*);
 void __cdecl fcn_0041bb70(int, unsigned char*, unsigned char*, unsigned char*);
@@ -13,7 +13,7 @@ int __cdecl vfs_fwrite(void*, int, int, void*);
 void __cdecl m_FreeTracked(void*);
 #include "Develop/Units/vfs/vfs.h"
 
-void __cdecl fcn_005e3ed0(int previewModeArg, char* name)
+void __cdecl ls_WriteSavePreviewPixels(int previewModeArg, char* name)
 {
 	void* fh;
 	unsigned char* buf;
@@ -23,7 +23,7 @@ void __cdecl fcn_005e3ed0(int previewModeArg, char* name)
 
 	n = 0;
 	fcn_00469e30(previewModeArg);
-	fcn_005e3d20();
+	ls_CaptureSavePreview();
 	fh = vfs_Tfopen(name, g_6790b0, g_6b7fdc);
 	if (fh != 0) {
 		buf = m_alloc(0xe100, g_6a23b0);

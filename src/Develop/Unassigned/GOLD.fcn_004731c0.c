@@ -7,7 +7,7 @@ void __cdecl fcn_00472c70(void*, int*, int*);
 void __cdecl ReportClientMessage(const char*);
 
 /* ADDRESS: GOLD 0x004731c0 */
-int __cdecl fcn_004731c0(short x, short y, int image, int window)
+int __cdecl d2_AddElementToWindow(short x, short y, int image, int window)
 {
     GOLD_GUI_WINDOW* owner;
     int index;

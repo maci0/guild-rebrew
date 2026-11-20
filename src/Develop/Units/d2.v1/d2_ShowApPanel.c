@@ -8,7 +8,7 @@ int __cdecl fcn_005373e0(void *proc, int msg);
 void __cdecl fcn_00471e30(int obj);
 
 /* ADDRESS: GOLDTL 0x005c4dc0 */
-void __cdecl fcn_005c4dc0(void)
+void __cdecl d2_ShowApPanel(void)
 {
 	int dlg;
 	int i;
@@ -40,6 +40,6 @@ void __cdecl fcn_005c4dc0(void)
 				}
 			}
 		}
-	} while (fcn_005373e0((void *) fcn_005c4dc0, 0x657c7) != 0);
+	} while (fcn_005373e0((void *) d2_ShowApPanel, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 }

@@ -20,11 +20,11 @@ void __cdecl fcn_0052a0c0(char*, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int);
 void __cdecl fcn_00594340(void);
-void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
 void __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_004c35f0(void);
@@ -67,7 +67,7 @@ typedef struct {
 } Req_59ba40;
 
 /* ADDRESS: GOLDTL 0x0059ba40 */
-int __cdecl fcn_0059ba40(char* building)
+int __cdecl d2_RunProductionTradeDialog(char* building)
 {
 	Req_59ba40 req;
 	char buf[4];
@@ -104,7 +104,7 @@ int __cdecl fcn_0059ba40(char* building)
 	*(int*) (m + 0x10162ec) = 0xe;
 	*(int*) (m + 0x10162f0) = 0xe;
 	*(int*) (m + 0x10162f4) = 0xe;
-	fcn_00533dc0(k, 0x70b, 0x742);
+	d2_DrawPanelFrame(k, 0x70b, 0x742);
 	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
 	*(unsigned int*) (g_1015ea0 + 0x84 + item * 0x2f4) = 0x54;
 	do {
@@ -145,7 +145,7 @@ int __cdecl fcn_0059ba40(char* building)
 							} while ((int) p < 0x7e35d0);
 						} else {
 							fcn_004c35f0();
-							found = fcn_005463a0(2, 0, 3, 3, *(unsigned int*) (building + 1));
+							found = he_StartHandlungSearch(2, 0, 3, 3, *(unsigned int*) (building + 1));
 							while (found) {
 								if (*(unsigned short*) (found + 0xac) == *(unsigned int*) (0x779160 + k * 0x58))
 									goto located;
@@ -259,7 +259,7 @@ located:
 		fcn_00595330(h, 2, count, r, 1);
 		fcn_00595e20(building, r);
 		fcn_005963f0(h, 1, 0, building);
-	} while (fcn_005373e0((int) fcn_0059ba40, 0x677c7));
+	} while (fcn_005373e0((int) d2_RunProductionTradeDialog, 0x677c7));
 	fcn_00471e30(h);
 	fcn_0052a2d0();
 	return 0;

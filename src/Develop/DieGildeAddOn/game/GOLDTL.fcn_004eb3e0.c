@@ -23,7 +23,7 @@ typedef struct {
 int __cdecl fcn_00507080(int k);
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 void* __cdecl gm_FindNextFilteredEntity(void);
-void __cdecl fcn_00508cf0(int a1, int* a2);
+void __cdecl gm_GenerateShuffledIndices(int a1, int* a2);
 float __cdecl gm_GetEntitySkill(char* entity, int index);
 double __cdecl gm_RandomFloat01(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -117,7 +117,7 @@ found:
 	}
 	if (n == 0)
 		return 0;
-	fcn_00508cf0(n, pick);
+	gm_GenerateShuffledIndices(n, pick);
 	if (n != 1) {
 		secondId = (unsigned int) ids[pick[1]];
 		v20 = (unsigned int) ids[pick[0]];

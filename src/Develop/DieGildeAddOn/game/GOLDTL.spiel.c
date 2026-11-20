@@ -28,7 +28,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 /* Inferred execution-context role/name; original source-unit ownership unresolved. */
 extern char* evt_CurrentScript;
-extern void __cdecl fcn_00429670(unsigned char*);
+extern void __cdecl evt_RunGfxScript(unsigned char*);
 void __cdecl ProcessActiveContexts(void)
 {
 	int i;
@@ -37,7 +37,7 @@ void __cdecl ProcessActiveContexts(void)
 		e = ((unsigned char*)g_6b7e94) + i;
 		if (e[0x124] & 1) {
 			(*(unsigned char**)&evt_CurrentScript) = e;
-			fcn_00429670(e);
+			evt_RunGfxScript(e);
 		}
 	}
 	(*(unsigned char**)&evt_CurrentScript) = 0;

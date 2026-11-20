@@ -50,8 +50,8 @@ void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int 
 void __cdecl fcn_00479cc0(int a, int b, int c, int d, char* e);
 void __cdecl fcn_00467920(int a0, int a1);
 void __cdecl fcn_00468e40(int a0, int a1);
-void __cdecl fcn_00466550(int idx, int surf);
-void __cdecl fcn_0046dff0(int a0, int a1);
+void __cdecl d2_DrawField(int idx, int surf);
+void __cdecl d2_DrawWindow(int a0, int a1);
 void __cdecl fcn_00469320(int idx, int surf);
 void __cdecl d2_DrawAnimationSlot(int i, int tex);
 void __cdecl d2_GetElementResourceSize(int a, int* w, int* h);
@@ -289,10 +289,10 @@ label_46a7ab:
 			case 0x40:
 				if (*(int*) (ent + 0x24) <= 0)
 					break;
-				fcn_0046dff0(*(int*) (ent + 0x88), g_77250c);
+				d2_DrawWindow(*(int*) (ent + 0x88), g_77250c);
 				break;
 			case 0x41:
-				fcn_00466550(*(int*) (ent + 0x88), g_77250c);
+				d2_DrawField(*(int*) (ent + 0x88), g_77250c);
 				break;
 			case 0x43:
 				if (*(int*) (ent + 0x24) <= 0)

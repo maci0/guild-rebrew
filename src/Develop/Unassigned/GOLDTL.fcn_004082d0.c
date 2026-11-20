@@ -4,7 +4,7 @@
 char __cdecl d3_GridPointToWorld(int, int, int, float*);
 int __cdecl ch_WorldToGridCoordinates(int, float*, int, int);
 
-int __cdecl fcn_004082d0(int a1, int a2, int a3, int a4, int a5, int a6)
+int __cdecl ch_ConvertGridPointToCharacterGrid(int a1, int a2, int a3, int a4, int a5, int a6)
 {
 	float vector[4];
 

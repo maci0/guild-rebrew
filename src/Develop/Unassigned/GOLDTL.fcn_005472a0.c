@@ -25,14 +25,14 @@ struct msg {
 
 #include <string.h>
 
-char* __cdecl fcn_005463a0(int, int, int, ...);
+char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 void __cdecl fcn_004c5530(struct msg*);
 
 void __cdecl fcn_005472a0(void)
 {
 	struct msg m;
 
-	if (fcn_005463a0(1, 0, 0x86) == 0) {
+	if (he_StartHandlungSearch(1, 0, 0x86) == 0) {
 		memset(&m, 0, sizeof(m));
 		m.b4 = (char) 0x86;
 		m.f8 = *(int*) (gm_CityEntity + 4);
@@ -41,7 +41,7 @@ void __cdecl fcn_005472a0(void)
 		m.pos = gm_GameTime;
 		fcn_004c5530(&m);
 	}
-	if (fcn_005463a0(1, 0, 0xa2) == 0) {
+	if (he_StartHandlungSearch(1, 0, 0xa2) == 0) {
 		memset(&m, 0, sizeof(m));
 		m.b4 = (char) 0xa2;
 		m.f8 = *(int*) (gm_CityEntity + 4);

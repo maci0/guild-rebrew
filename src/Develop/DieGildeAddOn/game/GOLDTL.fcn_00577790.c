@@ -3,7 +3,7 @@ extern char g_6a7e90[];
 void* __cdecl gm_LookupEntityRecordById(int);
 void  __cdecl io_FormatTextBuffer(void*, int, ...);
 void  __cdecl fcn_00545d40(int, int, void*, int, int, void*);
-void  __cdecl fcn_00546190(void*);
+void  __cdecl he_FreeAction(void*);
 
 
 /* ADDRESS: GOLDTL 0x00577790 */
@@ -27,5 +27,5 @@ void __cdecl fcn_00577790(void* action)
 		fcn_00545d40(*(int*) ((char*) action + 0xb0), -1, buf, 1, 0x5fa, 0);
 	}
 done:
-	fcn_00546190(action);
+	he_FreeAction(action);
 }

@@ -13,7 +13,7 @@ char* __cdecl fcn_00557f70(char*);
 int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00452420(char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00557fe0(char* u)
 {
@@ -61,7 +61,7 @@ void __cdecl fcn_00557fe0(char* u)
 			fcn_004432d0(t, 1);
 		}
 kill:
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	}
 }

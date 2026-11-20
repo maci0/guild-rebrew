@@ -13,12 +13,12 @@ extern short g_7f4c0c;
 
 int __cdecl fcn_00502cd0(int a, int b, ...);
 int __cdecl fcn_00525fb0(void* obj);
-void* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
+void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 void* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int flag);
-void __cdecl fcn_00533dc0(int ctx, int a, int b);
+void __cdecl d2_DrawPanelFrame(int ctx, int a, int b);
 int __cdecl io_AppendText(int id, ...);
 void __cdecl fcn_0052a0c0(void* obj, int flag);
 void __cdecl fcn_00594340(void);
@@ -40,7 +40,7 @@ void __cdecl fcn_00526120(char* buf, int flag);
 void __cdecl fcn_00532ef0(void);
 
 /* ADDRESS: GOLDTL 0x0059e740 */
-void __cdecl fcn_0059e740(unsigned char* targetBuilding, unsigned char* a1)
+void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a1)
 {
 	int count;
 	int ids[7];
@@ -91,7 +91,7 @@ void __cdecl fcn_0059e740(unsigned char* targetBuilding, unsigned char* a1)
 	ids[3] = 0;
 	ids[4] = 0;
 	ids[5] = 0;
-	entity = fcn_005463a0(2, 0, 0x14, 3, *(int*) (targetBuilding + 1));
+	entity = he_StartHandlungSearch(2, 0, 0x14, 3, *(int*) (targetBuilding + 1));
 	while (entity != 0) {
 		for (i = 0; i < 3; i++) {
 			if (*(unsigned short*) ((char*) entity + 0xae) == ids[i]) {
@@ -104,7 +104,7 @@ void __cdecl fcn_0059e740(unsigned char* targetBuilding, unsigned char* a1)
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9750);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_00533dc0(d2_CurrentWindowId, 0x70f, 0x741);
+	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x17fe);
 	fcn_0052a0c0(targetBuilding, 0);
@@ -130,11 +130,11 @@ void __cdecl fcn_0059e740(unsigned char* targetBuilding, unsigned char* a1)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00595e20(targetBuilding, ids[6]);
 	fcn_005963f0(dlg, 1, 0, targetBuilding);
-	while (fcn_005373e0((void*) fcn_0059e740, 0x677c7) != 0) {
+	while (fcn_005373e0((void*) d2_ShowHandelSearch, 0x677c7) != 0) {
 		fcn_00595e20(targetBuilding, ids[6]);
 		fcn_005963f0(dlg, 1, 0, targetBuilding);
 		memset(ids + 3, 0, 3 * sizeof(int));
-		entity = fcn_005463a0(2, 0, 0x14, 3, *(int*) (targetBuilding + 1));
+		entity = he_StartHandlungSearch(2, 0, 0x14, 3, *(int*) (targetBuilding + 1));
 		while (entity != 0) {
 			for (i = 0; i < 3; i++) {
 				if (*(unsigned short*) ((char*) entity + 0xae) == ids[i]) {

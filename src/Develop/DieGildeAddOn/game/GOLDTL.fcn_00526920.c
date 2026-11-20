@@ -24,7 +24,7 @@ extern char g_1043690[];
 char* __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3);
 int __cdecl gm_CheckEntityType(void* p);
 int __cdecl fcn_00505340(void* p);
-int __cdecl fcn_00515540(void* p);
+int __cdecl init_EnsureObjektSceneContext(void* p);
 void __cdecl init_LoadObjektScene(unsigned short id);
 void __cdecl fcn_005356b0(void* p);
 
@@ -95,7 +95,7 @@ ready:
 				g_7746cc = cur;
 				g_7e2700 = 0;
 				g_774670 = 0;
-				n = fcn_00515540(cur);
+				n = init_EnsureObjektSceneContext(cur);
 				if (g_1043690[n * 988 + 5] != 0) {
 					init_LoadObjektScene(*(unsigned short*) g_7e2708);
 				}

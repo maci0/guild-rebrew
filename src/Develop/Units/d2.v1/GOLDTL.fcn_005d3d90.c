@@ -33,7 +33,7 @@ void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 int __cdecl fcn_0046fac0(int, int, char *, int);
 int __cdecl fcn_0046b520(char *, int);
 void __cdecl fcn_00500d60(int *, char *);
-int __cdecl fcn_005d36f0(Arg, int, int);
+int __cdecl d2_DrawHistoryGraph(Arg, int, int);
 void __cdecl io_FormatTextBuffer(char *, char *, ...);
 
 /* ADDRESS: GOLDTL 0x005d3d90 */
@@ -62,7 +62,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	h = *(int *) ((char *) &g_1015f50 + win * 0x3cc);
 	step = (w - 0x69) / 16;
 	if (flags & 1)
-		m = fcn_005d36f0(*(Arg *) &g, w - 1, h);
+		m = d2_DrawHistoryGraph(*(Arg *) &g, w - 1, h);
 	d2_PlotRadius = 1;
 	if (flags & 2)
 		fcn_005d3880(*(Arg *) &g, w - 1, h);

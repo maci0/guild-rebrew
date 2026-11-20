@@ -8,7 +8,7 @@ extern char g_6aafe4[];
 
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_005338d0(char*, int, int);
+int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl gm_CheckZunftPreismanipulation(char*);
 void __cdecl fcn_005aa480(int);
 
@@ -21,7 +21,7 @@ void __cdecl fcn_005aaed0(int a)
 	fcn_005338a0();
 	while (fcn_005373e0(fcn_005aaed0, 0x67fff) != 0) {
 		if (gm_CheckZunftPreismanipulation(g_7f4ca0 + g_774970 * 540) != 0) {
-			x = fcn_005338d0(g_6aafe4, g_14aac24, 0x16);
+			x = RegisterStatusText(g_6aafe4, g_14aac24, 0x16);
 		}
 		if (g_7746a0 != 0 && g_7746a0 == x) {
 			fcn_005aa480(a);

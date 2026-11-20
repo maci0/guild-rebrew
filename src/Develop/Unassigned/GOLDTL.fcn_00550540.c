@@ -1,7 +1,7 @@
 
 
 
-int __cdecl fcn_00546190(int*);
+int __cdecl he_FreeAction(int*);
 
 int __cdecl fcn_00550540(int* action)
 {
@@ -9,7 +9,7 @@ int __cdecl fcn_00550540(int* action)
 
 	v = *(int*) ((char*) action + 0x70);
 	if (v == -2 || v == 0) {
-		return fcn_00546190(action);
+		return he_FreeAction(action);
 	}
 	return v;
 }

@@ -9,7 +9,7 @@ char* __cdecl ch_FindCharacterByName(char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl ch_CreateAction(char*, int, int);
 
-int __cdecl fcn_004ca7c0(char* x, char* out)
+int __cdecl cm_ExCancelCharacterActions(char* x, char* out)
 {
 	char buf[0x80];
 	char* o;

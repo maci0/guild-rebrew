@@ -2,7 +2,7 @@ extern int g_67a370;
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
-char __cdecl fcn_00407e30(char*, float*, float*, int, int, int*, int*, int, int);
+char __cdecl ch_FindWalkableCell(char*, float*, float*, int, int, int*, int*, int, int);
 void __cdecl d3_GridPointToWorld(char*, int, int, float*);
 
 
@@ -30,7 +30,7 @@ int __cdecl fcn_004bc8a0(float* position, int n, float* out)
 			ny = *(int*) (g + 0x20) - 2;
 		if (ny < 2)
 			ny = 2;
-		if (fcn_00407e30(g, position, position, nx, ny, &nx, &ny, 0x258, 0) != 0)
+		if (ch_FindWalkableCell(g, position, position, nx, ny, &nx, &ny, 0x258, 0) != 0)
 			d3_GridPointToWorld(g, nx, ny, out + k * 4);
 		else
 			d3_GridPointToWorld(g, x, y, out + k * 4);

@@ -13,7 +13,7 @@ extern Named24 g_67a470[8];
 
 /* ADDRESS: GOLD 0x0043e710 */
 /* ADDRESS: GOLDTL 0x0043b550 */
-char* __cdecl fcn_0043b550(int eventId)
+char* __cdecl d3_FindEventName(int eventId)
 {
 	int i;
 	unsigned off;

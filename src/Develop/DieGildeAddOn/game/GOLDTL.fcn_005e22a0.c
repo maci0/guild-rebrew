@@ -52,13 +52,13 @@ void __cdecl fcn_00516de0(int, int);
 void __cdecl fcn_004432d0(int, int);
 #include "client_scene_loader.h"
 void __cdecl ch_SetLowPolyMode(unsigned char);
-void __cdecl fcn_0052ac60(int);
+void __cdecl d3_SetCameraHeightFraction(int);
 void __cdecl fcn_0043bbf0(unsigned char);
 void __cdecl fcn_00598510(void);
 void __cdecl fcn_0043ace0(int);
 void __cdecl fcn_0041b820(float*, float*, float*);
 
-void __cdecl fcn_005e22a0(void)
+void __cdecl d3_ApplyGraphicsOptions(void)
 {
 	unsigned char hi;
 	float c[3];
@@ -112,7 +112,7 @@ void __cdecl fcn_005e22a0(void)
 	(*(Pair*)&g_6a2558) = g_6a2528[g_776669];
 	(*(Pair*)&g_6a2560) = g_6a2540[g_776669];
 	if ((*(unsigned char*)&g_774964)) {
-		fcn_0052ac60((*(int*)&g_774694));
+		d3_SetCameraHeightFraction((*(int*)&g_774694));
 	}
 	if (g_6b8304 != g_776668) {
 		fcn_0043bbf0(g_776668);

@@ -8,7 +8,7 @@ void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
 
-void __cdecl fcn_005612e0(char* e)
+void __cdecl he_ScheduleSabotage(char* e)
 {
 	char* t;
 

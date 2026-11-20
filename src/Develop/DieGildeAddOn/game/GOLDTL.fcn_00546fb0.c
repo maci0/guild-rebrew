@@ -5,7 +5,7 @@
 
 extern HE_AP_EVENT g_7dcae0[256];
 
-int __cdecl fcn_00546fb0(int k)
+int __cdecl he_SumEventValuesForSubject(int k)
 {
 	int sum;
 	int i;

@@ -1,5 +1,5 @@
 char __cdecl fcn_00438b40(char*, float*);
-char __cdecl fcn_00438cb0(char*, float*);
+char __cdecl d3_SetObjectRotation(char*, float*);
 
 /* ADDRESS: GOLDTL 0x00445aa0 */
 char __cdecl fcn_00445aa0(char* interpObj, unsigned int keyIndex, float keyFraction)
@@ -60,6 +60,6 @@ L:
 		*(float*) ((char*) newRotation + i) = (*(float*) (nextFrame + 0xc + i) - *(float*) (firstFrame + 0xc + i)) * t + *(float*) (firstFrame + 0xc + i);
 	}
 	fcn_00438b40(interpObj, newPosition);
-	fcn_00438cb0(interpObj, newRotation);
+	d3_SetObjectRotation(interpObj, newRotation);
 	return 1;
 }

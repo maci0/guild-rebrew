@@ -23,7 +23,7 @@ typedef struct {
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005ca560(Item5cbb* s);
@@ -46,7 +46,7 @@ int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, i
 	mindays = 200;
 	result = 0;
 	if (max == 0) {
-		for (t = fcn_005463a0(1, 0, 0x2c); t != 0; t = he_fn_Handlung()) {
+		for (t = he_StartHandlungSearch(1, 0, 0x2c); t != 0; t = he_fn_Handlung()) {
 			found = 0;
 			if ((p = gm_LookupEntityRecordById(*(int*) (t + 0xac))) == 0) {
 				continue;
@@ -91,7 +91,7 @@ int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, i
 		}
 		return result;
 	}
-	for (t = fcn_005463a0(1, 0, 0x2c); t != 0; t = he_fn_Handlung()) {
+	for (t = he_StartHandlungSearch(1, 0, 0x2c); t != 0; t = he_fn_Handlung()) {
 		found = 0;
 		if (*(int*) (t + 0xc5) - (*(GAME_TIMESTAMP*)&gm_GameTime).unit_0 > mindays) {
 			continue;

@@ -12,7 +12,7 @@ int __cdecl fcn_0050b750(int, int);
 int __cdecl fcn_00526010(void*, int, int);
 void __cdecl fcn_004c5150(int, int, int, int);
 void __cdecl fcn_004c4510(void*, int);
-int __cdecl fcn_004c4570(unsigned char, unsigned char, unsigned short, char*);
+int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
@@ -24,7 +24,7 @@ extern int g_14ce8e0, d2_CurrentElementId, g_774654;
 #define SHP_ID (*(unsigned short*) SHP_REC)
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005d2470 */
-int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
+int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 {
 	int v14 = -1;
 	float v4;
@@ -107,7 +107,7 @@ int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 				    *(int*) ((char*) arg2 + 4),
 				    *(unsigned char*) &g_773d75, uv);
 				fcn_004c4510(arg2, *(int*) ((char*) arg2 + 4));
-				fcn_004c4570(4, 1, 0x1c8, (char*) &flags);
+				cm_AppendPacketFieldDelta(4, 1, 0x1c8, (char*) &flags);
 				fcn_004c5360();
 				fcn_004c4ef0((char*) 0x6acba4);
 			}
@@ -116,7 +116,7 @@ int __cdecl fcn_005d2470(int* arg2, unsigned short* arg3)
 		} else if (d2_CurrentElementId == vc) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005d2470, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_ShowGiftDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

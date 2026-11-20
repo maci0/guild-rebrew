@@ -67,7 +67,7 @@ void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004b3e10(int, int, int);
 
-void __cdecl fcn_005435e0(void)
+void __cdecl gm_CreateSetupFamily(void)
 {
 	Figure* p;
 	Figure* spouse;

@@ -44,18 +44,18 @@ extern char* evt_CurrentScript;
 extern char* g_6b7eb8;
 extern char g_14cb440[];
 
-int __cdecl fcn_00428800(char* pEnd);
+int __cdecl evt_EvaluateExpression(char* pEnd);
 char* __cdecl fcn_00426620(char* s, int unused, char* end);
-void __cdecl fcn_00426680(char* s, struct tok_428800* t);
+void __cdecl evt_ReadToken(char* s, struct tok_428800* t);
 int __cdecl evt_ExecuteCommand(void* cmd);
 void __cdecl evt_LogScriptError(char* g, int pos, const char* msg);
-void __cdecl fcn_00428720(char* g);
+void __cdecl evt_RequestScriptExit(char* g);
 
 
 /* Evaluates one script expression from the lexer position, stopping at the
  * expression end ("," , ";" or the pEnd bound) or at a ")" / "]" token. */
 /* ADDRESS: GOLDTL 0x00428800 */
-int __cdecl fcn_00428800(char* pEnd)
+int __cdecl evt_EvaluateExpression(char* pEnd)
 {
 	struct tok_428800 t;
 	char msg[0x200];
@@ -84,16 +84,16 @@ int __cdecl fcn_00428800(char* pEnd)
 			if (pEnd != 0) {
 				p = fcn_00426620(*(char**) (evt_CurrentScript + 0x118), 0x679680, pEnd);
 				if (p != 0 && p < pEnd) {
-					value = n = fcn_00428800(p);
+					value = n = evt_EvaluateExpression(p);
 				}
 			} else {
 				p = fcn_00426620(*(char**) (evt_CurrentScript + 0x118), 0x679680,
 						*(char**) (evt_CurrentScript + 0x11c) + *(int*) (evt_CurrentScript + 0x120));
 				if (p != 0) {
-					value = n = fcn_00428800(p);
+					value = n = evt_EvaluateExpression(p);
 				}
 			}
-			fcn_00426680(*(char**) (evt_CurrentScript + 0x118), &t);
+			evt_ReadToken(*(char**) (evt_CurrentScript + 0x118), &t);
 			level = 0;
 			if (t.type == 1) {
 				*(char**) &g_6b7eb8 = 0;
@@ -106,9 +106,9 @@ int __cdecl fcn_00428800(char* pEnd)
 				int pos = (int) *(char**) (evt_CurrentScript + 0x118);
 				int index;
 
-				fcn_00426680(*(char**) (evt_CurrentScript + 0x118), &t);
+				evt_ReadToken(*(char**) (evt_CurrentScript + 0x118), &t);
 				if (t.type == 1 && t.u.num == 0x1b) {
-					index = fcn_00428800(0);
+					index = evt_EvaluateExpression(0);
 				} else {
 					*(int*) (evt_CurrentScript + 0x118) = pos;
 					index = 0;
@@ -116,7 +116,7 @@ int __cdecl fcn_00428800(char* pEnd)
 				if (index > sym->count - 1 || index < 0) {
 					sprintf(msg, "Array index out of bounce: '%s'", (char*) sym + 4);
 					evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), msg);
-					fcn_00428720(evt_CurrentScript);
+					evt_RequestScriptExit(evt_CurrentScript);
 					return 0;
 				}
 				switch (sym->kind) {
@@ -142,7 +142,7 @@ int __cdecl fcn_00428800(char* pEnd)
 			} else if (t.type == 0) {
 				sprintf(msg, "Unknown symbol: '%s'", t.u.text);
 				evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), msg);
-				fcn_00428720(evt_CurrentScript);
+				evt_RequestScriptExit(evt_CurrentScript);
 				return 0;
 			} else if (t.type == 0xb) {
 				*(char**) &g_6b7eb8 = (char*) t.u.num;
@@ -152,27 +152,27 @@ int __cdecl fcn_00428800(char* pEnd)
 			}
 			switch (level) {
 			case 1:
-				return value == fcn_00428800(pEnd);
+				return value == evt_EvaluateExpression(pEnd);
 			case 7:
-				return value != fcn_00428800(pEnd);
+				return value != evt_EvaluateExpression(pEnd);
 			case 0xc:
-				n = fcn_00428800(pEnd);
+				n = evt_EvaluateExpression(pEnd);
 				break;
 			case 0xd:
 			case 0x1c:
 				return value;
 			case 0x10:
-				return value <= fcn_00428800(pEnd);
+				return value <= evt_EvaluateExpression(pEnd);
 			case 0x11:
-				return value < fcn_00428800(pEnd);
+				return value < evt_EvaluateExpression(pEnd);
 			case 0x12:
-				return value >= fcn_00428800(pEnd);
+				return value >= evt_EvaluateExpression(pEnd);
 			case 0x13:
-				return value > fcn_00428800(pEnd);
+				return value > evt_EvaluateExpression(pEnd);
 			case 0x16:
-				return fcn_00428800(pEnd) | value;
+				return evt_EvaluateExpression(pEnd) | value;
 			case 0x17:
-				return fcn_00428800(pEnd) & value;
+				return evt_EvaluateExpression(pEnd) & value;
 			}
 			switch (op) {
 			case 2:

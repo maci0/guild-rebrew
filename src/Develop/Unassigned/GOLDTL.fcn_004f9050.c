@@ -5,7 +5,7 @@
 
 extern char g_679060[];
 
-int __cdecl fcn_004fa5f0(void*, int, int);
+int __cdecl d2_ShowPrivilegMessage(void*, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, short);
 
 int __cdecl fcn_004f9050(unsigned char* entity, int* request)
@@ -21,7 +21,7 @@ int __cdecl fcn_004f9050(unsigned char* entity, int* request)
 	if (*request == 3 && entity[2] == 6) {
 		memset(buf, 0, sizeof(buf));
 		io_FormatTextBuffer(buf, 0x1dc5, *(short*) entity);
-		fcn_004fa5f0(buf, 2, 0x657c7);
+		d2_ShowPrivilegMessage(buf, 2, 0x657c7);
 		return 2;
 	}
 	if (*request == 1 && entity[2] == 6) {

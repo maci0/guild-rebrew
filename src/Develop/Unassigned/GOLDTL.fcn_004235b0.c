@@ -8,7 +8,7 @@ typedef Voice_14cbbe0 Voice;
 extern int g_6b7d7c;
 extern Voice_14cbbe0 g_14cbbe0;
 Voice* __cdecl fcn_004229b0(void);
-char* __cdecl fcn_00422530(char* bank, const char* name);
+char* __cdecl sb_FindSampleByName(char* bank, const char* name);
 char* __cdecl sb_FindSampleBank(char* sample);
 void __cdecl sb_LoadEntry(char* bank, char* sample);
 int __cdecl fcn_00423670(Voice* v, int a, int b);
@@ -23,7 +23,7 @@ Voice* __cdecl fcn_004235b0(char* bank, const char* name, int prio, int loop, in
 	}
 	v = fcn_004229b0();
 	if (v != 0) {
-		s = fcn_00422530(bank, name);
+		s = sb_FindSampleByName(bank, name);
 		v->sample = s;
 		if (s != 0 && bank == 0) {
 			bank = sb_FindSampleBank(s);

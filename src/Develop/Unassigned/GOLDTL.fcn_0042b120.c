@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_0042b120(int a1)
+int __cdecl msx_FindWaveDriverIndex(int a1)
 {
 	int i;
 

@@ -17,7 +17,7 @@ char* __cdecl m_alloc(char*, char*);
 int __cdecl sbs_UpdateSampleSizes(char*);
 
 /* ADDRESS: GOLDTL 0x004248a0 */
-int __cdecl fcn_004248a0(char* name)
+int __cdecl sbs_Compile(char* name)
 {
 	char buf[0x100];
 	char* p;

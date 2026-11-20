@@ -17,16 +17,16 @@ extern char s_699760[];
 extern char s_699770[];
 extern char s_699784[];
 
-extern char* __cdecl fcn_00523710(void*);
+extern char* __cdecl ls_ReadCharacterRecord(void*);
 extern char* __cdecl gm_LookupEntityRecordById(int);
 extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
-extern int __cdecl fcn_0051ad90(int);
+extern int __cdecl ch_GetQueueEntryByIndex(int);
 extern int __cdecl fcn_004fda30(int);
 extern int __cdecl vfs_ResolvePath(char*, void*, void*, char*);
 extern int __cdecl ch_CreateMesh(void*, char*, void*);
-extern void __cdecl fcn_00407800(void*, int, void*);
+extern void __cdecl ch_SetBodyAttachment(void*, int, void*);
 extern void __cdecl ch_StartLoopingAnimation(void*, void*);
-extern void __cdecl fcn_00438cb0(void*, void*);
+extern void __cdecl d3_SetObjectRotation(void*, void*);
 extern void __cdecl fcn_004ce9e0(void*);
 extern void __cdecl fcn_00510820(void*, void*, int);
 extern char* __cdecl fcn_00442910(int, void*, void*, char*);
@@ -37,7 +37,7 @@ extern void __cdecl ch_SetVisible(void*, int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 extern int __cdecl fcn_004432d0(int, int);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-extern int __cdecl fcn_00515540(char*);
+extern int __cdecl init_EnsureObjektSceneContext(char*);
 extern int __cdecl fcn_005155e0(char*);
 
 
@@ -78,7 +78,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 	i = 0;
 	if (count > 0) {
 		do {
-			e = fcn_00523710((void*) stream);
+			e = ls_ReadCharacterRecord((void*) stream);
 			*(char**) (e + 0x12c) = gm_LookupEntityRecordById((int) *(char**) (e + 0x12c));
 			i++;
 		} while (i < count);
@@ -89,7 +89,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 	i = 0;
 	if (count > 0) {
 		do {
-			e = fcn_00523710((void*) stream);
+			e = ls_ReadCharacterRecord((void*) stream);
 			*(unsigned short**) (e + 0x12c) =
 				fcn_00502cd0(0, 2, 7, 1, *(unsigned int*) (e + 0x12c));
 			i++;
@@ -105,7 +105,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 				alloc = fcn_00502cd0((int) *(unsigned int*) ((char*) found + 0x5d),
 						     2, 6, 1, *(unsigned int*) (rec + 0x30));
 				if (alloc != 0 && *(short*) alloc != 0xfd) {
-					v = fcn_00515540((char*) alloc);
+					v = init_EnsureObjektSceneContext((char*) alloc);
 				} else {
 					v = fcn_005155e0((char*) found);
 				}
@@ -140,7 +140,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 			}
 			if (*(int*) (rec + 0x34) != 0) {
 				if (*(char*) (rec + 0x1a8) != 0) {
-					fcn_00407800(rec, 2, rec + 0x1a8);
+					ch_SetBodyAttachment(rec, 2, rec + 0x1a8);
 				}
 				if (*(char*) (rec + 0x1e8) != 0) {
 					p = strchr(rec + 0x1e8, '_');
@@ -153,7 +153,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 				if (u != 0) {
 					target = (char*) *(int*) (rec + 0x34);
 					if ((unsigned int) u >= 0x7f4ca0 && (unsigned int) u < 0x85a0a0) {
-						fcn_00438cb0(target, rec + 0x48);
+						d3_SetObjectRotation(target, rec + 0x48);
 						sprintf(target, s_68b0d8, u[1]);
 						*(unsigned int*) (target + 0x204) = (unsigned int) u;
 						*(unsigned int*) (target + 0x48) = (unsigned int) *(unsigned short*) u | 0x3000000;
@@ -265,9 +265,9 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 		if (v == 0) {
 			goto clear_record;
 		}
-		v = fcn_0051ad90((int) u[9]);
+		v = ch_GetQueueEntryByIndex((int) u[9]);
 		u[9] = v;
-		u[10] = fcn_0051ad90((int) u[10]);
+		u[10] = ch_GetQueueEntryByIndex((int) u[10]);
 		u[3] = 0;
 		*u = *(unsigned int*) ((char*) 0x14d0c40 + (unsigned int) type * 0x4c);
 		if (v == 0) {
@@ -287,7 +287,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 				alloc = fcn_00502cd0((int) *(unsigned int*) (e + 0x5d),
 						     2, 6, 1, u[0xe]);
 				if (alloc != 0 && *(short*) alloc != 0xfd) {
-					v = fcn_00515540((char*) alloc);
+					v = init_EnsureObjektSceneContext((char*) alloc);
 				} else {
 					v = fcn_005155e0(e);
 				}

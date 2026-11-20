@@ -4,7 +4,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 struct unit;
 
-struct unit* __cdecl fcn_005463a0(int n, ...);
+struct unit* __cdecl he_StartHandlungSearch(int n, ...);
 int __cdecl gm_RandomMod(unsigned short n);
 unsigned char* __cdecl fcn_004f43b0(char* e, unsigned char lim);
 int __cdecl fcn_004f1790(char* a, void* e);
@@ -31,7 +31,7 @@ void __cdecl fcn_004831f0(char* obj)
 		return;
 	}
 	*(int*) (obj + 0x1b4) |= 0x800;
-	if (fcn_005463a0(2, 0, 0x8d, 3, *(int*) ((char*) *(int*) (obj + 0x16c) + 1)) != 0) {
+	if (he_StartHandlungSearch(2, 0, 0x8d, 3, *(int*) ((char*) *(int*) (obj + 0x16c) + 1)) != 0) {
 		return;
 	}
 	e = (char*) fcn_004f43b0((char*) *(int*) (obj + 0x16c),

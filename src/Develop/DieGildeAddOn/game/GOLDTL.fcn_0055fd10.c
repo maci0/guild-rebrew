@@ -27,7 +27,7 @@ char* __cdecl fcn_0050dc90(unsigned char*);
 char* __cdecl fcn_005049a0(unsigned char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x0055fd10 */
 void __cdecl fcn_0055fd10(char* u)
@@ -106,12 +106,12 @@ void __cdecl fcn_0055fd10(char* u)
 		} else {
 			he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, msg, *(int*) (p + 1), -1, 0, 0);
 		}
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	case -2:
 	case -1:
 	kill:
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	}
 }

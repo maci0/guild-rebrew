@@ -7,7 +7,7 @@ struct frame_4311a0 {
 // SIZE 0xc0
 
 void __cdecl fcn_00438b40(char* node, float* v);
-void __cdecl fcn_00438cb0(char* node, float* v);
+void __cdecl d3_SetObjectRotation(char* node, float* v);
 
 #define FRAMES_4311A0(an) (*(struct frame_4311a0**) (*(char**) ((an) + 0x68) + 0x15c))
 
@@ -37,6 +37,6 @@ void __cdecl fcn_004311a0(char* node, char* an, int from, int to, int flags)
 		d[0] += *(float*) (node + 0x84);
 		d[1] += *(float*) (node + 0x88);
 		d[2] += *(float*) (node + 0x8c);
-		fcn_00438cb0(node, d);
+		d3_SetObjectRotation(node, d);
 	}
 }

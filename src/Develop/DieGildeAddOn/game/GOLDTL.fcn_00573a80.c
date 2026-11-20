@@ -13,7 +13,7 @@ char* __cdecl fcn_004c4480(int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_00510820(int, char*, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00573a80(char* u)
 {
@@ -50,7 +50,7 @@ void __cdecl fcn_00573a80(char* u)
 			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 			if (*(int*) (u + 0xc4) > *(int*) (u + 0xc0)) {
 				fcn_00510820(*(int*) (x + 0x18), x, 1);
-				fcn_00546190(u);
+				he_FreeAction(u);
 				break;
 			}
 		} while (fcn_00500cb0((pos14_7f4c00*) (u + 0x52), &gm_GameTime) < 0);
@@ -58,7 +58,7 @@ void __cdecl fcn_00573a80(char* u)
 	case -2:
 	case -1:
 kill:
-		fcn_00546190(u);
+		he_FreeAction(u);
 		break;
 	}
 }

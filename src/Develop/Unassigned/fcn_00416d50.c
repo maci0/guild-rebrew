@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-void __cdecl fcn_004518a0(float *v);
+void __cdecl d3_NormalizeVector(float *v);
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
@@ -56,7 +56,7 @@ char __cdecl fcn_00416d50(unsigned char *P, int pos)
                 normal[0] = vx;
                 normal[1] = vy;
                 normal[2] = vz;
-                fcn_004518a0(normal);
+                d3_NormalizeVector(normal);
                 if (normal[1] < 0.0f)
                     *(unsigned char *)(E + 0x51) &= ~1u;
                 else {

@@ -9,7 +9,7 @@ char* __cdecl m_alloc(int size, char* tag);
 char* __cdecl strncpy(char* dst, const char* src, unsigned int n);
 
 /* ADDRESS: GOLDTL 0x00423e10 */
-int __cdecl fcn_00423e10(char* s)
+int __cdecl sbs_CreateSet(char* s)
 {
 	char* list;
 	char* buf;

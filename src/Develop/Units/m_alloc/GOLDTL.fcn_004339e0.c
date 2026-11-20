@@ -9,7 +9,7 @@ void __cdecl fcn_004337c0(void* a0);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x004339e0 */
-int* __cdecl fcn_004339e0(char* a0, D3_ANIMATION_OPTIONS flags, int frameCount, void* srcFrames)
+int* __cdecl d3_CreateObjectAnimation(char* a0, D3_ANIMATION_OPTIONS flags, int frameCount, void* srcFrames)
 {
 	int* animation;
 	int* v3;

@@ -62,7 +62,7 @@ int __cdecl cm_RequestSendCutInfo(int, int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004e4fc0(unsigned char*);
-void __cdecl fcn_004e5140(unsigned char*);
+void __cdecl d2_AppendPendingPlayerNames(unsigned char*);
 int __cdecl fcn_005373e0(int, int);
 int __cdecl fcn_004e51a0(unsigned char*, int);
 void __cdecl fcn_004e6c60(int);
@@ -153,7 +153,7 @@ label_4e526f:
 						while (fcn_004c4450(h) == 0) {
 							fcn_00535960();
 						}
-						fcn_004e5140(s);
+						d2_AppendPendingPlayerNames(s);
 						fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
 					}
 					rec++;
@@ -178,7 +178,7 @@ label_4e526f:
 				}
 			}
 			while (fcn_004e4fc0(s) == 0) {
-				fcn_004e5140(s);
+				d2_AppendPendingPlayerNames(s);
 				fcn_00533a40(g_14ac5ec);
 				fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
 			}
@@ -195,7 +195,7 @@ label_4e526f:
 				}
 			}
 			while (fcn_004e4fc0(s) == 0) {
-				fcn_004e5140(s);
+				d2_AppendPendingPlayerNames(s);
 				fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
 				if (pos != -1
 						&& (pos == 0 || ((rec35c*) g_9b0e20)[found].f8 == 1)
@@ -203,7 +203,7 @@ label_4e526f:
 					g_772f28 = pos;
 					c1 = ((rec35c*) g_9b0e20)[pos];
 					g_772f24 = gm_LookupEntityRecordById(*(int*) (s + 0x34 + pos * 4));
-					fcn_004e5140(s);
+					d2_AppendPendingPlayerNames(s);
 					cut_ClockDeadline = g_68bfbc + cut_CurrentTick;
 					cut_ClockExpired = 0;
 					((cmd_entry*) g_9b0844)[s[8]].f0(&c1, id);
@@ -214,7 +214,7 @@ label_4e526f:
 					while (fcn_004c4450(h) == 0) {
 						fcn_00535960();
 					}
-					fcn_004e5140(s);
+					d2_AppendPendingPlayerNames(s);
 					fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
 				}
 				if (*(int*) (s + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
@@ -243,7 +243,7 @@ label_4e526f:
 					}
 				}
 			}
-			fcn_004e5140(s);
+			d2_AppendPendingPlayerNames(s);
 			fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
 		}
 	}

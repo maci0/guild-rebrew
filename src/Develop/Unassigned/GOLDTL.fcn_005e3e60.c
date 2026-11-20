@@ -5,7 +5,7 @@
 int __cdecl fcn_00475fd0(char*);
 void __cdecl d2_UnlockSurface(char*);
 
-void __cdecl fcn_005e3e60(int x0, int y0, char* surf)
+void __cdecl ls_DrawSavePreview(int x0, int y0, char* surf)
 {
 	int n;
 	int x;

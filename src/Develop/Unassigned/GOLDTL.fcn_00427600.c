@@ -11,9 +11,9 @@ typedef struct {
 
 extern char* evt_CurrentScript;
 
-void __cdecl fcn_00426680(int lex, tok_427600* t);
+void __cdecl evt_ReadToken(int lex, tok_427600* t);
 void __cdecl evt_LogScriptError(char* script, unsigned int position, const char* message);
-void __cdecl fcn_00428720(char* c);
+void __cdecl evt_RequestScriptExit(char* c);
 
 /* ADDRESS: GOLDTL 0x00427600 */
 int __cdecl fcn_00427600(char* g, int arg)
@@ -26,23 +26,23 @@ int __cdecl fcn_00427600(char* g, int arg)
 	e[0x24] = 0;
 	memset(&t, 0, sizeof(t));
 	for (;;) {
-		fcn_00426680(*(int*) (evt_CurrentScript + 0x118), &t);
+		evt_ReadToken(*(int*) (evt_CurrentScript + 0x118), &t);
 		if (t.type == 8 && ((t.u.num >= 1 && t.u.num <= 2) || t.u.num == 6)) {
 			*(int*) (e + 0x28 + e[0x24] * 4) = t.u.num;
-			fcn_00426680(*(int*) (evt_CurrentScript + 0x118), &t);
+			evt_ReadToken(*(int*) (evt_CurrentScript + 0x118), &t);
 			if (t.type != 0) {
 				if (t.type == 2)
 					evt_LogScriptError(g, *(int*) (g + 0x118), (char*) 0x679460);
 				else
 					evt_LogScriptError(g, *(int*) (g + 0x118), (char*) 0x67944c);
-				fcn_00428720(g);
+				evt_RequestScriptExit(g);
 				return 0;
 			}
 			d = e + 0x48 + e[0x24] * 0x20;
 			strcpy(d, t.u.text);
 			e[0x24]++;
 		}
-		fcn_00426680(*(int*) (evt_CurrentScript + 0x118), &t);
+		evt_ReadToken(*(int*) (evt_CurrentScript + 0x118), &t);
 		if (t.type == 1 && t.u.num == 0xd) {
 			break;
 		}

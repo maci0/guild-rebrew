@@ -21,7 +21,7 @@ void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl fcn_005cd440(Query*, char*, int, void*);
-int __cdecl fcn_005d6ea0(unsigned short*);
+int __cdecl d2_ShowBecircenDialog(unsigned short*);
 
 int __cdecl fcn_005d70c0(char* e, char* o)
 {
@@ -58,7 +58,7 @@ int __cdecl fcn_005d70c0(char* e, char* o)
 		} else {
 			io_FormatTextBuffer(buf, 0x1dae, 0x1db0);
 		}
-		if (fcn_005cd440(&q, buf, 0, (void*) fcn_005d6ea0) != 0) {
+		if (fcn_005cd440(&q, buf, 0, (void*) d2_ShowBecircenDialog) != 0) {
 			r = 1;
 		}
 	}

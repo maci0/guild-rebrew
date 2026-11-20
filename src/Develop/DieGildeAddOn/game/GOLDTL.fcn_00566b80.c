@@ -5,7 +5,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4);
 void __cdecl io_FormatTextBuffer(char* buf, int text, ...);
-void __cdecl fcn_00546190(char* u);
+void __cdecl he_FreeAction(char* u);
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char flags, int value, int x, int y, char* name, char* text2);
 
 /* ADDRESS: GOLDTL 0x00566b80 */
@@ -45,5 +45,5 @@ void __cdecl fcn_00566b80(char* obj)
 			}
 		}
 	}
-	fcn_00546190(obj);
+	he_FreeAction(obj);
 }

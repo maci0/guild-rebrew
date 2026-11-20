@@ -41,7 +41,7 @@ void __cdecl fcn_00532ef0(void);
 /* Builds the stock-trade dialog for the selected building, pumps the dialog
  * message loop and hands the scene back to the shared frame function. */
 /* ADDRESS: GOLDTL 0x0058a250 */
-void __cdecl fcn_0058a250(int a0)
+void __cdecl d2_RunSpyCabinetDialog(int a0)
 {
 	int ids[3];
 	int q[20];
@@ -143,7 +143,7 @@ void __cdecl fcn_0058a250(int a0)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_0058a250, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_RunSpyCabinetDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	fcn_00532ef0();
 }

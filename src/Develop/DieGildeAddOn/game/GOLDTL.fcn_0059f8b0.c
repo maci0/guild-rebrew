@@ -13,11 +13,11 @@ extern char g_6aa728[];
 
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_005338d0(char*, int, int);
+int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_005c1090(int);
 void __cdecl fcn_005c0a30(int);
 void __cdecl fcn_00532ef0(void);
-void __cdecl fcn_005bebe0(int, int, int);
+void __cdecl d2_RunTalenteDialog(int, int, int);
 
 void __cdecl fcn_0059f8b0(int a1, int a2)
 {
@@ -27,9 +27,9 @@ void __cdecl fcn_0059f8b0(int a1, int a2)
 
 	fcn_005338a0();
 	while (fcn_005373e0(fcn_0059f8b0, 0x67fff) != 0) {
-		x = fcn_005338d0(g_6aa750, g_14ab07c, 0xc);
-		y = fcn_005338d0(g_6aa73c, g_14ab750, 0xc);
-		z = fcn_005338d0(g_6aa728, g_14aadd8, 0xc);
+		x = RegisterStatusText(g_6aa750, g_14ab07c, 0xc);
+		y = RegisterStatusText(g_6aa73c, g_14ab750, 0xc);
+		z = RegisterStatusText(g_6aa728, g_14aadd8, 0xc);
 		if (g_774800 != 0) {
 			if (g_14cf950 == 0x19) {
 				fcn_005c1090(a1);
@@ -47,7 +47,7 @@ void __cdecl fcn_0059f8b0(int a1, int a2)
 				fcn_005c1090(a1);
 			}
 			else if (g_7746a0 == z) {
-				fcn_005bebe0(a1, a2, 4);
+				d2_RunTalenteDialog(a1, a2, 4);
 			}
 		}
 	}

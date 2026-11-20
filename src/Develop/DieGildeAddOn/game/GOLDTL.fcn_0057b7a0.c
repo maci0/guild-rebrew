@@ -25,7 +25,7 @@ float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_0051e070(void);
 
 void __cdecl fcn_0057b7a0(char* e)
@@ -43,7 +43,7 @@ void __cdecl fcn_0057b7a0(char* e)
 	switch (*(int*) (e + 0x70)) {
 	case -2:
 	case -1:
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	case 0:
 		break;
@@ -53,7 +53,7 @@ void __cdecl fcn_0057b7a0(char* e)
 	o = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 	if (o == 0 || (p = *(char**) (o + 0x16c)) == 0
 	    || fcn_0050f950(*(unsigned short*) (p + 0x27), *(unsigned short*) o) > -26) {
-		fcn_00546190(e);
+		he_FreeAction(e);
 		return;
 	}
 	r = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x2a);
@@ -86,5 +86,5 @@ void __cdecl fcn_0057b7a0(char* e)
 			}
 		}
 	}
-	fcn_00546190(e);
+	he_FreeAction(e);
 }

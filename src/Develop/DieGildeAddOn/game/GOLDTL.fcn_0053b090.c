@@ -29,13 +29,13 @@ void __cdecl d3_TransformPoint(char*, float*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00455140(char*, char*, float*);
 float __cdecl fcn_00451380(char*, float*);
-void __cdecl fcn_00438cb0(Model*, float*);
+void __cdecl d3_SetObjectRotation(Model*, float*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 void __cdecl fcn_00438ac0(Model*, int);
 void __cdecl ch_PreloadCharacterMotions(Figure*, int, char*);
-void __cdecl fcn_005338d0(Model*, int, int);
+void __cdecl RegisterStatusText(Model*, int, int);
 
-Figure* __cdecl fcn_0053b090(char* res, char* kind, int anim)
+Figure* __cdecl ch_CreateCharacterAtSceneObject(char* res, char* kind, int anim)
 {
 	float box[4];
 	char* h;
@@ -56,7 +56,7 @@ Figure* __cdecl fcn_0053b090(char* res, char* kind, int anim)
 		pos[2] = 0.0f;
 		fcn_00455140(h, ((char*)g_662d40), at);
 		pos[1] = fcn_00451380(((char*)g_662d40), at);
-		fcn_00438cb0(f->model, pos);
+		d3_SetObjectRotation(f->model, pos);
 		ch_PlaceOnGround(f, 0);
 		f->model->owner = f;
 		fcn_00438ac0(f->model, 1);
@@ -66,7 +66,7 @@ Figure* __cdecl fcn_0053b090(char* res, char* kind, int anim)
 		f->target = -1;
 		f->active = 1;
 		f->state = 4;
-		fcn_005338d0(f->model, g_14abee0[anim], 0);
+		RegisterStatusText(f->model, g_14abee0[anim], 0);
 	}
 	return f;
 }

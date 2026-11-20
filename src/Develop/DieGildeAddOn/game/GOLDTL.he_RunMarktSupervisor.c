@@ -59,7 +59,7 @@ extern double g_664468;
 extern double g_665dd0;
 
 int __cdecl gm_GetElapsedMinutes(void*, void*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_0050d320(int, unsigned char);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 char* __cdecl fcn_00503d10(int);
@@ -99,12 +99,12 @@ void __cdecl he_RunMarktSupervisor(char* action)
 	char* hall;
 
 	if (g_773d78 == 0) {
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	}
 	v = gm_GetElapsedMinutes((void*) (action + 0x60), (void*) &gm_GameTime);
 	if ((unsigned short) gm_GameTime.b > 0x14) {
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	}
 	if (v == 0) {
@@ -421,7 +421,7 @@ next_lager:
 		lager += 0x2a90;
 	} while (bar < (char*) 0x868c30);
 	if ((unsigned short) gm_GameTime.b >= 0x16) {
-		fcn_00546190(action);
+		he_FreeAction(action);
 		return;
 	}
 	*(GAME_TIMESTAMP*) (action + 0x52) = *(GAME_TIMESTAMP*) &gm_GameTime;

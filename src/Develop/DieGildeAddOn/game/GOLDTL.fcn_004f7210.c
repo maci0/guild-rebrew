@@ -2,7 +2,7 @@
 
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl fcn_005d3120(int a1, int* a2);
-char* __cdecl fcn_005463a0(int a1, int a2, int a3);
+char* __cdecl he_StartHandlungSearch(int a1, int a2, int a3);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, int arg);
 
@@ -22,7 +22,7 @@ int __cdecl fcn_004f7210(int entity, int* command)
 		if (*command == 3) {
 			r = fcn_005d3120(entity, command) | 2;
 		} else if (*command == 1 && *(char*) (entity + 2) == 6) {
-			for (e = fcn_005463a0(1, 0, 0x41); e != 0; e = he_fn_Handlung()) {
+			for (e = he_StartHandlungSearch(1, 0, 0x41); e != 0; e = he_fn_Handlung()) {
 				if (*(int*) (e + 0xac) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
 					p = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 					io_FormatTextBuffer((char*) command + 0x14, 0x1ce2, *(unsigned short*) p);

@@ -17,7 +17,7 @@ void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005373e0(int, int);
 
 /* ADDRESS: GOLDTL 0x0053d020 */
-unsigned int __cdecl fcn_0053d020(int a0)
+unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 {
 	int items[8];
 	int sel;

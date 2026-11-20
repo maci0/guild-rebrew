@@ -14,7 +14,7 @@ int __cdecl fcn_005373e0(char*, int);
 typedef struct { int i[0x2f4 / 4]; } Row_5845e0;
 
 /* ADDRESS: GOLDTL 0x005845e0 */
-int __cdecl fcn_005845e0(void)
+int __cdecl d2_ChooseTutorial(void)
 {
 	char* menu;
 	char* item;

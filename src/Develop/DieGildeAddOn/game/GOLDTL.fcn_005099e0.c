@@ -15,7 +15,7 @@ void __cdecl fcn_004c5150(int, int, int, int);
 int __cdecl gm_WalkEntityChain(int);
 void __cdecl fcn_004c4510(void *, int);
 void __cdecl fcn_004c4670(int, int, int, void *);
-void __cdecl fcn_004c4570(int, int, int, void *);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *);
 void __cdecl fcn_004c5360(void);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl fcn_00545d40(int, int, int, int, int, char *);
@@ -109,7 +109,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 		if (flag != 0
 			&& (*((unsigned char *) arg2 + 2) == 3 || *((unsigned char *) arg2 + 2) == 8
 				|| *((unsigned char *) arg2 + 2) == 9)) {
-			fcn_004c4570(1, 1, (int) arg2 - g_aed32c + 2, &i);
+			cm_AppendPacketFieldDelta(1, 1, (int) arg2 - g_aed32c + 2, &i);
 		}
 		fcn_004c5360();
 	}

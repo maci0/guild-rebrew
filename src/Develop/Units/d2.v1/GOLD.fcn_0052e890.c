@@ -45,7 +45,7 @@ extern Slot_f8f110 g_f8f110[];
 extern char* g_f8f080;
 extern char g_631090[];
 
-int __cdecl fcn_004731c0(int x, int y, int kind, int owner);
+int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_0052e890(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3)
@@ -53,11 +53,11 @@ int __cdecl fcn_0052e890(int x, int y, int owner, int other, int arg5, int* id2,
 	GOLD_GUI_WINDOW* s;
 
 	s = &g_f8f120[other];
-	*id1 = fcn_004731c0(x, y, 3, owner);
+	*id1 = d2_AddElementToWindow(x, y, 3, owner);
 	((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[owner].child[0] = *id1;
 	((Ent*)g_f8f080)[*id1].f4c = 1;
 	((Ent*)g_f8f080)[*id1].f1c0 = 3;
-	*id2 = fcn_004731c0(x, y + 0x2a, 4, owner);
+	*id2 = d2_AddElementToWindow(x, y + 0x2a, 4, owner);
 	((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[owner].child[1] = *id2;
 	((Ent*)g_f8f080)[*id2].f4c = 1;
 	((Ent*)g_f8f080)[*id2].f1c0 = 3;

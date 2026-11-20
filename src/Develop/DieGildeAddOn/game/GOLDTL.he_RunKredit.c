@@ -11,7 +11,7 @@ int __cdecl fcn_004c5620(int, int);
 int __cdecl fcn_005c4ec0(int, int, int, char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_64d41a(char*, char*, int);
-void __cdecl fcn_00546190(int);
+void __cdecl he_FreeAction(int);
 void __cdecl fcn_004c51a0(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00564b90 */
@@ -69,7 +69,7 @@ void __cdecl he_RunKredit(int loanEvent)
 			}
 			} else {
 				fcn_64d41a(info, (char*) 0x6a6620, *(int*) (loanEvent + 0xac));
-				fcn_00546190(loanEvent);
+				he_FreeAction(loanEvent);
 				return;
 			}
 		}
@@ -100,7 +100,7 @@ void __cdecl he_RunKredit(int loanEvent)
 					io_FormatTextBuffer(msg, 0x18d8, *(unsigned short*) n, obj,
 					           *(int*) (loanEvent + 0xb4));
 					fcn_00545d40(*(int*) (slot + 4), -1, msg, 0, 0x5ff, 0);
-					fcn_00546190(loanEvent);
+					he_FreeAction(loanEvent);
 					return;
 				}
 			}
@@ -117,5 +117,5 @@ void __cdecl he_RunKredit(int loanEvent)
 			}
 		}
 	}
-	fcn_00546190(loanEvent);
+	he_FreeAction(loanEvent);
 }

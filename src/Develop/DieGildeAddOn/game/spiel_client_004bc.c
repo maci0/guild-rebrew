@@ -4,13 +4,13 @@
 extern int g_67a370;
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_00406340(char*, char*, int);
+int __cdecl ch_QueuePlayAnimation(char*, char*, int);
 int __cdecl fcn_004bc8a0(int*, int, float*);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_00406340(char*, char*, int);
+int __cdecl ch_QueuePlayAnimation(char*, char*, int);
 int __cdecl fcn_004bc8a0(int*, int, float*);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
@@ -32,11 +32,11 @@ void __cdecl fcn_004bc540(AMBIENT_ANIMAL_SLOT* state)
 	if (gm_RandomMod(0x64) > 0x1e) {
 		if (state->kind == 0) {
 			if (gm_RandomMod(0x64) > 0x32)
-				fcn_00406340(state->objekt, "bewegung/stehen", gm_RandomMod(3) + 1);
+				ch_QueuePlayAnimation(state->objekt, "bewegung/stehen", gm_RandomMod(3) + 1);
 			else
-				fcn_00406340(state->objekt, "bewegung/bellen", gm_RandomMod(3) + 1);
+				ch_QueuePlayAnimation(state->objekt, "bewegung/bellen", gm_RandomMod(3) + 1);
 		} else {
-			fcn_00406340(state->objekt, "bewegung/stehen", gm_RandomMod(3) + 1);
+			ch_QueuePlayAnimation(state->objekt, "bewegung/stehen", gm_RandomMod(3) + 1);
 		}
 		return;
 	}
@@ -69,9 +69,9 @@ void __cdecl fcn_004bc6b0(AMBIENT_ANIMAL_SLOT* state)
 		return;
 	if (gm_RandomMod(0x64) > 0x14) {
 		if (gm_RandomMod(0x64) > 0x32)
-			fcn_00406340(state->objekt, "bewegung/stehen", gm_RandomMod(3) + 1);
+			ch_QueuePlayAnimation(state->objekt, "bewegung/stehen", gm_RandomMod(3) + 1);
 		else
-			fcn_00406340(state->objekt, "bewegung/fressen", gm_RandomMod(3) + 1);
+			ch_QueuePlayAnimation(state->objekt, "bewegung/fressen", gm_RandomMod(3) + 1);
 		return;
 	}
 	g = *(int*) (((char*)g_67a370) + 0xb0);

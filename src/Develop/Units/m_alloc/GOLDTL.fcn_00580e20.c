@@ -52,7 +52,7 @@ void __cdecl fcn_0057ecf0(void);
 void __cdecl fcn_0057ef30(void);
 void __cdecl fcn_0057f030(void);
 
-int* __cdecl fcn_00580e20(void)
+int* __cdecl d2_CreateTutorialChapter1(void)
 {
 	int* first;
 	int* p;

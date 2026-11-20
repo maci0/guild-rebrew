@@ -30,7 +30,7 @@ int __cdecl fcn_005222a0(void* stream)
 	fcn_004432d0(1, 0);
 	fcn_004437a0(0);
 	fcn_004432d0(0, 0);
-	d3_LoadScene(0, stream, fcn_0053f6a0);
+	d3_LoadScene(0, stream, d2_UpdateSceneLoadProgress);
 	fcn_004432d0(1, 0);
 	fcn_004432d0(0, 0);
 	if (((struct s_6b8300*)g_6b8300)->kind == 0x80) {

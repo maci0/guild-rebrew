@@ -19,7 +19,7 @@ extern char g_6a7f1c[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00545780(char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
 void __cdecl fcn_00579410(char*, struct house*);
 void __cdecl fcn_00579390(char*, struct house*);
@@ -43,7 +43,7 @@ void __cdecl fcn_00579460(char* u)
 		if (*(char**) (u + 0x74) != 0) {
 			fcn_00545780(u);
 		}
-		fcn_00546190(u);
+		he_FreeAction(u);
 		return;
 	}
 	switch (*(int*) (u + 0x70)) {
@@ -52,7 +52,7 @@ void __cdecl fcn_00579460(char* u)
 			fcn_00545670(u, 0, 0, g_6a5a10, 0x5ec);
 		}
 		if (*(char**) (u + 0x74) == 0) {
-			fcn_00546190(u);
+			he_FreeAction(u);
 			return;
 		}
 		d2_CenterDialogWindows(*(int*) (*(char**) (u + 0x74) + 8));
@@ -66,7 +66,7 @@ void __cdecl fcn_00579460(char* u)
 		if (fcn_00500cb0(&gm_GameTime, u + 0x52) > 0) {
 			fcn_00579410(p, &((struct house*)g_7f4ca0)[g_774970]);
 			fcn_00545780(u);
-			fcn_00546190(u);
+			he_FreeAction(u);
 			break;
 		}
 		if (*(char**) (u + 0x74) == 0) {
@@ -79,13 +79,13 @@ void __cdecl fcn_00579460(char* u)
 		if (g_100f1dc == 2) {
 			fcn_00579390(p, &((struct house*)g_7f4ca0)[g_774970]);
 			fcn_00545780(u);
-			fcn_00546190(u);
+			he_FreeAction(u);
 			return;
 		}
 		if (g_100f1dc == 1) {
 			fcn_00579410(p, &((struct house*)g_7f4ca0)[g_774970]);
 			fcn_00545780(u);
-			fcn_00546190(u);
+			he_FreeAction(u);
 		}
 		break;
 	}

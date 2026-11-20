@@ -30,7 +30,7 @@ extern int g_6b7fa4;
 char* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl ReportClientMessage(char* msg);
-int __cdecl fcn_0042b810(char* text, int index);
+int __cdecl txt_ParseTextVariants(char* text, int index);
 void __cdecl txt_ParseRandomText(char* s);
 int __cdecl fcn_0064d41a(char* dst, char* fmt, ...);
 char* __cdecl fcn_0064d1a0(char* s, int c);
@@ -345,7 +345,7 @@ pass1_done:
 					}
 					break;
 				case '(':
-					if (fcn_0042b810(p, v18) == 0) {
+					if (txt_ParseTextVariants(p, v18) == 0) {
 						fcn_0064d41a(msg, "Syntax error in file %s in line %i", p, lineNo);
 						MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
 					}

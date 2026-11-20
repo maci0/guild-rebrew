@@ -31,7 +31,7 @@ int __cdecl fcn_0055be70(int*);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
 void __cdecl fcn_004c5ed0(int, char*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl fcn_004c4450(int);
 int* __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c58b0(int, int);
@@ -46,7 +46,7 @@ void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 float __cdecl fcn_004ff210(int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-void __cdecl fcn_00507e30(char*, int);
+void __cdecl gm_GetScaledEntitySkill(char*, int);
 void __cdecl fcn_0050c5d0(char*, int*);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0055c050(char*);
@@ -54,7 +54,7 @@ int __cdecl _ftol(void);
 int* __cdecl fcn_00502cd0(int, ...);
 int* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_GetEntityTableEntry(char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl gm_GetMsgField(int, int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -171,7 +171,7 @@ label_1bc:
 			return;
 		}
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
-		q = (int) fcn_005463a0(1, 1, *(int*) (actionRecord + 0xb8));
+		q = (int) he_StartHandlungSearch(1, 1, *(int*) (actionRecord + 0xb8));
 		if (rec1 != 0 && q != 0 && *(int*) (q + 0xd4) == *(int*) (actionRecord + 4) && *(int*) (actionRecord + 0xb4) != -1) {
 			ent = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0xb8));
 			h = (int) fcn_004c4480(*(int*) (actionRecord + 0xb4));
@@ -185,7 +185,7 @@ label_1bc:
 		*(int*) (actionRecord + 0x70) = -1;
 		return;
 	case 4:
-		q = (int) fcn_005463a0(1, 1, *(int*) (actionRecord + 0xb8));
+		q = (int) he_StartHandlungSearch(1, 1, *(int*) (actionRecord + 0xb8));
 		if (q == 0) {
 			*(int*) (actionRecord + 0x70) = -1;
 			return;
@@ -232,7 +232,7 @@ label_1bc:
 				fcn_004c5da0(*(int*) (actionRecord + 0x8c + i * 4), *(int*) (rec1 + 1), *(int*) (q + 2), 0, 0, s_6a6a40);
 			}
 		}
-		fcn_00546190(actionRecord);
+		he_FreeAction(actionRecord);
 		return;
 	case 5:
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
@@ -254,7 +254,7 @@ label_1bc:
 						fcn_004c5c80(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4));
 						fcn_004c5da0(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4), *(int*) (h + 1), *(int*) (q + 2), 0, 0, s_6a6dc4);
 						count++;
-						fcn_00507e30((char*) val, 2);
+						gm_GetScaledEntitySkill((char*) val, 2);
 						fcn_00529160(h, 0, *(unsigned short*) val, 0);
 					}
 				}
@@ -315,7 +315,7 @@ label_1bc:
 		if (*(char*) (row + 2) == 6 || *(char*) (row + 2) == 7) {
 			io_FormatTextBuffer(buf, 0x1a86, rec1, val);
 			he_MessageBoxQuickjump(*(int*) (row + 4), *(int*) (row + 4), buf, 0, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
-			fcn_00546190(actionRecord);
+			he_FreeAction(actionRecord);
 			return;
 		}
 		goto tail;
@@ -331,7 +331,7 @@ label_fa92:
 		if (*(char*) (row + 2) == 6 || *(char*) (row + 2) == 7) {
 			io_FormatTextBuffer(buf, 0x19e9, rec1);
 			he_MessageBoxQuickjump(*(int*) (row + 4), *(int*) (row + 4), buf, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, 0);
-			fcn_00546190(actionRecord);
+			he_FreeAction(actionRecord);
 			return;
 		}
 		goto tail;
@@ -363,5 +363,5 @@ label_fa92:
 		return;
 	}
 tail:
-	fcn_00546190(actionRecord);
+	he_FreeAction(actionRecord);
 }

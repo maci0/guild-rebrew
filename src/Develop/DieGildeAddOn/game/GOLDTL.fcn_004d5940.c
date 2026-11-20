@@ -16,7 +16,7 @@ int __cdecl fcn_004d5450(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 float __cdecl gm_GetEntitySkill(char*, int);
-int __cdecl fcn_00507e30(char*, int);
+int __cdecl gm_GetScaledEntitySkill(char*, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_SearchTable67(int);
@@ -109,7 +109,7 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 				}
 			}
 			if (v >= g_6640f8) {
-				t = fcn_00507e30((char*) g_772e98, 3);
+				t = gm_GetScaledEntitySkill((char*) g_772e98, 3);
 				t = (int) ((float) t * 0.023809524f);
 				if (t > 4) {
 					t = 4;
@@ -191,7 +191,7 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 				io_AppendText(0x113d, count, 0xc10, sel, *g_772e9c, r);
 			}
 		}
-		t = fcn_00507e30((char*) g_772e98, 3);
+		t = gm_GetScaledEntitySkill((char*) g_772e98, 3);
 		t = (int) ((float) t * 0.023809524f);
 		if (t > 4) {
 			t = 4;

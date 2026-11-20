@@ -2,8 +2,8 @@
 
 
 char* __cdecl fcn_0050dc90(int);
-int __cdecl fcn_00426cc0(int);
-void __cdecl fcn_00428720(int);
+int __cdecl evt_FindScriptById(int);
+void __cdecl evt_RequestScriptExit(int);
 
 void __cdecl fcn_005904a0(char* obj, unsigned int flag)
 {
@@ -15,9 +15,9 @@ void __cdecl fcn_005904a0(char* obj, unsigned int flag)
 	}
 	id = *(int*) (*(char**) (obj + 0x184) + 0x28);
 	if (id != -1) {
-		h = fcn_00426cc0(id);
+		h = evt_FindScriptById(id);
 		if (h != 0) {
-			fcn_00428720(h);
+			evt_RequestScriptExit(h);
 		}
 	}
 	*(unsigned int*) (obj + 0x1b4) ^= (*(unsigned int*) (obj + 0x1b4) ^ flag) & 1;

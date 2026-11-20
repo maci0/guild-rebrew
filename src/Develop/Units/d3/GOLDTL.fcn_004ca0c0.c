@@ -7,7 +7,7 @@ extern signed char g_7f3b00[];
 #include "Develop/DieGildeAddOn/auxillary/plant.h"
 int __cdecl plt_CheckZoneAvailability(void*, unsigned int, unsigned int, unsigned int);
 char* __cdecl plt_FindRecord(void*, unsigned int, unsigned int);
-char* __cdecl fcn_004bcda0(void*, unsigned int, unsigned int, unsigned int, unsigned int);
+char* __cdecl plt_SetPlantMapSlot(void*, unsigned int, unsigned int, unsigned int, unsigned int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl fcn_004432d0(int, int);
 
@@ -80,7 +80,7 @@ int __cdecl fcn_004ca0c0(int cmd, char* result)
 
 		if (needs_create != 0) {
 			fcn_004432d0(g_7f3b00[lpGebaeudePROT[*(unsigned char*) entity + *(unsigned char*) entity * 0x24c]], 1);
-			found = fcn_004bcda0(
+			found = plt_SetPlantMapSlot(
 				*(void**) ((char*) entity + 0x71),
 				*(unsigned char*) (cmd + 0x18),
 				*(unsigned char*) (cmd + 0x19),

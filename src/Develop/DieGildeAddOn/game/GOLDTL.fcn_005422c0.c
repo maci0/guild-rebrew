@@ -17,7 +17,7 @@ extern void (__stdcall* g_662068)(unsigned int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c4700(int, int, int, void*);
 void __cdecl fcn_004c53a0(void);
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5120(int);
 void __cdecl fcn_004c5a60(int, int, int);
@@ -128,7 +128,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 							buf4[2] = *(int*) (obj + 0x1bc);
 							buf4[3] = *(int*) (obj + 0x1c0);
 							fcn_004c4510((char*) obj, *(int*) (obj + 4));
-							fcn_004c4570(4, 1, (int) (obj - g_aed32c) + 0x1b4, buf4);
+							cm_AppendPacketFieldDelta(4, 1, (int) (obj - g_aed32c) + 0x1b4, buf4);
 							fcn_004c5360();
 						}
 					}
@@ -151,7 +151,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 								cv = 0;
 							}
 							fcn_004c4510((char*) obj, *(int*) (obj + 2));
-							fcn_004c4570(1, 1, (int) (obj - g_aed32c) + 0x37, &cv);
+							cm_AppendPacketFieldDelta(1, 1, (int) (obj - g_aed32c) + 0x37, &cv);
 							fcn_004c5360();
 						}
 						else {
@@ -310,7 +310,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 								fcn_004c54c0(*(int*) (tile + 4), *(int*) (tile2 + 4), (int) delta, 0);
 							}
 							fcn_004c4510((char*) tile2, *(int*) (tile2 + 4));
-							fcn_004c4570(4, 1, 0x19c, &v);
+							cm_AppendPacketFieldDelta(4, 1, 0x19c, &v);
 							fcn_004c5360();
 							count++;
 							b1 = fcn_0050f950(idx, *(unsigned short*) tile2) + delta;
@@ -347,12 +347,12 @@ void __cdecl fcn_005422c0(unsigned int arg)
 									b1 = *(unsigned char*) (tile2 + 0x82);
 									cv = (char) (int) ((double) b1 * g_664128 + 0.5);
 									if (b1 > g_665368) {
-										fcn_004c4570(1, 1, (int) (tile2 - g_aed32c) + 0x82, &cv);
+										cm_AppendPacketFieldDelta(1, 1, (int) (tile2 - g_aed32c) + 0x82, &cv);
 									}
 									b1 = *(unsigned char*) (tile2 + 0x83);
 									cv = (char) (int) ((double) b1 * g_664128 + 0.5);
 									if (b1 > g_665368) {
-										fcn_004c4570(1, 1, (int) (tile2 - g_aed32c) + 0x83, &cv);
+										cm_AppendPacketFieldDelta(1, 1, (int) (tile2 - g_aed32c) + 0x83, &cv);
 									}
 									fcn_004c5360();
 									count++;
@@ -368,7 +368,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 							tile2 = g_7f4ca0 + id2 * 0x21c;
 							fcn_004c51a0(*(int*) (tile2 + 4), *(int*) (tile + 4), g_773d75, v);
 							fcn_004c4510((char*) tile2, *(int*) (tile2 + 4));
-							fcn_004c4570(4, 1, 0x19c, &v);
+							cm_AppendPacketFieldDelta(4, 1, 0x19c, &v);
 							fcn_004c5360();
 							count += 2;
 						}

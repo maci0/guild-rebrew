@@ -52,9 +52,9 @@ void __cdecl fcn_0052a960(void*);
 void __cdecl fcn_00445f50(int, int, float, int);
 void __cdecl fcn_004d5940(ShiftDlg*);
 void __cdecl fcn_004e51d0(ShiftDlg*, int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 void __cdecl fcn_004d6170(ShiftDlg*);
-void __cdecl fcn_004d2f10(ShiftDlg*);
+void __cdecl cut_RunCombatFlightOutro(ShiftDlg*);
 void __cdecl fcn_004d2a60(ShiftDlg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_004e6eb0(char*, unsigned int);
@@ -136,14 +136,14 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		if (*(int*) &g_772ea8 == 0) {
 			for (t = 0x9b4908; t < 0x9b4a48; t += 0x14) {
 				if (*(int*) t != -1) {
-					fcn_0046b2b0(*(int*) t);
+					d2_DestroyElement(*(int*) t);
 				}
 				*(int*) t = -1;
 				*(int*) (t - 4) = 0;
 				*(int*) (t + 4) = 0;
 			}
 			fcn_004d6170(p);
-			fcn_004d2f10(p);
+			cut_RunCombatFlightOutro(p);
 		} else if (*(int*) &g_772eac != 0 && *(char*) (*(int*) &g_772e9c + 2) == 6) {
 			v = 0;
 			w = gm_StartFilteredEntitySearch(1, 1, *(int*) (*(int*) 0x772eb4 + 0x10c));

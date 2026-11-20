@@ -5,7 +5,7 @@ unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 float __cdecl fcn_00508820(int, int);
 
 /* ADDRESS: GOLD 0x00509b40 */
-int __cdecl fcn_00509b40(unsigned char* a0, int scale)
+int __cdecl gm_CalculateGebaeudeValue(unsigned char* a0, int scale)
 {
 	unsigned char* row;
 	unsigned short* words;

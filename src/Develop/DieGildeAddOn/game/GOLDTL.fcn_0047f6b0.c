@@ -90,7 +90,7 @@ extern int ai_ResourceCount;
 
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl plt_FindPlantInfo(int);
 void* __cdecl fcn_00503d10(int);
 void __cdecl fcn_004849b0(char*, char*, char*);
@@ -209,7 +209,7 @@ int __cdecl fcn_0047f6b0(char* a)
 	}
 
 	flag = 0;
-	q = fcn_005463a0(2, 0, 9, 3, *(int*) (h + 1));
+	q = he_StartHandlungSearch(2, 0, 9, 3, *(int*) (h + 1));
 	if (q != 0) {
 		if (*(int*) (a + 0x17c) != (int) q) {
 			fcn_00529160(h, 0, *(unsigned short*) a, (int) q);

@@ -58,7 +58,7 @@ void __cdecl nt_LogWinsockError(int err);
 /* Opens a non-blocking TCP connection to host:port, waiting up to 16
  * half-second select rounds; returns the socket or -1. */
 /* ADDRESS: GOLDTL 0x00420db0 */
-int __cdecl fcn_00420db0(char* host, int port)
+int __cdecl nt_ConnectTcp(char* host, int port)
 {
 	char wsa[0x190];
 	FdSet_420db0 fds;

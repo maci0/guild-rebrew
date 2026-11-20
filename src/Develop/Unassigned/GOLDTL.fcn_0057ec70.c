@@ -5,7 +5,7 @@
 extern int* g_665f08;
 extern volatile int g_6b7fc0;
 
-int __cdecl fcn_0057ec70(int mask)
+int __cdecl d2_IsTutorialActionAllowed(int mask)
 {
 	char* p;
 

@@ -10,7 +10,7 @@ extern int d2_ScreenHeight;
 extern int g_1040494;
 extern char g_67d5bc[];
 
-int __cdecl fcn_00469890(void);
+int __cdecl d2_AllocateElement(void);
 int __cdecl m_alloc(int, char*);
 int __cdecl fcn_0046b520(char*, int);
 
@@ -22,7 +22,7 @@ int __cdecl fcn_0046fcd0(int xpos, int ypos, char* name)
 	char* s;
 	char* d;
 
-	idx = fcn_00469890();
+	idx = d2_AllocateElement();
 	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x88 / 4] = m_alloc(0x101, g_67d5bc);
 	if (((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x88 / 4] == 0) {
 		return -1;

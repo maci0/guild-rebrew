@@ -5,7 +5,7 @@
 
 int __cdecl fcn_00508eb0(unsigned short, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_00508d80(int, int*);
+void __cdecl gm_RandomizeIntArray(int, int*);
 
 void __cdecl fcn_0054c720(char* e, unsigned short* a, unsigned short* b)
 {
@@ -22,7 +22,7 @@ void __cdecl fcn_0054c720(char* e, unsigned short* a, unsigned short* b)
 	for (i = 0; i < 12; i++) {
 		arr[i] = i + half;
 	}
-	fcn_00508d80(12, arr);
+	gm_RandomizeIntArray(12, arr);
 	i = 0;
 	s = (float) (y + x);
 	for (; i < 3; i++) {

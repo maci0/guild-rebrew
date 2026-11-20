@@ -13,7 +13,7 @@ void __cdecl evt_ExecuteStatements(char*);
 /* Runs a script until it blocks, with the script pushed as the current one
  * for the duration. */
 /* ADDRESS: GOLDTL 0x00429670 */
-void __cdecl fcn_00429670(char* s)
+void __cdecl evt_RunGfxScript(char* s)
 {
 	int saved;
 	char* c;

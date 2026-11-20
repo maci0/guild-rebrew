@@ -28,7 +28,7 @@ extern unsigned char g_773d75;
 extern char g_67e33c[];
 
 unsigned short __cdecl gm_RandomMod(int n);
-char* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
+char* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
@@ -63,7 +63,7 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 	}
 	x = *(unsigned char*) (src + 0x1c);
 	y = *(unsigned char*) (src + 0x1d);
-	for (it = fcn_005463a0(2, 0, 0x12, 3, *(int*) (*(char**) (e + 0x16c) + 1)); it != 0; it = he_fn_Handlung()) {
+	for (it = he_StartHandlungSearch(2, 0, 0x12, 3, *(int*) (*(char**) (e + 0x16c) + 1)); it != 0; it = he_fn_Handlung()) {
 		x += *(int*) (it + 0xb0);
 		y += *(int*) (it + 0xb4);
 	}

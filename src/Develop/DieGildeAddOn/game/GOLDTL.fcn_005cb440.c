@@ -41,7 +41,7 @@ int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005ca560(Row*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 Node* __cdecl he_fn_Handlung(void);
-Node* __cdecl fcn_005463a0(int, int, int);
+Node* __cdecl he_StartHandlungSearch(int, int, int);
 
 #include "GOLDTL.fcn_005cb440_gconf.h"
 
@@ -81,7 +81,7 @@ int __cdecl fcn_005cb440(Ent* subject, int capacity, Row* rows, int a3)
 matched1:
 			n++;
 		}
-		p = fcn_005463a0(1, 0, 0x41);
+		p = he_StartHandlungSearch(1, 0, 0x41);
 		while (p != 0) {
 			if (p->keyac == subject->key) {
 				return n + 1;
@@ -140,7 +140,7 @@ next:
 		e = (Ent*) ((char*) e + 0x21c);
 	}
 	if ((unsigned int) n < (unsigned int) capacity) {
-		p = fcn_005463a0(1, 0, 0x41);
+		p = he_StartHandlungSearch(1, 0, 0x41);
 		while (p != 0) {
 			if (p->keyac == subject->key) {
 				e = (Ent*) gm_LookupEntityRecordById(p->b0);

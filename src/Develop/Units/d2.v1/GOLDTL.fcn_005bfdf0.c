@@ -50,7 +50,7 @@ int __cdecl fcn_004fa5b0(int, unsigned short*, int*);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005bfdf0(unsigned short* who, unsigned short* e)
+void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 {
 	int h;
 	Stat5bfd st;
@@ -102,6 +102,6 @@ void __cdecl fcn_005bfdf0(unsigned short* who, unsigned short* e)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(fcn_005bfdf0, 0x657c7) != 0);
+	} while (fcn_005373e0(d2_ShowBeweiseDetails, 0x657c7) != 0);
 	fcn_00471e30(h);
 }

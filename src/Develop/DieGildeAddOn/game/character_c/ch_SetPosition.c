@@ -33,7 +33,7 @@ extern void* ch_CharacterSlots[];
 char* __cdecl fcn_00402610(char*);
 #include "../client_scene_transform.h"
 float __cdecl fcn_00444700(char*, float*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 void __cdecl fcn_00441720(char*, float*, int, int*, int*, float*);
 extern float g_6628a8;
@@ -48,7 +48,7 @@ extern char g_10432c0[];
 char __cdecl fcn_00442c00(char*, char);
 
 void __cdecl fcn_00438b40(char*, int*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl vfs_ToSlashes(char*);
 int __cdecl d3_RemoveObjectAnim(char*);
 

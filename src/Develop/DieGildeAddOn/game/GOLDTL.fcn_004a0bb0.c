@@ -3,7 +3,7 @@ extern unsigned char g_773d75;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0047dd60(char*);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_0050d320(char*, char);
 unsigned short __cdecl gm_RandomMod(int);
@@ -52,7 +52,7 @@ int __cdecl ai_StartBerufsausbildung(int busy, char* ent, int pending, char* out
 		}
 		if ((float) (*(unsigned short*) (q + 0xa) + 4) >= *(float*) (q + 0x20)) {
 			if (*(unsigned char*) (q + 0x164) == 0) {
-				if (fcn_005463a0(2, 2, *(unsigned short*) q, 0, 0x5e) == 0) {
+				if (he_StartHandlungSearch(2, 2, *(unsigned short*) q, 0, 0x5e) == 0) {
 					if (best == 0 || *(unsigned short*) (q + 0xa) > *(unsigned short*) (best + 0xa)) {
 						best = q;
 					}

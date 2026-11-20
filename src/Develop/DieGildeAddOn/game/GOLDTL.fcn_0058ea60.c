@@ -34,7 +34,7 @@ extern unsigned char g_773d75;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_004c2db0(int, int);
-char* __cdecl fcn_0058e220(char*, char*);
+char* __cdecl d2_RunSeance(char*, char*);
 void __cdecl fcn_004a51d0(ENTITY_RECORD*, int, struct offer*, struct level*);
 float __cdecl fcn_004f4770(char*);
 float __cdecl gm_RandomFloat01(void);
@@ -51,7 +51,7 @@ int __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00428720(char*);
+void __cdecl evt_RequestScriptExit(char*);
 
 void __cdecl fcn_0058ea60(char* e, char* res)
 {
@@ -68,7 +68,7 @@ void __cdecl fcn_0058ea60(char* e, char* res)
 
 	id = 0;
 	t = fcn_004c2db0(*(int*) (res + 0x14), *(int*) (res + 0x4c));
-	m = fcn_0058e220(e, res);
+	m = d2_RunSeance(e, res);
 	memset(list, 0, sizeof(list));
 	list[0].id = 0x2b8;
 	list[1].id = 0x2bb;
@@ -128,6 +128,6 @@ void __cdecl fcn_0058ea60(char* e, char* res)
 	} while (fcn_005373e0(fcn_0058ea60, 0x777c7) != 0);
 	fcn_00471e30(h);
 	if (m != 0) {
-		fcn_00428720(m);
+		evt_RequestScriptExit(m);
 	}
 }

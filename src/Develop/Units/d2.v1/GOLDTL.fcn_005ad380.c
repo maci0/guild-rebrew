@@ -55,7 +55,7 @@ void __cdecl sv_ClearObjectSelection(void);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005ad380(int unused, char* e)
+int __cdecl d2_ConfirmEinbruch(int unused, char* e)
 {
 	int r;
 	int btn1;
@@ -126,7 +126,7 @@ int __cdecl fcn_005ad380(int unused, char* e)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005ad380, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_ConfirmEinbruch, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

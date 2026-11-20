@@ -15,12 +15,12 @@ typedef struct
 // SIZE 0xe
 
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_00546190(void*);
+void __cdecl he_FreeAction(void*);
 
 void __cdecl fcn_00550da0(void* record)
 {
 	*(S14b*) ((char*) record + 0x52) = *(S14b*) ((char*) record + 0x44);
 	if ((short) gm_RandomMod(2) != 0) {
-		fcn_00546190(record);
+		he_FreeAction(record);
 	}
 }

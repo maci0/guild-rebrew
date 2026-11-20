@@ -5,14 +5,14 @@ extern char* g_1015ea0;
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_0050cce0(char*, void*, int);
-char* __cdecl fcn_005463a0(int, int, int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 int __cdecl fcn_0046f7e0(int, int, int, int, int);
 void __cdecl fcn_0046f9b0(int, int);
 void __cdecl d2_SetElementFont(int, int);
-void __cdecl fcn_0046b2b0(int);
+void __cdecl d2_DestroyElement(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00500e20(int*);
 int __cdecl fcn_0051e070(void);
@@ -173,7 +173,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 		} while (key < 0x2e);
 		*(int*) (g_object(g_row_sub(row)) + 0x1e4) = status + 0x750;
 
-		found = fcn_005463a0(2, 0, 4, 3, *(unsigned int*) (ent + 1));
+		found = he_StartHandlungSearch(2, 0, 4, 3, *(unsigned int*) (ent + 1));
 		while (found != 0) {
 			if ((unsigned int) *(unsigned short*) (found + 0xac) == (unsigned int) g_row_type(row)) {
 				break;
@@ -181,7 +181,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 			found = he_fn_Handlung();
 		}
 		if (found == 0) {
-			found = fcn_005463a0(2, 0, 3, 3, *(unsigned int*) (ent + 1));
+			found = he_StartHandlungSearch(2, 0, 3, 3, *(unsigned int*) (ent + 1));
 			while (found != 0) {
 				if ((unsigned int) *(unsigned short*) (found + 0xac) == (unsigned int) g_row_type(row)) {
 					break;
@@ -212,7 +212,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 			}
 			if (g_row_extra(row) >= 0
 			    && *(int*) (g_object(g_row_extra(row)) + 8) != state) {
-				fcn_0046b2b0(g_row_extra(row));
+				d2_DestroyElement(g_row_extra(row));
 				g_row_extra(row) = -1;
 			}
 			if (g_row_extra(row) <= -1) {
@@ -228,7 +228,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 			}
 		} else {
 			if (g_row_extra(row) != -1) {
-				fcn_0046b2b0(g_row_extra(row));
+				d2_DestroyElement(g_row_extra(row));
 				g_row_extra(row) = -1;
 			}
 			if (g_row_sub(row) != -1) {
@@ -339,7 +339,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 		row = g_row(i);
 		if (g_row_handle(row) >= 0) {
 			g_row_sel(row) = -1;
-			fcn_0046b2b0(g_row_handle(row));
+			d2_DestroyElement(g_row_handle(row));
 			g_row_handle(row) = -1;
 			g_row_sub(row) = -1;
 			g_row_extra(row) = -1;

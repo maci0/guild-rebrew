@@ -10,7 +10,7 @@ extern Rec18_68da68 g_68da68[];
 
 void* __cdecl gm_LookupEntityRecordById(int);
 
-int __cdecl fcn_004ea460(void)
+int __cdecl amt_HasOccupiedOfficeType7(void)
 {
 	int n;
 	int i;

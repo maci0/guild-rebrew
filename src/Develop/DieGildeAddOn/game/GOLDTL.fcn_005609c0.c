@@ -18,7 +18,7 @@ void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 int __cdecl io_FormatTextBuffer(char*, int, int, int);
 int __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_00529160(int, int, int, int);
-void __cdecl fcn_00546190(int);
+void __cdecl he_FreeAction(int);
 int __cdecl strcat(char*, char*);
 int __cdecl strlen(char*);
 
@@ -70,7 +70,7 @@ void __cdecl fcn_005609c0(char* jobState)
 				i += 1;
 			}
 		}
-		fcn_00546190((int) jobState);
+		he_FreeAction((int) jobState);
 		return;
 	default:
 		return;

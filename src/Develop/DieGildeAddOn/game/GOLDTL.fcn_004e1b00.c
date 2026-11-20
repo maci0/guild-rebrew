@@ -27,7 +27,7 @@ int __cdecl fcn_00445f50(int, float, float, int);
 void __cdecl fcn_004463f0(int, int, float);
 
 /* ADDRESS: GOLDTL 0x004e1b00 */
-void __cdecl fcn_004e1b00(int eventRecord)
+void __cdecl cut_PlayHinrichtung(int eventRecord)
 {
 	int mode;
 	unsigned short* p;

@@ -19,14 +19,14 @@ int __cdecl io_AppendText();
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl fcn_00472640(int i, int flag);
 void __cdecl fcn_00471af0(int k, int flag);
-void __cdecl fcn_0059aa10(unsigned char*, int);
-void __cdecl fcn_005c2580(unsigned char*);
+void __cdecl d2_RunTechTreeDialog(unsigned char*, int);
+void __cdecl d2_ShowRenovationDialog(unsigned char*);
 void __cdecl fcn_005c2a40(unsigned char*);
 void __cdecl fcn_005c30e0(unsigned char*);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005c49e0(unsigned char* p)
+void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 {
 	int h1;
 	int h2;
@@ -110,12 +110,12 @@ void __cdecl fcn_005c49e0(unsigned char* p)
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == h1) {
 				fcn_00471af0(d, 0);
-				fcn_0059aa10(p, 0xfd);
+				d2_RunTechTreeDialog(p, 0xfd);
 				fcn_00471af0(d, 1);
 			}
 			else if (d2_CurrentElementId == h2) {
 				fcn_00471af0(d, 0);
-				fcn_005c2580(p);
+				d2_ShowRenovationDialog(p);
 				fcn_00471af0(d, 1);
 				redraw = 1;
 			}
@@ -132,7 +132,7 @@ void __cdecl fcn_005c49e0(unsigned char* p)
 				redraw = 1;
 			}
 		}
-	} while (fcn_005373e0(fcn_005c49e0, 0x677c7) != 0);
+	} while (fcn_005373e0(d2_ShowGebaeudeOptions, 0x677c7) != 0);
 	fcn_00471e30(d);
 	g_7746f8 = 0;
 }

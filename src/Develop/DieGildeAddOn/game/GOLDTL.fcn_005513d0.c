@@ -12,7 +12,7 @@ float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_00500bb0(char*, int, int, int);
 int __cdecl fcn_004c5980(void*);
 int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x005513d0 */
 void __cdecl fcn_005513d0(char* action)
@@ -92,5 +92,5 @@ void __cdecl fcn_005513d0(char* action)
 		return;
 	}
 tail:
-	fcn_00546190(action);
+	he_FreeAction(action);
 }

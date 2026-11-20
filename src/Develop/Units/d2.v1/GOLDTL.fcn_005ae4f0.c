@@ -10,10 +10,10 @@ extern int g_14ce8e0;
 extern int g_100f1dc;
 
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_005c69d0(char*);
+void __cdecl d2_ResetTrainingRows(char*);
 int __cdecl fcn_00525fb0(char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_005c6a10(int, int);
+void __cdecl d2_UpdateTrainingRows(int, int);
 
 int __cdecl fcn_00471f80(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -22,17 +22,17 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
-void __cdecl fcn_005ae4f0(char* e)
+void __cdecl d2_RunDiebesgildeTraining(char* e)
 {
 	int dlg;
 	int i;
 
 	if (fcn_00525fb0(e) == 0) {
 		dlg = fcn_00470820(0, 0, "locations\\diebesgilde\\diebesgilde_trainieren");
-		fcn_005c69d0(e);
+		d2_ResetTrainingRows(e);
 		d2_SetOverlayAnimation(0, 0);
 		do {
-			fcn_005c6a10(dlg, 2);
+			d2_UpdateTrainingRows(dlg, 2);
 			if (g_14ce8e0 != 0) {
 				if (CountDisplayCounters() == 0) {
 					g_774654 = 1;
@@ -53,7 +53,7 @@ void __cdecl fcn_005ae4f0(char* e)
 				}
 				ResetDisplayCounters();
 			}
-		} while (fcn_005373e0((void*) fcn_005ae4f0, 0x677c7) != 0);
+		} while (fcn_005373e0((void*) d2_RunDiebesgildeTraining, 0x677c7) != 0);
 		fcn_00471e30(dlg);
 		fcn_00532ef0();
 	}

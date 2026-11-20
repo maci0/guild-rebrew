@@ -19,7 +19,7 @@ extern char g_6a30e4[];
 
 char* __cdecl fcn_00412eb0(char* name, int mode);
 
-char* __cdecl fcn_005338d0(char* name, char* path, int arg)
+char* __cdecl RegisterStatusText(char* name, char* path, int arg)
 {
 	char buf[256];
 	int i;

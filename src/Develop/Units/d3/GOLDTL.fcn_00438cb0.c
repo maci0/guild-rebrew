@@ -10,7 +10,7 @@ void __cdecl d3_BuildEulerRotationMatrix(float*, char*);
 void __cdecl d3_TraverseSceneObjects(int, char*, int, void*);
 void __cdecl d3_ClearAuxSlotState(void);
 
-void __cdecl fcn_00438cb0(char* o, int* v)
+void __cdecl d3_SetObjectRotation(char* o, int* v)
 {
 	float n[4];
 	float* p;

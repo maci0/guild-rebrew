@@ -15,7 +15,7 @@
 
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_00546190(char* p);
+void __cdecl he_FreeAction(char* p);
 void __cdecl fcn_00500bb0(pos14_7f4c00* s, int a, int b, int c);
 
 void __cdecl fcn_005529a0(char* p)
@@ -31,7 +31,7 @@ void __cdecl fcn_005529a0(char* p)
 		}
 	}
 	if (p[0xd8] == 0) {
-		fcn_00546190(p);
+		he_FreeAction(p);
 		return;
 	}
 	for (i = 0; i < 6; i++) {

@@ -31,7 +31,7 @@ void __cdecl fcn_00476b60(void);
 int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_00472830(int k, int j);
 void __cdecl fcn_0046e830(int x, int y, int win, int target, int id);
-void __cdecl fcn_00469510(int i);
+void __cdecl d2_ClearRadioGroup(int i);
 unsigned char* __cdecl fcn_00502cd0(int, int, int, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -83,7 +83,7 @@ void __cdecl fcn_005ada30(char* p)
 		if (refresh != 0) {
 			memset(carts, 0, sizeof(carts));
 			if (grp != -1) {
-				fcn_00469510(grp);
+				d2_ClearRadioGroup(grp);
 				grp = -1;
 			}
 			d2_SetForm(d, 2);
@@ -140,7 +140,7 @@ void __cdecl fcn_005ada30(char* p)
 		}
 	} while (fcn_005373e0(fcn_005ada30, 0x677c7) != 0);
 	if (grp != -1) {
-		fcn_00469510(grp);
+		d2_ClearRadioGroup(grp);
 	}
 	fcn_00532ef0();
 	fcn_00471e30(d);

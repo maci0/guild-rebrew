@@ -78,7 +78,7 @@ int __cdecl fcn_0064d530(char*, const char*, unsigned int);
 int __cdecl fcn_0064eeec(char*);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 int __cdecl fcn_0064d740(char*, char*, int);
-int __cdecl fcn_00517b90(char*, int, char*);
+int __cdecl io_CopyTrailingDigits(char*, int, char*);
 int __cdecl fcn_0051e070(void);
 void __cdecl fcn_00500d60(void*, void*);
 int __cdecl fcn_004fe330(char*, int);
@@ -233,7 +233,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					res = fcn_0042b2f0(g_14a540c[kind], r, 8);
 				}
 				if (e > -1) {
-					k = fcn_00517b90(text.buf, e, slot258);
+					k = io_CopyTrailingDigits(text.buf, e, slot258);
 					sprintf(text.tmp, g_6a22d8, res, slot258, p);
 				} else {
 					sprintf(text.tmp, g_68b3f8, res, p);
@@ -248,7 +248,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					res = fcn_0042b2f0(g_14a5400[kind], r, 8);
 				}
 				if (e > -1) {
-					k = fcn_00517b90(text.buf, e, slot198);
+					k = io_CopyTrailingDigits(text.buf, e, slot198);
 					sprintf(text.tmp, g_6a22d8, res, slot198, p);
 				} else {
 					sprintf(text.tmp, g_68b3f8, res, p);
@@ -263,7 +263,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					res = fcn_0042b2f0(g_14a5418[kind], r, 8);
 				}
 				if (e > -1) {
-					k = fcn_00517b90(text.buf, e, slot218);
+					k = io_CopyTrailingDigits(text.buf, e, slot218);
 					sprintf(text.tmp, g_6a22d8, res, slot218, p);
 				} else {
 					sprintf(text.tmp, g_68b3f8, res, p);
@@ -627,7 +627,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			if (grammar_state == 1 || grammar_state == 2) {
 				res = fcn_0042b2f0(g_14a540c[kind], r, 4);
 				if (e > -1) {
-					k = fcn_00517b90(text.buf, e, slot1d8);
+					k = io_CopyTrailingDigits(text.buf, e, slot1d8);
 					sprintf(text.tmp, g_6a22d8, res, slot1d8, slot98);
 				} else {
 					sprintf(text.tmp, g_68b3f8, res, slot98);
@@ -638,7 +638,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			} else if (grammar_state == 3 || grammar_state == 4) {
 				res = fcn_0042b2f0(g_14a5400[kind], r, 4);
 				if (e > -1) {
-					k = fcn_00517b90(text.buf, e, slot118);
+					k = io_CopyTrailingDigits(text.buf, e, slot118);
 					sprintf(text.tmp, g_6a22d8, res, slot118, slot98);
 				} else {
 					sprintf(text.tmp, g_68b3f8, res, slot98);
@@ -649,7 +649,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			} else if (grammar_state == 5 || grammar_state == 6) {
 				res = fcn_0042b2f0(g_14a5418[kind], r, 4);
 				if (e > -1) {
-					k = fcn_00517b90(text.buf, e, slot158);
+					k = io_CopyTrailingDigits(text.buf, e, slot158);
 					sprintf(text.tmp, g_6a22d8, res, slot158, slot98);
 				} else {
 					sprintf(text.tmp, g_68b3f8, res, slot98);

@@ -21,7 +21,7 @@ float __cdecl fcn_004ec340(unsigned short* p, int kind)
 	if (kind < 1 || kind > 7) {
 		return g_6628a8;
 	}
-	n = fcn_004e8b80(kind, 6, recs);
+	n = amt_FindOfficeSlotsByKind(kind, 6, recs);
 	count = 0;
 	for (i = 0; i < n; i++) {
 		if (recs[i].mplayerid != *(int*) (p + 2) && recs[i].mplayerid != -1) {

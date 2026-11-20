@@ -14,12 +14,12 @@ int __cdecl fcn_00472250(int, int, int);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_004ea460(void);
+int __cdecl amt_HasOccupiedOfficeType7(void);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005cadc0(int, char*, char*, int, void*);
-int __cdecl fcn_005ccca0(char*, char*, int, void*);
+int __cdecl d2_ShowTabbedSelectionDialog(char*, char*, int, void*);
 
 /* ADDRESS: GOLDTL 0x005cd440 */
 int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
@@ -83,7 +83,7 @@ int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
 	scale = btn[8] * 0x2f4;
 	do {
 		result = 0;
-		if (!fcn_004ea460()) {
+		if (!amt_HasOccupiedOfficeType7()) {
 			*(int*) (g_1015ea0 + scale + 0x5c) = 0;
 			*(int*) (g_1015ea0 + scale + 0x1d0) = 0;
 		} else {
@@ -104,7 +104,7 @@ int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
 				fcn_00471af0(dlg, 1);
 			} else if (d2_CurrentElementId == id) {
 				fcn_00471af0(dlg, 0);
-				result = fcn_005ccca0(a0, (char*) titleTextId, -1, a3);
+				result = d2_ShowTabbedSelectionDialog(a0, (char*) titleTextId, -1, a3);
 				fcn_00471af0(dlg, 1);
 			}
 			if (result && a3 == 0 && (*(unsigned char*) (a0 + 0x14) & 4) == 0) {

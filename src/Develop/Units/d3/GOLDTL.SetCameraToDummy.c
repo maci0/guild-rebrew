@@ -7,7 +7,7 @@ extern char* evt_CurrentScript;
 #include "Develop/Units/d3/d3_camera.h"
 char* __cdecl fcn_00412eb0(char* name, int kind);
 void __cdecl fcn_00438b40(char* h, char* pos);
-void __cdecl fcn_00438cb0(char* h, char* rot);
+void __cdecl d3_SetObjectRotation(char* h, char* rot);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 /* ADDRESS: GOLD 0x0040ee10 */
@@ -20,7 +20,7 @@ int __cdecl SetCameraToDummy(char** name)
 	o = fcn_00412eb0(*name, 2);
 	if (o != 0) {
 		fcn_00438b40(d3_ActiveCamera, o + 0x5c);
-		fcn_00438cb0(d3_ActiveCamera, o + 0x90);
+		d3_SetObjectRotation(d3_ActiveCamera, o + 0x90);
 		return 0;
 	}
 	sprintf(buf, "SetCameraToDummy(): Could not find Cameradummy '%s'!", *name);

@@ -5,9 +5,9 @@ extern int g_aecde0;
 extern cell10_fb5760 g_fb5760[0x8000];
 
 int __cdecl sprintf(char*, const char*, ...);
-void __cdecl fcn_004c4aa0(char*);
+void __cdecl cm_RecycleCommandQueueNode(char*);
 int __cdecl fcn_004c41c0(char*);
-void __cdecl fcn_004c4250(char*);
+void __cdecl cm_ReassembleQueuedCommand(char*);
 int __cdecl ahm_ProcessEntityChain(char*);
 void __cdecl fcn_005356b0(int);
 
@@ -36,7 +36,7 @@ int __cdecl cm_ExecCommand(void)
 				cell->f1 = 0;
 				cell->f6 = 0;
 			}
-			fcn_004c4aa0(node);
+			cm_RecycleCommandQueueNode(node);
 			node = cm_CommandQueueHead;
 		}
 		p = (char*) 0xfb5760;
@@ -80,7 +80,7 @@ int __cdecl cm_ExecCommand(void)
 				*(int*) (node + 0x91) = 0;
 				*(char**) slot = g_aed200;
 				g_aed200 = node;
-				fcn_004c4250(node);
+				cm_ReassembleQueuedCommand(node);
 				if ((unsigned char) *node < 0x6a) {
 					if (*(int*) (node + 4) == -1) {
 						cell = 0;

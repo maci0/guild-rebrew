@@ -19,7 +19,7 @@ extern int g_6b89c0;
 int __cdecl fcn_0065f220(const char*, const char*);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00416300(int, ...);
-void __cdecl fcn_00415510(int, ...);
+void __cdecl d3_SetRainEffectOptions(int, ...);
 void __cdecl fcn_004599d0(void*, void*);
 void __cdecl fcn_00459980(void*, void*, char, float);
 void __cdecl fcn_00459940(void*, void*, float);
@@ -52,7 +52,7 @@ void __cdecl fcn_00536bb0(void)
 				i = 0;
 			}
 		}
-		fcn_00415510(g_7e4538, 1, 1, i, 1000); idx = g_7e4534;
+		d3_SetRainEffectOptions(g_7e4538, 1, 1, i, 1000); idx = g_7e4534;
 	}
 	f1 = g_7e4470[idx];
 	f2 = g_7e44d0[idx];
@@ -70,7 +70,7 @@ void __cdecl fcn_00536bb0(void)
 		             (int) ((double) -f2 * (double) lim * 2.0), 1000);
 	}
 	if (g_7e4538 != 0) {
-		fcn_00415510(g_7e4538, 1, 2, (int) ((double) -f1 * (double) lim * 0.5),
+		d3_SetRainEffectOptions(g_7e4538, 1, 2, (int) ((double) -f1 * (double) lim * 0.5),
 		             (int) ((double) -f2 * (double) lim * 0.5), 1000);
 	}
 	if (g_6b89c0 == 0) {

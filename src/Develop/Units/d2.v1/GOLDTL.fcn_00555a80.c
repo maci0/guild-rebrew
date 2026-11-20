@@ -24,7 +24,7 @@ extern int g_100f1dc;
 
 int __cdecl fcn_00500cb0(char* name, char* list);
 void __cdecl fcn_00545780(Panel* p);
-void __cdecl fcn_00546190(Panel* p);
+void __cdecl he_FreeAction(Panel* p);
 void __cdecl fcn_00545670(Panel* p, int a1, int a2, char* fmt, int a4);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int a1);
@@ -32,7 +32,7 @@ void __cdecl io_AppendText(int a0);
 void __cdecl fcn_004c30a0(int a0, int a1, char* fmt, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00555a80 */
-void __cdecl fcn_00555a80(Panel* p)
+void __cdecl d2_HandleTalentLevelDialog(Panel* p)
 {
 	ENTITY_RECORD* rec;
 	int id;
@@ -72,7 +72,7 @@ void __cdecl fcn_00555a80(Panel* p)
 	}
 	if (g_100f1dc == 2) {
 		fcn_00545780(p);
-		fcn_00546190(p);
+		he_FreeAction(p);
 		return;
 	}
 	if (g_7749e8 == 0) {
@@ -83,14 +83,14 @@ void __cdecl fcn_00555a80(Panel* p)
 	}
 	g_7749e8 = 0;
 	fcn_00545780(p);
-	fcn_00546190(p);
+	he_FreeAction(p);
 	return;
 open:
 	if (p->handle == 0) {
 		fcn_00545670(p, 0, 0, (char*) 0x6a5ec4, 0x5ec);
 	}
 	if (p->handle == 0) {
-		fcn_00546190(p);
+		he_FreeAction(p);
 		return;
 	}
 	d2_CenterDialogWindows(*(int*) (p->handle + 8));
@@ -116,5 +116,5 @@ update:
 	if (p->handle != 0) {
 		fcn_00545780(p);
 	}
-	fcn_00546190(p);
+	he_FreeAction(p);
 }

@@ -11,7 +11,7 @@ int __cdecl fcn_004432d0(int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 int __cdecl gm_ResolveEntityById(char**, int, int, int);
 char __cdecl fcn_0045b990(int, float*, int*, int*, float*);
-void __cdecl fcn_004518a0(float*);
+void __cdecl d3_NormalizeVector(float*);
 void __cdecl fcn_00438b40(char*, float*);
 int __cdecl gm_GetGameSpeedSetting(void);
 
@@ -74,7 +74,7 @@ int __cdecl fcn_00558680(char* action)
 						keys[2] = gm_GetGameSpeedSetting();
 						*(int*) (action + 0xec) = g_6b7fac;
 						scale = ((float) (unsigned int) keys[2] * 0.25f + 0.5f) * scale;
-						fcn_004518a0(dir);
+						d3_NormalizeVector(dir);
 						dir[0] = scale * dir[0];
 						dir[1] = scale * dir[1];
 						dir[2] = scale * dir[2];

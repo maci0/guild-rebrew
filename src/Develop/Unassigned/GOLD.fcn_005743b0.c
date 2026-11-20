@@ -3,10 +3,10 @@
 
 /* fcn_005743b0: return fcn_005463a0(2, 0, 0x9f, 2, *(unsigned short*)a) != 0. */
 
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 
 int __cdecl fcn_005743b0(char* a)
 {
-	return fcn_005463a0(2, 0, 0x9f, 2, *(unsigned short*) a) != 0;
+	return he_StartHandlungSearch(2, 0, 0x9f, 2, *(unsigned short*) a) != 0;
 }
 

@@ -10,7 +10,7 @@ extern char g_14cf70f;
 extern float g_662a70;
 
 float* __stdcall fcn_005ebbb9(float*, const float*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl fcn_00438b40(char*, float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 
@@ -58,7 +58,7 @@ int __cdecl fcn_0052b230(void)
 				*(float*) 0x7e26f8 = *(float*) (p + 0x8c);
 				*(float*) 0x7e26f4 = (float) fmod(*(float*) 0x7e26f4, g_662958);
 			}
-			fcn_00438cb0(p, (float*) 0x7e26f0);
+			d3_SetObjectRotation(p, (float*) 0x7e26f0);
 			p = d3_ActiveCamera;
 			if (g_774650 == g_774658 && (*(int*) &g_7746c4 == 0 || *(int*) &g_7746c8 != 0)) {
 				*(int*) &d3_CameraTargetRotation = *(int*) (p + 0x84);

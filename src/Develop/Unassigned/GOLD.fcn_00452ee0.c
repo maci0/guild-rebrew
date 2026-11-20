@@ -1,4 +1,4 @@
-char* __cdecl fcn_0043a000(char* object);
+char* __cdecl d3_SelectObjectLod(char* object);
 void __cdecl fcn_0043d7c0(void* obj);
 void __cdecl fcn_00458b10(char* object, char* camera, float* position, float* out);
 
@@ -11,7 +11,7 @@ void __cdecl fcn_00452ee0(char* o)
 
 	len = 0.0f;
 	if (*(int*) (o + 0x1cc) == 0) {
-		*(char**) (o + 0x1cc) = fcn_0043a000(o);
+		*(char**) (o + 0x1cc) = d3_SelectObjectLod(o);
 		if (*(int*) (o + 0x1cc) == 0) {
 			return;
 		}

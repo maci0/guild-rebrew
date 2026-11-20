@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 
-char* __cdecl fcn_005463a0(int, int, int);
+char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004fa5b0(int, void*, void*);
 
 /* ADDRESS: GOLDTL 0x004aa550 */
-int __cdecl fcn_004aa550(unsigned short* a0, char* request, char* a2)
+int __cdecl ai_DispatchPrivilege(unsigned short* a0, char* request, char* a2)
 {
 	char text[0x40];
 	char msg[0x220];
@@ -22,7 +22,7 @@ int __cdecl fcn_004aa550(unsigned short* a0, char* request, char* a2)
 	memset(msg, 0, sizeof(msg));
 	*(int*) (msg + 0x21c) = 0;
 	if ((*(int*) ((char*) a0 + 0x1c8) & 0x100) && *(int*) (request + 8) == 4) {
-		e = fcn_005463a0(1, 0, 0x45);
+		e = he_StartHandlungSearch(1, 0, 0x45);
 		while (e != 0) {
 			if (*(int*) (e + 0xac) == *(int*) ((char*) a0 + 4)) {
 				*(int*) (msg + 0x21c) = gm_LookupEntityRecordById(*(int*) (e + 0xb0));

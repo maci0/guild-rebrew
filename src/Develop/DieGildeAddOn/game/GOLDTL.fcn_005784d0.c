@@ -9,7 +9,7 @@ void __cdecl fcn_00500bb0(char*, int, int, int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, int, int);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 void __cdecl fcn_005b2ee0(char*, char*, char*);
 
 
@@ -27,7 +27,7 @@ void __cdecl fcn_005784d0(char* obj)
 
 	lager = (unsigned short*) gm_LookupEntityRecordById(*(int*) (obj + 0xb4));
 	if (lager == 0) {
-		fcn_00546190(obj);
+		he_FreeAction(obj);
 		return;
 	}
 	state = *(int*) (obj + 0x70);
@@ -119,5 +119,5 @@ reset3:
 	}
 release:
 	fcn_00529160(0, 0, *lager, (int) obj);
-	fcn_00546190(obj);
+	he_FreeAction(obj);
 }

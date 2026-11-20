@@ -5,7 +5,7 @@ extern char g_68deb8[];
 
 #include <string.h>
 
-int __cdecl fcn_004e8d10(void*, int, void*);
+int __cdecl amt_SelectOfficeCandidates(void*, int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
@@ -19,7 +19,7 @@ void __cdecl fcn_004ec660(void* entity)
 	if (*(unsigned char*) ((char*) entity + 0xd) < 2) {
 		return;
 	}
-	n = fcn_004e8d10(entity, 6, items);
+	n = amt_SelectOfficeCandidates(entity, 6, items);
 	if (n == 0) {
 		return;
 	}

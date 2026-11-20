@@ -37,14 +37,14 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
 void __cdecl d2_SetElementValue(int, int, int, int);
-void __cdecl fcn_00469510(int);
+void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 
 /* Modal message box: flags pick the layout (2, 0x10, 0x20), 8 the wait
  * value, 0x80 a progress bar, 4 closes after 0x1f4 ticks of g_6b7fac,
  * 0x40 calls fcn_004707d0 each frame. Returns the 1/0 close code. */
 /* ADDRESS: GOLDTL 0x00526660 */
-int __cdecl fcn_00526660(int parent, int flags)
+int __cdecl d2_RunMessageBox(int parent, int flags)
 {
 	int style;
 	int n;
@@ -89,7 +89,7 @@ int __cdecl fcn_00526660(int parent, int flags)
 	if (flags & 0x80) {
 		h = fcn_004677e0(0x1c, g_77255c->x10 - 0x20, g_77255c->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
 	}
-	while (fcn_005373e0((void*) fcn_00526660, style) != 0) {
+	while (fcn_005373e0((void*) d2_RunMessageBox, style) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
 			fcn_004707d0(dlg);
@@ -116,7 +116,7 @@ int __cdecl fcn_00526660(int parent, int flags)
 		}
 	}
 	g_77470e = 0;
-	fcn_00469510(list);
+	d2_ClearRadioGroup(list);
 	fcn_00471e30(dlg);
 	return n;
 }

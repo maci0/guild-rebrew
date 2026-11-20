@@ -13,7 +13,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char, int);
 
 /* ADDRESS: GOLD 0x004c6b20 */
 /* ADDRESS: GOLDTL 0x004c76c0 */
-int __cdecl fcn_004c76c0(int cmd, char* result)
+int __cdecl cm_CreateGebaeude(int cmd, char* result)
 {
 	char* building;
 	int field_id;

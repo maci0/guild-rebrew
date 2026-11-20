@@ -32,7 +32,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
 void __cdecl fcn_00529160(char*, char*, unsigned int, char*);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x0054e390 */
 void __cdecl fcn_0054e390(char* e)
@@ -45,7 +45,7 @@ void __cdecl fcn_0054e390(char* e)
 	n = 0;
 	if (*(int*) (e + 0x70) == -2) {
 		if (!(e[0x78] & 2)) {
-			fcn_00546190(e);
+			he_FreeAction(e);
 			return;
 		}
 		n = 1;
@@ -340,7 +340,7 @@ label_54e6a1:
 	default:
 		return;
 	}
-	fcn_00546190(e);
+	he_FreeAction(e);
 	return;
 label_54e513:
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;

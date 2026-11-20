@@ -14,7 +14,7 @@ int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl fcn_0050cf50(void* obj, int n);
 int __cdecl fcn_00526010(void* slot, int value, unsigned char flag);
 int __cdecl fcn_004fa5b0(int cmd, void* slot, unsigned int* list);
-void* __cdecl fcn_005463a0(int a, int b, int c, int d, int e);
+void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 void* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0055c0f0(void* a, void* b);
 int __cdecl fcn_0055c0a0(void* a, void* b);
@@ -65,7 +65,7 @@ int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
 	if (fcn_00526010((void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), value, g_773d75) == 0) {
 		return 0;
 	}
-	entity = fcn_005463a0(2, 2, *(unsigned short*) 0x774970, 0, 0x19);
+	entity = he_StartHandlungSearch(2, 2, *(unsigned short*) 0x774970, 0, 0x19);
 	while (entity != 0) {
 		if (*(int*) ((char*) entity + 0xac) == *(int*) (record + 1)) {
 			io_FormatTextBuffer(text, 0x1702, *(unsigned short*) (record + 0x27), record);

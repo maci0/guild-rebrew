@@ -15,7 +15,7 @@ int __cdecl ai_SelectBestMethod(int, int, int, Out495a80*, Out495a80*);
 int __cdecl fcn_004fa5b0(int, char*, int*);
 int __cdecl fcn_004f97a0(int); /* 0x4fbd20, metadata name is stale */
 int __cdecl fcn_00502cd0(int, int, int, int);
-int __cdecl fcn_005463a0(int, int, int, int, int);
+int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x00495a80 */
@@ -57,7 +57,7 @@ int __cdecl fcn_00495a80(int a0, char* actorEntity, int a2, char* a3, char* a4)
 		}
 		return r;
 	}
-	if (fcn_005463a0(2, 2, *(unsigned short*) actorEntity, 0, 0x60) != 0) {
+	if (he_StartHandlungSearch(2, 2, *(unsigned short*) actorEntity, 0, 0x60) != 0) {
 		return 0;
 	}
 	if (*(char*) a3 == 0x0e) {

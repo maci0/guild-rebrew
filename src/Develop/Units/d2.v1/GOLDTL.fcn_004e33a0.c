@@ -31,7 +31,7 @@ void __cdecl fcn_00471af0(int dlg, int a);
 void __cdecl fcn_00471d80(int dlg, int a);
 void __cdecl fcn_004e44f0(int a);
 void __cdecl fcn_004e51d0(int arg, int* ids);
-void __cdecl fcn_004e4c90(int a);
+void __cdecl cut_WaitTicks(int a);
 int __cdecl fcn_0050e4a0(int a);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl fcn_004c5f60(int a, int b, int c);
@@ -45,7 +45,7 @@ void __cdecl fcn_004e4eb0(void);
 int __cdecl fcn_004c51a0(int a, int b, unsigned char kind, int amount);
 
 /* ADDRESS: GOLDTL 0x004e33a0 */
-void __cdecl fcn_004e33a0(int* arg)
+void __cdecl cut_RunAuction(int* arg)
 {
 	char temp[0x200];
 	char line[0x40];
@@ -253,7 +253,7 @@ void __cdecl fcn_004e33a0(int* arg)
 			    (void*) (round + 2), (void*) 5,
 			    (void*) bidCount, (void*) states[besti]);
 		}
-		fcn_004e4c90(5);
+		cut_WaitTicks(5);
 		round++;
 		start--;
 	}
@@ -286,8 +286,8 @@ void __cdecl fcn_004e33a0(int* arg)
 			}
 			cur = *(int*) 0x7f4c00;
 			fcn_004c4510((char*) building, *(int*) ((char*) building + 1));
-			fcn_004c4570(4, 1, 0x69, &done);
-			fcn_004c4570(4, 1, 0x6d, &cur);
+			cm_AppendPacketFieldDelta(4, 1, 0x69, &done);
+			cm_AppendPacketFieldDelta(4, 1, 0x6d, &cur);
 			fcn_004c5360();
 			fcn_004c5f60(*(int*) ((char*) building + 1),
 			    *(int*) (gm_CityEntity + 4),

@@ -11,7 +11,7 @@ extern int g_6a25a8;
 int g_6a2598 = 0xffffffff;
 extern int g_6a2524;
 
-void __cdecl fcn_0046b2b0(int h);
+void __cdecl d2_DestroyElement(int h);
 void __cdecl fcn_00475f80(int h);
 void __cdecl fcn_0047ac60(int h, int v);
 void __cdecl fcn_004752e0(int h);
@@ -25,7 +25,7 @@ void __cdecl fcn_00527420(void)
 
 	for (i = 0; i < 15; i++) {
 		if (g_7ea380[i] != -1) {
-			fcn_0046b2b0(g_7ea380[i]);
+			d2_DestroyElement(g_7ea380[i]);
 			g_7ea380[i] = -1;
 		}
 	}
@@ -50,7 +50,7 @@ void __cdecl fcn_00527420(void)
 		g_77467c = 0;
 	}
 	if (g_6a25fc != -1) {
-		fcn_0046b2b0(g_6a25fc);
+		d2_DestroyElement(g_6a25fc);
 		g_6a25fc = -1;
 	}
 	if (g_6a25a8 != -1) {

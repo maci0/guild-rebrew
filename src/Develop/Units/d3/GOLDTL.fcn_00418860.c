@@ -18,7 +18,7 @@ extern double dbl_1_0;
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_00438b40(char*, float*);
 char* __cdecl fcn_00445600(char*, int, char*, char*);
-void __cdecl fcn_00438cb0(char*, float*);
+void __cdecl d3_SetObjectRotation(char*, float*);
 float __cdecl fcn_004187f0(float, float, float);
 void __cdecl fcn_00418ae0(char*);
 /* Light colour word passed by value; byte layout from fcn_0043a3f0. */
@@ -62,7 +62,7 @@ void __cdecl fcn_00418860(char* obj)
 				pos[1] = (a > 0.0f ? 0.0002f : -0.0002f) + *(float*) (obj + 0x88);
 				pos[0] = 0.0f;
 				pos[2] = 0.0f;
-				fcn_00438cb0(obj, pos);
+				d3_SetObjectRotation(obj, pos);
 			}
 		}
 	}

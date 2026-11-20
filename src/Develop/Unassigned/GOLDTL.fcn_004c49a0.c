@@ -7,7 +7,7 @@ extern volatile int g_6b7fac;
 void __cdecl fcn_004c3ff0(void);
 int __cdecl fcn_004c4940(void);
 
-char* __cdecl fcn_004c49a0(char kind, int timeout)
+char* __cdecl cm_WaitForQueuedCommand(char kind, int timeout)
 {
 	unsigned int end;
 	char* p;

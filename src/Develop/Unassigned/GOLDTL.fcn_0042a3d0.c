@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_0042a390(int);
+int __cdecl msx_ReleaseDigitalHandle(int);
 
 int __cdecl fcn_0042a3d0(void)
 {
@@ -12,7 +12,7 @@ int __cdecl fcn_0042a3d0(void)
 
 	if (g_6b7f90 != 0) {
 		for (a = (int) msx_WaveDrivers; a < (int) (msx_WaveDrivers + 16); a += 4) {
-			if (*(int*) a != 0 && fcn_0042a390(*(int*) a) != 0) {
+			if (*(int*) a != 0 && msx_ReleaseDigitalHandle(*(int*) a) != 0) {
 				r = -1;
 			}
 		}

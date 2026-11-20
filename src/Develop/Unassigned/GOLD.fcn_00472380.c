@@ -8,7 +8,7 @@ void* __cdecl m_alloc(unsigned int, const char*);
 int __cdecl fcn_00478cb0(int*, int);
 void __cdecl fcn_004796b0(int);
 int __cdecl fcn_0046c9e0(void);
-int __cdecl fcn_004731c0(short, short, int, int);
+int __cdecl d2_AddElementToWindow(short, short, int, int);
 #define I32(p) (*(int*)(p))
 #define U16(p) (*(unsigned short*)(p))
 #define U8(p) (*(unsigned char*)(p))
@@ -119,11 +119,11 @@ int __cdecl fcn_00472380(short x, short y, short width, short height, unsigned i
     I32(window + 0x3a0) = 0;
     I32(window + 0x3a4) = 0;
     if (flags & 8) {
-        fcn_004731c0(3, 3, I32(0x5fe734), index);
+        d2_AddElementToWindow(3, 3, I32(0x5fe734), index);
     }
     if (flags & 0x20) {
-        fcn_004731c0(*(short*)(window + 8) - 0xc, 3, I32(0x5fe734) + 1, index);
-        fcn_004731c0(*(short*)(window + 8) - 0xc, *(short*)(window + 0xa) - 10, I32(0x5fe734) + 2, index);
+        d2_AddElementToWindow(*(short*)(window + 8) - 0xc, 3, I32(0x5fe734) + 1, index);
+        d2_AddElementToWindow(*(short*)(window + 8) - 0xc, *(short*)(window + 0xa) - 10, I32(0x5fe734) + 2, index);
     }
     if (flags & 0x10) {
         I32(window + 0x2c) = (int)m_alloc(0x17d0, "d2_t:w->txt");

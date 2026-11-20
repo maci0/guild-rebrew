@@ -53,7 +53,7 @@ void __cdecl sv_ClearObjectSelection(void);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_0059da50(int unused, char* e)
+void __cdecl d2_OpenRaubzugDialog(int unused, char* e)
 {
 	int btn1;
 	Packet pkt;
@@ -115,7 +115,7 @@ void __cdecl fcn_0059da50(int unused, char* e)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_0059da50, 0x677c7) != 0);
+	} while (fcn_005373e0((void*) d2_OpenRaubzugDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	sv_ClearObjectSelection();
 }

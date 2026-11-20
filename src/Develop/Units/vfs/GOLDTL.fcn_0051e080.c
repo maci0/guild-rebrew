@@ -10,7 +10,7 @@ void __cdecl fcn_0051e9d0(void);
 void __cdecl fcn_0051ea70(void);
 int __cdecl fcn_0051e490(void* stream, int flags);
 int __cdecl fcn_0051eb20(void* stream);
-int __cdecl fcn_0051ebc0(void* stream);
+int __cdecl ls_fio_SaveObjekteINST(void* stream);
 int __cdecl fcn_0051ecf0(void* stream);
 int __cdecl fcn_0051f170(void* stream);
 int __cdecl ls_SaveEntities(void* stream);
@@ -19,8 +19,8 @@ int __cdecl fcn_00520310(void* stream);
 int __cdecl fcn_00520860(void* stream);
 int __cdecl fcn_005208e0(void* stream);
 int __cdecl fcn_00520d80(void* stream);
-int __cdecl fcn_00520d90(void* stream);
-int __cdecl fcn_005212c0(void* stream);
+int __cdecl he_SaveEvents(void* stream);
+int __cdecl ls_SaveCutscenes(void* stream);
 int __cdecl fcn_00521420(void* stream);
 int __cdecl fcn_00521530(void* stream);
 int __cdecl fcn_00521840(void* stream);
@@ -34,7 +34,7 @@ int __cdecl fcn_005922e0(void* stream);
 int __cdecl fcn_005b1f10(void* stream);
 
 /* ADDRESS: GOLDTL 0x0051e080 */
-int __cdecl fcn_0051e080(char* name, char* slot, int flags)
+int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 {
 	void* stream;
 
@@ -60,7 +60,7 @@ int __cdecl fcn_0051e080(char* name, char* slot, int flags)
 	vfs_fwrite((void*) 0x100dc00, 0x18, 1, stream);
 	vfs_fwrite((void*) 0x699368, 4, 1, stream);
 	vfs_fwrite((void*) 0x773d38, 4, 1, stream);
-	if (fcn_0051ebc0(stream) == 0) {
+	if (ls_fio_SaveObjekteINST(stream) == 0) {
 		CloseVfsStream(stream);
 		fcn_0051ea70();
 		return 0;
@@ -116,12 +116,12 @@ int __cdecl fcn_0051e080(char* name, char* slot, int flags)
 			fcn_0051ea70();
 			return 0;
 		}
-		if (fcn_00520d90(stream) == 0) {
+		if (he_SaveEvents(stream) == 0) {
 			CloseVfsStream(stream);
 			fcn_0051ea70();
 			return 0;
 		}
-		if (fcn_005212c0(stream) == 0) {
+		if (ls_SaveCutscenes(stream) == 0) {
 			CloseVfsStream(stream);
 			fcn_0051ea70();
 			return 0;

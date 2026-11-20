@@ -45,7 +45,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, ...);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 #include "client_packet_builder.h"
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -74,7 +74,7 @@ int __cdecl fcn_00499ad0(char* e)
 	}
 	fcn_004c51a0(*(int*) (r + 2), *(int*) (e + 4), 0, 0x3e80);
 	fcn_004c4510(e, *(int*) (e + 4));
-	fcn_004c4570(1, 1, 0xd, &ret);
+	cm_AppendPacketFieldDelta(1, 1, 0xd, &ret);
 	fcn_004c5360();
 	fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0, 0x4000);
 	st = (*(GAME_TIMESTAMP*)&gm_GameTime);

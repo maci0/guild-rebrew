@@ -44,13 +44,13 @@ void* __cdecl sb_LoadSampleBank(char* name, int init);
 int __cdecl fcn_004c3100(char* name, int x);
 int __cdecl fcn_004e4470(char* name);
 int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5);
-void __cdecl fcn_00407800(char* e, int mode, char* name);
+void __cdecl ch_SetBodyAttachment(char* e, int mode, char* name);
 int __cdecl d2_SetForm(int k, int i);
 void __cdecl io_AppendText(int a, ...);
 int __cdecl fcn_0064d41a(char* out, char* fmt, ...);
 int __cdecl fcn_004e4b20(int a, int b, char* c, int d);
 int __cdecl fcn_00423460(int* a);
-void __cdecl fcn_004e4c90(int dur);
+void __cdecl cut_WaitTicks(int dur);
 char* __cdecl fcn_00445600(int o, int flags, int ptr, char* name);
 void __cdecl ch_QueueWalkToDummy(char* owner, char* text);
 char* __cdecl ch_CreateAction(char* e, int kind, int p);
@@ -159,9 +159,9 @@ void __cdecl cut_MainDuell(char* a0)
     fcn_004fe2e0((char*) &sB, d3_CurrentContextIndex, 0, 0, 0, (int*) 0x68cdd0);
     fcn_004fe2e0((char*) &sA, d3_CurrentContextIndex, 0, 0, 0, (int*) 0x68cdb8);
     if (sB.entity != 0 && sA.entity != 0) {
-    fcn_00407800((char*) sB.entity, 2, (char*) 0x68cdac);
+    ch_SetBodyAttachment((char*) sB.entity, 2, (char*) 0x68cdac);
     *(unsigned char*) (sB.entity + 0x240) = 4;
-    fcn_00407800((char*) sA.entity, 2, (char*) 0x68cdac);
+    ch_SetBodyAttachment((char*) sA.entity, 2, (char*) 0x68cdac);
     *(unsigned char*) (sA.entity + 0x240) = 4;
 
     i = 0;
@@ -174,7 +174,7 @@ void __cdecl cut_MainDuell(char* a0)
         p = (char*) fcn_004e4b20(-7, 0, buf1, -1);
         if (p != 0) {
             while (fcn_00423460((int*) p) != 0)
-                fcn_004e4c90(2);
+                cut_WaitTicks(2);
         }
         i++;
     } while (i < 3);
@@ -187,7 +187,7 @@ void __cdecl cut_MainDuell(char* a0)
     d2_SetForm(g_68bfc0, 0);
     io_AppendText(0x6811b0);
     io_AppendText(0x10dd);
-    fcn_004e4c90(4);
+    cut_WaitTicks(4);
     io_AppendText(0x6811b0);
     fcn_004c3030(-7, 0, (int) 0x68cd18, -1);
 
@@ -231,7 +231,7 @@ void __cdecl cut_MainDuell(char* a0)
         keepB = 1;
     }
 
-    fcn_004e4c90(6);
+    cut_WaitTicks(6);
     j = 0;
     g_772f44 = 0;
     for (;;) {
@@ -255,7 +255,7 @@ void __cdecl cut_MainDuell(char* a0)
             d2_SetForm(g_68bfc0, 0);
             io_AppendText(t + 0x1113);
             fcn_004c3030(-5, 0, (int) 0x68ccac, t);
-            fcn_004e4c90(5);
+            cut_WaitTicks(5);
         }
         d2_SetForm(g_68bfc0, 0);
         io_AppendText(0x6811b0);
@@ -274,7 +274,7 @@ compare:
         io_AppendText(0x6811b0);
         n = *(unsigned short*) p;
         io_AppendText(0x111d, n, n);
-        fcn_004e4c90(5);
+        cut_WaitTicks(5);
     } else {
         d2_SetForm(g_68bfc0, 0);
         io_AppendText(0x6811b0);
@@ -298,7 +298,7 @@ compare:
         else
             io_AppendText(0x1121, sB.id & 0xffff);
     }
-    fcn_004e4c90(4);
+    cut_WaitTicks(4);
 
     d2_SetForm(g_68bfc0, 0);
     io_AppendText(0x6811b0);
@@ -316,7 +316,7 @@ compare:
         else
             io_AppendText(0x1121, sA.id & 0xffff);
     }
-    fcn_004e4c90(4);
+    cut_WaitTicks(4);
 
     d2_SetForm(g_68bfc0, 0);
     io_AppendText(0x6811b0);
@@ -345,7 +345,7 @@ compare:
         fcn_004c3030(-8, 0, (int) 0x68cc9c, 0);
     }
 
-    fcn_004e4c90(5);
+    cut_WaitTicks(5);
     if (*(int*) (0x7f4ca4 + (g_774970 & 0xffff) * 0x21c) == *(int*) (a0 + 0xc)) {
         fcn_004c54c0(sB.idx, sA.idx, 0xf, 1);
         fcn_004c54c0(sA.idx, sB.idx, 0xf, 1);

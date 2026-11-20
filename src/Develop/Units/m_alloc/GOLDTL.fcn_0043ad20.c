@@ -1,7 +1,7 @@
 int __cdecl m_pool_clear();
 int __cdecl fcn_00437270();
 int __cdecl fcn_004372d0();
-void __cdecl fcn_00438840(float a, float b);
+void __cdecl d3_SetFogRange(float a, float b);
 int __cdecl fcn_004385e0();
 int __cdecl fcn_00440f70();
 int __cdecl fcn_00441400();
@@ -81,9 +81,9 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 			if (*(char*) 0x6b8060 && *(char*) 0x6b8061) {
 				fogDistance = fcn_004424c0(*(int*) 0x6b8300, *(int*) 0x6b8014 + 0x4c, *(int*) 0x6b8014 + 0x18c);
 				if (fogDistance < *(float*) 0x104329c) {
-					fcn_00438840((1.0f - (*(float*) 0x104329c - fogDistance) / *(float*) 0x104329c) * *(float*) 0x10425fc, fogDistance);
+					d3_SetFogRange((1.0f - (*(float*) 0x104329c - fogDistance) / *(float*) 0x104329c) * *(float*) 0x10425fc, fogDistance);
 				} else {
-					fcn_00438840(*(float*) 0x10425fc, *(float*) 0x104329c);
+					d3_SetFogRange(*(float*) 0x10425fc, *(float*) 0x104329c);
 				}
 			}
 			DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x24, *(int*) 0x1042ce4);

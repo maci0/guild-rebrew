@@ -36,7 +36,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_00472250(int, int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00533dc0(int, int, int);
+void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00475220(char*);
@@ -58,7 +58,7 @@ int __cdecl fcn_004c4eb0(char*);
 int __cdecl fcn_004c4ef0(char*);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_004c4510(int, int);
-void __cdecl fcn_004c4570(int, int, int, int);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, int);
 int __cdecl fcn_004c5360(int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_005373e0(void*, int);
@@ -66,7 +66,7 @@ int __cdecl fcn_00532ef0(void);
 char* __cdecl itoa(int, char*, int);
 
 /* ADDRESS: GOLDTL 0x005a59d0 */
-int __cdecl fcn_005a59d0(char* a0)
+int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 {
 	int v1, v2, v3, v4, v5, v6, v7, dialogId;
 	int v17, v18, v19;
@@ -95,7 +95,7 @@ int __cdecl fcn_005a59d0(char* a0)
 	e0 = fcn_00472250(dialogId, 0, 0);
 	e4 = fcn_00472250(dialogId, 0, 4);
 	d2_SetForm(dialogId, 0);
-	fcn_00533dc0(d2_CurrentWindowId, 0x73b, 0x73f);
+	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);
 	d2_SetForm(dialogId, 0);
 	h1 = d2_ShowTxt((*(int*)(g_1015ea0 + e1 * 0x2f4 + 0x10) - *(int*)(g_77255c + 4)) + 2,
 		(*(int*)(g_1015ea0 + e1 * 0x2f4 + 0x1c) - *(int*)(g_77255c + 8)) + 2
@@ -284,7 +284,7 @@ int __cdecl fcn_005a59d0(char* a0)
 				} else fcn_00533a40(g_14ab710);
 			}
 		}
-	} while (fcn_005373e0(fcn_005a59d0, 0x677c7));
+	} while (fcn_005373e0(d2_ShowMoneyExchangeDialog, 0x677c7));
 	ResetDisplayCounters();
 	fcn_00471e30(dialogId);
 	return fcn_00532ef0();

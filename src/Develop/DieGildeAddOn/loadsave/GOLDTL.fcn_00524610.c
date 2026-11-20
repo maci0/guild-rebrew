@@ -6,7 +6,7 @@
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
-int __cdecl fcn_00524610(void* x)
+int __cdecl ls_LoadGameMatrices(void* x)
 {
 	int n;
 	int i;

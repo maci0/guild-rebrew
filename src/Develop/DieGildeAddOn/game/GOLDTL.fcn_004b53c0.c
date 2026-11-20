@@ -11,7 +11,7 @@ typedef struct {
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 
-void __cdecl fcn_004b53c0(unsigned short* key, int kind, stat12* out)
+void __cdecl gm_SummarizeEntityOwnership(unsigned short* key, int kind, stat12* out)
 {
 	unsigned char* e;
 	int match;

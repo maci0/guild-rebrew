@@ -41,8 +41,8 @@ extern int g_1040494;
 extern int d2_ScreenHeight;
 
 int __cdecl fcn_0052b720(void);
-void __cdecl fcn_0052c060(void);
-void __cdecl fcn_0052ad70(void);
+void __cdecl d3_UpdateCameraFromMouse(void);
+void __cdecl d3_AdjustCameraHeight(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004125c0(int a, int b);
 
@@ -56,10 +56,10 @@ int __cdecl fcn_0052c9b0(void)
 				g_774668 = fcn_0052b720();
 			}
 			if (!(main_LoopFlags & 0x8000)) {
-				fcn_0052c060();
+				d3_UpdateCameraFromMouse();
 			}
 			if (g_6a2574[0] != 0 && g_14cf70f == 0) {
-				fcn_0052ad70();
+				d3_AdjustCameraHeight();
 			}
 			if (g_774668 != 0 && g_774650 == g_774658 && (*(int*)&g_7746c4) == 0 && (*(int*)&g_7746c8) == 0) {
 				p = (char*) gm_GetEntityTableEntry((char*) (&((Rec*)g_7f4ca0)[g_774970]));

@@ -13,7 +13,7 @@ void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 void __cdecl fcn_0045a910(void);
 void __cdecl fcn_0045a9d0(void);
 void __cdecl fcn_0045a3a0(int*, int*);
-void __cdecl fcn_0045b1d0(int*, int, int);
+void __cdecl d3_RelabelMatchingCells(int*, int, int);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0045b290 */
@@ -191,7 +191,7 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 	}
 	d3_VisitSceneObjects(g_67a370, 0, 0x40, fcn_0045a9d0, m);
 	if (m[9]) {
-		fcn_0045b1d0(m, 0xb, 0xc);
+		d3_RelabelMatchingCells(m, 0xb, 0xc);
 		for (i = 0; i < m[8]; i++) {
 			((int*) m[9])[i * 7] = 0xd;
 			((int*) m[9])[((m[8] - 1) * m[8] + i) * 7] = 0xd;

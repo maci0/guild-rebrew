@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00453ed0 */
-void __cdecl fcn_00453ed0(float* a, float* b, float* out)
+void __cdecl d3_MultiplyAffineMatrices(float* a, float* b, float* out)
 {
 	out[0] = a[0]*b[0] + a[1]*b[4] + a[2]*b[8];
 	out[1] = a[1]*b[5] + b[1]*a[0] + b[9]*a[2];

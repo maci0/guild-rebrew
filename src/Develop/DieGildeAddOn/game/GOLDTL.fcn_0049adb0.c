@@ -27,7 +27,7 @@ typedef struct Counts {
 
 unsigned short __cdecl gm_RandomMod(int n);
 void* __cdecl gm_LookupEntityRecordById(int handle);
-void* __cdecl fcn_005463a0(int a, int b, int c);
+void* __cdecl he_StartHandlungSearch(int a, int b, int c);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl ai_SelectBestMethod(int type, int id, int n, Msg* a, Msg* b);
@@ -81,7 +81,7 @@ int __cdecl fcn_0049adb0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 		slots[2].id = 0x164;
 		n = 3;
 	} else if (*(int*) (e + 0x5c) == -1) {
-		o = fcn_005463a0(1, 0, 0x41);
+		o = he_StartHandlungSearch(1, 0, 0x41);
 		while (o != 0) {
 			if (*(int*) ((char*) o + 0xac) == *(int*) (e + 4)) {
 				rec = gm_LookupEntityRecordById(*(int*) ((char*) o + 0xb0));

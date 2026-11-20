@@ -4,7 +4,7 @@
 extern int* g_6b7f50[16];
 extern int g_6b7f90;
 
-int __cdecl fcn_0042b120(int*);
+int __cdecl msx_FindWaveDriverIndex(int*);
 int __cdecl fcn_0042b180(int*);
 typedef int (__stdcall* fcn_0042abd0_f)(int, int, int);
 typedef void (__stdcall* fcn_0042abd0_g)(void);
@@ -17,7 +17,7 @@ int __cdecl fcn_0042abd0(int* device, int a2, int* outHandle)
 	int i;
 	int j;
 
-	if (g_6b7f90 != 0 && (i = fcn_0042b120(device)) >= 0 && (j = fcn_0042b180(device)) >= 0) {
+	if (g_6b7f90 != 0 && (i = msx_FindWaveDriverIndex(device)) >= 0 && (j = fcn_0042b180(device)) >= 0) {
 		*outHandle = g_662404(*device, a2, r);
 		if (*outHandle != 0) {
 			g_6b7f50[i][j] = *outHandle;

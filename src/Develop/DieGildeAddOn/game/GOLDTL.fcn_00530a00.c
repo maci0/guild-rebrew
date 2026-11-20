@@ -16,7 +16,7 @@ extern char* ch_ContextCharacters[32];
 #include <string.h>
 
 
-void __cdecl fcn_00530a00(char* b)
+void __cdecl ch_CollectContextCharacters(char* b)
 {
 	struct s_7f4ca0** out;
 	int i;

@@ -28,7 +28,7 @@ void __cdecl fcn_00526920(unsigned char*, int, char*);
 unsigned char __cdecl fcn_00506380(int, unsigned char*, int, int);
 void __cdecl fcn_0052cbb0(unsigned char*);
 
-void __cdecl fcn_00599f90(void)
+void __cdecl d2_HandleEntityChooser(void)
 {
 	Query q;
 	unsigned char* e;

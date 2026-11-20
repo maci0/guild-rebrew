@@ -3,7 +3,7 @@ extern float g_662d70;
 extern float g_662d74;
 extern float g_662d78;
 
-void __cdecl fcn_004518a0(float* v);
+void __cdecl d3_NormalizeVector(float* v);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl d3_SetObjectPosition(char* o, float* v);
 void __cdecl fcn_00438b40(char* p, float* v);
@@ -29,7 +29,7 @@ void __cdecl fcn_00405760(unsigned char* e)
 	v[0] = *(float*) (e + 0x114) - v[0];
 	v[1] = *(float*) (e + 0x118) - v[1];
 	v[2] = *(float*) (e + 0x11c) - v[2];
-	fcn_004518a0(v);
+	d3_NormalizeVector(v);
 	p = *(char**) (e + 0x34);
 	v[0] *= 0.4f;
 	v[1] *= 0.4f;

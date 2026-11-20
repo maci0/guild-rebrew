@@ -42,7 +42,7 @@ void __cdecl fcn_00517250(char*, int);
 void __cdecl fcn_004432d0(int, int);
 char __cdecl fcn_00510b70(char*);
 void __cdecl srv_LogWinsockError(void);
-void __cdecl fcn_004f6740(void);
+void __cdecl cm_InitCrimeRecords(void);
 int __cdecl fcn_0051e070(void);
 void* __cdecl fcn_00445600(int, int, int, char*);
 
@@ -63,7 +63,7 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 Figure* __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_00512680(void);
-void __cdecl fcn_00512910(void);
+void __cdecl gm_InitializeShopInventory(void);
 void __cdecl fcn_00535960(void);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_005059b0(void*, int, int);
@@ -87,7 +87,7 @@ int __cdecl fcn_00514120(char* map)
 		return 1;
 	}
 	srv_LogWinsockError();
-	fcn_004f6740();
+	cm_InitCrimeRecords();
 	if (fcn_0051e070() != 0) {
 		folder = fcn_00445600(0, 0x100, 0, "ordner_CITIES_GER");
 	} else {
@@ -142,7 +142,7 @@ int __cdecl fcn_00514120(char* map)
 	}
 	fcn_00512680();
 	fcn_004c44a0();
-	fcn_00512910();
+	gm_InitializeShopInventory();
 	fcn_004c44b0();
 	while (fcn_004c44c0() == 0) {
 		fcn_00535960();

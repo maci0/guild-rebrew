@@ -12,8 +12,8 @@ int* __cdecl fcn_004c30a0(int, int, char*, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char* __cdecl he_fn_Handlung(void);
-char* __cdecl fcn_005463a0(int, ...);
-int __cdecl fcn_00546190(char*);
+char* __cdecl he_StartHandlungSearch(int, ...);
+int __cdecl he_FreeAction(char*);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 
@@ -23,7 +23,7 @@ void __cdecl fcn_004c5530(char*);
  * target, state 2 drops that target and reports the removal, state 3
  * re-resolves an existing target and copies its clock position. States -2
  * and -1 share the release body. */
-void __cdecl fcn_0056caf0(char* a0)
+void __cdecl he_RunFireEvent(char* a0)
 {
 	float best;
 	char* found;
@@ -112,13 +112,13 @@ void __cdecl fcn_0056caf0(char* a0)
 		*(int*) (a0 + 0x70) += 1;
 		return;
 	case 3:
-		rec = fcn_005463a0(1, 0, 0x4f);
+		rec = he_StartHandlungSearch(1, 0, 0x4f);
 		while (rec != 0 && *(int*) (rec + 0xf8) != *(int*) (a0 + 4)) {
 			rec = he_fn_Handlung();
 		}
 		if (rec == 0) {
 			fcn_004c30a0(-8, 0, (char*) 0x6a6ab4, -1, 100);
-			fcn_00546190(a0);
+			he_FreeAction(a0);
 			return;
 		}
 		*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
@@ -126,7 +126,7 @@ void __cdecl fcn_0056caf0(char* a0)
 		return;
 	case -2:
 	case -1:
-		fcn_00546190(a0);
+		he_FreeAction(a0);
 		return;
 	}
 }

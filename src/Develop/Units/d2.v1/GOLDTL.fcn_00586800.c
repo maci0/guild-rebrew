@@ -39,7 +39,7 @@ void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_00586800(char* e, int* unused)
+int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 {
 	int r;
 	int ok;
@@ -78,7 +78,7 @@ int __cdecl fcn_00586800(char* e, int* unused)
 		p = fcn_004ec7d0(e);
 		if (p == 0) {
 			g_774654 = 1;
-			fcn_005373e0(fcn_00586800, 0x20007);
+			fcn_005373e0(d2_RunDomizilSkillDialog, 0x20007);
 			fcn_00471e30(h);
 			return 0;
 		}
@@ -97,7 +97,7 @@ int __cdecl fcn_00586800(char* e, int* unused)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(fcn_00586800, 0x677c7) != 0);
+	} while (fcn_005373e0(d2_RunDomizilSkillDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 	return r;
 }

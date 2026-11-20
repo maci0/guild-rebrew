@@ -4,7 +4,7 @@
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c5ed0(int, char*, int);
 
-void __cdecl fcn_005599c0(char* o)
+void __cdecl ch_PlayRandomGesture(char* o)
 {
 	switch (gm_RandomMod(4)) {
 	case 0:

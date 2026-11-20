@@ -7,7 +7,7 @@ typedef struct {
 
 
 /* ADDRESS: GOLDTL 0x00514d30 */
-char __cdecl fcn_00514d30(char* name, FACKEL_LIST* list)
+char __cdecl d3_CollectFackelObjects(char* name, FACKEL_LIST* list)
 {
 	if (strstr(name, "ub_FACKEL_") != 0) {
 		list->items[list->count] = (unsigned int)name;

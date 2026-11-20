@@ -53,7 +53,7 @@ void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl fcn_00526120(char* buf, int zero);
 int __cdecl fcn_00502cd0(int val, int a, int b, int c);
 int __cdecl fcn_00502850(void);
-int __cdecl fcn_005463a0(int a, int b, int idx, int c, int d);
+int __cdecl he_StartHandlungSearch(int a, int b, int idx, int c, int d);
 int __cdecl he_fn_Handlung(void);
 void* __cdecl fcn_00470820(short a, short b, char* name);
 void __cdecl d2_CenterDialogWindows(int h);
@@ -68,7 +68,7 @@ void __cdecl fcn_00471e30(int h);
 void __cdecl fcn_005305a0(void);
 
 /* ADDRESS: GOLDTL 0x005ad640 */
-int __cdecl fcn_005ad640(void* a0, char* obj)
+int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 {
 	int cnt;
 	int ret;
@@ -112,7 +112,7 @@ int __cdecl fcn_005ad640(void* a0, char* obj)
 					item = fcn_00502850();
 				}
 			}
-			for (item = fcn_005463a0(2, 2, g_774970, 0, 0x40); item; item = he_fn_Handlung()) {
+			for (item = he_StartHandlungSearch(2, 2, g_774970, 0, 0x40); item; item = he_fn_Handlung()) {
 				for (k = 0; k < n; k++) {
 					if (*((int*) (item + 0xac)) == *((int*) (msg.objs[k] + 0x2a))) {
 						break;
@@ -175,7 +175,7 @@ int __cdecl fcn_005ad640(void* a0, char* obj)
 							g_774654 = 1;
 						}
 					}
-				} while (fcn_005373e0(fcn_005ad640, 0x677c7));
+				} while (fcn_005373e0(d2_ShowThievesGuildSpyDialog, 0x677c7));
 				fcn_00471e30((int) dlg);
 				fcn_005305a0();
 				return ret;

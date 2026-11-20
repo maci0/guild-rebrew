@@ -23,12 +23,12 @@ int __cdecl fcn_005340f0(int);
 int __cdecl fcn_005c9450(char*, int, int*);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
-int __cdecl fcn_005c95d0(int);
+int __cdecl d2_ShowBuildingTurnSummary(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005c9850 */
-void __cdecl fcn_005c9850(void)
+void __cdecl d2_ShowGebaeudeList(void)
 {
 	Rec_5c9850 rec;
 	char* table;
@@ -55,10 +55,10 @@ void __cdecl fcn_005c9850(void)
 		} else if (g_100f1dc != -1) {
 			for (j = 0; j < n; j++) {
 				if (d2_CurrentElementId == rec.ids[j]) {
-					fcn_005c95d0(((int*) g_1015ea0)[d2_CurrentElementId * 189 + 188]);
+					d2_ShowBuildingTurnSummary(((int*) g_1015ea0)[d2_CurrentElementId * 189 + 188]);
 				}
 			}
 		}
-	} while (fcn_005373e0(fcn_005c9850, 0x657c7) != 0);
+	} while (fcn_005373e0(d2_ShowGebaeudeList, 0x657c7) != 0);
 	fcn_00471e30(obj);
 }

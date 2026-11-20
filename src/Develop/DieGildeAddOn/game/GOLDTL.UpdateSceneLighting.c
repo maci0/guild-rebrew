@@ -2,8 +2,8 @@
 
 #if defined(REBREW_GOLD)
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
-char __cdecl fcn_00438d40(char*, char*, unsigned int, char (__cdecl *)(char*, void*), void*);
-char __cdecl fcn_00438e60(char*, char*, unsigned int, void (__cdecl *)(char*));
+char __cdecl d3_VisitSceneObjectsUntilStopped(char*, char*, unsigned int, char (__cdecl *)(char*, void*), void*);
+char __cdecl d3_VisitSceneNodes(char*, char*, unsigned int, void (__cdecl *)(char*));
 char __cdecl fcn_00452e30(char*, void*);
 void __cdecl fcn_00453270(char*);
 void __cdecl fcn_00441860(int);
@@ -23,10 +23,10 @@ void __cdecl UpdateSceneLighting(unsigned char flag)
             goto update_terrain;
         }
     } else if (flag > 1) {
-        fcn_00438e60((char*)g_67a370, 0, 0x40, fcn_00453270);
+        d3_VisitSceneNodes((char*)g_67a370, 0, 0x40, fcn_00453270);
         goto update_terrain;
     }
-    fcn_00438d40((char*)g_67a370, 0, 2, fcn_00452e30, 0);
+    d3_VisitSceneObjectsUntilStopped((char*)g_67a370, 0, 2, fcn_00452e30, 0);
     d3_LightingUpdatePending = 1;
 update_terrain:
 #endif

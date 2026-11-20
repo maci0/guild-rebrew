@@ -15,7 +15,7 @@ struct pos14 {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char* __cdecl fcn_005463a0(int, int, int, ...);
+char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
 #include "client_placement.h"
@@ -23,7 +23,7 @@ int __cdecl fcn_00598150(char*, char*);
 int __cdecl fcn_005987c0(char*, char*);
 void __cdecl fcn_004432d0(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 
 void __cdecl he_AllocGebaeudeBauen(char* u)
 {
@@ -34,9 +34,9 @@ void __cdecl he_AllocGebaeudeBauen(char* u)
 	int n;
 	int i;
 
-	for (e = fcn_005463a0(1, 0, 0xd); e != 0; e = he_fn_Handlung()) {
+	for (e = he_StartHandlungSearch(1, 0, 0xd); e != 0; e = he_fn_Handlung()) {
 		if (e != u && *(int*) (e + 0x70) < 5) {
-			fcn_00546190(u);
+			he_FreeAction(u);
 			return;
 		}
 	}
@@ -46,7 +46,7 @@ void __cdecl he_AllocGebaeudeBauen(char* u)
 	*(int*) (u + 0xc4) = 0;
 	*(int*) (u + 0xc8) = 0;
 	if (fcn_00597ff0(*(int*) (u + 0xb0), text) == 0) {
-		fcn_00546190(u);
+		he_FreeAction(u);
 		return;
 	}
 	saved = d3_CurrentContextIndex;
@@ -55,12 +55,12 @@ void __cdecl he_AllocGebaeudeBauen(char* u)
 	n = fcn_00598150(text, list);
 	if (n == 0) {
 		fcn_004432d0(saved, 1);
-		fcn_00546190(u);
+		he_FreeAction(u);
 		return;
 	}
 	for (i = 0; i < n; i++) {
 		if (fcn_005987c0(u + 0xd4, list) == 0) {
-			fcn_00546190(u);
+			he_FreeAction(u);
 			fcn_004432d0(saved, 1);
 			return;
 		}

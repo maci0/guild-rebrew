@@ -18,7 +18,7 @@ extern char g_7f4ca0[];
 extern int gm_CityEntity;
 extern char g_6a5998[];
 
-void __cdecl fcn_00546190(char*);
+void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c4450(int);
 void __cdecl gm_ResolveEntityById(char**, int, int, int);
 void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
@@ -44,7 +44,7 @@ void __cdecl fcn_0054a210(char* a0)
     o = a0;
     none = -1;
     if (*(int*) (o + 0x70) == none || *(int*) (o + 0x70) == -2) {
-        fcn_00546190(o);
+        he_FreeAction(o);
         return;
     }
     if (*(unsigned char*) (o + 0x78) & 4) {

@@ -17,13 +17,13 @@ extern int g_7747f0;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 #include "client_packet_builder.h"
-void __cdecl fcn_004c4570(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004e4ae0(char*, int);
 void __cdecl fcn_004e4e90(char*);
 void __cdecl fcn_004e4730(char*);
 int __cdecl fcn_004e4470(char*);
-int __cdecl fcn_004e4d00(int, int, int);
+int __cdecl cut_WaitForTimeoutOrInput(int, int, int);
 int __cdecl cut_RandMod(int);
 void __cdecl fcn_004e4b40(int, int, char*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -33,7 +33,7 @@ void __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472250(int, int, char*);
 void __cdecl d2_SetBildArgument(int, int);
-void __cdecl fcn_00474cf0(int);
+void __cdecl d2_SelectControl(int);
 char* __cdecl fcn_00471f80(int);
 int __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_00471e30(int);
@@ -95,7 +95,7 @@ void __cdecl fcn_004e2890(char* m)
 
 		v = 8;
 		fcn_004c4510(b, *(int*) (b + 4));
-		fcn_004c4570(1, 1, 2, &v);
+		cm_AppendPacketFieldDelta(1, 1, 2, &v);
 		fcn_004c5360();
 	}
 	cut_EventLoopFlags = 0x702c6;
@@ -104,7 +104,7 @@ void __cdecl fcn_004e2890(char* m)
 	fcn_004e4e90("cd2\\Geburt.mp3");
 	fcn_004e4730("Geburt.ed3");
 	esc = fcn_004e4470("cutscenes\\geburt\\enter_Geburt.esc");
-	if (fcn_004e4d00(0x1964, 0, 0) == 0) {
+	if (cut_WaitForTimeoutOrInput(0x1964, 0, 0) == 0) {
 		if (a[9] == 0) {
 			if (b[9] == 0)
 				fcn_004e4b40(-8, snd, "_GEBURT", cut_RandMod(2), 0);
@@ -115,10 +115,10 @@ void __cdecl fcn_004e2890(char* m)
 		} else {
 			fcn_004e4b40(-8, snd, "_GEBURT", cut_RandMod(2) + 6, 0);
 		}
-		if (fcn_004e4d00(1000, 0, 0) == 0) {
+		if (cut_WaitForTimeoutOrInput(1000, 0, 0) == 0) {
 			for (n = cut_RandMod(4) + 2; n > 0; n--)
 				fcn_004e4b40(-8, snd, "_GEBURT_GESCHREI", cut_RandMod(5), gm_RandomMod(0x800) + 1000);
-			fcn_004e4d00(7000, 0, 0);
+			cut_WaitForTimeoutOrInput(7000, 0, 0);
 		}
 	}
 	sc = fcn_00470820(0, 0, "cutscenes\\geburt");
@@ -131,19 +131,19 @@ void __cdecl fcn_004e2890(char* m)
 	d2_SetForm(sc, 2);
 	w = fcn_00472250(sc, 2, io_AppendText((int) "$L%t", b + 0x30));
 	d2_SetBildArgument(w, 0xf);
-	fcn_00474cf0(w);
+	d2_SelectControl(w);
 	for (;;) {
 		if (g_14cf950 == 0x1c || tp_d2_SelectedControl == 0) {
 			strcpy(buf, fcn_00471f80(w));
 			if (buf[0] != 0)
 				break;
-			fcn_00474cf0(w);
+			d2_SelectControl(w);
 		}
 		if (fcn_005373e0(0, cut_EventLoopFlags) == 0 || g_7747f0 != 0)
 			break;
 	}
 	fcn_004c4510(b, *(int*) (b + 4));
-	fcn_004c4570(1, 0x10, 0x30, buf);
+	cm_AppendPacketFieldDelta(1, 0x10, 0x30, buf);
 	fcn_004c5360();
 	fcn_00471e30(sc);
 	fcn_004e48b0();

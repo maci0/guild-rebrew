@@ -26,7 +26,7 @@ int __cdecl fcn_004b47a0(char* t, Spec* s);
 int __cdecl fcn_004b47e0(char* t, Spec* s);
 int __cdecl fcn_004b4830(char* t, Cmd* c, Spec* s);
 int __cdecl fcn_004b4860(char* t, Spec* s);
-int __cdecl fcn_004b48d0(char* t, Spec* s);
+int __cdecl gm_HasThreeFullyEquippedBuildings(char* t, Spec* s);
 int __cdecl fcn_004b49a0(char* t, Spec* s);
 int __cdecl fcn_004b49e0(char* t, Spec* s);
 int __cdecl fcn_004b4a20(char* t, Spec* s);
@@ -102,7 +102,7 @@ int __cdecl fcn_004b5070(Cmd* c)
 	case 8:
 		return fcn_004b4860(t, s);
 	case 12:
-		return fcn_004b48d0(t, s);
+		return gm_HasThreeFullyEquippedBuildings(t, s);
 	case 20:
 	case 25:
 	case 36:

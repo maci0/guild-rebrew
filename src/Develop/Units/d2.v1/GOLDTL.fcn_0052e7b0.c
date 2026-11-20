@@ -36,14 +36,14 @@ void __cdecl d2_SetForm(int h, int mode);
 int __cdecl fcn_0050f950(int a, int b);
 int __cdecl fcn_00507c30(int k);
 float __cdecl fcn_004ff040(char* e);
-void __cdecl fcn_005186c0(int id, int a, int b, char* out);
+void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
 void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
 int __cdecl fcn_004677e0(int a, int b, int c, int d, int e, int f, int g, int h);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00534160(int x, int y, int v, int kind);
 
-void __cdecl fcn_0052e7b0(char* e)
+void __cdecl d2_OpenPersonInfoPanel(char* e)
 {
 	char buf[512];
 	int rel;
@@ -64,7 +64,7 @@ void __cdecl fcn_0052e7b0(char* e)
 			kind = fcn_00507c30(*(unsigned char*) (e + 0x165));
 		}
 		pct = (int) (fcn_004ff040(e) * 100.0);
-		fcn_005186c0(*(unsigned short*) e, 1, 4, buf);
+		io_FormatEntityNameMarkup(*(unsigned short*) e, 1, 4, buf);
 		io_AppendText(g_6a2e8c, buf, pct);
 		d2_SetForm(g_6a25b8, 0);
 		x = (((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1;

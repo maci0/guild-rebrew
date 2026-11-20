@@ -49,7 +49,7 @@ int __cdecl AttachAnim(char** character, char** animation, int* kind)
 		options.mode = 0;
 		options.loop = 1;
 		options.reverse = 0;
-		fcn_00434970(*(char**) (object + 0x1cc), name, options);
+		d3_AttachAnimationToContext(*(char**) (object + 0x1cc), name, options);
 	}
 	if (*(int*) (evt_CurrentScript + 0xc84) == 1) {
 		*(void**) (evt_CurrentScript + 0xc60) = (void*) AttachAnim;

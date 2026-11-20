@@ -9,7 +9,7 @@ void* __cdecl m_alloc(int size, char* tag);
 
 /* ADDRESS: GOLD 0x0044ece0 */
 /* ADDRESS: GOLDTL 0x0044d5a0 */
-void __cdecl fcn_0044d5a0(int unused, char* s)
+void __cdecl d3_InitAGIPointBuffer(int unused, char* s)
 {
 	int n;
 
