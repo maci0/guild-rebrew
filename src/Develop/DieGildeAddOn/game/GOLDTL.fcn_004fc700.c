@@ -25,7 +25,7 @@ typedef struct {
 	char pad1a0[0x21c - 0x1a0];
 } Obj;
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int g_773d48;
 extern int g_99f724;
 
@@ -52,7 +52,7 @@ int __cdecl fcn_004fc700(unsigned short id, Slots* s, unsigned char flags)
 	if (i >= 6) {
 		return 0;
 	}
-	n = ((Obj*)g_7f4ca0)[id].count;
+	n = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].value_19c);
 	f = n * (offer.amount * 0.01f);
 	if (!(f > 0.0f)) {
 		f = 0.0f;
@@ -65,7 +65,7 @@ int __cdecl fcn_004fc700(unsigned short id, Slots* s, unsigned char flags)
 		if (flags & 1) {
 			p = fcn_0050e4a0(1);
 			p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
-			fcn_004c51a0(*(int*) (p + 2), ((Obj*)g_7f4ca0)[id].owner, 0, v);
+			fcn_004c51a0(*(int*) (p + 2), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), 0, v);
 			g_773d48++;
 		}
 		if (flags & 2) {

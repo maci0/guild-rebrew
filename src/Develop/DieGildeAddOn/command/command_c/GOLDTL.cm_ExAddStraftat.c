@@ -19,7 +19,7 @@ typedef struct Area {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_straftat.h"
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 void __cdecl srv_SeedRandom(int);
 void __cdecl fcn_004b4650(char*, int);
@@ -99,7 +99,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 				continue;
 			}
 			slot = *(unsigned short*) ((char*) ent + 8);
-			if (gs_AddBeweis(rec->id, *(int*) (g_7f4ca0 + slot * 0x21c + 4)) == 0) {
+			if (gs_AddBeweis(rec->id, *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slot].entity_id) == 0) {
 				break;
 			}
 			if (out != 0) {
@@ -107,7 +107,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 
 				px = (char*) gm_LookupEntityRecordById(*(int*) ((char*) ent + 0xc4));
 				if (px != 0) {
-					fcn_005b2740(px, g_7f4ca0 + slot * 0x21c);
+					fcn_005b2740(px, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slot]));
 				}
 			}
 		}

@@ -1,6 +1,6 @@
 extern unsigned char* lpGebaeudePROT;
 extern float g_6652d8[];
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 // SIZE 0x21c
 struct s_7f4ca0 {
 	char pad[2];
@@ -27,7 +27,7 @@ void __cdecl fcn_0057b070(char* o)
 	int b;
 
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac));
-	if (e != 0 && lpGebaeudePROT[*e * 0x24d] == 0x1d) {
+	if (e != 0 && ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category == 0x1d) {
 		x = gm_LookupEntityRecordById(*(int*) (o + 0xc));
 		if (x != 0) {
 			fcn_004f2810(x, e, *(int*) (o + 0xb0), *(unsigned char*) (o + 0xb4),

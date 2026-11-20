@@ -98,10 +98,10 @@ int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, c
 	d2_SetForm(dlg, 1);
 	for (i = 0; i < count; i++) {
 		recs[i].id = d2_ShowTxt(0, (short) (i * 24), recs[i].name, d2_CurrentWindowId);
-		((Slot*)g_1015ea0)[recs[i].id].f5c = 1;
-		((Slot*)g_1015ea0)[recs[i].id].f6c = 1;
-		((Slot*)g_1015ea0)[recs[i].id].f18 = ((Win*)g_77255c)->fc;
-		((Slot*)g_1015ea0)[recs[i].id].f1d0 = 3;
+		((D2_CONTROL_TL*) g_1015ea0)[recs[i].id].value_05c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[recs[i].id].value_06c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[recs[i].id].width = ((Win*)g_77255c)->fc;
+		((D2_CONTROL_TL*) g_1015ea0)[recs[i].id].flags_1d0 = 3;
 	}
 	_itoa(count, buf, 10);
 	fcn_0046f940(field, buf);

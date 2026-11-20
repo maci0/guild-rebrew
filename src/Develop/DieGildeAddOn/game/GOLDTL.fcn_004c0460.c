@@ -3,7 +3,7 @@ typedef struct Slots {
 	char* obj;
 } Slots;
 // SIZE 0xb8
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
 extern char g_868060[];
 extern unsigned char g_773d75;
@@ -31,7 +31,7 @@ void __cdecl fcn_004c0460(char* e, char who)
 	char* q;
 	char* par;
 	int k;
-	unsigned char* t;
+	BUILDING_PROTOTYPE *t;
 	Slots a = {0};
 	Slots b = {0};
 	char name[0x80];
@@ -52,8 +52,8 @@ void __cdecl fcn_004c0460(char* e, char who)
 	if (q == 0) {
 		return;
 	}
-	t = lpGebaeudePROT + *(unsigned char*) q * 0x24d;
-	if (*t != 10 && *t != 0x1c) {
+	t = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) q];
+	if (t->category != 10 && t->category != 0x1c) {
 		if (fcn_0050cce0(q, &a, 0) == 0) {
 			return;
 		}
@@ -66,9 +66,9 @@ void __cdecl fcn_004c0460(char* e, char who)
 			continue;
 		}
 		val = 0;
-		if (*t == 10) {
+		if (t->category == 10) {
 			src = fcn_00503d10(p[0]);
-		} else if (*t == 0x1c) {
+		} else if (t->category == 0x1c) {
 			src = fcn_00502cd0(*(int*) (q + 0x5d), 2, 0, 0x1dc, 6);
 		} else {
 			src = a.obj;
@@ -83,9 +83,9 @@ void __cdecl fcn_004c0460(char* e, char who)
 		}
 		m = gm_eval_SlotVoll(b.obj, p[0], n);
 		if (*(short*) (q + 0x27) != *(short*) par) {
-			if (*t == 10) {
+			if (t->category == 10) {
 				val = (int) (fcn_0050bb50(*(unsigned short*) o, g_773d75) * 1.1f);
-			} else if (*t == 0x1c) {
+			} else if (t->category == 0x1c) {
 				val = (int) (fcn_0050bb50(*(unsigned short*) o, q[0x65]) * 1.1f);
 			} else {
 				val = (int) (fcn_0050bb50(*(unsigned short*) o, g_773d75) * *(float*) (q + 0x49));

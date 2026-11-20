@@ -4,11 +4,11 @@
  */
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/goods_plan.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 /* g_100d0c0: 0x58-byte object records. */
 #pragma pack(push, 1)
 #include "production_goods.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 
@@ -111,9 +111,9 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 	ai_ResourceCount = 0;
 	for (k = 0; k < g_100b0ac; k++) {
 		for (j = 0; j != 4; j++) {
-			id = *(unsigned short*) (lpObjektePROT +
-			                         g_100d0c0[k].goods_id * 0x41 + 0x2e +
-			                         j * 2);
+			id = ((OBJECT_PROTOTYPE *)lpObjektePROT)[
+			                         g_100d0c0[k].goods_id].ingredient_ids[
+			                         j];
 			if (id == 0) {
 				continue;
 			}
@@ -148,7 +148,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		}
 	}
 
-	kind = ((Lvl*) lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].kind;
+	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
 	if (kind == 0xe || kind == 8 || kind == 0x20) {
 		if (ai_ResourceCount > 0) {
 			for (k = 0; k < ai_ResourceCount; k++) {
@@ -209,7 +209,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		}
 	}
 
-	kind = ((Lvl*) lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].kind;
+	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
 	if ((kind == 0x1d || kind == 0x1f) && ai_ResourceCount > 0) {
 		for (k = 0; k < ai_ResourceCount; k++) {
 			type = g_100b0c0[k].goods_id;
@@ -332,7 +332,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		}
 	}
 
-	kind = ((Lvl*) lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].kind;
+	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
 	if (kind == 8 || kind == 0xe) {
 		for (e = he_StartHandlungSearch(2, 0, 0x14, 3,
 		                     *(int*) (*(char**) (a + 0x16c) + 1));
@@ -352,7 +352,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		}
 	}
 
-	kind = ((Lvl*) lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].kind;
+	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
 	if (kind == 8) {
 		for (e = he_StartHandlungSearch(2, 0, 0x15, 3,
 		                     *(int*) (*(char**) (a + 0x16c) + 1));
@@ -372,7 +372,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		}
 	}
 
-	kind = ((Lvl*) lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].kind;
+	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
 	if (kind == 0x1d || kind == 0x1f) {
 		for (e = he_StartHandlungSearch(2, 0, 0x8c, 3,
 		                     *(int*) (*(char**) (a + 0x16c) + 1));

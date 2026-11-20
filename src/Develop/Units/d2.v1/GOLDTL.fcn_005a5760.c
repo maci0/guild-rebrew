@@ -60,21 +60,21 @@ void __cdecl fcn_005a5760(Row* rows, int window, int form, int a4)
 			rows[i].icon = fcn_00466ee0((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, 0x82, d2_CurrentWindowId);
 		} else {
 			rows[i].icon = fcn_0046f740((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, d2_CurrentWindowId);
-			((Ctl*)g_1015ea0)[rows[i].icon].x5c = 1;
+			((D2_CONTROL_TL*) g_1015ea0)[rows[i].icon].value_05c = 1;
 		}
-		((Ctl*)g_1015ea0)[rows[i].icon].x54 = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[rows[i].icon].value_054 = 1;
 		rows[i].name = d2_ShowTxt((((Screen*)g_77255c)->width - 0xbe) >> 1, i * 0x4c + 0x30, "", d2_CurrentWindowId);
 		io_FormatTextBuffer(buf, "%S", g_14a79c0[rows[i].id * 2]);
 		fcn_0046f940(rows[i].name, buf);
 		d2_SetElementFont(rows[i].icon, 0x54);
 		d2_SetElementFont(rows[i].name, 0x54);
-		((Ctl*)g_1015ea0)[rows[i].name].x6c = 1;
-		((Ctl*)g_1015ea0)[rows[i].name].x18 = 0xbe;
+		((D2_CONTROL_TL*) g_1015ea0)[rows[i].name].value_06c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[rows[i].name].width = 0xbe;
 		rows[i].info = d2_ShowTxt((((Screen*)g_77255c)->width - 0xbe) >> 1, i * 0x4c + 0x3f, "", d2_CurrentWindowId);
 		io_FormatTextBuffer(buf, "%s", g_868060 + rows[i].owner * 0x2f4);
 		fcn_0046f940(rows[i].info, buf);
 		d2_SetElementFont(rows[i].info, 0x54);
-		((Ctl*)g_1015ea0)[rows[i].info].x6c = 1;
-		((Ctl*)g_1015ea0)[rows[i].info].x18 = 0xbe;
+		((D2_CONTROL_TL*) g_1015ea0)[rows[i].info].value_06c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[rows[i].info].width = 0xbe;
 	}
 }

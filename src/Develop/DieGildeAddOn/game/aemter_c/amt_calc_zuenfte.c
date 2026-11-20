@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern int g_6798d4;
 extern unsigned char* lpGebaeudePROT;
 extern int g_6b7fdc;
@@ -144,7 +144,7 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 			if (t == 0) {
 				found = (unsigned int) d3_CurrentContextIndex;
 				fcn_004432d0(0, 1);
-				rowbase = (char*) (lpGebaeudePROT + row * 0x24d);
+				rowbase = (char*) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[row];
 				fcn_00597ff0(row, names);
 				n = fcn_00598150(names, ids);
 				rec = (char*) ids[gm_RandomMod(n) & 0xffff];

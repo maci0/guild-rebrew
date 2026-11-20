@@ -1,7 +1,7 @@
 // SIZE 0xc
 #include "client_types.h"
 typedef VECTOR3 Vec3;
-
+#include "Develop/Units/d3/d3_object.h"
 // SIZE 0xc
 typedef Pal_1041d20 Pal;
 
@@ -94,13 +94,13 @@ void __cdecl fcn_00442e30(void)
 	}
 	n = 0x48;
 	for (i = 0; i < 7; i++) {
-		((Slot*)g_1041d80)[i].a.x = g_67bbdc.x;
-		((Slot*)g_1041d80)[i].a.y = g_67bbdc.y;
-		((Slot*)g_1041d80)[i].a.z = g_67bbdc.z;
-		((Slot*)g_1041d80)[i].b.x = g_6b86c4.x;
-		((Slot*)g_1041d80)[i].b.y = g_6b86c4.y;
-		((Slot*)g_1041d80)[i].b.z = g_6b86c4.z;
-		d = (char*) ((Slot*)g_1041d80)[i].pal;
+		((D3_SCENE_SLOT*)g_1041d80)[i].a.x = g_67bbdc.x;
+		((D3_SCENE_SLOT*)g_1041d80)[i].a.y = g_67bbdc.y;
+		((D3_SCENE_SLOT*)g_1041d80)[i].a.z = g_67bbdc.z;
+		((D3_SCENE_SLOT*)g_1041d80)[i].b.x = g_6b86c4.x;
+		((D3_SCENE_SLOT*)g_1041d80)[i].b.y = g_6b86c4.y;
+		((D3_SCENE_SLOT*)g_1041d80)[i].b.z = g_6b86c4.z;
+		d = (char*) ((D3_SCENE_SLOT*)g_1041d80)[i].pal;
 		/*
 		 * TODO: replace this inline-asm copy with proper C once a spelling is
 		 * found; recorded C copy probes did not emit the prelude

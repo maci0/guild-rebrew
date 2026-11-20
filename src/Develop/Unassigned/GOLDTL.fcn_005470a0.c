@@ -53,7 +53,7 @@ void __cdecl fcn_005470a0(void)
 		m.b4 = 0x6b;
 		m.fc = -1;
 		m.b36 = 2;
-		m.f8 = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+		m.f8 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
 		m.pos = (*(pos14_7f4c00*)&gm_GameTime);
 		fcn_004c5530(&m);
 	}

@@ -5,7 +5,7 @@ void __cdecl fcn_004fd400(short* a, int* b);
 int __cdecl gm_AccumulateTyped2(unsigned short* e);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 extern unsigned char g_773d75;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -53,7 +53,7 @@ void __cdecl fcn_004ac410(unsigned char* entity, int a2, int a3)
 	}
 	if (p[0] == 1) {
 		for (i = 0; i < 768; i++) {
-			rec = g_7f4ca0 + i * 540;
+			rec = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 			if (*(int*) (rec + 4) != *(int*) (entity + 4)
 			    && gm_MapEntityStatRange(*(unsigned char*) (rec + 0x164)) == *(unsigned short*) (p + 1))
 				fcn_004c54c0(*(int*) (entity + 4), *(int*) (rec + 4), gm_RandomMod(4) + 3, 0);

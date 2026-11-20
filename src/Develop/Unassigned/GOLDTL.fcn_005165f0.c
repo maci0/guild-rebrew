@@ -1,5 +1,5 @@
 extern unsigned char* lpGebaeudePROT;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 
@@ -9,14 +9,14 @@ void __cdecl SelectTextureSet(char*, int, int, int);
 
 char __cdecl fcn_005165f0(char* o, unsigned char* e)
 {
-	unsigned char* t;
+	BUILDING_PROTOTYPE *t;
 	int n;
 	int st;
 	int i;
 
-	t = lpGebaeudePROT + *e * 0x24d;
-	n = t[0x247] - 1;
-	if (*t == 2) {
+	t = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e];
+	n = t->level - 1;
+	if (t->category == 2) {
 		n++;
 	}
 	st = *(int*) (o + 0x220);

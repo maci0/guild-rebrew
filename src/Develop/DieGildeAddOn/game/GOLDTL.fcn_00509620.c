@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/entity.h"
 
 extern char* gm_CityEntity;
@@ -146,7 +146,7 @@ int __cdecl fcn_00509620(int sourceId, int targetId)
 		node = *(void**) ((char*) node + 0x3f)) {
 		unsigned short id;
 		id = *(unsigned short*) node;
-		if (id != 0 && lpObjektePROT[id * 0x41] == 9)
+		if (id != 0 && (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].kind) == 9)
 			gm_AddObjekt(*(int*) ((char*) &rec_a + 4), id,
 				*(int*) ((char*) node + 0xe));
 	}

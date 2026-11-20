@@ -17,7 +17,7 @@ typedef struct
 	char pad_a0[0x254];
 } fcn_00467870_Def;
 // SIZE 0x2f4
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00467870 */
 int __cdecl fcn_00467870(int idx, int* out1, int* out2)
 {
@@ -29,17 +29,17 @@ int __cdecl fcn_00467870(int idx, int* out1, int* out2)
 	int v;
 	int r;
 
-	e = ((fcn_00467870_Def*) g_1015ea0)[idx].f0c;
+	e = *(int*) (&((D2_CONTROL_TL*) g_1015ea0)[idx].data);
 	lo = (char*) fcn_0047b620(e, 0);
 	fcn_0047b620(e, 1);
 	hi = (char*) fcn_0047b620(e, 3);
-	d = ((fcn_00467870_Def*) g_1015ea0)[idx].f94 - ((fcn_00467870_Def*) g_1015ea0)[idx].f90;
-	q = ((fcn_00467870_Def*) g_1015ea0)[idx].f8c - ((fcn_00467870_Def*) g_1015ea0)[idx].f90;
-	v = (int) ((float) ((fcn_00467870_Def*) g_1015ea0)[idx].f9c / d * q);
+	d = ((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_094 - ((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_090;
+	q = ((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c - ((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_090;
+	v = (int) ((float) ((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_09c / d * q);
 	r = v - (((unsigned short) *(short*) (hi + 2)) >> 1)
 	    + (unsigned short) *(short*) (lo + 2)
-	    + ((fcn_00467870_Def*) g_1015ea0)[idx].f10;
+	    + ((D2_CONTROL_TL*) g_1015ea0)[idx].x;
 	*out1 = r;
-	*out2 = ((fcn_00467870_Def*) g_1015ea0)[idx].f14;
+	*out2 = ((D2_CONTROL_TL*) g_1015ea0)[idx].y;
 	return 1;
 }

@@ -51,7 +51,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl gm_GetElapsedMinutes(char*, char*);
 void __cdecl fcn_0046f940(int, int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c2a40 */
 void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 {
@@ -135,7 +135,7 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 		r = *(char**) 0x77255c;
 		fcn_00533f40(*(int*) (r + 0x10) - 0x4c, *(int*) (r + 0xc) - 0x20,
 		             d2_CurrentWindowId, cnt);
-		*(int*) (g_1015ea0 + 0x84 + child * 0x2f4) = 0x56;
+		((D2_CONTROL_TL*) (g_1015ea0))[child].font = 0x56;
 	}
 	d2_SetForm(han, 2);
 	if (nslots >= 1) {
@@ -149,7 +149,7 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 			val = (int) (eval_ObjektPreis2Credits(id, 100) * scale);
 			handle = fcn_0046f740(0x10, cnt, (char*) (id + 0xdf), d2_CurrentWindowId);
 			ep[1] = handle;
-			r = g_1015ea0 + handle * 0x2f4;
+			r = (char*) &((D2_CONTROL_TL*) g_1015ea0)[handle];
 			*(int*) (r + 0x5c) = 1;
 			*(int*) (r + 0x1d0) = 3;
 			*(int*) (r + 0x1e4) = 0x520;
@@ -227,7 +227,7 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 					ep = slots;
 					sel = 0;
 					for (;;) {
-						*(int*) (g_1015ea0 + ep[1] * 0x2f4 + 0x1f4) = 0;
+						((D2_CONTROL_TL*) (g_1015ea0))[ep[1]].value_1f4.bits = 0;
 						if ((unsigned short) *(short*) (r + 0xb0) ==
 						    (unsigned short) ep[0]) {
 							break;
@@ -241,12 +241,12 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 					if (sel < nslots) {
 						id = slots[sel * 3];
 						handle = slots[sel * 3 + 1];
-						*(int*) (g_1015ea0 + id * 0x2f4 + 0x5c) = 0;
+						((D2_CONTROL_TL*) (g_1015ea0))[id].value_05c = 0;
 						fcn_0046f940(handle, *(int*) 0x14ab264);
 						lo = (float) gm_GetElapsedMinutes(r + 0x44, r + 0x52);
 						hi = (float) gm_GetElapsedMinutes(r + 0x44,
 						                          (char*) 0x7f4c00);
-						*(float*) (g_1015ea0 + id * 0x2f4 + 0x1f4) =
+						((D2_CONTROL_TL*) (g_1015ea0))[id].value_1f4.real =
 						    hi / lo;
 					}
 					break;
@@ -264,7 +264,7 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 			idx = nslots;
 			do {
 				if (fcn_00502cd0(*(int*) (productionBuilding + 0x5d), 1, 0, ep[0]) != 0) {
-					*(int*) (g_1015ea0 + ep[1] * 0x2f4 + 0x5c) = 0;
+					((D2_CONTROL_TL*) (g_1015ea0))[ep[1]].value_05c = 0;
 					fcn_0046f940(ep[2], *(int*) 0x14ab268);
 					removed++;
 				}

@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern int __cdecl fcn_00502cd0(int handle, ...);
 extern int __cdecl fcn_005013c0(void* link);
 extern void* __cdecl gm_NextEntityQueryMatch(void);
@@ -25,13 +26,12 @@ int __cdecl fcn_0050bff0(unsigned char* building)
 	unsigned char* def;
 	unsigned char* def2;
 	double ratio;
-
 	chain_count = 0;
 	match_count = 0;
 	seen = 0;
 	i = 0;
-	base = (unsigned char*) (lpGebaeudePROT + *building * 0x24d);
-	slot = (unsigned short*) (base + 0x23);
+	base = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building];
+	slot = ((BUILDING_PROTOTYPE*)base)->components;
 	while (i < 0x40) {
 		if (*slot == 0)
 			break;
@@ -50,7 +50,7 @@ int __cdecl fcn_0050bff0(unsigned char* building)
 					want = fcn_005013c0(p);
 					repeats = 1;
 					for (k = i + 1; k < 0x40; k++) {
-						s = (unsigned short*) (base + 0x23 + k * 2);
+						s = &((BUILDING_PROTOTYPE*)base)->components[k];
 						if (*s == 0)
 							break;
 						id2 = *s & 0x7fff;

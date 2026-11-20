@@ -11,7 +11,7 @@ int __cdecl fcn_00470820(int, int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl d2_SetForm(int, int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00545670 */
 int __cdecl fcn_00545670(char* e, short a2, short a3, int a4, int a5)
 {
@@ -46,7 +46,7 @@ allocate_slot:
 	*(int*) ((char*) *(int*) (e + 0x74)) = (int) e;
 	*(int*) ((char*) *(int*) (e + 0x74) + 4) = fcn_0046f740(i << 5, 0, a5, d2_CurrentWindowId);
 	v = *(int*) ((char*) *(int*) (e + 0x74) + 4);
-	*(int*) (g_1015ea0 + v * 0x2f4 + 0x58) = 1;
+	((D2_CONTROL_TL*) (g_1015ea0))[v].value_058 = 1;
 	*(int*) ((char*) *(int*) (e + 0x74) + 8) = fcn_00470820(a2, a3, a4);
 	fcn_00471d80(*(int*) ((char*) *(int*) (e + 0x74) + 8), 3);
 	fcn_00471af0(*(int*) ((char*) *(int*) (e + 0x74) + 8), 0);

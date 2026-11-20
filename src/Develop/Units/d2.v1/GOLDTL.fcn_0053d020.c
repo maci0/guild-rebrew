@@ -15,7 +15,7 @@ int __cdecl fcn_00471f80(int);
 void __cdecl fcn_00476b60(void);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005373e0(int, int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0053d020 */
 unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 {
@@ -52,28 +52,28 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 		items[i] = slot;
 		v = slot * 0x2f4;
 		i++;
-		*(unsigned int*) (v + 0x58 + (int) g_1015ea0) = 1;
-		*(unsigned int*) (v + 0x38 + (int) g_1015ea0) = 0;
-		*(unsigned int*) (v + 0x3c + (int) g_1015ea0) = 0;
-		*(unsigned int*) (v + 0x60 + (int) g_1015ea0) = 1;
+		*(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v)).value_058) = 1;
+		*(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v)).value_038) = 0;
+		*(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v)).value_03c) = 0;
+		*(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v)).value_060) = 1;
 	} while (i < 8);
 	i = 0;
 	do {
 		if (*(int*) 0x7e23e4 == i + 0x59a) {
 			v = items[i] * 0x2f4;
-			*(unsigned int*) (v + 0x4c + (int) g_1015ea0) = 1;
-			*(unsigned int*) (v + 0x68 + (int) g_1015ea0) = 1;
-			*(unsigned int*) (v + 0x60 + (int) g_1015ea0) = 0;
-			*(unsigned int*) (v + 0x3c + (int) g_1015ea0) = 0;
+			*(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v)).disabled) = 1;
+			*(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v)).value_068) = 1;
+			*(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v)).value_060) = 0;
+			*(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v)).value_03c) = 0;
 		}
 		i++;
 	} while (i < 8);
 	i = 0;
 	do {
-		if (*(int*) (g_1015ea0 + 0x4c + items[i] * 0x2f4) == 0) {
+		if (((D2_CONTROL_TL*) (g_1015ea0))[items[i]].disabled == 0) {
 			sel = items[i];
-			*(unsigned int*) (sel * 0x2f4 + 0x38 + (int) g_1015ea0) = 1;
-			*(unsigned int*) (sel * 0x2f4 + 0x3c + (int) g_1015ea0) = 1;
+			*(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[sel].value_038) = 1;
+			*(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[sel].value_03c) = 1;
 			break;
 		}
 		i++;
@@ -84,17 +84,17 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 	r4 = fcn_00472250(win, 4, io_AppendText(0x486, (char*) 0x6a3fc0));
 	w3 = fcn_00472250(win, 0, 3);
 	w4 = fcn_00472250(win, 0, 5);
-	*(unsigned int*) (*(int*) (g_1015ea0 + 0x88 + w3 * 0x2f4) * 0x160 + 0x102d158) = 0xc;
-	*(unsigned int*) (*(int*) (g_1015ea0 + 0x88 + w4 * 0x2f4) * 0x160 + 0x102d158) = 0xc;
+	*(unsigned int*) (((D2_CONTROL_TL*) (g_1015ea0))[w3].value_088 * 0x160 + 0x102d158) = 0xc;
+	*(unsigned int*) (((D2_CONTROL_TL*) (g_1015ea0))[w4].value_088 * 0x160 + 0x102d158) = 0xc;
 	if (*(char*) 0x7e23ea) {
 		fcn_00472380(w3, (char*) 0x7e23ea);
 		fcn_00472380(w4, (char*) 0x7e240a);
 		i = 0;
 		do {
-			if (*(int*) (g_1015ea0 + 8 + items[i] * 0x2f4) == *(int*) 0x7e23e4) {
+			if (((D2_CONTROL_TL*) (g_1015ea0))[items[i]].value_008 == *(int*) 0x7e23e4) {
 				sel = items[i];
-				*(unsigned int*) (sel * 0x2f4 + 0x38 + (int) g_1015ea0) = 1;
-				*(unsigned int*) (sel * 0x2f4 + 0x3c + (int) g_1015ea0) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[sel].value_038) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[sel].value_03c) = 1;
 				break;
 			}
 			i++;
@@ -110,7 +110,7 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 			*(char*) 0x7e23e0 = 0;
 			*(char*) 0x7e23e1 = 0;
 			*(char*) 0x7e23e2 = 0x12;
-			*(int*) 0x7e23e4 = *(int*) (g_1015ea0 + 8 + sel * 0x2f4);
+			*(int*) 0x7e23e4 = ((D2_CONTROL_TL*) (g_1015ea0))[sel].value_008;
 			*(char*) 0x7e23e8 = (char) (fcn_00471f80(r3) + 'w');
 			*(char*) 0x7e23e9 = (char) (fcn_00471f80(r4) + 'z');
 			src = (char*) fcn_00471f80(w3);
@@ -134,21 +134,21 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 		} else if (g_100f1dc >= 0x59a && g_100f1dc < 0x5a2) {
 			i = 0;
 			do {
-				elementAddress = (int) g_1015ea0 + items[i] * 0x2f4;
+				elementAddress = (int) &((D2_CONTROL_TL*) g_1015ea0)[items[i]];
 				found = 0;
 				if (elementAddress == *(int*) 0x100f1e4) {
 					sel = items[i];
 					found = 1;
 				} else {
-					*(unsigned int*) (g_1015ea0 + items[i] * 0x2f4 + 0x38) = 0;
-					*(unsigned int*) (g_1015ea0 + items[i] * 0x2f4 + 0x3c) = 0;
-					*(unsigned int*) (g_1015ea0 + items[i] * 0x2f4 + 0x60) = 1;
+					*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[items[i]].value_038) = 0;
+					*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[items[i]].value_03c) = 0;
+					*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[items[i]].value_060) = 1;
 				}
 				i++;
 			} while (i < 8);
 			if (!found) {
-				*(unsigned int*) (sel * 0x2f4 + 0x38 + (int) g_1015ea0) = 1;
-				*(unsigned int*) (sel * 0x2f4 + 0x3c + (int) g_1015ea0) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[sel].value_038) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[sel].value_03c) = 1;
 			}
 		}
 		id = fcn_005373e0(0x53d020, a0);

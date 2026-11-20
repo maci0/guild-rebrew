@@ -38,7 +38,7 @@ typedef struct Slot {
 typedef Obj_1038140 Obj;
 // SIZE 0x2bc
 
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 extern Obj_1038140 g_1038140[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -47,15 +47,15 @@ extern Obj_1038140 g_1038140[];
 char* __cdecl fcn_00472100(int j, int i)
 {
 	D2_WIN* w;
-	Slot* s;
+	D2_CONTROL_TL* s;
 
 	w = &((D2_WIN*)g_1015f40)[g_1038140[g_772534].wins[i]];
 	if (j > w->count) {
 		return 0;
 	}
-	s = &((Slot*)g_1015ea0)[w->children[j]];
-	if (s->type == 0x41) {
-		return s->data;
+	s = &((D2_CONTROL_TL*)g_1015ea0)[w->children[j]];
+	if (s->kind == 0x41) {
+		return *(char**)&s->data;
 	}
 	return 0;
 }

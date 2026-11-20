@@ -81,9 +81,9 @@ int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* selection)
 		if (*(int*) (selection->e + 0x210) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id)
 			fcn_0046f740(((fcn_005caaa0_Def*)g_772500)[1498].w + x, y, 0x6d3, d2_CurrentWindowId);
 		if (selection->f30 != 0) {
-			((fcn_005caaa0_Tile*)g_1015ea0)[selection->tile].f5c = 1;
-			((fcn_005caaa0_Tile*)g_1015ea0)[selection->tile].f1d0 = 3;
-			((fcn_005caaa0_Tile*)g_1015ea0)[selection->tile].owner = selection->e;
+			((D2_CONTROL_TL*) g_1015ea0)[selection->tile].value_05c = 1;
+			((D2_CONTROL_TL*) g_1015ea0)[selection->tile].flags_1d0 = 3;
+			((D2_CONTROL_TL*) g_1015ea0)[selection->tile].associated_object = selection->e;
 		}
 		if (selection->e[2] == 5 || selection->e[2] == 6 || selection->e[2] == 7)
 			fcn_0046f740(x - 0x20, y, *(int*) (selection->e + 0x54), d2_CurrentWindowId);

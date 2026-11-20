@@ -1,5 +1,5 @@
 extern int g_100f888;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char g_1043370[];
 extern int g_14ce8e8;
 extern char g_14cf7c8;
@@ -143,11 +143,11 @@ void __cdecl fcn_005b11f0(int* state)
 					if (n == -1) {
 						goto next;
 					}
-					*(int*) (g_1015ea0 + 0x28 + *slot * 0x2f4) = *(int*) (g_77255c + 4);
-					*(int*) (g_1015ea0 + 0x2c + *slot * 0x2f4) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
-					*(int*) (g_1015ea0 + 0x30 + *slot * 0x2f4) = *(int*) (g_77255c + 8);
-					*(int*) (g_1015ea0 + 0x34 + *slot * 0x2f4) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
-					*(char**) (g_1015ea0 + 0x50 + *slot * 0x2f4) = (char*) (state[0] * 700 + 0x1038140);
+					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_left)) = *(int*) (g_77255c + 4);
+					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_right)) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
+					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_top)) = *(int*) (g_77255c + 8);
+					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_bottom)) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
+					*(char**) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].value_050)) = (char*) (state[0] * 700 + 0x1038140);
 					goto check;
 				}
 				goto check;
@@ -166,11 +166,11 @@ void __cdecl fcn_005b11f0(int* state)
 			if (n == -1) {
 				goto next;
 			}
-			*(int*) (g_1015ea0 + 0x28 + *slot * 0x2f4) = *(int*) (g_77255c + 4);
-			*(int*) (g_1015ea0 + 0x2c + *slot * 0x2f4) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
-			*(int*) (g_1015ea0 + 0x30 + *slot * 0x2f4) = *(int*) (g_77255c + 8);
-			*(int*) (g_1015ea0 + 0x34 + *slot * 0x2f4) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
-			*(char**) (g_1015ea0 + 0x50 + *slot * 0x2f4) = (char*) (state[0] * 700 + 0x1038140);
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_left)) = *(int*) (g_77255c + 4);
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_right)) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_top)) = *(int*) (g_77255c + 8);
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_bottom)) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
+			*(char**) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].value_050)) = (char*) (state[0] * 700 + 0x1038140);
 		} else {
 			e = *(char**) (obj + 0x34);
 			if (*(int*) (e + 0x218) == 1 && *(int*) (obj + 0x124) == 0) {
@@ -178,10 +178,10 @@ void __cdecl fcn_005b11f0(int* state)
 			}
 			fcn_00469c40(*(int*) (g_77255c + 4) - *(int*) (g_77255c + 0x268) + sx,
 			    *(int*) (g_77255c + 8) - *(int*) (t + 0x258) + sy, *slot);
-			*(int*) (g_1015ea0 + 0x28 + *slot * 0x2f4) = *(int*) (g_77255c + 4);
-			*(int*) (g_1015ea0 + 0x2c + *slot * 0x2f4) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
-			*(int*) (g_1015ea0 + 0x30 + *slot * 0x2f4) = *(int*) (g_77255c + 8);
-			*(int*) (g_1015ea0 + 0x34 + *slot * 0x2f4) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_left)) = *(int*) (g_77255c + 4);
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_right)) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_top)) = *(int*) (g_77255c + 8);
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_bottom)) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
 		}
 
 check:

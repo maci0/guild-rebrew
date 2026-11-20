@@ -4,7 +4,7 @@ extern int g_100f1dc, g_14ce8e0, d2_CurrentElementId;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char* lpGebaeudePROT;
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } BUILDING_ROW;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 int __cdecl fcn_00525fb0(void*);
 void __cdecl fcn_0057e880(int, int, int, int);
@@ -79,7 +79,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	window = fcn_00470820(0, 0, (char*) 0x6aa148);
 	saved = window;
 	d2_CenterDialogWindows(window);
-	if (((BUILDING_ROW*) lpGebaeudePROT)[*p].kind == 0x1e) {
+	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*p].category == 0x1e) {
 		fcn_0052a0c0(p, 2);
 	} else {
 		fcn_0052a0c0(p, 0);
@@ -90,7 +90,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	count = 0;
 	d2_SetForm(window, 0);
 	id = 0x70b;
-	switch (((BUILDING_ROW*) lpGebaeudePROT)[*p].kind) {
+	switch (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*p].category) {
 	case 0x13:
 	case 0x04:
 	case 0x10:

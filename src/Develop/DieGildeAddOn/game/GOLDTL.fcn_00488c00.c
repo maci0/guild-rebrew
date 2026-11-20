@@ -1,5 +1,5 @@
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 // The second scan indexes g_7f4ca0[i] directly and decrements cnt inside each
 // call arm; an entity pointer or a shared decrement moves the strength-reduced
@@ -89,7 +89,7 @@ void __cdecl fcn_00488c00(Unit0488c00* u)
 	char* res;
 	int cnt;
 	int i;
-	Race0488c00* race;
+	BUILDING_PROTOTYPE* race;
 
 	cnt = 2;
 	for (i = 0; i < 768; i++) {
@@ -101,10 +101,10 @@ void __cdecl fcn_00488c00(Unit0488c00* u)
 	if (cnt <= 0) {
 		return;
 	}
-	race = &((Race0488c00*)lpGebaeudePROT)[*(unsigned char*)u->info];
-	if (race->kind == 4) {
+	race = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)u->info];
+	if (((char)race->category) == 4) {
 		res = fcn_00502cd0(*(int*)(u->info + 0x5d), 2, 6, 0, 0x60);
-	} else if (race->kind == 0x13) {
+	} else if (((char)race->category) == 0x13) {
 		res = fcn_00502cd0(*(int*)(u->info + 0x5d), 2, 6, 0, 0x145);
 	} else {
 		res = 0;

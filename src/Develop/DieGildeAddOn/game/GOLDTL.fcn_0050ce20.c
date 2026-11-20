@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 #include <string.h>
@@ -50,7 +50,7 @@ int __cdecl gm_CollectStockEntries(char* o, Stock* out, int producers)
 		}
 	}
 	for (e = fcn_00502cd0(*(int*) (b + 0x14), 1, 5); e != 0; e = gm_NextEntityQueryMatch()) {
-		rec = lpObjektePROT + *e * 0x41;
+		rec = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*e]);
 		if ((*rec == 0x17 && producers) || (*rec != 0x17 && !producers)) {
 			out->vals[out->n] = gm_GetMsgField(b, e);
 		out->caps[out->n] = fcn_0050dfd0(b, *e);

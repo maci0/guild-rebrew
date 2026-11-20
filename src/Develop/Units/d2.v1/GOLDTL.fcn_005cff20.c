@@ -1,5 +1,5 @@
 int __cdecl fcn_005373e0(void* handler, int screen_id);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* Screen arm body for the "Gesetze\Auswahl2" dialog (laws selection).
  *
  * Registry model: fcn_005373e0(handler, screen_id) stores the handler in
@@ -20,7 +20,7 @@ int __cdecl fcn_005373e0(void* handler, int screen_id);
  * 0x46f740 / 0x4693b0 / 0x469470 / 0x50f980 drawing helpers, 0x46e830,
  * 0x46f2c0, 0x46fac0, 0x472900, 0x4677e0, 0x472380, 0x472640, 0x469c40,
  * one indirect callback (call ecx from a frame slot), holder release through
- * fcn_00469510 and final teardown fcn_00471e30. No jump tables, no asm. */
+ * d2_ClearRadioGroup and final teardown fcn_00471e30. No jump tables, no asm. */
 
 /* One lot/party record, stride 0x21c. */
 typedef struct GOLDTL_House5cff {
@@ -62,7 +62,7 @@ extern unsigned char* lpGebaeudePROT;
 extern int d2_CurrentWindowId;
 extern char* g_772500;
 extern char* g_77255c;
-extern int g_1015ea0;
+extern char* g_1015ea0;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int d2_CurrentElementId;
@@ -90,7 +90,7 @@ void __cdecl fcn_00469c40(int, int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005cff20 */
 int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
                          void (__cdecl* cb)(int, int))
@@ -115,7 +115,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 	register unsigned short u1;
 	register unsigned short u2;
 	unsigned char type;
-	GOLDTL_EntType5cff* ent;
+	BUILDING_PROTOTYPE * ent;
 	GOLDTL_House5cff* h;
 	GOLDTL_LawSlot* s;
 	int i;
@@ -137,8 +137,8 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 		slots[n].id = u2;
 		n++;
 	}
-	ent = &((GOLDTL_EntType5cff*) lpGebaeudePROT)[*(unsigned char*) rec];
-	type = ent->type;
+	ent = &((BUILDING_PROTOTYPE *) lpGebaeudePROT)[*(unsigned char*) rec];
+	type = ent->category;
 	if (type == 1 || type == 2) {
 		h = (GOLDTL_House5cff*) g_7f4ca0;
 		do {
@@ -216,18 +216,18 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 					name = fcn_0046fac0(0x96 - (0xa0 - width) / 2,
 					                    dy + y - 0x46, text, d2_CurrentWindowId);
 					s->name = name;
-					*(int*) (g_1015ea0 + name * 0x2f4 + 0x6c) = 1;
-					*(int*) (g_1015ea0 + name * 0x2f4 + 0x18) = 0xa0;
+					((D2_CONTROL_TL*) (g_1015ea0))[name].value_06c = 1;
+					((D2_CONTROL_TL*) (g_1015ea0))[name].width = 0xa0;
 					d2_SetElementFont(name, 0x56);
-					*(int*) (g_1015ea0 + btn * 0x2f4 + 0x5c) = shown;
-					*(int*) (g_1015ea0 + btn * 0x2f4 + 0x60) = (shown == 0);
+					((D2_CONTROL_TL*) (g_1015ea0))[btn].value_05c = shown;
+					((D2_CONTROL_TL*) (g_1015ea0))[btn].value_060 = (shown == 0);
 					slider = fcn_004677e0(0x8c, dy + y + 4, 0x40, 0, 0x64,
 					                      0x75, 0x442, d2_CurrentWindowId);
 					s->slider = slider;
 					fcn_00472380(slider, 0, 0x64, progress);
 					fcn_00472640(slider, 0);
 					fcn_00469c40(((GOLDTL_Screen5cff*) g_77255c)->x
-					                 - (*(int*) (g_1015ea0 + slider * 0x2f4 + 0x18) - width) / 2
+					                 - (((D2_CONTROL_TL*) (g_1015ea0))[slider].width - width) / 2
 					                 + 0x96,
 					             ((GOLDTL_Screen5cff*) g_77255c)->y + y + 4 + dy,
 					             slider);

@@ -40,7 +40,7 @@ void __cdecl fcn_00500bb0(char*, int, int, int);
 int __cdecl fcn_005ca560(SEL_54f600*);
 int __cdecl fcn_005caaa0(int, int, int, SEL_54f600*);
 void __cdecl fcn_004c5620(int, void*);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0054f600 */
 void __cdecl fcn_0054f600(char* o)
 {
@@ -93,9 +93,9 @@ void __cdecl fcn_0054f600(char* o)
 				s.e = v4;
 				if (fcn_005ca560(&s) != 0) {
 					fcn_005caaa0(*(int*) (g_77255c + 0xc) / 2 - 0x28, 0, d2_CurrentWindowId, &s);
-					((TILE_54f600*) (void*) g_1015ea0)[s.tile].f5c = 1;
-					((TILE_54f600*) (void*) g_1015ea0)[s.tile].f1d0 = 3;
-					((TILE_54f600*) (void*) g_1015ea0)[s.tile].owner = s.e;
+					((D2_CONTROL_TL*) g_1015ea0)[s.tile].value_05c = 1;
+					((D2_CONTROL_TL*) g_1015ea0)[s.tile].flags_1d0 = 3;
+					((D2_CONTROL_TL*) g_1015ea0)[s.tile].associated_object = s.e;
 				}
 				d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 3);
 				io_AppendText(0x1d6b, (int) *(unsigned short*) (entity + 0xb4),

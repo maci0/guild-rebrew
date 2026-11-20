@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 #include <string.h>
@@ -39,7 +39,7 @@ int __cdecl gm_CanEnterGebaeude(unsigned char* p)
 	int x;
 	unsigned short own;
 
-	tbl = lpGebaeudePROT + p[0] * 0x24d;
+	tbl = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p[0]];
 	kind = gm_GetBuildingTypeCategory(p[0]);
 	r = fcn_00506380(g_774970, p, 0, 0);
 	if ((*(unsigned short*) (p + 0x5a) & 0x400) != 0) {
@@ -47,7 +47,7 @@ int __cdecl gm_CanEnterGebaeude(unsigned char* p)
 	}
 	if (((*(signed char*)&g_7747b0) & 0x80) == 0) {
 		x = ((House5a74*)g_7f4ca0)[g_774970].f1b1;
-		if (!(x > 0 && (*tbl == 6 || *tbl == 4)) && (r & 0x200) == 0) {
+		if (!(x > 0 && ((((BUILDING_PROTOTYPE*)tbl)->category) == 6 || (((BUILDING_PROTOTYPE*)tbl)->category) == 4)) && (r & 0x200) == 0) {
 			own = *(unsigned short*) (p + 0x27);
 			if (own != g_774970) {
 				if ((r & 1) == 0) {

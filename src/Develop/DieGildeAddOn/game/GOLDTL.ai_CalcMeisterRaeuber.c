@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_types.h"
 
 typedef struct {
@@ -203,7 +203,7 @@ attack:
 				if (gm_CheckEntityType((unsigned char*) p) != 0) {
 					continue;
 				}
-				if (((unsigned char*) lpGebaeudePROT)[*(unsigned char*) p + *(unsigned char*) p * 0x24c] == 0x21) {
+				if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) p].category == 0x21) {
 					continue;
 				}
 				if (*(int*) (p + 0x61) != 0 && fcn_004fa6f0(*(int*) (p + 0x61) + 0x4c, &a, &b) != 0) {

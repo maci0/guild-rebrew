@@ -40,7 +40,7 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* ch_ContextCharacters[32];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_types.h"
@@ -82,7 +82,7 @@ int __cdecl fcn_005afa50(int unused, char* e)
 		return 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((Player*)g_7f4ca0)[i].x188 != 0) {
+		if ((*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected) != 0) {
 			break;
 		}
 	}
@@ -110,7 +110,7 @@ int __cdecl fcn_005afa50(int unused, char* e)
 			if (d2_CurrentElementId == btn1) {
 				memset(&pkt, 0, sizeof(pkt));
 				pkt.type = 0x64;
-				pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
+				pkt.x8 = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
 				pkt.xc = *(int*) (g_7746c4 + 1);
 				pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 				pkt.x36 = 1;

@@ -48,7 +48,7 @@ void __cdecl fcn_0043a5a0(int a, int p);
 void __cdecl ReportClientMessage(char* a);
 void __cdecl d2_ClearRadioGroup(int a);
 void __cdecl fcn_00471e30(int a);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c5310 */
 void __cdecl ob_HandleBepflanzung(int gebaeude)
 {
@@ -160,8 +160,8 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			v8[v17] = v16;
 			if (v24 == -1) {
 				v24 = d2_CreateRadioGroup(1, v16);
-				*(unsigned int*) (v16 * 0x2f4 + 0x38 + g_1015ea0) = 1;
-				*(unsigned int*) (v16 * 0x2f4 + 0x3c + g_1015ea0) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[v16].value_038) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[v16].value_03c) = 1;
 			} else {
 				fcn_00469470(v24, v16);
 			}

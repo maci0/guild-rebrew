@@ -10,7 +10,7 @@ typedef struct
 } Ctl;
 
 extern int d2_CurrentWindowId;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char* g_14a5ad8[];
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
@@ -93,15 +93,15 @@ int __cdecl d2_ChooseProfession(int a1)
 		t = types[i];
 		h = fcn_0046f740(i % 3 * 96 + 100, (i / 3 + 1) * 80, t + 0x5a1, d2_CurrentWindowId);
 		btns[i] = h;
-		((Ctl*)g_1015ea0)[h].x5c = 1;
-		((Ctl*)g_1015ea0)[h].x1d0 = 3;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_05c) = 1;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[h].flags_1d0) = 3;
 		s = g_14a5ad8[t];
-		d = ((Ctl*)g_1015ea0)[h].name;
+		d = ((char*)&((D2_CONTROL_TL*)g_1015ea0)[h] + 0xcc);
 		do {
 			c = *s++;
 			*d++ = c;
 		} while (c != 0);
-		((Ctl*)g_1015ea0)[h].x1cc = 0x56;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_1cc) = 0x56;
 		fcn_00469470(grp, h);
 	}
 	g_100f1dc = -1;

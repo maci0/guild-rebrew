@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 extern unsigned char* lpGebaeudePROT;
@@ -16,14 +16,14 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 
 int __cdecl fcn_0050c5d0(unsigned char* o, int* out)
 {
-	unsigned char* rec;
+	BUILDING_PROTOTYPE *rec;
 	float v;
 	float sum;
 	char* q;
 	char* e;
 	int c;
 
-	rec = lpGebaeudePROT + *o * 589;
+	rec = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*o];
 	v = g_6628a8;
 	if (*(unsigned short*) (o + 0x27) != 0xffff) {
 		v = (float) gm_WalkEntityChain(*(unsigned short*) (o + 0x27));
@@ -31,7 +31,7 @@ int __cdecl fcn_0050c5d0(unsigned char* o, int* out)
 			v = g_665bf4;
 		}
 	}
-	if (*rec == 2) {
+	if (rec->category == 2) {
 		v *= g_665bf0;
 	} else {
 		v *= g_6652c8;

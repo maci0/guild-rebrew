@@ -4,7 +4,7 @@ extern char* g_7746a4;
 extern unsigned short g_7725c4;
 extern int g_6a2bf0;
 extern int g_6a2bf4;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern short g_14ce8c0;
 extern short g_14ce8c2;
 extern int g_14a79c0[];
@@ -71,7 +71,7 @@ void __cdecl sv_UpdateSceneHover(void)
 	if (g_6a2bf0 <= g_6a3764 || g_6a376c <= g_6a2bf0 || g_6a2bf4 <= g_6a3768 || (g_6a3770 <= g_6a2bf4 || d2_HoveredWindow != -1) || g_67d8d4 != -1
 	    || ((g_7746a4 = d3_FindSceneObjectAtScreenPoint((float) g_6a2bf0,
 	    (float) g_6a2bf4, 0x20, 1)) == 0 && (g_7746a4 = d3_FindSceneObjectAtScreenPoint((float) g_14ce8c0, (float) g_14ce8c2, 0x40, 1)) == 0)) {
-		if (d2_CurrentElementId == -1 || !(*(unsigned char*) (g_1015ea0 + d2_CurrentElementId * 0x2f4 + 0x1d0) & 0x40)) {
+		if (d2_CurrentElementId == -1 || !(*(unsigned char*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId].flags_1d0)) & 0x40)) {
 			g_100f8c0[0] = 0;
 		}
 		if (g_67d8cc != -1) {

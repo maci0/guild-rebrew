@@ -91,7 +91,7 @@ float __cdecl fcn_004ff040(Bar24* bar)
 	return fcn_004fef80((Obj28*) bar) / fcn_004feff0(bar);
 }
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 /* Named float addends: the two rounding stores die late and leave the
@@ -104,7 +104,7 @@ float __cdecl fcn_004ff080(unsigned short id)
 	float a;
 	float b;
 
-	p = (Bar24*) (g_7f4ca0 + id * 0x21c);
+	p = (Bar24*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]));
 	if (p->active == 1 || p->active == 0) {
 		return g_6628a8;
 	}

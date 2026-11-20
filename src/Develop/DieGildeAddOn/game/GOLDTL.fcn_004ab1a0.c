@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 typedef struct Rec18 {
 	char pad0[8];
 	unsigned char x8;
@@ -64,7 +64,7 @@ unsigned int __cdecl fcn_004ab1a0(int* subject, Msg* firstMessage, Msg* secondMe
 				do {
 					if (*(unsigned short*) (ent + 0x27) != 0xffff &&
 					    *(unsigned short*) (ent + 0x27) != *(unsigned short*) subject &&
-					    ((Bld24d*) lpGebaeudePROT)[*ent].x247 > 1 &&
+					    ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*ent].level > 1 &&
 					    (obj = (unsigned char*) fcn_00502cd0(*(unsigned int*) (ent + 0x5d), 1, 0, 0x120)) != 0 &&
 					    (obj = (unsigned char*) fcn_00502cd0(*(unsigned int*) (obj + 0x14), 1, 0, 300)) != 0) {
 						found[n * 2] = (int) ent;

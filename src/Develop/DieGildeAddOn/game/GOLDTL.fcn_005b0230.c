@@ -33,7 +33,7 @@ typedef struct ScrollSlot {
 #define g_cur_dir d2_CurrentWindowId
 #define g_cur_building g_77255c
 #define g_entity_type(t) ((unsigned char*) (g_7f4ca0 + (t) * 0x21c))
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005b0230 */
 void __cdecl fcn_005b0230(char* town)
 {
@@ -129,19 +129,19 @@ void __cdecl fcn_005b0230(char* town)
 				               * ((*obj == 'G') ? 0.48f : 0.435f)
 				               + (float) *(int*) (tex + 0x20) * 5.33f * 0.5f);
 				slot->handle = fcn_0046f740(bld_x, bld_y, *obj + 0x47f, dir);
-				*(int*) (g_1015ea0 + 0x5c + slot->handle * 0x2f4) = 1;
-				*(int*) (g_1015ea0 + 0x1d0 + slot->handle * 0x2f4) = 0x43;
-				*(int*) (g_1015ea0 + 0x1cc + slot->handle * 0x2f4) = 0x56;
-				slot->x = bld_x - *(int*) (g_1015ea0 + 0x18 + slot->handle * 0x2f4) / 2;
-				slot->y = bld_y - *(int*) (g_1015ea0 + 0x1c + slot->handle * 0x2f4) / 2;
+				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_05c = 1;
+				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].flags_1d0 = 0x43;
+				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1cc = 0x56;
+				slot->x = bld_x - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].width / 2;
+				slot->y = bld_y - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].height / 2;
 				fcn_00469c40(*(int*) (g_cur_building + 4) + bld_x,
 				             *(int*) (g_cur_building + 8) + bld_y, slot->handle);
 				if (*obj != 'G') {
 					fcn_005b00d0((int) obj,
-					             (int) (g_1015ea0 + 0xcc + slot->handle * 0x2f4));
+					             (int) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[slot->handle] + 0xcc));
 				} else {
 					p = (char*) (*(int*) (obj + 0x65) * 0x2f4 + 0x868060);
-					next = (unsigned char*) (g_1015ea0 + 0xcc + slot->handle * 0x2f4);
+					next = (unsigned char*) ((char*) &((D2_CONTROL_TL*) (g_1015ea0))[slot->handle] + 0xcc);
 					do {
 						copied = *p++;
 						*next++ = copied;
@@ -193,30 +193,30 @@ void __cdecl fcn_005b0230(char* town)
 				bld_y = (int) slot->fy;
 				slot->handle = fcn_0046f740(bld_x, bld_y,
 				                      (unsigned char) *slot->ent + 0x47f, dir);
-				*(int*) (g_1015ea0 + 0x5c + slot->handle * 0x2f4) = 1;
-				*(int*) (g_1015ea0 + 0x1dc + slot->handle * 0x2f4) = -1;
-				*(int*) (g_1015ea0 + 0x1e0 + slot->handle * 0x2f4) = -1;
-				*(int*) (g_1015ea0 + 0x1d0 + slot->handle * 0x2f4) = 0x43;
-				*(int*) (g_1015ea0 + 0x1cc + slot->handle * 0x2f4) = 0x56;
+				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_05c = 1;
+				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1dc = -1;
+				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1e0 = -1;
+				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].flags_1d0 = 0x43;
+				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1cc = 0x56;
 				if (*slot->ent != 'G') {
 					fcn_005b00d0((int) slot->ent,
-					             (int) (g_1015ea0 + 0xcc + slot->handle * 0x2f4));
+					             (int) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[slot->handle] + 0xcc));
 				} else {
 					p = (char*) (*(int*) (slot->ent + 0x65) * 0x2f4 + 0x868060);
-					next = (unsigned char*) (g_1015ea0 + 0xcc + slot->handle * 0x2f4);
+					next = (unsigned char*) ((char*) &((D2_CONTROL_TL*) (g_1015ea0))[slot->handle] + 0xcc);
 					do {
 						copied = *p++;
 						*next++ = copied;
 					} while (copied != 0);
 				}
-				slot->x = bld_x - *(int*) (g_1015ea0 + 0x18 + slot->handle * 0x2f4) / 2;
-				slot->y = bld_y - *(int*) (g_1015ea0 + 0x1c + slot->handle * 0x2f4) / 2;
+				slot->x = bld_x - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].width / 2;
+				slot->y = bld_y - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].height / 2;
 				fcn_00469c40(*(int*) (g_cur_building + 4) + bld_x,
 				             *(int*) (g_cur_building + 8) + bld_y, slot->handle);
 				if (!fcn_005cfd00((unsigned short*) (g_7f4ca0 + g_774970 * 0x21c),
 				                  (int*) (town + 0xc), (unsigned char*) slot->ent)) {
-					*(int*) (g_1015ea0 + 0x5c + slot->handle * 0x2f4) = 0;
-					*(int*) (g_1015ea0 + 0x1d0 + slot->handle * 0x2f4) = 0;
+					((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_05c = 0;
+					((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].flags_1d0 = 0;
 				}
 			}
 			i++;
@@ -261,10 +261,10 @@ void __cdecl fcn_005b0230(char* town)
 				bld_x = (int) tmp.fx;
 				bld_y = (int) tmp.fy;
 				handle = fcn_0046f740(bld_x, bld_y, 0x550, g_cur_dir);
-				*(int*) (g_1015ea0 + 0x5c + handle * 0x2f4) = 1;
-				*(int*) (g_1015ea0 + 0x1d0 + handle * 0x2f4) = 0x43;
-				*(int*) (g_1015ea0 + 0x1cc + handle * 0x2f4) = 0x56;
-				*(int*) (g_1015ea0 + 0x2f0 + handle * 0x2f4) = (int) obj;
+				((D2_CONTROL_TL*) (g_1015ea0))[handle].value_05c = 1;
+				((D2_CONTROL_TL*) (g_1015ea0))[handle].flags_1d0 = 0x43;
+				((D2_CONTROL_TL*) (g_1015ea0))[handle].value_1cc = 0x56;
+				*(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[handle].associated_object) = (int) obj;
 				*tab = handle;
 				tab++;
 			}
@@ -288,8 +288,8 @@ void __cdecl fcn_005b0230(char* town)
 				bld_x = (int) tmp.fx;
 				bld_y = (int) tmp.fy;
 				*tab = fcn_0046f740(bld_x, bld_y, 0x54f, g_cur_dir);
-				*(int*) (g_1015ea0 + 0x5c + *tab * 0x2f4) = 1;
-				*(int*) (g_1015ea0 + 0x1d0 + *tab * 0x2f4) = 0x43;
+				((D2_CONTROL_TL*) (g_1015ea0))[*tab].value_05c = 1;
+				((D2_CONTROL_TL*) (g_1015ea0))[*tab].flags_1d0 = 0x43;
 			}
 			tab++;
 		}

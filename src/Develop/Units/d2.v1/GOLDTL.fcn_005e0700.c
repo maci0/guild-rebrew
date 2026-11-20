@@ -42,7 +42,7 @@ void __cdecl fcn_005e0140(int, int, SaveItem*, char*, char*, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_005dfe80(int, unsigned int);
 void __cdecl fcn_00471e30(int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_ShowLoadGameMenu(void)
 {
 	int result;
@@ -78,8 +78,8 @@ int __cdecl d2_ShowLoadGameMenu(void)
 				if (items[i].used != 0 && items[i].slot != -1
 				    && (d2_CurrentElementId == items[i].id || d2_HoveredWindow == items[i].slot
 				        || (d2_HoveredWindow != -1
-				            && *(char**) (g_1015ea0
-				                   + ((D2_WIN*)g_1015f40)[d2_HoveredWindow].slot * 0x2f4 + 0x40)
+				            && *(char**) (&((D2_CONTROL_TL*) g_1015ea0)
+				                   [((D2_WIN*)g_1015f40)[d2_HoveredWindow].slot].parent)
 				                == (char*) &((D2_WIN*)g_1015f40)[items[i].slot]))) {
 					goto found;
 				}

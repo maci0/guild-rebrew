@@ -1,4 +1,4 @@
-extern char *g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_ScreenHeight;
 extern int g_1040494;
 #include "client_types.h"
@@ -60,7 +60,7 @@ extern Fld_102d140 g_102d140[0x10];
 /* ADDRESS: GOLDTL 0x00469c40 */
 void __cdecl fcn_00469c40(int a1, int a2, int index)
 {
-	Ent469c *e;
+	D2_CONTROL_TL *e;
 	Rect469 *r;
 	Win2_469 *w;
 	int kind;
@@ -70,84 +70,84 @@ void __cdecl fcn_00469c40(int a1, int a2, int index)
 	int xo;
 	int yo;
 
-	e = (Ent469c *) g_1015ea0 + index;
-	kind = e->x20;
-	e->x10 = a1;
-	e->x14 = a2;
-	e->x7c = 8;
-	e->x7d = 8;
+	e = (D2_CONTROL_TL *) g_1015ea0 + index;
+	kind = e->kind;
+	e->x = a1;
+	e->y = a2;
+	e->value_07c = 8;
+	e->value_07d = 8;
 	if (kind != 0x40) {
-		e->x30 = 0;
-		e->x34 = d2_ScreenHeight;
-		e->x28 = 0;
-		e->x2c = g_1040494;
+		e->clip_top = 0;
+		e->clip_bottom = d2_ScreenHeight;
+		e->clip_left = 0;
+		e->clip_right = g_1040494;
 	} else {
-		e->x30 = a2;
-		e->x34 = e->x1c + a2;
-		e->x28 = a1;
-		e->x2c = e->x18 + a1;
+		e->clip_top = a2;
+		e->clip_bottom = e->height + a2;
+		e->clip_left = a1;
+		e->clip_right = e->width + a1;
 	}
-	if (e->x40 != 0) {
-		r = (Rect469 *) e->x40;
-		t = (r->y1 > e->x30) ? r->y1 : e->x30;
+	if ((*(int*)&e->parent) != 0) {
+		r = (Rect469 *) (*(int*)&e->parent);
+		t = (r->y1 > e->clip_top) ? r->y1 : e->clip_top;
 
 
 
-		e->x30 = t;
-		t = (r->y2 + r->y1 < e->x34) ? r->y2 + r->y1 : e->x34;
+		e->clip_top = t;
+		t = (r->y2 + r->y1 < e->clip_bottom) ? r->y2 + r->y1 : e->clip_bottom;
 
 
 
 
-		e->x34 = t;
+		e->clip_bottom = t;
 		if (t >= d2_ScreenHeight) {
 			t = d2_ScreenHeight;
 		}
-		e->x34 = t;
-		t = (r->x1 > e->x28) ? r->x1 : e->x28;
+		e->clip_bottom = t;
+		t = (r->x1 > e->clip_left) ? r->x1 : e->clip_left;
 
 
 
 
-		e->x28 = t;
-		t = (r->x1 + r->x2 < e->x2c) ? r->x1 + r->x2 : e->x2c;
+		e->clip_left = t;
+		t = (r->x1 + r->x2 < e->clip_right) ? r->x1 + r->x2 : e->clip_right;
 
 
 
 
-		e->x2c = t;
+		e->clip_right = t;
 		if (t >= g_1040494) {
 			t = g_1040494;
 		}
-		e->x2c = t;
+		e->clip_right = t;
 	}
 	switch (kind) {
 	case 4:
-		*(unsigned short *) ((char*) g_100e7a0 + 0xe + e->x88 * 20) = (unsigned short) e->x10;
-		*(unsigned short *) ((char*) g_100e7a0 + 0x10 + e->x88 * 20) = (unsigned short) e->x14;
+		*(unsigned short *) ((char*) g_100e7a0 + 0xe + e->value_088 * 20) = (unsigned short) e->x;
+		*(unsigned short *) ((char*) g_100e7a0 + 0x10 + e->value_088 * 20) = (unsigned short) e->y;
 		break;
 	case 0x40:
-		w = (Win2_469 *) g_1015f40 + e->x88;
+		w = (Win2_469 *) g_1015f40 + e->value_088;
 		xo = w->x;
 		yo = w->y;
 		w->x = a1;
 		w->y = a2;
-		if (e->x2c > g_1040494) {
-			e->x2c = g_1040494;
+		if (e->clip_right > g_1040494) {
+			e->clip_right = g_1040494;
 		}
-		if (e->x34 > d2_ScreenHeight) {
-			e->x34 = d2_ScreenHeight;
+		if (e->clip_bottom > d2_ScreenHeight) {
+			e->clip_bottom = d2_ScreenHeight;
 		}
 		for (i = 0; i < w->n; i++) {
 			idx = w->ids[i];
-			fcn_00469c40(((Ent469c *) g_1015ea0 + idx)->x10 - xo + w->x,
-				     ((Ent469c *) g_1015ea0 + idx)->x14 - yo + w->y,
+			fcn_00469c40(((D2_CONTROL_TL *) g_1015ea0 + idx)->x - xo + w->x,
+				     ((D2_CONTROL_TL *) g_1015ea0 + idx)->y - yo + w->y,
 				     idx);
 		}
 		break;
 	case 0x41:
-		g_102d140[e->x88].x = a1;
-		g_102d140[e->x88].y = e->x14;
+		g_102d140[e->value_088].x = a1;
+		g_102d140[e->value_088].y = e->y;
 		break;
 	}
 }

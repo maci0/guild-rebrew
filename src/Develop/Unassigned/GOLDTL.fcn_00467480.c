@@ -26,7 +26,7 @@ extern char s_67d420[];
 #include "Develop/Units/Error/error_message.h"
 int __cdecl d2_OpenInputIcon(int x, int y, int a3, int a4, int a5);
 void __cdecl fcn_0046f650(int slot, D2_WIN* parent);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00467480 */
 int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win)
 {
@@ -43,14 +43,14 @@ int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win)
 	}
 	id = d2_OpenInputIcon(par->left + x, par->top - (*(int*) &par->pad3c[0x21c]) + y, a3, a4, a5);
 	fcn_0046f650(id, par);
-	((fcn_00467480_Ent*)g_1015ea0)[id].i[0x40 / 4] = (int) par;
-	((fcn_00467480_Ent*)g_1015ea0)[id].i[0x50 / 4] = ((fcn_00467480_Ent*)g_1015ea0)[par->slot].i[0x50 / 4];
-	((fcn_00467480_Ent*)g_1015ea0)[id].i[0x30 / 4] = par->top;
-	((fcn_00467480_Ent*)g_1015ea0)[id].i[0x34 / 4] = par->height + par->top;
-	((fcn_00467480_Ent*)g_1015ea0)[id].i[0x28 / 4] = par->left;
-	((fcn_00467480_Ent*)g_1015ea0)[id].i[0x2c / 4] = par->width + par->left;
-	((fcn_00467480_Fld*)g_102d278)[((fcn_00467480_Ent*)g_1015ea0)[id].i[0x88 / 4]].i[0] = (*(int*) &par->pad280[12]);
-	((fcn_00467480_Fld*)g_102d278)[((fcn_00467480_Ent*)g_1015ea0)[id].i[0x88 / 4]].i[0x24 / 4] = par->width - ((fcn_00467480_Ent*)g_1015ea0)[id].i[0x10 / 4] - (*(int*) &par->pad14[8]) + par->left;
+	*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[id].parent) = (int) par;
+	((D2_CONTROL_TL*) g_1015ea0)[id].value_050 = ((D2_CONTROL_TL*) g_1015ea0)[par->slot].value_050;
+	((D2_CONTROL_TL*) g_1015ea0)[id].clip_top = par->top;
+	((D2_CONTROL_TL*) g_1015ea0)[id].clip_bottom = par->height + par->top;
+	((D2_CONTROL_TL*) g_1015ea0)[id].clip_left = par->left;
+	((D2_CONTROL_TL*) g_1015ea0)[id].clip_right = par->width + par->left;
+	((fcn_00467480_Fld*)g_102d278)[((D2_CONTROL_TL*) g_1015ea0)[id].value_088].i[0] = (*(int*) &par->pad280[12]);
+	((fcn_00467480_Fld*)g_102d278)[((D2_CONTROL_TL*) g_1015ea0)[id].value_088].i[0x24 / 4] = par->width - ((D2_CONTROL_TL*) g_1015ea0)[id].x - (*(int*) &par->pad14[8]) + par->left;
 	par->children[par->count] = id;
 	par->count++;
 	return id;

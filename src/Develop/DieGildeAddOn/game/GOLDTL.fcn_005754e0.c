@@ -50,7 +50,7 @@ void __cdecl fcn_005754e0(char* u)
 		return;
 	}
 	for (i = 0; i < 128; i++) {
-		if (((rec24*)g_10069a0)[i].f0 != 0 && ((rec24*)g_10069a0)[i].f4 == ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id) {
+		if (((rec24*)g_10069a0)[i].f0 != 0 && ((rec24*)g_10069a0)[i].f4 == ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id) {
 			break;
 		}
 	}

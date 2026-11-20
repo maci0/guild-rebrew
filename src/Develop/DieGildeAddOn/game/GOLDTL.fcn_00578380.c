@@ -36,7 +36,7 @@ void __cdecl fcn_00578380(char* u)
 		if (o != u && *(unsigned short*) (o + 8) == *(unsigned short*) (u + 8) && *(int*) (o + 0xb0) == *(int*) (u + 0xb0)) {
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
 			io_FormatTextBuffer(text, 0x4096, *(int*) (u + 0xb0));
-			fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, 0x5fa, 0);
+			fcn_00545d40(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (u + 8)])->entity_id, -1, text, 0, 0x5fa, 0);
 			return;
 		}
 	}
@@ -47,5 +47,5 @@ void __cdecl fcn_00578380(char* u)
 		return;
 	}
 	*(int*) (u + 0x84) = fcn_004c5620(0, u);
-	fcn_005100f0(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -*(int*) (u + 0xb8));
+	fcn_005100f0(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (u + 8)])->entity_id, -*(int*) (u + 0xb8));
 }

@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 int __cdecl ai_SelectBestMethod(int who, int idx, int arg, int* out1, int* out2);
@@ -64,7 +64,7 @@ retry:
 	if (fcn_004aa7c0(p, v7, v8) == 0) {
 		return 0;
 	}
-	v9 = fcn_00507e70(p, g_7f4ca0 + v8[4] * 0x21c, 4);
+	v9 = fcn_00507e70(p, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[v8[4]]), 4);
 	if (gm_RandomFloat01() + v9 >= 1.0f) {
 		memcpy(a3, v7, sizeof(v7));
 		memcpy(a4, v8, sizeof(v8));

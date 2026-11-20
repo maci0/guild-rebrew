@@ -2,7 +2,7 @@
    books the operation and walks it through the spy states until the report
    is delivered.  State 1 scans the residential descriptors for a matching
    house type, state 2 waits for the target, state 3 hands the record over. */
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_types.h"
 
 extern char g_7f4ca0[];
@@ -98,13 +98,13 @@ void __cdecl fcn_005624a0(char* ctx)
 		tries = 0x100;
 		do {
 			hit = (unsigned char*) (lpGebaeudeINST + idx * 0xa9);
-			proto = lpGebaeudePROT + *hit * 0x24d;
+			proto = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*hit];
 			mask = 0;
 			mask2 = 0;
-			if (*proto > 0x1f) {
-				mask2 = 1 << (*proto - 0x20);
+			if ((((BUILDING_PROTOTYPE*)proto)->category) > 0x1f) {
+				mask2 = 1 << ((((BUILDING_PROTOTYPE*)proto)->category) - 0x20);
 			} else {
-				mask = 1 << *proto;
+				mask = 1 << (((BUILDING_PROTOTYPE*)proto)->category);
 			}
 			if (((mask & 0xa7fcc3a6) || (mask2 & 1))
 			    && *(int*) (hit + 1) != *(int*) (ctx + 0xac)) {

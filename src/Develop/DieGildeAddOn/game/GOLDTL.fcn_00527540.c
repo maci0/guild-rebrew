@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 extern int g_1040494;
@@ -176,7 +176,7 @@ have_image:
 					for (j = 0; j < 0x40; j++) {
 						if (*v7 != -1) {
 							v5 = *v7 & 0x7fff;
-							c = *(char*) (lpObjektePROT + v5 * 0x41);
+							c = *(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[v5]));
 							if ((c == 2 || c == 6) && v5 != 0xfd) {
 								if (v21 == i)
 									goto found2;

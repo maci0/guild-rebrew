@@ -1,7 +1,7 @@
 extern int g_7746d8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern char* lpObjektePROT;
 extern char* g_aed32c;
 
@@ -99,11 +99,11 @@ int __cdecl fcn_00595e20(char* building, char* a1)
 	ent = (unsigned short*) fcn_00502cd0(*(int*) (a1 + 0x14), 1, 5);
 	while (ent != 0) {
 		if (cat != 2) {
-			q = lpObjektePROT + *ent * 0x41;
+			q = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*ent]);
 			if (*q == 0x17 || *q == 0x25)
 				goto add16;
 		} else {
-			if (*(char*) (lpObjektePROT + *ent * 0x41) == 0x17)
+			if (*(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*ent])) == 0x17)
 				goto add16;
 		}
 
@@ -175,14 +175,14 @@ int __cdecl fcn_00595e20(char* building, char* a1)
 	found = 0;
 	for (p = (unsigned int*) 0x778db0; !found && (int) p < 0x779130; p += 0xe) {
 		if (*p != (unsigned int) -1
-		    && *(int*) (g_1015ea0 + *p * 0x2f4 + 0x20) == 0x41
+		    && *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*p].kind)) == 0x41
 		    && fcn_00471f80(*p))
 			found = 1;
 	}
 	if (!found) {
 		for (p = (unsigned int*) 0x7796f0; !found && (int) p < 0x7798b0; p += 0xe) {
 			if (*p != (unsigned int) -1
-			    && *(int*) (g_1015ea0 + *p * 0x2f4 + 0x20) == 0x41
+			    && *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*p].kind)) == 0x41
 			    && fcn_00471f80(*p))
 				found = 1;
 		}

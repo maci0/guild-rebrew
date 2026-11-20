@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x00507910 */
 int __cdecl fcn_00507910(int k)
 {
@@ -55,7 +55,7 @@ float __cdecl fcn_005101e0(unsigned char* p, int k, int a, int b)
 {
 	int c;
 
-	c = fcn_00507910(((Ent*)lpGebaeudePROT)[k].type);
+	c = fcn_00507910(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[k].category);
 	if (c != 10 && c != 11 && c != 12) {
 		return fcn_0050b8d0(p, k, a, b) * 3.0f;
 	}

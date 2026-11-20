@@ -82,7 +82,7 @@ void __cdecl m_FreeTracked(void* p);
 fcn_0046eda0_Surf* __cdecl fcn_004770a0(fcn_0046eda0_Desc* d, int kind);
 void __cdecl fcn_00476620(int a1, int a2, int w, int h, fcn_0046eda0_Surf* src, int a6, int a7, fcn_0046eda0_Surf* dst);
 void __cdecl fcn_00475f80(fcn_0046eda0_Surf* s);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046eda0 */
 void __cdecl d2_ResizeWindow(int w, int h, int win)
 {
@@ -106,9 +106,9 @@ void __cdecl d2_ResizeWindow(int w, int h, int win)
 	dw = w - p->w;
 	dh = h - p->h;
 	for (i = 0; i < p->count; i++) {
-		e = &((fcn_0046eda0_Ent*)g_1015ea0)[p->children[i]];
-		if (p->y + p->h + dh < e->y + e->h) {
-			dh = e->y - p->y - p->h + e->h + 8;
+		e = (fcn_0046eda0_Ent*) &((D2_CONTROL_TL*) g_1015ea0)[p->children[i]];
+		if (p->y + p->h + dh < ((D2_CONTROL_TL*) e)->y + ((D2_CONTROL_TL*) e)->height) {
+			dh = ((D2_CONTROL_TL*) e)->y - p->y - p->h + ((D2_CONTROL_TL*) e)->height + 8;
 		}
 	}
 	if (p->buf30 != 0) {
@@ -139,9 +139,9 @@ void __cdecl d2_ResizeWindow(int w, int h, int win)
 		p->w = (p->w - ox * 2) / gx * gx + ox * 2;
 		p->h = (p->h - oy * 2) / gy * gy + oy * 2;
 	}
-	e = &((fcn_0046eda0_Ent*)g_1015ea0)[p->ent];
-	e->bottom = p->y + p->h;
-	e->right = p->w + p->x;
+	e = (fcn_0046eda0_Ent*) &((D2_CONTROL_TL*) g_1015ea0)[p->ent];
+	((D2_CONTROL_TL*) e)->clip_bottom = p->y + p->h;
+	((D2_CONTROL_TL*) e)->clip_right = p->w + p->x;
 	if (p->y + p->h > d2_ScreenHeight) {
 		p->h = d2_ScreenHeight - p->y;
 	}
@@ -158,11 +158,11 @@ void __cdecl d2_ResizeWindow(int w, int h, int win)
 		p->h = (p->h - oy * 2) / gy * gy + oy * 2;
 	}
 	for (i = 0; i < p->count; i++) {
-		e = &((fcn_0046eda0_Ent*)g_1015ea0)[p->children[i]];
-		e->bottom = p->y + p->h;
-		e->right = p->w + p->x;
+		e = (fcn_0046eda0_Ent*) &((D2_CONTROL_TL*) g_1015ea0)[p->children[i]];
+		((D2_CONTROL_TL*) e)->clip_bottom = p->y + p->h;
+		((D2_CONTROL_TL*) e)->clip_right = p->w + p->x;
 	}
-	e = &((fcn_0046eda0_Ent*)g_1015ea0)[p->ent];
-	e->w = p->w;
-	e->h = p->h;
+	e = (fcn_0046eda0_Ent*) &((D2_CONTROL_TL*) g_1015ea0)[p->ent];
+	((D2_CONTROL_TL*) e)->width = p->w;
+	((D2_CONTROL_TL*) e)->height = p->h;
 }

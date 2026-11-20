@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 #pragma pack(push, 1)
@@ -61,31 +61,31 @@ void __cdecl init_Betrieb(Player*);
 
 void __cdecl fcn_00512d20(Player* p)
 {
-	Office* o;
+	BUILDING_PROTOTYPE * o;
 	int h;
 	Handle* q;
 	Site* s;
 
 	gm_GetBuildingTypeCategory(p->office);
-	o = &((Office*)lpGebaeudePROT)[p->office];
-	if (o->kind == 9) {
+	o = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[p->office];
+	if (o->category == 9) {
 		fcn_004c51f0(p->id, -1, 0x136, 1, (*(char*)&g_773d75), 0);
 		fcn_004c5150(((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_id, -1, (*(char*)&g_773d75), fcn_0050b750(0x1f4, (*(char*)&g_773d75)));
-	} else if (o->kind != 4 && o->kind != 0x10 && o->kind != 0x13) {
+	} else if (o->category != 4 && o->category != 0x10 && o->category != 0x13) {
 		fcn_004c51f0(p->id, -1, 0x134, 1, (*(char*)&g_773d75), 0);
 	}
-	if (o->kind != 9) {
-		if (o->kind == 4 || o->kind == 0x10 || o->kind == 0x13 || o->kind == 0x1d) {
-			if (o->kind == 0x1d) {
+	if (o->category != 9) {
+		if (o->category == 4 || o->category == 0x10 || o->category == 0x13 || o->category == 0x1d) {
+			if (o->category == 0x1d) {
 				h = fcn_004f36f0(p);
 			} else {
 				if (((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_state != 6 && ((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_state != 7) {
-					fcn_004c6090(p, 0, o->level, 0);
+					fcn_004c6090(p, 0, o->role_230, 0);
 				}
-				h = fcn_004c6090(p, 0, o->level, 0);
+				h = fcn_004c6090(p, 0, o->role_230, 0);
 			}
 		} else {
-			h = fcn_004c6090(p, 0, o->level, 0);
+			h = fcn_004c6090(p, 0, o->role_230, 0);
 		}
 		while (fcn_004c4450(h) == 0) {
 			fcn_00535960();

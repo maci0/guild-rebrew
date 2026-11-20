@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 #pragma pack(push, 1)
@@ -135,7 +135,7 @@ void __cdecl fcn_005059b0(Estate* s, unsigned short owner, int slot)
 	}
 	q = ((Obj*)lpObjekteINST);
 	for (i = 0x5008; i != 0; i--) {
-		if (q->kind != 0 && lpObjektePROT[q->kind * 0x41] == 0x1d && q->key == s->key) {
+		if (q->kind != 0 && (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[q->kind].kind) == 0x1d && q->key == s->key) {
 			q->id = ((Entity*)g_7f4ca0)[slot].id;
 			if (q->link != 0) {
 				q->link->id = ((Entity*)g_7f4ca0)[slot].id;

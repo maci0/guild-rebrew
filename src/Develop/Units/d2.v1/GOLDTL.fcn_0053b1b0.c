@@ -23,7 +23,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00534160(int, int, int, int);
 int __cdecl fcn_005373e0(void*, int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0053b1b0 */
 int __cdecl fcn_0053b1b0(void)
 {
@@ -72,12 +72,12 @@ int __cdecl fcn_0053b1b0(void)
 					fcn_00534160(0xd2, y, st[6 + i], 0x4d9);
 					id = fcn_0046f740(*(int*) (g_77255c + 0xc) - 0x2c, y, 0x519, d2_CurrentWindowId);
 					ids[2 * i] = id;
-					*(int*) (g_1015ea0 + id * 0x2f4 + 0x5c) = 1;
-					*(int*) (g_1015ea0 + id * 0x2f4 + 0x1d0) = 3;
+					((D2_CONTROL_TL*) (g_1015ea0))[id].value_05c = 1;
+					((D2_CONTROL_TL*) (g_1015ea0))[id].flags_1d0 = 3;
 					id = fcn_0046f740(*(int*) (g_77255c + 0xc) - 0x18, y, 0x51a, d2_CurrentWindowId);
 					ids[2 * i + 1] = id;
-					*(int*) (g_1015ea0 + id * 0x2f4 + 0x5c) = 1;
-					*(int*) (g_1015ea0 + id * 0x2f4 + 0x1d0) = 3;
+					((D2_CONTROL_TL*) (g_1015ea0))[id].value_05c = 1;
+					((D2_CONTROL_TL*) (g_1015ea0))[id].flags_1d0 = 3;
 				}
 				io_AppendText(0x1ae3);
 				fcn_00534160(0xd2, 0xec, v_len, 0x4d9);
@@ -89,15 +89,15 @@ int __cdecl fcn_0053b1b0(void)
 					else
 						j = 1;
 					id = ids[2 * i];
-					*(int*) (g_1015ea0 + id * 0x2f4 + 0x4c) = j;
-					*(int*) (g_1015ea0 + id * 0x2f4 + 0x60) = j;
+					((D2_CONTROL_TL*) (g_1015ea0))[id].disabled = j;
+					((D2_CONTROL_TL*) (g_1015ea0))[id].value_060 = j;
 					if (v_len > 0 && st[6 + i] < 126.0f)
 						j = 0;
 					else
 						j = 1;
 					id = ids[2 * i + 1];
-					*(int*) (g_1015ea0 + id * 0x2f4 + 0x4c) = j;
-					*(int*) (g_1015ea0 + id * 0x2f4 + 0x60) = j;
+					((D2_CONTROL_TL*) (g_1015ea0))[id].disabled = j;
+					((D2_CONTROL_TL*) (g_1015ea0))[id].value_060 = j;
 				}
 				v_first = 0;
 			}

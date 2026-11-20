@@ -29,7 +29,7 @@ int __cdecl fcn_004a8bf0(char* a1, char* e, char* a3, char* a4, char* out)
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = ((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx].entity_id;
+	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx].entity_id;
 	*(int*) (out + 8) = min(max(gm_RandomMod(*(int*) (e + 0x194) / 2), 1), 5);
 	return 1;
 }

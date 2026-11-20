@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
 extern char g_6b5c60[];
@@ -28,7 +28,7 @@ void __cdecl fcn_00515010(void)
 
 	e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 	while (e != 0) {
-		if (lpGebaeudePROT[*e * 0x24d] != 0x1c) {
+		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category != 0x1c) {
 			e[5] = (unsigned char) g_6b5c60[0];
 		}
 		e = (unsigned char*) gm_FindNextFilteredEntity();
@@ -38,7 +38,7 @@ void __cdecl fcn_00515010(void)
 		return;
 	}
 	do {
-		if (lpGebaeudePROT[*e * 0x24d] != 0x1c) {
+		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category != 0x1c) {
 			cnt = 0;
 			e[5] = (unsigned char) g_6b5c60[0];
 			p = tbl;

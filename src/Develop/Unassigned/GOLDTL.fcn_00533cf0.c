@@ -20,7 +20,7 @@ typedef struct {
 	char pad1a4[0x118];
 } Home;
 
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_7747a8;
 extern unsigned short g_773e40[];
 #include "client_types.h"
@@ -38,16 +38,16 @@ void __cdecl fcn_00533cf0(int mark)
 			if (((Home*)g_1038140)[i].x190 != 0 && ((Home*)g_1038140)[i].x1a0 != 0) {
 				h = &((Home*)g_1038140)[i];
 				for (k = 0; k < 0x400; k++) {
-					if (((Unit*)g_1015ea0)[k].alive != 0 && ((Unit*)g_1015ea0)[k].home == h && ((Unit*)g_1015ea0)[k].marked == 0) {
+					if ((*(int*)&((D2_CONTROL_TL*)g_1015ea0)[k].kind) != 0 && (*(void**)&((D2_CONTROL_TL*)g_1015ea0)[k].value_050) == h && (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[k].value_048) == 0) {
 						g_773e40[g_7747a8++] = (unsigned short) k;
-						((Unit*)g_1015ea0)[k].marked = 1;
+						(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[k].value_048) = 1;
 					}
 				}
 			}
 		}
 	} else {
 		for (i = 0; i < g_7747a8; i++) {
-			((Unit*)g_1015ea0)[g_773e40[i]].marked = 0;
+			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_773e40[i]].value_048) = 0;
 		}
 	}
 }

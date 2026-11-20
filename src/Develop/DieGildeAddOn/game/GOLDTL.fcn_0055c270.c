@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdio.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_types.h"
 
 extern unsigned char g_773d75;
@@ -133,7 +133,7 @@ void __cdecl fcn_0055c270(char* o)
 				*(unsigned short*) (o + 0xac) * 0x41);
 			if (h != 0 && *(unsigned short*) h != 0xfd) {
 				kind = 0x606;
-				if (((StateProto*)lpGebaeudePROT)[*e].kind != 6) {
+				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category != 6) {
 					p = (unsigned char*) fcn_0050dc90((char*) e);
 					if (p != 0 && p[2] == 1 && (p[0x1b4] & 1) != 0 &&
 					    *(int*) (o + 0xb8) != 0)
@@ -149,7 +149,7 @@ void __cdecl fcn_0055c270(char* o)
 					*(int*) (o + 0xb0), name, (char*) 0x6a6248);
 			} else {
 				kind = 0x606;
-				if (((StateProto*)lpGebaeudePROT)[*e].kind != 6) {
+				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category != 6) {
 					p = (unsigned char*) fcn_0050dc90((char*) e);
 					if (p != 0 && p[2] == 1 && (p[0x1b4] & 1) != 0 &&
 					    *(int*) (o + 0xb8) != 0)

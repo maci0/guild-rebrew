@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 #pragma pack(push, 1)
 // SIZE 0x61
@@ -51,7 +51,7 @@ void __cdecl fcn_005329a0(void)
 	int home;
 	Unit* u;
 	Estate* e;
-	Ware* w;
+	OBJECT_PROTOTYPE* w;
 
 	if (((Estate*)g_7746cc) != 0) {
 		home = ((Estate*)g_7746cc)->home;
@@ -68,8 +68,8 @@ void __cdecl fcn_005329a0(void)
 	}
 	d2_SelectFont(0x54);
 	for (u = fcn_00502cd0(home, 1, 5); u != 0; u = gm_NextEntityQueryMatch()) {
-		w = &((Ware*)lpObjektePROT)[u->slot];
-		if (u->model != 0 && w->type != 6 && w->type != 2
+		w = &((OBJECT_PROTOTYPE*)lpObjektePROT)[u->slot];
+		if (u->model != 0 && w->kind != 6 && w->kind != 2
 			&& fcn_00443e10(u->model, r)) {
 			fcn_0046bd20((r[2] - r[0]) / 2 + r[0] - 0x50, r[1], 0xa0, 0x60, g_77250c,
 				((WareName*)g_14a79c0)[u->slot].name, 0x28);
@@ -81,8 +81,8 @@ void __cdecl fcn_005329a0(void)
 		home = ((Player*)g_7746c8)->home;
 	}
 	for (u = fcn_00502cd0(home, 2, 5, 6); u != 0; u = gm_NextEntityQueryMatch()) {
-		w = &((Ware*)lpObjektePROT)[u->slot];
-		if (u->model != 0 && (w->type == 6 || w->type == 2)
+		w = &((OBJECT_PROTOTYPE*)lpObjektePROT)[u->slot];
+		if (u->model != 0 && (w->kind == 6 || w->kind == 2)
 			&& fcn_00443e10(u->model, r)) {
 			fcn_0046bd20((r[2] - r[0]) / 2 + r[0] - 0x50, r[1], 0xa0, 0x60, g_77250c,
 				((WareName*)g_14a79c0)[u->slot].name, 0x28);

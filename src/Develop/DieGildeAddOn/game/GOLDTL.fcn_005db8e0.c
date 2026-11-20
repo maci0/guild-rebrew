@@ -57,7 +57,7 @@ typedef struct Font {
 } Font;
 
 
-extern Slot* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char* g_772500;
 extern int d2_CurrentWindowId;
 extern char* g_14a5adc[15];
@@ -103,15 +103,15 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 	io_AppendText(0x1a9a, (p->female != 0) + 0x1aa0, p->id, n);
 	for (i = 1; i <= 15; i++) {
 		id = fcn_0046f740((i - 1) % 5 * colw + x0 + 0x20, (i - 1) / 5 * rowh + x0 + 0x64, i - 1 + 0x5a2, d2_CurrentWindowId);
-		g_1015ea0[id].shown = 1;
-		g_1015ea0[id].style = 3;
+		((D2_CONTROL_TL*)g_1015ea0)[id].value_05c = 1;
+		((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0 = 3;
 		s = g_14a5adc[i - 1];
-		d = g_1015ea0[id].text;
+		d = ((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0xcc);
 		do {
 			c = *s++;
 			*d++ = c;
 		} while (c != 0);
-		g_1015ea0[id].color = 0x56;
+		((D2_CONTROL_TL*)g_1015ea0)[id].value_1cc = 0x56;
 	}
 	result = 0;
 	while (fcn_005373e0(fcn_005db8e0, main_LoopFlags) != 0) {

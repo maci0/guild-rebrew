@@ -18,7 +18,7 @@ typedef struct {
 
 extern Pair_99f800 g_99f800[0x800];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 int __cdecl FindStraftatIndexById(int key);
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -48,8 +48,8 @@ int __cdecl fcn_004f5940(int key, int force)
 	fcn_004fa980(g_9a3800[k].unk_21, g_9a3800[k].kind);
 	for (i = 0; i < 2048; i++) {
 		if (key == g_99f800[i].key) {
-			if (g_774970 != 0xffff && g_99f800[i].owner == ((Obj*)g_7f4ca0)[g_774970].owner && p != 0 && force == 0) {
-				fcn_005b2a00(&((Obj*)g_7f4ca0)[g_774970], p);
+			if (g_774970 != 0xffff && g_99f800[i].owner == (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id) && p != 0 && force == 0) {
+				fcn_005b2a00(((Obj*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), p);
 			}
 			g_99f800[i].owner = -1;
 			g_99f800[i].key = -1;

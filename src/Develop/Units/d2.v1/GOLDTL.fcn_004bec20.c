@@ -23,7 +23,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004116d0(void);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_005373e0(void* fn, int arg);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004bec20 */
 unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 {
@@ -66,7 +66,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 		v6 = fcn_0052dee0(0, 4 + i * 0x1e, *(int*) (0x14a56e8 + i * 4));
 		handles[i] = v6;
 		v7 = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, *(int*) (ids + i));
-		*(int*) (g_1015ea0 + 0x2f0 + v6 * 0x2f4) = v7;
+		*(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[v6].associated_object) = v7;
 		fcn_00469470(k, v6);
 	}
 	d2_SelectRadioGroup(k, 0);
@@ -83,7 +83,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 				list[i] = -1;
 			}
 			i = 0;
-			v6 = *(int*) (g_1015ea0 + 0x2f0 + handles[*(int*) (0x102cbc8 + n)] * 0x2f4);
+			v6 = *(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[handles[*(int*) (0x102cbc8 + n)]].associated_object);
 			if (v6 != 0) {
 				v7 = *(unsigned int*) (v6 + 0x14);
 			} else {
@@ -95,9 +95,9 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 				while (p2 != 0) {
 					v6 = fcn_0046f740((i % 4) * 0x40, (i / 4) * 0x40, *(unsigned short*) p2 + 0xdf, d2_CurrentWindowId);
 					list[i] = v6;
-					*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x5c) = 1;
-					*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x1d0) = 3;
-					*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x1e4) = 0x525;
+					((D2_CONTROL_TL*) (g_1015ea0))[v6].value_05c = 1;
+					((D2_CONTROL_TL*) (g_1015ea0))[v6].flags_1d0 = 3;
+					((D2_CONTROL_TL*) (g_1015ea0))[v6].value_1e4 = 0x525;
 					items[i] = *(unsigned short*) p2;
 					p2 = (char*) gm_NextEntityQueryMatch();
 					i++;
@@ -107,8 +107,8 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 			v6 = fcn_0046f740((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527, d2_CurrentWindowId);
 			list[i] = v6;
 			v2 = 0;
-			*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x5c) = 1;
-			*(int*) (g_1015ea0 + v6 * 0x2f4 + 0x1d0) = 3;
+			((D2_CONTROL_TL*) (g_1015ea0))[v6].value_05c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[v6].flags_1d0 = 3;
 			v18 = *(int*) (0x102cbc8 + n);
 		}
 		if (g_100f1dc != -1) {

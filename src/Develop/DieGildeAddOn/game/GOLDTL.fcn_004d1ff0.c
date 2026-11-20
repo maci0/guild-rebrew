@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl fcn_004e4730(char *);
 int __cdecl fcn_004e4ec0(void);
 int __cdecl fcn_00536bb0(void);
@@ -65,7 +66,6 @@ void __cdecl fcn_004d1ff0(void *arg)
 	unsigned char *o;
 	unsigned char pathbuf[0x10];
 	char buf[0x100];
-
 	o = (unsigned char *) arg;
 	mode = 0xa;
 	if ((o[0x7c] & 1) != 0) {
@@ -81,7 +81,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 			r = gm_CheckEntityType((void *) ent);
 			ty = *(unsigned char *) ent;
 			if (r != 0) {
-				c = ((BuildingRow4d1ff0*) lpGebaeudePROT)[ty].kind;
+				c = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[ty].category;
 				if (c == 0x10) {
 					fcn_004e4730("Kampfszenario_RAEUBERLAGER.ed3");
 					mode = 0xf;
@@ -92,10 +92,10 @@ void __cdecl fcn_004d1ff0(void *arg)
 				else if (c == 0xd)
 					fcn_004e4730("Kampfszenario_MINE.ed3");
 			} else {
-				base = (int) &((BuildingRow4d1ff0*) lpGebaeudePROT)[ty];
-				c = *(unsigned char *) base;
+				base = (int) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[ty];
+				c = ((BUILDING_PROTOTYPE*)base)->category;
 				if (c == 4) {
-					c = *(unsigned char *) (base + 0x247);
+					c = ((BUILDING_PROTOTYPE*)base)->level;
 					if (c == 1)
 						fcn_004e4730("Kampfszenario_SCHMUGGLERLOCH.ed3");
 					else if (c == 2)
@@ -103,7 +103,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 					else if (c == 3)
 						fcn_004e4730("Kampfszenario_DIEBESGILDE.ed3");
 				} else if (c == 0x13) {
-					c = *(unsigned char *) (base + 0x247);
+					c = ((BUILDING_PROTOTYPE*)base)->level;
 					if (c == 1)
 						fcn_004e4730("Kampfszenario_STADTWACHE_KLEIN.ed3");
 					else if (c == 2)

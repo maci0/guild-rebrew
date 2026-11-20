@@ -34,7 +34,7 @@ typedef struct Slot {
 
 #include "client_types.h"
 extern Obj_1038140 g_1038140[];
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x00471a30 */
 void __cdecl d2_SetGroupVisibility(int k, int flag)
@@ -49,7 +49,7 @@ void __cdecl d2_SetGroupVisibility(int k, int flag)
 		for (i = 0; i < o->count; i++) {
 			w = &((D2_WIN*)g_1015f40)[o->wins[i]];
 			for (j = 0; j < w->count; j++) {
-				((Slot*)g_1015ea0)[w->children[j]].hidden = (flag == 0);
+				(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->children[j]].disabled) = (flag == 0);
 			}
 		}
 		o->shown = flag;

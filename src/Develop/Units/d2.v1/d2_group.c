@@ -1,9 +1,7 @@
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
-
 extern volatile int g_6b7fac;
 extern unsigned int g_772f70;
 extern int g_68bfcc;
-
 void __cdecl fcn_00472640(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 typedef struct {
@@ -14,13 +12,11 @@ typedef struct {
 	int *ids;
 	int count;
 } Screen;
-
 typedef struct {
 	char pad0[0x20];
 	int kind;
 	char pad24[0x2d0];
 } Obj2f4;
-
 #include "client_types.h"
 typedef List8c_102cbc8 List8c;
 
@@ -112,7 +108,11 @@ int __cdecl fcn_004e6eb0(char *text, unsigned int flags)
 	list = d2_CreateRadioGroup(0);
 	for (i = 0; i < ((Screen*)g_77255c)->count; i++) {
 		k = ((Screen*)g_77255c)->ids[i];
+#if defined(REBREW_GOLD)
 		if (((Obj2f4*)g_1015ea0)[k].kind != 0x40) {
+#else
+		if (((D2_CONTROL_TL*)g_1015ea0)[k].kind != 0x40) {
+#endif
 			fcn_00469470(list, k);
 		}
 	}

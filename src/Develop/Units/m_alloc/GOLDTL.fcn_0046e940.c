@@ -73,7 +73,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x2f4
 
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern int g_77259c;
@@ -169,20 +169,20 @@ found:
 		}
 	}
 	ei = d2_AllocateElement();
-	((Ent*) g_1015ea0)[ei].x20 = 0x40;
-	((Ent*) g_1015ea0)[ei].x10 = rec->x4;
-	((Ent*) g_1015ea0)[ei].x14 = rec->x8;
-	((Ent*) g_1015ea0)[ei].x18 = rec->xc;
-	((Ent*) g_1015ea0)[ei].x1c = rec->x10;
-	((Ent*) g_1015ea0)[ei].x8 = i + 0x400;
-	((Ent*) g_1015ea0)[ei].x88 = i;
-	((Ent*) g_1015ea0)[ei].x30 = rec->x8;
-	((Ent*) g_1015ea0)[ei].x2c = rec->xc + rec->x4;
-	((Ent*) g_1015ea0)[ei].x28 = rec->x4;
-	((Ent*) g_1015ea0)[ei].x34 = rec->x10 + rec->x8;
-	((Ent*) g_1015ea0)[ei].x24 = 2;
-	((Ent*) g_1015ea0)[ei].rec = rec;
-	((Ent*) g_1015ea0)[ei].x40 = 0;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].kind) = 0x40;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].x) = rec->x4;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].y) = rec->x8;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].width) = rec->xc;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].height) = rec->x10;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].value_008) = i + 0x400;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].value_088) = i;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].clip_top) = rec->x8;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].clip_right) = rec->xc + rec->x4;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].clip_left) = rec->x4;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].clip_bottom) = rec->x10 + rec->x8;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].mode) = 2;
+	(*(WinRec**)&((D2_CONTROL_TL*)g_1015ea0)[ei].data) = rec;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].parent) = 0;
 	rec->x278 = 2;
 	rec->x27c = ei;
 	rec->x280 = 1;

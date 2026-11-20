@@ -46,7 +46,7 @@ void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl fcn_00471f80(int id);
 int __cdecl fcn_005373e0(void* fn, int id);
 void __cdecl fcn_00471e30(char* dlg);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005d42e0 */
 void __cdecl fcn_005d42e0(void)
 {
@@ -120,8 +120,8 @@ void __cdecl fcn_005d42e0(void)
 		items[row] = n;
 		io_FormatTextBuffer(buf, row + 0x1f25);
 		fcn_0046fac0(0x19, i, buf, d2_CurrentWindowId);
-		((Ent*) g_1015ea0)[n].x5c = 1;
-		((Ent*) g_1015ea0)[n].x58 = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[n].value_05c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[n].value_058 = 1;
 		fcn_00472380(n, mask);
 		*(char*) &r = cp[-1];
 		*(char*) &g = cp[0];

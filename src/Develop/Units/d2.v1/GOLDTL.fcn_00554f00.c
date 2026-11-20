@@ -24,7 +24,7 @@ extern int g_7749e4;
 extern unsigned char g_773d75;
 extern int g_100f884;
 extern int g_100f1dc;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl fcn_00500cb0(char*, char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00545670(char*, int, int, char*, int);
@@ -50,7 +50,7 @@ void __cdecl fcn_00554f00(char* obj)
 	int st;
 	unsigned char c;
 
-	rec = g_7f4ca0 + *(unsigned short*) (obj + 8) * 0x21c;
+	rec = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (obj + 8)]);
 	if (g_774970 != *(unsigned short*) (obj + 8)) {
 		return;
 	}

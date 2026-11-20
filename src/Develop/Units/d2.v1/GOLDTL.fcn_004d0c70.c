@@ -89,19 +89,19 @@ void __cdecl fcn_004d0c70(void)
 				g_9b4840[k].name = fcn_0046f740(0x54, 0xf, (int) (*name + 0xdf), d2_CurrentWindowId);
 				fcn_00472680(g_9b4840[k].name, -2);
 				g_9b4840[k].label = d2_ShowTxt(0x54, 0x26, &(*(char*)g_6b5c60), d2_CurrentWindowId);
-				((Slot*)g_1015ea0)[g_9b4840[k].label].color = 0x54;
-				((Slot*)g_1015ea0)[g_9b4840[k].label].h = 0x18;
-				((Slot*)g_1015ea0)[g_9b4840[k].label].centered = 1;
+				((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].label].font = 0x54;
+				((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].label].width = 0x18;
+				((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].label].value_06c = 1;
 			}
 			g_9b4840[k].unit = unit;
 			*(int*) &((D2_WIN*)g_1015f40)[g_9b4840[k].win].pad14[0xc] = 0;
 			*(int*) &((D2_WIN*)g_1015f40)[g_9b4840[k].win].pad280[12] = 0x54;
 			g_9b4840[k].icon = fcn_0046f740(0x28, 0x11, *(int*) (unit + 0x18c), d2_CurrentWindowId);
-			((Slot*)g_1015ea0)[g_9b4840[k].icon].shadow = 1;
+			((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].icon].value_058 = 1;
 			g_9b4840[k].text = d2_ShowTxt(0, 0, &(*(char*)g_6b5c60), d2_CurrentWindowId);
-			((Slot*)g_1015ea0)[g_9b4840[k].text].color = 0x54;
-			((Slot*)g_1015ea0)[g_9b4840[k].text].h = 0x80;
-			((Slot*)g_1015ea0)[g_9b4840[k].text].centered = 1;
+			((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].text].font = 0x54;
+			((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].text].width = 0x80;
+			((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].text].value_06c = 1;
 			length = (float)(gm_GetScaledEntitySkill((char*) unit, 3));
 			fcn_00534160(0x24, 0x41, (int)length, 0x4df);
 			k++;

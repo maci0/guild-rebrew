@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -19,7 +19,7 @@ void* __cdecl fcn_00507a10(unsigned char* e)
 	r = 0;
 	t = gm_GetBuildingTypeCategory(e[0]);
 	if (t == 5) {
-		c = ((unsigned char*)g_7f4ca0)[g_774970 * 0x21c + 0x169];
+		c = ((unsigned char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])[0x169];
 		if (c == 0x1e) {
 			o = fcn_0050e4a0(2);
 		} else if (c == 0x1f) {

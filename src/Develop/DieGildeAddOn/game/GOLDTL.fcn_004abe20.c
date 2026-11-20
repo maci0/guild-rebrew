@@ -3,7 +3,7 @@ typedef struct Kind {
 	char pad1[0x24c];
 } Kind;
 // SIZE 0x24d
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
 extern char g_7f4ca0[];
@@ -38,7 +38,7 @@ int __cdecl ai_StartEhrerbietung(int a1, unsigned short* entity, int a3, char* r
 	e = lpGebaeudeINST;
 	for (i = 0; i < 0x100; i++, e += 0xa9) {
 		if (e[0] != 0 && *(unsigned short*) (e + 0x27) == *entity
-		    && ((Kind*)lpGebaeudePROT)[e[0]].type == 0x1f
+		    && ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[e[0]].category == 0x1f
 		    && fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x276) != 0) {
 			lim = 0xf00500;
 			if (fcn_004a5340(entity, 1, &lim, 0.0f, gm_RandomMod(0x20) + 25.0f, &id) == 0)

@@ -1,5 +1,5 @@
 extern int g_775318;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char* lpObjektePROT;
 extern char* g_6abb00;
 extern char* g_14b52c4;
@@ -9,7 +9,7 @@ void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_005c61e0(unsigned short id);
 int __cdecl fcn_00471f80(int handle);
-void __cdecl d2_SetElementValue(int handle, int element, int value, int extra);
+void __cdecl d2_SetElementValue(int handle, ...);
 void __cdecl fcn_00472640(int handle, int value);
 void __cdecl d2_SetDisplayCounter(int id, int value);
 int __cdecl fcn_00466ee0(int x, int y, int id, int group, char* name);
@@ -37,19 +37,19 @@ unsigned int __cdecl fcn_005c5e70(void)
 			if (fcn_00502cd0(*(int*) (container + 0x178), 1, 0, *(unsigned short*) *slot) != 0) {
 				handle = fcn_00471f80(slot[-1]);
 				d2_SetElementValue(slot[-1], 0, *(unsigned int*) (*slot + 0xe), handle);
-				fcn_0064d41a(g_1015ea0 + 0xcc + slot[-1] * 0x2f4, "%s~ %li %s",
+				fcn_0064d41a(((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]] + 0xcc), "%s~ %li %s",
 				    (unsigned int) g_14a79c0[*(unsigned short*) *slot * 2], *(unsigned int*) (*slot + 0xe), g_14b52c4);
 				used = fcn_005c61e0(*(unsigned short*) *slot);
 				if (used != 0) {
 					if (*(int*) (*slot + 0x21) != 0) {
 						fcn_00472640(slot[-1], 0);
-						*(float*) (g_1015ea0 + 500 + slot[-1] * 0x2f4) = g_6629c8
+						*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]].value_1f4)) = g_6629c8
 						    - (float) *(int*) (*slot + 0x1c) / *(int*) (used + 4);
 					}
 					else {
 						fcn_00472640(slot[-1], 1);
-						*(unsigned int*) (g_1015ea0 + 0x60 + slot[-1] * 0x2f4) = 0;
-						*(unsigned int*) (g_1015ea0 + 500 + slot[-1] * 0x2f4) = 0;
+						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]].value_060)) = 0;
+						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]].value_1f4)) = 0;
 					}
 				}
 				if (handle != 0) {
@@ -82,17 +82,17 @@ unsigned int __cdecl fcn_005c5e70(void)
 						handle = fcn_00466ee0((i % 3) * 0x38 + 0x15, (i / 3) * 0x36 + 0x4a,
 						    *match + 0xdf, 10, g_6abb00);
 						*(int*) (i * 8 + 0x776c60) = handle;
-						*(unsigned int*) (g_1015ea0 + 0x1d0 + handle * 0x2f4) = 0x23;
-						*(unsigned int*) (g_1015ea0 + 0x1dc + handle * 0x2f4) = 0xffffffff;
-						*(unsigned int*) (g_1015ea0 + 0x1e0 + handle * 0x2f4) = 0;
-						fcn_0064d41a(g_1015ea0 + 0xcc + handle * 0x2f4, "%s~ %li St",
+						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle].flags_1d0)) = 0x23;
+						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle].value_1dc)) = 0xffffffff;
+						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle].value_1e0)) = 0;
+						fcn_0064d41a(((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle] + 0x0cc), "%s~ %li St",
 						    (unsigned int) g_14a79c0[*match * 2],
 						    *(unsigned int*) ((char*) match + 0xe));
 						used = fcn_005c61e0(*match);
 						if (used != 0) {
 							if (*(int*) ((char*) match + 0x21) != 0) {
 								fcn_00472640(handle, 0);
-								*(float*) (g_1015ea0 + 500 + handle * 0x2f4) = g_6629c8
+								*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle].value_1f4)) = g_6629c8
 								    - (float) *(int*) ((char*) match + 0x1c) / *(int*) (used + 4);
 							}
 							else {

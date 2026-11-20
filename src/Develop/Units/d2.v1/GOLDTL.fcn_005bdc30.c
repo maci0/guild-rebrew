@@ -42,7 +42,7 @@ void __cdecl fcn_005b18c0(int*);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_005d0460(char*, int, int, int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005bdc30 */
 int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(int, int))
 {
@@ -77,7 +77,7 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 				if (g_14ce8d8 != 0 && id != -1) {
 					for (i = 0; i < 0x10; i++) {
 						if (ctx.ids10[i] != -1 && ctx.ids10[i] == id) {
-							v = *(int*) (g_1015ea0 + ctx.ids10[i] * 0x2f4 + 0x2f0);
+							v = *(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[ctx.ids10[i]].associated_object);
 							if (v != 0 && cb != 0) {
 								fcn_00471af0(ctx.dlg, 0);
 								d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);

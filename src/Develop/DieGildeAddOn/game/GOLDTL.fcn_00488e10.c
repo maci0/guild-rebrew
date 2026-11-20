@@ -1,6 +1,6 @@
 #include <string.h>
 #include "client_data.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 extern unsigned char* lpGebaeudePROT;
 
@@ -34,7 +34,7 @@ void __cdecl fcn_00488e10(char* e)
 		return;
 	}
 	q = *(char**) (e + 0x16c);
-	if (lpGebaeudePROT[*(unsigned char*) q * 0x24d] != 0x1d) {
+	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) q].category != 0x1d) {
 		return;
 	}
 	r = fcn_00502cd0(*(int*) (q + 0x5d), 2, 6, 0, 0x211);

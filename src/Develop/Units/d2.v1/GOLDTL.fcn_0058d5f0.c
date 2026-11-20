@@ -1,7 +1,7 @@
 #include <string.h>
 extern char* lpGebaeudePROT;
 extern char* lpObjektePROT;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_CurrentWindowId;
 extern int g_7f4c04;
 extern int g_7f4c08;
@@ -138,12 +138,12 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 		j = 0x19;
 		for (count = 0; count < n; count++) {
 			h = fcn_0046f740(i, j, (int) ids[count] + 0xdf, d2_CurrentWindowId);
-			vp = (unsigned char*) (g_1015ea0 + h * 0x2f4);
-			*(int*) (vp + 0x5c) = 1;
-			*(int*) (vp + 0x1d0) = 3;
-			*(int*) (vp + 0x1dc) = 100;
-			*(int*) (vp + 0x1e0) = 0x10;
-			*(int*) (vp + 0x84) = 0x54;
+			vp = (unsigned char*) &((D2_CONTROL_TL*)g_1015ea0)[h];
+			*(int*)&((D2_CONTROL_TL*)vp)->value_05c = 1;
+			*(int*)&((D2_CONTROL_TL*)vp)->flags_1d0 = 3;
+			*(int*)&((D2_CONTROL_TL*)vp)->value_1dc = 100;
+			*(int*)&((D2_CONTROL_TL*)vp)->value_1e0 = 0x10;
+			*(int*)&((D2_CONTROL_TL*)vp)->font = 0x54;
 			fcn_0046f9b0(h, *(int*) (0x14a79c0 + (int) ids[count] * 8));
 			handles[count] = h;
 			fcn_00472640(h, 1);

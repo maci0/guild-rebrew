@@ -15,7 +15,7 @@ typedef struct F8 {
 } F8;
 // SIZE 0x8
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
@@ -48,7 +48,7 @@ int __cdecl fcn_0048f8f0(char* e, char* q, Blk24* b1, Blk24* b2)
 	t = 0xf00500;
 	if (fcn_004a5340(e, 1, &t, 0, gm_RandomMod(0x20) + 32.0f, &idx) == 0)
 		return 0;
-	p = g_7f4ca0 + idx * 0x21c;
+	p = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
 	b2->c = *(int*) (p + 4);
 	b2->a = h[1];
 	b2->d = 4;
@@ -68,7 +68,7 @@ int __cdecl fcn_0048f8f0(char* e, char* q, Blk24* b1, Blk24* b2)
 		f.mask = 0x7b4c4a0;
 		f.b = 0;
 		t = -1;
-		fcn_004a5e60(g_7f4ca0 + g_774970 * 0x21c, 0, f, 0, 100.0f, &t);
+		fcn_004a5e60(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 0, f, 0, 100.0f, &t);
 	}
 	if (t == -1)
 		return 0;

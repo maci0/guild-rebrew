@@ -1,6 +1,6 @@
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl fcn_00502cd0(int, int, int, int);
@@ -30,7 +30,7 @@ int __cdecl fcn_005049a0(unsigned char* building)
 		for (i = 0; i < 0x40; i++, slot++) {
 			if (*slot != 0xffff) {
 				item = *slot & 0x7fff;
-				if ((lpObjektePROT + item * 64)[item] == 2 && item != 0xfd) {
+				if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[item].kind) == 2 && item != 0xfd) {
 					return fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, item);
 				}
 			}
@@ -54,7 +54,7 @@ int __cdecl fcn_005049a0(unsigned char* building)
 		for (i = 0; i < 0x40; i++, slot++) {
 			if (*slot != 0xffff) {
 				item = *slot & 0x7fff;
-				if ((lpObjektePROT + item * 64)[item] == 2 && item != 0xfd) {
+				if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[item].kind) == 2 && item != 0xfd) {
 					return fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, item);
 				}
 			}

@@ -42,7 +42,7 @@ extern int g_14a566c;
 extern volatile int g_6b7fac;
 extern Win_1015f40 g_1015f40[0x60];
 extern Obj_1038140 g_1038140[];
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char g_868060[];
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
@@ -128,10 +128,10 @@ void __cdecl fcn_0059e090(char* b)
 				d2_SetForm(h, 3);
 				io_AppendText(0x1c48, g_868060 + *(int*) (b + 0x65) * 0x2f4);
 			}
-			((City*)g_1015ea0)[a].x4c = sel;
-			((City*)g_1015ea0)[a].x60 = sel;
-			((City*)g_1015ea0)[c].x4c = sel == 0;
-			((City*)g_1015ea0)[c].x60 = sel == 0;
+			((D2_CONTROL_TL*)g_1015ea0)[a].disabled = sel;
+			((D2_CONTROL_TL*)g_1015ea0)[a].value_060 = sel;
+			((D2_CONTROL_TL*)g_1015ea0)[c].disabled = sel == 0;
+			((D2_CONTROL_TL*)g_1015ea0)[c].value_060 = sel == 0;
 			fcn_00594340();
 			shown = sel;
 		}

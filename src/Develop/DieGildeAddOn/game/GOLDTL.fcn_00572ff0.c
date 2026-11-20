@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "client_types.h"
 
 typedef struct { unsigned char kind; unsigned char rest[0x24c]; } BuildingProto572ff0;
@@ -275,7 +275,7 @@ i1next:
 		if (itm != 0 && *(int*) (itm + 0x16c) != 0) {
 			sprintf(buf, (char*) 0x6a7d00, itm + 0x30,
 			    *(int*) (itm + 0x16c) + 5, amt * m, left, m,
-			    (int) (lpObjektePROT + *(unsigned short*) r2 * 0x41 + 1));
+			    (int) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) r2]) + 1));
 		}
 		left -= amt * m;
 		if (itm != 0) {

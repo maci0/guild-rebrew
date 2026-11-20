@@ -4,7 +4,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
-extern void* g_1015ea0;
+extern char* g_1015ea0;
 extern char g_7f4ca0[];
 
 typedef struct {
@@ -26,7 +26,7 @@ void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl d2_ShowBuildingTurnSummary(int);
 int __cdecl fcn_005373e0(void*, int);
 void __cdecl fcn_00471e30(int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c9850 */
 void __cdecl d2_ShowGebaeudeList(void)
 {
@@ -55,7 +55,7 @@ void __cdecl d2_ShowGebaeudeList(void)
 		} else if (g_100f1dc != -1) {
 			for (j = 0; j < n; j++) {
 				if (d2_CurrentElementId == rec.ids[j]) {
-					d2_ShowBuildingTurnSummary(((int*) g_1015ea0)[d2_CurrentElementId * 189 + 188]);
+					d2_ShowBuildingTurnSummary(*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId].associated_object));
 				}
 			}
 		}

@@ -1,10 +1,10 @@
 extern char* g_772500;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_ScreenHeight;
 extern int g_1040494;
 
 int __cdecl d2_AllocateElement(void);
-int __cdecl d2_GetResourceData(int);
+void* __cdecl d2_GetResourceData(int);
 
 /* ADDRESS: GOLDTL 0x004675f0 */
 int __cdecl fcn_004675f0(int a0, int a1, int a2, int a3, int a4, int resourceId, int flags)
@@ -30,9 +30,9 @@ int __cdecl fcn_004675f0(int a0, int a1, int a2, int a3, int a4, int resourceId,
 		f1 = *(short*) (p3 + 0x50);
 		if (m <= f1)
 			m = f1;
-		*(int*) (g_1015ea0 + id * 0x2f4 + 0x18) = m;
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = m;
 		v = a2 + *(short*) (p0 + 0x52) * 2;
-		*(int*) (g_1015ea0 + id * 0x2f4 + 0x1c) = v;
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].height)) = v;
 	} else if (flags & 2) {
 		f2 = *(short*) (p1 + 0x52);
 		f3 = *(short*) (p0 + 0x52);
@@ -40,26 +40,26 @@ int __cdecl fcn_004675f0(int a0, int a1, int a2, int a3, int a4, int resourceId,
 		f1 = *(short*) (p3 + 0x52);
 		if (m <= f1)
 			m = f1;
-		*(int*) (g_1015ea0 + id * 0x2f4 + 0x18) = a2 + *(short*) (p0 + 0x50) * 2;
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = a2 + *(short*) (p0 + 0x50) * 2;
 		v = m;
-		*(int*) (g_1015ea0 + id * 0x2f4 + 0x1c) = v;
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].height)) = v;
 	}
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x20) = 0x45;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x5c) = 1;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x10) = a0;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x14) = a1;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 8) = 0;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x8c) = a3;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x94) = a4;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x98) = flags;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x90) = a3;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x9c) = a2;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0xa0) = a4 / 2;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0xa4) = resourceId;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x30) = 0;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x34) = d2_ScreenHeight;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x28) = 0;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0x2c) = g_1040494;
-	*(int*) (g_1015ea0 + id * 0x2f4 + 0xc) = d2_GetResourceData(resourceId);
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].kind)) = 0x45;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_05c)) = 1;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].x)) = a0;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].y)) = a1;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_008)) = 0;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0x08c)) = a3;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].payload.fields.value_094)) = a4;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].payload.fields.value_098)) = flags;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0x090)) = a3;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].payload.fields.value_09c)) = a2;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].payload.fields.value_0a0)) = a4 / 2;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].payload.fields.value_0a4)) = resourceId;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_top)) = 0;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_bottom)) = d2_ScreenHeight;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_left)) = 0;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_right)) = g_1040494;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].data)) = (int) d2_GetResourceData(resourceId);
 	return id;
 }

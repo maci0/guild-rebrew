@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 typedef struct
@@ -16,7 +16,7 @@ void* __cdecl fcn_004ec7d0(unsigned char* a1)
 {
 	int* idPtr;
 
-	if (((Tile*)lpGebaeudePROT)[a1[0]].type == 0x1e) {
+	if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[a1[0]].category)) == 0x1e) {
 		idPtr = *(int**) (a1 + 0x65);
 		if (idPtr != 0) {
 			return gm_LookupEntityRecordById(*idPtr);

@@ -34,7 +34,7 @@ void __cdecl fcn_005c4d00(int win, int sub, int idx, int unused)
 	d2_SetForm(win, sub);
 	memset(g_776ca0, 0, sizeof(g_776ca0));
 	fcn_0050e380(idx, buf);
-	io_AppendText(0x1efa, ((ENTITY_RECORD*)g_7f4ca0)[idx].unk_194);
+	io_AppendText(0x1efa, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].value_194);
 	k = 0;
 	while (*(int*) (buf + 0x35 + k * 0x1e) != 0 && k < 256) {
 		r = buf + 0x35 + k * 0x1e;

@@ -6,7 +6,7 @@ typedef struct {
 	int id;
 	char pad5[0xa4];
 } Player_551f90;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 // SIZE 0x24d
 typedef struct {
 	char type;
@@ -78,7 +78,7 @@ void __cdecl fcn_00551f90(Order_551f90* o)
 	i = gm_RandomMod(0x100);
 	do {
 		p = &((Player_551f90*)lpGebaeudeINST)[i];
-		if (((Kind_551f90*)lpGebaeudePROT)[p->kind].type == 7) {
+		if (((char) ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[p->kind].category) == 7) {
 			o->rnd = gm_RandomMod(0x100);
 			o->value = g_6643d8[gm_RandomMod(0x10)];
 			n = sizeof(m);

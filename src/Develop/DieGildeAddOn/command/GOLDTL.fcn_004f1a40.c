@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 typedef struct
@@ -15,16 +15,16 @@ unsigned short __cdecl gm_RandomMod(unsigned short n);
 
 Rec44* __cdecl fcn_004f1a40(unsigned char* e)
 {
-	unsigned char* ent;
+	BUILDING_PROTOTYPE *ent;
 	char* d;
 	Rec44* recs;
 	int n;
 	int k;
 	int idx;
 
-	ent = lpGebaeudePROT + *e * 0x24d;
+	ent = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e];
 	d = *(char**) (e + 0x65);
-	if (ent[0] == 0x1d && ent[0x247] >= 1 && ent[0x247] <= 3) {
+	if (ent->category == 0x1d && ent->level >= 1 && ent->level <= 3) {
 		n = cm_GetBuildingStatCount(e);
 		idx = gm_RandomMod((unsigned short) n);
 		k = n;

@@ -39,7 +39,7 @@ typedef struct
 
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern Obj_1038140 g_1038140[];
 extern int g_14ce86c;
 
@@ -61,9 +61,9 @@ int __cdecl fcn_00471170(int a, int b, int c)
 		p = &((fcn_00471170_Page*)g_1038140)[id];
 		for (i = 0; i < p->count; i++) {
 			w = &((fcn_00471170_Win*)g_1015f40)[p->wins[i]];
-			((fcn_00471170_Ent*)g_1015ea0)[w->i[0x27c / 4]].i[0x48 / 4] = 1;
+			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->i[0x27c / 4]].value_048) = 1;
 			for (j = 0; j < w->i[0x2c / 4]; j++) {
-				((fcn_00471170_Ent*)g_1015ea0)[((int*) w->i[0x28 / 4])[j]].i[0x48 / 4] = 1;
+				(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[((int*) w->i[0x28 / 4])[j]].value_048) = 1;
 			}
 		}
 		p->ready = 1;

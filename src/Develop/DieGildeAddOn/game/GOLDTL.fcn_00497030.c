@@ -1,7 +1,7 @@
 extern char* lpObjektePROT;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 char* __cdecl gm_FindRecordById(unsigned int);
 char* __cdecl gm_SearchTable67(unsigned int);
@@ -29,10 +29,10 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 		goto fail;
 	}
 	id = *(unsigned int*) (a3 + 4);
-	if (*(lpObjektePROT + id * 0x40 + id + 0x40) != 0) {
+	if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].value_040) != 0) {
 		goto fail;
 	}
-	if (*(lpObjektePROT + id * 0x40 + id) == 2) {
+	if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].kind) == 2) {
 		goto fail;
 	}
 	ent = 0;
@@ -43,7 +43,7 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 		if (rec == 0) {
 			goto fail;
 		}
-		kind = *(lpObjektePROT + (unsigned int) *(unsigned short*) rec * 0x40 + *(unsigned short*) rec);
+		kind = (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(unsigned int) *(unsigned short*)rec].kind);
 		if (kind != 2 && kind != 6) {
 			goto done;
 		}

@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 typedef struct Msg {
@@ -55,7 +55,7 @@ int __cdecl fcn_005d9ca0(Ent* ent, Ent* other, int count, int flag)
 	ids[3] = 0xffff;
 	q = gm_StartFilteredEntitySearch(1, 6);
 	while (q != 0) {
-		if (((char*)lpGebaeudePROT)[*q * 0x24d] == 15) {
+		if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*q].category)) == 15) {
 			break;
 		}
 		q = gm_FindNextFilteredEntity();

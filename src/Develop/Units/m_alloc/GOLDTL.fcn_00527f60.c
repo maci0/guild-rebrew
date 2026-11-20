@@ -88,7 +88,7 @@ int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_0066080a(char*);
 
 /* Element record field: 0x2f4-byte stride behind the g_1015ea0 pointer. */
-#define ELEM(i) ((char*) g_1015ea0 + (i) * 0x2f4)
+#define ELEM(i) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[(i)])
 #define EFIELD(i, off) (*(int*) (ELEM(i) + (off)))
 
 /*
@@ -105,7 +105,7 @@ struct town_frame {
 	char name[0x100];	/* 0x120 */
 	char buf[0x100];	/* 0x220 */
 };
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00527f60 */
 void __cdecl fcn_00527f60(unsigned char a0, int a1)
 {
@@ -176,51 +176,51 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 		g_6a2578 = fcn_0046f740(
 			0x10, 8, *(int*) (g_slot_table + 0x54
 					  + g_774970 * 0x21c), g_6a2598);
-		EFIELD(g_6a2578, 0x1d0) = 0x43;
-		EFIELD(g_6a2578, 0x5c) = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a2578].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a2578].value_05c = 1;
 
 		g_6a257c = fcn_0046f740(0x23a, 0xd, 0x522, g_6a2598);
-		EFIELD(g_6a257c, 0x1d0) = 0x43;
-		EFIELD(g_6a257c, 0x5c) = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a257c].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a257c].value_05c = 1;
 
 		g_6a25a0 = d2_ShowTxt(0x39, 0xd, g_6b5c60, g_6a2598);
-		EFIELD(g_6a25a0, 0x1d0) = 0x43;
-		EFIELD(g_6a25a0, 0x5c) = 1;
-		EFIELD(g_6a25a0, 0x84) = 0x55;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a0].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a0].value_05c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a0].font = 0x55;
 
 		g_6a2588 = fcn_00469c30((short) (g_1040494 - 0x8d),
 					(short) (d2_ScreenHeight - 0x73), 0x583);
-		EFIELD(g_6a2588, 0x1d0) = 0x43;
-		EFIELD(g_6a2588, 0x5c) = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a2588].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a2588].value_05c = 1;
 
 		g_6a258c = fcn_00469c30((short) (g_1040494 - 0x57),
 					(short) (d2_ScreenHeight - 0x4f), 0x7d9);
-		EFIELD(g_6a258c, 0x1d0) = three;
-		EFIELD(g_6a258c, 0x5c) = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a258c].flags_1d0 = three;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a258c].value_05c = 1;
 
 		g_6a2584 = fcn_00469c30((short) (g_1040494 - 0x2a),
 					(short) (d2_ScreenHeight - 0x66), 0x584);
-		EFIELD(g_6a2584, 0x1d0) = 0x43;
-		EFIELD(g_6a2584, 0x5c) = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a2584].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a2584].value_05c = 1;
 
 		g_6a2590 = fcn_00469c30((short) (g_1040494 - 0x4a), 0xd6,
 					0x585);
-		EFIELD(g_6a2590, 0x1d0) = 0x43;
-		EFIELD(g_6a2590, 0x5c) = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a2590].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a2590].value_05c = 1;
 
 		g_6a2594 = fcn_00469c30((short) (g_1040494 - 0x48), 0xd7,
 					0x551);
-		EFIELD(g_6a2594, 0x1d0) = 0x43;
-		EFIELD(g_6a2594, 0x5c) = 1;
-		EFIELD(g_6a2594, 0x20) = 8;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a2594].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a2594].value_05c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a2594].kind = 8;
 
 		g_6a25a4 = fcn_0046fcd0((short) (g_1040494 - 0x6a),
 					(short) (d2_ScreenHeight - 0x7e),
 					g_6b5c60);
-		EFIELD(g_6a25a4, 0x6c) = 1;
-		EFIELD(g_6a25a4, 0x84) = 0x54;
-		EFIELD(g_6a25a4, 0x18) = 0x6b;
-		EFIELD(g_6a25a4, 0x1c) = 0x20;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a4].value_06c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a4].font = 0x54;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a4].width = 0x6b;
+		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a4].height = 0x20;
 	} else if (g_77670c) {
 		if (g_6a2578 != -1) {
 			strcpy(ELEM(g_6a2578) + 0xcc, *(char**) 0x14ad034);
@@ -306,7 +306,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 		if (g_6a2590 != -1) {
 			d2_SetSlotVisibility(g_6a2590, 0);
 			d2_SetSlotVisibility(g_6a2594, 1);
-			EFIELD(g_6a2594, 0x88) =
+			((D2_CONTROL_TL*) g_1015ea0)[g_6a2594].value_088 =
 				(int) (fmod((double) *(float*) (d3_ActiveCamera + 0x88),
 					    *(double*) 0x662958)
 				       * *(float*) 0x665dc8
@@ -355,8 +355,8 @@ hidden:
 				g_6a2580 = fcn_00469c30(
 					(short) (g_1040494 - 0x6e), 0x5b, 0x5b1);
 			}
-			EFIELD(g_6a2580, 0x1d0) = 0x43;
-			EFIELD(g_6a2580, 0x5c) = 1;
+			((D2_CONTROL_TL*) g_1015ea0)[g_6a2580].flags_1d0 = 0x43;
+			((D2_CONTROL_TL*) g_1015ea0)[g_6a2580].value_05c = 1;
 		}
 		if (g_77670c) {
 			if (g_6a2580 != -1) {
@@ -400,7 +400,7 @@ hidden:
 	}
 
 	if (g_6a2578 != -1) {
-		if (EFIELD(g_6a2578, 8)
+		if (((D2_CONTROL_TL*) g_1015ea0)[g_6a2578].value_008
 		    != *(int*) (g_slot_table + 0x54 + g_774970 * 0x21c)) {
 			d2_DestroyElement(g_6a2578);
 			g_6a2578 = -1;
@@ -409,8 +409,8 @@ hidden:
 				*(int*) (g_slot_table + 0x54
 					 + g_774970 * 0x21c),
 				g_6a2598);
-			EFIELD(g_6a2578, 0x1d0) = three;
-			EFIELD(g_6a2578, 0x5c) = 1;
+			((D2_CONTROL_TL*) g_1015ea0)[g_6a2578].flags_1d0 = three;
+			((D2_CONTROL_TL*) g_1015ea0)[g_6a2578].value_05c = 1;
 		}
 	}
 	if (g_6a476c < 0) {

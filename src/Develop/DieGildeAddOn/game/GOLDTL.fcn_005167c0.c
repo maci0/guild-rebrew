@@ -1,6 +1,6 @@
 #include "client_types.h"
 typedef struct { unsigned char kind, unknown01[0x24c]; } BuildingProto5167c0;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 extern char* g_7f3b24;
@@ -50,21 +50,21 @@ void __cdecl fcn_005167c0(unsigned char* building, int queryId)
 	int type;
 	int count;
 	int i;
-	BuildingProto5167c0* rec;
+	BUILDING_PROTOTYPE* rec;
 	unsigned char* entity;
 	unsigned char* obj;
 	unsigned char** p;
 
 	mode = fcn_00500e20(&(*(char*) &gm_GameTime));
 	gm_GetBuildingTypeCategory(*building);
-	rec = &((BuildingProto5167c0*)lpGebaeudePROT)[*building];
+	rec = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building];
 	entity = (unsigned char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, queryId);
 	if (entity != 0 && *(unsigned short*) entity != 0xfd) {
 		type = ((signed char*) init_SceneContextIndices)[*(unsigned short*) entity];
 		g_7f3b24 = (char*) entity;
 		fcn_00516b70();
 	} else {
-		type = ((BuildingProto5167c0*) lpGebaeudePROT)[*building].kind;
+		type = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building].category;
 		g_7f3b24 = 0;
 		type = ((signed char*) g_7f3b00)[type];
 		fcn_00516be0();
@@ -109,10 +109,10 @@ void __cdecl fcn_005167c0(unsigned char* building, int queryId)
 	d3_TraverseSceneObjects(g_67a370, 0, 0x20, fcn_00515ef0);
 	fcn_00505c80((char*) building);
 	i = 0;
-	if (rec->kind == 0x16) {
+	if (rec->category == 0x16) {
 		count = 8;
 	} else {
-		count = (rec->kind != 1) * 4 + 4;
+		count = (rec->category != 1) * 4 + 4;
 	}
 	p = (unsigned char**) ch_CharacterSlots;
 	do {

@@ -9,7 +9,8 @@ typedef struct {
     unsigned char unknown0a3[0x1aa];
 } BuildingProto487470;
 #pragma pack(pop)
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern int lpGebaeudePROT;
 extern int gm_GameTime;
 extern int g_7f4c04;
@@ -18,7 +19,6 @@ extern unsigned short g_7f4c0c;
 extern char g_7f4ca0[];
 extern char g_7f4ca2[];
 extern unsigned char g_773d75;
-
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508da0(unsigned char* e);
 int __cdecl fcn_0050cf50(int, int);
@@ -43,7 +43,7 @@ void __cdecl fcn_00487470(char* actor)
 	unsigned char pkt2[0xf8];
 	unsigned char pkt1[0xf8];
 	char* p;
-	BuildingProto487470* row;
+	BUILDING_PROTOTYPE* row;
 	char* building;
 	char* other;
 	int i;
@@ -106,10 +106,10 @@ void __cdecl fcn_00487470(char* actor)
 	}
 	p = (char*) *(int*) (actor + 0x16c);
 	id = *(unsigned char*) p;
-	row = &((BuildingProto487470*)lpGebaeudePROT)[id];
-	if (row->count > 0) {
+	row = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[id];
+	if (row->component_count > 0) {
 		i = 0;
-		entry = row->entries;
+		entry = row->components;
 		do {
 			if (found != 0) {
 				goto have;
@@ -117,7 +117,7 @@ void __cdecl fcn_00487470(char* actor)
 			w = *entry;
 			if (w & 0x7fff) {
 				id = w & 0x7fff;
-				kind = *(char*) (lpObjektePROT + id * 0x41);
+				kind = *(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]));
 				if (kind != 2 && kind != 6) {
 					if (cand != 0xfd && fcn_00502cd0(*(int*) (*(int*) (actor + 0x16c) + 0x5d), 2, 6, 0, id) == 0) {
 						found = *entry & 0x7fff;
@@ -128,17 +128,17 @@ void __cdecl fcn_00487470(char* actor)
 			}
 			i++;
 			entry++;
-		} while (i < row->count);
+		} while (i < row->component_count);
 		if (found != 0) {
 			goto have;
 		}
 	}
 	i = 0;
 	cand = 0;
-	if (row->count <= 0) {
+	if (row->component_count <= 0) {
 		return;
 	}
-	entry = row->entries;
+	entry = row->components;
 	do {
 		if (found != 0) {
 			goto have;
@@ -146,7 +146,7 @@ void __cdecl fcn_00487470(char* actor)
 		w = *entry;
 		if (w & 0x7fff) {
 			id = w & 0x7fff;
-			kind = *(char*) (lpObjektePROT + id * 0x41);
+			kind = *(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]));
 			if (kind != 2 && kind != 6) {
 				if (cand == 0xfd && fcn_00502cd0(*(int*) (*(int*) (actor + 0x16c) + 0x5d), 2, 6, 0, id) == 0) {
 					found = *entry & 0x7fff;
@@ -157,7 +157,7 @@ void __cdecl fcn_00487470(char* actor)
 		}
 		i++;
 		entry++;
-	} while (i < row->count);
+	} while (i < row->component_count);
 	if (found == 0) {
 		return;
 	}

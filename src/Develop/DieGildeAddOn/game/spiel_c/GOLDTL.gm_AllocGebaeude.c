@@ -1,6 +1,6 @@
 #pragma optimize("y", off)
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 /* Client (GOLDTL) building allocator. Sibling of the server body in
  * Develop/DieGildeAddOn/game/spiel.c, which shares the field layout but not the
  * client's prototype-name selection. */
@@ -168,7 +168,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 			break;
 		}
 		if (comp != 0xffff) {
-			comp_type = *(unsigned char*) (lpObjektePROT + (int) (comp & 0x7fff) * 0x41);
+			comp_type = *(unsigned char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(int) (comp & 0x7fff)]));
 			if (comp_type == 2 || comp_type == 6) {
 				room_mode = 1;
 			}

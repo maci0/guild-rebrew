@@ -10,7 +10,7 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned 
 void __cdecl fcn_004c4510(char* obj, int id);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int offset, void* value);
 void __cdecl fcn_004c5360(void);
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x00493200 */
 int __cdecl fcn_00493200(char* actorEntity, char* a2)
 {
@@ -72,7 +72,7 @@ int __cdecl fcn_00493200(char* actorEntity, char* a2)
 				 (float) (int) pos + g_662c98, (unsigned short*) &pos) == 0) {
 			goto other;
 		}
-		pick = g_7f4ca0 + (pos & 0xffff) * 0x21c;
+		pick = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(pos & 0xffff)]);
 	}
 	if (pick != 0) {
 		b = 1;

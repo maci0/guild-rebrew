@@ -17,7 +17,7 @@ typedef struct {
 } Slot5ada;
 
 extern Group_102cbc4 g_102cbc4[8];
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 extern char g_6ab1e4[];
@@ -107,12 +107,12 @@ void __cdecl fcn_005ada30(char* p)
 						fcn_0050c5d0(q, val);
 						b = fcn_00472250(d, 2, io_AppendText(0x19fc, *q + 0x427, *(unsigned short*) (q + 0x27), q, e + 0x1c, val[0], val[1], e[0x37], e[0x36]));
 						btns[n] = b;
-						((Slot5ada*)g_1015ea0)[b].obj = q;
+						(*(unsigned char**)&((D2_CONTROL_TL*)g_1015ea0)[b].associated_object) = q;
 						if (grp == -1) {
 							grp = d2_CreateRadioGroup(1, b);
-							((Slot5ada*)g_1015ea0)[b].shown = 1;
-							((Slot5ada*)g_1015ea0)[b].active = 1;
-							((Slot5ada*)g_1015ea0)[b].obj = q;
+							(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_038) = 1;
+							(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_03c) = 1;
+							(*(unsigned char**)&((D2_CONTROL_TL*)g_1015ea0)[b].associated_object) = q;
 							g_102cbc4[grp].sel = 0;
 							n++;
 						}

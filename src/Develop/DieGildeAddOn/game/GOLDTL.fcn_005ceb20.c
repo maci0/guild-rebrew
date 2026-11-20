@@ -1,5 +1,5 @@
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 void* __cdecl memset(void*, int, unsigned int);
@@ -46,7 +46,7 @@ typedef struct
 } Shop;
 // SIZE 0x24d
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -119,7 +119,7 @@ void __cdecl d2_ConfirmMeisterbrief(unsigned char* obj, int mode)
 				if (p == 0) {
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 7;
-					pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
+					pkt.x8 = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
 					pkt.xc = *(int*) (obj + 1);
 					pkt.x36 = 1;
 					pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
@@ -132,7 +132,7 @@ void __cdecl d2_ConfirmMeisterbrief(unsigned char* obj, int mode)
 					}
 					pkt.x58 = 0;
 					fcn_004c5530(&pkt);
-					io_FormatTextBuffer(buf, 0x1939, ((Shop*)lpGebaeudePROT)[obj[0]].x223 + 0x130);
+					io_FormatTextBuffer(buf, 0x1939, ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[obj[0]].worker_kind[0] + 0x130);
 					fcn_00476b60();
 					fcn_00526120(buf, 0);
 				}

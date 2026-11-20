@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern char* d3_ActiveCamera;
 extern char* lpObjektePROT;
 extern unsigned char* lpGebaeudePROT;
@@ -60,7 +60,7 @@ void __cdecl fcn_005156a0(char* record)
 	if (k0 != 1)
 		goto tail;
 	idx = (int) (id * 0x41);
-	entry = lpObjektePROT + idx;
+	entry = (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id];
 	kind = *(unsigned char*) entry;
 	if (kind == 2)
 		goto label_59eb;
@@ -122,7 +122,7 @@ void __cdecl fcn_005156a0(char* record)
 						}
 					}
 
-					table = lpObjektePROT + *(unsigned short*) other * 0x41;
+					table = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) other]);
 
 					if (fcn_005014d0(*(unsigned short*) slot) != 0) {
 						int* q;
@@ -152,7 +152,7 @@ void __cdecl fcn_005156a0(char* record)
 				}
 			}
 		} else {
-			entry = lpObjektePROT + idx;
+			entry = (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id];
 			d3_SetSubtreeVisible(record, 1);
 			*(char**) (record + 0x204) = slot;
 			if (*entry != 0x1d)
@@ -190,7 +190,7 @@ label_59eb:
 		*(char**) (slot + 0x30) = record;
 		goto label_5aab;
 label_5a7a:
-		if (lpObjektePROT[idx] != 0x1d && lpObjektePROT[idx] != 0x21
+		if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].kind) != 0x1d && (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].kind) != 0x21
 			&& *(int*) (record + 0x218) != 1)
 			d3_SetSubtreeVisible(record, 0);
 	}
@@ -222,7 +222,7 @@ tail:
 	idx = gm_FindObjektPrototypeByName(record + 6);
 	if (idx == -1)
 		return;
-	if (lpObjektePROT[idx * 0x41] != 2)
+	if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[idx].kind) != 2)
 		list = base;
 	else
 		list = *(char**) (0x7f3ee0 + 0x5d);

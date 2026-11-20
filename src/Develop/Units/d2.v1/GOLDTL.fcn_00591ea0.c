@@ -36,8 +36,8 @@ void __cdecl fcn_00591da0(int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00591d00(void);
-int __cdecl fcn_005373e0(int, int);
-void __cdecl fcn_00471e30(int);
+int __cdecl fcn_005373e0(int, int); void __cdecl fcn_00471e30(int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00591ea0 */
 void __cdecl fcn_00591ea0(void)
@@ -111,19 +111,19 @@ void __cdecl fcn_00591ea0(void)
 					io_FormatTextBuffer(buf, 0x6a9b48, *(unsigned short*) &ent[0x27], ent);
 					v3 = d2_ShowTxt(0x9c, y, buf, *(int*) &d2_CurrentWindowId);
 					v3 *= 0x2f4;
-					*(int*) (v3 + 0x18 + *(int*) &g_1015ea0) = 0x80;
-					*(int*) (v3 + 0x84 + *(int*) &g_1015ea0) = 0x54;
+					(*(D2_CONTROL_TL*) ((char*) (*(int*) &g_1015ea0) + v3)).width = 0x80;
+					(*(D2_CONTROL_TL*) ((char*) (*(int*) &g_1015ea0) + v3)).font = 0x54;
 				} else {
 					v3 = d2_ShowTxt(0x60, y, *(char**) 0x14ad494, *(int*) &d2_CurrentWindowId);
-					*(int*) (*(int*) &g_1015ea0 + 0x84 + v3 * 0x2f4) = 0x53;
+					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].font = 0x53;
 				}
 				if (res != 0 && *res != 0xfd) {
 					fcn_0046f740(0x128, y - 9, *res + 0xdf, *(int*) &d2_CurrentWindowId);
 					io_FormatTextBuffer(buf, 0x6a9b44, (int) *res * 2 + 0x9a8);
 					v3 = d2_ShowTxt(0x164, y + 9, buf, *(int*) &d2_CurrentWindowId);
 					v3 *= 0x2f4;
-					*(int*) (v3 + 0x18 + *(int*) &g_1015ea0) = 0x80;
-					*(int*) (v3 + 0x84 + *(int*) &g_1015ea0) = 0x54;
+					(*(D2_CONTROL_TL*) ((char*) (*(int*) &g_1015ea0) + v3)).width = 0x80;
+					(*(D2_CONTROL_TL*) ((char*) (*(int*) &g_1015ea0) + v3)).font = 0x54;
 				}
 				row += 3;
 				i++;

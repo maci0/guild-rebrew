@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 extern char* gm_CityEntity;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
@@ -49,7 +49,7 @@ void __cdecl fcn_004ea620(void)
 			owner_id = *(unsigned short*) (ent + 0x27);
 			if (owner_id != 0xffff && owner_id != *(unsigned short*) gm_CityEntity && (*(unsigned char*) (ent + 0x5a) & 1) == 0) {
 				found++;
-				rec = (char*) (g_7f4ca0 + owner_id * 0x21c);
+				rec = (char*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[owner_id]));
 				t = *(unsigned char*) (rec + 0x164);
 				if (t >= 1 && t <= 6) {
 					for (i = 0; i < 0x10; i++) {
@@ -75,7 +75,7 @@ void __cdecl fcn_004ea620(void)
 			owner_id = *(unsigned short*) (ent + 0x27);
 			if (owner_id != 0xffff && owner_id != *(unsigned short*) gm_CityEntity && (*(unsigned char*) (ent + 0x5a) & 1) == 0) {
 				found++;
-				rec = (char*) (g_7f4ca0 + owner_id * 0x21c);
+				rec = (char*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[owner_id]));
 				t = *(unsigned char*) (rec + 0x164);
 				if (t >= 0x28 && t <= 0x2d) {
 					for (i = 0; i < 0x10; i++) {

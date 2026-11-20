@@ -7,7 +7,7 @@ typedef struct {
 } Cpy14;
 #pragma pack(pop)
 extern char* lpObjektePROT;
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 double __cdecl fcn_0050fdb0(int, int, void*);
 int __cdecl gm_SearchTable67(int);
 void __cdecl fcn_00529160(int, int, int, void*);
@@ -25,7 +25,7 @@ void __cdecl fcn_00571140(char* obj)
 	unsigned int index;
 
 	table = lpObjektePROT; index = *(unsigned short*) (obj + 0xac);
-	value = *(int*) (table + (index << 6) + index + 0x22);
+	value = *(int *)&((OBJECT_PROTOTYPE *)table)[index].value_022;
 	*(int*) (obj + 0xb0) = value;
 	dst = (Cpy14*) (obj + 0x52);
 	*dst = *(Cpy14*) (obj + 0x44);

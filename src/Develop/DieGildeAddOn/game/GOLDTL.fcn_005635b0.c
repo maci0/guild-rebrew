@@ -1,6 +1,6 @@
 #include "client_types.h"
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #pragma pack(push, 1)
 // SIZE 0x24d
 typedef struct {
@@ -73,7 +73,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 	float d;
 	int v;
 	char* p;
-	Kind_5635b0* k;
+	BUILDING_PROTOTYPE* k;
 
 	if ((o->flags & 2) && o->event != -1) {
 		if (fcn_004c4450(o->event) == 0) {
@@ -89,8 +89,8 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 				he_FreeAction(o);
 				return;
 			}
-			k = &((Kind_5635b0*)lpGebaeudePROT)[*(unsigned char*) p];
-			if (k->type == 0xd || k->type == 0xc || k->type == 0xb) {
+			k = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) p];
+			if (((char)k->category) == 0xd || ((char)k->category) == 0xc || ((char)k->category) == 0xb) {
 				he_FreeAction(o);
 				return;
 			}

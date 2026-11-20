@@ -23,7 +23,7 @@ int __cdecl fcn_005373e0(void*, int);
 void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetElementValue(int, ...);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c3820 */
 void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 {
@@ -77,11 +77,11 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 			if (fcn_0050c7d0(building[0], table[i]) != 0) {
 				label = fcn_0046f740(0, height, 2, d2_CurrentWindowId);
 				wins[i] = label;
-				*(int*) (g_1015ea0 + label * 0x2f4 + 0x1d0) = 3;
-				*(int*) (g_1015ea0 + label * 0x2f4 + 0x84) = 0x55;
+				((D2_CONTROL_TL*) (g_1015ea0))[label].flags_1d0 = 3;
+				((D2_CONTROL_TL*) (g_1015ea0))[label].font = 0x55;
 				io_FormatTextBuffer(buf, "%s:", *(unsigned int*) (table[i] * 8 + 0x14a9180));
 				fcn_0046f9b0(label, buf);
-				*(int*) (g_1015ea0 + label * 0x2f4 + 0x5c) = 1;
+				((D2_CONTROL_TL*) (g_1015ea0))[label].value_05c = 1;
 				if (table[i] == 3) {
 					type = 6;
 				}

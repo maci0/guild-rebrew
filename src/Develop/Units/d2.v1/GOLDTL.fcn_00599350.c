@@ -27,7 +27,7 @@ typedef struct {
 	char pad_db[0x1d];
 } Msg_599350;                        /* SIZE 0xf8 */
 
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
@@ -144,25 +144,25 @@ void __cdecl d2_ShowBuildingMenu(void)
 		id = fcn_0046f740((count % 2) * 0x46 + 0x30, (count / 2) * 0x5a + 0x0f, i + 0x6d4, d2_CurrentWindowId);
 		ids[i] = id;
 		if (flag == 0) {
-			*(int*) (g_1015ea0 + id * 0x2f4 + 0x5c) = 1;
-			strcpy((char*) (g_1015ea0 + id * 0x2f4 + 0xcc), g_14a7898[i]);
-			*(int*) (g_1015ea0 + id * 0x2f4 + 0x1d0) = 3;
-			*(int*) (g_1015ea0 + id * 0x2f4 + 0x1cc) = 0x54;
-			*(int*) (g_1015ea0 + id * 0x2f4 + 0x1e0) = -1;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_05c)) = 1;
+			strcpy((char*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0x0cc)), g_14a7898[i]);
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0)) = 3;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_1cc)) = 0x54;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_1e0)) = -1;
 		} else {
-			*(int*) (g_1015ea0 + id * 0x2f4 + 0x4c) = 1;
-			*(int*) (g_1015ea0 + id * 0x2f4 + 0x60) = 1;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].disabled)) = 1;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_060)) = 1;
 		}
 		count++;
 		flag = 0;
 	}
-	*(int*) (g_1015ea0 + ids[g_6aa0a8] * 0x2f4 + 0x38) = 1;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[ids[g_6aa0a8]].value_038)) = 1;
 	do {
 		if (g_100f1dc >= 0x6d4 && g_100f1dc < 0x6de) {
 			g_6aa0a8 = g_100f1dc - 0x6d4;
-			*(int*) (g_1015ea0 + ids[g_6aa0a8] * 0x2f4 + 0x38) = 1;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[ids[g_6aa0a8]].value_038)) = 1;
 			if (prev != -1) {
-				*(int*) (g_1015ea0 + ids[prev] * 0x2f4 + 0x38) = 0;
+				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[ids[prev]].value_038)) = 0;
 			}
 		}
 		if (g_6aa0a8 != prev) {
@@ -188,25 +188,25 @@ void __cdecl d2_ShowBuildingMenu(void)
 					if (avail == 1) {
 						if (p->kind != 0x0f && p->kind != 6) {
 							id = fcn_0046f740((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, idx + 0x427, d2_CurrentWindowId);
-							*(int*) (g_1015ea0 + id * 0x2f4 + 0x58) = 1;
-							strcpy((char*) (g_1015ea0 + id * 0x2f4 + 0xcc), *(char**) rec);
-							*(int*) (g_1015ea0 + id * 0x2f4 + 0x1d0) = 3;
-							*(int*) (g_1015ea0 + id * 0x2f4 + 0x1cc) = 0x54;
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_058)) = 1;
+							strcpy((char*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0x0cc)), *(char**) rec);
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0)) = 3;
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_1cc)) = 0x54;
 							txt = fcn_0050d200((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), idx);
 							fcn_0050bc10(txt, g_773d75, buf);
 							txt = d2_ShowTxt((count % 3) * 0x46 + 2, (count / 3) * 0x5a + 0x3f, g_6b5c60, d2_CurrentWindowId);
 							d2_SetElementFont(txt, 0x54);
 							fcn_0046f940(txt, buf);
-							*(int*) (g_1015ea0 + txt * 0x2f4 + 0x18) = 0x8c;
-							*(int*) (g_1015ea0 + txt * 0x2f4 + 0x6c) = 1;
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[txt].width)) = 0x8c;
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[txt].value_06c)) = 1;
 							count++;
 						}
 					} else {
 						if (avail == 2) {
 							id = fcn_0046f740((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, 0x4fb, d2_CurrentWindowId);
-							*(char*) (g_1015ea0 + id * 0x2f4 + 0xcc) = g_6b5c60[0];
-							*(int*) (g_1015ea0 + id * 0x2f4 + 0x1d0) = 3;
-							*(int*) (g_1015ea0 + id * 0x2f4 + 0x1cc) = 0x54;
+							*(char*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0x0cc)) = g_6b5c60[0];
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0)) = 3;
+							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_1cc)) = 0x54;
 							count++;
 						}
 					}
@@ -220,8 +220,8 @@ void __cdecl d2_ShowBuildingMenu(void)
 		if (g_100f1dc >= 0x427 && g_100f1dc <= 0x47f) {
 			i = g_100f1dc - 0x427;
 			if (prevIdx != -1) {
-				*(int*) (g_1015ea0 + prevIdx * 0x2f4 + 0x38) = 0;
-				*(int*) (g_1015ea0 + prevIdx * 0x2f4 + 0x3c) = 0;
+				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[prevIdx].value_038)) = 0;
+				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[prevIdx].value_03c)) = 0;
 			}
 			prevIdx = d2_CurrentElementId;
 			if (mode != 0) {

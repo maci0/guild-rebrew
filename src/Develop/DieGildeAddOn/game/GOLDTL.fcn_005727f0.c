@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 #pragma pack(1)
@@ -41,7 +41,7 @@ void __cdecl fcn_005727f0(char* e)
 {
 	char* r;
 	char buf[0x200];
-	struct rec* p;
+	OBJECT_PROTOTYPE* p;
 	int amt;
 	int i;
 
@@ -61,8 +61,8 @@ void __cdecl fcn_005727f0(char* e)
 			*(int*) (e + 0x70) = -1;
 			return;
 		}
-		p = &((struct rec*)lpObjektePROT)[*(unsigned short*) (e + 0xac)];
-		amt = (gm_RandomMod((unsigned short) (p->level * 40)) + p->level * 40)
+		p = &((OBJECT_PROTOTYPE*)lpObjektePROT)[*(unsigned short*) (e + 0xac)];
+		amt = (gm_RandomMod((unsigned short) (p->value_036 * 40)) + p->value_036 * 40)
 		    * (*(int*) (e + 0x18) + *(int*) (e + 0x14));
 		fcn_004c51f0(*(int*) (e + 0xb4), -1, *(unsigned short*) (e + 0xac), amt, g_773d75, 0);
 		io_FormatTextBuffer(buf, 0x1bb8, *(unsigned short*) (e + 0xac) * 2 + 0x9a8, r, amt);

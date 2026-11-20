@@ -3,7 +3,7 @@ typedef struct Gfx {
 	float f[10];
 } Gfx;
 // SIZE 0x28
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 extern int g_100f1dc;
@@ -68,9 +68,9 @@ void __cdecl fcn_00564460(char* e)
 		f = 15.0f;
 		q = (unsigned short*) gm_LookupEntityRecordById(*(int*) (e + 0xb4));
 		p = (unsigned char*) gm_SearchTable67(*(int*) (e + 0xac));
-		rec = (unsigned char*) (lpGebaeudePROT + *p * 0x24d);
+		rec = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p];
 		n = fcn_0050cf50(p, (int) (char) p[0x5c]);
-		if (*rec == 2) {
+		if ((((BUILDING_PROTOTYPE*)rec)->category) == 2) {
 			unsigned char* v4;
 
 			v4 = *(unsigned char**) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4e10);
@@ -85,7 +85,7 @@ void __cdecl fcn_00564460(char* e)
 			}
 		} else {
 			k = 0;
-			ptype = *(unsigned char*) (lpGebaeudePROT + *p * 0x24d);
+			ptype = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p].category;
 			c = *(unsigned short*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca0);
 			if (gm_StartFilteredEntitySearch(2, 4, c, 5, ptype) != 0) {
 				do {

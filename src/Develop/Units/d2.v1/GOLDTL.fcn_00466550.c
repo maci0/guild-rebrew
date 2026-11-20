@@ -66,7 +66,7 @@ void __cdecl d2_DrawField(int idx, int surf)
 		if (f->def == -1 && !(flags & 0x200)) {
 			f->w = fcn_0046b520(((char*) f + 0x2c), f->font);
 		} else {
-			f->w = *(int*) (g_1015ea0 + f->ent * 0x2f4 + 0x18);
+			f->w = ((D2_CONTROL_TL*) (g_1015ea0))[f->ent].width;
 		}
 		if (f->w < 0x30) {
 			f->w = 0x30;
@@ -79,8 +79,8 @@ void __cdecl d2_DrawField(int idx, int surf)
 			f->w = v;
 		}
 		fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
-		*(int*) (g_1015ea0 + f->ent * 0x2f4 + 0x18) = f->w;
-		if (*(int*) (g_1015ea0 + f->ent * 0x2f4 + 0x3c) != 0 || d2_CurrentElementId == f->ent) {
+		((D2_CONTROL_TL*) (g_1015ea0))[f->ent].width = f->w;
+		if (((D2_CONTROL_TL*) (g_1015ea0))[f->ent].value_03c != 0 || d2_CurrentElementId == f->ent) {
 			d2_DrawDefaultFontText(f->x, f->y, surf, ((char*) f + 0x2c), 2);
 		} else {
 			d2_DrawDefaultFontText(f->x, f->y, surf, ((char*) f + 0x2c), 0);
@@ -109,56 +109,56 @@ void __cdecl d2_DrawField(int idx, int surf)
 		} else {
 			sprintf(buf, (char*) 0x67d444, f->f12c);
 		}
-		e = &((fcn_00466550_Ent*) g_1015ea0)[f->ent];
+		e = (fcn_00466550_Ent*) &((D2_CONTROL_TL*) g_1015ea0)[f->ent];
 		if (f->def == -1) {
 			font = (char*) d2_GetResourceData(g_67d39c);
 			g0 = fcn_0047b620(font, 0);
 			g1 = fcn_0047b620(font, 1);
 			g2 = fcn_0047b620(font, 2);
-			e->i[0x18 / 4] = f->w = g0->w + f->digits * 14 + g2->w;
-			e->i[0x10 / 4] = f->x;
+			((D2_CONTROL_TL*) e)->width = f->w = g0->w + f->digits * 14 + g2->w;
+			((D2_CONTROL_TL*) e)->x = f->x;
 			v = f->w - g0->w - g1->w;
-			fcn_0047cba0(f->x, e->i[0x14 / 4], surf, font, 0);
-			fcn_0047cba0(f->x + f->w - g1->w, e->i[0x14 / 4], surf, font, 1);
-			w0 = e->i[0x10 / 4] + g0->w;
+			fcn_0047cba0(f->x, ((D2_CONTROL_TL*) e)->y, surf, font, 0);
+			fcn_0047cba0(f->x + f->w - g1->w, ((D2_CONTROL_TL*) e)->y, surf, font, 1);
+			w0 = ((D2_CONTROL_TL*) e)->x + g0->w;
 			fcn_0047a040(w0 - 1, g_7725fc, w0 + v, d2_ClipBottom);
 			i = 0;
 			if (0.0 < (double) (v / g2->w) + 0.5) {
 				do {
-					fcn_0047cba0(g2->w * i + g0->w + e->i[0x10 / 4],
-					    e->i[0x14 / 4], surf, font, 2);
+					fcn_0047cba0(g2->w * i + g0->w + ((D2_CONTROL_TL*) e)->x,
+					    ((D2_CONTROL_TL*) e)->y, surf, font, 2);
 					i++;
 				} while ((double) i < (double) (v / g2->w) + 0.5);
 			}
 			d2_SelectFont(d2_DefaultFont);
-			fcn_0046bd20(f->x, e->i[0x14 / 4] + 1, v, e->i[0x1c / 4],
+			fcn_0046bd20(f->x, ((D2_CONTROL_TL*) e)->y + 1, v, ((D2_CONTROL_TL*) e)->height,
 			    surf, buf, 0x10);
 		} else {
 			font = (char*) d2_GetResourceData(f->def);
-			e->i[0x1d4 / 4] = *(unsigned short*) (font + 6);
-			e->i[0x1d8 / 4] = *(unsigned short*) (font + 8);
-			if (e->i[0x60 / 4] != 0 && *(float*) ((char*) e + 0x1f4) == g_6628a8) {
+			((D2_CONTROL_TL*) e)->value_1d4 = *(unsigned short*) (font + 6);
+			((D2_CONTROL_TL*) e)->value_1d8 = *(unsigned short*) (font + 8);
+			if (((D2_CONTROL_TL*) e)->value_060 != 0 && ((D2_CONTROL_TL*) e)->value_1f4.real == g_6628a8) {
 				fcn_0047cbf0(f->x, f->y, surf, font, d2_ResourceOffset);
 			} else {
 				fcn_0047cba0(f->x, f->y, surf, font, d2_ResourceOffset);
 			}
-			if (*(float*) ((char*) e + 0x1f4) != g_6628a8) {
-				y = (int) ((*(double*) 0x6629c8 - *(float*) ((char*) e + 0x1f4))
-				    * e->i[0x1c / 4] + f->y);
+			if (((D2_CONTROL_TL*) e)->value_1f4.real != g_6628a8) {
+				y = (int) ((*(double*) 0x6629c8 - ((D2_CONTROL_TL*) e)->value_1f4.real)
+				    * ((D2_CONTROL_TL*) e)->height + f->y);
 				if (y > d2_ClipBottom) {
 					y = d2_ClipBottom;
 				}
 				fcn_0047a040(d2_ClipLeft, g_7725fc, d2_ClipRight, y);
 				fcn_0047cbf0(f->x, f->y, g_77250c, font, d2_ResourceOffset);
 				fcn_0047a040(d2_ClipLeft, g_7725fc, d2_ClipRight, d2_ClipBottom);
-				if (d2_CurrentElementId != e->i[0]) {
-					width = (int) (((*(float*) (g_1015ea0 + f->ent * 0x2f4 + 0x1f4) > *(double*) 0x6629c8)
+				if (d2_CurrentElementId != ((D2_CONTROL_TL*) e)->value_000) {
+					width = (int) (((((D2_CONTROL_TL*) (g_1015ea0))[f->ent].value_1f4.real > *(double*) 0x6629c8)
 					    ? *(double*) 0x6629c8
-					    : *(float*) (g_1015ea0 + f->ent * 0x2f4 + 0x1f4)) * *(double*) 0x662c38);
+					    : ((D2_CONTROL_TL*) (g_1015ea0))[f->ent].value_1f4.real) * *(double*) 0x662c38);
 					sprintf(buf3, (char*) 0x67d43c, width);
 					d2_SelectFont(d2_DefaultFont + 1);
 					fcn_0046bd20(f->x,
-					    e->i[0x14 / 4] + e->i[0x1c / 4] - 0xf,
+					    ((D2_CONTROL_TL*) e)->y + ((D2_CONTROL_TL*) e)->height - 0xf,
 					    *(unsigned short*) (font + 6), f->h, surf,
 					    buf3, 0x28);
 				}
@@ -180,10 +180,10 @@ void __cdecl d2_DrawField(int idx, int surf)
 		}
 	}
 	if (g_67d374 != -1
-	    && *(char*) (g_1015ea0 + f->ent * 0x2f4 + 0xcc) != 0
-	    && g_1015ea0 + g_67d374 * 0x2f4 == g_1015ea0 + f->ent * 0x2f4
+	    && *(char*) ((char*) &((D2_CONTROL_TL*) (g_1015ea0))[f->ent] + 0xcc) != 0
+	    && (char*) &((D2_CONTROL_TL*) g_1015ea0)[g_67d374] == (char*) &((D2_CONTROL_TL*) g_1015ea0)[f->ent]
 	    && tp_d2_SelectedControl == 0) {
-		g_7725a4 = (int) (g_1015ea0 + f->ent * 0x2f4);
-		g_7725a0 = *(int*) (g_1015ea0 + f->ent * 0x2f4 + 0x40);
+		g_7725a4 = (int) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[f->ent]);
+		g_7725a0 = *(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[f->ent].parent);
 	}
 }

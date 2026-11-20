@@ -41,7 +41,7 @@ extern int g_100f1c4;
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern int tp_d2_SelectedControl;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_67d38c;
 extern int g_14ce900;
 extern int g_14ce904;
@@ -100,13 +100,13 @@ done:
 	}
 	if (d2_HoveredWindow != -1 && (w = &((Win*)g_1015f40)[d2_HoveredWindow]) != 0 && g_14ce8d0 != 0 && w->up_btn != -1 && w->down_btn != -1 && tp_d2_SelectedControl == 0) {
 		if (d2_CurrentElementId == w->up_btn) {
-			w = &((Win*)g_1015f40)[((Slot*)g_1015ea0)[w->up_btn].win];
+			w = &((Win*)g_1015f40)[(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->up_btn].value_1f0)];
 			if (w->scroll == w->scroll_max || w->scroll == 0) {
 				d = w->step;
 				fcn_0046ed00(0, d, w->id);
 			}
 		} else if (d2_CurrentElementId == w->down_btn) {
-			w = &((Win*)g_1015f40)[((Slot*)g_1015ea0)[w->down_btn].win];
+			w = &((Win*)g_1015f40)[(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->down_btn].value_1f0)];
 			if (w->scroll == w->scroll_max || w->scroll == 0) {
 				d = -w->step;
 				fcn_0046ed00(0, d, w->id);

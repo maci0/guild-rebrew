@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern int d2_CurrentWindowId;
 extern char* lpObjektePROT;
 extern char* g_1015ea0;
@@ -70,7 +70,7 @@ typedef struct {
 	int f6c;
 	char pad70[0x88];
 } Req_59c000;
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0059c000 */
 int __cdecl fcn_0059c000(char* building)
 {
@@ -113,7 +113,7 @@ int __cdecl fcn_0059c000(char* building)
 	p[3] = 0xe;
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x742);
 	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
-	*(unsigned int*) (g_1015ea0 + 0x84 + item * 0x2f4) = 0x54;
+	*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[item].font) = 0x54;
 	do {
 		d2_SetForm(h, 2);
 		t = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0xff);
@@ -240,13 +240,13 @@ located:
 			p = (int*) 0x90d520;
 			acc = (int*) (0x779160 + count * 0x58);
 			for (i = 0; i < (int) (unsigned short) g_7f3ee4 && (int) acc < 0x7796e0; i++) {
-				row = (char*) (lpObjektePROT + *p * 0x41);
+				row = (char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*p]));
 				if (*row == 0x17)
 					goto nextcand;
 				found = 1;
 				for (j = 0; j < 4 && found; j++) {
-					if (*(unsigned short*) (row + 0x2e + j * 2)) {
-						m = fcn_00502cd0(*(unsigned int*) (t + 0x14), 1, 0, *(unsigned short*) (row + 0x2e + j * 2));
+					if (((OBJECT_PROTOTYPE *)row)->ingredient_ids[j]) {
+						m = fcn_00502cd0(*(unsigned int*) (t + 0x14), 1, 0, ((OBJECT_PROTOTYPE *)row)->ingredient_ids[j]);
 						if (!m || (*(int*) (m + 0xe) != 2 && *building != 0x1e))
 							found = 0;
 					}
@@ -273,9 +273,9 @@ nextcand:
 			for (k = 0; k < count; k++) {
 				*acc = 0x7fffffff;
 				for (j = 0; j < 4; j++) {
-					row = (char*) (lpObjektePROT + *(int*) (0x779160 + k * 0x58) * 0x41);
-					*(int*) (0x779164 + k * 0x58 + j * 4) = *(unsigned short*) (row + 0x2e + j * 2);
-					*(int*) (0x779174 + k * 0x58 + j * 4) = *(unsigned short*) (row + 0x26 + j * 2);
+					row = (char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(int*) (0x779160 + k * 0x58)]));
+					*(int*) (0x779164 + k * 0x58 + j * 4) = ((OBJECT_PROTOTYPE *)row)->ingredient_ids[j];
+					*(int*) (0x779174 + k * 0x58 + j * 4) = ((OBJECT_PROTOTYPE *)row)->ingredient_amounts[j];
 					if (!*(int*) (0x779164 + k * 0x58 + j * 4))
 						continue;
 					m = fcn_00502cd0(*(unsigned int*) (q + 0x14), 1, 0, *(int*) (0x779164 + k * 0x58 + j * 4));
@@ -286,7 +286,7 @@ nextcand:
 							*acc = gm_GetMsgField(q, m) / *(int*) (0x779174 + k * 0x58 + j * 4);
 					}
 				}
-				*acc = *(unsigned short*) (lpObjektePROT + *(int*) (0x779160 + k * 0x58) * 0x41 + 0x36) * *acc;
+				*acc = ((OBJECT_PROTOTYPE *)lpObjektePROT)[*(int*) (0x779160 + k * 0x58)].value_036 * *acc;
 				m = fcn_00502cd0(*(unsigned int*) (q + 0x14), 1, 0, *(int*) (0x779160 + k * 0x58));
 				if (m)
 					acc[1] = gm_GetMsgField(q, m);

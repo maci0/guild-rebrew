@@ -1,5 +1,5 @@
 #include "client_dialog_helpers.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x0050fe80 */
 int __cdecl fcn_0050fe80(char *base)
 {
@@ -11,7 +11,7 @@ int __cdecl fcn_0050fe80(char *base)
 	best = 1.0e10f;
 	best_index = -1;
 	for (i = 0; i < 768; i++) {
-		if (*(unsigned short *) (g_7f4ca0 + i * 0x21c) != 0xffff) {
+		if (*(unsigned short *) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[i])) != 0xffff) {
 			value = (signed char) base[0x869480 + i * 0x300];
 			if (value < best) {
 				best = value;

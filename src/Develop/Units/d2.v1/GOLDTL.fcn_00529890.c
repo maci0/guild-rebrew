@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "GOLDTL.fcn_00529890_gconf.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_CurrentWindowId;
@@ -123,13 +123,13 @@ label_529a17:
 						*(unsigned int*) (v6 + 0x7e30c0) = v16;
 						v15 = d2_ShowTxt(0, v5 + 4, g_6b5c60, d2_CurrentWindowId);
 						*(int*) (v6 + 0x7e30d4) = v15;
-						*(unsigned int*) (g_1015ea0 + 0x6c + v15 * 0x2f4) = 1;
-						*(unsigned int*) (g_1015ea0 + 0x18
-							+ *(int*) (v6 + 0x7e30d4) * 0x2f4) = 0x5f;
-						*(unsigned int*) (g_1015ea0 + 0x58
-							+ *(int*) (v6 + 0x7e30c0) * 0x2f4) = 1;
-						*(char**) (g_1015ea0 + 0x2f0
-							+ *(int*) (v6 + 0x7e30c0) * 0x2f4) = &v11[-0x165];
+						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v15].value_06c)) = 1;
+						*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+							[*(int*) (v6 + 0x7e30d4)].width) = 0x5f;
+						*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+							[*(int*) (v6 + 0x7e30c0)].value_058) = 1;
+						*(char**) (&((D2_CONTROL_TL*)g_1015ea0)
+							[*(int*) (v6 + 0x7e30c0)].associated_object) = &v11[-0x165];
 						if (*(int*) (v6 + 0x7e30d8) != -1) {
 							fcn_0046f280(*(int*) (v6 + 0x7e30d8));
 							*(unsigned int*) (v6 + 0x7e30d8) = 0xffffffff;
@@ -171,7 +171,7 @@ label_529c64:
 				v3 = *v13;
 				if (v3 != 0xffff) {
 					if (d2_CurrentElementId == v13[-4]) {
-						if (*(int*) (g_1015ea0 + 0x38 + v13[-4] * 0x2f4)) {
+						if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v13[-4]].value_038))) {
 							*(char*) (v3 * 0x21c + 0x7f4e28) = 1;
 							fcn_004c3540((char*) (v3 * 0x21c + 0x7f4ca0));
 						}
@@ -210,8 +210,8 @@ label_529cf0:
 				if (!(*(char*) (v13[2] * 0x21c + 0x7f4e28))) {
 					d2_SetElementValue(v13[-2], 0);
 				} else {
-					fcn_00473690(*(unsigned int*) (g_1015ea0 + 8
-						+ v13[-2] * 0x2f4), 1);
+					fcn_00473690(*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+						[v13[-2]].value_008), 1);
 					d2_SetElementValue(v13[-2], 1);
 				}
 				if (*v13 != -1) {
@@ -230,8 +230,8 @@ label_529cf0:
 					sprintf(v9, "%s %i%%",
 						(char*) (v13[2] * 0x21c + 0x7f4cd0), v16);
 					fcn_0046f940(v13[3], v9);
-					*(unsigned int*) (g_1015ea0 + 0x18
-						+ v13[3] * 0x2f4) = 0x5f;
+					*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+						[v13[3]].width) = 0x5f;
 				}
 				v5 = fcn_00529800((char*) (v13[2] * 0x21c + 0x7f4ca0),
 					out);
@@ -254,8 +254,8 @@ label_529cf0:
 							}
 						}
 						else {
-							if (out[0] == *(int*) (g_1015ea0 + 8
-								+ v5 * 0x2f4)) {
+							if (out[0] == *(int*) (&((D2_CONTROL_TL*)g_1015ea0)
+								[v5].value_008)) {
 								goto label_529f4c;
 							}
 							d2_DestroyElement(v5);
@@ -275,8 +275,8 @@ label_529f4c:
 					if (v15 != -1) {
 						v6 = v13[1];
 						if (v6 != -1) {
-							if (v15 == *(int*) (g_1015ea0 + 8
-								+ v6 * 0x2f4)) {
+							if (v15 == *(int*) (&((D2_CONTROL_TL*)g_1015ea0)
+								[v6].value_008)) {
 								goto label_529fe5;
 							}
 							d2_DestroyElement(v6);
@@ -314,8 +314,8 @@ label_529fe5:
 				v7 = (unsigned int) (*(char*) (*v13 * 0x21c
 					+ 0x7f4e28) != '\0');
 				v13[4] = v7;
-				*(unsigned int*) (g_1015ea0 + 0x38 + v13[-4] * 0x2f4) = v7;
-				*(unsigned int*) (g_1015ea0 + 0x3c + v13[-4] * 0x2f4) = v7;
+				*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v13[-4]].value_038)) = v7;
+				*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v13[-4]].value_03c)) = v7;
 			}
 			v13 = &v13[10];
 		} while ((int) v13 < 0x7e35d0);

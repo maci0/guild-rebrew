@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 // SIZE 0x90
 typedef struct {
@@ -62,7 +62,7 @@ int __cdecl fcn_0052c9b0(void)
 				d3_AdjustCameraHeight();
 			}
 			if (g_774668 != 0 && g_774650 == g_774658 && (*(int*)&g_7746c4) == 0 && (*(int*)&g_7746c8) == 0) {
-				p = (char*) gm_GetEntityTableEntry((char*) (&((Rec*)g_7f4ca0)[g_774970]));
+				p = (char*) gm_GetEntityTableEntry((char*) (((Rec *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])));
 				if (p != 0) {
 					*(int*) (p + 0x8c) = ((View*)d3_ActiveCamera)->x;
 					*(int*) (p + 0x90) = ((View*)d3_ActiveCamera)->y;

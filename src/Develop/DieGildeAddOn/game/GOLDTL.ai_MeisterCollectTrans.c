@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c06;
@@ -11,7 +11,7 @@ extern unsigned char g_773d75;
 extern char* lpGebaeudePROT;
 extern unsigned short* lpObjekteINST;
 extern char* lpObjektePROT;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 typedef struct BuildingRow489250 { unsigned char kind; char fields[0x246]; unsigned char capacity; char tail[5]; } BuildingRow489250;
 
 int __cdecl gm_RandomMod(unsigned short);
@@ -37,7 +37,7 @@ void __cdecl ai_MeisterCollectTrans(char* e)
 	void* out2;
 	unsigned char pkt[0xf8];
 	char buf[0x400];
-	BuildingRow489250* row;
+	BUILDING_PROTOTYPE *row;
 	char* u;
 	int type;
 	int id;
@@ -59,7 +59,7 @@ void __cdecl ai_MeisterCollectTrans(char* e)
 		iter = 0x5008;
 		do {
 			v3 = *(unsigned short*) slot;
-			if (v3 != 0 && *(char*) (lpObjektePROT + (unsigned int) v3 * 0x41) == 0x1d
+			if (v3 != 0 && *(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(unsigned int) v3])) == 0x1d
 			    && *(int*) (slot + 0x1c) == *(int*) (*(char**) (e + 0x16c) + 1)) {
 				count++;
 				if (v3 == 0x136) {
@@ -115,8 +115,8 @@ next:
 			iter--;
 		} while (iter != 0);
 		type = **(unsigned char**) (e + 0x16c);
-		row = &((BuildingRow489250*) lpGebaeudePROT)[type];
-		if (row->kind == 9) {
+		row = &((BUILDING_PROTOTYPE *) lpGebaeudePROT)[type];
+		if (row->category == 9) {
 			if (count - n136 == 0) {
 				t = (int) eval_ObjektPreis2Credits(0x134, 100);
 				fcn_004c5150(-1, *(int*) (g_7f4ca4 +
@@ -130,7 +130,7 @@ next:
 				if (*(int*) (e + 0x1c8) & 8) {
 					return;
 				}
-				if (count >= row->capacity) {
+				if (count >= row->level) {
 					return;
 				}
 				if ((unsigned short) gm_RandomMod(0x2ee) >= 2) {
@@ -154,7 +154,7 @@ next:
 			if (*(int*) (e + 0x1c8) & 8) {
 				return;
 			}
-			if (count >= row->capacity) {
+			if (count >= row->level) {
 				return;
 			}
 			if ((unsigned short) gm_RandomMod(0x2ee) >= 2) {
@@ -198,7 +198,7 @@ next:
 		if (*(int*) (e + 0x1c8) & 8) {
 			return;
 		}
-		if (count >= row->capacity) {
+		if (count >= row->level) {
 			return;
 		}
 		if ((unsigned short) gm_RandomMod(0x2ee) >= 2) {

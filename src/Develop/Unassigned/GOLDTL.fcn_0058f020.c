@@ -17,7 +17,7 @@ void __cdecl fcn_0058f020(void)
 
 	if (g_7746b4 != 0 && (g_7746b4[0x1b4] & 1) && g_14ce8cc != 0) {
 		fcn_005904a0(g_7746b4, 0);
-		fcn_004c54c0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, *(int*) (g_7746b4 + 4), -5, 0);
+		fcn_004c54c0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*) (g_7746b4 + 4), -5, 0);
 		r = fcn_00530bf0(g_7746b4, g_6a9834);
 		if (r != 0) {
 			*(int*) (r + 0xc8c) = 1;

@@ -134,7 +134,7 @@ unsigned char _dpad_6a2a88[224] = {
 unsigned char _dpad_6a2be8[4] = {
     0xff, 0xff, 0xff, 0xff
 };
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00535570 */
 int __cdecl d2_CreateScrollPerga(void)
 {
@@ -163,7 +163,7 @@ void __cdecl d2_UpdateScrollPerga(void)
 		if (v < 0) {
 			v = 0;
 		}
-		*(int*) (g_1015ea0 + g_6a2bfc * 0x2f4 + 0x88) = v;
-		*(int*) (g_1015ea0 + g_6a2c00 * 0x2f4 + 0x88) = v;
+		((D2_CONTROL_TL*) (g_1015ea0))[g_6a2bfc].value_088 = v;
+		((D2_CONTROL_TL*) (g_1015ea0))[g_6a2c00].value_088 = v;
 	}
 }

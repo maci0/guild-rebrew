@@ -1,6 +1,6 @@
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 int sprintf(char*, const char*, ...);
@@ -29,7 +29,7 @@ void __cdecl fcn_00510820(char* obj, unsigned char* ent, int kind)
 		}
 		break;
 	case 1:
-		sprintf(obj, "ob_%s", lpObjektePROT + *(unsigned short*) ent * 0x41 + 1);
+		sprintf(obj, "ob_%s", ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) ent]) + 1);
 		*(int*) (obj + 0x220) = 4;
 		break;
 	}

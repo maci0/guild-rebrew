@@ -1,5 +1,5 @@
 #include "entity_record.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 
@@ -25,10 +25,10 @@ int __cdecl fcn_004a9540(int a1, char* e, int a3, int a4, char* out)
 	if (!fcn_004a5340(e, 1, &lim, 0.0f, (float) gm_RandomMod(0x20) + 40.0f, &id)) {
 		return 0;
 	}
-	if (!fcn_0055c0f0(e, &((ENTITY_RECORD*)g_7f4ca0)[id])) {
+	if (!fcn_0055c0f0(e, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]))) {
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = ((ENTITY_RECORD*)g_7f4ca0)[id].entity_id;
+	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id;
 	return 1;
 }

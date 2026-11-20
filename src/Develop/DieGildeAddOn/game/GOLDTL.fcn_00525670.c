@@ -12,7 +12,7 @@ typedef struct {
 } Ent525670;
 extern char g_7f4ca0[];
 extern char* g_entity_type_table;
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern int __cdecl gm_LookupEntityRecordById(int);
 extern int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern int __cdecl gm_ResolveEntityById(int*, int, int, int);
@@ -76,8 +76,8 @@ unsigned int __cdecl gm_RebuildLoadedReferences(void)
 	v9 = 0;
 		while (v9 < g_773d8c) {
 		obj = (char*) (int) lpObjekteINST + v9 * 0x43;
-		if (*(char*) ((int) lpObjektePROT +
-		               (unsigned int) *(unsigned short*) obj * 0x41) == 0x1d)
+		if (*(char*) ((int) &((OBJECT_PROTOTYPE *)lpObjektePROT)[
+		               (unsigned int) *(unsigned short*) obj]) == 0x1d)
 			*(unsigned int*) (obj + 0x24) = 0;
 		v5 = *(int*) (obj + 6);
 		if (v5 != -1 && gm_ResolveEntityById(&v8, &v7, &v6, v5)) {

@@ -1,7 +1,7 @@
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 extern char g_7f4ca0[];
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl fcn_00507910(unsigned char typ);
 int __cdecl gm_CheckStatLevel(int a0, int typ);
@@ -240,7 +240,7 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 		if (a2 == 0)
 			goto finish;
 		id = *a2;
-		if (*(char*) (lpObjektePROT + (unsigned int) id * 0x41) == 6) {
+		if (*(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(unsigned int) id])) == 6) {
 			if (id >= 0x91 && id <= 0x97)
 				result = 1;
 			else

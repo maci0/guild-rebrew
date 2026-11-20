@@ -1,5 +1,5 @@
 #include "entity_record.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 
@@ -25,6 +25,6 @@ int __cdecl fcn_004a96f0(int a1, char* e, int a3, int a4, char* out)
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = ((ENTITY_RECORD*)g_7f4ca0)[id].entity_id;
+	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id;
 	return 1;
 }

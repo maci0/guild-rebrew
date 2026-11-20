@@ -5,7 +5,7 @@ int __cdecl io_AppendText(int fmt, ...);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
 int __cdecl d2_UpdateWindowDrag(void* win);
 void __cdecl fcn_0046f280(int);
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/Units/d2.v1/d2_window_view.h"
 extern char* lpObjektePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -65,7 +65,7 @@ void __cdecl fcn_005b39c0(void)
 					rec = (Rec80*) (p - 0x1c);
 					if (*(unsigned short*) (p - 0x1c) != 0 && rec->f04 != 0) {
 						id = rec->f00;
-						slot = (int) lpObjektePROT + id * 0x40 + id;
+						slot = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]);
 						v1c = rec->f1c;
 						io_AppendText(0x6ab804, slot + 1, (int) rec->f20, rec->f24,
 							(int) rec->f38, (int) eval_ObjektPreis2Credits(id, 100), rec->f10,

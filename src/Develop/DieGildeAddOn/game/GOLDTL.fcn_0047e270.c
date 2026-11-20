@@ -5,7 +5,7 @@
  */
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/goods_plan.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 typedef struct {
 	char pad0[0x16c];
 	int x16c;          /* +0x16c: shared building state */
@@ -116,8 +116,8 @@ void __cdecl fcn_0047e270(Bld* bld)
 			rec = &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i];
 			if (rec->goods_id != (int) bld->id)
 				continue;
-			goods = lpObjektePROT + rec->goods_id * 0x41;
-			if ((int) *(unsigned short*) (goods + 0x36) <= rec->unk_40 &&
+			goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[rec->goods_id]);
+			if ((int) ((OBJECT_PROTOTYPE *)goods)->value_036 <= rec->unk_40 &&
 			    fcn_00486640(bld, rec, 1)) {
 				rec->flags = rec->flags | 8;
 				fcn_004868d0(bld, rec);
@@ -136,8 +136,8 @@ void __cdecl fcn_0047e270(Bld* bld)
 				rec = &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i];
 				if (rec->goods_id != (int) bld->id)
 					continue;
-				goods = lpObjektePROT + rec->goods_id * 0x41;
-				if ((int) *(unsigned short*) (goods + 0x36) <= rec->unk_40 &&
+				goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[rec->goods_id]);
+				if ((int) ((OBJECT_PROTOTYPE *)goods)->value_036 <= rec->unk_40 &&
 				    fcn_00486640(bld, rec, 1)) {
 					rec->flags = rec->flags | 8;
 					fcn_004868d0(bld, rec);
@@ -159,17 +159,17 @@ pick:
 			for (rec = (PRODUCTION_GOODS_RECORD*) g_100d0c0; (char*) rec < (char*) g_100d0c0 + 0xb00; rec = (PRODUCTION_GOODS_RECORD*) ((char*) rec + 0x58)) {
 				if (rec->goods_id != n)
 					continue;
-				goods = lpObjektePROT + rec->goods_id * 0x41;
+				goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[rec->goods_id]);
 				if ((int) ((Craft*) craft)->x1c < rec->min_1)
 					break;
 				if ((int) ((Craft*) craft)->x1d < rec->min_2)
 					break;
-				if (rec->unk_40 < (int) *(unsigned short*) (goods + 0x36))
+				if (rec->unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
 					break;
 				n = fcn_00503d10(rec->goods_id);
 				if (n == 0)
 					break;
-				if ((int) ((unsigned short) *(unsigned short*) (goods + 0x36) + rec->unk_3c) <= gm_eval_SlotVoll(n, rec->goods_id, 1000000)) {
+				if ((int) ((unsigned short) ((OBJECT_PROTOTYPE *)goods)->value_036 + rec->unk_3c) <= gm_eval_SlotVoll(n, rec->goods_id, 1000000)) {
 					if (fcn_00486640(bld, rec, 1)) {
 						rec->flags = rec->flags | 8;
 						fcn_004868d0(bld, rec);
@@ -198,19 +198,19 @@ pick:
 	}
 	for (i = 0; i < g_100b0ac; i++) {
 		rec = &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]];
-		goods = lpObjektePROT + rec->goods_id * 0x41;
-		if ((*(unsigned char*) goods == 0x17 || *(unsigned char*) goods == 0x25) && rec->unk_3c >= 5)
+		goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[rec->goods_id]);
+		if ((((OBJECT_PROTOTYPE *)goods)->kind == 0x17 || ((OBJECT_PROTOTYPE *)goods)->kind == 0x25) && rec->unk_3c >= 5)
 			continue;
 		if ((int) ((Craft*) craft)->x1c < rec->min_1)
 			continue;
 		if ((int) ((Craft*) craft)->x1d < rec->min_2)
 			continue;
-		if (rec->unk_40 < (int) *(unsigned short*) (goods + 0x36))
+		if (rec->unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
 			continue;
 		n = fcn_00503d10(rec->goods_id);
 		if (n == 0)
 			continue;
-		if ((int) ((unsigned short) *(unsigned short*) (goods + 0x36) + rec->unk_3c) > gm_eval_SlotVoll(n, rec->goods_id, 1000000))
+		if ((int) ((unsigned short) ((OBJECT_PROTOTYPE *)goods)->value_036 + rec->unk_3c) > gm_eval_SlotVoll(n, rec->goods_id, 1000000))
 			continue;
 		if (!fcn_00486640(bld, rec, 1))
 			continue;
@@ -223,19 +223,19 @@ pick:
 	}
 	for (i = 0; i < g_100b0ac; i++) {
 		rec = &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]];
-		goods = lpObjektePROT + rec->goods_id * 0x41;
-		if ((*(unsigned char*) goods == 0x17 || *(unsigned char*) goods == 0x25) && rec->unk_3c >= 5)
+		goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[rec->goods_id]);
+		if ((((OBJECT_PROTOTYPE *)goods)->kind == 0x17 || ((OBJECT_PROTOTYPE *)goods)->kind == 0x25) && rec->unk_3c >= 5)
 			continue;
 		if ((int) ((Craft*) craft)->x1c < rec->min_1)
 			continue;
 		if ((int) ((Craft*) craft)->x1d < rec->min_2)
 			continue;
-		if (rec->unk_40 < (int) *(unsigned short*) (goods + 0x36))
+		if (rec->unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
 			continue;
 		n = fcn_00503d10(rec->goods_id);
 		if (n == 0)
 			continue;
-		if ((int) ((unsigned short) *(unsigned short*) (goods + 0x36) + rec->unk_3c) > gm_eval_SlotVoll(n, rec->goods_id, 1000000))
+		if ((int) ((unsigned short) ((OBJECT_PROTOTYPE *)goods)->value_036 + rec->unk_3c) > gm_eval_SlotVoll(n, rec->goods_id, 1000000))
 			continue;
 		if (!fcn_00486640(bld, rec, 0))
 			continue;

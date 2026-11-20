@@ -4,7 +4,7 @@ typedef struct
 } fcn_0046fcd0_Ent;
 // SIZE 0x2f4
 
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_ScreenHeight;
 extern int g_1040494;
@@ -23,28 +23,28 @@ int __cdecl fcn_0046fcd0(int xpos, int ypos, char* name)
 	char* d;
 
 	idx = d2_AllocateElement();
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x88 / 4] = m_alloc(0x101, g_67d5bc);
-	if (((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x88 / 4] == 0) {
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].value_088) = m_alloc(0x101, g_67d5bc);
+	if ((*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].value_088) == 0) {
 		return -1;
 	}
 	s = name;
-	d = (char*) ((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x88 / 4];
+	d = (char*) (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].value_088);
 	do {
 		c = *s;
 		s++;
 		*d = c;
 		d++;
 	} while (c != 0);
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x84 / 4] = d2_DefaultFont;
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x20 / 4] = 0x43;
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x10 / 4] = xpos;
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x14 / 4] = ypos;
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x18 / 4] = fcn_0046b520(name, ((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x84 / 4]) + 0x60;
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x1c / 4] = d2_FontHeight;
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x24 / 4] = 2;
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x30 / 4] = 0;
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x34 / 4] = d2_ScreenHeight;
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x28 / 4] = 0;
-	((fcn_0046fcd0_Ent*)g_1015ea0)[idx].i[0x2c / 4] = g_1040494;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].font) = d2_DefaultFont;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].kind) = 0x43;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].x) = xpos;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].y) = ypos;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].width) = fcn_0046b520(name, (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].font)) + 0x60;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].height) = d2_FontHeight;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].mode) = 2;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].clip_top) = 0;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].clip_bottom) = d2_ScreenHeight;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].clip_left) = 0;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].clip_right) = g_1040494;
 	return idx;
 }

@@ -1,5 +1,5 @@
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
@@ -83,7 +83,7 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 	Packet pkt;
 	char buf[0x800];
 	int kind;
-	Shop* t;
+	BUILDING_PROTOTYPE * t;
 	int cnt;
 	char* p;
 	int s;
@@ -91,12 +91,12 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 	int i;
 
 	cnt = 0;
-	t = &((Shop*)lpGebaeudePROT)[obj[0]];
-	if (t->x0 == 4) {
+	t = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[obj[0]];
+	if (t->category == 4) {
 		kind = 1;
 	}
 	else {
-		kind = t->x0 == 0x10 ? 0xf : 0x13;
+		kind = t->category == 0x10 ? 0xf : 0x13;
 	}
 	for (p = he_StartHandlungSearch(2, 0, 0x16, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
 		cnt++;

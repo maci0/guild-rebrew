@@ -42,7 +42,7 @@ int __cdecl fcn_00472250(int, int, char*);
 void __cdecl d2_UpdateWindowDrag(D2_WIN*);
 int __cdecl fcn_0046f280(int);
 
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* Modal two-column entity list: fills it once, then pumps the UI and opens
  * the entry the player picks. */
 /* ADDRESS: GOLDTL 0x005b4c80 */
@@ -74,8 +74,8 @@ void __cdecl fcn_005b4c80(void)
 			if (g_100f1dc != -1) {
 				for (i = 0; i < 0x300; i++) {
 					if (ids[i] != -1 && d2_CurrentElementId == ids[i]) {
-						if (((Ctl_5b4c80*)g_1015ea0)[d2_CurrentElementId].ent != 0) {
-							d2_RunCharacterDebugDialog(((Ctl_5b4c80*)g_1015ea0)[d2_CurrentElementId].ent);
+						if (((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId].associated_object != 0) {
+							d2_RunCharacterDebugDialog(((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId].associated_object);
 						}
 						break;
 					}
@@ -86,8 +86,8 @@ void __cdecl fcn_005b4c80(void)
 				saved = *(int*) &((D2_WIN*)g_1015f40)[left].pad3c[0x21c];
 				io_AppendText((int) "$C");
 				ids[0] = fcn_00472250(-1, d2_CurrentWindowId, io_AppendText((int) "%ib[NIEMAND]$6THeCnt:%i$A", 2, fcn_005b44b0(0)));
-				((Ctl_5b4c80*)g_1015ea0)[ids[0]].ent = 0;
-				((Ctl_5b4c80*)g_1015ea0)[ids[0]].used = 1;
+				((D2_CONTROL_TL*) g_1015ea0)[ids[0]].associated_object = 0;
+				((D2_CONTROL_TL*) g_1015ea0)[ids[0]].value_05c = 1;
 				n = 1;
 				for (i = 0; i < 0x300; i++) {
 					if (n >= 0x40) {
@@ -96,9 +96,9 @@ void __cdecl fcn_005b4c80(void)
 					ids[i] = -1;
 					if (((Ent_5b4c80*)g_7f4ca0)[i].slot != 0xffff) {
 						ids[i] = fcn_00472250(-1, d2_CurrentWindowId, io_AppendText((int) "%it[%1N4]$6THeCnt:%i$A", ((Ent_5b4c80*)g_7f4ca0)[i].slot, fcn_005b44b0(&((Ent_5b4c80*)g_7f4ca0)[i])));
-						((Ctl_5b4c80*)g_1015ea0)[ids[i]].ent = &((Ent_5b4c80*)g_7f4ca0)[i];
+						((D2_CONTROL_TL*) g_1015ea0)[ids[i]].associated_object = &((Ent_5b4c80*)g_7f4ca0)[i];
 						n++;
-						((Ctl_5b4c80*)g_1015ea0)[ids[i]].used = 1;
+						((D2_CONTROL_TL*) g_1015ea0)[ids[i]].value_05c = 1;
 					}
 					if (n >= 0x3f) {
 						if (d2_CurrentWindowId == right) {

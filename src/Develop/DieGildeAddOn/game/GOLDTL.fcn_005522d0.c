@@ -6,7 +6,7 @@ extern float g_6640b4;
 extern char* lpGebaeudePROT;
 extern char* lpGebaeudeINST;
 #include "GOLDTL.fcn_005522d0_gconf.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl gm_RandomFloat01Squared(void);
@@ -99,7 +99,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 			bit_lo = 0;
 			bit_hi = 0;
 			listp = lpGebaeudeINST + slot_no * 0xa9;
-			sel = ((BUILDING_PROT_5522*) lpGebaeudePROT)[*(unsigned char*) listp].kind;
+			sel = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) listp].category;
 			if (sel > 0x1f) {
 				bit_hi = 1 << ((sel - 0x20) & 0x1f);
 			}

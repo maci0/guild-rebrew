@@ -10,7 +10,7 @@ extern int main_LoopFlags;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern int g_665f78[];
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 int __cdecl fcn_00470820(int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -62,8 +62,8 @@ int __cdecl d2_RunFriedhofDialog(char* entity, int a2, unsigned char a3, int cho
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				if (cost == 0 || fcn_00526010(g_7f4ca0 + g_774970 * 540, cost, (*(char*)&g_773d75)) != 0) {
-					h = fcn_004f2f90(g_7f4ca0 + g_774970 * 540, choice, entity, a2, a3, cost);
+				if (cost == 0 || fcn_00526010(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), cost, (*(char*)&g_773d75)) != 0) {
+					h = fcn_004f2f90(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), choice, entity, a2, a3, cost);
 					while (h != -1 && (s = fcn_004c4450(h)) == 0) {
 						fcn_005373e0((void*) s, 0x20007);
 					}

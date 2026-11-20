@@ -1,7 +1,7 @@
 /* Draws one minimap/office slot: resolves the slot record from the global
  * table, picks the frame colour, draws the glyph runs and finally the label. */
 
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_FontHeight;
 extern int d2_CurrentElementId;
 extern int tp_d2_SelectedControl;
@@ -36,49 +36,49 @@ void __cdecl fcn_00468e40(int slotIndex, int surface)
 	unsigned char color;
 	int i;
 
-	glyphBase = 0; color = 8; slot = g_1015ea0 + slotIndex * 0x2f4;
-	flags = *(int*) (slot + 0x1d0);
+	glyphBase = 0; color = 8; slot = (char*)&((D2_CONTROL_TL*)g_1015ea0)[slotIndex];
+	flags = *(int*) &((D2_CONTROL_TL*)slot)->flags_1d0;
 	if ((flags & 2) && tp_d2_SelectedControl == 0) {
-		if (!((g_1015ea0 + d2_CurrentElementId * 0x2f4 != slot) && *(int*) (slot + 0x38) == 0)
-		    && *(int*) (slot + 0x4c) == 0) {
+		if (!(((char*)&((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId] != slot) && *(int*) &((D2_CONTROL_TL*)slot)->value_038 == 0)
+		    && *(int*) &((D2_CONTROL_TL*)slot)->disabled == 0) {
 			if (flags & 1) {
-				*(int*) (slot + 0x3c) = 1;
+				*(int*) &((D2_CONTROL_TL*)slot)->value_03c = 1;
 			}
 		} else if (flags & 1) {
-			*(int*) (slot + 0x3c) = 0;
+			*(int*) &((D2_CONTROL_TL*)slot)->value_03c = 0;
 		}
 	}
-	if (!(flags & 2) && *(int*) (slot + 0x58) != 0 && *(int*) (slot + 0x4c) == 0) {
-		*(int*) (slot + 0x3c) = *(int*) (slot + 0x38);
+	if (!(flags & 2) && *(int*) &((D2_CONTROL_TL*)slot)->value_058 != 0 && *(int*) &((D2_CONTROL_TL*)slot)->disabled == 0) {
+		*(int*) &((D2_CONTROL_TL*)slot)->value_03c = *(int*) &((D2_CONTROL_TL*)slot)->value_038;
 	}
-	if (*(int*) (slot + 0x3c) != 0) {
+	if (*(int*) &((D2_CONTROL_TL*)slot)->value_03c != 0) {
 		color = 10;
-	} else if (*(int*) (slot + 0x60) != 0) {
+	} else if (*(int*) &((D2_CONTROL_TL*)slot)->value_060 != 0) {
 		color = 9;
 	}
-	d2_SelectFont(*(int*) (slot + 0x84));
-	font = *(char**) (slot + 0xc);
+	d2_SelectFont(*(int*) &((D2_CONTROL_TL*)slot)->font);
+	font = *(char**) &((D2_CONTROL_TL*)slot)->data;
 	leftGlyph = fcn_0047b620(font, 0);
 	rightGlyph = fcn_0047b620(font, 1);
 	middleGlyph = fcn_0047b620(font, 2);
-	innerWidth = (*(int*) (slot + 0x18) - rightGlyph->w) - leftGlyph->w;
-	if (*(int*) (slot + 0x3c) != 0) {
+	innerWidth = (*(int*) &((D2_CONTROL_TL*)slot)->width - rightGlyph->w) - leftGlyph->w;
+	if (*(int*) &((D2_CONTROL_TL*)slot)->value_03c != 0) {
 		glyphBase = 3;
 	}
-	fcn_0047cba0(*(int*) (slot + 0x10), *(int*) (slot + 0x14), surface, font, glyphBase);
-	fcn_0047cba0((*(int*) (slot + 0x18) - rightGlyph->w) + *(int*) (slot + 0x10),
-	    *(int*) (slot + 0x14), surface, font, glyphBase + 1);
+	fcn_0047cba0(*(int*) &((D2_CONTROL_TL*)slot)->x, *(int*) &((D2_CONTROL_TL*)slot)->y, surface, font, glyphBase);
+	fcn_0047cba0((*(int*) &((D2_CONTROL_TL*)slot)->width - rightGlyph->w) + *(int*) &((D2_CONTROL_TL*)slot)->x,
+	    *(int*) &((D2_CONTROL_TL*)slot)->y, surface, font, glyphBase + 1);
 
-	fcn_0047a040(*(int*) (slot + 0x10) + leftGlyph->w - 1, g_7725fc, *(int*) (slot + 0x10) + leftGlyph->w + innerWidth, d2_ClipBottom);
+	fcn_0047a040(*(int*) &((D2_CONTROL_TL*)slot)->x + leftGlyph->w - 1, g_7725fc, *(int*) &((D2_CONTROL_TL*)slot)->x + leftGlyph->w + innerWidth, d2_ClipBottom);
 	i = 0;
 	if (0.0 < (double) (innerWidth / middleGlyph->w) + 0.5) {
 		do {
-			fcn_0047cba0(middleGlyph->w * i + leftGlyph->w + *(int*) (slot + 0x10),
-			    *(int*) (slot + 0x14), surface, font, glyphBase + 2);
+			fcn_0047cba0(middleGlyph->w * i + leftGlyph->w + *(int*) &((D2_CONTROL_TL*)slot)->x,
+			    *(int*) &((D2_CONTROL_TL*)slot)->y, surface, font, glyphBase + 2);
 			i++;
 		} while ((double) i < (double) (innerWidth / middleGlyph->w) + 0.5);
 	}
-	fcn_0046bd20(*(int*) (slot + 0x10),
-	    ((leftGlyph->h >> 1) - d2_FontHeight / 2) + 1 + *(int*) (slot + 0x14),
-	    *(int*) (slot + 0x18), *(int*) (slot + 0x1c), surface, slot + 0x8c, color);
+	fcn_0046bd20(*(int*) &((D2_CONTROL_TL*)slot)->x,
+	    ((leftGlyph->h >> 1) - d2_FontHeight / 2) + 1 + *(int*) &((D2_CONTROL_TL*)slot)->y,
+	    *(int*) &((D2_CONTROL_TL*)slot)->width, *(int*) &((D2_CONTROL_TL*)slot)->height, surface, slot + 0x8c, color);
 }

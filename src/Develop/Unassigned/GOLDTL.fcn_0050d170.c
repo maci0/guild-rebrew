@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 extern unsigned char* lpGebaeudePROT;
@@ -21,7 +21,7 @@ int __cdecl fcn_0050d170(int k)
 		if (w == 0) {
 			break;
 		}
-		rec = (*(int*)&lpObjektePROT) + (w & 0x7fff) * 0x40 + (w & 0x7fff);
+		rec = (int)&((OBJECT_PROTOTYPE *)(*(int*)&lpObjektePROT))[w & 0x7fff];
 		if (w & 0x8000) {
 			total = (int) (eval_ObjektPreis2Credits(*(unsigned char*) rec, 100) + total);
 		}

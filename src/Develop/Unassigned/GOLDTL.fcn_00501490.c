@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 typedef struct
@@ -17,7 +17,7 @@ int __cdecl gm_FindObjektPrototypeByName(char* name)
 	int i;
 
 	for (i = 0; i < 0x2dc; i++) {
-		if (fcn_0065f220(name, ((Name41*)lpObjektePROT)[i].name) == 0) {
+		if (fcn_0065f220(name, (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[i] + 1) == 0) {
 			return i;
 		}
 	}

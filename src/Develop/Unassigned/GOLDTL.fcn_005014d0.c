@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 typedef struct
@@ -12,11 +12,11 @@ extern char* lpObjektePROT;
 
 int __cdecl fcn_005014d0(int i)
 {
-	Name41* e;
+	OBJECT_PROTOTYPE* e;
 
-	e = &((Name41*)lpObjektePROT)[i];
-	if (e->type == 1 || e->type == 0x1a || e->type == 0xb || e->type == 0x1c || e->type == 0x1b ||
-	    e->type == 3 || e->type == 4) {
+	e = &((OBJECT_PROTOTYPE*)lpObjektePROT)[i];
+	if ((*(char *)&e->kind) == 1 || (*(char *)&e->kind) == 0x1a || (*(char *)&e->kind) == 0xb || (*(char *)&e->kind) == 0x1c || (*(char *)&e->kind) == 0x1b ||
+	    (*(char *)&e->kind) == 3 || (*(char *)&e->kind) == 4) {
 		return 1;
 	}
 	return 0;

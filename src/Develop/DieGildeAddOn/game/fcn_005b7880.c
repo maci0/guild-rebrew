@@ -95,10 +95,10 @@ typedef struct {
 } FRAME;
 /* SIZE 0x110c */
 
-#define GUI(i) (((Ctl*) g_1015ea0)[i])
+#define GUI(i) (((D2_CONTROL_TL*) g_1015ea0)[i])
 
 extern int lpGebaeudePROT;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 void* __cdecl fcn_00534c40(unsigned int, int, int, ...);
 void __cdecl fcn_005350d0(char*);
@@ -229,15 +229,15 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 		f.rows[i].label = fcn_0046fac0(f.tv, f.rows[i].y - 0x11,
 		                               *(char**) 0x14abc28,
 		                               *(int*) 0x772514);
-		GUI(f.rows[i].icon).f5c = 1;
-		GUI(f.rows[i].label).w = 0xa0;
-		GUI(f.rows[i].label).f6c = 1;
+		GUI(f.rows[i].icon).value_05c = 1;
+		GUI(f.rows[i].label).width = 0xa0;
+		GUI(f.rows[i].label).value_06c = 1;
 		f.rows[i].value = fcn_0046fac0(f.tv, f.rows[i].y + 0x44,
 		                               (char*) 0x6b5c60,
 		                               *(int*) 0x772514);
 		f.rows[i].obj = 0;
-		GUI(f.rows[i].value).w = 0xa0;
-		GUI(f.rows[i].value).f6c = 1;
+		GUI(f.rows[i].value).width = 0xa0;
+		GUI(f.rows[i].value).value_06c = 1;
 		f.rows[i].x1c = -1;
 		f.rows[i].bar = -1;
 		for (n = 0; n < 6; n++) {
@@ -391,14 +391,14 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 						    *(unsigned short*) r->obj, 1,
 						    1, f.txtNum);
 						fcn_0046f940(r->label, f.txtNum);
-						GUI(r->label).f6c = 1;
-						GUI(r->label).w = 0xa0;
+						GUI(r->label).value_06c = 1;
+						GUI(r->label).width = 0xa0;
 						r->bar = fcn_004677e0(
 						    r->x + 0xc, r->y + 0x32, 0x40,
 						    0, 0x64, 0x75, 0x42,
 						    *(int*) 0x772514);
 						r->state = 1;
-						GUI(r->bar).f4c = 1;
+						GUI(r->bar).disabled = 1;
 					}
 					if (r->bar != -1) {
 						f.tv = fcn_0050f950(
@@ -416,8 +416,8 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 					       *(char**) 0x14abbb0);
 					r->state = 2;
 					fcn_0046f940(r->label, f.txtWorker);
-					GUI(r->label).w = 0xa0;
-					GUI(r->label).h = 0x28;
+					GUI(r->label).width = 0xa0;
+					GUI(r->label).height = 0x28;
 				} else {
 					if (r->x1c != -1) {
 						d2_DestroyElement(r->x1c);
@@ -437,8 +437,8 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 					       *(char**) 0x14abc28);
 					r->state = 0;
 					fcn_0046f940(r->label, f.txtDefault);
-					GUI(r->label).w = 0xa0;
-					GUI(r->label).h = 0x28;
+					GUI(r->label).width = 0xa0;
+					GUI(r->label).height = 0x28;
 					fcn_0046f940(r->value,
 					             (char*) 0x6b5c60);
 				}

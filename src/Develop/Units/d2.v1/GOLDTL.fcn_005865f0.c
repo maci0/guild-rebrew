@@ -95,7 +95,7 @@ int __cdecl fcn_005865f0(char* e, int* who, int kind)
 				memset(&m, 0, sizeof(m));
 				m.kind = 0x97;
 				m.code = 1;
-				m.owner = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id;
+				m.owner = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id;
 				m.target = *(int*) (e + 1);
 				m.when = gm_GameTime;
 				m.who = *who;

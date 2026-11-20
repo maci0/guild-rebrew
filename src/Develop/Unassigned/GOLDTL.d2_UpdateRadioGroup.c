@@ -1,7 +1,7 @@
 #include "client_data.h"
 extern Group_102cbc4 g_102cbc4[8];
-extern int g_14ce904, g_14ce900, d2_CurrentElementId, g_67d38c, g_14ce8d8, g_14ce8cc;
-void __cdecl d2_SelectRadioGroup(int, int); int __cdecl fcn_004125c0(int, int);
+extern int g_14ce904, g_14ce900, d2_CurrentElementId, g_67d38c, g_14ce8d8, g_14ce8cc; void __cdecl d2_SelectRadioGroup(int, int); int __cdecl fcn_004125c0(int, int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00469630 */
 void __cdecl d2_UpdateRadioGroup(int groupIndex)
@@ -60,12 +60,12 @@ scan:
 	sel %= count;
 	if (alt) {
 		id = g_102cbc4[groupIndex].ids[sel];
-		alt = *(int*) &g_1015ea0 + id * 0x2f4;
+		alt = (char*) &((D2_CONTROL_TL*) g_1015ea0)[id];
 		fcn_004125c0(
-			(int) (*(int*) (alt + 0x18) * 0.5
-				+ *(int*) (alt + 0x10)),
-			(int) (*(int*) (alt + 0x1c) * 0.5
-				+ *(int*) (alt + 0x14)));
+			(int) (((D2_CONTROL_TL*) alt)->width * 0.5
+				+ ((D2_CONTROL_TL*) alt)->x),
+			(int) (((D2_CONTROL_TL*) alt)->height * 0.5
+				+ ((D2_CONTROL_TL*) alt)->y));
 	}
 skip:
 	if (sel == -1) {
@@ -88,11 +88,11 @@ skip:
 	g_14cf950 = 0;
 	id = g_102cbc4[groupIndex].ids[sel];
 	d2_CurrentElementId = id;
-	alt = *(int*) &g_1015ea0 + id * 0x2f4;
-	if (*(int*) (alt + 0x20) != 9) {
-		g_100f1dc = *(int*) (alt + 8);
+	alt = (char*) &((D2_CONTROL_TL*) g_1015ea0)[id];
+	if (((D2_CONTROL_TL*) alt)->kind != 9) {
+		g_100f1dc = ((D2_CONTROL_TL*) alt)->value_008;
 	}
 	else {
-		g_100f1dc = (*(unsigned char*) (alt + 0x1d0) & 0x10) ? 1 : 2;
+		g_100f1dc = (*(unsigned char*) &((D2_CONTROL_TL*) alt)->flags_1d0 & 0x10) ? 1 : 2;
 	}
 }

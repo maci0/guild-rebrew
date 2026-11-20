@@ -19,7 +19,7 @@ typedef struct HitObj {
 
 extern int g_67d388;
 extern HitObj** g_772540;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x0046ac40 */
 int __cdecl fcn_0046ac40(int x, int y)
@@ -53,7 +53,7 @@ int __cdecl fcn_0046ac40(int x, int y)
 		if (o->f4c != 0 || o->f48 != 0) {
 			continue;
 		}
-		if (*(int*) (g_1015ea0 + o->f0 * 0x2f4 + 0x20) != 0x40) {
+		if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[o->f0].kind)) != 0x40) {
 			continue;
 		}
 		g_67d388 = o->f88;

@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_types.h"
 
 /* One 0x21c-byte record of the 0x7f4ca0 table. Only the fields this body
@@ -61,7 +61,7 @@ void __cdecl fcn_00487000(char* e)
 	    && !(*(unsigned int*) (e + 0x1b4) & 2)) {
 		return;
 	}
-	ent = lpGebaeudePROT + *(unsigned char*) (*(char**) (e + 0x16c)) * 0x24d;
+	ent = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) (*(char**) (e + 0x16c))];
 	for (p = 0x7f4e05; p < 0x85a205; p += 0x21c) {
 		rec = (char*) (p - 0x165);
 		if (*(unsigned short*) rec == 0xffff) {
@@ -73,7 +73,7 @@ void __cdecl fcn_00487000(char* e)
 		if (*(char*) (rec + 0x165) == 0) {
 			continue;
 		}
-		if (*(char*) (rec + 0x165) != *(char*) (ent + 0x230)) {
+		if (*(char*) (rec + 0x165) != (char)((BUILDING_PROTOTYPE*)ent)->role_230) {
 			continue;
 		}
 		if (*(int*) (rec + 0x174) < 4) {
@@ -115,10 +115,10 @@ void __cdecl fcn_00487000(char* e)
 			sp += 4;
 		}
 	}
-	if (n >= (int) (*(unsigned char*) (lpGebaeudePROT
-	                                    + *(unsigned char*) (*(char**) (e + 0x16c)) * 0x24d + 0x231)
-	                + *(unsigned char*) (lpGebaeudePROT
-	                                     + *(unsigned char*) (*(char**) (e + 0x16c)) * 0x24d + 0x232))) {
+	if (n >= (int) (((BUILDING_PROTOTYPE*)lpGebaeudePROT)
+	                                    [*(unsigned char*) (*(char**) (e + 0x16c))].capacity_231
+	                + ((BUILDING_PROTOTYPE*)lpGebaeudePROT)
+	                                     [*(unsigned char*) (*(char**) (e + 0x16c))].capacity_232)) {
 		return;
 	}
 	tick = (int) fcn_005101e0((unsigned char*) ((char*) 0x7f4ca0
@@ -152,8 +152,8 @@ void __cdecl fcn_00487000(char* e)
 	gm_CheckEntityType((unsigned char*) *(char**) (e + 0x16c));
 	*(int*) (m + 0x8c) = -1;
 	m[0x59] = 1;
-	m[0x58] = *(unsigned char*) (lpGebaeudePROT
-	                             + *(unsigned char*) (*(char**) (e + 0x16c)) * 0x24d + 0x230);
+	m[0x58] = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)
+	                             [*(unsigned char*) (*(char**) (e + 0x16c))].role_230;
 	fcn_004c5530(m);
 	*(int*) (e + 0x1b8) -= tick;
 }

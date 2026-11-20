@@ -9,7 +9,7 @@ extern char* g_1015ea0;
 int __cdecl fcn_0046b520(char* s, int font);
 int __cdecl fcn_00468df0(int a1, int a2, int a3, int a4, int i);
 void __cdecl fcn_00469110(int a1, int a2);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00533bb0 */
 void __cdecl fcn_00533bb0(int windowId, int a1, int* a2, int labelCount, ...)
 {
@@ -60,7 +60,7 @@ void __cdecl fcn_00533bb0(int windowId, int a1, int* a2, int labelCount, ...)
 	for (i = 0; i < labelCount; i++, slot += 0x40, start += step) {
 		w = fcn_00468df0(start - maxw / 2, a1, 0xc5, slot, windowId);
 		a2[i] = w;
-		*(int*) (g_1015ea0 + w * 0x2f4 + 0x84) = 0x54;
+		((D2_CONTROL_TL*) (g_1015ea0))[w].font = 0x54;
 		fcn_00469110(w, maxw);
 
 

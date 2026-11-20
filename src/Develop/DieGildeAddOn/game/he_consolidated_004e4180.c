@@ -7,7 +7,7 @@ void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4910(void);
 void __cdecl fcn_004e3640(void);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 extern int g_772f3c;
 extern unsigned char* g_7746c4;
@@ -100,12 +100,12 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 				}
 			}
 			else {
-				if (g_7f3b00[lpGebaeudePROT[*entity * 0x24d]]) {
-					if (g_7f3b00[lpGebaeudePROT[*entity * 0x24d]] == -1 ||
-					    g_1043695[g_7f3b00[lpGebaeudePROT[*entity * 0x24d]] * 0x3dc]) {
-						init_LoadGebaeudeScene(lpGebaeudePROT[*entity * 0x24d]);
+				if (g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category]) {
+					if (g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category] == -1 ||
+					    g_1043695[g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category] * 0x3dc]) {
+						init_LoadGebaeudeScene(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category);
 					}
-					fcn_004432d0(g_7f3b00[lpGebaeudePROT[*entity * 0x24d]], 0);
+					fcn_004432d0(g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category], 0);
 					fcn_005167c0(entity, 0xfd);
 				}
 			}

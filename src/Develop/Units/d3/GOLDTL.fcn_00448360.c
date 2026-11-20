@@ -1,6 +1,6 @@
 #include "client_scene_loader.h"
 #include "client_types.h"
-
+#include "Develop/Units/d3/d3_object.h"
 #include <string.h>
 
 struct VFS_DIR;
@@ -120,12 +120,12 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 		 * and never reads it back. */
 		index = 7;
 		for (index = 0; index < 7; index++) {
-			*(float*) (g_1041d80 + index * 0x60) = g_67bbdc.x;
-			*(float*) (g_1041d80 + index * 0x60 + 4) = g_67bbdc.y;
-			*(float*) (g_1041d80 + index * 0x60 + 8) = g_67bbdc.z;
-			*(int*) (g_1041d80 + index * 0x60 + 0xc) = 0;
-			*(int*) (g_1041d80 + index * 0x60 + 0x10) = 0;
-			*(int*) (g_1041d80 + index * 0x60 + 0x14) = 0;
+			((D3_SCENE_SLOT*)g_1041d80)[index].a.x = g_67bbdc.x;
+			((D3_SCENE_SLOT*)g_1041d80)[index].a.y = g_67bbdc.y;
+			((D3_SCENE_SLOT*)g_1041d80)[index].a.z = g_67bbdc.z;
+			*(int*)&((D3_SCENE_SLOT*)g_1041d80)[index].b.x = 0;
+			*(int*)&((D3_SCENE_SLOT*)g_1041d80)[index].b.y = 0;
+			*(int*)&((D3_SCENE_SLOT*)g_1041d80)[index].b.z = 0;
 		}
 		if (version >= 0x3a6c00a2) {
 			rows = fcn_00446ca0((unsigned) version);
@@ -133,15 +133,15 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 			if (rows > 0) {
 				do {
 					fcn_00401280(s, &vec);
-					*(float*) (g_1041d80 + index * 0x60) = vec.x;
-					*(float*) (g_1041d80 + index * 0x60 + 4) = vec.y;
-					*(float*) (g_1041d80 + index * 0x60 + 8) = vec.z;
+					((D3_SCENE_SLOT*)g_1041d80)[index].a.x = vec.x;
+					((D3_SCENE_SLOT*)g_1041d80)[index].a.y = vec.y;
+					((D3_SCENE_SLOT*)g_1041d80)[index].a.z = vec.z;
 					if (version >= 0x3a6c00b3) {
 						if (version >= 0x3a6c00b5) {
 							fcn_00401280(s, &vec);
-							*(float*) (g_1041d80 + index * 0x60 + 0xc) = vec.x;
-							*(float*) (g_1041d80 + index * 0x60 + 0x10) = vec.y;
-							*(float*) (g_1041d80 + index * 0x60 + 0x14) = vec.z;
+							((D3_SCENE_SLOT*)g_1041d80)[index].b.x = vec.x;
+							((D3_SCENE_SLOT*)g_1041d80)[index].b.y = vec.y;
+							((D3_SCENE_SLOT*)g_1041d80)[index].b.z = vec.z;
 						}
 						/* count is the per-row entry counter and later the
 						 * object count read after the geometry block. */
@@ -149,10 +149,10 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 						do {
 							fcn_004011f0(s, &color);
 							fcn_004011d0(s, &discarded);
-							*(int*) (g_1041d80 + 0x18 + (count + index * 8) * 12) = color;
-							*(float*) (g_1041d80 + 0x1c + (count + index * 8) * 12) = discarded;
+							((D3_SCENE_SLOT*)g_1041d80)[index].pal[count].color = color;
+							((D3_SCENE_SLOT*)g_1041d80)[index].pal[count].f4 = discarded;
 							fcn_004011d0(s, &discarded);
-							*(float*) (g_1041d80 + 0x20 + (count + index * 8) * 12) = discarded;
+							((D3_SCENE_SLOT*)g_1041d80)[index].pal[count].f8 = discarded;
 							count = count + 1;
 						} while (count < 6);
 					}

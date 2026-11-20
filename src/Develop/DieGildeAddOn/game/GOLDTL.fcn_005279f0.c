@@ -5,7 +5,7 @@ typedef struct {
     short entries[0x40]; unsigned char unknown0a3[0x1aa];
 } BuildingProto5279f0;
 #pragma pack(pop)
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 typedef struct {
 	int left;
 	int top;
@@ -177,7 +177,7 @@ void __cdecl fcn_005279f0(unsigned int inputFlags)
 			do {
 				if (*e != (short) 0xffff) {
 					id = *e & 0x7fff;
-					c = *(char*) (lpObjektePROT + id * 0x41);
+					c = *(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]));
 					if ((c == 2 || c == 6)
 						&& id != 0xfd) {
 						if (v9 == v6) {
@@ -219,7 +219,7 @@ label_527db2:
 	do {
 		if (*e != (short) 0xffff) {
 			id = *e & 0x7fff;
-			c = *(char*) (lpObjektePROT + id * 0x41);
+			c = *(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]));
 			if ((c == 2 || c == 6) && id != 0xfd) {
 				if (v9 == v6) {
 					v8 = fcn_00502cd0(

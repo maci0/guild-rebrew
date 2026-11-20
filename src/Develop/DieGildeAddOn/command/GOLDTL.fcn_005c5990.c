@@ -24,7 +24,7 @@ typedef struct {
 } Name5c59;
 // SIZE 0x8
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -57,11 +57,11 @@ void __cdecl fcn_005c5990(char* who, int id)
 		}
 		if ((e[0xd] > 1 || g_774800 != 0) && g_14ce8cc != 0) {
 			for (i = 0; i < 768; i++) {
-				if (((Ent5c59*)g_7f4ca0)[i].active) {
+				if ((*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected)) {
 					char msg[0xf8];
 
 					memset(msg, 0, sizeof(msg));
-					*(int*) (msg + 8) = ((Ent5c59*)g_7f4ca0)[g_774970].f4;
+					*(int*) (msg + 8) = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
 					msg[4] = 0x28;
 					*(int*) (msg + 0x10) = 1;
 					*(int*) (msg + 0x14) = 0;
@@ -69,7 +69,7 @@ void __cdecl fcn_005c5990(char* who, int id)
 					*(int*) (msg + 0xc) = *(int*) (who + 1);
 					*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 					*(int*) (msg + 0x64) = *(int*) e;
-					*(int*) (msg + 0x5c) = ((Ent5c59*)g_7f4ca0)[i].f4;
+					*(int*) (msg + 0x5c) = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
 					*(int*) (msg + 0x58) = *(int*) (who + 1);
 					fcn_004c5530(msg);
 					cm_ExProdObjekt();

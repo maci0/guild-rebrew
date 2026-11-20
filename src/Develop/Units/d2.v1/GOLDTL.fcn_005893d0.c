@@ -50,11 +50,11 @@ void __cdecl d2_CreateCannonControls(int w, int a1)
 	    ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].slot);
 	d2_SetForm(*(int*) (w + 0xa4), 2);
 	*(int*) (w + 0xb8) = fcn_0046f740(0x59, 0xf, 0x7d5, *(int*) &d2_CurrentWindowId);
-	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xb8)].f5c = 1;
-	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xb8)].f1d0 = 3;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xb8)].value_05c) = 1;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xb8)].flags_1d0) = 3;
 	*(int*) (w + 0xbc) = fcn_0046f740(0x9b, 0xf, 0x7d4, *(int*) &d2_CurrentWindowId);
-	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xbc)].f5c = 1;
-	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xbc)].f1d0 = 3;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xbc)].value_05c) = 1;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xbc)].flags_1d0) = 3;
 	d2_SetForm(*(int*) (w + 0xa4), 1);
 	*(int*) (w + 0xb0) = fcn_004677e0(0x140, 0x14, 100, 0, 100, 0x7b, 0x82,
 	    *(int*) &d2_CurrentWindowId);
@@ -68,14 +68,14 @@ void __cdecl d2_CreateCannonControls(int w, int a1)
 	fcn_00472380(*(int*) (w + 0xb4), 0, 100, *(int*) 0x9a9218, 1);
 	fcn_00468b80(*(int*) (w + 0xb4), *(int*) 0x14b54a8);
 	*(int*) (w + 0xc8) = fcn_0046f740(0x14, 0x17, 0x7d3, *(int*) &d2_CurrentWindowId);
-	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xc8)].f5c = 1;
-	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xc8)].f1d0 = 3;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xc8)].value_05c) = 1;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xc8)].flags_1d0) = 3;
 	*(int*) (w + 0xcc) = fcn_0046f740(0x56, 0x17, 0x7d1, *(int*) &d2_CurrentWindowId);
-	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xcc)].f5c = 1;
-	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xcc)].f1d0 = 3;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xcc)].value_05c) = 1;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xcc)].flags_1d0) = 3;
 	*(int*) (w + 0xd0) = fcn_0046f740(0x98, 0x17, 0x7d2, *(int*) &d2_CurrentWindowId);
-	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xd0)].f5c = 1;
-	((GUI_ROW_5893D0*)g_1015ea0)[*(int*) (w + 0xd0)].f1d0 = 3;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xd0)].value_05c) = 1;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xd0)].flags_1d0) = 3;
 	*(int*) (w + 0xc0) = fcn_00470820(0, 0, (char*) 0x6a94c8);
 	fcn_00471d80(*(int*) (w + 0xc0), 1);
 	d2_SetForm(*(int*) (w + 0xc0), 0);

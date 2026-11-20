@@ -1,7 +1,7 @@
 /* AI step: upgrade a guild workshop. Picks the workshop kind for the entity's
  * profession, then tries an upgrade order, a repair/expand order or a sale
  * order, writing the two 0x18-byte order records on success. */
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 typedef struct Blk24 {
 	unsigned char kind;
 	char pad1[3];
@@ -51,7 +51,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 	int r;
 	char* w;
 	char* item;
-	BuildingRow* row;
+	BUILDING_PROTOTYPE* row;
 	unsigned char k;
 	char lvl;
 
@@ -132,11 +132,11 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 		*o1 = c;
 		return r;
 	}
-	row = &((BuildingRow*) lpGebaeudePROT)[*(unsigned char*) w];
+	row = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*(unsigned char*) w];
 	if (w[0x5a] & 0x45) {
 		return 0;
 	}
-	if (row->count >= row->max) {
+	if (row->level >= row->level_limit) {
 		return 0;
 	}
 	flag = *(unsigned char*) w + 1;

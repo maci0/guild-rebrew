@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern char* g_1015ea0;
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00468c30 */
 void __cdecl fcn_00468c30(int slot, int n, char* out)
 {
@@ -11,7 +11,7 @@ void __cdecl fcn_00468c30(int slot, int n, char* out)
 	int i;
 
 	i = 0;
-	strcpy(buf, g_1015ea0 + slot * 0x2f4 + 0xe8);
+	strcpy(buf, (char*) &((D2_CONTROL_TL*) g_1015ea0)[slot] + 0xe8);
 	q = buf;
 	p = strchr(buf + 1, '|');
 	for (; i < n; i++) {

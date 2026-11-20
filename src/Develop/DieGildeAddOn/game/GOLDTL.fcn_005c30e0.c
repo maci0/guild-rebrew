@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_types.h"
 #include "client_placement.h"
 
@@ -70,14 +70,14 @@ void __cdecl fcn_005c30e0(unsigned char* buildingEntry)
 	LC_GEBAEUDE_BAUPLATZ bp;
 	char buf[0x200];
 	char text[0x400];
-	GOLDTL_EntType5c30* rec;
+	BUILDING_PROTOTYPE* rec;
 	int kind;
 	int m;
 	int id;
 
-	rec = &((GOLDTL_EntType5c30*) lpGebaeudePROT)[*(unsigned char*) buildingEntry];
+	rec = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*(unsigned char*) buildingEntry];
 	id = *(int*) (buildingEntry + 1);
-	if (rec->f247 >= rec->f248) {
+	if (rec->level >= rec->level_limit) {
 		io_FormatTextBuffer(buf, 0x17d7);
 		fcn_00526120(buf, 0);
 		return;

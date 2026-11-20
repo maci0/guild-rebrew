@@ -25,7 +25,7 @@ typedef struct Slot {
 #include "client_types.h"
 extern Obj_1038140 g_1038140[];
 extern char* g_1015ea0;
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00471af0 */
 void __cdecl fcn_00471af0(int k, int flag)
 {
@@ -35,8 +35,8 @@ void __cdecl fcn_00471af0(int k, int flag)
 	o = &((Obj*)g_1038140)[k];
 	if (o->used) {
 		for (i = 0; i < 0x400; i++) {
-			if (((Slot*)g_1015ea0)[i].type && ((Slot*)g_1015ea0)[i].owner == o) {
-				((Slot*)g_1015ea0)[i].hidden = (flag == 0);
+			if (((D2_CONTROL_TL*) g_1015ea0)[i].kind && *(Obj**) &((D2_CONTROL_TL*) g_1015ea0)[i].value_050 == o) {
+				((D2_CONTROL_TL*) g_1015ea0)[i].value_048 = (flag == 0);
 			}
 		}
 		o->active = flag;

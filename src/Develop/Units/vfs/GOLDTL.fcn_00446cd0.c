@@ -5,7 +5,7 @@ typedef struct
 	int b;
 } fcn_00446cd0_Key;
 // SIZE 0xc
-
+#include "Develop/Units/d3/d3_object.h"
 typedef struct
 {
 	int pos[3];
@@ -58,12 +58,12 @@ void __cdecl fcn_00446cd0(char* name, void* stream)
 	fcn_00401260(s, (*(int*)&g_10425fc));
 	fcn_00401260(s, (*(int*)&g_104329c));
 	for (i = 0; i < 7; i++) {
-		vfs_WriteVec3(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].pos);
-		vfs_WriteVec3(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].dir);
+		vfs_WriteVec3(s, (int*)&((D3_SCENE_SLOT*)g_1041d80)[i].a);
+		vfs_WriteVec3(s, (int*)&((D3_SCENE_SLOT*)g_1041d80)[i].b);
 		for (j = 0; j < 6; j++) {
-			fcn_00401360(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].keys[j].k);
-			fcn_00401260(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].keys[j].a);
-			fcn_00401260(s, ((fcn_00446cd0_Cam*)g_1041d80)[i].keys[j].b);
+			fcn_00401360(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].color);
+			fcn_00401260(s, *(int*)&((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].f4);
+			fcn_00401260(s, *(int*)&((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].f8);
 		}
 	}
 	d3_VisitSceneObjects(g_67a370, 0, 0x18, (void*) fcn_00446c60, s);

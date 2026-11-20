@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 #include <string.h>
 
@@ -45,7 +45,7 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 	char buf[0x400];
 	char* h;
 	char* it;
-	Race* r;
+	BUILDING_PROTOTYPE * r;
 	int x;
 	int y;
 	int dx;
@@ -68,9 +68,9 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 		y += *(int*) (it + 0xb4);
 	}
 	h = *(char**) (e + 0x16c);
-	r = &((Race*)lpGebaeudePROT)[*(unsigned char*) h];
-	dy = r->cap_y - y;
-	dx = r->cap_x - x;
+	r = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) h];
+	dy = r->dimension_241 - y;
+	dx = r->dimension_240 - x;
 	if (dx <= 0 && dy <= 0) {
 		return;
 	}

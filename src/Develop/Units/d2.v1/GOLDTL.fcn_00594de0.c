@@ -1,5 +1,5 @@
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 /* Panel table entry. The 0x58 entry stride comes from the entry addressing in
  * this body (index * 0x58). The named fields are the offsets this body reads
  * or writes; bytes that no access reaches stay padding. */
@@ -34,7 +34,7 @@ int __cdecl gm_GetElapsedMinutes(void* a, void* b);
 void* __cdecl he_StartHandlungSearch(int n, ...);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl io_AppendText(int a, ...);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00594de0 */
 void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 {
@@ -80,16 +80,16 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 			} else {
 				p->c[2] = fcn_0046f740(0xd, 5, p->x0 + 0xdf, p->c[1]);
 			}
-			*(int*) (g_1015ea0 + p->c[2] * 0x2f4 + 0x5c) = 1;
-			*(int*) (g_1015ea0 + p->c[2] * 0x2f4 + 0x1e8) = -1;
-			*(int*) (g_1015ea0 + p->c[2] * 0x2f4 + 0x1ec) = -1;
+			((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_05c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_1e8 = -1;
+			((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_1ec = -1;
 			for (y = 0x11, k = 0; y < 0xd5; y += 0x31, k++) {
 				if (p->a[k] != 0) {
 					w = fcn_0046f7e0(y, 0x3a, p->a[k] + 0xdf, p->c[1], -2);
 					p->d[k] = w;
-					*(int*) (g_1015ea0 + w * 0x2f4 + 0x5c) = 1;
-					*(int*) (g_1015ea0 + w * 0x2f4 + 0x1e8) = -1;
-					*(int*) (g_1015ea0 + w * 0x2f4 + 0x1ec) = -1;
+					((D2_CONTROL_TL*) (g_1015ea0))[w].value_05c = 1;
+					((D2_CONTROL_TL*) (g_1015ea0))[w].value_1e8 = -1;
+					((D2_CONTROL_TL*) (g_1015ea0))[w].value_1ec = -1;
 				}
 			}
 			w = fcn_0046f100(0x43, 4, 0x88, 0x32, 0x10, p->c[1]);
@@ -112,19 +112,19 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 			}
 			if (!(found >= 0)) {
 				status = 2;
-				*(int*) (g_1015ea0 + p->d[k] * 0x2f4 + 0x1e4) = 0x74f;
+				((D2_CONTROL_TL*) (g_1015ea0))[p->d[k]].value_1e4 = 0x74f;
 			} else {
-				if (!((int) *(unsigned short*) (lpObjektePROT + p->x0 * 0x41 + off) <= *(int*) (st + 0x68 + found * 4))) {
-					*(int*) (g_1015ea0 + p->d[k] * 0x2f4 + 0x1e4) = 0x74e;
+				if (!((int) *(unsigned short*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[p->x0]) + off) <= *(int*) (st + 0x68 + found * 4))) {
+					((D2_CONTROL_TL*) (g_1015ea0))[p->d[k]].value_1e4 = 0x74e;
 					if (status <= 1) {
 						status = 1;
 					}
 				} else {
-					*(int*) (g_1015ea0 + p->d[k] * 0x2f4 + 0x1e4) = 0x74d;
+					((D2_CONTROL_TL*) (g_1015ea0))[p->d[k]].value_1e4 = 0x74d;
 				}
 			}
 		}
-		*(int*) (g_1015ea0 + p->c[2] * 0x2f4 + 0x1e4) = status + 0x750;
+		((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_1e4 = status + 0x750;
 
 		span = 0;
 		if (i == 0) {
@@ -142,14 +142,14 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 			span = *(int*) ((char*) row + 0x18) + *(int*) ((char*) row + 0x14);
 			t1 = gm_GetElapsedMinutes((void*) ((char*) row + 0x44), (void*) ((char*) row + 0x52));
 			t2 = gm_GetElapsedMinutes((void*) ((char*) row + 0x44), (void*) gm_GameTime);
-			*(float*) (g_1015ea0 + p->c[2] * 0x2f4 + 0x1f4) = (float) t2 / (float) t1;
+			((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_1f4.real = (float) t2 / (float) t1;
 		} else {
 			if (p->c[3] != -1) {
 				d2_DestroyElement(p->c[3]);
 				p->c[3] = -1;
 			}
 			if (p->c[2] != -1) {
-				*(float*) (g_1015ea0 + p->c[2] * 0x2f4 + 0x1f4) = 0.0f;
+				((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_1f4.real = 0.0f;
 			}
 		}
 

@@ -14,7 +14,7 @@ typedef struct {
 
 extern GUI_ENTRY g_9b4840[6];
 extern char g_10161bc[];
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern int d2_CurrentWindowId;
@@ -47,7 +47,7 @@ void __cdecl fcn_004d0a20(void)
 		q = g_9b4840;
 		do {
 			if (q->win != -1 && d2_CurrentElementId == q->icon) {
-				if (*(int*) (g_1015ea0 + q->icon * 0x2f4 + 0x38) != 0) {
+				if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[q->icon].value_038)) != 0) {
 					*(char*) ((int) q->unit + 0x188) = 1;
 				} else {
 					*(char*) ((int) q->unit + 0x188) = 0;
@@ -79,7 +79,7 @@ void __cdecl fcn_004d0a20(void)
 				r = (int*) fcn_004ce5c0(q->unit);
 				if (r != 0 && *r != 0) {
 					if (q->name != -1) {
-						if (*(int*) (g_1015ea0 + q->name * 0x2f4 + 8) != *r + 0xdf) {
+						if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[q->name].value_008)) != *r + 0xdf) {
 							if (q->name != -1) {
 								d2_DestroyElement(q->name);
 							}

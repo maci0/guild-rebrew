@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 typedef struct
 {
@@ -40,10 +40,10 @@ void __cdecl fcn_005aa9a0(int a1)
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x166a);
 	d2_SetForm(dlg, 2);
-	if (g_7f4ca0[g_774970 * 540 + 9] == 0) {
-		titleId = (unsigned char) g_7f4ca0[g_774970 * 540 + 0x169] + 0x253;
+	if (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])[9] == 0) {
+		titleId = (unsigned char) ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])[0x169] + 0x253;
 	} else {
-		titleId = (unsigned char) g_7f4ca0[g_774970 * 540 + 0x169] + 0x27b;
+		titleId = (unsigned char) ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])[0x169] + 0x27b;
 	}
 	io_AppendText(0x166d, titleId, 8, a1 + 0x1663);
 	do {
@@ -53,7 +53,7 @@ void __cdecl fcn_005aa9a0(int a1)
 		if (g_100f1dc == 2) {
 			s.x0 = 4;
 			s.x4 = a1;
-			fcn_004eba60(g_7f4ca0 + g_774970 * 540, &s);
+			fcn_004eba60(((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), &s);
 			g_774654 = 2;
 		} else if (g_100f1dc == 1) {
 			g_774654 = 1;

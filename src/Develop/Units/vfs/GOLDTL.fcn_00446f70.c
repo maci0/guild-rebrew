@@ -1,7 +1,7 @@
 // SIZE 0xc
 #include "client_types.h"
 typedef VECTOR3 Vec3;
-
+#include "Develop/Units/d3/d3_object.h"
 // SIZE 0xc
 typedef struct {
 	int color;
@@ -74,12 +74,12 @@ void __cdecl d3_SaveScene(const char* name, void* stream)
 	fcn_00401260(s, g_10425fc);
 	fcn_00401260(s, g_104329c);
 	for (i = 0; i < 7; i++) {
-		vfs_WriteVec3(s, &((Slot*)g_1041d80)[i].a);
-		vfs_WriteVec3(s, &((Slot*)g_1041d80)[i].b);
+		vfs_WriteVec3(s, (Vec3*)&((D3_SCENE_SLOT*)g_1041d80)[i].a);
+		vfs_WriteVec3(s, (Vec3*)&((D3_SCENE_SLOT*)g_1041d80)[i].b);
 		for (k = 0; k < 6; k++) {
-			fcn_00401360(s, ((Slot*)g_1041d80)[i].pal[k].color);
-			fcn_00401260(s, ((Slot*)g_1041d80)[i].pal[k].f4);
-			fcn_00401260(s, ((Slot*)g_1041d80)[i].pal[k].f8);
+			fcn_00401360(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].color);
+			fcn_00401260(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f4);
+			fcn_00401260(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f8);
 		}
 	}
 	n = 0;

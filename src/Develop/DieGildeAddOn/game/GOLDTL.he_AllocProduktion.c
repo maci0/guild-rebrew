@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 #pragma pack(2)
@@ -55,7 +55,7 @@ void __cdecl he_AllocProduktion(char* e)
 		}
 	}
 	r = gm_SearchTable67(*(int*) (e + 0xbc));
-	v = (float) ((struct rec*)lpObjektePROT)[*(unsigned short*) (e + 0xac)].base;
+	v = (float) ((OBJECT_PROTOTYPE*)lpObjektePROT)[*(unsigned short*) (e + 0xac)].value_022;
 	*(struct pos14*) (e + 0x52) = *(struct pos14*) (e + 0x44);
 	*(struct pos14*) (e + 0x60) = *(struct pos14*) (e + 0x44);
 	*(float*) (e + 0xb4) = v;

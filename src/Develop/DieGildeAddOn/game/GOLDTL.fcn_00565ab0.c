@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
@@ -93,11 +93,11 @@ void __cdecl he_UpdateErnten(char* ev)
 						*(int*) (ev + 0xc0) = -1;
 						{
 							unsigned short type = *(unsigned short*) (v5 + 0xa);
-							char* def = lpObjektePROT + type * 0x41;
+							char* def = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[type]);
 
 							*(pos14_7f4c00*) (ev + 0x52) = gm_GameTime;
 							fcn_00500bb0(ev + 0x52, 0,
-							             (int) ((double) (*(char*) (v5 + 0xd) * *(unsigned int*) (def + 0x22)) * 0.25), 0);
+							             (int) ((double) (*(char*) (v5 + 0xd) * ((OBJECT_PROTOTYPE *)def)->value_022) * 0.25), 0);
 						}
 						*(int*) (ev + 0x70) = *(int*) (ev + 0x70) + 1;
 						return;

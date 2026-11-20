@@ -33,13 +33,13 @@ void __cdecl d2_RunMessageFilterDialog(void)
 	for (i = 0; i < 9; i++) {
 		b = fcn_0046f740(8, i * 0x1c + 0xa, 0x605 + i, d2_CurrentWindowId);
 		btn[i] = b;
-		*(int*) (g_1015ea0 + b * 0x2f4 + 0x58) = 1;
-		*(int*) (g_1015ea0 + b * 0x2f4 + 0x5c) = 1;
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_058)) = 1;
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_05c)) = 1;
 		d2_SetElementFont(b, 0x55);
 		fcn_0046f9b0(b, g_14ac660[i]);
-		*(int*) (g_1015ea0 + b * 0x2f4 + 0x1d4) = 0x78;
-		*(int*) (g_1015ea0 + b * 0x2f4 + 0x1dc) = 0x1e;
-		*(int*) (g_1015ea0 + b * 0x2f4 + 0x1e0) = 3;
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_1d4)) = 0x78;
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_1dc)) = 0x1e;
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_1e0)) = 3;
 		d2_SetElementValue(b, fcn_0057de80(0x605 + i) == 0);
 	}
 	while (fcn_005373e0(d2_RunMessageFilterDialog, 0x677c7) != 0) {

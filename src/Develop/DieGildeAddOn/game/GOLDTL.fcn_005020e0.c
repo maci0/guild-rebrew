@@ -2,7 +2,7 @@
  * (value, year) points in g_8680c0; the current date (from the given time
  * source) selects and interpolates a segment by month, the result is scaled by
  * the row's factor, and then every goods cell of the row is refreshed. */
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 typedef struct {
 	int val;
 	int key;
@@ -129,7 +129,7 @@ void __cdecl fcn_005020e0(int townRow, char* timeSource)
 	}
 	g_85ab80[townRow].unk_08 = g_85ab80[townRow].unk_0c * g_85ab80[townRow].unk_08 / 1000;
 	for (i = 0; i < 85; i++) {
-		kind = lpObjektePROT[g_85ab80[townRow].slots[i].objekt_id * 0x41];
+		kind = (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[g_85ab80[townRow].slots[i].objekt_id].kind);
 		if (kind != 0x17 && kind != 0x25) {
 			g_85ab80[townRow].slots[i].unk_20 = (float) (((double) fcn_00502450(townRow, i) - g_85ab80[townRow].slots[i].unk_20) * 0.5 + g_85ab80[townRow].slots[i].unk_20);
 		}

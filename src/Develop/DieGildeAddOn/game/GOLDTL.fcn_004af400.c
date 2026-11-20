@@ -1,5 +1,5 @@
 /* Owned (both targets) by src/GOLDTL.fcn_004af2f0.c. */
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 extern char* lpObjektePROT;
 extern char* lpObjektePROT;
@@ -49,7 +49,7 @@ int __cdecl fcn_004af400(int a1, int a2, int a3, char* a4, int a5)
 	e = fcn_00502cd0(*(int*) ((char*) e + 0x14), 1, 5);
 	while (e != 0) {
 		k = *(unsigned short*) e;
-		if (*(unsigned char*) ((*(int*)&lpObjektePROT) + k * 0x40 + k) == 9) {
+		if (((OBJECT_PROTOTYPE *)(*(int*)&lpObjektePROT))[k].kind == 9) {
 			v = *(int*) ((char*) e + 0xe);
 			break;
 		}

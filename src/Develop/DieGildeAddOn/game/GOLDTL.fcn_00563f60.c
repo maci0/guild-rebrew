@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 // SIZE 0x7c
 typedef struct Req {
@@ -59,9 +59,9 @@ void __cdecl fcn_00563f60(char* o)
 		if (e != 0) {
 			p = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, *(unsigned short*) (o + 0xb0));
 			if (p != 0) {
-				race = lpGebaeudePROT + *e * 0x24d;
+				race = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e];
 				io_FormatTextBuffer(buf, 0x1c2b, e, *(unsigned short*) (o + 0xb0) * 2 + 0x9a8);
-				if (*race != 6) {
+				if ((((BUILDING_PROTOTYPE*)race)->category) != 6) {
 					q = fcn_0050dc90(e);
 					if (q != 0 && q[2] == 1 && (q[0x1b4] & 1)) {
 						kind = 0x60b;

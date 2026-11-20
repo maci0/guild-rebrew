@@ -5,7 +5,7 @@ typedef struct Kind {
 	unsigned char cap;
 	char pad248[0x24d - 0x248];
 } Kind;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
 
@@ -25,7 +25,7 @@ int __cdecl ai_StartTheater(int a1, unsigned short* entity, int a3, char* action
 	int t;
 	unsigned char* e;
 	unsigned char* found;
-	Kind* kind;
+	BUILDING_PROTOTYPE * kind;
 
 	lvl = gm_CheckStatLevel(*entity, 0xe);
 	best = 0;
@@ -37,18 +37,18 @@ int __cdecl ai_StartTheater(int a1, unsigned short* entity, int a3, char* action
 	for (a1 = 0x100; a1 != 0; a1--, e += 0xa9) {
 		if (e[0] == 0 || *(unsigned short*) (e + 0x27) != *entity)
 			continue;
-		kind = &((Kind*)lpGebaeudePROT)[e[0]];
-		if (kind->type != 0x1f)
+		kind = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[e[0]];
+		if (kind->category != 0x1f)
 			continue;
 		if (fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x27f) == 0)
 			continue;
 		if (fcn_0057c9d0(e) != 0)
 			continue;
 		if (found == 0) {
-			best = kind->cap == 2 ? 7 : 4;
+			best = kind->level == 2 ? 7 : 4;
 			found = e;
 		} else {
-			v = kind->cap == 2 ? 7 : 4;
+			v = kind->level == 2 ? 7 : 4;
 			if (v > best) {
 				best = v;
 				found = e;

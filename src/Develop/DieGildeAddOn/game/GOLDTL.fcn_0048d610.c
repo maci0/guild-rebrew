@@ -24,7 +24,7 @@ int __cdecl fcn_0048d610(ENTITY_RECORD* e, int* out)
 	if (g_67e964 < (*(int*)&gm_GameTime)) {
 		g_772624 = 0;
 		for (i = 0; i < 768; i++) {
-			if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 5) {
+			if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 7 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 5) {
 				g_772624++;
 			}
 		}

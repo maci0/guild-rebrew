@@ -47,7 +47,7 @@ int __cdecl d2_AllocateElement(void);
 Surf* __cdecl fcn_004770a0(Desc*, int);
 int __cdecl fcn_00475fd0(Surf*);
 void __cdecl d2_UnlockSurface(Surf*);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 static __inline void fill0(char* dst, int size)
 {
 	char* d;
@@ -89,27 +89,27 @@ int __cdecl fcn_00469140(int a1, int a2, int w, int h, char* src)
 	int i;
 
 	idx = d2_AllocateElement();
-	((Tile*)g_1015ea0)[idx].x20 = 0x47;
-	((Tile*)g_1015ea0)[idx].x10 = a1;
-	((Tile*)g_1015ea0)[idx].x14 = a2;
-	((Tile*)g_1015ea0)[idx].x1c = h;
-	((Tile*)g_1015ea0)[idx].x18 = w;
-	((Tile*)g_1015ea0)[idx].x08 = -1;
-	((Tile*)g_1015ea0)[idx].x30 = 0;
-	((Tile*)g_1015ea0)[idx].x34 = d2_ScreenHeight;
-	((Tile*)g_1015ea0)[idx].x28 = 0;
-	((Tile*)g_1015ea0)[idx].x2c = g_1040494;
+	((D2_CONTROL_TL*) g_1015ea0)[idx].kind = 0x47;
+	((D2_CONTROL_TL*) g_1015ea0)[idx].x = a1;
+	((D2_CONTROL_TL*) g_1015ea0)[idx].y = a2;
+	((D2_CONTROL_TL*) g_1015ea0)[idx].height = h;
+	((D2_CONTROL_TL*) g_1015ea0)[idx].width = w;
+	((D2_CONTROL_TL*) g_1015ea0)[idx].value_008 = -1;
+	((D2_CONTROL_TL*) g_1015ea0)[idx].clip_top = 0;
+	((D2_CONTROL_TL*) g_1015ea0)[idx].clip_bottom = d2_ScreenHeight;
+	((D2_CONTROL_TL*) g_1015ea0)[idx].clip_left = 0;
+	((D2_CONTROL_TL*) g_1015ea0)[idx].clip_right = g_1040494;
 	fill0((char*) &desc, 0x5c);
 	desc.h = h;
 	desc.w = w;
 	desc.x28 = 0x17;
-	((Tile*)g_1015ea0)[idx].surf = fcn_004770a0(&desc, 0);
-	s = ((Tile*)g_1015ea0)[idx].surf;
+	*(Surf**) &((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c = fcn_004770a0(&desc, 0);
+	s = *(Surf**) &((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c;
 	if (fcn_00475fd0(s)) {
 		for (i = 0; i < h; i++) {
 			memcpy(s->bits + s->pitch * i, src + i * w * 2, w * 2);
 		}
-		d2_UnlockSurface(((Tile*)g_1015ea0)[idx].surf);
+		d2_UnlockSurface(*(Surf**) &((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c);
 	}
 	return idx;
 }

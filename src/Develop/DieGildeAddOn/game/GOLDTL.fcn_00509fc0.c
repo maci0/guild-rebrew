@@ -2,7 +2,7 @@
 void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
 char* __cdecl strcat(char*, const char*);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 
@@ -96,11 +96,11 @@ void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a
 		mask = 0;
 		bit = 0;
 
-		if (lpGebaeudePROT[*p * 0x24d] > 0x1f) {
-			bit = 1 << (lpGebaeudePROT[*p * 0x24d] - 0x20);
+		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*p].category > 0x1f) {
+			bit = 1 << (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*p].category - 0x20);
 		}
 		else {
-			mask = 1 << lpGebaeudePROT[*p * 0x24d];
+			mask = 1 << ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*p].category;
 		}
 		send = 0;
 		cur = 0;

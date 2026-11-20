@@ -3,7 +3,7 @@ extern int g_779ce0;
 extern int g_779c6c;
 extern int g_6a9b9c;
 extern int d2_CurrentWindowId;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_14a5774;
 extern int g_14a579c;
 extern int g_14a595c[];
@@ -41,14 +41,14 @@ void __cdecl fcn_00593360(void)
 		g_779c6c = *(int*) (rec + 0xc);
 	d2_SetForm(g_6a9b9c, 3);
 	io_AppendText((int) g_6811b0);
-	i = *(int*) (g_1015ea0 + fcn_0046f740(5, 10, g_779c6c + 0x59a, d2_CurrentWindowId) * 0x2f4 + 0x18) + 0xf;
+	i = *(int*)&((D2_CONTROL_TL*)g_1015ea0)[fcn_0046f740(5, 10, g_779c6c + 0x59a, d2_CurrentWindowId)].width + 0xf;
 	if (!g_779c70) {
 		v = g_14a5774;
 	} else {
 		v = g_14a579c;
 	}
 	fcn_0064d41a(buf, "%s %s %s", v, g_779c72, g_779c82);
-	y = *(int*) (g_1015ea0 + fcn_0046fac0(i, 10, buf, d2_CurrentWindowId) * 0x2f4 + 0x1c) + 2;
+	y = *(int*)&((D2_CONTROL_TL*)g_1015ea0)[fcn_0046fac0(i, 10, buf, d2_CurrentWindowId)].height + 2;
 	z = y + 0xa;
 	if (g_779c70 == 1)
 		v = g_14a595c[g_779c6b];

@@ -1,6 +1,6 @@
 extern char* lpObjektePROT;
 extern unsigned char g_773d75;
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 char* __cdecl fcn_00503d10(int id);
 double __cdecl fcn_0042e450(char a, int b);
 void __cdecl fcn_004c51f0(int a, int b, int c, int d);
@@ -16,7 +16,7 @@ void __cdecl fcn_00515340(int idx)
 	rec = (char*) 0x85ab90 + idx * 0x2a90;
 	i = 0x55;
 	do {
-		p = lpObjektePROT + *(unsigned short*) rec * 0x41;
+		p = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) rec]);
 		h = (int) fcn_00503d10(*(unsigned short*) rec);
 		if (h != 0) {
 			if (*(unsigned char*) p == 0x17 || *(unsigned char*) p == 0x25) {

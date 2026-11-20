@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #pragma intrinsic(memcpy)
 
 /* Entity record handed to the production planner (fields used here only). */
@@ -74,7 +74,7 @@ void __cdecl ai_MeisterTrade(Ent483f20*, void*);
 void __cdecl fcn_00487f90(Plan483f20*);
 int __cdecl wsprintfA(char*, char*, ...);
 
-#define type_entry(id) (lpObjektePROT + (id) * 0x41)
+#define type_entry(id) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(id)]))
 #define slot_at(id) (g_7f4ca0 + (id) * 0x21c)
 
 /* Runs the start preconditions and returns fcn_00486640's answer. */
@@ -97,7 +97,7 @@ static __inline int can_start(Ent483f20* e, void* rec, PRODUCTION_GOODS_RECORD* 
 	if (*(unsigned char*) ((char*) rec + 0x1d) < p->min_2) {
 		return 0;
 	}
-	if (*(unsigned short*) (type + 0x36) > p->unk_40) {
+	if (((OBJECT_PROTOTYPE *)type)->value_036 > p->unk_40) {
 		return 0;
 	}
 	obj = fcn_00503d10(p->goods_id);
@@ -105,7 +105,7 @@ static __inline int can_start(Ent483f20* e, void* rec, PRODUCTION_GOODS_RECORD* 
 		return 0;
 	}
 	amount = gm_eval_SlotVoll(obj, p->goods_id, 1000000);
-	if (amount < *(unsigned short*) (type_entry(p->goods_id) + 0x36) + p->unk_3c) {
+	if (amount < ((OBJECT_PROTOTYPE *)type_entry(p->goods_id))->value_036 + p->unk_3c) {
 		return 0;
 	}
 	return fcn_00486640(e, p, human);
@@ -167,7 +167,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 				if (g_100d0c0[i].goods_id != e->item) {
 					continue;
 				}
-				if (g_100d0c0[i].unk_40 >= *(unsigned short*) (type_entry(g_100d0c0[i].goods_id) + 0x36) &&
+				if (g_100d0c0[i].unk_40 >= ((OBJECT_PROTOTYPE *)type_entry(g_100d0c0[i].goods_id))->value_036 &&
 				    fcn_00486640(e, &g_100d0c0[i], 1) != 0) {
 					start_production(e, &g_100d0c0[i], 0, msg);
 					goto after_start;
@@ -181,7 +181,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 			if (g_100d0c0[i].goods_id != e->item) {
 				continue;
 			}
-			if (g_100d0c0[i].unk_40 >= *(unsigned short*) (type_entry(g_100d0c0[i].goods_id) + 0x36) &&
+			if (g_100d0c0[i].unk_40 >= ((OBJECT_PROTOTYPE *)type_entry(g_100d0c0[i].goods_id))->value_036 &&
 			    fcn_00486640(e, &g_100d0c0[i], 1) != 0) {
 				start_production(e, &g_100d0c0[i], 0, msg);
 				found = 1;
@@ -254,7 +254,7 @@ after_start:
 			for (k = 0; k < 4; k++) {
 				id = *(int*) ((char*) prod + 4 + k * 4);
 				if (*(int*) (g_100b0e8 + id * 0x40) <
-				    (int) *(unsigned short*) (type_entry(prod->goods_id) + 0x26 + k * 2)) {
+				    (int) ((OBJECT_PROTOTYPE *)type_entry(prod->goods_id))->ingredient_amounts[k]) {
 					prod->flags &= ~8;
 				}
 			}

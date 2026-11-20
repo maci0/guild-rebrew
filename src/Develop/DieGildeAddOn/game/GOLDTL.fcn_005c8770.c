@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 typedef struct
@@ -31,10 +31,10 @@ void __cdecl fcn_00471e30(int);
 void __cdecl d2_ShowBuildingStatsDetail(unsigned char* a)
 {
 	int st[21];
-	Shop* t;
+	BUILDING_PROTOTYPE* t;
 	int dlg;
 
-	t = &((Shop*)lpGebaeudePROT)[a[0]];
+	t = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[a[0]];
 	dlg = fcn_00470820(0x3c, 0, s_6ac850);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 2);
@@ -50,7 +50,7 @@ void __cdecl d2_ShowBuildingStatsDetail(unsigned char* a)
 		io_AppendText(0xa5, st[2]);
 	}
 	if (st[6] != 0) {
-		io_AppendText(0xa6, t->x223 + 0x130, st[6]);
+		io_AppendText(0xa6, t->worker_kind[0] + 0x130, st[6]);
 	}
 	if (st[4] + st[5] != 0) {
 		io_AppendText(0xa7, st[4] + st[5]);
@@ -74,7 +74,7 @@ void __cdecl d2_ShowBuildingStatsDetail(unsigned char* a)
 		io_AppendText(0xad, st[19]);
 	}
 	if (st[18] != 0) {
-		if (t->x0 == 4 || t->x0 == 0x10 || t->x0 == 0x13) {
+		if (t->category == 4 || t->category == 0x10 || t->category == 0x13) {
 			io_AppendText(0xb3, st[18]);
 		}
 		else {

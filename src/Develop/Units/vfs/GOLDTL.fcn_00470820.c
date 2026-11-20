@@ -9,7 +9,7 @@ extern int d2_CurrentWindowId;
 extern float g_6628a8;
 extern int g_67d3a0;
 extern int g_6b7fdc;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_1040494;
 extern char s_67d268[];
 extern char s_67d774[];
@@ -245,9 +245,9 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 				}
 			}
 			v38 = 0;
-			*(int*) (g_1015ea0 + 0x50
-				+ *(int*) (*(int*) v32 * 0x3cc + 0x10161bc)
-					* 0x2f4) = v15 + 0x1038140;
+			*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (*(int*) v32 * 0x3cc + 0x10161bc)].value_050)
+
+ = v15 + 0x1038140;
 			v34 = *v32;
 			v13 = v33[0x33];
 			*(int*) (v15 + 0x10382c4) =
@@ -262,19 +262,19 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 						v13 = fcn_0046f740((short) *q,
 							(short) q[0x18], v12, v34);
 						if (*t == 0x12) {
-							*(unsigned int*) (g_1015ea0
-								+ 0x58 + v13 * 0x2f4) = 1;
-							*(unsigned int*) (g_1015ea0
-								+ 0x5c + v13 * 0x2f4) = 0;
+							*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_058)
+ = 1;
+							*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_05c)
+ = 0;
 						}
 						if (*t == 8) {
-							*(unsigned int*) (g_1015ea0
-								+ 0x58 + v13 * 0x2f4) = 0;
-							*(unsigned int*) (g_1015ea0
-								+ 0x5c + v13 * 0x2f4) = 1;
+							*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_058)
+ = 0;
+							*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_05c)
+ = 1;
 						}
-						*(int*) (g_1015ea0 + 0x50
-							+ v13 * 0x2f4) =
+						*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_050)
+ =
 							v15 + 0x1038140;
 					}
 					if (t[-0x330] != 0x43) {
@@ -290,9 +290,9 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 										+ v38 + 0xf1c),
 									0, 100, v12,
 									v37, v34);
-								*(int*) (g_1015ea0
-									+ 0x50
-									+ v13 * 0x2f4) =
+								*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_050)
+
+ =
 									v15 + 0x1038140;
 							}
 						} else {
@@ -303,8 +303,8 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 								*(unsigned char*) ((char*) t + 1),
 								*(unsigned char*) ((char*) t + 2),
 								v37, v34);
-							*(int*) (g_1015ea0 + 0x50
-								+ v13 * 0x2f4) =
+							*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_050)
+ =
 								v15 + 0x1038140;
 						}
 					} else if (strcmp((char*) v19,
@@ -319,12 +319,12 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 									+ 0x14a5320),
 								v34);
 							v13 = v12 * 0x2f4;
-							*(unsigned int*) (v13 + 8
-								+ g_1015ea0) =
+							*(unsigned int*) (&((D2_CONTROL_TL*)(g_1015ea0 + v13))->value_008)
+ =
 								txt_FindEntryIndex(
 								(char*) v19);
-							*(int*) (v13 + 0x50
-								+ g_1015ea0) =
+							*(int*) (&((D2_CONTROL_TL*)(g_1015ea0 + v13))->value_050)
+ =
 								v15 + 0x1038140;
 						}
 					}

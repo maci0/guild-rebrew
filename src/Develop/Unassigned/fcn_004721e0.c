@@ -3,7 +3,7 @@
 
 extern int g_772534;
 extern char* g_1015ea0;
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004721e0 */
 int* __cdecl fcn_004721e0(int a, int b, int c)
 {
@@ -25,5 +25,5 @@ int* __cdecl fcn_004721e0(int a, int b, int c)
 	arr = win->children;
 	idx = arr[a];
 	flag = (c == 0);
-	*(int*) (g_1015ea0 + (idx * 189 + 18) * 4) = flag; /* no return: native leaves the base in eax, no callers */
+	((D2_CONTROL_TL*) g_1015ea0)[idx].value_048 = flag; /* no return: native leaves the base in eax, no callers */
 }

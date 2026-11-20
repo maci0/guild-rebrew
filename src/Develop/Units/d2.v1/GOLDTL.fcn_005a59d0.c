@@ -11,7 +11,7 @@ typedef struct {
 
 extern int d2_CurrentWindowId;
 extern char* g_77255c;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 extern char g_1015f40[];
 extern char g_6b5c60[];
@@ -50,7 +50,7 @@ int __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_0046ed00(int, int, int);
 int __cdecl d2_SetSlotVisibility(int, int);
 void __cdecl d2_SetElementImage(int, int);
-void __cdecl d2_SetElementValue(int, int, int, int);
+void __cdecl d2_SetElementValue(int, ...);
 void __cdecl d2_ClearSelectedControl(void);
 int __cdecl fcn_00508620(int, int);
 int __cdecl fcn_004c4450(int);
@@ -97,17 +97,17 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 	d2_SetForm(dialogId, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);
 	d2_SetForm(dialogId, 0);
-	h1 = d2_ShowTxt((*(int*)(g_1015ea0 + e1 * 0x2f4 + 0x10) - *(int*)(g_77255c + 4)) + 2,
-		(*(int*)(g_1015ea0 + e1 * 0x2f4 + 0x1c) - *(int*)(g_77255c + 8)) + 2
-			+ *(int*)(g_1015ea0 + e1 * 0x2f4 + 0x14),
+	h1 = d2_ShowTxt((*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e1].x)) - *(int*)(g_77255c + 4)) + 2,
+		(*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e1].height)) - *(int*)(g_77255c + 8)) + 2
+			+ *(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e1].y)),
 		g_6b5c60, d2_CurrentWindowId);
-	h2 = d2_ShowTxt((*(int*)(g_1015ea0 + e2 * 0x2f4 + 0x10) - *(int*)(g_77255c + 4)) + 2,
-		(*(int*)(g_1015ea0 + e2 * 0x2f4 + 0x1c) - *(int*)(g_77255c + 8)) + 2
-			+ *(int*)(g_1015ea0 + e2 * 0x2f4 + 0x14),
+	h2 = d2_ShowTxt((*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e2].x)) - *(int*)(g_77255c + 4)) + 2,
+		(*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e2].height)) - *(int*)(g_77255c + 8)) + 2
+			+ *(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e2].y)),
 		g_6b5c60, d2_CurrentWindowId);
-	*(int*)(g_1015ea0 + 0x84 + h1 * 0x2f4) = 0x54;
-	*(int*)(g_1015ea0 + 0x84 + h2 * 0x2f4) = 0x54;
-	*(int*)(g_1015ea0 + 0x54 + e4 * 0x2f4) = 1;
+	*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[h1].font)) = 0x54;
+	*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[h2].font)) = 0x54;
+	*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e4].value_054)) = 1;
 	d2_SetForm(dialogId, 0);
 	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0] = 0xe;
 	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[4] = 0x18;

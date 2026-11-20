@@ -1,4 +1,4 @@
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "client_types.h"
 extern Group_102cbc4 g_102cbc4[8];
 
@@ -8,6 +8,6 @@ void __cdecl d2_SetRadioGroupEnabled(int g, int flag)
 	int j;
 
 	for (j = 0; j < *(int*) (((char*)g_102cbc4) + g * 0x8c); j++) {
-		*(int*) (g_1015ea0 + ((int*) (((char*)g_102cbc4) + g * 0x8c + 8))[j] * 0x2f4 + 0x4c) = flag == 0;
+		*(int*)&((D2_CONTROL_TL*)g_1015ea0)[((int*) (((char*)g_102cbc4) + g * 0x8c + 8))[j]].disabled = flag == 0;
 	}
 }

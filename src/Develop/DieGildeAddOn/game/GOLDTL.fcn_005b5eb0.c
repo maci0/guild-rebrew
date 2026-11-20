@@ -2,7 +2,7 @@ extern char* g_1015ea0; /* 0x1015ea0, GUI pool, stride 0x2f4 */
 extern char* g_773d78;  /* 0x773d78 */
 extern int g_14abc14;
 extern int d2_CurrentWindowId;    /* 0x772514 */
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_004fdec0(char* name);
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
@@ -81,13 +81,13 @@ void __cdecl fcn_005b5eb0(int windowContext, char* entityName)
         if (entityName != name) {
             v = fcn_0046f740(0, x, 5, d2_CurrentWindowId);
             *(int*) (i * 4 + 0x777cd0) = v;
-            *(unsigned int*) (g_1015ea0 + 0x5c + v * 0x2f4) = 1;
-            *(char**) (g_1015ea0 + 0x2f0 +
-                       *(int*) (i * 4 + 0x777cd0) * 0x2f4) = name;
+            *(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v].value_05c)) = 1;
+            *(char**) (&((D2_CONTROL_TL*)g_1015ea0)
+                       [*(int*) (i * 4 + 0x777cd0)].associated_object) = name;
             d2_SetElementFont(*(int*) (i * 4 + 0x777cd0), 0x56);
             fcn_0046f9b0(*(int*) (i * 4 + 0x777cd0), g_14abc14);
-            *(unsigned int*) (g_1015ea0 + 0x1d0 +
-                              *(int*) (i * 4 + 0x777cd0) * 0x2f4) = 3;
+            *(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+                              [*(int*) (i * 4 + 0x777cd0)].flags_1d0) = 3;
         }
         i++;
         y += 0x6e;

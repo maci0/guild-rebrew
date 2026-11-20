@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 #pragma pack(1)
@@ -28,7 +28,7 @@ void __cdecl fcn_0057b160(char* u)
 	char* h;
 
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (u + 0xac));
-	if (e != 0 && ((struct good*)lpGebaeudePROT)[*e].kind == 0x1d) {
+	if (e != 0 && ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category == 0x1d) {
 		fcn_004f2a10(0, e, *(int*) (u + 0xb0), *(unsigned char*) (u + 0xb4));
 		h = gm_LookupEntityRecordById(*(int*) (u + 0xc));
 		if (h != 0) {

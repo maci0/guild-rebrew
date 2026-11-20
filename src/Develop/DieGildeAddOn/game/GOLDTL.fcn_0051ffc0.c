@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 extern char* g_6b5c20;
@@ -43,7 +43,7 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 	count = 0;
 	for (i = 0; i < 0x5008; i++) {
 		idx = *(unsigned short*) (lpObjekteINST + i * 0x43);
-		if (*(char*) (lpObjektePROT + idx * 0x41) == 0x1d) {
+		if (*(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[idx])) == 0x1d) {
 			count += 1;
 		}
 	}
@@ -53,7 +53,7 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 	i = 0;
 	do {
 		idx = *(unsigned short*) (lpObjekteINST + i);
-		if (*(char*) (lpObjektePROT + idx * 0x41) == 0x1d) {
+		if (*(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[idx])) == 0x1d) {
 			if (vfs_WriteFigure(*(int*) (lpObjekteINST + i + 0x3b),
 			                 *(int*) (lpObjekteINST + i + 2), handle) == 0) {
 				return 0;

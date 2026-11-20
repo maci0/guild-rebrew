@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 extern int* g_665f08;
@@ -13,7 +13,7 @@ int __cdecl fcn_0057fa40(int* m)
 		return 1;
 	}
 	if (g_665f08[14] >= 1 && m[1] != 0 && m[0] == 0x24) {
-		if (((char*)lpGebaeudePROT)[*(unsigned char*) m[1] * 589] == 0xa) {
+		if (((char) ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) m[1]].category) == 0xa) {
 			g_665f08[14] = 2;
 			return 1;
 		}

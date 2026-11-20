@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 // 0x100dc20 is one 0xb00-byte block (owner, light count at +0x18, lights at
 // +0x300); declaring it as one struct makes the light copy reload the count
 // after each store, as the reference does.
@@ -77,7 +77,7 @@ void __cdecl fcn_00482f20(char *a)
 		flag = 1;
 		s = (Slot*) lpObjekteINST;
 		for (i = 0; flag && i < 0x5008; s++, i++) {
-			if (s->id != 0 && ((Kind*) lpObjektePROT)[s->id].kind == 0x1d && s->owner == *(int *) (*(char **) (a + 0x16c) + 1) &&
+			if (s->id != 0 && ((OBJECT_PROTOTYPE*) lpObjektePROT)[s->id].kind == 0x1d && s->owner == *(int *) (*(char **) (a + 0x16c) + 1) &&
 			    s->id == 0x136) {
 				flag = 0;
 			}

@@ -1,5 +1,5 @@
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl fcn_0043a9c0();
 int __cdecl fcn_0043aa30();
 int __cdecl fcn_004432d0();
@@ -140,14 +140,14 @@ void __cdecl fcn_00543080(void)
 	v3 = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 	while (v3) {
 		if (*v3 != 0x1e) {
-			if (((ResetProto*)lpGebaeudePROT)[*v3].kind == 7) {
+			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v3].category == 7) {
 				*(int*)(v3 + 0x69) = 0;
 			}
 		} else {
 			v5 = fcn_005155e0(v3);
 			v2 = d3_CurrentContextIndex;
 			if (v5 != -1) {
-				fcn_004432d0((int) *(char*) (((ResetProto*)lpGebaeudePROT)[*v3].kind + (unsigned long)&g_7f3b00), 1);
+				fcn_004432d0((int) *(char*) (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v3].category + (unsigned long)&g_7f3b00), 1);
 				fcn_0043aa30(3);
 				plt_UpdatePlantStages(*(unsigned int*) &v3[0x71]);
 				fcn_0043a9c0(3);

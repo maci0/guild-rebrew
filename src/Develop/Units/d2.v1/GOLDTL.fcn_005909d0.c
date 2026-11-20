@@ -4,7 +4,7 @@
 extern unsigned char* lpGebaeudePROT;
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char s_6a99f4[];
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -35,7 +35,7 @@ int __cdecl d2_CreateGebaeudeTooltip(int i)
 	if (rec[0] != 10) {
 		d2_SetForm(0, 3);
 		io_AppendText(0x2a, roman[(unsigned char) rec[0x247]]);
-		io_AppendText(0x28, fcn_0050d200(g_7f4ca0 + g_774970 * 540, i));
+		io_AppendText(0x28, fcn_0050d200(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), i));
 		io_AppendText(0x29, *(int*) (rec + 0x243));
 	}
 	return dlg;

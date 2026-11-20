@@ -27,7 +27,7 @@ extern char* g_1015ea0;
 extern void** g_772540;
 extern int g_67d388;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046b140 */
 int __cdecl fcn_0046b140(int x, int y)
 {
@@ -47,7 +47,7 @@ int __cdecl fcn_0046b140(int x, int y)
 			if (x >= s->x && x <= s->x + s->w && y >= s->y && y <= s->y + s->h && !hidden && y >= s->top && y <= s->bottom && !s->hidden4c && !s->hidden48) {
 				id = s->id;
 				d2_CurrentElementId = id;
-				if (((Slot*)g_1015ea0)[id].type == 0x40) {
+				if (((D2_CONTROL_TL*) g_1015ea0)[id].kind == 0x40) {
 					g_67d388 = s->result;
 					return g_67d388;
 				}

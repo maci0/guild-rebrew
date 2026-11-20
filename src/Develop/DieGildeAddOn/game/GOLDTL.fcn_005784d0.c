@@ -1,4 +1,4 @@
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
@@ -75,7 +75,7 @@ idle:
 			h = (int) gm_LookupEntityRecordById(*(int*) (obj + 0xb0));
 			if (h != 0) {
 				fcn_00500bb0(obj + 0x52, 0x18, 0, 0);
-				fcn_005b2ee0(g_7f4ca0 + *(unsigned short*) (obj + 8) * 0x21c,
+				fcn_005b2ee0(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (obj + 8)]),
 					(char*) h, obj + 0x52);
 			}
 			*(int*) (obj + 0x84) = fcn_004c5620(3, obj);

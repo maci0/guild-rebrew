@@ -1,4 +1,4 @@
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 int __cdecl fcn_004ffd90(int);
 int __cdecl fcn_0050a7e0(int, int, int, int, int, int, int, int);
@@ -19,8 +19,8 @@ char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
 			return 0;
 		}
 		if (flags & 2) {
-			*(char*) (g_7f4ca0 + i * 0x21c + 0x165) = (char) a5;
-			*(char*) (g_7f4ca0 + i * 0x21c + 0x164) = (char) a4;
+			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].active = (char) a5;
+			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].stat_category = (char) a4;
 		}
 	} else {
 		i = fcn_0050a7e0(a2, -1, -1, a3, 0, a4 & 0xff, a5 & 0xff, 2)
@@ -29,7 +29,7 @@ char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
 	if (i == 0xffff) {
 		return 0;
 	}
-	rec = g_7f4ca0 + i * 0x21c;
+	rec = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 	if (flags & 4) {
 		if (queryEntity != 0) {
 			s = sim_StartEntityQueryByType(queryEntity);

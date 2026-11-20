@@ -1,5 +1,5 @@
 extern char* g_1015ea0; /* 0x1015ea0, GUI pool, stride 0x2f4 */
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
 void __cdecl d2_SetElementImage(int element, int bild);
@@ -59,10 +59,10 @@ void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
     p = (int*) 0x778d50;
     do {
         if (p[-2] >= 2) {
-            *(unsigned int*) (g_1015ea0 + p[0] * 0x2f4 + 0x48) = 0;
+            *(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[p[0]].value_048)) = 0;
             fcn_00469c40(r[1] + p[-4], r[2] + p[-3], *p);
         } else {
-            *(unsigned int*) (g_1015ea0 + p[0] * 0x2f4 + 0x48) = 1;
+            *(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[p[0]].value_048)) = 1;
         }
         p += 5;
     } while ((int) p < 0x778da0);

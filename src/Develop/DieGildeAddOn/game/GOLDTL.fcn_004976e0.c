@@ -1,7 +1,7 @@
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_0050d320(char*, unsigned char);
 int __cdecl fcn_004a48a0(char*, int);
@@ -25,7 +25,7 @@ int __cdecl fcn_004976e0(int unused, char* e, int unused2, char* out, char* out2
 		p = ((char*)lpGebaeudeINST);
 		for (i = 0; i < 0x100; i++) {
 			if (p[0] != 0 && *(unsigned short*) (p + 0x25) == *(unsigned short*) e && !(p[0x5a] & 0x45) &&
-			    ((1 << lpGebaeudePROT[*(unsigned char*) p + *(unsigned char*) p * 588]) & 0x7c43b4) &&
+			    ((1 << ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) p].category) & 0x7c43b4) &&
 			    p[0x5c] < minv) {
 				minv = p[0x5c];
 				best = p;

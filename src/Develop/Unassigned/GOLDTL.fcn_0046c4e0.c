@@ -22,7 +22,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 
 void __cdecl fcn_00469110(int slot, int w);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046c4e0 */
 void __cdecl fcn_0046c4e0(int win)
 {
@@ -33,8 +33,8 @@ void __cdecl fcn_0046c4e0(int win)
 	w = &((Win*)g_1015f40)[win];
 	maxw = 0;
 	for (i = 0; i < w->count; i++) {
-		if (((Slot*)g_1015ea0)[w->children[i]].type == 9 && ((Slot*)g_1015ea0)[w->children[i]].w > maxw) {
-			maxw = ((Slot*)g_1015ea0)[w->children[i]].w;
+		if (((D2_CONTROL_TL*) g_1015ea0)[w->children[i]].kind == 9 && ((D2_CONTROL_TL*) g_1015ea0)[w->children[i]].width > maxw) {
+			maxw = ((D2_CONTROL_TL*) g_1015ea0)[w->children[i]].width;
 		}
 	}
 	maxw += 8;
@@ -42,8 +42,8 @@ void __cdecl fcn_0046c4e0(int win)
 		maxw = 0x80;
 	}
 	for (i = 0; i < w->count; i++) {
-		if (((Slot*)g_1015ea0)[w->children[i]].type == 9) {
-			((Slot*)g_1015ea0)[w->children[i]].visible = 1;
+		if (((D2_CONTROL_TL*) g_1015ea0)[w->children[i]].kind == 9) {
+			((D2_CONTROL_TL*) g_1015ea0)[w->children[i]].value_06c = 1;
 			fcn_00469110(w->children[i], maxw);
 		}
 	}

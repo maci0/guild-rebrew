@@ -25,7 +25,7 @@ int __cdecl fcn_00507400(int, int);
 void __cdecl fcn_004c6470(int, int);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_00471e30(int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* Build the stat-level button row for the character sheet: lay out the
    fourteen stat gauges, label them from the opposite-stat table, then run
    the modal input loop that adjusts one stat at a time. */
@@ -73,12 +73,12 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
                           (v8 / 5) * v7 + 100 + v14, v8 + 0x5a2,
                           d2_CurrentWindowId);
         v16 = v6 * 0x2f4;
-        *(unsigned int*) (v16 + 0x5c + (int) g_1015ea0) = 1;
-        *(unsigned int*) (v16 + 0x1d0 + (int) g_1015ea0) = 3;
+        *(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v16)).value_05c) = 1;
+        *(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v16)).flags_1d0) = 3;
         d2_SetElementFont(v6, 0x56);
-        *(unsigned int*) (v16 + 0x6c + (int) g_1015ea0) = 1;
-        *(unsigned int*) (v16 + 0x1dc + (int) g_1015ea0) = 0xffffffce;
-        *(unsigned int*) (v16 + 0x1e0 + (int) g_1015ea0) = 0x44;
+        *(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v16)).value_06c) = 1;
+        *(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v16)).value_1dc) = 0xffffffce;
+        *(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v16)).value_1e0) = 0x44;
         if (v5) {
             v3 = (unsigned int) txt_TextEntries[v5 + v10];
             sprintf(v12, (char*) *(unsigned int*) 0x14ac804,
@@ -87,14 +87,14 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
             v12[0] = 0;
         }
         fcn_0046f9b0(v6, (int) v12);
-        *(unsigned int*) (v16 + 0x18 + (int) g_1015ea0) = 0xa4;
+        *(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v16)).width) = 0xa4;
         if (v5 == *(unsigned char*) ((char*) a0 + 0x164)) {
             fcn_00472640(v6, 0);
         } else if (!v5) {
-            *(unsigned int*) (v16 + 0x1cc + (int) g_1015ea0) = 0x56;
-            *(unsigned int*) (v16 + 0x1d4 + (int) g_1015ea0) = 0xa4;
+            *(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v16)).value_1cc) = 0x56;
+            *(unsigned int*) (&(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v16)).value_1d4) = 0xa4;
             v9 = (char*) *v18;
-            v17 = (char*) (v16 + 0xcc + (int) g_1015ea0);
+            v17 = (char*) ((char*) &(*(D2_CONTROL_TL*) ((char*) ((int) g_1015ea0) + v16)) + 0xcc);
             do {
                 v2 = *v9;
                 v9 = &v9[1];

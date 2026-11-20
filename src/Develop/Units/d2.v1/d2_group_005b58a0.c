@@ -8,7 +8,7 @@ typedef struct
 	int x6c;
 	char pad70[0x2f4 - 0x70];
 } Ctl;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 typedef struct
 {
 	int x;
@@ -80,13 +80,13 @@ void __cdecl d2_CreateGauge(int x, int y, Gauge* s)
 	int i;
 
 	s->icon = fcn_0046f740(x, y, 0x5db, d2_CurrentWindowId);
-	((Ctl*)g_1015ea0)[s->icon].x5c = 1;
+	((D2_CONTROL_TL*) g_1015ea0)[s->icon].value_05c = 1;
 	s->label = d2_ShowTxt(x - 0x36, y - 0x11, g_14abc28, d2_CurrentWindowId);
-	((Ctl*)g_1015ea0)[s->label].x18 = 0xa0;
-	((Ctl*)g_1015ea0)[s->label].x6c = 1;
+	((D2_CONTROL_TL*) g_1015ea0)[s->label].width = 0xa0;
+	((D2_CONTROL_TL*) g_1015ea0)[s->label].value_06c = 1;
 	s->value = d2_ShowTxt(x - 0x36, y + 0x44, "", d2_CurrentWindowId);
-	((Ctl*)g_1015ea0)[s->value].x18 = 0xa0;
-	((Ctl*)g_1015ea0)[s->value].x6c = 1;
+	((D2_CONTROL_TL*) g_1015ea0)[s->value].width = 0xa0;
+	((D2_CONTROL_TL*) g_1015ea0)[s->value].value_06c = 1;
 	s->x1c = -1;
 	s->x10 = -1;
 	s->x8 = 0;
@@ -104,35 +104,35 @@ void __cdecl d2_CreateGauge(int x, int y, Gauge* s)
 void __cdecl d2_UpdateGauge(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 {
 	char buf[0x80];
-	unsigned char* rec;
+	BUILDING_PROTOTYPE *rec;
 
-	rec = lpGebaeudePROT + **(unsigned char**) (e + 0x16c) * 0x24d;
+	rec = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[**(unsigned char**) (e + 0x16c)];
 	d2_SetForm(g->win, 3);
 	g->x1c = fcn_0046f740(g->x + 2, g->y, *(int*) (e + 0x18c), d2_CurrentWindowId);
 	fcn_00517c00(*(unsigned short*) e, 1, 1, buf);
 	fcn_0046f940(g->label, buf);
-	((fcn_005b59c0_Ctl*)g_1015ea0)[g->label].x6c = 1;
-	((fcn_005b59c0_Ctl*)g_1015ea0)[g->label].x18 = 0xa0;
+	((D2_CONTROL_TL*) g_1015ea0)[g->label].value_06c = 1;
+	((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
 	g->bar = fcn_004677e0(g->x - 8, g->y + 0x32, 0x40, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
-	((fcn_005b59c0_Ctl*)g_1015ea0)[g->bar].x4c = 1;
+	((D2_CONTROL_TL*) g_1015ea0)[g->bar].disabled = 1;
 	g->state = 1;
-	((fcn_005b59c0_Ctl*)g_1015ea0)[g->icon].x2f0 = (char*) e;
+	((D2_CONTROL_TL*) g_1015ea0)[g->icon].associated_object = (char*) e;
 	if (*(int*) (e + 0x174) != 0 && e[0x164] == 0) {
-		if (g->obj[0x165] == rec[0x230])
+		if (g->obj[0x165] == rec->role_230)
 			io_FormatTextBuffer(buf, g_68c1c8, *(int*) (e + 0x174), 0x1a39);
-		else if (g->obj[0x165] == rec[0x22f])
+		else if (g->obj[0x165] == rec->role_22f)
 			io_FormatTextBuffer(buf, g_68c1c8, *(int*) (e + 0x174), 0x1a3a);
 		fcn_0046f940(g->value, buf);
-		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x6c = 1;
-		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x18 = 0xa0;
+		((D2_CONTROL_TL*) g_1015ea0)[g->value].value_06c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g->value].width = 0xa0;
 	} else if (e[0x164] == 0) {
-		if (g->obj[0x165] == rec[0x230])
+		if (g->obj[0x165] == rec->role_230)
 			io_FormatTextBuffer(buf, "%s", 0x1a3b);
-		else if (g->obj[0x165] == rec[0x22f])
+		else if (g->obj[0x165] == rec->role_22f)
 			io_FormatTextBuffer(buf, "%s", 0x1a3c);
 		fcn_0046f940(g->value, buf);
-		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x6c = 1;
-		((fcn_005b59c0_Ctl*)g_1015ea0)[g->value].x18 = 0xa0;
+		((D2_CONTROL_TL*) g_1015ea0)[g->value].value_06c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g->value].width = 0xa0;
 	}
 	if (full != 0) {
 		fcn_00534160(g->x, g->y + 0x64, e[0x83], 0x4df);

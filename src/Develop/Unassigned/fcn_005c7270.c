@@ -1,10 +1,10 @@
 extern unsigned char* lpGebaeudePROT;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x005c7270 */
 int __cdecl fcn_005c7270(void* o, int type)
 {
 	unsigned char* p;
-	signed char* e;
+	BUILDING_PROTOTYPE *e;
 	int idx;
 
 	if (!(o == 0)) {
@@ -13,19 +13,19 @@ int __cdecl fcn_005c7270(void* o, int type)
 		goto fail;
 	}
 	idx = *p;
-	e = lpGebaeudePROT + idx * 589;
+	e = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[idx];
 	if (type == 0x172 || type == 0x174) {
-		if (*e != 4) {
+		if (((signed char) e->category) != 4) {
 			goto fail;
 		}
 	}
 	if (type == 0x158 || type == 0x160) {
-		if (*e != 0x13) {
+		if (((signed char) e->category) != 0x13) {
 			goto fail;
 		}
 	}
 	if (type == 0x16e || type == 0x176) {
-		if (*e != 0x10) {
+		if (((signed char) e->category) != 0x10) {
 			goto fail;
 		}
 	}

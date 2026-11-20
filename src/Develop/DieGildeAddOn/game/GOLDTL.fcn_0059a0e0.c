@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 extern unsigned short* g_7e431c;
@@ -32,7 +32,7 @@ void __cdecl fcn_0059a0e0(void)
 	char* r;
 
 	if (g_7e431c != 0) {
-		r = &((Rec65*)lpObjektePROT)[*g_7e431c].type;
+		r = (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*g_7e431c].kind;
 		if ((*r == 6 || *r == 2) && (fcn_00506380(g_774970, g_7746c8, g_7e431c, 0) & 0x4000)) {
 			x = fcn_00502cd0(*(int*) (g_7746c8 + 0x5d), 2, 6, 0, 0xfd);
 			fcn_005a86a0((int) g_7e431c);

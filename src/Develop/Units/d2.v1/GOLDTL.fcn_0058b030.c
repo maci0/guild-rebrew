@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 // SIZE 0x2f4
 struct gadget {
@@ -38,7 +38,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046f740(int, int, int, int);
 void __cdecl fcn_00472640(int, int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0058b030(char* a, struct seldlg* d)
 {
 	char* s;
@@ -49,22 +49,22 @@ void __cdecl fcn_0058b030(char* a, struct seldlg* d)
 	io_AppendText((int) g_6811b0);
 	for (i = 0; i < 4; i++) {
 		d->ids[i] = fcn_0046f740(6 + i * 0x6c, 0, g_665f58[i], d->font);
-		((struct gadget*)g_1015ea0)[d->ids[i]].visible = 1;
-		((struct gadget*)g_1015ea0)[d->ids[i]].mode = 3;
-		((struct gadget*)g_1015ea0)[d->ids[i]].image = (char*) &((struct icon*)lpObjektePROT)[g_665f84[i]];
+		((D2_CONTROL_TL*) g_1015ea0)[d->ids[i]].value_05c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[d->ids[i]].flags_1d0 = 3;
+		((D2_CONTROL_TL*) g_1015ea0)[d->ids[i]].associated_object = (char*) &((OBJECT_PROTOTYPE*)lpObjektePROT)[g_665f84[i]];
 	}
 	fcn_00472640(d->ids[1], (unsigned char) s[0x19]);
 	fcn_00472640(d->ids[2], (unsigned char) s[0x1a]);
 	fcn_00472640(d->ids[3], (unsigned char) s[0x1b]);
 	if (d->sel == 3 && s[0x1b] == 1) {
-		((struct gadget*)g_1015ea0)[d->ids[3]].hot = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[d->ids[3]].value_03c = 1;
 	} else if (d->sel == 2 && s[0x1a] == 1) {
-		((struct gadget*)g_1015ea0)[d->ids[2]].hot = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[d->ids[2]].value_03c = 1;
 	} else if (d->sel == 1 && s[0x19] == 1) {
-		((struct gadget*)g_1015ea0)[d->ids[1]].hot = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[d->ids[1]].value_03c = 1;
 	} else {
-		((struct gadget*)g_1015ea0)[d->ids[0]].hot = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[d->ids[0]].value_03c = 1;
 		d->sel = 0;
 	}
-	((struct gadget*)g_1015ea0)[d->ids[d->sel]].focus = 1;
+	((D2_CONTROL_TL*) g_1015ea0)[d->ids[d->sel]].value_038 = 1;
 }

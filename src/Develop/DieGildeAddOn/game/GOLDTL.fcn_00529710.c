@@ -1,6 +1,6 @@
 extern unsigned char* lpGebaeudePROT;
 extern char g_10432c0[];
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 
@@ -16,7 +16,7 @@ int __cdecl fcn_00529710(char* a, unsigned char* b)
 	char* x;
 
 	r = 650.0f;
-	if (lpGebaeudePROT[*b * 0x24d] == 10) {
+	if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*b].category == 10) {
 		r = 1950.0f;
 	}
 	d = *(char**) (a + 0x3b);

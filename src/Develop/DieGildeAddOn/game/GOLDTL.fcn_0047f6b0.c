@@ -1,11 +1,11 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/goods_plan.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 /* g_100d0c0: 0x58-byte object records.  The four dwords at +4 select the
  * building instances; +0x54 carries the state flags. */
 #pragma pack(push, 1)
 #include "production_goods.h"
-
 
 
 
@@ -171,7 +171,7 @@ int __cdecl fcn_0047f6b0(char* a)
 	h = *(char**) (a + 0x16c);
 	q = 0;
 	if ((*(unsigned char*) (a + 0x1c8) & 0x10) == 0) {
-		if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) h].kind != 0xb) {
+		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) h].category != 0xb) {
 			q = fcn_00502cd0(*(int*) (t1 + 0x14), 1, 4, 0x17);
 			if (q == 0) {
 				*(int*) (a + 0x1c8) |= 0x10;
@@ -233,7 +233,7 @@ found:
 	if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].min_2) {
 		goto scan;
 	}
-	if (g_100d0c0[i].unk_40 < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36) {
+	if (g_100d0c0[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
 		goto scan;
 	}
 	v = (int) fcn_00503d10(g_100d0c0[i].goods_id);
@@ -241,15 +241,15 @@ found:
 		goto scan;
 	}
 	t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].goods_id, 0xf4240);
-	if (t < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36 + g_100d0c0[i].unk_3c) {
+	if (t < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036 + g_100d0c0[i].unk_3c) {
 		goto scan;
 	}
-	if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
+	if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
 		q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].goods_id);
 		if (q == 0) {
 			goto scan;
 		}
-		if (*(int*) (q + 0xe) < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36) {
+		if (*(int*) (q + 0xe) < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
 			goto scan;
 		}
 		g_100d0c0[i].flags |= 8;
@@ -275,7 +275,7 @@ scan:
 		if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].min_2) {
 			continue;
 		}
-		if (g_100d0c0[i].unk_40 < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36) {
+		if (g_100d0c0[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
 			continue;
 		}
 		v = (int) fcn_00503d10(g_100d0c0[i].goods_id);
@@ -283,10 +283,10 @@ scan:
 			continue;
 		}
 		t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].goods_id, 0xf4240);
-		if (t < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36 + g_100d0c0[i].unk_3c) {
+		if (t < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036 + g_100d0c0[i].unk_3c) {
 			continue;
 		}
-		if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].kind != 0x17) {
+		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].kind != 0x17) {
 			if (fcn_00486640(a, (int*) &g_100d0c0[i], 1)) {
 				g_100d0c0[i].flags |= 8;
 				fcn_004868d0(a, (int*) &g_100d0c0[i]);
@@ -298,7 +298,7 @@ scan:
 		if (q == 0) {
 			continue;
 		}
-		if (*(int*) (q + 0xe) < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36) {
+		if (*(int*) (q + 0xe) < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
 			continue;
 		}
 		g_100d0c0[i].flags |= 8;
@@ -320,7 +320,7 @@ after:
 		if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].min_2) {
 			continue;
 		}
-		if (g_100d0c0[i].unk_40 < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36) {
+		if (g_100d0c0[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
 			continue;
 		}
 		v = (int) fcn_00503d10(g_100d0c0[i].goods_id);
@@ -328,10 +328,10 @@ after:
 			continue;
 		}
 		t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].goods_id, 0xf4240);
-		if (t < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36 + g_100d0c0[i].unk_3c) {
+		if (t < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036 + g_100d0c0[i].unk_3c) {
 			continue;
 		}
-		if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
+		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
 			g_100d0c0[i].flags |= 0x10;
 			break;
 		}
@@ -345,13 +345,13 @@ after:
 		if ((g_100d0c0[i].flags & 8) == 0) {
 			continue;
 		}
-		if (((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
-			if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) h].kind == 0xb) {
+		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
+			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) h].category == 0xb) {
 				g_100d0c0[i].flags |= 0x10;
 			} else {
 				q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].goods_id);
 				if (q == 0
-				    || *(int*) (q + 0xe) < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f36) {
+				    || *(int*) (q + 0xe) < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
 					g_100d0c0[i].flags =
 					    (g_100d0c0[i].flags & ~8) | 0x10;
 				}
@@ -359,7 +359,7 @@ after:
 		} else {
 			for (j = 0; j != 4; j++) {
 				if (g_100b0c0[g_100d0c0[i].building_indices[j]].stock
-				    < (int) ((ItemDef*) lpObjektePROT)[g_100d0c0[i].goods_id].f26) {
+				    < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].ingredient_amounts[0]) {
 					g_100d0c0[i].flags &= ~8;
 				}
 			}
@@ -398,7 +398,7 @@ after:
 				st.want++;
 			}
 			if (*f & 0x10) {
-				if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) h].kind != 0xb) {
+				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) h].category != 0xb) {
 					st.want++;
 				}
 			}
@@ -419,7 +419,7 @@ after:
 	st.self = a;
 	st.total = 0;
 	st.sent = 0;
-	if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) h].kind != 0xb) {
+	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) h].category != 0xb) {
 		goto ltail;
 	}
 	if ((unsigned short) g_7f4c04 % 2 == 0) {
@@ -447,11 +447,11 @@ after:
 		}
 		for (i = 0; i < g_100b0ac * 4; i++) {
 			j = gm_RandomMod(g_100b0ac) & 0xffff;
-			if (((ItemDef*) lpObjektePROT)[g_100d0c0[j].goods_id].kind == 0x17) {
+			if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[j].goods_id].kind == 0x17) {
 				break;
 			}
 		}
-		if (((ItemDef*) lpObjektePROT)[g_100d0c0[j].goods_id].kind != 0x17) {
+		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[j].goods_id].kind != 0x17) {
 			goto lflag;
 		}
 		g = plt_FindPlantInfo(g_100d0c0[j].goods_id);
@@ -480,16 +480,16 @@ ltail:
 		rec = (char*) &g_100d0c0[0];
 		for (i = 0; i < g_100b0ac; i++) {
 			if (((PRODUCTION_GOODS_RECORD*) rec)->flags & 0x10) {
-				if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].kind != 0xb) {
+				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].category != 0xb) {
 					st.kind = 8;
 					st.rec = rec;
 					fcn_00487f90((int*) &st);
 				}
 			}
 			if (((PRODUCTION_GOODS_RECORD*) rec)->flags & 8) {
-					if (((ItemDef*) lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) rec)->goods_id].kind == 0x17) {
+					if (((OBJECT_PROTOTYPE*) lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) rec)->goods_id].kind == 0x17) {
 						st.rec = rec;
-						if (((Lvl*) lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].kind == 0xb) {
+						if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].category == 0xb) {
 							st.kind = 0x28;
 							fcn_00487f90((int*) &st);
 						} else {

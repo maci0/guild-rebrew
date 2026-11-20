@@ -1,5 +1,5 @@
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 #pragma pack(push, 2)
@@ -72,27 +72,27 @@ void __cdecl fcn_004c4ef0(char*);
 
 void __cdecl gm_BuyBuilding(int search, int buyer, int price, Order* o, int notify)
 {
-	Office* office;
+	BUILDING_PROTOTYPE* office;
 	char msg[0x100];
 	Estate* s;
 	Unit* u;
 
 	s = gm_StartFilteredEntitySearch(1, 1, search);
 	u = gm_LookupEntityRecordById(buyer);
-	office = &((Office*)lpGebaeudePROT)[s->office];
+	office = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[s->office];
 	fcn_004c4eb0("buy_building");
 	if (s->slot != 0xffff) {
 		io_FormatTextBuffer(msg, 0x17e6, s, u->slot, price);
 		he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[s->slot].entity_id, -1, msg, 0, 0x5ff, s->id, -1, 0, "_NACHRICHTEN_HS_30");
 		fcn_004c51a0(((ENTITY_RECORD*)g_7f4ca0)[s->slot].entity_id, buyer, (*(char*)&g_773d75), price);
 		fcn_004c5f60(s->id, u->id, u->id);
-		if (notify != 0 && office->kind == 2) {
+		if (notify != 0 && office->category == 2) {
 			fcn_004c6000(u->id, s->id);
 		}
 	} else {
 		fcn_004c5150(-1, buyer, (*(char*)&g_773d75), price);
 		fcn_004c5f60(s->id, u->id, u->id);
-		if (notify != 0 && office->kind == 2) {
+		if (notify != 0 && office->category == 2) {
 			fcn_004c6000(u->id, s->id);
 		}
 	}

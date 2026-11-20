@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 extern int g_7746a0;
@@ -18,7 +18,7 @@ void __cdecl fcn_005a9120(int a)
 
 	fcn_005338a0();
 	while (fcn_005373e0(fcn_005a9120, 0x67fff) != 0) {
-		if (g_7f4ca0[g_774970 * 540 + 0x166] != 0) {
+		if (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])[0x166] != 0) {
 			x = RegisterStatusText(g_6aae28, g_14abb58, 0x16);
 		}
 		else {

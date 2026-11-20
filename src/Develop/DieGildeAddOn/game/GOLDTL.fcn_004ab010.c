@@ -4,7 +4,7 @@ typedef struct Kind {
 	char pad248[0x24d - 0x248];
 } Kind;
 // SIZE 0x24d
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
 
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id, int c, int d);
@@ -20,7 +20,7 @@ int __cdecl fcn_004ab010(unsigned short* e, char* o1, char* o2)
 	char* q;
 
 	for (s = gm_StartFilteredEntitySearch(2, 4, *e, 5, 0x16); s; s = gm_FindNextFilteredEntity()) {
-		if (((Kind*)lpGebaeudePROT)[*(unsigned char*) s].cap > 1) {
+		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) s].level > 1) {
 			q = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0x120);
 			if (q && fcn_00502cd0(*(int*) (q + 0x14), 1, 0, 0x12c) && !he_StartHandlungSearch(2, 0, 0x74, 3, *(int*) (s + 1))) {
 				o1[0] = 4;

@@ -1,5 +1,5 @@
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char g_7747b0;
 extern unsigned char* lpGebaeudePROT;
 extern float g_696540[4];
@@ -57,7 +57,7 @@ int __cdecl fcn_0050c830(Time* start, Time* end, char* building)
 		return gm_GetElapsedMinutes((TimeKey*) start, (TimeKey*) end);
 	}
 	if (building != 0) {
-		if (lpGebaeudePROT[*(unsigned char*) building * 0x24d] == 0x1d) {
+		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) building].category == 0x1d) {
 			return gm_GetElapsedMinutes((TimeKey*) start, (TimeKey*) end);
 		}
 	}

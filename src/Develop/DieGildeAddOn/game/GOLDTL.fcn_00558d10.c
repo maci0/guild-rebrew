@@ -1,5 +1,5 @@
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
@@ -29,7 +29,7 @@ void __cdecl fcn_00558d10(char* e)
 		p = lpGebaeudeINST + idx * 0xa9;
 		bit_hi = 0;
 		bit_lo = 0;
-		c = *(unsigned char*) (lpGebaeudePROT + (unsigned int) *(unsigned char*) p * 0x24d);
+		c = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[(unsigned int) *(unsigned char*) p].category;
 		if (c > 31) {
 			bit_hi = 1U << ((c - 32) & 31);
 		} else {

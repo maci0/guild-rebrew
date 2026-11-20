@@ -39,7 +39,7 @@ void __cdecl d2_HandleTalentLevelDialog(Panel* p)
 	int v;
 
 	id = (int) p->id;
-	rec = &((ENTITY_RECORD*)g_7f4ca0)[id];
+	rec = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]);
 	if (g_774970 != p->id) {
 		return;
 	}

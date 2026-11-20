@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 extern char g_773d75;
@@ -64,8 +64,8 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 	i = 0;
 	do {
 		if (lpGebaeudeINST[i] != 0) {
-			p = lpGebaeudePROT + lpGebaeudeINST[i] * 0x24d;
-			v12[fcn_00507910(*p)]++;
+			p = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[lpGebaeudeINST[i]];
+			v12[fcn_00507910(((BUILDING_PROTOTYPE*)p)->category)]++;
 		}
 		i += 0xa9;
 	} while (i < 0xa900);

@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 #include "client_types.h"
@@ -28,8 +28,8 @@ void __cdecl fcn_0056c8f0(char* u)
 	n = 0;
 	m = 1;
 	for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
-		t = ((char*)lpGebaeudePROT) + *(unsigned char*) e * 0x24d;
-		if (gm_CheckEntityType(e) == 0 && fcn_00505340(e) == 0 && *(char**) (e + 0x61) != 0 && *t != 3) {
+		t = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) e];
+		if (gm_CheckEntityType(e) == 0 && fcn_00505340(e) == 0 && *(char**) (e + 0x61) != 0 && ((char)(((BUILDING_PROTOTYPE*)t)->category)) != 3) {
 			list[n++] = e;
 		}
 	}

@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 // SIZE 0x21c
@@ -71,7 +71,7 @@ void __cdecl fcn_00564210(char* e)
 		return;
 	case 1:
 		t = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
-		if (t != 0 && ((struct good*)lpGebaeudePROT)[*t].kind != 0xf) {
+		if (t != 0 && ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*t].category != 0xf) {
 			for (i = 0; i < 768; i++) {
 				if ((((struct house*)g_7f4ca0)[i].type == 6 || ((struct house*)g_7f4ca0)[i].type == 7) && ((struct house*)g_7f4ca0)[i].id != *(unsigned short*) (t + 0x27)) {
 					io_FormatTextBuffer(buf, 0x1c52, *(unsigned short*) (t + 0x27), t);

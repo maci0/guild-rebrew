@@ -23,7 +23,7 @@ extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_7746f8;
 #include "client_dialog_state.h"
-extern int g_1015ea0;
+extern char* g_1015ea0;
 extern int g_10162e8;
 extern int g_10162ec;
 extern int g_10162f0;
@@ -50,7 +50,7 @@ void __cdecl fcn_004c5530(void* a);
 void __cdecl fcn_0050bc10(int a, unsigned char b, char* c);
 void __cdecl fcn_0046ed00(int a, int b, int c);
 int __cdecl fcn_005373e0(int a, int b);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00599b00 */
 void __cdecl fcn_00599b00(void)
 {
@@ -112,29 +112,29 @@ void __cdecl fcn_00599b00(void)
 		raw = fcn_0046f740(ofs + 0x30, row - 0x30, cat + 0x427,
 		    d2_CurrentWindowId);
 		raw *= 0x2f4;
-		*(int*) (raw + 0x5c + g_1015ea0) = 1;
-		*(int*) (raw + 0x1d0 + g_1015ea0) = 3;
+		(*(D2_CONTROL_TL*) ((char*) (g_1015ea0) + raw)).value_05c = 1;
+		(*(D2_CONTROL_TL*) ((char*) (g_1015ea0) + raw)).flags_1d0 = 3;
 		src = *(char**) (cat * 0x38 + 0x14a6558);
-		dst = (char*) (raw + 0xcc + g_1015ea0);
+		dst = (char*) ((char*) &(*(D2_CONTROL_TL*) ((char*) (g_1015ea0) + raw)) + 0xcc);
 		do {
 			c = *src++;
 			*dst++ = c;
 		} while (c != 0);
-		*(int*) (raw + 0x1cc + g_1015ea0) = 0x54;
+		(*(D2_CONTROL_TL*) ((char*) (g_1015ea0) + raw)).value_1cc = 0x54;
 		fcn_0050bc10(cost, g_773d75, key);
 		ent = fcn_0046fac0(ofs + 2, row, 0x6b5c60, d2_CurrentWindowId);
 		d2_SetElementFont(ent, 0x54);
 		fcn_0046f940(ent, key);
 		ofs += 0x60;
-		*(int*) (ent * 0x2f4 + 0x18 + g_1015ea0) = 0x8c;
-		*(int*) (ent * 0x2f4 + 0x6c + g_1015ea0) = 1;
+		((D2_CONTROL_TL*) (g_1015ea0))[ent].width = 0x8c;
+		((D2_CONTROL_TL*) (g_1015ea0))[ent].value_06c = 1;
 	}
 	for (;;) {
 		if (g_100f1dc >= 0x427 && g_100f1dc <= 0x47f) {
 			i = g_100f1dc - 0x427;
 			if (selected != -1) {
-				*(int*) (selected * 0x2f4 + 0x38 + g_1015ea0) = 0;
-				*(int*) (selected * 0x2f4 + 0x3c + g_1015ea0) = 0;
+				((D2_CONTROL_TL*) (g_1015ea0))[selected].value_038 = 0;
+				((D2_CONTROL_TL*) (g_1015ea0))[selected].value_03c = 0;
 			}
 			selected = d2_CurrentElementId;
 			ent = fcn_00526070(query, *(int*) (query + 0x14),

@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 extern unsigned char* lpGebaeudePROT;
@@ -15,7 +15,7 @@ void __cdecl fcn_00505c80(unsigned char* e)
 	int i;
 
 	n = 0;
-	if (lpGebaeudePROT[e[0] * 0x24d] == 2) {
+	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[e[0]].category == 2) {
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 1, 4, 2);
 		while (q != 0) {
 			list[n++] = q;

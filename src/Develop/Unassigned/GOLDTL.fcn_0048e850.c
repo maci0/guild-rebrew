@@ -6,7 +6,7 @@ int __cdecl fcn_0050b810(int a, char b);
 int __cdecl fcn_004a4bb0(int action, char* e, int a, char* b, char* c, int d);
 int __cdecl ai_StartKreditNehmen(int a, char* e, int b, char* out1, char* out2);
 int __cdecl _ftol(void);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
 typedef struct { unsigned char unknown00[0x247]; unsigned char level; unsigned char unknown248[5]; } BUILDING_ROW;
 typedef struct Rec6 {
@@ -31,7 +31,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 			if (he_StartHandlungSearch(2, 0, 0xd, 2, *(unsigned short*) e) == 0) {
 				if (ent != 0) {
 					c = (int) *(unsigned char*) ent;
-					if (((BUILDING_ROW*)lpGebaeudePROT)[c].level < 3
+					if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[c].level < 3
 						&& (*(unsigned char*) (ent + 0x5a) & 0x41) == 0) {
 						*(int*) (rec2.v + 1) = c + 1;
 						*(int*) (rec2.v + 2) = 1;

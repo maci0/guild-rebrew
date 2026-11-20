@@ -85,7 +85,7 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 	list = d2_CreateRadioGroup(0);
 	for (i = 0; i < ((Screen*)g_77255c)->count; i++) {
 		k = ((Screen*)g_77255c)->ids[i];
-		if (((Obj2f4*)g_1015ea0)[k].kind != 0x40) {
+		if (((D2_CONTROL_TL*)g_1015ea0)[k].kind != 0x40) {
 			fcn_00469470(list, k);
 		}
 	}

@@ -25,7 +25,7 @@ void __cdecl he_OpenProfessionHelpEvents(char* o)
 {
 	int k;
 
-	k = gm_MapEntityStatRange(((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_164);
+	k = gm_MapEntityStatRange(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->unk_164);
 	if (k == 1 || k == 2 || k == 3) {
 		he_OpenHelpEvents("help_events_hw");
 	} else if (k == 5 || k == 6) {

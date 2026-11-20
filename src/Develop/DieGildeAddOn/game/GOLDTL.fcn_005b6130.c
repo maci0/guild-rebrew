@@ -12,7 +12,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 char* __cdecl gm_EntityAccumulate(int entity);
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 void __cdecl fcn_00526920(char* text, int a2, int a3);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005b6130 */
 void __cdecl fcn_005b6130(int a0, char* a1)
 {
@@ -52,13 +52,13 @@ void __cdecl fcn_005b6130(int a0, char* a1)
                     *(int*) (v4 * 4 + 0x777cd0) == -1) {
                     v3 = fcn_0046f740(0, v7, 5, d2_CurrentWindowId);
                     *(int*) (v4 * 4 + 0x777cd0) = v3;
-                    *(unsigned int*) (g_1015ea0 + 0x5c + v3 * 0x2f4) = 1;
-                    *(char**) (g_1015ea0 + 0x2f0 +
-                               *(int*) (v4 * 4 + 0x777cd0) * 0x2f4) = v2;
+                    *(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[v3].value_05c) = 1;
+                    *(char**) (&((D2_CONTROL_TL*) g_1015ea0)[
+                               *(int*) (v4 * 4 + 0x777cd0)].associated_object) = v2;
                     d2_SetElementFont(*(unsigned int*) (v4 * 4 + 0x777cd0),
                                  0x56);
-                    *(unsigned int*) (g_1015ea0 + 0x1d0 +
-                                      *(int*) (v4 * 4 + 0x777cd0) * 0x2f4) = 3;
+                    *(unsigned int*) (&((D2_CONTROL_TL*) g_1015ea0)[
+                                      *(int*) (v4 * 4 + 0x777cd0)].flags_1d0) = 3;
                 }
                 v3 = *(int*) (v4 * 4 + 0x777cd0);
                 if (v3 != -1) {
@@ -75,8 +75,8 @@ void __cdecl fcn_005b6130(int a0, char* a1)
         do {
             v4 = *v6;
             if (v4 != -1 && d2_CurrentElementId == v4) {
-                fcn_00526920(*(char**) (g_1015ea0 + 0x2f0 +
-                                        v4 * 0x2f4),
+                fcn_00526920(*(char**) (&((D2_CONTROL_TL*) g_1015ea0)[
+                                        v4].associated_object),
                              -1, 0x6b5c60);
             }
             v6 += 1;

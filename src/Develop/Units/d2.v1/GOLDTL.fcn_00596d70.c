@@ -56,7 +56,7 @@ int __cdecl fcn_00471f80(int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl fcn_00469c40(int, int, int);
 int __cdecl sprintf(char*, const char*, ...);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00596d70 */
 void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
                           unsigned int flags, unsigned char* p)
@@ -84,7 +84,7 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 				d2_SetElementFont(r->icon, 0x54);
 			} else {
 				r->icon = fcn_0046f740(r->x + 0xf, r->y + 6, r->id + 0xdf, d2_CurrentWindowId);
-				*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x5c) = 1;
+				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_05c = 1;
 			}
 		}
 		if (r->icon2 == -1) {
@@ -108,9 +108,9 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 			} else {
 				fcn_0046f940(r->text1, text);
 			}
-			*(int*) (g_1015ea0 + r->text1 * 0x2f4 + 0x18) = 0x2d;
-			*(int*) (g_1015ea0 + r->text1 * 0x2f4 + 0x84) = 0x54;
-			*(int*) (g_1015ea0 + r->text1 * 0x2f4 + 0x70) = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[r->text1].width = 0x2d;
+			((D2_CONTROL_TL*) (g_1015ea0))[r->text1].font = 0x54;
+			((D2_CONTROL_TL*) (g_1015ea0))[r->text1].value_070 = 1;
 		}
 		if (flags & 1) {
 			if (*p == 0x47) {
@@ -124,9 +124,9 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 			} else {
 				fcn_0046f940(r->text2, text);
 			}
-			*(int*) (g_1015ea0 + r->text2 * 0x2f4 + 0x18) = 0x2d;
-			*(int*) (g_1015ea0 + r->text2 * 0x2f4 + 0x84) = 0x54;
-			*(int*) (g_1015ea0 + r->text2 * 0x2f4 + 0x70) = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[r->text2].width = 0x2d;
+			((D2_CONTROL_TL*) (g_1015ea0))[r->text2].font = 0x54;
+			((D2_CONTROL_TL*) (g_1015ea0))[r->text2].value_070 = 1;
 		}
 		obj = (char*) he_StartHandlungSearch(2, 0, 4, 3, *(unsigned int*) (p + 1));
 		while (obj != 0) {
@@ -146,14 +146,14 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 		}
 		if (obj != 0 && (*(int*) (obj + 0x14) != 0 || *(int*) (obj + 0x18) != 0)) {
 			if (*obj == 4) {
-				*(float*) (g_1015ea0 + r->icon * 0x2f4 + 0x1f4) =
+				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1f4.real =
 					1.0 - *(float*) (obj + 0xb4) / *(float*) (obj + 0xb8);
 			} else if (*obj == 3) {
-				*(float*) (g_1015ea0 + r->icon * 0x2f4 + 0x1f4) =
+				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1f4.real =
 					1.0 - *(int*) (obj + 0xb0) / *(float*) (obj + 0xb4);
 			}
 		} else if (r->icon != -1) {
-			*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x1f4) = 0;
+			((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1f4.bits = 0;
 		}
 		if (makeIcon) {
 			v = fcn_00471f80(r->icon);
@@ -167,9 +167,9 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 			n = n < 0 ? 0 : n;
 			d2_SetElementValue(r->icon, 0, n, v);
 			if (r->f30) {
-				*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x60) = 0;
+				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_060 = 0;
 			} else {
-				*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x60) = 1;
+				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_060 = 1;
 			}
 			v = fcn_00471f80(r->icon);
 			if (v < 0) {
@@ -178,16 +178,16 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 			d2_SetElementValue(r->title, 0, r->f34, r->f30 - v, r->f2c);
 		} else {
 			if (r->f30) {
-				*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x60) = 0;
+				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_060 = 0;
 			} else {
-				*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x60) = 1;
+				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_060 = 1;
 			}
 			d2_SetElementValue(r->title, 0, r->f34, r->f30, r->f2c);
 		}
-		*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x1d0) = 0x22;
-		*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x1dc) = 4;
-		*(int*) (g_1015ea0 + r->icon * 0x2f4 + 0x1e0) = 0;
-		sprintf(g_1015ea0 + r->icon * 0x2f4 + 0xcc, "%s~ %li %s",
+		((D2_CONTROL_TL*) (g_1015ea0))[r->icon].flags_1d0 = 0x22;
+		((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1dc = 4;
+		((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1e0 = 0;
+		sprintf((char*) &((D2_CONTROL_TL*) g_1015ea0)[r->icon] + 0xcc, "%s~ %li %s",
 				((unsigned int*) g_14a79c0)[r->id * 2], r->f30, *(char**) 0x14b52c0);
 		if (r->icon >= 0) {
 			fcn_00469c40(w->left + r->x + 0xf, w->top + r->y + 6, r->icon);

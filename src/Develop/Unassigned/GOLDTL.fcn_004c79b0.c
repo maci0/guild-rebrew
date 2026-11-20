@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 // SIZE 0x21c
@@ -31,7 +31,7 @@ int __cdecl fcn_004c79b0(char* o, char* out)
 				fcn_004f22e0(h, obj, *val, fcn_004f1790(*(int*) (obj + 0x65), val));
 			}
 			out[1] = 1;
-			*(Rec21c**) (out + 6) = &((Rec21c*)g_7f4ca0)[idx];
+			*(Rec21c**) (out + 6) = ((Rec21c *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]);
 		} else {
 			out[1] = 0;
 			*(int*) (out + 6) = 0;

@@ -17,7 +17,7 @@ int __cdecl fcn_0050dfd0(char* a1, int a2);
 int __cdecl gm_GetMsgField(char* msg, char* pkt);
 u16* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_00471f80(int id);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00597bb0 */
 int __cdecl fcn_00597bb0(char* ep)
 {
@@ -83,7 +83,7 @@ int __cdecl fcn_00597bb0(char* ep)
     for (j = 0; b == 0 && j < 16; j++) {
         id = g_778da0[j].x10;
         if (id != -1) {
-            if (*(int*)((int) g_1015ea0 + 756 * id + 0x20) == 0x41) {
+            if (((D2_CONTROL_TL*) ((int) g_1015ea0))[id].kind == 0x41) {
                 if (fcn_00471f80(id))
                     b = 1;
             }

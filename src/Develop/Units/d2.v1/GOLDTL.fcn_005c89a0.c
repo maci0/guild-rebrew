@@ -88,7 +88,7 @@ int __cdecl fcn_005c89a0(void)
 				g_777d00[n].btn = fcn_0046f740(0, n * 0x3e, *e + 0x427, d2_CurrentWindowId);
 				io_FormatTextBuffer(buf, g_6ac870, *e * 14 + 0x48e, e + 5);
 				g_777d00[n].name_text = d2_ShowTxt(0x40, n * 0x3e + 8, buf, d2_CurrentWindowId);
-				((Font5c89*)g_1015ea0)[g_777d00[n].name_text].w = 0xa0;
+				(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_777d00[n].name_text].width) = 0xa0;
 				d2_SetElementFont(g_777d00[n].name_text, 0x54);
 				io_FormatTextBuffer(buf, g_68be7c, *(int*) (m + 0x1b8));
 				g_777d00[n].value_text = d2_ShowTxt(0x180, n * 0x3e + 0x14, buf, d2_CurrentWindowId);

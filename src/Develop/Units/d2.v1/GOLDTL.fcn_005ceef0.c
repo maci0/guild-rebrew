@@ -6,7 +6,7 @@ extern char g_773d75;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_aed32c;
 
 extern int g_14a90a0;
@@ -165,8 +165,8 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 				if (d2_CurrentElementId == v23) {
 					v2 = *v21;
 					*v21 = (v2 == 0);
-					*(unsigned int*) (g_1015ea0 + 0x38
-						+ v23 * 0x2f4) = (v2 != 0);
+					*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[v23].value_038
+						 = (v2 != 0);
 					fcn_00472640(*(unsigned int*) ((char*) v12 + v8),
 						*v21 == 0);
 				}

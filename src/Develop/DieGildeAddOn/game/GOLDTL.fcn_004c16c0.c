@@ -13,7 +13,7 @@ extern void fcn_004193c0(int a, int b);
 extern int msx_SetTrackVolume(int handle, int value);
 extern int msx_StartAmbientTrack(char *name, int value);
 extern void msx_StopAmbientTrack(int handle);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char *g_6b8300;
 extern unsigned char g_772d10;
 extern volatile int g_6b7fac;
@@ -267,7 +267,7 @@ join:
 		*(int *) (v2 + 0x681880) = v5;
 	}
 	if (g_7746c4 != 0 && g_772d10 != 0) {
-		c = *(unsigned char *) (lpGebaeudePROT + (unsigned) *g_7746c4 * 0x24d);
+		c = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned) *g_7746c4].category;
 		if (c == 0x16 && g_7746cc != 0 && *g_7746cc == 0x120) {
 			if (g_772d50 == 0) {
 				i = msx_StartAmbientTrack(s_689dfc, 5);

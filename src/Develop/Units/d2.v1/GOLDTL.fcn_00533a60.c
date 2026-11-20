@@ -1,5 +1,5 @@
 #include <string.h>
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_0046b520(char* s, int v);
 int __cdecl fcn_00468df0(int x, int a2, int a3, char* buf, int a5);
@@ -47,7 +47,7 @@ void __cdecl fcn_00533a60(int windowId, int a2, int* out, int count, ...)
         for (i = 0; i < count; i++) {
             id = fcn_00468df0(start, a2, 0xbf, buf[i], windowId);
             out[i] = id;
-            *(int*) (g_1015ea0 + id * 0x2f4 + 0x84) = 0x53;
+            *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].font)) = 0x53;
             fcn_00469110(id, max);
             start += step;
         }

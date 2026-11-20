@@ -1,6 +1,6 @@
 #include "client_packet_builder.h"
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* SIZE 0x21c */
 struct house {
 	unsigned short id;
@@ -47,7 +47,7 @@ void __cdecl fcn_00560eb0(char* e)
 	char* r;
 	char* s;
 	unsigned char* p;
-	struct race* row;
+	BUILDING_PROTOTYPE* row;
 	unsigned char add;
 	unsigned char type;
 	float skill;
@@ -97,8 +97,8 @@ void __cdecl fcn_00560eb0(char* e)
 		if (r != 0 && (r[0x1b4] & 1)) {
 			goto tail;
 		}
-		row = (struct race*) lpGebaeudePROT + (unsigned char) *q;
-		type = *(unsigned char*) row;
+		row = (BUILDING_PROTOTYPE*) lpGebaeudePROT + (unsigned char) *q;
+		type = row->category;
 		s = 0;
 		if (type == 4) {
 			s = fcn_00502cd0(*(int*) (q + 0x5d), 1, 0, 0x60);

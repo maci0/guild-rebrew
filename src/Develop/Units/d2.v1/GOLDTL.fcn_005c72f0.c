@@ -18,7 +18,7 @@ extern int g_14ce8cc;          /* 0x014ce8cc */
 extern int g_14ce8e0;          /* 0x014ce8e0 */
 extern int d2_HoveredWindow;          /* 0x0100f894 */
 extern int g_100f1dc;          /* 0x0100f1dc */
-extern int g_1015ea0;          /* 0x01015ea0 */
+extern char* g_1015ea0;          /* 0x01015ea0 */
 extern int d2_CurrentElementId;           /* 0x0067d370 */
 extern int d2_CurrentWindowId;           /* 0x00772514 */
 extern unsigned char g_773d75; /* 0x00773d75 */
@@ -64,7 +64,7 @@ void __cdecl fcn_00532ef0(void);
 int __cdecl CountDisplayCounters(void);
 void __cdecl ResetDisplayCounters(void);
 int __cdecl __itoa(int, char*, int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c72f0 */
 int __cdecl fcn_005c72f0(int objectArg)
 {
@@ -124,7 +124,7 @@ int __cdecl fcn_005c72f0(int objectArg)
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x72f, 0);
 	fcn_00533f40(0x270, 0x15c, d2_CurrentWindowId,
 			fcn_00472830(win, 2, 0x78, v10, v9buf, &v8));
-	*(int*) (g_1015ea0 + 0x84 + v8 * 0x2f4) = 0x54;
+	((D2_CONTROL_TL*) (g_1015ea0))[v8].font = 0x54;
 	def = g_item_def_table + (unsigned int) *p * 0x41;
 	v16 = win * 0xaf;
 label_5c7466:

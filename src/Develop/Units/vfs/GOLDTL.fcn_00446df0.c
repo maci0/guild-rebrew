@@ -1,7 +1,7 @@
 // SIZE 0xc
 #include "client_types.h"
 typedef VECTOR3 Vec3;
-
+#include "Develop/Units/d3/d3_object.h"
 // SIZE 0xc
 typedef struct {
 	int color;
@@ -65,13 +65,13 @@ void __cdecl fcn_00446df0(const char* name, void* stream)
 		fcn_004011d0(s, &g);
 		fcn_00438920(f, g, color);
 		for (i = 0; i < n; i++) {
-			fcn_00401280(s, &((Slot*)g_1041d80)[i].a);
-			fcn_00401280(s, &((Slot*)g_1041d80)[i].b);
+			fcn_00401280(s, &((D3_SCENE_SLOT*)g_1041d80)[i].a);
+			fcn_00401280(s, &((D3_SCENE_SLOT*)g_1041d80)[i].b);
 			for (k = 0; k < 6; k++) {
 				fcn_004011f0(s, &col);
-				((Slot*)g_1041d80)[i].pal[k].color = col;
-				fcn_004011d0(s, &((Slot*)g_1041d80)[i].pal[k].f4);
-				fcn_004011d0(s, &((Slot*)g_1041d80)[i].pal[k].f8);
+				((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].color = col;
+				fcn_004011d0(s, &((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f4);
+				fcn_004011d0(s, &((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f8);
 			}
 		}
 		vfs_ReadByte(s, &more);

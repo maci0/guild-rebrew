@@ -3,7 +3,7 @@ extern unsigned char g_773d75;
 extern char* g_1043370;
 extern int g_772900;
 extern int g_6816d8;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern IdSlot10058a0 g_10058a0[8];
 
 typedef struct MapPos {
@@ -60,7 +60,7 @@ int __cdecl fcn_004be3d0(int* a0, char* a1, char* a2, char* a3)
 	v = fcn_0046f740((int) p.x - 0x20, (int) p.y - 0x20, v, a0[2]);
 	n = g_772900;
 	g_10058a0[n].id = v;
-	*(int*) (g_1015ea0 + v * 0x2f4 + 0x58) = 1;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v].value_058)) = 1;
 	if (g_6816d8 == -1) {
 		g_6816d8 = d2_CreateRadioGroup(1, g_10058a0[g_772900].id);
 	} else {

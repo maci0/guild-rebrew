@@ -7,7 +7,8 @@
  * frame with 8-byte stack alignment). Block comments use native offsets.
  * Special request type 0x116 delegates to ai_MeisterTradeAllgemein.
  */
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include <stdio.h>
 #include <string.h>
 extern int gm_GameTime, g_7f4c04, g_7f4c08, g_772620; extern unsigned short g_7f4c0c;
@@ -38,7 +39,6 @@ typedef struct {
 	int f88[4];			/* +0x88 */
 	char pad98[0xf8 - 0x98];
 } Msg;
-
 /* Producer record, 0x40 bytes. */
 typedef struct {
 	int id;				/* +0x00 */
@@ -176,7 +176,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 			continue;
 		}
 		if (pr->qty28 > fcn_0050dfd0(bld, pr->id) / 3) {
-			if (((BuildingRow489a70*) lpGebaeudePROT)[(unsigned char) *(*(char**)(o + 0x16c))].kind == 0x16) {
+			if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *(*(char**)(o + 0x16c))].category == 0x16) {
 				pr->qty18 = pr->qty28 / 2;
 			} else {
 				pr->qty18 = pr->qty28;
@@ -209,8 +209,8 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 							sprintf(v.line,
 							    (char*) 0x67e708,
 							    t->qty44,
-							    lpObjektePROT +
-							    t->id * 0x41 + 1);
+							    (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[
+							    t->id] + 1);
 						}
 					}
 				} else {
@@ -224,8 +224,8 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 							sprintf(v.line,
 							    (char*) 0x67e6cc,
 							    t->qty44,
-							    lpObjektePROT +
-							    t->id * 0x41 + 1);
+							    (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[
+							    t->id] + 1);
 						}
 					}
 				}
@@ -271,8 +271,8 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 				if (o == g_100e748) {
 					sprintf(v.line, (char*) 0x67e6ac,
 					    t->qty44,
-					    lpObjektePROT +
-					    t->id * 0x41 + 1);
+					    (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[
+					    t->id] + 1);
 				}
 			}
 
@@ -297,8 +297,8 @@ dump_stock:
 				if (o == g_100e748) {
 					sprintf(v.line, (char*) 0x67e674,
 					    t->qty44,
-					    lpObjektePROT +
-					    t->id * 0x41 + 1);
+					    (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[
+					    t->id] + 1);
 				}
 			}
 		}
@@ -333,7 +333,7 @@ dump_stock:
 	}
 
 	tp = *(char**) (o + 0x16c);
-	type = ((BuildingRow489a70*) lpGebaeudePROT)[(unsigned char) *tp].kind;
+	type = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *tp].category;
 	if (type == 0xd || type == 0xb || type == 0xc) {
 		/* 0x0420-0x04b7: drop town requests already being handled */
 		for (i = 0; i < g_100b0ac; i++) {
@@ -428,7 +428,7 @@ next_request:
 		}
 		id = v.s2.ids[i];
 		sprintf(v.line, (char*) 0x67e634, *(char**) (o + 0x16c) + 5,
-		    v.s2.vals[i], lpObjektePROT + id * 0x41 + 1);
+		    v.s2.vals[i], ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]) + 1);
 		pr = 0;
 		for (pp = (Prod*) 0x100b0c0; pp < (Prod*) 0x100d0c0 &&
 		    pr == 0; pp++) {
@@ -449,7 +449,7 @@ next_request:
 			}
 			sprintf(v.line, (char*) 0x67e600,
 			    *(char**) (o + 0x16c) + 5,
-			    lpObjektePROT + id * 0x41 + 1);
+			    ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]) + 1);
 			tmp = v.s1.caps[j] - v.s1.vals[j];
 			if (v.s2.vals[i] < tmp) {
 				tmp = v.s2.vals[i];
@@ -479,7 +479,7 @@ next_request:
 			}
 			sprintf(v.line, (char*) 0x67e5d0,
 			    *(char**) (o + 0x16c) + 5,
-			    lpObjektePROT + id * 0x41 + 1);
+			    ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]) + 1);
 			tmp = fcn_0050dfd0(bld, id);
 			if (v.s2.vals[i] < tmp) {
 				tmp = v.s2.vals[i];
@@ -512,7 +512,7 @@ next_request:
 			sprintf(v.line, (char*) 0x67e588,
 			    *(char**) (o + 0x16c) + 5,
 			    v.s1.vals[j],
-			    lpObjektePROT + id * 0x41 + 1);
+			    ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]) + 1);
 			price = (int) fcn_0050bb50(id, g_773d75);
 			sprintf(v.line, (char*) 0x67e358, -1,
 			    *(int*) (bld + 2), id, v.s1.vals[j],
@@ -547,7 +547,7 @@ no_market:
 		if (v.s2.vals[i] != 0) {
 			sprintf(v.line, (char*) 0x67e540,
 			    *(char**) (o + 0x16c) + 5, v.s2.vals[i],
-			    lpObjektePROT + id * 0x41 + 1);
+			    ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]) + 1);
 			price = (int) fcn_0050bb50(id, g_773d75);
 			sprintf(v.line, (char*) 0x67e358, -1,
 			    *(int*) (bld + 2), id, v.s2.vals[i], g_773d75,
@@ -727,8 +727,8 @@ next_auto:
 			if (!fcn_00503d10(pr->id)) {
 				sprintf(v.line, (char*) 0x67e4e8,
 				    *(char**) (o + 0x16c) + 5, pr->qty18,
-				    lpObjektePROT +
-				    pr->id * 0x41 + 1);
+				    (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[
+				    pr->id] + 1);
 				price = (int) fcn_0050bb50(pr->id,
 				    g_773d75);
 				sprintf(v.line, (char*) 0x67e358, -1,
@@ -811,16 +811,16 @@ next_auto:
 			for (i = 0; i < 3; i++) {
 				if (v.m.ids[i] != 0) {
 					sprintf(v.line, (char*) 0x67e4d8,
-					    lpObjektePROT +
-					    v.m.ids[i] * 0x41 + 1);
+					    (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[
+					    v.m.ids[i]] + 1);
 				}
 			}
 			for (i = 0; i < 3; i++) {
 				if (v.m.ids[3 + i] != 0) {
 					sprintf(v.line, (char*) 0x67e4b8,
 					    v.m.f88[i],
-					    lpObjektePROT +
-					    v.m.ids[3 + i] * 0x41 + 1);
+					    (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[
+					    v.m.ids[3 + i]] + 1);
 				}
 			}
 		}

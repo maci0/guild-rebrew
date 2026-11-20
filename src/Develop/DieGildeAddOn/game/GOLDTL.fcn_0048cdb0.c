@@ -5,7 +5,7 @@
  */
 #include <string.h>
 #include <stdio.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 typedef struct {
 	int x0;
 	int n;
@@ -133,14 +133,14 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 				for (idx = 0; idx < st.x0; idx++) {
 					if (st.x48[idx] == 0)
 						continue;
-					sprintf(line, (char*) 0x67e918, *(int*) (o + 0x16c) + 5, st.x68[idx], st.x48[idx] * 0x41 + 1 + lpObjektePROT);
+					sprintf(line, (char*) 0x67e918, *(int*) (o + 0x16c) + 5, st.x68[idx], (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[st.x48[idx]] + 1);
 					for (p = (int*) 0x100b0c0; p < (int*) 0x100d0c0; p += 0x10) {
 						if (*p == (int) st.x48[idx])
 							break;
 					}
 					if (st.x68[idx] == 0)
 						continue;
-					sprintf(line, (char*) 0x67e8c0, *(int*) (o + 0x16c) + 5, st.x68[idx], st.x48[idx] * 0x41 + 1 + lpObjektePROT);
+					sprintf(line, (char*) 0x67e8c0, *(int*) (o + 0x16c) + 5, st.x68[idx], (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[st.x48[idx]] + 1);
 					price = fcn_0050bb50((int) st.x48[idx], g_773d75);
 					sprintf(line, (char*) 0x67e358, -1, *(int*) (q + 2), (int) st.x48[idx], st.x68[idx], g_773d75, (double) (int) price);
 					fcn_004c51f0(-1, *(int*) (q + 2), (short) st.x48[idx], st.x68[idx], (char) g_773d75, (int) fcn_0050bb50((int) st.x48[idx], g_773d75));

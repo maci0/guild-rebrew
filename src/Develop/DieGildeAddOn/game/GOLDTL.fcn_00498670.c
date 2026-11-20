@@ -1,5 +1,5 @@
 #include "client_dialog_helpers.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #pragma optimize("y", off)
 
 extern float g_66414c;
@@ -71,12 +71,12 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 	idx = 0;
 	while (idx < 0xa900) {
 		if (lpGebaeudeINST[idx] != 0 && *(short *) (lpGebaeudeINST + idx + 0x27) == *ent) {
-			p = lpGebaeudePROT + (int) lpGebaeudeINST[idx] * 0x24d;
-			type = fcn_00507910(*p);
+			p = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(int) lpGebaeudeINST[idx]];
+			type = fcn_00507910(((BUILDING_PROTOTYPE*)p)->category);
 			if (type > 0 && type < 0x10) {
-				sum += p[0x247];
+				sum += ((BUILDING_PROTOTYPE*)p)->level;
 				count++;
-				if (p[0x247] == 1) {
+				if (((BUILDING_PROTOTYPE*)p)->level == 1) {
 					ones++;
 				}
 			}
@@ -91,8 +91,8 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 		if (other == 0) {
 			diff = 0;
 		} else if (*other != 7) {
-			diff = (int) lpGebaeudePROT[*other * 0x24d + 0x247] -
-				(int) lpGebaeudePROT[0xb7b] + 1;
+			diff = (int) ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*other].level -
+				(int) ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[4].level + 1;
 		} else {
 			diff = -1;
 		}
@@ -151,13 +151,13 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 		p = lpGebaeudeINST + idx;
 		if (*p != 0 && *(short *) (p + 0x27) == *ent && (p[0x5a] & 0x41) == 0) {
 			t = *p;
-			type = lpGebaeudePROT[t * 0x24d + 0x247];
-			if (type < lpGebaeudePROT[t * 0x24d + 0x248]) {
-				v = fcn_00507910(lpGebaeudePROT[t * 0x24d]);
+			type = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[t].level;
+			if (type < ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[t].level_limit) {
+				v = fcn_00507910(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[t].category);
 				t = gm_CheckStatLevel(*ent, v);
 				if (t != 0) {
 					t = gm_GetOppositeStatIndex(t);
-					type = lpGebaeudePROT[(int) *p * 0x24d + 0x247];
+					type = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(int) *p].level;
 					t = t / 2 + t % 2;
 					if (type < t && v != 7) {
 						tmp = fcn_0050d170(*p + 1);
@@ -250,7 +250,7 @@ use_slot:
 		c2.kind = 0;
 		p = (unsigned char *) gm_StartFilteredEntitySearch(1, 5, t);
 		while (c1.kind == 0 && p != 0) {
-			if ((int) lpGebaeudePROT[(int) *p * 0x24d + 0x247] <= limit && (p[0x5a] & 2) != 0) {
+			if ((int) ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(int) *p].level <= limit && (p[0x5a] & 2) != 0) {
 				e = he_StartHandlungSearch(1, 0, 0x1b);
 				while (e != 0) {
 					if (*(int *) (e + 0xac) == *(int *) (p + 1)) {

@@ -95,8 +95,8 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm((int) h, 2);
 	row = fcn_0046fac0(0, 3, g_14b5e18, d2_CurrentWindowId);
-	*(int*) (g_1015ea0 + row * 0x2f4 + 0x6c) = 1;
-	*(int*) (g_1015ea0 + row * 0x2f4 + 0x18) = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[row].value_06c)) = 1;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[row].width)) = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width;
 	d2_SetElementFont(row, 0x54);
 	row2 = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 0x82, d2_CurrentWindowId);
 	fcn_00472380(row2, 0, 2, 0, 1);

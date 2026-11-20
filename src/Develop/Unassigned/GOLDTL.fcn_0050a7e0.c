@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "../DieGildeAddOn/game/game_data.h"
 typedef struct { unsigned char kind; char rest[0x24c]; } SpawnBuilding;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern int rand(void);
 extern int gm_CurrentHumanFamilyCount;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -162,7 +162,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
     if (location != 0) {
         unsigned char* type_entry;
 
-        type_entry = &((SpawnBuilding*) lpGebaeudePROT)[B(location, 0)].kind;
+        type_entry = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[B(location, 0)].category;
         if (*type_entry == 1) {
             D(slot, 0x170) = (int) location;
         } else {

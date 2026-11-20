@@ -38,9 +38,9 @@ int __cdecl d2_ChooseTutorial(void)
 		item = fcn_00472250(menu, 2, item);
 		ids[i] = (int) item;
 		index = (int) item;
-		((Row_5845e0*) g_1015ea0)[index].i[0x58 / 4] = 1;
-		((Row_5845e0*) g_1015ea0)[index].i[0x38 / 4] = g_6a81dc[i];
-		((Row_5845e0*) g_1015ea0)[index].i[0x1d0 / 4] &= -3;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[index].value_058) = 1;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[index].value_038) = g_6a81dc[i];
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[index].flags_1d0) &= -3;
 	}
 	item = io_AppendText((char*) 0x681140, 0x3f20);
 	result = (int) fcn_00472250(menu, 2, item);
@@ -55,7 +55,7 @@ int __cdecl d2_ChooseTutorial(void)
 				index = ids[k];
 				index = index * 0x40 - index;
 				index = index * 0xc;
-				if (*(int*) (g_1015ea0 + index + 0x38) != 0) {
+				if (*(int*)&((D2_CONTROL_TL*)(g_1015ea0 + index))->value_038 != 0) {
 					fcn_00472640((char*) result, 1);
 					break;
 				}
@@ -77,7 +77,7 @@ int __cdecl d2_ChooseTutorial(void)
 						index = ids[k];
 						index = index * 0x40 - index;
 						index = index * 0xc;
-						if (*(int*) (g_1015ea0 + index + 0x38) != 0) {
+						if (*(int*)&((D2_CONTROL_TL*)(g_1015ea0 + index))->value_038 != 0) {
 							n++;
 							g_6a81dc[k] = 1;
 						} else {

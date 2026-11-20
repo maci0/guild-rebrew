@@ -20,7 +20,7 @@ typedef struct
 
 extern Fld_102d140 g_102d140[];
 extern char* g_772500;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_ScreenHeight;
 extern int g_1040494;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -85,20 +85,20 @@ int __cdecl fcn_00466cb0(int x, int y, int def, unsigned char flags)
 		f->max = f->max > 0x19 ? f->max : 0x19;
 	}
 	id = d2_AllocateElement();
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x20 / 4] = 0x41;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x10 / 4] = f->x;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x14 / 4] = f->y;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x18 / 4] = f->w;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x1c / 4] = f->h;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x8 / 4] = def;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x88 / 4] = i;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x24 / 4] = 2;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x30 / 4] = 0;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x34 / 4] = d2_ScreenHeight;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x28 / 4] = 0;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x2c / 4] = g_1040494;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0xc / 4] = (int) f;
-	((fcn_00466cb0_Ent*)g_1015ea0)[id].i[0x84 / 4] = d2_DefaultFont;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].kind) = 0x41;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].x) = f->x;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].y) = f->y;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].width) = f->w;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) = f->h;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_008) = def;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_088) = i;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].mode) = 2;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_top) = 0;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_bottom) = d2_ScreenHeight;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_left) = 0;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_right) = g_1040494;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].data) = (int) f;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].font) = d2_DefaultFont;
 	f->ent = id;
 	return id;
 }

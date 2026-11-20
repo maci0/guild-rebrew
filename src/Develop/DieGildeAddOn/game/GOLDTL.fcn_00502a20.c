@@ -5,7 +5,7 @@ extern unsigned short g_699394;
 extern unsigned char g_773d90, g_773d98, g_773d99, g_773d9a, g_699396[2];
 extern unsigned short* g_773da4;
 int __cdecl gm_GetEntityType(void*);
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 /* ADDRESS: GOLDTL 0x00502a20 */
 int* __cdecl fcn_00502a20(void)
 {
@@ -127,7 +127,7 @@ match:
 			hit = 1;
 		}
 		if (*(char*) g_699396 != -1) {
-			if (*(char*) (lpObjektePROT + *(unsigned short*) p * 0x41) != *(char*) g_699396) {
+			if (*(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) p])) != *(char*) g_699396) {
 				goto fail;
 			}
 			hit = 1;

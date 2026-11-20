@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 #include <math.h>
@@ -39,8 +39,8 @@ unsigned char* __cdecl gm_FindNearestBuildingByKind(unsigned char* me, int kind)
 		return 0;
 	}
 	for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
-		rec = lpGebaeudePROT + *e * 589;
-		if (!gm_CheckEntityType(e) && !fcn_00505340(e) && *(char**) (e + 0x61) != 0 && e != me && *rec == kind) {
+		rec = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e];
+		if (!gm_CheckEntityType(e) && !fcn_00505340(e) && *(char**) (e + 0x61) != 0 && e != me && (((BUILDING_PROTOTYPE*)rec)->category) == kind) {
 			d3_TransformPoint(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, &a);
 			d3_TransformPoint(*(char**) (me + 0x61), *(char**) (me + 0x61) + 0x4c, &b);
 			dx = a.x - b.x;

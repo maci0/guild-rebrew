@@ -1,7 +1,7 @@
 #include "client_types.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern int g_6a25b8;
 extern int g_6a25bc;
 extern int d2_CurrentValueBar;
@@ -105,7 +105,7 @@ header_done:
 		}
 		ratio = (float) gm_GetElapsedMinutes(e + 0x44, e + 0xb8);
 		ratio = (float) gm_GetElapsedMinutes(e + 0x44, (char*) &gm_GameTime) / ratio;
-		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
+		((D2_CONTROL_TL*) (g_1015ea0))[g_6a25bc].value_1f4.real = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
 			g_6a25c4[0] = fcn_0046f740(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
@@ -127,7 +127,7 @@ header_done:
 				g_6a25c4[0] = fcn_0046f740(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 			}
 		}
-		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
+		((D2_CONTROL_TL*) (g_1015ea0))[g_6a25bc].value_1f4.real = ratio;
 		return;
 	}
 	if (flags & 0x40) {
@@ -137,7 +137,7 @@ header_done:
 		}
 		ratio = (float) gm_GetElapsedMinutes(e + 0x44, e + 0x52);
 		ratio = (float) gm_GetElapsedMinutes(e + 0x44, (char*) &gm_GameTime) / ratio;
-		*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
+		((D2_CONTROL_TL*) (g_1015ea0))[g_6a25bc].value_1f4.real = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
 			g_6a25c4[0] = fcn_0046f740(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
@@ -157,7 +157,7 @@ header_done:
 	}
 	ratio = (float) gm_GetElapsedMinutes(e + 0x44, e + 0x52);
 	ratio = (float) gm_GetElapsedMinutes(e + 0x44, (char*) &gm_GameTime) / ratio;
-	*(float*) (g_1015ea0 + g_6a25bc * 0x2f4 + 0x1f4) = ratio;
+	((D2_CONTROL_TL*) (g_1015ea0))[g_6a25bc].value_1f4.real = ratio;
 	if (g_6a25c4[0] == -1) {
 		d2_SetForm(g_6a25b8, 0);
 		g_6a25c4[0] = fcn_0046f740(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
@@ -207,7 +207,7 @@ no_header:
 	p = *(char**) (s + 0x17c);
 	if (p == 0) {
 		if (g_6a25d8 != -1) {
-			*(int*) (g_1015ea0 + g_6a25d8 * 0x2f4 + 0x1f4) = 0;
+			((D2_CONTROL_TL*) (g_1015ea0))[g_6a25d8].value_1f4.bits = 0;
 		}
 		return;
 	}
@@ -295,7 +295,7 @@ no_header:
 		}
 		break;
 	}
-	*(float*) (g_1015ea0 + g_6a25d8 * 0x2f4 + 0x1f4) = ratio;
+	((D2_CONTROL_TL*) (g_1015ea0))[g_6a25d8].value_1f4.real = ratio;
 	return;
 
 drop_elements:
@@ -317,7 +317,7 @@ no_target:
 			g_6a25c4[i] = -1;
 		}
 	}
-	if (g_7e2a9c == 0 || lpObjektePROT[*(unsigned short*) g_7e2a9c * 0x41] != 0x1d) {
+	if (g_7e2a9c == 0 || (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) g_7e2a9c].kind) != 0x1d) {
 		return;
 	}
 	if (g_6a25e8 != -1 && g_100f1dc != -1
@@ -355,9 +355,9 @@ no_target:
 		g_6a25c4[k] = fcn_0046f7e0(i, 0x28, *(unsigned short*) s + 0xdf, d2_CurrentWindowId, -2);
 		fcn_0064d41a(buf, "%i", gm_GetMsgField((int) e, (int) s));
 		n = d2_ShowTxt(i - 2, 0x1c, buf, d2_CurrentWindowId);
-		*(int*) (g_1015ea0 + n * 0x2f4 + 0x5c) = 1;
-		*(int*) (g_1015ea0 + n * 0x2f4 + 0x6c) = 1;
-		*(int*) (g_1015ea0 + n * 0x2f4 + 0x18) = 0x20;
+		((D2_CONTROL_TL*) (g_1015ea0))[n].value_05c = 1;
+		((D2_CONTROL_TL*) (g_1015ea0))[n].value_06c = 1;
+		((D2_CONTROL_TL*) (g_1015ea0))[n].width = 0x20;
 		s = gm_NextEntityQueryMatch();
 		k++;
 		if (s == 0) {

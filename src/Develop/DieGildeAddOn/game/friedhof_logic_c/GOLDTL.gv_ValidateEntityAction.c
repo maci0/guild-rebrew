@@ -1,7 +1,7 @@
 /* gv_ValidateEntityAction - validates a standard entity action command:
  * resolves the target entity, checks it is an active graveyard field,
  * then spawns the requested number of graveyard entities. */
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 #include "rebrew_types.h"
@@ -25,7 +25,7 @@ int __cdecl gv_ValidateEntityAction(void* cmd)
 		if (grave_id != 0xffff) {
 			if ((char*) 0x7f4ca0 + grave_id * 0x21c != (char*) g_entity_table_end) {
 				field_id = *(unsigned char*) entity;
-				if (((GRAVE_BUILDING_ROW*)lpGebaeudePROT)[field_id].kind != 0x1d) {
+				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[field_id].category != 0x1d) {
 					return -2;
 				}
 				if (*(void**) ((char*) entity + 0x65) == 0) {

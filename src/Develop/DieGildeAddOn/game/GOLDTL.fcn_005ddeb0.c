@@ -8,7 +8,7 @@ typedef struct {
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
@@ -21,7 +21,7 @@ int __cdecl fcn_005ddeb0(char* e)
 
 	for (p = he_StartHandlungSearch(1, 0, 0x35); p != 0; p = he_fn_Handlung()) {
 		if (*(int*) (e + 4) == *(int*) (p + 0xbc)) {
-			fcn_005b2350(e, g_7f4ca0 + *(unsigned short*) (p + 8) * 540);
+			fcn_005b2350(e, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (p + 8)]));
 			*(Stamp*) (p + 0x52) = (*(Stamp*)&gm_GameTime);
 			fcn_004c5620(-1, p);
 		}

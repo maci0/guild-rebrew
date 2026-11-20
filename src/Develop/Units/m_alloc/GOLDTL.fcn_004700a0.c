@@ -98,7 +98,7 @@ void __cdecl d2_UnlockSurface(int win);
 void __cdecl fcn_00476b10(int x, int y, int r, int g, int b, int win);
 void __cdecl d2_SelectFont(int handle);
 char* __cdecl fcn_0047ce00(char* name, int a1);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004700a0 */
 int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 {
@@ -154,7 +154,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 		*(int*) (g_1015f40 + i * 0x3cc) = i;
 	}
 	for (i = 0; i < 0x400; i++) {
-		*(int*) (g_1015ea0 + i * 0x2f4) = i;
+		*(int*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[i]) = i;
 	}
 	if (g_772564) {
 		return 0;

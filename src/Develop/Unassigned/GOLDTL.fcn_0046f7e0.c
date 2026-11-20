@@ -13,7 +13,7 @@ typedef struct
 
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_ScreenHeight;
 extern int g_1040494;
 extern char s_67d420[];
@@ -41,17 +41,17 @@ int __cdecl fcn_0046f7e0(int x, int y, int a3, int win, int a5)
 	id = w->children[w->count];
 	if (id != -1) {
 		fcn_0046f650(id, w);
-		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x40 / 4] = (int) w;
-		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x30 / 4] = 0;
-		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x34 / 4] = d2_ScreenHeight;
-		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x28 / 4] = 0;
-		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x2c / 4] = g_1040494;
-		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x50 / 4] = ((fcn_0046f7e0_Ent*)g_1015ea0)[w->slot].i[0x50 / 4];
-		((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x48 / 4] = ((fcn_0046f7e0_Ent*)g_1015ea0)[w->slot].i[0x48 / 4];
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].parent) = (int) w;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_top) = 0;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_bottom) = d2_ScreenHeight;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_left) = 0;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_right) = g_1040494;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_050) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_050);
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_048) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_048);
 		fcn_00472680(id, a5);
 		w->count++;
-		if (((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x1c / 4] + y > (*(int*) &w->pad3c[0x218])) {
-			(*(int*) &w->pad3c[0x218]) = ((fcn_0046f7e0_Ent*)g_1015ea0)[id].i[0x1c / 4] + y;
+		if ((*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) + y > (*(int*) &w->pad3c[0x218])) {
+			(*(int*) &w->pad3c[0x218]) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) + y;
 		}
 	}
 	return id;

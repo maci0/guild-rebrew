@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned char* lpGebaeudePROT;
 extern char* g_1043370[];
 #include "GOLDTL.fcn_0055e4a0_gconf.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 void* __cdecl gm_StartFilteredEntitySearch(int a, ...);
 char* __cdecl gm_FindRecordById(int id);
 int __cdecl fcn_004432d0(int a, int b);
@@ -55,7 +55,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 	char* e;
 	char* p;
 	unsigned int v4;
-	GebProt_55e4a0* prot;
+	BUILDING_PROTOTYPE * prot;
 	char* idx;
 
 	v6 = (char*) gm_StartFilteredEntitySearch(1, 0, 0x44);
@@ -117,7 +117,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 			}
 		}
 		else {
-			prot = &((GebProt_55e4a0*) lpGebaeudePROT)[*(unsigned char*) v8];
+			prot = &((BUILDING_PROTOTYPE *) lpGebaeudePROT)[*(unsigned char*) v8];
 			if (*(char*) v8 == 0x1e) {
 				*(unsigned int*) (key + 0) = *(unsigned int*) (s_6a6340 + 0);
 				*(unsigned int*) (key + 4) = *(unsigned int*) (s_6a6340 + 4);
@@ -145,7 +145,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 			else {
 				key[0] = 0;
 			}
-			if (prot->type != 0x1d && prot->type != 0x1f) {
+			if (prot->category != 0x1d && prot->category != 0x1f) {
 				io_FormatTextBuffer(buf, 0x1c3f, 1, 0x1c39,
 					*(unsigned short*) (v8 + 0x27), v8);
 			}

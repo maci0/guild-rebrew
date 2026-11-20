@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 extern unsigned char* lpGebaeudePROT;
@@ -8,7 +8,7 @@ int __cdecl fcn_0050e520(int k, int* out)
 	int r;
 
 	r = 1;
-	switch (lpGebaeudePROT[k * 0x24d]) {
+	switch (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[k].category) {
 	case 15:
 		*out = 1;
 		break;

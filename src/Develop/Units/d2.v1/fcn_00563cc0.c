@@ -5,7 +5,7 @@ void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004c5fa0(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x00563cc0 */
 void __cdecl fcn_00563cc0(char* action)
 {
@@ -41,7 +41,7 @@ void __cdecl fcn_00563cc0(char* action)
 		rec = (char*) (0x7f4ca0 + (unsigned short) (*(unsigned short*) (action + 8)) * 0x21c);
 		if (*(unsigned char*) (rec + 2) == 6) {
 			io_FormatTextBuffer(buf, 0x17e7, ent);
-			fcn_00545e80(*(int*) (g_7f4ca0 + *(unsigned short*) (action + 8) * 0x21c + 4), *(int*) (g_7f4ca0 + *(unsigned short*) (action + 8) * 0x21c + 4), buf, 0, mode,
+			fcn_00545e80(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (action + 8)].entity_id, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (action + 8)].entity_id, buf, 0, mode,
 				*(int*) (ent + 1), -1, 0, 0x6a65e0);
 		}
 		if (*(unsigned char*) (rec + 2) == 5 || *(unsigned char*) (rec + 2) == 6) {

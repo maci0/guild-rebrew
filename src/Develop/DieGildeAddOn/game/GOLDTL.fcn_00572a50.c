@@ -3,7 +3,7 @@ extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 extern unsigned short g_7f3ee4;
 extern int g_90d520[];
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl he_FreeAction(char*);
@@ -62,13 +62,13 @@ void __cdecl fcn_00572a50(char* obj)
 				fcn_005039e0(ref1);
 				for (count = 0; count < (int) g_7f3ee4; count++) {
 					n = g_90d520[count];
-					rec = lpObjektePROT + n * 0x40 + n;
+					rec = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[n]);
 					if (*rec == 0x17) {
 						continue;
 					}
 					more = 1;
 					off = 0;
-					p = (unsigned short*) (rec + 0x2e);
+					p = ((OBJECT_PROTOTYPE *)rec)->ingredient_ids;
 					do {
 						if (off >= 4) {
 							if (more) {
@@ -88,9 +88,9 @@ void __cdecl fcn_00572a50(char* obj)
 						p++;
 					} while (more);
 				}
-				rec = lpObjektePROT + *(unsigned short*) ent * 0x41;
-				total = ((unsigned short) gm_RandomMod(*(unsigned short*) (rec + 0x36) * 0x1e) +
-					*(unsigned short*) (rec + 0x36) * 0x1e) *
+				rec = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) ent]);
+				total = ((unsigned short) gm_RandomMod(((OBJECT_PROTOTYPE *)rec)->value_036 * 0x1e) +
+					((OBJECT_PROTOTYPE *)rec)->value_036 * 0x1e) *
 					(*(int*) (obj + 0x18) + *(int*) (obj + 0x14));
 				fcn_004c51f0(*(int*) (obj + 0xb4), -1, *(unsigned short*) ent,
 					total, g_773d75, 0);

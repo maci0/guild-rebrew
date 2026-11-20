@@ -66,7 +66,7 @@ void __cdecl d2_ProcessMouseInput(void)
 	if (g_14ce8d8 != 0) {
 		v7 = d2_CurrentElementId;
 		if (g_100f890 != -1) {
-			v4 = (int) g_1015ea0 + d2_CurrentElementId * 0x2f4;
+			v4 = (int) &((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId];
 			if ((*(int*) (v4 + 0x58) != 0 || *(int*) (v4 + 0x5c) != 0) &&
 			    *(int*) (v4 + 0x20) != 0x45) {
 				g_100f1dc = g_100f890;
@@ -81,8 +81,8 @@ void __cdecl d2_ProcessMouseInput(void)
 				}
 				if (*(int*) (v4 + 0x58) != 0) {
 					*(int*) (v4 + 0x38) = *(int*) (v4 + 0x38) ^ 1;
-					*(int*) ((int) g_1015ea0 + d2_CurrentElementId * 0x2f4 + 0x3c) =
-						*(int*) ((int) g_1015ea0 + 0x38 + d2_CurrentElementId * 0x2f4);
+					((D2_CONTROL_TL*) ((int) g_1015ea0))[d2_CurrentElementId].value_03c =
+						((D2_CONTROL_TL*) ((int) g_1015ea0))[d2_CurrentElementId].value_038;
 					fcn_004234e0(g_772578, g_67d908, 1, 0x3f, 0x7f, 0, 0);
 				} else if (g_100f890 != 1) {
 					fcn_004234e0(g_772578, g_67d908, 1, 0x3f, 0x7f, 0, 0);
@@ -132,7 +132,7 @@ void __cdecl d2_ProcessMouseInput(void)
 			}
 		}
 		if (v7 != -1) {
-			g_100f1e4 = (int) g_1015ea0 + v7 * 0x2f4;
+			g_100f1e4 = (int) &((D2_CONTROL_TL*) g_1015ea0)[v7];
 		}
 	} else {
 		g_100f1dc = -1;

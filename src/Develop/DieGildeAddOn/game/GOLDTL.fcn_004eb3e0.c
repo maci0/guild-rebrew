@@ -1,7 +1,7 @@
 /* Kidnapping transaction: picks the strongest free transporter of the guild,
  * sends the two captives (victim of the guild and the player's pick) to the
  * client with scaled visual slots, and posts the notification message. */
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 typedef struct {
 	unsigned short id;
 	char pad2[0xe];
@@ -55,7 +55,7 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 	int pick[10];
 	slot80* e;
 	unsigned char* q;
-	Bld24d* b;
+	BUILDING_PROTOTYPE * b;
 	float t;
 	float scale;
 	unsigned int v20;
@@ -85,9 +85,9 @@ unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
 	if (e == 0)
 		return 0;
 	do {
-		b = &((Bld24d*) lpGebaeudePROT)[*(unsigned char*) e];
-		if ((int) b->x247 > best) {
-			best = (int) b->x247;
+		b = &((BUILDING_PROTOTYPE *) lpGebaeudePROT)[*(unsigned char*) e];
+		if ((int) b->level > best) {
+			best = (int) b->level;
 			v20 = *(unsigned char*) e;
 		}
 		e = (slot80*) gm_FindNextFilteredEntity();

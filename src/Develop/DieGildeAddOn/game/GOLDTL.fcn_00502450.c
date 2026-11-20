@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/season_slots.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #pragma pack(push, 1)
 typedef struct {
 	char kind;
@@ -17,11 +17,11 @@ extern double g_665b78;
 int __cdecl fcn_00502450(int a, int b)
 {
 	unsigned short w;
-	Obj41* o;
+	OBJECT_PROTOTYPE* o;
 
 	w = g_85ab80[a].slots[b].objekt_id;
-	o = &((Obj41*)lpObjektePROT)[w];
-	if (o->kind == 0x17 || o->kind == 0x25) {
+	o = &((OBJECT_PROTOTYPE*)lpObjektePROT)[w];
+	if ((*(char *)&o->kind) == 0x17 || (*(char *)&o->kind) == 0x25) {
 		return 0;
 	}
 	if (a == 0) {

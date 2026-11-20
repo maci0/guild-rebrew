@@ -81,7 +81,7 @@ void __cdecl fcn_0057b7a0(char* e)
 					io_FormatTextBuffer(buf, 0x414b, 0x229, *(unsigned short*) sel * 2 + 0x9a8, *(int*) (o + 0x16c));
 					break;
 				}
-				he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, buf, 0, 0x5f2, *(int*) (p + 1),
+				he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, buf, 0, 0x5f2, *(int*) (p + 1),
 				    *(int*) (q + 2), 0, "_NACHRICHTEN_FRIEDHOF_06");
 			}
 		}

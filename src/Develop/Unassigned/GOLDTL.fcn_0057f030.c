@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 // SIZE 0x10
@@ -23,7 +23,7 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl fcn_0057f030(int* ev)
 {
-	if (ev[0] == 0xd && ev[1] != 0 && ((struct good*)lpGebaeudePROT)[*(unsigned char*) ev[1]].kind == 0xa) {
+	if (ev[0] == 0xd && ev[1] != 0 && ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) ev[1]].category == 0xa) {
 		((struct fsm*)g_665f08)->state = 0xb;
 		((struct fsm*)g_665f08)->next = 0xb;
 		((struct fsm*)g_665f08)->since = g_6b7fac;

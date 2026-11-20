@@ -100,7 +100,7 @@ typedef struct {
 #define H3		((char*) f.v1c)
 #define H6		((char*) f.v28)
 #define FLD(base, off)	(*(int*) ((char*) (base) + (off)))
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00467920 */
 void __cdecl fcn_00467920(int a0, int a1)
 {
@@ -115,20 +115,20 @@ void __cdecl fcn_00467920(int a0, int a1)
 	int y;
 	float ratio;
 
-	e = (int*) (g_1015ea0 + a0 * 0x2f4);
+	e = (int*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[a0]);
 	f.v34 = 0;
 	f.v2c = 0;
-	hs = (char*) e[3];
+	hs = (char*) *(int*) (&(*(D2_CONTROL_TL*) e).data);
 	f.v14 = (int) hs;
 	h1 = fcn_0047b620(hs, 1);
 	h0 = fcn_0047b620(hs, 0);
 	f.v1c = (int) fcn_0047b620(hs, 3);
 	f.v28 = (int) fcn_0047b620(hs, 6);
-	f.v30 = e[0x23];
-	f.v10 = e[0x25];
-	f.v20 = e[0x26];
-	f.v38 = e[0x24];
-	f.v24 = e[0x27];
+	f.v30 = (*(D2_CONTROL_TL*) e).payload.fields.value_08c;
+	f.v10 = (*(D2_CONTROL_TL*) e).payload.fields.value_094;
+	f.v20 = (*(D2_CONTROL_TL*) e).payload.fields.value_098;
+	f.v38 = (*(D2_CONTROL_TL*) e).payload.fields.value_090;
+	f.v24 = (*(D2_CONTROL_TL*) e).payload.fields.value_09c;
 	f.w8.i = f.v10 - f.v38;
 	if (!f.w8.i) {
 		f.wc.f = (float) f.v38;
@@ -138,7 +138,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 		ratio = (float) f.v24 / (float) f.w8.i;
 		f.w8.i = f.v30 - f.v38;
 		f.v18 = (float) f.w8.i * ratio;
-		f.w8.i = e[0x28] - f.v38;
+		f.w8.i = (*(D2_CONTROL_TL*) e).payload.fields.value_0a0 - f.v38;
 		f.wc.f = (float) f.w8.i * ratio;
 	}
 	if (f.v18 > g_6628a8 && f.v18 < g_6628a0) {
@@ -152,7 +152,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 		b = (int*) a1;
 
 		/* 0x467a69: bar frame */
-		fcn_0047a040(e[4], b[0xc], e[4] + GLYPH_W(h0) + f.v24, b[0xe]);
+		fcn_0047a040((*(D2_CONTROL_TL*) e).x, b[0xc], (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24, b[0xe]);
 
 		/* 0x467a90: fill run of the value bar */
 		f.w8.f = (float) f.v24;
@@ -163,12 +163,12 @@ void __cdecl fcn_00467920(int a0, int a1)
 			if (f.v10 == f.v38) {
 				g_102d020 = 1;
 			}
-			if (!e[0x13]) {
+			if (!(*(D2_CONTROL_TL*) e).disabled) {
 				for (f.w0.idx = 0; f.w0.idx < g_102d020;
 				     f.w0.idx++) {
-					x = e[4] + GLYPH_W(h0)
+					x = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0)
 					    + GLYPH_W(h1) * f.w0.idx;
-					y = e[5] + (GLYPH_H(H3)
+					y = (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3)
 						    - GLYPH_H(h1)) / 2;
 					fcn_0047cba0(x, y, a1,
 						     (char*) f.v14, 1);
@@ -177,9 +177,9 @@ void __cdecl fcn_00467920(int a0, int a1)
 			else {
 				for (f.w0.idx = 0; f.w0.idx < g_102d020;
 				     f.w0.idx++) {
-					x = e[4] + GLYPH_W(h0)
+					x = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0)
 					    + GLYPH_W(h1) * f.w0.idx;
-					y = e[5] + (GLYPH_H(H3)
+					y = (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3)
 						    - GLYPH_H(h1)) / 2;
 					fcn_0047cbf0(x, y, (int) b,
 						     (char*) f.v14, 1);
@@ -192,8 +192,8 @@ void __cdecl fcn_00467920(int a0, int a1)
 			/* 0x467bcf: the end mark of the fill run */
 			if (f.v20 & 0x10) {
 				if (f.wc.f > 0.0f) {
-					f.w8.i = e[4] + GLYPH_W(h0);
-					fcn_0047a040(e[4], b[0xc],
+					f.w8.i = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0);
+					fcn_0047a040((*(D2_CONTROL_TL*) e).x, b[0xc],
 						     (int) ((float) f.w8.i
 							    + f.wc.f),
 						     b[0xe]);
@@ -204,9 +204,9 @@ void __cdecl fcn_00467920(int a0, int a1)
 					for (f.w0.idx = 0;
 					     f.w0.idx < g_102d020;
 					     f.w0.idx++) {
-						x = e[4] + GLYPH_W(h0)
+						x = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0)
 						    + GLYPH_W(h1) * f.w0.idx;
-						y = e[5] + (GLYPH_H(H3)
+						y = (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3)
 							    - GLYPH_H(h1)) / 2;
 						fcn_0047cba0(x, y, (int) b,
 							     (char*) f.v14, 4);
@@ -215,14 +215,14 @@ void __cdecl fcn_00467920(int a0, int a1)
 			}
 
 			/* 0x467ca7: bar frame of the fill run */
-			fcn_0047a040(e[4], b[0xc],
-				     e[4] + GLYPH_W(h0) + f.v24,
+			fcn_0047a040((*(D2_CONTROL_TL*) e).x, b[0xc],
+				     (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
 				     b[0xe]);
 
 			if (f.v18 > 0.0f) {
 				/* 0x467cce: filled part, no tick offset */
 				if (!(f.v20 & 8)) {
-					f.wc.i = e[4] + GLYPH_W(h0);
+					f.wc.i = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0);
 					fcn_0047a040(f.wc.i, b[0xc],
 						     (int) ((float) f.wc.i
 							    + f.v18),
@@ -231,13 +231,13 @@ void __cdecl fcn_00467920(int a0, int a1)
 					n = (int) (f.v18 / (float) f.w8.i
 						   + g_6628a0);
 					g_102d020 = n;
-					if (e[0x13]) {
+					if ((*(D2_CONTROL_TL*) e).disabled) {
 						for (f.w0.idx = 0;
 						     f.w0.idx < g_102d020;
 						     f.w0.idx++) {
-							x = e[4] + GLYPH_W(h0)
+							x = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0)
 							    + GLYPH_W(h1) * f.w0.idx;
-							y = e[5]
+							y = (*(D2_CONTROL_TL*) e).y
 							    + (GLYPH_H(H3)
 							       - GLYPH_H(h1)) / 2;
 							fcn_0047cbf0(x, y,
@@ -249,9 +249,9 @@ void __cdecl fcn_00467920(int a0, int a1)
 						for (f.w0.idx = 0;
 						     f.w0.idx < g_102d020;
 						     f.w0.idx++) {
-							x = e[4] + GLYPH_W(h0)
+							x = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0)
 							    + GLYPH_W(h1) * f.w0.idx;
-							y = e[5]
+							y = (*(D2_CONTROL_TL*) e).y
 							    + (GLYPH_H(H3)
 							       - GLYPH_H(h1)) / 2;
 							fcn_0047cba0(x, y,
@@ -259,13 +259,13 @@ void __cdecl fcn_00467920(int a0, int a1)
 								     (char*) f.v14, 2);
 						}
 					}
-					fcn_0047a040(e[4], b[0xc],
-						     e[4] + GLYPH_W(h0) + f.v24,
+					fcn_0047a040((*(D2_CONTROL_TL*) e).x, b[0xc],
+						     (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
 						     b[0xe]);
 				}
 				/* 0x467e39: filled part with the tick offset */
 				else {
-					f.wc.i = e[4] + GLYPH_W(h0);
+					f.wc.i = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0);
 					fcn_0047a040(f.wc.i, b[0xc],
 						     (int) ((float) f.wc.i
 							    + f.v18),
@@ -274,13 +274,13 @@ void __cdecl fcn_00467920(int a0, int a1)
 					n = (int) (f.v18 / (float) f.w8.i
 						   + g_6628a0);
 					g_102d020 = n;
-					if (e[0x13]) {
+					if ((*(D2_CONTROL_TL*) e).disabled) {
 						for (f.w0.idx = 0;
 						     f.w0.idx < g_102d020;
 						     f.w0.idx++) {
-							x = e[4] + GLYPH_W(h0)
+							x = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0)
 							    + GLYPH_W(h1) * f.w0.idx;
-							y = e[5]
+							y = (*(D2_CONTROL_TL*) e).y
 							    + (GLYPH_H(H3)
 							       - GLYPH_H(h1)) / 2;
 							fcn_0047cbf0(x, y,
@@ -292,9 +292,9 @@ void __cdecl fcn_00467920(int a0, int a1)
 						for (f.w0.idx = 0;
 						     f.w0.idx < g_102d020;
 						     f.w0.idx++) {
-							x = e[4] + GLYPH_W(h0)
+							x = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0)
 							    + GLYPH_W(h1) * f.w0.idx;
-							y = e[5]
+							y = (*(D2_CONTROL_TL*) e).y
 							    + (GLYPH_H(H3)
 							       - GLYPH_H(h1)) / 2;
 							fcn_0047cba0(x, y,
@@ -306,8 +306,8 @@ void __cdecl fcn_00467920(int a0, int a1)
 			}
 
 			/* 0x467f5c: closing rect of the bar frame */
-			fcn_0047a040(e[4], b[0xc],
-				     e[4] + GLYPH_W(h0) * 2 + f.v24, b[0xe]);
+			fcn_0047a040((*(D2_CONTROL_TL*) e).x, b[0xc],
+				     (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) * 2 + f.v24, b[0xe]);
 		}
 		else {
 			/* 0x467f7d: label colour gradient */
@@ -328,29 +328,29 @@ void __cdecl fcn_00467920(int a0, int a1)
 				     (unsigned char) f.w0.b.v02);
 
 			/* 0x46802e: label bitmap clipped into the bar rect */
-			n = d2_QueueTexturedQuad(e[4],
-					 e[5] + (GLYPH_H(H3) - GLYPH_H(h1)) / 2,
-					 e[6], e[7], (int) g_77256c->surface, 0);
+			n = d2_QueueTexturedQuad((*(D2_CONTROL_TL*) e).x,
+					 (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h1)) / 2,
+					 (*(D2_CONTROL_TL*) e).width, (*(D2_CONTROL_TL*) e).height, (int) g_77256c->surface, 0);
 			if (n) {
 				d2_SetQuadVertexColor((int*) n, 1, 1, 1);
 			}
-			f.wc.i = e[4] + GLYPH_W(h0);
+			f.wc.i = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0);
 			fcn_0047a040(f.wc.i, ((int*) a1)[0xc],
 				     (int) ((float) f.wc.i + f.v18),
 				     ((int*) a1)[0xe]);
 
 			/* 0x4680b3: clamped label bitmap */
-			n = d2_QueueTexturedQuad(e[4] + GLYPH_W(h0),
-					 e[5] + (GLYPH_H(H3) - GLYPH_H(h1)) / 2,
-					 (int) f.v18, e[7], (int) g_77256c->surface, 0);
+			n = d2_QueueTexturedQuad((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0),
+					 (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h1)) / 2,
+					 (int) f.v18, (*(D2_CONTROL_TL*) e).height, (int) g_77256c->surface, 0);
 			if (n) {
 				d2_SetQuadVertexColor((int*) n, f.w0.b.v00, f.w0.b.v01,
 					     f.w0.b.v02);
 			}
 
 			/* 0x468119: bar rect and tick marks */
-			fcn_0047a040(e[4], ((int*) a1)[0xc],
-				     e[4] + GLYPH_W(h0) + f.v24,
+			fcn_0047a040((*(D2_CONTROL_TL*) e).x, ((int*) a1)[0xc],
+				     (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
 				     ((int*) a1)[0xe]);
 			if (!(f.v20 & 8)) {
 				f.wc.i = GLYPH_W(h1);
@@ -358,9 +358,9 @@ void __cdecl fcn_00467920(int a0, int a1)
 					       + g_6628a0);
 				for (f.w0.idx = 0; f.w0.idx < f.w8.i;
 				     f.w0.idx++) {
-					x = e[4] + GLYPH_W(h0)
+					x = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0)
 					    + GLYPH_W(h1) * f.w0.idx;
-					y = e[5] + (GLYPH_H(H3)
+					y = (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3)
 						    - GLYPH_H(h1)) / 2;
 					fcn_0047cba0(x, y, a1,
 						     (char*) f.v14, 1);
@@ -368,63 +368,63 @@ void __cdecl fcn_00467920(int a0, int a1)
 			}
 
 			/* 0x4681cc: gauge body rect */
-			fcn_0047a040(e[0x0a], e[0x0c], e[0x0b], e[0x0d]);
+			fcn_0047a040((*(D2_CONTROL_TL*) e).clip_left, (*(D2_CONTROL_TL*) e).clip_top, (*(D2_CONTROL_TL*) e).clip_right, (*(D2_CONTROL_TL*) e).clip_bottom);
 		}
 		if (f.v20 & 0x20) {
 			goto body;
 		}
 
 		/* 0x4681f0: icon hit test */
-		if (d2_CurrentElementId == e[0] && !(f.v20 & 0x40)) {
-			if (e[0x14] && FLD(e[0x14], 0x198)) {
+		if (d2_CurrentElementId == (*(D2_CONTROL_TL*) e).value_000 && !(f.v20 & 0x40)) {
+			if ((*(D2_CONTROL_TL*) e).value_050 && FLD((*(D2_CONTROL_TL*) e).value_050, 0x198)) {
 				n = g_102d028;
 			}
 			else {
 				n = d2_MouseX;
 			}
 			if (f.v28) {
-				if (n >= e[4] && n < e[4] + GLYPH_W(H6)) {
+				if (n >= (*(D2_CONTROL_TL*) e).x && n < (*(D2_CONTROL_TL*) e).x + GLYPH_W(H6)) {
 					f.v34 = 1;
 				}
-				else if (n >= e[4] + e[6] - GLYPH_W(H6)
-					 && n < e[4] + e[6]) {
+				else if (n >= (*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width - GLYPH_W(H6)
+					 && n < (*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width) {
 					f.v2c = 1;
 				}
 			}
 			else {
-				if (n >= e[4] && n < e[4] + GLYPH_W(H3)) {
+				if (n >= (*(D2_CONTROL_TL*) e).x && n < (*(D2_CONTROL_TL*) e).x + GLYPH_W(H3)) {
 					f.v34 = 1;
 				}
-				else if (n >= e[4] + e[6] - GLYPH_W(H3)
-					 && n < e[4] + e[6]) {
+				else if (n >= (*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width - GLYPH_W(H3)
+					 && n < (*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width) {
 					f.v2c = 1;
 				}
 			}
 		}
 		*((char*) e + 0x2ec) = (char) f.v34;
 		*((char*) e + 0x2ed) = (char) f.v2c;
-		if (!e[0x18]) {
-			fcn_0047cba0(e[4], e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+		if (!(*(D2_CONTROL_TL*) e).value_060) {
+			fcn_0047cba0((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 				     a1, (char*) f.v14, 0);
-			if (fcn_0047cba0(e[4] + GLYPH_W(h0) + f.v24,
-					 e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+			if (fcn_0047cba0((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
+					 (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 					 a1, (char*) f.v14, 5)) {
 				goto ticks;
 			}
-			fcn_0047cba0(e[4] + GLYPH_W(h0) + f.v24,
-				     e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+			fcn_0047cba0((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
+				     (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 				     a1, (char*) f.v14, 0);
 		}
 		else {
-			fcn_0047cbf0(e[4], e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+			fcn_0047cbf0((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 				     a1, (char*) f.v14, 0);
-			if (fcn_0047cbf0(e[4] + GLYPH_W(h0) + f.v24,
-					 e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+			if (fcn_0047cbf0((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
+					 (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 					 a1, (char*) f.v14, 5)) {
 				goto ticks;
 			}
-			fcn_0047cbf0(e[4] + GLYPH_W(h0) + f.v24,
-				     e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+			fcn_0047cbf0((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
+				     (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 				     a1, (char*) f.v14, 0);
 		}
 
@@ -432,22 +432,22 @@ void __cdecl fcn_00467920(int a0, int a1)
 		/* 0x46843c: end marks */
 		if (f.v34) {
 			if (f.v28) {
-				fcn_0047ccd0(e[4], e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+				fcn_0047ccd0((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 					     a1, (char*) f.v14, 6);
 			}
 			if (!f.v28) {
-				fcn_0047ccd0(e[4], e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+				fcn_0047ccd0((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 					     a1, (char*) f.v14, 3);
 			}
 		}
 		else if (f.v2c) {
-			fcn_0047a040(e[0x0a], e[0x0c], e[0x0b], e[0x0d]);
+			fcn_0047a040((*(D2_CONTROL_TL*) e).clip_left, (*(D2_CONTROL_TL*) e).clip_top, (*(D2_CONTROL_TL*) e).clip_right, (*(D2_CONTROL_TL*) e).clip_bottom);
 			if (f.v28) {
-				fcn_0047ccd0(e[4] + e[6] - GLYPH_W(H6), e[5] + (GLYPH_H(H6) - GLYPH_H(h0)) / 2,
+				fcn_0047ccd0((*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width - GLYPH_W(H6), (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H6) - GLYPH_H(h0)) / 2,
 					     a1, (char*) f.v14, 7);
 			}
 			if (!f.v28) {
-				fcn_0047ccd0(e[4] + e[6] - GLYPH_W(H3), e[5] + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+				fcn_0047ccd0((*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width - GLYPH_W(H3), (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
 					     a1, (char*) f.v14, 3);
 			}
 		}
@@ -456,26 +456,26 @@ void __cdecl fcn_00467920(int a0, int a1)
 		/* 0x468554: label text */
 		if (!(f.v20 & 0x48)) {
 			f.v28 = (int) f.v18;
-			fcn_0047cba0(e[4] + GLYPH_W(h0) - GLYPH_W(H3) / 2
-				     + f.v28, e[5], (int) b, (char*) f.v14, 3);
+			fcn_0047cba0((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) - GLYPH_W(H3) / 2
+				     + f.v28, (*(D2_CONTROL_TL*) e).y, (int) b, (char*) f.v14, 3);
 			if (*(char*) ((char*) e + 0xe8)) {
 				fcn_00468c30(a0, f.v30, f.buf);
-				d2_SelectFont(e[0x21] ? e[0x21]
+				d2_SelectFont((*(D2_CONTROL_TL*) e).font ? (*(D2_CONTROL_TL*) e).font
 						     : d2_DefaultFont + 1);
 				f.v2c = GLYPH_W(H3);
-				fcn_0046bd20(e[4] + GLYPH_W(h0) - f.v2c / 2
+				fcn_0046bd20((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) - f.v2c / 2
 					     + f.v28,
-					     e[5] + GLYPH_H(H3) / 2
+					     (*(D2_CONTROL_TL*) e).y + GLYPH_H(H3) / 2
 					     - d2_FontHeight / 2 + 1,
 					     GLYPH_W(H3), GLYPH_H(H3), (int) b,
 					     (int) f.buf, 8);
 			}
 			else {
-				d2_SelectFont(e[0x21] ? e[0x21]
+				d2_SelectFont((*(D2_CONTROL_TL*) e).font ? (*(D2_CONTROL_TL*) e).font
 						     : d2_DefaultFont + 1);
-				f.v2c = e[4] + GLYPH_W(h0)
+				f.v2c = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0)
 					- GLYPH_W(H3) / 2 + f.v28;
-				f.v28 = e[5] + GLYPH_H(H3) / 2
+				f.v28 = (*(D2_CONTROL_TL*) e).y + GLYPH_H(H3) / 2
 					- d2_FontHeight / 2 + 2;
 				if (f.v20 & 0x1000) {
 					sprintf(f.buf, str_67d43c, f.v30);
@@ -497,22 +497,22 @@ void __cdecl fcn_00467920(int a0, int a1)
 		/* 0x468700: icon block */
 		if (f.v20 & 0x04) {
 			fcn_0047a040(0, 0, b[1], b[2]);
-			d2_SelectFont(e[0x21] ? e[0x21]
-					     : (e[0x10] ? FLD(e[0x10], 0x28c)
+			d2_SelectFont((*(D2_CONTROL_TL*) e).font ? (*(D2_CONTROL_TL*) e).font
+					     : (*(int*) (&(*(D2_CONTROL_TL*) e).parent) ? FLD(*(int*) (&(*(D2_CONTROL_TL*) e).parent), 0x28c)
 							: d2_DefaultFont + 1));
-			if (e[0x1d]) {
+			if ((*(D2_CONTROL_TL*) e).value_074) {
 				itoa(f.v30, f.v3c, 10);
 				fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
-				d2_DrawDefaultFontText(e[4] + (int) f.v18, e[5] - 0x10,
+				d2_DrawDefaultFontText((*(D2_CONTROL_TL*) e).x + (int) f.v18, (*(D2_CONTROL_TL*) e).y - 0x10,
 					     (int) b, f.v3c, 0);
 			}
 			sprintf(f.v3c, str_67d444, f.v38);
 			n = (d2_FontHeight - GLYPH_H(h0)) / 2 - 1;
 			x = fcn_0046b520(f.v3c, d2_CurrentFont);
-			d2_DrawDefaultFontText(e[4] - x - 4, e[5] - n,
+			d2_DrawDefaultFontText((*(D2_CONTROL_TL*) e).x - x - 4, (*(D2_CONTROL_TL*) e).y - n,
 				     (int) b, f.v3c, 0);
 			sprintf(f.v3c, str_67d444, f.v10);
-			d2_DrawDefaultFontText(e[4] + e[6] + 4, e[5] - n,
+			d2_DrawDefaultFontText((*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width + 4, (*(D2_CONTROL_TL*) e).y - n,
 				     (int) b, f.v3c, 0);
 		}
 
@@ -520,24 +520,24 @@ void __cdecl fcn_00467920(int a0, int a1)
 		if (*(char*) ((char*) e + 0xa8)) {
 			fcn_0047a040(0, 0, FLD(b, 4), FLD(b, 8));
 			/* Four pending pushes make 0x46884f the v10 scratch, not flags. */
-			d2_SelectFont(e[0x21] ? e[0x21] : d2_DefaultFont + 1);
-			x = e[4];
-			y = e[5] - 0xd;
+			d2_SelectFont((*(D2_CONTROL_TL*) e).font ? (*(D2_CONTROL_TL*) e).font : d2_DefaultFont + 1);
+			x = (*(D2_CONTROL_TL*) e).x;
+			y = (*(D2_CONTROL_TL*) e).y - 0xd;
 			n = 8;
 			if (f.v20 & 0x80) {
-				x = e[4] - fcn_0046b520((char*) e + 0xa8, d2_DefaultFont) - 0x18;
-				y = e[5];
+				x = (*(D2_CONTROL_TL*) e).x - fcn_0046b520((char*) e + 0xa8, d2_DefaultFont) - 0x18;
+				y = (*(D2_CONTROL_TL*) e).y;
 				n = 0x10;
 			}
-			fcn_0046bd20(x, y, e[6], 0x20, (int) b, (int) ((char*) e + 0xa8), n);
+			fcn_0046bd20(x, y, (*(D2_CONTROL_TL*) e).width, 0x20, (int) b, (int) ((char*) e + 0xa8), n);
 		}
 
-		e[0x1d] = 0;
+		(*(D2_CONTROL_TL*) e).value_074 = 0;
 		return;
 	}
 
 	if (!(f.v20 & 1)) {
-		e[0x1d] = 0;
+		(*(D2_CONTROL_TL*) e).value_074 = 0;
 		return;
 	}
 
@@ -546,41 +546,41 @@ void __cdecl fcn_00467920(int a0, int a1)
 	if (f.w8.f - f.v18 > 0.0f && !(f.v20 & 8)) {
 		g_102d024 = (int) (f.w8.f / (float) GLYPH_H(h1) + g_6628a0);
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
-			y = e[5] + GLYPH_H(h0)
+			y = (*(D2_CONTROL_TL*) e).y + GLYPH_H(h0)
 			    + GLYPH_H(h1) * (f.w0.idx - 1);
-			x = e[4] + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
+			x = (*(D2_CONTROL_TL*) e).x + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
 			fcn_0047cba0(x, y, a1, (char*) f.v14, 1);
 		}
 	}
 	/* 0x468997: end cap */
 	if ((f.v20 & 0x10) && f.wc.f > 0.0f) {
-		fcn_0047a040(e[4], e[5] + GLYPH_H(h0),
-			     e[4] + e[6], e[5] + e[7] - GLYPH_H(h0));
+		fcn_0047a040((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + GLYPH_H(h0),
+			     (*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width, (*(D2_CONTROL_TL*) e).y + (*(D2_CONTROL_TL*) e).height - GLYPH_H(h0));
 		g_102d024 = (int) (f.wc.f / (float) GLYPH_H(h1) + g_6628a0);
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
-			y = (int) ((float) e[7] - f.wc.f - (float) GLYPH_H(h0)
-				   + (float) (e[5]
+			y = (int) ((float) (*(D2_CONTROL_TL*) e).height - f.wc.f - (float) GLYPH_H(h0)
+				   + (float) ((*(D2_CONTROL_TL*) e).y
 					      + GLYPH_H(h1) * f.w0.idx));
-			x = e[4] + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
+			x = (*(D2_CONTROL_TL*) e).x + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
 			fcn_0047cba0(x, y, a1, (char*) f.v14, 4);
 		}
 	}
 	/* 0x468a74 */
 	if (f.v18 > 0.0f) {
-		f.v10 = e[5] + e[7] - GLYPH_H(h0);
-		fcn_0047a040(e[4], (int) ((float) GLYPH_H(h0) - f.v18),
-			     e[4] + e[6], f.v10);
+		f.v10 = (*(D2_CONTROL_TL*) e).y + (*(D2_CONTROL_TL*) e).height - GLYPH_H(h0);
+		fcn_0047a040((*(D2_CONTROL_TL*) e).x, (int) ((float) GLYPH_H(h0) - f.v18),
+			     (*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width, f.v10);
 		g_102d024 = (int) (f.v18 / (float) GLYPH_H(h1) + g_6628a0);
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
-			y = (int) ((float) e[7] - f.v18 - (float) GLYPH_H(h0)
-				   + (float) (e[5]
+			y = (int) ((float) (*(D2_CONTROL_TL*) e).height - f.v18 - (float) GLYPH_H(h0)
+				   + (float) ((*(D2_CONTROL_TL*) e).y
 					      + GLYPH_H(h1) * f.w0.idx));
-			x = e[4] + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
+			x = (*(D2_CONTROL_TL*) e).x + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
 			fcn_0047cba0(x, y, a1, (char*) f.v14, 1);
 		}
-		e[0x1d] = 0;
+		(*(D2_CONTROL_TL*) e).value_074 = 0;
 		return;
 	}
 
-	e[0x1d] = 0;
+	(*(D2_CONTROL_TL*) e).value_074 = 0;
 }

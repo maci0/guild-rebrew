@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 typedef struct
 {
@@ -39,7 +39,7 @@ void __cdecl fcn_004f0da0(void)
 	for (i = 0; i < 8; i++) {
 		if (((Slot170*)g_7731b8)[i].id != -1) {
 			gm_ResolveEntityById((void**) (&r), 0, 0, ((Slot170*)g_7731b8)[i].id);
-			if ((r == 0 && ((Slot170*)g_7731b8)[i].flags == 0) || (lpGebaeudePROT[*r * 0x24d] != 0x1e && ((Slot170*)g_7731b8)[i].flags == 0)) {
+			if ((r == 0 && ((Slot170*)g_7731b8)[i].flags == 0) || (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*r].category != 0x1e && ((Slot170*)g_7731b8)[i].flags == 0)) {
 				fcn_004f0930(((Slot170*)g_7731b8)[i].id);
 			}
 		}

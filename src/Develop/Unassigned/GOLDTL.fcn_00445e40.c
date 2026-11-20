@@ -4,7 +4,7 @@ typedef struct {
 	int b;
 	int c;
 } Trip;
-
+#include "Develop/Units/d3/d3_object.h"
 // SIZE 0x60
 typedef struct {
 	int hdr[6];
@@ -32,7 +32,7 @@ void __cdecl fcn_00445e40(int idx)
 		((Trip*)g_1041d20)[g_67a960].c = (*(int*)&g_104329c);
 	}
 	n = 0x48;
-	dst = ((Slot*)g_1041d80)[idx].data;
+	dst = (char*)((D3_SCENE_SLOT*)g_1041d80)[idx].pal;
 	/*
 	 * TODO: replace this inline-asm copy with proper C once a spelling is
 	 * found; recorded C copy probes did not emit the prelude

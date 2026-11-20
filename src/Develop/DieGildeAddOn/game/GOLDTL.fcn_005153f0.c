@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 // SIZE 0x21c
@@ -60,17 +60,17 @@ void __cdecl fcn_005153f0(void)
 			continue;
 		}
 		if (gm_GetBuildingTypeCategory(p->office) == 1 || gm_GetBuildingTypeCategory(p->office) == 4 || gm_GetBuildingTypeCategory(p->office) == 2
-			|| ((Office*)lpGebaeudePROT)[p->office].kind == 0x13 || ((Office*)lpGebaeudePROT)[p->office].kind == 4
-			|| ((Office*)lpGebaeudePROT)[p->office].kind == 0x10 || ((Office*)lpGebaeudePROT)[p->office].kind == 5
-			|| ((Office*)lpGebaeudePROT)[p->office].kind == 9) {
-			if (((Office*)lpGebaeudePROT)[p->office].kind != 0xb) {
+			|| ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category == 0x13 || ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category == 4
+			|| ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category == 0x10 || ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category == 5
+			|| ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category == 9) {
+			if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category != 0xb) {
 				int value = 0xfa00;
 
 				fcn_004c4510((char*) p, p->id);
 				cm_AppendPacketFieldDelta(4, 1, (char*) p - g_aed32c + 0x39, &value);
 				fcn_004c5360();
 				fcn_004c5f60(p->id, e->entity_id, e->entity_id);
-				fcn_004c6090(p, 1, 0, ((Office*)lpGebaeudePROT)[p->office].level);
+				fcn_004c6090(p, 1, 0, ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].worker_kind[0]);
 				fcn_004c51f0(p->id, -1, 0x135, 1, (*(char*)&g_773d75), 0);
 			}
 		}

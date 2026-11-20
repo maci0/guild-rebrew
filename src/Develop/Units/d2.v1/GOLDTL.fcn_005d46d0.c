@@ -98,9 +98,9 @@ void __cdecl fcn_005d46d0(void)
 		fl = (int) (list[i].f1c * 100.0f);
 		h = fcn_0046f740(0x28, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2),
 			((House*)g_7f4ca0)[list[i].id].f54, d2_CurrentWindowId);
-		((Slot*)g_1015ea0)[h].shown = 1;
-		((Slot*)g_1015ea0)[h].style = 3;
-		((Slot*)g_1015ea0)[h].house = &((House*)g_7f4ca0)[list[i].id];
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_05c) = 1;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[h].flags_1d0) = 3;
+		(*(House**)&((D2_CONTROL_TL*)g_1015ea0)[h].associated_object) = &((House*)g_7f4ca0)[list[i].id];
 		sprintf(text, s_6a9680, list[i].id);
 		fcn_005c9090(text, 0x36, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 0x22, 0x12c, 0x56);
 		v = MIN(MAX(((House*)g_7f4ca0)[list[i].id].f54 - 0x59a, 0), 7);

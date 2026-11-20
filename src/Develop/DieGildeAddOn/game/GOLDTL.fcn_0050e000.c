@@ -1,5 +1,5 @@
 #include "spiel.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 /* The T&L build of gm_eval_SlotVoll (SERVER 0x10019d30): a missing entity
@@ -44,7 +44,7 @@ int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
 		}
 		return size - msg_field;
 	}
-	record = lpObjektePROT + item_id * 0x41;
+	record = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[item_id]);
 	if (is_cat2) {
 		is_producer = (*record == 0x17);
 	} else {
@@ -60,7 +60,7 @@ int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
 		if (query_result != NULL) {
 			do {
 				q_id = *(unsigned short*) query_result;
-				record = lpObjektePROT + q_id * 0x41;
+				record = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[q_id]);
 				if (is_cat2) {
 					if (is_producer) {
 						if (*record == 0x17) {

@@ -59,7 +59,7 @@ int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 	}
 	count = 0;
 	for (i = 0; i < 768; i++) {
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_16c == target) {
+		if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == target) {
 			count++;
 		}
 	}

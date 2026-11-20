@@ -5,7 +5,7 @@ typedef struct Kind50bec0 {
 	unsigned short slot[0x40];
 	char pad[0x24d - 0xa3];
 } Kind50bec0;
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 typedef struct {
 	char kind;
 	char pad[0x40];
@@ -31,7 +31,7 @@ int __cdecl fcn_0050bec0(unsigned char* s, int* out)
 			break;
 		}
 		w = k->slot[i] & 0x7fff;
-		if (((Obj50bec0*)lpObjektePROT)[w].kind != 0x21) {
+		if ((*(char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[w].kind) != 0x21) {
 			n++;
 		}
 		if (out != 0) {
@@ -46,7 +46,7 @@ int __cdecl fcn_0050bec0(unsigned char* s, int* out)
 int __cdecl fcn_0050bf30(unsigned char* s, unsigned short* key, int* out)
 {
 	Kind50bec0* k;
-	Obj50bec0* o;
+	OBJECT_PROTOTYPE* o;
 	int n;
 	int i;
 	int w;
@@ -66,11 +66,11 @@ int __cdecl fcn_0050bf30(unsigned char* s, unsigned short* key, int* out)
 			break;
 		}
 		w = k->slot[i] & 0x7fff;
-		o = &((Obj50bec0*)lpObjektePROT)[w];
-		if (o->kind == 2 || o->kind == 6) {
+		o = &((OBJECT_PROTOTYPE*)lpObjektePROT)[w];
+		if ((*(char *)&o->kind) == 2 || (*(char *)&o->kind) == 6) {
 			break;
 		}
-		if (o->kind != 0x21) {
+		if ((*(char *)&o->kind) != 0x21) {
 			n++;
 		}
 		if (out != 0) {

@@ -25,7 +25,7 @@ extern char* g_1015ea0;
 extern int g_1040494;
 
 void __cdecl fcn_00469c40(int x, int y, int slot);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00469090(int slot)
 {
 	Slot0469090* s;
@@ -33,15 +33,15 @@ void __cdecl fcn_00469090(int slot)
 	int x;
 	int y;
 
-	s = &((Slot0469090*)g_1015ea0)[slot];
-	if (s->used != 0) {
-		r = s->link;
+	s = (Slot0469090*) &((D2_CONTROL_TL*) g_1015ea0)[slot];
+	if (((D2_CONTROL_TL*) s)->value_06c != 0) {
+		r = (Rect0469090*) ((D2_CONTROL_TL*) s)->parent;
 		if (r != 0) {
-			x = r->width / 2 - s->width / 2 + r->left;
-			y = s->y;
+			x = r->width / 2 - ((D2_CONTROL_TL*) s)->width / 2 + r->left;
+			y = ((D2_CONTROL_TL*) s)->y;
 		} else {
-			x = g_1040494 / 2 - s->width / 2;
-			y = s->y;
+			x = g_1040494 / 2 - ((D2_CONTROL_TL*) s)->width / 2;
+			y = ((D2_CONTROL_TL*) s)->y;
 		}
 		fcn_00469c40(x, y, slot);
 	}

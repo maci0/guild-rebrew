@@ -40,8 +40,8 @@ void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_0050dc90(int);
 int __cdecl fcn_005373e0(int, int);
-void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_ClearRadioGroup(int); void __cdecl fcn_00471e30(int);
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "client_packet_builder.h"
 /* ADDRESS: GOLDTL 0x005c8c40 */
 void __cdecl d2_OpenPlayerStats(void)
@@ -110,7 +110,7 @@ void __cdecl d2_OpenPlayerStats(void)
 			for (i = 0; i < g_775338; i++) {
 				if (d2_CurrentElementId == *(int*) (0x778900 + i * 4)) {
 					d2_SetGroupVisibility(save, 0);
-					d2_ShowBuildingStatsDetail(*(int*) (*(int*) &g_1015ea0 + 0x2f0 + d2_CurrentElementId * 0x2f4));
+					d2_ShowBuildingStatsDetail(*(int*) (&((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[d2_CurrentElementId].associated_object));
 					d2_SetGroupVisibility(save, 1);
 					break;
 				}

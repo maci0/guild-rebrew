@@ -18,7 +18,7 @@ typedef struct
 
 extern Rec2d_9a3800 g_9a3800[512];
 extern Pair_99f800 g_99f800[0x800];
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 void* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl FindStraftatIndexById(int b);
@@ -34,7 +34,7 @@ int __cdecl fcn_004f63d0(int id, int* out, unsigned short k)
 	if (gm_LookupEntityRecordById(id) == 0) {
 		return 0;
 	}
-	e = g_7f4ca0 + k * 0x21c;
+	e = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[k]);
 	if (e == 0) {
 		return 0;
 	}

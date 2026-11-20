@@ -1,4 +1,4 @@
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -73,8 +73,8 @@ void __cdecl d2_RunFireExtinguishDialog(char* e)
 			} else {
 				goto next;
 			}
-			if (fcn_00525f60(g_7f4ca0 + g_774970 * 0x21c, n)) {
-				fcn_005100f0(*(int*) (g_7f4ca0 + g_774970 * 0x21c + 4), -n);
+			if (fcn_00525f60(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), n)) {
+				fcn_005100f0(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -n);
 				fcn_00471af0(win, 0);
 				if (gm_RandomFloat01() < p) {
 					ent = he_StartHandlungSearch(1, 0, 0x4f);

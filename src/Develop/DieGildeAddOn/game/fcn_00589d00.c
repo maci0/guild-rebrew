@@ -1,7 +1,7 @@
 #include <string.h>
 extern int gm_GameTime, g_7f4c08; extern unsigned short g_7f4c0c;
 extern int d2_CurrentWindowId, g_100f1dc, g_14ce8e0, g_774654, d2_CurrentElementId; extern char* g_1015ea0; extern unsigned short g_774970; extern unsigned char g_773d75;
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_664150;
 
@@ -81,8 +81,8 @@ void __cdecl fcn_00589d00(int a0)
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
 	elem = fcn_0046fac0(0, 3, *(int*) 0x14b5360, d2_CurrentWindowId);
-	*(int*) (g_1015ea0 + elem * 0x2f4 + 0x6c) = 1;
-	*(int*) (g_1015ea0 + elem * 0x2f4 + 0x18) =
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[elem].value_06c)) = 1;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[elem].width)) =
 	    *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c);
 	d2_SetElementFont(elem, 0x54);
 	elem = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, d2_CurrentWindowId);

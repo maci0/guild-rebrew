@@ -7,7 +7,7 @@ extern int g_66602c;
 extern float g_664178;
 extern float g_664158;
 extern float g_6628bc;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -57,7 +57,7 @@ int __cdecl fcn_00497990(int a1, char* entityRec, int phaseFlag, char* decisionM
 	e = (unsigned char*) lpGebaeudeINST;
 	for (i = 0; i < 0x100; i++) {
 		if (*e != 0) {
-			unsigned char b = ((BUILDING_ROW*)lpGebaeudePROT)[*e].kind;
+			unsigned char b = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category;
 			bits_lo = 0;
 			bits_hi = 0;
 			if (b > 0x1f) {
@@ -86,7 +86,7 @@ found:
 	q[3] = (r == 2 || r == 4);
 	t = (unsigned char*) *(int*) (entityRec + 0x170);
 	if (t != 0) {
-		n = ((BUILDING_ROW*)lpGebaeudePROT)[*t].level - 1;
+		n = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*t].level - 1;
 		if (n >= 0) {
 			/* uncertain: native clears b dwords from &q[0], past q[3] when b > 4 */
 			for (i = 0; i <= n; i++) {
@@ -101,7 +101,7 @@ found:
 		}
 		while (e != 0) {
 			unsigned char b = *(unsigned char*) e;
-			if (((BUILDING_ROW*)lpGebaeudePROT)[b].kind == 2 && (*(unsigned char*) (e + 0x5a) & 2) != 0) {
+			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[b].category == 2 && (*(unsigned char*) (e + 0x5a) & 2) != 0) {
 				if ((b == 4 && q[0] != 0) || (b == 5 && q[1] != 0) || (b == 6 && q[2] != 0) || (b == 7 && q[3] != 0)) {
 					t = (unsigned char*) he_StartHandlungSearch(1, 0, 0x1b);
 					if (t != 0) {
@@ -153,7 +153,7 @@ found:
 			return 0x10;
 		}
 		while (e != 0) {
-			if (((BUILDING_ROW*)lpGebaeudePROT)[*e].kind == id) {
+			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category == id) {
 				t = (unsigned char*) he_StartHandlungSearch(1, 0, 0x1b);
 				if (t != 0) {
 					while (*(int*) (t + 0xac) != *(int*) (e + 1)) {

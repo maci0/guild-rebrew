@@ -58,7 +58,7 @@ char *__cdecl fcn_005cd440(REQUEST *, char *, int, int);
 int __cdecl fcn_005373e0(void (__cdecl *)(void *), int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005e53b0 */
 void __cdecl fcn_005e53b0(void *arg)
 {
@@ -116,14 +116,14 @@ void __cdecl fcn_005e53b0(void *arg)
                 fcn_005ca740(item->x, item->y, d2_CurrentWindowId, 0x54, item, 1);
                 if (i < count) {
                     fcn_00472640(item->control, 1);
-                    ui = g_1015ea0 + item->control * 756;
-                    *(int *)(ui + 0x5c) = 1;
-                    *(int *)(ui + 0x1d0) = 3;
-                    *(char **)(ui + 0x2f0) = item->entity;
-                    *(int *)(ui + 0x60) = 0;
+                    ui = (char*) &((D2_CONTROL_TL*) g_1015ea0)[item->control];
+                    (*(D2_CONTROL_TL*) ui).value_05c = 1;
+                    (*(D2_CONTROL_TL*) ui).flags_1d0 = 3;
+                    *(char**) (&(*(D2_CONTROL_TL*) ui).associated_object) = item->entity;
+                    (*(D2_CONTROL_TL*) ui).value_060 = 0;
                 } else {
-                    ui = g_1015ea0 + item->control * 756;
-                    *(int *)(ui + 0x60) = 1;
+                    ui = (char*) &((D2_CONTROL_TL*) g_1015ea0)[item->control];
+                    (*(D2_CONTROL_TL*) ui).value_060 = 1;
                 }
                 p = item->entity;
                 if (p && i) cost += fcn_004e99c0((unsigned char)p[0x166]) / 3 + 2;

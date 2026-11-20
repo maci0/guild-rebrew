@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 // SIZE 0x6c4
@@ -31,9 +31,9 @@ void __cdecl fcn_005166a0(unsigned char* home)
 	unsigned char* rec;
 	int i;
 
-	rec = (unsigned char*) ((char*)lpGebaeudePROT) + *home * 589;
+	rec = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*home];
 	for (k = 0; g_699b18[k].key != 0; k++) {
-		if (g_699b18[k].key == *rec) {
+		if (g_699b18[k].key == (((BUILDING_PROTOTYPE*)rec)->category)) {
 			break;
 		}
 	}

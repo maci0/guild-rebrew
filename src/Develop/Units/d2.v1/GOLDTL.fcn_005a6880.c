@@ -56,7 +56,7 @@ void __cdecl fcn_0046f940(int, void*);
 void __cdecl fcn_0046ed00(int, int, int);
 void __cdecl fcn_005a6570(char*);
 void __cdecl d2_ShowMoneyExchangeDialog(char*);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005a6880 */
 void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 {
@@ -103,18 +103,18 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 	w0 = fcn_00472250(h, 0, 0);
 	w4 = fcn_00472250(h, 0, 4);
 	d2_SetForm(h, 0);
-	cx = *(int*) (g_1015ea0 + w1 * 0x2f4 + 0x10) - *(int*) (g_77255c + 4) + 2;
-	cy = *(int*) (g_1015ea0 + w1 * 0x2f4 + 0x1c) -
-	     *(int*) (g_77255c + 8) + *(int*) (g_1015ea0 + w1 * 0x2f4 + 0x14) +
+	cx = ((D2_CONTROL_TL*) (g_1015ea0))[w1].x - *(int*) (g_77255c + 4) + 2;
+	cy = ((D2_CONTROL_TL*) (g_1015ea0))[w1].height -
+	     *(int*) (g_77255c + 8) + ((D2_CONTROL_TL*) (g_1015ea0))[w1].y +
 	     2;
 	cb = fcn_0046fac0(cx, cy, g_6b5c60, d2_CurrentWindowId);
-	cx = *(int*) (g_1015ea0 + w2 * 0x2f4 + 0x10) - *(int*) (g_77255c + 4) + 2;
-	cy = *(int*) (g_1015ea0 + w2 * 0x2f4 + 0x1c) -
-	     *(int*) (g_77255c + 8) + *(int*) (g_1015ea0 + w2 * 0x2f4 + 0x14) +
+	cx = ((D2_CONTROL_TL*) (g_1015ea0))[w2].x - *(int*) (g_77255c + 4) + 2;
+	cy = ((D2_CONTROL_TL*) (g_1015ea0))[w2].height -
+	     *(int*) (g_77255c + 8) + ((D2_CONTROL_TL*) (g_1015ea0))[w2].y +
 	     2;
 	label2 = fcn_0046fac0(cx, cy, g_6b5c60, d2_CurrentWindowId);
-	*(int*) (g_1015ea0 + cb * 0x2f4 + 0x84) = 0x54;
-	*(int*) (g_1015ea0 + label2 * 0x2f4 + 0x84) = 0x54;
+	((D2_CONTROL_TL*) (g_1015ea0))[cb].font = 0x54;
+	((D2_CONTROL_TL*) (g_1015ea0))[label2].font = 0x54;
 	d2_SetForm(h, 0);
 	i = d2_CurrentWindowId;
 	*(int*) (0x10162e8 + i * 0x3cc) = 0xe;

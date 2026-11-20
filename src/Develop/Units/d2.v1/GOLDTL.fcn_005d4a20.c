@@ -58,7 +58,7 @@ char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005373e0(void*, int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005d4a20 */
 void __cdecl d2_ShowPrivilegien(void)
 {
@@ -184,8 +184,8 @@ void __cdecl d2_ShowPrivilegien(void)
 						h = fcn_00472250((int) dlg, 2,
 							io_AppendText((int) fmt, q.name));
 						keys[i] = -1;
-						((Slot*) g_1015ea0)[h].f4c = 1;
-						((Slot*) g_1015ea0)[h].f60 = 1;
+						((D2_CONTROL_TL*) g_1015ea0)[h].disabled = 1;
+						((D2_CONTROL_TL*) g_1015ea0)[h].value_060 = 1;
 						count++;
 					}
 				}

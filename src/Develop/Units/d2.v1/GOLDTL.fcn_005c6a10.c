@@ -10,7 +10,7 @@
 
 
 
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char* lpObjektePROT;
 extern unsigned char g_10161bc[];
 extern int d2_CurrentWindowId;
@@ -143,7 +143,7 @@ present:
 		g_7774a0[i].entity = *list;
 		h = fcn_0046f740(0, i * 0x78, 0x74c, d2_CurrentWindowId);
 		g_7774a0[i].row_element = h;
-		*(int*) (g_1015ea0 + h * 0x2f4 + 0x5c) = 1;
+		*(int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_05c = 1;
 		g_7774a0[i].portrait_element = fcn_0046f740(0x10, i * 0x78 + 5,
 			*(int*) (g_7774a0[i].entity + 0x18c), d2_CurrentWindowId);
 		h = fcn_0046f100(0x40, i * 0x78, 0xb4, 0x50, 0x10, d2_CurrentWindowId);

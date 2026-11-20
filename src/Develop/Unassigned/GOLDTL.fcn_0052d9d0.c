@@ -1,5 +1,5 @@
 extern int g_67a370;
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 // SIZE 0x21c
 struct s_7f4ca0 {
 	char pad[2];
@@ -27,7 +27,7 @@ void __cdecl fcn_0052d9d0(char* e)
 	if (*(unsigned short*) (e + 0x27) == 0xffff) {
 		return;
 	}
-	k = ((struct s_7f4ca0*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].kind;
+	k = ((struct s_7f4ca0 *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 0x27)])->kind;
 	if (k == 6 || k == 7 || k == 5) {
 		if ((o[0x214] & 1) == 0) {
 			saved = *(int*) (o + 0x1f4);

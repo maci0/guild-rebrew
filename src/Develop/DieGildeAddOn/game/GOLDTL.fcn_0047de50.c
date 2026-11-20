@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 #include <stdio.h>
 
@@ -101,7 +101,7 @@ void __cdecl ai_EvaluateMeister(Master47de* m)
 		g_100dc30 = m->budget;
 	}
 	if (gm_GetBuildingTypeCategory(m->bld->office) == 1 || gm_GetBuildingTypeCategory(m->bld->office) == 4) {
-		k = ((Office47de*)lpGebaeudePROT)[m->bld->office].kind;
+		k = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[m->bld->office].category;
 		if (k == 0xe || k == 8 || k == 0x20) {
 			ai_StartMeisterProduction(m);
 		} else if (k == 0x1d) {
@@ -114,7 +114,7 @@ void __cdecl ai_EvaluateMeister(Master47de* m)
 	} else if (gm_GetBuildingTypeCategory(m->bld->office) == 2) {
 		fcn_0047f6b0(m);
 	} else {
-		k = ((Office47de*)lpGebaeudePROT)[m->bld->office].kind;
+		k = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[m->bld->office].category;
 		if (k == 0x13) {
 			ai_CalcMeisterWache(m);
 		} else if (k == 4) {

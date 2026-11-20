@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 // SIZE 0x21c
@@ -49,7 +49,7 @@ void __cdecl cm_RequestSellObjekt(char* e)
 	char* r;
 	char* q;
 	int n;
-	struct good* p;
+	struct BUILDING_PROTOTYPE * p;
 
 	n = 0;
 	amt = 0;
@@ -63,8 +63,8 @@ void __cdecl cm_RequestSellObjekt(char* e)
 				if (n >= 16) {
 					break;
 				}
-				p = &((struct good*)lpGebaeudePROT)[*c];
-				if (gm_GetBuildingTypeCategory(*c) == 1 || p->kind == 9) {
+				p = &((struct BUILDING_PROTOTYPE *)lpGebaeudePROT)[*c];
+				if (gm_GetBuildingTypeCategory(*c) == 1 || p->category == 9) {
 					list[n++] = c;
 				}
 			}

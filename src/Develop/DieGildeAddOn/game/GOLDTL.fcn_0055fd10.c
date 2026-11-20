@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 // SIZE 0xe
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 // SIZE 0x21c
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
@@ -36,7 +36,7 @@ void __cdecl fcn_0055fd10(char* u)
 	int v;
 	char text[0x400];
 	unsigned char* p;
-	unsigned char* t;
+	BUILDING_PROTOTYPE* t;
 	char* r;
 	char* w;
 	int a;
@@ -61,12 +61,12 @@ void __cdecl fcn_0055fd10(char* u)
 		if (p == 0) {
 			goto kill;
 		}
-		t = lpGebaeudePROT + *p * 0x24d;
+		t = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p];
 		if (*(short*) h != 0x116) {
-			a = t[0x240];
-			b = t[0x241];
+			a = t->dimension_240;
+			b = t->dimension_241;
 		} else {
-			a = b = t[0x242];
+			a = b = t->dimension_242;
 		}
 		if (*(int*) (u + 0xb0) > 0) {
 			*(int*) (u + 0xb0) -= 1;

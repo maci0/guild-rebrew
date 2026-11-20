@@ -9,7 +9,7 @@ typedef struct Rec {
     char pad38[9];
 } Rec;
 #pragma pack(pop)
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern float g_6628a8;
 extern char* lpObjektePROT;
 
@@ -20,7 +20,7 @@ float __cdecl fcn_0050b840(int id)
 	float acc;
 	int i;
 	int t;
-	Rec* r;
+	OBJECT_PROTOTYPE* r;
 
 	base = *(unsigned char**) 0x868050;
 	t = ((int*) 0x99e0a0)[id];
@@ -28,6 +28,6 @@ float __cdecl fcn_0050b840(int id)
 	for (i = 0; i < 2; i++) {
 		acc += base[t * 0x24d + 0x233 + i] * *(float*) 0x665be0 * *(double*) 0x665bd8;
 	}
-	r = (Rec*) lpObjektePROT + id;
-	return acc * r->cap / r->div;
+	r = (OBJECT_PROTOTYPE*) lpObjektePROT + id;
+	return acc * r->value_022 / r->value_036;
 }

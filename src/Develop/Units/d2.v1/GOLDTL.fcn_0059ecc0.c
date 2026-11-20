@@ -3,7 +3,7 @@
 extern pos14_7f4c00 gm_GameTime; extern char g_7f4ca0[];
 extern int g_100f1dc, d2_CurrentElementId, g_14ce8e0, g_774654;
 
-extern unsigned int* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_CurrentWindowId;
 
 typedef struct Req_59ecc0 {
@@ -109,11 +109,11 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 	cnt = 0;
 	for (x = 0x19; x < 0x109; x += 0x50) {
 		h = fcn_0046f740(y, x, (int) ids[cnt] + 0xdf, d2_CurrentWindowId);
-		g_1015ea0[h * 0xbd + 0x17] = 1;
-		g_1015ea0[h * 0xbd + 0x74] = 3;
-		g_1015ea0[h * 0xbd + 0x77] = 100;
-		g_1015ea0[h * 0xbd + 0x78] = 0x10;
-		g_1015ea0[h * 0xbd + 0x21] = 0x54;
+		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_05c = 1;
+		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].flags_1d0 = 3;
+		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_1dc = 100;
+		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_1e0 = 0x10;
+		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].font = 0x54;
 		fcn_0046f9b0(h, *(int*) (0x14a79c0 + (int) ids[cnt] * 8));
 		handles[cnt] = h;
 		fcn_00472640(h, 1);

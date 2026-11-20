@@ -1,5 +1,5 @@
 extern unsigned char* lpGebaeudePROT;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x00504ef0 */
 int __cdecl fcn_00504ef0(int type, int* out)
 {
@@ -8,7 +8,7 @@ int __cdecl fcn_00504ef0(int type, int* out)
 
 	n = 0;
 	for (i = 0; i < 0x58; i++) {
-		if (lpGebaeudePROT[i * 0x24d] == type) {
+		if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[i].category == type) {
 			out[n] = i;
 			n++;
 		}

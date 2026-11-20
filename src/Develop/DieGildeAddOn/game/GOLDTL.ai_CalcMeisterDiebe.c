@@ -1,5 +1,5 @@
 /* AI: a master decides to recruit thieves (Gesetze/slavery economy screen logic). */
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include <string.h>
 #include <stdio.h>
 #include "Develop/DieGildeAddOn/game/goods_plan.h"
@@ -105,7 +105,7 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 			break;
 		}
 		if (gm_ResolveEntityById(0, (int*) &ent, 0, *(int*) (found + 6)) != 0
-		    && *(char*) (lpObjektePROT + (unsigned int) (unsigned short) *(unsigned short*) ent * 0x41) == 2) {
+		    && *(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(unsigned int) (unsigned short) *(unsigned short*) ent])) == 2) {
 			handle = (unsigned char*) found;
 		}
 		found = gm_NextEntityQueryMatch();

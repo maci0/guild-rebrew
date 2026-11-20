@@ -64,9 +64,9 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* row, int a5)
 			fcn_00472640(row[2], 0);
 		}
 		if (row[0xc]) {
-			*(int*) ((int)g_1015ea0 + 0x5c + row[1] * 0x2f4) = 1;
-			*(int*) ((int)g_1015ea0 + 0x1d0 + row[1] * 0x2f4) = 3;
-			*(int*) ((int)g_1015ea0 + 0x2f0 + row[1] * 0x2f4) = row[0];
+			*(int*) ((int)((char*)&((D2_CONTROL_TL*)g_1015ea0)[row[1]].value_05c)) = 1;
+			*(int*) ((int)((char*)&((D2_CONTROL_TL*)g_1015ea0)[row[1]].flags_1d0)) = 3;
+			*(int*) ((int)((char*)&((D2_CONTROL_TL*)g_1015ea0)[row[1]].associated_object)) = row[0];
 		}
 		kind = *(unsigned char*) (row[0] + 2);
 		if (kind != 5 && kind != 6 && kind != 7)

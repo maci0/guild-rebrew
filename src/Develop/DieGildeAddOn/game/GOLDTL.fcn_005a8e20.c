@@ -24,7 +24,7 @@ typedef struct
 
 // SIZE 0x3cc
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -111,7 +111,7 @@ void __cdecl d2_OpenRathausGebInfo(void)
 		if (g_100f1dc != -1) {
 			for (i = 0; i < n; i++) {
 				if (d2_CurrentElementId == rows[i].btn && *(unsigned short*) (rows[i].obj + 0x27) != g_774970 &&
-				    fcn_00526010(&((Player*)g_7f4ca0)[g_774970], *(int*) (rows[i].rel + 0xb0), (*(char*)&g_773d75)) != 0) {
+				    fcn_00526010(((Player*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), *(int*) (rows[i].rel + 0xb0), (*(char*)&g_773d75)) != 0) {
 					fcn_00526920(rows[i].obj, -1, s_6b5c60);
 				}
 			}

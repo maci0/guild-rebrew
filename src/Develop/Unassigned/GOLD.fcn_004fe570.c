@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 char* __cdecl m_alloc(int, const char*);
 void __cdecl gm_InitItemBuildingMap(void);
 void __cdecl gm_KillAllSpieler(void);
@@ -19,7 +20,6 @@ int __cdecl gm_InitializeGameTables(char* prefix)
     int n;
     unsigned short id;
     unsigned int index;
-
     for (src = (char*) 0x7e3ff8, d = (char*) 0x7d6a64; (int) src < 0x7e4ebc; src += 0x2f4, d += 0x2a90) {
 
         *(int*) (d - 4) = *(int*) (src - 0x50);
@@ -67,7 +67,7 @@ int __cdecl gm_InitializeGameTables(char* prefix)
             if (id == 0xffff)
                 continue;
             index = id & 0x7fff;
-            if ((items[index * 0x41] == 2 || items[index * 0x41] == 6) &&
+            if (((*(char *)&((OBJECT_PROTOTYPE *)items)[index].kind) == 2 || (*(char *)&((OBJECT_PROTOTYPE *)items)[index].kind) == 6) &&
                 index != 0xfd && (id & 0x8000))
                 n++;
         }

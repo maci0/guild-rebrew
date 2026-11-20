@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_sound.h"
 #include "client_types.h"
 #include "g_688118.h"
@@ -125,7 +125,7 @@ check:
 	if (g_772e58 == 0) {
 		return;
 	}
-	if (((BUILDING_ROW*)lpGebaeudePROT)[(unsigned char)*g_772e58].kind != 2) {
+	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[(unsigned char)*g_772e58].category != 2) {
 		return;
 	}
 restart:
@@ -136,7 +136,7 @@ restart:
 	thr = *(short*) (0x688228 + idx);
 	roll = gm_RandomMod(0x80);
 	if ((int) roll < thr) {
-		kind = g_772e58 != 0 ? ((BUILDING_ROW*)lpGebaeudePROT)[(unsigned char)*g_772e58].kind : 0x2694;
+		kind = g_772e58 != 0 ? ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[(unsigned char)*g_772e58].category : 0x2694;
 		j = 0;
 		e = *(int*) (0x688118 + idx);
 		while (e != 0) {

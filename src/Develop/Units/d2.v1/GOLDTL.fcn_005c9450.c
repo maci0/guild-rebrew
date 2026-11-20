@@ -56,9 +56,9 @@ int __cdecl fcn_005c9450(unsigned short* who, int n, int* arr)
 		io_FormatTextBuffer(buf, s_68be7c, v);
 		d2_ShowTxt(0x80, y + 0x1b, buf, d2_CurrentWindowId);
 		if (flag == 1 && cnt < n) {
-			((Slot*)g_1015ea0)[h].x5c = 1;
-			((Slot*)g_1015ea0)[h].x1d0 = 3;
-			((Slot*)g_1015ea0)[h].x2f0 = e;
+			((D2_CONTROL_TL*) g_1015ea0)[h].value_05c = 1;
+			((D2_CONTROL_TL*) g_1015ea0)[h].flags_1d0 = 3;
+			((D2_CONTROL_TL*) g_1015ea0)[h].associated_object = e;
 			arr[cnt] = h;
 		}
 		cnt++;

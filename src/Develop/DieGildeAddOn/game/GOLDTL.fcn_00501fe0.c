@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/season_slots.h"
 
 
 // SIZE 0x80
@@ -33,15 +33,15 @@ void __cdecl fcn_00501fe0(void)
 	}
 	for (n = gm_RandomMod(2); n > 0; n--) {
 		r = gm_RandomMod(0x54);
-		row = (Offer*) (g_85ab90 + g_773d75 * 0x2a90 + r * 0x80);
-		if (row->id != 0 && row->active != 0) {
+		row = (Offer*)&((MARKET_STOCK_SLOT*)(g_85ab90 + g_773d75 * 0x2a90))[r];
+		if (((MARKET_STOCK_SLOT*)row)->objekt_id != 0 && ((MARKET_STOCK_SLOT*)row)->active != 0) {
 			copy = *row;
 			if (gm_RandomMod(1) != 0) {
 				copy.price = copy.base * 1.5;
-				copy.value = (float)(eval_ObjektPreis2Credits(row->id, 100) * 1.5);
+				copy.value = (float)(eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 100) * 1.5);
 			} else {
 				copy.price = copy.base * 0.5;
-				copy.value = (float)(eval_ObjektPreis2Credits(row->id, 100) * 0.5);
+				copy.value = (float)(eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 100) * 0.5);
 			}
 			fcn_004c61d0(&copy, g_773d75);
 		}

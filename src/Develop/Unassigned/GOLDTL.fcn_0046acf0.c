@@ -1,7 +1,7 @@
 #include <string.h>
 extern int g_102d028, g_102d02c, g_67d388, d2_CurrentElementId; extern char* g_1015ea0;
-char* __cdecl d3_FindTextureByName(char*);
-char __cdecl fcn_00444860(float, float, int, char*, float*, float*);
+char* __cdecl d3_FindTextureByName(char*); char __cdecl fcn_00444860(float, float, int, char*, float*, float*);
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046acf0 */
 int __cdecl fcn_0046acf0(int a0, int screenY, int a2, int a3, int a4)
 {
@@ -79,7 +79,7 @@ found:
 		list = *(int**) (t + 0x28);
 		{
 			for (j = 0; j < cnt; j++, list++) {
-				obj = g_1015ea0 + *list * 0x2f4;
+				obj = (char*) &((D2_CONTROL_TL*) g_1015ea0)[*list];
 				if (px < *(int*) (obj + 0x10)) {
 					continue;
 				}

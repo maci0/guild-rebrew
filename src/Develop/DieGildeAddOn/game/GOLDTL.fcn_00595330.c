@@ -1,7 +1,7 @@
 extern char* lpObjektePROT;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_0050cce0(char*, void*, int);
@@ -44,8 +44,8 @@ typedef struct Stock {
 #define g_row_item(r, k) (*(int*) ((r) + 0x3c + (k) * 4))
 #define g_row_last(r) (*(int*) ((r) + 0x4c))
 
-#define g_object(idx) (g_1015ea0 + (idx) * 0x2f4)
-#define g_id_field(row, ofs) (*(unsigned short*) (lpObjektePROT + g_row_type(row) * 0x41 + (ofs)))
+#define g_object(idx) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[(idx)])
+#define g_id_field(row, ofs) (*(unsigned short*) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[g_row_type(row)] + (ofs)))
 
 /* ADDRESS: GOLDTL 0x00595330 */
 void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4)
@@ -109,22 +109,22 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 			key = 0x26;
 			delta = 0x11;
 			slot = row + 0x3c;
-			*(int*) (g_object(g_row_sub(row)) + 0x5c) = 1;
-			*(int*) (g_object(g_row_sub(row)) + 0x1e8) = -1;
-			*(int*) (g_object(g_row_sub(row)) + 0x1ec) = -1;
+			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_05c = 1;
+			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1e8 = -1;
+			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1ec = -1;
 			do {
 				if (*(int*) (slot - 0x38)) {
 					*(int*) slot = fcn_0046f7e0(delta, 0x3a,
 					                            *(int*) (slot - 0x38) + 0xdf,
 					                            g_row_handle(row), -2);
-					*(int*) (g_object(*(int*) slot) + 0x5c) = 1;
+					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_05c = 1;
 					d2_SetElementFont(*(int*) slot, 0x54);
 					_itoa(g_id_field(row, key), numbuf, 10);
 					fcn_0046f9b0(*(int*) slot, (int) numbuf);
-					*(int*) (g_object(*(int*) slot) + 0x1dc) = -8;
-					*(int*) (g_object(*(int*) slot) + 0x1e0) = 6;
-					*(int*) (g_object(*(int*) slot) + 0x1e8) = -1;
-					*(int*) (g_object(*(int*) slot) + 0x1ec) = -1;
+					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1dc = -8;
+					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1e0 = 6;
+					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1e8 = -1;
+					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1ec = -1;
 				}
 				key += 2;
 				slot += 4;
@@ -148,10 +148,10 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 				}
 				if (idx < stock.n) {
 					if ((int) g_id_field(row, key) <= stock.vals[idx]) {
-						*(int*) (g_object(*(int*) slot) + 0x1e4) = 0x74d;
+						*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1e4 = 0x74d;
 						pick = delta;
 					} else {
-						*(int*) (g_object(*(int*) slot) + 0x1e4) = 0x74e;
+						*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1e4 = 0x74e;
 						if (status <= 1) {
 							status = 1;
 						}
@@ -160,7 +160,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 					}
 				} else {
 					status = 2;
-					*(int*) (g_object(*(int*) slot) + 0x1e4) = 0x74f;
+					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1e4 = 0x74f;
 					if (g_row_sel(row) == cnt) {
 						delta = (unsigned int) g_id_field(row, key);
 						pick = delta;
@@ -171,7 +171,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 			cnt++;
 			slot += 4;
 		} while (key < 0x2e);
-		*(int*) (g_object(g_row_sub(row)) + 0x1e4) = status + 0x750;
+		*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1e4 = status + 0x750;
 
 		found = he_StartHandlungSearch(2, 0, 4, 3, *(unsigned int*) (ent + 1));
 		while (found != 0) {
@@ -211,7 +211,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 				}
 			}
 			if (g_row_extra(row) >= 0
-			    && *(int*) (g_object(g_row_extra(row)) + 8) != state) {
+			    && *(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_extra(row)].value_008 != state) {
 				d2_DestroyElement(g_row_extra(row));
 				g_row_extra(row) = -1;
 			}
@@ -220,10 +220,10 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 			}
 			delta = *(int*) (found + 0x18) + *(int*) (found + 0x14);
 			if (*found == 4) {
-				*(float*) (g_object(g_row_sub(row)) + 0x1f4) =
+				*(float*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1f4.real =
 					g_6629c8 - *(float*) (found + 0xb4) / *(float*) (found + 0xb8);
 			} else if (*found == 3) {
-				*(float*) (g_object(g_row_sub(row)) + 0x1f4) =
+				*(float*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1f4.real =
 					g_6629c8 - (float) *(int*) (found + 0xb0) / *(float*) (found + 0xb4);
 			}
 		} else {
@@ -232,7 +232,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 				g_row_extra(row) = -1;
 			}
 			if (g_row_sub(row) != -1) {
-				*(float*) (g_object(g_row_sub(row)) + 0x1f4) = 0.0f;
+				*(float*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1f4.real = 0.0f;
 			}
 			idx = 0;
 		}
@@ -240,7 +240,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 		slot = row + 0x3c;
 		for (j = 4; j != 0; j--) {
 			if (*(int*) (slot - 0x38)) {
-				*(int*) (g_object(*(int*) slot) + 0x3c) = 0;
+				*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_03c = 0;
 			}
 			slot += 4;
 		}
@@ -258,7 +258,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 				io_AppendText(0x6aa194, delta, 0x51e, 0xb8, g_row_type(row) * 2 + 0x9a8);
 			}
 		} else if (pick != 0) {
-			*(int*) (g_object(g_row_item(row, key)) + 0x3c) = 1;
+			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_item(row, key)].value_03c = 1;
 			d2_CurrentWindowId = g_row_last(row);
 			if (g_id_field(row, 0x36) == 1) {
 				switch (fcn_0051e070()) {
@@ -296,7 +296,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 			}
 		} else {
 			pick = 1;
-			*(int*) (g_object(g_row_item(row, key)) + 0x3c) = 1;
+			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_item(row, key)].value_03c = 1;
 			d2_CurrentWindowId = g_row_last(row);
 			if (g_id_field(row, 0x36) == 1) {
 				switch (fcn_0051e070()) {

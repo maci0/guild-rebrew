@@ -36,7 +36,7 @@ typedef struct
 
 #include "client_types.h"
 extern Fld_102d140 g_102d140[];
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char s_67d47c[];
 extern char s_67d474[];
 extern char s_67d46c[];
@@ -101,21 +101,21 @@ int __cdecl d2_OpenInputIcon(int x, int y, int w, int h, unsigned char flags)
 		f->max = 0x20;
 	}
 	if (flags & 0x30) {
-		((fcn_00467240_Ent*)g_1015ea0)[id].i[0x78 / 4] = 1;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_078) = 1;
 	}
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x20 / 4] = 0x41;
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x10 / 4] = f->x;
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x14 / 4] = f->y;
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x18 / 4] = f->w;
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x1c / 4] = f->h;
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x8 / 4] = 0;
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x88 / 4] = f->idx;
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x24 / 4] = 2;
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x30 / 4] = f->y;
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x28 / 4] = f->x;
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x2c / 4] = f->x + f->w;
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0x34 / 4] = f->y + f->h;
-	((fcn_00467240_Ent*)g_1015ea0)[id].i[0xc / 4] = (int) f;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].kind) = 0x41;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].x) = f->x;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].y) = f->y;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].width) = f->w;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) = f->h;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_008) = 0;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_088) = f->idx;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].mode) = 2;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_top) = f->y;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_left) = f->x;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_right) = f->x + f->w;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_bottom) = f->y + f->h;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].data) = (int) f;
 	f->ent = id;
 	return id;
 }

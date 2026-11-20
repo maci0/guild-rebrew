@@ -41,11 +41,11 @@ void __cdecl fcn_005e5130(void)
 	Req* p;
 	int n;
 
-	if (((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_flags & 0x20000) {
+	if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].flags_1cc) & 0x20000) {
 		fcn_00526120(g_14b5bc0, 4);
 		return;
 	}
-	if (fcn_00525f60(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 1)) {
+	if (fcn_00525f60(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 1)) {
 		n = 0x50;
 		p = &req;
 		__asm {

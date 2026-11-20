@@ -13,7 +13,7 @@ struct gadget {
 	char pad1d4[0x120];
 };
 
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char* g_14a5ad8[];
 extern int d2_CurrentWindowId;
 extern char g_6a3f8c[];
@@ -67,10 +67,10 @@ int __cdecl d2_ShowChooseProfessionDialog(int flags)
 		t = types[i];
 		id = fcn_0046f740((i % 3) * 0x60 + 0x64, (i / 3 * 5 + 5) * 0x10, t + 0x5a1, d2_CurrentWindowId);
 		ids[i] = id;
-		((struct gadget*)g_1015ea0)[id].visible = 1;
-		((struct gadget*)g_1015ea0)[id].mode = 3;
-		strcpy(((struct gadget*)g_1015ea0)[id].label, g_14a5ad8[t]);
-		((struct gadget*)g_1015ea0)[id].font = 0x56;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_05c) = 1;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0) = 3;
+		strcpy(((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0xcc), g_14a5ad8[t]);
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_1cc) = 0x56;
 		fcn_00469470(list, id);
 	}
 	g_100f1dc = -1;

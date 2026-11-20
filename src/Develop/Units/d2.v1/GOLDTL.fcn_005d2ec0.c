@@ -67,7 +67,7 @@ int __cdecl fcn_005d2ec0(char* a0)
 		items[i].e = gm_LookupEntityRecordById(ids[i]);
 		items[i].flag = 1;
 		fcn_005ca560(&items[i]);
-		items[i].val = fcn_005d2a40(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, *(int*) (items[i].e + 4));
+		items[i].val = fcn_005d2a40(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, *(int*) (items[i].e + 4));
 		io_FormatTextBuffer(buf, 0x1ce4, items[i].val);
 		fcn_005ca740(items[i].x, items[i].y, d2_CurrentWindowId, 0x56, &items[i], 1);
 		fcn_005c9090((int) buf, items[i].x + *(short*) (g_772500 + 0x1ebd8) / 2,

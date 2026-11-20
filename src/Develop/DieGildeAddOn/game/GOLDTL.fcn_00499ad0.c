@@ -36,7 +36,7 @@ typedef struct {
 	char pad8[0x214];
 } House499a;
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_6a375c;
@@ -85,7 +85,7 @@ int __cdecl fcn_00499ad0(char* e)
 			if (i >= g_6a375c) {
 				break;
 			}
-			if (((House499a*)g_7f4ca0)[k].type == 6 || ((House499a*)g_7f4ca0)[k].type == 7) {
+			if ((*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[k].entity_type) == 6 || (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[k].entity_type) == 7) {
 				{
 					int dst;
 					int n;
@@ -110,7 +110,7 @@ int __cdecl fcn_00499ad0(char* e)
 					rep stosb
 					}
 				}
-				m.owner = ((House499a*)g_7f4ca0)[k].owner;
+				m.owner = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[k].entity_id);
 				m.kind = 0x69;
 				m.target = -1;
 				m.code = 9;

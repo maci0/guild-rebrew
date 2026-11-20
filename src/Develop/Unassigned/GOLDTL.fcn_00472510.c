@@ -17,7 +17,7 @@ typedef Page_1038144 fcn_00472510_Page;
 // SIZE 0x2bc
 
 extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern Page_1038144 g_1038144[];
 extern int g_772534;
 
@@ -25,16 +25,16 @@ extern int g_772534;
 void __cdecl fcn_00472510(int idx, int slot, int a3, int a4, int a5, int a6)
 {
 	fcn_00472510_Win* w;
-	fcn_00472510_Ent* e;
+	D2_CONTROL_TL* e;
 	char* sub;
 
 	w = &((fcn_00472510_Win*)g_1015f40)[g_1038144[g_772534].i[slot]];
 	if (idx > w->i[0x2c / 4]) {
 		return;
 	}
-	e = &((fcn_00472510_Ent*)g_1015ea0)[((int*) w->i[0x28 / 4])[idx]];
-	if (e->i[0x20 / 4] == 0x41) {
-		sub = (char*) e->i[0xc / 4];
+	e = &((D2_CONTROL_TL*)g_1015ea0)[((int*) w->i[0x28 / 4])[idx]];
+	if ((*(int*)&e->kind) == 0x41) {
+		sub = (char*) (*(int*)&e->data);
 		if (*(int*) (sub + 0x28) & 1) {
 			if (strlen((char*) a3) > 0xfe) {
 				return;
@@ -49,14 +49,14 @@ void __cdecl fcn_00472510(int idx, int slot, int a3, int a4, int a5, int a6)
 			return;
 		}
 	}
-	if (e->i[0x20 / 4] == 0x45) {
-		e->i[0x90 / 4] = a3;
-		e->i[0x94 / 4] = a4;
-		e->i[0x8c / 4] = a5;
-		if (*((unsigned char*) e + 0x98) & 0x10) {
-			e->i[0xa0 / 4] = a6;
+	if ((*(int*)&e->kind) == 0x45) {
+		(*(int*)&e->payload.fields.value_090) = a3;
+		(*(int*)&e->payload.fields.value_094) = a4;
+		(*(int*)&e->payload.fields.value_08c) = a5;
+		if (*((unsigned char*)&e->payload.fields.value_098) & 0x10) {
+			(*(int*)&e->payload.fields.value_0a0) = a6;
 		}
-	} else if (e->i[0x58 / 4] != 0 || e->i[0x5c / 4] != 0) {
-		e->i[0x3c / 4] = e->i[0x38 / 4] = (unsigned char) a3;
+	} else if ((*(int*)&e->value_058) != 0 || (*(int*)&e->value_05c) != 0) {
+		(*(int*)&e->value_03c) = (*(int*)&e->value_038) = (unsigned char) a3;
 	}
 }

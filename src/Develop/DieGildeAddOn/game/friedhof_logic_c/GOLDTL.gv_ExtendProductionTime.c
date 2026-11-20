@@ -1,5 +1,5 @@
 /* gv_ExtendProductionTime - proper C */
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 
@@ -40,7 +40,7 @@ int __cdecl gv_ExtendProductionTime(void* building)
 		if (grave_id != 0xffff) {
 			if ((char*) 0x7f4ca0 + grave_id * 0x21c != (char*) *(unsigned int*) 0x773da8) {
 				field_id = *(unsigned char*) entity;
-				if (lpGebaeudePROT[field_id + field_id * 588] != 0x1d) {
+				if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[field_id].category != 0x1d) {
 					return -2;
 				}
 				workers = *(void**) ((char*) entity + 0x65);

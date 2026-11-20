@@ -1,3 +1,4 @@
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_0047d220(char* p);
 void* __cdecl fcn_004f18d0(char* a1, char* a2, int a3, int a4, int a5);
@@ -21,7 +22,6 @@ int __cdecl fcn_0048fe70(int a0, char* actorEntity, int a2, int* a3, int* a4, in
 	int out;
 	int m;
 	int t, r;
-
 	v9 = 0;
 	if (a2 != 0) {
 		return 0;
@@ -57,7 +57,7 @@ int __cdecl fcn_0048fe70(int a0, char* actorEntity, int a2, int* a3, int* a4, in
 	a2 = 0;
 	do {
 		if (*rec != 0 && (rec[0x5a] & 1) == 0
-		    && lpGebaeudePROT[(unsigned char) *rec * 0x24d] == 0x1d) {
+		    && ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *rec].category == 0x1d) {
 			if (n < 8) {
 				cand[n] = (int) rec;
 				n++;

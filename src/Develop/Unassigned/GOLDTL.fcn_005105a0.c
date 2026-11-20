@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 #include <string.h>
@@ -34,7 +34,7 @@ int __cdecl fcn_005105a0(char* o)
 	}
 	if (_strcmpi(base, "ob") == 0 || _strcmpi(base + 1, "ob") == 0) {
 		for (i = 0; i < 732; i++) {
-			if (_strcmpi(type, lpObjektePROT + i * 0x41 + 1) == 0) {
+			if (_strcmpi(type, ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[i]) + 1) == 0) {
 				*(int*) (o + 0x48) = i | 0x1000000;
 				return 1;
 			}

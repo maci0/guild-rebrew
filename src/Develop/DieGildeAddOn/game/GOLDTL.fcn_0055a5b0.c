@@ -30,7 +30,7 @@ typedef struct {
 	char pad6e[0x8a];
 } Msg55a5;
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
@@ -78,7 +78,7 @@ void __cdecl fcn_0055a5b0(char* u)
 			return;
 		}
 		if (*(int*) (u + 0xb0) != 0) {
-			h = g_7f4ca0 + *(unsigned short*) (u + 8) * 0x21c;
+			h = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)]);
 			f = gm_GetEntitySkill(h, 3) > 0.1f ? gm_GetEntitySkill(h, 3) : 0.1f;
 			a = gm_WalkEntityChain(*(unsigned short*) h);
 			fcn_004ff210(*(unsigned short*) h, -(int) ((int) fcn_004fef80(h) * ((1.0f - f) * 0.5f)));

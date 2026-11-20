@@ -2,7 +2,7 @@
 
 extern int g_7746a0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int g_14aac24;
 extern char g_6aafe4[];
 
@@ -20,7 +20,7 @@ void __cdecl fcn_005aaed0(int a)
 	x = 0;
 	fcn_005338a0();
 	while (fcn_005373e0(fcn_005aaed0, 0x67fff) != 0) {
-		if (gm_CheckZunftPreismanipulation(g_7f4ca0 + g_774970 * 540) != 0) {
+		if (gm_CheckZunftPreismanipulation(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])) != 0) {
 			x = RegisterStatusText(g_6aafe4, g_14aac24, 0x16);
 		}
 		if (g_7746a0 != 0 && g_7746a0 == x) {

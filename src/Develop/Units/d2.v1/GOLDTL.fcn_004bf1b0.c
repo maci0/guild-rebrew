@@ -49,7 +49,7 @@ unsigned int __cdecl fcn_004be560(char*, int, unsigned int);
 unsigned int __cdecl d2_ChooseRoutingGood(char*, int, unsigned int);
 int __cdecl fcn_004bf3e0(int*);
 void __cdecl fcn_004bfc70(int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004bf1b0 */
 void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 {
@@ -110,12 +110,12 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 	}
 	fcn_0046f740(0x6e, 0x1a, *(unsigned short*) rec + 0x4ae, first);
 	i = d2_ShowTxt(0x6e, 2, g_14b5e88, first);
-	*(int*) (g_1015ea0 + i * 0x2f4 + 0x6c) = 1;
-	*(int*) (g_1015ea0 + i * 0x2f4 + 0x18) = 0xcd;
+	((D2_CONTROL_TL*) (g_1015ea0))[i].value_06c = 1;
+	((D2_CONTROL_TL*) (g_1015ea0))[i].width = 0xcd;
 	fcn_0046f740(0x6e, 0x88, *(unsigned short*) rec + 0x4ae, first);
 	i = d2_ShowTxt(0x6e, 0x70, g_14b5e8c, first);
-	*(int*) (g_1015ea0 + i * 0x2f4 + 0x6c) = 1;
-	*(int*) (g_1015ea0 + i * 0x2f4 + 0x18) = 0xcd;
+	((D2_CONTROL_TL*) (g_1015ea0))[i].value_06c = 1;
+	((D2_CONTROL_TL*) (g_1015ea0))[i].width = 0xcd;
 	if (n > 0) {
 		icons[3] = 0x51;
 		icons[4] = 0;
@@ -129,11 +129,11 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 		for (i = 0; i < n; i++) {
 			k = icons[3 + i + (*(unsigned short*) rec - 0x134) * 3] + 0x6e;
 			icons[i] = fcn_0046f740(k, 0x22, 0x525, first);
-			*(int*) (g_1015ea0 + icons[i] * 0x2f4 + 0x5c) = 1;
-			*(int*) (g_1015ea0 + icons[i] * 0x2f4 + 0x1d0) = 3;
+			((D2_CONTROL_TL*) (g_1015ea0))[icons[i]].value_05c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[icons[i]].flags_1d0 = 3;
 			labels[i] = fcn_0046f740(k, 0x90, 0x525, first);
-			*(int*) (g_1015ea0 + labels[i] * 0x2f4 + 0x5c) = 1;
-			*(int*) (g_1015ea0 + labels[i] * 0x2f4 + 0x1d0) = 3;
+			((D2_CONTROL_TL*) (g_1015ea0))[labels[i]].value_05c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[labels[i]].flags_1d0 = 3;
 		}
 	}
 	while (fcn_005373e0(fcn_004bf1b0, 0x657c7) != 0) {

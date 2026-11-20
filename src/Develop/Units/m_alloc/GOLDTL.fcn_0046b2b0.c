@@ -15,7 +15,7 @@ void __cdecl d2_SubRefcount(int i);
 void __cdecl d2_AddDirtyRect(int x, int y, int w, int h, void* owner);
 void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* Releases one entity slot: runs the state-specific teardown, detaches it from
  * its window list and panel, then clears the slot record. */
 /* ADDRESS: GOLDTL 0x0046b2b0 */
@@ -28,25 +28,25 @@ void __cdecl d2_DestroyElement(int id)
 	int i;
 	int state;
 
-	e = g_1015ea0 + id * 0x2f4;
-	if (*(int*) (e + 4) == 0) {
+	e = (char*) &((D2_CONTROL_TL*) g_1015ea0)[id];
+	if ((*(D2_CONTROL_TL*) e).value_004 == 0) {
 		return;
 	}
-	state = *(int*) (e + 0x20);
+	state = (*(D2_CONTROL_TL*) e).kind;
 	switch (state) {
 	case 0x43:
-		if (*(int*) (e + 0x88) != 0) {
-			m_FreeTracked((void*) *(int*) (e + 0x88));
+		if ((*(D2_CONTROL_TL*) e).value_088 != 0) {
+			m_FreeTracked((void*) (*(D2_CONTROL_TL*) e).value_088);
 		}
 		break;
 	case 4:
-		d2_ClearAnimationSlot(*(int*) (e + 0x88));
+		d2_ClearAnimationSlot((*(D2_CONTROL_TL*) e).value_088);
 		break;
 	case 0x40:
-		d2_DestroyWindow(*(int*) (e + 0x88));
+		d2_DestroyWindow((*(D2_CONTROL_TL*) e).value_088);
 		break;
 	case 0x41:
-		f = &g_102d140[*(int*) (e + 0x88)];
+		f = &g_102d140[(*(D2_CONTROL_TL*) e).value_088];
 		if (tp_d2_SelectedControl == f) {
 			tp_d2_SelectedControl = 0;
 		}
@@ -56,23 +56,23 @@ void __cdecl d2_DestroyElement(int id)
 		memset(f, 0, sizeof(Fld_102d140));
 		break;
 	case 9:
-		list = *(char**) (e + 0x40);
+		list = *(char**) (&(*(D2_CONTROL_TL*) e).parent);
 		if (list != 0) {
 			*(int*) (list + 0x3c4) = 0;
 		}
 		break;
 	case 0x47:
-		if (*(int*) (e + 0x8c) != 0) {
-			fcn_00475f80((void*) *(int*) (e + 0x8c));
+		if ((*(D2_CONTROL_TL*) e).payload.fields.value_08c != 0) {
+			fcn_00475f80((void*) (*(D2_CONTROL_TL*) e).payload.fields.value_08c);
 		}
 		break;
 	default:
 		break;
 	}
-	if (*(int*) (e + 0x20) < 0x40) {
-		d2_SubRefcount(*(int*) (e + 8));
+	if ((*(D2_CONTROL_TL*) e).kind < 0x40) {
+		d2_SubRefcount((*(D2_CONTROL_TL*) e).value_008);
 	}
-	list = *(char**) (e + 0x40);
+	list = *(char**) (&(*(D2_CONTROL_TL*) e).parent);
 	if (list != 0) {
 		n = *(int*) (list + 0x2c);
 		i = 0;
@@ -86,9 +86,9 @@ void __cdecl d2_DestroyElement(int id)
 		}
 		(*(int*) (list + 0x2c))--;
 	}
-	list = *(char**) (e + 0x50);
+	list = *(char**) (&(*(D2_CONTROL_TL*) e).value_050);
 	if (list != 0 && *(int*) (list + 0x198) != 0) {
-		d2_AddDirtyRect(*(int*) (e + 0x10), *(int*) (e + 0x14), *(int*) (e + 0x18), *(int*) (e + 0x1c), list);
+		d2_AddDirtyRect((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y, (*(D2_CONTROL_TL*) e).width, (*(D2_CONTROL_TL*) e).height, list);
 	}
 	for (i = 0; i < 0x3ff; i++) {
 		if (g_772540[i] == (void*) e) {
@@ -103,6 +103,6 @@ void __cdecl d2_DestroyElement(int id)
 	if (id == g_772528) {
 		g_772528 = id - 1;
 	}
-	memset(g_1015ea0 + id * 0x2f4, 0, 0x2f4);
-	*(int*) (g_1015ea0 + id * 0x2f4) = id;
+	memset((char*) &((D2_CONTROL_TL*) g_1015ea0)[id], 0, 0x2f4);
+	*(int*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[id]) = id;
 }

@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 extern char* lpObjektePROT;
 #include "client_types.h"
@@ -33,7 +33,7 @@ int __cdecl d2_OpenObjektUpgradeTooltip(int id)
 	int b;
 	float f;
 
-	if (lpObjektePROT[id * 65] == 0x1d) {
+	if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].kind) == 0x1d) {
 		return -1;
 	}
 	dlg = fcn_00470820(0, 0, "ToolTip\\ToolTip_Objekte_Upgrades");
@@ -47,7 +47,7 @@ int __cdecl d2_OpenObjektUpgradeTooltip(int id)
 	io_AppendText(id * 2 + 0x9a9);
 	d2_SetForm(0, 1);
 	io_AppendText(id * 2 + 0x9a8);
-	rec = lpObjektePROT + id * 65;
+	rec = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]);
 	d2_SetForm(0, 3);
 	if (rec[0x40] != 0) {
 		io_AppendText(0x21, (unsigned char) rec[0x40]);

@@ -92,8 +92,8 @@ int __cdecl fcn_005dbb60(int unused, unsigned short* p)
 	d2_SetForm(dlg, 2);
 	for (i = 0; i < 3; i++) {
 		ids[i] = fcn_0046f740(0x14, i * 0x5a + 10, 0x4c6, d2_CurrentWindowId);
-		((Slot*)g_1015ea0)[ids[i]].shown = 1;
-		((Slot*)g_1015ea0)[ids[i]].style = 3;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_05c) = 1;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ids[i]].flags_1d0) = 3;
 		io_FormatTextBuffer(text, s_679060, ((Player*)g_868060)[i + 1].name);
 		d2_ShowTxt(0xbe, i * 0x5a + 10, text, d2_CurrentWindowId);
 		io_FormatTextBuffer(text, s_679060, shares[i].kind + 0x16b7);

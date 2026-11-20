@@ -63,20 +63,20 @@ unsigned int __cdecl fcn_0053b6b0(int jobCode)
 	d = d2_UiScale;
 	id1 = fcn_00469c30((int) (d * 150.0f + d * 330.0f),
 		(int) (d * 370.0f), 0x1a);
-	*(int*) ((char*) g_1015ea0 + id1 * 0x2f4 + 0x5c) = 1;
-	*(int*) ((char*) g_1015ea0 + id1 * 0x2f4 + 0x1d0) = 3;
+	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id1].value_05c = 1;
+	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id1].flags_1d0 = 3;
 
 	d = d2_UiScale;
 	id2 = fcn_00469c30((int) (d * 330.0f),
 		(int) (d * 370.0f), 0x1b);
-	*(int*) ((char*) g_1015ea0 + id2 * 0x2f4 + 0x5c) = 1;
-	*(int*) ((char*) g_1015ea0 + id2 * 0x2f4 + 0x1d0) = 3;
+	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id2].value_05c = 1;
+	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id2].flags_1d0 = 3;
 
 	d = d2_UiScale;
 	id3 = fcn_00469c30((int) (d * 70.0f + d * 330.0f),
 		(int) (d * 45.0f + d * 370.0f), 0x51b);
-	*(int*) ((char*) g_1015ea0 + id3 * 0x2f4 + 0x5c) = 1;
-	*(int*) ((char*) g_1015ea0 + id3 * 0x2f4 + 0x1d0) = 3;
+	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id3].value_05c = 1;
+	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id3].flags_1d0 = 3;
 
 	count = 0;
 	if (maenner[0][0] != 0) {

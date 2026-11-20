@@ -55,17 +55,17 @@ void __cdecl fcn_00593550(void)
 			if (*(int*) (p + 4) != 0) {
 				strcat(buf, g_14b5d54);
 			}
-			d2_ShowTxt(((Ctl*)g_1015ea0)[h].x18 + 10, y, buf, d2_CurrentWindowId);
-			y = y + ((Ctl*)g_1015ea0)[h].x1c + 5;
+			d2_ShowTxt(((D2_CONTROL_TL*) g_1015ea0)[h].width + 10, y, buf, d2_CurrentWindowId);
+			y = y + ((D2_CONTROL_TL*) g_1015ea0)[h].height + 5;
 			g_779cc0[i] = h;
 			if (p == g_779cb8) {
 				g_779ce0 = i;
 			} else {
-				((Ctl*)g_1015ea0)[h].x5c = 1;
-				((Ctl*)g_1015ea0)[h].x1d0 = 3;
+				((D2_CONTROL_TL*) g_1015ea0)[h].value_05c = 1;
+				((D2_CONTROL_TL*) g_1015ea0)[h].flags_1d0 = 3;
 			}
 			if (g_779c40 == *(int*) p) {
-				((Ctl*)g_1015ea0)[h].x38 = 1;
+				((D2_CONTROL_TL*) g_1015ea0)[h].value_038 = 1;
 			}
 		}
 	}

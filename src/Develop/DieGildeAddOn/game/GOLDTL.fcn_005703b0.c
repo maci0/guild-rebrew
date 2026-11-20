@@ -40,7 +40,7 @@ void __cdecl fcn_005703b0(char* u)
 	switch (*(int*) (u + 0x70)) {
 	case 0:
 		if (g_774964 != 0) {
-			((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_state = 5;
+			((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_type = 5;
 			(*(int*) (u + 0x70))++;
 		}
 		break;
@@ -66,7 +66,7 @@ void __cdecl fcn_005703b0(char* u)
 		*(int*) (u + 0x58) = gm_RandomMod(0x3c);
 		break;
 	case 2:
-		((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_state = 6;
+		((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_type = 6;
 	case -2:
 	case -1:
 		he_FreeAction(u);

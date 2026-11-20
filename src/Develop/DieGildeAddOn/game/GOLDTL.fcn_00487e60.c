@@ -16,7 +16,7 @@ typedef struct Ent {
 
 // SIZE 0x58
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
  
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -54,8 +54,8 @@ void __cdecl fcn_00487e60(char* e, int k)
 		}
 		if (found) {
 			for (i = 0; i < 768; i++) {
-				if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].host == q) {
-					fcn_00529160(*(char**) (e + 0x16c), 0, ((Ent*)g_7f4ca0)[i].id, 0);
+				if ((*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index) != 0xffff && (*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_17c) == q) {
+					fcn_00529160(*(char**) (e + 0x16c), 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), 0);
 				}
 			}
 		}

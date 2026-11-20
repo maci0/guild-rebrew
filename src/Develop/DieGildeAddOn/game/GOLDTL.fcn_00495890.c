@@ -1,5 +1,5 @@
 #include "entity_record.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
 
@@ -22,14 +22,14 @@ void __cdecl fcn_00495890(void)
 
 	flags = 1;
 	for (i = 0; i < 768; i++) {
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state != 3) {
+		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type != 3) {
 			continue;
 		}
 		flags |= gm_RandomMod(2) ? 2 : 0;
 		flags |= gm_RandomMod(3) ? 4 : 0;
 		flags |= gm_RandomMod(3) ? 8 : 0;
 		flags |= gm_RandomMod(2) ? 0x10 : 0;
-		fcn_004c4510((char*) &((ENTITY_RECORD*)g_7f4ca0)[i], ((ENTITY_RECORD*)g_7f4ca0)[i].entity_id);
+		fcn_004c4510((char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
 		cm_AppendPacketFieldDelta(4, 1, 0x1e8, &flags);
 		fcn_004c5360();
 	}

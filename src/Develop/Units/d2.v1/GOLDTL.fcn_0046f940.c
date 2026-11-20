@@ -1,4 +1,4 @@
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_0046b520(const char* s, int a);
 
@@ -10,12 +10,12 @@ void __cdecl fcn_0046f940(int i, const char* s)
 	char c;
 
 	p = s;
-	d = *(char**) (g_1015ea0 + i * 0x2f4 + 0x88);
+	d = *(char**) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].value_088));
 	do {
 		c = *p++;
 		*d++ = c;
 	} while (c != 0);
-	if (*(int*) (g_1015ea0 + i * 0x2f4 + 0x6c) == 0 && *(int*) (g_1015ea0 + i * 0x2f4 + 0x70) == 0) {
-		*(int*) (g_1015ea0 + i * 0x2f4 + 0x18) = fcn_0046b520(s, *(int*) (g_1015ea0 + i * 0x2f4 + 0x84));
+	if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].value_06c)) == 0 && *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].value_070)) == 0) {
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].width)) = fcn_0046b520(s, *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].font)));
 	}
 }

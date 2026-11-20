@@ -1,11 +1,11 @@
 #include "client_packet_builder.h"
-
+#include "Develop/DieGildeAddOn/game/season_slots.h"
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_773d78;
 extern unsigned char g_773d75;
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
-
 /* SIZE 0x80 */
 typedef struct {
 	unsigned short id;
@@ -39,9 +39,9 @@ void __cdecl fcn_00535960(void);
 void __cdecl fcn_005017a0(int player)
 {
 	Slot rec;
-	Slot* p;
-	Slot* s;
-	Slot* q;
+	MARKET_STOCK_SLOT* p;
+	MARKET_STOCK_SLOT* s;
+	MARKET_STOCK_SLOT* q;
 	char* ent;
 	char* ent2;
 	char* o;
@@ -58,12 +58,12 @@ void __cdecl fcn_005017a0(int player)
 	if (g_773d78 == 0) {
 		return;
 	}
-	s = (Slot*) (g_85ab90 + player * 0x2a90);
+	s = (MARKET_STOCK_SLOT*) (g_85ab90 + player * 0x2a90);
 	if (player == g_773d75) {
 		p = s;
 		for (n = 0x55; n != 0; n--) {
 			p->active = 0;
-			p = (Slot*) ((char*) p + 0x80);
+			p = (MARKET_STOCK_SLOT*) ((char*) p + 0x80);
 		}
 		e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 		while (e != 0) {
@@ -71,19 +71,19 @@ void __cdecl fcn_005017a0(int player)
 				ent = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0xff);
 				i = 0;
 				if (ent != 0) {
-					for (p = s; i < 0x55; i++, p = (Slot*) ((char*) p + 0x80)) {
-						if (p->id != 0 &&
-						    fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, p->id) != 0) {
+					for (p = s; i < 0x55; i++, p = (MARKET_STOCK_SLOT*) ((char*) p + 0x80)) {
+						if (p->objekt_id != 0 &&
+						    fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, p->objekt_id) != 0) {
 							p->active = 1;
-							item = (unsigned short*) (lpObjektePROT + p->id * 0x41 + 0x2e);
+							item = (unsigned short*) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[p->objekt_id] + 0x2e);
 							for (q = s, n = 0x55; n != 0; n--) {
 								for (v = 4, item2 = item; v != 0; v--) {
-									if (q->id == *item2) {
+									if (q->objekt_id == *item2) {
 										q->active = 1;
 									}
 									item2++;
 								}
-								q = (Slot*) ((char*) q + 0x80);
+								q = (MARKET_STOCK_SLOT*) ((char*) q + 0x80);
 							}
 						}
 					}
@@ -93,8 +93,8 @@ void __cdecl fcn_005017a0(int player)
 		}
 		p = s;
 		for (n = 0x55; n != 0; n--) {
-			rec = *s;
-			ent = fcn_00502cd0(*(int*) (g_773d78 + 0x5d), 1, 0, p->target);
+			rec = *(Slot*)s;
+			ent = fcn_00502cd0(*(int*) (g_773d78 + 0x5d), 1, 0, p->target_id);
 			if (ent != 0) {
 				ent2 = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0xff);
 				if (ent2 == 0) {
@@ -105,16 +105,16 @@ void __cdecl fcn_005017a0(int player)
 					ent2 = fcn_004c4480(v);
 				}
 				if (p->active != 0) {
-					if (fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, p->id) == 0) {
-						v = fcn_004c51f0(*(int*) (ent2 + 2), -1, p->id, 1, (char) g_773d75, 0);
+					if (fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, p->objekt_id) == 0) {
+						v = fcn_004c51f0(*(int*) (ent2 + 2), -1, p->objekt_id, 1, (char) g_773d75, 0);
 						while (fcn_004c4450(v) == 0) {
 							fcn_00535960();
 						}
 					}
 				} else {
-					o = fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, p->id);
+					o = fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, p->objekt_id);
 					if (o != 0) {
-						v = fcn_004c51f0(-1, *(int*) (ent2 + 2), p->id,
+						v = fcn_004c51f0(-1, *(int*) (ent2 + 2), p->objekt_id,
 								 *(int*) (o + 0xe), (char) g_773d75, 0);
 						while (fcn_004c4450(v) == 0) {
 							fcn_00535960();
@@ -123,8 +123,8 @@ void __cdecl fcn_005017a0(int player)
 				}
 				fcn_004c6190((char*) &rec, (char) player);
 			}
-			s = (Slot*) ((char*) s + 0x80);
-			p = (Slot*) ((char*) p + 0x80);
+			s = (MARKET_STOCK_SLOT*) ((char*) s + 0x80);
+			p = (MARKET_STOCK_SLOT*) ((char*) p + 0x80);
 		}
 		ip = codes;
 		for (v = *ip; v != 0; v = *++ip) {
@@ -165,7 +165,7 @@ void __cdecl fcn_005017a0(int player)
 		fcn_004c44a0();
 		p = s;
 		for (n = 0x55; n != 0; n--) {
-			rec = *p;
+			rec = *(Slot*)p;
 			if (rec.id != 0) {
 				if (fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, rec.id) != 0 ||
 				    fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, rec.id) != 0) {
@@ -181,7 +181,7 @@ void __cdecl fcn_005017a0(int player)
 				}
 				fcn_004c6190((char*) &rec, (char) player);
 			}
-			p = (Slot*) ((char*) p + 0x80);
+			p = (MARKET_STOCK_SLOT*) ((char*) p + 0x80);
 		}
 		fcn_004c44b0();
 		while (fcn_004c44c0() == 0) {

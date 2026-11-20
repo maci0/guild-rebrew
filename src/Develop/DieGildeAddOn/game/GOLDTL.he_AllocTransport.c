@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char* lpGebaeudePROT;
 
 typedef struct TransportBuildingRow {
@@ -87,7 +87,7 @@ void __cdecl he_AllocTransport(char* action)
 	}
 
 	idx = *(unsigned char*) second;
-	if (((TransportBuildingRow*) lpGebaeudePROT)[idx].kind == 10 && query != 0 &&
+	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[idx].category == 10 && query != 0 &&
 	    (*(unsigned char*) (query + 0x20) & 1) != 0) {
 		best = second;
 		fbest = 1e8f;

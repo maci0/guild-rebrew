@@ -3,7 +3,7 @@ typedef struct Rec {
 	char rest[0x40];
 } Rec;
 // SIZE 0x41
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 typedef struct Slot {
 	int id;
 	int a;
@@ -42,7 +42,7 @@ void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt)
 	cnt->free = 0;
 	cnt->total = 0;
 	for (it = *(char**) (e + 0x178); it != 0; it = *(char**) (it + 0x3f)) {
-		if (((Rec*)lpObjektePROT)[*(unsigned short*) it].type == 9) {
+		if ((*(char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[*(unsigned short*) it].kind) == 9) {
 			continue;
 		}
 		cnt->total++;

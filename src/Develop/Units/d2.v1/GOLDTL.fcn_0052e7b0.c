@@ -89,8 +89,8 @@ void __cdecl d2_OpenPersonInfoPanel(char* e)
 	x = (((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1;
 	if (e != 0) {
 		g_6a25d8 = fcn_0046f740(x, 0x38, *(int*) (e + 0x18c), d2_CurrentWindowId);
-		((Ctl*)g_1015ea0)[g_6a25d8].owner = e;
-		((Ctl*)g_1015ea0)[g_6a25d8].linked = 1;
+		(*(char**)&((D2_CONTROL_TL*)g_1015ea0)[g_6a25d8].associated_object) = e;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_6a25d8].value_05c) = 1;
 	}
 	else {
 		fcn_0046f740(x, 0x38, 0x521, d2_CurrentWindowId);

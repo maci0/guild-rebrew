@@ -35,7 +35,7 @@ void __cdecl he_StartAssassinAction(char* u)
 	for (o = he_StartHandlungSearch(1, 0, 0x99); o != 0; o = he_fn_Handlung()) {
 		if (o != u && *(unsigned short*) (o + 8) == *(unsigned short*) (u + 8)) {
 			io_FormatTextBuffer(text, 0x3ff7, *(unsigned short*) (u + 8));
-			fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, 0x5fa, 0);
+			fcn_00545d40(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (u + 8)])->entity_id, -1, text, 0, 0x5fa, 0);
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
 			he_FreeAction(u);
 			return;

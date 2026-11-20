@@ -39,7 +39,7 @@ typedef struct Slot {
 // SIZE 0x2f4
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_102d028;
 extern int g_102d02c;
 extern short g_14ce8c0;
@@ -57,7 +57,7 @@ void __cdecl fcn_00474040(void)
 	int min;
 	int limit;
 	int pos;
-	Slot* s;
+	D2_CONTROL_TL* s;
 	char* font;
 	Glyph* bar;
 	int mx;
@@ -66,11 +66,11 @@ void __cdecl fcn_00474040(void)
 	if (d2_CurrentElementId == -1) {
 		return;
 	}
-	s = &((Slot*)g_1015ea0)[d2_CurrentElementId];
-	if (s->type != 0x45 || (s->flags & 0x40) != 0) {
+	s = &((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId];
+	if (s->kind != 0x45 || (s->payload.fields.value_098 & 0x40) != 0) {
 		return;
 	}
-	if (s->owner != 0 && s->owner->captured != 0) {
+	if ((*(Owner**)&s->value_050) != 0 && (*(Owner**)&s->value_050)->captured != 0) {
 		mx = g_102d028;
 		my = g_102d02c;
 	} else {
@@ -78,23 +78,23 @@ void __cdecl fcn_00474040(void)
 		my = g_14ce8c2;
 	}
 	if (g_14ce8d0 != 0) {
-		font = s->font;
+		font = (*(char**)&s->data);
 		g = fcn_0047b620(font, 0);
 		fcn_0047b620(font, 1);
 		fcn_0047b620(font, 3);
 		bar = fcn_0047b620(font, 6);
-		s = &((Slot*)g_1015ea0)[d2_CurrentElementId];
-		flags = s->flags;
-		max = s->max;
-		min = s->min;
-		page = s->page;
-		limit = s->limit;
+		s = &((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId];
+		flags = s->payload.fields.value_098;
+		max = s->payload.fields.value_094;
+		min = s->payload.fields.value_090;
+		page = s->payload.fields.value_09c;
+		limit = s->payload.fields.value_0a0;
 		range = max - min;
-		if ((flags & 0x48) == 0 && mx > s->x + bar->w && mx < s->w - bar->w + s->x) {
+		if ((flags & 0x48) == 0 && mx > s->x + bar->w && mx < s->width - bar->w + s->x) {
 			if ((flags & 2) != 0) {
 				pos = (int)((mx - g->w - s->x) * ((float) range / page) + min + 0.5f);
 			} else if ((flags & 1) != 0) {
-				pos = (int)((s->h - g->h + s->y - my) * ((float) range / page) + min + 0.5f);
+				pos = (int)((s->height - g->h + s->y - my) * ((float) range / page) + min + 0.5f);
 			}
 			if (pos < min) {
 				pos = min;
@@ -103,18 +103,18 @@ void __cdecl fcn_00474040(void)
 			} else if (pos > max) {
 				pos = max;
 			}
-			s->dirty = 1;
-			((Slot*)g_1015ea0)[d2_CurrentElementId].pos = pos;
+			s->value_074 = 1;
+			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId].payload.fields.value_08c) = pos;
 		}
 	}
-	if (g_14ce8d8 != 0 || (g_14ce8d4 != 0 && ((Slot*)g_1015ea0)[d2_CurrentElementId].max >= 100)) {
-		s = &((Slot*)g_1015ea0)[d2_CurrentElementId];
-		pos = s->pos;
-		max = s->max;
-		min = s->min;
-		if (s->up != 0) {
+	if (g_14ce8d8 != 0 || (g_14ce8d4 != 0 && (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId].payload.fields.value_094) >= 100)) {
+		s = &((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId];
+		pos = s->payload.fields.value_08c;
+		max = s->payload.fields.value_094;
+		min = s->payload.fields.value_090;
+		if ((*(char*)&s->value_2ec) != 0) {
 			pos--;
-		} else if (s->down != 0) {
+		} else if ((*(char*)&s->value_2ed) != 0) {
 			pos++;
 		}
 		if (pos < min) {
@@ -124,7 +124,7 @@ void __cdecl fcn_00474040(void)
 		} else if (pos > max) {
 			pos = max;
 		}
-		s->dirty = 1;
-		((Slot*)g_1015ea0)[d2_CurrentElementId].pos = pos;
+		s->value_074 = 1;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId].payload.fields.value_08c) = pos;
 	}
 }

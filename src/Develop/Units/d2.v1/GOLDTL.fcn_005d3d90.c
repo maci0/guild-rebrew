@@ -1,5 +1,5 @@
 #include "client_dialog_helpers.h"
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern unsigned char d2_PlotRadius;
 extern int d2_CurrentWindowId;
 extern int g_1015f4c;
@@ -83,8 +83,8 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	for (i = 0, n = 0x64; n > 0; i++, n -= 0x19) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x6acbec, n);
 		id = fcn_0046fac0(3, (int) ((float) i * g_6628bc * y + 5.0f), loc.buf, d2_CurrentWindowId);
-		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = 0x23;
-		*(int *) (g_1015ea0 + id * 0x2f4 + 0x70) = 1;
+		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = 0x23;
+		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_070)) = 1;
 	}
 	if (m != 0) {
 		x1 = w - 0x3c;
@@ -95,12 +95,12 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m);
 		d = fcn_0046b520(loc.buf, 0x55) + 2;
 		id = fcn_0046fac0(x1, 5, loc.buf, d2_CurrentWindowId);
-		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
-		*(int *) (g_1015ea0 + id * 0x2f4 + 0x70) = 1;
+		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
+		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_070)) = 1;
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m / 2);
 		id = fcn_0046fac0(x1, (h - 0x1e) / 2 + 5, loc.buf, d2_CurrentWindowId);
-		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
-		*(int *) (g_1015ea0 + id * 0x2f4 + 0x70) = 1;
+		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
+		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_070)) = 1;
 	}
 	loc.src[0] = gm_GameTime;
 	loc.src[1] = g_7f4c04;
@@ -111,7 +111,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 		d = fcn_0046b520(loc.buf, 0x55);
 		id = fcn_0046fac0(step * 16 + 0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
-		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
+		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 	}
 	loc.src[0]--;
 	fcn_00500d60(loc.src, loc.out);
@@ -122,7 +122,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 			io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 			d = fcn_0046b520(loc.buf, 0x55);
 			id = fcn_0046fac0(n, h - 0xd, loc.buf, d2_CurrentWindowId);
-			*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
+			*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 			fcn_00472c30(n, h - 0x13, n, h - 0xd, 0x10, 0x10, 0x10);
 		}
 		loc.src[0]--;
@@ -133,7 +133,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 		d = fcn_0046b520(loc.buf, 0x55);
 		id = fcn_0046fac0(0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
-		*(int *) (g_1015ea0 + id * 0x2f4 + 0x18) = d;
+		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 	}
 	d2_PlotRadius = saved;
 }

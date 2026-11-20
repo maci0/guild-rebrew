@@ -13,7 +13,7 @@ typedef struct
 
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char s_67d420[];
 
 #include "Develop/Units/Error/error_message.h"
@@ -37,14 +37,14 @@ int __cdecl d2_AddWindowChild(int id, int win)
 		return 0;
 	}
 	fcn_0046f650(id, w);
-	((fcn_00465eb0_Ent*)g_1015ea0)[id].i[0x40 / 4] = (int) w;
-	((fcn_00465eb0_Ent*)g_1015ea0)[id].i[0x50 / 4] = ((fcn_00465eb0_Ent*)g_1015ea0)[w->slot].i[0x50 / 4];
-	((fcn_00465eb0_Ent*)g_1015ea0)[id].i[0x30 / 4] = w->top;
-	((fcn_00465eb0_Ent*)g_1015ea0)[id].i[0x34 / 4] = w->height + w->top;
-	((fcn_00465eb0_Ent*)g_1015ea0)[id].i[0x28 / 4] = w->left;
-	((fcn_00465eb0_Ent*)g_1015ea0)[id].i[0x2c / 4] = w->width + w->left;
-	((fcn_00465eb0_Ent*)g_1015ea0)[id].i[0x48 / 4] = ((fcn_00465eb0_Ent*)g_1015ea0)[w->slot].i[0x48 / 4];
-	bottom = ((fcn_00465eb0_Ent*)g_1015ea0)[id].i[0x1c / 4] + ((fcn_00465eb0_Ent*)g_1015ea0)[id].i[0x14 / 4] - w->top;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].parent) = (int) w;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_050) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_050);
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_top) = w->top;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_bottom) = w->height + w->top;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_left) = w->left;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_right) = w->width + w->left;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_048) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_048);
+	bottom = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) + (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].y) - w->top;
 	if (bottom > (*(int*) &w->pad3c[0x218])) {
 		(*(int*) &w->pad3c[0x218]) = bottom + 4;
 	}

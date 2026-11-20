@@ -30,7 +30,7 @@ int __cdecl fcn_004f7bf0(unsigned char* a1, int* a2)
 		return 1;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && (((ENTITY_RECORD*)g_7f4ca0)[i].unk_165[1] != 0x12 || ((ENTITY_RECORD*)g_7f4ca0)[i].unk_165[1] <= 0x15)) {
+		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index != 0xffff && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].class_166 != 0x12 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].class_166 <= 0x15)) {
 			break;
 		}
 	}

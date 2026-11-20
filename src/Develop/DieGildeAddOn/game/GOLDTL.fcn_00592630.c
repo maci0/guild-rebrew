@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 extern char g_7f4ca0[];
@@ -33,7 +33,7 @@ void __cdecl fcn_00592630(void)
 	}
 	n = 3;
 	for (e = gm_StartFilteredEntitySearch(1, 4, i); e != 0; e = gm_FindNextFilteredEntity()) {
-		if (((char*)lpGebaeudePROT)[*e * 589] != 2) {
+		if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category)) != 2) {
 			fcn_005925e0(n++, (int) e);
 		}
 	}

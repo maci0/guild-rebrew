@@ -7,6 +7,15 @@
 #ifdef REBREW_GOLD
 typedef GuiWin D2_TEXT_WINDOW;
 typedef GuiEnt D2_TEXT_ENTRY;
+#define D2E_w w
+#define D2E_f16 f16
+#define D2E_f1c f1c
+#define D2E_f1e f1e
+#define D2E_f20 f20
+#define D2E_f22 f22
+#define D2E_f24 f24
+#define D2E_f40 f40
+#define D2E_bild_offset bild_offset
 typedef short D2_TEXT_COORD;
 
 extern GuiWin g_00f8f120[];
@@ -48,28 +57,19 @@ typedef struct D2_TEXT_WINDOW {
 	char pad294[0x3cc - 0x294];
 } D2_TEXT_WINDOW;
 
-typedef struct D2_TEXT_ENTRY {
-	char pad00[0xc];
-	char* data;
-	int x;
-	int y;
-	int w;
-	int f16;
-	int kind;
-	int f1c;
-	int f1e;
-	int f20;
-	int f22;
-	int f24;
-	char pad38[0x40 - 0x38];
-	D2_TEXT_WINDOW* parent;
-	char pad44[0x50 - 0x44];
-	int f40;
-	char pad54[0x84 - 0x54];
-	int font;
-	int bild_offset;
-	char pad8c[0x2f4 - 0x8c];
-} D2_TEXT_ENTRY;
+typedef D2_CONTROL_TL D2_TEXT_ENTRY;
+#define D2E_w width
+#define D2E_f16 height
+#define D2E_f1c mode
+#define D2E_f1e clip_left
+#define D2E_f20 clip_right
+#define D2E_f22 clip_top
+#define D2E_f24 clip_bottom
+#define D2E_f40 value_050
+#define D2E_bild_offset value_088
+
+
+
 
 typedef int D2_TEXT_COORD;
 
@@ -118,11 +118,11 @@ int __cdecl d2_ShowTxt(D2_TEXT_COORD x, D2_TEXT_COORD y, char* text, int win)
 		return -1;
 	}
 	id = d2_TEXT_ALLOCATE_INDEX();
-	d2_TEXT_ENTRIES[id].bild_offset = (int) m_alloc(0x101, d2_TEXT_TAG);
-	if (d2_TEXT_ENTRIES[id].bild_offset == 0) {
+	d2_TEXT_ENTRIES[id].D2E_bild_offset = (int) m_alloc(0x101, d2_TEXT_TAG);
+	if (d2_TEXT_ENTRIES[id].D2E_bild_offset == 0) {
 		return -1;
 	}
-	strcpy((char*) d2_TEXT_ENTRIES[id].bild_offset, text);
+	strcpy((char*) d2_TEXT_ENTRIES[id].D2E_bild_offset, text);
 	if (w->font != 0) {
 		d2_TEXT_ENTRIES[id].font = w->font;
 	} else {
@@ -131,28 +131,28 @@ int __cdecl d2_ShowTxt(D2_TEXT_COORD x, D2_TEXT_COORD y, char* text, int win)
 	d2_TEXT_ENTRIES[id].kind = 0x43;
 	d2_TEXT_ENTRIES[id].x = w->x + x;
 	d2_TEXT_ENTRIES[id].y = w->y - w->scroll + y;
-	d2_TEXT_ENTRIES[id].w = d2_TEXT_MEASURE(text, d2_TEXT_ENTRIES[id].font) + 0x60;
+	d2_TEXT_ENTRIES[id].D2E_w = d2_TEXT_MEASURE(text, d2_TEXT_ENTRIES[id].font) + 0x60;
 #ifdef REBREW_GOLD
-	d2_TEXT_ENTRIES[id].f16 = g_00f8f084;
+	d2_TEXT_ENTRIES[id].D2E_f16 = g_00f8f084;
 #else
-	d2_TEXT_ENTRIES[id].f16 = *(unsigned short*) ((char*) d2_GetResourceData(d2_TEXT_ENTRIES[id].font) + 8);
+	d2_TEXT_ENTRIES[id].D2E_f16 = *(unsigned short*) ((char*) d2_GetResourceData(d2_TEXT_ENTRIES[id].font) + 8);
 #endif
-	d2_TEXT_ENTRIES[id].f1c = 2;
+	d2_TEXT_ENTRIES[id].D2E_f1c = 2;
 	d2_TEXT_ENTRIES[id].parent = w;
 	d2_TEXT_ENTRIES[id].data = (char*) w;
-	d2_TEXT_ENTRIES[id].f22 = w->y;
-	d2_TEXT_ENTRIES[id].f24 = w->height + w->y;
-	d2_TEXT_ENTRIES[id].f1e = w->x;
-	d2_TEXT_ENTRIES[id].f20 = w->width + w->x;
-	d2_TEXT_ENTRIES[id].f40 = d2_TEXT_ENTRIES[w->id].f40;
+	d2_TEXT_ENTRIES[id].D2E_f22 = w->y;
+	d2_TEXT_ENTRIES[id].D2E_f24 = w->height + w->y;
+	d2_TEXT_ENTRIES[id].D2E_f1e = w->x;
+	d2_TEXT_ENTRIES[id].D2E_f20 = w->width + w->x;
+	d2_TEXT_ENTRIES[id].D2E_f40 = d2_TEXT_ENTRIES[w->id].D2E_f40;
 #ifdef REBREW_GOLD
 	*(unsigned char*) ((char*) &d2_TEXT_ENTRIES[id] + 0x7c) = 0;
-	if (d2_TEXT_ENTRIES[id].f16 + y > *(int*) ((char*) w + 0x244)) {
-		*(int*) ((char*) w + 0x244) = d2_TEXT_ENTRIES[id].f16 + y;
+	if (d2_TEXT_ENTRIES[id].D2E_f16 + y > *(int*) ((char*) w + 0x244)) {
+		*(int*) ((char*) w + 0x244) = d2_TEXT_ENTRIES[id].D2E_f16 + y;
 	}
 #else
-	if (d2_TEXT_ENTRIES[id].f16 + y > w->max_height) {
-		w->max_height = d2_TEXT_ENTRIES[id].f16 + y;
+	if (d2_TEXT_ENTRIES[id].D2E_f16 + y > w->max_height) {
+		w->max_height = d2_TEXT_ENTRIES[id].D2E_f16 + y;
 	}
 #endif
 	d2_TEXT_INSERT(id, w);

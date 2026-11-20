@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdio.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern int d3_CurrentContextIndex;
 extern unsigned char g_7747b0;
 extern unsigned char* lpGebaeudePROT;
@@ -63,7 +63,7 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 		fcn_0042df30((void*) 0x538060, 1);
 		restore = 1;
 	}
-	p = (char*) (((GebProt_5110d0*) lpGebaeudePROT)[prototypeIndex].type + 0x7f3b00);
+	p = (char*) (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[prototypeIndex].category + 0x7f3b00);
 	if (*p == (char) 0xff) {
 		if (g_774964 != 0 && (g_774670 <= 0 || g_7e2700 != 0)) {
 			flags = (main_LoopFlags & 0xfffffff7) | 0x80;

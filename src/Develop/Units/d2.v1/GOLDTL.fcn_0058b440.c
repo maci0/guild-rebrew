@@ -106,19 +106,19 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
                                *(int*) (v2[3] * 0x3cc + 0x1015f50) * rowIndex + 4,
                                *(unsigned int*) (*v15 + 0x3c), v2[3]);
             v15[-1] = v14;
-            *(unsigned int*) ((int) g_1015ea0 + 0x5c + v14 * 0x2f4) = v17;
-            *(unsigned int*) ((int) g_1015ea0 + 0x1d0 + v15[-1] * 0x2f4) = 3;
+            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].value_05c) = v17;
+            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-1]].flags_1d0) = 3;
             fcn_0058b9c0((void*) *v15, v12);
             fcn_0058ba20((char*) *v15, v13);
             v7 = *(int*) (v2[3] * 0x3cc + 0x1015f50) * rowIndex;
             v14 = fcn_0046fac0(0, v7 + 0x38, v12, v2[3]);
-            *(unsigned int*) (v14 * 0x2f4 + 0x6c + (int) g_1015ea0) = 1;
-            *(unsigned int*) (v14 * 0x2f4 + 0x18 + (int) g_1015ea0) =
+            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].value_06c) = 1;
+            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].width) =
                 *(unsigned int*) (v2[3] * 0x3cc + 0x1015f4c);
             d2_SetElementFont(v14, 0x54);
             v14 = fcn_0046fac0(0, v7 + 0x45, v13, v2[3]);
-            *(unsigned int*) (v14 * 0x2f4 + 0x6c + (int) g_1015ea0) = 1;
-            *(unsigned int*) (v14 * 0x2f4 + 0x18 + (int) g_1015ea0) =
+            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].value_06c) = 1;
+            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].width) =
                 *(unsigned int*) (v2[3] * 0x3cc + 0x1015f4c);
             d2_SetElementFont(v14, 0x54);
             v7 += 0x57;
@@ -126,7 +126,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
             do {
                 io_FormatTextBuffer(v12, 0x6a9688, v14 + 0x16b7);
                 v8 = fcn_0046fac0((void*) 0x28, v7, v12, v2[3]);
-                *(unsigned int*) ((int) g_1015ea0 + 0x18 + v8 * 0x2f4) = 300;
+                *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v8].width) = 300;
                 d2_SetElementFont(v8, 0x54);
                 fcn_00534160(0xa0, v7, *(unsigned char*) (*v15 + 0x24 + v14), 0x4df);
                 v14 += 1;

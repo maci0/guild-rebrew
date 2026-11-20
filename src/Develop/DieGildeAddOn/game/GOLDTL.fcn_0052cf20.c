@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 // SIZE 0xc
 typedef struct {
@@ -117,7 +117,7 @@ void __cdecl fcn_0052cf20(Ent* e)
 	g_7e3a40[2] = q.z;
 	fcn_00438b40((View*)d3_ActiveCamera, (Vec3*) &q);
 	d3_SetObjectRotation((View*)d3_ActiveCamera, &rot);
-	s = (Save*) gm_GetEntityTableEntry((char*) (&((House*)g_7f4ca0)[g_774970]));
+	s = (Save*) gm_GetEntityTableEntry((char*) (((House *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])));
 	if (s != 0) {
 		*(int*) &s->pos.x = *(int*) &q.x;
 		*(int*) &s->pos.y = *(int*) &q.y;

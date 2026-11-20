@@ -22,7 +22,7 @@ typedef struct
 
 #include "client_types.h"
 extern Fld_102d140 g_102d140[];
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char* txt_TextEntries[];
 
 int __cdecl fcn_0046b520(char* s, int font);
@@ -36,7 +36,7 @@ void __cdecl fcn_00466fe0(int fld, int str)
 	int len;
 
 	f = &((fcn_00466fe0_Fld*)g_102d140)[fld];
-	e = (char*) ((fcn_00466fe0_Ent*)g_1015ea0)[f->ent].i[0x40 / 4];
+	e = (char*) (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[f->ent].parent);
 	if (e == 0) {
 		return;
 	}
@@ -52,5 +52,5 @@ void __cdecl fcn_00466fe0(int fld, int str)
 	memmove(f->cur + len, f->cur, strlen(*(char**) (e + 0x3c)) - (f->cur - *(char**) (e + 0x3c)) + 1);
 	memcpy(f->cur, txt_TextEntries[str], f->len);
 	f->w = fcn_0046b520(txt_TextEntries[str], f->font);
-	((fcn_00466fe0_Ent*)g_1015ea0)[f->ent].i[0x18 / 4] = f->w;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[f->ent].width) = f->w;
 }

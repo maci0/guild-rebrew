@@ -3,7 +3,7 @@ typedef struct Rec {
 	char rest[0x40];
 } Rec;
 // SIZE 0x41
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/production_goods.h"
 #include "Develop/DieGildeAddOn/game/goods_plan.h"
 
@@ -24,7 +24,7 @@ void __cdecl fcn_00487d80(int* ca, int* cb, PRODUCTION_GOODS_RECORD* n)
 	GOODS_PLAN_ENTRY* s;
 
 	if (!(n->flags & 1)) {
-		if (((Rec*)lpObjektePROT)[n->goods_id].type == 0x17 || ((Rec*)lpObjektePROT)[n->goods_id].type == 0x25) {
+		if ((*(char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[n->goods_id].kind) == 0x17 || (*(char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[n->goods_id].kind) == 0x25) {
 			(*ca)++;
 		} else {
 			(*cb)++;
@@ -37,7 +37,7 @@ void __cdecl fcn_00487d80(int* ca, int* cb, PRODUCTION_GOODS_RECORD* n)
 		}
 		s = &g_100b0c0[n->building_indices[i]];
 		if (!(s->flags & 1)) {
-			if (((Rec*)lpObjektePROT)[s->goods_id].type == 0x17 || ((Rec*)lpObjektePROT)[s->goods_id].type == 0x25) {
+			if ((*(char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[s->goods_id].kind) == 0x17 || (*(char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[s->goods_id].kind) == 0x25) {
 				(*ca)++;
 			} else {
 				(*cb)++;

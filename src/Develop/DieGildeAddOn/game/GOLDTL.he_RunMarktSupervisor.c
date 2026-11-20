@@ -6,7 +6,7 @@
  * slots, one 0x80 slot record and one 0xf0 spare buffer; the untyped scratch
  * slots are reused with different meanings in the three passes, so they are
  * named after the pass that owns them. */
-
+#include "Develop/DieGildeAddOn/game/season_slots.h"
 #include <string.h>
 
 /* g_7f4c00: 14-byte market stamp, word view of the second field is compared. */
@@ -127,15 +127,15 @@ void __cdecl he_RunMarktSupervisor(char* action)
 	}
 	/* pass 1: refill the player's own stock */
 	for (i = 0; i < 0x55; i++) {
-		slot = (MarktSlot*) (g_85ab90 + g_773d75 * 0x2a90 + i * 0x80);
-		if (slot->id == 0) {
+		slot = (MarktSlot*)&((MARKET_STOCK_SLOT*)(g_85ab90 + g_773d75 * 0x2a90))[i];
+		if (((MARKET_STOCK_SLOT*)slot)->objekt_id == 0) {
 			continue;
 		}
 		memcpy(&rec, slot, 0x80);
-		if (slot->f4 == 0) {
+		if (((MARKET_STOCK_SLOT*)slot)->active == 0) {
 			continue;
 		}
-		kind = *(unsigned char*) (lpObjektePROT + slot->id * 0x41);
+		kind = *(unsigned char*) (lpObjektePROT + ((MARKET_STOCK_SLOT*)slot)->objekt_id * 0x41);
 		if (kind != 0x25 && kind != 0x17) {
 			continue;
 		}
@@ -195,14 +195,14 @@ void __cdecl he_RunMarktSupervisor(char* action)
 	}
 	/* pass 2: price the slots the player does not hold */
 	for (i = 0; i < 0x55; i++) {
-		slot = (MarktSlot*) (g_85ab90 + g_773d75 * 0x2a90 + i * 0x80);
-		if (slot->id == 0) {
+		slot = (MarktSlot*)&((MARKET_STOCK_SLOT*)(g_85ab90 + g_773d75 * 0x2a90))[i];
+		if (((MARKET_STOCK_SLOT*)slot)->objekt_id == 0) {
 			continue;
 		}
-		if (slot->f4 == 0) {
+		if (((MARKET_STOCK_SLOT*)slot)->active == 0) {
 			continue;
 		}
-		kind = *(unsigned char*) (lpObjektePROT + slot->id * 0x41);
+		kind = *(unsigned char*) (lpObjektePROT + ((MARKET_STOCK_SLOT*)slot)->objekt_id * 0x41);
 		if (kind == 0x25 || kind == 0x17) {
 			continue;
 		}
@@ -285,7 +285,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 	}
 	/* pass 3: the three trade lagers next to each market hall */
 	i = 1;
-	lager = (char*) 0x85d620;
+	lager = g_85ab90 + 0x2a90;
 	bar = (char*) 0x868354;
 	do {
 		if (*bar == 0) {

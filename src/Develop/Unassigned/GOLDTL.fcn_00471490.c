@@ -24,7 +24,7 @@ void __cdecl fcn_0047c560(int a, int b, char* surf);
 void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
 void __cdecl fcn_0047ccd0(int x, int y, int surf, char* font, int c);
 void __cdecl d2_DrawAnimationSlot(int idx, int surf);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00471490 */
 void __cdecl fcn_00471490(int k)
 {
@@ -75,116 +75,116 @@ void __cdecl fcn_00471490(int k)
 			win->left = oh1;
 			win->top = oh2;
 			for (col = 0; col < win->count; col++) {
-				obj = g_1015ea0 + win->children[col] * 0x2f4;
-				sx = *(int*) (obj + 0x10) - *(int*) (base + 0x188);
-				sy = ybase - *(int*) (base + 0x18c) + *(int*) (obj + 0x14);
-				if (*(int*) (obj + 4) != 0) {
-					v = *(int*) (obj + 0x34) + ybase;
+				obj = (char*) &((D2_CONTROL_TL*) g_1015ea0)[win->children[col]];
+				sx = (*(D2_CONTROL_TL*) obj).x - *(int*) (base + 0x188);
+				sy = ybase - *(int*) (base + 0x18c) + (*(D2_CONTROL_TL*) obj).y;
+				if ((*(D2_CONTROL_TL*) obj).value_004 != 0) {
+					v = (*(D2_CONTROL_TL*) obj).clip_bottom + ybase;
 					if (v >= 0x100) {
 						v = 0x100;
 					}
-					right = *(int*) (obj + 0x2c);
+					right = (*(D2_CONTROL_TL*) obj).clip_right;
 					if (right >= 0x100) {
 						right = 0x100;
 					}
-					top = *(int*) (obj + 0x30) + ybase;
-					fcn_0047a040(*(int*) (obj + 0x28) < 0 ? 0 : *(int*) (obj + 0x28),
+					top = (*(D2_CONTROL_TL*) obj).clip_top + ybase;
+					fcn_0047a040((*(D2_CONTROL_TL*) obj).clip_left < 0 ? 0 : (*(D2_CONTROL_TL*) obj).clip_left,
 					             top <= 0 ? 0 : top, right, v);
-					switch (*(int*) (obj + 0x20)) {
+					switch ((*(D2_CONTROL_TL*) obj).kind) {
 					case 1:
-						if (*(int*) (obj + 0x3c)) {
-							fcn_0047ccd0(sx, sy, (int) surf, *(char**) (obj + 0xc), 0);
+						if ((*(D2_CONTROL_TL*) obj).value_03c) {
+							fcn_0047ccd0(sx, sy, (int) surf, *(char**) (&(*(D2_CONTROL_TL*) obj).data), 0);
 						} else {
-							fcn_0047cba0(sx, sy, (int) surf, *(char**) (obj + 0xc), 0);
+							fcn_0047cba0(sx, sy, (int) surf, *(char**) (&(*(D2_CONTROL_TL*) obj).data), 0);
 						}
 						break;
 					case 4:
-						d2_DrawAnimationSlot(*(int*) (obj + 0x88), (int) surf);
+						d2_DrawAnimationSlot((*(D2_CONTROL_TL*) obj).value_088, (int) surf);
 						break;
 					case 5:
 					case 8:
-						if (*(int*) (obj + 0x1d0) & 2) {
-							if (g_1015ea0 + d2_CurrentElementId * 0x2f4 == obj || *(int*) (obj + 0x38) != 0) {
-								if (*(int*) (obj + 0x1d0) & 1) {
-									*(int*) (obj + 0x3c) = 1;
+						if ((*(D2_CONTROL_TL*) obj).flags_1d0 & 2) {
+							if ((char*) &((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId] == obj || (*(D2_CONTROL_TL*) obj).value_038 != 0) {
+								if ((*(D2_CONTROL_TL*) obj).flags_1d0 & 1) {
+									(*(D2_CONTROL_TL*) obj).value_03c = 1;
 								}
 							} else {
-								if (*(int*) (obj + 0x1d0) & 1) {
-									*(int*) (obj + 0x3c) = 0;
+								if ((*(D2_CONTROL_TL*) obj).flags_1d0 & 1) {
+									(*(D2_CONTROL_TL*) obj).value_03c = 0;
 								}
 							}
 						}
-						if (*(int*) (obj + 0x3c)) {
-							fcn_0047ccd0(sx, sy, (int) surf, *(char**) (obj + 0xc), *(int*) (obj + 0x88));
+						if ((*(D2_CONTROL_TL*) obj).value_03c) {
+							fcn_0047ccd0(sx, sy, (int) surf, *(char**) (&(*(D2_CONTROL_TL*) obj).data), (*(D2_CONTROL_TL*) obj).value_088);
 						} else {
-							fcn_0047cba0(sx, sy, (int) surf, *(char**) (obj + 0xc), *(int*) (obj + 0x88));
+							fcn_0047cba0(sx, sy, (int) surf, *(char**) (&(*(D2_CONTROL_TL*) obj).data), (*(D2_CONTROL_TL*) obj).value_088);
 						}
-						if (*(unsigned char*) (obj + 0x8c) == 0) {
+						if (*(unsigned char*) (&(*(D2_CONTROL_TL*) obj).payload.fields.value_08c) == 0) {
 							break;
 						}
-						if (*(int*) (obj + 0x84) != 0) {
-							d2_SelectFont(*(int*) (obj + 0x84));
+						if ((*(D2_CONTROL_TL*) obj).font != 0) {
+							d2_SelectFont((*(D2_CONTROL_TL*) obj).font);
 						}
 						flags = 0;
-						if (*(int*) (obj + 0x3c)) {
+						if ((*(D2_CONTROL_TL*) obj).value_03c) {
 							flags = 2;
-						} else if (*(int*) (obj + 0x60)) {
+						} else if ((*(D2_CONTROL_TL*) obj).value_060) {
 							flags = 1;
 						}
-						if (*(int*) (obj + 0x6c)) {
+						if ((*(D2_CONTROL_TL*) obj).value_06c) {
 							flags |= 8;
 						}
-						if (*(int*) (obj + 0x70)) {
+						if ((*(D2_CONTROL_TL*) obj).value_070) {
 							flags |= 0x10;
 						}
 						d2_GetElementResourceSize(*(int*) obj, &w, &h);
-						if (*(int*) (obj + 0x1dc) != -1) {
-							sx = *(int*) (obj + 0x1dc) - *(int*) (base + 0x188);
-							top = *(int*) (obj + 0x18);
+						if ((*(D2_CONTROL_TL*) obj).value_1dc != -1) {
+							sx = (*(D2_CONTROL_TL*) obj).value_1dc - *(int*) (base + 0x188);
+							top = (*(D2_CONTROL_TL*) obj).width;
 						} else {
-							sx = w - *(int*) (base + 0x188) + *(int*) (obj + 0x10) + 6;
-							top = w * 3 + *(int*) (obj + 0x18);
+							sx = w - *(int*) (base + 0x188) + (*(D2_CONTROL_TL*) obj).x + 6;
+							top = w * 3 + (*(D2_CONTROL_TL*) obj).width;
 						}
-						if (*(int*) (obj + 0x1e0) != -1) {
-							sy = ybase - *(int*) (base + 0x18c) + *(int*) (obj + 0x1e0);
+						if ((*(D2_CONTROL_TL*) obj).value_1e0 != -1) {
+							sy = ybase - *(int*) (base + 0x18c) + (*(D2_CONTROL_TL*) obj).value_1e0;
 						} else {
-							sy = ybase - *(int*) (base + 0x18c) + *(int*) (obj + 0x14) - 1;
+							sy = ybase - *(int*) (base + 0x18c) + (*(D2_CONTROL_TL*) obj).y - 1;
 						}
-						fcn_0046bd20(sx, sy, top, *(int*) (obj + 0x1c), surf,
+						fcn_0046bd20(sx, sy, top, (*(D2_CONTROL_TL*) obj).height, surf,
 						             obj + 0x8c, flags);
 						break;
 					case 0x41:
-						d2_DrawField(*(int*) (obj + 0x88), (int) surf);
+						d2_DrawField((*(D2_CONTROL_TL*) obj).value_088, (int) surf);
 						break;
 					case 0x43:
-						if (*(int*) (obj + 0x24) > 0) {
+						if ((*(D2_CONTROL_TL*) obj).mode > 0) {
 							fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
-							d2_SelectFont(*(int*) (obj + 0x84));
+							d2_SelectFont((*(D2_CONTROL_TL*) obj).font);
 							flags = 0;
-							if (*(int*) (obj + 0x3c)) {
+							if ((*(D2_CONTROL_TL*) obj).value_03c) {
 								flags = 2;
-							} else if (*(int*) (obj + 0x60)) {
+							} else if ((*(D2_CONTROL_TL*) obj).value_060) {
 								flags = 1;
 							}
-							if (*(int*) (obj + 0x6c)) {
+							if ((*(D2_CONTROL_TL*) obj).value_06c) {
 								flags |= 8;
 							}
-							if (*(int*) (obj + 0x70)) {
+							if ((*(D2_CONTROL_TL*) obj).value_070) {
 								flags |= 0x10;
 							}
-							fcn_0046bd20(sx, sy, *(int*) (obj + 0x18), *(int*) (obj + 0x1c),
-							             surf, *(char**) (obj + 0x88), flags);
+							fcn_0046bd20(sx, sy, (*(D2_CONTROL_TL*) obj).width, (*(D2_CONTROL_TL*) obj).height,
+							             surf, *(char**) (&(*(D2_CONTROL_TL*) obj).value_088), flags);
 							d2_SelectFont(d2_CurrentFont);
 						}
 						break;
 					case 0x45:
-						sx = *(int*) (obj + 0x10);
-						sy = *(int*) (obj + 0x14);
-						*(int*) (obj + 0x10) = sx - *(int*) (base + 0x188);
-						*(int*) (obj + 0x14) = ybase - *(int*) (base + 0x18c) + sy;
+						sx = (*(D2_CONTROL_TL*) obj).x;
+						sy = (*(D2_CONTROL_TL*) obj).y;
+						(*(D2_CONTROL_TL*) obj).x = sx - *(int*) (base + 0x188);
+						(*(D2_CONTROL_TL*) obj).y = ybase - *(int*) (base + 0x18c) + sy;
 						fcn_00467920(*(int*) obj, (int) surf);
-						*(int*) (obj + 0x10) = sx;
-						*(int*) (obj + 0x14) = sy;
+						(*(D2_CONTROL_TL*) obj).x = sx;
+						(*(D2_CONTROL_TL*) obj).y = sy;
 						break;
 					}
 				}

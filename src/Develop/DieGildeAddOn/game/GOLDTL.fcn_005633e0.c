@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 #pragma pack(1)
@@ -38,7 +38,7 @@ void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_005633e0(char* u)
 {
-	struct good* gd;
+	struct BUILDING_PROTOTYPE * gd;
 	char text[0x800];
 	ENTITY_RECORD* h;
 	unsigned char* e;
@@ -50,8 +50,8 @@ void __cdecl fcn_005633e0(char* u)
 	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), gm_RandomMod(3) + 4, 0, 0);
 	e = gm_StartFilteredEntitySearch(1, 1, *(int*) (u + 0xac));
 	if (e != 0) {
-		gd = &((struct good*)lpGebaeudePROT)[*e];
-		if (gd->kind != 0xd && gd->kind != 0xc && gd->kind != 0xb) {
+		gd = &((struct BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e];
+		if (gd->category != 0xd && gd->category != 0xc && gd->category != 0xb) {
 			fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 2, 0);
 			*(int*) (u + 0xb8) = 0;
 			if (*(unsigned short*) (e + 0x25) != 0xffff) {
@@ -65,7 +65,7 @@ void __cdecl fcn_005633e0(char* u)
 					}
 				}
 			}
-			if (gd->kind == 5 && h != 0 && h->entity_state != 6 && h->entity_state != 7) {
+			if (gd->category == 5 && h != 0 && h->entity_state != 6 && h->entity_state != 7) {
 				v = fcn_0050d270(*(int*) (e + 0x5d));
 				if (v != 0) {
 					fcn_004c5150(h->entity_id, *(int*) (e + 1), g_773d75, v);

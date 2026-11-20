@@ -34,7 +34,7 @@ int __cdecl fcn_004b62c0(void)
 int __cdecl fcn_004b6470(void)
 {
 	if (g_14cbca0 != -1) {
-		if (((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id == g_6a3760)
+		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id == g_6a3760)
 			return fcn_004b60c0();
 		return fcn_004b62c0();
 	}

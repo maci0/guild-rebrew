@@ -17,7 +17,7 @@ extern volatile int g_6b7fac;
 extern char g_77534d;
 extern int main_LoopFlags;
 extern char* g_77255c;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -76,7 +76,7 @@ int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 	ctx = d2_CreateRadioGroup(0);
 	for (i = 0; i < ((IdList*)g_77255c)->count; i++) {
 		id = ((IdList*)g_77255c)->ids[i];
-		if (((Obj2f4*)g_1015ea0)[id].kind != 0x40) {
+		if (((D2_CONTROL_TL*)g_1015ea0)[id].kind != 0x40) {
 			fcn_00469470(ctx, id);
 		}
 	}

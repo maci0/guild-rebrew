@@ -1,6 +1,6 @@
 #include <math.h>
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } Building560290;
 extern float g_696540[];
@@ -197,7 +197,7 @@ void __cdecl fcn_00560290(char* a0)
 				break;
 			}
 			win = fcn_00500e20(&gm_GameTime);
-			if (((Building560290*) lpGebaeudePROT)[*v9].kind != 0x20) {
+			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v9].category != 0x20) {
 				scale = (double) fcn_0050c710(v9, 0xb, 1) * *(double*) 0x665eb0 + g_6629c8;
 			} else {
 				scale = (double) fcn_0050c710(v9, 0x1e, 1) * *(double*) 0x665eb0 + g_6629c8;

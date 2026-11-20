@@ -8,7 +8,7 @@ int __cdecl fcn_0050d200(char*, int);
 int __cdecl fcn_0050b810(int, unsigned char);
 int __cdecl fcn_004a4bb0(int, char*, int, int*, int*, int);
 int __cdecl ai_StartKreditNehmen(int, char*, int, int*, int*);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0048d6c0 */
 int __cdecl ai_StartDomizil(int a0, char* a1, int a2, int* a3, int* a4)
 {
@@ -22,7 +22,7 @@ int __cdecl ai_StartDomizil(int a0, char* a1, int a2, int* a3, int* a4)
 	if (fcn_0048d610(a1, (char**) &a1) && a2 == 0 && (a0 == 0x40 || a0 == 0) &&
 	    he_StartHandlungSearch(2, 0, 0xd, 2, *(unsigned short*) entity) == 0) {
 		if (a1 != 0) {
-			if (*(unsigned char*) (lpGebaeudePROT + *(unsigned char*) a1 * 0x24d + 0x247) < 3 &&
+			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) a1].level < 3 &&
 			    !(a1[0x5a] & 0x41)) {
 				v13[1] = *(unsigned char*) a1 + 1;
 				v13[2] = 1;

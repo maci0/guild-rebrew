@@ -8,7 +8,7 @@ void __cdecl fcn_00472380(int, ...);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_004f0ff0(char*, int, int, int, int*, int*);
 float __cdecl fcn_005e8860(void);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 float __cdecl fcn_00580070(float*);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -41,17 +41,17 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 	fcn_00472380(*(int*) (panel + 0xb0), 0, max, level);
 	fcn_00472640(*(int*) (panel + 0xcc), 1 <= *(int*) (panel + 0xdc));
 	fcn_00472640(*(int*) (panel + 0xd0), 2 <= *(int*) (panel + 0xdc));
-	*(int*) (*(int*) &g_1015ea0 + 0x3c + *(int*) (panel + 0xc8) * 0x2f4) =
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xc8)].value_03c =
 	    *(int*) (panel + 0xa0) == 0;
-	*(int*) (*(int*) &g_1015ea0 + 0x3c + *(int*) (panel + 0xcc) * 0x2f4) =
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xcc)].value_03c =
 	    *(int*) (panel + 0xa0) == 1;
-	*(int*) (*(int*) &g_1015ea0 + 0x3c + *(int*) (panel + 0xd0) * 0x2f4) =
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xd0)].value_03c =
 	    *(int*) (panel + 0xa0) == 2;
-	*(int*) (*(int*) &g_1015ea0 + 0x38 + *(int*) (panel + 0xc8) * 0x2f4) =
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xc8)].value_038 =
 	    *(int*) (panel + 0xa0) == 0;
-	*(int*) (*(int*) &g_1015ea0 + 0x38 + *(int*) (panel + 0xcc) * 0x2f4) =
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xcc)].value_038 =
 	    *(int*) (panel + 0xa0) == 1;
-	*(int*) (*(int*) &g_1015ea0 + 0x38 + *(int*) (panel + 0xd0) * 0x2f4) =
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xd0)].value_038 =
 	    *(int*) (panel + 0xa0) == 2;
 	rec = fcn_004f0ff0((char*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0), level,
 	                   percent, *(int*) (panel + 0xa0) + 1, (int*) &v1, (int*) &v2);
@@ -68,20 +68,20 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 	d2_SetForm(*(int*) (panel + 0xc0), 2);
 	io_AppendText(0x6811b0);
 	rec = fcn_0046fac0(0, 0xf, *(char**) 0x14b54c0, *(int*) &d2_CurrentWindowId);
-	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
-	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].value_06c = 1;
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].width =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
 	d2_SetElementFont(rec, 0x54);
 	io_FormatTextBuffer(text, (char*) 0x6a9480, v2, v1);
 	rec = fcn_0046fac0(0, 0x23, text, *(int*) &d2_CurrentWindowId);
-	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
-	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].value_06c = 1;
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].width =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
 	d2_SetElementFont(rec, 0x54);
 	rec = fcn_0046fac0(*(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2,
 	                   0xf, *(char**) 0x14b54c4, *(int*) &d2_CurrentWindowId);
-	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
-	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].value_06c = 1;
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].width =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
 	d2_SetElementFont(rec, 0x54);
 	io_FormatTextBuffer(text, (char*) 0x6a9480,
@@ -90,8 +90,8 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 	             *(int*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0 + 0x194));
 	rec = fcn_0046fac0(*(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2,
 	                   0x23, text, *(int*) &d2_CurrentWindowId);
-	*(int*) (rec * 0x2f4 + 0x6c + *(int*) &g_1015ea0) = 1;
-	*(int*) (rec * 0x2f4 + 0x18 + *(int*) &g_1015ea0) =
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].value_06c = 1;
+	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].width =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
 	d2_SetElementFont(rec, 0x54);
 	*(int*) 0x9a9214 = level;

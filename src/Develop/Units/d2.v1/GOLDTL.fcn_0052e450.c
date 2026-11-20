@@ -53,7 +53,7 @@ void __cdecl d2_OpenTransporterInfoPanel(unsigned short* e)
 			d2_SetForm(g_6a25b8, 0);
 			x = ((((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1;
 			id = fcn_0046f740(x, 0x30, *e + 0xdf, d2_CurrentWindowId);
-			((Ent*)g_1015ea0)[id].f5c = 1;
+			((D2_CONTROL_TL*) g_1015ea0)[id].value_05c = 1;
 			if (*parent == g_774970) {
 				g_6a25e8 = fcn_0052dee0(x, 0xac, g_14b5e84);
 			}

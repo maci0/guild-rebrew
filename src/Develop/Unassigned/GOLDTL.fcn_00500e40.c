@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #pragma pack(push, 1)
 typedef struct Rec500e {
 	char kind;
@@ -87,7 +87,7 @@ void __cdecl fcn_00500e40(void)
 			do {
 				if (*(unsigned short*) r != 0xffff) {
 					id = *(unsigned short*) r & 0x7fff;
-					tgt = ((int*) 0x8f9480)[((Rec500e*) lpObjektePROT)[id].x21];
+					tgt = ((int*) 0x8f9480)[((OBJECT_PROTOTYPE*) lpObjektePROT)[id].subtype];
 					t = (unsigned char*) lpGebaeudePROT + tgt * 0x24d;
 					kind = t[0];
 					cnt = 0;

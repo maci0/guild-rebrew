@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 typedef struct {
@@ -23,14 +23,14 @@ float __cdecl fcn_0050bb50(int id, unsigned char a);
 void __cdecl fcn_005af160(unsigned char* p, int unused, int mode)
 {
 	float sum;
-	unsigned char* rec;
+	BUILDING_PROTOTYPE *rec;
 	int kind;
 	int i;
 	int n;
 	float v;
 
 	sum = 0.0f;
-	rec = lpGebaeudePROT + *p * 589;
+	rec = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*p];
 	if (*p == 0x47) {
 		kind = *(int*) (p + 0x65);
 	} else {
@@ -40,7 +40,7 @@ void __cdecl fcn_005af160(unsigned char* p, int unused, int mode)
 		if (((Slot5ba7*)g_7796e0)[i].h != -1 && fcn_00471f80(((Slot5ba7*)g_7796e0)[i].h) != 0) {
 			n = fcn_00471f80(((Slot5ba7*)g_7796e0)[i].h);
 			if (n != 0) {
-				if (*rec == 10) {
+				if (rec->category == 10) {
 					v = (float) (fcn_0050bb50(((Slot5ba7*)g_7796e0)[i].id, (char) kind) * g_664ef8);
 				} else {
 					v = fcn_0050bb50(((Slot5ba7*)g_7796e0)[i].id, (char) kind) * *(float*) (p + 0x49);
@@ -56,7 +56,7 @@ void __cdecl fcn_005af160(unsigned char* p, int unused, int mode)
 		if (((Slot5ba7*)g_778da0)[i].h != -1 && fcn_00471f80(((Slot5ba7*)g_778da0)[i].h) != 0) {
 			n = fcn_00471f80(((Slot5ba7*)g_778da0)[i].h);
 			if (n != 0) {
-				if (*rec == 10) {
+				if (rec->category == 10) {
 					v = (float) (fcn_0050bb50(((Slot5ba7*)g_778da0)[i].id, (char) kind) * g_664ef8);
 				} else {
 					v = fcn_0050bb50(((Slot5ba7*)g_778da0)[i].id, (char) kind) * *(float*) (p + 0x49);

@@ -24,7 +24,7 @@ void __cdecl fcn_0046f060(int win)
 	}
 	n = p->count;
 	if (n > 0) {
-		e = g_1015ea0 + 0x14;
+		e = (char*) g_1015ea0 + 0x14;
 		y = p->top;
 		do {
 			if (*(int*) (e + 8) + *(int*) e > y + v) {

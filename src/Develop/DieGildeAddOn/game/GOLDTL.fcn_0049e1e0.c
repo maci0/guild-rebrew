@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 typedef struct Blk24 {
 	unsigned char kind;
@@ -56,7 +56,7 @@ int __cdecl ai_StartBaumeister(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	}
 	rec = lpGebaeudeINST;
 	for (a3 = 0; a3 < 0x100; a3++) {
-		if (rec[0] != 0 && lpGebaeudePROT[rec[0] * 0x24d] == 3 && !(rec[0x5a] & 4)) {
+		if (rec[0] != 0 && ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[rec[0]].category == 3 && !(rec[0x5a] & 4)) {
 			lvl = rec[0x5c];
 			if (lvl < gm_RandomMod(0x40) + 0x25) {
 				Blk24 b1;

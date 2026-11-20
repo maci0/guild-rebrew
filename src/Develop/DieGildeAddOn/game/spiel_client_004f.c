@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char g_7f4ca0[];
 extern char* gm_CityEntity;
 extern unsigned char* lpGebaeudePROT;
@@ -42,7 +42,7 @@ int __cdecl fcn_004f25a0(char* req)
 		return -1;
 	}
 	type = *(unsigned char*) entity1;
-	if (lpGebaeudePROT[type + type * 588] != 0x1d) {
+	if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[type].category != 0x1d) {
 		return -2;
 	}
 	workers = *(void**) ((char*) entity1 + 0x65);

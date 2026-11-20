@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #pragma pack(push, 1)
 typedef struct fcn_0050b980_Rec {
     char type;                  /* +0x00 */
@@ -38,7 +38,7 @@ extern int g_14a79c0[];
 /* ADDRESS: GOLDTL 0x0050b980 */
 float __cdecl eval_ObjektPreis2Credits(int id, int percent)
 {
-    fcn_0050b980_Rec* r;
+    OBJECT_PROTOTYPE* r;
     char buf[256];
     float acc;
     float price;
@@ -50,17 +50,17 @@ float __cdecl eval_ObjektPreis2Credits(int id, int percent)
     char* childp;
     BUILDING_PRICE_ROW* building;
 
-    r = &((fcn_0050b980_Rec*) lpObjektePROT)[id];
-    if (r->cache != 0) {
-        price = (float) (r->cache << 5) * (percent & 0xff) * 0.01f;
-        if (r->sub == 3) {
+    r = &((OBJECT_PROTOTYPE*) lpObjektePROT)[id];
+    if (r->price_cache != 0) {
+        price = (float) (r->price_cache << 5) * (percent & 0xff) * 0.01f;
+        if (r->subtype == 3) {
             return price * 1.5f;
         }
         return price;
     }
 
-    divisor = (int) r->div + (r->div == 0);
-    q = (float) r->cap / divisor;
+    divisor = (int) r->value_036 + (r->value_036 == 0);
+    q = (float) r->value_022 / divisor;
     buildingType = g_99e0a0[id];
     building = (BUILDING_PRICE_ROW*) g_entity_type_table + buildingType;
     if (buildingType) {
@@ -74,7 +74,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int percent)
     }
     price = q * (acc * 0.5);
 
-    if (r->type == 0x17) {
+    if ((*(char *)&r->kind) == 0x17) {
         return price * 2.2f;
     }
 
@@ -84,7 +84,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int percent)
             break;
         }
         if (child != 0xffff) {
-            price = eval_ObjektPreis2Credits(child, percent) * *(unsigned short*) (childp - 8) / r->div
+            price = eval_ObjektPreis2Credits(child, percent) * *(unsigned short*) (childp - 8) / r->value_036
                     + price;
         } else {
             sprintf(buf,
@@ -93,7 +93,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int percent)
                     g_14a79c0[id * 2]);
         }
     }
-    r->cache = (int) (price * 0.06875f);
+    r->price_cache = (int) (price * 0.06875f);
     price = (float) (percent & 0xff) * price;
     price *= 0.01f;
     return price * 2.2f;

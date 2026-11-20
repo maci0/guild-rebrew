@@ -83,7 +83,7 @@ int __cdecl fcn_005e4060(void);
 void __cdecl fcn_00533a40(char*);
 int __cdecl fcn_004c5790(int, Msg*);
 void __cdecl fcn_00471e30(int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_ShowNetworkLoadGame(void)
 {
 	int i;
@@ -124,7 +124,7 @@ int __cdecl d2_ShowNetworkLoadGame(void)
 					if (d2_HoveredWindow == -1) {
 						continue;
 					}
-					if (((Ctl*)g_1015ea0)[((D2_WIN*)g_1015f40)[d2_HoveredWindow].slot].f40 != &((D2_WIN*)g_1015f40)[slots[i].f8]) {
+					if ((D2_WIN*) ((D2_CONTROL_TL*)g_1015ea0)[((D2_WIN*)g_1015f40)[d2_HoveredWindow].slot].parent != &((D2_WIN*)g_1015f40)[slots[i].f8]) {
 						continue;
 					}
 				}
@@ -134,7 +134,7 @@ int __cdecl d2_ShowNetworkLoadGame(void)
 					flag = 1;
 				}
 				d2_SetSlotVisibility(slots[i].h, 0);
-				if (!fcn_005e0b40(((Ctl*)g_1015ea0)[slots[i].h].f10, ((Ctl*)g_1015ea0)[slots[i].h].f14, slots[i].rec.text)) {
+				if (!fcn_005e0b40(((D2_CONTROL_TL*) g_1015ea0)[slots[i].h].x, ((D2_CONTROL_TL*) g_1015ea0)[slots[i].h].y, slots[i].rec.text)) {
 					d2_SetSlotVisibility(slots[i].h, 1);
 					break;
 				}

@@ -11,7 +11,7 @@ extern float g_662d40[3];
 extern float g_7e3a40[3];
 extern float d3_CameraTargetRotation[3];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* g_7e2aa0;
 extern char* g_7746c0;
 
@@ -106,7 +106,7 @@ void __cdecl fcn_0052cbb0(Ent* e)
 	g_7e3a40[0] = q[0];
 	g_7e3a40[1] = q[1];
 	g_7e3a40[2] = q[2];
-	s = (Save*) gm_GetEntityTableEntry((char*) (&((House*) g_7f4ca0)[g_774970]));
+	s = (Save*) gm_GetEntityTableEntry((char*) (((House*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])));
 	if (s != 0) {
 		*(int*) &s->pos[0] = *(int*) &q[0];
 		*(int*) &s->pos[1] = *(int*) &q[1];

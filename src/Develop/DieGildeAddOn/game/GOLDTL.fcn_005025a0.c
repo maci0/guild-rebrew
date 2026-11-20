@@ -1,5 +1,5 @@
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/season_slots.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 extern float flt_1;
@@ -27,7 +27,7 @@ float __cdecl fcn_005025a0(int season, int slot)
 	int off;
 
 	off = season * 0x2a90 + slot * 0x80;
-	id = *(unsigned short*) (g_85ab90 + off);
+	id = ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->objekt_id;
 	def = g_item_def_table + id * 0x41;
 	store = fcn_00503d10(id);
 	if (store == 0 && season != g_773d75) {
@@ -44,19 +44,19 @@ float __cdecl fcn_005025a0(int season, int slot)
 	if (e != 0) {
 		stock = (float) *(int*) (e + 0xe);
 	}
-	last = *(float*) (g_85ab90 + off + 0x38);
-	ratio = *(float*) (g_85ab90 + off + 0x24) / *(float*) (g_85ab90 + off + 0x20)
-		* ((stock > *(float*) (g_85ab90 + off + 0x20) && *def != 0x17)
-			? (stock < 1.0 ? *(float*) (g_85ab90 + off + 0x20) / 1.0
-				: *(float*) (g_85ab90 + off + 0x20) / stock)
+	last = ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->price;
+	ratio = ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->price_factor / ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->basis
+		* ((stock > ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->basis && *def != 0x17)
+			? (stock < 1.0 ? ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->basis / 1.0
+				: ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->basis / stock)
 			: flt_1);
 	scale = ratio > 0.25 ? ratio : 0.25;
 	if (scale >= g_664e78) {
 		scale = 5.0;
 	}
 	stock = scale;
-	price = ((double) eval_ObjektPreis2Credits(id, 100) * scale - (double) last) * 0.4f + *(float*) (g_85ab90 + off + 0x38);
-	if (*(float*) (g_85ab90 + off + 0x38) <= 0.0f) {
+	price = ((double) eval_ObjektPreis2Credits(id, 100) * scale - (double) last) * 0.4f + ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->price;
+	if (((MARKET_STOCK_SLOT*)(g_85ab90 + off))->price <= 0.0f) {
 		if (eval_ObjektPreis2Credits(id, 100) < 512.0f) {
 			return 512.0f;
 		}

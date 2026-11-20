@@ -1,6 +1,6 @@
 extern int d2_CurrentWindowId;
 extern char* g_77255c;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern int g_14ce8e0;
@@ -52,14 +52,14 @@ void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
 	for (i = 0; i < 7; i++) {
 		if (i != 0 || enableFirst != 0) {
 			id = btn[i];
-			*(int*) (g_1015ea0 + id * 0x2f4 + 0x5c) = 1;
-			*(int*) (g_1015ea0 + id * 0x2f4 + 0x1d0) = 3;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_05c)) = 1;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0)) = 3;
 		}
 		id = btn[i];
-		*(int*) (g_1015ea0 + id * 0x2f4 + 0x84) = 0x55;
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].font)) = 0x55;
 		fcn_005c9090(*(int*) (0x14a9de8 + btn[i + 7] * 4),
-			     *(int*) (g_1015ea0 + id * 0x2f4 + 0x10) - *(int*) (g_77255c + 4) + 0x20,
-			     *(int*) (g_1015ea0 + id * 0x2f4 + 0x14) - *(int*) (g_77255c + 8) - 0x19,
+			     *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].x)) - *(int*) (g_77255c + 4) + 0x20,
+			     *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].y)) - *(int*) (g_77255c + 8) - 0x19,
 			     200, 0x55);
 	}
 	d2_SetOverlayAnimation(0, 0);

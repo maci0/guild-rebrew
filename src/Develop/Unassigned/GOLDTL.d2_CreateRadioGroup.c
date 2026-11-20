@@ -18,7 +18,7 @@ extern char* g_1015ea0;
 extern char s_67d4b0[];
 
 #include "Develop/Units/Error/error_message.h"
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004693b0 */
 int __cdecl d2_CreateRadioGroup(int n, ...)
 {
@@ -43,8 +43,8 @@ int __cdecl d2_CreateRadioGroup(int n, ...)
 	va_start(ap, n);
 	for (j = 0; j < n; j++) {
 		g_102cbc4[i].ids[j] = va_arg(ap, int);
-		((Slot*)g_1015ea0)[g_102cbc4[i].ids[j]].dirty = 1;
-		((Slot*)g_1015ea0)[g_102cbc4[i].ids[j]].flags &= ~2;
+		((D2_CONTROL_TL*) g_1015ea0)[g_102cbc4[i].ids[j]].value_058 = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g_102cbc4[i].ids[j]].flags_1d0 &= ~2;
 	}
 	va_end(ap);
 	return i;

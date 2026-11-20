@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 typedef struct Rec {
 	char type;
 	char rest[0x40];
@@ -69,8 +69,8 @@ int __cdecl fcn_005c4ec0(int a0, char* ownerEntity, int requestedAmount, char* a
 				if (obj != 0) {
 					sub = (unsigned short*) fcn_00502cd0(*(int*) ((char*) obj + 0x14), 1, 5);
 					while (sub != 0 && remaining > 0) {
-						if (((Rec*) lpObjektePROT)[*sub].type != 0x17
-							&& ((Rec*) lpObjektePROT)[*sub].type != 0x25) {
+						if ((*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) != 0x17
+							&& (*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) != 0x25) {
 							div = (int) (fcn_0050bb50(*sub, g_773d75) * 0.5);
 							if (div != 0) {
 								amount = remaining / div;
@@ -118,8 +118,8 @@ int __cdecl fcn_005c4ec0(int a0, char* ownerEntity, int requestedAmount, char* a
 				if (obj != 0) {
 					sub = (unsigned short*) fcn_00502cd0(*(int*) ((char*) obj + 0x14), 1, 5);
 					while (sub != 0 && remaining > 0) {
-						if (((Rec*) lpObjektePROT)[*sub].type == 0x17
-							|| ((Rec*) lpObjektePROT)[*sub].type == 0x25) {
+						if ((*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) == 0x17
+							|| (*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) == 0x25) {
 							div = (int) (fcn_0050bb50(*sub, g_773d75) * 0.5);
 							if (div != 0) {
 								amount = remaining / div;

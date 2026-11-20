@@ -48,7 +48,7 @@ extern int g_6a24d8[];
 extern int g_7ea380[15];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774684;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl fcn_0047a040(int, int, int, int);
 int __cdecl fcn_00475290(int, int, int, int, int);
@@ -131,6 +131,6 @@ void __cdecl fcn_00526db0(char* name)
 	(*(Surface**)&g_774684) = fcn_004770a0(&desc2, 3);
 	fcn_00476970((*(Surface**)&g_774684));
 	g_6a25fc = fcn_00469c30(0x286, 0x23c, 0x544);
-	((Control*)g_1015ea0)[g_6a25fc].visible = 1;
+	((D2_CONTROL_TL*)g_1015ea0)[g_6a25fc].value_05c = 1;
 	d2_SetSlotVisibility(g_6a25fc, 0);
 }

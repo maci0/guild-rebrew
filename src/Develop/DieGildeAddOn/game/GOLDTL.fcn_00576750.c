@@ -1,6 +1,6 @@
 #include <string.h>
 #include "client_packet_builder.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char* lpGebaeudePROT;
 extern float g_6629d0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -33,8 +33,8 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 	char byte;
 
 	selected = 0;
-	record = lpGebaeudePROT + *(unsigned char*) object * 0x24d;
-	if (*record != 0x1e) {
+	record = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) object];
+	if (((char)(((BUILDING_PROTOTYPE*)record)->category)) != 0x1e) {
 		return;
 	}
 	memset(flags, 0, sizeof flags);
@@ -93,10 +93,10 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 		}
 		break;
 	case 2:
-		if (record[0x247] == 3) {
+		if (((char)(((BUILDING_PROTOTYPE*)record)->level)) == 3) {
 			byte = (char) (0xfc - gm_RandomMod(3));
 		}
-		else if (record[0x247] == 2) {
+		else if (((char)(((BUILDING_PROTOTYPE*)record)->level)) == 2) {
 			byte = (char) (0xfa - gm_RandomMod(3));
 		}
 		else {

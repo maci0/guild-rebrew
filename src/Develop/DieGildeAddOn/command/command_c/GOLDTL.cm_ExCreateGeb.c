@@ -21,7 +21,7 @@ void __cdecl fcn_004550b0(int a, int b);
 typedef struct BuildingProto { unsigned char kind; char name[0x24c]; } BuildingProto;
 void __cdecl fcn_0052d9d0(void* p);
 void __cdecl fcn_004bd4e0(int a, int b);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x004cc820 */
 int __cdecl cm_ExCreateGeb(char* request, char* out)
 {
@@ -54,7 +54,7 @@ int __cdecl cm_ExCreateGeb(char* request, char* out)
 	*(int*) 0x68a9d4 = *(int*) (geb + 1);
 	/* Prefix literal at native 0x6798d4. */
 	strcpy(name, "gb_");
-	strcat(name, ((BuildingProto*)lpGebaeudePROT)[*geb].name);
+	strcat(name, ((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*geb] + 1));
 	strupr(name + 2);
 	for (i = 0; i < 4; i++) {
 		if (i != 0)

@@ -6,7 +6,7 @@ extern float g_6a2b68[7][4];
 extern VECTOR3 g_67bbdc;
 extern float g_67bbe0;
 extern float g_67bbe4;
-
+#include "Develop/Units/d3/d3_object.h"
 // SIZE 0x60
 struct s_1041d80 {
 	float v[3];
@@ -40,9 +40,9 @@ void __cdecl fcn_0052a7d0(void)
 			(*(float*)&g_67bbdc) = src[i][0];
 			g_67bbe0 = src[i][1];
 			g_67bbe4 = src[i][2];
-			((struct s_1041d80*)g_1041d80)[i].v[0] = src[i][0];
-			((struct s_1041d80*)g_1041d80)[i].v[1] = src[i][1];
-			((struct s_1041d80*)g_1041d80)[i].v[2] = src[i][2];
+			((D3_SCENE_SLOT*)g_1041d80)[i].a.x = src[i][0];
+			((D3_SCENE_SLOT*)g_1041d80)[i].a.y = src[i][1];
+			((D3_SCENE_SLOT*)g_1041d80)[i].a.z = src[i][2];
 		}
 	}
 }

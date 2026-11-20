@@ -89,21 +89,21 @@ void __cdecl d2_OpenRaubzugDialog(int unused, char* e)
 				pkt.type = 0x75;
 				pkt.x36 = 1;
 				n = 0;
-				pkt.x8 = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+				pkt.x8 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
 				pkt.x58 = *(int*) (e + 1);
 				pkt.x5c = *(int*) (((char*)g_7746c8) + 1);
 				for (i = 0; i < 8; i++) {
 					pkt.ids[i] = -1;
 				}
 				for (i = 0; i < 768; i++) {
-					if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_17c[12] != 0) {
-						pkt.ids[n] = ((ENTITY_RECORD*)g_7f4ca0)[i].entity_id;
+					if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected != 0) {
+						pkt.ids[n] = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id;
 						n++;
 					}
 				}
 				if (n != 0) {
 					fcn_004c5530(&pkt);
-					fcn_005100f0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1);
+					fcn_005100f0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1);
 					cm_ExProdObjekt();
 				}
 				else {

@@ -1,7 +1,7 @@
 /* 0x21c-stride entity-table sweep from 0x7f4ca0 to 0x85a0a0: matches the
    record whose owner pointer equals the driver's, resolves its type row
    through 0x100e764/0x100e724 and reports the 0x39 event. */
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 int __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl fcn_004ce590(int);
 int __cdecl fcn_005c7270(int, int);
@@ -81,7 +81,7 @@ void __cdecl fcn_00489010(char* e)
 			idx = *(int*) found;
 			tbl = lpObjektePROT;
 			sprintf(buf, (char*) 0x67e388, e + 0x30, p - 0x154,
-			        tbl + idx * 0x41 + 1);
+			        (char *)&((OBJECT_PROTOTYPE *)tbl)[idx] + 1);
 			sprintf(buf + 0x14, (char*) 0x67e358, *(int*) (p - 0x180),
 			        *(int*) (e + 2), idx, 1, g_773d75, 0);
 			fcn_004c51f0(*(int*) (p - 0x180), *(int*) (e + 2), idx, 1,

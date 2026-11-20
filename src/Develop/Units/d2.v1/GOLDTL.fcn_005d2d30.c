@@ -27,7 +27,7 @@ typedef struct
 // SIZE 0xf8
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern int g_100f1dc;
@@ -54,7 +54,7 @@ int __cdecl d2_RunWerbungDialog(unsigned short* target)
 	int r;
 	int h;
 
-	cost = fcn_005d2a40(*(int*) (g_7f4ca0 + g_774970 * 540 + 4), *(int*) (target + 2));
+	cost = fcn_005d2a40(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*) (target + 2));
 	dlg = fcn_00470820(0, 0, "privillegien\\werbung2");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
@@ -69,7 +69,7 @@ int __cdecl d2_RunWerbungDialog(unsigned short* target)
 			if (g_100f1dc == 2) {
 				memset(&pkt, 0, sizeof(pkt));
 				pkt.type = 0x41;
-				pkt.x8 = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
+				pkt.x8 = *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
 				pkt.xc = pkt.x8;
 				pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 				pkt.x36 = 2;

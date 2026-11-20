@@ -3,7 +3,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl io_AppendText(int, ...);
@@ -15,30 +15,30 @@ void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* building, int a2, int a3)
 {
 	int btn;
-	char* info;
+	BUILDING_PROTOTYPE *info;
 	int dlg;
 	int x_dlg = -1;
 	int y_dlg = -1;
 	int handled = 0;
 	int r;
 
-	info = lpGebaeudePROT + *building * 0x24d;
+	info = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*building];
 	dlg = fcn_00470820(0, 0, (char*) 0x6ac448);
 	d2_CenterDialogWindows(dlg);
 	io_AppendText(0x10b);
 	if (*a0 != 0x116) {
-		if (a2 >= (int) (unsigned char) info[0x240]) {
+		if (a2 >= (int) (unsigned char) ((char) info->dimension_240)) {
 			io_AppendText(0x110);
 		} else {
 			btn = io_AppendText(0x10c, 0x1f40);
 			x_dlg = fcn_00472250(dlg, 0, btn);
 		}
-		if (a3 >= (int) (unsigned char) info[0x241]) {
+		if (a3 >= (int) (unsigned char) ((char) info->dimension_241)) {
 			io_AppendText(0x111);
 		} else {
 			y_dlg = fcn_00472250(dlg, 0, io_AppendText(0x10d, 0x1f40));
 		}
-	} else if (a2 >= (int) (unsigned char) info[0x242]) {
+	} else if (a2 >= (int) (unsigned char) ((char) info->dimension_242)) {
 		io_AppendText(0x111);
 	} else {
 		x_dlg = fcn_00472250(dlg, 0, io_AppendText(0x10e, 0x1f40));

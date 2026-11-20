@@ -6,7 +6,7 @@ typedef struct {
 	char pad_a3[0x1a6];
 	int value;
 } Lvl50cf;
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 /* SIZE 0x41 */
 typedef struct {
 	unsigned char kind;
@@ -44,14 +44,14 @@ int __cdecl fcn_0050cf50(unsigned char* buildingRecordArg, int percentScale)
 			break;
 		}
 		id = lvl->ids[i] & 0x7fff;
-		k = ((Kind50cf*) lpObjektePROT)[id].kind;
+		k = ((OBJECT_PROTOTYPE*) lpObjektePROT)[id].kind;
 		if (!flag) {
 			if (k == 2 || k == 6) {
 				t = fcn_00502cd0(*(int*) (buildingRecordArg + 0x5d), 1, 0, id);
 				if (t != 0) {
 					acc[0] = (int) (acc[0] + eval_ObjektPreis2Credits(*(unsigned short*) t, *(unsigned char*) (t + 0x12)));
 					if (i < 0x3f) {
-						k = ((Kind50cf*) lpObjektePROT)[lvl->ids[i + 1] & 0x7fff].kind;
+						k = ((OBJECT_PROTOTYPE*) lpObjektePROT)[lvl->ids[i + 1] & 0x7fff].kind;
 						if (k != 2 && k != 6) {
 							flag = 1;
 						}
@@ -65,7 +65,7 @@ int __cdecl fcn_0050cf50(unsigned char* buildingRecordArg, int percentScale)
 					acc[0] = (int) (acc[0] + eval_ObjektPreis2Credits(*(unsigned short*) q, *(unsigned char*) (q + 0x12)));
 				}
 				if (i < 0x3f) {
-					k = ((Kind50cf*) lpObjektePROT)[lvl->ids[i + 1] & 0x7fff].kind;
+					k = ((OBJECT_PROTOTYPE*) lpObjektePROT)[lvl->ids[i + 1] & 0x7fff].kind;
 					if (k == 2 || k == 6) {
 						flag = 0;
 					}

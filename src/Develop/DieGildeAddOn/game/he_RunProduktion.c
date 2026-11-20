@@ -2,7 +2,7 @@
 #include "client_types.h"
 #include "client_actions.h"
 #include "Develop/DieGildeAddOn/game/spiel.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
@@ -239,7 +239,7 @@ warten:
             io_FormatTextBuffer(text, 0x1bb4, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
             strcpy(bild, "_NACHRICHTEN_HS_05");
         } else {
-            rohstoff = (unsigned short*) (lpObjektePROT + *(unsigned short*) (e + 0xac) * 0x41 + 0x2e);
+            rohstoff = (unsigned short*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) (e + 0xac)]) + 0x2e);
             for (i = 0; i < 4; ++i, ++rohstoff) {
                 if (*rohstoff != 0) {
                     eintrag = fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *rohstoff);
@@ -277,14 +277,14 @@ warten:
                 return;
             }
             do {
-                rezept = lpObjektePROT + *(unsigned short*) (e + 0xac) * 0x41;
+                rezept = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) (e + 0xac)]);
                 differenz = fcn_0050c830(letzte_zeit, naechste_zeit, 0);
                 produziert = 0;
                 *(float*) (e + 0xb4) -= (*(int*) (e + 0x14) * 1.3f + *(int*) (e + 0x18)) * (float) differenz * leistung;
                 if (*(float*) (e + 0xb4) <= 0.0f) {
                     do {
                         ++produziert;
-                        *(float*) (e + 0xb4) += (double) *(unsigned int*) (rezept + 0x22);
+                        *(float*) (e + 0xb4) += (double) ((OBJECT_PROTOTYPE *)rezept)->value_022;
                         *(float*) (e + 0xb8) = *(float*) (e + 0xb4);
                     } while (*(float*) (e + 0xb4) <= 0.0f);
                     if (produziert != 0) {

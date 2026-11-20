@@ -33,7 +33,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_00517c00(int, int, int, char*);
 void __cdecl fcn_005b5c70(Gauge*);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
 {
 	char buf[0x100];
@@ -49,16 +49,16 @@ void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
 		}
 		g->state = 2;
 		fcn_0046f940(g->label, buf);
-		((Ctl*)g_1015ea0)[g->label].x18 = 0xa0;
-		((Ctl*)g_1015ea0)[g->label].x1c = 0x28;
+		((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
+		((D2_CONTROL_TL*) g_1015ea0)[g->label].height = 0x28;
 		g->state = 2;
 		return;
 	}
 	if (g->obj != 0 && ((char*) g->obj)[8] != 0) {
 		fcn_00517c00(*g->obj, 1, 1, buf);
 		fcn_0046f940(g->label, buf);
-		((Ctl*)g_1015ea0)[g->label].x6c = 1;
-		((Ctl*)g_1015ea0)[g->label].x18 = 0xa0;
+		((D2_CONTROL_TL*) g_1015ea0)[g->label].value_06c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
 		g->state = 1;
 		return;
 	}
@@ -69,9 +69,9 @@ void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
 	}
 	g->state = 0;
 	fcn_0046f940(g->label, buf);
-	((Ctl*)g_1015ea0)[g->label].x18 = 0xa0;
-	((Ctl*)g_1015ea0)[g->label].x1c = 0x28;
+	((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
+	((D2_CONTROL_TL*) g_1015ea0)[g->label].height = 0x28;
 	fcn_0046f940(g->value, "");
 	g->state = 0;
-	((Ctl*)g_1015ea0)[g->icon].x2f0 = 0;
+	*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[g->icon].associated_object) = 0;
 }

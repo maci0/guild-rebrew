@@ -2,7 +2,7 @@
    result block.  Entity counts come from the record array at 0x7f4ca0, the
    per-kind totals from the kind table at 0x696178, and the weight sums from
    the cell table at 0x99ef90. */
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char g_7f4ca0[];          /* record array, stride 0x21c */
 #include "game_data.h"
 typedef struct StatsProto { unsigned char kind; char pad1[0x246]; unsigned char field247, field248; char tail[4]; } StatsProto;
@@ -28,7 +28,7 @@ void __cdecl fcn_004faed0(float* out)
 	char* rec;
 	char* ent;
 	char* pos;
-	unsigned char type; StatsProto* proto;
+	unsigned char type; BUILDING_PROTOTYPE* proto;
 	int total;
 	int slot0_count;
 	int slot1_count;
@@ -80,10 +80,10 @@ void __cdecl fcn_004faed0(float* out)
 		total++;
 		ent = *(char**) rec;
 		if (ent != 0) {
-			proto = (StatsProto*)lpGebaeudePROT; type = *(unsigned char*)ent;
+			proto = (BUILDING_PROTOTYPE*)lpGebaeudePROT; type = *(unsigned char*)ent;
 			pos = *(char**) (ent + 0x61); proto += type; slot0_count++;
 			if (pos != 0) {
-				type = proto->kind;
+				type = proto->category;
 				if (!(type >= 0x0b && type <= 0x0d) && type != 0x10) {
 					if (fcn_004fa6f0(pos + 0x4c, &x, &y) != 0) {
 						idx = y + x * 8;
@@ -94,10 +94,10 @@ void __cdecl fcn_004faed0(float* out)
 		}
 		ent = *(char**) (rec + 4);
 		if (ent != 0) {
-			proto = (StatsProto*)lpGebaeudePROT; type = *(unsigned char*)ent;
+			proto = (BUILDING_PROTOTYPE*)lpGebaeudePROT; type = *(unsigned char*)ent;
 			pos = *(char**) (ent + 0x61); proto += type; slot1_count++;
 			if (pos != 0) {
-				type = proto->kind;
+				type = proto->category;
 				if (!(type >= 0x0b && type <= 0x0d) && type != 0x10) {
 					if (fcn_004fa6f0(pos + 0x4c, &x2, &y2) != 0) {
 						idx = y2 + x2 * 8;
@@ -111,20 +111,20 @@ void __cdecl fcn_004faed0(float* out)
 	for (n = 0x100; n != 0; n--) {
 		type = *(unsigned char*) rec;
 		if (type != 0 && type <= 0x43 && *(short*) (rec + 0x27) != -1) {
-			proto = &((StatsProto*)lpGebaeudePROT)[type]; weight_a = weight_a + *(unsigned short*) (g_696178 + type * 4);
+			proto = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[type]; weight_a = weight_a + *(unsigned short*) (g_696178 + type * 4);
 			weight_b = weight_b + *(unsigned short*) (g_696178 + type * 4 + 2);
 			sum_c = sum_c + *(unsigned short*) (g_696178 + type * 4 + 1);
 			if (*(unsigned short*) (g_696178 + type * 4 + 1) != 0) {
 				sum_a = sum_a
-				    + proto->field247;
+				    + proto->level;
 				sum_b = sum_b
-				    + proto->field248;
+				    + proto->level_limit;
 			}
 			if (*(unsigned short*) (g_696178 + type * 4 + 3) != 0) {
 				sum_d = sum_d
-				    + proto->field247;
+				    + proto->level;
 				slot0_e = slot0_e
-				    + proto->field248;
+				    + proto->level_limit;
 			}
 		}
 		rec += 0xa9;

@@ -51,7 +51,7 @@ int __cdecl fcn_005db8e0(void *, void *);
 int __cdecl fcn_005dbb60(void *, void *);
 int __cdecl _ftol(void);
 int __cdecl d2_ShowTxt(int, int, char *, int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005d1790 */
 void __cdecl fcn_005d1790(unsigned short *person, int a1)
 {
@@ -183,8 +183,8 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 	stamp = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width;
 	io_FormatTextBuffer(buf12, 0x1f61);
 	idx = d2_ShowTxt(0, 1, buf12, d2_CurrentWindowId);
-	*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
-	*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
+	((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
+	((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
 	inx = 2;
 	i = 0;
 	do {
@@ -197,70 +197,70 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 	io_FormatTextBuffer(buf12, 0x1f63);
 	idx = d2_ShowTxt(0, 0x9a, buf12, d2_CurrentWindowId);
 	inx = 7;
-	*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
-	*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
+	((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
+	((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
 	if (*(int *)((char *)person + 0x2c) != 0) {
 		if (*(int *)((char *)person + 0x2c) & 0xf) {
 			io_FormatTextBuffer(buf12, 0x161e);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0xf0) {
 			io_FormatTextBuffer(buf12, 0x161f);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0xf00) {
 			io_FormatTextBuffer(buf12, 0x1620);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0x3000) {
 			io_FormatTextBuffer(buf12, 0x1621);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0x1c000) {
 			io_FormatTextBuffer(buf12, 0x1622);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0xe0000) {
 			io_FormatTextBuffer(buf12, 0x1623);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0x700000) {
 			io_FormatTextBuffer(buf12, 0x1624);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0x1800000) {
 			io_FormatTextBuffer(buf12, 0x1625);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0x1e000000) {
 			io_FormatTextBuffer(buf12, 0x1626);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x6c) = 1;
-			*(int *)(g_1015ea0 + idx * 0x2f4 + 0x18) = stamp;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
 		}
 	}
 	if (a1 != 0) {

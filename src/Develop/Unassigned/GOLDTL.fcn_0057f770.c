@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 // SIZE 0x3c
@@ -36,7 +36,7 @@ int __cdecl fcn_0057f770(int* ev)
 	struct item* p;
 
 	if (ev[0] == 0x2b && (p = (struct item*) ev[1]) != 0) {
-		if (((struct good*)lpGebaeudePROT)[p->good].kind == 2 && p->owner == g_774970 && (*(struct fsm**)&g_665f08)->flag == 0
+		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[p->good].category == 2 && p->owner == g_774970 && (*(struct fsm**)&g_665f08)->flag == 0
 		    && (ev[3] == 5 || ev[3] == 2 || ev[3] == 0xd || ev[3] == 8)) {
 			(*(struct fsm**)&g_665f08)->flag = 1;
 			(*(struct fsm**)&g_665f08)->next = 0xa;
@@ -44,7 +44,7 @@ int __cdecl fcn_0057f770(int* ev)
 			(*(struct fsm**)&g_665f08)->since = g_6b7fac;
 		}
 	} else if (ev[0] == 0x10 && (p = (struct item*) ev[1]) != 0) {
-		if (((struct good*)lpGebaeudePROT)[p->good].kind == 2 && p->owner == g_774970) {
+		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[p->good].category == 2 && p->owner == g_774970) {
 			if (ev[2] == 0 && (*(struct fsm**)&g_665f08)->flag == 0) {
 				(*(struct fsm**)&g_665f08)->next = 9;
 			}

@@ -5,7 +5,7 @@ typedef Obj_1038140 Obj;
 extern Obj_1038140 g_1038140[];
 
 void __cdecl fcn_00471c80(int win, unsigned char flags);
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_772534;
 extern Win_1015f40 g_1015f40[0x60];
 typedef struct Slot {
@@ -74,7 +74,7 @@ void __cdecl fcn_00471d80(int k, int flags)
 /* ADDRESS: GOLDTL 0x00471ee0 */
 void __cdecl fcn_00471ee0(int i, int v)
 {
-	*(int*) (g_1015ea0 + (*(int*) (((char*)g_1038140) + g_772534 * 0x2bc + 0x194) + i) * 0x2f4 + 0x38) = v;
+	*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[(*(int*) (((char*)g_1038140) + g_772534 * 0x2bc + 0x194) + i)].value_038) = v;
 }
 
 /* ADDRESS: GOLDTL 0x00471f20 */
@@ -86,7 +86,7 @@ char* __cdecl fcn_00471f20(int j, int k)
 	if (j > *(int*) (m + 0x2c)) {
 		return 0;
 	}
-	return g_1015ea0 + (*(int**) (m + 0x28))[j] * 0x2f4;
+	return (char*)&((D2_CONTROL_TL*)g_1015ea0)[(*(int**) (m + 0x28))[j]];
 }
 
 /* ADDRESS: GOLDTL 0x00471f80 */
@@ -95,9 +95,9 @@ int __cdecl fcn_00471f80(int slot)
 	Slot* s;
 	char* d;
 
-	s = &((Slot*)g_1015ea0)[slot];
-	if (s->type == 0x41) {
-		d = s->data;
+	s = (Slot*)&((D2_CONTROL_TL*)g_1015ea0)[slot];
+	if ((*(int*)&((D2_CONTROL_TL*)s)->kind) == 0x41) {
+		d = (*(char**)&((D2_CONTROL_TL*)s)->data);
 		if (*(int*) (d + 0x28) & 0x10) {
 			return *(int*) (d + 0x14c);
 		}
@@ -108,11 +108,11 @@ int __cdecl fcn_00471f80(int slot)
 			return *(int*) (d + 0x12c);
 		}
 	}
-	if (s->dirty) {
-		return s->text;
+	if ((*(int*)&((D2_CONTROL_TL*)s)->value_058)) {
+		return (*(int*)&((D2_CONTROL_TL*)s)->value_038);
 	}
-	if (s->type == 0x45) {
-		return (int) s->buf;
+	if ((*(int*)&((D2_CONTROL_TL*)s)->kind) == 0x45) {
+		return (int) (*(char**)&((D2_CONTROL_TL*)s)->payload.fields.value_08c);
 	}
 	return -1;
 }

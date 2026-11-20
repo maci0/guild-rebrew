@@ -1,6 +1,6 @@
 extern unsigned char* lpGebaeudePROT;
 extern short* gm_CityEntity;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x005cfb00 */
 unsigned int __cdecl fcn_005cfb00(short* a0, int* filterSpec, unsigned char* gebaeude)
 {
@@ -24,7 +24,7 @@ unsigned int __cdecl fcn_005cfb00(short* a0, int* filterSpec, unsigned char* geb
 		return 0;
 	if (!filterSpec[2] && !filterSpec[3] && !filterSpec[4])
 		return 1;
-	type = (unsigned char) lpGebaeudePROT[gebaeude[0] * 0x24d];
+	type = (unsigned char) ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[gebaeude[0]].category;
 	lo = 0;
 	if (type > 0x1f)
 		hi = 1u << ((type - 0x20) & 0x1f);

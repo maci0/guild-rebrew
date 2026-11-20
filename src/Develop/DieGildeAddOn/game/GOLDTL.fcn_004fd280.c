@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char g_99f6a0[];
 extern int g_99f6e0;
 extern int g_99f724;
@@ -65,7 +65,7 @@ void __cdecl fcn_004fd280(int flag)
 			n = 0;
 			while (ent != 0 && n < 8) {
 				if (*(unsigned short*) (ent + 0x27) != 0xffff) {
-					vals[n] = lpGebaeudePROT[*(unsigned char*) ent * 0x24d + 0x247];
+					vals[n] = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) ent].level;
 					ptrs[n] = ent;
 					n++;
 				}

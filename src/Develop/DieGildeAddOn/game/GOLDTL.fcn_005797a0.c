@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern float g_6628cc;
 
 extern float g_665ef8;
@@ -87,7 +87,7 @@ void __cdecl fcn_005797a0(char* event)
 		*(unsigned int*) (event + 0x70) = 0xffffffff;
 	search = (unsigned char*) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (event + 0x10));
 	if (search != 0) {
-		row = (char*) &((BuildingRow5797*) lpGebaeudePROT)[*search];
+		row = (char*) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*search];
 		param = (char*) fcn_00502cd0(*(unsigned int*) (&search[0x5d]), 2, 6, 0, 0x2a);
 		if (param == 0)
 			*(unsigned int*) (event + 0x70) = 0xffffffff;
@@ -96,7 +96,7 @@ void __cdecl fcn_005797a0(char* event)
 	}
 	if (*(int*) (event + 0x70) == 0) {
 		value = gm_GetElapsedMinutes(event + 0xb8, 0x7f4c00);
-		if (*row == 0x1d) {
+		if (((char)((BUILDING_PROTOTYPE*)row)->category) == 0x1d) {
 			fvalue = (float) fcn_0050c710(search, 0x12, 1) * 0.01f;
 		} else {
 			fvalue = (float) fcn_0050c710(search, 0x1e, 1) * 0.01f;
@@ -138,7 +138,7 @@ void __cdecl fcn_005797a0(char* event)
 		if (valid != 0) {
 			fcn_004c51f0(*(int*) (param + 2), -1, *(unsigned short*) (event + 0xac),
 				valid, (char) g_773d75, 0);
-			if (*row != 0x1f) {
+			if (((char)((BUILDING_PROTOTYPE*)row)->category) != 0x1f) {
 				io_FormatTextBuffer(text, 0x412c, 0x4128, 0x228, (void*) search);
 				strcpy(name, "_NACHRICHTEN_FRIEDHOF_01");
 				len = *(unsigned short*) (event + 0xac) * 2 + 0x9a8;
@@ -157,7 +157,7 @@ void __cdecl fcn_005797a0(char* event)
 			}
 			strcat(text, line);
 		} else {
-			if (*row == 0x1f) {
+			if (((char)((BUILDING_PROTOTYPE*)row)->category) == 0x1f) {
 				io_FormatTextBuffer(text, 0x4225, 0x421e, 0x22c, (void*) search);
 				strcpy(name, "_NACHRICHTEN_ZIGEUNER_03");
 			} else {

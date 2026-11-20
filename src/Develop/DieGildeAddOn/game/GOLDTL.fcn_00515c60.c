@@ -3,7 +3,7 @@ extern int g_699b10;
 extern void* g_6b7fdc;
 extern char g_6790c8[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 int __cdecl fcn_0050dc90(void*);
 int __cdecl gm_CheckEntityType(void*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -57,7 +57,7 @@ found:
 		v3 = (int) lpGebaeudePROT + *a0 * 0x24d;
 	}
 	else {
-		v3 = (int) lpObjektePROT + *(unsigned short*) a1 * 0x41;
+		v3 = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) a1]);
 		if (!v3) {
 			v3 = z;
 		}

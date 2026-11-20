@@ -19,7 +19,7 @@ extern int g_6a476c;
 extern unsigned char** g_7749e4;
 #include "client_types.h"
 extern s_77e8c0 g_77e8c0[16];
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern unsigned char g_7747b0;
 extern volatile int g_6b7fc0;
 
@@ -34,7 +34,7 @@ void __cdecl fcn_00545aa0(void)
 	if (g_6a476c == -1) {
 		return;
 	}
-	if ((*(struct slot**)&g_7749e4) != 0 && (*(struct slot**)&g_7749e4)->ctl != -1 && ((struct gadget*)g_1015ea0)[(*(struct slot**)&g_7749e4)->ctl].focus == 0) {
+	if ((*(struct slot**)&g_7749e4) != 0 && (*(struct slot**)&g_7749e4)->ctl != -1 && (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[(*(struct slot**)&g_7749e4)->ctl].value_038) == 0) {
 		if ((*(struct slot**)&g_7749e4)->dlg != 0) {
 			fcn_00471af0((*(struct slot**)&g_7749e4)->dlg, 0);
 		}
@@ -45,14 +45,14 @@ void __cdecl fcn_00545aa0(void)
 		(*(struct slot**)&g_7749e4) = 0;
 	}
 	for (i = 0; i < 16; i++) {
-		if (((struct slot*)g_77e8c0)[i].ctl != -1 && (*(struct slot**)&g_7749e4) != &((struct slot*)g_77e8c0)[i] && ((struct gadget*)g_1015ea0)[((struct slot*)g_77e8c0)[i].ctl].focus != 0) {
+		if (((struct slot*)g_77e8c0)[i].ctl != -1 && (*(struct slot**)&g_7749e4) != &((struct slot*)g_77e8c0)[i] && (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[((struct slot*)g_77e8c0)[i].ctl].value_038) != 0) {
 			if ((*(struct slot**)&g_7749e4) != 0 && (*(struct slot**)&g_7749e4)->dlg != -1) {
 				if ((*(struct slot**)&g_7749e4)->dlg != 0) {
 					fcn_00471af0((*(struct slot**)&g_7749e4)->dlg, 0);
 				}
 				if ((*(struct slot**)&g_7749e4)->ctl != -1) {
-					((struct gadget*)g_1015ea0)[(*(struct slot**)&g_7749e4)->ctl].focus = 0;
-					((struct gadget*)g_1015ea0)[(*(struct slot**)&g_7749e4)->ctl].hot = 0;
+					(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[(*(struct slot**)&g_7749e4)->ctl].value_038) = 0;
+					(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[(*(struct slot**)&g_7749e4)->ctl].value_03c) = 0;
 				}
 				o = (*(struct slot**)&g_7749e4)->obj;
 				if (o != 0 && ((o[0] == 0x11 && (o[0xf0] & 0x40) != 0) || o[0] == 0x87) && (g_7747b0 & 4) == 0) {

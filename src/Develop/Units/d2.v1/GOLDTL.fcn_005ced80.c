@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 typedef struct
 {
@@ -53,11 +53,11 @@ void __cdecl fcn_005ced80(int dlg, Entry* list, int* bars, int* icons)
 	for (i = 0; i < 7; i++) {
 		if (list[i].id != 0) {
 			h = fcn_0046f740(0xf, i * 0x30, list[i].id + 0xdf, d2_CurrentWindowId);
-			((Ctl*)g_1015ea0)[h].x1d0 = 3;
-			((Ctl*)g_1015ea0)[h].x2f0 = &((Rec65*)lpObjektePROT)[list[i].id].type;
+			((D2_CONTROL_TL*) g_1015ea0)[h].flags_1d0 = 3;
+			((D2_CONTROL_TL*) g_1015ea0)[h].associated_object = (char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[list[i].id].kind;
 			fcn_00472640(h, 1);
-			((Ctl*)g_1015ea0)[h].x5c = 1;
-			((Ctl*)g_1015ea0)[h].x38 = list[i].b5 == 0;
+			((D2_CONTROL_TL*) g_1015ea0)[h].value_05c = 1;
+			((D2_CONTROL_TL*) g_1015ea0)[h].value_038 = list[i].b5 == 0;
 			icons[i] = h;
 			bars[i] = fcn_004677e0(0x64, i * 0x30 + 0xc, 0xc8, 0, 0x64, 0x7b, 0x802, d2_CurrentWindowId);
 			d2_SetElementValue(bars[i], 0, 0x64, list[i].b4);

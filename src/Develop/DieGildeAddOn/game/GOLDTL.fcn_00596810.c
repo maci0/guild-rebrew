@@ -36,7 +36,7 @@ unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(char*, unsigned short*);
 int __cdecl fcn_0050dfd0(char*, int);
 int __cdecl fcn_00471f80(int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00596810(char* msg, char* src)
 {
 	int tbl[17][4];
@@ -152,7 +152,7 @@ int __cdecl fcn_00596810(char* msg, char* src)
 	result = 0;
 	for (i = 0; result == 0 && i < 16; i++) {
 		id = ((Watch*) g_778da0)[i].ent;
-		if (id != -1 && ((Ent*) g_1015ea0)[id].type == 0x41 && fcn_00471f80(id) != 0) {
+		if (id != -1 && ((D2_CONTROL_TL*) g_1015ea0)[id].kind == 0x41 && fcn_00471f80(id) != 0) {
 			result = 1;
 		}
 	}

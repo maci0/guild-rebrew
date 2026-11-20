@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -47,7 +47,7 @@ void __cdecl fcn_00487360(char* e)
 			n++;
 		}
 	}
-	if (n >= lpGebaeudePROT[*(unsigned char*) o * 0x24d + 0x232] + lpGebaeudePROT[*(unsigned char*) o * 0x24d + 0x231]) {
+	if (n >= ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) o].capacity_232 + ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) o].capacity_231) {
 		return;
 	}
 	if (n != 0) {

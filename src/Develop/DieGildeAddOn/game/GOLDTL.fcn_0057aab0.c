@@ -1,5 +1,5 @@
 #include <math.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 // SIZE 0x58
 typedef struct {
 	char pad0[0x4c];
@@ -88,7 +88,7 @@ void __cdecl fcn_0057aab0(Bld57aa* self, int mode, int who, int side)
 	Pos57aa* bp;
 	unsigned int lo;
 	unsigned int hi;
-	Office57aa* o;
+	BUILDING_PROTOTYPE * o;
 	int role;
 	int v;
 	int j;
@@ -108,12 +108,12 @@ void __cdecl fcn_0057aab0(Bld57aa* self, int mode, int who, int side)
 	for (i = 0; i < 0x100; i++) {
 		lo = 0;
 		b = &((Bld57aa*)lpGebaeudeINST)[i];
-		o = &((Office57aa*)lpGebaeudePROT)[b->office];
+		o = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[b->office];
 		hi = 0;
-		if (o->kind > 0x1f) {
-			hi = 1 << (o->kind - 0x20);
+		if (o->category > 0x1f) {
+			hi = 1 << (o->category - 0x20);
 		} else {
-			lo = 1 << o->kind;
+			lo = 1 << o->category;
 		}
 		if (b->owner == 0xffff || b->owner == *((unsigned short*)gm_CityEntity)) {
 			continue;

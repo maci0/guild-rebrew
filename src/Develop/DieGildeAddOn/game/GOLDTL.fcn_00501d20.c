@@ -3,14 +3,14 @@ extern char* g_773d78;
 extern unsigned char g_773d75;
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
-
+#include "Develop/DieGildeAddOn/game/season_slots.h"
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 void* __cdecl gm_AddObjekt(void);
 void* __cdecl gm_FindNextFilteredEntity(void);
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
-
 /* ADDRESS: GOLDTL 0x00501d20 */
 void __cdecl fcn_00501d20(int season)
 {
@@ -25,7 +25,7 @@ void __cdecl fcn_00501d20(int season)
 	int j;
 	int k;
 	int count;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 	ids[0] = 0x92;
 	ids[1] = 0x93;
 	ids[2] = 0x94;
@@ -45,22 +45,22 @@ void __cdecl fcn_00501d20(int season)
 		return;
 	}
 	for (i = 0; i < 0x55; i++) {
-		*(int*) (slots + i * 0x80 + 4) = 0;
+		((MARKET_STOCK_SLOT*)slots)[i].active = 0;
 	}
 
 	entity = gm_StartFilteredEntitySearch(1, 6);
 	while (entity != 0) {
-		if (*(char*) (lpGebaeudePROT + *(unsigned char*) entity * 0x24d) != '\n') {
+		if (((char) ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) entity].category) != '\n') {
 			query = fcn_00502cd0(*(int*) ((char*) entity + 0x5d), 1, 0, 0xff);
 			for (i = 0; query != 0 && i < 0x55; i++) {
-				if (*(unsigned short*) (slots + i * 0x80) != 0 &&
-				    fcn_00502cd0(*(int*) ((char*) query + 0x14), 1, 0, *(unsigned short*) (slots + i * 0x80)) != 0) {
-					*(int*) (slots + i * 0x80 + 4) = 1;
-					def = lpObjektePROT + *(unsigned short*) (slots + i * 0x80) * 0x41;
+				if (((MARKET_STOCK_SLOT*)slots)[i].objekt_id != 0 &&
+				    fcn_00502cd0(*(int*) ((char*) query + 0x14), 1, 0, ((MARKET_STOCK_SLOT*)slots)[i].objekt_id) != 0) {
+					((MARKET_STOCK_SLOT*)slots)[i].active = 1;
+					def = (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((MARKET_STOCK_SLOT*)slots)[i].objekt_id];
 					for (j = 0; j < 0x55; j++) {
 						for (k = 0; k < 4; k++) {
-							if (*(unsigned short*) (slots + j * 0x80) == *(unsigned short*) (def + 0x2e + k * 2)) {
-								*(int*) (slots + j * 0x80 + 4) = 1;
+							if (((MARKET_STOCK_SLOT*)slots)[j].objekt_id == ((OBJECT_PROTOTYPE *)def)->ingredient_ids[k]) {
+								((MARKET_STOCK_SLOT*)slots)[j].active = 1;
 							}
 						}
 					}
@@ -71,12 +71,12 @@ void __cdecl fcn_00501d20(int season)
 	}
 
 	for (i = 0; i < 0x55; i++) {
-		result = fcn_00502cd0(*(int*) ((char*) (*(int*)&g_773d78) + 0x5d), 1, 0, *(unsigned short*) (slots + i * 0x80 + 0x3c));
+		result = fcn_00502cd0(*(int*) ((char*) (*(int*)&g_773d78) + 0x5d), 1, 0, ((MARKET_STOCK_SLOT*)slots)[i].target_id);
 		if (result != 0) {
 			result = fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 0, 0xff);
-			if (*(int*) (slots + i * 0x80 + 4) != 0) {
-				if (fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 0, *(unsigned short*) (slots + i * 0x80)) == 0) {
-					gm_AllocObjekt(*(int*) ((char*) result + 2), *(unsigned short*) (slots + i * 0x80), 1);
+			if (((MARKET_STOCK_SLOT*)slots)[i].active != 0) {
+				if (fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 0, ((MARKET_STOCK_SLOT*)slots)[i].objekt_id) == 0) {
+					gm_AllocObjekt(*(int*) ((char*) result + 2), ((MARKET_STOCK_SLOT*)slots)[i].objekt_id, 1);
 				}
 			}
 		}

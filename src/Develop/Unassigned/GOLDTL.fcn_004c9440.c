@@ -20,7 +20,7 @@ extern int g_6a3434;
 extern int g_6a3430;
 extern int g_772620;
 extern LightState g_100dc20;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 int __cdecl fcn_00500cb0(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
 void __cdecl he_RunDueActions(void);
@@ -51,8 +51,8 @@ int __cdecl fcn_004c9440(char* x, char* out)
 		if (g_6a3430 != 0) {
 			g_772620 = 0;
 			for (i = 0; i < 0x300; i++) {
-				if (*(unsigned short*) (g_7f4ca0 + i * 0x21c) != 0xffff)
-					ai_EvaluateMeister(g_7f4ca0 + i * 0x21c);
+				if (*(unsigned short*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i])) != 0xffff)
+					ai_EvaluateMeister(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]));
 			}
 			fcn_0047da10();
 		}

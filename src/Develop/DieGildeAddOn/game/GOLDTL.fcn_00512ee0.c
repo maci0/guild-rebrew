@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_types.h"
 
 #pragma pack(push, 1)
@@ -116,7 +116,7 @@ void __cdecl fcn_00512ee0(void)
 	char *e;
 	char *f;
 	Player *p;
-	Office *o;
+	BUILDING_PROTOTYPE *o;
 	int j;
 	int k;
 	int h;
@@ -161,10 +161,10 @@ void __cdecl fcn_00512ee0(void)
 		do {
 			p = (Player *)(lpGebaeudeINST + inner);
 			if (p->office != 0 && p->slot == 0xffff) {
-				o = (Office *)(lpGebaeudePROT + p->office * 0x24d);
+				o = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office];
 				for (j = 0; j < 6; j++) {
-					if (o->slots[j] != 0
-							&& o->slots[j] == *(unsigned char *)(e + 0x164)) {
+					if (o->worker_kind[j] != 0
+							&& o->worker_kind[j] == *(unsigned char *)(e + 0x164)) {
 						h = fcn_004c5f60(p->id, *(int *)(e + 4),
 								*(int *)(e + 4));
 						while (fcn_004c4450(h) == 0) {
@@ -172,7 +172,7 @@ void __cdecl fcn_00512ee0(void)
 						}
 						fcn_00512d20((unsigned char *)p);
 						done = 1;
-						counts[o->kind]++;
+						counts[o->category]++;
 						break;
 					}
 				}
@@ -265,12 +265,12 @@ void __cdecl fcn_00512ee0(void)
 		count = count * 2;
 		cm_AppendPacketFieldDelta(4, 1, 0x69, (char *)&count);
 		fcn_004c5360();
-		o = (Office *)(lpGebaeudePROT + *(unsigned char *)e * 0x24d);
+		o = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char *)e];
 		fcn_004c5f60(*(int *)(e + 1), *(int *)(gm_CityEntity + 4),
 				*(int *)(gm_CityEntity + 4));
-		fcn_004c6090((unsigned char *)e, 1, o->f230, o->slots[0]);
-		fcn_004c6090((unsigned char *)e, 0, o->f22f, 0);
-		fcn_004c6090((unsigned char *)e, 0, o->f22f, 0);
+		fcn_004c6090((unsigned char *)e, 1, o->role_230, o->worker_kind[0]);
+		fcn_004c6090((unsigned char *)e, 0, o->role_22f, 0);
+		fcn_004c6090((unsigned char *)e, 0, o->role_22f, 0);
 		fcn_004c51f0(*(int *)(e + 1), -1, 0x135, 1, g_773d75, 0);
 		counts[k]++;
 	}
@@ -278,15 +278,15 @@ void __cdecl fcn_00512ee0(void)
 	d2_SetProgressPercent(0, 0x5f);
 	e = (char *)gm_StartFilteredEntitySearch(2, 4, 0xffff, 5, 0x10);
 	if (e) {
-		o = (Office *)(lpGebaeudePROT + *(unsigned char *)e * 0x24d);
-		h = fcn_004c6090((unsigned char *)e, 2, o->f230, 0x2d);
+		o = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char *)e];
+		h = fcn_004c6090((unsigned char *)e, 2, o->role_230, 0x2d);
 		while (fcn_004c4450(h) == 0) {
 			fcn_00535960();
 		}
 		h = *(int *)(fcn_004c4480(h) + 4);
 		fcn_004c5f60(*(int *)(e + 1), h, h);
-		fcn_004c6090((unsigned char *)e, 0, o->f22f, 0);
-		fcn_004c6090((unsigned char *)e, 0, o->f230, 0);
+		fcn_004c6090((unsigned char *)e, 0, o->role_22f, 0);
+		fcn_004c6090((unsigned char *)e, 0, o->role_230, 0);
 		fcn_004c51f0(*(int *)(e + 1), -1, 0x135, 1, g_773d75, 0);
 		counts[0x10]++;
 	}
@@ -297,19 +297,19 @@ void __cdecl fcn_00512ee0(void)
 			p = (Player *)(lpGebaeudeINST + inner);
 			if (p->office == 0 || p->slot != 0xffff)
 				continue;
-			o = (Office *)(lpGebaeudePROT + p->office * 0x24d);
-			kind = o->kind;
+			o = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office];
+			kind = o->category;
 			if (kinds[kind] != 1 || counts[kind] >= 2)
 				continue;
 			slot = 0;
 			fcn_004c44a0();
 			for (j = 5; j >= 0; j--) {
-				if (o->slots[j]) {
-					slot = o->slots[j];
+				if (o->worker_kind[j]) {
+					slot = o->worker_kind[j];
 					break;
 				}
 			}
-			h = fcn_004c6090((unsigned char *)p, 2, o->f230, slot);
+			h = fcn_004c6090((unsigned char *)p, 2, o->role_230, slot);
 			while (fcn_004c4450(h) == 0) {
 				fcn_00535960();
 			}
@@ -321,23 +321,23 @@ void __cdecl fcn_00512ee0(void)
 				handles[outer] = q;
 				outer++;
 			}
-			kind = o->kind;
+			kind = o->category;
 			if (kind != 9 && kind != 5) {
 				if (kind != 4 && kind != 0x10 && kind != 0x13) {
-					fcn_004c6090((unsigned char *)p, 0, o->f22f, 0);
+					fcn_004c6090((unsigned char *)p, 0, o->role_22f, 0);
 				} else {
-					fcn_004c6090((unsigned char *)p, 0, o->f22f, 0);
-					fcn_004c6090((unsigned char *)p, 0, o->f230, 0);
+					fcn_004c6090((unsigned char *)p, 0, o->role_22f, 0);
+					fcn_004c6090((unsigned char *)p, 0, o->role_230, 0);
 				}
 			}
 			fcn_004c51f0(p->id, -1, 0x135, 1, g_773d75, 0);
-			if (o->kind == 5) {
+			if (o->category == 5) {
 				count = fcn_0050b750(6000, g_773d75);
 				fcn_004c5150(*(int *)(q + 4), -1, g_773d75, count);
 			}
 			init_Betrieb((unsigned char *)p);
 			fcn_004c44b0();
-			counts[o->kind]++;
+			counts[o->category]++;
 		}
 		while (fcn_004c44c0() == 0) {
 			fcn_004c3ff0();
@@ -390,9 +390,9 @@ handles_done:
 	fcn_004c44a0();
 	for (inner = 0; inner < 0xa900; inner += 0xa9) {
 		p = (Player *)(lpGebaeudeINST + inner);
-		o = (Office *)(lpGebaeudePROT + p->office * 0x24d);
+		o = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office];
 		slot = p->slot;
-		kind = o->kind;
+		kind = o->category;
 		if (slot != 0xffff) {
 			if (kinds[kind] == 2 || kinds[kind] == 1) {
 				e = g_7f4ca0 + slot * 0x21c;
@@ -401,13 +401,13 @@ handles_done:
 					if (g_6a3424) {
 						if (kind != 9 && kind != 5) {
 							if (kind != 4 && kind != 0x10 && kind != 0x13) {
-								fcn_004c6090((unsigned char *)p, 0, o->f22f, 0);
+								fcn_004c6090((unsigned char *)p, 0, o->role_22f, 0);
 							} else {
-								fcn_004c6090((unsigned char *)p, 0, o->f22f, 0);
-								fcn_004c6090((unsigned char *)p, 0, o->f230, 0);
+								fcn_004c6090((unsigned char *)p, 0, o->role_22f, 0);
+								fcn_004c6090((unsigned char *)p, 0, o->role_230, 0);
 							}
 						}
-						fcn_004c6090((unsigned char *)p, 1, o->f230, o->slots[0]);
+						fcn_004c6090((unsigned char *)p, 1, o->role_230, o->worker_kind[0]);
 						fcn_004c51f0(p->id, -1, 0x135, 1, g_773d75, 0);
 						init_Betrieb((unsigned char *)p);
 					}
@@ -415,7 +415,7 @@ handles_done:
 				}
 			}
 		}
-		if (kinds[o->kind] == 0 && slot == 0xffff)
+		if (kinds[o->category] == 0 && slot == 0xffff)
 			fcn_004c5f60(p->id, *(int *)(gm_CityEntity + 4),
 					*(int *)(gm_CityEntity + 4));
 	}

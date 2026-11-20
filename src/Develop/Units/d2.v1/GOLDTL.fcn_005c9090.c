@@ -24,7 +24,7 @@ void __cdecl fcn_005c9090(int text, int x, int y, int w, int font)
 		fcn_00472ea0(g_77254c, g_772550, g_772544, g_772548);
 	}
 	r = d2_ShowTxt(x - w / 2, y, (char*) text, d2_CurrentWindowId);
-	*(int*) (g_1015ea0 + r * 756 + 0x6c) = 1;
-	*(int*) (g_1015ea0 + r * 756 + 0x18) = w;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[r].value_06c)) = 1;
+	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[r].width)) = w;
 	d2_SetElementFont(r, font);
 }

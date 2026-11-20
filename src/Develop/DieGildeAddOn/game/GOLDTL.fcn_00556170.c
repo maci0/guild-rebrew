@@ -1,5 +1,5 @@
 #include <math.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern int lpGebaeudeINST;
 extern int lpGebaeudePROT;
 extern unsigned char g_773d75;
@@ -136,7 +136,7 @@ void __cdecl fcn_00556170(char* p)
 		do {
 			ent = (char*) (lpGebaeudeINST + v * 0xa9);
 			type = *(unsigned char*) ent;
-			if (*(char*) (lpGebaeudePROT + type * 0x24d) == 1 &&
+			if ((char)((BUILDING_PROTOTYPE*)lpGebaeudePROT)[type].category == 1 &&
 			    fcn_004fac80(type, limits) != 0 &&
 			    *(unsigned char*) (ent + 0x65) < (unsigned short) limits[0]) {
 				found = 1;
@@ -208,7 +208,7 @@ void __cdecl fcn_00556170(char* p)
 				for (;;) {
 					ent = (char*) (lpGebaeudeINST + v34 * 0xa9);
 					type = *(unsigned char*) ent;
-					if (*(char*) (lpGebaeudePROT + type * 0x24d) == 1 &&
+					if ((char)((BUILDING_PROTOTYPE*)lpGebaeudePROT)[type].category == 1 &&
 					    fcn_004fac80(type, limits) != 0 &&
 					    *(unsigned char*) (ent + 0x65) < (unsigned short) limits[0]) {
 						found = 1;

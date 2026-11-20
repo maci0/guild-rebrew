@@ -1,5 +1,5 @@
 extern char s_67fb68[];
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
@@ -50,7 +50,7 @@ int __cdecl fcn_004ab3e0(char* actor, char* a2, char* a3)
 	fcn_004c4eb0(s_67fb68);
 	fcn_004c68c0(&msg);
 	fcn_004c58b0(*(int*) (a2 + 4), *(int*) (actor + 4));
-	fcn_004c51a0(*(int*) (g_7f4ca0 + *(unsigned short*) (found + 0x27) * 540 + 4),
+	fcn_004c51a0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (found + 0x27)].entity_id,
 	    *(int*) (actor + 4), 0, *(int*) (a2 + 0x10));
 	fcn_004c4ef0(s_67fb68);
 	return 1;

@@ -8,7 +8,7 @@ typedef struct Slot046f4c0 {
 } Slot046f4c0;
 // SIZE 0x2f4
 
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern void** g_772540;
 
 void __cdecl fcn_0046f4c0(int slot)
@@ -19,7 +19,7 @@ void __cdecl fcn_0046f4c0(int slot)
 
 	free = -1;
 	i = 0x3ff;
-	s = &((Slot046f4c0*)g_1015ea0)[slot];
+	s = (Slot046f4c0*)&((D2_CONTROL_TL*)g_1015ea0)[slot];
 	do {
 		if (((Slot046f4c0**)g_772540)[i] == s) {
 			if (free != -1) {

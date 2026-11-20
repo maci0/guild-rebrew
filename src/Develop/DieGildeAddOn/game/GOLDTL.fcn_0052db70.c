@@ -3,7 +3,7 @@ extern int g_7f4c04;
 extern int lpGebaeudePROT;
 extern int d3_CurrentContextIndex;
 extern unsigned char g_slot_table[2];
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern float g_696540[];
 extern float g_696550[];
 
@@ -31,7 +31,7 @@ void __cdecl fcn_0052db70(char* buildingRecord)
 
 	sel = fcn_00500e20(&gm_GameTime);
 
-	if (*(unsigned char*) (lpGebaeudePROT + (unsigned char) *buildingRecord * 0x24d) == 7 ||
+	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[(unsigned char) *buildingRecord].category == 7 ||
 	    *(int*) (buildingRecord + 0x61) == 0) {
 		return;
 	}

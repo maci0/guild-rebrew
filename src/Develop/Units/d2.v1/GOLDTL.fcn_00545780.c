@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7749e4;
 extern int g_6a4768;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DestroyElement(int slot);
@@ -62,8 +62,8 @@ void __cdecl fcn_00545780(char* obj)
                 v4 = v3[-3];
                 if (v4 != -1) {
                     fcn_00469c40(
-                        *(int*) (g_1015ea0 + v4 * 0x2f4 + 0x10) - 0x20,
-                        *(int*) (g_1015ea0 + 0x14 + v4 * 0x2f4), v4);
+                        *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v4].x)) - 0x20,
+                        *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v4].y)), v4);
                 }
                 v3 += 3;
             } while ((int) v3 < 0x77e990);

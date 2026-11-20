@@ -1,7 +1,7 @@
 extern char g_68114c[];
 extern char g_681140[];
 extern int d2_CurrentWindowId;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
 extern int g_100f1dc;
@@ -57,7 +57,7 @@ int __cdecl d2_ChooseMission(int missionKey)
 	lst = d2_CreateRadioGroup(0);
 	for (it = fcn_004b3ce0(missionKey, 0); it != 0; it = fcn_004b3ce0(missionKey, it)) {
 		k = fcn_00472250(h, 2, io_AppendText((int) g_681140, it[2]));
-		*(int**) (g_1015ea0 + k * 756 + 0x2f0) = it;
+		*(int**) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[k].associated_object)) = it;
 		fcn_00469470(lst, k);
 	}
 	while (fcn_005373e0(d2_ChooseMission, 0x1c6) != 0) {
@@ -66,7 +66,7 @@ int __cdecl d2_ChooseMission(int missionKey)
 			g_774654 = 1;
 		if (g_100f1dc != -1 && ((struct list_4b3fe0*)g_102cbc8)[lst].sel != -1
 		    && d2_CurrentElementId == ((struct list_4b3fe0*)g_102cbc8)[lst].items[((struct list_4b3fe0*)g_102cbc8)[lst].sel]) {
-			e = *(int**) (g_1015ea0 + ((struct list_4b3fe0*)g_102cbc8)[lst].items[((struct list_4b3fe0*)g_102cbc8)[lst].sel] * 756 + 0x2f0);
+			e = *(int**) (&((D2_CONTROL_TL*)g_1015ea0)[((struct list_4b3fe0*)g_102cbc8)[lst].items[((struct list_4b3fe0*)g_102cbc8)[lst].sel]].associated_object);
 			if (fcn_004b3ec0(*e, main_LoopFlags) != 0) {
 				result = *e;
 				g_774654 = 1;

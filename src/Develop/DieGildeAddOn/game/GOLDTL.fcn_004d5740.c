@@ -19,7 +19,7 @@ int __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
 int* __cdecl fcn_004ce610(char*);
 void __cdecl fcn_00472680(int, int);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004d5740 */
 void __cdecl fcn_004d5740(char* ids, int originX, int originY)
 {
@@ -53,9 +53,9 @@ void __cdecl fcn_004d5740(char* ids, int originX, int originY)
 		f = (float) gm_GetScaledEntitySkill(rec, 3);
 		fcn_00534160(x, y + 0x3c, (int) f, 0x4eb);
 		h = d2_ShowTxt(x - 0x24, y - 0x11, g_6b5c60, d2_CurrentWindowId);
-		*(int*) (g_1015ea0 + h * 0x2f4 + 0x18) = 0x78;
-		*(int*) (g_1015ea0 + h * 0x2f4 + 0x6c) = 1;
-		*(int*) (g_1015ea0 + h * 0x2f4 + 0x84) = 0x56;
+		((D2_CONTROL_TL*) (g_1015ea0))[h].width = 0x78;
+		((D2_CONTROL_TL*) (g_1015ea0))[h].value_06c = 1;
+		((D2_CONTROL_TL*) (g_1015ea0))[h].font = 0x56;
 		io_FormatTextBuffer(buf, "%1N1 %i%", *(unsigned short*) rec,
 			     (int) (fcn_004ff040(rec) * 100.0));
 		fcn_0046f940(h, buf);

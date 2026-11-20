@@ -8,7 +8,7 @@
  * delay. The local packet buffer holds the map slot index at +0x27, the
  * source index at +0, the object handle at +1 and an id at +0x29.
  */
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #pragma pack(push, 1)
 typedef struct S55cc80Packet {
 	unsigned char idx0;
@@ -50,7 +50,7 @@ void __cdecl fcn_0055cc80(char* self)
 	char* row;
 	int state, started, count;
 	int t;
-	int src; S55cc80Proto* proto; unsigned char job;
+	int src; BUILDING_PROTOTYPE* proto; unsigned char job;
 
 	state = *(int*) (self + 0x70);
 	switch (state) {
@@ -65,7 +65,7 @@ void __cdecl fcn_0055cc80(char* self)
 		}
 		row = (char*) &g_7f4ca0 + packet->slot * 0x21c;
 		t = (int)fcn_005101e0(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
-		proto = &((S55cc80Proto*)lpGebaeudePROT)[packet->idx0];
+		proto = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[packet->idx0];
 		src = gm_AccumulateTyped2((char*) &g_7f4ca0 + packet->slot * 0x21c);
 		if (t > src) {
 			io_FormatTextBuffer(buf, 0x1a41, (char*) packet);
@@ -79,7 +79,7 @@ void __cdecl fcn_0055cc80(char* self)
 			p = (int*) (self + 0xb0);
 			for (; started < 1; started++, p++) {
 				if (*p > 0) {
-					q = (char*) fcn_004c6090((char*) packet, 1, 0, proto->bytes[0x223 + *(unsigned char*)(self + 0xac)]);
+					q = (char*) fcn_004c6090((char*) packet, 1, 0, ((unsigned char*)proto)[0x223 + *(unsigned char*)(self + 0xac)]);
 					*(int*) (self + 0xb8) = (int) q;
 					break;
 				}
@@ -111,9 +111,9 @@ void __cdecl fcn_0055cc80(char* self)
 			he_FreeAction(self);
 			return;
 		}
-		proto = &((S55cc80Proto*)lpGebaeudePROT)[packet->idx0];
+		proto = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[packet->idx0];
 		q = fcn_004c4480(*(int*) (self + 0xb8));
-		job = proto->bytes[0x223 + *(unsigned char*)(self + 0xac)];
+		job = ((unsigned char*)proto)[0x223 + *(unsigned char*)(self + 0xac)];
 		*(unsigned char*) (q + 0x165) = 0;
 		*(unsigned char*) (q + 0x164) = job;
 		for (count = 0; count < 1; count++) {

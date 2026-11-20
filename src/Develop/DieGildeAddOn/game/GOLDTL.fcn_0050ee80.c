@@ -3,8 +3,8 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7f4c10;
 #include "Develop/Units/d2.v1/d2_dependency_node.h"
-
-
+#include "Develop/Units/d2.v1/d2_gui.h"
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 
@@ -50,7 +50,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 	v1 = *(int*) (0x1038150 + g_7f4c10 * 0x2bc);
 	for (; i < g_85ab60; i++) {
 		st = 0;
-		if (*(unsigned char*) (lpObjektePROT + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id * 0x40 + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) == 6) {
+		if (((OBJECT_PROTOTYPE *)lpObjektePROT)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id].kind == 6) {
 			if (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) != 0) {
 				st = 1;
 				for (q = he_StartHandlungSearch(2, 0, 0xc, 3, *(int*) (a + 1)); q != 0;
@@ -68,12 +68,12 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 						if (p->item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_a &&
 						    (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, p->item_id) != 0 ||
 						     fcn_00502cd0(*(int*) ((char*) b + 0x14), 1, 0, p->item_id) != 0) &&
-						    *(int*) (g_1015ea0 + p->unk_24 * 0x2f4 + 0x60) == 0) {
+						    *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[p->unk_24].value_060)) == 0) {
 							n++;
 						} else if (p->item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_b &&
 							   (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, p->item_id) != 0 ||
 							    fcn_00502cd0(*(int*) ((char*) b + 0x14), 1, 0, p->item_id) != 0) &&
-							   *(int*) (g_1015ea0 + p->unk_24 * 0x2f4 + 0x60) == 0) {
+							   *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[p->unk_24].value_060)) == 0) {
 							n++;
 						}
 					}
@@ -149,8 +149,8 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 					y = 0xdf;
 				}
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = fcn_0046f740(3, 3, y, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
-				*(int*) (g_1015ea0 + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 * 0x2f4 + 0x64) = 1;
-				*(int*) (g_1015ea0 + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 * 0x2f4 + 0x5c) = 1;
+				*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_064) = 1;
+				*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_05c) = 1;
 				d2_CurrentWindowId = h;
 				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x32, 0x60, 0x11, 0x4510, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_2c = windowId;
@@ -170,7 +170,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 					y = 0xdf;
 				}
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = fcn_0046f740(3, 3, y, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
-				*(int*) (g_1015ea0 + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 * 0x2f4 + 0x5c) = 1;
+				*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_05c) = 1;
 				d2_CurrentWindowId = h;
 				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x32, 0x60, 0x11, 0x4510, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_2c = windowId;
@@ -180,7 +180,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id < 0x2dc) {
 					io_AppendText(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id * 2 + 0x9a8);
 				}
-				*(int*) (g_1015ea0 + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 * 0x2f4 + 0x64) = 1;
+				*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_064) = 1;
 			} else {
 				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c = windowId;
@@ -201,13 +201,13 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id < 0x2dc) {
 					io_AppendText(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id * 2 + 0x9a8);
 				}
-				*(int*) (g_1015ea0 + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 * 0x2f4 + 0x64) = 1;
+				*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_064) = 1;
 			}
 			d2_CurrentWindowId = h;
 			((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].state = st;
 		}
 		if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].state == 3) {
-			if (*(unsigned char*) (lpObjektePROT + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id * 0x40 + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) == 6) {
+			if (((OBJECT_PROTOTYPE *)lpObjektePROT)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id].kind == 6) {
 				if (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) != 0) {
 					for (q = he_StartHandlungSearch(2, 0, 0xc, 3, *(int*) (a + 1)); q != 0;
 					     q = he_fn_Handlung()) {
@@ -225,10 +225,10 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 					}
 				}
 			}
-			*(int*) (g_1015ea0 + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 * 0x2f4 + 0x1f4) = 0;
+			*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_1f4) = 0;
 			goto next;
 fnd:
-			*(float*) (g_1015ea0 + ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 * 0x2f4 + 0x1f4) =
+			*(float*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_1f4) =
 				(float) gm_GetElapsedMinutes(q + 0x44, (void*) &gm_GameTime) /
 				(float) gm_GetElapsedMinutes(q + 0x44, q + 0x52);
 next:			;

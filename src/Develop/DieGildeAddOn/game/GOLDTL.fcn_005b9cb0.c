@@ -58,6 +58,6 @@ void __cdecl fcn_005b9cb0(int n, char** items)
 		for (i = 0; i < n; i++) {
 			fcn_00506300(items[i]);
 		}
-		fcn_004c5150(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1, (*(char*)&g_773d75), price);
+		fcn_004c5150(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, -1, (*(char*)&g_773d75), price);
 	}
 }

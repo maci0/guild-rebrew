@@ -1,17 +1,17 @@
 extern unsigned char* lpGebaeudePROT;
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0050c7d0 */
 int __cdecl fcn_0050c7d0(int idx, int type)
 {
-	unsigned char* e;
+	BUILDING_PROTOTYPE* e;
 	int sum;
 	int i;
 
 	sum = 0;
-	e = lpGebaeudePROT + idx * 0x24d;
+	e = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[idx];
 	for (i = 0; i < 0x40; i++) {
-		if ((*(unsigned short*) (e + 0x23 + i * 2) & 0x7fff) != 0 && e[0x1a3 + i] == type) {
-			sum += e[0x1e3 + i];
+		if ((e->components[i] & 0x7fff) != 0 && e->component_kind[i] == type) {
+			sum += e->component_value[i];
 		}
 	}
 	return sum;

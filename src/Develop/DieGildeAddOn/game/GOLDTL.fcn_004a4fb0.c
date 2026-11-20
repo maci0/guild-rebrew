@@ -1,5 +1,5 @@
 #include "game_data.h"
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
@@ -30,7 +30,7 @@ unsigned int __cdecl fcn_004a4fb0(unsigned int* outItem, unsigned int* a1, unsig
 	v10 = (unsigned short*) (rec + 0x23);
 	v6 = building;
 	do {
-		v1 = *(unsigned char*) (lpObjektePROT + (*v10 & 0x7fff) * 0x41);
+		v1 = *(unsigned char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(*v10 & 0x7fff)]));
 		if (v1 != '!') {
 			if (v1 != 2 && v1 != 6) {
 label:

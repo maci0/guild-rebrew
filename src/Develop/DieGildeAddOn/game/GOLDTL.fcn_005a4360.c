@@ -2,7 +2,7 @@
 
 
 extern unsigned char g_773d75;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -32,7 +32,7 @@ void __cdecl fcn_005a4360(char* e, char* s)
 	if (fcn_00526120(msg, 1) == 0) {
 		return;
 	}
-	slot = g_7f4ca0 + *(unsigned short*) (e + 0x27) * 540;
+	slot = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)]);
 	fcn_004c5150(*(int*) (e + 1), *(int*) (s + 0xb0), (*(char*)&g_773d75), *(int*) (s + 0xb4));
 	p = (char*) gm_GetEntityTableEntry((char*) (g));
 	if (p != 0) {

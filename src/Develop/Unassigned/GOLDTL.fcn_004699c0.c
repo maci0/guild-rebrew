@@ -1,5 +1,5 @@
 extern int g_772504,d2_ClipLeft,d2_ClipRight,g_7725fc,d2_ClipBottom,d2_DefaultFont,d2_ResourceOffset;
-typedef struct { char b[0x2f4]; } Slot;
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_AllocateElement(void);
 int __cdecl fcn_00466260(int, int*, int*);
 void __cdecl d2_AddRefcount(int);
@@ -24,61 +24,61 @@ int __cdecl fcn_004699c0(unsigned int x, int y, int resourceId)
 	}
 	idx = d2_AllocateElement();
 
-	slot = (char*) ((char*) ((Slot*) g_1015ea0 + idx));
+	slot = (char*) &((D2_CONTROL_TL*)g_1015ea0)[idx];
 	if (idx >= 0x400) {
 		return -1;
 	}
 	fcn_00466260(resourceId, &v4, &n);
-	*(int*) (slot + 0xc) = v4;
-	*(int*) (slot + 8) = n;
-	*(int*) (slot + 0x20) = *(int*) (*(int*) &g_772500 + 0x3c + n * 0x54);
-	*(int*) (slot + 0x10) = x;
-	*(int*) (slot + 0x14) = y;
-	*(int*) (slot + 0x28) = d2_ClipLeft;
-	*(int*) (slot + 0x2c) = d2_ClipRight;
-	*(int*) (slot + 0x30) = g_7725fc;
-	*(int*) (slot + 0x34) = d2_ClipBottom;
-	*(int*) (slot + 0x24) = 2;
-	*(int*) (slot + 0x84) = d2_DefaultFont;
+	*(int*) &((D2_CONTROL_TL*)slot)->data = v4;
+	*(int*) &((D2_CONTROL_TL*)slot)->value_008 = n;
+	*(int*) &((D2_CONTROL_TL*)slot)->kind = *(int*) (*(int*) &g_772500 + 0x3c + n * 0x54);
+	*(int*) &((D2_CONTROL_TL*)slot)->x = x;
+	*(int*) &((D2_CONTROL_TL*)slot)->y = y;
+	*(int*) &((D2_CONTROL_TL*)slot)->clip_left = d2_ClipLeft;
+	*(int*) &((D2_CONTROL_TL*)slot)->clip_right = d2_ClipRight;
+	*(int*) &((D2_CONTROL_TL*)slot)->clip_top = g_7725fc;
+	*(int*) &((D2_CONTROL_TL*)slot)->clip_bottom = d2_ClipBottom;
+	*(int*) &((D2_CONTROL_TL*)slot)->mode = 2;
+	*(int*) &((D2_CONTROL_TL*)slot)->font = d2_DefaultFont;
 	d2_AddRefcount(n);
-	kind = *(int*) (slot + 0x20);
+	kind = *(int*) &((D2_CONTROL_TL*)slot)->kind;
 	if (kind == 8) {
-		*(int*) (slot + 0x5c) = 1;
+		*(int*) &((D2_CONTROL_TL*)slot)->value_05c = 1;
 	}
-	*(int*) (slot + 0x1e4) = -1;
-	*(int*) (slot + 0x1e8) = 0;
-	*(int*) (slot + 0x1ec) = 0;
+	*(int*) &((D2_CONTROL_TL*)slot)->value_1e4 = -1;
+	*(int*) &((D2_CONTROL_TL*)slot)->value_1e8 = 0;
+	*(int*) &((D2_CONTROL_TL*)slot)->value_1ec = 0;
 	switch (kind) {
 	case 1:
-		tp = (char*) *(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0xc);
-		*(int*) (slot + 0x18) = *(unsigned short*) (tp + 6);
-		*(int*) (slot + 0x1c) = *(unsigned short*) (tp + 8);
+		tp = (char*) *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data;
+		*(int*) &((D2_CONTROL_TL*)slot)->width = *(unsigned short*) (tp + 6);
+		*(int*) &((D2_CONTROL_TL*)slot)->height = *(unsigned short*) (tp + 8);
 		return idx;
 	case 4:
-		*(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0x88) = fcn_0047a200(x, y, *(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0xc), 0);
-		tp = (char*) *(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0xc);
-		*(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0x18) = *(unsigned short*) (tp + 6);
-		*(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0x1c) = *(unsigned short*) (tp + 8);
+		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_088 = fcn_0047a200(x, y, *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data, 0);
+		tp = (char*) *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data;
+		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].width = *(unsigned short*) (tp + 6);
+		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].height = *(unsigned short*) (tp + 8);
 		return idx;
 	case 17:
-		tp = (char*) *(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0xc);
-		*(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0x18) = *(short*) (tp + 0xc);
-		*(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0x1c) = *(short*) (tp + 0xe);
-		*(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0x88) = 2;
+		tp = (char*) *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data;
+		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].width = *(short*) (tp + 0xc);
+		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].height = *(short*) (tp + 0xe);
+		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_088 = 2;
 		return idx;
 	case 5:
 	case 8:
-		*(int*) (slot + 0x88) = d2_ResourceOffset;
-		tp = (char*) *(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0xc);
-		r = fcn_0047b620((int) tp, *(int*) ((char*) ((Slot*) g_1015ea0 + idx) + 0x88));
-		*(int*) (slot + 0x18) = *(unsigned short*) (r + 2);
-		*(int*) (slot + 0x1c) = *(unsigned short*) (r + 6);
-		*(int*) (slot + 0x1dc) = -1;
-		*(int*) (slot + 0x1e0) = -1;
-		*(int*) (slot + 0x1d4) = *(unsigned short*) (tp + 6);
-		*(int*) (slot + 0x1d8) = *(unsigned short*) (tp + 8);
-		*(char*) ((char*) ((Slot*) g_1015ea0 + idx) + 0x7c) = 8;
-		*(char*) ((char*) ((Slot*) g_1015ea0 + idx) + 0x7d) = 8;
+		*(int*) &((D2_CONTROL_TL*)slot)->value_088 = d2_ResourceOffset;
+		tp = (char*) *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data;
+		r = fcn_0047b620((int) tp, *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_088);
+		*(int*) &((D2_CONTROL_TL*)slot)->width = *(unsigned short*) (r + 2);
+		*(int*) &((D2_CONTROL_TL*)slot)->height = *(unsigned short*) (r + 6);
+		*(int*) &((D2_CONTROL_TL*)slot)->value_1dc = -1;
+		*(int*) &((D2_CONTROL_TL*)slot)->value_1e0 = -1;
+		*(int*) &((D2_CONTROL_TL*)slot)->value_1d4 = *(unsigned short*) (tp + 6);
+		*(int*) &((D2_CONTROL_TL*)slot)->value_1d8 = *(unsigned short*) (tp + 8);
+		*(char*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_07c = 8;
+		*(char*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_07d = 8;
 		return idx;
 	}
 	return idx;

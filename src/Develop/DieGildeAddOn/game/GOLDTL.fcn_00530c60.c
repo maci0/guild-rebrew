@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "client_types.h"
-
 extern char* g_7746cc;
 #include "game_data.h"
 typedef struct JobProto { unsigned char kind; unsigned char rest[0x24c]; } JobProto;
@@ -30,7 +30,7 @@ void __cdecl init_GetGebaeudeSceneName(int, char*);
 void __cdecl fcn_00530c60(unsigned char* building)
 {
 	char* itemdef;
-	JobProto* type_row;
+	BUILDING_PROTOTYPE* type_row;
 	char* ent;
 	char* info;
 	char* info2;
@@ -56,9 +56,9 @@ void __cdecl fcn_00530c60(unsigned char* building)
 
 	itemdef = 0;
 	if (g_7746cc != 0 && *(unsigned short*) g_7746cc != 0xfd) {
-		itemdef = lpObjektePROT + *(unsigned short*) g_7746cc * 0x41;
+		itemdef = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) g_7746cc]);
 	}
-	type_row = &((JobProto*)lpGebaeudePROT)[*building];
+	type_row = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building];
 	if ((unsigned int)g_6b7fac > g_6a2520 + 500) {
 		if (g_67a370 != 0) {
 			info = *(char**) (g_67a370 + 0x3c8);
@@ -81,7 +81,7 @@ void __cdecl fcn_00530c60(unsigned char* building)
 			r = fcn_00530b20(ent, (int) building, job);
 			info = *(char**)(ent + 0x184);
 			if (r != 0) {
-				category = type_row->kind;
+				category = type_row->category;
 				if (category == 0x0d) {
 					if (g_7746cc != 0) {
 						if (*(unsigned short*) g_7746cc == 0x37
@@ -112,7 +112,7 @@ void __cdecl fcn_00530c60(unsigned char* building)
 				}
 			}
 			else {
-				category = type_row->kind;
+				category = type_row->category;
 				if (category == 0x16 && g_7746cc != 0 && *(unsigned short*) g_7746cc == 0x120
 				    && *(int*) (info + 0x30) == *(int*) (g_7746cc + 2)
 				    && (*(unsigned int*) (ent + 0x1c8) & 0x1000) == 0) {

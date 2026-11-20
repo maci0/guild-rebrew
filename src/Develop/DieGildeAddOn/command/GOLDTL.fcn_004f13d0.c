@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 /* Second copy of the server cm_GetBuildingStatCount body (server
@@ -15,7 +15,7 @@ int __cdecl fcn_004f13d0(unsigned char* cmd)
 	char* type_entry;
 
 	entity_type = *cmd;
-	type_entry = ((char*)lpGebaeudePROT) + (unsigned int) entity_type * 0x24d;
+	type_entry = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned int) entity_type];
 	upgrade_data = *(int*) (cmd + 0x65);
 	/* Reading the tier byte in each test rather than into a local makes the
 	 * record address a common subexpression, so msvc6 materialises it with
@@ -23,13 +23,13 @@ int __cdecl fcn_004f13d0(unsigned char* cmd)
 	 * displacement into the scaled load, and it still hoists `mov dl,1`
 	 * ahead of the leas.  A volatile load also splits the address but fences
 	 * the constant behind it (121/135). */
-	if (type_entry[0x247] == '\x01') {
+	if (((char)(((BUILDING_PROTOTYPE*)type_entry)->level)) == '\x01') {
 		stat_count = 8;
 		if (*(unsigned char*) (upgrade_data + 0x19) == (unsigned char) 1) {
 			return 0xc;
 		}
 	}
-	else if (type_entry[0x247] == '\x02') {
+	else if (((char)(((BUILDING_PROTOTYPE*)type_entry)->level)) == '\x02') {
 		stat_count = 0xc;
 		if (*(unsigned char*) (upgrade_data + 0x19) == (unsigned char) 1) {
 			stat_count = 0x12;

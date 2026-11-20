@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
@@ -16,7 +16,7 @@ int __cdecl fcn_004f4650(int a, unsigned char** out1, void** out2)
 	*out2 = 0;
 	rec = lpGebaeudeINST;
 	for (i = 0; i < 256; i++, rec += 0xa9) {
-		if (rec[0] != 0 && lpGebaeudePROT[rec[0] * 0x24d] == 0x1d) {
+		if (rec[0] != 0 && ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[rec[0]].category == 0x1d) {
 			r = FindSlotEntryFiltered(a, rec, 0, (void*) fcn_004f17f0, 0xff);
 			if (r != 0) {
 				*out1 = rec;

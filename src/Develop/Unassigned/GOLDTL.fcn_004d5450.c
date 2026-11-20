@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 typedef struct
@@ -12,14 +12,14 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl fcn_004d5450(unsigned char* a1)
 {
-	Tile* tile;
+	BUILDING_PROTOTYPE * tile;
 
-	tile = &((Tile*)lpGebaeudePROT)[a1[0]];
-	if (tile->type == 0x13) {
+	tile = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[a1[0]];
+	if (((char) tile->category) == 0x13) {
 		return 0;
 	}
-	if (tile->type == 0x10) {
+	if (((char) tile->category) == 0x10) {
 		return 1;
 	}
-	return tile->type == 4 ? 2 : 0;
+	return ((char) tile->category) == 4 ? 2 : 0;
 }

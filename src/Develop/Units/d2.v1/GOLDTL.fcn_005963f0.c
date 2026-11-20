@@ -77,10 +77,10 @@ void __cdecl fcn_005963f0(int dialog, int form, int a2, unsigned int a3)
 
 	for (v = (int*) 0x778d50; (int) v < 0x778da0; v += 5) {
 		if (v[-2] >= 2) {
-			*(int*) (g_1015ea0 + 0x48 + *v * 0x2f4) = 0;
+			((D2_CONTROL_TL*) (g_1015ea0))[*v].value_048 = 0;
 			fcn_00469c40(v[-4] + p[1], v[-3] + p[2], *v);
 		} else {
-			*(int*) (g_1015ea0 + 0x48 + *v * 0x2f4) = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[*v].value_048 = 1;
 		}
 	}
 
@@ -109,10 +109,10 @@ void __cdecl fcn_005963f0(int dialog, int form, int a2, unsigned int a3)
 		}
 		v[-1] = *v;
 		if (*v >= 2) {
-			*(int*) (g_1015ea0 + 0x48 + v[1] * 0x2f4) = 0;
+			((D2_CONTROL_TL*) (g_1015ea0))[v[1]].value_048 = 0;
 			fcn_00469c40(v[-3] + p[1], v[-2] + p[2], v[1]);
 		} else {
-			*(int*) (g_1015ea0 + 0x48 + v[1] * 0x2f4) = 1;
+			((D2_CONTROL_TL*) (g_1015ea0))[v[1]].value_048 = 1;
 		}
 	}
 

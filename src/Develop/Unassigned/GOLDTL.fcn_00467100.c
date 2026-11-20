@@ -25,7 +25,7 @@ extern Fld_102d140 g_102d140[];
 extern char* g_1015ea0;
 
 int __cdecl fcn_0046b520(char* s, int font);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00467100 */
 void __cdecl fcn_00467100(int fld, char* text)
 {
@@ -35,7 +35,7 @@ void __cdecl fcn_00467100(int fld, char* text)
 	int len;
 
 	f = &((fcn_00467100_Fld*)g_102d140)[fld];
-	e = (char*) ((fcn_00467100_Ent*)g_1015ea0)[f->ent].i[0x40 / 4];
+	e = (char*) *(int*) (&((D2_CONTROL_TL*) g_1015ea0)[f->ent].parent);
 	if (e == 0) {
 		return;
 	}
@@ -52,8 +52,8 @@ void __cdecl fcn_00467100(int fld, char* text)
 	memcpy(f->cur, text, f->len);
 	f->w = fcn_0046b520(text, f->font);
 	if (f->fixed != 0) {
-		((fcn_00467100_Ent*)g_1015ea0)[f->ent].i[0x18 / 4] = f->w;
+		((D2_CONTROL_TL*) g_1015ea0)[f->ent].width = f->w;
 	} else {
-		((fcn_00467100_Ent*)g_1015ea0)[f->ent].i[0x18 / 4] = f->w >= 0 ? 0 : f->w;
+		((D2_CONTROL_TL*) g_1015ea0)[f->ent].width = f->w >= 0 ? 0 : f->w;
 	}
 }

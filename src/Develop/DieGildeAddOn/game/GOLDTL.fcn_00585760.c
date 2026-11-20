@@ -26,7 +26,7 @@ typedef struct {
 	char p6c[0x8c];
 } Msg;
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
@@ -48,7 +48,7 @@ int __cdecl fcn_00585760(char* e, int* list, int idx)
 	}
 	memset(&msg, 0, sizeof(msg));
 	msg.kind = 0x96;
-	msg.owner = *(int*) (g_7f4ca0 + *(unsigned short*) (e + 0x27) * 540 + 4);
+	msg.owner = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id;
 	msg.entity = *(int*) (e + 1);
 	msg.timestamp.a = (*(int*)&gm_GameTime);
 	msg.timestamp.b = (*(int*)&g_7f4c04);

@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 
 
 #pragma pack(push, 1)
@@ -31,11 +31,11 @@ int __cdecl fcn_005053c0(unsigned short* slot)
 		{0x24b, 0x29}, {0x256, 0x2a}, {0x266, 9}, {0x2c, 0x20}, {0x2d, 0x20}, {0x33, 0x20},
 		{0, -1}
 	};
-	Ware* w;
+	OBJECT_PROTOTYPE* w;
 	int i;
 
-	w = &((Ware*)lpObjektePROT)[*slot];
-	if (w->type == 2 || w->type == 6) {
+	w = &((OBJECT_PROTOTYPE*)lpObjektePROT)[*slot];
+	if (w->kind == 2 || w->kind == 6) {
 		for (i = 0; icons[i].ware != 0; i++) {
 			if (icons[i].ware == *slot) {
 				return icons[i].icon + 0x60e;

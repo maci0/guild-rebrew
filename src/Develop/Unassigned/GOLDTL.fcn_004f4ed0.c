@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 extern unsigned char* lpGebaeudeINST;
@@ -18,7 +18,7 @@ float __cdecl fcn_004f4ed0(unsigned short* key)
 	best = 0;
 	rec = lpGebaeudeINST;
 	for (i = 0; i < 256; i++, rec += 0xa9) {
-		if (rec[0] != 0 && *(unsigned short*) (rec + 0x27) == *key && lpGebaeudePROT[rec[0] * 0x24d] == 7) {
+		if (rec[0] != 0 && *(unsigned short*) (rec + 0x27) == *key && ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[rec[0]].category == 7) {
 			v = fcn_0050c710(rec, 10, 1);
 			if (v == 0x4b) {
 				return g_662a6c;

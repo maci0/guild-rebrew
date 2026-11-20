@@ -9,7 +9,7 @@ typedef struct {
 	char pad70[0x280];
 	int x2f0;
 } Ctl;
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 // SIZE 0x3cc
 typedef struct {
 	char pad0[0xc];
@@ -136,12 +136,12 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 		y = (count / 2) * 0x50 + 10;
 		item = fcn_0046f740(x, y, src[0] + 0xdf, wnd);
 		*ids++ = item;
-		((Ctl*) g_1015ea0)[item].x5c = 1;
-		((Ctl*) g_1015ea0)[item].x2f0 = (int) (lpObjektePROT + src[0] * 0x41);
+		((D2_CONTROL_TL*) g_1015ea0)[item].value_05c = 1;
+		*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[item].associated_object) = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[src[0]]);
 		fcn_00469470(list, item);
 		io_FormatTextBuffer(buf, (char*) 0x679060, src[0] * 2 + 0x9a8);
 		item = d2_ShowTxt(x + 0x3c, y + 5, buf, wnd);
-		((Ctl*) g_1015ea0)[item].x18 = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
+		((D2_CONTROL_TL*) g_1015ea0)[item].width = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
 		d2_SetElementFont(item, 0x54);
 		fcn_00534160(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
 		count++;
@@ -160,8 +160,8 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 				io_FormatTextBuffer(buf, (char*) 0x404d, owner + 0x4172);
 			}
 			item = d2_ShowTxt(0, 0, buf, d2_CurrentWindowId);
-			((Ctl*) g_1015ea0)[item].x18 = ((Screen*) g_77255c)->xc;
-			((Ctl*) g_1015ea0)[item].x6c = 1;
+			((D2_CONTROL_TL*) g_1015ea0)[item].width = ((Screen*) g_77255c)->xc;
+			((D2_CONTROL_TL*) g_1015ea0)[item].value_06c = 1;
 			d2_SetElementFont(item, 0x54);
 			d2_SetElementValue(dlg, 0, 0x64, (int) (frac * g_662cf8));
 		}
@@ -186,12 +186,12 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 				y = (count / 2) * 0x50 + 10;
 				item = fcn_0046f740(x, y, src[0] + 0xdf, wnd);
 				*ids++ = item;
-				((Ctl*) g_1015ea0)[item].x5c = 1;
-				((Ctl*) g_1015ea0)[item].x2f0 = (int) (lpObjektePROT + src[0] * 0x41);
+				((D2_CONTROL_TL*) g_1015ea0)[item].value_05c = 1;
+				*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[item].associated_object) = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[src[0]]);
 				fcn_00469470(list, item);
 				io_FormatTextBuffer(buf2, (char*) 0x679060, src[0] * 2 + 0x9a8);
 				item = d2_ShowTxt(x + 0x3c, y + 5, buf2, wnd);
-				((Ctl*) g_1015ea0)[item].x18 = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
+				((D2_CONTROL_TL*) g_1015ea0)[item].width = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
 				d2_SetElementFont(item, 0x54);
 				fcn_00534160(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
 				count++;

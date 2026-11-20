@@ -9,7 +9,7 @@ extern unsigned short g_7f3ee4;
 extern int g_90d520[];
 extern int g_14a79c0[];
 extern char g_679060[];
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
@@ -23,7 +23,7 @@ int __cdecl fcn_0064d41a(char*, const char*, ...);
 int __cdecl fcn_005373e0(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004116d0(void);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* Route one enhanced-building selection through the query engine: build the
  * window, walk the candidate query, spawn one icon record per hit, then keep
  * dispatching until the master loop closes the dialog. */
@@ -41,14 +41,14 @@ unsigned int __cdecl fcn_004be560(char* building, int a1, unsigned int a2)
 	unsigned int ret;
 
 	ret = a2;
-	src = lpGebaeudePROT + (unsigned char) *building * 0x24d;
+	src = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *building];
 	a2 = fcn_00470820(0, 0, (char*) 0x6816e8);
 	d2_CenterDialogWindows(a2);
 	d2_SetForm(a2, 4);
 	fcn_00472250(a2, 4, io_AppendText(0x7d));
 	d2_SetForm(a2, 2);
 	win = a2;
-	if (*src == 0x1c) {
+	if ((((BUILDING_PROTOTYPE*)src)->category) == 0x1c) {
 		q = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x1dc, 6);
 		n = 0;
 		if (!q) {
@@ -63,15 +63,15 @@ unsigned int __cdecl fcn_004be560(char* building, int a1, unsigned int a2)
 				t = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40,
 					*(unsigned short*) e + 0xdf, d2_CurrentWindowId);
 				items[n] = t;
-				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x5c) = 1;
-				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1d0) = 3;
-				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1e4) = 0x525;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_05c) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].flags_1d0) = 3;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_1e4) = 0x525;
 				g_90d520[n] = *(unsigned short*) e;
 				n++;
 			}
 			e = (char*) gm_NextEntityQueryMatch();
 		} while (e);
-	} else if (*src == 9) {
+	} else if ((((BUILDING_PROTOTYPE*)src)->category) == 9) {
 		q = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x116, 6);
 		n = 0;
 		if (!q) {
@@ -86,9 +86,9 @@ unsigned int __cdecl fcn_004be560(char* building, int a1, unsigned int a2)
 				t = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40,
 					*(unsigned short*) e + 0xdf, d2_CurrentWindowId);
 				items[n] = t;
-				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x5c) = 1;
-				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1d0) = 3;
-				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1e4) = 0x525;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_05c) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].flags_1d0) = 3;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_1e4) = 0x525;
 				g_90d520[n] = *(unsigned short*) e;
 				n++;
 			}
@@ -104,12 +104,12 @@ unsigned int __cdecl fcn_004be560(char* building, int a1, unsigned int a2)
 				t = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40,
 					g_90d520[n] + 0xdf, d2_CurrentWindowId);
 				items[n] = t;
-				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x5c) = 1;
-				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1d0) = 0x23;
-				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1e4) = 0x525;
-				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1dc) = 4;
-				*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1e0) = 0xf;
-				fcn_0064d41a((char*) (t * 0x2f4 + g_1015ea0 + 0xcc),
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_05c) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].flags_1d0) = 0x23;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_1e4) = 0x525;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_1dc) = 4;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_1e0) = 0xf;
+				fcn_0064d41a((char*) ((char*) &((D2_CONTROL_TL*) (g_1015ea0))[t] + 0xcc),
 					"%s", g_14a79c0[g_90d520[n] * 2]);
 				n++;
 			}
@@ -120,8 +120,8 @@ tail:
 	g_90d520[n] = 0;
 	t = fcn_0046f740((n % 4) * 0x40 + 7, (n / 4) * 0x40 + 7, 0x527, d2_CurrentWindowId);
 	items[n] = t;
-	*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x5c) = 1;
-	*(unsigned int*) (t * 0x2f4 + g_1015ea0 + 0x1d0) = 3;
+	*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_05c) = 1;
+	*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].flags_1d0) = 3;
 	while (fcn_005373e0(0x4be560, 0x657c7)) {
 		if (g_14ce8e0) {
 			g_774654 = 1;

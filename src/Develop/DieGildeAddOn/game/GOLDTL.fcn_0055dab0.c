@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 typedef struct Level {
 	unsigned char kind;
 	char pad1[0x24c];
@@ -51,7 +51,7 @@ void __cdecl fcn_0055dab0(char* e)
 	char* b;
 	char* c;
 	char* r;
-	Level* lv;
+	BUILDING_PROTOTYPE* lv;
 	int saved;
 	int code;
 	char text[0x104];
@@ -95,7 +95,7 @@ void __cdecl fcn_0055dab0(char* e)
 				    0x609, *(int*) (c + 1), -1, 0, "_NACHRICHTEN_HS_59");
 			}
 		} else {
-			lv = (Level*) (lpGebaeudePROT + *(unsigned char*) c * sizeof(Level));
+			lv = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) c];
 			code = 0x609;
 			if (*(unsigned char*) c == 0x1e) {
 				memcpy(text, "_NACHRICHTEN_HS_58", 0x13);
@@ -106,7 +106,7 @@ void __cdecl fcn_0055dab0(char* e)
 			} else {
 				text[0] = 0;
 			}
-			if (lv->kind != 0x1d && lv->kind != 0x1f) {
+			if (lv->category != 0x1d && lv->category != 0x1f) {
 				io_FormatTextBuffer(msg, 0x1c3f, 1, 0x1c39, *(unsigned short*) (c + 0x27), c);
 			} else {
 				code = 0x608;

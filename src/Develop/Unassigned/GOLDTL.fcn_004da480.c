@@ -12,7 +12,7 @@ typedef struct
 // SIZE 0x21c
 
 extern int g_67a370;
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* ch_ContextCharacters[32];
 
 void __cdecl ch_RefreshContextCharacters(void)
@@ -28,8 +28,8 @@ void __cdecl ch_RefreshContextCharacters(void)
 		if (n >= 31) {
 			break;
 		}
-		if (((Ent21c*)g_7f4ca0)[i].ref != 0 && *(int*) (((Ent21c*)g_7f4ca0)[i].ref + 0x88) == self) {
-			((Ent21c**)ch_ContextCharacters)[n] = &((Ent21c*)g_7f4ca0)[i];
+		if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_184) != 0 && *(int*) ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_184) + 0x88) == self) {
+			((Ent21c**)ch_ContextCharacters)[n] = ((Ent21c*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 			n++;
 		}
 	}

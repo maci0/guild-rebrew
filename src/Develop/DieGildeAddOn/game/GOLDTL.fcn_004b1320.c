@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "game_data.h"
-
+#include "Develop/DieGildeAddOn/game/season_slots.h"
 /* SIZE 0x80 */
 typedef struct {
 	unsigned short id;
@@ -72,17 +72,17 @@ int __cdecl fcn_004b1320(int a1, int a2, char* argumentText)
 			case 0: {
 				for (i = 0; i < 0x2a80; i += 0x80) {
 					row = g_85ab90 + g_773d75 * 0x2a90 + i;
-					if (*(unsigned short*) row == 0)
+					if (((MARKET_STOCK_SLOT*)row)->objekt_id == 0)
 						continue;
-					if (*(int*) (row + 4) == 0)
+					if (((MARKET_STOCK_SLOT*)row)->active == 0)
 						continue;
-					p = fcn_004ce590(*(unsigned short*) row);
+					p = fcn_004ce590(((MARKET_STOCK_SLOT*)row)->objekt_id);
 					if (p == 0 || *(int*) p == 0)
 						continue;
 					f = factor + 1.0f;
-					copy = *(Ent80*) (g_85ab90 + g_773d75 * 0x2a90 + i);
+					copy = *(Ent80*)((MARKET_STOCK_SLOT*)(g_85ab90 + g_773d75 * 0x2a90 + i));
 					copy.price = copy.base * (factor + 1.0f);
-					copy.value = eval_ObjektPreis2Credits(*(unsigned short*) row, 0x64) * f;
+					copy.value = eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 0x64) * f;
 					fcn_004c6190((char*) &copy, g_773d75);
 				}
 				return 1;
@@ -90,16 +90,16 @@ int __cdecl fcn_004b1320(int a1, int a2, char* argumentText)
 			case 1: {
 				for (i = 0; i < 0x2a80; i += 0x80) {
 					row = g_85ab90 + g_773d75 * 0x2a90 + i;
-					if (*(unsigned short*) row == 0)
+					if (((MARKET_STOCK_SLOT*)row)->objekt_id == 0)
 						continue;
-					if (*(int*) (row + 4) == 0)
+					if (((MARKET_STOCK_SLOT*)row)->active == 0)
 						continue;
-					if (*(char*) (lpObjektePROT + *(unsigned short*) row * 0x41) != 8)
+					if (*(char*) (lpObjektePROT + ((MARKET_STOCK_SLOT*)row)->objekt_id * 0x41) != 8)
 						continue;
 					f = factor + 1.0f;
 					copy = *(Ent80*) row;
 					copy.price = copy.base * (factor + 1.0f);
-					copy.value = eval_ObjektPreis2Credits(*(unsigned short*) row, 0x64) * f;
+					copy.value = eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 0x64) * f;
 					fcn_004c6190((char*) &copy, g_773d75);
 				}
 				return 1;
@@ -107,16 +107,16 @@ int __cdecl fcn_004b1320(int a1, int a2, char* argumentText)
 			case 2: {
 				for (i = 0; i < 0x2a80; i += 0x80) {
 					row = g_85ab90 + g_773d75 * 0x2a90 + i;
-					if (*(unsigned short*) row == 0)
+					if (((MARKET_STOCK_SLOT*)row)->objekt_id == 0)
 						continue;
-					if (*(int*) (row + 4) == 0)
+					if (((MARKET_STOCK_SLOT*)row)->active == 0)
 						continue;
-					if (*(char*) (lpObjektePROT + *(unsigned short*) row * 0x41) != 0x20)
+					if (*(char*) (lpObjektePROT + ((MARKET_STOCK_SLOT*)row)->objekt_id * 0x41) != 0x20)
 						continue;
 					f = factor + 1.0f;
 					copy = *(Ent80*) row;
 					copy.price = copy.base * (factor + 1.0f);
-					copy.value = eval_ObjektPreis2Credits(*(unsigned short*) row, 0x64) * f;
+					copy.value = eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 0x64) * f;
 					fcn_004c6190((char*) &copy, g_773d75);
 				}
 			}

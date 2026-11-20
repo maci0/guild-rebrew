@@ -11,7 +11,7 @@
  * self+0x18 weight the travel time; the ball position at self+0xb0 is summed
  * until it turns positive, and a negative socket test repeats the loop.
  */
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "client_types.h"
 
 void __cdecl gm_ResolveEntityById(void*, void*, int, int);
@@ -99,7 +99,7 @@ void __cdecl fcn_00571240(char* self)
 		if (fcn_00500cb0(self + 0x52, gm_GameTime) >= 0)
 			return;
 		do {
-			entry = lpObjektePROT + *(unsigned short*) (self + 0xac) * 0x41;
+			entry = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) (self + 0xac)]);
 			prev = (float) *(int*) (self + 0xb0);
 			n = fcn_0050c830(self + 0x60, self + 0x52, 0)
 				* (*(int*) (self + 0x18) + *(int*) (self + 0x14) * 2);
@@ -119,12 +119,12 @@ void __cdecl fcn_00571240(char* self)
 					he_FreeAction(self);
 					return;
 				}
-				n = *(unsigned short*) (entry + 0x36);
+				n = ((OBJECT_PROTOTYPE *)entry)->value_036;
 				if (n >= *(int*) (q + 0xe))
 					n = *(int*) (q + 0xe);
 				fcn_004c51f0(*(int*) (self + 0xc0), *(int*) (self + 0xbc), *(unsigned short*) (self + 0xac),
 					n, g_773d75, 0);
-				*(int*) (self + 0xb0) += *(int*) (entry + 0x22);
+				*(int*) (self + 0xb0) += *(int *)&((OBJECT_PROTOTYPE *)entry)->value_022;
 				*(float*) (self + 0xb4) = (float) *(int*) (self + 0xb0);
 			}
 			*(pos14_7f4c00*) (self + 0x60) = *(pos14_7f4c00*) (self + 0x52);

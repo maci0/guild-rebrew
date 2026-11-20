@@ -14,7 +14,7 @@ extern char* g_1015ea0;
 
 void __cdecl fcn_00472640(int, int);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_0058c780(char* a1, int a2, int a3, int* controlIds, int* selectedIndex)
 {
 	int r;
@@ -27,7 +27,7 @@ int __cdecl fcn_0058c780(char* a1, int a2, int a3, int* controlIds, int* selecte
 	sel = -1;
 	for (i = 0; i < a2 + 1; i++) {
 		fcn_00472640(controlIds[i], 0);
-		((Ctl*)g_1015ea0)[controlIds[i]].x38 = 0;
+		((D2_CONTROL_TL*) g_1015ea0)[controlIds[i]].value_038 = 0;
 	}
 	for (i = a2 + 1; i < 4; i++) {
 		if (gv_CheckSlotActive(*(void**) (a1 + 0x65), i)) {
@@ -38,12 +38,12 @@ int __cdecl fcn_0058c780(char* a1, int a2, int a3, int* controlIds, int* selecte
 			}
 		} else {
 			fcn_00472640(controlIds[i], 0);
-			((Ctl*)g_1015ea0)[controlIds[i]].x38 = 0;
+			((D2_CONTROL_TL*) g_1015ea0)[controlIds[i]].value_038 = 0;
 		}
 	}
-	if (((Ctl*)g_1015ea0)[controlIds[*selectedIndex]].x4c != 0 && sel != -1) {
+	if (((D2_CONTROL_TL*) g_1015ea0)[controlIds[*selectedIndex]].disabled != 0 && sel != -1) {
 		*selectedIndex = sel;
-		((Ctl*)g_1015ea0)[controlIds[sel]].x38 = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[controlIds[sel]].value_038 = 1;
 	}
 	return r;
 }

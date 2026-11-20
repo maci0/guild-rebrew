@@ -23,7 +23,7 @@ typedef struct {
 // SIZE 0x21c
 
 extern Tab5c84 g_776aa0[16];
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_6ac820[];
 extern char g_6811b0[];
@@ -86,7 +86,7 @@ int __cdecl fcn_005c8400(void)
 	d2_SetForm(h, 5);
 	io_AppendText(0x1f40);
 	d2_SetForm(h, 1);
-	fcn_005a5440(((Ent5c84*)g_7f4ca0)[g_774970].f178, g_776aa0, h, 1, 0);
+	fcn_005a5440((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].object_list), g_776aa0, h, 1, 0);
 	for (k = 0; k < 9; k++) {
 		if (lines[k].bar != -1) {
 			fcn_0046f280(lines[k].bar);

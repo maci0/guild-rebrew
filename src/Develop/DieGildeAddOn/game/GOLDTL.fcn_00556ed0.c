@@ -1,5 +1,5 @@
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #pragma pack(push, 1)
 typedef struct {
 	int day;
@@ -106,7 +106,7 @@ void __cdecl RunSimKrankheiten(char* s)
 			y = 0.0f;
 			x = 0.0f;
 			if (home != 0) {
-				if (*(unsigned char*) (lpGebaeudePROT + *(unsigned char*) home * 0x24d) == 2) {
+				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) home].category == 2) {
 					x = (float) fcn_0050c710(home, 8, 1) * g_665370 * g_66430c;
 				} else {
 					x = (float) fcn_0050c710(home, 8, 1) * 0.02f * g_66430c;

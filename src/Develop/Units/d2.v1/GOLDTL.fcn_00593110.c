@@ -7,7 +7,7 @@ extern int g_14b5d48;
 extern int g_14b5d4c;
 extern int g_14b5d50;
 extern int g_9baadc;
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char g_6a9b90[];
 extern char g_6a9b98[];
 
@@ -21,6 +21,6 @@ void __cdecl fcn_00593110(void)
 	d2_SetForm(g_6a9b9c, 8);
 	fcn_00533a60(d2_CurrentWindowId, 0, g_6a9b98, 1, g_14b5d50);
 	if (g_9baadc == 0x7f) {
-		*(int*) (g_1015ea0 + g_6a9b94 * 756 + 0x4c) = 1;
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[g_6a9b94].disabled)) = 1;
 	}
 }

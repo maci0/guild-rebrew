@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 extern unsigned char* lpGebaeudePROT;
@@ -33,7 +33,7 @@ int __cdecl fcn_004eb320(unsigned char* obj)
 	if (r == 0 || (r[0x5a] & 1) != 0) {
 		return 0;
 	}
-	if (lpGebaeudePROT[*r * 0x24d + 0x247] < 3) {
+	if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*r].level < 3) {
 		return 0;
 	}
 	if (*(unsigned int*) (obj + 0x1c8) & 0x10000000) {

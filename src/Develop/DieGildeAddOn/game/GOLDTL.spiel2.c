@@ -1,6 +1,6 @@
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
-
+#include "Develop/DieGildeAddOn/game/season_slots.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -126,8 +126,8 @@ char* __cdecl gm_FindSlotById(int arg1, int arg2)
 	int i;
 
 	for (i = 0; i < 0x55; i++) {
-		if (*(unsigned short*) (g_85ab90 + arg1 * 0x2a90 + i * 0x80) == arg2) {
-			return (char*) (g_85ab90 + arg1 * 0x2a90 + i * 0x80);
+		if (((MARKET_STOCK_SLOT*)(g_85ab90 + arg1 * 0x2a90))[i].objekt_id == arg2) {
+			return (char*)&((MARKET_STOCK_SLOT*)(g_85ab90 + arg1 * 0x2a90))[i];
 		}
 	}
 	return 0;

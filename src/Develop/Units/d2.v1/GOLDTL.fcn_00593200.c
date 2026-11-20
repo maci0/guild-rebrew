@@ -41,8 +41,8 @@ void __cdecl fcn_00593200(void)
 		slot = fcn_00465950((char*) 0x6a2e24);
 	}
 	slot = fcn_0046f740(5, 5, slot, d2_CurrentWindowId);
-	x = *(int*) (g_1015ea0 + slot * 0x2f4 + 0x18) + 0xf;
+	x = ((D2_CONTROL_TL*) (g_1015ea0))[slot].width + 0xf;
 	row = d2_ShowTxt(x, 0x19, s2, d2_CurrentWindowId);
 	sprintf(s1, (char*) 0x6a9bb8, *(int*) 0x14b5d34, flag);
-	d2_ShowTxt(x, *(int*) (g_1015ea0 + row * 0x2f4 + 0x1c) + 0x1b, s1, d2_CurrentWindowId);
+	d2_ShowTxt(x, ((D2_CONTROL_TL*) (g_1015ea0))[row].height + 0x1b, s1, d2_CurrentWindowId);
 }

@@ -1,4 +1,4 @@
-extern char* g_1015ea0;
+#include "Develop/Units/d2.v1/d2_gui.h"
 extern char* g_772904;
 
 struct slot_4bfca0 {
@@ -28,11 +28,11 @@ void __cdecl fcn_004bfca0(char* list, struct panel_4bfca0* panel)
 	for (i = 0; i < panel->count; i++) {
 		if (panel->slots[i].obj != 0) {
 			if (panel->slots[i].obj != g_772904) {
-				*(int*) (g_1015ea0 + panel->slots[i].id * 756 + 0x1d0) |= 1;
-				*(int*) (g_1015ea0 + panel->slots[i].id * 756 + 0x3c) = 0;
+				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[panel->slots[i].id].flags_1d0)) |= 1;
+				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[panel->slots[i].id].value_03c)) = 0;
 			} else {
-				*(int*) (g_1015ea0 + panel->slots[i].id * 756 + 0x1d0) &= ~1;
-				*(int*) (g_1015ea0 + panel->slots[i].id * 756 + 0x3c) = 1;
+				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[panel->slots[i].id].flags_1d0)) &= ~1;
+				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[panel->slots[i].id].value_03c)) = 1;
 			}
 		}
 	}
@@ -42,8 +42,8 @@ void __cdecl fcn_004bfca0(char* list, struct panel_4bfca0* panel)
 		do {
 			for (i = 0; i < panel->count; i++) {
 				if (panel->slots[i].obj != 0 && *(int*) (panel->slots[i].obj + 1) == *(int*) (n + 4)) {
-					*(int*) (g_1015ea0 + panel->slots[i].id * 756 + 0x3c) = 1;
-					*(int*) (g_1015ea0 + panel->slots[i].id * 756 + 0x1d0) &= ~1;
+					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[panel->slots[i].id].value_03c)) = 1;
+					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[panel->slots[i].id].flags_1d0)) &= ~1;
 					*p++ = panel->slots[i].obj;
 					break;
 				}

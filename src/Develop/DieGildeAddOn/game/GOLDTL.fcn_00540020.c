@@ -19,7 +19,7 @@
  *                        0x10 of tail keeps the native 0x3b8 frame)
  */
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_types.h"
 #include "he_tables.h"
 
@@ -153,8 +153,8 @@ void __cdecl fcn_004c2d90(float, int);
 
 #define SLOTPTR(k) ((char*) g_7f4ca0 + (k) * 0x21c)
 #define SLOT4(k) (*(int *) (SLOTPTR(k) + 4))
-#define ENTTYPE(t) (*(unsigned char *) (lpGebaeudePROT + (t) * 0x24d))
-#define ENTCLASS(t) (*(unsigned char *) (lpGebaeudePROT + (t) * 0x24d + 0x247))
+#define ENTTYPE(t) (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(t)].category)
+#define ENTCLASS(t) (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(t)].level)
 #define OBJBYTE (*(unsigned char *) obj)
 
 /* ADDRESS: GOLDTL 0x00540020 */

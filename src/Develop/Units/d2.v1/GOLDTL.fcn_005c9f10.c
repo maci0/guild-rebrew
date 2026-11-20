@@ -131,22 +131,22 @@ label_5ca044:
 					d2_SetElementValue(v5, 0, 100, 0);
 				}
 				fcn_00472640(v15[-4], 1);
-				*(int*) ((int) g_1015ea0 + 0x5c + v15[-4] * 0x2f4) = 1;
+				((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-4]].value_05c = 1;
 			}
 			if (v3 != 0 && *(char*) &v3[1] == 6 && *(int*) (v15[-6] + 0x210) == *(int*) &v3[2]) {
 				fcn_0046f740((int) *(short*) ((int) g_772500 + 0x1ebd8) + v11, v10, 0x6d3, d2_CurrentWindowId);
 			}
 			if (a2 == 0 || fcn_005cf720(g_774970, *(unsigned short*) v15[-6], a2, 0) != 0) {
-				*(int*) ((int) g_1015ea0 + 0x5c + v15[-5] * 0x2f4) = 1;
-				*(int*) ((int) g_1015ea0 + 0x1d0 + v15[-5] * 0x2f4) = 3;
-				*(int*) ((int) g_1015ea0 + 0x2f0 + v15[-5] * 0x2f4) = v15[-6];
+				((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].value_05c = 1;
+				((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].flags_1d0 = 3;
+				*(int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].associated_object) = v15[-6];
 			}
 		} else {
 			fcn_0046f740((v6 - (int) *(short*) ((int) g_772500 + 0x1a2ac) / 2) - 3, v10 + 1, 0x4fb, d2_CurrentWindowId);
 			io_FormatTextBuffer(caption, "%s", v15[-3] + 0x253);
 			fcn_005c9090(caption, v6, v15[-1], 0xca, 0x56);
-			*(int*) ((int) g_1015ea0 + 0x5c + v15[-5] * 0x2f4) = 1;
-			*(int*) ((int) g_1015ea0 + 0x2f0 + v15[-5] * 0x2f4) = 0;
+			((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].value_05c = 1;
+			*(int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].associated_object) = 0;
 			fcn_00472640(v15[-5], 0);
 		}
 		v17 += 1;

@@ -32,7 +32,7 @@ extern unsigned char g_14cf736;
 extern unsigned char g_14cf72a;
 extern int tp_d2_SelectedControl;
 extern int g_7725e4;
-extern int g_1015ea0;
+extern char* g_1015ea0;
 extern int g_67d8ec;
 extern int g_67d3b0;
 extern int d2_MouseBottomBoundary;
@@ -49,7 +49,7 @@ void __cdecl fcn_00469c40(int x, int y, int slot);
 int __cdecl fcn_00469c30(int x, int y, int a3);
 char __cdecl fcn_00411610(int shift, int ctrl, int alt, char key);
 
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00474300 */
 void __cdecl d2_HandleTextInput(void)
 {
@@ -79,7 +79,7 @@ void __cdecl d2_HandleTextInput(void)
 		}
 	case 28:
 		w = (*(Combo**) &tp_d2_SelectedControl);
-		((int*) g_1015ea0)[w->sel * 189 + 15] = 0;
+		((D2_CONTROL_TL*) g_1015ea0)[w->sel].value_03c = 0;
 		(*(Combo**) &tp_d2_SelectedControl) = 0;
 		g_7725e4 = 0;
 		if (g_67d8ec != -1) {
@@ -124,7 +124,7 @@ common_tail:
 		Combo* w2;
 
 		w = (*(Combo**) &tp_d2_SelectedControl);
-		list = (ComboList*) ((int*) g_1015ea0)[w->sel * 189 + 16];
+		list = (ComboList*) *(int*) (&((D2_CONTROL_TL*) g_1015ea0)[w->sel].parent);
 		if (g_14cf736 == 0 && g_14cf72a == 0) {
 			i = g_100f1cc;
 			if (i >= list->count - 1) {
@@ -136,7 +136,7 @@ common_tail:
 				p = list->items + i;
 				for (;;) {
 					idx = *p;
-					cell = &((int*) g_1015ea0)[idx * 189];
+					cell = &((int*) (int) g_1015ea0)[idx * 189];
 					if (cell[8] == 0x41 && cell[0x12] == 0) {
 						goto found15;
 					}
@@ -158,7 +158,7 @@ common_tail:
 				p = list->items + i;
 				for (;;) {
 					idx = *p;
-					cell = &((int*) g_1015ea0)[idx * 189];
+					cell = &((int*) (int) g_1015ea0)[idx * 189];
 					if (cell[8] == 0x41 && cell[0x12] == 0) {
 						goto found15;
 					}
@@ -174,11 +174,11 @@ common_tail:
 found15:
 		g_100f1cc = i;
 		w = (*(Combo**) &tp_d2_SelectedControl);
-		((int*) g_1015ea0)[w->sel * 189 + 15] = 0;
+		((D2_CONTROL_TL*) g_1015ea0)[w->sel].value_03c = 0;
 		idx = list->items[i];
-		w2 = (Combo*) ((int*) g_1015ea0)[idx * 189 + 3];
+		w2 = (Combo*) *(int*) (&((D2_CONTROL_TL*) g_1015ea0)[idx].data);
 		(*(Combo**) &tp_d2_SelectedControl) = w2;
-		((int*) g_1015ea0)[w2->sel * 189 + 15] = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[w2->sel].value_03c = 1;
 		g_100f1d4 = d2_MouseBottomBoundary - saved;
 		g_100f940 = (*(Combo**) &tp_d2_SelectedControl)->text_len;
 		g_100f950 = 0;

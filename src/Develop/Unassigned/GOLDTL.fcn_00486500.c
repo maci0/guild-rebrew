@@ -10,7 +10,7 @@ typedef struct Rec {
 } Rec;
 // SIZE 0x41
 #pragma pack(pop)
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/production_goods.h"
 
 
@@ -48,13 +48,13 @@ void __cdecl fcn_00486500(PRODUCTION_GOODS_RECORD* n)
 						s->price = fcn_0050bb50(s->goods_id, g_773d75);
 					}
 				}
-				n->sum += ((Rec*)lpObjektePROT)[n->goods_id].weight[i] * s->price;
+				n->sum += ((OBJECT_PROTOTYPE*)lpObjektePROT)[n->goods_id].ingredient_amounts[i] * s->price;
 			}
 		}
-		n->sum = n->sum / ((Rec*)lpObjektePROT)[n->goods_id].div;
+		n->sum = n->sum / ((OBJECT_PROTOTYPE*)lpObjektePROT)[n->goods_id].value_036;
 		n->base = fcn_0050b840(n->goods_id);
 		n->value = n->base + n->sum;
 		n->price = fcn_0050bb50(n->goods_id, g_773d75);
-		n->slope = (n->price - n->value) / ((Rec*)lpObjektePROT)[n->goods_id].cap;
+		n->slope = (n->price - n->value) / ((OBJECT_PROTOTYPE*)lpObjektePROT)[n->goods_id].value_022;
 	}
 }

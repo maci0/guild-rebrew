@@ -30,7 +30,7 @@ extern void** g_772540;
 extern char s_67d59c[];
 
 #include "Develop/Units/Error/error_message.h"
-
+#include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046f650 */
 void __cdecl fcn_0046f650(int slot, char* parent)
 {
@@ -38,7 +38,7 @@ void __cdecl fcn_0046f650(int slot, char* parent)
 	Slot* p;
 
 	for (i = 0; i < 0x3ff; i++) {
-		if (((Slot**)g_772540)[i] == &((Slot*)g_1015ea0)[slot]) {
+		if (((Slot**)g_772540)[i] == (Slot*) &((D2_CONTROL_TL*) g_1015ea0)[slot]) {
 			if (i == 0x3ff) {
 				((Slot**)g_772540)[0x3ff] = 0;
 			} else if (i < 0x3ff) {
@@ -57,7 +57,7 @@ void __cdecl fcn_0046f650(int slot, char* parent)
 		if (i < 0x3ff) {
 			memmove(&((Slot**)g_772540)[i + 2], &((Slot**)g_772540)[i + 1], 0xff8 - i * 4);
 		}
-		((Slot**)g_772540)[i + 1] = &((Slot*)g_1015ea0)[slot];
+		((Slot**)g_772540)[i + 1] = (Slot*) &((D2_CONTROL_TL*) g_1015ea0)[slot];
 	} else {
 		ReportClientMessage(s_67d59c);
 	}

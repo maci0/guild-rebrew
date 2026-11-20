@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "client_timer.h"
 #include "client_scene_loader.h"
 
@@ -63,7 +63,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 	void** p;
 
 	saved = d3_CurrentContextIndex;
-	name = lpObjektePROT + objectTypeIndex * 0x41;
+	name = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[objectTypeIndex]);
 	progress = 0;
 	paused = 0;
 	if (g_774964 && g_774670 <= 0) {

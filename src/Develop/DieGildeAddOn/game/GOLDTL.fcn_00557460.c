@@ -1,6 +1,6 @@
 #include "client_dialog_helpers.h"
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* Dark corner dialog ("Dunkle Ecke"). Resolves the current target, offers
  * the neighbouring entities as the next target and books the skill checks
  * that decide whether the corner stays dark. */
@@ -82,7 +82,7 @@ void __cdecl fcn_00557460(char* dlg)
 		tries = 0x100;
 		do {
 			hit = (char*) (lpGebaeudeINST + scan * 0xa9);
-			kind = ((BuildingRow557460*) lpGebaeudePROT)[*(unsigned char*) hit].kind;
+			kind = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) hit].category;
 			mask = 0;
 			mask2 = 0;
 			if (kind > 0x1f) {

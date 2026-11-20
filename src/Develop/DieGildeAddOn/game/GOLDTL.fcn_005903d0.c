@@ -1,4 +1,4 @@
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
 extern unsigned char* lpGebaeudePROT;
@@ -14,8 +14,8 @@ int __cdecl fcn_005903d0(unsigned short* who, unsigned char* p, short* cmd)
 	int flags;
 	int i;
 
-	t = lpGebaeudePROT + *p * 589;
-	lvl = gm_CheckStatLevel(*who, fcn_00507910(*t));
+	t = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p];
+	lvl = gm_CheckStatLevel(*who, fcn_00507910((((BUILDING_PROTOTYPE*)t)->category)));
 	flags = 0x81;
 	if (*(unsigned short*) (p + 0x25) == *who) {
 		flags |= 0x103c;
@@ -26,10 +26,10 @@ int __cdecl fcn_005903d0(unsigned short* who, unsigned char* p, short* cmd)
 	if (*(unsigned short*) (p + 0x27) == *who) {
 		flags |= 0x4461;
 		for (i = 0; i < 6; i++) {
-			if (t[0x223 + i] == 0) {
+			if (((BUILDING_PROTOTYPE*)t)->worker_kind[i] == 0) {
 				break;
 			}
-			if (lvl == t[0x223 + i]) {
+			if (lvl == ((BUILDING_PROTOTYPE*)t)->worker_kind[i]) {
 				flags |= 0x2200;
 				break;
 			}

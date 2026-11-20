@@ -1,5 +1,5 @@
 #include "client_types.h"
-
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_7f4ca0[];
 extern pos14_7f4c00 gm_GameTime;
 
@@ -21,7 +21,7 @@ void __cdecl fcn_00578e10(char* action)
 	if ((*(unsigned char*) (action + 0x78) & flag) != 0) {
 		return;
 	}
-	rec = g_7f4ca0 + *(unsigned short*) (action + 8) * 0x21c;
+	rec = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (action + 8)]);
 	n = fcn_004a5fe0(rec,
 	    5, flag, zero, zero, zero, 5, (int*) (action + 0xb4));
 	if (n == 0) {

@@ -46,8 +46,8 @@ void __cdecl fcn_0057c020(ENTITY_RECORD* a, ENTITY_RECORD* b)
 	} else {
 		d = -20 - gm_RandomMod(0x10);
 		for (i = 0; i < 768; i++) {
-			if (i != b->entity_index && (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 5)) {
-				fcn_004c54c0(b->entity_id, ((ENTITY_RECORD*)g_7f4ca0)[i].entity_id, d, 1);
+			if (i != b->entity_index && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 7 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 5)) {
+				fcn_004c54c0(b->entity_id, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, d, 1);
 			}
 		}
 	}

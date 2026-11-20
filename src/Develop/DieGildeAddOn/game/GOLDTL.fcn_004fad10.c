@@ -3,7 +3,7 @@
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 int __cdecl fcn_004fa6f0(char* a1, int* a2, int* a3);
 void __cdecl fcn_004f4830(unsigned char a1, char* a2);
-
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x004fad10 */
 void __cdecl fcn_004fad10(void)
 {
@@ -55,7 +55,7 @@ void __cdecl fcn_004fad10(void)
 			if (building != 0 && *(unsigned char*) building != 0) {
 				v8 = *(int*) ((char*) building + 0x61);
 				if (v8 != 0) {
-					v3 = *(unsigned char*) (lpGebaeudePROT + *(unsigned char*) building * 0x24d);
+					v3 = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) building].category;
 					if ((v3 < 0xb || v3 >= 0xe) && v3 != 0x10) {
 						if (fcn_004fa6f0((char*) v8 + 0x4c, &v15, &v14) != 0) {
 							fcn_004f4830(record[0x1c], (char*) stats);

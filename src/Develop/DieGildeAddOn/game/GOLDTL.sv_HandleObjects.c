@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern char* g_7ea360;
 extern char* g_7746a0;
 extern char* g_7746a4;
@@ -158,7 +158,7 @@ L744:
 	}
 	list = sv_HoveredObjekt;
 	if (list != 0) {
-		p = lpObjektePROT + (unsigned int) (unsigned short) *(unsigned short*) list * 0x41;
+		p = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(unsigned int) (unsigned short) *(unsigned short*) list]);
 	} else {
 		p = 0;
 	}
@@ -218,7 +218,7 @@ L744:
 		g_7e2aa0 = g_7746b0;
 		return;
 	}
-	if (*(char*) (lpObjektePROT + (unsigned int) (unsigned short) *(unsigned short*) list * 0x41) == 0x1d) {
+	if (*(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(unsigned int) (unsigned short) *(unsigned short*) list])) == 0x1d) {
 		g_7746c0 = selected;
 		sv_ClearObjectSelection();
 		return;

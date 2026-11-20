@@ -1,6 +1,6 @@
 /* gv_ActivateSection - proper C */
 
-extern char g_7f4ca0[];
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_7f4ca0[];
 
 
@@ -32,7 +32,7 @@ int __cdecl gv_ActivateSection(void* cmd)
 	if (entity) {
 		grave_id = *(unsigned short*) ((char*) entity + 0x27);
 		if (grave_id != 0xffff) {
-			if (g_7f4ca0 + grave_id * 0x21c != (char*) g_entity_table_end) {
+			if (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[grave_id]) != (char*) g_entity_table_end) {
 				field_id = *(unsigned char*) entity;
 				if (((unsigned char*)g_entity_type_table)[field_id + field_id * 588] != 0x1d) {
 					return -2;

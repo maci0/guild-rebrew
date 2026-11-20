@@ -19,7 +19,7 @@ void __cdecl fcn_005c91c0(int text, int x, int y, int d, int e)
 	int idx;
 
 	idx = d2_ShowTxt(x, y, (char*) text, *(int*) 0x772514);
-	((Obj*)g_1015ea0)[idx].f70 = 0;
-	((Obj*)g_1015ea0)[idx].f18 = d;
+	((D2_CONTROL_TL*)g_1015ea0)[idx].value_070 = 0;
+	((D2_CONTROL_TL*)g_1015ea0)[idx].width = d;
 	d2_SetElementFont(idx, e);
 }

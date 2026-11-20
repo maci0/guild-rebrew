@@ -86,20 +86,20 @@ void __cdecl fcn_0058bfd0(int* ctx)
 			                 *(int*) (ctx[2] * 0x3cc + 0x1015f50) * i + 4,
 			                 *(int*) (*r + 0x3c), ctx[2]);
 			r[-1] = h;
-			*(int*) (g_1015ea0 + 0x5c + h * 0x2f4) = 1;
-			*(int*) (g_1015ea0 + 0x1d0 + r[-1] * 0x2f4) = 3;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_05c)) = 1;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[r[-1]].flags_1d0)) = 3;
 			fcn_0058b9c0((void*) *r, buf);
 			fcn_0058ba20((char*) *r, buf2);
 			y = *(int*) (ctx[2] * 0x3cc + 0x1015f50) * i + 0x38;
 			h = fcn_0046fac0(0, y, buf, ctx[2]);
-			*(int*) (g_1015ea0 + 0x6c + h * 0x2f4) = 1;
-			*(int*) (g_1015ea0 + 0x18 + h * 0x2f4) =
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_06c)) = 1;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].width)) =
 			    *(int*) (ctx[2] * 0x3cc + 0x1015f4c);
 			d2_SetElementFont(h, 0x54);
 			y += 0xd;
 			h = fcn_0046fac0(0, y, buf2, ctx[2]);
-			*(int*) (g_1015ea0 + 0x6c + h * 0x2f4) = 1;
-			*(int*) (g_1015ea0 + 0x18 + h * 0x2f4) =
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_06c)) = 1;
+			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].width)) =
 			    *(int*) (ctx[2] * 0x3cc + 0x1015f4c);
 			d2_SetElementFont(h, 0x54);
 			y += 0x12;
@@ -107,7 +107,7 @@ void __cdecl fcn_0058bfd0(int* ctx)
 			do {
 				io_FormatTextBuffer(buf, "%s:", 0x16b7 + j);
 				h = fcn_0046fac0(0x28, y, buf, ctx[2]);
-				*(int*) (g_1015ea0 + 0x18 + h * 0x2f4) = 0x12c;
+				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].width)) = 0x12c;
 				d2_SetElementFont(h, 0x54);
 				fcn_00534160(0xa0, y,
 				             *(unsigned char*) (*r + 0x24 + j), 0x4df);

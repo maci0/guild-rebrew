@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "Develop/DieGildeAddOn/game/object_prototype.h"
 #pragma pack(push, 1)
 typedef struct Rec {
 	char type;
@@ -43,7 +43,7 @@ int __cdecl fcn_004bb0b0(int* request)
 	}
 	e = fcn_00502cd0(*(int*) (p + 0x178), 1, 5);
 	while (e != 0 && n < 6) {
-		if (((Rec*)lpObjektePROT)[*e].type != 9) {
+		if ((*(char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[*e].kind) != 9) {
 			found[n] = e;
 			n++;
 		}
