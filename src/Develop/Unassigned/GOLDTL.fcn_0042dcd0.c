@@ -25,6 +25,7 @@ __declspec(dllimport) unsigned int __stdcall timeSetEvent(unsigned int, unsigned
 void __stdcall fcn_0042dcd0(unsigned int id, unsigned int msg, unsigned long user, unsigned long dw1, unsigned long dw2)
 {
 	int i;
+	int tick;
 
 	if (g_6b7fbc != 0) {
 		return;
@@ -45,7 +46,9 @@ void __stdcall fcn_0042dcd0(unsigned int id, unsigned int msg, unsigned long use
 			g_6b7fb4++;
 		}
 		if (g_6b7fc8 != 0) {
-			if (++g_6b7fcc % 20 == 0) {
+			tick = g_6b7fcc;
+		g_6b7fcc = ++tick;
+		if (tick % 20 == 0) {
 				g_6b7fac = (unsigned int) g_6b7fac + 1;
 			}
 		} else {

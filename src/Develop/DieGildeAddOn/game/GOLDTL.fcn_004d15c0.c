@@ -69,7 +69,7 @@ char __cdecl fcn_004d15c0(char* context, char* targetEntity)
 				}
 			}
 		} else {
-			if (fcn_0045bad0(*(int*) (g_67a370 + 0xb0), g_14ce8c0 + 0x1a,
+			obj = *(int*) (g_67a370 + 0xb0); if (fcn_0045bad0(obj, g_14ce8c0 + 0x1a,
 					 g_14ce8c2 + 0x1a, &v13, &v12) != 0) {
 				e = gm_FindOrCreateEntitySlot(context, targetEntity);
 				e->fc = 0;

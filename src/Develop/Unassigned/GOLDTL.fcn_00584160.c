@@ -56,11 +56,7 @@ void __cdecl fcn_00584160(int a0)
 	if (handle != -1) {
 		fcn_0046f4c0(handle);
 		o = g_665f08;
-		if (*(int*) (o + 0x64) != g_774650) {
-			d2_SetSlotVisibility(*(int*) (o + 0x60), 0);
-		} else {
-			d2_SetSlotVisibility(*(int*) (o + 0x60), 1);
-		}
+		d2_SetSlotVisibility(*(int*) (o + 0x60), *(int*) (o + 0x64) == g_774650);
 		o = g_665f08;
 	}
 

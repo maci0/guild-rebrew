@@ -1,3 +1,4 @@
+extern int g_67530c;
 extern void __cdecl SelectTextureSet(void* e, void* o, unsigned int lod, int refresh);
 
 /* ADDRESS: GOLDTL 0x004fdcf0 */
@@ -30,6 +31,6 @@ void __cdecl fcn_004fdcf0(int* a0)
         }
         *(char*) ((char*) obj + 0x23a) = (char) idx;
     }
-    if (*(int*) 0x67530c == *(int*) ((char*) obj + 0x2c))
+    if (g_67530c == *(int*) ((char*) obj + 0x2c))
         SelectTextureSet(ctx, (unsigned int)res, idx, 1);
 }

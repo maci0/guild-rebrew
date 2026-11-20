@@ -52,7 +52,7 @@ int __cdecl fcn_004b6830(int* request)
 			continue;
 		}
 		for (j = 0, s = (unsigned char*) 0x7f4ca2; (int) s < 0x85a0a2; s += 0x21c, j++) {
-			if (*(s + 0x166) != *(rec - 4)) {
+			if (*(s + 0x166) != msg[8 + i * 0x18]) {
 				continue;
 			}
 			if (*s != 3 && *s != 4) {

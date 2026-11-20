@@ -52,7 +52,7 @@ extern int g_772f54;
 extern char g_14cf71d;
 extern char g_14cf738;
 extern int g_7746cc;
-#include "Develop/Units/d8_vesa/d3d_device_view.h"
+extern int g_6b5de0;
 extern char g_1052be0[];
 extern char g_7747b0;
 extern unsigned char g_14cf950;
@@ -190,7 +190,7 @@ extern void fcn_00535850();
 
 
 /* ADDRESS: GOLDTL 0x005373e0 */
-int __cdecl fcn_005373e0(int loopId, unsigned int flags)
+int __cdecl fcn_005373e0(int a0, unsigned int flags)
 {
 	int result;
 	float t;
@@ -206,8 +206,8 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 	main_LoopFlags = flags;
 	main_PumpWindowMessages();
 	fcn_412630();
-	if (loopId != 0) {
-		if (*(int *) ((char *) g_7e35c0 + g_774650 * 8) != loopId) {
+	if (a0 != 0) {
+		if (*(int *) ((char *) g_7e35c0 + g_774650 * 8) != a0) {
 			fcn_004116d0();
 		}
 		if (g_774970 != 0xffff) {
@@ -233,16 +233,16 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 	if (g_774654 == 0 && (flags & 0x100) && !(flags & 0x100000)) {
 		fcn_00533090(flags);
 	}
-	g_774708 = loopId;
-	if (loopId != 0) {
-		if (*(int *) ((char *) g_7e35c0 + g_774650 * 8) == loopId) {
+	g_774708 = a0;
+	if (a0 != 0) {
+		if (*(int *) ((char *) g_7e35c0 + g_774650 * 8) == a0) {
 			result = 1;
 		} else if (g_774654 != 0) {
 			result = 0;
 		} else {
 			result = 1;
 			for (addr = 0x7e35c0; addr < 0x7e39c0; addr += 8) {
-				if (*(int *) addr == loopId) {
+				if (*(int *) addr == a0) {
 					ReportClientMessage(g_6a33f4);
 					result = 0;
 					break;
@@ -250,7 +250,7 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 			}
 			if (result != 0) {
 				g_774650++;
-				*(int *) ((char *) g_7e35c0 + g_774650 * 8) = loopId;
+				*(int *) ((char *) g_7e35c0 + g_774650 * 8) = a0;
 			}
 		}
 		if (g_774654 != 0 && result != 0) {
@@ -438,7 +438,7 @@ int __cdecl fcn_005373e0(int loopId, unsigned int flags)
 		fcn_005337f0();
 		fcn_00526b70();
 		fcn_0047c560(0, 0, 0);
-		(*(void (__stdcall **) (int, int)) ((int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0xa0))((int) g_6b5de0, (int) g_1052be0);
+		(*(void (__stdcall **) (int, int)) (*(int *) g_6b5de0 + 0xa0))(g_6b5de0, (int) g_1052be0);
 		fcn_0047cdf0();
 	} else if (g_7e2700 != 0) {
 		fcn_00472a50();

@@ -46,10 +46,7 @@ int __cdecl fcn_00405a50(int a, int b, int id, int value, int radius)
 		if (b + r < rowend) {
 			rowend = b + r;
 		}
-		row = b - r;
-		if (row < 1) {
-			row = 1;
-		}
+		row = b - r < 1 ? 1 : b - r;
 		for (; row <= rowend; row++) {
 			dy = abs(b - row);
 			w = r - dy;

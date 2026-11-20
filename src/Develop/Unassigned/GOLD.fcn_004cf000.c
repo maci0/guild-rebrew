@@ -52,7 +52,7 @@ void __cdecl fcn_004cf000(void)
 					continue;
 				}
 				c = *(unsigned char*) (e + 8);
-				if (c > 4 || c == 0) {
+				if (c > 4 || c <= 0) {
 					continue;
 				}
 				c -= 1;
@@ -62,8 +62,7 @@ void __cdecl fcn_004cf000(void)
 					continue;
 				}
 				d = fcn_004ce590(0x16e);
-				num = cut_RandMod((unsigned int) ((unsigned char) d[6] - (unsigned char) d[5]));
-				num += (unsigned char) d[5];
+				num = cut_RandMod((unsigned int) ((unsigned char) d[6] - (unsigned char) d[5])) + (unsigned char) d[5];
 				t = (int) ((double) num * *(float*) (e + 0x1c) * 0.01);
 				fcn_004c6880(*(int*) (e + 4), t, (int) *(unsigned char*) (e + 8));
 			}

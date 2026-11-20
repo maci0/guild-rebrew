@@ -15,17 +15,13 @@ __declspec(dllimport) int __stdcall MessageBoxA(void*, const char*, const char*,
 /* ADDRESS: GOLDTL 0x0042dac0 */
 int __cdecl txt_SaveTextFile(int a)
 {
-    char *p;
     char buf[0x104];
     void* f;
     int n, v;
     int *first, *last;
-    char *row;
 
-    row = txt_TextBanks[a];
-    p = row + 0x60;
 
-    sub_64d41a(buf, 0x679de4, (unsigned long) g_1052f00, (unsigned long) g_679888, (void*) row);
+    sub_64d41a(buf, 0x679de4, (unsigned long) g_1052f00, (unsigned long) g_679888, (void*) txt_TextBanks[a]);
     f = sub_64e2f9(buf, (unsigned long) g_6790b0);
     if (f == 0) {
         MessageBoxA(0, "Could not write ResourceFile!", "txt_SaveTextFile", 0x30);
@@ -34,14 +30,14 @@ int __cdecl txt_SaveTextFile(int a)
         return 0;
     }
     sub_64e48f(f, 0, 0);
-    first = (int*) p;
-    last = (int*) (p + 4);
+    first = (int*) (txt_TextBanks[a] + 0x60);
+    last = (int*) (txt_TextBanks[a] + 0x64);
     n = *last - *first + 1;
     sub_64ed28(&n, 4, 1, f);
     sub_64ed28(first, 4, 1, f);
     sub_64ed28(last, 4, 1, f);
     for (n = *first; n < *last + 1; n++) {
-        v = (int) txt_TextEntries[n] - *(int *)(p + 8);
+        v = (int) txt_TextEntries[n] - *(int *)(txt_TextBanks[a] + 0x68);
         sub_64ed28(&v, 4, 1, f);
     }
     for (n = *first; n < *last + 1; n++) {
@@ -51,8 +47,8 @@ int __cdecl txt_SaveTextFile(int a)
         sub_64ed28(g_11bb000 + n, 1, 1, f);
     }
 
-    sub_64ed28(p + 12, 4, 1, f);
-    sub_64ed28(*(void**) (p + 8), *(int *)(p + 12), 1, f);
+    sub_64ed28(txt_TextBanks[a] + 0x6c, 4, 1, f);
+    sub_64ed28(*(void**) (txt_TextBanks[a] + 0x68), *(int *)(txt_TextBanks[a] + 0x6c), 1, f);
     sub_64e1fd(f);
     return 1;
 }

@@ -40,9 +40,7 @@ void __cdecl fcn_004a7be0(void)
 			if (c > 1) {
 				duplicateRows++;
 			}
-			if (c > maxRowCount) {
-				maxRowCount = c;
-			}
+			maxRowCount = c > maxRowCount ? c : maxRowCount;
 			counts[g] = c;
 		}
 		for (g = 0; g < 4; g++) {

@@ -25,7 +25,7 @@ float __cdecl fcn_00451380(float* a, float* b)
 	d3_NormalizeVector(va);
 	d3_NormalizeVector(vb);
 	if (CompareVector3WithinTolerance(va, vb, 1.0e-7f)) {
-		return *(float*) 0x6628a8;
+		return 0.0f;
 	}
 	nvb[0] = -vb[0];
 	nvb[1] = -vb[1];
@@ -37,7 +37,7 @@ float __cdecl fcn_00451380(float* a, float* b)
 	cr[1] = vb[0] * va[2] - vb[2] * va[0];
 	cr[2] = vb[1] * va[0] - vb[0] * va[1];
 	cross = g_662d60 * cr[0] + g_662d64 * cr[1] + g_662d68 * cr[2];
-	if (cross > *(float*) 0x6628a8) {
+	if (cross > 0.0f) {
 		return (float) (-asin(vb[2] * va[2] + vb[1] * va[1] + vb[0] * va[0]));
 	}
 	return (float) (asin(vb[2] * va[2] + vb[1] * va[1] + vb[0] * va[0]) - *(double*) 0x662958);

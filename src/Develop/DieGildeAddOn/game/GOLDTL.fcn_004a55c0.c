@@ -3,7 +3,7 @@
 extern int g_77261c;
 
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_005cf720(unsigned int, unsigned int, void*, int);
+int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
 float __cdecl fcn_0050f980(unsigned short, unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x004a55c0 */
@@ -36,7 +36,7 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int requestedCoun
 	if ((minimumScore > 0.0 || maximumScore < 100.0) && minimumScore < maximumScore) {
 		flag = 1;
 	}
-	if (requestedCount <= idx) {
+	if (idx >= requestedCount) {
 		return 1;
 	}
 	do {

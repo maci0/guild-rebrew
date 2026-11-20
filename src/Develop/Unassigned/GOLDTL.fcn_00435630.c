@@ -18,11 +18,13 @@ void __cdecl fcn_00435630(char* o, char* name, char on)
 {
 	Slot* slots;
 	int i;
+	char *clock_base;
 
 	if (o == 0) {
 		return;
 	}
-	*(int*) (*(char**) (o + 0x320) + 0x40) = g_6b7fac;
+	clock_base = *(char**) (o + 0x320);
+	*(int*) (clock_base + 0x40) = g_6b7fac;
 	slots = (Slot*) (o + 0x390);
 	for (i = 0; i < 3; i++) {
 		if (slots[i].name != 0 && strcmp(name, slots[i].name) == 0) {

@@ -36,10 +36,8 @@ int __cdecl fcn_004d31d0(char* self, int centerColumn, int centerRow, int search
 					hi = *(int*) (map + 0x20) - 1;
 				}
 				for (c = lo; c <= hi; c++) {
-					if (*(int*) (*(char**) (map + 0x24)
-							+ (*(int*) (map + 0x20) * r + c) * 0x1c) != 0
-						&& *(int*) (*(char**) (map + 0x24)
-							+ (*(int*) (map + 0x20) * r + c) * 0x1c) != 0xd) {
+					int cell = *(int*) (*(char**) (map + 0x24) + (*(int*) (map + 0x20) * r + c) * 0x1c);
+					if (cell != 0 && cell != 0xd) {
 						f = fcn_004d3070(self, c, r,
 							(float) searchRadius * *(float*) (map + 0x10) * 2.0f);
 						if (f < best) {
