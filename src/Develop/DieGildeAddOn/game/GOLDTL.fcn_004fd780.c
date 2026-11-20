@@ -1,5 +1,5 @@
 int __cdecl fcn_004f4830(int, void*);
-double __cdecl gm_RandomFloat01(void);
+float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c5480(int, int, float);
 void __cdecl fcn_004c4510(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
@@ -23,7 +23,6 @@ void __cdecl fcn_004fd780(void)
 	unsigned char kind;
 	int count;
 	int arg;
-	float now;
 
 	if ((gm_GameTime % 4) != 0) {
 		return;
@@ -38,12 +37,10 @@ void __cdecl fcn_004fd780(void)
 				kind = *(unsigned char*) p;
 				if (kind < 10 && kind > 0 && kind != 6 && kind != 7
 					&& kind != 8 && *(unsigned short*) (p + 8) >= 0xc) {
-					now = gm_RandomFloat01();
-					if (now * *(float*) 0x6629d0 > *(float*) (p + 0x1ce)) {
+					if (gm_RandomFloat01() * *(float*) 0x6629d0 > *(float*) (p + 0x1ce)) {
 						count = (p[0xa] == 0);
-						now = gm_RandomFloat01();
 						fcn_004c5480(*(int*) (p + 2), 0x1d0,
-							now * 0.5f + 0.25f);
+							gm_RandomFloat01() * 0.5f + 0.25f);
 						g_773d48++;
 						fcn_004c4510(p - 2, *(int*) (p + 2));
 						cm_AppendPacketFieldDelta(1, 1, 0xc, &count);

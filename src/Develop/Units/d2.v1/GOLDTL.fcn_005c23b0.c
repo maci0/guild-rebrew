@@ -56,8 +56,7 @@ void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 	p = fcn_0050cf50(e, *(char*) (e + 0x5c));
 	v = fcn_0050b710(p, g_773d75);
 	d2_SetForm(win, 2);
-	ret = *(unsigned short*) (g_773d75 * 0x2f4 + 0x8680b4);
-	h = fcn_00472250(win, 2, io_AppendText(0x17c5, e, ret * 2 + 0x9a8));
+	h = fcn_00472250(win, 2, io_AppendText(0x17c5, e, *(unsigned short*) (g_773d75 * 0x2f4 + 0x8680b4) * 2 + 0x9a8));
 	fcn_00472380(h, (int) (v * 0.5), (int) (v * 1.5), v);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_005373e0(0, 0x677c7);

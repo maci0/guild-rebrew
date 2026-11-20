@@ -24,11 +24,9 @@ float __cdecl fcn_005025a0(int season, int slot)
 	float last;
 	float ratio;
 	double scale; float price;
-	int off;
 
-	off = season * 0x2a90 + slot * 0x80;
-	id = ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->objekt_id;
-	def = g_item_def_table + id * 0x41;
+	id = ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].objekt_id;
+	def = lpObjektePROT + id * 0x41;
 	store = fcn_00503d10(id);
 	if (store == 0 && season != g_773d75) {
 		e = gm_FindKind47ByOwner(season);
@@ -44,19 +42,19 @@ float __cdecl fcn_005025a0(int season, int slot)
 	if (e != 0) {
 		stock = (float) *(int*) (e + 0xe);
 	}
-	last = ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->price;
-	ratio = ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->price_factor / ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->basis
-		* ((stock > ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->basis && *def != 0x17)
-			? (stock < 1.0 ? ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->basis / 1.0
-				: ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->basis / stock)
+	last = ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].price;
+	ratio = ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].price_factor / ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].basis
+		* ((stock > ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].basis && *def != 0x17)
+			? (stock < 1.0 ? ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].basis / 1.0
+				: ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].basis / stock)
 			: flt_1);
 	scale = ratio > 0.25 ? ratio : 0.25;
 	if (scale >= g_664e78) {
 		scale = 5.0;
 	}
 	stock = scale;
-	price = ((double) eval_ObjektPreis2Credits(id, 100) * scale - (double) last) * 0.4f + ((MARKET_STOCK_SLOT*)(g_85ab90 + off))->price;
-	if (((MARKET_STOCK_SLOT*)(g_85ab90 + off))->price <= 0.0f) {
+	price = ((double) eval_ObjektPreis2Credits(id, 100) * scale - (double) last) * 0.4f + ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].price;
+	if (((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].price <= 0.0f) {
 		if (eval_ObjektPreis2Credits(id, 100) < 512.0f) {
 			return 512.0f;
 		}

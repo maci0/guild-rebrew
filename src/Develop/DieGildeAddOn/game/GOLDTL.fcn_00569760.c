@@ -31,6 +31,7 @@ void __cdecl fcn_00569760(char* eventTrack)
 	char* e;
 	char* rec;
 	char* pl;
+	int eid;
 	struct {
 		char msg[0xf8];
 		char text[0x200];
@@ -97,11 +98,12 @@ void __cdecl fcn_00569760(char* eventTrack)
 			f = 0.02f;
 		}
 		n = gm_WalkEntityChain(*(unsigned short*) e);
+		eid = *(int*) (e + 4);
 		*(unsigned char*) (b.msg + 4) = 0x3e;
-		*(int*) (b.msg + 8) = *(int*) (e + 4);
+		*(int*) (b.msg + 8) = eid;
 		*(int*) (b.msg + 0xc) = *(int*) (rec + 1);
 		*(unsigned char*) (b.msg + 0x36) = 9;
-		*(int*) (b.msg + 0x58) = *(int*) (e + 4);
+		*(int*) (b.msg + 0x58) = eid;
 		*(int*) (b.msg + 0x60) = (int) ((flt_665ecc < (float) n ? flt_665ecc : (float) n) * f);
 		*(int*) (b.msg + 0x5c) = ((ENTITY_RECORD*) g_7f4ca0)[
 		                                  *(unsigned short*) (eventTrack + 8)].entity_id;

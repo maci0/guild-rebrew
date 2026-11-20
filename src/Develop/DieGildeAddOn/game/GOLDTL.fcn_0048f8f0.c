@@ -64,14 +64,15 @@ int __cdecl fcn_0048f8f0(char* e, char* q, Blk24* b1, Blk24* b2)
 	}
 	{
 		F8 f;
+		int out;
 
 		f.mask = 0x7b4c4a0;
 		f.b = 0;
-		t = -1;
-		fcn_004a5e60(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 0, f, 0, 100.0f, &t);
+		out = -1;
+		fcn_004a5e60(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 0, f, 0, 100.0f, &out);
+		if (out == -1)
+			return 0;
+		b2->b = out;
 	}
-	if (t == -1)
-		return 0;
-	b2->b = t;
 	return 1;
 }

@@ -46,7 +46,7 @@ char* __cdecl he_CreateAnimatedEntityMarker(char* effectState, char* name, char*
 	FRAME546590 frames[2];
 	FLAGS546590 flags;
 	COLOR546590 color;
-	float pos[3];
+	float pos[4];
 	float lo;
 	float hi;
 	char* obj;
@@ -62,11 +62,10 @@ char* __cdecl he_CreateAnimatedEntityMarker(char* effectState, char* name, char*
 		obj[0x216] |= 3;
 		obj[0x217] &= 0xfe;
 		*(int*) (obj + 0x220) = 5;
-		color.r = 0x80;
-		color.g = 0;
-		color.f0 = 1;
+		*(int*) &color = 0;
 		color.f1 = 0;
-		color.x = 0;
+		color.f0 = 1;
+		color.r = 0x80;
 		fcn_0043a3f0(obj, *(char**) (obj + 0x1cc), color);
 		fcn_00414be0(obj, 0xc0, 0xa0, 0x80);
 		memset(&flags, 0, sizeof(flags));
@@ -82,7 +81,7 @@ char* __cdecl he_CreateAnimatedEntityMarker(char* effectState, char* name, char*
 		frames[1].pos[1] = 0.0f;
 		frames[1].pos[2] = 0.0f;
 		frames[1].rot[0] = 0.0f;
-		frames[1].rot[1] = 60.0f;
+		frames[1].rot[1] = 201.061935f;
 		frames[1].rot[2] = 0.0f;
 		d3_CreateObjectAnimation(obj, flags, 2, frames);
 		fcn_00546480(entity);

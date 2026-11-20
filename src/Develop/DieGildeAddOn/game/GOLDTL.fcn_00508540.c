@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-int __cdecl gm_RandomMod(int);
+unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508220(int, int*);
 int __cdecl fcn_004c4510(int*, int);
 int __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
@@ -14,6 +14,7 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 	int r;
 	int left;
 	int mode;
+	int flags;
 	int value;
 	int amount;
 
@@ -25,20 +26,20 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 	sel[1] = 3;
 	sel[2] = 4;
 	sel[3] = 5;
-	value = rec[0xb];
-	if ((value & 0xf0) == 0) {
+	flags = rec[0xb];
+	if ((flags & 0xf0) == 0) {
 		avail[0] = 1;
 	}
-	if ((value & 0xf00) == 0) {
+	if ((flags & 0xf00) == 0) {
 		avail[1] = 1;
 	}
-	if ((value & 0x3000) == 0) {
+	if ((flags & 0x3000) == 0) {
 		avail[2] = 1;
 	}
-	if ((value & 0x1c000) == 0) {
+	if ((flags & 0x1c000) == 0) {
 		avail[3] = 1;
 	}
-	r = gm_RandomMod(4) & 0xffff;
+	r = gm_RandomMod(4);
 	left = 4;
 	while (avail[r] != 1) {
 		left--;
@@ -54,7 +55,7 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 	if (fcn_00508220(mode, avail) == 0) {
 		return 0;
 	}
-	r = gm_RandomMod((int) ((double) (unsigned int) avail[2] * 0.5)) & 0xffff;
+	r = gm_RandomMod((int) ((double) (unsigned int) avail[2] * 0.5));
 	if (r == 0) {
 		return 0;
 	}

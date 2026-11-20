@@ -30,9 +30,6 @@ int __cdecl fcn_00501040(char* dir)
 	int idx;
 	char path[0x200];
 	int row;
-	char* def_row;
-	char* cat_p;
-	char* total;
 
 	src = &g_868118;
 	dst = &g_85ab84;
@@ -93,10 +90,7 @@ int __cdecl fcn_00501040(char* dir)
 			entry = *slot;
 			if (entry != 0xffff) {
 				idx = entry & 0x7fff;
-				def_row = (char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[idx] - idx;
-				cat_p = (char*) idx;
-				cat_p += (int) def_row;
-				category = *(char*) cat_p;
+				category = ((OBJECT_PROTOTYPE*)lpObjektePROT)[idx].kind;
 				if ((category == 2 || category == 6) && idx != 0xfd && (entry & 0x8000) != 0) {
 					count++;
 				}
@@ -104,9 +98,8 @@ int __cdecl fcn_00501040(char* dir)
 			slot++;
 			left--;
 		} while (left != 0);
-		total = (char*)&((BUILDING_PROTOTYPE*)(*(char**)&lpGebaeudePROT))[row].count_021;
+		((BUILDING_PROTOTYPE*)(*(char**)&lpGebaeudePROT))[row].count_021 += (char) count;
 		row++;
-		*total += (char) count;
 	} while (row < 0x58);
 	srv_SeedRandomWithTime();
 	return 0;

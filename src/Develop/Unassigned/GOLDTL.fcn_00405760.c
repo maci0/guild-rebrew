@@ -14,6 +14,8 @@ void __cdecl fcn_00405760(unsigned char* e)
 	float v[4];
 	float x;
 	float y;
+	float sy;
+	float sz;
 	char* p;
 
 	if (e[0x110] == 0) {
@@ -24,11 +26,11 @@ void __cdecl fcn_00405760(unsigned char* e)
 	y = *(float*) (p + 0x50);
 	*(int*) &v[2] = *(int*) (p + 0x54);
 	v[0] = x + *(float*) (p + 0x78);
-	v[1] = y + *(float*) (p + 0x7c);
-	v[2] += *(float*) (p + 0x80);
+	sy = y + *(float*) (p + 0x7c);
+	sz = v[2] + *(float*) (p + 0x80);
 	v[0] = *(float*) (e + 0x114) - v[0];
-	v[1] = *(float*) (e + 0x118) - v[1];
-	v[2] = *(float*) (e + 0x11c) - v[2];
+	v[1] = *(float*) (e + 0x118) - sy;
+	v[2] = *(float*) (e + 0x11c) - sz;
 	d3_NormalizeVector(v);
 	p = *(char**) (e + 0x34);
 	v[0] *= 0.4f;

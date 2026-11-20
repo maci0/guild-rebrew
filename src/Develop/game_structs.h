@@ -38,7 +38,7 @@ typedef struct LinkedNode {
 
 /* --- Office slot table entry (0x18 bytes) --- */
 // SIZE 0x18
-typedef struct {
+typedef struct OFFICE_SLOT {
 	unsigned char id;        /* +0x00 */
 	unsigned char pad1[3];
 	int mplayerid;           /* +0x04 */

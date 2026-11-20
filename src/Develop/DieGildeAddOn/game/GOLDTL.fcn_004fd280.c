@@ -73,13 +73,11 @@ void __cdecl fcn_004fd280(int flag)
 			}
 		}
 	}
-	p = lpGebaeudeINST;
 	i = 0;
 	do {
-		*(int*) (p + i + 0x4d) = 0;
-		p = lpGebaeudeINST;
-		if (*(unsigned char*) (p + i) >= 0xb && *(unsigned char*) (p + i) <= 0xd) {
-			*(int*) (p + i + 0x69) = 0;
+		*(int*) (lpGebaeudeINST + i + 0x4d) = 0;
+		if (*(unsigned char*) (lpGebaeudeINST + i) >= 0xb && *(unsigned char*) (lpGebaeudeINST + i) <= 0xd) {
+			*(int*) (lpGebaeudeINST + i + 0x69) = 0;
 		}
 		i += 0xa9;
 	} while (i < 0xa900);

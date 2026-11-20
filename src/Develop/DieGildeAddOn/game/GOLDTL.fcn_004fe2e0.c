@@ -48,8 +48,7 @@ int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 		}
 	}
 	if (p == 0 && q == 0) {
-		fcn_004432d0(savedContext, 1);
-		return *(int*) (a0 + 0x184);
+		goto done;
 	}
 	*(int*) &opt[0] = p[0];
 	*(int*) &opt[1] = p[1];
@@ -71,6 +70,7 @@ have:
 			fcn_004fdfe0(a0);
 		}
 	}
+done:
 	fcn_004432d0(savedContext, 1);
 	return *(int*) (a0 + 0x184);
 }

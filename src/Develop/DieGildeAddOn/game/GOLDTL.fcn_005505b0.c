@@ -37,10 +37,10 @@ void __cdecl fcn_005505b0(int a)
 		return;
 	}
 	io_FormatTextBuffer(buf, 0x10c2, g_868080 + (unsigned char) g_773d75 * 0x2f4, (gm_RandomMod(3) & 0xffff) + 0x10c4);
+	id = 0;
 	q = (char*) 0x7f4ca2;
 	do {
 		p = q - 2;
-		id = 0;
 		if (*(short*) p != -1 && *(unsigned char*) (p + 8) >= 2
 		    && (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7 || *(char*) (p + 2) == 5)) {
 			if (fcn_004a5e60((unsigned short*) p, 4, 0x400080, 0, 0.0f, 100.0f, &found)) {
@@ -60,6 +60,7 @@ void __cdecl fcn_005505b0(int a)
 			}
 		}
 		q += 0x21c;
+		id = 0;
 	} while ((int) q < 0x85a0a2);
 	he_FreeAction((void*) a);
 }

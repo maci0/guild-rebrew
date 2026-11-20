@@ -1,4 +1,5 @@
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl m_alloc(int size, char* tag);
 char* __cdecl sbs_FindSet(int id);
@@ -47,8 +48,8 @@ unsigned int __cdecl fcn_00424270(unsigned int a0, unsigned int sampleName)
 		strncpy(*(char**) (v3 + 0x104), (char*) sampleName, 0x100);
 		*(int*) (*(char**) (v3 + 0x104) + 0x100) = fcn_00423920(sampleName);
 		*(int*) (v2 + 0x34) += *(int*) (*(char**) (v3 + 0x104) + 0x100);
-		*(int*) (*(char**) 0x6b7d68 + 0x34) += *(int*) (*(char**) (v3 + 0x104) + 0x100);
-		*(int*) 0x6b7d6c = *(int*) 0x6b7d6c + 1;
+		*(int*) (sbs_BankManager + 0x34) += *(int*) (*(char**) (v3 + 0x104) + 0x100);
+		g_6b7d6c++;
 		return 0;
 		}
 	} else {
@@ -78,8 +79,8 @@ unsigned int __cdecl fcn_00424270(unsigned int a0, unsigned int sampleName)
 		strncpy(*(char**) (v2 + 0x38), (char*) sampleName, 0x100);
 		*(int*) (*(char**) (v2 + 0x38) + 0x100) = fcn_00423920(sampleName);
 		*(int*) (v2 + 0x34) += *(int*) (*(char**) (v2 + 0x38) + 0x100);
-		*(int*) (*(char**) 0x6b7d68 + 0x34) += *(int*) (*(char**) (v2 + 0x38) + 0x100);
-		*(int*) 0x6b7d6c = *(int*) 0x6b7d6c + 1;
+		*(int*) (sbs_BankManager + 0x34) += *(int*) (*(char**) (v2 + 0x38) + 0x100);
+		g_6b7d6c++;
 		return 0;
 		}
 	}

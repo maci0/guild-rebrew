@@ -72,11 +72,10 @@ char __cdecl fcn_00417870(char* a0, int timeNow)
 	if (!(*(int*) (a0 + 0x20) & 1) && count >= *(int*) (a0 + 0xd8))
 		return 0;
 	if ((*(int*) (a0 + 0x20) & 1) != 0 && count > half) {
-		base = *(char**) (a0 + 0x28);
-		for (i = 0; i < *(int*) (a0 + 0xd8); i++) {
+		rec = (Rec*) *(char**) (a0 + 0x28);
+		for (i = 0; i < *(int*) (a0 + 0xd8); i++, rec++) {
 			if (i >= half)
 				break;
-			rec = (Rec*) base + i;
 			if (!(rec->fl & 1)) {
 				rec->fl |= 1;
 				rec->nx = (float) fcn_0064d3f8() * 3.0518509447574615e-05f - g_6628cc;

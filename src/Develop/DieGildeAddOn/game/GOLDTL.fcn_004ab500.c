@@ -25,6 +25,7 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 	int v6;
 	int v7;
 	int v1;
+	unsigned int* v4;
 
 	v5 = gm_CheckStatLevel((int) *entity, 0xe);
 	v9[0] = 0xffff;
@@ -33,6 +34,7 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 	v9[3] = 0xffff;
 	v12 = 0;
 	v6 = 0;
+	v4 = 0;
 	v10[0] = 0;
 	v10[1] = 0;
 	v10[2] = 0;
@@ -61,14 +63,13 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 			v11 += 0xa9;
 		} while (--a0);
 		if (v12 != 0 && v6 != 0) {
-			unsigned int* v4 = (unsigned int*) 0xf00500;
+			v4 = (unsigned int*) 0xf00500;
 
 			if (fcn_004a5340((int*) entity, 1, (int*) &v4, 0,
 			                 (float) (gm_RandomMod(0x20) & 0xffff) + 25.0f,
 			                 (unsigned short*) &v8) != 0) {
-				v1 = *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[v8 & 0xffff]) + 0x166);
 				a2 = (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[v8 & 0xffff]));
-				v5 = fcn_004e99c0((unsigned char) v1) / 3 + 2;
+				v5 = fcn_004e99c0(*(unsigned char*) (a2 + 0x166)) / 3 + 2;
 				if (v5 + 2 <= *(int*) ((char*) entity + 0x194) &&
 				    (a0 = fcn_004a5c40((int*) entity, 4, (int) v4, 25.0f,
 				                       75.0f, v6, v9)) != 0) {

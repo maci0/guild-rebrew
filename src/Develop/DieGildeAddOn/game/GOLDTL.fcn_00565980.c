@@ -7,7 +7,7 @@ char* __cdecl fcn_004bcc50(int a, int b);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d);
 void __cdecl fcn_00529160(char* obj, int a, int id, int b);
-int __cdecl fcn_004c5aa0(int a, char b, char c, int d, char e, int f);
+int __cdecl fcn_004c5aa0(int a, char b, char c, short d, char e, int f);
 void __cdecl he_FreeAction(char* obj);
 
 /* ADDRESS: GOLDTL 0x00565980 */

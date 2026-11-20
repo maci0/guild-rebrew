@@ -83,12 +83,12 @@ void __cdecl fcn_00469c40(int a1, int a2, int index)
 		e->clip_right = g_1040494;
 	} else {
 		e->clip_top = a2;
-		e->clip_bottom = e->height + a2;
+		e->clip_bottom = a2 + e->height;
 		e->clip_left = a1;
-		e->clip_right = e->width + a1;
+		e->clip_right = a1 + e->width;
 	}
-	if ((*(int*)&e->parent) != 0) {
-		r = (Rect469 *) (*(int*)&e->parent);
+	if (e->parent != 0) {
+		r = (Rect469 *) e->parent;
 		t = (r->y1 > e->clip_top) ? r->y1 : e->clip_top;
 
 
@@ -127,9 +127,9 @@ void __cdecl fcn_00469c40(int a1, int a2, int index)
 		*(unsigned short *) ((char*) g_100e7a0 + 0x10 + e->value_088 * 20) = (unsigned short) e->y;
 		break;
 	case 0x40:
+		xo = g_1015f40[e->value_088].x;
+		yo = g_1015f40[e->value_088].y;
 		w = (Win2_469 *) g_1015f40 + e->value_088;
-		xo = w->x;
-		yo = w->y;
 		w->x = a1;
 		w->y = a2;
 		if (e->clip_right > g_1040494) {
@@ -139,10 +139,10 @@ void __cdecl fcn_00469c40(int a1, int a2, int index)
 			e->clip_bottom = d2_ScreenHeight;
 		}
 		for (i = 0; i < w->n; i++) {
+			D2_CONTROL_TL *c;
 			idx = w->ids[i];
-			fcn_00469c40(((D2_CONTROL_TL *) g_1015ea0 + idx)->x - xo + w->x,
-				     ((D2_CONTROL_TL *) g_1015ea0 + idx)->y - yo + w->y,
-				     idx);
+			c = (D2_CONTROL_TL *) g_1015ea0 + idx;
+			fcn_00469c40(c->x - xo + w->x, c->y - yo + w->y, idx);
 		}
 		break;
 	case 0x41:
