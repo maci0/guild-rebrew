@@ -15,7 +15,7 @@ typedef struct Obj {
 // SIZE 0x2bc
 
 #include "client_types.h"
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 extern int g_14ce86c;
 
 char* __cdecl d3_FindTextureByName(char* name);

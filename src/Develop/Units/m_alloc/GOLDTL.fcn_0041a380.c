@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "g_6b5dd0.h"
-extern Adapter* g_6b5dd0;
+extern DISPLAY_ADAPTER_INFO* g_6b5dd0;
 extern void* g_6b5ddc;
 extern unsigned int g_6b5de8;
 
@@ -61,7 +61,7 @@ int __cdecl fcn_0041a380(unsigned int minWidth, unsigned int minHeight, unsigned
 	while (ADAPTERCOUNT > 0)
 		fcn_0041a2c0(0);
 	ADAPTERCOUNT = (unsigned int) ((ADAPTERCOUNTFN) VTBL(0x10))((void*) D3D);
-	g_6b5dd0 = (Adapter*)m_alloc(ADAPTERCOUNT * 0x508, "dd:AdapterInfo");
+	g_6b5dd0 = (DISPLAY_ADAPTER_INFO*)m_alloc(ADAPTERCOUNT * 0x508, "dd:AdapterInfo");
 	i = 0;
 	if (i < ADAPTERCOUNT) {
 	offset = 0;

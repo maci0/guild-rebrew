@@ -4,7 +4,7 @@ extern char* g_1043370;
 extern int g_772900;
 extern int g_6816d8;
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern IdSlot10058a0 g_10058a0[8];
+extern D2_RADIO_SLOT g_10058a0[8];
 
 typedef struct MapPos {
 	int f0;

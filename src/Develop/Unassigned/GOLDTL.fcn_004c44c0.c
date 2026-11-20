@@ -10,7 +10,7 @@ typedef struct {
 extern unsigned int g_100581c;
 extern unsigned int g_aed204;
 #include "client_types.h"
-extern cell10_fb5760 g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 
 int __cdecl fcn_004c44c0(void)
 {

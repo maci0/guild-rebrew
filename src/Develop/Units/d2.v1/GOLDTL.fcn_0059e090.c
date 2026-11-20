@@ -41,7 +41,7 @@ extern int d2_CurrentWindowId;
 extern int g_14a566c;
 extern volatile int g_6b7fac;
 extern Win_1015f40 g_1015f40[0x60];
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char g_868060[];
 extern int g_100f1dc;

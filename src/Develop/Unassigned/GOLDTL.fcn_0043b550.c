@@ -1,5 +1,5 @@
 #include "g_67a470.h"
-Named24 g_67a470[8] = {
+SCENE_EVENT_ENTRY g_67a470[8] = {
     { "NONE", 0 },
     { "TEST", 1 },
     { "ZOOM_IN_OBJECT", 2 },
@@ -9,7 +9,7 @@ Named24 g_67a470[8] = {
     { "SCENE_EXIT", 5 },
     { "SCENE_SUPERVISOR", 6 },
 };
-extern Named24 g_67a470[8];
+extern SCENE_EVENT_ENTRY g_67a470[8];
 
 /* ADDRESS: GOLD 0x0043e710 */
 /* ADDRESS: GOLDTL 0x0043b550 */

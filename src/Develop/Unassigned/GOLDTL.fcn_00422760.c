@@ -8,7 +8,7 @@ typedef struct {
 } T422760;
 
 #include "client_types.h"
-extern Voice_14cbbe0 g_14cbbe0;
+extern SOUND_VOICE g_14cbbe0;
 extern char* g_6b7e88;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 

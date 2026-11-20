@@ -10,7 +10,7 @@
 #include "memtrack.h"
 extern int g_6b6f78;
 extern int g_6b6f64;
-extern MemBlock* g_6b6f80;
+extern TRACKED_MEMORY_BLOCK* g_6b6f80;
 extern int g_6b6f6c;
 extern int g_6b6f68;
 #endif
@@ -513,7 +513,7 @@ void* __cdecl m_alloc(unsigned int size, const char* file_and_line);
 #ifndef REBREW_SERVER
 extern int g_6b6f70;
 extern int g_6b6f74;
-extern struct GroupNode g_14cc5c0;
+extern struct ALLOC_GROUP_NODE g_14cc5c0;
 #define g_array_ptr g_6b6f80
 #define m_TrackedCapacity g_6b6f64
 #define m_AllocationBalance g_6b6f78
@@ -528,8 +528,8 @@ void* __cdecl m_alloc(unsigned int size, const char* tag)
 {
 	char name[0x100];
 	char buf[0x10];
-	struct GroupNode* node;
-	struct GroupNode* prev;
+	struct ALLOC_GROUP_NODE* node;
+	struct ALLOC_GROUP_NODE* prev;
 	int taglen;
 	int i;
 	void* mem;
@@ -549,7 +549,7 @@ void* __cdecl m_alloc(unsigned int size, const char* tag)
 		return 0;
 	}
 	m_AllocationBalance++;
-	node = (struct GroupNode*) &g_alloc_root_name;
+	node = (struct ALLOC_GROUP_NODE*) &g_alloc_root_name;
 	if (tag != 0) {
 		p = strchr(tag, ':');
 		if (p != 0) {
@@ -560,7 +560,7 @@ void* __cdecl m_alloc(unsigned int size, const char* tag)
 			}
 			strncpy(buf, tag, taglen);
 			buf[taglen] = 0;
-			node = (struct GroupNode*) &g_alloc_root_name;
+			node = (struct ALLOC_GROUP_NODE*) &g_alloc_root_name;
 			while (node != 0) {
 				if (strcmp(buf, node->name) == 0) {
 					break;
@@ -569,7 +569,7 @@ void* __cdecl m_alloc(unsigned int size, const char* tag)
 				node = node->next;
 			}
 			if (node == 0) {
-				node = (struct GroupNode*) malloc(0x28);
+				node = (struct ALLOC_GROUP_NODE*) malloc(0x28);
 				strcpy(node->name, buf);
 				/* The reference emits these six stores in the order
 				 * 0x14,0x10,0x1c,0x18,0x20,0x24 (0x100066bc-0x100066cb)
@@ -660,7 +660,7 @@ void* __cdecl m_alloc(unsigned int size, const char* tag)
 		*(void**) (slot + 8) = mem;
 		*(const char**) (slot + 4) = p;
 		*(unsigned int*) (slot + 0xc) = size;
-		*(struct GroupNode**) slot = node;
+		*(struct ALLOC_GROUP_NODE**) slot = node;
 		g_stat1 += (int) size;
 		if (g_stat1 > m_PeakBytes) {
 			m_PeakBytes = g_stat1;
@@ -796,7 +796,7 @@ void __cdecl m_FreeTracked(void* ptr)
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x17a, "Memory-Underflow Error");
 	}
 #else
-	MemBlock* s;
+	TRACKED_MEMORY_BLOCK* s;
 	int i;
 	int size;
 
@@ -918,7 +918,7 @@ extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
 #ifndef REBREW_SERVER
 extern int g_6b6f70;
 extern int g_6b6f74;
-extern struct GroupNode g_14cc5c0;
+extern struct ALLOC_GROUP_NODE g_14cc5c0;
 #define g_stat1 g_6b6f68
 #define m_AllocatedBlockCount g_6b6f6c
 #define m_PeakBytes g_6b6f70
@@ -932,7 +932,7 @@ void __cdecl m_ReportGroupInfo(const char* toggle)
 {
 	char buf[0x400];
 	char buf2[0x10];
-	struct GroupNode* node;
+	struct ALLOC_GROUP_NODE* node;
 	char* slot;
 	int i;
 	char match;
@@ -950,7 +950,7 @@ void __cdecl m_ReportGroupInfo(const char* toggle)
 #ifdef REBREW_SERVER
 	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1b6, "---g-r-o-u-p---i-n-f-o-s---", 1);
 #endif
-	node = (struct GroupNode*) &g_alloc_root_name;
+	node = (struct ALLOC_GROUP_NODE*) &g_alloc_root_name;
 	while (node != 0) {
 		if (toggle != 0 && strstr(node->name, toggle) != 0) {
 			match = 1;
@@ -977,7 +977,7 @@ void __cdecl m_ReportGroupInfo(const char* toggle)
 #endif
 					if (match != 0) {
 						for (i = 0, slot = (char*) g_array_ptr; i < m_TrackedCapacity; i++, slot += 0x10) {
-							if (*(char**) (slot + 8) != 0 && *(struct GroupNode**) slot == node) {
+							if (*(char**) (slot + 8) != 0 && *(struct ALLOC_GROUP_NODE**) slot == node) {
 								sprintf(buf, "{%s} w/ %i bytes (%ik).", *(char**) (slot + 4), *(int*) (slot + 0xc), *(int*) (slot + 0xc) >> 10);
 #ifdef REBREW_SERVER
 								LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1d5, buf, 1);

@@ -35,12 +35,12 @@ typedef struct Slot {
 
 // SIZE 0x3cc
 #include "client_types.h"
-typedef Obj_1038140 Obj;
+typedef D2_FORM_RECORD Obj;
 // SIZE 0x2bc
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00472100 */

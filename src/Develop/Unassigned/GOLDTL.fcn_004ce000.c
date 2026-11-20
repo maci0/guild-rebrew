@@ -6,7 +6,7 @@
 extern int g_772e88;
 extern int g_772e8c;
 extern int g_9ba9f4;
-extern logrec g_9ba3a0[15];
+extern TEXT_LOG_RECORD g_9ba3a0[15];
 
 char* __cdecl fcn_004ce000(void)
 {

@@ -1,8 +1,8 @@
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 #include "client_types.h"
 
-extern Sample_99ec20 g_99ec20[16];
-extern Cell_99ef80 g_99ef80[9][8];
+extern GRAPH_SAMPLE g_99ec20[16];
+extern CRIME_GRID_CELL g_99ef80[9][8];
 
 /* ADDRESS: GOLDTL 0x005246e0 */
 unsigned int __cdecl fcn_005246e0(unsigned int stream)

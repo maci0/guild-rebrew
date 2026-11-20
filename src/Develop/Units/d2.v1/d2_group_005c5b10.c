@@ -74,7 +74,7 @@ typedef struct {
 	int v;
 } Pair;
 
-extern Btn_776c60 g_776c60[6];
+extern D2_ITEM_BUTTON g_776c60[6];
 extern char* g_775318;
 extern char* g_77255c;
 extern int g_10161cc[];

@@ -14,12 +14,12 @@ void __cdecl ahm_ShufflePlayerPrototypes(void);
 #include "g_772f90.h"
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern Draw772* g_772fdc;
+extern ALCHEMY_PLAYER_PROTOTYPE* g_772fdc;
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
 extern int g_772fe0;
-extern Rec772fe4* g_772fe4;
+extern ALCHEMY_RECIPE_PROTOTYPE* g_772fe4;
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_004ec9a0(int p);
@@ -51,7 +51,7 @@ void __cdecl ahm_ShufflePlayerPrototypes(void)
 	int i;
 	int a;
 	int b;
-	Draw772 tmp;
+	ALCHEMY_PLAYER_PROTOTYPE tmp;
 
 	n = ahm_PlayerPrototypeCount * 2;
 	for (i = 0; i < n; i++) {
@@ -67,7 +67,7 @@ void __cdecl ahm_ShufflePlayerPrototypes(void)
 
 /* ADDRESS: GOLD 0x004eaea0 */
 /* ADDRESS: GOLDTL 0x004ecc20 */
-Rec772fe4* __cdecl fcn_004ecc20(int p)
+ALCHEMY_RECIPE_PROTOTYPE* __cdecl fcn_004ecc20(int p)
 {
 	int step;
 	int idx;

@@ -6,7 +6,7 @@
 
 #include "rgb.h"
 
-extern Rgb g_100f1a0;
+extern RGB_COLOR g_100f1a0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1015da0[];
 extern char g_696528[];

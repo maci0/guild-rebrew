@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 
 /* ADDRESS: GOLDTL 0x00472830 */
 int __cdecl fcn_00472830(int k, int j)

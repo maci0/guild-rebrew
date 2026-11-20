@@ -13,7 +13,7 @@ typedef struct Obj {
 // SIZE 0x2bc
 
 #include "client_types.h"
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 
 void __cdecl fcn_00471340(int k);
 void __cdecl fcn_004713b0(int k, char* a, char* b);

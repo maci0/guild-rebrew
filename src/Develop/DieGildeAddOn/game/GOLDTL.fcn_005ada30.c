@@ -4,7 +4,7 @@
 #pragma intrinsic(memset)
 
 #include "client_types.h"
-typedef Group_102cbc4 Group;
+typedef D2_RADIO_GROUP Group;
 // SIZE 0x8c
 
 // SIZE 0x2f4
@@ -16,7 +16,7 @@ typedef struct {
 	unsigned char* obj;
 } Slot5ada;
 
-extern Group_102cbc4 g_102cbc4[8];
+extern D2_RADIO_GROUP g_102cbc4[8];
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"

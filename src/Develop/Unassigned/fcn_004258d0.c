@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-typedef Voice_14cbbe0 Voice;
+typedef SOUND_VOICE Voice;
 
 extern char* g_6b7e88;
 #include "Develop/DieGildeAddOn/game/game_data.h"

@@ -13,14 +13,14 @@ typedef struct node99 {
 #pragma pack(pop)
 /* SIZE 0x99 */
 
-typedef cell10_fb5760 cell10;
+typedef COMMAND_STATUS_SLOT cell10;
 /* SIZE 0xa */
 
 extern int g_68a9dc;
 extern char g_9bade0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1005780;
-extern cell10_fb5760 g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 extern char* g_14cbca4;
 extern volatile int g_6b7fac;
 extern unsigned int g_aecde4;

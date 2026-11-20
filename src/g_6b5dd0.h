@@ -7,7 +7,7 @@ typedef struct {
 	unsigned long guid[4];
 	char pad428[0x504 - 0x428];
 	void* data;
-} Adapter;
+} DISPLAY_ADAPTER_INFO;
 // SIZE 0x508
 
 #endif

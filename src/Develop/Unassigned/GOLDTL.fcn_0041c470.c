@@ -2,7 +2,7 @@
 #include <string.h>
 #include "octree.h"
 
-extern OctNode* g_6b6f20[6];
+extern COLOR_OCTREE_NODE* g_6b6f20[6];
 extern unsigned char g_6b6008[3][0x100];
 extern unsigned short g_6b5e08[256];
 extern unsigned short g_6b6b18[256];

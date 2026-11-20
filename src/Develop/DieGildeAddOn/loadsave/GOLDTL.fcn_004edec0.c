@@ -9,7 +9,7 @@ extern int g_772f80;
 extern int g_772f84;
 extern int g_772f88;
 extern int g_772f8c;
-extern Slot772f90 g_772f90[3];
+extern ALCHEMY_DRAW_SLOT g_772f90[3];
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 void __cdecl fcn_004ecaa0(int v);

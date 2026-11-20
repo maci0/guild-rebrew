@@ -3,13 +3,13 @@
 
 #include "octree.h"
 
-extern OctNode* g_6b6f20[6];
+extern COLOR_OCTREE_NODE* g_6b6f20[6];
 extern int g_6b6308;
 void* __cdecl fcn_0064de9d(int n, int size);
 
 int __cdecl fcn_0041be70(void)
 {
-	OctNode** p;
+	COLOR_OCTREE_NODE** p;
 
 	g_6b6f20[0] = fcn_0064de9d(0x18, 1);
 	g_6b6f20[1] = fcn_0064de9d(0x18, 8);

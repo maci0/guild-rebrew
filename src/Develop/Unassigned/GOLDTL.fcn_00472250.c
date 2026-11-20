@@ -13,11 +13,11 @@
 
 // SIZE 0x3cc
 #include "client_types.h"
-typedef Obj_1038140 Obj;
+typedef D2_FORM_RECORD Obj;
 // SIZE 0x2bc
 
 
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 
 /* ADDRESS: GOLDTL 0x00472250 */
 int __cdecl fcn_00472250(int k, int i, int j)

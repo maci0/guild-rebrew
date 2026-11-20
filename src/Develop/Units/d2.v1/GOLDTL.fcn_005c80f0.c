@@ -4,7 +4,7 @@
 #pragma intrinsic(memset)
 
 #include "client_types.h"
-typedef Group_102cbc4 Group;
+typedef D2_RADIO_GROUP Group;
 // SIZE 0x8c
 
 // SIZE 0x21c
@@ -21,7 +21,7 @@ typedef struct {
 #define HOUSES 768
 #define DISTRICT0 0x59a
 
-extern Group_102cbc4 g_102cbc4[8];
+extern D2_RADIO_GROUP g_102cbc4[8];
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;

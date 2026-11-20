@@ -5,15 +5,15 @@ typedef struct {
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;
-} Rgb;
+} RGB_COLOR;
 
 extern int g_67a370;
-void __cdecl d3_VisitSceneObjects(int a, char* e, int mask, void (__cdecl* cb)(void), Rgb* c);
+void __cdecl d3_VisitSceneObjects(int a, char* e, int mask, void (__cdecl* cb)(void), RGB_COLOR* c);
 void __cdecl fcn_00414c70(void);
 
 void __cdecl d3_SetSubtreeColor(char* e, unsigned char r, unsigned char g, unsigned char b)
 {
-	Rgb c;
+	RGB_COLOR c;
 	int saved;
 
 	c.r = r;

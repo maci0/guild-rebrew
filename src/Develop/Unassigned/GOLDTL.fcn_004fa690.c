@@ -9,8 +9,8 @@
 extern Rec24_99f5a0 g_99f5a0;
 extern char g_99f6a0[];
 extern char g_99f620[];
-extern Cell_99ef80 g_99ef80[9][8];
-extern Sample_99ec20 g_99ec20[16];
+extern CRIME_GRID_CELL g_99ef80[9][8];
+extern GRAPH_SAMPLE g_99ec20[16];
 extern char g_99f5e0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 

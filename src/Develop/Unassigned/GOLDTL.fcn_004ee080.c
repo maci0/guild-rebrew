@@ -3,9 +3,9 @@
 
 #include "g_772f90.h"
 
-extern Slot772f90 g_772f90[3];
+extern ALCHEMY_DRAW_SLOT g_772f90[3];
 
-void __cdecl fcn_004ee080(Slot772f90* p)
+void __cdecl fcn_004ee080(ALCHEMY_DRAW_SLOT* p)
 {
 	int i;
 

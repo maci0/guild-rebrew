@@ -5,6 +5,6 @@
 typedef struct {
 	int id;
 	int b;
-} IdSlot10058a0;
+} D2_RADIO_SLOT;
 
 #endif

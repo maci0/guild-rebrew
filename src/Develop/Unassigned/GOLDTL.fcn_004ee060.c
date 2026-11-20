@@ -1,6 +1,6 @@
 #include "g_772f90.h"
-extern Slot772f90 g_772f90[3];
-extern Slot772f90 g_772f90[3];
+extern ALCHEMY_DRAW_SLOT g_772f90[3];
+extern ALCHEMY_DRAW_SLOT g_772f90[3];
 
 /* ADDRESS: GOLD 0x004ec2d0 */
 /* ADDRESS: GOLDTL 0x004ee060 */

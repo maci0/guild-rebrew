@@ -7,7 +7,7 @@ extern int __cdecl fcn_00475f80(void* o);
 /* ADDRESS: GOLDTL 0x00471e30 */
 void __cdecl fcn_00471e30(int dialogIndex)
 {
-	Obj_1038140* base;
+	D2_FORM_RECORD* base;
 	int i;
 	int* p;
 	int* items;

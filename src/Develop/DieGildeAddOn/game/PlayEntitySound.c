@@ -1,12 +1,12 @@
 #include "../../../client_sound.h"
 
 #include "../../../client_lighting.h"
-Voice_14cbbe0* __cdecl fcn_00422460(int a, int b);
+SOUND_VOICE* __cdecl fcn_00422460(int a, int b);
 
 void __cdecl PlayEntitySound(char* cmd)
 {
     char* e;
-    Voice_14cbbe0* r;
+    SOUND_VOICE* r;
 
     e = *(char**)(cmd + 0x14);
     r = fcn_00422460(0, (int)(cmd + 0x130));

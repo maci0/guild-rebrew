@@ -5,14 +5,14 @@
  * Keep this layout private to memory tracking; unrelated translation units
  * do not use it. */
 // SIZE 0x28
-struct GroupNode {
+struct ALLOC_GROUP_NODE {
 	char name[0x10];
 	int size_total;   /* 0x10 */
 	int count_total;  /* 0x14 */
 	int size_max;     /* 0x18 */
 	int count_max;    /* 0x1c */
 	int count;        /* 0x20 */
-	struct GroupNode* next; /* 0x24 */
+	struct ALLOC_GROUP_NODE* next; /* 0x24 */
 };
 
 #endif /* GROUP_NODE_H */

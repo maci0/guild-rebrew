@@ -4,8 +4,8 @@
 extern char* g_1015ea0;
 extern void** g_772540;
 extern int g_772528;
-extern Fld_102d140* tp_d2_SelectedControl;
-extern Fld_102d140 g_102d140[];
+extern UI_FIELD* tp_d2_SelectedControl;
+extern UI_FIELD g_102d140[];
 
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00475f80(void* surf);
@@ -23,7 +23,7 @@ void __cdecl d2_DestroyElement(int id)
 {
 	char* e;
 	char* list;
-	Fld_102d140* f;
+	UI_FIELD* f;
 	int n;
 	int i;
 	int state;
@@ -53,7 +53,7 @@ void __cdecl d2_DestroyElement(int id)
 		if (f->def != -1) {
 			d2_SubRefcount(f->def);
 		}
-		memset(f, 0, sizeof(Fld_102d140));
+		memset(f, 0, sizeof(UI_FIELD));
 		break;
 	case 9:
 		list = *(char**) (&(*(D2_CONTROL_TL*) e).parent);

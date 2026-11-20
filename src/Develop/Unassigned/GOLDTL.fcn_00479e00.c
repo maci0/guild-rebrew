@@ -1,7 +1,7 @@
 #include "rgb.h"
 
 extern int g_100f1a8;
-extern Rgb g_100f1b8;
+extern RGB_COLOR g_100f1b8;
 
 int __cdecl d2_PackColorForPixelFormat(unsigned char r, unsigned char g, unsigned char b);
 

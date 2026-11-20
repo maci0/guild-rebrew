@@ -42,13 +42,13 @@ extern int g_67dabc;
 extern int g_67dab8;
 extern int g_77260c;
 extern int g_772610;
-extern Rgb g_100f1a0;
+extern RGB_COLOR g_100f1a0;
 
 Tiles* __cdecl fcn_0047abd0(int, int);
 Tex* __cdecl fcn_004770a0(TexDesc* d, int fmt);
 void __cdecl fcn_00476620(int, int, int, int, Img*, int, int, Tex*);
 int __cdecl fcn_00475fd0(Tex*);
-void __cdecl fcn_00476a50(int, int, Tex*, Rgb*);
+void __cdecl fcn_00476a50(int, int, Tex*, RGB_COLOR*);
 void __cdecl fcn_00476b10(int, int, unsigned char, unsigned char, unsigned char, Tex*);
 void __cdecl d2_UnlockSurface(Tex*);
 void __cdecl fcn_00475f80(Tex*);
@@ -97,7 +97,7 @@ Tiles* __cdecl fcn_0047b640(int x, int y, int w, int h, Img* img, int size)
 		g_77260c++;
 		fcn_00476620(i % cols * tile + x, i / cols * tile + y, tile, tile, img, 0, 0, t);
 		if (g_100f1a0.r || g_100f1a0.g || g_100f1a0.b) {
-			Rgb px;
+			RGB_COLOR px;
 
 			fcn_00475fd0(t);
 			for (px_y = 0; px_y < tile; px_y++) {

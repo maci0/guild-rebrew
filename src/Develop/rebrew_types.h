@@ -16,7 +16,7 @@ typedef struct __old_region_map
 {
     int                 free_paras_in_page;
     unsigned int        last_failed_alloc;
-} OldRegionMap;
+} OLD_SBH_REGION_MAP;
 
 // SIZE 0x1000
 typedef struct __old_sbh_page
@@ -26,18 +26,18 @@ typedef struct __old_sbh_page
     unsigned char       alloc_map[241];
     unsigned char       reserved[7];
     OldPara             alloc_blocks[240];
-} OldSbhPage;
+} OLD_SBH_PAGE;
 
 // SIZE 0x2020
 typedef struct __old_sbh_region
 {
     struct __old_sbh_region * p_next_region;
     struct __old_sbh_region * p_prev_region;
-    OldRegionMap *           p_starting_region_map;
-    OldRegionMap *           p_first_uncommitted;
-    OldSbhPage *             p_pages_begin;
-    OldSbhPage *             p_pages_end;
-    OldRegionMap             region_map[1025];
+    OLD_SBH_REGION_MAP *           p_starting_region_map;
+    OLD_SBH_REGION_MAP *           p_first_uncommitted;
+    OLD_SBH_PAGE *             p_pages_begin;
+    OLD_SBH_PAGE *             p_pages_end;
+    OLD_SBH_REGION_MAP             region_map[1025];
 } OldSbhRegion;
 
 #endif /* REBREW_TYPES_H */

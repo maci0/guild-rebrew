@@ -8,9 +8,9 @@ extern int g_772f7c;
 extern int g_772f80;
 extern int g_772f84;
 extern int g_772f88;
-extern Slot772f90 g_772f90[3];
+extern ALCHEMY_DRAW_SLOT g_772f90[3];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern Draw772* g_772fdc;
+extern ALCHEMY_PLAYER_PROTOTYPE* g_772fdc;
 
 void __cdecl fcn_004ecaa0(int a);
 

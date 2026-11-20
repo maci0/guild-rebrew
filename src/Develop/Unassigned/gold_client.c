@@ -11,7 +11,7 @@ struct ref_f31161 {
 #pragma pack()
 
 #include "client_types.h"
-extern cell10_fb5760 g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 #define g_f31161 ((struct ref_f31161 *)((char *)g_fb5760 + 1))
 
 void __cdecl fcn_004478e0(int, int);

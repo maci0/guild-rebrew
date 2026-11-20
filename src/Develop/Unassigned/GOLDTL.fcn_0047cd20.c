@@ -6,7 +6,7 @@ typedef struct {
 } fcn_0047cd20_set;
 // SIZE 0x1c
 
-extern Rgb g_100f1b8;
+extern RGB_COLOR g_100f1b8;
 
 int __cdecl fcn_0047bdd0(int, int, int, float, unsigned char, unsigned char, unsigned char);
 

@@ -67,11 +67,11 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	if (flags & 2)
 		fcn_005d3880(*(Arg *) &g, w - 1, h);
 	if (flags & 4)
-		fcn_005d3c20(*(Cur *) &g, w - 1, h);
+		fcn_005d3c20(*(GRAPH_VALUE *) &g, w - 1, h);
 	if (flags & 8)
-		fcn_005d3980(*(Cur *) &g, w - 1, h);
+		fcn_005d3980(*(GRAPH_VALUE *) &g, w - 1, h);
 	if (flags & 0x10)
-		fcn_005d3ad0(*(Cur *) &g, w - 1, h);
+		fcn_005d3ad0(*(GRAPH_VALUE *) &g, w - 1, h);
 	d2_PlotRadius = 0;
 	fcn_00472c30(0x2d, 8, 0x2d, h - 0x13, 0x10, 0x10, 0x10);
 	fcn_00472c30(0x2d, h - 0x13, w - 0x3b, h - 0x13, 0x10, 0x10, 0x10);

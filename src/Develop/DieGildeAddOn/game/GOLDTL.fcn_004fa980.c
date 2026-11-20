@@ -11,9 +11,9 @@ typedef struct {
 
 // SIZE 0x18
 #include "client_types.h"
-typedef Cell_99ef80 Cell;
+typedef CRIME_GRID_CELL Cell;
 
-extern Cell_99ef80 g_99ef80[9][8];
+extern CRIME_GRID_CELL g_99ef80[9][8];
 
 void __cdecl fcn_004f4830(int kind, Offer* o);
 

@@ -5,7 +5,7 @@
 
 #include "g_9ba3a0.h"
 
-extern logrec g_9ba3a0[15];
+extern TEXT_LOG_RECORD g_9ba3a0[15];
 extern int g_9ba9f4;
 extern int g_772e88;
 

@@ -5,7 +5,7 @@
 
 // SIZE 0x4c
 #include "client_types.h"
-typedef Entry_14d0c40 Entry;
+typedef CH_ACTION_DECLARATION Entry;
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 #include "Develop/Units/Error/error_message.h"

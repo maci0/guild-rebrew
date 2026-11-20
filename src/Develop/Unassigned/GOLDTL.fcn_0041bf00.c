@@ -3,7 +3,7 @@
 
 #include "octree.h"
 
-extern OctNode* g_6b6f20[6];
+extern COLOR_OCTREE_NODE* g_6b6f20[6];
 extern OctRef* g_6b6f40;
 extern void* g_6b6f44;
 void __cdecl free(void* p);

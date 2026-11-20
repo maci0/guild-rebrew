@@ -1,7 +1,7 @@
 #include <string.h>
 #include "rgb.h"
 
-extern Rgb g_100f1a0;
+extern RGB_COLOR g_100f1a0;
 
 char* __cdecl m_alloc(unsigned int size, char* file);
 short __cdecl d2_PackColorForPixelFormat(unsigned char r, unsigned char g, unsigned char b);

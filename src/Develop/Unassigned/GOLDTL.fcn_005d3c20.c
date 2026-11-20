@@ -3,7 +3,7 @@
 
 // SIZE 0x14
 #include "client_types.h"
-typedef Sample_99ec20 Sample;
+typedef GRAPH_SAMPLE Sample;
 
 // SIZE 0x28
 typedef struct {
@@ -12,16 +12,16 @@ typedef struct {
 	float b;
 	float c;
 	char pad10[0x18];
-} Cur;
+} GRAPH_VALUE;
 
-extern Sample_99ec20 g_99ec20[16];
+extern GRAPH_SAMPLE g_99ec20[16];
 extern float g_662a94;
 
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 
 #define CLAMP0(v) ((v) > 0.0 ? (v) : 0.0)
 
-void __cdecl fcn_005d3c20(Cur cur, int w, int h)
+void __cdecl fcn_005d3c20(GRAPH_VALUE cur, int w, int h)
 {
 	int step;
 	float scale;

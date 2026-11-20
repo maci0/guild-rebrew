@@ -23,12 +23,12 @@ typedef struct pkt99_payload {
 } pkt99_payload;
 /* SIZE 0x80 */
 
-typedef cell10_fb5760 cell10;
+typedef COMMAND_STATUS_SLOT cell10;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_aed330;
 extern CLIENT_QUEUED_PACKET g_aed740[0x8000];
-extern cell10_fb5760 g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 
 int __cdecl fcn_004c3a50(unsigned char*);
 

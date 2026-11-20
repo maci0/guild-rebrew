@@ -11,16 +11,16 @@ typedef struct {
 	char k;
 	char pad5[3];
 	int f;
-} Draw772;
+} ALCHEMY_PLAYER_PROTOTYPE;
 // SIZE 0xc
 
 /* GOLDTL 0x772f90: 3 slots, saved and loaded field by field. */
 typedef struct {
 	int active;
-	Draw772 v;
+	ALCHEMY_PLAYER_PROTOTYPE v;
 	int y;
 	int x;
-} Slot772f90;
+} ALCHEMY_DRAW_SLOT;
 // SIZE 0x18
 
 /* GOLDTL 0x772fe4 points to g_772fe0 of these. */
@@ -28,7 +28,7 @@ typedef struct {
 	int key;
 	int a;
 	int b;
-} Rec772fe4;
+} ALCHEMY_RECIPE_PROTOTYPE;
 // SIZE 0xc
 
 #endif

@@ -24,7 +24,7 @@ typedef struct {
 extern int g_7747a8;
 extern unsigned short g_773e40[];
 #include "client_types.h"
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 
 void __cdecl fcn_00533cf0(int mark)
 {

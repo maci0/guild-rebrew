@@ -1392,7 +1392,7 @@ int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
 		}
 	}
 	else {
-		*(struct SaveHeaderTail*) (dest + 0x9c) = *(struct SaveHeaderTail*) g_save_header_tail;
+		*(struct SAVE_HEADER_LEGACY_PREFIX*) (dest + 0x9c) = *(struct SAVE_HEADER_LEGACY_PREFIX*) g_save_header_tail;
 	}
 	return 1;
 }

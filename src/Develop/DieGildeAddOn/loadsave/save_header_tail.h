@@ -8,7 +8,7 @@
  * include from entity.h (loadsave TUs). */
 #pragma pack(1)
 // SIZE 0x9
-struct SaveHeaderTail {
+struct SAVE_HEADER_LEGACY_PREFIX {
 	int a;
 	int b;
 	char c;

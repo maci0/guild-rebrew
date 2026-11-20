@@ -7,7 +7,7 @@ typedef struct {
 	char text[0x24];
 	int b;
 	int a;
-} logrec;
+} TEXT_LOG_RECORD;
 // SIZE 0x6c
 
 #endif

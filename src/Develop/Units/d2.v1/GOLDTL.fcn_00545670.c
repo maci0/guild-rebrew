@@ -3,7 +3,7 @@ extern char* g_1015ea0;
 extern int g_6a4768;
 extern int g_77e8a0;
 extern int d2_CurrentWindowId;
-extern s_77e8c0 g_77e8c0[16];
+extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 
 int __cdecl fcn_005455b0(void);
 int __cdecl fcn_0046f740(int, int, int, int);

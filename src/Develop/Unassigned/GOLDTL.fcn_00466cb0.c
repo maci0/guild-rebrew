@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "client_types.h"
-typedef Fld_102d140 fcn_00466cb0_Fld;
+typedef UI_FIELD fcn_00466cb0_Fld;
 // SIZE 0x160
 
 typedef struct
@@ -18,7 +18,7 @@ typedef struct
 } fcn_00466cb0_Ent;
 // SIZE 0x2f4
 
-extern Fld_102d140 g_102d140[];
+extern UI_FIELD g_102d140[];
 extern char* g_772500;
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_ScreenHeight;

@@ -38,7 +38,7 @@ extern char s_ls_tmp_1002d4fc; /* 0x1002d4fc */
  * three fields are adjacent and always written together. */
 #pragma pack(1)
 // SIZE 0x9
-struct SaveHeaderTail {
+struct SAVE_HEADER_LEGACY_PREFIX {
 	int a;
 	int b;
 	char c;
@@ -165,7 +165,7 @@ int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
 		}
 	}
 	else {
-		*(struct SaveHeaderTail*) (dest + 0x9c) = *(struct SaveHeaderTail*) g_save_header_tail;
+		*(struct SAVE_HEADER_LEGACY_PREFIX*) (dest + 0x9c) = *(struct SAVE_HEADER_LEGACY_PREFIX*) g_save_header_tail;
 	}
 	return 1;
 }

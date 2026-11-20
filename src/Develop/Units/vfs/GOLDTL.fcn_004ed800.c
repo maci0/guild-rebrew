@@ -4,9 +4,9 @@ struct VFS_DIR;
 
 extern struct VFS_DIR* g_6b7fdc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern Draw772* g_772fdc;
+extern ALCHEMY_PLAYER_PROTOTYPE* g_772fdc;
 extern int g_772fe0;
-extern Rec772fe4* g_772fe4;
+extern ALCHEMY_RECIPE_PROTOTYPE* g_772fe4;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 unsigned int __cdecl vfs_ReadData(char* buf, unsigned int size, unsigned int count, void* f);
@@ -45,7 +45,7 @@ int __cdecl fcn_004ed800(void)
 		m_FreeTracked(g_772fdc);
 		g_772fdc = 0;
 	}
-	g_772fdc = (Draw772*) m_alloc(ahm_PlayerPrototypeCount * 12, "ahm_AllocPlayerPrototypes");
+	g_772fdc = (ALCHEMY_PLAYER_PROTOTYPE*) m_alloc(ahm_PlayerPrototypeCount * 12, "ahm_AllocPlayerPrototypes");
 	if (g_772fdc == 0) {
 		goto fail;
 	}
@@ -80,7 +80,7 @@ int __cdecl fcn_004ed800(void)
 		m_FreeTracked(g_772fe4);
 		g_772fe4 = 0;
 	}
-	g_772fe4 = (Rec772fe4*) m_alloc(g_772fe0 * 12, "ahm_AllocRecipePrototypes");
+	g_772fe4 = (ALCHEMY_RECIPE_PROTOTYPE*) m_alloc(g_772fe0 * 12, "ahm_AllocRecipePrototypes");
 	if (g_772fe4 == 0) {
 		goto fail;
 	}

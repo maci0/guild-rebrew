@@ -12,7 +12,7 @@ void __cdecl fcn_00474d80(int, void*, void*);
 void __cdecl fcn_00474e70(int);
 void __cdecl fcn_004754c0(int, int);
 void __cdecl fcn_00437060(int);
-Voice_14cbbe0* __cdecl fcn_004234e0(char*, const char*, int, int, int, int, int);
+SOUND_VOICE* __cdecl fcn_004234e0(char*, const char*, int, int, int, int, int);
 
 /* ADDRESS: GOLD 0x0052f390 */
 char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)

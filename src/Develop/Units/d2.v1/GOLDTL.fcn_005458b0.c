@@ -6,7 +6,7 @@ extern int g_1040494;
 // SIZE 0xc
 
 #include "client_types.h"
-extern s_77e8c0 g_77e8c0[16];
+extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 
 // SIZE 0x3cc
 

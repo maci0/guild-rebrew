@@ -6,7 +6,7 @@
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern unsigned char* lpGebaeudePROT;
-extern cell10_fb5760 g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 struct unit;
 void* __cdecl gm_SearchTable67(int id);

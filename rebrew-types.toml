@@ -156,9 +156,9 @@ symbol = "DISPLAY_COUNTER"
 size = 12
 native_size = 12
 extent = "stride"
-evidence = "TL4737c0/4737e0 and Gold476c60/476c80 iterate six records across 72 bytes; ID at 0 and value at 4. Final four bytes remain uninterpreted. The DISPLAY_COUNTER definition is unchanged after canonical VECTOR3 naming and declaration changes. Reviewed complete native helper and rejecting wrong-table proofs in .scratch/goal23/pool-unification/production-native-proof.json. Names and subsystem inferred; storage owner unresolved. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged."
+evidence = "TL4737c0/4737e0 and Gold476c60/476c80 iterate six records across 72 bytes; ID at 0 and value at 4. Final four bytes remain uninterpreted. The DISPLAY_COUNTER definition is unchanged after canonical VECTOR3 naming and declaration changes. Reviewed complete native helper and rejecting wrong-table proofs in .scratch/goal23/pool-unification/production-native-proof.json. Names and subsystem inferred; storage owner unresolved. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "bf6a83c8ce23345f50624477f1c13f28c60edca2348f3ed8324c7682af318994"
+source_hash = "33fd3a5a3cb6e66e159784f70cd5da2327eaf9be92cfb51add4617f7fc387eb3"
 headers_hash = "0afa1cd98f8d1d526a9b703d3522a9341d495b3723f17c0280190d617f4058d3"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
@@ -174,9 +174,9 @@ symbol = "DISPLAY_COUNTER"
 size = 12
 native_size = 12
 extent = "stride"
-evidence = "TL4737c0/4737e0 and Gold476c60/476c80 iterate six records across 72 bytes; ID at 0 and value at 4. Final four bytes remain uninterpreted. The DISPLAY_COUNTER definition is unchanged after canonical VECTOR3 naming and declaration changes. Reviewed complete native helper and rejecting wrong-table proofs in .scratch/goal23/pool-unification/production-native-proof.json. Names and subsystem inferred; storage owner unresolved. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged."
+evidence = "TL4737c0/4737e0 and Gold476c60/476c80 iterate six records across 72 bytes; ID at 0 and value at 4. Final four bytes remain uninterpreted. The DISPLAY_COUNTER definition is unchanged after canonical VECTOR3 naming and declaration changes. Reviewed complete native helper and rejecting wrong-table proofs in .scratch/goal23/pool-unification/production-native-proof.json. Names and subsystem inferred; storage owner unresolved. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "bf6a83c8ce23345f50624477f1c13f28c60edca2348f3ed8324c7682af318994"
+source_hash = "33fd3a5a3cb6e66e159784f70cd5da2327eaf9be92cfb51add4617f7fc387eb3"
 headers_hash = "0afa1cd98f8d1d526a9b703d3522a9341d495b3723f17c0280190d617f4058d3"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
@@ -316,10 +316,10 @@ symbol = "CH_QUEUE_SLOT"
 size = 404
 native_size = 404
 extent = "allocation"
-evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged. Rebound after the Rebrew 6.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the reviewed function renames changed identifiers in its source context; definition, native extent and offsets unchanged."
+evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged. Rebound after the Rebrew 6.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the reviewed function renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "6380730f3a34d68dbc7bba2ff9f4b37e30119d0c0aab7cb88e9a4c395268c0ce"
-headers_hash = "33f79e46b9f763dc3d61bcd88431b2b23e46fc7e53128fa728d51659d935e9d2"
+source_hash = "0f90ba65e7524611b2d92379d43fd9c268a934ced3fefe7350dd46913bc6c6cf"
+headers_hash = "85facd272ceb1de9957eea6134f640d8c58c1c386824f0cd653e6b8e5c4fa2af"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -331,10 +331,10 @@ symbol = "CH_QUEUE_SLOT"
 size = 404
 native_size = 404
 extent = "stride"
-evidence = "Native free-slot helpers TL 0x405080 and Gold 0x404760 scan 2000 records at 0x194 stride; startup allocation 0xc5440 equals 2000 times the stride. Occupancy dword at zero; payload remains opaque. The shared action record is a separate source view, not a storage ownership claim. Rebound after the Rebrew 6.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the reviewed function renames changed identifiers in its source context; definition, native extent and offsets unchanged."
+evidence = "Native free-slot helpers TL 0x405080 and Gold 0x404760 scan 2000 records at 0x194 stride; startup allocation 0xc5440 equals 2000 times the stride. Occupancy dword at zero; payload remains opaque. The shared action record is a separate source view, not a storage ownership claim. Rebound after the Rebrew 6.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the reviewed function renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "6380730f3a34d68dbc7bba2ff9f4b37e30119d0c0aab7cb88e9a4c395268c0ce"
-headers_hash = "33f79e46b9f763dc3d61bcd88431b2b23e46fc7e53128fa728d51659d935e9d2"
+source_hash = "0f90ba65e7524611b2d92379d43fd9c268a934ced3fefe7350dd46913bc6c6cf"
+headers_hash = "85facd272ceb1de9957eea6134f640d8c58c1c386824f0cd653e6b8e5c4fa2af"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -343,13 +343,13 @@ belegt = 0
 unbekannt_004 = 4
 [types."ch.action_dispatch_entry".GOLDTL]
 file = "src/client_types.h"
-symbol = "Entry_14d0c40"
+symbol = "CH_ACTION_DECLARATION"
 size = 76
 native_size = 76
 extent = "stride"
-evidence = "Paired native action registration TL406210/Gold405670 use 0x4c stride, fields +0,+4,+5,+0x48 and index <=0x3f; startup clears 64 x 0x4c bytes. Existing handler member is an opaque DWORD view, not a proven callback signature. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged."
+evidence = "Paired native action registration TL406210/Gold405670 use 0x4c stride, fields +0,+4,+5,+0x48 and index <=0x3f; startup clears 64 x 0x4c bytes. Existing handler member is an opaque DWORD view, not a proven callback signature. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 to the type's reviewed name CH_ACTION_DECLARATION (renamed from Entry_14d0c40); size, extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "bf6a83c8ce23345f50624477f1c13f28c60edca2348f3ed8324c7682af318994"
+source_hash = "33fd3a5a3cb6e66e159784f70cd5da2327eaf9be92cfb51add4617f7fc387eb3"
 headers_hash = "0afa1cd98f8d1d526a9b703d3522a9341d495b3723f17c0280190d617f4058d3"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
@@ -362,13 +362,13 @@ param = 72
 
 [types."ch.action_dispatch_entry".GOLD]
 file = "src/client_types.h"
-symbol = "Entry_14d0c40"
+symbol = "CH_ACTION_DECLARATION"
 size = 76
 native_size = 76
 extent = "stride"
-evidence = "Paired native action registration TL406210/Gold405670 use 0x4c stride, fields +0,+4,+5,+0x48 and index <=0x3f; startup clears 64 x 0x4c bytes. Existing handler member is an opaque DWORD view, not a proven callback signature. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged."
+evidence = "Paired native action registration TL406210/Gold405670 use 0x4c stride, fields +0,+4,+5,+0x48 and index <=0x3f; startup clears 64 x 0x4c bytes. Existing handler member is an opaque DWORD view, not a proven callback signature. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 to the type's reviewed name CH_ACTION_DECLARATION (renamed from Entry_14d0c40); size, extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "bf6a83c8ce23345f50624477f1c13f28c60edca2348f3ed8324c7682af318994"
+source_hash = "33fd3a5a3cb6e66e159784f70cd5da2327eaf9be92cfb51add4617f7fc387eb3"
 headers_hash = "0afa1cd98f8d1d526a9b703d3522a9341d495b3723f17c0280190d617f4058d3"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
@@ -417,10 +417,10 @@ symbol = "Kind"
 size = 20
 native_size = 20
 extent = "allocation"
-evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-19 after shared struct headers replaced local typedefs (r5b48); definition, native extent and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after server global renames and macro alias fixes changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b50 shared-declaration and struct edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the second function rename batch changed identifiers in its source context; definition, native extent and offsets unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-19 after shared struct headers replaced local typedefs (r5b48); definition, native extent and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after server global renames and macro alias fixes changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b50 shared-declaration and struct edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the second function rename batch changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "ca92806f334fa01b6f3a9fab63442e9e24c9eff6eb80cdec5aed090c5a7a57d6"
-headers_hash = "eb33b5effdda954e6995b037797f0b612097aba6be24166f1bfa3d747af8772d"
+headers_hash = "ff0c6e877e68d987482f619fb19016908581fb343382978b2d7b9123b78771d4"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -432,10 +432,10 @@ symbol = "Kind"
 size = 20
 native_size = 20
 extent = "allocation"
-evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-19 after shared struct headers replaced local typedefs (r5b48); definition, native extent and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after server global renames and macro alias fixes changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b50 shared-declaration and struct edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the second function rename batch changed identifiers in its source context; definition, native extent and offsets unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-19 after shared struct headers replaced local typedefs (r5b48); definition, native extent and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after server global renames and macro alias fixes changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b50 shared-declaration and struct edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the second function rename batch changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "ca92806f334fa01b6f3a9fab63442e9e24c9eff6eb80cdec5aed090c5a7a57d6"
-headers_hash = "eb33b5effdda954e6995b037797f0b612097aba6be24166f1bfa3d747af8772d"
+headers_hash = "ff0c6e877e68d987482f619fb19016908581fb343382978b2d7b9123b78771d4"
 context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -809,10 +809,10 @@ symbol = "D2_TEXT_WINDOW"
 size = 972
 native_size = 972
 extent = "allocation"
-evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged. Rebound after the Rebrew 6.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the second function rename batch changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the shared struct headers (d3_object.h, d2_gui.h, game_structs.h and others) were revised; recorded size, extent and offsets rechecked by the compiler. Rebound 2026-11-21 after the d2 GUI struct conversion changed its source context; definition, extent and offsets unchanged."
+evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged. Rebound after the Rebrew 6.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the second function rename batch changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the shared struct headers (d3_object.h, d2_gui.h, game_structs.h and others) were revised; recorded size, extent and offsets rechecked by the compiler. Rebound 2026-11-21 after the d2 GUI struct conversion changed its source context; definition, extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "5692ef9d4dff34b49fb5e16a22ab8c04e8ab14999bf6692997ff30fd3735ea31"
-headers_hash = "feeb04713491f77aaca3ad2d3f31b453cd9ddeede8f9c6bf1ae6f26df6cabef5"
+headers_hash = "836f1721da1f9b7252c01bd042642912fed996c8f97efbf91deee922c3ee1b17"
 context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 

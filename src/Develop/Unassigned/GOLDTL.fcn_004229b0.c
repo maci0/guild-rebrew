@@ -3,10 +3,10 @@
 
 // SIZE 0x30
 #include "client_types.h"
-typedef Voice_14cbbe0 Voice;
+typedef SOUND_VOICE Voice;
 
 extern int g_6b7d7c;
-extern Voice_14cbbe0 g_14cbbe0;
+extern SOUND_VOICE g_14cbbe0;
 extern char* g_6b7e88;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl fcn_0042aaa0(int h);

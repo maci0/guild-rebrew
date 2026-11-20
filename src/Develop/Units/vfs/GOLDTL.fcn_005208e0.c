@@ -2,8 +2,8 @@ unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 
 #include "client_types.h"
 
-extern Sample_99ec20 g_99ec20[16];
-extern Cell_99ef80 g_99ef80[9][8];
+extern GRAPH_SAMPLE g_99ec20[16];
+extern CRIME_GRID_CELL g_99ef80[9][8];
 
 /* ADDRESS: GOLDTL 0x005208e0 */
 int __cdecl fcn_005208e0(char* fp)

@@ -10,7 +10,7 @@ typedef struct {
 // SIZE 0xc
 
 #include "client_types.h"
-extern s_77e8c0 g_77e8c0[16];
+extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 
 void __cdecl fcn_00545780(int);
 void __cdecl fcn_00471e30(int);

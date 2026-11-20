@@ -13,7 +13,7 @@ typedef struct {
 	unsigned char mask;
 	unsigned char idx;
 	char pad[2];
-} OctNode;
+} COLOR_OCTREE_NODE;
 // SIZE 0x18
 
 typedef struct {

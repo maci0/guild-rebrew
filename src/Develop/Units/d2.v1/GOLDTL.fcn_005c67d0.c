@@ -1,7 +1,7 @@
 
 
 #include "client_types.h"
-typedef Btn_776c60 Btn;
+typedef D2_ITEM_BUTTON Btn;
 // SIZE 0x8
 
 #include "Develop/Units/d2.v1/d2_win.h"
@@ -21,7 +21,7 @@ extern int g_1040494;
 extern Win_1015f40 g_1015f40[0x60];
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern Btn_776c60 g_776c60[6];
+extern D2_ITEM_BUTTON g_776c60[6];
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern int g_14a92bc;

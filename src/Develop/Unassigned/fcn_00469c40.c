@@ -55,7 +55,7 @@ typedef struct {
 
 
 extern Win2_469 g_1015f40[0x60];
-extern Fld_102d140 g_102d140[0x10];
+extern UI_FIELD g_102d140[0x10];
 
 /* ADDRESS: GOLDTL 0x00469c40 */
 void __cdecl fcn_00469c40(int a1, int a2, int index)

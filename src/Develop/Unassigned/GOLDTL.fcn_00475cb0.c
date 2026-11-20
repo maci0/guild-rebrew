@@ -31,11 +31,11 @@ typedef struct BmpInfo {
 } BmpInfo;
 // SIZE 0x2c
 
-typedef struct Rgb {
+typedef struct RGB_COLOR {
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;
-} Rgb;
+} RGB_COLOR;
 // SIZE 0x3
 
 
@@ -48,7 +48,7 @@ int __cdecl fcn_00475cb0(const char* name, int w, int h, unsigned char* pixels)
 	int y;
 	BmpFileHeader bfh;
 	BmpInfo bmi;
-	Rgb row[0x400];
+	RGB_COLOR row[0x400];
 	int i;
 	unsigned char t;
 	unsigned char u;

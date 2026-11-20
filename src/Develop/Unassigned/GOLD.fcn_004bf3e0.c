@@ -1,6 +1,6 @@
 #include "g_10058a0.h"
-extern IdSlot10058a0 g_10058a0[8];
-extern IdSlot10058a0 g_10058a0[8];
+extern D2_RADIO_SLOT g_10058a0[8];
+extern D2_RADIO_SLOT g_10058a0[8];
 // fcn_004bf3e0: first i with table[i].id != -1 && table[i].b == a
 // (GOLDTL 0x10058a0 / GOLD 0xf812a0).
 

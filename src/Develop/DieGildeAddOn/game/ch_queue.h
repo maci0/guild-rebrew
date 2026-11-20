@@ -21,6 +21,6 @@ char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...);
 /* Native startup clears exactly 64 entries; declaration only, owner unresolved. */
 /* ADDRESS: GOLDTL 0x014d0c40 */
 /* ADDRESS: GOLD 0x01469700 */
-extern Entry_14d0c40 ch_ActionDefinitions[64];
+extern CH_ACTION_DECLARATION ch_ActionDefinitions[64];
 
 #endif

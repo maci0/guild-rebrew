@@ -1,6 +1,6 @@
 #include <string.h>
 #include "rgb.h"
-extern Rgb g_100f1a0;
+extern RGB_COLOR g_100f1a0;
 extern char g_100eb80[];
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);

@@ -40,7 +40,7 @@ typedef struct
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 extern int g_14ce86c;
 
 int __cdecl fcn_00470820(int a, int b, int c);

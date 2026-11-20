@@ -18,7 +18,7 @@ struct gadget {
 extern int g_6a476c;
 extern unsigned char** g_7749e4;
 #include "client_types.h"
-extern s_77e8c0 g_77e8c0[16];
+extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern unsigned char g_7747b0;
 extern volatile int g_6b7fc0;

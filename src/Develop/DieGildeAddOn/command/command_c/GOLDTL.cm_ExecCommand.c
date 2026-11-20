@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_aecde0;
-extern cell10_fb5760 g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 
 int __cdecl sprintf(char*, const char*, ...);
 void __cdecl cm_RecycleCommandQueueNode(char*);
@@ -18,7 +18,7 @@ int __cdecl cm_ExecCommand(void)
 	char* prev;
 	char* next;
 	char* slot;
-	cell10_fb5760* cell;
+	COMMAND_STATUS_SLOT* cell;
 	char* p;
 	int pass;
 	int seq;

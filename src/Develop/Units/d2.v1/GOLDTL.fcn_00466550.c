@@ -17,7 +17,7 @@ typedef struct
 	unsigned short pad6;
 } fcn_00466550_Glyph;
 
-extern Fld_102d140 g_102d140[];
+extern UI_FIELD g_102d140[];
 extern char* g_1015ea0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d374;
@@ -42,7 +42,7 @@ void __cdecl fcn_0047cbf0(int x, int y, int surf, char* font, int c);
 /* ADDRESS: GOLDTL 0x00466550 */
 void __cdecl d2_DrawField(int idx, int surf)
 {
-	Fld_102d140* f;
+	UI_FIELD* f;
 	fcn_00466550_Ent* e;
 	fcn_00466550_Glyph* g0;
 	fcn_00466550_Glyph* g1;

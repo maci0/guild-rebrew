@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern cell10_fb5760 g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 
 
 /* ADDRESS: GOLDTL 0x004c4450 */

@@ -8,7 +8,7 @@
 extern Win_1015f40 g_1015f40[0x60];
 extern s_1015f4c g_1015f4c[];
 extern List8c_102cbc8 g_102cbc8[];
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 extern Page_1038144 g_1038144[];
 extern Slot_779d00 g_779d00[];
 extern pos14_7f4c00 gm_GameTime;

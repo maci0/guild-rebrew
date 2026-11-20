@@ -21,7 +21,7 @@ typedef struct
 // SIZE 0x2f4
 
 #include "client_types.h"
-extern Fld_102d140 g_102d140[];
+extern UI_FIELD g_102d140[];
 extern char* g_1015ea0;
 
 int __cdecl fcn_0046b520(char* s, int font);

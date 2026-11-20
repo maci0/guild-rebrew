@@ -1,6 +1,6 @@
 #include "g_67a470.h"
 
-extern Named24 g_67a470[8];
+extern SCENE_EVENT_ENTRY g_67a470[8];
 
 int __cdecl fcn_0065f220(const char* a, const char* b);
 

@@ -13,7 +13,7 @@ typedef struct
 // SIZE 0x14
 
 #include "client_types.h"
-extern Sample_99ec20 g_99ec20[16];
+extern GRAPH_SAMPLE g_99ec20[16];
 extern int g_99f5e4;
 extern int g_99f5e8;
 extern int g_99f5ec;

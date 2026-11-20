@@ -41,7 +41,7 @@ extern unsigned char g_7747b0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 #include "client_types.h"
-extern Btn_776c60 g_776c60[6];
+extern D2_ITEM_BUTTON g_776c60[6];
 extern char* g_775318;
 extern unsigned char g_773d75;
 

@@ -4,9 +4,9 @@
 #include "g_772f90.h"
 
 extern int g_772fe0;
-extern Rec772fe4* g_772fe4;
+extern ALCHEMY_RECIPE_PROTOTYPE* g_772fe4;
 
-Rec772fe4* __cdecl fcn_004ecbe0(int key)
+ALCHEMY_RECIPE_PROTOTYPE* __cdecl fcn_004ecbe0(int key)
 {
 	int i;
 

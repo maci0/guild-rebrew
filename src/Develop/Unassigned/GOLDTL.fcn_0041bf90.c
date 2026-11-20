@@ -1,6 +1,6 @@
 #include "octree.h"
 
-extern OctNode* g_6b6f20[6];
+extern COLOR_OCTREE_NODE* g_6b6f20[6];
 extern OctRef* g_6b6f40;
 extern unsigned int g_6b6f38;
 extern unsigned short g_6b6b18[256];
@@ -19,7 +19,7 @@ int __cdecl fcn_0041bf90(unsigned char* pixels, unsigned int count)
 	unsigned int idx;
 	unsigned int bit;
 	unsigned int byte_offset;
-	OctNode** pp;
+	COLOR_OCTREE_NODE** pp;
 
 	g_6b6f40 = malloc(0x20004);
 	if (!g_6b6f40) {
@@ -45,9 +45,9 @@ int __cdecl fcn_0041bf90(unsigned char* pixels, unsigned int count)
 			for (pp = g_6b6f20 + 4; (int) pp >= (int) g_6b6f20; pp--) {
 				bit = idx & 7;
 				idx >>= 3;
-				byte_offset = idx * sizeof(OctNode);
-				((OctNode*) ((char*) *pp + byte_offset))->key += c;
-				((OctNode*) ((char*) *pp + byte_offset))->mask |= (unsigned char) (1 << bit);
+				byte_offset = idx * sizeof(COLOR_OCTREE_NODE);
+				((COLOR_OCTREE_NODE*) ((char*) *pp + byte_offset))->key += c;
+				((COLOR_OCTREE_NODE*) ((char*) *pp + byte_offset))->mask |= (unsigned char) (1 << bit);
 			}
 		}
 	}

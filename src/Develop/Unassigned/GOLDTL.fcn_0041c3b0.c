@@ -3,7 +3,7 @@
 
 #include "octree.h"
 
-extern OctNode* g_6b6f20[6];
+extern COLOR_OCTREE_NODE* g_6b6f20[6];
 extern int g_6b6308;
 extern unsigned char g_6b6008[3][0x100];
 
@@ -13,7 +13,7 @@ void __cdecl fcn_0041c3b0(int n, int level)
 	unsigned int cnt;
 	unsigned int gg;
 	unsigned int bb;
-	OctNode* p;
+	COLOR_OCTREE_NODE* p;
 
 	if (g_6b6f20[level][n].mask != 0) {
 		for (i = 7; i >= 0; i--) {

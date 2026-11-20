@@ -1,5 +1,5 @@
 #include "client_types.h"
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 
 void __cdecl fcn_0046f540(int id);
 

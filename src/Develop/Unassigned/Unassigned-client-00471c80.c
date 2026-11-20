@@ -1,8 +1,8 @@
 void __cdecl fcn_00469c40(int, int, int);
 #include "client_types.h"
-typedef Obj_1038140 Obj;
+typedef D2_FORM_RECORD Obj;
 
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 
 void __cdecl fcn_00471c80(int win, unsigned char flags);
 #include "Develop/Units/d2.v1/d2_gui.h"

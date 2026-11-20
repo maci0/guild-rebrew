@@ -1,6 +1,6 @@
 #include "g_10058a0.h"
 
-extern IdSlot10058a0 g_10058a0[8];
+extern D2_RADIO_SLOT g_10058a0[8];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl d2_CreateRadioGroup(int, int);

@@ -85,7 +85,7 @@ typedef struct {
 	int count;
 	int sel;
 	int ids[33];
-} Group_102cbc4;
+} D2_RADIO_GROUP;
 
 /* g_102cbc8 */
 typedef struct {
@@ -115,7 +115,7 @@ typedef struct {
 	int def;
 	int f140;
 	char pad144[0x160 - 0x144];
-} Fld_102d140;
+} UI_FIELD;
 
 /* g_102d278 */
 typedef struct {
@@ -133,7 +133,7 @@ typedef struct {
 	void* fx[2];
 	void* h[2];
 	char pad1b4[0x2bc - 0x1b4];
-} Obj_1038140;
+} D2_FORM_RECORD;
 
 /* g_1038144 */
 typedef struct {
@@ -167,7 +167,7 @@ typedef struct {
 	int vol;
 	int pan;
 	int f2c;
-} Voice_14cbbe0;
+} SOUND_VOICE;
 
 /* g_14cc460 */
 typedef struct Chan_14cc460 {
@@ -193,7 +193,7 @@ typedef struct {
 	unsigned char kind;
 	char name[0x43];
 	int param;
-} Entry_14d0c40;
+} CH_ACTION_DECLARATION;
 
 /* g_67bbdc, g_6b86c4 */
 typedef struct {
@@ -243,7 +243,7 @@ typedef struct {
 typedef struct {
 	int btn;
 	char* item;
-} Btn_776c60;
+} D2_ITEM_BUTTON;
 
 
 
@@ -283,7 +283,7 @@ typedef struct {
 	char* p;
 	int h;
 	int x8;
-} s_77e8c0;
+} D2_ACTION_POPUP_SLOT;
 
 
 
@@ -350,7 +350,7 @@ typedef struct {
 	float c;
 	float d;
 	float e;
-} Sample_99ec20;
+} GRAPH_SAMPLE;
 
 /* g_99ec2c */
 typedef struct {
@@ -364,7 +364,7 @@ typedef struct {
 	short demand;
 	short supply;
 	char pad4[0x18 - 4];
-} Cell_99ef80;
+} CRIME_GRID_CELL;
 
 /* g_99f5a0 */
 typedef struct {
@@ -430,7 +430,7 @@ typedef struct {
 	char f1;
 	int f2;
 	int f6;
-} cell10_fb5760;
+} COMMAND_STATUS_SLOT;
 #pragma pack()
 
 #endif

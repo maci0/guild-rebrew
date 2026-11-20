@@ -11,7 +11,7 @@ typedef struct node99_load {
 #pragma pack(pop)
 /* SIZE 0x99 */
 extern char g_9bade0[];
-extern cell10_fb5760 g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 extern char* cm_CommandQueueHead;
 extern char* g_aed200;
 extern int ls_SaveVersion;

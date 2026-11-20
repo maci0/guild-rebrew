@@ -23,7 +23,7 @@ typedef struct Slot {
 // SIZE 0x2f4
 
 #include "client_types.h"
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 extern char* g_1015ea0;
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00471af0 */

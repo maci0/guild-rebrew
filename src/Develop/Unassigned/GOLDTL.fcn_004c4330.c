@@ -18,7 +18,7 @@
 
 
 
-typedef cell10_fb5760 cell10;
+typedef COMMAND_STATUS_SLOT cell10;
 /* SIZE 0xa */
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -26,7 +26,7 @@ extern unsigned char* g_14cbca8;
 extern int g_aecde0;
 extern int g_aed330;
 extern CLIENT_QUEUED_PACKET g_aed740[0x8000];
-extern cell10_fb5760 g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 
 unsigned short __cdecl fcn_004c3a50(CLIENT_QUEUED_PACKET*);
 int __cdecl fcn_004c4090(void);

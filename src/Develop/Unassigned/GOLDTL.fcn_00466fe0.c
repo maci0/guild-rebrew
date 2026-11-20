@@ -21,7 +21,7 @@ typedef struct
 // SIZE 0x2f4
 
 #include "client_types.h"
-extern Fld_102d140 g_102d140[];
+extern UI_FIELD g_102d140[];
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* txt_TextEntries[];
 

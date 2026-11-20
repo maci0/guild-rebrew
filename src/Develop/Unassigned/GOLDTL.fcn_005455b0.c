@@ -1,7 +1,7 @@
 #include "client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern s_77e8c0 g_77e8c0[16];
+extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00545780(char*);
@@ -11,7 +11,7 @@ void __cdecl he_FreeAction(char*);
 unsigned int __cdecl fcn_005455b0(void)
 {
 	pos14_7f4c00 pos;
-	s_77e8c0* r;
+	D2_ACTION_POPUP_SLOT* r;
 	char* p;
 	char* found;
 	int foundi;

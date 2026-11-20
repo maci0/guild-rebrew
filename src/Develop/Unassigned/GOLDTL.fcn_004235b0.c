@@ -3,10 +3,10 @@
 
 // SIZE 0x30
 #include "client_types.h"
-typedef Voice_14cbbe0 Voice;
+typedef SOUND_VOICE Voice;
 
 extern int g_6b7d7c;
-extern Voice_14cbbe0 g_14cbbe0;
+extern SOUND_VOICE g_14cbbe0;
 Voice* __cdecl fcn_004229b0(void);
 char* __cdecl sb_FindSampleByName(char* bank, const char* name);
 char* __cdecl sb_FindSampleBank(char* sample);

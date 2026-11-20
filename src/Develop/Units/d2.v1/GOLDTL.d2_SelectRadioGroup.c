@@ -1,8 +1,8 @@
 #include "client_types.h"
-typedef Group_102cbc4 Group;
+typedef D2_RADIO_GROUP Group;
 // SIZE 0x8c
 
-extern Group_102cbc4 g_102cbc4[8];
+extern D2_RADIO_GROUP g_102cbc4[8];
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 

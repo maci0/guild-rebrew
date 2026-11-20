@@ -6,11 +6,11 @@
 #include "Develop/Units/m_alloc/group_node.h"
 
 typedef struct {
-	struct GroupNode* pool;
+	struct ALLOC_GROUP_NODE* pool;
 	char* tag;
 	void* ptr;
 	int size;
-} MemBlock;
+} TRACKED_MEMORY_BLOCK;
 // SIZE 0x10
 
 #endif

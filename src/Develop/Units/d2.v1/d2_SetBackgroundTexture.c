@@ -8,9 +8,9 @@ extern char s_67d54c[];
 void __cdecl fcn_0047ce50(void* tex);
 void* __cdecl fcn_0047ce00(const char* name, int a2);
 #include "Develop/Units/Error/error_message.h"
-typedef Obj_1038140 Obj;
+typedef D2_FORM_RECORD Obj;
 
-extern Obj_1038140 g_1038140[];
+extern D2_FORM_RECORD g_1038140[];
 extern int g_772534;
 extern int d2_CurrentWindowId;
 extern char* g_77255c;

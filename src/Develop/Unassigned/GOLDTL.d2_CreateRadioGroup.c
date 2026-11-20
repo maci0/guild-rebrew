@@ -1,7 +1,7 @@
 #include <stdarg.h>
 
 #include "client_types.h"
-typedef Group_102cbc4 Group;
+typedef D2_RADIO_GROUP Group;
 // SIZE 0x8c
 
 typedef struct Slot {
@@ -13,7 +13,7 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern Group_102cbc4 g_102cbc4[8];
+extern D2_RADIO_GROUP g_102cbc4[8];
 extern char* g_1015ea0;
 extern char s_67d4b0[];
 
