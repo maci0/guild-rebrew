@@ -1,5 +1,40 @@
+/* Proposed scene-slot declarations. Targets: GOLDTL and GOLD (same layout;
+ * native table addresses differ). Replaces local Slot, Slot445f50,
+ * fcn_00446cd0_Cam and s_1041d80 views after their uses are reconciled.
+ * Existing byte-array declaration is opt-in pending global binding review.
+ * Resolved: removed transitive client_types.h include; local vector type keeps
+ * x/y/z members; existing a/b/pal and f4/f8 member spellings are retained;
+ * opt-in extern avoids conflict with the legacy Slot445f50 declaration. */
 #ifndef D3_OBJECT_H
 #define D3_OBJECT_H
+
+/* Compatible in layout with VECTOR3; convert explicitly at API boundaries. */
+typedef struct D3_SCENE_VECTOR3 {
+    float x; /* 0x00 */
+    float y; /* 0x04 */
+    float z; /* 0x08 */
+} D3_SCENE_VECTOR3;
+/* // SIZE 0x0c */
+
+/* Inferred scene palette entry names; color is also accessed as bytes. */
+typedef struct D3_SCENE_PALETTE_ENTRY {
+    int color;        /* 0x00: color word */
+    float f4;     /* 0x04: interpolated scalar */
+    float f8;     /* 0x08: interpolated scalar */
+} D3_SCENE_PALETTE_ENTRY;
+/* // SIZE 0x0c */
+
+typedef struct D3_SCENE_SLOT {
+    D3_SCENE_VECTOR3 a;                    /* 0x00: first scene vector */
+    D3_SCENE_VECTOR3 b;                      /* 0x0c: second scene vector */
+    D3_SCENE_PALETTE_ENTRY pal[6];   /* 0x18..0x5f */
+} D3_SCENE_SLOT;
+/* // SIZE 0x60 */
+
+/* Enable only in converted TUs after removing incompatible local externs. */
+#ifdef D3_SCENE_DECLARE_BYTE_VIEW
+extern char g_1041d80[];
+#endif
 
 /* Inferred names. Native extents are proven; unknown regions retain their bytes. */
 typedef struct D3_DRAW_PART {
