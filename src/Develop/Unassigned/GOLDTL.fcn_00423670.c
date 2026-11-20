@@ -68,8 +68,8 @@ int __cdecl fcn_00423670(int* voice, int a1, int a2)
 		goto done;
 	}
 	if (a1 != 0) {
-		voice[4] = ((*(int*) &g_6b7fac) * 2 + (*(int*) &g_6b7fac)) * 4
-			+ (*(int*) &g_6b7fac);
+		voice[4] = (g_6b7fac * 2 + g_6b7fac) * 4
+			+ g_6b7fac;
 		voice[5] |= 1;
 		fcn_0042a920(*voice, 0);
 	} else {
@@ -84,8 +84,8 @@ int __cdecl fcn_00423670(int* voice, int a1, int a2)
 		msx_SetSampleLoopCount(*voice, voice[3]);
 		voice[6] = 0;
 	}
-	stamp = ((*(int*) &g_6b7fac) * 2 + (*(int*) &g_6b7fac)) * 4
-		+ (*(int*) &g_6b7fac);
+	stamp = (g_6b7fac * 2 + g_6b7fac) * 4
+		+ g_6b7fac;
 	((int*) voice[1])[0xf] = voice[2] = stamp;
 	voice[5] &= ~8;
 	msx_StartSample(*voice);

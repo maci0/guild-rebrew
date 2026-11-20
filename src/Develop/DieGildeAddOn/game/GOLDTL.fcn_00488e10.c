@@ -1,6 +1,7 @@
 #include <string.h>
 #include "client_data.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 extern unsigned char* lpGebaeudePROT;
 
@@ -14,22 +15,22 @@ void __cdecl fcn_00488e10(char* e)
 	char* p;
 	char* q;
 	char* r;
-	char* o; int* owner;
+	char* o; ENTITY_RECORD* rec;
 	unsigned int f;
 	int cnt;
 
 	cnt = 1;
-	owner = (int*) ((char*) g_7f4ca2 + 0x16a);
+	rec = (ENTITY_RECORD*) g_7f4ca0;
 	do {
-		if (*(unsigned short*) ((char*) owner - 0x16c) != 0xffff
-		    && *owner == *(int*) (e + 0x16c)
-		    && *((char*) owner - 7) != 0
-		    && (q = (char*) owner[4]) != 0
+		if (rec->entity_index != 0xffff
+		    && *(int*) &rec->unk_16c == *(int*) (e + 0x16c)
+		    && rec->unk_165[0] != 0
+		    && (q = *(char**) rec->unk_17c) != 0
 		    && *(unsigned char*) q == 0x8f) {
 			cnt--;
 		}
-		owner += 0x87;
-	} while ((int) owner < 0x85a20c);
+		rec++;
+	} while ((int) &rec->unk_16c < 0x85a20c);
 	if (cnt <= 0) {
 		return;
 	}

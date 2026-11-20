@@ -17,6 +17,7 @@ int __cdecl fcn_0047a570(int a0, int a1, int a2, int* countOut, int* sizesOut, i
 	int bp;
 
 	unsigned int i;
+	int k;
 
 	if (a2 > a1) {
 		n = a2;
@@ -57,14 +58,9 @@ int __cdecl fcn_0047a570(int a0, int a1, int a2, int* countOut, int* sizesOut, i
 	v2 = size / a2;
 	v2 = (int) (1.0f > (float) v2 + 0.5f ? 1.0f : (float) v2 + 0.5f);
 	prod = v1 * v2;
-	bp = a0 / prod;
-	if (bp < 1) {
-		bp = 1;
-	}
-	if (bp > 0) {
-		for (i = 0; i < bp; i++) {
-			sizesOut[i] = size;
-		}
+	bp = a0 / prod < 1 ? 1 : a0 / prod;
+	for (k = 0; k < bp; k++) {
+		sizesOut[k] = size;
 	}
 	if (bp >= 1 && a0 % prod != 0 && a0 > prod && a5 != 0) {
 

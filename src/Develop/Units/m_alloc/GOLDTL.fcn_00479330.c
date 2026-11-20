@@ -35,8 +35,8 @@ int* __cdecl fcn_00479330(int* src)
 		s = (char*) res + 0x32;
 		for (j = 0; j < *(unsigned short*) ((char*) src + 0xa); j++) {
 			*(int*) s = *(int*) in;
-			offs[j] = (int) (s - (char*) res);
 			*(int*) res += 4;
+			offs[j] = (int) (s - (char*) res);
 			for (i = 0; i < *(unsigned int*) in; i++) {
 				*(int*) out = (int) (((unsigned int) *(int*) p * 2) / 3);
 				*(int*) (out + 4) = *(int*) (p + 4);

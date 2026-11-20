@@ -43,15 +43,15 @@ void __cdecl fcn_00440670(unsigned int time, unsigned int count, char* p)
 			*(float*) (p + 0x148) = (float) fmod(dt * *(float*) (p + 0xc) + *(float*) (p + 0x148), 1.0);
 			*(float*) (p + 0x14c) = (float) fmod(dt * *(float*) (p + 0x10) + *(float*) (p + 0x14c), 1.0);
 			for (i = 0; i < 4; i++) {
-				*(float*) (p + 0x138 + i * 4) = (float) fmod(dt * *(float*) (p + 0x18 + i * 4) + *(float*) (p + 0x138 + i * 4), g_662958);
+				*(float*) (p + 0x138 + i * 4) = (float) fmod(dt * *(float*) (p + 0x18 + i * 4) + *(float*) (p + 0x138 + i * 4), 6.2831854820251465);
 			}
 			for (i = 0; i < 0x10; i++) {
 				di = (double) i;
 				o = (float*) (p + 0x38 + ((i & 3) + (i >> 2) * 4) * 0x10);
-				t[0] = (float) sin((cos(g_662cd8 * di) * g_662958 + *(float*) (p + 0x138)) + di);
-				t[1] = (float) cos((sin(g_662cc8 - g_662cd0 * di) * g_662958 + *(float*) (p + 0x13c)) + di);
-				t[2] = (float) sin(di - cos(g_662cc0 * di) * g_662958 + *(float*) (p + 0x140) + g_662cb8);
-				t[3] = (float) cos(di - sin(g_662cb0 * di + g_662cc8) * g_662958 + *(float*) (p + 0x144) + g_662ad0);
+				t[0] = (float) sin((cos(2.7 * di) * 6.2831854820251465 + *(float*) (p + 0x138)) + di);
+				t[1] = (float) cos((sin(3.1415927410125732 - g_662cd0 * di) * 6.2831854820251465 + *(float*) (p + 0x13c)) + di);
+				t[2] = (float) sin(di - cos(g_662cc0 * di) * 6.2831854820251465 + *(float*) (p + 0x140) + 2.2);
+				t[3] = (float) cos(di - sin(g_662cb0 * di + 3.1415927410125732) * 6.2831854820251465 + *(float*) (p + 0x144) + 4.0);
 				o[0] = t[0] * *(float*) (p + 0x28);
 				o[1] = t[1] * *(float*) (p + 0x2c);
 				o[2] = t[2] * *(float*) (p + 0x30);

@@ -14,7 +14,7 @@ extern int g_14ce8e0;
 extern int d2_CurrentElementId;
 extern char g_6ac494[];
 
-double __cdecl gm_RandomFloat01(void);
+float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00525f60(void*, int);
 int __cdecl fcn_00579640(void*, void*);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);

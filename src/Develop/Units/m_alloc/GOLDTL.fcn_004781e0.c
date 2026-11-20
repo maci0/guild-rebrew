@@ -62,8 +62,8 @@ unsigned int* __cdecl fcn_004781e0(int a0, int a1, int width, int a3, int a4, ch
 		} while (i < a3);
 	}
 	if (x0 < x1 || y0 < y1) {
-		x1 = 0;
 		x0 = 0;
+		x1 = 0;
 		y1 = 0;
 		y0 = 0;
 	}

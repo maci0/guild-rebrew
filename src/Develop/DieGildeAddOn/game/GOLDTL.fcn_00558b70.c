@@ -57,7 +57,8 @@ unsigned int __cdecl fcn_00558b70(char* eventRecord)
 	view = *(char**) (ent + 0x61);
 	d3_TransformPoint(view, view + 0x4c, from);
 
-	from[1] = from[1] + *(float*) (*(char**) (*(char**) (*(char**) (ent + 0x61) + 0x1cc) + 0x318) + 0x1d4) + g_665ea0;
+	from[1] = from[1] + *(float*) (*(char**) (*(char**) (*(char**) (ent + 0x61) + 0x1cc) + 0x318) + 0x1d4);
+	from[1] = from[1] + g_665ea0;
 
 	d3_TransformPoint(*(char**) (eventRecord + 0xc8), *(char**) (eventRecord + 0xc8) + 0x4c, to);
 	delta[0] = from[0] - to[0];

@@ -2,7 +2,7 @@
 int __cdecl fcn_00413e00(float *pointA, float *pointB, float *pointC, float *boxMin,
                          float *boxMax)
 {
-	float v[7];
+	float v[8];
 
 	v[0] = ((*pointA < *pointB ? *pointA : *pointB) < *pointC) ? (*pointA < *pointB ? *pointA : *pointB) : *pointC;
 	v[1] = ((double) pointC[1] > (double) ((double) pointA[1] < (double) pointB[1] ? pointA[1] : pointB[1])) ? ((double) pointA[1] < (double) pointB[1] ? pointA[1] : pointB[1]) : pointC[1];

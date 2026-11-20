@@ -21,12 +21,12 @@ int __cdecl gm_InitializeGameTables(char* prefix)
     unsigned short id;
     unsigned int index;
     for (src = (char*) 0x7e3ff8, d = (char*) 0x7d6a64; (int) src < 0x7e4ebc; src += 0x2f4, d += 0x2a90) {
-
-        *(int*) (d - 4) = *(int*) (src - 0x50);
-        *(int*) d = 1000;
-        *(int*) (d + 4) = *(int*) src;
-        *(int*) (d + 8) = 1000;
-        memcpy(d + 0xc, (void*) 0x6178a8, 0x2a80);
+        char *base = d + 8, *copy_dst = d + 0xc;
+        *(int*) (base - 0xc) = *(int*) (src - 0x50);
+        *(int*) (base - 8) = 1000;
+        *(int*) (base - 4) = *(int*) src;
+        *(int*) base = 1000;
+        memcpy(copy_dst, (void*) 0x6178a8, 0x2a80);
     }
     g_entity_type_table = m_alloc(0xca78, "f3_gm:lpGebaeudePROT");
     if (!g_entity_type_table)
@@ -59,7 +59,7 @@ int __cdecl gm_InitializeGameTables(char* prefix)
     gm_InitItemBuildingMap();
     gm_KillAllSpieler();
     for (i = 0; i < 0xca78; i += 0x24d) {
-        p = g_entity_type_table + i;
+        p = i + g_entity_type_table;
         n = 0;
         items = g_item_def_table;
         for (j = 0; j < 0x40; j++) {
@@ -67,7 +67,7 @@ int __cdecl gm_InitializeGameTables(char* prefix)
             if (id == 0xffff)
                 continue;
             index = id & 0x7fff;
-            if (((*(char *)&((OBJECT_PROTOTYPE *)items)[index].kind) == 2 || (*(char *)&((OBJECT_PROTOTYPE *)items)[index].kind) == 6) &&
+            if ((((OBJECT_PROTOTYPE *)items)[index].kind == 2 || ((OBJECT_PROTOTYPE *)items)[index].kind == 6) &&
                 index != 0xfd && (id & 0x8000))
                 n++;
         }

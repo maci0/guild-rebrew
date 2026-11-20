@@ -1,8 +1,9 @@
 #include <string.h>
 #include "client_data.h"
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 
 typedef struct Hit4ad2e0 {
-	char* p;
+	ENTITY_RECORD* p;
 	float f;
 } Hit4ad2e0;
 
@@ -27,7 +28,7 @@ void __cdecl fcn_004ad2e0(void)
 	int i;
 	int pos;
 	char* obj;
-	char* rec;
+	ENTITY_RECORD* rec;
 	float f;
 
 	if (gm_GameTime.a < 4) {
@@ -49,12 +50,12 @@ void __cdecl fcn_004ad2e0(void)
 	}
 	count = 0;
 	memset(hits, 0, sizeof(hits));
-	rec = (char*) 0x7f4ca0;
+	rec = (ENTITY_RECORD*) 0x7f4ca0;
 	do {
-		if (!(excludedMask & *(int*) (rec + 0x1cc)) && (requiredMask & *(int*) (rec + 0x1cc)) && *(unsigned char*) (rec + 0xd) >= 7 &&
-		    (*(unsigned char*) (rec + 2) == 6 || *(unsigned char*) (rec + 2) == 7 ||
-		     *(unsigned char*) (rec + 2) == 5 || *(unsigned char*) (rec + 2) == 4 ||
-		     *(unsigned char*) (rec + 2) == 3 || *(unsigned char*) (rec + 2) == 2)) {
+		if (!(excludedMask & rec->entity_flags) && (requiredMask & rec->entity_flags) && rec->unk_00d >= 7 &&
+		    (rec->entity_state == 6 || rec->entity_state == 7 ||
+		     rec->entity_state == 5 || rec->entity_state == 4 ||
+		     rec->entity_state == 3 || rec->entity_state == 2)) {
 			f = fcn_004ad500((unsigned char*) rec, (unsigned short*) obj, v4, 0);
 			for (i = 4; i > 0; i--) {
 				if (!(f > hits[i - 1].f)) {
@@ -71,8 +72,8 @@ void __cdecl fcn_004ad2e0(void)
 				count++;
 			}
 		}
-		rec += 0x21c;
-	} while ((int) rec < 0x85a0a0);
+		rec++;
+	} while ((int) &rec->entity_state < 0x85a0a2);
 	if (count >= 4) {
 		count = 4;
 	}
@@ -80,10 +81,10 @@ void __cdecl fcn_004ad2e0(void)
 		if (hits[i].p == 0) {
 			return;
 		}
-		fcn_004c5420(*(int*) (hits[i].p + 4), 0x1cc, 4, v6, 0);
-		if (*(char*) (hits[i].p + 2) == 6 || *(char*) (hits[i].p + 2) == 7) {
-			io_FormatTextBuffer(text, 0x42b1, (*(char*) (hits[i].p + 9) != 0 ? 0x28 : 0) + 0x253 + v4);
-			fcn_00545d40(*(int*) (hits[i].p + 4), -1, text, 0, 0x5fd, "_NACHRICHTEN_NEU_14");
+		fcn_004c5420(hits[i].p->entity_id, 0x1cc, 4, v6, 0);
+		if ((char) hits[i].p->entity_state == 6 || (char) hits[i].p->entity_state == 7) {
+			io_FormatTextBuffer(text, 0x42b1, (hits[i].p->gender != 0 ? 0x28 : 0) + 0x253 + v4);
+			fcn_00545d40(hits[i].p->entity_id, -1, text, 0, 0x5fd, "_NACHRICHTEN_NEU_14");
 		}
 	}
 }

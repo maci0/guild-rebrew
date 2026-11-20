@@ -97,7 +97,7 @@ int __cdecl fcn_005c02a0(char* entity)
                         *(int*)((char*)stats + 0x28) += amount;
                     fcn_004c5150(*(int*)(entity + 4), *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, g_773d75, amount);
                     duration = amount * ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].flags_1cc & 0x800)
-                        ? (double) g_664164 : (double) g_662ac8) * g_664330;
+                        ? g_664164 : g_662ac8) * g_664330;
                     command = gm_WalkEntityChain(g_774970);
                     command += gm_WalkEntityChain(*(unsigned short*)entity);
                     command = (int)(duration / command);

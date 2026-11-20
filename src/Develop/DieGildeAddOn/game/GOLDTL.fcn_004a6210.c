@@ -109,12 +109,12 @@ int __cdecl fcn_004a6210(char* actor, char* a1, int a2)
 	g_772874 = normal[1];
 	g_772878 = normal[2];
 	g_772848 = *(int*) (actor + 4);
-	g_7728b4 = res.cost;
 	g_77284c = *(int*) (a1 + 1);
 	g_7728b8 = res.amount;
-	g_772898 = state;
+	g_7728b4 = res.cost;
 	g_772894 = row + 1;
 	g_772890 = *(int*) &trajectory;
+	g_772898 = state;
 	g_77289c = col;
 	memcpy((void*) 0x7728a0, entry, sizeof(entry));
 

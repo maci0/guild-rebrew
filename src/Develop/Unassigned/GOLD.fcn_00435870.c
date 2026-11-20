@@ -1,4 +1,4 @@
-extern volatile int g_6b7fac;
+extern int g_6b7fac;
 
 /* ADDRESS: GOLD 0x00435870 */
 void __cdecl fcn_00435870(char* obj, char* name, unsigned char bit)

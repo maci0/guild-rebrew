@@ -27,7 +27,7 @@ void __cdecl fcn_004fcc20(void)
 
 	handle = (int) fcn_00507ab0(1);
 	fcn_004f4830(5, buf);
-	n = fcn_0050b750(0xe - *(int*) (buf + 0x18), g_773d75);
+	r = 0xe - *(int*) (buf + 0x18); n = fcn_0050b750(r, g_773d75);
 	i = 0;
 	g_773d48 = 0;
 	q = (char*) 0x7f4e10;

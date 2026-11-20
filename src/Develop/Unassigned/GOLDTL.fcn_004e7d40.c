@@ -61,8 +61,8 @@ int __cdecl amt_ApplyForOffice(char* entityRecord, int officeKind)
 			if (first) {
 				info.alt = amt_OfficeSlots[i].id;
 			} else {
-				info.sel = amt_OfficeSlots[i].id;
 				info.owner = *(int*) (entityRecord + 4);
+				info.sel = amt_OfficeSlots[i].id;
 				fcn_004c4eb0((char*) 0x67eef4);
 				res = fcn_004c6360(&info);
 				fcn_004c4ef0((char*) 0x67eef4);

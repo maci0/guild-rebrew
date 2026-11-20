@@ -44,20 +44,21 @@ int __cdecl fcn_004b6830(int* request)
 	if (n == 0) {
 		return 0x400;
 	}
+	i = 0;
 	hit = 0;
-	for (i = 0; i < n && hit == 0; i++) {
+	for (; i < n && hit == 0; i++) {
 		rec = msg + 0xc + i * 0x18;
 		if (*(rec + 4) != 3 || *(int*) rec == 0) {
 			continue;
 		}
-		for (s = (unsigned char*) 0x7f4ca2; (int) s < 0x85a0a2; s += 0x21c) {
+		for (j = 0, s = (unsigned char*) 0x7f4ca2; (int) s < 0x85a0a2; s += 0x21c, j++) {
 			if (*(s + 0x166) != *(rec - 4)) {
 				continue;
 			}
 			if (*s != 3 && *s != 4) {
 				continue;
 			}
-			hit = (unsigned short*) (s - 2);
+			hit = (unsigned short*) (g_7f4ca0 + j * 0x21c);
 			break;
 		}
 		if (hit != 0) {

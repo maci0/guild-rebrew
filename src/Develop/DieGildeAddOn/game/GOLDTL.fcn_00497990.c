@@ -65,7 +65,7 @@ int __cdecl fcn_00497990(int a1, char* entityRec, int phaseFlag, char* decisionM
 			} else {
 				bits_lo = (int) (1U << b);
 			}
-			if (*(unsigned short*) (e + 0x27) == *(unsigned short*) entityRec) {
+			if (*(unsigned short*) entityRec == *(unsigned short*) (e + 0x27)) {
 				if ((g_666028 & bits_lo) != 0 || (g_66602c & bits_hi) != 0) {
 					goto found;
 				}

@@ -1,5 +1,6 @@
 #include <string.h>
 #include "client_types.h"
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 extern pos14_7f4c00 gm_GameTime;
 
 struct unit;
@@ -13,7 +14,7 @@ void __cdecl fcn_004c5530(int a1);
 /* ADDRESS: GOLDTL 0x004831f0 */
 void __cdecl fcn_004831f0(char* obj)
 {
-	char* p;
+	ENTITY_RECORD* p;
 	char* e;
 	char* found;
 	char* parent;
@@ -40,26 +41,26 @@ void __cdecl fcn_004831f0(char* obj)
 		return;
 	}
 	found = 0;
-	p = (char*) 0x7f4ca0;
+	p = (ENTITY_RECORD*) g_7f4ca0;
 	do {
-		if ((int) p >= 0x85a0a0) {
+		if ((int) &p->unk_17c >= 0x85a21c) {
 			break;
 		}
-		if (*(unsigned short*) p != 0xffff) {
-			parent = (char*) *(int*) (p + 0x16c);
+		if (p->entity_index != 0xffff) {
+			parent = p->unk_16c;
 			if (parent == (char*) *(int*) (obj + 0x16c)) {
-				if (*(char*) (p + 0x165) != 0) {
-					q = *(char**) (p + 0x17c);
+				if (p->unk_165[0] != 0) {
+					q = *(char**) p->unk_17c;
 					if (q == 0 || *(unsigned char*) q == 4 || *(unsigned char*) q == 0x8c) {
-						r = (char*) *(int*) (p + 0x184);
+						r = *(char**) (p->unk_17c + 8);
 						if (r != 0 && *(int*) (r + 0x2c) == *(int*) (parent + 1)) {
-							found = p;
+							found = (char*) p;
 						}
 					}
 				}
 			}
 		}
-		p += 0x21c;
+		p++;
 	} while (found == 0);
 	if (found == 0) {
 		return;
