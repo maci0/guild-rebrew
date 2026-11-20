@@ -61,9 +61,9 @@ int __cdecl fcn_00497990(int a1, char* entityRec, int phaseFlag, char* decisionM
 			bits_lo = 0;
 			bits_hi = 0;
 			if (b > 0x1f) {
-				bits_hi = 1 << (b - 0x20);
+				bits_hi = (int) (1U << ((b - 0x20) & 31));
 			} else {
-				bits_lo = 1 << b;
+				bits_lo = (int) (1U << b);
 			}
 			if (*(unsigned short*) (e + 0x27) == *(unsigned short*) entityRec) {
 				if ((g_666028 & bits_lo) != 0 || (g_66602c & bits_hi) != 0) {

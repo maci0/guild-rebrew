@@ -1,4 +1,5 @@
 #include <math.h>
+extern const double g_6629c8;
 
 typedef struct LightIter {
 	char* obj;
@@ -65,7 +66,7 @@ char __cdecl fcn_0043ed30(char* node, LightIter* it)
 	}
 	scale = sqrt(t) / (*(float*) 0x6b8308 + sc->f60);
 	w = sc->width;
-	if (!(scale > *(double*) 0x6629c8)) {
+	if (!(scale > g_6629c8)) {
 		sc->data[w * centerY + centerX] |= 0x80;
 		return 1;
 	}

@@ -86,7 +86,7 @@ int __cdecl fcn_004d3c60(int id)
 		band = 3;
 	} else if (ratio >= g_662a6c) {
 		band = 2;
-	} else if (ratio >= g_6628cc) {
+	} else if (ratio >= 0.5f) {
 		band = 1;
 	} else {
 		band = 0;

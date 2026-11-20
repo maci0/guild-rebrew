@@ -18,6 +18,7 @@ __declspec(dllimport) void __stdcall Sleep(unsigned long);
 extern void (__stdcall* g_662264)(int);
 extern int g_7747d4, main_LoopFlags, g_1040494, d2_ScreenHeight, main_Instance;
 extern unsigned char g_772d10;
+extern char g_14cf950;
 
 /* ADDRESS: GOLDTL 0x005448e0 */
 void __cdecl main_PlayOutroMovie(void)
@@ -62,7 +63,7 @@ void __cdecl main_PlayOutroMovie(void)
 	fcn_004124b0();
 	t = *(unsigned char*) 0x7766a2;
 	*(int*) 0x6b5c90 = 0;
-	*(unsigned char*) 0x14cf950 = 0;
+	g_14cf950 = 0;
 	fcn_004c2d90((float) t * *(float*) 0x665e44, 0x3e8);
 	t = *(int*) 0x77492c;
 	g_772d10 = (unsigned char) saved;

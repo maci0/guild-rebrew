@@ -32,7 +32,6 @@ int __cdecl fcn_0048f4f0(char* e, char* q, Blk24* b1, Blk24* b2)
 	char* p;
 	int* h;
 	int t;
-	int found;
 	int v;
 	unsigned short idx;
 
@@ -61,6 +60,7 @@ int __cdecl fcn_0048f4f0(char* e, char* q, Blk24* b1, Blk24* b2)
 			b2->b = *(int*) (v + 1);
 		} else {
 			F8 f;
+			int found;
 			found = -1;
 			f.mask = 0x7b4c4a0;
 			f.b = 0;

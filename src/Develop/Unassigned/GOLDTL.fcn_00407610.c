@@ -71,7 +71,7 @@ int __cdecl fcn_00407760(char* flags, PairRun* src, char* dst, char* scale)
 	if (flags != 0 && (flags[4] & 0x10) != 0) {
 		step = 2;
 	} else {
-		step = (int) (*(float*) 0x6628e0 / *(float*) (scale + 0x10) + 0.5f);
+		step = (int) (12.0f / *(float*) (scale + 0x10) + 0.5f);
 		if (step < i) {
 			step = i;
 		}

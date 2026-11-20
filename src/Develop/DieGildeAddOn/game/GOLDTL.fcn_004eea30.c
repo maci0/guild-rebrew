@@ -32,7 +32,7 @@ int __cdecl fcn_004eea30(void* obj, int id, float fraction)
 	m.tag = 0x61535263;
 	m.obj = *(int*) ((char*) obj + 4);
 	m.id = id;
-	if (fraction > g_6628a8) {
+	if (fraction > 0.0f) {
 		if (fraction < 1.0f) {
 			m.f = fraction;
 			return fcn_004c6d30(&m);

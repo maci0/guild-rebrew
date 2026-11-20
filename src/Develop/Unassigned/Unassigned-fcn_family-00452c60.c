@@ -1,3 +1,4 @@
+extern const float g_6628a8;
 #include <math.h>
 
 #define GOLDTL_MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -241,8 +242,8 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
 			p->f40 = v[2] * e->f50 + p->f28;
 			p->f48 = v[3] * e->f54 + e->fe4;
 			p->f44 = (float) sin(p->f0c) * e->fb8 + e->fc0;
-			if ((e->fb0 < *(float*) 0x6628a8 && p->f40 < e->fb0) ||
-			    (e->fb0 > *(float*) 0x6628a8 && p->f40 > e->fb0)) {
+			if ((e->fb0 < g_6628a8 && p->f40 < e->fb0) ||
+			    (e->fb0 > g_6628a8 && p->f40 > e->fb0)) {
 				p->f40 = e->fb0;
 				p->f00 *= e->fa4;
 				p->f04 *= e->fa8;
@@ -359,7 +360,7 @@ char __cdecl fcn_00453470(void* a1, unsigned int tick)
 				*(float*) (p + 0x20) = v[0] * r;
 				*(float*) (p + 0x24) = v[1] * r;
 				*(float*) (p + 0x28) = v[2] * r;
-				if (*(float*) (e + 0x68) != *(float*) 0x6628a8) {
+				if (*(float*) (e + 0x68) != g_6628a8) {
 					r = r * *(float*) (e + 0x44);
 				} else {
 					*(float*) (p + 0x20) = 0.0f;
@@ -376,7 +377,7 @@ char __cdecl fcn_00453470(void* a1, unsigned int tick)
 				v[2] -= *(float*) (p + 0x28);
 				d3_NormalizeVector(v);
 			} else {
-				if (*(float*) (e + 0x68) != *(float*) 0x6628a8) {
+				if (*(float*) (e + 0x68) != g_6628a8) {
 					r = (float) rand() * RAND_UNIT_453470 *
 						*(float*) (e + 0x68);
 					*(float*) (p + 0x20) = v[0] * r;
@@ -452,16 +453,16 @@ char __cdecl fcn_00453470(void* a1, unsigned int tick)
 			*(float*) (p + 0x18) += dt * *(float*) (e + 0x60);
 			*(float*) (p + 0x1c) += dt * *(float*) (e + 0x64);
 			*(float*) (p + 0x10) = (float) fmod(*(float*) (p + 0x10),
-				*(double*) 0x662958);
+				6.2831854820251465);
 			*(float*) (p + 0x14) = (float) fmod(*(float*) (p + 0x14),
-				*(double*) 0x662958);
+				6.2831854820251465);
 			*(float*) (p + 0x18) = (float) fmod(*(float*) (p + 0x18),
-				*(double*) 0x662958);
+				6.2831854820251465);
 			*(float*) (p + 0x1c) = (float) fmod(*(float*) (p + 0x1c),
-				*(double*) 0x662958);
+				6.2831854820251465);
 			*(float*) (p + 0x0c) = (float) fmod(
 				*(float*) (p + 0x0c) + dt * *(float*) (e + 0xbc),
-				*(double*) 0x662958);
+				6.2831854820251465);
 			*(float*) (p) += dt * *(float*) (e + 0x98);
 			*(float*) (p + 4) += dt * *(float*) (e + 0x9c);
 			*(float*) (p + 8) += dt * *(float*) (e + 0xa0);

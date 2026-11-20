@@ -33,7 +33,6 @@ void __cdecl fcn_004d4950(int a0)
     char* v9;
     int v5;
     int v22;
-    int v11;
     char animations[2][0x20] = { "kampf/arm_greifen", "kampf/bauch_greifen" };
     char message[0x100];
     int v8;
@@ -57,6 +56,7 @@ void __cdecl fcn_004d4950(int a0)
         (v7[0x16] == 1 || v7[0x16] == 2)) {
         v8 = (int) fcn_004ce680(v3);
         if (v8) {
+            int v11;
             v11 = -1;
             fcn_004c4510((char*) v8, *(int*) (v8 + 2));
             fcn_004c4670(4, 1, (v8 - (int)g_aed32c) + 0x20, &v11);

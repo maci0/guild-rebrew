@@ -56,9 +56,9 @@ unsigned char __cdecl fcn_00438450(char* o)
 				src += 20;
 				dst += 4;
 			}
-			*(float*) (transformObject + 0x300) = *(float*) (transformObject + 0x300) * g_662a34;
-			*(float*) (transformObject + 0x304) = *(float*) (transformObject + 0x304) * g_662a34;
-			*(float*) (transformObject + 0x308) = *(float*) (transformObject + 0x308) * g_662a34;
+			*(float*) (transformObject + 0x300) = *(float*) (transformObject + 0x300) * 0.125f;
+			*(float*) (transformObject + 0x304) = *(float*) (transformObject + 0x304) * 0.125f;
+			*(float*) (transformObject + 0x308) = *(float*) (transformObject + 0x308) * 0.125f;
 		}
 		return *(unsigned char*) (p + 0x163d);
 	}

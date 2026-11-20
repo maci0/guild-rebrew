@@ -43,7 +43,7 @@ int __cdecl fcn_004382e0(char* obj)
 		dist = dist * n * g_1042a10;
 		idx = (int) dist;
 		if (idx >= n) {
-			dist = (float) n - g_6628a0;
+			dist = (float) n - 1.0f;
 		}
 		else if (dist < g_6628a8) {
 			dist = g_6628a8;

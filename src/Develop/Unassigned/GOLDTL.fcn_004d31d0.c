@@ -31,7 +31,7 @@ int __cdecl fcn_004d31d0(char* self, int centerColumn, int centerRow, int search
 				d = i - abs(n);
 				lo = centerColumn - d;
 				hi = centerColumn + d;
-				lo = lo < 0 ? 0 : lo;
+				if (lo < 0) lo = 0;
 				if (hi > *(int*) (map + 0x20) - 1) {
 					hi = *(int*) (map + 0x20) - 1;
 				}

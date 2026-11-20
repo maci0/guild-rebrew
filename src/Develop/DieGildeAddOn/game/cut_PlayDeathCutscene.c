@@ -92,7 +92,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			start = *(int*) 0x6b7fac;
 			while (*(volatile unsigned int*) 0x6b7fac < (unsigned int) (start + 0x339) && state == 0) {
 				fcn_005373e0(0, cut_EventLoopFlags);
-				if (*(int*) 0x14ce8e0 != 0) {
+				if (g_14ce8e0 != 0) {
 					state = 1;
 				}
 				if ((float) (unsigned int) (*(int*) 0x6b7fac - start) * (1.0f / 825.0f) < 1.0f) {
@@ -148,7 +148,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 		} else if ((*(unsigned char*) 0x7747b0 & 8) != 0) {
 			*(char*) ((char*) obj + 8) = 0;
 			idxval = yslot;
-			*(int*) 0x774954 = 1;
+			g_774954 = 1;
 			if (idxval != 0) {
 				io_FormatTextBuffer(buf1, 0x1ab4);
 			} else {
@@ -169,5 +169,5 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 	fcn_004c09b0();
 	fcn_004230e0((void*) handle);
 	fcn_004e4eb0();
-	*(int*) 0x772f54 = 0;
+	g_772f54 = 0;
 }

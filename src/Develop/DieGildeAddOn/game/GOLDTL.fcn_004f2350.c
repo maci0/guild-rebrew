@@ -52,10 +52,7 @@ int __cdecl fcn_004f2350(int e)
 		return -6;
 	}
 	slot = (char*) gv_GetSlotEntry((int) ent, *(int*) (e + 0xc), *(char*) (e + 0x10));
-	if (slot == 0) {
-		return -7;
-	}
-	if (*(short*) (slot + 8) != *(short*) (q + 0x50)) {
+	if (slot == 0 || *(short*) (slot + 8) != *(short*) (q + 0x50)) {
 		return -7;
 	}
 	base = *(int**) (slot + 0x10);

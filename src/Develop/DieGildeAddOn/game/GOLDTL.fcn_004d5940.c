@@ -171,8 +171,7 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 			p++;
 			i--;
 		} while (i);
-		sel = *(int*) (dialogState + 0x100);
-		sel = *(int*) (fcn_00502cd0(0, 2, 7, 1, sel) + 0x24);
+		sel = *(int*) (fcn_00502cd0(0, 2, 7, 1, *(int*) (dialogState + 0x100)) + 0x24);
 		d2_SetForm(win, 1);
 		io_AppendText(0x6811b0);
 		if (sel) {

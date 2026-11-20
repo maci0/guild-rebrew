@@ -48,21 +48,13 @@ int __cdecl fcn_00490c90(char* entity, int a1, int* outResult)
 		if (v5[6] - 3 > r) {
 			v = gm_RandomMod(3) & 0xffff; v = v5[6] - v - 1;
 			*outResult = v;
-			if (v5[1] > v) {
-				*outResult = v5[1];
-				return 1;
-			}
-			*outResult = v;
+			*outResult = v5[1] > v ? v5[1] : v;
 			return 1;
 		}
 		if (v5[6] + 3 < r) {
 			v = (gm_RandomMod(3) & 0xffff) + v5[6] + 1;
 			*outResult = v;
-			if (v5[2] < v) {
-				*outResult = v5[2];
-				return 1;
-			}
-			*outResult = v;
+			*outResult = v5[2] < v ? v5[2] : v;
 			return 1;
 		}
 	}

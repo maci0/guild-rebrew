@@ -114,8 +114,8 @@ void __cdecl fcn_0055cc80(char* self)
 		proto = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[packet->idx0];
 		q = fcn_004c4480(*(int*) (self + 0xb8));
 		job = ((unsigned char*)proto)[0x223 + *(unsigned char*)(self + 0xac)];
-		*(unsigned char*) (q + 0x165) = 0;
 		*(unsigned char*) (q + 0x164) = job;
+		*(unsigned char*) (q + 0x165) = 0;
 		for (count = 0; count < 1; count++) {
 			if (((int*) (self + 0xb0))[count] <= 0) {
 				continue;

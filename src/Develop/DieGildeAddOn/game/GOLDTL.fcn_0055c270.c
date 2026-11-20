@@ -124,7 +124,7 @@ void __cdecl fcn_0055c270(char* o)
 			msg.x58 = *(int*) (e + 1);
 			fcn_004c5530((char*) &msg);
 		}
-		if (*(char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_state == 6) {
+		if (*(char*) &((ENTITY_RECORD_VIEW*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_type == 6) {
 			char tmp[0x80];
 			char name[0x80];
 

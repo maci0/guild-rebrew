@@ -15,7 +15,7 @@ typedef struct {
 /* ADDRESS: GOLDTL 0x00421f10 */
 void __cdecl fcn_00421f10(Obj_00421f10* a0, unsigned int startIndex)
 {
-	unsigned int v;
+	unsigned short v;
 	unsigned short n;
 	int tail;
 

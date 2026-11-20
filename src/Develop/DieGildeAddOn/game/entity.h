@@ -106,4 +106,45 @@ extern unsigned int g_entity_slot_table[];
 extern char g_entity_state_base[2];
 extern unsigned char g_entity_type_bytes[1];
 
+/* Client only: in server builds even this unused typedef
+ * changes code generation in an existing server translation unit. */
+#if !defined(REBREW_SERVER)
+/* SIZE 0xac */
+typedef struct DYNAMIC_ENTITY_RECORD {
+    short unk_000;               /* 0x00: initialized to -1 */
+    unsigned char unk_002[0x10]; /* 0x02: serialized block */
+    unsigned char unk_012[2];    /* 0x12: not covered by save spans */
+    unsigned char unk_014[4];    /* 0x14 */
+    unsigned char unk_018[4];    /* 0x18: not covered by save spans */
+    unsigned char unk_01c[4];    /* 0x1c */
+    unsigned char unk_020[4];    /* 0x20 */
+    unsigned char unk_024[4];    /* 0x24: not covered by save spans */
+    unsigned char unk_028[4];    /* 0x28 */
+    unsigned char unk_02c[4];    /* 0x2c */
+    unsigned char unk_030[4];    /* 0x30 */
+    unsigned char unk_034[4];    /* 0x34 */
+    unsigned char unk_038[4];    /* 0x38 */
+    unsigned char unk_03c[4];    /* 0x3c */
+    unsigned char unk_040[4];    /* 0x40 */
+    unsigned char unk_044[4];    /* 0x44 */
+    unsigned char unk_048[4];    /* 0x48 */
+    unsigned char unk_04c[4];    /* 0x4c */
+    unsigned char unk_050[4];    /* 0x50 */
+    unsigned char unk_054[4];    /* 0x54 */
+    unsigned char unk_058[4];    /* 0x58 */
+    unsigned char unk_05c[4];    /* 0x5c */
+    unsigned char unk_060[4];    /* 0x60: older saves default to 0x3f800000 */
+    unsigned char unk_064[4];    /* 0x64 */
+    unsigned char unk_068[4];    /* 0x68 */
+    unsigned char unk_06c[4];    /* 0x6c */
+    unsigned char unk_070[4];    /* 0x70 */
+    unsigned char unk_074[0x11]; /* 0x74: saved block; older loads may read 14 bytes */
+    unsigned char unk_085[3];    /* 0x85: not covered by save spans */
+    unsigned char unk_088[4];    /* 0x88 */
+    unsigned char unk_08c[0x10]; /* 0x8c */
+    unsigned char unk_09c[0x0c]; /* 0x9c */
+    unsigned char unk_0a8[4];    /* 0xa8 */
+} DYNAMIC_ENTITY_RECORD;
+#endif
+
 #endif /* ENTITY_H */

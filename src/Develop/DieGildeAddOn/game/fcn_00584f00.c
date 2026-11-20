@@ -1,5 +1,6 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004ec7d0(int a1);
 int __cdecl fcn_00526010(void* tbl, int a2, char a3);
@@ -19,8 +20,8 @@ int __cdecl fcn_00584f00(int a1, char* a2, int cost)
     int r;
 
     h = fcn_004ec7d0(a1);
-    if (fcn_00526010((void*) (540 * *(u16*) 0x774970 + 0x7f4ca0), cost,
-                     *(u8*) 0x773d75) != 0) {
+    if (fcn_00526010((void*) (540 * g_774970 + 0x7f4ca0), cost,
+                     g_773d75) != 0) {
         if (h != 0) {
             fcn_00526120((void*) *(int*) 0x14b5440, 0x100);
         } else {

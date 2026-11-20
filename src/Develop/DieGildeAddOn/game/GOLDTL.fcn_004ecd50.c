@@ -19,19 +19,19 @@ float __cdecl fcn_004ecd50(char* a0, unsigned int* a1, int* a2)
 	x = fcn_004ec8a0(a0, 2);
 	obj = fcn_004ec950(a0, *a1);
 	if (obj == 0) {
-		return g_6628a8;
+		return 0.0f;
 	}
 	if (*((float*) obj + 1) >= 1.0f) {
-		return g_6628a8;
+		return 0.0f;
 	}
 	requested = *a2;
 	if (requested <= 0) {
-		return g_6628a8;
+		return 0.0f;
 	}
 	v4 = fcn_004eccd0(a0, (char*) a1);
 	adjusted = (int) ((float) v4 * (1.0f - x * 0.5f) * (1.0f - *((float*) obj + 1)));
 	if (adjusted <= 0) {
-		return g_6628a8;
+		return 0.0f;
 	}
 	amount = adjusted;
 	if (requested < adjusted) {

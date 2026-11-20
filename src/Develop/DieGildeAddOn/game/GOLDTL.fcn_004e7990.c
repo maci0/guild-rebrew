@@ -66,7 +66,7 @@ float __cdecl fcn_004e7990(int a0, int a1, unsigned int a2, int a3)
 			}
 		}
 		if (a2 >= 3) {
-			v = v + *(float*) 0x6640cc;
+			v = v + 10.0f;
 		}
 	}
 	if (a3 != 0) {
@@ -74,7 +74,7 @@ float __cdecl fcn_004e7990(int a0, int a1, unsigned int a2, int a3)
 		fcn_004f4830(2, v10);
 		bonus = *(float*) ((char*) &v9 + 0x14);
 		if (v10[6] == 2) {
-			bonus = bonus * *(float*) 0x662a6c;
+			bonus = bonus * 0.75f;
 		}
 		if (*(char*) (a0 + 0xc) == *(char*) (a1 + 0xc)) {
 			return bonus + v;

@@ -53,14 +53,14 @@ found:
 	if (a1 && *(int*) (*(int*) (v9 + 0x184) + 0x30) != *(int*) (a1 + 2)) {
 		return;
 	}
-	if (gm_CheckEntityType(a0)) {
-		v3 = (int) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*a0];
-	}
-	else {
+	if (!gm_CheckEntityType(a0)) {
 		v3 = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) a1]);
 		if (!v3) {
 			v3 = z;
 		}
+	}
+	else {
+		v3 = (int) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*a0];
 	}
 	v3++;
 	fcn_0064d41a(path, (char*) 0x6a1f54, g_6790c8, v3, v3);

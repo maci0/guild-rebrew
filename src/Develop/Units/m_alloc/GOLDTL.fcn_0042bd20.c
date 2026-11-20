@@ -61,8 +61,7 @@ int __cdecl txt_LoadTextFileDefinition(char* path)
 				*q = 0;
 				r = fcn_0064d1a0(p, '.');
 				*r = 0;
-				strcpy(names[n], p);
-				n++;
+				strcpy(names[n++], p);
 				if (n > 0x80)
 					{ m_FreeTracked(txt_TextBuffer); txt_TextBuffer = 0; return 0; }
 			}

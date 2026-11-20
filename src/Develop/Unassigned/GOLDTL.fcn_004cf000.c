@@ -10,11 +10,13 @@ float __cdecl fcn_004cf000(void *a0, int gridX, int gridZ)
     float p[8];
     float x;
     float z;
+    char *position;
 
     d3_GridPointToWorld(*(int *)((char *)g_67a370 + 0xb0), gridX, gridZ, p);
-    x = *(float *)((char *)*(int *)((char *)*(int *)((char *)a0 + 0x184) + 0x34) + 0x4c);
+    position = (char *)*(int *)((char *)*(int *)((char *)a0 + 0x184) + 0x34);
+    x = *(float *)(position + 0x4c);
     p[1] = 0.0f;
-    z = *(float *)((char *)*(int *)((char *)*(int *)((char *)a0 + 0x184) + 0x34) + 0x54);
+    z = *(float *)(position + 0x54);
     p[4] = p[0] - x;
     return (float)sqrt((p[2] - z) * (p[2] - z) + p[4] * p[4]);
 }

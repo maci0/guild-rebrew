@@ -1,3 +1,4 @@
+extern int g_14ce86c;
 extern int g_6b89b0, g_6b89b8;
 /* Chooses a display mode through the device vtable, stores the accepted mode
    and the flag bytes, then lets fcn_00456c80 build the surfaces. */
@@ -11,7 +12,7 @@ extern char g_1040600;
 	(*(int (__stdcall **)(int, int, int, int, int, int, int)) \
 	    (*(int*) *(int*) 0x6b5ddc + 0x28))( \
 	    *(int*) 0x6b5ddc, *(int*) 0x14ce744, *(int*) 0x14ce72c, \
-	    *(int*) 0x14ce86c, 1, 3, (f))
+	    g_14ce86c, 1, 3, (f))
 
 /* ADDRESS: GOLDTL 0x00456750 */
 void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
@@ -154,7 +155,7 @@ chosen:
 	if (r != 0) {
 		goto second;
 	}
-	r = *(int*) 0x14ce86c;
+	r = g_14ce86c;
 store:
 	g_6b89b8 = r;
 second:

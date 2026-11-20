@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern void* __cdecl gm_LookupEntityRecordById(unsigned int);
+extern unsigned char g_773d75; extern double g_662a48; extern void* __cdecl gm_LookupEntityRecordById(unsigned int);
 extern int __cdecl fcn_005c6270(void*, int);
 extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl gm_FindNextFilteredEntity(void);
@@ -67,12 +67,12 @@ int __cdecl fcn_004b7f70(unsigned int* request)
 		}
 	}
 	v = gm_RandomMod(4); owner = *ent;
-	d = (double) v + *(double*) 0x662a48;
+	d = (double) v + g_662a48;
 	n = (int) (((double) gm_WalkEntityChain(owner) * d) *
 	    *(double*) 0x6640e8);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
 	fcn_00545d40(*(int*) ((char*) ent + 4), *(int*) ((char*) ent + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
-	fcn_004c51a0(-1, *(int*) request, *(char*) 0x773d75, n);
+	fcn_004c51a0(-1, *(int*) request, (char) g_773d75, n);
 	return 0;
 }
