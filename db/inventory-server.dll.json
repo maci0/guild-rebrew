@@ -1,13 +1,23 @@
 [
   {
     "va": 268439552,
-    "size": 33,
-    "name": "fcn.10001000"
-  },
-  {
-    "va": 268439585,
-    "size": 269,
-    "name": "fcn.10001021"
+    "size": 302,
+    "name": "fcn.10001000",
+    "extent_history": [
+      {
+        "old_size": 33,
+        "new_size": 302,
+        "reason": "zlib function split in two by an earlier repair: build/server.map has no symbol at the tail, the next symbol follows the merged end (byte-identical server relink)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-21T12:58:52.532170+00:00",
+        "merged": {
+          "va": 268439585,
+          "size": 269,
+          "name": "fcn.10001021",
+          "extent_history": []
+        }
+      }
+    ]
   },
   {
     "va": 268439856,
@@ -16,23 +26,43 @@
   },
   {
     "va": 268440048,
-    "size": 11,
-    "name": "fcn.100011f0"
-  },
-  {
-    "va": 268440059,
-    "size": 298,
-    "name": "fcn.100011fb"
+    "size": 309,
+    "name": "fcn.100011f0",
+    "extent_history": [
+      {
+        "old_size": 11,
+        "new_size": 309,
+        "reason": "zlib function split in two by an earlier repair: build/server.map has no symbol at the tail, the next symbol follows the merged end (byte-identical server relink)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-21T12:58:52.532170+00:00",
+        "merged": {
+          "va": 268440059,
+          "size": 298,
+          "name": "fcn.100011fb",
+          "extent_history": []
+        }
+      }
+    ]
   },
   {
     "va": 268440368,
-    "size": 468,
-    "name": "fcn.10001330"
-  },
-  {
-    "va": 268440836,
-    "size": 37,
-    "name": "fcn.10001504"
+    "size": 505,
+    "name": "fcn.10001330",
+    "extent_history": [
+      {
+        "old_size": 468,
+        "new_size": 505,
+        "reason": "zlib function split in two by an earlier repair: build/server.map has no symbol at the tail, the next symbol follows the merged end (byte-identical server relink)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-21T12:58:52.532170+00:00",
+        "merged": {
+          "va": 268440836,
+          "size": 37,
+          "name": "fcn.10001504",
+          "extent_history": []
+        }
+      }
+    ]
   },
   {
     "va": 268440880,
@@ -67,12 +97,29 @@
   {
     "va": 268442208,
     "size": 343,
-    "name": "fcn.10001a60"
-  },
-  {
-    "va": 268442551,
-    "size": 9,
-    "name": "fcn.10001bb7"
+    "name": "fcn.10001a60",
+    "extent_history": [
+      {
+        "old_size": 343,
+        "new_size": 352,
+        "reason": "zlib function split in two by an earlier repair: build/server.map has no symbol at the tail, the next symbol follows the merged end (byte-identical server relink)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-21T12:58:52.532170+00:00",
+        "merged": {
+          "va": 268442551,
+          "size": 9,
+          "name": "fcn.10001bb7",
+          "extent_history": []
+        }
+      },
+      {
+        "old_size": 352,
+        "new_size": 343,
+        "reason": "deflate_stored and inflate_trees_bits end at 343 and 163 bytes; the following 9 and 13 bytes are nop padding before the next build/server.map symbol",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-21T13:02:39.627391+00:00"
+      }
+    ]
   },
   {
     "va": 268442560,
@@ -346,12 +393,29 @@
   {
     "va": 268459264,
     "size": 163,
-    "name": "fcn.10005d00"
-  },
-  {
-    "va": 268459427,
-    "size": 13,
-    "name": "fcn.10005da3"
+    "name": "fcn.10005d00",
+    "extent_history": [
+      {
+        "old_size": 163,
+        "new_size": 176,
+        "reason": "zlib function split in two by an earlier repair: build/server.map has no symbol at the tail, the next symbol follows the merged end (byte-identical server relink)",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-21T12:58:52.532170+00:00",
+        "merged": {
+          "va": 268459427,
+          "size": 13,
+          "name": "fcn.10005da3",
+          "extent_history": []
+        }
+      },
+      {
+        "old_size": 176,
+        "new_size": 163,
+        "reason": "deflate_stored and inflate_trees_bits end at 343 and 163 bytes; the following 9 and 13 bytes are nop padding before the next build/server.map symbol",
+        "binary_hash": "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1",
+        "changed_at": "2026-11-21T13:02:39.627391+00:00"
+      }
+    ]
   },
   {
     "va": 268459440,

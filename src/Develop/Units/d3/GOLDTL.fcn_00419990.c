@@ -49,7 +49,7 @@ extern char str_6776b8[];
 float __cdecl fcn_00413d10(float* pos);
 unsigned char __cdecl fcn_00441720(int* world, float* pos, unsigned int flag, unsigned int* grid_x, unsigned int* grid_y, float* radius);
 int __cdecl fcn_00441f10(int* world, int x, int y);
-float* __stdcall fcn_005ebbb9(float* matrix, const float* camera);
+float* __stdcall D3DXMatrixTranspose(float* matrix, const float* camera);
 void __cdecl d3_NormalizeVector(float* v);
 char* __cdecl fcn_00419640(int id, int* which);
 char* __cdecl fcn_004234e0(char* bank, char* name, int loop, int pan, int vol, int a, int b);
@@ -117,7 +117,7 @@ void __cdecl d3snd_UpdateAmbientSources(void)
 	radius = 39.37f;
 	entries[0].id = entries[0].volume = entries[0].pan = 0;
 	entries[1].id = entries[1].volume = entries[1].pan = 0;
-	fcn_005ebbb9((float*) matrix, (float*) (d3_ActiveCamera + 0x18c));
+	D3DXMatrixTranspose((float*) matrix, (float*) (d3_ActiveCamera + 0x18c));
 	dir[1] = 0.0f;
 	dir[0] = g_662d40[0] * matrix[0][0] + (g_662d40[1] * matrix[1][0] + g_662d40[2] * matrix[2][0]);
 	dir[2] = g_662d40[0] * matrix[0][2] + (g_662d40[1] * matrix[1][2] + g_662d40[2] * matrix[2][2]);

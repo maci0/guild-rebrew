@@ -9,7 +9,7 @@ extern float g_6628a8;
 extern char g_14cf70f;
 extern float g_662a70;
 
-float* __stdcall fcn_005ebbb9(float*, const float*);
+float* __stdcall D3DXMatrixTranspose(float*, const float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl fcn_00438b40(char*, float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
@@ -89,7 +89,7 @@ int __cdecl fcn_0052b230(void)
 	if (g_14ce8d0 != 0) {
 		return r;
 	}
-	fcn_005ebbb9(m, (const float*) (p + 0x18c));
+	D3DXMatrixTranspose(m, (const float*) (p + 0x18c));
 	t = (float) ((int) *(short*) &g_14cf900 - *(int*) 0x774738);
 	s = t * *(float*) &g_6628a8;
 	v[0] = m[0] * t + (m[4] * s + m[8] * s);

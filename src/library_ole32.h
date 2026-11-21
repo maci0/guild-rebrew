@@ -4,3 +4,6 @@
  * Columns: module, address, size in bytes, native symbol. */
 
 // GOLD 0x00422db6 n/a CoUninitialize
+// OLE32 0x005eaa08 n/a CoInitialize
+// OLE32 0x005eaa0e n/a CoUninitialize
+// OLE32 0x005eaa14 n/a CoCreateInstance

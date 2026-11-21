@@ -1,6 +1,6 @@
 #include "Develop/Units/d3/d3_camera.h"
 
-float* __stdcall fcn_005ebbb9(float* out, const float* in);
+float* __stdcall D3DXMatrixTranspose(float* out, const float* in);
 
 /* 0x24 bytes between the camera vector and the matrix keep the matrix
  * at [esp+0x30] inside a 0x70-byte frame. */
@@ -27,7 +27,7 @@ void __cdecl fcn_004131e0(float* out, float amount)
 	cam[0] = *(float*) (base + 0x4c);
 	cam[1] = *(float*) (base + 0x50);
 	cam[2] = *(float*) (base + 0x54);
-	fcn_005ebbb9(blk.m, (float*) (base + 0x18c));
+	D3DXMatrixTranspose(blk.m, (float*) (base + 0x18c));
 	neg = -amount;
 	scale = neg * *(float*) 0x6628a8;
 	*(float*) (blk.hole + 4) = scale;

@@ -4,7 +4,7 @@
  * Columns: module, address, size in bytes, native symbol. */
 
 // GOLDTL 0x005eaaf0 294 _AIL_shutdown@0
-// GOLDTL 0x005eaaf6 288 _AIL_set_digital_master_volume@8
+// GOLDTL 0x005eaaf6 6 _AIL_set_digital_master_volume@8
 // GOLDTL 0x0064c112 6 DirectDrawCreateEx
 // GOLDTL 0x00660600 186 WideCharToMultiByte
 // GOLDTL 0x00660606 180 InterlockedIncrement
@@ -93,5 +93,5 @@
 // GOLDTL 0x006607f8 n/a CreateDIBSection
 // GOLDTL 0x006607fe n/a CreateCompatibleDC
 // GOLDTL 0x00660804 n/a RegOpenKeyA
-// GOLDTL 0x00660ace n/a _fcn_00660ace
+// GOLDTL 0x00660ace 6 _fcn_00660ace
 // SERVER 0x10023840 6 RtlUnwind

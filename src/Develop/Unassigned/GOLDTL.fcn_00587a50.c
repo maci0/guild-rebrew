@@ -16,7 +16,7 @@ extern void __cdecl fcn_00438b40(void*, float*);
 extern void __cdecl d3_NormalizeVector(float*);
 extern float __cdecl fcn_004514d0(int, int);
 extern void* __cdecl fcn_005e8850(void);
-extern void __stdcall fcn_005ebbb9(float*, float*);
+extern void __stdcall D3DXMatrixTranspose(float*, float*);
 extern int __cdecl fcn_00471f80(int);
 extern void __cdecl fcn_00587f40(char*);
 
@@ -53,7 +53,7 @@ void __cdecl fcn_00587a50(char* o)
 	v[7] = 0.0f;
 
 	c = fcn_005e8850();
-	fcn_005ebbb9(m, ((struct node98*) *(void**) (o + 0x98))->m);
+	D3DXMatrixTranspose(m, ((struct node98*) *(void**) (o + 0x98))->m);
 	v[2] = 0.0f;
 	v[4] = 0.0f;
 	v[3] = fcn_004514d0((int) g_662d40, (int) c) - g_662b08 -

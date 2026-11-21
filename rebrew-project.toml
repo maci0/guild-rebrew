@@ -69,11 +69,14 @@ check_known_bindings = true
 # scripts/gate.sh runs it.  Measurements: docs/general-knowledge.md,
 # "one compiler version, two code generators".
 compiler = { profile = "msvc-6.0-sp5-pp" }
-# The T&L client statically links d3dx8.lib: 0x5e0000-0x64ffff holds ~907
-# linker-supplied D3DX8 bodies (~273 KB), not game source.  Declared so
-# "work left" tools (cross-import, todo) skip the band instead of treating it
-# as unreversed game code.  GOLD links DirectX by DLL import only.
-external_ranges = ["0x5e0000-0x64ffff", "0x650000-0x66ffff"]
+# The T&L client statically links d3dx8.lib.  Linker-supplied, not game source:
+# the import thunk table 0x5ea7b0-0x5eaacf (133 `jmp [IAT]` thunks), then from
+# 0x5eaaf0 (more thunks, the first d3dx8 body at 0x5eac1c) to 0x64ffff.  Game code
+# sits below and between them (0x5eaad0/0x5eaae0 are a game global's atexit
+# registration and its destructor).  Declared so "work left" tools (cross-import,
+# todo) skip the band instead of treating it as unreversed game code.  GOLD links
+# DirectX by DLL import only.
+external_ranges = ["0x5ea7b0-0x5eaacf", "0x5eaaf0-0x64ffff", "0x650000-0x66ffff"]
 binary = "original/Europa1400Gold_TL.exe"
 format = "pe"
 arch = "x86_32"
@@ -98,6 +101,8 @@ LIBCMT = "LIBCMT.lib"
 WINMM = "WINMM.lib"
 WS2_32 = "WS2_32.lib"
 ADVAPI32 = "ADVAPI32.lib"
+# gdi32.dll thunk rows only (accounting); GDI32.lib is not added to the link.
+GDI32 = ""
 
 [targets."Europa1400Gold.exe"]
 check_known_bindings = true

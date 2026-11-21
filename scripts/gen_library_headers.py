@@ -16,7 +16,6 @@ TITLES = {
     "library_libcmt.h": "LIBCMT, the MSVC 6.0 SP5 multithreaded static C runtime (server.dll, Europa1400Gold_TL.exe)",
     "library_libc.h": "LIBC, the MSVC 6.0 SP5 single-threaded static C runtime (Europa1400Gold.exe)",
     "library_d3dx8.h": "d3dx8.lib, the DirectX 8 D3DX static library",
-    "library_lua50.h": "Lua 5.0",
     "library_imports.h": "import thunks the linker emits for DLL imports",
 }
 

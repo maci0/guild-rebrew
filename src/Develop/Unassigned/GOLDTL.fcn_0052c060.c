@@ -93,7 +93,7 @@ void __cdecl fcn_00438b40(void*, void*);
 void __cdecl d3_SetObjectRotation(void*, void*);
 char* __cdecl fcn_00509570(void*);
 void __cdecl d3_SetCameraHeightFraction(float);
-float* __stdcall fcn_005ebbb9(float*, const float*);
+float* __stdcall D3DXMatrixTranspose(float*, const float*);
 float __cdecl fcn_004514d0(float*, float*);
 
 /* ADDRESS: GOLDTL 0x0052c060 */
@@ -270,7 +270,7 @@ predict:
 	if (g_14ce8d0 != 0) {
 		goto tail;
 	}
-	fcn_005ebbb9(mat, cam->mat);
+	D3DXMatrixTranspose(mat, cam->mat);
 	q.y = 0.0f;
 	t = (float) g_7766b4 * g_665df8;
 	d.x = (float) ((int) g_14cf900 - g_773e38) * t;

@@ -26,7 +26,7 @@ int __cdecl fcn_0046f740(int a, int b, int c, int d);
 void __cdecl fcn_00469470(int a, int b);
 int __cdecl d2_CreateRadioGroup(int a, ...);
 int __cdecl fcn_00441ab0(char* a, int b, int c, float d, float* out);
-float* __stdcall fcn_005ebbb9(float* a, const float* b);
+float* __stdcall D3DXMatrixTranspose(float* a, const float* b);
 void __cdecl fcn_00438b40(int h, float* p);
 int __cdecl plt_CheckZoneAvailability(int a, int b, int c, unsigned int d);
 void __cdecl d3_SetSubtreeColor(int a, int b, int c, int d);
@@ -178,7 +178,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			v16 = (int) v18 >> 0x10;
 			v34 = v19;
 			v37 = v16;
-			fcn_005ebbb9(matrix, (float*) (d3_ActiveCamera + 0x18c));
+			D3DXMatrixTranspose(matrix, (float*) (d3_ActiveCamera + 0x18c));
 			world[0] = matrix[8] * pick[2] + matrix[4] * pick[1] + matrix[0] * pick[0];
 			world[1] = matrix[9] * pick[2] + matrix[5] * pick[1] + matrix[1] * pick[0];
 			world[2] = matrix[10] * pick[2] + matrix[6] * pick[1] + matrix[2] * pick[0];

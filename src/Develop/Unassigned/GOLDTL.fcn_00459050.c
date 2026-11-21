@@ -8,7 +8,7 @@ extern char* d3_ActiveCamera;
 void __cdecl fcn_00451340(float*, float*, float, float*);
 float __cdecl fcn_00451380(float*, float*);
 void __cdecl d3_NormalizeVector(float*);
-float* __stdcall fcn_005ebbb9(float*, const float*);
+float* __stdcall D3DXMatrixTranspose(float*, const float*);
 
 /* Rebuild one 6x8 terrain patch: place every lattice vertex through the
  * camera basis, shade it into a byte, then lock the patch vertex buffer
@@ -50,7 +50,7 @@ void __cdecl fcn_00459050(int self)
 	*(float*) (p + 0x14) = (float) fmod(fcn_00451380((float*) g_662d40, v), 6.2831854820251465);
 	*(unsigned int*) (p + 0xc) = 0x30;
 	src = (float*) (d3_ActiveCamera + 0x18c);
-	fcn_005ebbb9(m, src);
+	D3DXMatrixTranspose(m, src);
 	dr[0] = *(float*) 0x10425d8 * m[8] + *(float*) 0x10425d4 * m[4] + *(float*) 0x10425d0 * m[0];
 	dr[1] = *(float*) 0x10425d8 * m[9] + *(float*) 0x10425d4 * m[5] + *(float*) 0x10425d0 * m[1];
 	dr[2] = *(float*) 0x10425d8 * m[10] + *(float*) 0x10425d4 * m[6] + *(float*) 0x10425d0 * m[2];

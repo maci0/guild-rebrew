@@ -54,7 +54,7 @@ extern char* g_7e2aa0;
 extern char* g_7746c0;
 
 int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
-float* __stdcall fcn_005ebbb9(float* out, float* in);
+float* __stdcall D3DXMatrixTranspose(float* out, float* in);
 void __cdecl d3_TransformPoint(char* src, char* pos, Vec3* out);
 float __cdecl fcn_00413d10(Vec3* p);
 void __cdecl fcn_00433780(View* v);
@@ -83,7 +83,7 @@ void __cdecl fcn_0052cf20(Ent* e)
 
 	obj = e->obj;
 	d3_GetObjectVerticalBounds(obj, &lo, &hi);
-	fcn_005ebbb9(m, ((View*)d3_ActiveCamera)->mat);
+	D3DXMatrixTranspose(m, ((View*)d3_ActiveCamera)->mat);
 	a = g_662d40[0] * -600.0f;
 	b = g_662d40[1] * -600.0f;
 	c = g_662d40[2] * -600.0f;

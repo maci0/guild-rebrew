@@ -62,7 +62,7 @@ extern char g_6b8000;
 
 void __cdecl d3_UpdateObjectCameraTransform(Ent*, char*, int);
 Mat* __stdcall fcn_005ebea2(Mat*, float*, Mat*);
-Mat* __stdcall fcn_005ebbb9(Mat*, Mat*);
+Mat* __stdcall D3DXMatrixTranspose(Mat*, Mat*);
 Plane* __stdcall fcn_005ee04a(Plane*, Plane*, Mat*);
 Plane* __stdcall fcn_005ed45f(void*, Plane*);
 void __cdecl d3_VisitSceneObjects(int, int, int, void (__cdecl*)(void), void*);
@@ -83,15 +83,15 @@ void __cdecl fcn_00451df0(Ent* e)
 		d3_UpdateObjectCameraTransform(e, d3_ActiveCamera, 0);
 	}
 	fcn_005ebea2(&m, 0, &e->xf->a);
-	fcn_005ebbb9(&m, &m);
+	D3DXMatrixTranspose(&m, &m);
 	fcn_005ee04a(&p, &e->inst->model->plane, &m);
 	fcn_005ed45f(&big, &p);
 	fcn_005ebea2(&m, 0, &e->xf->b);
-	fcn_005ebbb9(&m, &m);
+	D3DXMatrixTranspose(&m, &m);
 	fcn_005ee04a(&p, &e->inst->model->plane, &m);
 	fcn_005ed45f((Mat*) g_1040cc0, &p);
 	fcn_005ebea2((Mat*) g_1040c80, 0, (Mat*) g_1040cc0);
-	fcn_005ebbb9((Mat*) g_1040c80, (Mat*) g_1040c80);
+	D3DXMatrixTranspose((Mat*) g_1040c80, (Mat*) g_1040c80);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x16, 2);
 	g_6b8000 = 1;
 	d3_VisitSceneObjects(g_67a370, 0, 0x40, fcn_00451f80, &big);

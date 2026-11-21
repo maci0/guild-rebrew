@@ -19,7 +19,7 @@ extern char g_14cf7cb;
 extern char g_14cf7c8;
 #include <math.h>
 
-float* __stdcall fcn_005ebbb9(float* out, const float* in);
+float* __stdcall D3DXMatrixTranspose(float* out, const float* in);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 float __cdecl fcn_004514d0(int a, int b);
 void __cdecl fcn_00438b40(char* p, int* v);
@@ -215,7 +215,7 @@ done:
 	}
 	step = (float) (*(float*) 0x6a2570 * f
 	    * (d3_CameraHeightFraction * 1.5 + 0.6));
-	fcn_005ebbb9(mat, (float*) ((char*) d3_ActiveCamera + 0x18c));
+	D3DXMatrixTranspose(mat, (float*) ((char*) d3_ActiveCamera + 0x18c));
 	d[0] = *(float*) 0x774744 * step * 1.1;
 	d[1] = *(float*) 0x77474c * step * 1.1;
 	q[0] = mat[8] * *(float*) 0x662d48

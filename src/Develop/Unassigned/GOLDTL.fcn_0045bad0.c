@@ -6,7 +6,7 @@ extern float g_10432a4;
 extern float g_6628a8;
 extern double g_662e68;
 
-float* __stdcall fcn_005ebbb9(float* out, const float* in);
+float* __stdcall D3DXMatrixTranspose(float* out, const float* in);
 
 /* Projects the screen point into map space and steps along the ray until a
  * map cell (x, z) is at least as high as the ray's y. */
@@ -37,7 +37,7 @@ char __cdecl fcn_0045bad0(char* e, int gx, int gy, int* ox, int* oy)
 	o[2] = o[2] / *(float*) (e + 0x18);
 	u = ((float) gx - d3_ViewportCenterX) / g_10432a4;
 	v = ((float) gy - g_1052bc8) / d3_ProjectionScaleY;
-	fcn_005ebbb9(m, (float*) (d3_ActiveCamera + 0x18c));
+	D3DXMatrixTranspose(m, (float*) (d3_ActiveCamera + 0x18c));
 	px = m[4] * v + m[0] * u + m[8];
 	py = m[5] * v + m[1] * u + m[9];
 	pz = m[6] * v + m[2] * u + m[10];

@@ -34,7 +34,7 @@ typedef struct {
 #pragma pack(pop)
 
 int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
-float* __stdcall fcn_005ebbb9(float* out, const float* in);
+float* __stdcall D3DXMatrixTranspose(float* out, const float* in);
 void __cdecl d3_TransformPoint(char* e, char* pos, float* out);
 float __cdecl fcn_00413d10(float* p);
 void __cdecl fcn_00433780(char* cam);
@@ -66,7 +66,7 @@ void __cdecl fcn_0052cbb0(Ent* e)
 
 	obj = e->obj;
 	d3_GetObjectVerticalBounds(obj, &lo, &hi);
-	fcn_005ebbb9(m, (float*) ((char*) d3_ActiveCamera + 0x18c));
+	D3DXMatrixTranspose(m, (float*) ((char*) d3_ActiveCamera + 0x18c));
 	a = g_662d40[0] * -600.0f;
 	b = g_662d40[1] * -600.0f;
 	c = g_662d40[2] * -600.0f;

@@ -2,7 +2,7 @@
 
 extern int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 extern void __cdecl fcn_004557c0(void*, void*, int, float*);
-extern float* __stdcall fcn_005ebbb9(float*, const float*);
+extern float* __stdcall D3DXMatrixTranspose(float*, const float*);
 extern float __cdecl fcn_004514d0(float*, float*);
 extern void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
 extern float* __stdcall fcn_005eb970(float*, const float*, const float*);
@@ -62,7 +62,7 @@ int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view
 	} else {
 		src = (unsigned char*) view + 0x18c;
 	}
-	fcn_005ebbb9(m, (float*) src);
+	D3DXMatrixTranspose(m, (float*) src);
 	if (*(int*) (self + 0x218) == 3) {
 		if (valid) {
 			outB[0] = *(float*) (self + 0x84) + pos[0];

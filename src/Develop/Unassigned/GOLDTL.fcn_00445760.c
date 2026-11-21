@@ -21,7 +21,7 @@ typedef struct Obj0445760 {
 void __cdecl d3_MatrixToEulerAngles(void* a, int b);
 void __cdecl fcn_004557c0(Obj0445760* o, char* a, int b, Mat0445760* out);
 Mat0445760* __stdcall fcn_005ebea2(Mat0445760* out, float* det, Mat0445760* in);
-Mat0445760* __stdcall fcn_005ebbb9(Mat0445760* out, Mat0445760* in);
+Mat0445760* __stdcall D3DXMatrixTranspose(Mat0445760* out, Mat0445760* in);
 void* __stdcall fcn_005eb970(void* out, void* in, Mat0445760* m);
 
 void __cdecl fcn_00445760(Obj0445760* o, Vec0445760* in, void* dir, Vec0445760* out, int arg)
@@ -44,7 +44,7 @@ void __cdecl fcn_00445760(Obj0445760* o, Vec0445760* in, void* dir, Vec0445760* 
 	out->y = (inv.m[1][1] * in->y + inv.m[0][1] * in->x) + inv.m[2][1] * in->z + inv.m[3][1];
 	out->z = inv.m[1][2] * in->y + inv.m[0][2] * in->x + inv.m[2][2] * in->z + inv.m[3][2];
 	fcn_004557c0(p, 0, 1, &m);
-	fcn_005ebbb9(&inv, &m);
+	D3DXMatrixTranspose(&inv, &m);
 	fcn_005eb970(&m, dir, &inv);
 	d3_MatrixToEulerAngles(&m, arg);
 }

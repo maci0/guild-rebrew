@@ -32,6 +32,7 @@ the returned digest. [AGENTS.md](../AGENTS.md) owns metadata and upstream repair
 | `scripts/wine_load_check.sh` | Load the server DLL and resolve Init/Exit |
 | `scripts/gen_import_includes.py` | Native import retention/order recipe |
 | `scripts/progress_svg.py` | Graphics from a canonical status report |
+| `scripts/gen_library_headers.py` | Rewrite `src/library_*.h` as lists of their LIBRARY rows; run after `library adopt` or `source rehome` |
 | `stubs/linked_manifest.py` | Scaffold attribution from a successful link map |
 
 Layout generators do not establish original storage owners.
