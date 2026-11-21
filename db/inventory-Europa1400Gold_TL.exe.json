@@ -112344,8 +112344,45 @@
   },
   {
     "va": 6607439,
-    "size": 248,
-    "name": "fcn.0064d24f"
+    "size": 60,
+    "name": "fcn.0064d24f",
+    "extent_history": [
+      {
+        "old_size": 248,
+        "new_size": 60,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6607499,
+    "size": 168,
+    "name": "fcn.0064d28b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 168,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6607667,
+    "size": 20,
+    "name": "fcn.0064d333",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 20,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6607687,
@@ -112527,7 +112564,7 @@
   },
   {
     "va": 6610082,
-    "size": 824,
+    "size": 507,
     "name": "fcn.0064dca2",
     "extent_history": [
       {
@@ -112550,12 +112587,33 @@
         "reason": "Control-flow closure resize after merging fall-through entries: an interior branch targets code past an interior ret, so the entry extends to its decoded closure and never past the next entry start.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T10:09:06.742485+00:00"
+      },
+      {
+        "old_size": 824,
+        "new_size": 507,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6610589,
+    "size": 317,
+    "name": "fcn.0064de9d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 317,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
       }
     ]
   },
   {
     "va": 6610906,
-    "size": 407,
+    "size": 233,
     "name": "fcn.0064dfda",
     "extent_history": [
       {
@@ -112571,41 +112629,55 @@
         "reason": "Second split of the import-thunk remainder at 0x64dfda: library rows inside it leave the 86-byte fragment at 0x64e171 unowned. Trim the head to that fragment, admit the fragment, and admit the continuation at 0x64e1c7 as its own entry.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T09:55:40.739408+00:00"
-      }
-    ]
-  },
-  {
-    "va": 6611313,
-    "size": 86,
-    "name": "fcn.0064e171",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 86,
-        "reason": "Second split of the import-thunk remainder at 0x64dfda: library rows inside it leave the 86-byte fragment at 0x64e171 unowned. Trim the head to that fragment, admit the fragment, and admit the continuation at 0x64e1c7 as its own entry.",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T09:55:40.742938+00:00"
-      }
-    ]
-  },
-  {
-    "va": 6611399,
-    "size": 9,
-    "name": "fcn.0064e1c7",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 28068,
-        "reason": "Second split of the import-thunk remainder at 0x64dfda: library rows inside it leave the 86-byte fragment at 0x64e171 unowned. Trim the head to that fragment, admit the fragment, and admit the continuation at 0x64e1c7 as its own entry.",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T09:55:40.746254+00:00"
       },
       {
-        "old_size": 28068,
-        "new_size": 9,
-        "reason": "Reviewed split: body ends at 0x64e1d0; the remainder decodes as one contiguous function-like block ending in a terminator",
+        "old_size": 407,
+        "new_size": 233,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-29T13:05:57.764671+00:00"
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6611139,
+    "size": 18,
+    "name": "fcn.0064e0c3",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 18,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6611157,
+    "size": 44,
+    "name": "fcn.0064e0d5",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 44,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6611201,
+    "size": 252,
+    "name": "fcn.0064e101",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 252,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
       }
     ]
   },
@@ -112625,7 +112697,7 @@
   },
   {
     "va": 6639467,
-    "size": 225,
+    "size": 42,
     "name": "fcn.00654f6b",
     "extent_history": [
       {
@@ -112634,6 +112706,2351 @@
         "reason": "Restore full .text coverage after the control-flow boundary work: each residual unattributed range is either a gap between entries or code that the head entry's resize left outside its extent. Trim any container that crosses a range start and admit the range (and any remainder past it) as its own native entry, so no byte stays unowned; the rows for these entries remain unreconstructed work items, not matches.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T10:22:31.146673+00:00"
+      },
+      {
+        "old_size": 225,
+        "new_size": 42,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T08:33:54.288660+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6611453,
+    "size": 49,
+    "name": "fcn.0064e1fd",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 49,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6611502,
+    "size": 76,
+    "name": "fcn.0064e22e",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 76,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6611578,
+    "size": 78,
+    "name": "fcn.0064e27a",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 78,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6611656,
+    "size": 49,
+    "name": "fcn.0064e2c8",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 49,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6611705,
+    "size": 19,
+    "name": "fcn.0064e2f9",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 19,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6611724,
+    "size": 34,
+    "name": "fcn.0064e30c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 34,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6611758,
+    "size": 353,
+    "name": "fcn.0064e32e",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 353,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612111,
+    "size": 44,
+    "name": "fcn.0064e48f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 44,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612155,
+    "size": 141,
+    "name": "fcn.0064e4bb",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 141,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612296,
+    "size": 25,
+    "name": "fcn.0064e548",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 25,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612321,
+    "size": 220,
+    "name": "fcn.0064e561",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 220,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612541,
+    "size": 45,
+    "name": "fcn.0064e63d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 45,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612586,
+    "size": 17,
+    "name": "fcn.0064e66a",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 17,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612603,
+    "size": 17,
+    "name": "fcn.0064e67b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 17,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612620,
+    "size": 15,
+    "name": "fcn.0064e68c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 15,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612635,
+    "size": 15,
+    "name": "fcn.0064e69b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 15,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612650,
+    "size": 165,
+    "name": "fcn.0064e6aa",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 165,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612833,
+    "size": 26,
+    "name": "fcn.0064e761",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 26,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612880,
+    "size": 6,
+    "name": "fcn.0064e790",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 6,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6612886,
+    "size": 182,
+    "name": "fcn.0064e796",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 182,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6613072,
+    "size": 170,
+    "name": "fcn.0064e850",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 170,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6613242,
+    "size": 746,
+    "name": "fcn.0064e8fa",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 746,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6613988,
+    "size": 47,
+    "name": "fcn.0064ebe4",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 47,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6614035,
+    "size": 232,
+    "name": "fcn.0064ec13",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 232,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6614267,
+    "size": 45,
+    "name": "fcn.0064ecfb",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 45,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6614312,
+    "size": 47,
+    "name": "fcn.0064ed28",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 47,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6614359,
+    "size": 266,
+    "name": "fcn.0064ed57",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 266,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6614625,
+    "size": 139,
+    "name": "fcn.0064ee61",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 139,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6614764,
+    "size": 11,
+    "name": "fcn.0064eeec",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 11,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6614775,
+    "size": 186,
+    "name": "fcn.0064eef7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 186,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6614961,
+    "size": 117,
+    "name": "fcn.0064efb1",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 117,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6615078,
+    "size": 164,
+    "name": "fcn.0064f026",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 164,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6615242,
+    "size": 65,
+    "name": "fcn.0064f0ca",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 65,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6615307,
+    "size": 98,
+    "name": "fcn.0064f10b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 98,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6615408,
+    "size": 56,
+    "name": "fcn.0064f170",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 56,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6615472,
+    "size": 291,
+    "name": "fcn.0064f1b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 291,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6615763,
+    "size": 140,
+    "name": "fcn.0064f2d3",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 140,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6615903,
+    "size": 8,
+    "name": "fcn.0064f35f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 8,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6615911,
+    "size": 111,
+    "name": "fcn.0064f367",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 111,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6616022,
+    "size": 204,
+    "name": "fcn.0064f3d6",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 204,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6616226,
+    "size": 205,
+    "name": "fcn.0064f4a2",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 205,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6616431,
+    "size": 200,
+    "name": "fcn.0064f56f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 200,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6616631,
+    "size": 32,
+    "name": "fcn.0064f637",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 32,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6616663,
+    "size": 100,
+    "name": "fcn.0064f657",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 100,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6616763,
+    "size": 42,
+    "name": "fcn.0064f6bb",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 42,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6616805,
+    "size": 11,
+    "name": "fcn.0064f6e5",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 11,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6616816,
+    "size": 20,
+    "name": "fcn.0064f6f0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 20,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6616836,
+    "size": 183,
+    "name": "fcn.0064f704",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 183,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6617024,
+    "size": 52,
+    "name": "fcn.0064f7c0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 52,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6617076,
+    "size": 243,
+    "name": "fcn.0064f7f4",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 243,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6617319,
+    "size": 81,
+    "name": "fcn.0064f8e7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 81,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6617400,
+    "size": 47,
+    "name": "fcn.0064f938",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 47,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6617447,
+    "size": 46,
+    "name": "fcn.0064f967",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 46,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6617493,
+    "size": 92,
+    "name": "fcn.0064f995",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 92,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6617594,
+    "size": 164,
+    "name": "fcn.0064f9fa",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 164,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6617758,
+    "size": 100,
+    "name": "fcn.0064fa9e",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 100,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6617858,
+    "size": 59,
+    "name": "fcn.0064fb02",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 59,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6617917,
+    "size": 16,
+    "name": "fcn.0064fb3d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 16,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6617933,
+    "size": 139,
+    "name": "fcn.0064fb4d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 139,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6618072,
+    "size": 207,
+    "name": "fcn.0064fbd8",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 207,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6618279,
+    "size": 8,
+    "name": "fcn.0064fca7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 8,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6618287,
+    "size": 111,
+    "name": "fcn.0064fcaf",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 111,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6618398,
+    "size": 203,
+    "name": "fcn.0064fd1e",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 203,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6618601,
+    "size": 815,
+    "name": "fcn.0064fde9",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 815,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6619416,
+    "size": 207,
+    "name": "fcn.00650118",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 207,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6619623,
+    "size": 264,
+    "name": "fcn.006501e7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 264,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6619887,
+    "size": 37,
+    "name": "fcn.006502ef",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 37,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6619924,
+    "size": 36,
+    "name": "fcn.00650314",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 36,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6619960,
+    "size": 126,
+    "name": "fcn.00650338",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 126,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6620086,
+    "size": 18,
+    "name": "fcn.006503b6",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 18,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6620104,
+    "size": 47,
+    "name": "fcn.006503c8",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 47,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6620151,
+    "size": 33,
+    "name": "fcn.006503f7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 33,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6620184,
+    "size": 37,
+    "name": "fcn.00650418",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 37,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6620221,
+    "size": 22,
+    "name": "fcn.0065043d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 22,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6620243,
+    "size": 231,
+    "name": "fcn.00650453",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 231,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6620474,
+    "size": 661,
+    "name": "fcn.0065053a",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 661,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6621135,
+    "size": 20,
+    "name": "fcn.006507cf",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 20,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6621155,
+    "size": 46,
+    "name": "fcn.006507e3",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 46,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6621201,
+    "size": 146,
+    "name": "fcn.00650811",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 146,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6621358,
+    "size": 81,
+    "name": "fcn.006508ae",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 81,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6621453,
+    "size": 128,
+    "name": "fcn.0065090d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 128,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6621581,
+    "size": 94,
+    "name": "fcn.0065098d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 94,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6621675,
+    "size": 22,
+    "name": "fcn.006509eb",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 22,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6621697,
+    "size": 130,
+    "name": "fcn.00650a01",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 130,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6621827,
+    "size": 52,
+    "name": "fcn.00650a83",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 52,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6621893,
+    "size": 7,
+    "name": "fcn.00650ac5",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 7,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6621900,
+    "size": 79,
+    "name": "fcn.00650acc",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 79,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6621979,
+    "size": 54,
+    "name": "fcn.00650b1b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 54,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622033,
+    "size": 26,
+    "name": "fcn.00650b51",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 26,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622059,
+    "size": 84,
+    "name": "fcn.00650b6b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 84,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622143,
+    "size": 37,
+    "name": "fcn.00650bbf",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 37,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622180,
+    "size": 182,
+    "name": "fcn.00650be4",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 182,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622362,
+    "size": 117,
+    "name": "fcn.00650c9a",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 117,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622479,
+    "size": 123,
+    "name": "fcn.00650d0f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 123,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622604,
+    "size": 66,
+    "name": "fcn.00650d8c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 66,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622670,
+    "size": 88,
+    "name": "fcn.00650dce",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 88,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622758,
+    "size": 16,
+    "name": "fcn.00650e26",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 16,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622774,
+    "size": 35,
+    "name": "fcn.00650e36",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 35,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622809,
+    "size": 9,
+    "name": "fcn.00650e59",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 9,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622818,
+    "size": 19,
+    "name": "fcn.00650e62",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 19,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622837,
+    "size": 5,
+    "name": "fcn.00650e75",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 5,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622844,
+    "size": 31,
+    "name": "fcn.00650e7c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 31,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622875,
+    "size": 19,
+    "name": "fcn.00650e9b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 19,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622894,
+    "size": 20,
+    "name": "fcn.00650eae",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 20,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622914,
+    "size": 53,
+    "name": "fcn.00650ec2",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 53,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622967,
+    "size": 22,
+    "name": "fcn.00650ef7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 22,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6622989,
+    "size": 43,
+    "name": "fcn.00650f0d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 43,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623032,
+    "size": 146,
+    "name": "fcn.00650f38",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 146,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623178,
+    "size": 137,
+    "name": "fcn.00650fca",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 137,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623315,
+    "size": 53,
+    "name": "fcn.00651053",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 53,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623368,
+    "size": 80,
+    "name": "fcn.00651088",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 80,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623448,
+    "size": 46,
+    "name": "fcn.006510d8",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 46,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623494,
+    "size": 40,
+    "name": "fcn.00651106",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 40,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623534,
+    "size": 40,
+    "name": "fcn.0065112e",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 40,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623574,
+    "size": 40,
+    "name": "fcn.00651156",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 40,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623614,
+    "size": 45,
+    "name": "fcn.0065117e",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 45,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623659,
+    "size": 40,
+    "name": "fcn.006511ab",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 40,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623699,
+    "size": 40,
+    "name": "fcn.006511d3",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 40,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623739,
+    "size": 46,
+    "name": "fcn.006511fb",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 46,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623785,
+    "size": 46,
+    "name": "fcn.00651229",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 46,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623831,
+    "size": 46,
+    "name": "fcn.00651257",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 46,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623877,
+    "size": 40,
+    "name": "fcn.00651285",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 40,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623917,
+    "size": 13,
+    "name": "fcn.006512ad",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 13,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623930,
+    "size": 8,
+    "name": "fcn.006512ba",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 8,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623938,
+    "size": 61,
+    "name": "fcn.006512c2",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 61,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6623999,
+    "size": 61,
+    "name": "fcn.006512ff",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 61,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6624060,
+    "size": 43,
+    "name": "fcn.0065133c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 43,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6624103,
+    "size": 582,
+    "name": "fcn.00651367",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 582,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6624685,
+    "size": 283,
+    "name": "fcn.006515ad",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 283,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6624968,
+    "size": 185,
+    "name": "fcn.006516c8",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 185,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6625153,
+    "size": 280,
+    "name": "fcn.00651781",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 280,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6625436,
+    "size": 37,
+    "name": "fcn.0065189c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 37,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6625473,
+    "size": 204,
+    "name": "fcn.006518c1",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 204,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6625677,
+    "size": 83,
+    "name": "fcn.0065198d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 83,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6625760,
+    "size": 121,
+    "name": "fcn.006519e0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 121,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6625884,
+    "size": 123,
+    "name": "fcn.00651a5c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 123,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6626016,
+    "size": 31,
+    "name": "fcn.00651ae0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 31,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6626065,
+    "size": 62,
+    "name": "fcn.00651b11",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 62,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6626127,
+    "size": 41,
+    "name": "fcn.00651b4f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 41,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6626168,
+    "size": 90,
+    "name": "fcn.00651b78",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 90,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6626258,
+    "size": 78,
+    "name": "fcn.00651bd2",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 78,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6626336,
+    "size": 24,
+    "name": "fcn.00651c20",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 24,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6626360,
+    "size": 62,
+    "name": "fcn.00651c38",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 62,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6626422,
+    "size": 97,
+    "name": "fcn.00651c76",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 97,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6626519,
+    "size": 194,
+    "name": "fcn.00651cd7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 194,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6626713,
+    "size": 85,
+    "name": "fcn.00651d99",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 85,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6626798,
+    "size": 167,
+    "name": "fcn.00651dee",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 167,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6626965,
+    "size": 147,
+    "name": "fcn.00651e95",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 147,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6627112,
+    "size": 81,
+    "name": "fcn.00651f28",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 81,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6627193,
+    "size": 37,
+    "name": "fcn.00651f79",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 37,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6627230,
+    "size": 141,
+    "name": "fcn.00651f9e",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 141,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6627371,
+    "size": 42,
+    "name": "fcn.0065202b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 42,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6627413,
+    "size": 1857,
+    "name": "fcn.00652055",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1857,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6629270,
+    "size": 53,
+    "name": "fcn.00652796",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 53,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6629323,
+    "size": 49,
+    "name": "fcn.006527cb",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 49,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6629372,
+    "size": 56,
+    "name": "fcn.006527fc",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 56,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6629428,
+    "size": 13,
+    "name": "fcn.00652834",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 13,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6629441,
+    "size": 16,
+    "name": "fcn.00652841",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 16,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6629457,
+    "size": 14,
+    "name": "fcn.00652851",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 14,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6629471,
+    "size": 444,
+    "name": "fcn.0065285f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 444,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6629915,
+    "size": 84,
+    "name": "fcn.00652a1b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 84,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6629999,
+    "size": 129,
+    "name": "fcn.00652a6f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 129,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6630128,
+    "size": 41,
+    "name": "fcn.00652af0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 41,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6630169,
+    "size": 108,
+    "name": "fcn.00652b19",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 108,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6630277,
+    "size": 97,
+    "name": "fcn.00652b85",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 97,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6639509,
+    "size": 20,
+    "name": "fcn.00654f95",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 20,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T08:33:54.288660+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6639529,
+    "size": 163,
+    "name": "fcn.00654fa9",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 163,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T08:33:54.288660+00:00"
       }
     ]
   },
@@ -112643,9 +115060,1068 @@
     "name": "fcn.0065504c"
   },
   {
+    "va": 6630395,
+    "size": 24,
+    "name": "fcn.00652bfb",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 24,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6630419,
+    "size": 84,
+    "name": "fcn.00652c13",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 84,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6630503,
+    "size": 30,
+    "name": "fcn.00652c67",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 30,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6630533,
+    "size": 19,
+    "name": "fcn.00652c85",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 19,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6630552,
+    "size": 103,
+    "name": "fcn.00652c98",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 103,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6630655,
+    "size": 160,
+    "name": "fcn.00652cff",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 160,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6630827,
+    "size": 280,
+    "name": "fcn.00652dab",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 280,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6631120,
+    "size": 62,
+    "name": "fcn.00652ed0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 62,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6631182,
+    "size": 61,
+    "name": "fcn.00652f0e",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 61,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6631243,
+    "size": 384,
+    "name": "fcn.00652f4b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 384,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6631627,
+    "size": 51,
+    "name": "fcn.006530cb",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 51,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6631678,
+    "size": 60,
+    "name": "fcn.006530fe",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 60,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6631744,
+    "size": 103,
+    "name": "fcn.00653140",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 103,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6631847,
+    "size": 140,
+    "name": "fcn.006531a7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 140,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6631987,
+    "size": 5,
+    "name": "fcn.00653233",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 5,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6631992,
+    "size": 2,
+    "name": "fcn.00653238",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6631994,
+    "size": 2,
+    "name": "fcn.0065323a",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6631996,
+    "size": 1,
+    "name": "fcn.0065323c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6631997,
+    "size": 7,
+    "name": "fcn.0065323d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 7,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632004,
+    "size": 2,
+    "name": "fcn.00653244",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632006,
+    "size": 5,
+    "name": "fcn.00653246",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 5,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632011,
+    "size": 2,
+    "name": "fcn.0065324b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632013,
+    "size": 5,
+    "name": "fcn.0065324d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 5,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632018,
+    "size": 43,
+    "name": "fcn.00653252",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 43,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632061,
+    "size": 2,
+    "name": "fcn.0065327d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632063,
+    "size": 40,
+    "name": "fcn.0065327f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 40,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632103,
+    "size": 63,
+    "name": "fcn.006532a7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 63,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632166,
+    "size": 2,
+    "name": "fcn.006532e6",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632168,
+    "size": 17,
+    "name": "fcn.006532e8",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 17,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632185,
+    "size": 10,
+    "name": "fcn.006532f9",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 10,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632195,
+    "size": 7,
+    "name": "fcn.00653303",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 7,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632208,
+    "size": 279,
+    "name": "fcn.00653310",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 279,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6632487,
+    "size": 1183,
+    "name": "fcn.00653427",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1183,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6633670,
+    "size": 19,
+    "name": "fcn.006538c6",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 19,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6633689,
+    "size": 19,
+    "name": "fcn.006538d9",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 19,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6633708,
+    "size": 76,
+    "name": "fcn.006538ec",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 76,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6633784,
+    "size": 76,
+    "name": "fcn.00653938",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 76,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6633860,
+    "size": 52,
+    "name": "fcn.00653984",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 52,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6633912,
+    "size": 52,
+    "name": "fcn.006539b8",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 52,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6633964,
+    "size": 76,
+    "name": "fcn.006539ec",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 76,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6634040,
+    "size": 76,
+    "name": "fcn.00653a38",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 76,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6634116,
+    "size": 52,
+    "name": "fcn.00653a84",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 52,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6634168,
+    "size": 52,
+    "name": "fcn.00653ab8",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 52,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6634220,
+    "size": 21,
+    "name": "fcn.00653aec",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 21,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6634241,
+    "size": 21,
+    "name": "fcn.00653b01",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 21,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6634262,
+    "size": 518,
+    "name": "fcn.00653b16",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 518,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6634780,
+    "size": 178,
+    "name": "fcn.00653d1c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 178,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6634958,
+    "size": 518,
+    "name": "fcn.00653dce",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 518,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6635476,
+    "size": 181,
+    "name": "fcn.00653fd4",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 181,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6635657,
+    "size": 6,
+    "name": "fcn.00654089",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 6,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6635663,
+    "size": 6,
+    "name": "fcn.0065408f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 6,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6635669,
+    "size": 3,
+    "name": "fcn.00654095",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 3,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6635672,
+    "size": 3,
+    "name": "fcn.00654098",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 3,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6635675,
+    "size": 127,
+    "name": "fcn.0065409b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 127,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6635808,
+    "size": 123,
+    "name": "fcn.00654120",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 123,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6635931,
+    "size": 2597,
+    "name": "fcn.0065419b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2597,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6638528,
+    "size": 55,
+    "name": "fcn.00654bc0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 55,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6638583,
+    "size": 26,
+    "name": "fcn.00654bf7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 26,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6638609,
+    "size": 23,
+    "name": "fcn.00654c11",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 23,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6638632,
+    "size": 36,
+    "name": "fcn.00654c28",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 36,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6638689,
+    "size": 103,
+    "name": "fcn.00654c61",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 103,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6638792,
+    "size": 2,
+    "name": "fcn.00654cc8",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6638794,
+    "size": 16,
+    "name": "fcn.00654cca",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 16,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6638810,
+    "size": 181,
+    "name": "fcn.00654cda",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 181,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6638991,
+    "size": 2,
+    "name": "fcn.00654d8f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6638993,
+    "size": 29,
+    "name": "fcn.00654d91",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 29,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6639022,
+    "size": 169,
+    "name": "fcn.00654dae",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 169,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6639200,
+    "size": 23,
+    "name": "fcn.00654e60",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 23,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6639223,
+    "size": 60,
+    "name": "fcn.00654e77",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 60,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6639296,
+    "size": 21,
+    "name": "fcn.00654ec0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 21,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6639317,
+    "size": 23,
+    "name": "fcn.00654ed5",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 23,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6639340,
+    "size": 25,
+    "name": "fcn.00654eec",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 25,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6639365,
+    "size": 67,
+    "name": "fcn.00654f05",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 67,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6639432,
+    "size": 22,
+    "name": "fcn.00654f48",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 22,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6639454,
+    "size": 13,
+    "name": "fcn.00654f5e",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 13,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
     "va": 6639996,
-    "size": 143,
-    "name": "fcn.0065517c"
+    "size": 101,
+    "name": "fcn.0065517c",
+    "extent_history": [
+      {
+        "old_size": 143,
+        "new_size": 101,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6640139,
@@ -112658,19 +116134,51 @@
     "name": "fcn.00655226"
   },
   {
+    "va": 6640097,
+    "size": 42,
+    "name": "fcn.006551e1",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 42,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
     "va": 6640211,
     "size": 328,
     "name": "fcn.00655253"
   },
   {
     "va": 6640539,
-    "size": 261,
-    "name": "fcn.0065539b"
+    "size": 93,
+    "name": "fcn.0065539b",
+    "extent_history": [
+      {
+        "old_size": 261,
+        "new_size": 93,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6640800,
-    "size": 119,
-    "name": "fcn.006554a0"
+    "size": 88,
+    "name": "fcn.006554a0",
+    "extent_history": [
+      {
+        "old_size": 119,
+        "new_size": 88,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6640919,
@@ -112678,9 +116186,37 @@
     "name": "fcn.00655517"
   },
   {
+    "va": 6640632,
+    "size": 168,
+    "name": "fcn.006553f8",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 168,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
     "va": 6641098,
     "size": 72,
     "name": "fcn.006555ca"
+  },
+  {
+    "va": 6640888,
+    "size": 31,
+    "name": "fcn.006554f8",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 31,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6641170,
@@ -112709,13 +116245,31 @@
   },
   {
     "va": 6643227,
-    "size": 967,
-    "name": "fcn.00655e1b"
+    "size": 758,
+    "name": "fcn.00655e1b",
+    "extent_history": [
+      {
+        "old_size": 967,
+        "new_size": 758,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6644194,
-    "size": 849,
-    "name": "fcn.006561e2"
+    "size": 821,
+    "name": "fcn.006561e2",
+    "extent_history": [
+      {
+        "old_size": 849,
+        "new_size": 821,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6645043,
@@ -112723,9 +116277,37 @@
     "name": "fcn.00656533"
   },
   {
+    "va": 6643985,
+    "size": 209,
+    "name": "fcn.00656111",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 209,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
     "va": 6645367,
     "size": 86,
     "name": "fcn.00656677"
+  },
+  {
+    "va": 6645015,
+    "size": 28,
+    "name": "fcn.00656517",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 28,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6645453,
@@ -112829,8 +116411,17 @@
   },
   {
     "va": 6649397,
-    "size": 484,
-    "name": "fcn.00657635"
+    "size": 386,
+    "name": "fcn.00657635",
+    "extent_history": [
+      {
+        "old_size": 484,
+        "new_size": 386,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6649881,
@@ -112841,6 +116432,20 @@
     "va": 6650267,
     "size": 70,
     "name": "fcn.0065799b"
+  },
+  {
+    "va": 6649783,
+    "size": 98,
+    "name": "fcn.006577b7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 98,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6650337,
@@ -112864,8 +116469,17 @@
   },
   {
     "va": 6650620,
-    "size": 69,
-    "name": "fcn.00657afc"
+    "size": 42,
+    "name": "fcn.00657afc",
+    "extent_history": [
+      {
+        "old_size": 69,
+        "new_size": 42,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6650689,
@@ -112876,6 +116490,20 @@
     "va": 6650738,
     "size": 134,
     "name": "fcn.00657b72"
+  },
+  {
+    "va": 6650662,
+    "size": 27,
+    "name": "fcn.00657b26",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 27,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6650872,
@@ -113061,8 +116689,17 @@
   },
   {
     "va": 6657239,
-    "size": 105,
-    "name": "fcn.006594d7"
+    "size": 41,
+    "name": "fcn.006594d7",
+    "extent_history": [
+      {
+        "old_size": 105,
+        "new_size": 41,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6657344,
@@ -113073,6 +116710,34 @@
     "va": 6657380,
     "size": 90,
     "name": "fcn.00659564"
+  },
+  {
+    "va": 6657280,
+    "size": 20,
+    "name": "fcn.00659500",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 20,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6657300,
+    "size": 44,
+    "name": "fcn.00659514",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 44,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6657470,
@@ -113141,18 +116806,31 @@
   },
   {
     "va": 6659414,
-    "size": 388,
-    "name": "fcn.00659d56"
+    "size": 339,
+    "name": "fcn.00659d56",
+    "extent_history": [
+      {
+        "old_size": 388,
+        "new_size": 339,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6659802,
-    "size": 229,
-    "name": "fcn.00659eda"
-  },
-  {
-    "va": 6660031,
-    "size": 9,
-    "name": "fcn.00659fbf"
+    "size": 238,
+    "name": "fcn.00659eda",
+    "extent_history": [
+      {
+        "old_size": 229,
+        "new_size": 238,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6660040,
@@ -113160,42 +116838,30 @@
     "name": "fcn.00659fc8"
   },
   {
-    "va": 6660526,
-    "size": 92,
-    "name": "fcn.0065a1ae"
-  },
-  {
-    "va": 6660618,
-    "size": 29,
-    "name": "fcn.0065a20a",
+    "va": 6659753,
+    "size": 49,
+    "name": "fcn.00659ea9",
     "extent_history": [
       {
-        "old_size": 29,
-        "new_size": 5,
-        "reason": "recycle2-230 thunk/CRT splits",
+        "old_size": null,
+        "new_size": 49,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-20T13:06:59.017407+00:00"
-      },
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6660526,
+    "size": 97,
+    "name": "fcn.0065a1ae",
+    "extent_history": [
       {
-        "old_size": 5,
-        "new_size": 29,
-        "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
+        "old_size": 92,
+        "new_size": 97,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T06:15:08.729793+00:00"
-      },
-      {
-        "old_size": 29,
-        "new_size": 5,
-        "reason": "reviewed extent: the body is a five byte jump to 0x65756f and the remaining extent bytes belong to a following function with no inventory row, so the code extent is 5",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-11-03T06:52:57.965372+00:00"
-      },
-      {
-        "old_size": 5,
-        "new_size": 29,
-        "reason": "revert my earlier shrink: the previous reviewed boundary folded the following gap bytes into this entry so no text byte stays unowned, and the gap continues the same external-range code with no new inventory row. An over-long extent is the lesser defect against an unowned byte",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-11-03T06:57:42.142926+00:00"
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
       }
     ]
   },
@@ -113229,6 +116895,20 @@
     "name": "fcn.0065a4cb"
   },
   {
+    "va": 6660623,
+    "size": 24,
+    "name": "fcn.0065a20f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 24,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
     "va": 6661493,
     "size": 93,
     "name": "fcn.0065a575"
@@ -113250,13 +116930,17 @@
   },
   {
     "va": 6661889,
-    "size": 205,
-    "name": "fcn.0065a701"
-  },
-  {
-    "va": 6662094,
-    "size": 78,
-    "name": "fcn.0065a7ce"
+    "size": 283,
+    "name": "fcn.0065a701",
+    "extent_history": [
+      {
+        "old_size": 205,
+        "new_size": 283,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6662172,
@@ -113296,8 +116980,17 @@
   },
   {
     "va": 6662816,
-    "size": 221,
-    "name": "fcn.0065aaa0"
+    "size": 76,
+    "name": "fcn.0065aaa0",
+    "extent_history": [
+      {
+        "old_size": 221,
+        "new_size": 76,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6663037,
@@ -113306,13 +116999,31 @@
   },
   {
     "va": 6663883,
-    "size": 869,
-    "name": "fcn.0065aecb"
+    "size": 400,
+    "name": "fcn.0065aecb",
+    "extent_history": [
+      {
+        "old_size": 869,
+        "new_size": 400,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6664752,
-    "size": 258,
-    "name": "fcn.0065b230"
+    "size": 55,
+    "name": "fcn.0065b230",
+    "extent_history": [
+      {
+        "old_size": 258,
+        "new_size": 55,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6665010,
@@ -113323,6 +117034,20 @@
     "va": 6665300,
     "size": 55,
     "name": "fcn.0065b454"
+  },
+  {
+    "va": 6662892,
+    "size": 145,
+    "name": "fcn.0065aaec",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 145,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6665355,
@@ -113344,6 +117069,20 @@
     ]
   },
   {
+    "va": 6664283,
+    "size": 469,
+    "name": "fcn.0065b05b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 469,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
     "va": 6666032,
     "size": 132,
     "name": "fcn.0065b730",
@@ -113354,6 +117093,20 @@
         "reason": "reviewed tail padding: trailing 0x90/0xCC runs after the last control-transfer instruction; 0x64d4fa 0xCCx14 0x64d522..0x64d52f, 0x64d701 0xCCx6 0x64d70a..0x64d70f, 0x64dc43 0xCCx9 0x64dc77..0x64dc7f, 0x657bf8 0xCCx13 0x657c13..0x657c1f, 0x657e51 0xCCx6 0x65802a..0x65802f, 0x65aa71 0xCCx12 0x65aa94..0x65aa9f, 0x65b4d9 0xCCx15 0x65b721..0x65b72f, 0x65b730 0xCCx12 0x65b7b4..0x65b7bf",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-11-02T21:45:51.883983+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6664807,
+    "size": 203,
+    "name": "fcn.0065b267",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 203,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
       }
     ]
   },
@@ -113637,8 +117390,17 @@
   },
   {
     "va": 6672528,
-    "size": 72,
-    "name": "fcn.0065d090"
+    "size": 31,
+    "name": "fcn.0065d090",
+    "extent_history": [
+      {
+        "old_size": 72,
+        "new_size": 31,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6672600,
@@ -113652,8 +117414,17 @@
   },
   {
     "va": 6672733,
-    "size": 563,
-    "name": "fcn.0065d15d"
+    "size": 517,
+    "name": "fcn.0065d15d",
+    "extent_history": [
+      {
+        "old_size": 563,
+        "new_size": 517,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6673296,
@@ -113662,8 +117433,31 @@
   },
   {
     "va": 6674015,
-    "size": 68,
-    "name": "fcn.0065d65f"
+    "size": 46,
+    "name": "fcn.0065d65f",
+    "extent_history": [
+      {
+        "old_size": 68,
+        "new_size": 46,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6672559,
+    "size": 41,
+    "name": "fcn.0065d0af",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 41,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6674083,
@@ -113681,6 +117475,34 @@
     "name": "fcn.0065d94b"
   },
   {
+    "va": 6673250,
+    "size": 23,
+    "name": "fcn.0065d362",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 23,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6673273,
+    "size": 23,
+    "name": "fcn.0065d379",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 23,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
     "va": 6675191,
     "size": 320,
     "name": "fcn.0065daf7"
@@ -113689,6 +117511,20 @@
     "va": 6675511,
     "size": 266,
     "name": "fcn.0065dc37"
+  },
+  {
+    "va": 6674061,
+    "size": 22,
+    "name": "fcn.0065d68d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 22,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6675777,
@@ -113818,8 +117654,17 @@
   },
   {
     "va": 6675928,
-    "size": 73,
-    "name": "fcn.0065ddd8"
+    "size": 17,
+    "name": "fcn.0065ddd8",
+    "extent_history": [
+      {
+        "old_size": 73,
+        "new_size": 17,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6676001,
@@ -113847,14 +117692,60 @@
     "name": "fcn.0065e07c"
   },
   {
+    "va": 6675945,
+    "size": 17,
+    "name": "fcn.0065dde9",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 17,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6675962,
+    "size": 39,
+    "name": "fcn.0065ddfa",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 39,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
     "va": 6676645,
-    "size": 405,
-    "name": "fcn.0065e0a5"
+    "size": 389,
+    "name": "fcn.0065e0a5",
+    "extent_history": [
+      {
+        "old_size": 405,
+        "new_size": 389,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6677050,
-    "size": 128,
-    "name": "fcn.0065e23a"
+    "size": 28,
+    "name": "fcn.0065e23a",
+    "extent_history": [
+      {
+        "old_size": 128,
+        "new_size": 28,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6677178,
@@ -113877,14 +117768,51 @@
     "name": "fcn.0065e30a"
   },
   {
+    "va": 6677034,
+    "size": 16,
+    "name": "fcn.0065e22a",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 16,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
     "va": 6677401,
     "size": 149,
     "name": "fcn.0065e399"
   },
   {
+    "va": 6677078,
+    "size": 100,
+    "name": "fcn.0065e256",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 100,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
     "va": 6677550,
-    "size": 589,
-    "name": "fcn.0065e42e"
+    "size": 562,
+    "name": "fcn.0065e42e",
+    "extent_history": [
+      {
+        "old_size": 589,
+        "new_size": 562,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6678139,
@@ -113910,6 +117838,20 @@
     "va": 6679546,
     "size": 73,
     "name": "fcn.0065ebfa"
+  },
+  {
+    "va": 6678112,
+    "size": 27,
+    "name": "fcn.0065e660",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 27,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6679619,
@@ -113982,13 +117924,31 @@
   },
   {
     "va": 6683205,
-    "size": 213,
-    "name": "fcn.0065fa45"
+    "size": 124,
+    "name": "fcn.0065fa45",
+    "extent_history": [
+      {
+        "old_size": 213,
+        "new_size": 124,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6683418,
-    "size": 326,
-    "name": "fcn.0065fb1a"
+    "size": 293,
+    "name": "fcn.0065fb1a",
+    "extent_history": [
+      {
+        "old_size": 326,
+        "new_size": 293,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6683744,
@@ -114011,9 +117971,37 @@
     "name": "fcn.0065ff0e"
   },
   {
+    "va": 6683329,
+    "size": 89,
+    "name": "fcn.0065fac1",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 89,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
+  },
+  {
     "va": 6684519,
     "size": 97,
     "name": "fcn.0065ff67"
+  },
+  {
+    "va": 6683711,
+    "size": 33,
+    "name": "fcn.0065fc3f",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 33,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6684616,
@@ -115315,8 +119303,17 @@
   },
   {
     "va": 6687082,
-    "size": 80,
-    "name": "fcn.0066096a"
+    "size": 39,
+    "name": "fcn.0066096a",
+    "extent_history": [
+      {
+        "old_size": 80,
+        "new_size": 39,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
+      }
+    ]
   },
   {
     "va": 6687162,
@@ -115344,6 +119341,20 @@
         "reason": "Reviewed accounting admission: these ranges are .text import thunks, jump tables, or interior code fragments that no inventory entry names and no preceding function owns. Admitting them from the native inventory removes the unattributed gap; they are not claimed as reconstructed game functions.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T06:15:15.743641+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6687121,
+    "size": 41,
+    "name": "fcn.00660991",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 41,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-21T05:09:38.227140+00:00"
       }
     ]
   }

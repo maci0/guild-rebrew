@@ -1,3030 +1,1198 @@
-// LIBRARY markers for functions the linker supplies from d3dx8.lib.
-// Auto-generated library catalog. The linker supplies
-// these bytes, so they are not worth reversing.
-
-
-// _adler32
-
-
-// _crc32
-
-
-// _deflateInit2_
-
-
-// _deflateReset
-
-
-// _putShortMSB
-
-
-// _flush_pending
-
-
-// _deflateEnd
-
-
-// _fill_window
-
-
-// _read_buf
-
-
-// _longest_match
-
-
-// _gzeof
-
-
-// _inflate_blocks_reset
-
-
-// _inflate_blocks_new
-
-
-// _inflate_blocks_free
-
-
-// ?inflate_blocks_sync_point@D3DX@@YAHPAUinflate_blocks_state@1@@Z
-
-
-// _inflate_codes_new
-
-
-// _inflate_codes
-
-
-// _inflate_codes_free
-
-
-// _inflate_fast
-
-
-// _inflateReset
-
-
-// _inflateEnd
-
-
-// _inflateInit2_
-
-
-// _inflate_trees_bits
-
-
-// _inflate_trees_dynamic
-
-
-// _inflate_trees_fixed
-
-
-// _inflate_flush
-
-
-// _init_block
-
-
-// __tr_flush_block
-
-
-// _pqdownheap
-
-
-// _build_bl_tree
-
-
-// _scan_tree
-
-
-// _set_data_type
-
-
-// _copy_block
-
-
-// _zcalloc
-
-
-// _zcfree
-
-
-// ?WithinEpsilon@@YAHMM@Z
-
-
-// ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
-
-
-// ?c_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
-
-
-// ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
-
-
-// ?c_D3DXVec2CatmullRom@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
-
-
-// ?init_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
-
-
-// ?c_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
-
-
-// ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
-
-
-// ?c_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
-
-
-// ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
-
-
-// ?c_D3DXVec2CatmullRom@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
-
-
-// ?init_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
-
-
-// ?c_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
-
-
-// ?c_D3DXVec3Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR3@@PBUD3DXMATRIX@@@Z
-
-
-// ?c_D3DXVec3TransformNormal@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
-
-
-// ?c_D3DXVec4Cross@@YGPAUD3DXVECTOR4@@PAU1@PBU1@11@Z
-
-
-// ??KD3DXVECTOR3@@QBE?AU0@M@Z
-
-
-// ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
-
-
-// ?c_D3DXVec4Hermite@@YGPAUD3DXVECTOR4@@PAU1@PBU1@111M@Z
-
-
-// ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
-
-
-// ?c_D3DXVec4CatmullRom@@YGPAUD3DXVECTOR4@@PAU1@PBU1@111M@Z
-
-
-// ?init_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
-
-
-// ?c_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
-
-
-// ?c_D3DXVec4Transform@@YGPAUD3DXVECTOR4@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
-
-
-// ?c_D3DXMatrixfDeterminant@@YGMPBUD3DXMATRIX@@@Z
-
-
-// ?c_D3DXMatrixMultiply@@YGPAUD3DXMATRIX@@PAU1@PBU1@1@Z
-
-
-// ?c_D3DXMatrixMultiply@@YGPAUD3DXMATRIX@@PAU1@PBU1@1@Z
-
-
-// ?c_D3DXMatrixInverse@@YGPAUD3DXMATRIX@@PAU1@PAMPBU1@@Z
-
-
-// ??DD3DXQUATERNION@@QBE?AU0@M@Z
-
-
-// ?c_D3DXMatrixRotationX@@YGPAUD3DXMATRIX@@PAU1@M@Z
-
-
-// ?c_D3DXMatrixRotationY@@YGPAUD3DXMATRIX@@PAU1@M@Z
-
-
-// ?c_D3DXMatrixRotationX@@YGPAUD3DXMATRIX@@PAU1@M@Z
-
-
-// ?c_D3DXMatrixRotationAxis@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXVECTOR3@@M@Z
-
-
-// ?c_D3DXMatrixRotationQuaternion@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXQUATERNION@@@Z
-
-
-// ?c_D3DXMatrixAffineTransformation@@YGPAUD3DXMATRIX@@PAU1@MPBUD3DXVECTOR3@@PBUD3DXQUATERNION@@1@Z
-
-
-// ?D3DXVec3Cross@@YAPAUD3DXVECTOR3@@PAU1@PBU1@1@Z
-
-
-// _D3DXMatrixLookAtRH@16
-
-
-// _D3DXMatrixLookAtLH@16
-
-
-// ?D3DXVec3Lerp@@YAPAUD3DXVECTOR3@@PAU1@PBU1@1M@Z
-
-
-// _D3DXMatrixPerspectiveRH@20
-
-
-// _D3DXMatrixPerspectiveLH@20
-
-
-// _D3DXMatrixPerspectiveFovRH@20
-
-
-// _D3DXMatrixPerspectiveFovRH@20
-
-
-// _D3DXMatrixPerspectiveOffCenterRH@28
-
-
-// _D3DXMatrixPerspectiveOffCenterLH@28
-
-
-// _D3DXMatrixOrthoRH@20
-
-
-// _D3DXMatrixOrthoRH@20
-
-
-// _D3DXMatrixOrthoOffCenterRH@28
-
-
-// _D3DXMatrixOrthoOffCenterRH@28
-
-
-// ?c_D3DXQuaternionToAxisAngle@@YGXPBUD3DXQUATERNION@@PAUD3DXVECTOR3@@PAM@Z
-
-
-// ?c_D3DXQuaternionRotationMatrix@@YGPAUD3DXQUATERNION@@PAU1@PBUD3DXMATRIX@@@Z
-
-
-// ?c_D3DXQuaternionRotationAxis@@YGPAUD3DXQUATERNION@@PAU1@PBUD3DXVECTOR3@@M@Z
-
-
-// ?c_D3DXQuaternionRotationYawPitchRoll@@YGPAUD3DXQUATERNION@@PAU1@MMM@Z
-
-
-// ?c_D3DXQuaternionNormalize@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
-
-
-// ?c_D3DXQuaternionInverse@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
-
-
-// ?c_D3DXQuaternionLn@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
-
-
-// ?c_D3DXQuaternionExp@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
-
-
-// ?c_D3DXQuaternionSlerp@@YGPAUD3DXQUATERNION@@PAU1@PBU1@1M@Z
-
-
-// ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
-
-
-// ?c_D3DXQuaternionSquad@@YGPAUD3DXQUATERNION@@PAU1@PBU1@111M@Z
-
-
-// ?init_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
-
-
-// ?c_D3DXQuaternionBaryCentric@@YGPAUD3DXQUATERNION@@PAU1@PBU1@11MM@Z
-
-
-// ?c_D3DXPlaneNormalize@@YGPAUD3DXPLANE@@PAU1@PBU1@@Z
-
-
-// ?c_D3DXPlaneIntersectLine@@YGPAUD3DXVECTOR3@@PAU1@PBUD3DXPLANE@@PBU1@2@Z
-
-
-// ?c_D3DXPlaneFromPoints@@YGPAUD3DXPLANE@@PAU1@PBUD3DXVECTOR3@@11@Z
-
-
-// ?c_D3DXPlaneTransform@@YGPAUD3DXPLANE@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
-
-
-// _D3DXColorAdjustSaturation@12
-
-
-// _D3DXColorAdjustContrast@12
-
-
-// _D3DXFresnelTerm@8
-
-
-// ?c_D3DXVec2Normalize@@YGPAUD3DXVECTOR2@@PAU1@PBU1@@Z
-
-
-// ?c_D3DXVec2Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR2@@PBUD3DXMATRIX@@@Z
-
-
-// ?c_D3DXVec2TransformCoord@@YGPAUD3DXVECTOR2@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
-
-
-// ?c_D3DXVec2TransformNormal@@YGPAUD3DXVECTOR2@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
-
-
-// ?c_D3DXVec3Normalize@@YGPAUD3DXVECTOR3@@PAU1@PBU1@@Z
-
-
-// ?c_D3DXVec3TransformCoord@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
-
-
-// ?c_D3DXVec3Project@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBU_D3DVIEWPORT8@@PBUD3DXMATRIX@@33@Z
-
-
-// ?c_D3DXVec3Unproject@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBU_D3DVIEWPORT8@@PBUD3DXMATRIX@@33@Z
-
-
-// ?c_D3DXQuaternionNormalize@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
-
-
-// ??DD3DXQUATERNION@@QBE?AU0@ABU0@@Z
-
-
-// ?c_D3DXMatrixRotationYawPitchRoll@@YGPAUD3DXMATRIX@@PAU1@MMM@Z
-
-
-// ?c_D3DXMatrixTransformation@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXVECTOR3@@PBUD3DXQUATERNION@@1121@Z
-
-
-// ?c_D3DXMatrixShadow@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXVECTOR4@@PBUD3DXPLANE@@@Z
-
-
-// ?c_D3DXMatrixReflect@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXPLANE@@@Z
-
-
-// ??_GCD3DXFont@@QAEPAXI@Z
-
-
-// ??_GCD3DXFont@@QAEPAXI@Z
-
-
-// ??_GCD3DXFont@@QAEPAXI@Z
-
-
-// ??_GCD3DXFont@@QAEPAXI@Z
-
-
-// _D3DXGetErrorStringA@12
-
-
-// _D3DXGetErrorStringW@12
-
-
-// _D3DXCreateFontIndirect@12
-
-
-// _D3DXCreateSprite@8
-
-
-// _D3DXCreateRenderToSurface@28
-
-
-// _D3DXCreateFont@12
-
-
-// ?SwapFaceNeighbors@@YAXIIPAK@Z
-
-
-// ?RemapFaceNeighbors@@YAXIPAIPAK@Z
-
-
-// ?ReorderNeighborData@@YAJPAIPAKK@Z
-
-
-// ?And@CD3DXBitField256@@QAEXAAV1@0@Z
-
-
-// ?Count@CD3DXBitField256@@QAEKXZ
-
-
-// ??1CBone@@QAE@XZ
-
-
-// ?GreedyTSP@@YAJPAUSBoneCombinationNode@@PAPAU1@PAK2@Z
-
-
-// _D3DXCreateBuffer@8
-
-
-// ??0D3DXCOLOR@@QAE@K@Z
-
-
-// _D3DXGetFVFVertexSize@4
-
-
-// ?GenerateWedgeList@@YAJPAKKPAH0@Z
-
-
-// ?BFloatsEqual@@YAHMMM@Z
-
-
-// ?CbTexCoordSize@DXCrackFVF@@QAEKK@Z
-
-
-// ?GetTexCoordSizes@DXCrackFVF@@QAEXPAK@Z
-
-
-// ??1?$GXTri3Mesh@I$0A@$0?0@@QAE@XZ
-
-
-// ?QueryInterface@?$GXTri3Mesh@I$0A@$0?0@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ?CloneMesh@?$GXTri3Mesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
-
-
-// ??1?$GXTri3Mesh@I$0A@$0?0@@QAE@XZ
-
-
-// ?QueryInterface@?$GXTri3Mesh@I$0A@$0?0@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ?CloneMesh@?$GXTri3Mesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
-
-
-// ?CalcSplitMeshSizes@?$@G$00$0PPPP@@@YAJPAGKKKPAK111G@Z
-
-
-// ?CalcSplitMeshSizes@?$@I$0A@$0?0@@YAJPAIKKKPAK111I@Z
-
-
-// ??_H@YGXPAXIHP6EPAX0@Z@Z
-
-
-// ??_ECBone@@QAEPAXI@Z
-
-
-// ??0?$CFaceListIter@G$00$0PPPP@@@QAE@PAV?$GXTri3Mesh@G$00$0PPPP@@@@Z
-
-
-// ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJK@Z
-
-
-// ?FindWedge@?$GXTri3Mesh@I$0A@$0?0@@ABEIPAII@Z
-
-
-// ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJK@Z
-
-
-// ?FindWedge@?$GXTri3Mesh@G$00$0PPPP@@@ABEIPAGI@Z
-
-
-// ?ResizeDynamicArray@@YAHPAPAV?$NeighborInfo@I@@IIPAI@Z
-
-
-// ?ResizeDynamicArray@@YAHPAPAKIIPAI@Z
-
-
-// ?ResizeDynamicArray@@YAHPAPAGIIPAI@Z
-
-
-// ?ResizeDynamicArray@@YAHPAPAKIIPAI@Z
-
-
-// ?FindEdge@@YAIPAII@Z
-
-
-// ?ResizeDynamicArray@@YAHPAPAV?$NeighborInfo@G@@IIPAI@Z
-
-
-// ?FindEdge@@YAIPAGG@Z
-
-
-// ?GenerateWedgeList@?$GXSimplifyMesh@I$0A@$0?0@@AAEJXZ
-
-
-// ?SetupWeightInfo@?$GXSimplifyMesh@I$0A@$0?0@@AAEJQAU_D3DXATTRIBUTEWEIGHTS@@PBM1KPAE@Z
-
-
-// ?GenerateWedgeList@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJXZ
-
-
-// ?SetupWeightInfo@?$GXSimplifyMesh@I$0A@$0?0@@AAEJQAU_D3DXATTRIBUTEWEIGHTS@@PBM1KPAE@Z
-
-
-// ??_ECQuadric@@QAEPAXI@Z
-
-
-// ??0?$CFaceListIter@I$0A@$0?0@@QAE@IIPAV?$GXTri3Mesh@I$0A@$0?0@@E@Z
-
-
-// ??0?$CFaceListIter@G$00$0PPPP@@@QAE@GGPAV?$GXTri3Mesh@G$00$0PPPP@@@E@Z
-
-
-// ?Compact@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAI00@Z
-
-
-// ?VertexOptimize@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAI0@Z
-
-
-// ?CollectAttributeIds@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAPAKPAK@Z
-
-
-// ?FindPoint@?$GXTri3Mesh@I$0A@$0?0@@ABEIPAII@Z
-
-
-// ?Compact@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAI00@Z
-
-
-// ?VertexOptimize@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAI0@Z
-
-
-// ?CollectAttributeIds@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAPAKPAK@Z
-
-
-// ?FindPoint@?$GXTri3Mesh@G$00$0PPPP@@@ABEIPAGI@Z
-
-
-// ?MoveToCCWFace@?$CFaceListIter@I$0A@$0?0@@QAE_NXZ
-
-
-// ?MoveToCCWFace@?$CFaceListIter@G$00$0PPPP@@@QAE_NXZ
-
-
-// ?Init@?$CSimplificationHeap@I@@QAEJI@Z
-
-
-// ?Switch@?$CSimplificationHeap@I@@AAEXII@Z
-
-
-// ?BInArray@@YA_NQAIII@Z
-
-
-// ?AddToDynamicArray@@YAHPAPAIABIPAI2@Z
-
-
-// ?Init@?$CSimplificationHeap@I@@QAEJI@Z
-
-
-// ?Switch@?$CSimplificationHeap@G@@AAEXII@Z
-
-
-// ?BInArray@@YA_NQAGIG@Z
-
-
-// ?AddToDynamicArray@@YAHPAPAIABIPAI2@Z
-
-
-// ?RemapVertex@?$GXTri3Mesh@I$0A@$0?0@@AAEXIPAI@Z
-
-
-// ?RemapFace@?$GXTri3Mesh@I$0A@$0?0@@AAEXIPAI0@Z
-
-
-// ?SwapVertex@?$GXTri3Mesh@I$0A@$0?0@@AAEXIIPAE@Z
-
-
-// ?SwapFace@?$GXTri3Mesh@I$0A@$0?0@@AAEXII@Z
-
-
-// ?AddToDynamicArray@@YAHPAPAIABIPAI2@Z
-
-
-// ??0?$CMeshStatus@I$0A@$0?0@@QAE@PAV?$GXTri3Mesh@I$0A@$0?0@@PAV?$NeighborInfo@I@@I@Z
-
-
-// ??1?$CMeshStatus@I$0A@$0?0@@QAE@XZ
-
-
-// ?FindEdge@@YAIPAII@Z
-
-
-// ?RemapVertex@?$GXTri3Mesh@G$00$0PPPP@@@AAEXIPAI@Z
-
-
-// ?RemapFace@?$GXTri3Mesh@G$00$0PPPP@@@AAEXIPAI0@Z
-
-
-// ?SwapVertex@?$GXTri3Mesh@G$00$0PPPP@@@AAEXIIPAE@Z
-
-
-// ?SwapFace@?$GXTri3Mesh@G$00$0PPPP@@@AAEXII@Z
-
-
-// ??0?$CMeshStatus@G$00$0PPPP@@@QAE@PAV?$GXTri3Mesh@G$00$0PPPP@@@PAV?$NeighborInfo@G@@G@Z
-
-
-// ??1?$CMeshStatus@G$00$0PPPP@@@QAE@XZ
-
-
-// ?DGenerateBorderError@?$GXSimplifyMesh@I$0A@$0?0@@AAENIIPAUD3DXVECTOR3@@PAE@Z
-
-
-// ?DGenerateBorderError@?$GXSimplifyMesh@G$00$0PPPP@@@AAENGGPAUD3DXVECTOR3@@PAE@Z
-
-
-// ?IFindInitialFace@?$CMeshStatus@G$00$0PPPP@@@QAEGXZ
-
-
-// ?Init@?$CIndexQueue@I$0?0@@QAEJXZ
-
-
-// ?BElementPresent@?$CIndexQueue@I$0?0@@QAE_NI@Z
-
-
-// ?InsertElement@?$CIndexQueue@I$0?0@@QAEXI@Z
-
-
-// ?Init@?$CIndexQueue@G$0PPPP@@@QAEJXZ
-
-
-// ?BElementPresent@?$CIndexQueue@G$0PPPP@@@QAE_NG@Z
-
-
-// ?InsertElement@?$CIndexQueue@G$0PPPP@@@QAEXG@Z
-
-
-// ?ClwFaceCorner@?$GXTri3Mesh@I$0A@$0?0@@AAE?AUSFaceCorner@@AAU2@@Z
-
-
-// ?CcwCorner@?$GXTri3Mesh@I$0A@$0?0@@AAE?AUSFaceCorner@@AAU2@PAV?$CMeshStatus@I$0A@$0?0@@@Z
-
-
-// ?ClwFaceCorner@?$GXTri3Mesh@I$0A@$0?0@@AAE?AUSFaceCorner@@AAU2@@Z
-
-
-// ?CcwCorner@?$GXTri3Mesh@G$00$0PPPP@@@AAE?AUSFaceCorner@@AAU2@PAV?$CMeshStatus@G$00$0PPPP@@@@Z
-
-
-// ?RemoveElement@?$CMeshStatus@I$0A@$0?0@@AAEXI@Z
-
-
-// ?PrependElement@?$CMeshStatus@I$0A@$0?0@@AAEXI@Z
-
-
-// ?DecrementCount@?$CMeshStatus@I$0A@$0?0@@AAEXI@Z
-
-
-// ?RemoveElement@?$CMeshStatus@G$00$0PPPP@@@AAEXG@Z
-
-
-// ?PrependElement@?$CMeshStatus@G$00$0PPPP@@@AAEXG@Z
-
-
-// ?DecrementCount@?$CMeshStatus@G$00$0PPPP@@@AAEXG@Z
-
-
-// ??0SVertexCopyContext@@QAE@KK@Z
-
-
-// ??1CPMSharedData@@QAE@XZ
-
-
-// ?IntersectTriUnbounded@@YAXPAUD3DXVECTOR3@@0000PAM11@Z
-
-
-// _D3DXComputeBoundingSphere@20
-
-
-// _D3DXComputeBoundingBox@20
-
-
-// _D3DXWeldVertices@24
-
-
-// ??1?$CD3DXSkinMesh@I$0A@$0?0@@QAE@XZ
-
-
-// ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ?SetBoneInfluence@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKKPBKPBM@Z
-
-
-// ?GetMaxVertexInfluences@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJPAK@Z
-
-
-// ?GetMaxFaceInfluences@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJPAK@Z
-
-
-// ?CalcVertexSkinData@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJXZ
-
-
-// ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@K@Z
-
-
-// ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@PAVCBone@@K@Z
-
-
-// ??1?$CD3DXSkinMesh@I$0A@$0?0@@QAE@XZ
-
-
-// ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ?SetBoneInfluence@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKKPBKPBM@Z
-
-
-// ?GetMaxVertexInfluences@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJPAK@Z
-
-
-// ?GetMaxFaceInfluences@?$CD3DXSkinMesh@G$00$0PPPP@@@UAGJPAK@Z
-
-
-// ?CalcVertexSkinData@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJXZ
-
-
-// ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@K@Z
-
-
-// ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@PAVCBone@@K@Z
-
-
-// ?DrawSubset@?$GXTri3Mesh@I$0A@$0?0@@UAGJK@Z
-
-
-// ?Resize@?$GXTri3Mesh@I$0A@$0?0@@QAEJII@Z
-
-
-// ?BValid@?$GXTri3Mesh@I$0A@$0?0@@EAE_NPAV?$GXTri3Face@I@@@Z
-
-
-// ?BValidAttributeGroups@?$GXTri3Mesh@I$0A@$0?0@@AAE_NPAV?$GXTri3Face@I@@@Z
-
-
-// ?DrawSubset@?$GXTri3Mesh@G$00$0PPPP@@@UAGJK@Z
-
-
-// ?Resize@?$GXTri3Mesh@G$00$0PPPP@@@QAEJII@Z
-
-
-// ?BValid@?$GXTri3Mesh@G$00$0PPPP@@@EAE_NPAV?$GXTri3Face@G@@@Z
-
-
-// ?BValidAttributeGroups@?$GXTri3Mesh@I$0A@$0?0@@AAE_NPAV?$GXTri3Face@I@@@Z
-
-
-// ?LoadFromData@?$GXHalfEdgePMesh@G$00$0PPPP@@@QAEJPAUID3DXMesh@@PAKPAEK@Z
-
-
-// ?LoadFromData@?$GXHalfEdgePMesh@G$00$0PPPP@@@QAEJPAUID3DXMesh@@PAKPAEK@Z
-
-
-// ?Init@?$CFaceListIter@I$0A@$0?0@@QAEXIIE@Z
-
-
-// ?Init@?$CFaceListIter@G$00$0PPPP@@@QAEXGGE@Z
-
-
-// ?CopyMesh@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV1@@Z
-
-
-// ?CopyMesh@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV1@@Z
-
-
-// ?GetNextFace@?$CFaceListIter@I$0A@$0?0@@QAEIXZ
-
-
-// ?GetNextFace@?$CFaceListIter@G$00$0PPPP@@@QAEGXZ
-
-
-// ?ComputePointReps@?$GXSimplifyMesh@I$0A@$0?0@@AAEJXZ
-
-
-// ?ComputePointReps@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJXZ
-
-
-// ?AttributeSort@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAI00H@Z
-
-
-// ?SplitSharedVertices@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAPAKPAI@Z
-
-
-// ?ReorderVertexData@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAIPAE@Z
-
-
-// ?ReorderFaceData@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAI0@Z
-
-
-// ?AddVertex@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAEI@Z
-
-
-// ?AttributeSort@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAI00H@Z
-
-
-// ?SplitSharedVertices@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAPAKPAI@Z
-
-
-// ?ReorderVertexData@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAIPAE@Z
-
-
-// ?ReorderFaceData@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAI0@Z
-
-
-// ?Adjust@?$CSimplificationHeap@I@@AAEXI_N0@Z
-
-
-// ?Adjust@?$CSimplificationHeap@G@@AAEXI_N0@Z
-
-
-// ?AccessVertex@?$CSimVertexCache@I$0?0@@QAEXIAA_N@Z
-
-
-// ?AccessVertex@?$CSimVertexCache@I$0?0@@QAEXIAA_N@Z
-
-
-// ?Init@?$CMeshStatus@I$0A@$0?0@@QAEJII_N@Z
-
-
-// ?MarkAsProcessed@?$CMeshStatus@I$0A@$0?0@@QAEXI@Z
-
-
-// ?IFindNextFace@?$CMeshStatus@I$0A@$0?0@@QAEII@Z
-
-
-// ?Init@?$CMeshStatus@G$00$0PPPP@@@QAEJGG_N@Z
-
-
-// ?MarkAsProcessed@?$CMeshStatus@G$00$0PPPP@@@QAEXG@Z
-
-
-// ?IFindNextFace@?$CMeshStatus@G$00$0PPPP@@@QAEGG@Z
-
-
-// ??_GCD3DXFont@@QAEPAXI@Z
-
-
-// ??0?$GXTri3Mesh@I$0A@$0?0@@QAE@PAUIDirect3DDevice8@@KK@Z
-
-
-// ?IndexedHeapSort@@YAXPAKPAMK@Z
-
-
-// ?VertexHashAdd@@YAHPAUD3DXVECTOR3@@KPAPAUSVertexHashEntry@@PAU2@KPAK3PAV?$GXTri3Face@I@@33@Z
-
-
-// ??0?$GXTri3Mesh@I$0A@$0?0@@QAE@PAUIDirect3DDevice8@@KK@Z
-
-
-// ?CloneHelper16@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV1@@Z
-
-
-// ?CloneHelper32@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV?$GXTri3Mesh@I$0A@$0?0@@@Z
-
-
-// ?CloneVertexBuffer@?$GXTri3Mesh@G$00$0PPPP@@@AAEJKPAUIDirect3DVertexBuffer8@@@Z
-
-
-// ?VertexHashAdd@@YAHPAUD3DXVECTOR3@@KPAPAUSVertexHashEntry@@PAU2@KPAK3PAV?$GXTri3Face@G@@33@Z
-
-
-// ??0?$GXHalfEdgePMesh@G$00$0PPPP@@@QAE@PAUIDirect3DDevice8@@KK@Z
-
-
-// ?QueryInterface@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ?CloneMeshFVF@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
-
-
-// ?CloneMesh@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
-
-
-// ?CloneMesh@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
-
-
-// ?TrimByFaces@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAK0@Z
-
-
-// ?TrimByVertices@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAK0@Z
-
-
-// ??1?$GXHalfEdgePMesh@G$00$0PPPP@@@QAE@XZ
-
-
-// ??0?$GXHalfEdgePMesh@G$00$0PPPP@@@QAE@PAUIDirect3DDevice8@@KK@Z
-
-
-// ?QueryInterface@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ?CloneMeshFVF@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
-
-
-// ?CloneMesh@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
-
-
-// ?CloneMesh@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
-
-
-// ?TrimByFaces@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAK0@Z
-
-
-// ?TrimByVertices@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAK0@Z
-
-
-// ??1?$GXHalfEdgePMesh@G$00$0PPPP@@@QAE@XZ
-
-
-// ?CloneHelper16@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV?$GXTri3Mesh@G$00$0PPPP@@@@Z
-
-
-// ?CloneHelper32@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV1@@Z
-
-
-// ?CloneVertexBuffer@?$GXTri3Mesh@G$00$0PPPP@@@AAEJKPAUIDirect3DVertexBuffer8@@@Z
-
-
-// ??0?$GXSimplifyMesh@I$0A@$0?0@@QAE@PAUIDirect3DDevice8@@KK@Z
-
-
-// ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ?CloneMeshFVF@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKKPAUIDirect3DDevice8@@PAK1PAPAUID3DXMesh@@@Z
-
-
-// ?CloneMesh@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAK2PAPAUID3DXMesh@@@Z
-
-
-// ?CloneMesh@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAK2PAPAUID3DXMesh@@@Z
-
-
-// ??0?$GXSimplifyMesh@I$0A@$0?0@@QAE@PAUIDirect3DDevice8@@KK@Z
-
-
-// ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ?CloneMeshFVF@?$GXSimplifyMesh@G$00$0PPPP@@@UAGJKKPAUIDirect3DDevice8@@PAK1PAPAUID3DXMesh@@@Z
-
-
-// ?CloneMesh@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAK2PAPAUID3DXMesh@@@Z
-
-
-// ?CloneMesh@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAK2PAPAUID3DXMesh@@@Z
-
-
-// ?DefragmentWedges@?$GXSimplifyMesh@I$0A@$0?0@@AAEJXZ
-
-
-// ?PeiExtractMin@?$CSimplificationHeap@I@@QAEPAV?$CEdgeInfo@I@@XZ
-
-
-// ?DefragmentWedges@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJXZ
-
-
-// ?PeiExtractMin@?$CSimplificationHeap@G@@QAEPAV?$CEdgeInfo@G@@XZ
-
-
-// ?Add@?$CSimplificationHeap@I@@QAEJPAV?$CEdgeInfo@I@@@Z
-
-
-// ?Add@?$CSimplificationHeap@G@@QAEJPAV?$CEdgeInfo@G@@@Z
-
-
-// ?SGIStripReorder@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV?$CMeshStatus@I$0A@$0?0@@PAI1@Z
-
-
-// ?VCacheStripReorder@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV?$CMeshStatus@I$0A@$0?0@@PAI1K@Z
-
-
-// ?SGIStripReorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV?$CMeshStatus@G$00$0PPPP@@@PAI1@Z
-
-
-// ?VCacheStripReorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV?$CMeshStatus@G$00$0PPPP@@@PAI1K@Z
-
-
-// _D3DXCreateMeshFVF@24
-
-
-// ?D3DXCreatePMeshFromData@@YGJPAUID3DXMesh@@KPAKPAEKPAPAUID3DXPMesh@@@Z
-
-
-// ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJKKKKKPAUIDirect3DDevice8@@@Z
-
-
-// ?Init@?$CD3DXSkinMesh@G$00$0PPPP@@@QAEJKKKKKPAUIDirect3DDevice8@@@Z
-
-
-// ?SetNumFaces@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJK@Z
-
-
-// ?UndoVSplit@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEXAAVCHalfEdgeVSplit@@@Z
-
-
-// ?GatherECollapseInfo@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEXAAVCHalfEdgeVSplit@@@Z
-
-
-// ?ApplyVSplit@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEXAAVCHalfEdgeVSplit@@@Z
-
-
-// ?GatherVSplitInfo@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEXAAVCHalfEdgeVSplit@@@Z
-
-
-// ?GetNextWedge@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEGI@Z
-
-
-// ?SetNumVertices@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJK@Z
-
-
-// ?Reorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAII0I@Z
-
-
-// ?SetNumFaces@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJK@Z
-
-
-// ?UndoVSplit@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEXAAVCHalfEdgeVSplit@@@Z
-
-
-// ?GatherECollapseInfo@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEXAAVCHalfEdgeVSplit@@@Z
-
-
-// ?ApplyVSplit@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEXAAVCHalfEdgeVSplit@@@Z
-
-
-// ?GatherVSplitInfo@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEXAAVCHalfEdgeVSplit@@@Z
-
-
-// ?GetNextWedge@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEII@Z
-
-
-// ?SetNumVertices@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJK@Z
-
-
-// ?Reorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAII0I@Z
-
-
-// ?StripReorder@?$GXTri3Mesh@I$0A@$0?0@@AAEJKPAI0PBK@Z
-
-
-// ?StripReorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJKPAI0PBK@Z
-
-
-// _D3DXCreateMesh@24
-
-
-// _D3DXCreateSkinMesh@28
-
-
-// ?OptimizeBaseLOD@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPAK@Z
-
-
-// ?OptimizeBaseLOD@?$GXHalfEdgePMesh@I$0A@$0?0@@UAGJKPAK@Z
-
-
-// ?SetupSimplification@?$GXSimplifyMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@PBKQAU_D3DXATTRIBUTEWEIGHTS@@PBM@Z
-
-
-// ?SetupSimplification@?$GXSimplifyMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@PBKQAU_D3DXATTRIBUTEWEIGHTS@@PBM@Z
-
-
-// _D3DXCreateSPMesh@20
-
-
-// ?GenerateSkinnedMesh@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKMQAKPAK1PAPAUID3DXBuffer@@PAPAUID3DXMesh@@@Z
-
-
-// ?IsSubset@CD3DXBitField256@@QAEHAAV1@@Z
-
-
-// ?CalcNumAttributes@?$CD3DXSkinMesh@I$0A@$0?0@@QAEXPAK0@Z
-
-
-// ?Or@CD3DXBitField256@@QAEXAAV1@0@Z
-
-
-// ?GenerateSkinnedMesh@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKMQAKPAK1PAPAUID3DXBuffer@@PAPAUID3DXMesh@@@Z
-
-
-// ?CalcNumAttributes@?$CD3DXSkinMesh@I$0A@$0?0@@QAEXPAK0@Z
-
-
-// ?ReduceFaces@?$GXSimplifyMesh@I$0A@$0?0@@UAGJK@Z
-
-
-// ?CollapseEdge@?$GXSimplifyMesh@I$0A@$0?0@@AAEJPAV?$CEdgeInfo@I@@PAE@Z
-
-
-// ?GatherEdgeCollapseData@?$GXSimplifyMesh@I$0A@$0?0@@AAEJAAU?$SEdgeCollapseContext@I@@PAV?$CEdgeInfo@I@@PAE@Z
-
-
-// ?BValidEdgeCollapse@?$GXSimplifyMesh@I$0A@$0?0@@AAE_NAAU?$SEdgeCollapseContext@I@@PAE@Z
-
-
-// ?PerformEdgeCollapse@?$GXSimplifyMesh@I$0A@$0?0@@AAEJAAU?$SEdgeCollapseContext@I@@PAE@Z
-
-
-// ?MarkAsUnused@?$GXTri3Mesh@I$0A@$0?0@@AAEXI@Z
-
-
-// ?Delete@?$CSimplificationHeap@I@@QAEJPAV?$CEdgeInfo@I@@@Z
-
-
-// ?Update@?$CSimplificationHeap@I@@QAEJPAV?$CEdgeInfo@I@@@Z
-
-
-// ?ReduceFaces@?$GXSimplifyMesh@I$0A@$0?0@@UAGJK@Z
-
-
-// ?ReduceFaces@?$GXSimplifyMesh@I$0A@$0?0@@UAGJK@Z
-
-
-// ?CollapseEdge@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJPAV?$CEdgeInfo@G@@PAE@Z
-
-
-// ?GatherEdgeCollapseData@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJAAU?$SEdgeCollapseContext@G@@PAV?$CEdgeInfo@G@@PAE@Z
-
-
-// ?BValidEdgeCollapse@?$GXSimplifyMesh@G$00$0PPPP@@@AAE_NAAU?$SEdgeCollapseContext@G@@PAE@Z
-
-
-// ?PerformEdgeCollapse@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJAAU?$SEdgeCollapseContext@G@@PAE@Z
-
-
-// ?MarkAsUnused@?$GXTri3Mesh@G$00$0PPPP@@@AAEXG@Z
-
-
-// ?Delete@?$CSimplificationHeap@G@@QAEJPAV?$CEdgeInfo@G@@@Z
-
-
-// ?RecalcEdgeQEMS_Plane@?$GXSimplifyMesh@G$00$0PPPP@@@AAEXGGPAE@Z
-
-
-// ?Update@?$CSimplificationHeap@G@@QAEJPAV?$CEdgeInfo@G@@@Z
-
-
-// ?ReduceFaces@?$GXSimplifyMesh@I$0A@$0?0@@UAGJK@Z
-
-
-// ?D3DXGetFormatInfo@@YAPBU_D3DXFORMAT_INFO@@W4_D3DFORMAT@@@Z
-
-
-// ?D3DXScoreFormat@@YAIPBU_D3DXFORMAT_INFO@@0@Z
-
-
-// ?D3DXFindClosestFormat@@YA?AW4_D3DFORMAT@@PBW41@PBUtagPALETTEENTRY@@PBU_D3DXFORMAT_INFO@@@Z
-
-
-// ?D3DXFindClosestExternalFormat@@YA?AW4_D3DFORMAT@@W41@@Z
-
-
-// _D3DXGetImageInfoFromFileInMemory@12
-
-
-// _D3DXLoadSurfaceFromMemory@40
-
-
-// ?SaveSurfaceToFile@@YAJPBXW4_D3DXIMAGE_FILEFORMAT@@PAUIDirect3DSurface8@@PBUtagPALETTEENTRY@@PBUtagRECT@@H@Z
-
-
-// _D3DXSaveSurfaceToFileA@20
-
-
-// _D3DXSaveSurfaceToFileW@20
-
-
-// _D3DXLoadVolumeFromMemory@44
-
-
-// ?SaveVolumeToFile@@YAJPBXW4_D3DXIMAGE_FILEFORMAT@@PAUIDirect3DVolume8@@PBUtagPALETTEENTRY@@PBU_D3DBOX@@H@Z
-
-
-// _D3DXSaveSurfaceToFileA@20
-
-
-// _D3DXSaveSurfaceToFileW@20
-
-
-// _D3DXCreateTexture@32
-
-
-// _D3DXCreateCubeTexture@28
-
-
-// _D3DXCreateVolumeTexture@36
-
-
-// ??_ECD3DXParameter@@QAEPAXI@Z
-
-
-// ??_ECD3DXLockVolume@@QAEPAXI@Z
-
-
-// ?EvalColor@@YAMPAUD3DXCOLOR@@K@Z
-
-
-// _D3DXGetImageInfoFromFileA@8
-
-
-// _D3DXGetImageInfoFromFileW@8
-
-
-// _D3DXGetImageInfoFromResourceA@12
-
-
-// _D3DXGetImageInfoFromResourceW@12
-
-
-// _D3DXLoadSurfaceFromFileInMemory@36
-
-
-// _D3DXLoadSurfaceFromSurface@32
-
-
-// _D3DXLoadVolumeFromFileInMemory@36
-
-
-// _D3DXLoadVolumeFromVolume@32
-
-
-// ?SaveTextureToFile@@YAJPBXW4_D3DXIMAGE_FILEFORMAT@@PAUIDirect3DBaseTexture8@@PBUtagPALETTEENTRY@@H@Z
-
-
-// _D3DXFilterTexture@16
-
-
-// _D3DXLoadSurfaceFromFileA@32
-
-
-// _D3DXLoadSurfaceFromFileW@32
-
-
-// _D3DXLoadSurfaceFromResourceA@36
-
-
-// _D3DXLoadSurfaceFromResourceW@36
-
-
-// _D3DXLoadSurfaceFromFileA@32
-
-
-// _D3DXLoadSurfaceFromFileW@32
-
-
-// _D3DXLoadSurfaceFromResourceA@36
-
-
-// _D3DXLoadSurfaceFromResourceW@36
-
-
-// ?CreateTextureFromFileInMemoryEx@@YAJPAUIDirect3DDevice8@@PBXIIIIIKW4_D3DFORMAT@@W4_D3DPOOL@@KKKPAU_D3DXIMAGE_INFO@@PAUtagPALETTEENTRY@@W4_D3DRESOURCETYPE@@PAPAUIDirect3DBaseTexture8@@@Z
-
-
-// _D3DXCreateTextureFromFileInMemoryEx@60
-
-
-// _D3DXCreateCubeTextureFromFileInMemoryEx@56
-
-
-// _D3DXCreateVolumeTextureFromFileInMemoryEx@64
-
-
-// _D3DXCreateTextureFromFileExA@56
-
-
-// _D3DXCreateTextureFromFileExW@56
-
-
-// _D3DXCreateTextureFromResourceExA@60
-
-
-// _D3DXCreateTextureFromResourceExW@60
-
-
-// _D3DXCreateCubeTextureFromFileExA@52
-
-
-// _D3DXCreateCubeTextureFromFileExW@52
-
-
-// _D3DXCreateCubeTextureFromResourceExA@56
-
-
-// _D3DXCreateTextureFromResourceExW@60
-
-
-// _D3DXCreateVolumeTextureFromFileExA@60
-
-
-// _D3DXCreateVolumeTextureFromFileExW@60
-
-
-// _D3DXCreateVolumeTextureFromResourceExA@64
-
-
-// _D3DXCreateTextureFromResourceExW@60
-
-
-// ?GetD3DRegValue@@YAHKPADPAXK@Z
-
-
-// ?_asm_isMMX@@YAHXZ
-
-
-// ?IsIntelSSEProcessor@@YAKXZ
-
-
-// ?DrawTextA@CD3DXFont@@UAGHPBDHPAUtagRECT@@KK@Z
-
-
-// ?DrawTextW@CD3DXFont@@UAGHPBGHPAUtagRECT@@KK@Z
-
-
-// ?QueryInterface@CD3DXFont@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ??0CD3DXFont@@QAE@XZ
-
-
-// ??1CD3DXSprite@@QAE@XZ
-
-
-// ?Initialize@CD3DXSprite@@QAEJPAUIDirect3DDevice8@@@Z
-
-
-// ?QueryInterface@CD3DXFont@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ?Draw@CD3DXSprite@@UAGJPAUIDirect3DTexture8@@PBUtagRECT@@PBUD3DXVECTOR2@@2M2K@Z
-
-
-// ??0CD3DXSprite@@QAE@XZ
-
-
-// ?Init@CD3DXRenderToSurface@@QAEJPAUIDirect3DDevice8@@IIW4_D3DFORMAT@@H1@Z
-
-
-// ?EndScene@CD3DXRenderToSurface@@UAGJXZ
-
-
-// ?OnLostDevice@CD3DXRenderToSurface@@UAGJXZ
-
-
-// ??1CD3DXRenderToSurface@@QAE@XZ
-
-
-// ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ??0CD3DXRenderToSurface@@QAE@XZ
-
-
-// ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ?D3DXVec2Lerp@@YAPAUD3DXVECTOR2@@PAU1@PBU1@1M@Z
-
-
-// ??1CD3DXRenderToSurface@@QAE@XZ
-
-
-// ??0CD3DXFile@@QAE@XZ
-
-
-// ?Open@CD3DXFile@@QAEJPBXH@Z
-
-
-// ?Create@CD3DXFile@@QAEJPBXH@Z
-
-
-// ??1CD3DXFile@@QAE@XZ
-
-
-// ??0CD3DXAssembler@@QAE@XZ
-
-
-// ?DecodeMask@CD3DXAssembler@@QAEKPAD@Z
-
-
-// ?DecodeSwizzle@CD3DXAssembler@@QAEKPAD@Z
-
-
-// ?SetConstant@CD3DXAssembler@@QAEXKPAUD3DXVECTOR4@@@Z
-
-
-// ?d3dxasm_parse@@YAHXZ
-
-
-// ??0CD3DXResource@@QAE@XZ
-
-
-// ??1CD3DXResource@@QAE@XZ
-
-
-// ?Close@CD3DXResource@@QAEJXZ
-
-
-// ?Open@CD3DXResource@@QAEJPAUHINSTANCE__@@PBXHH@Z
-
-
-// ??1CD3DXBuffer@@UAE@XZ
-
-
-// ?Init@CD3DXBuffer@@UAEJK@Z
-
-
-// ?AddString@CD3DXStringBuffer@@QAEJPAD@Z
-
-
-// ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
-
-
-// ?D3DXCreateStringBuffer@@YAJKPAPAVCD3DXStringBuffer@@@Z
-
-
-// ?D3DXCreateBufferA16@@YAJKPAPAUID3DXBuffer@@@Z
-
-
-// ??0SStringList@@QAE@PADPAU0@@Z
-
-
-// ??_GCD3DXFont@@QAEPAXI@Z
-
-
-// ?AddMaterial@@YAJPAUIDirectXFileSaveObject@@PBUD3DXMATERIAL@@KPAUSStringList@@PAUIDirectXFileData@@@Z
-
-
-// ?AddFaceMaterials@@YAJPAUIDirectXFileSaveObject@@PAKKPBUD3DXMATERIAL@@KKPAUSStringList@@PAUIDirectXFileData@@@Z
-
-
-// ??1SStringList@@QAE@XZ
-
-
-// ?AddNormals@@YAJPAUIDirectXFileSaveObject@@PAEKPAGPAKKAAVDXCrackFVF@@PAUIDirectXFileData@@@Z
-
-
-// ?AddTextureCoordinates@@YAJPAUIDirectXFileSaveObject@@PAEKAAVDXCrackFVF@@PAUIDirectXFileData@@@Z
-
-
-// ?AddVertexColors@@YAJPAUIDirectXFileSaveObject@@PAEKAAVDXCrackFVF@@PAUIDirectXFileData@@@Z
-
-
-// ?AddOtherFVFData@@YAJPAUIDirectXFileSaveObject@@PAEKKAAVDXCrackFVF@@PAUIDirectXFileData@@@Z
-
-
-// ?D3DXSaveMeshToXofEx@@YGJPAUIDirectXFileSaveObject@@PAUID3DXMesh@@PBKQAUD3DXMATERIAL@@KKPAEKPAPAUIDirectXFileData@@PAUSStringList@@@Z
-
-
-// ?D3DXSaveMeshToXEx@@YGJPADPAUID3DXMesh@@PBKQAUD3DXMATERIAL@@KKPAEK@Z
-
-
-// _D3DXSaveMeshToX@24
-
-
-// ?DwCombineFVFs@@YAKKK@Z
-
-
-// ?D3DXMergeMeshes@@YAJPAUID3DXMesh@@PAKPAUID3DXBuffer@@K012KPAUIDirect3DDevice8@@PAPAU1@PAPAU2@51@Z
-
-
-// _D3DXLoadMeshFromXof@28
-
-
-// _D3DXCreatePMeshFromStream@24
-
-
-// ?LoadMeshes@@YAJPAUIDirectXFileData@@AAUD3DXMATRIX@@KPAUIDirect3DDevice8@@PAPAUID3DXMesh@@PAPAUID3DXBuffer@@4PAK@Z
-
-
-// ??0COrbitVertexIter@@QAE@PBKPAXI@Z
-
-
-// ?FindWedge@COrbitVertexIter@@QAEKKK@Z
-
-
-// ?GetNextFace@COrbitVertexIter@@QAEKXZ
-
-
-// ?MoveToCCWFace@COrbitVertexIter@@QAEHXZ
-
-
-// ?OutputError@@YAXPAVCD3DXSzStack@@PADZZ
-
-
-// ?ValidateIndices@?$@G$00$0PPPP@@@YAJPAGPBKKKPAVCD3DXSzStack@@@Z
-
-
-// ?ValidateIndices@?$@I$0A@$0?0@@YAJPAIPBKKKPAVCD3DXSzStack@@@Z
-
-
-// ?Init@COrbitVertexIter@@QAEXKKE@Z
-
-
-// ?BreakBowTies@@YAJPAUID3DXMesh@@PBKPAPAU1@PAVCD3DXSzStack@@@Z
-
-
-// _D3DXCleanMesh@20
-
-
-// ?D3DXValidMeshEx@?$@I$0A@$0?0@@YAJPAUID3DXMesh@@PBKPAPAUID3DXBuffer@@I@Z
-
-
-// ?D3DXValidMeshEx@?$@G$00$0PPPP@@@YAJPAUID3DXMesh@@PBKPAPAUID3DXBuffer@@G@Z
-
-
-// _D3DXValidMesh@12
-
-
-// ??0CD3DXImage@@QAE@XZ
-
-
-// ??1CD3DXImage@@QAE@XZ
-
-
-// ??_GCD3DXFont@@QAEPAXI@Z
-
-
-// ?Initialize@CD3DXImage@@QAEJPAUD3DX_BLT@@@Z
-
-
-// ?LoadDIB@CD3DXImage@@AAEJPBXK@Z
-
-
-// ?SaveDIB@CD3DXImage@@AAEJPAXH@Z
-
-
-// ?LoadJPG@CD3DXImage@@AAEJPBXK@Z
-
-
-// ?LoadTGA@CD3DXImage@@AAEJPBXK@Z
-
-
-// ?LoadPPM@CD3DXImage@@AAEJPBXK@Z
-
-
-// ?LoadPNG@CD3DXImage@@AAEJPBXK@Z
-
-
-// ?LoadDDS@CD3DXImage@@AAEJPBXK@Z
-
-
-// ?SaveDDS@CD3DXImage@@AAEJPAX@Z
-
-
-// ?Save@CD3DXImage@@QAEJPBXW4_D3DXIMAGE_FILEFORMAT@@H@Z
-
-
-// ?LoadBMP@CD3DXImage@@AAEJPBXK@Z
-
-
-// ?Load@CD3DXImage@@QAEJPBXKPAU_D3DXIMAGE_INFO@@H@Z
-
-
-// ??0CD3DXBlt@@QAE@XZ
-
-
-// ?TF_SetupTriangle@@YAPAEIIH@Z
-
-
-// ??_ETF_Row@@QAEPAXI@Z
-
-
-// ?BltTriangle3D@CD3DXBlt@@IAEJXZ
-
-
-// ?BltSame_DXTn@CD3DXBlt@@IAEJXZ
-
-
-// ?c_BoxFilter2D_A8R8G8B8@@YAJPAI0IIII@Z
-
-
-// ?BltBox2D_A8R8G8B8@CD3DXBlt@@IAEJXZ
-
-
-// ?c_BoxFilter2D_X8R8G8B8@@YAJPAI0IIII@Z
-
-
-// ?mmx_BoxFilter2D_A8R8G8B8@@YAJPAI0IIII@Z
-
-
-// ??DD3DXQUATERNION@@QBE?AU0@M@Z
-
-
-// ?BltBox2D_A8R8G8B8@CD3DXBlt@@IAEJXZ
-
-
-// ?BltBox2D_R5G6B5@CD3DXBlt@@IAEJXZ
-
-
-// ?BltBox2D_X1R5G5B5@CD3DXBlt@@IAEJXZ
-
-
-// ?BltBox2D_A1R5G5B5@CD3DXBlt@@IAEJXZ
-
-
-// ?BltBox2D_A4R4G4B4@CD3DXBlt@@IAEJXZ
-
-
-// ?BltBox2D_R3G3B2@CD3DXBlt@@IAEJXZ
-
-
-// ?BltBox2D_A8@CD3DXBlt@@IAEJXZ
-
-
-// ?BltBox2D_A8R3G3B2@CD3DXBlt@@IAEJXZ
-
-
-// ?BltBox2D_X4R4G4B4@CD3DXBlt@@IAEJXZ
-
-
-// ?BltBox2D_A8L8@CD3DXBlt@@IAEJXZ
-
-
-// ?BltBox2D_R3G3B2@CD3DXBlt@@IAEJXZ
-
-
-// ?BltSame@CD3DXBlt@@IAEJXZ
-
-
-// ?BltCopy@CD3DXBlt@@IAEJXZ
-
-
-// ?BltNone@CD3DXBlt@@IAEJXZ
-
-
-// ?BltPoint@CD3DXBlt@@IAEJXZ
-
-
-// ?BltBox2D@CD3DXBlt@@IAEJXZ
-
-
-// ?BltBox3D@CD3DXBlt@@IAEJXZ
-
-
-// ?LF_SetupLinear@@YAPAEIIH@Z
-
-
-// ?BltLinear2D@CD3DXBlt@@IAEJXZ
-
-
-// ?BltLinear3D@CD3DXBlt@@IAEJXZ
-
-
-// ?BltTriangle2D@CD3DXBlt@@IAEJXZ
-
-
-// ?Blt@CD3DXBlt@@QAEJPAUD3DX_BLT@@0K@Z
-
-
-// ??0CD3DXDwStack@@QAE@XZ
-
-
-// ?Unlock@CD3DXLockSurface@@QAEJXZ
-
-
-// ?Unlock@CD3DXLockVolume@@QAEJXZ
-
-
-// ??1CD3DXCodec@@UAE@XZ
-
-
-// ?Convert@CD3DXCodec@@IAEPAUD3DXCOLOR@@PAU2@@Z
-
-
-// ??1CD3DXCodecDXT@@UAE@XZ
-
-
-// ?F2IBegin@@YAXXZ
-
-
-// ??0CD3DXCodec@@IAE@PAUD3DX_BLT@@IK@Z
-
-
-// ?ConvertFrom@CD3DXCodec@@QAEJPAV1@@Z
-
-
-// ?QuantizeColorKey@CD3DXCodec@@MAEXXZ
-
-
-// ?ColorKey@CD3DXCodec@@IAEXPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_A8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_X8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_R5G6B5@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_X1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_A1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_A4R4G4B4@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_R3G3B2@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_A8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_A8R3G3B2@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_X4R4G4B4@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_A2B10G10R10@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_G16R16@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_A8P8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_P8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_L8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_A8L8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_A4L4@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_L6V5U5@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_X8L8V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_Q8W8V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_V16U16@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_W11V11U10@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_A2W10V10U10@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_D16_LOCKABLE@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_D16_LOCKABLE@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_D3DX_A16L16@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_D3DX_R16G16B16@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Encode@CD3DXCodec_D3DX_A16R16G16B16@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_A8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_X8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_R5G6B5@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_X1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_A1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_A4R4G4B4@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_A2B10G10R10@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_G16R16@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_R3G3B2@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_A8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_A8R3G3B2@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_X4R4G4B4@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_A8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_L8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_A8L8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_A4L4@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_L6V5U5@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_X8L8V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_Q8W8V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_V16U16@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_W11V11U10@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_A2W10V10U10@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_D16_LOCKABLE@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_D16_LOCKABLE@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_D3DX_A16L16@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_D3DX_R16G16B16@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ?Decode@CD3DXCodec_D3DX_A16R16G16B16@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ??0CD3DXCodec_R8G8B8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodecYUV@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ?Commit@CD3DXCodecYUV@@QAEJXZ
-
-
-// ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ?Fetch@CD3DXCodecYUV@@QAEJIIH@Z
-
-
-// ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ?Encode@CD3DXCodecYUV@@UAEXIIPAUD3DXCOLOR@@@Z
-
-
-// ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodecDXT@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ?QuantizeColorKey@CD3DXCodecDXT@@MAEXXZ
-
-
-// ??0CD3DXCodec_V8U8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_V8U8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_X8L8V8U8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_Q8W8V8U8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_X8L8V8U8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_X8L8V8U8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_X8L8V8U8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_D3DX_R16G16B16@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_D3DX_A16R16G16B16@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??1CD3DXCodecYUV@@UAE@XZ
-
-
-// ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
-
-
-// ?Create@CD3DXCodec@@SAPAV1@PAUD3DX_BLT@@@Z
-
-
-// ?sse_D3DXInitFastTable@@YAXPAUD3DXFASTTABLE@@@Z
-
-
-// ?sse_D3DXInitFastTable@@YAXPAUD3DXFASTTABLE@@@Z
-
-
-// ?get_feature_flags@@YAIXZ
-
-
-// ?x3d_D3DXInitFastTable@@YAXPAUD3DXFASTTABLE@@@Z
-
-
-// ?x86_D3DXVec3Normalize@@YGPAUD3DXVECTOR3@@PAU1@PBU1@@Z
-
-
-// ?x86_D3DXMatrixMultiply@@YGPAUD3DXMATRIX@@PAU1@PBU1@1@Z
-
-
-// ?x86_D3DXInitFastTable@@YAXPAUD3DXFASTTABLE@@@Z
-
-
-// ??0CD3DXText@@IAE@XZ
-
-
-// ??_GCD3DXFont@@QAEPAXI@Z
-
-
-// ?Release@CD3DXText@@QAEXXZ
-
-
-// ??0CD3DXDwStack@@QAE@XZ
-
-
-// ??1CD3DXDwStack@@QAE@XZ
-
-
-// ?Push@CD3DXDwStack@@QAEJK@Z
-
-
-// ?Pop@CD3DXDwStack@@QAEJPAK@Z
-
-
-// ?GetLastError@CD3DXDwStack@@QAEJXZ
-
-
-// ??0CD3DXSzStack@@QAE@XZ
-
-
-// ??1CD3DXSzStack@@QAE@XZ
-
-
-// ?Push@CD3DXSzStack@@QAEJPAD@Z
-
-
-// ?Pop@CD3DXDwStack@@QAEJPAK@Z
-
-
-// ?GetLastError@CD3DXDwStack@@QAEJXZ
-
-
-// ?GenerateStringBuffer@CD3DXSzStack@@QAEJPAPAUID3DXBuffer@@@Z
-
-
-// ?FindPoint@@YAKPAKKPAUSLoadVertex@@@Z
-
-
-// ?CreateMaterialBuffer@@YAJPAUD3DXMATERIAL@@KPAPAUID3DXBuffer@@@Z
-
-
-// ?MergeMaterialBuffers@@YAJPAUID3DXBuffer@@K0KPAPAU1@@Z
-
-
-// ?SetTex1@DXCrackFVF@@QAEXPAXPAUD3DXVECTOR2@@@Z
-
-
-// ?InitVertices@@YAJAAPAUSLoadVertex@@K@Z
-
-
-// ?InitFaces@@YAJAAPAUSLoadedFace@@K@Z
-
-
-// ?BEqualWedges@@YA_NAAUSLoadVertex@@0@Z
-
-
-// ?AddToDynamicArray@@YAHPAPAUSLoadVertex@@ABU1@PAK2@Z
-
-
-// ?SetVertexColor@@YAJPAUSLoadedFace@@KAAUD3DXCOLOR@@PAPAUSLoadVertex@@PAK3@Z
-
-
-// ?SetVertexAttributes@@YAJPAUSLoadedFace@@KPAUD3DXVECTOR3@@PAUD3DXVECTOR2@@PAPAUSLoadVertex@@PAK4@Z
-
-
-// ?SetSmoothingGroup@@YAJPAUSLoadedFace@@KGAAUD3DXVECTOR3@@PAPAUSLoadVertex@@PAK3@Z
-
-
-// ?InitCorners@@YAJAAPAUSCorner@@K@Z
-
-
-// _jpeg_CreateDecompress
-
-
-// _jpeg_set_marker_processor
-
-
-// ?default_decompress_parms@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// _jpeg_consume_input
-
-
-// _jpeg_finish_decompress
-
-
-// _jpeg_read_header
-
-
-// ?output_pass_setup@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// _jpeg_read_scanlines
-
-
-// _jpeg_start_decompress
-
-
-// ?get_soi@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?get_sof@D3DX@@YAEPAUjpeg_decompress_struct@1@EE@Z
-
-
-// ?get_sos@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?get_app0@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?get_app14@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?get_dac@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?get_dht@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?get_dqt@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?get_dri@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?skip_variable@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?next_marker@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?first_marker@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?reset_marker_reader@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?jinit_marker_reader@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?d3dx_jpeg_output_message@@YAXPAUjpeg_common_struct@D3DX@@@Z
-
-
-// _jpeg_std_error
-
-
-// ?png_format_buffer@D3DX@@YAXPAUpng_struct_def@1@PADPBD@Z
-
-
-// _png_set_error_fn
-
-
-// _png_error
-
-
-// _png_chunk_error
-
-
-// _png_chunk_error
-
-
-// _png_create_read_struct
-
-
-// _png_read_init
-
-
-// _png_read_info
-
-
-// _png_read_update_info
-
-
-// _png_read_row
-
-
-// _png_read_rows
-
-
-// _png_read_image
-
-
-// _png_read_end
-
-
-// _png_read_destroy
-
-
-// _png_destroy_read_struct
-
-
-// _png_get_valid
-
-
-// _png_get_rowbytes
-
-
-// _png_get_channels
-
-
-// _png_get_gAMA
-
-
-// _png_get_sRGB
-
-
-// _png_get_IHDR
-
-
-// _png_get_PLTE
-
-
-// _png_get_tRNS
-
-
-// _png_set_bgr
-
-
-// _png_set_swap
-
-
-// _png_set_packing
-
-
-// _png_set_interlace_handling
-
-
-// _png_set_filler
-
-
-// _png_do_swap
-
-
-// _png_do_bgr
-
-
-// _png_set_dither
-
-
-// _png_set_gamma
-
-
-// _png_set_expand
-
-
-// _png_set_expand
-
-
-// _png_read_transform_info
-
-
-// _png_do_unpack
-
-
-// _png_do_unshift
-
-
-// _png_do_chop
-
-
-// _png_do_read_filler
-
-
-// _png_do_gamma
-
-
-// _png_do_expand_palette
-
-
-// _png_do_expand
-
-
-// _png_do_dither
-
-
-// _png_build_gamma_table
-
-
-// _png_init_read_transformations
-
-
-// _png_do_read_transformations
-
-
-// _png_set_gAMA
-
-
-// _png_set_IHDR
-
-
-// _png_set_PLTE
-
-
-// _png_set_sRGB
-
-
-// _png_set_sRGB_gAMA_and_cHRM
-
-
-// _png_set_tRNS
-
-
-// _png_read_data
-
-
-// _png_set_read_fn
-
-
-// _png_sig_cmp
-
-
-// _png_zalloc
-
-
-// _png_reset_crc
-
-
-// _png_info_destroy
-
-
-// _png_create_info_struct
-
-
-// ?Decode565@@YAXPAUD3DXCOLOR@@G@Z
-
-
-// ?DecodePremult@@YAJPAUD3DXCOLOR@@@Z
-
-
-// ?EncodePremult@@YAJPAUD3DXCOLOR@@PBU1@@Z
-
-
-// ?D3DXColorLerp@@YAPAUD3DXCOLOR@@PAU1@PBU1@1M@Z
-
-
-// ?F2IBegin@@YAXXZ
-
-
-// ?Encode565@@YAGPBUD3DXCOLOR@@@Z
-
-
-// ?OptimizeAlpha@@YAXPAM0PBMI@Z
-
-
-// ?OptimizeRGB@@YAXPAUD3DXCOLOR@@0PBU1@I@Z
-
-
-// ?EncodeDXT1@@YAJPAEPBUD3DXCOLOR@@H@Z
-
-
-// ?D3DXDecodeDXT1@@YAJPAUD3DXCOLOR@@PBE@Z
-
-
-// ?D3DXDecodeDXT3@@YAJPAUD3DXCOLOR@@PBE@Z
-
-
-// ?D3DXEncodeDXT3@@YAJPAEPBUD3DXCOLOR@@@Z
-
-
-// ?D3DXEncodeDXT5@@YAJPAEPBUD3DXCOLOR@@@Z
-
-
-// ?D3DXEncodeDXT2@@YAJPAEPBUD3DXCOLOR@@@Z
-
-
-// ?D3DXEncodeDXT2@@YAJPAEPBUD3DXCOLOR@@@Z
-
-
-// ?sse_D3DXVec2Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR2@@PBUD3DXMATRIX@@@Z
-
-
-// ?sse_D3DXVec2Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR2@@PBUD3DXMATRIX@@@Z
-
-
-// ?sse_D3DXVec2TransformNormal@@YGPAUD3DXVECTOR2@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
-
-
-// ?sse_D3DXVec4Normalize@@YGPAUD3DXVECTOR4@@PAU1@PBU1@@Z
-
-
-// ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
-
-
-// ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
-
-
-// ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
-
-
-// ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
-
-
-// ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
-
-
-// ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
-
-
-// ?sse_D3DXVec3BaryCentric@@YGPAUD3DXVECTOR3@@PAU1@PBU1@11MM@Z
-
-
-// ?sse_D3DXVec3BaryCentric@@YGPAUD3DXVECTOR3@@PAU1@PBU1@11MM@Z
-
-
-// ?sse_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
-
-
-// ?sse_D3DXPlaneIntersectLine@@YGPAUD3DXVECTOR3@@PAU1@PBUD3DXPLANE@@PBU1@2@Z
-
-
-// ?sse_D3DXQuaternionMultiply@@YGPAUD3DXQUATERNION@@PAU1@PBU1@1@Z
-
-
-// ?sse_D3DXVec4Normalize@@YGPAUD3DXVECTOR4@@PAU1@PBU1@@Z
-
-
-// ?x3d_D3DXQuaternionSlerp@@YGPAUD3DXQUATERNION@@PAU1@PBU1@1M@Z
-
-
-// ?x3d_D3DXQuaternionSquadSetup@@YGXPAUD3DXQUATERNION@@00PBU1@111@Z
-
-
-// ?x3d_D3DXVec2Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR2@@PBUD3DXMATRIX@@@Z
-
-
-// ?x3d_D3DXPlaneNormalize@@YGPAUD3DXPLANE@@PAU1@PBU1@@Z
-
-
-// ?jdiv_round_up@D3DX@@YAJJJ@Z
-
-
-// ?jround_up@D3DX@@YAJJJ@Z
-
-
-// ?jcopy_sample_rows@D3DX@@YAXPAPAEH0HHI@Z
-
-
-// ?jcopy_block_row@D3DX@@YAXPAY0EA@F0I@Z
-
-
-// ?jzero_far@D3DX@@YAXPAXI@Z
-
-
-// ?IsMMX@D3DX@@YAHXZ
-
-
-// ?initial_setup@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?per_scan_setup@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?latch_quant_tables@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?start_input_pass@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?jinit_input_controller@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?out_of_memory@D3DX@@YAXPAUjpeg_common_struct@1@H@Z
-
-
-// ?alloc_small@D3DX@@YAPAXPAUjpeg_common_struct@1@HI@Z
-
-
-// ?alloc_large@D3DX@@YAPAXPAUjpeg_common_struct@1@HI@Z
-
-
-// ?alloc_sarray@D3DX@@YAPAPAEPAUjpeg_common_struct@1@HII@Z
-
-
-// ?alloc_barray@D3DX@@YAPAPAY0EA@FPAUjpeg_common_struct@1@HII@Z
-
-
-// ?request_virt_sarray@D3DX@@YAPAUjvirt_sarray_control@1@PAUjpeg_common_struct@1@HEIII@Z
-
-
-// ?request_virt_barray@D3DX@@YAPAUjvirt_barray_control@1@PAUjpeg_common_struct@1@HEIII@Z
-
-
-// ?realize_virt_arrays@D3DX@@YAXPAUjpeg_common_struct@1@@Z
-
-
-// ?do_sarray_io@D3DX@@YAXPAUjpeg_common_struct@1@PAUjvirt_sarray_control@1@E@Z
-
-
-// ?do_barray_io@D3DX@@YAXPAUjpeg_common_struct@1@PAUjvirt_barray_control@1@E@Z
-
-
-// ?access_virt_sarray@D3DX@@YAPAPAEPAUjpeg_common_struct@1@PAUjvirt_sarray_control@1@IIE@Z
-
-
-// ?access_virt_barray@D3DX@@YAPAPAY0EA@FPAUjpeg_common_struct@1@PAUjvirt_barray_control@1@IIE@Z
-
-
-// ?free_pool@D3DX@@YAXPAUjpeg_common_struct@1@H@Z
-
-
-// ?jinit_memory_mgr@D3DX@@YAXPAUjpeg_common_struct@1@@Z
-
-
-// _jpeg_abort
-
-
-// _jpeg_destroy
-
-
-// _jpeg_alloc_quant_table
-
-
-// _jpeg_alloc_huff_table
-
-
-// ?use_merged_upsample@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// _jpeg_calc_output_dimensions
-
-
-// ?prepare_range_limit_table@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?master_selection@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?jinit_master_decompress@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// _inflateReset
-
-
-// _inflateEnd
-
-
-// _inflateInit2_
-
-
-// _inflateInit_
-
-
-// _inflate
-
-
-// _inflateSetDictionary
-
-
-// _inflateSync
-
-
-// _png_create_struct
-
-
-// _png_destroy_struct
-
-
-// _png_malloc
-
-
-// _png_free
-
-
-// _png_memcpy_check
-
-
-// _png_memset_check
-
-
-// _png_get_uint_32
-
-
-// _png_crc_read
-
-
-// _png_crc_error
-
-
-// _png_check_chunk_name
-
-
-// _png_combine_row
-
-
-// _png_do_read_interlace
-
-
-// _png_read_filter_row
-
-
-// _png_read_start_row
-
-
-// _png_crc_finish
-
-
-// _png_handle_IHDR
-
-
-// _png_handle_PLTE
-
-
-// _png_handle_IEND
-
-
-// _png_handle_gAMA
-
-
-// _png_handle_sRGB
-
-
-// _png_handle_tRNS
-
-
-// _png_handle_unknown
-
-
-// _png_read_finish_row
-
-
-// _crc32
-
-
-// ?sse_D3DXVec3TransformNormal@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
-
-
-// ?acos2_ss@@YAXMPAM@Z
-
-
-// ?sse_sin4@@YG_K_K@Z
-
-
-// ?sse_sincos@@YG_K_K@Z
-
-
-// ?sse_SinCos4@@YAXQBMQAM1@Z
-
-
-// ?sse2_atan2@@YA_KQBM0@Z
-
-
-// ?sse_SinCos4@@YAXQBMQAM1@Z
-
-
-// _a_atan
-
-
-// _a_atan2
-
-
-// _a_acos
-
-
-// _a_log
-
-
-// _a_cos
-
-
-// _a_cos
-
-
-// ?jpeg_get_small@D3DX@@YAPAXPAUjpeg_common_struct@1@I@Z
-
-
-// ?jpeg_get_small@D3DX@@YAPAXPAUjpeg_common_struct@1@I@Z
-
-
-// ?jpeg_get_small@D3DX@@YAPAXPAUjpeg_common_struct@1@I@Z
-
-
-// ?jpeg_get_small@D3DX@@YAPAXPAUjpeg_common_struct@1@I@Z
-
-
-// ?jpeg_open_backing_store@D3DX@@YAXPAUjpeg_common_struct@1@PAUbacking_store_struct@1@J@Z
-
-
-// ?alloc_funny_pointers@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?make_funny_pointers@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?set_wraparound_pointers@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?set_bottom_pointers@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?process_data_simple_main@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAEPAII@Z
-
-
-// ?process_data_context_main@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAEPAII@Z
-
-
-// ?jinit_d_main_controller@D3DX@@YAXPAUjpeg_decompress_struct@1@E@Z
-
-
-// ?start_iMCU_row@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?decompress_onepass@D3DX@@YAHPAUjpeg_decompress_struct@1@PAPAPAE@Z
-
-
-// ?consume_data@D3DX@@YAHPAUjpeg_decompress_struct@1@@Z
-
-
-// ?decompress_data@D3DX@@YAHPAUjpeg_decompress_struct@1@PAPAPAE@Z
-
-
-// ?smoothing_ok@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?jinit_d_coef_controller@D3DX@@YAXPAUjpeg_decompress_struct@1@E@Z
-
-
-// ?jpeg_make_d_derived_tbl@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUJHUFF_TBL@1@PAPAUd_derived_tbl@1@@Z
-
-
-// ?jpeg_fill_bit_buffer@D3DX@@YAEPAUbitread_working_state@1@JHH@Z
-
-
-// ?jpeg_huff_decode@D3DX@@YAHPAUbitread_working_state@1@JHPAUd_derived_tbl@1@H@Z
-
-
-// ?process_restart@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?decode_mcu@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
-
-
-// ?start_pass_huff_decoder@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?jinit_huff_decoder@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?process_restart@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
-
-
-// ?decode_mcu_DC_first@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
-
-
-// ?decode_mcu_AC_first@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
-
-
-// ?decode_mcu_DC_refine@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
-
-
-// ?decode_mcu_AC_refine@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
-
-
-// ?start_pass_phuff_decoder@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?jinit_phuff_decoder@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?start_pass@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?jinit_inverse_dct@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?post_process_1pass@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
-
-
-// ?post_process_prepass@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
-
-
-// ?post_process_2pass@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
-
-
-// ?jinit_d_post_controller@D3DX@@YAXPAUjpeg_decompress_struct@1@E@Z
-
-
-// ?sep_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
-
-
-// ?int_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
-
-
-// ?h2v1_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
-
-
-// ?h2v2_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
-
-
-// ?h2v1_fancy_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
-
-
-// ?h2v2_fancy_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
-
-
-// ?jinit_upsampler@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?build_ycc_rgb_table@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?null_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
-
-
-// ?grayscale_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
-
-
-// ?ycck_cmyk_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
-
-
-// ?MYCbCr2RGB@D3DX@@YAXHPAE000@Z
-
-
-// ?MYCbCrA2RGBA@D3DX@@YAXHPAE0000@Z
-
-
-// ?MYCbCrA2RGBALegacy@D3DX@@YAXHPAE0000@Z
-
-
-// ?ycc_rgb_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
-
-
-// ?jinit_color_deconverter@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?build_ycc_rgb_table@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?merged_2v_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
-
-
-// ?merged_1v_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
-
-
-// ?h2v1_merged_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAE@Z
-
-
-// ?h2v2_merged_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAE@Z
-
-
-// ?jinit_merged_upsampler@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?prescan_quantize@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
-
-
-// ?update_box@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUbox@1@@Z
-
-
-// ?median_cut@D3DX@@YAHPAUjpeg_decompress_struct@1@PAUbox@1@HH@Z
-
-
-// ?compute_color@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUbox@1@H@Z
-
-
-// ?select_colors@D3DX@@YAXPAUjpeg_decompress_struct@1@H@Z
-
-
-// ?find_nearby_colors@D3DX@@YAHPAUjpeg_decompress_struct@1@HHHQAE@Z
-
-
-// ?find_best_colors@D3DX@@YAXPAUjpeg_decompress_struct@1@HHHHQAE1@Z
-
-
-// ?fill_inverse_cmap@D3DX@@YAXPAUjpeg_decompress_struct@1@HHH@Z
-
-
-// ?pass2_no_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
-
-
-// ?pass2_fs_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
-
-
-// ?init_error_limit@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?start_pass_2_quant@D3DX@@YAXPAUjpeg_decompress_struct@1@E@Z
-
-
-// ?jinit_2pass_quantizer@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?select_ncolors@D3DX@@YAHPAUjpeg_decompress_struct@1@QAH@Z
-
-
-// ?create_colormap@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?create_colorindex@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?make_odither_array@D3DX@@YAPAY0BA@HPAUjpeg_decompress_struct@1@H@Z
-
-
-// ?create_odither_tables@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?color_quantize@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
-
-
-// ?color_quantize3@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
-
-
-// ?quantize_ord_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
-
-
-// ?quantize3_ord_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
-
-
-// ?quantize_fs_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
-
-
-// ?alloc_fs_workspace@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?jinit_1pass_quantizer@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
-
-
-// ?inflate_blocks_reset@D3DX@@YAXPAUinflate_blocks_state@1@PAUz_stream_s@1@PAK@Z
-
-
-// ?inflate_blocks_new@D3DX@@YAPAUinflate_blocks_state@1@PAUz_stream_s@1@P6AKKPBEI@ZI@Z
-
-
-// ?inflate_blocks@D3DX@@YAHPAUinflate_blocks_state@1@PAUz_stream_s@1@H@Z
-
-
-// ?inflate_blocks_free@D3DX@@YAHPAUinflate_blocks_state@1@PAUz_stream_s@1@@Z
-
-
-// ?inflate_set_dictionary@D3DX@@YAXPAUinflate_blocks_state@1@PBEI@Z
-
-
-// ?inflate_blocks_sync_point@D3DX@@YAHPAUinflate_blocks_state@1@@Z
-
-
-// _adler32
-
-
-// ?jpeg_idct_4x4@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
-
-
-// ?jpeg_idct_2x2@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
-
-
-// ?jpeg_idct_1x1@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
-
-
-// ?jpeg_idct_islow@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
-
-
-// ?jpeg_idct_ifast@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
-
-
-// ?jpeg_idct_float@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
-
-
-// ?inflate_codes_new@D3DX@@YAPAUinflate_codes_state@1@IIPAUinflate_huft_s@1@0PAUz_stream_s@1@@Z
-
-
-// ?inflate_codes@D3DX@@YAHPAUinflate_blocks_state@1@PAUz_stream_s@1@H@Z
-
-
-// ?inflate_codes_free@D3DX@@YAXPAUinflate_codes_state@1@PAUz_stream_s@1@@Z
-
-
-// ?huft_build@D3DX@@YAHPAIIIPBI1PAPAUinflate_huft_s@1@0PAU21@00@Z
-
-
-// ?inflate_trees_bits@D3DX@@YAHPAI0PAPAUinflate_huft_s@1@PAU21@PAUz_stream_s@1@@Z
-
-
-// ?inflate_trees_dynamic@D3DX@@YAHIIPAI00PAPAUinflate_huft_s@1@1PAU21@PAUz_stream_s@1@@Z
-
-
-// ?inflate_trees_fixed@D3DX@@YAHPAI0PAPAUinflate_huft_s@1@1PAUz_stream_s@1@@Z
-
-
-// ?inflate_flush@D3DX@@YAHPAUinflate_blocks_state@1@PAUz_stream_s@1@H@Z
-
-
-// ?pidct8x8llm@D3DX@@YAXPAF00PAPAEIPAE@Z
-
-
-// ?midct8x8llm@D3DX@@YAXPAF00PAPAEIPAE@Z
-
-
-// ?pidct8x8aan@D3DX@@YAXPAF00PAPAEIPAE@Z
-
-
-// ?midct8x8aan@D3DX@@YAXPAF00PAPAEIPAE@Z
-
-
-// ?inflate_fast@D3DX@@YAHIIPAUinflate_huft_s@1@0PAUinflate_blocks_state@1@PAUz_stream_s@1@@Z
+/* d3dx8.lib, the DirectX 8 D3DX static library.
+ * Generated by scripts/gen_library_headers.py from the LIBRARY rows in
+ * rebrew-functions.toml. The linker supplies these bodies; nothing here is compiled.
+ * Columns: module, address, size in bytes, native symbol. */
+
+// D3DX8 0x0045d3f0 n/a _adler32
+// D3DX8 0x0045d600 n/a _crc32
+// D3DX8 0x0045d770 n/a _deflateInit2_
+// D3DX8 0x0045da70 n/a _deflateReset
+// D3DX8 0x0045de70 n/a _putShortMSB
+// D3DX8 0x0045dea0 n/a _flush_pending
+// D3DX8 0x0045df20 n/a _deflateEnd
+// D3DX8 0x0045e370 n/a _fill_window
+// D3DX8 0x0045e4a0 n/a _read_buf
+// D3DX8 0x0045e860 n/a _longest_match
+// D3DX8 0x0045fa70 n/a _gzeof
+// D3DX8 0x0045fc50 n/a _inflate_blocks_reset
+// D3DX8 0x0045fcd0 n/a _inflate_blocks_new
+// D3DX8 0x004609c0 n/a _inflate_blocks_free
+// D3DX8 0x00460a40 n/a ?inflate_blocks_sync_point@D3DX@@YAHPAUinflate_blocks_state@1@@Z
+// D3DX8 0x00460a50 n/a _inflate_codes_new
+// D3DX8 0x00460a90 n/a _inflate_codes
+// D3DX8 0x00461190 n/a _inflate_codes_free
+// D3DX8 0x004611b0 n/a _inflate_fast
+// D3DX8 0x00461510 n/a _inflateReset
+// D3DX8 0x00461560 n/a _inflateEnd
+// D3DX8 0x004615b0 n/a _inflateInit2_
+// D3DX8 0x00461ca0 n/a _inflate_trees_bits
+// D3DX8 0x00462200 n/a _inflate_trees_dynamic
+// D3DX8 0x00462390 n/a _inflate_trees_fixed
+// D3DX8 0x004623c0 n/a _inflate_flush
+// D3DX8 0x00462a80 n/a _init_block
+// D3DX8 0x00462da0 n/a __tr_flush_block
+// D3DX8 0x004631b0 n/a _pqdownheap
+// D3DX8 0x00463520 n/a _build_bl_tree
+// D3DX8 0x00463590 n/a _scan_tree
+// D3DX8 0x004642b0 n/a _set_data_type
+// D3DX8 0x00464460 n/a _copy_block
+// D3DX8 0x00465820 n/a _zcalloc
+// D3DX8 0x00465840 n/a _zcfree
+// D3DX8 0x005eac1c n/a ?WithinEpsilon@@YAHMM@Z
+// D3DX8 0x005eac6f n/a ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
+// D3DX8 0x005eac9f n/a ?c_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
+// D3DX8 0x005ead2d n/a ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
+// D3DX8 0x005ead5d n/a ?c_D3DXVec2CatmullRom@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
+// D3DX8 0x005eae0c n/a ?init_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
+// D3DX8 0x005eae41 n/a ?c_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
+// D3DX8 0x005eaeda n/a ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
+// D3DX8 0x005eaf15 n/a ?c_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
+// D3DX8 0x005eafca n/a ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
+// D3DX8 0x005eaffa n/a ?c_D3DXVec2CatmullRom@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
+// D3DX8 0x005eb0d9 n/a ?init_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
+// D3DX8 0x005eb111 n/a ?c_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
+// D3DX8 0x005eb18d n/a ?c_D3DXVec3Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR3@@PBUD3DXMATRIX@@@Z
+// D3DX8 0x005eb256 n/a ?c_D3DXVec3TransformNormal@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
+// D3DX8 0x005eb369 n/a ?c_D3DXVec4Cross@@YGPAUD3DXVECTOR4@@PAU1@PBU1@11@Z
+// D3DX8 0x005eb47c n/a ??KD3DXVECTOR3@@QBE?AU0@M@Z
+// D3DX8 0x005eb4b7 n/a ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
+// D3DX8 0x005eb507 n/a ?c_D3DXVec4Hermite@@YGPAUD3DXVECTOR4@@PAU1@PBU1@111M@Z
+// D3DX8 0x005eb5d8 n/a ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
+// D3DX8 0x005eb608 n/a ?c_D3DXVec4CatmullRom@@YGPAUD3DXVECTOR4@@PAU1@PBU1@111M@Z
+// D3DX8 0x005eb6fb n/a ?init_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
+// D3DX8 0x005eb730 n/a ?c_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
+// D3DX8 0x005eb7e7 n/a ?c_D3DXVec4Transform@@YGPAUD3DXVECTOR4@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
+// D3DX8 0x005eb899 n/a ?c_D3DXMatrixfDeterminant@@YGMPBUD3DXMATRIX@@@Z
+// D3DX8 0x005eb976 n/a ?c_D3DXMatrixMultiply@@YGPAUD3DXMATRIX@@PAU1@PBU1@1@Z
+// D3DX8 0x005ebc3f n/a ?c_D3DXMatrixMultiply@@YGPAUD3DXMATRIX@@PAU1@PBU1@1@Z
+// D3DX8 0x005ebea8 n/a ?c_D3DXMatrixInverse@@YGPAUD3DXMATRIX@@PAU1@PAMPBU1@@Z
+// D3DX8 0x005ec2d9 n/a ??DD3DXQUATERNION@@QBE?AU0@M@Z
+// D3DX8 0x005ec4b9 n/a ?c_D3DXMatrixRotationX@@YGPAUD3DXMATRIX@@PAU1@M@Z
+// D3DX8 0x005ec555 n/a ?c_D3DXMatrixRotationY@@YGPAUD3DXMATRIX@@PAU1@M@Z
+// D3DX8 0x005ec5f2 n/a ?c_D3DXMatrixRotationX@@YGPAUD3DXMATRIX@@PAU1@M@Z
+// D3DX8 0x005ec694 n/a ?c_D3DXMatrixRotationAxis@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXVECTOR3@@M@Z
+// D3DX8 0x005ec7a9 n/a ?c_D3DXMatrixRotationQuaternion@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXQUATERNION@@@Z
+// D3DX8 0x005ec93e n/a ?c_D3DXMatrixAffineTransformation@@YGPAUD3DXMATRIX@@PAU1@MPBUD3DXVECTOR3@@PBUD3DXQUATERNION@@1@Z
+// D3DX8 0x005eca41 n/a ?D3DXVec3Cross@@YAPAUD3DXVECTOR3@@PAU1@PBU1@1@Z
+// D3DX8 0x005ecab2 n/a _D3DXMatrixLookAtRH@16
+// D3DX8 0x005ecbfa n/a _D3DXMatrixLookAtLH@16
+// D3DX8 0x005ecd42 n/a ?D3DXVec3Lerp@@YAPAUD3DXVECTOR3@@PAU1@PBU1@1M@Z
+// D3DX8 0x005ecda7 n/a _D3DXMatrixPerspectiveRH@20
+// D3DX8 0x005ece13 n/a _D3DXMatrixPerspectiveLH@20
+// D3DX8 0x005ece7f n/a _D3DXMatrixPerspectiveFovRH@20
+// D3DX8 0x005ecf13 n/a _D3DXMatrixPerspectiveFovRH@20
+// D3DX8 0x005ecffb n/a _D3DXMatrixPerspectiveOffCenterRH@28
+// D3DX8 0x005ed098 n/a _D3DXMatrixPerspectiveOffCenterLH@28
+// D3DX8 0x005ed18c n/a _D3DXMatrixOrthoRH@20
+// D3DX8 0x005ed248 n/a _D3DXMatrixOrthoRH@20
+// D3DX8 0x005ed2f9 n/a _D3DXMatrixOrthoOffCenterRH@28
+// D3DX8 0x005ed39b n/a _D3DXMatrixOrthoOffCenterRH@28
+// D3DX8 0x005ed478 n/a ?c_D3DXQuaternionToAxisAngle@@YGXPBUD3DXQUATERNION@@PAUD3DXVECTOR3@@PAM@Z
+// D3DX8 0x005ed528 n/a ?c_D3DXQuaternionRotationMatrix@@YGPAUD3DXQUATERNION@@PAU1@PBUD3DXMATRIX@@@Z
+// D3DX8 0x005ed682 n/a ?c_D3DXQuaternionRotationAxis@@YGPAUD3DXQUATERNION@@PAU1@PBUD3DXVECTOR3@@M@Z
+// D3DX8 0x005ed712 n/a ?c_D3DXQuaternionRotationYawPitchRoll@@YGPAUD3DXQUATERNION@@PAU1@MMM@Z
+// D3DX8 0x005ed8a7 n/a ?c_D3DXQuaternionNormalize@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
+// D3DX8 0x005ed973 n/a ?c_D3DXQuaternionInverse@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
+// D3DX8 0x005eda3a n/a ?c_D3DXQuaternionLn@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
+// D3DX8 0x005edacb n/a ?c_D3DXQuaternionExp@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
+// D3DX8 0x005edb90 n/a ?c_D3DXQuaternionSlerp@@YGPAUD3DXQUATERNION@@PAU1@PBU1@1M@Z
+// D3DX8 0x005edc73 n/a ?init_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
+// D3DX8 0x005edca3 n/a ?c_D3DXQuaternionSquad@@YGPAUD3DXQUATERNION@@PAU1@PBU1@111M@Z
+// D3DX8 0x005edd11 n/a ?init_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
+// D3DX8 0x005edd46 n/a ?c_D3DXQuaternionBaryCentric@@YGPAUD3DXQUATERNION@@PAU1@PBU1@11MM@Z
+// D3DX8 0x005edde4 n/a ?c_D3DXPlaneNormalize@@YGPAUD3DXPLANE@@PAU1@PBU1@@Z
+// D3DX8 0x005ede9b n/a ?c_D3DXPlaneIntersectLine@@YGPAUD3DXVECTOR3@@PAU1@PBUD3DXPLANE@@PBU1@2@Z
+// D3DX8 0x005edf9b n/a ?c_D3DXPlaneFromPoints@@YGPAUD3DXPLANE@@PAU1@PBUD3DXVECTOR3@@11@Z
+// D3DX8 0x005ee050 n/a ?c_D3DXPlaneTransform@@YGPAUD3DXPLANE@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
+// D3DX8 0x005ee0ef n/a _D3DXColorAdjustSaturation@12
+// D3DX8 0x005ee147 n/a _D3DXColorAdjustContrast@12
+// D3DX8 0x005ee190 n/a _D3DXFresnelTerm@8
+// D3DX8 0x005ee25e n/a ?c_D3DXVec2Normalize@@YGPAUD3DXVECTOR2@@PAU1@PBU1@@Z
+// D3DX8 0x005ee2eb n/a ?c_D3DXVec2Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR2@@PBUD3DXMATRIX@@@Z
+// D3DX8 0x005ee356 n/a ?c_D3DXVec2TransformCoord@@YGPAUD3DXVECTOR2@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
+// D3DX8 0x005ee3d6 n/a ?c_D3DXVec2TransformNormal@@YGPAUD3DXVECTOR2@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
+// D3DX8 0x005ee412 n/a ?c_D3DXVec3Normalize@@YGPAUD3DXVECTOR3@@PAU1@PBU1@@Z
+// D3DX8 0x005ee4b2 n/a ?c_D3DXVec3TransformCoord@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
+// D3DX8 0x005ee571 n/a ?c_D3DXVec3Project@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBU_D3DVIEWPORT8@@PBUD3DXMATRIX@@33@Z
+// D3DX8 0x005ee6fe n/a ?c_D3DXVec3Unproject@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBU_D3DVIEWPORT8@@PBUD3DXMATRIX@@33@Z
+// D3DX8 0x005ee8a4 n/a ?c_D3DXQuaternionNormalize@@YGPAUD3DXQUATERNION@@PAU1@PBU1@@Z
+// D3DX8 0x005ee95d n/a ??DD3DXQUATERNION@@QBE?AU0@ABU0@@Z
+// D3DX8 0x005ee984 n/a ?c_D3DXMatrixRotationYawPitchRoll@@YGPAUD3DXMATRIX@@PAU1@MMM@Z
+// D3DX8 0x005ee9bd n/a ?c_D3DXMatrixTransformation@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXVECTOR3@@PBUD3DXQUATERNION@@1121@Z
+// D3DX8 0x005eec71 n/a ?c_D3DXMatrixShadow@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXVECTOR4@@PBUD3DXPLANE@@@Z
+// D3DX8 0x005eed4b n/a ?c_D3DXMatrixReflect@@YGPAUD3DXMATRIX@@PAU1@PBUD3DXPLANE@@@Z
+// D3DX8 0x005ef1e4 n/a ??_GCD3DXFont@@QAEPAXI@Z
+// D3DX8 0x005ef200 n/a ??_GCD3DXFont@@QAEPAXI@Z
+// D3DX8 0x005ef21c n/a ??_GCD3DXFont@@QAEPAXI@Z
+// D3DX8 0x005ef238 n/a ??_GCD3DXFont@@QAEPAXI@Z
+// D3DX8 0x005ef52a n/a _D3DXGetErrorStringA@12
+// D3DX8 0x005ef799 n/a _D3DXGetErrorStringW@12
+// D3DX8 0x005ef7f4 n/a _D3DXCreateFontIndirect@12
+// D3DX8 0x005ef863 n/a _D3DXCreateSprite@8
+// D3DX8 0x005ef8cf n/a _D3DXCreateRenderToSurface@28
+// D3DX8 0x005ef9c9 n/a _D3DXCreateFont@12
+// D3DX8 0x005efa18 n/a ?SwapFaceNeighbors@@YAXIIPAK@Z
+// D3DX8 0x005efa4c n/a ?RemapFaceNeighbors@@YAXIPAIPAK@Z
+// D3DX8 0x005efa7d n/a ?ReorderNeighborData@@YAJPAIPAKK@Z
+// D3DX8 0x005efb8c n/a ?And@CD3DXBitField256@@QAEXAAV1@0@Z
+// D3DX8 0x005efc20 n/a ?Count@CD3DXBitField256@@QAEKXZ
+// D3DX8 0x005efc51 n/a ??1CBone@@QAE@XZ
+// D3DX8 0x005efc70 n/a ?GreedyTSP@@YAJPAUSBoneCombinationNode@@PAPAU1@PAK2@Z
+// D3DX8 0x005efd8a n/a _D3DXCreateBuffer@8
+// D3DX8 0x005efddd n/a ??0D3DXCOLOR@@QAE@K@Z
+// D3DX8 0x005efe32 n/a _D3DXGetFVFVertexSize@4
+// D3DX8 0x005f006e n/a ?GenerateWedgeList@@YAJPAKKPAH0@Z
+// D3DX8 0x005f00cd n/a ?BFloatsEqual@@YAHMMM@Z
+// D3DX8 0x005f02e6 n/a ?CbTexCoordSize@DXCrackFVF@@QAEKK@Z
+// D3DX8 0x005f030a n/a ?GetTexCoordSizes@DXCrackFVF@@QAEXPAK@Z
+// D3DX8 0x005f0359 n/a ??1?$GXTri3Mesh@I$0A@$0?0@@QAE@XZ
+// D3DX8 0x005f04b4 n/a ?QueryInterface@?$GXTri3Mesh@I$0A@$0?0@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x005f054a n/a ?CloneMesh@?$GXTri3Mesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
+// D3DX8 0x005f0610 n/a ??1?$GXTri3Mesh@I$0A@$0?0@@QAE@XZ
+// D3DX8 0x005f076b n/a ?QueryInterface@?$GXTri3Mesh@I$0A@$0?0@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x005f0801 n/a ?CloneMesh@?$GXTri3Mesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
+// D3DX8 0x005f08c7 n/a ?CalcSplitMeshSizes@?$@G$00$0PPPP@@@YAJPAGKKKPAK111G@Z
+// D3DX8 0x005f09c4 n/a ?CalcSplitMeshSizes@?$@I$0A@$0?0@@YAJPAIKKKPAK111I@Z
+// D3DX8 0x005f0db4 n/a ??_H@YGXPAXIHP6EPAX0@Z@Z
+// D3DX8 0x005f0dd6 n/a ??_ECBone@@QAEPAXI@Z
+// D3DX8 0x005f0f7e n/a ??0?$CFaceListIter@G$00$0PPPP@@@QAE@PAV?$GXTri3Mesh@G$00$0PPPP@@@@Z
+// D3DX8 0x005f0fc3 n/a ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJK@Z
+// D3DX8 0x005f1153 n/a ?FindWedge@?$GXTri3Mesh@I$0A@$0?0@@ABEIPAII@Z
+// D3DX8 0x005f117c n/a ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJK@Z
+// D3DX8 0x005f130c n/a ?FindWedge@?$GXTri3Mesh@G$00$0PPPP@@@ABEIPAGI@Z
+// D3DX8 0x005f1340 n/a ?ResizeDynamicArray@@YAHPAPAV?$NeighborInfo@I@@IIPAI@Z
+// D3DX8 0x005f1438 n/a ?ResizeDynamicArray@@YAHPAPAKIIPAI@Z
+// D3DX8 0x005f14c2 n/a ?ResizeDynamicArray@@YAHPAPAGIIPAI@Z
+// D3DX8 0x005f1549 n/a ?ResizeDynamicArray@@YAHPAPAKIIPAI@Z
+// D3DX8 0x005f15d3 n/a ?FindEdge@@YAIPAII@Z
+// D3DX8 0x005f15e9 n/a ?ResizeDynamicArray@@YAHPAPAV?$NeighborInfo@G@@IIPAI@Z
+// D3DX8 0x005f16df n/a ?FindEdge@@YAIPAGG@Z
+// D3DX8 0x005f16f7 n/a ?GenerateWedgeList@?$GXSimplifyMesh@I$0A@$0?0@@AAEJXZ
+// D3DX8 0x005f1956 n/a ?SetupWeightInfo@?$GXSimplifyMesh@I$0A@$0?0@@AAEJQAU_D3DXATTRIBUTEWEIGHTS@@PBM1KPAE@Z
+// D3DX8 0x005f1d8f n/a ?GenerateWedgeList@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJXZ
+// D3DX8 0x005f2006 n/a ?SetupWeightInfo@?$GXSimplifyMesh@I$0A@$0?0@@AAEJQAU_D3DXATTRIBUTEWEIGHTS@@PBM1KPAE@Z
+// D3DX8 0x005f243f n/a ??_ECQuadric@@QAEPAXI@Z
+// D3DX8 0x005f2483 n/a ??0?$CFaceListIter@I$0A@$0?0@@QAE@IIPAV?$GXTri3Mesh@I$0A@$0?0@@E@Z
+// D3DX8 0x005f24e6 n/a ??0?$CFaceListIter@G$00$0PPPP@@@QAE@GGPAV?$GXTri3Mesh@G$00$0PPPP@@@E@Z
+// D3DX8 0x005f25bd n/a ?Compact@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAI00@Z
+// D3DX8 0x005f2675 n/a ?VertexOptimize@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAI0@Z
+// D3DX8 0x005f26db n/a ?CollectAttributeIds@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAPAKPAK@Z
+// D3DX8 0x005f2809 n/a ?FindPoint@?$GXTri3Mesh@I$0A@$0?0@@ABEIPAII@Z
+// D3DX8 0x005f2854 n/a ?Compact@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAI00@Z
+// D3DX8 0x005f293a n/a ?VertexOptimize@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAI0@Z
+// D3DX8 0x005f29bc n/a ?CollectAttributeIds@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAPAKPAK@Z
+// D3DX8 0x005f2aec n/a ?FindPoint@?$GXTri3Mesh@G$00$0PPPP@@@ABEIPAGI@Z
+// D3DX8 0x005f2b3f n/a ?MoveToCCWFace@?$CFaceListIter@I$0A@$0?0@@QAE_NXZ
+// D3DX8 0x005f2c0e n/a ?MoveToCCWFace@?$CFaceListIter@G$00$0PPPP@@@QAE_NXZ
+// D3DX8 0x005f2d0c n/a ?Init@?$CSimplificationHeap@I@@QAEJI@Z
+// D3DX8 0x005f2d46 n/a ?Switch@?$CSimplificationHeap@I@@AAEXII@Z
+// D3DX8 0x005f2d7f n/a ?BInArray@@YA_NQAIII@Z
+// D3DX8 0x005f2da1 n/a ?AddToDynamicArray@@YAHPAPAIABIPAI2@Z
+// D3DX8 0x005f2e3f n/a ?Init@?$CSimplificationHeap@I@@QAEJI@Z
+// D3DX8 0x005f2e79 n/a ?Switch@?$CSimplificationHeap@G@@AAEXII@Z
+// D3DX8 0x005f2eb2 n/a ?BInArray@@YA_NQAGIG@Z
+// D3DX8 0x005f2ed6 n/a ?AddToDynamicArray@@YAHPAPAIABIPAI2@Z
+// D3DX8 0x005f2f99 n/a ?RemapVertex@?$GXTri3Mesh@I$0A@$0?0@@AAEXIPAI@Z
+// D3DX8 0x005f2fb7 n/a ?RemapFace@?$GXTri3Mesh@I$0A@$0?0@@AAEXIPAI0@Z
+// D3DX8 0x005f300e n/a ?SwapVertex@?$GXTri3Mesh@I$0A@$0?0@@AAEXIIPAE@Z
+// D3DX8 0x005f30a8 n/a ?SwapFace@?$GXTri3Mesh@I$0A@$0?0@@AAEXII@Z
+// D3DX8 0x005f317b n/a ?AddToDynamicArray@@YAHPAPAIABIPAI2@Z
+// D3DX8 0x005f3219 n/a ??0?$CMeshStatus@I$0A@$0?0@@QAE@PAV?$GXTri3Mesh@I$0A@$0?0@@PAV?$NeighborInfo@I@@I@Z
+// D3DX8 0x005f323a n/a ??1?$CMeshStatus@I$0A@$0?0@@QAE@XZ
+// D3DX8 0x005f3251 n/a ?FindEdge@@YAIPAII@Z
+// D3DX8 0x005f3267 n/a ?RemapVertex@?$GXTri3Mesh@G$00$0PPPP@@@AAEXIPAI@Z
+// D3DX8 0x005f3288 n/a ?RemapFace@?$GXTri3Mesh@G$00$0PPPP@@@AAEXIPAI0@Z
+// D3DX8 0x005f32ec n/a ?SwapVertex@?$GXTri3Mesh@G$00$0PPPP@@@AAEXIIPAE@Z
+// D3DX8 0x005f3389 n/a ?SwapFace@?$GXTri3Mesh@G$00$0PPPP@@@AAEXII@Z
+// D3DX8 0x005f3465 n/a ??0?$CMeshStatus@G$00$0PPPP@@@QAE@PAV?$GXTri3Mesh@G$00$0PPPP@@@PAV?$NeighborInfo@G@@G@Z
+// D3DX8 0x005f3488 n/a ??1?$CMeshStatus@G$00$0PPPP@@@QAE@XZ
+// D3DX8 0x005f349f n/a ?DGenerateBorderError@?$GXSimplifyMesh@I$0A@$0?0@@AAENIIPAUD3DXVECTOR3@@PAE@Z
+// D3DX8 0x005f3622 n/a ?DGenerateBorderError@?$GXSimplifyMesh@G$00$0PPPP@@@AAENGGPAUD3DXVECTOR3@@PAE@Z
+// D3DX8 0x005f380c n/a ?IFindInitialFace@?$CMeshStatus@G$00$0PPPP@@@QAEGXZ
+// D3DX8 0x005f386a n/a ?Init@?$CIndexQueue@I$0?0@@QAEJXZ
+// D3DX8 0x005f38b1 n/a ?BElementPresent@?$CIndexQueue@I$0?0@@QAE_NI@Z
+// D3DX8 0x005f38d8 n/a ?InsertElement@?$CIndexQueue@I$0?0@@QAEXI@Z
+// D3DX8 0x005f390c n/a ?Init@?$CIndexQueue@G$0PPPP@@@QAEJXZ
+// D3DX8 0x005f3954 n/a ?BElementPresent@?$CIndexQueue@G$0PPPP@@@QAE_NG@Z
+// D3DX8 0x005f397c n/a ?InsertElement@?$CIndexQueue@G$0PPPP@@@QAEXG@Z
+// D3DX8 0x005f39a2 n/a ?ClwFaceCorner@?$GXTri3Mesh@I$0A@$0?0@@AAE?AUSFaceCorner@@AAU2@@Z
+// D3DX8 0x005f39c2 n/a ?CcwCorner@?$GXTri3Mesh@I$0A@$0?0@@AAE?AUSFaceCorner@@AAU2@PAV?$CMeshStatus@I$0A@$0?0@@@Z
+// D3DX8 0x005f3a0d n/a ?ClwFaceCorner@?$GXTri3Mesh@I$0A@$0?0@@AAE?AUSFaceCorner@@AAU2@@Z
+// D3DX8 0x005f3a2d n/a ?CcwCorner@?$GXTri3Mesh@G$00$0PPPP@@@AAE?AUSFaceCorner@@AAU2@PAV?$CMeshStatus@G$00$0PPPP@@@@Z
+// D3DX8 0x005f3b18 n/a ?RemoveElement@?$CMeshStatus@I$0A@$0?0@@AAEXI@Z
+// D3DX8 0x005f3b7f n/a ?PrependElement@?$CMeshStatus@I$0A@$0?0@@AAEXI@Z
+// D3DX8 0x005f3bbe n/a ?DecrementCount@?$CMeshStatus@I$0A@$0?0@@AAEXI@Z
+// D3DX8 0x005f3c59 n/a ?RemoveElement@?$CMeshStatus@G$00$0PPPP@@@AAEXG@Z
+// D3DX8 0x005f3cdd n/a ?PrependElement@?$CMeshStatus@G$00$0PPPP@@@AAEXG@Z
+// D3DX8 0x005f3d29 n/a ?DecrementCount@?$CMeshStatus@G$00$0PPPP@@@AAEXG@Z
+// D3DX8 0x005f3d5a n/a ??0SVertexCopyContext@@QAE@KK@Z
+// D3DX8 0x005f4132 n/a ??1CPMSharedData@@QAE@XZ
+// D3DX8 0x005f414f n/a ?IntersectTriUnbounded@@YAXPAUD3DXVECTOR3@@0000PAM11@Z
+// D3DX8 0x005f42da n/a _D3DXComputeBoundingSphere@20
+// D3DX8 0x005f43f0 n/a _D3DXComputeBoundingBox@20
+// D3DX8 0x005f4c86 n/a _D3DXWeldVertices@24
+// D3DX8 0x005f4fab n/a ??1?$CD3DXSkinMesh@I$0A@$0?0@@QAE@XZ
+// D3DX8 0x005f501e n/a ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x005f51ac n/a ?SetBoneInfluence@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKKPBKPBM@Z
+// D3DX8 0x005f52f2 n/a ?GetMaxVertexInfluences@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJPAK@Z
+// D3DX8 0x005f572e n/a ?GetMaxFaceInfluences@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJPAK@Z
+// D3DX8 0x005f587f n/a ?CalcVertexSkinData@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJXZ
+// D3DX8 0x005f5ac6 n/a ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@K@Z
+// D3DX8 0x005f5afa n/a ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@PAVCBone@@K@Z
+// D3DX8 0x005f5b11 n/a ??1?$CD3DXSkinMesh@I$0A@$0?0@@QAE@XZ
+// D3DX8 0x005f5b84 n/a ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x005f5d12 n/a ?SetBoneInfluence@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKKPBKPBM@Z
+// D3DX8 0x005f5e58 n/a ?GetMaxVertexInfluences@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJPAK@Z
+// D3DX8 0x005f6294 n/a ?GetMaxFaceInfluences@?$CD3DXSkinMesh@G$00$0PPPP@@@UAGJPAK@Z
+// D3DX8 0x005f63e5 n/a ?CalcVertexSkinData@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJXZ
+// D3DX8 0x005f662c n/a ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@K@Z
+// D3DX8 0x005f6660 n/a ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@PAVCBone@@K@Z
+// D3DX8 0x005f6677 n/a ?DrawSubset@?$GXTri3Mesh@I$0A@$0?0@@UAGJK@Z
+// D3DX8 0x005f6ff5 n/a ?Resize@?$GXTri3Mesh@I$0A@$0?0@@QAEJII@Z
+// D3DX8 0x005f74c4 n/a ?BValid@?$GXTri3Mesh@I$0A@$0?0@@EAE_NPAV?$GXTri3Face@I@@@Z
+// D3DX8 0x005f769d n/a ?BValidAttributeGroups@?$GXTri3Mesh@I$0A@$0?0@@AAE_NPAV?$GXTri3Face@I@@@Z
+// D3DX8 0x005f76f7 n/a ?DrawSubset@?$GXTri3Mesh@G$00$0PPPP@@@UAGJK@Z
+// D3DX8 0x005f7c6a n/a ?Resize@?$GXTri3Mesh@G$00$0PPPP@@@QAEJII@Z
+// D3DX8 0x005f811e n/a ?BValid@?$GXTri3Mesh@G$00$0PPPP@@@EAE_NPAV?$GXTri3Face@G@@@Z
+// D3DX8 0x005f8329 n/a ?BValidAttributeGroups@?$GXTri3Mesh@I$0A@$0?0@@AAE_NPAV?$GXTri3Face@I@@@Z
+// D3DX8 0x005f8383 n/a ?LoadFromData@?$GXHalfEdgePMesh@G$00$0PPPP@@@QAEJPAUID3DXMesh@@PAKPAEK@Z
+// D3DX8 0x005f8903 n/a ?LoadFromData@?$GXHalfEdgePMesh@G$00$0PPPP@@@QAEJPAUID3DXMesh@@PAKPAEK@Z
+// D3DX8 0x005f8e74 n/a ?Init@?$CFaceListIter@I$0A@$0?0@@QAEXIIE@Z
+// D3DX8 0x005f8ed2 n/a ?Init@?$CFaceListIter@G$00$0PPPP@@@QAEXGGE@Z
+// D3DX8 0x005f8f40 n/a ?CopyMesh@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV1@@Z
+// D3DX8 0x005f9145 n/a ?CopyMesh@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV1@@Z
+// D3DX8 0x005f934b n/a ?GetNextFace@?$CFaceListIter@I$0A@$0?0@@QAEIXZ
+// D3DX8 0x005f940e n/a ?GetNextFace@?$CFaceListIter@G$00$0PPPP@@@QAEGXZ
+// D3DX8 0x005f9642 n/a ?ComputePointReps@?$GXSimplifyMesh@I$0A@$0?0@@AAEJXZ
+// D3DX8 0x005f987c n/a ?ComputePointReps@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJXZ
+// D3DX8 0x005f996c n/a ?AttributeSort@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAI00H@Z
+// D3DX8 0x005f9d3d n/a ?SplitSharedVertices@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAPAKPAI@Z
+// D3DX8 0x005f9f90 n/a ?ReorderVertexData@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAIPAE@Z
+// D3DX8 0x005fa0b7 n/a ?ReorderFaceData@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAI0@Z
+// D3DX8 0x005fa198 n/a ?AddVertex@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAEI@Z
+// D3DX8 0x005fa317 n/a ?AttributeSort@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAI00H@Z
+// D3DX8 0x005fa710 n/a ?SplitSharedVertices@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAPAKPAI@Z
+// D3DX8 0x005fa980 n/a ?ReorderVertexData@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAIPAE@Z
+// D3DX8 0x005faac5 n/a ?ReorderFaceData@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAI0@Z
+// D3DX8 0x005fb381 n/a ?Adjust@?$CSimplificationHeap@I@@AAEXI_N0@Z
+// D3DX8 0x005fba38 n/a ?Adjust@?$CSimplificationHeap@G@@AAEXI_N0@Z
+// D3DX8 0x005fbb0b n/a ?AccessVertex@?$CSimVertexCache@I$0?0@@QAEXIAA_N@Z
+// D3DX8 0x005fbb45 n/a ?AccessVertex@?$CSimVertexCache@I$0?0@@QAEXIAA_N@Z
+// D3DX8 0x005fbb6d n/a ?Init@?$CMeshStatus@I$0A@$0?0@@QAEJII_N@Z
+// D3DX8 0x005fbc59 n/a ?MarkAsProcessed@?$CMeshStatus@I$0A@$0?0@@QAEXI@Z
+// D3DX8 0x005fbcbe n/a ?IFindNextFace@?$CMeshStatus@I$0A@$0?0@@QAEII@Z
+// D3DX8 0x005fbd99 n/a ?Init@?$CMeshStatus@G$00$0PPPP@@@QAEJGG_N@Z
+// D3DX8 0x005fbe95 n/a ?MarkAsProcessed@?$CMeshStatus@G$00$0PPPP@@@QAEXG@Z
+// D3DX8 0x005fbf10 n/a ?IFindNextFace@?$CMeshStatus@G$00$0PPPP@@@QAEGG@Z
+// D3DX8 0x005fc008 n/a ??_GCD3DXFont@@QAEPAXI@Z
+// D3DX8 0x005fc138 n/a ??0?$GXTri3Mesh@I$0A@$0?0@@QAE@PAUIDirect3DDevice8@@KK@Z
+// D3DX8 0x005fc982 n/a ?IndexedHeapSort@@YAXPAKPAMK@Z
+// D3DX8 0x005fcab0 n/a ?VertexHashAdd@@YAHPAUD3DXVECTOR3@@KPAPAUSVertexHashEntry@@PAU2@KPAK3PAV?$GXTri3Face@I@@33@Z
+// D3DX8 0x005fcb73 n/a ??0?$GXTri3Mesh@I$0A@$0?0@@QAE@PAUIDirect3DDevice8@@KK@Z
+// D3DX8 0x005fce9c n/a ?CloneHelper16@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV1@@Z
+// D3DX8 0x005fd059 n/a ?CloneHelper32@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV?$GXTri3Mesh@I$0A@$0?0@@@Z
+// D3DX8 0x005fd228 n/a ?CloneVertexBuffer@?$GXTri3Mesh@G$00$0PPPP@@@AAEJKPAUIDirect3DVertexBuffer8@@@Z
+// D3DX8 0x005fd9ef n/a ?VertexHashAdd@@YAHPAUD3DXVECTOR3@@KPAPAUSVertexHashEntry@@PAU2@KPAK3PAV?$GXTri3Face@G@@33@Z
+// D3DX8 0x005fdabb n/a ??0?$GXHalfEdgePMesh@G$00$0PPPP@@@QAE@PAUIDirect3DDevice8@@KK@Z
+// D3DX8 0x005fdca9 n/a ?QueryInterface@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x005fdd01 n/a ?CloneMeshFVF@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
+// D3DX8 0x005fdd76 n/a ?CloneMesh@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
+// D3DX8 0x005fddb0 n/a ?CloneMesh@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
+// D3DX8 0x005fe1b2 n/a ?TrimByFaces@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAK0@Z
+// D3DX8 0x005fe293 n/a ?TrimByVertices@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAK0@Z
+// D3DX8 0x005fe5e2 n/a ??1?$GXHalfEdgePMesh@G$00$0PPPP@@@QAE@XZ
+// D3DX8 0x005fe645 n/a ??0?$GXHalfEdgePMesh@G$00$0PPPP@@@QAE@PAUIDirect3DDevice8@@KK@Z
+// D3DX8 0x005fe832 n/a ?QueryInterface@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x005fe88a n/a ?CloneMeshFVF@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
+// D3DX8 0x005fe8ff n/a ?CloneMesh@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
+// D3DX8 0x005fe939 n/a ?CloneMesh@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPBKPAUIDirect3DDevice8@@PAPAUID3DXMesh@@@Z
+// D3DX8 0x005fed3a n/a ?TrimByFaces@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAK0@Z
+// D3DX8 0x005fee1b n/a ?TrimByVertices@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKKPAK0@Z
+// D3DX8 0x005ff15e n/a ??1?$GXHalfEdgePMesh@G$00$0PPPP@@@QAE@XZ
+// D3DX8 0x005ff60d n/a ?CloneHelper16@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV?$GXTri3Mesh@G$00$0PPPP@@@@Z
+// D3DX8 0x005ff7dd n/a ?CloneHelper32@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV1@@Z
+// D3DX8 0x005ff990 n/a ?CloneVertexBuffer@?$GXTri3Mesh@G$00$0PPPP@@@AAEJKPAUIDirect3DVertexBuffer8@@@Z
+// D3DX8 0x005ffa65 n/a ??0?$GXSimplifyMesh@I$0A@$0?0@@QAE@PAUIDirect3DDevice8@@KK@Z
+// D3DX8 0x005ffbbc n/a ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x005ffc1d n/a ?CloneMeshFVF@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKKPAUIDirect3DDevice8@@PAK1PAPAUID3DXMesh@@@Z
+// D3DX8 0x005ffdb0 n/a ?CloneMesh@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAK2PAPAUID3DXMesh@@@Z
+// D3DX8 0x005ffdf0 n/a ?CloneMesh@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAK2PAPAUID3DXMesh@@@Z
+// D3DX8 0x005ffea7 n/a ??0?$GXSimplifyMesh@I$0A@$0?0@@QAE@PAUIDirect3DDevice8@@KK@Z
+// D3DX8 0x005ffffe n/a ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x0060005f n/a ?CloneMeshFVF@?$GXSimplifyMesh@G$00$0PPPP@@@UAGJKKPAUIDirect3DDevice8@@PAK1PAPAUID3DXMesh@@@Z
+// D3DX8 0x00600202 n/a ?CloneMesh@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAK2PAPAUID3DXMesh@@@Z
+// D3DX8 0x00600242 n/a ?CloneMesh@?$GXSimplifyMesh@I$0A@$0?0@@UAGJKPBKPAUIDirect3DDevice8@@PAK2PAPAUID3DXMesh@@@Z
+// D3DX8 0x006002f9 n/a ?DefragmentWedges@?$GXSimplifyMesh@I$0A@$0?0@@AAEJXZ
+// D3DX8 0x006008f0 n/a ?PeiExtractMin@?$CSimplificationHeap@I@@QAEPAV?$CEdgeInfo@I@@XZ
+// D3DX8 0x00600930 n/a ?DefragmentWedges@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJXZ
+// D3DX8 0x00600f9f n/a ?PeiExtractMin@?$CSimplificationHeap@G@@QAEPAV?$CEdgeInfo@G@@XZ
+// D3DX8 0x00600fdf n/a ?Add@?$CSimplificationHeap@I@@QAEJPAV?$CEdgeInfo@I@@@Z
+// D3DX8 0x00601095 n/a ?Add@?$CSimplificationHeap@G@@QAEJPAV?$CEdgeInfo@G@@@Z
+// D3DX8 0x0060114f n/a ?SGIStripReorder@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV?$CMeshStatus@I$0A@$0?0@@PAI1@Z
+// D3DX8 0x00601225 n/a ?VCacheStripReorder@?$GXTri3Mesh@I$0A@$0?0@@AAEJPAV?$CMeshStatus@I$0A@$0?0@@PAI1K@Z
+// D3DX8 0x00601522 n/a ?SGIStripReorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV?$CMeshStatus@G$00$0PPPP@@@PAI1@Z
+// D3DX8 0x00601618 n/a ?VCacheStripReorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAV?$CMeshStatus@G$00$0PPPP@@@PAI1K@Z
+// D3DX8 0x00601a9b n/a _D3DXCreateMeshFVF@24
+// D3DX8 0x00601b86 n/a ?D3DXCreatePMeshFromData@@YGJPAUID3DXMesh@@KPAKPAEKPAPAUID3DXPMesh@@@Z
+// D3DX8 0x0060223c n/a ?Init@?$CD3DXSkinMesh@I$0A@$0?0@@QAEJKKKKKPAUIDirect3DDevice8@@@Z
+// D3DX8 0x006022c0 n/a ?Init@?$CD3DXSkinMesh@G$00$0PPPP@@@QAEJKKKKKPAUIDirect3DDevice8@@@Z
+// D3DX8 0x0060295d n/a ?SetNumFaces@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJK@Z
+// D3DX8 0x00602a4c n/a ?UndoVSplit@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEXAAVCHalfEdgeVSplit@@@Z
+// D3DX8 0x00602c59 n/a ?GatherECollapseInfo@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEXAAVCHalfEdgeVSplit@@@Z
+// D3DX8 0x00602e7a n/a ?ApplyVSplit@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEXAAVCHalfEdgeVSplit@@@Z
+// D3DX8 0x006030db n/a ?GatherVSplitInfo@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEXAAVCHalfEdgeVSplit@@@Z
+// D3DX8 0x006035f5 n/a ?GetNextWedge@?$GXHalfEdgePMesh@G$00$0PPPP@@@AAEGI@Z
+// D3DX8 0x00603616 n/a ?SetNumVertices@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJK@Z
+// D3DX8 0x00603b19 n/a ?Reorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAII0I@Z
+// D3DX8 0x00603b91 n/a ?SetNumFaces@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJK@Z
+// D3DX8 0x00603c80 n/a ?UndoVSplit@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEXAAVCHalfEdgeVSplit@@@Z
+// D3DX8 0x00603e4e n/a ?GatherECollapseInfo@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEXAAVCHalfEdgeVSplit@@@Z
+// D3DX8 0x00604043 n/a ?ApplyVSplit@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEXAAVCHalfEdgeVSplit@@@Z
+// D3DX8 0x00604251 n/a ?GatherVSplitInfo@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEXAAVCHalfEdgeVSplit@@@Z
+// D3DX8 0x0060470d n/a ?GetNextWedge@?$GXHalfEdgePMesh@I$0A@$0?0@@AAEII@Z
+// D3DX8 0x0060472f n/a ?SetNumVertices@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJK@Z
+// D3DX8 0x00604c28 n/a ?Reorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJPAII0I@Z
+// D3DX8 0x006063d8 n/a ?StripReorder@?$GXTri3Mesh@I$0A@$0?0@@AAEJKPAI0PBK@Z
+// D3DX8 0x006066d8 n/a ?StripReorder@?$GXTri3Mesh@G$00$0PPPP@@@AAEJKPAI0PBK@Z
+// D3DX8 0x00606a7d n/a _D3DXCreateMesh@24
+// D3DX8 0x00607ac3 n/a _D3DXCreateSkinMesh@28
+// D3DX8 0x00607f31 n/a ?OptimizeBaseLOD@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPAK@Z
+// D3DX8 0x006081de n/a ?OptimizeBaseLOD@?$GXHalfEdgePMesh@I$0A@$0?0@@UAGJKPAK@Z
+// D3DX8 0x0060846d n/a ?SetupSimplification@?$GXSimplifyMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@PBKQAU_D3DXATTRIBUTEWEIGHTS@@PBM@Z
+// D3DX8 0x006088ef n/a ?SetupSimplification@?$GXSimplifyMesh@I$0A@$0?0@@QAEJPAV?$GXTri3Mesh@I$0A@$0?0@@PBKQAU_D3DXATTRIBUTEWEIGHTS@@PBM@Z
+// D3DX8 0x00608d75 n/a _D3DXCreateSPMesh@20
+// D3DX8 0x0060900d n/a ?GenerateSkinnedMesh@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKMQAKPAK1PAPAUID3DXBuffer@@PAPAUID3DXMesh@@@Z
+// D3DX8 0x0060a05c n/a ?IsSubset@CD3DXBitField256@@QAEHAAV1@@Z
+// D3DX8 0x0060a0db n/a ?CalcNumAttributes@?$CD3DXSkinMesh@I$0A@$0?0@@QAEXPAK0@Z
+// D3DX8 0x0060a8eb n/a ?Or@CD3DXBitField256@@QAEXAAV1@0@Z
+// D3DX8 0x0060aacc n/a ?GenerateSkinnedMesh@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKMQAKPAK1PAPAUID3DXBuffer@@PAPAUID3DXMesh@@@Z
+// D3DX8 0x0060bb1d n/a ?CalcNumAttributes@?$CD3DXSkinMesh@I$0A@$0?0@@QAEXPAK0@Z
+// D3DX8 0x0060c4bd n/a ?ReduceFaces@?$GXSimplifyMesh@I$0A@$0?0@@UAGJK@Z
+// D3DX8 0x0060c585 n/a ?CollapseEdge@?$GXSimplifyMesh@I$0A@$0?0@@AAEJPAV?$CEdgeInfo@I@@PAE@Z
+// D3DX8 0x0060c658 n/a ?GatherEdgeCollapseData@?$GXSimplifyMesh@I$0A@$0?0@@AAEJAAU?$SEdgeCollapseContext@I@@PAV?$CEdgeInfo@I@@PAE@Z
+// D3DX8 0x0060ce39 n/a ?BValidEdgeCollapse@?$GXSimplifyMesh@I$0A@$0?0@@AAE_NAAU?$SEdgeCollapseContext@I@@PAE@Z
+// D3DX8 0x0060d503 n/a ?PerformEdgeCollapse@?$GXSimplifyMesh@I$0A@$0?0@@AAEJAAU?$SEdgeCollapseContext@I@@PAE@Z
+// D3DX8 0x0060d83a n/a ?MarkAsUnused@?$GXTri3Mesh@I$0A@$0?0@@AAEXI@Z
+// D3DX8 0x0060d90e n/a ?Delete@?$CSimplificationHeap@I@@QAEJPAV?$CEdgeInfo@I@@@Z
+// D3DX8 0x0060db4e n/a ?Update@?$CSimplificationHeap@I@@QAEJPAV?$CEdgeInfo@I@@@Z
+// D3DX8 0x0060db71 n/a ?ReduceFaces@?$GXSimplifyMesh@I$0A@$0?0@@UAGJK@Z
+// D3DX8 0x0060dc39 n/a ?ReduceFaces@?$GXSimplifyMesh@I$0A@$0?0@@UAGJK@Z
+// D3DX8 0x0060dd01 n/a ?CollapseEdge@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJPAV?$CEdgeInfo@G@@PAE@Z
+// D3DX8 0x0060ddcd n/a ?GatherEdgeCollapseData@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJAAU?$SEdgeCollapseContext@G@@PAV?$CEdgeInfo@G@@PAE@Z
+// D3DX8 0x0060e6ac n/a ?BValidEdgeCollapse@?$GXSimplifyMesh@G$00$0PPPP@@@AAE_NAAU?$SEdgeCollapseContext@G@@PAE@Z
+// D3DX8 0x0060ee68 n/a ?PerformEdgeCollapse@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJAAU?$SEdgeCollapseContext@G@@PAE@Z
+// D3DX8 0x0060f224 n/a ?MarkAsUnused@?$GXTri3Mesh@G$00$0PPPP@@@AAEXG@Z
+// D3DX8 0x0060f319 n/a ?Delete@?$CSimplificationHeap@G@@QAEJPAV?$CEdgeInfo@G@@@Z
+// D3DX8 0x0060f49e n/a ?RecalcEdgeQEMS_Plane@?$GXSimplifyMesh@G$00$0PPPP@@@AAEXGGPAE@Z
+// D3DX8 0x0060f59f n/a ?Update@?$CSimplificationHeap@G@@QAEJPAV?$CEdgeInfo@G@@@Z
+// D3DX8 0x0060f5c2 n/a ?ReduceFaces@?$GXSimplifyMesh@I$0A@$0?0@@UAGJK@Z
+// D3DX8 0x0060f68a n/a ?D3DXGetFormatInfo@@YAPBU_D3DXFORMAT_INFO@@W4_D3DFORMAT@@@Z
+// D3DX8 0x0060f6ae n/a ?D3DXScoreFormat@@YAIPBU_D3DXFORMAT_INFO@@0@Z
+// D3DX8 0x0060f723 n/a ?D3DXFindClosestFormat@@YA?AW4_D3DFORMAT@@PBW41@PBUtagPALETTEENTRY@@PBU_D3DXFORMAT_INFO@@@Z
+// D3DX8 0x0060f873 n/a ?D3DXFindClosestExternalFormat@@YA?AW4_D3DFORMAT@@W41@@Z
+// D3DX8 0x0060f8a4 n/a _D3DXGetImageInfoFromFileInMemory@12
+// D3DX8 0x0060f8dc n/a _D3DXLoadSurfaceFromMemory@40
+// D3DX8 0x0060f9bb n/a ?SaveSurfaceToFile@@YAJPBXW4_D3DXIMAGE_FILEFORMAT@@PAUIDirect3DSurface8@@PBUtagPALETTEENTRY@@PBUtagRECT@@H@Z
+// D3DX8 0x0060fa6b n/a _D3DXSaveSurfaceToFileA@20
+// D3DX8 0x0060fa8b n/a _D3DXSaveSurfaceToFileW@20
+// D3DX8 0x0060faab n/a _D3DXLoadVolumeFromMemory@44
+// D3DX8 0x0060fb7e n/a ?SaveVolumeToFile@@YAJPBXW4_D3DXIMAGE_FILEFORMAT@@PAUIDirect3DVolume8@@PBUtagPALETTEENTRY@@PBU_D3DBOX@@H@Z
+// D3DX8 0x0060fc2e n/a _D3DXSaveSurfaceToFileA@20
+// D3DX8 0x0060fc4e n/a _D3DXSaveSurfaceToFileW@20
+// D3DX8 0x00610011 n/a _D3DXCreateTexture@32
+// D3DX8 0x00610077 n/a _D3DXCreateCubeTexture@28
+// D3DX8 0x006100d6 n/a _D3DXCreateVolumeTexture@36
+// D3DX8 0x00610143 n/a ??_ECD3DXParameter@@QAEPAXI@Z
+// D3DX8 0x0061018e n/a ??_ECD3DXLockVolume@@QAEPAXI@Z
+// D3DX8 0x00610afa n/a ?EvalColor@@YAMPAUD3DXCOLOR@@K@Z
+// D3DX8 0x00611341 n/a _D3DXGetImageInfoFromFileA@8
+// D3DX8 0x00611380 n/a _D3DXGetImageInfoFromFileW@8
+// D3DX8 0x006113bf n/a _D3DXGetImageInfoFromResourceA@12
+// D3DX8 0x00611403 n/a _D3DXGetImageInfoFromResourceW@12
+// D3DX8 0x00611447 n/a _D3DXLoadSurfaceFromFileInMemory@36
+// D3DX8 0x006114ff n/a _D3DXLoadSurfaceFromSurface@32
+// D3DX8 0x006116a5 n/a _D3DXLoadVolumeFromFileInMemory@36
+// D3DX8 0x00611761 n/a _D3DXLoadVolumeFromVolume@32
+// D3DX8 0x006117e7 n/a ?SaveTextureToFile@@YAJPBXW4_D3DXIMAGE_FILEFORMAT@@PAUIDirect3DBaseTexture8@@PBUtagPALETTEENTRY@@H@Z
+// D3DX8 0x00611be1 n/a _D3DXFilterTexture@16
+// D3DX8 0x006120d8 n/a _D3DXLoadSurfaceFromFileA@32
+// D3DX8 0x00612129 n/a _D3DXLoadSurfaceFromFileW@32
+// D3DX8 0x0061217a n/a _D3DXLoadSurfaceFromResourceA@36
+// D3DX8 0x006121d0 n/a _D3DXLoadSurfaceFromResourceW@36
+// D3DX8 0x00612226 n/a _D3DXLoadSurfaceFromFileA@32
+// D3DX8 0x00612277 n/a _D3DXLoadSurfaceFromFileW@32
+// D3DX8 0x006122c8 n/a _D3DXLoadSurfaceFromResourceA@36
+// D3DX8 0x0061231e n/a _D3DXLoadSurfaceFromResourceW@36
+// D3DX8 0x00612374 n/a ?CreateTextureFromFileInMemoryEx@@YAJPAUIDirect3DDevice8@@PBXIIIIIKW4_D3DFORMAT@@W4_D3DPOOL@@KKKPAU_D3DXIMAGE_INFO@@PAUtagPALETTEENTRY@@W4_D3DRESOURCETYPE@@PAPAUIDirect3DBaseTexture8@@@Z
+// D3DX8 0x006129e7 n/a _D3DXCreateTextureFromFileInMemoryEx@60
+// D3DX8 0x00612a27 n/a _D3DXCreateCubeTextureFromFileInMemoryEx@56
+// D3DX8 0x00612a67 n/a _D3DXCreateVolumeTextureFromFileInMemoryEx@64
+// D3DX8 0x00612aa8 n/a _D3DXCreateTextureFromFileExA@56
+// D3DX8 0x00612b0b n/a _D3DXCreateTextureFromFileExW@56
+// D3DX8 0x00612b6e n/a _D3DXCreateTextureFromResourceExA@60
+// D3DX8 0x00612bd6 n/a _D3DXCreateTextureFromResourceExW@60
+// D3DX8 0x00612c6e n/a _D3DXCreateCubeTextureFromFileExA@52
+// D3DX8 0x00612cce n/a _D3DXCreateCubeTextureFromFileExW@52
+// D3DX8 0x00612d2e n/a _D3DXCreateCubeTextureFromResourceExA@56
+// D3DX8 0x00612d93 n/a _D3DXCreateTextureFromResourceExW@60
+// D3DX8 0x00612e28 n/a _D3DXCreateVolumeTextureFromFileExA@60
+// D3DX8 0x00612e8e n/a _D3DXCreateVolumeTextureFromFileExW@60
+// D3DX8 0x00612ef4 n/a _D3DXCreateVolumeTextureFromResourceExA@64
+// D3DX8 0x00612f5f n/a _D3DXCreateTextureFromResourceExW@60
+// D3DX8 0x006131cd n/a ?GetD3DRegValue@@YAHKPADPAXK@Z
+// D3DX8 0x00613229 n/a ?_asm_isMMX@@YAHXZ
+// D3DX8 0x0061331f n/a ?IsIntelSSEProcessor@@YAKXZ
+// D3DX8 0x00613679 n/a ?DrawTextA@CD3DXFont@@UAGHPBDHPAUtagRECT@@KK@Z
+// D3DX8 0x0061369f n/a ?DrawTextW@CD3DXFont@@UAGHPBGHPAUtagRECT@@KK@Z
+// D3DX8 0x006136e6 n/a ?QueryInterface@CD3DXFont@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x00613742 n/a ??0CD3DXFont@@QAE@XZ
+// D3DX8 0x0061375d n/a ??1CD3DXSprite@@QAE@XZ
+// D3DX8 0x006137aa n/a ?Initialize@CD3DXSprite@@QAEJPAUIDirect3DDevice8@@@Z
+// D3DX8 0x006138c7 n/a ?QueryInterface@CD3DXFont@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x00613d5f n/a ?Draw@CD3DXSprite@@UAGJPAUIDirect3DTexture8@@PBUtagRECT@@PBUD3DXVECTOR2@@2M2K@Z
+// D3DX8 0x00614209 n/a ??0CD3DXSprite@@QAE@XZ
+// D3DX8 0x00614227 n/a ?Init@CD3DXRenderToSurface@@QAEJPAUIDirect3DDevice8@@IIW4_D3DFORMAT@@H1@Z
+// D3DX8 0x0061451e n/a ?EndScene@CD3DXRenderToSurface@@UAGJXZ
+// D3DX8 0x006145d6 n/a ?OnLostDevice@CD3DXRenderToSurface@@UAGJXZ
+// D3DX8 0x00614654 n/a ??1CD3DXRenderToSurface@@QAE@XZ
+// D3DX8 0x00614676 n/a ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x006146bd n/a ??0CD3DXRenderToSurface@@QAE@XZ
+// D3DX8 0x0061495f n/a ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x00614e91 n/a ?D3DXVec2Lerp@@YAPAUD3DXVECTOR2@@PAU1@PBU1@1M@Z
+// D3DX8 0x00614ebc n/a ??1CD3DXRenderToSurface@@QAE@XZ
+// D3DX8 0x006165dd n/a ??0CD3DXFile@@QAE@XZ
+// D3DX8 0x006165ef n/a ?Open@CD3DXFile@@QAEJPBXH@Z
+// D3DX8 0x006166ff n/a ?Create@CD3DXFile@@QAEJPBXH@Z
+// D3DX8 0x0061680a n/a ??1CD3DXFile@@QAE@XZ
+// D3DX8 0x00616815 n/a ??0CD3DXAssembler@@QAE@XZ
+// D3DX8 0x0061719a n/a ?DecodeMask@CD3DXAssembler@@QAEKPAD@Z
+// D3DX8 0x00617243 n/a ?DecodeSwizzle@CD3DXAssembler@@QAEKPAD@Z
+// D3DX8 0x00617685 n/a ?SetConstant@CD3DXAssembler@@QAEXKPAUD3DXVECTOR4@@@Z
+// D3DX8 0x006187ca n/a ?d3dxasm_parse@@YAHXZ
+// D3DX8 0x00619146 n/a ??0CD3DXResource@@QAE@XZ
+// D3DX8 0x00619153 n/a ??1CD3DXResource@@QAE@XZ
+// D3DX8 0x00619161 n/a ?Close@CD3DXResource@@QAEJXZ
+// D3DX8 0x00619180 n/a ?Open@CD3DXResource@@QAEJPAUHINSTANCE__@@PBXHH@Z
+// D3DX8 0x0061920e n/a ??1CD3DXBuffer@@UAE@XZ
+// D3DX8 0x00619223 n/a ?Init@CD3DXBuffer@@UAEJK@Z
+// D3DX8 0x0061936b n/a ?AddString@CD3DXStringBuffer@@QAEJPAD@Z
+// D3DX8 0x00619497 n/a ?QueryInterface@CD3DXBuffer@@UAGJABU_GUID@@PAPAX@Z
+// D3DX8 0x0061953b n/a ?D3DXCreateStringBuffer@@YAJKPAPAVCD3DXStringBuffer@@@Z
+// D3DX8 0x0061958c n/a ?D3DXCreateBufferA16@@YAJKPAPAUID3DXBuffer@@@Z
+// D3DX8 0x00619687 n/a ??0SStringList@@QAE@PADPAU0@@Z
+// D3DX8 0x006196a7 n/a ??_GCD3DXFont@@QAEPAXI@Z
+// D3DX8 0x006196c3 n/a ?AddMaterial@@YAJPAUIDirectXFileSaveObject@@PBUD3DXMATERIAL@@KPAUSStringList@@PAUIDirectXFileData@@@Z
+// D3DX8 0x00619a23 n/a ?AddFaceMaterials@@YAJPAUIDirectXFileSaveObject@@PAKKPBUD3DXMATERIAL@@KKPAUSStringList@@PAUIDirectXFileData@@@Z
+// D3DX8 0x00619c44 n/a ??1SStringList@@QAE@XZ
+// D3DX8 0x00619c5f n/a ?AddNormals@@YAJPAUIDirectXFileSaveObject@@PAEKPAGPAKKAAVDXCrackFVF@@PAUIDirectXFileData@@@Z
+// D3DX8 0x00619d92 n/a ?AddTextureCoordinates@@YAJPAUIDirectXFileSaveObject@@PAEKAAVDXCrackFVF@@PAUIDirectXFileData@@@Z
+// D3DX8 0x00619e55 n/a ?AddVertexColors@@YAJPAUIDirectXFileSaveObject@@PAEKAAVDXCrackFVF@@PAUIDirectXFileData@@@Z
+// D3DX8 0x00619f77 n/a ?AddOtherFVFData@@YAJPAUIDirectXFileSaveObject@@PAEKKAAVDXCrackFVF@@PAUIDirectXFileData@@@Z
+// D3DX8 0x0061a174 n/a ?D3DXSaveMeshToXofEx@@YGJPAUIDirectXFileSaveObject@@PAUID3DXMesh@@PBKQAUD3DXMATERIAL@@KKPAEKPAPAUIDirectXFileData@@PAUSStringList@@@Z
+// D3DX8 0x0061a5c3 n/a ?D3DXSaveMeshToXEx@@YGJPADPAUID3DXMesh@@PBKQAUD3DXMATERIAL@@KKPAEK@Z
+// D3DX8 0x0061a770 n/a _D3DXSaveMeshToX@24
+// D3DX8 0x0061a7e9 n/a ?DwCombineFVFs@@YAKKK@Z
+// D3DX8 0x0061a861 n/a ?D3DXMergeMeshes@@YAJPAUID3DXMesh@@PAKPAUID3DXBuffer@@K012KPAUIDirect3DDevice8@@PAPAU1@PAPAU2@51@Z
+// D3DX8 0x0061bfbb n/a _D3DXLoadMeshFromXof@28
+// D3DX8 0x0061bfe4 n/a _D3DXCreatePMeshFromStream@24
+// D3DX8 0x0061c368 n/a ?LoadMeshes@@YAJPAUIDirectXFileData@@AAUD3DXMATRIX@@KPAUIDirect3DDevice8@@PAPAUID3DXMesh@@PAPAUID3DXBuffer@@4PAK@Z
+// D3DX8 0x0061cf57 n/a ??0COrbitVertexIter@@QAE@PBKPAXI@Z
+// D3DX8 0x0061cf84 n/a ?FindWedge@COrbitVertexIter@@QAEKKK@Z
+// D3DX8 0x0061cfed n/a ?GetNextFace@COrbitVertexIter@@QAEKXZ
+// D3DX8 0x0061d0a8 n/a ?MoveToCCWFace@COrbitVertexIter@@QAEHXZ
+// D3DX8 0x0061d185 n/a ?OutputError@@YAXPAVCD3DXSzStack@@PADZZ
+// D3DX8 0x0061d237 n/a ?ValidateIndices@?$@G$00$0PPPP@@@YAJPAGPBKKKPAVCD3DXSzStack@@@Z
+// D3DX8 0x0061d38b n/a ?ValidateIndices@?$@I$0A@$0?0@@YAJPAIPBKKKPAVCD3DXSzStack@@@Z
+// D3DX8 0x0061d4d3 n/a ?Init@COrbitVertexIter@@QAEXKKE@Z
+// D3DX8 0x0061d52a n/a ?BreakBowTies@@YAJPAUID3DXMesh@@PBKPAPAU1@PAVCD3DXSzStack@@@Z
+// D3DX8 0x0061da61 n/a _D3DXCleanMesh@20
+// D3DX8 0x0061db0c n/a ?D3DXValidMeshEx@?$@I$0A@$0?0@@YAJPAUID3DXMesh@@PBKPAPAUID3DXBuffer@@I@Z
+// D3DX8 0x0061de31 n/a ?D3DXValidMeshEx@?$@G$00$0PPPP@@@YAJPAUID3DXMesh@@PBKPAPAUID3DXBuffer@@G@Z
+// D3DX8 0x0061e15d n/a _D3DXValidMesh@12
+// D3DX8 0x0061e196 n/a ??0CD3DXImage@@QAE@XZ
+// D3DX8 0x0061e1af n/a ??1CD3DXImage@@QAE@XZ
+// D3DX8 0x0061e208 n/a ??_GCD3DXFont@@QAEPAXI@Z
+// D3DX8 0x0061e224 n/a ?Initialize@CD3DXImage@@QAEJPAUD3DX_BLT@@@Z
+// D3DX8 0x0061e2e7 n/a ?LoadDIB@CD3DXImage@@AAEJPBXK@Z
+// D3DX8 0x0061e9fd n/a ?SaveDIB@CD3DXImage@@AAEJPAXH@Z
+// D3DX8 0x0061ed43 n/a ?LoadJPG@CD3DXImage@@AAEJPBXK@Z
+// D3DX8 0x0061efb3 n/a ?LoadTGA@CD3DXImage@@AAEJPBXK@Z
+// D3DX8 0x0061f45a n/a ?LoadPPM@CD3DXImage@@AAEJPBXK@Z
+// D3DX8 0x0061f730 n/a ?LoadPNG@CD3DXImage@@AAEJPBXK@Z
+// D3DX8 0x0061fcc6 n/a ?LoadDDS@CD3DXImage@@AAEJPBXK@Z
+// D3DX8 0x00620007 n/a ?SaveDDS@CD3DXImage@@AAEJPAX@Z
+// D3DX8 0x006202af n/a ?Save@CD3DXImage@@QAEJPBXW4_D3DXIMAGE_FILEFORMAT@@H@Z
+// D3DX8 0x00620578 n/a ?LoadBMP@CD3DXImage@@AAEJPBXK@Z
+// D3DX8 0x006205a8 n/a ?Load@CD3DXImage@@QAEJPBXKPAU_D3DXIMAGE_INFO@@H@Z
+// D3DX8 0x0062077d n/a ??0CD3DXBlt@@QAE@XZ
+// D3DX8 0x006207cc n/a ?TF_SetupTriangle@@YAPAEIIH@Z
+// D3DX8 0x00620a89 n/a ??_ETF_Row@@QAEPAXI@Z
+// D3DX8 0x00620ad5 n/a ?BltTriangle3D@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00620f49 n/a ?BltSame_DXTn@CD3DXBlt@@IAEJXZ
+// D3DX8 0x006210dd n/a ?c_BoxFilter2D_A8R8G8B8@@YAJPAI0IIII@Z
+// D3DX8 0x00621203 n/a ?BltBox2D_A8R8G8B8@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00621234 n/a ?c_BoxFilter2D_X8R8G8B8@@YAJPAI0IIII@Z
+// D3DX8 0x0062131c n/a ?mmx_BoxFilter2D_A8R8G8B8@@YAJPAI0IIII@Z
+// D3DX8 0x00621496 n/a ??DD3DXQUATERNION@@QBE?AU0@M@Z
+// D3DX8 0x006214f1 n/a ?BltBox2D_A8R8G8B8@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00621522 n/a ?BltBox2D_R5G6B5@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00621672 n/a ?BltBox2D_X1R5G5B5@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00621796 n/a ?BltBox2D_A1R5G5B5@CD3DXBlt@@IAEJXZ
+// D3DX8 0x006218e5 n/a ?BltBox2D_A4R4G4B4@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00621a38 n/a ?BltBox2D_R3G3B2@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00621b77 n/a ?BltBox2D_A8@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00621c12 n/a ?BltBox2D_A8R3G3B2@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00621d5e n/a ?BltBox2D_X4R4G4B4@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00621e8b n/a ?BltBox2D_A8L8@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00621fd7 n/a ?BltBox2D_R3G3B2@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00622158 n/a ?BltSame@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00622290 n/a ?BltCopy@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00622381 n/a ?BltNone@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00622583 n/a ?BltPoint@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00622787 n/a ?BltBox2D@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00622baa n/a ?BltBox3D@CD3DXBlt@@IAEJXZ
+// D3DX8 0x0062303c n/a ?LF_SetupLinear@@YAPAEIIH@Z
+// D3DX8 0x0062313c n/a ?BltLinear2D@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00623522 n/a ?BltLinear3D@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00623c53 n/a ?BltTriangle2D@CD3DXBlt@@IAEJXZ
+// D3DX8 0x00623ff5 n/a ?Blt@CD3DXBlt@@QAEJPAUD3DX_BLT@@0K@Z
+// D3DX8 0x0062410f n/a ??0CD3DXDwStack@@QAE@XZ
+// D3DX8 0x0062411f n/a ?Unlock@CD3DXLockSurface@@QAEJXZ
+// D3DX8 0x0062418e n/a ?Unlock@CD3DXLockVolume@@QAEJXZ
+// D3DX8 0x0062491c n/a ??1CD3DXCodec@@UAE@XZ
+// D3DX8 0x00624935 n/a ?Convert@CD3DXCodec@@IAEPAUD3DXCOLOR@@PAU2@@Z
+// D3DX8 0x00624c99 n/a ??1CD3DXCodecDXT@@UAE@XZ
+// D3DX8 0x00625133 n/a ?F2IBegin@@YAXXZ
+// D3DX8 0x00625175 n/a ??0CD3DXCodec@@IAE@PAUD3DX_BLT@@IK@Z
+// D3DX8 0x006253dd n/a ?ConvertFrom@CD3DXCodec@@QAEJPAV1@@Z
+// D3DX8 0x00625458 n/a ?QuantizeColorKey@CD3DXCodec@@MAEXXZ
+// D3DX8 0x00625524 n/a ?ColorKey@CD3DXCodec@@IAEXPAUD3DXCOLOR@@@Z
+// D3DX8 0x00625594 n/a ?Encode@CD3DXCodec_R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00625680 n/a ?Encode@CD3DXCodec_A8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006257a3 n/a ?Encode@CD3DXCodec_X8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006258a4 n/a ?Encode@CD3DXCodec_R5G6B5@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006259a5 n/a ?Encode@CD3DXCodec_X1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00625aa6 n/a ?Encode@CD3DXCodec_A1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00625bc3 n/a ?Encode@CD3DXCodec_A4R4G4B4@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00625ce6 n/a ?Encode@CD3DXCodec_R3G3B2@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00625de4 n/a ?Encode@CD3DXCodec_A8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00625e8d n/a ?Encode@CD3DXCodec_A8R3G3B2@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00625fb0 n/a ?Encode@CD3DXCodec_X4R4G4B4@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006260b1 n/a ?Encode@CD3DXCodec_A2B10G10R10@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006261d4 n/a ?Encode@CD3DXCodec_G16R16@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006262a4 n/a ?Encode@CD3DXCodec_A8P8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006263bc n/a ?Encode@CD3DXCodec_P8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00626481 n/a ?Encode@CD3DXCodec_L8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00626546 n/a ?Encode@CD3DXCodec_A8L8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x0062663c n/a ?Encode@CD3DXCodec_A4L4@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00626727 n/a ?Encode@CD3DXCodec_V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006267fc n/a ?Encode@CD3DXCodec_L6V5U5@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00626901 n/a ?Encode@CD3DXCodec_X8L8V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00626a0c n/a ?Encode@CD3DXCodec_Q8W8V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00626b46 n/a ?Encode@CD3DXCodec_V16U16@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00626c1c n/a ?Encode@CD3DXCodec_W11V11U10@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00626d26 n/a ?Encode@CD3DXCodec_A2W10V10U10@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00626e5c n/a ?Encode@CD3DXCodec_D16_LOCKABLE@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00626f23 n/a ?Encode@CD3DXCodec_D16_LOCKABLE@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00626fea n/a ?Encode@CD3DXCodec_D3DX_A16L16@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006270d8 n/a ?Encode@CD3DXCodec_D3DX_R16G16B16@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006271c7 n/a ?Encode@CD3DXCodec_D3DX_A16R16G16B16@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627323 n/a ?Decode@CD3DXCodec_R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006273af n/a ?Decode@CD3DXCodec_A8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627455 n/a ?Decode@CD3DXCodec_X8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006274f1 n/a ?Decode@CD3DXCodec_R5G6B5@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627596 n/a ?Decode@CD3DXCodec_X1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627638 n/a ?Decode@CD3DXCodec_A1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006276e8 n/a ?Decode@CD3DXCodec_A4R4G4B4@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627797 n/a ?Decode@CD3DXCodec_A2B10G10R10@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x0062786d n/a ?Decode@CD3DXCodec_G16R16@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006278ff n/a ?Decode@CD3DXCodec_R3G3B2@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006279a1 n/a ?Decode@CD3DXCodec_A8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627a13 n/a ?Decode@CD3DXCodec_A8R3G3B2@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627ac5 n/a ?Decode@CD3DXCodec_X4R4G4B4@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627b64 n/a ?Decode@CD3DXCodec_A8R8G8B8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627c4f n/a ?Decode@CD3DXCodec_L8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627cbd n/a ?Decode@CD3DXCodec_A8L8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627d46 n/a ?Decode@CD3DXCodec_A4L4@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627dcf n/a ?Decode@CD3DXCodec_V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627e51 n/a ?Decode@CD3DXCodec_L6V5U5@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627f02 n/a ?Decode@CD3DXCodec_X8L8V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00627f93 n/a ?Decode@CD3DXCodec_Q8W8V8U8@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x0062802a n/a ?Decode@CD3DXCodec_V16U16@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006280ad n/a ?Decode@CD3DXCodec_W11V11U10@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00628167 n/a ?Decode@CD3DXCodec_A2W10V10U10@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x0062823a n/a ?Decode@CD3DXCodec_D16_LOCKABLE@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006282aa n/a ?Decode@CD3DXCodec_D16_LOCKABLE@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x0062831a n/a ?Decode@CD3DXCodec_D3DX_A16L16@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x006283a8 n/a ?Decode@CD3DXCodec_D3DX_R16G16B16@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00628434 n/a ?Decode@CD3DXCodec_D3DX_A16R16G16B16@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00628514 n/a ??0CD3DXCodec_R8G8B8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00628530 n/a ??0CD3DXCodecYUV@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00628649 n/a ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00628686 n/a ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x006286c3 n/a ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x006286df n/a ?Commit@CD3DXCodecYUV@@QAEJXZ
+// D3DX8 0x006288ec n/a ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00628929 n/a ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00628966 n/a ?Fetch@CD3DXCodecYUV@@QAEJIIH@Z
+// D3DX8 0x00628c37 n/a ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00628c74 n/a ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00628cb1 n/a ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00628cee n/a ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00628d2b n/a ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00628d68 n/a ?Encode@CD3DXCodecYUV@@UAEXIIPAUD3DXCOLOR@@@Z
+// D3DX8 0x00628df5 n/a ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00628ea1 n/a ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00628ede n/a ??0CD3DXCodecDXT@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x006290d0 n/a ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x0062910d n/a ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x0062914a n/a ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00629187 n/a ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x006291e0 n/a ??0CD3DXCodec_R3G3B2@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x0062921d n/a ?QuantizeColorKey@CD3DXCodecDXT@@MAEXXZ
+// D3DX8 0x0062931e n/a ??0CD3DXCodec_V8U8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x0062935b n/a ??0CD3DXCodec_V8U8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00629398 n/a ??0CD3DXCodec_X8L8V8U8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x006293d5 n/a ??0CD3DXCodec_Q8W8V8U8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00629412 n/a ??0CD3DXCodec_X8L8V8U8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x0062944f n/a ??0CD3DXCodec_X8L8V8U8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x0062948c n/a ??0CD3DXCodec_X8L8V8U8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x006294c9 n/a ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00629506 n/a ??0CD3DXCodec_R5G6B5@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x006297ec n/a ??0CD3DXCodec_A8R8G8B8@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00629829 n/a ??0CD3DXCodec_D3DX_R16G16B16@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00629866 n/a ??0CD3DXCodec_D3DX_A16R16G16B16@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x006298a3 n/a ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x006298dc n/a ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00629915 n/a ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x0062994e n/a ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00629987 n/a ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x006299c0 n/a ??1CD3DXCodecYUV@@UAE@XZ
+// D3DX8 0x00629a09 n/a ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00629a21 n/a ??0CD3DXCodec_DXT1@@QAE@PAUD3DX_BLT@@@Z
+// D3DX8 0x00629a39 n/a ?Create@CD3DXCodec@@SAPAV1@PAUD3DX_BLT@@@Z
+// D3DX8 0x0062a200 n/a ?sse_D3DXInitFastTable@@YAXPAUD3DXFASTTABLE@@@Z
+// D3DX8 0x0062a310 n/a ?sse_D3DXInitFastTable@@YAXPAUD3DXFASTTABLE@@@Z
+// D3DX8 0x0062a420 n/a ?get_feature_flags@@YAIXZ
+// D3DX8 0x0062a4f5 n/a ?x3d_D3DXInitFastTable@@YAXPAUD3DXFASTTABLE@@@Z
+// D3DX8 0x0062a981 n/a ?x86_D3DXVec3Normalize@@YGPAUD3DXVECTOR3@@PAU1@PBU1@@Z
+// D3DX8 0x0062aa4b n/a ?x86_D3DXMatrixMultiply@@YGPAUD3DXMATRIX@@PAU1@PBU1@1@Z
+// D3DX8 0x0062abbc n/a ?x86_D3DXInitFastTable@@YAXPAUD3DXFASTTABLE@@@Z
+// D3DX8 0x0062abf8 n/a ??0CD3DXText@@IAE@XZ
+// D3DX8 0x0062ad3f n/a ??_GCD3DXFont@@QAEPAXI@Z
+// D3DX8 0x0062af70 n/a ?Release@CD3DXText@@QAEXXZ
+// D3DX8 0x0062b645 n/a ??0CD3DXDwStack@@QAE@XZ
+// D3DX8 0x0062b655 n/a ??1CD3DXDwStack@@QAE@XZ
+// D3DX8 0x0062b663 n/a ?Push@CD3DXDwStack@@QAEJK@Z
+// D3DX8 0x0062b6d1 n/a ?Pop@CD3DXDwStack@@QAEJPAK@Z
+// D3DX8 0x0062b705 n/a ?GetLastError@CD3DXDwStack@@QAEJXZ
+// D3DX8 0x0062b70d n/a ??0CD3DXSzStack@@QAE@XZ
+// D3DX8 0x0062b720 n/a ??1CD3DXSzStack@@QAE@XZ
+// D3DX8 0x0062b751 n/a ?Push@CD3DXSzStack@@QAEJPAD@Z
+// D3DX8 0x0062b804 n/a ?Pop@CD3DXDwStack@@QAEJPAK@Z
+// D3DX8 0x0062b838 n/a ?GetLastError@CD3DXDwStack@@QAEJXZ
+// D3DX8 0x0062b840 n/a ?GenerateStringBuffer@CD3DXSzStack@@QAEJPAPAUID3DXBuffer@@@Z
+// D3DX8 0x0062b953 n/a ?FindPoint@@YAKPAKKPAUSLoadVertex@@@Z
+// D3DX8 0x0062bb34 n/a ?CreateMaterialBuffer@@YAJPAUD3DXMATERIAL@@KPAPAUID3DXBuffer@@@Z
+// D3DX8 0x0062bc2d n/a ?MergeMaterialBuffers@@YAJPAUID3DXBuffer@@K0KPAPAU1@@Z
+// D3DX8 0x0062bd41 n/a ?SetTex1@DXCrackFVF@@QAEXPAXPAUD3DXVECTOR2@@@Z
+// D3DX8 0x0062bd8e n/a ?InitVertices@@YAJAAPAUSLoadVertex@@K@Z
+// D3DX8 0x0062bea7 n/a ?InitFaces@@YAJAAPAUSLoadedFace@@K@Z
+// D3DX8 0x0062bf25 n/a ?BEqualWedges@@YA_NAAUSLoadVertex@@0@Z
+// D3DX8 0x0062bfa9 n/a ?AddToDynamicArray@@YAHPAPAUSLoadVertex@@ABU1@PAK2@Z
+// D3DX8 0x0062c0cd n/a ?SetVertexColor@@YAJPAUSLoadedFace@@KAAUD3DXCOLOR@@PAPAUSLoadVertex@@PAK3@Z
+// D3DX8 0x0062c1f9 n/a ?SetVertexAttributes@@YAJPAUSLoadedFace@@KPAUD3DXVECTOR3@@PAUD3DXVECTOR2@@PAPAUSLoadVertex@@PAK4@Z
+// D3DX8 0x0062c368 n/a ?SetSmoothingGroup@@YAJPAUSLoadedFace@@KGAAUD3DXVECTOR3@@PAPAUSLoadVertex@@PAK3@Z
+// D3DX8 0x0062c4c9 n/a ?InitCorners@@YAJAAPAUSCorner@@K@Z
+// D3DX8 0x0062cdcf n/a _jpeg_CreateDecompress
+// D3DX8 0x0062ce99 n/a _jpeg_set_marker_processor
+// D3DX8 0x0062cef6 n/a ?default_decompress_parms@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062d069 n/a _jpeg_consume_input
+// D3DX8 0x0062d173 n/a _jpeg_finish_decompress
+// D3DX8 0x0062d21a n/a _jpeg_read_header
+// D3DX8 0x0062d27d n/a ?output_pass_setup@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062d326 n/a _jpeg_read_scanlines
+// D3DX8 0x0062d51e n/a _jpeg_start_decompress
+// D3DX8 0x0062d5df n/a ?get_soi@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062d66d n/a ?get_sof@D3DX@@YAEPAUjpeg_decompress_struct@1@EE@Z
+// D3DX8 0x0062d968 n/a ?get_sos@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062dc1a n/a ?get_app0@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062de56 n/a ?get_app14@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062dfd0 n/a ?get_dac@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062e127 n/a ?get_dht@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062e3bb n/a ?get_dqt@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062e5e4 n/a ?get_dri@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062e6bb n/a ?skip_variable@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062e757 n/a ?next_marker@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062e82e n/a ?first_marker@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062ec1f n/a ?reset_marker_reader@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062ec49 n/a ?jinit_marker_reader@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0062ece1 n/a ?d3dx_jpeg_output_message@@YAXPAUjpeg_common_struct@D3DX@@@Z
+// D3DX8 0x0062edd7 n/a _jpeg_std_error
+// D3DX8 0x0062ee23 n/a ?png_format_buffer@D3DX@@YAXPAUpng_struct_def@1@PADPBD@Z
+// D3DX8 0x0062eeb7 n/a _png_set_error_fn
+// D3DX8 0x0062eed9 n/a _png_error
+// D3DX8 0x0062ef0c n/a _png_chunk_error
+// D3DX8 0x0062ef31 n/a _png_chunk_error
+// D3DX8 0x0062ef56 n/a _png_create_read_struct
+// D3DX8 0x0062f059 n/a _png_read_init
+// D3DX8 0x0062f119 n/a _png_read_info
+// D3DX8 0x0062f28c n/a _png_read_update_info
+// D3DX8 0x0062f2be n/a _png_read_row
+// D3DX8 0x0062f665 n/a _png_read_rows
+// D3DX8 0x0062f6df n/a _png_read_image
+// D3DX8 0x0062f72c n/a _png_read_end
+// D3DX8 0x0062f82c n/a _png_read_destroy
+// D3DX8 0x0062f95e n/a _png_destroy_read_struct
+// D3DX8 0x0062f9df n/a _png_get_valid
+// D3DX8 0x0062f9f9 n/a _png_get_rowbytes
+// D3DX8 0x0062fa0f n/a _png_get_channels
+// D3DX8 0x0062fa3b n/a _png_get_gAMA
+// D3DX8 0x0062fa64 n/a _png_get_sRGB
+// D3DX8 0x0062fa8f n/a _png_get_IHDR
+// D3DX8 0x0062fb60 n/a _png_get_PLTE
+// D3DX8 0x0062fb93 n/a _png_get_tRNS
+// D3DX8 0x0062fbfa n/a _png_set_bgr
+// D3DX8 0x0062fc03 n/a _png_set_swap
+// D3DX8 0x0062fc15 n/a _png_set_packing
+// D3DX8 0x0062fc47 n/a _png_set_interlace_handling
+// D3DX8 0x0062fc60 n/a _png_set_filler
+// D3DX8 0x0062fcad n/a _png_do_swap
+// D3DX8 0x0062fcda n/a _png_do_bgr
+// D3DX8 0x0062fe21 n/a _png_set_dither
+// D3DX8 0x00630474 n/a _png_set_gamma
+// D3DX8 0x006304bc n/a _png_set_expand
+// D3DX8 0x006304c5 n/a _png_set_expand
+// D3DX8 0x006304ce n/a _png_read_transform_info
+// D3DX8 0x006305b9 n/a _png_do_unpack
+// D3DX8 0x006306c9 n/a _png_do_unshift
+// D3DX8 0x00630840 n/a _png_do_chop
+// D3DX8 0x00630884 n/a _png_do_read_filler
+// D3DX8 0x00630b1c n/a _png_do_gamma
+// D3DX8 0x00630e6a n/a _png_do_expand_palette
+// D3DX8 0x00631072 n/a _png_do_expand
+// D3DX8 0x006313c4 n/a _png_do_dither
+// D3DX8 0x006314d2 n/a _png_build_gamma_table
+// D3DX8 0x006317db n/a _png_init_read_transformations
+// D3DX8 0x006318ee n/a _png_do_read_transformations
+// D3DX8 0x00631aa6 n/a _png_set_gAMA
+// D3DX8 0x00631ac1 n/a _png_set_IHDR
+// D3DX8 0x00631b62 n/a _png_set_PLTE
+// D3DX8 0x00631b86 n/a _png_set_sRGB
+// D3DX8 0x00631ba1 n/a _png_set_sRGB_gAMA_and_cHRM
+// D3DX8 0x00631bda n/a _png_set_tRNS
+// D3DX8 0x00631c34 n/a _png_read_data
+// D3DX8 0x00631c5c n/a _png_set_read_fn
+// D3DX8 0x00631cce n/a _png_sig_cmp
+// D3DX8 0x00631d2e n/a _png_zalloc
+// D3DX8 0x00631d86 n/a _png_reset_crc
+// D3DX8 0x00631deb n/a _png_info_destroy
+// D3DX8 0x00631e08 n/a _png_create_info_struct
+// D3DX8 0x00631e54 n/a ?Decode565@@YAXPAUD3DXCOLOR@@G@Z
+// D3DX8 0x00631ea0 n/a ?DecodePremult@@YAJPAUD3DXCOLOR@@@Z
+// D3DX8 0x00631f1e n/a ?EncodePremult@@YAJPAUD3DXCOLOR@@PBU1@@Z
+// D3DX8 0x00631f4e n/a ?D3DXColorLerp@@YAPAUD3DXCOLOR@@PAU1@PBU1@1M@Z
+// D3DX8 0x00631f94 n/a ?F2IBegin@@YAXXZ
+// D3DX8 0x00631fd6 n/a ?Encode565@@YAGPBUD3DXCOLOR@@@Z
+// D3DX8 0x006320d0 n/a ?OptimizeAlpha@@YAXPAM0PBMI@Z
+// D3DX8 0x006323d5 n/a ?OptimizeRGB@@YAXPAUD3DXCOLOR@@0PBU1@I@Z
+// D3DX8 0x00632940 n/a ?EncodeDXT1@@YAJPAEPBUD3DXCOLOR@@H@Z
+// D3DX8 0x00633144 n/a ?D3DXDecodeDXT1@@YAJPAUD3DXCOLOR@@PBE@Z
+// D3DX8 0x00633282 n/a ?D3DXDecodeDXT3@@YAJPAUD3DXCOLOR@@PBE@Z
+// D3DX8 0x00633459 n/a ?D3DXEncodeDXT3@@YAJPAEPBUD3DXCOLOR@@@Z
+// D3DX8 0x0063356d n/a ?D3DXEncodeDXT5@@YAJPAEPBUD3DXCOLOR@@@Z
+// D3DX8 0x00633a05 n/a ?D3DXEncodeDXT2@@YAJPAEPBUD3DXCOLOR@@@Z
+// D3DX8 0x00633a39 n/a ?D3DXEncodeDXT2@@YAJPAEPBUD3DXCOLOR@@@Z
+// D3DX8 0x00633a70 n/a ?sse_D3DXVec2Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR2@@PBUD3DXMATRIX@@@Z
+// D3DX8 0x00633ab0 n/a ?sse_D3DXVec2Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR2@@PBUD3DXMATRIX@@@Z
+// D3DX8 0x00633b10 n/a ?sse_D3DXVec2TransformNormal@@YGPAUD3DXVECTOR2@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
+// D3DX8 0x00634700 n/a ?sse_D3DXVec4Normalize@@YGPAUD3DXVECTOR4@@PAU1@PBU1@@Z
+// D3DX8 0x006348b0 n/a ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
+// D3DX8 0x00634970 n/a ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
+// D3DX8 0x00634a00 n/a ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
+// D3DX8 0x00634ab0 n/a ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
+// D3DX8 0x00634b70 n/a ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
+// D3DX8 0x00634c10 n/a ?sse_D3DXVec3CatmullRom@@YGPAUD3DXVECTOR3@@PAU1@PBU1@111M@Z
+// D3DX8 0x00634ca0 n/a ?sse_D3DXVec3BaryCentric@@YGPAUD3DXVECTOR3@@PAU1@PBU1@11MM@Z
+// D3DX8 0x00634d00 n/a ?sse_D3DXVec3BaryCentric@@YGPAUD3DXVECTOR3@@PAU1@PBU1@11MM@Z
+// D3DX8 0x00634d50 n/a ?sse_D3DXVec2BaryCentric@@YGPAUD3DXVECTOR2@@PAU1@PBU1@11MM@Z
+// D3DX8 0x00634db0 n/a ?sse_D3DXPlaneIntersectLine@@YGPAUD3DXVECTOR3@@PAU1@PBUD3DXPLANE@@PBU1@2@Z
+// D3DX8 0x00635330 n/a ?sse_D3DXQuaternionMultiply@@YGPAUD3DXQUATERNION@@PAU1@PBU1@1@Z
+// D3DX8 0x006353c0 n/a ?sse_D3DXVec4Normalize@@YGPAUD3DXVECTOR4@@PAU1@PBU1@@Z
+// D3DX8 0x0063726b n/a ?x3d_D3DXQuaternionSlerp@@YGPAUD3DXQUATERNION@@PAU1@PBU1@1M@Z
+// D3DX8 0x00637713 n/a ?x3d_D3DXQuaternionSquadSetup@@YGXPAUD3DXQUATERNION@@00PBU1@111@Z
+// D3DX8 0x0063c660 n/a ?x3d_D3DXVec2Transform@@YGPAUD3DXVECTOR4@@PAU1@PBUD3DXVECTOR2@@PBUD3DXMATRIX@@@Z
+// D3DX8 0x0063d688 n/a ?x3d_D3DXPlaneNormalize@@YGPAUD3DXPLANE@@PAU1@PBU1@@Z
+// D3DX8 0x0063d82b n/a ?jdiv_round_up@D3DX@@YAJJJ@Z
+// D3DX8 0x0063d83b n/a ?jround_up@D3DX@@YAJJJ@Z
+// D3DX8 0x0063d853 n/a ?jcopy_sample_rows@D3DX@@YAXPAPAEH0HHI@Z
+// D3DX8 0x0063d89a n/a ?jcopy_block_row@D3DX@@YAXPAY0EA@F0I@Z
+// D3DX8 0x0063d8bc n/a ?jzero_far@D3DX@@YAXPAXI@Z
+// D3DX8 0x0063d8d7 n/a ?IsMMX@D3DX@@YAHXZ
+// D3DX8 0x0063d909 n/a ?initial_setup@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0063dac4 n/a ?per_scan_setup@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0063dc3a n/a ?latch_quant_tables@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0063dccc n/a ?start_input_pass@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0063dde1 n/a ?jinit_input_controller@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0063de22 n/a ?out_of_memory@D3DX@@YAXPAUjpeg_common_struct@1@H@Z
+// D3DX8 0x0063de37 n/a ?alloc_small@D3DX@@YAPAXPAUjpeg_common_struct@1@HI@Z
+// D3DX8 0x0063df33 n/a ?alloc_large@D3DX@@YAPAXPAUjpeg_common_struct@1@HI@Z
+// D3DX8 0x0063dfc1 n/a ?alloc_sarray@D3DX@@YAPAPAEPAUjpeg_common_struct@1@HII@Z
+// D3DX8 0x0063e053 n/a ?alloc_barray@D3DX@@YAPAPAY0EA@FPAUjpeg_common_struct@1@HII@Z
+// D3DX8 0x0063e0f1 n/a ?request_virt_sarray@D3DX@@YAPAUjvirt_sarray_control@1@PAUjpeg_common_struct@1@HEIII@Z
+// D3DX8 0x0063e152 n/a ?request_virt_barray@D3DX@@YAPAUjvirt_barray_control@1@PAUjpeg_common_struct@1@HEIII@Z
+// D3DX8 0x0063e1b3 n/a ?realize_virt_arrays@D3DX@@YAXPAUjpeg_common_struct@1@@Z
+// D3DX8 0x0063e332 n/a ?do_sarray_io@D3DX@@YAXPAUjpeg_common_struct@1@PAUjvirt_sarray_control@1@E@Z
+// D3DX8 0x0063e3ba n/a ?do_barray_io@D3DX@@YAXPAUjpeg_common_struct@1@PAUjvirt_barray_control@1@E@Z
+// D3DX8 0x0063e445 n/a ?access_virt_sarray@D3DX@@YAPAPAEPAUjpeg_common_struct@1@PAUjvirt_sarray_control@1@IIE@Z
+// D3DX8 0x0063e563 n/a ?access_virt_barray@D3DX@@YAPAPAY0EA@FPAUjpeg_common_struct@1@PAUjvirt_barray_control@1@IIE@Z
+// D3DX8 0x0063e686 n/a ?free_pool@D3DX@@YAXPAUjpeg_common_struct@1@H@Z
+// D3DX8 0x0063e797 n/a ?jinit_memory_mgr@D3DX@@YAXPAUjpeg_common_struct@1@@Z
+// D3DX8 0x0063e84b n/a _jpeg_abort
+// D3DX8 0x0063e86d n/a _jpeg_destroy
+// D3DX8 0x0063e888 n/a _jpeg_alloc_quant_table
+// D3DX8 0x0063e8a4 n/a _jpeg_alloc_huff_table
+// D3DX8 0x0063e8c0 n/a ?use_merged_upsample@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0063e931 n/a _jpeg_calc_output_dimensions
+// D3DX8 0x0063eb20 n/a ?prepare_range_limit_table@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0063eb8f n/a ?master_selection@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0063eeed n/a ?jinit_master_decompress@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0063ef1d n/a _inflateReset
+// D3DX8 0x0063ef5c n/a _inflateEnd
+// D3DX8 0x0063ef9a n/a _inflateInit2_
+// D3DX8 0x0063f07f n/a _inflateInit_
+// D3DX8 0x0063f096 n/a _inflate
+// D3DX8 0x0063f3fd n/a _inflateSetDictionary
+// D3DX8 0x0063f476 n/a _inflateSync
+// D3DX8 0x0063f546 n/a _png_create_struct
+// D3DX8 0x0063f588 n/a _png_destroy_struct
+// D3DX8 0x0063f595 n/a _png_malloc
+// D3DX8 0x0063f5cb n/a _png_free
+// D3DX8 0x0063f5e4 n/a _png_memcpy_check
+// D3DX8 0x0063f607 n/a _png_memset_check
+// D3DX8 0x0063f638 n/a _png_get_uint_32
+// D3DX8 0x0063f66e n/a _png_crc_read
+// D3DX8 0x0063f688 n/a _png_crc_error
+// D3DX8 0x0063f6e6 n/a _png_check_chunk_name
+// D3DX8 0x0063f748 n/a _png_combine_row
+// D3DX8 0x0063f95e n/a _png_do_read_interlace
+// D3DX8 0x0063fc27 n/a _png_read_filter_row
+// D3DX8 0x0063fda2 n/a _png_read_start_row
+// D3DX8 0x0063ff3e n/a _png_crc_finish
+// D3DX8 0x0063ffca n/a _png_handle_IHDR
+// D3DX8 0x006401c0 n/a _png_handle_PLTE
+// D3DX8 0x006402ea n/a _png_handle_IEND
+// D3DX8 0x00640334 n/a _png_handle_gAMA
+// D3DX8 0x0064043f n/a _png_handle_sRGB
+// D3DX8 0x0064052e n/a _png_handle_tRNS
+// D3DX8 0x006406e5 n/a _png_handle_unknown
+// D3DX8 0x0064072f n/a _png_read_finish_row
+// D3DX8 0x00640959 n/a _crc32
+// D3DX8 0x00640a70 n/a ?sse_D3DXVec3TransformNormal@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
+// D3DX8 0x00640c20 n/a ?acos2_ss@@YAXMPAM@Z
+// D3DX8 0x00640d30 n/a ?sse_sin4@@YG_K_K@Z
+// D3DX8 0x00640eb0 n/a ?sse_sincos@@YG_K_K@Z
+// D3DX8 0x00641040 n/a ?sse_SinCos4@@YAXQBMQAM1@Z
+// D3DX8 0x00641230 n/a ?sse2_atan2@@YA_KQBM0@Z
+// D3DX8 0x00641810 n/a ?sse_SinCos4@@YAXQBMQAM1@Z
+// D3DX8 0x00641980 n/a _a_atan
+// D3DX8 0x00641a40 n/a _a_atan2
+// D3DX8 0x00641b40 n/a _a_acos
+// D3DX8 0x00641d40 n/a _a_log
+// D3DX8 0x00642120 n/a _a_cos
+// D3DX8 0x00642240 n/a _a_cos
+// D3DX8 0x00642638 n/a ?jpeg_get_small@D3DX@@YAPAXPAUjpeg_common_struct@1@I@Z
+// D3DX8 0x00642643 n/a ?jpeg_get_small@D3DX@@YAPAXPAUjpeg_common_struct@1@I@Z
+// D3DX8 0x0064264e n/a ?jpeg_get_small@D3DX@@YAPAXPAUjpeg_common_struct@1@I@Z
+// D3DX8 0x00642659 n/a ?jpeg_get_small@D3DX@@YAPAXPAUjpeg_common_struct@1@I@Z
+// D3DX8 0x00642669 n/a ?jpeg_open_backing_store@D3DX@@YAXPAUjpeg_common_struct@1@PAUbacking_store_struct@1@J@Z
+// D3DX8 0x00642681 n/a ?alloc_funny_pointers@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00642729 n/a ?make_funny_pointers@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0064285a n/a ?set_wraparound_pointers@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0064292e n/a ?set_bottom_pointers@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x006429c4 n/a ?process_data_simple_main@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAEPAII@Z
+// D3DX8 0x00642a2c n/a ?process_data_context_main@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAEPAII@Z
+// D3DX8 0x00642bbf n/a ?jinit_d_main_controller@D3DX@@YAXPAUjpeg_decompress_struct@1@E@Z
+// D3DX8 0x00642c92 n/a ?start_iMCU_row@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00642ce1 n/a ?decompress_onepass@D3DX@@YAHPAUjpeg_decompress_struct@1@PAPAPAE@Z
+// D3DX8 0x00642ebe n/a ?consume_data@D3DX@@YAHPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0064305d n/a ?decompress_data@D3DX@@YAHPAUjpeg_decompress_struct@1@PAPAPAE@Z
+// D3DX8 0x006431c3 n/a ?smoothing_ok@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x006437fe n/a ?jinit_d_coef_controller@D3DX@@YAXPAUjpeg_decompress_struct@1@E@Z
+// D3DX8 0x006438f6 n/a ?jpeg_make_d_derived_tbl@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUJHUFF_TBL@1@PAPAUd_derived_tbl@1@@Z
+// D3DX8 0x00643aa0 n/a ?jpeg_fill_bit_buffer@D3DX@@YAEPAUbitread_working_state@1@JHH@Z
+// D3DX8 0x00643b8a n/a ?jpeg_huff_decode@D3DX@@YAHPAUbitread_working_state@1@JHPAUd_derived_tbl@1@H@Z
+// D3DX8 0x00643c74 n/a ?process_restart@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00643cd2 n/a ?decode_mcu@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
+// D3DX8 0x0064409f n/a ?start_pass_huff_decoder@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x006441ce n/a ?jinit_huff_decoder@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00644208 n/a ?process_restart@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00644263 n/a ?decode_mcu_DC_first@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
+// D3DX8 0x00644460 n/a ?decode_mcu_AC_first@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
+// D3DX8 0x00644689 n/a ?decode_mcu_DC_refine@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
+// D3DX8 0x0064476b n/a ?decode_mcu_AC_refine@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
+// D3DX8 0x00644ad9 n/a ?start_pass_phuff_decoder@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00644d7c n/a ?jinit_phuff_decoder@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00644ddd n/a ?start_pass@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00644f94 n/a ?jinit_inverse_dct@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00645008 n/a ?post_process_1pass@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
+// D3DX8 0x0064506d n/a ?post_process_prepass@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
+// D3DX8 0x006450fd n/a ?post_process_2pass@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
+// D3DX8 0x0064522f n/a ?jinit_d_post_controller@D3DX@@YAXPAUjpeg_decompress_struct@1@E@Z
+// D3DX8 0x006452cc n/a ?sep_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
+// D3DX8 0x006453a5 n/a ?int_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
+// D3DX8 0x00645482 n/a ?h2v1_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
+// D3DX8 0x006454d9 n/a ?h2v2_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
+// D3DX8 0x00645543 n/a ?h2v1_fancy_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
+// D3DX8 0x006455e7 n/a ?h2v2_fancy_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAPAEPAPAPAE@Z
+// D3DX8 0x006456ee n/a ?jinit_upsampler@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x006458af n/a ?build_ycc_rgb_table@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0064595f n/a ?null_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
+// D3DX8 0x006459ca n/a ?grayscale_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
+// D3DX8 0x006459ed n/a ?ycck_cmyk_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
+// D3DX8 0x00645b20 n/a ?MYCbCr2RGB@D3DX@@YAXHPAE000@Z
+// D3DX8 0x00645c5c n/a ?MYCbCrA2RGBA@D3DX@@YAXHPAE0000@Z
+// D3DX8 0x00645d8a n/a ?MYCbCrA2RGBALegacy@D3DX@@YAXHPAE0000@Z
+// D3DX8 0x00645ec6 n/a ?ycc_rgb_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
+// D3DX8 0x006460e4 n/a ?jinit_color_deconverter@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00646205 n/a ?build_ycc_rgb_table@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x006462ca n/a ?merged_2v_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
+// D3DX8 0x00646370 n/a ?merged_1v_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEPAIIPAPAE2I@Z
+// D3DX8 0x006463a1 n/a ?h2v1_merged_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAE@Z
+// D3DX8 0x006464f7 n/a ?h2v2_merged_upsample@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAE@Z
+// D3DX8 0x006466dd n/a ?jinit_merged_upsampler@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00646752 n/a ?prescan_quantize@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
+// D3DX8 0x0064680a n/a ?update_box@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUbox@1@@Z
+// D3DX8 0x00646b42 n/a ?median_cut@D3DX@@YAHPAUjpeg_decompress_struct@1@PAUbox@1@HH@Z
+// D3DX8 0x00646c95 n/a ?compute_color@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUbox@1@H@Z
+// D3DX8 0x00646dcd n/a ?select_colors@D3DX@@YAXPAUjpeg_decompress_struct@1@H@Z
+// D3DX8 0x00646e5a n/a ?find_nearby_colors@D3DX@@YAHPAUjpeg_decompress_struct@1@HHHQAE@Z
+// D3DX8 0x00646fda n/a ?find_best_colors@D3DX@@YAXPAUjpeg_decompress_struct@1@HHHHQAE1@Z
+// D3DX8 0x006470f4 n/a ?fill_inverse_cmap@D3DX@@YAXPAUjpeg_decompress_struct@1@HHH@Z
+// D3DX8 0x006471c4 n/a ?pass2_no_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
+// D3DX8 0x0064726d n/a ?pass2_fs_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
+// D3DX8 0x006474db n/a ?init_error_limit@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x0064758e n/a ?start_pass_2_quant@D3DX@@YAXPAUjpeg_decompress_struct@1@E@Z
+// D3DX8 0x0064769f n/a ?jinit_2pass_quantizer@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x006477b2 n/a ?select_ncolors@D3DX@@YAHPAUjpeg_decompress_struct@1@QAH@Z
+// D3DX8 0x006478a9 n/a ?create_colormap@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x006479d6 n/a ?create_colorindex@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00647b01 n/a ?make_odither_array@D3DX@@YAPAY0BA@HPAUjpeg_decompress_struct@1@H@Z
+// D3DX8 0x00647b63 n/a ?create_odither_tables@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00647c28 n/a ?color_quantize@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
+// D3DX8 0x00647cb0 n/a ?color_quantize3@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
+// D3DX8 0x00647d3d n/a ?quantize_ord_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
+// D3DX8 0x00647e28 n/a ?quantize3_ord_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
+// D3DX8 0x00647f27 n/a ?quantize_fs_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
+// D3DX8 0x006480ab n/a ?alloc_fs_workspace@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x006481c0 n/a ?jinit_1pass_quantizer@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// D3DX8 0x00648247 n/a ?inflate_blocks_reset@D3DX@@YAXPAUinflate_blocks_state@1@PAUz_stream_s@1@PAK@Z
+// D3DX8 0x006482b2 n/a ?inflate_blocks_new@D3DX@@YAPAUinflate_blocks_state@1@PAUz_stream_s@1@P6AKKPBEI@ZI@Z
+// D3DX8 0x0064833f n/a ?inflate_blocks@D3DX@@YAHPAUinflate_blocks_state@1@PAUz_stream_s@1@H@Z
+// D3DX8 0x00648ada n/a ?inflate_blocks_free@D3DX@@YAHPAUinflate_blocks_state@1@PAUz_stream_s@1@@Z
+// D3DX8 0x00648b0e n/a ?inflate_set_dictionary@D3DX@@YAXPAUinflate_blocks_state@1@PBEI@Z
+// D3DX8 0x00648b3f n/a ?inflate_blocks_sync_point@D3DX@@YAHPAUinflate_blocks_state@1@@Z
+// D3DX8 0x00648b4c n/a _adler32
+// D3DX8 0x00648c97 n/a ?jpeg_idct_4x4@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
+// D3DX8 0x00648fac n/a ?jpeg_idct_2x2@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
+// D3DX8 0x0064916a n/a ?jpeg_idct_1x1@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
+// D3DX8 0x006491a7 n/a ?jpeg_idct_islow@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
+// D3DX8 0x006491f3 n/a ?jpeg_idct_ifast@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
+// D3DX8 0x0064923f n/a ?jpeg_idct_float@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
+// D3DX8 0x00649620 n/a ?inflate_codes_new@D3DX@@YAPAUinflate_codes_state@1@IIPAUinflate_huft_s@1@0PAUz_stream_s@1@@Z
+// D3DX8 0x00649654 n/a ?inflate_codes@D3DX@@YAHPAUinflate_blocks_state@1@PAUz_stream_s@1@H@Z
+// D3DX8 0x00649bb8 n/a ?inflate_codes_free@D3DX@@YAXPAUinflate_codes_state@1@PAUz_stream_s@1@@Z
+// D3DX8 0x00649bc9 n/a ?huft_build@D3DX@@YAHPAIIIPBI1PAPAUinflate_huft_s@1@0PAU21@00@Z
+// D3DX8 0x00649f4e n/a ?inflate_trees_bits@D3DX@@YAHPAI0PAPAUinflate_huft_s@1@PAU21@PAUz_stream_s@1@@Z
+// D3DX8 0x00649fcd n/a ?inflate_trees_dynamic@D3DX@@YAHIIPAI00PAPAUinflate_huft_s@1@1PAU21@PAUz_stream_s@1@@Z
+// D3DX8 0x0064a0d0 n/a ?inflate_trees_fixed@D3DX@@YAHPAI0PAPAUinflate_huft_s@1@1PAUz_stream_s@1@@Z
+// D3DX8 0x0064a0ff n/a ?inflate_flush@D3DX@@YAHPAUinflate_blocks_state@1@PAUz_stream_s@1@H@Z
+// D3DX8 0x0064a214 n/a ?pidct8x8llm@D3DX@@YAXPAF00PAPAEIPAE@Z
+// D3DX8 0x0064a676 n/a ?midct8x8llm@D3DX@@YAXPAF00PAPAEIPAE@Z
+// D3DX8 0x0064ad2e n/a ?pidct8x8aan@D3DX@@YAXPAF00PAPAEIPAE@Z
+// D3DX8 0x0064b089 n/a ?midct8x8aan@D3DX@@YAXPAF00PAPAEIPAE@Z
+// D3DX8 0x0064be5c n/a ?inflate_fast@D3DX@@YAHIIPAUinflate_huft_s@1@0PAUinflate_blocks_state@1@PAUz_stream_s@1@@Z
+// GOLDTL 0x0045d770 505 _deflateInit2_
+// GOLDTL 0x0045dea0 114 _flush_pending
+// GOLDTL 0x0045e4a0 113 _read_buf
+// GOLDTL 0x00462500 37 _error
+// GOLDTL 0x004625f0 173 _gz_uncompress
+// GOLDTL 0x004626a0 177 _file_compress
+// GOLDTL 0x00462760 233 _file_uncompress
+// GOLDTL 0x00462850 545 _main
+// GOLDTL 0x005e12b5 n/a ?x3d_D3DXVec4Cross@@YGPAUD3DXVECTOR4@@PAU1@PBU1@11@Z
+// GOLDTL 0x005e1bfe 1685 ?sse_D3DXVec3TransformCoord$$1@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBUD3DXMATRIX@@@Z
+// GOLDTL 0x005e2b30 1565 ?sse_D3DXVec2Hermite@@YGPAUD3DXVECTOR2@@PAU1@PBU1@111M@Z
+// GOLDTL 0x005e351e 1516 ?sse_D3DXQuaternionRotationYawPitchRoll$$1@@YGPAUD3DXQUATERNION@@PAU1@MMM@Z
+// GOLDTL 0x005e6df0 n/a _fcn_005e6df0
+// GOLDTL 0x005e7738 1771 _D3DXComputeNormalMap@24
+// GOLDTL 0x005e7e30 2598 fcn_005e7e30
+// GOLDTL 0x005e9400 n/a _a_asin
+// GOLDTL 0x005e9860 1334 _a_modf
+// GOLDTL 0x005ea4d0 736 _fcn_005ea4d0
+// GOLDTL 0x005ea5c0 n/a ?sse2_atan2@@YA_KQBM0@Z
+// GOLDTL 0x005eac16 n/a _fcn_005eac16
+// GOLDTL 0x005eae41 n/a ?LoadDIB@CD3DXImage@@AAEJPBXK@Z
+// GOLDTL 0x005eb307 17 ?init_D3DXVec3Unproject@@YGPAUD3DXVECTOR3@@PAU1@PBU1@PBU_D3DVIEWPORT8@@PBUD3DXMATRIX@@33@Z
+// GOLDTL 0x005eb318 n/a _fcn_005eb318
+// GOLDTL 0x005eb970 n/a _fcn_005eb970
+// GOLDTL 0x005ebb0d n/a ?LoadTGA@CD3DXImage@@AAEJPBXK@Z
+// GOLDTL 0x005ebbbf n/a _fcn_005ebbbf
+// GOLDTL 0x005ebea2 n/a _fcn_005ebea2
+// GOLDTL 0x005ec28a n/a ?LoadPNG@CD3DXImage@@AAEJPBXK@Z
+// GOLDTL 0x005ec4b3 n/a _fcn_005ec4b3
+// GOLDTL 0x005ec7a3 n/a _fcn_005ec7a3
+// GOLDTL 0x005ec820 n/a ?LoadDDS@CD3DXImage@@AAEJPBXK@Z
+// GOLDTL 0x005ec8d0 30 _fcn_005ec8d0
+// GOLDTL 0x005ec8ee 39 ?init_D3DXMatrixAffineTransformation@@YGPAUD3DXMATRIX@@PAU1@MPBUD3DXVECTOR3@@PBUD3DXQUATERNION@@1@Z
+// GOLDTL 0x005ec915 35 ?D3DXVec3LengthSq@@YAMPBUD3DXVECTOR3@@@Z
+// GOLDTL 0x005ed326 n/a ?TF_SetupTriangle@@YAPAEIIH@Z
+// GOLDTL 0x005ed62f n/a ?BltTriangle3D@CD3DXBlt@@IAEJXZ
+// GOLDTL 0x005ed96d n/a _fcn_005ed96d
+// GOLDTL 0x005eda34 n/a _fcn_005eda34
+// GOLDTL 0x005edac5 n/a _fcn_005edac5
+// GOLDTL 0x005edb8a n/a _fcn_005edb8a
+// GOLDTL 0x005eddde n/a _fcn_005eddde
+// GOLDTL 0x005ede93 n/a ?mmx_BoxFilter2D_A8R8G8B8@@YAJPAI0IIII@Z
+// GOLDTL 0x005edf88 n/a _fcn_005edf88
+// GOLDTL 0x005edf95 n/a _fcn_005edf95
+// GOLDTL 0x005ee04a n/a _fcn_005ee04a
+// GOLDTL 0x005ef254 140 _D3DXAssembleShaderFromFileA@20
+// GOLDTL 0x005ef2fe n/a ?BltBox2D@CD3DXBlt@@IAEJXZ
+// GOLDTL 0x005ef94b 126 _D3DXCreateRenderToEnvMap@24
+// GOLDTL 0x005f0144 200 ??0DXCrackFVF@@QAE@K@Z
+// GOLDTL 0x005f020c 15 ?GetArrayElem@DXCrackFVF@@QAEPAEPAXK@Z
+// GOLDTL 0x005f021b 18 ?SetPosition@DXCrackFVF@@QAEXPAXPAUD3DXVECTOR3@@@Z
+// GOLDTL 0x005f022d 28 ?SetNormal@DXCrackFVF@@QAEXPAXPAUD3DXVECTOR3@@@Z
+// GOLDTL 0x005f0249 21 ?SetPointSize@DXCrackFVF@@QAEXPAXM@Z
+// GOLDTL 0x005f025e 21 ?SetDiffuse@DXCrackFVF@@QAEXPAXK@Z
+// GOLDTL 0x005f0273 21 ?SetSpecular@DXCrackFVF@@QAEXPAXK@Z
+// GOLDTL 0x005f0288 28 ?SetIndices@DXCrackFVF@@QAEXPAXK@Z
+// GOLDTL 0x005f02a4 7 _fcn_005f02a4
+// GOLDTL 0x005f02ab 10 ?PvGetNormal@DXCrackFVF@@QAEPAUD3DXVECTOR3@@PAX@Z
+// GOLDTL 0x005f02b5 13 ?FGetPointSize@DXCrackFVF@@QAEMPAX@Z
+// GOLDTL 0x005f02c2 13 ?ColorGetDiffuse@DXCrackFVF@@QAEKPAX@Z
+// GOLDTL 0x005f02cf 13 ?ColorGetSpecular@DXCrackFVF@@QAEKPAX@Z
+// GOLDTL 0x005f02dc 10 ?PuvGetTex1@DXCrackFVF@@QAEPAUD3DXVECTOR2@@PAX@Z
+// GOLDTL 0x005f07ca n/a ?BltTriangle2D@CD3DXBlt@@IAEJXZ
+// GOLDTL 0x005f0b6c n/a ?Blt@CD3DXBlt@@QAEJPAUD3DX_BLT@@0K@Z
+// GOLDTL 0x005f0d20 n/a ?Lock@CD3DXLockSurface@@QAEJPAUD3DX_BLT@@PAUIDirect3DSurface8@@PBUtagPALETTEENTRY@@PBUtagRECT@@KK@Z
+// GOLDTL 0x005f0e46 10 ?UnlockVB@?$GXTri3Mesh@I$0A@$0?0@@QAEJXZ
+// GOLDTL 0x005f0e50 30 ?LockIB@?$GXTri3Mesh@I$0A@$0?0@@QAEJPAPAEK@Z
+// GOLDTL 0x005f0e6f n/a _fcn_005f0e6f
+// GOLDTL 0x005f0eb0 31 ?LockVB@?$GXTri3Mesh@G$00$0PPPP@@@QAEJPAPAEK@Z
+// GOLDTL 0x005f0ecf n/a _fcn_005f0ecf
+// GOLDTL 0x005f0f3e n/a _fcn_005f0f3e
+// GOLDTL 0x005f15f9 n/a ?Encode@CD3DXCodecDXT@@UAEXIIPAUD3DXCOLOR@@@Z
+// GOLDTL 0x005f1de4 n/a ?ColorKey@CD3DXCodec@@IAEXPAUD3DXCOLOR@@@Z
+// GOLDTL 0x005f37c6 23 ?IFindInitialFace@?$CMeshStatus@I$0A@$0?0@@QAEIXZ
+// GOLDTL 0x005f37e5 16 ?PwGetNeighbors@?$CMeshStatus@I$0A@$0?0@@QAEPAII@Z
+// GOLDTL 0x005f37f5 23 ?BProcessed@?$CMeshStatus@G$00$0PPPP@@@QBEEG@Z
+// GOLDTL 0x005f3e56 n/a ?Decode@CD3DXCodec_X1R5G5B5@@UAEXIIPAUD3DXCOLOR@@@Z
+// GOLDTL 0x005f48ea n/a ?Decode@CD3DXCodec_V16U16@@UAEXIIPAUD3DXCOLOR@@@Z
+// GOLDTL 0x005f4a27 n/a ?Decode@CD3DXCodec_A2W10V10U10@@UAEXIIPAUD3DXCOLOR@@@Z
+// GOLDTL 0x005f6d83 78 ?HashRemove@@YAXKKKPAPAUhashentry@@K@Z
+// GOLDTL 0x005f6e57 n/a _jpeg_finish_decompress
+// GOLDTL 0x005f764c n/a ?get_sos@D3DX@@YAEPAUjpeg_decompress_struct@1@@Z
+// GOLDTL 0x005f9410 n/a _png_read_end
+// GOLDTL 0x005f9734 328 ?CreateEmptyMesh@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJXZ
+// GOLDTL 0x005fab4e n/a _png_do_expand_palette
+// GOLDTL 0x005fad56 n/a _png_do_expand
+// GOLDTL 0x005fb1b6 n/a _png_build_gamma_table
+// GOLDTL 0x005fc10c 44 ??0?$CD3DXSkinMesh@G$00$0PPPP@@@QAE@XZ
+// GOLDTL 0x005fdd69 n/a ?alloc_small@D3DX@@YAPAXPAUjpeg_common_struct@1@HI@Z
+// GOLDTL 0x005fe153 95 ?Optimize@?$GXHalfEdgePMesh@G$00$0PPPP@@@UAGJKPAK0PAPAUID3DXBuffer@@PAPAUID3DXMesh@@@Z
+// GOLDTL 0x005fe377 n/a ?access_virt_sarray@D3DX@@YAPAPAEPAUjpeg_common_struct@1@PAUjvirt_sarray_control@1@IIE@Z
+// GOLDTL 0x005fecdb 95 ?Optimize@?$GXHalfEdgePMesh@I$0A@$0?0@@UAGJKPAK0PAPAUID3DXBuffer@@PAPAUID3DXMesh@@@Z
+// GOLDTL 0x005fef10 n/a _png_memset_check
+// GOLDTL 0x0060100a 139 ?Print@?$CSimplificationHeap@I@@QAEJXZ
+// GOLDTL 0x006010c0 143 ?Print@?$CSimplificationHeap@G@@QAEJXZ
+// GOLDTL 0x006018f6 n/a ?decode_mcu@D3DX@@YAEPAUjpeg_decompress_struct@1@PAPAY0EA@F@Z
+// GOLDTL 0x00603611 n/a ?ycck_cmyk_convert@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAPAEIPAPAEH@Z
+// GOLDTL 0x0060481e 1034 ?Trim@?$GXHalfEdgePMesh@I$0A@$0?0@@EAGJKKKKKPAU_D3DXATTRIBUTERANGE@@PAK1@Z
+// GOLDTL 0x006052c3 n/a ?jinit_2pass_quantizer@D3DX@@YAXPAUjpeg_decompress_struct@1@@Z
+// GOLDTL 0x006053d6 n/a ?select_ncolors@D3DX@@YAHPAUjpeg_decompress_struct@1@QAH@Z
+// GOLDTL 0x00605b4b n/a ?quantize_fs_dither@D3DX@@YAXPAUjpeg_decompress_struct@1@PAPAE1H@Z
+// GOLDTL 0x00605ccf 324 ?RemapInternals@?$GXSimplifyMesh@G$00$0PPPP@@@AAEJPAII0I@Z
+// GOLDTL 0x00605e6b n/a ?jpeg_idct_4x4@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
+// GOLDTL 0x00606180 n/a ?jpeg_idct_2x2@D3DX@@YAXPAUjpeg_decompress_struct@1@PAUjpeg_component_info@1@PAFPAPAEI@Z
+// GOLDTL 0x006067f4 n/a ?pidct8x8llm@D3DX@@YAXPAF00PAPAEIPAE@Z
+// GOLDTL 0x00606c56 n/a ?midct8x8llm@D3DX@@YAXPAF00PAPAEIPAE@Z
+// GOLDTL 0x0060730e n/a ?pidct8x8aan@D3DX@@YAXPAF00PAPAEIPAE@Z
+// GOLDTL 0x00607669 n/a ?midct8x8aan@D3DX@@YAXPAF00PAPAEIPAE@Z
+// GOLDTL 0x006092bc 3488 ?Optimize2@?$GXTri3Mesh@I$0A@$0?0@@AAEJKPAK00PAPAUID3DXBuffer@@KPAPAV1@@Z
+// GOLDTL 0x00609405 n/a ?ConvertToBlendedMesh@?$CD3DXSkinMesh@I$0A@$0?0@@UAGJKQAKPAK1PAPAUID3DXBuffer@@12PAPAUID3DXMesh@@@Z
+// GOLDTL 0x0060ca00 992 _fcn_0060ca00
+// GOLDTL 0x0060cde0 89 ?AddHEPoint@?$GXSimplifyMesh@I$0A@$0?0@@AAEXPAEIG@Z
+// GOLDTL 0x0060d8c7 71 _fcn_0060d8c7
+// GOLDTL 0x0060e201 1107 _fcn_0060e201
+// GOLDTL 0x0060e654 88 ?AddHEPoint@?$GXSimplifyMesh@G$00$0PPPP@@@AAEXPAEGG@Z
+// GOLDTL 0x0060f791 226 ?D3DXFindClosestDeviceFormat@@YA?AW4_D3DFORMAT@@PAUIDirect3DDevice8@@KW4_D3DRESOURCETYPE@@PBU_D3DXFORMAT_INFO@@@Z
+// GOLDTL 0x006132e7 56 _fcn_006132e7
+// GOLDTL 0x00613555 58 ??1CD3DXFont@@QAE@XZ
+// GOLDTL 0x0061358f n/a _fcn_0061358f
+// GOLDTL 0x0061359c 221 ?Initialize@CD3DXFont@@QAEJPAUIDirect3DDevice8@@PBUtagLOGFONTA@@@Z
+// GOLDTL 0x006135fa n/a _IsEqualGUID
+// GOLDTL 0x00613611 n/a ?GetDevice@CD3DXFont@@UAGJPAPAUIDirect3DDevice8@@@Z
+// GOLDTL 0x00613637 n/a ?GetLogFont@CD3DXFont@@UAGJPAUtagLOGFONTA@@@Z
+// GOLDTL 0x0061365b n/a ?Begin@CD3DXFont@@UAGJXZ
+// GOLDTL 0x0061366a n/a ?End@CD3DXFont@@UAGJXZ
+// GOLDTL 0x00614789 127 ?Begin@CD3DXRenderToEnvMap@@QAEJXZ
+// GOLDTL 0x00614808 343 ?BeginScene@CD3DXRenderToEnvMap@@QAEJW4_D3DCUBEMAP_FACES@@@Z
+// GOLDTL 0x006149fc 112 ?BeginCube@CD3DXRenderToEnvMap@@UAGJPAUIDirect3DCubeTexture8@@@Z
+// GOLDTL 0x00614a6c 132 ?BeginSphere@CD3DXRenderToEnvMap@@UAGJPAUIDirect3DTexture8@@@Z
+// GOLDTL 0x00614af0 213 ?BeginHemisphere@CD3DXRenderToEnvMap@@UAGJPAUIDirect3DTexture8@@0@Z
+// GOLDTL 0x00616426 212 ?EndScene@CD3DXRenderToEnvMap@@QAEJXZ
+// GOLDTL 0x006164d7 n/a ?Face@CD3DXRenderToEnvMap@@UAGJW4_D3DCUBEMAP_FACES@@@Z
+// GOLDTL 0x006164fa 227 ?End@CD3DXRenderToEnvMap@@UAGJXZ
+// GOLDTL 0x006172e4 929 ?DecodeRegister@CD3DXAssembler@@QAEKPADKH@Z
+// GOLDTL 0x0061772e 214 ?UpdateDebugText@CD3DXAssembler@@QAEXXZ
+// GOLDTL 0x00617804 375 ?UpdateDebugFileLine@CD3DXAssembler@@QAEXXZ
+// GOLDTL 0x0061797b 1304 ?Token@CD3DXAssembler@@QAEHXZ
+// GOLDTL 0x00618c83 1219 ?Assemble@CD3DXAssembler@@QAEJPBXIPBDIKPAPAUID3DXBuffer@@22@Z
+// GOLDTL 0x006194de 24 ??0CD3DXBuffer@@QAE@XZ
+// GOLDTL 0x00619504 22 ??0CD3DXStringBuffer@@QAE@XZ
+// GOLDTL 0x0061951a 28 ??_GCD3DXStringBuffer@@UAEPAXI@Z
+// GOLDTL 0x0061ada1 4187 ?D3DXLoadMeshFromXofEx@@YGJPAUIDirectXFileData@@KPAUIDirect3DDevice8@@PAPAUID3DXBuffer@@2PAKPAPAUID3DXMesh@@PAPAE322PAPAVCBone@@3@Z
+// GOLDTL 0x0061ed1b n/a _fcn_0061ed1b
+// GOLDTL 0x00624188 n/a _fcn_00624188
+// GOLDTL 0x006241a9 1043 fcn_006241a9
+// GOLDTL 0x006245c1 859 fcn_006245c1
+// GOLDTL 0x00628e2d 116 fcn_00628e2d
+// GOLDTL 0x00628e32 111 ?Decode@CD3DXCodecYUV@@UAEXIIPAUD3DXCOLOR@@@Z
+// GOLDTL 0x0062953e 686 fcn_0062953e
+// GOLDTL 0x00629543 681 ?Decode@CD3DXCodecDXT@@UAEXIIPAUD3DXCOLOR@@@Z
+// GOLDTL 0x0062a1cd 33 fcn_0062a1cd
+// GOLDTL 0x0062a1d2 28 fcn_0062a1d2
+// GOLDTL 0x0062a1ee 5 fcn_0062a1ee
+// GOLDTL 0x0062ab2e 142 fcn_0062ab2e
+// GOLDTL 0x0062ac43 249 ??1CD3DXText@@IAE@XZ
+// GOLDTL 0x0062ad3c n/a _fcn_0062ad3c
+// GOLDTL 0x0062ad5b 141 fcn_0062ad5b
+// GOLDTL 0x0062ade8 48 ?End@CD3DXText@@QAEJXZ
+// GOLDTL 0x0062ae18 123 ?OnLostDevice@CD3DXText@@QAEJXZ
+// GOLDTL 0x0062ae93 186 fcn_0062ae93
+// GOLDTL 0x0062af4d 35 ?OnDeleteFont@CD3DXText@@QAEJXZ
+// GOLDTL 0x0062af7c 321 ?Initialize@CD3DXText@@IAEJPAUIDirect3DDevice8@@@Z
+// GOLDTL 0x0062b0bd 1299 fcn_0062b0bd
+// GOLDTL 0x0062b5d0 117 ?Create@CD3DXText@@SAJPAUIDirect3DDevice8@@PAPAV1@@Z
+// GOLDTL 0x0062b97d 439 fcn_0062b97d
+// GOLDTL 0x0062c591 2110 fcn_0062c591
+// GOLDTL 0x0062ce8f 10 fcn_0062ce8f
+// GOLDTL 0x00633305 340 fcn_00633305
+// GOLDTL 0x00638854 448 fcn_00638854
+// GOLDTL 0x00638a14 6257 fcn_00638a14
+// GOLDTL 0x0063a285 1271 fcn_0063a285
+// GOLDTL 0x0063a77c 4436 fcn_0063a77c
+// GOLDTL 0x0063b8d0 1754 fcn_0063b8d0
+// GOLDTL 0x0063bfaa 1064 fcn_0063bfaa
+// GOLDTL 0x0063c3d2 654 fcn_0063c3d2
+// GOLDTL 0x0063c6eb 460 fcn_0063c6eb
+// GOLDTL 0x0063c8b7 392 fcn_0063c8b7
+// GOLDTL 0x0063ca3f 550 fcn_0063ca3f
+// GOLDTL 0x0063cc65 2595 fcn_0063cc65
+// GOLDTL 0x00641720 232 fcn_00641720
+// GOLDTL 0x00642664 n/a _fcn_00642664
+// GOLDTL 0x0064267d n/a _fcn_0064267d
+// GOLDTL 0x0064d4fa 40 fcn_0064d4fa
+// GOLDTL 0x0064dca2 507 fcn_0064dca2

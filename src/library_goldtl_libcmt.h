@@ -1,1277 +1,286 @@
-/* Managed _cinit/_initterm identities describe a complete 71-byte component
- * matching compatible stock crt0dat.obj. _initterm is a private static helper,
- * not a game-callable extern. The actual client raw-link provider remains
- * unverified. No copied CRT C body or storage is provided here. */
-
-// LIBRARY markers for GOLDTL functions the linker supplies from LIBCMT
-// (Processor Pack build, msvc-6.0-sp5-pp). Each one confirmed by
-// `rebrew library match --lib <sp5-pp LIBCMT.LIB> --target Europa1400Gold_TL.exe --va <va>`.
-
-
-// _strrchr
-
-
-// __ftol
-
-
-// _fprintf
-
-
-// __lock_file
-
-
-// __lock_file2
-
-
-// __lock_file
-
-
-// __lock_file2
-
-
-// _srand
-
-
-// _rand
-
-
-// _sprintf
-
-
-// _strstr
-
-
-// _strncpy
-
-
-// _atof
-
-
-// __dosmaperr
-
-
-// __errno
-
-
-// ___doserrno
-
-
-// __alloca_probe
-
-
-// _qsort
-
-
-// _shortsort
-
-
-// _swap
-
-
-// _sscanf
-
-
-// __CIpow
-
-
-// ___RTCastToVoid
-
-
-// _free
-
-
-// _malloc
-
-
-// __nh_malloc
-
-
-// ___FrameUnwindToState
-
-
-// _fclose
-
-
-// __fclose_lk
-
-
-// _fputs
-
-
-// __fsopen
-
-
-// _fopen
-
-
-// _ftell
-
-
-// __ftell_lk
-
-
-// _fseek
-
-
-// __fseek_lk
-
-
-// _ctime
-
-
-// _time
-
-
-// _exit
-
-
-// __exit
-
-
-// _doexit
-
-
-// __lockexit
-
-
-// __lockexit
-
-
-// __alldiv
-
-
-// __assert
-
-
-// _fread
-
-
-// __fread_lk
-
-
-// _fscanf
-
-
-// _fwrite
-
-
-// __fwrite_lk
-
-
-// _atol
-
-
-// _atoi
-
-
-// __isctype
-
-
-// _strtok
-
-
-// _printf
-
-
-// _fgets
-
-
-// _strncmp
-
-
-// _strncat
-
-
-// _bsearch
-
-
-// _toupper
-
-
-// __toupper_lk
-
-
-// __findfirst
-
-
-// __findnext
-
-
-// __findclose
-
-
-// ___timet_from_ft
-
-
-// __rmdir
-
-
-// _atoi
-
-
-// __CIasin
-
-
-// __allmul
-
-
-// __fdopen
-
-
-// _vsprintf
-
-
-// _fflush
-
-
-// __fflush_lk
-
-
-// __flush
-
-
-// __flushall
-
-
-// _flsall
-
-
-// _rewind
-
-
-// _fputc
-
-
-// _perror
-
-
-// _ceil
-
-
-// _tolower
-
-
-// __tolower_lk
-
-
-// _realloc
-
-
-// _ceil
-
-
-// _WinMainCRTStartup
-
-
-// __amsg_exit
-
-
-// _fast_error_exit
-
-
-// _atexit
-
-
-// __copysign
-
-
-// __chgsign
-
-
-// __logb
-
-
-// __nextafter
-
-
-// __finite
-
-
-// __fpclass
-
-
-// _atoi
-
-
-// __snprintf
-
-
-// _iswupper
-
-
-// ___FrameUnwindToState
-
-
-// 
-
-
-// ?FrameUnwindFilter@@YAHPAU_EXCEPTION_POINTERS@@@Z
-
-
-// ??_L@YGXPAXIHP6EX0@Z1@Z
-
-
-// 
-
-
-// 
-
-
-// ___CxxFrameHandler
-
-
-// 
-
-
-// 
-
-
-// (static, no archive symbol)
-
-
-// (static, no archive symbol)
-
-
-// (static, no archive symbol)
-
-
-// __global_unwind2
-
-
-// __local_unwind2
-
-
-// __abnormal_termination
-
-
-// __NLG_Notify1
-
-
-// __NLG_Notify
-
-
-// __EH_prolog
-
-
-// __statusfp
-
-
-// __clearfp
-
-
-// __control87
-
-
-// __controlfp
-
-
-// __abstract_cw
-
-
-// __hw_cw
-
-
-// __abstract_sw
-
-
-// __vsnprintf
-
-
-// _isalpha
-
-
-// _isdigit
-
-
-// _isspace
-
-
-// _isalnum
-
-
-// __mbsdup
-
-
-// _setlocale
-
-
-// __setlocale_set_cat
-
-
-// __setlocale_get_all
-
-
-// __expandlocale
-
-
-// __strcats
-
-
-// ___lc_strtolc
-
-
-// ___lc_lctostr
-
-
-// _longjmp
-
-
-// __setjmp3
-
-
-// __aullshr
-
-
-// __setdefaultprecision
-
-
-// __ms_p5_test_fdiv
-
-
-// __ms_p5_mp_test_fdiv
-
-
-// __fassign
-
-
-// __cftoe
-
-
-// __cftoe2
-
-
-// __cftoe
-
-
-// __cftof2
-
-
-// __cftog
-
-
-// __cfltcvt
-
-
-// __shift
-
-
-// __stbuf
-
-
-// __ftbuf
-
-
-// __output
-
-
-// _write_char
-
-
-// _write_multi_char
-
-
-// _write_string
-
-
-// _get_int_arg
-
-
-// _get_int64_arg
-
-
-// _get_short_arg
-
-
-// __ioinit
-
-
-// __mtinitlocks
-
-
-// __mtdeletelocks
-
-
-// __lock
-
-
-// __unlock
-
-
-// __mtinit
-
-
-// __getptd
-
-
-// __flsbuf
-
-
-// __cintrindisp2
-
-
-// __cintrindisp1
-
-
-// __ctrandisp2
-
-
-// __ctrandisp1
-
-
-// __fload
-
-
-// __trandisp1
-
-
-// __trandisp1
-
-
-// __rttosnpopde
-
-
-// _fdiv_main_routine
-
-
-// __fdivp_sti_st
-
-
-// __fdivrp_sti_st
-
-
-// __safe_fdivr
-
-
-// __fprem_common
-
-
-// __adj_fprem
-
-
-// __fprem_common
-
-
-// __adj_fprem1
-
-
-// __fltin2
-
-
-// _strlen
-
-
-// __input
-
-
-// __hextodec
-
-
-// __inc
-
-
-// __un_inc
-
-
-// __whiteout
-
-
-// __ffexpm1
-
-
-// __startTwoArgErrorHandling
-
-
-// __startOneArgErrorHandling
-
-
-// __twoToTOS
-
-
-// __load_CW
-
-
-// __convertTOStoQNaN
-
-
-// __fload_withFB
-
-
-// __checkTOS_withFB
-
-
-// __powhlp
-
-
-// __d_inttype
-
-
-// __callnewh
-
-
-// __GetLinkerVersion
-
-
-// ___heap_select
-
-
-// __heap_init
-
-
-// _memset
-
-
-// __set_sbh_threshold
-
-
-// ___sbh_heap_init
-
-
-// ___sbh_find_block
-
-
-// ___sbh_free_block
-
-
-// ___sbh_alloc_block
-
-
-// ___sbh_alloc_new_region
-
-
-// ___sbh_alloc_new_group
-
-
-// ___sbh_resize_block
-
-
-// ___sbh_heap_check
-
-
-// ___old_sbh_new_region
-
-
-// ___old_sbh_release_region
-
-
-// ___old_sbh_decommit_pages
-
-
-// ___old_sbh_find_block
-
-
-// ___old_sbh_free_block
-
-
-// ___old_sbh_alloc_block
-
-
-// ___old_sbh_alloc_block_from_page
-
-
-// ___old_sbh_resize_block
-
-
-// ___old_sbh_heap_check
-
-
-// __except_handler3
-
-
-// __close
-
-
-// __close_lk
-
-
-// __freebuf
-
-
-// __openfile
-
-
-// __getstream
-
-
-// __lseek
-
-
-// __lseek_lk
-
-
-// _asctime
-
-
-// _store_dt
-
-
-// _localtime
-
-
-// ___loctotime_t
-
-
-// _setvbuf
-
-
-// _signal
-
-
-// _raise
-
-
-// _siglookup
-
-
-// ___pxcptinfoptrs
-
-
-// ___crtMessageBoxA
-
-
-// __itoa
-
-
-// _xtoa
-
-
-// __ltoa
-
-
-// __i64toa
-
-
-// _x64toa@20
-
-
-// __ui64toa
-
-
-// __mbscpy
-
-
-// __filbuf
-
-
-// __lseek
-
-
-// __read_lk
-
-
-// __lseek
-
-
-// __write_lk
-
-
-// ___RTCastToVoid
-
-
-// (static, no archive symbol)
-
-
-// _strncnt
-
-
-// __commit
-
-
-// __alloc_osfhnd
-
-
-// __set_osfhnd
-
-
-// __free_osfhnd
-
-
-// __get_osfhandle
-
-
-// __open_osfhandle
-
-
-// __lock_fhandle
-
-
-// __unlock_fhandle
-
-
-// __handle_qnan1
-
-
-// __handle_qnan2
-
-
-// __except1
-
-
-// __except2
-
-
-// __raise_exc
-
-
-// __handle_exc
-
-
-// __umatherr
-
-
-// __set_errno
-
-
-// __get_fname
-
-
-// __errcode
-
-
-// __frnd
-
-
-// __set_exp
-
-
-// __set_bexp
-
-
-// __sptype
-
-
-// __decomp
-
-
-// __statfp
-
-
-// __clrfp
-
-
-// __ctrlfp
-
-
-// __set_statfp
-
-
-// __XcptFilter
-
-
-// _xcptlookup
-
-
-// __wincmdln
-
-
-// __setenvp
-
-
-// ___setargv
-
-
-// _parse_cmdline
-
-
-// ___crtGetEnvironmentStringsA
-
-
-// __FF_MSGBANNER
-
-
-// __NMSG_WRITE
-
-
-// (static, no archive symbol)
-
-
-// _ldexp
-
-
-// 
-
-
-// 
-
-
-// ___InternalCxxFrameHandler
-
-
-// (static, no archive symbol)
-
-
-// (static, no archive symbol)
-
-
-// 
-
-
-// ___FrameUnwindToState
-
-
-// ?FrameUnwindFilter@@YAHPAU_EXCEPTION_POINTERS@@@Z
-
-
-// (static, no archive symbol)
-
-
-// (static, no archive symbol)
-
-
-// ?ExFilterRethrow@@YAHPAU_EXCEPTION_POINTERS@@@Z
-
-
-// ___FrameUnwindToState
-
-
-// (static, no archive symbol)
-
-
-// ?AdjustPointer@@YAPAXPAXABUPMD@@@Z
-
-
-// __CallSettingFrame@12
-
-
-// __get_lc_time
-
-
-// __free_lc_time
-
-
-// _fix_grouping
-
-
-// __get_lc_lconv
-
-
-// _fix_grouping
-
-
-// __free_lc_lconv
-
-
-// ___init_ctype
-
-
-// _strcmp
-
-
-// _strcspn
-
-
-// _strcspn
-
-
-// ___get_qualified_locale
-
-
-// _TranslateName
-
-
-// _LangCountryEnumProc@4
-
-
-// _GetLcidFromLanguage
-
-
-// _LanguageEnumProc@4
-
-
-// _GetLcidFromCountry
-
-
-// _LanguageEnumProc@4
-
-
-// _ProcessCodePage
-
-
-// _TestDefaultCountry
-
-
-// _TestDefaultLanguage
-
-
-// _IsThisWindowsNT
-
-
-// _crtGetLocaleInfoA@16
-
-
-// _LcidFromHexString
-
-
-// _GetPrimaryLen
-
-
-// ??_L@YGXPAXIHP6EX0@Z1@Z
-
-
-// __ZeroTail
-
-
-// __IncMan
-
-
-// __RoundMan
-
-
-// __CopyMan
-
-
-// __FillZeroMan
-
-
-// __IsZeroMan
-
-
-// __ShrMan
-
-
-// __ld12cvt
-
-
-// __ld12tod
-
-
-// __ld12tod
-
-
-// __ld12told
-
-
-// __atodbl
-
-
-// __atoldbl
-
-
-// __atodbl
-
-
-// __fptostr
-
-
-// __fltout2
-
-
-// ___dtold
-
-
-// __isatty
-
-
-// _mbstowcs
-
-
-// __wctomb_lk
-
-
-// __aulldiv
-
-
-// __aullrem
-
-
-// __getbuf
-
-
-// __87except
-
-
-// ___strgtold12
-
-
-// ___STRINGTOLD
-
-
-// _mbstowcs
-
-
-// __mbtowc_lk
-
-
-// __allshl
-
-
-// __ungetc_lk
-
-
-// _strtol
-
-
-// _strtoxl
-
-
-// __sopen
-
-
-// ___tzset
-
-
-// __tzset_lk
-
-
-// __isindst
-
-
-// __isindst_lk
-
-
-// _cvtdate
-
-
-// _gmtime
-
-
-// __ismbblead
-
-
-// _x_ismbbtype
-
-
-// __setmbcp
-
-
-// _getSystemCP
-
-
-// _CPtoLCID
-
-
-// _setSBCS
-
-
-// _setSBUpLow
-
-
-// ___initmbctable
-
-
-// ?_ValidateRead@@YAHPBXI@Z
-
-
-// ?_ValidateRead@@YAHPBXI@Z
-
-
-// ?_ValidateExecute@@YAHP6GHXZ@Z
-
-
-// __Getdays
-
-
-// __Getmonths
-
-
-// __Gettnames
-
-
-// __Strftime
-
-
-// __expandtime
-
-
-// __store_str
-
-
-// __store_num
-
-
-// __store_number
-
-
-// __store_winword
-
-
-// ___getlocaleinfo
-
-
-// (static, no archive symbol)
-
-
-// __strcmpi
-
-
-// __strnicmp
-
-
-// ___addl
-
-
-// ___add_12
-
-
-// ___shl_12
-
-
-// ___shr_12
-
-
-// ___mtold12
-
-
-// _$I10_OUTPUT
-
-
-// ___ld12mul
-
-
-// ___multtenpow12
-
-
-// __chsize_lk
-
-
-// __getenv_lk
-
-
-// ___crtGetLocaleInfoA
-
-
-// ___crtGetLocaleInfoA
-
-
-// __chsize
-
-
-// __setmode_lk
-
-
-// __mbsnbcoll
-
-
-// ___wtomb_environ
-
-
-// _strncnt
-
-
-// ___crtsetenv
-
-
-// _findenv
-
-
-// _copy_environ
-
-
-// __mbschr
-
-
-// __strupr
-
-
-// __mkdir
-
-
-// __getcwd
-
-
-// __getdcwd_lk
-
-
-// __validdrive
-
-
-// __fileno
+/* GOLDTL_LIBCMT.
+ * Generated by scripts/gen_library_headers.py from the LIBRARY rows in
+ * rebrew-functions.toml. The linker supplies these bodies; nothing here is compiled.
+ * Columns: module, address, size in bytes, native symbol. */
+
+// GOLDTL 0x00608f01 n/a _flsall
+// GOLDTL 0x0060a930 n/a _memcpy
+// GOLDTL 0x0060acf2 n/a ___initstdio
+// GOLDTL 0x0060c319 n/a ?TranslatorGuardHandler@@YA?AW4_EXCEPTION_DISPOSITION@@PAUEHExceptionRecord@@PAUTranslatorGuardRN@@PAX2@Z
+// GOLDTL 0x0060c7fa n/a _setlocale
+// GOLDTL 0x0060d803 n/a ___sbh_free_block
+// GOLDTL 0x0060dfe1 n/a ___sbh_resize_block
+// GOLDTL 0x0060f1e7 n/a __openfile
+// GOLDTL 0x0060fa00 n/a __output
+// GOLDTL 0x00612c39 n/a __input
+// GOLDTL 0x0061382c n/a ___crtGetStringTypeA
+// GOLDTL 0x006142d7 n/a __get_fname
+// GOLDTL 0x006145db n/a __XcptFilter
+// GOLDTL 0x00614c1c n/a __NMSG_WRITE
+// GOLDTL 0x00614da0 n/a _ldexp
+// GOLDTL 0x00615e2a n/a ___init_numeric
+// GOLDTL 0x00616856 n/a _LangCountryEnumProc@4
+// GOLDTL 0x00616a5a n/a _GetLcidFromLanguage
+// GOLDTL 0x0061929d n/a __ungetc_lk
+// GOLDTL 0x006195e1 n/a __setmbcp
+// GOLDTL 0x00619834 n/a _setSBUpLow
+// GOLDTL 0x0064d1a0 n/a _strrchr
+// GOLDTL 0x0064d228 39 __ftol
+// GOLDTL 0x0064d24f 60 _fprintf
+// GOLDTL 0x0064d347 47 __lock_file
+// GOLDTL 0x0064d376 n/a __lock_file2
+// GOLDTL 0x0064d3c8 n/a __lock_file2
+// GOLDTL 0x0064d3eb n/a _srand
+// GOLDTL 0x0064d3f8 n/a _rand
+// GOLDTL 0x0064d41a 82 _sprintf
+// GOLDTL 0x0064d470 n/a _strstr
+// GOLDTL 0x0064d530 n/a _strncpy
+// GOLDTL 0x0064d62e n/a _atof
+// GOLDTL 0x0064d685 n/a __dosmaperr
+// GOLDTL 0x0064d6f8 n/a __errno
+// GOLDTL 0x0064d701 9 ___doserrno
+// GOLDTL 0x0064d710 n/a __alloca_probe
+// GOLDTL 0x0064d740 821 fcn_0064d740
+// GOLDTL 0x0064da75 n/a _qsort
+// GOLDTL 0x0064dbc9 n/a _shortsort
+// GOLDTL 0x0064dc17 n/a _swap
+// GOLDTL 0x0064dc43 52 _sscanf
+// GOLDTL 0x0064dc80 n/a __CIpow
+// GOLDTL 0x0064dfda 233 _free
+// GOLDTL 0x0065504c n/a __powhlp
+// GOLDTL 0x0065517c 101 __d_inttype
+// GOLDTL 0x0065520b n/a __callnewh
+// GOLDTL 0x00655226 n/a __GetLinkerVersion
+// GOLDTL 0x00655253 n/a ___heap_select
+// GOLDTL 0x0065539b 93 __heap_init
+// GOLDTL 0x006554a0 88 _memset
+// GOLDTL 0x00655517 n/a __set_sbh_threshold
+// GOLDTL 0x006555ca n/a ___sbh_heap_init
+// GOLDTL 0x00655612 n/a ___sbh_find_block
+// GOLDTL 0x0065563d n/a ___sbh_free_block
+// GOLDTL 0x00655966 n/a ___sbh_alloc_block
+// GOLDTL 0x00655c6f n/a ___sbh_alloc_new_region
+// GOLDTL 0x00655d20 n/a ___sbh_alloc_new_group
+// GOLDTL 0x00655e1b 758 ___sbh_resize_block
+// GOLDTL 0x006561e2 821 ___sbh_heap_check
+// GOLDTL 0x00656533 n/a ___old_sbh_new_region
+// GOLDTL 0x00656677 n/a ___old_sbh_release_region
+// GOLDTL 0x006566cd n/a ___old_sbh_decommit_pages
+// GOLDTL 0x0065678f n/a ___old_sbh_find_block
+// GOLDTL 0x006567e6 n/a ___old_sbh_free_block
+// GOLDTL 0x0065682b n/a ___old_sbh_alloc_block
+// GOLDTL 0x00656a33 n/a ___old_sbh_alloc_block_from_page
+// GOLDTL 0x00656b57 n/a ___old_sbh_resize_block
+// GOLDTL 0x00656c00 n/a ___old_sbh_heap_check
+// GOLDTL 0x00656d68 n/a __except_handler3
+// GOLDTL 0x00656e40 n/a __close
+// GOLDTL 0x00656e9d n/a __close_lk
+// GOLDTL 0x00656f20 n/a __freebuf
+// GOLDTL 0x00656f4b n/a __openfile
+// GOLDTL 0x006570bb n/a __getstream
+// GOLDTL 0x00657183 n/a __lseek
+// GOLDTL 0x006571e8 n/a __lseek_lk
+// GOLDTL 0x0065725b n/a _asctime
+// GOLDTL 0x00657325 n/a _store_dt
+// GOLDTL 0x0065734d n/a _localtime
+// GOLDTL 0x006574ad n/a ___loctotime_t
+// GOLDTL 0x00657586 n/a _setvbuf
+// GOLDTL 0x00657635 386 _signal
+// GOLDTL 0x00657819 n/a _raise
+// GOLDTL 0x0065799b n/a _siglookup
+// GOLDTL 0x006579e1 n/a ___pxcptinfoptrs
+// GOLDTL 0x006579ea n/a ___crtMessageBoxA
+// GOLDTL 0x00657a73 n/a __itoa
+// GOLDTL 0x00657aa0 n/a _xtoa
+// GOLDTL 0x00657afc 42 __ltoa
+// GOLDTL 0x00657b41 n/a __i64toa
+// GOLDTL 0x00657b72 n/a _x64toa@20
+// GOLDTL 0x00657bf8 27 __ui64toa
+// GOLDTL 0x00657c20 n/a __mbscpy
+// GOLDTL 0x00657d10 n/a __filbuf
+// GOLDTL 0x00657dec n/a __lseek
+// GOLDTL 0x00657e51 473 __read_lk
+// GOLDTL 0x00658030 821 fcn_00658030
+// GOLDTL 0x00658365 n/a __lseek
+// GOLDTL 0x006583ca n/a __write_lk
+// GOLDTL 0x00658555 n/a ___RTCastToVoid
+// GOLDTL 0x0065869e n/a (static, no archive symbol)
+// GOLDTL 0x006588c2 n/a _strncnt
+// GOLDTL 0x006588ed n/a __commit
+// GOLDTL 0x00658980 n/a __alloc_osfhnd
+// GOLDTL 0x00658aa3 n/a __set_osfhnd
+// GOLDTL 0x00658b1f n/a __free_osfhnd
+// GOLDTL 0x00658b9e n/a __get_osfhandle
+// GOLDTL 0x00658be0 n/a __open_osfhandle
+// GOLDTL 0x00658c87 n/a __lock_fhandle
+// GOLDTL 0x00658ce6 n/a __unlock_fhandle
+// GOLDTL 0x00658d08 n/a __handle_qnan1
+// GOLDTL 0x00658d5c n/a __handle_qnan2
+// GOLDTL 0x00658dbc n/a __except1
+// GOLDTL 0x00658e54 n/a __except2
+// GOLDTL 0x00658ef9 n/a __raise_exc
+// GOLDTL 0x006591ac n/a __handle_exc
+// GOLDTL 0x006593c3 n/a __umatherr
+// GOLDTL 0x0065944b n/a __set_errno
+// GOLDTL 0x00659473 n/a __get_fname
+// GOLDTL 0x00659498 n/a __errcode
+// GOLDTL 0x006594c5 n/a __frnd
+// GOLDTL 0x006594d7 41 __set_exp
+// GOLDTL 0x00659540 n/a __set_bexp
+// GOLDTL 0x00659564 n/a __sptype
+// GOLDTL 0x006595be n/a __decomp
+// GOLDTL 0x0065967f n/a __statfp
+// GOLDTL 0x0065968d n/a __clrfp
+// GOLDTL 0x0065969c n/a __ctrlfp
+// GOLDTL 0x006596bf n/a __set_statfp
+// GOLDTL 0x00659715 n/a __XcptFilter
+// GOLDTL 0x00659853 n/a _xcptlookup
+// GOLDTL 0x0065988d n/a __wincmdln
+// GOLDTL 0x006598e5 n/a __setenvp
+// GOLDTL 0x0065999e n/a ___setargv
+// GOLDTL 0x00659a37 n/a _parse_cmdline
+// GOLDTL 0x00659beb n/a ___crtGetEnvironmentStringsA
+// GOLDTL 0x00659d1d n/a __FF_MSGBANNER
+// GOLDTL 0x00659d56 n/a __NMSG_WRITE
+// GOLDTL 0x00659eda n/a (static, no archive symbol)
+// GOLDTL 0x00659fc8 n/a _ldexp
+// GOLDTL 0x0065a1ae n/a n/a
+// GOLDTL 0x0065a227 n/a n/a
+// GOLDTL 0x0065a27d n/a ___InternalCxxFrameHandler
+// GOLDTL 0x0065a318 n/a (static, no archive symbol)
+// GOLDTL 0x0065a4cb n/a (static, no archive symbol)
+// GOLDTL 0x0065a575 n/a n/a
+// GOLDTL 0x0065a5d2 n/a ___FrameUnwindToState
+// GOLDTL 0x0065a670 n/a ?FrameUnwindFilter@@YAHPAU_EXCEPTION_POINTERS@@@Z
+// GOLDTL 0x0065a686 n/a (static, no archive symbol)
+// GOLDTL 0x0065a701 n/a (static, no archive symbol)
+// GOLDTL 0x0065a7ce 78 fcn_0065a7ce
+// GOLDTL 0x0065a81c n/a ?ExFilterRethrow@@YAHPAU_EXCEPTION_POINTERS@@@Z
+// GOLDTL 0x0065a846 n/a ___FrameUnwindToState
+// GOLDTL 0x0065aa0a n/a (static, no archive symbol)
+// GOLDTL 0x0065aa71 35 ?AdjustPointer@@YAPAXPAXABUPMD@@@Z
+// GOLDTL 0x0065aaa0 n/a __CallSettingFrame@12
+// GOLDTL 0x0065ab7d n/a __get_lc_time
+// GOLDTL 0x0065aecb n/a __free_lc_time
+// GOLDTL 0x0065b230 n/a _fix_grouping
+// GOLDTL 0x0065b332 n/a __get_lc_lconv
+// GOLDTL 0x0065b454 n/a _fix_grouping
+// GOLDTL 0x0065b48b n/a __free_lc_lconv
+// GOLDTL 0x0065b4d9 584 ___init_ctype
+// GOLDTL 0x0065b730 132 _strcmp
+// GOLDTL 0x0065b7c0 n/a _strcspn
+// GOLDTL 0x0065b800 n/a _strcspn
+// GOLDTL 0x0065b83a n/a ___get_qualified_locale
+// GOLDTL 0x0065b9b7 n/a _TranslateName
+// GOLDTL 0x0065ba96 n/a _LangCountryEnumProc@4
+// GOLDTL 0x0065bc9a n/a _GetLcidFromLanguage
+// GOLDTL 0x0065bcf0 n/a _LanguageEnumProc@4
+// GOLDTL 0x0065bdad n/a _GetLcidFromCountry
+// GOLDTL 0x0065bde4 n/a _LanguageEnumProc@4
+// GOLDTL 0x0065be84 n/a _ProcessCodePage
+// GOLDTL 0x0065beea n/a _TestDefaultCountry
+// GOLDTL 0x0065bf09 n/a _TestDefaultLanguage
+// GOLDTL 0x0065bf6b n/a _IsThisWindowsNT
+// GOLDTL 0x0065bfa1 n/a _crtGetLocaleInfoA@16
+// GOLDTL 0x0065c087 n/a _LcidFromHexString
+// GOLDTL 0x0065c0c0 n/a _GetPrimaryLen
+// GOLDTL 0x0065c0e1 n/a ??_L@YGXPAXIHP6EX0@Z1@Z
+// GOLDTL 0x0065c146 n/a __ZeroTail
+// GOLDTL 0x0065c18f n/a __IncMan
+// GOLDTL 0x0065c1e5 n/a __RoundMan
+// GOLDTL 0x0065c271 n/a __CopyMan
+// GOLDTL 0x0065c28c n/a __FillZeroMan
+// GOLDTL 0x0065c298 n/a __IsZeroMan
+// GOLDTL 0x0065c2b3 n/a __ShrMan
+// GOLDTL 0x0065c340 n/a __ld12cvt
+// GOLDTL 0x0065c4ac n/a __ld12tod
+// GOLDTL 0x0065c4c2 n/a __ld12tod
+// GOLDTL 0x0065c4d8 n/a __ld12told
+// GOLDTL 0x0065c552 n/a __atodbl
+// GOLDTL 0x0065c57f n/a __atoldbl
+// GOLDTL 0x0065c5ad n/a __atodbl
+// GOLDTL 0x0065c5da n/a __fptostr
+// GOLDTL 0x0065c651 n/a __fltout2
+// GOLDTL 0x0065c6ad n/a ___dtold
+// GOLDTL 0x0065c76c n/a __isatty
+// GOLDTL 0x0065c795 n/a _mbstowcs
+// GOLDTL 0x0065c7ee 105 __wctomb_lk
+// GOLDTL 0x0065c860 104 __aulldiv
+// GOLDTL 0x0065c8d0 n/a __aullrem
+// GOLDTL 0x0065c945 n/a __getbuf
+// GOLDTL 0x0065c989 n/a __87except
+// GOLDTL 0x0065ca59 n/a ___strgtold12
+// GOLDTL 0x0065cf2a n/a ___STRINGTOLD
+// GOLDTL 0x0065cf66 n/a _mbstowcs
+// GOLDTL 0x0065cfc3 201 __mbtowc_lk
+// GOLDTL 0x0065d090 n/a __allshl
+// GOLDTL 0x0065d0d8 n/a __ungetc_lk
+// GOLDTL 0x0065d146 n/a _strtol
+// GOLDTL 0x0065d15d n/a _strtoxl
+// GOLDTL 0x0065d390 n/a __sopen
+// GOLDTL 0x0065d65f n/a ___tzset
+// GOLDTL 0x0065d6a3 n/a __tzset_lk
+// GOLDTL 0x0065d92a n/a __isindst
+// GOLDTL 0x0065d94b n/a __isindst_lk
+// GOLDTL 0x0065daf7 n/a _cvtdate
+// GOLDTL 0x0065dc37 n/a _gmtime
+// GOLDTL 0x0065dd44 n/a fcn_0065dd44
+// GOLDTL 0x0065dd55 n/a fcn_0065dd55
+// GOLDTL 0x0065dd66 n/a fcn_0065dd66
+// GOLDTL 0x0065dd77 n/a __ismbbalnum
+// GOLDTL 0x0065dd8b n/a __ismbbalpha
+// GOLDTL 0x0065dd9f n/a __ismbbgraph
+// GOLDTL 0x0065ddb3 n/a __ismbbprint
+// GOLDTL 0x0065ddc7 n/a __ismbbpunct
+// GOLDTL 0x0065ddd8 n/a __ismbblead
+// GOLDTL 0x0065de21 n/a _x_ismbbtype
+// GOLDTL 0x0065de52 n/a __setmbcp
+// GOLDTL 0x0065dfff n/a _getSystemCP
+// GOLDTL 0x0065e049 n/a _CPtoLCID
+// GOLDTL 0x0065e07c n/a _setSBCS
+// GOLDTL 0x0065e0a5 n/a _setSBUpLow
+// GOLDTL 0x0065e23a n/a ___initmbctable
+// GOLDTL 0x0065e2ba n/a ?_ValidateRead@@YAHPBXI@Z
+// GOLDTL 0x0065e2d6 n/a ?_ValidateRead@@YAHPBXI@Z
+// GOLDTL 0x0065e2f2 n/a ?_ValidateExecute@@YAHP6GHXZ@Z
+// GOLDTL 0x0065e30a n/a __Getdays
+// GOLDTL 0x0065e399 n/a __Getmonths
+// GOLDTL 0x0065e42e n/a __Gettnames
+// GOLDTL 0x0065e67b n/a __Strftime
+// GOLDTL 0x0065e775 n/a __expandtime
+// GOLDTL 0x0065eb64 n/a __store_str
+// GOLDTL 0x0065eb8b n/a __store_num
+// GOLDTL 0x0065ebfa n/a __store_number
+// GOLDTL 0x0065ec43 n/a __store_winword
+// GOLDTL 0x0065ef12 n/a ___getlocaleinfo
+// GOLDTL 0x0065f050 453 (static, no archive symbol)
+// GOLDTL 0x0065f220 n/a __strcmpi
+// GOLDTL 0x0065f2f0 n/a __strnicmp
+// GOLDTL 0x0065f3f1 n/a ___addl
+// GOLDTL 0x0065f412 n/a ___add_12
+// GOLDTL 0x0065f470 n/a ___shl_12
+// GOLDTL 0x0065f49e n/a ___shr_12
+// GOLDTL 0x0065f4cb n/a ___mtold12
+// GOLDTL 0x0065f592 n/a _$I10_OUTPUT
+// GOLDTL 0x0065f825 n/a ___ld12mul
+// GOLDTL 0x0065fa45 n/a ___multtenpow12
+// GOLDTL 0x0065fb1a n/a __chsize_lk
+// GOLDTL 0x0065fc60 n/a __getenv_lk
+// GOLDTL 0x0065fcdd n/a ___crtGetLocaleInfoA
+// GOLDTL 0x0065fdf0 n/a ___crtGetLocaleInfoA
+// GOLDTL 0x0065ff0e n/a __chsize
+// GOLDTL 0x0065ff67 n/a __setmode_lk
+// GOLDTL 0x0065ffc8 n/a __mbsnbcoll
+// GOLDTL 0x00660007 n/a ___wtomb_environ
+// GOLDTL 0x00660075 637 ___crtCompareStringA
+// GOLDTL 0x006602f2 n/a _strncnt
+// GOLDTL 0x0066031d n/a ___crtsetenv
+// GOLDTL 0x006604a4 n/a _findenv
+// GOLDTL 0x006604fc n/a _copy_environ
+// GOLDTL 0x00660563 151 __mbschr
+// GOLDTL 0x0066080a 308 __strupr
+// GOLDTL 0x0066093e n/a __mkdir
+// GOLDTL 0x0066096a n/a __getcwd
+// GOLDTL 0x006609ba n/a __getdcwd_lk
+// GOLDTL 0x00660a8f n/a __validdrive
+// GOLDTL 0x00660ac6 n/a __fileno

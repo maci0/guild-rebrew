@@ -31986,6 +31986,34 @@
     "name": "fcn.005de5b0"
   },
   {
+    "va": 6153680,
+    "size": 6,
+    "name": "fcn.005de5d0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 6,
+        "reason": "6-byte jmp [IAT] import thunk (ff 25 + IAT slot); its LIBRARY row already names the import",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:56:45.307272+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6153686,
+    "size": 6,
+    "name": "fcn.005de5d6",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 6,
+        "reason": "6-byte jmp [IAT] import thunk (ff 25 + IAT slot); its LIBRARY row already names the import",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:56:45.307272+00:00"
+      }
+    ]
+  },
+  {
     "va": 6153692,
     "size": 20,
     "name": "fcn.005de5dc"
@@ -32036,6 +32064,20 @@
         "reason": "Goal55 stock strstr.obj has 128 executable bytes through 0x5de87f. Following 10 bytes are a separate mov-edx/jump stub, not part of strstr and not padding. Full stock-object and strchr internal-entry proof retained.",
         "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
         "changed_at": "2026-10-15T18:51:51.881751+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6154368,
+    "size": 10,
+    "name": "fcn.005de880",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 10,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T05:44:16.782018+00:00"
       }
     ]
   },
@@ -32161,7 +32203,7 @@
   },
   {
     "va": 6156544,
-    "size": 188,
+    "size": 6,
     "name": "fcn.005df100",
     "extent_history": [
       {
@@ -32170,6 +32212,27 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
         "changed_at": "2026-10-23T14:52:55.528728+00:00"
+      },
+      {
+        "old_size": 188,
+        "new_size": 6,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6156550,
+    "size": 182,
+    "name": "fcn.005df106",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 182,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
       }
     ]
   },
@@ -32279,13 +32342,45 @@
   },
   {
     "va": 6160898,
-    "size": 110,
-    "name": "fcn.005e0202"
+    "size": 100,
+    "name": "fcn.005e0202",
+    "extent_history": [
+      {
+        "old_size": 110,
+        "new_size": 100,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T05:44:16.782018+00:00"
+      }
+    ]
   },
   {
     "va": 6161008,
-    "size": 29,
-    "name": "fcn.005e0270"
+    "size": 20,
+    "name": "fcn.005e0270",
+    "extent_history": [
+      {
+        "old_size": 29,
+        "new_size": 20,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6161028,
+    "size": 9,
+    "name": "fcn.005e0284",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 9,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
   },
   {
     "va": 6161037,
@@ -32369,8 +32464,31 @@
   },
   {
     "va": 6163537,
-    "size": 65,
-    "name": "fcn.005e0c51"
+    "size": 18,
+    "name": "fcn.005e0c51",
+    "extent_history": [
+      {
+        "old_size": 65,
+        "new_size": 18,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T05:44:16.782018+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6163555,
+    "size": 47,
+    "name": "fcn.005e0c63",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 47,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T05:44:16.782018+00:00"
+      }
+    ]
   },
   {
     "va": 6163602,
@@ -32384,8 +32502,59 @@
   },
   {
     "va": 6163682,
-    "size": 233,
-    "name": "fcn.005e0ce2"
+    "size": 41,
+    "name": "fcn.005e0ce2",
+    "extent_history": [
+      {
+        "old_size": 233,
+        "new_size": 41,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T05:44:16.782018+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6163723,
+    "size": 90,
+    "name": "fcn.005e0d0b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 90,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T05:44:16.782018+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6163813,
+    "size": 78,
+    "name": "fcn.005e0d65",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 78,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T05:44:16.782018+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6163891,
+    "size": 24,
+    "name": "fcn.005e0db3",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 24,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T05:44:16.782018+00:00"
+      }
+    ]
   },
   {
     "va": 6163915,
@@ -32519,13 +32688,255 @@
   },
   {
     "va": 6168567,
-    "size": 338,
-    "name": "fcn.005e1ff7"
+    "size": 140,
+    "name": "fcn.005e1ff7",
+    "extent_history": [
+      {
+        "old_size": 338,
+        "new_size": 140,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168707,
+    "size": 5,
+    "name": "fcn.005e2083",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 5,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168712,
+    "size": 2,
+    "name": "fcn.005e2088",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168714,
+    "size": 2,
+    "name": "fcn.005e208a",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168716,
+    "size": 1,
+    "name": "fcn.005e208c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168717,
+    "size": 7,
+    "name": "fcn.005e208d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 7,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168724,
+    "size": 2,
+    "name": "fcn.005e2094",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168726,
+    "size": 5,
+    "name": "fcn.005e2096",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 5,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168731,
+    "size": 2,
+    "name": "fcn.005e209b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168733,
+    "size": 5,
+    "name": "fcn.005e209d",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 5,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168738,
+    "size": 43,
+    "name": "fcn.005e20a2",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 43,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168781,
+    "size": 2,
+    "name": "fcn.005e20cd",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168783,
+    "size": 40,
+    "name": "fcn.005e20cf",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 40,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168823,
+    "size": 63,
+    "name": "fcn.005e20f7",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 63,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168886,
+    "size": 2,
+    "name": "fcn.005e2136",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 2,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168888,
+    "size": 17,
+    "name": "fcn.005e2138",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 17,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
   },
   {
     "va": 6168905,
-    "size": 23,
-    "name": "fcn.005e2149"
+    "size": 10,
+    "name": "fcn.005e2149",
+    "extent_history": [
+      {
+        "old_size": 23,
+        "new_size": 10,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6168915,
+    "size": 13,
+    "name": "fcn.005e2153",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 13,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
   },
   {
     "va": 6168928,
@@ -32539,8 +32950,157 @@
   },
   {
     "va": 6170409,
-    "size": 573,
-    "name": "fcn.005e2729"
+    "size": 19,
+    "name": "fcn.005e2729",
+    "extent_history": [
+      {
+        "old_size": 573,
+        "new_size": 19,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6170428,
+    "size": 76,
+    "name": "fcn.005e273c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 76,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6170504,
+    "size": 76,
+    "name": "fcn.005e2788",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 76,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6170580,
+    "size": 52,
+    "name": "fcn.005e27d4",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 52,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6170632,
+    "size": 52,
+    "name": "fcn.005e2808",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 52,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6170684,
+    "size": 76,
+    "name": "fcn.005e283c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 76,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6170760,
+    "size": 76,
+    "name": "fcn.005e2888",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 76,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6170836,
+    "size": 52,
+    "name": "fcn.005e28d4",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 52,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6170888,
+    "size": 52,
+    "name": "fcn.005e2908",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 52,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6170940,
+    "size": 21,
+    "name": "fcn.005e293c",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 21,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6170961,
+    "size": 21,
+    "name": "fcn.005e2951",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 21,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
   },
   {
     "va": 6170982,
@@ -32854,8 +33414,73 @@
   },
   {
     "va": 6186616,
-    "size": 260,
-    "name": "fcn.005e6678"
+    "size": 22,
+    "name": "fcn.005e6678",
+    "extent_history": [
+      {
+        "old_size": 260,
+        "new_size": 22,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6186638,
+    "size": 13,
+    "name": "fcn.005e668e",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 13,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6186651,
+    "size": 42,
+    "name": "fcn.005e669b",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 42,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6186693,
+    "size": 20,
+    "name": "fcn.005e66c5",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 20,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6186713,
+    "size": 163,
+    "name": "fcn.005e66d9",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 163,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
   },
   {
     "va": 6186876,
@@ -32989,8 +33614,31 @@
   },
   {
     "va": 6190942,
-    "size": 34,
-    "name": "fcn.005e775e"
+    "size": 19,
+    "name": "fcn.005e775e",
+    "extent_history": [
+      {
+        "old_size": 34,
+        "new_size": 19,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6190961,
+    "size": 15,
+    "name": "fcn.005e7771",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 15,
+        "reason": "asm object split at its external symbols: each piece is one LIBCMT/LIBC function placed by masked exact byte match (.scratch/libcov/place.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:36:06.260299+00:00"
+      }
+    ]
   },
   {
     "va": 6190976,
@@ -33149,8 +33797,17 @@
   },
   {
     "va": 6195538,
-    "size": 46,
-    "name": "fcn.005e8952"
+    "size": 40,
+    "name": "fcn.005e8952",
+    "extent_history": [
+      {
+        "old_size": 46,
+        "new_size": 40,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T05:44:16.782018+00:00"
+      }
+    ]
   },
   {
     "va": 6195584,
@@ -33359,8 +34016,31 @@
   },
   {
     "va": 6204058,
-    "size": 54,
-    "name": "fcn.005eaa9a"
+    "size": 43,
+    "name": "fcn.005eaa9a",
+    "extent_history": [
+      {
+        "old_size": 54,
+        "new_size": 43,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T05:44:16.782018+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6204112,
+    "size": 6,
+    "name": "fcn.005eaad0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 6,
+        "reason": "6-byte jmp [IAT] import thunk (ff 25 + IAT slot); its LIBRARY row already names the import",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T08:56:45.307272+00:00"
+      }
+    ]
   },
   {
     "va": 6204118,
@@ -33394,7 +34074,16 @@
   },
   {
     "va": 6204877,
-    "size": 51,
-    "name": "fcn.005eadcd"
+    "size": 55,
+    "name": "fcn.005eadcd",
+    "extent_history": [
+      {
+        "old_size": 51,
+        "new_size": 55,
+        "reason": "LIBCMT 6.0 SP5 objects placed by masked exact byte match of each COMDAT section (asm objects only into holes); extents follow the object's function boundaries, edited extents keep previously covered code (.scratch/libcov/place.py, plan.py)",
+        "binary_hash": "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8",
+        "changed_at": "2026-11-21T05:44:16.782018+00:00"
+      }
+    ]
   }
 ]
