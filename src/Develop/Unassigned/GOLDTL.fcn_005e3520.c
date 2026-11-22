@@ -1,0 +1,154 @@
+int __cdecl fcn_00470820(int, int, char *);
+void __cdecl fcn_00537320(int);
+void __cdecl fcn_00471db0(int, int);
+void __cdecl fcn_00471d80(int, int);
+int __cdecl d2_SetForm(int, int);
+void __cdecl fcn_005340f0(int);
+void __cdecl d2_SetOverlayAnimation(int, int);
+int __cdecl io_AppendText(char *, ...);
+int __cdecl fcn_00472250(int, int, int);
+void __cdecl d2_SetSlotVisibility(int, int);
+void __cdecl d2_SetElementValue(int, ...);
+void __cdecl fcn_00468cd0(int, int);
+void __cdecl fcn_00468b80(int, int);
+void __cdecl fcn_00468bb0(int, int, ...);
+void __cdecl fcn_00533a60(int, int, int *, int, ...);
+int __cdecl fcn_005373e0(void *, int);
+void __cdecl fcn_00471af0(int, int);
+void __cdecl fcn_005e2660(void);
+int __cdecl fcn_00471f80(int);
+void __cdecl fcn_005e12d0(void);
+void __cdecl d3_ApplyGraphicsOptions(void);
+void __cdecl fcn_005e1ca0(void);
+void __cdecl fcn_00471e30(int);
+
+void __cdecl fcn_005e2510(void);
+void __cdecl fcn_00527420(void);
+void __cdecl fcn_00526db0(char *);
+int __cdecl fcn_00527000(void);
+void __cdecl fcn_005e3b70(void);
+
+/* ADDRESS: GOLDTL 0x005e3520 */
+void __cdecl fcn_005e3520(void)
+{
+  int v1, selection[2];
+  unsigned char v2;
+  unsigned int v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v16;
+  v16 = *(unsigned int *)0x7e46ac & ~0x2000;
+  v1 = 0;
+  v3 = fcn_00470820(0,0,(char *)0x6ad30c);
+  fcn_00537320(v16);
+  fcn_00471db0(v3,1);
+  fcn_00471d80(v3,2);
+  d2_SetForm(v3,0);
+  fcn_005340f0(*(unsigned int *)0x772514);
+  d2_SetOverlayAnimation(0,0);
+  d2_SetForm(v3,2);
+  io_AppendText((char *)0x1c59);
+  d2_SetForm(v3,1);
+  v4 = fcn_00472250(v3,1,0);
+  v5 = fcn_00472250(v3,1,1);
+  v6 = fcn_00472250(v3,1,2);
+  v7 = fcn_00472250(v3,1,3);
+  v8 = fcn_00472250(v3,1,4);
+  v9 = fcn_00472250(v3,1,5);
+  v10 = fcn_00472250(v3,1,6);
+  v11 = fcn_00472250(v3,1,9);
+  v12 = fcn_00472250(v3,1,10);
+  v13 = fcn_00472250(v3,1,0xb);
+  v14 = fcn_00472250(v3,1,0xc);
+  d2_SetElementValue(v4,0,0xa0,*(unsigned int *)0x7766a8);
+  fcn_00468cd0(v4,0x882);
+  fcn_00468b80(v4,*(unsigned int *)0x14ac578);
+  d2_SetElementValue(v5,0,500,*(unsigned int *)0x7766b0);
+  fcn_00468cd0(v5,0x882);
+  fcn_00468b80(v5,*(unsigned int *)0x14ac57c);
+  d2_SetElementValue(v6,0,100,*(unsigned int *)0x7766b4);
+  fcn_00468cd0(v6,0x882);
+  fcn_00468b80(v6,*(unsigned int *)0x14ac580);
+  d2_SetElementValue(v7,0,100,*(unsigned int *)0x7766ac & 0xff);
+  fcn_00468cd0(v7,0x882);
+  fcn_00468b80(v7,*(unsigned int *)0x14ac584);
+  d2_SetElementValue(v8,0,1,*(unsigned int *)0x7766b8 & 0xff);
+  fcn_00468cd0(v8,0x82);
+  fcn_00468b80(v8,*(unsigned int *)0x14ac588);
+  fcn_00468bb0(v8,2,*(unsigned int *)0x14ac50c,*(unsigned int *)0x14ac510);
+  d2_SetSlotVisibility(v8,0);
+  d2_SetElementValue(v9,0,1,*(unsigned int *)0x7766b8 >> 0x10 & 0xff);
+  fcn_00468cd0(v9,0x82);
+  fcn_00468b80(v9,*(unsigned int *)0x14ac58c);
+  fcn_00468bb0(v9,2,*(unsigned int *)0x14ac50c,*(unsigned int *)0x14ac510);
+  d2_SetElementValue(v10,0,1,*(unsigned int *)0x7766b8 >> 0x18);
+  fcn_00468cd0(v10,0x82);
+  fcn_00468b80(v10,*(unsigned int *)0x14ac590);
+  fcn_00468bb0(v10,2,*(unsigned int *)0x14ac50c,*(unsigned int *)0x14ac510);
+  d2_SetElementValue(v11,0,4,*(unsigned int *)0x776708 & 0xff);
+  fcn_00468cd0(v11,0x82);
+  fcn_00468b80(v11,*(unsigned int *)0x14ac594);
+  fcn_00468bb0(v11,5,*(unsigned int *)0x14ac4f8,*(unsigned int *)0x14ac4fc,*(unsigned int *)0x14ac500,*(unsigned int *)0x14ac504,*(unsigned int *)0x14ac508);
+  d2_SetElementValue(v12,0,1,*(unsigned int *)0x776708 >> 8 & 0xff);
+  fcn_00468cd0(v12,0x82);
+  fcn_00468b80(v12,*(unsigned int *)0x14ac598);
+  fcn_00468bb0(v12,2,*(unsigned int *)0x14ac50c,*(unsigned int *)0x14ac510);
+  d2_SetSlotVisibility(v12,0);
+  d2_SetElementValue(v14,0,1,*(unsigned int *)0x77670c & 0xff);
+  fcn_00468cd0(v14,0x82);
+  fcn_00468b80(v14,*(unsigned int *)0x14ac5a4);
+  fcn_00468bb0(v14,2,*(unsigned int *)0x14ac50c,*(unsigned int *)0x14ac510);
+  d2_SetElementValue(v13,0,1,*(unsigned int *)0x776708 >> 0x18);
+  fcn_00468cd0(v13,0x82);
+  fcn_00468b80(v13,*(unsigned int *)0x14ac5a0);
+  fcn_00468bb0(v13,2,*(unsigned int *)0x14ac50c,*(unsigned int *)0x14ac510);
+  d2_SetForm(v3,3);
+  fcn_00533a60(*(unsigned int *)0x772514,0,&selection[0],2,*(unsigned int *)0x14ac5a8,*(unsigned int *)0x14ac5ac);
+  if (fcn_005373e0((void *)fcn_005e3520,v16)) {
+    do {
+      if ((*(unsigned int *)0x14ce8e0) || (*(unsigned char *)0x14cf950 == 1))
+        *(unsigned int *)0x774654 = 1;
+      if (*(unsigned int *)0x100f1dc != -1) {
+        if (*(unsigned int *)0x67d370 != selection[0]) {
+          if (*(unsigned int *)0x67d370 != selection[1]) goto label_5e39ed;
+        }
+        else {
+          v1 = 1;
+        }
+        *(unsigned int *)0x774654 = 1;
+      }
+label_5e39ed:
+      ;
+    } while (fcn_005373e0((void *)fcn_005e3520,v16));
+    if (v1) {
+      *(unsigned int *)0x7766a8 = fcn_00471f80(v4);
+      v2 = fcn_00471f80(v7);
+      *(unsigned char *)0x7766ac = v2;
+      *(unsigned int *)0x7766b0 = fcn_00471f80(v5);
+      *(unsigned int *)0x7766b4 = fcn_00471f80(v6);
+      *(unsigned char *)0x7766b8 = 0;
+      v2 = fcn_00471f80(v9);
+      *(unsigned char *)0x7766ba = v2;
+      v2 = fcn_00471f80(v10);
+      *(unsigned char *)0x7766bb = v2;
+      v2 = fcn_00471f80(v12);
+      *(unsigned char *)0x776709 = v2;
+      v2 = fcn_00471f80(v13);
+      *(unsigned char *)0x77670b = v2;
+      v2 = fcn_00471f80(v14);
+      *(unsigned char *)0x77670c = v2;
+      v16 = fcn_00471f80(v11);
+      if (v16 != (*(unsigned int *)0x776708 & 0xff)) {
+        v2 = fcn_00471f80(v11);
+        *(unsigned char *)0x776708 = v2;
+        fcn_00471af0(v3,0);
+        if (*(unsigned char *)0x774964) {
+          fcn_00527420();
+          fcn_00526db0((char *)fcn_00527000());
+          fcn_005e3b70();
+          *(unsigned int *)0x774714 = 1;
+        }
+      }
+      fcn_005e12d0();
+      fcn_005e2510();
+    }
+  }
+  fcn_00471e30(v3);
+}

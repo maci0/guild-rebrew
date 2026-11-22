@@ -126,7 +126,7 @@ void __cdecl fcn_005e53b0(void *arg)
                     (*(D2_CONTROL_TL*) ui).value_060 = 1;
                 }
                 p = item->entity;
-                if (p && i) cost += fcn_004e99c0((unsigned char)p[0x166]) / 3 + 2;
+                if (i && p) cost += fcn_004e99c0((unsigned char)p[0x166]) / 3 + 2;
             }
             d2_SetForm(window, 2);
             io_AppendText((int)g_6811b0, cost);

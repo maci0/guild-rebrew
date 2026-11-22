@@ -1,0 +1,66 @@
+__declspec(dllimport) unsigned int __stdcall GetPrivateProfileIntA(const char *, const char *, int, const char *);
+__declspec(dllimport) unsigned int __stdcall GetPrivateProfileStringA(const char *, const char *, const char *, char *, unsigned int, const char *);
+
+/* ADDRESS: GOLDTL 0x005e1ca0 */
+void __cdecl fcn_005e1ca0(void)
+{
+    unsigned int v1;
+    unsigned char v2;
+    *(unsigned char *)0x776665 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad298,0,(char *)0x7e22c0);
+    *(unsigned char *)0x776664 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad290,0,(char *)0x7e22c0);
+    *(unsigned char *)0x776666 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad280,0,(char *)0x7e22c0);
+    *(unsigned char *)0x776667 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad270,0,(char *)0x7e22c0);
+    *(unsigned char *)0x776668 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad25c,0,(char *)0x7e22c0);
+    *(unsigned char *)0x776669 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad244,0,(char *)0x7e22c0);
+    *(unsigned char *)0x77666a = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad238,0,(char *)0x7e22c0);
+    *(unsigned char *)0x77666b = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad224,1,(char *)0x7e22c0);
+    *(unsigned char *)0x77666c = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad218,0,(char *)0x7e22c0);
+    *(float *)0x776670 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad208,0,(char *)0x7e22c0) * *(float *)0x662910);
+    *(float *)0x776674 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1f8,0,(char *)0x7e22c0) * *(float *)0x662910);
+    *(float *)0x776678 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1e8,0,(char *)0x7e22c0) * *(float *)0x662910);
+    *(float *)0x77667c = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1d8,0x32,(char *)0x7e22c0) * *(float *)0x662910);
+    *(float *)0x776680 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1cc,100,(char *)0x7e22c0) * *(float *)0x662910);
+    *(float *)0x776684 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1c0,100,(char *)0x7e22c0) * *(float *)0x662910);
+    *(float *)0x776688 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1b4,100,(char *)0x7e22c0) * *(float *)0x662910);
+    *(float *)0x77668c = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1a8,100,(char *)0x7e22c0) * *(float *)0x662910);
+    *(float *)0x776690 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1a0,100,(char *)0x7e22c0) * *(float *)0x662910);
+    *(float *)0x776694 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad198,100,(char *)0x7e22c0) * *(float *)0x662910);
+    *(float *)0x776698 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad190,100,(char *)0x7e22c0) * *(float *)0x662910);
+    *(float *)0x77669c = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad188,100,(char *)0x7e22c0) * *(float *)0x662910);
+    *(unsigned char *)0x776660 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad254,0,(char *)0x7e22c0);
+    v2 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6a4654,0,(char *)0x7e22c0);
+    *(unsigned char *)0x77534c = v2;
+    v1 = *(unsigned int *)(((*(unsigned int *)0x77534c & 255) * 8) + 0x6acf6c);
+    *(unsigned int *)0x6acf80 = *(unsigned int *)(((*(unsigned int *)0x77534c & 255) * 8) + 0x6acf68);
+    *(unsigned int *)0x6acf84 = v1;
+    *(unsigned char *)0x7766a0 = GetPrivateProfileIntA((char *)0x6a4710,(char *)0x6ad17c,0,(char *)0x7e22c0);
+    *(unsigned char *)0x7766a1 = GetPrivateProfileIntA((char *)0x6a4710,(char *)0x6ad174,0,(char *)0x7e22c0);
+    *(unsigned char *)0x7766a2 = GetPrivateProfileIntA((char *)0x6a4710,(char *)0x6ad16c,0,(char *)0x7e22c0);
+    *(unsigned char *)0x7766a3 = GetPrivateProfileIntA((char *)0x6a4710,(char *)0x6ad160,0,(char *)0x7e22c0);
+    *(unsigned char *)0x7766a4 = GetPrivateProfileIntA((char *)0x6a4710,(char *)0x6ad154,0,(char *)0x7e22c0);
+    *(unsigned int *)0x7766a8 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad14c,0,(char *)0x7e22c0);
+    *(unsigned int *)0x7766b0 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad140,0,(char *)0x7e22c0);
+    *(unsigned char *)0x7766ac = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad120,0,(char *)0x7e22c0);
+    *(unsigned int *)0x7766b4 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad130,0,(char *)0x7e22c0);
+    *(unsigned char *)0x7766b8 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad110,0,(char *)0x7e22c0);
+    *(unsigned char *)0x7766b9 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad100,1,(char *)0x7e22c0);
+    *(unsigned char *)0x7766ba = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad0c8,1,(char *)0x7e22c0);
+    *(unsigned char *)0x7766bb = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad0b8,1,(char *)0x7e22c0);
+    *(unsigned char *)0x7766b8 = 0;
+    GetPrivateProfileStringA((char *)0x6a81bc,(char *)0x6ad0f8,(char *)0x6a463c,(char *)0x7766bc,0x40,(char *)0x7e22c0);
+    *(unsigned int *)0x7766fc = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad0ec,0,(char *)0x7e22c0);
+    *(unsigned int *)0x776700 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad0e4,1,(char *)0x7e22c0);
+    *(unsigned int *)0x776704 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad0d8,1,(char *)0x7e22c0);
+    *(unsigned char *)0x776708 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad0ac,1,(char *)0x7e22c0);
+    *(unsigned char *)0x776709 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad0a0,1,(char *)0x7e22c0);
+    *(unsigned char *)0x77670a = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad094,1,(char *)0x7e22c0);
+    *(unsigned char *)0x77670b = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad08c,1,(char *)0x7e22c0);
+    *(unsigned char *)0x77670c = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad080,1,(char *)0x7e22c0);
+    *(unsigned int *)0x7e1fa0 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad074,2,(char *)0x7e22c0);
+    *(unsigned int *)0x7e1fa4 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad068,2,(char *)0x7e22c0);
+    *(unsigned int *)0x7e1fa8 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad05c,2,(char *)0x7e22c0);
+    *(unsigned int *)0x7e1fac = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad050,2,(char *)0x7e22c0);
+    *(unsigned int *)0x7e1fb0 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad044,2,(char *)0x7e22c0);
+    *(unsigned int *)0x7e1fb4 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad038,2,(char *)0x7e22c0);
+    *(unsigned int *)0x7e1fb8 = GetPrivateProfileIntA((char *)0x6a81bc,(char *)0x6ad02c,2,(char *)0x7e22c0);
+}

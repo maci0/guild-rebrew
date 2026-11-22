@@ -27,7 +27,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 extern int g_100f1dc;
-extern int g_666018;
+extern int g_666018, g_66601c;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_005263d0(int, int, int);
@@ -76,7 +76,7 @@ void __cdecl fcn_005e5a50(char* entity)
 	memset(query, 0, sizeof(query));
 	memset(query + 7, -1, 8 * sizeof(int));
 	query[2] = g_666018;
-	query[3] = *(int*) 0x66601c;
+	query[3] = g_66601c;
 	query[0] = 1;
 	query[1] = 0x400;
 	query[4] = 6;

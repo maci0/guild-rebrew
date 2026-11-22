@@ -1,7 +1,6 @@
-
-
 void __cdecl fcn_00471e30(int);
 
+/* ADDRESS: GOLDTL 0x005e6dd0 */
 void __cdecl fcn_005e6dd0(void)
 {
 	fcn_00471e30(*(int*) 0x6ad568);

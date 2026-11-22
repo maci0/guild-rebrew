@@ -99844,7 +99844,7 @@
   },
   {
     "va": 6164368,
-    "size": 805,
+    "size": 820,
     "name": "fcn.005e0f90",
     "extent_history": [
       {
@@ -99853,82 +99853,41 @@
         "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-24T13:52:00.327431+00:00"
+      },
+      {
+        "old_size": 805,
+        "new_size": 821,
+        "reason": "0x5e0f90 d2_ShowNetworkLoadGame ends with ret at 0x5e12c4 (821 bytes; 0x5e12b5 was its epilogue); the next function starts at 0x5e12d0 (sub esp,0x20) and runs to the d3dx8 body at 0x5e1bfe; 0x5e7738 starts mid-instruction inside the game function at 0x5e6df0",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T06:52:01.252453+00:00"
+      },
+      {
+        "old_size": 821,
+        "new_size": 820,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
   {
-    "va": 6165173,
-    "size": 2377,
-    "name": "fcn.005e12b5",
+    "va": 6165200,
+    "size": 2509,
+    "name": "fcn.005e12d0",
     "extent_history": [
       {
         "old_size": null,
-        "new_size": 27,
-        "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
+        "new_size": 2350,
+        "reason": "0x5e0f90 d2_ShowNetworkLoadGame ends with ret at 0x5e12c4 (821 bytes; 0x5e12b5 was its epilogue); the next function starts at 0x5e12d0 (sub esp,0x20) and runs to the d3dx8 body at 0x5e1bfe; 0x5e7738 starts mid-instruction inside the game function at 0x5e6df0",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:00.330238+00:00"
+        "changed_at": "2026-11-22T06:52:01.252453+00:00"
       },
       {
-        "old_size": 27,
-        "new_size": 2377,
-        "reason": "Phase B merges: absorb contiguous interior inventory fragments into the phase-A library owner rows; protected live game claims and retirements excluded",
+        "old_size": 2350,
+        "new_size": 2509,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:40.685753+00:00",
-        "merged": {
-          "va": 6165200,
-          "size": 2350,
-          "name": "fcn.005e12d0",
-          "extent_history": [
-            {
-              "old_size": 2509,
-              "new_size": 2350,
-              "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
-              "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-              "changed_at": "2026-10-24T13:52:00.330247+00:00"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  {
-    "va": 6167550,
-    "size": 1685,
-    "name": "fcn.005e1bfe",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 162,
-        "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:00.333007+00:00"
-      },
-      {
-        "old_size": 162,
-        "new_size": 1685,
-        "reason": "Phase B merges: absorb contiguous interior inventory fragments into the phase-A library owner rows; protected live game claims and retirements excluded",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:40.685836+00:00",
-        "merged": {
-          "va": 6167712,
-          "size": 1523,
-          "name": "fcn.005e1ca0",
-          "extent_history": []
-        }
-      },
-      {
-        "old_size": 1685,
-        "new_size": 1698,
-        "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T06:15:08.729538+00:00"
-      },
-      {
-        "old_size": 1698,
-        "new_size": 1685,
-        "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-29T10:04:44.131593+00:00"
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
@@ -99950,6 +99909,20 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:44.131597+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6167712,
+    "size": 1523,
+    "name": "fcn.005e1ca0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1523,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
@@ -100017,89 +99990,21 @@
     ]
   },
   {
-    "va": 6171440,
-    "size": 1565,
-    "name": "fcn.005e2b30",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 48,
-        "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:00.335777+00:00"
-      },
-      {
-        "old_size": 48,
-        "new_size": 1565,
-        "reason": "Phase B merges: absorb contiguous interior inventory fragments into the phase-A library owner rows; protected live game claims and retirements excluded",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:40.685904+00:00",
-        "merged": {
-          "va": 6171488,
-          "size": 1517,
-          "name": "fcn.005e2b60",
-          "extent_history": []
-        }
-      },
-      {
-        "old_size": 1565,
-        "new_size": 1568,
-        "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T06:15:08.729549+00:00"
-      },
-      {
-        "old_size": 1568,
-        "new_size": 1565,
-        "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-29T10:04:44.131605+00:00"
-      }
-    ]
-  },
-  {
     "va": 6173008,
     "size": 974,
     "name": "fcn.005e3150"
   },
   {
-    "va": 6173982,
-    "size": 1516,
-    "name": "fcn.005e351e",
+    "va": 6170208,
+    "size": 1265,
+    "name": "fcn.005e2660",
     "extent_history": [
       {
         "old_size": null,
-        "new_size": 2,
-        "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
+        "new_size": 1265,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:00.338550+00:00"
-      },
-      {
-        "old_size": 2,
-        "new_size": 1516,
-        "reason": "Phase B merges: absorb contiguous interior inventory fragments into the phase-A library owner rows; protected live game claims and retirements excluded",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:40.685967+00:00",
-        "merged": {
-          "va": 6173984,
-          "size": 1514,
-          "name": "fcn.005e3520",
-          "extent_history": []
-        }
-      },
-      {
-        "old_size": 1516,
-        "new_size": 1522,
-        "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T06:15:08.729553+00:00"
-      },
-      {
-        "old_size": 1522,
-        "new_size": 1516,
-        "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-29T10:04:44.131608+00:00"
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
@@ -100121,6 +100026,20 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:44.131611+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6171488,
+    "size": 1517,
+    "name": "fcn.005e2b60",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1517,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
@@ -100156,6 +100075,20 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:44.131617+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6173984,
+    "size": 1514,
+    "name": "fcn.005e3520",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1514,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
@@ -100293,27 +100226,6 @@
     ]
   },
   {
-    "va": 6177767,
-    "size": 1070,
-    "name": "fcn.005e43e7",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 1081,
-        "reason": "Re-admit the remainder of a retired inventory row at the control-flow closure end: the head entry now ends where the function ends, and these bytes continue past it as their own entry.",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T09:54:43.340987+00:00"
-      },
-      {
-        "old_size": 1081,
-        "new_size": 1070,
-        "reason": "Band extents over-extend past the last ret into alignment filler or a following object; trim each listed extent to the end of its last ret instruction. This is the same reviewed boundary evidence used for the other filler tails.",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T18:56:44.949190+00:00"
-      }
-    ]
-  },
-  {
     "va": 6178848,
     "size": 332,
     "name": "fcn.005e4820",
@@ -100394,6 +100306,20 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:44.131648+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6177776,
+    "size": 1061,
+    "name": "fcn.005e43f0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1061,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
@@ -100678,29 +100604,8 @@
     ]
   },
   {
-    "va": 6188493,
-    "size": 28,
-    "name": "fcn.005e6dcd",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 35,
-        "reason": "Re-admit the remainder of a retired inventory row at the control-flow closure end: the head entry now ends where the function ends, and these bytes continue past it as their own entry.",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T09:54:43.346596+00:00"
-      },
-      {
-        "old_size": 35,
-        "new_size": 28,
-        "reason": "Band extents over-extend past the last ret into alignment filler or a following object; trim each listed extent to the end of its last ret instruction. This is the same reviewed boundary evidence used for the other filler tails.",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T18:56:44.949222+00:00"
-      }
-    ]
-  },
-  {
     "va": 6188528,
-    "size": 2376,
+    "size": 1,
     "name": "fcn.005e6df0",
     "extent_history": [
       {
@@ -100709,53 +100614,67 @@
         "reason": "Reviewed native boundary repair in the declared static D3DX8 band (target external_ranges 0x5e0000-0x64ffff): status --json reports each listed range as NO_FUNCTION (bytes in no metadata-backed span) and capstone decodes the range start as code or data. Each container row below over-extends over that range, and the range ends at the following inventory start. Trim the container at the new boundary and admit the measured range as its own inventory entry so the band is fully tiled. These are library-band accounting extents, not reconstructed game functions.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T07:05:06.777553+00:00"
-      }
-    ]
-  },
-  {
-    "va": 6190904,
-    "size": 1771,
-    "name": "fcn.005e7738",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 1080,
-        "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:00.350079+00:00"
       },
       {
-        "old_size": 1080,
-        "new_size": 1771,
-        "reason": "Phase B merges: absorb contiguous interior inventory fragments into the phase-A library owner rows; protected live game claims and retirements excluded",
+        "old_size": 2376,
+        "new_size": 4147,
+        "reason": "0x5e0f90 d2_ShowNetworkLoadGame ends with ret at 0x5e12c4 (821 bytes; 0x5e12b5 was its epilogue); the next function starts at 0x5e12d0 (sub esp,0x20) and runs to the d3dx8 body at 0x5e1bfe; 0x5e7738 starts mid-instruction inside the game function at 0x5e6df0",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:40.686220+00:00",
+        "changed_at": "2026-11-22T06:52:01.252453+00:00",
         "merged": {
-          "va": 6191984,
-          "size": 691,
-          "name": "fcn.005e7b70",
-          "extent_history": []
+          "va": 6190904,
+          "size": 1771,
+          "name": "fcn.005e7738",
+          "extent_history": [
+            {
+              "old_size": null,
+              "new_size": 1080,
+              "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
+              "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+              "changed_at": "2026-10-24T13:52:00.350079+00:00"
+            },
+            {
+              "old_size": 1080,
+              "new_size": 1771,
+              "reason": "Phase B merges: absorb contiguous interior inventory fragments into the phase-A library owner rows; protected live game claims and retirements excluded",
+              "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+              "changed_at": "2026-10-24T13:52:40.686220+00:00",
+              "merged": {
+                "va": 6191984,
+                "size": 691,
+                "name": "fcn.005e7b70",
+                "extent_history": []
+              }
+            },
+            {
+              "old_size": 1771,
+              "new_size": 1784,
+              "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
+              "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+              "changed_at": "2026-10-25T06:15:08.729600+00:00"
+            },
+            {
+              "old_size": 1784,
+              "new_size": 1771,
+              "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
+              "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+              "changed_at": "2026-10-29T10:04:44.131670+00:00"
+            }
+          ]
         }
       },
       {
-        "old_size": 1771,
-        "new_size": 1784,
-        "reason": "Reviewed native boundary repair: the inventory entry ends mid-body and the following gap continues the same function with no new prologue (capstone decodes the gap continuously as code and the next inventory entry is a split part). Extending the preceding entry restores one owner for the split span.",
+        "old_size": 4147,
+        "new_size": 1,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T06:15:08.729600+00:00"
-      },
-      {
-        "old_size": 1784,
-        "new_size": 1771,
-        "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-29T10:04:44.131670+00:00"
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
   {
     "va": 6192688,
-    "size": 2598,
+    "size": 2577,
     "name": "fcn.005e7e30",
     "extent_history": [
       {
@@ -100771,6 +100690,13 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:44.131673+00:00"
+      },
+      {
+        "old_size": 2598,
+        "new_size": 2577,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
@@ -100824,6 +100750,20 @@
     ]
   },
   {
+    "va": 6188496,
+    "size": 25,
+    "name": "fcn.005e6dd0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 25,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
+      }
+    ]
+  },
+  {
     "va": 6196224,
     "size": 241,
     "name": "fcn.005e8c00",
@@ -100838,6 +100778,34 @@
     ]
   },
   {
+    "va": 6188544,
+    "size": 3436,
+    "name": "fcn.005e6e00",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 3436,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6191984,
+    "size": 691,
+    "name": "fcn.005e7b70",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 691,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
+      }
+    ]
+  },
+  {
     "va": 6196480,
     "size": 223,
     "name": "fcn.005e8d00",
@@ -100848,6 +100816,20 @@
         "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-29T10:04:44.131684+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6195280,
+    "size": 6,
+    "name": "fcn.005e8850",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 6,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
@@ -100929,75 +100911,6 @@
     ]
   },
   {
-    "va": 6198272,
-    "size": 1120,
-    "name": "fcn.005e9400",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 176,
-        "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:00.352823+00:00"
-      },
-      {
-        "old_size": 176,
-        "new_size": 1120,
-        "reason": "Phase B merges: absorb contiguous interior inventory fragments into the phase-A library owner rows; protected live game claims and retirements excluded",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:40.686283+00:00",
-        "merged": {
-          "va": 6198448,
-          "size": 944,
-          "name": "fcn.005e94b0",
-          "extent_history": [
-            {
-              "old_size": 960,
-              "new_size": 944,
-              "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
-              "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-              "changed_at": "2026-10-24T13:52:00.352829+00:00"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  {
-    "va": 6199392,
-    "size": 1334,
-    "name": "fcn.005e9860",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 16,
-        "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:00.355782+00:00"
-      },
-      {
-        "old_size": 16,
-        "new_size": 1344,
-        "reason": "Phase B merges: absorb contiguous interior inventory fragments into the phase-A library owner rows; protected live game claims and retirements excluded",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:40.686346+00:00",
-        "merged": {
-          "va": 6199408,
-          "size": 1328,
-          "name": "fcn.005e9870",
-          "extent_history": []
-        }
-      },
-      {
-        "old_size": 1344,
-        "new_size": 1334,
-        "reason": "Reviewed linker-fill tail: reachable code ends at a terminator and every byte up to the next inventory start is NOP/INT3 fill, so the stored extent includes alignment padding",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-29T10:04:44.131694+00:00"
-      }
-    ]
-  },
-  {
     "va": 6200736,
     "size": 1318,
     "name": "fcn.005e9da0",
@@ -101033,29 +100946,8 @@
     ]
   },
   {
-    "va": 6202454,
-    "size": 108,
-    "name": "fcn.005ea456",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 122,
-        "reason": "Re-admit the remainder of a retired inventory row at the control-flow closure end: the head entry now ends where the function ends, and these bytes continue past it as their own entry.",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T09:54:43.349484+00:00"
-      },
-      {
-        "old_size": 122,
-        "new_size": 108,
-        "reason": "Band extents over-extend past the last ret into alignment filler or a following object; trim each listed extent to the end of its last ret instruction. This is the same reviewed boundary evidence used for the other filler tails.",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-25T18:56:44.949228+00:00"
-      }
-    ]
-  },
-  {
     "va": 6202576,
-    "size": 240,
+    "size": 727,
     "name": "fcn.005ea4d0",
     "extent_history": [
       {
@@ -101064,69 +100956,13 @@
         "reason": "Reviewed native boundary repair in the declared static D3DX8 band (target external_ranges 0x5e0000-0x64ffff): status --json reports each listed range as NO_FUNCTION (bytes in no metadata-backed span) and capstone decodes the range start as code or data. Each container row below over-extends over that range, and the range ends at the following inventory start. Trim the container at the new boundary and admit the measured range as its own inventory entry so the band is fully tiled. These are library-band accounting extents, not reconstructed game functions.",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-10-25T07:05:06.780706+00:00"
-      }
-    ]
-  },
-  {
-    "va": 6202816,
-    "size": 487,
-    "name": "fcn.005ea5c0",
-    "extent_history": [
-      {
-        "old_size": null,
-        "new_size": 496,
-        "reason": "Phase A extents: owner starts from the audit link map clamped to the next inventory start; straddling rows trimmed at owner boundaries; protected live game claims and retirements excluded",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:00.361372+00:00"
       },
       {
-        "old_size": 496,
-        "new_size": 502,
-        "reason": "Phase B merges: absorb contiguous interior inventory fragments into the phase-A library owner rows; protected live game claims and retirements excluded",
+        "old_size": 240,
+        "new_size": 727,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:40.686535+00:00",
-        "merged": {
-          "va": 6203312,
-          "size": 6,
-          "name": "fcn.005ea7b0",
-          "extent_history": [
-            {
-              "old_size": 800,
-              "new_size": 6,
-              "reason": "Stored extent starts with a 5-6 byte jump; trailing bytes are either fill or a separate following function, so the row shrinks to the body and the fragment becomes its own row",
-              "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-              "changed_at": "2026-10-23T19:08:23.016260+00:00"
-            }
-          ]
-        }
-      },
-      {
-        "old_size": 502,
-        "new_size": 1296,
-        "reason": "Phase B merges: absorb contiguous interior inventory fragments into the phase-A library owner rows; protected live game claims and retirements excluded",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-10-24T13:52:40.686597+00:00",
-        "merged": {
-          "va": 6203318,
-          "size": 794,
-          "name": "fcn.005ea7b6",
-          "extent_history": [
-            {
-              "old_size": null,
-              "new_size": 794,
-              "reason": "Stored extent starts with a 5-6 byte jump; trailing bytes are either fill or a separate following function, so the row shrinks to the body and the fragment becomes its own row",
-              "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-              "changed_at": "2026-10-23T19:08:23.018781+00:00"
-            }
-          ]
-        }
-      },
-      {
-        "old_size": 1296,
-        "new_size": 487,
-        "reason": "sse2_atan2 ends with ret at 0x5ea7a6 (then nop padding); 0x5ea7b0-0x5eaace are 133 six-byte jmp [IAT] import thunks, each its own linker-made function",
-        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
-        "changed_at": "2026-11-21T18:38:40.636166+00:00"
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
@@ -101159,6 +100995,20 @@
     ]
   },
   {
+    "va": 6197472,
+    "size": 964,
+    "name": "fcn.005e90e0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 964,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
+      }
+    ]
+  },
+  {
     "va": 6203324,
     "size": 6,
     "name": "fcn.005ea7bc",
@@ -101173,6 +101023,20 @@
     ]
   },
   {
+    "va": 6198448,
+    "size": 958,
+    "name": "fcn.005e94b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 958,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
+      }
+    ]
+  },
+  {
     "va": 6203330,
     "size": 6,
     "name": "fcn.005ea7c2",
@@ -101183,6 +101047,20 @@
         "reason": "sse2_atan2 ends with ret at 0x5ea7a6 (then nop padding); 0x5ea7b0-0x5eaace are 133 six-byte jmp [IAT] import thunks, each its own linker-made function",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-11-21T18:38:40.636166+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6199408,
+    "size": 1318,
+    "name": "fcn.005e9870",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1318,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
@@ -101225,6 +101103,20 @@
         "reason": "sse2_atan2 ends with ret at 0x5ea7a6 (then nop padding); 0x5ea7b0-0x5eaace are 133 six-byte jmp [IAT] import thunks, each its own linker-made function",
         "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
         "changed_at": "2026-11-21T18:38:40.636166+00:00"
+      }
+    ]
+  },
+  {
+    "va": 6202464,
+    "size": 98,
+    "name": "fcn.005ea460",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 98,
+        "reason": "GoldTL game band 0x5e0000-0x5ea7af rebuilt from rebrew binary functions starts confirmed by the bytes (each start follows a ret or jmp and padding); sizes end at the last code byte before padding; nine fragment starts inside other functions retired (.scratch/libcov/band_plan.py)",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-22T07:38:08.608484+00:00"
       }
     ]
   },
