@@ -555066,10 +555066,12 @@ changed_at = "2026-11-21T20:02:04.746661+00:00"
 updated_by = "verify"
 ["SERVER.0x1001a160"]
 size = 6
-file = "src/library_winsock.h"
+file = "src/library_ws2_32.h"
 symbol = "_closesocket@4"
 kind = "LIBRARY"
 name = "closesocket@4"
+updated_by = "rehome"
+updated_at = "2026-11-22T04:35:53+00:00"
 
 [["SERVER.0x1001a160".status_history]]
 old_status = "EXACT"
@@ -555078,10 +555080,12 @@ changed_at = "2026-10-04T06:16:38.081141+00:00"
 updated_by = ""
 ["SERVER.0x1001a166"]
 size = 6
-file = "src/library_winsock.h"
+file = "src/library_ws2_32.h"
 symbol = "_sendto@24"
 kind = "LIBRARY"
 name = "sendto@24"
+updated_by = "rehome"
+updated_at = "2026-11-22T04:35:53+00:00"
 
 [["SERVER.0x1001a166".status_history]]
 old_status = "EXACT"
@@ -555090,10 +555094,12 @@ changed_at = "2026-10-04T06:16:38.081141+00:00"
 updated_by = ""
 ["SERVER.0x1001a16c"]
 size = 6
-file = "src/library_winsock.h"
+file = "src/library_ws2_32.h"
 symbol = "_bind@12"
 kind = "LIBRARY"
 name = "bind@12"
+updated_by = "rehome"
+updated_at = "2026-11-22T04:35:53+00:00"
 
 [["SERVER.0x1001a16c".status_history]]
 old_status = "EXACT"
@@ -555102,10 +555108,12 @@ changed_at = "2026-10-04T06:16:38.081141+00:00"
 updated_by = ""
 ["SERVER.0x1001a172"]
 size = 6
-file = "src/library_winsock.h"
+file = "src/library_ws2_32.h"
 symbol = "_htons@4"
 kind = "LIBRARY"
 name = "htons@4"
+updated_by = "rehome"
+updated_at = "2026-11-22T04:35:53+00:00"
 
 [["SERVER.0x1001a172".status_history]]
 old_status = "EXACT"
@@ -555114,10 +555122,12 @@ changed_at = "2026-10-04T06:16:38.081141+00:00"
 updated_by = ""
 ["SERVER.0x1001a178"]
 size = 6
-file = "src/library_winsock.h"
+file = "src/library_ws2_32.h"
 symbol = "_htonl@4"
 kind = "LIBRARY"
 name = "htonl@4"
+updated_by = "rehome"
+updated_at = "2026-11-22T04:35:53+00:00"
 
 [["SERVER.0x1001a178".status_history]]
 old_status = "EXACT"
@@ -555126,10 +555136,12 @@ changed_at = "2026-10-04T06:16:38.081141+00:00"
 updated_by = ""
 ["SERVER.0x1001a17e"]
 size = 6
-file = "src/library_winsock.h"
+file = "src/library_ws2_32.h"
 symbol = "_setsockopt@20"
 kind = "LIBRARY"
 name = "setsockopt@20"
+updated_by = "rehome"
+updated_at = "2026-11-22T04:35:53+00:00"
 
 [["SERVER.0x1001a17e".status_history]]
 old_status = "EXACT"
@@ -555138,10 +555150,12 @@ changed_at = "2026-10-04T06:16:38.081141+00:00"
 updated_by = ""
 ["SERVER.0x1001a184"]
 size = 6
-file = "src/library_winsock.h"
+file = "src/library_ws2_32.h"
 symbol = "_socket@12"
 kind = "LIBRARY"
 name = "socket@12"
+updated_by = "rehome"
+updated_at = "2026-11-22T04:35:53+00:00"
 
 [["SERVER.0x1001a184".status_history]]
 old_status = "EXACT"
@@ -798288,131 +798302,175 @@ symbol = "timeKillEvent"
 ["WS2_32.0x005eaa3e"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_2"
-symbol = "ordinal_2"
+name = "bind"
+symbol = "_bind@12"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa44"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_9"
-symbol = "ordinal_9"
+name = "htons"
+symbol = "_htons@4"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa4a"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_8"
-symbol = "ordinal_8"
+name = "htonl"
+symbol = "_htonl@4"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa50"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_21"
-symbol = "ordinal_21"
+name = "setsockopt"
+symbol = "_setsockopt@20"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa56"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_23"
-symbol = "ordinal_23"
+name = "socket"
+symbol = "_socket@12"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa5c"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_115"
-symbol = "ordinal_115"
+name = "WSAStartup"
+symbol = "_WSAStartup@8"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa62"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_3"
-symbol = "ordinal_3"
+name = "closesocket"
+symbol = "_closesocket@4"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa68"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_20"
-symbol = "ordinal_20"
+name = "sendto"
+symbol = "_sendto@24"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa6e"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_12"
-symbol = "ordinal_12"
+name = "inet_ntoa"
+symbol = "_inet_ntoa@4"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa74"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_17"
-symbol = "ordinal_17"
+name = "recvfrom"
+symbol = "_recvfrom@24"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa7a"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_10"
-symbol = "ordinal_10"
+name = "ioctlsocket"
+symbol = "_ioctlsocket@12"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa80"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_116"
-symbol = "ordinal_116"
+name = "WSACleanup"
+symbol = "_WSACleanup@0"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa86"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_111"
-symbol = "ordinal_111"
+name = "WSAGetLastError"
+symbol = "_WSAGetLastError@0"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa8c"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_52"
-symbol = "ordinal_52"
+name = "gethostbyname"
+symbol = "_gethostbyname@4"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa92"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_57"
-symbol = "ordinal_57"
+name = "gethostname"
+symbol = "_gethostname@8"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa98"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_7"
-symbol = "ordinal_7"
+name = "getsockopt"
+symbol = "_getsockopt@20"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaa9e"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_22"
-symbol = "ordinal_22"
+name = "shutdown"
+symbol = "_shutdown@8"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaaa4"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_18"
-symbol = "ordinal_18"
+name = "select"
+symbol = "_select@20"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaaaa"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_4"
-symbol = "ordinal_4"
+name = "connect"
+symbol = "_connect@12"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaab0"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_11"
-symbol = "ordinal_11"
+name = "inet_addr"
+symbol = "_inet_addr@4"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaab6"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_16"
-symbol = "ordinal_16"
+name = "recv"
+symbol = "_recv@16"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
 
 ["WS2_32.0x005eaabc"]
 file = "src/library_ws2_32.h"
 kind = "LIBRARY"
-name = "ordinal_19"
-symbol = "ordinal_19"
+name = "send"
+symbol = "_send@16"
+updated_by = "match"
+updated_at = "2026-11-22T04:35:38+00:00"
