@@ -62,7 +62,7 @@ void __cdecl sv_UpdateSceneHover(void)
 	int limit;
 
 	g_7746a4 = 0;
-	if (g_7725c4 != 0 && g_7725c4 <= 8) {
+	if (g_7725c4 >= 1 && g_7725c4 <= 8) {
 		g_7746a4 = 0;
 		return;
 	}

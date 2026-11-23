@@ -24,7 +24,7 @@ void __cdecl d2_ShowTitleAward(char* o)
 {
 	short* slot;
 	char* g;
-	char buf[0x1fc];
+	char buf[0x200];
 	int state;
 	int st;
 	int code;
@@ -129,10 +129,10 @@ void __cdecl d2_ShowTitleAward(char* o)
 		}
 		fcn_004c30a0(-7, 0, buf, 0, 100);
 		fcn_004c30a0(-7, 0, "MausclickLinks_s_01", -1, 0);
-		if (*(char*) (g + 9))
-			end = *(int*) (o + 0xc0) + 0x27b;
-		else
+		if (*(char*) (g + 9) == 0)
 			end = 0x253;
+		else
+			end = *(int*) (o + 0xc0) + 0x27b;
 		io_AppendText(kind, code, (int) (o + 0xac), end);
 	} else {
 		st = *(int*) (o + 0xc0);
@@ -143,10 +143,10 @@ void __cdecl d2_ShowTitleAward(char* o)
 			kind = 0x42b0;
 		else if (st == 0x23)
 			kind = 0x42ae;
-		if (*(char*) (g + 9))
-			end = st + 0x27b;
-		else
+		if (*(char*) (g + 9) == 0)
 			end = 0x253;
+		else
+			end = st + 0x27b;
 		io_AppendText(kind, *(unsigned short*) g, end);
 	}
 	d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 2);

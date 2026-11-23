@@ -28,14 +28,14 @@ void __cdecl fcn_00476a50(int x, int y, Surf* s, unsigned char* dst)
 		break;
 	case 24:
 		off = (s->pitch * y + x) * n;
-		b = s->bits;
-		c0 = b[off]; c1 = b[off + 1]; c2 = b[off + 2];
+		b = s->bits + off;
+		c0 = b[0]; c1 = b[1]; c2 = b[2];
 
 		break;
 	case 32:
 		off = s->pitch * y + x;
-		b = s->bits;
-		c0 = b[off * 4 + 2]; c1 = b[off * 4 + 1]; c2 = b[off * 4];
+		b = s->bits + off * 4;
+		c0 = b[2]; c1 = b[1]; c2 = b[0];
 
 		break;
 	default:

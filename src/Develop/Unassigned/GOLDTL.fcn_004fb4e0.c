@@ -12,6 +12,8 @@ void __cdecl fcn_004fb4e0(char* a)
 	int j;
 	unsigned char w;
 
+	count = 0;
+	sum = 0;
 	*(int*) ((char*) 0x99f5e0 + 0x00) = *(int*) (a + 0x00);
 	*(int*) ((char*) 0x99f5e0 + 0x04) = *(int*) (a + 0x04);
 	*(int*) ((char*) 0x99f5e0 + 0x08) = *(int*) (a + 0x08);
@@ -32,8 +34,6 @@ void __cdecl fcn_004fb4e0(char* a)
 	g_773d4c = f18;
 	g_773d50 = f14;
 
-	count = 0;
-	sum = 0;
 	acc[0] = 0;
 	acc[1] = 0;
 	acc[2] = 0;

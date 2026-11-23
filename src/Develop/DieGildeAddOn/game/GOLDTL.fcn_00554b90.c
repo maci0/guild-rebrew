@@ -38,13 +38,12 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 /* ADDRESS: GOLDTL 0x00554b90 */
 void __cdecl fcn_00554b90(char* e)
 {
-	int n;
-	int ids[8];
+	struct { int n; int ids[8]; } L;
 	int vals[8];
 	char msg[0x114];
 	char buf[0x200];
 	House_554b90* h;
-
+	int i;
 	int k;
 	int m;
 	int v;
@@ -65,7 +64,7 @@ void __cdecl fcn_00554b90(char* e)
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x11be, r, *(int*) (e + 0xb0));
-		for (h = g_7f4ca0; h < g_7f4ca0 + 768; h++) {
+		for (i = 0; i < 768; i++) { h = &g_7f4ca0[i];
 
 			if ((h->type == 6 || h->type == 7) && h->level > 0) {
 				fcn_00545d40(h->handle, h->handle, buf, 0, 0x601, 0);
@@ -77,18 +76,18 @@ void __cdecl fcn_00554b90(char* e)
 		*(int*) (e + 0x84) = fcn_004c5620(1, e);
 		return;
 	case 1:
-		memset(ids, 0xff, sizeof(ids));
+		memset(L.ids, 0xff, sizeof(L.ids));
 		memset(vals, 0, sizeof(vals));
 		memset(msg, 0, sizeof(msg));
-		n = 0;
-		for (h = g_7f4ca0; h < g_7f4ca0 + 768; h++) {
+		L.n = 0;
+		for (i = 0; i < 768; i++) { h = &g_7f4ca0[i];
 
-			if (n >= 8) {
+			if (L.n >= 8) {
 				break;
 			}
 			if ((h->type == 6 || h->type == 7) && h->level > 0 && h->busy == 0 && gm_AccumulateTyped2(h) >= *(int*) (e + 0xb0)) {
-				((int*) (msg + 0x34))[n] = h->handle;
-				n++;
+				((int*) (msg + 0x34))[L.n] = h->handle;
+				L.n++;
 			}
 		}
 		for (h = g_7f4ca0; h < g_7f4ca0 + 768; h++) {
@@ -96,7 +95,7 @@ void __cdecl fcn_00554b90(char* e)
 				v = gm_AccumulateTyped2(h);
 				if (v >= *(int*) (e + 0xb0)) {
 					for (k = 0; k < 8; k++) {
-						if (ids[k] == -1) {
+						if (L.ids[k] == -1) {
 							goto put;
 						}
 						if (v > vals[k]) {
@@ -107,30 +106,30 @@ void __cdecl fcn_00554b90(char* e)
 shift:
 					if (k < 7) {
 						for (m = 7; m > k; m--) {
-							ids[m] = ids[m - 1];
+							L.ids[m] = L.ids[m - 1];
 							vals[m] = vals[m - 1];
 						}
 					}
 put:
 					vals[k] = v;
-					ids[k] = h->handle;
+					L.ids[k] = h->handle;
 				}
 			}
 		}
 		for (k = 0; k < 8; k++) {
-			if (n >= 8) {
+			if (L.n >= 8) {
 				break;
 			}
-			if (ids[k] != -1) {
-				((int*) (msg + 0x34))[n] = ids[k];
-				n++;
+			if (L.ids[k] != -1) {
+				((int*) (msg + 0x34))[L.n] = L.ids[k];
+				L.n++;
 			}
 		}
-		if (n != 0) {
+		if (L.n != 0) {
 			msg[8] = 0xa;
 			msg[0x26] = 0x22;
 			*(int*) (msg + 0x14) = -1;
-			msg[0x30] = (char) n;
+			msg[0x30] = (char) L.n;
 			*(int*) (msg + 0xc) = g_7f4ca0[g_774970].handle;
 			*(int*) (msg + 0x7c) = *(int*) (e + 0xac);
 			*(int*) (msg + 0x80) = *(int*) (e + 0xb0);

@@ -26,13 +26,13 @@ void __cdecl fcn_0046f060(int win)
 	if (n > 0) {
 		e = (char*) g_1015ea0 + 0x14;
 		y = p->top;
-		do {
+		while (n > 0) {
 			if (*(int*) (e + 8) + *(int*) e > y + v) {
 				v = (*(int*) (e + 8) - y) + *(int*) e + 8;
 			}
 			e += 0x2f4;
 			n--;
-		} while (n != 0);
+		}
 	}
 	d2_ResizeWindow(*(short*) &p->width, (short) v, win);
 }

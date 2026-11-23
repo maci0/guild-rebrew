@@ -8,7 +8,7 @@ typedef struct NODE042F010 {
 
 int __cdecl vfs_NormalizeCase(char*);
 char* __cdecl fcn_0064e790(const char* s, int c);
-int __cdecl vfs_CompareNames(char* name, NODE042F010* p);
+int __cdecl vfs_CompareNames(const char* a, const char* b);
 
 /* ADDRESS: GOLDTL 0x0042f010 */
 char* __cdecl vfs_FindPathNode(char* name, NODE042F010* node)
@@ -38,7 +38,7 @@ char* __cdecl vfs_FindPathNode(char* name, NODE042F010* node)
 		strcpy(buf, p + 1);
 		p[1] = 0;
 		n = n->child;
-		while (n != 0 && vfs_CompareNames(path, n) != 0) {
+		while (n != 0 && vfs_CompareNames((char*) n, path) != 0) {
 			n = n->next;
 		}
 		strcpy(path, buf);

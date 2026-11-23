@@ -19,6 +19,7 @@ extern void __cdecl fcn_004c5530(void*);
 extern unsigned short __cdecl gm_RandomMod(int);
 extern void __cdecl fcn_00500bb0(void*, int, int, int);
 extern char s_6903e8[];
+extern unsigned char g_6a375c;
 
 #pragma optimize("y", off)
 
@@ -37,11 +38,9 @@ void __cdecl fcn_004f6d60(unsigned int entityIndex)
 	int count;
 	int v;
 	int limit;
-	char* fill_dst;
-	int fill_count;
 
 	slot = (char*) &((ENTITY_RECORD*) g_7f4ca0)[entityIndex & 0xffff];
-	if (*(short*) slot == -1) {
+	if (*(unsigned short*) slot == 0xffff) {
 		return;
 	}
 	if (*(unsigned char*) (slot + 2) >= 0xa) {
@@ -59,11 +58,7 @@ void __cdecl fcn_004f6d60(unsigned int entityIndex)
 	if (limit > 0xa) {
 		limit = 0xa;
 	}
-	limit = *(int*) ((char*) 0x6653a0 + limit * 4);
-	if (v <= limit) {
-		return;
-	}
-	if (count == 1) {
+	if (v > *(int*) ((char*) 0x6653a0 + limit * 4) && count == 1) {
 		found = gm_StartFilteredEntitySearch(1, 5, 0xf);
 		if (found == 0) {
 			return;
@@ -81,99 +76,106 @@ void __cdecl fcn_004f6d60(unsigned int entityIndex)
 		}
 		return;
 	}
-	if (count >= 9) {
-		return;
-	}
-	*((unsigned char*)&entityIndex + 3) = count + 1;
-	if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
-		fcn_004c4510(slot, *(int*) (slot + 4));
-		cm_AppendPacketFieldDelta(1, 1, 0xd, ((unsigned char*)&entityIndex + 3));
-		fcn_004c5360();
-	} else {
-		fill_dst = msg;
-		fill_count = 0xf8;
-		__asm {
-            mov edi, fill_dst
-            xor eax, eax
-            mov ebx, fill_count
-            lea ecx, [edi+edi*2]
-            and ecx, 3
-            sub ebx, ecx
-            jle short L_fill_tail0
-            rep stosb
-            mov ecx, ebx
-            and ebx, 3
-            shr ecx, 2
-            rep stosd
-        L_fill_tail0:
-            add ecx, ebx
-            rep stosb
-        }
-		*(int*) (msg + 0x2c) = gm_GameTime.b;
-		*(int*) (msg + 0x28) = gm_GameTime.a;
-		*(short*) (msg + 0x34) = gm_GameTime.d;
-		*(int*) (msg + 0x30) = gm_GameTime.c;
-		*(unsigned char*) (msg + 4) = 0x69;
-		*(int*) (msg + 8) = *(int*) (slot + 4);
-		*(int*) (msg + 0xc) = -1;
-		*(unsigned char*) (msg + 0x36) = 9;
-		*(short*) (msg + 0x2c) = 7;
-		*(int*) (msg + 0x2e) = 0;
-		*(char*) (msg + 0x58) = *((unsigned char*)&entityIndex + 3);
-		*(int*) (msg + 0x5c) = *(int*) (slot + 4);
-		fcn_004c5530(msg);
-	}
-	if (*(char*) (slot + 2) != 5 && *(char*) (slot + 2) != 6
-	    && *(char*) (slot + 2) != 7) {
-		return;
-	}
-	other = (char*) 0x7f4ca2;
-	v = 0;
-	do {
-		if (v >= *(unsigned char*) 0x6a375c) {
-			return;
-		}
-		if ((*other == 6 || *other == 7) && other - 2 != slot) {
+	if (v > *(int*) ((char*) 0x6653a0 + limit * 4) && count < 9) {
+		*((unsigned char*)&entityIndex + 3) = count + 1;
+		if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
+			fcn_004c4510(slot, *(int*) (slot + 4));
+			cm_AppendPacketFieldDelta(1, 1, 0xd, ((unsigned char*)&entityIndex + 3));
+			fcn_004c5360();
+		} else {
+			{
+			char* fill_dst;
+			int fill_count;
 			fill_dst = msg;
 			fill_count = 0xf8;
 			__asm {
-            mov edi, fill_dst
-            xor eax, eax
-            mov ebx, fill_count
-            lea ecx, [edi+edi*2]
-            and ecx, 3
-            sub ebx, ecx
-            jle short L_fill_tail1
-            rep stosb
-            mov ecx, ebx
-            and ebx, 3
-            shr ecx, 2
-            rep stosd
-        L_fill_tail1:
-            add ecx, ebx
-            rep stosb
-        }
-			*(int*) (msg + 0x2c) = gm_GameTime.b;
-			*(int*) (msg + 0x28) = gm_GameTime.a;
-			*(short*) (msg + 0x34) = gm_GameTime.d;
-			*(int*) (msg + 0x30) = gm_GameTime.c;
+                mov edi, fill_dst
+                mov ebx, fill_count
+                xor eax, eax
+                lea ecx, [edi+edi*2]
+                and ecx, 3
+                sub ebx, ecx
+                jle short L_fill_tail0
+                rep stosb
+                mov ecx, ebx
+                and ebx, 3
+                shr ecx, 2
+                rep stosd
+            L_fill_tail0:
+                add ecx, ebx
+                rep stosb
+            }
+			}
 			*(unsigned char*) (msg + 4) = 0x69;
-			*(int*) ((char*) msg + 8) = *(int*) (other + 2);
+			*(int*) (msg + 8) = *(int*) (slot + 4);
+			*(int*) (msg + 0x28) = gm_GameTime.a;
+			*(int*) (msg + 0x2c) = gm_GameTime.b;
+			*(int*) (msg + 0x30) = gm_GameTime.c;
+			*(short*) (msg + 0x34) = gm_GameTime.d;
 			*(int*) (msg + 0xc) = -1;
 			*(unsigned char*) (msg + 0x36) = 9;
 			*(short*) (msg + 0x2c) = 7;
 			*(int*) (msg + 0x2e) = 0;
-			if (*(char*) (slot + 2) == 5) {
-				limit = gm_RandomMod(8);
-				fcn_00500bb0(msg + 0x28, gm_RandomMod(4), limit * 7, 0);
-			}
 			*(char*) (msg + 0x58) = *((unsigned char*)&entityIndex + 3);
 			*(int*) (msg + 0x5c) = *(int*) (slot + 4);
 			fcn_004c5530(msg);
-			v++;
 		}
-		other += sizeof(ENTITY_RECORD);
-	} while ((int) other < 0x85a0a2);
+		if (*(char*) (slot + 2) != 5 && *(char*) (slot + 2) != 6
+		    && *(char*) (slot + 2) != 7) {
+			return;
+		}
+		other = (char*) 0x7f4ca2;
+		v = 0;
+		do {
+			if (v >= g_6a375c) {
+				return;
+			}
+			if ((*other == 6 || *other == 7) && other - 2 != slot) {
+				{
+				char* fill_dst;
+				int fill_count;
+				fill_dst = msg;
+				fill_count = 0xf8;
+				__asm {
+                mov edi, fill_dst
+                mov ebx, fill_count
+                xor eax, eax
+                lea ecx, [edi+edi*2]
+                and ecx, 3
+                sub ebx, ecx
+                jle short L_fill_tail1
+                rep stosb
+                mov ecx, ebx
+                and ebx, 3
+                shr ecx, 2
+                rep stosd
+            L_fill_tail1:
+                add ecx, ebx
+                rep stosb
+            }
+				}
+				*(int*) ((char*) msg + 8) = *(int*) (other + 2);
+				*(int*) (msg + 0x28) = gm_GameTime.a;
+				*(int*) (msg + 0x2c) = gm_GameTime.b;
+				*(int*) (msg + 0x30) = gm_GameTime.c;
+				*(unsigned char*) (msg + 4) = 0x69;
+				*(int*) (msg + 0xc) = -1;
+				*(unsigned char*) (msg + 0x36) = 9;
+				*(short*) (msg + 0x34) = gm_GameTime.d;
+				*(short*) (msg + 0x2c) = 7;
+				*(int*) (msg + 0x2e) = 0;
+				if (*(char*) (slot + 2) == 5) {
+					fcn_00500bb0(msg + 0x28, gm_RandomMod(4),
+						     gm_RandomMod(8) * 7, 0);
+				}
+				*(char*) (msg + 0x58) = *((unsigned char*)&entityIndex + 3);
+				*(int*) (msg + 0x5c) = *(int*) (slot + 4);
+				fcn_004c5530(msg);
+				v++;
+			}
+			other += sizeof(ENTITY_RECORD);
+		} while ((int) other < 0x85a0a2);
+	}
 }
 
 #pragma optimize("", on)

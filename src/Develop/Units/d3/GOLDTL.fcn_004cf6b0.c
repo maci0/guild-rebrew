@@ -64,11 +64,11 @@ int __cdecl fcn_004cf6b0(void)
 				position[0] = -243.0f;
 				position[1] = -90.0f;
 				position[2] = 190.0f;
-				position[3] = 0.0f;
+				*(int*) &position[3] = 0;
 				v7[0] = -50.0f;
 				v7[1] = 0.0f;
 				v7[2] = 38.0f;
-				v7[3] = 0.0f;
+				*(int*) &v7[3] = 0;
 				position[0] = *(float*) (p0 + 0x4c);
 				position[1] = *(float*) (p0 + 0x50);
 				position[2] = *(float*) (p0 + 0x54);

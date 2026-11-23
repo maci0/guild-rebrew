@@ -13,7 +13,7 @@ void __cdecl cm_AppendPacketFieldDelta(int a, int b, int offset, void* value);
 void __cdecl fcn_004c4670(int a, int b, int offset, void* value);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004eea30(int city, int id, float value);
-void __cdecl fcn_005782f0(int a, int b);
+void __cdecl fcn_005782f0(int a, unsigned short b);
 void __cdecl fcn_005b3270(char* slot, int a, char* object);
 void __cdecl fcn_005b32d0(char* slot, int a, char* object);
 void __cdecl fcn_005b3330(char* slot, int a, char* object, void* record);
@@ -77,12 +77,13 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 		index = gm_RandomMod(3) & 0xffff;
 		for (i = 3; i != 0; i--) {
 			if (found[index] != 0 && *(int*) ((char*) found[index] + 0x1c) == 0) {
+				int one;
 				int amount;
 
-				mode = 1;
+				one = 1;
 				amount = (gm_RandomMod(4) & 0xffff) + 3;
 				fcn_004c4510((char*) found[index], *(int*) ((char*) found[index] + 2));
-				cm_AppendPacketFieldDelta(4, 1, 0x1c, &mode);
+				cm_AppendPacketFieldDelta(4, 1, 0x1c, &one);
 				cm_AppendPacketFieldDelta(4, 1, 0x20, &amount);
 				fcn_004c5360();
 				fcn_005b3330((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
@@ -109,8 +110,7 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 		    city, object);
 		break;
 	case 3:
-		index = gm_RandomMod(3);
-		fcn_005782f0(city, index + 1);
+		fcn_005782f0(city, gm_RandomMod(3) + 1);
 		fcn_005b32d0((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
 		    city, object);
 		break;

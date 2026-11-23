@@ -51,10 +51,10 @@ unsigned char __cdecl fcn_00438450(char* o)
 				dst[0] = src[-1];
 				dst[1] = src[0];
 				*(float*) (transformObject + 0x300) = src[-2] + *(float*) (transformObject + 0x300);
-				*(float*) (transformObject + 0x304) = dst[0] + *(float*) (transformObject + 0x304);
-				*(float*) (transformObject + 0x308) = *(float*) (transformObject + 0x308) + dst[1];
 				src += 20;
-				dst += 4;
+                dst += 4;
+                *(float*) (transformObject + 0x304) = dst[-4] + *(float*) (transformObject + 0x304);
+                *(float*) (transformObject + 0x308) = *(float*) (transformObject + 0x308) + dst[-3];
 			}
 			*(float*) (transformObject + 0x300) = *(float*) (transformObject + 0x300) * 0.125f;
 			*(float*) (transformObject + 0x304) = *(float*) (transformObject + 0x304) * 0.125f;

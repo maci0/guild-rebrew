@@ -78,8 +78,8 @@ found:
 		cnt = *(int*) (t + 0x2c);
 		list = *(int**) (t + 0x28);
 		{
-			for (j = 0; j < cnt; j++, list++) {
-				obj = (char*) &((D2_CONTROL_TL*) g_1015ea0)[*list];
+			for (j = 0; j < cnt; j++) {
+				obj = (char*) &((D2_CONTROL_TL*) g_1015ea0)[list[j]];
 				if (px < *(int*) (obj + 0x10)) {
 					continue;
 				}

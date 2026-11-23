@@ -5,8 +5,8 @@ int __cdecl fcn_005e5990(void*);
 
 int __cdecl fcn_005e3a57(void* a)
 {
-	if (--*(int*) ((char*) a + 4) < 0) {
-		return fcn_005e5990(a);
+	if (--*(int*) ((char*) a + 4) >= 0) {
+		return *(*(unsigned char**) a)++;
 	}
-	return (unsigned char) *(*(char**) a)++;
+	return fcn_005e5990(a);
 }

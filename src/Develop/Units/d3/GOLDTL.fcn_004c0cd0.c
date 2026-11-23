@@ -67,10 +67,10 @@ void __cdecl fcn_004c0cd0(void)
         scaled = 0;
         d = *(float*) (d3_ActiveCamera + 0x50)
             - fcn_00413d10((float*) (d3_ActiveCamera + 0x4c));
-        g_100584c = (short) g_7f4c0c;
         g_1005840 = gm_GameTime;
         g_1005844 = g_7f4c04;
         g_1005848 = g_7f4c08;
+        g_100584c = (short) g_7f4c0c;
         if (g_7e4538 != 0 && (count = *g_7e4538) != 0) {
             scaled = count * 8;
             if (count >= 999) {
