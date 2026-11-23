@@ -34,18 +34,17 @@ extern int ls_SaveVersion, g_773d8c;
 unsigned int __cdecl gm_RebuildLoadedReferences(void)
 {
 	char* p;
+	char* r;
 	Ent525670* e;
 	char* obj;
 	char* rec;
 	int* q;
 	int savedContext;
-	int v4;
 	int v5;
-	int v6;
-	int v7;
 	int v8;
+	int v7;
+	int v6;
 	int v9;
-	unsigned char kind;
 
 	gm_CityEntity = (char*) gm_LookupEntityRecordById((int) gm_CityEntity);
 	if (!gm_CityEntity)
@@ -83,90 +82,81 @@ unsigned int __cdecl gm_RebuildLoadedReferences(void)
 		if (v5 != -1 && gm_ResolveEntityById(&v8, &v7, &v6, v5)) {
 			if (v8) {
 				v5 = *(int*) (v8 + 0x5d);
-				if (v5) {
-					for (v4 = *(int*) (v5 + 0x3f); v4; v4 = *(int*) (v4 + 0x3f))
-						v5 = v4;
-					goto chain;
+				if (!v5) {
+					*(int*) (v8 + 0x5d) = (int) obj;
+				} else {
+					while (*(int*) (v5 + 0x3f))
+						v5 = *(int*) (v5 + 0x3f);
+					*(int*) (v5 + 0x3f) = (int) obj;
 				}
-				*(int*) (v8 + 0x5d) = (int) obj;
 			} else if (v7) {
 				v5 = *(int*) (v7 + 0x14);
-				if (v5) {
-					for (v4 = *(int*) (v5 + 0x3f); v4; v4 = *(int*) (v4 + 0x3f))
-						v5 = v4;
-				chain:
-					*(int*) (v5 + 0x3f) = (int) obj;
-				} else {
+				if (!v5) {
 					*(int*) (v7 + 0x14) = (int) obj;
+				} else {
+					while (*(int*) (v5 + 0x3f))
+						v5 = *(int*) (v5 + 0x3f);
+					*(int*) (v5 + 0x3f) = (int) obj;
 				}
 			} else {
 				v5 = *(int*) (v6 + 0x178);
-				if (v5) {
-					for (v4 = *(int*) (v5 + 0x3f); v4; v4 = *(int*) (v4 + 0x3f))
-						v5 = v4;
-					goto chain;
+				if (!v5) {
+					*(int*) (v6 + 0x178) = (int) obj;
+				} else {
+					while (*(int*) (v5 + 0x3f))
+						v5 = *(int*) (v5 + 0x3f);
+					*(int*) (v5 + 0x3f) = (int) obj;
 				}
-				*(int*) (v6 + 0x178) = (int) obj;
 			}
 		}
 		v9++;
 	}
 	savedContext = d3_CurrentContextIndex;
 	fcn_004432d0(0, 0);
-	for (p = (char*) 0x77e980; (int) p <= 0x7d197f; p += 0x14c) {
-		kind = *(unsigned char*) p;
-		if (!kind)
+	for (r = (char*) 0x77e980; (int) r < 0x7d1980; r += 0x14c) {
+		if (!*(unsigned char*) r)
 			continue;
-		if (kind == 0x29 || kind == 0x2d || kind == 0x2f || kind == 0x11 || kind == 0x25 ||
-		    kind == 5 || kind == 10 || kind == 0x26 || (*(unsigned char*) (p + 0x78) & 8)) {
-			v9 = *(int*) (p + 0x70);
+		if (*(unsigned char*) r == 0x29 || *(unsigned char*) r == 0x2d || *(unsigned char*) r == 0x2f ||
+		    *(unsigned char*) r == 0x11 || *(unsigned char*) r == 0x25 || *(unsigned char*) r == 5 ||
+		    *(unsigned char*) r == 10 || *(unsigned char*) r == 0x26 || (*(unsigned char*) (r + 0x78) & 8)) {
+			v9 = *(int*) (r + 0x70);
 			if (v9) {
-				*(int*) (p + 0x70) = 0;
+				*(int*) (r + 0x70) = 0;
 				g_774964 = 2;
-				if (kind == 0x11)
-					*(unsigned char*) (p + 0xf0) &= 0xef;
-				(*(void(__cdecl**)(char*)) (kind * 4 + 0x7dc440))(p);
+				if (*(unsigned char*) r == 0x11)
+					*(unsigned char*) (r + 0xf0) &= 0xef;
+				(*(void(__cdecl**)(char*)) (*(unsigned char*) r * 4 + 0x7dc440))(r);
 				g_774964 = 0;
-				*(int*) (p + 0x70) = v9;
+				*(int*) (r + 0x70) = v9;
 			}
 		}
-		kind = *(unsigned char*) p;
-		if (kind == 0xc)
+		if (*(unsigned char*) r == 0xc)
 			continue;
-		if (kind == 0xd) {
-			gm_ResolveEntityById(&v6, 0, 0, *(int*) (p + 0xb8));
+		if (*(unsigned char*) r == 0xd) {
+			gm_ResolveEntityById(&v6, 0, 0, *(int*) (r + 0xb8));
 			if (v6)
-				fcn_00573e10(p);
+				fcn_00573e10(r);
 			continue;
 		}
-		if (kind == 0xf) {
-			v9 = gm_FindRecordById(*(int*) (p + 0x10));
+		if (*(unsigned char*) r == 0xf) {
+			v9 = gm_FindRecordById(*(int*) (r + 0x10));
 			if (v9)
-				*(char**) (v9 + 0x24) = p;
+				*(char**) (v9 + 0x24) = r;
 			continue;
 		}
-		if (kind == 0x78) {
-			*(unsigned char*) (p + 0xc8) = 0;
-			*(unsigned char*) (p + 0xc9) = 0;
-			*(unsigned char*) (p + 0xca) = 0;
-			*(unsigned char*) (p + 0xcb) = 0;
-			*(unsigned char*) (p + 0xcc) = 0;
-			*(unsigned char*) (p + 0xcd) = 0;
-			*(unsigned char*) (p + 0xce) = 0;
-			*(unsigned char*) (p + 0xcf) = 0;
+		if (*(unsigned char*) r == 0x78) {
+			*(int*) (r + 0xc8) = 0;
+			*(int*) (r + 0xcc) = 0;
 			continue;
 		}
-		if (kind == 0x76) {
-			*(unsigned char*) (p + 0xb0) = 0;
-			*(unsigned char*) (p + 0xb1) = 0;
-			*(unsigned char*) (p + 0xb2) = 0;
-			*(unsigned char*) (p + 0xb3) = 0;
+		if (*(unsigned char*) r == 0x76) {
+			*(int*) (r + 0xb0) = 0;
 			continue;
 		}
-		if (kind == 0x14) {
-			fcn_005290d0(p);
-			*(unsigned char*) (p + 0xac) =
-			    *(unsigned char*) (p + 0x14) + *(unsigned char*) (p + 0x18);
+		if (*(unsigned char*) r == 0x14) {
+			fcn_005290d0(r);
+			*(unsigned char*) (r + 0xac) =
+			    *(unsigned char*) (r + 0x14) + *(unsigned char*) (r + 0x18);
 		}
 	}
 	fcn_004432d0(savedContext, 0);

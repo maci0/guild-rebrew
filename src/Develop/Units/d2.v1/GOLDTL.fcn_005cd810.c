@@ -47,9 +47,9 @@ typedef struct {
 /* ADDRESS: GOLDTL 0x005cd810 */
 void __cdecl fcn_005cd810(int office)
 {
-	Rec_5cd810 rec[8];
+	char src1[0x90];
 	char src2[0x90];
-	char src1[0x80];
+	Rec_5cd810 rec[8];
 	short* sel2;
 	int sel;
 	int dlg;
@@ -86,22 +86,18 @@ void __cdecl fcn_005cd810(int office)
 			}
 			if (((0 < office) && (office < 7)) || (office == 8)) {
 				count = amt_FindOfficeSlotsByKind(office, 6, src1);
-				if (count > 0) {
-					for (i = 0; i < count; i++) {
-						rec[i].ent = gm_LookupEntityRecordById(*(int*) (src1 + i * 0x18 + 4));
-						rec[i].text = *(unsigned char*) (src1 + i * 0x18 + 8);
-					}
+				for (i = 0; i < count; i++) {
+					rec[i].ent = gm_LookupEntityRecordById(*(int*) (src1 + i * 0x18 + 4));
+					rec[i].text = *(unsigned char*) (src1 + i * 0x18 + 8);
+				}
+			} else if (office == 7) {
+				count = amt_CollectOfficeGroup7(0, 6, src2);
+				for (i = 0; i < count; i++) {
+					rec[i].ent = gm_LookupEntityRecordById(*(int*) (src2 + i * 0x18 + 4));
+					rec[i].text = *(unsigned char*) (src2 + i * 0x18 + 8);
 				}
 			} else {
-				if (office != 7)
-					return;
-				count = amt_CollectOfficeGroup7(0, 6, src2);
-				if (count > 0) {
-					for (i = 0; i < count; i++) {
-						rec[i].ent = gm_LookupEntityRecordById(*(int*) (src2 + i * 0x18 + 4));
-						rec[i].text = *(unsigned char*) (src2 + i * 0x18 + 8);
-					}
-				}
+				return;
 			}
 			if (!count)
 				return;
@@ -110,7 +106,7 @@ void __cdecl fcn_005cd810(int office)
 				if (!ent)
 					continue;
 				rec[i].text2 = 0;
-				rec[i].text1 = 0x6ca - (*(unsigned char*) (ent + 0xc) != 0);
+				rec[i].text1 = *(char*) (ent + 0xc) ? 0x6c9 : 0x6ca;
 				if ((*(unsigned char*) (g_774970 * 0x21c + 0x7f4ca9) != *(unsigned char*) (ent + 9)) && (*(unsigned int*) (ent + 0x1c8) & 0x800000)) {
 					j = he_StartHandlungSearch(1, 0, 0x6f);
 					while (j) {
@@ -122,7 +118,7 @@ void __cdecl fcn_005cd810(int office)
 					}
 				}
 				rec[i].text3 = 0;
-				if (CountMatchingStraftatEntries(*(int*) (ent + 4), g_774970) >= 1) {
+				if (CountMatchingStraftatEntries(*(int*) (ent + 4), g_774970) > 0) {
 					rec[i].text3 = 0x6cd;
 				} else {
 					j = he_StartHandlungSearch(1, 0, 0x18);
@@ -153,19 +149,19 @@ void __cdecl fcn_005cd810(int office)
 						rec[i].text4 = 0x6d0;
 					else
 						rec[i].text4 = 0x6cf;
-
-
-
-
 				}
 			}
-			p = (char*) sel2;
-			if (!p)
-				p = (char*) (g_774970 * 0x21c + 0x7f4ca0);
-			if (office && (office != 7))
+			if (office && (office != 7)) {
+				p = (char*) sel2;
+				if (!p)
+					p = (char*) (g_774970 * 0x21c + 0x7f4ca0);
 				fcn_005c9f10(d2_CurrentWindowId, office, 0, count, (int) rec, (short*) p);
-			else
+			} else {
+				p = (char*) sel2;
+				if (!p)
+					p = (char*) (g_774970 * 0x21c + 0x7f4ca0);
 				fcn_005c99a0(d2_CurrentWindowId, office, 0, count, (int) rec, (int) p);
+			}
 			for (i = 0; i < count; i++) {
 				fcn_00472640(rec[i].h1, 1);
 				if (rec[i].h2 != -1)
@@ -175,48 +171,39 @@ void __cdecl fcn_005cd810(int office)
 		}
 		if (g_14ce8e0) {
 			g_774654 = 1;
-			goto loopend;
-		}
-		if (g_14ce8e8) {
-			if (sel == 0) {
-				sel2 = 0;
-				i = 0;
-				while (i < count) {
-					if (rec[i].h2 == d2_CurrentElementId)
-						break;
-					i++;
-				}
-				if ((0 <= i) && (i < count)) {
-					ent = (char*) rec[i].ent;
-					if (ent) {
-						sel2 = 0;
-						again = 1;
-						if (*(unsigned short*) ent != 0xffff) {
-							sel2 = (short*) ent;
-							sel = 1;
+		} else {
+			if (g_14ce8e8) {
+				if (!sel) {
+					sel2 = 0;
+					for (i = 0; i < count; i++) {
+						if (rec[i].h2 == d2_CurrentElementId)
+							break;
+					}
+					if ((i > -1) && (i < count)) {
+						ent = (char*) rec[i].ent;
+						if (ent) {
+							sel2 = 0;
+							again = 1;
+							if (*(unsigned short*) ent != 0xffff) {
+								sel2 = (short*) ent;
+								sel = 1;
+							}
 						}
 					}
+					goto loopend;
 				}
+			} else if (sel) {
+				sel = 0;
+				sel2 = 0;
+				again = 1;
 				goto loopend;
 			}
-		} else {
-			if (sel == 0)
-				goto select;
-			sel = 0;
-			sel2 = 0;
-			again = 1;
-			goto loopend;
-		}
-select:
-		if (g_14ce8d8 && (g_100f1dc != -1)) {
-			if (count > 0) {
-				i = 0;
-				while (i < count) {
+			if (g_14ce8d8 && (g_100f1dc != -1)) {
+				for (i = 0; i < count; i++) {
 					if (rec[i].h1 == d2_CurrentElementId)
 						break;
-					i++;
 				}
-				if ((0 <= i) && (i < count)) {
+				if ((i > -1) && (i < count)) {
 					ent = (char*) rec[i].ent;
 					if (!ent || (*(unsigned short*) ent == 0xffff)) {
 						sel2 = 0;
@@ -226,8 +213,8 @@ select:
 					d2_ShowAmtInfo(rec[i].text, (int) ent);
 					fcn_00471af0(dlg, 1);
 				}
+				again = 1;
 			}
-			again = 1;
 		}
 loopend:
 		if (!fcn_005373e0((int) fcn_005cd810, 0x657c7)) {

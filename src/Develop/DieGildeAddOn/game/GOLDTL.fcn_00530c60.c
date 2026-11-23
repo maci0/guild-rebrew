@@ -15,6 +15,7 @@ extern float g_696550[];
 extern int g_6b7fdc;
 
 extern pos14_7f4c00 gm_GameTime;
+extern s_7e2ac0 g_7e2ac0[48];
 
 int __cdecl fcn_00500e20(int*);
 int __cdecl fcn_00530b20(char*, int, char*);
@@ -29,6 +30,17 @@ void __cdecl init_GetGebaeudeSceneName(int, char*);
 /* ADDRESS: GOLDTL 0x00530c60 */
 void __cdecl fcn_00530c60(unsigned char* building)
 {
+	int mode;
+	int id;
+	int stop;
+	int hit;
+	int j;
+	int k;
+	int i;
+	int hour;
+	int n;
+	int r;
+	int c;
 	char* itemdef;
 	BUILDING_PROTOTYPE* type_row;
 	char* ent;
@@ -36,7 +48,6 @@ void __cdecl fcn_00530c60(unsigned char* building)
 	char* info2;
 	char* p;
 	char* h;
-	char* q;
 	char* s;
 	char* script;
 	void* found;
@@ -45,14 +56,6 @@ void __cdecl fcn_00530c60(unsigned char* building)
 	char path[0x80];
 	char sp[0x80];
 	int flags[8];
-	int hour;
-	int i;
-	int k;
-	int n;
-	int r;
-	int c; unsigned char category;
-	int mode;
-	int id;
 
 	itemdef = 0;
 	if (g_7746cc != 0 && *(unsigned short*) g_7746cc != 0xfd) {
@@ -74,58 +77,63 @@ void __cdecl fcn_00530c60(unsigned char* building)
 		ent = ch_ContextCharacters[i];
 		if (ent != 0 && (info = *(char**) (ent + 0x184)) != 0
 		    && *(int*) (info + 0x2c) == *(int*) (building + 1)
-		    && *(unsigned char*) (ent + 8) != 0
+		    && *(unsigned char*) (ent + 8) > 0
 		    && *(int*) (info + 0x88) == g_67a370) {
 			mode = 0;
 			job[0] = 0;
 			r = fcn_00530b20(ent, (int) building, job);
-			info = *(char**)(ent + 0x184);
 			if (r != 0) {
-				category = type_row->category;
-				if (category == 0x0d) {
+				if (type_row->category == 0x0d) {
 					if (g_7746cc != 0) {
 						if (*(unsigned short*) g_7746cc == 0x37
-						    && *(int*) (info + 0x30) == *(int*) (g_7746cc + 2)) {
-							goto flag_on;
+						    && *(int*) (*(char**) (ent + 0x184) + 0x30) == *(int*) (g_7746cc + 2)) {
+							mode = 1;
 						}
-						if (*(unsigned short*) g_7746cc != 0xfd
-						    || *(int*) (info + 0x30) != *(int*) (g_7746cc + 2)) {
-							goto after;
+						else if (*(unsigned short*) g_7746cc == 0xfd
+						         && *(int*) (*(char**) (ent + 0x184) + 0x30) == *(int*) (g_7746cc + 2)) {
+							p = *(char**) (ent + 0x17c);
+							mode = 1;
+							if (p != 0 && *(int*) (p + 0xc8) != 0) {
+								mode = 0;
+							}
 						}
 					}
-					p = *(char**) (ent + 0x17c);
-					mode = 1;
-					if (p != 0 && *(int*) (p + 0xc8) != 0) {
-						mode = 0;
+					else {
+						p = *(char**) (ent + 0x17c);
+						mode = 1;
+						if (p != 0 && *(int*) (p + 0xc8) != 0) {
+							mode = 0;
+						}
 					}
 				}
 				else {
-					if (category == 8 && *(unsigned short*) g_7746cc == 0xdd
+					if (type_row->category == 8 && *(unsigned short*) g_7746cc == 0xdd
 					    && *(char*) (ent + 0x180) == 0x15) {
-						goto flag_on;
+						mode = 1;
 					}
-					p = *(char**) (ent + 0x17c);
-					mode = 1;
-					if (p != 0 && *p == 4 && *(int*) (p + 0xc8) != 0) {
-						mode = 0;
+					else {
+						p = *(char**) (ent + 0x17c);
+						mode = 1;
+						if (p != 0 && *p == 4 && *(int*) (p + 0xc8) != 0) {
+							mode = 0;
+						}
 					}
 				}
 			}
 			else {
-				category = type_row->category;
-				if (category == 0x16 && g_7746cc != 0 && *(unsigned short*) g_7746cc == 0x120
-				    && *(int*) (info + 0x30) == *(int*) (g_7746cc + 2)
+				if (type_row->category == 0x16 && g_7746cc != 0 && *(unsigned short*) g_7746cc == 0x120
+				    && *(int*) (*(char**) (ent + 0x184) + 0x30) == *(int*) (g_7746cc + 2)
 				    && (*(unsigned int*) (ent + 0x1c8) & 0x1000) == 0) {
 					strcpy(job, "besucher");
-					goto flag_on;
+					mode = 1;
 				}
-				if (category == 1 && *(char**) (ent + 0x170) == (char*) building
-				    && (*(unsigned int*) (ent + 0x1c8) & 0x1000) == 0) {
+				else if (type_row->category == 1 && *(char**) (ent + 0x170) == (char*) building
+				         && (*(unsigned int*) (ent + 0x1c8) & 0x1000) == 0) {
 					strcpy(job, "bewohner");
-					goto flag_on;
+					mode = 1;
 				}
-				if (*(char*) (ent + 0x180) == 0 && *(char**) (ent + 0x16c) == (char*) building
-				    && *(int*) (info + 0x28) == -1) {
+				else if (*(char*) (ent + 0x180) == 0 && *(char**) (ent + 0x16c) == (char*) building
+				         && *(int*) (*(char**) (ent + 0x184) + 0x28) == -1) {
 					if (*(char*) (ent + 0x164)) {
 						strcpy(job, "meister");
 					}
@@ -136,35 +144,27 @@ void __cdecl fcn_00530c60(unsigned char* building)
 					else {
 						strcpy(job, "pause");
 					}
-					goto flag_on;
+					mode = 1;
 				}
-				goto after;
 			}
-			goto after;
-flag_on:
-			mode = 1;
-after:
 			if (*(char*) (ent + 0x165) == 0x1c && (*(unsigned char*) (ent + 0x1b4) & 1)
-			    && *(int*) (info + 0x28) == -1) {
+			    && *(int*) (*(char**) (ent + 0x184) + 0x28) == -1) {
 				strcpy(job, "faulenzen");
+				mode = 1;
 			}
-			else if (!mode) {
-				goto bottom;
-			}
-			if (job[0] != 0) {
-				if (*(int*) (info + 0x28) != -1) {
-					if (evt_FindScriptById(*(int*) (info + 0x28)) != 0) {
-						goto next;
-					}
+			if (mode && job[0] != 0) {
+				info = *(char**) (ent + 0x184);
+				if (*(int*) (info + 0x28) != -1 && evt_FindScriptById(*(int*) (info + 0x28)) != 0) {
+					/* already running */
 				}
-				if (*(int*) (info + 0x28) == -1) {
+				else if (*(int*) (info + 0x28) == -1) {
 					k = 0;
 					while (k < 8) {
 						flags[k] = 1;
 						k += 1;
 					}
-					for (q = (char*)ch_ContextCharacters; q < (char*)(ch_ContextCharacters + 32); q += 4) {
-						info2 = *(char**) q;
+					for (j = 0; j < 32; j++) {
+						info2 = ch_ContextCharacters[j];
 						if (info2 != 0 && (info2 = *(char**) (info2 + 0x184)) != 0
 						    && (id = *(int*) (info2 + 0x28)) != -1
 						    && (h = evt_FindScriptById(id)) != 0
@@ -209,40 +209,38 @@ after:
 						}
 					}
 				}
-				goto next;
 			}
-bottom:
-			if (*(char**) (ent + 0x16c) == (char*) building
-			    && (info = *(char**) (ent + 0x184)) != 0
-			    && *(int*) (info + 0x28) != -1) {
-				mode = 0;
-				if (*(char*) (ent + 0x180) == 0) {
-					mode = 1;
-				}
-				else if ((float) (g_7f4c04 & 0xffff) > g_696550[hour]) {
-					mode = 1;
-				}
-				p = *(char**) (ent + 0x17c);
-				if ((p != 0 && *p == 4 && *(int*) (p + 0xc8) != 0) || mode) {
-					mode = 0;
-					h = evt_FindScriptById(*(int*) (info + 0x28));
-					if (h != 0) {
-						for (q = (char*) 0x7e2ac4; q < (char*) 0x7e30c4; q += 0x20) {
-							if (mode) {
-								break;
+			else {
+				stop = 0;
+				if (*(char**) (ent + 0x16c) == (char*) building
+				    && (info = *(char**) (ent + 0x184)) != 0
+				    && (id = *(int*) (info + 0x28)) != -1) {
+					if (*(char*) (ent + 0x180) == 0
+					    || (float) (gm_GameTime.b & 0xffff) > g_696550[hour]) {
+						stop = 1;
+					}
+					p = *(char**) (ent + 0x17c);
+					if ((p != 0 && *p == 4 && *(int*) (p + 0xc8) != 0) || stop) {
+						hit = 0;
+						h = evt_FindScriptById(id);
+						if (h != 0) {
+							for (j = 0; j < 48; j++) {
+								if (hit) {
+									break;
+								}
+								if (g_7e2ac0[j].key != 0 && *(char*) g_7e2ac0[j].pad != 0
+								    && strstr(h, (char*) g_7e2ac0[j].pad) != 0) {
+									hit = 1;
+								}
 							}
-							if (*(int*) (q - 4) != 0 && *q != 0 && strstr(h, q) != 0) {
-								mode = 1;
+							if (hit) {
+								evt_RequestScriptExit(h);
 							}
-						}
-						if (mode) {
-							evt_RequestScriptExit(h);
 						}
 					}
 				}
 			}
 		}
-next:
-			i += 1;
+		i += 1;
 	} while (i < 0x20);
 }

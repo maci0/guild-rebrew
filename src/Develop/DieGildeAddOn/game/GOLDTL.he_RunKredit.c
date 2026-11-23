@@ -12,7 +12,7 @@ int __cdecl fcn_005c4ec0(int, int, int, char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_64d41a(char*, char*, int);
 void __cdecl he_FreeAction(int);
-void __cdecl fcn_004c51a0(int, int, int, int);
+void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x00564b90 */
 void __cdecl he_RunKredit(int loanEvent)
@@ -51,7 +51,7 @@ void __cdecl he_RunKredit(int loanEvent)
 				return;
 			}
 			f = (float) (*(int*) (loanEvent + 0xb4) *
-			             (*(int*) (loanEvent + 0xc0) * 0.01));
+			             (*(int*) (loanEvent + 0xc0) * g_6640e8));
 			time = gm_AccumulateTyped2(n);
 			if ((float) time < f) {
 				time = (int) f;
@@ -64,7 +64,7 @@ void __cdecl he_RunKredit(int loanEvent)
 				}
 			} else {
 				fcn_004c51a0(*(int*) ((char*) obj + 1), *(int*) (loanEvent + 0xb0),
-				           *(unsigned char*) 0x773d75, (int) f);
+				           g_773d75, (int) f);
 				*(int*) ((char*) obj + 0x55) = (int) (*(int*) ((char*) obj + 0x55) + f);
 			}
 			} else {
@@ -91,17 +91,15 @@ void __cdecl he_RunKredit(int loanEvent)
 					io_FormatTextBuffer(buf, 0x18e9, *(int*) (loanEvent + 0xb4));
 				fcn_005c4ec0(*(int*) ((char*) obj + 1), n,
 				           *(int*) (loanEvent + 0xb4), buf);
-				if (*(int*) (loanEvent + 0xb4) <= time)
-					fcn_00545d40(*(int*) (loanEvent + 0xb0), -1, buf, 0, 0x5ff, (char*) 0x6b5c60);
-				else
+				if (time < *(int*) (loanEvent + 0xb4))
 					fcn_00545d40(*(int*) (loanEvent + 0xb0), -1, buf, 0, 0x5ff, (char*) 0x699a88);
+				else
+					fcn_00545d40(*(int*) (loanEvent + 0xb0), -1, buf, 0, 0x5ff, (char*) 0x6b5c60);
 				if (*(unsigned char*) (slot + 2) == 6 ||
 				    *(unsigned char*) (slot + 2) == 7) {
 					io_FormatTextBuffer(msg, 0x18d8, *(unsigned short*) n, obj,
 					           *(int*) (loanEvent + 0xb4));
 					fcn_00545d40(*(int*) (slot + 4), -1, msg, 0, 0x5ff, 0);
-					he_FreeAction(loanEvent);
-					return;
 				}
 			}
 		}

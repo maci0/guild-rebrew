@@ -257,10 +257,7 @@ LfailB:
 				v11 += 1;
 			} while (v11 < v18[32]);
 		}
-		*(int*) (buildAction + 0x52) = gm_GameTime.a;
-		*(int*) (buildAction + 0x56) = gm_GameTime.b;
-		*(int*) (buildAction + 0x5a) = gm_GameTime.c;
-		*(unsigned short*) (buildAction + 0x5e) = (unsigned short) gm_GameTime.d;
+		*(pos14_7f4c00*) (buildAction + 0x52) = gm_GameTime;
 		fcn_00500bb0((void*) (buildAction + 0x52), 0, 10, 0);
 		*(int*) (buildAction + 0x70) = *(int*) (buildAction + 0x70) + 1;
 		fcn_004432d0(savedContext, 1);

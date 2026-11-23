@@ -50,12 +50,12 @@ int __cdecl fcn_005252d0(void* fp)
 	if (!ls_ReadVfsDataChecked(&n, 4, 1, fp)) {
 read_failed: return 0;
 	}
-	i = 0;
 	if (n == -1) {
 		cm_CommandQueueHead = 0;
 	} else {
 		cm_CommandQueueHead = (char*) &((node99_load*) g_9bade0)[n];
 	}
+	i = 0;
 	if (!ls_ReadVfsDataChecked(&n, 4, 1, fp)) {
 		return 0;
 	}

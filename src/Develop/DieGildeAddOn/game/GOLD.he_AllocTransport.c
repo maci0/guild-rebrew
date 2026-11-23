@@ -21,7 +21,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 int __cdecl gm_CheckEntityType(unsigned char*);
 char* __cdecl gm_SearchTable67(int);
-int __cdecl gm_RandomMod(int);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004fe140(int*, int, int, int);
 void __cdecl fcn_00458a10(char*, float*, float*);
 void __cdecl he_FreeAction(char*);
@@ -55,7 +55,8 @@ void __cdecl he_AllocTransport(char* action)
 	char nbuf[256];
 	float f;
 	float fbest;
-	double distance, dx, dy, dz;
+	float distance;
+	double dx, dy, dz;
 	float pnew[4];
 	float pold[4];
 	int found_first;
@@ -76,15 +77,18 @@ void __cdecl he_AllocTransport(char* action)
 
 	first = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0xb0));
 	if (first == 0) {
-		goto done;
+		he_FreeAction(action);
+		return;
 	}
 	gm_ResolveEntityById(0, (void**) &query, 0, *(int*) (action + 0xac));
 	if (query == 0) {
-		goto done;
+		he_FreeAction(action);
+		return;
 	}
 	second = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0xb4));
 	if (second == 0) {
-		goto done;
+		he_FreeAction(action);
+		return;
 	}
 
 	idx = *(unsigned char*) second;
@@ -102,10 +106,10 @@ void __cdecl he_AllocTransport(char* action)
 				dx = (double) pnew[0] - pold[0];
 				dy = (double) pnew[1] - pold[1];
 				dz = (double) pnew[2] - pold[2];
-				distance = sqrt(dz * dz + dy * dy + dx * dx);
+				distance = (float) sqrt(dz * dz + dy * dy + dx * dx);
 				if (distance < fbest) {
 					best = p;
-					fbest = (float) distance;
+					fbest = distance;
 				}
 				p = gm_FindNextFilteredEntity();
 			} while (p != 0);
@@ -141,21 +145,21 @@ void __cdecl he_AllocTransport(char* action)
 		found_second = 1;
 	}
 
-	if (found_first) {
+	if (found_first && !found_second) {
+		*(int*) (action + 0xc8) = 2;
+	} else if (!found_first) {
 		if (found_second) {
-			*(int*) (action + 0xc8) = 4;
-			if (first == second) {
-				ReportClientMessage("he_AllocTransport(): Start and goal are the same!");
-				he_FreeAction(action);
-				return;
-			}
+			*(int*) (action + 0xc8) = 1;
 		} else {
-			*(int*) (action + 0xc8) = 2;
+			*(int*) (action + 0xc8) = 3;
 		}
-	} else if (found_second) {
-		*(int*) (action + 0xc8) = 1;
 	} else {
-		*(int*) (action + 0xc8) = 3;
+		*(int*) (action + 0xc8) = 4;
+		if (first == second) {
+			ReportClientMessage("he_AllocTransport(): Start and goal are the same!");
+			he_FreeAction(action);
+			return;
+		}
 	}
 
 	*(int*) (action + 0xb8) = *(int*) (second + 0x30) + *(int*) (first + 0x30);
@@ -163,65 +167,57 @@ void __cdecl he_AllocTransport(char* action)
 	*(char*) (action + 0xd0) = 0;
 	fcn_004fe140((int*) (action + 0x52), 0, 0, 1);
 
-	if (query == 0) {
-		goto done;
-	}
-	rec = gm_SearchTable67(*(int*) (query + 0x1c));
-	idx = *(unsigned char*) (query + 0x12);
-	node = *(char**) (query + 0x3b);
-	f = (float) ((float) idx * 0.01f * 0.5 +
-	             0.9);
-	*(float*) (node + 0x1a0) = f;
-	if (*(short*) query == 0x136) {
-		*(float*) (node + 0x1a0) = (float) (f - 0.4);
-	} else if (*(short*) query == 0x135) {
-		*(float*) (node + 0x1a0) = (float) (f + 0.3);
-	}
-	if (rec != 0) {
-		v = fcn_0050c710((unsigned char*) rec, 0x11, 1);
-		f = (float) ((double) v * 0.01 + 1.0) *
-		    *(float*) (node + 0x1a0);
+	if (query != 0) {
+		rec = gm_SearchTable67(*(int*) (query + 0x1c));
+		idx = *(unsigned char*) (query + 0x12);
+		node = *(char**) (query + 0x3b);
+		f = (float) ((float) idx * 0.01f * 0.5 +
+		             0.9);
 		*(float*) (node + 0x1a0) = f;
-		*(float*) (action + 0xc0) = f;
-	}
-	*(unsigned char*) (query + 0x13) = *(unsigned char*) (query + 0x13) | 0x40;
-	if ((*(unsigned char*) (action + 0x78) & 2) != 0) {
-		fcn_004c5420(*(int*) (query + 2), 0x13, 1, 0x40, 0);
-	}
-	*(int*) (query + 0x24) = (int) action;
-	*(int*) (action + 0x10) = *(int*) (query + 2);
+		if (*(short*) query == 0x136) {
+			*(float*) (node + 0x1a0) = (float) (f - 0.4);
+		} else if (*(short*) query == 0x135) {
+			*(float*) (node + 0x1a0) = (float) (f + 0.3);
+		}
+		if (rec != 0) {
+			v = fcn_0050c710((unsigned char*) rec, 0x11, 1);
+			f = (float) ((double) v * 0.01 + 1.0) *
+			    *(float*) (node + 0x1a0);
+			*(float*) (node + 0x1a0) = f;
+			*(float*) (action + 0xc0) = f;
+		}
+		*(unsigned char*) (query + 0x13) = *(unsigned char*) (query + 0x13) | 0x40;
+		if ((*(unsigned char*) (action + 0x78) & 2) != 0) {
+			fcn_004c5420(*(int*) (query + 2), 0x13, 1, 0x40, 0);
+		}
+		*(int*) (query + 0x24) = (int) action;
+		*(int*) (action + 0x10) = *(int*) (query + 2);
 
-	if ((*(unsigned char*) (query + 0x20) & 1) != 0) {
-		fcn_0050de80(query, &stats);
-		if (stats.total > 0) {
-			*(int*) (action + 0xcc) = stats.total / 16000 + (unsigned short) gm_RandomMod(2);
-		} else {
-			*(int*) (action + 0xcc) = 0;
-		}
-		if (*(int*) (action + 0xcc) > 2) {
-			*(int*) (action + 0xcc) = 2;
-		}
-		if (*(int*) (action + 0xcc) != 0) {
-			sprintf(nbuf, "he_AllocTransport(): master choose eskorte type %i", *(int*) (action + 0xcc));
-			*(char*) (query + 0x28) = *(char*) (action + 0xcc);
-			v = fcn_0050ddf0(stats.total, (int) *(char*) (query + 0x28));
-			if ((*(unsigned char*) (action + 0x78) & 2) != 0) {
-				fcn_004c51a0(-1, *(int*) ((g_770b80 + 4) +
-				              *(unsigned short*) (action + 8) * 0x21c),
-				             (char) g_773d75, v);
-				*(int*) (action + 0x84) = -1;
-				*(int*) (action + 0xec) = -1;
-				return;
+		if ((*(unsigned char*) (query + 0x20) & 1) != 0) {
+			fcn_0050de80(query, &stats);
+			if (stats.total > 0) {
+				*(int*) (action + 0xcc) = stats.total / 16000 + (unsigned short) gm_RandomMod(2);
+			} else {
+				*(int*) (action + 0xcc) = 0;
 			}
-		} else {
-			*(char*) (query + 0x28) = 0;
+			*(int*) (action + 0xcc) = *(int*) (action + 0xcc) > 2 ? 2 : *(int*) (action + 0xcc);
+			if (*(int*) (action + 0xcc) != 0) {
+				sprintf(nbuf, "he_AllocTransport(): master choose eskorte type %i", *(int*) (action + 0xcc));
+				*(char*) (query + 0x28) = *(char*) (action + 0xcc);
+				v = fcn_0050ddf0(stats.total, (int) *(char*) (query + 0x28));
+				if ((*(unsigned char*) (action + 0x78) & 2) != 0) {
+					fcn_004c51a0(-1, *(int*) ((g_770b80 + 4) +
+					              *(unsigned short*) (action + 8) * 0x21c),
+					             (char) g_773d75, v);
+				}
+			} else {
+				*(char*) (query + 0x28) = 0;
+			}
 		}
+
+		*(int*) (action + 0x84) = -1;
+		*(int*) (action + 0xec) = -1;
+		return;
 	}
-
-	*(int*) (action + 0x84) = -1;
-	*(int*) (action + 0xec) = -1;
-	return;
-
-done:
 	he_FreeAction(action);
 }

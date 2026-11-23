@@ -157,7 +157,10 @@ int __cdecl fcn_004d6170(char* ctx)
 		}
 		side = p;
 	} else {
-		side = g_772ea4 != g_772e9c ? g_772e9c : g_772e98;
+		side = g_772e98;
+		if (g_772ea4 != g_772e9c) {
+			side = g_772e9c;
+		}
 	}
 	screen = fcn_00470820(0, 0, "cutscenes\\combat_end");
 	fcn_00471d80(screen, 3);

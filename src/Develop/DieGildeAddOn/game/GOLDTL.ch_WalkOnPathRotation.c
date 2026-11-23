@@ -14,20 +14,21 @@ void __cdecl fcn_00438d70(int a1, int a2, int a3, int a4);
 void __cdecl ch_WalkOnPathRotation(char* obj)
 {
 	char buf[256];
+	float position[4];
+	float relative[4];
 	char* inst;
 	char* o;
 	float turnDelta;
 	float turnStep;
 	float angle;
-	float dx;
-	float dy;
-	float dz;
+	double base;
 	int ticks;
 
 	inst = *(char**) (obj + 0x14);
 	if (*(float*) (obj + 0x108) < 0.0f) {
 		o = *(char**) (inst + 0x34);
 		turnDelta = fcn_00444700(o, (float*) (obj + 0x124));
+		base = *(float*) (o + 0x88);
 		*(float*) (obj + 0x108) = turnDelta;
 		if (turnDelta <= 0.04 && turnDelta >= -0.04) {
 			angle = turnDelta + *(float*) (o + 0x88);
@@ -52,7 +53,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 			} else {
 				turnStep *= 0.04f;
 			}
-			angle = *(float*) (o + 0x88) - turnStep;
+			angle = (float) (base - turnStep);
 			angle = (float) fmod(angle, 6.2831855f);
 			if (angle < 0.0) {
 				angle += 6.2831855f;
@@ -69,6 +70,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 	if (*(float*) (obj + 0x108) > 0.0f) {
 		o = *(char**) (inst + 0x34);
 		turnDelta = fcn_00444700(o, (float*) (obj + 0x124));
+		base = *(float*) (o + 0x88);
 		*(float*) (obj + 0x108) = turnDelta;
 		if (turnDelta <= 0.04 && turnDelta >= -0.04) {
 			angle = turnDelta + *(float*) (o + 0x88);
@@ -93,7 +95,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 			} else {
 				turnStep *= 0.04f;
 			}
-			angle = *(float*) (o + 0x88) + turnStep;
+			angle = (float) (base + turnStep);
 			angle = (float) fmod(angle, 6.2831855f);
 			if (angle < 0.0) {
 				angle += 6.2831855f;
@@ -108,10 +110,13 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 		return;
 	}
 	o = *(char**) (inst + 0x34);
-	dx = *(float*) (o + 0x4c) - *(float*) (obj + 0x124);
-	dy = *(float*) (o + 0x50) - *(float*) (obj + 0x128);
-	dz = *(float*) (o + 0x54) - *(float*) (obj + 0x12c);
-	if (sqrt(dz * dz + dy * dy + dx * dx) >
+	position[0] = *(float*) (o + 0x4c);
+	position[1] = *(float*) (o + 0x50);
+	position[2] = *(float*) (o + 0x54);
+	relative[0] = position[0] - *(float*) (obj + 0x124);
+	relative[1] = position[1] - *(float*) (obj + 0x128);
+	relative[2] = position[2] - *(float*) (obj + 0x12c);
+	if (sqrt(relative[2] * relative[2] + relative[1] * relative[1] + relative[0] * relative[0]) >
 	    *(float*) (obj + 0x10c) * 1.4) {
 		if (*(int*) (obj + 0xf8) >= *(int*) (obj + 0xf0) - 1) {
 			ch_SetPosition(inst, (float*) (obj + 0x124), 0);

@@ -127,8 +127,8 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		goto restore;
 	} else {
 		fcn_00455140((char*) *(int*)(upgradeBuilding + 0x61), g_662d40, direction);
-		angles[0] = 0;
 		angles[1] = 0;
+		angles[0] = 0;
 		angles[2] = 0;
 		angles[1] = fcn_00451380(g_662d40, direction);
 		fcn_00438b40((char*) obj, (int*) vec);

@@ -30,7 +30,10 @@ char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
 		return 0;
 	}
 	rec = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
-	if (flags & 4) {
+	if (!(flags & 4)) {
+		return rec;
+	}
+	{
 		if (queryEntity != 0) {
 			s = sim_StartEntityQueryByType(queryEntity);
 			if (s != 0) {

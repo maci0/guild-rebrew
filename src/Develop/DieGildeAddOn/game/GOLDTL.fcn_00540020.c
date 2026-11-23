@@ -139,7 +139,7 @@ void __cdecl ch_SetVisible(int, int);
 void* __cdecl fcn_00503e80(void);
 int __cdecl fcn_00504bd0(int);
 int __cdecl fcn_0047d240(void*);
-int __cdecl fcn_0042e410(int);
+unsigned short __cdecl fcn_0042e410(int);
 int __cdecl fcn_00508da0(void*);
 int __cdecl fcn_0050cf50(void*, int);
 int __cdecl fcn_0047dd60(void*);
@@ -470,8 +470,7 @@ void __cdecl fcn_00540020(void)
 					}
 				}
 				if (fcn_0047d240(SLOTPTR(i)) != 0 || *(unsigned char*) (SLOTPTR(i) + 2) == 1) {
-					w = (int) (fcn_0042e410(0x5a) & 0xffff);
-					if (fcn_00508da0(obj) < w) {
+					if (fcn_00508da0(obj) < fcn_0042e410(0x5a)) {
 						int ent;
 
 						cand = fcn_0050cf50(obj, 0x64);
@@ -520,9 +519,8 @@ void __cdecl fcn_00540020(void)
 				}
 				c = ENTCLASS(OBJBYTE);
 				if (c == 1) {
-					v = leftw * 2 / n;
-					*(int*) ((char*) obj + 0x39) = v;
-					v = v < 0 ? 0 : v;
+					*(int*) ((char*) obj + 0x39) = leftw * 2 / n;
+					v = (*(int*) ((char*) obj + 0x39) < 0) ? 0 : *(int*) ((char*) obj + 0x39);
 					*(int*) ((char*) obj + 0x39) = v;
 					if (ENTTYPE(OBJBYTE) == 5) {
 						if (v >= 0x2ee00) {
@@ -533,9 +531,8 @@ void __cdecl fcn_00540020(void)
 					}
 					*(int*) ((char*) obj + 0x39) = v;
 				} else if (c == 2) {
-					v = leftw * 4 / n;
-					*(int*) ((char*) obj + 0x39) = v;
-					v = v < 0 ? 0 : v;
+					*(int*) ((char*) obj + 0x39) = leftw * 4 / n;
+					v = (*(int*) ((char*) obj + 0x39) < 0) ? 0 : *(int*) ((char*) obj + 0x39);
 					*(int*) ((char*) obj + 0x39) = v;
 					if (ENTTYPE(OBJBYTE) == 5) {
 						if (v >= 0x4e200) {
@@ -546,9 +543,8 @@ void __cdecl fcn_00540020(void)
 					}
 					*(int*) ((char*) obj + 0x39) = v;
 				} else if (c == 3) {
-					v = leftw * 8 / n;
-					*(int*) ((char*) obj + 0x39) = v;
-					v = v < 0 ? 0 : v;
+					*(int*) ((char*) obj + 0x39) = leftw * 8 / n;
+					v = (*(int*) ((char*) obj + 0x39) < 0) ? 0 : *(int*) ((char*) obj + 0x39);
 					*(int*) ((char*) obj + 0x39) = v;
 					if (ENTTYPE(OBJBYTE) == 5) {
 						if (v >= 0x9c400) {

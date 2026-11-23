@@ -67,10 +67,9 @@ void __cdecl fcn_005e53b0(void *arg)
     int cache[5], buttons[2];
     char *selected[4];
     char text[0x800];
-    char *house, *p, *ui;
+    char *house, *p;
     int window, cost, count, i, n, j;
-    char refresh;
-    ITEM *item;
+    int refresh;
     unsigned int last;
 
     memset(items, 0, sizeof(items));
@@ -89,16 +88,16 @@ void __cdecl fcn_005e53b0(void *arg)
     d2_SetForm(window, 0);
     fcn_005340f0(d2_CurrentWindowId);
     d2_SetForm(window, 1);
-    items[0].y = 30;
     items[0].x = (*(int *)(g_1015f4c + d2_CurrentWindowId * 972) - *(short *)(g_772500 + 0x1ebd8)) / 2;
-    items[1].y = 125;
+    items[0].y = 30;
     items[1].x = (*(int *)(g_1015f4c + d2_CurrentWindowId * 972) - *(short *)(g_772500 + 0x1ebd8)) / 3 - 10;
-    items[2].y = 125;
+    items[1].y = 125;
     items[2].x = (*(int *)(g_1015f4c + d2_CurrentWindowId * 972) - *(short *)(g_772500 + 0x1ebd8)) * 2 / 3 + 10;
-    items[3].y = 220;
+    items[2].y = 125;
     items[3].x = (*(int *)(g_1015f4c + d2_CurrentWindowId * 972) - *(short *)(g_772500 + 0x1ebd8)) / 3 - 100;
-    items[4].y = 220;
+    items[3].y = 220;
     items[4].x = (*(int *)(g_1015f4c + d2_CurrentWindowId * 972) - *(short *)(g_772500 + 0x1ebd8)) * 2 / 3 + 100;
+    items[4].y = 220;
     d2_SetForm(window, 3);
     fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, g_14b59fc, g_14b5a00);
     do {
@@ -110,23 +109,20 @@ void __cdecl fcn_005e53b0(void *arg)
             io_AppendText((int)g_6811b0);
             io_AppendText(0x41b2);
             cost = 0;
-            for (i = 0, item = items; i < 5; ++i, ++item) {
-                if (i >= count) { item->entity = 0; cache[i] = -1; }
-                fcn_005ca560(item);
-                fcn_005ca740(item->x, item->y, d2_CurrentWindowId, 0x54, item, 1);
+            for (i = 0; i < 5; ++i) {
+                if (i >= count) { items[i].entity = 0; cache[i] = -1; }
+                fcn_005ca560(&items[i]);
+                fcn_005ca740(items[i].x, items[i].y, d2_CurrentWindowId, 0x54, &items[i], 1);
                 if (i < count) {
-                    fcn_00472640(item->control, 1);
-                    ui = (char*) &((D2_CONTROL_TL*) g_1015ea0)[item->control];
-                    (*(D2_CONTROL_TL*) ui).value_05c = 1;
-                    (*(D2_CONTROL_TL*) ui).flags_1d0 = 3;
-                    *(char**) (&(*(D2_CONTROL_TL*) ui).associated_object) = item->entity;
-                    (*(D2_CONTROL_TL*) ui).value_060 = 0;
+                    fcn_00472640(items[i].control, 1);
+                    ((D2_CONTROL_TL*) g_1015ea0)[items[i].control].value_05c = 1;
+                    ((D2_CONTROL_TL*) g_1015ea0)[items[i].control].flags_1d0 = 3;
+                    *(char**) (&((D2_CONTROL_TL*) g_1015ea0)[items[i].control].associated_object) = items[i].entity;
+                    ((D2_CONTROL_TL*) g_1015ea0)[items[i].control].value_060 = 0;
                 } else {
-                    ui = (char*) &((D2_CONTROL_TL*) g_1015ea0)[item->control];
-                    (*(D2_CONTROL_TL*) ui).value_060 = 1;
+                    ((D2_CONTROL_TL*) g_1015ea0)[items[i].control].value_060 = 1;
                 }
-                p = item->entity;
-                if (i && p) cost += fcn_004e99c0((unsigned char)p[0x166]) / 3 + 2;
+                cost += (items[i].entity && i) ? (fcn_004e99c0((unsigned char)items[i].entity[0x166]) / 3 + 2) : 0;
             }
             d2_SetForm(window, 2);
             io_AppendText((int)g_6811b0, cost);
@@ -143,8 +139,8 @@ void __cdecl fcn_005e53b0(void *arg)
                     n = 0;
                     for (i = 1; i < 5; ++i) {
                         if (items[i].entity) {
-                            j = (int)(fcn_00507e70((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], items[i].entity, 4) * -50.0f);
-                            fcn_004c54c0(*(unsigned short *)items[0].entity, *(unsigned short *)items[i].entity, j - 50, 1);
+                            j = 50 - (int)(fcn_00507e70((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], items[i].entity, 4) * -50.0f);
+                            fcn_004c54c0(*(unsigned short *)items[0].entity, *(unsigned short *)items[i].entity, -j, 1);
                             selected[n++] = items[i].entity;
                         }
                     }
@@ -157,20 +153,22 @@ void __cdecl fcn_005e53b0(void *arg)
                 }
             } else if (d2_CurrentElementId == buttons[1]) g_774654 = 1;
             else {
-                for (i = 0; i < 5; ++i) if (d2_CurrentElementId == items[i].control) break;
-                if (i < 5) {
-                    memset(&request, 0, sizeof(request));
-                    n = 0;
-                    for (j = 0; j < 5; ++j) {
-                        if (j != i) request.excluded[n++] = items[j].entity ? *(unsigned short *)items[j].entity : 0xffff;
+                for (i = 0; i < 5; ++i) {
+                    if (d2_CurrentElementId == items[i].control) {
+                        memset(&request, 0, sizeof(request));
+                        n = 0;
+                        for (j = 0; j < 5; ++j) {
+                            if (j != i) request.excluded[n++] = items[j].entity ? *(unsigned short *)items[j].entity : 0xffff;
+                        }
+                        request.field8 = g_666018; request.fieldc = g_66601c;
+                        request.enabled = 1; request.size = 0x400;
+                        request.kind = 6; request.field14 = 2;
+                        p = fcn_005cd440(&request, i ? g_14b59f4 : g_14b59f0, 0, 0);
+                        items[i].entity = p;
+                        cache[i] = p ? *(int *)(p + 4) : -1;
+                        refresh = 1;
+                        break;
                     }
-                    request.enabled = 1; request.size = 0x400;
-                    request.field8 = g_666018; request.fieldc = g_66601c;
-                    request.kind = 6; request.field14 = 2;
-                    p = fcn_005cd440(&request, i ? g_14b59f4 : g_14b59f0, 0, 0);
-                    items[i].entity = p;
-                    cache[i] = p ? *(int *)(p + 4) : -1;
-                    refresh = 1;
                 }
             }
         } else if (g_6b7fac > last + 140u) {

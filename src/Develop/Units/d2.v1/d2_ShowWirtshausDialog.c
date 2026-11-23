@@ -3,7 +3,8 @@
  * choice loop. Chosen action opens the guest/order subdialog, runs the Wirtshaus
  * action helpers (0x5a0cd0, 0x492d60, 0x493000) and formats the result lines.
  * Stack slots are bound to the native frame offsets (frame 0x390). */
-extern int g_100f1dc; extern int d2_CurrentWindowId; extern unsigned char g_773d75; extern unsigned short g_774970; extern unsigned short g_7f4c04; extern char g_7f4ca4[];
+extern int g_774654; extern int g_14ce8e0; extern int g_100f1dc;
+extern int d2_CurrentWindowId; extern unsigned char g_773d75; extern unsigned short g_774970; extern unsigned short g_7f4c04; extern char g_7f4ca4[];
 #include <math.h>
 #include <string.h>
 
@@ -140,8 +141,8 @@ label_5a15b5:
   v2 = 1;
   (*(int *)&g_100f1dc) = -1;
   do {
-    if ((*(int *)0x14ce8e0)) { // branch-flip
-      (*(int *)0x774654) = 1;
+    if (g_14ce8e0) { // branch-flip
+      g_774654 = 1;
       v2 = 1;
     }
     else if ((*(int *)&g_100f1dc) != -1) {
@@ -154,12 +155,12 @@ label_5a15b5:
           }
         }
         else {
-          (*(int *)0x774654) = 1;
+          g_774654 = 1;
           v2 = 0;
         }
       }
       else {
-        (*(int *)0x774654) = 1;
+        g_774654 = 1;
         v2 = 1;
       }
     }
@@ -185,7 +186,7 @@ label_5a15b5:
           }
         }
         fcn_004927c0(v3,&v14,v9);
-        (*(int *)0x774654) = 1;
+        g_774654 = 1;
       }
     } while (fcn_005373e0(0x5a1430,0x777c7));
     if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
@@ -199,7 +200,7 @@ label_5a15b5:
       (*(int *)&g_100f1dc) = -1;
       do {
         if ((*(int *)&g_100f1dc) == 2)
-          (*(int *)0x774654) = 1;
+          g_774654 = 1;
       } while (fcn_005373e0(0x5a1430,0x777c7));
       if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
         fcn_00471e30(windowId);
@@ -301,7 +302,7 @@ label_5a1b81:
                   (*(int *)&g_100f1dc) = -1;
                   do {
                     if (v25)
-                      (*(int *)0x774654) = 1;
+                      g_774654 = 1;
                     else if (v2) {
                       v2 = 0;
                       d2_SetForm(windowId,4);
@@ -357,8 +358,8 @@ label_5a1b81:
                   if (((v13[1] == 5 && v3 == v13[2]) || (v13[1] == 6 && v3 == v21[0])))
                     fcn_004c51a0(*(unsigned int *)(playerSlot * 0x21c + (unsigned long)&g_7f4ca4),0xffffffff,0,v34);
                   do {
-                    if ((*(int *)0x14ce8e0))
-                      (*(int *)0x774654) = 1;
+                    if (g_14ce8e0)
+                      g_774654 = 1;
                   } while (fcn_005373e0(0x5a1430,0x777c7));
                 }
               }

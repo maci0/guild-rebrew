@@ -54,17 +54,17 @@ void __cdecl fcn_00586c10(char* obj)
     int count;
     int v[3];
     unsigned int elapsedTicks;
-    float anchor[3];
-    int g28;
-    int s0;
-    int s1;
-    int s2;
-    int s3;
     int p[3];
+    int s3;
+    int s2;
+    int s1;
+    int s0;
+    int g28;
+    float anchor[3];
     int S[57];
     float f0[4];
     float f1[4];
-    short idx[1024];
+    unsigned short idx[1024];
     char* res;
     char* sp;
     int id;
@@ -85,8 +85,8 @@ void __cdecl fcn_00586c10(char* obj)
     if (res == 0) {
         id = fcn_004f08d0(obj);
         if (id != -1) {
-            while (fcn_004c4450(id) == 0)
-                fcn_005373e0(0, 0x20007);
+            while ((i = fcn_004c4450(id)) == 0)
+                fcn_005373e0(i, 0x20007);
         }
         res = (char*) fcn_004efd30(*(int*) (obj + 1));
         if (res == 0)
@@ -102,10 +102,10 @@ void __cdecl fcn_00586c10(char* obj)
     v[0] = *(int*) ((char*) g + 0x84);
     v[1] = *(int*) ((char*) g + 0x88);
     v[2] = *(int*) ((char*) g + 0x8c);
+    s2 = g_1040488;
     s0 = g_1040480;
     s1 = g_1040484;
     s3 = g_104048c;
-    s2 = g_1040488;
     g28 = d3_CurrentContextIndex;
 
     d2_SetOverlayAnimation(0, 0);
@@ -164,24 +164,23 @@ void __cdecl fcn_00586c10(char* obj)
     fcn_00414960(f0, f1, (char*) *(int*) (obj + 0x61));
     if (g_9a9200[0] != *(int*) (obj + 1)) {
         g_9a9200[0] = *(int*) (obj + 1);
-        g_9a9200[2] = v[0];
-        g_9a9200[3] = v[1];
-        g_9a9200[4] = v[2];
         g_9a9200[5] = 0;
         g_9a9200[6] = 0;
         g_9a9200[7] = 0;
+        g_9a9200[2] = v[0];
+        g_9a9200[3] = v[1];
+        g_9a9200[4] = v[2];
     }
 
     d3_TransformPoint((char*) *(int*) (obj + 0x61), (float*) (*(char**) (obj + 0x61) + 0x4c), (float*) S);
-    dt = f1[1] - f0[1];
+    dt = (f1[1] - f0[1]) * 0.800000012f;
     *(int*) ((char*) S + 0x10) = g_9a9200[2];
     *(int*) ((char*) S + 0x14) = g_9a9200[3];
     *(int*) ((char*) S + 0x18) = g_9a9200[4];
-    dt = dt * 0.800000012f + *(float*) ((char*) S + 0x04);
-    *(float*) ((char*) S + 0x04) = dt;
+    *(float*) ((char*) S + 0x04) += dt;
+    anchor[1] = *(float*) ((char*) S + 0x14);
+    anchor[2] = *(float*) ((char*) S + 0x18);
     anchor[0] = 0.0f;
-    anchor[1] = *(float*)&g_9a9200[3];
-    anchor[2] = *(float*)&g_9a9200[4];
     *(char**) ((char*) S + 0x98) = fcn_00442910(0, (float*) 0x662d70, anchor, (char*) 0x6a946c);
     *(char**) ((char*) S + 0x8c) = fcn_00442910((int) *(char**) ((char*) S + 0x98), (float*) 0x662d70, (float*) 0x662d80, (char*) 0x6a945c);
     *(char**) ((char*) S + 0x90) = fcn_00442910((int) *(char**) ((char*) S + 0x98), (float*) 0x662d70, (float*) 0x662d80, (char*) 0x6a9444);
@@ -287,9 +286,8 @@ void __cdecl fcn_00586c10(char* obj)
     fcn_004432d0(g28, 0);
     if (g_6b89c0 != 0)
         fcn_00459710((char*) g_6b89c0, 1);
-    g = (int*) d3_ActiveCamera;
-    fcn_00438b40((char*) g, p);
-    d3_SetObjectRotation((char*) g, v);
+    fcn_00438b40((char*) d3_ActiveCamera, p);
+    d3_SetObjectRotation((char*) d3_ActiveCamera, v);
     fcn_00516de0(g_6b8300, 0);
     fcn_00443230(1);
     fcn_00473150(sp);

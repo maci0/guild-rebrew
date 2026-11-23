@@ -136,14 +136,16 @@ void __cdecl fcn_004ff490(char* entity)
 			mode = 0x12;
 			memset(pkt, 0, 0x114);
 			*(GAME_TIMESTAMP*) (pkt + 0x18) = t;
-			*(int*) (pkt + 0xc) = *(int*) (other + 4);
+			id = *(int*) (other + 4);
+			*(int*) (pkt + 0xc) = id;
+			*(int*) (pkt + 0x34) = id;
+			id = *(int*) (handle + 4);
 			pkt[8] = 7;
-			*(int*) (pkt + 0x14) = -1;
 			pkt[0x26] = 0xa0;
+			*(int*) (pkt + 0x14) = -1;
 			pkt[0x30] = 2;
-			*(int*) (pkt + 0x34) = *(int*) (other + 4);
-			*(int*) (pkt + 0x38) = *(int*) (handle + 4);
-			fcn_004c4510(handle, *(int*) (handle + 4));
+			*(int*) (pkt + 0x38) = id;
+			fcn_004c4510(handle, id);
 			cm_AppendPacketFieldDelta(1, 1, 2, &mode);
 			fcn_004c5360();
 			fcn_004c5980(pkt);
@@ -154,8 +156,7 @@ void __cdecl fcn_004ff490(char* entity)
 
 	if (ent != 0 && ent[8] != 0 && *(unsigned short*) (entity + 0xa) <= 0x26) {
 		count = 0;
-		p = entity + 0x68;
-		for (i = 0; i < 5; i++) {
+		for (i = 3, p = entity + 0x68; i < 8; i++, p += 4) {
 			if (*(int*) p != -1) {
 				e = gm_LookupEntityRecordById(*(int*) p);
 				if (*(char*) (e + 2) == 6 || *(char*) (e + 2) == 7 || *(char*) (e + 2) == 5) {
@@ -165,15 +166,13 @@ void __cdecl fcn_004ff490(char* entity)
 					count++;
 				}
 			}
-			p += 4;
 		}
 		if (count == 4) {
 			return;
 		}
 		if (*(char*) (ent + 2) == 6 || *(char*) (ent + 2) == 7) {
 			extra = 0;
-			p = ent + 0x68;
-			for (i = 0; i < 5; i++) {
+			for (i = 3, p = ent + 0x68; i < 8; i++, p += 4) {
 				if (*(int*) p != -1) {
 					e = gm_LookupEntityRecordById(*(int*) p);
 					if (*(char*) (e + 2) == 6 || *(char*) (e + 2) == 7 || *(char*) (e + 2) == 5) {
@@ -183,7 +182,6 @@ void __cdecl fcn_004ff490(char* entity)
 						extra++;
 					}
 				}
-				p += 4;
 			}
 			if (extra == 5) {
 				return;

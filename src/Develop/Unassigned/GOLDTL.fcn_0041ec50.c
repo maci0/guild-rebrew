@@ -21,7 +21,7 @@ __declspec(dllimport) int __stdcall IsWindow(void*);
 __declspec(dllimport) int __stdcall GetClientRect(void*, Rect41ec50*);
 __declspec(dllimport) int __stdcall MultiByteToWideChar(unsigned int, unsigned long, const char*, int, unsigned short*, int);
 extern long __stdcall DirectDrawCreateEx(void*, void**, void*, void*);
-extern long __stdcall CoCreateInstance(void*, void*, unsigned long, void*, void**);
+extern __declspec(dllimport) long __stdcall CoCreateInstance(void*, void*, unsigned long, void*, void**);
 
 char* __cdecl AllocVideoListNode(void);
 void __cdecl ReleaseVideoInterfaces(char*);
@@ -35,17 +35,15 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 {
 	FILE* fp;
 	char* v;
-	Com* dd;
-	Com* graph;
-	Com* filter;
-	Com* surface;
-	Com* window;
+	Com* com;
 	Rect41ec50 rc;
+	int wflags;
+	int vid_w;
+	int vid_h;
 	Rect41ec50 client;
 	int desc[0x1f];
 	int scaled;
 	int num;
-	int wflags;
 	int id;
 	long res;
 	char msg[0x100];
@@ -65,7 +63,6 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 	wflags = 0;
 	desc[0] = 0;
 	memset(&desc[1], 0, 0x78);
-	window = 0;
 	strcpy(v + 0x10, name);
 	*(void**) (v + 0x114) = hwnd;
 	*(int*) (v + 0xc) = flags;
@@ -73,8 +70,8 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 	if (res < 0) {
 		goto fail;
 	}
-	dd = *(Com**) (v + 0x13c);
-	if ((*(long (__stdcall**) (Com*, void*, void**)) dd->vt)(dd, (void*) 0x66db00, (void**) (v + 0x138)) < 0) {
+	com = *(Com**) (v + 0x13c);
+	if ((*(long (__stdcall**) (Com*, void*, void**)) com->vt)(com, (void*) 0x66db00, (void**) (v + 0x138)) < 0) {
 		goto fail;
 	}
 	if (flags & 0x10) {
@@ -85,35 +82,36 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 	if (flags & 0x40) {
 		wflags |= 0x400;
 	}
-	dd = *(Com**) (v + 0x13c);
-	if ((*(long (__stdcall**) (Com*, void*, int)) (dd->vt + 0x50 / 4))(dd, hwnd, wflags) < 0) {
+	com = *(Com**) (v + 0x13c);
+	if ((*(long (__stdcall**) (Com*, void*, int)) (com->vt + 0x50 / 4))(com, hwnd, wflags) < 0) {
 		goto fail;
 	}
 	if ((wflags & 0x10) && mode_w != 0 && mode_h != 0 && mode_bpp != 0) {
-		if ((*(long (__stdcall**) (Com*, int, int, int, int, int)) (dd->vt + 0x54 / 4))(dd, mode_w, mode_h, mode_bpp, 0, 0) < 0) {
+		com = *(Com**) (v + 0x13c);
+		if ((*(long (__stdcall**) (Com*, int, int, int, int, int)) (com->vt + 0x54 / 4))(com, mode_w, mode_h, mode_bpp, 0, 0) < 0) {
 			goto fail;
 		}
 	}
-	dd = *(Com**) (v + 0x13c);
+	com = *(Com**) (v + 0x13c);
 	desc[0] = 0x7c;
 	desc[1] = 1;
 	*(int*) (&desc[0x68 / 4]) = 0x184200;
-	if ((*(long (__stdcall**) (Com*, int*, void**, void*)) (dd->vt + 0x18 / 4))(dd, desc, (void**) (v + 0x144), 0) < 0) {
+	if ((*(long (__stdcall**) (Com*, int*, void**, void*)) (com->vt + 0x18 / 4))(com, desc, (void**) (v + 0x144), 0) < 0) {
 		goto fail;
 	}
-	surface = *(Com**) (v + 0x144);
-	if ((*(long (__stdcall**) (Com*, void*, void**)) surface->vt)(surface, (void*) 0x66dac0, (void**) (v + 0x140)) < 0) {
+	com = *(Com**) (v + 0x144);
+	if ((*(long (__stdcall**) (Com*, void*, void**)) com->vt)(com, (void*) 0x66dac0, (void**) (v + 0x140)) < 0) {
 		goto fail;
 	}
 	res = CoCreateInstance((void*) 0x670470, 0, 1, (void*) 0x66ed70, (void**) (v + 0x134));
 	if (res < 0) {
 		goto fail;
 	}
-	graph = *(Com**) (v + 0x134);
-	if ((*(long (__stdcall**) (Com*, void*)) (graph->vt + 0xc / 4))(graph, *(void**) (v + 0x138)) < 0) {
+	com = *(Com**) (v + 0x134);
+	if ((*(long (__stdcall**) (Com*, void*)) (com->vt + 0xc / 4))(com, *(void**) (v + 0x138)) < 0) {
 		goto fail;
 	}
-	res = (*(long (__stdcall**) (Com*, void*)) (graph->vt + 0x14 / 4))(graph, *(void**) (v + 0x140));
+	res = (*(long (__stdcall**) (Com*, void*)) (com->vt + 0x14 / 4))(com, *(void**) (v + 0x140));
 	if (res < 0) {
 		if (res == 0x80070057L) {
 			sprintf(msg, (char*) 0x678124);
@@ -126,48 +124,48 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 	if (res < 0) {
 		goto fail;
 	}
-	filter = *(Com**) (v + 0x11c);
-	if ((*(long (__stdcall**) (Com*, void*, void**)) filter->vt)(filter, (void*) 0x66f900, (void**) (v + 0x128)) < 0) {
+	com = *(Com**) (v + 0x11c);
+	if ((*(long (__stdcall**) (Com*, void*, void**)) com->vt)(com, (void*) 0x66f900, (void**) (v + 0x128)) < 0) {
 		goto fail;
 	}
-	filter = *(Com**) (v + 0x11c);
-	if ((*(long (__stdcall**) (Com*, void*, void**)) filter->vt)(filter, (void*) 0x66f920, (void**) (v + 0x12c)) < 0) {
+	com = *(Com**) (v + 0x11c);
+	if ((*(long (__stdcall**) (Com*, void*, void**)) com->vt)(com, (void*) 0x66f920, (void**) (v + 0x12c)) < 0) {
 		goto fail;
 	}
-	filter = *(Com**) (v + 0x11c);
-	if ((*(long (__stdcall**) (Com*, void*, void**)) filter->vt)(filter, (void*) 0x66f960, (void**) (v + 0x120)) < 0) {
+	com = *(Com**) (v + 0x11c);
+	if ((*(long (__stdcall**) (Com*, void*, void**)) com->vt)(com, (void*) 0x66f960, (void**) (v + 0x120)) < 0) {
 		goto fail;
 	}
-	filter = *(Com**) (v + 0x11c);
-	if ((*(long (__stdcall**) (Com*, void*, void**)) filter->vt)(filter, (void*) 0x66f940, (void**) (v + 0x124)) < 0) {
+	com = *(Com**) (v + 0x11c);
+	if ((*(long (__stdcall**) (Com*, void*, void**)) com->vt)(com, (void*) 0x66f940, (void**) (v + 0x124)) < 0) {
 		goto fail;
 	}
 	MultiByteToWideChar(0, 2, name, (int) strlen(name) + 1, wname, 0x104);
-	filter = *(Com**) (v + 0x11c);
-	if ((*(long (__stdcall**) (Com*, void*, void*)) (filter->vt + 0x34 / 4))(filter, wname, 0) < 0) {
+	com = *(Com**) (v + 0x11c);
+	if ((*(long (__stdcall**) (Com*, void*, void*)) (com->vt + 0x34 / 4))(com, wname, 0) < 0) {
 		goto fail;
 	}
-	graph = *(Com**) (v + 0x11c);
-	if ((*(long (__stdcall**) (Com*, void*, void**)) graph->vt)(graph, (void*) 0x66f910, (void**) (v + 0x130)) < 0) {
+	com = *(Com**) (v + 0x11c);
+	if ((*(long (__stdcall**) (Com*, void*, void**)) com->vt)(com, (void*) 0x66f910, (void**) (v + 0x130)) < 0) {
 		goto fail;
 	}
-	window = *(Com**) (v + 0x130);
-	if ((*(long (__stdcall**) (Com*, void*)) (window->vt + 0x74 / 4))(window, *(void**) (v + 0x114)) < 0) {
+	com = *(Com**) (v + 0x130);
+	if ((*(long (__stdcall**) (Com*, void*)) (com->vt + 0x74 / 4))(com, *(void**) (v + 0x114)) < 0) {
 		goto fail;
 	}
-	window = *(Com**) (v + 0x130);
-	if ((*(long (__stdcall**) (Com*, int)) (window->vt + 0x24 / 4))(window, 0x40000000) < 0) {
+	com = *(Com**) (v + 0x130);
+	if ((*(long (__stdcall**) (Com*, int)) (com->vt + 0x24 / 4))(com, 0x40000000) < 0) {
 		goto fail;
 	}
 	if (flags & 2) {
 		GetClientRect(hwnd, &rc);
 		if (flags & 4) {
-			filter = *(Com**) (v + 0x128);
-			if ((*(long (__stdcall**) (Com*, int*, int*)) (filter->vt + 0x88 / 4))(filter, &client.left, &client.top) < 0) {
+			com = *(Com**) (v + 0x128);
+			if ((*(long (__stdcall**) (Com*, int*, int*)) (com->vt + 0x88 / 4))(com, &vid_w, &vid_h) < 0) {
 				goto fail;
 			}
-			num = (rc.right - rc.left) * client.top;
-			scaled = (int) ((double) num / (double) client.left);
+			num = (rc.right - rc.left) * vid_h;
+			scaled = (int) ((double) num / (double) vid_w);
 			rc.top = ((rc.bottom - rc.top) >> 1) - (scaled >> 1);
 			rc.bottom = scaled + rc.top;
 		}
@@ -183,12 +181,12 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 				rc.top = ((client.bottom - client.top) >> 1) - ((rc.bottom - rc.top) >> 1);
 			}
 		} else {
-			filter = *(Com**) (v + 0x128);
-			if ((*(long (__stdcall**) (Com*, int*, int*)) (filter->vt + 0x88 / 4))(filter, &client.left, &client.top) < 0) {
+			com = *(Com**) (v + 0x128);
+			if ((*(long (__stdcall**) (Com*, int*, int*)) (com->vt + 0x88 / 4))(com, &vid_w, &vid_h) < 0) {
 				goto fail;
 			}
-			num = w * client.top;
-			scaled = (int) ((double) num / (double) client.left);
+			num = w * vid_h;
+			scaled = (int) ((double) num / (double) vid_w);
 			if (flags & 1) {
 				GetClientRect(hwnd, &client);
 				rc.left = ((client.right - client.left) >> 1) - (w >> 1);
@@ -204,24 +202,24 @@ int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int
 		}
 	} else {
 		GetClientRect(hwnd, &rc);
-		filter = *(Com**) (v + 0x128);
-		if ((*(long (__stdcall**) (Com*, int*, int*)) (filter->vt + 0x88 / 4))(filter, &client.left, &client.top) < 0) {
+		com = *(Com**) (v + 0x128);
+		if ((*(long (__stdcall**) (Com*, int*, int*)) (com->vt + 0x88 / 4))(com, &vid_w, &vid_h) < 0) {
 			goto fail;
 		}
-		rc.left = ((rc.right - rc.left) >> 1) - (client.left >> 1);
-		rc.top = ((rc.bottom - rc.top) >> 1) - (client.top >> 1);
-		rc.right = rc.left + client.left;
-		rc.bottom = rc.top + client.top;
+		rc.left = ((rc.right - rc.left) >> 1) - (vid_w >> 1);
+		rc.top = ((rc.bottom - rc.top) >> 1) - (vid_h >> 1);
+		rc.right = rc.left + vid_w;
+		rc.bottom = rc.top + vid_h;
 	}
-	window = *(Com**) (v + 0x130);
-	if ((*(long (__stdcall**) (Com*, int, int, int, int)) (window->vt + 0x9c / 4))(window, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top) < 0) {
+	com = *(Com**) (v + 0x130);
+	if ((*(long (__stdcall**) (Com*, int, int, int, int)) (com->vt + 0x9c / 4))(com, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top) < 0) {
 		goto fail;
 	}
 	*(int*) (v + 8) = g_14cc5bc;
 	id = g_14cc5bc++;
 	if (flags & 8) {
-		window = *(Com**) (v + 0x124);
-		(*(long (__stdcall**) (Com*, void*, int, int)) (window->vt + 0x34 / 4))(window, hwnd, 0x9021, id);
+		com = *(Com**) (v + 0x124);
+		(*(long (__stdcall**) (Com*, void*, int, int)) (com->vt + 0x34 / 4))(com, hwnd, 0x9021, id);
 	}
 	return id;
 

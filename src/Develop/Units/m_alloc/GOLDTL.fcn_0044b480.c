@@ -159,7 +159,7 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* objectName, char* nametab, int n
 		res = (int) obj;
 	}
 	if (obj != 0) {
-		obj->flags = (obj->flags & 0xfd) | ((ok == 0) << 1);
+		obj->flags ^= (obj->flags ^ ((ok == 0) << 1)) & 2;
 		fcn_0044a770(obj, 0);
 		return obj;
 	}

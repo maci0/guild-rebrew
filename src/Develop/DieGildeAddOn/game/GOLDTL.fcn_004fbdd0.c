@@ -31,9 +31,7 @@ void __cdecl fcn_00545d40(int slot, int entity, char* text, int flag, int size, 
 /* ADDRESS: GOLDTL 0x004fbdd0 */
 void __cdecl fcn_004fbdd0(void)
 {
-	float sum0;
-	float sum1;
-	float sum2;
+	float sum[3];
 	float sum3;
 	float lit;
 	float min;
@@ -53,17 +51,17 @@ void __cdecl fcn_004fbdd0(void)
 	if (gm_GameTime % 4 != 0) {
 		return;
 	}
-	sum2 = (g_99ed14 + g_99ed28 + g_99ed3c + g_99ed50) * 0.25f;
-	sum1 = (g_99ed10 + g_99ed24 + g_99ed38 + g_99ed4c) * 0.25f;
-	sum0 = (g_99ed18 + g_99ed2c + g_99ed40 + g_99ed54) * 0.25f;
+	sum[0] = (g_99ed18 + g_99ed2c + g_99ed40 + g_99ed54) * 0.25f;
+	sum[1] = (g_99ed10 + g_99ed24 + g_99ed38 + g_99ed4c) * 0.25f;
+	sum[2] = (g_99ed14 + g_99ed28 + g_99ed3c + g_99ed50) * 0.25f;
 	sum3 = (g_99ed1c + g_99ed30 + g_99ed44 + g_99ed58) * 0.25f;
 	lit = fcn_004fc520();
 	id0 = 0x1c11;
-	if (!(sum0 <= g_dbl_6653e8)) {
+	if (!(sum[0] <= g_dbl_6653e8)) {
 		id0 = 0x1c15;
 	}
 	id1 = 0x1c12;
-	if (!(sum1 <= g_dbl_6653e8)) {
+	if (!(sum[1] <= g_dbl_6653e8)) {
 		id1 = 0x1c16;
 	}
 	id2 = 0x1c13;
@@ -71,24 +69,24 @@ void __cdecl fcn_004fbdd0(void)
 		id2 = 0x1c17;
 	}
 	id3 = 0x1c14;
-	if (!(sum2 <= g_dbl_6653e8)) {
+	if (!(sum[2] <= g_dbl_6653e8)) {
 		id3 = 0x1c18;
 	}
-	min = sum0;
+	min = sum[0];
 	index = 0;
 	have = 0;
-	if (sum1 > min) {
+	if (sum[1] > min) {
 		index = 1;
 	}
-	min = min < sum1 ? min : sum1;
+	min = min < sum[1] ? min : sum[1];
 	if (lit > min) {
 		index = 2;
 	}
 	min = min < lit ? min : lit;
-	if (sum2 > min) {
+	if (sum[2] > min) {
 		index = 3;
 	}
-	min = min < sum2 ? min : sum2;
+	min = min < sum[2] ? min : sum[2];
 	if (min > g_dbl_6628f0) {
 		table[0] = 0x1bf5;
 		table[1] = 0x1bfb;

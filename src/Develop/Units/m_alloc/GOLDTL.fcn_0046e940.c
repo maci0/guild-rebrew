@@ -80,6 +80,7 @@ extern int g_77259c;
 extern int g_67d390;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d3a0;
+extern char g_1015f40[];
 
 int __cdecl fcn_004770a0(int* p, int kind);
 void __cdecl fcn_00476970(int h);
@@ -102,7 +103,7 @@ int __cdecl fcn_0046e940(unsigned int x, unsigned int y, unsigned int width, int
 	if (g_77259c > 0x60) {
 		g_77259c = 1;
 	}
-	for (i = 0, p = (unsigned int*) 0x10161d0; (int) p < 0x102ce50; p += 0xf3, i++) {
+	for (i = 0, p = (unsigned int*) (g_1015f40 + 0x290); (int) p < (int) (g_1015f40 + 0x16f10); p += 0xf3, i++) {
 		if (*p == 0) {
 			goto found;
 		}
@@ -112,7 +113,7 @@ found:
 	if (i == -1) {
 		return i;
 	}
-	rec = (WinRec*) (i * 0x3cc + 0x1015f40);
+	rec = &((WinRec*) g_1015f40)[i];
 	rec->x4 = x;
 	rec->xc = width;
 	rec->x8 = y;
@@ -169,20 +170,20 @@ found:
 		}
 	}
 	ei = d2_AllocateElement();
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].kind) = 0x40;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].x) = rec->x4;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].y) = rec->x8;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].width) = rec->xc;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].height) = rec->x10;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].value_008) = i + 0x400;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].value_088) = i;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].clip_top) = rec->x8;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].clip_right) = rec->xc + rec->x4;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].clip_left) = rec->x4;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].clip_bottom) = rec->x10 + rec->x8;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].mode) = 2;
-	(*(WinRec**)&((D2_CONTROL_TL*)g_1015ea0)[ei].data) = rec;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ei].parent) = 0;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].kind = 0x40;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].x = rec->x4;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].y = rec->x8;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].width = rec->xc;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].height = rec->x10;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].value_008 = i + 0x400;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].value_088 = i;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].clip_top = rec->x8;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].clip_right = rec->xc + rec->x4;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].clip_left = rec->x4;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].clip_bottom = rec->x10 + rec->x8;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].mode = 2;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].data = rec;
+	((D2_CONTROL_TL*)g_1015ea0)[ei].parent = 0;
 	rec->x278 = 2;
 	rec->x27c = ei;
 	rec->x280 = 1;

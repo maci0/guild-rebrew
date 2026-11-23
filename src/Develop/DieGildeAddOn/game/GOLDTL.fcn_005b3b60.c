@@ -236,7 +236,6 @@ void __cdecl fcn_005b3b60(void)
 				}
 				fcn_004c5530(msg);
 			} else if (k == item[5]) {
-				i = g_774970;
 				memset(m, 0, sizeof(m));
 				*(char*) (m + 8) = 4;
 				*(char*) (m + 0x26) = 0x22;
@@ -251,7 +250,7 @@ void __cdecl fcn_005b3b60(void)
 						break;
 					}
 					if (*(unsigned short*) p != 0xffff && *(char*) (p + 0x166) != 0
-					    && *(unsigned short*) p != (unsigned short) i) {
+					    && g_774970 != *(unsigned short*) p) {
 						*(int*) (m + 0x34 + k * 4) = *(int*) (p + 4);
 						k++;
 					}

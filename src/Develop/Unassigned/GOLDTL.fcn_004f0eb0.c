@@ -45,7 +45,7 @@ float __cdecl fcn_004f0eb0(int level, int percent, int count)
 	sum = g_6628a8;
 	while (count-- > 0) {
 		sum += step;
-		step *= g_6628cc;
+		step *= 0.5f;
 	}
 	return sum;
 }

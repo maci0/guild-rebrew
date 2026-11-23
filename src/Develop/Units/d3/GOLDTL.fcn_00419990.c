@@ -22,6 +22,11 @@ typedef struct Entry_419990 {
 	int pan;
 } Entry_419990;
 
+typedef struct Slot_419990 {
+	int id;
+	char pad[0x50];
+} Slot_419990;
+
 extern int* g_6b8300;
 extern char* d3_ActiveCamera;
 extern unsigned char g_772d10;
@@ -123,16 +128,15 @@ void __cdecl d3snd_UpdateAmbientSources(void)
 	dir[2] = g_662d40[0] * matrix[0][2] + (g_662d40[1] * matrix[1][2] + g_662d40[2] * matrix[2][2]);
 	d3_NormalizeVector(dir);
 	run = fcn_00441f10(g_6b8300, raw_x, raw_y);
-	if (run >= 0) {
-		cell = *(int*) ((char*) g_6b8300 + 0x7da0);
-		id = *(int*) ((char*) cell + run * 344 + 0x154);
-	} else {
-		id = 0;
+	if (run < 0) {
+		goto fill_one;
 	}
-	if (run >= 0 && id <= 3 && id != 0) {
+	cell = *(int*) ((char*) g_6b8300 + 0x7da0);
+	id = *(int*) ((char*) cell + run * 344 + 0x154);
+	if (id <= 3 && id != 0) {
 		entries[0].id = id;
 		entries[0].volume = (int) (((double) (unsigned int) int_67769c[id] -
-			(double) (unsigned int) int_67769c[id] * g_6628a8 / (flt_677684[id] * flt_677684[id])) *
+			(double) (unsigned int) int_67769c[id] * 0.0f / (flt_677684[id] * flt_677684[id])) *
 			(2000 - hint) * g_662a80);
 		entries[0].pan = 63;
 		count = 1;
@@ -140,6 +144,7 @@ void __cdecl d3snd_UpdateAmbientSources(void)
 			((int*) g_6b5d14)[i] = 3;
 		}
 	} else {
+fill_one:
 		for (i = 0; i < g_6b5d18; i++) {
 			((int*) g_6b5d14)[i] = 1;
 		}
@@ -231,7 +236,8 @@ void __cdecl d3snd_UpdateAmbientSources(void)
 		count = 1;
 	}
 	state = -1;
-	if (count == 0) {
+	switch (count) {
+	case 0:
 		if (g_6b5d54 != 0) {
 			fcn_004237f0((int*) g_6b5d54, 0);
 		}
@@ -239,8 +245,7 @@ void __cdecl d3snd_UpdateAmbientSources(void)
 			fcn_004237f0((int*) g_6b5da8, 0);
 		}
 		return;
-	}
-	if (count == 1) {
+	case 1:
 		voice = (Voice_419990*) fcn_00419640(entries[0].id, &state);
 		if (voice != 0) {
 			if (voice->handle != 0) {
@@ -251,23 +256,25 @@ void __cdecl d3snd_UpdateAmbientSources(void)
 				d3snd_PlaySource((char*) voice, 0, 0, 0);
 			}
 		}
-		id = state == 0 ? g_6b5da8 : g_6b5d54;
+		id = ((Slot_419990*) &g_6b5d54)[state == 0].id;
 		if (id != 0) {
 			fcn_004237f0((int*) id, 0);
 		}
-	}
-	state = -1;
-	for (i = 0; i < count; i++) {
-		voice = (Voice_419990*) fcn_00419640(entries[i].id, &state);
-		if (voice != 0) {
-			if (voice->handle != 0) {
-				fcn_00423890((int*) voice->handle, entries[i].volume);
-				fcn_00423850((int*) voice->handle, entries[i].pan);
-			}
-			if (fcn_004193d0((char*) voice) == 0) {
-				d3snd_PlaySource((char*) voice, 0, 0, 0);
+	case 2:
+		state = -1;
+		for (i = 0; i < count; i++) {
+			voice = (Voice_419990*) fcn_00419640(entries[i].id, &state);
+			if (voice != 0) {
+				if (voice->handle != 0) {
+					fcn_00423890((int*) voice->handle, entries[i].volume);
+					fcn_00423850((int*) voice->handle, entries[i].pan);
+				}
+				if (fcn_004193d0((char*) voice) == 0) {
+					d3snd_PlaySource((char*) voice, 0, 0, 0);
+				}
 			}
 		}
+		break;
 	}
 	return;
 stop:
