@@ -25,8 +25,7 @@ void __cdecl he_RunNightWatchmanAnnouncements(char* action)
 
 		if (!((float) w >= *(float*) (idx * 4 + 0x696540)) || !((float) w < *(float*) (idx * 4 + 0x696540) + 1.0f)) {
 			*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
-			fcn_00500bb0((char*) &gm_GameTime, 0, 0, 1);
-			return;
+			goto sync_time;
 		}
 		if (*(char*) &g_774964)
 			fcn_004c30a0(-7, 0, (char*) 0x6a6d50, -1, 0xfa);
@@ -56,8 +55,7 @@ void __cdecl he_RunNightWatchmanAnnouncements(char* action)
 
 		if (!((float) w >= *(float*) (idx * 4 + 0x696550)) || !((float) w < *(float*) (idx * 4 + 0x696550) + 1.0f)) {
 			*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
-			fcn_00500bb0((char*) &gm_GameTime, 0, 0, 1);
-			return;
+			goto sync_time;
 		}
 		if (*(char*) &g_774964)
 			fcn_004c30a0(-7, 0, (char*) 0x6a6d50, -1, 0xfa);
@@ -86,8 +84,7 @@ void __cdecl he_RunNightWatchmanAnnouncements(char* action)
 		if (*(unsigned short*) &g_7f4c04 < 0x16 || *(int*) 0x7f4c06 < 0x1e ||
 		    *(int*) 0x7f4c06 >= 0x32) {
 			*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
-			fcn_00500bb0((char*) &gm_GameTime, 0, 0, 1);
-			return;
+			goto sync_time;
 		}
 		if (*(char*) &g_774964) {
 			fcn_004c30a0(-7, 0, (char*) 0x6a6d50, -1, 0xfa);
@@ -103,4 +100,6 @@ void __cdecl he_RunNightWatchmanAnnouncements(char* action)
 	default:
 		return;
 	}
+sync_time:
+	fcn_00500bb0((char*) &gm_GameTime, 0, 0, 1);
 }

@@ -1,5 +1,30 @@
+#include <string.h>
 #include "client_types.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
+
+typedef struct F8 {
+	int mask;
+	int b;
+} F8;
+
+struct msg {
+	char pad0[4];
+	unsigned char kind;
+	char pad5[3];
+	int owner;
+	int target;
+	char pad10[0x18];
+	pos14_7f4c00 when;
+	unsigned char code;
+	char pad37[0x21];
+	int f58;
+	int f5c;
+	int f60;
+	int f64;
+	int f68;
+	int f6c;
+	char pad70[0x88];
+};
 
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -7,10 +32,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
-extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern pos14_7f4c00 gm_GameTime;
 #include "GOLDTL.fcn_0058a250_gconf.h"
 extern char g_7f4ca4[];
 
@@ -30,7 +52,7 @@ int __cdecl fcn_00471f80(int);
 int __cdecl fcn_00525f60(char*, int);
 int __cdecl fcn_005898f0(void*);
 void __cdecl fcn_005100f0(int, int);
-int __cdecl fcn_004a5e60(unsigned short*, int, int, int, float, float, int*);
+int __cdecl fcn_004a5e60(unsigned short*, int, F8, int, float, int*);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_005373e0(void*, int);
@@ -45,7 +67,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 {
 	int ids[3];
 	int q[20];
-	char req[0xf8];
+	struct msg req;
 	char* targetEntity;
 	int dlg;
 	int elem;
@@ -56,16 +78,17 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 	int id;
 	int i;
 	int n; int cost;
+	F8 f;
 
 	for (i = 0; i < 20; i++) {
 		q[i] = 0;
 	}
-	q[0] = 1;
-	q[1] = 0x400;
-	q[4] = 6;
 	for (i = 7; i < 15; i++) {
 		q[i] = -1;
 	}
+	q[0] = 1;
+	q[1] = 0x400;
+	q[4] = 6;
 	targetEntity = (char*) fcn_005cd440(q, (char*) *(int*) 0x14b5310, 0, 0);
 	if (targetEntity == 0) {
 		fcn_00532ef0();
@@ -94,50 +117,46 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 	cancelButton = fcn_00472250(dlg, 3, v16 + 1);
 	g_100f1dc = -1;
 	do {
-		v16 = fcn_00471f80(elem);
+		sel = fcn_00471f80(elem);
+		v16 = sel;
 		d2_SetForm(dlg, 1);
 		io_AppendText(0x6811b0);
 		io_AppendText(0x3ffd, 0x3ffb, *(unsigned short*) targetEntity, n);
-		cost = ids[v16]; io_AppendText(0x3ffe, cost);
+		cost = ids[sel]; io_AppendText(0x3ffe, cost);
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == confirmButton) {
 				if (fcn_00525f60(g_slot_table + g_774970 * 0x21c, cost) == 1 && fcn_005898f0((void*) a0) != 0) {
 					fcn_005100f0(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -cost);
-					for (i = 0; i < 0x3e; i++) {
-						*(int*) (req + i * 4) = 0;
-					}
-					req[4] = 0x99;
-					req[0x36] = 2;
-					*(int*) (req + 0x64) = -1;
-					*(int*) (req + 0x68) = 1;
-					*(int*) (req + 8) = *(int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + (int) g_7f4ca4);
-					*(int*) (req + 0x2c) = g_7f4c04;
-					*(int*) (req + 0x28) = gm_GameTime;
-					*(int*) (req + 0xc) = *(int*) (a0 + 1);
-					*(int*) (req + 0x5c) = *(int*) (a0 + 1);
-					*(int*) (req + 0x30) = g_7f4c08;
-					*(short*) (req + 0x34) = g_7f4c0c;
-					*(int*) (req + 0x60) = *(int*) (targetEntity + 4);
-					*(int*) (req + 0x6c) = v16;
+					memset(&req, 0, sizeof(req));
+					req.kind = 0x99;
+					req.code = 2;
+					req.f64 = -1;
+					req.f68 = 1;
+					req.owner = *(int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + (int) g_7f4ca4);
+					req.when = gm_GameTime;
+					req.target = *(int*) (a0 + 1);
+					req.f5c = *(int*) (a0 + 1);
+					req.f60 = *(int*) (targetEntity + 4);
+					req.f6c = v16;
 					if (*(int*) (targetEntity + 0x170) != 0) {
-						sel = *(int*) (*(int*) (targetEntity + 0x170) + 1);
+						req.f58 = *(int*) (*(int*) (targetEntity + 0x170) + 1);
 					} else if (*(int*) (targetEntity + 0x16c) != 0) {
-						sel = *(int*) (*(int*) (targetEntity + 0x16c) + 1);
+						req.f58 = *(int*) (*(int*) (targetEntity + 0x16c) + 1);
 					} else {
 						v16 = -1;
-						fcn_004a5e60((unsigned short*) (g_slot_table + g_774970 * 0x21c), 0, 0x7b4c4a0, 0, 0.0f, 100.0f, &v16);
-						sel = v16;
+						f.mask = 0x7b4c4a0;
+						f.b = 0;
+						fcn_004a5e60((unsigned short*) (g_slot_table + g_774970 * 0x21c), 0, f, 0, 100.0f, &v16);
+						req.f58 = v16;
 					}
-					*(int*) (req + 0x58) = sel;
-					id = fcn_004c5530(req);
-					if (id != -1) {
-						while (fcn_004c4450(id) == 0) {
-							fcn_005373e0(0, 0x20007);
-						}
+					id = fcn_004c5530(&req);
+					while (id != -1 && fcn_004c4450(id) == 0) {
+						fcn_005373e0(0, 0x20007);
 					}
 					fcn_004c3030(-7, 0, (char*) 0x6a9508, 0);
+					g_774654 = 1;
 				}
 			} else if (d2_CurrentElementId == cancelButton) {
 				g_774654 = 1;

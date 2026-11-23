@@ -32,7 +32,6 @@ char __cdecl ch_FindWalkableCell(char* map, float* from, float* to, int x, int y
 	int rowEnd;
 	int col;
 	int colEnd;
-	int dy;
 	int span;
 	int type;
 	int world;
@@ -40,7 +39,6 @@ char __cdecl ch_FindWalkableCell(char* map, float* from, float* to, int x, int y
 	float dx;
 	float ey;
 	float ez;
-	float ex;
 
 	if (map == 0 || *(int**) (map + 0x24) == 0 || outX == 0 || outY == 0) {
 		return 0;
@@ -68,26 +66,11 @@ char __cdecl ch_FindWalkableCell(char* map, float* from, float* to, int x, int y
 
 	if ((flags & 1) || world) {
 		for (; i < *(int*) (map + 0x20) && i < maxRows; i++) {
-			rowEnd = *(int*) (map + 0x20) - 1;
-			if (rowEnd > i + y) {
-				rowEnd = i + y;
-			}
-			row = y - i;
-			if (row < 1) {
-				row = 1;
-			}
-			dy = y - row;
-			while (row <= rowEnd) {
-				span = i - abs(dy);
-				colEnd = *(int*) (map + 0x20) - 1;
-				if (colEnd > x + span) {
-					colEnd = x + span;
-				}
-				col = x - span;
-				if (col < 0) {
-					col = 0;
-				}
-				while (col <= colEnd) {
+			rowEnd = (*(int*) (map + 0x20) - 1 < y + i) ? *(int*) (map + 0x20) - 1 : y + i;
+			for (row = (y - i < 1) ? 1 : y - i; row <= rowEnd; row++) {
+				span = i - abs(y - row);
+				colEnd = (*(int*) (map + 0x20) - 1 < x + span) ? *(int*) (map + 0x20) - 1 : x + span;
+				for (col = (x - span < 0) ? 0 : x - span; col <= colEnd; col++) {
 					if (row >= 0 && row < *(int*) (map + 0x20) && col >= 0 && col < *(int*) (map + 0x20)) {
 						type = ((int*) *(int**) (map + 0x24))[(*(int*) (map + 0x20) * row + col) * 7];
 						if (type != 0 && type != 0x0d) {
@@ -96,10 +79,10 @@ char __cdecl ch_FindWalkableCell(char* map, float* from, float* to, int x, int y
 								ey = pa[1] - p[1];
 								ez = pa[2] - p[2];
 								d = (float) sqrt(ez * ez + ey * ey + dx * dx);
-								ez = pb[2] - p[2];
+								dx = pb[0] - p[0];
 								ey = pb[1] - p[1];
-								ex = pb[0] - p[0];
-								d = d + (float) sqrt(ez * ez + ey * ey + ex * ex);
+								ez = pb[2] - p[2];
+								d += (float) sqrt(ez * ez + ey * ey + dx * dx);
 								if (d < best) {
 									*outX = col;
 									*outY = row;
@@ -108,34 +91,16 @@ char __cdecl ch_FindWalkableCell(char* map, float* from, float* to, int x, int y
 							}
 						}
 					}
-					col++;
 				}
-				row++;
-				dy--;
 			}
 		}
 	} else {
 		for (; i < *(int*) (map + 0x20) && i < maxRows; i++) {
-			rowEnd = *(int*) (map + 0x20) - 1;
-			if (rowEnd > i + y) {
-				rowEnd = i + y;
-			}
-			row = y - i;
-			if (row < 1) {
-				row = 1;
-			}
-			dy = y - row;
-			while (row <= rowEnd) {
-				span = i - abs(dy);
-				colEnd = *(int*) (map + 0x20) - 1;
-				if (colEnd > x + span) {
-					colEnd = x + span;
-				}
-				col = x - span;
-				if (col < 0) {
-					col = 0;
-				}
-				while (col <= colEnd) {
+			rowEnd = (*(int*) (map + 0x20) - 1 < y + i) ? *(int*) (map + 0x20) - 1 : y + i;
+			for (row = (y - i < 1) ? 1 : y - i; row <= rowEnd; row++) {
+				span = i - abs(y - row);
+				colEnd = (*(int*) (map + 0x20) - 1 < x + span) ? *(int*) (map + 0x20) - 1 : x + span;
+				for (col = (x - span < 0) ? 0 : x - span; col <= colEnd; col++) {
 					if (row >= 0 && row < *(int*) (map + 0x20) && col >= 0 && col < *(int*) (map + 0x20)) {
 						type = ((int*) *(int**) (map + 0x24))[(*(int*) (map + 0x20) * row + col) * 7];
 						if (type != 0 && type != 0x0d) {
@@ -144,10 +109,7 @@ char __cdecl ch_FindWalkableCell(char* map, float* from, float* to, int x, int y
 							return 1;
 						}
 					}
-					col++;
 				}
-				row++;
-				dy--;
 			}
 		}
 	}

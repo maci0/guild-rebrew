@@ -33,8 +33,7 @@ void __cdecl evt_ReadToken(char* s, struct tok_426680* t)
 	char buf[0x100];
 	char found;
 	char c;
-	register struct tok_426680* tok;
-	register char* p;
+	char* p;
 	char* q;
 	int i;
 	int j;
@@ -48,7 +47,7 @@ void __cdecl evt_ReadToken(char* s, struct tok_426680* t)
 		t->type = 0xc;
 		return;
 	}
-	tok = t; tok->type = 0;
+	t->type = 0;
 	start = 0;
 	while (s[start] == ' ' && start < strlen(s)) {
 		start++;
@@ -61,32 +60,30 @@ void __cdecl evt_ReadToken(char* s, struct tok_426680* t)
 		}
 		for (j = 1; j < 0x1e; j++) {
 			if (s[i] == *(char*) (0x14cb840 + j * 5)) {
-				if (j != 0x1d) {
-					break;
-				}
-				if (g_6b25b0 > 1) {
-					r = _isctype(s[i - 1], 4);
-				} else {
-					r = *(unsigned char*) ((unsigned char*) g_6b23a4 + s[i - 1] * 2) & 4;
-				}
-				if (r == 0) {
-					break;
-				}
-			}
-		}
-		if (j < 0x1e) {
-			if (i == start) {
-				for (j = 1; j < 0x1e; j++) {
-					if (evt_MatchTokenPrefix(s + i, (char*) (0x14cb840 + j * 5))) {
-						i += (int) strlen((char*) (0x14cb840 + j * 5));
-						break;
+				if (j == 0x1d) {
+					if (g_6b25b0 > 1) {
+						r = _isctype(s[i - 1], 4);
+					} else {
+						r = *(unsigned char*) ((unsigned char*) g_6b23a4 + s[i - 1] * 2) & 4;
+					}
+					if (r != 0) {
+						continue;
 					}
 				}
+				if (i - start == 0) {
+					for (j = 1; j < 0x1e; j++) {
+						if (evt_MatchTokenPrefix(s + i, (char*) (0x14cb840 + j * 5))) {
+							i += (int) strlen((char*) (0x14cb840 + j * 5));
+							break;
+						}
+					}
+				}
+				found = 1;
+				memcpy(buf, s + start, i - start);
+				buf[i - start] = 0;
+				LEX_426680 = s + start + strlen(buf);
+				break;
 			}
-			memcpy(buf, s + start, i - start);
-			buf[i - start] = 0;
-			found = 1;
-			LEX_426680 = s + start + strlen(buf);
 		}
 		i++;
 	} while (found == 0);
@@ -94,22 +91,22 @@ void __cdecl evt_ReadToken(char* s, struct tok_426680* t)
 	c = buf[0];
 	for (j = 1; j < 9; j++) {
 		if (c == *(char*) (g_14cb3b0 + (j - 1) * 0x10) && evt_MatchTokenPrefix(buf, (char*) (g_14cb3b0 + (j - 1) * 0x10)) != 0) {
-			tok->type = 0xa;
-			tok->u.num = j;
+			t->type = 0xa;
+			t->u.num = j;
 			return;
 		}
 	}
 	for (j = 1; j < 0x1e; j++) {
 		if (c == *(char*) (0x14cb840 + j * 5) && evt_MatchTokenPrefix(buf, (char*) (0x14cb840 + j * 5)) != 0) {
-			tok->type = 1;
-			tok->u.num = j;
+			t->type = 1;
+			t->u.num = j;
 			if (j == 0xe) {
 				q = strchr(LEX_426680, '"');
 				if (q != 0) {
-					memcpy(tok->u.text, LEX_426680, q - LEX_426680);
-					tok->u.text[q - LEX_426680] = 0;
+					memcpy(t->u.text, LEX_426680, q - LEX_426680);
+					t->u.text[q - LEX_426680] = 0;
 				}
-				tok->type = 7;
+				t->type = 7;
 				LEX_426680 = q + 1;
 			}
 			g_6b7eb4 = j;
@@ -131,41 +128,41 @@ void __cdecl evt_ReadToken(char* s, struct tok_426680* t)
 	}
 	if (r != 0) {
 		if (strchr(buf, '.')) {
-			tok->type = 6;
-			tok->u.fnum = (float) atof(buf);
+			t->type = 6;
+			t->u.fnum = (float) atof(buf);
 		} else {
-			tok->type = 5;
-			tok->u.num = atoi(buf);
+			t->type = 5;
+			t->u.num = atoi(buf);
 		}
 	} else {
 		if ((p = evt_FindSymbol(evt_CurrentScript, buf)) != 0) {
-			tok->type = 2;
-			tok->u.sym = p;
+			t->type = 2;
+			t->u.sym = p;
 			return;
 		}
 		if ((r = evt_ClassifyScriptType(buf)) != 0) {
-			tok->type = 8;
-			tok->u.num = r;
+			t->type = 8;
+			t->u.num = r;
 			return;
 		}
 		if ((p = evt_FindDefinition(evt_CurrentScript, buf)) != 0) {
-			tok->type = 3;
-			tok->u.sym = p;
+			t->type = 3;
+			t->u.sym = p;
 			return;
 		}
 		if ((p = fcn_00429e60(buf)) != 0) {
-			tok->type = 4;
-			tok->u.sym = p;
+			t->type = 4;
+			t->u.sym = p;
 			return;
 		}
 		if ((p = fcn_00426240(evt_CurrentScript, buf)) != 0) {
-			tok->type = 0xb;
-			tok->u.sym = p;
+			t->type = 0xb;
+			t->u.sym = p;
 			return;
 		}
 	}
-	if (tok->type != 0) {
+	if (t->type != 0) {
 		return;
 	}
-	strcpy(tok->u.text, buf);
+	strcpy(t->u.text, buf);
 }

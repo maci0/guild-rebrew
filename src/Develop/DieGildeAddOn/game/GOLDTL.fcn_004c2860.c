@@ -22,6 +22,8 @@ extern char* g_7746c4;
 extern char* g_7746c8;
 extern char* g_7746cc;
 extern unsigned char* lpGebaeudePROT;
+extern pos14_7f4c00 gm_GameTime;
+extern IdGroup g_688118[];
 
 int __cdecl fcn_004c27f0(void);
 int __cdecl fcn_004c2820(int);
@@ -45,7 +47,6 @@ void __cdecl fcn_004c2860(void)
 	int idx;
 	int j;
 	int kind;
-	int e;
 	int thr;
 	char* cc;
 	Chan_14cc460* p;
@@ -57,10 +58,10 @@ void __cdecl fcn_004c2860(void)
 	if (!(g_6819b0 > g_6628a8)) {
 		return;
 	}
-	if (g_772e64 != fcn_00500e20((int*) 0x7f4c00)) {
+	if (g_772e64 != fcn_00500e20((int*) &gm_GameTime)) {
 		if (g_772e64 != 0) {
 			slot = fcn_004c2820(0x2694);
-			g_772e64 = fcn_00500e20((int*) 0x7f4c00);
+			g_772e64 = fcn_00500e20((int*) &gm_GameTime);
 			if (slot < 0) {
 				return;
 			}
@@ -86,7 +87,7 @@ void __cdecl fcn_004c2860(void)
 			}
 			return;
 		}
-		g_772e64 = fcn_00500e20((int*) 0x7f4c00);
+		g_772e64 = fcn_00500e20((int*) &gm_GameTime);
 		return;
 	}
 	if (tp_msx_CurrentTrack != 0) {
@@ -132,22 +133,17 @@ restart:
 	slot = fcn_004c27f0();
 	g_772e58 = g_7746c4 != 0 ? g_7746c4 : g_7746c8;
 	g_772e5c = cc;
-	idx = slot * 0x114;
-	thr = *(short*) (0x688228 + idx);
+	thr = g_688118[slot].score;
 	roll = gm_RandomMod(0x80);
 	if ((int) roll < thr) {
 		kind = g_772e58 != 0 ? ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[(unsigned char)*g_772e58].category : 0x2694;
-		j = 0;
-		e = *(int*) (0x688118 + idx);
-		while (e != 0) {
-			if (e == kind) {
+		for (j = 0; g_688118[slot].ids[j] != 0; j++) {
+			if (g_688118[slot].ids[j] == kind) {
 				break;
 			}
-			j++;
-			e = *(int*) (0x688118 + idx + j * 4);
 		}
-		if (*(int*) (0x688118 + idx + j * 4) == 0) {
-			fcn_0064d41a(g_772a10, (char*) 0x68a388, (char*) (0x688128 + idx), thr);
+		if (g_688118[slot].ids[j] == 0) {
+			fcn_0064d41a(g_772a10, (char*) 0x68a388, g_688118[slot].name, thr);
 			g_772e68 = now;
 		} else return;
 		if (g_772e58 != 0) {

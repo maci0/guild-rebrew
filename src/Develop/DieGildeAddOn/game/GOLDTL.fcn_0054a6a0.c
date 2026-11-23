@@ -1,6 +1,21 @@
 /* Drive the merchant trade page: validate the sell request, place the item
  * and report the trade result. */
 
+typedef struct {
+	unsigned short id;
+	char kind;
+	char pad3;
+	int h;
+	char pad8[0x21c - 8];
+} Rec54a6a0;
+
+typedef struct {
+	int a;
+	int b;
+	char* who;
+} Out54a6a0;
+
+extern Rec54a6a0 g_7f4ca0[];
 extern unsigned char g_773d75;
 
 void __cdecl he_FreeAction(int);
@@ -11,15 +26,15 @@ void __cdecl fcn_00500bb0(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_005b23e0(int, int, int);
+void __cdecl fcn_005b23e0(Rec54a6a0*, int, int);
 void __cdecl fcn_004c4510(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
-int __cdecl fcn_004fd4f0(int, int*);
+int __cdecl fcn_004fd4f0(int, Out54a6a0*);
 int __cdecl io_FormatTextBuffer(char*, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_004c5150(int, int, int, int);
-int __cdecl fcn_00493200(int, int);
+void __cdecl fcn_004c5150(int, int, unsigned char, int);
+int __cdecl fcn_00493200(Rec54a6a0*, int);
 
 /* ADDRESS: GOLDTL 0x0054a6a0 */
 void __cdecl fcn_0054a6a0(int a0)
@@ -28,9 +43,7 @@ void __cdecl fcn_0054a6a0(int a0)
 	int v3;
 	int v4;
 	int entity;
-	unsigned int v14;
-	int v15;
-	int pair[2];
+	Out54a6a0 pair;
 	char message[256];
 	char v1;
 
@@ -69,15 +82,11 @@ void __cdecl fcn_0054a6a0(int a0)
 			v8 = 0;
 			v9 = (char) 0xff;
 			v10 = 0xffffffff;
-			v15 = 0;
+			pair.who = 0;
 			v4 = gm_LookupEntityRecordById(*(int*) (v3 + 0x1e));
 			if (v4) {
-				v15 = v4;
-				fcn_005b23e0(
-				    (int) ((unsigned int) *(unsigned short*) (entity + 0x27) *
-				               0x21c +
-				           0x7f4ca0),
-				    v4, entity);
+				pair.who = (char*) v4;
+				fcn_005b23e0(&g_7f4ca0[*(unsigned short*) (entity + 0x27)], v4, entity);
 			}
 			fcn_004c4510(v3, *(int*) (v3 + 2));
 			cm_AppendPacketFieldDelta(1, 1, 0x22, (int*) &v8);
@@ -85,59 +94,56 @@ void __cdecl fcn_0054a6a0(int a0)
 			cm_AppendPacketFieldDelta(1, 1, 0x1d, (int*) &v9);
 			cm_AppendPacketFieldDelta(4, 1, 0x1e, (int*) &v10);
 			fcn_004c5360();
-			v4 = fcn_004fd4f0(entity, pair);
+			v4 = fcn_004fd4f0(entity, &pair);
 			if (v4) {
-				v1 = *(char*) ((unsigned int) *(unsigned short*) (entity + 0x27) *
-			                       0x21c +
-			                   0x7f4ca2);
+				v1 = g_7f4ca0[*(unsigned short*) (entity + 0x27)].kind;
 				if (v1 == 6 || v1 == 7) {
-					io_FormatTextBuffer(message, 0x19a7, pair[0], pair[1]);
-					fcn_00545d40(*(int*) ((unsigned int) *
-					                              (unsigned short*) (entity + 0x27) *
-					                              0x21c +
-					                          0x7f4ca4),
+					io_FormatTextBuffer(message, 0x19a7, pair.a, pair.b);
+					fcn_00545d40(g_7f4ca0[*(unsigned short*) (entity + 0x27)].h,
 					             0xffffffff, message, 0, 0x5ff, (char*) 0x6b5c60);
 				}
-				fcn_004c5150(*(int*) ((unsigned int) *
-				                          (unsigned short*) (entity + 0x27) *
-				                          0x21c +
-				                      0x7f4ca4),
-				             0xffffffff, g_773d75, pair[1]);
+				fcn_004c5150(g_7f4ca0[*(unsigned short*) (entity + 0x27)].h,
+				             0xffffffff, g_773d75, pair.b);
 				fcn_004c4510(entity, *(int*) (entity + 1));
-				cm_AppendPacketFieldDelta(4, 1, 0x69, &pair[1]);
+				cm_AppendPacketFieldDelta(4, 1, 0x69, &pair.b);
 				fcn_004c5360();
 			}
 		}
 		fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
 		*(unsigned short*) (v2 + 0x56) = 7;
 		*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
-		return;
+		break;
 	}
 	case 1:
 		fcn_00500bb0(v2 + 0x52,
 		              (int) ((gm_RandomMod(2) & 0xffff) + 1), 0, 0);
 		*(int*) (v2 + 0x84) = fcn_004c5620(2, v2);
-		return;
+		break;
 	case 0:
-		v4 = (unsigned int) *(unsigned short*) (entity + 0x27) * 0x21c;
-		v1 = *(char*) (v4 + 0x7f4ca2);
+		v1 = g_7f4ca0[*(unsigned short*) (entity + 0x27)].kind;
 		if (v1 != 6 && v1 != 7) {
-			if (!v3 || !fcn_00493200(v4 + 0x7f4ca0, v3)) {
+			if (!v3) {
 				fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
 				*(unsigned short*) (v2 + 0x56) = 7;
 				*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
 				return;
 			}
-		} else if (!v3 || !*(char*) (v3 + 0x22)) {
+			if (!fcn_00493200(&g_7f4ca0[*(unsigned short*) (entity + 0x27)], v3)) {
+				fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
+				*(unsigned short*) (v2 + 0x56) = 7;
+				*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
+				return;
+			}
+			fcn_00500bb0(v2 + 0x52, 1, 0, 0);
+			*(int*) (v2 + 0x84) = fcn_004c5620(1, v2);
+		} else if (v3 && *(char*) (v3 + 0x22)) {
+			fcn_00500bb0(v2 + 0x52, 1, 0, 0);
+			*(int*) (v2 + 0x84) = fcn_004c5620(1, v2);
+		} else {
 			fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
 			*(unsigned short*) (v2 + 0x56) = 7;
-			v14 = 0;
-			*(int*) (v2 + 0x84) = fcn_004c5620(v14, v2);
-			return;
+			*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
 		}
-		fcn_00500bb0(v2 + 0x52, 1, 0, 0);
-		v14 = 1;
-		*(int*) (v2 + 0x84) = fcn_004c5620(v14, v2);
-		return;
+		break;
 	}
 }

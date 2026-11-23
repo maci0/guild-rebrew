@@ -38,19 +38,19 @@ void __cdecl fcn_0044a390(MeshBox* m)
 	float cx;
 	float cy;
 	float cz;
-	float bb[6];
-	float dx;
-	float dy;
-	float dz;
+	float min_v[4];
+	float max_v[4];
 
-	v = m->verts;
 	n = m->vert_count;
 	r = 0.0f;
-	for (i = n; i > 0; i--) {
-		d = v->px * v->px + v->py * v->py + v->pz * v->pz;
-		if (d > r)
-			r = d;
-		v++;
+	if (n > 0) {
+		v = m->verts;
+		for (i = n; i > 0; i--) {
+			d = v->pz * v->pz + v->px * v->px + v->py * v->py;
+			if (d > r)
+				r = d;
+			v++;
+		}
 	}
 	m->center_x = 0.0f;
 	m->center_y = 0.0f;
@@ -58,56 +58,56 @@ void __cdecl fcn_0044a390(MeshBox* m)
 	m->diagonal = (float) sqrt(d); /* Native reloads the last squared distance. */
 	m->radius = (float) sqrt(d);
 	if (n > 0) {
-		bb[0] = 1e10f;
-		bb[1] = 1e10f;
-		bb[2] = 1e10f;
-		bb[3] = -1e10f;
-		bb[4] = -1e10f;
-		bb[5] = -1e10f;
+		max_v[2] = -1e10f;
+		max_v[0] = -1e10f;
+		max_v[1] = -1e10f;
+		min_v[0] = 1e10f;
+		min_v[1] = 1e10f;
+		min_v[2] = 1e10f;
 		v = m->verts;
 		for (i = n; i > 0; i--) {
-			if (!(bb[0] < v->px))
-				bb[0] = v->px;
-			if (!(v->py > bb[1]))
-				bb[1] = v->py;
-			if (!(v->pz > bb[2]))
-				bb[2] = v->pz;
-			if (!(bb[4] > v->px))
-				bb[4] = v->px;
-			if (!(v->py < bb[5]))
-				bb[5] = v->py;
-			if (!(bb[3] > v->pz))
-				bb[3] = v->pz;
+			if (!(min_v[0] < v->px))
+				min_v[0] = v->px;
+			if (!(v->py > min_v[1]))
+				min_v[1] = v->py;
+			if (!(v->pz > min_v[2]))
+				min_v[2] = v->pz;
+			if (!(max_v[0] > v->px))
+				max_v[0] = v->px;
+			if (!(v->py < max_v[1]))
+				max_v[1] = v->py;
+			if (!(max_v[2] > v->pz))
+				max_v[2] = v->pz;
 			v++;
 		}
-		m->verts[m->vert_count].px = bb[0];
-		m->verts[m->vert_count].py = bb[1];
-		m->verts[m->vert_count].pz = bb[2];
-		m->verts[m->vert_count + 1].px = bb[4];
-		m->verts[m->vert_count + 1].py = bb[1];
-		m->verts[m->vert_count + 1].pz = bb[2];
-		m->verts[m->vert_count + 2].px = bb[0];
-		m->verts[m->vert_count + 2].py = bb[5];
-		m->verts[m->vert_count + 2].pz = bb[2];
-		m->verts[m->vert_count + 3].px = bb[4];
-		m->verts[m->vert_count + 3].py = bb[5];
-		m->verts[m->vert_count + 3].pz = bb[2];
-		m->verts[m->vert_count + 4].px = bb[0];
-		m->verts[m->vert_count + 4].py = bb[1];
-		m->verts[m->vert_count + 4].pz = bb[3];
-		m->verts[m->vert_count + 5].px = bb[4];
-		m->verts[m->vert_count + 5].py = bb[1];
-		m->verts[m->vert_count + 5].pz = bb[3];
-		m->verts[m->vert_count + 6].px = bb[0];
-		m->verts[m->vert_count + 6].py = bb[5];
-		m->verts[m->vert_count + 6].pz = bb[3];
-		m->verts[m->vert_count + 7].px = bb[4];
-		m->verts[m->vert_count + 7].py = bb[5];
-		m->verts[m->vert_count + 7].pz = bb[3];
-		dx = bb[4] - bb[0];
-		dy = bb[5] - bb[1];
-		dz = bb[3] - bb[2];
-		m->diagonal = (float) sqrt(dz * dz + dy * dy + dx * dx);
+		m->verts[n].px = min_v[0];
+		m->verts[m->vert_count].py = min_v[1];
+		m->verts[m->vert_count].pz = min_v[2];
+		m->verts[m->vert_count + 1].px = max_v[0];
+		m->verts[m->vert_count + 1].py = min_v[1];
+		m->verts[m->vert_count + 1].pz = min_v[2];
+		m->verts[m->vert_count + 2].px = min_v[0];
+		m->verts[m->vert_count + 2].py = max_v[1];
+		m->verts[m->vert_count + 2].pz = min_v[2];
+		m->verts[m->vert_count + 3].px = max_v[0];
+		m->verts[m->vert_count + 3].py = max_v[1];
+		m->verts[m->vert_count + 3].pz = min_v[2];
+		m->verts[m->vert_count + 4].px = min_v[0];
+		m->verts[m->vert_count + 4].py = min_v[1];
+		m->verts[m->vert_count + 4].pz = max_v[2];
+		m->verts[m->vert_count + 5].px = max_v[0];
+		m->verts[m->vert_count + 5].py = min_v[1];
+		m->verts[m->vert_count + 5].pz = max_v[2];
+		m->verts[m->vert_count + 6].px = min_v[0];
+		m->verts[m->vert_count + 6].py = max_v[1];
+		m->verts[m->vert_count + 6].pz = max_v[2];
+		m->verts[m->vert_count + 7].px = max_v[0];
+		m->verts[m->vert_count + 7].py = max_v[1];
+		m->verts[m->vert_count + 7].pz = max_v[2];
+		max_v[0] -= min_v[0];
+		max_v[1] -= min_v[1];
+		max_v[2] -= min_v[2];
+		m->diagonal = (float) sqrt(max_v[0] * max_v[0] + max_v[1] * max_v[1] + max_v[2] * max_v[2]);
 		cx = 0.0f;
 		cy = 0.0f;
 		cz = 0.0f;
@@ -123,16 +123,18 @@ void __cdecl fcn_0044a390(MeshBox* m)
 		m->center_z = cz * 0.125f;
 	}
 	r = 0.0f;
-	v = m->verts;
 	n = m->vert_count;
-	for (i = n; i > 0; i--) {
-		dx = v->px - m->center_x;
-		dy = v->py - m->center_y;
-		dz = v->pz - m->center_z;
-		d = dz * dz + dy * dy + dx * dx;
-		if (d > r)
-			r = d;
-		v++;
+	if (n > 0) {
+		v = m->verts;
+		for (i = n; i > 0; i--) {
+			float dx = v->px - m->center_x;
+			float dy = v->py - m->center_y;
+			float dz = v->pz - m->center_z;
+			d = dz * dz + dy * dy + dx * dx;
+			if (d > r)
+				r = d;
+			v++;
+		}
 	}
 	m->spread = (float) sqrt(r);
 }

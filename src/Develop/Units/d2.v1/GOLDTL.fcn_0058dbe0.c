@@ -40,9 +40,9 @@ void __cdecl fcn_0058dbe0(int a0)
 	int v5;
 	int v6;
 	int v9;
-	int* v27;
+	int v27;
 	int rec;
-	int* v30;
+	int v30;
 	int fill_n;
 	char* fill;
 
@@ -108,28 +108,23 @@ void __cdecl fcn_0058dbe0(int a0)
 	fcn_00468bb0(secondControl, 3, *(int*) 0x14b5630, *(int*) 0x14b5634,
 	             *(int*) 0x14b5638);
 	d2_SetForm(dialogId, 2);
-	v30 = (int*) io_AppendText(0x40be);
-	v27 = (int*) fcn_00472250(dialogId, 2, (int) v30);
-	v30 = (int*) fcn_00472250(dialogId, 2, (int) v30 + 1);
-	*(int*) &g_100f1dc = -1;
+	v30 = io_AppendText(0x40be);
+	v27 = fcn_00472250(dialogId, 2, v30);
+	v30 = fcn_00472250(dialogId, 2, v30 + 1);
+	g_100f1dc = -1;
 	do {
 		d2_SetForm(dialogId, 3);
 		io_AppendText(0x6811b0);
-		v6 = fcn_00471f80(secondControl);
-		v6 = (v6 + 2) * (fcn_00471f80(firstControl) + 2);
+		v6 = (fcn_00471f80(secondControl) + 2) * (fcn_00471f80(firstControl) + 2);
 		io_AppendText(0x40b9);
 		io_AppendText(0x40ba, v6);
-		if (*(int*) 0x14ce8e0) {
+		if (g_14ce8e0) {
 			goto label_58df76;
 		}
-		if (*(int*) &g_100f1dc != -1) {
-			if (*(int**) 0x67d370 != v27) {
-				if (*(int**) 0x67d370 == v30) {
-					goto label_58df76;
-				}
-			} else {
+		if (g_100f1dc != -1) {
+			if (d2_CurrentElementId == v27) {
 				v5 = g_774970;
-				if (fcn_00525f60(v5 * 0x21c + 0x7f4ca0, v6) == 1) {
+				if (fcn_00525f60((int) (g_7f4ca0 + v5 * 0x21c), v6) == 1) {
 					for (v9 = 0; v9 < 0x3e; v9++) {
 						req[v9] = 0;
 					}
@@ -137,10 +132,7 @@ void __cdecl fcn_0058dbe0(int a0)
 					((char*) req)[0x36] = (char) 2;
 					*(int*) ((char*) req + 8) = *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
 					*(int*) ((char*) req + 0xc) = *(int*) (a0 + 1);
-					*(int*) ((char*) req + 0x28) = *(int*) &gm_GameTime;
-					*(int*) ((char*) req + 0x2c) = *(int*) &g_7f4c04;
-					*(int*) ((char*) req + 0x30) = *(int*) 0x7f4c08;
-					*(unsigned short*) ((char*) req + 0x34) = *(unsigned short*) 0x7f4c0c;
+					*(pos14_7f4c00*) ((char*) req + 0x28) = gm_GameTime;
 					*(int*) ((char*) req + 0x5c) = fcn_00471f80(firstControl);
 					*(int*) ((char*) req + 0x60) = fcn_00471f80(secondControl);
 					*(int*) ((char*) req + 0x58) = *(int*) (rec + 1);
@@ -148,13 +140,12 @@ void __cdecl fcn_0058dbe0(int a0)
 				label_58df76:
 					*(int*) 0x774654 = 1;
 				}
+			} else if (d2_CurrentElementId == v30) {
+				goto label_58df76;
 			}
 		}
-		if (!fcn_005373e0(0x58dbe0, 0x677c7)) {
-			fcn_00471e30(dialogId);
-			fcn_00532ef0();
-			return;
-		}
-	} while (1);
+	} while (fcn_005373e0(0x58dbe0, 0x677c7));
+	fcn_00471e30(dialogId);
+	fcn_00532ef0();
 }
 #pragma optimize("", on)

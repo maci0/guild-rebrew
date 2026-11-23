@@ -47,6 +47,7 @@ int __cdecl d3_CreateObjectAnimation(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_
 void __cdecl fcn_00433780(char*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl d3_SetObjectRotation(char*, float*);
+#include <string.h>
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 /* ADDRESS: GOLDTL 0x004079f0 */
@@ -101,23 +102,23 @@ void __cdecl ch_ExecuteTurn90(char* task)
 			dir.v[2] = *(float*) (frame - 0x8c);
 			dir.v[1] = *(float*) (frame - 0x90);
 			dir.v[0] = *(float*) (frame - 0x94);
-			*(int*) &flags = 0;
+			memset(&flags, 0, sizeof(flags));
 			type = *(int*) (frame - 0xc0) - 0x1e;
 			frames[0].unbekannt_000 = type;
-			*(int*) ((char*) &flags + 8) = 0;
 			flags.bit_1_2 = 1;
 			flags.bit_1_4 = 1;
 			frames[1].drehung[0] = -dir.v[0];
 			frames[1].drehung[1] = angle - dir.v[1];
-			flags.bit_1_3 = 1;
-			frames[1].drehung[2] = -dir.v[2];
+			dir.v[2] = -dir.v[2];
 			flags.bit_8_1 = 1;
-			frames[0].position[0] = 0.0f;
-			frames[0].position[1] = 0.0f;
-			frames[0].position[2] = 0.0f;
+			flags.bit_1_3 = 1;
+			frames[1].drehung[2] = dir.v[2];
 			frames[0].drehung[0] = 0.0f;
 			frames[0].drehung[1] = 0.0f;
 			frames[0].drehung[2] = 0.0f;
+			frames[0].position[0] = 0.0f;
+			frames[0].position[1] = 0.0f;
+			frames[0].position[2] = 0.0f;
 			frames[1].position[0] = 0.0f;
 			frames[1].position[1] = 0.0f;
 			frames[1].position[2] = 0.0f;
@@ -126,13 +127,12 @@ void __cdecl ch_ExecuteTurn90(char* task)
 			return;
 		}
 		frames[0].unbekannt_000 = 8;
-		*(int*) &flags = 0;
-		*(int*) ((char*) &flags + 8) = 0;
+		memset(&flags, 0, sizeof(flags));
 		flags.bit_1_2 = 1;
 		flags.bit_1_4 = 1;
+		flags.bit_8_1 = 1;
 		flags.bit_1_3 = 1;
 		frames[1].drehung[1] = angle;
-		flags.bit_8_1 = 1;
 		frames[0].drehung[0] = 0.0f;
 		frames[0].drehung[1] = 0.0f;
 		frames[0].drehung[2] = 0.0f;
@@ -157,20 +157,18 @@ void __cdecl ch_ExecuteTurn90(char* task)
 			task = 0;
 		}
 	}
-	if (*(char**) (owner + 0x70) != 0) {
-		if ((*(unsigned char*) (*(char**) (owner + 0x70) + 0x6d) & 0x20) != 0) {
-			d3_RemoveObjectAnimation(*(char**) (*(char**) (*(char**) (task + 0x14) + 0x34) + 0x1ec) + 0xf4,
-				     *(char**) (*(char**) (owner + 0x70) + 0x68));
-			d3_SetObjectRotation(*(char**) (*(char**) (task + 0x14) + 0x34),
-				     (float*) (task + 0x18));
-			fcn_00433780(*(char**) (*(char**) (task + 0x14) + 0x34));
-			*(int*) (owner + 0x78) = 0;
-			ch_RemoveQueueEntry(task);
-			return;
-		}
+	if (*(char**) (owner + 0x70) != 0
+	    && (*(unsigned char*) (*(char**) (owner + 0x70) + 0x6d) & 0x20) != 0) {
+		d3_RemoveObjectAnimation(*(char**) (*(char**) (*(char**) (task + 0x14) + 0x34) + 0x1ec) + 0xf4,
+			     *(char**) (*(char**) (owner + 0x70) + 0x68));
+		d3_SetObjectRotation(*(char**) (*(char**) (task + 0x14) + 0x34),
+			     (float*) (task + 0x18));
+		fcn_00433780(*(char**) (*(char**) (task + 0x14) + 0x34));
+		*(int*) (owner + 0x78) = 0;
+		ch_RemoveQueueEntry(task);
 		return;
 	}
-	if (*(int*) (owner + 0x78) == 0 && task != 0) {
+	if (*(char**) (owner + 0x70) == 0 && *(int*) (owner + 0x78) == 0 && task != 0) {
 		ch_RemoveQueueEntry(task);
 	}
 }

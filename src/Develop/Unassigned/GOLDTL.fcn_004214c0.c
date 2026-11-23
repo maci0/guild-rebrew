@@ -48,21 +48,15 @@ unsigned short __cdecl fcn_004214c0(PathGrid* grid, int x, int y, int goal_x, in
 {
 	int t;
 	int i;
-	int level;
 	unsigned short node;
 	unsigned short goal;
-	float* costs;
 
-	level = 0;
-	g_678c0c = level;
+	g_678c0c = 0;
 	g_678c08 = grid->width - 1;
 	t = grid->width >> 1;
-	if (t != 0) {
-		do {
-			level++;
-			t >>= 1;
-		} while (t != 0);
-		g_678c0c = level;
+	while (t != 0) {
+		g_678c0c++;
+		t >>= 1;
 	}
 	g_678c20[0] = 0;
 	g_678c20[1] = -(short) grid->width;
@@ -72,10 +66,10 @@ unsigned short __cdecl fcn_004214c0(PathGrid* grid, int x, int y, int goal_x, in
 	g_678c20[5] = -(short) grid->width;
 	g_678c20[6] = (short) grid->width;
 	g_678c20[7] = (short) grid->width;
-	g_14cbc74 = (goal_y << level) + goal_x;
-	node = (y << level) + x;
-	g_14cbc76 = node;
 	g_14cbc70 = 0;
+	node = (y << g_678c0c) + x;
+	g_14cbc74 = (goal_y << g_678c0c) + goal_x;
+	g_14cbc76 = node;
 	++g_14cbc72;
 	grid->nodes[node].mark = g_14cbc72;
 	grid->nodes[node].g = 0;
@@ -86,7 +80,7 @@ unsigned short __cdecl fcn_004214c0(PathGrid* grid, int x, int y, int goal_x, in
 	grid->nodes[node].f18 = 0xffff;
 	grid->nodes[node].parent = 0xffff;
 	if (g_14cbc76 == g_14cbc74) {
-		return node;
+		return g_14cbc76;
 	}
 	goal = g_14cbc74;
 	grid->nodes[goal].mark = g_14cbc72;
@@ -99,15 +93,14 @@ unsigned short __cdecl fcn_004214c0(PathGrid* grid, int x, int y, int goal_x, in
 	grid->nodes[goal].parent = 0xffff;
 	g_14cbc6c = g_678db8[kind];
 	g_14cbc78 = g_678dd0[kind];
-	costs = g_678c50[kind];
-	g_14cbc64 = costs;
-	if (costs[grid->nodes[node].type] < 0.0 || costs[grid->nodes[goal].type] < 0.0) {
+	g_14cbc64 = g_678c50[kind];
+	if (g_14cbc64[grid->nodes[node].type] < 0.0 || g_14cbc64[grid->nodes[goal].type] < 0.0) {
 		return 0xffff;
 	}
 	g_14cbc80 = 0;
 	for (i = 1; i < 15; i++) {
-		if (costs[i] > 0.0) {
-			g_14cbc80 += costs[i];
+		if (g_14cbc64[i] > 0.0) {
+			g_14cbc80 += g_14cbc64[i];
 		}
 	}
 	g_14cbc80 = 7.0f;
@@ -115,10 +108,7 @@ unsigned short __cdecl fcn_004214c0(PathGrid* grid, int x, int y, int goal_x, in
 	g_14cbc60 = 4;
 	g_14cbc68 = 8;
 	node = fcn_00421ba0(grid, node);
-	if (node == 0xffff) {
-		return 0xffff;
-	}
-	for (;;) {
+	while (node != 0xffff) {
 		if (node == g_14cbc74) {
 			fcn_00421f10(grid, node);
 			return g_14cbc76;
@@ -148,8 +138,6 @@ unsigned short __cdecl fcn_004214c0(PathGrid* grid, int x, int y, int goal_x, in
 		g_14cbc60 = 4;
 		g_14cbc68 = 8;
 		node = fcn_00421ba0(grid, node);
-		if (node == 0xffff) {
-			return 0xffff;
-		}
 	}
+	return 0xffff;
 }

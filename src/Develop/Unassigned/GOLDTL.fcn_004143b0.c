@@ -97,7 +97,7 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 	}
 	ok = 1;
 	do {
-		if (node != self) {
+		if (self != node) {
 			ok &= d3_AccumulateMeshHeightRange(&box, node);
 		}
 		node = *(char**) (node + 0x1f4);

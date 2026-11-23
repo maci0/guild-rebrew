@@ -123,16 +123,16 @@ void __cdecl fcn_005624a0(char* ctx)
 		}
 		io_FormatTextBuffer(text, 0x6a6578, hit);
 		ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
-		if (ent == 0) {
-			fcn_00500bb0(ctx + 0x52, 0, 1, 0);
-			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+		if (ent != 0) {
+			fcn_004c5c80(*(int*) (ent + 4));
+			fcn_004c5da0(*(int*) (ent + 4), *(int*) (hit + 1), -1, 0, 1, s_67ed14);
+			fcn_00500bb0(ctx + 0x52, 0, 5, 0);
+			*(int*) (ctx + 0xb4) = *(int*) (hit + 1);
+			*(int*) (ctx + 0x84) = fcn_004c5620(2, ctx);
 			return;
 		}
-		fcn_004c5c80(*(int*) (ent + 4));
-		fcn_004c5da0(*(int*) (ent + 4), *(int*) (hit + 1), -1, 0, 1, s_67ed14);
-		fcn_00500bb0(ctx + 0x52, 0, 5, 0);
-		*(int*) (ctx + 0xb4) = *(int*) (hit + 1);
-		*(int*) (ctx + 0x84) = fcn_004c5620(2, ctx);
+		fcn_00500bb0(ctx + 0x52, 0, 1, 0);
+		*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
 		return;
 	}
 	case 2:

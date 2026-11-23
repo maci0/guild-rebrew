@@ -115,8 +115,8 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	}
 	loc.src[0]--;
 	fcn_00500d60(loc.src, loc.out);
-	n = step * 15 + 0x2d;
 	for (i = 0xf; i != 0; i--) {
+		n = step * i + 0x2d;
 		fcn_00472c30(n, h - 0x13, n, h - 0x10, 0x10, 0x10, 0x10);
 		if (loc.out[1] == 1) {
 			io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
@@ -127,7 +127,6 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		}
 		loc.src[0]--;
 		fcn_00500d60(loc.src, loc.out);
-		n -= step;
 	}
 	if (loc.out[1] == 1) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));

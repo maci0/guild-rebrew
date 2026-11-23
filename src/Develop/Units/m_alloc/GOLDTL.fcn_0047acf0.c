@@ -108,9 +108,117 @@ char* __cdecl fcn_0047acf0(char* list)
 		    2.0f < (float) maxh / (float) minh)
 			flag = 1;
 	}
-	w = (int) *(unsigned short*) (bank + 6);
-	if (w <= g_67dac0 && w <= 0x200 && !flag) {
-		if (!fcn_0047a570(count, w, (int) *(unsigned short*) (bank + 8), &split, sizes, 1)) {
+	if ((int) *(unsigned short*) (bank + 6) > g_67dac0 || *(unsigned short*) (bank + 6) > 0x200 || flag) {
+		for (i = 0; i < (int) *(unsigned short*) (list + 0x2a); i++) {
+			shape = fcn_0047a070(list, i);
+			sz = fcn_00477420(*(unsigned short*) (shape + 6) < *(unsigned short*) (shape + 0xa)
+			                  ? *(unsigned short*) (shape + 6) : *(unsigned short*) (shape + 0xa));
+			if (sz >= g_67dac0)
+				sz = g_67dac0;
+			if (sz <= 0x3f)
+				sz = 0x40;
+			cols = (int) ((float) *(unsigned short*) (shape + 6) / (float) sz + 0.5f);
+			rows = (int) ((float) *(unsigned short*) (shape + 0xa) / (float) sz + 0.5f);
+			cells = rows * cols;
+			sourceCols = cols;
+			for (k = 0; k < cells; k++) {
+				sizes[k] = sz;
+			}
+			split = cells;
+			sheets = cells;
+			if (cells >= 4) {
+				n = g_67dac0;
+				if (n > 0x200)
+					n = 0x200;
+				if (sz < n) {
+					if (fcn_0047a570(cells, sz, sz, &sheets, sizes, 1)) {
+						cells = sheets;
+					}
+				}
+			}
+			node = fcn_0047abd0(cells, split);
+			*(unsigned short*) (node + 2) = *(unsigned short*) (shape + 6);
+			*(unsigned short*) (node + 6) = *(unsigned short*) (shape + 0xa);
+			*(unsigned short*) (node + 0) = 0;
+			*(unsigned short*) (node + 4) = 0;
+			**(int**) (node + 0x30) = 0;
+			*(int*) (*(int*) (node + 0x30) + 4) = 0;
+			*(unsigned int*) (node + 0x34) = (unsigned int) sz;
+			memset(hdr, 0, 0x17 * 4);
+			hdr[1] = sz;
+			if (sz <= (int) *(unsigned short*) (shape + 6))
+				hdr[1] = (int) *(unsigned short*) (shape + 6);
+			hdr[2] = sz;
+			if (sz <= (int) *(unsigned short*) (shape + 0xa))
+				hdr[2] = (int) *(unsigned short*) (shape + 0xa);
+			hdr[0xa] = 0x15;
+			base = fcn_004770a0(hdr, 0x20);
+			fcn_00475fd0(base);
+			fcn_0047a710(0, 0, shape, base);
+			d2_UnlockSurface(base);
+			j = 0;
+			y = 0;
+			if (sheets >= 1) {
+				do {
+					memset(hdr, 0, 0x17 * 4);
+					n = sizes[j];
+					hdr[0xa] = g_67dabc != 0 ? 0x35545844 : g_67dab8;
+					hdr[1] = n;
+					hdr[2] = n;
+					surf = fcn_004770a0(hdr, 0);
+					srcRect.left = (j % sourceCols) * sz;
+					srcRect.top = (j / sourceCols) * sz;
+					srcRect.right = srcRect.left + sz; srcRect.bottom = srcRect.top + sz;
+					if (split != sheets) {
+						cols = n / sz;
+						cells = cols * cols;
+						if (cells >= 1) {
+							rows = 0;
+							while (y < split) {
+								dstRect.left = (rows % cols) * sz; dstRect.top = (rows / cols) * sz;
+								dstRect.right = dstRect.left + sz; dstRect.bottom = dstRect.top + sz;
+								srcRect.left = (y % sourceCols) * sz; srcRect.top = (y / sourceCols) * sz;
+								srcRect.right = srcRect.left + sz; srcRect.bottom = srcRect.top + sz;
+								fcn_006114ff(*(int*) (surf + 0x24), 0, (int*) &dstRect, *(int*) (base + 0x24), 0, (int*) &srcRect, -1, 0xff000000);
+								*(float*) (*(int*) (node + 0x30) + y * 0xc) = (float) dstRect.left / (float) *(int*) (surf + 0x54);
+								*(float*) (*(int*) (node + 0x30) + y * 0xc + 4) = (float) dstRect.top / (float) *(int*) (surf + 0x58);
+								*(int*) (*(int*) (node + 0x30) + y * 0xc + 8) = (int) surf;
+								rows++;
+								y++;
+								if (cells <= rows)
+									break;
+							}
+						}
+					}
+					else {
+						fcn_006114ff(*(int*) (surf + 0x24), 0, 0, *(int*) (base + 0x24), 0, (int*) &srcRect, -1, 0xff000000);
+						*(int*) (*(int*) (node + 0x30) + j * 0xc) = 0;
+						*(int*) (*(int*) (node + 0x30) + j * 0xc + 4) = 0;
+						*(int*) (*(int*) (node + 0x30) + j * 0xc + 8) = (int) surf;
+					}
+					*(int*) (*(int*) (node + 0x28) + j * 4) = (int) surf;
+					fcn_004760e0(surf);
+					g_772610 = g_772610 + *(int*) (surf + 0x4c);
+					g_77260c = g_77260c + 1;
+					j++;
+				} while (j < sheets);
+			}
+			fcn_0047ac20(node, bank);
+			n = 0;
+			if (*(int*) (node + 0x2c) >= 1) {
+				do {
+					if (*(int*) (*(int*) (node + 0x30) + 8 + n * 0xc) == 0) {
+						__asm { int 3 }
+						return 0;
+					}
+					n++;
+				} while (n < *(int*) (node + 0x2c));
+			}
+			fcn_00475f80(base);
+		}
+	}
+	else {
+		if (!fcn_0047a570(count, (int) *(unsigned short*) (bank + 6), (int) *(unsigned short*) (bank + 8), &split, sizes, 1)) {
 			m_FreeTracked(bank);
 			return 0;
 		}
@@ -195,127 +303,6 @@ char* __cdecl fcn_0047acf0(char* list)
 			}
 			sheets++;
 		} while (sheets < split);
-	}
-	else {
-		i = 0;
-		if (*(short*) (list + 0x2a) == 0)
-			goto done;
-		do {
-			shape = fcn_0047a070(list, i);
-			w = (int) *(unsigned short*) (shape + 6);
-			h = (int) *(unsigned short*) (shape + 0xa);
-			sz = fcn_00477420(w < h ? w : h);
-			if (sz >= g_67dac0)
-				sz = g_67dac0;
-			if (sz <= 0x3f)
-				sz = 0x40;
-			cols = (int) ((float) *(unsigned short*) (shape + 6) / (float) sz + 0.5f);
-			rows = (int) ((float) *(unsigned short*) (shape + 0xa) / (float) sz + 0.5f);
-			cells = rows * cols;
-			sourceCols = cols;
-			if (cells >= 1) {
-				k = 0;
-				while (k < cells) {
-					sizes[k] = sz;
-					k++;
-				}
-			}
-			split = cells;
-			sheets = cells;
-			if (cells >= 4) {
-				n = g_67dac0;
-				if (n > 0x200)
-					n = 0x200;
-				if (sz < n) {
-					if (fcn_0047a570(cells, sz, sz, &sheets, sizes, 1)) {
-						cells = sheets;
-					}
-				}
-			}
-			node = fcn_0047abd0(cells, split);
-			*(unsigned short*) (node + 2) = *(unsigned short*) (shape + 6);
-			*(unsigned short*) (node + 6) = *(unsigned short*) (shape + 0xa);
-			*(unsigned short*) (node + 0) = 0;
-			*(unsigned short*) (node + 4) = 0;
-			uv = *(char**) (node + 0x30);
-			*(int*) uv = 0;
-			*(int*) (uv + 4) = 0;
-			*(unsigned int*) (node + 0x34) = (unsigned int) sz;
-			memset(hdr, 0, 0x17 * 4);
-			hdr[1] = sz;
-			if (sz <= (int) *(unsigned short*) (shape + 6))
-				hdr[1] = (int) *(unsigned short*) (shape + 6);
-			hdr[2] = sz;
-			if (sz <= (int) *(unsigned short*) (shape + 0xa))
-				hdr[2] = (int) *(unsigned short*) (shape + 0xa);
-			hdr[0xa] = 0x15;
-			base = fcn_004770a0(hdr, 0x20);
-			fcn_00475fd0(base);
-			fcn_0047a710(0, 0, shape, base);
-			d2_UnlockSurface(base);
-			j = 0;
-			y = 0;
-			if (sheets >= 1) {
-				do {
-					memset(hdr, 0, 0x17 * 4);
-					n = sizes[j];
-					hdr[0xa] = g_67dabc != 0 ? 0x35545844 : g_67dab8;
-					hdr[1] = n;
-					hdr[2] = n;
-					surf = fcn_004770a0(hdr, 0);
-					srcRect.left = (j % sourceCols) * sz;
-					srcRect.top = (j / sourceCols) * sz;
-					srcRect.right = srcRect.left + sz; srcRect.bottom = srcRect.top + sz;
-					if (split != sheets) {
-						cols = n / sz;
-						cells = cols * cols;
-						if (cells >= 1) {
-							rows = 0;
-							while (y < split) {
-								dstRect.left = (rows % cols) * sz; dstRect.top = (rows / cols) * sz;
-								dstRect.right = dstRect.left + sz; dstRect.bottom = dstRect.top + sz;
-								srcRect.left = (y % sourceCols) * sz; srcRect.top = (y / sourceCols) * sz;
-								srcRect.right = srcRect.left + sz; srcRect.bottom = srcRect.top + sz;
-								fcn_006114ff(*(int*) (surf + 0x24), 0, (int*) &dstRect, *(int*) (base + 0x24), 0, (int*) &srcRect, -1, 0xff000000);
-								uv = *(char**) (node + 0x30);
-								*(float*) (uv + y * 0xc) = (float) ((double) dstRect.left / *(int*) (surf + 0x54));
-								*(float*) (uv + y * 0xc + 4) = (float) ((double) dstRect.top / *(int*) (surf + 0x58));
-								*(int*) (uv + y * 0xc + 8) = (int) surf;
-								rows++;
-								y++;
-								if (cells <= rows)
-									break;
-							}
-						}
-					}
-					else {
-						fcn_006114ff(*(int*) (surf + 0x24), 0, 0, *(int*) (base + 0x24), 0, (int*) &srcRect, -1, 0xff000000);
-						uv = *(char**) (node + 0x30);
-						*(int*) (uv + j * 0xc) = 0;
-						*(int*) (uv + j * 0xc + 4) = 0;
-						*(int*) (uv + j * 0xc + 8) = (int) surf;
-					}
-					*(int*) (*(int*) (node + 0x28) + j * 4) = (int) surf;
-					fcn_004760e0(surf);
-					g_772610 = g_772610 + *(int*) (surf + 0x4c);
-					g_77260c = g_77260c + 1;
-					j++;
-				} while (j < sheets);
-			}
-			fcn_0047ac20(node, bank);
-			n = 0;
-			if (*(int*) (node + 0x2c) >= 1) {
-				do {
-					if (*(int*) (*(int*) (node + 0x30) + 8 + n * 0xc) == 0) {
-						__asm { int 3 }
-						return 0;
-					}
-					n++;
-				} while (n < *(int*) (node + 0x2c));
-			}
-			fcn_00475f80(base);
-			i++;
-		} while (i < (int) *(unsigned short*) (list + 0x2a));
 	}
 done:
 	if (*(short*) (bank + 4) == *(short*) (list + 0x2a))

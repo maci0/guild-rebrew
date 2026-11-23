@@ -151,7 +151,8 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	else if (t->category == 0x10) {
 		btnC = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x5e) != 0;
 	} else { btnC = 1; }
-	fcn_00472640(out[0], btnA);
+	if (btnA) fcn_00472640(out[0], 1);
+	else fcn_00472640(out[0], 0);
 	fcn_00472640(out[3], btnB != 0);
 	fcn_00472640(out[6], btnC);
 	for (;;) {

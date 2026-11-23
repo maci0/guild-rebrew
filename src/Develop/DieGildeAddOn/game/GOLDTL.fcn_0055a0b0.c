@@ -22,6 +22,7 @@ void __cdecl he_FreeAction(void*);
 void __cdecl fcn_0055a0b0(char* action)
 {
 	int cnt;
+	int i;
 	int b;
 	int idx;
 	int n;
@@ -52,9 +53,7 @@ void __cdecl fcn_0055a0b0(char* action)
 	} else {
 		if (idx >= 0 && idx < 6) {
 			cnt = amt_FindOfficeSlotsByKind(*(int*) (action + 0xb0 + idx * 4), 6, arr);
-			if (cnt > 0) {
-				r = (unsigned char*) arr;
-				do {
+			for (i = 0, r = (unsigned char*) arr; i < cnt; i++) {
 					v3 = gm_LookupEntityRecordById(*(int*) (r + 4));
 					if (v3 != 0 && fcn_004e8b40(*(unsigned char*) (r + 8), tmp)) {
 						if (*(int*) (action + 0xac) == 1
@@ -91,7 +90,6 @@ void __cdecl fcn_0055a0b0(char* action)
 						}
 					}
 					r = r + 0x18;
-				} while (--cnt);
 			}
 			(*(int*) (action + 0x70))++;
 			fcn_00500bb0((unsigned char*) action + 0x52, 1, 0, 0);

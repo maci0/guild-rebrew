@@ -52,7 +52,6 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	int pair[2];
 	int id_a;
 	int id_b;
-	int v19;
 	int v5;
 	int dialog;
 	int v9;
@@ -90,15 +89,19 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	g_100f1dc = -1;
 	for (;;) {
 		v5 = gm_LookupEntityRecordById(v3) && he_StartHandlungSearch(1, 1, v4);
-		fcn_00472640(id_b, v5 && *(int*) (v7 + 0xbc) < gm_GameTime.a);
+		if (v5 && *(int*) (v7 + 0xbc) < gm_GameTime.a) {
+			fcn_00472640(id_b, 1);
+		} else {
+			fcn_00472640(id_b, 0);
+		}
 		if (!g_14ce8e0 && v5) {
 			if (g_100f1dc != -1) {
 				if (d2_CurrentElementId == id_a) {
-					if (*(char*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca9))
-						v19 = 0x1a58;
-					else
-						v19 = 0x1a57;
-					io_FormatTextBuffer(text, v19, *v6);
+					if (!*(char*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca9)) {
+						io_FormatTextBuffer(text, 0x1a57, *v6);
+					} else {
+						io_FormatTextBuffer(text, 0x1a58, *v6);
+					}
 					if (fcn_00526120(text, 1)) {
 						*(pos14_7f4c00*) (v7 + 0x52) = gm_GameTime;
 
@@ -106,9 +109,8 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 
 						*(int*) (v7 + 0xbc) = gm_GameTime.a;
 						v9 = fcn_004c5620(1, v7);
-						if (v9 != -1) {
-							while (!fcn_004c4450(v9))
-								fcn_005373e0(0, 0x20007);
+						while (v9 != -1 && !fcn_004c4450(v9)) {
+							fcn_005373e0(0, 0x20007);
 						}
 						g_774654 = 1;
 					}

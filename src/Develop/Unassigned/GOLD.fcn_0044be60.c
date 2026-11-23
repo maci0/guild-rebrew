@@ -204,14 +204,18 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 		}
 	}
 	if (g_6b8300 == 0) {
-		if ((*(char**) 0x633df8) != 0) {
-			fcn_0045e610((*(char**) 0x633df8), 0);
+		clone = *(char**) 0x633df8;
+		if (clone != 0) {
+			fcn_0045e610(clone, 0);
 		} else {
 			(*(char**) 0x633df8) = d3sm_Create(0, -(*(int*) 0x633dcc), 1);
 		}
-	} else if ((*(char**) 0x633df8) != 0) {
-		d3sm_Destroy((*(char**) 0x633df8));
-		(*(char**) 0x633df8) = 0;
+	} else {
+		clone = *(char**) 0x633df8;
+		if (clone != 0) {
+			d3sm_Destroy(clone);
+			(*(char**) 0x633df8) = 0;
+		}
 	}
 	universe = g_67a370;
 	if (*(int*) (universe + 0xb4) == 0) {

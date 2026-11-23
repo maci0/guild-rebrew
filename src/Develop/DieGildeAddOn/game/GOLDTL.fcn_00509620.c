@@ -16,51 +16,55 @@ extern void __cdecl fcn_0055bc40(void* entity);
 extern void __cdecl fcn_004e8940(void* entity);
 extern int __cdecl gm_MapEntityStatRange(int age);
 extern void* __cdecl gm_GetEntityTableEntry(void* entity);
-extern int __cdecl gm_CheckStatLevel(unsigned int slot, int kind);
+extern int __cdecl gm_CheckStatLevel(int slot, int kind);
 extern int __cdecl gm_GetOppositeStatIndex(int value);
 extern char* __cdecl fcn_004fd9d0(int a, int b);
-extern void __cdecl gm_AddObjekt(int record, unsigned int item, int value);
+extern void __cdecl gm_AddObjekt(int record, int item, int value);
 extern void __cdecl gm_KillSpieler(int slot, int value);
 
 /* ADDRESS: GOLDTL 0x00509620 */
 int __cdecl fcn_00509620(int sourceId, int targetId)
 {
-	EntityStruct* slots;
-	EntityStruct* p;
-	EntityStruct* q;
+	int counter;
+	int owner;
+	unsigned short q_slot;
+	unsigned short p_slot;
+	int value;
 	EntityStruct rec_a;
 	EntityStruct rec_b;
-	char* name;
-	char* item;
-	void* node;
-	void* found;
-	int off;
-	int sq;
-	int n;
-	int i;
-	int j;
-	unsigned short p_slot;
-	unsigned short q_slot;
-	unsigned short pid;
-	int kind;
-	int value;
-	int rank;
+	EntityStruct* p;
+	EntityStruct* q;
 	unsigned char* ep;
+	char* found;
+	char* node;
+	char* dst;
+	int i;
+	int level;
+	int rank;
+	char* item;
+	unsigned short obj_type;
 
-	slots = (EntityStruct*) g_slot_table;
 	p = (EntityStruct*) gm_LookupEntityRecordById(sourceId);
 	if (p == 0)
 		return -1;
-	kind = (int) fcn_004b3c00(p);
-	for (off = 0, n = 0x100; n != 0; n--, off += 0xa9) {
-		ep = g_entity_ptr + off;
-		if (ep[0] != 0) {
-			kind = gm_GetBuildingTypeCategory(ep[0]);
-			if (kind == 2 && *(unsigned short*) (ep + 0x27) == p->entity_index)
-				kind = fcn_005059b0(ep,
-					*(unsigned short*) gm_CityEntity, *(unsigned short*) gm_CityEntity);
+	fcn_004b3c00(p);
+
+	i = 0;
+	counter = 0x100;
+	do {
+		ep = g_entity_ptr + i * 0xa9;
+		if (*ep != 0) {
+			if (gm_GetBuildingTypeCategory(*ep & 0xff) == 2) {
+				if (*(unsigned short*) (ep + 0x27) == p->entity_index) {
+					owner = *(unsigned short*) gm_CityEntity;
+					fcn_005059b0(ep, owner, owner);
+				}
+			}
 		}
-	}
+		i++;
+		counter--;
+	} while (counter != 0);
+
 	p_slot = p->entity_index;
 	value = gm_WalkEntityChain(p_slot);
 	q = (EntityStruct*) gm_LookupEntityRecordById(targetId);
@@ -74,31 +78,24 @@ int __cdecl fcn_00509620(int sourceId, int targetId)
 		q->max_hp = p->max_hp;
 	fcn_004e8940(p);
 
-	rec_a = *q;
-	pid = p->entity_index;
-	rec_a.entity_index = pid;
-	rec_a.entity_state = p->entity_state;
+	memcpy(&rec_a, q, 0x21c);
 	rec_a.entity_id = p->entity_id;
+	rec_a.entity_index = p->entity_index;
+	rec_a.entity_state = p->entity_state;
 	rec_a.is_active = p->is_active;
 	rec_a.current_building = p->current_building;
 
-	/* Native stores p->age at rec_a+0x164 only on the rank==0 path
-	 * (0x5097cd) and on the opposite-stat jge path (0x5097be). On the
-	 * found==NULL (0x50976e -> 0x5097d4), level==0 (0x509784 -> 0x5097d4)
-	 * and jl paths there is no store, so rec_a.age keeps the q copy.
-	 * The 0x4fd9d0 arguments are rec_a.gender and rec_a.age (reloaded at
-	 * 0x509800/0x509807 and masked 0xff). */
-	rank = gm_MapEntityStatRange(q->age);
+	rank = gm_MapEntityStatRange(((char*) q)[0x164] & 0xff);
 	if (rank != 0) {
-		found = gm_GetEntityTableEntry(p);
+		found = (char*) gm_GetEntityTableEntry(p);
 		if (found != 0) {
-			item = (char*) gm_CheckStatLevel(pid, rank);
-			if (item != 0) {
-				sq = gm_GetOppositeStatIndex(q->age);
-				if (gm_GetOppositeStatIndex((int) item) >= sq) {
-					rec_a.age = p->age;
+			level = gm_CheckStatLevel(p->entity_index, rank);
+			if (level != 0) {
+				if (gm_GetOppositeStatIndex(level) <
+					gm_GetOppositeStatIndex(((char*) q)[0x164] & 0xff)) {
+					found[rank + 0x74] = ((char*) q)[0x164];
 				} else {
-					*(char*) ((char*) found + 0x74 + rank) = q->age;
+					rec_a.age = p->age;
 				}
 			}
 		}
@@ -106,54 +103,70 @@ int __cdecl fcn_00509620(int sourceId, int targetId)
 		rec_a.age = p->age;
 	}
 
-	name = (char*) &rec_a + 0x1f4;
-	if (p->gender == q->gender) {
-		strcpy(name, (char*) p + 0x1f4);
-		*(int*) ((char*) &rec_a + 0x18c) = p->target_id;
+	if (p->gender == rec_a.gender) {
+		strcpy((char*) &rec_a + 0x1f4, (char*) p + 0x1f4);
+		rec_a.target_id = p->target_id;
 	} else {
-		name[0] = 0;
-		item = fcn_004fd9d0((unsigned char) rec_a.gender, rec_a.age);
+		*((char*) &rec_a + 0x1f4) = 0;
+		item = fcn_004fd9d0(rec_a.gender & 0xff, rec_a.age & 0xff);
 		if (item != 0) {
-			strcpy(name, item + 4);
-			*(int*) ((char*) &rec_a + 0x18c) = *(int*) (item + 0x34) + 0x639;
+			strcpy((char*) &rec_a + 0x1f4, item + 4);
+			rec_a.target_id = *(int*) (item + 0x34) + 0x639;
 		}
 	}
 
 	rec_b = *p;
-	rec_b.entity_index = q->entity_index;
 	rec_b.entity_id = q->entity_id;
+	rec_b.entity_index = q->entity_index;
 	rec_b.entity_state = 9;
-	slots[p_slot] = rec_a;
-	slots[q_slot] = rec_b;
 
-	for (node = *(void**) ((char*) &slots[p_slot] + 0x178); node != 0;
-		node = *(void**) ((char*) node + 0x3f))
-		*(int*) ((char*) node + 6) = slots[p_slot].entity_id;
-	for (node = *(void**) ((char*) &slots[q_slot] + 0x178); node != 0;
-		node = *(void**) ((char*) node + 0x3f))
-		*(int*) ((char*) node + 6) = slots[q_slot].entity_id;
+	memcpy((char*) g_slot_table + p_slot * 0x21c, &rec_a, 0x21c);
+	memcpy((char*) g_slot_table + q_slot * 0x21c, &rec_b, 0x21c);
 
-	for (q = slots, i = 0x300; i != 0; i--, q++) {
-		for (j = 0; j < 8; j++) {
-			if (q->ref_table[j] == sourceId)
-				q->ref_table[j] = targetId;
-			else if (q->ref_table[j] == targetId)
-				q->ref_table[j] = sourceId;
+	node = *(char**) ((char*) g_slot_table + 0x178 + p_slot * 0x21c);
+	while (node != 0) {
+		*(int*) (node + 6) = *(int*) ((char*) g_slot_table + 4 + p_slot * 0x21c);
+		node = *(char**) (node + 0x3f);
+	}
+	node = *(char**) ((char*) g_slot_table + 0x178 + q_slot * 0x21c);
+	while (node != 0) {
+		*(int*) (node + 6) = *(int*) ((char*) g_slot_table + 4 + q_slot * 0x21c);
+		node = *(char**) (node + 0x3f);
+	}
+
+	dst = (char*) g_slot_table + 0x5c;
+	counter = 0x300;
+	do {
+		char* ent = dst;
+		level = 8;
+		do {
+			if (*(int*) ent == sourceId) {
+				*(int*) ent = targetId;
+			} else if (*(int*) ent == targetId) {
+				*(int*) ent = sourceId;
+			}
+			ent += 4;
+			level--;
+		} while (level != 0);
+		dst += 0x21c;
+		counter--;
+	} while (counter != 0);
+
+	node = *(char**) ((char*) &rec_b + 0x178);
+	while (node != 0) {
+		obj_type = *(unsigned short*) node;
+		if (obj_type != 0) {
+			if ((*(char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[obj_type].kind) == 9) {
+				gm_AddObjekt(rec_a.entity_id, obj_type,
+					*(int*) (node + 0xe));
+			}
 		}
+		node = *(char**) (node + 0x3f);
 	}
 
-	for (node = *(void**) ((char*) &rec_b + 0x178); node != 0;
-		node = *(void**) ((char*) node + 0x3f)) {
-		unsigned short id;
-		id = *(unsigned short*) node;
-		if (id != 0 && (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].kind) == 9)
-			gm_AddObjekt(*(int*) ((char*) &rec_a + 4), id,
-				*(int*) ((char*) node + 0xe));
-	}
-
-	*(int*) ((char*) &slots[p_slot] + 0x1a8) = value;
-	*(int*) ((char*) &slots[p_slot] + 0x194) = 4;
-	*(int*) ((char*) &slots[p_slot] + 0x1c8) = 0;
+	*(int*) ((char*) g_slot_table + 0x1a8 + p_slot * 0x21c) = value;
+	*(int*) ((char*) g_slot_table + 0x194 + p_slot * 0x21c) = 4;
+	*(int*) ((char*) g_slot_table + 0x1c8 + p_slot * 0x21c) = 0;
 	gm_KillSpieler(rec_b.entity_index, 0);
 	return p_slot;
 }
