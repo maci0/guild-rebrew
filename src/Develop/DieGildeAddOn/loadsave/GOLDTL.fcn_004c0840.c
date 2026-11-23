@@ -52,8 +52,8 @@ int __cdecl fcn_004c0840(int handle)
 			dst = (char*) fcn_004be1f0(*(int*) (x + 0x29));
 			if (*(int*) (x + 0x29) == 0)
 				*(int*) (x + 0x29) = (int) dst;
-			*(int*) (dst + 4) = rec->kind;
 			*(int*) dst = rec->id;
+			*(int*) (dst + 4) = rec->kind;
 			*(Rec24*) (dst + 8) = rec->a;
 			*(Rec24*) (dst + 0x20) = rec->b;
 			i++;

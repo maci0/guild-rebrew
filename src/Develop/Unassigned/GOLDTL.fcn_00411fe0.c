@@ -1,8 +1,24 @@
+#include "client_input.h"
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14ce920[];
 extern short g_14ce922;
 extern short g_14ce924;
+extern short g_14ce8c2;
+extern int g_14ce8e8;
+extern int g_6b5c88;
 void __cdecl fcn_00411f90(void);
 void __cdecl fcn_00411b80(void);
+
+typedef struct {
+	int dwOfs;
+	int dwData;
+	int dwTimeStamp;
+	int dwSequence;
+	int uAppData;
+} DI_OBJDATA_411FE0;
+
+#define MIN411FE0(a, b) ((a) < (b) ? (a) : (b))
+#define MAX411FE0(a, b) ((a) > (b) ? (a) : (b))
 
 /* Reads the 0x14-byte UI event records of the active input object and applies
  * them to the cursor position and the three button latches. Cases 0/4 scale the
@@ -12,157 +28,133 @@ void __cdecl fcn_00411b80(void);
 /* ADDRESS: GOLDTL 0x00411fe0 */
 void __cdecl fcn_00411fe0(void)
 {
-	int flag;
-	unsigned char ev[0x14];
+	DWORD count;
+	DI_OBJDATA_411FE0 ev;
 	int v;
-	int t;
 
-	flag = 1;
-	*(short*) 0x14ce926 = 0;
-	*(short*) 0x14ce928 = 0;
-	*(short*) 0x14ce92a = 0;
-	if (*(int*) 0x14ce8a0 == 0) {
+	count = 1;
+	((short*) g_14ce920)[3] = 0;
+	((short*) g_14ce920)[4] = 0;
+	((short*) g_14ce920)[5] = 0;
+	if (g_14ce8a0 == 0) {
 		return;
 	}
 	while (1) {
-		*(int*) 0x14ce938 = 0;
-		*(int*) 0x14ce92c = 0;
-		*(int*) 0x14ce93c = 0;
-		*(int*) 0x14ce94c = 0;
-		*(int*) 0x14ce940 = 0;
-		*(int*) 0x14ce95c = 0;
-		*(int*) 0x14ce950 = 0;
-		*(int*) 0x14ce960 = 0;
-		*(int*) 0x14ce964 = 0;
-		v = ((int (__stdcall*) (int, int, void*, int*, int)) *(void**) (**(int**) 0x14ce8a0 + 0x28))(*(int*) 0x14ce8a0, 0x14, ev, &flag, 0);
-		if (v < 0 || flag == 0) {
+		g_14ce920[6] = 0;
+		g_14ce920[3] = 0;
+		g_14ce920[7] = 0;
+		g_14ce920[11] = 0;
+		g_14ce920[8] = 0;
+		g_14ce920[15] = 0;
+		g_14ce920[12] = 0;
+		g_14ce920[16] = 0;
+		g_14ce920[17] = 0;
+		if (g_14ce8a0->vtbl->GetDeviceData(g_14ce8a0, 0x14, (LPDIDEVICEOBJECTDATA) &ev, &count, 0) < 0 || count == 0) {
 			break;
 		}
-		switch (*(int*) ev) {
+		switch (ev.dwOfs) {
 		case 0:
-			v = (int) (*(int*) 0x6772b8 * *(float*) 0x662a30 * *(int*) (ev + 4));
+			v = (int) ((*(int*) 0x6772b8 / 256.0f) * ev.dwData);
 			*(short*) g_14ce920 += (short) v;
-			*(short*) 0x14ce926 = (short) v;
+			((short*) g_14ce920)[3] = (short) v;
 			break;
 		case 4:
-			v = (int) (*(int*) 0x6772b8 * *(float*) 0x662a30 * *(int*) (ev + 4));
+			v = (int) ((*(int*) 0x6772b8 / 256.0f) * ev.dwData);
 			g_14ce922 += (short) v;
-			*(short*) 0x14ce928 = (short) v;
+			((short*) g_14ce920)[4] = (short) v;
 			break;
 		case 8:
-			v = *(int*) 0x6772b8 * *(int*) (ev + 4);
+			v = *(int*) 0x6772b8 * ev.dwData;
 			v >>= 8;
 			if (v > 0) {
-				*(int*) 0x14ce964 = 1;
+				g_14ce920[17] = 1;
 			} else if (v < 0) {
-				*(int*) 0x14ce960 = 1;
+				g_14ce920[16] = 1;
 			}
 			g_14ce924 += (short) v;
-			*(short*) 0x14ce92a = (short) v;
+			((short*) g_14ce920)[5] = (short) v;
 			fcn_00411b80();
 			break;
 		case 12:
-			v = *(int*) (ev + 4) & 0x80;
-			if (v) {
-				*(int*) 0x14ce930 = 1;
-				*(int*) 0x14ce92c = 0;
-				if (*(int*) 0x14ce8e8 == 0) {
-					*(int*) 0x14ce938 = 1;
+			v = ev.dwData;
+			if (v & 0x80) {
+				g_14ce920[4] = 1;
+				g_14ce920[3] = 0;
+				if (g_14ce8e8 == 0) {
+					g_14ce920[6] = 1;
 				}
 				fcn_00411f90();
 				fcn_00411b80();
 			}
-			if (!v) {
-				*(int*) 0x14ce92c = 1;
-				*(int*) 0x14ce930 = 0;
+			if (!(v & 0x80)) {
+				g_14ce920[3] = 1;
+				g_14ce920[4] = 0;
 				fcn_00411f90();
 				fcn_00411b80();
 			}
 			break;
 		case 13:
-			v = *(int*) (ev + 4) & 0x80;
-			if (v) {
-				*(int*) 0x14ce944 = 1;
-				*(int*) 0x14ce940 = 0;
-				*(int*) 0x14ce94c = 1;
+			v = ev.dwData;
+			if (v & 0x80) {
+				g_14ce920[9] = 1;
+				g_14ce920[8] = 0;
+				g_14ce920[11] = 1;
 				fcn_00411f90();
 				fcn_00411b80();
 			}
-			if (!v) {
-				*(int*) 0x14ce940 = 1;
-				*(int*) 0x14ce944 = 0;
+			if (!(v & 0x80)) {
+				g_14ce920[8] = 1;
+				g_14ce920[9] = 0;
 				fcn_00411f90();
 				fcn_00411b80();
 			}
 			break;
 		case 14:
-			v = *(int*) (ev + 4) & 0x80;
-			if (v) {
-				*(int*) 0x14ce954 = 1;
-				*(int*) 0x14ce950 = 0;
-				*(int*) 0x14ce95c = 1;
+			v = ev.dwData;
+			if (v & 0x80) {
+				g_14ce920[13] = 1;
+				g_14ce920[12] = 0;
+				g_14ce920[15] = 1;
 				fcn_00411f90();
 				fcn_00411b80();
 			}
-			if (!v) {
-				*(int*) 0x14ce950 = 1;
-				*(int*) 0x14ce954 = 0;
+			if (!(v & 0x80)) {
+				g_14ce920[12] = 1;
+				g_14ce920[13] = 0;
 				fcn_00411f90();
 				fcn_00411b80();
 			}
 			break;
 		}
 	}
-	if ((int) *(short*) g_14ce920 < *(int*) 0x6b5c80) {
-		*(short*) g_14ce920 = (short) *(int*) 0x6b5c80;
+	if ((int) *(short*) g_14ce920 < g_6b5c80) {
+		*(short*) g_14ce920 = (short) g_6b5c80;
 	}
-	if ((int) *(short*) g_14ce920 > *(int*) 0x6772bc) {
-		*(short*) g_14ce920 = (short) *(int*) 0x6772bc;
+	if ((int) *(short*) g_14ce920 > d2_MouseRightBoundary) {
+		*(short*) g_14ce920 = (short) d2_MouseRightBoundary;
 	}
-	if ((int) g_14ce922 < *(int*) 0x6b5c84) {
-		g_14ce922 = (short) *(int*) 0x6b5c84;
+	if ((int) g_14ce922 < d2_MouseTopBoundary) {
+		g_14ce922 = (short) d2_MouseTopBoundary;
 	}
-	if ((int) g_14ce922 > *(int*) 0x6772c0) {
-		g_14ce922 = (short) *(int*) 0x6772c0;
+	if ((int) g_14ce922 > d2_MouseBottomBoundary) {
+		g_14ce922 = (short) d2_MouseBottomBoundary;
 	}
-	if (*(int*) 0x6b5c88 & 4) {
-		int pt[2];
-		((void (__stdcall*) (int*)) *(void**) 0x662250)(pt);
-		((void (__stdcall*) (int, int*)) *(void**) 0x662308)(*(int*) 0x14ce89c, pt);
-		if (*(int*) 0x6772c4 == 0) {
-			*(short*) g_14ce920 = (short) (*(short*) g_14ce920 + pt[0] - *(int*) 0x14ce8c0);
-			g_14ce922 = (short) (g_14ce922 + (short) pt[1] - *(short*) 0x14ce8c2);
-			pt[0] = (int) (short) *(int*) 0x14ce8c0;
-			pt[1] = (int) *(short*) 0x14ce8c2;
-			((void (__stdcall*) (int, int*)) *(void**) 0x662304)(*(int*) 0x14ce89c, pt);
-			((void (__stdcall*) (int, int)) *(void**) 0x662300)(pt[0], pt[1]);
+	if (g_6b5c88 & 4) {
+		POINT pt;
+		GetCursorPos(&pt);
+		ScreenToClient(g_14ce89c, &pt);
+		if (g_6772c4 == 0) {
+			*(short*) g_14ce920 = (short) (*(short*) g_14ce920 + pt.x - *(int*) &g_14ce8c0);
+			g_14ce922 = (short) (g_14ce922 + (short) pt.y - g_14ce8c2);
+			pt.x = (short) *(int*) &g_14ce8c0;
+			pt.y = g_14ce8c2;
+			ClientToScreen(g_14ce89c, &pt);
+			SetCursorPos(pt.x, pt.y);
 			fcn_00411b80();
 			return;
 		}
-		t = pt[0];
-		if (*(int*) 0x6772bc <= t) {
-			t = *(int*) 0x6772bc;
-		}
-		if (*(int*) 0x6b5c80 <= t) {
-			*(short*) 0x14ce920 = (short) pt[0];
-			if (*(int*) 0x6772bc <= pt[0]) {
-				*(short*) 0x14ce920 = (short) *(int*) 0x6772bc;
-			}
-		} else {
-			*(short*) 0x14ce920 = (short) *(int*) 0x6b5c80;
-		}
-		t = pt[1];
-		if (*(int*) 0x6772c0 <= t) {
-			t = *(int*) 0x6772c0;
-		}
-		if (*(int*) 0x6b5c84 <= t) {
-			*(short*) 0x14ce922 = (short) pt[1];
-			if (*(int*) 0x6772c0 <= pt[1]) {
-				*(short*) 0x14ce922 = (short) *(int*) 0x6772c0;
-			}
-		} else {
-			*(short*) 0x14ce922 = (short) *(int*) 0x6b5c84;
-		}
+		*(short*) g_14ce920 = (short) MAX411FE0(g_6b5c80, MIN411FE0(pt.x, d2_MouseRightBoundary));
+		g_14ce922 = (short) MAX411FE0(d2_MouseTopBoundary, MIN411FE0(pt.y, d2_MouseBottomBoundary));
 	}
 	fcn_00411b80();
 }

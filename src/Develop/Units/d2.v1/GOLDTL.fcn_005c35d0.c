@@ -1,6 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
+extern char g_7f4ca4[];
 /* Dialog message loop for 0x6ac5d8: validates the click id through
    fcn_00504f30, shows the dialog, then forwards the 0x39 packet to
    fcn_004c5530 while fcn_005373e0 keeps the loop alive. */
@@ -68,7 +69,7 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 			                          g_774970 * 0x21c),
 			                 fcn_0050b750(fcn_00471f80(ctl), g_773d75), g_773d75)) {
 				*(char*) (pkt + 4) = 0x21;
-				*(int*) (pkt + 8) = *(int*) (0x7f4ca4 +
+				*(int*) (pkt + 8) = *(int*) (g_7f4ca4 +
 				                             *(unsigned short*) (e + 0x25) * 0x21c);
 				*(int*) (pkt + 0xc) = -1;
 				*(char*) (pkt + 0x36) = 9;
@@ -76,7 +77,7 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 				*(int*) (pkt + 0x5c) = fcn_0050b750(
 				    fcn_00471f80(ctl),
 				    g_773d75);
-				*(int*) (pkt + 0x60) = *(int*) (0x7f4ca4 +
+				*(int*) (pkt + 0x60) = *(int*) (g_7f4ca4 +
 				                                g_774970 * 0x21c);
 				fcn_004c5530(pkt);
 				fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 0x200, 0);

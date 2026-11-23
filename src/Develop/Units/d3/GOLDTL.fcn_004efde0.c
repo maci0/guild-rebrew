@@ -12,10 +12,10 @@
  * +0x18, an object handle at +0x150, a callback at +0x168 and the data
  * pointer at +0x16c.
  */
+#include "client_types.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
-/* Current slot: idx counts ints, 0x5c per 0x170-byte slot of the table at g_7731b8. */
-#define SLOT ((Sefde0Slot*) ((char*) g_7731b8 + idx * 4))
+#define SLOTS ((Sefde0Slot*) g_7731b8)
 
 typedef struct Sefde0Entry {
 	int f00[12];
@@ -40,6 +40,9 @@ typedef struct Sefde0Slot {
 } Sefde0Slot;
 
 extern int g_7731b8[];
+extern pos14_7f4c00 g_772fe8;
+extern pos14_7f4c00 gm_GameTime;
+extern float g_6652c4;
 int __cdecl gm_GetElapsedMinutes(char*, char*);
 void __cdecl fcn_004432d0(int, int);
 int __cdecl fcn_005e9870(Sefde0Entry*);
@@ -53,125 +56,103 @@ void __cdecl fcn_004f01c0(int, int, int, int*);
 /* ADDRESS: GOLDTL 0x004efde0 */
 void __cdecl fcn_004efde0(void)
 {
-	int* statep;
-	char* obj;
 	int save;
-	int idx;
+	int elapsed;
+	int slot;
 	int count;
 	int i;
-	int flags;
 	int state;
 	float step;
-	float x;
-	float y;
-	float z;
 
-
-	idx = gm_GetElapsedMinutes((char*) 0x772fe8, (char*) 0x7f4c00);
-	if (idx < 0) {
-		idx = 0;
+	elapsed = gm_GetElapsedMinutes((char*) &g_772fe8, (char*) &gm_GameTime);
+	if (elapsed < 0) {
+		elapsed = 0;
 	}
-	step = (float) idx * *(float*) 0x6652c4;
-	*(int*) 0x772fe8 = *(int*) 0x7f4c00;
-	*(int*) 0x772fec = *(int*) 0x7f4c04;
-	*(int*) 0x772ff0 = *(int*) 0x7f4c08;
-	*(short*) 0x772ff4 = *(short*) 0x7f4c0c;
-	step = step * *(float*) 0x662a3c;
-	save = d3_CurrentContextIndex; fcn_004432d0(0, 1);
-	count = 0; idx = 0;
-	for (;;) {
-		if (SLOT->id != -1) {
-			x = step + SLOT->x;
-			SLOT->x = x;
-			y = step + SLOT->y;
-			SLOT->y = y;
-			z = step + SLOT->z;
-			SLOT->z = z;
-			SLOT->x = MIN(x, 1.0f);
-			SLOT->y = MIN(y, 1.0f);
-			SLOT->z = MIN(z, 1.0f);
-			if (SLOT->flags & 2) {
-				i = 0;
-				count = 0;
-				statep = &SLOT->entry[0].state;
-				while (i < 3) {
-					state = *statep;
+	step = (float) elapsed * g_6652c4;
+	g_772fe8 = gm_GameTime;
+	step *= g_662a3c;
+	save = d3_CurrentContextIndex;
+	fcn_004432d0(0, 1);
+	for (slot = 0; slot < 8; slot++) {
+		if (SLOTS[slot].id != -1) {
+			count = 0;
+			SLOTS[slot].x += step;
+			SLOTS[slot].y += step;
+			SLOTS[slot].z += step;
+			SLOTS[slot].x = MIN(SLOTS[slot].x, 1.0f);
+			SLOTS[slot].y = MIN(SLOTS[slot].y, 1.0f);
+			SLOTS[slot].z = MIN(SLOTS[slot].z, 1.0f);
+			if (!(SLOTS[slot].flags & 2)) {
+				if (SLOTS[slot].flags & 4) {
+					fcn_004efd70(SLOTS[slot].id);
+				}
+			} else {
+				for (i = 0; i < 3; i++) {
+					state = SLOTS[slot].entry[i].state;
 					if (state == 0) {
 						count++;
 						if (count >= 3) {
-							SLOT->flags &= ~3;
-							if (SLOT->flags & 4) {
-								fcn_004efd70(SLOT->id);
+							SLOTS[slot].flags &= ~3;
+							if (SLOTS[slot].flags & 4) {
+								fcn_004efd70(SLOTS[slot].id);
 							}
 						}
 					} else if (state == 1) {
 						int runs;
-						if (SLOT->mode == 0) {
-							runs = fcn_005e9870((Sefde0Entry*) (statep - 0x17));
+						if (SLOTS[slot].mode == 0) {
+							runs = fcn_005e9870(&SLOTS[slot].entry[i]);
 						} else {
-							runs = fcn_005e9da0((Sefde0Entry*) (statep - 0x17));
+							runs = fcn_005e9da0(&SLOTS[slot].entry[i]);
 						}
 						if (runs != 0) {
-							obj = ((char*) g_7731b8[idx + i + 0x57]);
-							if (obj == 0) {
-								obj = fcn_00442910(0, (float*) 0x662d70, (float*) 0x662d80, (char*) 0x68ff14);
-								g_7731b8[idx + i + 0x57] = (int) obj;
-								*(unsigned char*) (obj + 0x215) |= 1;
-								*(unsigned char*) (((char*) g_7731b8[idx + i + 0x57]) + 0x216) |= 3;
-								*(unsigned char*) (((char*) g_7731b8[idx + i + 0x57]) + 0x215) &= ~2;
+							if (SLOTS[slot].objects[i] == 0) {
+								SLOTS[slot].objects[i] = fcn_00442910(0, (float*) 0x662d70, (float*) 0x662d80, (char*) 0x68ff14);
+								*(unsigned char*) (SLOTS[slot].objects[i] + 0x215) |= 1;
+								*(unsigned char*) (SLOTS[slot].objects[i] + 0x216) |= 3;
+								*(unsigned char*) (SLOTS[slot].objects[i] + 0x215) &= ~2;
 							}
-							fcn_00438b40(((char*) g_7731b8[idx + i + 0x57]), statep - 0xb);
+							fcn_00438b40(SLOTS[slot].objects[i], &SLOTS[slot].entry[i].obj);
 						}
-						if (*statep == 3) {
-							obj = ((char*) g_7731b8[idx + i + 0x57]);
-							if (obj != 0) {
-								d3_DestroyObject(obj);
-								g_7731b8[idx + i + 0x57] = (int) 0;
+						if (SLOTS[slot].entry[i].state == 3) {
+							if (SLOTS[slot].objects[i] != 0) {
+								d3_DestroyObject(SLOTS[slot].objects[i]);
+								SLOTS[slot].objects[i] = 0;
 							}
-							if (SLOT->data != 0) {
-								*SLOT->data = i;
+							if (SLOTS[slot].data != 0) {
+								*SLOTS[slot].data = i;
 							}
-							*(int*) ((char*) SLOT->data + i * 0x10 + 8) = -1;
-							if (SLOT->callback != 0) {
-								SLOT->callback((int) SLOT->data);
+							SLOTS[slot].data[i * 4 + 2] = -1;
+							if (SLOTS[slot].callback != 0) {
+								SLOTS[slot].callback((int) SLOTS[slot].data);
 							}
-							*statep = 0;
-							g_7731b8[idx + i + 0x54] = 0;
-						} else if (*statep == 2) {
+							SLOTS[slot].entry[i].state = 0;
+							SLOTS[slot].active[i] = 0;
+						} else if (SLOTS[slot].entry[i].state == 2) {
 							count++;
-							obj = ((char*) g_7731b8[idx + i + 0x57]);
-							if (obj != 0) {
-								d3_DestroyObject(obj);
-								g_7731b8[idx + i + 0x57] = (int) 0;
+							if (SLOTS[slot].objects[i] != 0) {
+								d3_DestroyObject(SLOTS[slot].objects[i]);
+								SLOTS[slot].objects[i] = 0;
 							}
-							fcn_004f01c0(SLOT->flags & 1, SLOT->id, (int) (statep - 0x17), SLOT->data);
-							if (SLOT->data != 0) {
-								*SLOT->data = i;
+							fcn_004f01c0(SLOTS[slot].flags & 1, SLOTS[slot].id, (int) &SLOTS[slot].entry[i], SLOTS[slot].data);
+							if (SLOTS[slot].data != 0) {
+								*SLOTS[slot].data = i;
 							}
-							if (SLOT->callback != 0) {
-								SLOT->callback((int) SLOT->data);
+							if (SLOTS[slot].callback != 0) {
+								SLOTS[slot].callback((int) SLOTS[slot].data);
 							}
-							*statep = 0;
-							g_7731b8[idx + i + 0x54] = 0;
-							*SLOT->data = -1;
+							SLOTS[slot].entry[i].state = 0;
+							SLOTS[slot].active[i] = 0;
+							*SLOTS[slot].data = -1;
 						}
 					}
-					i++;
-					statep += 0x1a;
 				}
 				if (count >= 3) {
-					SLOT->flags &= ~3;
-					if (SLOT->flags & 4) {
-						fcn_004efd70(SLOT->id);
+					SLOTS[slot].flags &= ~3;
+					if (SLOTS[slot].flags & 4) {
+						fcn_004efd70(SLOTS[slot].id);
 					}
 				}
-			} else if (SLOT->flags & 4) {
-				fcn_004efd70(SLOT->id);
 			}
-		}
-		idx += 0x5c;
-		if (idx >= 0x2e0) {
-			break;
 		}
 	}
 	fcn_004432d0(save, 1);

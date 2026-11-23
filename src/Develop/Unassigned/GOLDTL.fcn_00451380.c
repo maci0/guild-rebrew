@@ -1,5 +1,6 @@
 #include <math.h>
 
+extern double g_662958;
 extern float g_662d60;
 extern float g_662d64;
 extern float g_662d68;
@@ -40,5 +41,5 @@ float __cdecl fcn_00451380(float* a, float* b)
 	if (cross > 0.0f) {
 		return (float) (-asin(vb[2] * va[2] + vb[1] * va[1] + vb[0] * va[0]));
 	}
-	return (float) (asin(vb[2] * va[2] + vb[1] * va[1] + vb[0] * va[0]) - *(double*) 0x662958);
+	return (float) (asin(vb[2] * va[2] + vb[1] * va[1] + vb[0] * va[0]) - g_662958);
 }

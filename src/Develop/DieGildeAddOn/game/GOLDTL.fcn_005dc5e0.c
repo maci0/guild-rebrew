@@ -47,32 +47,17 @@ static __inline void fill0_5dc5e0(char* dst, int size)
 /* ADDRESS: GOLDTL 0x005dc5e0 */
 int __cdecl fcn_005dc5e0(char* entity, int* target)
 {
-	char text[0x800];
-	char name[0x100];
-	int set[0x14];
 	char buf[0xf8];
 	char* pkt;
 	unsigned int ent;
 	char kind;
+	int res;
 
-	if (*(char*) (entity + 2) != 6) {
-		pkt = (char*) gm_StartFilteredEntitySearch(1, 1, target[1]);
-		if (pkt == 0) {
-			return 0;
-		}
-		fill0_5dc5e0(buf, 0xf8);
-		*(char*) (buf + 4) = 0x76;
-		*(int*) (buf + 8) = *(int*) (entity + 4);
-		*(int*) (buf + 0xc) = -1;
-		*(int*) (buf + 0x28) = gm_GameTime;
-		*(int*) (buf + 0x2c) = g_7f4c04;
-		*(int*) (buf + 0x30) = g_7f4c08;
-		*(unsigned short*) (buf + 0x34) = g_7f4c0c;
-		*(char*) (buf + 0x36) = 0x0a;
-		*(int*) (buf + 0x58) = *(int*) (pkt + 1);
-		*(unsigned short*) (buf + 0x6e) = 0x178;
-		fcn_004c5530(buf); fill0_5dc5e0(buf, 0xf8);
-	} else {
+	res = 0;
+	if (*(char*) (entity + 2) == 6) {
+		int set[0x14];
+		char name[0x100];
+
 		memset(set, 0, sizeof(set));
 		memset(&set[7], 0xff, 0x20);
 		io_FormatTextBuffer(name, 0x9b);
@@ -83,15 +68,32 @@ int __cdecl fcn_005dc5e0(char* entity, int* target)
 		set[3] = 1;
 		pkt = (char*) fcn_005bdc30(1, set, name, 0, 0);
 		if (pkt == 0) {
-			return 0;
+			goto done;
 		}
 		fill0_5dc5e0(buf, 0xf8);
-		*(char*) (buf + 4) = 0x76;
-		*(int*) (buf + 8) = *(int*) (entity + 4);
-		*(int*) (buf + 0xc) = -1;
 		*(int*) (buf + 0x28) = gm_GameTime;
-		*(int*) (buf + 0x2c) = g_7f4c04;
+		*(int*) (buf + 8) = *(int*) (entity + 4);
 		*(int*) (buf + 0x30) = g_7f4c08;
+		*(int*) (buf + 0x2c) = g_7f4c04;
+		*(char*) (buf + 4) = 0x76;
+		*(int*) (buf + 0xc) = -1;
+		*(unsigned short*) (buf + 0x34) = g_7f4c0c;
+		*(char*) (buf + 0x36) = 0x0a;
+		*(int*) (buf + 0x58) = *(int*) (pkt + 1);
+		*(unsigned short*) (buf + 0x6e) = 0x178;
+		fcn_004c5530(buf); fill0_5dc5e0(buf, 0xf8);
+	} else {
+		pkt = (char*) gm_StartFilteredEntitySearch(1, 1, target[1]);
+		if (pkt == 0) {
+			goto done;
+		}
+		fill0_5dc5e0(buf, 0xf8);
+		*(int*) (buf + 0x28) = gm_GameTime;
+		*(int*) (buf + 8) = *(int*) (entity + 4);
+		*(int*) (buf + 0x30) = g_7f4c08;
+		*(int*) (buf + 0x2c) = g_7f4c04;
+		*(char*) (buf + 4) = 0x76;
+		*(int*) (buf + 0xc) = -1;
 		*(unsigned short*) (buf + 0x34) = g_7f4c0c;
 		*(char*) (buf + 0x36) = 0x0a;
 		*(int*) (buf + 0x58) = *(int*) (pkt + 1);
@@ -99,13 +101,12 @@ int __cdecl fcn_005dc5e0(char* entity, int* target)
 		fcn_004c5530(buf); fill0_5dc5e0(buf, 0xf8);
 	}
 
-
-	*(char*) (buf + 4) = 0x77;
-	*(int*) (buf + 8) = *(int*) (entity + 4);
-	*(int*) (buf + 0xc) = -1;
 	*(int*) (buf + 0x28) = gm_GameTime;
-	*(int*) (buf + 0x2c) = g_7f4c04;
+	*(int*) (buf + 8) = *(int*) (entity + 4);
 	*(int*) (buf + 0x30) = g_7f4c08;
+	*(int*) (buf + 0x2c) = g_7f4c04;
+	*(char*) (buf + 4) = 0x77;
+	*(int*) (buf + 0xc) = -1;
 	*(unsigned short*) (buf + 0x34) = g_7f4c0c;
 	*(char*) (buf + 0x36) = 1;
 	*(int*) (buf + 0x58) = *(int*) (pkt + 1);
@@ -120,10 +121,14 @@ int __cdecl fcn_005dc5e0(char* entity, int* target)
 		ent = *(unsigned short*) (pkt + 0x27);
 		kind = g_7f4ca2[ent * 0x21c];
 		if (kind == 6 || kind == 7) {
+			char text[0x800];
+
 			io_FormatTextBuffer(text, 0xff2, pkt);
 			ent = *(unsigned short*) (pkt + 0x27);
 			fcn_00545d40(*(int*) (&g_7f4ca4[ent * 0x87]), -1, text, 0, 0x5fb, 0);
 		}
 	}
-	return 1;
+	res = 1;
+done:
+	return res;
 }

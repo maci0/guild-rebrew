@@ -20,6 +20,7 @@ typedef struct {
 extern volatile int g_6b7fc0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774654;
+extern int g_6a2c04;
 extern char g_6abaec[];
 
 int __cdecl fcn_00470820(int, int, char*);
@@ -45,7 +46,7 @@ void __cdecl d2_ShowSupermap(Map5b52* m, int x0, int y0, int x1, int y1)
 	h = fcn_00470820(0, 0, g_6abaec);
 	fcn_00471d80(h, 3);
 	g_6b7fc0 = 1;
-	*(int*) 0x6a2c04 = 0;
+	g_6a2c04 = 0;
 	while (fcn_005373e0((void*) d2_ShowSupermap, 0x277c7) != 0) {
 		d2_SetForm(h, 1);
 		if (m != 0) {
@@ -89,5 +90,5 @@ void __cdecl d2_ShowSupermap(Map5b52* m, int x0, int y0, int x1, int y1)
 	}
 	fcn_00471e30(h);
 	g_6b7fc0 = 0;
-	*(int*) 0x6a2c04 = 1;
+	g_6a2c04 = 1;
 }

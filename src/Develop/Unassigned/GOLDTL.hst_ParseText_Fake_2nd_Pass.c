@@ -29,78 +29,91 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 	Slot* slot;
 	int in_label;
 	int dashes;
+	char* d;
 	char* p;
 	char* s;
 	char* q;
 	char c;
-	int n;
 
 	in_label = 0;
 	dashes = 0;
-	n = sizeof(buf); p = buf; __asm {
-		mov edi, p
-		mov ebx, n
-		xor eax, eax
-		lea ecx, [edi+edi*2]
-		and ecx, 3
-		sub ebx, ecx
-		jle short fill_end1
-		rep stosb
-		mov ecx, ebx
-		and ebx, 3
-		shr ecx, 2
-		rep stosd
-	fill_end1:
-		add ecx, ebx
-		rep stosb
+	{
+		int n = sizeof(buf);
+		char* fp = buf;
+		__asm {
+			mov edi, fp
+			mov ebx, n
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short fill_end1
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		fill_end1:
+			add ecx, ebx
+			rep stosb
+		}
 	}
-	n = strlen(out); p = buf; __asm {
-		mov edi, p
-		mov esi, out
-		mov ebx, n
-		lea ecx, [edi+edi*2]
-		and ecx, 3
-		sub ebx, ecx
-		jle short fill_end2
-		rep movsb
-		mov ecx, ebx
-		and ebx, 3
-		shr ecx, 2
-		rep movsd
-	fill_end2:
-		add ecx, ebx
-		rep movsb
+	{
+		int n = strlen(out);
+		char* fp = buf;
+		__asm {
+			mov edi, fp
+			mov esi, out
+			mov ebx, n
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short fill_end2
+			rep movsb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep movsd
+		fill_end2:
+			add ecx, ebx
+			rep movsb
+		}
 	}
 	slot = hst_ParseCommandline_1st_Pass(id);
 	s = buf;
+	d = out;
 	if (*s != 0) {
 		do {
 			c = *s;
 			if (in_label == 0) {
 				if (c == '_') {
-					n = sizeof(label); p = label; __asm {
-						mov edi, p
-						mov ebx, n
-						xor eax, eax
-						lea ecx, [edi+edi*2]
-						and ecx, 3
-						sub ebx, ecx
-						jle short fill_end3
-						rep stosb
-						mov ecx, ebx
-						and ebx, 3
-						shr ecx, 2
-						rep stosd
-					fill_end3:
-						add ecx, ebx
-						rep stosb
+					{
+						int n = sizeof(label);
+						char* fp = label;
+						__asm {
+							mov edi, fp
+							mov ebx, n
+							xor eax, eax
+							lea ecx, [edi+edi*2]
+							and ecx, 3
+							sub ebx, ecx
+							jle short fill_end3
+							rep stosb
+							mov ecx, ebx
+							and ebx, 3
+							shr ecx, 2
+							rep stosd
+						fill_end3:
+							add ecx, ebx
+							rep stosb
+						}
 					}
-					label[0] = (char) c;
-					p = label + 1;
+					p = label;
+					*p++ = *s;
 					in_label = 1;
 					dashes = 0;
 				} else {
-					*out++ = (char) c;
+					*d++ = (char) c;
 				}
 				s++;
 				continue;
@@ -109,9 +122,9 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 				goto syntax_error;
 			}
 			if (c == '-') {
+				dashes++;
 				*p++ = (char) c;
 				s++;
-				dashes++;
 				if (dashes > 2) {
 					sprintf(msg, g_680ae0, id - hst_HistoryTextBase - 1, label);
 					return 0;
@@ -123,43 +136,48 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 				s++;
 				continue;
 			}
-			n = isdigit(c);
-			if (n == 0) {
-				sprintf(msg, g_680ae0, id - hst_HistoryTextBase - 1, label);
-				return 0;
+			if (dashes == 2) {
+				if (isdigit(c) == 0) {
+					sprintf(msg, g_680ae0, id - hst_HistoryTextBase - 1, label);
+					return 0;
+				}
+				while (isdigit(*s) && *s != 0) {
+					*p++ = *s++;
+				}
+				{
+					int n = sizeof(slotname);
+					char* fq = slotname;
+					__asm {
+						mov edi, fq
+						mov ebx, n
+						xor eax, eax
+						lea ecx, [edi+edi*2]
+						and ecx, 3
+						sub ebx, ecx
+						jle short fill_end4
+						rep stosb
+						mov ecx, ebx
+						and ebx, 3
+						shr ecx, 2
+						rep stosd
+					fill_end4:
+						add ecx, ebx
+						rep stosb
+					}
+				}
+				*p = 0;
+				if (hst_ParseContext(label, slotname, slot) == 0) {
+					goto parse_fail;
+				}
+				q = slotname;
+				while (*q != 0) {
+					*d++ = *q++;
+				}
+				*d++ = *s;
+				in_label = 0;
+				dashes = 0;
+				s++;
 			}
-			while (isdigit(*s) && *s != 0) {
-				*p++ = *s++;
-			}
-			n = sizeof(slotname); q = slotname; __asm {
-				mov edi, q
-				mov ebx, n
-				xor eax, eax
-				lea ecx, [edi+edi*2]
-				and ecx, 3
-				sub ebx, ecx
-				jle short fill_end4
-				rep stosb
-				mov ecx, ebx
-				and ebx, 3
-				shr ecx, 2
-				rep stosd
-			fill_end4:
-				add ecx, ebx
-				rep stosb
-			}
-			*p = 0;
-			if (hst_ParseContext(label, slotname, slot) == 0) {
-				goto parse_fail;
-			}
-			q = slotname;
-			while (*q != 0) {
-				*out++ = *q++;
-			}
-			*out++ = *s;
-			in_label = 0;
-			dashes = 0;
-			s++;
 		} while (*s != 0);
 	}
 	if (in_label != 0 && dashes < 2) {
@@ -168,22 +186,26 @@ syntax_error:
 		return 0;
 	}
 	if (in_label == 1 && dashes == 2) {
-		n = sizeof(slotname); q = slotname; __asm {
-			mov edi, q
-			mov ebx, n
-			xor eax, eax
-			lea ecx, [edi+edi*2]
-			and ecx, 3
-			sub ebx, ecx
-			jle short fill_end5
-			rep stosb
-			mov ecx, ebx
-			and ebx, 3
-			shr ecx, 2
-			rep stosd
-		fill_end5:
-			add ecx, ebx
-			rep stosb
+		{
+			int n = sizeof(slotname);
+			char* fq = slotname;
+			__asm {
+				mov edi, fq
+				mov ebx, n
+				xor eax, eax
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short fill_end5
+				rep stosb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep stosd
+			fill_end5:
+				add ecx, ebx
+				rep stosb
+			}
 		}
 		*p = 0;
 		if (hst_ParseContext(label, slotname, slot) == 0) {
@@ -191,10 +213,10 @@ syntax_error:
 		}
 		q = slotname;
 		while (*q != 0) {
-			*out++ = *q++;
+			*d++ = *q++;
 		}
 	}
-	*out = 0;
+	*d = 0;
 	return 1;
 parse_fail:
 	if (slot != 0) {

@@ -37,10 +37,8 @@ int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d,
 	float* p3;
 	float sx;
 	float sy;
-	float dx;
 	float slope_a;
 	float slope_b;
-	float slope_c;
 	float left;
 	float right;
 	int ax;
@@ -49,7 +47,6 @@ int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d,
 	int by;
 	int cx;
 	int cy;
-	int x;
 	int y;
 	int hit;
 	int t;
@@ -108,45 +105,44 @@ int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d,
 	d = (void*) 0xff;
 	e = 0;
 	if (ay == by) {
-		if (ay != cy) {
+		if (ay == cy) {
+			/* one row: a single span from the leftmost to the rightmost x */
+			left = (float) ((ax < bx ? ax : bx) < cx ? (ax < bx ? ax : bx) : cx);
+			right = (float) ((ax > bx ? ax : bx) > cx ? (ax > bx ? ax : bx) : cx);
+			hit = fcn_004137e0(map, (int*) &d, (int*) &e, (int) left, (int) right, ay);
+		} else {
 			/* flat top: advance each edge toward the bottom vertex */
-			hit = fcn_004137e0(map, (int*) &d, (int*) &e, ax, bx, ay);
-			dx = (float) (cx - ax);
-			slope_a = dx / (float) (cy - ay);
-			slope_b = (float) (cx - bx) / (float) (cy - by);
-			left = (float) ax + slope_a;
-			right = (float) bx + slope_b;
+			left = (float) ax;
+			right = (float) bx;
+			hit = fcn_004137e0(map, (int*) &d, (int*) &e, (int) left, (int) right, ay);
+			slope_a = (float) ((double) (cx - ax) / (double) (cy - ay));
+			slope_b = (float) ((double) (cx - bx) / (double) (cy - by));
+			left += slope_a;
+			right += slope_b;
 			for (y = ay + 1; y <= cy; y++) {
 				hit &= fcn_004137e0(map, (int*) &d, (int*) &e, (int) left, (int) right, y);
 				left += slope_a;
 				right += slope_b;
 			}
-		} else {
-			/* one row: a single span from the leftmost to the rightmost x */
-			t = ax < bx ? ax : bx;
-			x = t < cx ? t : cx;
-			t = ax > bx ? ax : bx;
-			t = t > cx ? t : cx;
-			hit = fcn_004137e0(map, (int*) &d, (int*) &e, x, t, ay);
 		}
 	} else {
 		/* general triangle: the top row collapses to the apex */
-		slope_a = (float) (cx - ax) / (float) (cy - ay);
-		slope_b = (float) (bx - ax) / (float) (by - ay);
-		hit = 1;
 		left = (float) ax;
+		slope_a = (float) ((double) (cx - ax) / (double) (cy - ay));
 		right = left;
+		slope_b = (float) ((double) (bx - ax) / (double) (by - ay));
+		hit = 1;
 		for (y = ay; y <= by; y++) {
 			hit &= fcn_004137e0(map, (int*) &d, (int*) &e, (int) left, (int) right, y);
 			left += slope_a;
 			right += slope_b;
 		}
-		slope_c = (float) (cx - bx) / (float) (cy - by);
-		right = (float) bx - slope_c;
-		for (y = by + 1; y <= cy; y++) {
+		slope_b = (float) ((double) (cx - bx) / (double) (cy - by));
+		right = (float) bx - slope_b;
+		for (; y <= cy; y++) {
 			hit &= fcn_004137e0(map, (int*) &d, (int*) &e, (int) left, (int) right, y);
 			left += slope_a;
-			right += slope_c;
+			right += slope_b;
 		}
 	}
 	if (hit != 0) {
@@ -154,5 +150,5 @@ int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d,
 	}
 	*lo_out = (float) (int) d * map->height_scale + map->base_y;
 	*hi_out = (float) (int) e * map->height_scale + map->base_y;
-	return 0;
+	return hit;
 }

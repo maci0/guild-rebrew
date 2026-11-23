@@ -83,7 +83,7 @@ int __cdecl hst_ParseDate(int key, int flags, int* out, char* text)
 {
 	char buf[0x17d0];
 	Parts parts;
-	int c;
+	short c;
 	int mode;
 	unsigned char tmp[0x10];
 	char* src;
@@ -135,7 +135,28 @@ int __cdecl hst_ParseDate(int key, int flags, int* out, char* text)
 		}
 		*out = val - 0x578;
 		if ((flags & 4) != 0) {
-			copy0(text, buf, strlen(buf));
+			int n6;
+			char* s6;
+
+			n6 = strlen(buf);
+			s6 = buf;
+			__asm {
+				mov edi, text
+				mov esi, s6
+				mov ebx, n6
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short Lc4
+				rep movsb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep movsd
+			Lc4:
+				add ecx, ebx
+				rep movsb
+			}
 		} else if ((flags & 2) != 0) {
 			switch (mode) {
 			case 2:
@@ -150,8 +171,46 @@ int __cdecl hst_ParseDate(int key, int flags, int* out, char* text)
 			}
 		}
 		if ((flags & 1) != 0) {
-			fill0(g_1007ba0, 0x10);
-			copy0(g_1007ba0, buf, 0xa);
+			int n7;
+			char* s8;
+
+			n7 = 0x10;
+			__asm {
+				mov edi, offset g_1007ba0
+				mov ebx, n7
+				xor eax, eax
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short Lf5
+				rep stosb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep stosd
+			Lf5:
+				add ecx, ebx
+				rep stosb
+			}
+			n7 = 0xa;
+			s8 = buf;
+			__asm {
+				mov edi, offset g_1007ba0
+				mov esi, s8
+				mov ebx, n7
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short Lc6
+				rep movsb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep movsd
+			Lc6:
+				add ecx, ebx
+				rep movsb
+			}
 		}
 		return 1;
 	} while (0);

@@ -66,8 +66,8 @@ void __cdecl fcn_0041ec50(unsigned int* destination, unsigned int* source)
 			while (y != 0) {
 				input = (unsigned short*) line + first_column;
 				x = span;
+				samples += x;
 				if (x != 0) {
-					samples += x;
 					do {
 						pixel = *input++;
 						red += (pixel & source[0x16]) >> rshift;

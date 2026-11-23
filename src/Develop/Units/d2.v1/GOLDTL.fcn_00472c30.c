@@ -75,8 +75,8 @@ void __cdecl fcn_00472c30(int x0, int y0, int x1, int y1, int a4, int a5, int a6
 		} while (x0 != x1);
 		return;
 	}
-	d2 = dx * 2;
 	e2 = (dx - dy) * 2;
+	d2 = dx * 2;
 	e = d2 - dy;
 	do {
 		y0 += sy;

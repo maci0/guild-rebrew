@@ -149,8 +149,8 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 			wC[ei][1][1] = m[ei][1] * t10;
 			wC[ei][1][2] = m[ei][1] * t11;
 
-			tapA[ei][1] = r1->p0;
 			tapA[ei][0] = r0->p0;
+			tapA[ei][1] = r1->p0;
 			tapB[ei][1] = r1->p1;
 			tapB[ei][0] = r0->p1;
 

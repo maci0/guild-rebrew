@@ -132,7 +132,7 @@ void __cdecl fcn_00591ea0(void)
 			item = old_sel;
 			y = slot;
 		}
-		if (*(int*) 0x14ce8e0 != 0 || *(char*) &g_14cf950 == 'X' || *(char*) &g_14cf950 == 1)
+		if (g_14ce8e0 != 0 || *(char*) &g_14cf950 == 'X' || *(char*) &g_14cf950 == 1)
 			g_774654 = 1;
 		if (*(int*) &g_100f1dc != -1) {
 			sel = *(int*) 0x67d370;

@@ -74,7 +74,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int maxCount, int* a2, voi
 		}
 	}
 	keep = found;
-	if (maxCount <= found) {
+	if (found >= maxCount) {
 		keep = maxCount;
 		found = maxCount;
 	}

@@ -11,13 +11,12 @@ void __cdecl fcn_00454850(unsigned int* node, unsigned int a1, unsigned int dept
 {
 	float lo[4];
 	float hi[4];
+	float d[4];
 	unsigned int* p;
 	unsigned int v;
-	unsigned int first;
-	unsigned int ok;
-	float dx;
-	float dz;
-	int i;
+	int first;
+	char ok;
+	unsigned int i;
 
 	ok = 1;
 	if (node[0xc] > 0) {
@@ -46,53 +45,52 @@ void __cdecl fcn_00454850(unsigned int* node, unsigned int a1, unsigned int dept
 			}
 		} else {
 			for (p = (unsigned int*) node[0xf]; p != 0; p = (unsigned int*) p[1]) {
-				v = *(unsigned int*) (*p + 0x1ec);
-				*((float*) (node + 4)) = (*((float*) (node + 4)) < *((float*) (v + 0x90)))
-					? *((float*) (node + 4)) : *((float*) (v + 0x90));
-				*((float*) (node + 5)) = (*((float*) (node + 5)) < *((float*) (v + 0x94)))
-					? *((float*) (node + 5)) : *((float*) (v + 0x94));
-				*((float*) (node + 6)) = (*((float*) (node + 6)) < *((float*) (v + 0x98)))
-					? *((float*) (node + 6)) : *((float*) (v + 0x98));
-				*((float*) (node + 8)) = (*((float*) (node + 8)) > *((float*) (v + 0xa0)))
-					? *((float*) (node + 8)) : *((float*) (v + 0xa0));
-				*((float*) (node + 9)) = (*((float*) (node + 9)) > *((float*) (v + 0xa4)))
-					? *((float*) (node + 9)) : *((float*) (v + 0xa4));
-				*((float*) (node + 10)) = (*((float*) (node + 10)) > *((float*) (v + 0xa8)))
-					? *((float*) (node + 10)) : *((float*) (v + 0xa8));
+				*((float*) (node + 4)) = (*((float*) (*(unsigned int*) (*p + 0x1ec) + 0x90)) > *((float*) (node + 4)))
+					? *((float*) (node + 4)) : *((float*) (*(unsigned int*) (*p + 0x1ec) + 0x90));
+				*((float*) (node + 5)) = (*((float*) (*(unsigned int*) (*p + 0x1ec) + 0x94)) > *((float*) (node + 5)))
+					? *((float*) (node + 5)) : *((float*) (*(unsigned int*) (*p + 0x1ec) + 0x94));
+				*((float*) (node + 6)) = (*((float*) (*(unsigned int*) (*p + 0x1ec) + 0x98)) > *((float*) (node + 6)))
+					? *((float*) (node + 6)) : *((float*) (*(unsigned int*) (*p + 0x1ec) + 0x98));
+				*((float*) (node + 8)) = (*((float*) (*(unsigned int*) (*p + 0x1ec) + 0xa0)) < *((float*) (node + 8)))
+					? *((float*) (node + 8)) : *((float*) (*(unsigned int*) (*p + 0x1ec) + 0xa0));
+				*((float*) (node + 9)) = (*((float*) (*(unsigned int*) (*p + 0x1ec) + 0xa4)) < *((float*) (node + 9)))
+					? *((float*) (node + 9)) : *((float*) (*(unsigned int*) (*p + 0x1ec) + 0xa4));
+				*((float*) (node + 10)) = (*((float*) (*(unsigned int*) (*p + 0x1ec) + 0xa8)) < *((float*) (node + 10)))
+					? *((float*) (node + 10)) : *((float*) (*(unsigned int*) (*p + 0x1ec) + 0xa8));
 			}
 		}
 	}
-	if (depth < maxDepth && a1 < node[0xc]) {
-		dx = (*((float*) (node + 8)) - *((float*) (node + 4))) * 0.5f;
-		dz = (*((float*) (node + 10)) - *((float*) (node + 6))) * 0.5f;
+	if (depth < maxDepth && node[0xc] > a1) {
+		d[0] = (*((float*) (node + 8)) - *((float*) (node + 4))) * 0.5f;
+		d[2] = (*((float*) (node + 10)) - *((float*) (node + 6))) * 0.5f;
+		first = -1;
 		lo[0] = *((float*) (node + 4));
 		lo[2] = *((float*) (node + 6));
-		hi[0] = dx + *((float*) (node + 4));
-		hi[2] = dz + *((float*) (node + 6));
+		hi[0] = d[0] + *((float*) (node + 4));
+		hi[2] = d[2] + *((float*) (node + 6));
 		node[0] = (unsigned int) d3_CollectObjectsInBounds((char*) node, lo, hi);
-		lo[0] = dx + *((float*) (node + 4));
+		lo[0] = d[0] + *((float*) (node + 4));
 		lo[2] = *((float*) (node + 6));
 		hi[0] = *((float*) (node + 8));
-		hi[2] = dz + *((float*) (node + 6));
+		hi[2] = d[2] + *((float*) (node + 6));
 		node[1] = (unsigned int) d3_CollectObjectsInBounds((char*) node, lo, hi);
-		lo[0] = dx + *((float*) (node + 4));
-		lo[2] = dz + *((float*) (node + 6));
+		lo[0] = d[0] + *((float*) (node + 4));
+		lo[2] = d[2] + *((float*) (node + 6));
 		hi[0] = *((float*) (node + 8));
 		hi[2] = *((float*) (node + 10));
 		node[2] = (unsigned int) d3_CollectObjectsInBounds((char*) node, lo, hi);
 		lo[0] = *((float*) (node + 4));
-		lo[2] = dx + *((float*) (node + 6));
-		hi[0] = dx + *((float*) (node + 4));
+		lo[2] = d[0] + *((float*) (node + 6));
+		hi[0] = d[0] + *((float*) (node + 4));
 		hi[2] = *((float*) (node + 10));
 		node[3] = (unsigned int) d3_CollectObjectsInBounds((char*) node, lo, hi);
-		first = 0xffffffff;
 		for (i = 0; i < 4; i++) {
 			v = node[i];
 			if (v != 0) {
-				if ((int) first < 0) {
-					first = *(unsigned int*) (v + 0x30);
+				if (first < 0) {
+					first = *(int*) (v + 0x30);
 				} else {
-					if (first != *(unsigned int*) (v + 0x30))
+					if (first != *(int*) (v + 0x30))
 						ok = 0;
 				}
 			}

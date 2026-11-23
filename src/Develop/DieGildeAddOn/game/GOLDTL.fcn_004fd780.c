@@ -7,6 +7,8 @@ void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
 
+extern float g_6629d0;
+extern float g_662a3c;
 extern int gm_GameTime;
 extern int g_773d48;
 
@@ -37,7 +39,7 @@ void __cdecl fcn_004fd780(void)
 				kind = *(unsigned char*) p;
 				if (kind < 10 && kind > 0 && kind != 6 && kind != 7
 					&& kind != 8 && *(unsigned short*) (p + 8) >= 0xc) {
-					if (gm_RandomFloat01() * *(float*) 0x6629d0 > *(float*) (p + 0x1ce)) {
+					if (gm_RandomFloat01() * g_6629d0 > *(float*) (p + 0x1ce)) {
 						count = (p[0xa] == 0);
 						fcn_004c5480(*(int*) (p + 2), 0x1d0,
 							gm_RandomFloat01() * 0.5f + 0.25f);
@@ -73,7 +75,7 @@ void __cdecl fcn_004fd780(void)
 				if (fcn_004f4f60(2, mode == 0, *(int*) (p + 2), -1, arg) != -1) {
 					g_773d48++;
 				}
-				if (*(float*) (p + 0x1ce) > *(float*) 0x662a3c) {
+				if (*(float*) (p + 0x1ce) > g_662a3c) {
 					fcn_004c5480(*(int*) (p + 2), 0x1d0, -0.1f);
 				}
 				g_773d48++;

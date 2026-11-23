@@ -44,8 +44,8 @@ void __cdecl fcn_00478d50(int x, int y, Surf16* s, Block* b)
 	unsigned int k;
 
 	r = (Row*) ((char*) b + 0x32);
-	base = s->bits + (y * s->pitch + x);
 	seg = (Seg*) ((char*) r + 4);
+	base = s->bits + (y * s->pitch + x);
 	for (i = 0; i < b->row_count; i++) {
 		p = base;
 		for (j = 0; j < r->seg_count; j++) {

@@ -1,4 +1,5 @@
 #include <stdio.h>
+extern int g_774650;
 
 extern unsigned short *__cdecl gm_StartFilteredEntitySearch(int, ...);
 extern void *__cdecl gm_FindRecordById(int);
@@ -127,7 +128,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 			io_FormatTextBuffer(l_text, 0x1c43);
 		else
 			io_FormatTextBuffer(l_text, 0x1c44, v5);
-		v10 = *(int *)0x774650;
+		v10 = g_774650;
 		if ((*(int *)(0x7e35c0 + v10 * 8) != 0x5ba910 ||
 		     (*(int *)0x7746c4 != (int)v5 &&
 		      (!fcn_00505340((unsigned char *)v5) || !*(int *)0x7746cc ||

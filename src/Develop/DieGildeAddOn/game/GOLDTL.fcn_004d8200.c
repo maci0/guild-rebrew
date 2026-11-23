@@ -45,7 +45,6 @@ void __cdecl fcn_004d8200(int* p)
 	char* task;
 	unsigned short* rec;
 	int* ent;
-	unsigned int tileX;
 	int save;
 	int eid;
 	int i;
@@ -85,10 +84,10 @@ void __cdecl fcn_004d8200(int* p)
 	goto check_174;
 make_task:
 	if ((unsigned short) gm_RandomMod(10) > 8) {
-		if (*(int*) (save + 4) != *(int*) (g_772e9c + 4)) {
-			fcn_004c30a0(*rec, g_772ee0, "_K_C2C_ANGRIFF", -1, 500);
-		} else {
+		if (*(int*) (save + 4) == *(int*) (g_772e9c + 4)) {
 			fcn_004c30a0(*rec, g_772edc, "_K_C2C_ANGRIFF", -1, 500);
+		} else {
+			fcn_004c30a0(*rec, g_772ee0, "_K_C2C_ANGRIFF", -1, 500);
 		}
 	}
 	i = p[8];
@@ -134,6 +133,7 @@ block_174:
 	*(int*) (task + 0x188) = p[6];
 	*(blk24*) (task + 0xf0) = g_68bef4;
 	if (*(int*) (((char*) g_772f24) + 4) == g_68b79c) {
+		unsigned int tileX;
 		q = *(char**) ((char*) rec + 0x184);
 		if (!fcn_0045b990(map, (float*) (*(int*) (q + 0x34) + 0x4c),
 		                  &g_102d020, &g_102d024, &height)) {

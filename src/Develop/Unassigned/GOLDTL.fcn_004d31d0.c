@@ -19,8 +19,8 @@ int __cdecl fcn_004d31d0(char* self, int centerColumn, int centerRow, int search
 	int hi; int row_hi;
 
 	map = *(char**) (((char*) g_67a370) + 0xb0);
-	best = 1e9f;
 	i = 0;
+	best = 1e9f;
 	if (searchRadius > 0) {
 		k = centerRow;
 		do {

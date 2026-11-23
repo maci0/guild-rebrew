@@ -64,9 +64,8 @@ void __cdecl fcn_005167c0(unsigned char* building, int queryId)
 		g_7f3b24 = (char*) entity;
 		fcn_00516b70();
 	} else {
-		type = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building].category;
+		type = g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building].category];
 		g_7f3b24 = 0;
-		type = ((signed char*) g_7f3b00)[type];
 		fcn_00516be0();
 	}
 	if (d3_CurrentContextIndex != type
@@ -76,7 +75,11 @@ void __cdecl fcn_005167c0(unsigned char* building, int queryId)
 	}
 	obj = (unsigned char*) fcn_00445600(0, 0x180, 0, s_6a1fdc);
 	if (obj != 0) {
-		d3_SetSubtreeVisible((int) obj, g_776664 ? 1 : 0);
+		if (!g_776664) {
+			d3_SetSubtreeVisible((int) obj, 0);
+		} else {
+			d3_SetSubtreeVisible((int) obj, 1);
+		}
 	}
 	g_67530c = *(int*) (building + 1);
 	if (g_7746cc != 0) {
@@ -112,7 +115,7 @@ void __cdecl fcn_005167c0(unsigned char* building, int queryId)
 	if (rec->category == 0x16) {
 		count = 8;
 	} else {
-		count = (rec->category != 1) * 4 + 4;
+		count = (rec->category == 1) ? 4 : 8;
 	}
 	p = (unsigned char**) ch_CharacterSlots;
 	do {
@@ -133,16 +136,16 @@ void __cdecl fcn_005167c0(unsigned char* building, int queryId)
 		obj = *p;
 		if (obj != 0 && d3_GetContextIndex(*(int*) (obj + 0x88)) == type) {
 			obj = *p;
-			if ((*(int*) (obj + 0x2c) != *(int*) (building + 1)
-			     && *(int*) (obj + 0x30) != *(int*) (entity + 2))
-			    || i >= count) {
-				ch_SetVisible((char*) obj, 0);
-			} else {
+			if ((*(int*) (obj + 0x2c) == *(int*) (building + 1)
+			     || *(int*) (obj + 0x30) == *(int*) (entity + 2))
+			    && i < count) {
 				ch_SetVisible((char*) obj, 1);
 				ch_PlaceOnGround((char*) *p, 0);
 				fcn_004fdcf0((char*) p - 0x184);
 				fcn_004fdfe0((char*) p - 0x184);
 				i++;
+			} else {
+				ch_SetVisible((char*) obj, 0);
 			}
 		}
 		p = (unsigned char**) ((char*) p + 0x21c);
@@ -150,14 +153,12 @@ void __cdecl fcn_005167c0(unsigned char* building, int queryId)
 	p = (unsigned char**) fcn_00502cd0(0, 2, 7, 4, 0x1d);
 	while (p != 0) {
 		obj = (unsigned char*) *(void**) ((char*) p + 0x3b);
-		if (*(int*) (obj + 0x88) == g_67a370) {
-			if (*(int*) (obj + 0x2c) == *(int*) (building + 1)) {
-				ch_SetVisible((char*) obj, 1);
-				ch_PlaceOnGround((char*) obj, 0);
-				ch_UpdateAttachedModelPosition((char*) obj, 1);
-			} else if (*(int*) (obj + 0x88) == g_67a370) {
-				ch_SetVisible((char*) obj, 0);
-			}
+		if (*(int*) (obj + 0x88) == g_67a370 && *(int*) (obj + 0x2c) == *(int*) (building + 1)) {
+			ch_SetVisible((char*) obj, 1);
+			ch_PlaceOnGround((char*) obj, 0);
+			ch_UpdateAttachedModelPosition((char*) obj, 1);
+		} else if (*(int*) (obj + 0x88) == g_67a370) {
+			ch_SetVisible((char*) obj, 0);
 		}
 		p = (unsigned char**) gm_NextEntityQueryMatch();
 	}

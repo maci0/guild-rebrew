@@ -87,8 +87,8 @@ label:
 			}
 			v6 = building;
 		}
-		v12 += 2;
 		idx += 1;
+		v12 += 2;
 		v10 += 1;
 		if (idx >= (int) (unsigned char) ((BUILDING_PROTOTYPE*)rec)->component_count) {
 			return 0;

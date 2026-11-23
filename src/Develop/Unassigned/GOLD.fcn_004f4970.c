@@ -2,6 +2,10 @@
 
 
 extern char g_770b80[];
+extern int g_current_year;
+extern int g_7f4c04;
+extern int g_7f4c08;
+extern short g_7f4c0c;
 
 extern int __cdecl gm_WalkEntityChain(int);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -30,11 +34,9 @@ void __cdecl fcn_004f4970(unsigned int packedId)
 	int count;
 	int v;
 	int limit;
-	char* fill_dst;
-	int fill_count;
 
 	slot = g_770b80 + (packedId & 0xffff) * 0x21c;
-	if (*(short*) slot == -1) {
+	if (*(unsigned short*) slot == 0xffff) {
 		return;
 	}
 	if (*(unsigned char*) (slot + 2) >= 0xa) {
@@ -52,11 +54,7 @@ void __cdecl fcn_004f4970(unsigned int packedId)
 	if (limit > 0xa) {
 		limit = 0xa;
 	}
-	limit = *(int*) ((char*) 0x5ee0f8 + limit * 4);
-	if (limit >= v) {
-		return;
-	}
-	if (count == 1) {
+	if (v > *(int*) ((char*) 0x5ee0f8 + limit * 4) && count == 1) {
 		found = gm_StartFilteredEntitySearch(1, 5, 0xf);
 		if (found == 0) {
 			return;
@@ -74,101 +72,95 @@ void __cdecl fcn_004f4970(unsigned int packedId)
 		}
 		return;
 	}
-	if (v <= limit) {
-		return;
-	}
-	if (count >= 9) {
-		return;
-	}
-	*((unsigned char*)&packedId + 3) = count + 1;
-	if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
-		fcn_004c4510(slot, *(int*) (slot + 4));
-		cm_AppendPacketFieldDelta(1, 1, 0xd, ((unsigned char*)&packedId + 3));
-		fcn_004c5360();
-	} else {
-		fill_dst = msg;
-		fill_count = 0xf8;
-		__asm {
-            mov edi, fill_dst
-            xor eax, eax
-            mov ebx, fill_count
-            lea ecx, [edi+edi*2]
-            and ecx, 3
-            sub ebx, ecx
-            jle short L_fill_tail0
-            rep stosb
-            mov ecx, ebx
-            and ebx, 3
-            shr ecx, 2
-            rep stosd
-        L_fill_tail0:
-            add ecx, ebx
-            rep stosb
-        }
-		*(int*) (msg + 0x2c) = *(int*) 0x770ae4;
-		*(int*) (msg + 0x28) = *(int*) 0x770ae0;
-		*(short*) (msg + 0x34) = *(short*) 0x770aec;
-		*(int*) (msg + 0x30) = *(int*) 0x770ae8;
-		*(unsigned char*) (msg + 4) = 0x69;
-		*(int*) (msg + 8) = *(int*) (slot + 4);
-		*(int*) (msg + 0xc) = -1;
-		*(unsigned char*) (msg + 0x36) = 9;
-		*(short*) (msg + 0x2c) = 7;
-		*(int*) (msg + 0x2e) = 0;
-		*(char*) (msg + 0x58) = *((unsigned char*)&packedId + 3);
-		*(int*) (msg + 0x5c) = *(int*) (slot + 4);
-		fcn_004c5530(msg);
-	}
-	if (*(char*) (slot + 2) != 5 && *(char*) (slot + 2) != 6
-	    && *(char*) (slot + 2) != 7) {
-		return;
-	}
-	other = (char*) 0x770b82;
-	v = 0;
-	do {
-		if (v >= *(unsigned char*) 0x6248a4) {
-			return;
-		}
-		if ((*other == 6 || *other == 7) && other - 2 != slot) {
-			fill_dst = msg;
-			fill_count = 0xf8;
+	if (v > *(int*) ((char*) 0x5ee0f8 + limit * 4) && count < 9) {
+		*((unsigned char*)&packedId + 3) = count + 1;
+		if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
+			fcn_004c4510(slot, *(int*) (slot + 4));
+			cm_AppendPacketFieldDelta(1, 1, 0xd, ((unsigned char*)&packedId + 3));
+			fcn_004c5360();
+		} else {
+			char* fill_dst = msg;
+			int fill_count = 0xf8;
 			__asm {
-            mov edi, fill_dst
-            xor eax, eax
-            mov ebx, fill_count
-            lea ecx, [edi+edi*2]
-            and ecx, 3
-            sub ebx, ecx
-            jle short L_fill_tail1
-            rep stosb
-            mov ecx, ebx
-            and ebx, 3
-            shr ecx, 2
-            rep stosd
-        L_fill_tail1:
-            add ecx, ebx
-            rep stosb
-        }
-			*(int*) (msg + 0x2c) = *(int*) 0x770ae4;
-			*(int*) (msg + 0x28) = *(int*) 0x770ae0;
-			*(short*) (msg + 0x34) = *(short*) 0x770aec;
-			*(int*) (msg + 0x30) = *(int*) 0x770ae8;
+                mov edi, fill_dst
+                mov ebx, fill_count
+                xor eax, eax
+                lea ecx, [edi+edi*2]
+                and ecx, 3
+                sub ebx, ecx
+                jle short L_fill_tail0
+                rep stosb
+                mov ecx, ebx
+                and ebx, 3
+                shr ecx, 2
+                rep stosd
+            L_fill_tail0:
+                add ecx, ebx
+                rep stosb
+            }
 			*(unsigned char*) (msg + 4) = 0x69;
-			*(int*) ((char*) msg + 8) = *(int*) (other + 2);
+			*(int*) (msg + 8) = *(int*) (slot + 4);
+			*(int*) (msg + 0x28) = g_current_year;
+			*(int*) (msg + 0x2c) = g_7f4c04;
+			*(int*) (msg + 0x30) = g_7f4c08;
+			*(short*) (msg + 0x34) = g_7f4c0c;
 			*(int*) (msg + 0xc) = -1;
 			*(unsigned char*) (msg + 0x36) = 9;
 			*(short*) (msg + 0x2c) = 7;
 			*(int*) (msg + 0x2e) = 0;
-			if (*(char*) (slot + 2) == 5) {
-				limit = gm_RandomMod(8);
-				fcn_004fe140(msg + 0x28, gm_RandomMod(4), limit * 7, 0);
-			}
 			*(char*) (msg + 0x58) = *((unsigned char*)&packedId + 3);
 			*(int*) (msg + 0x5c) = *(int*) (slot + 4);
 			fcn_004c5530(msg);
-			v++;
 		}
-		other += 0x21c;
-	} while ((int) other < 0x7d5f82);
+		if (*(char*) (slot + 2) != 5 && *(char*) (slot + 2) != 6
+		    && *(char*) (slot + 2) != 7) {
+			return;
+		}
+		other = (char*) 0x770b82;
+		v = 0;
+		do {
+			if (v >= *(unsigned char*) 0x6248a4) {
+				return;
+			}
+			if ((*other == 6 || *other == 7) && other - 2 != slot) {
+				char* fill_dst = msg;
+				int fill_count = 0xf8;
+				__asm {
+                mov edi, fill_dst
+                mov ebx, fill_count
+                xor eax, eax
+                lea ecx, [edi+edi*2]
+                and ecx, 3
+                sub ebx, ecx
+                jle short L_fill_tail1
+                rep stosb
+                mov ecx, ebx
+                and ebx, 3
+                shr ecx, 2
+                rep stosd
+            L_fill_tail1:
+                add ecx, ebx
+                rep stosb
+            }
+				*(int*) ((char*) msg + 8) = *(int*) (other + 2);
+				*(int*) (msg + 0x28) = g_current_year;
+				*(int*) (msg + 0x2c) = g_7f4c04;
+				*(int*) (msg + 0x30) = g_7f4c08;
+				*(unsigned char*) (msg + 4) = 0x69;
+				*(int*) (msg + 0xc) = -1;
+				*(unsigned char*) (msg + 0x36) = 9;
+				*(short*) (msg + 0x34) = g_7f4c0c;
+				*(short*) (msg + 0x2c) = 7;
+				*(int*) (msg + 0x2e) = 0;
+				if (*(char*) (slot + 2) == 5) {
+					fcn_004fe140(msg + 0x28, gm_RandomMod(4), gm_RandomMod(8) * 7, 0);
+				}
+				*(char*) (msg + 0x58) = *((unsigned char*)&packedId + 3);
+				*(int*) (msg + 0x5c) = *(int*) (slot + 4);
+				fcn_004c5530(msg);
+				v++;
+			}
+			other += 0x21c;
+		} while ((int) other < 0x7d5f82);
+	}
 }
-
