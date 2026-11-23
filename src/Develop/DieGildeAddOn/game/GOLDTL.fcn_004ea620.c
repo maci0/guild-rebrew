@@ -125,19 +125,19 @@ void __cdecl fcn_004ea620(void)
 	}
 	best = 0;
 	for (; best_i < count; best_i++) {
-		n = gm_WalkEntityChain(*(unsigned short*) cand[best_i]);
-		if (value < n) {
+		rec = (char*) cand[best_i];
+		n = gm_WalkEntityChain(*(unsigned short*) rec);
+		if (n > value) {
+			best = rec;
 			value = n;
-			best = (char*) cand[best_i];
 		}
 	}
 	if (best == 0 || best == existing) {
 		return;
 	}
-	t = *(unsigned char*) (best + 0x164);
 	if (existing != 0) {
-		kind = *(unsigned char*) (existing + 0x164);
-		if (abs(kind - t) < 6) {
+		t = *(unsigned char*) (best + 0x164);
+		if (abs(*(unsigned char*) (existing + 0x164) - t) < 6) {
 			fcn_004ea560(existing, *(unsigned char*) (existing + 0x169));
 			fcn_004ea4b0(best, *(unsigned char*) (existing + 0x169));
 			t = *(unsigned char*) (best + 0x164);
@@ -161,6 +161,7 @@ void __cdecl fcn_004ea620(void)
 		fcn_004ea4b0(best, kind);
 		return;
 	}
+	t = *(unsigned char*) (best + 0x164);
 	if (t >= 1 && t <= 6) {
 		fcn_004e8240((unsigned char) b[0], best, 0, 1, 0xff);
 		kind = 0x1c;

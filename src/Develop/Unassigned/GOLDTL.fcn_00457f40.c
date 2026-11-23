@@ -40,8 +40,6 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 {
 	GOLDTL_BufferVtbl* ops;
 
-	unsigned short* idx;
-	unsigned char* tile;
 	void* verts;
 	void* idxs;
 	int count;
@@ -72,7 +70,7 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 	ops = *(GOLDTL_BufferVtbl**) vb;
 	ops->Lock(vb, 0, (h + 1) * (w + 1) * 0x18, &verts, 0x2000);
 	ops = *(GOLDTL_BufferVtbl**) ib;
-	ops->Lock(ib, 0, w * h * 0xc, &idxs, 0x2000);
+	ops->Lock(ib, 0, h * w * 0xc, &idxs, 0x2000);
 	if (verts == 0) {
 		goto cleanup;
 	}
@@ -80,19 +78,18 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 		goto cleanup;
 	}
 
-	fy = (g_6b7ff9 ? g_6629b0 : 1.5f) + offset[1];
 	fx = (float) rect[0] * scale[0] + offset[0];
+	fy = (g_6b7ff9 ? g_6629b0 : 1.5f) + offset[1];
 	y = rect[2];
 	fz = (float) y * scale[2] + offset[2];
 	u2 = uv->v;
 
-	tile = (unsigned char*) (base + y * stride);
 	while (y <= rect[3]) {
 		x = rect[0];
 		sx = fx;
 		su = uv->u;
 		while (x <= rect[1]) {
-			height = tile[x];
+			height = *(unsigned char*) (base + y * stride + x);
 			((GOLDTL_TerrainVertex*) verts)->x = sx;
 			((GOLDTL_TerrainVertex*) verts)->y = (float) height * scale[1] + fy;
 			((GOLDTL_TerrainVertex*) verts)->z = fz;
@@ -104,7 +101,6 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 			su += uv->du;
 			x++;
 		}
-		tile += stride;
 		fz += scale[2];
 		u2 += uv->dv;
 		y++;
@@ -120,27 +116,23 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 		j = 0;
 		if (w > 0) {
 			do {
-				tile = (unsigned char*) (base + (rect[2] + i) * stride
-					+ rect[0] + j);
-				h0 = tile[0];
-				h2 = tile[stride];
-				h1 = tile[1];
+				h0 = *(unsigned char*) (base + (rect[2] + i) * stride + rect[0] + j);
+				h1 = *(unsigned char*) (base + (rect[2] + i) * stride + rect[0] + j + 1);
+				h2 = *(unsigned char*) (base + (rect[2] + i + 1) * stride + rect[0] + j);
 				if (abs(h0 - h1) <= th && abs(h0 - h2) <= th
 					&& abs(h1 - h2) <= th) {
-					idx = (unsigned short*) idxs;
-					idx[0] = (unsigned short) (i * (w + 1) + j);
-					idx[1] = (unsigned short) (i * (w + 1) + j + 1);
-					idx[2] = (unsigned short) ((i + 1) * (w + 1) + j);
+					((unsigned short*) idxs)[0] = (unsigned short) (i * (w + 1) + j);
+					((unsigned short*) idxs)[1] = (unsigned short) (i * (w + 1) + j + 1);
+					((unsigned short*) idxs)[2] = (unsigned short) ((i + 1) * (w + 1) + j);
 					idxs = (char*) idxs + 6;
 					count++;
 				}
 				h3 = *(unsigned char*)(base + (rect[2] + i + 1) * stride + rect[0] + j + 1);
 				if (abs(h3 - h1) <= th && abs(h3 - h2) <= th
 					&& abs(h1 - h2) <= th) {
-					idx = (unsigned short*) idxs;
-					idx[0] = (unsigned short) (i * (w + 1) + j + 1);
-					idx[1] = (unsigned short) ((i + 1) * (w + 1) + j + 1);
-					idx[2] = (unsigned short) ((i + 1) * (w + 1) + j);
+					((unsigned short*) idxs)[0] = (unsigned short) (i * (w + 1) + j + 1);
+					((unsigned short*) idxs)[1] = (unsigned short) ((i + 1) * (w + 1) + j + 1);
+					((unsigned short*) idxs)[2] = (unsigned short) ((i + 1) * (w + 1) + j);
 					idxs = (char*) idxs + 6;
 					count++;
 				}

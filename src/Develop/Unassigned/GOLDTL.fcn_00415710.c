@@ -78,9 +78,9 @@ void __cdecl d3_UpdateRain(Rain415710* self, float dt)
 	d3_BuildEulerRotationMatrix(in, out);
 	cam = d3_ActiveCamera; m = (float*) (cam + 0x18c);
 	b0 = (out[4] + out[0]) * 0.0f + out[8] * g_6629b0;
-	self->x = *(float*) (cam + 0x84);
-	self->y = *(float*) (cam + 0x88);
-	self->z = *(float*) (cam + 0x8c);
+	self->x = *(float*) (d3_ActiveCamera + 0x84);
+	self->y = *(float*) (d3_ActiveCamera + 0x88);
+	self->z = *(float*) (d3_ActiveCamera + 0x8c);
 	b1 = (out[5] + out[1]) * 0.0f + out[9] * g_6629b0;
 	d0 = (double) self->px - *(float*) (cam + 0x4c);
 	d1 = (double) self->py - *(float*) (cam + 0x50);

@@ -57,7 +57,7 @@ int __cdecl fcn_005c1110(void)
 	b[1] = -1;
 	b[2] = -1;
 	b[3] = -1;
-	t = *(int*) &g_6b7fac;
+	t = (unsigned int) g_6b7fac;
 	h = fcn_00470820(0, 0, (char*) 0x6ac514);
 	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
@@ -65,9 +65,9 @@ int __cdecl fcn_005c1110(void)
 	io_AppendText(0x1912);
 	*(int*) &g_100f1dc = -1;
 	do {
-		if ((unsigned int) t <= (unsigned int) *(int*) &g_6b7fac) {
+		if (t <= (unsigned int) g_6b7fac) {
 			n = 1;
-			t = (unsigned int) *(int*) &g_6b7fac + 0x1f4U;
+			t = (unsigned int) g_6b7fac + 0x1f4U;
 			a[0] = -1;
 			b[0] = -1;
 			a[1] = -1;
@@ -79,8 +79,9 @@ int __cdecl fcn_005c1110(void)
 			ent = (Ent5c1110*) he_StartHandlungSearch(n, 0, 0x35);
 			if (ent != 0) {
 				i = 2;
-				for (k = 0; ; ) {
-					if (k == 0x10) {
+				k = 0;
+				do {
+					if (k >= 0x10) {
 						goto done;
 					}
 					if (ent->f70 > -1) {
@@ -103,10 +104,7 @@ int __cdecl fcn_005c1110(void)
 						}
 					}
 					ent = (Ent5c1110*) he_fn_Handlung();
-					if (ent == 0) {
-						break;
-					}
-				}
+				} while (ent != 0);
 			}
 			if (n < 5) {
 				q = (int*) ((char*) &g_1038140 + h * 0x2bc + n * 8);
@@ -138,18 +136,15 @@ done:;
 						*(pos14_7f4c00*) ((char*) o + 0x52) =
 						    *(pos14_7f4c00*) &gm_GameTime;
 						r = fcn_004c5620(-1, (char*) o);
-						if (r != -1) {
-							for (;;) {
-								if (fcn_004c4450(r) != 0) break;
-								fcn_005373e0(0, 0x677c7);
-							}
+						while (r != -1 && fcn_004c4450(r) == 0) {
+							fcn_005373e0(0, 0x677c7);
 						}
 						if (fcn_004c4450(r) == 1) {
 							fcn_005100f0(*(int*) ((char*) &g_7f4ca0
 							    + 4 + 0x21c
 							    * (unsigned int) *(unsigned short*) &g_774970), -2);
 						}
-						t = *(int*) &g_6b7fac;
+						t = (unsigned int) g_6b7fac;
 					}
 				}
 			}

@@ -38,7 +38,7 @@ int __cdecl fcn_004bd4e0(int sceneObjectArg, int typeIdArg)
 	char ctx[0x54];
 
 
-	float pos[3];
+	float pos[4];
 	float ox1;
 	float oy1;
 	float ox2;

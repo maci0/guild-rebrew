@@ -61,13 +61,12 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	fcn_00445f50(0, 0, 1.0f, 1);
 	fcn_004463f0(0, 0, 0);
 	if (mode == 1) {
-		scene = (char*) (cut_RandMod(3) * 0x4c + 0x6a2818);
+		fcn_004e4b60((char*) (cut_RandMod(3) * 0x4c + 0x6a2818));
 	} else if (mode == 2) {
-		scene = (char*) (cut_RandMod(3) * 0x4c + 0x6a2730);
+		fcn_004e4b60((char*) (cut_RandMod(3) * 0x4c + 0x6a2730));
 	} else {
-		scene = (char*) (cut_RandMod(4) * 0x4c + 0x6a2600);
+		fcn_004e4b60((char*) (cut_RandMod(4) * 0x4c + 0x6a2600));
 	}
-	fcn_004e4b60(scene);
 	fcn_004e4e90((char*) 0x68cb08);
 	if (mode == 1) {
 		fcn_004e4c40(500);
@@ -79,7 +78,8 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	}
 	sprintf(buf, (char*) 0x68cad8, id + 4);
 
-	sprintf(buf + strlen(buf), (char*) 0x68cad8, fcn_004fda30(*p) + 4);
+	r_dst = buf + strlen(buf);
+	sprintf(r_dst, (char*) 0x68cad8, fcn_004fda30(*p) + 4);
 
 	r_dst = buf + strlen(buf);
 	if (r != 0) {
@@ -103,23 +103,19 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	}
 	switch (*(char*) (eventRecord + 0x7c)) {
 	case 0:
-		scene = (char*) 0x68cf28;
+		fcn_004e44b0((char*) 0x68cf28, (char*) 0x6b5c60);
 		break;
 	case 1:
 	case 2:
-		scene = (char*) 0x68cef8;
+		fcn_004e44b0((char*) 0x68cef8, (char*) 0x6b5c60);
 		break;
 	case 3:
-		scene = (char*) 0x68cec8;
+		fcn_004e44b0((char*) 0x68cec8, (char*) 0x6b5c60);
 		break;
 	case 4:
-		scene = (char*) 0x68ce98;
+		fcn_004e44b0((char*) 0x68ce98, (char*) 0x6b5c60);
 		break;
-	default:
-		goto done;
 	}
-	fcn_004e44b0(scene, (char*) 0x6b5c60);
-done:
 	fcn_004e4de0(ranges[*(char*) (eventRecord + 0x7c)]);
 	fcn_004e48b0();
 	fcn_004e44f0(fcn_004e44b0((char*) 0x68ce6c, (char*) 0x6b5c60));

@@ -123,9 +123,9 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 				if (g_100f1dc == i + 0x5a2) {
 					m.b36 = 0x12;
 					m.b4 = 0x5e;
+					m.f58 = e->handle;
 					m.f8 = p->handle;
 					m.fc = -1;
-					m.f58 = e->handle;
 					m.b5c = fcn_00507400(i + 1, result);
 					m.f60 = n;
 					fcn_004c5530(&m);

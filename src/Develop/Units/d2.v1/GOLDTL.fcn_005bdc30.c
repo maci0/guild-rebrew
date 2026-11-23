@@ -47,10 +47,8 @@ int __cdecl fcn_005d0460(char*, int, int, int);
 int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(int, int))
 {
 	MsgCtx ctx;
-	int id;
 	int i;
 	int v;
-	int mode4;
 	v = 0;
 	memset(ctx.pad0c, 0, 0x50);
 	if (state != 0) {
@@ -65,82 +63,75 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 	}
 	fcn_005b0dd0(&ctx);
 	fcn_005b0230(&ctx);
-	if (fcn_005373e0((void*) fcn_005bdc30, 0x677c7) != 0) {
-		mode4 = flags & 4; do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
-			}
-			g_6ab3dc = (tp_d2_SelectedControl == 0);
-			fcn_005b11f0(&ctx);
-			id = d2_CurrentElementId;
-			if (mode4) {
-				if (g_14ce8d8 != 0 && id != -1) {
-					for (i = 0; i < 0x10; i++) {
-						if (ctx.ids10[i] != -1 && ctx.ids10[i] == id) {
-							v = *(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[ctx.ids10[i]].associated_object);
-							if (v != 0 && cb != 0) {
-								fcn_00471af0(ctx.dlg, 0);
-								d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
-								cb(v, v);
-								fcn_00471af0(ctx.dlg, 1);
-								d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
-								id = d2_CurrentElementId;
-							}
-							else {
-								g_774654 = 1;
-							}
-							break;
-						}
-					}
-				}
-			}
-			else if ((flags & 8) && g_14ce8d8 != 0 && id != -1) {
-				for (i = 0; i < 0x100; i++) {
-					if (ctx.ids[i] != -1 && ctx.ids[i] == id) {
-						v = *(int*) (g_774a68 + i * 4);
-						g_774654 = 1;
-						break;
-					}
-				}
-			}
-			if (ctx.count > 0) {
-				for (i = 0; i < ctx.count; i++) {
-					if (id != -1 && ctx.queue[i].id == id && g_14ce8d8 != 0) {
-						v = 0;
-						if (flags & 1) {
-							v = ctx.queue[i].value;
-						}
-						else {
-							if (!(flags & 2)) {
-								continue;
-							}
+	while (fcn_005373e0((void*) fcn_005bdc30, 0x677c7) != 0) {
+		if (g_14ce8e0 != 0) {
+			g_774654 = 1;
+		}
+		g_6ab3dc = (tp_d2_SelectedControl == 0);
+		fcn_005b11f0(&ctx);
+		if (flags & 4) {
+			if (g_14ce8d8 != 0 && d2_CurrentElementId != -1) {
+				for (i = 0; i < 0x10; i++) {
+					if (ctx.ids10[i] != -1 && d2_CurrentElementId == ctx.ids10[i]) {
+						v = *(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[ctx.ids10[i]].associated_object);
+						if (v != 0 && cb != 0) {
 							fcn_00471af0(ctx.dlg, 0);
 							d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
-							v = fcn_005d0460((char*) ctx.queue[i].value, (int) state, (int) name, (int) cb);
-							d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
+							cb(v, v);
 							fcn_00471af0(ctx.dlg, 1);
-							id = d2_CurrentElementId;
+							d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
 						}
-						if (v == 0) {
-							continue;
-						}
-						if (cb == 0) {
+						else {
 							g_774654 = 1;
-							break;
 						}
-						if (flags & 2) {
-							continue;
-						}
-						fcn_00471af0(ctx.dlg, 0);
-						d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
-						cb(v, ctx.queue[i].value);
-						fcn_00471af0(ctx.dlg, 1);
-						d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
 						break;
 					}
 				}
 			}
-		} while (fcn_005373e0((void*) fcn_005bdc30, 0x677c7) != 0);
+		}
+		else if ((flags & 8) && g_14ce8d8 != 0 && d2_CurrentElementId != -1) {
+			for (i = 0; i < 0x100; i++) {
+				if (ctx.ids[i] != -1 && ctx.ids[i] == d2_CurrentElementId) {
+					v = *(int*) (g_774a68 + i * 4);
+					g_774654 = 1;
+					break;
+				}
+			}
+		}
+		for (i = 0; i < ctx.count; i++) {
+			if (d2_CurrentElementId != -1 && d2_CurrentElementId == ctx.queue[i].id && g_14ce8d8 != 0) {
+				v = 0;
+				if (flags & 1) {
+					v = ctx.queue[i].value;
+				}
+				else {
+					if (!(flags & 2)) {
+						continue;
+					}
+					fcn_00471af0(ctx.dlg, 0);
+					d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
+					v = fcn_005d0460((char*) ctx.queue[i].value, (int) state, (int) name, (int) cb);
+					d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
+					fcn_00471af0(ctx.dlg, 1);
+				}
+				if (v == 0) {
+					continue;
+				}
+				if (cb == 0) {
+					g_774654 = 1;
+					break;
+				}
+				if (flags & 2) {
+					continue;
+				}
+				fcn_00471af0(ctx.dlg, 0);
+				d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
+				cb(v, ctx.queue[i].value);
+				fcn_00471af0(ctx.dlg, 1);
+				d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
+				break;
+			}
+		}
 	}
 	fcn_0057e880(0xd, v, 1, 0);
 	fcn_005b18c0(&ctx.dlg);

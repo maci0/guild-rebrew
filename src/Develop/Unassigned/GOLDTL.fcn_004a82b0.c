@@ -93,17 +93,17 @@ int __cdecl fcn_004a82b0(void)
 		*(int*) (tbl + 0xbc) = res[sel];
 		return sel;
 	}
-	if (res[sel] == 0) {
-		if (res[2] != 0) {
-			*(int*) (tbl + 0xbc) = res[2];
-			return 2;
-		}
+	if (res[sel] == 0 && res[2] == 0) {
 		x = fcn_004a77f0((int*) (tbl + sel * 0x34 + 0xc), 0);
 		y = fcn_004a77f0((int*) (tbl + 0x40), 0);
 		if (x > y) {
 			return sel;
 		}
 		return 1;
+	}
+	if (res[sel] == 0) {
+		*(int*) (tbl + 0xbc) = res[2];
+		return 2;
 	}
 	if (res[2] == 0 || res[2] < res[sel]) {
 		*(int*) (tbl + 0xbc) = res[sel];

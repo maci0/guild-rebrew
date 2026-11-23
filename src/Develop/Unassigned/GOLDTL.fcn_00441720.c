@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00441720 */
-int __cdecl fcn_00441720(int* a0, float* worldPos, unsigned int a2, unsigned int* gridX, unsigned int* gridZ, float* heightOut)
+unsigned char __cdecl fcn_00441720(int* a0, float* worldPos, unsigned int a2, unsigned int* gridX, unsigned int* gridZ, float* heightOut)
 {
 	float pp[3];
 	float v13;
@@ -54,38 +54,38 @@ int __cdecl fcn_00441720(int* a0, float* worldPos, unsigned int a2, unsigned int
 	}
 	v4 = v4 & ~(s - 1);
 	v3 = v3 & ~(s - 1);
-	pp[0] = (pp[0] - (float) v4) / (float) s;
-	pp[2] = (pp[2] - (float) v3) / (float) s;
+	hx = (pp[0] - (float) v4) / (float) s;
+	hz = (pp[2] - (float) v3) / (float) s;
 	if (data != 0 && (*(unsigned char*) (data + (unsigned int) v4 / s + ((unsigned int) v3 / s * (int) width) / s) & 0x80) != 0) {
-		if (!(pp[2] + pp[0] > 1.0f)) {
-			v13 = (float) ((unsigned char*) a0[4])[width * v3 + v4];
-			v11 = (float) ((unsigned char*) a0[4])[((v4 + s) & mask) + width * v3] - v13;
-			v12 = (float) ((unsigned char*) a0[4])[((v3 + s) & mask) * width + v4] - v13;
-		} else {
+		if (hz + hx > 1.0f) {
 			v9 = (v4 + s) & mask;
 			v6 = ((v3 + s) & mask) * width;
 			v13 = (float) ((unsigned char*) a0[4])[v9 + v6];
 			v11 = (float) ((unsigned char*) a0[4])[v6 + v4] - v13;
 			v12 = (float) ((unsigned char*) a0[4])[v3 * width + v9] - v13;
-			pp[0] = 1.0f - pp[0];
-			pp[2] = 1.0f - pp[2];
+			hx = 1.0f - hx;
+			hz = 1.0f - hz;
+		} else {
+			v13 = (float) ((unsigned char*) a0[4])[width * v3 + v4];
+			v11 = (float) ((unsigned char*) a0[4])[((v4 + s) & mask) + width * v3] - v13;
+			v12 = (float) ((unsigned char*) a0[4])[((v3 + s) & mask) * width + v4] - v13;
 		}
 	} else {
-		if (!(1.0f - pp[2] + pp[0] > 1.0f)) {
-			v7 = ((v3 + s) & mask) * width;
-			v13 = (float) ((unsigned char*) a0[4])[v7 + v4];
-			v11 = (float) ((unsigned char*) a0[4])[((v4 + s) & mask) + v7] - v13;
-			pp[2] = 1.0f - pp[2];
-			v12 = (float) ((unsigned char*) a0[4])[width * v3 + v4] - v13;
-		} else {
+		if (1.0f - hz + hx > 1.0f) {
 			v9 = (v4 + s) & mask;
 			v13 = (float) ((unsigned char*) a0[4])[width * v3 + v9];
 			v11 = (float) ((unsigned char*) a0[4])[width * v3 + v4] - v13;
 			v12 = (float) ((unsigned char*) a0[4])[((v3 + s) & mask) * width + v9] - v13;
-			pp[0] = 1.0f - pp[0];
+			hx = 1.0f - hx;
+		} else {
+			v7 = ((v3 + s) & mask) * width;
+			v13 = (float) ((unsigned char*) a0[4])[v7 + v4];
+			v11 = (float) ((unsigned char*) a0[4])[((v4 + s) & mask) + v7] - v13;
+			hz = 1.0f - hz;
+			v12 = (float) ((unsigned char*) a0[4])[width * v3 + v4] - v13;
 		}
 	}
-	*heightOut = (v11 * pp[0] + v12 * pp[2] + v13) * *(float*) ((char*) a0 + 0x84) + *(float*) ((char*) a0 + 0x54);
+	*heightOut = (v11 * hx + v12 * hz + v13) * *(float*) ((char*) a0 + 0x84) + *(float*) ((char*) a0 + 0x54);
 	goto fail_1;
 fail_1:
 	return 1;

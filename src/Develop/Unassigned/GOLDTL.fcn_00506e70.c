@@ -19,7 +19,9 @@ int __cdecl fcn_00506e70(unsigned int idx, int count, ...)
             {
                 int value;
                 value = va_arg(p, int);
-                if (t[0x166] == value || t[0x169] == value)
+                if (t[0x166] == value)
+                    found = 1;
+                else if (t[0x169] == value)
                     found = 1;
             }
         }

@@ -143,7 +143,7 @@ void __cdecl d2_ProcessMouseInput(void)
 	g_67d8d4 = -1;
 	v7 = 0;
 	v5 = (int*) 0x100f204;
-	for (;;) {
+	do {
 		if (d2_MouseX >= v5[-1] &&
 		    d2_MouseX <= v5[-1] + v5[1] &&
 		    d2_MouseY >= *v5 &&
@@ -157,24 +157,27 @@ void __cdecl d2_ProcessMouseInput(void)
 		}
 		v5 += 6;
 		v7 += 1;
-		if ((int) v5 >= 0x100f504) {
-			break;
-		}
-	}
-	if (d2_HoveredWindow != -1) {
-		v4 = (int) &g_1015f40[d2_HoveredWindow];
+	} while ((int) v5 < 0x100f504);
+	v8 = d2_HoveredWindow;
+	if (v8 != -1) {
+		v4 = (int) &g_1015f40[v8];
 		if (g_14ce8d0 != 0 &&
 		    (*(unsigned char*) (v4 + 0x14) & 0x20) != 0 &&
-		    *(int*) (v4 + 0xc) + *(int*) (v4 + 4) - 0xc < d2_MouseX &&
-		    d2_MouseY > *(int*) (v4 + 8) + 0xa &&
-		    d2_MouseY < *(int*) (v4 + 0x10) + *(int*) (v4 + 8) - 0xa) {
-			v7 = ((d2_MouseY - *(int*) (v4 + 8) - 0xc) * *(int*) (v4 + 0x254)) /
-			     (*(int*) (v4 + 0x10) - 0x18) + 4;
-			*(int*) (v4 + 0x258) = v7;
-			*(int*) (v4 + 0x248) = v7 / d2_FontHeight;
-			*(int*) (v4 + 0x44) = *(int*) (v4 + 0x48 + (v7 / d2_FontHeight) * 4);
-			if (v7 != *(int*) (v4 + 0x25c)) {
-				fcn_0046e790(d2_HoveredWindow);
+		    d2_MouseX > *(int*) (v4 + 0xc) + *(int*) (v4 + 4) - 0xc) {
+			v2 = *(int*) (v4 + 8);
+			if (d2_MouseY > v2 + 0xa) {
+				v6 = *(int*) (v4 + 0x10);
+				if (d2_MouseY < v6 + v2 - 0xa) {
+					v7 = ((d2_MouseY - v2 - 0xc) * *(int*) (v4 + 0x254)) /
+					     (v6 - 0x18) + 4;
+					*(int*) (v4 + 0x258) = v7;
+					v2 = v7 / d2_FontHeight;
+					*(int*) (v4 + 0x248) = v2;
+					*(int*) (v4 + 0x44) = *(int*) (v4 + 0x48 + v2 * 4);
+					if (v7 != *(int*) (v4 + 0x25c)) {
+						fcn_0046e790(v8);
+					}
+				}
 			}
 		}
 	}

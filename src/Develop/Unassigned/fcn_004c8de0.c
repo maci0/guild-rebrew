@@ -16,8 +16,8 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 	int j;
 	int r1;
 	int idx5;
-	int idx4;
-	int idx5idx;
+	unsigned int idx4;
+	unsigned int idx5idx;
 	unsigned int mode;
 	int kind;
 	int e;
@@ -36,9 +36,14 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 
 	if (kind == 4) {
 		mode = t[9];
-		if (mode == 0) {
-			hi = 0x64; lo = -0x4b; hiadd = -5; loadd = 0xb;
+		if (mode <= 0) {
+			mode = 0;
 		} else if (mode >= 4) {
+			mode = 4;
+		}
+		if (mode <= 0) {
+			hi = 0x64; lo = -0x4b; hiadd = -5; loadd = 0xb;
+		} else if (mode == 4) {
 			hi = 0x28; lo = -0x73; hiadd = -0x14; loadd = 3;
 		} else if (mode == 3) {
 			hi = 0x37; lo = -0x69; hiadd = -0x10; loadd = 5;
@@ -50,12 +55,11 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 			hi = 0x64; lo = -0x4b; hiadd = -5; loadd = 0xb;
 		}
 		for (i = 0; i < 0x300; i++) {
-			p = (char*) g_869480 + i * 0x300;
 			for (j = 0; j < 0x300; j++) {
-				v = (signed char) p[j];
-				if (i != j && (*(unsigned short*)&((ENTITY_RECORD*)g_7f4ca0)[i].entity_index) != 0xffff &&
-				    (*(unsigned short*)&((ENTITY_RECORD*)g_7f4ca0)[j].entity_index) != 0xffff) {
-						if (v > hi) {
+				v = (signed char) g_869480[i][j];
+				if (i != j && ((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff &&
+				    ((ENTITY_RECORD*)g_7f4ca0)[j].entity_index != 0xffff) {
+					if (v > hi) {
 						v += hiadd;
 					} else if (v < lo) {
 						v += loadd;
@@ -65,91 +69,74 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 					} else if (v >= 0x7f) {
 						v = 0x7f;
 					}
-					p[j] = (signed char) v;
+					g_869480[i][j] = (signed char) v;
 				}
 			}
 		}
 	} else {
-		idx4 = 0;
-		for (i = 0; (unsigned int) i < 0x65400; i += sizeof(ENTITY_RECORD)) {
-			if (SLOT_DWORD(i) == idx5) {
+		for (idx4 = 0; idx4 < 0x300; idx4++) {
+			if (((ENTITY_RECORD*)g_7f4ca0)[idx4].entity_id == idx5) {
 				break;
 			}
-			idx4++;
 		}
-		if ((unsigned int) i >= 0x65400) {
-			return 1;
-		}
-		if ((unsigned int) idx4 >= 0x300) {
-			return 1;
-		}
-		if ((*(unsigned short*)&((ENTITY_RECORD*)g_7f4ca0)[idx4].entity_index) == 0xffff) {
+		if (idx4 >= 0x300 || ((ENTITY_RECORD*)g_7f4ca0)[idx4].entity_index == 0xffff) {
 			return 1;
 		}
 		if (kind == 3) {
-			e = *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[idx4]) + 0x210);
-			p = (char*) g_90e0a0 + idx4;
+			e = ((ENTITY_RECORD*)g_7f4ca0)[idx4].unk_210;
+			p = &g_90e0a0[0][idx4];
 			for (i = 0; i < 0x300; i++) {
-				if ((*(int*)&((ENTITY_RECORD*)g_7f4ca0)[i].entity_id) != e) {
+				if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_id != e) {
 					*p = (char) (int) ((float) *p * *(float*) (t + 8));
 				}
 				p += 0x300;
 			}
 		} else {
 			idx5idx = idx4;
-			idx4 = 0;
-			for (i = 0; (unsigned int) i < 0x65400; i += sizeof(ENTITY_RECORD)) {
-				if (SLOT_DWORD(i) == r1) {
+			for (idx4 = 0; idx4 < 0x300; idx4++) {
+				if (((ENTITY_RECORD*)g_7f4ca0)[idx4].entity_id == r1) {
 					break;
 				}
-				idx4++;
 			}
-			if ((unsigned int) i >= 0x65400) {
+			if (idx4 >= 0x300 || ((ENTITY_RECORD*)g_7f4ca0)[idx4].entity_index == 0xffff) {
 				return 1;
 			}
-			if ((unsigned int) idx4 >= 0x300) {
-				return 1;
-			}
-			if ((*(unsigned short*)&((ENTITY_RECORD*)g_7f4ca0)[idx4].entity_index) == 0xffff) {
-				return 1;
-			}
-			p = (char*) g_869480 + idx4 * 0x300 + idx5idx;
 			if (kind == 2) {
-				*(unsigned char*) ((char*) g_90e0a0 + idx4 * 0x300 + idx5idx) = 0;
-				v = *(signed char*) p + t[6];
+				v = (signed char) g_869480[idx4][idx5idx];
+				g_90e0a0[idx4][idx5idx] = 0;
+				v += t[6];
 				if (v < -0x7f) {
 					v = -0x7f;
 				} else if (v >= 0x7f) {
 					v = 0x7f;
 				}
-				*p = (signed char) v;
+				g_869480[idx4][idx5idx] = (signed char) v;
 			} else if (kind == 1) {
-				v = *(signed char*) p + t[6];
+				v = (signed char) g_869480[idx4][idx5idx] + t[6];
 				if (v < -0x7f) {
 					v = -0x7f;
 				} else if (v >= 0x7f) {
 					v = 0x7f;
 				}
-				*p = (signed char) v;
+				g_869480[idx4][idx5idx] = (signed char) v;
 				if (t[6] >= 0) {
 					v = v / 2;
 				}
-				v += *(signed char*) ((char*) g_90e0a0 + idx4 * 0x300 + idx5idx);
-				if (v < -0x7f) {
-					*(unsigned char*) ((char*) g_90e0a0 + idx4 * 0x300 + idx5idx) = 0x81;
-				} else if (v >= 0x7f) {
-					*(unsigned char*) ((char*) g_90e0a0 + idx4 * 0x300 + idx5idx) = 0x7f;
-				} else {
-					*(signed char*) ((char*) g_90e0a0 + idx4 * 0x300 + idx5idx) = (signed char) v;
-				}
-			} else if (kind == 0) {
-				v = *(signed char*) p + t[6];
+				v += (signed char) g_90e0a0[idx4][idx5idx];
 				if (v < -0x7f) {
 					v = -0x7f;
 				} else if (v >= 0x7f) {
 					v = 0x7f;
 				}
-				*p = (signed char) v;
+				g_90e0a0[idx4][idx5idx] = (signed char) v;
+			} else if (kind == 0) {
+				v = (signed char) g_869480[idx4][idx5idx] + t[6];
+				if (v < -0x7f) {
+					v = -0x7f;
+				} else if (v >= 0x7f) {
+					v = 0x7f;
+				}
+				g_869480[idx4][idx5idx] = (signed char) v;
 			}
 		}
 	}

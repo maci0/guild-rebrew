@@ -11,6 +11,7 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
     float u[4];
     float v[4];
     float c[4];
+    float t[4];
     int i;
 
     basis[14] = 0.0f;
@@ -47,9 +48,12 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
     v[0] = m[8] - m[0xc];
     v[1] = m[9] - m[0xd];
     v[2] = m[0xa] - m[0xe];
-    basis[0] = v[0] + u[0];
-    basis[1] = v[1] + u[1];
-    basis[2] = v[2] + u[2];
+    t[0] = v[0] + u[0];
+    t[1] = v[1] + u[1];
+    t[2] = v[2] + u[2];
+    basis[0] = t[0];
+    basis[1] = t[1];
+    basis[2] = t[2];
     d3_NormalizeVector(basis + 0);
 
     u[0] = m[0x1c] - m[0x14];
@@ -70,9 +74,12 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
     v[0] = m[8] - m[0];
     v[1] = m[9] - m[1];
     v[2] = m[0xa] - m[2];
-    basis[4] = v[0] + u[0];
-    basis[5] = v[1] + u[1];
-    basis[6] = v[2] + u[2];
+    t[0] = v[0] + u[0];
+    t[1] = v[1] + u[1];
+    t[2] = v[2] + u[2];
+    basis[4] = t[0];
+    basis[5] = t[1];
+    basis[6] = t[2];
     d3_NormalizeVector(basis + 4);
 
     u[0] = m[4] - m[0x14];
@@ -93,9 +100,12 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
     v[0] = m[8] - m[0x18];
     v[1] = m[9] - m[0x19];
     v[2] = m[0xa] - m[0x1a];
-    basis[8] = v[0] + u[0];
-    basis[9] = v[1] + u[1];
-    basis[10] = v[2] + u[2];
+    t[0] = v[0] + u[0];
+    t[1] = v[1] + u[1];
+    t[2] = v[2] + u[2];
+    basis[8] = t[0];
+    basis[9] = t[1];
+    basis[10] = t[2];
     d3_NormalizeVector(basis + 8);
 
     d3_MatrixToEulerAngles(basis, e);

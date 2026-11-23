@@ -62,12 +62,12 @@ unsigned char __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, unsigned int t)
         e->f20 = 0;
         for (; i < e->count; i++, p++) {
             if (!(p->flags & 1)) {
-                p->f38 = (float) rand() * 3.0518509447574615e-05f * g_662ad0 - g_662918;
-                p->f3c = (float) rand() * 3.0518509447574615e-05f * g_662930 - g_662acc;
-                p->f40 = (float) rand() * 3.0518509447574615e-05f * g_662ad0 - g_662918;
-                p->f00 = (float) rand() * 3.0518509447574615e-05f * g_662aa0 - g_662a98;
-                p->f04 = (float) rand() * 3.0518509447574615e-05f * g_662ac8 + g_6628cc;
-                p->f08 = (float) rand() * 3.0518509447574615e-05f * g_662ac0 - g_662ab8;
+                p->f38 = (float) rand() * 3.0518509447574615e-05f * g_662ad0 - 2.0f;
+                p->f3c = (float) rand() * 3.0518509447574615e-05f * g_662930 - 1.5f;
+                p->f40 = (float) rand() * 3.0518509447574615e-05f * g_662ad0 - 2.0f;
+                p->f00 = (float) rand() * 3.0518509447574615e-05f * g_662aa0 - 5.0f;
+                p->f04 = (float) rand() * 3.0518509447574615e-05f * g_662ac8 + 0.5f;
+                p->f08 = (float) rand() * 3.0518509447574615e-05f * g_662ac0 - 4.8f;
                 p->f10 = (float) ((rand() & 0x7f) + 0x7f);
                 p->f30 = t;
                 p->flags = p->flags | 1;
@@ -85,9 +85,9 @@ unsigned char __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, unsigned int t)
             p->f40 = dt * p->f08 + p->f40;
             if (p->f3c < e->f08) {
                 p->f3c = e->f08;
-                p->f04 = p->f04 * g_662ab4;
-                p->f00 = p->f00 - p->f00 * g_662ab0;
-                p->f08 = p->f08 - p->f08 * g_662aac;
+                p->f04 = p->f04 * -0.37f;
+                p->f00 = p->f00 - p->f00 * 0.61f;
+                p->f08 = p->f08 - p->f08 * 0.59f;
             } else { p->f04 = p->f04 - dt * e->f00; }
             p->f10 = p->f10 - dt * e->f04;
             if (p->f10 > 0.0) {

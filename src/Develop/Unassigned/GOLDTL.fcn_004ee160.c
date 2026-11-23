@@ -28,7 +28,7 @@ int __cdecl fcn_004ee160(char* a0)
 	total = r * r + total;
 	r = fcn_004ec8a0(p, 3);
 	total = r * r + total;
-	for (n = 6, p2 = e + 0x10; n != 0; n--, p2 += 8) {
+	for (p2 = e + 0x10, n = 6; n != 0; n--, p2 += 8) {
 		q = fcn_004ecbe0(*(int*) (p2 - 4));
 		if (q != 0) {
 			sum += *(float*) (q + 4) + *(float*) p2;

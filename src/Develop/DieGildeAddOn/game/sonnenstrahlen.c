@@ -14,11 +14,8 @@ char* __cdecl fcn_00445600(char*, int, char*, char*);
 char* __cdecl fcn_00442910(char*, float*, float*, char*);
 void __cdecl StopSonnenstrahlen(char* objekt, int phase)
 {
-    int zeit;
-
-    zeit = g_6b7fac;
     SonnenstrahlenAktiv = -1;
-    SonnenstrahlenStartZeit = zeit;
+    SonnenstrahlenStartZeit = g_6b7fac;
     SonnenstrahlenPhase = phase;
 }
 void __cdecl fcn_00418860(char*);

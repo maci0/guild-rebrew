@@ -67,7 +67,6 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 	float direction[3];
 	float angles[3];
 	float radius;
-	float f;
 	int saved;
 	int h;
 	int obj;
@@ -153,6 +152,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 	fcn_0052d9d0(upgradeBuilding);
 	h = *(int*) (upgradeBuilding + 0x61);
 	if (h != 0) {
+		float f;
 		res = fcn_00500e20((char*) 0x7f4c00);
 		if (res == 1) g_773dd4 = (unsigned char)res;
 		else if (res == 0) g_773dd4 = (unsigned char)res;

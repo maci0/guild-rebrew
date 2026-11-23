@@ -41,7 +41,7 @@ char __cdecl fcn_00448b10(void)
 		case 0x30:
 			value = flags[0];
 			flags[0] = value ^
-			           ((unsigned char) (~(value >> 1) * 2 ^ value) &
+			           ((unsigned char) (~(value >> 1) << 1 ^ value) &
 			            2);
 			fcn_00438af0(0);
 			fcn_00436aa0(flags);

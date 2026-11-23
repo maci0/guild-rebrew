@@ -37,7 +37,6 @@ int __cdecl fcn_005a02b0(void)
 	char msg[0xf8];
 	char text[0x100];
 	char* slot;
-	char* sc;
 	int h;
 	int n;
 	int mode;
@@ -88,10 +87,9 @@ int __cdecl fcn_005a02b0(void)
 		else {
 			d2_SetForm(h, 1); io_AppendText(0x15bb); d2_SetForm(h, 2);
 			io_AppendText(0x15bc, *(unsigned short*) slot, info);
-			sc = g_77255c;
 			d = fcn_004677e0(0x1c,
-			    *(int*) (sc + 0x10) - 0x3c,
-			    *(int*) (sc + 0xc) - 0x40, 0, 0x64, 0x83,
+			    *(int*) (g_77255c + 0x10) - 0x3c,
+			    *(int*) (g_77255c + 0xc) - 0x40, 0, 0x64, 0x83,
 			    0x42, d2_CurrentWindowId);
 			d2_SetElementValue(d, 0, 0x64, (int) (grade * 100.0f));
 		}
@@ -107,11 +105,11 @@ int __cdecl fcn_005a02b0(void)
 					fcn_005100f0(*(int*) (slot + 4), -4);
 					memset(msg, 0, sizeof(msg));
 					*(int*) (msg + 8) = *(int*) (slot + 4);
-					*(int*) (msg + 0xc) = -1;
-					*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 					msg[4] = 0x26;
+					*(int*) (msg + 0xc) = -1;
 					msg[0x36] = 9;
 					*(int*) (msg + 0x58) = *(int*) (slot + 4);
+					*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 					fcn_00500bb0(msg + 0x28, 2, 0, 0);
 					fcn_004c5530(msg);
 					g_774654 = 1;
@@ -121,7 +119,7 @@ int __cdecl fcn_005a02b0(void)
 				g_774654 = 1;
 			}
 		}
-		if (*(int*) 0x14ce8e0 != 0) {
+		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
 	}

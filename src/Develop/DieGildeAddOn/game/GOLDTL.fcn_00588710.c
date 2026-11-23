@@ -43,8 +43,8 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
 			t0 = *(float*) 0x662d40; t1 = *(float*) 0x662d44; pos[2] = *(float*) 0x662d48;
 			factor = *(float*) 0x665f40;
 			factor *= f;
-			t0 *= factor; t1 *= factor; pos[2] *= factor;
-			pos[0] = *(float*) 0x665f28 + t0;
+			pos[0] = factor * t0; t1 *= factor; pos[2] *= factor;
+			pos[0] = *(float*) 0x665f28 + pos[0];
 			pos[1] = *(float*) 0x665f2c + t1;
 			pos[2] = *(float*) 0x665f30 + pos[2];
 			fcn_00438b40((char*) *(int*) (a1 + 0x9c), (int*) pos);
@@ -79,8 +79,8 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
 			t0 = *(float*) 0x662d40; t1 = *(float*) 0x662d44; pos[2] = *(float*) 0x662d48;
 			factor = *(float*) 0x665f40;
 			factor *= f;
-			t0 *= factor; t1 *= factor; pos[2] *= factor;
-			pos[0] = *(float*) 0x665f28 + t0;
+			pos[0] = factor * t0; t1 *= factor; pos[2] *= factor;
+			pos[0] = *(float*) 0x665f28 + pos[0];
 			pos[1] = *(float*) 0x665f2c + t1;
 			pos[2] = *(float*) 0x665f30 + pos[2];
 			fcn_00438b40((char*) *(int*) (a1 + 0x9c), (int*) pos);

@@ -78,7 +78,7 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int textRef)
 	} else {
 		buf[0] = label[6];
 		i = atoi(buf);
-		if (i < 0 || i >= 4) {
+		if (i <= -1 || i >= 4) {
 			sprintf(buf, (char*) 0x680a50, textRef - hst_HistoryTextBase);
 			return 0;
 		}
@@ -89,28 +89,23 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int textRef)
 		p = label + 7;
 	}
 
+	inToken = 0;
 	fill0(buf, 0x100);
 	wp = buf;
-	inToken = 0;
 
 	while (*p != 0) {
 		c = *p;
-		if (c != ' ') {
-			if (!inToken) {
-				inToken = 1;
-			}
-			*wp = c;
-			wp++;
-		} else {
+		if (c == ' ') {
 			if (inToken) {
 				len = 8;
-				start = buf + 2;
 				if (*(int*) (buf + 1) == g_68074d) {
 					len = atoi(buf);
 					start = buf + 8;
+				} else {
+					start = buf + 2;
 				}
 				for (i = 0; i < 27; i++) {
-					if (strncmp(start, (char*) (0x67fcb8 + i * 0x40), strlen((char*) (0x67fcb8 + i * 0x40))) == 0) {
+					if (memcmp(start, (char*) (0x67fcb8 + i * 0x40), strlen((char*) (0x67fcb8 + i * 0x40))) == 0) {
 						break;
 					}
 				}
@@ -118,29 +113,38 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int textRef)
 					end = start + strlen((char*) (0x67fcb8 + i * 0x40));
 					(*(void (__cdecl**)(int, int, char*)) (0x680798 + i * 4))(rec, len, end);
 				}
+				inToken = 0;
 				fill0(buf, 0x100);
 				wp = buf;
-				inToken = 0;
+				continue;
 			}
+		} else {
+			if (!inToken) {
+				inToken = 1;
+			}
+			*wp = c;
+			wp++;
 		}
 		p++;
 	}
 
-	if (!inToken) {
-		return 1;
-	}
-	textRef = 8; start = buf + 2;
-	if (*(int*) (buf + 1) == g_68074d) {
-		textRef = atoi(buf); start = buf + 8;
-	}
-	for (i = 0; i < 27; i++) {
-		if (strncmp(start, (char*) (0x67fcb8 + i * 0x40), strlen((char*) (0x67fcb8 + i * 0x40))) == 0) {
-			break;
+	if (inToken) {
+		textRef = 8;
+		if (*(int*) (buf + 1) == g_68074d) {
+			textRef = atoi(buf);
+			start = buf + 8;
+		} else {
+			start = buf + 2;
 		}
-	}
-	if (i < 27 && i < 0x1b) {
-		end = start + strlen((char*) (0x67fcb8 + i * 0x40));
-		(*(void (__cdecl**)(int, int, char*)) (0x680798 + i * 4))(rec, textRef, end);
+		for (i = 0; i < 27; i++) {
+			if (memcmp(start, (char*) (0x67fcb8 + i * 0x40), strlen((char*) (0x67fcb8 + i * 0x40))) == 0) {
+				break;
+			}
+		}
+		if (i < 27 && i < 0x1b) {
+			end = start + strlen((char*) (0x67fcb8 + i * 0x40));
+			(*(void (__cdecl**)(int, int, char*)) (0x680798 + i * 4))(rec, textRef, end);
+		}
 	}
 	return 1;
 }

@@ -41,6 +41,7 @@ int __cdecl cm_ExCreateGeb(char* request, char* out)
 	int saved;
 	int i;
 	int handle;
+	unsigned int kind;
 
 	model = (unsigned char*) gm_LookupEntityRecordById(*(int*) (request + 0x10));
 	if (model == 0)
@@ -52,9 +53,10 @@ int __cdecl cm_ExCreateGeb(char* request, char* out)
 	if (geb == 0)
 		return 1;
 	*(int*) 0x68a9d4 = *(int*) (geb + 1);
+	kind = *geb;
 	/* Prefix literal at native 0x6798d4. */
 	strcpy(name, "gb_");
-	strcat(name, ((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*geb] + 1));
+	strcat(name, ((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[kind] + 1));
 	strupr(name + 2);
 	for (i = 0; i < 4; i++) {
 		if (i != 0)

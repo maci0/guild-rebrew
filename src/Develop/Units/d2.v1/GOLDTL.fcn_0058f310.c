@@ -31,7 +31,12 @@ void __cdecl fcn_00472380(int, int, int, int);
 int __cdecl fcn_00471f80(int);
 int __cdecl fcn_00525f60(char*, int);
 void __cdecl fcn_00526120(int, int);
-int __cdecl fcn_004a5e60(unsigned short*, int, int, int, float, float, int*);
+typedef struct F8 {
+	int mask;
+	int b;
+} F8;
+/* SIZE 0x8 */
+int __cdecl fcn_004a5e60(char*, int, F8, int, float, int*);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_005373e0(void*, int);
@@ -122,20 +127,21 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 					*(int*) (req + 0x60) = *(int*) (hh + 4);
 					*(int*) (req + 0x38) = *(int*) (hh + 4);
 					if (*(int*) (v + 0x170) != 0) {
-						flag = *(int*) (*(int*) (v + 0x170) + 1);
+						*(int*) (req + 0x58) = *(int*) (*(int*) (v + 0x170) + 1);
 					} else if (*(int*) (v + 0x16c) != 0) {
-						flag = *(int*) (*(int*) (v + 0x16c) + 1);
+						*(int*) (req + 0x58) = *(int*) (*(int*) (v + 0x16c) + 1);
 					} else {
+						F8 f;
 						flag = -1;
-						fcn_004a5e60((unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970])), 0, 0x7b4c4a0, 0, 0.0f,
+						f.mask = 0x7b4c4a0;
+						f.b = 0;
+						fcn_004a5e60(((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), 0, f, 0,
 						    100.0f, &flag);
+						*(int*) (req + 0x58) = flag;
 					}
-					*(int*) (req + 0x58) = flag;
 					id = fcn_004c5530(req);
-					if (id != -1) {
-						while (fcn_004c4450(id) == 0) {
-							fcn_005373e0(0, 0x20007);
-						}
+					while (id != -1 && fcn_004c4450(id) == 0) {
+						fcn_005373e0(0, 0x20007);
 					}
 					main_LoopFlags = 0x677c7;
 					g_774654 = 1;

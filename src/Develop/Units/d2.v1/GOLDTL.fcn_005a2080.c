@@ -64,8 +64,8 @@ void __cdecl fcn_005a2080(int building, int table)
 	ip = (unsigned int*) (table + 0x1c);
 	for (;;) {
 		i = 0;
-		n = 0;
 		state = 0;
+		n = 0;
 		changed = 0;
 		p = sel[0];
 		q = (int*) ip;

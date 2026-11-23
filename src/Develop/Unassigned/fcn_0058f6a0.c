@@ -26,7 +26,12 @@ extern int __cdecl sub_519190(int, ...);
 extern int __cdecl sub_472250(int, int, int);
 extern int __cdecl sub_525f60(int, int);
 extern int __cdecl sub_526120(char*, int);
-extern int __cdecl sub_4a5e60(unsigned short*, int, int, int, float, float, int*);
+struct f8_s {
+    int mask;
+    int b;
+};
+
+extern int __cdecl sub_4a5e60(unsigned short*, int, struct f8_s, int, float, int*);
 extern int __cdecl sub_4c5530(char*);
 extern int __cdecl sub_4c4450(int);
 extern int __cdecl sub_5373e0(int, int);
@@ -60,9 +65,9 @@ void __cdecl fcn_0058f6a0(const unsigned char* entity)
     int selected;
     int r;
     int i;
-    int index;
     int denied;
     unsigned char* pe;
+    struct f8_s f;
 
     memset(query, 0, sizeof(query));
     memset(query + 7, 0xff, 8 * sizeof(*query));
@@ -93,11 +98,11 @@ void __cdecl fcn_0058f6a0(const unsigned char* entity)
         } else if (dword_100f1dc != -1) {
             if (dword_67d370 == ok) {
                 denied = 0;
+                found = 0;
                 r = sub_525f60(0x7f4ca0 + word_774970 * 0x21c, 4);
                 if (r == 0) {
                     denied = 1;
                 }
-                found = 0;
                 i = 0;
                 pe = byte_7f4e28;
                 do {
@@ -116,24 +121,25 @@ void __cdecl fcn_0058f6a0(const unsigned char* entity)
                         msg[4] = 0x89;
                         msg[0x36] = 1;
                         *(int*) (msg + 0x64) = 4;
-                        index = *(unsigned short*) (entity + 0x27);
+                        *(int*) (msg + 8) = *(int*) (0x7f4ca4 + *(unsigned short*) (entity + 0x27) * 0x21c);
                         *(int*) (msg + 0xc) = *(int*) (entity + 1);
-                        *(int*) (msg + 8) = *(int*) (0x7f4ca4 + index * 0x21c);
-                        *(int*) (msg + 0x30) = dword_7f4c08;
                         *(int*) (msg + 0x28) = dword_7f4c00;
+                        *(int*) (msg + 0x30) = dword_7f4c08;
+                        *(int*) (msg + 0x2c) = dword_7f4c04;
                         *(int*) (msg + 0x60) = *(int*) (found->data + 4);
                         *(int*) (msg + 0x38) = *(int*) (found->data + 4);
-                        *(int*) (msg + 0x2c) = dword_7f4c04;
-                        *(int*) (msg + 0x5c) = *(int*) (hdl->pad + 4);
                         *(unsigned short*) (msg + 0x34) = word_7f4c0c;
+                        *(int*) (msg + 0x5c) = *(int*) (hdl->pad + 4);
                         if (hdl->a170 != 0) {
                             *(int*) (msg + 0x58) = *(int*) ((char*) hdl->a170 + 1);
                         } else if (hdl->a16c != 0) {
                             *(int*) (msg + 0x58) = *(int*) ((char*) hdl->a16c + 1);
                         } else {
                             selected = -1;
+                            f.mask = 0x7b4c4a0;
+                            f.b = 0;
                             sub_4a5e60((unsigned short*) (0x7f4ca0 + word_774970 * 0x21c),
-                                0, 0x7b4c4a0, 0, 0.0f, 100.0f, &selected);
+                                0, f, 0, 100.0f, &selected);
                             *(int*) (msg + 0x58) = selected;
                         }
                         r = sub_4c5530(msg);

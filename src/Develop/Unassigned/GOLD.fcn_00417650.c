@@ -4,13 +4,20 @@
 /* ADDRESS: GOLD 0x00417650 */
 int __cdecl fcn_00417650(int count)
 {
-    if (tp_SoundSources != 0)
-        goto fail;
+    int rc;
+
+    rc = 0;
+    if (tp_SoundSources != 0) {
+        rc = -1;
+        goto done;
+    }
     if (count != 0)
         d3snd_SourceCount = count;
     tp_SoundSources = (SOUND_SOURCE*) m_alloc(d3snd_SourceCount * sizeof(SOUND_SOURCE), "d3snd_Init");
-    if (tp_SoundSources == 0)
-        goto fail;
+    if (tp_SoundSources == 0) {
+        rc = -1;
+        goto done;
+    }
     count = d3snd_SourceCount * sizeof(SOUND_SOURCE);
     __asm {
         mov edi, tp_SoundSources
@@ -29,7 +36,6 @@ int __cdecl fcn_00417650(int count)
         add ecx, ebx
         rep stosb
     }
-    return 0;
-fail:
-    return -1;
+done:
+    return rc;
 }
