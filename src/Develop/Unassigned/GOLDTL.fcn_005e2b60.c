@@ -1,3 +1,4 @@
+extern int g_100f1dc;
 int __cdecl fcn_00470820(int, int, char *);
 void __cdecl fcn_00537320(int);
 void __cdecl fcn_00471db0(int, int);
@@ -93,7 +94,7 @@ void __cdecl fcn_005e2b60(void)
     do {
       if ((*(unsigned int *)0x14ce8e0) || (*(unsigned char *)0x14cf950 == 1))
         *(unsigned int *)0x774654 = 1;
-      if (*(unsigned int *)0x100f1dc != -1) {
+      if (g_100f1dc != -1) {
         if (*(unsigned int *)0x67d370 != selection[0]) {
           if (*(unsigned int *)0x67d370 != selection[1]) {
             if (*(unsigned int *)0x67d370 == selection[2]) {

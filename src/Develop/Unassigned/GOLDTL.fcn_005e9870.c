@@ -44,7 +44,7 @@ int __cdecl fcn_005e9870(Sefde0Entry *entry)
 	if (*(int*) (obj + 0x5c) != 1) {
 		return 0;
 	}
-	remain = *(int *)0x6b7fac - *(int*) (obj + 0x60);
+	remain = g_6b7fac - *(int*) (obj + 0x60);
 	if (fcn_0045b990(map, (float*) (obj + 0x30), &ox, &oy, &h) == 0) {
 		*(int*) (obj + 0x5c) = 3;
 		*(int*) (obj + 0x58) = 0;

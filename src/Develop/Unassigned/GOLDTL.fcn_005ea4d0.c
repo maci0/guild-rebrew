@@ -6,7 +6,7 @@ float __cdecl fcn_004514d0(int, int);
 int __cdecl fcn_005ea4d0(void *a, void *b, void *c, void *d, void *e, void *f, void *g, void *h, void *i)
 {
     float *origin, *target, *bounds, *angle, *bearing, *speed, *velocity, *direction, *normal;
-    float vector[3], horizontal[3], distance, height, dt, da, gravity;
+    float vector[4], horizontal[4], distance, height, dt, da, gravity;
     float current_speed, current_angle, sn, cs, apex, time, delta, invgravity;
     int sign, count;
     origin = (float *)a; target = (float *)b; bounds = (float *)c;

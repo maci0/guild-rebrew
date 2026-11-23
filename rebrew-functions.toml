@@ -614561,7 +614561,7 @@ blocker_delta = 1045
 similarity = 93.9873417721519
 
 ["GOLDTL.0x005e5a50".verification]
-source_hash = "4af288f716f536c075cbe399a4a8d822ef9b71076f09b72438e9fb7ef91fb765"
+source_hash = "fc273401289813f2ea3f705b0dcfeac78c9ff322249f054ebf81ffa770880596"
 reference_hash = "e60a27e9686cb076bc37a620e94c243c9b72033eaa4716f094d89ac7406bae6d"
 reference_size = "1103"
 headers_hash = "1a3a28770fb405c59fc5ffe88d50d09f48a7bde2056e0810eb9498f93fdbc540"
@@ -614572,7 +614572,7 @@ module = "GOLDTL"
 va = "0x5e5a50"
 context_hash = ""
 defines = "[]"
-input_hash = "aae92ff47fad6c1bdb9d74962b8a152ec5a42c264665ac0f9e26777219f78374"
+input_hash = "d5e2b7c3cb394241ca57b686aec4c7bcd9a074f9945d7c7d7be29ad809eb625c"
 aligned_pairs = 297
 target_instructions = 316
 candidate_instructions = 316
@@ -614580,7 +614580,7 @@ hunks = 15
 similarity = 93.9873417721519
 status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-23T01:31:54+00:00"
+measured_at = "2026-11-23T03:38:44+00:00"
 
 [["GOLDTL.0x005e5a50".binding_history]]
 action = "retire"

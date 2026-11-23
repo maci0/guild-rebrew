@@ -1,3 +1,5 @@
+#include "Develop/DieGildeAddOn/game/game_data.h"
+extern int g_1043370;
 char __cdecl fcn_0045b990(int, float *, int *, int *, float *);
 int __cdecl fcn_005ea2d0(int, float *, float *, int, int, int *, int *);
 
@@ -8,9 +10,9 @@ int __cdecl fcn_005e90e0(char *obj)
     float inv, signx, signy, signz;
     int map, remain, n, x, y, nx, ny, hit;
     gravity = *(float *)0x6660ec * *(float *)0x6660e8;
-    map = *(int *)0x1043370;
+    map = g_1043370;
     if (*(int *)(obj + 0x5c) != 1) return 0;
-    remain = *(int *)0x6b7fac - *(int *)(obj + 0x60);
+    remain = g_6b7fac - *(int *)(obj + 0x60);
     if (!fcn_0045b990(map, (float *)(obj + 0x30), &x, &y, &height)) {
         *(int *)(obj + 0x5c) = 3;
         *(int *)(obj + 0x58) = 0;

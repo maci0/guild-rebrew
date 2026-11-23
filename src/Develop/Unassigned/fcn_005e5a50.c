@@ -28,6 +28,7 @@ extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 extern int g_100f1dc;
 extern int g_14ce8e0;
+extern int g_774654;
 extern int g_666018, g_66601c;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl fcn_004c3030(int, int, char*, int);
@@ -114,7 +115,7 @@ void __cdecl fcn_005e5a50(char* entity)
 			io_AppendText(0x41d7, (val > 1 ? val : 1) * 32000);
 		}
 		if (g_14ce8e0 != 0) {
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			int clicked = *(int*) 0x67d370;
 			if (clicked == ids[0]) {
@@ -137,10 +138,10 @@ void __cdecl fcn_005e5a50(char* entity)
 					fcn_0064d41a(buf, (char*) 0x6ad454, val);
 					fcn_004c3030(-7, 0, buf, -1);
 					fcn_00526120(text, 0);
-					*(int*) 0x774654 = 1;
+					g_774654 = 1;
 				}
 			} else if (clicked == ids[1]) {
-				*(int*) 0x774654 = 1;
+				g_774654 = 1;
 			}
 		}
 	} while (fcn_005373e0((void*) fcn_005e5a50, 0x677c7) != 0);

@@ -3,7 +3,7 @@
 
 extern int g_6b7fdc;
 extern int d2_CurrentWindowId;
-extern char *g_1015ea0;
+extern char *g_1015ea0, *g_77255c;
 int __cdecl vfs_ListFilesByExtension(char *, char *, void *);
 int __cdecl vfs_Tfopen(char *, char *, int);
 int __cdecl ls_LoadSavegameHeader(int, char *);
@@ -46,7 +46,7 @@ void __cdecl fcn_005e0140(int a, int b, void *items, void *records, char *path, 
         if (index == -1) continue;
         d2_SetForm(a, b);
         row = (char *)items + index * 0x220;
-        y = *(short *)(*(int *)0x77255c + 0xc);
+        y = *(short *)((int)g_77255c + 0xc);
         element = fcn_0046f100(0, (short)(index * 130), (short)(y - 16), 0x82, 16, d2_CurrentWindowId);
         *(int *)(row + 8) = element;
         *(int *)(element * 0x3cc + 0x10161cc) = 0x54;
@@ -69,9 +69,9 @@ void __cdecl fcn_005e0140(int a, int b, void *items, void *records, char *path, 
         }
         element = *(int *)(row + 4);
         *(int *)(g_1015ea0 + element * 0x2f4 + 0x5c) = 1;
-        *(int *)(g_1015ea0 + element * 0x2f4 + 0x18) = *(int *)(*(int *)0x77255c + 0xc) - 0xa0;
+        *(int *)(g_1015ea0 + element * 0x2f4 + 0x18) = *(int *)((int)g_77255c + 0xc) - 0xa0;
         *(int *)(g_1015ea0 + element * 0x2f4 + 0x1d0) = 3;
-        fcn_0046f100(0xa4, 0x12, (short)(*(short *)(*(int *)0x77255c + 0xc) - 0xb0), 0x6e, 16, d2_CurrentWindowId);
+        fcn_0046f100(0xa4, 0x12, (short)(*(short *)((int)g_77255c + 0xc) - 0xb0), 0x6e, 16, d2_CurrentWindowId);
         *(int *)(d2_CurrentWindowId * 0x3cc + 0x10161cc) = 0x54;
         *(int *)(d2_CurrentWindowId * 0x3cc + 0x1015f60) = 0;
         sprintf(text, (char *)0x699a68, *(int *)(header + 0x68), 0x11);
@@ -93,7 +93,7 @@ void __cdecl fcn_005e0140(int a, int b, void *items, void *records, char *path, 
         d2_SetForm(a, b);
         row = (char *)items + index * 0x220;
         row[0xc] = 0;
-        y = *(short *)(*(int *)0x77255c + 0xc);
+        y = *(short *)((int)g_77255c + 0xc);
         element = fcn_0046f100(0, (short)(index * 130), (short)(y - 16), 0x78, 16, d2_CurrentWindowId);
         *(int *)(row + 8) = element;
         *(int *)(element * 0x3cc + 0x10161cc) = 0x54;
@@ -103,9 +103,9 @@ void __cdecl fcn_005e0140(int a, int b, void *items, void *records, char *path, 
         fcn_004692c0(0, 0, 160, 120, (void *)0x7ea3c0, d2_CurrentWindowId);
         fcn_0046f740(0x3c, 0x20, 0x4fb, d2_CurrentWindowId);
         *(int *)(g_1015ea0 + element * 0x2f4 + 0x5c) = 1;
-        *(int *)(g_1015ea0 + element * 0x2f4 + 0x18) = *(int *)(*(int *)0x77255c + 0xc) - 0xa0;
+        *(int *)(g_1015ea0 + element * 0x2f4 + 0x18) = *(int *)((int)g_77255c + 0xc) - 0xa0;
         *(int *)(g_1015ea0 + element * 0x2f4 + 0x1d0) = 3;
-        fcn_0046f100(0xa4, 0x18, (short)(*(short *)(*(int *)0x77255c + 0xc) - 0xb0), 0x60, 16, d2_CurrentWindowId);
+        fcn_0046f100(0xa4, 0x18, (short)(*(short *)((int)g_77255c + 0xc) - 0xb0), 0x60, 16, d2_CurrentWindowId);
         *(int *)(d2_CurrentWindowId * 0x3cc + 0x10161cc) = 0x54;
         io_AppendText(0x1cc7);
     }

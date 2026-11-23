@@ -52,19 +52,19 @@ void __cdecl fcn_005e2660(void)
     c[2] = fcn_00472250(dialog, 1, 8);
     c[3] = fcn_00472250(dialog, 1, 11);
     for (i = 0; i < 3; i++) {
-        d2_SetElementValue(a[i], -50, 50, (int)(((float *)0x776670)[i] * *(float *)0x662cf8));
+        d2_SetElementValue(a[i], -50, 50, (int)(((float *)0x776670)[i] * 100.0f));
         fcn_00468cd0(a[i], 0x82);
         fcn_00468b80(a[i], ((int *)0x14b52b4)[i]);
-        d2_SetElementValue(b[i], 0, 200, (int)(((float *)0x776680)[i] * *(float *)0x662cf8));
+        d2_SetElementValue(b[i], 0, 200, (int)(((float *)0x776680)[i] * 100.0f));
         fcn_00468cd0(b[i], 0x82);
         fcn_00468b80(b[i], ((int *)0x14b52b4)[i]);
-        d2_SetElementValue(c[i], 50, 600, (int)(((float *)0x776690)[i] * *(float *)0x662cf8));
+        d2_SetElementValue(c[i], 50, 600, (int)(((float *)0x776690)[i] * 100.0f));
         fcn_00468cd0(c[i], 0x82);
         fcn_00468b80(c[i], ((int *)0x14b52b4)[i]);
     }
-    d2_SetElementValue(a[3], 0, 100, (int)(*(float *)0x77667c * *(float *)0x662cf8));
-    d2_SetElementValue(b[3], 0, 150, (int)(*(float *)0x77668c * *(float *)0x662cf8));
-    d2_SetElementValue(c[3], 0, 150, (int)(*(float *)0x77669c * *(float *)0x662cf8));
+    d2_SetElementValue(a[3], 0, 100, (int)(*(float *)0x77667c * 100.0f));
+    d2_SetElementValue(b[3], 0, 150, (int)(*(float *)0x77668c * 100.0f));
+    d2_SetElementValue(c[3], 0, 150, (int)(*(float *)0x77669c * 100.0f));
     while (fcn_005373e0((void *)fcn_005e2660, flags)) {
         if (*(int *)0x14ce8e0 || *(unsigned char *)0x14cf950 == 1)
             *(int *)0x774654 = 1;
@@ -93,13 +93,13 @@ void __cdecl fcn_005e2660(void)
     }
     if (accepted) {
         for (i = 0; i < 3; i++) {
-            ((float *)0x776670)[i] = fcn_00471f80(a[i]) * *(float *)0x662910;
-            ((float *)0x776680)[i] = fcn_00471f80(b[i]) * *(float *)0x662910;
-            ((float *)0x776690)[i] = fcn_00471f80(c[i]) * *(float *)0x662910;
+            ((float *)0x776670)[i] = fcn_00471f80(a[i]) * 0.01f;
+            ((float *)0x776680)[i] = fcn_00471f80(b[i]) * 0.01f;
+            ((float *)0x776690)[i] = fcn_00471f80(c[i]) * 0.01f;
         }
-        *(float *)0x77667c = fcn_00471f80(a[3]) * *(float *)0x662910;
-        *(float *)0x77668c = fcn_00471f80(b[3]) * *(float *)0x662910;
-        *(float *)0x77669c = fcn_00471f80(c[3]) * *(float *)0x662910;
+        *(float *)0x77667c = fcn_00471f80(a[3]) * 0.01f;
+        *(float *)0x77668c = fcn_00471f80(b[3]) * 0.01f;
+        *(float *)0x77669c = fcn_00471f80(c[3]) * 0.01f;
         fcn_005e12d0();
     }
     d3_ApplyGraphicsOptions();

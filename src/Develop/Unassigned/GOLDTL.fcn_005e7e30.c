@@ -1,4 +1,4 @@
-extern int d2_CurrentWindowId;
+extern int d2_CurrentWindowId, g_100f1dc;
 extern char *g_1015ea0;
 int __cdecl fcn_00470820(int, int, char *);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -138,13 +138,13 @@ void __cdecl fcn_005e7e30(void)
   v3 = d2_ShowTxt(0xcb,0x3c4,(*(char **)0x14b5c38),(d2_CurrentWindowId));
   *(int *)((g_1015ea0) + 0x18 + v3 * 0x2f4) = v8;
   d2_SetElementFont(v3,0x54);
-  (*(int *)0x100f1dc) = 1;
+  g_100f1dc = 1;
   v1 = (int *)((d2_CurrentWindowId) * 0x3cc + 0x1016194);
   *v1 = *v1 + 8;
   do {
     if ((*(int *)0x14ce8e0))
       (*(int *)0x774654) = 1;
-    if (((*(int *)0x100f1dc) != -1) && ((*(int *)0x67d370) == v4))
+    if ((g_100f1dc != -1) && ((*(int *)0x67d370) == v4))
       (*(int *)0x774654) = 1;
   } while (fcn_005373e0((void *)fcn_005e7e30,0x777c7));
   fcn_00471e30(v2);
