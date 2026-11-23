@@ -1,44 +1,40 @@
+#include <string.h>
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
+
+typedef struct D3_UNIVERSE_VIEW {
+	char name[0x3d5];
+	unsigned char verwendet;
+	char unbekannt_3d6[6];
+} D3_UNIVERSE_VIEW;
+
 extern unsigned char* lpGebaeudePROT;
 extern signed char g_7f3b00[];
 extern unsigned char* g_7746c8;
-#include "Develop/DieGildeAddOn/game/building_prototype.h"
-// SIZE 0x3dc
-struct s_10432c0 {
-	char name[0x3d5];
-	char used;
-	char pad[6];
-};
-
 extern char g_10432c0[];
-
-
-
-#include <string.h>
 
 int __cdecl fcn_00413160(void);
 void __cdecl init_LoadGebaeudeScene(int);
 
+/* ADDRESS: GOLDTL 0x005155e0 */
 int __cdecl fcn_005155e0(unsigned char* e)
 {
 	int k;
 	int r;
-	char *dst, *src;
 
 	k = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category;
 	if (((signed char*)g_7f3b00)[k] == -1) {
-		if (e != g_7746c8 && *e != 0x1e) {
+		if (e == g_7746c8 || *e == 0x1e) {
+			init_LoadGebaeudeScene(*e);
+		} else {
 			r = fcn_00413160();
 			if (r == -1) {
 				return r;
 			}
 			((signed char*)g_7f3b00)[k] = (signed char) r;
-			((struct s_10432c0*)g_10432c0)[r].used = 1;
-			dst = ((struct s_10432c0*)g_10432c0)[r].name;
-			src = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e] + 1;
-			while ((*dst++ = *src++) != 0) { }
-			return ((signed char*)g_7f3b00)[k];
+			((D3_UNIVERSE_VIEW*)g_10432c0)[r].verwendet = 1;
+			strcpy((char*)&((D3_UNIVERSE_VIEW*)g_10432c0)[r],
+				(char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e] + 1);
 		}
-		init_LoadGebaeudeScene(*e);
 	}
 	return ((signed char*)g_7f3b00)[k];
 }

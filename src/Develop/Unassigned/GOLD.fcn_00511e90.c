@@ -1,4 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern signed char g_76fa60[];
 extern unsigned char* g_6f230c;
 
@@ -23,25 +24,21 @@ int __cdecl fcn_00511e90(unsigned char* e)
 {
 	int k;
 	int r;
-	char *src;
-	char *dst;
 
-	k = g_7e3f30[*e * 0x24d];
-	if (g_76fa60[k] == -1) {
-		if (e != g_6f230c && *e != 0x1e) {
+	k = ((BUILDING_PROTOTYPE*)g_7e3f30)[*e].category;
+	if (((signed char*)g_76fa60)[k] == -1) {
+		if (e == g_6f230c || *e == 0x1e) {
+			fcn_0050dc30(*e);
+		} else {
 			r = fcn_00413160();
 			if (r == -1) {
 				return r;
 			}
-			g_76fa60[k] = (signed char) r;
+			((signed char*)g_76fa60)[k] = (signed char) r;
 			g_fd7ba0[r].used = 1;
-			src = (char*) g_7e3f30 + *e * 0x24d + 1;
-			dst = g_fd7ba0[r].name;
-			while ((*dst++ = *src++) != 0) {
-			}
-			return g_76fa60[k];
+			strcpy((char*)&g_fd7ba0[r],
+				(char*)&((BUILDING_PROTOTYPE*)g_7e3f30)[*e] + 1);
 		}
-		fcn_0050dc30(*e);
 	}
-	return g_76fa60[k];
+	return ((signed char*)g_76fa60)[k];
 }

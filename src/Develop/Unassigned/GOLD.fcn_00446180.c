@@ -47,11 +47,11 @@ int __cdecl fcn_00446180(char* object)
             if (step != 0) {
                 nx = size / step + 1;
                 ny = nx;
-                if (column == 7) {
-                    nx -= 4 / step;
-                }
                 if (row == 7) {
                     ny -= 4 / step;
+                }
+                if (column == 7) {
+                    nx -= 4 / step;
                 }
                 left_y = ny - 1;
                 y = row * size;

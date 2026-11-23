@@ -167,11 +167,10 @@ unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* acto
 				((16.0f - (float) matched[i]) * 0.06666667f) *
 				calc[i].avg;
 			scores[i] = score;
-			if (k != -1) {
-				if (score < scores[k])
-					k = 1;
-			} else {
+			if (k == -1) {
 				k = i;
+			} else if (score < scores[k]) {
+				k = 1;
 			}
 			if (best == -1 || scores[best] < score)
 				best = i;

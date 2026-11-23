@@ -31,7 +31,6 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 	int* slot;
 	char buf[1024];
 	char name[64];
-	char* s;
 	int x;
 	int y;
 	int z;
@@ -41,7 +40,6 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 	int v7;
 	int v8;
 	int v9;
-	int i;
 	int sex;
 
 	if (g_774970 != *(unsigned short*) (action + 8))
@@ -94,42 +92,34 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 	case 1:
 		ent = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (action + 0xac));
 		x = gm_MapEntityStatRange(*(unsigned char*) (action + 0xb0));
-		statIndex = gm_GetOppositeStatIndex(*(unsigned char*) (action + 0xb0));
+		statIndex = gm_GetOppositeStatIndex(*(unsigned char*) (action + 0xb0)) + 1;
 		sprintf(name, "brk_%02i", x);
 		v7 = sb_FindBankByName("BERUF_BESTANDEN");
-		if (0xd <= x) {
+		if (x > 12) {
 			if (*(char*) (ent + 9))
-				s = "ADDON_BERUF_LISTE_WEIBLICH";
+				v = sb_FindBankByName("ADDON_BERUF_LISTE_WEIBLICH");
 			else
-				s = "ADDON_BERUF_LISTE_MAENNLICH";
-			v = sb_FindBankByName(s);
+				v = sb_FindBankByName("ADDON_BERUF_LISTE_MAENNLICH");
 			v8 = sb_FindBankByName("ADDON_GEBAEUDE_LISTE");
 			v9 = sb_FindBankByName("ADDON_BERUFE_VEREINIGUNG_UNTERSCHRIFT");
 		} else {
 			if (*(char*) (ent + 9))
-				s = "BERUF_LISTE_WEIBLICH";
+				v = sb_FindBankByName("BERUF_LISTE_WEIBLICH");
 			else
-				s = "BERUF_LISTE_MAENNLICH";
-			v = sb_FindBankByName(s);
+				v = sb_FindBankByName("BERUF_LISTE_MAENNLICH");
 			v8 = sb_FindBankByName("GEBAEUDE_LISTE");
 			v9 = sb_FindBankByName("BERUFE_VEREINIGUNG_UNTERSCHRIFT");
 		}
-
-		if (statIndex + 1 >= 3) {
-			if (statIndex + 1 >= 5)
-				s = "FanfarePositivLang";
-			else
-				s = "FanfarePositivMittel";
-		} else {
-			s = "FanfarePositivKurz";
-		}
-		fcn_004c30a0(-7, 0, s, -1, 0);
+		fcn_004c30a0(-7, 0,
+			statIndex < 3 ? "FanfarePositivKurz" : (statIndex < 5 ? "FanfarePositivMittel" : "FanfarePositivLang"),
+			-1, 0);
 		fcn_004c30a0(-6, v7, "SELBST", 1, 0);
-		fcn_004c30a0(-8, v, name, statIndex - 1, 0);
+		fcn_004c30a0(-8, v, name, statIndex - 2, 0);
 		fcn_004c30a0(-6, v7, "SELBST", 0, 0);
+		statIndex--;
 		fcn_004c30a0(-8, v8, name, (int) (3.0 - ((double) statIndex + 1.0) * 0.5), 0);
 		fcn_004c30a0(-6, v7, "GEZEICHNET", -1, 0);
-		if (0xd <= x)
+		if (x > 12)
 			x -= 0xd;
 		else
 			x -= 1;

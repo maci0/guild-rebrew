@@ -50,17 +50,17 @@ int __cdecl fcn_0049b1f0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 	unsigned short ids[2];
 	F8 f;
 	Slot* sv;
-	int id;
+	int k;
+	int ncolors;
 	int found;
 	int r;
 	int i;
 
+	k = kind;
 	if (kind == 0) {
-		kind = 0x1c;
-	} else {
-		return 0;
+		k = 0x1c;
 	}
-	if (busy != 0) {
+	if (busy != 0 || kind != 0) {
 		return 0;
 	}
 	memset(slot, 0, sizeof(slot));
@@ -98,7 +98,7 @@ int __cdecl fcn_0049b1f0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 		b.type = 7;
 		b.a = *(int*) (e + 4);
 		b.b = 1;
-		r = ai_SelectBestMethod(kind, *(unsigned short*) e, 2, &a, &b);
+		r = ai_SelectBestMethod(k, *(unsigned short*) e, 2, &a, &b);
 		if (r == 0) {
 			return 0;
 		}
@@ -110,7 +110,7 @@ int __cdecl fcn_0049b1f0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 		return 0;
 	}
 occupied:
-	i = gm_RandomMod(0xc) & 0xffff;
+	i = (unsigned short) gm_RandomMod(0xc);
 	while (slot[i].a < 1) {
 		i = (i + 1) % 12;
 	}
@@ -119,30 +119,35 @@ occupied:
 	a.a = slot[i].b;
 	a.f = 0.05f;
 	sv = &slot[i];
-	id = sv->id;
-	if (id != 0x169 && id != 0x16d) {
-		colors[0] = (id != 0x29a) ? 0xf00500 : 0xf00d00;
+	if (sv->id != 0x169 && sv->id != 0x16d) {
+		ncolors = 1;
+		if (sv->id == 0x29a) {
+			colors[0] = 0xf00d00;
+		} else {
+			colors[0] = 0xf00500;
+		}
 	} else {
+		ncolors = 2;
 		colors[0] = 0xf00500;
 		colors[1] = 0xf00500;
 	}
-	if (id == 0x177) {
+	if (sv->id == 0x177) {
 		colors[0] |= 0x10000;
 	}
-	f.mask = 0xa07c4390;
-	f.b = 1;
-	if (id != 0x178) {
-		if (fcn_004a5340(e, (id != 0x169 && id != 0x16d) ? 1 : 2, colors, 0,
-			(float) (gm_RandomMod(0x40) & 0xffff), ids) == 0) {
-			return 0;
-		}
-	} else {
+	if (sv->id == 0x178) {
+		f.mask = 0xa07c4390;
+		f.b = 1;
 		found = -1;
 		if (g_77261c == 0 ||
 			(fcn_004a5e60(g_77261c, 4, f, 0, 100.0f, &found), found == -1)) {
 			if (fcn_004a5e60(e, 6, f, 0, (float) (gm_RandomMod(0x40) & 0xffff), &found) == 0) {
 				return 0;
 			}
+		}
+	} else {
+		if (fcn_004a5340(e, ncolors, colors, 0,
+			(float) (gm_RandomMod(0x40) & 0xffff), ids) == 0) {
+			return 0;
 		}
 	}
 	switch (sv->id) {
@@ -180,7 +185,7 @@ occupied:
 	b.d = 0x21;
 	r = 0x21;
 	if (i > 1) {
-		r = ai_SelectBestMethod(kind, *(unsigned short*) e, 4, &a, &b);
+		r = ai_SelectBestMethod(k, *(unsigned short*) e, 4, &a, &b);
 		if (r == 0) {
 			return 0;
 		}

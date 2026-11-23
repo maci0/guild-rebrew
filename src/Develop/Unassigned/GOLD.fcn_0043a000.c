@@ -35,11 +35,12 @@ char* __cdecl d3_SelectObjectLod(char* object)
         else if (level < 0.0f)
             level = 0.0f;
         index = (int) level;
+        page = model + 0xf4 + index * 0x198;
     } else {
         selected = (*(unsigned char*) (object + 0x213) & 0x30) >> 4;
         index = __max(0, __min(*(unsigned char*) (model + 0x96c) - 1, selected - 1));
+        page = model + 0xf4 + index * 0x198;
     }
-    page = model + 0xf4 + index * 0x198;
     if (*(int*) (page + 8) == 0 || *(int*) (page + 0xc) == 0)
         return 0;
     if (page != *(char**) (object + 0x1cc) || d3_LightingUpdatePending)

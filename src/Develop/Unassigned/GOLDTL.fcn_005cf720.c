@@ -31,10 +31,10 @@ int __cdecl fcn_005cf720(unsigned int self, unsigned int candidate, unsigned cha
 	if ((g_slot_table + off) == (unsigned char*) gm_CityEntity)
 		return 0;
 	if (!p)
-		return 1;
+		goto ret1;
 	flags = *(unsigned int*) (p + 4);
 	if (!flags)
-		return 1;
+		goto ret1;
 	if (g_slot_table[off + 2] >= 10)
 		return 0;
 	if (p[0x14] & 2) {
@@ -116,9 +116,12 @@ int __cdecl fcn_005cf720(unsigned int self, unsigned int candidate, unsigned cha
 			return 0;
 	}
 	if (!*(int*) (p + 0x40))
-		return 1;
+		goto ret1;
 	f = fcn_0050f980((int) (self & 0xffff), (int) (candidate & 0xffff), 1);
 	if (!(f < *(float*) (p + 0x44)) && !(f > *(float*) (p + 0x48)))
-		return 1;
+		goto ret1;
 	return 0;
+
+ret1:
+	return 1;
 }

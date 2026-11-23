@@ -38,8 +38,8 @@ int __cdecl fcn_00584f00(int a1, char* a2, int cost)
                 }
                 if (fcn_004c4450(r) == 1) {
                     fcn_004ee080((int) a2);
-                    fcn_004c5150(-1, *(int*) (0x7f4ca4 + 540 * *(u16*) 0x774970),
-                                 *(u8*) 0x773d75, cost);
+                    fcn_004c5150(-1, *(int*) (0x7f4ca4 + 540 * g_774970),
+                                 g_773d75, cost);
                     return 1;
                 }
             }

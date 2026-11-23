@@ -40,9 +40,8 @@ char __cdecl fcn_00453270(char* o)
 	if (mesh == 0 || (o[0x212] & 2)) {
 		return 0;
 	}
-	color = 0;
+	color = 0xff;
 	(*(int*) 0x633b04)++;
-	*(unsigned char*) &color = 0xff;
 	fcn_00452ee0(o);
 	*(int*) 0x633b18 = 0;
 	for (i = 0; i < *(int*) (mesh + 8); i++) {

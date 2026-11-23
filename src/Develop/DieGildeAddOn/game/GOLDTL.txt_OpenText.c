@@ -61,14 +61,15 @@ int __cdecl txt_OpenText(char* definitionPath, char* writeHeader)
 	char* p;
 	char* q;
 	char* r;
+	char* fileName;
 	FILE* fp;
 	int fileIndex;
+	int endPos;
 	int k;
 	int len;
-	int v34;
 	int offset;
-	int v3c;
-	int v40;
+	int fileCount;
+	int startEntry;
 	int defineCount;
 	int v44;
 	int starts[10];
@@ -92,11 +93,11 @@ int __cdecl txt_OpenText(char* definitionPath, char* writeHeader)
 	starts[8] = 0xa0;
 	starts[9] = 0xb4;
 	v18 = 0;
-	v40 = 0;
+	startEntry = 0;
 	v20 = 0;
 	defineCount = 0;
 	v44 = 0;
-	v3c = 0;
+	fileCount = 0;
 	txt_EntryCount = 0;
 	v10 = 0x80;
 	p = (char*) txt_TextBanks + 0x68;
@@ -198,9 +199,9 @@ int __cdecl txt_OpenText(char* definitionPath, char* writeHeader)
 				goto fail_free;
 			}
 			*q = 0;
-			strcpy(inc[v3c], p);
-			v3c++;
-			if (v3c > 0x80) {
+			strcpy(inc[fileCount], p);
+			fileCount++;
+			if (fileCount > 0x80) {
 				goto fail_free;
 			}
 		}
@@ -212,11 +213,10 @@ pass1_done:
 	fcn_0064e1fd(fp);
 
 	/* Pass 2: compile every listed text file into its binary resource. */
-	v40 = v3c;
-	for (fileIndex = 0; fileIndex < v40; fileIndex++) {
+	for (fileIndex = 0; fileIndex < fileCount; fileIndex++) {
 		strcpy(line, g_1052f00);
-		p = inc[fileIndex];
-		strcat(line, p);
+		fileName = inc[fileIndex];
+		strcat(line, fileName);
 		fp = (FILE*) fcn_0064e2f9(line, "rt");
 		if (fp == 0) {
 			fcn_0064d41a(msg, "Could not open TextFile: '%s' !", line);
@@ -233,7 +233,7 @@ pass1_done:
 				break;
 			}
 			lineNo++;
-			v20 = 0;
+			v10 = 0;
 			if (strstr(line, "#define") != 0) {
 				k = strlen(line);
 				line[k - 1] = 0;
@@ -253,8 +253,7 @@ pass1_done:
 			while (line[v10] == ' ') {
 				v10++;
 			}
-			v34 = v18 * 0x50;
-			for (v14 = v10; v10 < (int) strlen(line); v10++, v14++) {
+			for (v14 = v10; (unsigned int) v10 < strlen(line); v10++, v14++) {
 				p = line + v10;
 				switch (line[v10]) {
 				case '\t':
@@ -266,34 +265,34 @@ pass1_done:
 					p = (char*) fcn_0064e790(line + v10, '"');
 					k = (int) (p - (line + v10));
 					if (k < 0) {
-						fcn_0064d41a(msg, "Syntax error in file %s in line %i", p, lineNo);
+						fcn_0064d41a(msg, "Syntax error in file %s in line %i", fileName, lineNo);
 						MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
 						break;
 					}
 					memset(msg, 0, sizeof(msg));
 					if (k > 0xff) {
-						fcn_0064d41a(msg, "Line too long in file %s in line %i", p, lineNo);
+						fcn_0064d41a(msg, "Line too long in file %s in line %i", fileName, lineNo);
 						MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
 						break;
 					}
 					fcn_0064d530(msg, line + v10, k);
 					p = (char*) strstr(msg, "/*");
 					if (p != 0) {
-						v10 += k;
-						v14 += k;
+						v10 += k + 1;
+						v14 += k + 1;
 						while (p != 0) {
 							r = (char*) strstr(msg, "*/");
 							if (r < p) {
-								fcn_0064d41a(msg, "Syntax error in file %s in line %i: Missing '/*'", p, lineNo);
+								fcn_0064d41a(msg, "Syntax error in file %s in line %i: Missing '/*'", fileName, lineNo);
 								MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
 								break;
 							}
 							if (r == 0) {
-								fcn_0064d41a(msg, "Syntax error in file %s in line %i: Missing '*/'", p, lineNo);
+								fcn_0064d41a(msg, "Syntax error in file %s in line %i: Missing '*/'", fileName, lineNo);
 								MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
 								break;
 							}
-							memcpy(p, r + 2, strlen(r + 2) + 1);
+							memmove(p, r + 2, strlen(r + 2) + 1);
 							p = (char*) strstr(msg, "/*");
 						}
 						k = (int) strlen(msg);
@@ -313,20 +312,20 @@ pass1_done:
 							return 0;
 						}
 						strncat(&txt_TextBuffer[txt_EntryCount * 0x1000], line + v10, k);
-						v10 += k;
-						v14 += k;
+						v10 += k + 1;
+						v14 += k + 1;
 					}
 					g_6b7fa4 += k;
 					v44 = 1;
-					if (line[v10 + 1] == ',') {
+					if (line[v10] == ',') {
 						do {
 							v10 += 2;
 							p = (char*) fcn_0064e790(line + v10, '"');
 							k = (int) (p - (line + v10));
 							if (k < 0) {
-								fcn_0064d41a(msg, "Syntax error in file %s in line %i", p, lineNo);
+								fcn_0064d41a(msg, "Syntax error in file %s in line %i", fileName, lineNo);
 								MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
-								v10 = (int) strlen(line) - 1;
+								v10 = (int) strlen(line);
 								break;
 							}
 							msg[0] = '|';
@@ -343,19 +342,22 @@ pass1_done:
 							v14 += k + 1;
 						} while (line[v10] == ',');
 					}
+					v10--;
+					v14--;
 					break;
 				case '(':
 					if (txt_ParseTextVariants(p, v18) == 0) {
-						fcn_0064d41a(msg, "Syntax error in file %s in line %i", p, lineNo);
+						fcn_0064d41a(msg, "Syntax error in file %s in line %i", fileName, lineNo);
 						MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
 					}
+					v10 = (int) strlen(line);
 					break;
 				case '*':
 					if (line[v10 + 1] == '/') {
 						v20--;
 					}
 					if (v20 < 0) {
-						fcn_0064d41a(msg, "txt_TextOpen(): nested comments found. in file %s in line %i", p, lineNo);
+						fcn_0064d41a(msg, "txt_TextOpen(): nested comments found. in file %s in line %i", fileName, lineNo);
 					}
 					break;
 				case '/':
@@ -365,11 +367,12 @@ pass1_done:
 							v20--;
 						}
 					}
+					v10 = (int) strlen(line);
 					break;
 				case ';':
-					strcpy(g_1053000[txt_EntryCount], (char*) (0x13350d0 + v34));
+					strcpy(g_1053000[txt_EntryCount], g_1335120[v18 - 1]);
 					strcat(g_1053000[txt_EntryCount], "+");
-					fcn_00657a73(txt_EntryCount - g_14b731c[fileIndex], u140, 10);
+					fcn_00657a73(txt_EntryCount - g_14b7320[v18 - 1], u140, 10);
 					strcat(g_1053000[txt_EntryCount], u140);
 					g_6b7fa4 = g_6b7fa4 + 1;
 					txt_EntryCount = txt_EntryCount + 1;
@@ -385,7 +388,7 @@ pass1_done:
 					continue;
 				case '_':
 					if (v44 != 0) {
-						fcn_0064d41a(msg, "Syntax error in file %s in line %i: missing ';'", line, lineNo);
+						fcn_0064d41a(msg, "Syntax error in file %s in line %i: missing ';'", inc[fileIndex], lineNo);
 						MessageBoxA((HWND) 0, msg, "txt_OpenText", 0x30);
 						m_FreeTracked(txt_TextBuffer);
 						txt_TextBuffer = 0;
@@ -393,12 +396,12 @@ pass1_done:
 						return 0;
 					}
 					g_14b7320[v18] = txt_EntryCount;
-					v3c = v10;
-					while (v3c < (int) strlen(line) && line[v3c] != 0xa && line[v3c] != 0x20 && line[v3c] != 9) {
-						v3c++;
+					endPos = v10;
+					while ((unsigned int) endPos < strlen(line) && line[endPos] != 0xa && line[endPos] != 0x20 && line[endPos] != 9) {
+						endPos++;
 					}
-					memset(&g_11cd000[v34], 0, 0x50);
-					fcn_0064d530((char*) &g_11cd000[v34], line + v10, v3c - v10);
+					memset(g_11cd000[v18], 0, 0x50);
+					fcn_0064d530(g_11cd000[v18], line + v10, endPos - v10);
 					k = 0;
 					while (k < 8) {
 						if (v14 <= starts[k]) {
@@ -411,22 +414,22 @@ pass1_done:
 						memset(rec[k], 0, 0x80);
 						starts[k] = v14;
 						starts[k + 1] = v14 + 0xa;
-						memset(&g_1335120[v34], 0, 0x50);
+						memset(g_1335120[v18], 0, 0x50);
 						if (k != 0) {
 							strcpy(rec[k], rec[k - 1]);
-							strncat(rec[k], line + v10, v3c - v10);
+							strncat(rec[k], line + v10, endPos - v10);
 							strcpy(buf250, rec[k - 1]);
 							strcat(buf250, rec[k]);
 						} else {
-							fcn_0064d530(rec[0], line + v10, v3c - v10);
+							fcn_0064d530(rec[0], line + v10, endPos - v10);
 							strcpy(buf250, rec[0]);
-							for (v3c = 1; v3c < 8; v3c++) {
-								starts[v3c] = starts[1] + (v3c - 1) * 0xa;
+							for (k = 1; k < 8; k++) {
+								starts[k] = starts[1] + (k - 1) * 0xa;
 							}
+							k = 0;
 						}
-						strcpy((char*) &g_1335120[v34], rec[k]);
+						strcpy(g_1335120[v18], rec[k]);
 						v18++;
-						v34 += 0x50;
 						if (v18 > 0x4800) {
 							fcn_0064d41a(msg, "Zuviele Label! Zeile:%i", lineNo);
 							MessageBoxA((HWND) 0, msg, "txt_OpenText", 0x30);
@@ -435,12 +438,14 @@ pass1_done:
 							fcn_0064e1fd(fp);
 							return 0;
 						}
-						v14 = v14 + (v3c - v10) - 2;
+						v14 = v14 + (endPos - v10) - 2;
 					}
+					v10 = endPos - 2;
+					v14 = v14 + (endPos - v10) - 2;
 					break;
 				case '{':
 					txt_ParseRandomText(p);
-					v14 += 4;
+					v10 = v14 + 4;
 					continue;
 				default:
 					break;
@@ -451,16 +456,19 @@ pass1_done:
 			}
 		}
 		fcn_0064e1fd(fp);
-		k = g_6b7fa4;
-		p = m_alloc(k, "txt_txt:txt_textbuffer");
+		p = m_alloc(g_6b7fa4, "txt_txt:txt_textbuffer");
 		BANK(fileIndex).text = p;
 		if (p == 0) {
 			MessageBoxA((HWND) 0, "Memory could not be allocated!", "txt_openText", 0x30);
-			goto fail_free;
+			if (txt_TextBuffer != 0) {
+				m_FreeTracked(txt_TextBuffer);
+				txt_TextBuffer = 0;
+			}
+			return 0;
 		}
-		memset(p, 0, k);
+		memset(p, 0, g_6b7fa4);
 		offset = 0;
-		for (v10 = v40; v10 < txt_EntryCount; v10++) {
+		for (v10 = startEntry; v10 < txt_EntryCount; v10++) {
 			memcpy(BANK(fileIndex).text + offset, &txt_TextBuffer[v10 * 0x1000],
 				strlen(&txt_TextBuffer[v10 * 0x1000]) + 1);
 			txt_TextEntries[v10] = BANK(fileIndex).text + offset;
@@ -476,17 +484,17 @@ pass1_done:
 			}
 		}
 		strcpy(line, g_1052e00);
-		strcat(line, p);
+		strcat(line, fileName);
 		q = (char*) fcn_0064d1a0(line, '.');
 		if (q != 0) {
 			*q = 0;
 		}
-		strcpy(BANK(fileIndex).name, p);
+		strcpy(BANK(fileIndex).name, fileName);
 		q = (char*) fcn_0064d1a0(BANK(fileIndex).name, '.');
 		if (q != 0) {
 			*q = 0;
 		}
-		BANK(fileIndex).first = v40;
+		BANK(fileIndex).first = startEntry;
 		BANK(fileIndex).count = txt_EntryCount - 1;
 		strcat(line, ".res");
 		fp = (FILE*) fcn_0064e2f9(line, "wb");
@@ -497,26 +505,26 @@ pass1_done:
 			return 0;
 		}
 		fcn_0064e48f(fp, 0, 0);
-		v10 = txt_EntryCount - v40;
+		v10 = txt_EntryCount - startEntry;
 		fcn_0064ed28(&v10, 4, 1, fp);
 		fcn_0064ed28(&BANK(fileIndex).first, 4, 1, fp);
 		fcn_0064ed28(&BANK(fileIndex).count, 4, 1, fp);
-		for (v10 = v40; v10 < txt_EntryCount; v10++) {
+		for (v10 = startEntry; v10 < txt_EntryCount; v10++) {
 			k = (int) (txt_TextEntries[v10] - BANK(fileIndex).text);
 			fcn_0064ed28(&k, 4, 1, fp);
 		}
-		for (v10 = v40; v10 < txt_EntryCount; v10++) {
+		for (v10 = startEntry; v10 < txt_EntryCount; v10++) {
 			fcn_0064ed28(g_1053000[v10], 0x50, 1, fp);
 		}
-		for (v10 = v40; v10 < txt_EntryCount; v10++) {
+		for (v10 = startEntry; v10 < txt_EntryCount; v10++) {
 			fcn_0064ed28(&g_11bb000[v10], 1, 1, fp);
 		}
 		fcn_0064ed28(&g_6b7fa4, 4, 1, fp);
 		fcn_0064ed28(BANK(fileIndex).text, g_6b7fa4, 1, fp);
 		fcn_0064e1fd(fp);
 		g_6b7fa4 = 0;
-		fcn_0064d41a(msg, "txt_OpenText(): %s compiled!", p);
-		v40 = txt_EntryCount;
+		fcn_0064d41a(msg, "txt_OpenText(): %s compiled!", fileName);
+		startEntry = txt_EntryCount;
 	}
 
 	/* Pass 3: write the C header for the compiled resources. */

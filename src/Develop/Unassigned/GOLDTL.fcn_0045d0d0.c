@@ -43,8 +43,8 @@ int* __cdecl fcn_0045d0d0(char* a0, int a1, int a2, int a3, int a4, unsigned cha
 	strncpy((char*) p, a0, 0x3f);
 	p[0x19] = a1;
 	p[0x1a] = a1;
-	p[0x16] = a4;
 	p[0x11] = (a1 * a1 - 1) | (a1 - 1);
+	p[0x16] = a4;
 	p[0x13] = 0;
 	p[0x14] = 0;
 	g = a4 >> 8 & 0xff;

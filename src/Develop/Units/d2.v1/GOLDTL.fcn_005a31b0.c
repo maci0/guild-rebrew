@@ -55,7 +55,6 @@ void __cdecl fcn_005a31b0(char* building)
 	k = -1;
 	if (fcn_005373e0((void*) fcn_005a31b0, 0x677c7)) {
 		do {
-			n = 0;
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
@@ -75,11 +74,10 @@ void __cdecl fcn_005a31b0(char* building)
 				io_AppendText((char*) 0x1a11);
 				d2_SetForm(idx, 5);
 				io_AppendText((char*) 0x1a14, *(int*) (building + 0x65) * 0x2f4 + g_868060, g_85ab80[*(int*) (building + 0x65)].unk_00);
-				win = *(int*) (idx * 700 + 0x103814c) * 0x3cc;
-				windowData = g_1015f40 + win;
+				windowData = g_1015f40 + *(int*) (idx * 700 + 0x103814c) * 0x3cc;
 				sprintf(name, "Wappen128_ns_Stadt_%s", (char*) (*(int*) (building + 0x65) * 0x2f4 + (int) g_868060));
-				d2_SetBackgroundTexture(name, *(int*) (win + 0x1015f40));
-				*(int*) (win + 0x10162e4) = 0;
+				d2_SetBackgroundTexture(name, *(int*) windowData);
+				*(int*) (windowData + 0x3a4) = 0;
 				flag = g_6b7fac;
 				slot = fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x1db, 6);
 				if (slot == 0) {
@@ -89,6 +87,7 @@ void __cdecl fcn_005a31b0(char* building)
 				if (win2 == 0) {
 					return;
 				}
+				n = 0;
 				d2_SetForm(idx, 3);
 				io_AppendText((char*) 0x1a12);
 				it = (unsigned short*) fcn_00502cd0(*(int*) (slot + 0x14), 1, 5);
@@ -114,7 +113,7 @@ void __cdecl fcn_005a31b0(char* building)
 				}
 				k = 1;
 			}
-			dt = (double) ((unsigned int)g_6b7fac - flag) * *(double*) 0x665fa8;
+			dt = (double) ((unsigned int)g_6b7fac - flag) * (1.0 / 650.0);
 			if (!(dt < g_665ed0)) {
 				dt = g_665ed0;
 			}

@@ -1,15 +1,18 @@
 #include "client_dialog_helpers.h"
 
+int __cdecl abs(int);
 int __cdecl ai_SelectBestMethod(int, int, int, Cmd*, Cmd*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_RandomMod(unsigned short);
-double __cdecl gm_RandomFloat01(void);
+float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_WalkEntityChain(unsigned short);
 float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004a5340(unsigned short*, unsigned int, unsigned int*, float, float, unsigned short*);
 int __cdecl fcn_004e9310(int, int, unsigned char**);
 extern char* g_77261c;
+extern float g_662910;
+extern double g_662aa0;
 
 /* ADDRESS: GOLDTL 0x00496810 */
 int __cdecl fcn_00496810(int targetSlot, short* ent, int mode, Cmd* out1, Cmd* out2, int extra)
@@ -18,13 +21,11 @@ int __cdecl fcn_00496810(int targetSlot, short* ent, int mode, Cmd* out1, Cmd* o
     Cmd c2;
     unsigned char* list[6];
     unsigned char* e;
-    unsigned int magnitude;
     int strength;
     int count;
     int best;
     int i;
     int r;
-    int sum;
     int lower;
     int upper;
     int chosen;
@@ -62,10 +63,10 @@ int __cdecl fcn_00496810(int targetSlot, short* ent, int mode, Cmd* out1, Cmd* o
     strength = (int)((float)fcn_0050d320(ent, g_773d75) * 0.33f);
     if (out1->kind == 0) {
         if (*((unsigned char*)ent + 0x168) != 0) {
-            count = fcn_004e9310(*((unsigned char*)ent + 0x168), 6, list);
-            if (count <= 0) return 0;
             best = -1;
             best_value = 100.0f;
+            count = fcn_004e9310(*((unsigned char*)ent + 0x168), 6, list);
+            if (count <= 0) return 0;
             for (i = 0; i < count; i++) {
                 if (list[i] != (unsigned char*)g_77261c) {
                     value = fcn_0050f980(*(unsigned short*)ent, *(unsigned short*)list[i], 1);
@@ -80,22 +81,15 @@ int __cdecl fcn_00496810(int targetSlot, short* ent, int mode, Cmd* out1, Cmd* o
         } else {
             if ((*(unsigned int*)((char*)ent + 0x1cc) & 0x1c000) != 0) return 0;
             mode = 0x10000500;
-            i = (unsigned short)gm_RandomMod(0x19);
-            if (fcn_004a5340((unsigned short*)ent, 1, (unsigned int*)&mode, 0.0f, (float)i + 10.0, (unsigned short*)&targetSlot) == 0) return 0;
+            if (fcn_004a5340((unsigned short*)ent, 1, (unsigned int*)&mode, 0.0f, (float)(unsigned short)gm_RandomMod(0x19) + g_662aa0, (unsigned short*)&targetSlot) == 0) return 0;
             e = (unsigned char*)0x7f4ca0 + *(unsigned short*)&targetSlot * 0x21c;
         }
         if (e == 0) return 0;
         out1->kind = 7;
         out1->f1 = *(int*)(e + 4);
         out1->f2 = 1;
-        sum = gm_WalkEntityChain(*(unsigned short*)ent);
-        sum += gm_WalkEntityChain(*(unsigned short*)e);
-        magnitude = (sum ^ (sum >> 31)) - (sum >> 31);
-        if ((float)(int)magnitude * 0.0007843137f > 1600.0f) {
-            sum = gm_WalkEntityChain(*(unsigned short*)ent);
-            sum += gm_WalkEntityChain(*(unsigned short*)e);
-            magnitude = (sum ^ (sum >> 31)) - (sum >> 31);
-            value = (float)(int)magnitude * 0.0007843137f;
+        if ((float)abs(gm_WalkEntityChain(*(unsigned short*)ent) + gm_WalkEntityChain(*(unsigned short*)e)) * 0.0007843137f > 1600.0f) {
+            value = (float)abs(gm_WalkEntityChain(*(unsigned short*)ent) + gm_WalkEntityChain(*(unsigned short*)e)) * 0.0007843137f;
         } else {
             value = 1600.0f;
         }
@@ -107,16 +101,13 @@ int __cdecl fcn_00496810(int targetSlot, short* ent, int mode, Cmd* out1, Cmd* o
         out2->f1 = 0;
         chosen = (int)(gm_RandomFloat01() * (upper - lower) + lower);
         out2->f2 = chosen;
-        value = (float)(unsigned int)chosen * 500.0f;
-        sum = gm_WalkEntityChain(*(unsigned short*)ent);
-        sum += gm_WalkEntityChain(*(unsigned short*)e);
-        out2->f4 = (int)(value / (float)sum);
+        out2->f4 = (int)((float)(unsigned int)chosen * 500.0f / (float)(gm_WalkEntityChain(*(unsigned short*)ent) + gm_WalkEntityChain(*(unsigned short*)e)));
         return 9;
     }
     if (out1->kind != 7) return 0;
     e = gm_LookupEntityRecordById(out1->f1);
     if (e == 0 || e == (unsigned char*)g_77261c) return 0;
-    value = (float)strength * 0.01f;
+    value = (float)strength * g_662910;
     if (!(value > 3200.0f)) value = 3200.0f;
     lower = (int)value;
     value = (float)strength * 0.15f;
@@ -125,15 +116,13 @@ int __cdecl fcn_00496810(int targetSlot, short* ent, int mode, Cmd* out1, Cmd* o
     out2->f1 = 0;
     chosen = (int)(gm_RandomFloat01() * ((int)value - lower) + lower);
     out2->f2 = chosen;
-    value = (float)(unsigned int)chosen * 500.0f;
-    sum = gm_WalkEntityChain(*(unsigned short*)ent);
-    sum += gm_WalkEntityChain(*(unsigned short*)e);
-    out2->f4 = (int)(value / (float)sum);
+    out2->f4 = (int)((float)(unsigned int)chosen * 500.0f / (float)(gm_WalkEntityChain(*(unsigned short*)ent) + gm_WalkEntityChain(*(unsigned short*)e)));
     return 9;
 
 sent:
-    if (r == 0) return 0;
-    *out1 = c1;
-    *out2 = c2;
+    if (r != 0) {
+        *out1 = c1;
+        *out2 = c2;
+    }
     return r;
 }

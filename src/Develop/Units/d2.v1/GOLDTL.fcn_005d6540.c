@@ -123,7 +123,11 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 	g_100f1dc = -1;
 	do {
 		if (keep) {
-			fcn_00472640(box, (fcn_00471f80(ctl) - add != rec[6]) && box != -1);
+			if (fcn_00471f80(ctl) - add != rec[6] && box != -1) {
+				fcn_00472640(box, 1);
+			} else {
+				fcn_00472640(box, 0);
+			}
 		}
 		if (g_14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;

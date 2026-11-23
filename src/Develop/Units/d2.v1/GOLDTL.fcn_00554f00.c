@@ -101,11 +101,7 @@ void __cdecl fcn_00554f00(char* obj)
 state_zero:
 
 	if (*(char**) (obj + 0x74) == 0) {
-		if (p == rec) {
-			fcn_00545670(obj, 0, 0, g_6a5e78, 0x5fd);
-		} else {
-			fcn_00545670(obj, 0, 0, g_6a5e60, 0x5fe);
-		}
+		fcn_00545670(obj, 0, 0, (p == rec) ? g_6a5e78 : g_6a5e60, (p == rec) ? 0x5fd : 0x5fe);
 	}
 
 	if (*(char**) (obj + 0x74) == 0) {
@@ -137,7 +133,7 @@ state_zero:
 	if (c == 2) {
 		fcn_004c30a0(-7, 0, g_6a5e40, 0, 0x64);
 		fcn_004c30a0(-8, 0, g_6a5e24, 0, 0xfa);
-		fcn_004c30a0(-8, 0, (*(char*) (p + 9) != 0) ? g_6a5e00 : g_6a5e10, (int) c, 0x64);
+		fcn_004c30a0(-8, 0, (*(char*) (p + 9) == 0) ? g_6a5e10 : g_6a5e00, (int) c, 0x64);
 		fcn_004c30a0(-7, 0, g_67d908, -1, 0);
 		goto tail;
 	}
@@ -151,13 +147,13 @@ state_zero:
 	fcn_004c30a0(-7, 0, s, 0, 0x64);
 	if (c < 7) {
 		fcn_004c30a0(-8, 0, g_6a5dcc, 0, 0xfa);
-		fcn_004c30a0(-8, 0, (*(char*) (p + 9) != 0) ? g_6a5e00 : g_6a5e10, (int) c, 0x64);
+		fcn_004c30a0(-8, 0, (*(char*) (p + 9) == 0) ? g_6a5e10 : g_6a5e00, (int) c, 0x64);
 	} else if (c == 7) {
 		fcn_004c30a0(-7, 0, g_6a5da8, -1, 0x64);
 	} else if (c == 8) {
-		fcn_004c30a0(-7, 0, "_VERLEIHUNG_TITEL_ERHALTEN_HS_03", -1, 0x64);
+		fcn_004c30a0(-7, 0, (char*) 0x6a5d84, -1, 0x64);
 	} else if (c == 9) {
-		fcn_004c30a0(-7, 0, "_VERLEIHUNG_TITEL_ERHALTEN_HS_04", -1, 0x64);
+		fcn_004c30a0(-7, 0, (char*) 0x6a5d60, -1, 0x64);
 	}
 	fcn_004c30a0(-7, 0, g_67d908, -1, 0);
 	goto tail;
@@ -181,7 +177,7 @@ state_zero:
 		fcn_004c30a0(-8, 0, g_6a5d3c, 0, 0x64);
 	} else if (c < 7) {
 		fcn_004c30a0(-8, 0, g_6a5d20, 0, 0x64);
-		fcn_004c30a0(-8, 0, (*(char*) (p + 9) != 0) ? g_6a5e00 : g_6a5e10, (int) c, 0x64);
+		fcn_004c30a0(-8, 0, (*(char*) (p + 9) == 0) ? g_6a5e10 : g_6a5e00, (int) c, 0x64);
 	} else if (c == 7) {
 		fcn_004c30a0(-7, 0, g_6a5d04, -1, 0x64);
 	} else if (c == 8) {

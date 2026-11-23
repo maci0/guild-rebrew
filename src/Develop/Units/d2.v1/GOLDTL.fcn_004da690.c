@@ -1,3 +1,4 @@
+extern unsigned short g_774970;
 /* Council session controller, native frame layout by slot. */
 #include <stddef.h>
 
@@ -204,7 +205,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
 
     fcn_005358e0(0x6b5c60);
     if (fcn_004ea130(s20) == 0) {
-        unsigned short v = *(unsigned short *)0x774970;
+        unsigned short v = g_774970;
         if (*(int *)((char *)a0 + 0xc) == *(int *)(0x7f4ca4 + (unsigned int)v * 0x21c)) {
             fcn_004e99e0(s20, s28, (char *)&mid[0x38]);
         }
@@ -432,7 +433,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                   *(unsigned short *)s10);
                     fcn_004e4de0(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
-                                          (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
+                                          (unsigned int)g_774970 * 0x21c)) {
                         jc = 0x9b0e30;
                         n = s0C;
                         do {
@@ -458,7 +459,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                   *(unsigned short *)s10, *(unsigned short *)s10);
                     fcn_004e4de0(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
-                                          (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
+                                          (unsigned int)g_774970 * 0x21c)) {
                         if (s0C > 0) {
                             n = s0C;
                             jc = 0x9b0e30;
@@ -636,7 +637,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     io_AppendText((char *)0x12e0, *(unsigned short *)s5C,
                                   *(unsigned char *)s00 + 0x253);
                     fcn_004e4de0(0xfa0);
-                    if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
+                    if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)g_774970 * 0x21c)) {
                         fcn_004e8240(*(unsigned char *)(s00 - 8), 0, 0, rs20, 0xff);
                         s5C = 0;
                         if (fcn_004c4450(s5C) == 0) {
@@ -659,7 +660,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     io_AppendText((char *)0x12e2, *(unsigned short *)s58);
                     fcn_004e4de0(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
-                                          (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
+                                          (unsigned int)g_774970 * 0x21c)) {
                         s70 = fcn_004e8240(*(unsigned char *)(s00 - 8), 0, (unsigned char *)s58, 1, 0xff);
                         if (fcn_004c4450(s70) == 0) {
                             do {
@@ -743,7 +744,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                           *(unsigned char *)s00 + 0x253);
                             fcn_004e4de0(0xfa0);
                             if (a0[3] == *(int *)(0x7f4ca4 +
-                                                  (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
+                                                  (unsigned int)g_774970 * 0x21c)) {
                                 s78 = fcn_004e8240(*(unsigned char *)(s00 - 8), 0,
                                                    (unsigned char *)blkA.sel[s6C], 1, 0xff);
                                 if (fcn_004c4450(s78) == 0) {
@@ -778,7 +779,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                           *(unsigned short *)blkA.sel[s6C]);
                             fcn_004e4de0(0xfa0);
                             if (a0[3] == *(int *)(0x7f4ca4 +
-                                                  (unsigned int)*(unsigned short *)0x774970 * 0x21c)) {
+                                                  (unsigned int)g_774970 * 0x21c)) {
                                 s78 = fcn_004e8240(*(unsigned char *)(s00 - 8), 0,
                                                    (unsigned char *)blkA.sel[s6C], 1, 0xff);
                                 if (fcn_004c4450(s78) == 0) {
@@ -814,7 +815,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     s30 += 1;
     } while (s30 < 6);
     /* native 0x4dc199..0x4dc221: epilogue */
-    if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)*(unsigned short *)0x774970 * 0x21c))
+    if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)g_774970 * 0x21c))
         fcn_004ea350();
     fcn_004e4b00(s34);
     fcn_004e4b00(s38);

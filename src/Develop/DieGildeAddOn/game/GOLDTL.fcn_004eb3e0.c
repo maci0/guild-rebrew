@@ -118,18 +118,18 @@ found:
 	if (n == 0)
 		return 0;
 	gm_GenerateShuffledIndices(n, pick);
-	if (n != 1) {
-		secondId = (unsigned int) ids[pick[1]];
+	if (n == 1) {
 		v20 = (unsigned int) ids[pick[0]];
 	} else {
 		v20 = (unsigned int) ids[pick[0]];
+		secondId = (unsigned int) ids[pick[1]];
 	}
 	t = gm_GetEntitySkill(self, 2);
 	if (packet[2] == 1) {
-		scale = (gm_RandomFloat01() + g_6628a0) * t * g_6628d8 + *(float*) 0x664198;
+		scale = (float) (gm_RandomFloat01() + g_6628a0) * t * 0.4f + *(float*) 0x664198;
 	} else {
 		scale = *(double*) 0x6629c8 -
-			((gm_RandomFloat01() + g_6628a0) * t * g_66414c + *(double*) 0x6628f0);
+			((float) (gm_RandomFloat01() + g_6628a0) * t * 0.3f + *(double*) 0x6628f0);
 	}
 
 	e = gm_FindSlotById(g_773d75, v20);
