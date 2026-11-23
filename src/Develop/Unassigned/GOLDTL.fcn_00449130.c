@@ -55,13 +55,12 @@ int __cdecl fcn_00449130(void)
 	float v19;
 	float v20;
 	float v21;
-	double d;
+	float scale0;
+	float scale1;
 	float motion[3];
 	char v7[12];
-	float scale[2];
 	float rotate[3];
 	char v8[16];
-	char v3;
 
 	v14 = 0;
 	v15 = 0;
@@ -113,8 +112,8 @@ int __cdecl fcn_00449130(void)
 		v20 = (float) dy / g_14ce864 * g_6628fc;
 	}
 	if (g_14ce8ec != 0) {
-		g_6b85ac = (int) g_14cf902;
 		g_6b85a8 = (int) g_14cf900;
+		g_6b85ac = (int) g_14cf902;
 	}
 	else if (g_14ce8e4 != 0) {
 		if (g_6772c4 != 0) {
@@ -135,23 +134,22 @@ int __cdecl fcn_00449130(void)
 		else {
 			dy = 0;
 		}
-		v21 = (float) dx / (float) (unsigned int) g_14ce860;
-		v19 = (float) dy / (float) (unsigned int) g_14ce864;
-		d = (double) (unsigned int) g_14ce860;
-		scale[0] = (float) d
-			/ (((float) fabs((float) dx) + g_6629c8)
-			* g_66293c);
-		if (scale[0] > g_6628b0)
-			scale[0] = g_6628b0;
-		scale[1] = ((float) fabs((float) dy) + g_6629c8)
-			* g_66293c
-			/ (float) (unsigned int) g_14ce864;
-		if (scale[1] > g_6628b0)
-			scale[1] = g_6628b0;
-		v21 = v21 * scale[0] * *(float*) 0x662d00;
-		v19 = v19 * scale[1] * *(float*) 0x662cfc;
 		g_6b85ac = (int) g_14cf902;
 		g_6b85a8 = (int) g_14cf900;
+		v21 = (float) ((float) dx / (unsigned int) g_14ce860);
+		v19 = (float) dy / (float) (unsigned int) g_14ce864;
+		scale0 = (float) ((unsigned int) g_14ce860
+			/ (((float) fabs((float) dx) + g_6629c8)
+			* g_66293c));
+		if (g_6628b0 < scale0)
+			scale0 = g_6628b0;
+		scale1 = (float) (((float) fabs((float) dy) + g_6629c8)
+			* g_66293c
+			/ (float) (unsigned int) g_14ce864);
+		if (g_6628b0 < scale1)
+			scale1 = g_6628b0;
+		v21 = v21 * scale0 * *(float*) 0x662d00;
+		v19 = v19 * scale1 * *(float*) 0x662cfc;
 	}
 	if (g_14ce8e4 == 0 && g_14ce8d0 == 0 && g_6772c4 == 0) {
 		g_6772c4 = 1;
@@ -173,17 +171,21 @@ int __cdecl fcn_00449130(void)
 		goto label_4495a3;
 	}
 	if (v2 != 0 || v1 != 0) {
-		motion[1] = v18;
-		rotate[1] = v19;
+		motion[2] = v18;
 	}
 	else {
 		motion[0] = v20;
 		motion[1] = v18;
+	}
+	if (v2 != 0 || v1 != 0) {
+		rotate[2] = v19;
+	}
+	else {
 		rotate[0] = v21;
 		rotate[1] = (float) ((unsigned char) g_14cf70f * 0x28) + v19;
 	}
 	if (v14 != 0 || v15 != 0) {
-		v3 = fcn_00448cc0(g_1041d0c, rotate, motion, d3_ActiveCamera, v8, v7);
+		char v3 = fcn_00448cc0(g_1041d0c, rotate, motion, d3_ActiveCamera, v8, v7);
 		v15 = (char) ((unsigned char) v3 >> 1);
 		v14 = v3 & 1;
 		if (v14 != 0)

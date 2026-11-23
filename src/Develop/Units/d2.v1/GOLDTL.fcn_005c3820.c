@@ -72,33 +72,31 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 	}
 	step = (int) (10.0f / count * 24.0f);
 	height = (*(int*) (g_77255c + 0x10) - step * count) / 2 + 0xe;
-	if (entry != 0) {
-		for (i = 0; table[i] != 0; i++) {
-			if (fcn_0050c7d0(building[0], table[i]) != 0) {
-				label = fcn_0046f740(0, height, 2, d2_CurrentWindowId);
-				wins[i] = label;
-				((D2_CONTROL_TL*) (g_1015ea0))[label].flags_1d0 = 3;
-				((D2_CONTROL_TL*) (g_1015ea0))[label].font = 0x55;
-				io_FormatTextBuffer(buf, "%s:", *(unsigned int*) (table[i] * 8 + 0x14a9180));
-				fcn_0046f9b0(label, buf);
-				((D2_CONTROL_TL*) (g_1015ea0))[label].value_05c = 1;
-				if (table[i] == 3) {
-					type = 6;
-				}
-				else if (table[i] == 0x24) {
-					type = 4;
-				}
-				else {
-					type = fcn_0050c7d0(building[0], table[i]);
-				}
-				gauge = fcn_004677e0(0x140, height, 0x82, 0, type, 0x6f, 0x56, d2_CurrentWindowId);
-				elems[i] = gauge;
-				d2_SetElementValue(gauge, 0, type, 0, 0);
-				height += step;
+	for (i = 0; table[i] != 0; i++) {
+		if (fcn_0050c7d0(building[0], table[i]) != 0) {
+			label = fcn_0046f740(0, height, 2, d2_CurrentWindowId);
+			wins[i] = label;
+			((D2_CONTROL_TL*) (g_1015ea0))[label].flags_1d0 = 3;
+			((D2_CONTROL_TL*) (g_1015ea0))[label].font = 0x55;
+			io_FormatTextBuffer(buf, "%s:", *(unsigned int*) (table[i] * 8 + 0x14a9180));
+			fcn_0046f9b0(label, buf);
+			((D2_CONTROL_TL*) (g_1015ea0))[label].value_05c = 1;
+			if (table[i] == 3) {
+				type = 6;
+			}
+			else if (table[i] == 0x24) {
+				type = 4;
 			}
 			else {
-				wins[i] = -1;
+				type = fcn_0050c7d0(building[0], table[i]);
 			}
+			gauge = fcn_004677e0(0x140, height, 0x82, 0, type, 0x6f, 0x56, d2_CurrentWindowId);
+			elems[i] = gauge;
+			d2_SetElementValue(gauge, 0, type, 0, 0);
+			height += step;
+		}
+		else {
+			wins[i] = -1;
 		}
 	}
 	g_100f1dc = -1;
@@ -107,13 +105,10 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 		if ((a1[0x5b] & 4) != 0 || found == 0) {
 			g_774654 = 1;
 		}
-		if (g_14ce8e0 != 0) {
+		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && elem == d2_CurrentElementId)) {
 			g_774654 = 1;
 		}
-		else if (g_100f1dc != -1 && elem == d2_CurrentElementId) {
-			g_774654 = 1;
-		}
-		if (g_100f1dc != -1 && entry != 0) {
+		if (g_100f1dc != -1) {
 			for (i = 0; table[i] != 0; i++) {
 				if (wins[i] != -1 && d2_CurrentElementId == wins[i]) {
 					io_FormatTextBuffer(buf, "$Z$[%s$]$N%s", table[i] * 2 + 0xf98,
@@ -124,23 +119,25 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 				}
 			}
 		}
-		if (entry != 0) {
-			for (i = 0; table[i] != 0; i++) {
-				if (fcn_0050c7d0(building[0], table[i]) != 0 && elems[i] != -1) {
-					if (table[i] == 3) {
-						type = 6;
-					}
-					else if (table[i] == 0x24) {
-						type = 4;
-					}
-					else {
-						type = fcn_0050c7d0(building[0], table[i]);
-					}
-					fcn_0050c710((unsigned char*) building, table[i], 0);
-					d2_SetElementValue(elems[i], 0, type,
-					    fcn_0050c710((unsigned char*) building, table[i], 1),
-					    fcn_0050c710((unsigned char*) building, table[i], 0));
+		for (i = 0; table[i] != 0; i++) {
+			if (fcn_0050c7d0(building[0], table[i]) != 0 && elems[i] != -1) {
+				if (table[i] == 3) {
+					type = 6;
 				}
+				else if (table[i] == 0x24) {
+					type = 4;
+				}
+				else {
+					type = fcn_0050c7d0(building[0], table[i]);
+				}
+					{
+						int v0;
+						int v1;
+						fcn_0050c710((unsigned char*) building, table[i], 0);
+						v0 = fcn_0050c710((unsigned char*) building, table[i], 0);
+						v1 = fcn_0050c710((unsigned char*) building, table[i], 1);
+						d2_SetElementValue(elems[i], 0, type, v1, v0);
+					}
 			}
 		}
 		if (fcn_005373e0((void*) d2_ShowTechTreeEffects, 0x677c7) == 0) {

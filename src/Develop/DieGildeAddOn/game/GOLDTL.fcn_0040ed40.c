@@ -44,11 +44,12 @@ int __cdecl AttachAnim(char** character, char** animation, int* kind)
 		}
 		memset(&options, 0, sizeof(options));
 		*(int*) &options = 0;
-		options.layer = (unsigned char) (0x10 | ((*kind == 0) ? 0x08 : 0));
+		options.layer = (unsigned char) ((*kind == 0) ? 0x08 : 0);
 		options.queue = 1;
+		options.layer |= 0x10;
 		options.mode = 0;
-		options.loop = 1;
 		options.reverse = 0;
+		options.loop = 1;
 		d3_AttachAnimationToContext(*(char**) (object + 0x1cc), name, options);
 	}
 	if (*(int*) (evt_CurrentScript + 0xc84) == 1) {

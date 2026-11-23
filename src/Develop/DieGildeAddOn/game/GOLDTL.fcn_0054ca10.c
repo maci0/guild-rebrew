@@ -89,77 +89,77 @@ void __cdecl fcn_0054ca10(char* e)
 		if (v == -0x400 || v == -0x401 || v == -0x402) {
 			goto Lneg;
 		}
-		if (v != -0x403) {
-			if (v == 0) {
-				if (a[2] == 6) {
-					pa = gm_LookupEntityRecordById(*(int*) (b + 0x60));
-					if (pa != 0 && pa[8] > 0 && b[2] != 5) {
-						io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) pa, *(unsigned short*) a);
-						io_FormatTextBuffer(line + strlen(line), 0x1cec);
-						io_FormatTextBuffer(line + strlen(line), 0x1cf2, *(unsigned short*) b);
-						io_FormatTextBuffer(line + strlen(line), 0x1ced);
-						io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) pa);
-					} else {
-						io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) b, *(unsigned short*) a);
-						io_FormatTextBuffer(line + strlen(line), 0x1cec);
-						io_FormatTextBuffer(line + strlen(line), 0x1cf1);
-						io_FormatTextBuffer(line + strlen(line), 0x1ced);
-						io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) b);
-					}
-					fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
-				}
-				*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-				goto Lsend;
+		if (v == -0x403) {
+			if (a[2] != 6) {
+				goto Lneg;
 			}
-			if (v == 1) {
-				e[0xb9] = (char) fcn_005d2a40(*(int*) (e + 0xac), *(int*) (e + 0xb0));
-				e[0xb8] = e[0xb8] + 1;
+			pa = gm_LookupEntityRecordById(*(int*) (b + 0x60));
+			pb = gm_LookupEntityRecordById(*(int*) (b + 0x5c));
+			if (pa != 0 && pa[8] > 0 && b[2] != 5) {
+				io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) pa, *(unsigned short*) a);
+				io_FormatTextBuffer(line + strlen(line), 0x1cee);
+				io_FormatTextBuffer(line + strlen(line), 0x1cf2, *(unsigned short*) b);
+				io_FormatTextBuffer(line + strlen(line), 0x1cef, *(unsigned short*) pb);
+				io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) pa);
+			} else {
+				io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) b, *(unsigned short*) a);
+				io_FormatTextBuffer(line + strlen(line), 0x1cee);
+				io_FormatTextBuffer(line + strlen(line), 0x1cf1);
+				io_FormatTextBuffer(line + strlen(line), 0x1cef, *(unsigned short*) pb);
+				io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) b);
 			}
-			if (e[0xb8] >= e[0xb9]) {
-				*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-				fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
-				*(int*) (e + 0x84) = fcn_004c5620(1, e);
-				return;
-			}
-			if (a[2] == 6) {
-				io_FormatTextBuffer(line, 0x1cf3);
-				io_FormatTextBuffer(line + strlen(line), 0x1cf4, *(unsigned short*) b, 0x5d,
-				    (int) e[0xb9] - (int) e[0xb8], 0x5d);
-				fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 0, 0x5f4, 0);
-			} else if (a[2] == 5) {
-				e[0xb8] = e[0xb8] + (char) gm_RandomMod(2) + 1;
-			} else if (gm_RandomMod(4) == 0) {
-				e[0xb8] = e[0xb8] + 1;
-			}
-			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0x18, 0, 0);
-			*(unsigned short*) (e + 0x56) = 8;
-			e[0xba] = 1;
-			fcn_0054c720(e, a, b);
-			*(int*) (e + 0x84) = -1;
-			fcn_004c5620(0, e);
-			return;
-		}
-		if (a[2] != 6) {
+			fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
 			goto Lneg;
 		}
-		pa = gm_LookupEntityRecordById(*(int*) (b + 0x60));
-		pb = gm_LookupEntityRecordById(*(int*) (b + 0x5c));
-		if (pa != 0 && pa[8] > 0 && b[2] != 5) {
-			io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) pa, *(unsigned short*) a);
-			io_FormatTextBuffer(line + strlen(line), 0x1cee);
-			io_FormatTextBuffer(line + strlen(line), 0x1cf2, *(unsigned short*) b);
-			io_FormatTextBuffer(line + strlen(line), 0x1cef, *(unsigned short*) pb);
-			io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) pa);
-		} else {
-			io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) b, *(unsigned short*) a);
-			io_FormatTextBuffer(line + strlen(line), 0x1cee);
-			io_FormatTextBuffer(line + strlen(line), 0x1cf1);
-			io_FormatTextBuffer(line + strlen(line), 0x1cef, *(unsigned short*) pb);
-			io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) b);
+		if (v == 0) {
+			if (a[2] == 6) {
+				pa = gm_LookupEntityRecordById(*(int*) (b + 0x60));
+				if (pa != 0 && pa[8] > 0 && b[2] != 5) {
+					io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) pa, *(unsigned short*) a);
+					io_FormatTextBuffer(line + strlen(line), 0x1cec);
+					io_FormatTextBuffer(line + strlen(line), 0x1cf2, *(unsigned short*) b);
+					io_FormatTextBuffer(line + strlen(line), 0x1ced);
+					io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) pa);
+				} else {
+					io_FormatTextBuffer(line, 0x1ceb, *(unsigned short*) b, *(unsigned short*) a);
+					io_FormatTextBuffer(line + strlen(line), 0x1cec);
+					io_FormatTextBuffer(line + strlen(line), 0x1cf1);
+					io_FormatTextBuffer(line + strlen(line), 0x1ced);
+					io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) b);
+				}
+				fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
+			}
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
+			goto Lsend;
 		}
-		fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
-		goto Lneg;
+		if (v == 1) {
+			e[0xb9] = (char) fcn_005d2a40(*(int*) (e + 0xac), *(int*) (e + 0xb0));
+			e[0xb8] = e[0xb8] + 1;
+		}
+		if (e[0xb8] >= e[0xb9]) {
+			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
+			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
+			*(int*) (e + 0x84) = fcn_004c5620(1, e);
+			return;
+		}
+		if (a[2] == 6) {
+			io_FormatTextBuffer(line, 0x1cf3);
+			io_FormatTextBuffer(line + strlen(line), 0x1cf4, *(unsigned short*) b, 0x5d,
+			    (int) e[0xb9] - (int) e[0xb8], 0x5d);
+			fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 0, 0x5f4, 0);
+		} else if (a[2] == 5) {
+			e[0xb8] = e[0xb8] + (char) gm_RandomMod(2) + 1;
+		} else if (gm_RandomMod(4) == 0) {
+			e[0xb8] = e[0xb8] + 1;
+		}
+		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
+		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0x18, 0, 0);
+		*(unsigned short*) (e + 0x56) = 8;
+		e[0xba] = 1;
+		fcn_0054c720(e, a, b);
+		*(int*) (e + 0x84) = -1;
+		fcn_004c5620(0, e);
+		return;
 	case 1:
 		fcn_004c4eb0(g_6a5a48);
 		fcn_004c4510(b, *(int*) (b + 4));

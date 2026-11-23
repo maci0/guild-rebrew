@@ -24,10 +24,16 @@ void __cdecl fcn_0054f4a0(char* a0, char* firstEntity, unsigned char* secondEnti
 	Row_54f4a0 slot;
 	char buf[0x400];
 	int ret;
+	int textId;
 
 	ret = 0;
 	if (firstEntity[2] == 6 || firstEntity[2] == 7) {
-		io_FormatTextBuffer(buf, 0x1d81, *(unsigned short*) secondEntity, *(unsigned short*) secondEntity, (secondEntity[9] != 0) + 0x1d68);
+		if (secondEntity[9] != 0) {
+			textId = 0x1d69;
+		} else {
+			textId = 0x1d68;
+		}
+		io_FormatTextBuffer(buf, 0x1d81, *(unsigned short*) secondEntity, *(unsigned short*) secondEntity, textId);
 		fcn_00545d40(*(int*) (firstEntity + 4), *(int*) (firstEntity + 4), buf, 0, 0x5fb, 0);
 		fcn_004c5420(*(int*) (firstEntity + 4), 0x1c8, 4, 0, 0x400);
 		fcn_004c5420(*(int*) (secondEntity + 4), 0x1c8, 4, 0, 0x400);

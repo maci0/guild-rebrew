@@ -1,10 +1,12 @@
 #include <string.h>
 #include "client_types.h"
-extern pos14_7f4c00 gm_GameTime; extern char g_7f4ca0[];
+extern pos14_7f4c00 gm_GameTime; extern char g_7f4ca4[];
 extern int g_100f1dc, d2_CurrentElementId, g_14ce8e0, g_774654;
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_CurrentWindowId;
+extern s_1015f4c g_1015f4c[];
+extern int g_14a79c0[];
 
 typedef struct Req_59ecc0 {
 	int f00;                    /* 0x00 */
@@ -105,19 +107,17 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 	fcn_00594340();
 	d2_CenterDialogWindows(total);
 	d2_SetForm(total, 2);
-	y = *(int*) (0x1015f4c + d2_CurrentWindowId * 0x3cc) / 2 - 0x80;
-	cnt = 0;
-	for (x = 0x19; x < 0x109; x += 0x50) {
+	y = -0x80 + *(int*) ((char*) g_1015f4c + d2_CurrentWindowId * 0x3cc) / 2;
+	for (x = 0x19, cnt = 0; x < 0x109; x += 0x50, cnt++) {
 		h = fcn_0046f740(y, x, (int) ids[cnt] + 0xdf, d2_CurrentWindowId);
 		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_05c = 1;
 		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].flags_1d0 = 3;
 		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_1dc = 100;
 		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_1e0 = 0x10;
 		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].font = 0x54;
-		fcn_0046f9b0(h, *(int*) (0x14a79c0 + (int) ids[cnt] * 8));
+		fcn_0046f9b0(h, g_14a79c0[(int) ids[cnt] * 2]);
 		handles[cnt] = h;
 		fcn_00472640(h, 1);
-		cnt++;
 	}
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00595e20(gebaeude, ids[6]);
@@ -145,7 +145,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 		for (i = 0; i < 3; i++) {
 			fcn_00472640(handles[i], 1);
 			if (ids[i + 3] == 1) {
-				io_FormatTextBuffer(text, 0x1807, 1, (int)ids[i] * 2 + 0x9a8);
+				io_FormatTextBuffer(text, 0x1807, ids[i + 3], (int)ids[i] * 2 + 0x9a8);
 			}
 			else if ((int)ids[i + 3] > 1) {
 				io_FormatTextBuffer(text, 0x1808, ids[i + 3], (int)ids[i] * 2 + 0x9a8);
@@ -159,21 +159,23 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 		if (g_100f1dc != -1) {
 			for (sel = 0; sel < 3; sel++) {
 				if (handles[sel] == d2_CurrentElementId)
-					break;
+					goto found;
 			}
-			if (sel < 3) {
+			goto skip_req;
+		found:
+			if (sel != -1) {
 				memset(&req, 0, 0xf8);
 				req.kind = 0x15;
 				req.f36 = 1;
 				req.f08 = *(int*) (*(unsigned short*) (gebaeude + 0x27) * 0x21c
-					+ (int)(g_7f4ca0 + 4));
+					+ g_7f4ca4);
 				req.f0c = *(int*) (gebaeude + 1);
 				*(pos14_7f4c00*)&req.f28 = gm_GameTime;
 
 				req.f5a = (unsigned short) ids[sel];
 				req.f60 = *(int*) (a1 + 2);
 				cnt = 0;
-				p = g_7f4ca0 + 4;
+				p = g_7f4ca4;
 				do {
 					if (cnt >= 6)
 						break;
@@ -183,12 +185,11 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 					}
 					p += 0x21c;
 				} while ((int) p < 0x85a0a4);
-				memset(&req.list[cnt], -1, (6 - cnt) * 4);
-				req.f58 = (unsigned char) cnt;
-				if (cnt == 0) {
-					fcn_00526120(*(int*) 0x14ab324, 4);
+				for (i = cnt; i < 6; i++) {
+					req.list[i] = -1;
 				}
-				else {
+				req.f58 = (unsigned char) cnt;
+				if (cnt != 0) {
 					fcn_004c35f0();
 					sv_ClearObjectSelection();
 					sel = fcn_004c5530(&req);
@@ -197,7 +198,11 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 					}
 					fcn_004c4480(sel);
 				}
+				else {
+					fcn_00526120(*(int*) 0x14ab324, 4);
+				}
 			}
+		skip_req: ;
 		}
 		else if (g_14ce8e0 != 0)
 			g_774654 = 1;

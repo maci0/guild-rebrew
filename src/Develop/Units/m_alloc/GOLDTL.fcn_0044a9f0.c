@@ -99,9 +99,9 @@ void __cdecl fcn_0044a9f0(MeshObj* m)
 					if (!(other & 0x40000000)) {
 						continue;
 					}
-					if (fabs(m->faces[face].uv[corner].u -
+					if ((float) fabs(m->faces[face].uv[corner].u -
 					         m->faces[(other & 0x3ffffff) / 3].uv[(other & 0x3ffffff) % 3].u) <= 9.99999975e-05f
-					    && fabs(m->faces[face].uv[corner].v -
+					    && (float) fabs(m->faces[face].uv[corner].v -
 					         m->faces[(other & 0x3ffffff) / 3].uv[(other & 0x3ffffff) % 3].v) <= 9.99999975e-05f) {
 						list[j] = other & 0x3fffffff;
 						total--;
@@ -138,9 +138,9 @@ void __cdecl fcn_0044a9f0(MeshObj* m)
 						(*ip)++;
 					}
 					else if (other == uv_index - m->vrepeat[v]) {
-						if (fabs(m->faces[k / 3].uv[k % 3].u -
+						if ((float) fabs(m->faces[k / 3].uv[k % 3].u -
 						         m->uvs[uv_index].u) <= 9.99999975e-05f
-						    && fabs(m->faces[k / 3].uv[k % 3].v -
+						    && (float) fabs(m->faces[k / 3].uv[k % 3].v -
 						         m->uvs[uv_index].v) <= 9.99999975e-05f) {
 							*ip = (unsigned short) uv_index;
 						}

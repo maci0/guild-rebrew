@@ -18,18 +18,12 @@ void* __cdecl fcn_00479660(char* bank, int mode, int keepOriginal)
 	int sum = 0;
 	char* n;
 	char* p;
-	int* tbl;
 	int total;
 
 	if (size == 0)
 		return 0;
-	total = *(unsigned short*) (bank + 0x2a);
-	if (total > 0) {
-		tbl = (int*) (bank + 0x45);
-		do {
-			sum += *(int*) (bank + *tbl + 0x2e);
-			tbl++;
-		} while (--total);
+	for (total = 0; total < *(unsigned short*) (bank + 0x2a); total++) {
+		sum += *(int*) (bank + ((int*) (bank + 0x45))[total] + 0x2e);
 	}
 	if (*(unsigned char*) (bank + 0x34) == 2 && mode == 1) {
 		n = (char*) m_alloc(size - sum, s_67da58);
@@ -37,17 +31,11 @@ void* __cdecl fcn_00479660(char* bank, int mode, int keepOriginal)
 		*(int*) (n + 0x30) = 0;
 		*(unsigned char*) (n + 0x34) = 1;
 		*(unsigned short*) (n + 0x2a) = 0;
-		total = 0;
-		if (*(unsigned short*) (bank + 0x2a) > 0) {
-			tbl = (int*) (bank + 0x45);
-			do {
-				p = (char*) fcn_00479620(bank + *tbl, 1);
-				fcn_004798c0(p, n);
-				if (p)
-					m_FreeTracked(p);
-				total++;
-				tbl++;
-			} while (total < *(unsigned short*) (bank + 0x2a));
+		for (total = 0; total < *(unsigned short*) (bank + 0x2a); total++) {
+			p = (char*) fcn_00479620(bank + ((int*) (bank + 0x45))[total], 1);
+			fcn_004798c0(p, n);
+			if (p)
+				m_FreeTracked(p);
 		}
 		if (*(int*) (bank + 0x3e) != 0) {
 			*(int*) (n + 0x3e) = *(int*) (n + 0x30);
@@ -65,17 +53,11 @@ void* __cdecl fcn_00479660(char* bank, int mode, int keepOriginal)
 	*(int*) (n + 0x30) = 0;
 	*(unsigned char*) (n + 0x34) = 1;
 	*(unsigned short*) (n + 0x2a) = 0;
-	total = 0;
-	if (*(unsigned short*) (bank + 0x2a) > 0) {
-		tbl = (int*) (bank + 0x45);
-		do {
-			p = (char*) fcn_00479620(bank + *tbl, 1);
-			fcn_004798c0(p, n);
-			if (p)
-				m_FreeTracked(p);
-			total++;
-			tbl++;
-		} while (total < *(unsigned short*) (bank + 0x2a));
+	for (total = 0; total < *(unsigned short*) (bank + 0x2a); total++) {
+		p = (char*) fcn_00479620(bank + ((int*) (bank + 0x45))[total], 1);
+		fcn_004798c0(p, n);
+		if (p)
+			m_FreeTracked(p);
 	}
 	if (*(int*) (bank + 0x3e) != 0) {
 		*(int*) (n + 0x3e) = *(int*) (n + 0x30);

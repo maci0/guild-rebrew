@@ -52,7 +52,6 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 	float half;
 	float cx;
 	float cy;
-	float k;
 	float s;
 	float w; float s7;
 	int i;
@@ -79,15 +78,14 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 	t0 = self->u * (*(float*) (d3_ActiveCamera + 0x18c + 0 * 4)) + self->v * (*(float*) (d3_ActiveCamera + 0x18c + 8 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 4 * 4)) * 0.0f;
 	t1 = self->u * (*(float*) (d3_ActiveCamera + 0x18c + 1 * 4)) + self->v * (*(float*) (d3_ActiveCamera + 0x18c + 9 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 5 * 4)) * 0.0f;
 	t2 = self->u * (*(float*) (d3_ActiveCamera + 0x18c + 2 * 4)) + self->v * (*(float*) (d3_ActiveCamera + 0x18c + 10 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 6 * 4)) * 0.0f;
-	u0 = ((*(float*) (d3_ActiveCamera + 0x18c + 0 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 8 * 4))) * 0.0f - (*(float*) (d3_ActiveCamera + 0x18c + 4 * 4)) * 1.0f;
-	u1 = ((*(float*) (d3_ActiveCamera + 0x18c + 1 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 9 * 4))) * 0.0f - (*(float*) (d3_ActiveCamera + 0x18c + 5 * 4)) * 1.0f;
-	u2 = ((*(float*) (d3_ActiveCamera + 0x18c + 2 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 10 * 4))) * 0.0f - (*(float*) (d3_ActiveCamera + 0x18c + 6 * 4)) * 1.0f;
+	u0 = ((*(float*) (d3_ActiveCamera + 0x18c + 0 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 8 * 4))) * 0.0f - (*(float*) (d3_ActiveCamera + 0x18c + 4 * 4)) * g_6628a0;
+	u1 = ((*(float*) (d3_ActiveCamera + 0x18c + 1 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 9 * 4))) * 0.0f - (*(float*) (d3_ActiveCamera + 0x18c + 5 * 4)) * g_6628a0;
+	u2 = ((*(float*) (d3_ActiveCamera + 0x18c + 2 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 10 * 4))) * 0.0f - (*(float*) (d3_ActiveCamera + 0x18c + 6 * 4)) * g_6628a0;
 	hw = (float) ((d3_ViewportRight - g_1042570) >> 1);
 	hh = (float) ((d3_ViewportBottom - g_1042574) >> 1);
 	half = (hw > hh) ? hw : hh;
 	cx = (float) g_1042570 + hw;
 	cy = (float) g_1042574 + hh;
-	k = half * 3.0f;
 	i = 0;
 	r = self->list;
 	while (i < self->count) {
@@ -97,10 +95,10 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 				r[0] += 2.0;
 			} while (r[0] < (-1.0));
 		}
-		if (1.0 <= r[0]) {
+		if (r[0] >= 1.0) {
 			do {
 				r[0] -= 2.0;
-			} while (1.0 <= r[0]);
+			} while (r[0] >= 1.0);
 		}
 		r[1] = (u1 * r[5] + t1 * r[4]) * dt + r[1] + transformY + b1;
 		if (r[1] < (-1.0)) {
@@ -108,10 +106,10 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 				r[1] += 2.0;
 			} while (r[1] < (-1.0));
 		}
-		if (1.0 <= r[1]) {
+		if (r[1] >= 1.0) {
 			do {
 				r[1] -= 2.0;
-			} while (1.0 <= r[1]);
+			} while (r[1] >= 1.0);
 		}
 		r[2] = (u2 * r[5] + t2 * r[4]) * dt + (transformZ + transformZ) + r[2];
 		if (r[2] < (-1.0f)) {
@@ -119,12 +117,12 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 				r[2] += 2.0f;
 			} while (r[2] < (-1.0f));
 		}
-		if (1.0f <= r[2]) {
+		if (r[2] >= 1.0f) {
 			do {
 				r[2] -= 2.0f;
-			} while (1.0f <= r[2]);
+			} while (r[2] >= 1.0f);
 		}
-		s = k / (r[2] + r[2] + 3.0f);
+		s = (half * 3.0f) / (r[2] + r[2] + 3.0f);
 		r[6] = s * r[0] + cx;
 		s7 = cy - s * r[1]; r[7] = s7;
 		w = (1.0f - r[2]) * 13.5f + 1.0f;

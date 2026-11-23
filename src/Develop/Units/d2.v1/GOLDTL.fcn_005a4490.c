@@ -42,7 +42,7 @@ void __cdecl d2_ShowLoanDialog(char* p)
 {
 	struct loan_offer rows[9];
 	char* lines[9];
-	int sel[2];
+	int sel[4];
 	int w;
 	int h;
 	int i;

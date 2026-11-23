@@ -2,8 +2,8 @@
 #include <stdlib.h>
 extern void __cdecl fcn_005e1ca0(void);
 extern void __cdecl main_PumpWindowMessages(void);
-extern void __cdecl fcn_0041a380(int, int, int);
-extern char __cdecl fcn_0041a970(HWND, void*, int, int);
+extern int __cdecl fcn_0041a380(unsigned int, unsigned int, unsigned char);
+extern char __cdecl fcn_0041a970(HWND, void*, unsigned char, unsigned char);
 extern void __cdecl ReportClientMessage(char*);
 extern void __cdecl d3_ClearDisplayAdapterList(void);
 extern void __cdecl m_ShutdownAllocator(void);
@@ -29,12 +29,6 @@ extern int g_6acf80;
 extern int g_6acf84;
 
 typedef struct Gfx538 {
-	int width;
-	int height0;
-	int rcL;
-	int rcT;
-	int rcR;
-	int rcB;
 	int w2;
 	int h2;
 	int fmt;
@@ -44,25 +38,19 @@ typedef struct Gfx538 {
 	int depth;
 	int flags;
 	int refresh;
-	int interval;
-	int a40;
-	int a44;
-	int a48;
 	int dxt;
 	int a50;
 	int a54;
 	int a58;
 	int a5c;
 	int a60;
-	int a64;
-	int a68;
-	int a6c;
-	int a70;
+	float x;
+	float y;
+	float a6c;
+	float a70;
 	float f74;
 	float f78;
 	float f7c;
-	char a80[0x14];
-	char text[0x100];
 } Gfx538;
 
 /* Creates the game window and the D3D8.1 device: work-area sizing, window
@@ -72,6 +60,8 @@ int __cdecl fcn_00538850(int topmost)
 {
 	Gfx538 g;
 	RECT work;
+	RECT rc;
+	char text[MAX_PATH];
 	int style;
 	int exstyle;
 	int dx;
@@ -79,13 +69,6 @@ int __cdecl fcn_00538850(int topmost)
 	int w;
 	int h;
 
-	dx = 0;
-	g.width = 0;
-	g.height0 = 0;
-	g.rcL = 0;
-	g.rcT = 0;
-	g.rcR = 0;
-	g.rcB = 0;
 	g.w2 = 0;
 	g.h2 = 0;
 	g.fmt = 0x10;
@@ -95,61 +78,70 @@ int __cdecl fcn_00538850(int topmost)
 	g.depth = 0x1000;
 	g.flags = 8;
 	g.refresh = 0x18;
-	g.interval = 0;
-	g.a40 = 0;
-	g.a44 = 0;
-	g.a48 = 0;
 	g.dxt = 0;
-	g.a50 = 0x20;
+	g.a50 = 0;
 	g.a54 = 0;
 	g.a58 = 0;
 	g.a5c = 0;
-	g.a60 = 0;
+	g.a60 = 0x20;
+	g.x = 0.0f;
+	g.y = 0.0f;
+	g.a6c = 0.0f;
+	g.a70 = 0.0f;
 	g.f74 = 4.0f;
 	g.f78 = 12000.0f;
-	g.f7c = 32.0f;
+	g.f7c = 640.0f;
+	dx = 0;
+	dy = 0;
 	fcn_005e1ca0();
-	g_6a376c = g_6acf80 - 0x6a;
 	g_6a3764 = 0;
 	g_6a3768 = 0;
+	g_6a376c = g_6acf80 - 0x6a;
 	g_6a3770 = g_6acf84;
 	SystemParametersInfoA(0x30, 0, &work, 0);
 	w = work.right - work.left;
 	h = work.bottom - work.top;
+	rc.left = 0;
+	rc.top = 0;
+	rc.right = g_6acf80;
+	rc.bottom = g_6acf84;
 	exstyle = GetWindowLongA(*(HWND*) 0x774940, -0x14);
 	style = GetWindowLongA(*(HWND*) 0x774940, -0x10);
-	g.rcL = 0;
-	g.rcT = 0;
-	g.rcR = g_6acf80;
-	g.rcB = g_6acf84;
-	if (AdjustWindowRectEx((RECT*) &g.rcL, style, 0, exstyle)) {
-		dx = g.rcR - g.rcL;
-		dy = g.rcB - g.rcT;
-	} else {
-		dy = g.width;
+	if (AdjustWindowRectEx(&rc, style, 0, exstyle)) {
+		dx = rc.right - rc.left;
+		dy = rc.bottom - rc.top;
 	}
-	SetWindowPos(*(HWND*) 0x774940, topmost == 0 ? HWND_TOPMOST : HWND_TOP,
-		abs(w - dx) / 2, abs(h - dy) / 2, dx, dy, 0);
+	if (topmost != 0) {
+		SetWindowPos(*(HWND*) 0x774940, HWND_TOP,
+			abs(w - dx) / 2, abs(h - dy) / 2, dx, dy, 0);
+	} else {
+		SetWindowPos(*(HWND*) 0x774940, HWND_TOPMOST,
+			abs(w - dx) / 2, abs(h - dy) / 2, dx, dy, 0);
+	}
 	main_PumpWindowMessages();
-	g.width = g_6acf80;
-	g.height0 = 0;
+	g.x = (float) g_6acf80;
+	g.y = (float) g_6acf84;
 	g.w2 = g_6acf80;
 	g.h2 = g_6acf84;
-	g.a5c = *(int*) 0x7747e4;
 	g.ms = (topmost == 1);
+	g.a5c = *(int*) 0x7747e4;
+	g.fmt = 0x10;
+	g.count = 0;
+	g.a6c = 0.0f;
+	g.a70 = 0.0f;
 	g.a50 = 1;
 	g.a54 = 0;
 	g.a58 = 0;
 	g.a60 = 0x20;
 	g.flags = 8;
 	g.dxt = 0x31545844;
-	g.refresh = 0xfa00;
-	g.interval = 0x1000;
-	g.a48 = 0x20;
+	g.swap = 0xfa00;
+	g.depth = 0x1000;
+	g.refresh = 0x20;
 	g.f74 = 4.0f;
 	g.f78 = 12000.0f;
-	g.f7c = (float) (12000.0 / (double) g.width);
 	d3_LODMode = 2;
+	g.f7c = (float) (512.0 / (640.0 / (double) (unsigned int) g_6acf80));
 	fcn_0041a380(g_6acf80, g_6acf84, topmost == 1);
 	if (!fcn_0041a970(*(HWND*) 0x774940, (void*) 0x5387c0, topmost == 1, 1)) {
 		ReportClientMessage((char*) 0x6a3904);
@@ -159,7 +151,7 @@ int __cdecl fcn_00538850(int topmost)
 		return 0;
 	}
 	d3_ClearDisplayAdapterList();
-	if (!fcn_00439020(&g.w2, *(HWND*) 0x774940, main_Instance))
+	if (!fcn_00439020(&g, *(HWND*) 0x774940, main_Instance))
 		return 0;
 	d3_CreateSceneCameras();
 	while (ShowCursor(0) > 0)
@@ -188,9 +180,9 @@ int __cdecl fcn_00538850(int topmost)
 	*(unsigned char*) 0x6790d0 = *(unsigned char*) 0x6a38d4;
 	sprintf((char*) 0x67d268, (char*) 0x6a38c4);
 	d3_ApplyGraphicsOptions();
-	sprintf(g.text, (char*) 0x6a38b0, (char*) 0x679888);
+	sprintf(text, (char*) 0x6a38b0, (char*) 0x679888);
 	if (!d2_Open(*(HWND*) 0x774940, g_6acf80, g_6acf84,
-			(char*) 0x6a3550, g.text))
+			(char*) 0x6a3550, text))
 		return 0;
 	g_1015ce0 = *(int*) 0x774940;
 	d2_MouseRightBoundary = g_1040494 - 8;

@@ -1,6 +1,8 @@
 #include <stdio.h>
 extern void* txt_TextBuffer;
 extern int g_6b7fa4, txt_EntryCount;
+extern int g_11bb000[], g_14b731c[];
+extern char g_1053000[][0x50], g_1335120[][0x50];
 #include <string.h>
 
 #pragma intrinsic(memset, strlen, strcpy, strcat)
@@ -67,14 +69,16 @@ int __cdecl txt_ParseTextVariants(char* text, int index)
 					}
 					s = fcn_0064e790(r, '/');
 					if (s != 0) {
+						r++;
 						memset(v15, 0, sizeof(v15));
-						strncpy(v15, r + 1, (int) (s - (r + 1)) - 1);
+						strncpy(v15, r, (int) (s - r) - 1);
 						t = fcn_0064e790(s, ']');
 						if (t == 0) {
 							return 0;
 						}
+						s++;
 						memset(v16, 0, sizeof(v16));
-						strncpy(v16, s + 1, (int) (t - (s + 1)) - 1);
+						strncpy(v16, s, (int) (t - s) - 1);
 						p = t + 1;
 						if (strlen(p) != 0) {
 							memset(v19, 0, sizeof(v19));
@@ -86,10 +90,12 @@ int __cdecl txt_ParseTextVariants(char* text, int index)
 						if (t == 0) {
 							return 0;
 						}
+						r++;
 						memset(v15, 0, sizeof(v15));
-						strncpy(v15, r + 1, (int) (t - (r + 1)) - 1);
+						strncpy(v15, r, (int) (t - r) - 1);
+						r++;
 						memset(v16, 0, sizeof(v16));
-						strncpy(v16, r + 2, (int) (t - (r + 2)) - 1);
+						strncpy(v16, r, (int) (t - r) - 1);
 						p = t + 1;
 						if (strlen(p) != 0) {
 							memset(v19, 0, sizeof(v19));
@@ -114,10 +120,10 @@ int __cdecl txt_ParseTextVariants(char* text, int index)
 		strcat((char*) ((int) txt_TextBuffer + (txt_EntryCount << 12)), v21[i]);
 		g_6b7fa4 = g_6b7fa4 + strlen(v21[i]);
 	}
-	*(int*) (txt_EntryCount * 4 + 0x11bb000) = kind;
-	sprintf((char*) (txt_EntryCount * 0x50 + 0x1053000), "%s+%i",
-	    (char*) (index * 0x50 + 0x13350d0),
-	    txt_EntryCount - *(int*) (index * 4 + 0x14b731c));
+	g_11bb000[txt_EntryCount] = kind;
+	sprintf(g_1053000[txt_EntryCount], "%s+%i",
+	    g_1335120[index - 1],
+	    txt_EntryCount - g_14b731c[index]);
 	g_6b7fa4 = g_6b7fa4 + 1;
 	txt_EntryCount = txt_EntryCount + 1;
 	return 1;

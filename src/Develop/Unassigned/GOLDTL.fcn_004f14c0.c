@@ -16,10 +16,10 @@ int __cdecl fcn_004f14c0(G175_REC* a, int na, G175_REC* b, int nb)
 	int j;
 	int i;
 
-	best_a = 0;
 	sum_a = 0;
-	best_b = 0;
 	sum_b = 0;
+	best_a = 0;
+	best_b = 0;
 	for (i = 0; i < na; i++) {
 		if (a[i].id == -1) {
 			continue;

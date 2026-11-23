@@ -46,7 +46,7 @@ typedef struct Bld24d {
 } Bld24d;
 
 /* ADDRESS: GOLDTL 0x004eb3e0 */
-unsigned int __cdecl fcn_004eb3e0(int* packet, char* self)
+unsigned int __cdecl fcn_004eb3e0(char* self, int* packet)
 {
 	slot80 ent;
 	char buf1[512];
@@ -126,10 +126,10 @@ found:
 	}
 	t = gm_GetEntitySkill(self, 2);
 	if (packet[2] == 1) {
-		scale = (gm_RandomFloat01() + g_6628a0) * t * *(float*) 0x6628d8 + *(float*) 0x664198;
+		scale = (gm_RandomFloat01() + g_6628a0) * t * g_6628d8 + *(float*) 0x664198;
 	} else {
 		scale = *(double*) 0x6629c8 -
-			((gm_RandomFloat01() + g_6628a0) * t * 0.3f + *(double*) 0x6628f0);
+			((gm_RandomFloat01() + g_6628a0) * t * g_66414c + *(double*) 0x6628f0);
 	}
 
 	e = gm_FindSlotById(g_773d75, v20);
@@ -150,12 +150,12 @@ found:
 		fcn_004c5420(*(int*) (self + 4), 0x1c8, 4, 0x4000000, 0);
 		fcn_005100f0(*(int*) (self + 4), -3);
 		found = gm_RandomMod(3);
-		if (packet[2] != 1) {
-			io_FormatTextBuffer(buf1, (found & 0xffff) + 0x165a, packet[1] + 0x1648);
-			io_FormatTextBuffer(buf2, 0x1659, buf1, v20 * 2 + 0x9a8, secondId * 2 + 0x9a8);
-		} else {
+		if (packet[2] == 1) {
 			io_FormatTextBuffer(buf1, (found & 0xffff) + 0x1656, packet[1] + 0x1648);
 			io_FormatTextBuffer(buf2, 0x1655, buf1, v20 * 2 + 0x9a8, secondId * 2 + 0x9a8);
+		} else {
+			io_FormatTextBuffer(buf1, (found & 0xffff) + 0x165a, packet[1] + 0x1648);
+			io_FormatTextBuffer(buf2, 0x1659, buf1, v20 * 2 + 0x9a8, secondId * 2 + 0x9a8);
 		}
 		for (q = (unsigned char*) 0x7f4ca4; (int) q < (int) 0x85a0a4; q += 0x21c) {
 			if ((*(unsigned char*) (q - 2) == 7 || *(unsigned char*) (q - 2) == 6) &&

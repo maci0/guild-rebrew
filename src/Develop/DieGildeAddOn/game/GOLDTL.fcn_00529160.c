@@ -60,7 +60,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 {
 	Slot_529160* slot;
 	Rec_529160* rec;
-	char* old;
+	unsigned char* old;
 	char* r;
 	void* o;
 	int contextIdx;
@@ -74,8 +74,8 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		return;
 	}
 	slot = (Slot_529160*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[index]));
-	old = *(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[index]) + 0x17c);
-	if ((char*) newShown == old) {
+	old = *(unsigned char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[index]) + 0x17c);
+	if (newShown == old) {
 		return;
 	}
 	if (activeRec == 0) {
@@ -116,13 +116,13 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		}
 	}
 	if (old != 0) {
-		fcn_00529060(slot->id, old);
+		fcn_00529060(slot->id, (char*) old);
 		switch (*old) {
 		case 3:
 		case 4:
 		case 8:
 		case 9:
-			fcn_005290d0(old);
+			fcn_005290d0((char*) old);
 			break;
 		case 20:
 		case 21:
@@ -143,22 +143,22 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		case 137:
 		case 141:
 		case 143:
-			fcn_005290d0(old);
-			if (fcn_005241f0(old) <= 0) {
+			fcn_005290d0((char*) old);
+			if (fcn_005241f0((char*) old) <= 0) {
 				*(pos14_7f4c00*) (old + 0x52) = gm_GameTime;
-				fcn_004c5620(-1, old);
+				fcn_004c5620(-1, (char*) old);
 			}
 			break;
 		case 40:
-			if (fcn_005241f0(old) <= 0) {
-				fcn_004c5620(-1, old);
+			if (fcn_005241f0((char*) old) <= 0) {
+				fcn_004c5620(-1, (char*) old);
 			}
 			break;
 		case 72:
 		case 73:
 		case 117:
 		case 161:
-			he_FreeAction(old);
+			he_FreeAction((char*) old);
 			break;
 		}
 	} else if (slot->owner != 0 && ((Rec_529160*) slot->owner)->object != -1) {

@@ -1,36 +1,36 @@
 /* ADDRESS: GOLD 0x0045f160 */
-char __cdecl fcn_0045f160(char* terrain, float* point, int* outx, int* outz, float* height)
+char __cdecl fcn_0045f160(float* tex, float* pt, int* outx, int* outy, float* out)
 {
-    int x;
-    int z;
-    int width;
-    int next_height;
-    int right_height;
-    unsigned char* cells;
-    float base;
-    float z_fraction;
+	unsigned char* data;
+	int width;
+	int x;
+	int y;
+	float s;
+	float fx;
+	float fy;
+	float t10;
+	float t01;
 
-    if (terrain == 0)
-        return 0;
-    x = (int) ((point[0] - *(float*) terrain) / *(float*) (terrain + 0x10));
-    z = (int) ((point[2] - *(float*) (terrain + 8)) / *(float*) (terrain + 0x18));
-    if (x < 0)
-        return 0;
-    width = *(int*) (terrain + 0x20);
-    if (x >= width || z < 0 || z >= width || outx == 0 || outz == 0)
-        return 0;
-    *outx = x;
-    *outz = z;
-    if (height != 0) {
-        width = *(int*) (terrain + 0x20);
-        cells = *(unsigned char**) (terrain + 0x28);
-        base = (cells[z * width + x] + 0.5f) * *(float*) (terrain + 0x14) + *(float*) (terrain + 4);
-        z_fraction = (point[2] - (z * *(float*) (terrain + 0x18) + *(float*) (terrain + 8))) / *(float*) (terrain + 0x18);
-        next_height = cells[((z + 1) & (width - 1)) * width + x];
-        right_height = cells[z * width + ((x + 1) & (width - 1))];
-        *height = z_fraction * ((next_height + 0.5f) * *(float*) (terrain + 0x14) + *(float*) (terrain + 4) - base)
-            + ((point[0] - (x * *(float*) (terrain + 0x10) + *(float*) terrain)) / *(float*) (terrain + 0x10))
-            * ((right_height + 0.5f) * *(float*) (terrain + 0x14) + *(float*) (terrain + 4) - base) + base;
-    }
-    return 1;
+	if (tex == 0) {
+		return 0;
+	}
+	x = (int) ((pt[0] - tex[0]) / tex[4]);
+	y = (int) ((pt[2] - tex[2]) / tex[6]);
+	if (x < 0 || x >= *(int*) (tex + 8) || y < 0 || y >= *(int*) (tex + 8) || outx == 0 || outy == 0) {
+		return 0;
+	}
+	*outx = x;
+	*outy = y;
+	if (out != 0) {
+		width = *(int*) (tex + 8);
+		data = *(unsigned char**) (tex + 10);
+
+		s = ((float) data[width * y + x] + 0.5f) * tex[5] + tex[1];
+		fy = (pt[2] - (y * tex[6] + tex[2])) / tex[6];
+		t10 = ((float) data[width * ((y + 1) & (width - 1)) + x] + 0.5f) * tex[5] + tex[1];
+		fx = (pt[0] - (x * tex[4] + tex[0])) / tex[4];
+		t01 = ((float) *(unsigned char*) (((int) data + ((x + 1) & (width - 1))) + width * y) + 0.5f) * tex[5] + tex[1];
+		*out = (t01 - s) * fx + (t10 - s) * fy + s;
+	}
+	return 1;
 }

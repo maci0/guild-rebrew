@@ -46,7 +46,6 @@ void __cdecl fcn_0055c740(char* ctx)
 	int state;
 	int ver;
 	int i;
-	int pri;
 
 	state = *(int*) (ctx + 0x70);
 	switch (state) {
@@ -61,9 +60,9 @@ void __cdecl fcn_0055c740(char* ctx)
 		if (rec == 0) {
 			break;
 		}
-		kind = *(unsigned char*) rec;
+		ver = *(unsigned char*) rec;
 		ver = (int) fcn_005101e0((unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]),
-		    kind, -1, 1);
+		    ver, -1, 1);
 		if (ver > gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)])) {
 			io_FormatTextBuffer(text, 0x1a40, rec);
 			he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)].entity_id,
@@ -74,9 +73,8 @@ void __cdecl fcn_0055c740(char* ctx)
 		}
 		for (i = 0; i < 0xc; i++) {
 			if (*(int*) (ctx + 0xb0 + i * 4) > 0) {
-				kind = *(unsigned char*) (ctx + 0xac);
 				*(int*) (ctx + 0xe4) = fcn_004c6090((unsigned char*) rec,
-				    0, kind, 0);
+				    0, *(unsigned char*) (ctx + 0xac), 0);
 				*(pos14_7f4c00*) (ctx + 0x52) = gm_GameTime;
 
 
@@ -142,13 +140,14 @@ void __cdecl fcn_0055c740(char* ctx)
 				h = fcn_0050dc90(rec);
 				io_FormatTextBuffer(text, 0x1bab, ver, *obj, rec);
 				if (h != 0 && (*(unsigned char*) (h + 0x1b4) & 1)) {
-					pri = 0x60c;
+					he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ctx + 8)].entity_id,
+					    *(int*) (rec + 1), text, 0, 0x60c, *(int*) (rec + 1),
+					    *(int*) (ctx + 0xe0), 0, s_6a5b54);
 				} else {
-					pri = 0x5f2;
+					he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ctx + 8)].entity_id,
+					    *(int*) (rec + 1), text, 0, 0x5f2, *(int*) (rec + 1),
+					    *(int*) (ctx + 0xe0), 0, s_6a5b54);
 				}
-				he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ctx + 8)].entity_id,
-				    *(int*) (rec + 1), text, 0, pri, *(int*) (rec + 1),
-				    *(int*) (ctx + 0xe0), 0, s_6a5b54);
 			}
 			fcn_004c51a0(*(int*) (obj + 2),
 			    ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ctx + 8)].entity_id, g_773d75, ver);

@@ -1,3 +1,4 @@
+#include <string.h>
 #include "game_data.h"
 #include "client_dialog_state.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -49,9 +50,7 @@ unsigned int __cdecl fcn_0053b6b0(int jobCode)
 	int idx;
 	int prev = -1;
 	int selected = 0;
-	int i;
 	char* p;
-	float d;
 
 	idx = gm_MapEntityStatRange(jobCode);
 
@@ -60,21 +59,18 @@ unsigned int __cdecl fcn_0053b6b0(int jobCode)
 		d3_TransformPoint(dev, (char*) dev + 0x4c, pos);
 	}
 
-	d = d2_UiScale;
-	id1 = fcn_00469c30((int) (d * 150.0f + d * 330.0f),
-		(int) (d * 370.0f), 0x1a);
+	id1 = fcn_00469c30((int) (d2_UiScale * 150.0f + d2_UiScale * 330.0f),
+		(int) (d2_UiScale * 370.0f), 0x1a);
 	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id1].value_05c = 1;
 	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id1].flags_1d0 = 3;
 
-	d = d2_UiScale;
-	id2 = fcn_00469c30((int) (d * 330.0f),
-		(int) (d * 370.0f), 0x1b);
+	id2 = fcn_00469c30((int) (d2_UiScale * 330.0f),
+		(int) (d2_UiScale * 370.0f), 0x1b);
 	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id2].value_05c = 1;
 	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id2].flags_1d0 = 3;
 
-	d = d2_UiScale;
-	id3 = fcn_00469c30((int) (d * 70.0f + d * 330.0f),
-		(int) (d * 45.0f + d * 370.0f), 0x51b);
+	id3 = fcn_00469c30((int) (d2_UiScale * 70.0f + d2_UiScale * 330.0f),
+		(int) (d2_UiScale * 45.0f + d2_UiScale * 370.0f), 0x51b);
 	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id3].value_05c = 1;
 	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id3].flags_1d0 = 3;
 
@@ -125,7 +121,6 @@ unsigned int __cdecl fcn_0053b6b0(int jobCode)
 		if (prev != idx) {
 			view = evt_LoadGfxScript("Effekte/choose_character.esc");
 			if (view != 0) {
-				d = d2_UiScale;
 				fcn_00428340(view, 6,
 					(int) pos[0],
 					(int) pos[1] + 0x14,
@@ -143,28 +138,19 @@ unsigned int __cdecl fcn_0053b6b0(int jobCode)
 			}
 			if (g_7e23e8 == 0) {
 				idx = idx % count;
-				if (idx <= -1) {
+				if (idx < 0) {
 					idx = count - 1;
 				}
-				p = &maenner[idx][0];
+				strcpy(name, maenner[idx]);
 			} else {
 				idx = idx % count2;
-				if (idx <= -1) {
+				if (idx < 0) {
 					idx = count2 - 1;
 				}
-				p = &frauen[idx][0];
+				strcpy(name, frauen[idx]);
 			}
-			i = 0;
-			do {
-				name[i] = p[i];
-				i += 1;
-			} while (p[i - 1] != 0);
 			obj = 0;
-			i = 0;
-			do {
-				*(char*) (0x7e2435 + i) = name[i];
-				i += 1;
-			} while (name[i - 1] != 0);
+			strcpy((char*) 0x7e2435, name);
 			g_7e2468 = fcn_004fdec0(name) + 0x639;
 			obj = ch_CreateAtPosition(name, pos);
 			fcn_00402b00(obj, dev);

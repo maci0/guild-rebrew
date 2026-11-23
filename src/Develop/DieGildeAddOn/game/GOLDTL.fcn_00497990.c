@@ -97,7 +97,7 @@ found:
 	if (*(char*) decisionMsg == 0) {
 		e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 		if (*(char*) decisionMsg != 0) {
-			return 0x10;
+			goto ret16;
 		}
 		while (e != 0) {
 			unsigned char b = *(unsigned char*) e;
@@ -127,10 +127,9 @@ found:
 				return 0x10;
 			}
 		}
-		if (*(char*) decisionMsg != 0) {
-			return 0x10;
+		if (*(char*) decisionMsg == 0) {
+			return 0;
 		}
-		return 0;
 	} else {
 		if (*(unsigned char*) decisionMsg != 5) {
 			return 0;
@@ -150,10 +149,10 @@ found:
 		}
 		e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 		if (*(unsigned char*) decisionMsg != 5) {
-			return 0x10;
+			goto ret16;
 		}
 		while (e != 0) {
-			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category == id) {
+			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category == *(int*) (decisionMsg + 4)) {
 				t = (unsigned char*) he_StartHandlungSearch(1, 0, 0x1b);
 				if (t != 0) {
 					while (*(int*) (t + 0xac) != *(int*) (e + 1)) {
@@ -180,8 +179,9 @@ found:
 		if (*(unsigned char*) decisionMsg == 5) {
 			return 0;
 		}
-		return 0x10;
 	}
+ret16:
+	return 0x10;
 fraction:
 	r = fcn_0050cf50((char*) e, (int) *(signed char*) (e + 0x5c));
 	if ((double) (B - A) / (double) B < (double) (B - r) / (double) r * g_664158 + 0.25f) {

@@ -1,4 +1,6 @@
+#include <string.h>
 #include "client_data.h"
+#include "client_placement.h"
 #include "game_data.h"
 extern unsigned char g_773dd4;
 extern int g_773dd8;
@@ -75,13 +77,13 @@ void __cdecl gm_HandleHausbau(int a0)
 	float v29;
 	float v21;
 	unsigned char* v15;
-	float v17[4];
-	char v20[14];
-	int v36;
-	char v16[0x54];
-	int v18[33];
-	char v19[128];
 	char messageText[0x200];
+	char v19[128];
+	LC_OBJECT_LIST v18;
+	LC_GEBAEUDE_BAUPLATZ v16;
+	int v36;
+	char v20[14];
+	float v17[4];
 
 	buildAction = a0;
 	savedContext = d3_CurrentContextIndex;
@@ -202,7 +204,7 @@ LfailB:
 		*(int*) (buildAction + 0x84) = -1;
 		fcn_004432d0(0, 1);
 		fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
-		if (!v15 || !fcn_005985f0(v16, (int) v15)) {
+		if (!v15 || !fcn_005985f0(&v16, (int) v15)) {
 			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
 			fcn_004432d0(savedContext, 1);
 			return;
@@ -215,9 +217,9 @@ LfailB:
 			v14 = (unsigned char*) (v11 + (int) lpGebaeudeINST);
 			if (v14 != v15 && *v14 && (v24 = *(int*) (v14 + 0x61)) != 0) {
 				d3_TransformPoint((char*) v24, (char*) (v24 + 0x4c), v17);
-				v17[0] = v17[0] - *(float*) (v16 + 0x40);
-				v17[1] = v17[1] - *(float*) (v16 + 0x44);
-				v17[2] = v17[2] - *(float*) (v16 + 0x48);
+				v17[0] = v17[0] - v16.position[0];
+				v17[1] = v17[1] - v16.position[1];
+				v17[2] = v17[2] - v16.position[2];
 				v29 = (float) sqrt(v17[2] * v17[2] + v17[1] * v17[1] + v17[0] * v17[0]);
 				if (v29 < v21
 					&& fcn_00445600(*(int*) (v11 + (int) lpGebaeudeINST + 0x61),
@@ -233,16 +235,14 @@ LfailB:
 			fcn_004432d0(savedContext, 1);
 			return;
 		}
-		for (v11 = 0; v11 < 33; v11++) {
-			v18[v11] = 0;
-		}
-		d3_VisitSceneObjects(g_67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
+		memset(&v18, 0, sizeof(v18));
+		d3_VisitSceneObjects(g_67a370, (int) v16.node, 0x2c0, 0x5982d0, &v18);
 		*(unsigned char*) (buildAction + 0xd0) = 0;
 		v21 = 0.0f;
-		if (v18[32] > 0) {
+		if (v18.count > 0) {
 			v11 = 0;
 			do {
-				v8 = v18[v11];
+				v8 = (int) v18.objects[v11];
 				v14 = (unsigned char*) fcn_00445600(*(int*) (v13 + 0x61), 0x100, 0, 0x68149c);
 				if (v8 && *(int*) (v8 + 0x218) != 1 && v14) {
 					v24 = evt_LoadGfxScript((char*) 0x6a7dd4);
@@ -255,12 +255,9 @@ LfailB:
 					*(unsigned char*) (buildAction + 0xd0) = *(unsigned char*) (buildAction + 0xd0) + 1;
 				}
 				v11 += 1;
-			} while (v11 < v18[32]);
+			} while (v11 < v18.count);
 		}
-		*(int*) (buildAction + 0x52) = gm_GameTime.a;
-		*(int*) (buildAction + 0x56) = gm_GameTime.b;
-		*(int*) (buildAction + 0x5a) = gm_GameTime.c;
-		*(unsigned short*) (buildAction + 0x5e) = (unsigned short) gm_GameTime.d;
+		*(pos14_7f4c00*) (buildAction + 0x52) = gm_GameTime;
 		fcn_00500bb0((void*) (buildAction + 0x52), 0, 10, 0);
 		*(int*) (buildAction + 0x70) = *(int*) (buildAction + 0x70) + 1;
 		fcn_004432d0(savedContext, 1);
@@ -274,29 +271,21 @@ LfailB:
 		}
 		fcn_004432d0(0, 1);
 		fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
-		if (!fcn_005985f0(v16, (int) v15)) {
+		if (!fcn_005985f0(&v16, (int) v15)) {
 			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
 			fcn_004432d0(savedContext, 1);
 			return;
 		}
-		for (v11 = 0; v11 < 33; v11++) {
-			v18[v11] = 0;
-		}
-		d3_VisitSceneObjects(g_67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
-		for (v11 = 0; v11 < v18[32]; v11++) {
+		memset(&v18, 0, sizeof(v18));
+		d3_VisitSceneObjects(g_67a370, (int) v16.node, 0x2c0, 0x5982d0, &v18);
+		for (v11 = 0; v11 < v18.count; v11++) {
 			if (g_773dd8) {
-				fcn_004550b0(v18[v11], g_773dd8);
+				fcn_004550b0((int) v18.objects[v11], g_773dd8);
 			}
-			d3_DestroyObject(v18[v11]);
+			d3_DestroyObject((int) v18.objects[v11]);
 		}
-		*(int*) (buildAction + 0x60) = gm_GameTime.a;
-		*(int*) (buildAction + 0x64) = gm_GameTime.b;
-		*(int*) (buildAction + 0x68) = gm_GameTime.c;
-		*(unsigned short*) (buildAction + 0x6c) = (unsigned short) gm_GameTime.d;
-		*(int*) (buildAction + 0x52) = gm_GameTime.a;
-		*(int*) (buildAction + 0x56) = gm_GameTime.b;
-		*(int*) (buildAction + 0x5a) = gm_GameTime.c;
-		*(unsigned short*) (buildAction + 0x5e) = (unsigned short) gm_GameTime.d;
+		*(pos14_7f4c00*) (buildAction + 0x60) = gm_GameTime;
+		*(pos14_7f4c00*) (buildAction + 0x52) = gm_GameTime;
 		fcn_00500bb0((void*) (buildAction + 0x52), 0, 10, 0);
 		*(int*) (buildAction + 0x70) = *(int*) (buildAction + 0x70) + 1;
 		*(int*) (buildAction + 0xb4) = 0;
@@ -310,10 +299,7 @@ LfailB:
 			fcn_00500bb0((void*) (buildAction + 0x52), 0, 0x1e, 0);
 			return;
 		}
-		*(int*) (buildAction + 0x60) = *(int*) (buildAction + 0x52);
-		*(int*) (buildAction + 0x64) = *(int*) (buildAction + 0x56);
-		*(int*) (buildAction + 0x68) = *(int*) (buildAction + 0x5a);
-		*(unsigned short*) (buildAction + 0x6c) = *(unsigned short*) (buildAction + 0x5e);
+		*(pos14_7f4c00*) (buildAction + 0x60) = *(pos14_7f4c00*) (buildAction + 0x52);
 		if (!v15) {
 			fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
 		}
@@ -423,10 +409,7 @@ LfailB:
 			if (*(unsigned char*) (buildAction + 0x78) & 2) {
 				fcn_004c5420(*(int*) (v15 + 1), 0x5a, 2, 0, 1);
 				if (*(unsigned char*) v15 >= 4 && *(unsigned char*) v15 <= 7) {
-					*(int*) v20 = gm_GameTime.a;
-					*(int*) (v20 + 4) = gm_GameTime.b;
-					*(int*) (v20 + 8) = gm_GameTime.c;
-					*(unsigned short*) (v20 + 12) = (unsigned short) gm_GameTime.d;
+					*(pos14_7f4c00*) v20 = gm_GameTime;
 					fcn_004c4510(v15, *(int*) (v15 + 1));
 					cm_AppendPacketFieldDelta(1, 0xe, 0x69, v20);
 					fcn_004c5360();
@@ -467,10 +450,9 @@ LfailB:
 			}
 			v9 = *(unsigned char*) v15;
 			if (v9 >= 4 && v9 <= 7) {
-				v27 = (int) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)].unk_170;
-				v8 = *(int*) v27;
-				if (!v8 || *(unsigned char*) v8 > (unsigned char) v9) {
-					*(int*) v27 = (int) v15;
+				v8 = ((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)].unk_170;
+				if (!v8 || *(unsigned char*) v8 <= (unsigned char) v9) {
+					((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)].unk_170 = (int) v15;
 				}
 			}
 			fcn_005001e0((void*) ((int) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)]),

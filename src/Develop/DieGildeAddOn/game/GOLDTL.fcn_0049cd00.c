@@ -39,11 +39,10 @@ int __cdecl ai_StartAnschwaerzen(int a1, char* ent, int a3, Blk24* o1, Blk24* o2
 		b2.a = 0;
 		b2.b = 0;
 		r = ai_SelectBestMethod(0x28, *(unsigned short*) ent, 1, &b1, &b2);
-		if (r == 0) {
-			return 0;
+		if (r != 0) {
+			*o1 = b1;
+			*o2 = b2;
 		}
-		*o1 = b1;
-		*o2 = b2;
 		return r;
 	}
 	if (*(unsigned char*) (ent + 2) == 3) {
@@ -63,11 +62,10 @@ int __cdecl ai_StartAnschwaerzen(int a1, char* ent, int a3, Blk24* o1, Blk24* o2
 		b2.a = *(int*) (*(char**) (ent + 0x170) + 1);
 		b2.b = 1;
 		r = ai_SelectBestMethod(0x28, *(unsigned short*) ent, 1, &b1, &b2);
-		if (r == 0) {
-			return 0;
+		if (r != 0) {
+			*o1 = b1;
+			*o2 = b2;
 		}
-		*o1 = b1;
-		*o2 = b2;
 		return r;
 	}
 fill:
@@ -76,7 +74,7 @@ fill:
 	if (fcn_004aa920((short*) ent, (int) &b1, (char*) &b2) == 0) {
 		return 0;
 	}
-	*o1 = b1;
-	*o2 = b2;
+	memcpy(o1, &b1, sizeof(b1));
+	memcpy(o2, &b2, sizeof(b2));
 	return 0x2a;
 }

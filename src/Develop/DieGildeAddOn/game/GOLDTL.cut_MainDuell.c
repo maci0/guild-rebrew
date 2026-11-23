@@ -234,9 +234,9 @@ void __cdecl cut_MainDuell(char* a0)
     cut_WaitTicks(6);
     j = 0;
     g_772f44 = 0;
-    for (;;) {
+    while (j < 3) {
         if (g_772f44 != 0)
-            goto compare;
+            break;
         fcn_004e51d0((unsigned int*) a0, (int) a0);
         e = (char*) fcn_004e6a70(sA.idx);
         g_772f5a = 0;
@@ -260,11 +260,8 @@ void __cdecl cut_MainDuell(char* a0)
         d2_SetForm(g_68bfc0, 0);
         io_AppendText(0x6811b0);
         j++;
-        if (j >= 3)
-            break;
     }
     if (g_772f44 != 0) {
-compare:
         if (fcn_004ff040((char*) &sB) > fcn_004ff040((char*) &sA))
             p = (char*) &sA;
         else {

@@ -5,8 +5,6 @@
 /* ADDRESS: GOLDTL 0x0045b990 */
 char __cdecl fcn_0045b990(float* tex, float* pt, int* outx, int* outy, float* out)
 {
-	unsigned char* data;
-	int width;
 	int x;
 	int y;
 	float s;
@@ -26,14 +24,11 @@ char __cdecl fcn_0045b990(float* tex, float* pt, int* outx, int* outy, float* ou
 	*outx = x;
 	*outy = y;
 	if (out != 0) {
-		width = *(int*) (tex + 8);
-		data = *(unsigned char**) (tex + 10);
-
-		s = ((float) data[width * y + x] + 0.5f) * tex[5] + tex[1];
+		s = ((float) (*(unsigned char**) (tex + 10))[*(int*) (tex + 8) * y + x] + 0.5f) * tex[5] + tex[1];
 		fy = (pt[2] - (y * tex[6] + tex[2])) / tex[6];
-		t10 = ((float) data[width * ((y + 1) & (width - 1)) + x] + 0.5f) * tex[5] + tex[1];
+		t10 = ((float) (*(unsigned char**) (tex + 10))[*(int*) (tex + 8) * ((y + 1) & (*(int*) (tex + 8) - 1)) + x] + 0.5f) * tex[5] + tex[1];
 		fx = (pt[0] - (x * tex[4] + tex[0])) / tex[4];
-		t01 = ((float) data[width * y + ((x + 1) & (width - 1))] + 0.5f) * tex[5] + tex[1];
+		t01 = ((float) (*(unsigned char**) (tex + 10))[*(int*) (tex + 8) * y + ((x + 1) & (*(int*) (tex + 8) - 1))] + 0.5f) * tex[5] + tex[1];
 		*out = (t01 - s) * fx + (t10 - s) * fy + s;
 	}
 	return 1;

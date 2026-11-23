@@ -7,6 +7,8 @@ void __cdecl fcn_00439870(char* object, char* parent, int force)
 	float matrix[16];
 	char* source;
 	char* destination;
+	char* source2;
+	char* destination2;
 	if (!(object[0x212] & 0x80) || (char) force != 0) {
 		fcn_00458d90(object, 0, 0, (float*) (*(char**) (object + 0x1ec) + 8));
 		object[0x212] |= 0x80;
@@ -46,11 +48,11 @@ void __cdecl fcn_00439870(char* object, char* parent, int force)
 			(float*) (*(char**) (object + 0x1ec) + 0x48));
 	} else {
 		force = 0x40;
-		source = *(char**) (object + 0x1ec) + 8;
-		destination = *(char**) (object + 0x1ec) + 0x48;
+		source2 = *(char**) (object + 0x1ec) + 8;
+		destination2 = *(char**) (object + 0x1ec) + 0x48;
 		__asm {
-			mov edi, destination
-			mov esi, source
+			mov edi, destination2
+			mov esi, source2
 			mov ebx, force
 			lea ecx, [edi+edi*2]
 			and ecx, 3

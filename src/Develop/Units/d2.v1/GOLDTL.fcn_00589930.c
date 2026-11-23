@@ -149,9 +149,9 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 					m.f6c = j;
 					act.count = -1;
 					m.owner = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (building + 0x27)].entity_id;
-					m.when = gm_GameTime;
 					m.target = *(int*) (building + 1);
 					m.f5c = *(int*) (building + 1);
+					m.when = gm_GameTime;
 					fcn_004a5e60(
 					    (unsigned short*) (unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970]
 

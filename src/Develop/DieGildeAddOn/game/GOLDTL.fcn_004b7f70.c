@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern unsigned char g_773d75; extern double g_662a48; extern void* __cdecl gm_LookupEntityRecordById(unsigned int);
+extern unsigned char g_773d75; extern double g_662a48; extern double g_6640e8; extern void* __cdecl gm_LookupEntityRecordById(unsigned int);
 extern int __cdecl fcn_005c6270(void*, int);
 extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl gm_FindNextFilteredEntity(void);
@@ -17,7 +17,7 @@ extern void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_004b7f70(unsigned int* request)
 {
 	unsigned short* ent;
-	int r; unsigned short owner;
+	int r;
 	int ids[16];
 	char buf[0x400];
 	int cnt;
@@ -62,14 +62,14 @@ int __cdecl fcn_004b7f70(unsigned int* request)
 	for (i = 0; i < cnt; i++) {
 		id = ids[i];
 		if (id != -1) {
-			r = (unsigned short) gm_RandomMod(4);
-			fcn_004c54c0(*(int*) ((char*) ent + 4), id, r * 2 + 6, 1);
+			r = gm_RandomMod(4) * 2 + 6;
+			fcn_004c54c0(*(int*) ((char*) ent + 4), id, r, 1);
 		}
 	}
-	v = gm_RandomMod(4); owner = *ent;
+	v = gm_RandomMod(4);
 	d = (double) v + g_662a48;
-	n = (int) (((double) gm_WalkEntityChain(owner) * d) *
-	    *(double*) 0x6640e8);
+	n = (int) (((double) gm_WalkEntityChain(*ent) * d) *
+	    g_6640e8);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
 	fcn_00545d40(*(int*) ((char*) ent + 4), *(int*) ((char*) ent + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);

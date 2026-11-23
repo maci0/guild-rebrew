@@ -35,8 +35,9 @@ typedef struct {
 	int type;                       /* 0x030 */
 	DialogEntry entries[16];        /* 0x034 */
 	int selected;                   /* 0x134 */
-	int button; int rows[8][3];
-} DialogState;                          /* SIZE 0x138 */
+	int button; int rows[8][3];     /* 0x138, 0x13c */
+	int row;                        /* 0x19c */
+} DialogState;                          /* SIZE 0x1a0 */
 
 typedef struct {
 	int dlg;                        /* 0x00 */
@@ -122,7 +123,7 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 	d2_SetForm(st.handle, 7);
 	st.form7 = d2_CurrentWindowId;
 
-	st.type = 0; st.selected = 0;
+	st.type = 0; st.selected = 0; st.row = 0;
 	fcn_0058b030(a1, (SelDlg*)&st);
 	fcn_0058b1f0(a1, &st, 0xffffffff);
 	fcn_0058b440((unsigned int) a1, (unsigned int*) &st, -1, mode);
@@ -141,33 +142,27 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			for (i = 0; i < 4; i++) {
+			for (i = 0; i < 4 && !found; i++) {
 				if (st.ids[i] == d2_CurrentElementId && i != st.type) {
 					selft = 0;
 					st.type = i; cur = -1;
 					st.selected = 0;
 					flags |= 7;
 					found = 1;
-					break;
 				}
 			}
-			if (found == 0) {
-				for (i = 0; i < 16; i++) {
-					if (st.entries[i].btn == d2_CurrentElementId && i != cur) {
-						selft = i;
-						st.selected = i;
-						flags |= 3;
-						found = 1;
-						break;
-					}
+			for (i = 0; !found && i < 16; i++) {
+				if (st.entries[i].btn == d2_CurrentElementId && i != cur) {
+					selft = i;
+					st.selected = i;
+					flags |= 3;
+					found = 1;
 				}
 			}
 			if (mode == 0) {
-				if (found == 0) {
-					for (i = 0; i < 8; i++) {
-						if (st.rows[i][0] != d2_CurrentElementId) {
-							continue;
-						}
+				for (i = 0; !found && i < 8; i++) {
+					if (st.rows[i][0] == d2_CurrentElementId) {
+						st.row = i;
 						found = 1;
 						if (result != 0) {
 							result->item = st.entries[selft].item;
@@ -176,21 +171,18 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 							result->item2 = (char*) st.rows[i][1];
 							result->value2 = *(int*) result->item2;
 						}
-						if (callback == 0) {
-							if (result != 0) {
-								g_774654 = 1;
-							}
-							break;
+						if (callback != 0) {
+							rec.item = st.entries[selft].item;
+							rec.value = *(int*) rec.item;
+							rec.kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), rec.item);
+							rec.item2 = (char*) st.rows[i][1];
+							rec.value2 = *(int*) rec.item2;
+							fcn_00471af0(st.handle, 0);
+							callback(a1, &rec);
+							fcn_00471af0(st.handle, 1);
+						} else if (result != 0) {
+							g_774654 = 1;
 						}
-						rec.item = st.entries[selft].item;
-						rec.value = *(int*) rec.item;
-						rec.kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), rec.item);
-						rec.item2 = (char*) st.rows[i][1];
-						rec.value2 = *(int*) rec.item2;
-						fcn_00471af0(st.handle, 0);
-						callback(a1, &rec);
-						fcn_00471af0(st.handle, 1);
-						break;
 					}
 				}
 			} else if (mode == 1 && st.button == d2_CurrentElementId) {
@@ -201,11 +193,7 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 					result->item2 = 0;
 					result->value2 = -1;
 				}
-				if (callback == 0) {
-					if (result != 0) {
-						g_774654 = 1;
-					}
-				} else {
+				if (callback != 0) {
 					rec1.item = st.entries[selft].item;
 					rec1.value = *(int*) rec1.item;
 					rec1.kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), rec1.item);
@@ -214,6 +202,8 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 					fcn_00471af0(st.handle, 0);
 					callback(a1, &rec1);
 					fcn_00471af0(st.handle, 1);
+				} else if (result != 0) {
+					g_774654 = 1;
 				}
 			}
 		}

@@ -63,8 +63,6 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 	int r4;
 	int r3;
 	struct d2_daterec dt;
-	int buttons[2];
-	int v15;
 	int r2;
 	int r1;
 	int h;
@@ -104,10 +102,10 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 	}
 	if (*((char *)person + 0x164) != 0) {
 		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f55,
-		    (*((char *)person + 9) != 0 ? 0x18f : 0x130) + *((unsigned char *)person + 0x164));
+		    *((unsigned char *)person + 0x164) + (*((char *)person + 9) != 0 ? 0x18f : 0x130));
 	} else if (*((char *)person + 0x165) != 0) {
 		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f56,
-		    (*((char *)person + 9) != 0 ? 0x230 : 0x20d) + *((unsigned char *)person + 0x165));
+		    *((unsigned char *)person + 0x165) + (*((char *)person + 9) != 0 ? 0x230 : 0x20d));
 	}
 	t = *((char *)person + 9) != 0 ? 0x27b : 0x253;
 	if (*((char *)person + 0x166) == 0 && *((char *)person + 0x169) == 0) {
@@ -162,7 +160,7 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 		;
 	}
 	io_AppendText("$5<$R%s $0<$3>$L%s$A$0>", 0x488,
-	    (gm_GameTime.a >= 0x75 ? 0x483 : 0x486) + *((unsigned char *)person + 0xc));
+	    (gm_GameTime.a < 0x75 ? 0x486 : 0x483) + *((unsigned char *)person + 0xc));
 	io_AppendText("$5<$R%s$0<", 0x1f5a);
 	ok = 0;
 	p = (char *)person + 0x68;
@@ -188,8 +186,8 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 	inx = 2;
 	i = 0;
 	do {
-		io_FormatTextBuffer(buf12, i + 0x16b7);
 		inx += 0x18;
+		io_FormatTextBuffer(buf12, i + 0x16b7);
 		d2_ShowTxt(10, inx - 1, buf12, d2_CurrentWindowId);
 		fcn_00534210(0xaf, inx, (char *)person, i, 0x4e5);
 		i++;
@@ -268,14 +266,14 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 		r5 = fcn_00472250(h, 4, io_AppendText(0x1f50, *person));
 	} else {
 		if ((*((char *)g_7f4ca0 + 540 * g_774970 + 9) == 0 &&
-		     *(int *)(g_7f4ca0 + 540 * g_774970 + 4) == *(int *)((char *)person + 0x60)) ||
+		     *(int *)((char *)person + 0x60) == *(int *)(g_7f4ca0 + 540 * g_774970 + 4)) ||
 		    (*((char *)g_7f4ca0 + 540 * g_774970 + 9) == 1 &&
-		     *(int *)(g_7f4ca0 + 540 * g_774970 + 4) == *(int *)((char *)person + 0x64))) {
+		     *(int *)((char *)person + 0x64) == *(int *)(g_7f4ca0 + 540 * g_774970 + 4))) {
 			if (!(*((char *)person + 0x164) != 0)) {
 				if (he_StartHandlungSearch(2, 2, *person, 0, 0x5e) == 0) {
-					v15 = person[5] + 4;
-					if (v15 >= *(float *)((char *)person + 0x20)) {
+					if (person[5] + 4 >= *(float *)((char *)person + 0x20)) {
 						if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
+							int buttons[2];
 							io_FormatTextBuffer(bufA, 0x1f4b, *person);
 							io_FormatTextBuffer(bufB, 0x1a96);
 							d2_SetForm(h, 4);
@@ -295,10 +293,11 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 			} else {
 				if ((*(int *)((char *)person + 0x1c8) & 0x10000) == 0) {
 					if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
-						io_FormatTextBuffer(bufA, 0x1f4b, *person);
-						io_FormatTextBuffer(bufB, 0x1a97);
+						int buttons[2];
+						io_FormatTextBuffer(bufB, 0x1f4b, *person);
+						io_FormatTextBuffer(bufA, 0x1a97);
 						d2_SetForm(h, 4);
-						fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, bufA, bufB);
+						fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, bufB, bufA);
 						r1 = buttons[0];
 						r4 = buttons[1];
 					}
@@ -320,36 +319,38 @@ label_2281:
 	d2_CurrentElementId = -1;
 	do {
 		if (r1 != -1) {
-			fcn_00472640(r1, gm_AccumulateTyped2(g_7f4ca0 + 540 * g_774970) > 0);
+			if (gm_AccumulateTyped2(g_7f4ca0 + 540 * g_774970) <= 0) {
+				fcn_00472640(r1, 0);
+			} else {
+				fcn_00472640(r1, 1);
+			}
 		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
 			fcn_00471af0(h, 0);
-			if (d2_CurrentElementId != r5) {
-				if (d2_CurrentElementId != r1) {
-					if (d2_CurrentElementId != r2) {
-						if (d2_CurrentElementId != r4) {
-							if (d2_CurrentElementId == r3) {
-								fcn_004b54e0(*(int *)((char *)person + 4));
-							}
-						} else if (fcn_005dbb60(g_7f4ca0 + 540 * g_774970, person) != 0) {
-							fcn_00472640(r4, 0);
-						}
-					} else if (fcn_005db8e0(g_7f4ca0 + 540 * g_774970, person) != 0) {
-						fcn_00472640(r2, 0);
-					}
-				} else if (d2_ShowGiftDialog(g_7f4ca0 + 540 * g_774970, person) != 0) {
-					fcn_00472640(r1, 0);
-				}
-			} else {
+			if (d2_CurrentElementId == r5) {
 				io_FormatTextBuffer(bufB, 0x1f51, *person, *person);
 				if (fcn_00526120(bufB, 1) != 0) {
 					fcn_004c50e0(*(int *)(g_7f4ca0 + 540 * g_774970 + 4),
 					    *(int *)((char *)person + 4));
 					g_774654 = 2;
 				}
+			} else if (d2_CurrentElementId == r1) {
+				if (d2_ShowGiftDialog(g_7f4ca0 + 540 * g_774970, person) != 0) {
+					fcn_00472640(r1, 0);
+				}
+			} else if (d2_CurrentElementId == r2) {
+				if (fcn_005db8e0(g_7f4ca0 + 540 * g_774970, person) != 0) {
+					fcn_00472640(r2, 0);
+				}
+			} else if (d2_CurrentElementId == r4) {
+				if (fcn_005dbb60(g_7f4ca0 + 540 * g_774970, person) != 0) {
+					fcn_00472640(r4, 0);
+				}
+			} else if (d2_CurrentElementId == r3) {
+				fcn_004b54e0(*(int *)((char *)person + 4));
 			}
 			fcn_00471af0(h, 1);
 		}

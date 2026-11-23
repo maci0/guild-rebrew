@@ -1,6 +1,8 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
+#include "client_types.h"
 extern int g_7749e4;
 extern int g_6a4768;
+extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl d2_SetForm(int, int);
@@ -11,10 +13,7 @@ void __cdecl fcn_00469c40(int x, int y, int slot);
 /* ADDRESS: GOLDTL 0x00545780 */
 void __cdecl fcn_00545780(char* obj)
 {
-    int* v3;
-    int* v1;
-    int v4;
-    int dialog;
+    int i;
 
     if (*(int*) (obj + 0x74) == 0) {
         return;
@@ -26,59 +25,46 @@ void __cdecl fcn_00545780(char* obj)
     } else {
         __asm { int 3 }
     }
-    dialog = *(int*) (*(int*) (obj + 0x74) + 8);
-    if (dialog != -1) {
-        fcn_00471e30(dialog);
+    if (*(int*) (*(int*) (obj + 0x74) + 8) != -1) {
+        fcn_00471e30(*(int*) (*(int*) (obj + 0x74) + 8));
         *(int*) (*(int*) (obj + 0x74) + 8) = -1;
     }
     if (g_7749e4 == *(int*) (obj + 0x74)) {
         g_7749e4 = 0;
     }
     *(int*) (obj + 0x74) = 0;
-    v4 = 0;
-    v3 = (int*) 0x77e8c4;
-    do {
-        if (*v3 == -1) {
-            if (v4 >= 0x10) {
-                break;
-            }
-            v3 = (int*) (v4 * 0xc + 0x77e8d0);
-            do {
-                if ((int) v3 < 0x77e984) {
-                    if (*v3 != -1) {
-                        v3[-3] = *v3;
-                        v1 = &v3[-4];
-                        v3[-2] = v3[1];
-                        *v1 = v3[-1];
-                        *(int**) (v3[-1] + 0x74) = v1;
-                        *v3 = -1;
-                        v3[-1] = 0;
-                        v3[1] = -1;
-                        if (v3[-3] == -1 && *v1 != 0) {
-                            __asm { int 3 }
-                        }
-                    }
-                }
-                v4 = v3[-3];
-                if (v4 != -1) {
-                    fcn_00469c40(
-                        *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v4].x)) - 0x20,
-                        *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v4].y)), v4);
-                }
-                v3 += 3;
-            } while ((int) v3 < 0x77e990);
+    for (i = 0; i < 16; i++) {
+        if (g_77e8c0[i].h == -1) {
             break;
         }
-        v3 += 3;
-        v4++;
-    } while ((int) v3 < 0x77e984);
-    v4 = 0;
-    v3 = (int*) 0x77e8c4;
-    do {
-        if (*v3 != -1) {
-            g_6a4768 = v4;
+    }
+    if (i < 16) {
+        for (; i < 16; i++) {
+            if (i < 15) {
+                if (g_77e8c0[i + 1].h != -1) {
+                    g_77e8c0[i].h = g_77e8c0[i + 1].h;
+                    g_77e8c0[i].p = g_77e8c0[i + 1].p;
+                    g_77e8c0[i].x8 = g_77e8c0[i + 1].x8;
+                    *(D2_ACTION_POPUP_SLOT**) (g_77e8c0[i].p + 0x74) = &g_77e8c0[i];
+                    g_77e8c0[i + 1].h = -1;
+                    g_77e8c0[i + 1].p = 0;
+                    g_77e8c0[i + 1].x8 = -1;
+                    if (g_77e8c0[i].h == -1 && g_77e8c0[i].p != 0) {
+                        __asm { int 3 }
+                    }
+                }
+            }
+            if (g_77e8c0[i].h != -1) {
+                fcn_00469c40(
+                    ((D2_CONTROL_TL*) g_1015ea0)[g_77e8c0[i].h].x - 0x20,
+                    ((D2_CONTROL_TL*) g_1015ea0)[g_77e8c0[i].h].y,
+                    g_77e8c0[i].h);
+            }
         }
-        v3 += 3;
-        v4++;
-    } while ((int) v3 < 0x77e984);
+    }
+    for (i = 0; i < 16; i++) {
+        if (g_77e8c0[i].h != -1) {
+            g_6a4768 = i;
+        }
+    }
 }

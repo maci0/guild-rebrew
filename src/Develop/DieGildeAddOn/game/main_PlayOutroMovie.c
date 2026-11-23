@@ -16,7 +16,8 @@ void __cdecl fcn_00473150(unsigned char*);
 
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
 extern void (__stdcall* g_662264)(int);
-extern int g_7747d4, main_LoopFlags, g_1040494, d2_ScreenHeight, main_Instance;
+extern int g_7747d4, main_LoopFlags, g_1040494, d2_ScreenHeight, main_Instance, g_774940;
+extern float g_678158;
 extern unsigned char g_772d10;
 extern char g_14cf950;
 
@@ -28,6 +29,7 @@ void __cdecl main_PlayOutroMovie(void)
 	char* b;
 	int saved;
 	int t;
+	float vol;
 
 	if (*(int*) 0x77492c == 0) {
 		fcn_0041e620();
@@ -35,7 +37,7 @@ void __cdecl main_PlayOutroMovie(void)
 	fcn_004c2d90(0.0f, 0x3e8);
 	h = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, (char*) 0x67d67c, 0x5a, 1);
 	for (;;) {
-		if ((*h & 4) && !(*(float*) 0x678158 >= *(float*) 0x6628a8)) {
+		if ((*h & 4) && !(g_678158 >= 0.0f)) {
 			break;
 		}
 		fcn_005373e0(0, main_LoopFlags);
@@ -56,15 +58,15 @@ void __cdecl main_PlayOutroMovie(void)
 	fcn_0041f350(g_7747d4);
 	fcn_00473150(h);
 	main_PumpWindowMessages();
-	g_662264(*(int*) 0x774940);
+	g_662264(g_774940);
 	fcn_004117c0(1);
 	fcn_004117f0(1);
 	*(int*) 0x6b5c90 = 1;
 	fcn_004124b0();
-	t = *(unsigned char*) 0x7766a2;
+	vol = (float) *(unsigned char*) 0x7766a2;
 	*(int*) 0x6b5c90 = 0;
 	g_14cf950 = 0;
-	fcn_004c2d90((float) t * *(float*) 0x665e44, 0x3e8);
+	fcn_004c2d90(vol * (1.0f / 127.0f), 0x3e8);
 	t = *(int*) 0x77492c;
 	g_772d10 = (unsigned char) saved;
 	if (t == 0) {

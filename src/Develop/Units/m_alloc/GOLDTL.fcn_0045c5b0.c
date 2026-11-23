@@ -65,9 +65,9 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 	unsigned char c21;
 	unsigned int width;
 	int height;
-	Tex* found;
-	int fmt;
 	unsigned int index;
+	int fmt;
+	Tex* found;
 	int avail;
 	int fn;
 	Tex* p;
@@ -89,25 +89,23 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 	if (found != 0) {
 		index = found - (Tex*) g_104049c;
 		p = found;
-		if (index < g_10404a0) {
-			do {
-				if (p->refs > 0) {
-					if (strcmp(name, p->name) == 0
-					    && *(unsigned int*) &p->id == *(unsigned int*) &c
-					    && p->b0 == c22
-					    && p->b4 == c26
-					    && p->field56 == c24
-					    && p->field55 == c25
-					    && p->b3 == c23
-					    && p->field5e == c21) {
-						found = p;
-						fcn_0045c310(found, 1);
-						return found;
-					}
+		while (index < g_10404a0) {
+			if (p->refs > 0) {
+				if (strcmp(name, p->name) == 0
+				    && *(unsigned int*) &p->id == *(unsigned int*) &c
+				    && p->b0 == c22
+				    && p->b4 == c26
+				    && p->field56 == c24
+				    && p->field55 == c25
+				    && p->b3 == c23
+				    && p->field5e == c21) {
+					found = p;
+					fcn_0045c310(found, 1);
+					return found;
 				}
-				index++;
-				p++;
-			} while (index < g_10404a0);
+			}
+			index++;
+			p++;
 		}
 		if (found == p) {
 			fcn_0045c310(found, 1);
@@ -173,51 +171,51 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 	strcpy(buf1, name);
 	strcpy(buf2, name);
 	strupr(buf1);
-	if (avail == 0 || t == 0 || width != (unsigned int) height) {
-		return 0;
+	if (avail != 0 && t != 0 && width == (unsigned int) height) {
+		fn = 0x70;
+		__asm {
+			mov edi, t
+			mov ebx, fn
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short L163
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		L163:
+			add ecx, ebx
+			rep stosb
+		}
+		strncpy(t->name, name, 0x3f);
+		t->field64 = (int) width;
+		t->field68 = height;
+		t->idx44 = (int) (width * height - 1) | (int) (width - 1);
+		*(unsigned int*) &t->id = *(unsigned int*) &c;
+		t->pattern6c = ((unsigned int) (c.b) << 8 | c.b) << 8 | c.b;
+		t->b4 = c26;
+		t->b0 = c22;
+		t->field55 = c25;
+		t->field56 = c24;
+		t->b3 = c23;
+		t->b1 = 0;
+		t->dxt = (strstr(buf1, "_NM") != 0);
+		t->format60 = (t->dxt * 0x02000000) | 0x31545844;
+		if (((Col*) &t->id)->c1) {
+			t->b5 = 1;
+		} else {
+			t->b5 = (strstr(buf1, "_NS") != 0);
+		}
+		*(unsigned int*) &t->field5c = 0;
+		t->field5e = c21;
+		t->refs = 1;
+		t->color48 = -1;
+		g_10405c4++;
+		fcn_0045c380(t, *(unsigned int*) &c, flags, flags2);
+		return t;
 	}
-	fn = 0x70;
-	__asm {
-		mov edi, t
-		mov ebx, fn
-		xor eax, eax
-		lea ecx, [edi+edi*2]
-		and ecx, 3
-		sub ebx, ecx
-		jle short L163
-		rep stosb
-		mov ecx, ebx
-		and ebx, 3
-		shr ecx, 2
-		rep stosd
-	L163:
-		add ecx, ebx
-		rep stosb
-	}
-	strncpy(t->name, name, 0x3f);
-	t->field64 = (int) width;
-	t->field68 = (int) width;
-	t->idx44 = (int) (width * width - 1) | (int) (width - 1);
-	*(unsigned int*) &t->id = *(unsigned int*) &c;
-	t->pattern6c = ((unsigned int) (c.b) << 8 | c.b) << 8 | c.b;
-	t->b4 = c26;
-	t->b0 = c22;
-	t->field55 = c25;
-	t->field56 = c24;
-	t->b3 = c23;
-	t->b1 = 0;
-	t->dxt = (strstr(buf1, "_NM") != 0);
-	t->format60 = (((unsigned int) t->dxt & 1) << 0x19) | 0x31545844;
-	if (((Col*) &t->id)->c1) {
-		t->b5 = 1;
-	} else {
-		t->b5 = (strstr(buf1, "_NS") != 0);
-	}
-	*(unsigned int*) &t->field5c = 0;
-	t->field5e = c21;
-	t->refs = 1;
-	t->color48 = -1;
-	g_10405c4++;
-	fcn_0045c380(t, *(unsigned int*) &c, flags, flags2);
-	return t;
+	return 0;
 }
