@@ -72,8 +72,8 @@ void __cdecl PrepareFloorWater(char* e)
 	}
 
 	waterMask = (char*) m_alloc(*(int*) e * *(int*) e, (char*) 0x67a778);
-	flag = 0;
 	v9 = 0;
+	flag = 0;
 	if (*(int*) e - 4 > 0) {
 		do {
 			v11 = 0;

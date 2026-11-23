@@ -71,12 +71,12 @@ char* __cdecl he_CreateAnimatedEntityMarker(char* effectState, char* name, char*
 		memset(&flags, 0, sizeof(flags));
 		flags.e = 1;
 		frames[0].id = 0x8c0;
-		frames[0].pos[0] = 0.0f;
-		frames[0].pos[1] = 0.0f;
-		frames[0].pos[2] = 0.0f;
 		frames[0].rot[0] = 0.0f;
 		frames[0].rot[1] = 0.0f;
 		frames[0].rot[2] = 0.0f;
+		frames[0].pos[0] = 0.0f;
+		frames[0].pos[1] = 0.0f;
+		frames[0].pos[2] = 0.0f;
 		frames[1].pos[0] = 0.0f;
 		frames[1].pos[1] = 0.0f;
 		frames[1].pos[2] = 0.0f;

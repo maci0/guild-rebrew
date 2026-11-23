@@ -199,7 +199,7 @@ next:
 			break;
 		}
 	}
-	if (*(char*) 0x14cf7c8) {
+	if (g_14cf7c8) {
 		fcn_0046ed00(0, -4, d2_CurrentWindowId);
 		return;
 	}

@@ -82,8 +82,8 @@ L2:
 	fl.b[1] |= 0x14;
 	fl.b[1] |= 8;
 	fl.b[8] |= 2;
-	q = a / b;
 	cnt = 1;
+	q = a / b;
 	frames[0].type = q;
 	for (i = 0; i < b; i++) {
 		e = list[i];

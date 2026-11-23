@@ -129,7 +129,7 @@ void __cdecl fcn_00416540(Ctx_416540* self, float dt)
 		w *= r[3];
 		r[8] = r[6] + w;
 		r[9] = w + s7;
-		i++;
 		r += 10;
+		i++;
 	}
 }

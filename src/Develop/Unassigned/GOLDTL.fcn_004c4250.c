@@ -42,8 +42,8 @@ int __cdecl cm_ReassembleQueuedCommand(char* obj)
 				return 0;
 			}
 		}
-		memcpy(g_aed340 + i, e + 0x10, 0x80);
 		*(int*) (prev + 0xc) = 0;
+		memcpy(g_aed340 + i, e + 0x10, 0x80);
 		*(char*) e = 0;
 		i += 0x80;
 	}

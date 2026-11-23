@@ -48,8 +48,8 @@ unsigned char __cdecl fcn_004385e0(int a0)
 			p[2] = v16;
 			p[1] = *(int*) (a0 + 0x1ec) + 0x48;
 			p[3] = (int) rec;
-			p[5] = *(int*) &v15;
 			p[4] = *(int*) &v14;
+			p[5] = *(int*) &v15;
 			p[6] = slotIndex;
 			p[7] = (*(unsigned char*) (a0 + 0x215) & 0x20)
 			    ? *(int*) (v1 + 0x49c)

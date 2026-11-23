@@ -30,11 +30,7 @@ void __cdecl fcn_004fb390(void)
 	*(int*) ((char*) g_99f590 + 4) = gm_GameTime.b;
 	*(int*) ((char*) g_99f590 + 8) = gm_GameTime.c;
 	*(short*) ((char*) g_99f590 + 12) = gm_GameTime.d;
-	*(int*) ((char*) buf + 0x28) = *(int*) (g_99f5e0 + 0x0);
-	*(int*) ((char*) buf + 0x2c) = *(int*) (g_99f5e0 + 0x4);
-	*(int*) ((char*) buf + 0x30) = *(int*) (g_99f5e0 + 0x8);
-	*(int*) ((char*) buf + 0x34) = *(int*) (g_99f5e0 + 0xc);
-	*(int*) ((char*) buf + 0x38) = *(int*) (g_99f5e0 + 0x10);
+	memcpy((char*) buf + 0x28, g_99f5e0, 0x14);
 	*(float*) ((char*) buf + 0x3c) = (float) sample;
 
 	*(int*) ((char*) buf + 0x40) = *(int*) &g_773d4c;

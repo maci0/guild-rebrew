@@ -32,7 +32,7 @@ void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int red, int green, int 
     if (dx > dy) {
         diagonal = dy - dx;
         straight = dy + dy;
-        diagonal += diagonal; error = straight - dx;
+        error = straight - dx; diagonal += diagonal;
         do {
             x += sx;
             if (error >= 0) { y += sy; error += diagonal; }
@@ -42,7 +42,7 @@ void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int red, int green, int 
     } else {
         diagonal = dx - dy;
         straight = dx + dx;
-        diagonal += diagonal; error = straight - dy;
+        error = straight - dy; diagonal += diagonal;
         do {
             y += sy;
             if (error >= 0) { x += sx; error += diagonal; }

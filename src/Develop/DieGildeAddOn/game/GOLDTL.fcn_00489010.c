@@ -52,8 +52,8 @@ void __cdecl fcn_00489010(char* e)
 			if (k != 0) {
 				for (i = 0; !done && i < ai_ResourceCount; i++) {
 					if (*(int*) (0x100b0c0 + i * 0x40) == *(int*) b) {
-						found = a;
 						done = 1;
+						found = a;
 					}
 				}
 			}
@@ -68,8 +68,8 @@ void __cdecl fcn_00489010(char* e)
 				if (k != 0) {
 					for (i = 0; !done && i < ai_ResourceCount; i++) {
 						if (*(int*) (0x100b0c0 + i * 0x40) == *(int*) b) {
-							found = a;
 							done = 1;
+							found = a;
 						}
 					}
 				}

@@ -65,15 +65,16 @@ int* __cdecl d3_CreateObjectAnimation(char* a0, D3_ANIMATION_OPTIONS flags, int 
 		animation[8] = *(int*) (a0 + 0x84);
 		animation[9] = *(int*) (a0 + 0x88);
 		animation[10] = *(int*) (a0 + 0x8c);
-		if ((*(unsigned char*) ((char*) animation + 0x2d) & 2) != 0) {
+		if ((*(unsigned char*) ((char*) animation + 0x2d) & 2) == 0) {
+			animation[1] = 0;
+			animation[3] = 0;
+			animation[2] = 1;
+		} else {
 			v6 = *animation - 1;
 			animation[1] = v6;
 			animation[3] = *(int*) (animation[0x10] + v6 * 0x58) - 1;
 			animation[2] = fcn_004321a0(*(D3_ANIMATION_OPTIONS*) (animation + 0xb), v6, 0, v6, v6);
-		} else {
-			animation[1] = 0;
-			animation[3] = 0;
-			animation[2] = 1;
+		
 		}
 		fcn_004337c0(animation);
 	}

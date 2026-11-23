@@ -70,8 +70,8 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 				dst += *(int*) (s + 0x10);
 			}
 			q = end + 1;
-			row++;
 			line = end;
+			row++;
 		}
 		return 1;
 	}
@@ -110,8 +110,8 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 			dst += *(int*) (s + 0x10);
 		}
 		q = end + 1;
-		row++;
 		line = end;
+		row++;
 	}
 
 	return 1;

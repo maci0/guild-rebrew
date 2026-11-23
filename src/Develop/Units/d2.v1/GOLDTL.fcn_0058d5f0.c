@@ -229,7 +229,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 					p += 0x21c;
 					i = j;
 				} while ((int) p < 0x85a0a4);
-				while (j <= 3) {
+				while (j < 4) {
 					req.list[j] = 0xffffffff;
 					j += 2;
 				}

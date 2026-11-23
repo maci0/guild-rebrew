@@ -37,7 +37,7 @@ int __cdecl fcn_0042a120(int* out, int channels, int bits, int rate)
 	*(int*) ((char*) msx_WaveDrivers[index] + 8) = rate;
 	block = (unsigned int) bits >> 3;
 	loaded = block * channels;
-	*(int*) ((char*) msx_WaveDrivers[index] + 0xc) = loaded * rate;
+	*(int*) ((char*) msx_WaveDrivers[index] + 0xc) = block * channels * rate;
 	*(short*) ((char*) msx_WaveDrivers[index] + 0x10) = (short) loaded;
 	*(short*) ((char*) msx_WaveDrivers[index] + 0x12) = (short) bits;
 	if (AIL_waveOutOpen(msx_WaveDrivers[index], 0, 0, (char*) msx_WaveDrivers[index] + 4) != 0) {

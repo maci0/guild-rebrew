@@ -28,7 +28,6 @@ void __cdecl main_PlayOutroMovie(void)
 	unsigned char* h;
 	char* b;
 	int saved;
-	int t;
 	float vol;
 
 	if (*(int*) 0x77492c == 0) {
@@ -67,9 +66,8 @@ void __cdecl main_PlayOutroMovie(void)
 	*(int*) 0x6b5c90 = 0;
 	g_14cf950 = 0;
 	fcn_004c2d90(vol * (1.0f / 127.0f), 0x3e8);
-	t = *(int*) 0x77492c;
 	g_772d10 = (unsigned char) saved;
-	if (t == 0) {
+	if (*(int*) 0x77492c == 0) {
 		fcn_0041e650();
 	}
 }

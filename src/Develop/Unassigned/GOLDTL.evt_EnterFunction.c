@@ -111,12 +111,12 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 			return;
 		}
 		switch (sym->kind) {
-		case 2:
-			*sym->data = (char) args[k];
-			break;
 		case 1:
-			*(int*) sym->data = args[k];
-			break;
+            *(int*) sym->data = args[k];
+            break;
+        case 2:
+            *sym->data = (char) args[k];
+            break;
 		case 7:
 			*(float*) sym->data = (float) args[k];
 			break;

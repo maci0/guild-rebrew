@@ -20,7 +20,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int maxCount, int* a2, voi
 
 	found = 0;
 	if (!maxCount) {
-		for (c = (unsigned char*) 0x7f4ca0; c < (unsigned char*) 0x85a0a0; c += 0x21c) {
+		for (c = (unsigned char*) 0x7f4ca0; (int) c < 0x85a0a0; c += 0x21c) {
 			if (c == (unsigned char*) a0)
 				continue;
 			if (*(short*) c == -1)
@@ -36,7 +36,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int maxCount, int* a2, voi
 	memset(a2, 0, maxCount * 0x38);
 	for (i = 0; i < maxCount; i++)
 		a2[i * 14 + 11] = 100;
-	for (c = (unsigned char*) 0x7f4ca0; c < (unsigned char*) 0x85a0a0; c += 0x21c) {
+	for (c = (unsigned char*) 0x7f4ca0; (int) c < 0x85a0a0; c += 0x21c) {
 		if (c == (unsigned char*) a0)
 			continue;
 		if (*(short*) c == -1)
