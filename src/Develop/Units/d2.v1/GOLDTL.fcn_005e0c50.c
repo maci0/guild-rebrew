@@ -74,7 +74,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
-void __cdecl fcn_005e0140(int, int, Slot*, Rec*, char*, int);
+void __cdecl fcn_005e0140(int, int, void*, void*, char*, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl vfs_LookupPath(char*, int, int*);

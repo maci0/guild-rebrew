@@ -27,6 +27,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 extern int g_100f1dc;
+extern int g_14ce8e0;
 extern int g_666018, g_66601c;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl fcn_004c3030(int, int, char*, int);
@@ -112,7 +113,7 @@ void __cdecl fcn_005e5a50(char* entity)
 		if (g_774970 != *(unsigned short*) (entity + 0x27)) {
 			io_AppendText(0x41d7, (val > 1 ? val : 1) * 32000);
 		}
-		if (*(int*) 0x14ce8e0 != 0) {
+		if (g_14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;
 		} else if (g_100f1dc != -1) {
 			int clicked = *(int*) 0x67d370;

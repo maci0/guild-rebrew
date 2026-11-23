@@ -16,19 +16,19 @@ int __cdecl fcn_005e90e0(char *obj)
         *(int *)(obj + 0x58) = 0;
         return 0;
     }
-    signx = (*(float *)(obj + 0x40) > *(float *)0x6628a8) ? *(float *)0x6628a0 : *(float *)0x662a94;
-    signy = (*(float *)(obj + 0x44) > *(float *)0x6628a8) ? *(float *)0x6628a0 : *(float *)0x662a94;
-    signz = (*(float *)(obj + 0x48) > *(float *)0x6628a8) ? *(float *)0x6628a0 : *(float *)0x662a94;
-    inv = *(float *)0x6628a0 / *(float *)(obj + 0x54);
+    signx = (*(float *)(obj + 0x40) > *(float *)0x6628a8) ? 1.0f : *(float *)0x662a94;
+    signy = (*(float *)(obj + 0x44) > *(float *)0x6628a8) ? 1.0f : *(float *)0x662a94;
+    signz = (*(float *)(obj + 0x48) > *(float *)0x6628a8) ? 1.0f : *(float *)0x662a94;
+    inv = 1.0f / *(float *)(obj + 0x54);
     initial[0] = inv * (*(float *)(obj + 0x50) * *(float *)(obj + 0x40) * *(float *)(obj + 0x40) * signx * *(float *)0x6ad620 * *(float *)0x6660f8 * *(float *)0x6628cc) * *(float *)0x6660ec;
     initial[1] = inv * (*(float *)(obj + 0x44) * *(float *)(obj + 0x44) * *(float *)(obj + 0x50) * signy * *(float *)0x6ad620 * *(float *)0x6660f8 * *(float *)0x6628cc) * *(float *)0x6660ec;
     initial[2] = inv * (*(float *)(obj + 0x50) * *(float *)(obj + 0x48) * *(float *)(obj + 0x48) * signz * *(float *)0x6ad620 * *(float *)0x6660f8 * *(float *)0x6628cc) * *(float *)0x6660ec;
     n = 0;
     while (n < remain) {
-        signx = (*(float *)(obj + 0x10) > *(float *)0x6628a8) ? *(float *)0x6628a0 : *(float *)0x662a94;
-        signy = (*(float *)(obj + 0x14) > *(float *)0x6628a8) ? *(float *)0x6628a0 : *(float *)0x662a94;
-        signz = (*(float *)(obj + 0x18) > *(float *)0x6628a8) ? *(float *)0x6628a0 : *(float *)0x662a94;
-        inv = *(float *)0x6628a0 / *(float *)(obj + 0x54);
+        signx = (*(float *)(obj + 0x10) > *(float *)0x6628a8) ? 1.0f : *(float *)0x662a94;
+        signy = (*(float *)(obj + 0x14) > *(float *)0x6628a8) ? 1.0f : *(float *)0x662a94;
+        signz = (*(float *)(obj + 0x18) > *(float *)0x6628a8) ? 1.0f : *(float *)0x662a94;
+        inv = 1.0f / *(float *)(obj + 0x54);
         v[0] = *(float *)(obj + 0x10);
         v[1] = *(float *)(obj + 0x14);
         v[2] = *(float *)(obj + 0x18);

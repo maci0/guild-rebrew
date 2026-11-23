@@ -1,10 +1,10 @@
+typedef struct { unsigned int first, second; } ProfilePair;
 __declspec(dllimport) unsigned int __stdcall GetPrivateProfileIntA(const char *, const char *, int, const char *);
 __declspec(dllimport) unsigned int __stdcall GetPrivateProfileStringA(const char *, const char *, const char *, char *, unsigned int, const char *);
 
 /* ADDRESS: GOLDTL 0x005e1ca0 */
 void __cdecl fcn_005e1ca0(void)
 {
-    unsigned int v1;
     unsigned char v2;
     *(unsigned char *)0x776665 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad298,0,(char *)0x7e22c0);
     *(unsigned char *)0x776664 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad290,0,(char *)0x7e22c0);
@@ -30,9 +30,7 @@ void __cdecl fcn_005e1ca0(void)
     *(unsigned char *)0x776660 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad254,0,(char *)0x7e22c0);
     v2 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6a4654,0,(char *)0x7e22c0);
     *(unsigned char *)0x77534c = v2;
-    v1 = *(unsigned int *)(((*(unsigned int *)0x77534c & 255) * 8) + 0x6acf6c);
-    *(unsigned int *)0x6acf80 = *(unsigned int *)(((*(unsigned int *)0x77534c & 255) * 8) + 0x6acf68);
-    *(unsigned int *)0x6acf84 = v1;
+    *(ProfilePair *)0x6acf80 = ((ProfilePair *)0x6acf68)[*(unsigned int *)0x77534c & 255];
     *(unsigned char *)0x7766a0 = GetPrivateProfileIntA((char *)0x6a4710,(char *)0x6ad17c,0,(char *)0x7e22c0);
     *(unsigned char *)0x7766a1 = GetPrivateProfileIntA((char *)0x6a4710,(char *)0x6ad174,0,(char *)0x7e22c0);
     *(unsigned char *)0x7766a2 = GetPrivateProfileIntA((char *)0x6a4710,(char *)0x6ad16c,0,(char *)0x7e22c0);

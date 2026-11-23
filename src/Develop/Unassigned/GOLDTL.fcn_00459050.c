@@ -1,4 +1,7 @@
 extern float g_10425a0[];
+extern float g_10425b0[];
+extern float g_10425c0[];
+extern float g_10425d0[];
 extern float g_6629d0;
 extern const float g_662d40[3];
 #include <math.h>
@@ -51,15 +54,15 @@ void __cdecl fcn_00459050(int self)
 	*(unsigned int*) (p + 0xc) = 0x30;
 	src = (float*) (d3_ActiveCamera + 0x18c);
 	D3DXMatrixTranspose(m, src);
-	dr[0] = *(float*) 0x10425d8 * m[8] + *(float*) 0x10425d4 * m[4] + *(float*) 0x10425d0 * m[0];
-	dr[1] = *(float*) 0x10425d8 * m[9] + *(float*) 0x10425d4 * m[5] + *(float*) 0x10425d0 * m[1];
-	dr[2] = *(float*) 0x10425d8 * m[10] + *(float*) 0x10425d4 * m[6] + *(float*) 0x10425d0 * m[2];
-	cr[0] = *(float*) 0x10425c8 * m[8] + *(float*) 0x10425c4 * m[4] + *(float*) 0x10425c0 * m[0];
-	cr[1] = *(float*) 0x10425c8 * m[9] + *(float*) 0x10425c4 * m[5] + *(float*) 0x10425c0 * m[1];
-	cr[2] = *(float*) 0x10425c8 * m[10] + *(float*) 0x10425c4 * m[6] + *(float*) 0x10425c0 * m[2];
-	br[0] = *(float*) 0x10425b8 * m[8] + *(float*) 0x10425b4 * m[4] + *(float*) 0x10425b0 * m[0];
-	br[1] = *(float*) 0x10425b8 * m[9] + *(float*) 0x10425b4 * m[5] + *(float*) 0x10425b0 * m[1];
-	br[2] = *(float*) 0x10425b8 * m[10] + *(float*) 0x10425b4 * m[6] + *(float*) 0x10425b0 * m[2];
+	dr[0] = *(float*) 0x10425d8 * m[8] + *(float*) 0x10425d4 * m[4] + g_10425d0[0] * m[0];
+	dr[1] = *(float*) 0x10425d8 * m[9] + *(float*) 0x10425d4 * m[5] + g_10425d0[0] * m[1];
+	dr[2] = *(float*) 0x10425d8 * m[10] + *(float*) 0x10425d4 * m[6] + g_10425d0[0] * m[2];
+	cr[0] = *(float*) 0x10425c8 * m[8] + *(float*) 0x10425c4 * m[4] + g_10425c0[0] * m[0];
+	cr[1] = *(float*) 0x10425c8 * m[9] + *(float*) 0x10425c4 * m[5] + g_10425c0[0] * m[1];
+	cr[2] = *(float*) 0x10425c8 * m[10] + *(float*) 0x10425c4 * m[6] + g_10425c0[0] * m[2];
+	br[0] = *(float*) 0x10425b8 * m[8] + *(float*) 0x10425b4 * m[4] + g_10425b0[0] * m[0];
+	br[1] = *(float*) 0x10425b8 * m[9] + *(float*) 0x10425b4 * m[5] + g_10425b0[0] * m[1];
+	br[2] = *(float*) 0x10425b8 * m[10] + *(float*) 0x10425b4 * m[6] + g_10425b0[0] * m[2];
 	ar[0] = g_10425a0[2] * m[8] + g_10425a0[1] * m[4] + g_10425a0[0] * m[0];
 	ar[1] = g_10425a0[2] * m[9] + g_10425a0[1] * m[5] + g_10425a0[0] * m[1];
 	ar[2] = g_10425a0[2] * m[10] + g_10425a0[1] * m[6] + g_10425a0[0] * m[2];

@@ -36,7 +36,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
-void __cdecl fcn_005e0140(int, int, SaveItem*, char*, char*, int);
+void __cdecl fcn_005e0140(int, int, void*, void*, char*, int);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl fcn_005dfe80(int, unsigned int);
 void __cdecl fcn_00471e30(int);

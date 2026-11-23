@@ -176,8 +176,8 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 		if (v18 != 0xffffffff && v6) {
 			v19 = v18 & 0xffff;
 			v16 = (int) v18 >> 0x10;
-			v34 = v19;
 			v37 = v16;
+			v34 = v19;
 			D3DXMatrixTranspose(matrix, (float*) (d3_ActiveCamera + 0x18c));
 			world[0] = matrix[8] * pick[2] + matrix[4] * pick[1] + matrix[0] * pick[0];
 			world[1] = matrix[9] * pick[2] + matrix[5] * pick[1] + matrix[1] * pick[0];

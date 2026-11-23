@@ -3,7 +3,6 @@
  * rebrew-functions.toml. The linker supplies these bodies; nothing here is compiled.
  * Columns: module, address, size in bytes, native symbol. */
 
-// GOLDTL 0x005e0140 1462 _fcn_005e0140
 // GOLDTL 0x00608f01 n/a _flsall
 // GOLDTL 0x0060a930 n/a _memcpy
 // GOLDTL 0x0060acf2 466 ___initstdio

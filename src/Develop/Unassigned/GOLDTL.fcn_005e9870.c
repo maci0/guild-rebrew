@@ -50,26 +50,26 @@ int __cdecl fcn_005e9870(Sefde0Entry *entry)
 		*(int*) (obj + 0x58) = 0;
 		return 0;
 	}
-	f[0] = *(float*) (obj + 0x50) * *(float*) (obj + 0x40) * *(float*) (obj + 0x40) * (*(float*) (obj + 0x40) > 0.0f ? 1.0f : -1.0f) * g_6ad620 * 1.2f * g_6628cc;
-	f[1] = ((*(float*) (obj + 0x44) > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * *(float*) (obj + 0x44) * *(float*) (obj + 0x44) * g_6628cc;
-	f[2] = *(float*) (obj + 0x50) * (*(float*) (obj + 0x48) > 0.0f ? 1.0f : -1.0f) * g_6ad620 * 1.2f * *(float*) (obj + 0x48) * *(float*) (obj + 0x48) * g_6628cc;
+	f[0] = *(float*) (obj + 0x50) * *(float*) (obj + 0x40) * *(float*) (obj + 0x40) * (*(float*) (obj + 0x40) > 0.0f ? 1.0f : -1.0f) * g_6ad620 * 1.2f * 0.5f;
+	f[1] = ((*(float*) (obj + 0x44) > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * *(float*) (obj + 0x44) * *(float*) (obj + 0x44) * 0.5f;
+	f[2] = *(float*) (obj + 0x50) * (*(float*) (obj + 0x48) > 0.0f ? 1.0f : -1.0f) * g_6ad620 * 1.2f * *(float*) (obj + 0x48) * *(float*) (obj + 0x48) * 0.5f;
 	n = 0;
 	while (n < remain) {
 		v[0] = *(float*) (obj + 0x10);
 		v[1] = *(float*) (obj + 0x14);
 		v[2] = *(float*) (obj + 0x18);
-		q[0] = ((v[0] > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * v[0] * v[0] * g_6628cc;
-		q[1] = ((v[1] > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * v[1] * v[1] * g_6628cc;
-		q[2] = ((v[2] > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * v[2] * v[2] * g_6628cc;
+		q[0] = ((v[0] > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * v[0] * v[0] * 0.5f;
+		q[1] = ((v[1] > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * v[1] * v[1] * 0.5f;
+		q[2] = ((v[2] > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * v[2] * v[2] * 0.5f;
 		m[0] = (q[0] + f[0]) * inv;
 		m[1] = (q[1] + f[1]) * inv - step;
 		m[2] = (q[2] + f[2]) * inv;
 		v[0] += m[0];
 		v[1] += m[1];
 		v[2] += m[2];
-		r[0] = ((v[0] > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * v[0] * v[0] * g_6628cc;
-		r[1] = ((v[1] > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * v[1] * v[1] * g_6628cc;
-		r[2] = ((v[2] > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * v[2] * v[2] * g_6628cc;
+		r[0] = ((v[0] > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * v[0] * v[0] * 0.5f;
+		r[1] = ((v[1] > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * v[1] * v[1] * 0.5f;
+		r[2] = ((v[2] > 0.0f ? 1.0f : -1.0f) * *(float*) (obj + 0x50) * g_6ad620 * 1.2f) * v[2] * v[2] * 0.5f;
 		pf[0] = *(float*) (obj + 0x30);
 		pf[1] = *(float*) (obj + 0x34);
 		pf[2] = *(float*) (obj + 0x38);
@@ -78,9 +78,9 @@ int __cdecl fcn_005e9870(Sefde0Entry *entry)
 		t[0] = (r[0] + f[0]) * inv;
 		t[1] = (r[1] + f[1]) * inv - step;
 		t[2] = (r[2] + f[2]) * inv;
-		v[0] = (t[0] + m[0]) * g_6628cc + *(float*) (obj + 0x10);
-		v[1] = (t[1] + m[1]) * g_6628cc + *(float*) (obj + 0x14);
-		v[2] = (t[2] + m[2]) * g_6628cc + *(float*) (obj + 0x18);
+		v[0] = (t[0] + m[0]) * 0.5f + *(float*) (obj + 0x10);
+		v[1] = (t[1] + m[1]) * 0.5f + *(float*) (obj + 0x14);
+		v[2] = (t[2] + m[2]) * 0.5f + *(float*) (obj + 0x18);
 		*(float*) (obj + 0x10) = v[0];
 		*(float*) (obj + 0x14) = v[1];
 		*(float*) (obj + 0x18) = v[2];
@@ -95,7 +95,7 @@ int __cdecl fcn_005e9870(Sefde0Entry *entry)
 			*(float*) (obj + 0x38) = pf[2];
 			*(int*) (obj + 0x5c) = 2;
 			*(float*) (obj + 0x58) =
-				(*(float*)(obj + 0x18) * *(float*)(obj + 0x18) + *(float*)(obj + 0x14) * *(float*)(obj + 0x14) + *(float*)(obj + 0x10) * *(float*)(obj + 0x10)) * *(float*) (obj + 0x54) * g_6628cc;
+				(*(float*)(obj + 0x18) * *(float*)(obj + 0x18) + *(float*)(obj + 0x14) * *(float*)(obj + 0x14) + *(float*)(obj + 0x10) * *(float*)(obj + 0x10)) * *(float*) (obj + 0x54) * 0.5f;
 			return 0;
 		}
 		*(float*) (obj + 0x30) = pf[0];

@@ -1,3 +1,4 @@
+extern const float g_662d40[3];
 extern unsigned short g_7725c4;
 extern short g_14ce8c2;
 extern short g_14ce8c0;
@@ -218,19 +219,19 @@ done:
 	D3DXMatrixTranspose(mat, (float*) ((char*) d3_ActiveCamera + 0x18c));
 	d[0] = *(float*) 0x774744 * step * 1.1;
 	d[1] = *(float*) 0x77474c * step * 1.1;
-	q[0] = mat[8] * *(float*) 0x662d48
-	    + mat[4] * *(float*) 0x662d44
-	    + mat[0] * *(float*) 0x662d40;
-	q[2] = mat[10] * *(float*) 0x662d48
-	    + mat[6] * *(float*) 0x662d44
-	    + mat[2] * *(float*) 0x662d40;
+	q[0] = mat[8] * g_662d40[2]
+	    + mat[4] * g_662d40[1]
+	    + mat[0] * g_662d40[0];
+	q[2] = mat[10] * g_662d40[2]
+	    + mat[6] * g_662d40[1]
+	    + mat[2] * g_662d40[0];
 	if (sqrt((double) (q[0] * q[0] + q[2] * q[2])) < 0.1f) {
 		v[1] = d[1];
 		v[2] = 0.0f;
 		q[0] = mat[0] * d[0] + mat[4] * v[1] + mat[8] * v[2];
 		q[2] = mat[2] * d[0] + mat[6] * v[1] + mat[10] * v[2];
 	} else {
-		step = fcn_004514d0(0x662d40, (int) &q[0]);
+		step = fcn_004514d0((int) g_662d40, (int) &q[0]);
 		v[1] = 0.0f;
 		v[2] = d[1];
 		q[0] = d[0] * cos(-step) + d[1] * sin(-step);

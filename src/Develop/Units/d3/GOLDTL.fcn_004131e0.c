@@ -20,7 +20,7 @@ void __cdecl fcn_004131e0(float* out, float amount)
 	struct CamPad131e0 blk;
 	float neg;
 	float scale;
-	float a;
+	float a, x, y;
 	char* base;
 
 	base = (char*) d3_ActiveCamera;
@@ -34,15 +34,15 @@ void __cdecl fcn_004131e0(float* out, float amount)
 	a = blk.m[8] * neg;
 	a = a + blk.m[4] * scale;
 	a = a + *(float*) &blk.m[0] * *(float*) (blk.hole + 4);
-	*(float*) (blk.hole + 0x14) = a;
+	x = a;
 	a = blk.m[9] * neg;
 	a = a + blk.m[5] * scale;
 	a = a + *(float*) &blk.m[1] * *(float*) (blk.hole + 4);
-	*(float*) (blk.hole + 0x18) = a;
+	y = a;
 	/* Left-associated so m[10]*neg is the first multiply. Nesting the
 	 * memory term first emits that multiply before m[10]*neg. */
 	a = (blk.m[10] * neg + blk.m[6] * scale) + *(float*) &blk.m[2] * *(float*) (blk.hole + 4);
-	out[0] = *(float*) (blk.hole + 0x14) + cam[0];
-	out[1] = *(float*) (blk.hole + 0x18) + cam[1];
+	out[0] = x + cam[0];
+	out[1] = y + cam[1];
 	out[2] = a + cam[2];
 }

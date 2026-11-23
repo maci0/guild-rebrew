@@ -108,7 +108,6 @@ int __cdecl fcn_00591990(void) { return 0; }
 int __cdecl fcn_005988b0(void) { return 0; }
 int __cdecl fcn_005a8690(void) { return 0; }
 int __cdecl fcn_005cff10(void) { return 0; }
-int __cdecl fcn_005e6e00(void) { return 0; }
 int __stdcall fcn_005eb250(int a0, int a1, int a2) { return 0; }
 int __stdcall fcn_005eb970(int a0, int a1, int a2) { return 0; }
 int __stdcall fcn_005ebea2(int a0, int a1, int a2) { return 0; }
@@ -285,7 +284,6 @@ int __cdecl fcn_004fbd20(void) { return 0; }
 int __cdecl fcn_00505370(void) { return 0; }
 int __cdecl fcn_0050dac0(void) { return 0; }
 int __cdecl fcn_00510550b(void) { return 0; }
-int __cdecl fcn_005e0140(void) { return 0; }
 int __cdecl fcn_0064d740(void) { return 0; }
 int __cdecl fcn_0064dfda(void) { return 0; }
 int __cdecl fcn_0064e790(void) { return 0; }

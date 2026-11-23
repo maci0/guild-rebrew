@@ -12,7 +12,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl fcn_005373e0(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowBlutracheDialog(int);
-void __cdecl fcn_005e6e00(void);
+int __cdecl fcn_005e6e00(void);
 
 void __cdecl fcn_005e6950(int a)
 {
