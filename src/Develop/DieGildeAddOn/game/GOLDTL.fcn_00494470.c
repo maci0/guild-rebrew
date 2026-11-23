@@ -76,7 +76,6 @@ int __cdecl fcn_00494470(Party494470* p, int flag)
 		}
 		p->members[i].value = value < 2 ? value : 2;
 	}
-	x = flag;
 	for (i = 0; i < p->count; i++) {
 			switch (p->members[i].value) {
 		case -2:

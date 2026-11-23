@@ -5,6 +5,11 @@ typedef struct Query_453270 {
 	unsigned char flag;
 } Query_453270;
 
+typedef union Color_453270 {
+	unsigned int u;
+	unsigned char b[4];
+} Color_453270;
+
 char* __cdecl d3_SelectObjectLod(char* object);
 void __cdecl fcn_00452ee0(char* o);
 void __cdecl fcn_004522a0(char* o, Query_453270* q);
@@ -22,16 +27,13 @@ char __cdecl fcn_00453270(char* o)
 	char* mesh;
 	char* p;
 	Query_453270 q;
-	unsigned int color;
+	Color_453270 color;
 	int i;
 	int tmp;
 	float v[3];
 	float m;
 	float s;
 	float lum;
-	int* pr;
-	int* pg;
-	int* pb;
 
 	if (*(int*) (o + 0x1cc) == 0) {
 		*(char**) (o + 0x1cc) = d3_SelectObjectLod(o);
@@ -40,19 +42,20 @@ char __cdecl fcn_00453270(char* o)
 	if (mesh == 0 || (o[0x212] & 2)) {
 		return 0;
 	}
-	color = 0xff;
+	color.u = 0;
+	color.b[0] = 0xff;
 	(*(int*) 0x633b04)++;
 	fcn_00452ee0(o);
 	*(int*) 0x633b18 = 0;
-	for (i = 0; i < *(int*) (mesh + 8); i++) {
-		p = *(char**) mesh + i * 0x50 + 0x34;
-		*(int*) (p - 4) = *(int*) 0x5fcc78;
-		*(int*) p = *(int*) 0x5fcc7c;
-		*(int*) (p + 4) = *(int*) 0x5fcc80;
+	p = *(char**) mesh;
+	for (i = 0; i < *(int*) (mesh + 8); i++, p += 0x50) {
+		*(int*) (p + 0x30) = *(int*) 0x5fcc78;
+		*(int*) (p + 0x34) = *(int*) 0x5fcc7c;
+		*(int*) (p + 0x38) = *(int*) 0x5fcc80;
 	}
-	q.ref = o;
 	q.count = 0;
 	q.list = 0;
+	q.ref = o;
 	q.flag = ((unsigned char) o[0x210] >> 5) & 1;
 	d3_VisitSceneObjectsUntilStopped(*(char**) (o + 0x208), 0, 10, (char (__cdecl*)(char*, void*)) fcn_00453100, &q);
 	if (q.count > 0) {
@@ -63,15 +66,12 @@ char __cdecl fcn_00453270(char* o)
 		m_FreeTracked(q.list);
 		q.list = 0;
 	}
+	p = *(char**) mesh;
 	if (*(char*) 0x633450 != 0) {
-		pr = &tmp;
-		pg = &tmp;
-		pb = &tmp;
-		for (i = 0; i < *(int*) (mesh + 8); i++) {
-			p = *(char**) mesh + i * 0x50 + 0x34;
-			v[0] = *(float*) (p - 4);
-			v[1] = *(float*) p;
-			v[2] = *(float*) (p + 4);
+		for (i = 0; i < *(int*) (mesh + 8); i++, p += 0x50) {
+			v[0] = *(float*) (p + 0x30);
+			v[1] = *(float*) (p + 0x34);
+			v[2] = *(float*) (p + 0x38);
 			m = v[0];
 			if (!(m > v[1])) {
 				m = v[1];
@@ -85,27 +85,26 @@ char __cdecl fcn_00453270(char* o)
 				v[1] = v[1] * s;
 				v[2] = v[2] * s;
 			}
-			*pr = (int) v[0];
-			p[0x12] = (char) tmp;
-			*pg = (int) v[1];
-			p[0x11] = (char) tmp;
-			*pb = (int) v[2];
-			p[0x10] = (char) tmp;
-			*(int*) (p + 0xc) = *(int*) (p + 0x10);
+			tmp = (int) v[0];
+			p[0x46] = (char) tmp;
+			tmp = (int) v[1];
+			p[0x45] = (char) tmp;
+			tmp = (int) v[2];
+			p[0x44] = (char) tmp;
+			*(int*) (p + 0x40) = *(int*) (p + 0x44);
 		}
 	} else {
-		for (i = 0; i < *(int*) (mesh + 8); i++) {
-			p = *(char**) mesh + i * 0x50 + 0x34;
-			lum = *(float*) (p + 4) * 0.11f + *(float*) p * 0.59f + *(float*) (p - 4) * 0.3f;
+		for (i = 0; i < *(int*) (mesh + 8); i++, p += 0x50) {
+			lum = *(float*) (p + 0x30) * 0.3f + (*(float*) (p + 0x34) * 0.59f + *(float*) (p + 0x38) * 0.11f);
 			tmp = (int) lum;
 			if ((unsigned int) tmp >= 0xff) {
 				tmp = 0xff;
 			}
-			p[0x12] = (char) tmp;
-			*(int*) (p + 0xc) = *(int*) (p + 0x10);
+			p[0x46] = (char) tmp;
+			*(int*) (p + 0x40) = *(int*) (p + 0x44);
 		}
 	}
-	fcn_00452f90(o, mesh, 0, color);
+	fcn_00452f90(o, mesh, 0, color.u);
 	d3_VisitSceneObjectsUntilStopped(*(char**) (o + 0x208), 0, 4, fcn_00452d80, o);
 	*(int*) 0x633b18 = 0;
 	o[0x210] |= 4;

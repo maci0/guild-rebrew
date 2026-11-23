@@ -67,9 +67,8 @@ void __cdecl fcn_00465c60(void)
 		d2_DestroyElement(i);
 		i++;
 	} while (i < 0x3ff);
-	off = 0;
-	do {
-		entry = (VfsEntry*) (g_772500 + off);
+	for (i = 0; i < 0x800; i++) {
+		entry = (VfsEntry*) (g_772500 + i * 0x54);
 		if (entry->data != 0 && entry->size != 0) {
 			if (entry->kind < 0x10) {
 				fcn_0047b5d0(entry->data);
@@ -80,8 +79,7 @@ void __cdecl fcn_00465c60(void)
 			g_772508 -= entry->size;
 			entry->data = 0;
 		}
-		off += 0x54;
-	} while (off < 0x2a000);
+	}
 	if (g_77250c != 0) {
 		object = *(void**) (g_77250c + 0x24);
 		g_14ce728 = (*(int (__stdcall**) (void*)) (*(int*) object + 8))(object);

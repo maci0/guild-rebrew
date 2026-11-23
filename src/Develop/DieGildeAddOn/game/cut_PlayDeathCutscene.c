@@ -121,10 +121,10 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, cut_EventLoopFlags);
 		} else {
 			int alo;
-			f10 = 100.0f;
 			alo = 0;
 			r = *(int*) ((char*) obj + 4);
 			fcn_004c4510(obj, r);
+			f10 = 100.0f;
 			cm_AppendPacketFieldDelta(4, 1, 0x1c, &f10);
 			cm_AppendPacketFieldDelta(4, 1, 0x24, &alo);
 			*(char*) ((char*) obj + 8) = 100;

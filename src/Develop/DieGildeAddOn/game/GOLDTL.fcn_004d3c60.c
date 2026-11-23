@@ -45,8 +45,8 @@ int __cdecl fcn_004d3c60(int id)
 		mode = 5;
 	}
 	sum_lo = 0.0f;
-	for (i = 0x80; i < 0xc0; i += 4) {
-		ent = *(int*) (g_772eb4 + i);
+	for (i = 0x20; i < 0x30; i++) {
+		ent = *(int*) (g_772eb4 + i * 4);
 		if (ent != -1) {
 			e = gm_LookupEntityRecordIn32SlotTable(ent);
 			if (e[8] != 0 && e[8] != 4) {
@@ -55,8 +55,8 @@ int __cdecl fcn_004d3c60(int id)
 		}
 	}
 	sum_hi = 0.0f;
-	for (i = 0xc0; i < 0x100; i += 4) {
-		ent = *(int*) (g_772eb4 + i);
+	for (i = 0x30; i < 0x40; i++) {
+		ent = *(int*) (g_772eb4 + i * 4);
 		if (ent != -1) {
 			e = gm_LookupEntityRecordIn32SlotTable(ent);
 			if (e[8] != 0 && e[8] != 4) {

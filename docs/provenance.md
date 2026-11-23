@@ -32615,3 +32615,52 @@ Replaces the local vector reloads \`sqrt(v[0]*v[0] + ...)\` with direct matrix v
 - Before/after: `SIZE_MISMATCH` `249/624` (`obj 1858/2040`, `bytes 173/2040`) -> `SIZE_MISMATCH` `352/624` (`obj 1996/2040`, `bytes 189/2040`).
 - Decision owner: matching lane 46
 - 2026-11-24: Batch r5b73: matching lanes 35-53 (gpt-6.1-terra, gemini-3.8-flash, gemini-4-hydrogen, neon). Seven rows rise, none fall: RELOC GOLDTL 0x00565350, 0x005ccca0, 0x005d5930; NEAR_MATCHING GOLDTL 0x004172e0, 0x004e8360, 0x00536bb0, 0x0056e3c0. Verified: both clients link, server raw link byte-identical, lint 0/0 on all targets, no status regressions by rebrew's `_STATUS_ORDER`. Decision owner: matching lanes, reviewed by lead.
+
+## 2026-11-24 - GOLD 0x00453270 fcn_00453270 mesh lighting loop
+
+- Hoisted the mesh buffer pointer `p` across all three vertex/light loops, introduced `Color_453270` union for `color.u = 0; color.b[0] = 0xff;` matching native `0x4532b4`/`0x4532ba`/`0x4534f1`, dropped unused dummy locals `pr`/`pg`/`pb`, and aligned `q` field init and `lum` sum order in `src/Develop/Unassigned/GOLD.fcn_00453270.c`.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLD 0x00453270` from `84/229` (`obj 706/760`) to `109/229` (`obj 683/760`, +25 aligned pairs); all-target lint reported no findings. Native inline `fistp` sites at `0x45344b..0x4534ca` and existing `fcn_004522a0`/`fcn_00452f90` declaration discrepancies remain.
+- Decision owner: matching lane 46.
+
+## 2026-11-24 - GOLDTL 0x00593360 fcn_00593360 RELOC 368/368
+
+- Rewrote the row-y accumulation in `src/Develop/Units/d2.v1/GOLDTL.fcn_00593360.c` as `x = 10; y = height + 2; x = x + y; ...; y = x + y;`, matching native `add edi, ebx` / `push edi` at `0x005934b9..0x005934bc`.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x00593360` from `NEAR_MATCHING` (`101/112`, `366/368`) to `RELOC` (`103/112`, `368/368`); all-target lint reported no findings.
+- Decision owner: matching lane 46.
+
+## 2026-11-24 - GOLDTL 0x00465c60 fcn_00465c60 RELOC 500/500
+
+- Replaced the manual byte-offset `do ... while (off < 0x2a000)` scan in `src/Develop/Units/m_alloc/GOLDTL.fcn_00465c60.c` with `for (i = 0; i < 0x800; i++)` indexing `g_772500 + i * 0x54`, so MSVC strength-reduces `i * 0x54` into the SIB base register `[edi + eax + disp]` at `0x00465caa..0x00465cc2`.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x00465c60` from `NEAR_MATCHING` (`147/152`, `495/500`) to `RELOC` (`152/152`, `500/500`); all-target lint reported no findings.
+- Decision owner: matching lane 46.
+
+## 2026-11-24 - GOLDTL 0x004d3c60 fcn_004d3c60 SIB base order
+
+- Replaced the manual `i += 4` offset loops (`0x80..0xc0`, `0xc0..0x100`) in `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004d3c60.c` with `for (i = 0x20; i < 0x30; i++)` and `for (i = 0x30; i < 0x40; i++)` indexing `g_772eb4 + i * 4`, matching native `[esi + ecx]` and `[esi + edx]` SIB bytes at `0x004d3cf1` and `0x004d3d3d`.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x004d3c60` from `168/182` (`512/560`) to `170/182` (`514/560`, exact `560/560`); all-target lint reported no findings.
+- Decision owner: matching lane 46.
+
+## 2026-11-24 - GOLDTL 0x00494470 fcn_00494470 second-loop guard
+
+- Removed the spurious `x = flag;` assignment before the second `for (i = 0; i < p->count; i++)` loop in `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00494470.c`, matching native `xor ebx, ebx; test al, al; jbe; mov esi, [esp+0x20]` at `0x00494579..0x00494583`.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x00494470` from `223/240` (`608/640`) to `224/240` (`622/640`, exact `640/640`); all-target lint reported no findings.
+- Decision owner: matching lane 46.
+
+## 2026-11-24 - GOLDTL 0x00441400 fcn_00441400 Terrain441400 tex[k] loop setup
+
+- Added local `Terrain441400` struct layout (`tex[8]`, `pos[3]`, `cells[8][8]`) in `src/Develop/Units/d3/GOLDTL.fcn_00441400.c` and replaced the manual `pp` pointer walk with `for (k = 0; k < 8; k++)` indexing `t->tex[k]` and `&t->cells[a][b]`, matching native `mov ebx, 0x14` ahead of the `[esp+0x10]` spill at `0x0044148e..0x00441493`.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x00441400` from `232/237` (`712/725`) to `233/237` (`721/725`, exact `725/725`); all-target lint reported no findings.
+- Decision owner: matching lane 46.
+
+## 2026-11-24 - GOLDTL 0x00457290 fcn_00457290 RELOC 914/914
+
+- Removed the redundant `p2` local in `src/Develop/Unassigned/GOLDTL.fcn_00457290.c`, passed `(char*) q` directly to `fcn_004582d0`, and assigned `p1 = (char*) node->p1cc;` before `q = (Sub0457290*) p1;`, matching native `[esp + 0x14]` before `[esp + 0x18]` at `0x0045747a..0x0045747e`.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x00457290` from `NEAR_MATCHING` (`285/286`, `912/914`) to `RELOC` (`286/286`, `914/914`); all-target lint reported no findings.
+- Decision owner: matching lane 46.
+
+## 2026-11-24 - GOLDTL 0x004e2b70 cut_PlayDeathCutscene alo/f10 store order
+
+- Ordered `alo = 0;` before `fcn_004c4510(obj, r);` and `f10 = 100.0f;` after in `src/Develop/DieGildeAddOn/game/cut_PlayDeathCutscene.c`, matching native `0x004e2e6b..0x004e2e73`.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x004e2b70` from `314/347` (`1098/1199`) to `315/347` (`1099/1199`, exact `1199/1199`); all-target lint reported no findings.
+- Decision owner: matching lane 46.
+- 2026-11-24: Batch r5b74: matching lane 46 (gemini-4-neon). Three rows rise to RELOC, none fall: GOLDTL 0x00457290, 0x00465c60, 0x00593360. Verified: both clients link, server raw link byte-identical, lint 0/0 on all targets, no status regressions by rebrew's `_STATUS_ORDER`. Decision owner: matching lane, reviewed by lead.

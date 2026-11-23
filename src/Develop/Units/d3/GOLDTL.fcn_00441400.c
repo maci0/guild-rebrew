@@ -43,6 +43,14 @@ typedef struct Cell {
 	char pad3[5];
 } Cell;
 
+typedef struct Terrain441400 {
+	char pad0[0x30];
+	MObj* tex[8];
+	float pos[3];
+	char pad5c[0x44];
+	Cell cells[8][8];
+} Terrain441400;
+
 #include "Develop/Units/d3/d3_camera.h"
 
 
@@ -53,29 +61,30 @@ void __cdecl fcn_004372d0(unsigned char, unsigned char, int, unsigned char, unsi
 /* ADDRESS: GOLDTL 0x00441400 */
 void __cdecl fcn_00441400(char* o)
 {
+	Terrain441400* t;
 	float m[16];
-	MObj** pp;
 	Cell* c;
 	MObj* p;
 	unsigned k;
 	int a;
 	int b;
 
+	t = (Terrain441400*) o;
 	if (d3_ActiveCamera == 0) {
 		return;
 	}
-	fcn_005ec410(m, *(float*) (o + 0x50) - *(float*) (((char*) d3_ActiveCamera) + 0x4c),
-	             *(float*) (o + 0x54) - *(float*) (((char*) d3_ActiveCamera) + 0x50),
-	             *(float*) (o + 0x58) - *(float*) (((char*) d3_ActiveCamera) + 0x54));
+	fcn_005ec410(m, t->pos[0] - *(float*) (((char*) d3_ActiveCamera) + 0x4c),
+	             t->pos[1] - *(float*) (((char*) d3_ActiveCamera) + 0x50),
+	             t->pos[2] - *(float*) (((char*) d3_ActiveCamera) + 0x54));
 	fcn_005eb970(m, m, (float*) (((char*) d3_ActiveCamera) + 0x18c));
 	((Transform441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetTransform)(((D3D_DEVICE_VIEW*)g_6b5de0), 0x100, m);
 	fcn_004372d0(0xff, 0, 0, 0, 0);
-	for (pp = (MObj**) (o + 0x30), k = 0; k < 8; k++) {
-		if (*pp != 0) {
-			((Texture441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) *pp + 0x50));
+	for (k = 0; k < 8; k++) {
+		if (t->tex[k] != 0) {
+			((Texture441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) t->tex[k] + 0x50));
 			for (a = 0; a < 8; a++) {
 				for (b = 0; b < 8; b++) {
-					c = (Cell*) (o + 0xa0) + a * 8 + b;
+					c = &t->cells[a][b];
 					if (c->on > 0 && c->occ[k].a != 0) {
 						p = c->occ[k].a;
 						p->v->slots[3](p, 0);
@@ -83,17 +92,16 @@ void __cdecl fcn_00441400(char* o)
 				}
 			}
 		}
-		pp++;
 	}
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x1b, 1);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x8d, 1);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x13, 5);
-	for (pp = (MObj**) (o + 0x30), k = 0; k < 8; k++) {
-		if (*pp != 0) {
-			((Texture441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) *pp + 0x50));
+	for (k = 0; k < 8; k++) {
+		if (t->tex[k] != 0) {
+			((Texture441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) t->tex[k] + 0x50));
 			for (a = 0; a < 8; a++) {
 				for (b = 0; b < 8; b++) {
-					c = (Cell*) (o + 0xa0) + a * 8 + b;
+					c = &t->cells[a][b];
 					if (c->on > 0 && c->occ[k].b != 0 && c->occ[k].state == 1) {
 						p = c->occ[k].b;
 						p->v->slots[3](p, 0);
@@ -101,16 +109,15 @@ void __cdecl fcn_00441400(char* o)
 				}
 			}
 		}
-		pp++;
 	}
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0xe, 0);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x14, 2);
-	for (pp = (MObj**) (o + 0x30), k = 0; k < 8; k++) {
-		if (*pp != 0) {
-			((Texture441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) *pp + 0x50));
+	for (k = 0; k < 8; k++) {
+		if (t->tex[k] != 0) {
+			((Texture441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) t->tex[k] + 0x50));
 			for (a = 0; a < 8; a++) {
 				for (b = 0; b < 8; b++) {
-					c = (Cell*) (o + 0xa0) + a * 8 + b;
+					c = &t->cells[a][b];
 					if (c->on > 0 && c->occ[k].b != 0) {
 						if (c->occ[k].state != 1) {
 							p = c->occ[k].b;
@@ -124,7 +131,6 @@ void __cdecl fcn_00441400(char* o)
 				}
 			}
 		}
-		pp++;
 	}
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x1b, 0);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x13, 2);

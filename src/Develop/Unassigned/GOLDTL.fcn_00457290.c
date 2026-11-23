@@ -99,7 +99,6 @@ char __cdecl fcn_00457290(Node0457290* node, Node0457290* other, char* a2, char*
 	Sub0457290* q;
 	float tol;
 	char* p1;
-	char* p2;
 	float va[4];
 	float vb[4];
 	float vc[4];
@@ -194,9 +193,8 @@ alloc:
 			*(int*) (rec->fc + 8) = *(int*) 0x6b8008;
 		}
 		m = node->p1ec;
-		q = node->p1cc;
-		p1 = (char*) q;
-		p2 = (char*) q;
+		p1 = (char*) node->p1cc;
+		q = (Sub0457290*) p1;
 		if (m->f11f4 > 0 && m->f11f0 > 0) {
 			p1 = (char*) m + 0xee0;
 		}
@@ -250,7 +248,7 @@ alloc:
 			}
 		}
 submit:
-		fcn_004582d0((char*) node, p2, p1, a2, va, vb, (char*) other, rec, a3);
+		fcn_004582d0((char*) node, (char*) q, p1, a2, va, vb, (char*) other, rec, a3);
 		fcn_00457630(rec, *(unsigned int*) 0x6b8300);
 	}
 end:

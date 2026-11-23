@@ -48,15 +48,17 @@ void __cdecl fcn_00593360(void)
 		v = g_14a579c;
 	}
 	fcn_0064d41a(buf, "%s %s %s", v, g_779c72, g_779c82);
-	y = *(int*)&((D2_CONTROL_TL*)g_1015ea0)[fcn_0046fac0(i, 10, buf, d2_CurrentWindowId)].height + 2;
-	z = y + 0xa;
+	x = 10;
+	y = *(int*)&((D2_CONTROL_TL*)g_1015ea0)[fcn_0046fac0(i, x, buf, d2_CurrentWindowId)].height + 2;
+	x = x + y;
 	if (g_779c70 == 1)
 		v = g_14a595c[g_779c6b];
 	else
 		v = g_14a57e0[g_779c6b];
 	fcn_0064d41a(buf, "%s: %s", g_14b5d40, v);
-	fcn_0046fac0(i, z, buf, d2_CurrentWindowId);
+	fcn_0046fac0(i, x, buf, d2_CurrentWindowId);
 	v = g_14a6538[g_779c71];
 	fcn_0064d41a(buf, "%s: %s", g_14b5d44, v);
-	fcn_0046fac0(i, y + z, buf, d2_CurrentWindowId);
+	y = x + y;
+	fcn_0046fac0(i, y, buf, d2_CurrentWindowId);
 }
