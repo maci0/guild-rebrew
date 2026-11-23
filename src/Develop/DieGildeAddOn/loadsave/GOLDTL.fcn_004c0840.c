@@ -57,7 +57,7 @@ int __cdecl fcn_004c0840(int handle)
 			*(Rec24*) (dst + 8) = rec->a;
 			*(Rec24*) (dst + 0x20) = rec->b;
 			i++;
-			rec = (Rec64*) ((char*) rec + 0x40);
+			rec++;
 		} while (i < n && rec != 0 && *(int*) (x + 2) == rec->id);
 	}
 	m_FreeTracked(buf);

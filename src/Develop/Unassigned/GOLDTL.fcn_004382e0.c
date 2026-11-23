@@ -9,23 +9,25 @@ extern float g_1042a10;
 /* ADDRESS: GOLDTL 0x004382e0 */
 int __cdecl fcn_004382e0(char* obj)
 {
-	char* ext;
-	char* entry;
-	int n;
-	int idx;
-	int max_idx;
 	float dx;
 	float dy;
 	float dz;
-	float dist;
+	float fn;
+	char* ext;
+	char* entry;
+	int res;
+	int idx;
+	int max_idx;
+	unsigned char n;
 
+	res = 0;
 	ext = *(char**) (obj + 0x1ec);
 	if (ext == 0) {
-		return 0;
+		return res;
 	}
 	n = *(unsigned char*) (ext + 0x163c);
 	if (n == 0) {
-		return 0;
+		return res;
 	}
 	if (n == 1) {
 		entry = ext + 0xf4;
@@ -36,14 +38,17 @@ int __cdecl fcn_004382e0(char* obj)
 		entry = ext + 0xf4 + idx * 0x4a4;
 	}
 	else {
+		float dist;
+
 		dx = *(float*) (obj + 0x4c) - *(float*) (d3_ActiveCamera + 0x4c);
 		dy = *(float*) (obj + 0x50) - *(float*) (d3_ActiveCamera + 0x50);
 		dz = *(float*) (obj + 0x54) - *(float*) (d3_ActiveCamera + 0x54);
+		fn = (float) *(unsigned char*) (ext + 0x163c);
 		dist = sqrt(dz * dz + dy * dy + dx * dx);
-		dist = dist * n * g_1042a10;
+		dist = dist * fn * g_1042a10;
 		idx = (int) dist;
-		if (idx >= n) {
-			dist = (float) n - 1.0f;
+		if (idx >= *(unsigned char*) (ext + 0x163c)) {
+			dist = fn - 1.0f;
 		}
 		else if (dist < g_6628a8) {
 			dist = g_6628a8;
@@ -52,7 +57,7 @@ int __cdecl fcn_004382e0(char* obj)
 		entry = ext + 0xf4 + idx * 0x4a4;
 	}
 	if (*(int*) (entry + 0x310) == 0 || *(int*) (entry + 0x314) == 0) {
-		return 0;
+		return res;
 	}
 	if (entry == *(char**) (obj + 0x1cc)) {
 		return (int) entry;

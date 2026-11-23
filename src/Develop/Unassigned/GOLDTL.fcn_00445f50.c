@@ -4,6 +4,7 @@
 #include "client_types.h"
 #include "Develop/Units/d3/d3_object.h"
 extern float g_6628a8;
+extern float g_6628a0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67a370;
 extern VECTOR3 g_6b86c4;
@@ -31,14 +32,14 @@ char __cdecl fcn_00445f50(unsigned int slot, float t, float scale, int a3)
 	Pal_1041d20* dst;
 	unsigned char* rows;
 	float inv;
-	float c[3];
+	float c[4];
 	unsigned int n;
 
 	if (slot < 7) {
 	} else {
 		return 0;
 	}
-	if (!(t >= 0.0f))
+	if (!(t >= g_6628a8))
 		return 0;
 	if (!(t <= g_6628a0))
 		return 0;
@@ -62,10 +63,10 @@ char __cdecl fcn_00445f50(unsigned int slot, float t, float scale, int a3)
 	g_6b86c4.x = c[0] * t + ((D3_SCENE_SLOT*)g_1041d80)[slot].b.x;
 	g_6b86c4.y = c[1] * t + ((D3_SCENE_SLOT*)g_1041d80)[slot].b.y;
 	g_6b86c4.z = c[2] * t + ((D3_SCENE_SLOT*)g_1041d80)[slot].b.z;
-	inv = 1.0f - t;
+	inv = g_6628a0 - t;
 	pc = (Pal_1041d20*)((D3_SCENE_SLOT*)g_1041d80)[slot].pal;
 	pn = (Pal_1041d20*)((D3_SCENE_SLOT*)g_1041d80)[n].pal;
-	for (dst = g_1041d20; (int) dst < (int) (g_1041d20 + 6); dst++) {
+	for (dst = g_1041d20; dst < g_1041d20 + 6; dst++) {
 		((unsigned char*) &dst->color)[2] = (unsigned char) (int) (((unsigned char*) &pc->color)[2] * inv + ((unsigned char*) &pn->color)[2] * t);
 		((unsigned char*) &dst->color)[1] = (unsigned char) (int) (((unsigned char*) &pn->color)[1] * t + ((unsigned char*) &pc->color)[1] * inv);
 		((unsigned char*) &dst->color)[0] = (unsigned char) (int) (((unsigned char*) &pc->color)[0] * inv + ((unsigned char*) &pn->color)[0] * t);
@@ -77,13 +78,12 @@ char __cdecl fcn_00445f50(unsigned int slot, float t, float scale, int a3)
 	UpdateSceneLighting(a3);
 	*(int*) 0x67a95c = slot;
 	if (g_6b89c0 != 0) {
-		rows = (unsigned char*) g_10405e0;
 		*((unsigned char*) (g_6b89c0 + 0x0a)) =
-			(unsigned char) (int) (rows[slot * 4 + 2] * inv + rows[n * 4 + 2] * t);
+			(unsigned char) (int) (((unsigned char*) g_10405e0)[slot * 4 + 2] * inv + ((unsigned char*) g_10405e0)[n * 4 + 2] * t);
 		*((unsigned char*) (g_6b89c0 + 0x09)) =
-			(unsigned char) (int) (rows[slot * 4 + 1] * inv + rows[n * 4 + 1] * t);
+			(unsigned char) (int) (((unsigned char*) g_10405e0)[slot * 4 + 1] * inv + ((unsigned char*) g_10405e0)[n * 4 + 1] * t);
 		*((unsigned char*) (g_6b89c0 + 0x08)) =
-			(unsigned char) (int) (rows[slot * 4 + 0] * inv + rows[n * 4 + 0] * t);
+			(unsigned char) (int) (((unsigned char*) g_10405e0)[slot * 4 + 0] * inv + ((unsigned char*) g_10405e0)[n * 4 + 0] * t);
 	}
 	return 1;
 }

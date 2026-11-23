@@ -123,5 +123,5 @@ void __cdecl fcn_00500e40(void)
 		}
 		r += 4;
 		t += 0x41;
-	} while (r < (unsigned char*) 0x99ec10);
+	} while ((int) r < 0x99ec10);
 }

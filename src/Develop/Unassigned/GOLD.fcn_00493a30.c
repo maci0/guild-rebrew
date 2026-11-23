@@ -34,7 +34,7 @@ void __cdecl fcn_00493a30(unsigned char* game)
             *(int*) (game + 8) = 6;
             return;
         }
-        *(int*) (game + 8) = 3 + (*(int*) (game + 0x4c) == 4) * 2;
+        *(int*) (game + 8) = (*(int*) (game + 0x4c) == 4) ? 5 : 3;
         return;
     }
     for (i = 0; i < game[0x10]; i++)

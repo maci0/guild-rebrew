@@ -11,34 +11,33 @@ extern unsigned short g_6b6d20[256];
 int __cdecl fcn_0041ca10(int r, int g, int b);
 
 /* ADDRESS: GOLDTL 0x0041c470 */
-unsigned int __cdecl fcn_0041c470(unsigned char* input, char* output, int width, unsigned int height, int dither)
+unsigned int __cdecl fcn_0041c470(unsigned char* input, char* output, int width, int height, int dither)
 {
 	unsigned int i;
 	unsigned int count;
 	unsigned char* map;
 	unsigned char* clamp;
 	short* cache;
-	unsigned int entries;
-	unsigned int size;
+	int entries;
+	int size;
 	short* a;
 	short* b;
 	char* error;
-	unsigned int row;
+	int row;
 	int reverse;
 	int step;
-	short* next;
-	short* current;
 	short* down;
 	short* up;
 	int x;
-	unsigned int r;
-	unsigned int g;
-	unsigned int bl;
+	int r;
+	int g;
+	int bl;
 	unsigned int key;
-	unsigned int index;
+	int index;
 	int dr;
 	int dg;
 	int db;
+	unsigned char* clamp_mid;
 
 	i = 0;
 	if (!dither) {
@@ -61,77 +60,82 @@ unsigned int __cdecl fcn_0041c470(unsigned char* input, char* output, int width,
 		free(map);
 		return 1;
 	}
-	entries = (unsigned int)width * 3 + 6;
+	reverse = 0;
+	entries = width * 3 + 6;
 	clamp = (unsigned char*)malloc(768);
+	clamp_mid = clamp + 256;
 	cache = (short*)malloc(65536);
 	size = entries * 2;
 	a = (short*)malloc(size);
 	b = (short*)malloc(size);
 	error = (char*)malloc(512);
 	if (clamp && cache && a && b && error) {
-		if ((int)entries > 0) {
-			memset(a, 0, entries * 2);
+		if (entries > 0) {
+			for (x = 0; x < entries; x++) {
+				a[x] = 0;
+			}
 		}
 		memset(cache, 255, 65536);
-		for (i = 0; i < 256; i++) {
-			clamp[i] = 0;
-			clamp[256 + i] = (unsigned char)i;
-			clamp[512 + i] = 255;
+		for (x = 0; x < 256; x++) {
+			clamp_mid[x - 256] = 0;
+			clamp_mid[x] = (unsigned char)x;
+			clamp_mid[x + 256] = 255;
 		}
-		for (i = 0; i < 256; i++) {
-			error[i] = -20;
-			error[256 + i] = 20;
+		for (x = 0; x < 256; x++) {
+			error[x] = -20;
+			error[256 + x] = 20;
 		}
 		for (x = -20; x <= 20; x++) {
 			error[256 + x] = (char)x;
 		}
-		reverse = 0;
-		for (row = 0; (int)row < (int)height; row++) {
-			step = reverse ? -1 : 1;
+		for (row = 0; row < height; row++) {
 			if (reverse) {
-				input += (unsigned int)width * 3 - 3;
-				output += (unsigned int)width - 1;
+				step = -1;
+				input += width * 3 - 3;
+				output += width - 1;
+				up = b + 3;
+				down = a + width * 3;
+			} else {
+				step = 1;
+				up = a + 3;
+				down = b + width * 3;
 			}
-			next = reverse ? a : b;
-			current = reverse ? b : a;
-			down = next + (unsigned int)width * 3;
-			down[0] = 0;
-			down[1] = 0;
 			down[2] = 0;
-			up = current + 3;
+			down[1] = 0;
+			down[0] = 0;
 			for (x = width; x > 0; x--) {
-				r = clamp[256 + (unsigned int)input[0] + ((up[0] + 8) >> 4)];
-				g = clamp[256 + (unsigned int)input[1] + ((up[1] + 8) >> 4)];
-				bl = clamp[256 + (unsigned int)input[2] + ((up[2] + 8) >> 4)];
+				r = clamp_mid[input[0] + ((up[0] + 8) >> 4)];
+				g = clamp_mid[input[1] + ((up[1] + 8) >> 4)];
+				bl = clamp_mid[input[2] + ((up[2] + 8) >> 4)];
 				key = (((r & 248) << 5) | (g & 248)) << 2 | (bl >> 3);
 				if (cache[key] < 0) {
 					cache[key] = (short)fcn_0041ca10(r, g, bl);
 				}
-				index = (unsigned short)cache[key];
+				index = cache[key];
 				*output = (unsigned char)index;
-				dr = error[256 + r - g_6b6008[0][index]];
-				db = error[256 + bl - g_6b6008[2][index]];
-				dg = error[256 + g - g_6b6008[1][index]];
+				up += 3;
+				down -= 3;
+				dr = (error + 256)[r - g_6b6008[0][index]];
+				dg = (error + 256)[g - g_6b6008[1][index]];
+				db = (error + 256)[bl - g_6b6008[2][index]];
 				down[0] = (short)dr;
-				down[6] = (short)(down[6] + dr * 3);
-				down[3] = (short)(down[3] + dr * 5);
-				up[0] = (short)(up[0] + dr * 7);
+				down[6] += (short)(dr * 3);
+				down[3] += (short)(dr * 5);
+				up[0] += (short)(dr * 7);
 				down[1] = (short)dg;
-				down[7] = (short)(down[7] + dg * 3);
-				down[4] = (short)(down[4] + dg * 5);
-				up[1] = (short)(up[1] + dg * 7);
+				down[7] += (short)(dg * 3);
+				down[4] += (short)(dg * 5);
+				up[1] += (short)(dg * 7);
 				down[2] = (short)db;
-				down[8] = (short)(down[8] + db * 3);
-				down[5] = (short)(down[5] + db * 5);
-				up[2] = (short)(up[2] + db * 7);
+				down[8] += (short)(db * 3);
+				down[5] += (short)(db * 5);
+				up[2] += (short)(db * 7);
 				input += step * 3;
 				output += step;
-				down -= 3;
-				up += 3;
 			}
-			if (row % 2) {
-				input += ((unsigned int)width + 1) * 3;
-				output += (unsigned int)width + 1;
+			if (row % 2 == 1) {
+				input += (width + 1) * 3;
+				output += width + 1;
 			}
 			reverse = !reverse;
 		}

@@ -14,6 +14,7 @@ typedef struct {
 	unsigned char fc1;
 } Ent5c1110;
 #include "client_data.h"
+#include "client_dialog_state.h"
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -120,8 +121,8 @@ int __cdecl fcn_005c1110(void)
 done:;
 
 		}
-		if (*(int*) 0x14ce8e0 != 0) {
-			*(int*) 0x774654 = 1;
+		if (g_14ce8e0 != 0) {
+			g_774654 = 1;
 		} else if (*(int*) &g_100f1dc != -1 && *(int*) 0x67d370 != -1) {
 			for (k = 0; k < 4; k++) {
 				if (a[k] == *(int*) 0x67d370) {

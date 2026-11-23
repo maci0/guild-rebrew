@@ -14,8 +14,7 @@ void __cdecl fcn_00451500(float* a, float angle, float* m)
 	float s;
 	float c;
 	float v[4];
-
-
+	float t;
 	float dotOffset;
 
 	v[2] = g_662d68;
@@ -28,22 +27,20 @@ void __cdecl fcn_00451500(float* a, float angle, float* m)
 	m[10] = a[2];
 	d3_NormalizeVector(m + 8);
 	dotOffset = -(v[0] * m[8] + v[2] * m[10] + v[1] * m[9]);
-	m[4] = v[0] = dotOffset * m[8] + v[0];
-	m[5] = v[1] = dotOffset * m[9] + v[1];
-	m[6] = v[2] = dotOffset * m[10] + v[2];
-	if ((float) sqrt(v[0] * v[0] + (v[1] * v[1] + v[2] * v[2])) < g_662ce8) {
-		v[0] = -m[9];
-		m[4] = v[0] * m[8] + g_662d60;
-		m[5] = v[0] * m[9] + g_662d64;
-		v[0] = v[0] * m[10] + g_662d68;
-		m[6] = v[0];
-		if ((float) sqrt(m[5] * m[5] + (m[4] * m[4] + v[0] * v[0])) < g_662ce8) {
-			v[0] = -m[10];
-			m[4] = v[0] * m[8] + g_662d40[0];
-			m[5] = v[0] * m[9] + g_662d40[1];
-			v[0] = v[0] * m[10] + g_662d40[2];
-			m[6] = v[0];
-			if ((float) sqrt(m[5] * m[5] + (m[4] * m[4] + v[0] * v[0])) < g_662ce8) {
+	m[4] = dotOffset * m[8] + v[0];
+	m[5] = dotOffset * m[9] + v[1];
+	m[6] = dotOffset * m[10] + v[2];
+	if ((float) sqrt(m[6] * m[6] + m[4] * m[4] + m[5] * m[5]) < g_662ce8) {
+		t = -m[9];
+		m[4] = t * m[8] + g_662d60;
+		m[5] = t * m[9] + g_662d64;
+		m[6] = t * m[10] + g_662d68;
+		if ((float) sqrt(m[6] * m[6] + m[4] * m[4] + m[5] * m[5]) < g_662ce8) {
+			t = -m[10];
+			m[4] = t * m[8] + g_662d40[0];
+			m[5] = t * m[9] + g_662d40[1];
+			m[6] = t * m[10] + g_662d40[2];
+			if ((float) sqrt(m[6] * m[6] + m[4] * m[4] + m[5] * m[5]) < g_662ce8) {
 				m[0xe] = 0.0f;
 				m[0xd] = 0.0f;
 				m[0xc] = 0.0f;

@@ -32,14 +32,14 @@ void __cdecl he_RunNightWatchmanAnnouncements(char* action)
 		if (*(char*) 0x7766b9 != 0 && *(char*) &g_774964 != 0 &&
 		    (gm_RandomMod(10) & 0xffff) > 7 && *(char*) &g_774964 != 0) {
 			fcn_004c30a0(*(int*) (action + 0xac), 0, (char*) 0x6a6d30, -1, 0xfa);
-			if (*(int*) (idx * 4 + 0x696540) == 0x40e00000) {
+			if (*(float*) (idx * 4 + 0x696540) == 7.0f) {
 				fcn_004c30a0(*(int*) (action + 0xac), 0, (char*) 0x6a6d10, -1, 0xfa);
-			} else if (*(int*) (idx * 4 + 0x696540) == 0x41000000) {
+			} else if (*(float*) (idx * 4 + 0x696540) == 8.0f) {
 				if (idx == 2)
 					fcn_004c30a0(*(int*) (action + 0xac), 0, (char*) 0x6a6cec, -1, 0xfa);
 				else
 					fcn_004c30a0(*(int*) (action + 0xac), 0, (char*) 0x6a6ccc, -1, 0xfa);
-			} else if (*(int*) (idx * 4 + 0x696540) == 0x41100000) {
+			} else if (*(float*) (idx * 4 + 0x696540) == 9.0f) {
 				fcn_004c30a0(*(int*) (action + 0xac), 0, (char*) 0x6a6cac, -1, 0x3e8);
 			}
 			if ((gm_RandomMod(10) & 0xffff) > 7)
@@ -62,14 +62,14 @@ void __cdecl he_RunNightWatchmanAnnouncements(char* action)
 		if (*(char*) 0x7766b9 != 0 && *(char*) &g_774964 != 0 &&
 		    (gm_RandomMod(10) & 0xffff) > 7 && *(char*) &g_774964 != 0) {
 			fcn_004c30a0(*(int*) (action + 0xac), 0, (char*) 0x6a6d30, -1, 0xfa);
-			if (*(int*) (idx * 4 + 0x696550) == 0x41980000) {
+			if (*(float*) (idx * 4 + 0x696550) == 19.0f) {
 				fcn_004c30a0(*(int*) (action + 0xac), 0, (char*) 0x6a6c6c, -1, 0xfa);
-			} else if (*(int*) (idx * 4 + 0x696550) == 0x41a00000) {
+			} else if (*(float*) (idx * 4 + 0x696550) == 20.0f) {
 				if (idx == 2)
 					fcn_004c30a0(*(int*) (action + 0xac), 0, (char*) 0x6a6c48, -1, 0xfa);
 				else
 					fcn_004c30a0(*(int*) (action + 0xac), 0, (char*) 0x6a6c28, -1, 0xfa);
-			} else if (*(int*) (idx * 4 + 0x696550) == 0x41a80000) {
+			} else if (*(float*) (idx * 4 + 0x696550) == 21.0f) {
 				fcn_004c30a0(*(int*) (action + 0xac), 0, (char*) 0x6a6c08, -1, 0xfa);
 			}
 			if ((gm_RandomMod(10) & 0xffff) > 7)

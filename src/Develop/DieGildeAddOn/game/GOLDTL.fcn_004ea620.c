@@ -39,7 +39,6 @@ void __cdecl fcn_004ea620(void)
 	count = 0;
 	value = 0;
 	found = 0;
-	best_i = 0;
 	ent = gm_StartFilteredEntitySearch(1, 5, 4);
 	if (ent != 0) {
 		do {
@@ -124,7 +123,7 @@ void __cdecl fcn_004ea620(void)
 		value = 0;
 	}
 	best = 0;
-	for (; best_i < count; best_i++) {
+	for (best_i = 0; best_i < count; best_i++) {
 		rec = (char*) cand[best_i];
 		n = gm_WalkEntityChain(*(unsigned short*) rec);
 		if (n > value) {

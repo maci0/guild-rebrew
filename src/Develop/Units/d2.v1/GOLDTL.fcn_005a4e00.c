@@ -91,7 +91,7 @@ void __cdecl fcn_005a4e00(char* building)
 			}
 			count = 0;
 			for (j = 0; j < n; j++) {
-				for (i = 0; i <= count; i++) {
+				for (i = 0; i < count + 1; i++) {
 					if (((ENTITY_RECORD*) g_7f4ca0)[ids[i]].entity_id == *(int*) (out[j] + 0xb0)) {
 						break;
 					}
@@ -122,8 +122,8 @@ void __cdecl fcn_005a4e00(char* building)
 				items[i][1] = fcn_00472250(h, 2,
 				    io_AppendText(0x18df, ids[i], v, sum));
 			}
+			first = 0;
 		}
-		first = 0;
 		if (g_100f1dc == 2) {
 			if (d2_CurrentElementId == close_btn) {
 				fcn_005a4bb0(building);

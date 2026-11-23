@@ -58,8 +58,8 @@ char __cdecl ch_FindWalkableCell(char* map, float* from, float* to, int x, int y
 	} else {
 		d3_GridPointToWorld(map, x, y, pb);
 	}
-	pa[0] = from[0];
 	pa[1] = from[1];
+	pa[0] = from[0];
 	pa[2] = from[2];
 	*outX = -1;
 	*outY = -1;

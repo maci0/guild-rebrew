@@ -18,7 +18,6 @@ void __cdecl fcn_00454850(unsigned int* node, unsigned int a1, unsigned int dept
 	char ok;
 	unsigned int i;
 
-	ok = 1;
 	if (node[0xc] > 0) {
 		*((float*) (node + 4)) = 1.0e10f;
 		*((float*) (node + 5)) = 1.0e10f;
@@ -61,6 +60,7 @@ void __cdecl fcn_00454850(unsigned int* node, unsigned int a1, unsigned int dept
 		}
 	}
 	if (depth < maxDepth && node[0xc] > a1) {
+		ok = 1;
 		d[0] = (*((float*) (node + 8)) - *((float*) (node + 4))) * 0.5f;
 		d[2] = (*((float*) (node + 10)) - *((float*) (node + 6))) * 0.5f;
 		first = -1;

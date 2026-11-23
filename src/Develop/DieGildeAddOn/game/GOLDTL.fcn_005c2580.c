@@ -79,7 +79,7 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 	fcn_005373e0(0, 0x677c7);
 	do {
 		p = gm_SearchTable67(id);
-		if ((*(unsigned char*) (e + 0x5b) & 4) || p == 0) {
+		if (!((*(unsigned char*) (e + 0x5b) & 4) == 0 && p != 0)) {
 			g_774654 = 1;
 		}
 		if (g_14ce8e0 != 0) {
@@ -94,9 +94,9 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 				val = 0;
 				dur = 0;
 				*(unsigned char*) (msg + 4) = 0x1c;
+				*(int*) (msg + 8) = ((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970].entity_id;
 				*(int*) (msg + 0xc) = -1;
 				*(unsigned char*) (msg + 0x36) = 1;
-				*(int*) (msg + 8) = ((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970].entity_id;
 				*(int*) (msg + 0x58) = *(int*) (e + 1);
 				if (d2_CurrentElementId == h0) {
 					dur = (int) (n * 0.25);

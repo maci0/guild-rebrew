@@ -51,7 +51,7 @@ void __cdecl fcn_004c2860(void)
 	char* cc;
 	Chan_14cc460* p;
 
-	now = (*(int*) &g_6b7fac + *(int*) &g_6b7fac * 2) * 4 + *(int*) &g_6b7fac;
+	now = (g_6b7fac + g_6b7fac * 2) * 4 + g_6b7fac;
 	if (g_774964 == 0) {
 		return;
 	}
@@ -145,16 +145,11 @@ restart:
 		if (g_688118[slot].ids[j] == 0) {
 			fcn_0064d41a(g_772a10, (char*) 0x68a388, g_688118[slot].name, thr);
 			g_772e68 = now;
-		} else return;
-		if (g_772e58 != 0) {
-			fcn_004c2100();
-		} else {
-			msx_SelectOutdoorTrack();
+			goto play;
 		}
-	} else {
-		g_772e68 = now - 0x3a98;
 		return;
 	}
+	g_772e68 = now - 0x3a98;
 	return;
 noptr:
 	if (g_689d20 != 0) {
@@ -162,9 +157,14 @@ noptr:
 			return;
 		}
 	}
+	cc = g_7746c4;
 	g_689d20 = 0;
-	g_772e58 = g_7746c4 != 0 ? g_7746c4 : g_7746c8;
+	if (cc == 0) {
+		cc = g_7746c8;
+	}
+	g_772e58 = cc;
 	g_772e68 = now;
+play:
 	if (g_772e58 != 0) {
 		fcn_004c2100();
 	} else {

@@ -29,8 +29,8 @@ int __cdecl fcn_0052b230(void)
 	int i;
 	int r;
 
-	my = g_14cf902;
 	mx = *(short*) g_14cf900;
+	my = g_14cf902;
 	r = 0;
 	i = g_14ce8e8;
 	if (i != 0 && *(int*) 0x774740 == 0) {

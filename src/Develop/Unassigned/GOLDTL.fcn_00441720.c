@@ -1,14 +1,13 @@
 /* ADDRESS: GOLDTL 0x00441720 */
 unsigned char __cdecl fcn_00441720(int* a0, float* worldPos, unsigned int a2, unsigned int* gridX, unsigned int* gridZ, float* heightOut)
 {
-	float pp[3];
+	float pp[4];
 	float v13;
 	float hx;
 	float hz;
 	unsigned char* data;
 	unsigned int mask;
 	unsigned int width;
-	unsigned int stride;
 	int b;
 	unsigned int s;
 	int v4;
@@ -41,14 +40,13 @@ unsigned char __cdecl fcn_00441720(int* a0, float* worldPos, unsigned int a2, un
 		goto fail_1;
 	}
 	width = a0[0];
-	stride = a0[1];
 	mask = a0[3];
 	data = (unsigned char*) a0[9];
 	s = 1;
 	if ((unsigned char) a2 != 0) {
-		b = *(unsigned char*) ((char*) a0 + (v4 / (int) stride + (v3 / (int) stride) * 8) * 500 + 0x28e);
+		b = *(unsigned char*) ((char*) a0 + (v4 / a0[1] + (v3 / a0[1]) * 8) * 500 + 0x28e);
 		if (b == 2 || b == 4) {
-			data = (unsigned char*) a0[b / 2 + 9];
+			data = (unsigned char*) a0[(b >> 1) + 9];
 			s = b;
 		}
 	}
