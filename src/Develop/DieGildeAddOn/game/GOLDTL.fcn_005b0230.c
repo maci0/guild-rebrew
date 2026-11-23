@@ -3,6 +3,7 @@
 #include "game_data.h"
 extern char* g_774a68;
 #include "Develop/DieGildeAddOn/game/game_data.h"
+extern float g_6ab3e0;
 extern char* g_1043370;
 extern char* g_77255c;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -58,6 +59,7 @@ void __cdecl fcn_005b0230(char* town)
 	int idx;
 	int i;
 	int j;
+	unsigned char kind_type;
 	int kind;
 	float pos[4];
 	float height;
@@ -107,7 +109,7 @@ void __cdecl fcn_005b0230(char* town)
 	g_cur_dir = dir;
 	i = 0;
 	slot = (ScrollSlot*) (town + 0xdc);
-	if (count > 0) {
+	if (g_town_count(town) > 0) {
 		do {
 			obj = slot->ent;
 			handle = *(int*) (obj + 0x61);
@@ -118,16 +120,23 @@ void __cdecl fcn_005b0230(char* town)
 				slot->y = bld_y;
 				fcn_005b00f0((char*) slot, base_x, base_y);
 			} else {
-				g_cur_dir = dir;
-				g_cur_building = (char*) &g_1015f40[dir];
-				bld_x = (int) ((float) *(int*) (tex + 0x20)
-				               * (float) offs[2 * (unsigned char) obj[0x34]] * 5.33f
-				               * ((*obj == 'G') ? 0.48f : 0.435f)
-				               + (float) *(int*) (tex + 0x20) * 5.33f * 0.5f);
-				bld_y = (int) ((float) *(int*) (tex + 0x20)
-				               * (float) offs[2 * (unsigned char) obj[0x34] + 1] * 5.33f
-				               * ((*obj == 'G') ? 0.48f : 0.435f)
-				               + (float) *(int*) (tex + 0x20) * 5.33f * 0.5f);
+				g_cur_dir = g_town_dir(town);
+				g_cur_building = (char*) &g_1015f40[g_cur_dir];
+				if (*obj == 'G') {
+					bld_x = (int) ((float) *(int*) (tex + 0x20)
+					               * (float) offs[2 * (unsigned char) obj[0x34]] * g_6ab3e0 * 0.48f
+					               + (float) *(int*) (tex + 0x20) * g_6ab3e0 * 0.5f);
+					bld_y = (int) ((float) *(int*) (tex + 0x20)
+					               * (float) offs[2 * (unsigned char) obj[0x34] + 1] * g_6ab3e0 * 0.48f
+					               + (float) *(int*) (tex + 0x20) * g_6ab3e0 * 0.5f);
+				} else {
+					bld_x = (int) ((float) *(int*) (tex + 0x20)
+					               * (float) offs[2 * (unsigned char) obj[0x34]] * g_6ab3e0 * 0.435f
+					               + (float) *(int*) (tex + 0x20) * g_6ab3e0 * 0.5f);
+					bld_y = (int) ((float) *(int*) (tex + 0x20)
+					               * (float) offs[2 * (unsigned char) obj[0x34] + 1] * g_6ab3e0 * 0.435f
+					               + (float) *(int*) (tex + 0x20) * g_6ab3e0 * 0.5f);
+				}
 				slot->handle = fcn_0046f740(bld_x, bld_y, *obj + 0x47f, dir);
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_05c = 1;
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].flags_1d0 = 0x43;
@@ -136,21 +145,21 @@ void __cdecl fcn_005b0230(char* town)
 				slot->y = bld_y - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].height / 2;
 				fcn_00469c40(*(int*) (g_cur_building + 4) + bld_x,
 				             *(int*) (g_cur_building + 8) + bld_y, slot->handle);
-				if (*obj != 'G') {
-					fcn_005b00d0((int) obj,
-					             (int) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[slot->handle] + 0xcc));
-				} else {
+				if (*obj == 'G') {
 					p = (char*) (*(int*) (obj + 0x65) * 0x2f4 + 0x868060);
 					next = (unsigned char*) ((char*) &((D2_CONTROL_TL*) (g_1015ea0))[slot->handle] + 0xcc);
 					do {
 						copied = *p++;
 						*next++ = copied;
 					} while (copied != 0);
+				} else {
+					fcn_005b00d0((int) obj,
+					             (int) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[slot->handle] + 0xcc));
 				}
 				kind = *(unsigned short*) (obj + 0x27);
 				if (kind != 0xffff) {
-					j = g_7f4ca2[kind].kind;
-					if (j == 5 || j == 6 || j == 7) {
+					kind_type = g_7f4ca2[kind].kind;
+					if (kind_type == 5 || kind_type == 6 || kind_type == 7) {
 						fcn_0046f740(bld_x - 8, bld_y - 8,
 						             *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[kind] + 0x54),
 						             g_cur_dir);
@@ -162,11 +171,10 @@ void __cdecl fcn_005b0230(char* town)
 		} while (i < g_town_count(town));
 	}
 
-	count = g_town_count(town);
-	if (count > 1) {
-		for (i = 1; i < g_town_count(town); i++) {
-			slot = (ScrollSlot*) (town + 0xdc) + i - 1;
-			for (j = i; j < g_town_count(town); j++) {
+	if (g_town_count(town) > 1) {
+		for (i = 0; i < g_town_count(town) - 1; i++) {
+			slot = (ScrollSlot*) (town + 0xdc) + i;
+			for (j = i + 1; j < g_town_count(town); j++) {
 				candidate = (ScrollSlot*) (town + 0xdc) + j;
 				if (candidate->y < slot->y) {
 					tmp = *slot;
@@ -185,29 +193,29 @@ void __cdecl fcn_005b0230(char* town)
 	}
 	tab = (int*) (town + 0x26dc);
 	i = 0;
-	if (count > 0) {
+	if (g_town_count(town) > 0) {
 		slot = (ScrollSlot*) (town + 0xdc);
 		do {
 			if (slot->handle == -1) {
 				bld_x = (int) slot->fx;
 				bld_y = (int) slot->fy;
 				slot->handle = fcn_0046f740(bld_x, bld_y,
-				                      (unsigned char) *slot->ent + 0x47f, dir);
+				                      (unsigned char) *slot->ent + 0x47f, g_cur_dir);
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_05c = 1;
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1dc = -1;
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1e0 = -1;
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].flags_1d0 = 0x43;
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1cc = 0x56;
-				if (*slot->ent != 'G') {
-					fcn_005b00d0((int) slot->ent,
-					             (int) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[slot->handle] + 0xcc));
-				} else {
+				if (*slot->ent == 'G') {
 					p = (char*) (*(int*) (slot->ent + 0x65) * 0x2f4 + 0x868060);
 					next = (unsigned char*) ((char*) &((D2_CONTROL_TL*) (g_1015ea0))[slot->handle] + 0xcc);
 					do {
 						copied = *p++;
 						*next++ = copied;
 					} while (copied != 0);
+				} else {
+					fcn_005b00d0((int) slot->ent,
+					             (int) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[slot->handle] + 0xcc));
 				}
 				slot->x = bld_x - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].width / 2;
 				slot->y = bld_y - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].height / 2;
@@ -226,13 +234,13 @@ void __cdecl fcn_005b0230(char* town)
 
 	i = 0;
 	slot = (ScrollSlot*) (town + 0xdc);
-	if (count >= 1) {
+	if (g_town_count(town) > 0) {
 		do {
 			if (slot->handle != -1) {
 				kind = *(unsigned short*) (slot->ent + 0x27);
 				if (kind != 0xffff) {
-					j = g_7f4ca2[kind].kind;
-					if (j == 5 || j == 6 || j == 7) {
+					kind_type = g_7f4ca2[kind].kind;
+					if (kind_type == 5 || kind_type == 6 || kind_type == 7) {
 						fcn_0046f740(slot->x - 8, slot->y - 8,
 						             *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[kind] + 0x54),
 						             g_cur_dir);

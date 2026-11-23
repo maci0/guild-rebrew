@@ -34,13 +34,12 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 	int x;
 	int y;
 	int z;
-	int kind;
+	char kind;
 	int v;
 	int statIndex;
 	int v7;
 	int v8;
 	int v9;
-	int sex;
 
 	if (g_774970 != *(unsigned short*) (action + 8))
 		return;
@@ -65,16 +64,12 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 		d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 0);
 		d2_CenterDialogWindows(*(int*) (*(int*) (action + 0x74) + 8));
 		ent = (unsigned char*) gm_LookupEntityRecordById(*(unsigned int*) (action + 0xac));
-		sex = *(unsigned char*) (ent + 9);
-		sex = -sex;
-		y = (sex >> 8) & 0x5f;
-		y += 0x130;
+		y = *(unsigned char*) (ent + 9) ? 0x18f : 0x130;
 		x = gm_MapEntityStatRange(*(unsigned char*) (action + 0xb0));
-		z = gm_GetOppositeStatIndex(*(unsigned char*) (action + 0xb0));
+		z = gm_GetOppositeStatIndex(*(unsigned char*) (action + 0xb0)) + 1;
 		d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 1);
-		v7 = (int) (z * 0.5 + (3 * x + 0x155a));
 		io_AppendText(0x15c3, g_773d75 * 0x2f4 + (int) 0x868080, (int) 0x7f4c00,
-			*(unsigned char*) (action + 0xb1) + y, v7, x + 0x158a);
+			*(unsigned char*) (action + 0xb1) + y, (int) ((float) ((z - 1) * 0.5) + (3 * x + 0x155a)), x + 0x158a);
 		fcn_004c6470(*(int*) (ent + 4), *(unsigned char*) (action + 0xb1));
 		kind = *(char*) (ent + 2);
 		if (kind == 6 || kind == 7 || kind == 5) {
@@ -96,34 +91,33 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 		sprintf(name, "brk_%02i", x);
 		v7 = sb_FindBankByName("BERUF_BESTANDEN");
 		if (x > 12) {
-			if (*(char*) (ent + 9))
-				v = sb_FindBankByName("ADDON_BERUF_LISTE_WEIBLICH");
-			else
+			if (!*(char*) (ent + 9))
 				v = sb_FindBankByName("ADDON_BERUF_LISTE_MAENNLICH");
+			else
+				v = sb_FindBankByName("ADDON_BERUF_LISTE_WEIBLICH");
 			v8 = sb_FindBankByName("ADDON_GEBAEUDE_LISTE");
 			v9 = sb_FindBankByName("ADDON_BERUFE_VEREINIGUNG_UNTERSCHRIFT");
 		} else {
-			if (*(char*) (ent + 9))
-				v = sb_FindBankByName("BERUF_LISTE_WEIBLICH");
-			else
+			if (!*(char*) (ent + 9))
 				v = sb_FindBankByName("BERUF_LISTE_MAENNLICH");
+			else
+				v = sb_FindBankByName("BERUF_LISTE_WEIBLICH");
 			v8 = sb_FindBankByName("GEBAEUDE_LISTE");
 			v9 = sb_FindBankByName("BERUFE_VEREINIGUNG_UNTERSCHRIFT");
 		}
-		fcn_004c30a0(-7, 0,
-			statIndex < 3 ? "FanfarePositivKurz" : (statIndex < 5 ? "FanfarePositivMittel" : "FanfarePositivLang"),
-			-1, 0);
+		if (statIndex < 3)
+			fcn_004c30a0(-7, 0, "FanfarePositivKurz", -1, 0);
+		else if (statIndex < 5)
+			fcn_004c30a0(-7, 0, "FanfarePositivMittel", -1, 0);
+		else
+			fcn_004c30a0(-7, 0, "FanfarePositivLang", -1, 0);
 		fcn_004c30a0(-6, v7, "SELBST", 1, 0);
 		fcn_004c30a0(-8, v, name, statIndex - 2, 0);
 		fcn_004c30a0(-6, v7, "SELBST", 0, 0);
 		statIndex--;
 		fcn_004c30a0(-8, v8, name, (int) (3.0 - ((double) statIndex + 1.0) * 0.5), 0);
 		fcn_004c30a0(-6, v7, "GEZEICHNET", -1, 0);
-		if (x > 12)
-			x -= 0xd;
-		else
-			x -= 1;
-		fcn_004c30a0(-8, v9, "_BERUFE_VEREINIGUNG_UNTERSCHRIFT", x, 0);
+		fcn_004c30a0(-8, v9, "_BERUFE_VEREINIGUNG_UNTERSCHRIFT", x > 12 ? x - 13 : x - 1, 0);
 		fcn_004c30a0(-7, 0, "MausclickLinks_s_01", -1, 0);
 		*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 		return;

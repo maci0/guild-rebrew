@@ -47,16 +47,10 @@ int __cdecl fcn_004e8360(char* requestData)
 			return 0;
 		other = *(int*) (ent + 4);
 	}
-	p = (unsigned char*) &amt_OfficeSlots;
-	i = 0;
-	do {
-		if (*p == *(unsigned char*) requestData)
+	for (i = 0; i < 0x2a; i++) {
+		if (((Rec18*) amt_OfficeSlots)[i].f00 == *(unsigned char*) requestData)
 			break;
-		p += 0x18;
-		i++;
-	} while ((int) p < (int) 0x9a9610);
-	if ((int) p >= (int) 0x9a9610)
-		return 0;
+	}
 	if (i >= 0x2a)
 		return 0;
 	x = gm_LookupEntityRecordById(((Rec18*) amt_OfficeSlots)[i].f04);
@@ -94,8 +88,9 @@ int __cdecl fcn_004e8360(char* requestData)
 			if (*(unsigned char*) (0x68da70 + ((Rec18*) amt_OfficeSlots)[i].f08 * 0x18) >=
 			    *(unsigned char*) (0x68da70 + *(unsigned char*) (ent + 0x166) * 0x18))
 				*(unsigned char*) (ent + 0x167) = ((Rec18*) amt_OfficeSlots)[i].f08;
-			*(unsigned char*) (ent + 0x166) = ((Rec18*) amt_OfficeSlots)[i].f08;
-			if (*(unsigned char*) (ent + 0x168) == ((Rec18*) amt_OfficeSlots)[i].f08)
+			bit = ((Rec18*) amt_OfficeSlots)[i].f08;
+			*(unsigned char*) (ent + 0x166) = bit;
+			if (*(unsigned char*) (ent + 0x168) == bit)
 				*(unsigned char*) (ent + 0x168) = 0;
 			if (((Rec18*) amt_OfficeSlots)[i].f08 == 0x0f) {
 				*(int*) (ent + 0x1cc) |= 0x40;
@@ -138,17 +133,15 @@ int __cdecl fcn_004e8360(char* requestData)
 			*(int*) (ent + 0x1cc) = flags;
 			k = 0;
 			if (((Rec18*) amt_OfficeSlots)[i].f08 == '#') {
-				flags |= 0x200;
+				*(int*) (ent + 0x1cc) = flags | 0x200;
 				k = 0x4000;
 			} else if (((Rec18*) amt_OfficeSlots)[i].f08 == '$') {
-				flags |= 0x400;
+				*(int*) (ent + 0x1cc) = flags | 0x400;
 				k = 0x8000;
 			} else if (((Rec18*) amt_OfficeSlots)[i].f08 == '%') {
-				flags |= 0x800;
+				*(int*) (ent + 0x1cc) = flags | 0x800;
 				k = 0x10000;
 			}
-			if (k != 0)
-				*(int*) (ent + 0x1cc) = flags;
 			for (ip = (int*) 0x7f4e6c; (int) ip < (int) 0x85a26c; ip = (int*) ((char*) ip + 0x21c))
 				*ip &= ~k;
 		}

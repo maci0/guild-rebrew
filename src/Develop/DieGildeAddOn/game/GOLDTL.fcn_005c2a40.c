@@ -62,7 +62,6 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 	char msg[0x100];
 	char* base;
 	char* r;
-	char* cur;
 	unsigned short* p;
 	int* ep;
 	int nslots;
@@ -72,9 +71,7 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 	int han;
 	int cnt;
 	int sel;
-	int idx;
 	int i;
-	int k;
 	int id;
 	int handle;
 	int val;
@@ -129,39 +126,29 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 	d2_SetForm(han, 1);
 	io_AppendText(0x17ce);
 	d2_SetForm(han, 0);
-	cur = 0;
 	if (nslots > 4) {
-		cnt = fcn_00472830(han, 2, 0x3c, &coord_y, &coord_x, &child);
-		r = *(char**) 0x77255c;
-		fcn_00533f40(*(int*) (r + 0x10) - 0x4c, *(int*) (r + 0xc) - 0x20,
-		             d2_CurrentWindowId, cnt);
+		fcn_00533f40((*(int**) 0x77255c)[4] - 0x4c, (*(int**) 0x77255c)[3] - 0x20,
+		             d2_CurrentWindowId,
+		             fcn_00472830(han, 2, 0x3c, &coord_y, &coord_x, &child));
 		((D2_CONTROL_TL*) (g_1015ea0))[child].font = 0x56;
 	}
 	d2_SetForm(han, 2);
-	if (nslots >= 1) {
-		k = nslots;
-		cnt = 0;
-		ep = slots;
-		do {
-			id = ep[0];
-			scale = (float) ((double) g_7747b4 * 0.25 +
-			                 0.5);
-			val = (int) (eval_ObjektPreis2Credits(id, 100) * scale);
-			handle = fcn_0046f740(0x10, cnt, (char*) (id + 0xdf), d2_CurrentWindowId);
-			ep[1] = handle;
-			r = (char*) &((D2_CONTROL_TL*) g_1015ea0)[handle];
-			*(int*) (r + 0x5c) = 1;
-			*(int*) (r + 0x1d0) = 3;
-			*(int*) (r + 0x1e4) = 0x520;
-			*(int*) (r + 0x1e8) = -2;
-			*(int*) (r + 0x1ec) = -2;
-			io_FormatTextBuffer(msg, 0x17d3,
-			             *(int*) (id * 8 + 0x14a79c0), val);
-			ep[2] = fcn_0046fac0(0x60, cnt + 10, msg, d2_CurrentWindowId);
-			cnt += 0x3c;
-			ep += 3;
-			k--;
-		} while (k != 0);
+	cnt = 0;
+	for (i = 0; i < nslots; i++) {
+		id = slots[i * 3];
+		scale = (float) ((double) g_7747b4 * 0.25 + 0.5);
+		val = (int) (eval_ObjektPreis2Credits(id, 100) * scale);
+		handle = fcn_0046f740(0x10, cnt, (char*) (id + 0xdf), d2_CurrentWindowId);
+		slots[i * 3 + 1] = handle;
+		((D2_CONTROL_TL*) g_1015ea0)[handle].value_05c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[handle].flags_1d0 = 3;
+		((D2_CONTROL_TL*) g_1015ea0)[handle].value_1e4 = 0x520;
+		((D2_CONTROL_TL*) g_1015ea0)[handle].value_1e8 = -2;
+		((D2_CONTROL_TL*) g_1015ea0)[handle].value_1ec = -2;
+		io_FormatTextBuffer(msg, 0x17d3,
+		             *(int*) (id * 8 + 0x14a79c0), val);
+		slots[i * 3 + 2] = fcn_0046fac0(0x60, cnt + 10, msg, d2_CurrentWindowId);
+		cnt += 0x3c;
 	}
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00476b60();
@@ -173,16 +160,14 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 		if (g_14ce8e0 != 0 || g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-		if (g_100f1dc != -1 && nslots >= 1) {
+		if (g_100f1dc != -1 && nslots > 0) {
 			ep = slots + 1;
 			sel = 0;
 			do {
 				if (d2_CurrentElementId == *ep) {
-					scale = (float) ((double) g_7747b4 * 0.25 +
-					                 0.5);
+					scale = (float) ((double) g_7747b4 * 0.25 + 0.5);
 					val = (int) (eval_ObjektPreis2Credits(slots[sel * 3], 100) * scale);
-					if ((int) (unsigned char) *(base + 0x21) <=
-					    total + others) {
+					if (total + others >= (int) (unsigned char) *(base + 0x21)) {
 						fcn_00526120(*(int*) 0x14ab260, 0);
 					} else if (fcn_00526010((void*) (g_7f4ca0 +
 					                                 (int) g_774970 * 0x21c),
@@ -216,65 +201,36 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 			} while (sel < nslots);
 		}
 		total = 0;
-		if (he_StartHandlungSearch(2, 0, 0x1f, 3, *(int*) (productionBuilding + 1)) != 0) {
-			cur = 0;
-			for (;;) {
-				r = he_fn_Handlung();
-				for (;;) {
-					if (nslots <= 0) {
-						break;
-					}
-					ep = slots;
-					sel = 0;
-					for (;;) {
-						((D2_CONTROL_TL*) (g_1015ea0))[ep[1]].value_1f4.bits = 0;
-						if ((unsigned short) *(short*) (r + 0xb0) ==
-						    (unsigned short) ep[0]) {
-							break;
-						}
-						sel++;
-						ep += 3;
-						if (sel >= nslots) {
-							break;
-						}
-					}
-					if (sel < nslots) {
-						id = slots[sel * 3];
-						handle = slots[sel * 3 + 1];
-						((D2_CONTROL_TL*) (g_1015ea0))[id].value_05c = 0;
-						fcn_0046f940(handle, *(int*) 0x14ab264);
-						lo = (float) gm_GetElapsedMinutes(r + 0x44, r + 0x52);
-						hi = (float) gm_GetElapsedMinutes(r + 0x44,
-						                          (char*) 0x7f4c00);
-						((D2_CONTROL_TL*) (g_1015ea0))[id].value_1f4.real =
-						    hi / lo;
-					}
-					break;
-				}
-				total++;
-				cur = he_fn_Handlung();
-				if (cur == 0) {
+		r = (char*) he_StartHandlungSearch(2, 0, 0x1f, 3, *(int*) (productionBuilding + 1));
+		while (r != 0) {
+			for (sel = 0; sel < nslots; sel++) {
+				((D2_CONTROL_TL*) (g_1015ea0))[slots[sel * 3 + 1]].value_1f4.bits = 0;
+				if ((unsigned short) *(short*) (r + 0xb0) == slots[sel * 3]) {
+					handle = slots[sel * 3 + 1];
+					((D2_CONTROL_TL*) (g_1015ea0))[handle].value_05c = 0;
+					fcn_0046f940(slots[sel * 3 + 2], *(int*) 0x14ab264);
+					lo = (float) gm_GetElapsedMinutes(r + 0x44, r + 0x52);
+					hi = (float) gm_GetElapsedMinutes(r + 0x44,
+					                          (char*) 0x7f4c00);
+					((D2_CONTROL_TL*) (g_1015ea0))[handle].value_1f4.real =
+					    hi / lo;
 					break;
 				}
 			}
+			total++;
+			r = (char*) he_fn_Handlung();
 		}
 		removed = 0;
-		if (nslots >= 1) {
-			ep = slots;
-			idx = nslots;
-			do {
-				if (fcn_00502cd0(*(int*) (productionBuilding + 0x5d), 1, 0, ep[0]) != 0) {
-					((D2_CONTROL_TL*) (g_1015ea0))[ep[1]].value_05c = 0;
-					fcn_0046f940(ep[2], *(int*) 0x14ab268);
-					removed++;
-				}
-				ep += 3;
-				idx--;
-			} while (idx != 0);
+		for (i = 0; i < nslots; i++) {
+			if (fcn_00502cd0(*(int*) (productionBuilding + 0x5d), 1, 0, slots[i * 3]) != 0) {
+				((D2_CONTROL_TL*) (g_1015ea0))[slots[i * 3 + 1]].value_05c = 0;
+				fcn_0046f940(slots[i * 3 + 2], *(int*) 0x14ab268);
+				removed++;
+			}
 		}
 		d2_SetForm(han, 3);
 		io_AppendText(0x17cf, productionBuilding,
-		             (int) (unsigned char) *(cur + 0x21) - others - removed,
+		             (int) (unsigned char) *(base + 0x21) - total - removed,
 		             0x17d4);
 	} while (fcn_005373e0((void*) 0x5c2a40, 0x657c7) != 0);
 	fcn_00471e30(han);

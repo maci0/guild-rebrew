@@ -21,7 +21,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00416300(int, ...);
 void __cdecl d3_SetRainEffectOptions(int, ...);
 void __cdecl fcn_004599d0(void*, void*);
-void __cdecl fcn_00459980(void*, void*, char, float);
+void __cdecl fcn_00459980(void*, void*, unsigned char, float);
 void __cdecl fcn_00459940(void*, void*, float);
 
 /* ADDRESS: GOLDTL 0x00536bb0 */
@@ -31,39 +31,32 @@ void __cdecl fcn_00536bb0(void)
 	float f2;
 	float f;
 	int lim;
-	int idx;
 	int i;
-	char opacity;
-	float v2;
 	char* name;
 
-
 	g_7e4534 = g_7f4c04 & 0xffff;
-	idx = g_7e4534;
 	if (g_7e453c != 0) {
-		fcn_00416300(g_7e453c, 1, 1, g_7e43a8[idx], 1000); idx = g_7e4534;
+		fcn_00416300(g_7e453c, 1, 1, g_7e43a8[g_7e4534], 1000);
 	}
 	if (g_7e4538 != 0) {
-		i = g_7e43a8[idx];
 		if (g_7e453c != 0) {
-			if (i & 1) {
-				i = i / 5;
+			if (g_7e43a8[g_7e4534] & 1) {
+				d3_SetRainEffectOptions(g_7e4538, 1, 1, g_7e43a8[g_7e4534] / 5, 1000);
 			} else {
-				i = 0;
+				d3_SetRainEffectOptions(g_7e4538, 1, 1, 0, 1000);
 			}
+		} else {
+			d3_SetRainEffectOptions(g_7e4538, 1, 1, g_7e43a8[g_7e4534], 1000);
 		}
-		d3_SetRainEffectOptions(g_7e4538, 1, 1, i, 1000); idx = g_7e4534;
 	}
-	f1 = g_7e4470[idx];
-	f2 = g_7e44d0[idx];
-	i = g_7e43a8[(idx + 0x17) % 0x18];
-	lim = g_7e43a8[idx];
-	if (lim < i) {
-		lim = i;
+	f1 = g_7e4470[g_7e4534];
+	f2 = g_7e44d0[g_7e4534];
+	lim = g_7e43a8[(g_7e4534 + 0x17) % 0x18];
+	if (lim <= g_7e43a8[g_7e4534]) {
+		lim = g_7e43a8[g_7e4534];
 	}
-	i = g_7e43a8[(idx + 1) % 0x18];
-	if (lim < i) {
-		lim = i;
+	if (lim <= g_7e43a8[(g_7e4534 + 1) % 0x18]) {
+		lim = g_7e43a8[(g_7e4534 + 1) % 0x18];
 	}
 	if (g_7e453c != 0) {
 		fcn_00416300(g_7e453c, 1, 2, (int) ((double) -f1 * (double) lim * 2.0),
@@ -76,7 +69,7 @@ void __cdecl fcn_00536bb0(void)
 	if (g_6b89c0 == 0) {
 		return;
 	}
-	f = (float) ((double) (lim + 0x96) * sqrt((double) f1 * f1 + (double) f2 * f2) * 0.125f);
+	f = (float) (sqrt(f1 * f1 + f2 * f2) * (lim + 0x96) * 0.125);
 
 	if (g_7e4544[0x2a] == 0) {
 		if (lim < 0x32) {
@@ -105,7 +98,6 @@ void __cdecl fcn_00536bb0(void)
 		fcn_00459980((void*) g_6b89c0, g_7e4544, 0xff, 1500.0f);
 	}
 	if (g_7e4544[0x2a] == 0xff) {
-
 		if (lim < 0x32) {
 			i = (int) (unsigned int) gm_RandomMod(4);
 			if (fcn_0065f220(*(char**) (g_7e4540 + 0x1c), (char*) (0x6a2600 + i * 0x4c)) == 0) {
@@ -131,15 +123,12 @@ void __cdecl fcn_00536bb0(void)
 		((int*) g_7e4540)[5] = *(int*) (name + 0x48);
 		fcn_00459980((void*) g_6b89c0, g_7e4544, 0, 1500.0f);
 	}
-	fcn_00459940((void*) g_6b89c0, g_7e4540, f * 0.75f);
+	fcn_00459940((void*) g_6b89c0, g_7e4540, (float) (f * 0.75));
 	fcn_00459940((void*) g_6b89c0, g_7e4544, f);
 	if (lim == 0) {
-		opacity = 0;
-		v2 = 2500.0f;
+		fcn_00459980((void*) g_6b89c0, g_7e4548, 0, 2500.0f);
 	} else {
-		opacity = (lim << 6) / 1000 + 0x60;
-		v2 = 1000.0f;
+		fcn_00459980((void*) g_6b89c0, g_7e4548, (unsigned char) ((lim << 6) / 1000 + 0x60), 1000.0f);
 	}
-	fcn_00459980((void*) g_6b89c0, g_7e4548, opacity, v2);
-	fcn_00459940((void*) g_6b89c0, g_7e4548, f * 1.5f);
+	fcn_00459940((void*) g_6b89c0, g_7e4548, (float) (f * 1.5));
 }

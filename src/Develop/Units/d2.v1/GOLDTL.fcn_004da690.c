@@ -1,3 +1,4 @@
+extern char *g_772500;
 extern unsigned short g_774970;
 /* Council session controller, native frame layout by slot. */
 #include <stddef.h>
@@ -343,7 +344,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 d2_ClearWindowChildren(*(int *)0x772514, 1);
                 if (k > 0) {
                     int *lane;
-                    s08 = (0x320 - *(short *)(*(int *)0x772500 + 0x1ebd8) * k) / (k + 1);
+                    s08 = (0x320 - *(short *)(g_772500 + 0x1ebd8) * k) / (k + 1);
                     i = 0;
                     n = 0;
                     s7C = s08;
@@ -354,7 +355,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             lane[5] = 0;
                             lane[12] = 0;
                             fcn_005ca560((char *)lane);
-                            fcn_005ca740(*(short *)(*(int *)0x772500 + 0x1ebd8) * i + acc, 0,
+                            fcn_005ca740(*(short *)(g_772500 + 0x1ebd8) * i + acc, 0,
                                          *(int *)0x772514, 0x54, lane, 0);
                             acc += s08;
                             i += 1;
@@ -573,7 +574,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         lane[11] = 0;
                         lane[12] = 0;
                         fcn_005ca560((char *)lane);
-                        fcn_005ca740((0xa0 - *(short *)(*(int *)0x772500 + 0x1ebd8)) / 2,
+                        fcn_005ca740((0xa0 - *(short *)(g_772500 + 0x1ebd8)) / 2,
                                      0, *(int *)0x772514, 0x54,
                                      lane, 1);
                         blkA.s98[i] = *(int *)(s80 + 4);
@@ -610,7 +611,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     fcn_004727a0(s38, 0);
                     d2_ClearWindowChildren(*(int *)0x772514, 1);
                     if (rs20 > 0) {
-                        s08 = (0x320 - *(short *)(*(int *)0x772500 + 0x1ebd8) * rs20) / (rs20 + 1);
+                        s08 = (0x320 - *(short *)(g_772500 + 0x1ebd8) * rs20) / (rs20 + 1);
                         i = 0;
                         acc = s08;
                         do {
@@ -619,7 +620,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                 *(int *)((char *)&mid + 0x3bc) = 0;
                                 *(int *)((char *)&mid + 0x3d8) = 0;
                                 fcn_005ca560((char *)&mid + 0x3a8);
-                                fcn_005ca740(*(short *)(*(int *)0x772500 + 0x1ebd8) * i + acc,
+                                fcn_005ca740(*(short *)(g_772500 + 0x1ebd8) * i + acc,
                                              0, *(int *)0x772514, 0x54,
                                              (int *)((char *)&mid + 0x3a8), 0);
                                 acc += s08;

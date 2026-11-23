@@ -118,7 +118,9 @@ int __cdecl fcn_005cf720(unsigned int self, unsigned int candidate, unsigned cha
 	if (!*(int*) (p + 0x40))
 		goto ret1;
 	f = fcn_0050f980((int) (self & 0xffff), (int) (candidate & 0xffff), 1);
-	if (!(f < *(float*) (p + 0x44)) && !(f > *(float*) (p + 0x48)))
+	if (f < *(float*) (p + 0x44))
+		return 0;
+	if (f <= *(float*) (p + 0x48))
 		goto ret1;
 	return 0;
 

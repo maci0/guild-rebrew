@@ -14,6 +14,9 @@
 
 #include <math.h>
 
+#define D3_MIN(a, b) ((a) > (b) ? (b) : (a))
+#define D3_MAX(a, b) ((a) < (b) ? (b) : (a))
+
 typedef struct {
 	char pad0[0x1cc];
 	void* mesh;			/* +0x1cc */
@@ -64,10 +67,6 @@ typedef struct {
 
 #include "Develop/Units/d3/d3_triangle_neighbors.h"
 
-
-
-
-
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* p);
 int __cdecl d3_CalculateTriangleNormal(Point45a9d0* a, Point45a9d0* b, Point45a9d0* c,
@@ -85,10 +84,7 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 	Point45a9d0* p0;
 	Point45a9d0* p1;
 	Point45a9d0* p2;
-	Point45a9d0* pa;
-	Point45a9d0* pb;
-	Point45a9d0* pc;
-	Point45a9d0* pd;
+	float* fp;
 	float uvs[6];
 	unsigned char depths[3];
 	float plane[4];
@@ -101,6 +97,8 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 	float dv;
 	unsigned short* id;
 	unsigned char flagbyte;
+	unsigned char ext;
+	unsigned char visible;
 	int steps;
 	int k;
 	int n;
@@ -108,7 +106,7 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 	int j;
 	int maxi;
 	int mini;
-	int ext;
+	int best;
 
 	mesh = (Mesh45a9d0*) o->mesh;
 	if (mesh == 0) {
@@ -117,24 +115,23 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 	if (o->matrix == 0) {
 		return 1;
 	}
-	if ((o->flags & 3 & c->flags) != 0 && (o->flags & 4) == 0) {
+	if ((c->flags & (o->flags & 3)) != 0 && (o->flags & 4) == 0) {
 		return 1;
 	}
 
 	pts = (Point45a9d0*) m_alloc(mesh->count * 0x50, "d3sm:Points");
-	steps = (int) (50.0f / c->ext[0] + 0.5f);
-	steps = steps / 4;
+	/* pack the draw flags for the renderer */
+	flagbyte = (unsigned char) ((2 * (((c->flags & (o->flags & 3)) == 0) |
+	    (((o->flags & 8) == 8) * 2))) | ((o->flags & 4) == 4));
+	steps = (int) (50.0f / c->ext[0] + 0.5f) / 4;
 	if (steps > 4) {
 		steps = 4;
 	} else if (steps < 1) {
 		steps = 1;
 	}
-	scale[0] = 1.0f / c->ext[0];
-	scale[1] = 1.0f / c->ext[1];
-	scale[2] = 1.0f / c->ext[2];
-	/* pack the draw flags for the renderer */
-	flagbyte = (unsigned char) ((2 * ((((o->flags & 3) & c->flags) == 0) |
-	    (((o->flags & 8) == 8) * 2))) | ((o->flags & 4) == 4));
+	for (i = 0; i < 3; i++) {
+		scale[i] = 1.0f / c->ext[i];
+	}
 
 	/* transform each instance vertex and project it into the viewport */
 	for (i = 0; i < mesh->count; i++) {
@@ -159,11 +156,7 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 		pts[i].u = (pts[i].x - c->x0) * scale[0] + 0.875f;
 		pts[i].v = (pts[i].z - c->z0) * scale[2] + 0.875f;
 		depth = (pts[i].y - c->y0) * scale[1];
-		if (depth < 1.0f) {
-			depth = 1.0f;
-		} else if (depth > 254.0f) {
-			depth = 254.0f;
-		}
+		depth = D3_MIN(D3_MAX(depth, 1.0f), 254.0f);
 		pts[i].depth = (unsigned char) (int) depth;
 	}
 
@@ -185,10 +178,11 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 			area -= p0->u * p1->v;
 			area += p0->u * p2->v;
 			area -= p2->u * p0->v;
-			if (!(area < 0.0f)) {
+			visible = (unsigned char) (area < 0.0f);
+			ext = 0;
+			if (!visible) {
 				continue;
 			}
-			ext = 0;
 		}
 		if (!(p0->u >= 0.0f && p0->u < (float) c->width)) {
 			continue;
@@ -214,12 +208,9 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 			 * the plane offset over the two remaining vertices */
 			dmax = -1.0e10f;
 			dmin = 1.0e10f;
-			maxi = 0;
-			mini = 0;
+			arrays = (Arrays45a9d0*) mesh->arrays;
 			for (k = 0; k < 3; k++) {
-				arrays = (Arrays45a9d0*) mesh->arrays;
-				id = arrays->index + j * 3;
-				p = (Point45a9d0*) ((char*) pts + id[k] * 0x50);
+				p = &pts[arrays->index[j * 3 + k]];
 				uvs[k * 2] = p->u;
 				uvs[k * 2 + 1] = p->v;
 				depths[k] = p->depth;
@@ -232,56 +223,36 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 					mini = k;
 				}
 			}
-			pa = (Point45a9d0*) ((char*) pts +
-			    id[g_662c7c[mini].previous] * 0x50);
-			pb = (Point45a9d0*) ((char*) pts +
-			    id[g_662c7c[mini].next] * 0x50);
-			pc = (Point45a9d0*) ((char*) pts +
-			    id[g_662c7c[maxi].previous] * 0x50);
-			pd = (Point45a9d0*) ((char*) pts +
-			    id[g_662c7c[maxi].next] * 0x50);
-			ext = mini;
-			if (fabs(pc->y + pd->y - dmax - dmax) >
-			    fabs(pa->y + pb->y - dmin - dmin)) {
-				ext = maxi;
+			best = mini;
+			if (fabs(pts[arrays->index[j * 3 + g_662c7c[mini].next]].y +
+			    pts[arrays->index[j * 3 + g_662c7c[mini].previous]].y - dmin * 2.0f) <
+			    fabs(pts[arrays->index[j * 3 + g_662c7c[maxi].next]].y +
+			    pts[arrays->index[j * 3 + g_662c7c[maxi].previous]].y - dmax * 2.0f)) {
+				best = maxi;
 			}
-			du = 0.875f * plane[0];
-			dv = 0.875f * plane[2];
-			uvs[ext * 2] -= du;
-			uvs[ext * 2 + 1] -= dv;
-			n = (ext + 1) % 3;
+			du = plane[0] * 0.875f;
+			uvs[best * 2] -= du;
+			dv = plane[2] * 0.875f;
+			uvs[best * 2 + 1] -= dv;
+			n = (best + 1) % 3;
 			uvs[n * 2] += du;
 			uvs[n * 2 + 1] += dv;
-			n = (ext + 2) % 3;
+			n = (best + 2) % 3;
 			uvs[n * 2] += du;
 			uvs[n * 2 + 1] += dv;
 			for (k = 0; k < 3; k++) {
-				uvs[k * 2] = uvs[k * 2] > (float) (c->width - 1) ?
-				    (float) (c->width - 1) :
-				    (uvs[k * 2] < 0.0f ? 0.0f : uvs[k * 2]);
-				uvs[k * 2 + 1] =
-				    uvs[k * 2 + 1] > (float) (c->width - 1) ?
-				    (float) (c->width - 1) :
-				    (uvs[k * 2 + 1] < 0.0f ? 0.0f : uvs[k * 2 + 1]);
-				arrays = (Arrays45a9d0*) mesh->arrays;
-				depths[k] = ((Point45a9d0*) ((char*) pts +
-				    arrays->index[j * 3 + k] * 0x50))->depth;
+				uvs[k * 2] = D3_MAX(D3_MIN(uvs[k * 2], (float) (c->width - 1)), 0.0f);
+				uvs[k * 2 + 1] = D3_MAX(D3_MIN(uvs[k * 2 + 1], (float) (c->width - 1)), 0.0f);
+				depths[k] = pts[arrays->index[j * 3 + k]].depth;
 			}
 		} else {
+			arrays = (Arrays45a9d0*) mesh->arrays;
 			for (k = 0; k < 3; k++) {
-				arrays = (Arrays45a9d0*) mesh->arrays;
-				p = (Point45a9d0*) ((char*) pts +
-				    arrays->index[j * 3 + k] * 0x50);
-				uvs[k * 2] = p->u > (float) (c->width - 1) ?
-				    (float) (c->width - 1) :
-				    (p->u < 0.0f ? 0.0f : p->u);
-				uvs[k * 2 + 1] =
-				    p->v > (float) (c->width - 1) ?
-				    (float) (c->width - 1) :
-				    (p->v < 0.0f ? 0.0f : p->v);
-				depths[k] = ((Point45a9d0*) ((char*) pts +
-				    ((Arrays45a9d0*) mesh->arrays)->index
-				    [j * 3 + k] * 0x50))->depth;
+				fp = &pts[arrays->index[j * 3 + k]].u;
+				uvs[k * 2] = D3_MAX(D3_MIN(*fp, (float) (c->width - 1)), 0.0f);
+				fp = &pts[arrays->index[j * 3 + k]].v;
+				uvs[k * 2 + 1] = D3_MAX(D3_MIN(*fp, (float) (c->width - 1)), 0.0f);
+				depths[k] = pts[arrays->index[j * 3 + k]].depth;
 			}
 		}
 		fcn_00456080(uvs, depths, c->f28, c->width, flagbyte, c->f24,

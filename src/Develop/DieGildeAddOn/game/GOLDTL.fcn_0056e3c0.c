@@ -9,7 +9,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00500bb0(int*, int, int, int);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
-void __cdecl fcn_00529160(int, int, unsigned short, int);
+void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl io_FormatTextBuffer(int*, unsigned int, ...);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, char*, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
@@ -36,7 +36,6 @@ void __cdecl fcn_0056e3c0(char* eventState)
 	char c;
 	int v;
 	int i;
-	unsigned int idx;
 	char buf[0x514];
 
 	if (*(int*) (eventState + 0x70) != -1) {
@@ -70,14 +69,14 @@ void __cdecl fcn_0056e3c0(char* eventState)
 		}
 		fcn_00529160(0, 0, *(unsigned short*) s, 0);
 		if ((*(unsigned char*) (eventState + 0x78) & 2) != 0) {
-			p = *(char**) (s + 0x16c);
-			if (p != 0) {
-				idx = *(unsigned short*) (p + 0x27);
-				c = *(char*)&((ENTITY_RECORD*)g_7f4ca0)[idx].entity_state;
+			if (*(char**) (s + 0x16c) != 0) {
+				c = *(char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (*(char**) (s + 0x16c) + 0x27)].entity_state;
 				if (c == 6 || c == 7) {
-					io_FormatTextBuffer((int*) (buf + 0x114), 0x42f4, *(unsigned short*) s, (int) p);
-					v = *(int*) (p + 1);
-					he_MessageBoxQuickjump(*(unsigned int*)&((ENTITY_RECORD*)g_7f4ca0)[idx].entity_id, v, buf + 0x114, 0, 0x60a, v, -1, g_6b5c60, g_6b5c60);
+					io_FormatTextBuffer((int*) (buf + 0x114), 0x42f4, *(unsigned short*) s, (int) *(char**) (s + 0x16c));
+					v = *(int*) (*(char**) (s + 0x16c) + 1);
+					he_MessageBoxQuickjump(
+						*(unsigned int*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (*(char**) (s + 0x16c) + 0x27)].entity_id,
+						v, buf + 0x114, 0, 0x60a, v, -1, g_6b5c60, g_6b5c60);
 				}
 			}
 		}
@@ -118,16 +117,13 @@ void __cdecl fcn_0056e3c0(char* eventState)
 			*(int*) (buf + i * 4) = 0;
 		}
 		*(char*) (buf + 0x08) = 8;
-		*(int*) (buf + 0x18) = *(int*) gm_GameTime;
-		*(int*) (buf + 0x1c) = *(int*) (gm_GameTime + 4);
-		*(int*) (buf + 0x20) = *(int*) (gm_GameTime + 8);
-		*(unsigned short*) (buf + 0x24) = *(unsigned short*) (gm_GameTime + 0xc);
 		*(char*) (buf + 0x26) = 0xa0;
+		*(pos14_7f4c00*) (buf + 0x18) = *(pos14_7f4c00*) gm_GameTime;
 		fcn_00500bb0((int*) (buf + 0x18), 0, 0x1e, 0);
 		s = *(char**) (s + 4);
 		*(int*) (buf + 0x14) = -1;
-		*(int*) (buf + 0x0c) = (int) s;
 		*(char*) (buf + 0x30) = 1;
+		*(int*) (buf + 0x0c) = (int) s;
 		*(int*) (buf + 0x34) = (int) s;
 		*(int*) (eventState + 0xb4) = fcn_004c5980((int) buf);
 		fcn_00500bb0((int*) (eventState + 0x52), 0, 1, 0);
@@ -141,7 +137,7 @@ void __cdecl fcn_0056e3c0(char* eventState)
 		}
 		fcn_005099e0(s, p);
 		c = *(char*) (s + 2);
-		if ((c == 6 || c == 7 || c == 5) && *(unsigned char*) (p + 0xd) < *(unsigned char*) (s + 0xd)) {
+		if ((c == 6 || c == 7 || c == 5) && *(unsigned char*) (s + 0xd) > *(unsigned char*) (p + 0xd)) {
 			fcn_004c4510((int) p, *(int*) (p + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, (int*) (s + 0xd));
 			fcn_004c5360();
@@ -159,36 +155,33 @@ void __cdecl fcn_0056e3c0(char* eventState)
 		if (v == 0) {
 			return;
 		}
-		if (v != 2) {
+		if (v == 2) {
+			*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
+			*(int*) (eventState + 0x70) = 4;
+		} else {
 			*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
 			*(int*) (eventState + 0xb0) = *(int*) fcn_004c4480(*(int*) (eventState + 0xb4));
 			fcn_00500bb0((int*) (eventState + 0x52), 2, 0, 0);
 			*(int*) (eventState + 0x70) = 7;
-			return;
 		}
-		goto label_7b3;
+		return;
 	case 7:
-		if (*(unsigned char*) (s + 8) != 0) {
+		if (*(unsigned char*) (s + 8) > 0) {
 			goto tail;
 		}
 		if (cut_FindCutsceneById(*(int*) (eventState + 0xb0)) != 0) {
 			*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
 			fcn_00500bb0((int*) (eventState + 0x52), 2, 0, 0);
-			return;
+		} else {
+			*(int*) (eventState + 0xb4) = -1;
+			*(int*) (eventState + 0xb0) = -1;
+			*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
+			*(int*) (eventState + 0x70) = 4;
 		}
-		*(int*) (eventState + 0xb4) = -1;
-		*(int*) (eventState + 0xb0) = -1;
-		goto label_7b3;
+		return;
 	default:
 		return;
 	}
-label_7b3:
-	*(int*) (eventState + 0x52) = *(int*) gm_GameTime;
-	*(int*) (eventState + 0x56) = *(int*) (gm_GameTime + 4);
-	*(int*) (eventState + 0x5a) = *(int*) (gm_GameTime + 8);
-	*(int*) (eventState + 0x70) = 4;
-	*(unsigned short*) (eventState + 0x5e) = *(unsigned short*) (gm_GameTime + 0xc);
-	return;
 tail:
 	he_FreeAction(eventState);
 }

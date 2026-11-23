@@ -88,15 +88,17 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 		if (b[0] >= gm_RandomMod(8)) {
 			Msg_5d5930 m;
 			pos14_7f4c00 pos;
+			int sender;
 			pos = gm_GameTime;
 			fcn_00500bb0(&pos, 0x60, 0, 0);
 			memset(&m, 0, sizeof(m));
+			sender = *(int*) (p + 4);
+			m.f8 = sender;
+			m.fc = sender;
 			m.pos.a = gm_GameTime.a;
 			m.pos.b = gm_GameTime.b;
-			m.f8 = *(int*) (p + 4);
-			m.fc = *(int*) (p + 4);
 			m.pos.c = gm_GameTime.c;
-			m.f58 = *(int*) (p + 4);
+			m.f58 = sender;
 			m.b4 = 0x45;
 			m.b36 = 2;
 			m.pos.d = gm_GameTime.d;

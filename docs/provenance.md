@@ -32525,3 +32525,93 @@ Replaces the local vector reloads \`sqrt(v[0]*v[0] + ...)\` with direct matrix v
 - Decision owner: matching lane 48.
 - Notes: Replaced snapshot array indexing with pointer traversal over 0x1467488..0x1467e08 and off = i * 0x4c arithmetic, matching native loop codegen and eliminating array index overhead.
 - 2026-11-24: Batch r5b72: matching lanes 35-53 (gpt-6.1-terra, gemini-3.8-flash, gemini-4-hydrogen, neon). Five rows rise, none fall: EXACT GOLD 0x00493a30; RELOC GOLD 0x00504100, GOLDTL 0x0056e980, 0x005a4e00; NEAR_MATCHING GOLDTL 0x00589930. Held back lane 48's GOLD 0x00411440 keep (stored STUB in place of SIZE_MISMATCH; status put back with `rebrew test --target Europa1400Gold.exe --va 0x411440 --force-status`, 35 aligned pairs) and an unqueued lane-48 edit of GOLDTL 0x00500a40; sources restored, trials in .scratch/fleet/48/freeze-trials/, gate rerun. Verified: both clients link, server raw link byte-identical, lint 0/0 on all targets, no status regressions by rebrew's `_STATUS_ORDER`. Decision owner: matching lanes, reviewed by lead.
+- 2026-11-24: GOLDTL 0x004da690 (cut_RunOfficeSessions, src/Develop/Units/d2.v1/GOLDTL.fcn_004da690.c) kept 883/1975 aligned pairs, matched bytes improved from 1306 to 1311. Replaced raw *(int*)0x772500 cast with typed `extern char *g_772500;`. Verification: rebrew test --source-targets --no-promote, rebrew lint --all-targets clean. Decision owner: matching lane 50.
+- 2026-11-24: GOLDTL 0x005cf720 (fcn_005cf720, src/Develop/Unassigned/GOLDTL.fcn_005cf720.c) improved from 225/279 to 227/279 aligned pairs, obj size 971 to 969 (native 982). Used separate float comparison exit branches (`if (f < min) return 0; if (f <= max) goto ret1; return 0;`) matching native epilogue layout at 0x5cf840-0x5cf870. Verification: rebrew test --source-targets --no-promote, rebrew lint --all-targets clean. Decision owner: matching lane 50.
+- 2026-11-24: GOLDTL 0x0047cf60 (fcn_0047cf60): MIN/MAX clamp macro and state pointer matching GOLD twin 0x0047daa0 (129 -> 150 aligned pairs, obj 553 -> 562). Decision owner: matching lane 45.
+
+## `GOLDTL 0x005c2a40` (`fcn_005c2a40`)
+- File: `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005c2a40.c`
+- Result: `SIZE_MISMATCH` 419/486 (from 332/486; obj 1675/1683, hunks 53, sim 0.865).
+- Decision owner: matching lane 43.
+- Notes: Inlined `fcn_00472830` inside `fcn_00533f40`, accessed `D2_CONTROL_TL` fields directly on `g_1015ea0`, used `nslots > 0`, inverted capacity check to `total + others >= *(unsigned char*)(base + 0x21)`, walked `he_StartHandlungSearch`/`he_fn_Handlung` directly via `r` with indexed `slots` fields (`slots[sel*3+1]`/`.value_05c` and `slots[sel*3+2]`), and fixed final capacity text arg to `*(unsigned char*)(base + 0x21) - total - removed` (eliminating `cur`; `t5`/`t6` hit `obj=1683/1683` with 420/486 but returned `STUB`, so `t4` `SIZE_MISMATCH 419/486` was kept).
+
+## `GOLDTL 0x005ccca0` (`d2_ShowTabbedSelectionDialog`)
+- File: `src/Develop/Units/d2.v1/GOLDTL.fcn_005ccca0.c`
+- Result: `RELOC` 490/541 (from `SIZE_MISMATCH` 489/541; obj 1952/1952, hunks 50, sim 0.906).
+- Decision owner: matching lane 43.
+- Notes: Moved `if (i > -1 && i < g_6ac8a8[g_775344].count)` and its `rows[i].ent` update inside the `if (rows[i].key2 == d2_CurrentElementId)` branch before `break`, matching native 0x005cd27d (`jmp 0x5cd40a`) and expanding two short jumps to reach exact 1952-byte size.
+
+- 2026-11-24: GOLDTL 0x004172e0 (fcn_004172e0 in src/Develop/Unassigned/GOLDTL.fcn_004172e0.c) improved from 137/158 aligned pairs (SIZE_MISMATCH, obj 592/584) to 149/158 aligned pairs (NEAR_MATCHING, exact obj 584/584, 534 matches). Changed dt from double to float for particle delta time integration, eliminating 64-bit float conversions and aligning object size to exact 584 bytes. Verification: rebrew test --source-targets --no-promote, rebrew lint --all-targets clean. Decision owner: matching lane 48.
+
+- 2026-11-24: Reconstructed `GOLDTL 0x00565350` (`he_RunMeisterpruefungPassed`, `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00565350.c`) from `SIZE_MISMATCH` 320/394 (obj 1192/1196) to `RELOC` 362/394 (obj 1196/1196, bytes 1196/1196). Changes: gender offset ternary `*(unsigned char*)(ent + 9) ? 0x18f : 0x130` (native `neg cl; sbb ecx, ecx; and ecx, 0x5f; add ecx, 0x130` at `0x56543b`), `char kind` for byte `cmp al, imm8` checks (`0x5654f3`/`0x565538`), `z = gm_GetOppositeStatIndex(...) + 1` and `(int)((float)((z - 1) * 0.5) + (3 * x + 0x155a))` matching native `inc ebp`/`dec ebp` and `fmul 0.5; fiadd [esp+0x38]` (`0x565470..0x5654a3`), `!*(char*)(ent + 9)` male-first bank lookup branches (`0x5655e8`/`0x56561c`), `if`/`else if`/`else` `FanfarePositiv*` calls (`0x565656..0x565684`), and `x > 12 ? x - 13 : x - 1` (`0x56570b..0x565715`). Verified with `rebrew test --source-targets --no-promote` (RELOC 1196/1196) and `rebrew lint --all-targets` clean. Decision owner: matching lane 46.
+
+## `GOLDTL 0x0047e270` (`fcn_0047e270`)
+- File: `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0047e270.c`
+- Result: `SIZE_MISMATCH` 501/690 (from 232/690; obj 2396/2372, hunks 121, sim 0.721).
+- Decision owner: matching lane 43.
+- Notes: Indexed `((PRODUCTION_GOODS_RECORD*) g_100d0c0)[...]` directly in the producer/order/humanplayer loops, moved `hit = 0` inside `g_7f4c04 != 8 && g_7f4c04 != 0xd`, placed `!(bld->f1b4 & 0x100)` before `bld->id != 0`, flipped `unk_40`/`gm_eval_SlotVoll` comparison sides and `!fcn_00486640(..., 1)` branch order, changed `g_100dc38 < 4` to `if (g_100dc38 < 4) do { ... } while (g_100dc38 < 4)`, and emitted early return on `put.count == 0 || put.flags == 0` matching 0x0047eb95.
+
+## `GOLDTL 0x005b0230` (`fcn_005b0230`)
+- File: `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005b0230.c`
+- Result: `SIZE_MISMATCH` 423/877 (from 421/877; obj 2880/2962, hunks 178, sim 0.490).
+- Decision owner: matching lane 43.
+- Notes: Declared `extern float g_6ab3e0` and replaced the ternary 5.33f expression with `if (*obj == 'G') ... else ...`, ordered `*obj == 'G'` and `*slot->ent == 'G'` branches first, used `g_town_count(town)` in the slot/marker loops, used `i < g_town_count(town) - 1` for the sort loop, and narrowed `kind_type` to `unsigned char`.
+
+- 2026-11-24: Improved `GOLDTL 0x0042bf20` (`txt_OpenText`, `src/Develop/DieGildeAddOn/game/GOLDTL.txt_OpenText.c`) from `SIZE_MISMATCH` 1038/1841 (obj 5887/5840, bytes 1446) to `SIZE_MISMATCH` 1287/1841 (obj 5791/5840, bytes 1624, +249 aligned pairs). Changes: reordered `switch (line[v10])` cases to native order (`\t`, `(`, `{`, `/`, `*`, `_`, `"`, `;`, native `0x42c530..0x42cbf1`), fixed `v18 = 0x4800` bug to `v10 = 0x4800` (native `0x42c05f` writes `[esp+0x18]` with two pushes on stack = `v10`, restoring `v18 = 0` at `0x42bf7c`), changed pass 1 and pass 2 file loops to `do { ... } while ((STREAM_FLAG(fp) & 0x10) == 0)` (`0x42c30c`, `0x42ccf0`), matched space-skip loop `while (line[v10++] == ' '); v10--;` (`0x42c4d6..0x42c4e8`), matched `case '_'` `for (k = 0; k < 8; k++)` with `k == 0` fall-through and `starts[k] = v14 + k * 0xa` (`0x42c699..0x42c746`), inlined `m_FreeTracked` fail returns (`0x42c1ad`, `0x42c319`), and used `inc[fileCount++]` / `def[defineCount++]` / `line[strlen(line) - 1] = 0`. Verified with `rebrew test --source-targets --no-promote` and `rebrew lint --all-targets` clean. Decision owner: matching lane 46.
+
+- 2026-11-24: Improved `GOLDTL 0x004385e0` (`fcn_004385e0`, `src/Develop/Units/m_alloc/GOLDTL.fcn_004385e0.c`) from `SIZE_MISMATCH` 151/173 (obj 609/600, bytes 184) to `SIZE_MISMATCH` 156/173 (obj 599/600, bytes 405, +5 aligned pairs, 1B from native). Changes: typed `Obj4385e0`, `Mesh4385e0`, and `Particle4385e0` structs with local `m = v1->mesh` (eliminating the 6-byte reload of `[edi + 0x318]` at native `0x438682`), `float f10`/`f14` fields avoiding `&v15`, and incrementing `*(int*) 0x6b8054` before `g_1042a08` (`0x43881d..0x43882b`, matching 5-byte `eax` encodings). `DATA TODO 0x6b8054`. Verified with `rebrew test --source-targets --no-promote` and `rebrew lint --all-targets` clean. Decision owner: matching lane 46.
+
+### 2026-11-24: GOLD 0x00446180 (`src/Develop/Unassigned/GOLD.fcn_00446180.c`)
+
+- Changed `GOLD 0x00446180` (`fcn_00446180`): moved `if (column == 7)` ahead of `if (row == 7)` (matching `0x446236` vs `0x446248`), hoisted `base_y = row * size` and `base_x = column * size` with `if (ny - 1 > 0)` / `if (nx - 1 > 0)` unsigned loop gates (`0x44625d` `jbe`, `0x446278` `jbe`), split `step` lookup around `slot = object + (column + row * 8) * 100 + 0xe0` and `(object[0x1c70] & 0x1c)` (`0x4461f5-0x446221`), and changed the `resource + 0x68` sign bit check to `(*(unsigned char*)(resource + 0x68) & 0x80) == 0` (`0x446324` `js`).
+- Behavior preserved (equivalent signed/unsigned loop bounds for `ny,nx >= 1`, same `column == 7` / `row == 7` subtractions, bit-7 test matches `< 0` on signed char).
+- Verified with `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/Unassigned/GOLD.fcn_00446180.c --source-targets --no-promote --json`: `Europa1400Gold.exe` aligned pairs `114/180 -> 124/180` (`SIZE_MISMATCH`, obj `536 -> 556/550`, `sim=0.685`), all-target `rebrew lint` clean for the file. Decision owner: matching lane 43.
+
+### 2026-11-24 GOLDTL 0x004e8360 (`fcn_004e8360`)
+- What: Replaced the slot scan with `for (i = 0; i < 0x2a; i++) { if (((Rec18*) amt_OfficeSlots)[i].f00 == *(unsigned char*) requestData) break; } if (i >= 0x2a) return 0;` and reloaded `amt_OfficeSlots[i].f08` into `bit` after the rank check.
+- Why: Native `0x4e8391`, `0x4e83b3`, `0x4e83d9`, and `0x4e83e7` emit four distinct `return 0` epilogues and `0x4e8507` reloads `[edi + 0x9a9228]`.
+- Before/after: `SIZE_MISMATCH` `211/278` (`obj 940/916`, `bytes 181/940`) -> `NEAR_MATCHING` `232/278` (`obj 916/916`, `bytes 859/916`).
+- Decision owner: matching lane 46
+
+### 2026-11-24 GOLDTL 0x00536bb0 (`fcn_00536bb0`)
+- What: Used `g_7e4534` directly without an `idx` local, expressed the rain call as a 3-way `if`/`else` calling `d3_SetRainEffectOptions`, initialized `lim` to `g_7e43a8[(g_7e4534 + 0x17) % 0x18]` with `<=` comparisons, removed redundant `(double)` casts in `sqrt(f1 * f1 + f2 * f2) * (lim + 0x96) * 0.125`, changed `0.75f`/`1.5f` to double `0.75`/`1.5`, typed `fcn_00459980` param 3 as `unsigned char` (matching native `push 0xff`), and replaced the `opacity`/`v2` locals with an `if (lim == 0)` / `else` calling `fcn_00459980`.
+- Why: Native `0x536c08..0x536c31` tail-merges three rain calls, `0x536c7a`/`0x536c96` emit `jg`, `0x536d39..0x536d6d` uses `fmul dword` + `fmul qword [0x665e38]`, `0x536e6a` emits `push 0xff`, `0x536fd6`/`0x53704c` emit `fmul qword`, and `0x537012..0x537043` tail-merges the two `fcn_00459980` calls. Only the post-call reload order of `g_7e4538`/`g_7e4534` at `0x536c36`/`0x536c3c` remains swapped.
+- Before/after: `SIZE_MISMATCH` `297/360` (`obj 1244/1220`, `bytes 261/1244`) -> `NEAR_MATCHING` `352/360` (`obj 1220/1220`, `bytes 1215/1220`).
+- Decision owner: matching lane 46
+
+### 2026-11-24: GOLDTL 0x00417d00 (`src/Develop/Unassigned/GOLDTL.fcn_00417d00.c`)
+
+- Changed `GOLDTL 0x00417d00` (`fcn_00417d00`): wrote `s->z = a5` before `s->q = a7` (matching argument load order at `0x417d87`), initialized `i = 0` before `if (s->count > 0)` (matching `0x417da8` `mov [esp+0x24], ebp` ahead of `0x417dac` `jle`), and parenthesized `((float) i * inv) * g_662b08` to match `0x417e64-0x417e68`.
+- Behavior preserved (pure local setup/associativity equivalence).
+- Verified with `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/Unassigned/GOLDTL.fcn_00417d00.c --source-targets --no-promote --json`: `Europa1400Gold_TL.exe` `NEAR_MATCHING 143/156 -> 149/156`, `obj=509/509`, `hunks=5`, `sim=0.955`, all-target `rebrew lint` clean for the file. Decision owner: matching lane 43.
+
+### 2026-11-24 GOLDTL 0x0056e3c0 (`fcn_0056e3c0`)
+- What: Typed `fcn_00529160` param 3 as `int`, removed the cached `p`/`idx` locals in `case 0` so `*(char**) (s + 0x16c)` reloads and `ebx` stays `-1`, used `pos14_7f4c00` copy in `case 3` with `buf+0x26`/`buf+0x30` store order, flipped `case 4` to `*(unsigned char*) (s + 0xd) > *(unsigned char*) (p + 0xd)`, structured `case 6` as `if (v == 2) { ... } else { ... }`, and used `*(unsigned char*) (s + 8) > 0` in `case 7`.
+- Why: Native `0x56e49a..0x56e53b` reloads `[esi + 0x16c]` and recomputes the entity offset, `0x56e67d..0x56e6a5` stores `buf+0x26` and `buf+0x30` before the trailing fields, `0x56e712..0x56e71d` emits `jbe`, `0x56e7a9..0x56e7e5` places the `v == 2` block first, and `0x56e843` emits `ja`. The first 1178 bytes (`0x56e3c0..0x56e859`) match byte-for-byte.
+- Before/after: `SIZE_MISMATCH` `331/430` (`obj 1280/1312`, `bytes 190/1312`) -> `NEAR_MATCHING` `391/430` (`obj 1312/1312`, `bytes 1227/1312`).
+- Decision owner: matching lane 46
+
+### 2026-11-24 GOLDTL 0x0054bc90 (`fcn_0054bc90`)
+- What: Resolved `v7` inside each `action+0xbc` branch (removing cached `v1`/`v2`/`v5` locals to match native `sub esp, 0x20c`), split the 4-slot scans into separate `for (idx = 0; idx < 4; idx++)` loops per `action+0xbc` branch in `case 2` and `case 1`, ordered the `switch` cases `2`, `1`, `0`, inlined early-exit cleanup at `0x54bd25`, and ordered `action+0xbc == 0` before `!= 0` in `case 0`.
+- Why: Native `0x54bc90` allocates `sub esp, 0x20c`, `0x54bd08..0x54bd86` computes `v7` in both branches with `0x54bd25` as the shared early-exit cleanup, `0x54bdee..0x54be4a` and `0x54bfd4..0x54c005` emit separate 4-element loops, and `0x54c16c` puts `0x1770` before `0x1771`.
+- Before/after: `SIZE_MISMATCH` `213/485` (`obj 1284/1456`, `bytes 95/1456`) -> `SIZE_MISMATCH` `329/485` (`obj 1518/1456`, `bytes 309/1518`).
+- Decision owner: matching lane 46
+
+## 2026-11-23 lane 43: GOLDTL 0x005d5930 RELOC (300/307)
+
+- Change: In `src/Develop/Units/d2.v1/GOLDTL.fcn_005d5930.c`, cached `sender = *(int*) (p + 4)` and moved `m.f8`/`m.fc` stores before `m.pos.a`/`b`/`c`.
+- Evidence: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/Units/d2.v1/GOLDTL.fcn_005d5930.c --source-targets --no-promote --json` returned `RELOC` (`300/307`, `obj 1079/1079`, `hunks=7`, `sim=0.977`). Lint verified clean (`rebrew lint --all-targets`).
+- Decision owner: matching lane 43.
+
+## 2026-11-23 lane 43: GOLDTL 0x00531d20 NEAR_MATCHING (689/742)
+
+- Change: In `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00531d20.c`, used explicit `unsigned char* bp = (unsigned char*) lpGebaeudePROT + *ent * 0x24d` in `case 0x8c`.
+- Evidence: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00531d20.c --source-targets --no-promote --json` returned `NEAR_MATCHING` (`689/742`, `obj 2348/2348`, `hunks=8`, `sim=0.921`). Lint verified clean (`rebrew lint --all-targets`).
+- Decision owner: matching lane 43.
+
+### 2026-11-24 GOLDTL 0x0045a9d0 (`fcn_0045a9d0`)
+- What: Expressed the `depth` and `uvs` clamps with `D3_MIN`/`D3_MAX` ternary macros, moved `flagbyte` ahead of `steps`, restored the `for (i = 0; i < 3; i++)` `scale` loop, typed `ext`/`visible` as `unsigned char`, hoisted `arrays = mesh->arrays` outside the `k` loops, used `dmin * 2.0f`/`dmax * 2.0f` with direct neighbor indexing, and used a per-component `float* fp` pointer in the non-degenerate UV clamp loop.
+- Why: Native `0x45aa3b..0x45aabd` computes `flagbyte` before `steps` and loops over `scale[0..2]`, `0x45abad..0x45abf2` and `0x45af99..0x45b14f` evaluate the nested `MIN`/`MAX` ternary clamps twice, `0x45aed3`/`0x45af0a` emit `fadd st(0), st(0)`, and `0x45b0e9` loads `[eax + edi + 0x14]` via `lea ebx`.
+- Before/after: `SIZE_MISMATCH` `249/624` (`obj 1858/2040`, `bytes 173/2040`) -> `SIZE_MISMATCH` `352/624` (`obj 1996/2040`, `bytes 189/2040`).
+- Decision owner: matching lane 46
+- 2026-11-24: Batch r5b73: matching lanes 35-53 (gpt-6.1-terra, gemini-3.8-flash, gemini-4-hydrogen, neon). Seven rows rise, none fall: RELOC GOLDTL 0x00565350, 0x005ccca0, 0x005d5930; NEAR_MATCHING GOLDTL 0x004172e0, 0x004e8360, 0x00536bb0, 0x0056e3c0. Verified: both clients link, server raw link byte-identical, lint 0/0 on all targets, no status regressions by rebrew's `_STATUS_ORDER`. Decision owner: matching lanes, reviewed by lead.

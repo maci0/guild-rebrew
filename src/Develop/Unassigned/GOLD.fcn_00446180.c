@@ -23,6 +23,8 @@ int __cdecl fcn_00446180(char* object)
     unsigned int left_y;
     unsigned int x;
     unsigned int y;
+    unsigned int base_x;
+    unsigned int base_y;
     char* resource;
     char* description;
     void* buffer;
@@ -36,30 +38,35 @@ int __cdecl fcn_00446180(char* object)
     scene = *(int*)(object + 0x14);
     fcn_004437f0(object);
     for (row = 0; row < 8; row++) {
+        base_y = row * size;
         for (column = 0; column < 8; column++) {
-            step = *(unsigned char*)(object + (column + row * 8) * 100 + 0x13e);
-            if (step == 0) {
-                step = (*(unsigned char*)(object + 0x1c70) & 0x1c) >> 2;
-                if (step == 0) {
+            base_x = column * size;
+            resource = object + (column + row * 8) * 100 + 0xe0;
+            if (*(unsigned char*)(resource + 0x5e) == 0) {
+                if (*(unsigned char*)(object + 0x1c70) & 0x1c) {
+                    step = (*(unsigned char*)(object + 0x1c70) >> 2) & 7;
+                } else {
                     step = 1;
                 }
+            } else {
+                step = *(unsigned char*)(resource + 0x5e);
             }
             if (step != 0) {
                 nx = size / step + 1;
                 ny = nx;
-                if (row == 7) {
-                    ny -= 4 / step;
-                }
                 if (column == 7) {
                     nx -= 4 / step;
                 }
-                left_y = ny - 1;
-                y = row * size;
-                if (left_y != 0) {
+                if (row == 7) {
+                    ny -= 4 / step;
+                }
+                if (ny - 1 > 0) {
+                    y = base_y;
+                    left_y = ny - 1;
                     do {
-                        left_x = nx - 1;
-                        x = column * size;
-                        if (left_x != 0) {
+                        if (nx - 1 > 0) {
+                            x = base_x;
+                            left_x = nx - 1;
                             do {
                                 resource = fcn_0043fc10(scene, universe, x, y, step, object + 0x30);
                                 if (resource != 0 && *resource == 0x2a) {
@@ -80,7 +87,7 @@ int __cdecl fcn_00446180(char* object)
                                             created++;
                                         }
                                     }
-                                    if (*(signed char*)(resource + 0x68) >= 0) {
+                                    if ((*(unsigned char*)(resource + 0x68) & 0x80) == 0) {
                                         fcn_004360e0(*(void**)(resource + 0x64));
                                         *(unsigned char*)(resource + 0x68) |= 0x80;
                                     }

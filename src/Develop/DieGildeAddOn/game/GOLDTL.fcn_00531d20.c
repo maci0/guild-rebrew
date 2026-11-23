@@ -219,11 +219,13 @@ void __cdecl fcn_00531d20(void)
 				break;
 			case 0x8c:
 				if (*(int*) (g_7746b4 + 0x16c) != 0) {
+					unsigned char* bp;
 					ent = *(unsigned char**) (g_7746b4 + 0x16c);
-					if (((struct Building_531d20*) lpGebaeudePROT)[*ent].class_id == 0x1d)
+					bp = (unsigned char*) lpGebaeudePROT + *ent * 0x24d;
+					if (*bp == 0x1d)
 						io_FormatTextBuffer((char*) text,
 						    0x1283 + (fcn_0042e410(3) & 0xffff));
-					else if (((struct Building_531d20*) lpGebaeudePROT)[*ent].class_id == 0x1f)
+					else if (*bp == 0x1f)
 						io_FormatTextBuffer((char*) text,
 						    0x1289 + (fcn_0042e410(3) & 0xffff));
 				}

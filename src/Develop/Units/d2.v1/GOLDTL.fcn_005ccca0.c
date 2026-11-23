@@ -186,14 +186,14 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 				cur = 0;
 				for (i = 0; i < g_6ac8a8[g_775344].count; i++) {
 					if (rows[i].key2 == d2_CurrentElementId) {
+						if (i > -1 && i < g_6ac8a8[g_775344].count) {
+							if (rows[i].ent != 0 &&
+									*(unsigned short*) rows[i].ent != 0xffff) {
+								state = 4;
+								cur = rows[i].ent;
+							}
+						}
 						break;
-					}
-				}
-				if (i > -1 && i < g_6ac8a8[g_775344].count) {
-					if (rows[i].ent != 0 &&
-							*(unsigned short*) rows[i].ent != 0xffff) {
-						state = 4;
-						cur = rows[i].ent;
 					}
 				}
 				goto after;

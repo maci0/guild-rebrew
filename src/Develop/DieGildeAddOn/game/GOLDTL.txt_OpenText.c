@@ -75,8 +75,8 @@ int __cdecl txt_OpenText(char* definitionPath, char* writeHeader)
 	int starts[10];
 	char line[0xc8];
 	char msg[0x100];
-	char buf250[0x80];
 	char path[0x104];
+	char buf250[0x80];
 	char rec[10][0xc4];
 	char u140[0x14];
 	char def[0x60][0x100];
@@ -122,7 +122,7 @@ int __cdecl txt_OpenText(char* definitionPath, char* writeHeader)
 
 	txt_EntryCount = 0;
 	g_6b7fa4 = 0;
-	v18 = 0x4800;
+	v10 = 0x4800;
 	p = (char*) fcn_0064d1a0(definitionPath, '\\');
 	if (p != 0) {
 		memset(g_1052e00, 0, 0x100);
@@ -149,11 +149,13 @@ int __cdecl txt_OpenText(char* definitionPath, char* writeHeader)
 	fp = (FILE*) fcn_0064e2f9(definitionPath, "rt");
 	if (fp == 0) {
 		MessageBoxA((HWND) 0, "Could not open Textfiledefinition!", "Error", 0x30);
-		goto fail_free;
+		m_FreeTracked(txt_TextBuffer);
+		txt_TextBuffer = 0;
+		return 0;
 	}
 
 	/* Pass 1: collect output path, header path and the include list. */
-	for (;;) {
+	do {
 		memset(line, 0, 0xc8);
 		fgets(line, 0xc8, fp);
 		if (strstr(line, "//") != 0) {
@@ -163,12 +165,16 @@ int __cdecl txt_OpenText(char* definitionPath, char* writeHeader)
 		if (p != 0) {
 			p = (char*) fcn_0064e790(p, '"');
 			if (p == 0) {
-				goto fail_free;
+				m_FreeTracked(txt_TextBuffer);
+				txt_TextBuffer = 0;
+				return 0;
 			}
 			p++;
 			q = (char*) fcn_0064e790(p, '"');
 			if (q == 0) {
-				goto fail_free;
+				m_FreeTracked(txt_TextBuffer);
+				txt_TextBuffer = 0;
+				return 0;
 			}
 			*q = 0;
 			strcpy(g_1052e00, p);
@@ -177,12 +183,16 @@ int __cdecl txt_OpenText(char* definitionPath, char* writeHeader)
 		if (p != 0) {
 			p = (char*) fcn_0064e790(p, '"');
 			if (p == 0) {
-				goto fail_free;
+				m_FreeTracked(txt_TextBuffer);
+				txt_TextBuffer = 0;
+				return 0;
 			}
 			p++;
 			q = (char*) fcn_0064e790(p, '"');
 			if (q == 0) {
-				goto fail_free;
+				m_FreeTracked(txt_TextBuffer);
+				txt_TextBuffer = 0;
+				return 0;
 			}
 			*q = 0;
 			strcpy(g_1335000, p);
@@ -191,25 +201,28 @@ int __cdecl txt_OpenText(char* definitionPath, char* writeHeader)
 		if (p != 0) {
 			p = (char*) fcn_0064e790(p, '"');
 			if (p == 0) {
-				goto fail_free;
+				m_FreeTracked(txt_TextBuffer);
+				txt_TextBuffer = 0;
+				return 0;
 			}
 			p++;
 			q = (char*) fcn_0064e790(p, '"');
 			if (q == 0) {
-				goto fail_free;
+				m_FreeTracked(txt_TextBuffer);
+				txt_TextBuffer = 0;
+				return 0;
 			}
 			*q = 0;
-			strcpy(inc[fileCount], p);
-			fileCount++;
+			strcpy(inc[fileCount++], p);
 			if (fileCount > 0x80) {
-				goto fail_free;
+				m_FreeTracked(txt_TextBuffer);
+				txt_TextBuffer = 0;
+				return 0;
 			}
 		}
 pass1_done:
-		if ((STREAM_FLAG(fp) & 0x10) != 0) {
-			break;
-		}
-	}
+		;
+	} while ((STREAM_FLAG(fp) & 0x10) == 0);
 	fcn_0064e1fd(fp);
 
 	/* Pass 2: compile every listed text file into its binary resource. */
@@ -226,7 +239,7 @@ pass1_done:
 			return 0;
 		}
 		lineNo = 0;
-		for (;;) {
+		do {
 			memset(line, 0, 0xc8);
 			fgets(line, 0xc8, fp);
 			if (strcmp(line, g_6b5c60) == 0) {
@@ -235,10 +248,8 @@ pass1_done:
 			lineNo++;
 			v10 = 0;
 			if (strstr(line, "#define") != 0) {
-				k = strlen(line);
-				line[k - 1] = 0;
-				fcn_0064d41a(def[defineCount], "%s\n", line);
-				defineCount++;
+				line[strlen(line) - 1] = 0;
+				fcn_0064d41a(def[defineCount++], "%s\n", line);
 				if (defineCount > 0x60) {
 					MessageBoxA((HWND) 0, "To many defines!", "Error", 0x30);
 				}
@@ -250,15 +261,96 @@ pass1_done:
 				}
 				v10 = strlen(line);
 			}
-			while (line[v10] == ' ') {
-				v10++;
+			while (line[v10++] == ' ') {
 			}
+			v10--;
 			for (v14 = v10; (unsigned int) v10 < strlen(line); v10++, v14++) {
 				p = line + v10;
 				switch (line[v10]) {
 				case '\t':
 					v14 += 4;
 					continue;
+				case '(':
+					if (txt_ParseTextVariants(p, v18) == 0) {
+						fcn_0064d41a(msg, "Syntax error in file %s in line %i", fileName, lineNo);
+						MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
+					}
+					v10 = (int) strlen(line);
+					break;
+				case '{':
+					txt_ParseRandomText(p);
+					v10 = v14 + 4;
+					continue;
+				case '/':
+					if (line[v10 + 1] == '*') {
+						v20++;
+						if (strstr(line + v10 + 1, "*/") != 0) {
+							v20--;
+						}
+					}
+					v10 = (int) strlen(line);
+					break;
+				case '*':
+					if (line[v10 + 1] == '/') {
+						v20--;
+					}
+					if (v20 < 0) {
+						fcn_0064d41a(msg, "txt_TextOpen(): nested comments found. in file %s in line %i", fileName, lineNo);
+					}
+					break;
+				case '_':
+					if (v44 != 0) {
+						fcn_0064d41a(msg, "Syntax error in file %s in line %i: missing ';'", inc[fileIndex], lineNo);
+						MessageBoxA((HWND) 0, msg, "txt_OpenText", 0x30);
+						m_FreeTracked(txt_TextBuffer);
+						txt_TextBuffer = 0;
+						fcn_0064e1fd(fp);
+						return 0;
+					}
+					g_14b7320[v18] = txt_EntryCount;
+					endPos = v10;
+					while ((unsigned int) endPos < strlen(line) && line[endPos] != 0xa && line[endPos] != 0x20 && line[endPos] != 9) {
+						endPos++;
+					}
+					memset(g_11cd000[v18], 0, 0x50);
+					fcn_0064d530(g_11cd000[v18], line + v10, endPos - v10);
+					for (k = 0; k < 8; k++) {
+						if (v14 <= starts[k]) {
+							g_14a0b20[v18] = (unsigned char) k;
+							memset(rec[k], 0, 0x80);
+							starts[k] = v14;
+							starts[k + 1] = v14 + 0xa;
+							memset(g_1335120[v18], 0, 0x50);
+							if (k == 0) {
+								fcn_0064d530(rec[0], line + v10, endPos - v10);
+								strcpy(buf250, rec[0]);
+								for (k = 1; k < 8; k++) {
+									starts[k] = v14 + k * 0xa;
+								}
+								k = 0;
+							} else {
+								strcpy(rec[k], rec[k - 1]);
+								strncat(rec[k], line + v10, endPos - v10);
+								strcpy(buf250, rec[k - 1]);
+								strcat(buf250, rec[k]);
+							}
+							strcpy(g_1335120[v18], rec[k]);
+							v18++;
+							if (v18 > 0x4800) {
+								fcn_0064d41a(msg, "Zuviele Label! Zeile:%i", lineNo);
+								MessageBoxA((HWND) 0, msg, "txt_OpenText", 0x30);
+								m_FreeTracked(txt_TextBuffer);
+								txt_TextBuffer = 0;
+								fcn_0064e1fd(fp);
+								return 0;
+							}
+							v14 = v14 + (endPos - v10) - 2;
+							break;
+						}
+					}
+					v10 = endPos - 2;
+					v14 = v14 + (endPos - v10) - 2;
+					break;
 				case '"':
 					v10++;
 					v14++;
@@ -345,30 +437,6 @@ pass1_done:
 					v10--;
 					v14--;
 					break;
-				case '(':
-					if (txt_ParseTextVariants(p, v18) == 0) {
-						fcn_0064d41a(msg, "Syntax error in file %s in line %i", fileName, lineNo);
-						MessageBoxA((HWND) 0, msg, "Error in textfile", 0x30);
-					}
-					v10 = (int) strlen(line);
-					break;
-				case '*':
-					if (line[v10 + 1] == '/') {
-						v20--;
-					}
-					if (v20 < 0) {
-						fcn_0064d41a(msg, "txt_TextOpen(): nested comments found. in file %s in line %i", fileName, lineNo);
-					}
-					break;
-				case '/':
-					if (line[v10 + 1] == '*') {
-						v20++;
-						if (strstr(line + v10 + 1, "*/") != 0) {
-							v20--;
-						}
-					}
-					v10 = (int) strlen(line);
-					break;
 				case ';':
 					strcpy(g_1053000[txt_EntryCount], g_1335120[v18 - 1]);
 					strcat(g_1053000[txt_EntryCount], "+");
@@ -386,75 +454,11 @@ pass1_done:
 					v44 = 0;
 					v14++;
 					continue;
-				case '_':
-					if (v44 != 0) {
-						fcn_0064d41a(msg, "Syntax error in file %s in line %i: missing ';'", inc[fileIndex], lineNo);
-						MessageBoxA((HWND) 0, msg, "txt_OpenText", 0x30);
-						m_FreeTracked(txt_TextBuffer);
-						txt_TextBuffer = 0;
-						fcn_0064e1fd(fp);
-						return 0;
-					}
-					g_14b7320[v18] = txt_EntryCount;
-					endPos = v10;
-					while ((unsigned int) endPos < strlen(line) && line[endPos] != 0xa && line[endPos] != 0x20 && line[endPos] != 9) {
-						endPos++;
-					}
-					memset(g_11cd000[v18], 0, 0x50);
-					fcn_0064d530(g_11cd000[v18], line + v10, endPos - v10);
-					k = 0;
-					while (k < 8) {
-						if (v14 <= starts[k]) {
-							break;
-						}
-						k++;
-					}
-					if (k < 8) {
-						g_14a0b20[v18] = (unsigned char) k;
-						memset(rec[k], 0, 0x80);
-						starts[k] = v14;
-						starts[k + 1] = v14 + 0xa;
-						memset(g_1335120[v18], 0, 0x50);
-						if (k != 0) {
-							strcpy(rec[k], rec[k - 1]);
-							strncat(rec[k], line + v10, endPos - v10);
-							strcpy(buf250, rec[k - 1]);
-							strcat(buf250, rec[k]);
-						} else {
-							fcn_0064d530(rec[0], line + v10, endPos - v10);
-							strcpy(buf250, rec[0]);
-							for (k = 1; k < 8; k++) {
-								starts[k] = starts[1] + (k - 1) * 0xa;
-							}
-							k = 0;
-						}
-						strcpy(g_1335120[v18], rec[k]);
-						v18++;
-						if (v18 > 0x4800) {
-							fcn_0064d41a(msg, "Zuviele Label! Zeile:%i", lineNo);
-							MessageBoxA((HWND) 0, msg, "txt_OpenText", 0x30);
-							m_FreeTracked(txt_TextBuffer);
-							txt_TextBuffer = 0;
-							fcn_0064e1fd(fp);
-							return 0;
-						}
-						v14 = v14 + (endPos - v10) - 2;
-					}
-					v10 = endPos - 2;
-					v14 = v14 + (endPos - v10) - 2;
-					break;
-				case '{':
-					txt_ParseRandomText(p);
-					v10 = v14 + 4;
-					continue;
 				default:
 					break;
 				}
 			}
-			if ((STREAM_FLAG(fp) & 0x10) != 0) {
-				break;
-			}
-		}
+		} while ((STREAM_FLAG(fp) & 0x10) == 0);
 		fcn_0064e1fd(fp);
 		p = m_alloc(g_6b7fa4, "txt_txt:txt_textbuffer");
 		BANK(fileIndex).text = p;
@@ -536,7 +540,9 @@ pass1_done:
 	fp = (FILE*) fcn_0064e2f9(line, "wt");
 	if (fp == 0) {
 		MessageBoxA((HWND) 0, "Could not write HeaderFile!", "txt_OpenText", 0x30);
-		goto fail_free;
+		m_FreeTracked(txt_TextBuffer);
+		txt_TextBuffer = 0;
+		return 0;
 	}
 	fcn_0064e48f(fp, 0, 0);
 	if (v18 > 0) {
@@ -564,15 +570,4 @@ success:
 	g_6b7f9c = v18;
 	g_1052de0 = 1;
 	return 1;
-
-fail_close:
-	m_FreeTracked(txt_TextBuffer);
-	txt_TextBuffer = 0;
-	fcn_0064e1fd(fp);
-	return 0;
-
-fail_free:
-	m_FreeTracked(txt_TextBuffer);
-	txt_TextBuffer = 0;
-	return 0;
 }

@@ -110,18 +110,16 @@ void __cdecl fcn_0047e270(Bld* bld)
 	fcn_00487970(craft, bld, 0x4b);
 	fcn_00487c00(craft, bld, 0x19);
 	fcn_00487470(bld);
-	hit = 0;
 	if (g_7f4c04 != 8 && g_7f4c04 != 0xd) {
+		hit = 0;
 		for (i = 0; i < g_100b0ac; i++) {
-			rec = &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i];
-			if (rec->goods_id != (int) bld->id)
+			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id != (int) bld->id)
 				continue;
-			goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[rec->goods_id]);
-			if ((int) ((OBJECT_PROTOTYPE *)goods)->value_036 <= rec->unk_40 &&
-			    fcn_00486640(bld, rec, 1)) {
-				rec->flags = rec->flags | 8;
-				fcn_004868d0(bld, rec);
-				bld->id = (unsigned short) rec->goods_id;
+			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_40 >= (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036 &&
+			    fcn_00486640(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
+				((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags |= 8;
+				fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
+				bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
 				hit = 1;
 			}
 			break;
@@ -130,57 +128,56 @@ void __cdecl fcn_0047e270(Bld* bld)
 		if (hit)
 			goto done;
 	}
-	else if (bld->f1b4 & 0x100) {
-		if (bld->id != 0) {
-			for (i = 0; i < g_100b0ac; i++) {
-				rec = &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i];
-				if (rec->goods_id != (int) bld->id)
-					continue;
-				goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[rec->goods_id]);
-				if ((int) ((OBJECT_PROTOTYPE *)goods)->value_036 <= rec->unk_40 &&
-				    fcn_00486640(bld, rec, 1)) {
-					rec->flags = rec->flags | 8;
-					fcn_004868d0(bld, rec);
-					bld->id = (unsigned short) rec->goods_id;
-					goto done;
-				}
-				break;
+	else if (!(bld->f1b4 & 0x100)) {
+		bld->f1b4 |= 0x100;
+		bld->id = 0;
+	}
+	else if (bld->id != 0) {
+		for (i = 0; i < g_100b0ac; i++) {
+			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id != (int) bld->id)
+				continue;
+			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_40 >= (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036 &&
+			    fcn_00486640(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
+				((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags |= 8;
+				fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
+				bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
+				goto done;
 			}
+			break;
 		}
 	}
-	else {
-		bld->id = 0;
-		bld->f1b4 = bld->f1b4 | 0x100;
-	}
-pick:
 	if (*(unsigned char*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (bld->x16c + 0x27)]) + 2) == 6) {
 		n = fcn_005b1e40(bld->x16c);
 		if (n != 0) {
-			for (rec = (PRODUCTION_GOODS_RECORD*) g_100d0c0; (char*) rec < (char*) g_100d0c0 + 0xb00; rec = (PRODUCTION_GOODS_RECORD*) ((char*) rec + 0x58)) {
-				if (rec->goods_id != n)
+			for (i = 0; i < 0x20; i++) {
+				if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id != n)
 					continue;
-				goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[rec->goods_id]);
-				if ((int) ((Craft*) craft)->x1c < rec->min_1)
+				if ((int) ((Craft*) craft)->x1c < ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].min_1)
 					break;
-				if ((int) ((Craft*) craft)->x1d < rec->min_2)
+				if ((int) ((Craft*) craft)->x1d < ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].min_2)
 					break;
-				if (rec->unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
+				if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_40 < (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036)
 					break;
-				n = fcn_00503d10(rec->goods_id);
+				n = fcn_00503d10(((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id);
 				if (n == 0)
 					break;
-				if ((int) ((unsigned short) ((OBJECT_PROTOTYPE *)goods)->value_036 + rec->unk_3c) <= gm_eval_SlotVoll(n, rec->goods_id, 1000000)) {
-					if (fcn_00486640(bld, rec, 1)) {
-						rec->flags = rec->flags | 8;
-						fcn_004868d0(bld, rec);
-						bld->id = (unsigned short) rec->goods_id;
-						fcn_0064d41a(name, "Produktion von %s starten, da Humanplayer es so will.", goods + 1);
-						goto done;
-					}
-					if (fcn_00486640(bld, rec, 0)) {
-						fcn_004868d0(bld, rec);
-						bld->id = (unsigned short) rec->goods_id;
-						fcn_0064d41a(name, "Produktion von %s starten obwohl Rohstoffe fehlen, da der spieler es so will", goods + 1);
+				if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id, 1000000) >=
+				    (int) ((unsigned short) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036 +
+				           ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_3c)) {
+					if (!fcn_00486640(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
+						if (fcn_00486640(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 0)) {
+							fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
+							bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
+							fcn_0064d41a(name, "Produktion von %s starten obwohl Rohstoffe fehlen, da der spieler es so will",
+							             ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id]) + 1);
+							goto done;
+						}
+					} else {
+						((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags |= 8;
+						fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
+						bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
+						fcn_0064d41a(name, "Produktion von %s starten, da Humanplayer es so will.",
+						             ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id]) + 1);
 						goto done;
 					}
 				}
@@ -197,79 +194,80 @@ pick:
 		order[r] = j;
 	}
 	for (i = 0; i < g_100b0ac; i++) {
-		rec = &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]];
-		goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[rec->goods_id]);
-		if ((((OBJECT_PROTOTYPE *)goods)->kind == 0x17 || ((OBJECT_PROTOTYPE *)goods)->kind == 0x25) && rec->unk_3c >= 5)
+		goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id]);
+		if ((((OBJECT_PROTOTYPE *)goods)->kind == 0x17 || ((OBJECT_PROTOTYPE *)goods)->kind == 0x25) && ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_3c >= 5)
 			continue;
-		if ((int) ((Craft*) craft)->x1c < rec->min_1)
+		if ((int) ((Craft*) craft)->x1c < ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].min_1)
 			continue;
-		if ((int) ((Craft*) craft)->x1d < rec->min_2)
+		if ((int) ((Craft*) craft)->x1d < ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].min_2)
 			continue;
-		if (rec->unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
+		if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
 			continue;
-		n = fcn_00503d10(rec->goods_id);
+		n = fcn_00503d10(((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id);
 		if (n == 0)
 			continue;
-		if ((int) ((unsigned short) ((OBJECT_PROTOTYPE *)goods)->value_036 + rec->unk_3c) > gm_eval_SlotVoll(n, rec->goods_id, 1000000))
+		if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id, 1000000) <
+		    (int) ((unsigned short) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id].value_036 +
+		           ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_3c))
 			continue;
-		if (!fcn_00486640(bld, rec, 1))
+		if (!fcn_00486640(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]], 1))
 			continue;
-		rec = &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]];
-		rec->flags = rec->flags | 8;
-		fcn_004868d0(bld, rec);
-		bld->id = (unsigned short) rec->goods_id;
-		fcn_0064d41a(name, "Produktion von %s starten", goods + 1);
+		((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].flags |= 8;
+		fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]]);
+		bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id;
+		fcn_0064d41a(name, "Produktion von %s starten", ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id]) + 1);
 		goto done;
 	}
 	for (i = 0; i < g_100b0ac; i++) {
-		rec = &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]];
-		goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[rec->goods_id]);
-		if ((((OBJECT_PROTOTYPE *)goods)->kind == 0x17 || ((OBJECT_PROTOTYPE *)goods)->kind == 0x25) && rec->unk_3c >= 5)
+		goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id]);
+		if ((((OBJECT_PROTOTYPE *)goods)->kind == 0x17 || ((OBJECT_PROTOTYPE *)goods)->kind == 0x25) && ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_3c >= 5)
 			continue;
-		if ((int) ((Craft*) craft)->x1c < rec->min_1)
+		if ((int) ((Craft*) craft)->x1c < ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].min_1)
 			continue;
-		if ((int) ((Craft*) craft)->x1d < rec->min_2)
+		if ((int) ((Craft*) craft)->x1d < ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].min_2)
 			continue;
-		if (rec->unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
+		if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
 			continue;
-		n = fcn_00503d10(rec->goods_id);
+		n = fcn_00503d10(((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id);
 		if (n == 0)
 			continue;
-		if ((int) ((unsigned short) ((OBJECT_PROTOTYPE *)goods)->value_036 + rec->unk_3c) > gm_eval_SlotVoll(n, rec->goods_id, 1000000))
+		if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id, 1000000) <
+		    (int) ((unsigned short) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id].value_036 +
+		           ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_3c))
 			continue;
-		if (!fcn_00486640(bld, rec, 0))
+		if (!fcn_00486640(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]], 0))
 			continue;
-		fcn_004868d0(bld, rec);
-		bld->id = (unsigned short) rec->goods_id;
-		fcn_0064d41a(name, "Produktion von %s starten obwohl Rohstoffe fehlen", goods + 1);
+		fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]]);
+		bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id;
+		fcn_0064d41a(name, "Produktion von %s starten obwohl Rohstoffe fehlen", ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id]) + 1);
 		goto done;
 	}
 	bld->id = 0;
 done:
 	fcn_0047e220(craft);
 	fcn_0047e0e0(bld, craft);
-	if (g_100dc20 == bld->x16c && g_100dc38 < 4) {
+	if (g_100dc20 == bld->x16c) {
 		i = 0;
-		while (i < g_100b0ac) {
-			rec = &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i];
-			((PRODUCTION_GOODS_RECORD*) g_100dc60)[g_100dc38] = *rec;
-			for (j = 0; j < 4; j++) {
-				if (rec->building_indices[j] >= 0) {
-					n = *(int*) (g_100dc40 + g_100dc38 * 4);
-					memcpy(g_100df20 + (n + g_100dc38 * 4) * 0x40, &g_100b0c0[rec->building_indices[j]], 0x40);
-					*(int*) (g_100dc40 + g_100dc38 * 4) = *(int*) (g_100dc40 + g_100dc38 * 4) + 1;
+		if (g_100dc38 < 4) {
+			do {
+				if (i >= g_100b0ac)
+					break;
+				((PRODUCTION_GOODS_RECORD*) g_100dc60)[g_100dc38] = ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i];
+				for (j = 0; j < 4; j++) {
+					if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].building_indices[j] >= 0) {
+						memcpy(g_100df20 + (*(int*) (g_100dc40 + g_100dc38 * 4) + g_100dc38 * 4) * 0x40, &g_100b0c0[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].building_indices[j]], 0x40);
+						*(int*) (g_100dc40 + g_100dc38 * 4) = *(int*) (g_100dc40 + g_100dc38 * 4) + 1;
+					}
 				}
-			}
-			g_100dc38 = g_100dc38 + 1;
-			i = i + 1;
-			if (g_100dc38 >= 4)
-				break;
+				g_100dc38 = g_100dc38 + 1;
+				i = i + 1;
+			} while (g_100dc38 < 4);
 		}
 	}
 	fcn_00487e60(bld, 4);
 	put.count = 0;
 	for (n = 0x7f4ca2; n < 0x85a0a2; n += (int)sizeof(ENTITY_RECORD)) {
-		if (*(unsigned char*) (n + 6) == 0)
+		if (*(unsigned char*) (n + 6) <= 0)
 			continue;
 		if (*(unsigned short*) (n - 2) == 0xffff)
 			continue;
@@ -300,22 +298,21 @@ done:
 	}
 	if (put.flags >= put.count)
 		put.flags = put.count;
-	if (put.count != 0 && put.flags != 0 && g_100b0ac > 0) {
-		put.bld = (int) bld;
-		put.craft = craft;
-		put.x10 = 0;
-		put.x20 = 0;
-		put.x1c = 0;
-		i = 0;
-		for (; i < g_100b0ac; i++) {
-			rec = &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i];
-			if (rec->flags & 8) {
-				put.kind = 4;
-				put.rec = (int) rec;
-				fcn_00487f90(&put);
-			}
-			else
-				continue;
+	if (put.count == 0 || put.flags == 0) {
+		ai_MeisterCollectTrans(bld);
+		ai_MeisterTrade(bld, craft);
+		return;
+	}
+	put.bld = (int) bld;
+	put.craft = craft;
+	put.x10 = 0;
+	put.x20 = 0;
+	put.x1c = 0;
+	for (i = 0; i < g_100b0ac; i++) {
+		if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags & 8) {
+			put.kind = 4;
+			put.rec = (int) &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i];
+			fcn_00487f90(&put);
 			if (g_100dc20 == bld->x16c && g_100dc3c < 4) {
 				((PRODUCTION_GOODS_RECORD*) g_100ddc0)[g_100dc3c] = *(PRODUCTION_GOODS_RECORD*) put.rec;
 				g_100dc3c = g_100dc3c + 1;
