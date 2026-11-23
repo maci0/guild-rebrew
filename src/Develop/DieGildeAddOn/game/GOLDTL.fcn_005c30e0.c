@@ -125,7 +125,7 @@ void __cdecl fcn_005c30e0(unsigned char* buildingEntry)
 			return;
 		}
 		m = gm_SearchTable67(id);
-		if (*(unsigned char*) (buildingEntry + 0x5b) & 4) {
+		if (*(unsigned short*) (buildingEntry + 0x5a) & 0x400) {
 			return;
 		}
 		if (!m) {
@@ -151,7 +151,8 @@ void __cdecl fcn_005c30e0(unsigned char* buildingEntry)
 		return;
 	}
 	if (kind == 3) {
-		m = fcn_00502cd0(*(int*) ((char*) fcn_0050e4a0(1) + 0x5d), 2, 6, 0, 0x115);
+		id = *(int*) ((char*) fcn_0050e4a0(1) + 0x5d);
+		m = fcn_00502cd0(id, 2, 6, 0, 0x115);
 		if (fcn_00526120(buf, 0x11) == 0) {
 			return;
 		}

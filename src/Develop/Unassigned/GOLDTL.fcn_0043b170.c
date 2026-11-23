@@ -58,8 +58,8 @@ void __cdecl fcn_0043b170(unsigned int flags, char force, unsigned int mode, cha
 						} while (node != d3_SceneObjectSentinel);
 					}
 				}
-				entry++;
 				i++;
+				entry++;
 			} while ((int) entry < (int) 0x1052a40);
 		}
 		scale = g_1052c50;

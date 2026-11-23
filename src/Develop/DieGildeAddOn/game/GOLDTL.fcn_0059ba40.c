@@ -1,6 +1,7 @@
 #include <string.h>
 
 extern int d2_CurrentWindowId;
+extern char g_779160[];
 extern char* g_1015ea0;
 extern int g_100f1dc;
 extern int g_100f884;
@@ -132,14 +133,14 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 			} while (!any);
 			if (count > 0) {
 				for (k = 0; k < count; k++) {
-					if (d2_CurrentElementId == *(int*) (0x779194 + k * 0x58)) {
+					if (d2_CurrentElementId == *(int*) (g_779160 + 0x34 + k * 0x58)) {
 						if (!any) {
 							p = (int*) 0x7e30d0;
 							do {
 								if (*p == 0xffff)
 									break;
 								row = *(char**) &((ENTITY_RECORD_VIEW*) 0x7f4ca0)[*p].ptr_17c;
-								if (row && (*row == 3) && (*(int*) (row + 0x10) == *(int*) (building + 1)) && (*(unsigned short*) (row + 0xac) == *(unsigned int*) (0x779160 + k * 0x58)))
+								if (row && (*row == 3) && (*(int*) (row + 0x10) == *(int*) (building + 1)) && (*(unsigned short*) (row + 0xac) == *(unsigned int*) (g_779160 + k * 0x58)))
 									*(char*) &((ENTITY_RECORD_VIEW*) 0x7f4ca0)[*p].selected = 1;
 								p += 10;
 							} while ((int) p < 0x7e35d0);
@@ -147,7 +148,7 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 							fcn_004c35f0();
 							found = he_StartHandlungSearch(2, 0, 3, 3, *(unsigned int*) (building + 1));
 							while (found) {
-								if (*(unsigned short*) (found + 0xac) == *(unsigned int*) (0x779160 + k * 0x58))
+								if (*(unsigned short*) (found + 0xac) == *(unsigned int*) (g_779160 + k * 0x58))
 									goto located;
 								found = he_fn_Handlung();
 							}
@@ -162,7 +163,7 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 							req.c2c = g_7f4c04;
 							req.c30 = g_7f4c08;
 							req.c34 = g_7f4c0c;
-							req.id = *(unsigned short*) (0x779160 + k * 0x58);
+							req.id = *(unsigned short*) (g_779160 + k * 0x58);
 							req.f68 = *(unsigned int*) (building + 1);
 							req.f6c = *(unsigned int*) (q + 2);
 							req.f70 = *(unsigned int*) (r + 2);

@@ -1,4 +1,7 @@
 extern int d2_CurrentWindowId;
+extern int g_100f1dc;
+extern int g_14ce8e0;
+extern int g_774654;
 #include <string.h>
 
 extern unsigned char g_773d75;
@@ -146,24 +149,24 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 	}
 	d2_SetForm(w, 3);
 	fcn_00533a60(last, 0, pt, 2, *(int *)0x14b5428, *(int *)0x14b542c);
-	*(unsigned int *)0x100f1dc = 0xffffffff;
+	g_100f1dc = -1;
 	do {
 		r = (void *)pt[0];
 		exp = *(unsigned int *)(0x102cbc8 + idx * 0x8c);
 		fcn_00472640(r, (exp != 0xffffffff) && (i != 0));
-		if (*(unsigned int *)0x14ce8e0) {
-			*(unsigned int *)0x774654 = 1;
-		} else if (*(unsigned int *)0x100f1dc != 0xffffffff) {
+		if (g_14ce8e0) {
+			g_774654 = 1;
+		} else if (g_100f1dc != -1) {
 			if (*(unsigned int *)0x67d370 == pt[0]) {
 				for (id = 0; id < 3; id++) {
 					if (exp == (unsigned int)id) {
 						if (fcn_00584f00(a0, rec[id], val[id])) {
-							*(unsigned int *)0x774654 = 1;
+							g_774654 = 1;
 						}
 					}
 				}
 			} else if (*(unsigned int *)0x67d370 == pt[1]) {
-				*(unsigned int *)0x774654 = 1;
+				g_774654 = 1;
 			}
 		}
 	} while (fcn_005373e0(0x5848b0, 0x677c7));

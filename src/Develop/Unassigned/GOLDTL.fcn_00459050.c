@@ -54,18 +54,18 @@ void __cdecl fcn_00459050(int self)
 	*(unsigned int*) (p + 0xc) = 0x30;
 	src = (float*) (d3_ActiveCamera + 0x18c);
 	D3DXMatrixTranspose(m, src);
-	dr[0] = *(float*) 0x10425d8 * m[8] + *(float*) 0x10425d4 * m[4] + g_10425d0[0] * m[0];
-	dr[1] = *(float*) 0x10425d8 * m[9] + *(float*) 0x10425d4 * m[5] + g_10425d0[0] * m[1];
-	dr[2] = *(float*) 0x10425d8 * m[10] + *(float*) 0x10425d4 * m[6] + g_10425d0[0] * m[2];
-	cr[0] = *(float*) 0x10425c8 * m[8] + *(float*) 0x10425c4 * m[4] + g_10425c0[0] * m[0];
-	cr[1] = *(float*) 0x10425c8 * m[9] + *(float*) 0x10425c4 * m[5] + g_10425c0[0] * m[1];
-	cr[2] = *(float*) 0x10425c8 * m[10] + *(float*) 0x10425c4 * m[6] + g_10425c0[0] * m[2];
-	br[0] = *(float*) 0x10425b8 * m[8] + *(float*) 0x10425b4 * m[4] + g_10425b0[0] * m[0];
-	br[1] = *(float*) 0x10425b8 * m[9] + *(float*) 0x10425b4 * m[5] + g_10425b0[0] * m[1];
-	br[2] = *(float*) 0x10425b8 * m[10] + *(float*) 0x10425b4 * m[6] + g_10425b0[0] * m[2];
-	ar[0] = g_10425a0[2] * m[8] + g_10425a0[1] * m[4] + g_10425a0[0] * m[0];
-	ar[1] = g_10425a0[2] * m[9] + g_10425a0[1] * m[5] + g_10425a0[0] * m[1];
-	ar[2] = g_10425a0[2] * m[10] + g_10425a0[1] * m[6] + g_10425a0[0] * m[2];
+	dr[0] = *(float*) 0x10425d4 * m[4] + *(float*) 0x10425d8 * m[8] + g_10425d0[0] * m[0];
+	dr[1] = *(float*) 0x10425d4 * m[5] + *(float*) 0x10425d8 * m[9] + g_10425d0[0] * m[1];
+	dr[2] = *(float*) 0x10425d4 * m[6] + *(float*) 0x10425d8 * m[10] + g_10425d0[0] * m[2];
+	cr[0] = *(float*) 0x10425c4 * m[4] + *(float*) 0x10425c8 * m[8] + g_10425c0[0] * m[0];
+	cr[1] = *(float*) 0x10425c4 * m[5] + *(float*) 0x10425c8 * m[9] + g_10425c0[0] * m[1];
+	cr[2] = *(float*) 0x10425c4 * m[6] + *(float*) 0x10425c8 * m[10] + g_10425c0[0] * m[2];
+	br[0] = *(float*) 0x10425b4 * m[4] + *(float*) 0x10425b8 * m[8] + g_10425b0[0] * m[0];
+	br[1] = *(float*) 0x10425b4 * m[5] + *(float*) 0x10425b8 * m[9] + g_10425b0[0] * m[1];
+	br[2] = *(float*) 0x10425b4 * m[6] + *(float*) 0x10425b8 * m[10] + g_10425b0[0] * m[2];
+	ar[0] = g_10425a0[1] * m[4] + g_10425a0[2] * m[8] + g_10425a0[0] * m[0];
+	ar[1] = g_10425a0[1] * m[5] + g_10425a0[2] * m[9] + g_10425a0[0] * m[1];
+	ar[2] = g_10425a0[1] * m[6] + g_10425a0[2] * m[10] + g_10425a0[0] * m[2];
 	vp = (float*) (p + 0x94);
 	i = 0;
 	for (r = 0; r < 6; r++) {
@@ -75,29 +75,29 @@ void __cdecl fcn_00459050(int self)
 		for (c = 0; c < 8; c++) {
 			fcn_00451340(o1, o2, (float) c * 0.14285715f, vp - 1);
 			d3_NormalizeVector(vp - 1);
-			p[0x30 + i] = *(float*) (p + 0x18) < vp[0];
+			p[0x30 + i] = vp[0] > *(float*) (p + 0x18);
 			u = (vp[0] - *(float*) (p + 0x1c)) * *(float*) (p + 0x20);
-			if (u < 0.0f) {
-				u = 0.0f;
-			} else if (u > 255.0f) {
+			if (!(0.0f > u) && 255.0f < u) {
 				u = 255.0f;
+			} else if (0.0f > u) {
+				u = 0.0f;
 			}
 			p[0x60 + i] = (unsigned char) u;
 			i++;
 			vp = (float*) ((char*) vp + 16);
 		}
 	}
+	count = 0;
 	obj = *(void**) (p + 4);
 	vt = *(void***) obj;
 	((void (__stdcall*) (void*, unsigned int, unsigned int, void**, unsigned int)) vt[11])(obj, 0, 0x1a4, &locked, 0x2000);
 	ind = (short*) locked;
-	count = 0;
 	for (r = 0; r < 5; r++) {
-		for (c = 0; c < 7; c++) {
+		cell = p + 0x60 + r * 8;
+		for (c = 0; c < 7; c++, cell++) {
 			idx = c + r * 8;
-			cell = p + 0x60 + idx;
 			if (*(unsigned char*) (p + 0x30 + idx) && *(unsigned char*) (p + 0x31 + idx) && *(unsigned char*) (p + 0x38 + idx) && *(unsigned char*) (p + 0x39 + idx)) {
-				if (cell[0] || *(unsigned char*) (p + 0x61 + idx) || *(unsigned char*) (p + 0x68 + idx) || *(unsigned char*) (p + 0x39 + idx)) {
+				if (cell[0] > 0 || *(unsigned char*) (p + 0x61 + idx) > 0 || *(unsigned char*) (p + 0x68 + idx) > 0 || *(unsigned char*) (p + 0x39 + idx) > 0) {
 					ind[count] = (short) idx;
 					count++;
 					ind[count] = (short) (idx + 1);

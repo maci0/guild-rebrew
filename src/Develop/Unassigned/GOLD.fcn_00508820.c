@@ -25,7 +25,7 @@ float __cdecl fcn_00508820(int id, int percentage)
     GOLD_PRICE_PROTO* prototype;
     char error[256];
     double quotient;
-    double total;
+    float total;
     float price;
     int building;
     int divisor;

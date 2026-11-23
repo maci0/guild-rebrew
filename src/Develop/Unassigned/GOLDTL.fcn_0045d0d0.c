@@ -14,6 +14,7 @@ int* __cdecl fcn_0045d0d0(char* a0, int a1, int a2, int a3, int a4, unsigned cha
 	int* p;
 	int n;
 	unsigned char b;
+	int g;
 
 
 	p = (int*) fcn_0045c290(a4, &n);
@@ -46,7 +47,8 @@ int* __cdecl fcn_0045d0d0(char* a0, int a1, int a2, int a3, int a4, unsigned cha
 	p[0x11] = (a1 * a1 - 1) | (a1 - 1);
 	p[0x14] = 0;
 	p[0x13] = 0;
-	p[0x1b] = ((a4 >> 8 & 0xff) << 8 | (a4 >> 8 & 0xff)) << 8 | (a4 >> 8 & 0xff);
+	g = a4 >> 8 & 0xff;
+	p[0x1b] = (g << 8 | g) << 8 | g;
 	p[0x17] = 0;
 	p[0x18] = a2;
 	p[0x10] = 1;

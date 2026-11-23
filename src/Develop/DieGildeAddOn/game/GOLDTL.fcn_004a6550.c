@@ -111,18 +111,12 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 		pos2.x = tx;
 		pos2.y = ty;
 		pos2.z = tz;
-		delta.x = 5.0f * g_772870;
-		delta.y = 5.0f * g_772874;
-		delta.z = 5.0f * g_772878;
-		pos.x += delta.x;
-		pos.y += delta.y;
-		pos.z += delta.z;
-		delta.x = g_664450 * g_772870;
-		delta.y = g_664450 * g_772874;
-		delta.z = g_664450 * g_772878;
-		pos2.x += delta.x;
-		pos2.y += delta.y;
-		pos2.z += delta.z;
+		pos.x += 5.0f * g_772870;
+		pos.y += 5.0f * g_772874;
+		pos.z += 5.0f * g_772878;
+		pos2.x += g_664450 * g_772870;
+		pos2.y += g_664450 * g_772874;
+		pos2.z += g_664450 * g_772878;
 		fcn_005e8e80(buf2, &pos.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
 		fcn_005e8e80(buf1, &pos2.x, (float*) 0x772860, speed,
@@ -151,12 +145,9 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 		pos.x = tx;
 		pos.y = ty;
 		pos.z = tz;
-		delta.x = 5.0f * g_772880;
-		delta.y = 5.0f * g_772884;
-		delta.z = 5.0f * g_772888;
-		pos.x += delta.x;
-		pos.y += delta.y;
-		pos.z += delta.z;
+		pos.x += 5.0f * g_772880;
+		pos.y += 5.0f * g_772884;
+		pos.z += 5.0f * g_772888;
 		delta.x = g_66444c * g_772880;
 		delta.y = g_66444c * g_772884;
 		delta.z = g_66444c * g_772888;
@@ -166,18 +157,12 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 		pos2.x += delta.x;
 		pos2.y += delta.y;
 		pos2.z += delta.z;
-		delta.x = 5.0f * g_772870;
-		delta.y = 5.0f * g_772874;
-		delta.z = 5.0f * g_772878;
-		pos3.x += delta.x;
-		pos3.y += delta.y;
-		pos3.z += delta.z;
-		delta.x = g_664450 * g_772870;
-		delta.y = g_664450 * g_772874;
-		delta.z = g_664450 * g_772878;
-		pos2.x += delta.x;
-		pos2.y += delta.y;
-		pos2.z += delta.z;
+		pos3.x += 5.0f * g_772870;
+		pos3.y += 5.0f * g_772874;
+		pos3.z += 5.0f * g_772878;
+		pos2.x += g_664450 * g_772870;
+		pos2.y += g_664450 * g_772874;
+		pos2.z += g_664450 * g_772878;
 		fcn_005e8e80(buf3, &pos3.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
 		fcn_005e8e80(buf1, &pos2.x, (float*) 0x772860, speed,

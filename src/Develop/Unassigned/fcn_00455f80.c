@@ -21,7 +21,7 @@ void __cdecl fcn_00455f80(int value, int unused, int storeval, int count,
 			v5 = v2 * stride;
 			local0 = centerY + areaRadius;
 			edi = centerY - v2;
-			while (v2 <= (stride - 1 < local0 ? stride - 1 : local0)) {
+			while (v2 <= (local0 < stride - 1 ? local0 : stride - 1)) {
 				end = centerX + (areaRadius - (edi < 0 ? -edi : edi));
 				i = centerX - (areaRadius - (edi < 0 ? -edi : edi));
 				i = i < 0 ? 0 : i;

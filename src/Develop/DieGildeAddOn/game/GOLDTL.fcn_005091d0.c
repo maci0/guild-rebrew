@@ -100,7 +100,8 @@ void __cdecl fcn_005091d0(int* pn, StatRow* rows)
 	for (i = 0; i < *pn; i++) {
 		r = rows + i;
 		r->ratio = (float) r->count / (float) max;
-		fsum = r->vc + r->v10;
+		fsum = r->vc;
+		fsum += r->v10;
 		fsum += r->v14;
 		fsum *= 0.15f;
 		fsum += r->ratio * 0.3f;

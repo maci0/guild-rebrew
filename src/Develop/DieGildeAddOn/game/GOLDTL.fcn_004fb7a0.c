@@ -18,7 +18,10 @@ void __cdecl fcn_00500bb0(Time14* t, int hours, int minutes, int seconds);
 void __cdecl fcn_004c5530(void* msg);
 int __cdecl fcn_004c6a00(void* msg);
 
-#define CLOCK_4fb7a0 (*(Time14*) 0x7f4c00)
+extern int gm_GameTime;
+extern int g_7f4c04;
+extern int g_7f4c08;
+extern unsigned short g_7f4c0c;
 
 #pragma optimize("y", off)
 
@@ -90,6 +93,7 @@ void __cdecl fcn_004fb7a0(void)
 		sel[11] = 2;
 		sel[12] = 2;
 		sel[13] = 2;
+		nextPhase = sel[gm_RandomMod(0x10) & 0xffff] + 1;
 	} else if (st[8] == 2) {
 		sel[6] = 0;
 		sel[5] = 0;
@@ -101,6 +105,7 @@ void __cdecl fcn_004fb7a0(void)
 		sel[11] = 2;
 		sel[12] = 2;
 		sel[13] = 2;
+		nextPhase = sel[gm_RandomMod(0x10) & 0xffff] + 1;
 	} else {
 		sel[6] = 0;
 		sel[5] = 0;
@@ -112,19 +117,25 @@ void __cdecl fcn_004fb7a0(void)
 		sel[11] = 1;
 		sel[12] = 1;
 		sel[13] = 1;
+		nextPhase = sel[gm_RandomMod(0x10) & 0xffff] + 1;
 	}
-	nextPhase = sel[gm_RandomMod(0x10) & 0xffff] + 1;
 	st[7] = nextPhase;
 	if (nextPhase == 1) {
 		ev[4] = 'Y';
 		*(int*) (ev + 8) = *(int*) (gm_CityEntity + 4);
 		*(int*) (ev + 0xc) = -1;
-		*(Time14*) (ev + 0x28) = CLOCK_4fb7a0;
+		*(int*) (ev + 0x28) = gm_GameTime;
+		*(int*) (ev + 0x2c) = g_7f4c04;
+		*(int*) (ev + 0x30) = g_7f4c08;
+		*(unsigned short*) (ev + 0x34) = g_7f4c0c;
 		ev[0x36] = 2;
 		*(int*) (ev + 0x58) = (gm_RandomMod(3) & 0xffff) * 3;
-		*(Time14*) (ev + 0x28) = CLOCK_4fb7a0;
+		*(int*) (ev + 0x28) = gm_GameTime;
+		*(int*) (ev + 0x2c) = g_7f4c04;
+		*(int*) (ev + 0x30) = g_7f4c08;
+		*(unsigned short*) (ev + 0x34) = g_7f4c0c;
 		((Time14*) (ev + 0x28))->min = 0;
-		if (CLOCK_4fb7a0.hour < 0x17 && CLOCK_4fb7a0.hour >= 7) {
+		if ((unsigned short) g_7f4c04 < 0x17 && (unsigned short) g_7f4c04 >= 7) {
 			fcn_00500bb0((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		} else {
 			fcn_00500bb0((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
@@ -134,11 +145,14 @@ void __cdecl fcn_004fb7a0(void)
 		*(int*) (ev + 8) = *(int*) (gm_CityEntity + 4);
 		*(int*) (ev + 0xc) = -1;
 		*(int*) (ev + 0x58) = -1;
-		*(Time14*) (ev + 0x28) = CLOCK_4fb7a0;
+		*(int*) (ev + 0x28) = gm_GameTime;
+		*(int*) (ev + 0x2c) = g_7f4c04;
+		*(int*) (ev + 0x30) = g_7f4c08;
+		*(unsigned short*) (ev + 0x34) = g_7f4c0c;
 		ev[0x36] = 1;
 		*(int*) (ev + 0x74) = 1000;
 		((Time14*) (ev + 0x28))->min = 0;
-		if (CLOCK_4fb7a0.hour >= 0x17) {
+		if ((unsigned short) g_7f4c04 >= 0x17) {
 			fcn_00500bb0((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		} else {
 			fcn_00500bb0((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
@@ -147,12 +161,15 @@ void __cdecl fcn_004fb7a0(void)
 state3:
 		ev[4] = 'P';
 		*(int*) (ev + 8) = *(int*) (gm_CityEntity + 4);
-		*(Time14*) (ev + 0x28) = CLOCK_4fb7a0;
+		*(int*) (ev + 0x28) = gm_GameTime;
 		*(int*) (ev + 0xc) = -1;
+		*(int*) (ev + 0x2c) = g_7f4c04;
+		*(int*) (ev + 0x30) = g_7f4c08;
+		*(unsigned short*) (ev + 0x34) = g_7f4c0c;
 		ev[0x36] = 2;
 		*(int*) (ev + 0x58) = -1;
 		*(int*) (ev + 0x74) = 1000;
-		if (CLOCK_4fb7a0.hour >= 0x17) {
+		if ((unsigned short) g_7f4c04 >= 0x17) {
 			fcn_00500bb0((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		} else {
 			fcn_00500bb0((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);

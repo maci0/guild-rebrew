@@ -12,6 +12,7 @@ char __cdecl fcn_00473360(char* p)
 	if (p == 0)
 		return 0;
 	memset(shape, 0, 9);
+	shape[8] = 0;
 	memcpy(shape, p, 8);
 	shape[8] = 0;
 	if (!memcmp(shape, (char*) 0x67d8bc, 9)) {

@@ -50,7 +50,7 @@ void __cdecl fcn_004d2c80(int *arr, int arg1)
         sub_407e30(ebx, p, p, col, row, &x, &y, 2, 0);
         sub_45b920(ebx, x, y, position);
         sub_402ab0(*(void **)((char *)esi + 0x184), position, 1);
-        rotation[0] = rotation[1] = rotation[2] = 0.0f; sub_455140(edi, g_662d40, direction);
+        rotation[0] = 0.0f; rotation[1] = 0.0f; rotation[2] = 0.0f; sub_455140(edi, g_662d40, direction);
         rotation[1] = sub_451380(g_662d40, direction);
         sub_438cb0(*(void **)((char *)*(void **)((char *)esi + 0x184) + 0x34), rotation);
     }

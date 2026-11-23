@@ -15,8 +15,8 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 /* ADDRESS: GOLDTL 0x004b6830 */
 int __cdecl fcn_004b6830(int* request)
 {
-	unsigned char msg[0xa8];
-	char buf[0xe8];
+	unsigned char msg[0x90];
+	char buf[0x100];
 	unsigned short* ent;
 	unsigned char* rec;
 	unsigned char* s;
@@ -46,7 +46,8 @@ int __cdecl fcn_004b6830(int* request)
 	}
 	i = 0;
 	hit = 0;
-	for (; i < n && hit == 0; i++) {
+	for (; i < n; i++) {
+		if (hit != 0) goto found;
 		rec = msg + 0xc + i * 0x18;
 		if (*(rec + 4) != 3 || *(int*) rec == 0) {
 			continue;
@@ -76,7 +77,7 @@ found:
 	    *(unsigned char*) (msg + 8 + i * 0x18) + 0x253, v);
 	fcn_004c51a0(*request, *(int*) ((char*) hit + 4), g_773d75, v);
 	fcn_00545d40(*((int*) ent + 1), *((int*) ent + 1), buf,
-	    0x100 < strlen(buf + 4), 0x603, 0);
+	    0x100 < strlen(buf), 0x603, 0);
 	return 0;
 
 }

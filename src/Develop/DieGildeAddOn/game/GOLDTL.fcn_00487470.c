@@ -74,7 +74,7 @@ void __cdecl fcn_00487470(char* actor)
 	if (!(*(int*) (actor + 0x1b4) & 8)) {
 		return;
 	}
-	if (gm_RandomMod(0x14) + 0x4b > fcn_00508da0((unsigned char*) p)) {
+	if (fcn_00508da0((unsigned char*) p) < gm_RandomMod(0x14) + 0x4b) {
 		amountf = (float) fcn_0050cf50(*(int*)(actor + 0x16c), 100) * g_664138 * g_664138;
 		if (g_662a7c > amountf) {
 			amountf = 128.0f;

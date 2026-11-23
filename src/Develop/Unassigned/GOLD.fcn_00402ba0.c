@@ -1,6 +1,17 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
+typedef struct D3_ANIMATION_OPTIONS {
+    unsigned char mode;
+    unsigned char layer;
+    unsigned char pad2[2];
+    unsigned int loop : 1;
+    unsigned int reverse : 1;
+    unsigned int pad4 : 30;
+    unsigned char blend : 1;
+    unsigned char queue : 1;
+    unsigned char pad8[3];
+} D3_ANIMATION_OPTIONS;
 void __cdecl fcn_00442c00(char*, int);
 void __cdecl fcn_00453270(char*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
@@ -8,7 +19,7 @@ void __cdecl fcn_00438b40(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 int __cdecl fcn_00433f40(char*);
 void __cdecl fcn_0044e4a0(char*, char*, int);
-char* __cdecl fcn_00435550(char*, char*, int, int, int);
+char* __cdecl fcn_00435550(char*, char*, D3_ANIMATION_OPTIONS);
 char* __cdecl vfs_ToSlashes(char*);
 void __cdecl fcn_00411b70(char*);
 #define I32(p) (*(int*)(p))
@@ -16,6 +27,10 @@ void __cdecl fcn_00411b70(char*);
 /* ADDRESS: GOLD 0x00402ba0 */
 void __cdecl fcn_00402ba0(char* character)
 {
+    D3_ANIMATION_OPTIONS opt;
+    char name[256];
+    char path[256];
+    char error[512];
     char* low;
     char* high;
     char* animation;
@@ -23,9 +38,7 @@ void __cdecl fcn_00402ba0(char* character)
     float dx;
     float dy;
     float dz;
-    char path[256];
-    char name[256];
-    char error[512];
+    unsigned short flags;
     low = *(char**)(character + 0x22c);
     if (!low)
         return;
@@ -33,7 +46,8 @@ void __cdecl fcn_00402ba0(char* character)
         high = *(char**)(character + 0x34);
         I32(low + 0x200) = I32(high + 0x200);
         I32(*(char**)(character + 0x22c) + 0x48) = I32(*(char**)(character + 0x34) + 0x48);
-        if (*(unsigned short*)(character + 0x8c) & 0x200) {
+        flags = *(unsigned short*)(character + 0x8c);
+        if (flags & 0x200) {
             if (I32(*(char**)(character + 0x34) + 0x218) != 1)
                 fcn_00442c00(*(char**)(character + 0x34), 0);
             low = *(char**)(character + 0x22c);
@@ -44,40 +58,42 @@ void __cdecl fcn_00402ba0(char* character)
             return;
         }
         if (I32(character + 0x88) == 0xfd7ba0) {
-            if (I32(0x631064) == 1 && I32(0xfc2dec)) {
-                dx = F32(I32(0xfc2dec) + 0x4c) - F32(high + 0x4c);
-                dy = F32(I32(0xfc2dec) + 0x50) - F32(high + 0x50);
-                dz = F32(I32(0xfc2dec) + 0x54) - F32(high + 0x54);
-                if (sqrt(dx * dx + (dy * dy + dz * dz)) < 1500.0f) {
-                    if (I32(high + 0x218) == 1 && !(character[0x8c] & 0x20)) {
-                        fcn_00442c00(high, 1);
-                        fcn_00453270(*(char**)(character + 0x34));
-                    }
+            if (I32(0x631064) != 1 || !I32(0xfc2dec)) {
+                goto lowpoly_model;
+            }
+            dx = F32(I32(0xfc2dec) + 0x4c) - F32(high + 0x4c);
+            dy = F32(I32(0xfc2dec) + 0x50) - F32(high + 0x50);
+            dz = F32(I32(0xfc2dec) + 0x54) - F32(high + 0x54);
+            dz = (float)sqrt(dz * dz + dy * dy + dx * dx);
+            if (!(dz < 1500.0f)) {
+            lowpoly_model:
+                high = *(char**)(character + 0x34);
+                if (I32(high + 0x218) != 1)
+                    fcn_00442c00(high, 0);
+                if ((I32(character + 0x2c) != I32(0x5f1294) || I32(character + 0x30) != I32(0x5f1298)) && I32(character + 0x30)) {
                     if (I32(*(char**)(character + 0x22c) + 0x218) != 1)
                         fcn_00442c00(*(char**)(character + 0x22c), 0);
-                    goto update_animation;
+                } else if (I32(*(char**)(character + 0x22c) + 0x218) == 1 && !(character[0x8c] & 0x20)) {
+                    fcn_00442c00(*(char**)(character + 0x22c), 1);
+                    fcn_00453270(*(char**)(character + 0x22c));
                 }
-            }
-            high = *(char**)(character + 0x34);
-            if (I32(high + 0x218) != 1)
-                fcn_00442c00(high, 0);
-            if ((I32(character + 0x2c) != I32(0x5f1294) || I32(character + 0x30) != I32(0x5f1298)) && I32(character + 0x30)) {
+                low = *(char**)(character + 0x22c);
+                high = *(char**)(character + 0x34);
+                if (I32(low + 0x218) != 1 && I32(low + 0x1cc) &&
+                    !CompareVector3WithinTolerance((float*)(low + 0x4c), (float*)(high + 0x4c), 2.0f))
+                    fcn_00438b40(low, (float*)(high + 0x4c));
+                high = *(char**)(character + 0x34);
+                low = *(char**)(character + 0x22c);
+                if (I32(high + 0x1cc) && !CompareVector3WithinTolerance((float*)(low + 0x84), (float*)(high + 0x84), 0.05f))
+                    d3_SetObjectRotation(low, (float*)(high + 0x84));
+            } else {
+                if (I32(high + 0x218) == 1 && !(flags & 0x20)) {
+                    fcn_00442c00(high, 1);
+                    fcn_00453270(*(char**)(character + 0x34));
+                }
                 if (I32(*(char**)(character + 0x22c) + 0x218) != 1)
                     fcn_00442c00(*(char**)(character + 0x22c), 0);
-            } else if (I32(*(char**)(character + 0x22c) + 0x218) == 1 && !(character[0x8c] & 0x20)) {
-                fcn_00442c00(*(char**)(character + 0x22c), 1);
-                fcn_00453270(*(char**)(character + 0x22c));
             }
-            low = *(char**)(character + 0x22c);
-            high = *(char**)(character + 0x34);
-            if (I32(low + 0x218) != 1 && I32(low + 0x1cc) &&
-                !CompareVector3WithinTolerance((float*)(low + 0x4c), (float*)(high + 0x4c), 2.0f))
-                fcn_00438b40(low, (float*)(high + 0x4c));
-            high = *(char**)(character + 0x34);
-            low = *(char**)(character + 0x22c);
-            if (I32(high + 0x1cc) && !CompareVector3WithinTolerance((float*)(low + 0x84), (float*)(high + 0x84), 0.05f))
-                d3_SetObjectRotation(low, (float*)(high + 0x84));
-        update_animation:
             animation = *(char**)(*(char**)(character + 0x22c) + 0x1cc);
             if (!animation || (signed char)character[0x8c] < 0)
                 return;
@@ -89,9 +105,16 @@ void __cdecl fcn_00402ba0(char* character)
                 sprintf(path, "lowpolycharacter/%s/%s_%s_LOW.baf", character + 0x230, "gehen", character + 0x230);
                 sprintf(name, "%s_%s_LOW.baf", "gehen", character + 0x230);
                 vfs_ToSlashes(name);
+                memset(&opt, 0, sizeof(opt));
+                opt.queue = 1;
+                *(int*)&opt = 0;
+                opt.layer = 8;
+                opt.mode = 0;
+                opt.reverse = 0;
+                opt.loop = 0;
                 if (!fcn_00433f40(name))
                     fcn_0044e4a0(path, name, 1);
-                attached = fcn_00435550(*(char**)(*(char**)(character + 0x22c) + 0x1ec) + 0xf4, name, 0x800, 0, 2);
+                attached = fcn_00435550(*(char**)(*(char**)(character + 0x22c) + 0x1ec) + 0xf4, name, opt);
                 if (!attached) {
                     sprintf(error, "ch_Updatelowpoly(): Could not attach ani: %s", path);
                     character[0x8c] |= 0x80;
@@ -101,7 +124,7 @@ void __cdecl fcn_00402ba0(char* character)
                 I32(attached + 0x3c) = -1;
                 return;
             }
-            if (I32(animation + 0x84) && !high) {
+            if (!high && I32(animation + 0x84)) {
                 fcn_00411b70(*(char**)(character + 0x22c));
                 return;
             }
@@ -112,7 +135,7 @@ void __cdecl fcn_00402ba0(char* character)
         if ((I32(character + 0x2c) != I32(0x5f1294) || I32(character + 0x30) != I32(0x5f1298)) && I32(character + 0x30)) {
             if (I32(high + 0x218) != 1)
                 fcn_00442c00(high, 0);
-        } else if (I32(high + 0x218) == 1 && !(character[0x8c] & 0x20)) {
+        } else if (I32(high + 0x218) == 1 && !(flags & 0x20)) {
             fcn_00442c00(high, 1);
             fcn_00453270(*(char**)(character + 0x34));
         }

@@ -41,11 +41,11 @@ void __cdecl fcn_00500e40(void)
 	int cnt;
 	int n;
 
+	memset((void*) 0x8f9480, 0, 0x64);
 	run = 0;
 	count = 0;
 	i = 0;
 	bld = (unsigned char*) lpGebaeudePROT;
-	memset((void*) 0x8f9480, 0, 0x64);
 	for (n = 0; n < 0x2dc; n++) {
 		((int*) 0x99e0a0)[n] = 0x58;
 	}

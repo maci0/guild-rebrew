@@ -6,22 +6,25 @@ void __cdecl fcn_00440140(void*);
 void __cdecl fcn_0043f990(void)
 {
 	unsigned int i;
-	int offset;
+	unsigned int offset;
 	char* resource;
+	char* base;
 	char* fillDst;
 	int fillCount;
 
 	for (i = 0; i < *(unsigned int*) 0x633744; i++) {
 		offset = i * 0x44;
-		resource = *(char**) (*(char**) 0x63374c + offset);
+		base = *(char**) 0x63374c;
+		resource = *(char**) (base + offset);
 		if (resource != 0) {
 			if (*resource == '*') {
 				while (*(int*) (resource + 0x40) > 0) {
 					fcn_0045fbb0(resource);
-					resource = *(char**) (*(char**) 0x63374c + offset);
+					base = *(char**) 0x63374c;
+					resource = *(char**) (base + offset);
 				}
 			}
-			*(int*) (*(char**) 0x63374c + offset) = 0;
+			*(int*) (base + offset) = 0;
 		}
 		*(char*) (*(char**) 0x63374c + offset + 0x40) = 0;
 		*(int*) (*(char**) 0x63374c + offset + 4) = 0;

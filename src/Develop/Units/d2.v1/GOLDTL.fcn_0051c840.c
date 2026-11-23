@@ -174,7 +174,7 @@ body:
 				memmove(buf + e + strlen(st.tmpl), buf + i,
 					strlen(buf) - i + 2);
 				flag = 0;
-				strcpy(buf + e, st.tmpl);
+				memcpy(buf + e, st.tmpl, strlen(st.tmpl) + 1);
 				break;
 			}
 			e = i - k - 1;

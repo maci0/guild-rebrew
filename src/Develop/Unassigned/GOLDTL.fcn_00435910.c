@@ -80,7 +80,6 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 	float m[3][2];
 	float t0, t1, t2, t3, t4, t5;
 	float t6, t7, t8, t9, t10, t11;
-	float h;
 	int count;
 	int layers;
 	int ei;
@@ -90,6 +89,7 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 	int c;
 	int o;
 	Vertex* v;
+	float *p0, *p1, *p2, *p3, *p4, *p5;
 
 	first = (unsigned char*) fcn_004356c0(a0);
 	layout = (unsigned char*) *(int*) ((unsigned char*) a0 + 0x318);
@@ -103,41 +103,35 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 	do {
 		if (*(unsigned char**) (layer + 0x64) != 0 &&
 		    *(float*) (layer + 0x3c) != 0.0f) {
-			h = *(float*) (layer + 0x3c);
 			b = layer - 4;
 			ei = (b == first) ? 0 : count;
 			recs = (unsigned char*) *(int*) (*(int*) (layer + 0x64) + 0x15c);
 			r0 = (Rec*) (recs + *(int*) (layer - 4) * REC_STRIDE);
 			r1 = (Rec*) (recs + *(int*) (layer) * REC_STRIDE);
 
-			tapA[ei][1] = r1->p0;
-			tapA[ei][0] = r0->p0;
-			tapB[ei][1] = r1->p1;
-			tapB[ei][0] = r0->p1;
-
-			t0 = h * r0->a[0];
+			t0 = *(float*) (layer + 0x3c) * r0->a[0];
 			wA[ei][0][0] = t0;
-			t1 = h * r0->a[1];
+			t1 = *(float*) (layer + 0x3c) * r0->a[1];
 			wA[ei][0][1] = t1;
-			t2 = h * r0->a[2];
+			t2 = *(float*) (layer + 0x3c) * r0->a[2];
 			wA[ei][0][2] = t2;
-			t3 = h * r0->b[0];
+			t3 = *(float*) (layer + 0x3c) * r0->b[0];
 			wC[ei][0][0] = t3;
-			t4 = h * r0->b[1];
+			t4 = *(float*) (layer + 0x3c) * r0->b[1];
 			wC[ei][0][1] = t4;
-			t5 = h * r0->b[2];
+			t5 = *(float*) (layer + 0x3c) * r0->b[2];
 			wC[ei][0][2] = t5;
-			t6 = h * r1->a[0];
+			t6 = *(float*) (layer + 0x3c) * r1->a[0];
 			wA[ei][1][0] = t6;
-			t7 = h * r1->a[1];
+			t7 = *(float*) (layer + 0x3c) * r1->a[1];
 			wA[ei][1][1] = t7;
-			t8 = h * r1->a[2];
+			t8 = *(float*) (layer + 0x3c) * r1->a[2];
 			wA[ei][1][2] = t8;
-			t9 = h * r1->b[0];
+			t9 = *(float*) (layer + 0x3c) * r1->b[0];
 			wC[ei][1][0] = t9;
-			t10 = h * r1->b[1];
+			t10 = *(float*) (layer + 0x3c) * r1->b[1];
 			wC[ei][1][1] = t10;
-			t11 = h * r1->b[2];
+			t11 = *(float*) (layer + 0x3c) * r1->b[2];
 			wC[ei][1][2] = t11;
 
 			fcn_004357b0(b, &m[ei][1], &m[ei][0]);
@@ -154,6 +148,11 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 			wC[ei][1][0] = m[ei][1] * t9;
 			wC[ei][1][1] = m[ei][1] * t10;
 			wC[ei][1][2] = m[ei][1] * t11;
+
+			tapA[ei][1] = r1->p0;
+			tapA[ei][0] = r0->p0;
+			tapB[ei][1] = r1->p1;
+			tapB[ei][0] = r0->p1;
 
 			/* the macro expands MIN twice, so the native re-reads the
 			   two +0x38 fields for the second MIN */
@@ -178,7 +177,8 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 		v = vertices;
 		for (item = 0; n > item; item++) {
 			o = item * CELL_STRIDE;
-			v->f[0] = (float) tapA[2][1][o] * wA[2][1][0] +
+			p0 = &v->f[0];
+			*p0 = (float) tapA[2][1][o] * wA[2][1][0] +
 				(float) tapA[1][0][o] * wA[1][0][0] +
 				(float) tapA[0][0][o] * wA[0][0][0] +
 				(float) tapA[0][1][o] * wA[0][1][0] +
@@ -186,7 +186,8 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 				(float) tapA[1][1][o] * wA[1][1][0] +
 				((float*) *(int*) (layout + 0x27c))[o] + wC[2][1][0] + wC[2][0][0] +
 				wC[1][1][0] + wC[1][0][0] + wC[0][1][0] + wC[0][0][0];
-			v->f[1] = (float) tapA[2][1][o + 1] * wA[2][1][1] +
+			p1 = &v->f[1];
+			*p1 = (float) tapA[2][1][o + 1] * wA[2][1][1] +
 				(float) tapA[1][0][o + 1] * wA[1][0][1] +
 				(float) tapA[0][0][o + 1] * wA[0][0][1] +
 				(float) tapA[0][1][o + 1] * wA[0][1][1] +
@@ -194,7 +195,8 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 				(float) tapA[1][1][o + 1] * wA[1][1][1] +
 				((float*) *(int*) (layout + 0x27c))[o + 1] + wC[2][1][1] + wC[2][0][1] +
 				wC[1][1][1] + wC[1][0][1] + wC[0][1][1] + wC[0][0][1];
-			v->f[2] = (float) tapA[2][1][o + 2] * wA[2][1][2] +
+			p2 = &v->f[2];
+			*p2 = (float) tapA[2][1][o + 2] * wA[2][1][2] +
 				(float) tapA[1][0][o + 2] * wA[1][0][2] +
 				(float) tapA[0][0][o + 2] * wA[0][0][2] +
 				(float) tapA[0][1][o + 2] * wA[0][1][2] +
@@ -202,11 +204,14 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 				(float) tapA[1][1][o + 2] * wA[1][1][2] +
 				((float*) *(int*) (layout + 0x27c))[o + 2] + wC[2][1][2] + wC[2][0][2] +
 				wC[1][1][2] + wC[1][0][2] + wC[0][1][2] + wC[0][0][2];
-			v->f[3] = (((float) tapB[0][0][o] - F_STEP_BIAS) * m[0][0] +
+			p3 = &v->f[3];
+			*p3 = (((float) tapB[0][0][o] - F_STEP_BIAS) * m[0][0] +
 				((float) tapB[0][1][o] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
-			v->f[4] = (((float) tapB[0][0][o + 1] - F_STEP_BIAS) * m[0][0] +
+			p4 = &v->f[4];
+			*p4 = (((float) tapB[0][0][o + 1] - F_STEP_BIAS) * m[0][0] +
 				((float) tapB[0][1][o + 1] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
-			v->f[5] = (((float) tapB[0][0][o + 2] - F_STEP_BIAS) * m[0][0] +
+			p5 = &v->f[5];
+			*p5 = (((float) tapB[0][0][o + 2] - F_STEP_BIAS) * m[0][0] +
 				((float) tapB[0][1][o + 2] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
 			c = *vertexCounts;
 			if (c > 0) {
@@ -216,7 +221,12 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 			}
 			v++;
 			for (k = 1; k < c; k++) {
-				v[0] = v[-1];
+				v->f[0] = *p0;
+				v->f[1] = *p1;
+				v->f[2] = *p2;
+				v->f[3] = *p3;
+				v->f[4] = *p4;
+				v->f[5] = *p5;
 				v->id[0] = ids[0];
 				v->id[1] = ids[1];
 				ids += 2;
@@ -234,29 +244,35 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 		v = vertices;
 		for (item = 0; item < n; item++) {
 			o = item * CELL_STRIDE;
-			v->f[0] = (float) tapA[1][1][o] * wA[1][1][0] +
+			p0 = &v->f[0];
+			*p0 = (float) tapA[1][1][o] * wA[1][1][0] +
 				(float) tapA[1][0][o] * wA[1][0][0] +
 				(float) tapA[0][1][o] * wA[0][1][0] +
 				(float) tapA[0][0][o] * wA[0][0][0] +
 				((float*) *(int*) (layout + 0x27c))[o] + wC[1][1][0] + wC[1][0][0] +
 				wC[0][1][0] + wC[0][0][0];
-			v->f[1] = (float) tapA[1][1][o + 1] * wA[1][1][1] +
+			p1 = &v->f[1];
+			*p1 = (float) tapA[1][1][o + 1] * wA[1][1][1] +
 				(float) tapA[1][0][o + 1] * wA[1][0][1] +
 				(float) tapA[0][1][o + 1] * wA[0][1][1] +
 				(float) tapA[0][0][o + 1] * wA[0][0][1] +
 				((float*) *(int*) (layout + 0x27c))[o + 1] + wC[1][1][1] + wC[1][0][1] +
 				wC[0][1][1] + wC[0][0][1];
-			v->f[2] = (float) tapA[1][1][o + 2] * wA[1][1][2] +
+			p2 = &v->f[2];
+			*p2 = (float) tapA[1][1][o + 2] * wA[1][1][2] +
 				(float) tapA[1][0][o + 2] * wA[1][0][2] +
 				(float) tapA[0][1][o + 2] * wA[0][1][2] +
 				(float) tapA[0][0][o + 2] * wA[0][0][2] +
 				((float*) *(int*) (layout + 0x27c))[o + 2] + wC[1][1][2] + wC[1][0][2] +
 				wC[0][1][2] + wC[0][0][2];
-			v->f[3] = (((float) tapB[0][0][o] - F_STEP_BIAS) * m[0][0] +
+			p3 = &v->f[3];
+			*p3 = (((float) tapB[0][0][o] - F_STEP_BIAS) * m[0][0] +
 				((float) tapB[0][1][o] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
-			v->f[4] = (((float) tapB[0][0][o + 1] - F_STEP_BIAS) * m[0][0] +
+			p4 = &v->f[4];
+			*p4 = (((float) tapB[0][0][o + 1] - F_STEP_BIAS) * m[0][0] +
 				((float) tapB[0][1][o + 1] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
-			v->f[5] = (((float) tapB[0][0][o + 2] - F_STEP_BIAS) * m[0][0] +
+			p5 = &v->f[5];
+			*p5 = (((float) tapB[0][0][o + 2] - F_STEP_BIAS) * m[0][0] +
 				((float) tapB[0][1][o + 2] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
 			c = *vertexCounts;
 			if (c > 0) {
@@ -266,7 +282,12 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 			}
 			v++;
 			for (k = 1; k < c; k++) {
-				v[0] = v[-1];
+				v->f[0] = *p0;
+				v->f[1] = *p1;
+				v->f[2] = *p2;
+				v->f[3] = *p3;
+				v->f[4] = *p4;
+				v->f[5] = *p5;
 				v->id[0] = ids[0];
 				v->id[1] = ids[1];
 				ids += 2;
@@ -284,20 +305,26 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 		v = vertices;
 		for (item = 0; item < n; item++) {
 			o = item * CELL_STRIDE;
-			v->f[0] = (float) tapA[0][1][o] * wA[0][1][0] +
+			p0 = &v->f[0];
+			*p0 = (float) tapA[0][1][o] * wA[0][1][0] +
 				(float) tapA[0][0][o] * wA[0][0][0] +
 				((float*) *(int*) (layout + 0x27c))[o] + wC[0][1][0] + wC[0][0][0];
-			v->f[1] = (float) tapA[0][1][o + 1] * wA[0][1][1] +
+			p1 = &v->f[1];
+			*p1 = (float) tapA[0][1][o + 1] * wA[0][1][1] +
 				(float) tapA[0][0][o + 1] * wA[0][0][1] +
 				((float*) *(int*) (layout + 0x27c))[o + 1] + wC[0][1][1] + wC[0][0][1];
-			v->f[2] = (float) tapA[0][1][o + 2] * wA[0][1][2] +
+			p2 = &v->f[2];
+			*p2 = (float) tapA[0][1][o + 2] * wA[0][1][2] +
 				(float) tapA[0][0][o + 2] * wA[0][0][2] +
 				((float*) *(int*) (layout + 0x27c))[o + 2] + wC[0][1][2] + wC[0][0][2];
-			v->f[3] = (((float) tapB[0][0][o] - F_STEP_BIAS) * m[0][0] +
+			p3 = &v->f[3];
+			*p3 = (((float) tapB[0][0][o] - F_STEP_BIAS) * m[0][0] +
 				((float) tapB[0][1][o] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
-			v->f[4] = (((float) tapB[0][0][o + 1] - F_STEP_BIAS) * m[0][0] +
+			p4 = &v->f[4];
+			*p4 = (((float) tapB[0][0][o + 1] - F_STEP_BIAS) * m[0][0] +
 				((float) tapB[0][1][o + 1] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
-			v->f[5] = (((float) tapB[0][0][o + 2] - F_STEP_BIAS) * m[0][0] +
+			p5 = &v->f[5];
+			*p5 = (((float) tapB[0][0][o + 2] - F_STEP_BIAS) * m[0][0] +
 				((float) tapB[0][1][o + 2] - F_STEP_BIAS) * m[0][1]) * F_STEP_K;
 			c = *vertexCounts;
 			if (c > 0) {
@@ -307,7 +334,12 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 			}
 			v++;
 			for (k = 1; k < c; k++) {
-				v[0] = v[-1];
+				v->f[0] = *p0;
+				v->f[1] = *p1;
+				v->f[2] = *p2;
+				v->f[3] = *p3;
+				v->f[4] = *p4;
+				v->f[5] = *p5;
 				v->id[0] = ids[0];
 				v->id[1] = ids[1];
 				ids += 2;

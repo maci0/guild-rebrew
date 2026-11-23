@@ -123,7 +123,7 @@ void __cdecl fcn_005aeab0(char* rec)
 				*(int*) (pkt + 0xc) = *(int*) (rec + 1);
 				*(unsigned char*) (pkt + 0x36) = 9;
 				*(int*) (pkt + 0x58) = *(int*) (ent + 4);
-				*(int*) (pkt + 0x60) = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
+				*(int*) (pkt + 0x60) = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
 				*(int*) (pkt + 0x64) = cnt;
 				fcn_004c5530(pkt);
 				io_FormatTextBuffer(note, 0x19c5, cnt, *(unsigned short*) ent);

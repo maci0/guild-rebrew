@@ -98,6 +98,7 @@ extern unsigned char g_773d75;
 extern char* g_773d78;
 extern int gm_GameTime;
 extern int g_7f4c04;
+extern char* lpObjektePROT;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
 extern int g_772620;
@@ -196,7 +197,7 @@ int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld)
 					continue;
 				}
 				sprintf(v.line, (char*) 0x67e6cc, t->qty44,
-				    *(char**) 0x99ec10 + t->id * 0x40 +
+				    lpObjektePROT + t->id * 0x40 +
 				    t->id + 1);
 			}
 
@@ -240,7 +241,7 @@ int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld)
 						sprintf(v.line,
 						    (char*) 0x67e6ac,
 						    t->qty44,
-						    *(char**) 0x99ec10 +
+						    lpObjektePROT +
 						    t->id * 0x40 +
 						    t->id + 1);
 					}
@@ -269,7 +270,7 @@ clear_stack:
 				t->qty44 = tmp;
 				if (o == *(char**) 0x100e748) {
 					sprintf(v.line, (char*) 0x67e674,
-					    tmp, *(char**) 0x99ec10 +
+					    tmp, lpObjektePROT +
 					    t->id * 0x40 + t->id + 1);
 				}
 			}
@@ -361,7 +362,7 @@ next_request:
 			}
 			sprintf(v.line, (char*) 0x67e868,
 			    *(char**) (o + 0x16c) + 5, *p,
-			    *(char**) 0x99ec10 + *ip * 0x40 + *ip + 1);
+			    lpObjektePROT + *ip * 0x40 + *ip + 1);
 
 			pr = 0;
 			for (t = (Prod*) 0x100b0c0;
@@ -387,7 +388,7 @@ next_request:
 					continue;
 				}
 				sprintf(v.line, (char*) 0x67e828,
-				    *(char**) 0x99ec10 + *ip * 0x40 + *ip + 1,
+				    lpObjektePROT + *ip * 0x40 + *ip + 1,
 				    *(char**) (o + 0x16c) + 5);
 				tmp = v.a1[j] - v.a2[j];
 				tmp = *p < tmp ? *p : tmp;
@@ -418,7 +419,7 @@ next_request:
 				}
 				sprintf(v.line, (char*) 0x67e7f0,
 				    *(char**) (o + 0x16c) + 5,
-				    *(char**) 0x99ec10 + *ip * 0x40 + *ip + 1);
+				    lpObjektePROT + *ip * 0x40 + *ip + 1);
 				tmp = fcn_0050dfd0(bld, (int) *ip);
 				tmp = *p < tmp ? *p : tmp;
 				sprintf(v.line, (char*) 0x67e358,
@@ -462,7 +463,7 @@ next_request:
 					sprintf(v.line, (char*) 0x67e7a0,
 					    *(char**) (o + 0x16c) + 5,
 					    v.a2[j],
-					    *(char**) 0x99ec10 +
+					    lpObjektePROT +
 					    (int) v.ids[j] * 0x40 +
 					    (int) v.ids[j] + 1);
 					tmp = (int) fcn_0050bb50(
@@ -512,7 +513,7 @@ fake_auto:
 			if (*p != 0) {
 				sprintf(v.line, (char*) 0x67e750,
 				    *(char**) (o + 0x16c) + 5, *p,
-				    *(char**) 0x99ec10 +
+				    lpObjektePROT +
 				    (int) *ip * 0x40 + (int) *ip + 1);
 				price = (int) fcn_0050bb50((int) *ip,
 				    g_773d75);
@@ -653,7 +654,7 @@ next_collect:
 					    (char*) 0x67e4e8,
 					    *(char**) (o + 0x16c) + 5,
 					    w->qty18,
-					    *(char**) 0x99ec10 +
+					    lpObjektePROT +
 					    w->id * 0x40 + w->id + 1);
 					tmp = (int) fcn_0050bb50(w->id,
 					    g_773d75);
@@ -734,7 +735,7 @@ next_collect:
 					if (v.m.ids[i] != 0) {
 						sprintf(v.line,
 						    (char*) 0x67e4d8,
-						    *(char**) 0x99ec10 +
+						    lpObjektePROT +
 						    (int) v.m.ids[i] * 0x40 +
 						    (int) v.m.ids[i] + 1);
 					}
@@ -744,7 +745,7 @@ next_collect:
 						sprintf(v.line,
 						    (char*) 0x67e4b8,
 						    v.m.f88[i],
-						    *(char**) 0x99ec10 +
+						    lpObjektePROT +
 						    (int) v.m.ids[3 + i] *
 						    0x40 +
 						    (int) v.m.ids[3 + i] + 1);

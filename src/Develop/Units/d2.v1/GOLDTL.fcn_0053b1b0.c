@@ -46,7 +46,7 @@ int __cdecl fcn_0053b1b0(void)
 	memcpy(st, (void*) 0x7e1fc0, 44);
 	v_id = -1;
 	for (i = 4; i < 6; i++) {
-		if (i <= 3)
+		if (i < 4)
 			st[6 + st[i]] = (int) (st[6 + st[i]] + 21.0f);
 		else
 			st[6 + st[i]] = (int) (st[6 + st[i]] + 63.0);
@@ -82,22 +82,25 @@ int __cdecl fcn_0053b1b0(void)
 				io_AppendText(0x1ae3);
 				fcn_00534160(0xd2, 0xec, v_len, 0x4d9);
 				v_id = fcn_00472250(dlg, 1, io_AppendText(0x1ae4));
-				j = 0;
 				for (i = 0; i < 5; i++) {
-					if (st[6 + i] > ((int*)0x7e1fd8)[i])
-						j = 0;
-					else
-						j = 1;
-					id = ids[2 * i];
-					((D2_CONTROL_TL*) (g_1015ea0))[id].disabled = j;
-					((D2_CONTROL_TL*) (g_1015ea0))[id].value_060 = j;
-					if (v_len > 0 && st[6 + i] < 126.0f)
-						j = 0;
-					else
-						j = 1;
-					id = ids[2 * i + 1];
-					((D2_CONTROL_TL*) (g_1015ea0))[id].disabled = j;
-					((D2_CONTROL_TL*) (g_1015ea0))[id].value_060 = j;
+					if (st[6 + i] > ((int*)0x7e1fd8)[i]) {
+						id = ids[2 * i];
+						((D2_CONTROL_TL*) (g_1015ea0))[id].disabled = 0;
+						((D2_CONTROL_TL*) (g_1015ea0))[id].value_060 = 0;
+					} else {
+						id = ids[2 * i];
+						((D2_CONTROL_TL*) (g_1015ea0))[id].disabled = 1;
+						((D2_CONTROL_TL*) (g_1015ea0))[id].value_060 = 1;
+					}
+					if (v_len > 0 && st[6 + i] < 126.0f) {
+						id = ids[2 * i + 1];
+						((D2_CONTROL_TL*) (g_1015ea0))[id].disabled = 0;
+						((D2_CONTROL_TL*) (g_1015ea0))[id].value_060 = 0;
+					} else {
+						id = ids[2 * i + 1];
+						((D2_CONTROL_TL*) (g_1015ea0))[id].disabled = 1;
+						((D2_CONTROL_TL*) (g_1015ea0))[id].value_060 = 1;
+					}
 				}
 				v_first = 0;
 			}

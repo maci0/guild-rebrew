@@ -47,17 +47,19 @@ found:
 	if (e == 0) {
 		return;
 	}
-	if (*e != 0xfd) {
-		sprintf(value, (char*) 0x68b3f8,
-			*(char**) ((int) *e * 8 + 0x14a79c0), *(char**) 0x14a552c);
-	} else if ((int) g_7746cc != 0) {
-		sprintf(value, (char*) 0x68b3f8,
-			*(char**) ((int) *(unsigned short*) (int) g_7746cc * 8 + 0x14a79c0),
-			*(char**) 0x14a5530);
+	if (*e == 0xfd) {
+		if ((int) g_7746cc != 0) {
+			sprintf(value, (char*) 0x68b3f8,
+				*(char**) ((int) *(unsigned short*) (int) g_7746cc * 8 + 0x14a79c0),
+				*(char**) 0x14a5530);
+		} else {
+			sprintf(value, (char*) 0x68b3f8,
+				*(char**) ((int) *(unsigned char*) p * 0x38 + 0x14a6558),
+				*(char**) 0x14a5530);
+		}
 	} else {
 		sprintf(value, (char*) 0x68b3f8,
-			*(char**) ((int) *(unsigned char*) p * 0x38 + 0x14a6558),
-			*(char**) 0x14a5530);
+			*(char**) ((int) *e * 8 + 0x14a79c0), *(char**) 0x14a552c);
 	}
 	if (fcn_00443e10(a, rc)) {
 		fcn_0046bd20((rc[2] - rc[0]) / 2 + rc[0] - 0x50, rc[1], 0xa0, 0x60,

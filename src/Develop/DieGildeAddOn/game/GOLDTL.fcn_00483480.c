@@ -1,5 +1,6 @@
 #include "production_goods.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
+#include "Develop/DieGildeAddOn/game/goods_plan.h"
 extern int g_100dc20;
 extern int g_100dc3c;
 int __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -321,7 +322,7 @@ tail:
 					int *s2;
 					int *d2;
 
-					s2 = (int *) (id * 0x40 + 0x100b0c0);
+					s2 = (int *) ((char *) g_100b0c0 + id * 0x40);
 					d2 = (int *) ((*(int *) (g_100dc38 * 4 + 0x100dc40) +
 						       g_100dc38 * 4) * 0x40 + 0x100df20);
 					*(RECORD *) d2 = *(RECORD *) s2;

@@ -14,9 +14,8 @@ int __cdecl fcn_004758b0(char* name, unsigned char* pix)
 	void* f;
 	int i;
 	int n;
-	int align;
+	int rowbytes;
 	int rev;
-	int row;
 
 	f = fcn_0064e2f9(name, (char*) 0x6750e8);
 	if (f != 0) {
@@ -31,22 +30,29 @@ int __cdecl fcn_004758b0(char* name, unsigned char* pix)
 		n = *(int*) (hdr + 8);
 		rev = n >= 0;
 		*(int*) (hdr + 8) = abs(n);
-		align = (*(int*) (hdr + 4) * 3) & 3;
+		rowbytes = *(int*) (hdr + 4) * 3;
 		for (i = 0; i < *(int*) (hdr + 8); i++) {
-			row = rev ? *(int*) (hdr + 8) - i - 1 : i;
-			fcn_0064ebe4(pix + row * *(int*) (hdr + 4) * 3, 1,
-				*(int*) (hdr + 4) * 3, f);
-			if (align != 0) {
-				fcn_0064e48f(f, 4 - align, 1);
+			if (!rev) {
+				fcn_0064ebe4(pix + i * *(int*) (hdr + 4) * 3, 1,
+					*(int*) (hdr + 4) * 3, f);
+			} else {
+				fcn_0064ebe4(pix + (*(int*) (hdr + 8) - i - 1) * *(int*) (hdr + 4) * 3, 1,
+					*(int*) (hdr + 4) * 3, f);
+			}
+			if (rowbytes & 3) {
+				fcn_0064e48f(f, 4 - (rowbytes & 3), 1);
 			}
 		}
 		fcn_0064e1fd(f);
-		p = pix + 2;
-		for (i = *(int*) (hdr + 4) * *(int*) (hdr + 8); i > 0; i--) {
-			t = p[-2];
-			p[-2] = p[0];
-			p[0] = t;
-			p += 3;
+		n = *(int*) (hdr + 4) * *(int*) (hdr + 8);
+		if (n > 0) {
+			p = pix + 2;
+			for (i = 0; i < n; i++) {
+				t = p[-2];
+				p[-2] = p[0];
+				p[0] = t;
+				p += 3;
+			}
 		}
 		goto fail_1;
 	}

@@ -179,7 +179,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cursor += 4;
 			p = *(char**) (cursor - 4);
 			j = (int) p;
-			if (j < 0x4800) {
+			if (j <= 0x4800) {
 				kind = g_11bb000[j];
 				p = txt_TextEntries[j];
 			}

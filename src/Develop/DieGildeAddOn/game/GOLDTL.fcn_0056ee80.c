@@ -108,13 +108,15 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 		*(int*) (actionRecord + 0x70) = 1;
 		return;
 	}
-	case 1:
+	case 1: {
+		int e;
+
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		i = 0;
 		for (;;) {
 			if (*(int*) (actionRecord + 0x8c + i * 4) != -1) {
-				ent = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + i * 4));
-				if (ent != 0 && *(int*) (ent + 0x184) != 0 && fcn_00529670(ent, rec1) == 0) {
+				e = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + i * 4));
+				if (e != 0 && *(int*) (e + 0x184) != 0 && fcn_00529670(e, rec1) == 0) {
 					break;
 				}
 			}
@@ -129,6 +131,7 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 		*(pos14_7f4c00*) (actionRecord + 0x52) = gm_GameTime;
 		fcn_00500bb0(actionRecord + 0x52, 0, 4, 0);
 		return;
+	}
 	case 2:
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		if (rec1 == 0) {
@@ -151,32 +154,38 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 			return;
 		}
 label_1bc:
+		{
+		int e;
+
 		for (cnt = 0; cnt < 8; cnt++) {
 			if (*(int*) (actionRecord + 0x8c + cnt * 4) != -1) {
-				ent = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + cnt * 4));
-				if (ent != 0) {
-					fcn_00529160(rec1, 0, *(unsigned short*) ent, (int) actionRecord);
+				e = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + cnt * 4));
+				if (e != 0) {
+					fcn_00529160(rec1, 0, *(unsigned short*) e, (int) actionRecord);
 					fcn_004c5c80(*(int*) (actionRecord + 0x8c + cnt * 4));
 					fcn_004c5da0(*(int*) (actionRecord + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 0, s_6a6dc4);
 					fcn_004c5ed0(*(int*) (actionRecord + 0x8c + cnt * 4), gestik[gm_RandomMod(3)], 1);
 				}
 			}
 		}
+		}
 		*(int*) (actionRecord + 0x70) = 5;
 		*(pos14_7f4c00*) (actionRecord + 0x52) = gm_GameTime;
 		fcn_00500bb0(actionRecord + 0x52, 0, 0xf, 0);
 		return;
-	case 3:
+	case 3: {
+		int e;
+
 		if (*(int*) (actionRecord + 0xb4) != -1 && fcn_004c4450(*(int*) (actionRecord + 0xb4)) == 0) {
 			return;
 		}
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		q = (int) he_StartHandlungSearch(1, 1, *(int*) (actionRecord + 0xb8));
 		if (rec1 != 0 && q != 0 && *(int*) (q + 0xd4) == *(int*) (actionRecord + 4) && *(int*) (actionRecord + 0xb4) != -1) {
-			ent = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0xb8));
+			e = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0xb8));
 			h = (int) fcn_004c4480(*(int*) (actionRecord + 0xb4));
-			if (ent != 0 && h != 0) {
-				fcn_004c58b0(*(int*) h, *(int*) (ent + 4));
+			if (e != 0 && h != 0) {
+				fcn_004c58b0(*(int*) h, *(int*) (e + 4));
 			}
 			*(int*) (actionRecord + 0x70) = 4;
 			fcn_00500bb0(actionRecord + 0x52, 0, 10, 0);
@@ -184,6 +193,7 @@ label_1bc:
 		}
 		*(int*) (actionRecord + 0x70) = -1;
 		return;
+	}
 	case 4:
 		q = (int) he_StartHandlungSearch(1, 1, *(int*) (actionRecord + 0xb8));
 		if (q == 0) {

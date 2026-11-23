@@ -23,17 +23,15 @@ unsigned int __cdecl fcn_004aa240(int a0, int entity, int a2, char *request, int
 {
     int n;
     unsigned short r;
-    int ids1[3];
-    int ids2[3];
+    struct { int cc; int ids1[3]; int ids2[3]; } s;
     SAVE_REC rec;
     int *src;
     unsigned int id;
     int ok;
     char *q;
-    int cc;
 
     memset(&rec, 0, sizeof rec);
-    cc = 0;
+    s.cc = 0;
     rec.ptr = 0;
     if (*(int *)(entity + 0x1c8) & 0x100)
     {
@@ -55,31 +53,31 @@ unsigned int __cdecl fcn_004aa240(int a0, int entity, int a2, char *request, int
         for (src = (int *)0x67faa4; (int)src < (int)0x67fab0; src++)
         {
             if (fcn_004fa5b0(*src, entity, &rec) & 2)
-                ids1[n++] = *src;
+                s.ids1[n++] = *src;
         }
         if (rec.ptr)
         {
             rec.type = 2;
-            cc = 0;
+            s.cc = 0;
             for (src = (int *)0x67faa4; (int)src < (int)0x67fab0; src++)
             {
                 if (fcn_004fa5b0(*src, entity, &rec) & 2)
-                    ids2[cc++] = *src;
+                    s.ids2[s.cc++] = *src;
             }
         }
-        if (n != 0 && (cc == 0 || (r = (unsigned short)gm_RandomMod(2)) == 0))
+        if (n != 0 && (s.cc == 0 || (r = (unsigned short)gm_RandomMod(2)) == 0))
         {
             rec.type = 1;
             r = (unsigned short)gm_RandomMod(n);
-            id = (unsigned int)ids1[r];
+            id = (unsigned int)s.ids1[r];
             n = 3;
             ok = fcn_004fa5b0((int)id, entity, &rec) & 2;
         }
-        else if (cc != 0)
+        else if (s.cc != 0)
         {
             rec.type = 2;
-            r = (unsigned short)gm_RandomMod(cc);
-            id = (unsigned int)ids2[r];
+            r = (unsigned short)gm_RandomMod(s.cc);
+            id = (unsigned int)s.ids2[r];
             n = 4;
             ok = fcn_004fa5b0((int)id, entity, &rec) & 2;
         }

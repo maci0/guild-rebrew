@@ -39,7 +39,6 @@ void __cdecl io_AppendText(int a, ...);
 void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 {
 	Panel* p;
-	unsigned char* st;
 	int stock[0xb8 / 4];
 	unsigned char* obj;
 	void* row;
@@ -57,7 +56,6 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 
 	/* List record buffer: fcn_0050cce0 fills 0xb8 bytes. Only the count at
 	 * +4, the item ids at +0x48 and the values at +0x68 are read here. */
-	st = (unsigned char*) stock;
 	obj = 0;
 	if (g_7746c4 != 0) {
 		obj = (unsigned char*) g_7746c4;
@@ -104,8 +102,8 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 				continue;
 			}
 			found = -1;
-			for (n = 0; n < *(int*) (st + 4); n++) {
-				if ((int) *(unsigned short*) (st + 0x48 + n * 2) == p->a[k]) {
+			for (n = 0; n < stock[1]; n++) {
+				if ((int) *(unsigned short*) ((unsigned char*) stock + 0x48 + n * 2) == p->a[k]) {
 					found = n;
 					break;
 				}
@@ -114,7 +112,7 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 				status = 2;
 				((D2_CONTROL_TL*) (g_1015ea0))[p->d[k]].value_1e4 = 0x74f;
 			} else {
-				if (!((int) *(unsigned short*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[p->x0]) + off) <= *(int*) (st + 0x68 + found * 4))) {
+				if (!((int) *(unsigned short*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[p->x0]) + off) <= *(int*) ((unsigned char*) stock + 0x68 + found * 4))) {
 					((D2_CONTROL_TL*) (g_1015ea0))[p->d[k]].value_1e4 = 0x74e;
 					if (status <= 1) {
 						status = 1;

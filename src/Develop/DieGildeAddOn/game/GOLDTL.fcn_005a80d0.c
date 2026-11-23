@@ -58,7 +58,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	id = -1;
 	n = gm_CanEnterGebaeude(a0);
 	if (n == 0) {
-		*(int*) &g_7e2700 = n;
+		*(int*) &g_7e2700 = 0;
 		return;
 	}
 	g_774658 = g_774650 + 1;

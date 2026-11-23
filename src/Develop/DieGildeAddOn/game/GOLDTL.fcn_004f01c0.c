@@ -139,9 +139,9 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 		     ((dist * *(float*) 0x662b30 + *(float*) 0x664138) * dist +
 		      1.0f);
 		fcn_00414ab0(&va.x, &vb.x, *(char**) (rec + 0x61));
-		vb.x = (vb.x - va.x) * *(float*) 0x6628cc;
-		vb.y = (vb.y - va.y) * *(float*) 0x6628cc;
-		vb.z = (vb.z - va.z) * *(float*) 0x6628cc;
+		vb.x = (vb.x - va.x) * 0.5f;
+		vb.y = (vb.y - va.y) * 0.5f;
+		vb.z = (vb.z - va.z) * 0.5f;
 		xlo = pv.x - vb.x;
 		xhi = pv.x + vb.x;
 		ylo = pv.y - vb.y;
@@ -166,7 +166,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 			continue;
 		}
 		count = count + 1;
-		tmp = scale * *(float*) 0x662910;
+		tmp = scale * 0.01f;
 		if (!(tmp < *(float*) 0x662cf8)) {
 			tmp = *(float*) 0x662cf8;
 		}
@@ -217,7 +217,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 		f2 = rr * *(float*) 0x662d34;
 		f3 = rr * *(float*) 0x6629d0;
 	} else {
-		f1 = rr * *(float*) 0x662910;
+		f1 = rr * 0.01f;
 		f2 = rr * *(float*) 0x66414c;
 		f3 = rr * *(float*) 0x662a3c;
 	}

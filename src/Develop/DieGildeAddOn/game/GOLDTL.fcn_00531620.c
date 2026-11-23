@@ -122,7 +122,7 @@ void __cdecl fcn_00531620(void)
 
 L684:
 	if (g_14ce8e4 == 0) {
-		if (d3_SelectionBoxActive == 0 && g_6772c4 != 0 && *(int*) 0x100f894 == -1
+		if (d3_SelectionBoxActive == 0 && g_6772c4 != 0 && d2_HoveredWindow == -1
 		    && ent != 0 && *(unsigned short*) (ent + 0x27) == g_774970) {
 			d3_BeginSelectionBox();
 		}
@@ -146,7 +146,7 @@ L6d3:
 		fcn_00531320();
 		goto La5d;
 	}
-	if (map == 0 || ent == 0 || g_14ce8cc == 0 || *(int*) 0x100f894 != -1) {
+	if (map == 0 || ent == 0 || g_14ce8cc == 0 || d2_HoveredWindow != -1) {
 		goto La5d;
 	}
 	k = 0;
@@ -222,7 +222,7 @@ L6d3:
 	}
 
 L192f:
-	if (map == 0 || g_14ce8cc == 0 || *(int*) 0x100f894 != -1) {
+	if (map == 0 || g_14ce8cc == 0 || d2_HoveredWindow != -1) {
 		goto La50;
 	}
 	fcn_0064d41a(u.buf, (char*) 0x68143c, (char*) g_7746a0 + 8);

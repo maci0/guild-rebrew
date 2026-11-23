@@ -77,7 +77,7 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 		rc[3] = rc[3] > iy ? rc[3] : iy;
 		rec += 0x14;
 	} while (--i != 0);
-	rc[0] = g_1042570 < rc[0] ? rc[0] : g_1042570;
+	rc[0] = rc[0] > g_1042570 ? rc[0] : g_1042570;
 	rc[2] = rc[2] < d3_ViewportRight - 1 ? rc[2] : d3_ViewportRight - 1;
 	rc[1] = g_1042574 < rc[1] ? rc[1] : g_1042574;
 	rc[3] = rc[3] < d3_ViewportBottom - 1 ? rc[3] : d3_ViewportBottom - 1;

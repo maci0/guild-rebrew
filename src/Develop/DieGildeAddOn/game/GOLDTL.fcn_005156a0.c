@@ -71,8 +71,7 @@ void __cdecl fcn_005156a0(char* record)
 		slot = (char*) fcn_00502cd0((int) list, 1, 0, (int) id);
 		if (slot == 0)
 			goto label_59eb;
-		*(unsigned int*) (slot + 0x30) = 0;
-		*(unsigned int*) (slot + 0x34) = 0;
+		*(unsigned int*) (slot + 0x18) = 0;
 		table = *(char**) (record + 0x1fc);
 		if (table != 0) {
 			id2 = *(unsigned int*) (table + 0x48) & 0xffffff;
@@ -85,7 +84,7 @@ void __cdecl fcn_005156a0(char* record)
 					d3_SetSubtreeVisible(record, 1);
 					*(char**) (record + 0x204) = slot;
 					*(unsigned int*) (record + 0x224) = 0;
-					*(char**) (slot + 0x30) = record;
+					*(char**) (slot + 0x18) = record;
 					if (fcn_005014d0(*(unsigned short*) slot) != 0) {
 						item = (char*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) entry);
 						while (item != 0) {
@@ -142,7 +141,7 @@ void __cdecl fcn_005156a0(char* record)
 				d3_SetSubtreeVisible(record, 1);
 				*(char**) (record + 0x204) = slot;
 				*(unsigned int*) (record + 0x224) = 0;
-				*(char**) (slot + 0x30) = record;
+				*(char**) (slot + 0x18) = record;
 				if (fcn_005014d0(*(unsigned short*) slot) != 0) {
 					item = (char*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) entry);
 					while (item != 0) {
@@ -158,7 +157,7 @@ void __cdecl fcn_005156a0(char* record)
 			*(char**) (record + 0x204) = slot;
 			if (*entry != 0x1d)
 				*(unsigned int*) (record + 0x224) = 0;
-			*(char**) (slot + 0x30) = record;
+			*(char**) (slot + 0x18) = record;
 			if (fcn_005014d0(*(unsigned short*) slot) != 0) {
 				item = (char*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) entry);
 				while (item != 0) {
@@ -182,13 +181,13 @@ label_59eb:
 			statusFlags = fcn_00506380(g_774970, (void*) 0x7f3ee0, slot, 0);
 			if ((statusFlags & 0x4000) != 0) {
 				*(unsigned int*) (record + 0x224) = 1;
-				*(char**) (slot + 0x30) = record;
+				*(char**) (slot + 0x18) = record;
 				goto label_5aab;
 			}
 		} else {
 			*(unsigned int*) (record + 0x224) = 0;
 		}
-		*(char**) (slot + 0x30) = record;
+		*(char**) (slot + 0x18) = record;
 		goto label_5aab;
 label_5a7a:
 		if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].kind) != 0x1d && (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].kind) != 0x21

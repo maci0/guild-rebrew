@@ -161,16 +161,16 @@ void __cdecl he_RunTransport(char *e)
 			}
 		}
 		n = (unsigned short)gm_RandomMod(0x69);
-		if (!(n > (f * 0.01) * *(unsigned char *)(q + 0x12))) {
-			*(char *)(e + 0xf1) = 1;
+		if (n > (f * 0.01) * *(unsigned char *)(q + 0x12)) {
+			if ((g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].kind == 6 || g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].kind == 7) && (*(unsigned char *)(q + 0x20) & 1) == 0) {
+				io_FormatTextBuffer(buf, 0x1c45);
+				fcn_00545d40(g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x608, 0);
+			}
+			gm_ChangeObjektZustand(*(char **)(q + 2), -0xa);
+			*(char *)(e + 0xf1) = 2;
 			return;
 		}
-		if ((g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].kind == 6 || g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].kind == 7) && (*(unsigned char *)(q + 0x20) & 1) == 0) {
-			io_FormatTextBuffer(buf, 0x1c45);
-			fcn_00545d40(g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x608, 0);
-		}
-		gm_ChangeObjektZustand(*(char **)(q + 2), -0xa);
-		*(char *)(e + 0xf1) = 2;
+		*(char *)(e + 0xf1) = 1;
 		return;
 	case 2:
 		if ((*(unsigned char *)(e + 0x78) == 0) & 2) {
