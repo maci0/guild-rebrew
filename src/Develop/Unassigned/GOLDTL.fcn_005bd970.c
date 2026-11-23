@@ -51,16 +51,15 @@ int __cdecl fcn_005bd970(char* node, char* entries)
 		if (angle >= 5.890486389398575 && angle <= 6.2831854820251465) {
 			*(int*) (entries + 0x200 + *(int*) (entries + 0x400) * 4) = 0x1a;
 		}
+		*(int*) (entries + 0x400) += 1;
 	} else if (strstr(node, "dummy_GEBIRGE") != 0) {
 		*(unsigned int*) (entries + *(int*) (entries + 0x400) * 4) = (unsigned int) node;
 		*(int*) (entries + 0x200 + *(int*) (entries + 0x400) * 4) = 0x1e;
-	} else {
-		if (strstr(node, "gb_MAUER_GR") == 0) {
-			return *(int*) (entries + 0x400) < 0x80;
-		}
+		*(int*) (entries + 0x400) += 1;
+	} else if (strstr(node, "gb_MAUER_GR") != 0) {
 		*(unsigned int*) (entries + *(int*) (entries + 0x400) * 4) = (unsigned int) node;
 		*(int*) (entries + 0x200 + *(int*) (entries + 0x400) * 4) = 0x1f;
+		*(int*) (entries + 0x400) += 1;
 	}
-	*(int*) (entries + 0x400) += 1;
 	return *(int*) (entries + 0x400) < 0x80;
 }

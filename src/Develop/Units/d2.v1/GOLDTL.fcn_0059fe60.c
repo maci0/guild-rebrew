@@ -53,8 +53,8 @@ void __cdecl fcn_0059fe60(char *a0)
 	int avail[4];
 	int box[0x14];
 	char msg[0xf8];
-	char text_b[0x3c];
-	char text_a[0x44];
+	char text_b[0x40];
+	char text_a[0x40];
 	char text_c[0x200];
 	int dlg;
 	int n;
@@ -74,7 +74,11 @@ void __cdecl fcn_0059fe60(char *a0)
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 2);
-	item = fcn_00472250(dlg, 2, io_AppendText(g_7f4ca0[g_774970].b9 == 0 ? 0x1a50 : 0x1a51));
+	if (g_7f4ca0[g_774970].b9 == 0) {
+		item = fcn_00472250(dlg, 2, io_AppendText(0x1a50));
+	} else {
+		item = fcn_00472250(dlg, 2, io_AppendText(0x1a51));
+	}
 	g_100f1dc = -1;
 	do {
 		acts[0] = -1;
@@ -110,7 +114,11 @@ void __cdecl fcn_0059fe60(char *a0)
 			buttons[i] = fcn_00472250(dlg, 1, io_AppendText(0x1a52, *(unsigned short *) ent));
 			fcn_00472640(buttons[i], avail[i]);
 		}
-		fcn_00472640(item, n < 4);
+		if (n >= 4) {
+			fcn_00472640(item, 0);
+		} else {
+			fcn_00472640(item, 1);
+		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {

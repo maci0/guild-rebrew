@@ -52,10 +52,10 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 	}
 	i = 0;
 	do {
-		idx = *(unsigned short*) (lpObjekteINST + i);
+		idx = *(unsigned short*) (i + lpObjekteINST);
 		if (*(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[idx])) == 0x1d) {
-			if (vfs_WriteFigure(*(int*) (lpObjekteINST + i + 0x3b),
-			                 *(int*) (lpObjekteINST + i + 2), handle) == 0) {
+			n = *(int*) (i + lpObjekteINST + 0x3b);
+			if (vfs_WriteFigure(n, *(int*) (i + lpObjekteINST + 2), handle) == 0) {
 				return 0;
 			}
 		}
@@ -63,7 +63,7 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 	} while (i < 0x14f218);
 	i = 0;
 	do {
-		src = g_6b5c20 + i;
+		src = i + g_6b5c20;
 		if (*(char*) (src + 9) != 0) {
 			*(int*) (src + 0x14) = *(int*) *(int*) (src + 0x14);
 			*(int*) (src + 0x24) = fcn_0051fd00(*(int*) (src + 0x24));
@@ -77,7 +77,7 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 	for (;;) {
 		flag = 0;
 		memset(&rec, 0, 0x194);
-		src = g_6b5c20 + i;
+		src = i + g_6b5c20;
 		idx = *(int*) (src + 0x14);
 		if (idx >= 0 && idx < 0x300) {
 			object = *(char**) (0x14d0020 + idx * 4);
@@ -87,8 +87,10 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 			if (object != 0 && *(int*) (*(char**) (object + 0x34) + 0x204) != 0) {
 				flag = *(char*) (src + 9);
 				memcpy(&rec, src, 0x194);
-			}
-			if (vfs_fwrite(&flag, 1, 1, handle) <= 0) {
+				if (vfs_fwrite(&flag, 1, 1, handle) <= 0) {
+					return 0;
+				}
+			} else if (vfs_fwrite(&flag, 1, 1, handle) <= 0) {
 				return 0;
 			}
 			if (vfs_fwrite((char*) &rec + 0xc, 4, 1, handle) <= 0) {
@@ -123,7 +125,7 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 	}
 	i = 0;
 	do {
-		src = g_6b5c20 + i;
+		src = i + g_6b5c20;
 		if (*(char*) (src + 9) != 0) {
 			*(int*) (src + 0x14) = *(int*) (0x14d0020 + *(int*) (src + 0x14) * 4);
 			*(int*) (src + 0x24) = ch_GetQueueEntryByIndex(*(int*) (src + 0x24));

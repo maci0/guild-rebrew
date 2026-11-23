@@ -147,13 +147,13 @@ int __cdecl fcn_004bfe00(char *obj)
 		fcn_004be530();
 	}
 	n = fcn_004be340((void *) g_772908);
-	if (n < 2) {
+	if (n >= 2) {
+		fcn_004c6e20((int) obj, (void *) g_772908);
+	} else {
 		changed = 0; fcn_004c6ea0((int) obj);
 		fcn_004c4510(obj, *(int *) (obj + 2));
 		fcn_004c4700(1, 1, (int) (obj - g_aed32c) + 0x33, &changed);
 		fcn_004c53a0();
-	} else {
-		fcn_004c6e20((int) obj, (void *) g_772908);
 	}
 	fcn_005b18c0(town);
 	if (g_6816d8 != -1) {

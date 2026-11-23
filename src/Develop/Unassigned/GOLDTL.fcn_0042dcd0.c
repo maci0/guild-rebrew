@@ -30,8 +30,9 @@ void __stdcall fcn_0042dcd0(unsigned int id, unsigned int msg, unsigned long use
 	if (g_6b7fbc != 0) {
 		return;
 	}
+	tick = g_6b7fb8;
 	g_6b7fbc = 1;
-	g_6b7fb8++;
+	g_6b7fb8 = tick + 1;
 	if (g_6b7fc0 == 0) {
 		for (i = 0; i < 32; i++) {
 			if (g_1052c60[i].funktion != 0 && (unsigned int) g_6b7fac % g_1052c60[i].periode == 0

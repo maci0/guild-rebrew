@@ -11,7 +11,6 @@ int __cdecl fcn_004013b0(void* a1, int* outBuffer, void* a3)
 	int size;
 
 	stream = a1;
-	size = (int) a1;
 	fcn_004011f0(stream, &size);
 	p = m_alloc(size, a3);
 	*outBuffer = (int) p;

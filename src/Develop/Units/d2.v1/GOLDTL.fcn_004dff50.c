@@ -74,34 +74,34 @@ void __cdecl fcn_004dff50(char* task)
 
 
 	fcn_004234e0(0, (char*) 0x68cbf4, 1, 0x3f, 0x7f, 0, 0);
-	if (fcn_004dfe40(foe, n) != 0) {
-		g_772f44 = 1;
-		return;
-	}
-	if (hit) {
-		fcn_00417b50(*(char**) (*(char**) (foe + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
-		if (*(int*) (*(char**) (foe + 0x184) + 0x128) == 0) {
-			ch_QueuePlayAnimation(*(char**) (foe + 0x184), (char*) 0x68cbe4, 1);
-		}
-		d2_SetForm(g_68bfc0, 0);
-		task = (char*) fcn_004de610(6);
-		io_AppendText((int) task + 0x1102, *(unsigned short*) foe);
-		fcn_004c3030(*(unsigned short*) foe, 0, (char*) 0x68cbb8, (int) task);
-		{
-			float x;
-			float y;
+	if (fcn_004dfe40(foe, n) == 0) {
+		if (hit) {
+			fcn_00417b50(*(char**) (*(char**) (foe + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
+			if (*(int*) (*(char**) (foe + 0x184) + 0x128) == 0) {
+				ch_QueuePlayAnimation(*(char**) (foe + 0x184), (char*) 0x68cbe4, 1);
+			}
+			d2_SetForm(g_68bfc0, 0);
+			task = (char*) fcn_004de610(6);
+			io_AppendText((int) task + 0x1102, *(unsigned short*) foe);
+			fcn_004c3030(*(unsigned short*) foe, 0, (char*) 0x68cbb8, (int) task);
+			{
+				float x;
+				float y;
 
-			y = *(float*) (foe + 0x1c) * 0.01 * n;
-			x = (float) *(int*) (foe + 0x24) - y;
-			*(int*) (foe + 0x24) = (int) x;
-			fcn_004ff210(*(unsigned short*) foe, (int) -y);
+				y = *(float*) (foe + 0x1c) * 0.01 * n;
+				x = (float) *(int*) (foe + 0x24) - y;
+				*(int*) (foe + 0x24) = (int) x;
+				fcn_004ff210(*(unsigned short*) foe, (int) -y);
+			}
+		} else {
+			if (*(int*) (*(char**) (foe + 0x184) + 0x128) == 0) {
+				ch_QueuePlayAnimation(*(char**) (foe + 0x184), (char*) 0x68cba0, 1);
+			}
+			task = (char*) fcn_004de610(9);
+			io_AppendText((int) task + 0x1109, *(unsigned short*) foe);
+			fcn_004c3030(*(unsigned short*) foe, 0, (char*) 0x68cb74, (int) task);
 		}
 	} else {
-		if (*(int*) (*(char**) (foe + 0x184) + 0x128) == 0) {
-			ch_QueuePlayAnimation(*(char**) (foe + 0x184), (char*) 0x68cba0, 1);
-		}
-		task = (char*) fcn_004de610(9);
-		io_AppendText((int) task + 0x1109, *(unsigned short*) foe);
-		fcn_004c3030(*(unsigned short*) foe, 0, (char*) 0x68cb74, (int) task);
+		g_772f44 = 1;
 	}
 }

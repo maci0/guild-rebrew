@@ -110,7 +110,7 @@ void __cdecl fcn_004faed0(float* out)
 	rec = (char*)lpGebaeudeINST;
 	for (n = 0x100; n != 0; n--) {
 		type = *(unsigned char*) rec;
-		if (type != 0 && type <= 0x43 && *(short*) (rec + 0x27) != -1) {
+		if (type > 0 && type < 0x44 && *(short*) (rec + 0x27) != -1) {
 			proto = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[type]; weight_a = weight_a + *(unsigned short*) (g_696178 + type * 4);
 			weight_b = weight_b + *(unsigned short*) (g_696178 + type * 4 + 2);
 			sum_c = sum_c + *(unsigned short*) (g_696178 + type * 4 + 1);

@@ -32,23 +32,18 @@ int __cdecl fcn_004e9ee0(void)
 				if (recs[j].status == 2) {
 					e1 = gm_LookupEntityRecordById(recs[j].msetter);
 					e2 = gm_LookupEntityRecordById(recs[j].mplayerid);
-					if (e1 != 0 && *(unsigned char*) (e1 + 8) > 0) {
-						if (e2 != 0 && *(unsigned char*) (e2 + 8) > 0) {
-							flags[i] |= 1;
-						} else {
-							v = fcn_004e8240(recs[j].id, 0, 0, 4, 0xff);
-							if (v != -1) {
-								while (!fcn_004c4450(v)) {
-									fcn_00535960();
-								}
-							}
+					if (e1 != 0 && *(unsigned char*) (e1 + 8) > 0
+						&& e2 != 0 && *(unsigned char*) (e2 + 8) > 0) {
+						flags[i] |= 1;
+					} else if (e1 != 0 && *(unsigned char*) (e1 + 8)) {
+						v = fcn_004e8240(recs[j].id, 0, 0, 4, 0xff);
+						while (v != -1 && !fcn_004c4450(v)) {
+							fcn_00535960();
 						}
 					} else {
 						v = fcn_004e8240(recs[j].id, (unsigned char*) e2, 0, 1, 0xff);
-						if (v != -1) {
-							while (!fcn_004c4450(v)) {
-								fcn_00535960();
-							}
+						while (v != -1 && !fcn_004c4450(v)) {
+							fcn_00535960();
 						}
 					}
 				} else if (recs[j].status == 3 && recs[j].pcount > 0) {
@@ -67,7 +62,7 @@ int __cdecl fcn_004e9ee0(void)
 				}
 			}
 		}
-		if ((flags[i] & 1) && n > 0) {
+		if (flags[i] & 1) {
 			for (j = 0; j < n; j++) {
 				e1 = gm_LookupEntityRecordById(recs[j].mplayerid);
 				if (e1 != 0 && (e1[2] == 6 || e1[2] == 7) && e1[0x1b1] == 0) {

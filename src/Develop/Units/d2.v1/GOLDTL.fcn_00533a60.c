@@ -42,8 +42,8 @@ void __cdecl fcn_00533a60(int windowId, int a2, int* out, int count, ...)
         step = q;
         start = q;
     }
-    start -= max / 2;
     if (count > 0) {
+        start -= max / 2;
         for (i = 0; i < count; i++) {
             id = fcn_00468df0(start, a2, 0xbf, buf[i], windowId);
             out[i] = id;

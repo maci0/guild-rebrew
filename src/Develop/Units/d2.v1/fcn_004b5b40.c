@@ -87,6 +87,7 @@ void __cdecl fcn_004b5b40(int mode)
 				while (fcn_004c4450(q) == 0) {
 					fcn_00535960();
 				}
+				g_774654 = 1;
 			}
 			else if (d2_CurrentElementId == r2) {
 				m2.id = *(int*) (slot + 4);
@@ -97,10 +98,11 @@ void __cdecl fcn_004b5b40(int mode)
 				while (fcn_004c4450(q) == 0) {
 					fcn_00535960();
 				}
+				g_774654 = 1;
 			}
 			else if (d2_CurrentElementId == r3) {
-				g_6a3440 = -1;
 				m3.id = *(int*) (slot + 4);
+				g_6a3440 = -1;
 				arena_done = 1;
 				m3.vend = 1;
 				m3.vunk = 0;
@@ -108,8 +110,8 @@ void __cdecl fcn_004b5b40(int mode)
 				while (fcn_004c4450(q) == 0) {
 					fcn_00535960();
 				}
-			} else { continue; }
-			g_774654 = 1;
+				g_774654 = 1;
+			}
 		}
 	} while (fcn_005373e0((void*) fcn_004b5b40, flags | 0x80) != 0);
 	fcn_00471e30(dlg);

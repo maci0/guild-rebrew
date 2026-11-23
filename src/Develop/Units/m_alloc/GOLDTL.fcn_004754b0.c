@@ -9,17 +9,13 @@ void* __cdecl m_alloc(int, int);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLDTL 0x004754b0 */
-unsigned char __cdecl fcn_004754b0(void* path, void* pixels, int a3)
+unsigned char __cdecl fcn_004754b0(void* path, void* pixels, unsigned char a3)
 {
 	BITMAPINFOHEADER hdr;
 	unsigned char v10[2];
 	void* f;
 	int v9;
 	int v12;
-	int n;
-	int last;
-	int i;
-	void* q;
 
 	f = (void*) fcn_0064e2f9(path, 0x6750e8);
 	if (f) {
@@ -34,11 +30,7 @@ unsigned char __cdecl fcn_004754b0(void* path, void* pixels, int a3)
 			v9 = 0;
 			while (v9 < abs(hdr.biHeight)) {
 				fcn_0064ebe4(v10, 1, 2, f);
-				if (v10[0]) {
-					memset((char*) pixels + hdr.biWidth * v9 + v12, v10[1], v10[0]);
-					v12 += v10[0];
-				}
-				else {
+				if (!v10[0]) {
 					switch (v10[1]) {
 					case 0:
 						v12 = 0;
@@ -63,23 +55,31 @@ unsigned char __cdecl fcn_004754b0(void* path, void* pixels, int a3)
 						break;
 					}
 				}
+				else {
+					memset((char*) pixels + hdr.biWidth * v9 + v12, v10[1], v10[0]);
+					v12 += v10[0];
+				}
 			}
 		}
 		else {
 			fcn_0064ebe4(pixels, hdr.biHeight, hdr.biWidth, f);
 		}
 		fcn_0064e1fd(f);
-		if ((a3 & 0xff) && hdr.biHeight > 0) {
+		if (a3 && hdr.biHeight > 0) {
+			void* q;
+			int i;
+			int n;
+			int last;
 			q = m_alloc(hdr.biWidth, 0x67d924);
 			i = 0;
-			last = hdr.biHeight - 1;
 			n = hdr.biHeight / 2;
-			while (i < n) {
-				memcpy(q, (char*) pixels + hdr.biWidth * i, hdr.biWidth);
-				memcpy((char*) pixels + hdr.biWidth * i, (char*) pixels + hdr.biWidth * last, hdr.biWidth);
-				memcpy((char*) pixels + hdr.biWidth * last, q, hdr.biWidth);
-				i++;
-				last--;
+			if (i < n) {
+				last = hdr.biHeight - 1;
+				for (; i < n; i++, last--) {
+					memcpy(q, (char*) pixels + hdr.biWidth * i, hdr.biWidth);
+					memcpy((char*) pixels + hdr.biWidth * i, (char*) pixels + hdr.biWidth * last, hdr.biWidth);
+					memcpy((char*) pixels + hdr.biWidth * last, q, hdr.biWidth);
+				}
 			}
 			m_FreeTracked(q);
 		}

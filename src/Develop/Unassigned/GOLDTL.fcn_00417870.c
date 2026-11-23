@@ -34,9 +34,9 @@ char __cdecl fcn_00417870(char* a0, int timeNow)
 {
 	Rec* rec;
 	char* base;
-	int i;
-	int half;
 	int count;
+	int half;
+	int i;
 	unsigned int t;
 	float v;
 	float f;
@@ -44,30 +44,28 @@ char __cdecl fcn_00417870(char* a0, int timeNow)
 	half = (int) (*(unsigned int*) (a0 + 0x20) >> 1);
 	count = 0;
 	base = *(char**) (a0 + 0x28);
-	{
-		for (i = 0; i < *(int*) (a0 + 0xd8); i++) {
-			rec = (Rec*) base + i;
-			if (rec->fl & 1) {
-				t = (unsigned int) (timeNow - ((Rec*) *(char**) (a0 + 0x28) + i)->t);
-				v = (float) t * 0.001f;
-				((Rec*) *(char**) (a0 + 0x28) + i)->nx = ((Rec*) *(char**) (a0 + 0x28) + i)->vx + ((Rec*) *(char**) (a0 + 0x28) + i)->px;
-				((Rec*) *(char**) (a0 + 0x28) + i)->ny = ((Rec*) *(char**) (a0 + 0x28) + i)->vy + ((Rec*) *(char**) (a0 + 0x28) + i)->py;
-				((Rec*) *(char**) (a0 + 0x28) + i)->nz = ((Rec*) *(char**) (a0 + 0x28) + i)->vz + *(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 8);
-				((Rec*) *(char**) (a0 + 0x28) + i)->w = g_662948 * v + ((Rec*) *(char**) (a0 + 0x28) + i)->w;
-				((Rec*) *(char**) (a0 + 0x28) + i)->py = ((Rec*) *(char**) (a0 + 0x28) + i)->py - v;
-				if (((Rec*) *(char**) (a0 + 0x28) + i)->ny < -10.0)
-					rec->fl &= 0xfe;
-				rec->vx = rec->nx;
-				rec->vy = rec->ny;
-				rec->vz = rec->nz;
-				f = rec->ny * 1.5f + 50.0f;
-				if (0.0f > f)
-					f = 0.0f;
-				rec->c4f = (unsigned char) (int) f;
-				if (!(rec->fl & 1))
-					count++;
-			}
+	for (i = 0; i < *(int*) (a0 + 0xd8); i++) {
+		rec = (Rec*) base + i;
+		if (rec->fl & 1) {
+			t = (unsigned int) (timeNow - ((Rec*) *(char**) (a0 + 0x28) + i)->t);
+			v = (float) t * 0.001f;
+			((Rec*) *(char**) (a0 + 0x28) + i)->nx = ((Rec*) *(char**) (a0 + 0x28) + i)->vx + ((Rec*) *(char**) (a0 + 0x28) + i)->px;
+			((Rec*) *(char**) (a0 + 0x28) + i)->ny = ((Rec*) *(char**) (a0 + 0x28) + i)->vy + ((Rec*) *(char**) (a0 + 0x28) + i)->py;
+			((Rec*) *(char**) (a0 + 0x28) + i)->nz = ((Rec*) *(char**) (a0 + 0x28) + i)->vz + *(float*) (*(char**) (a0 + 0x28) + i * 0x54 + 8);
+			((Rec*) *(char**) (a0 + 0x28) + i)->w = g_662948 * v + ((Rec*) *(char**) (a0 + 0x28) + i)->w;
+			((Rec*) *(char**) (a0 + 0x28) + i)->py = ((Rec*) *(char**) (a0 + 0x28) + i)->py - v;
+			if (((Rec*) *(char**) (a0 + 0x28) + i)->ny < -10.0)
+				rec->fl &= 0xfe;
+			rec->vx = rec->nx;
+			rec->vy = rec->ny;
+			rec->vz = rec->nz;
+			f = rec->ny * 1.5f + 50.0f;
+			if (0.0f > f)
+				f = 0.0f;
+			rec->c4f = (unsigned char) (int) f;
 		}
+		if (!(rec->fl & 1))
+			count++;
 	}
 	if (!(*(int*) (a0 + 0x20) & 1) && count >= *(int*) (a0 + 0xd8))
 		return 0;
@@ -94,8 +92,8 @@ char __cdecl fcn_00417870(char* a0, int timeNow)
 				                     (float) fcn_0064d3f8() * g_662a40 +
 				                     0.4f;
 				rec->t = timeNow;
+				rec->w = *(float*) (a0 + 0xe4);
 				rec->vx = rec->nx;
-				rec->w = *(int*) (a0 + 0xe4);
 				rec->vy = rec->ny;
 				rec->vz = rec->nz;
 				f = rec->ny * 1.5f + 50.0f;

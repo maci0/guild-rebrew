@@ -98,11 +98,10 @@ void __cdecl fcn_00560eb0(char* e)
 			goto tail;
 		}
 		row = (BUILDING_PROTOTYPE*) lpGebaeudePROT + (unsigned char) *q;
-		type = row->category;
 		s = 0;
-		if (type == 4) {
+		if (row->category == 4) {
 			s = fcn_00502cd0(*(int*) (q + 0x5d), 1, 0, 0x60);
-		} else if (type == 0x13) {
+		} else if (row->category == 0x13) {
 			s = fcn_00502cd0(*(int*) (q + 0x5d), 1, 0, 0x145);
 		}
 		if (s == 0) {

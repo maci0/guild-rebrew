@@ -44,9 +44,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 	strcpy((char*) 0x7e2480, slot);
 	fcn_0051e9d0();
 	if (fcn_0051e490(stream, flags) == 0) {
-		CloseVfsStream(stream);
-		fcn_0051ea70();
-		return 0;
+		goto failure;
 	}
 	vfs_fwrite((void*) 0x699364, 4, 1, stream);
 	vfs_fwrite((void*) 0x7749d0, 4, 1, stream);
@@ -180,4 +178,8 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 	CloseVfsStream(stream);
 	fcn_0051ea70();
 	return 1;
+failure:
+	CloseVfsStream(stream);
+	fcn_0051ea70();
+	return 0;
 }

@@ -137,10 +137,8 @@ void __cdecl fcn_0058f6a0(const unsigned char* entity)
                             *(int*) (msg + 0x58) = selected;
                         }
                         r = sub_4c5530(msg);
-                        if (r != -1) {
-                            while (sub_4c4450(r) == 0) {
-                                sub_5373e0(0, 0x20007);
-                            }
+                        while (r != -1 && sub_4c4450(r) == 0) {
+                            sub_5373e0(0, 0x20007);
                         }
                         dword_7e46ac = 0x677c7;
                         sub_51af00(text, 0x40a7, *(unsigned short*) found->data);

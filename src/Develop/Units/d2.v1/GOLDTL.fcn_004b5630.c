@@ -33,10 +33,10 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	d2_SetForm(obj, 2);
 	io_AppendText(0x6811b0);
 	tab = fcn_00472250(obj, 2, io_AppendText(0x7d));
+	b = loopFlags | 0x80;
 	if (fcn_004273c0()) {
 		node = fcn_004c3030(-8, 0, (const char *) 0x68119c, 0);
 		if (fcn_00423460(node)) {
-			b = loopFlags | 0x80;
 			do {
 				fcn_005373e0(0, b);
 				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
@@ -50,7 +50,6 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	} else {
 		i = g_6b7fac + 0xfa;
 		if (i > g_6b7fac) {
-			b = loopFlags | 0x80;
 			do {
 				fcn_005373e0(0, b);
 				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
@@ -61,10 +60,10 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	}
 	d2_SetForm(obj, 1);
 	io_AppendText(0x1b9c);
+	b = loopFlags | 0x80;
 	if (fcn_004273c0()) {
 		node = fcn_004c3030(-8, 0, (const char *) 0x68119c, 1);
 		if (fcn_00423460(node)) {
-			b = loopFlags | 0x80;
 			do {
 				fcn_005373e0(0, b);
 				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
@@ -78,7 +77,6 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	} else {
 		i = g_6b7fac + 0xfa;
 		if (i > g_6b7fac) {
-			b = loopFlags | 0x80;
 			do {
 				fcn_005373e0(0, b);
 				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
@@ -89,10 +87,10 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	}
 	d2_SetForm(obj, 1);
 	io_AppendText(0x1b9d);
+	b = loopFlags | 0x80;
 	if (fcn_004273c0()) {
 		node = fcn_004c3030(-8, 0, (const char *) 0x68119c, 2);
 		if (fcn_00423460(node)) {
-			b = loopFlags | 0x80;
 			do {
 				fcn_005373e0(0, b);
 				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
@@ -106,7 +104,6 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	} else {
 		i = g_6b7fac + 0xfa;
 		if (i > g_6b7fac) {
-			b = loopFlags | 0x80;
 			do {
 				fcn_005373e0(0, b);
 				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
@@ -119,11 +116,11 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	io_AppendText(0x6811b0);
 	io_AppendText(0x1b9e);
 	io_AppendText(*(int *) (a0 + 8) + 2);
+	b = loopFlags | 0x80;
 	if (fcn_004273c0()) {
 		sprintf(buf, (const char *) 0x681180, *(unsigned *) (a0 + 0x10));
 		node = fcn_004c3030(-7, 0, buf, -1);
 		if (fcn_00423460(node)) {
-			b = loopFlags | 0x80;
 			while (fcn_005373e0(0, b), g_100f1dc == -1 || d2_CurrentElementId != tab) {
 				if (!fcn_00423460(node)) {
 					fcn_00471e30(obj);
@@ -137,7 +134,6 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	} else {
 		i = g_6b7fac + 0xfa;
 		if (i > g_6b7fac) {
-			b = loopFlags | 0x80;
 			do {
 				fcn_005373e0(0, b);
 				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {

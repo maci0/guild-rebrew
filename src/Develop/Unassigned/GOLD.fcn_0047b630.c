@@ -13,11 +13,13 @@ int __cdecl fcn_0047b630(int x, int y, int* surface, char* sprite, int factor)
 	int divisor;
 	int row;
 	int emit;
+	int clip_y;
 	line_count = (unsigned int*) (sprite + 0x32);
 	run = (unsigned int*) (sprite + 0x36);
 	height = *(unsigned short*) (sprite + 0xa);
 	row_output = (unsigned short*) surface[7] + surface[4] * y + x;
-	if (height + y < *(int*) 0x6f045c) {
+	clip_y = *(int*) 0x6f045c;
+	if (height + y < clip_y) {
 		return 0;
 	}
 	divisor = factor & 0xff;
@@ -25,7 +27,7 @@ int __cdecl fcn_0047b630(int x, int y, int* surface, char* sprite, int factor)
 		height = (*(int*) 0x5fed60 - y) * divisor;
 	}
 	carry = 0;
-	if (y >= *(int*)0x6f045c) {
+	if (y >= clip_y) {
 		for (row = 0; row < height; row++) {
 			emit = row % divisor == 0;
 			output = row_output;

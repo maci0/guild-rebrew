@@ -44,17 +44,17 @@ void __cdecl fcn_00476d50(int x0, int y0, int x1, int y1, int r, int g, int b, S
 		return;
 	}
 	if (x0 < x1) {
-		step[0] = 1;
+		step[1] = 1;
 		dx = x1 - x0;
 	} else {
-		step[0] = -1;
+		step[1] = -1;
 		dx = x0 - x1;
 	}
 	if (y0 < y1) {
-		step[1] = 1;
+		step[0] = 1;
 		dy = y1 - y0;
 	} else {
-		step[1] = -1;
+		step[0] = -1;
 		dy = y0 - y1;
 	}
 	x = x0;
@@ -65,9 +65,9 @@ void __cdecl fcn_00476d50(int x0, int y0, int x1, int y1, int r, int g, int b, S
 		inc2 = 2 * dy;
 		d = 2 * dy - dx;
 		while (x != x1) {
-			x += step[0];
+			x += step[1];
 			if (d >= 0) {
-				y += step[1];
+				y += step[0];
 				d += inc1;
 			} else {
 				d += inc2;
@@ -80,9 +80,9 @@ void __cdecl fcn_00476d50(int x0, int y0, int x1, int y1, int r, int g, int b, S
 	inc2 = 2 * dx;
 	d = 2 * dx - dy;
 	while (y != y1) {
-		y += step[1];
+		y += step[0];
 		if (d >= 0) {
-			x += step[0];
+			x += step[1];
 			d += inc1;
 		} else {
 			d += inc2;

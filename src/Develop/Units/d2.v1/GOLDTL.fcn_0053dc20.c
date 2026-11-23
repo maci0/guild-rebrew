@@ -86,12 +86,12 @@ label_53dd68:
 		if (!r) {
 			d2_ClearRadioGroup(dlg);
 			fcn_00471e30(obj);
-			if (!again) {
-				*(int *) 0x7747b0 = 0;
-				return 0;
+			if (again) {
+				*(int *) 0x7747b0 |= 8;
+				return again;
 			}
-			*(int *) 0x7747b0 |= 8;
-			return again;
+			*(int *) 0x7747b0 = 0;
+			return 0;
 		}
 		d2_UpdateRadioGroup(dlg);
 		if (g_14ce8e0 || g_14cf950 == 1) {

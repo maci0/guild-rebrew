@@ -34,15 +34,10 @@ int __cdecl fcn_004cf180(void)
     int obj;
     int e;
     int m;
-    int node;
     int t;
     int d;
-    int flag;
     float v[8];
     float dist;
-
-
-
     unsigned char color[4];
 
     count = 0;
@@ -66,14 +61,17 @@ int __cdecl fcn_004cf180(void)
                 v[0] = *(float*) (obj + 0x4c);
                 v[1] = *(float*) (obj + 0x50);
                 v[2] = *(float*) (obj + 0x54);
-                *(int*) color = 0x3fc0c0c0;
+                color[2] = 0xc0;
+                color[1] = 0xc0;
+                color[0] = 0xc0;
+                color[3] = 0x3f;
                 fcn_00418000(0, v, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f,
                              140.0f, 35.0f, &v[4], 0x190, 6,
                              *(int*) color);
                 fcn_004185a0(0, v, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f,
                              4.0f, 7.0f, 8.0f, *(int*) color);
-                fcn_00417d00(0, v, 0x1e, 120.0f, 85.0f, 20.0f, 60.0f, 0x3c);
-                for (q = (int*) 0x7e4260; q < (int*) 0x7e42e0; q++) {
+                fcn_00417d00(0, v, 0x1e, 120.0f, 80.0f, 20.0f, 60.0f, 0x3c);
+                for (q = (int*) 0x7e4260; (int) q < 0x7e42e0; q++) {
                     e = *q;
                     if (e != 0) {
                         m = *(int*) (e + 0x184);
@@ -87,22 +85,19 @@ int __cdecl fcn_004cf180(void)
                                  *(float*) (*(int*) (m + 0x34) + 0x54);
                             dist = (float) sqrt(v[2] * v[2] + v[1] * v[1] +
                                                 v[0] * v[0]);
-                            if (dist < g_664ed4) {
-                                t = (int) cut_RandMod((unsigned char) r[6] -
-                                                       (unsigned char) r[5]);
-                                t += (unsigned char) r[5];
-                                d = (int) ((double) (unsigned int) t *
+                            if (dist < 170.0f) {
+                                d = (int) ((double) (cut_RandMod((unsigned char) r[6] -
+                                                                 (unsigned char) r[5]) +
+                                                     (unsigned char) r[5]) *
                                            (*(float*) (e + 0x1c) *
                                             0.01));
                                 t = (int) ((double) d *
-                                           (g_6629c8 - dist * g_664ed0));
-                                node = *q;
-                                *(int*) (node + 0x24) -= t;
-                                if (*(int*) (node + 0x16c) == *(int*) &g_772e9c)
-                                    flag = 1;
+                                           (1.0 - dist * (1.0f / 170.0f)));
+                                *(int*) (*q + 0x24) -= t;
+                                if (*(int*) (*q + 0x16c) == *(int*) &g_772e9c)
+                                    fcn_004cfc40((char*) *q, t, 1);
                                 else
-                                    flag = 2;
-                                fcn_004cfc40((char*) node, t, flag);
+                                    fcn_004cfc40((char*) *q, t, 2);
                                 if (!fcn_004d4790((char*) e)) {
                                     ch_QueuePlayAnimation((char*) m, "Explosion_s", 1);
                                 }

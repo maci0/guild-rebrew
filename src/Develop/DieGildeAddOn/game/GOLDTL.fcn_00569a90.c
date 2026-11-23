@@ -89,8 +89,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 					*(int*) (pkt + 0x4d) += *(int*) (action + 0xb4);
 				}
 				*(int*) (action + 0x70) = 3;
-				*(int*) (action + 0x70) = -1;
-				return;
+				goto done_case1;
 			}
 			if (g_100f1dc == 1) {
 				pkt = gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0x10));
@@ -101,6 +100,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 				he_MessageBoxQuickjump(entity, entity, buf, 0, 0x5f0, *(int*) (pkt + 1),
 				    -1, 0, 0);
 			}
+done_case1:
 			*(int*) (action + 0x70) = -1;
 			return;
 		case 2:

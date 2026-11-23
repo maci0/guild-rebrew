@@ -1,3 +1,4 @@
+#include <string.h>
 #include "client_types.h"
 #include "client_dialog_helpers.h"
 
@@ -100,8 +101,7 @@ void __cdecl fcn_0054ac70(char* e)
 	case 1:
 		w = *(int*) (e + 0xac);
 		m = (unsigned char*) pkt;
-		for (i = 0; i < 0x45; i++)
-			pkt[i] = 0;
+		memset(pkt, 0, sizeof pkt);
 		*(unsigned char*) (m + 0x74) = *(unsigned char*) (e + 0xc4);
 		*(int*) (m + 0x7c) = *(int*) (e + 4);
 		*(int*) (m + 0x38) = *(int*) (e + 0xb0);

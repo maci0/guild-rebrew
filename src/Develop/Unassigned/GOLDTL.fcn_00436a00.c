@@ -2,21 +2,15 @@
  * and reads it again after the call, which MSVC 6 only emits when the callee
  * is defined in the same translation unit. Both bodies live in this file. */
 
-/* SIZE 0x4 */
-typedef struct {
-	unsigned char b0;
-	unsigned char b1;
-	unsigned char b2;
-	unsigned char b3;
-} F4321a0;
+#include "Develop/Units/d3/d3_animation.h"
 
 /* ADDRESS: GOLD 0x004324e0 */
 /* ADDRESS: GOLDTL 0x004321a0 */
-int __cdecl fcn_004321a0(F4321a0 flags, int a2, int a3, int v, int lo, int hi, int max)
+int __cdecl fcn_004321a0(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max)
 {
 	unsigned char f;
 
-	f = *(unsigned char*) &flags.b1;
+	f = flags.layer;
 	if (f & 2) {
 		if (v > lo) {
 			return v - 1;
@@ -40,14 +34,6 @@ int __cdecl fcn_004321a0(F4321a0 flags, int a2, int a3, int v, int lo, int hi, i
 }
 
 #if !defined(REBREW_GOLD)
-typedef struct
-{
-	int f0;
-	int f4;
-	int f8;
-} S436a00_Flags;
-
-int __cdecl fcn_004321a0(S436a00_Flags flags, int a3, int v, int lo, int hi);
 void __cdecl fcn_00438ac0(int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00436a00 */
@@ -71,7 +57,7 @@ void __cdecl fcn_00436a00(int arg0, char* p, int index)
 			*(int*) (p + 8) = 0;
 		}
 		*(int*) p = index;
-		*(int*) (p + 4) = fcn_004321a0(*(S436a00_Flags*) (p + 0x6c), index,
+		*(int*) (p + 4) = fcn_004321a0(*(D3_ANIMATION_OPTIONS*) (p + 0x6c), index,
 		    *(int*) (owner + 0x150), *(int*) (owner + 0x154), *(int*) (owner + 0x148));
 		fcn_00438ac0(arg0, 1);
 	}

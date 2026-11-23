@@ -1,7 +1,9 @@
+#include <stdlib.h>
+
 char* __cdecl fcn_005b1a80(int id);
 
 /* ADDRESS: GOLDTL 0x005b1ce0 */
-void __cdecl fcn_005b1ce0(char* a0, int entryKey, unsigned int requestedShare)
+void __cdecl fcn_005b1ce0(char* a0, int entryKey, unsigned char requestedShare)
 {
 	char* p;
 	int used;
@@ -11,7 +13,6 @@ void __cdecl fcn_005b1ce0(char* a0, int entryKey, unsigned int requestedShare)
 	int cur;
 	int delta;
 	int step;
-	int v;
 
 	p = fcn_005b1a80(*(int*) (a0 + 1));
 	avail = 100;
@@ -30,36 +31,28 @@ void __cdecl fcn_005b1ce0(char* a0, int entryKey, unsigned int requestedShare)
 			used--;
 		}
 	}
-	if ((int) (requestedShare & 0xff) > avail || used < 2) {
+	if ((int) requestedShare > avail || used < 2) {
 		return;
 	}
-	idx = 0;
-	while (idx < 7) {
-		if (*(int*) (p + 0xc + idx * 8) == entryKey && (unsigned char) requestedShare != *(unsigned char*) (p + 0x10 + idx * 8)) {
-			break;
+	for (idx = 0; idx < 7; idx++) {
+		if (*(int*) (p + 0xc + idx * 8) == entryKey && requestedShare != *(unsigned char*) (p + 0x10 + idx * 8)) {
+			goto found;
 		}
-		idx++;
 	}
-	if (idx >= 7) {
-		return;
-	}
-	v = *(unsigned char*) (p + 0x10 + idx * 8);
-	delta = v - (int) (requestedShare & 0xff);
-	step = v < (int) (requestedShare & 0xff) ? -1 : 1;
+	return;
+found:
+	step = *(unsigned char*) (p + 0x10 + idx * 8) < requestedShare ? -1 : 1;
+	delta = abs(*(unsigned char*) (p + 0x10 + idx * 8) - requestedShare);
 	cur = *(unsigned char*) (p + 8);
-	if (delta < 0) {
-		delta = -delta;
-	}
 	while (delta != 0) {
 		if (idx != cur && *(int*) (p + 0xc + cur * 8) != 0 && *(unsigned char*) (p + 0x11 + cur * 8) == 0) {
-			v = *(unsigned char*) (p + 0x10 + cur * 8);
-			if (v + step >= 0 && v + step < avail + 1) {
+			if (*(unsigned char*) (p + 0x10 + cur * 8) + step > -1 && *(unsigned char*) (p + 0x10 + cur * 8) + step < avail + 1) {
+				*(unsigned char*) (p + 0x10 + cur * 8) += (unsigned char) step;
 				delta--;
-				*(unsigned char*) (p + 0x10 + cur * 8) = (unsigned char) (v + step);
 			}
 		}
 		cur = (cur + 1) % 7;
 	}
-	*(unsigned char*) (p + 0x10 + idx * 8) = (unsigned char) requestedShare;
+	*(unsigned char*) (p + 0x10 + idx * 8) = requestedShare;
 	*(unsigned char*) (p + 8) = (unsigned char) cur;
 }

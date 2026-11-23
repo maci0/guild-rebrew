@@ -76,7 +76,7 @@ void __cdecl fcn_005963f0(int dialog, int form, int a2, unsigned int a3)
 	d2_SetForm(dialog, form);
 
 	for (v = (int*) 0x778d50; (int) v < 0x778da0; v += 5) {
-		if (v[-2] >= 2) {
+		if (v[-2] > 1) {
 			((D2_CONTROL_TL*) (g_1015ea0))[*v].value_048 = 0;
 			fcn_00469c40(v[-4] + p[1], v[-3] + p[2], *v);
 		} else {

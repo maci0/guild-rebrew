@@ -34,21 +34,20 @@ void __cdecl fcn_00526920(char* buildingRecord, int a1, char* a2)
 	char* cur;
 	char* hit;
 	char* old;
-	char* saved_ptr;
 	int saved;
 	int id;
 	unsigned char type;
 	int n;
 
+	hit = 0;
 	if (g_7e2700 != 0) {
 		return;
 	}
 	if ((main_LoopFlags & 0x10000) != 0) {
 		return;
 	}
-	hit = 0;
-	id = (int) g_774970;
-	if (g_774970 != 0xffff && g_7f4e51[id * 540] != 0) {
+	if (g_774970 != 0xffff && g_7f4e51[(int) g_774970 * 540] != 0) {
+		id = (int) g_774970;
 		type = ((BldProt_526920*) lpGebaeudePROT)[(unsigned char) *buildingRecord].type;
 		if (type == 6) {
 			goto ready;
@@ -72,8 +71,8 @@ ready:
 		g_7e2708 = fcn_00502cd0(*(int*) (buildingRecord + 0x5d), 1, 0, 0xfd);
 	}
 	strcpy(g_7e2714, a2);
-	g_7e2700 = 1;
 	cur = g_7e2708;
+	g_7e2700 = 1;
 	if (cur != 0 && *(unsigned short*) cur != 0) {
 		if (cur != g_7746cc) {
 			if (buildingRecord == hit) {
@@ -87,7 +86,7 @@ ready:
 					return;
 				}
 			}
-			*(unsigned short*) (buildingRecord + 0x29) = *(unsigned short*) g_7e2708;
+			*(unsigned short*) (buildingRecord + 0x29) = *(unsigned short*) cur;
 			old = g_7746cc;
 			saved = g_774670;
 			if (gm_CheckEntityType(buildingRecord) == 0 && fcn_00505340(buildingRecord) == 0) {
@@ -113,7 +112,7 @@ ready:
 		g_7e2700 = 0;
 		return;
 	}
-	if (buildingRecord == hit && g_7746c8 == 0) {
+	if (hit == buildingRecord && g_7746c8 == 0) {
 		g_7e2700 = 0;
 		return;
 	}

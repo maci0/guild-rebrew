@@ -106,9 +106,9 @@ void __cdecl d2_ShowPrivilegien(void)
 	g_100f1dc = -1;
 	do {
 		count = 0;
-		prev = ptr;
 		if (now <= (unsigned) g_6b7fac || changed) {
 			now = (unsigned)g_6b7fac + 500;
+			prev = ptr;
 			if (((((House*) g_7f4ca0)[g_774970].f1c8) & 0x100) != 0 || ptr != 0) {
 				e = he_StartHandlungSearch(1, 0, 0x45);
 				while (e != 0) {
@@ -126,8 +126,10 @@ void __cdecl d2_ShowPrivilegien(void)
 				changed = 1;
 				mode = 2;
 				q.kind = 1;
+			} else if (mode == 2) {
+				q.kind = 1;
 			} else {
-				q.kind = mode == 2 ? 1 : 2;
+				q.kind = 2;
 			}
 			for (i = 0; i < 0x3a; i++) {
 				r = fcn_004fa5b0(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
@@ -207,7 +209,7 @@ void __cdecl d2_ShowPrivilegien(void)
 				mode = (mode == 2) ? 10 : 2;
 			} else {
 				for (i = 0; i < 0x3a; i++) {
-					if (keys[i] == d2_CurrentElementId) {
+					if (d2_CurrentElementId == keys[i]) {
 						fcn_00471af0((int) dlg, 0);
 						q.kind = mode == 2 ? 3 : 4;
 						r = fcn_004fa5b0(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);

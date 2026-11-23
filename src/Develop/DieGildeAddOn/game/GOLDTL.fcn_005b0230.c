@@ -185,7 +185,7 @@ void __cdecl fcn_005b0230(char* town)
 	}
 	tab = (int*) (town + 0x26dc);
 	i = 0;
-	if (count >= 1) {
+	if (count > 0) {
 		slot = (ScrollSlot*) (town + 0xdc);
 		do {
 			if (slot->handle == -1) {

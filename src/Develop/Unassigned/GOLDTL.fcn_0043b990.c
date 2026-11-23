@@ -9,8 +9,6 @@ extern int g_14ce728;
 void __cdecl fcn_0043ef20(char* a0);
 long __stdcall D3DXCreateMeshFVF(int a0, int a1, int a2, int a3, char* a4, char* a5);
 
-#pragma optimize("y", off)
-
 /* ADDRESS: GOLDTL 0x0043b990 */
 void __cdecl fcn_0043b990(char* terrainObject)
 {
@@ -19,20 +17,17 @@ void __cdecl fcn_0043b990(char* terrainObject)
 	char* q;
 	char* srf2;
 	void* buf;
-	void* buf2;
 	int i;
 	int j;
 	int k;
 	int n;
 	int m;
-	void* copy_src;
-	int copy_count;
 
-	rec = terrainObject + 0x244;
+	start = terrainObject + 0x244;
 	i = 8;
 	do {
+		rec = start;
 		j = 8;
-		start = rec;
 		do {
 			if (*(unsigned char*) (rec + 0x18) != 0
 			    && *(int*) rec == 0) {
@@ -60,25 +55,30 @@ void __cdecl fcn_0043b990(char* terrainObject)
 						(*(void (__stdcall**)(void*, int, void**))
 						    (*(int*) *(int*) q + 0x40))
 						    (*(void**) q, 0, &buf);
-						copy_src = *(void**) (q - 8);
-                        copy_count = *(int*) (q + 0x18) * 6;
-                        __asm {
-                            mov edi, buf
-                            mov esi, copy_src
-                            mov ebx, copy_count
-                            lea ecx, [edi+edi*2]
-                            and ecx, 3
-                            sub ebx, ecx
-                            jle short L_copy_0x18_6
-                            rep movsb
-                            mov ecx, ebx
-                            and ebx, 3
-                            shr ecx, 2
-                            rep movsd
-                        L_copy_0x18_6:
-                            add ecx, ebx
-                            rep movsb
-                        }
+						{
+							int copy_count;
+							void* copy_src;
+
+							copy_count = *(int*) (q + 0x18) * 6;
+							copy_src = *(void**) (q - 8);
+							__asm {
+								mov edi, buf
+								mov esi, copy_src
+								mov ebx, copy_count
+								lea ecx, [edi+edi*2]
+								and ecx, 3
+								sub ebx, ecx
+								jle short L_copy_0x18_6
+								rep movsb
+								mov ecx, ebx
+								and ebx, 3
+								shr ecx, 2
+								rep movsd
+							L_copy_0x18_6:
+								add ecx, ebx
+								rep movsb
+							}
+						}
 						(*(void (__stdcall**)(void*))
 						    (*(int*) *(int*) q + 0x44))
 						    (*(void**) q);
@@ -101,52 +101,63 @@ void __cdecl fcn_0043b990(char* terrainObject)
 						(*(void (__stdcall**)(void*, int, void**))
 						    (*(int*) *(int*) srf2 + 0x40))
 						    (*(void**) srf2, 0, &buf);
-						copy_src = *(void**) (q - 4);
-                        copy_count = *(int*) (q + 0x1c) * 6;
-                        __asm {
-                            mov edi, buf
-                            mov esi, copy_src
-                            mov ebx, copy_count
-                            lea ecx, [edi+edi*2]
-                            and ecx, 3
-                            sub ebx, ecx
-                            jle short L_copy_0x1c_6
-                            rep movsb
-                            mov ecx, ebx
-                            and ebx, 3
-                            shr ecx, 2
-                            rep movsd
-                        L_copy_0x1c_6:
-                            add ecx, ebx
-                            rep movsb
-                        }
+						{
+							int copy_count;
+							void* copy_src;
+
+							copy_count = *(int*) (q + 0x1c) * 6;
+							copy_src = *(void**) (q - 4);
+							__asm {
+								mov edi, buf
+								mov esi, copy_src
+								mov ebx, copy_count
+								lea ecx, [edi+edi*2]
+								and ecx, 3
+								sub ebx, ecx
+								jle short L_copy_0x1c_6
+								rep movsb
+								mov ecx, ebx
+								and ebx, 3
+								shr ecx, 2
+								rep movsd
+							L_copy_0x1c_6:
+								add ecx, ebx
+								rep movsb
+							}
+						}
 						(*(void (__stdcall**)(void*))
 						    (*(int*) *(int*) srf2 + 0x44))
 						    (*(void**) srf2);
 						if (*(int*) (q - 0x14) != 0) {
+							void* buf2;
 
 							(*(void (__stdcall**)(void*, int, void**))
 							    (*(int*) *(int*) srf2 + 0x58))
 							    (*(void**) srf2, 0x2000, &buf2);
-							copy_src = *(void**) (q - 0x14);
-                        copy_count = *(int*) (q + 0x1c) * 4;
-                        __asm {
-                            mov edi, buf2
-                            mov esi, copy_src
-                            mov ebx, copy_count
-                            lea ecx, [edi+edi*2]
-                            and ecx, 3
-                            sub ebx, ecx
-                            jle short L_copy_0x1c_4
-                            rep movsb
-                            mov ecx, ebx
-                            and ebx, 3
-                            shr ecx, 2
-                            rep movsd
-                        L_copy_0x1c_4:
-                            add ecx, ebx
-                            rep movsb
-                        }
+							{
+								int copy_count;
+								void* copy_src;
+
+								copy_count = *(int*) (q + 0x1c) * 4;
+								copy_src = *(void**) (q - 0x14);
+								__asm {
+									mov edi, buf2
+									mov esi, copy_src
+									mov ebx, copy_count
+									lea ecx, [edi+edi*2]
+									and ecx, 3
+									sub ebx, ecx
+									jle short L_copy_0x1c_4
+									rep movsb
+									mov ecx, ebx
+									and ebx, 3
+									shr ecx, 2
+									rep movsd
+								L_copy_0x1c_4:
+									add ecx, ebx
+									rep movsb
+								}
+							}
 							(*(void (__stdcall**)(void*))
 							    (*(int*) *(int*) srf2 + 0x5c))
 							    (*(void**) srf2);
@@ -155,9 +166,9 @@ void __cdecl fcn_0043b990(char* terrainObject)
 				}
 				q += 0x34;
 			} while (--k);
-			start += 0x1f4;
-			rec = start;
+			rec += 0x1f4;
 		} while (--j);
+		start = rec;
 	} while (--i);
 	fcn_0043ef20(terrainObject);
 }

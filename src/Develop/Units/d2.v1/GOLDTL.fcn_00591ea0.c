@@ -110,9 +110,8 @@ void __cdecl fcn_00591ea0(void)
 					fcn_0046f740(0x60, y - 9, *ent + 0x427, *(int*) &d2_CurrentWindowId);
 					io_FormatTextBuffer(buf, 0x6a9b48, *(unsigned short*) &ent[0x27], ent);
 					v3 = d2_ShowTxt(0x9c, y, buf, *(int*) &d2_CurrentWindowId);
-					v3 *= 0x2f4;
-					(*(D2_CONTROL_TL*) ((char*) (*(int*) &g_1015ea0) + v3)).width = 0x80;
-					(*(D2_CONTROL_TL*) ((char*) (*(int*) &g_1015ea0) + v3)).font = 0x54;
+					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].width = 0x80;
+					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].font = 0x54;
 				} else {
 					v3 = d2_ShowTxt(0x60, y, *(char**) 0x14ad494, *(int*) &d2_CurrentWindowId);
 					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].font = 0x53;
@@ -121,9 +120,8 @@ void __cdecl fcn_00591ea0(void)
 					fcn_0046f740(0x128, y - 9, *res + 0xdf, *(int*) &d2_CurrentWindowId);
 					io_FormatTextBuffer(buf, 0x6a9b44, (int) *res * 2 + 0x9a8);
 					v3 = d2_ShowTxt(0x164, y + 9, buf, *(int*) &d2_CurrentWindowId);
-					v3 *= 0x2f4;
-					(*(D2_CONTROL_TL*) ((char*) (*(int*) &g_1015ea0) + v3)).width = 0x80;
-					(*(D2_CONTROL_TL*) ((char*) (*(int*) &g_1015ea0) + v3)).font = 0x54;
+					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].width = 0x80;
+					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].font = 0x54;
 				}
 				row += 3;
 				i++;

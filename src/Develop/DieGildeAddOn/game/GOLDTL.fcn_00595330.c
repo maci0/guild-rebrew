@@ -1,4 +1,5 @@
 extern char* lpObjektePROT;
+extern int g_7798a0;
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
@@ -83,9 +84,9 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 		row = g_row(0);
 		for (i = rowCount; i > 0; i--) {
 			g_row_sel(row) = -1;
-			if (*(int*) 0x7798a0) {
+			if (g_7798a0) {
 				for (j = 0; j < 4; j++) {
-					if (g_row_cat(row, j) == *(int*) 0x7798a0) {
+					if (g_row_cat(row, j) == g_7798a0) {
 						g_row_sel(row) = j;
 					}
 				}
