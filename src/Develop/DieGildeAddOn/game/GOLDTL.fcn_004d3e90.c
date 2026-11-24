@@ -1,4 +1,3 @@
-extern float g_6628a8;
 
 char* __cdecl fcn_004ce610(void* obj);
 char* __cdecl fcn_004ce680(void* obj);
@@ -11,7 +10,7 @@ float __cdecl fcn_004d3e90(void* obj, unsigned int mode)
 	float r;
 	int n;
 
-	r = g_6628a8;
+	r = 0.0f;
 	switch (mode) {
 	case 0:
 		{

@@ -1,7 +1,5 @@
 #include <math.h>
 
-extern float flt_1;
-extern float flt_6628cc;
 
 int __cdecl gm_LookupEntityRecordById(int a0);
 int __cdecl fcn_005c6270(int a0, int a1);
@@ -17,11 +15,11 @@ int __cdecl fcn_00493be0(void* a0)
 	int k;
 
 	p = (char*) a0;
-	n = (int) (*(float*) (p + 4) - flt_1);
+	n = (int) (*(float*) (p + 4) - 1.0f);
 	f = *(float*) (p + 4);
 	frac = f - ceil(f);
 	v = gm_LookupEntityRecordById(*(int*) (p + 0x18));
-	if (frac >= flt_6628cc) {
+	if (frac >= 0.5f) {
 		n++;
 	}
 	n = (n < 0) ? 0 : n;

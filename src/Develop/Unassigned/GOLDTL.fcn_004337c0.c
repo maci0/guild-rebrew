@@ -5,7 +5,6 @@ extern void __cdecl fcn_004321f0(int *a, int *b, int *c);
 void __cdecl fcn_004337c0(int *state)
 {
     int i;
-    int off;
     int j;
 
     if (state == 0)
@@ -15,29 +14,27 @@ void __cdecl fcn_004337c0(int *state)
     if (*state <= 2) {
         i = 0;
         if (*state > 0) {
-            off = 0;
             do {
                 if ((*(unsigned char *)((int)state + 0x34) & 1) != 0 &&
                     i < *state - 1) {
-                    fcn_00451720((int *)(off + (char *)state[0x10] + 0x6c),
-                                 (int *)(off + (char *)state[0x10] + 0x14),
-                                 (int *)(off + (char *)state[0x10] + 0x6c),
-                                 (int *)(off + (char *)state[0x10] + 0x14));
+                    fcn_00451720((int *)(i * 0x58 + (char *)state[0x10] + 0x6c),
+                                 (int *)(i * 0x58 + (char *)state[0x10] + 0x14),
+                                 (int *)(i * 0x58 + (char *)state[0x10] + 0x6c),
+                                 (int *)(i * 0x58 + (char *)state[0x10] + 0x14));
                 }
-                *(int *)(off + (char *)state[0x10] + 0x20) = 0;
-                *(int *)(off + (char *)state[0x10] + 0x24) = 0;
-                *(int *)(off + (char *)state[0x10] + 0x28) = 0;
-                *(int *)(off + (char *)state[0x10] + 0x30) = 0;
-                *(int *)(off + (char *)state[0x10] + 0x34) = 0;
-                *(int *)(off + (char *)state[0x10] + 0x38) = 0;
-                *(int *)(off + (char *)state[0x10] + 0x40) = 0;
-                *(int *)(off + (char *)state[0x10] + 0x44) = 0;
-                *(int *)(off + (char *)state[0x10] + 0x48) = 0;
-                *(int *)(off + (char *)state[0x10] + 0x4c) = 0;
-                *(int *)(off + (char *)state[0x10] + 0x50) = 0;
-                *(int *)(off + (char *)state[0x10] + 0x54) = 0;
+                *(int *)(i * 0x58 + (char *)state[0x10] + 0x20) = 0;
+                *(int *)(i * 0x58 + (char *)state[0x10] + 0x24) = 0;
+                *(int *)(i * 0x58 + (char *)state[0x10] + 0x28) = 0;
+                *(int *)(i * 0x58 + (char *)state[0x10] + 0x30) = 0;
+                *(int *)(i * 0x58 + (char *)state[0x10] + 0x34) = 0;
+                *(int *)(i * 0x58 + (char *)state[0x10] + 0x38) = 0;
+                *(int *)(i * 0x58 + (char *)state[0x10] + 0x40) = 0;
+                *(int *)(i * 0x58 + (char *)state[0x10] + 0x44) = 0;
+                *(int *)(i * 0x58 + (char *)state[0x10] + 0x48) = 0;
+                *(int *)(i * 0x58 + (char *)state[0x10] + 0x4c) = 0;
+                *(int *)(i * 0x58 + (char *)state[0x10] + 0x50) = 0;
+                *(int *)(i * 0x58 + (char *)state[0x10] + 0x54) = 0;
                 i++;
-                off += 0x58;
             } while (i < *state);
         }
     } else {

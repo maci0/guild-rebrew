@@ -31,15 +31,11 @@ int __cdecl fcn_004cdda0(char* command, unsigned char* response, unsigned char* 
 	memcpy(buf, g_aed340, n * 64);
 	node = buf;
 
-	i = 0;
-	if (n > 0) {
-		i = n;
-		do {
-			*(char**) (node + 0x38) = prev;
-			*(char**) (node + 0x3c) = node + 0x40;
-			prev = node;
-			node += 0x40;
-		} while (--n);
+	for (i = 0; i < n; i++) {
+		*(char**) (node + 0x38) = prev;
+		*(char**) (node + 0x3c) = node + 0x40;
+		prev = node;
+		node += 0x40;
 	}
 	*(int*) (buf + i * 0x40 - 4) = 0;
 	*(void**) ((char*) p + 0x29) = fcn_004be2a0(buf);

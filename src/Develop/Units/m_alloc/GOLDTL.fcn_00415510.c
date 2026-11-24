@@ -33,12 +33,6 @@ typedef struct {
 } Rain;
 
 extern char g_67756c[];
-extern float g_662a18;
-extern float g_6628bc;
-extern float g_6628cc;
-extern float g_662a2c;
-extern float g_662a40;
-extern float g_662a44;
 
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
@@ -64,10 +58,10 @@ void __cdecl d3_SetRainEffectOptions(Rain* r, int n, ...)
 		if (t >= 0) {
 			if (t > 1) {
 				if (t == 2) {
-					r->size24 = (float) *++p * g_662a2c;
+					r->size24 = (float) *++p * 0.001f;
 					r->f14 = r->f1c;
 					r->f18 = r->f20;
-					r->size28 = (float) *++p * g_662a2c;
+					r->size28 = (float) *++p * 0.001f;
 					r->f38 = r->f2c;
 					r->f3c = *++p + r->f2c;
 				}
@@ -87,12 +81,12 @@ void __cdecl d3_SetRainEffectOptions(Rain* r, int n, ...)
 					if (r->count < k) {
 						k -= r->count;
 						do {
-							d->x = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
-							d->y = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
-							d->z = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
-							d->size = (float) rand() * g_662a44 + g_6628bc;
-							d->drift_a = (float) rand() * g_662a40 + g_6628bc;
-							d->drift_b = (float) rand() * g_662a40 + g_6628bc;
+							d->x = ((float) rand() * 3.0518509447574615e-05f - 0.5f) * 2.0f;
+							d->y = ((float) rand() * 3.0518509447574615e-05f - 0.5f) * 2.0f;
+							d->z = ((float) rand() * 3.0518509447574615e-05f - 0.5f) * 2.0f;
+							d->size = (float) rand() * 7.629627e-06f + 0.25f;
+							d->drift_a = (float) rand() * 1.5259255e-06f + 0.25f;
+							d->drift_b = (float) rand() * 1.5259255e-06f + 0.25f;
 							d++;
 						} while (--k);
 					}

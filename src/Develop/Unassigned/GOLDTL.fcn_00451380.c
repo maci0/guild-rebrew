@@ -32,7 +32,7 @@ float __cdecl fcn_00451380(float* a, float* b)
 	nvb[1] = -vb[1];
 	nvb[2] = -vb[2];
 	if (CompareVector3WithinTolerance(va, nvb, 1.0e-7f)) {
-		return *(float*) 0x6628f8;
+		return -3.1415927f;
 	}
 	cr[0] = vb[2] * va[1] - vb[1] * va[2];
 	cr[1] = vb[0] * va[2] - vb[2] * va[0];

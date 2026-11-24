@@ -74,7 +74,8 @@ plain:
 		rec = fcn_004ce680(e);
 		if (rec != 0 && *(int*) (rec + 0x20) <= 0) {
 			fcn_00533a40((char*) g_14a9a08);
-			goto fail;
+fail:
+			return -1;
 		}
 		m.f10 = 0;
 		m.f14 = col;
@@ -85,7 +86,7 @@ plain:
 		rec = fcn_004ce680(e);
 		if (rec != 0 && *(int*) (rec + 0x20) <= 0) {
 			fcn_00533a40((char*) g_14a9a0c);
-			goto fail;
+			return -1;
 		}
 		m.f10 = 0;
 		m.f14 = col;
@@ -97,6 +98,4 @@ plain:
 		m.f1c = 1;
 	}
 	return fcn_004c67c0(*(int*) (context + 0x10), &m);
-fail:
-	return -1;
 }

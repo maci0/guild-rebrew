@@ -1,4 +1,5 @@
 extern volatile int g_6b7fb8;
+extern char g_14cf950;
 
 typedef struct DevData DevData;
 
@@ -29,10 +30,10 @@ void __cdecl fcn_004124b0(void)
 	unsigned char key;
 	int stamp;
 
-	*(unsigned char*) 0x14cf950 = 0;
+	g_14cf950 = 0;
 	one = 1;
 	do {
-		dev = *(INPUT_DEVICE**) 0x14ce90c;
+		dev = g_14ce90c;
 		n = (unsigned int) one;
 		hr = dev->vtbl->GetDeviceData(dev, 0x14, (LPDIDEVICEOBJECTDATA) &ev, (LPDWORD) &n, 0);
 		if (hr < 0) {
@@ -44,7 +45,7 @@ void __cdecl fcn_004124b0(void)
 		if (ev.data & 0x80) {
 			if (*(int*) 0x6b5c90 == 0) {
 				ofs = ev.ofs;
-				*(unsigned char*) 0x14cf950 = (unsigned char) ofs;
+				g_14cf950 = (char) ofs;
 				((unsigned char*) 0x14cf700)[(unsigned char) ofs] = (unsigned char) one;
 			}
 		} else if (*(int*) 0x6b5c90 == 0) {
@@ -53,7 +54,7 @@ void __cdecl fcn_004124b0(void)
 			((unsigned char*) 0x14cf960)[ofs] = (unsigned char) one;
 		}
 	} while (hr >= 0);
-	cur = *(unsigned char*) 0x14cf950;
+	cur = (unsigned char) g_14cf950;
 	if (cur != 0) {
 		key = cur;
 		stamp = g_6b7fb8;
@@ -66,7 +67,7 @@ void __cdecl fcn_004124b0(void)
 	}
 	if (key != 0) {
 		if (cur == 0 && ((unsigned char*) 0x14cf700)[*(int*) 0x6b5cb0 & 0xff] != 0 && (unsigned int) g_6b7fb8 > (unsigned int) stamp + 5) {
-			*(unsigned char*) 0x14cf950 = key;
+			g_14cf950 = key;
 			*(int*) 0x6b5c68 = g_6b7fb8;
 		}
 		if (((unsigned char*) 0x14cf700)[*(int*) 0x6b5cb0 & 0xff] == 0) {

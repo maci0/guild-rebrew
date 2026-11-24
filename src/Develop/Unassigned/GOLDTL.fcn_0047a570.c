@@ -3,7 +3,7 @@
 
 extern int g_67dac0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern double dbl_1_0;
+
 
 /* ADDRESS: GOLDTL 0x0047a570 */
 int __cdecl fcn_0047a570(int a0, int a1, int a2, int* countOut, int* sizesOut, int a5)
@@ -19,14 +19,14 @@ int __cdecl fcn_0047a570(int a0, int a1, int a2, int* countOut, int* sizesOut, i
 	unsigned int i;
 	int k;
 
-	if (a2 > a1) {
-		n = a2;
-	}
-	else {
+	if (a1 > a2) {
 		n = a1;
 	}
+	else {
+		n = a2;
+	}
 	if (a0 > 1) {
-		v1 = (int) (sqrt((double) a0) + dbl_1_0);
+		v1 = (int) (sqrt((double) a0) + 1.0);
 	}
 	else {
 		v1 = a0;
@@ -50,7 +50,7 @@ int __cdecl fcn_0047a570(int a0, int a1, int a2, int* countOut, int* sizesOut, i
 		size = g_67dac0;
 	}
 	if ((float) n / (float) size < 0.9f && size > 0x40 && a5 != 0
-	    && size / 2 > a2 && size / 2 > a1) {
+	    && size / 2 > a1 && size / 2 > a2) {
 		size >>= 1;
 	}
 	v1 = size / a1;

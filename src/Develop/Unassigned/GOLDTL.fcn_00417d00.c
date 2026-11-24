@@ -20,8 +20,6 @@ typedef struct {
 	int count;
 } Explosion417d00;
 
-extern float g_662b08;
-extern float g_662b0c;
 
 int* __cdecl fcn_004524e0(int a0, char* a1, Bytes4 a2, float a3, char* a4, void (__cdecl* a5)(void));
 void __cdecl fcn_004526d0(int* a0, float* a1);
@@ -69,8 +67,8 @@ int* __cdecl fcn_00417d00(char* a0, float* pos, int n, float a3, float a4, float
 				v[0] = v[0] - s->y * 0.05f;
 				v[1] = v[1] - s->y * 0.025f;
 				v[2] = v[2] - s->y * 0.05f;
-				rr = rand() * g_662b0c;
-				h = (float) sin(((float) i * inv) * g_662b08) * s->y;
+				rr = rand() * 1.9175345e-4f;
+				h = (float) sin(((float) i * inv) * 1.5707964f) * s->y;
 				*v4 = h;
 				h = (float) sqrt(s->x * s->x - h * h);
 				v4[-1] = (float) sin(rr) * h + v[0];

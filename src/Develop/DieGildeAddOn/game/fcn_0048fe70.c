@@ -21,7 +21,6 @@ int __cdecl fcn_0048fe70(int a0, char* actorEntity, int a2, int* a3, int* a4, in
 	int v;
 	int out;
 	int m;
-	int t, r;
 	v9 = 0;
 	if (a2 != 0) {
 		return 0;
@@ -105,6 +104,7 @@ int __cdecl fcn_0048fe70(int a0, char* actorEntity, int a2, int* a3, int* a4, in
 		v9 = (int*) cand[fcn_0042e410(n) & 0xffff];
 		v4 = (int*) fcn_004f18d0(0, (char*) v9, 0, 0x4f1840, 0xff);
 		if (v4 != 0) {
+			int t, r;
 			t = fcn_004f4440((int) actorEntity, 0xff, *v4, 1, &r);
 			m = fcn_0050d320((int) actorEntity, g_773d75);
 			if ((int) ((float) m * g_664160) < t) {

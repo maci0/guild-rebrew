@@ -5,10 +5,6 @@ extern int g_772e9c;
 extern int g_772f08;
 extern int g_9b9e40[];
 extern int g_9b43e0[];
-extern float g_662e64;
-extern float g_664144;
-extern float g_662a6c;
-extern float g_6628cc;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 float __cdecl fcn_004ce8b0(char*);
@@ -80,11 +76,11 @@ int __cdecl fcn_004d3c60(int id)
 	} else {
 		ratio = sum_lo / sum_hi;
 	}
-	if (ratio >= g_662e64) {
+	if (ratio >= 1.75f) {
 		band = 4;
-	} else if (ratio >= g_664144) {
+	} else if (ratio >= 1.25f) {
 		band = 3;
-	} else if (ratio >= g_662a6c) {
+	} else if (ratio >= 0.75f) {
 		band = 2;
 	} else if (ratio >= 0.5f) {
 		band = 1;

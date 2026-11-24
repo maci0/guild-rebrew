@@ -7,11 +7,14 @@ void __cdecl fcn_00456530(int, int);
 void __cdecl fcn_00456c80(void);
 extern unsigned int g_14ce798, g_10405fc, g_104061c;
 extern char g_1040600;
+extern void* g_6b5ddc;
+extern unsigned char g_6b89bc;
+extern char g_6b89bd;
 
 #define SET_MODE(f) \
 	(*(int (__stdcall **)(int, int, int, int, int, int, int)) \
-	    (*(int*) *(int*) 0x6b5ddc + 0x28))( \
-	    *(int*) 0x6b5ddc, *(int*) 0x14ce744, *(int*) 0x14ce72c, \
+	    (*(int*) g_6b5ddc + 0x28))( \
+	    (int) g_6b5ddc, *(int*) 0x14ce744, *(int*) 0x14ce72c, \
 	    g_14ce86c, 1, 3, (f))
 
 /* ADDRESS: GOLDTL 0x00456750 */
@@ -97,7 +100,7 @@ void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
 		r = g_6b89b8;
 	}
 chosen:
-	*(char*) 0x6b89bc = r != 0;
+	g_6b89bc = r != 0;
 	if (r != 0) {
 		goto second;
 	}
@@ -160,6 +163,6 @@ store:
 	g_6b89b8 = r;
 second:
 	r = SET_MODE(r);
-	*(char*) 0x6b89bd = r >= 0;
+	g_6b89bd = r >= 0;
 	fcn_00456c80();
 }

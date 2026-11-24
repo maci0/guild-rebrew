@@ -50,6 +50,13 @@ void __cdecl fcn_004d4250(char* rec, char* e)
 				}
 			}
 			break;
+		case 5:
+			obj = fcn_004d34f0(e);
+			if (obj != 0) {
+				fcn_004d1250(rec, e, obj);
+				return;
+			}
+			break;
 		case 1:
 			obj = fcn_004d3600(e);
 			if (obj != 0) {
@@ -64,18 +71,11 @@ void __cdecl fcn_004d4250(char* rec, char* e)
 				return;
 			}
 			break;
-		case 3:
-			fcn_004d1570(rec, e);
-			break;
 		case 4:
 			fcn_004d14b0(rec, e);
 			return;
-		case 5:
-			obj = fcn_004d34f0(e);
-			if (obj != 0) {
-				fcn_004d1250(rec, e, obj);
-				return;
-			}
+		case 3:
+			fcn_004d1570(rec, e);
 			break;
 		}
 	}

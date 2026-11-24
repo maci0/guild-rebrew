@@ -42,7 +42,6 @@ typedef int (__stdcall* Device450e90Fn)(D3D_DEVICE_VIEW*, int, int);
 
 
 
-extern float g_6628a8;
 extern float g_67bc1c;
 extern float g_67bc20;
 extern char g_67bc24;
@@ -72,7 +71,7 @@ void __cdecl fcn_00450e90(float a, float b, char* c, float* d, float* e)
 	int i;
 	int n;
 
-	sign = (b < g_6628a8) ? (int) 0x80000000 : 0;
+	sign = (b < 0.0f) ? (int) 0x80000000 : 0;
 	if (!(b > -b)) {
 		b = -b;
 	}
@@ -88,8 +87,8 @@ void __cdecl fcn_00450e90(float a, float b, char* c, float* d, float* e)
 	}
 	probe = (Probe450e90*) c;
 	for (light = (SceneLight450e90*) g_6b86e8; light != 0 && g_6b8708 < g_6b8704; light = light->next) {
-		acc = g_6628a8;
-		for (i = 0; i <= 8; i++) {
+		acc = 0.0f;
+		for (i = 0; i < 9; i++) {
 			dx = probe[i].x - light->x;
 			dy = probe[i].y - light->y;
 			dz = probe[i].z - light->z;
@@ -109,7 +108,7 @@ void __cdecl fcn_00450e90(float a, float b, char* c, float* d, float* e)
 				acc += v * 0.0013071895809844136f;
 			}
 		}
-		if (acc > g_6628a8) {
+		if (acc > 0.0f) {
 			((SortEntry450e90*) g_1041d04)[g_6b8708].e = (char*) light;
 			((SortEntry450e90*) g_1041d04)[g_6b8708].value = acc;
 			((SortEntry450e90*) g_1041d04)[g_6b8708].pad = 0;

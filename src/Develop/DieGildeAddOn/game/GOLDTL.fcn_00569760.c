@@ -101,9 +101,9 @@ void __cdecl fcn_00569760(char* eventTrack)
 		n = gm_WalkEntityChain(*(unsigned short*) e);
 		award = (int) ((flt_665ecc < (float) n ? flt_665ecc : (float) n) * f);
 		eid = *(int*) (e + 4);
+		*(int*) (b.msg + 0xc) = *(int*) (rec + 1);
 		*(unsigned char*) (b.msg + 4) = 0x3e;
 		*(int*) (b.msg + 8) = eid;
-		*(int*) (b.msg + 0xc) = *(int*) (rec + 1);
 		*(unsigned char*) (b.msg + 0x36) = 9;
 		*(int*) (b.msg + 0x58) = eid;
 		*(int*) (b.msg + 0x60) = award;

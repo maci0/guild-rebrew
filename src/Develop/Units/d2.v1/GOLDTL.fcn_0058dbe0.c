@@ -1,6 +1,7 @@
 /* Open the arena betting page: query the match, build the layout and poll
  * input until the page is closed. */
 #include "client_data.h"
+extern int g_774654;
 void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
@@ -138,7 +139,7 @@ void __cdecl fcn_0058dbe0(int a0)
 					*(int*) ((char*) req + 0x58) = *(int*) (rec + 1);
 					fcn_004c5530(req);
 				label_58df76:
-					*(int*) 0x774654 = 1;
+					g_774654 = 1;
 				}
 			} else if (d2_CurrentElementId == v30) {
 				goto label_58df76;

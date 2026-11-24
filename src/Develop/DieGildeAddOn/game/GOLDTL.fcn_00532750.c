@@ -14,6 +14,7 @@ void __cdecl fcn_00532750(char* a)
 	char key[0x60];
 	char value[0x100];
 	unsigned short* e;
+	unsigned short* hit;
 	char* p;
 
 	if ((int) g_7746c8 != 0) {
@@ -35,19 +36,19 @@ void __cdecl fcn_00532750(char* a)
 	}
 	while (e != 0) {
 		if (strcmpi(key, (char*) (*(int*) 0x99ec10 + (int) *e * 0x40 + (int) *e + 1)) == 0) {
-			goto found;
+			hit = e; goto found;
 		}
 		e = gm_NextEntityQueryMatch();
 	}
 	if ((int) g_7746c8 == 0) {
 		return;
 	}
-	e = (unsigned short*) fcn_00502cd0(*(int*) (p + 0x5d), 1, 0, 0xfd);
+	hit = (unsigned short*) fcn_00502cd0(*(int*) (p + 0x5d), 1, 0, 0xfd);
 found:
-	if (e == 0) {
+	if (hit == 0) {
 		return;
 	}
-	if (*e == 0xfd) {
+	if (*hit == 0xfd) {
 		if ((int) g_7746cc != 0) {
 			sprintf(value, (char*) 0x68b3f8,
 				*(char**) ((int) *(unsigned short*) (int) g_7746cc * 8 + 0x14a79c0),
@@ -59,7 +60,7 @@ found:
 		}
 	} else {
 		sprintf(value, (char*) 0x68b3f8,
-			*(char**) ((int) *e * 8 + 0x14a79c0), *(char**) 0x14a552c);
+			*(char**) ((int) *hit * 8 + 0x14a79c0), *(char**) 0x14a552c);
 	}
 	if (fcn_00443e10(a, rc)) {
 		fcn_0046bd20((rc[2] - rc[0]) / 2 + rc[0] - 0x50, rc[1], 0xa0, 0x60,

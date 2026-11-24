@@ -32684,3 +32684,137 @@ Replaces the local vector reloads \`sqrt(v[0]*v[0] + ...)\` with direct matrix v
   scaffold drift and Git whitespace checks passed.
 - Decision owner: user, requesting a repository-wide documentation review.
 - 2026-11-24: Release 1.15.0. Pinned rebrew 6.72.0 to 6.74.0 (its 6.73.0 breaking changes touch `rebrew library list --json`, recondb 3.0.0 signature indexes and dispatch replies; no guild-rebrew script, CI step or config uses them, and `flirt_sigs/` has no recondb index). Project and lockfile version 1.14.0 to 1.15.0. Release notes in docs/releases/1.15.0.md: 83 rows newly EXACT/RELOC against `git show v1.14.0:rebrew-functions.toml` (72 GoldTL, 11 Gold); the 27 rows that left EXACT/RELOC are all library functions from the 4fc439880 library coverage change (8 in `src/library_d3dx8.h`, 2 in `src/library_libcmt.h`, 17 with their reconstructed sources deleted). Verified under 6.74.0: both clients relinked with `cmake --build build/consolidation-baseline-pp` (exit 0), `uv run bash scripts/gate.sh` pass (316/316 functions, 652/652 data rows, raw image 286,720 bytes, SHA-256 3cc2ce90...d1609d1), lint 5,427 passed with 0 errors and 0 warnings on all targets, no stored status changed by the gate. Client comparison from `rebrew verify --data --whole-binary --raw-link --dry-run --json` and `rebrew binary score`; neither matches. Graphics regenerated from that release's `rebrew status --all-targets --json`; README, docs/README.md and docs/TODO.md point at 1.15.0. Decision owner: user (requested release).
+
+## 2026-11-24 - GOLDTL 0x004f0f60 clamp into a local
+
+- `src/Develop/Unassigned/GOLDTL.fcn_004f0f60.c` now copies the clamped value into a local `v` on each of the three goto paths (in range, `>= 4`, otherwise zero) instead of reassigning the `value` parameter. Native `0x004f0f6b` (`jg`) and the `0x004f0fe3` `jmp` both reach `0x004f0f6f mov ecx, [esp + 8]`, which loads `out` ahead of the `0x004f0f73` conversion store to `[esp + 4]` on every path; the reassigned parameter stored only on the zero path.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x004f0f60` from `NEAR_MATCHING` 37/41 to 40/41 (obj 133/133); the remaining difference is the `fadd` slot at `0x004f0f97`. All-target lint reported no findings.
+- Decision owner: matching lane 58.
+
+## 2026-11-24 - GOLDTL 0x004cdda0 node walk as a counted for loop
+
+- `src/Develop/Unassigned/fcn_004cdda0.c` builds the node chain with `for (i = 0; i < n; i++)` instead of `i = 0; if (n > 0) { i = n; do ... while (--n); }`. The compiler derives the same `dec edx` countdown and the final `i = n` copy, and now schedules native `0x004cde1d lea eax, [esp + 0x4c]` before `0x004cde21 mov ecx, edx`, the last swapped pair.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x004cdda0` from `NEAR_MATCHING` 71/73 to `RELOC` (199/199 bytes, obj 199/199). All-target lint reported no findings for the file.
+- Decision owner: matching lane 57.
+
+## 2026-11-24 - GOLDTL 0x004124b0 named input globals
+
+- `src/Develop/Unassigned/GOLDTL.fcn_004124b0.c` reads the keyboard device through the existing `g_14ce90c` (`INPUT_DEVICE*`, `client_input.h`) and the last-key byte through the existing `g_14cf950` (`char`, defined in `stubs/goldtl/symbol_stubs.c`) instead of the raw `*(INPUT_DEVICE**) 0x14ce90c` and `*(unsigned char*) 0x14cf950` casts. Native reads the device pointer as a dword and stores and loads 0x14cf950 as a byte (the reference diff labels `mov byte ptr [g_14cf950], dl`), so both declarations have the native access width.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x004124b0` from 62/76 to 63/76 aligned pairs (`NEAR_MATCHING`, obj 266/266); the device name alone tied at 62. All-target lint reported no findings for the file.
+- Decision owner: matching lane 55.
+
+## 2026-11-24 - GOLDTL 0x004d3e90 zero literal
+
+- `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004d3e90.c` initializes the result with the literal `0.0f` instead of reading `extern float g_6628a8`. The row `GOLDTL.0x006628a8` is in `.rdata` with `link_symbol = "__real@00000000"`, so it is the compiler's zero literal that native loads at `0x004d3e95 fld dword ptr [0x6628a8]`.
+- Verification: `rebrew test --source-targets --no-promote --json` 85/100 aligned pairs before and after (`NEAR_MATCHING`, obj 324/324); kept as a tie under the compiler-literal rule. All-target lint reported no findings for the file.
+- Decision owner: matching lane 55.
+
+## 2026-11-24 - GOLDTL 0x00451380 minus-pi literal
+
+- `src/Develop/Unassigned/GOLDTL.fcn_00451380.c` returns the literal `-3.1415927f` on the opposite-vector path instead of the raw `*(float*) 0x6628f8` read. Native `0x00451427 fld dword ptr [0x6628f8]` loads the `.rdata` bytes `db 0f 49 c0`, the binary32 value -3.1415927; the candidate now binds the compiler literal `__real@c0490fdb`.
+- Verification: `rebrew test --source-targets --no-promote --json` 94/98 aligned pairs before and after (`NEAR_MATCHING`, obj 334/334); kept as a tie under the compiler-literal rule. All-target lint reported no findings for the file.
+- Decision owner: matching lane 54.
+
+## 2026-11-24 - GOLDTL 0x0047a570 cell-size maximum and half-size test order
+
+- `src/Develop/Unassigned/GOLDTL.fcn_0047a570.c` selects the larger cell size as `if (a1 > a2) n = a1; else n = a2;` instead of `if (a2 > a1) n = a2; else n = a1;`, matching native `0x0047a57d mov esi, ebp` (a1) / `jg` / `mov esi, ebx` (a2). With a1 back in ebp and a2 in ebx, the half-size test is written `size / 2 > a1 && size / 2 > a2`, matching native `cmp eax, ebp` before `cmp eax, ebx`. The sqrt term adds the literal `1.0` instead of `extern double dbl_1_0`: native `fadd qword ptr [0x6629c8]` reads the row `GOLDTL.0x006629c8` (`storage_kind = "literal"`, `link_symbol = "__real@3ff0000000000000"`), and the candidate relocation now validates.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x0047a570` from 141/150 to 146/150 aligned pairs (`NEAR_MATCHING`, obj 410/410); the maximum form alone gave 144, the conjunct order 146, the literal tied. All-target lint reported no findings for the file. The remaining rows are the recursive-count tail (native keeps `a0` in eax across `rep movsd`, ours reloads it).
+- Decision owner: matching lane 56.
+
+## 2026-11-24 - GOLDTL 0x004d4250 switch arm order
+
+- `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004d4250.c` lists the selector switch arms as case 0, 5, 1, 2, 4, 3 instead of 0 to 5. MSVC lays out arms in source order, and native places them at `0x004d429a` (0), `0x004d4387` (5), `0x004d43a9` (1), `0x004d43cb` (2), `0x004d43ed` (4) and `0x004d4401` (3, falling into the `0x004d440f` epilogue); the jump table at `0x004d4418` is indexed by value either way. Arm bodies are unchanged.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x004d4250` from `NEAR_MATCHING` 157/176 to `RELOC` (obj 480/480, 165/176 aligned pairs with the jump table counted as instructions). All-target lint reported no findings for the file.
+- Decision owner: matching lane 55.
+
+## 2026-11-24 - GOLDTL 0x00417d00 rdata float literals
+
+- `src/Develop/Unassigned/GOLDTL.fcn_00417d00.c` writes the particle angle constants as the literals `1.5707964f` and `1.9175345e-4f` instead of reading `extern float g_662b08` and `g_662b0c`, and drops both declarations. Both addresses are in `.rdata`; their bytes are `db 0f c9 3f` (binary32 1.5707964) and `6d 11 49 39` (binary32 1.9175345e-4). The candidate binds `__real@3fc90fdb` to native 0x662b08 and `__real@3949116d` to native 0x662b0c.
+- Verification: `rebrew test --source-targets --no-promote --json` 149/156 aligned pairs before and after (`NEAR_MATCHING`, obj 509/509); kept as a tie under the compiler-literal rule. All-target lint reported no findings for the file.
+- Decision owner: matching lane 54.
+
+## 2026-11-24 - GOLDTL 0x00415510 float literals
+
+- `src/Develop/Units/m_alloc/GOLDTL.fcn_00415510.c` writes the read-only constants as literals: `g_662a2c` as `0.001f`, `g_6628cc` as `0.5f`, `g_6628bc` as `0.25f`, `g_662a40` as `1.5259255e-06f` and `g_662a44` as `7.629627e-06f`. All five addresses are in `.rdata` of `Europa1400Gold_TL.exe` (bytes `6f12833a`, `0000003f`, `0000803e`, `67cecc35`, `00010037`), and the compiled `__real@` symbols carry the same bit patterns.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x00415510` from 142/149 to 144/149 aligned pairs (`NEAR_MATCHING`, obj 509/509); `0.001f` alone gave the gain, the other four tied. All-target lint reported no findings for the file.
+- Decision owner: matching lane 55.
+
+## 2026-11-24 - GOLDTL 0x004337c0 per-entry zeroing re-applied
+
+- `src/Develop/Unassigned/GOLDTL.fcn_004337c0.c` gets the change recorded under "2026-11-23 - GOLDTL 0x004337c0 fcn_004337c0 per-entry zeroing": the first zeroing loop addresses each entry as `i * 0x58 + (char *)state[0x10] + k` and the `off` variable is gone. That entry describes the change, but lane 34 saved the file to its freeze-trials at freeze r5b64 and restored the source, so the tree still held the `off` form. Native evidence is unchanged: `0x0043382e mov dword ptr [ecx + edi + 0x30], ebp` uses the 0x58-stride register.
+- Verification: `rebrew test --source-targets --no-promote --json` 170/188 before and 176/188 after (`NEAR_MATCHING`, obj 535/535). A second trial writing the second-loop stores index-first produced identical bytes and was dropped. All-target lint reported no findings for the file.
+- Decision owner: matching lane 54.
+
+## 2026-11-24 - GOLDTL 0x00569760 message record id store moved up
+
+- `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00569760.c` writes `*(int*) (b.msg + 0xc) = *(int*) (rec + 1)` before the `0x3e` byte and `eid` stores. Native `0x0056999c mov edi, [edi + 4]` and `0x0056999f mov ecx, [esi + 1]` load both values back to back after the `0x00569998 fmul` and before the `0x005699a2` byte store; the candidate now does the same.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x00569760` from `NEAR_MATCHING` 214/224 to 215/224 (bytes 698 to 707 of 723, obj 723/723). The three stores that follow are still in a different order. All-target lint reported no findings for the file.
+- Decision owner: matching lane 57.
+
+## 2026-11-24 - GOLDTL 0x00532750 separate selected-entity pointer
+
+- `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00532750.c` stores the chosen entity in its own pointer `hit`: the name-match exit assigns `hit = e` before `goto found`, the `0xfd` fallback query assigns `hit`, and the type test and the `0x14a79c0` name lookup read `hit`. Native keeps the query cursor in esi (`0x005327fa mov esi, eax`), copies it into eax on a match (`0x0053285f mov eax, esi; jmp 0x532822`), leaves the fallback result in eax (`0x0053281a call 0x502cd0` then `test eax, eax`), and reads the type through eax (`0x0053282a mov ax, word ptr [eax]`). A single variable kept both paths in esi.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x00532750` from 131/143 to 138/143 aligned pairs (`NEAR_MATCHING`, obj 426/426). All-target lint reported no findings for the file. A `break` plus post-loop fallback block with one variable tied at 131; the named `lpObjektePROT` key (pointer arithmetic or `OBJECT_PROTOTYPE.name_bytes`) fell to 107 (obj 428), so the raw `0x99ec10` key read stays.
+- Decision owner: matching lane 56.
+
+## 2026-11-24 - GOLDTL 0x00493be0 float literals
+
+- `src/Develop/Unassigned/GOLDTL.fcn_00493be0.c` writes `flt_1` as `1.0f` and `flt_6628cc` as `0.5f` and drops both externs. Native reads them at `0x00493bec fsub dword ptr [0x6628a0]` and in the fraction compare; both addresses are `.rdata` (bytes `0000803f`, `0000003f`), and the compiled `__real@3f800000` and `__real@3f000000` relocations resolve to `0x6628a0` and `0x6628cc`.
+- Verification: `rebrew test --source-targets --no-promote --json` 61/87 aligned pairs before and after (`NEAR_MATCHING`, obj 249/249); kept as a tie under the compiler-literal rule. All-target lint reported no findings for the file.
+- Decision owner: matching lane 55.
+
+## 2026-11-24 - GOLDTL 0x004e8360 office template reads through g_68da68
+
+- `src/Develop/Unassigned/GOLDTL.fcn_004e8360.c` now reads the office template byte at `+8` and dword at `+0x10` through the existing `g_68da68` table (`extern char g_68da68[]`, defined in both stub trees) instead of the raw `0x68da70`/`0x68da78` address casts. Native compares `[edx*8 + 0x68da70]` with `[eax*8 + 0x68da70]` and tests `[eax*8 + 0x68da78]`, relocated against that table; with the named table the compiler evaluates the slot operand first as native does. Access widths are unchanged.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x004e8360` from `NEAR_MATCHING` 232/278 to 250/278 (obj 916/916). All-target lint reported no findings for the file.
+- Decision owner: matching lane 58.
+
+## 2026-11-24 - GOLDTL 0x004172e0 float spawn-range subtractions
+
+- `src/Develop/Unassigned/GOLDTL.fcn_004172e0.c` writes the five random spawn offsets as `(float) ((float) rand() * 3.0518509447574615e-05f * range) - c`, so the subtraction of `c` is a float operation. Native subtracts with `fsub dword ptr` from the binary32 constants at 0x662918 (2.0), 0x662acc (1.5), 0x662a98 (5.0) and 0x662ab8 (4.8) before the f38, f3c, f40, f00 and f08 stores; the all-double expression emitted `fsub qword ptr` instead. `src/Develop/Unassigned/fcn_00416d50.c` writes the same particle pattern this way. The candidate binds `__real@40000000`, `__real@3fc00000`, `__real@40a00000` and `__real@4099999a` to those native addresses.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x004172e0` from 149/158 to 154/158 aligned pairs (`NEAR_MATCHING`, obj 584/584). Trials not kept: the 4.0f literal for `g_662ac8` (153/158, obj 578), and moving the f30 and flags stores after the f48 line in either order (154/158 ties). All-target lint reported no findings for the file.
+- Decision owner: matching lane 54.
+
+## 2026-11-24 - GOLDTL 0x00456750 named display globals
+
+- `src/Develop/Unassigned/GOLDTL.fcn_00456750.c` now uses the existing `g_6b5ddc` (device pointer, dword), `g_6b89bc` and `g_6b89bd` (byte flags) in place of raw `*(int*) 0x6b5ddc`, `*(char*) 0x6b89bc` and `*(char*) 0x6b89bd` casts, at the native access widths. All three are defined in `stubs/goldtl/symbol_stubs.c`.
+- Verification: `rebrew test --source-targets --no-promote --json` kept `GOLDTL 0x00456750` at 294/296 (obj 960/960, match 949/960) while matched relocations rose from 42 to 57. Tie kept under the named-global rule. All-target lint reported no findings for the file.
+- Decision owner: matching lane 58.
+
+## 2026-11-24 - GOLDTL 0x004d1020 shared fail exit
+
+- `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004d1020.c` places the `fail:` label on the `return -1` of the `v == 0x174` arm (after its `fcn_00533a40(g_14a9a08)` call) instead of on a separate trailing return, and the `0x176` arm returns -1 directly instead of jumping there. Native sends every early failure branch (`je 0x4d113f`, last one at `0x004d1099`) to `0x004d113f pop esi / pop ebp / or eax, -1`, which follows the `0x14a9a08` call inside the 0x174 arm; the 0x176 arm (`0x004d1195`) and the 0x15e arm (`0x004d11d5`) emit their own `or eax, -1` before the pops. Behavior is unchanged.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x004d1020` from 156/173 to 158/173 aligned pairs (`NEAR_MATCHING`, obj 560/560). All-target lint reported no findings for the file.
+- Decision owner: matching lane 55.
+
+## 2026-11-24 - GOLDTL 0x0058dbe0 named dialog-done flag
+
+- `src/Develop/Units/d2.v1/GOLDTL.fcn_0058dbe0.c` stores through the existing `int g_774654` (declared in `client_dialog_state.h`, defined in `stubs/goldtl/symbol_stubs.c`) instead of `*(int*) 0x774654`, at the native dword width.
+- Verification: `rebrew test --source-targets --no-promote --json` kept `GOLDTL 0x0058dbe0` at 278/289 (obj 975/975, match 921/975) with matched relocations 54 -> 55; tie kept under the named-global rule. All-target lint reported no findings for the file.
+- Open data item: an unkept experiment declaring `extern int g_14b55f8` for the raw `*(int*) 0x14b55f8` argument reached 284/289, because native schedules the `fcn_005bdc30` argument pushes ahead of the `query` stores (`0x0058dc8e..0x0058dca9`). `0x14b55f8` has no data row or stub definition yet.
+- Decision owner: matching lane 58.
+
+## 2026-11-24 - GOLDTL 0x004d3c60 ratio band literals
+
+- `src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004d3c60.c` compares the ratio against the literals `1.75f`, `1.25f` and `0.75f` instead of `extern float g_662e64`, `g_664144` and `g_662a6c`, whose only storage is the zero-filled stubs in `stubs/goldtl/symbol_stubs.c`; the now unused externs (and the unused `g_6628cc`) are removed. The native compare operands read `.rdata` bytes `00 00 e0 3f` (1.75f) at 0x662e64, `00 00 a0 3f` (1.25f) at 0x664144 and `00 00 40 3f` (0.75f) at 0x662a6c (`rebrew binary asm show`), beside the 0.5f literal at 0x6628cc the function already writes as `0.5f`; the candidate emits `__real@3fe00000`, `__real@3fa00000` and `__real@3f400000`. These addresses have no data rows yet, so the bindings stay unresolved until the literals are registered.
+- Verification: `rebrew test --source-targets --no-promote --json` 170/182 aligned pairs before and after (`NEAR_MATCHING`, obj 560/560); kept as a tie under the compiler-literal rule. All-target lint reported no findings for the file.
+- Decision owner: matching lane 56.
+
+## 2026-11-24 - GOLDTL 0x0048fe70 out value scoped to its branch
+
+- `src/Develop/DieGildeAddOn/game/fcn_0048fe70.c` declares `int t, r;` at the top of the second branch's `if (v4 != 0)` block, where `fcn_004f4440` writes `r`, instead of at function scope. Native `0x004900c0 lea eax, [esp + 0x38]` passes `&r` in the dead parameter slot that also holds `m` for `0x004900e9 fild dword ptr [esp + 0x38]`. With function scope the compiler gave `r` the a0 slot (`[esp + 0x34]`); with block scope `r` shares the slot with `m`, as in native.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x0048fe70` from `NEAR_MATCHING` 229/230 to `RELOC` 230/230 (694/694 bytes, obj 694/694). All-target lint reported no findings for the file.
+- Decision owner: matching lane 54.
+
+## 2026-11-24 - GOLDTL 0x0040a200 ch_WalkOnPathRotation float distance
+
+- `src/Develop/DieGildeAddOn/game/GOLDTL.ch_WalkOnPathRotation.c` compares the path distance as `(float) sqrt(...)` against `*(float*) (obj + 0x10c) * 1.4`. Native follows `fsqrt` with `fstp st(2); fstp st(0)`, taking the result as a float value and dropping the dead `relative[]` temporaries before `fld [esi + 0x10c]; fmul [0x662940]; fcompp`; the uncast double compared first and popped afterwards.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x0040a200` from `NEAR_MATCHING` 273/276 to `RELOC` 275/276 (1011/1011 bytes). All-target lint reported no findings for the file.
+- Decision owner: matching lane 58.
+
+## 2026-11-24 - GOLDTL 0x00450e90 zero literal and probe bound
+
+- `src/Develop/Unassigned/GOLDTL.fcn_00450e90.c` writes the three `g_6628a8` reads (sign test, accumulator start, accumulator test) as `0.0f` and drops the extern; the row `GOLDTL.0x006628a8` is `.rdata` with `link_symbol = "__real@00000000"`. The probe loop bound is now `i < 9` instead of `i <= 8`, matching native `cmp esi, 9` / `jl` at the loop latch; the iteration count is unchanged.
+- Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x00450e90` from `NEAR_MATCHING` 193/196 to `RELOC` (652/652 bytes, 195/196 aligned pairs). With the extern still in place `i < 9` measured 177/196, and the literals alone tied at 193. All-target lint reported no findings for the file.
+- Decision owner: matching lane 55.
+- 2026-11-24: Batch r5b75: matching lanes 54-58 (claude-opus-5-5), NEAR_MATCHING rows from `rebrew todo`. Five rows rise to RELOC, none fall: GOLDTL 0x0040a200, 0x00450e90, 0x0048fe70, 0x004cdda0, 0x004d4250; the other queued files are aligned-pair gains within NEAR_MATCHING. Verified: both clients link, server raw link byte-identical, lint 0/0 on all targets, no status regressions by rebrew's `_STATUS_ORDER`. Decision owner: matching lanes, reviewed by lead.

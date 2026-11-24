@@ -116,7 +116,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 	relative[0] = position[0] - *(float*) (obj + 0x124);
 	relative[1] = position[1] - *(float*) (obj + 0x128);
 	relative[2] = position[2] - *(float*) (obj + 0x12c);
-	if (sqrt(relative[2] * relative[2] + relative[1] * relative[1] + relative[0] * relative[0]) >
+	if ((float) sqrt(relative[2] * relative[2] + relative[1] * relative[1] + relative[0] * relative[0]) >
 	    *(float*) (obj + 0x10c) * 1.4) {
 		if (*(int*) (obj + 0xf8) >= *(int*) (obj + 0xf0) - 1) {
 			ch_SetPosition(inst, (float*) (obj + 0x124), 0);
