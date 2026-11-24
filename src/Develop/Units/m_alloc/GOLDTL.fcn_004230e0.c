@@ -23,30 +23,34 @@ int __cdecl fcn_004230e0(char* a0)
 	int left;
 
 	r = 0;
+	prev = 0;
 	if (g_6b7d7c == 0) {
 		return 1;
 	}
 	if (MemUsed == 0 || a0 == 0) {
 		r = -1; goto done;
 	}
-	prev = 0;
 	bank = g_6b7d78;
-	while (bank != 0 && bank != a0) {
-		prev = bank;
-		bank = *(char**) (bank + 0x13c);
-	}
 	if (bank == 0) {
 		goto done;
 	}
-	left = *(int*) (bank + 0x140) - 1;
-	*(int*) (bank + 0x140) = left;
+	do {
+		if (bank == a0) {
+			goto found;
+		}
+		prev = bank;
+		bank = *(char**) (bank + 0x13c);
+	} while (bank != 0);
+	goto done;
+found:
+	left = --(*(int*) (bank + 0x140));
 	if (left > 0) {
 		goto done;
 	}
-	if (prev == 0) {
-		g_6b7d78 = *(char**) (bank + 0x13c);
-	} else {
+	if (prev != 0) {
 		*(char**) (prev + 0x13c) = *(char**) (bank + 0x13c);
+	} else {
+		g_6b7d78 = *(char**) (bank + 0x13c);
 	}
 	name = a0 + 0x32;
 	fcn_0064d41a(g_14cbae0, g_678f70, name, MemUsed);
@@ -68,7 +72,6 @@ int __cdecl fcn_004230e0(char* a0)
 					MemUsed += -12 - *(int*) (*(char**) (*(char**) (bank + 0x138) + i * 0x40 + 0x38) + 8);
 				}
 				m_FreeTracked(*(char**) (*(char**) (bank + 0x138) + i * 0x40 + 0x38));
-				*(char**) (*(char**) (bank + 0x138) + i * 0x40 + 0x38) = 0;
 				*(char**) (*(char**) (bank + 0x138) + i * 0x40 + 0x38) = 0;
 			}
 			i++;

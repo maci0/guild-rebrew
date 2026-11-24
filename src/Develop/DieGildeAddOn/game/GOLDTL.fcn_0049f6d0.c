@@ -29,8 +29,6 @@ int __cdecl fcn_00507910(int);
 int __cdecl fcn_004a40c0(Calc*);
 unsigned short __cdecl gm_RandomMod(int);
 
-#pragma optimize("y", off)
-
 /* ADDRESS: GOLDTL 0x0049f6d0 */
 unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* actorEntity, int* a2, char* a3)
 {

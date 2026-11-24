@@ -61,17 +61,16 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* outValue)
 			if (cur < fcn_004ec710() * 3) {
 				r = r + 1 + (gm_RandomMod(3) & 0xffff);
 			}
-			v = v5[6];
-			if (v - 3 > r) {
-				cur = (v - (gm_RandomMod(2) & 0xffff)) - 1;
+			if (v5[6] - 3 > r) {
+				cur = (v5[6] - (gm_RandomMod(2) & 0xffff)) - 1;
 				*outValue = cur;
 				if (v5[1] > cur)
 					cur = v5[1];
 				*outValue = cur;
 				return 1;
 			}
-			if (v + 3 < r) {
-				cur = (gm_RandomMod(2) & 0xffff) + v + 1;
+			if (v5[6] + 3 < r) {
+				cur = (gm_RandomMod(2) & 0xffff) + v5[6] + 1;
 				if (v5[2] < cur)
 					cur = v5[2];
 				*outValue = cur;

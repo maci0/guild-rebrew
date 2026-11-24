@@ -23,18 +23,17 @@ int __cdecl cm_ExAllocCutscene(int* obj, char* result)
     if (g_14cbca0 != -1)
         g_699368 = *(int*) ((char*) obj + 0x10);
     entry = cut_AllocCutscene(payload);
-    if (entry != 0) {
-        if (g_7747b0 & 4)
-            *(unsigned char*) (entry + 0x26) |= 0x80;
-        *(int*) (entry + 0x78) = *(int*) ((char*) obj + 0x14);
-        if (result != 0) {
-            result[0] = 1;
-            result[1] = 9;
-            *(char**) (result + 6) = entry;
-        }
-    } else {
-        ret = 1;
+    if (entry == 0)
+        goto null_entry;
+    if (g_7747b0 & 4)
+        *(unsigned char*) (entry + 0x26) |= 0x80;
+    *(int*) (entry + 0x78) = *(int*) ((char*) obj + 0x14);
+    if (result != 0) {
+        result[0] = 1;
+        result[1] = 9;
+        *(char**) (result + 6) = entry;
     }
+post_alloc:
     if (*(unsigned char*) (entry + 8) == 5) {
         idx = (unsigned short) g_774970;
         if (*(int*) (g_7f4ca4 + idx * 0x21c) != *(int*) (entry + 0x34)) {
@@ -44,4 +43,7 @@ int __cdecl cm_ExAllocCutscene(int* obj, char* result)
     }
     g_699368++;
     return ret;
+null_entry:
+    ret = 1;
+    goto post_alloc;
 }

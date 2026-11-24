@@ -18,7 +18,7 @@ void __cdecl fcn_00471e30(int dialogIndex)
 		}
 	}
 	base = &g_1038140[dialogIndex];
-	if (base->used == 0) {
+	if (g_1038140[dialogIndex].used == 0) {
 		return;
 	}
 	items = (int*) g_1038144;

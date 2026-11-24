@@ -207,9 +207,9 @@ int __cdecl fcn_0053ed60(int unused, int network)
 							io_AppendText(0x68b300);
 							io_AppendText(idx + 1);
 						}
+						fcn_00442c00(sel, 0);
+						highlight = data.values[i];
 					}
-					fcn_00442c00(sel, 0);
-					highlight = data.values[i];
 				} else if (data.cities[i] != 0) {
 					fcn_00442c00(data.cities[i], 1);
 				}

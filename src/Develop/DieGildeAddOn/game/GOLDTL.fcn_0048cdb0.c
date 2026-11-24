@@ -86,13 +86,14 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 	int j;
 	char* e;
 	char* g;
-	int* p;
 	int amt;
 	int lim;
 	int sum;
 	int want;
+	int idx;
 
-	n = k = 0;
+	n = 0;
+	k = 0;
 	if (*(float*) 0x100d0f4 <= 0.0f || *(int*) 0x100d10c == 0)
 		return 0;
 	fcn_0050cce0(*(char**) (o + 0x16c), name, 0);
@@ -101,12 +102,12 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 		if (*(unsigned char*) (item + 0x12) < 0x21) {
 			memset(&m, 0, 0xf8);
 			m.type = 0x10;
-			m.flag2 = 1;
 			m.state = *(int*) (*(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c + 0x7f4ca4);
 			m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
 			m.p28 = gm_GameTime;
 			m.p2c = g_7f4c04;
 			m.p30 = g_7f4c08;
+			m.flag2 = 1;
 			m.p34 = g_7f4c0c;
 			fcn_00500bb0(&m.p28, 0, 0, 10);
 			m.f58 = *(int*) (item + 2);
@@ -128,14 +129,15 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			}
 			fcn_0050de80(item, &st);
 			q = fcn_00502cd0(*(int*) (item + 0x14), 1, 0, 0x1dd);
+			j = 0;
 			if (st.x0 > 0) {
-				for (j = 0; j < st.x0; j++) {
+				for (; j < st.x0; j++) {
 					if (st.x48[j] == 0)
 						continue;
 					sprintf(line, (char*) 0x67e918, *(int*) (o + 0x16c) + 5, st.x68[j], (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[st.x48[j]] + 1);
-					for (p = (int*) 0x100b0c0; p < (int*) 0x100d0c0; p += 0x10) {
-						if (*p == (int) st.x48[j])
-							break;
+					for (e = 0, lim = 0x100b0c0; lim < 0x100d0c0 && !e; lim += 0x40) {
+						if (*(int*) lim == (int) st.x48[j])
+							e = (char*) lim;
 					}
 					if (st.x68[j] == 0)
 						continue;
@@ -160,59 +162,84 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			n++;
 			st.x48[0] = *(unsigned short*) 0x100d0c0;
 			j = 1;
-			while (j < *(int*) 0x100b0ac && n < 3) {
-				e = (char*) (0x100d118 + j * 0x58);
-				if (*(float*) (e + 0x34) > 0.0f)
-					break;
-				if (*(int*) (*(int*) (e + 0x14) + 1) == m.slots[3] && *(int*) (e + 0x4c) != 0) {
-					lim = fcn_0050dfd0(q, *(int*) e);
-					if (st.x0 > 0) {
-						for (k = 0; k < st.x0; k++) {
-							if (st.x48[k] != 0)
-								continue;
-							want = *(int*) (e + 0x4c);
-							if (lim < want)
-								want = lim;
-							sprintf(line, (char*) 0x67e358, *(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, g_773d75, 0);
-							want = *(int*) (e + 0x4c);
-							if (lim < want)
-								want = lim;
-							fcn_004c51f0(*(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, (char) g_773d75, 0);
-							m.ids[n] = *(unsigned short*) e;
-							m.slots[n] = *(int*) (*(int*) (e + 0x14) + 1);
-							n++;
-							st.x48[k] = *(unsigned short*) e;
-							break;
+			if (n < 3) {
+				do {
+					if (j >= *(int*) 0x100b0ac)
+						break;
+					e = (char*) (0x100d0c0 + j * 0x58);
+					if (!(*(float*) (e + 0x34) <= 0.0f))
+						break;
+					if (*(int*) (*(int*) (e + 0x14) + 1) == m.slots[3] && *(int*) (e + 0x4c) != 0) {
+						lim = fcn_0050dfd0(q, *(int*) e);
+						if (st.x0 > 0) {
+							for (idx = 0; idx < st.x0; idx++) {
+								if (st.x48[idx] != 0)
+									continue;
+								want = *(int*) (e + 0x4c);
+								if (lim < want)
+									want = lim;
+								sprintf(line, (char*) 0x67e358, *(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, g_773d75, 0);
+								want = *(int*) (e + 0x4c);
+								if (lim < want)
+									want = lim;
+								fcn_004c51f0(*(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, (char) g_773d75, 0);
+								m.ids[n] = *(unsigned short*) e;
+								m.slots[n] = *(int*) (*(int*) (e + 0x14) + 1);
+								n++;
+								st.x48[idx] = *(unsigned short*) e;
+							}
 						}
 					}
-				}
-				j++;
+					j++;
+				} while (n < 3);
 			}
 			memset(totals, 0, sizeof(totals));
 			j = 0;
-			while (j < *(int*) 0x100b0a8 && k < 3) {
-				e = (char*) (0x100b0c0 + j * 0x40);
-				if (*(float*) (e + 0x20) > 0.0f)
-					break;
-				g = (char*) *(int*) (e + 8);
-				if (*(int*) (g + 1) != m.slots[0] || *(int*) (e + 0x34) == 0) {
+			if (k < 3) {
+				do {
+					if (j >= *(int*) 0x100b0a8)
+						break;
+					e = (char*) (0x100b0c0 + j * 0x40);
+					if (!(*(float*) (e + 0x20) <= 0.0f))
+						break;
+					g = (char*) *(int*) (e + 8);
+					if (*(int*) (g + 1) != m.slots[0] || *(int*) (e + 0x34) == 0) {
+						j++;
+						continue;
+					}
+					amt = fcn_0050dfd0(q, *(int*) (e + 0x0c));
+					if (g == 0) {
+						j++;
+						continue;
+					}
+					m.ids[k + 3] = *(unsigned short*) e;
+					m.slots[k + 3] = *(int*) (g + 1);
+					if (amt >= *(int*) (e + 0x34))
+						amt = *(int*) (e + 0x34);
+					m.f88[k] = amt;
+					if (*g == 'G')
+						totals[*(int*) (g + 0x65)] = (int) (totals[*(int*) (g + 0x65)] + amt * *(float*) (e + 0x1c));
+					k++;
 					j++;
-					continue;
+				} while (k < 3);
+			}
+			for (k = 1; k < 4; k++) {
+				sum = gm_QueryEntitySum(*(int*) (0x7f4e18 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), k);
+				want = totals[k];
+				if (want > sum) {
+					want = (want * 9) / 8;
+					fcn_004c4eb0((int) (char*) 0x67e8b0);
+					fcn_004c5150(*(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), -1, (char) k, want);
+					fcn_004c5150(-1, *(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), (char) g_773d75, (int) ((double) want * 1.03));
+					fcn_004c4ef0((int) (char*) 0x67e8b0);
 				}
-				amt = fcn_0050dfd0(q, *(int*) (e + 0x0c));
-				if (g == 0) {
-					j++;
-					continue;
+				else if (want * 2 < sum) {
+					want = sum - (want * 9) / 8;
+					fcn_004c4eb0((int) (char*) 0x67e8b0);
+					fcn_004c5150(*(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), -1, (char) g_773d75, want);
+					fcn_004c5150(-1, *(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), (char) k, (int) ((double) want * 1.03));
+					fcn_004c4ef0((int) (char*) 0x67e8b0);
 				}
-				m.ids[k + 3] = *(unsigned short*) e;
-				m.slots[k + 3] = *(int*) (g + 1);
-				if (*(int*) (e + 0x34) <= amt)
-					amt = *(int*) (e + 0x34);
-				m.f88[k] = amt;
-				if (*g == 'G')
-					totals[*(int*) (g + 0x65)] = (int) (totals[*(int*) (g + 0x65)] + amt * *(float*) (e + 0x1c));
-				k++;
-				j++;
 			}
 			lim = m.slots[0];
 			if (lim == -1)
@@ -228,24 +255,6 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			m.f58 = *(int*) (item + 2);
 			m.f5c = lim;
 			m.f60 = *(int*) (o + 4);
-			for (k = 1; k < 4; k++) {
-				sum = gm_QueryEntitySum(*(int*) (0x7f4e18 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), k);
-				want = totals[k];
-				if (want <= sum) {
-					if (want * 2 < sum) {
-						fcn_004c4eb0((int) (char*) 0x67e8b0);
-						fcn_004c5150(*(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), -1, (char) g_773d75, sum - (want * 9) / 8);
-						fcn_004c5150(-1, *(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), (char) k, (int) ((double) (sum - (want * 9) / 8) * 1.03));
-						fcn_004c4ef0((int) (char*) 0x67e8b0);
-					}
-				}
-				else {
-					fcn_004c4eb0((int) (char*) 0x67e8b0);
-					fcn_004c5150(*(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), -1, (char) k, (want * 9) / 8);
-					fcn_004c5150(-1, *(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), (char) g_773d75, (int) ((double) ((want * 9) / 8) * 1.03));
-					fcn_004c4ef0((int) (char*) 0x67e8b0);
-				}
-			}
 			if (*(int*) 0x100b0a4 == 0) {
 				fcn_004c5530(&m);
 				*(int*) 0x772620 = *(int*) 0x772620 + 1;

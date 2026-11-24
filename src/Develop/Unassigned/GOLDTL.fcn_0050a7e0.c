@@ -64,22 +64,22 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         return -1;
     slot = (char*) 0x7f4ca0 + idx * 0x21c;
     memset(slot, 0, 0x21c);
-    B(slot, 0x218) = 1;
     D((char*) 0x7f4ca0 + idx * 0x21c, 4) = -1;
     W((char*) 0x7f4ca0 + idx * 0x21c, 0) = 0xffff;
     for (n = 0; n < 8; n++) {
         D((char*) 0x7f4ca0 + idx * 0x21c, 0x5c + n * 4) = -1;
     }
-    W((char*) 0x7f4ca0 + idx * 0x21c, 0) = (unsigned short) idx;
     (gm_EntityCount)++;
-    D(slot, 0x1f0) = 0;
-    B(slot, 0x215) = 0;
+    W((char*) 0x7f4ca0 + idx * 0x21c, 0) = (unsigned short) idx;
+    B(slot, 2) = (unsigned char) type;
     D(slot, 0x170) = 0;
-    D(slot, 0x210) = -1;
     D(slot, 0x16c) = 0;
+    D(slot, 0x1f0) = 0;
+    D(slot, 0x210) = -1;
+    B(slot, 0x215) = 0;
     B(slot, 0x216) = 0;
     B(slot, 0x217) = 0;
-    B(slot, 2) = (unsigned char) type;
+    B(slot, 0x218) = 1;
     sprintf(work, (char*) 0x6999fc, gm_NextEntityId, type);
     D(slot, 4) = gm_NextEntityId;
     (gm_NextEntityId)++;
@@ -102,8 +102,8 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
     if (B(slot, 2) == 0x10) {
         char* ent;
 
-        B(slot, 2) = 3;
         ent = fcn_004eef70();
+        B(slot, 2) = 3;
         if (ent != 0) {
             D(slot, 0x54) = 0x59a;
             rnd = gm_RandomMod(8) & 0xffff;
@@ -138,7 +138,6 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
             B(slot, 0x217) = rnd < 6 ? 0xc2 : 0x3c;
             if ((float) W(slot, 0xa) > F(slot, 0x20)) {
                 float acc;
-                float decay;
 
                 acc = F(slot, 0x1c);
                 if ((float) W(slot, 0xa) - F(slot, 0x20) > 0.0f) {
@@ -163,16 +162,16 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         unsigned char* type_entry;
 
         type_entry = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[B(location, 0)].category;
-        if (*type_entry == 1) {
-            D(slot, 0x170) = (int) location;
-        } else {
+        if (*type_entry != 1) {
             if (*type_entry > 3 && *type_entry < 0x17 && *type_entry != 0xa && *type_entry != 0xf &&
                 *type_entry != 0x11) {
                 D(slot, 0x16c) = (int) location;
             }
+        } else {
+            D(slot, 0x170) = (int) location;
         }
     }
-    B(slot, 0xd) = B(slot, 0x166) != 0 ? 2 : 1;
+    B(slot, 0xd) = (B(slot, 0x166) != 0) + 1;
     if (type != 6 && type != 7 && type < 0xa) {
         B(slot, 0x1b0) = (char) gm_RandomMod(8);
     }
@@ -182,13 +181,13 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         B(slot, 9) = (char) arg8;
     }
     if (type < 4 || type == 0xb) {
-        if (arg6 != 0) {
-            t = gm_IsInRange(arg6);
+        if (arg7 != 0) {
+            t = gm_EntityClassCheck(arg7);
             if (t != 2) {
                 B(slot, 9) = (char) t;
             }
-        } else if (arg7 != 0) {
-            t = gm_EntityClassCheck(arg7);
+        } else if (arg6 != 0) {
+            t = gm_IsInRange(arg6);
             if (t != 2) {
                 B(slot, 9) = (char) t;
             }
@@ -251,8 +250,8 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
             B((char*) 0x869480 + W(slot, 0) + n * 0x300, 0) = (char) (gm_RandomMod(0x40) - 0x20);
             B((char*) 0x90e0a0 + W(slot, 0) + n * 0x300, 0) = 0;
         }
-        B(slot, 0x58) = 1;
         B(slot, 0xc) = (char) gm_RandomMod(2);
+        F(slot, 0x1d0) = (float) gm_RandomFloat01() * 0.5f + 0.25f;
         if (arg7 != 0 && arg6 == 0) {
             for (n = 0; n < 5; n++) {
                 B(slot, 0x80 + n) = (char) gm_RandomStatModifier(
@@ -269,7 +268,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         }
         memset(slot + 0x5c, 0xff, 0x20);
         D(slot, 0x64) = father_id;
-        F(slot, 0x1d0) = (float) gm_RandomFloat01() * 0.5f + 0.25f;
+        B(slot, 0x58) = 1;
         if (father != 0) {
             B(slot, 0x58) = (char) (B(father, 0x58) + 1);
             for (n = 3; n < 8; n++) {
@@ -345,11 +344,14 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         }
         dst = slot + 0x88;
         for (n = 0; n < 0xe; n++) {
-            F(dst, 0) = (float) (1.0 * F(father, 0x88 + n * 0xc) +
-                                 (gm_RandomFloat01() - 1.0) * F(mother, 0x88 + n * 0xc));
-            dst += 0xc;
-            F(dst, 4) = (float) ((double) F(dst, 0) * 0.001);
+            double r;
+
+            r = gm_RandomFloat01();
+            F(dst, 0) = (float) ((1.0 - r) * F(father, 0x88 + n * 0xc) +
+                                 r * F(mother, 0x88 + n * 0xc));
             F(dst, 8) = (float) ((double) (gm_RandomMod(0xa) & 0xffff) + 900.0);
+            F(dst, 4) = (float) ((double) F(dst, 0) * 0.001);
+            dst += 0xc;
         }
         F(slot, 0x124) = (float) ((gm_RandomFloat01() + 2.0) * 8.0);
         F(slot, 0x128) = (float) ((double) F(slot, 0x124) * 0.001);
@@ -408,18 +410,18 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         }
         D(slot, 0x7c) = 0;
         if (B(father, 2) == 6 || B(father, 2) == 7 || B(father, 2) == 5) {
-            B(slot, 0x58) = (char) (B(father, 0x58) + 1);
             W(slot, 0x50) = W(father, 0x50);
+            B(slot, 0x58) = (char) (B(father, 0x58) + 1);
             D(slot, 0x54) = D(father, 0x54);
         } else {
             W(slot, 0x50) = W(mother, 0x50);
             B(slot, 0x58) = (char) (B(mother, 0x58) + 1);
             D(slot, 0x54) = D(mother, 0x54);
         }
-        D(slot, 0x20) = 0x41400000;
+        D(slot, 0x1c) = 0x447a0000;
         F(slot, 0x14) = (float) ((gm_RandomQuadratic() * 7.0f + 30.0f) * 0.6f +
                                  (F(father, 0x14) + F(mother, 0x14)) * 0.2);
-        D(slot, 0x1c) = 0x447a0000;
+        D(slot, 0x20) = 0x41400000;
         D(slot, 0x18) = D(slot, 0x1c);
         F(slot, 0x10) = (float) ((double) (F(slot, 0x1c) * 0.33f) +
                                  (double) (unsigned short) gm_RandomMod((int) (F(slot, 0x1c) * 0.2)) -
@@ -438,10 +440,10 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
             (char) (0x7f - gm_RandomMod(0x20));
         B((char*) 0x869480 + ((W(father, 0) * 3) << 8) + W(slot, 0), 0) =
             (char) (0x7f - gm_RandomMod(0x20));
-        if (B(father, 2) == 6 || B(father, 2) == 7 || B(father, 2) == 5) {
-            strcpy(slot + 0x40, father + 0x40);
-        } else {
+        if (B(father, 2) != 6 && B(father, 2) != 7 && B(father, 2) != 5) {
             strcpy(slot + 0x40, mother + 0x40);
+        } else {
+            strcpy(slot + 0x40, father + 0x40);
         }
     }
     if (B(slot, 9) == 0) {
@@ -468,7 +470,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
     fcn_004fdfe0(slot);
     memset(slot + 0x1b4, 0, 0x10);
     ahm_ResetEntityState(slot);
-    if (B(slot, 2) == 3 || B(slot, 2) == 2 || B(slot, 2) == 4 || B(slot, 2) == 0x13) {
+    if (B(slot, 2) == 3 || B(slot, 2) == 4 || B(slot, 2) == 2 || B(slot, 2) == 0x13) {
         rnd = gm_RandomMod(3) & 0xffff;
         B(slot, 0x82 + rnd) = (char) (B(slot, 0x82 + rnd) + 0x2a);
     }

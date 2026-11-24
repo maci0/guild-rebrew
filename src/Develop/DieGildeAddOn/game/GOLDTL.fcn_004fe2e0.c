@@ -16,6 +16,7 @@ void __cdecl fcn_004fdfe0(char*);
 int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 {
 	int savedContext;
+	int transformed;
 	float def[4];
 	float opt[4];
 	int* q;
@@ -24,6 +25,7 @@ int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 	char* v6;
 
 	savedContext = d3_CurrentContextIndex;
+	transformed = 0;
 	def[0] = 0.0f;
 	def[1] = 0.0f;
 	def[2] = 0.0f;
@@ -43,7 +45,7 @@ int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 	if (a5 != 0) {
 		v5 = fcn_00445600(a4, 0x100, 0, a5);
 		if (v5 != 0) {
-			d3_TransformPoint((char*) v5, (char*) v5 + 0x4c, (int*) opt);
+			transformed = 1;
 			goto have;
 		}
 	}
@@ -54,6 +56,9 @@ int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 	*(int*) &opt[1] = p[1];
 	*(int*) &opt[2] = p[2];
 have:
+	if (transformed != 0) {
+		d3_TransformPoint((char*) v5, (char*) v5 + 0x4c, (int*) opt);
+	}
 	v5 = fcn_004fda30(*(unsigned short*) a0);
 	if (v5 != 0) {
 		v6 = (char*) (v5 + 4);

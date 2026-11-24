@@ -8,8 +8,8 @@ int __cdecl fcn_004a82b0(void)
 {
 	int a[3];
 	int b[3];
-	int res[3] = { 0, 0, 0 };
-	int flag[3] = { 0, 0, 0 };
+	int res[3] = { 0 };
+	int flag[3] = { 0 };
 	int c[3];
 	int d[3];
 	char* tbl;

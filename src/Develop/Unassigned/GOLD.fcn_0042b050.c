@@ -1,5 +1,6 @@
 #include <string.h>
 
+extern char* g_6b7e94;
 void* __cdecl m_alloc(int size, const char* tag);
 
 /* ADDRESS: GOLD 0x0042b050 */
@@ -10,10 +11,10 @@ int __cdecl evt_InitScriptEngine(void)
 	*(void**) 0x6332c0 = m_alloc(0x20, "evt:commandLine");
 	*(void**) 0x6332c4 = m_alloc(0x400, "evt:console");
 	*(void**) 0x14607b0 = m_alloc(0x1080, "evt:errorline");
-	*(void**) 0x6332b4 = m_alloc(0x64c00, "evt:script");
-	memset(*(void**) 0x6332b4, 0, 0x64c00);
+	g_6b7e94 = (char*) m_alloc(0x64c00, "evt:script");
+	memset(g_6b7e94, 0, 0x64c00);
 	for (offset = 0; offset < 0x64c00; offset += 0xc98) {
-		*(unsigned int*) ((char*) *(void**) 0x6332b4 + offset + 0x100) = 0xffffffff;
+		*(unsigned int*) (g_6b7e94 + offset + 0x100) = 0xffffffff;
 	}
 	**(unsigned int**) 0x6332bc = 0;
 	strcpy((char*) 0x1460705, "==");

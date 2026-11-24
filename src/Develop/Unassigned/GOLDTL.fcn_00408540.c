@@ -45,7 +45,6 @@ int __cdecl ch_ReplanBlockedPath(int a0,int a1,int *a2)
   int v28;
   unsigned int *v29;
   unsigned int *v3;
-  int v30; 
   float v31;
   float v32; 
   float v33; 
@@ -105,11 +104,8 @@ int __cdecl ch_ReplanBlockedPath(int a0,int a1,int *a2)
       v8 = v11[2];
       if (!v8) break;
       if (v8 & 2) { 
-        if (*v11 == v15) {
-          v30 = (int *)v11[1] == v14;
-label_408759:
-          if (v30) goto label_408905;
-        }
+        if (*v11 == v15 && (int *)v11[1] == v14)
+          goto label_408905;
       }
       else {
         if (v8 & 1) {
@@ -132,10 +128,8 @@ label_4088fe:
           v8 = *v11;
           if ((v8 != v15) || ((int *)v11[1] != v14)) {
 label_40874a:
-            if (v8 == v17) {
-              v30 = v11[1] == v16;
-              goto label_408759;
-            }
+            if (v8 == v17 && v11[1] == v16)
+              goto label_408905;
           }
           else {
             if (((!v6) || (*(char *)(v6 + 9) != '-')) || (*(int *)(v6 + 0x154) != -1)) goto label_4088fe;
@@ -223,21 +217,20 @@ label_40892d:
     v28 = *(int *)(a2[v26] + 0x128);
     if (((v28) && (*(char *)(v28 + 9) == '-')) && ((*(int *)(v28 + 0xf4) && (*(int *)(v28 + 0x154) == -1)))) {
       v27 = v36;
-      if (4 <= v36)
+      if (v27 > 3)
         v27 = 3;
       if (*(int *)(a2[v26] + 0x124)) 
-        v6 = *(int *)(v28 + 0xf8) + -2;
+        v6 = *(int *)(v28 + 0xf8) - 2;
       else {
         v6 = *(int *)(v28 + 0xf8);
       }
-      if (v6 <= 0)
+      if (v6 < 1)
         v6 = 1;
       v10 = v6 + 2;
       for (; (v6 < v10 && (v6 < *(int *)(v28 + 0xf0))); v6 = v6 + 1) {
         v23 = (int *)(unsigned int)*(unsigned char *)(*(int *)(v28 + 0xf4) + v6 * 2);
         v22 = (unsigned int)*(unsigned char *)(*(int *)(v28 + 0xf4) + 1 + v6 * 2);
-        v34 = (v6 != *(int *)(v28 + 0xf0) + -1) ? 1 : 0xd; 
-        fcn_00405a50(v23,v22,v37,v34,v27);
+        fcn_00405a50(v23,v22,v37,(v6 == *(int *)(v28 + 0xf0) - 1) ? 0xd : 1,v27);
       }
     }
     v26 += 1;
@@ -314,11 +307,7 @@ label_40892d:
       v22 = v26;
       (*(int *)0x14d0c28) = 0x14cfc20;
       (*(int *)0x14d0c24) = 0x200;
-      if (*(int *)(*(int *)(v35 + 0x24) + (int)(*(int *)(v35 + 0x20) * v15 + (int)v24) * 0x1c) != 0xd) { 
-        v8 = v15;
-        v14 = v24;
-      }
-      else {
+      if (*(int *)(*(int *)(v35 + 0x24) + (int)(*(int *)(v35 + 0x20) * v15 + (int)v24) * 0x1c) == 0xd) { 
         if ((*(int *)(a0 + 0x88) == 0x10432c0) || (v27 = 2, g_6b8300))
           v27 = 5;
         v4 = ch_FindWalkableCell(v35,*(int *)(a0 + 0x34) + 0x4c,v28 + 0x144,v24,v15,&v14,&v26,v36 * v27,*(unsigned int *)(v28 + 0x160) | 1);
@@ -331,6 +320,10 @@ label_40892d:
           v8 = v15;
           v14 = v24;
         }
+      }
+      else {
+        v8 = v15;
+        v14 = v24;
       }
       v5 = fcn_00421350(0x14d0c20,v13,v14,v8,v23,v22,*(unsigned char *)(a0 + 0x240));
       v27 = (*(int *)0x14d0c20);

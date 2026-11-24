@@ -11,6 +11,7 @@
 
 extern float g_6628a0;
 extern float g_6628a8;
+extern double g_662a08;
 
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNearestBuildingByKind(unsigned char*, int);
@@ -61,8 +62,8 @@ void __cdecl fcn_0056ce70(char* obj)
 	} else {
 		d = g_6628a0;
 	}
-	if (d > 1.5) {
-		d = 1.5;
+	if (d > g_662a08) {
+		d = g_662a08;
 	}
 	d *= *(int*) (obj + 0xb0);
 	*(int*) (obj + 0x84) = -1;

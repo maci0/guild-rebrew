@@ -544,7 +544,8 @@ void __cdecl fcn_00467920(int a0, int a1)
 	/* 0x4688d7: gauge ends */
 	f.w8.f = (float) f.v24;
 	if (f.w8.f - f.v18 > 0.0f && !(f.v20 & 8)) {
-		g_102d024 = (int) (f.w8.f / (float) GLYPH_H(h1) + g_6628a0);
+		f.v10 = GLYPH_H(h1);
+		g_102d024 = (int) (f.w8.f / (float) f.v10 + g_6628a0);
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
 			y = (*(D2_CONTROL_TL*) e).y + GLYPH_H(h0)
 			    + GLYPH_H(h1) * (f.w0.idx - 1);
@@ -556,11 +557,13 @@ void __cdecl fcn_00467920(int a0, int a1)
 	if ((f.v20 & 0x10) && f.wc.f > 0.0f) {
 		fcn_0047a040((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + GLYPH_H(h0),
 			     (*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width, (*(D2_CONTROL_TL*) e).y + (*(D2_CONTROL_TL*) e).height - GLYPH_H(h0));
-		g_102d024 = (int) (f.wc.f / (float) GLYPH_H(h1) + g_6628a0);
+		f.v10 = GLYPH_H(h1);
+		g_102d024 = (int) (f.wc.f / (float) f.v10 + g_6628a0);
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
-			y = (int) ((float) (*(D2_CONTROL_TL*) e).height - f.wc.f - (float) GLYPH_H(h0)
-				   + (float) ((*(D2_CONTROL_TL*) e).y
-					      + GLYPH_H(h1) * f.w0.idx));
+			f.v10 = GLYPH_H(h0);
+			f.w8.i = (*(D2_CONTROL_TL*) e).y + GLYPH_H(h1) * f.w0.idx;
+			y = (int) ((float) (*(D2_CONTROL_TL*) e).height - f.wc.f - (float) f.v10
+				   + (float) f.w8.i);
 			x = (*(D2_CONTROL_TL*) e).x + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
 			fcn_0047cba0(x, y, a1, (char*) f.v14, 4);
 		}
@@ -568,13 +571,15 @@ void __cdecl fcn_00467920(int a0, int a1)
 	/* 0x468a74 */
 	if (f.v18 > 0.0f) {
 		f.v10 = (*(D2_CONTROL_TL*) e).y + (*(D2_CONTROL_TL*) e).height - GLYPH_H(h0);
-		fcn_0047a040((*(D2_CONTROL_TL*) e).x, (int) ((float) GLYPH_H(h0) - f.v18),
+		fcn_0047a040((*(D2_CONTROL_TL*) e).x, (int) ((float) f.v10 - f.v18),
 			     (*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width, f.v10);
-		g_102d024 = (int) (f.v18 / (float) GLYPH_H(h1) + g_6628a0);
+		f.v10 = GLYPH_H(h1);
+		g_102d024 = (int) (f.v18 / (float) f.v10 + g_6628a0);
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
-			y = (int) ((float) (*(D2_CONTROL_TL*) e).height - f.v18 - (float) GLYPH_H(h0)
-				   + (float) ((*(D2_CONTROL_TL*) e).y
-					      + GLYPH_H(h1) * f.w0.idx));
+			f.v10 = GLYPH_H(h0);
+			f.w8.i = (*(D2_CONTROL_TL*) e).y + GLYPH_H(h1) * f.w0.idx;
+			y = (int) ((float) (*(D2_CONTROL_TL*) e).height - f.v18 - (float) f.v10
+				   + (float) f.w8.i);
 			x = (*(D2_CONTROL_TL*) e).x + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
 			fcn_0047cba0(x, y, a1, (char*) f.v14, 1);
 		}

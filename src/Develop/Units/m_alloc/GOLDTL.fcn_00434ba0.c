@@ -21,7 +21,6 @@ void __cdecl fcn_00434ba0(char* anim, char* mesh)
 	float pmin[4];
 	float pmax[4];
 	float sum[4];
-	float v;
 	int i;
 	int j;
 	int k;
@@ -43,24 +42,25 @@ void __cdecl fcn_00434ba0(char* anim, char* mesh)
 		}
 		else {
 			for (j = 0; j < *(int*) (anim + 0x140); j++) {
-				v = (float) *(unsigned char*) (*(int*) (frame + 0xb4) + j * 3)
+				sum[0] = (float) *(unsigned char*) (*(int*) (frame + 0xb4) + j * 3)
 					* *(float*) (frame + 0x14) + *(float*) (frame + 0x08);
-				points[j * 4 + 0] = v + *(float*) (*(int*) (mesh + 0x27c) + j * 12);
-				v = (float) *(unsigned char*) (*(int*) (frame + 0xb4) + j * 3 + 1)
+				sum[1] = (float) *(unsigned char*) (*(int*) (frame + 0xb4) + j * 3 + 1)
 					* *(float*) (frame + 0x18) + *(float*) (frame + 0x0c);
-				points[j * 4 + 1] = v + *(float*) (*(int*) (mesh + 0x27c) + j * 12 + 4);
-				v = (float) *(unsigned char*) (*(int*) (frame + 0xb4) + j * 3 + 2)
+				sum[2] = (float) *(unsigned char*) (*(int*) (frame + 0xb4) + j * 3 + 2)
 					* *(float*) (frame + 0x1c) + *(float*) (frame + 0x10);
-				points[j * 4 + 2] = v + *(float*) (*(int*) (mesh + 0x27c) + j * 12 + 8);
+				points[j * 4 + 0] = sum[0] + *(float*) (*(int*) (mesh + 0x27c) + j * 12);
+				points[j * 4 + 1] = sum[1] + *(float*) (*(int*) (mesh + 0x27c) + j * 12 + 4);
+				points[j * 4 + 2] = sum[2] + *(float*) (*(int*) (mesh + 0x27c) + j * 12 + 8);
 			}
 		}
 		*(float*) (frame + 0x38) = *(float*) (mesh + 0x1d4)
 			- d3_GetMaxVertexDistance(points, *(int*) (mesh + 0x44));
 		for (j = 0; j < *(int*) (mesh + 0x4c); j++) {
-			unsigned short* tri = (unsigned short*) (*(int*) (mesh + 0x280) + j * 6);
-
-			d3_CalculateTriangleNormal(points + tri[0] * 4, points + tri[1] * 4,
-				points + tri[2] * 4, normals + j * 4);
+			d3_CalculateTriangleNormal(
+				points + *(unsigned short*) (*(int*) (mesh + 0x280) + j * 6) * 4,
+				points + *(unsigned short*) (*(int*) (mesh + 0x280) + j * 6 + 2) * 4,
+				points + *(unsigned short*) (*(int*) (mesh + 0x280) + j * 6 + 4) * 4,
+				normals + j * 4);
 		}
 		pmin[0] = 1e+10f;
 		pmin[1] = 1e+10f;
@@ -100,9 +100,9 @@ void __cdecl fcn_00434ba0(char* anim, char* mesh)
 				}
 			}
 			d3_NormalizeVector(sum);
-			sum[0] = sum[0] + g_6628a0;
-			sum[1] = sum[1] + g_6628a0;
-			sum[2] = sum[2] + g_6628a0;
+			sum[0] += g_6628a0;
+			sum[1] += g_6628a0;
+			sum[2] += g_6628a0;
 			*(char*) (*(int*) (frame + 0xb8) + j * 3 + 0) = (char) (sum[0] * g_662c70);
 			*(char*) (*(int*) (frame + 0xb8) + j * 3 + 1) = (char) (sum[1] * g_662c70);
 			*(char*) (*(int*) (frame + 0xb8) + j * 3 + 2) = (char) (sum[2] * g_662c70);
@@ -128,42 +128,42 @@ void __cdecl fcn_00434ba0(char* anim, char* mesh)
 	for (i = 0; i < *(int*) (anim + 0x148); i++) {
 		if (i > 0) {
 			bbox[i * 8 + 0] =
-			    bbox[i * 8 + 0] < *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x84) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x84) > bbox[i * 8 + 0] ?
 			    bbox[i * 8 + 0] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x84);
 			bbox[i * 8 + 1] =
-			    bbox[i * 8 + 1] < *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x80) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x80) > bbox[i * 8 + 1] ?
 			    bbox[i * 8 + 1] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x80);
 			bbox[i * 8 + 2] =
-			    bbox[i * 8 + 2] < *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x7c) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x7c) > bbox[i * 8 + 2] ?
 			    bbox[i * 8 + 2] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x7c);
 			bbox[i * 8 + 4] =
-			    bbox[i * 8 + 4] > *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x78) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x78) < bbox[i * 8 + 4] ?
 			    bbox[i * 8 + 4] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x78);
 			bbox[i * 8 + 5] =
-			    bbox[i * 8 + 5] > *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x74) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x74) < bbox[i * 8 + 5] ?
 			    bbox[i * 8 + 5] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x74);
 			bbox[i * 8 + 6] =
-			    bbox[i * 8 + 6] > *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x70) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x70) < bbox[i * 8 + 6] ?
 			    bbox[i * 8 + 6] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 - 0x70);
 		}
 		if (i < *(int*) (anim + 0x148) - 1) {
 			bbox[i * 8 + 0] =
-			    bbox[i * 8 + 0] < *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0xfc) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0xfc) > bbox[i * 8 + 0] ?
 			    bbox[i * 8 + 0] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0xfc);
 			bbox[i * 8 + 1] =
-			    bbox[i * 8 + 1] < *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x100) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x100) > bbox[i * 8 + 1] ?
 			    bbox[i * 8 + 1] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x100);
 			bbox[i * 8 + 2] =
-			    bbox[i * 8 + 2] < *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x104) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x104) > bbox[i * 8 + 2] ?
 			    bbox[i * 8 + 2] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x104);
 			bbox[i * 8 + 4] =
-			    bbox[i * 8 + 4] > *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x108) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x108) < bbox[i * 8 + 4] ?
 			    bbox[i * 8 + 4] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x108);
 			bbox[i * 8 + 5] =
-			    bbox[i * 8 + 5] > *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x10c) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x10c) < bbox[i * 8 + 5] ?
 			    bbox[i * 8 + 5] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x10c);
 			bbox[i * 8 + 6] =
-			    bbox[i * 8 + 6] > *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x110) ?
+			    *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x110) < bbox[i * 8 + 6] ?
 			    bbox[i * 8 + 6] : *(float*) (*(char**) (anim + 0x15c) + i * 0xc0 + 0x110);
 		}
 	}

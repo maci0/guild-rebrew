@@ -1,3 +1,4 @@
+#include <string.h>
 #include "client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
@@ -37,7 +38,7 @@ int __cdecl fcn_005c6270(char*, int);
 /* queued scene action handed to the packet builder */
 /* SIZE 0xf8 */
 typedef struct {
-	char pad04[4];
+	int pad00;
 	unsigned char kind;	/* +0x04 */
 	char pad05[3];
 	int who;		/* +0x08 */
@@ -213,8 +214,9 @@ void __cdecl fcn_00568ed0(char* a1)
 			fcn_004c5360();
 			fcn_004c6b20(*(int*) (obj + 4), 5, 0);
 			{
-				Msg_568ed0 msg = {0};
+				Msg_568ed0 msg;
 
+				memset(&msg, 0, sizeof(msg));
 				msg.kind = 0x3d;
 				msg.who = *(int*) (hs + 4);
 				msg.target = *(int*) (ent + 1);

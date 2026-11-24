@@ -43,15 +43,14 @@ int* __cdecl d3_CreateRain(int count)
 		info[22] = *(int*) (d3_ActiveCamera + 0x54);
 	}
 	capacity = count;
-	if (capacity <= 0) {
+	if (capacity < 1) {
 		capacity = 1;
 	}
-	drop = (float*) m_alloc(capacity * 0x28, "d3t:RainDropList");
-	info[4] = (int) drop;
-	if (drop == 0) {
+	if ((info[4] = (int) m_alloc(capacity * 0x28, "d3t:RainDropList")) == 0) {
 		m_FreeTracked(info);
 		return 0;
 	}
+	drop = (float*) info[4];
 	while (i < *info) {
 		value = rand() * 3.0518509447574615e-5f - 0.5f;
 		drop[0] = value + value;

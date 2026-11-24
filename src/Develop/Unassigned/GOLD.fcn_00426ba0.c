@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "Develop/Units/m_alloc/m_alloc.h"
 extern int g_0063319c;
+extern int* g_6b7d78;
 char* __cdecl fcn_00422760(int, int*);
 void __cdecl fcn_004237f0(void*, int);
 #define I32(p) (*(int*)(p))
@@ -22,7 +23,7 @@ int __cdecl fcn_00426ba0(char* target)
     if (!I32(0x633194) || !target) {
         rc = -1;
     } else {
-        bank = *(char**)0x633198;
+        bank = (char*)g_6b7d78;
         while (bank) {
             if (bank == target)
                 break;
@@ -33,7 +34,7 @@ int __cdecl fcn_00426ba0(char* target)
             if (previous)
                 *(char**)(previous + 0x13c) = *(char**)(bank + 0x13c);
             else
-                *(char**)0x633198 = *(char**)(bank + 0x13c);
+                g_6b7d78 = *(int**)(bank + 0x13c);
             name = target + 0x32;
             sprintf((char*)0x1460920, "Unloading Samplebank %s ... MemUsed before unloading %d bytes.", name, I32(0x633194));
             for (i = 0; i < I32(bank + 0x134); i++) {

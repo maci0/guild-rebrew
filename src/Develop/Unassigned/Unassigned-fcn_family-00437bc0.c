@@ -3,7 +3,6 @@
 double __cdecl atan2(double, double);
 double __cdecl sin(double);
 double __cdecl cos(double);
-#pragma intrinsic(atan2, sin, cos)
 
 extern float g_1052bbc;
 extern float g_1052bb4;

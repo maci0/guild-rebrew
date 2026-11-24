@@ -10,27 +10,28 @@ void __cdecl m_FreeTracked(void* p);
 int __cdecl fcn_00424040(char* name)
 {
 	char* e;
-	char* prev = 0;
 	int ret = 0;
+	char* prev = 0;
 
 	if (name != 0) {
 		int r;
 
 		r = fcn_00424130(name, 0);
-		if (r == 0) {
-			for (e = *(char**) (sbs_BankManager + 0x3c); e != 0; e = *(char**) (e + 0x3c)) {
-				if (strcmp(e, name) == 0) {
-					if (prev != 0) {
-						*(char**) (prev + 0x3c) = *(char**) (e + 0x3c);
-					} else {
-						*(char**) (sbs_BankManager + 0x3c) = *(char**) (e + 0x3c);
-					}
-					m_FreeTracked(e);
-					g_6b7d6c++;
-					return r;
+		if (r != 0) {
+			return r;
+		}
+		for (e = *(char**) (sbs_BankManager + 0x3c); e != 0; e = *(char**) (e + 0x3c)) {
+			if (strcmp(e, name) == 0) {
+				if (prev != 0) {
+					*(char**) (prev + 0x3c) = *(char**) (e + 0x3c);
+				} else {
+					*(char**) (sbs_BankManager + 0x3c) = *(char**) (e + 0x3c);
 				}
-				prev = e;
+				m_FreeTracked(e);
+				g_6b7d6c++;
+				return r;
 			}
+			prev = e;
 		}
 		return r;
 	}

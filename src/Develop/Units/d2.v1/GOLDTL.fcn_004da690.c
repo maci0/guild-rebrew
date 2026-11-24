@@ -73,16 +73,11 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     int s3C;
     int s40;
     int s44;
-    int s48;
-    int s4C;
-    int s50;
+    int v1[3];
     int s58;
     int s5C;
     int s60;
-    int s64;
-    int s68;
-    int s6C;
-    int s70;
+    int v2[4];
     int s78;
     int s7C;
     int acc;
@@ -92,9 +87,6 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     int s8C;
     int s90;
     int s94;
-    int s9C;
-    int sA0;
-    int sA4;
     int sC0;
     int sC4;
     int sC8;
@@ -134,17 +126,16 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     struct {
         int sel[4];
         int s84[6];
-        /* native 0x9c: three variant counters, 0xc bytes */
-        int s54[3];
+        /* native 0x9c: second-pass packet struct (12 bytes) */
+        struct {
+            int s9C;
+            unsigned char sA0;
+            int sA4;
+        } blkD;
         int s98[4];
     } blkA;
     struct {
         int sD0[6];
-        /* native leaves 0xe8..0x103 untouched; the filler is trimmed so the
-           packet's four-byte hole still fits native's 0x900 frame. */
-        int pad0;
-        int pad1;
-        int pad3;
         int sF4[8];
     } blkB;
     struct {
@@ -155,7 +146,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         int sE4;      /* native 0x100 */
         int sE8;      /* native 0x104 */
     } blkC;
-    int n, k, i;
+    int n, k, i, numSel, s4C, s50;
 
     memcpy(a0c, a0, 0x114);
     s2C = 0;
@@ -225,8 +216,8 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         }
     }
 
+    s4C = s0C;
     if (s44 > 0) {
-        s4C = s0C;
         s50 = 0x9b0e24 + s0C * 0x35c;
         for (n = 0; n < s44; n++) {
             int *pp = (int *)0x9b0e30;
@@ -270,7 +261,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     s1C = 0;
     if (s28 > 0) {
         for (n = 0; n < s28; n++) {
-            if (*((unsigned char *)&mid[0x38] + n * 0x18) == 2)
+            if (*((unsigned char *)&mid[0x48] + n * 0x18) == 2)
                 s1C += 1;
         }
     }
@@ -282,19 +273,19 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         for (i = 0; i < s44; i++) {
             s04 = fcn_004fda30((int)*(unsigned short *)blkA.s84[i]);
             if (s04 != 0)
-                fcn_0064d41a((char *)&mid[0x298], (char *)0x68c1c8,
+                fcn_0064d41a((char *)&mid[0x2a8], (char *)0x68c1c8,
                              blkB.sD0[i], (char *)(s04 + 4));
             else
-                fcn_0064d41a((char *)&mid[0x298], (char *)0x68c1b0,
+                fcn_0064d41a((char *)&mid[0x2a8], (char *)0x68c1b0,
                              blkB.sD0[i]);
-            fcn_004e44b0((char *)0x68c184, (char *)&mid[0x298]);
+            fcn_004e44b0((char *)0x68c184, (char *)&mid[0x2a8]);
         }
         for (i = 0; i < s44; i++) {
-            fcn_0064d41a((char *)&mid[0x298], "%i", blkB.sD0[i]);
-            fcn_004e44b0((char *)0x68c158, (char *)&mid[0x298]);
+            fcn_0064d41a((char *)&mid[0x2a8], "%i", blkB.sD0[i]);
+            fcn_004e44b0((char *)0x68c158, (char *)&mid[0x2a8]);
         }
-        fcn_0051af00((char *)&mid[0x298], (char *)0x68c140, flug[s30]);
-        fcn_004e44f0(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x298]));
+        fcn_0051af00((char *)&mid[0x2a8], (char *)0x68c140, flug[s30]);
+        fcn_004e44f0(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x2a8]));
         s3C = 1;
         fcn_005358e0(0x6b5c60);
     }
@@ -306,9 +297,9 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         do {
             if (s1C == 0)
                 break;
-            s48 = 0;
-            s4C = 0;
-            s50 = 0;
+            v1[0] = 0;
+            v1[1] = 0;
+            v1[2] = 0;
             if (fcn_004ea2b0(s20, (char *)(s00 - 4)) != 0) {
                 i = 0;
                 k = 0;
@@ -324,12 +315,12 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 s10 = gm_LookupEntityRecordById(*(int *)s00);
                 s18 = gm_LookupEntityRecordById(*(int *)(s00 + 0x10));
                 fcn_004727a0(s60, 1);
-                *(int *)((char *)&mid + 0x70) = s10;
-                *(int *)((char *)&mid + 0x8c) = 0;
-                *(int *)((char *)&mid + 0xa8) = 0;
-                fcn_005ca560((char *)&mid + 0x70);
+                *(int *)((char *)&mid + 0x38) = s10;
+                *(int *)((char *)&mid + 0x4c) = 0;
+                *(int *)((char *)&mid + 0x68) = 0;
+                fcn_005ca560((char *)&mid + 0x38);
                 fcn_005ca740(0x28, 0, *(int *)0x772514, 0x54,
-                             (int *)((char *)&mid + 0x78), 1);
+                             (int *)((char *)&mid + 0x38), 1);
                 fcn_004727a0(s60, 2);
                 fcn_004da510(*(int *)0x772514, 1, 0);
                 fcn_004e4b40(-8, s34, 0x68c0f0, s20 - 1, 0x32);
@@ -347,7 +338,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     s08 = (0x320 - *(short *)(g_772500 + 0x1ebd8) * k) / (k + 1);
                     i = 0;
                     n = 0;
-                    s7C = s08;
+                    acc = s08;
                     lane = (int *)((char *)&mid + 0x3a8);
                     while (n < s0C) {
                         if (((char *)blkA.s84[n])[0x166] != 0) {
@@ -361,6 +352,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             i += 1;
                         }
                         n += 1;
+                        lane = (int *)((char *)lane + 0x38);
                     }
                 }
                 fcn_004e4de0(0x9c4);
@@ -379,9 +371,9 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         s80 = 0x9b0eb4 + i * 0x35c;
                         if (*(int *)s80 < 3) {
                             s58 = gm_LookupEntityRecordById(*(int *)(s80 - 0x84));
-                            blkA.s54[*(int *)s80] += 1;
+                            v1[*(int *)s80] += 1;
                             fcn_004727a0(s14, 0);
-                            *(int *)(0x1015ea0 + *(int *)((char *)&mid + 0x3ac) * 0x30c + 0x3c) = 1;
+                            *(int *)(*(int *)0x1015ea0 + *(int *)((char *)&mid + 0x3ac + i * 0x38) * 0x2f4 + 0x3c) = 1;
                             io_AppendText((char *)0x6811b0);
                             io_AppendText((char *)0x12c7, *(unsigned short *)s58);
                             fcn_004e4de0(0x3e8);
@@ -419,22 +411,23 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                 break;
                             }
                             fcn_004e4de0(0xfa0);
-                            *(int *)(0x1015ea0 + *(int *)((char *)&mid + 0x3ac) * 0x30c + 0x3c) = 0;
+                            *(int *)(*(int *)0x1015ea0 + *(int *)((char *)&mid + 0x3ac + i * 0x38) * 0x2f4 + 0x3c) = 0;
                             fcn_004e4de0(0x3e8);
                         }
                         i += 1;
                     } while (i < s0C);
                 }
                 /* native 0x4db332..0x4db5c5: vote result text and packet pass */
-                if (s48 > s4C) {
+                if (v1[0] > v1[1]) {
                     fcn_004e4b40(-8, s60, 0x68c098, (int)cut_RandMod(3), 0x64);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
-                    io_AppendText((char *)0x12d6, (char *)s48, (char *)s4C,
+                    io_AppendText((char *)0x12d6, (char *)v1[0], (char *)v1[1],
                                   *(unsigned short *)s10);
                     fcn_004e4de0(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
                                           (unsigned int)g_774970 * 0x21c)) {
+                        int s70;
                         jc = 0x9b0e30;
                         n = s0C;
                         do {
@@ -452,11 +445,12 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         }
                     }
                 } else {
+                    int s70;
                     s70 = gm_LookupEntityRecordById(*(int *)s00);
                     fcn_004e4b40(-8, s60, 0x68c074, (int)cut_RandMod(3), 0x64);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
-                    io_AppendText((char *)0x12d7, (char *)s48, (char *)s4C,
+                    io_AppendText((char *)0x12d7, (char *)v1[0], (char *)v1[1],
                                   *(unsigned short *)s10, *(unsigned short *)s10);
                     fcn_004e4de0(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
@@ -498,56 +492,56 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         } while (s40 < s28);
     }
     /* native 0x4db5f5..0x4dc199: second packet pass */
-    s2C = 0;
+    s1C = 0;
     if (s28 > 0) {
         i = 0;
         while (i < s28) {
-            if (*(unsigned char *)((char *)&mid[0x40] + i * 0x18) == 3 &&
-                *(int *)((char *)&mid[0x3c] + i * 0x18) != 0)
-                s2C += 1;
+            if (*(unsigned char *)((char *)&mid[0x48] + i * 0x18) == 3 &&
+                *(int *)((char *)&mid[0x44] + i * 0x18) != 0)
+                s1C += 1;
             i += 1;
         }
     }
-    if (s2C != 0 && s3C == 0) {
+    if (s1C != 0 && s3C == 0) {
             fcn_004e4730(sitzung[s30]);
             if (s2C == 0)
                 s2C = msx_StartAmbientTrack((char *)0x68c1d0, 0x40);
             for (i = 0; i < s44; i++) {
                 s04 = fcn_004fda30((int)*(unsigned short *)blkA.s84[i]);
                 if (s04 != 0)
-                    fcn_0064d41a((char *)&mid[0x2a8], (char *)0x68c1c8,
+                    fcn_0064d41a((char *)&mid[0x1a8], (char *)0x68c1c8,
                                  blkB.sD0[i], (char *)(s04 + 4));
                 else
-                    fcn_0064d41a((char *)&mid[0x2a8], (char *)0x68c1b0, blkB.sD0[i]);
-                fcn_004e44b0((char *)0x68c184, (char *)&mid[0x2a8]);
+                    fcn_0064d41a((char *)&mid[0x1a8], (char *)0x68c1b0, blkB.sD0[i]);
+                fcn_004e44b0((char *)0x68c184, (char *)&mid[0x1a8]);
             }
             for (i = 0; i < s44; i++) {
-                fcn_0064d41a((char *)&mid[0x2a8], "%i", blkB.sD0[i]);
-                fcn_004e44b0((char *)0x68c158, (char *)&mid[0x2a8]);
+                fcn_0064d41a((char *)&mid[0x1a8], "%i", blkB.sD0[i]);
+                fcn_004e44b0((char *)0x68c158, (char *)&mid[0x1a8]);
             }
-            fcn_0051af00((char *)&mid[0x2a8], (char *)0x68c140, flug[s30]);
-            fcn_004e44f0(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x2a8]));
+            fcn_0051af00((char *)&mid[0x1a8], (char *)0x68c140, flug[s30]);
+            fcn_004e44f0(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x1a8]));
             fcn_005358e0(0x6b5c60);
             s3C = 1;
     }
     if (s28 > 0) {
         s40 = 0;
-        s00 = (int)(char *)&mid[0x44];
+        s00 = (int)(char *)&mid[0x40];
         while (s40 < s28) {
-            s64 = 0;
-            s68 = 0;
-            s6C = 0;
-            s70 = 0;
-            if (s2C != 0 && *(unsigned char *)(s00 + 8) == 3 &&
+            v2[0] = 0;
+            v2[1] = 0;
+            v2[2] = 0;
+            v2[3] = 0;
+            if (s1C != 0 && *(unsigned char *)(s00 + 8) == 3 &&
                 *(int *)(s00 + 4) != 0) {
-                s2C -= 1;
-                s9C = 2;
-                sA0 = *(unsigned char *)(s00 - 8);
-                sA4 = *(unsigned char *)s00;
+                s1C -= 1;
+                blkA.blkD.s9C = 2;
+                blkA.blkD.sA0 = *(unsigned char *)(s00 - 8);
+                blkA.blkD.sA4 = *(unsigned char *)s00;
                 i = 0;
                 rs20 = 0;
                 while (i < s44) {
-                    if (fcn_004e9180((void *)blkA.s84[i], sA4) != 0 &&
+                    if (fcn_004e9180((void *)blkA.s84[i], blkA.blkD.sA4) != 0 &&
                         ((char *)blkA.s84[i])[0x1b1] == 0)
                         rs20 += 1;
                     i += 1;
@@ -560,7 +554,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 {
                 int *lane;
                 int s80;
-                lane = (int *)((char *)&mid + 0x128);
+                lane = (int *)((char *)&mid + 0xc8);
                 i = 0;
                 s80 = 0x7f4ca0;
                 do {
@@ -584,9 +578,10 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     s80 += 0x21c;
                 } while (s80 < 0x85a0a0);
                 }
-                if (i != 0) {
-                    if (i < 4) {
-                        n = i;
+                numSel = i;
+                if (numSel != 0) {
+                    if (numSel < 4) {
+                        n = numSel;
                         while (n < 4) {
                             blkA.s98[n] = -1;
                             blkA.sel[n] = 0;
@@ -594,7 +589,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         }
                     }
                     fcn_004e4b40(-8, s38, 0x68c050, s20 - 1, 0x64);
-                    fcn_004e4b40(-8, s38, 0x68c044, i - 1, 0x1f4);
+                    fcn_004e4b40(-8, s38, 0x68c044, numSel - 1, 0x1f4);
                     fcn_00471af0(s14, 1);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
@@ -602,9 +597,10 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     io_AppendText((char *)0x12d9, s20 + 0x12a9, s20 + 0x12bb,
                                   *(unsigned char *)s00 + 0x253);
                     i = 0;
-                    while (i < rs20) {
+                    while (i < numSel) {
                         io_AppendText((char *)0x12db,
-                                      *(unsigned short *)(blkA.s84[i]), 0);
+                                      *(unsigned short *)(blkA.sel[i]),
+                                      *(unsigned short *)(blkA.sel[i]));
                         i += 1;
                     }
                     fcn_004e4de0(0x9c4);
@@ -612,35 +608,36 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     d2_ClearWindowChildren(*(int *)0x772514, 1);
                     if (rs20 > 0) {
                         s08 = (0x320 - *(short *)(g_772500 + 0x1ebd8) * rs20) / (rs20 + 1);
-                        i = 0;
-                        acc = s08;
-                        do {
-                            if (fcn_004e9180((void *)blkA.s84[i], sA4) != 0) {
-                                *(int *)((char *)&mid + 0x3a8) = blkA.s84[i];
-                                *(int *)((char *)&mid + 0x3bc) = 0;
-                                *(int *)((char *)&mid + 0x3d8) = 0;
-                                fcn_005ca560((char *)&mid + 0x3a8);
-                                fcn_005ca740(*(short *)(g_772500 + 0x1ebd8) * i + acc,
-                                             0, *(int *)0x772514, 0x54,
-                                             (int *)((char *)&mid + 0x3a8), 0);
-                                acc += s08;
-                            }
-                            i += 1;
-                        } while (i < s0C);
+                        if (s0C > 0) {
+                            i = 0;
+                            acc = s08;
+                            do {
+                                if (fcn_004e9180((void *)blkA.s84[i], blkA.blkD.sA4) != 0) {
+                                    *(int *)((char *)&mid + 0x3a8 + i * 0x38) = blkA.s84[i];
+                                    *(int *)((char *)&mid + 0x3bc + i * 0x38) = 0;
+                                    *(int *)((char *)&mid + 0x3d8 + i * 0x38) = 0;
+                                    fcn_005ca560((char *)&mid + 0x3a8 + i * 0x38);
+                                    fcn_005ca740(*(short *)(g_772500 + 0x1ebd8) * i + acc,
+                                                 0, *(int *)0x772514, 0x54,
+                                                 (int *)((char *)&mid + 0x3a8 + i * 0x38), 0);
+                                    acc += s08;
+                                }
+                                i += 1;
+                            } while (i < s0C);
+                        }
                     }
                     fcn_004e4de0(0x9c4);
                 }
-                if (rs20 == 1) {
+                if (numSel == 1) {
                     fcn_004e4b40(-8, s38, 0x68c038, 0, 0x64);
-                    *(int *)(0x1015ea0 + *(int *)((char *)&mid + 0x3a8) * 0x30c + 0x3c) = rs20;
-                    fcn_004727a0(s38, 0);
+                    *(int *)(*(int *)0x1015ea0 + *(int *)((char *)&mid + 0xcc) * 0x2f4 + 0x3c) = numSel;
+                    fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
-                    io_AppendText((char *)0x12e0, *(unsigned short *)s5C,
+                    io_AppendText((char *)0x12e0, *(unsigned short *)blkA.sel[0],
                                   *(unsigned char *)s00 + 0x253);
                     fcn_004e4de0(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)g_774970 * 0x21c)) {
-                        fcn_004e8240(*(unsigned char *)(s00 - 8), 0, 0, rs20, 0xff);
-                        s5C = 0;
+                        s5C = fcn_004e8240(*(unsigned char *)(s00 - 8), 0, (unsigned char *)blkA.sel[0], numSel, 0xff);
                         if (fcn_004c4450(s5C) == 0) {
                             do {
                                 fcn_00535960();
@@ -648,16 +645,17 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         }
                     }
                 } else if (rs20 == 0) {
+                    int s68, s70;
                     /* native 0x4dbbed: count == 0, single picked row */
-                    s68 = (int)cut_RandMod((unsigned int)rs20);
+                    s68 = (int)cut_RandMod((unsigned int)numSel);
                     fcn_004e4b40(-8, s38, 0x68c038, 1, 0x64);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
                     io_AppendText((char *)0x12e1);
                     fcn_004e4de0(0x3e8);
                     s58 = blkA.sel[s68];
-                    s70 = *(int *)((char *)&mid + 0x12c + s68 * 0x38);
-                    *(int *)(0x1015ea0 + s70 * 0x2f4 + 0x3c) = 1;
+                    s70 = *(int *)((char *)&mid + 0xcc + s68 * 0x38);
+                    *(int *)(*(int *)0x1015ea0 + s70 * 0x2f4 + 0x3c) = 1;
                     io_AppendText((char *)0x12e2, *(unsigned short *)s58);
                     fcn_004e4de0(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
@@ -672,43 +670,43 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 } else {
                     /* native 0x4dbce1: count > 1, scan the 0x9b0eb4 packets */
                     fcn_00471af0(s14, 0);
-                    fcn_004e51d0(a0, (void *)&blkC);
+                    fcn_004e51d0(a0, (void *)&blkA.blkD);
                     fcn_004e4de0(0x3e8);
                     fcn_00471af0(s14, 1);
                     if (s0C > 0) {
+                        int s4C, curId;
                         s4C = 0;
                         s5C = 0x9b0eb4;
-                        s60 = (int)((char *)&mid + 0x408);
-                        s64 = 0;
+                        s60 = (int)((char *)&mid + 0x3ac);
                         while (s4C < s0C) {
-                            s70 = *(int *)s5C;
-                            if (s70 != -1 && rs20 > 0) {
+                            curId = *(int *)s5C;
+                            if (curId != -1 && numSel > 0) {
                                 int *pq;
                                 jc = 0;
                                 do {
-                                    if (blkA.s98[jc] == s70) {
-                                        *(int *)(0x1015ea0 + *(int *)s60 * 0x2f4 + 0x3c) = 1;
+                                    if (blkA.s98[jc] == curId) {
+                                        *(int *)(*(int *)0x1015ea0 + *(int *)s60 * 0x2f4 + 0x3c) = 1;
                                         fcn_004727a0(s14, 0);
                                         io_AppendText((char *)0x6811b0);
                                         io_AppendText((char *)0x12de,
                                                       *(unsigned short *)blkA.s84[s4C]);
-                                        blkA.s54[jc] += 1;
+                                        v2[jc] += 1;
                                         fcn_004e4de0(0x3e8);
-                                        pq = (int *)((char *)&mid + 0x12c + jc * 0x38);
-                                        *(int *)(0x1015ea0 + *pq * 0x2f4 + 0x3c) = 1;
+                                        pq = (int *)((char *)&mid + 0xcc + jc * 0x38);
+                                        *(int *)(*(int *)0x1015ea0 + *pq * 0x2f4 + 0x3c) = 1;
                                         fcn_004727a0(s50, jc + 1);
                                         fcn_004da4d0(jc + 1,
-                                                     (void *)((char *)&mid + 0x408 + jc * 0x38));
+                                                     (void *)((char *)&mid + 0xc8 + jc * 0x38));
                                         fcn_004727a0(s14, 0);
                                         io_AppendText((char *)0x12df,
                                                       *(unsigned short *)blkA.sel[jc]);
                                         fcn_004e4de0(0xfa0);
-                                        *(int *)(0x1015ea0 + *(int *)s60 * 0x2f4 + 0x3c) = 0;
-                                        *(int *)(0x1015ea0 + *pq * 0x2f4 + 0x3c) = 0;
+                                        *(int *)(*(int *)0x1015ea0 + *(int *)s60 * 0x2f4 + 0x3c) = 0;
+                                        *(int *)(*(int *)0x1015ea0 + *pq * 0x2f4 + 0x3c) = 0;
                                         break;
                                     }
                                     jc += 1;
-                                } while (jc < rs20);
+                                } while (jc < numSel);
                             }
                             s4C += 1;
                             s5C += 0x35c;
@@ -722,8 +720,8 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     s6C = -1;
                     s70 = 0;
                     i = 0;
-                    while (i < rs20) {
-                        s78 = blkA.s54[i];
+                    while (i < numSel) {
+                        s78 = v2[i];
                         if (s78 > s68) {
                             s70 = 0;
                             s68 = s78;
@@ -735,8 +733,8 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     }
                     if (s70 == 0) {
                         if (s6C != -1) {
-                            *(int *)(0x1015ea0 +
-                                     *(int *)((char *)&mid + 0x12c + s6C * 0x38) * 0x2f4 + 0x3c) = 1;
+                            *(int *)(*(int *)0x1015ea0 +
+                                     *(int *)((char *)&mid + 0xcc + s6C * 0x38) * 0x2f4 + 0x3c) = 1;
                             fcn_004e4b40(-8, s38, 0x68c038, 3, 0x64);
                             fcn_004727a0(s14, 0);
                             io_AppendText((char *)0x6811b0);
@@ -756,17 +754,17 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             }
                         }
                     } else if (s6C != -1) {
-                        /* native 0x4dbfd5: tie, walk forward modulo rs20 */
-                        s78 = (int)cut_RandMod((unsigned int)rs20);
-                        i = rs20;
+                        /* native 0x4dbfd5: tie, walk forward modulo numSel */
+                        s78 = (int)cut_RandMod((unsigned int)numSel);
+                        i = numSel;
                         do {
-                            if (blkA.s54[s78] == s68) {
+                            if (v2[s78] == s68) {
                                 s6C = s78;
                                 break;
                             }
                             i -= 1;
                             s78 += 1;
-                            s78 %= rs20;
+                            s78 %= numSel;
                         } while (i != 0);
                         {
                             fcn_004e4b40(-8, s38, 0x68c038, 2, 0x64);
@@ -774,8 +772,8 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             io_AppendText((char *)0x6811b0);
                             io_AppendText((char *)0x12e3);
                             fcn_004e4de0(0x3e8);
-                            *(int *)(0x1015ea0 +
-                                     *(int *)((char *)&mid + 0x12c + s6C * 0x38) * 0x2f4 + 0x3c) = 1;
+                            *(int *)(*(int *)0x1015ea0 +
+                                     *(int *)((char *)&mid + 0xcc + s6C * 0x38) * 0x2f4 + 0x3c) = 1;
                             io_AppendText((char *)0x12e4,
                                           *(unsigned short *)blkA.sel[s6C]);
                             fcn_004e4de0(0xfa0);

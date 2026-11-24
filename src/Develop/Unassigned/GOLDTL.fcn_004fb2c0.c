@@ -1,5 +1,21 @@
 #include <string.h>
-extern float g_773d4c, g_773d50, g_773d54, g_99ec14;
+#include "client_types.h"
+
+#pragma pack(push, 2)
+typedef struct
+{
+	int a;
+	unsigned short b;
+	short b2;
+	int c;
+	short d;
+} Blob14;
+#pragma pack(pop)
+
+extern Blob14 g_99f590;
+extern pos14_7f4c00 gm_GameTime;
+extern char g_99f5e0[];
+extern float g_773d4c, g_773d50, g_773d54, g_99ec14, g_6628cc;
 
 #pragma intrinsic(memcpy)
 
@@ -13,19 +29,17 @@ int __cdecl fcn_004fb2c0(void)
 	double d;
 
 	v = fcn_004fc460((char*) buf);
-	memcpy((void*) 0x99f5e0, buf, 40);
-	if (g_773d4c == *(float*) 0x6628a8) {
-		d = ((double) v + *(double*) 0x6629c8) * g_773d54;
+	if (g_773d4c == 0.0f) {
+		memcpy(g_99f5e0, buf, 40);
+		d = ((double) v + 1.0) * g_773d54;
 		g_773d50 = (float) d;
-		g_773d4c = (float) (d * *(double*) 0x6640f8);
+		g_773d4c = (float) (d * 0.95);
 	} else {
-		d = ((double) v + *(double*) 0x6629c8) * g_773d54;
-		g_773d50 = (float) ((d - g_773d50) * *(float*) 0x6628cc + g_773d50);
+		memcpy(g_99f5e0, buf, 40);
+		d = ((double) v + 1.0) * g_773d54;
+		g_773d50 = (float) ((d - g_773d50) * g_6628cc + g_773d50);
 	}
-	g_99ec14 = (float) ((g_773d50 - g_773d4c) * *(double*) 0x6653d0);
-	*(int*) 0x99f590 = *(int*) 0x7f4c00;
-	*(int*) 0x99f594 = *(int*) 0x7f4c04;
-	*(int*) 0x99f598 = *(int*) 0x7f4c08;
-	*(unsigned short*) 0x99f59c = *(unsigned short*) 0x7f4c0c;
+	g_99ec14 = (float) ((g_773d50 - g_773d4c) * 0.0007336182331406322);
+	g_99f590 = *(Blob14*) &gm_GameTime;
 	return (int) g_773d50;
 }

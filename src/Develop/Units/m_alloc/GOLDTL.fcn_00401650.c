@@ -61,10 +61,6 @@ char __cdecl fcn_00401650(const char* name, char* buf, char* palbuf, int flags)
 	}
 	vfs_fseek(f, 0xe, 0);
 	vfs_ReadData((char*) &bih, 1, 0x28, f);
-	flip = 0;
-	noflip = 0;
-	needpal = 0;
-	bpp24 = 0;
 	if (buf == 0) {
 		flags &= ~1;
 	}
@@ -74,6 +70,10 @@ char __cdecl fcn_00401650(const char* name, char* buf, char* palbuf, int flags)
 	if (palbuf == 0 || ((flags & 8) == 8 && (flags & 2) == 2)) {
 		flags &= ~2;
 	}
+	bpp24 = 0;
+	noflip = 0;
+	flip = 0;
+	needpal = 0;
 	if (bih.biPlanes == 1) {
 		if (bih.biBitCount == 0x18 && bih.biCompression == 0) {
 			bpp24 = 1;
@@ -130,7 +130,7 @@ have_pixels:
 	tmp = (char*) m_alloc(0x400, "!bmp:tLoadBMPPal");
 	vfs_fseek(f, 0x36, 0);
 	vfs_ReadData(tmp, 4, bih.biClrUsed, f);
-	for (i = 0; i < bih.biClrUsed; i++) {
+	for (i = 0; i < (int) bih.biClrUsed; i++) {
 		pal2[i * 3 + 0] = tmp[i * 4 + 2];
 		pal2[i * 3 + 1] = tmp[i * 4 + 1];
 		pal2[i * 3 + 2] = tmp[i * 4 + 0];
@@ -146,24 +146,31 @@ read_pixels:
 		col = 0;
 		while (row < abs(bih.biHeight)) {
 			vfs_ReadData((char*) pair, 1, 2, f);
-			if (pair[0] != 0) {
+			if (pair[0] == 0) {
+				switch (pair[1]) {
+				case 0:
+					col = 0;
+					row++;
+					break;
+				case 1:
+					col = 0;
+					row = abs(bih.biHeight);
+					break;
+				case 2:
+					vfs_ReadData((char*) pair, 1, 2, f);
+					col += pair[0];
+					row += pair[1];
+					break;
+				default:
+					vfs_ReadData(pixels + row * bih.biWidth + col,
+						     pair[1] + (pair[1] & 1), 1, f);
+					col += pair[1];
+					break;
+				}
+			} else {
 				memset(pixels + row * bih.biWidth + col,
 				       pair[1], pair[0]);
 				col += pair[0];
-			} else if (pair[1] == 0) {
-				col = 0;
-				row++;
-			} else if (pair[1] == 1) {
-				col = 0;
-				row = abs(bih.biHeight);
-			} else if (pair[1] == 2) {
-				vfs_ReadData((char*) pair, 1, 2, f);
-				col += pair[0];
-				row += pair[1];
-			} else {
-				vfs_ReadData(pixels + row * bih.biWidth + col,
-					     pair[1] + (pair[1] & 1), 1, f);
-				col += pair[1];
 			}
 		}
 	} else {

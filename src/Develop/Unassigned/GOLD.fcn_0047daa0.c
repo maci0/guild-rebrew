@@ -1,3 +1,6 @@
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) < (b) ? (b) : (a))
+
 /* ADDRESS: GOLD 0x0047daa0 */
 void __cdecl fcn_0047daa0(char* e)
 {
@@ -8,7 +11,7 @@ void __cdecl fcn_0047daa0(char* e)
     int i;
 
     v = *(float*) (e + 0x124) + *(float*) (e + 0x12c) - *(float*) (e + 0x128) * *(float*) (e + 0x12c);
-    *(float*) (e + 0x12c) = (float) ((v < 0.0 || !(v < 1000.0)) ? (v < 0.0 ? 0.0 : 1000.0) : v);
+    *(float*) (e + 0x12c) = (float) MIN(MAX(v, 0.0), 1000.0);
     selected = 0;
     best = 0.0f;
     for (i = 0; i < 13; i++) {
@@ -28,12 +31,12 @@ void __cdecl fcn_0047daa0(char* e)
             } else if (i == 3) {
                 v = *(float*) (e + 0xac) * *(float*) (e + 0x1e4) + *(float*) (e + 0xb4)
                     - *(float*) (e + 0xb0) * *(float*) (e + 0xb4);
-                *(float*) (e + 0xb4) = (float) ((v < 0.0 || !(v < 1000.0)) ? (v < 0.0 ? 0.0 : 1000.0) : v);
+                *(float*) (e + 0xb4) = (float) MIN(MAX(v, 0.0), 1000.0);
             } else {
 update:
                 state = (float*) (e + 0x90 + i * 12);
                 v = *(float*) (e + 0x88 + i * 12) + *state - *(float*) (e + 0x8c + i * 12) * *state;
-                *state = (float) ((v < 0.0 || !(v < 1000.0)) ? (v < 0.0 ? 0.0 : 1000.0) : v);
+                *state = (float) MIN(MAX(v, 0.0), 1000.0);
             }
         }
         if (i == *(unsigned char*) (e + 0x130)) {

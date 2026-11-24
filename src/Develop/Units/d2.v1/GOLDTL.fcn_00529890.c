@@ -41,11 +41,11 @@ void __cdecl fcn_00529890(char* building)
 	int v5;
 	int v6;
 	unsigned int v7;
-	int out[3];
+	int out[8];
 	int v15;
 	unsigned int v16;
 	char v8[256];
-	char v9[128];
+	char v9[120];
 
 	if (g_6a25b4 != -1) {
 		v12 = (char*) (g_entity_type_table + (unsigned int) (unsigned char) *building * 0x24d);
@@ -83,82 +83,82 @@ void __cdecl fcn_00529890(char* building)
 		v11 = (char*) 0x7f4e05;
 		do {
 			if (*(char**) (v11 + 7) == building && *(int*) (v11 + 0x1f) && v11[-0x15d]) {
-				if ((unsigned char) g_774724) {
-					if ((unsigned char) g_774724 != 1
-						|| (v6 = fcn_00507c30((unsigned char) *v11), !v11[-1]
-							&& (v6 == 10 || v6 == 0xb || v6 == 0xc))) {
-label_529a17:
-						v6 = 0;
-						v13 = (int*) 0x7e30d0;
-						do {
-							if (*v13 == v3) {
-								if (v6 < 0x20) {
-									goto label_529c64;
-								}
-								break;
-							}
-							v13 = &v13[10];
-							v6 += 1;
-						} while ((int) v13 < 0x7e35d0);
-						v6 = 0;
-						v13 = (int*) 0x7e30d0;
-						do {
-							if (*v13 == 0xffff) {
-								break;
-							}
-							v13 = &v13[10];
-							v6 += 1;
-						} while ((int) v13 < 0x7e35d0);
-						if (0x20 < v6) {
-							break;
-						}
-						fcn_00517c00(v3, 1, 1, v8);
-						d2_SetForm(g_6a25b4, 1);
-						v5 = v6 * 0x4e;
-						v6 *= 0x28;
-						v4 = fcn_0046f740(6, v5, 0x5dc, d2_CurrentWindowId);
-						v16 = *(unsigned int*) (v11 + 0x27);
-						*(unsigned int*) (v6 + 0x7e30c4) = v4;
-						v16 = fcn_0046f740(8, v5 + 0x11, v16, d2_CurrentWindowId);
-						*(unsigned int*) (v6 + 0x7e30c0) = v16;
-						v15 = d2_ShowTxt(0, v5 + 4, g_6b5c60, d2_CurrentWindowId);
-						*(int*) (v6 + 0x7e30d4) = v15;
-						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v15].value_06c)) = 1;
-						*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
-							[*(int*) (v6 + 0x7e30d4)].width) = 0x5f;
-						*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
-							[*(int*) (v6 + 0x7e30c0)].value_058) = 1;
-						*(char**) (&((D2_CONTROL_TL*)g_1015ea0)
-							[*(int*) (v6 + 0x7e30c0)].associated_object) = &v11[-0x165];
-						if (*(int*) (v6 + 0x7e30d8) != -1) {
-							fcn_0046f280(*(int*) (v6 + 0x7e30d8));
-							*(unsigned int*) (v6 + 0x7e30d8) = 0xffffffff;
-						}
-						*(int*) (v6 + 0x7e30d0) = v3;
-						*(unsigned int*) (v6 + 0x7e30dc) = 0;
-						v1 = *v12;
-						if (v1 == 0x10 || v1 == 0x13 || v1 == 0x04) {
-							d2_SetForm(g_6a25b4, 1);
-							v16 = fcn_0046f100(6, v5 + 0x3f, 0x50, 0xf, 0,
-								d2_CurrentWindowId);
-							*(unsigned int*) (v6 + 0x7e30d8) = v16;
-							fcn_0046f740(4, 1, 0x5df, d2_CurrentWindowId);
-							fcn_00534210(0x10, 4,
-								(char*) (*(int*) (v6 + 0x7e30d0) * 0x21c
-									+ 0x7f4ca0), 2, 0x4f1);
-							fcn_0046f740(0x28, 1, 0x5e0, d2_CurrentWindowId);
-							fcn_00534210(0x34, 4,
-								(char*) (*(int*) (v6 + 0x7e30d0) * 0x21c
-									+ 0x7f4ca0), 3, 0x4f1);
-						}
-						v16 = *(unsigned int*) (v6 + 0x7e30c0);
-						d2_SetElementValue(v16, v11[0x23] != '\0');
+				if (!(unsigned char) g_774724) {
+					if ((*v11 != v12[0x22f] && *v11 != v12[0x230]) || v11[-1]) {
+						goto label_529c64;
 					}
 				}
-				else if ((*v11 == v12[0x22f] || *v11 == v12[0x230])
-					&& !v11[-1]) {
-					goto label_529a17;
+				else if ((unsigned char) g_774724 == 1) {
+					v6 = fcn_00507c30((unsigned char) *v11);
+					if (v11[-1] || (v6 != 10 && v6 != 0xb && v6 != 0xc)) {
+						goto label_529c64;
+					}
 				}
+				v6 = 0;
+				v13 = (int*) 0x7e30d0;
+				do {
+					if (*v13 == v3) {
+						if (v6 < 0x20) {
+							goto label_529c64;
+						}
+						break;
+					}
+					v13 = &v13[10];
+					v6 += 1;
+				} while ((int) v13 < 0x7e35d0);
+				v6 = 0;
+				v13 = (int*) 0x7e30d0;
+				do {
+					if (*v13 == 0xffff) {
+						break;
+					}
+					v13 = &v13[10];
+					v6 += 1;
+				} while ((int) v13 < 0x7e35d0);
+				if (0x20 < v6) {
+					break;
+				}
+				fcn_00517c00(v3, 1, 1, v8);
+				d2_SetForm(g_6a25b4, 1);
+				v5 = v6 * 0x4e;
+				v6 *= 0x28;
+				v4 = fcn_0046f740(6, v5, 0x5dc, d2_CurrentWindowId);
+				v16 = *(unsigned int*) (v11 + 0x27);
+				*(unsigned int*) (v6 + 0x7e30c4) = v4;
+				v16 = fcn_0046f740(8, v5 + 0x11, v16, d2_CurrentWindowId);
+				*(unsigned int*) (v6 + 0x7e30c0) = v16;
+				v15 = d2_ShowTxt(0, v5 + 4, g_6b5c60, d2_CurrentWindowId);
+				*(int*) (v6 + 0x7e30d4) = v15;
+				*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v15].value_06c)) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+					[*(int*) (v6 + 0x7e30d4)].width) = 0x5f;
+				*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+					[*(int*) (v6 + 0x7e30c0)].value_058) = 1;
+				*(char**) (&((D2_CONTROL_TL*)g_1015ea0)
+					[*(int*) (v6 + 0x7e30c0)].associated_object) = &v11[-0x165];
+				if (*(int*) (v6 + 0x7e30d8) != -1) {
+					fcn_0046f280(*(int*) (v6 + 0x7e30d8));
+					*(unsigned int*) (v6 + 0x7e30d8) = 0xffffffff;
+				}
+				*(int*) (v6 + 0x7e30d0) = v3;
+				*(unsigned int*) (v6 + 0x7e30dc) = 0;
+				v1 = *v12;
+				if (v1 == 0x10 || v1 == 0x13 || v1 == 0x04) {
+					d2_SetForm(g_6a25b4, 1);
+					v16 = fcn_0046f100(6, v5 + 0x3f, 0x50, 0xf, 0,
+						d2_CurrentWindowId);
+					*(unsigned int*) (v6 + 0x7e30d8) = v16;
+					fcn_0046f740(4, 1, 0x5df, d2_CurrentWindowId);
+					fcn_00534210(0x10, 4,
+						(char*) (*(int*) (v6 + 0x7e30d0) * 0x21c
+							+ 0x7f4ca0), 2, 0x4f1);
+					fcn_0046f740(0x28, 1, 0x5e0, d2_CurrentWindowId);
+					fcn_00534210(0x34, 4,
+						(char*) (*(int*) (v6 + 0x7e30d0) * 0x21c
+							+ 0x7f4ca0), 3, 0x4f1);
+				}
+				v16 = *(unsigned int*) (v6 + 0x7e30c0);
+				d2_SetElementValue(v16, v11[0x23] != '\0');
 			}
 label_529c64:
 			v11 = &v11[0x21c];
@@ -169,38 +169,33 @@ label_529c64:
 		do {
 			if (*(int*) 0x100f1dc != -1) {
 				v3 = *v13;
-				if (v3 != 0xffff) {
-					if (d2_CurrentElementId == v13[-4]) {
-						if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v13[-4]].value_038))) {
-							*(char*) (v3 * 0x21c + 0x7f4e28) = 1;
-							fcn_004c3540((char*) (v3 * 0x21c + 0x7f4ca0));
-						}
-						else {
-							*(char*) (v3 * 0x21c + 0x7f4e28) = 0;
-						}
-					}
-					goto label_529cf0;
+				if (v3 == 0xffff) {
+					goto label_529d30;
 				}
+				if (d2_CurrentElementId == v13[-4]) {
+					if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v13[-4]].value_038))) {
+						*(char*) (v3 * 0x21c + 0x7f4e28) = 1;
+						fcn_004c3540((char*) (v3 * 0x21c + 0x7f4ca0));
+					}
+					else {
+						*(char*) (v3 * 0x21c + 0x7f4e28) = 0;
+					}
+				}
+			}
+			if (*v13 == 0xffff) {
+				goto label_529d30;
+			}
+			v3 = *v13 * 0x21c;
+			if (*(int*) (*(int*) (v3 + 0x7f4e24) + 0x2c)
+				!= *(int*) &v2[1]
+				|| (*(int*) (v3 + 0x7f4e68) & 0x800)
+				|| *(char*) (v3 + 0x7f4e20) == 0x14) {
 label_529d30:
-				v3 = v13[-4];
-				v16 = 0;
+				fcn_00472640(v13[-4], 0);
 			}
 			else {
-label_529cf0:
-				if (*v13 == 0xffff) {
-					goto label_529d30;
-				}
-				v3 = *v13 * 0x21c;
-				if (*(int*) (*(int*) (v3 + 0x7f4e24) + 0x2c)
-					!= *(int*) &v2[1]
-					|| (*(unsigned int*) (v3 + 0x7f4e68) & 0x800)
-					|| *(char*) (v3 + 0x7f4e20) == 0x14) {
-					goto label_529d30;
-				}
-				v3 = v13[-4];
-				v16 = 1;
+				fcn_00472640(v13[-4], 1);
 			}
-			fcn_00472640(v3, v16);
 			v13 = &v13[10];
 		} while ((int) v13 < 0x7e35d0);
 		v3 = 0x28;
@@ -235,18 +230,18 @@ label_529cf0:
 				}
 				v5 = fcn_00529800((char*) (v13[2] * 0x21c + 0x7f4ca0),
 					out);
-				v6 = out[0];
 				if (v5) {
 					v15 = -1;
 					if (2 <= v5) {
 						v15 = out[1];
 					}
-					if (out[0] != -1) {
+					v6 = out[0];
+					if (v6 != -1) {
 						v5 = *v13;
 						if (v5 == -1) {
-							if (out[0] >= 0xdf && out[0] <= 0x3bb) {
+							if (v6 >= 0xdf && v6 <= 0x3bb) {
 								v6 = fcn_0046f7e0(0x38, v3 - 0x18,
-									out[0], d2_CurrentWindowId, -2);
+									v6, d2_CurrentWindowId, -2);
 							}
 							else {
 								v6 = fcn_0046f740(0x38, v3 - 0x18,
@@ -254,15 +249,15 @@ label_529cf0:
 							}
 						}
 						else {
-							if (out[0] == *(int*) (&((D2_CONTROL_TL*)g_1015ea0)
+							if (v6 == *(int*) (&((D2_CONTROL_TL*)g_1015ea0)
 								[v5].value_008)) {
 								goto label_529f4c;
 							}
 							d2_DestroyElement(v5);
 							*v13 = -1;
-							if (out[0] >= 0xdf && out[0] <= 0x3bb) {
+							if (v6 >= 0xdf && v6 <= 0x3bb) {
 								v6 = fcn_0046f7e0(0x38, v3 - 0x18,
-									out[0], d2_CurrentWindowId, -2);
+									v6, d2_CurrentWindowId, -2);
 							}
 							else {
 								v6 = fcn_0046f740(0x38, v3 - 0x18,

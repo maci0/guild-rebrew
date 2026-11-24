@@ -26,11 +26,11 @@ void __cdecl fcn_004fb390(void)
 	*(int*) (g_99f5e0 + 0x18) = *(int*) &g_773d4c;
 	slope = (sample - g_773d4c) * 0.0007336182331406322;
 	g_99ec14 = (float) slope;
-	*(int*) g_99f590 = gm_GameTime.a;
-	*(int*) ((char*) g_99f590 + 4) = gm_GameTime.b;
-	*(int*) ((char*) g_99f590 + 8) = gm_GameTime.c;
-	*(short*) ((char*) g_99f590 + 12) = gm_GameTime.d;
-	memcpy((char*) buf + 0x28, g_99f5e0, 0x14);
+	*(int*) ((char*) buf + 0x28) = *(int*) g_99f5e0;
+	*(int*) ((char*) buf + 0x2c) = *(int*) (g_99f5e0 + 4);
+	*(int*) ((char*) buf + 0x30) = *(int*) (g_99f5e0 + 8);
+	*(int*) ((char*) buf + 0x34) = *(int*) (g_99f5e0 + 0xc);
+	*(int*) ((char*) buf + 0x38) = *(int*) (g_99f5e0 + 0x10);
 	*(float*) ((char*) buf + 0x3c) = (float) sample;
 
 	*(int*) ((char*) buf + 0x40) = *(int*) &g_773d4c;
@@ -42,5 +42,9 @@ void __cdecl fcn_004fb390(void)
 	*(int*) ((char*) buf + 0x58) = gm_GameTime.b;
 	*(int*) ((char*) buf + 0x5c) = gm_GameTime.c;
 	*(short*) ((char*) buf + 0x60) = gm_GameTime.d;
+	*(int*) g_99f590 = gm_GameTime.a;
+	*(int*) ((char*) g_99f590 + 4) = gm_GameTime.b;
+	*(int*) ((char*) g_99f590 + 8) = gm_GameTime.c;
+	*(short*) ((char*) g_99f590 + 12) = gm_GameTime.d;
 	fcn_004c62c0((char*) buf + 0x28);
 }

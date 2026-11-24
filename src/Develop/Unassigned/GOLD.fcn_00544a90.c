@@ -4,9 +4,9 @@
 #include "client_types.h"
 
 #define gm_GameTime (*(pos14_7f4c00*) 0x770ae0)
-#define g_7f4ca4 ((char*) 0x770b84)
-#define g_869480 ((char (*)[0x300]) 0x7e5360)
-#define g_774970 (*(unsigned short*) 0x6f25b8)
+extern char g_7f4ca4[];
+extern char g_869480[0x300][0x300];
+extern unsigned short g_774970;
 #define g_664174 1.1f
 #define g_6a5a48 "werbung"
 

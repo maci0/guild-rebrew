@@ -1,4 +1,5 @@
 int __cdecl FindStraftatIndexById(int);
+extern char g_7f4ca4[];
 
 /* ADDRESS: GOLD 0x004f3c50 */
 int __cdecl fcn_004f3c50(int* ids, int* counts, int id)
@@ -14,6 +15,7 @@ int __cdecl fcn_004f3c50(int* ids, int* counts, int id)
 	int v;
 	int k;
 	int t;
+	int t2;
 	int* cp;
 	int* ip;
 
@@ -26,7 +28,7 @@ int __cdecl fcn_004f3c50(int* ids, int* counts, int id)
 		list[i] = -1;
 	}
 	w = list;
-	key = *(int*) (0x770b84 + (unsigned short) id * 0x21c);
+	key = *(int*) (g_7f4ca4 + (unsigned short) id * 0x21c);
 	for (e = (int*) 0x91b6e4; (int) e < 0x91f6e4; e += 2) {
 		if (e[-1] == key) {
 			k = FindStraftatIndexById(e[0]);
@@ -55,12 +57,12 @@ int __cdecl fcn_004f3c50(int* ids, int* counts, int id)
 		}
 		for (k = 31, cp = counts + 30, ip = ids + 30; k > 0; k--, cp--, ip--) {
 			if (cp[1] > cp[0]) {
-				t = ids[k];
-				ids[k] = *ip;
-				*ip = t;
-				t = cp[1];
+				t = *ip;
+				t2 = cp[1];
+				*ip = ids[k];
 				cp[1] = cp[0];
-				cp[0] = t;
+				ids[k] = t;
+				cp[0] = t2;
 			}
 		}
 	}

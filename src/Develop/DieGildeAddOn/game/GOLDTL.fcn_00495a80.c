@@ -43,13 +43,13 @@ int __cdecl fcn_00495a80(int a0, char* actorEntity, int a2, char* a3, char* a4)
 		return 0;
 	}
 	if (*(int*) (actorEntity + 0x170) == 0 && *(char*) (actorEntity + 2) != 3) {
+		action.msg.mode = 0;
+		action.msg.f1 = 0;
+		action.msg.f2 = 0;
 		extra.msg.mode = 0;
 		extra.msg.f1 = 0;
 		extra.msg.f2 = 0;
 		extra.msg.f5 = 0x3f28f5c3;
-		action.msg.mode = 0;
-		action.msg.f1 = 0;
-		action.msg.f2 = 0;
 		r = ai_SelectBestMethod(4, *(unsigned short*) actorEntity, 1, &extra.msg, &action.msg);
 		if (r != 0) {
 			*(Out495a80*) a3 = extra.msg;

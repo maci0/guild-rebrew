@@ -169,7 +169,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			r = -1;
 		}
 		c = text.buf[i];
-		switch ((unsigned char) c) {
+		switch (c) {
 		case 'C':
 			i++;
 			memset(output, 0, 0x80);
@@ -184,11 +184,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				p = txt_TextEntries[j];
 			}
 			k = (r != -1) ? 3 : 2;
-			if (kind == 0xff) {
-				if (p == 0) {
-					p = txt_TextEntries[j];
-				}
-			} else {
+			if (kind != 0xff) {
 				if (r == -1) {
 					r = 1;
 				}
@@ -197,6 +193,8 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				} else {
 					p = (char*) fcn_0042b2f0(p, r, 8);
 				}
+			} else if (p == 0) {
+				p = txt_TextEntries[j];
 			}
 			if (grammar_state == 0) {
 				if ((int) strlen(p) + i > 0x17cb) {
@@ -239,7 +237,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					sprintf(text.tmp, g_68b3f8, res, p);
 				}
 				if (fcn_0051e070() == 0 && grammar_state == 2) {
-					text.tmp[0] = (char) toupper((unsigned char) text.tmp[0]);
+					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			} else if (grammar_state == 3 || grammar_state == 4) {
 				if (text.buf[i - 1] == 's' && flag == 0) {
@@ -254,7 +252,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					sprintf(text.tmp, g_68b3f8, res, p);
 				}
 				if (fcn_0051e070() == 0 && grammar_state == 4) {
-					text.tmp[0] = (char) toupper((unsigned char) text.tmp[0]);
+					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			} else if (grammar_state == 5 || grammar_state == 6) {
 				if (text.buf[i - 1] == 's' && flag == 0) {
@@ -269,7 +267,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					sprintf(text.tmp, g_68b3f8, res, p);
 				}
 				if (fcn_0051e070() == 0 && grammar_state == 6) {
-					text.tmp[0] = (char) toupper((unsigned char) text.tmp[0]);
+					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			}
 			if ((int) strlen(text.tmp) + i > 0x17cb) {
@@ -302,7 +300,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + i - 2;
 				fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 1 - i);
-				memcpy(cp_dst, cp_src, cp_n);
+				memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			} else {
 				j = *(int*) (cursor - 4);
 				if (j > 1 || j == 0) {
@@ -313,7 +311,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + i - 1;
 				fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) + 1 - i);
-				memcpy(cp_dst, cp_src, cp_n);
+				memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			}
 			break;
 		case 'I':
@@ -328,7 +326,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					flag = 1;
 				}
 				sprintf(text.tmp, num, j);
-				e = (int) strlen(text.tmp) + (int) strlen(text.tmp) / 3;
+				e = (int) (strlen(text.tmp) + strlen(text.tmp) / 3);
 				k = (int) strlen(text.tmp);
 				res = -1;
 				p = num + e;
@@ -359,7 +357,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				} else {
 					sprintf(num, "%i", j);
 				}
-				e = (int) strlen(num) + ((int) strlen(num) - 1) / 3;
+				e = (int) (strlen(num) + (strlen(num) - 1) / 3);
 				k = (int) strlen(num);
 				res = -1;
 				p = text.tmp + e;
@@ -384,7 +382,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + i - 1;
 				fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) + 1 - i);
-				memcpy(cp_dst, cp_src, cp_n);
+				memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			}
 			break;
 		case 'T':
@@ -398,7 +396,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + i - 1;
 			fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) - i + 1);
-			memcpy(cp_dst, cp_src, cp_n);
+			memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			break;
 		case 'w':
 			cursor += 4;
@@ -460,7 +458,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + i - 3;
 				fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 1 - i);
-				memcpy(cp_dst, cp_src, cp_n);
+				memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			}
 			break;
 		case 'v':
@@ -535,7 +533,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + i - 3;
 			fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) + 2 - i);
-			memcpy(cp_dst, cp_src, cp_n);
+			memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			break;
 		case 'a':
 			if (text.buf[i - 1] == '%') {
@@ -546,7 +544,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				cp_n = (int) strlen(cp_src);
 				cp_dst = text.buf + i - 1;
 				fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) - i + 1);
-				memcpy(cp_dst, cp_src, cp_n);
+				memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 				break;
 			}
 			sprintf(text.tmp, g_6a2348, 0x14);
@@ -554,7 +552,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + i - 1;
 			fcn_0064d740(cp_dst + cp_n, text.buf + i + 1, (int) strlen(text.buf) - i + 1);
-			memcpy(cp_dst, cp_src, cp_n);
+			memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			break;
 		case 'D':
 			cursor += 4;
@@ -707,7 +705,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + i - 1;
 			fcn_0064d740(cp_dst + cp_n, text.buf + i, (int) strlen(text.buf) - (i - e) + 5);
-			memcpy(cp_dst, cp_src, cp_n);
+			memcpy(cp_dst, cp_src, (int) strlen(cp_src));
 			break;
 		case '%':
 			text.buf[i - 1] = 0x16;

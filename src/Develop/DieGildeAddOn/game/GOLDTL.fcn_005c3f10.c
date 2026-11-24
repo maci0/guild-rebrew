@@ -153,7 +153,7 @@ void __cdecl fcn_005c3f10(char* ent)
 	changed = 1;
 	v.other = 0;
 	v.hover = 0;
-	if ((*(unsigned char*) (ent + 0x5b) & 4) != 0)
+	if ((*(unsigned short*) (ent + 0x5a) & 0x400) != 0)
 		return;
 	if (*(unsigned short*) (ent + 0x25) == g_774970) {
 		if (d2_TutorialAllowsFlag(0x100) == 0)

@@ -60,10 +60,10 @@ found:
 	table = m_alloc(a * 4, "txt_txt:txt_loadTextFile:PointerTable");
 	fcn_00430bd0(table, 4, a, stream);
 	for (i = 0; i < a; i++)
-		fcn_00430bd0((char*) ((*(int*) (rec + 0x60) + i) * 0x50 + 0xfe7e40),
+		fcn_00430bd0((char*) ((*pc + i) * 0x50 + 0xfe7e40),
 		    0x50, 1, stream);
 	for (i = 0; i < a; i++)
-		fcn_00430bd0((char*) ((*(int*) (rec + 0x60) + i) * 4 + 0x114fe60),
+		fcn_00430bd0((char*) ((*pc + i) * 4 + 0x114fe60),
 		    1, 1, stream);
 	fcn_00430bd0(&b, 4, 1, stream);
 	*(int*) (rec + 0x68) = (int) m_alloc(b, "txt_txt:txt_loadTextFile:Pointer");
@@ -71,7 +71,7 @@ found:
 	if (a > 0) { dst = (int*) ((*pc) * 4 + 0x143a1c0); base = *(int*) (rec + 0x68); for (i = 0; i < a; i++, dst++)
 		*dst =
 		    ((int*) table)[i] + base; }
-	if (*(int*) 0x6333b8 + 1 < *pcount)
+	if (*pcount > *(int*) 0x6333b8 + 1)
 		*(int*) 0x6333b8 = *pcount + 1;
 	fcn_00430aa0(stream);
 	m_FreeTracked(table);

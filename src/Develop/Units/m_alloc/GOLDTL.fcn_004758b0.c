@@ -48,9 +48,9 @@ int __cdecl fcn_004758b0(char* name, unsigned char* pix)
 		if (n > 0) {
 			p = pix + 2;
 			for (i = 0; i < n; i++) {
-				t = p[-2];
-				p[-2] = p[0];
-				p[0] = t;
+				t = p[0];
+				p[0] = p[-2];
+				p[-2] = t;
 				p += 3;
 			}
 		}

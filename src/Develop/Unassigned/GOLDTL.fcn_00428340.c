@@ -36,7 +36,9 @@ int __cdecl fcn_00428340(char* scriptCtx, int a1, ...)
 		return 0;
 	}
 	argp = &a1;
-	for (i = 0, kinds = (int*) (obj + 0x28), text = (char*) 0x14cb540; i < *(char*) (obj + 0x24); i++, kinds++, text += 0x60) {
+	kinds = (int*) (obj + 0x28);
+	text = (char*) 0x14cb540;
+	for (i = 0; i < *(char*) (obj + 0x24); i++) {
 		kind = *kinds;
 		if (kind == 6) {
 			strcpy(text, (char*) *(argp + 1));
@@ -48,6 +50,8 @@ int __cdecl fcn_00428340(char* scriptCtx, int a1, ...)
 			((int*) g_6b7ea0)[kinds - (int*) (obj + 0x28)] = *(char*) (argp + 1);
 			argp++;
 		}
+		kinds++;
+		text += 0x60;
 	}
 	evt_EnterFunction((int) scriptCtx, obj);
 	*(int*) (scriptCtx + 0x124) = *(int*) (scriptCtx + 0x124) | 1;

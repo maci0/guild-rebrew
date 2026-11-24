@@ -120,6 +120,8 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	char* p;
 	unsigned char* e;
 
+	btnA = 0;
+	btnB = 0;
 	btnC = 0;
 	t = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[obj[0]];
 	dlg = fcn_00470820(0, 0, s_6ac79c);
@@ -143,18 +145,28 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	}
 	start = g_6b7fac;
 	*(int*) (g_77255c + 0x3a4) = 0;
-	btnA = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x35) != 0;
-	btnB = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x34);
+	if (fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x35) != 0) {
+		btnA = 1;
+	}
+	if (fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x34) != 0) {
+		btnB = 1;
+	}
 	if (t->category == 4) {
-		btnC = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x5d) != 0;
+		if (fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x5d) != 0) {
+			btnC = 1;
+		}
 	}
 	else if (t->category == 0x10) {
-		btnC = fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x5e) != 0;
+		if (fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x5e) != 0) {
+			btnC = 1;
+		}
 	} else { btnC = 1; }
 	if (btnA) fcn_00472640(out[0], 1);
 	else fcn_00472640(out[0], 0);
-	fcn_00472640(out[3], btnB != 0);
-	fcn_00472640(out[6], btnC);
+	if (btnB) fcn_00472640(out[3], 1);
+	else fcn_00472640(out[3], 0);
+	if (btnC) fcn_00472640(out[6], 1);
+	else fcn_00472640(out[6], 0);
 	for (;;) {
 		d2_SetForm(dlg, 1);
 		i = g_6b7fac - start;
@@ -229,7 +241,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 									else {
 										pkt.x60 = -1;
 									}
-									*(char*) &pkt.x58 = (char) (i + 2);
+									*(char*) &pkt.x58 = (i != 0) + 2;
 									pkt.x5c = *(int*) ((char*) q - 0x178);
 									fcn_00529160(obj, 0, *(unsigned short*) ((char*) q - 0x17c), 0);
 									fcn_004c5530(&pkt);
@@ -269,7 +281,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 send:
 							fcn_004c35f0();
 							sv_ClearObjectSelection();
-							if (sum >= 4) {
+							if (sum > 3) {
 								io_FormatTextBuffer(buf, 0x1a4a, 3);
 								fcn_00526120(buf, 0);
 							}
@@ -285,8 +297,9 @@ send:
 				do {
 					if (out[i * 3] != -1 && d2_CurrentElementId == out[i * 3]) {
 						if (i != 2) {
+							int target = (i != 0) + 2;
 							for (p = he_StartHandlungSearch(2, 0, 0x16, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
-								if (*(char*) (p + 0xac) == (char) (i + 2)) {
+								if (*(unsigned char*) (p + 0xac) == target) {
 									e = gm_LookupEntityRecordById(*(int*) (p + 0xb0));
 									if (e != 0) {
 										*(char*) (e + 0x188) = 1;

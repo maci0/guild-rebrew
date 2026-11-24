@@ -94,12 +94,12 @@ void __cdecl he_RunPlagueEvent(char* ev)
 	case 1:
 		slot_no = *(unsigned int*) (ev + 0xb0);
 		n = 0x100;
-		rec = 0;
 		do {
-			bit_lo = 0;
 			bit_hi = 0;
 			listp = lpGebaeudeINST + slot_no * 0xa9;
+			rec = listp;
 			sel = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) listp].category;
+			bit_lo = 0;
 			if (sel > 0x1f) {
 				bit_hi = 1 << ((sel - 0x20) & 0x1f);
 			}
@@ -108,7 +108,6 @@ void __cdecl he_RunPlagueEvent(char* ev)
 			}
 			if (*(unsigned short*) (listp + 0x27) != 0xffff
 				&& ((bit_lo & 0x807c4110) || (bit_hi & 1))) {
-				rec = listp;
 				break;
 			}
 			rec = 0;
@@ -138,11 +137,11 @@ void __cdecl he_RunPlagueEvent(char* ev)
 		*(unsigned int*) (ev + 0x84) = fcn_004c5620(2, ev);
 		return;
 	case 2:
-		rec = 0;
 		gm_ResolveEntityById((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xcc));
 		fcn_00500bb0(ev + 0x52, 0, 5, 0);
 		if (!rec) {
-			break;
+			*(unsigned int*) (ev + 0x84) = fcn_004c5620(-1, ev);
+			return;
 		}
 		for (i = 0; i < 4; i++) {
 			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
@@ -165,7 +164,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 			}
 			ent = (char*) g_slot_table + 0x16c;
 			left = 0;
-			for (;;) {
+			do {
 				if (nent >= 16) {
 					break;
 				}
@@ -179,10 +178,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 				}
 				ent += 0x21c;
 				i++;
-				if ((int) ent >= 0x85a20c) {
-					break;
-				}
-			}
+			} while ((int) ent < 0x85a20c);
 			if (nent == 0) {
 				goto after_scan;
 			}
@@ -195,11 +191,9 @@ void __cdecl he_RunPlagueEvent(char* ev)
 				f = 1.0f;
 			}
 			count = (int) f;
-			if (count > 0) {
+			for (n = 0; n < count; n++) {
 				left = 1;
-				for (n = 0; n < count; n++) {
-					scores[n] = fcn_00508490((char*) g_slot_table + picks[n] * 0x21c);
-				}
+				scores[n] = fcn_00508490((char*) g_slot_table + picks[n] * 0x21c);
 			}
 			p = found;
 			if (found && !gm_RandomMod(8)) {
@@ -229,7 +223,6 @@ after_scan:
 			*(unsigned int*) (ev + 0x84) = fcn_004c5620(1, ev);
 			return;
 		}
-		rec = 0;
 		gm_ResolveEntityById((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xd0));
 		if (!rec) {
 			break;
@@ -249,7 +242,6 @@ after_scan:
 		return;
 	case 3:
 		fcn_00500bb0(ev + 0x52, 0, 5, 0);
-		rec = 0;
 		gm_ResolveEntityById((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xd0));
 		if (!rec) {
 			break;

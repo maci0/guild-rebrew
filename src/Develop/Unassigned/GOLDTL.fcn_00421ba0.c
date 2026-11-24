@@ -48,7 +48,7 @@ unsigned short __cdecl fcn_00421ba0(PathGrid* grid, unsigned short node)
 	for (i = 0; i < 8; i++) {
 		t = g_678c20[i & 7];
 		t += ((short*) 0x678c10)[i & 7];
-		idx = (node + t) & 0xffff;
+		idx = (unsigned short) (node + t);
 		q = &grid->nodes[idx];
 		if (q->mark == g_14cbc72 && (q->flags & g_14cbc68) != 0) {
 			g_14cbc7e = (unsigned short) idx;

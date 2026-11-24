@@ -1,5 +1,7 @@
 #include <string.h>
 
+extern int d2_CurrentWindowId;
+
 void __cdecl ls_CaptureSavePreview(void);
 void __cdecl fcn_005e3b70(void);
 int __cdecl fcn_00470820(int, int, char *);
@@ -37,11 +39,11 @@ void __cdecl fcn_004c39b0(void);
 void __cdecl fcn_0057e870(void);
 
 /* ADDRESS: GOLDTL 0x005e43f0 */
-int __cdecl fcn_005e43f0(void)
+void __cdecl fcn_005e43f0(void)
 {
     char message[0x200], preview[0x9600];
     int dialog, a, b, c, d, e, f, g, group, current, handle;
-    unsigned char saved;
+    int saved;
 
     ls_CaptureSavePreview();
     memcpy(preview, (void *)0x7ea3c0, 0x9600);
@@ -51,27 +53,27 @@ int __cdecl fcn_005e43f0(void)
     fcn_00471db0(dialog, 1);
     fcn_00471d80(dialog, 2);
     d2_SetForm(dialog, 0);
-    fcn_005340f0(*(int *)0x772514);
+    fcn_005340f0(d2_CurrentWindowId);
     fcn_00525ef0();
     d2_SetForm(0, 0);
-    a = fcn_005e3b10(0, *(int *)0x14ac490, *(int *)0x772514);
-    b = fcn_005e3b10(1, *(int *)0x14ac494, *(int *)0x772514);
+    a = fcn_005e3b10(0, *(int *)0x14ac490, d2_CurrentWindowId);
+    b = fcn_005e3b10(1, *(int *)0x14ac494, d2_CurrentWindowId);
     if (*(unsigned char *)0x7747b0 & 4) {
         fcn_00472640(a, 0);
         if (!(*(unsigned char *)0x7747b0 & 0x10)) fcn_00472640(b, 0);
     }
-    if (*(signed char *)0x7747b0 < 0) {
+    if (*(signed char *)0x7747b0 & 0x80) {
         d2_PauseTutorialUpdates();
         fcn_00472640(a, 0);
         fcn_00472640(b, 0);
     }
     *(unsigned char *)0x774966 = 1;
-    c = fcn_005e3b10(2, *(int *)0x14ac498, *(int *)0x772514);
-    d = fcn_005e3b10(3, *(int *)0x14ac49c, *(int *)0x772514);
-    e = fcn_005e3b10(4, *(int *)0x14ac4a0, *(int *)0x772514);
-    f = fcn_005e3b10(5, *(int *)0x14ac4a4, *(int *)0x772514);
+    c = fcn_005e3b10(2, *(int *)0x14ac498, d2_CurrentWindowId);
+    d = fcn_005e3b10(3, *(int *)0x14ac49c, d2_CurrentWindowId);
+    e = fcn_005e3b10(4, *(int *)0x14ac4a0, d2_CurrentWindowId);
+    f = fcn_005e3b10(5, *(int *)0x14ac4a4, d2_CurrentWindowId);
     if (!(*(unsigned char *)0x7747b0 & 4)) *(int *)0x6b7fc0 = 1;
-    g = fcn_005e3b10(7, *(int *)0x14ac4a8, *(int *)0x772514);
+    g = fcn_005e3b10(7, *(int *)0x14ac4a8, d2_CurrentWindowId);
     group = d2_CreateRadioGroup(7, a, b, c, d, e, f, g);
     fcn_004c3140(0);
     saved = *(unsigned char *)0x772d10;
@@ -80,36 +82,43 @@ int __cdecl fcn_005e43f0(void)
     while (fcn_005373e0((void *)fcn_005e43f0, 0x24087)) {
         d2_UpdateRadioGroup(group);
         if (*(int *)0x14ce8e0 || *(unsigned char *)0x14cf950 == 1) *(int *)0x774654 = 1;
-        current = *(int *)0x67d370;
-        if (*(int *)0x14ce8d8 && current != -1) {
-            if (current == a) {
-                fcn_00471af0(dialog, 0);
-                if (d2_ShowLoadGameMenu()) {
-                    *(int *)0x774958 = 1;
-                    *(int *)0x774954 = 1;
-                    fcn_005356b0(0x5438c0);
-                } else fcn_00471af0(dialog, 1);
-            } else if (current == b) {
-                fcn_00471af0(dialog, 0);
-                if (*(unsigned char *)0x7747b0 & 4) d2_ShowNetworkLoadGame(preview);
-                else d2_RunSaveGameDialog(preview);
-                fcn_00471af0(dialog, 1);
-            } else if (current == f) {
-                fcn_00471af0(dialog, 0);
-                io_FormatTextBuffer(message, 0x1ca4);
-                if (fcn_005dfe80(message, 1)) {
-                    handle = fcn_004c3f90();
-                    if (handle != -1) while (!fcn_004c4450(handle)) fcn_00535960();
-                    *(int *)0x774954 = 1;
-                    fcn_005356b0(0x5438c0);
-                } else fcn_00471af0(dialog, 1);
-            } else if (current == c) {
-                fcn_00471af0(dialog, 0); fcn_005e3520(); fcn_00471af0(dialog, 1);
-            } else if (current == d) {
-                fcn_00471af0(dialog, 0); fcn_005e2b60(); fcn_00471af0(dialog, 1);
-            } else if (current == e) {
-                fcn_00471af0(dialog, 0); d2_ShowSoundOptions(); fcn_00471af0(dialog, 1);
-            } else if (current == g) *(int *)0x774654 = 1;
+        if (*(int *)0x14ce8d8) {
+            current = *(int *)0x67d370;
+            if (current != -1) {
+                if (current == a) {
+                    fcn_00471af0(dialog, 0);
+                    if (d2_ShowLoadGameMenu()) {
+                        *(int *)0x774958 = 1;
+                        *(int *)0x774954 = 1;
+                        fcn_005356b0(0x5438c0);
+                    } else fcn_00471af0(dialog, 1);
+                } else if (current == b) {
+                    fcn_00471af0(dialog, 0);
+                    if (!(*(unsigned char *)0x7747b0 & 4)) d2_RunSaveGameDialog(preview);
+                    else d2_ShowNetworkLoadGame(preview);
+                    fcn_00471af0(dialog, 1);
+                } else if (current == f) {
+                    fcn_00471af0(dialog, 0);
+                    io_FormatTextBuffer(message, 0x1ca4);
+                    if (fcn_005dfe80(message, 1)) {
+                        handle = fcn_004c3f90();
+                        while (handle != -1) {
+                            if (fcn_004c4450(handle)) {
+                                break;
+                            }
+                            fcn_00535960();
+                        }
+                        *(int *)0x774954 = 1;
+                        fcn_005356b0(0x5438c0);
+                    } else fcn_00471af0(dialog, 1);
+                } else if (current == c) {
+                    fcn_00471af0(dialog, 0); fcn_005e3520(); fcn_00471af0(dialog, 1);
+                } else if (current == d) {
+                    fcn_00471af0(dialog, 0); fcn_005e2b60(); fcn_00471af0(dialog, 1);
+                } else if (current == e) {
+                    fcn_00471af0(dialog, 0); d2_ShowSoundOptions(); fcn_00471af0(dialog, 1);
+                } else if (current == g) *(int *)0x774654 = 1;
+            }
         }
     }
     fcn_005e3c40();
@@ -120,6 +129,5 @@ int __cdecl fcn_005e43f0(void)
     fcn_004c3140((void *)(unsigned int)*(unsigned char *)0x7766a1);
     *(unsigned char *)0x772d10 = saved;
     fcn_004c39b0();
-    if (*(signed char *)0x7747b0 < 0 && !*(int *)0x774954) fcn_0057e870();
-    return 0;
+    if ((*(signed char *)0x7747b0 & 0x80) && !*(int *)0x774954) fcn_0057e870();
 }

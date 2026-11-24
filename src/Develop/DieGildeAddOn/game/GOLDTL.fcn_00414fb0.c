@@ -80,8 +80,8 @@ L2:
 		}
 	}
 	fl.b[1] |= 0x14;
-	fl.b[1] |= 8;
 	fl.b[8] |= 2;
+	fl.b[1] |= 8;
 	cnt = 1;
 	q = a / b;
 	frames[0].type = q;

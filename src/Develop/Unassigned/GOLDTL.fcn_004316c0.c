@@ -35,7 +35,7 @@ void __cdecl fcn_004316c0(int obj)
 {
 	PathRec rec[4];
 	float left[0xc];
-	float right[0xc];
+	float right[0x10];
 	float out[4];
 	float q[4];
 	float w;
@@ -68,8 +68,8 @@ void __cdecl fcn_004316c0(int obj)
 	}
 	count = 0;
 	if (*(char*) ((char*) plan + 0x594) != 0) {
-		fn = sizeof(rec);
 		fd = (char*) rec;
+		fn = sizeof(rec);
 		/* Reviewed original operand-homed fill (inline fill/copy block). */
 		__asm {
 			mov edi, fd
@@ -88,10 +88,9 @@ void __cdecl fcn_004316c0(int obj)
 			add ecx, ebx
 			rep stosb
 		}
-		count = 0;
-		for (i = 0; i <= 0x173; i += 0x7c) {
-			sec = (unsigned char*) plan + i + 0x41c;
-			nblock = *(int*) ((char*) plan + i + 0x484);
+		for (i = 0; i < 0x174; i += 0x7c) {
+			sec = (unsigned char*) *(int*) (obj + 0x1ec) + i + 0x41c;
+			nblock = *(int*) (sec + 0x68);
 			if (nblock == 0) {
 				continue;
 			}
@@ -100,21 +99,19 @@ void __cdecl fcn_004316c0(int obj)
 				if (id == 0xff) {
 					continue;
 				}
-				j = -1;
-				names = (unsigned char*) *(int*) ((char*) plan + 0x40c);
 				cand = (unsigned char*) (nblock + (id + 1) * 0x40);
-				for (k = 0; k < count; k++) {
-					if (strcmp(rec[k].name, (char*) cand) == 0) {
-						j = k;
+				for (j = 0; j < count; j++) {
+					if (strcmp(rec[j].name, (char*) cand) == 0) {
 						break;
 					}
 				}
 				edge = (Edge*) sec;
 				node = (int*) *(int*) (nblock + 0x15c);
-				if (j < 0) {
+				if (j >= count) {
 					if (count >= 4) {
 						continue;
 					}
+					names = (unsigned char*) *(int*) (*(int*) (obj + 0x1ec) + 0x40c);
 					strcpy(rec[count].name, (char*) cand);
 					for (k = 0; k < names[0x2a0]; k++) {
 						if (strcmp((char*) names + 0x74 + k * 0x58, (char*) cand) == 0) {
@@ -165,40 +162,40 @@ void __cdecl fcn_004316c0(int obj)
 				}
 			}
 		}
-		if (count != 0) {
-			for (i = 0; i < count; i++) {
-				w = 1.0f / (float) rec[i].flag;
-				for (k = 0; k < 3; k++) {
-					rec[i].mat[k][0] = w * rec[i].mat[k][0];
-					rec[i].mat[k][1] = w * rec[i].mat[k][1];
-					rec[i].mat[k][2] = w * rec[i].mat[k][2];
-				}
-				d3_MatrixToEulerAngles(rec[i].mat[0], q);
-				for (nblock = *(int*) (obj + 0x200); nblock != 0; nblock = *(int*) (nblock + 0x1f4)) {
-					if (*(int*) (nblock + 0x1ec) != 0
-					    && strcmp(rec[i].name, (char*) (*(int*) (nblock + 0x1ec) + 0xb4)) == 0) {
-						fcn_00438b40(nblock, rec[i].target);
-						d3_SetObjectRotation(nblock, q);
-					}
-				}
-			}
-			return;
-		}
 	}
-	names = (unsigned char*) *(int*) ((char*) plan + 0x40c);
-	for (nblock = *(int*) (obj + 0x200); nblock != 0; nblock = *(int*) (nblock + 0x1f4)) {
-		cand = (unsigned char*) *(int*) (nblock + 0x1ec);
-		if (cand == 0 || cand[0xb4] == 0) {
-			continue;
-		}
-		for (k = 0; k < names[0x2a0]; k++) {
-			if (strcmp((char*) names + 0x74 + k * 0x58, (char*) cand + 0xb4) == 0) {
-				break;
+	if (count == 0) {
+		names = (unsigned char*) *(int*) (*(int*) (obj + 0x1ec) + 0x40c);
+		for (nblock = *(int*) (obj + 0x200); nblock != 0; nblock = *(int*) (nblock + 0x1f4)) {
+			cand = (unsigned char*) *(int*) (nblock + 0x1ec);
+			if (cand == 0 || cand[0xb4] == 0) {
+				continue;
+			}
+			for (k = 0; k < names[0x2a0]; k++) {
+				if (strcmp((char*) names + 0x74 + k * 0x58, (char*) cand + 0xb4) == 0) {
+					break;
+				}
+			}
+			if (k < names[0x2a0]) {
+				fcn_00438b40(nblock, (float*) (names + k * 0x58 + 0xb4));
+				d3_SetObjectRotation(nblock, (float*) (names + k * 0x58 + 0xc0));
 			}
 		}
-		if (k < names[0x2a0]) {
-			fcn_00438b40(nblock, (float*) (names + k * 0x58 + 0xb4));
-			d3_SetObjectRotation(nblock, (float*) (names + k * 0x58 + 0xc0));
+	} else {
+		for (i = 0; i < count; i++) {
+			w = 1.0f / (float) rec[i].flag;
+			for (k = 0; k < 3; k++) {
+				rec[i].mat[k][0] = w * rec[i].mat[k][0];
+				rec[i].mat[k][1] = w * rec[i].mat[k][1];
+				rec[i].mat[k][2] = w * rec[i].mat[k][2];
+			}
+			d3_MatrixToEulerAngles(rec[i].mat[0], q);
+			for (nblock = *(int*) (obj + 0x200); nblock != 0; nblock = *(int*) (nblock + 0x1f4)) {
+				if (*(int*) (nblock + 0x1ec) != 0
+				    && strcmp(rec[i].name, (char*) (*(int*) (nblock + 0x1ec) + 0xb4)) == 0) {
+					fcn_00438b40(nblock, rec[i].target);
+					d3_SetObjectRotation(nblock, q);
+				}
+			}
 		}
 	}
 }

@@ -48,7 +48,7 @@ void __cdecl fcn_005b11f0(int* state)
 	int sx;
 	int sy;
 	int* slot;
-	int* list;
+	int list;
 	int obj;
 	unsigned short w;
 	unsigned char kind;
@@ -67,8 +67,8 @@ void __cdecl fcn_005b11f0(int* state)
 			state[0x9e8] = g_6b7fac;
 		}
 	}
-	if (g_100f888 != -1 && (unsigned int) (state[0x9e8] + 0x4b) < (unsigned int) g_6b7fac
-	    && g_14ce8e8 && g_6a99e8 == -1 && state[0x9e9] >= 1) {
+	if (g_100f888 != -1 && (unsigned int) g_6b7fac > (unsigned int) (state[0x9e8] + 0x4b)
+	    && g_14ce8e8 && g_6a99e8 == -1 && state[0x9e9] > 0) {
 		n = 0;
 		p = (char*) (state + 0x38);
 		i = d2_CurrentElementId;
@@ -86,10 +86,10 @@ void __cdecl fcn_005b11f0(int* state)
 		} while (n < state[0x9e9]);
 	}
 	d2_CurrentWindowId = state[2];
-	list = (int*) 0x14d0020;
+	list = 0x14d0020;
 	slot = state + 0x637;
 	for (;;) {
-		obj = *list;
+		obj = *(int*) list;
 		if (obj == 0) {
 			goto next;
 		}
@@ -120,14 +120,11 @@ void __cdecl fcn_005b11f0(int* state)
 		sx = (int) ((float) (g_778d24 / 2) + (float) ox + x);
 		if (*slot == -1) {
 			e = *(char**) (obj + 0x34);
-			id = *(int*) (e + 0x204);
 			if (*(int*) (e + 0x218) == 1 && *(int*) (obj + 0x124) == 0) {
 				goto check;
 			}
-			if (id == 0) {
-				goto check;
-			}
-			if (*(int*) (obj + 0x124) == 0) {
+			id = *(int*) (e + 0x204);
+			if (id != 0 && *(int*) (obj + 0x124) == 0) {
 				if (*(int*) (id + 0x16c) == 0) {
 					goto check;
 				}
@@ -152,25 +149,27 @@ void __cdecl fcn_005b11f0(int* state)
 				}
 				goto check;
 			}
-			p = fcn_0050d490((char*) id);
-			if (p == 0) {
-				goto check;
+			if (id != 0 && *(int*) (obj + 0x124) != 0) {
+				p = fcn_0050d490((char*) id);
+				if (p == 0) {
+					goto check;
+				}
+				kind = p[2];
+				if (kind != 6 && kind != 7 && kind != 5) {
+					goto check;
+				}
+				n = fcn_00469c30(*(int*) (g_77255c + 4) + sx, *(int*) (g_77255c + 8) + sy,
+				    *(int*) (p + 0x54) - 0x53);
+				*slot = n;
+				if (n == -1) {
+					goto next;
+				}
+				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_left)) = *(int*) (g_77255c + 4);
+				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_right)) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
+				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_top)) = *(int*) (g_77255c + 8);
+				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_bottom)) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
+				*(char**) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].value_050)) = (char*) (state[0] * 700 + 0x1038140);
 			}
-			kind = p[2];
-			if (kind != 6 && kind != 7 && kind != 5) {
-				goto check;
-			}
-			n = fcn_00469c30(*(int*) (g_77255c + 4) + sx, *(int*) (g_77255c + 8) + sy,
-			    *(int*) (p + 0x54) - 0x53);
-			*slot = n;
-			if (n == -1) {
-				goto next;
-			}
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_left)) = *(int*) (g_77255c + 4);
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_right)) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_top)) = *(int*) (g_77255c + 8);
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_bottom)) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
-			*(char**) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].value_050)) = (char*) (state[0] * 700 + 0x1038140);
 		} else {
 			e = *(char**) (obj + 0x34);
 			if (*(int*) (e + 0x218) == 1 && *(int*) (obj + 0x124) == 0) {
@@ -194,8 +193,8 @@ check:
 		}
 next:
 		slot += 1;
-		list += 1;
-		if (list >= (int*) 0x14d0c20) {
+		list += 4;
+		if (list >= 0x14d0c20) {
 			break;
 		}
 	}

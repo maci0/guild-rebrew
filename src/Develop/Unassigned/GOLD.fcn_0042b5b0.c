@@ -33,8 +33,8 @@ int __cdecl fcn_0042b5b0(char* name, int handlerAddress, int handlerKind, int n,
 	}
 	off = i * 0x4c;
 	*(int*) (tab + off + 0x44) = handlerAddress;
-	*(int*) (*(char**) 0x6332bc + off + 0x20) = n;
 	*(int*) (*(char**) 0x6332bc + off + 0x48) = handlerKind;
+	*(int*) (*(char**) 0x6332bc + off + 0x20) = n;
 	if (0 < n) {
 		va = &n;
 		dst = (int*) (off + 0x24);

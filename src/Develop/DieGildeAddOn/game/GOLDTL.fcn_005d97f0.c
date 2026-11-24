@@ -33,7 +33,6 @@ void __cdecl fcn_00471e30(int);
 unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
 {
     int v1;
-    int v3;
     int v4;
     int v5;
     int v6;
@@ -78,9 +77,8 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
         ((D2_CONTROL_TL*) g_1015ea0)[v6].value_1dc = 0xffffffce;
         ((D2_CONTROL_TL*) g_1015ea0)[v6].value_1e0 = 0x44;
         if (v5) {
-            v3 = (unsigned int) txt_TextEntries[v5 + v10];
             sprintf(v12, (char*) *(unsigned int*) 0x14ac804,
-                    gm_GetOppositeStatIndex(v5, v3));
+                    gm_GetOppositeStatIndex(v5, (unsigned int) txt_TextEntries[v5 + v10]));
         } else {
             v12[0] = 0;
         }

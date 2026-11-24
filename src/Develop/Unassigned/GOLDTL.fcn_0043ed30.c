@@ -34,6 +34,7 @@ char __cdecl fcn_0043ed30(char* node, LightIter* it)
 	int r;
 	int r2;
 	int w;
+	int offset;
 	int y0;
 	int y1;
 	int x0;
@@ -66,8 +67,9 @@ char __cdecl fcn_0043ed30(char* node, LightIter* it)
 	}
 	scale = sqrt(t) / (*(float*) 0x6b8308 + sc->f60);
 	w = sc->width;
+	offset = w * centerY + centerX;
 	if (!(scale > g_6629c8)) {
-		sc->data[w * centerY + centerX] |= 0x80;
+		sc->data[offset] |= 0x80;
 		return 1;
 	}
 	r = (int) scale;

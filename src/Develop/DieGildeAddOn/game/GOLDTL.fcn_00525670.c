@@ -54,7 +54,8 @@ unsigned int __cdecl gm_RebuildLoadedReferences(void)
 		for (p = (char*) 0x773db4; (int) p < 0x773dd4; p += 4)
 			*(int*) p = gm_LookupEntityRecordById(*(int*) p);
 	}
-	for (e = (Ent525670*) g_7f4ca0; (int) e < 0x85a0a0; e++) {
+	for (p = (char*) g_7f4ca0 + 0x170; (int) p < 0x85a210; p += 0x21c) {
+		e = (Ent525670*) (p - 0x170);
 		if ((unsigned short) e->id != 0xffff) {
 			if (e->f16c == -1)
 				e->f16c = 0;

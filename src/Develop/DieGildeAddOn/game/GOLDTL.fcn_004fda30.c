@@ -62,7 +62,7 @@ HEAD_SET* __cdecl fcn_004fda30(unsigned int entityIndex)
 				headSet = (HEAD_SET*) 0x693228;
 			}
 		} else {
-			headSet = (HEAD_SET*) 0x6918e8;
+			headSet = g_6918e8;
 		}
 		headEntry = (int*) headSet;
 		do {

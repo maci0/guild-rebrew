@@ -38,7 +38,6 @@ void __cdecl he_FreeAction(char*);
 void __cdecl fcn_00560290(char* a0)
 {
 	char text[1024];
-	char name[512];
 	float here[3];
 	float nextp[3];
 	float best;
@@ -92,7 +91,7 @@ void __cdecl fcn_00560290(char* a0)
 			if (sel) {
 				rec = 0;
 				*(unsigned int*) (a0 + 0xb4) = *(unsigned int*) (sel + 1);
-				if (*(char*) (a0 + 0xac)) {
+				if (*(unsigned char*) (a0 + 0xac) > 0) {
 					i = 0;
 					e = a0 + 0x8c;
 					do {
@@ -118,7 +117,7 @@ void __cdecl fcn_00560290(char* a0)
 				return;
 			}
 			i = 0;
-			if (*(char*) (a0 + 0xac)) {
+			if (*(unsigned char*) (a0 + 0xac) > 0) {
 				e = a0 + 0x8c;
 				do {
 					rec = gm_LookupEntityRecordById(*(int*) e);
@@ -142,7 +141,7 @@ void __cdecl fcn_00560290(char* a0)
 				return;
 			}
 			i = 0;
-			if (*(char*) (a0 + 0xac)) {
+			if (*(unsigned char*) (a0 + 0xac) > 0) {
 				e = a0 + 0x8c;
 				do {
 					id = (unsigned short*) gm_LookupEntityRecordById(*(int*) e);
@@ -167,7 +166,7 @@ void __cdecl fcn_00560290(char* a0)
 				break;
 			}
 			i = 0;
-			if (*(char*) (a0 + 0xac)) {
+			if (*(unsigned char*) (a0 + 0xac) > 0) {
 				e = a0 + 0x8c;
 				do {
 					rec = gm_LookupEntityRecordById(*(int*) e);
@@ -181,7 +180,7 @@ void __cdecl fcn_00560290(char* a0)
 				} while (i < (int) (unsigned char) *(a0 + 0xac));
 			}
 			i = 0;
-			if (*(char*) (a0 + 0xac)) {
+			if (*(unsigned char*) (a0 + 0xac) > 0) {
 				e = a0 + 0x8c;
 				do {
 					id = (unsigned short*) gm_LookupEntityRecordById(*(int*) e);
@@ -197,13 +196,15 @@ void __cdecl fcn_00560290(char* a0)
 				break;
 			}
 			win = fcn_00500e20(&gm_GameTime);
-			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v9].category != 0x20) {
-				scale = (double) fcn_0050c710(v9, 0xb, 1) * *(double*) 0x665eb0 + g_6629c8;
+			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v9].category == 0x20) {
+				scale = (double) fcn_0050c710(v9, 0x1e, 1) * *(double*) 0x665eb0 + 1.0;
+				t = gm_RandomMod(6) & 0xffff;
+				t = (int) ((double) ((t + 9) * (unsigned char) *(a0 + 0xac)) * scale);
 			} else {
-				scale = (double) fcn_0050c710(v9, 0x1e, 1) * *(double*) 0x665eb0 + g_6629c8;
+				scale = (double) fcn_0050c710(v9, 0xb, 1) * *(double*) 0x665eb0 + 1.0;
+				t = gm_RandomMod(6) & 0xffff;
+				t = (int) ((double) ((t + 9) * (unsigned char) *(a0 + 0xac)) * scale);
 			}
-			t = gm_RandomMod(6) & 0xffff;
-			t = (int) ((double) ((t + 9) * (unsigned char) *(a0 + 0xac)) * scale);
 			if (win == 3 && !(*(v9 + 0x5b) & 0x20)) {
 				t = (int) ((double) t * 0.5);
 			}
@@ -213,6 +214,7 @@ void __cdecl fcn_00560290(char* a0)
 			}
 			id = (unsigned short*) fcn_0050dc90(v9);
 			if (rec) {
+				char name[512];
 				fcn_004c51f0(*(int*) (q + 2), -1, *(unsigned short*) (a0 + 0xae), rec, g_773d75, 0);
 				io_FormatTextBuffer(text, 0x1802, 0x17fd, v9);
 				io_FormatTextBuffer(name, 0x1803, rec, (unsigned int) *(unsigned short*) (a0 + 0xae) * 2 + 0x9a8);
@@ -229,7 +231,7 @@ void __cdecl fcn_00560290(char* a0)
 		case 0xfffffffe:
 		case 0xffffffff:
 			sel = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (a0 + 0x10));
-			if (sel && *(char*) (a0 + 0xac)) {
+			if (sel && *(unsigned char*) (a0 + 0xac) > 0) {
 				i = 0;
 				e = a0 + 0x8c;
 				do {

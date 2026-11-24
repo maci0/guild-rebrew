@@ -67,8 +67,8 @@ int* __cdecl CreateParticle(int* a1)
 		s->items[i].x18 = s->items[i].x40;
 		s->items[i].x00 = (float) (fcn_0064d3f8() * 3.051851e-05f * 0.2 - 0.1);
 		s->items[i].x04 = (float) (0.1 - (fcn_0064d3f8() * 3.051851e-05f + 1.0) * 0.2);
-		v = s->items[i].x04;
-		s->items[i].x08 = (float) (-0.5 - v);
+		v = (float) (-0.5 - s->items[i].x04);
+		s->items[i].x08 = v;
 		s->items[i].x4f = (unsigned char) (0.0 > s->items[i].x3c * 1.5 - 20.0 ? 0.0 : s->items[i].x3c * 1.5 - 20.0);
 	}
 	return (int*) s;

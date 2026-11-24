@@ -42,8 +42,6 @@ void __cdecl fcn_00564460(char* e)
 	unsigned char type;
 	int ptype;
 	int k;
-	int a;
-	int b;
 	int c;
 
 	switch (*(int*) (e + 0x70)) {
@@ -74,14 +72,10 @@ void __cdecl fcn_00564460(char* e)
 			unsigned char* v4;
 
 			v4 = *(unsigned char**) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4e10);
-			if (v4 != 0) {
-				if (v4 == p) {
-					f = 5.0f;
-				} else {
-					if (v4 != 0 && *v4 < *p) {
-						f = 1.2f;
-					}
-				}
+			if (v4 != 0 && v4 == p) {
+				f = 5.0f;
+			} else if (v4 != 0 && *v4 < *p) {
+				f = 1.2f;
 			}
 		} else {
 			k = 0;
@@ -92,15 +86,15 @@ void __cdecl fcn_00564460(char* e)
 					k++;
 				} while (gm_FindNextFilteredEntity());
 			}
-			if (k > 1) {
-				f = 1.6f;
-			} else {
+			if (k <= 1) {
 				ptype = *(unsigned char*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca2);
-				if (ptype != 6 && ptype != 7 && ptype != 5) {
-					f = 1.6f;
-				} else {
+				if (ptype == 6 || ptype == 7 || ptype == 5) {
 					f = 8.0f;
+				} else {
+					f = 1.6f;
 				}
+			} else {
+				f = 1.6f;
 			}
 		}
 		if ((double)n * ((double)f * (g_662a08 - (double)fcn_0050f980(*q, *(unsigned short*) (p + 0x25), 1) * g_662910)) < (double) *(int*) (e + 0xb0)) {
@@ -109,16 +103,11 @@ void __cdecl fcn_00564460(char* e)
 			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 2, 0x200);
 			fcn_004c51a0(*(int*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca4),
 				*(int*) (q + 2), g_773d75, *(int*) (e + 0xb0));
-			if (*(short*) (p + 0x27) != *(short*) (p + 0x25)) {
-				a = *(int*) (p + 1);
-				b = *(int*) (q + 2);
-				c = -1;
+			if (*(short*) (p + 0x27) == *(short*) (p + 0x25)) {
+				fcn_004c5f60(*(int*) (p + 1), *(int*) (q + 2), *(int*) (q + 2));
 			} else {
-				a = *(int*) (p + 1);
-				b = *(int*) (q + 2);
-				c = b;
+				fcn_004c5f60(*(int*) (p + 1), *(int*) (q + 2), -1);
 			}
-			fcn_004c5f60(a, b, c);
 			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 2);
 			he_FreeAction(e);
 			return;
@@ -145,16 +134,11 @@ void __cdecl fcn_00564460(char* e)
 			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 2, 0x200);
 			fcn_004c51a0(*(int*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca4),
 				*(int*) (q + 2), g_773d75, *(int*) (e + 0xb0));
-			if (*(short*) (p + 0x27) != *(short*) (p + 0x25)) {
-				a = *(int*) (p + 1);
-				b = *(int*) (q + 2);
-				c = -1;
+			if (*(short*) (p + 0x27) == *(short*) (p + 0x25)) {
+				fcn_004c5f60(*(int*) (p + 1), *(int*) (q + 2), *(int*) (q + 2));
 			} else {
-				a = *(int*) (p + 1);
-				b = *(int*) (q + 2);
-				c = b;
+				fcn_004c5f60(*(int*) (p + 1), *(int*) (q + 2), -1);
 			}
-			fcn_004c5f60(a, b, c);
 			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 2);
 			fcn_00545780(e);
 			he_FreeAction(e);

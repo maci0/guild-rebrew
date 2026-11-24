@@ -22,6 +22,7 @@ typedef struct {
 	int f;
 	int g;
 	int h;
+	int i;
 } msg_4f4f60;
 #pragma pack()
 
@@ -31,6 +32,7 @@ int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5)
 	char rec[36];
 	msg_4f4f60 msg;
 	char* h1;
+	int v3;
 
 	float f;
 
@@ -38,9 +40,10 @@ int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5)
 	if (!fcn_004f4830(idx, rec)) {
 		goto fail;
 	}
-	h1 = gm_LookupEntityRecordById(a3);
+	v3 = a3;
+	h1 = gm_LookupEntityRecordById(v3);
 	gm_LookupEntityRecordById(a4);
-	gm_ResolveEntityById((char**)&idx, 0, 0, a5);
+	gm_ResolveEntityById((char**)&a3, 0, 0, a5);
 	switch ((unsigned char) *(int*) (rec + 0x14)) {
 	case 1:
 		if (*(int*) (rec + 0x18) != id) {
@@ -81,7 +84,7 @@ int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5)
 		goto fail;
 	}
 	f = fcn_004f4ed0((unsigned short*) h1);
-	if (gm_RandomFloat01() < f) {
+	if (gm_RandomFloat01() >= f) {
 		goto fail;
 	}
 	if (fcn_005c6270(h1, 0x22a) != 0) {
@@ -93,7 +96,7 @@ int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5)
 	msg.f = id;
 	msg.e = rec[0];
 	msg.b = a4;
-	msg.c = a3;
+	msg.c = v3;
 	msg.d = *(short*) (rec + 0x10);
 	msg.h = 1;
 	msg.g = a5;

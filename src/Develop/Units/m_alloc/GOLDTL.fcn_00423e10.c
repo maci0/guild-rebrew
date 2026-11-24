@@ -54,11 +54,11 @@ int __cdecl sbs_CreateSet(char* s)
 		g_6b7d6c++;
 		return 0;
 	}
+	fp = buf;
 	if (buf == 0) {
 		return -1;
 	}
 	fn = 0x40;
-	fp = buf;
 	__asm {
 		mov edi, fp
 		mov ebx, fn

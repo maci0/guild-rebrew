@@ -1,9 +1,9 @@
 #include <string.h>
+#include "Develop/rebrew_types.h"
+#include "Develop/rebrew_globals.h"
 
 /* DATA TODO: native .data tables 0x875360 (25 dwords, item kind to building
- * index), 0x919f80 (732 dwords, per item best building index). 0x7e3f30 is the
- * building-prototype pointer (88 records, stride 0x24d), 0x91aaf0 the item
- * prototype pointer (stride 0x41). */
+ * index), 0x919f80 (732 dwords, per item best building index). */
 #define KIND_BUILDING ((int*) 0x875360)
 #define ITEM_BEST ((int*) 0x919f80)
 #define BUILDING_COUNT 0x58
@@ -17,9 +17,6 @@ void __cdecl gm_InitItemBuildingMap(void)
 {
 	unsigned char* p;
 	unsigned char* q;
-	unsigned char* r;
-	unsigned short* ids;
-	int* best;
 	int i;
 	int j;
 	int k;
@@ -32,12 +29,13 @@ void __cdecl gm_InitItemBuildingMap(void)
 	int count;
 	int idx;
 	int value;
+	unsigned short id;
 
 	memset(KIND_BUILDING, 0, 25 * sizeof(int));
 	for (i = 0; i < ITEM_COUNT; i++) {
 		ITEM_BEST[i] = BUILDING_COUNT;
 	}
-	p = *(unsigned char**) 0x7e3f30;
+	p = (unsigned char*) g_entity_type_table;
 	pos = 0;
 	run = 0;
 	KIND_BUILDING[8] = 0x2f;
@@ -67,14 +65,14 @@ void __cdecl gm_InitItemBuildingMap(void)
 		} else {
 			pos++;
 		}
-		ids = (unsigned short*) (p + 0x23);
-		for (k = 0; k < p[0x22]; k++, ids++) {
-			if (*ids == 0xffff) {
+		for (k = 0; k < p[0x22]; k++) {
+			id = ((unsigned short*) (p + 0x23))[k];
+			if (id == 0xffff) {
 				continue;
 			}
-			idx = *ids & 0x7fff;
-			base = KIND_BUILDING[*(unsigned char*) (*(char**) 0x91aaf0 + idx * ITEM_STRIDE + 0x21)];
-			q = *(unsigned char**) 0x7e3f30 + base * BUILDING_STRIDE;
+			idx = id & 0x7fff;
+			base = KIND_BUILDING[(unsigned char) g_item_def_table[idx * ITEM_STRIDE + 0x21]];
+			q = (unsigned char*) g_entity_type_table + base * BUILDING_STRIDE;
 			key2 = q[0];
 			count = 0;
 			if (base < BUILDING_COUNT) {
@@ -89,10 +87,9 @@ void __cdecl gm_InitItemBuildingMap(void)
 			}
 		}
 	}
-	r = (unsigned char*) (*(char**) 0x91aaf0 + 0x21);
-	for (best = ITEM_BEST; (int) best < 0x91aaf0; best++, r += ITEM_STRIDE) {
-		if (*best == BUILDING_COUNT) {
-			*best = KIND_BUILDING[*r];
+	for (i = 0; i < ITEM_COUNT; i++) {
+		if (ITEM_BEST[i] == BUILDING_COUNT) {
+			ITEM_BEST[i] = KIND_BUILDING[(unsigned char) g_item_def_table[i * ITEM_STRIDE + 0x21]];
 		}
 	}
 }

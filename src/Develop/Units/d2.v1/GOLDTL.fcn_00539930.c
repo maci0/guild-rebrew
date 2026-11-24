@@ -82,7 +82,7 @@ unsigned int __cdecl d2_ShowServerBrowser(int a0)
 	char savePath[260];
 	
 	
-	unsigned int v36;
+	int v36;
 	int v38;
 	int v4;
 	int dialog;
@@ -150,18 +150,16 @@ unsigned int __cdecl d2_ShowServerBrowser(int a0)
 						v11 = *(int*) ((int) ((int*) ((char*) hosts + 0x7c)) + v32);
 						*v31 = -1;
 						if (v11 == 0x3f) {
-							if (a0 == 0) {
+							if (a0 != 0) {
 								goto label_539d27;
 							}
-							goto label_539ae5;
+						} else if (v11 == 0x7f && a0 == 0) {
+							goto label_539d27;
 						}
-label_539ae5:
-						if (v11 == 0x7f) {
-							if (a0 == 0) {
-								goto label_539d27;
-							}
-						}
-						if (v11 != 0x3f) {
+						if (v11 == 0x3f) {
+							v8 = &((char*) hosts + 0x16)[v32];
+							strcpy(mapName, v8);
+						} else {
 							v13 = (int*) ((int) ((int*) ((char*) hosts + 0x5a)) + v32);
 							sprintf(path, s_6a3a54, &((unsigned char*) hosts + 0x36)[v32 + 4]);
 							v32 = vfs_Tfopen(path, 0x6750e8, g_6b7fdc);
@@ -169,7 +167,7 @@ label_539ae5:
 								v4 = 1;
 								fcn_00521eb0(v32, header1);
 								v12 = 0;
-								if (((*(unsigned int*) (header1 + 0x31)) & 0xff) != 0) {
+								if ((int) ((*(unsigned int*) (header1 + 0x31)) & 0xff) > 0) {
 									do {
 										if (*v13 != ((int*) (header1 + 0x78))[v12]) {
 											v4 = 0;
@@ -190,9 +188,6 @@ label_539ba4:
 							strcpy(mapName, v8);
 							v12 = v37;
 							v32 = v34;
-						} else {
-							v8 = &((char*) hosts + 0x16)[v32];
-							strcpy(mapName, v8);
 						}
 						if (v4 != 0) {
 							__strupr(mapName);
@@ -237,24 +232,7 @@ label_539d27:
 				g_774654 = 1;
 			}
 			if (g_100f1dc != -1) {
-				int v40b;
-				int v39b;
-				v40b = buttons[2];
-				v39b = buttons[1];
-				if (d2_CurrentElementId != buttons[0]) {
-					if (d2_CurrentElementId != v39b) {
-						if (d2_CurrentElementId == v40b) {
-							fcn_00471af0(dialog, 0);
-							if (d2_PromptNetworkHost() != 0) {
-								g_774654 = 1;
-								v38 = 1;
-							}
-							fcn_00471af0(dialog, 1);
-						}
-					} else {
-						v4 = 1;
-					}
-				} else {
+				if (d2_CurrentElementId == buttons[0]) {
 					v32 = *(int*) (group * 0x8c + 0x102cbc8);
 					if (v32 != -1) {
 						v12 = v32 * 0x80;
@@ -305,7 +283,7 @@ label_539d27:
 								v10[v32 + 0x7e254a] = v3;
 								v10 = &v10[1];
 							} while (v3 != 0);
-							g_7747b0 |= 0x40;
+							*(int*) &g_7747b0 |= 0x40;
 							sprintf(savePath, s_6a3a54, g_7e21a0);
 							memset(header2, 0, sizeof(header2));
 
@@ -333,25 +311,38 @@ label_539d27:
 							g_9badc4 = (*(unsigned int*) (header2 + 0x6c)) & 0xff;
 							v32 = 0;
 							do {
-								v2 = (header2 + 0x40)[v32];
-								*(char*) (v32 + 0x9bada0) = v2;
+								v2 = header2[0x40 + v32];
+								((char*) 0x9bada0)[v32] = v2;
 								v32 += 1;
 							} while (v2 != 0);
 							if (((int*) header2)[0] >= 0x10054) {
 								v32 = 0;
 								do {
-										v2 = (header2 + 0x50)[v32];
-									*(char*) (v32 + 0x9badb0) = v2;
+									v2 = header2[0x50 + v32];
+									((char*) 0x9badb0)[v32] = v2;
 									v32 += 1;
 								} while (v2 != 0);
-								g_9badc8 = (int) ((*(unsigned int*) (header2 + 0x60)) >> 0x18);
+								g_9badc8 = (int) ((*(unsigned int*) (header2 + 0x63)) & 0xff);
 								g_9badcc = (*(unsigned int*) (header2 + 0x64));
 							}
 						}
 					}
+				} else if (d2_CurrentElementId == buttons[1]) {
+					v4 = 1;
+				} else if (d2_CurrentElementId == buttons[2]) {
+					fcn_00471af0(dialog, 0);
+					if (d2_PromptNetworkHost() != 0) {
+						g_774654 = 1;
+						v38 = 1;
+					}
+					fcn_00471af0(dialog, 1);
 				}
 			}
-			fcn_00472640(buttons[0], *(int*) (group * 0x8c + 0x102cbc8) != -1);
+			if (*(int*) (group * 0x8c + 0x102cbc8) != -1) {
+				fcn_00472640(buttons[0], 1);
+			} else {
+				fcn_00472640(buttons[0], 0);
+			}
 		} while (fcn_005373e0(0x539930, 0x24087) != 0);
 		if (group != -1) {
 			d2_ClearRadioGroup(group);

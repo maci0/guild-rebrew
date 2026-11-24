@@ -64,7 +64,7 @@ typedef struct CMsg {
 	float f04;      /* +0x04 */
 	int i08;        /* +0x08 */
 	float f0c;      /* +0x0c */
-	char text[4];   /* +0x10 */
+	unsigned char text[4];   /* +0x10 */
 	int id[6];      /* +0x14 */
 	int pad[9];     /* +0x2c */
 	int hnd[8];
@@ -77,7 +77,7 @@ int __cdecl cut_RunProzess(int a0)
 	int i;
 	int j;
 	int n;
-	unsigned int cnt;
+	int cnt;
 	float f;
 	float fsum;
 	char* p34;
@@ -206,15 +206,15 @@ int __cdecl cut_RunProzess(int a0)
 	}
 	h2 = fcn_004e4ae0("ADDON\\PROZESS_NEU.sbf", 0);
 	msg.pad[0] = fcn_00493dc0((unsigned short*) p34, (unsigned short*) p38);
-	sprintf(str, "%s ", fcn_004fda30(*(unsigned short*) p3c));
+	sprintf(str, "%s ", (char*) fcn_004fda30(*(unsigned short*) p3c) + 4);
 	end = str + strlen(str);
-	sprintf(end, "%s ", fcn_004fda30(*(unsigned short*) p34));
+	sprintf(end, "%s ", (char*) fcn_004fda30(*(unsigned short*) p34) + 4);
 	end = str + strlen(str);
-	sprintf(end, "%s ", fcn_004fda30(*(unsigned short*) p38));
+	sprintf(end, "%s ", (char*) fcn_004fda30(*(unsigned short*) p38) + 4);
 	end = str + strlen(str);
-	sprintf(end, "%s ", fcn_004fda30(*(unsigned short*) p40));
+	sprintf(end, "%s ", (char*) fcn_004fda30(*(unsigned short*) p40) + 4);
 	end = str + strlen(str);
-	sprintf(end, "%s", fcn_004fda30(*(unsigned short*) p44));
+	sprintf(end, "%s", (char*) fcn_004fda30(*(unsigned short*) p44) + 4);
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-create2.esc", (int) str);
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "2");
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "2");
@@ -339,12 +339,12 @@ int __cdecl cut_RunProzess(int a0)
 		cnt2 = *(unsigned char*) (a0 + 0x30);
 		idx = 0;
 		if (cnt2 > 0) {
-			while (*(int*) (0x9b0e30 + idx * 0x35c) != msg.id[0]) {
-				idx++;
-				if (idx >= cnt2) {
+			do {
+				if (*(int*) (0x9b0e30 + idx * 0x35c) == msg.id[0]) {
 					break;
 				}
-			}
+				idx++;
+			} while (idx < cnt2);
 		}
 		v1 = *(int*) (g_9b0eb4 + idx * 0x35c);
 		v2 = *(int*) (0x9b0eb8 + idx * 0x35c);
@@ -460,10 +460,7 @@ int __cdecl cut_RunProzess(int a0)
 			}
 
 			/* 0x4de05c */
-			i = 0;
-			do {
-				work[i] = "cutscenes\\prozess\\folter\\"[i];
-			} while ("cutscenes\\prozess\\folter\\"[i++] != 0);
+			memcpy(work, "cutscenes\\prozess\\folter\\", 26);
 			pend = work + strlen(work);
 			pent = gm_LookupEntityRecordById(*(int*) (a0 + 0x48));
 			d2_SetForm(g_68bfc0, 0);
@@ -486,12 +483,15 @@ int __cdecl cut_RunProzess(int a0)
 			}
 			fcn_004e44f0(h);
 			h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
-			st = *(int*) (g_9b0eb4 + i * 0x35c);
-			msg.pad[3] = st & 0xf;
-			if (msg.pad[3] >= 6) {
+			st = *(int*) (g_9b0eb4 + i * 0x35c) & 0xf;
+			if (st < 6) {
+				if (st > 0) {
+					msg.pad[3] = st;
+				} else {
+					msg.pad[3] = 0;
+				}
+			} else {
 				msg.pad[3] = 6;
-			} else if (msg.pad[3] <= 0) {
-				msg.pad[3] = 0;
 			}
 			msg.pad[4] = fcn_004938c0(&msg);
 			msg.pad[5] = 0;
@@ -709,7 +709,7 @@ int __cdecl cut_RunProzess(int a0)
 	fcn_004e4b00(hStrafe);
 	fcn_004e4b00(h0);
 	h14 = fcn_004e4ae0("PROZESS_8.sbf", 0);
-	if (acc < 2) {
+	if ((unsigned int) acc < 2) {
 		/* 0x4deb4a: guilty verdict */
 		hStrafe = fcn_004e4ae0("PROZESS_7_SCHULDIG.sbf", 0);
 		h0 = fcn_004e4ae0("PROZESS_7_STRAFEN.sbf", 0);
@@ -730,7 +730,7 @@ int __cdecl cut_RunProzess(int a0)
 			} while (i < cnt);
 		}
 		st = *(int*) (g_9b0eb4 + i * 0x35c);
-		if (st >= 4 && *(char*) (p34 + 2) == 6 && *(char*) (p38 + 0x166) != 0) {
+		if ((unsigned int) st >= 4 && *(char*) (p34 + 2) == 6 && *(char*) (p38 + 0x166) != 0) {
 			fcn_004b4650((int) p34, 0x13);
 		}
 		fcn_004e4450(g_68bfc0, 1);
@@ -739,7 +739,7 @@ int __cdecl cut_RunProzess(int a0)
 		io_AppendText(0x152f, *(unsigned short*) p38);
 		io_AppendText(0x1530);
 		fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_7_SCHULDIG",
-			(*(char*) (p38 + 9) == 1), 0x64);
+			((*(char*) (p38 + 9) == 1) & 1), 0x64);
 		fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_7_SCHULDIG", 2, 0xfa);
 		cut_WaitTicks(3);
 		fcn_004f6810((int) p38, st);
@@ -759,7 +759,7 @@ int __cdecl cut_RunProzess(int a0)
 		}
 		fcn_004e4b40(*(unsigned short*) p3c, h0, "_PROZESS_7_STRAFEN", st, 0x64);
 		fcn_004e4b40(*(unsigned short*) p3c, h14, "_PROZESS_8",
-			(*(char*) (p38 + 9) == 1), 0xc8);
+			((*(char*) (p38 + 9) == 1) & 1), 0xc8);
 		eIdx = g_774970;
 		if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
 			fcn_004f6850((int) p38, st, (int) p3c, (int) p40, (int) p44);
@@ -783,9 +783,9 @@ int __cdecl cut_RunProzess(int a0)
 		/* 0x4dee4f: not guilty verdict */
 		hStrafe = fcn_004e4ae0("PROZESS_7_NICHT_SCHULDIG.sbf", 0);
 		fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_7_NICHT_SCHULDIG",
-			(*(char*) (p38 + 9) == 1), 0x64);
+			((*(char*) (p38 + 9) == 1) & 1), 0x64);
 		fcn_004e4b40(*(unsigned short*) p3c, h14, "_PROZESS_8",
-			2 + (*(char*) (p34 + 9) == 1), 0xc8);
+			2 + ((*(char*) (p34 + 9) == 1) & 1), 0xc8);
 		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
 		fcn_004e4450(g_68bfc0, 1);
 		d2_SetForm(g_68bfc0, 0);
@@ -809,8 +809,8 @@ int __cdecl cut_RunProzess(int a0)
 	/* 0x4defad */
 	eIdx = g_774970;
 	if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
-		if (msg.pad[6] != 0 && *(float*) &msg.pad[8] != 0.0f) {
-			fcn_004ff210(*(short*) p38, (int) *(float*) &msg.pad[8]);
+		if (msg.pad[6] != 0 && *(float*) &msg.pad[8] < 0.0f) {
+			fcn_004ff210(*(unsigned short*) p38, (int) *(float*) &msg.pad[8]);
 		}
 		if (fcn_005c6270((int) p38, 0x22e) != 0) {
 			fcn_004c54c0(*(int*) (p38 + 4), *(int*) (p3c + 4), -0x1a, 1);

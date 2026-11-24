@@ -19,17 +19,17 @@ char* __cdecl fcn_004be1f0(int head);
 
 /* Reads a table of 0x40-byte records and appends each record to its owner list. */
 /* ADDRESS: GOLDTL 0x004c0840 */
-int __cdecl fcn_004c0840(int handle)
+int __cdecl fcn_004c0840(int n)
 {
 	Rec64* rec;
 	char* buf;
 	char* x;
 	char* dst;
-	int n;
+	int handle;
 	int i;
 	int k;
 
-	n = handle;
+	handle = n;
 	if (ls_ReadVfsDataChecked(&n, 4, 1, handle) == 0)
 		return 0;
 	buf = (char*) m_alloc(n * 0x40, (char*) 0x681748);

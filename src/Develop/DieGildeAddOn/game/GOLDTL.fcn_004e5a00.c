@@ -3,8 +3,6 @@
 
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 
-#pragma intrinsic(memset)
-
 extern double dbl_6640e8;
 extern double dbl_6629c8;
 
@@ -41,8 +39,6 @@ void __cdecl fcn_00473150(int a);
 void __cdecl fcn_004c4510(int a, int b);
 void __cdecl fcn_004c4700(int a, int b, char* c, int* d);
 void __cdecl fcn_004c53a0(void);
-
-#pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x004e5a00 */
 void __cdecl cut_ExecuteCutscene(int* event)
@@ -82,7 +78,7 @@ void __cdecl cut_ExecuteCutscene(int* event)
     int* slot;
     int* record;
     int* unit;
-    int* hop;
+    int hop_addr;
 
     e = (unsigned char*) event;
     sprintf(text, (char*) 0x68d604, e[8], *(int*) e);
@@ -302,8 +298,8 @@ post_cleanup:
     n = *(unsigned short*) 0x774970;
     if (*(int*) (e + 0xc) == ((int*) 0x7f4ca0)[n * 135 + 1]) {
         unit = (int*) (e + 0x34);
-        for (hop = (int*) 0x9b0e20; hop < (int*) 0x9b43e0;
-            hop = (int*) ((char*) hop + 0x35c)) {
+        for (hop_addr = 0x9b0e20; hop_addr < 0x9b43e0; hop_addr += 0x35c) {
+            int* hop = (int*) hop_addr;
             hop[1] = 0;
             hop[0] = 0;
             hop[2] = 0;

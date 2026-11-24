@@ -1,3 +1,7 @@
+#include "client_lighting.h"
+
+extern volatile int g_6b7fac;
+
 typedef struct Query_453270 {
 	char* ref;
 	unsigned int count;
@@ -44,7 +48,7 @@ char __cdecl fcn_00453270(char* o)
 	}
 	color.u = 0;
 	color.b[0] = 0xff;
-	(*(int*) 0x633b04)++;
+	g_6b86d4++;
 	fcn_00452ee0(o);
 	*(int*) 0x633b18 = 0;
 	p = *(char**) mesh;
@@ -95,7 +99,10 @@ char __cdecl fcn_00453270(char* o)
 		}
 	} else {
 		for (i = 0; i < *(int*) (mesh + 8); i++, p += 0x50) {
-			lum = *(float*) (p + 0x30) * 0.3f + (*(float*) (p + 0x34) * 0.59f + *(float*) (p + 0x38) * 0.11f);
+			v[0] = *(float*) (p + 0x30);
+			v[1] = *(float*) (p + 0x34);
+			v[2] = *(float*) (p + 0x38);
+			lum = v[0] * 0.3f + v[1] * 0.59f + v[2] * 0.11f;
 			tmp = (int) lum;
 			if ((unsigned int) tmp >= 0xff) {
 				tmp = 0xff;
@@ -108,8 +115,8 @@ char __cdecl fcn_00453270(char* o)
 	d3_VisitSceneObjectsUntilStopped(*(char**) (o + 0x208), 0, 4, fcn_00452d80, o);
 	*(int*) 0x633b18 = 0;
 	o[0x210] |= 4;
-	*(int*) (o + 0x44) = *(int*) 0x6333cc;
-	*(int*) (*(char**) (o + 0x1ec) + 0x95c) = *(int*) 0x633b10;
-	(*(int*) 0x633b04)--;
+	*(int*) (o + 0x44) = g_6b7fac;
+	*(int*) (*(char**) (o + 0x1ec) + 0x95c) = LightingUpdateCount;
+	g_6b86d4--;
 	return 1;
 }

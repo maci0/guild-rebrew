@@ -13,7 +13,7 @@ int __cdecl fcn_004eb180(char* owner, int* id, float* fraction, int include)
             value = (float) (((double) *(int*) (event + 0xb8) -
                 (double) *(int*) (event + 0xb4)) / (double) *(int*) (event + 0xb8));
             *fraction = value;
-            *fraction = (1.0f < value) ? 1.0f : (!(value > 0.0f) ? 0.0f : (!(1.0f < value) ? value : 1.0f));
+            *fraction = (((1.0f < value) ? 1.0f : value) > 0.0f) ? ((1.0f < value) ? 1.0f : value) : 0.0f;
 
 
 
@@ -22,7 +22,7 @@ int __cdecl fcn_004eb180(char* owner, int* id, float* fraction, int include)
             rest = (float) (((double) *(int*) (event + 0xbc) -
                 (double) *(int*) (event + 0xb8)) / (double) *(int*) (event + 0xbc));
             *fraction = rest;
-            *fraction = (1.0f < rest) ? 1.0f : (!(rest > 0.0f) ? 0.0f : (!(1.0f < rest) ? rest : 1.0f));
+            *fraction = (((1.0f < rest) ? 1.0f : rest) > 0.0f) ? ((1.0f < rest) ? 1.0f : rest) : 0.0f;
 
 
 
@@ -32,7 +32,7 @@ int __cdecl fcn_004eb180(char* owner, int* id, float* fraction, int include)
             rest = (float) (((double) *(int*) (event + 0xbc) -
                 (double) *(int*) (event + 0xb8)) / (double) *(int*) (event + 0xbc));
             *fraction = rest;
-            *fraction = (1.0f < rest) ? 1.0f : (!(rest > 0.0f) ? 0.0f : (!(1.0f < rest) ? rest : 1.0f));
+            *fraction = (((1.0f < rest) ? 1.0f : rest) > 0.0f) ? ((1.0f < rest) ? 1.0f : rest) : 0.0f;
 
 
 

@@ -21,9 +21,9 @@ void __cdecl fcn_00558d10(char* e)
 	unsigned int bit_hi;
 	int n;
 
-	idx = *(int*) (e + 0xb8);
 	clock = (pos14_7f4c00*) (e + 0x52);
 	*clock = gm_GameTime;
+	idx = *(int*) (e + 0xb8);
 	n = 0x100;
 	do {
 		p = lpGebaeudeINST + idx * 0xa9;
@@ -31,7 +31,7 @@ void __cdecl fcn_00558d10(char* e)
 		bit_lo = 0;
 		c = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[(unsigned int) *(unsigned char*) p].category;
 		if (c > 31) {
-			bit_hi = 1U << ((c - 32) & 31);
+			bit_hi = 1U << (c - 32);
 		} else {
 			bit_lo = 1U << c;
 		}

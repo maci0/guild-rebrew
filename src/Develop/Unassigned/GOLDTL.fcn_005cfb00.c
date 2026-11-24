@@ -63,7 +63,8 @@ unsigned int __cdecl fcn_005cfb00(short* a0, int* filterSpec, unsigned char* geb
 			}
 			goto zero;
 		case 4:
-			accept = (*(short*) (gebaeude + 0x27)) == *a0;
+			other = *(short*) (gebaeude + 0x27);
+			accept = other == *a0;
 			break;
 		case 5:
 			accept = (*(short*) (gebaeude + 0x27)) != *a0;

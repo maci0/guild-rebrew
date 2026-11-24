@@ -8,8 +8,6 @@ extern char g_7f4ca4[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern double g_6629c8;
-extern float g_662cf8;
-extern float g_665e88;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -127,11 +125,12 @@ void __cdecl fcn_0054e390(char* e)
 			} while (i != 0);
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
-			if (!n) {
-				*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+			if (n) {
+				he_FreeAction(e);
 				return;
 			}
-			break;
+			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+			return;
 		}
 	case 2:
 		if (!e[0x78] & 2) {
@@ -181,7 +180,6 @@ label_54e6a1:
 			char* p;
 			char* ownrow;
 			int i;
-			int v;
 			int m;
 			unsigned char kc;
 			int k;
@@ -190,9 +188,9 @@ label_54e6a1:
 			own = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 			ownrow = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)];
 			p = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)];
-			v = fcn_0050c710(own, 5, 1);
-			limit = (float) ((double) v * 0.01 + g_6629c8);
-			rec = fcn_00502cd0(*(int*) (gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0)) + 0x5d), 1, 0, 0xca);
+			limit = (float) (fcn_0050c710(own, 5, 1) * 0.01 + g_6629c8);
+			other = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
+			rec = fcn_00502cd0(*(int*) (other + 0x5d), 1, 0, 0xca);
 			while (rec != 0) {
 				if (*(int*) (rec + 0x2a) == *(int*) (own + 1)) {
 					f = (float) ((*(unsigned char*) (rec + 0x37) + 100.0) * 0.01);
@@ -203,7 +201,7 @@ label_54e6a1:
 			if (g_774800) {
 				f = 5.0f;
 			}
-			if (f * g_662cf8 + (float) (gm_RandomMod(0x4b) & 0xffff) > limit * g_665e88) {
+			if (f * 100.0f + (float) (gm_RandomMod(0x4b) & 0xffff) > limit * 125.0f) {
 				memset(pkt, 0, sizeof(pkt));
 				pkt[8] = 3;
 				pkt[0x26] = 0xa2;

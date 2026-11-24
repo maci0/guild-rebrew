@@ -45,12 +45,8 @@ int __cdecl fcn_004bd4e0(int sceneObjectArg, int typeIdArg)
 	float oy2;
 	float dx;
 	float dy;
-	double adx;
-	double ady;
 	float rate;
 	float step;
-	int cellx;
-	int celly;
 	int count;
 	int i;
 	int j;
@@ -149,45 +145,22 @@ int __cdecl fcn_004bd4e0(int sceneObjectArg, int typeIdArg)
 	if (g_1006110 > g_1006914) {
 		if (g_1006110 >= 5) {
 			memcpy((char*) g_1006114, (char*) g_1005910, 0x800);
-
-
-
-
-
-
-
-
 			g_1006110 = g_1006914;
 		} else {
-			goto copy_offset;
+			memcpy((char*) g_1006114 + g_1006110 * 2, (char*) g_1005910, 0x800);
+			g_1006110 += g_1006914;
 		}
 	} else if (g_1006110 < 5) {
-		goto copy_offset;
+		memcpy((char*) g_1006114 + g_1006110 * 2, (char*) g_1005910, 0x800);
+		g_1006110 += g_1006914;
 	}
-	goto line;
-copy_offset:
-	memcpy((char*) g_1006114 + g_1006110 * 2, (char*) g_1005910, 0x800);
-
-
-
-
-
-
-
-
-	g_1006110 += g_1006914;
-line:
 	dy = oy2 - oy1;
 	dx = ox2 - ox1;
-	adx = fabs(dx);
-	ady = fabs(dy);
-	if (ady > adx) {
-		rate = dx / ady;
+	if (fabs(dy) > fabs(dx)) {
+		rate = (float) (dx / fabs(dy));
 		step = (dy > 0.0f) ? 1.0f : -1.0f;
-		cellx = (int) oy1;
-		celly = (int) oy2;
-		if (cellx != celly) {
-			while (1) {
+		if ((int) oy1 != (int) oy2) {
+			do {
 				g_1006114[g_1006110 * 2] = (unsigned char) (int) oy1;
 				g_1006114[g_1006110 * 2 + 1] = (unsigned char) (int) ox1;
 				g_1006110++;
@@ -195,20 +168,13 @@ line:
 				*(int*) (map + ((int) ox1 * *g_1005900 + (int) oy1) * 0x1c) = 6;
 				oy1 += step;
 				ox1 += rate;
-				cellx = (int) oy1;
-				celly = (int) oy2;
-				if (cellx == celly) {
-					break;
-				}
-			}
+			} while ((int) oy1 != (int) oy2);
 		}
 	} else {
-		rate = dy / adx;
+		rate = (float) (dy / fabs(dx));
 		step = (dx > 0.0f) ? 1.0f : -1.0f;
-		cellx = (int) ox1;
-		celly = (int) ox2;
-		if (cellx != celly) {
-			while (1) {
+		if ((int) ox1 != (int) ox2) {
+			do {
 				g_1006114[g_1006110 * 2] = (unsigned char) (int) oy1;
 				g_1006114[g_1006110 * 2 + 1] = (unsigned char) (int) ox1;
 				g_1006110++;
@@ -216,12 +182,7 @@ line:
 				*(int*) (map + ((int) ox1 * *g_1005900 + (int) oy1) * 0x1c) = 6;
 				ox1 += step;
 				oy1 += rate;
-				cellx = (int) ox1;
-				celly = (int) ox2;
-				if (cellx == celly) {
-					break;
-				}
-			}
+			} while ((int) ox1 != (int) ox2);
 		}
 	}
 	dst = fcn_00445600((char*) sceneObjectArg, 0x100, 0, s_68149c);
@@ -244,19 +205,21 @@ line:
 						*(map + (unsigned int) g_1005910[n * 2 + 1] * *g_1005900 + (unsigned int) g_1005910[n * 2]) = (unsigned char) g_1005908;
 					}
 				} else {
-					for (n = 0; n < g_1006110; n++) {
+					p = (char*) g_1006114;
+					for (n = 0; n < g_1006110; n++, p += 2) {
 						for (k = -1; k < 2; k++) {
 							for (i = -1; i < 2; i++) {
 								map = *(char**) (g_1005900 + 5);
-								*(map + ((unsigned int) g_1006114[n * 2 + 1] + k) * *g_1005900 + (unsigned int) g_1006114[n * 2] + i) = (unsigned char) g_1005908;
+								*(map + ((unsigned int) (unsigned char) p[1] + k) * *g_1005900 + (unsigned int) (unsigned char) p[0] + i) = (unsigned char) g_1005908;
 							}
 						}
 					}
-					for (n = 0; n < g_1006914; n++) {
+					p = (char*) g_1005910;
+					for (n = 0; n < g_1006914; n++, p += 2) {
 						for (k = -1; k < 2; k++) {
 							for (i = -1; i < 2; i++) {
 								map = *(char**) (g_1005900 + 5);
-								*(map + ((unsigned int) g_1005910[n * 2 + 1] + k) * *g_1005900 + (unsigned int) g_1005910[n * 2] + i) = (unsigned char) g_1005908;
+								*(map + ((unsigned int) (unsigned char) p[1] + k) * *g_1005900 + (unsigned int) (unsigned char) p[0] + i) = (unsigned char) g_1005908;
 							}
 						}
 					}
