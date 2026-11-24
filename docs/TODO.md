@@ -19,11 +19,11 @@ attribution change.
 
 The existing server build matches the reference byte for byte. A read-only
 verification of that image also passed all 652 data comparisons and all
-whole-binary checks. The [1.14.0 release](releases/1.14.0.md#validation) records
+whole-binary checks. The [1.15.0 release](releases/1.15.0.md#validation) records
 the full gate, including compilation and Wine. Both client images still differ
 and use placeholders. Rebuild before reporting a new working-tree result. [Server gate](build.md) · [Client comparison](../stubs/README.md)
 
-`uv run --frozen rebrew lint --all-targets --json` (Rebrew 6.72.0) reported
+`uv run --frozen rebrew lint --all-targets --json` (Rebrew 6.74.0) reported
 5,427 files passed per target and zero lint findings. The binding loader
 separately logged retired Gold anchors.
 
