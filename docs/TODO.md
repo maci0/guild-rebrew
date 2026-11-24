@@ -9,7 +9,7 @@ builds are under `build/consolidation-baseline-pp/`.
 | Target | C matches / game functions | Accounted `.text` | Raw bytes equal at original offsets |
 | --- | ---: | ---: | ---: |
 | server.dll | 251 / 251 | 100.0% | 286,720 |
-| GoldTL | 4,290 / 5,260 | 59.5% | 137,400 |
+| GoldTL | 4,301 / 5,260 | 59.8% | 137,400 |
 | Gold | 2,110 / 4,429 | 23.5% | 26,792 |
 
 C matches count `EXACT` and `RELOC` and exclude five Gold whole-function assembly
@@ -19,7 +19,7 @@ attribution change.
 
 The existing server build matches the reference byte for byte. A read-only
 verification of that image also passed all 652 data comparisons and all
-whole-binary checks. The [1.15.0 release](releases/1.15.0.md#validation) records
+whole-binary checks. The [1.16.0 release](releases/1.16.0.md#validation) records
 the full gate, including compilation and Wine. Both client images still differ
 and use placeholders. Rebuild before reporting a new working-tree result. [Server gate](build.md) · [Client comparison](../stubs/README.md)
 

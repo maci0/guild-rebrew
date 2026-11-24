@@ -38,7 +38,7 @@
 - Search by virtual address with `uv run --frozen rebrew source findings 0x00499950 --json`. Use the address under review and check that the evidence applies to your target.
 - See [unfinished reviews](HANDOFF.md) for source questions and the [provenance ledger](provenance.md) for recorded decisions.
 - Find archived notebooks and local receipts in [research history](goal-history.md). Historical claims describe the inputs at the time.
-- Source checkpoints: [1.15.0](releases/1.15.0.md), [1.14.0](releases/1.14.0.md), [1.13.0](releases/1.13.0.md), [1.12.0](releases/1.12.0.md), [1.11.0](releases/1.11.0.md), [1.10.0](releases/1.10.0.md).
+- Source checkpoints: [1.16.0](releases/1.16.0.md), [1.15.0](releases/1.15.0.md), [1.14.0](releases/1.14.0.md), [1.13.0](releases/1.13.0.md), [1.12.0](releases/1.12.0.md), [1.11.0](releases/1.11.0.md), [1.10.0](releases/1.10.0.md).
 
 Add new results to the page that covers their topic. Keep attachments in
 `docs/assets/` and local Obsidian settings in `.obsidian/` outside Git.
