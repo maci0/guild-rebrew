@@ -12,7 +12,7 @@ void __cdecl d2_SetForm(int a, int b);
 int __cdecl io_AppendText(void* id, ...);
 int __cdecl fcn_00472250(int a, int b, int c);
 int __cdecl fcn_0050b710(int a, unsigned char b);
-int __cdecl fcn_0050b750(int a, int index);
+int __cdecl fcn_0050b750(int a, unsigned char index);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl fcn_005373e0(void* a, int b);
 int __cdecl fcn_00471f80(int a);
@@ -57,13 +57,13 @@ void __cdecl fcn_005a4bb0(char* o)
         v = fcn_0050b750(fcn_00471f80(it2), g_773d75);
         g_774698 = have - v;
         if (g_100f1dc == 2) {
-            v = fcn_0050b750(fcn_00471f80(it2), g_773d75);
-            if (have < v) {
-                d = v - have;
+            r = fcn_0050b750(fcn_00471f80(it2), g_773d75);
+            if (have < r) {
+                d = r - have;
                 fcn_004c5150(*(int*)(o + 1),
                              *(int*)(0x7f4ca4 + *(u16*)(o + 0x27) * 0x21c), g_773d75, d);
             } else {
-                d = have - v;
+                d = have - r;
                 fcn_004c5150(*(int*)(0x7f4ca4 + *(u16*)(o + 0x27) * 0x21c),
                              *(int*)(o + 1), g_773d75, d);
             }

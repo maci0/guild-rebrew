@@ -80,11 +80,13 @@ char* __cdecl fcn_0047acf0(char* list)
 	*(unsigned short*) (bank + 8) = *(unsigned short*) (list + 0x2e);
 	*(unsigned char*) (bank + 0x14) = *(unsigned char*) (list + 0x42);
 	*(unsigned short*) (bank + 0x16) = *(unsigned short*) (list + 0x43);
-	count = (int) *(unsigned short*) (list + 0x2a);
-	*(int*) (bank + 0x18) = (int) m_alloc(count << 2, "plyshpshapes");
-	*(int*) (bank + 0x1c) = *(unsigned int*) bank != 2;
+	*(int*) (bank + 0x18) = (int) m_alloc(*(unsigned short*) (list + 0x2a) << 2, "plyshpshapes");
+	if (*(unsigned int*) bank == 2)
+		*(int*) (bank + 0x1c) = 0;
+	else
+		*(int*) (bank + 0x1c) = 1;
 	maxw = -1;
-	if ((int) *(unsigned short*) (list + 0x2a) >= 2 &&
+	if (*(unsigned short*) (list + 0x2a) > 1 &&
 	    (*(unsigned short*) (list + 0x2c) >= 0x80 || *(unsigned short*) (list + 0x2e) >= 0x80)) {
 		minw = 0x800;
 		maxh = -1;
@@ -113,9 +115,9 @@ char* __cdecl fcn_0047acf0(char* list)
 			shape = fcn_0047a070(list, i);
 			sz = fcn_00477420(*(unsigned short*) (shape + 6) < *(unsigned short*) (shape + 0xa)
 			                  ? *(unsigned short*) (shape + 6) : *(unsigned short*) (shape + 0xa));
-			if (sz >= g_67dac0)
+			if (sz > g_67dac0)
 				sz = g_67dac0;
-			if (sz <= 0x3f)
+			if (sz < 0x40)
 				sz = 0x40;
 			cols = (int) ((float) *(unsigned short*) (shape + 6) / (float) sz + 0.5f);
 			rows = (int) ((float) *(unsigned short*) (shape + 0xa) / (float) sz + 0.5f);
@@ -162,23 +164,31 @@ char* __cdecl fcn_0047acf0(char* list)
 				do {
 					memset(hdr, 0, 0x17 * 4);
 					n = sizes[j];
-					hdr[0xa] = g_67dabc != 0 ? 0x35545844 : g_67dab8;
 					hdr[1] = n;
 					hdr[2] = n;
+					if (g_67dabc != 0)
+						hdr[0xa] = 0x35545844;
+					else
+						hdr[0xa] = g_67dab8;
 					surf = fcn_004770a0(hdr, 0);
-					srcRect.left = (j % sourceCols) * sz;
 					srcRect.top = (j / sourceCols) * sz;
-					srcRect.right = srcRect.left + sz; srcRect.bottom = srcRect.top + sz;
+					srcRect.bottom = srcRect.top + sz;
+					srcRect.left = (j % sourceCols) * sz;
+					srcRect.right = srcRect.left + sz;
 					if (split != sheets) {
 						cols = n / sz;
 						cells = cols * cols;
 						if (cells >= 1) {
 							rows = 0;
 							while (y < split) {
-								dstRect.left = (rows % cols) * sz; dstRect.top = (rows / cols) * sz;
-								dstRect.right = dstRect.left + sz; dstRect.bottom = dstRect.top + sz;
-								srcRect.left = (y % sourceCols) * sz; srcRect.top = (y / sourceCols) * sz;
-								srcRect.right = srcRect.left + sz; srcRect.bottom = srcRect.top + sz;
+								dstRect.top = (rows / cols) * sz;
+								dstRect.bottom = dstRect.top + sz;
+								dstRect.left = (rows % cols) * sz;
+								dstRect.right = dstRect.left + sz;
+								srcRect.top = (y / sourceCols) * sz;
+								srcRect.bottom = srcRect.top + sz;
+								srcRect.left = (y % sourceCols) * sz;
+								srcRect.right = srcRect.left + sz;
 								fcn_006114ff(*(int*) (surf + 0x24), 0, (int*) &dstRect, *(int*) (base + 0x24), 0, (int*) &srcRect, -1, 0xff000000);
 								*(float*) (*(int*) (node + 0x30) + y * 0xc) = (float) dstRect.left / (float) *(int*) (surf + 0x54);
 								*(float*) (*(int*) (node + 0x30) + y * 0xc + 4) = (float) dstRect.top / (float) *(int*) (surf + 0x58);

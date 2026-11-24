@@ -1,3 +1,4 @@
+#include <string.h>
 #include "client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
@@ -23,7 +24,6 @@ void __cdecl fcn_0057d0d0(char* entity)
 	int found;
 	int mode;
 	int flag;
-	int objs[4] = {0};
 	int i;
 	int n;
 	int k;
@@ -36,7 +36,10 @@ void __cdecl fcn_0057d0d0(char* entity)
 	n = 0;
 	found = 0;
 	mode = 0;
+	{
+	int objs[4];
 	ids = (int*) (entity + 0x8c);
+	memset(objs, 0, sizeof(objs));
 	i = 4;
 	do {
 		v = *ids;
@@ -155,4 +158,5 @@ void __cdecl fcn_0057d0d0(char* entity)
 			*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 			*(int*) (entity + 0x70) = 0;
 		}
+	}
 }

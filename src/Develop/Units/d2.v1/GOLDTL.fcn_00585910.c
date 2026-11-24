@@ -158,7 +158,7 @@ void __cdecl fcn_00585910(char* e)
 		d2_SetForm(ids[0], 4);
 		io_AppendText(0x6811b0);
 		if (sel != 0) {
-			ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
+			ids[9] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			if (sel == 1) {
 				io_FormatTextBuffer(text, (char*) 0x404b);
 			} else if (sel == 2) {
@@ -170,9 +170,10 @@ void __cdecl fcn_00585910(char* e)
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].width) = ((Screen*) g_77255c)->xc;
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
 			d2_SetElementFont(item, 0x54);
-			d2_SetElementValue(ids[2], 0, 0x64, (int) (frac * 100.0f));
+			d2_SetElementValue(ids[9], 0, 0x64, (int) (frac * 100.0f));
 		}
 		if (sel != prev || g_6b7fac > (unsigned int) (stamp + 0x32)) {
+			int lbl;
 			data = fcn_004ec7d0((unsigned char*) e);
 			if (data == 0) {
 				g_774654 = 1;
@@ -187,10 +188,10 @@ void __cdecl fcn_00585910(char* e)
 			ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 			io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
-			item = d2_ShowTxt(0, 0, buf, ids[1]);
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].width) = ((D2_WIN*)g_1015f40)[ids[1]].width;
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
-			d2_SetElementFont(item, 0x53);
+			lbl = d2_ShowTxt(0, 0, buf, ids[1]);
+			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[lbl].width) = ((D2_WIN*)g_1015f40)[ids[1]].width;
+			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[lbl].value_06c) = 1;
+			d2_SetElementFont(lbl, 0x53);
 			io_FormatTextBuffer(buf, (char*) 0x403f, *(unsigned short*) (data + 0xa));
 			item = d2_ShowTxt(0x12c, 0x64, buf, ids[1]);
 			d2_SetElementFont(item, 0x53);
@@ -229,7 +230,7 @@ void __cdecl fcn_00585910(char* e)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
-			for (p = &ids[5], i = 0; i < 4; p++, i++) {
+			for (i = 0, p = &ids[5]; i < 4; i++, p++) {
 				if (*p == d2_CurrentElementId) {
 					fcn_00471af0(ids[0], 0);
 					fcn_005865f0(e, src, i);

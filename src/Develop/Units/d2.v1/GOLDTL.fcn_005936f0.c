@@ -20,6 +20,7 @@ extern unsigned char g_7e23e1; extern unsigned char g_7e23e2;
 extern int g_7e23e4;
 extern char g_7e23e8;
 extern char g_7e23e9;
+extern signed char g_6a3440;
 extern int g_14abe74;
 extern int g_14abe78;
 extern int g_14abe80;
@@ -60,9 +61,9 @@ char* __cdecl itoa(int, char*, int);
 /* ADDRESS: GOLDTL 0x005936f0 */
 int __cdecl fcn_005936f0(int msg, int param)
 {
-	char text[0x104];
-	char digit[0x14];
-	int out[2];
+	char text[0x100];
+	char digit[0x30];
+	int out[4];
 	int ids[8];
 	int first;
 	int second;
@@ -79,15 +80,15 @@ int __cdecl fcn_005936f0(int msg, int param)
 	int p;
 	char redraw;
 	char* s;
-	int sex0;
 	int sex1;
-	int faith0;
+	int sex0;
 	int faith1;
+	int faith0;
 	int* ent;
 
+	redraw = 1;
 	result = 0;
 	sel = 0;
-	redraw = 1;
 	GetPrivateProfileStringA("Network", "Name", "Vorname", g_7e23ea, 0x20, g_7e22c0);
 	GetPrivateProfileStringA("Network", "Familienname", "Nachname", g_7e240a, 0x20, g_7e22c0);
 	g_7e23e4 = GetPrivateProfileIntA("Network", "Wappen", 0, g_7e22c0) + 0x59a;
@@ -137,7 +138,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 	d2_SetBildArgument(first, 0xc);
 	d2_SetBildArgument(second, 0xc);
 	w8 = d2_CreateRadioGroup(2, sex0, sex1);
-	d2_SelectRadioGroup(w8, g_7e23e8 & 0xff);
+	d2_SelectRadioGroup(w8, (*(int*) &g_7e23e8) & 0xff);
 	w24 = d2_CreateRadioGroup(2, faith0, faith1);
 	d2_SelectRadioGroup(w24, g_7e23e9 & 0xff);
 	fcn_00476b60();
@@ -163,10 +164,8 @@ int __cdecl fcn_005936f0(int msg, int param)
 		if (g_779ce4[1] != 0) {
 			g_779ce4[1] = 0;
 			p = fcn_004ce1d0();
-			n = fcn_004c4450(p);
-			while (n == 0) {
+			while (!fcn_004c4450(p)) {
 				fcn_00535960();
-				n = fcn_004c4450(p);
 			}
 			g_774a34 = (int*) fcn_004ce180();
 			for (i = 0; i < 8; i++)
@@ -187,25 +186,25 @@ int __cdecl fcn_005936f0(int msg, int param)
 		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == elem6) || g_14cf950 == 1) {
 			if (sel == 0) {
 				g_774654 = 1;
-				if (!redraw)
-					goto dispatch;
-			}
-			else {
+			} else {
 				sel = sel - 1;
-				goto update;
+				redraw = 1;
 			}
 		}
-		else if (!redraw)
-			goto dispatch;
-update:
-		for (i = 0; i < 5; i++)
-			d2_SetSlotVisibility(fcn_00472250(h, 0, i), i <= sel);
-		if (sel == 0)
-			d2_SelectControl(first);
-		else if (sel == 1)
-			d2_SelectControl(second);
-		redraw = 0;
-dispatch:
+		if (redraw) {
+			for (i = 0; i < 5; i++) {
+				int slot = fcn_00472250(h, 0, i);
+				if (i <= sel)
+					d2_SetSlotVisibility(slot, 1);
+				else
+					d2_SetSlotVisibility(slot, 0);
+			}
+			if (sel == 0)
+				d2_SelectControl(first);
+			else if (sel == 1)
+				d2_SelectControl(second);
+			redraw = 0;
+		}
 		if (sel == 0) {
 			if (g_14cf950 == 0x1c) {
 				s = fcn_00471f80(first);
@@ -276,7 +275,13 @@ dispatch:
 			(*(char *)&g_7e23e1) = 0;
 			(*(char *)&g_7e23e2) = 0x12;
 			g_7e23e4 = ((D2_CONTROL_TL*)g_1015ea0)[g_102cbcc[group * 35 + g_102cbc8[group * 35]]].value_008;
-			result = 1;
+			if (g_6a3440 == -1) {
+				result = 1;
+			}
+			else {
+				(void) *(volatile int*) &param;
+				result = 1;
+			}
 			g_774654 = 1;
 		}
 		if (fcn_005373e0((int (__cdecl*)(void)) 0x53d490, msg) == 0) {
@@ -288,7 +293,7 @@ dispatch:
 			WritePrivateProfileStringA("Network", "Familienname", g_7e240a, g_7e22c0);
 			itoa(g_7e23e4 - 0x59a, digit, 10);
 			WritePrivateProfileStringA("Network", "Wappen", digit, g_7e22c0);
-			itoa(g_7e23e8 & 0xff, digit, 10);
+			itoa((*(int*) &g_7e23e8) & 0xff, digit, 10);
 			WritePrivateProfileStringA("Network", "Geschlecht", digit, g_7e22c0);
 			itoa(g_7e23e9 & 0xff, digit, 10);
 			WritePrivateProfileStringA("Network", "Glauben", digit, g_7e22c0);

@@ -71,7 +71,7 @@ unsigned char __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, unsigned int t)
                 p->f10 = (float) ((rand() & 0x7f) + 0x7f);
                 p->f30 = t;
                 p->flags = p->flags | 1;
-                p->f48 = (float) rand() * 3.0518509447574615e-05f + g_6628a0;
+                p->f48 = (float) rand() * 3.0518509447574615e-05f + 1.0f;
             }
         }
     }

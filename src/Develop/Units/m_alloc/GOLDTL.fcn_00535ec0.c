@@ -171,10 +171,11 @@ void __cdecl fcn_00535ec0(void)
 		}
 		p = fcn_004c4480(n);
 		if (*(char**) (p + 0x184) != 0) {
-			(*(char**) (p + 0x184))[0x8d] |= 0x10;
-			ch_SetBodyAttachment(*(char**) (p + 0x184), 2, "ub_BIERKRUG");
-			CreateAnimationEvent(*(char**) (p + 0x184), "sitzend/hinsetzen");
-			ch_QueuePlayAnimation(*(char**) (p + 0x184), "sitzend/sitz_schreiben", 4);
+			char* m = *(char**) (p + 0x184);
+			*(unsigned char*) (m + 0x8d) |= 0x10;
+			ch_SetBodyAttachment(m, 2, "ub_BIERKRUG");
+			CreateAnimationEvent(m, "sitzend/hinsetzen");
+			ch_QueuePlayAnimation(m, "sitzend/sitz_schreiben", 4);
 		}
 		return;
 	}
@@ -229,8 +230,8 @@ void __cdecl fcn_00535ec0(void)
 		slot_buf[0x26] = 0x20;
 		*(int*) (slot_buf + 0x14) = -1;
 		slot_buf[0x30] = 2;
-		*(pos14_7f4c00*) (slot_buf + 0x18) = gm_GameTime;
 		*(int*) (slot_buf + 0x38) = *(int*) (n * 0x21c + 0x7f4ca4);
+		*(pos14_7f4c00*) (slot_buf + 0x18) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (slot_buf + 0x18), 0, 0x1e, 0);
 		fcn_004c5980(slot_buf);
 		return;

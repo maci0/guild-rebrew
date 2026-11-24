@@ -62,8 +62,7 @@ void __cdecl fcn_005b3b60(void)
 	item[1] = fcn_00472250(item[7], 0, io_AppendText("%ia[Brand]$N"));
 	item[3] = fcn_00472250(item[7], 0, io_AppendText("%ia[Sturm]$N"));
 	item[5] = fcn_00472250(item[7], 0, io_AppendText("%ia[Duell]$N"));
-	if (fcn_005373e0(0x5b3b60, 0x657c7)) {
-		do {
+	while (fcn_005373e0(0x5b3b60, 0x657c7)) {
 		if (g_14ce8e0) {
 			g_774654 = 1;
 		}
@@ -192,14 +191,7 @@ void __cdecl fcn_005b3b60(void)
 				*(int*) (msg + 0x58) = i * 3;
 				*(int*) (msg + 0x2c) = g_7f4c04;
 				*(int*) (msg + 0x2e) = 0;
-				*(int*) (msg + 0x28) = gm_GameTime.a;
-				*(unsigned short*) (msg + 0x34) = g_7f4c0c;
-				if ((unsigned short) g_7f4c04 >= 0x17) {
-					fcn_00500bb0(msg + 0x28, (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
-				} else {
-					fcn_00500bb0(msg + 0x28, gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
-				}
-				fcn_004c5530(msg);
+				goto weather_send;
 			} else if (k == item[1]) {
 				*(char*) (msg + 4) = 0x4e;
 				*(int*) (msg + 8) = *(int*) (gm_CityEntity + 4);
@@ -227,6 +219,7 @@ void __cdecl fcn_005b3b60(void)
 				*(char*) (msg + 0x36) = 2;
 				*(int*) (msg + 0x58) = -1;
 				*(int*) (msg + 0x9c) = 0x3e8;
+weather_send:
 				*(int*) (msg + 0x28) = gm_GameTime.a;
 				*(unsigned short*) (msg + 0x34) = g_7f4c0c;
 				if ((unsigned short) g_7f4c04 >= 0x17) {
@@ -256,14 +249,13 @@ void __cdecl fcn_005b3b60(void)
 					}
 					p += 0x21c;
 				}
-				*(pos14_7f4c00*) &m[0x18] = *(pos14_7f4c00*) &gm_GameTime;
 				*(char*) (m + 0x7c) = 0;
+				*(pos14_7f4c00*) &m[0x18] = *(pos14_7f4c00*) &gm_GameTime;
 				fcn_00500bb0(m + 0x18, 0, 0x1e, 0);
 				fcn_004c5980(m);
 				g_774654 = 2;
 			}
 		}
-		} while (fcn_005373e0(0x5b3b60, 0x657c7));
 	}
 	fcn_00471e30(item[7]);
 }

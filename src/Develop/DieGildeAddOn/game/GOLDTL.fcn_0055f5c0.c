@@ -156,7 +156,7 @@ done:
             }
             if (fcn_00500cb0((void*) &gm_GameTime, rec + 0x18) <= 0)
                 goto tail;
-            if (*(signed char*) (rec + 0x26) < 0) {
+            if (*(unsigned char*) (rec + 0x26) & 0x80) {
                 if (!((*(unsigned char*) (e + 0xf0) & 2)
                       && *(int*) (e + 0xb0) != -1
                       && (*(unsigned char*) (rec + 0x26) & 0x10)))
@@ -189,73 +189,76 @@ tail:
                 return;
             goto test_dl;
         }
-        if (g_100f1dc == 2)
-            goto body2;
-        if (g_100f1dc == 1)
-            goto body1;
+        if (g_100f1dc != 2) {
+            if (g_100f1dc == 1)
+                goto body1;
 test_dl:
-        if (!g_7749e8)
-            goto exit_a;
+            if (!g_7749e8)
+                goto exit_a;
 body1:
-        if (*(unsigned char*) (e + 0xf0) & 4) {
-            rec = cut_FindCutsceneById(*(int*) (e + 0xb8));
-            if (rec != 0) {
-                if (*(signed char*) (rec + 0x26) < 0) {
-                    if (!((*(unsigned char*) (e + 0xf0) & 2)
-                          && *(int*) (e + 0xb0) != -1
-                          && (*(unsigned char*) (rec + 0x26) & 0x10)))
-                        *(int*) (rec + 4) = 1;
-                } else if (g_7747b0 & 8) {
-                    cut_RemoveParticipant(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
-                } else if (g_7747b0 & 4) {
-                    fcn_004c5a20(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
+            {
+                unsigned char flags = *(unsigned char*) (e + 0xf0);
+                if (flags & 4) {
+                    rec = cut_FindCutsceneById(*(int*) (e + 0xb8));
+                    if (rec != 0) {
+                        if (*(unsigned char*) (rec + 0x26) & 0x80) {
+                            if (!((flags & 2)
+                                  && *(int*) (e + 0xb0) != -1
+                                  && (*(unsigned char*) (rec + 0x26) & 0x10)))
+                                *(int*) (rec + 4) = 1;
+                        } else if (g_7747b0 & 8) {
+                            cut_RemoveParticipant(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
+                        } else if (g_7747b0 & 4) {
+                            fcn_004c5a20(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
+                        }
+                    }
+                }
+                if ((flags & 0x10) && *(int*) (e + 0xec) != 0) {
+                    fcn_004237f0(*(void**) (e + 0xec), 0);
+                    *(int*) (e + 0xec) = 0;
+                }
+                if (flags & 0x40) {
+                    if (!(*(unsigned char*) &g_7747b0 & 4))
+                        *(int*) &g_6b7fc0 = 0;
                 }
             }
-        }
-        if ((*(unsigned char*) (e + 0xf0) & 0x10) && *(int*) (e + 0xec) != 0) {
-            fcn_004237f0(*(void**) (e + 0xec), 0);
-            *(int*) (e + 0xec) = 0;
-        }
-        if (*(unsigned char*) (e + 0xf0) & 0x40) {
-            if (!(*(unsigned char*) &g_7747b0 & 4))
-                *(int*) &g_6b7fc0 = 0;
-        }
-        if (g_14ce8d8 != 0) {
-            g_6b5c8c = 1;
-            fcn_004116d0();
-        }
-        fcn_00545780(e);
-        he_FreeAction(e);
+            if (g_14ce8d8 != 0) {
+                g_6b5c8c = 1;
+                fcn_004116d0();
+            }
+            fcn_00545780(e);
+            he_FreeAction(e);
 exit_a:
-        g_7749e8 = 0;
-        return;
-body2:
-        if (*(unsigned char*) (e + 0xf0) & 4) {
-            rec = cut_FindCutsceneById(*(int*) (e + 0xb8));
-            if (!((*(unsigned char*) (e + 0xf0) & 2)
-                  && *(int*) (e + 0xb0) != -1
-                  && (*(unsigned char*) (rec + 0x26) & 0x10)))
-                *(int*) (rec + 4) = 1;
+            g_7749e8 = 0;
+            return;
+        } else {
+            if (*(unsigned char*) (e + 0xf0) & 4) {
+                rec = cut_FindCutsceneById(*(int*) (e + 0xb8));
+                if (!((*(unsigned char*) (e + 0xf0) & 2)
+                      && *(int*) (e + 0xb0) != -1
+                      && (*(unsigned char*) (rec + 0x26) & 0x10)))
+                    *(int*) (rec + 4) = 1;
+            }
+            if (*(unsigned char*) (e + 0xf0) & 2) {
+                rec = (char*) fcn_00503fe0(1, 1, *(int*) (e + 0xb0));
+                if (rec == 0)
+                    return;
+                fcn_00526920(rec, *(int*) (e + 0xb4), e + 0xbc);
+            }
+            if ((*(unsigned char*) (e + 0xf0) & 0x10) && *(int*) (e + 0xec) != 0) {
+                fcn_004237f0(*(void**) (e + 0xec), 0);
+                *(int*) (e + 0xec) = 0;
+            }
+            if (*(unsigned char*) (e + 0xf0) & 0x40) {
+                if (!(*(unsigned char*) &g_7747b0 & 4))
+                    *(int*) &g_6b7fc0 = 0;
+            }
+            if (g_14ce8d8 != 0) {
+                g_6b5c8c = 1;
+                fcn_004116d0();
+            }
+            goto exit_b;
         }
-        if (*(unsigned char*) (e + 0xf0) & 2) {
-            rec = (char*) fcn_00503fe0(1, 1, *(int*) (e + 0xb0));
-            if (rec == 0)
-                return;
-            fcn_00526920(rec, *(int*) (e + 0xb4), e + 0xbc);
-        }
-        if ((*(unsigned char*) (e + 0xf0) & 0x10) && *(int*) (e + 0xec) != 0) {
-            fcn_004237f0(*(void**) (e + 0xec), 0);
-            *(int*) (e + 0xec) = 0;
-        }
-        if (*(unsigned char*) (e + 0xf0) & 0x40) {
-            if (!(*(unsigned char*) &g_7747b0 & 4))
-                *(int*) &g_6b7fc0 = 0;
-        }
-        if (g_14ce8d8 != 0) {
-            g_6b5c8c = 1;
-            fcn_004116d0();
-        }
-        goto exit_b;
 exit_clear:
         if (*(unsigned char*) (e + 0xf0) & 0x40) {
             if (!(*(unsigned char*) &g_7747b0 & 4))

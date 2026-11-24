@@ -152,10 +152,8 @@ void __cdecl fcn_005ac2d0(char* building)
 		pkt.fc = *(int*) (building + 1);
 		pkt.b5c = 0;
 		rc = fcn_004c5530(&pkt);
-		if (rc != -1) {
-			while (fcn_004c4450(rc) == 0) {
-				fcn_005373e0((void*) 0, 0x677c7);
-			}
+		while (rc != -1 && fcn_004c4450(rc) == 0) {
+			fcn_005373e0((void*) 0, 0x677c7);
 		}
 		unit = fcn_004c4480(rc);
 	}
@@ -269,10 +267,8 @@ void __cdecl fcn_005ac2d0(char* building)
 					rc = fcn_004c5360();
 					flag = 1;
 					state = 1;
-					if (rc != -1) {
-						while (fcn_004c4450(rc) == 0) {
-							fcn_005373e0((void*) 0, 0x677c7);
-						}
+					while (rc != -1 && fcn_004c4450(rc) == 0) {
+						fcn_005373e0((void*) 0, 0x677c7);
 					}
 				}
 			} else if (d2_CurrentElementId == btnState1) {
@@ -298,10 +294,8 @@ void __cdecl fcn_005ac2d0(char* building)
 					rc = fcn_004c5360();
 					state = 2;
 					flag = 1;
-					if (rc != -1) {
-						while (fcn_004c4450(rc) == 0) {
-							fcn_005373e0((void*) 0, 0x677c7);
-						}
+					while (rc != -1 && fcn_004c4450(rc) == 0) {
+						fcn_005373e0((void*) 0, 0x677c7);
 					}
 				}
 			} else if (d2_CurrentElementId == btnState2) {
@@ -321,10 +315,8 @@ void __cdecl fcn_005ac2d0(char* building)
 				rc = fcn_004c5360();
 				flag = 1;
 				state = 1;
-				if (rc != -1) {
-					while (fcn_004c4450(rc) == 0) {
-						fcn_005373e0((void*) 0, 0x677c7);
-					}
+				while (rc != -1 && fcn_004c4450(rc) == 0) {
+					fcn_005373e0((void*) 0, 0x677c7);
 				}
 			} else if (d2_CurrentElementId == btnCancel) {
 				g_774654 = 1;

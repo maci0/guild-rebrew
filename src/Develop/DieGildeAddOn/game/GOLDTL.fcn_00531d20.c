@@ -78,24 +78,26 @@ void __cdecl fcn_00531d20(void)
 	if (sel != 0 && !(kind->class_id == 0x16 && *g_7746cc == 0x120) && kind->class_id != 0x0f)
 		return;
 	fcn_0042e410(4);
+	id = -1;
 	text[0] = g_6b5c60[0];
 	for (i = 1; i < 0x200; i++)
 		text[i] = 0;
 	obj = -1;
-	id = -1;
 	if (g_7746b4 != 0) {
 		mode = 1;
-		i = 0;
 		if (*(unsigned char*) (g_7746b4 + 0x164) != 0)
 			i = gm_MapEntityStatRange(*(unsigned char*) (g_7746b4 + 0x164));
 		else if (*(unsigned char*) (g_7746b4 + 0x165) != 0)
 			i = fcn_00507c30(*(unsigned char*) (g_7746b4 + 0x165));
+		else
+			goto set_idx_00531d20;
 		if (i == 0x0b || i == 0x0c) {
 			mode = 0;
 			idx = (unsigned short) fcn_0042e410(4) + 1;
 			if (idx == 3)
 				idx = 4;
 		} else {
+		set_idx_00531d20:
 			idx = (unsigned short) fcn_0042e410(4) + 1;
 		}
 		rec = *(int*) (g_7746b4 + 0x17c);
@@ -251,19 +253,19 @@ void __cdecl fcn_00531d20(void)
 	fcn_004fc460((char*) f);
 	switch (idx) {
 	case 1:
-		obj = (int) (f[1] * g_664e78 * g_662930 + id);
+		obj = (int) (f[1] * g_662930 * g_664e78 + id);
 		obj += fcn_0042e410(3) & 0xffff;
 		break;
 	case 2:
-		obj = (int) (fcn_004fbd40() * g_664e78 * g_662930 + id);
+		obj = (int) (fcn_004fbd40() * g_662930 * g_664e78 + id);
 		obj += fcn_0042e410(3) & 0xffff;
 		break;
 	case 3:
-		obj = (int) (f[2] * g_664e78 * g_662930 + id);
+		obj = (int) (f[2] * g_662930 * g_664e78 + id);
 		obj += fcn_0042e410(3) & 0xffff;
 		break;
 	case 4:
-		obj = (int) (f[0] * g_664e78 * g_662930 + id);
+		obj = (int) (f[0] * g_662930 * g_664e78 + id);
 		obj += fcn_0042e410(3) & 0xffff;
 		break;
 	case 5:

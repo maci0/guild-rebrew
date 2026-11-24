@@ -46,10 +46,11 @@ void __cdecl d2_DestroyElement(int id)
 		d2_DestroyWindow((*(D2_CONTROL_TL*) e).value_088);
 		break;
 	case 0x41:
-		f = &g_102d140[(*(D2_CONTROL_TL*) e).value_088];
-		if (tp_d2_SelectedControl == f) {
+		n = (*(D2_CONTROL_TL*) e).value_088;
+		if (tp_d2_SelectedControl == &g_102d140[n]) {
 			tp_d2_SelectedControl = 0;
 		}
+		f = &g_102d140[n];
 		if (f->def != -1) {
 			d2_SubRefcount(f->def);
 		}

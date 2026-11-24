@@ -39,7 +39,6 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 	int i;
 	int st;
 	int n;
-	int found;
 	int v1;
 	int windowId;
 	int h;
@@ -56,8 +55,7 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				for (q = he_StartHandlungSearch(2, 0, 0xc, 3, *(int*) (a + 1)); q != 0;
 				     q = he_fn_Handlung()) {
 					if (*(int*) (q + 0xb4) == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) {
-						st = 3;
-						break;
+						goto set_st3;
 					}
 				}
 			} else {
@@ -89,31 +87,30 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				st = 1;
 			} else if (*(unsigned short*) b != 0xfd ||
 				   fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) == 0) {
-				found = 0;
+				n = 0;
 				if (i > 0) {
 					p = (DEPENDENCY_DIAGRAM_NODE*)g_7f3f00;
 					for (k = i; k != 0; p++, k--) {
 						if (p->item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_a &&
 						    (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, p->item_id) != 0 ||
 						     fcn_00502cd0(*(int*) ((char*) b + 0x14), 1, 0, p->item_id) != 0)) {
-							found++;
+							n++;
 						} else if (p->item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_b &&
 							   (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, p->item_id) != 0 ||
 							    fcn_00502cd0(*(int*) ((char*) b + 0x14), 1, 0, p->item_id) != 0)) {
-							found++;
+							n++;
 						}
 					}
 				}
-				if ((found == 0 && ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_a == 0) ||
-				    (found == 1 && ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_b == 0) ||
-				    found == 2) {
+				if ((n == 0 && ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_a == 0) ||
+				    (n == 1 && ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_b == 0) ||
+				    n == 2) {
 					st = 2;
 					for (q = he_StartHandlungSearch(2, 0, 2, 3, *(int*) (a + 1)); q != 0;
 					     q = he_fn_Handlung()) {
 						if (*(int*) (q + 0xb0) == *(int*) ((char*) b + 2) &&
 						    *(unsigned short*) (q + 0xac) == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id) {
-							st = 3;
-							break;
+							goto set_st3;
 						}
 					}
 				}
@@ -121,6 +118,10 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				st = 1;
 			}
 		}
+		goto skip_st3;
+set_st3:
+		st = 3;
+skip_st3:
 		if (st != ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].state) {
 			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c != -1) {
 				fcn_0046f280(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
@@ -180,7 +181,6 @@ void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b)
 				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id < 0x2dc) {
 					io_AppendText(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id * 2 + 0x9a8);
 				}
-				*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_064) = 1;
 			} else {
 				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c = windowId;

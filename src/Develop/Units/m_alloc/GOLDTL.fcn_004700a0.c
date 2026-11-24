@@ -271,45 +271,45 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	*(int*) (info + 8) = g_14ce864;
 	(*(void (__stdcall**) (void*, int, int, void*)) (*(char**) g_6b5de0 + 0x40))(g_6b5de0, 0, 0, info + 0x24);
 	g_77250c = fcn_004770a0(info, 4);
-	if (g_77250c) {
-		fcn_004760c0(g_77250c, info + 0x5c);
-		if (fcn_00475fd0(g_77250c)) {
-			fcn_00476970(g_77250c);
-			d2_UnlockSurface(g_77250c);
-		}
-		for (i = 0; i < 0x17; i++) {
-			((int*) info)[i] = 0;
-		}
-		*(int*) (info + 4) = 0x20;
-		*(int*) (info + 8) = 0x20;
-		*(int*) (info + 0x28) = g_67dab8;
-		g_77256c = (D2_SURFACE*) fcn_004770a0(info, 2);
-		if (g_77256c) {
-			fcn_00475fd0((int) g_77256c);
-			for (i = 0; i < 0x20; i++) {
-				for (j = 0; j < 0x20; j++) {
-					fcn_00476b10(j, i, 0xff, 0xff, 0xff, (int) g_77256c);
-				}
-			}
-			d2_UnlockSurface((int) g_77256c);
-			d2_SelectFont(fcn_00465950(s_67d474));
-			g_77253c = fcn_0047ce00(s_67d67c, 0);
-			if (g_77253c == 0) {
-				ReportClientMessage(s_67d654);
-			}
-			g_67d390 = fcn_00465950(s_67d648);
-			g_67d394 = fcn_00465950(s_67d638);
-			d2_DefaultFont = fcn_00465950(s_67d474);
-			g_67d39c = fcn_00465950(s_67d624);
-			g_67d3a0 = fcn_00465950(s_67d618);
-			g_67d3a4 = fcn_00465950(s_67d604);
-			g_67d3a8 = fcn_00465950(s_67d5fc);
-			g_67d3ac = fcn_00465950(s_67d5ec);
-			g_67d3b0 = fcn_00465950(s_67d5dc);
-			g_67d3b4 = fcn_00465950(s_67d5c8);
-			return 1;
-		}
+	if (!g_77250c) {
 		return 0;
 	}
-	return 0;
+	fcn_004760c0(g_77250c, info + 0x5c);
+	if (fcn_00475fd0(g_77250c)) {
+		fcn_00476970(g_77250c);
+		d2_UnlockSurface(g_77250c);
+	}
+	for (i = 0; i < 0x17; i++) {
+		((int*) info)[i] = 0;
+	}
+	*(int*) (info + 4) = 0x20;
+	*(int*) (info + 8) = 0x20;
+	*(int*) (info + 0x28) = g_67dab8;
+	g_77256c = (D2_SURFACE*) fcn_004770a0(info, 2);
+	if (!g_77256c) {
+		return 0;
+	}
+	fcn_00475fd0((int) g_77256c);
+	for (i = 0; i < 0x20; i++) {
+		for (j = 0; j < 0x20; j++) {
+			fcn_00476b10(j, i, 0xff, 0xff, 0xff, (int) g_77256c);
+		}
+	}
+	d2_UnlockSurface((int) g_77256c);
+	d2_SelectFont(fcn_00465950(s_67d474));
+	g_77253c = fcn_0047ce00(s_67d67c, 0);
+	if (g_77253c == 0) {
+		ReportClientMessage(s_67d654);
+	}
+	g_67d390 = fcn_00465950(s_67d648);
+	g_67d394 = fcn_00465950(s_67d638);
+	d2_DefaultFont = fcn_00465950(s_67d474);
+	g_67d39c = fcn_00465950(s_67d624);
+	g_67d3a0 = fcn_00465950(s_67d618);
+	g_67d3a4 = fcn_00465950(s_67d604);
+	g_67d3a8 = fcn_00465950(s_67d5fc);
+	g_67d3ac = fcn_00465950(s_67d5ec);
+	g_67d3b0 = fcn_00465950(s_67d5dc);
+	g_67d3b4 = fcn_00465950(s_67d5c8);
+	return 1;
 }

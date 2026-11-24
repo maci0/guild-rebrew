@@ -225,7 +225,8 @@ double __cdecl fcn_004fe5f0(char* entity)
 			v4 = fcn_0050c710(*(int*) (entity + 0x170), 8, 1);
 			adjusted = v4 * g_665370 * g_66444c + adjusted;
 		}
-		v10 = (*(float*) (entity + 0x1c) - adjusted) + adjusted / *(float*) (entity + 0x1c);
+		v10 = adjusted / *(float*) (entity + 0x1c);
+		v10 += *(float*) (entity + 0x1c) - adjusted;
 		fcn_004c4510(entity, *(int*) (entity + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x1c, &v10);
 		fcn_004c5360();

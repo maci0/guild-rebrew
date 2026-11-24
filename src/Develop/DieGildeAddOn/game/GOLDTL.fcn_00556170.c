@@ -38,18 +38,19 @@ typedef struct {
 void __cdecl fcn_00556170(char* p)
 {
 	float ts[0xa];
+	int limits[2];
+	int v34;
+	int v38;
 	char* ent;
 	char* obj;
 	int found;
-	int limits[2];
 	int n;
 	int i;
 	int key;
+	int idx;
 	int type;
 	int state;
-	int v38;
-	int v34;
-	unsigned short v;
+	int v;
 	float f;
 
 	state = *(int*) (p + 0x70);
@@ -91,7 +92,11 @@ void __cdecl fcn_00556170(char* p)
 	case 2:
 		if (*(unsigned short*) ((char*) gm_GameTime + 4) >= 0x14) {
 			COPY_UI(p);
-			break;
+inc_anim7:
+			*(int*) (p + 0x58) += 1;
+anim7:
+			*(int*) (p + 0x84) = fcn_004c5620(7, p);
+			return;
 		}
 		f = fcn_0042e450();
 		if (f > *(float*) (p + 0xb0)) {
@@ -122,8 +127,8 @@ void __cdecl fcn_00556170(char* p)
 			return;
 		}
 		obj = fcn_004c4480(*(int*) (p + 0xb8));
-		v34 = fcn_0042e410(2) & 0xffff;
 		v38 = 0;
+		v34 = fcn_0042e410(2) & 0xffff;
 		if (obj == 0) {
 			fcn_00500bb0(p + 0x52, 1, 0, 0);
 			*(int*) (p + 0xb8) = -1;
@@ -133,7 +138,7 @@ void __cdecl fcn_00556170(char* p)
 		found = 0;
 		n = 0x100;
 		v = (unsigned short) fcn_0042e410(0x100);
-		do {
+		while (n != 0) {
 			ent = (char*) (lpGebaeudeINST + v * 0xa9);
 			type = *(unsigned char*) ent;
 			if ((char)((BUILDING_PROTOTYPE*)lpGebaeudePROT)[type].category == 1 &&
@@ -142,14 +147,16 @@ void __cdecl fcn_00556170(char* p)
 				found = 1;
 			}
 			n--;
-			v = (unsigned short) ((v + 1) & 0xff);
-		} while (found == 0 && n != 0);
+			v = (v + 1) % 0x100;
+			if (found != 0) {
+				break;
+			}
+		}
 		if (found)
 			fcn_004c6000(*(int*) (obj + 4), *(int*) (ent + 1));
 		i = fcn_0042e410(0x32);
-		key = *(int*) (obj + 4);
-		fcn_004c51a0(key, -1, g_773d75, ((i & 0xffff) + 0x33) * 0x20);
-		fcn_004c4510(obj, key);
+		fcn_004c51a0(*(int*) (obj + 4), -1, g_773d75, ((i & 0xffff) + 0x33) * 0x20);
+		fcn_004c4510(obj, *(int*) (obj + 4));
 		cm_AppendPacketFieldDelta(1, 1, 2, &v38);
 		cm_AppendPacketFieldDelta(1, 1, 0xc, &v34);
 		fcn_004c5360();
@@ -161,7 +168,7 @@ void __cdecl fcn_00556170(char* p)
 	case 6:
 		if (*(unsigned short*) ((char*) gm_GameTime + 4) >= 0x14) {
 			COPY_UI(p);
-			break;
+			goto inc_anim7;
 		}
 		f = fcn_0042e450();
 		if (f > *(float*) (p + 0xb0)) {
@@ -169,7 +176,7 @@ void __cdecl fcn_00556170(char* p)
 			n = 0x300;
 			do {
 				key = v * 0x21c;
-				if (*(short*) (key + 0x7f4ca0) != -1 &&
+				if (*(unsigned short*) (key + 0x7f4ca0) != 0xffff &&
 				    *(char*) (key + 0x7f4ca8) != 0 &&
 				    *(char*) (key + 0x7f4ca2) == 0 &&
 				    *(int*) (key + 0x7f4e0c) == 0) {
@@ -178,7 +185,7 @@ void __cdecl fcn_00556170(char* p)
 					break;
 				}
 				n--;
-				v = (unsigned short) ((v + 1) % 0x300);
+				v = (v + 1) % 0x300;
 			} while (n != 0);
 			*(int*) (p + 0xb8) = -1;
 			COPY_UI(p);
@@ -194,9 +201,9 @@ void __cdecl fcn_00556170(char* p)
 	case 7:
 		v = (unsigned short) fcn_0042e410(0x300);
 		n = 0x300;
-		for (;;) {
+		do {
 			key = v * 0x21c;
-			if (*(short*) (key + 0x7f4ca0) != -1 &&
+			if (*(unsigned short*) (key + 0x7f4ca0) != 0xffff &&
 			    *(char*) (key + 0x7f4ca8) != 0 &&
 			    ((*(char*) (key + 0x7f4ca2) == 0 &&
 			      *(int*) (key + 0x7f4e10) == 0) ||
@@ -204,9 +211,9 @@ void __cdecl fcn_00556170(char* p)
 			      *(int*) (key + 0x7f4e10) == 0))) {
 				found = 0;
 				i = 0x100;
-				v34 = fcn_0042e410(0x100) & 0xff;
-				for (;;) {
-					ent = (char*) (lpGebaeudeINST + v34 * 0xa9);
+				idx = (unsigned short) fcn_0042e410(0x100);
+				while (i != 0) {
+					ent = (char*) (lpGebaeudeINST + idx * 0xa9);
 					type = *(unsigned char*) ent;
 					if ((char)((BUILDING_PROTOTYPE*)lpGebaeudePROT)[type].category == 1 &&
 					    fcn_004fac80(type, limits) != 0 &&
@@ -214,11 +221,8 @@ void __cdecl fcn_00556170(char* p)
 						found = 1;
 					}
 					i--;
-					v34 = (v34 + 1) & 0xff;
+					idx = (idx + 1) % 0x100;
 					if (found != 0) {
-						break;
-					}
-					if (i == 0) {
 						break;
 					}
 				}
@@ -228,31 +232,27 @@ void __cdecl fcn_00556170(char* p)
 				break;
 			}
 			n--;
-			if (n == 0) {
-				break;
-			}
-			v = (unsigned short) ((v + 1) % 0x300);
-		}
+			v = (v + 1) % 0x300;
+		} while (n != 0);
 		fcn_00500bb0(p + 0x52, 0, 10, 0);
 		if (*(unsigned short*) (p + 0x56) >= 0x16) {
 			COPY_UI(p);
 			*(int*) (p + 0x58) = 0;
 			*(int*) (p + 0x52) += 1;
 			*(short*) (p + 0x56) = 6;
-			goto anim7;
+			*(int*) (p + 0x84) = fcn_004c5620(0, p);
+			return;
 		}
 		if (*(unsigned short*) (p + 0x56) < 0xf) {
 			COPY_UI(p);
 			*(int*) (p + 0x58) += 1;
-			goto anim7;
+			*(int*) (p + 0x84) = fcn_004c5620(0, p);
+			return;
 		}
-		break;
+		goto anim7;
 	default:
 		return;
 	}
-	*(int*) (p + 0x58) += 1;
-anim7:
-	*(int*) (p + 0x84) = fcn_004c5620(7, p);
 }
 
 static int filler_556170(char *e)

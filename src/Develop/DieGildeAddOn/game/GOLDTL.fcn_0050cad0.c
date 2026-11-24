@@ -25,7 +25,13 @@ int __cdecl fcn_0050cad0(int* a, int* b)
     v7 = b[0];
     if (v3 < v7) {
         f = (float) (*(unsigned short*) ((char*) &cur + 4) * 60 + *(int*) ((char*) &cur + 6));
-        f = (g_665c00 > f || f < g_665bfc) ? (g_665c00 > f ? g_665c00 : f) : g_665bfc;
+        if (g_665c00 > f) goto clamp1;
+        if (f < g_665bfc) {
+        clamp1:
+            f = (g_665c00 > f ? g_665c00 : f);
+        } else {
+            f = g_665bfc;
+        }
         v5 = (int) f;
         minutes = (int) (g_665bfc - (float) v5);
         cur.a = v3 + 1;
@@ -42,10 +48,22 @@ int __cdecl fcn_0050cad0(int* a, int* b)
         } while (--v7);
     }
     f = (float) (*(unsigned short*) ((char*) b + 4) * 60 + *(int*) ((char*) b + 6));
-    f = (g_665c00 > f || f < g_665bfc) ? (g_665c00 > f ? g_665c00 : f) : g_665bfc;
+    if (g_665c00 > f) goto clamp2;
+    if (f < g_665bfc) {
+    clamp2:
+        f = (g_665c00 > f ? g_665c00 : f);
+    } else {
+        f = g_665bfc;
+    }
     v5 = (int) f;
     f = (float) (*(unsigned short*) ((char*) &cur + 4) * 60 + *(int*) ((char*) &cur + 6));
-    f = (g_665c00 > f || f < g_665bfc) ? (g_665c00 > f ? g_665c00 : f) : g_665bfc;
+    if (g_665c00 > f) goto clamp3;
+    if (f < g_665bfc) {
+    clamp3:
+        f = (g_665c00 > f ? g_665c00 : f);
+    } else {
+        f = g_665bfc;
+    }
     v6 = (int) f;
     return (minutes - v6) + v5;
 }

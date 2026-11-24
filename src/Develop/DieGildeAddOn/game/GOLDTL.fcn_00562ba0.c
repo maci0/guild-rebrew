@@ -56,8 +56,8 @@ void __cdecl fcn_00562ba0(int eventCursor)
 			*(int*) (eventBase + 0xc8) = *(int*) (v7 + 4);
 			fcn_004c51a0(-1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(unsigned char*) &g_773d75, *(int*) (eventBase + 0xd8));
 			fcn_00529160(0, 0, *(unsigned short*) v7, eventBase);
-			*(int*) (eventBase + 0xcc) = -1;
 			*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
+			*(int*) (eventBase + 0xcc) = -1;
 			return;
 		}
 		*(int*) (eventBase + 0x70) = -1;
@@ -162,17 +162,19 @@ label_562e74:
 				io_FormatTextBuffer(buf, 0x1012, *(unsigned short*) v7, 2);
 				fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 			}
-			if (*(char*) (v7 + 2) != 6 && *(char*) (v7 + 2) != 7) {
-				goto label_563129;
+			if (*(char*) (v7 + 2) == 6 || *(char*) (v7 + 2) == 7) {
+				io_FormatTextBuffer(buf, 0x1010);
+				fcn_00545d40(*(int*) (v7 + 4), -1, buf, 0, 0x5fb, (char*) 0x6a6538);
 			}
-			io_FormatTextBuffer(buf, 0x1010);
-			fcn_00545d40(*(int*) (v7 + 4), -1, buf, 0, 0x5fb, (char*) 0x6a6538);
+			*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
+			return;
 		} else if (fcn_005c6270(v7, 0x17c) != 0) {
-			if (*(char*) (ep + 2) != 6 && *(char*) (ep + 2) != 7) {
-				goto label_563129;
+			if (*(char*) (ep + 2) == 6 || *(char*) (ep + 2) == 7) {
+				io_FormatTextBuffer(buf, 0xff3);
+				fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 			}
-			io_FormatTextBuffer(buf, 0xff3);
-			fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
+			*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
+			return;
 		} else {
 			targetType = *(char*) (v7 + 2);
 			if (v4 != 0) {
@@ -200,14 +202,11 @@ label_562e74:
 				}
 			}
 			fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (eventBase + 0xb4), *(int*) (eventBase + 0xac));
-			if (*(char*) (v7 + 2) != 6 && *(char*) (v7 + 2) != 7) {
+			targetType = *(char*) (v7 + 2);
+			if (targetType != 6 && targetType != 7) {
 				fcn_004c54c0(*(int*) (ep + 4), *(int*) (v7 + 4), -0x19, 1);
-				*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
-				return;
 			}
-			goto label_563129;
 		}
-label_563129:
 		*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 		return;
 	case 5:

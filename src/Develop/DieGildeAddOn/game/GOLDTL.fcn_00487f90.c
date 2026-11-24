@@ -31,6 +31,7 @@ void __cdecl fcn_00487f90(int* actionCtx)
 	int base;
 	int k;
 	int v;
+	unsigned short id;
 
 	if (actionCtx[0] == 0x28) {
 		base = *(int*) (*(int*) (actionCtx[1] + 0x16c) + 0x71);
@@ -111,22 +112,18 @@ void __cdecl fcn_00487f90(int* actionCtx)
 		*(short*) (m + 0x5a) = *(short*) actionCtx[2];
 		*(int*) (m + 0x5c) =
 		    *(int*) (fcn_005049a0((unsigned char*) *(int*) (actionCtx[1] + 0x16c)) + 2);
-		if (actionCtx[8] < n) {
-			for (e = (char*) 0x7f4e05; (int) e < 0x85a205; e += 0x21c) {
-				if (*(short*) (e - 0x165) != -1 &&
-				    *(int*) (e + 7) == *(int*) (actionCtx[1] + 0x16c) &&
-				    *e != 0 && *(int*) (e + 0x17) == 0 &&
-				    *(int*) (e + 0x1f) != 0 &&
-				    *(int*) (*(int*) (e + 0x1f) + 0x2c) ==
-				        *(int*) (*(int*) (e + 7) + 1)) {
-					*(int*) (m + 0x38 + *(int*) (m + 0x10) * 4) =
-					    *(int*) (e + 4);
-					*(int*) (m + 0x10) = *(int*) (m + 0x10) + 1;
-					actionCtx[8] = actionCtx[8] + 1;
-				}
-				if (actionCtx[8] >= n) {
-					break;
-				}
+		for (e = (char*) 0x7f4e05;
+		     actionCtx[8] < n && (int) e < 0x85a205; e += 0x21c) {
+			if (*(short*) (e - 0x165) != -1 &&
+			    *(int*) (e + 7) == *(int*) (actionCtx[1] + 0x16c) &&
+			    *e != 0 && *(int*) (e + 0x17) == 0 &&
+			    *(int*) (e + 0x1f) != 0 &&
+			    *(int*) (*(int*) (e + 0x1f) + 0x2c) ==
+			        *(int*) (*(int*) (e + 7) + 1)) {
+				*(int*) (m + 0x38 + *(int*) (m + 0x10) * 4) =
+				    *(int*) (e + 4);
+				*(int*) (m + 0x10) = *(int*) (m + 0x10) + 1;
+				actionCtx[8] = actionCtx[8] + 1;
 			}
 		}
 		m[0x58] = (char) *(int*) (m + 0x10);
@@ -173,22 +170,18 @@ void __cdecl fcn_00487f90(int* actionCtx)
 				*(int*) (m + 0x60) = -1;
 			}
 		}
-		if (actionCtx[8] < n) {
-			for (e = (char*) 0x7f4e05; (int) e < 0x85a205; e += 0x21c) {
-				if (*(unsigned short*) (e - 0x165) != 0xffff &&
-				    *(int*) (e + 7) == *(int*) (actionCtx[1] + 0x16c) &&
-				    *e != 0 && *(int*) (e + 0x17) == 0 &&
-				    *(int*) (e + 0x1f) != 0 &&
-				    *(int*) (*(int*) (e + 0x1f) + 0x2c) ==
-				        *(int*) (*(int*) (e + 7) + 1)) {
-					*(int*) (m + 0x38 + *(int*) (m + 0x10) * 4) =
-					    *(int*) (e + 4);
-					*(int*) (m + 0x10) = *(int*) (m + 0x10) + 1;
-					actionCtx[8] = actionCtx[8] + 1;
-				}
-				if (actionCtx[8] >= n) {
-					break;
-				}
+		for (e = (char*) 0x7f4e05;
+		     actionCtx[8] < n && (int) e < 0x85a205; e += 0x21c) {
+			if (*(unsigned short*) (e - 0x165) != 0xffff &&
+			    *(int*) (e + 7) == *(int*) (actionCtx[1] + 0x16c) &&
+			    *e != 0 && *(int*) (e + 0x17) == 0 &&
+			    *(int*) (e + 0x1f) != 0 &&
+			    *(int*) (*(int*) (e + 0x1f) + 0x2c) ==
+			        *(int*) (*(int*) (e + 7) + 1)) {
+				*(int*) (m + 0x38 + *(int*) (m + 0x10) * 4) =
+				    *(int*) (e + 4);
+				*(int*) (m + 0x10) = *(int*) (m + 0x10) + 1;
+				actionCtx[8] = actionCtx[8] + 1;
 			}
 		}
 		m[0x58] = (char) *(int*) (m + 0x10);
@@ -224,22 +217,18 @@ void __cdecl fcn_00487f90(int* actionCtx)
 		*(short*) (m + 0x34) = g_7f4c0c;
 		m[0x36] = 1;
 		*(short*) (m + 0x58) = *(short*) actionCtx[2];
-		if (actionCtx[8] < n) {
-			for (e = (char*) 0x7f4e05; (int) e < 0x85a205; e += 0x21c) {
-				if (*(short*) (e - 0x165) != -1 &&
-				    *(int*) (e + 7) == *(int*) (actionCtx[1] + 0x16c) &&
-				    *e != 0 && *(int*) (e + 0x17) == 0 &&
-				    *(int*) (e + 0x1f) != 0 &&
-				    *(int*) (*(int*) (e + 0x1f) + 0x2c) ==
-				        *(int*) (*(int*) (e + 7) + 1)) {
-					*(int*) (m + 0x38 + *(int*) (m + 0x10) * 4) =
-					    *(int*) (e + 4);
-					*(int*) (m + 0x10) = *(int*) (m + 0x10) + 1;
-					actionCtx[8] = actionCtx[8] + 1;
-				}
-				if (actionCtx[8] >= n) {
-					break;
-				}
+		for (e = (char*) 0x7f4e05;
+		     actionCtx[8] < n && (int) e < 0x85a205; e += 0x21c) {
+			if (*(short*) (e - 0x165) != -1 &&
+			    *(int*) (e + 7) == *(int*) (actionCtx[1] + 0x16c) &&
+			    *e != 0 && *(int*) (e + 0x17) == 0 &&
+			    *(int*) (e + 0x1f) != 0 &&
+			    *(int*) (*(int*) (e + 0x1f) + 0x2c) ==
+			        *(int*) (*(int*) (e + 7) + 1)) {
+				*(int*) (m + 0x38 + *(int*) (m + 0x10) * 4) =
+				    *(int*) (e + 4);
+				*(int*) (m + 0x10) = *(int*) (m + 0x10) + 1;
+				actionCtx[8] = actionCtx[8] + 1;
 			}
 		}
 		if (*(int*) (m + 0x10) == 0) {
@@ -317,18 +306,15 @@ void __cdecl fcn_00487f90(int* actionCtx)
 	} else if (actionCtx[0] == 4) {
 		v = (int) fcn_005049a0((unsigned char*) *(int*) (actionCtx[1] + 0x16c));
 	}
-	if (actionCtx[8] < n) {
-		for (e = (char*) 0x7f4e05; (int) e < 0x85a205; e += 0x21c) {
-			if (*(short*) (e - 0x165) != -1 &&
-			    *(int*) (e + 7) == *(int*) (actionCtx[1] + 0x16c) &&
-			    *e != 0 && *(int*) (e + 0x17) == 0) {
-				fcn_00529160(*(int*) (actionCtx[1] + 0x16c), v,
-				             *(unsigned short*) (e - 0x165), (int) rec);
-				actionCtx[8] = actionCtx[8] + 1;
-			}
-			if (actionCtx[8] >= n) {
-				break;
-			}
+	for (e = (char*) 0x7f4e05;
+	     actionCtx[8] < n && (int) e < 0x85a205; e += 0x21c) {
+		id = *(unsigned short*) (e - 0x165);
+		if (id != 0xffff &&
+		    *(int*) (e + 7) == *(int*) (actionCtx[1] + 0x16c) &&
+		    *e != 0 && *(int*) (e + 0x17) == 0) {
+			fcn_00529160(*(int*) (actionCtx[1] + 0x16c), v,
+			             id, (int) rec);
+			actionCtx[8] = actionCtx[8] + 1;
 		}
 	}
 	actionCtx[7] = actionCtx[7] + 1;

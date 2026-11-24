@@ -129,7 +129,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 		s2 = cy - pv.y;
 		tmp = cz - pv.z;
 		dist = (float) sqrt(s1 * s1 + s2 * s2 + tmp * tmp);
-		if (best == 0 || dist < bestdist) {
+		if (best == 0 || bestdist > dist) {
 			bestdist = dist;
 			best = rec;
 		}
@@ -162,12 +162,12 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 			scale = s1;
 		}
 		scale = scale * *(float*) (in + 0x58);
-		if (!(scale > *(float*) 0x662cf8)) {
+		if (scale <= *(float*) 0x662cf8) {
 			continue;
 		}
 		count = count + 1;
 		tmp = scale * 0.01f;
-		if (!(tmp < *(float*) 0x662cf8)) {
+		if (tmp >= *(float*) 0x662cf8) {
 			tmp = *(float*) 0x662cf8;
 		}
 		best = rec;
