@@ -18,10 +18,10 @@ int __cdecl d2_AllocateElement(void)
 	rec = (int*) (g_1015ea0 + base * 12);
 	for (i = 0x3ff; i >= 0; i--) {
 		if (tbl[i] != 0) {
+			i++;
 			break;
 		}
 	}
-	i++;
 	if (i < 0) {
 		i = 0;
 	}

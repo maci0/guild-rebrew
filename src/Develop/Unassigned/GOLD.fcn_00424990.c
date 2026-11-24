@@ -4,6 +4,9 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6b7d40;
+extern char* g_14cbca4;
+extern unsigned char* g_14cbca8;
+extern unsigned short g_14cbcae;
 void __cdecl nt_ResetPacketStats(void);
 void __cdecl fcn_00424510(int);
 
@@ -24,10 +27,10 @@ int __cdecl nt_ConnectToHost(const char* host, unsigned short port)
 
     nt_ResetPacketStats();
     g_14cbca0 = -1;
-    *(int*) 0x1460ae4 = 0;
-    *(int*) 0x1460ae8 = 0;
+    g_14cbca4 = 0;
+    g_14cbca8 = 0;
     *(short*) 0x1460aec = 0;
-    *(short*) 0x1460aee = 0;
+    g_14cbcae = 0;
     g_14cbcb0 = 0;
     if (host == 0)
         return -1;

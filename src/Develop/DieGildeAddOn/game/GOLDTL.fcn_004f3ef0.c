@@ -119,7 +119,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 			}
 			if (home == 0)
 				continue;
-			if (slot != home && (*(int*) (slot + 4) & 3) == gm_GameTime % 4
+			if (slot != home && gm_GameTime % 4 == *(unsigned int*) (slot + 4) % 4
 			    && *(unsigned char*) ((char*) entry + 0xc) * g_662c30 < g_664178) {
 				handle = fcn_004c54c0(*(unsigned int*) (home + 4), *(unsigned int*) (slot + 4),
 					-5 - gm_RandomMod(0x10), 1);

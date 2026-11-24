@@ -117,9 +117,9 @@ found_one:
 
 
 
-						msg.f36 = 9;
 						msg.f10 = 0;
 						msg.f14 = 0;
+						msg.f36 = 9;
 						msg.f58 = *(int*) (event + 0xc);
 						msg.f5c = *(int*) (event + 0xac);
 						msg.f64 = ref;

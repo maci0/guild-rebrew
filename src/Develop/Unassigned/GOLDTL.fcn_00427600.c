@@ -31,10 +31,12 @@ int __cdecl fcn_00427600(char* g, int arg)
 			*(int*) (e + 0x28 + e[0x24] * 4) = t.u.num;
 			evt_ReadToken(*(int*) (evt_CurrentScript + 0x118), &t);
 			if (t.type != 0) {
-				if (t.type == 2)
+				if (t.type == 2) {
 					evt_LogScriptError(g, *(int*) (g + 0x118), (char*) 0x679460);
-				else
-					evt_LogScriptError(g, *(int*) (g + 0x118), (char*) 0x67944c);
+					evt_RequestScriptExit(g);
+					return 0;
+				}
+				evt_LogScriptError(g, *(int*) (g + 0x118), (char*) 0x67944c);
 				evt_RequestScriptExit(g);
 				return 0;
 			}

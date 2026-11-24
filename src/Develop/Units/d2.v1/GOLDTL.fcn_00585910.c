@@ -96,8 +96,8 @@ void __cdecl fcn_00585910(char* e)
 	ids[1] = d2_CurrentWindowId;
 	d2_SetForm(ids[0], 1);
 	io_AppendText(0x4039);
-	d2_SetForm(ids[0], 2);
 	if (data == 0) {
+		d2_SetForm(ids[0], 2);
 		io_AppendText(0x4051, 0x182);
 		do {
 			if (g_14ce8e0 != 0) {
@@ -107,6 +107,7 @@ void __cdecl fcn_00585910(char* e)
 		fcn_00471e30(ids[0]);
 		return;
 	}
+	d2_SetForm(ids[0], 2);
 	fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
 	fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
 	ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);

@@ -41,8 +41,8 @@ void __cdecl fcn_004ff490(char* entity)
 	int i;
 	int extra;
 	GAME_TIMESTAMP t;
-	int mode;
-	char pkt[0x110];
+
+	char pkt[0x114];
 	float f;
 
 	if ((unsigned char) entity[2] >= 10) {
@@ -133,6 +133,8 @@ void __cdecl fcn_004ff490(char* entity)
 		}
 		handle = fcn_004c4480(id);
 		if (other != 0) {
+			int mode;
+
 			mode = 0x12;
 			memset(pkt, 0, 0x114);
 			*(GAME_TIMESTAMP*) (pkt + 0x18) = t;

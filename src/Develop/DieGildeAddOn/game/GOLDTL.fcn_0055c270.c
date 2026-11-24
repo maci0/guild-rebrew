@@ -163,10 +163,10 @@ void __cdecl fcn_0055c270(char* o)
 			}
 			rec[0x13] |= 0xa0;
 		}
-		h = fcn_00502cd0(*(int*) (e + 0x5d), 1, 1, *(int*) (o + 0xb0));
 		{
 			Req55c270 m;
 
+			h = fcn_00502cd0(*(int*) (e + 0x5d), 1, 1, *(int*) (o + 0xb0));
 			*(pos14_7f4c00*) &m = gm_GameTime;
 			fcn_00500bb0((pos14_7f4c00*) &m, 0, 0, 1);
 			m.id = *(int*) (e + 1);

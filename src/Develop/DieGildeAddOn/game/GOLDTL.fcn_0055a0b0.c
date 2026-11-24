@@ -7,10 +7,10 @@ struct EvRec {
 	char pad1[15];
 };
 #include "client_actions.h"
-int __cdecl fcn_004e8b40(unsigned char, int*);
+int __cdecl fcn_004e8b40(int, int*);
 int __cdecl amt_FindOfficeSlotsByKind(int, int, EvRec*);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl gm_RandomMod(int);
+unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004e8240(unsigned char, unsigned char*, unsigned char*, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
@@ -23,7 +23,7 @@ void __cdecl fcn_0055a0b0(char* action)
 {
 	int cnt;
 	int i;
-	int b;
+	unsigned short b;
 	int idx;
 	int n;
 	int tmp[6];
@@ -70,7 +70,7 @@ void __cdecl fcn_0055a0b0(char* action)
 								    && *(unsigned int*) p != *(unsigned int*) (v3 + 4)
 								    && *(unsigned short*) (*(unsigned int*) (p + 0x168) + 0x27) == *(unsigned short*) v3) {
 									++n;
-									b = (tmp[2] & 0xff) * 3;
+									b = (unsigned char) tmp[2] * 3;
 									fcn_004c54c0(*(int*) (v3 + 4), *(int*) p,
 									             -((unsigned short) gm_RandomMod(b) + (tmp[2] & 0xff) * 3), 1);
 								}

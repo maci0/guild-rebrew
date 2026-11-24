@@ -54,7 +54,6 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 	int aux_a;
 	int aux_b;
 	int start;
-	int left;
 	char name[256];
 	char tmp[256];
 	char* object;
@@ -245,24 +244,19 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 					fcn_004011d0(stream, RD_LIGHTS(object) + 0x198);
 					fcn_004011f0(stream, RD_LIGHTS(object) + 0x19c);
 				}
-				start = 0;
-				if (count > 0) {
-					off = 0;
-					left = count;
-					start = count;
-					for (; left != 0; left--) {
-						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);
-						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x24);
-						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x2c);
-						fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38 + 0x18);
-						fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38);
-						fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38 + 0x0c);
-						if (version >= 0x3a6c00acu) {
-							fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x30);
-							fcn_004011f0(stream, RD_LIGHTS(object) + off * 0x38 + 0x34);
-						}
-						off++;
+				off = 0;
+				for (start = 0; start < count; start++) {
+					fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);
+					fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x24);
+					fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x2c);
+					fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38 + 0x18);
+					fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38);
+					fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38 + 0x0c);
+					if (version >= 0x3a6c00acu) {
+						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x30);
+						fcn_004011f0(stream, RD_LIGHTS(object) + off * 0x38 + 0x34);
 					}
+					off++;
 				}
 				if (start < 7) {
 					for (i = start; i < 7; i++) {
@@ -287,19 +281,14 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 				fcn_00401280(stream, object + 0x4c);
 				if (version >= 0x3a6c00a1u) {
 					count = fcn_00446ca0(version);
-					start = 0;
-					if (count > 0) {
-						off = 0;
-						left = count;
-						start = count;
-						for (; left != 0; left--) {
-							fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);
-							fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x24);
-							fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x2c);
-							fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38 + 0x18);
-							fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38);
-							off++;
-						}
+					off = 0;
+					for (start = 0; start < count; start++) {
+						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);
+						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x24);
+						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x2c);
+						fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38 + 0x18);
+						fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38);
+						off++;
 					}
 					if (start < 7) {
 						for (i = start; i < 7; i++) {

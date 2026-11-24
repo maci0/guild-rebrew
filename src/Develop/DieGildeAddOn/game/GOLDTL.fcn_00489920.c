@@ -21,7 +21,6 @@ void __cdecl fcn_00489920(char* e)
 {
 	char* o;
 	char* q;
-	char s[0xf8];
 
 	if (gm_CanEvaluateMaster(e) == 0) {
 		return;
@@ -36,6 +35,7 @@ void __cdecl fcn_00489920(char* e)
 	}
 	do {
 		if ((unsigned char) q[0x12] < (gm_RandomMod(0x20) & 0xffff) + 0x28) {
+			char s[0xf8];
 			memset(s, 0, sizeof(s));
 			o = *(char**) (e + 0x16c);
 			*(char*) (s + 4) = 0x10;
@@ -48,9 +48,9 @@ void __cdecl fcn_00489920(char* e)
 			*(pos14_7f4c00*) (s + 0x28) = gm_GameTime;
 			fcn_00500bb0((SIM_CLOCK_489920*) (s + 0x28), 0, 0, 10);
 			*(int*) (s + 0x58) = *(int*) (q + 2);
-			*(int*) (s + 0x5c) = 100 - *(unsigned char*) (q + 0x12);
 			*(int*) (s + 0x64) = 5;
 			*(int*) (s + 0x84) = 0;
+			*(int*) (s + 0x5c) = 100 - *(unsigned char*) (q + 0x12);
 			fcn_004c5530((int) s);
 		}
 		q = gm_NextEntityQueryMatch();

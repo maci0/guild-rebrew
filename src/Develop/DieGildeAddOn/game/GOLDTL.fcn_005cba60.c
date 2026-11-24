@@ -19,7 +19,6 @@ int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 int __cdecl fcn_005cba60(unsigned short* who, unsigned int max, Item5cba60* out, int kind)
 {
 	unsigned short* ps[4];
-	Item5cba60* o;
 	char* t;
 	unsigned short* q;
 	int count;
@@ -36,10 +35,10 @@ int __cdecl fcn_005cba60(unsigned short* who, unsigned int max, Item5cba60* out,
 	}
 	if (max != 0) {
 		memset(out, 0, max * 0x38);
-		for (i = 0, o = out; i < count && i < max; i++, o++) {
-			o->house = ps[i];
-			fcn_005ca560(o);
-			o->value = fcn_005cf720(*who, *o->house, kind, 0);
+		for (i = 0; i < (max < count ? max : count); i++, out++) {
+			out->house = ps[i];
+			fcn_005ca560(out);
+			out->value = fcn_005cf720(*who, *out->house, kind, 0);
 		}
 	}
 	return count;

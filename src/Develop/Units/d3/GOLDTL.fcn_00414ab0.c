@@ -30,11 +30,11 @@ void __cdecl fcn_00414ab0(float* outA, float* outB, char* ent)
 	do {
 
 		outA[0] = (outA[0] < p[0]) ? outA[0] : p[0];
-		outA[1] = (p[1] > outA[1]) ? outA[1] : p[1];
-		outA[2] = (p[2] > outA[2]) ? outA[2] : p[2];
-		outB[0] = (p[0] < outB[0]) ? outB[0] : p[0];
-		outB[1] = (p[1] < outB[1]) ? outB[1] : p[1];
-		outB[2] = (p[2] < outB[2]) ? outB[2] : p[2];
+		outA[1] = ((double) outA[1] < (double) p[1]) ? outA[1] : p[1];
+		outA[2] = ((double) outA[2] < (double) p[2]) ? outA[2] : p[2];
+		outB[0] = (outB[0] > p[0]) ? outB[0] : p[0];
+		outB[1] = ((double) outB[1] > (double) p[1]) ? outB[1] : p[1];
+		outB[2] = ((double) outB[2] > (double) p[2]) ? outB[2] : p[2];
 		i--; p += 0x14;
 	} while (i != 0);
 }

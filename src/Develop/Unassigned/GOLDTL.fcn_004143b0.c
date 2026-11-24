@@ -106,10 +106,10 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 		goto fail;
 	}
 pick:
-	if (arg2 == 0) {
-		value = box.loAligned;
-	} else {
+	if (arg2 != 0) {
 		value = box.hiAligned;
+	} else {
+		value = box.loAligned;
 	}
 	*(unsigned char*) (self + 0x214) |= 4;
 	*(float*) (self + 0x50) = value - box.lo + *(float*) (self + 0x50);

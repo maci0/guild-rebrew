@@ -22,13 +22,13 @@ int __cdecl fcn_00413c40(void* obj, float* outA, float* outB, void* p4, void* p5
     if (r1 != 0 && r2 != 0)
         return 1;
     if (r1 == 0) {
-        if (r2 != 0) {
-            *outA = *(float*) &p6;
-            *outB = *(float*) &p5;
+        if (r2 == 0) {
+            *outA = *(float*) &p6 < *(float*) &p4 ? *(float*) &p6 : *(float*) &p4;
+            *outB = *(float*) &p5 > *(float*) &obj ? *(float*) &p5 : *(float*) &obj;
             return 0;
         }
-        *outA = *(float*) &p6 < *(float*) &p4 ? *(float*) &p6 : *(float*) &p4;
-        *outB = *(float*) &p5 > *(float*) &obj ? *(float*) &p5 : *(float*) &obj;
+        *outA = *(float*) &p6;
+        *outB = *(float*) &p5;
         return 0;
     }
     *outA = *(float*) &p4;

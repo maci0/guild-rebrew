@@ -18,7 +18,7 @@ void __cdecl fcn_0057d9e0(char* a)
 	char buf[0x400];
 
 	e = gm_LookupEntityRecordById(*(int*) (a + 0xc));
-	if (e == 0 || *(int*) (a + 0x70) == -1 || *(int*) (a + 0x70) == -2 || *(int*) (a + 0x70) > 3) {
+	if (*(int*) (a + 0x70) == -1 || *(int*) (a + 0x70) == -2 || *(int*) (a + 0x70) > 3 || e == 0) {
 		he_FreeAction(a);
 		return;
 	}

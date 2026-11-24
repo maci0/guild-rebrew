@@ -139,7 +139,7 @@ void __cdecl fcn_004d3800(void)
 	for (i = 0; i < 6; i++) {
 		for (j = 0; j < 5; j++) {
 			for (k = 0; k < 6; k++) {
-				g[i][j][k] = (float) (g[i][j][k] * 0.01);
+				g[i][j][k] *= 0.01;
 				if (k != 0) {
 					g[i][j][k] += g[i][j][k - 1];
 				}

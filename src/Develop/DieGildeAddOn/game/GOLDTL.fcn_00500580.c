@@ -15,12 +15,9 @@ char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
 
 	if (flags & 1) {
 		i = fcn_004ffd90(a3) & 0xffff;
-		if (i == 0xffff) {
-			return 0;
-		}
-		if (flags & 2) {
-			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].stat_category = (char) a4;
+		if (i != 0xffff && (flags & 2)) {
 			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].active = (char) a5;
+			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].stat_category = (char) a4;
 		}
 	} else {
 		i = fcn_0050a7e0(a2, -1, -1, a3, 0, a4 & 0xff, a5 & 0xff, 2)
