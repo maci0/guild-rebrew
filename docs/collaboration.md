@@ -1,8 +1,10 @@
 # Git and BinSync
 
 The project repository contains C, headers, configuration, layouts, native evidence and
-managed metadata. Use a narrow branch/worktree, agree on definition ownership,
-and submit affected-target checks with changes. Rebrew writers own metadata edits.
+managed metadata. Use a narrow branch/worktree and agree on source, header and
+layout ownership before parallel edits. Use separate build directories or one
+linker writer; metadata locks protect neither source edits nor links. Submit
+affected-target checks with changes. Rebrew writers own metadata edits.
 
 BinSync is optional analysis exchange. It carries reviewed names, prototypes,
 comments, locals, globals and types. It does not import STATUS, compiler flags or
@@ -21,10 +23,10 @@ Names and source similarity do not establish a compatible state repository.
 ## Review an exchange
 
 ```sh
-uv run --extra binsync rebrew binsync summary binsync --target server.dll --json
-uv run --extra binsync rebrew binsync diff binsync --target server.dll --json
-uv run --extra binsync rebrew binsync pull binsync --target server.dll --user REBREW_USER --no-git --dry-run --json
-uv run --extra binsync rebrew binsync push binsync --target server.dll --user REBREW_USER --dry-run --json
+uv run --frozen --extra binsync rebrew binsync summary binsync --target server.dll --json
+uv run --frozen --extra binsync rebrew binsync diff binsync --target server.dll --json
+uv run --frozen --extra binsync rebrew binsync pull binsync --target server.dll --user REBREW_USER --no-git --dry-run --json
+uv run --frozen --extra binsync rebrew binsync push binsync --target server.dll --user REBREW_USER --dry-run --json
 ```
 
 Replace `REBREW_USER` with Rebrew's own writer username. It must differ from
@@ -32,7 +34,8 @@ the live bridge's username: pull excludes Rebrew's user branch, and push writes
 that branch. Keep the same writer identity for the exchange; do not infer it
 from the state author in `binsync/metadata.toml`. Resolve binary,
 state-health and field conflicts first. `diff` exits 1 for differences. `--no-git`
-uses already-fetched peer state. After reviewing a preview, omit `--dry-run` only
+uses already-fetched peer state. A preview with `--no-git` cannot review unseen
+remote changes. After reviewing a preview, omit `--dry-run` only
 for the intended apply/export. Re-test changed C contracts and inspect the Git diff.
 
 Push commits to the local state repository by default; `--git-push` publishes it.

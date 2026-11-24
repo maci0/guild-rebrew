@@ -22,10 +22,11 @@ size. BSS contributes virtual extent without file payload.
 
 The IAT begins .rdata; the server has no separate .idata section. A matching import
 name list does not establish identical slot order, hints or physical placement.
+Inspect the reference with `uv run --frozen rebrew binary pe --target server.dll --json`.
 
 ## Find the actual contribution
 
-Use the selected objects, archive extraction and map before explaining a gap.
+Inspect the selected objects, archive extraction and map before explaining a gap.
 `/OPT:REF` can discard compiled contributions; `/OPT:NOREF` does not select omitted
 TUs or every archive member. Undefined references can still matter in discarded code.
 
@@ -38,8 +39,11 @@ share an owner.
 
 Preserve a baseline, rebuild affected targets and compare complete files plus
 sections, imports, exports, relocations, resources, headers and layout. Use
-`rebrew source organize review` and `rebrew source organize check` for source organization changes and the
-placement commands listed in [tooling](tooling-upstream.md).
+`rebrew source organize review` before source organization changes and
+`rebrew source organize check BEFORE AFTER --json` after rebuilding each affected
+target. The latter compares preserved and rebuilt raw PE files; it does not earn
+a byte verdict. Use the placement commands listed in [tooling](tooling-upstream.md)
+to locate shifts.
 
 Do not insert bytes or duplicate storage to improve same-offset agreement.
 Alignment requires evidence at the exact site; a gap or short C body is insufficient.

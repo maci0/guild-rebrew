@@ -1,8 +1,9 @@
 # Assembly audit
 
-[AGENTS.md](../AGENTS.md#assembly-and-linker-gaps) owns assembly policy. Metadata
-records each reviewed definition/target receipt and byte verdict through
-`rebrew source document-assembly`. Whole-function assembly is separate from C recovery.
+[AGENTS.md](../AGENTS.md#assembly-and-linker-gaps) owns assembly policy.
+`rebrew source document-assembly` records reviewed evidence for each definition
+and target. `rebrew test` and `rebrew verify` earn byte verdicts separately.
+Whole-function assembly remains separate from C recovery.
 
 ## What qualifies
 
@@ -17,19 +18,20 @@ do not validate a receipt's reasoning or other inputs.
 ## Find outstanding work
 
 ```sh
-uv run rebrew todo --category naked-reconstruction --target Europa1400Gold.exe --json
-uv run rebrew lint --all-targets --json
+uv run --frozen rebrew todo --category naked-reconstruction --all-targets --json
+uv run --frozen rebrew lint --all-targets --json
 ```
 
 The todo category reports byte-matched definitions still marked `source = "naked"`.
-Lint E023 flags unsupported whole-function assembly dumps. Documented assembly
-and minor padding are exempt. These are different lists. Do not maintain another
-count here.
+Each target defaults to at most 20 items; increase `--limit` to review more.
+Lint E023 uses a heuristic to flag whole-function naked assembly dumps; reviewed
+assembly and minor padding are exempt. A clean lint run does not establish native
+assembly evidence. Use both lists without maintaining a separate count here.
 
 ## Compilation and retention
 
 Separate compilation, selected link inputs, archive extraction and retained
-contributions. A gap proves none of them. Comparison-client /OPT:NOREF retains
+contributions. A gap proves none of them. Comparison-client `/OPT:NOREF` retains
 selected contributions but does not establish original linker behavior.
 [Link layout](msvc6-link-layout.md) owns placement and discard analysis.
 

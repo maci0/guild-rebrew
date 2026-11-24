@@ -1,6 +1,6 @@
 # Tooling
 
-Use `uv run rebrew <command>` and its public APIs before adding a helper.
+Use `uv run --frozen rebrew <command>` and its public APIs before adding a helper.
 `pyproject.toml` and `uv.lock` specify package pins. A sibling tooling checkout is not
 needed for normal reconstruction.
 
@@ -12,7 +12,7 @@ needed for normal reconstruction.
 | Work selection and accounting | `todo`, `status`, `coverage catalog` |
 | Symbolize data accesses | `source symbolize --dry-run` |
 | Rename/rebind a definition | `source rename`, `source binding` |
-| Inspect complete native code | `binary asm show`, `binary xrefs` |
+| Inspect native code and references | `binary asm show`, `binary xrefs` |
 | Review/repair native boundaries | `binary repair-extents --dry-run` |
 | Compare function bytes | `test`, `diff`, `diagnose probe` |
 | Check linked operands/placement | `binary relocs`, `build check-text-placement`, `build check-data-placement` |
@@ -28,7 +28,7 @@ the returned digest. [AGENTS.md](../AGENTS.md) owns metadata and upstream repair
 | Script | Purpose |
 | --- | --- |
 | `scripts/gate.sh` | Server acceptance checks |
-| `scripts/verify_objective.py` | Independent raw-file equality check |
+| `scripts/verify_objective.py` | Independent server file equality and PE checks |
 | `scripts/wine_load_check.sh` | Load the server DLL and resolve Init/Exit |
 | `scripts/gen_import_includes.py` | Native import retention/order recipe |
 | `scripts/progress_svg.py` | Graphics from a canonical status report |
@@ -44,10 +44,14 @@ split-link, copied-CRT and replacement-import emitters are not build alternative
 
 ## Open gaps
 
-Reusable issues belong in the upstream checkout's `docs/IDEAS-GUILD.md`, with
-replay evidence. Check installed help and preview the selected target's writes
-before using `data layout fill`. Review the proposed source paths and storage
-ownership before applying the plan.
+Record missing capabilities in the upstream checkout's `docs/IDEAS-GUILD.md`,
+with the problem, proposed capability and replay evidence. Tooling bugs require
+an upstream fix, regression test and passing suite before reconstruction resumes;
+a local workaround or backlog entry does not close them. See
+[upstream rules](../AGENTS.md#upstream-rebrew) for the checkout path.
+
+Before using `data layout fill`, check installed help and preview the selected
+target's writes. Review proposed source paths and storage ownership before applying.
 
 The managed support-purpose descriptions mark `src/crt_region/amsg_exit.c` and
 `src/crt_region/data_restore.c` as historical experiments excluded from the

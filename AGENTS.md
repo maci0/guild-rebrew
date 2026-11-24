@@ -20,9 +20,9 @@
 1. rebrew todo --json                          # get highest-impact action items
 2. rebrew library match --lib <runtime>.LIB --va 0x<VA>   # is it already in a library?
 3. rebrew skeleton 0x<VA>                      # only for an inventory VA without source
-4. rebrew test src/Europa1400Gold_TL.exe/<func>.c --json  # compile + compare
+4. rebrew test 0x<VA> --json                  # compile + compare
 5. # iterate code until STATUS: EXACT or RELOC
-6. rebrew test --all --json                    # batch promote all ready functions
+6. rebrew test --all --json                    # recheck eligible files in the selected target
 ```
 
 Check library attribution before implementing a function. Use `rebrew library scan-signatures`,
@@ -177,9 +177,6 @@ on unavailability; writes use a durable `.rebrew/metadata-journal.toml` and
 per-backend replication receipts. Back up those files. Recovered writers catch
 up on the next write or `rebrew metadata reconcile`; `--dry-run` previews.
 Independent changes conflict rather than being overwritten by wall-clock order.
-This project replicates: SQLite (`rebrew-metadata.sqlite3`, gitignored) is read
-first and the TOML stores stay a written, git-tracked replica. A clone without
-the database reads TOML; its first write populates SQLite.
 `source = "naked"`, STRUCT/CALLERS information and support file purposes are
 metadata-only. Old inline blocks and earlier metadata formats are rejected;
 ordinary readers have no compatibility parser or legacy fallback. Use
@@ -414,17 +411,19 @@ below are project-specific and survive that refresh.
 
 ## Local setup
 
-The generated quick-start source path is a template placeholder; use the
-function VA or the source path printed by `rebrew skeleton` in this tree.
-`test --all` rechecks eligible files for the selected target and records results.
-The configured backend is `unshare`; the GoldTL resource step invokes Docker
-directly. Follow [the build guide](docs/build.md) for this checkout's setup.
+Run Rebrew through `uv run --frozen rebrew` from the checkout root. GoldTL is the
+default target. Select `server.dll` or `Europa1400Gold.exe` explicitly for those
+builds. The compiler backend is `unshare`. The GoldTL resource step invokes
+Docker directly. [Build guide](docs/build.md)
+
+This checkout reads metadata from SQLite first and writes to both SQLite and the
+tracked TOML replica. A clone reads TOML until its first write initializes the
+ignored `rebrew-metadata.sqlite3` file.
 
 ## Provenance ledger
 
-Every change to a deliverable gets an append-only entry in
-[docs/provenance.md](docs/provenance.md): date, change, reason, evidence,
-decision owner, verification. A reversal is a new entry.
+Append the date, change, reason, evidence, decision owner and verification for
+each deliverable change. Record reversals in new entries. [Provenance ledger](docs/provenance.md)
 
 ## Game compiler policy
 

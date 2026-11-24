@@ -7,11 +7,12 @@ repeatedly invalidated otherwise plausible work.
 
 - Read the source, current binding and address-keyed findings before starting a
   new probe. Resolve the exact target/VA rather than borrowing a similar name.
-- Establish exclusive file/definition ownership for parallel work. Review shared
-  callers, types, storage and build contexts before assigning separate edits.
+- Agree on file/definition ownership for parallel work, including shared callers,
+  types, storage and build contexts. Follow the
+  [collaboration rules](collaboration.md) for concurrent edits and builds.
 - Check the library provider and complete native extent before treating a row as
   missing game code. A signature miss is inconclusive.
-- Use the installed CLI and public APIs before writing a duplicate helper.
+- Check [existing tools](tooling-upstream.md) before writing a helper.
 
 ## During a probe
 
@@ -30,8 +31,10 @@ anchors. A source rename can leave stale build state or explicit retention symbo
 Review managed-store changes through their owning writers; read-only file mode is
 intentional, not permission to bypass locks.
 
-Rebuild the artifact that decides the claim. Check its freshness and full length.
-A green object score does not clear link, data, load or source-fidelity failures.
-[Measurement](measure-traps.md) owns those distinctions.
+Rebuild the artifact that decides the claim and check its freshness and full length.
+For shared-source, declaration, name or provider changes, relink every target that
+compiles the affected files and require zero new LNK2001, LNK2019 and LNK2005 errors.
+Use [measurement limits](measure-traps.md) to distinguish object, link, data, load
+and source-recovery claims.
 
 Older write-ups are in the [archive](goal-history.md#full-notebooks) under this filename.

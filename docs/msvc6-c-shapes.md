@@ -1,9 +1,9 @@
 # MSVC6 C shapes
 
 Use native instructions to choose a source hypothesis, then compare the complete
-object with canonical whole-TU flags. These are measured patterns, not guarantees
-about every compiler context. [Measurement](measure-traps.md) defines the proof
-limits; [register allocation](msvc6-allocator.md) covers homes and slots.
+compiled function with canonical whole-TU flags. These patterns depend on compiler context.
+[Measurement](measure-traps.md) defines the proof limits;
+[register allocation](msvc6-allocator.md) covers registers and stack slots.
 
 ## Diagnose before rewriting
 
@@ -36,12 +36,12 @@ FP rounding or observable reloads.
 - Unused declarations and definition order can affect code generation. Preserve
   the original TU context during probes.
 - A `return` inside a loop can trigger epilogue merging. Check return placement
-  before treating shared epilogues as a compiler limit. See section 2 of
-  `docs/codegen-walls.md` in the [November 5 archive](goal-history.md#full-notebooks).
+  before treating shared epilogues as a compiler limit. In the
+  [November 5 archive](goal-history.md#full-notebooks), read `docs/codegen-walls.md`
+  section 2 together with its correction in `docs/msvc6-c-shapes.md` section 200.
 - Keep logging literals, argument order and even native API-format mismatches
   faithful. Correcting the game is a different task from reconstructing it.
 
-Use [negative results](codegen-walls.md) before reopening an exhausted probe family.
-A failed search grants no [assembly exception](assembly-audit.md).
+Check [negative results](codegen-walls.md) before reopening an exhausted probe family.
 
 Older write-ups are in the [archive](goal-history.md#full-notebooks) under this filename.

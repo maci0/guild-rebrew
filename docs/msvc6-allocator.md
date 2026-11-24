@@ -1,7 +1,7 @@
 # MSVC6 register allocation
 
 Register and stack assignments depend on live ranges, uses, calls and the full
-translation unit. A source experiment measures that context, not a general rule.
+translation unit. Record that context when interpreting an experiment.
 Expression-level differences belong in [C shapes](msvc6-c-shapes.md).
 
 ## Read the native value flow
@@ -32,9 +32,10 @@ use it only with evidence for those accesses, not to improve a score.
 Track entry ESP and every push, pop, stack adjustment and callee cleanup.
 Resolve each displacement at that instruction. Compilers can reuse dead parameter
 or saved-register slots; reserved frame bytes do not prove a local array or struct.
-A diagnostic sentinel can identify a slot, but must not become production state.
+A diagnostic sentinel can identify a slot. Keep it in the probe rather than
+production source.
 
-Compare complete objects after a type or context change. Keep rejected variants
+Compare all affected compiled functions after a type or context change. Keep rejected variants
 bounded and consult [negative results](codegen-walls.md) before repeating them.
 
 Older write-ups are in the [archive](goal-history.md#full-notebooks) under this filename.

@@ -2,22 +2,31 @@
 
 External analysis supplies hypotheses and test cases. Confirm each against the
 exact local binary before accepting a name, signature, field or counterpart.
-Use the [reference hashes](build.md#reference-inputs) to identify a build.
-Community target labels can differ from this project's module names.
+[Reference hashes](build.md#reference-inputs) identify a build. Community target
+labels can differ from this project's module names.
 
 ## Retained native checks
 
-- The TL binary contains `ch_SetVisible(): invalid character`. The current
-  0x00402a00 binding is `ch_SetVisible`.
-- The TL binary contains the `ch_Create` overflow diagnostic. Preserve its spelling
-  when reviewing the 0x00403200 name.
-- TL 0x004050c0 is currently named `ch_RemoveQueueEntry`. The descriptive name
-  does not establish its original spelling.
-- Preserve `gs_AddBeweis` from its original diagnostic rather than translating it
-  to a community spelling.
+Checked in the local Gold and GoldTL images on 2026-11-24. The server image
+has none of these strings. [Naming](naming_conventions.md) owns adoption rules.
 
-[Naming](naming_conventions.md) owns adoption rules. Current bindings may already
-incorporate a reviewed fact; a historical candidate count is not a work queue.
+- Both client images contain `ch_SetVisible(): invalid character`. GoldTL
+  `0x00402a00` is bound to `ch_SetVisible` in
+  `src/Develop/DieGildeAddOn/game/GOLDTL.ch_SetVisible.c`. The Gold copy of the
+  same diagnostic is in `src/Develop/Unassigned/GOLD.fcn_00402480.c`, which is
+  still named `fcn_00402480`.
+- Both client images contain `ch_Create:Too many characters!`. Keep that
+  spelling, including the missing space, when reviewing the GoldTL `0x00403200`
+  name. The current definition is `ch_Create` in
+  `src/Develop/Units/m_alloc/GOLDTL.fcn_00403200.c` and reports the string
+  through `g_67534c`.
+- GoldTL `0x004050c0` and Gold `0x004047a0` are named `ch_RemoveQueueEntry`.
+  That name describes the body. No original spelling is attested for it.
+- Both client images contain
+  `gs_AddBeweis(): Executed---- owner = %i, st_id = %i, slot = %i`. Keep
+  `Beweis`. The shared definition is `gs_AddBeweis` in
+  `src/Develop/Unassigned/GOLDTL.gs_AddBeweis.c` (GoldTL `0x004f5770`, Gold
+  `0x004f3640`).
 
 ## Reuse research carefully
 

@@ -1,7 +1,8 @@
 # Build and compare
 
-The [current checkpoint](TODO.md) records validation. This guide builds the server;
-[client scaffolds](../stubs/README.md) have additional inputs and unresolved work.
+Build and verify `server.dll` against the original. See
+[client comparison builds](../stubs/README.md) for the EXEs and
+[current work](TODO.md) for the latest measurements.
 
 ## Prerequisites
 
@@ -27,9 +28,17 @@ The namespace command alone does not test all requirements. See the
 
 ## Project environment
 
-Follow the [README quick setup](../README.md#start-here) to clone the repository
-and create its environment. Run subsequent project commands from the checkout
-root. `.python-version` selects Python; `pyproject.toml` and `uv.lock` pin dependencies.
+Clone the repository and create its pinned environment:
+
+```sh
+git clone https://github.com/maci0/guild-rebrew.git
+cd guild-rebrew
+uv sync --frozen
+uv run --frozen rebrew --version
+```
+
+Run the commands below from the checkout root. `.python-version` selects the
+interpreter. `pyproject.toml` and `uv.lock` pin dependencies.
 
 ## Reference inputs
 
@@ -46,35 +55,42 @@ reference, even if the filename agrees.
 
 ## Prepare compiler images
 
-Build the two server images from the toolchain recipes:
+Clone the toolchain recipes and point Rebrew at them:
 
 ```sh
 git clone https://github.com/maci0/recompile-toolchains.git ../recompile-toolchains
 export REBREW_TOOLCHAINS_DIR="$PWD/../recompile-toolchains"
-uv run rebrew toolchain build msvc-6.0-sp5
-uv run rebrew toolchain build msvc-6.0-sp5-crt
+```
+
+Build the two server images:
+
+```sh
+uv run --frozen rebrew toolchain build msvc-6.0-sp5
+uv run --frozen rebrew toolchain build msvc-6.0-sp5-crt
 ```
 
 The server compiles with plain VC6 SP5, `/MT` and LIBCMT. Its link uses the
-`msvc-6.0-sp5-crt` image. Client compiler/runtime contexts are documented in [build facts](general-knowledge.md#configured-build).
-The `-docker.cmake` filename is historical; the driver uses the configured backend.
-Its generated header and older recovery hints retain Docker wording and the
-`--toolchain` shortcut. That shortcut requires CMake 3.21+; the
-[documented CMake option](https://cmake.org/cmake/help/latest/manual/cmake.1.html#cmdoption-cmake-toolchain)
-is equivalent to `-DCMAKE_TOOLCHAIN_FILE=...`, used below for CMake 3.19 compatibility.
+`msvc-6.0-sp5-crt` image. [Build facts](general-knowledge.md#configured-build)
+cover the client compiler/runtime contexts.
+
+The `-docker.cmake` toolchain filename is historical: the driver runs the
+configured backend. Its header comment and the gate's recovery hint still say
+Docker and use `--toolchain`, which needs CMake 3.21+. The commands below use the
+[equivalent](https://cmake.org/cmake/help/latest/manual/cmake.1.html#cmdoption-cmake-toolchain)
+`-DCMAKE_TOOLCHAIN_FILE=...`, which works on CMake 3.19.
 
 ## Build the server
 
 Use a fresh build directory:
 
 ```sh
-uv run cmake -G "Unix Makefiles" -S . -B build/server-example \
+uv run --frozen cmake -G "Unix Makefiles" -S . -B build/server-example \
   -DCMAKE_TOOLCHAIN_FILE="$PWD/cmake/toolchain-msvc-6.0-sp5-docker.cmake" \
   -DCMAKE_BUILD_TYPE=Release \
   -DREBREW_BUILD_SERVER=ON \
   -DREBREW_BUILD_GOLD=OFF -DREBREW_BUILD_GOLDTL=OFF \
   -DREBREW_DEBUG_INFO=OFF
-uv run cmake --build build/server-example --parallel 2
+uv run --frozen cmake --build build/server-example --parallel 2
 ```
 
 This produces `server.dll` and `server.map` in that directory. Keep each image
@@ -87,7 +103,7 @@ The server target currently selects `REBREW_LEGACY_SERVER_LAYOUT` through
 ```sh
 cmp original/Server/server.dll build/server-example/server.dll
 sha256sum original/Server/server.dll build/server-example/server.dll
-uv run rebrew verify --target server.dll \
+uv run --frozen rebrew verify --target server.dll \
   --built build/server-example/server.dll \
   --data --whole-binary --raw-link --dry-run --json
 ```
@@ -96,7 +112,9 @@ uv run rebrew verify --target server.dll \
 existing image without a function compile pass or verdict writes; exit 1 reports
 differences. Name the target explicitly because the project defaults to GoldTL.
 
-For the full gate, install its host loader tools on Debian/Ubuntu. The loader
+## Run the server gate
+
+Install the gate's host loader tools on Debian/Ubuntu. The loader
 check fails if Wine or `i686-w64-mingw32-gcc` is absent:
 
 ```sh
@@ -111,7 +129,7 @@ Configure that tree separately with the server options above, replacing
 metadata; run it only while sources are stable:
 
 ```sh
-uv run bash scripts/gate.sh
+uv run --frozen bash scripts/gate.sh
 ```
 
 A matching server file does not mean every gate check passed. Report the results

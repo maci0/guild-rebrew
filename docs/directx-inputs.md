@@ -19,11 +19,9 @@ Paths in the tables are relative to that directory.
 | `lib/dinput8.lib` | 19,928 | `8492ccaf3e8fdee6777aa21a6b693b3389450c290e3ae1de525956811614c97d` |
 | `lib/d3d8.lib` | 2,466 | `90c3a046e41deef54eb8a68b01b527d1b2639dccee30135f1c7c72b835bc96a4` |
 
-The [provenance ledger](provenance.md) records extraction of
-`lib/d3dx8.lib` from the DirectX 8.1 SDK installer `dx81sdk_full.exe`, archive.org
-item `dx81sdk_full`, at `DXF/DXSDK/lib/d3dx8.lib` on 2026-10-25. The saved
-`scratch/dx8sdk/sdk81/d3dx8.lib` has the same hash in the
-[local receipt archive](goal-history.md#local-receipts).
+The DirectX 8.1 SDK archive came from `DXF/DXSDK/lib/d3dx8.lib` in
+`dx81sdk_full.exe` (archive.org item `dx81sdk_full`). The October 25 entry records
+the extraction and link results. [Archive provenance](provenance.md#2026-10-25-session-round-34-d3dx8-provider-replaced-with-directx-81-sdk-archive)
 
 The archive label and matching bytes do not establish the provider selected by
 the original game linker. Keep these files unchanged.
@@ -39,17 +37,33 @@ member hashes below.
 | `obj\i386\cd3dximage.obj` | 22,584 | `d0c91f1bf7550ae39709f738416a48710e75aba61749203d8c7b03d5a07fe592` |
 | `obj\i386\jerror.obj` | 26,570 | `e1203fbdc8cb43231d4952b24843030fdd4f332c51e858807bdaf6cbda0516ba` |
 
-The 23 files currently under `supp/` match members of the same archive:
+## Supplementary objects
 
-- `jcomapi.obj`, `jdapimin.obj`, `jdapistd.obj`, `jdmarker.obj`, `jdmaster.obj`
-  and `jdtrans.obj` match their names under `obj\i386\`.
-- The `png*.obj` files match their names under `obj\i386\`.
-- `pchamd.obj` matches `objd\i386\pchamd.obj`.
-- `pchintel.obj` and `pchintel-2.obj` match the first and second occurrences of
-  `objd\i386\pchintel.obj`. The two occurrences have different bytes.
+From the checkout root, extract these 23 members into an empty `supp/` directory.
+CMake links every `.obj` in that directory. The selection excludes
+`pngpread.obj` and includes both occurrences of `pchintel.obj`.
 
-CMake's glob includes the PCH objects too. It does not enforce hashes for the
-supplementary objects or the other four local archives.
+```sh
+(
+  set -eu
+  archive="$PWD/references/dxsdk8/lib/d3dx8-xpsp1.lib"
+  out=references/dxsdk8/supp
+  mkdir -p "$out"
+  for member in jcomapi jdapimin jdapistd jdmarker jdmaster jdtrans \
+                png pngerror pngget pngmem pngread pngrio pngrtran pngrutil \
+                pngset pngtrans pngwio pngwrite pngwtran pngwutil; do
+    llvm-ar p "$archive" "obj\\i386\\${member}.obj" > "$out/$member.obj"
+  done
+  llvm-ar p "$archive" 'objd\i386\pchamd.obj' > "$out/pchamd.obj"
+  llvm-ar p "$archive" 'objd\i386\pchintel.obj' > "$out/pchintel.obj"
+  cd "$out"
+  llvm-ar xN 2 "$archive" 'objd\i386\pchintel.obj'
+  mv 'objd\i386\pchintel.obj' pchintel-2.obj
+)
+```
+
+CMake checks the XP archive and the two members it extracts itself. Verify the
+other archive hashes above before linking.
 
 ## Import libraries
 

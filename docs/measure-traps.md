@@ -7,10 +7,10 @@ not a copied score table.
 | Evidence | Establishes | Does not establish |
 | --- | --- | --- |
 | Complete native CFG/data-flow review | The reviewed semantics and contracts | Original C spelling or byte identity |
-| Complete object EXACT | Object bytes agree | Linked placement or full image identity |
+| Complete object EXACT | Compared function bytes agree in the object | Linked placement, whole-object or full-image identity |
 | Object RELOC | Agreement under the applied relocation policy | Correct unresolved operands or selected providers |
 | Bounded semantic proof/fixtures | Agreement under modeled inputs, calls and bounds | Unmodeled runtime behavior or byte identity |
-| Raw linked EXACT | Function bytes at the native VA agree | Every other function/data record agrees |
+| Linked EXACT | Raw-linked function bytes at the native VA agree | Every other function/data record agrees |
 | Whole-file comparison | Complete file bytes agree | Original source ownership or C recovery |
 | Layout/data metadata | Recorded extents, roles and ownership evidence | New allocations or verified bytes |
 
@@ -30,9 +30,8 @@ A residue count is not a count of independent semantic errors.
 
 ## Stack arithmetic
 
-Resolve ESP-relative addresses with every pending push and stack adjustment at
-that instruction. [Register allocation](msvc6-allocator.md#stack-slots) covers
-stack-slot tracking.
+Resolve ESP-relative addresses at each instruction using the
+[stack-slot tracking procedure](msvc6-allocator.md#stack-slots).
 
 ## x87 conditions
 
@@ -53,7 +52,7 @@ can distinguish expressions that agree on ordinary inputs.
 
 A timeout, stale context, failed build or missing receipt supplies no byte verdict.
 Cached results require current source/header/compiler/binary and binding inputs.
-`verify --no-cache` bypasses verdict caching, not necessarily object caching.
+[Verification and caches](verify-performance.md) explains which checks reuse them.
 An unchanged byte result does not validate a changed native identity or provider.
 
 Write corrections as new provenance entries. Do not overwrite a failed receipt or

@@ -41,9 +41,9 @@ C type, complete extent and allocation ownership as separate claims.
 
 ## Review and verify
 
-Use `uv run rebrew data list --all-targets --json`,
-`uv run rebrew data bss --target server.dll --json`, and
-`uv run rebrew lint --all-targets --json` to inspect the catalog. Change rows only through locked
+Use `uv run --frozen rebrew data list --all-targets --json`,
+`uv run --frozen rebrew data bss --target server.dll --json`, and
+`uv run --frozen rebrew lint --all-targets --json` to inspect the catalog. Change rows only through locked
 writers. Compare bytes and placement against the matching raw image/map; owner
 assignment itself does not promote a verdict.
 

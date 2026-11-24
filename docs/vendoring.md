@@ -17,7 +17,7 @@ Generated outputs are tracked because managed function bindings compile them.
 CMake checks both manifests during configuration and refuses drift.
 
 ```sh
-uv run rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml
+uv run --frozen rebrew library vendor references/vendor/zlib/vendor.toml references/vendor/minizip/vendor.toml
 ```
 
 Check is the default. After reviewing patch/manifest edits, add `--apply` to

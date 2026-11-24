@@ -32664,3 +32664,22 @@ Replaces the local vector reloads \`sqrt(v[0]*v[0] + ...)\` with direct matrix v
 - Verification: `rebrew test --source-targets --no-promote --json` moved `GOLDTL 0x004e2b70` from `314/347` (`1098/1199`) to `315/347` (`1099/1199`, exact `1199/1199`); all-target lint reported no findings.
 - Decision owner: matching lane 46.
 - 2026-11-24: Batch r5b74: matching lane 46 (gemini-4-neon). Three rows rise to RELOC, none fall: GOLDTL 0x00457290, 0x00465c60, 0x00593360. Verified: both clients link, server raw link byte-identical, lint 0/0 on all targets, no status regressions by rebrew's `_STATUS_ORDER`. Decision owner: matching lane, reviewed by lead.
+
+## 2026-11-24 - Repository documentation review
+
+- Consolidated setup in the server and client guides, refreshed the README,
+  documentation index, work queue and status graphics, and aligned AGENTS with
+  the pinned Rebrew scaffold. Clarified what each verification command checks
+  and retained the existing source, assembly and link acceptance requirements.
+- Corrected research and SDK receipt locations, clarified historical release
+  scope, and documented the exact inputs to the GoldTL supplementary-object
+  step. Dated release measurements and archived notebooks retain their
+  original evidence.
+- Evidence and verification: Rebrew 6.72.0 status, TODO and lint reports, the
+  tracked scaffold and build rules, release records, and reference binaries.
+  A read-only server comparison passed all 652 data checks and every
+  whole-binary check. Both existing client images still differ. All 23 DirectX
+  extraction outputs matched the existing supplementary inputs. Fresh CMake
+  configurations passed for the server and both clients. Local Markdown links,
+  scaffold drift and Git whitespace checks passed.
+- Decision owner: user, requesting a repository-wide documentation review.

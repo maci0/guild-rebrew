@@ -28,18 +28,17 @@ changed or substituted archives fail; do not generate a replacement import libra
 
 ## Evidence
 
-The saved snapshot header identifies 6.1c. The archived `link-probe.json` records
+The saved snapshot header identified 6.1c. The `link-probe.json` receipt recorded
 51 GoldTL and 31 Gold MSS32 imports with matching names and hints. These isolated
 probes do not establish a complete client image. The [6.0 candidate](../mss-6.0/README.md)
 supplied the names but failed every hint check.
 
-Local receipts are under
-`../guild-rebrew-archive/2026-11-05/scratch/goal83-miles-candidates/`, relative to
-the checkout root. `source-pin.json` records the commit and blob above;
-`downloads.json` records the archive hash and size. `area51-mss.h` contains the
-version label. See [receipt locations](../../docs/goal-history.md#local-receipts).
+The receipts were in
+`../guild-rebrew-archive/2026-11-05/scratch/goal83-miles-candidates/`, which was
+deleted on 2026-11-14: `source-pin.json` (commit and blob above), `downloads.json`
+(archive hash and size) and `area51-mss.h` (version label). The pin and hash above
+remain checkable. See [local receipts](../../docs/goal-history.md#local-receipts).
 
-Historical analysis and receipt paths are preserved as
-`references/mss-6.1c/README.md` in the
+Historical analysis is preserved as `references/mss-6.1c/README.md` in the
 [documentation archive](../../docs/goal-history.md#full-notebooks). Reference game
 hashes belong in the [build guide](../../docs/build.md#reference-inputs).

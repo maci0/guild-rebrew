@@ -6,26 +6,19 @@ nor storage ownership. [Current work](../docs/TODO.md) owns build status.
 
 ## Inputs
 
-Complete the [host/toolchain setup](../docs/build.md) and supply both client
-[reference binaries](../docs/build.md#reference-inputs).
-The clients use the Processor Pack image:
+Install the [host prerequisites](../docs/build.md#prerequisites), create the
+[project environment](../docs/build.md#project-environment) and supply both
+[client references](../docs/build.md#reference-inputs). Clone and select the
+[toolchain recipes](../docs/build.md#prepare-compiler-images), then build the
+client Processor Pack image:
 
 ```sh
-uv run rebrew toolchain build msvc-6.0-sp5-pp
+uv run --frozen rebrew toolchain build msvc-6.0-sp5-pp
 ```
 
 Supply the pinned [Miles 6.1c archive](../references/mss-6.1c/README.md).
-GoldTL also needs `llvm-ar` and these local DirectX inputs:
-
-- `references/dxsdk8/lib/d3dx8.lib`
-- `references/dxsdk8/lib/ddraw.lib`
-- `references/dxsdk8/lib/dinput8.lib`
-- `references/dxsdk8/lib/d3d8.lib`
-- `references/dxsdk8/lib/d3dx8-xpsp1.lib`
-- The JPEG/PNG objects under `references/dxsdk8/supp/`
-
-The [DirectX input guide](../docs/directx-inputs.md) records archive and member
-hashes, provenance and the checks CMake enforces. Keep the archives unpatched.
+GoldTL also needs `llvm-ar` and the local archives and supplementary objects
+listed in the [DirectX input guide](../docs/directx-inputs.md).
 
 ## Placeholder stubs
 
@@ -43,23 +36,23 @@ file establishes original provider selection.
 ## Build
 
 ```sh
-uv run cmake -G "Unix Makefiles" -S . -B build/clients \
+uv run --frozen cmake -G "Unix Makefiles" -S . -B build/clients \
   -DCMAKE_TOOLCHAIN_FILE="$PWD/cmake/toolchain-msvc-6.0-sp5-docker.cmake" \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_RUNTIME_OUTPUT_DIRECTORY="$PWD/build" \
   -DREBREW_BUILD_SERVER=OFF \
   -DREBREW_BUILD_GOLD=ON -DREBREW_BUILD_GOLDTL=ON \
   -DREBREW_DEBUG_INFO=OFF
-uv run cmake --build build/clients --parallel 2
+uv run --frozen cmake --build build/clients --parallel 2
 ```
 
 Use a fresh build directory. This writes the EXEs and maps to `build/`, while
 objects stay in `build/clients/`. It can replace earlier client images there.
 
 Gold uses `/ML` with LIBC; GoldTL uses `/MT` with LIBCMT. The configured backend runs
-CL/LINK/LIB in the pinned images. The historical toolchain filename does not
-select Docker execution. GoldTL compiles its resources with a direct Docker
-invocation, so it needs Docker even when the compiler backend is `unshare`.
+CL/LINK/LIB in the pinned images ([toolchain filename](../docs/build.md#prepare-compiler-images)).
+GoldTL compiles its resources with a direct Docker invocation, so it needs Docker
+even when the compiler backend is `unshare`.
 
 The scaffold's `/OPT:NOREF` retains selected contributions. Gold's placeholder
 WinMain is in `src/Develop/DieGildeAddOn/game/GOLD.main.c`; GoldTL has a
@@ -73,9 +66,9 @@ Use the image and map from that build. Pass `--built` because both configured
 configured images; these commands compare the images from this recipe.
 
 ```sh
-uv run rebrew verify --target Europa1400Gold.exe \
+uv run --frozen rebrew verify --target Europa1400Gold.exe \
   --built build/Europa1400Gold.exe --data --whole-binary --raw-link --dry-run --json
-uv run rebrew verify --target Europa1400Gold_TL.exe \
+uv run --frozen rebrew verify --target Europa1400Gold_TL.exe \
   --built build/Europa1400Gold_TL.exe --data --whole-binary --raw-link --dry-run --json
 ```
 
@@ -91,15 +84,15 @@ against the target ABI before applying generator output. The commands below
 preview the historical inputs without replacing current scaffolds:
 
 ```sh
-uv run rebrew build symbol-stubs --source-dir src --module GOLD \
+uv run --frozen rebrew build symbol-stubs --source-dir src --module GOLD \
   --reference original/Europa1400Gold.exe \
   --log stubs/gold/unresolved.txt --footer stubs/SCAFFOLD.txt \
   --specials stubs/gold/specials.toml --output stubs/gold/symbol_stubs.c --dry-run --json
-uv run rebrew build symbol-stubs --source-dir src --module GOLDTL \
+uv run --frozen rebrew build symbol-stubs --source-dir src --module GOLDTL \
   --reference original/Europa1400Gold_TL.exe \
   --log stubs/goldtl/unresolved.txt --footer stubs/SCAFFOLD.txt \
   --specials stubs/goldtl/specials.toml --output stubs/goldtl/symbol_stubs.c --dry-run --json
-uv run rebrew build symbol-stubs --source-dir src --module GOLDTL \
+uv run --frozen rebrew build symbol-stubs --source-dir src --module GOLDTL \
   --reference original/Europa1400Gold_TL.exe \
   --log stubs/goldtl/abi-variants.txt --output stubs/goldtl/abi_stubs.c --dry-run --json
 ```
