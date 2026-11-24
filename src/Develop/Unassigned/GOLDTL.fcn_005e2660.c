@@ -1,3 +1,5 @@
+#include "client_dialog_state.h"
+
 int __cdecl fcn_00470820(int, int, char *);
 void __cdecl fcn_00537320(int);
 void __cdecl fcn_00471db0(int, int);
@@ -67,20 +69,20 @@ void __cdecl fcn_005e2660(void)
     d2_SetElementValue(c[3], 0, 150, (int)(*(float *)0x77669c * 100.0f));
     while (fcn_005373e0((void *)fcn_005e2660, flags)) {
         if (*(int *)0x14ce8e0 || *(unsigned char *)0x14cf950 == 1)
-            *(int *)0x774654 = 1;
+            g_774654 = 1;
         if (*(int *)0x100f1dc != -1) {
             if (*(int *)0x67d370 == selection[0]) {
                 accepted = 1;
-                *(int *)0x774654 = 1;
+                g_774654 = 1;
             } else if (*(int *)0x67d370 == selection[1]) {
-                *(int *)0x774654 = 1;
+                g_774654 = 1;
             }
         }
         if (*(int *)0x14ce8d0) {
             for (i = 0; i < 3; i++) {
                 first = fcn_00471f80(a[i]);
                 second = fcn_00471f80(a[3]);
-                x[i] = (second + *(float *)0x662914) * (first + 50) * *(float *)0x662d04 - *(float *)0x6628cc;
+                x[i] = (second + *(float *)0x662914) * (first + 50) * *(float *)0x662d04 - 0.5f;
                 first = fcn_00471f80(b[i]);
                 second = fcn_00471f80(b[3]);
                 y[i] = second * (float)first * *(float *)0x662d04;

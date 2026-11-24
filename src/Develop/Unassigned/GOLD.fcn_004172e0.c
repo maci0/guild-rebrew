@@ -46,8 +46,9 @@ void __cdecl fcn_004172e0(char* object)
 		if (light != 0) {
 			a = *(float*) (light + 0x88) - *(float*) (object + 0x88);
 			if (fabs(a) >= 0.009999999776482582) {
-				rotation[1] = (a > 0.0f ? 0.0002f : -0.0002f) + *(float*) (object + 0x88);
+				a = (a > 0.0f ? 0.0002f : -0.0002f) + *(float*) (object + 0x88);
 				rotation[0] = 0.0f;
+				rotation[1] = a;
 				rotation[2] = 0.0f;
 				d3_SetObjectRotation(object, rotation);
 			}
@@ -85,11 +86,12 @@ void __cdecl fcn_004172e0(char* object)
 	}
 	{
 		SUNRAY_COLOR color;
+		float factor;
 
-		a *= result;
+		factor = a * result;
 		memset(&color, 0, sizeof(color));
 		color.c = 1;
-		color.a = (unsigned char) (a * x * 128.0f);
+		color.a = (unsigned char) (factor * x * 128.0f);
 		d3_ChangeObjectTransparency(object, *(char**) (object + 0x1cc), color);
 	}
 }

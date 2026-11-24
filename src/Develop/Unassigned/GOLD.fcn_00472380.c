@@ -4,6 +4,7 @@
 extern GOLD_GUI_WINDOW g_00f8f120[];
 extern GuiEnt* g_00f8f080;
 extern short g_005fe73c;
+extern int d2_CurrentWindowId;
 void* __cdecl m_alloc(unsigned int, const char*);
 int __cdecl fcn_00478cb0(int*, int);
 void __cdecl fcn_004796b0(int);
@@ -129,6 +130,6 @@ int __cdecl fcn_00472380(short x, short y, short width, short height, unsigned i
         I32(window + 0x2c) = (int)m_alloc(0x17d0, "d2_t:w->txt");
     }
     I32(0x6ed980) = (int)window;
-    I32(0x6ed938) = index;
+    d2_CurrentWindowId = index;
     return index;
 }

@@ -13,7 +13,7 @@ int __cdecl fcn_004ff950(int a0, int a1)
 	char* e;
 
 	sum = 0;
-	row = (char*) 0x7d6a70 + a1 * 0x80 + a0 * 0x6810;
+	row = (char*) 0x7d6a70 + a0 * 0x2a90 + a1 * 0x80;
 	g = row + 0x40;
 	if (*g == 0) {
 		return 0;
@@ -29,8 +29,8 @@ int __cdecl fcn_004ff950(int a0, int a1)
 		g += 8;
 	}
 	sum = (int) ((float) sum * *(double*) 0x5eb7e8);
-	if (!(*(float*) (row + 0x24) == *(float*) 0x5eb788)) {
-		sum = (int) (*(float*) (row + 0x24) / *(float*) (row + 0x20) * (float) sum);
+	if (*(float*) (row + 0x24) != *(float*) 0x5eb788) {
+		sum = (int) ((*(float*) (row + 0x24) / *(float*) (row + 0x20)) * sum);
 	}
 	return sum;
 }

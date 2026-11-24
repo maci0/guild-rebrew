@@ -32,8 +32,8 @@ void __cdecl fcn_00416980(void)
 	int row;
 	int column;
 	int samples;
-	double sum;
-	double maximum;
+	float sum;
+	float maximum;
 	float minimum;
 	float negative_minimum;
 	float scale;
@@ -122,22 +122,21 @@ allocate_source:
 	descriptor[9] = (unsigned int) m_alloc(65536, "d3t:snow_ddsd");
 	if (descriptor[9] == 0) { return; }
 source_ready:
-	mip = (unsigned int*) 0x14665a0;
-	mip[0] = 124;
-	mip[3] = 256;
-	mip[2] = 256;
-	mip[18] = 32;
-	mip[19] = 32;
-	mip[20] = 0;
-	mip[21] = 8;
-	mip[22] = 0;
-	mip[23] = 0;
-	mip[24] = 0;
-	mip[25] = 0;
-	mip[4] = 256;
-	mip[9] = (unsigned int) m_alloc(65536, "d3t:SnowMipMap8");
-	if (mip[9] == 0) { return; }
-	fcn_004205c0(mip, palette, descriptor, palette);
+	((unsigned int*) 0x14665a0)[0] = 124;
+	((unsigned int*) 0x14665a0)[3] = 256;
+	((unsigned int*) 0x14665a0)[2] = 256;
+	((unsigned int*) 0x14665a0)[18] = 32;
+	((unsigned int*) 0x14665a0)[19] = 32;
+	((unsigned int*) 0x14665a0)[20] = 0;
+	((unsigned int*) 0x14665a0)[21] = 8;
+	((unsigned int*) 0x14665a0)[22] = 0;
+	((unsigned int*) 0x14665a0)[23] = 0;
+	((unsigned int*) 0x14665a0)[24] = 0;
+	((unsigned int*) 0x14665a0)[25] = 0;
+	((unsigned int*) 0x14665a0)[4] = 256;
+	((unsigned int*) 0x14665a0)[9] = (unsigned int) m_alloc(65536, "d3t:SnowMipMap8");
+	if (((unsigned int*) 0x14665a0)[9] == 0) { return; }
+	fcn_004205c0((unsigned int*) 0x14665a0, palette, descriptor, palette);
 	for (level = 0, mip = (unsigned int*) 0x14661c0; (int) mip < 0x14665a0; level++, mip += 31) {
 		size = 1 << level;
 		mip[0] = 124;
@@ -149,15 +148,14 @@ source_ready:
 		if (mip[9] == 0) { return; }
 		fcn_00420140(mip, (unsigned int*) 0x14665a0);
 	}
-	mip = (unsigned int*) 0x1466e80;
-	mip[0] = 124;
-	mip[3] = 256;
-	mip[2] = 256;
-	memcpy(mip + 18, (void*) 0xfe79ec, 32);
-	mip[4] = 512;
-	mip[9] = (unsigned int) m_alloc(131072, "d3t:SnowMipMap16");
-	if (mip[9] == 0) { return; }
-	fcn_004205c0(mip, palette, descriptor, palette);
+	((unsigned int*) 0x1466e80)[0] = 124;
+	((unsigned int*) 0x1466e80)[3] = 256;
+	((unsigned int*) 0x1466e80)[2] = 256;
+	memcpy((unsigned int*) 0x1466e80 + 18, (void*) 0xfe79ec, 32);
+	((unsigned int*) 0x1466e80)[4] = 512;
+	((unsigned int*) 0x1466e80)[9] = (unsigned int) m_alloc(131072, "d3t:SnowMipMap16");
+	if (((unsigned int*) 0x1466e80)[9] == 0) { return; }
+	fcn_004205c0((unsigned int*) 0x1466e80, palette, descriptor, palette);
 	for (level = 0, mip = (unsigned int*) 0x1466aa0; (int) mip < 0x1466e80; level++, mip += 31) {
 		size = 1 << level;
 		mip[0] = 124;
@@ -169,22 +167,21 @@ source_ready:
 		if (mip[9] == 0) { return; }
 		fcn_00420140(mip, (unsigned int*) 0x1466e80);
 	}
-	mip = (unsigned int*) 0x14672e0;
-	mip[0] = 124;
-	mip[3] = 256;
-	mip[2] = 256;
-	mip[18] = 32;
-	mip[19] = 64;
-	mip[20] = 0;
-	mip[21] = 32;
-	mip[22] = 0xff0000;
-	mip[23] = 0xff00;
-	mip[24] = 0xff;
-	mip[25] = 0;
-	mip[4] = 1024;
-	mip[9] = (unsigned int) m_alloc(262144, "d3t:SnowMipMap32");
-	if (mip[9] == 0) { return; }
-	fcn_004205c0(mip, palette, descriptor, palette);
+	((unsigned int*) 0x14672e0)[0] = 124;
+	((unsigned int*) 0x14672e0)[3] = 256;
+	((unsigned int*) 0x14672e0)[2] = 256;
+	((unsigned int*) 0x14672e0)[18] = 32;
+	((unsigned int*) 0x14672e0)[19] = 64;
+	((unsigned int*) 0x14672e0)[20] = 0;
+	((unsigned int*) 0x14672e0)[21] = 32;
+	((unsigned int*) 0x14672e0)[22] = 0xff0000;
+	((unsigned int*) 0x14672e0)[23] = 0xff00;
+	((unsigned int*) 0x14672e0)[24] = 0xff;
+	((unsigned int*) 0x14672e0)[25] = 0;
+	((unsigned int*) 0x14672e0)[4] = 1024;
+	((unsigned int*) 0x14672e0)[9] = (unsigned int) m_alloc(262144, "d3t:SnowMipMap32");
+	if (((unsigned int*) 0x14672e0)[9] == 0) { return; }
+	fcn_004205c0((unsigned int*) 0x14672e0, palette, descriptor, palette);
 	for (level = 0, mip = (unsigned int*) 0x1466f00; (int) mip < 0x14672e0; level++, mip += 31) {
 		size = 1 << level;
 		mip[0] = 124;
@@ -239,9 +236,9 @@ source_ready:
 			if (maximum < temporary[i]) { maximum = temporary[i]; }
 		}
 		negative_minimum = -minimum;
-		scale = (float) (255.0f / (maximum - minimum));
+		scale = 255.0f / (maximum - minimum);
 		for (i = 0; i < area; i++) {
-			value = (float) (((double) negative_minimum + temporary[i]) * scale);
+			value = (negative_minimum + temporary[i]) * scale;
 			if (0.0f > value) { value = 0.0f; }
 			else if (!(value < 255.0f)) { value = 255.0f; }
 			else if (!(0.0f <= value)) { value = 0.0f; }
@@ -250,10 +247,10 @@ source_ready:
 		mip[0] = 124;
 		mip[3] = size;
 		mip[2] = size;
-		mip[18] = 32;
+		mip[19] = 32;
 		mip[21] = 8;
 		mip[4] = size;
-		mip[9] = (unsigned int) m_alloc(area, "d3t:SnowDither");
+		mip[9] = (unsigned int) m_alloc(size * size, "d3t:SnowDither");
 		if (mip[9] == 0) { return; }
 		for (i = 0; i < area; i++) { ((unsigned char*) mip[9])[i] = (unsigned char) temporary[i]; }
 	}

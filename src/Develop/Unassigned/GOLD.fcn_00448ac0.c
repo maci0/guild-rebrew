@@ -19,8 +19,8 @@ float __cdecl fcn_00448ac0(char* obj, float* target)
 	float y;
 	float dot;
 	float ang;
-	double s;
-	double c;
+	float s;
+	float c;
 	float rotated_x;
 
 	fcn_00455540(obj, g_662d40, a);
@@ -37,10 +37,10 @@ float __cdecl fcn_00448ac0(char* obj, float* target)
 	dot = (td[0] * a[0] + td[2] * a[2]) + y;
 	dot = (-1.0f > dot ? -1.0f : dot) < 1.0f ? (-1.0f > dot ? -1.0f : dot) : 1.0f;
 	ang = (float) acos(dot);
-	s = sin(*(double*) 0x5eb868);
-	c = cos(*(double*) 0x5eb868);
-	rotated_x = (float) (c * a[0] + s * a[2]);
-	if ((td[0] * rotated_x + td[2] * (c * a[2] - s * a[0])) + y > 0.0f) {
+	s = (float) sin(*(double*) 0x5eb868);
+	c = (float) cos(*(double*) 0x5eb868);
+	rotated_x = s * a[2] + c * a[0];
+	if ((td[2] * (c * a[2] - s * a[0]) + rotated_x * td[0]) + y > 0.0f) {
 		ang = -ang;
 	}
 	return ang;

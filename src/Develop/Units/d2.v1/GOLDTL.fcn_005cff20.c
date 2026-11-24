@@ -239,21 +239,21 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		if (g_100f1dc != -1 && n > 0) {
+		if (g_100f1dc != -1) {
 			for (i = 0; i < n; i++) {
 				if (d2_CurrentElementId == slots[i].btn) {
-					if (i >= 0) {
+					if (i > -1) {
 						chosen = (int) &((GOLDTL_House5cff*) g_7f4ca0)[slots[i].id];
 						result = chosen;
-						if (cb == 0) {
-							g_774654 = 1;
-						} else {
+						if (cb != 0) {
 							cb(chosen, (int) rec);
 							flag = 1;
 							if (holder != -1) {
 								d2_ClearRadioGroup(holder);
 							}
 							holder = -1;
+						} else {
+							g_774654 = 1;
 						}
 					}
 					break;

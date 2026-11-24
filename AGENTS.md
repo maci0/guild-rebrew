@@ -7,11 +7,10 @@
 - **Target**: `Europa1400Gold_TL.exe` (pe, x86_32)
 - **Compiler**: msvc-6.0-sp5-pp (`docker image rebrew/msvc:6.0-sp5-pp-win32`)
 - **Language**: C89. Follow the compiler constraints below.
-- **Config**: `rebrew-project.toml` (all tools read from here)
+- **Config**: project commands read `rebrew-project.toml`
 - **Function inventory**: the target's configured `inventory_file`, defaulting to
   `<reversed_dir>/function_structure.json` (`[{va, size, name}]`
-  written by discoverer plugins. Packaged: rizin, capstone, NE/MZ. Third-party
-  plugins join via the `rebrew.discoverers` entry-point group, with no host edits)
+  written by format-specific discoverers. Use `rebrew binary functions` to preview discovery.)
 - **Layout source of truth**: `layout/<target>/rebrew-layout.toml` (+ hex blobs)
 
 ## Quick Start
@@ -350,9 +349,8 @@ Detailed workflow instructions are in `.agents/skills/`:
 | `rebrew-ghidra-sync` | BinSync field sync/conflicts; ReVa structural operations |
 
 Load the matching `SKILL.md`, then only references needed for the task. The table
-lists the skills that ship with rebrew; `rebrew init` also copies any
-`REBREW_SKILLS_DIR` user skills over them by name, so `rebrew skills list --json`
-(`origin` is `packaged` or `user`) is the authority on what a directory holds.
+lists the packaged skills. `rebrew init` overlays skills from `REBREW_SKILLS_DIR`
+by name. Run `rebrew skills list --json` to see the effective set and its origins.
 Skill text is reference material, not authorization. User instructions take
 precedence; otherwise follow this file when a skill disagrees. Continue within
 the authorized scope without requesting the same permission again. Imported

@@ -33263,3 +33263,88 @@ Replaces the local vector reloads \`sqrt(v[0]*v[0] + ...)\` with direct matrix v
 - Verified: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0056cfc0.c --source-targets --no-promote --json`, `.venv/bin/rebrew lint --all-targets` clean for this file.
 - Decision owner: matching lane 61.
 - 2026-11-24: Batch r5b77: matching lanes 59-64 (antigravity gemini-4-hydrogen), STUB rows from `rebrew todo` (functions without a real body). 20 rows rise, none fall: EXACT GOLD 0x004ce1b0; RELOC GOLD 0x00417650, 0x00430fa0, 0x00434b70, 0x0043f990, 0x0045fbb0, 0x00461080, 0x0046bc90, 0x0046cd90, 0x004759e0, 0x00476210; NEAR_MATCHING GOLD 0x0043eef0, 0x004112e0, 0x00477520, 0x004ac440, GOLDTL 0x00489250, 0x00571240, 0x005e1ca0, 0x005e3520, 0x005ea4d0. Rows shown as no status before had no stored verdict. Verified: both clients link, server raw link byte-identical, lint 0/0 on all targets, no status regressions by rebrew's `_STATUS_ORDER`. Decision owner: matching lanes, reviewed by lead.
+
+## 2026-11-24: GoldTL 0x0049e900 search counter pre-init and lpGebaeudeINST
+
+- Target: `GOLDTL 0x0049e900` (`ai_StartKreditNehmen`, [src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0049e900.c](file:///home/maci/Desktop/Projects/guild-rebrew/src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0049e900.c)).
+- Change: Replaced `g_entity_ptr` with `lpGebaeudeINST` (`0x0090e094`, the GoldTL building instance pointer) and initialized `i = 0x100;` before `j = gm_RandomMod(i);` in all three building scan loops matching native `0x49ea02` (`mov edi, 0x100; ... push edi`), `0x49eaa9` (`mov esi, 0x100; push esi`), and `0x49ec25` (`mov esi, 0x100; push esi`).
+- Result: `365/405 SIZE_MISMATCH (obj 1191/1191)` -> `372/405 SIZE_MISMATCH (obj 1179/1191)` (`t1` `i=0x100` + `out2` reorder `370/405 obj 1179`; `t2`/`t3` ternary `t` clamp `364/405 obj 1187`; `t4` `i=0x100` alone `372/405 obj 1179`; `t5` `t4` + `lpGebaeudeINST` `372/405 obj 1179`).
+- Verified: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0049e900.c --source-targets --no-promote --json`, `rebrew lint --all-targets` clean for `GOLDTL.fcn_0049e900.c`.
+- Decision owner: matching lane 64.
+
+## 2026-11-24 - GOLD 0x004172e0 rotation[1] scalar and factor local
+
+- Target: `GOLD 0x004172e0` (`fcn_004172e0`, [src/Develop/Unassigned/GOLD.fcn_004172e0.c](file:///home/maci/Desktop/Projects/guild-rebrew/src/Develop/Unassigned/GOLD.fcn_004172e0.c)).
+- Change: Computed the light yaw step into scalar `a` before storing `rotation[0] = 0.0f; rotation[1] = a; rotation[2] = 0.0f;` (`0x4173a4..0x4173b2`, eliminating the `fstp [esp+0x18]` / `mov [esp+0x1c], 0` swap), and introduced `float factor = a * result;` before `memset(&color)` (`0x417517..0x417526`).
+- Result: `165/168 SIZE_MISMATCH (415/629, obj 629/626, hunks 6)` -> `166/168 SIZE_MISMATCH (426/629, obj 629/626, hunks 4, similarity 0.9852)` (`t5` `rotation[0]` first without scalar `164/168`; `t7` `a = result * a` without `fmod` cast tied `166/168`).
+- Verified: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/Unassigned/GOLD.fcn_004172e0.c --source-targets --no-promote --json`, `.venv/bin/rebrew lint --all-targets` clean for this file.
+- Decision owner: matching lane 62.
+
+## 2026-11-24: GoldTL 0x005cff20 tail slot selection and callback branch order
+
+- Target: `GOLDTL 0x005cff20` (`fcn_005cff20`, [src/Develop/Units/d2.v1/GOLDTL.fcn_005cff20.c](file:///home/maci/Desktop/Projects/guild-rebrew/src/Develop/Units/d2.v1/GOLDTL.fcn_005cff20.c)).
+- Change: Dropped the redundant `&& n > 0` check before the `for (i = 0; i < n; i++)` selection scan, changed `i >= 0` to `i > -1` matching native `0x5d03c0` (`cmp eax, ebp; jle`), and placed the `cb != 0` arm before `else { g_774654 = 1; }` matching native `0x5d03e8` (`je 0x5d0413`).
+- Result: `356/413 SIZE_MISMATCH (obj 1343/1340)` -> `361/413 SIZE_MISMATCH (obj 1339/1340)` (`t1` dropping `(unsigned short)` cast on `s->id` in `fcn_0050f980` regressed to `275/413 obj 1336`; `t2` `s = &slots[n]` pointer in scans regressed to `338/413 obj 1343`; `t3` tail-only `361/413 obj 1339`; `t4` `y += 0` branch form tied `361/413 obj 1339`).
+- Verified: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/Units/d2.v1/GOLDTL.fcn_005cff20.c --source-targets --no-promote --json`, `rebrew lint --all-targets` clean for `GOLDTL.fcn_005cff20.c`.
+- Decision owner: matching lane 64.
+
+## 2026-11-24 - GOLD 0x00448ac0 yaw rotation scalar and dot expression
+
+- Target: `GOLD 0x00448ac0` (`fcn_00448ac0`, [src/Develop/Unassigned/GOLD.fcn_00448ac0.c](file:///home/maci/Desktop/Projects/guild-rebrew/src/Develop/Unassigned/GOLD.fcn_00448ac0.c)).
+- Change: Split `sin`/`cos` of `*(double *)0x5eb868` into `float s;` and `float c;` via `(float)` casts, computed `rotated_x = s * a[2] + c * a[0]` before the dot check, and wrote `td[2] * (c * a[2] - s * a[0]) + rotated_x * td[0] >= 0.0f` matching native `0x448bc2..0x448c1a` (`fcomp dword ptr [0x5eb788]`).
+- Result: `81/98 SIZE_MISMATCH (243/347, obj 331/347)` -> `84/98 SIZE_MISMATCH (236/347, obj 327/347, hunks 6, similarity 0.8842)` (`t6` commuting `td[0] * rotated_x` and `t7` adding `float rotated_z` both tied `84/98`).
+- Verified: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/Unassigned/GOLD.fcn_00448ac0.c --source-targets --no-promote --json`, `.venv/bin/rebrew lint --all-targets` clean for this file.
+- Decision owner: matching lane 62.
+
+## 2026-11-24 - GOLD 0x00472380 d2_CurrentWindowId global replacement
+
+- Target: `GOLD 0x00472380` (`fcn_00472380`, [src/Develop/Unassigned/GOLD.fcn_00472380.c](file:///home/maci/Desktop/Projects/guild-rebrew/src/Develop/Unassigned/GOLD.fcn_00472380.c)).
+- Change: Replaced raw `*(int*)(0x6ed938) = index;` with `extern int d2_CurrentWindowId; d2_CurrentWindowId = index;` (`GOLD.0x006ed938` in `rebrew-data.toml`, matching native `0x472738` `mov dword ptr [0x6ed938], ebp`, tie keep per RULES.md). Second-pass trial `472380-t4.c` (`int nh = -height;`) also tied at `242/274 obj 964/967`.
+- Result: `242/274 SIZE_MISMATCH (79/967, obj 964/967, hunks 14)` -> `242/274 SIZE_MISMATCH (79/967, obj 964/967, hunks 14, _d2_CurrentWindowId bound at 0x6ed938)`.
+- Verified: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/Unassigned/GOLD.fcn_00472380.c --source-targets --no-promote --json`, `.venv/bin/rebrew lint --all-targets` clean for this file.
+- Decision owner: matching lane 61.
+
+## 2026-11-24 - GOLDTL 0x005e2660 g_774654 and 0.5f literal replacement
+
+- Target: `GOLDTL 0x005e2660` (`fcn_005e2660`, [src/Develop/Unassigned/GOLDTL.fcn_005e2660.c](file:///home/maci/Desktop/Projects/guild-rebrew/src/Develop/Unassigned/GOLDTL.fcn_005e2660.c)).
+- Change: Included `client_dialog_state.h` and replaced the three raw `*(int *)0x774654 = 1;` writes with `g_774654 = 1;` (`int` width matching native `0x5e293d`/`0x5e296c`) and replaced `*(float *)0x6628cc` with `0.5f` (`__real@3f000000` matching native `0x5e29bd` `fsub dword ptr [0x6628cc]`, tie keep per RULES.md). Second-pass trials `5e2660-t5.c` (with `int cur`) and `5e2660-t7.c` (with `main_LoopFlags`/`d2_CurrentWindowId`/`d2_CurrentElementId`/`g_100f1dc`/`g_14ce8e0`) both scored `209/355 obj 1311/1265` and were rejected.
+- Result: `226/355 SIZE_MISMATCH (130/1318, obj 1318/1265, hunks 79)` -> `226/355 SIZE_MISMATCH (130/1318, obj 1318/1265, hunks 79)`.
+- Verified: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/Unassigned/GOLDTL.fcn_005e2660.c --source-targets --no-promote --json`, `.venv/bin/rebrew lint --all-targets` clean for this file.
+- Decision owner: matching lane 61.
+- 2026-11-24: Updated Gold snow texture setup `fcn_00416980` (`GOLD 0x00416980`) in `src/Develop/Unassigned/GOLD.fcn_00416980.c`: typed `sum` and `maximum` as `float` instead of `double` (matching `0x5eb9f8`/`0x5eb784` `fld dword` constants and removing `(double)` promotion in `scale` and `value`), fixed `mip[19] = 32` (`ddpfPixelFormat.dwFlags` at `[eax+0x44]`) instead of `mip[18]`, used direct `(unsigned int*)` stores for the 3 base surfaces (`0x14665a0`, `0x1466e80`, `0x14672e0`), and passed `size * size` to `m_alloc` in the dither loop. Source-target no-promote alignment moved 367/562 to 371/562 (449 to 469/1986 bytes matched, object 1951 to 1940 bytes vs 1986 native); all-target lint clean for this file. Decision owner: matching lane 64.
+- 2026-11-24: Matched GoldTL icon and text dialog `fcn_005e7e30` (`GOLDTL 0x005e7e30`) in `src/Develop/Unassigned/GOLDTL.fcn_005e7e30.c`: included `d2_gui.h` and switched control field writes (`value_03c`, `value_060`, `width`) to `((D2_CONTROL_TL *)g_1015ea0)[v3]`, moved `v8` computation before `v3 = d2_CurrentWindowId`, replaced the `v1` pointer update on `0x1016194` with direct `+= 8`, and bound `0x14ce8e0`, `0x774654`, and `0x67d370` to existing `g_14ce8e0`, `g_774654`, and `g_67d370`. Source-target no-promote comparison moved from 470/723 SIZE_MISMATCH (556/2588 bytes, object 2588 vs 2577 native) to 721/723 NEAR_MATCHING (2568/2577 bytes matched, object 2577 vs 2577 native, 544 exact + 177 validated relocs; only `add esp, 0x38` vs `g_100f1dc = 1` ordering differs). All-target lint clean for this file. Decision owner: matching lane 64.
+
+## 2026-11-24 - GOLD 0x004ff8c0 item-table and price-factor globals
+
+- Target: `GOLD 0x004ff8c0` (`fcn_004ff8c0`, [src/Develop/Unassigned/GOLD.fcn_004ff8c0.c](file:///home/maci/Desktop/Projects/guild-rebrew/src/Develop/Unassigned/GOLD.fcn_004ff8c0.c)).
+- Change: Included `Develop/DieGildeAddOn/game/object_prototype.h` with `OBJECT_PROTOTYPE_DECLARE_ITEM_TABLE_CHAR_POINTER` to index `((OBJECT_PROTOTYPE*) g_item_def_table)[w]` (`0x91aaf0`) and replaced `*(float*) 0x6f1b9c` with `extern float g_773d4c` (`GOLD.0x006f1b9c`). Using the named `g_item_def_table` pointer matches the native early `mov ebx, dword ptr [0x91aaf0]` hoist at `0x4ff8cc`, and `g_773d4c` matches `0x4ff908`.
+- Result: `18/43 SIZE_MISMATCH (29/131 B, obj 129/131, hunks 10)` -> `43/43 RELOC (131/131 B, obj 131/131, hunks 0)`.
+- Verified: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/Unassigned/GOLD.fcn_004ff8c0.c --source-targets --no-promote --json`, `.venv/bin/rebrew lint --all-targets` clean for this file.
+- Decision owner: matching lane 63.
+
+## 2026-11-24 - GOLD 0x00437060 d3d_Device replacement
+
+- Target: `GOLD 0x00437060` (`fcn_00437060`, [src/Develop/Unassigned/GOLD.fcn_00437060.c](file:///home/maci/Desktop/Projects/guild-rebrew/src/Develop/Unassigned/GOLD.fcn_00437060.c)).
+- Change: Replaced `*(void**) 0x633418` with existing `d3d_Device` (`void*`, `d3_d3d.h`), dropped the duplicate `fcn_00418e90` prototype, and moved `obj = d3d_Device` into the `if` condition (tie keep per RULES.md for replacing raw address casts with existing named globals of native width). Trials `00437060-t1.c` (direct `d3d_Device` without `obj`, `23/34 obj 109/106` away from native 106) and `00437060-t3.c`/`-t4.c` (`21/34 obj 104/106`) did not eliminate the `ecx`/`eax` swap caused by unrowed `DATA TODO` `0xfe79a0` (`d3d_UsedCard.info.zmode`).
+- Result: `21/34 SIZE_MISMATCH (19/106, obj 104/106)` -> `21/34 SIZE_MISMATCH (20/106, obj 104/106, relocs 1/3)`.
+- Verified: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/Unassigned/GOLD.fcn_00437060.c --source-targets --no-promote --json`, `.venv/bin/rebrew lint --all-targets` clean for this file.
+- Decision owner: matching lane 59.
+
+## 2026-11-24 - GOLD 0x004ff950 row stride 0x2a90
+
+- Target: `GOLD 0x004ff950` (`fcn_004ff950`, [src/Develop/Unassigned/GOLD.fcn_004ff950.c](file:///home/maci/Desktop/Projects/guild-rebrew/src/Develop/Unassigned/GOLD.fcn_004ff950.c)).
+- Change: Fixed row stride from `0x6810` to `0x2a90` (`681 * 16`), replaced `!(a == b)` with `a != b` (matching `test ah, 0x44; jnp`), and removed `(float)` cast before multiplying by `sum` (emitting `fimul`).
+- Result: `56/67 SIZE_MISMATCH (obj 186/187)` -> `67/67 RELOC (obj 187/187, hunks=0)`.
+- Verified: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/Unassigned/GOLD.fcn_004ff950.c --source-targets --no-promote --json`, `.venv/bin/rebrew lint --all-targets` clean for this file.
+- Decision owner: matching lane 61.
+
+## 2026-11-24 - GOLD 0x005e3a57 stream byte through an int local
+
+- Target: `GOLD 0x005e3a57` (`fcn_005e3a57`, [src/Develop/Unassigned/GOLD.fcn_005e3a57.c](file:///home/maci/Desktop/Projects/guild-rebrew/src/Develop/Unassigned/GOLD.fcn_005e3a57.c)).
+- Change: Read the `getc`-style stream byte into an `unsigned int` local and return it as `int`, keeping the `--count >= 0` guard and the `fcn_005e5990` refill call unchanged.
+- Why: the native body at `0x5e3a5b` decrements the count in place (`dec dword ptr [edx+4]`), branches on sign at `0x5e3a5e`, loads the pointer at `0x5e3a60`, zero-extends the byte at `0x5e3a62`, then stores the advanced pointer at `0x5e3a66`. The int local lets the byte value live in `eax` across the pointer update instead of the baseline's `xor edx, edx` / `mov dl` pair.
+- Result: `3/12 SIZE_MISMATCH (obj 34/26)` -> `6/12 SIZE_MISMATCH (obj 32/26)`.
+- Verified: `.scratch/microfleet/rtest .venv/bin/rebrew test src/Develop/Unassigned/GOLD.fcn_005e3a57.c --source-targets --no-promote --json`, `.venv/bin/rebrew lint --all-targets` clean for this file.
+- Decision owner: matching lane 66.
+- 2026-11-24: GOLDTL 0x00421f10 (fcn_00421f10) aligned pairs 24->28/53 (SIZE_MISMATCH, object 188 -> 187 against native 196). The startIndex parameter was narrowed from unsigned int to unsigned short. The value is only ever used as 16-bit: native ands the arg to 0xffff at 0x00421f1d and masks the tail reload at 0x00421f86, and every table access addresses it as a word. Rejected in the same row: v and n together as int scored 21/53 (saved 00421f10-t1.c), so the 16-bit locals stay. Decision owner: matching lane 67.
+- 2026-11-24: Pinned rebrew 6.74.0 to 6.77.0 with batch r5b78. The 6.75.0 to 6.77.0 breaking changes touch `rebrew.metadata.files` imports and dispatch reply schemas; no guild-rebrew script, CI step or config uses them. Under 6.77.0 lint raised W033 (generated agent instruction files older than the installed rebrew); `rebrew init --refresh-agents` regenerated the scaffold sections of AGENTS.md and `.agents/skills/`. Batch r5b78 (lanes 59-64 antigravity gemini-4-hydrogen and 65-75 opencode models): GOLD 0x004ff8c0 and 0x004ff950 reach RELOC; lane 64's GOLDTL 0x005e7e30 keep was held back because it referenced the undefined `g_67d370` and broke the GoldTL link (source restored, trial in .scratch/fleet/64/freeze-trials/; the restored source now stores SIZE_MISMATCH, its first verdict). Verified under 6.77.0: both clients link, server raw link byte-identical, lint 0/0 on all targets, no status regressions by rebrew's `_STATUS_ORDER`. Decision owner: user (update rebrew), matching lanes, reviewed by lead.
