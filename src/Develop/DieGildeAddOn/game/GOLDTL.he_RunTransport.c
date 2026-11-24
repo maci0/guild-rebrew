@@ -182,10 +182,10 @@ void __cdecl he_RunTransport(char *e)
 			gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
 			stamp = gm_GameTime;
 			fcn_00500bb0((char *)&stamp, 0, 0, 1);
-			q = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
-			v = *(int *)(q + 1);
+			r = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
+			v = *(int *)(r + 1);
 			fcn_004c5790(4, &v);
-			if (g_7746c4 == q || g_7746c8 == q) {
+			if (g_7746c4 == r || g_7746c8 == r) {
 				fcn_004234e0(g_7747cc, g_6a63dc, 1, 0x3f, 0x7f, 0, 0);
 			}
 			*(int *)(e + 0x84) = fcn_004c5620(3, e);

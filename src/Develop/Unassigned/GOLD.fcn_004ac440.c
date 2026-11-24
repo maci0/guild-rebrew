@@ -45,7 +45,7 @@ int __cdecl fcn_004ac440(void)
         return -1;
     options.first = (GOLD_OPTION_4AC440*) m_alloc(options.first_count * 44, "hmt_CreateBinaryFile");
     if (options.first == 0)
-        return -1;
+        goto fail;
     options.second = (GOLD_OPTION_4AC440*) m_alloc(options.second_count * 44, "hmt_CreateBinaryFile");
     if (options.second == 0)
         goto fail;
@@ -76,18 +76,18 @@ int __cdecl fcn_004ac440(void)
         GetPrivateProfileStringA(section, "end", "-1", text, 256, path);
         options.second[i].enabled = atoi(text);
     }
-    if (!fcn_004ac8a0(&options)) {
-        m_FreeTracked(options.first);
-        options.first = 0;
-        m_FreeTracked(options.second);
-        return 0;
+    if (fcn_004ac8a0(&options)) {
+    fail:
+        if (options.first != 0) {
+            m_FreeTracked(options.first);
+            options.first = 0;
+        }
+        if (options.second != 0)
+            m_FreeTracked(options.second);
+        return -1;
     }
-fail:
-    if (options.first != 0) {
-        m_FreeTracked(options.first);
-        options.first = 0;
-    }
-    if (options.second != 0)
-        m_FreeTracked(options.second);
-    return -1;
+    m_FreeTracked(options.first);
+    options.first = 0;
+    m_FreeTracked(options.second);
+    return 0;
 }

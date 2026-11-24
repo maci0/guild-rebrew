@@ -16,7 +16,7 @@ int __cdecl fcn_00475c10(char*);
 int __cdecl fcn_00475780(void*, void*);
 void __cdecl fcn_00476a50(int, int, int, void*);
 int __cdecl fcn_005053c0(void*);
-int __cdecl fcn_00469c30(int, int, int);
+int __cdecl fcn_00469c30(short, short, int);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strrchr(const char*, int);
 
@@ -91,38 +91,30 @@ void __cdecl fcn_00527540(void)
 			sprintf(buf, "%sbmp\\groundplans\\riss_handwerksbetrieb.bmp", prefix);
 		}
 		goto have_image;
-	}
-	if (v3 == 3) {
+	} else if (v3 == 3) {
 		if (*q == 0x0f)
 			sprintf(buf, "%sbmp\\groundplans\\riss_rathaus.bmp", prefix);
 		else if (*q == 0x01)
 			sprintf(buf, "%sbmp\\groundplans\\Riss_Arbeiterunterkunft.bmp", prefix);
 		goto have_image;
-	}
-	if (v3 == 5)
+	} else if (v3 == 5)
 		sprintf(buf, "%sbmp\\groundplans\\riss_zunfthaus.bmp", prefix);
 	else {
-		switch (*q) {
-		case 0x05:
+		if (*q == 0x05)
 			sprintf(buf, "%sbmp\\groundplans\\riss_geldleihe.bmp", prefix);
-			break;
-		case 0x09:
+		else if (*q == 0x09)
 			sprintf(buf, "%sbmp\\groundplans\\riss_lagerhaus.bmp", prefix);
-			break;
-		case 0x07:
+		else if (*q == 0x07)
 			sprintf(buf, "%sbmp\\groundplans\\riss_kirche.bmp", prefix);
-			break;
-		case 0x13:
+		else if (*q == 0x13)
 			sprintf(buf, "%sbmp\\groundplans\\riss_stadtwache.bmp", prefix);
-			break;
-		default:
+		else {
 			sprintf(buf, "%sbmp\\groundplans\\riss_%s.bmp", prefix, p);
 			v3 = fcn_00475c10(buf);
 			*(int*) 0x774680 = v3;
 			if (v3)
 				goto have_image;
 			sprintf(buf, "%sbmp\\groundplans\\riss_handwerksbetrieb.bmp", prefix);
-			break;
 		}
 	}
 have_image:
@@ -141,14 +133,15 @@ have_image:
 	}
 	q = strrchr(buf, '.');
 	*q = 0;
-	strcpy(buf + strlen(buf), "_C.bmp");
+	strcat(buf, "_C.bmp");
 	*(int*) 0x774680 = fcn_00475c10(buf);
 	v22 = 0;
 	fcn_00475fd0(*(int*) 0x774680);
 	v12 = *(int*) 0x774680;
+	v3 = 0;
 	if (!v12)
 		return;
-	for (v3 = 0; *(int*) (v12 + 8) > v3; v3++) {
+	for (; v3 < *(int*) (v12 + 8); v3++) {
 		for (v14 = 0; v14 < *(int*) (v12 + 4); v14++) {
 			fcn_00476a50(v14, v3, v12, key);
 			if (fcn_00475780(key, white))
@@ -165,7 +158,7 @@ have_image:
 							if (!v4)
 								goto next_pixel;
 							if (*v4 != 0xfd) {
-								if (i == v21)
+								if (v21 == i)
 									goto found;
 								v21++;
 							}
@@ -195,8 +188,8 @@ found:
 			if (v4 != 0) {
 				v13 = fcn_005053c0(v4);
 				if (v13 != -1) {
-					v6 = fcn_00469c30((short) (*(int*) 0x1040494 - 0x7e + v14),
-						(short) (v3 + 0x4c), v13);
+					v6 = fcn_00469c30(*(int*) 0x1040494 + v14 - 0x7e,
+						v3 + 0x4c, v13);
 					*(int*) (v22 * 4 + 0x7ea380) = v6;
 					v22++;
 				}

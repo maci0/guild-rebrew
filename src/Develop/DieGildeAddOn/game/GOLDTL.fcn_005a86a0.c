@@ -32,36 +32,31 @@ void __cdecl fcn_005e6950(void*);
 /* ADDRESS: GOLDTL 0x005a86a0 */
 void __cdecl fcn_005a86a0(void* a0)
 {
+	void* message;
 	int save10;
-	int save40;
-	int save44;
-	int save48;
-	int save50;
-	int save54;
-	int save58;
+	int save[7];
 	char v1;
 	char* saved688;
 	void* t;
 	int sub;
-	void* message;
 
 	message = a0;
 	sub = -1;
 	save10 = *(int*) &d3_CurrentContextIndex;
-	*(void**) &g_7746cc = a0;
-	*(int*) &g_6791c8 = *(int*) ((char*) a0 + 2);
-	g_675310 = *(int*) ((char*) a0 + 2);
+	*(void**) &g_7746cc = message;
+	*(int*) &g_6791c8 = *(int*) ((char*) message + 2);
+	g_675310 = *(int*) ((char*) message + 2);
 	g_774658 = g_774650 + 1;
-	save40 = *(int*) &g_7e3a40;
-	save44 = *(int*) &g_7e3a44;
-	save48 = *(int*) &g_7e3a48;
-	save50 = *(int*) &d3_CameraTargetRotation;
-	save54 = *(int*) &g_7e3a54;
-	save58 = *(int*) &g_7e3a58;
+	save[0] = *(int*) &g_7e3a40;
+	save[1] = *(int*) &g_7e3a44;
+	save[2] = *(int*) &g_7e3a48;
 	g_6a2520 = 0;
+	save[4] = *(int*) &d3_CameraTargetRotation;
+	save[5] = *(int*) &g_7e3a54;
+	save[6] = *(int*) &g_7e3a58;
 	fcn_00530510();
 	sv_ClearObjectSelection();
-	v1 = *(char*) (*(unsigned short*) a0 + (unsigned long)&init_SceneContextIndices);
+	v1 = *(char*) (*(unsigned short*) message + (unsigned long)&init_SceneContextIndices);
 	if (v1 != (char) 0xfe) {
 		if (v1 == (char) 0xff || *(char*) ((int) v1 * 0x3dc + 0x1043695) != 0) {
 			d2_SuppressOverlay = 1;
@@ -72,7 +67,7 @@ void __cdecl fcn_005a86a0(void* a0)
 		fcn_004432d0(*(char*) (*(unsigned short*)message + (unsigned long)&init_SceneContextIndices), 0);
 		fcn_0043aa30(3);
 		fcn_005167c0(*(void**) &g_7746c8, *(unsigned short*)message);
-		fcn_00516c50(*(void**) &g_7746c8, a0);
+		fcn_00516c50(*(void**) &g_7746c8, message);
 		if (*(void**) &g_67a370 != 0) {
 			t = *(void**) ((char*) *(void**) &g_67a370 + 0x3c8);
 			if (t != 0 && *(void**) ((char*) t + 0x210) != 0) {
@@ -168,11 +163,11 @@ void __cdecl fcn_005a86a0(void* a0)
 	g_675310 = *(int*) ((char*) fcn_00502cd0(save10, 2, 6, 0, 0xfd) + 2);
 	g_774658 = g_774650;
 	*(void**)&d3_CameraVerticalStep = a0;
-	*(int*) &g_7e3a40 = save40;
-	*(int*) &g_7e3a44 = save44;
-	*(int*) &g_7e3a48 = save48;
+	*(int*) &g_7e3a40 = save[0];
+	*(int*) &g_7e3a44 = save[1];
+	*(int*) &g_7e3a48 = save[2];
 	*(void**)&d3_CameraHorizontalIndex = saved688;
-	*(int*) &d3_CameraTargetRotation = save50;
-	*(int*) &g_7e3a54 = save54;
-	*(int*) &g_7e3a58 = save58;
+	*(int*) &d3_CameraTargetRotation = save[4];
+	*(int*) &g_7e3a54 = save[5];
+	*(int*) &g_7e3a58 = save[6];
 }

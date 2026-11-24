@@ -1,3 +1,5 @@
+#include "Develop/Units/d3/d3_camera.h"
+
 extern float g_fc5348;
 extern float g_fc2944;
 
@@ -30,7 +32,7 @@ unsigned char __cdecl fcn_004486e0(char* e, int* rect)
 		return 0;
 	}
 	if (*(int*) (e + 0x218) == 0) {
-		fcn_00458b10(e, *(char**) 0xfc2dec, (float*) (e + 0x4c), v);
+		fcn_00458b10(e, d3_ActiveCamera, (float*) (e + 0x4c), v);
 		inv = 1.0f / v[2];
 		x = g_fc5348 * v[0] * inv + *(float*) 0xfe75fc;
 		y = g_fc2944 * v[1] * inv + *(float*) 0xfe7604;
@@ -49,15 +51,16 @@ unsigned char __cdecl fcn_004486e0(char* e, int* rect)
 	if (owner == 0 || *(int*) (owner + 0x10) == 0) {
 		return 0;
 	}
-	camera = *(char**) 0xfc2dec;
+	camera = d3_ActiveCamera;
 	fcn_00439870(e, (e[0x210] & 0x80) ? 0 : camera, 0);
 	pts = (float*) (*(int (__cdecl **)(char*, char*, char*)) (*(char**) (owner + 0x10) + 0x1f4))(e, owner, *(char**) (e + 0x1ec) + 0x48);
-	rect[0] = 0x10000;
 	rect[1] = 0x10000;
-	rect[2] = -0x10000;
+	rect[0] = 0x10000;
 	rect[3] = -0x10000;
+	rect[2] = -0x10000;
 	p = pts + 1;
-	for (n = 8; n != 0; n--, p += 0x14) {
+	n = 8;
+	do {
 		inv = 1.0f / p[1];
 		px = (int) (g_fc5348 * p[-1] * inv + *(float*) 0xfe75fc);
 		x0 = rect[0] < px ? rect[0] : px;
@@ -69,7 +72,8 @@ unsigned char __cdecl fcn_004486e0(char* e, int* rect)
 		rect[1] = y0;
 		y1 = rect[3] > py ? rect[3] : py;
 		rect[3] = y1;
-	}
+		p += 0x14;
+	} while (--n);
 	t = *(int*) 0xfc2930;
 	if (x0 > t)
 		t = x0;

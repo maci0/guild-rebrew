@@ -5,6 +5,7 @@ typedef struct OBJECT_COLOR { unsigned char a, b, c, d; } OBJECT_COLOR;
 
 extern volatile int g_6b7fac;
 extern char* ch_ContextCharacters[32];
+extern float g_662910;
 extern float g_662cf8;
 extern double g_6640e8;
 
@@ -69,6 +70,7 @@ void __cdecl fcn_004cf000(void)
 		}
 	}
 	for (i = 0; i < 32; i++) {
+		found = 0;
 		e = ch_ContextCharacters[i];
 		if (e == 0) {
 			continue;
@@ -91,18 +93,18 @@ void __cdecl fcn_004cf000(void)
 				d3_ChangeObjectTransparency(e34, *(char**) (e34 + 0x1cc), color);
 			} else {
 				best = 999999.0f;
-				found = 0;
 				for (j = 0; j < 32; j++) {
-					if (ch_ContextCharacters[j] == 0) {
+					g = ch_ContextCharacters[j];
+					if (g == 0) {
 						continue;
 					}
-					if (fcn_004ce270(e, ch_ContextCharacters[j]) == 0) {
+					if (fcn_004ce270(e, g) == 0) {
 						continue;
 					}
-					if (*(char*) (ch_ContextCharacters[j] + 8) == 0) {
+					if (*(char*) (g + 8) == 0) {
 						continue;
 					}
-					v = fcn_004ce1b0(e, *(char**) (*(char**) (ch_ContextCharacters[j] + 0x184) + 0x34));
+					v = fcn_004ce1b0(e, *(char**) (*(char**) (g + 0x184) + 0x34));
 					if (v < g_662cf8) {
 						found = 1;
 						if (v < best) {
@@ -113,7 +115,7 @@ void __cdecl fcn_004cf000(void)
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				d3_SetSubtreeVisible((int) e34, (unsigned char) found);
 				if (found) {
-					t = (int) (255.0f - best * 0.01f * 255.0f);
+					t = (int) (255.0f - g_662910 * best * 255.0f);
 					memset(&color, 0, sizeof(color));
 					color.c = 0; color.a = (unsigned char) t;
 					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
@@ -133,18 +135,20 @@ void __cdecl fcn_004cf000(void)
 			g = gm_LookupEntityRecordIn32SlotTable(*(int*) (s + 0x10));
 			if (g != 0) {
 				o = *(char**) (e + 0x184);
-				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				g34 = *(char**) (*(char**) (g + 0x184) + 0x34);
+				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				if (CompareVector3WithinTolerance((float*) (e34 + 0x4c), (float*) (g34 + 0x4c), 10.0f) == 0) {
-					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 					g34 = *(char**) (*(char**) (g + 0x184) + 0x34);
+					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 					v = fcn_00448ac0(e34, (float*) (g34 + 0x4c));
 					o = *(char**) (e + 0x184);
 					s = (char*) *(int*) (o + 0x128);
 					if (s == 0 || (*(char*) (s + 9) != 0x2d && *(char*) (s + 9) != 0x3a)) {
 						if (0.08 < (double) fabs(v)) {
-							e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
-							fcn_00438d70(e34, *(int*) (e34 + 0x84), *(float*) (e34 + 0x88) + v * 0.25, *(int*) (e34 + 0x8c));
+							double d;
+							d = v * 0.25;
+							e34 = *(char**) (o + 0x34);
+							fcn_00438d70(e34, *(int*) (e34 + 0x84), d + *(float*) (e34 + 0x88), *(int*) (e34 + 0x8c));
 						}
 					}
 				}

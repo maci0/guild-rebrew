@@ -83,9 +83,9 @@ void __cdecl fcn_004c0cd0(void)
                 }
                 if (g_1005884 == 0) {
                     g_1005884 = fcn_004234e0((char*) g_7747bc, (char*) 0x689da0,
-                        0, 0x3f, (int) (d * flt_889 * flt_inv2600), 0, 0);
+                        0, 0x3f, (int) (flt_inv2600 * (flt_889 * d)), 0, 0);
                 } else {
-                    fcn_00423890(g_1005884, (int) (d * flt_889 * flt_inv2600));
+                    fcn_00423890(g_1005884, (int) (flt_inv2600 * (flt_889 * d)));
                 }
                 if (g_1005854 == 0) {
                     g_1005854 = fcn_004234e0((char*) g_7747bc, (char*) 0x689d94,
@@ -129,17 +129,17 @@ void __cdecl fcn_004c0cd0(void)
                 r = flt_500 - s;
                 if (g_1005864 == 0) {
                     g_1005864 = fcn_004234e0((char*) g_7747bc, (char*) 0x689d84,
-                        0, 0x3f, (int) (d2 * r * flt_889 * flt_inv1300k), 0, 0);
+                        0, 0x3f, (int) (flt_inv1300k * (flt_889 * (d2 * r))), 0, 0);
                 } else {
                     fcn_00423890(g_1005864,
-                        (int) (d2 * r * flt_889 * flt_inv1300k));
+                        (int) (flt_inv1300k * (flt_889 * (d2 * r))));
                 }
                 if (g_100587c == 0) {
                     g_100587c = fcn_004234e0((char*) g_7747bc, (char*) 0x689d74,
-                        0, 0x3f, (int) (r * d * flt_889 * flt_inv1300k), 0, 0);
+                        0, 0x3f, (int) (flt_inv1300k * (flt_889 * (r * d))), 0, 0);
                 } else {
                     fcn_00423890(g_100587c,
-                        (int) (r * d * flt_889 * flt_inv1300k));
+                        (int) (flt_inv1300k * (flt_889 * (r * d))));
                 }
                 if (g_1005854 == 0) {
                     g_1005854 = fcn_004234e0((char*) g_7747bc, (char*) 0x689d94,
@@ -168,25 +168,25 @@ void __cdecl fcn_004c0cd0(void)
                 }
                 if (g_100587c == 0) {
                     g_100587c = fcn_004234e0((char*) g_7747bc, (char*) 0x689d74,
-                        0, 0x3f, (int) (s * d * flt_889 * flt_inv910k), 0, 0);
+                        0, 0x3f, (int) (flt_inv910k * (flt_889 * (s * d))), 0, 0);
                 } else {
                     fcn_00423890(g_100587c,
-                        (int) (s * d * flt_889 * flt_inv910k));
+                        (int) (flt_inv910k * (flt_889 * (s * d))));
                 }
                 r = flt_350 - s;
                 if (g_100585c == 0) {
                     g_100585c = fcn_004234e0((char*) g_7747bc, (char*) 0x689d64,
-                        0, 0x3f, (int) (d2 * r * flt_889 * flt_inv910k), 0, 0);
+                        0, 0x3f, (int) (flt_inv910k * (flt_889 * (d2 * r))), 0, 0);
                 } else {
                     fcn_00423890(g_100585c,
-                        (int) (d2 * r * flt_889 * flt_inv910k));
+                        (int) (flt_inv910k * (flt_889 * (d2 * r))));
                 }
                 if (g_1005874 == 0) {
                     g_1005874 = fcn_004234e0((char*) g_7747bc, (char*) 0x689d54,
-                        0, 0x3f, (int) (r * d * flt_889 * flt_inv910k), 0, 0);
+                        0, 0x3f, (int) (flt_inv910k * (flt_889 * (r * d))), 0, 0);
                 } else {
                     fcn_00423890(g_1005874,
-                        (int) (r * d * flt_889 * flt_inv910k));
+                        (int) (flt_inv910k * (flt_889 * (r * d))));
                 }
                 if (g_1005854 == 0) {
                     g_1005854 = fcn_004234e0((char*) g_7747bc, (char*) 0x689d94,
@@ -214,10 +214,10 @@ void __cdecl fcn_004c0cd0(void)
                 }
                 if (g_1005874 == 0) {
                     g_1005874 = fcn_004234e0((char*) g_7747bc, (char*) 0x689d54,
-                        0, 0x3f, (int) (s * d * flt_889 * flt_inv387k), 0, 0);
+                        0, 0x3f, (int) (flt_inv387k * (flt_889 * (s * d))), 0, 0);
                 } else {
                     fcn_00423890(g_1005874,
-                        (int) (s * d * flt_889 * flt_inv387k));
+                        (int) (flt_inv387k * (flt_889 * (s * d))));
                 }
                 if (g_1005854 == 0) {
                     g_1005854 = fcn_004234e0((char*) g_7747bc, (char*) 0x689d94,

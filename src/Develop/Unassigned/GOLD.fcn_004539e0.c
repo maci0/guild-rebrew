@@ -10,6 +10,7 @@ float __cdecl fcn_004539e0(const float* a, const float* b)
     float first[4];
     float second[4];
     float opposite[4];
+    float cr[3];
     float orientation;
 
     second[1] = 0.0f;
@@ -27,9 +28,10 @@ float __cdecl fcn_004539e0(const float* a, const float* b)
     opposite[2] = -second[2];
     if (CompareVector3WithinTolerance(first, opposite, 1.0e-7f))
         return *(float*) g_6628f8;
-    orientation = *(float*) 0x5ebb94 * (second[2] * first[1] - second[1] * first[2])
-        + (*(float*) 0x5ebb98 * (second[0] * first[2] - second[2] * first[0])
-        + *(float*) 0x5ebb9c * (second[1] * first[0] - second[0] * first[1]));
+    cr[0] = second[2] * first[1] - second[1] * first[2];
+    cr[1] = second[0] * first[2] - second[2] * first[0];
+    cr[2] = second[1] * first[0] - second[0] * first[1];
+    orientation = *(float*) 0x5ebb94 * cr[0] + *(float*) 0x5ebb98 * cr[1] + *(float*) 0x5ebb9c * cr[2];
     if (orientation > 0.0f)
         return (float) -acos(second[2] * first[2] + second[1] * first[1] + second[0] * first[0]);
     return (float) (acos(second[2] * first[2] + second[1] * first[1] + second[0] * first[0]) - 6.2831854820251465);

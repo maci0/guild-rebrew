@@ -1,8 +1,9 @@
 /* Checks that an entity action is allowed: matches the action's class masks
  * against the entity type table and filters the action's entity-id selector. */
 
-#define g_entity_type_table ((unsigned char*) *(unsigned int*) 0x868050)
-#define g_entity_table_end (*(unsigned short**) 0x773da8)
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
+extern unsigned char* lpGebaeudePROT;
+extern char* gm_CityEntity;
 #define g_action_class_lo (*(unsigned int*) 0x666030)
 #define g_action_class_hi (*(unsigned int*) 0x666034)
 
@@ -18,7 +19,6 @@ int __cdecl fcn_005cfd00(unsigned short* self, int* action, unsigned char* entit
 	int allow;
 	int unlisted;
 	int i;
-	unsigned short target;
 	unsigned short ent_id;
 
 	if (action == 0) {
@@ -34,7 +34,7 @@ int __cdecl fcn_005cfd00(unsigned short* self, int* action, unsigned char* entit
 	if (masks == 0 && action[4] == 0) {
 		return 1;
 	}
-	type = g_entity_type_table[entity[0] + entity[0] * 0x24c];
+	type = ((BUILDING_PROTOTYPE*) lpGebaeudePROT)[entity[0]].category;
 	lo = 0;
 	hi = 0;
 	if (type > 0x1f) {
@@ -54,7 +54,7 @@ int __cdecl fcn_005cfd00(unsigned short* self, int* action, unsigned char* entit
 	if ((other & 0x80000000) && (entity[0x5a] & 1)) {
 		return 0;
 	}
-	if ((masks == 0 && other == 0) || (lo & masks) || (hi & other)) {
+	if ((masks == 0 && other == 0) || (masks & lo) || (other & hi)) {
 		match = 1;
 	}
 	if (action[4] == 0) {
@@ -88,13 +88,13 @@ int __cdecl fcn_005cfd00(unsigned short* self, int* action, unsigned char* entit
 			break;
 		case 7:
 			allow = (*(unsigned short*) (entity + 0x27) != *self
-			    && *(unsigned short*) (entity + 0x27) != *g_entity_table_end
+			    && *(unsigned short*) (entity + 0x27) != *(unsigned short*) gm_CityEntity
 			    && *(unsigned short*) (entity + 0x27) != 0xffff);
 			break;
 		}
 	}
-	ent_id = *(unsigned short*) (entity + 0x27);
-	if ((action[5] & 1) && ent_id != 0xffff) {
+	if ((action[5] & 1) && *(unsigned short*) (entity + 0x27) != 0xffff) {
+		ent_id = *(unsigned short*) (entity + 0x27);
 		for (i = 0; i < 4; i++) {
 			if (ent_id == *(unsigned short*) ((char*) action + 0x1c + i * 2)) {
 				if (*(unsigned short*) ((char*) action + 0x1c + i * 2) != 0xffff) {

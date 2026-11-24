@@ -26,17 +26,15 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_00500cb0(char*, char*);
 void __cdecl fcn_00500bb0(char*, int, int, int);
-void __cdecl fcn_004c51f0(int, int, int, int, int, int);
+void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
 extern char g_7f4ca0[];
 extern char gm_GameTime[];
 extern char* gm_CityEntity;
 extern unsigned char g_773d75;
 extern char* lpObjektePROT;
-extern double g_6640e8;
 extern double g_6629c8;
 extern double g_662908;
-extern double g_662ad8;
 
 /* ADDRESS: GOLDTL 0x00571240 */
 void __cdecl fcn_00571240(char* self)
@@ -81,15 +79,18 @@ void __cdecl fcn_00571240(char* self)
 		gm_ResolveEntityById(&node, 0, 0, *(int*) (self + 0xb8));
 		total = fcn_0050c710(node, 1, 1) * 0.01 + g_6629c8;
 		if (*(unsigned char*) (self + 0xc8) >= 0x3c) {
-			if (map != 0) {
-				for (i = 0; i < 8; i++) {
-					if (((int*) (self + 0x8c))[i] != -1 && *(int*) (node + 0x41) != 2)
-						fcn_004c54c0(*(int*) (map + 4), ((int*) (self + 0x8c))[i],
-							2 - *(int*) (node + 0x41), 0);
+			for (i = 0; i < 8; i++) {
+				if (map == 0)
+					goto skip_map;
+				if (((int*) (self + 0x8c))[i] != -1) {
+					n = *(int*) (node + 0x41);
+					if (n != 2)
+						fcn_004c54c0(*(int*) (map + 4), ((int*) (self + 0x8c))[i], 2 - n, 0);
 				}
-				*(float*) (self + 0xc4) = (float) ((fcn_0050fdb0(*(unsigned short*) map, 8, self + 0x8c)
-					- g_662908) * 0.25);
 			}
+			*(float*) (self + 0xc4) = (float) ((fcn_0050fdb0(*(unsigned short*) map, 8, self + 0x8c)
+				- g_662908) * 0.25);
+skip_map:
 			*(unsigned char*) (self + 0xc8) = 0;
 		}
 		n = fcn_0050c830(self + 0x60, gm_GameTime, 0);

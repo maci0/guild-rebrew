@@ -3,6 +3,7 @@
 #pragma intrinsic(memset)
 
 extern int g_100f1dc;
+extern int g_774654;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -130,7 +131,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 			}
 		}
 		if (g_14ce8e0 != 0) {
-			*(int*) 0x774654 = 1;
+			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
@@ -149,10 +150,10 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 						fcn_004c6ae0(*(int*) (a0 + 4), -2);
 						fcn_004c5420(*(int*) (recp + 4), 0x1c8, 4, limit, 0);
 					}
-					*(int*) 0x774654 = 1;
+					g_774654 = 1;
 				}
 			} else if (g_100f1dc == 1) {
-				*(int*) 0x774654 = 1;
+				g_774654 = 1;
 			}
 		}
 	} while (fcn_005373e0((void*) fcn_005d6540, 0x657c7) != 0);

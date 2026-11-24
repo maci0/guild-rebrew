@@ -8,7 +8,6 @@
 char* __cdecl d3_SelectObjectLod(char* object)
 {
     char* model;
-    char* eye;
     char* page;
     int count;
     int index;
@@ -22,12 +21,11 @@ char* __cdecl d3_SelectObjectLod(char* object)
     if (*(unsigned char*) (model + 0x96c) <= 0)
         return 0;
 
-    eye = d3_ActiveCamera;
-    if ((*(unsigned char*) (object + 0x213) & 0x30) == 0 && eye) {
+    if ((*(unsigned char*) (object + 0x213) & 0x30) == 0 && d3_ActiveCamera) {
         delta = *(VECTOR3*) (object + 0x4c);
-        delta.x -= *(float*) (eye + 0x4c);
-        delta.y -= *(float*) (eye + 0x50);
-        delta.z -= *(float*) (eye + 0x54);
+        delta.x -= *(float*) (d3_ActiveCamera + 0x4c);
+        delta.y -= *(float*) (d3_ActiveCamera + 0x50);
+        delta.z -= *(float*) (d3_ActiveCamera + 0x54);
         level = (float) sqrt(delta.z * delta.z + delta.y * delta.y + delta.x * delta.x)
             * (float) *(unsigned char*) (model + 0x96c) * *(float*) 0xfc2dd4;
         if ((int) level >= *(unsigned char*) (model + 0x96c))

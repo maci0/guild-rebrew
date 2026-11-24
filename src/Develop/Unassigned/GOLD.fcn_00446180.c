@@ -61,12 +61,13 @@ int __cdecl fcn_00446180(char* object)
                     ny -= 4 / step;
                 }
                 if (ny - 1 > 0) {
+                    nx--;
                     y = base_y;
                     left_y = ny - 1;
                     do {
-                        if (nx - 1 > 0) {
+                        if (nx > 0) {
                             x = base_x;
-                            left_x = nx - 1;
+                            left_x = nx;
                             do {
                                 resource = fcn_0043fc10(scene, universe, x, y, step, object + 0x30);
                                 if (resource != 0 && *resource == 0x2a) {

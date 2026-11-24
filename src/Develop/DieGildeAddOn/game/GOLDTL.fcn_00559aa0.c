@@ -43,21 +43,15 @@ void __cdecl gm_SimulatePoliticians(struct job* job)
 	char* record;
 	char* candidate;
 	char* list[32];
-	int guard;
-	int state;
 	int divisor;
 	int found;
 	int count;
-	int i;
 	int value;
 	unsigned char type;
-	signed char slot_byte;
 	unsigned int bit_lo;
 	unsigned int bit_hi;
 
 	record = 0;
-	guard = 0;
-	count = 0;
 	entity = (char*) gm_LookupEntityRecordById(job->house);
 	if (entity == 0) {
 		job->house = -1;
@@ -111,9 +105,9 @@ void __cdecl gm_SimulatePoliticians(struct job* job)
 	job->flags &= 0xef;
 	fcn_004c5c80(*(unsigned int*) (entity + 4));
 	if (!(gm_RandomFloat01() > g_6628cc)) {
-		state = (unsigned char) job->pada[0];
-		guard = 0x100;
-		value = ((unsigned char) job->pada[1] + state) % 0x100;
+		divisor = (unsigned char) job->pada[0];
+		found = 0x100;
+		value = ((unsigned char) job->pada[1] + divisor) % 0x100;
 		do {
 			candidate = (char*) (lpGebaeudeINST + value * 0xa9);
 			record = candidate;
@@ -133,9 +127,9 @@ void __cdecl gm_SimulatePoliticians(struct job* job)
 				candidate = 0;
 				record = 0;
 			}
-			guard--;
-			value = (state + value) % 0x100;
-		} while (guard != 0);
+			found--;
+			value = (divisor + value) % 0x100;
+		} while (found != 0);
 	} else {
 		candidate = (char*) gm_StartFilteredEntitySearch(1, 5, 0x16);
 		count = 0;

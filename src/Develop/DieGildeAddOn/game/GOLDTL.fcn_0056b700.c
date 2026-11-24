@@ -268,8 +268,8 @@ label_56b858:
 				if (door != 0 && strstr(door, (char*) 0x6a1d10) != 0)
 					buf.msg[0x7c] |= 8;
 				for (i = 0; i < 0x10; i++) {
-					*(int*) (buf.msg + 0x80 + i * 4) = -1;
 					*(int*) (buf.msg + 0xc0 + i * 4) = -1;
+					*(int*) (buf.msg + 0x80 + i * 4) = -1;
 				}
 				for (i = 0; i < 3; i++) {
 					if (list[i] != 0)
@@ -287,8 +287,7 @@ label_56b858:
 					}
 				}
 				*(int*) (buf.msg + 0x10c) = *(int*) (slot + 1);
-				for (i = 0; i < 8; i++)
-					*(int*) (buf.msg + 0xc0 + i * 4) = *(int*) (obj + 0x8c + i * 4);
+				memcpy(buf.msg + 0xc0, obj + 0x8c, 0x20);
 				*(pos14_7f4c00*) (buf.msg + 0x18) = gm_GameTime;
 				fcn_00500bb0((pos14_7f4c00*) (buf.msg + 0x18), 0xf, 0, 0);
 				*(int*) (obj + 0xdc) = fcn_004c5980(buf.msg);

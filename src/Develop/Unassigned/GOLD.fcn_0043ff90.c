@@ -26,33 +26,47 @@ void __cdecl fcn_0043ff90(char* scene)
 		}
 		row += 4;
 	}
-	rec = scene + 0xf8;
+	rec = scene + 0x108;
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
+			m_FreeTracked(SLOT(rec, -0x10));
+			SLOT(rec, -0x10) = 0;
 			m_FreeTracked(SLOT(rec, 0));
 			SLOT(rec, 0) = 0;
-			m_FreeTracked(SLOT(rec, 0x10));
-			SLOT(rec, 0x10) = 0;
-			m_FreeTracked(SLOT(rec, 0x18));
-			SLOT(rec, 0x18) = 0;
-			m_FreeTracked(SLOT(rec, 0x24));
-			SLOT(rec, 0x24) = 0;
-			if (*(unsigned char*) (rec + 0x48)) {
-				m_FreeTracked(SLOT(rec, 0x1c));
-				SLOT(rec, 0x1c) = 0;
+			m_FreeTracked(SLOT(rec, 8));
+			SLOT(rec, 8) = 0;
+			m_FreeTracked(SLOT(rec, 0x14));
+			SLOT(rec, 0x14) = 0;
+			if (*(unsigned char*) (rec + 0x38)) {
+				m_FreeTracked(SLOT(rec, 0xc));
+				SLOT(rec, 0xc) = 0;
+				m_FreeTracked(SLOT(rec, -0xc));
+				SLOT(rec, -0xc) = 0;
 				m_FreeTracked(SLOT(rec, 4));
 				SLOT(rec, 4) = 0;
-				m_FreeTracked(SLOT(rec, 0x14));
-				SLOT(rec, 0x14) = 0;
 			}
 			rec += 0x64;
 		}
 	}
-	for (i = 0x10; i <= 0x20; i += 4) {
-		if (SLOT(scene, i) != 0) {
-			m_FreeTracked(SLOT(scene, i));
-			SLOT(scene, i) = 0;
-		}
+	if (SLOT(scene, 0x10) != 0) {
+		m_FreeTracked(SLOT(scene, 0x10));
+		SLOT(scene, 0x10) = 0;
+	}
+	if (SLOT(scene, 0x14) != 0) {
+		m_FreeTracked(SLOT(scene, 0x14));
+		SLOT(scene, 0x14) = 0;
+	}
+	if (SLOT(scene, 0x18) != 0) {
+		m_FreeTracked(SLOT(scene, 0x18));
+		SLOT(scene, 0x18) = 0;
+	}
+	if (SLOT(scene, 0x1c) != 0) {
+		m_FreeTracked(SLOT(scene, 0x1c));
+		SLOT(scene, 0x1c) = 0;
+	}
+	if (SLOT(scene, 0x20) != 0) {
+		m_FreeTracked(SLOT(scene, 0x20));
+		SLOT(scene, 0x20) = 0;
 	}
 	if (SLOT(scene, 0x19e0) != 0) {
 		for (i = 0; i < *(unsigned char*) (scene + 0x1c6d); i++) {

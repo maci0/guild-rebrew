@@ -93,13 +93,14 @@ void __cdecl ai_MeisterCollectTrans(char* e)
 					if (found != *(char**) (e + 0x16c)) {
 						memset(pkt, 0, 0xf8);
 						pkt[4] = 0xf;
-						*(int*) (pkt + 0x08) = *(int*) (g_7f4ca4 +
-						                                *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c);
+						type = *(int*) (g_7f4ca4 +
+						                *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c);
 						pkt[0x36] = 2;
 						*(int*) (pkt + 0x28) = gm_GameTime;
 						*(int*) (pkt + 0x2c) = g_7f4c04;
 						*(int*) (pkt + 0x30) = g_7f4c08;
 						*(unsigned short*) (pkt + 0x34) = g_7f4c0c;
+						*(int*) (pkt + 0x08) = type;
 						*(int*) (pkt + 0x0c) = -1;
 						*(int*) (pkt + 0x58) = *(int*) (slot + 2);
 						*(int*) (pkt + 0x5c) = *(int*) ((char*) found + 1);
@@ -126,7 +127,7 @@ next:
 				sprintf(buf, (char*) 0x67e3fc, *(char**) (e + 0x16c) + 5);
 				return;
 			}
-			if (n136 != 0) {
+			if (n136 == 0) {
 				if (*(int*) (e + 0x1c8) & 8) {
 					return;
 				}
@@ -136,7 +137,30 @@ next:
 				if ((unsigned short) gm_RandomMod(0x2ee) >= 2) {
 					return;
 				}
-				id = 0x136 - ((unsigned short) gm_RandomMod(8) < 4);
+				t = (int) eval_ObjektPreis2Credits(0x136, 100);
+				if (*(int*) (e + 0x1b8) <= t * 2) {
+					return;
+				}
+				t = (int) eval_ObjektPreis2Credits(0x136, 100);
+				fcn_004c5150(-1, *(int*) (g_7f4ca4 +
+				                         *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
+				             (char) g_773d75, t);
+				fcn_004c51f0(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x136, 1, (char) g_773d75, 0);
+				sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &g_7f4c04,
+				        g_7f4c06, *(char**) (e + 0x16c) + 5);
+				*(int*) (e + 0x1c8) |= 8;
+				return;
+			} else {
+				if (*(int*) (e + 0x1c8) & 8) {
+					return;
+				}
+				if (count >= row->level) {
+					return;
+				}
+				if ((unsigned short) gm_RandomMod(0x2ee) >= 2) {
+					return;
+				}
+				id = ((unsigned short) gm_RandomMod(8) < 4) ? 0x135 : 0x136;
 				t = (int) eval_ObjektPreis2Credits(id, 100);
 				if (*(int*) (e + 0x1b8) <= t * 2) {
 					return;
@@ -151,28 +175,6 @@ next:
 				*(int*) (e + 0x1c8) |= 8;
 				return;
 			}
-			if (*(int*) (e + 0x1c8) & 8) {
-				return;
-			}
-			if (count >= row->level) {
-				return;
-			}
-			if ((unsigned short) gm_RandomMod(0x2ee) >= 2) {
-				return;
-			}
-			t = (int) eval_ObjektPreis2Credits(0x136, 100);
-			if (*(int*) (e + 0x1b8) <= t * 2) {
-				return;
-			}
-			t = (int) eval_ObjektPreis2Credits(0x136, 100);
-			fcn_004c5150(-1, *(int*) (g_7f4ca4 +
-			                         *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
-			             (char) g_773d75, t);
-			fcn_004c51f0(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x136, 1, (char) g_773d75, 0);
-			sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &g_7f4c04,
-			        g_7f4c06, *(char**) (e + 0x16c) + 5);
-			*(int*) (e + 0x1c8) |= 8;
-			return;
 		}
 		if (count == 0) {
 			if (*(char*) (g_7f4ca2 + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c) == 6

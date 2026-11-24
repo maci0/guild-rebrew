@@ -12,21 +12,21 @@ float __cdecl fcn_004ffa10(int, int);
 void __cdecl fcn_004ff550(int city, int* date)
 {
     char calendar[10];
-    int year, month, tableOffset, outputOffset, count, index, lo, hi, value, previousYear, i;
-    int *p, *out;
+    int year, month, tableOffset, count, index, lo, hi, value, previousYear, i;
+    int *p;
     unsigned char kind;
     fcn_00500d60(date, calendar);
     year = *(short*) (calendar + 2);
     month = calendar[1];
     tableOffset = city * 0x2f4;
     count = 0;
-    outputOffset = city * 0x2a90;
     p = (int*) (tableOffset + 0x7e3fa4);
     do {
         if (p[0] >= p[2]) break;
         ++count;
         p += 2;
     } while (count < 9);
+    if (count >= 9) count = 9;
     index = 0;
     p = (int*) (tableOffset + 0x7e3fa4);
     while (index < count) {
@@ -34,27 +34,25 @@ void __cdecl fcn_004ff550(int city, int* date)
         ++index;
         p += 2;
     }
-    out = (int*) (outputOffset + 0x7d6a60);
     if (index >= count - 1) {
-        *out = *(int*) (tableOffset + 0x7e3fa0 + count * 8);
+        *(int*) (city * 0x2a90 + 0x7d6a60) = *(int*) (tableOffset + 0x7e3fa0 + count * 8);
     } else {
         hi = *(int*) (tableOffset + 0x7e3fa4 + index * 8);
         if (year == hi) {
-            value = *(int*) (tableOffset + 0x7e3fa8 + index * 8);
-            *out = ((month + (year - hi) * 12) *
-                (*(int*) (tableOffset + 0x7e3fb0 + index * 8) - value)) /
-                ((*(int*) (tableOffset + 0x7e3fac + index * 8) - hi) * 12) + value;
+            *(int*) (city * 0x2a90 + 0x7d6a60) = ((month + (year - hi) * 12) *
+                (*(int*) (tableOffset + 0x7e3fb0 + index * 8) - *(int*) (tableOffset + 0x7e3fa8 + index * 8))) /
+                ((*(int*) (tableOffset + 0x7e3fac + index * 8) - hi) * 12) + *(int*) (tableOffset + 0x7e3fa8 + index * 8);
         } else if (index > 0) {
             lo = *(int*) (tableOffset + 0x7e3fa0 + index * 8);
             previousYear = *(int*) (tableOffset + 0x7e3f9c + index * 8);
-            *out = ((month + (year - previousYear) * 12) *
+            *(int*) (city * 0x2a90 + 0x7d6a60) = ((month + (year - previousYear) * 12) *
                 (*(int*) (tableOffset + 0x7e3fa8 + index * 8) - lo)) /
                 ((hi - previousYear) * 12) + lo;
         } else {
-            *out = *(int*) (tableOffset + 0x7e3fa8);
+            *(int*) (city * 0x2a90 + 0x7d6a60) = *(int*) (tableOffset + 0x7e3fa8);
         }
     }
-    *out = out[1] * *out / 1000;
+    *(int*) (city * 0x2a90 + 0x7d6a60) = *(int*) (city * 0x2a90 + 0x7d6a64) * *(int*) (city * 0x2a90 + 0x7d6a60) / 1000;
     count = 0;
     p = (int*) (tableOffset + 0x7e3ff4);
     do {
@@ -62,6 +60,7 @@ void __cdecl fcn_004ff550(int city, int* date)
         ++count;
         p += 2;
     } while (count < 9);
+    if (count >= 9) count = 9;
     index = 0;
     p = (int*) (tableOffset + 0x7e3ff4);
     while (index < count) {
@@ -69,28 +68,26 @@ void __cdecl fcn_004ff550(int city, int* date)
         ++index;
         p += 2;
     }
-    out = (int*) (outputOffset + 0x7d6a68);
     if (index >= count - 1) {
-        *out = *(int*) (tableOffset + 0x7e3ff0 + count * 8);
+        *(int*) (city * 0x2a90 + 0x7d6a68) = *(int*) (tableOffset + 0x7e3ff0 + count * 8);
     } else {
         hi = *(int*) (tableOffset + 0x7e3ff4 + index * 8);
         if (year == hi) {
-            value = *(int*) (tableOffset + 0x7e3ff8 + index * 8);
-            *out = ((month + (year - hi) * 12) *
-                (*(int*) (tableOffset + 0x7e4000 + index * 8) - value)) /
-                ((*(int*) (tableOffset + 0x7e3ffc + index * 8) - hi) * 12) + value;
+            *(int*) (city * 0x2a90 + 0x7d6a68) = ((month + (year - hi) * 12) *
+                (*(int*) (tableOffset + 0x7e4000 + index * 8) - *(int*) (tableOffset + 0x7e3ff8 + index * 8))) /
+                ((*(int*) (tableOffset + 0x7e3ffc + index * 8) - hi) * 12) + *(int*) (tableOffset + 0x7e3ff8 + index * 8);
         } else if (index > 0) {
             lo = *(int*) (tableOffset + 0x7e3ff0 + index * 8);
             previousYear = *(int*) (tableOffset + 0x7e3fec + index * 8);
-            *out = ((month + (year - previousYear) * 12) *
+            *(int*) (city * 0x2a90 + 0x7d6a68) = ((month + (year - previousYear) * 12) *
                 (*(int*) (tableOffset + 0x7e3ff8 + index * 8) - lo)) /
                 ((hi - previousYear) * 12) + lo;
         } else {
-            *out = *(int*) (tableOffset + 0x7e3ff8);
+            *(int*) (city * 0x2a90 + 0x7d6a68) = *(int*) (tableOffset + 0x7e3ff8);
         }
     }
-    *out = out[1] * *out / 1000;
-    p = (int*) (outputOffset + 0x7d6aa0);
+    *(int*) (city * 0x2a90 + 0x7d6a68) = *(int*) (city * 0x2a90 + 0x7d6a6c) * *(int*) (city * 0x2a90 + 0x7d6a68) / 1000;
+    p = (int*) (city * 0x2a90 + 0x7d6aa0);
     for (i = 0; i < 0x55; ++i, p += 0x20) {
         kind = (((unsigned char*) g_item_def_table))[*(unsigned short*) (p - 12) * 0x41];
         if (kind != 0x17 && kind != 0x25) {

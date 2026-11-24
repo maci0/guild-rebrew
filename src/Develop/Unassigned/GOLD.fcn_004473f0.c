@@ -14,7 +14,6 @@ void __cdecl fcn_004473f0(void)
 {
 	unsigned int* p;
 	char* copyDst;
-	char* copySrc;
 	int copyCount;
 	int offset;
 
@@ -57,10 +56,9 @@ void __cdecl fcn_004473f0(void)
 		p[3] = *(unsigned int*) 0x633b20;
 		p[4] = *(unsigned int*) 0x633b24;
 		copyDst = (char*) (p + 5);
-		copySrc = (char*) 0xfba960;
 		__asm {
 			mov edi, copyDst
-			mov esi, copySrc
+			mov esi, 0xfba960
 			mov ebx, copyCount
 			lea ecx, [edi+edi*2]
 			and ecx, 3
@@ -81,8 +79,8 @@ void __cdecl fcn_004473f0(void)
 	*(int*) 0x6338bc = 0;
 	*(int*) 0x6338b8 = 0;
 	fcn_00448910();
-	*(int*) 0x63349c = 0;
 	offset = d3_CurrentContextIndex * 0x3e0;
+	*(int*) 0x63349c = 0;
 	*(int*) 0x5fb5c0 = 4;
 	*(int*) 0x5fb5c4 = 0xf;
 	*(int*) (offset + 0xfd7c24) = 0;

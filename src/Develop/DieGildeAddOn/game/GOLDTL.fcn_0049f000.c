@@ -63,7 +63,7 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 	} while (i < 0x3c);
 	i = 0;
 	do {
-		if (lpGebaeudeINST[i] != 0) {
+		if (*(unsigned char*) (i + lpGebaeudeINST) != 0) {
 			p = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[lpGebaeudeINST[i]];
 			v12[fcn_00507910(((BUILDING_PROTOTYPE*)p)->category)]++;
 		}
@@ -78,10 +78,11 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 				return 0;
 			}
 			v7 = fcn_00507400(v10, 1);
-			v15[1] = fcn_005072c0(v7);
-			if (v15[1] == 0) {
+			v10 = fcn_005072c0(v7);
+			if (v10 == 0) {
 				return 0;
 			}
+			v15[1] = v10;
 			*(unsigned char*) v15 = 5;
 			v15[2] = 1;
 			*(unsigned char*) v14 = 0;

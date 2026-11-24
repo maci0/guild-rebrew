@@ -6,17 +6,15 @@
 /* ADDRESS: GOLD 0x0046bc90 */
 void __cdecl fcn_0046bc90(int index, int count, ...)
 {
-	char* text;
+	GuiEnt* p;
+	int i;
 	va_list args;
-	text = g_00f8f080[index].u.text + 0x5c;
-	*text = 0;
+	p = &g_00f8f080[index];
+	p->u.text[0x5c] = 0;
 	va_start(args, count);
-	if (count > 0) {
-		index = count;
-		do {
-			strcat(text, va_arg(args, char*));
-			strcat(text, "|");
-		} while (--index != 0);
+	for (i = 0; i < count; i++) {
+		strcat(p->u.text + 0x5c, va_arg(args, char*));
+		strcat(p->u.text + 0x5c, "|");
 	}
 	va_end(args);
 }

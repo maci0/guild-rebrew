@@ -71,19 +71,19 @@ read_failed: return 0;
 		*(char*) (r - 2) = 1;
 	}
 	if (n > 0) {
-		for (r = (char*) g_aed740 + 0x91; i < n; i++, r += 0x99) {
-			if (!ls_ReadVfsDataChecked(r - 0x91, 0x99, 1, fp)) {
+		for (; i < n; i++) {
+			if (!ls_ReadVfsDataChecked(&g_aed740[i], 0x99, 1, fp)) {
 				return 0;
 			}
-			if (*(int*) r == -1) {
-				*(int*) r = 0;
+			if ((int) g_aed740[i].prev == -1) {
+				g_aed740[i].prev = 0;
 			} else {
-				*(int*) r = (int) &(g_aed740)[*(int*) r];
+				g_aed740[i].prev = &g_aed740[(int) g_aed740[i].prev];
 			}
-			if (*(int*) (r + 4) == -1) {
-				*(int*) (r + 4) = 0;
+			if ((int) g_aed740[i].next == -1) {
+				g_aed740[i].next = 0;
 			} else {
-				*(int*) (r + 4) = (int) &(g_aed740)[*(int*) (r + 4)];
+				g_aed740[i].next = &g_aed740[(int) g_aed740[i].next];
 			}
 		}
 	}

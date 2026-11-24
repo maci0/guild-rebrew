@@ -45,9 +45,10 @@ void __cdecl fcn_0043eef0(char* buffer, char* desc)
 			corners[1] = (int*) (lut[m[x]] + off);
 			corners[2] = (int*) (lut[m[x + 4]] + off);
 			corners[3] = (int*) (lut[m[x + 5]] + off);
+			off = *(unsigned int*) 0xfbb870;
 			(*(BLIT_FN*) 0x5fb970)((short*) buffer
-			    + (*(unsigned int*) (desc + 0xc) * y + x) * *(unsigned int*) 0xfbb870,
-			    src, corners, *(unsigned int*) 0xfbb870);
+			    + (*(unsigned int*) (desc + 0xc) * y + x) * off,
+			    src, corners, off);
 		}
 	}
 	if (*(unsigned char*) 0x631220 != 0) {

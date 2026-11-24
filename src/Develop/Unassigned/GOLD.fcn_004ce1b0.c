@@ -5,11 +5,14 @@
 float __cdecl fcn_004ce1b0(char* b, char* a)
 {
 	char* p;
-	float dx;
-	float dz;
+	float pos_a[2];
+	struct { float z, x; } pos_b;
 
+	pos_a[0] = *(float*) (a + 0x4c);
+	pos_a[1] = *(float*) (a + 0x54);
 	p = *(char**) (*(char**) (b + 0x184) + 0x34);
-	dx = *(float*) (a + 0x4c) - *(float*) (p + 0x4c);
-	dz = *(float*) (a + 0x54) - *(float*) (p + 0x54);
-	return (float) sqrt(dx * dx + dz * dz);
+	pos_b.x = *(float*) (p + 0x4c);
+	pos_b.z = *(float*) (p + 0x54);
+	pos_a[0] -= pos_b.x;
+	return (float) sqrt((pos_a[1] - pos_b.z) * (pos_a[1] - pos_b.z) + pos_a[0] * pos_a[0]);
 }

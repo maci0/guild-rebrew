@@ -1,11 +1,10 @@
-extern int g_f8f080;
+#include "gold_gui.h"
 
 int __cdecl fcn_004690a0(int);
 
 /* ADDRESS: GOLD 0x004759e0 */
 int __cdecl fcn_004759e0(int id, int* out, int* out2)
 {
-	int slot;
 	char* rec;
 	char* font;
 	char* sub;
@@ -13,11 +12,7 @@ int __cdecl fcn_004759e0(int id, int* out, int* out2)
 	unsigned short w;
 
 	if (id != -1) {
-		slot = id;
-		slot = (slot << 5) - id;
-		slot = slot + slot * 2;
-		slot = id + slot * 2;
-		rec = (char*) (g_f8f080 + slot * 4);
+		rec = (char*) &g_00f8f080[id];
 		kind = *(int*) (rec + 0x18);
 		if (kind == 1 || kind == 8 || kind == 5) {
 			font = (char*) fcn_004690a0(*(int*) (rec + 8));
@@ -34,7 +29,7 @@ int __cdecl fcn_004759e0(int id, int* out, int* out2)
 					return 1;
 				}
 				*out = *(unsigned short*) (font + 0x2c);
-				*out = *(unsigned short*) (font + 0x2e);
+				*out2 = *(unsigned short*) (font + 0x2e);
 				return 1;
 			}
 		}

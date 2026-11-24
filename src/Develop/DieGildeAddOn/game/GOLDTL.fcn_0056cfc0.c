@@ -82,7 +82,9 @@ void __cdecl fcn_0056cfc0(char *a0)
 				*(int *)(a0 + 0x70) = -1;
 				return;
 			}
-			if (*(unsigned char *)(a0 + 0xb4) < 3) {
+			if (*(unsigned char *)(a0 + 0xb4) >= 3)
+				goto inc_step;
+			{
 				char names[3][64] = {"dummy_FAHNE", "dummy_RAUCH_0", "dummy_BRAND"};
 				float pos[3] = {-243.0f, -90.0f, 190.0f};
 				char text[0x400];
@@ -146,11 +148,10 @@ void __cdecl fcn_0056cfc0(char *a0)
 
 				fcn_00500bb0(a0 + 0x52, 0, 4, 0);
 				fcn_004432d0(v10, 1);
-			} else {
-				*(int *)(a0 + 0x70) = *(int *)(a0 + 0x70) + 1;
 			}
 		} else {
-			*(int *)(a0 + 0x70) = *(int *)(a0 + 0x70) + 1;
+inc_step:
+			(*(int *)(a0 + 0x70))++;
 		}
 		if (e == 0) {
 			*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
@@ -196,13 +197,17 @@ void __cdecl fcn_0056cfc0(char *a0)
 		if (*(int *)(a0 + 0xb0) > 0) {
 			if (e != 0) {
 				float pos[3];
+				float tmp;
+				double dtmp;
 
 				f = 1.0f;
 				p = (int *)(a0 + 0x60);
-				n = (int)((float)fcn_0050cad0(p, (int *)0x7f4c00) *
-					  (1.0f / 6.0f) * 2.0f);
-				if (g_7e4538 != 0)
-					f = 1.0 + *(int *)g_7e4538 * 0.002 * 0.7;
+				tmp = (float)fcn_0050cad0(p, (int *)0x7f4c00) * (1.0f / 6.0f);
+				n = (int)(tmp + tmp);
+				if (g_7e4538 != 0) {
+					dtmp = *(int *)g_7e4538 * 0.002;
+					f = 1.0 + dtmp * 0.7;
+				}
 				*(int *)(a0 + 0xb0) =
 					(int)((float)*(int *)(a0 + 0xb0) - n * f);
 				fcn_0050ff70(e, -n);
@@ -228,6 +233,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 
 
 
+				e = 0;
 				fcn_00500bb0(a0 + 0x52, 0, 4, 0);
 				if (*(unsigned char *)(a0 + 0xb4) < 3)
 					*(int *)(a0 + 0x70) = 0;
@@ -236,7 +242,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 				n = 0x10;
 				do {
 					if (*p != -1) {
-						if (i == 0) {
+						if (e == 0) {
 							e = gm_StartFilteredEntitySearch(1, 1,
 										 *(int *)(a0 + 0xac));
 							i = (int)gm_FindNearestBuildingByKind(e, 3);
@@ -284,12 +290,12 @@ void __cdecl fcn_0056cfc0(char *a0)
 				}
 				p++;
 			} while (--i);
-			for (i = 0; i < 3; i++) {
-				sprintf(buf, g_6a6afc, *(int *)(a0 + 4), i);
-				n = evt_FindScriptByName(buf);
-				if (n != 0)
-					evt_RequestScriptExit((char *)n);
-			}
+		}
+		for (i = 0; i < 3; i++) {
+			sprintf(buf, g_6a6afc, *(int *)(a0 + 4), i);
+			n = evt_FindScriptByName(buf);
+			if (n != 0)
+				evt_RequestScriptExit((char *)n);
 		}
 		if (e != 0 && *(int *)(e + 0x61) != 0 &&
 		    (n = *(int *)(*(int *)(e + 0x61) + 0x210)) != 0)

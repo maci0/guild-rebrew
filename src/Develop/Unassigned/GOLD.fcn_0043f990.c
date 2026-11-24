@@ -25,8 +25,9 @@ void __cdecl fcn_0043f990(void)
 				}
 			}
 			*(int*) (base + offset) = 0;
+			base = *(char**) 0x63374c;
 		}
-		*(char*) (*(char**) 0x63374c + offset + 0x40) = 0;
+		*(char*) (base + offset + 0x40) = 0;
 		*(int*) (*(char**) 0x63374c + offset + 4) = 0;
 		*(int*) (*(char**) 0x63374c + offset + 8) = 0;
 		*(int*) (*(char**) 0x63374c + offset + 0xc) = 0;

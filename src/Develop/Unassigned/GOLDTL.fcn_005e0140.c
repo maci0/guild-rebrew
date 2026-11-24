@@ -21,7 +21,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005e0140(int a, int b, void *items, void *records, char *path, int mode)
 {
     int i, count, file, index, element, x, y;
-    char header[0x100], empty[0x210], text[64];
+    char header[0xfc], empty[0x210], text[64];
     char *row, *rec;
     unsigned short *pixels;
 
@@ -67,19 +67,18 @@ void __cdecl fcn_005e0140(int a, int b, void *items, void *records, char *path, 
             }
             fcn_004692c0(0, 0, 160, 120, pixels, d2_CurrentWindowId);
         }
-        element = *(int *)(row + 4);
-        *(int *)(g_1015ea0 + element * 0x2f4 + 0x5c) = 1;
-        *(int *)(g_1015ea0 + element * 0x2f4 + 0x18) = *(int *)((int)g_77255c + 0xc) - 0xa0;
-        *(int *)(g_1015ea0 + element * 0x2f4 + 0x1d0) = 3;
+        *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x5c) = 1;
+        *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x18) = *(int *)((int)g_77255c + 0xc) - 0xa0;
+        *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x1d0) = 3;
         fcn_0046f100(0xa4, 0x12, (short)(*(short *)((int)g_77255c + 0xc) - 0xb0), 0x6e, 16, d2_CurrentWindowId);
         *(int *)(d2_CurrentWindowId * 0x3cc + 0x10161cc) = 0x54;
         *(int *)(d2_CurrentWindowId * 0x3cc + 0x1015f60) = 0;
         sprintf(text, (char *)0x699a68, *(int *)(header + 0x68), 0x11);
         io_AppendText(0x1cc5, header + 5, *(int *)(header + 0x32) + 0x578,
                       *(unsigned short *)(header + 0x36), *(int *)(header + 0x38) % 60);
-        io_AppendText(0x1cc6, 0x114 + (unsigned char)header[0x62] + (header[0x6c] ? 10 : 0), header + 0x40,
-                      0x130 + (unsigned char)header[0x60] + (header[0x6c] ? 0x5f : 0),
-                      0x253 + (unsigned char)header[0x61] + (header[0x6c] ? 0x28 : 0), text,
+        io_AppendText(0x1cc6, (header[0x6c] ? 10 : 0) + 0x114 + (unsigned char)header[0x62], header + 0x40,
+                      (header[0x6c] ? 0x5f : 0) + 0x130 + (unsigned char)header[0x60],
+                      (header[0x6c] ? 0x28 : 0) + 0x253 + (unsigned char)header[0x61], text,
                       *(int *)(0x14ac550 + *(int *)(header + 0x98) * 4));
     }
     memset((void *)0x7ea3c0, 0, 0x9600);
@@ -102,9 +101,9 @@ void __cdecl fcn_005e0140(int a, int b, void *items, void *records, char *path, 
         d2_SetElementFont(element, 0x53);
         fcn_004692c0(0, 0, 160, 120, (void *)0x7ea3c0, d2_CurrentWindowId);
         fcn_0046f740(0x3c, 0x20, 0x4fb, d2_CurrentWindowId);
-        *(int *)(g_1015ea0 + element * 0x2f4 + 0x5c) = 1;
-        *(int *)(g_1015ea0 + element * 0x2f4 + 0x18) = *(int *)((int)g_77255c + 0xc) - 0xa0;
-        *(int *)(g_1015ea0 + element * 0x2f4 + 0x1d0) = 3;
+        *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x5c) = 1;
+        *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x18) = *(int *)((int)g_77255c + 0xc) - 0xa0;
+        *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x1d0) = 3;
         fcn_0046f100(0xa4, 0x18, (short)(*(short *)((int)g_77255c + 0xc) - 0xb0), 0x60, 16, d2_CurrentWindowId);
         *(int *)(d2_CurrentWindowId * 0x3cc + 0x10161cc) = 0x54;
         io_AppendText(0x1cc7);

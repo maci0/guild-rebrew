@@ -32,11 +32,10 @@ void __cdecl fcn_005e3b70(void);
 /* ADDRESS: GOLDTL 0x005e3520 */
 void __cdecl fcn_005e3520(void)
 {
-  int v1, selection[2];
-  unsigned char v2;
-  unsigned int v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v16;
-  v16 = *(unsigned int *)0x7e46ac & ~0x2000;
+  int v1, sel0, sel1, selection[2];
+  unsigned int v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16;
   v1 = 0;
+  v16 = *(unsigned int *)0x7e46ac & ~0x2000;
   v3 = fcn_00470820(0,0,(char *)0x6ad30c);
   fcn_00537320(v16);
   fcn_00471db0(v3,1);
@@ -75,11 +74,11 @@ void __cdecl fcn_005e3520(void)
   fcn_00468b80(v8,*(unsigned int *)0x14ac588);
   fcn_00468bb0(v8,2,*(unsigned int *)0x14ac50c,*(unsigned int *)0x14ac510);
   d2_SetSlotVisibility(v8,0);
-  d2_SetElementValue(v9,0,1,*(unsigned int *)0x7766b8 >> 0x10 & 0xff);
+  d2_SetElementValue(v9,0,1,*(unsigned char *)0x7766ba);
   fcn_00468cd0(v9,0x82);
   fcn_00468b80(v9,*(unsigned int *)0x14ac58c);
   fcn_00468bb0(v9,2,*(unsigned int *)0x14ac50c,*(unsigned int *)0x14ac510);
-  d2_SetElementValue(v10,0,1,*(unsigned int *)0x7766b8 >> 0x18);
+  d2_SetElementValue(v10,0,1,*(unsigned char *)0x7766bb);
   fcn_00468cd0(v10,0x82);
   fcn_00468b80(v10,*(unsigned int *)0x14ac590);
   fcn_00468bb0(v10,2,*(unsigned int *)0x14ac50c,*(unsigned int *)0x14ac510);
@@ -87,7 +86,7 @@ void __cdecl fcn_005e3520(void)
   fcn_00468cd0(v11,0x82);
   fcn_00468b80(v11,*(unsigned int *)0x14ac594);
   fcn_00468bb0(v11,5,*(unsigned int *)0x14ac4f8,*(unsigned int *)0x14ac4fc,*(unsigned int *)0x14ac500,*(unsigned int *)0x14ac504,*(unsigned int *)0x14ac508);
-  d2_SetElementValue(v12,0,1,*(unsigned int *)0x776708 >> 8 & 0xff);
+  d2_SetElementValue(v12,0,1,*(unsigned char *)0x776709);
   fcn_00468cd0(v12,0x82);
   fcn_00468b80(v12,*(unsigned int *)0x14ac598);
   fcn_00468bb0(v12,2,*(unsigned int *)0x14ac50c,*(unsigned int *)0x14ac510);
@@ -96,49 +95,43 @@ void __cdecl fcn_005e3520(void)
   fcn_00468cd0(v14,0x82);
   fcn_00468b80(v14,*(unsigned int *)0x14ac5a4);
   fcn_00468bb0(v14,2,*(unsigned int *)0x14ac50c,*(unsigned int *)0x14ac510);
-  d2_SetElementValue(v13,0,1,*(unsigned int *)0x776708 >> 0x18);
+  d2_SetElementValue(v13,0,1,*(unsigned char *)0x77670b);
   fcn_00468cd0(v13,0x82);
   fcn_00468b80(v13,*(unsigned int *)0x14ac5a0);
   fcn_00468bb0(v13,2,*(unsigned int *)0x14ac50c,*(unsigned int *)0x14ac510);
   d2_SetForm(v3,3);
   fcn_00533a60(*(unsigned int *)0x772514,0,&selection[0],2,*(unsigned int *)0x14ac5a8,*(unsigned int *)0x14ac5ac);
+  sel0 = selection[0];
+  sel1 = selection[1];
   if (fcn_005373e0((void *)fcn_005e3520,v16)) {
     do {
       if ((*(unsigned int *)0x14ce8e0) || (*(unsigned char *)0x14cf950 == 1))
         *(unsigned int *)0x774654 = 1;
       if (g_100f1dc != -1) {
-        if (*(unsigned int *)0x67d370 != selection[0]) {
-          if (*(unsigned int *)0x67d370 != selection[1]) goto label_5e39ed;
-        }
-        else {
+        v15 = *(unsigned int *)0x67d370;
+        if (v15 == sel0) {
           v1 = 1;
+          *(unsigned int *)0x774654 = 1;
         }
-        *(unsigned int *)0x774654 = 1;
+        else if (v15 == sel1) {
+          *(unsigned int *)0x774654 = 1;
+        }
       }
-label_5e39ed:
-      ;
     } while (fcn_005373e0((void *)fcn_005e3520,v16));
     if (v1) {
       *(unsigned int *)0x7766a8 = fcn_00471f80(v4);
-      v2 = fcn_00471f80(v7);
-      *(unsigned char *)0x7766ac = v2;
+      *(unsigned char *)0x7766ac = (unsigned char)fcn_00471f80(v7);
       *(unsigned int *)0x7766b0 = fcn_00471f80(v5);
-      *(unsigned int *)0x7766b4 = fcn_00471f80(v6);
+      *(int *)0x7766b4 = fcn_00471f80(v6);
       *(unsigned char *)0x7766b8 = 0;
-      v2 = fcn_00471f80(v9);
-      *(unsigned char *)0x7766ba = v2;
-      v2 = fcn_00471f80(v10);
-      *(unsigned char *)0x7766bb = v2;
-      v2 = fcn_00471f80(v12);
-      *(unsigned char *)0x776709 = v2;
-      v2 = fcn_00471f80(v13);
-      *(unsigned char *)0x77670b = v2;
-      v2 = fcn_00471f80(v14);
-      *(unsigned char *)0x77670c = v2;
+      *(unsigned char *)0x7766ba = (unsigned char)fcn_00471f80(v9);
+      *(unsigned char *)0x7766bb = (unsigned char)fcn_00471f80(v10);
+      *(unsigned char *)0x776709 = (unsigned char)fcn_00471f80(v12);
+      *(unsigned char *)0x77670b = (unsigned char)fcn_00471f80(v13);
+      *(unsigned char *)0x77670c = (unsigned char)fcn_00471f80(v14);
       v16 = fcn_00471f80(v11);
       if (v16 != (*(unsigned int *)0x776708 & 0xff)) {
-        v2 = fcn_00471f80(v11);
-        *(unsigned char *)0x776708 = v2;
+        *(unsigned char *)0x776708 = (unsigned char)fcn_00471f80(v11);
         fcn_00471af0(v3,0);
         if (*(unsigned char *)0x774964) {
           fcn_00527420();

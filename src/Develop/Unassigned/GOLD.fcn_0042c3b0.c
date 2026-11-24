@@ -6,43 +6,37 @@ char* __cdecl fcn_0042c3b0(char* a0, int a1, int a2)
 {
 	char* alt;
 	char* p;
-	int n;
 	int i;
 	int len;
-	char c;
+	char mode_c;
 
-	i = 0;
+	mode_c = (char) a2;
 	p = a0;
-	if ((char) a2 == 8) {
-		a1 = a1 + 4;
+	i = 0;
+	alt = (char*) a2;
+	if (mode_c == 8) {
+		a1 += 4;
 		alt = a0;
-	} else {
-		alt = (char*) a2;
 	}
-	n = a1 - 1;
-	if (n > 0) {
-		do {
-			len = 0;
-			do {
-				c = p[len];
-				len++;
-			} while (c != 0);
-			p = p + len - 1;
-			if (p == 0) {
-				return a0;
-			}
-			p++;
-			i++;
-			if (i == 4 || (i == 6 && *p != 0)) {
-				alt = p;
-			}
-		} while (i < n);
-	}
-	if (*p == 0) {
-		if ((char) a2 == 4) {
+	while (i < a1 - 1) {
+		len = 0;
+		while (p[len++] != 0) {
+		}
+		p = p + len - 1;
+		if (p == 0) {
 			return a0;
 		}
-		if ((char) a2 == 8) {
+		p++;
+		i++;
+		if (i == 4 || (i == 6 && *p != 0)) {
+			alt = p;
+		}
+	}
+	if (*p == 0) {
+		if (mode_c == 4) {
+			return a0;
+		}
+		if (mode_c == 8) {
 			p = alt;
 		}
 	}
