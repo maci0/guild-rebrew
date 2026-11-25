@@ -241,14 +241,13 @@ void __cdecl fcn_00506e70(unsigned short* entity, char* outputText, int a2)
 		return;
 	}
 	i = 0;
-	while (i <= 5) {
+	do {
+		if (i >= 6)
+			break;
 		io_FormatTextBuffer(buf, (int) "%1G$A", list[i]);
 		strcat(outputText, buf);
 		i++;
-		if (count <= i) {
-			return;
-		}
-	}
+	} while (i < count);
 	if (count <= i) {
 		return;
 	}

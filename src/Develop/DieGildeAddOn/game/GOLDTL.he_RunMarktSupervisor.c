@@ -50,8 +50,8 @@ extern unsigned char g_7747b0;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern float g_6628a8;
 extern float g_662948;
-extern float g_664198;
-extern float g_665ea0;
+
+
 extern double g_662930;
 extern double g_6629c8;
 extern double g_6640f8;
@@ -156,7 +156,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		d = (double) v * g_665dd0;
 		uf.f = (float) (rec.f34 * 0.0714285746f * d);
 		up.n = gm_RandomMod(100) & 0xffff;
-		uf.f = (up.n + g_665ea0) * uf.f * 0.01f;
+		uf.f = (up.n + 20.0f) * uf.f * 0.01f;
 		if (uf.f != g_6628a8) {
 			if (g_6628a0 > uf.f) {
 				uf.f = 1.0f;
@@ -274,7 +274,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 				if (t == 0) {
 					rec.f24 = rec.f20 * 1.5f;
 				} else {
-					rec.f24 = rec.f20 * g_664198;
+					rec.f24 = rec.f20 * 1.2f;
 				}
 			}
 		}

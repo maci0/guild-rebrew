@@ -12,9 +12,9 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 extern unsigned int g_666028;
 extern unsigned int g_66602c;
-extern float g_664178;
+
 extern float g_6628bc;
-extern float g_66414c;
+
 
 /* SIZE 0x24d: building prototype row of lpGebaeudePROT (0x868050) */
 typedef struct {
@@ -67,9 +67,9 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 			lo = 0;
 			hi = 0;
 			if (rec[0] > 0x1f) {
-				hi = 1 << (rec[0] - 0x20);
+				hi = 1U << ((rec[0] - 0x20) & 31);
 			} else {
-				lo = 1 << rec[0];
+				lo = 1U << rec[0];
 			}
 			if (*(unsigned short*) (p + 0x27) == *(unsigned short*) entity
 				&& ((g_666028 & lo) || (g_66602c & hi))) {
@@ -80,7 +80,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 				/* scan address and money value share one stack slot in the
 				 * native body; every hit path returns before the scan resumes */
 				p = fcn_0050d320(entity, g_773d75);
-				p = (int) ((float) p * g_664178);
+				p = (int) ((float) p * 0.66f);
 				out.kind = 0;
 				out.f1 = 0;
 				out.f2 = 0;
@@ -182,7 +182,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 					out.kind = 4;
 					out.f1 = *(int*) (q + 1);
 					out.f2 = 1;
-					need = (int) ((float) fcn_0050d170(v) * g_66414c);
+					need = (int) ((float) fcn_0050d170(v) * 0.3f);
 					if (!fcn_004a4bb0(a0, entity, a2, &cmd, &out, 0))
 						return 0;
 					if (p < need) {

@@ -38,6 +38,7 @@ typedef struct {
 extern int g_1038144[];
 extern char g_1015f40[];
 extern int g_14a79c0[];
+extern char* g_14b52c0;
 
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_00466ee0(int, int, int, int, int);
@@ -188,7 +189,7 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 		((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1dc = 4;
 		((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1e0 = 0;
 		sprintf((char*) &((D2_CONTROL_TL*) g_1015ea0)[r->icon] + 0xcc, "%s~ %li %s",
-				((unsigned int*) g_14a79c0)[r->id * 2], r->f30, *(char**) 0x14b52c0);
+				((unsigned int*) g_14a79c0)[r->id * 2], r->f30, g_14b52c0);
 		if (r->icon >= 0) {
 			fcn_00469c40(w->left + r->x + 0xf, w->top + r->y + 6, r->icon);
 		}

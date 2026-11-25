@@ -122,7 +122,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
     d2_SetForm(windowId,2);
     io_AppendText(0x1875);
     if ((*(unsigned short *)&g_7f4c04) > 0xb) {
-      v26 = *(float *)(v7 + 0x5c) * (*(float *)0x664178) - (*(float *)0x6628ac);
+      v26 = *(float *)(v7 + 0x5c) * 0.66f - 0.02f;
       goto label_5a15b5;
     }
   }
@@ -133,7 +133,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
     v29 = fcn_00472250(windowId,3,io_AppendText(0x1877));
     v28 = fcn_00472250(windowId,3,io_AppendText(0x1878));
     v30 = fcn_00472250(windowId,3,io_AppendText(0x1879));
-    v26 = *(float *)(v7 + 0x5c) * (*(float *)0x664178) - (*(float *)0x662a3c);
+    v26 = *(float *)(v7 + 0x5c) * 0.66f - 0.1f;
 label_5a15b5:
     *(float *)(v7 + 0x5c) = v26;
   }

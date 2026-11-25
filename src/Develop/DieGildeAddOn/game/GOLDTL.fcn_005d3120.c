@@ -149,7 +149,7 @@ int __cdecl fcn_005d3120(int entity, int* request)
 					{
 						float f;
 
-						f = (float) d * *(float*) 0x665bc0;
+						f = (float) d * (1.0f / 9.0f);
 						if (!(f > g_6628a8)) {
 							f = g_6628a8;
 						}

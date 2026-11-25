@@ -46,12 +46,12 @@ int __cdecl fcn_0052b230(void)
 				*(float*) 0x7e26f0 = d[0];
 				*(float*) 0x7e26f4 = *(float*) (p + 0x88);
 				*(float*) 0x7e26f8 = *(float*) (p + 0x8c);
-				*(float*) 0x7e26f0 = (float) fmod(*(float*) 0x7e26f0, g_662958);
+				*(float*) 0x7e26f0 = (float) fmod(*(float*) 0x7e26f0, 6.2831854820251465);
 			} else {
 				*(float*) 0x7e26f0 = *(float*) (p + 0x84);
 				*(float*) 0x7e26f4 = *(float*) (p + 0x88) - (float) ((int) mx - *(int*) 0x774738) * g_662a70;
 				*(float*) 0x7e26f8 = *(float*) (p + 0x8c);
-				*(float*) 0x7e26f4 = (float) fmod(*(float*) 0x7e26f4, g_662958);
+				*(float*) 0x7e26f4 = (float) fmod(*(float*) 0x7e26f4, 6.2831854820251465);
 			}
 			d3_SetObjectRotation(p, (float*) 0x7e26f0);
 			p = d3_ActiveCamera;

@@ -164,9 +164,9 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 							req.c30 = g_7f4c08;
 							req.c34 = g_7f4c0c;
 							req.id = *(unsigned short*) (g_779160 + k * 0x58);
-							req.f68 = *(unsigned int*) (building + 1);
-							req.f6c = *(unsigned int*) (q + 2);
+							req.f68 = req.f12;
 							req.f70 = *(unsigned int*) (r + 2);
+							req.f6c = *(unsigned int*) (q + 2);
 							m = fcn_004c5530(&req);
 							while (!fcn_004c4450(m))
 								fcn_005373e0(0, 0x20007);

@@ -262,13 +262,9 @@ i1next:
 			cand = (unsigned int) (t * *(int*) (r2 + 0x1c)) >> 2;
 			lim = gm_GetMsgField(e2, r2) - cand;
 		}
-		m = lim;
-		if (left / amt <= m) {
-			m = left / amt;
-		}
-		if (m < 0) {
-			m = 0;
-		}
+		t = left / amt;
+		m = lim < t ? lim : t;
+		m = m < 0 ? 0 : m;
 		if (m != 0) {
 			*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (q + 2),
 			    *(int*) (e2 + 2), *(unsigned short*) r2, m, g_773d75, amt);

@@ -1,3 +1,5 @@
+extern unsigned short g_774970;
+extern unsigned char g_773d75;
 /* Reconstructed from native disassembly; stack slots bound to the native frame offsets. */
 
 #include <math.h>
@@ -192,17 +194,17 @@ label_5be43c:
         if (v6)
           v8 += *(int *)(v6 + 0xb4);
         v9 = fcn_005bdfc0(v4,v2,v15,v8);
-        fcn_0050b810(*(unsigned int *)((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4e18),(*(unsigned char *)0x773d75));
+        fcn_0050b810(*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4e18),g_773d75);
         if (v9 != 1) { // branch-flip
-          if ((v9 == 2) && (v11 = (*(unsigned char *)0x773d75), v15 = (unsigned int)(*(unsigned short *)0x774970), fcn_00526010(v15 * 0x21c + 0x7f4ca0,8000,v11))) {
-            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca4),(*(unsigned char *)0x773d75),8000);
+          if ((v9 == 2) && (v11 = g_773d75, v15 = (unsigned int)g_774970, fcn_00526010(v15 * 0x21c + 0x7f4ca0,8000,v11))) {
+            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,8000);
             v12 = fcn_004c4450(v11);
             while (!v12) {
               fcn_00535960();
               v12 = fcn_004c4450(v11);
             }
             if (fcn_004c4450(v11) == 1) {
-              v12 = fcn_00509570((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca0);
+              v12 = fcn_00509570((unsigned int)g_774970 * 0x21c + 0x7f4ca0);
               if (v12)
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 8000;
               if (!v6) {
@@ -234,16 +236,16 @@ label_5be43c:
           }
         }
         else {
-          v10 = fcn_00526010((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca0,8000,(*(unsigned char *)0x773d75));
+          v10 = fcn_00526010((unsigned int)g_774970 * 0x21c + 0x7f4ca0,8000,g_773d75);
           if (v10) {
-            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca4),(*(unsigned char *)0x773d75),8000);
+            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,8000);
             v12 = fcn_004c4450(v11);
             while (!v12) {
               fcn_00535960();
               v12 = fcn_004c4450(v11);
             }
             if (fcn_004c4450(v11) == 1) {
-              v12 = fcn_00509570((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca0);
+              v12 = fcn_00509570((unsigned int)g_774970 * 0x21c + 0x7f4ca0);
               if (v12)
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 8000;
               if (v3) // branch-flip
@@ -277,19 +279,19 @@ label_5be970:
           }
         }
       } else { // branch-flip
-        if ((((*(int *)0x67d370) == v28) && (0 <= (*(signed char *)0x7747b0))) && (v11 = (*(unsigned char *)0x773d75),
-             v15 = (unsigned int)(*(unsigned short *)0x774970), fcn_00526010(v15 * 0x21c + 0x7f4ca0,0x3200,v11))) {
+        if ((((*(int *)0x67d370) == v28) && (0 <= (*(signed char *)0x7747b0))) && (v11 = g_773d75,
+             v15 = (unsigned int)g_774970, fcn_00526010(v15 * 0x21c + 0x7f4ca0,0x3200,v11))) {
           io_FormatTextBuffer(v26,0x113,0x3200);
           v13 = fcn_00526120(v26,0x101);
           if (v13) {
-            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca4),(*(unsigned char *)0x773d75),0x3200);
+            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,0x3200);
             v12 = fcn_004c4450(v11);
             while (!v12) {
               fcn_00535960();
               v12 = fcn_004c4450(v11);
             }
             if (fcn_004c4450(v11) == 1) {
-              v12 = fcn_00509570((unsigned int)(*(unsigned short *)0x774970) * 0x21c + 0x7f4ca0);
+              v12 = fcn_00509570((unsigned int)g_774970 * 0x21c + 0x7f4ca0);
               if (v12)
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 0x3200;
               if (!v7) {

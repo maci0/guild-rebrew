@@ -46,7 +46,7 @@ void __cdecl fcn_005b0230(char* town)
 	char* obj;
 	char* p;
 	int* tab;
-	int offs[16] = { 0, -1, 1, 0, 1, 0, 1, 1, 0, 1, -1, 1, -1, 0, -1, -1 };
+	int offs[16];
 	int tex;
 	int base_x;
 	int base_y;
@@ -70,6 +70,23 @@ void __cdecl fcn_005b0230(char* town)
 	idx = g_773d75 * 0x2f4;
 	base_x = *(int*) (idx + 0x86834c);
 	base_y = *(int*) (idx + 0x868350);
+
+	offs[0] = 0;
+	offs[1] = -1;
+	offs[2] = 1;
+	offs[3] = 0;
+	offs[4] = 1;
+	offs[5] = 0;
+	offs[6] = 1;
+	offs[7] = 1;
+	offs[8] = 0;
+	offs[9] = 1;
+	offs[10] = -1;
+	offs[11] = 1;
+	offs[12] = -1;
+	offs[13] = 0;
+	offs[14] = -1;
+	offs[15] = -1;
 
 	slot = (ScrollSlot*) (town + 0xdc);
 	for (i = 0x100; i != 0; i--) {

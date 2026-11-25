@@ -4,6 +4,10 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_100f1dc;
 extern int g_100f1e4;
+extern int g_14abe74;
+extern int g_14abe78;
+extern int g_14abe80;
+extern int g_14abe84;
 extern char* g_1015ea0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
@@ -99,14 +103,14 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 	surnameField = fcn_00472250(dlg, 2, io_AppendText(0x1ad1, 0x1ad3));
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x1ad4);
-	fcn_00533a60(d2_CurrentWindowId, 0x1c, v11, 2, *(int*) 0x14abe74,
-	    *(int*) 0x14abe78);
+	fcn_00533a60(d2_CurrentWindowId, 0x1c, v11, 2, g_14abe74,
+	    g_14abe78);
 	s1a = (char*) v11[0];
 	s1b = (char*) v11[1];
 	d2_SetForm(dlg, 4);
 	io_AppendText(0x1ad7);
-	fcn_00533a60(d2_CurrentWindowId, 0x1c, v11, 2, *(int*) 0x14abe80,
-	    *(int*) 0x14abe84);
+	fcn_00533a60(d2_CurrentWindowId, 0x1c, v11, 2, g_14abe80,
+	    g_14abe84);
 	s2a = (char*) v11[0];
 	s2b = (char*) v11[1];
 	d2_SetForm(dlg, 5);

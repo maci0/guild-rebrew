@@ -24,7 +24,6 @@ extern Win_1015f40 g_1015f40[0x60];
 
 extern float g_6628a8;
 
-extern float g_662b10;
 extern double g_6640e8;
 extern double g_662c38;
 
@@ -114,7 +113,7 @@ header_done:
 	}
 	if (flags & 1) {
 		e = he_StartHandlungSearch(2, 0, 0xd, 3, *(int*) (g_7e2aa0 + 1));
-		ratio = g_662b10;
+		ratio = 0.05f;
 		if (e != 0) {
 			if (*(int*) (e + 0x70) >= 4) {
 				ratio = (float) *(int*) (e + 0xc8) / (float) *(int*) (e + 0xc4);

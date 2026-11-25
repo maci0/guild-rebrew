@@ -429,11 +429,11 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 					v23[1] = v40 - v35;
 					v23[2] = v28 - v36;
 					*(float*) (v11 * 0xc0 + 0x14 + *(int*) (animation + 0x15c))
-						= v23[0] * *(float*) 0x662c30;
+						= v23[0] * 0.00392156886f;
 					*(float*) (v11 * 0xc0 + 0x18 + *(int*) (animation + 0x15c))
-						= v23[1] * *(float*) 0x662c30;
+						= v23[1] * 0.00392156886f;
 					*(float*) (v11 * 0xc0 + 0x1c + *(int*) (animation + 0x15c))
-						= v23[2] * *(float*) 0x662c30;
+						= v23[2] * 0.00392156886f;
 					v4 = v11 * 0xc0 + 4 + *(int*) (animation + 0x15c);
 					*(int*) v4 = *(int*) v4 * 3;
 					v4 = (int) m_alloc(v22 * 3, (char*) 0x67b8a0);

@@ -6,9 +6,9 @@ extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
 extern float g_6628a0;
 extern float g_664154;
-extern float g_662cf8;
-extern float g_665ec0;
-extern float g_662c98;
+
+
+
 extern int lpGebaeudePROT;
 extern char g_6a6560[];
 extern char g_6a654c[];
@@ -352,7 +352,7 @@ void __cdecl fcn_00561380(void *action)
 				pos + 4, 400, 6, *(int *)color);
 			fcn_004185a0(v10, pos, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f, 4.0f, 7.0f, 8.0f,
 				*(int *)color);
-			fcn_00417d00(v10, pos, (int)(v24 * g_662c98), v24 * g_665ec0, v24 * g_662cf8,
+			fcn_00417d00(v10, pos, (int)(v24 * 40.0f), v24 * 140.0f, v24 * 100.0f,
 				20.0f, 60.0f, 0x50);
 		label_562049:
 			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&gm_GameTime;

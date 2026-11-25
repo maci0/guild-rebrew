@@ -76,7 +76,7 @@ void __cdecl fcn_00483480(int entityRecord)
 	fcn_00488a20(entityRecord);
 	fcn_00488e10(entityRecord);
 	fcn_004833a0(entityRecord);
-	mode = *(short *) 0x7f4c04;
+	mode = (short) g_7f4c04;
 	if (mode == 8 || mode == 0xd) {
 		if ((*(unsigned int *) (entityRecord + 0x1b4) & 0x100) == 0) {
 			*(unsigned short *) (entityRecord + 0x1bc) = 0;

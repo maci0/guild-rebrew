@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-extern float g_6628cc;
+
 
 extern float g_665ef8;
 extern int gm_GameTime;
@@ -101,7 +101,7 @@ void __cdecl fcn_005797a0(char* event)
 		} else {
 			fvalue = (float) fcn_0050c710(search, 0x1e, 1) * 0.01f;
 			if (handle == 3 && (search[0x5b] & 0x20) == 0)
-				fvalue = fvalue - g_6628cc;
+				fvalue = fvalue - 0.5f;
 		}
 		increment = (fvalue + 1.0f) * (float) value * g_665ef8;
 		if (valid >= 1) {

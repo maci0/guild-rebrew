@@ -25,7 +25,7 @@ extern char s_68dee8[];
 extern char s_68dee0[];
 extern char s_6b5c60[];
 
-extern double g_6629c8;
+
 extern double g_6640e8;
 extern int main_Instance;
 extern int ahm_PlayerPrototypeCount;
@@ -121,10 +121,10 @@ unsigned int __cdecl fcn_004ed240(void)
 		f = atof(out) * 0.01;
 		if (f > 0.0) {
 			f = atof(out) * 0.01;
-			if (f < g_6629c8) {
+			if (f < 1.0) {
 				goto clamp_low;
 			}
-			f = g_6629c8;
+			f = 1.0;
 		}
 		else {
 clamp_low:
@@ -141,10 +141,10 @@ clamp_low:
 		f = atof(out) * 0.01;
 		if (f > 0.0) {
 			f = atof(out) * 0.01;
-			if (f < g_6629c8) {
+			if (f < 1.0) {
 				goto clamp_low2;
 			}
-			f = g_6629c8;
+			f = 1.0;
 		}
 		else {
 clamp_low2:

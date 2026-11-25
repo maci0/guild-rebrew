@@ -150,7 +150,7 @@ void __cdecl fcn_0054bc90(char* action)
 			*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 			return;
 		}
-		if (*(int*) 0x100f884 != *(int*) (*(int*) (action + 0x74) + 8))
+		if (g_100f884 != *(int*) (*(int*) (action + 0x74) + 8))
 			return;
 		v11 = -1;
 		if (*(int*) &g_100f1dc == -1)

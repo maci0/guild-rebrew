@@ -412,7 +412,11 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 		if (obj->anzahl_mat > 0xfe) {
 			fcn_00401360(stream, pol->material);
 		} else {
-			vfs_WriteByte(stream, pol->material == -1 ? (char) 0xff : (char) pol->material);
+			if (pol->material == -1) {
+				vfs_WriteByte(stream, (char) 0xff);
+			} else {
+				vfs_WriteByte(stream, (char) pol->material);
+			}
 		}
 	}
 	for (i = 0; i < obj->anzahl_mat; i++) {

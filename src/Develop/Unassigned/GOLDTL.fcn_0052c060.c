@@ -290,9 +290,10 @@ predict:
 		q.z = d.y * (float) cos(ang) - d.x * (float) sin(ang);
 	}
 	v.x = d.x;
+	cam = (View*) d3_ActiveCamera;
 	v.x = cam->pos.x + q.x;
 	v.y = cam->pos.y;
-	v.z = cam->pos.z + d.y;
+	v.z = cam->pos.z + q.z;
 	if (CompareVector3WithinTolerance(&g_773e14, (float*) &v, 0.1f) == 0) {
 		if (*(int*) (g_67a370 + 0xb0) != 0) {
 			ent = *(char**) (g_67a370 + 0xb0);

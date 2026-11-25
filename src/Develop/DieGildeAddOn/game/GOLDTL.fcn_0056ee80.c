@@ -18,7 +18,7 @@ extern char s_6a6a40[];
 extern char s_68be9c[];
 extern char s_68bea4[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern double g_665ed0;
+
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -285,7 +285,7 @@ label_1bc:
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		h = (int) fcn_00502cd0(*(int*) (rec1 + 0x5d), 2, 6, 0, 0x2a);
 		fcn_0050c5d0((char*) rec1, req);
-		val = (int) (*(int*) req * g_665ed0);
+		val = (int) (*(int*) req * 0.35);
 		io_FormatTextBuffer(str, 0x68bea4, val);
 		strcat(msg, str);
 		fcn_004c5150(*(int*) (ent + 4), *(int*) (row + 4), g_773d75, val);

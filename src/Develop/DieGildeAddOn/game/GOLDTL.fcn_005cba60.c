@@ -35,7 +35,7 @@ int __cdecl fcn_005cba60(unsigned short* who, unsigned int max, Item5cba60* out,
 	}
 	if (max != 0) {
 		memset(out, 0, max * 0x38);
-		for (i = 0; i < (max < count ? max : count); i++, out++) {
+		for (i = 0; i < (count <= max ? count : max); i++, out++) {
 			out->house = ps[i];
 			fcn_005ca560(out);
 			out->value = fcn_005cf720(*who, *out->house, kind, 0);

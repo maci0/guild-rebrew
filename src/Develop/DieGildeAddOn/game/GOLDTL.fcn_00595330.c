@@ -68,12 +68,12 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 	int i;
 
 	ent = 0;
-	if (*(int*) 0x7746c4 == 0) {
-		if (*(int*) 0x7746c8) {
-			ent = (char*) *(int*) 0x7746c8;
+	if (g_7746c4 == 0) {
+		if (g_7746c8) {
+			ent = (char*) g_7746c8;
 		}
 	} else {
-		ent = (char*) *(int*) 0x7746c4;
+		ent = (char*) g_7746c4;
 	}
 	gm_GetBuildingTypeCategory((unsigned char) *ent);
 	d2_SetForm(windowId, 0);

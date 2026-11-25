@@ -86,9 +86,9 @@ void __cdecl fcn_00557460(char* dlg)
 			mask = 0;
 			mask2 = 0;
 			if (kind > 0x1f) {
-				mask2 = 1 << (kind - 0x20);
+				mask2 = 1u << ((kind - 0x20) & 0x1f);
 			} else {
-				mask = 1 << kind;
+				mask = 1u << kind;
 			}
 			if (((mask & 0xa7fcc3a6) || (mask2 & 1))
 			    && *(int*) (hit + 1) != *(int*) (dlg + 0xb0)) {

@@ -13,7 +13,7 @@ typedef struct {
   unsigned char count;
 } Party5c18e0;
 extern pos14_7f4c00 gm_GameTime;
-extern int g_666018, g_66601c, d2_CurrentWindowId, g_774654; extern unsigned short g_774970;
+extern int g_100f1dc, g_14ce8e0, d2_CurrentElementId; extern int g_666018, g_66601c, d2_CurrentWindowId, g_774654; extern unsigned short g_774970;
 int __cdecl fcn_00433780();
 int __cdecl fcn_00438b40();
 int __cdecl d3_SetObjectRotation();
@@ -162,9 +162,9 @@ label_5c221e:
       io_AppendText(0x1783,v5 + 0x177a);
     fcn_00494470(&party,0);
     io_AppendText(0x1784,party.text);
-    (*(int *)0x100f1dc) = -1;
+    g_100f1dc = -1;
     do {
-      if ((*(int *)0x14ce8e0))
+      if (g_14ce8e0)
         g_774654 = 1;
     } while (fcn_005373e0(0x5c18e0,0x677c7));
   }
@@ -175,7 +175,7 @@ label_5c221e:
     fcn_005340f0(d2_CurrentWindowId);
     d2_CenterDialogWindows(v9);
     d2_SetOverlayAnimation(0,0);
-    (*(int *)0x100f1dc) = 0xffffffff;
+    g_100f1dc = 0xffffffff;
     d2_SetForm(v9,1);
     io_AppendText(0x6811b0);
     io_AppendText(0x1772);
@@ -189,19 +189,19 @@ label_5c221e:
     } while (v6 < 5);
     v10 = fcn_00472250(v9,1,io_AppendText((char *)0x6ac5a4,v6 + 0x1773));
     v12 = a1;
-    (*(int *)0x100f1dc) = -1;
+    g_100f1dc = -1;
     v17[v18 & 0xff] = v10;
     v10 = v27;
     do {
-      if ((*(int *)0x14ce8e0)) {
+      if (g_14ce8e0) {
         v10 = 0;
         g_774654 = 1;
       }
-      if ((*(int *)0x100f1dc) != -1) {
+      if (g_100f1dc != -1) {
         v6 = 0;
         v18 = 0;
         do {
-          if ((*(int *)0x67d370) == v17[v18 & 0xff]) {
+          if (d2_CurrentElementId == v17[v18 & 0xff]) {
             fcn_004c4510(v12,*(unsigned int *)(v12 + 2));
             cm_AppendPacketFieldDelta(1,1,0x2c,&v18);
             fcn_004c5360();
@@ -233,19 +233,19 @@ label_5c221e:
         } while (v6 < 5);
         v12 = fcn_00472250(v9,1,io_AppendText((char *)0x6ac5a4,v6 + 0x177a));
         v10 = a1;
-        (*(int *)0x100f1dc) = -1;
+        g_100f1dc = -1;
         v17[v18 & 0xff] = v12;
         v12 = v27;
         do {
-          if ((*(int *)0x14ce8e0)) {
+          if (g_14ce8e0) {
             v12 = 0;
             g_774654 = 1;
           }
-          if ((*(int *)0x100f1dc) != -1) {
+          if (g_100f1dc != -1) {
             v6 = 0;
             v18 = 0;
             do {
-              if ((*(int *)0x67d370) == v17[v18 & 0xff]) {
+              if (d2_CurrentElementId == v17[v18 & 0xff]) {
                 fcn_004c4510(v10,*(unsigned int *)(v10 + 2));
                 cm_AppendPacketFieldDelta(1,1,0x2d,&v18);
                 fcn_004c5360();
@@ -280,7 +280,7 @@ label_5c221e:
         fcn_005340f0(d2_CurrentWindowId);
         d2_CenterDialogWindows(v9);
         d2_SetOverlayAnimation(0,0);
-        (*(int *)0x100f1dc) = -1;
+        g_100f1dc = -1;
         v12 = -1;
         do {
           if (v18) {
@@ -327,17 +327,17 @@ label_5c221e:
             if (!v10)
               fcn_00472640(buttons[0],0);
           }
-          if ((*(int *)0x100f1dc) != -1) {
-            if ((*(int *)0x14ce8e0)) {
+          if (g_100f1dc != -1) {
+            if (g_14ce8e0) {
               v27 = 0;
               g_774654 = 1;
             }
-            if ((*(int *)0x67d370) != v36) { 
-              if ((*(int *)0x67d370) != commit) { 
-                if ((*(int *)0x67d370) != v38) { 
+            if (d2_CurrentElementId != v36) { 
+              if (d2_CurrentElementId != commit) { 
+                if (d2_CurrentElementId != v38) { 
                   v10 = 0;
                   do {
-                    if ((*(int *)0x67d370) == *(int *)((int)v17 + v10)) {
+                    if (d2_CurrentElementId == *(int *)((int)v17 + v10)) {
                       *(unsigned int *)((int)v20 + v10) = 0;
                       v18 = 1;
                     }

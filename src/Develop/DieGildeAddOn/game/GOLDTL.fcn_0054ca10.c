@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca4[];
 #include "Develop/DieGildeAddOn/game/game_matrices.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern float g_664174;
+
 extern char g_6a5a48[];
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
@@ -194,7 +194,7 @@ void __cdecl fcn_0054ca10(char* e)
 			}
 			io_FormatTextBuffer(buf, 0x1d31, *(unsigned short*) b);
 			fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), buf, 0, 0x5f4, 0);
-			fcn_004c5480(*(int*) (pb + 4), 0x7c, g_664174 - *(float*) (pb + 0x7c));
+			fcn_004c5480(*(int*) (pb + 4), 0x7c, 1.1f - *(float*) (pb + 0x7c));
 		}
 		if (fcn_004f46e0((int) b, &rec, &hit) != 0) {
 			v = fcn_004f1790(*(int*) (rec + 0x65), hit);

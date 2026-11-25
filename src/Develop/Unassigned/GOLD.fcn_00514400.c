@@ -108,10 +108,10 @@ int __cdecl fcn_00514400(int a1, int a2, int a3, char* a4)
 	case 6:
 		if (p[0x40]) {
 			strcpy(a4, (char*) p + 0x40);
-		} else {
-			strcpy(a4, (char*) p + 0x30);
+			return 1;
 		}
-		goto fail_1;
+		strcpy(a4, (char*) p + 0x30);
+		return 1;
 	case 7:
 		if ((unsigned char) a2 == 2) {
 			if (ENDS_APOSTROPHE((char*) p + 0x40)) {

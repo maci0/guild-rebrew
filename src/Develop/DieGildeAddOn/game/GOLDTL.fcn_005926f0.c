@@ -281,7 +281,7 @@ int __cdecl fcn_005926f0(void)
 		}
 	next:
 		(*(int*)0x100f1dc) = -1;
-		if (*(int*)((char*)*(int*)0x779ce4 + 4) != 0) {
+		if (g_779ce4[1] != 0) {
 			if (fcn_004ce090()) {
 				g_774654 = 1;
 			} else {
@@ -292,7 +292,7 @@ int __cdecl fcn_005926f0(void)
 				fcn_00593360();
 				fcn_00593550();
 				fcn_005941e0();
-				*(int*)((char*)*(int*)0x779ce4 + 4) = 0;
+				g_779ce4[1] = 0;
 			}
 		}
 	last:

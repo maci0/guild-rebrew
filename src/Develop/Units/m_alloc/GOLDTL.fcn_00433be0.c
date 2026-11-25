@@ -231,22 +231,22 @@ char* __cdecl d3_CreateMorphAnimation(char* a0, char* a1, char* a2, char* a3, ch
 			rx = maxx - minx;
 			ry = maxy - miny;
 			rz = maxz - minz;
-			*(float*) (*(int*) (p + 0x15c) + 0xd4) = rx * *(float*) 0x662c30;
-			*(float*) (*(int*) (p + 0x15c) + 0xd8) = ry * *(float*) 0x662c30;
-			*(float*) (*(int*) (p + 0x15c) + 0xdc) = rz * *(float*) 0x662c30;
+			*(float*) (*(int*) (p + 0x15c) + 0xd4) = rx * 0.003921568859368563f;
+			*(float*) (*(int*) (p + 0x15c) + 0xd8) = ry * 0.003921568859368563f;
+			*(float*) (*(int*) (p + 0x15c) + 0xdc) = rz * 0.003921568859368563f;
 			invx = 1.0f / rx;
 			invy = 1.0f / ry;
 			invz = 1.0f / rz;
 			for (i = 0; i < *(int*) (p + 0x140); i++) {
 				*(unsigned char*) (*(int*) (*(int*) (p + 0x15c) + 0x174) + i * 3) =
 				    (unsigned char) ((*(float*) (r + i * 0x10) - minx) *
-					*(float*) 0x6628a4 * invx);
+					255.0f * invx);
 				*(unsigned char*) (*(int*) (*(int*) (p + 0x15c) + 0x174) + i * 3 + 1) =
 				    (unsigned char) ((*(float*) (r + i * 0x10 + 4) - miny) *
-					*(float*) 0x6628a4 * invy);
+					255.0f * invy);
 				*(unsigned char*) (*(int*) (*(int*) (p + 0x15c) + 0x174) + i * 3 + 2) =
 				    (unsigned char) ((*(float*) (r + i * 0x10 + 8) - minz) *
-					*(float*) 0x6628a4 * invz);
+					255.0f * invz);
 			}
 			m_FreeTracked(r);
 		}

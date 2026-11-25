@@ -299,7 +299,7 @@ build_other:
 					    fcn_00519190(0x17a9));
 			}
 after_build:
-			if (*(int*) 0x774800 != 0)
+			if (g_774800 != 0)
 				v.h5c = fcn_00472250(dlg, 1,
 				    fcn_00519190(0x1ba7));
 			changed = 0;
@@ -318,7 +318,7 @@ after_build:
 		}
 		if (g_14ce8e0 != 0 && tp_d2_SelectedControl == 0)
 			g_774654 = 1;
-		if (*(int*) 0x100f1dc == -1)
+		if (g_100f1dc == -1)
 			goto loop_test;
 		if (d2_CurrentElementId == v.h34) {
 			fcn_00471af0(dlg, 0);
