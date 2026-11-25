@@ -46,7 +46,6 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 	int k;
 	int y;
 	int n;
-	int found;
 	int status;
 	int off;
 	int span;
@@ -101,18 +100,16 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 			if (p->a[k] == 0) {
 				continue;
 			}
-			found = -1;
 			for (n = 0; n < stock[1]; n++) {
 				if ((int) *(unsigned short*) ((unsigned char*) stock + 0x48 + n * 2) == p->a[k]) {
-					found = n;
 					break;
 				}
 			}
-			if (!(found >= 0)) {
+			if (n >= stock[1]) {
 				status = 2;
 				((D2_CONTROL_TL*) (g_1015ea0))[p->d[k]].value_1e4 = 0x74f;
 			} else {
-				if (!((int) *(unsigned short*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[p->x0]) + off) <= *(int*) ((unsigned char*) stock + 0x68 + found * 4))) {
+				if (!((int) *(unsigned short*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[p->x0]) + off) <= *(int*) ((unsigned char*) stock + 0x68 + n * 4))) {
 					((D2_CONTROL_TL*) (g_1015ea0))[p->d[k]].value_1e4 = 0x74e;
 					if (status <= 1) {
 						status = 1;

@@ -597465,29 +597465,29 @@ updated_at = "2026-11-07T22:26:24+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 cflags = "/O2 /Gd /G6"
-similarity = 47.686832740213525
+similarity = 49.11032028469751
 
 ["GOLDTL.0x0049c880".verification]
-source_hash = "a606f0f5abf63709b3777163dde829d1892a19752227df7857369fbe6f81408f"
+source_hash = "4aec1c5e9909c97e17e4c76a8c1336db91ae83f628690b51acd518f8822bc540"
 reference_hash = "c05a50852898696af5ff42bea909f9d4b532bb27e7568095b6ea7f0ee922513b"
 reference_size = "474"
 headers_hash = "e8d6fd7fd7addff86e542bfd2cc2cb8c8c148c5d545b3a80f2903fd5d830a416"
-compiler_hash = "410fcd7e311a12ca3ee35004a099a0bdd762b0c23d281dd24eb14e48730acb17"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd /G6"
 module = "GOLDTL"
 va = "0x49c880"
 context_hash = ""
-defines = "[]"
-input_hash = "221a4b1dc689c2170dcf3d991ff0aaae0d339660e7fc36df07a32b568355e904"
-aligned_pairs = 67
+defines = "(none)"
+input_hash = "f0ce7081b53c93d4a8bd416157f07d27000803476c575ef2146036a31e478628"
+aligned_pairs = 69
 target_instructions = 147
 candidate_instructions = 134
-hunks = 27
-similarity = 47.686832740213525
+hunks = 23
+similarity = 49.11032028469751
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-20T06:32:22+00:00"
+measured_at = "2026-11-25T03:05:07+00:00"
 
 [["GOLDTL.0x0049c880".status_history]]
 old_status = "STUB"
@@ -605956,29 +605956,29 @@ updated_by = "fix-sizes"
 updated_at = "2026-10-29T11:14:46+00:00"
 status = "SIZE_MISMATCH"
 blocker = "faithful body 712B vs native 694B, 47/712; GM_RandomMod loop and 0x7f4ca0 table stride codegen differ"
-similarity = 77.13004484304933
+similarity = 85.90604026845638
 
 ["GOLDTL.0x00493200".verification]
-source_hash = "d1f05efd25862898b897bb6f9f8baa5f5780f5d67857a6bf0ffb69592c04c999"
+source_hash = "2fe9afef2d489364750c7571c23ef442f022c2d71a81c2b727a34c40ad7a4762"
 reference_hash = "ec680da8624b72584a0f2a19ce45d48d9ed3c87fc888dd28bf5d4b205ec5d841"
 reference_size = "694"
 headers_hash = "d2a840a59f39fcf2b71c6f7d253f24c1f406e91d0b44c8583a9168e9a2a1d19d"
-compiler_hash = "410fcd7e311a12ca3ee35004a099a0bdd762b0c23d281dd24eb14e48730acb17"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x493200"
 context_hash = ""
-defines = "[]"
-input_hash = "7c9e4878a35461c44317d15b3aa268ef7b46c0bcfc3fe2f32f462afcd01fcb09"
-aligned_pairs = 172
+defines = "(none)"
+input_hash = "6f3d605a1a0b03eea6fb005e9f64dae885a435bee1ce66f6d946780bd1e547e7"
+aligned_pairs = 192
 target_instructions = 223
-candidate_instructions = 223
-hunks = 35
-similarity = 77.13004484304933
+candidate_instructions = 224
+hunks = 25
+similarity = 85.90604026845638
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-20T06:27:44+00:00"
+measured_at = "2026-11-25T03:04:24+00:00"
 
 [["GOLDTL.0x00493200".status_history]]
 old_status = "STUB"
@@ -606378,29 +606378,29 @@ updated_by = "fix-sizes"
 updated_at = "2026-11-12T14:14:38+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 69.76744186046511
+similarity = 70.15503875968993
 
 ["GOLDTL.0x004789e0".verification]
-source_hash = "2fc3bed1c49adedfad8a9fd03e6a768d8620dcf75266f58a9d769a139510947e"
+source_hash = "435c1d6cca59f219c5e29f5cfa0c4e9baa251ceb1d11f173ff2ea5492a888dcb"
 reference_hash = "74072aea9ef99443227824bdf9309c564db00dd99776b4949abd5c9aed087379"
 reference_size = "707"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "f8fb8d9ee05e8cfc09ea4e53f9c98b2e7a49aae69c1d2573f51ba782a083a047"
+headers_hash = "ac1925c64e7d27384b82e736c22819484dbdeaea639abe2d132c9655b8c6e64c"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x4789e0"
 context_hash = ""
-defines = "[]"
-input_hash = "057aca5db24e9a436bb21e91aa8549b3f55e83f427fe7ce6fae260dfd44d32a3"
-aligned_pairs = 180
+defines = "(none)"
+input_hash = "b06e27c4124e33f28b1c788a6add978ceff678f4d323e5a4d7b262738dac6168"
+aligned_pairs = 181
 target_instructions = 258
 candidate_instructions = 258
-hunks = 43
-similarity = 69.76744186046511
+hunks = 42
+similarity = 70.15503875968993
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-23T17:47:14+00:00"
+measured_at = "2026-11-25T03:10:47+00:00"
 
 [["GOLDTL.0x004789e0".status_history]]
 old_status = "STUB"
@@ -607186,29 +607186,29 @@ updated_by = "fix-sizes"
 updated_at = "2026-10-29T11:14:46+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 89.33002481389578
+similarity = 94.78908188585608
 
 ["GOLDTL.0x00558370".verification]
-source_hash = "3d39b783003c80d7fe2602af73f0f636819445949fbfc923620d43b78c7900e5"
+source_hash = "f1e022308b974a82bffde57109803a7cf020719996f9057f52fb5d98b1d82c05"
 reference_hash = "1bd1b48f56385dbdc8e9b19a5509910b18b6714ead7ed5a05b2e8d5f1643500e"
 reference_size = "781"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "00e0f61af27093da2ed9e32ef43d241f7dd73b00b4948021a8a5405a45761046"
+headers_hash = "f0596901cfed4f6dcde9814e040bff3243f7d572c6b9c32b0dc864b3f3d83bd8"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x558370"
 context_hash = ""
-defines = "[]"
-input_hash = "c6c28d1d74d937a397b73499f81153c05b4d34a5b6b3dc234bf10f6d87999b38"
-aligned_pairs = 180
+defines = "(none)"
+input_hash = "b57f356e60d254d9b5fbe4bcc7b46b7c813c41a4cd5877f735c7d0380dba93e4"
+aligned_pairs = 191
 target_instructions = 201
 candidate_instructions = 202
-hunks = 13
-similarity = 89.33002481389578
+hunks = 11
+similarity = 94.78908188585608
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-18T11:37:49+00:00"
+measured_at = "2026-11-25T03:07:08+00:00"
 
 [["GOLDTL.0x00558370".status_history]]
 old_status = "STUB"
@@ -607604,10 +607604,10 @@ updated_by = "test"
 updated_at = "2026-11-25T02:36:42+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 80.078125
+similarity = 81.32295719844358
 
 ["GOLDTL.0x004964e0".verification]
-source_hash = "3908ddb1ecf11a162e4d7b8b1a18e99d1bdb322171ddfddfaef57253cbc3c910"
+source_hash = "ddeb5a263ab3b5752c31353e80a73fc5ab148a973a1dc4fdc7b671096f7d4f29"
 reference_hash = "82188f5eba7484b8d7af231c0229d205c06f5f82ddfeb7017b64dffb6fae4c10"
 reference_size = "806"
 headers_hash = "87fcaf44f9aa888cc6d11016d2115c2e166f63f94a2a43085588c6a8436644e7"
@@ -607618,15 +607618,15 @@ module = "GOLDTL"
 va = "0x4964e0"
 context_hash = ""
 defines = "(none)"
-input_hash = "abcf9f9a2442cdf3055092cd660695c5a5c8d3c0060b463baccdf6143a470246"
-aligned_pairs = 205
+input_hash = "531abb43bee227c580b19588ea1b0db0c13e0745b2f8c214ac3d2f30eba250fb"
+aligned_pairs = 209
 target_instructions = 258
-candidate_instructions = 254
-hunks = 40
-similarity = 80.078125
+candidate_instructions = 256
+hunks = 42
+similarity = 81.32295719844358
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-25T02:36:42+00:00"
+measured_at = "2026-11-25T03:04:44+00:00"
 
 [["GOLDTL.0x004964e0".status_history]]
 old_status = "STUB"
@@ -608786,18 +608786,18 @@ blocker = "Application code — pending per-function decompilation"
 similarity = 78.72340425531915
 
 ["GOLDTL.0x0057c9f0".verification]
-source_hash = "a61765ee128cac9f91b1dac97c7a7fb6eb546b66886e7e736e85972dfa3449a5"
+source_hash = "5c0d33b5422813f3fd172d3fa8eea63aec90709d35f799c183c6c91281a0fccf"
 reference_hash = "f03588359c279214ed34f8f43aa860cf7d1fc411001711ee822dbce4fde8e21d"
 reference_size = "464"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "604f3c2c79db2131eb969d1543c5eaaa00bd5df9265b1782b48a34d9a17523b5"
+headers_hash = "f0596901cfed4f6dcde9814e040bff3243f7d572c6b9c32b0dc864b3f3d83bd8"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x57c9f0"
 context_hash = ""
-defines = "[]"
-input_hash = "ee8d5b50f75845d407343e4bb683982e226fa67ae1a80d23bd9e655ca0ef38a3"
+defines = "(none)"
+input_hash = "e5ef50d56f1c0ce1f0dc3e4893e0be5004b1ff15dcaa7be14a1182480e0f7537"
 aligned_pairs = 111
 target_instructions = 142
 candidate_instructions = 140
@@ -608805,7 +608805,7 @@ hunks = 24
 similarity = 78.72340425531915
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-16T22:38:19+00:00"
+measured_at = "2026-11-25T03:07:45+00:00"
 
 [["GOLDTL.0x0057c9f0".status_history]]
 old_status = "STUB"
@@ -610988,29 +610988,29 @@ updated_by = "fix-sizes"
 updated_at = "2026-10-29T11:14:46+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 43.76899696048632
+similarity = 45.59270516717325
 
 ["GOLDTL.0x00429920".verification]
-source_hash = "89741815d4abf7388c63835fe0257f76fa1394e74c56531889d6cef9cf83186f"
+source_hash = "4cf33545933a1e78a65805ab00836507074b0ef83f24db9a126add8064fc6304"
 reference_hash = "a3df4063ef81dd78d182b5b0efb01f0b4cf425bc5109a947b989c735ddfefef3"
 reference_size = "948"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "95104fbd80c1e609e30b13ef20b27b243f71e781f432fa5d79e9b296b7365371"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x429920"
 context_hash = ""
-defines = "[]"
-input_hash = "f264adf8bf9038d96a9057f0b634a359ed6bdbe27bb52dbab3900cad03538e6c"
-aligned_pairs = 72
+defines = "(none)"
+input_hash = "7829d82ed101f0d3ff39c9361cb72e05a53d715d077cf706a833680645f18e26"
+aligned_pairs = 75
 target_instructions = 165
 candidate_instructions = 164
 hunks = 40
-similarity = 43.76899696048632
-writer = "verify"
+similarity = 45.59270516717325
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-13T12:22:02+00:00"
+writer = "test"
+measured_at = "2026-11-25T03:13:17+00:00"
 
 [["GOLDTL.0x00429920".status_history]]
 old_status = "STUB"
@@ -612331,29 +612331,29 @@ updated_by = "fix-sizes"
 updated_at = "2026-10-29T11:14:46+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 77.41935483870968
+similarity = 94.21768707482994
 
 ["GOLDTL.0x005aeab0".verification]
-source_hash = "bc69a0256ec3611fa5128634b7b0b152774c096c5aa348689f064a2b439b8840"
+source_hash = "e0f5fa04bbd784510eadf094d3a8b3e77a5ddcb52fc016888852217908ddb53b"
 reference_hash = "f3978c44c915859b3dbbb22c9dde0bcbc8c3a066f7ac8c4ed426467e796a5575"
 reference_size = "990"
 headers_hash = "77b6eada342763d258d64162cda7e275ffd95645ddcc9151db0d07e295c8e618"
-compiler_hash = "00e0f61af27093da2ed9e32ef43d241f7dd73b00b4948021a8a5405a45761046"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x5aeab0"
 context_hash = ""
-defines = "[]"
-input_hash = "68e41e167069278207004c0e445c2a630cc51bb7dc4c97d0d57f56a891e189bb"
-aligned_pairs = 228
+defines = "(none)"
+input_hash = "1207c3e34642b5643f4bd0326bee93aa0a8673d83aa4ac9a7cfae983fa631443"
+aligned_pairs = 277
 target_instructions = 293
-candidate_instructions = 296
-hunks = 24
-similarity = 77.41935483870968
+candidate_instructions = 295
+hunks = 11
+similarity = 94.21768707482994
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-19T02:23:52+00:00"
+measured_at = "2026-11-25T03:08:58+00:00"
 
 [["GOLDTL.0x005aeab0".status_history]]
 old_status = "STUB"
@@ -612719,18 +612719,18 @@ blocker = "Application code — pending per-function decompilation"
 similarity = 89.81636060100166
 
 ["GOLDTL.0x0050d6d0".verification]
-source_hash = "d9289f6f6e6a4f44a6baec9e2ea559e1dcdbe5a71a79b48bb167c7192cbfbeeb"
+source_hash = "b0f5e80e7f35320371bb36b53d876e61fab8d43d92619fe5c3783ad44ed116ac"
 reference_hash = "760547d5738dcaf6fbc85be453b72535679113bb5246bc0b4f659536596f3946"
 reference_size = "1003"
-headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "00e0f61af27093da2ed9e32ef43d241f7dd73b00b4948021a8a5405a45761046"
+headers_hash = "be339bd759f0adac7ccefc3fc165d7df18d851e1c780e57de0d30664665616b4"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x50d6d0"
 context_hash = ""
-defines = "[]"
-input_hash = "3abc5c0e64917365669281ccf6b87f873953ea5484af55d825774110a1893a0c"
+defines = "(none)"
+input_hash = "9ef3855463f89cc869685fd43da23d2931866c067ecb14e9c2f6bb0ea14cec4e"
 aligned_pairs = 269
 target_instructions = 300
 candidate_instructions = 299
@@ -612738,7 +612738,7 @@ hunks = 30
 similarity = 89.81636060100166
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-19T06:47:56+00:00"
+measured_at = "2026-11-25T03:05:48+00:00"
 
 [["GOLDTL.0x0050d6d0".status_history]]
 old_status = "STUB"
@@ -614978,29 +614978,29 @@ updated_by = "rehome"
 updated_at = "2026-10-27T08:36:24+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Residence dialog; 65/1007, object 928B. Body covers dialog creation, the 4-slot building list, the message loop and the fcn_00532ef0 tail call, but the message-box structs built for 0x51af00 (ids 0x1a53/0x1a54/0x1a55/0x1a56) and 0x5cd440, and the 0x4c5530 notification record, are approximated by local int arrays; the tail-called 0x532ef0 body is contaminated into the pseudo file and must not be inlined."
-similarity = 73.41337907375643
+similarity = 80.34188034188034
 
 ["GOLDTL.0x0059fe60".verification]
-source_hash = "4c34f58b70fa708f4fa2521ee745e84b1104f7ed52a70e28dd0adf39e4045a2f"
+source_hash = "f4b9208a964b8feadf28a24e7769673852679a3141dbd21601ab0290da266cba"
 reference_hash = "3b2ccc1659c74f1ddb4c38aa6b58a3dbd89f7b6bfa9d1a68429785eea3626025"
 reference_size = "1007"
 headers_hash = "c0b75040efd82dc595f88e5ae3539d141ceef40cb0e86c8065cf7e235e470d02"
-compiler_hash = "072a1c82f881ee560e98990cd00a5daf0c1e0edb584f08c8d72aa25b82ad2a56"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x59fe60"
 context_hash = ""
-defines = "[]"
-input_hash = "8668ea9a1948497131710cb0c6b11b3ae3487beae2b3decd4aee5facb7f30643"
-aligned_pairs = 214
+defines = "(none)"
+input_hash = "5e2c73f52845e10e5c2322422d21e110b6941689c611ebac61b26dc08a13de43"
+aligned_pairs = 235
 target_instructions = 291
-candidate_instructions = 292
-hunks = 48
-similarity = 73.41337907375643
+candidate_instructions = 294
+hunks = 36
+similarity = 80.34188034188034
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-23T06:49:54+00:00"
+measured_at = "2026-11-25T03:12:41+00:00"
 
 [["GOLDTL.0x0059fe60".status_history]]
 old_status = "STUB"
@@ -617734,26 +617734,26 @@ blocker = "Application code — pending per-function decompilation"
 similarity = 75.54858934169279
 
 ["GOLDTL.0x00449130".verification]
-source_hash = "82655e678cba78d377c2e75a97f7d6eef8c5714859da7bc45d6696dccca09eb0"
+source_hash = "91af1b86d86a8af2ec463251fe5cd8562c10d01f2821098510d1bdf80bfb8976"
 reference_hash = "af3aa84a7be047f82014a083ba6c11ae4a51bff9968281b35a4d2dc538a463cc"
 reference_size = "1219"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "072a1c82f881ee560e98990cd00a5daf0c1e0edb584f08c8d72aa25b82ad2a56"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x449130"
 context_hash = ""
-defines = "[]"
-input_hash = "33a0a56370f2bd59c9fd031d4f9513b246fce497321d78689b163885e10c6274"
+defines = "(none)"
+input_hash = "ad6a46d8032df4177ed4c02f003dba562f0f5b3a57f2b2c2dec68fcd7f4bff6f"
 aligned_pairs = 241
 target_instructions = 318
 candidate_instructions = 320
-hunks = 44
+hunks = 43
 similarity = 75.54858934169279
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-23T09:24:14+00:00"
+measured_at = "2026-11-25T03:09:58+00:00"
 
 [["GOLDTL.0x00449130".status_history]]
 old_status = "STUB"
@@ -618268,29 +618268,29 @@ updated_at = "2026-10-27T08:36:09+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Frame/spill layout not reproduced: target sub esp,0x78 with six 4-byte slots at 0x78..0x64 (0x78 factor, 0x74 int result, 0x70 ratio, 0x6c unsigned-conversion high, 0x68 f2c copy) then v[8] at 0x60 and m[16] at 0x40; this body spills only three slots (sub esp,0x6c) so every esp displacement after the prologue is 12 bytes low and the source is 65 bytes short. Instruction-by-instruction semantics are decoded and correct; the gap is MSVC 6 x87 spill-slot and literal-pool reproduction."
 blocker_delta = 65
-similarity = 47.3015873015873
+similarity = 52.6984126984127
 
 ["GOLDTL.0x00587a50".verification]
-source_hash = "2b6e5e8d80b86c62efb5e6a706f30bc1035f22c19e96fb59651c143e1a44b542"
+source_hash = "2d76d1d1a62041601e7cc3000f6e8a979deb26e6fad97d6a1205ce0df7f9566d"
 reference_hash = "c69915e120ce3a3c3cfa263658b0566a7c8ba986ac1a585deebceb9a05c41fd6"
 reference_size = "1253"
-headers_hash = "87769ba78b78c734fd4a5613fce53d289ae7656610b5885acd9e13d9b1b5e124"
-compiler_hash = "db4a33fdfdedb3e31dfdb2bde49f931dfa5214b9bfa199537388689dd254874e"
+headers_hash = "ab2375d76da9e4ce20095955cfb78497f44d2639303996bd53ce7f69ba709987"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x587a50"
 context_hash = ""
-defines = "[]"
-input_hash = "d2550cf985457ff4c9a42d62a5c8a58d65109388946bf85cecfb46c538905566"
-aligned_pairs = 149
+defines = "(none)"
+input_hash = "5762ff790584599afaaa9bb662c410a08924b21688aea503c5920c73f3548365"
+aligned_pairs = 166
 target_instructions = 334
 candidate_instructions = 296
-hunks = 58
-similarity = 47.3015873015873
+hunks = 61
+similarity = 52.6984126984127
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-16T05:37:43+00:00"
+measured_at = "2026-11-25T03:11:13+00:00"
 
 [["GOLDTL.0x00587a50".status_history]]
 old_status = "STUB"
@@ -619697,29 +619697,29 @@ updated_by = "rehome"
 updated_at = "2026-10-27T08:32:15+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 40.45226130653266
+similarity = 42.96482412060301
 
 ["GOLDTL.0x00477590".verification]
-source_hash = "398dfd1e9d46c447a9b65a95dc8612d4661d8a2dfd75bc7d191e7371f698f120"
+source_hash = "464168054dc80eb33765aba8ff80f6cf67f143951c17a27b4f6f6352b9eb48f0"
 reference_hash = "2310cb73602d979e5b9f784cd4c3f404e2e2ca705d843c2dcfb6eaeb5c753185"
 reference_size = "1349"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "95104fbd80c1e609e30b13ef20b27b243f71e781f432fa5d79e9b296b7365371"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x477590"
 context_hash = ""
-defines = "[]"
-input_hash = "3a84a080b21721d03aa1057e01c337afa0e7361ae781c5106967c58f9c1b4a87"
-aligned_pairs = 161
+defines = "(none)"
+input_hash = "12f36a667ea25a5a988aa3effc643d1d206860207bff66d573e033c0413e5872"
+aligned_pairs = 171
 target_instructions = 399
 candidate_instructions = 397
-hunks = 68
-similarity = 40.45226130653266
-writer = "verify"
+hunks = 82
+similarity = 42.96482412060301
 status = "SIZE_MISMATCH"
-measured_at = "2026-11-13T12:22:02+00:00"
+writer = "test"
+measured_at = "2026-11-25T03:13:48+00:00"
 
 [["GOLDTL.0x00477590".status_history]]
 old_status = "STUB"
@@ -619736,29 +619736,29 @@ updated_by = "rehome"
 updated_at = "2026-10-27T08:36:24+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 62.41872561768531
+similarity = 63.97919375812744
 
 ["GOLDTL.0x00594de0".verification]
-source_hash = "7460e698d5a520d4cab558b84ec5ef0dae90d10ee80c2c3e8cb2c12e88f405e1"
+source_hash = "d45f2231a79440319b0061e2f9bd86dddcc440a82fa98de51a90ba897d1394d8"
 reference_hash = "cd744075f3ca6899ff6cfbccc5c2bee674b3e8a9cc9a427f9ace868d33a6c765"
 reference_size = "1353"
 headers_hash = "87c18bfedef36c326a349037597df497a557fb032d63e0a7a0a45048b27a9ebf"
-compiler_hash = "072a1c82f881ee560e98990cd00a5daf0c1e0edb584f08c8d72aa25b82ad2a56"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x594de0"
 context_hash = ""
-defines = "[]"
-input_hash = "72200fcf9717c050bb574da7188fade286e081bc172c3a32bf3e39b53cc3a611"
-aligned_pairs = 240
+defines = "(none)"
+input_hash = "88e0d3ded2efeda30d4be61546a5fbc25bd5def4bf012faf51a467b13a5bd7a7"
+aligned_pairs = 246
 target_instructions = 389
 candidate_instructions = 380
-hunks = 72
-similarity = 62.41872561768531
+hunks = 69
+similarity = 63.97919375812744
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-23T13:47:38+00:00"
+measured_at = "2026-11-25T03:12:09+00:00"
 
 [["GOLDTL.0x00594de0".status_history]]
 old_status = "STUB"
@@ -619775,29 +619775,29 @@ updated_by = "rehome"
 updated_at = "2026-10-27T08:35:24+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 83.12020460358056
+similarity = 86.18925831202046
 
 ["GOLDTL.0x00543080".verification]
-source_hash = "f483af146742dba3062c5edc5717eefc87d037c9b5e9ec9073aea5b353956af1"
+source_hash = "1288351d333c56cb35352ee4cb1b3e21da08964a5736b736faa83291668cdc29"
 reference_hash = "1c6b0d0029b08b704ca714cb3ddcf18718b1029e8f501f267506b151b289837c"
 reference_size = "1349"
 headers_hash = "a0f40a18d0a39f704b05547936705a1defbab330cea46418d77f1931834c4e83"
-compiler_hash = "410fcd7e311a12ca3ee35004a099a0bdd762b0c23d281dd24eb14e48730acb17"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x543080"
 context_hash = ""
-defines = "[]"
-input_hash = "39e680b777de57d5b8af3d5dd085a634a18d6b029b63eb4db324fe470be7527e"
-aligned_pairs = 325
+defines = "(none)"
+input_hash = "c02615db4d395141c41832c5d5794e114d53ba0a9e01070fea65b0de026d8a71"
+aligned_pairs = 337
 target_instructions = 387
 candidate_instructions = 395
 hunks = 35
-similarity = 83.12020460358056
+similarity = 86.18925831202046
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-20T06:12:30+00:00"
+measured_at = "2026-11-25T03:06:50+00:00"
 
 [["GOLDTL.0x00543080".status_history]]
 old_status = "STUB"
@@ -619814,29 +619814,29 @@ updated_by = "rehome"
 updated_at = "2026-10-27T08:34:54+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 34.64399574920298
+similarity = 53.65853658536586
 
 ["GOLDTL.0x00520310".verification]
-source_hash = "67e9845a1978d1fc000d47a990bd34d96c655f0eb4a119ec5230587a3eb3de4e"
+source_hash = "01a0cc2603f89cf2a7b4037af59d45fb3ae6a17b3fe2cb64ffa81a07a3365c3e"
 reference_hash = "d10daa0f4ed60582f2bd0a6348c8627542298f35f3a130dd93a4f4bafeb03571"
 reference_size = "1346"
-headers_hash = "e289c2c94926a9fcb7b524be5f14c82391ff4410901d2820d2a5fc9c64a5c688"
-compiler_hash = "00e0f61af27093da2ed9e32ef43d241f7dd73b00b4948021a8a5405a45761046"
+headers_hash = "12eddd1f048af9ea0a19b3870139e2c30d42ad624b878297ac00e66e06e6fef5"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x520310"
 context_hash = ""
-defines = "[]"
-input_hash = "6f763367cc5fb889a99d3a5c7fd9aa24be5395c30ed3608fcd9bd9a09e8bedd6"
-aligned_pairs = 163
+defines = "(none)"
+input_hash = "844a8217f61abef2a33edd2faae2273982d4855701649297e0523534a9594bcd"
+aligned_pairs = 253
 target_instructions = 479
-candidate_instructions = 462
-hunks = 23
-similarity = 34.64399574920298
+candidate_instructions = 464
+hunks = 46
+similarity = 53.65853658536586
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-18T20:34:54+00:00"
+measured_at = "2026-11-25T03:14:23+00:00"
 
 [["GOLDTL.0x00520310".status_history]]
 old_status = "STUB"
@@ -620020,29 +620020,29 @@ updated_by = "rehome"
 updated_at = "2026-10-27T08:35:08+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 62.83524904214559
+similarity = 66.15581098339719
 
 ["GOLDTL.0x00531620".verification]
-source_hash = "22bcc3b6d3325a12b562c29330443d6903fc05d3d60bcaf3d6f39652aba86b52"
+source_hash = "901626082cf048b153c84be3e53d00459a9f79ec6863e47a759c80c10b576717"
 reference_hash = "668d65013f9e5ea7bece5dff789cb0732aa6dd19ac7dd06dc309cbf3142c9a3a"
 reference_size = "1363"
-headers_hash = "2bbf74f1a1637594464eb576b431dec1144123aae326e50761d7a8bc2c0bf65f"
-compiler_hash = "604f3c2c79db2131eb969d1543c5eaaa00bd5df9265b1782b48a34d9a17523b5"
+headers_hash = "4260cc386bd1da66130703230aa7d03671a61667d08e2f14fd6d372ea183812a"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x531620"
 context_hash = ""
-defines = "[]"
-input_hash = "ec161368c2a22ee819ff9c336ca2af0bf528de85b34e0aed8fd1eb47eebe7504"
-aligned_pairs = 246
+defines = "(none)"
+input_hash = "3b5ac23c703e50c3426b32b60b4a0c7672c344cdf7013e1f35ede3b1e50e8763"
+aligned_pairs = 259
 target_instructions = 391
 candidate_instructions = 392
-hunks = 66
-similarity = 62.83524904214559
+hunks = 64
+similarity = 66.15581098339719
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-17T12:33:48+00:00"
+measured_at = "2026-11-25T03:06:31+00:00"
 
 [["GOLDTL.0x00531620".status_history]]
 old_status = "STUB"
@@ -620949,29 +620949,29 @@ updated_by = "rehome"
 updated_at = "2026-10-27T08:32:00+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 59.51417004048582
+similarity = 60.385005065856134
 
 ["GOLDTL.0x00471490".verification]
-source_hash = "d667db104ce1387af1fa631be564c0c76c01d5fab7c012a69886a4442377e757"
+source_hash = "61c1dbf39fe17cfe593413ef7674e9cb9f952ed239cad9962c3ea305b6660b5b"
 reference_hash = "49e7472180c5a74bdcd99b1130d47c62c71eb9130f6854070f7295284508fe22"
 reference_size = "1440"
-headers_hash = "61b6e9b4510c3874580b23d70c94a0f4e364316b99e9dd41c975c3936ba10461"
-compiler_hash = "410fcd7e311a12ca3ee35004a099a0bdd762b0c23d281dd24eb14e48730acb17"
+headers_hash = "be50aba2ef6830f44f5c8833ee277018dcad33452302dd26d9c45c264227cc9d"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x471490"
 context_hash = ""
-defines = "[]"
-input_hash = "fc0b078c3f30e8f09297ab4f8246f32c5960cbe928efa31731d36a5f06cd4f92"
-aligned_pairs = 294
+defines = "(none)"
+input_hash = "9f1fe0c7bd91f781092d7d1aea06be133610219b5083f66f6e5f9ba57d701380"
+aligned_pairs = 298
 target_instructions = 505
-candidate_instructions = 483
-hunks = 84
-similarity = 59.51417004048582
+candidate_instructions = 482
+hunks = 88
+similarity = 60.385005065856134
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-20T06:26:53+00:00"
+measured_at = "2026-11-25T03:10:24+00:00"
 
 [["GOLDTL.0x00471490".status_history]]
 old_status = "STUB"
@@ -620988,29 +620988,29 @@ updated_by = "rehome"
 updated_at = "2026-10-27T08:34:54+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 54.78841870824054
+similarity = 66.66666666666666
 
 ["GOLDTL.0x005156a0".verification]
-source_hash = "0a9427c84fe72d8eca4188f0f0ace1a589b822d4ee09b646b9c0af777240b9d7"
+source_hash = "5227777d0a0b67116d788fb4b0baab1ec0cc9347ca8f25273ea9f37ca32c6fb1"
 reference_hash = "90634b6b27b6d15f23d1e59eef6904a8610ca40dbb214f0588b80c403db2f899"
 reference_size = "1432"
 headers_hash = "9a3d2541b4f29b8b1a416cdd55bede71e23a82fd276d1827b42785ec16fdd598"
-compiler_hash = "410fcd7e311a12ca3ee35004a099a0bdd762b0c23d281dd24eb14e48730acb17"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x5156a0"
 context_hash = ""
-defines = "[]"
-input_hash = "cfc9bbf0e1042c14e61a6e142312c51fa96ab2a9554b0e3da7943159f65d0ec4"
-aligned_pairs = 246
+defines = "(none)"
+input_hash = "0a2f2631ae1078070b68b1b9d66d9c506f6a3a7ad3b4340110cb8879843c341b"
+aligned_pairs = 305
 target_instructions = 460
-candidate_instructions = 438
-hunks = 82
-similarity = 54.78841870824054
+candidate_instructions = 455
+hunks = 56
+similarity = 66.66666666666666
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-20T08:37:39+00:00"
+measured_at = "2026-11-25T03:06:11+00:00"
 
 [["GOLDTL.0x005156a0".status_history]]
 old_status = "STUB"
@@ -621110,29 +621110,29 @@ updated_by = "rehome"
 updated_at = "2026-10-27T08:36:24+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 90.68923821039904
+similarity = 91.30434782608695
 
 ["GOLDTL.0x0059a340".verification]
-source_hash = "247c675b34b211aea2df64cd1695df22619051e6fa2f7244f081e37a3dbab79d"
+source_hash = "3e2f8b32a745590fab0c07e560beb0bebc9c786fdce0045e9a82f5bfb1491abd"
 reference_hash = "eaab70a756d55a80404e79caa4179c71ac92b6169757a0721013443ae836850c"
 reference_size = "1443"
 headers_hash = "098a9e226e2d79e957f0ee4f4a607b4d6afdfa9b5848f570377da690bbfabd8f"
-compiler_hash = "410fcd7e311a12ca3ee35004a099a0bdd762b0c23d281dd24eb14e48730acb17"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x59a340"
 context_hash = ""
-defines = "[]"
-input_hash = "823e3a712daecf8e2da4965b0bc08c6faf33001e248315bcd714fed38f18334c"
-aligned_pairs = 375
+defines = "(none)"
+input_hash = "e531ebfc4e5935919101dcb0e0203b8c69bf59c734375f98553d63a8a00f697b"
+aligned_pairs = 378
 target_instructions = 413
-candidate_instructions = 414
-hunks = 24
-similarity = 90.68923821039904
+candidate_instructions = 415
+hunks = 22
+similarity = 91.30434782608695
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-20T08:39:29+00:00"
+measured_at = "2026-11-25T03:08:37+00:00"
 
 [["GOLDTL.0x0059a340".status_history]]
 old_status = "STUB"
@@ -624605,29 +624605,29 @@ updated_by = "fix-sizes"
 updated_at = "2026-10-29T11:14:46+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 71.00271002710026
+similarity = 71.59603246167718
 
 ["GOLDTL.0x00585030".verification]
-source_hash = "167081af273016f09f6505904fae690397dcc330c3e174dd0c055b0c24a56cfc"
+source_hash = "82040c4ad87c7f9aa05a1aeefce53a52102f5182914b32177fe5993b700d0a2f"
 reference_hash = "6651033534f8e7d5726bef66365263a65194524e50d8bbe9490b8013fa5ab107"
 reference_size = "1839"
-headers_hash = "ef04d0f15a2de0a2909a5fe3d46f0b36c68526fca455b6cb6ebd51aa07f690d7"
-compiler_hash = "410fcd7e311a12ca3ee35004a099a0bdd762b0c23d281dd24eb14e48730acb17"
+headers_hash = "e8b605815714cf16de804d762dcb6c591e714a7189a4f2bf8f8d7bee1f022a18"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x585030"
 context_hash = ""
-defines = "[]"
-input_hash = "d1b4ad6bee75ad7272f558e1b7e952eb5ff139e64e1f242fafbf57221ccc2910"
-aligned_pairs = 393
+defines = "(none)"
+input_hash = "9b196413bfa9820531d90a540818449cdb84b96182975828a39f7ca423ee7e92"
+aligned_pairs = 397
 target_instructions = 554
-candidate_instructions = 553
-hunks = 97
-similarity = 71.00271002710026
+candidate_instructions = 555
+hunks = 93
+similarity = 71.59603246167718
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-20T06:33:32+00:00"
+measured_at = "2026-11-25T03:11:41+00:00"
 
 [["GOLDTL.0x00585030".status_history]]
 old_status = "STUB"
@@ -624800,29 +624800,29 @@ updated_by = "rehome"
 updated_at = "2026-10-27T08:34:39+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 56.44481887110362
+similarity = 60.535117056856194
 
 ["GOLDTL.0x00509fc0".verification]
-source_hash = "fff6a867175d461985060c88c3b6de45cf6cec12b2ff59f76f79c1761a859abe"
+source_hash = "f4c2051f68d096a36ba1d8caa9fe0742da90120f15706ec9b0da05adf93754bc"
 reference_hash = "bbba84f55e0bca004e5ef09ab1a46c0717d2722ad6935a8216e515b5f0a5f01e"
 reference_size = "1870"
-headers_hash = "66ab4e30e74387bb14e9b11fd7a67fa1024eaaece16fae6fa6d4ec998e6e6225"
-compiler_hash = "410fcd7e311a12ca3ee35004a099a0bdd762b0c23d281dd24eb14e48730acb17"
+headers_hash = "a381e7ce528d3d4a53d68d808922f5fc2321d6901df79ed31b588c0cdbcc78d2"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x509fc0"
 context_hash = ""
-defines = "[]"
-input_hash = "9d266a040270a01accc8e4e7ed57dd0c8b823a91632018a57a0caa480dbe3717"
-aligned_pairs = 335
+defines = "(none)"
+input_hash = "ad51c839b3f99f7e9063af005fb652a5313e959bad690d10367bb63d3ac71ba6"
+aligned_pairs = 362
 target_instructions = 595
-candidate_instructions = 592
-hunks = 99
-similarity = 56.44481887110362
+candidate_instructions = 601
+hunks = 87
+similarity = 60.535117056856194
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-20T07:10:51+00:00"
+measured_at = "2026-11-25T03:05:26+00:00"
 
 [["GOLDTL.0x00509fc0".status_history]]
 old_status = "STUB"
@@ -627097,29 +627097,29 @@ updated_by = "rehome"
 updated_at = "2026-10-27T08:36:24+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
-similarity = 58.31564048124558
+similarity = 64.26043878273178
 
 ["GOLDTL.0x005944d0".verification]
-source_hash = "7b97e85c9c7415d1f36f6c07b11bfe26ad398d859feffabd465f02d011037212"
+source_hash = "6e55416322b0bc49f8e438e989bab13992b2fa7fdd7ba85d2b27e9b63ec2eebb"
 reference_hash = "3f6db6eb7d5981cc7e2ffdccda71531802ec4d9df4dfc88ca91b58c7c06a07a1"
 reference_size = "2311"
-headers_hash = "f5ab53df4ef0f454ef52b38cee462d9d25175574a905f82e49b9cdcbd4ad8faa"
-compiler_hash = "410fcd7e311a12ca3ee35004a099a0bdd762b0c23d281dd24eb14e48730acb17"
+headers_hash = "a0f40a18d0a39f704b05547936705a1defbab330cea46418d77f1931834c4e83"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x5944d0"
 context_hash = ""
-defines = "[]"
-input_hash = "248600f5040a31a19fdee4cfdc80274ac88ff5fa1ce8524de4fc6fa00e6edfd6"
-aligned_pairs = 412
+defines = "(none)"
+input_hash = "13db957dcac84e95ff20bc71d81dce40f7edb2ee08c4b7e6ed44c1eee383168b"
+aligned_pairs = 454
 target_instructions = 720
 candidate_instructions = 693
-hunks = 118
-similarity = 58.31564048124558
+hunks = 122
+similarity = 64.26043878273178
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-20T06:55:22+00:00"
+measured_at = "2026-11-25T03:08:08+00:00"
 
 [["GOLDTL.0x005944d0".status_history]]
 old_status = "STUB"
@@ -629485,18 +629485,18 @@ blocker = "Application code — pending per-function decompilation"
 similarity = 67.34366648850883
 
 ["GOLDTL.0x004849b0".verification]
-source_hash = "87dd297f7ef7858ab1a467227d8228d34feea79791d244263b14b050faf04421"
+source_hash = "d191afe8731f21ed11fdf3883e5707104594afb52c4aedd3ee4ad2447554dcda"
 reference_hash = "31831cc2a79d79c604cf9f0006d20b322f47d5bec3746b431a41eec36c2f4991"
 reference_size = "3226"
 headers_hash = "bf231d97eb3c0e31ca0fd17cdac39a3a394209acf2e96cc979467df3e19b30cb"
-compiler_hash = "410fcd7e311a12ca3ee35004a099a0bdd762b0c23d281dd24eb14e48730acb17"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x4849b0"
 context_hash = ""
-defines = "[]"
-input_hash = "fca626daa26c5c6b7ebc12936daa8944b4cbf5e110e182dbf5c234014a204239"
+defines = "(none)"
+input_hash = "b290049c7657afd9a99d69df77ab213c8e10ba9d7185967fb7ce67b1152bd42c"
 aligned_pairs = 630
 target_instructions = 933
 candidate_instructions = 938
@@ -629504,7 +629504,7 @@ hunks = 133
 similarity = 67.34366648850883
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-20T06:20:00+00:00"
+measured_at = "2026-11-25T03:03:43+00:00"
 
 [["GOLDTL.0x004849b0".status_history]]
 old_status = "STUB"
@@ -726689,36 +726689,36 @@ measured_at = "2026-10-22T08:36:00+00:00"
 ["GOLD.0x004ab3e0"]
 size = 720
 updated_by = "test"
-updated_at = "2026-11-12T22:59:34+00:00"
+updated_at = "2026-11-25T03:09:29+00:00"
 file = "src/Develop/Unassigned/GOLD.fcn_004ab3e0_gold.c"
 name = "fcn_004ab3e0_gold"
 symbol = "_fcn_004ab3e0_gold"
 kind = "FUNCTION"
-status = "SIZE_MISMATCH"
+status = "NEAR_MATCHING"
 blocker = "Application code: GOLD-only function kept under a distinct identifier because its placeholder name belongs to the shared GOLDTL definition bound at 0x4ab2c0; pending decompilation."
-similarity = 97.2972972972973
+similarity = 97.74774774774775
 
 ["GOLD.0x004ab3e0".verification]
-source_hash = "b7303ab37c470df95cadc2fcc67f387b777acb24467e6a51524071326e867a1c"
+source_hash = "e5f8aeaf5659eb93d3552559481f2beb6bbf162c2f49651b78e61c10c20c584d"
 reference_hash = "fb8a547bf6a4fcaa83120ae18698ffa1551a61c614bd552514d1d48d1181a776"
 reference_size = "720"
-headers_hash = "b7da22156d65198150d6bf98a08a3d3d05afde53884dd02060c8efe41282f039"
-compiler_hash = "46f2a0c69fc1b59d855126efbd86ef27d9ec4e10a034ddc5398ca8097cef258e"
+headers_hash = "0c4aa2693aa209a86e615123e7c9c6dd33d050c441caacd960f3a5c3d02927a4"
+compiler_hash = "e3aefb01d670c03360b8861a18f3aeb8ec526feb9e8909883b1f6fc295058a5c"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLD"
 va = "0x4ab3e0"
 context_hash = ""
-defines = "[\"REBREW_GOLD\"]"
-input_hash = "4e8c1971138b43cc64f65eee5c298b6d183b2ef465abee522ad47a3d58194f4d"
-aligned_pairs = 216
+defines = "REBREW_GOLD"
+input_hash = "ef3a44cf5e8874220963b28434534093a539ec24cdb2b79f984a9bc3411f3abf"
+aligned_pairs = 217
 target_instructions = 222
 candidate_instructions = 222
-hunks = 5
-similarity = 97.2972972972973
-status = "SIZE_MISMATCH"
+hunks = 4
+similarity = 97.74774774774775
+status = "NEAR_MATCHING"
 writer = "test"
-measured_at = "2026-11-16T05:32:49+00:00"
+measured_at = "2026-11-25T03:09:29+00:00"
 
 [["GOLD.0x004ab3e0".binding_history]]
 action = "rebind"
@@ -726762,6 +726762,12 @@ kind = "FUNCTION"
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-11-12T22:59:34.100844+00:00"
+updated_by = "test"
+
+[["GOLD.0x004ab3e0".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "NEAR_MATCHING"
+changed_at = "2026-11-25T03:09:29.832882+00:00"
 updated_by = "test"
 ["GOLD.0x00410ac0"]
 size = 1040
@@ -748194,38 +748200,43 @@ file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0048e5b0.c"
 name = "ai_StartCannonTower"
 symbol = "_ai_StartCannonTower"
 kind = "FUNCTION"
-updated_by = "rename"
-updated_at = "2026-11-07T23:06:59+00:00"
-status = "SIZE_MISMATCH"
-blocker = "Application code — pending per-function decompilation"
-similarity = 97.98270893371757
+updated_by = "test"
+updated_at = "2026-11-25T03:04:05+00:00"
+status = "RELOC"
+similarity = 100.0
 
 ["GOLDTL.0x0048e5b0".verification]
-source_hash = "305129641014a8ec4ff6d6c5702497f16c8f61aae97f8e20afb8e721dc2d3f23"
+source_hash = "0b82e4e4e1685b4ac529983efcb26b3069a399e2a1d74ae13c41000f29a3ecc4"
 reference_hash = "bf3e3a7a1b65cb65b770420273ca14722e17dc1498f28754b2d4762b2d137d1a"
 reference_size = "456"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "95104fbd80c1e609e30b13ef20b27b243f71e781f432fa5d79e9b296b7365371"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x48e5b0"
 context_hash = ""
-defines = "[]"
-input_hash = "51f2b586ca6492a7ca07912084441b0a8ce7f77da63cca6f608af70a7e77407e"
-aligned_pairs = 170
+defines = "(none)"
+input_hash = "ba63d06a18f1fbc6d03a1f67a854a148dec3c78e2c082a9745f9bc5f990d7f61"
+aligned_pairs = 173
 target_instructions = 173
-candidate_instructions = 174
-hunks = 4
-similarity = 97.98270893371757
-status = "SIZE_MISMATCH"
+candidate_instructions = 173
+hunks = 0
+similarity = 100.0
+status = "RELOC"
 writer = "test"
-measured_at = "2026-11-13T21:56:51+00:00"
+measured_at = "2026-11-25T03:04:05+00:00"
 
 [["GOLDTL.0x0048e5b0".status_history]]
 old_status = "STUB"
 new_status = "SIZE_MISMATCH"
 changed_at = "2026-10-20T00:01:40.343679+00:00"
+updated_by = "test"
+
+[["GOLDTL.0x0048e5b0".status_history]]
+old_status = "SIZE_MISMATCH"
+new_status = "RELOC"
+changed_at = "2026-11-25T03:04:05.594721+00:00"
 updated_by = "test"
 ["GOLDTL.0x00493920"]
 size = 264
@@ -751483,29 +751494,29 @@ updated_at = "2026-11-03T22:25:37+00:00"
 status = "SIZE_MISMATCH"
 blocker = "STUB, best body kept unchanged this pass: 144/2324 exact, object 1428 vs 2324 (255 target instructions still uncovered; diff reports first missing at 'mov ecx, [mem]'). Target frame is 0x928 (sub esp,0x928) and the live disassembly shows an 8-case jump table at 0x56c8c4 on arg+0x70; the current body covers only part of the switch (cases 0-5 plus -1/-2) and its buf[0x800] frame does not match 0x928, so operands and branch encodings diverge throughout. Needs a full codegen-faithful rewrite from the 357-line hint at .scratch/decomp/GOLDTL/0x0056bfd0.c.pseudo."
 blocker_delta = 2180
-similarity = 70.04160887656033
+similarity = 70.18030513176144
 
 ["GOLDTL.0x0056bfd0".verification]
-source_hash = "20f62f58d5eb96c6ab9aa51ffb022dd524f34d55fa17da204c259c68099f3376"
+source_hash = "93228a84d08e4462e8dc201d95b127d01d3f1afa9994de3716d01d90b03ec419"
 reference_hash = "f6d32f19c2b35a28f30d69e5717880f99c34c149137d1f9805e77a89885ae13f"
 reference_size = "2324"
-headers_hash = "57b094c63765b01804cbabb971fa3668ce55ef0fc87a610963789cdbf1bf9836"
-compiler_hash = "acb48bf53eb63cd1fe6691ee15506889240f226303c27b17085affa2a05b37dc"
+headers_hash = "85facd272ceb1de9957eea6134f640d8c58c1c386824f0cd653e6b8e5c4fa2af"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x56bfd0"
 context_hash = ""
-defines = "[]"
-input_hash = "72fc67144e7f77ecfa0499411fc9f30a51ca2d3d86c78e028d81566fae1f878c"
-aligned_pairs = 505
+defines = "(none)"
+input_hash = "6f06653f2ac3942c07ce970e194d754f9c166dd5a27bbc7076429b1958766474"
+aligned_pairs = 506
 target_instructions = 718
 candidate_instructions = 724
-hunks = 74
-similarity = 70.04160887656033
+hunks = 72
+similarity = 70.18030513176144
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-16T03:10:57+00:00"
+measured_at = "2026-11-25T03:07:27+00:00"
 
 [["GOLDTL.0x0056bfd0".status_history]]
 old_status = "STUB"
@@ -773314,7 +773325,7 @@ name = "fcn_00495fe0"
 symbol = "_fcn_00495fe0"
 kind = "FUNCTION"
 status = "SIZE_MISMATCH"
-similarity = 42.81609195402299
+similarity = 44.89208633093525
 
 [["GOLDTL.0x00495fe0".binding_history]]
 action = "retire"
@@ -773350,26 +773361,26 @@ symbol = "_fcn_00495fe0"
 kind = "FUNCTION"
 
 ["GOLDTL.0x00495fe0".verification]
-source_hash = "813413a31c17ff5c8485d1a988b67bbb1b5afd3c5c242e9583912749d38538db"
+source_hash = "f680324099a859cdc7dcf4b293deaf2c5eb5468dcf8048ab6fe40b9a2cc36aff"
 reference_hash = "b92040a94f69fcf61efb7451eeabbfdc63b1f852f9e12a663e60849831bf536b"
 reference_size = "1184"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-compiler_hash = "00e0f61af27093da2ed9e32ef43d241f7dd73b00b4948021a8a5405a45761046"
+compiler_hash = "548d46ee2a44b58cb05fdbb51fba925fe6f9a60375037be5ddc87e5192d14499"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
 module = "GOLDTL"
 va = "0x495fe0"
 context_hash = ""
-defines = "[]"
-input_hash = "35c5f224e15fe4a6dc5ba53fc204de1b79c453e34efd32469eae822d27143f00"
-aligned_pairs = 149
+defines = "(none)"
+input_hash = "bf62ed3acf2563746dfba4648ce70de2b94cf436a30e5112f85472db7c52e1eb"
+aligned_pairs = 156
 target_instructions = 349
-candidate_instructions = 347
-hunks = 60
-similarity = 42.81609195402299
+candidate_instructions = 346
+hunks = 65
+similarity = 44.89208633093525
 status = "SIZE_MISMATCH"
 writer = "test"
-measured_at = "2026-11-19T06:01:27+00:00"
+measured_at = "2026-11-25T03:03:18+00:00"
 ["GOLDTL.0x005e6d72"]
 updated_by = "rehome"
 updated_at = "2026-10-25T10:19:03+00:00"

@@ -63,7 +63,7 @@ int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* firstAction, cha
 			memcpy(a4, &m2, 24);
 			return r;
 		}
-		return 0;
+		goto result;
 	}
 	if (fcn_004efd30(*(int*) (e + 1)) == 0 && (*(int*) (p + 0x1cc) & 0x80000000) == 0) {
 		fcn_004c5420(*(int*) (p + 4), 0x1e8, 4, 0x80000000, 0);
@@ -87,5 +87,7 @@ int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* firstAction, cha
 	*(int*) (firstAction + 4) = *(int*) (e + 1);
 	*(char*) a4 = 4;
 	*(int*) (a4 + 4) = *(int*) (a1 + 1);
-	return 0x42;
+	r = 0x42;
+result:
+	return r;
 }

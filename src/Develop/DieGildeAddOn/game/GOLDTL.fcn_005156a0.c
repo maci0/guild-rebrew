@@ -2,6 +2,8 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char* d3_ActiveCamera;
+extern char* g_7f3b24;
+extern char* g_7f3ee0;
 extern char* lpObjektePROT;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* g_7746c8;
@@ -14,10 +16,10 @@ extern int __cdecl fcn_005014d0(unsigned short handle);
 extern int __cdecl gm_FindObjektPrototypeByName(char* key);
 extern int __cdecl fcn_00506380(int a, void* table, void* record, int mode);
 extern void __cdecl d3_SetSubtreeVisible(char* record, int mode);
-extern int __cdecl d3_ComputeObjectBoundingSphere(char* record, char* scene, char* out, int* value);
+extern char __cdecl d3_ComputeObjectBoundingSphere(char* record, char* scene, float* out, float* value);
 extern double g_662a08;
 extern void* __cdecl evt_LoadGfxScript(char* name);
-extern void __cdecl fcn_00428340(void* handle, int a, int b);
+extern int __cdecl fcn_00428340(char* handle, int a, ...);
 extern void __cdecl SelectTextureSet(char* record, int target, char mode, int flag);
 
 /* ADDRESS: GOLDTL 0x005156a0 */
@@ -39,14 +41,14 @@ void __cdecl fcn_005156a0(char* record)
 	int i;
 	int n;
 	int count;
-	int a;
+	int scaled;
 	int b;
 	int rc;
 	unsigned short v1;
 	unsigned short v2;
 	unsigned short v12;
-	char buf[16];
-	int value;
+	float buf[4];
+	float value;
 	void* handle;
 
 	base = record;
@@ -54,10 +56,10 @@ void __cdecl fcn_005156a0(char* record)
 	list = 0;
 	id = *(unsigned int*) (record + 0x48) & 0xffffff;
 	k0 = record[0x4b];
-	if (*(int*) 0x7f3b24 != 0)
-		list = (char*) *(int*) (*(int*) 0x7f3b24 + 0x14);
+	if (g_7f3b24 != 0)
+		list = (char*) *(int*) (g_7f3b24 + 0x14);
 	else
-		list = (char*) *(int*) (*(int*) 0x7f3ee0 + 0x5d);
+		list = (char*) *(int*) (g_7f3ee0 + 0x5d);
 	if (k0 != 1)
 		goto tail;
 	idx = (int) (id * 0x41);
@@ -95,7 +97,7 @@ void __cdecl fcn_005156a0(char* record)
 								int second;
 								char* row;
 								row = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)
-									[*(unsigned char*) 0x7f3ee0];
+									[*(unsigned char*) g_7f3ee0];
 								best = -1;
 								second = -1;
 								count = ((BUILDING_PROTOTYPE*)row)->component_count;
@@ -171,14 +173,14 @@ void __cdecl fcn_005156a0(char* record)
 label_59eb:
 		if (entry[0] == 0x1d)
 			goto label_5a7a;
-		slot = (char*) fcn_00502cd0((int) *(void**) (0x7f3ee0 + 0x5d), 2, 6,
+		slot = (char*) fcn_00502cd0((int) *(void**) (g_7f3ee0 + 0x5d), 2, 6,
 			0, (int) id);
 		if (slot == 0)
 			goto label_5a7a;
 		d3_SetSubtreeVisible(record, 1);
 		*(char**) (record + 0x204) = slot;
 		if ((entry[0] == 6 || entry[0] == 2) && g_7746c8 != 0) {
-			statusFlags = fcn_00506380(g_774970, (void*) 0x7f3ee0, slot, 0);
+			statusFlags = fcn_00506380(g_774970, g_7f3ee0, slot, 0);
 			if ((statusFlags & 0x4000) != 0) {
 				*(unsigned int*) (record + 0x224) = 1;
 				*(char**) (slot + 0x18) = record;
@@ -199,9 +201,11 @@ label_5aab:
 		if (*(int*) (record + 0x1ec) != 0) {
 			rc = d3_ComputeObjectBoundingSphere(record, d3_ActiveCamera, buf, &value);
 			if (rc != 0) {
+				scaled = (int) (value * g_662a08);
 				handle = evt_LoadGfxScript((char*) 0x6a1f3c);
 				if (handle != 0)
-					fcn_00428340(handle, 6, (int) (*(float*) &value * g_662a08));
+					fcn_00428340((char*) handle, 6, (int) buf[0], (int) buf[1],
+						(int) buf[2], (int) value, scaled, record);
 			}
 		}
 		*(unsigned char*) (slot + 0x13) = *(unsigned char*) (slot + 0x13) & 0x5f;
@@ -225,7 +229,7 @@ tail:
 	if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[idx].kind) != 2)
 		list = base;
 	else
-		list = *(char**) (0x7f3ee0 + 0x5d);
+		list = *(char**) (g_7f3ee0 + 0x5d);
 	if (fcn_00502cd0((int) list, 1, 0, idx) != 0) {
 		d3_SetSubtreeVisible(record, 0);
 		return;

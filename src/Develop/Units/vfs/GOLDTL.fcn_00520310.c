@@ -55,90 +55,90 @@ unsigned int __cdecl fcn_00520310(unsigned int stream)
 	}
 	for (i = 0; i < 4; i++) {
 		int k;
-		offset = i * 0x2f4;
-		if (vfs_fwrite((g_868060 + offset), 0x20, 1, (char*) stream) <= 0)
+		char *row = g_868060 + i * 0x2f4;
+		if (vfs_fwrite(row, 0x20, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x40, 8, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x40, 8, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x48, 1, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x48, 1, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x4c, 4, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x4c, 4, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x50, 4, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x50, 4, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x54, 2, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x54, 2, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x58, 8, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x58, 8, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x60, 1, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x60, 1, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x61, 1, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x61, 1, 1, (char*) stream) <= 0)
 			return 0;
-		p = (g_868060 + offset) + 0x64;
+		p = row + 0x64;
 		for (k = 0; k < 10; k++) {
 			if (vfs_fwrite(p, 8, 1, (char*) stream) <= 0)
 				return 0;
 			p += 8;
 		}
-		p = (g_868060 + offset) + 0xb4;
+		p = row + 0xb4;
 		for (k = 0; k < 10; k++) {
 			if (vfs_fwrite(p, 8, 1, (char*) stream) <= 0)
 				return 0;
 			p += 8;
 		}
-		if (vfs_fwrite((g_868060 + offset) + 0x104, 1, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x104, 1, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x105, 1, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x105, 1, 1, (char*) stream) <= 0)
 			return 0;
-		p = (g_868060 + offset) + 0x108;
+		p = row + 0x108;
 		for (k = 0; k < 4; k++) {
 			if (vfs_fwrite(p, 4, 1, (char*) stream) <= 0)
 				return 0;
 			p += 4;
 		}
-		p = (g_868060 + offset) + 0x118;
+		p = row + 0x118;
 		for (k = 0; k < 4; k++) {
 			if (vfs_fwrite(p, 4, 1, (char*) stream) <= 0)
 				return 0;
 			p += 4;
 		}
-		if (vfs_fwrite((g_868060 + offset) + 0x128, 4, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x128, 4, 1, (char*) stream) <= 0)
 			return 0;
 
 		for (k = 0; k < 0x0b; k++) {
-			if (vfs_fwrite(g_868060 + offset + 0x12c + k, 1, 1, (char*) stream) <= 0)
+			if (vfs_fwrite(row + 0x12c + k, 1, 1, (char*) stream) <= 0)
 				return 0;
 
 		}
-		if (vfs_fwrite((g_868060 + offset) + 0x137, 1, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x137, 1, 1, (char*) stream) <= 0)
 			return 0;
 
 		for (k = 0; k < 7; k++) {
-			if (vfs_fwrite(g_868060 + offset + 0x138 + k, 1, 1, (char*) stream) <= 0)
+			if (vfs_fwrite(row + 0x138 + k, 1, 1, (char*) stream) <= 0)
 				return 0;
 
 		}
-		if (vfs_fwrite((g_868060 + offset) + 0x13f, 1, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x13f, 1, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x140, 1, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x140, 1, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x141, 1, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x141, 1, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x142, 1, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x142, 1, 1, (char*) stream) <= 0)
 			return 0;
-		p = (g_868060 + offset) + 0x144;
+		p = row + 0x144;
 		for (k = 0; k < 8; k++) {
 			if (vfs_fwrite(p, 0x12, 1, (char*) stream) <= 0)
 				return 0;
 			p += 0x12;
 		}
-		if (vfs_fwrite((g_868060 + offset) + 0x1d4, 4, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x1d4, 4, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x1d8, 4, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x1d8, 4, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x1dc, 0xd0, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x1dc, 0xd0, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite((g_868060 + offset) + 0x2ec, 8, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x2ec, 8, 1, (char*) stream) <= 0)
 			return 0;
 	}
 	return 1;

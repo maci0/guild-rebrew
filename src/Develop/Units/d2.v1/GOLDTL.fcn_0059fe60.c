@@ -63,10 +63,7 @@ void __cdecl fcn_0059fe60(char *a0)
 	char *act;
 	unsigned short *sel;
 
-	buttons[0] = -1;
-	buttons[1] = -1;
-	buttons[2] = -1;
-	buttons[3] = -1;
+	memset(buttons, 0xff, sizeof(buttons));
 	fcn_005338a0();
 	dlg = fcn_00470820(0, 0, "locations\\wohnsitz\\geliebte");
 	d2_SetForm(dlg, 0);

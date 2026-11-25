@@ -1,4 +1,5 @@
 extern int g_100f1dc, g_14ce8e0, d2_CurrentElementId;
+#include "client_dialog_state.h"
 /* Runs the town trade/settlement dialog: opens the window, collects the shop
    list, draws the goods rows and processes input until the player closes it. */
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -115,7 +116,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	d2_DrawPanelFrame(d2_CurrentWindowId, id, 0x742);
 	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId,
 	             fcn_00472830(window, 2), 0x78, &rect2, &rect1, &listControl);
-	*(unsigned int*) (*(int*) 0x1015ea0 + 0x84 + listControl * 0x2f4) = 0x54;
+	*(unsigned int*) ((int) g_1015ea0 + 0x84 + listControl * 0x2f4) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
 	while (1) {
 		int any;
@@ -130,7 +131,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 		if (!entry) {
 			return 0;
 		}
-		if (g_100f1dc != -1 && *(int*) 0x100f884 == window) {
+		if (g_100f1dc != -1 && g_100f884 == window) {
 			any = 0;
 			r = (int*) 0x7e30e0;
 			do {
@@ -176,7 +177,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 
 							ok = 1;
 							handle = *(int*) (row + 0x779160);
-							rec = *(int*) 0x99ec10 + handle * 0x40;
+							rec = (int) lpObjektePROT + handle * 0x40;
 							v3 = *(unsigned short*) (handle + 0x36 + rec);
 							if (!(gm_eval_SlotVoll(entry, handle, v3))) {
 								unsigned char kind;
@@ -233,7 +234,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 										if (*(unsigned short*) (p + 0x27) != 0xffff) {
 											v33 = *(unsigned int*) (*(unsigned short*) (p + 0x27) * 0x21c + 0x7f4ca4);
 										} else {
-											v33 = *(unsigned int*) (*(unsigned short*) 0x774970 * 0x21c + 0x7f4ca4);
+											v33 = *(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4);
 										}
 										v34 = *(unsigned int*) (p + 1);
 										*(char*) (tmpl + 0x04) = 4;
@@ -300,7 +301,7 @@ found_row:
 			} while (!any);
 			if (!any) {
 				if (d2_CanCloseWindowDuringTutorial() == 1) {
-					*(int*) 0x774654 = 1;
+					g_774654 = 1;
 					fcn_00532ef0();
 				}
 				goto after_input;
@@ -372,9 +373,9 @@ after_input:
 					off = 0x26;
 					do {
 						*cells = *(unsigned short*) (off + r3[-0x14] * 0x41 + 8 +
-						                              *(int*) 0x99ec10);
+						                              (int) lpObjektePROT);
 						cells[4] = *(unsigned short*) (off + r3[-0x14] * 0x41 +
-						                               *(int*) 0x99ec10);
+						                               (int) lpObjektePROT);
 						if (*cells) {
 							got = fcn_00502cd0(*(int*) (entry + 0x14), 1, 0, *cells);
 							if (!(got)) {
@@ -386,7 +387,7 @@ after_input:
 								best = *r3;
 								t = gm_GetMsgField(entry, got) /
 								    *(unsigned short*) (off + r3[-0x14] * 0x41 +
-								                        *(int*) 0x99ec10);
+								                        (int) lpObjektePROT);
 								if (t <= best) {
 									*r3 = t;
 								}
@@ -396,7 +397,7 @@ after_input:
 						cells++;
 					} while (off < 0x2e);
 					*r3 = *(unsigned short*) (r3[-0x14] * 0x41 + 0x36 +
-					                          *(int*) 0x99ec10) * *r3;
+					                          (int) lpObjektePROT) * *r3;
 					got = fcn_00502cd0(*(int*) (entry + 0x14), 1, 0, r3[-0x14]);
 					if (got) {
 						r3[1] = gm_GetMsgField(entry, got);
@@ -410,8 +411,8 @@ after_input:
 			fcn_00657a73(count, list, 10);
 			fcn_0046f940(listControl, list);
 			window = saved;
-			*(unsigned int*) (*(int*) 0x1015ea0 + 0x6c + listControl * 0x2f4) = 1;
-			*(unsigned int*) (*(int*) 0x1015ea0 + 0x18 + listControl * 0x2f4) = 0x30;
+			*(unsigned int*) ((int) g_1015ea0 + 0x6c + listControl * 0x2f4) = 1;
+			*(unsigned int*) ((int) g_1015ea0 + 0x18 + listControl * 0x2f4) = 0x30;
 			fcn_00595330(saved, 2, count, entry, 0);
 			if (idx) {
 				d2_SetForm(saved, 2);

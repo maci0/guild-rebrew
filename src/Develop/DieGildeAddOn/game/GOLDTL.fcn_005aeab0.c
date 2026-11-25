@@ -118,11 +118,12 @@ void __cdecl fcn_005aeab0(char* rec)
 		}
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == b1) {
+				int entityId = *(int*) (ent + 4);
 				*(unsigned char*) (pkt + 4) = 0x3e;
-				*(int*) (pkt + 8) = *(int*) (ent + 4);
+				*(int*) (pkt + 8) = entityId;
 				*(int*) (pkt + 0xc) = *(int*) (rec + 1);
 				*(unsigned char*) (pkt + 0x36) = 9;
-				*(int*) (pkt + 0x58) = *(int*) (ent + 4);
+				*(int*) (pkt + 0x58) = entityId;
 				*(int*) (pkt + 0x60) = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
 				*(int*) (pkt + 0x64) = cnt;
 				fcn_004c5530(pkt);

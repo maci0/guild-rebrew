@@ -41,8 +41,8 @@ unsigned int* __cdecl fcn_00477590(int originX, int originY, unsigned int width,
     total = 0;
     buf = (unsigned int*) m_alloc((width * 0xc + 4) * height + 0x32, (char*) 0x67d984);
     for (y = 0; y < (int) height; y++) {
-        for (x = 0; x < (int) width; x++) {
-            stride = pixels + (((originY + y) * rowStride + originX) + x) * 3;
+        stride = pixels + ((originY + y) * rowStride + originX) * 3;
+        for (x = 0; x < (int) width; x++, stride += 3) {
             if (fcn_00475780((char*) stride, (char*) 0x100f1a0) && x > (int) (unsigned short) maxx) {
                 maxx = x;
             }

@@ -148,8 +148,8 @@ int __cdecl fcn_00449130(void)
 			/ (float) (unsigned int) g_14ce864);
 		if (g_6628b0 < scale1)
 			scale1 = g_6628b0;
-		v21 = v21 * scale0 * *(float*) 0x662d00;
-		v19 = v19 * scale1 * *(float*) 0x662cfc;
+		v21 = v21 * scale0 * 256.0f;
+		v19 = v19 * scale1 * -256.0f;
 	}
 	if (g_14ce8e4 == 0 && g_14ce8d0 == 0 && g_6772c4 == 0) {
 		g_6772c4 = 1;

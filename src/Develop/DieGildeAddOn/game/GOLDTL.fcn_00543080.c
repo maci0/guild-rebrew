@@ -139,11 +139,7 @@ void __cdecl fcn_00543080(void)
 	}
 	v3 = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 	while (v3) {
-		if (*v3 != 0x1e) {
-			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v3].category == 7) {
-				*(int*)(v3 + 0x69) = 0;
-			}
-		} else {
+		if (*v3 == 0x1e) {
 			v5 = fcn_005155e0(v3);
 			v2 = d3_CurrentContextIndex;
 			if (v5 != -1) {
@@ -153,6 +149,8 @@ void __cdecl fcn_00543080(void)
 				fcn_0043a9c0(3);
 				fcn_004432d0(v2, 1);
 			}
+		} else if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v3].category == 7) {
+			*(int*)(v3 + 0x69) = 0;
 		}
 		v3 = (unsigned char*) gm_FindNextFilteredEntity();
 	}

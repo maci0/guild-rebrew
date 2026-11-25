@@ -130,25 +130,7 @@ void __cdecl fcn_0059a340(void)
 	state = 0;
 	fcn_0042df30(0x538060, 0);
 	v9 = fcn_005373e0(0x59a340, 0x67fff);
-	do {
-		if (!v9) {
-			g_772d10 = 0;
-			g_774964 = 0;
-			fcn_004c3a10();
-			fcn_00475220(g_6b5c60);
-			fcn_00533a40(g_6b5c60);
-			fcn_00530510();
-			g_7725c4 = 0;
-			d2_SuppressOverlay = 0;
-			g_6772c4 = 1;
-			fcn_004125c0(d2_MouseX, d2_MouseY);
-			d2_MouseRightBoundary = savedRight;
-			d2_MouseBottomBoundary = savedBottom;
-			g_6b5c80 = v5;
-			d2_MouseTopBoundary = v6;
-			fcn_005373e0(0, 0x67fff);
-			return;
-		}
+	while (v9) {
 		g_774658 = g_774650;
 		if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_198[0x19]) > 0)
 			lc_PlayerInJail();
@@ -257,5 +239,20 @@ label_59a834:
 		}
 label_59a83a:
 		v9 = fcn_005373e0(0x59a340, 0x67fff);
-	} while (1);
+	}
+	g_772d10 = 0;
+	g_774964 = 0;
+	fcn_004c3a10();
+	fcn_00475220(g_6b5c60);
+	fcn_00533a40(g_6b5c60);
+	fcn_00530510();
+	g_7725c4 = 0;
+	d2_SuppressOverlay = 0;
+	g_6772c4 = 1;
+	fcn_004125c0(d2_MouseX, d2_MouseY);
+	d2_MouseRightBoundary = savedRight;
+	d2_MouseBottomBoundary = savedBottom;
+	g_6b5c80 = v5;
+	d2_MouseTopBoundary = v6;
+	fcn_005373e0(0, 0x67fff);
 }

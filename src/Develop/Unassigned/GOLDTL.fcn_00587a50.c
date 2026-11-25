@@ -27,6 +27,7 @@ void __cdecl fcn_00587a50(char* o)
 	float d1;
 	float z;
 	int iv;
+	double iv_scale;
 	float u;
 	float s;
 	float v[8];
@@ -85,15 +86,15 @@ void __cdecl fcn_00587a50(char* o)
 	d1 = (v[0] - -0.61086524f) / ((double) 0.7853982f - (double) -0.61086524f);
 	f = (v[0] - -0.2617994f) / ((double) 0.7853982f - (double) -0.2617994f);
 	iv = fcn_00471f80(*(int*) (o + 0xb4));
-	u = (float) iv * 0.01f;
-	s = (0.5f - 0.25f * u) * f * *(float*) (o + 0x20) + d1;
+	iv_scale = (float) iv * 0.01f;
+	s = (0.5f - 0.25f * iv_scale) * f * *(float*) (o + 0x20) + d1;
 	s = s * 30.0f + v[5];
 	u = 1.0f - *(float*) (o + 0x20);
 	u = 0.3f * sqrt(u) + 0.7f * u;
-	u = u + (float) iv * 0.01f * *(float*) (o + 0x20) * 0.5f;
+	u = u + iv_scale * *(float*) (o + 0x20) * 0.5f;
 	v[0] = u * 0.61086524f * f + -0.61086524f;
 	z = *(float*) (o + 0x2c);
-	u = (float) iv * 0.01f * f * 0.5f + 1.0f;
+	u = iv_scale * f * 0.5f + 1.0f;
 	u = (u * 1450.0f * f + 50.0f) * *(float*) (o + 0x20);
 
 	v[5] = u * *(float*) (o + 0x28) + s;

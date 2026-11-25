@@ -50,7 +50,8 @@ int __cdecl fcn_00493200(char* actorEntity, char* a2)
 			return 0;
 		}
 		index = gm_RandomMod(count);
-		for (left = count; left != 0; left--) {
+		left = count;
+		do {
 			r = *(int*) (slots + index * 24 + 4);
 			if (*(int*) (actorEntity + 4) != r) {
 				pick = gm_LookupEntityRecordById(r);
@@ -63,8 +64,9 @@ int __cdecl fcn_00493200(char* actorEntity, char* a2)
 					pick = 0;
 				}
 			}
+			left--;
 			index = (index + 1) % count;
-		}
+		} while (left != 0);
 	} else if (kind == 0xa) {
 		code = 0xc00;
 		pos = gm_RandomMod(0x1e);

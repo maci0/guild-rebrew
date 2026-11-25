@@ -123,7 +123,7 @@ int __cdecl fcn_00495fe0(int unused, char* obj, int flag, int* out1, int* out2)
 		}
 		marks[loop] = 1;
 		extra.values[loop] = fcn_004fbd20(loop) & 0xff;
-		if ((extra.values[loop] & 0xff) == 0) {
+		if (extra.values[loop] == 0) {
 			extra.values[loop] = 0xfc;
 		}
 		r = fcn_004fa5b0(cands[loop], obj, frame); bonus = (r & 2) ? -1.0f : g_6628a8;

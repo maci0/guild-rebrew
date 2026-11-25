@@ -39,13 +39,9 @@ int __cdecl fcn_00558370(int a0)
     if (v5 == 0)
         goto fail;
     v1 = *(int *)(v5 + 0x61);
-    if (v1 == 0)
+    if (!v1 || !(v1 = *(int *)(v1 + 0x1cc)) || !*(int *)(v1 + 0x318))
         goto fail;
-    v1 = *(int *)(v1 + 0x1cc);
-    if (v1 == 0)
-        goto fail;
-    if (*(int *)(v1 + 0x318) == 0)
-        goto fail;
+
     {
         v6 = v5;
         gm_ResolveEntityById(&out, 0, 0, *(int *)(v3 + 0xb4));
@@ -53,13 +49,9 @@ int __cdecl fcn_00558370(int a0)
         if (v5 == 0)
             goto fail;
         v1 = *(int *)(v5 + 0x61);
-        if (v1 == 0)
+        if (!v1 || !(v1 = *(int *)(v1 + 0x1cc)) || !*(int *)(v1 + 0x318))
             goto fail;
-        v1 = *(int *)(v1 + 0x1cc);
-        if (v1 == 0)
-            goto fail;
-        if (*(int *)(v1 + 0x318) == 0)
-            goto fail;
+
         if (*(int *)(v3 + 0xc4) == 0)
         {
             d3_TransformPoint(*(int *)(v6 + 0x61), *(int *)(v6 + 0x61) + 0x4c,

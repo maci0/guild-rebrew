@@ -228,14 +228,13 @@ void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a
 		return;
 	}
 	i = 0;
-	while (i <= 5) {
+	do {
+		if (i >= 6)
+			break;
 		io_FormatTextBuffer(buf, s_6999a8, list[i]);
 		strcat(reportText, buf);
 		i++;
-		if (count <= i) {
-			return;
-		}
-	}
+	} while (i < count);
 	if (count <= i) {
 		return;
 	}

@@ -9,6 +9,8 @@ int __cdecl fcn_00429920(void)
 	unsigned long *p;
 	int i;
 	int n;
+	unsigned long single_head;
+	unsigned long single_tail;
 
 	*(void **)0x6b7e9c = m_alloc(0x4c00, (const char *)0x6797d0);
 	*(void **)0x6b7ea0 = m_alloc(0x20, (const char *)0x6797c0);
@@ -71,14 +73,16 @@ int __cdecl fcn_00429920(void)
     *(unsigned long *)0x14cb3f4 = *(unsigned long *)0x679710;
     *(unsigned short *)0x14cb3d4 = *(unsigned short *)0x679728;
     *(unsigned char *)0x14cb3d6 = *(unsigned char *)0x67972a;
+    single_head = *(unsigned long *)0x679700;
+    single_tail = *(unsigned long *)0x679708;
     *(unsigned long *)0x14cb404 = *(unsigned long *)0x679704;
     *(unsigned char *)0x14cb3e4 = *(unsigned char *)0x679720;
     *(unsigned long *)0x14cb3f0 = *(unsigned long *)0x67970c;
     *(unsigned long *)0x14cb414 = *(unsigned long *)0x6796f8;
     *(unsigned char *)0x14cb3f8 = *(unsigned char *)0x679714;
-    *(unsigned long *)0x14cb400 = *(unsigned long *)0x679700;
+    *(unsigned long *)0x14cb400 = single_head;
     *(unsigned long *)0x14cb424 = *(unsigned long *)0x6796ec;
-    *(unsigned long *)0x14cb408 = *(unsigned long *)0x679708;
+    *(unsigned long *)0x14cb408 = single_tail;
     *(unsigned long *)0x14cb410 = *(unsigned long *)0x6796f4;
     *(unsigned long *)0x14cb8e0 = 0;
     *(unsigned long *)0x14cb418 = *(unsigned long *)0x6796fc;

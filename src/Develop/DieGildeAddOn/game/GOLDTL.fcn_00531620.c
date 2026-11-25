@@ -96,6 +96,7 @@ void __cdecl fcn_00531620(void)
 	int idx;
 	int c;
 	int cell;
+	int dimension;
 	int ei;
 	int w;
 
@@ -186,11 +187,12 @@ L6d3:
 			continue;
 		}
 		cell = 0;
+		dimension = map->n;
 		for (;;) {
 			ix = (int) (u.offs[k][0] * (50.0 / map->sx) + b);
 			iy = (int) (u.offs[k][1] * (50.0 / map->sz) + a);
-			if (ix < map->n && iy < map->n) {
-				cell = ((Cell_531620*) map->cells)[map->n * iy + ix].id;
+			if (ix < dimension && iy < dimension) {
+				cell = ((Cell_531620*) map->cells)[dimension * iy + ix].id;
 			}
 			k++;
 			if (k >= 8) {
@@ -198,7 +200,7 @@ L6d3:
 				iy = a;
 				break;
 			}
-			if (ix < 0 || ix >= map->n || iy < 0 || iy >= map->n
+			if (ix < 0 || ix >= dimension || iy < 0 || iy >= dimension
 			    || cell == 0 || cell == 0xd) {
 				continue;
 			}

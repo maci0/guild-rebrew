@@ -61,10 +61,10 @@ int __cdecl fcn_004ab3e0_gold(int action, char* actor, int busy, char* first, ch
     i = 0;
     chosen = 0;
     for (; i < count; i++) {
-        level = fcn_004e99c0((unsigned char) ((char*) g_slot_table)[ids[i] * 0x21c + 0x166]) / 3 + 2 + total;
-        if (level >= *(int*) (actor + 0x194)) {
+        level = fcn_004e99c0((unsigned char) ((char*) g_slot_table)[ids[i] * 0x21c + 0x166]) / 3 + 2;
+        if (level + total >= *(int*) (actor + 0x194)) {
             selected[chosen++] = (char*) g_slot_table + ids[i] * 0x21c;
-            total = level;
+            total += level;
         }
     }
     if (!chosen) return 0;

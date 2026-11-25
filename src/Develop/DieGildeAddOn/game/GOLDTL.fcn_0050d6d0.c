@@ -2,6 +2,7 @@
  * their computed offsets. */
 
 #include <string.h>
+#include "Develop/DieGildeAddOn/game/game_timestamp.h"
 typedef struct { int values[3]; } SiteTriple;
 
 extern unsigned char g_773d75;
@@ -42,7 +43,7 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 	if (a1 && a0 && *(unsigned short*) (a0 + 0x27) != 0xffff && a2) {
 		v21 = gm_QueryEntitySum(*(int*) (a0 + 0x5d), g_773d75);
 		if ((char) a1[1] == 6) {
-			if (*(int*) 0x7f4c00 < 6) {
+			if (gm_GameTime.a < 6) {
 				v6 = (int) *(unsigned short*) (a0 + 0x27);
 				v2 = *(char*) ((unsigned int) v6 * 0x21c + 0x7f4ca2);
 				if (v2 != 6 && v2 != 7) {

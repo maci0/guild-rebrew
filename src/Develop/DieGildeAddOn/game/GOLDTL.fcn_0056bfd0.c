@@ -140,8 +140,8 @@ void __cdecl fcn_0056bfd0(char* ent)
 			*(int*) (msg + 0x34) = *(int*) ((char*) i + 4);
 			*(int*) (msg + 0x38) = *(int*) ((char*) j + 4);
 			for (i = 0; i < 0x10; i++) {
-				*(int*) (msg + 0x80 + i * 4) = -1;
 				*(int*) (msg + 0xc0 + i * 4) = -1;
+				*(int*) (msg + 0x80 + i * 4) = -1;
 			}
 			n = 0;
 			i = 0x7f4e0c;

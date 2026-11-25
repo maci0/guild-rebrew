@@ -66,9 +66,8 @@ retry:
 	}
 	v9 = fcn_00507e70(p, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[v8[4]]), 4);
 	if (gm_RandomFloat01() + v9 >= 1.0f) {
-		memcpy(a3, v7, sizeof(v7));
-		memcpy(a4, v8, sizeof(v8));
-		return 0x28;
+		method = 0x28;
+		goto copy_result;
 	}
 	*(unsigned char*) v7 = 4;
 	v7[1] = 3; v7[5] = 0;
@@ -81,6 +80,7 @@ done:
 	if (method == 0) {
 		return 0;
 	}
+copy_result:
 	memcpy(a3, v7, sizeof(v7));
 	memcpy(a4, v8, sizeof(v8));
 	return method;

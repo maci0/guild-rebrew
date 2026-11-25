@@ -1,4 +1,3 @@
-extern float g_662914;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 extern char g_7f4ca0[];
@@ -50,7 +49,7 @@ void __cdecl fcn_0057c9f0(char* action)
 			bonus = -5;
 		}
 		bonus += 0x19;
-		radius = (float) base + g_662c98;
+		radius = (float) base + 40.0f;
 		count = gm_RandomMod(0x18) + 0xf;
 	}
 	else if (kind == 2) {
@@ -62,7 +61,7 @@ void __cdecl fcn_0057c9f0(char* action)
 			bonus = -5;
 		}
 		bonus += 0xf;
-		radius = (float) base + g_662914;
+		radius = (float) base + 50.0f;
 		count = gm_RandomMod(0x10) + 0xc;
 	}
 	else {

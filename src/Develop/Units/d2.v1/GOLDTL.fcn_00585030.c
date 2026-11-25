@@ -135,7 +135,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 		x = (count & 1) * 0xf0 + 10;
 		y = (count / 2) * 0x50 + 10;
 		item = fcn_0046f740(x, y, src[0] + 0xdf, wnd);
-		*ids++ = item;
+		*ids = item;
 		((D2_CONTROL_TL*) g_1015ea0)[item].value_05c = 1;
 		*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[item].associated_object) = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[src[0]]);
 		fcn_00469470(list, item);
@@ -145,6 +145,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 		d2_SetElementFont(item, 0x54);
 		fcn_00534160(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
 		count++;
+		ids++;
 	}
 	do {
 		sel = fcn_004ecf00(e, &owner, &frac, 0);
@@ -185,7 +186,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 				x = (count & 1) * 0xf0 + 10;
 				y = (count / 2) * 0x50 + 10;
 				item = fcn_0046f740(x, y, src[0] + 0xdf, wnd);
-				*ids++ = item;
+				*ids = item;
 				((D2_CONTROL_TL*) g_1015ea0)[item].value_05c = 1;
 				*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[item].associated_object) = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[src[0]]);
 				fcn_00469470(list, item);
@@ -195,6 +196,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 				d2_SetElementFont(item, 0x54);
 				fcn_00534160(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
 				count++;
+				ids++;
 			}
 			g_102cbc8[list].n = owner;
 			d2_UpdateRadioGroup(list);

@@ -44,7 +44,7 @@ void __cdecl fcn_00471490(int k)
 	char* obj;
 	int sx;
 	int sy;
-	int top;
+	int top, left;
 	int oh1;
 	int oh2;
 
@@ -88,8 +88,8 @@ void __cdecl fcn_00471490(int k)
 						right = 0x100;
 					}
 					top = (*(D2_CONTROL_TL*) obj).clip_top + ybase;
-					fcn_0047a040((*(D2_CONTROL_TL*) obj).clip_left < 0 ? 0 : (*(D2_CONTROL_TL*) obj).clip_left,
-					             top <= 0 ? 0 : top, right, v);
+					left = (*(D2_CONTROL_TL*) obj).clip_left;
+					fcn_0047a040(left & ((left < 0) - 1), top & ((top <= 0) - 1), right, v);
 					switch ((*(D2_CONTROL_TL*) obj).kind) {
 					case 1:
 						if ((*(D2_CONTROL_TL*) obj).value_03c) {

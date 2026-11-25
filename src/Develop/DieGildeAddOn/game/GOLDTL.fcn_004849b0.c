@@ -345,7 +345,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 				}
 				x = fcn_0050c710(*(char**) (a + 0x16c), 0xb, 1);
 				g_100b0c0[k].allocated =
-				    (int) (((float) x * 0.01f + g_6628a0) *
+				    (int) (((float) x * 0.01f + 1.0f) *
 				               g_664124 +
 				           (float) g_100b0c0[k].allocated);
 			}
@@ -365,7 +365,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 				}
 				x = fcn_0050c710(*(char**) (a + 0x16c), 0xb, 1);
 				g_100b0c0[k].allocated =
-				    (int) (((float) x * 0.01f + g_6628a0) *
+				    (int) (((float) x * 0.01f + 1.0f) *
 				               g_664124 +
 				           (float) g_100b0c0[k].allocated);
 			}
@@ -385,7 +385,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 				}
 				x = fcn_0050c710(*(char**) (a + 0x16c), 0xb, 1);
 				g_100b0c0[k].allocated =
-				    (int) (((float) x * 0.01f + g_6628a0) *
+				    (int) (((float) x * 0.01f + 1.0f) *
 				               g_664124 +
 				           (float) g_100b0c0[k].allocated);
 			}

@@ -1,3 +1,5 @@
+#include "Develop/DieGildeAddOn/game/game_data.h"
+
 unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short* spr, unsigned int zoom)
 {
 	unsigned short* dst;
@@ -21,22 +23,22 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 	dst = (unsigned short*) (*(int*) (s + 0x1c)
 	 + (*(int*) (s + 0x10) * (int) y + x) * 2);
 	height = *(unsigned short*) ((char*) spr + 0xa);
-	if ((int) (height + y) < *(int*) 0x7725fc) {
+	if ((int) (height + y) < g_7725fc) {
 		return 0;
 	}
 	h = *(unsigned short*) ((char*) spr + 6);
-	if ((int) x + (int) h / (int) zoom > *(int*) 0x67d964) {
+	if ((int) x + (int) h / (int) zoom > d2_ClipRight) {
 		return 0;
 	}
-	if ((int) x + (int) h < *(int*) 0x7725f8) {
+	if ((int) x + (int) h < d2_ClipLeft) {
 		return 0;
 	}
-	if (*(int*) 0x67d968 < (int) ((int) height / (int) zoom + (int) y)) {
-		height = (*(int*) 0x67d968 - (int) y) * zoom;
+	if (d2_ClipBottom < (int) ((int) height / (int) zoom + (int) y)) {
+		height = (d2_ClipBottom - (int) y) * zoom;
 	}
 	off = 0;
 	row = 0;
-	if ((int) y >= *(int*) 0x7725fc) {
+	if ((int) y >= g_7725fc) {
 		while (row < (int) height) {
 			first = (row % (int) zoom) == 0;
 			end = q;
@@ -91,7 +93,7 @@ unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short
 					n = (q[1] + off) / zoom;
 					if (n > 0) {
 						do {
-							if (*(int*) 0x7725fc <= (int) (row / (int) zoom + (int) y)) {
+							if (g_7725fc <= (int) (row / (int) zoom + (int) y)) {
 								*d = *(unsigned short*) src;
 							}
 							src = (unsigned int*) ((char*) src + zoom * 2);

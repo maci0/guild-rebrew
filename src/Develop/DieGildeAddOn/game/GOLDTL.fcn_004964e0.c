@@ -143,11 +143,9 @@ fallback:
 calc:
 	for (i = 0; i < 4; i++) {
 		if (t->effects[i].value > 0.0f) {
-			if (t->effects[i].type == e->kind) {
-				*a0 += e->rate[t->effects[i].type].f * t->effects[i].value * 0.02f;
-			} else {
-				*a0 += e->rate[t->effects[i].type].f * t->effects[i].value * 0.01f;
-			}
+			*a0 += t->effects[i].type == e->kind
+				? e->rate[t->effects[i].type].f * t->effects[i].value * 0.02f
+				: e->rate[t->effects[i].type].f * t->effects[i].value * 0.01f;
 
 		}
 		if (t->other_effects[i].value > 0.0f) {
