@@ -69,8 +69,8 @@ void __cdecl fcn_00585910(char* e)
 {
 	char text[0x100];
 	char buf[0x100];
-	int prev;
 	int stamp;
+	int prev;
 	float frac;
 	int owner;
 	int item;
@@ -167,13 +167,12 @@ void __cdecl fcn_00585910(char* e)
 				io_FormatTextBuffer(text, (char*) 0x404d, owner + 0x4172);
 			}
 			item = d2_ShowTxt(0, 0, text, d2_CurrentWindowId);
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].width) = ((Screen*) g_77255c)->xc;
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
+			((D2_CONTROL_TL*) (g_1015ea0 + item * sizeof(D2_CONTROL_TL)))->width = ((Screen*) g_77255c)->xc;
+			((D2_CONTROL_TL*) (g_1015ea0 + item * sizeof(D2_CONTROL_TL)))->value_06c = 1;
 			d2_SetElementFont(item, 0x54);
 			d2_SetElementValue(ids[9], 0, 0x64, (int) (frac * 100.0f));
 		}
 		if (sel != prev || g_6b7fac > (unsigned int) (stamp + 0x32)) {
-			int lbl;
 			data = fcn_004ec7d0((unsigned char*) e);
 			if (data == 0) {
 				g_774654 = 1;
@@ -188,10 +187,10 @@ void __cdecl fcn_00585910(char* e)
 			ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 			io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
-			lbl = d2_ShowTxt(0, 0, buf, ids[1]);
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[lbl].width) = ((D2_WIN*)g_1015f40)[ids[1]].width;
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[lbl].value_06c) = 1;
-			d2_SetElementFont(lbl, 0x53);
+			ids[9] = d2_ShowTxt(0, 0, buf, ids[1]);
+			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ids[9]].width) = ((D2_WIN*)g_1015f40)[ids[1]].width;
+			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ids[9]].value_06c) = 1;
+			d2_SetElementFont(ids[9], 0x53);
 			io_FormatTextBuffer(buf, (char*) 0x403f, *(unsigned short*) (data + 0xa));
 			item = d2_ShowTxt(0x12c, 0x64, buf, ids[1]);
 			d2_SetElementFont(item, 0x53);

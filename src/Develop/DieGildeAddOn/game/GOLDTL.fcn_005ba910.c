@@ -400,7 +400,7 @@ l_after:
 		f.v4c = 1;
 	} else {
 		if (*(char*) f.v74 == 0xa) {
-			f.v58 = 1;
+			f.v68 = 1;
 			/* 0x5bae4e: the search result lands in the v88 slot, not a1 */
 			f.v88 = (int) gm_StartFilteredEntitySearch(1, 0, 0x44);
 			f.v40 = 1;
@@ -560,10 +560,10 @@ l_sel:
 			                 *(int*) (idx + 2), 3,
 			                 (int) (*(unsigned short*) 0x774970)) != 0
 			    && e->f04 == 0) {
-				if (fcn_00505340(f.v14) == 0) {
+				if (fcn_00505340(buildingArg) == 0) {
 					goto l_next;
 				}
-				if (fcn_005ba020(f.v14, idx) != 0) {
+				if (fcn_005ba020(buildingArg, idx) != 0) {
 					goto l_next;
 				}
 			}
@@ -710,8 +710,8 @@ l_fill_next:
 l_slot:
 	/* 0x5bb798: per-slot panel refresh, f.v28 is the slot byte offset */
 	e = (Ent5ba910*) ((char*) f.v6D8 + f.v28);
-	if (e->f00 != -1) {
-		*(int*) 0x772514 = e->f00;
+	if (e->f10 != -1) {
+		*(int*) 0x772514 = e->f10;
 		io_AppendText(0x6811b0);
 	}
 	idx = e->f00;
@@ -811,15 +811,15 @@ l_slot_handles:
 			if (*(short*) (f.v15C + 0x44 + f.v24 * 2) == 0) {
 				continue;
 			}
-			for (j = 0; j < f.v158; j++) {
-				if (*(int*) ((char*) e + 0xd8 + j * 4) != -1
+			for (f.v20 = 0; f.v20 < f.v158; f.v20++) {
+				if (*(int*) ((char*) e + 0xd8 + f.v20 * 4) != -1
 				    && *(int*) (*(int*) 0x1015ea0
-				                + *(int*) ((char*) e + 0xd8 + j * 4) * 0x2f4 + 8)
+				                + *(int*) ((char*) e + 0xd8 + f.v20 * 4) * 0x2f4 + 8)
 				       == (int) (*(unsigned short*) (f.v15C + 0x44 + f.v24 * 2)) + 0xdf) {
 					break;
 				}
 			}
-			if (j < f.v158) {
+			if (f.v20 < f.v158) {
 				i = ((int*) ((char*) f.v6D8 + 0xd8))[f.v10 + f.v20];
 				f.v1c = ((int*) (f.v15C + 4))[f.v24];
 				j = fcn_00471f80(i);
@@ -827,8 +827,8 @@ l_slot_handles:
 					f.v48 = 1;
 				}
 				fcn_00472380(i, 0, ((int*) (f.v15C + 0x64))[f.v24], j);
-				fcn_00472380(((int*) ((char*) f.v6D8 + 0xe4))[f.v10 + f.v20], 0, f.v1c,
-				             ((int*) (f.v15C + 0x64))[f.v24] - j);
+				j = ((int*) (f.v15C + 0x64))[f.v24] - j;
+				fcn_00472380(((int*) ((char*) f.v6D8 + 0xe4))[f.v10 + f.v20], 0, f.v1c, j);
 				{
 					int k;
 					k = i * 0x2f4;
@@ -840,7 +840,7 @@ l_slot_handles:
 				fcn_0064d41a((int) (*(int*) 0x1015ea0 + i * 0x2f4 + 0xcc), 0x6aa1a8,
 				             *(int*) (0x14a79c0
 				                      + (int) (*(unsigned short*) (f.v15C + 0x44 + f.v24 * 2)) * 8),
-				             ((int*) (f.v15C + 0x64))[f.v24],
+				             j,
 				             *(int*) 0x14b52c0);
 			}
 			if (f.v20 < f.v158) {
@@ -980,7 +980,7 @@ l_da9:
 			j = 3;
 			idx = (int) e->fD8;
 			do {
-				if (*(int*) idx != -1) {
+				if (*(int*) (idx + 0xc) != -1) {
 					fcn_00473690(*(int*) (*(int*) 0x1015ea0 + *(int*) idx * 0x2f4 + 8),
 					             fcn_00471f80(*(int*) idx));
 				}
@@ -1050,34 +1050,6 @@ l_da9:
 			goto l_5bc2f8;
 		}
 	}
-	goto l_5bc1d3;
-l_5bc2f8:
-	if ((*(char*) (e->f00 + 0x20) & 1) != 0) {
-		fcn_00533a40(*(int*) 0x14a56e0);
-		goto l_5bc1d3;
-	}
-	idx = (int) e->f00;
-	e->f08 = 1;
-	if (idx == 0) {
-		goto l_5bc1d3;
-	}
-	if (f.v3c != 0 || f.v4c != 0) {
-		goto l_5bc370;
-	}
-	fcn_0051af00((int) f.v15D8, 0xee, f.v14);
-	fcn_00533a40((int) (f.v15D8 + 0xc));
-	goto l_5bc1d7;
-l_5bc370:
-	i = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
-	d2_ClearSelectedControl();
-	if (gm_RandomFloat01() < 0.25f) {
-		ob_TransportFromLager(*(int*) (i + 2), f.v18, f.v14, f.v3c, 0, f.v50,
-		                      f.v34, modeFlags);
-	} else {
-		ob_TransportFromLager(*(int*) (i + 2), f.v18, f.v14, f.v3c, 0, 1.0f,
-		                      f.v34, modeFlags);
-	}
-	goto l_5bc1d7;
 l_5bc1d3:
 l_5bc1d7:
 	/* 0x5bc1d7: the selection table decides between layout and overlay */
@@ -1106,95 +1078,50 @@ l_5bc253:
 	}
 	f.v98 = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
 	f.v30 = (int) (((Ent5ba910*) f.v24)->fD8);
-	for (f.v20 = 3; f.v20 != 0; f.v20--, f.v30 += 4) {
-		j = *(int*) f.v30;
-		if (j == -1) {
-			continue;
-		}
-		slot_value = *(int*) (*(int*) 0x1015ea0 + j * 0x2f4 + 8) - 0xdf;
-		if (f.v40 == 0) {
-			i = 0;
-		} else if (f.v68 == 0) {
-			i = (int) (fcn_0050bb50(slot_value, f.v34) * *(float*) (f.v14 + 0x49));
-		} else {
-			i = (int) (fcn_0050bb50(slot_value, f.v34) * 0.9);
-		}
-		if (modeFlags == 2 || modeFlags == 4) {
-			i = (int) fcn_0050bb50(slot_value, (int) (*(unsigned char*) (f.v14 + 0x65)));
-		}
-		idx = 1;
-		if (f.v34 != 0
-		    && fcn_00502cd0(*(int*) (f.v34 + 0x14), 1, 0, slot_value) == 0) {
-			idx = 0;
-		}
-		j = fcn_00471f80(j);
-		if (idx == 0) {
-			goto l_5bca65;
-		}
-		if (j <= 0) {
-			continue;
-		}
-		idx = gm_eval_SlotVoll(f.v18, slot_value, j);
-		f.v28 = idx * i;
-		f.vA4 = (int) fcn_0050b750(1, (int) (g_773d75));
-		*(float*) &f.v84 = (float) f.v28;
-		if ((int) (*(float*) &f.v84 * *(float*) &f.v64 - *(float*) &f.v84)
-		    < f.vA4) {
-			*(float*) &f.v64 = 1.0f;
-		}
-		if (f.v80 != 0) {
-			if (d2_DispatchTutorialEvent(0x28, f.v14, 0, slot_value) == 0) {
-				continue;
-			}
-			fcn_0057e880(0x28, f.v14, 0, slot_value);
-		} else if (f.v70 != 0) {
-			if (d2_DispatchTutorialEvent(0x26, f.v14, 0, slot_value) == 0) {
-				continue;
-			}
-			fcn_0057e880(0x26, f.v14, 0, slot_value);
-		}
-		if (idx <= 0) {
-			continue;
-		}
-		fcn_004c51f0(*(int*) (f.v18 + 2), *(int*) (f.v98 + 2), slot_value, idx,
-		             f.v34, (int) (*(float*) &i * *(float*) &f.v64));
-		if (*(float*) &f.v64 == 1.0f) {
-			fcn_0051af00((int) (f.v210 + 0x238), 0xed,
-			             (int) (*(float*) &f.v28 * *(float*) &f.v64
-			                    - *(float*) &f.v28));
-			fcn_00533a40((int) (f.v210 + 0x240));
-			fcn_004234e0(0, 0x68aed0, 1, 0x3f, 0x7f, 0, 0);
-		}
-		fcn_00472380(*(int*) f.v30, 0, 0x64, 0);
-		continue;
-	l_5bca65:
-		if (j <= 0) {
-			continue;
-		}
-		fcn_0051af00((int) (f.v210 + 0x238), 0xeb, slot_value + slot_value + 0x9a8);
-		fcn_00526120((int) (f.v210 + 0x238), 0x100);
+	f.v20 = 3;
+l_5bc295:
+	j = *(int*) f.v30;
+	if (j == -1) {
+		goto l_5bca98;
 	}
-l_5bcab6:
-	f.v24 += 0xf0;
-	f.v1c--;
-	if (f.v1c != 0) {
-		goto l_5bc253;
+	idx = 1;
+	slot_value = *(int*) (*(int*) 0x1015ea0 + j * 0x2f4 + 8) - 0xdf;
+	if (f.v40 == 0) {
+		goto l_5bc8ca;
 	}
+	if (f.v68 == 0) {
+		goto l_5bc887;
+	}
+	i = (int) (fcn_0050bb50(slot_value, f.v34) * 0.9);
+	goto l_5bc89d;
 
-l_5bcacf:
-	ResetDisplayCounters();
-	for (idx = 0x7796f0; idx < 0x7798b0; idx += 0x38) {
-		if (*(int*) idx != -1) {
-			fcn_00472380(*(int*) idx, 0, 0, 0);
-		}
+l_5bc2f8:
+	if ((*(char*) (e->f00 + 0x20) & 1) != 0) {
+		fcn_00533a40(*(int*) 0x14a56e0);
+		goto l_5bc1d3;
 	}
-	for (idx = 0x778db0; idx < 0x779130; idx += 0x38) {
-		if (*(int*) idx != -1) {
-			fcn_00472380(*(int*) idx, 0, 0, 0);
-		}
+	idx = (int) e->f00;
+	e->f08 = 1;
+	if (idx == 0) {
+		goto l_5bc1d3;
 	}
-	fcn_004116d0();
-	goto l_5bcd16;
+	if (f.v3c != 0 || f.v4c != 0) {
+		goto l_5bc370;
+	}
+	fcn_0051af00((int) f.v15D8, 0xee, f.v14);
+	fcn_00533a40((int) (f.v15D8 + 0xc));
+	goto l_5bc1d7;
+l_5bc370:
+	i = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
+	d2_ClearSelectedControl();
+	if (gm_RandomFloat01() < 0.25f) {
+		ob_TransportFromLager(*(int*) (i + 2), f.v18, f.v14, f.v3c, 0, f.v50,
+		                      f.v34, modeFlags);
+	} else {
+		ob_TransportFromLager(*(int*) (i + 2), f.v18, f.v14, f.v3c, 0, 1.0f,
+		                      f.v34, modeFlags);
+	}
+	goto l_5bc1d7;
 
 l_5bc3fa:
 	/* 0x5bc3fa: without a container the slot flags are only toggled */
@@ -1235,12 +1162,12 @@ l_5bc453:
 				continue;
 			}
 			if (f.v40 == 0) {
-				*(float*) &f.v84 = 0.0f;
+				*(float*) &f.v8c = 0.0f;
 			} else if (f.v68 == 0) {
-				*(float*) &f.v84 =
+				*(float*) &f.v8c =
 				    fcn_0050bb50(slot, f.v34) * *(float*) (f.v14 + 0x49);
 			} else {
-				*(float*) &f.v84 = fcn_0050bb50(slot, f.v34) * 0.9;
+				*(float*) &f.v8c = fcn_0050bb50(slot, f.v34) * 0.9;
 			}
 			idx = 1;
 			if (f.v44 != 0
@@ -1253,7 +1180,7 @@ l_5bc453:
 			}
 			fcn_004c51f0(*(int*) (f.v18 + 2),
 			             *(int*) (*(int*) 0x775318 + 4), slot, j, f.v34,
-			             (int) (*(float*) &f.v84));
+			             (int) (*(float*) &f.v8c));
 			fcn_00472380(*(int*) i, 0, 0x64, 0);
 		}
 		goto l_5bc1d3;
@@ -1302,17 +1229,18 @@ l_5bc700:
 	if (f.v3c == -1 || f.v60 == 0 || *(int*) 0x14ce8d8 == 0) {
 		goto l_5bc1d3;
 	}
+	f.v20 = 0;
 	e = f.v6D8;
 	for (i = 0; i < 16; i++, e++) {
-		if (e->f00 == 0 || e->f0c != *(int*) 0x67d370) {
-			continue;
+		if (e->f00 != 0 && e->f0c == *(int*) 0x67d370) {
+			if ((*(char*) (f.v6D8[i].f00 + 0x20) & 1) != 0) {
+				fcn_00533a40(*(int*) 0x14a56e0);
+			} else {
+				f.v6D8[i].f08 = 1;
+				f.v20 = (int) f.v6D8[i].f00;
+			}
+			break;
 		}
-		if ((*(char*) (e->f00 + 0x20) & 1) != 0) {
-			fcn_00533a40(*(int*) 0x14a56e0);
-			continue;
-		}
-		e->f08 = 1;
-		f.v20 = (int) e->f00;
 	}
 	if (f.v20 == 0) {
 		goto l_5bc1d3;
@@ -1320,7 +1248,7 @@ l_5bc700:
 	for (idx = 0x776c60; idx < 0x776c90; idx += 8) {
 		int slot;
 
-		f.vA4 = (int) fcn_00502cd0(*(int*) (f.v20 + 0x14), 1, 0, 0x1dd);
+		h = (int) fcn_00502cd0(*(int*) (f.v20 + 0x14), 1, 0, 0x1dd);
 		if (*(int*) (idx + 4) == 0) {
 			continue;
 		}
@@ -1337,16 +1265,108 @@ l_5bc700:
 		} else {
 			*(float*) &f.v84 = fcn_0050bb50(slot, f.v34) * 0.9;
 		}
-		j = gm_eval_SlotVoll(f.vA4, slot, j);
+		j = gm_eval_SlotVoll(h, slot, j);
 		if (j == 0) {
 			continue;
 		}
-		fcn_004c51f0(*(int*) (f.vA4 + 2),
+		fcn_004c51f0(*(int*) (h + 2),
 		             *(int*) (*(int*) 0x775318 + 4), slot, j, f.v34,
 		             (int) (*(float*) &f.v84));
 		fcn_00472380(*(int*) idx, 0, 0x64, 0);
 	}
 	goto l_5bc1d7;
+
+l_5bc887:
+	i = (int) (fcn_0050bb50(slot_value, f.v34) * *(float*) (f.v14 + 0x49));
+l_5bc89d:
+	f.v10 = i;
+	if (modeFlags == 2 || modeFlags == 4) {
+		i = (int) fcn_0050bb50(slot_value, (int) (*(unsigned char*) (f.v14 + 0x65)));
+		goto l_5bc8cc;
+	}
+	goto l_5bc8d0;
+l_5bc8ca:
+	i = 0;
+l_5bc8cc:
+	f.v10 = i;
+l_5bc8d0:
+	if (f.v44 != 0
+	    && fcn_00502cd0(*(int*) (f.v44 + 0x14), 1, 0, slot_value) == 0) {
+		idx = 0;
+	}
+	j = fcn_00471f80(*(int*) f.v30);
+	if (idx == 0) {
+		goto l_5bca65;
+	}
+	if (j <= 0) {
+		goto l_5bca98;
+	}
+	idx = gm_eval_SlotVoll(f.v18, slot_value, j);
+	f.v28 = idx * i;
+	f.vA4 = (int) fcn_0050b750(1, (int) (g_773d75));
+	*(float*) &f.v28 = (float) f.v28;
+	if ((int) (*(float*) &f.v28 * *(float*) &f.v64 - *(float*) &f.v28)
+	    < f.vA4) {
+		*(float*) &f.v64 = 1.0f;
+	}
+	if (f.v80 != 0) {
+		if (d2_DispatchTutorialEvent(0x28, f.v14, 0, slot_value) == 0) {
+			goto l_5bca98;
+		}
+		fcn_0057e880(0x28, (char*) f.v14, 0, slot_value);
+	} else if (f.v70 != 0) {
+		if (d2_DispatchTutorialEvent(0x26, f.v14, 0, slot_value) == 0) {
+			goto l_5bca98;
+		}
+		fcn_0057e880(0x26, (char*) f.v14, 0, slot_value);
+	}
+	if (idx > 0) {
+		fcn_004c51f0(*(int*) (f.v18 + 2), *(int*) (f.v98 + 2), slot_value, idx,
+		             f.v34, (int) ((float) f.v10 * *(float*) &f.v64));
+	}
+	if (*(float*) &f.v64 != 1.0 && idx > 0) {
+		fcn_0051af00((int) (f.v210 + 0x238), 0xed,
+		             (int) (*(float*) &f.v28 * *(float*) &f.v64
+		                    - *(float*) &f.v28));
+		fcn_00533a40((int) (f.v210 + 0x238));
+		fcn_004234e0(0, 0x68aed0, 1, 0x3f, 0x7f, 0, 0);
+	}
+	if (idx > 0) {
+		fcn_00472380(*(int*) f.v30, 0, 0x64, 0);
+	}
+	goto l_5bca98;
+l_5bca65:
+	if (j > 0) {
+		fcn_0051af00((int) (f.v210 + 0x238), 0xeb, slot_value + slot_value + 0x9a8);
+		fcn_00526120((int) (f.v210 + 0x238), 0x100);
+	}
+l_5bca98:
+	f.v30 += 4;
+	f.v20--;
+	if (f.v20 != 0) {
+		goto l_5bc295;
+	}
+l_5bcab6:
+	f.v24 += 0xf0;
+	f.v1c--;
+	if (f.v1c != 0) {
+		goto l_5bc253;
+	}
+
+l_5bcacf:
+	ResetDisplayCounters();
+	for (idx = 0x7796f0; idx < 0x7798b0; idx += 0x38) {
+		if (*(int*) idx != -1) {
+			fcn_00472380(*(int*) idx, 0, 0, 0);
+		}
+	}
+	for (idx = 0x778db0; idx < 0x779130; idx += 0x38) {
+		if (*(int*) idx != -1) {
+			fcn_00472380(*(int*) idx, 0, 0, 0);
+		}
+	}
+	fcn_004116d0();
+	goto l_5bcd16;
 
 l_5bcb2a:
 	/* 0x5bcb2a: the second overlay pass over the same selection row */
@@ -1383,23 +1403,24 @@ l_5bcb82:
 			continue;
 		}
 		slot_value = *(int*) (*(int*) 0x1015ea0 + j * 0x2f4 + 8) - 0xdf;
-		if (f.v34 != 0
-		    && fcn_00502cd0(*(int*) (f.v34 + 0x14), 1, 1, slot_value) == 0) {
+		idx = 1;
+		if (f.v44 != 0
+		    && fcn_00502cd0(*(int*) (f.v44 + 0x14), 1, 0, slot_value) == 0) {
+			idx = 0;
+		}
+		i = fcn_00471f80(j);
+		if (idx == 0 || i <= 0) {
 			continue;
 		}
-		f.v38 = fcn_00471f80(j);
-		if (f.v38 <= 0) {
-			continue;
-		}
-		f.v38 = gm_CheckInventoryCapacity(
+		i = gm_CheckInventoryCapacity(
 			(char*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c),
-			slot_value, f.v38);
-		if (f.v38 <= 0) {
+			slot_value, i);
+		if (i <= 0) {
 			continue;
 		}
 		fcn_004c51f0(*(int*) (0x7f4ca4
 		                      + *(unsigned short*) 0x774970 * 0x21c),
-		             slot_value, *(int*) (h + 2), f.v38, f.v24, 0);
+		             slot_value, *(int*) (h + 2), i, f.v34, 0);
 		fcn_00472380(j, 0, 0x64, 0);
 	}
 l_5bcc9f:
@@ -1508,20 +1529,21 @@ l_5bcd9a:
 	l_5bced7:
 		idx = *(int*) f.v10;
 		if (idx != 0) {
-			f.vA4 = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
+			h = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
 			f.v30 = f.v10 + 0xd8;
 			for (f.v1c = 3; f.v1c != 0; f.v1c--, f.v30 += 4) {
-				if (*(int*) f.v30 == -1) {
+				j = *(int*) f.v30;
+				if (j == -1) {
 					continue;
 				}
-				slot_value = *(int*) (*(int*) 0x1015ea0 + *(int*) f.v30 * 0x2f4 + 8) - 0xdf;
-				j = fcn_00471f80(*(int*) f.v30);
-				if (j <= 0) {
+				slot_value = *(int*) (*(int*) 0x1015ea0 + j * 0x2f4 + 8) - 0xdf;
+				i = fcn_00471f80(j);
+				if (i <= 0) {
 					continue;
 				}
-				fcn_004c51f0(-1, *(int*) (f.vA4 + 2), slot_value, j,
+				fcn_004c51f0(-1, *(int*) (h + 2), slot_value, i,
 				             (int) (g_773d75), 0);
-				fcn_00472380(*(int*) f.v30, 0,
+				fcn_00472380(j, 0,
 				             ((int*) (f.v15C + 0x64))[f.v24], 0);
 			}
 		}
@@ -1593,7 +1615,7 @@ l_5bcf9f:
 l_5bd177:
 		/* 0x5bd177: the same sum over a non-dialog entity list */
 		e = f.v6D8;
-		for (f.v1c = 0x10; f.v1c != 0; f.v1c--, e++) {
+		for (j = 0x10; j != 0; j--, e++) {
 			if (e->f00 == 0 || e->f08 == 0) {
 				continue;
 			}
@@ -1695,8 +1717,7 @@ l_5bd26b:
 				*(short*) (f.v210 + 0x84) = *(short*) 0x7f4c0c;
 				fcn_00500bb0((int) (f.v210 + 0x78), 0, 0, 0xa);
 				*(int*) (f.v210 + 0xa8) = *(int*) (e->f00 + 2);
-				/* the record was zeroed above, so this byte store still leaves 4 */
-				f.v210[0xb4] = 4;
+				*(int*) (f.v210 + 0xb4) = 4;
 				*(int*) (f.v210 + 0xd4) = 1;
 				*(int*) (f.v210 + 0xac) =
 					0x64 - *(unsigned char*) (e->f00 + 0x12);
@@ -1778,8 +1799,8 @@ l_5bd632:
 	fcn_00471e30(f.v2c);
 	*(int*) 0x774698 = 0;
 	if (f.v80 != 0) {
-		fcn_00471e30(f.v94);
-		*(int*) 0x7746cc = f.v7c;
+		fcn_00471e30(f.vA4);
+		*(int*) 0x7746cc = f.v88;
 	}
 	fcn_0057e880(0x23, (char*) 0, 1, 0);
 	return 0;

@@ -5,8 +5,8 @@ functions to `RELOC` or `EXACT` through the same gate every change passes. It an
 question: which model gives the most matched functions per dollar of API-equivalent tokens.
 
 This page names models and agent tools by the user's decision (2026-11-25), as an exception to
-the project's attribution rule. Status: **round 1 running**; results below are filled in when it
-ends.
+the project's attribution rule. Status: **round 1 finished** on
+2026-11-25 with batch r5b91.
 
 ## Round 1 method
 
@@ -58,8 +58,11 @@ what the subscriptions billed.
 ## Known limits
 
 - 30 functions per model separates large differences only; a gap of one or two matches is noise.
-- Opus's draw holds fewer `NEAR_MATCHING` rows (4 of 30, against about 8 for the others), which
-  makes its sample harder.
+- Samples differ in mix: `NEAR_MATCHING` rows per model range from 3 (Haiku, Terra) and 4 (Opus) to
+  14 (neon), the rest `SIZE_MISMATCH`.
+- Argon's cost includes work from about 09:10 to 09:17 UTC on 2026-11-25, when a lead-side metadata
+  fault made some comparisons fail. Its share of the cost was not measured.
+- `RELOC` from `rebrew test` may leave operands unresolved; those are compared masked.
 - Every row was tried before by earlier matching rounds, so all models work leftovers. Absolute
   rates are lower than on fresh rows; the comparison between models is what the round measures.
 - Usage limits can park a model before it finishes; its rate then covers fewer rows.
@@ -68,16 +71,15 @@ what the subscriptions billed.
 
 Which model to try first on a function, and when to hand it on. Trying rungs in order of successes
 per dollar costs least per match when failures at one rung say little about the next; that
-independence is assumed, not measured. Snapshot of round 1 at 07:20 UTC on 2026-11-25, before
-batch r5b90; costs include work whose keeps were not committed yet.
+independence is assumed, not measured. Final round 1 figures; the order rests on few matches.
 
 | Model | Rows tried | `RELOC`/`EXACT` | Dollars per row | Matches per dollar |
 | --- | ---: | ---: | ---: | ---: |
-| Claude Opus 5.5 | 24 | 4 | 0.98 | 0.17 |
+| Claude Opus 5.5 | 30 | 11 | 1.00 | 0.37 |
 | Claude Sonnet 5.5 | 30 | 1 | 0.25 | 0.13 |
+| Gemini 4 argon | 30 | 4 | 1.27 | 0.11 |
+| Gemini 4 neon | 30 | 3 | 1.17 | 0.09 |
 | GPT 6.2 Sol | 30 | 1 | 0.40 | 0.08 |
-| Gemini 4 neon | 30 | 2 | 1.12 | 0.06 |
-| Gemini 4 argon | 20 | 1 | 1.08 | 0.05 |
 | Gemini 4 hydrogen | 30 | 1 | 0.89 | 0.04 |
 | GPT 6.1 Terra | 30 | 0 | 0.21 | 0 |
 | MiniMax M3.1 flash | 30 | 0 | 0.04 | 0 |
@@ -85,12 +87,13 @@ batch r5b90; costs include work whose keeps were not committed yet.
 
 Rungs to test:
 
-1. **No model:** `rebrew cross-import` from a matched twin, flag sweeps and Rebrew's genetic search.
+1. **No model:** `rebrew source import-related` from a matched twin, flag sweeps (`rebrew match flags`) and
+   genetic search (`rebrew match run`).
 2. **A model at about 2 cents per row.** None of the four cheapest matched one of 120 hard rows. At
    that price a 1% success rate would already beat every row of the table, and 0 of 120 does not
    rule out 2%.
-3. **A middle rung:** Sonnet, Sol or a Gemini model.
-4. **Opus**, for rows the others failed.
+3. **Opus**, if its quota allows: the most matches per dollar.
+4. **Sonnet, argon or neon**, when Opus quota is scarce. Their order is not settled.
 
 Handover rules:
 
@@ -101,12 +104,31 @@ Handover rules:
 - Prices here are API-equivalent. Subscription limits also decide the rung: a model whose quota is
   scarce is kept for rows that need it.
 
-Not settled: the order rests on one to four matches per model, all on rows earlier rounds had
-tried. Round 2 measures first attempts, drawn from the Gold functions that have no source yet
+Not settled: below Opus the order rests on one to four matches per model, all on rows earlier rounds
+had tried. Round 2 measures first attempts, drawn from the Gold functions that have no source yet
 (2,110 of 4,768 inventory entries on 2026-11-25). In earlier work Gemini 4 hydrogen's committed
 `RELOC`/`EXACT` results came mostly from first bodies: 18 of 27 started from `STUB` or no verdict.
 
 ## Results
 
-Round 1 is running. This section gets each model's rows finished, `RELOC`/`EXACT`, success rate,
-API-equivalent cost and cost per match when it ends.
+Every model finished its 30 rows. All matches reached `RELOC`; none reached `EXACT`. The range is
+the 95% Wilson interval of the success rate.
+
+| Model | `RELOC` | Success | 95% range | Rises to `NEAR_MATCHING` | Held back | API-equivalent cost | Cost per match |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Claude Opus 5.5 | 11 | 36.7% | 22 to 55% | 3 | 0 | $29.93 | $2.72 |
+| Claude Sonnet 5.5 | 1 | 3.3% | 1 to 17% | 0 | 0 | $7.55 | $7.55 |
+| Gemini 4 argon | 4 | 13.3% | 5 to 30% | 4 | 0 | $38.01 | $9.50 |
+| Gemini 4 neon | 3 | 10.0% | 3 to 26% | 1 | 1 | $35.01 | $11.67 |
+| GPT 6.2 Sol | 1 | 3.3% | 1 to 17% | 0 | 0 | $12.14 | $12.14 |
+| Gemini 4 hydrogen | 1 | 3.3% | 1 to 17% | 0 | 2 | $26.83 | $26.83 |
+| GPT 6.1 Terra | 0 | 0% | 0 to 11% | 0 | 0 | $6.17 | n/a |
+| MiniMax M3.1 flash | 0 | 0% | 0 to 11% | 0 | 0 | $1.25 | n/a |
+| GPT 6 Luna | 0 | 0% | 0 to 11% | 0 | 0 | $0.76 | n/a |
+| Claude Haiku 5.5 | 0 | 0% | 0 to 11% | 0 | 0 | $0.52 | n/a |
+| DeepSeek v4.1 flash | 0 | 0% | 0 to 11% | 0 | 0 | $0.50 | n/a |
+
+Opus had the most matches and the lowest cost per match. Its range overlaps argon's and neon's, so
+the size of its lead is uncertain; it does not overlap the ranges of the models with one match or
+none. Places two to six are not separated by this sample. The cheapest four cost $3.03 together for
+120 rows and matched none.
