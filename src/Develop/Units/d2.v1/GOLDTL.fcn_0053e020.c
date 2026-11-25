@@ -1,5 +1,7 @@
 extern int g_7e2468;
 extern int g_7e2430;
+extern char g_7e23e3;
+extern int g_14abee0[];
 extern int g_774654;
 extern int g_1040494;
 extern int d2_ScreenHeight;
@@ -22,6 +24,9 @@ int __cdecl fcn_004e44f0();
 typedef struct {
 	short w[3];
 } Name6_53e020;
+typedef struct {
+	char b[5];
+} Name5_53e020;
 
 int __cdecl fcn_004fdec0();
 Name6_53e020 __cdecl fcn_00506d50(int);
@@ -117,16 +122,15 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 				r = fcn_0053e8a0(0);
 				if (r == 1) {
 					d2_SuppressOverlay = r;
-					*(int*) 0x6a37f8 = d2_OpenMessageBox(*(int*) 0x14abf04, 0);
+					*(int*) 0x6a37f8 = d2_OpenMessageBox(g_14abee0[9], 0);
 					if (d2_RunParentProfessionSelection(0) == 0) {
 						fcn_004432d0(0, 0);
 						v1 = 1;
 					}
 				} else if (r == 0) {
 					if (d2_ShowChooseProfessionDialog(0xc6) != 0) {
-						v11 = fcn_00506d50(*(unsigned char*) 0x7e23e3);
-						*(unsigned char*) 0x7e2434 = (unsigned char) v11.w[2];
-						g_7e2430 = *(int*) &v11;
+						v11 = fcn_00506d50((unsigned char) g_7e23e3);
+						*(Name5_53e020*) &g_7e2430 = *(Name5_53e020*) &v11;
 						g_7e2468 = fcn_004fdec0(0x6a3db4) + 0x639;
 					} else {
 						fcn_004432d0(0, 0);

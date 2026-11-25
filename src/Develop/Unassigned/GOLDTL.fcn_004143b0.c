@@ -25,13 +25,8 @@ typedef struct S143b0Box {
 	float loAligned;
 	float hiAligned;
 	float pt[4][4];
-	float minX;
-	float loX;
-	float minY;
-	float unused64;
-	float maxX;
-	float hiX;
-	float maxY;
+	float min[4];
+	float max[4];
 } S143b0Box;
 
 char __cdecl d3_ReparentObject(char*, int);
@@ -46,7 +41,6 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 {
 	S143b0Box box;
 	char* node;
-	char* next;
 	int link;
 	int ok;
 	float value;
@@ -83,19 +77,17 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 		box.loAligned = 1e35f;
 		box.hiAligned = -1e35f;
 	}
-	box.minX = MIN(MIN(MIN(box.pt[0][0], box.pt[1][0]), box.pt[2][0]), box.pt[3][0]);
-	box.loX = box.lo;
-	box.minY = MIN(MIN(MIN(box.pt[0][2], box.pt[1][2]), box.pt[2][2]), box.pt[3][2]);
-	box.maxX = MAX(MAX(MAX(box.pt[0][0], box.pt[1][0]), box.pt[2][0]), box.pt[3][0]);
-	box.hiX = box.hi;
-	box.maxY = MAX(MAX(MAX(box.pt[0][2], box.pt[1][2]), box.pt[2][2]), box.pt[3][2]);
-	node = self;
-	next = *(char**) (node + 0x1f8);
-	while (next != 0) {
-		node = next;
-		next = *(char**) (node + 0x1f8);
-	}
+	box.min[0] = MIN(MIN(MIN(box.pt[0][0], box.pt[1][0]), box.pt[2][0]), box.pt[3][0]);
+	box.min[1] = box.lo;
+	box.min[2] = MIN(MIN(MIN(box.pt[0][2], box.pt[1][2]), box.pt[2][2]), box.pt[3][2]);
+	box.max[0] = MAX(MAX(MAX(box.pt[0][0], box.pt[1][0]), box.pt[2][0]), box.pt[3][0]);
+	box.max[1] = box.hi;
+	box.max[2] = MAX(MAX(MAX(box.pt[0][2], box.pt[1][2]), box.pt[2][2]), box.pt[3][2]);
 	ok = 1;
+	node = self;
+	while (*(char**) (node + 0x1f8) != 0) {
+		node = *(char**) (node + 0x1f8);
+	}
 	do {
 		if (self != node) {
 			ok &= d3_AccumulateMeshHeightRange(&box, node);

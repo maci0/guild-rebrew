@@ -31,6 +31,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
     char* end;
     char* last;
     char* glyph;
+    char* p;
     int origin_x;
     int origin_y;
     int right;
@@ -181,11 +182,12 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
                     g_77254c = draw_x;
                 word = words[0];
                 for (i = next_count; i > 0; i--) {
+                    p = word;
                     for (j = 0; j < (int)strlen(word); j++) {
-                        c = (unsigned char)word[j];
+                        c = (unsigned char)*p;
                         if (c != '~') {
                             glyph = fcn_0047b620(g_772524, c);
-                            if (j)
+                            if (right)
                                 draw_x -= *(unsigned short*)(glyph + 0x11);
                             if (c != ' ') {
                                 if (surface) {
@@ -203,6 +205,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
                             draw_y += d2_FontHeight;
                             draw_x = origin_x;
                         }
+                        p++;
                     }
                     if (g_772544 < draw_x - origin_x)
                         g_772544 = draw_x - origin_x;

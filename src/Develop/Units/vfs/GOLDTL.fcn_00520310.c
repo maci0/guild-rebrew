@@ -5,29 +5,26 @@ extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* str
 /* ADDRESS: GOLDTL 0x00520310 */
 unsigned int __cdecl fcn_00520310(unsigned int stream)
 {
-	unsigned int result;
-	int offset;
+	char* row;
 	char* p;
-	int count;
 	int i;
 	int j;
+	int k;
 
-	count = 0x55;
-	result = vfs_fwrite(&count, 4, 1, (char*) stream);
-	if (result <= 0)
+	i = 0x55;
+	if (vfs_fwrite(&i, 4, 1, (char*) stream) <= 0)
 		return 0;
 	for (i = 0; i < 5; i++) {
-		offset = i * 0x2a90;
-		if (vfs_fwrite(((char*) g_85ab80 + offset), 4, 1, (char*) stream) <= 0)
+		row = (char*) g_85ab80 + i * 0x2a90;
+		if (vfs_fwrite(row, 4, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite(((char*) g_85ab80 + offset) + 4, 4, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 4, 4, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite(((char*) g_85ab80 + offset) + 8, 4, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 8, 4, 1, (char*) stream) <= 0)
 			return 0;
-		if (vfs_fwrite(((char*) g_85ab80 + offset) + 0x0c, 4, 1, (char*) stream) <= 0)
+		if (vfs_fwrite(row + 0x0c, 4, 1, (char*) stream) <= 0)
 			return 0;
-		p = ((char*) g_85ab80 + offset) + 0x18;
-		for (j = 0; j < 0x55; j++) {
+		for (j = 0, p = row + 0x18; j < 0x55; j++, p += 0x80) {
 			if (vfs_fwrite(p - 8, 2, 1, (char*) stream) <= 0)
 				return 0;
 			if (vfs_fwrite(p - 4, 4, 1, (char*) stream) <= 0)
@@ -50,12 +47,10 @@ unsigned int __cdecl fcn_00520310(unsigned int stream)
 				return 0;
 			if (vfs_fwrite(p + 0x24, 4, 1, (char*) stream) <= 0)
 				return 0;
-			p += 0x80;
 		}
 	}
 	for (i = 0; i < 4; i++) {
-		int k;
-		char *row = g_868060 + i * 0x2f4;
+		row = g_868060 + i * 0x2f4;
 		if (vfs_fwrite(row, 0x20, 1, (char*) stream) <= 0)
 			return 0;
 		if (vfs_fwrite(row + 0x40, 8, 1, (char*) stream) <= 0)
@@ -74,33 +69,25 @@ unsigned int __cdecl fcn_00520310(unsigned int stream)
 			return 0;
 		if (vfs_fwrite(row + 0x61, 1, 1, (char*) stream) <= 0)
 			return 0;
-		p = row + 0x64;
 		for (k = 0; k < 10; k++) {
-			if (vfs_fwrite(p, 8, 1, (char*) stream) <= 0)
+			if (vfs_fwrite(row + 0x64 + k * 8, 8, 1, (char*) stream) <= 0)
 				return 0;
-			p += 8;
 		}
-		p = row + 0xb4;
 		for (k = 0; k < 10; k++) {
-			if (vfs_fwrite(p, 8, 1, (char*) stream) <= 0)
+			if (vfs_fwrite(row + 0xb4 + k * 8, 8, 1, (char*) stream) <= 0)
 				return 0;
-			p += 8;
 		}
 		if (vfs_fwrite(row + 0x104, 1, 1, (char*) stream) <= 0)
 			return 0;
 		if (vfs_fwrite(row + 0x105, 1, 1, (char*) stream) <= 0)
 			return 0;
-		p = row + 0x108;
 		for (k = 0; k < 4; k++) {
-			if (vfs_fwrite(p, 4, 1, (char*) stream) <= 0)
+			if (vfs_fwrite(row + 0x108 + k * 4, 4, 1, (char*) stream) <= 0)
 				return 0;
-			p += 4;
 		}
-		p = row + 0x118;
 		for (k = 0; k < 4; k++) {
-			if (vfs_fwrite(p, 4, 1, (char*) stream) <= 0)
+			if (vfs_fwrite(row + 0x118 + k * 4, 4, 1, (char*) stream) <= 0)
 				return 0;
-			p += 4;
 		}
 		if (vfs_fwrite(row + 0x128, 4, 1, (char*) stream) <= 0)
 			return 0;
@@ -126,11 +113,9 @@ unsigned int __cdecl fcn_00520310(unsigned int stream)
 			return 0;
 		if (vfs_fwrite(row + 0x142, 1, 1, (char*) stream) <= 0)
 			return 0;
-		p = row + 0x144;
 		for (k = 0; k < 8; k++) {
-			if (vfs_fwrite(p, 0x12, 1, (char*) stream) <= 0)
+			if (vfs_fwrite(row + 0x144 + k * 0x12, 0x12, 1, (char*) stream) <= 0)
 				return 0;
-			p += 0x12;
 		}
 		if (vfs_fwrite(row + 0x1d4, 4, 1, (char*) stream) <= 0)
 			return 0;

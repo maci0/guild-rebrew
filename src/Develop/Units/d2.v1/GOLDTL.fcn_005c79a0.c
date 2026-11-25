@@ -22,7 +22,9 @@ typedef struct
 	int x58;
 	int x5c;
 	int x60;
-	char pad64[0x94];
+	char pad64[0xc];
+	int x70;
+	char pad74[0x84];
 } Packet;
 /* SIZE 0xf8 */
 
@@ -35,9 +37,12 @@ typedef struct
 
 typedef struct
 {
-	int x0;
+	unsigned short x0;
+	char pad2[2];
 	int x4;
-	char pad8[0x180];
+	char pad8[0x174];
+	char* x17c;
+	char pad180[8];
 	unsigned char x188;
 	char pad189[0x93];
 } Player;
@@ -46,7 +51,7 @@ typedef struct
 extern unsigned char* lpGebaeudePROT;
 extern char* g_77255c;
 extern int d2_CurrentWindowId;
-extern volatile int g_6b7fac;
+extern int g_6b7fac;
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern int g_14ce8e0;
@@ -115,13 +120,12 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	int i; double alpha;
 	int hwnd;
 	BUILDING_PROTOTYPE* t;
-	Player* pl;
-	unsigned int* q;
+	int j;
 	char* p;
 	unsigned char* e;
 
-	btnA = 0;
 	btnB = 0;
+	btnA = 0;
 	btnC = 0;
 	t = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[obj[0]];
 	dlg = fcn_00470820(0, 0, s_6ac79c);
@@ -143,8 +147,8 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	else {
 		d2_SetBackgroundTexture(s_6ac7ec, *(int*) g_77255c);
 	}
-	start = g_6b7fac;
 	*(int*) (g_77255c + 0x3a4) = 0;
+	start = g_6b7fac;
 	if (fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x35) != 0) {
 		btnA = 1;
 	}
@@ -182,9 +186,8 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 				sv_ClearObjectSelection();
 			}
 		}
-		cnt3 = 0;
 		cnt2 = 0;
-		sum = 0;
+		cnt3 = 0;
 		p = he_StartHandlungSearch(2, 0, 0x16, 3, *(int*) (obj + 1));
 		if (p != 0) {
 			while (p != 0) {
@@ -196,8 +199,6 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 				}
 				p = he_fn_Handlung();
 			}
-			cnt2 = cnt2;
-			cnt3 = cnt3;
 		}
 		cnt6c = 0;
 		p = he_StartHandlungSearch(2, 0, 0x6c, 3, *(int*) (obj + 1));
@@ -212,113 +213,103 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 		io_AppendText(s_6aa194, cnt3, 0x51e, 0x1a47, 0x16ba);
 		d2_CurrentWindowId = out[8];
 		io_AppendText(s_6ac7dc, cnt6c, 0x51e, 0x1a48);
-		if (g_100f1dc != -1) {
-			if (CountDisplayCounters() != 0) {
-				i = 0;
-				do {
-					if (out[i * 3] != -1 && d2_CurrentElementId == out[i * 3]) {
-						sum = cnt3 + cnt2;
-						if (i == 0 || i == 1) {
-							q = (unsigned int*) (g_7f4ca0 + 0x17c);
-							do {
-								if (*(char*) ((char*) q + 0xc) != 0) {
-									memset(&pkt, 0, sizeof(pkt));
-									if (*q != 0 && *(char*) *q == 0x16) {
-										sum--;
-									}
-									if (sum >= 3) {
-										sum = 4;
-										goto send;
-									}
-									pkt.type = 0x16;
-									pkt.x8 = *(int*) (g_7f4ca0 + g_774970 * 0x21c + 4);
-									pkt.xc = *(int*) (obj + 1);
-									pkt.name = *(pos14_7f4c00*) &gm_GameTime;
-									pkt.x36 = 1;
-									if (g_7746cc != 0) {
-										pkt.x60 = *(int*) (g_7746cc + 2);
-									}
-									else {
-										pkt.x60 = -1;
-									}
-									*(char*) &pkt.x58 = (i != 0) + 2;
-									pkt.x5c = *(int*) ((char*) q - 0x178);
-									fcn_00529160(obj, 0, *(unsigned short*) ((char*) q - 0x17c), 0);
-									fcn_004c5530(&pkt);
-									sum++;
+		if (g_100f1dc != -1 && CountDisplayCounters() != 0) {
+			for (i = 0; i < 3; i++) {
+				if (out[i * 3] != -1 && d2_CurrentElementId == out[i * 3]) {
+					sum = cnt2 + cnt3;
+					if (i == 0 || i == 1) {
+						for (j = 0; j < 0x300; j++) {
+							if (((Player*) g_7f4ca0)[j].x188 != 0) {
+								memset(&pkt, 0, sizeof(pkt));
+								if (((Player*) g_7f4ca0)[j].x17c != 0 && *((Player*) g_7f4ca0)[j].x17c == 0x16) {
+									sum--;
 								}
-								q += 0x87;
-							} while ((int) q < (int) (g_7f4ca0 + 0x6557c));
-						}
-						else {
-							pl = (Player*) g_7f4ca4;
-							do {
 								if (sum >= 3) {
+									sum = 4;
 									break;
 								}
-								if (*(char*) ((char*) pl + 0x184) != 0) {
-									memset(&pkt, 0, sizeof(pkt));
-									pkt.type = 0x6c;
-									pkt.x8 = *(int*) ((char*) g_7f4ca4 + *(unsigned short*) (obj + 0x27) * 0x21c);
-									pkt.xc = *(int*) (obj + 1);
-									pkt.name = *(pos14_7f4c00*) &gm_GameTime;
-									pkt.x36 = 1;
-									if (g_7746cc != 0 && *(unsigned short*) g_7746cc != 0xfd) {
-										pkt.x60 = *(int*) (g_7746cc + 2);
-									}
-									else {
-										pkt.x60 = -1;
-									}
-									pkt.x58 = *(int*) ((char*) pl);
-									fcn_00529160(obj, 0, *(unsigned short*) ((char*) pl - 4), 0);
-									fcn_004c5530(&pkt);
-									sum++;
+								pkt.type = 0x16;
+								pkt.x8 = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+								pkt.xc = *(int*) (obj + 1);
+								pkt.name = *(pos14_7f4c00*) &gm_GameTime;
+								pkt.x36 = 1;
+								if (g_7746cc != 0) {
+									pkt.x60 = *(int*) (g_7746cc + 2);
 								}
-								pl++;
-							} while ((int) pl < (int) (g_7f4ca0 + 0x65404));
-						}
-						if (sum != 0) {
-send:
-							fcn_004c35f0();
-							sv_ClearObjectSelection();
-							if (sum > 3) {
-								io_FormatTextBuffer(buf, 0x1a4a, 3);
-								fcn_00526120(buf, 0);
+								else {
+									pkt.x60 = -1;
+								}
+								pkt.x5c = ((Player*) g_7f4ca0)[j].x4;
+								*(char*) &pkt.x58 = (i != 0) + 2;
+								fcn_00529160(obj, 0, ((Player*) g_7f4ca0)[j].x0, 0);
+								fcn_004c5530(&pkt);
+								sum++;
 							}
-							break;
 						}
+					}
+					else {
+						for (j = 0; j < 0x300; j++) {
+							if (sum >= 3) {
+								break;
+							}
+							if (((Player*) g_7f4ca0)[j].x188 != 0) {
+								pkt.type = 0x6c;
+								pkt.x8 = *(int*) (g_7f4ca4 + *(unsigned short*) (obj + 0x27) * 0x21c);
+								pkt.xc = *(int*) (obj + 1);
+								pkt.name = *(pos14_7f4c00*) &gm_GameTime;
+								pkt.x36 = 1;
+								pkt.x58 = ((Player*) g_7f4ca0)[j].x4;
+								if (g_7746cc != 0 && *(unsigned short*) g_7746cc != 0xfd) {
+									pkt.x70 = *(int*) (g_7746cc + 2);
+								}
+								else {
+									pkt.x70 = -1;
+								}
+								fcn_00529160(obj, 0, ((Player*) g_7f4ca0)[j].x0, 0);
+								fcn_004c5530(&pkt);
+								sum++;
+							}
+						}
+					}
+					if (sum == 0) {
 						fcn_00526120((char*) g_14abc44, 0);
 					}
-					i++;
-				} while (i < 3);
-			}
-			else {
-				i = 0;
-				do {
-					if (out[i * 3] != -1 && d2_CurrentElementId == out[i * 3]) {
-						if (i != 2) {
-							int target = (i != 0) + 2;
-							for (p = he_StartHandlungSearch(2, 0, 0x16, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
-								if (*(unsigned char*) (p + 0xac) == target) {
-									e = gm_LookupEntityRecordById(*(int*) (p + 0xb0));
-									if (e != 0) {
-										*(char*) (e + 0x188) = 1;
-									}
-								}
-							}
+					else {
+						fcn_004c35f0();
+						sv_ClearObjectSelection();
+						if (sum > 3) {
+							io_FormatTextBuffer(buf, 0x1a4a, 3);
+							fcn_00526120(buf, 0);
 						}
-						else {
-							for (p = he_StartHandlungSearch(2, 0, 0x6c, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
-								e = gm_LookupEntityRecordById(*(int*) (p + 0xac));
+						i = 3;
+					}
+				}
+			}
+		}
+		else if (g_100f1dc != -1 && CountDisplayCounters() == 0) {
+			for (i = 0; i < 3; i++) {
+				if (out[i * 3] != -1 && d2_CurrentElementId == out[i * 3]) {
+					if (i != 2) {
+						int target = (i != 0) + 2;
+						for (p = he_StartHandlungSearch(2, 0, 0x16, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
+							if (*(unsigned char*) (p + 0xac) == target) {
+								e = gm_LookupEntityRecordById(*(int*) (p + 0xb0));
 								if (e != 0) {
 									*(char*) (e + 0x188) = 1;
 								}
 							}
 						}
-						break;
 					}
-					i++;
-				} while (i < 3);
+					else {
+						for (p = he_StartHandlungSearch(2, 0, 0x6c, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
+							e = gm_LookupEntityRecordById(*(int*) (p + 0xac));
+							if (e != 0) {
+								*(char*) (e + 0x188) = 1;
+							}
+						}
+					}
+					break;
+				}
 			}
 		}
 		if (fcn_005373e0((void*) fcn_005c79a0, 0x677c7) == 0) {

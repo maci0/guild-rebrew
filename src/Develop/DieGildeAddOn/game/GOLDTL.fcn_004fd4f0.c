@@ -37,7 +37,7 @@ void __cdecl fcn_004fd400(int* a, int* b);
 float __cdecl gm_GetEntitySkill(fcn_004fd4f0_Ent* e, int k);
 int __cdecl fcn_004f4830(int idx, fcn_004fd4f0_Stat* dst);
 int __cdecl fcn_0050c710(char* a, int b, int c);
-double __cdecl gm_RandomFloat01(void);
+float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_WalkEntityChain(unsigned short id);
 void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_004c5480(int a1, int a2, float a3);
@@ -90,7 +90,7 @@ int __cdecl fcn_004fd4f0(char* building, fcn_004fd4f0_Out* out)
 				v = r * mult * 0.6;
 			sign = -0.05f;
 		}
-		if (!(gm_RandomFloat01() * 2.0 <= v))
+		if (!(gm_RandomFloat01() * 2.0f <= v))
 			continue;
 		fb = (float) base;
 		amt = (int) ((MAX(gm_WalkEntityChain(ent->id) / fb * 160.0f, 0.0f) + 160.0f) * v);
@@ -99,8 +99,10 @@ int __cdecl fcn_004fd4f0(char* building, fcn_004fd4f0_Out* out)
 		count++;
 		if (ent->mood < 0.95f && ent->mood > 0.05f)
 			fcn_004c5480(ent->h, 0x1d0, sign);
-		if (out->who != 0)
-			fcn_004c54c0(*(int*) (out->who + 4), ent->h, (int) (fcn_00507e70(me, ent, 4) * 10.0f + 1.0f), 1);
+		if (out->who != 0) {
+			n = (int) (fcn_00507e70(me, ent, 4) * 10.0f + 1.0f);
+			fcn_004c54c0(*(int*) (out->who + 4), ent->h, n, 1);
+		}
 	}
 	out->count = count;
 	out->total = total;

@@ -48,12 +48,7 @@ int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view
 	same = (unsigned char) (r1 == 0);
 	r2 = CompareVector3WithinTolerance(pos, v, 0.001f);
 	valid = 0;
-	if (r2 == 0) {
-		valid = 1;
-		if (*(int*) (self + 0x218) == 0) {
-			valid = 0;
-		}
-	}
+	valid = (unsigned char) (r2 == 0 && *(int*) (self + 0x218) != 0);
 	flag = 0;
 	if (*(int*) (self + 0x1fc) != 0) {
 		fcn_004557c0(*(void**) (self + 0x1fc),

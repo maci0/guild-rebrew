@@ -187,36 +187,27 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			world[2] += *(float*) (d3_ActiveCamera + 0x54);
 			fcn_00438b40(v6, world);
 			if (*(unsigned char*) (*(int*) g_6b8300 * v16
-					+ *(int*) (g_6b8300 + 0x14) + v19) != v36
-				|| (v16 = plt_CheckZoneAvailability(v40, v19, v16,
-						(unsigned char) ((char*) v26)[0x42])) == 0) {
-				v1 = 0;
+					+ *(int*) (g_6b8300 + 0x14) + v19) == v36
+				&& (v16 = plt_CheckZoneAvailability(v40, v19, v16,
+						(unsigned char) ((char*) v26)[0x42])) != 0) {
 				v16 = v25;
-				v22 = 0x40;
-				v21 = 0x40;
-				v20 = 0xc0;
+				v1 = 1;
+				d3_SetSubtreeColor(v6, 0, 0, 0);
 			}
 			else {
-				v22 = 0;
-				v21 = 0;
-				v1 = 1;
-				v20 = 0;
 				v16 = v25;
+				v1 = 0;
+				d3_SetSubtreeColor(v6, 0xc0, 0x40, 0x40);
 			}
 		}
 		else {
-			if (!v1) {
-				v22 = 0x40;
-				v21 = 0x40;
-				v20 = 0xc0;
+			if (v1) {
+				d3_SetSubtreeColor(v6, 0, 0, 0);
 			}
 			else {
-				v22 = 0;
-				v21 = 0;
-				v20 = 0;
+				d3_SetSubtreeColor(v6, 0xc0, 0x40, 0x40);
 			}
 		}
-		d3_SetSubtreeColor(v6, v20, v21, v22);
 		v4 = v26;
 		if (g_14ce8cc && v18 != 0xffffffff && v1) {
 			v20 = fcn_004c5aa0(*(unsigned int*) ((char*) gebaeude + 1),
@@ -262,19 +253,17 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 				} while (v17 < v16);
 			}
 		}
-		if (g_14cf950 != 'N') {
-			if (g_14cf950 == 'J') {
-				v23 -= 1;
-				if (v23 <= -1) {
-					v23 = v16 - 1;
-				}
-				d2_SelectRadioGroup(v24, v23);
-			}
-		}
-		else {
+		if (g_14cf950 == 'N') {
 			v23 += 1;
-			if (v16 - 1 < v23) {
+			if (v23 > v16 - 1) {
 				v23 = 0;
+			}
+			d2_SelectRadioGroup(v24, v23);
+		}
+		else if (g_14cf950 == 'J') {
+			v23 -= 1;
+			if (v23 <= -1) {
+				v23 = v16 - 1;
 			}
 			d2_SelectRadioGroup(v24, v23);
 		}
@@ -288,19 +277,20 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			fcn_0064d41a(v14, (char*) 0x6ac704, (char*) 0x7e1ae0,
 				&v4[1]);
 			v6 = fcn_004488e0(v14, 0, 0);
-			if (v6) {
-				unsigned int color;
-				color = 0x100dc;
-				*(unsigned char*) ((char*) v6 + 0x215) =
-					*(unsigned char*) ((char*) v6 + 0x215) & 0x7f;
-				fcn_0043a5a0(v6, (int) &color);
-				*(unsigned char*) ((char*) v6 + 0x215) =
-					*(unsigned char*) ((char*) v6 + 0x215) | 0x80;
-			}
-			else {
+			if (!v6) {
 				fcn_0064d41a(v15, (char*) 0x6ac6c4, v14);
 				ReportClientMessage(v15);
 				g_774654 = 1;
+			}
+			else {
+				unsigned char color[4] = { 0 };
+				color[2] = 1;
+				color[0] = 0xdc;
+				*(unsigned char*) ((char*) v6 + 0x215) =
+					*(unsigned char*) ((char*) v6 + 0x215) & 0x7f;
+				fcn_0043a5a0(v6, (int) color);
+				*(unsigned char*) ((char*) v6 + 0x215) =
+					*(unsigned char*) ((char*) v6 + 0x215) | 0x80;
 			}
 			v33 = v23;
 		}

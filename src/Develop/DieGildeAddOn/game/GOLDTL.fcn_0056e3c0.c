@@ -169,15 +169,15 @@ void __cdecl fcn_0056e3c0(char* eventState)
 		if (*(unsigned char*) (s + 8) > 0) {
 			goto tail;
 		}
-		if (cut_FindCutsceneById(*(int*) (eventState + 0xb0)) != 0) {
-			*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
-			fcn_00500bb0((int*) (eventState + 0x52), 2, 0, 0);
-		} else {
+		if (cut_FindCutsceneById(*(int*) (eventState + 0xb0)) == 0) {
 			*(int*) (eventState + 0xb4) = -1;
 			*(int*) (eventState + 0xb0) = -1;
 			*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
 			*(int*) (eventState + 0x70) = 4;
+			return;
 		}
+		*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
+		fcn_00500bb0((int*) (eventState + 0x52), 2, 0, 0);
 		return;
 	default:
 		return;

@@ -13,37 +13,37 @@ extern unsigned char g_773d75;
 extern int g_100e724;
 extern int g_100e764;
 extern char* lpObjektePROT;
+extern char g_7f4ca0[];
 /* ADDRESS: GOLDTL 0x00489010 */
-void __cdecl fcn_00489010(char* e)
+void __cdecl fcn_00489010(char* e, char* a1)
 {
 	char buf[0x400];
+	int m;
 	char* p;
 	char* n;
 	char* a;
 	char* b;
 	char* found;
-	char* tbl;
 	int i;
 	int k;
-	int idx;
 	int done;
 
-	p = (char*) 0x7f4e24;
-	do {
-		if (*(unsigned short*) (p - 0x184) == 0xffff
-		    || *(char**) (p - 0x18) != *(char**) (e + 0x16c)
-		    || *(char*) (p - 0x1f) == 0
-		    || *(char**) p == 0
-		    || *(int*) (*(char**) p + 0x2c) != *(int*) (*(char**) (p - 0x18) + 1)) {
-			goto next;
+	for (m = 0; m < 0x300; m++) {
+		p = g_7f4ca0 + m * 0x21c;
+		if (*(unsigned short*) p == 0xffff
+		    || *(char**) (p + 0x16c) != *(char**) (e + 0x16c)
+		    || *(char*) (p + 0x165) == 0
+		    || *(char**) (p + 0x184) == 0
+		    || *(int*) (*(char**) (p + 0x184) + 0x2c) != *(int*) (*(char**) (p + 0x16c) + 1)) {
+			continue;
 		}
 		found = 0;
-		n = (char*) fcn_00502cd0(*(int*) (p - 0xc), 1, 4, 0xc);
+		n = (char*) fcn_00502cd0(*(int*) (p + 0x178), 1, 4, 0xc);
 		if (n == 0) {
 			return;
 		}
 		done = 0;
-		for (b = (char*) &g_100e764, a = (char*) 0x100b100; !done; b += 4, a += 0x40) {
+		for (a = (char*) 0x100b100, b = (char*) &g_100e764; !done; b += 4, a += 0x40) {
 			if (*(int*) (b - 4) == 0 || *(int*) b == 0) {
 				break;
 			}
@@ -52,14 +52,14 @@ void __cdecl fcn_00489010(char* e)
 			if (k != 0) {
 				for (i = 0; !done && i < ai_ResourceCount; i++) {
 					if (*(int*) (0x100b0c0 + i * 0x40) == *(int*) b) {
-						done = 1;
 						found = a;
+						done = 1;
 					}
 				}
 			}
 		}
 		if (!done) {
-			for (b = (char*) &g_100e724, a = (char*) 0x100b100; !done; b += 4, a += 0x40) {
+			for (a = (char*) 0x100b100, b = (char*) &g_100e724; !done; b += 4, a += 0x40) {
 				if (*(int*) (b - 4) == 0 || *(int*) b == 0) {
 					break;
 				}
@@ -68,8 +68,8 @@ void __cdecl fcn_00489010(char* e)
 				if (k != 0) {
 					for (i = 0; !done && i < ai_ResourceCount; i++) {
 						if (*(int*) (0x100b0c0 + i * 0x40) == *(int*) b) {
-							done = 1;
 							found = a;
+							done = 1;
 						}
 					}
 				}
@@ -78,17 +78,13 @@ void __cdecl fcn_00489010(char* e)
 		if (found != 0 && *(int*) (found + 0x28) != 0
 		    && fcn_004ce590(*(int*) found) != 0
 		    && fcn_005c7270((int) e, *(int*) found) != 0) {
-			idx = *(int*) found;
-			tbl = lpObjektePROT;
-			sprintf(buf, (char*) 0x67e388, e + 0x30, p - 0x154,
-			        (char *)&((OBJECT_PROTOTYPE *)tbl)[idx] + 1);
-			sprintf(buf + 0x14, (char*) 0x67e358, *(int*) (p - 0x180),
-			        *(int*) (e + 2), idx, 1, g_773d75, 0);
-			fcn_004c51f0(*(int*) (p - 0x180), *(int*) (e + 2), idx, 1,
+			sprintf(buf, (char*) 0x67e388, e + 0x30, p + 0x30,
+			        (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(int*) found] + 1);
+			sprintf(buf, (char*) 0x67e358, *(int*) (p + 4),
+			        *(int*) (a1 + 2), *(int*) found, 1, g_773d75, 0);
+			fcn_004c51f0(*(int*) (p + 4), *(int*) (a1 + 2), *(int*) found, 1,
 			             g_773d75, 0);
 			*(int*) (found + 0x28) = *(int*) (found + 0x28) - 1;
 		}
-next:
-		p += 0x21c;
-	} while ((int) p < 0x85a224);
+	}
 }

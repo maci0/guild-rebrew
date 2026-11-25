@@ -64,7 +64,8 @@ extern int g_6798d4;
 extern int g_6b7fdc;
 extern int d3_ActiveCamera;
 extern int g_774a68;
-extern short g_774970;
+extern unsigned short g_774970;
+extern char g_7f4ca0[];
 extern int g_774654;
 extern char g_14cf950;
 extern short g_14ce8c0;
@@ -133,10 +134,10 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 	f.iFlag48 = 1;
 	f.iFlag44 = 1;
 	f.pKontext = *(char**) (g_67a370 + 0xb0);
+	f.iErgebnis = 0;
 	f.iRot = 0;
 	f.iAnzahl = 0;
 	f.pPrev = 0;
-	f.iErgebnis = 0;
 	f.fAbstand = 1.0e9f;
 	f.iTypOffset = gebaeudetyp * 0x24d;
 	if (lpGebaeudePROT[f.iTypOffset] == 2) {
@@ -183,7 +184,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 	}
 	f.iKennung = (unsigned short) gm_RandomMod(f.iAnzahl);
 	if (lpGebaeudePROT[f.iTypOffset] == 0x21) {
-		f.iKennung = (*(unsigned char*) (0x7f4ca9 + g_774970 * 0x21c) != 1);
+		f.iKennung = (*(unsigned char*) (g_7f4ca0 + 9 + g_774970 * 0x21c) != 1);
 	}
 	if (fcn_00597ff0(gebaeudetyp, f.cOgrName) == 0) {
 		return 0;
@@ -369,7 +370,7 @@ platzieren:
 			d3_BuildEulerRotationMatrix(f.fVec, f.fMatrix);
 		}
 		if (g_14ce8cc != 0 && pNaechster != 0) {
-			i = fcn_0050d200((int) (0x7f4ca0 + g_774970 * 0x21c), gebaeudetyp);
+			i = fcn_0050d200((int) (g_7f4ca0 + g_774970 * 0x21c), gebaeudetyp);
 			io_FormatTextBuffer(f.cText, 0x17ef, i, gebaeudetyp * 14 + 0x48e,
 				*(int*) (lpGebaeudePROT + f.iTypOffset + 0x243));
 			if (fcn_00526120(f.cText, 1) != 0) {

@@ -54,7 +54,8 @@ unsigned int __cdecl gm_RebuildLoadedReferences(void)
 		for (p = (char*) 0x773db4; (int) p < 0x773dd4; p += 4)
 			*(int*) p = gm_LookupEntityRecordById(*(int*) p);
 	}
-	for (p = (char*) g_7f4ca0 + 0x170; (int) p < 0x85a210; p += 0x21c) {
+	p = (char*) g_7f4ca0 + 0x170;
+	do {
 		e = (Ent525670*) (p - 0x170);
 		if ((unsigned short) e->id != 0xffff) {
 			if (e->f16c == -1)
@@ -72,7 +73,7 @@ unsigned int __cdecl gm_RebuildLoadedReferences(void)
 				e->f17c = he_StartHandlungSearch(1, 1, v9);
 			e->f184 = 0;
 		}
-	}
+	} while ((int) (p += 0x21c) < 0x85a210);
 	v9 = 0;
 		while (v9 < g_773d8c) {
 		obj = (char*) (int) lpObjekteINST + v9 * 0x43;

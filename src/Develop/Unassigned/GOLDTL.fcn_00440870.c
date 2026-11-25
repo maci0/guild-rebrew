@@ -74,8 +74,8 @@ void __cdecl fcn_00440870(char* o, char* c)
 	d3_NormalizeVector(v);
 	d = 0.5f
 	    - (float) fabs(*(float*) 0x662d48 * v[2] + *(float*) 0x662d44 * v[1] + *(float*) 0x662d40 * v[0]);
-	mask = *(int*) (m + 0xc);
 	bmp = *(char**) (m + 0x18);
+	mask = *(int*) (m + 0xc);
 	stride = *(int*) m;
 	((IDev*) *(void**) (c + 0x1a4))->v->Lock((IDev*) *(void**) (c + 0x1a4), 0, 0, (void**) &o, 0x2000);
 	map = *(char**) (c + 0x1b8);

@@ -84,6 +84,12 @@ L2:
 	fl.b[1] |= 8;
 	cnt = 1;
 	q = a / b;
+	frames[0].rot[0] = 0.0f;
+	frames[0].rot[1] = 0.0f;
+	frames[0].rot[2] = 0.0f;
+	frames[0].pos[0] = 0.0f;
+	frames[0].pos[1] = 0.0f;
+	frames[0].pos[2] = 0.0f;
 	frames[0].type = q;
 	for (i = 0; i < b; i++) {
 		e = list[i];

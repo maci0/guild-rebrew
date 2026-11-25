@@ -39,6 +39,7 @@ void __cdecl fcn_00478d50(int x, int y, Surf16* s, Block* b)
 	unsigned char cr;
 	unsigned char cg;
 	unsigned short* p;
+	unsigned short* px;
 	Seg* seg;
 	unsigned int j;
 	unsigned int k;
@@ -46,19 +47,22 @@ void __cdecl fcn_00478d50(int x, int y, Surf16* s, Block* b)
 	r = (Row*) ((char*) b + 0x32);
 	seg = (Seg*) ((char*) r + 4);
 	base = s->bits + (y * s->pitch + x);
+	p = base;
 	for (i = 0; i < b->row_count; i++) {
-		p = base;
 		for (j = 0; j < r->seg_count; j++) {
+			px = (unsigned short*) (seg + 1);
 			p += seg->offset >> 1;
 			for (k = 0; k < seg->count; k++) {
-				fcn_0041bb70(((unsigned short*) (seg + 1))[k], &cb, &cg, &cr);
+				fcn_0041bb70(*px, &cb, &cg, &cr);
 				v = (int) (((double) cr + (double) cb) * 0.2 + (double) cg * g_664088);
 				*p = d2_PackColorForPixelFormat(v, v, v);
+				px++;
 				p++;
 			}
 			seg = (Seg*) ((char*) (seg + 1) + seg->count * 2);
 		}
 		base += s->pitch;
+		p = base;
 		r = (Row*) seg;
 		seg = (Seg*) ((char*) r + 4);
 	}

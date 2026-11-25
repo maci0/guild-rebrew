@@ -14,8 +14,6 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl io_FormatTextBuffer(void*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_CurrentWindowId;
-/* The color scale is a binary32 literal. */
-extern const float g_662cf8;
 /* Fill and draw the eight trade-goods rows of the market window: compact the
    non-empty entries from the supplier record, build one icon plus five price
    gauges per row, then draw the detail text for the selected entry. */
@@ -23,6 +21,7 @@ extern const float g_662cf8;
 void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
 {
     int* v1;
+    char v11[4];
     char v10[4];
     char v12[256];
     char v13[256];
@@ -30,8 +29,8 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
     int* v15;
     int rowCount;
     int v17;
-    int rowIndex;
     unsigned int v19;
+    int rowIndex;
     unsigned int* v2;
     unsigned int* v3;
     unsigned int* v4;
@@ -41,26 +40,24 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
     int v8;
     char v9[4];
     v2 = a1;
-    rowCount = 0;
     v19 = 0;
+    rowCount = 0;
     v1 = (int*) a1[a1[0x4d] * 4 + 0xe];
     v14 = *(int*) (*v1 * 4 + 0x6652f8);
     if (v14 > 0) {
         v7 = 0;
         v4 = &a1[0x51];
         do {
-            v3 = v4;
             if (*(int*) (v1[4] + v7) != -1) {
                 v4[-1] = (int) (v1[4] + v7);
                 rowCount += 1;
-                v3 = &v4[3];
                 v6 = *(unsigned int*) (v7 + v1[4]);
                 v4[-2] = 0xffffffff;
                 *v4 = v6;
+                v4 += 3;
             }
             v7 += 0x44;
             v14 -= 1;
-            v4 = v3;
         } while (v14);
     }
     if (rowCount < 8) {
@@ -84,12 +81,9 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
     io_AppendText(0x6811b0);
     d2_SetForm(*v2, 7);
     io_AppendText(0x6811b0);
-    {
-        char v11[4];
-        fcn_00533f40(0, 0, v2[6], v2[3],
-                     *(unsigned int*) (v2[3] * 0x3cc + 0x1015f50), (int*) v11,
-                     (int*) v10, (int*) v9);
-    }
+    fcn_00533f40(0, 0, v2[6], v2[3],
+                 *(unsigned int*) (v2[3] * 0x3cc + 0x1015f50), (int*) v11,
+                 (int*) v10, (int*) v9);
     d2_SetForm(*v2, 3);
     rowIndex = 0;
     if (rowCount > 0) {
@@ -97,11 +91,9 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
         v15 = (int*) &v2[0x50];
         do {
             v14 = v2[3];
-            v8 = v14 * 0x3cc;
-            v7 = *(int*) (v8 + 0x1015f50);
-            v8 = (*(int*) (v8 + 0x1015f4c) -
+            v8 = (*(int*) (v14 * 0x3cc + 0x1015f4c) -
                   (int) *(short*) ((int) g_772500 + 0x2399c)) / 2;
-            v15[-1] = fcn_0046f740(v8, v7 * rowIndex + 2, 0x6c7, v14);
+            v15[-1] = fcn_0046f740(v8, *(int*) (v14 * 0x3cc + 0x1015f50) * rowIndex + 2, 0x6c7, v14);
             v14 = fcn_0046f740(v8 + 2,
                                *(int*) (v2[3] * 0x3cc + 0x1015f50) * rowIndex + 4,
                                *(unsigned int*) (*v15 + 0x3c), v2[3]);
@@ -110,18 +102,19 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
             *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-1]].flags_1d0) = 3;
             fcn_0058b9c0((void*) *v15, v12);
             fcn_0058ba20((char*) *v15, v13);
-            v7 = *(int*) (v2[3] * 0x3cc + 0x1015f50) * rowIndex;
-            v14 = fcn_0046fac0(0, v7 + 0x38, v12, v2[3]);
+            v7 = *(int*) (v2[3] * 0x3cc + 0x1015f50) * rowIndex + 0x38;
+            v14 = fcn_0046fac0(0, v7, v12, v2[3]);
             *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].value_06c) = 1;
             *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].width) =
                 *(unsigned int*) (v2[3] * 0x3cc + 0x1015f4c);
             d2_SetElementFont(v14, 0x54);
-            v14 = fcn_0046fac0(0, v7 + 0x45, v13, v2[3]);
+            v7 += 0xd;
+            v14 = fcn_0046fac0(0, v7, v13, v2[3]);
             *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].value_06c) = 1;
             *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].width) =
                 *(unsigned int*) (v2[3] * 0x3cc + 0x1015f4c);
             d2_SetElementFont(v14, 0x54);
-            v7 += 0x57;
+            v7 += 0x12;
             v14 = 0;
             do {
                 io_FormatTextBuffer(v12, 0x6a9688, v14 + 0x16b7);
@@ -131,7 +124,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
                 fcn_00534160(0xa0, v7, *(unsigned char*) (*v15 + 0x24 + v14), 0x4df);
                 v14 += 1;
                 v7 += 0xd;
-            } while (v14 <= 4);
+            } while (v14 < 5);
             rowIndex += 1;
             v15 = &v15[3];
         } while (rowIndex < rowCount);
@@ -167,14 +160,15 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
                      *(unsigned short*) ((char*) v1 + 10) + 0x578);
         io_AppendText((int) 0x6a9668, 0x4102, (int) v12);
         io_FormatTextBuffer(v12, 0x6a9658,
-                     (int) (*(unsigned char*) ((char*) v1 + 0xc) *
-                            0.0039215689f * g_662cf8));
+                     (int) (((float) *(unsigned char*) ((char*) v1 + 0xc) /
+                            255.0f) * 100.0f));
         io_AppendText((int) 0x6a9668, 0x4103, (int) v12);
         if (a3 == 1) {
+            v14 = d2_CurrentWindowId;
             v6 = fcn_00468df0(
-                (*(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0xb4) / 2,
-                *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f50) - 0x21, 0xbf,
-                *(int*) 0x14b5ee4, d2_CurrentWindowId);
+                (*(int*) (v14 * 0x3cc + 0x1015f4c) - 0xb4) / 2,
+                *(int*) (v14 * 0x3cc + 0x1015f50) - 0x21, 0xbf,
+                *(int*) 0x14b5ee4, v14);
             v2[0x4e] = v6;
             fcn_00469110(v6, 0xb4);
         }

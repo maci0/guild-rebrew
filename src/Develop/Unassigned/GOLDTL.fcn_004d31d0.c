@@ -26,25 +26,30 @@ int __cdecl fcn_004d31d0(char* self, int centerColumn, int centerRow, int search
 		do {
 			row_hi = *(int*) (map + 0x20) - 1 < i + centerRow ? *(int*) (map + 0x20) - 1 : i + centerRow;
 			lo = k < 0 ? 0 : k;
-			n = centerRow - lo;
-			for (r = lo; r <= row_hi; r++, n--) {
-				d = i - abs(n);
-				lo = centerColumn - d;
-				hi = centerColumn + d;
-				if (lo < 0) lo = 0;
-				hi = *(int*) (map + 0x20) - 1 < centerColumn + d ? *(int*) (map + 0x20) - 1 : centerColumn + d;
-				for (c = lo; c <= hi; c++) {
-					int cell = *(int*) (*(char**) (map + 0x24) + (*(int*) (map + 0x20) * r + c) * 0x1c);
-					if (cell != 0 && cell != 0xd) {
-						f = fcn_004d3070(self, c, r,
-							(float) searchRadius * *(float*) (map + 0x10) * 2.0f);
-						if (f < best) {
-							best = f;
-							*resultColumn = c;
-							*resultRow = r;
+			r = lo;
+			if (r <= row_hi) {
+				n = centerRow - r;
+				do {
+					d = i - abs(n);
+					lo = centerColumn - d;
+					hi = centerColumn + d;
+					if (lo < 0) lo = 0;
+					hi = *(int*) (map + 0x20) - 1 < centerColumn + d ? *(int*) (map + 0x20) - 1 : centerColumn + d;
+					for (c = lo; c <= hi; c++) {
+						int cell = *(int*) (*(char**) (map + 0x24) + (*(int*) (map + 0x20) * r + c) * 0x1c);
+						if (cell != 0 && cell != 0xd) {
+							f = fcn_004d3070(self, c, r,
+								(float) searchRadius * *(float*) (map + 0x10) * 2.0f);
+							if (f < best) {
+								best = f;
+								*resultColumn = c;
+								*resultRow = r;
+							}
 						}
 					}
-				}
+					r++;
+					n--;
+				} while (r <= row_hi);
 			}
 			i++;
 			k--;

@@ -35,12 +35,7 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 	kind = t[7];
 
 	if (kind == 4) {
-		mode = t[9];
-		if (mode <= 0) {
-			mode = 0;
-		} else if (mode >= 4) {
-			mode = 4;
-		}
+		mode = (unsigned int) t[9] <= 0 ? 0 : (unsigned int) t[9] >= 4 ? 4 : t[9];
 		if (mode <= 0) {
 			hi = 0x64; lo = -0x4b; hiadd = -5; loadd = 0xb;
 		} else if (mode == 4) {
@@ -64,11 +59,13 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 					} else if (v < lo) {
 						v += loadd;
 					}
-					if (v <= -0x7f) {
-						v = -0x7f;
-					} else if (v >= 0x7f) {
+					if (v > -0x7f) {
+					if (v >= 0x7f) {
 						v = 0x7f;
 					}
+				} else {
+					v = -0x7f;
+				}
 					g_869480[i][j] = (signed char) v;
 				}
 			}
@@ -105,37 +102,27 @@ int __cdecl fcn_004c8de0(int* a, unsigned char* changed)
 				v = (signed char) g_869480[idx4][idx5idx];
 				g_90e0a0[idx4][idx5idx] = 0;
 				v += t[6];
-				if (v < -0x7f) {
+				if (v >= -0x7f) {
+					if (v >= 0x7f) {
+						v = 0x7f;
+					}
+				} else {
 					v = -0x7f;
-				} else if (v >= 0x7f) {
-					v = 0x7f;
 				}
 				g_869480[idx4][idx5idx] = (signed char) v;
 			} else if (kind == 1) {
 				v = (signed char) g_869480[idx4][idx5idx] + t[6];
-				if (v < -0x7f) {
-					v = -0x7f;
-				} else if (v >= 0x7f) {
-					v = 0x7f;
-				}
+				v = v < -0x7f ? -0x7f : v >= 0x7f ? 0x7f : v;
 				g_869480[idx4][idx5idx] = (signed char) v;
 				if (t[6] >= 0) {
 					v = v / 2;
 				}
 				v += (signed char) g_90e0a0[idx4][idx5idx];
-				if (v < -0x7f) {
-					v = -0x7f;
-				} else if (v >= 0x7f) {
-					v = 0x7f;
-				}
+				v = v < -0x7f ? -0x7f : v >= 0x7f ? 0x7f : v;
 				g_90e0a0[idx4][idx5idx] = (signed char) v;
 			} else if (kind == 0) {
 				v = (signed char) g_869480[idx4][idx5idx] + t[6];
-				if (v < -0x7f) {
-					v = -0x7f;
-				} else if (v >= 0x7f) {
-					v = 0x7f;
-				}
+				v = v < -0x7f ? -0x7f : v >= 0x7f ? 0x7f : v;
 				g_869480[idx4][idx5idx] = (signed char) v;
 			}
 		}

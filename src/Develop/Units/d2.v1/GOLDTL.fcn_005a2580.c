@@ -73,10 +73,9 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 	Rec rec;
 	char buf[512];
 	int seen[3];
+	char* fillDst;
 	int vals[3];
 	int idx[3];
-	int out1;
-	int out2;
 	int h;
 	int changed;
 	int y;
@@ -87,8 +86,6 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 	int j;
 	char* p;
 	char* e;
-	char* fillDst;
-	int fillCount;
 
 	y = -1;
 	seen[0] = -1;
@@ -109,13 +106,15 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 	do {
 		p = a2 + 0x1c;
 		for (j = 0; j < 3; j++) {
+			int out1;
+			int out2;
 			if (fcn_004f7120(*(int*) p, (*(unsigned short*) (a0 + 0x27)) * 540 + 0x7f4ca0,
 				&out1, &out2, &idx[j])) {
-				if (seen[j] != *(int*) p) {
+				if (*(int*) p != seen[j]) {
 					changed = 1;
 				}
-				seen[j] = *(int*) p;
 				sel[j].who = (char*) ((out2 & 0xffff) * 540 + 0x7f4ca0);
+				seen[j] = *(int*) p;
 				vals[j] = out1;
 			} else if (seen[j] != -1) {
 				changed = 1;
@@ -131,8 +130,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 			io_AppendText(0x18a3);
 			x = *(int*) (g_77255c + 0xc) / 2;
 			y = (x - *(short*) (g_772500 + 0x1ebd8)) - 0x28;
-			line = 0x46;
-			for (j = 0; j < 3; j++) {
+			for (j = 0, line = 0x46; line < 0x181; j++, line += 0x69) {
 				sel[j].x10 = y;
 				sel[j].x14 = line - 0x1e;
 				sel[j].used = (sel[j].who != 0);
@@ -144,7 +142,6 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 					io_FormatTextBuffer(buf, 0x18a5, *(int*) (idx + j) * 5 + 0x13fd, vals[j]);
 				}
 				fcn_005c91c0(buf, x, line, 0xf0, 0x54);
-				line += 0x69;
 			}
 			changed = 0;
 			found = 0;
@@ -165,6 +162,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 			}
 		}
 		if (g_100f1dc != -1 && d2_CurrentElementId == y) {
+			int fillCount;
 			fillDst = (char*) &rec;
 			fillCount = sizeof(rec);
 			__asm {

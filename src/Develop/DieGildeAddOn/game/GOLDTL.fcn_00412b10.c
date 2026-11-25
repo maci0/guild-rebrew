@@ -52,12 +52,12 @@ unsigned int __cdecl fcn_00412b10(char* object, float targetX, float targetY, fl
 	z.layer = z.layer & 0xf7;
 	z.queue = 1;
 	rotation[2] = targetRotZ;
-	frames[0].rotation[0] = 0.0f;
-	frames[0].rotation[1] = 0.0f;
-	frames[0].rotation[2] = 0.0f;
 	frames[0].position[0] = 0.0f;
 	frames[0].position[1] = 0.0f;
 	frames[0].position[2] = 0.0f;
+	frames[0].rotation[0] = 0.0f;
+	frames[0].rotation[1] = 0.0f;
+	frames[0].rotation[2] = 0.0f;
 	rotation[1] = targetRotY;
 	if ((a8 & 8) != 0) {
 		fcn_00451720(object + 0x84, rotation, v6, rotation);

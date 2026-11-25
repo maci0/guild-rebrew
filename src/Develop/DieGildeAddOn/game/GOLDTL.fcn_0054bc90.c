@@ -88,8 +88,8 @@ void __cdecl fcn_0054bc90(char* action)
 		he_FreeAction(action);
 		return;
 	}
-	v4 = *(char*) ((unsigned int) *(unsigned short*) (action + 8) * 0x21c + (unsigned long) &g_7f4ca2);
 	v3 = (unsigned short*) ((unsigned int) *(unsigned short*) (action + 8) * 0x21c + (unsigned long) &g_7f4ca0);
+	v4 = *(char*) ((unsigned int) *(unsigned short*) (action + 8) * 0x21c + (unsigned long) &g_7f4ca2);
 	if (v4 != 6 && v4 != 7)
 		*(int*) (action + 0x70) = 2;
 	switch (*(int*) (action + 0x70)) {

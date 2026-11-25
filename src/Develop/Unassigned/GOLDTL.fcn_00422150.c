@@ -72,9 +72,10 @@ void __cdecl fcn_00422150(void)
                         else if (p->flags14 & 2)
                         {
                             fcn_0042a880(p->obj);
-                            p->flags14 = p->flags14 | 8;
+                            value = p->flags14 | 8;
+                            p->flags14 = value;
                             p->start10 = 0;
-                            p->flags14 = p->flags14 & ~3;
+                            p->flags14 = value & ~3;
                         }
                         else
                         {

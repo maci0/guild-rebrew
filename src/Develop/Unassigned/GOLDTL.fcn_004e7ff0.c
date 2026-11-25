@@ -62,7 +62,7 @@ found:
 		goto fail;
 	}
 	c = arg[6];
-	if (((SlotRec*) amt_OfficeSlots)[i].tag != c) {
+	if (c != ((SlotRec*) amt_OfficeSlots)[i].tag) {
 		goto fail;
 	}
 	if (arg[5] == 0xff) {

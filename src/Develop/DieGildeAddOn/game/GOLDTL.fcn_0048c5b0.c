@@ -166,7 +166,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 		n = 0;
 		i = 0;
 		if (*(int*) 0x100b0c0 != 0) {
-			tmp = fcn_0050dfd0(q, *(unsigned short*) 0x100b0c0);
+			tmp = fcn_0050dfd0(q, *(int*) 0x100b0c0);
 			m.ids[3] = *(unsigned short*) 0x100b0c0;
 			m.slots[3] = *(int*) (*(int*) 0x100b0c8 + 1);
 			if (tmp > g_100b0f4) {
@@ -186,12 +186,12 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			if (*(int*) (0x100b0c0 + i * 0x40 + 0x34) == 0) {
 				continue;
 			}
+			tmp = fcn_0050dfd0(q, *(int*) (0x100b0c0 + i * 0x40));
 			if (*(int*) (0x100b0c0 + i * 0x40 + 8) == 0) {
 				continue;
 			}
 			m.ids[n + 3] = *(unsigned short*) (0x100b0c0 + i * 0x40);
 			m.slots[n + 3] = *(int*) (*(int*) (0x100b0c0 + i * 0x40 + 8) + 1);
-			tmp = fcn_0050dfd0(q, (int) m.ids[n + 3]);
 			if (tmp > *(int*) (0x100b0c0 + i * 0x40 + 0x34)) {
 				tmp = *(int*) (0x100b0c0 + i * 0x40 + 0x34);
 			}

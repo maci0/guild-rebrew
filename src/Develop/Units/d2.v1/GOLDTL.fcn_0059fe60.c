@@ -63,7 +63,10 @@ void __cdecl fcn_0059fe60(char *a0)
 	char *act;
 	unsigned short *sel;
 
-	memset(buttons, 0xff, sizeof(buttons));
+	buttons[0] = -1;
+	buttons[1] = -1;
+	buttons[2] = -1;
+	buttons[3] = -1;
 	fcn_005338a0();
 	dlg = fcn_00470820(0, 0, "locations\\wohnsitz\\geliebte");
 	d2_SetForm(dlg, 0);
@@ -78,14 +81,11 @@ void __cdecl fcn_0059fe60(char *a0)
 	}
 	g_100f1dc = -1;
 	do {
+		memset(ids, 0xff, sizeof(ids));
 		acts[0] = -1;
 		acts[1] = -1;
-		ids[0] = -1;
 		acts[2] = -1;
-		ids[1] = -1;
 		acts[3] = -1;
-		ids[2] = -1;
-		ids[3] = -1;
 		n = 0;
 		for (ent = he_StartHandlungSearch(1, 0, 0x6f); ent != 0 && n < 4; ent = he_fn_Handlung()) {
 			if (*(int *) (ent + 0xac) == g_7f4ca0[g_774970].f4) {
@@ -122,9 +122,9 @@ void __cdecl fcn_0059fe60(char *a0)
 			if (d2_CurrentElementId == item) {
 				memset(box, 0, sizeof(box));
 				box[4] = 6;
+				box[1] = (g_7f4ca0[g_774970].b9 != 0) ? 0x20409 : 0x2040a;
 				box[2] = g_666018;
 				box[3] = g_66601c;
-				box[1] = 0x2040a - (g_7f4ca0[g_774970].b9 != 0);
 				io_FormatTextBuffer(text_a, 0x1a53);
 				io_FormatTextBuffer(text_b, 0x1a54);
 				sel = fcn_005cd440(box, text_a, text_b, 0);

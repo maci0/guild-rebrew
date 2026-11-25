@@ -86,12 +86,14 @@ void __cdecl fcn_005aeab0(char* rec)
 		return;
 	}
 	cls = *(unsigned char*) (ent + 0x1b1);
-	switch (cls) {
-	case 0: break;
-	case 1: weight = 0.02f; break;
-	case 2: weight = 0.04f; break;
-	case 3: weight = 0.06f; break;
-	default: weight = 0.1f; break;
+	if (cls >= 4) {
+		weight = 0.1f;
+	} else if (cls == 3) {
+		weight = 0.06f;
+	} else if (cls == 2) {
+		weight = 0.04f;
+	} else if (cls == 1) {
+		weight = 0.02f;
 	}
 	v = gm_WalkEntityChain(*(unsigned short*) ent);
 	prob = (double) v;

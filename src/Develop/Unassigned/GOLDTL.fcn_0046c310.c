@@ -49,13 +49,11 @@ void __cdecl fcn_0046c310(int win)
 	w = &((fcn_0046c310_Win*)g_1015f40)[win];
 	v = w->vx;
 	if (v < 0) {
-		v = v + w->step;
-		pos = w->x - w->step;
-		w->x = pos;
-		w->vx = v;
+		w->x -= w->step;
+		v = w->vx += w->step;
 		if (v > 0) {
 			w->vx = 0;
-			w->x = v + pos;
+			w->x = v + w->x;
 		}
 		if (w->x >= 0) {
 			goto y_axis;
@@ -65,13 +63,11 @@ void __cdecl fcn_0046c310(int win)
 		if (v <= 0) {
 			goto y_axis;
 		}
-		pos = w->x + w->step;
-		v = v - w->step;
-		w->x = pos;
-		w->vx = v;
+		w->x += w->step;
+		v = w->vx -= w->step;
 		if (v < 0) {
 			w->vx = 0;
-			w->x = v + pos;
+			w->x = v + w->x;
 		}
 		if (w->x <= w->limit) {
 			goto y_axis;
@@ -82,13 +78,11 @@ void __cdecl fcn_0046c310(int win)
 y_axis:
 	v = w->vy;
 	if (v < 0) {
-		v = v + w->step;
-		pos = w->y - w->step;
-		w->y = pos;
-		w->vy = v;
+		w->y -= w->step;
+		v = w->vy += w->step;
 		if (v > 0) {
 			w->vy = 0;
-			w->y = v + pos;
+			w->y = v + w->y;
 		}
 	} else if (v > 0) {
 		w->y = w->y + w->step;
