@@ -66,7 +66,7 @@ found:
 		vfs_ReadData((char*) ((*(int*) (rec + 0x60) + i) * 0x50 + 0x1053000),
 		    0x50, 1, stream);
 	for (i = 0; i < a; i++)
-		vfs_ReadData((char*) ((*(int*) (rec + 0x60) + i) * 4 + 0x11bb000),
+		vfs_ReadData((char*) &g_11bb000[*(int*) (rec + 0x60) + i],
 		    1, 1, stream);
 	vfs_ReadData((char*) &b, 4, 1, stream);
 	*(int*) (rec + 0x68) = (int) m_alloc(b, "txt_txt:txt_loadTextFile:Pointer");

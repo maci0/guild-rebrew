@@ -22,7 +22,7 @@ int __cdecl fcn_00486640(char* a0, int* a1, int a2);
 int __cdecl fcn_00486640(char* a0, int* goodsPlan, int a2)
 {
 	int* p;
-	int off;
+	int ingredient;
 	int found;
 	int idx;
 	int i;
@@ -39,14 +39,14 @@ int __cdecl fcn_00486640(char* a0, int* goodsPlan, int a2)
 	AI_SUPPLY_CANDIDATE* rec;
 	GOODS_PLAN_ENTRY* seg;
 
-	off = 0x26;
+	ingredient = 0;
 	p = goodsPlan + 1;
 	do {
 		if (*p < 0) {
 			goto next;
 		}
 		seg = &g_100b0c0[*p];
-		word = *(unsigned short*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[goodsPlan[0]]) + off);
+		word = ((OBJECT_PROTOTYPE*) lpObjektePROT)[goodsPlan[0]].ingredient_amounts[ingredient];
 		if (seg->stock < word) {
 			if (a2 != 0) {
 				return 0;
@@ -78,7 +78,7 @@ int __cdecl fcn_00486640(char* a0, int* goodsPlan, int a2)
 						    && gm_GetBuildingTypeCategory((unsigned char) *rec->entity) != 2
 						    && rec->unk_08 != 0) {
 							lim = rec->limit;
-							w = *(unsigned short*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[goodsPlan[0]]) + off);
+							w = ((OBJECT_PROTOTYPE*) lpObjektePROT)[goodsPlan[0]].ingredient_amounts[ingredient];
 							if (lim >= w) {
 								if (*(short*) (rec->entity + 0x27) == *(short*) (*(int*) (a0 + 0x16c) + 0x27)) {
 									found = 1;
@@ -118,7 +118,7 @@ int __cdecl fcn_00486640(char* a0, int* goodsPlan, int a2)
 		}
 next:
 		p++;
-		off += 2;
-	} while (off < 0x2e);
+		ingredient++;
+	} while (ingredient < 4);
 	return 1;
 }

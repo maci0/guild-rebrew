@@ -107,6 +107,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 
 				px = (char*) gm_LookupEntityRecordById(*(int*) ((char*) ent + 0xc4));
 				if (px != 0) {
+					slot = *(unsigned short*) ((char*) ent + 8);
 					fcn_005b2740(px, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slot]));
 				}
 			}

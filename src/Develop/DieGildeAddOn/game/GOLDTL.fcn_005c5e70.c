@@ -4,7 +4,6 @@ extern int g_775318;
 extern char* lpObjektePROT;
 extern char* g_6abb00;
 extern char* g_14b52c4;
-extern double g_6629c8;
 extern int g_14a79c0[];
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -43,7 +42,7 @@ unsigned int __cdecl fcn_005c5e70(void)
 				if (used != 0) {
 					if (*(int*) (*slot + 0x21) != 0) {
 						fcn_00472640(slot[-1], 0);
-						*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]].value_1f4)) = g_6629c8
+						*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]].value_1f4)) = 1.0
 						    - (float) *(int*) (*slot + 0x1c) / *(int*) (used + 4);
 					}
 					else {
@@ -92,7 +91,7 @@ unsigned int __cdecl fcn_005c5e70(void)
 						if (used != 0) {
 							if (*(int*) ((char*) match + 0x21) != 0) {
 								fcn_00472640(handle, 0);
-								*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle].value_1f4)) = g_6629c8
+								*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle].value_1f4)) = 1.0
 								    - (float) *(int*) ((char*) match + 0x1c) / *(int*) (used + 4);
 							}
 							else {

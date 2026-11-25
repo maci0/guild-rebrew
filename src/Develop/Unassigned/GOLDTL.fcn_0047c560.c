@@ -69,7 +69,7 @@ int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
 	int j;
 	int id;
 	RENDER_QUAD* rec;
-	char* data;
+	BankData *data;
 	char* p;
 	Sample s;
 
@@ -77,14 +77,13 @@ int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
 	if (((Device*) g_772614)->vtbl->Lock((Device*) g_772614, 0, (d2_QueuedQuadCount - idx) * 0x18, &idx, 0x2000) < 0) {
 		return 0;
 	}
-	data = (char*) idx;
+	data = (BankData*) idx;
 	rec = g_1552020 + start;
 	if (start < d2_QueuedQuadCount) {
-		p = data;
 		i = start;
 		do {
-			*(BankData*) p = *(BankData*) rec;
-			p += 0xa8;
+			*data = *(BankData*) rec;
+			data++;
 			rec++;
 			i++;
 		} while (i < d2_QueuedQuadCount);

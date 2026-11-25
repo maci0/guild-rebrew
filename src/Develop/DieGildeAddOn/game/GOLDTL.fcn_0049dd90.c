@@ -1,8 +1,8 @@
 #include <string.h>
 
 extern unsigned char g_773d75;
-extern float g_66436c;
-extern float g_664368;
+
+
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* SIZE 0x18 */
@@ -107,7 +107,7 @@ label_49df97:
         {
             v19 = 0x12;
             rv = gm_RandomMod(0x200);
-            if ((float)rv + v15[6] < g_66436c)
+            if ((float)rv + v15[6] < 1250.0f)
                 return 0;
         }
         else
@@ -116,7 +116,7 @@ label_49df97:
                 return 0;
             v19 = 0x13;
             rv = gm_RandomMod(0x400);
-            if ((float)rv + v15[6] < g_664368)
+            if ((float)rv + v15[6] < 5000.0f)
                 return 0;
         }
         if ((float)fcn_0050d170(v19) * 0.4f <= (float)v7)

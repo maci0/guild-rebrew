@@ -53,20 +53,23 @@ void __cdecl fcn_0046e700(int index)
     if (element->kind < 0x40) fcn_0046cab0(element->f08);
     parent = element->parent;
     if (parent) {
+        int count = parent->count;
         i = 0;
-        while (i < parent->count) {
-            ++i;
-            if (parent->list[i - 1] == index) break;
+        while (i < count && parent->list[i++] != index) {
         }
         --i;
-        if (i != parent->count) {
-            memmove(parent->list + i, parent->list + i + 1, (parent->count - i) * 4);
+        if (i != count) {
+            memmove(parent->list + i, parent->list + i + 1, (count - i) * 4);
         }
         --parent->count;
     }
     object = (char*) element->f40;
-    if (object && *(int*) (object + 0x198)) {
-        fcn_00468fa0(element->x, element->y, element->w, element->f16, object);
+    if (object) {
+        if (*(int*) (object + 0x198)) {
+            fcn_00468fa0(element->x, element->y, element->w, element->f16, object);
+        } else {
+            fcn_00468ea0(element->x, element->y, element->w, element->f16);
+        }
     } else {
         fcn_00468ea0(element->x, element->y, element->w, element->f16);
     }

@@ -22,7 +22,6 @@ float __cdecl fcn_005025a0(int season, int slot)
 	int id;
 	float stock;
 	float last;
-	float ratio;
 	double scale; float price;
 
 	id = ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].objekt_id;
@@ -43,12 +42,12 @@ float __cdecl fcn_005025a0(int season, int slot)
 		stock = (float) *(int*) (e + 0xe);
 	}
 	last = ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].price;
-	ratio = ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].price_factor / ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].basis
-		* ((stock > ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].basis && *def != 0x17)
+	scale = ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].price_factor / ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].basis;
+	scale *= ((stock > ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].basis && *def != 0x17)
 			? (stock < 1.0 ? ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].basis / 1.0
 				: ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].basis / stock)
 			: flt_1);
-	scale = ratio > 0.25 ? ratio : 0.25;
+	scale = scale > 0.25 ? scale : 0.25;
 	if (scale >= g_664e78) {
 		scale = 5.0;
 	}

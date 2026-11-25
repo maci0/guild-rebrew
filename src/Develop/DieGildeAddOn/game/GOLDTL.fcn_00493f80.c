@@ -23,6 +23,7 @@ typedef struct GOLDTL_Msg493 {
 } GOLDTL_Msg493;                /* SIZE 0xf8 */
 
 extern float g_664150;
+extern char g_7f4ca2[1];
 
 void* __cdecl gm_LookupEntityRecordById(unsigned int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -76,7 +77,7 @@ void __cdecl fcn_00493f80(void)
 		add ecx, ebx
 		rep stosb
 	}
-	rec = (unsigned char*) 0x7f4ca2;
+	rec = (unsigned char*) g_7f4ca2;
 	slot = flags;
 	do {
 		if (!*slot) {

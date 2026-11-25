@@ -52,11 +52,13 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 	EvtSymbol* sym;
 	EvtCallFrame* slot;
 	int args[8];
-	char storage[0x300];
+	char storage[8][0x60];
 	int pos;
 	int n;
 	int k;
 	int* incoming;
+	int (*param)[8];
+	int* type;
 
 	pos = 0;
 	if (fn == 0) {
@@ -78,7 +80,7 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 		for (k = 0; k < fn->argc; k++) {
 			sym = (EvtSymbol*) evt_EvaluateExpression(0);
 			if (fn->types[k] == 6) {
-				strcpy(&storage[k * 0x60], (char*) sym);
+				strcpy(storage[k], (char*) sym);
 			} else {
 				args[k] = (int) sym;
 			}
@@ -92,7 +94,7 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 		incoming = (int*) g_6b7ea0;
 		for (k = 0; k < n; k++) {
 			if (fn->types[k] == 6) {
-				strcpy(&storage[k * 0x60], (char*) 0x14cb540 + k * 0x60);
+				strcpy(storage[k], (char*) 0x14cb540 + k * 0x60);
 			} else {
 				args[k] = incoming[k];
 			}
@@ -103,8 +105,8 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 	ip->frame = slot;
 	slot->splice = ip->splice;
 	slot->code = (char*) fn;
-	for (k = 0; k < fn->argc; k++) {
-		sym = (EvtSymbol*) evt_AllocateLocalVariable(ip, fn->types[k], 1, fn->params[k]);
+	for (k = 0, param = fn->params, type = fn->types; k < fn->argc; k++, param++, type++) {
+		sym = (EvtSymbol*) evt_AllocateLocalVariable(ip, *type, 1, *param);
 		if (sym == 0) {
 			evt_LogScriptError(ip, ip->depth, (char*) 0x6794c0);
 			evt_RequestScriptExit((char*) ip);
@@ -121,7 +123,7 @@ void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 			*(float*) sym->data = (float) args[k];
 			break;
 		case 6:
-			strcpy(sym->data, &storage[k * 0x60]);
+			strcpy(sym->data, storage[k]);
 			break;
 		default:
 			break;

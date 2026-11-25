@@ -18,7 +18,7 @@ char __cdecl fcn_00458e00(char* a0, char* a1)
 	float* uv;
 	if (a0 != 0 && *(int*) (a0 + 0xc) > 0 && a1 != 0 && *(int*) (a1 + 0x1c) != 0) {
 		scale = *(float*) a1 * 0.5f;
-		scale = scale * *(float*) 0x662dc0;
+		scale = scale * 0.31830987334251404f;
 		if (((unsigned char*) a1)[0x2a] == 0) {
 			return 1;
 		}
@@ -39,8 +39,8 @@ char __cdecl fcn_00458e00(char* a0, char* a1)
 				(((((unsigned char*) a1)[0x2a] << 8) | ((unsigned char*) a0)[0xa]) << 8
 				| ((unsigned char*) a0)[9]) << 8 | ((unsigned char*) a0)[8];
 		}
-		xstep = (float) (*(int*) 0x1042578 - *(int*) 0x1042570) * *(float*) 0x662dbc;
-		ystep = (float) (*(int*) 0x104257c - *(int*) 0x1042574) * *(float*) 0x6629d0;
+		xstep = (float) (*(int*) 0x1042578 - *(int*) 0x1042570) * 0.1428571492433548f;
+		ystep = (float) (*(int*) 0x104257c - *(int*) 0x1042574) * 0.2f;
 		obj = *(void**) a0;
 		(*(void (__stdcall**) (void*, int, int, void**, int)) (*(int*) obj + 0x2c))(obj, 0,
 			*(int*) (a0 + 0xc) << 5, &buf, 0x2000);

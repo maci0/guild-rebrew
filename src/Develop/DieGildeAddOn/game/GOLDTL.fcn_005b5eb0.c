@@ -8,7 +8,6 @@ int __cdecl d2_SetForm(int k, int i);
 int __cdecl fcn_0046f740(int x, int y, int id, int win);
 void __cdecl d2_SetElementFont(int i, int v);
 void __cdecl fcn_0046f9b0(int element, int a2);
-int __cdecl fcn_0046fac0(int a1, int a2, char* text, int win);
 char* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 char* __cdecl gm_EntityAccumulate(int entity);
 int __cdecl fcn_0050c490(char* a, void** out);
@@ -75,7 +74,7 @@ void __cdecl fcn_005b5eb0(int windowContext, char* entityName)
             }
             io_FormatTextBuffer(buf, 0x1a3e, name);
         }
-        v = fcn_0046fac0(0, x - 0x12, buf, d2_CurrentWindowId);
+        v = d2_ShowTxt(0, x - 0x12, buf, d2_CurrentWindowId);
         *(int*) (i * 4 + 0x777cdc) = v;
         d2_SetElementFont(v, 0x56);
         if (entityName != name) {

@@ -35,7 +35,6 @@ typedef union {
 
 extern float g_10432a0;
 extern float g_1043294;
-extern float g_662c6c;
 
 /* Rebuilds the view frustum: the four side planes from the half-angles of the
  * viewport, the four corner rays and the near and far planes. */
@@ -149,7 +148,7 @@ unsigned char __cdecl fcn_00437ee0(float* p, float* pmin, float* pmax)
 	flags.s.b6 = (common.b != 0);
 	if ((flags.b & 0x40) == 0) {
 		lo = 1e10f;
-		hi = g_662c6c;
+		hi = -1e10f;
 		q = p + 2;
 		for (i = 0; i < 8; i++) {
 			if (!(q[0] > lo))

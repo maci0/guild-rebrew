@@ -84,18 +84,18 @@ int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
 
         for (k = 0; k < 9; k++)
         {
-            if (activeTab == 1)
+            if (activeTab != 1)
+                break;
+            p = &arr[k][0];
+            if (*p != -1)
             {
-                p = &arr[k][0];
-                if (*p != -1)
-                {
-                    fcn_0046f280(*p);
-                    d2_DestroyElement(p[1]);
-                    p[0] = -1;
-                    p[1] = -1;
-                    p[2] = 0;
-                }
+                fcn_0046f280(*p);
+                d2_DestroyElement(p[1]);
+                p[0] = -1;
+                p[1] = -1;
+                p[2] = 0;
             }
+
         }
 
         d2_SetForm(dialogWindow, 2);

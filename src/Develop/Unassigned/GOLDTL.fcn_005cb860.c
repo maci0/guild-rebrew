@@ -28,7 +28,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int maxCount, int* a2, voi
 			if ((unsigned char) (c[2] - 2) > 5)
 				continue;
 			d = fcn_0050f980((unsigned short) *a0, *(unsigned short*) c, 1);
-			if (d <= *(float*) 0x664394 || *(int*) (c + 0x210) == *(int*) ((char*) a0 + 4))
+			if (d <= 33.0f || *(int*) (c + 0x210) == *(int*) ((char*) a0 + 4))
 				found++;
 		}
 		return found;
@@ -45,7 +45,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int maxCount, int* a2, voi
 			continue;
 		if (*(int*) (c + 0x210) != *(int*) ((char*) a0 + 4)) {
 			d = fcn_0050f980((unsigned short) *a0, *(unsigned short*) c, 1);
-			if (d > *(float*) 0x664394)
+			if (d > 33.0f)
 				continue;
 		} else {
 			d = 0.0f;

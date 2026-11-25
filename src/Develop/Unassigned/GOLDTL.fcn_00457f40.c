@@ -30,7 +30,6 @@ typedef struct GOLDTL_TileUv {
 	float dv;                   /* 0x0c */
 } GOLDTL_TileUv;
 
-extern float g_6629b0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_6b7ff9;
 
@@ -79,7 +78,7 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
 	}
 
 	fx = (float) rect[0] * scale[0] + offset[0];
-	fy = (g_6b7ff9 ? g_6629b0 : 1.5f) + offset[1];
+	fy = (g_6b7ff9 ? 2.5f : 1.5f) + offset[1];
 	y = rect[2];
 	fz = (float) y * scale[2] + offset[2];
 	u2 = uv->v;

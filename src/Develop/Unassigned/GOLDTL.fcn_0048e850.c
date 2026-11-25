@@ -7,6 +7,7 @@ int __cdecl fcn_004a4bb0(int action, char* e, int a, char* b, char* c, int d);
 int __cdecl ai_StartKreditNehmen(int a, char* e, int b, char* out1, char* out2);
 int __cdecl _ftol(void);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
+#include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char* lpGebaeudePROT;
 typedef struct { unsigned char unknown00[0x247]; unsigned char level; unsigned char unknown248[5]; } BUILDING_ROW;
 typedef struct Rec6 {
@@ -40,7 +41,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 						*(int*) (rec1.v + 2) = 1;
 						need = (int) ((float) fcn_0050d170(c + 1) * 0.3f);
 						if (fcn_004a4bb0(action, e, 0, (char*) rec2.v, (char*) rec1.v, 0) != 0) {
-							have = (int) ((float) fcn_0050b810(*(int*) (e + 0x178), *(char*) 0x773d75) * 0.5f);
+							have = (int) ((float) fcn_0050b810(*(int*) (e + 0x178), (char) g_773d75) * 0.5f);
 							if (have < need) {
 								d = need - have;
 								if ((float) d / (float) need < 0.25f) {
@@ -61,7 +62,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 					*(int*) (rec1.v + 2) = 1;
 					if (fcn_004a4bb0(action, e, 0, (char*) rec1.v, (char*) rec2.v, 1) != 0) {
 						need = fcn_0050d200(e, *(int*) (rec1.v + 1));
-						have = (int) ((float) fcn_0050b810(*(int*) (e + 0x178), *(char*) 0x773d75) * 0.5f);
+						have = (int) ((float) fcn_0050b810(*(int*) (e + 0x178), (char) g_773d75) * 0.5f);
 						if (have < need) {
 							d = need - have;
 							if ((float) d / (float) need < 0.25f) {

@@ -1,4 +1,5 @@
 #include "client_dialog_state.h"
+extern int g_14abaac;
 /* Kidnapping message handler: validates the request against the current
  * location slot, builds and posts the stealing-guild packet, and pumps the
  * message queue until the dialog reports no further action. */
@@ -104,7 +105,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 					res = 1;
 					g_774654 = 3;
 				} else {
-					fcn_00526120((void*) *(int*) 0x14abaac, 0);
+					fcn_00526120((void*) g_14abaac, 0);
 					*(int*) &g_100f1dc = -1;
 				}
 			} else if (d2_CurrentElementId == v9)

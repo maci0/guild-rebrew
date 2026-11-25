@@ -45,6 +45,7 @@ int __cdecl fcn_00414d20(int a1, int count, ...)
 	int m;
 	int quot;
 	char* s;
+	float* camera;
 	va_list ap;
 
 	h[12] = 0;
@@ -137,6 +138,7 @@ int __cdecl fcn_00414d20(int a1, int count, ...)
 		va_end(ap);
 	}
 	quot = a1 / n;
+	camera = (float*) d3_ActiveCamera;
 	{
 		Ent4cf450* ents;
 		int e;
@@ -157,19 +159,25 @@ int __cdecl fcn_00414d20(int a1, int count, ...)
 				continue;
 			}
 			if ((*(unsigned char*) (e + 0x214) & 0x40) != 0) {
-				ents[m].pos[0] = *(float*) (e + 0x5c) - ((float*) d3_ActiveCamera)[0x13];
-				ents[m].pos[1] = *(float*) (e + 0x60) - ((float*) d3_ActiveCamera)[0x14];
-				ents[m].pos[2] = *(float*) (e + 0x64) - ((float*) d3_ActiveCamera)[0x15];
-				ents[m].rot[0] = *(float*) (e + 0x90) - ((float*) d3_ActiveCamera)[0x21];
-				ents[m].rot[1] = *(float*) (e + 0x94) - ((float*) d3_ActiveCamera)[0x22];
-				ents[m].rot[2] = *(float*) (e + 0x98) - ((float*) d3_ActiveCamera)[0x23];
+				ents[m].pos[0] = *(float*) (e + 0x5c);
+				ents[m].pos[1] = *(float*) (e + 0x60);
+				ents[m].pos[2] = *(float*) (e + 0x64);
+				ents[m].rot[0] = *(float*) (e + 0x90);
+				ents[m].rot[1] = *(float*) (e + 0x94);
+				ents[m].rot[2] = *(float*) (e + 0x98);
+				ents[m].pos[0] -= camera[0x13];
+				ents[m].pos[1] -= camera[0x14];
+				ents[m].pos[2] -= camera[0x15];
+				ents[m].rot[0] -= camera[0x21];
+				ents[m].rot[1] -= camera[0x22];
+				ents[m].rot[2] -= camera[0x23];
 			}
-			ents[m].type = quot;
+			ents[m - 1].type = quot;
 			m++;
 		}
 		ents[m].type = 0;
 	}
-	d3_ActiveCameraAnimation = d3_CreateObjectAnimation((char*) d3_ActiveCamera, fl, n + 1, rec);
+	d3_ActiveCameraAnimation = d3_CreateObjectAnimation((char*) camera, fl, n + 1, rec);
 	d3_CameraAnimating = 1;
 	return 1;
 }

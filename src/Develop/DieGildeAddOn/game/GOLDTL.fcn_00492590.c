@@ -1,7 +1,7 @@
 #include <string.h>
 
 unsigned short __cdecl gm_RandomMod(int n);
-float __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 char* __cdecl fcn_0064d530(char* dst, const char* src, unsigned int n);
 
 extern unsigned char g_772628[];
@@ -21,6 +21,7 @@ unsigned int __cdecl fcn_00492590(int a0)
 	int sel;
 	int v;
 	int bl;
+	unsigned char sex;
 	char* src;
 
 	tab[0] = 0.2f;
@@ -66,11 +67,12 @@ unsigned int __cdecl fcn_00492590(int a0)
 		}
 	}
 	memset(((char *)g_772628), 0, 0x21c);
-	((char *)g_772628)[9] = (char) gm_RandomMod(2);
-	if (((char *)g_772628)[9] != 0) {
-		src = gm_FemaleNames[gm_RandomMod(0x70) & 0xffff];
-	} else {
+	sex = (unsigned char) gm_RandomMod(2);
+	g_772628[9] = sex;
+	if (sex == 0) {
 		src = g_14a5dbc[gm_RandomMod(0xbf) & 0xffff];
+	} else {
+		src = gm_FemaleNames[gm_RandomMod(0x70) & 0xffff];
 	}
 	fcn_0064d530(((char *)g_772628) + 0x30, src, 0xf);
 	switch (a0) {

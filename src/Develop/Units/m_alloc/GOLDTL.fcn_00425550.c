@@ -97,20 +97,12 @@ fail:
 			goto fail;
 		}
 		found = *(char**) ((char*) data + 0x38);
-		if (found == 0) {
-			return result;
-		}
-		while (index-- != 0) {
-
+		while (found != 0 && index-- != 0) {
 			found = *(char**) (found + 0x104);
-			if (found == 0) {
-				return result;
-			}
 		}
-		if (found == 0) {
-			return result;
+		if (found != 0) {
+			result = fcn_00425550(found, ext);
 		}
-		result = fcn_00425550(found, ext);
 		return result;
 	}
 }

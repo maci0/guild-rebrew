@@ -4,7 +4,6 @@ extern float g_662918;
 extern float g_662914;
 extern const float g_662cf8;
 extern float g_662c98;
-extern const float g_6628a8;
 int __cdecl fcn_004f5dd0(int);
 
 /* ADDRESS: GOLDTL 0x004a4680 */
@@ -45,7 +44,7 @@ int __cdecl fcn_004a4680(float* o0, float* o1, int idx, char* s, int* p4)
 	t = (char*) &method->effects[0].value;
 	for (i = 0; !found && i < 4; i++) {
 		if (*(char*) (t - 4) == *(char*) (s + 0x130)
-			&& *(float*) t > g_6628a8) {
+			&& *(float*) t > 0.0f) {
 			found = 1;
 		}
 		t += 8;
@@ -53,14 +52,14 @@ int __cdecl fcn_004a4680(float* o0, float* o1, int idx, char* s, int* p4)
 	t = (char*) &method->other_effects[0].value;
 	for (i = 0; !found && i < 4; i++) {
 		if (*(char*) (t - 4) == *(char*) (s + 0x130)
-			&& *(float*) t > g_6628a8) {
+			&& *(float*) t > 0.0f) {
 			found = 1;
 		}
 		t += 8;
 	}
 	t = (char*) method->effects;
 	for (i = 4; i != 0; i--) {
-		if (*(float*) (t + 4) > g_6628a8) {
+		if (*(float*) (t + 4) > 0.0f) {
 			if (*(unsigned char*) t == *(unsigned char*) (s + 0x130)) {
 				contribution = (*(float*) (s + (*(unsigned char*) t + 0xc) * 0xc)
 					* *(float*) (t + 4)) / (v10 + v9);
@@ -78,7 +77,7 @@ int __cdecl fcn_004a4680(float* o0, float* o1, int idx, char* s, int* p4)
 			contribution = contribution * *(float*) (s + (*(unsigned char*) t + 0xc) * 0xc);
 		}
 		*o0 += contribution;
-		if (*(float*) (t + 0x44) > g_6628a8) {
+		if (*(float*) (t + 0x44) > 0.0f) {
 			if (*(unsigned char*) (t + 0x40) == *(unsigned char*) (s + 0x130)) {
 				contribution = (*(float*) (s + (*(unsigned char*) (t + 0x40) + 0xc) * 0xc)
 					* *(float*) (t + 0x44)) / (v10 + v9);

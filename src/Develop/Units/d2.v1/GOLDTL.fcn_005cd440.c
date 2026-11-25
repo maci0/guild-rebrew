@@ -32,6 +32,7 @@ int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
 	int result;
 	int scale;
 	int e;
+	int occupied;
 
 	order[0] = 0;
 	order[1] = 8;
@@ -83,13 +84,9 @@ int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
 	scale = btn[8] * (int)sizeof(D2_CONTROL_TL);
 	do {
 		result = 0;
-		if (!amt_HasOccupiedOfficeType7()) {
-			*(int*) (g_1015ea0 + scale + 0x5c) = 0;
-			*(int*) (g_1015ea0 + scale + 0x1d0) = 0;
-		} else {
-			*(int*) (g_1015ea0 + scale + 0x5c) = 1;
-			*(int*) (g_1015ea0 + scale + 0x1d0) = 3;
-		}
+		occupied = amt_HasOccupiedOfficeType7() != 0;
+		*(int*) (g_1015ea0 + scale + 0x5c) = occupied;
+		*(int*) (g_1015ea0 + scale + 0x1d0) = occupied * 3;
 		if (g_14ce8e0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
