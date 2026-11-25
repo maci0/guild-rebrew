@@ -15,8 +15,6 @@ extern int g_14ce8cc;
 extern int g_67fcb4;
 extern char* g_14a5310[];
 extern char g_6b5c60[];
-extern double g_664e78;
-extern double g_662930;
 
 unsigned short __cdecl fcn_0042e410(int a);
 int __cdecl he_StartHandlungSearch(int n, ...);
@@ -253,19 +251,19 @@ void __cdecl fcn_00531d20(void)
 	fcn_004fc460((char*) f);
 	switch (idx) {
 	case 1:
-		obj = (int) (f[1] * g_662930 * g_664e78 + id);
+		obj = (int) ((f[1] * 5.0) * 3.0 + id);
 		obj += fcn_0042e410(3) & 0xffff;
 		break;
 	case 2:
-		obj = (int) (fcn_004fbd40() * g_662930 * g_664e78 + id);
+		obj = (int) ((fcn_004fbd40() * 5.0) * 3.0 + id);
 		obj += fcn_0042e410(3) & 0xffff;
 		break;
 	case 3:
-		obj = (int) (f[2] * g_662930 * g_664e78 + id);
+		obj = (int) ((f[2] * 5.0) * 3.0 + id);
 		obj += fcn_0042e410(3) & 0xffff;
 		break;
 	case 4:
-		obj = (int) (f[0] * g_662930 * g_664e78 + id);
+		obj = (int) ((f[0] * 5.0) * 3.0 + id);
 		obj += fcn_0042e410(3) & 0xffff;
 		break;
 	case 5:

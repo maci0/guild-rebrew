@@ -34,8 +34,8 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl fcn_0050c710(char* e, int a, int b);
 char* __cdecl fcn_0050dc90(char* e);
-double __cdecl gm_RandomFloat01(void);
-int __cdecl gm_RandomMod(unsigned short n);
+float __cdecl gm_RandomFloat01(void);
+unsigned short __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_0050f950(int a, int b);
 void __cdecl fcn_005904a0(char* s, int v);
 void __cdecl fcn_004c5530(Msg5* m);
@@ -56,15 +56,14 @@ void __cdecl fcn_0057b390(char* e)
 	int k;
 	int n;
 	int d;
-	double r;
+	float r;
 
 	switch (*(int*) (e + 0x70)) {
 	case 0:
 		u = gm_StartFilteredEntitySearch(1, 5, 0x1d);
 		while (u != 0) {
 			if (*(unsigned short*) (u + 0x27) != 0xffff) {
-				n = fcn_0050c710(u, 0x15, 1);
-				lim = (float) n * g_662a70 + g_662a6c;
+				lim = (float) fcn_0050c710(u, 0x15, 1) * 0.0025f;
 				count = 0;
 				for (p = 0x7f4ca0; p < 0x85a0a0; p += 0x21c) {
 					if (*(unsigned short*) p != 0xffff && *(int*) (p + 0x16c) == (int) u) {
@@ -73,7 +72,7 @@ void __cdecl fcn_0057b390(char* e)
 				}
 				for (k = 0; k < count; k++) {
 					r = gm_RandomFloat01();
-					if (r > lim) {
+					if (r > lim + 0.75f) {
 						s = list[k];
 						if (!(*(unsigned char*) (s + 0x1b4) & 1) &&
 						    (*(unsigned char*) (s + 0x180) == 4 ||
@@ -81,14 +80,14 @@ void __cdecl fcn_0057b390(char* e)
 						     *(unsigned char*) (s + 0x180) == 0x8d)) {
 							fcn_005904a0(s, 1);
 						}
-					} else {
+					} else if (r > 0.5) {
 						s = list[k];
-						if (r > 0.5 && *(int*) (s + 0x17c) == 0) {
+						if (*(int*) (s + 0x17c) == 0) {
 							d = fcn_0050f950(*(unsigned short*) (u + 0x27), *(unsigned short*) s);
-							if (-(int) (gm_RandomMod(0x4a) & 0xffff) < d) {
+							if (-gm_RandomMod(0x4a) < d) {
 								memset(&m, 0, sizeof(m));
-								m.target = *(int*) (u + 1);
 								m.owner = *(unsigned short*) (e + 8);
+								m.target = *(int*) (u + 1);
 								m.kind = 0x94;
 								m.at = *(GAME_TIMESTAMP*) &gm_GameTime;
 								m.code = 1;
@@ -98,8 +97,8 @@ void __cdecl fcn_0057b390(char* e)
 						}
 					}
 				}
+				u = gm_FindNextFilteredEntity();
 			}
-			u = gm_FindNextFilteredEntity();
 		}
 		break;
 	case 1:
@@ -121,7 +120,7 @@ void __cdecl fcn_0057b390(char* e)
 				     *(unsigned char*) (s + 0x180) == 0x8d ||
 				     *(unsigned char*) (s + 0x180) == 0) &&
 				    (cur == 0 || cur != s)) {
-					if (gm_RandomFloat01() > 0.75) {
+					if (gm_RandomFloat01() > 0.75f) {
 						fcn_005904a0(s, 0);
 					} else if (cur != 0 && (*(unsigned char*) (cur + 0x1b4) & 1) &&
 						   *(int*) (s + 0x184) != 0) {

@@ -21,7 +21,6 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* outValue)
 	int cnt;
 	int r;
 	int cur;
-	int v;
 	int p;
 	float f;
 	int d;
@@ -45,13 +44,12 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* outValue)
 			f = fcn_004fbd40();
 			d = v5[2] - v5[1];
 			if (f < g_664188) {
-				v = (int) ((float) d * g_664160 + v5[1]);
+				r = (int) ((float) d * g_664160 + v5[1]);
 			} else if (f < g_664180) {
-				v = (int) ((float) d * g_66417c + v5[1]);
+				r = (int) ((float) d * g_66417c + v5[1]);
 			} else {
-				v = (int) ((float) d * g_664178 + v5[1]);
+				r = (int) ((float) d * g_664178 + v5[1]);
 			}
-			r = v;
 			if (mode == 1 || mode == 2 || mode == 3 || mode == 5) {
 				r--;
 			}
@@ -62,18 +60,13 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* outValue)
 				r = r + 1 + (gm_RandomMod(3) & 0xffff);
 			}
 			if (v5[6] - 3 > r) {
-				cur = (v5[6] - (gm_RandomMod(2) & 0xffff)) - 1;
-				*outValue = cur;
-				if (v5[1] > cur)
-					cur = v5[1];
-				*outValue = cur;
+				*outValue = v5[6] - (gm_RandomMod(2) & 0xffff) - 1;
+				*outValue = v5[1] > *outValue ? v5[1] : *outValue;
 				return 1;
 			}
 			if (v5[6] + 3 < r) {
-				cur = (gm_RandomMod(2) & 0xffff) + v5[6] + 1;
-				if (v5[2] < cur)
-					cur = v5[2];
-				*outValue = cur;
+				*outValue = (gm_RandomMod(2) & 0xffff) + v5[6] + 1;
+				*outValue = v5[2] < *outValue ? v5[2] : *outValue;
 				return 1;
 			}
 		}

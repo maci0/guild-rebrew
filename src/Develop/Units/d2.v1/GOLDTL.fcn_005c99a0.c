@@ -21,12 +21,12 @@ int __cdecl fcn_004677e0();
 int __cdecl fcn_00472380();
 float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
 int __cdecl fcn_00472640();
-int __cdecl fcn_005cf720();
+int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005c99a0 */
-int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, int cells, int owner)
+int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, Item_5c99a0* items, int owner)
 {
-	Item_5c99a0* items;
+	Item_5c99a0* item;
 	int counts[3];
 	int rows;
 	int row;
@@ -37,12 +37,8 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, int cells,
 	int x;
 	int y;
 	int left;
-	int v;
-	int* obj;
-	int t;
 	char buf[256];
 
-	items = (Item_5c99a0*) cells;
 	counts[0] = -1;
 	counts[1] = -1;
 	counts[2] = -1;
@@ -96,87 +92,71 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, int cells,
 		break;
 	}
 	idx = 0;
-	if (rows > 0) {
-		for (row = 0; row < rows; row++) {
-			n = counts[row];
-			for (col = 0; col < n; col++) {
-				if (idx >= itemCount) {
-					break;
-				}
-				items[idx].y = ybase;
-				if (n == 3) {
-					items[idx].x = col * 0xca;
-				} else if (n == 2) {
-					items[idx].x = col * 0xca + 0x65;
-				} else {
-					items[idx].x = 0xca;
-				}
-				idx++;
+	for (row = 0; row < rows; row++) {
+		n = counts[row];
+		for (col = 0; col < n; col++, idx++) {
+			if (idx >= itemCount) {
+				break;
 			}
-			ybase += 0x80;
-		}
-	}
-	if (itemCount <= 0) {
-		return 0;
-	}
-	t = itemCount;
-	while (t != 0) {
-		x = items->x + 0x65;
-		y = items->y + 0x23;
-		left = x - (int) *(short*) (*(int*) &g_772500 + 0x1ebd8) / 2;
-		items->win = fcn_0046f740(left, y, 0x5da, *(int*) &d2_CurrentWindowId);
-		obj = items->obj;
-		if (obj != 0) {
-			if (*(char*) ((int) obj + 2) == 6 || *(char*) ((int) obj + 2) == 7 || *(char*) ((int) obj + 2) == 5) {
-				fcn_0046f740(left - 0x20, y, *(int*) ((int) obj + 0x54), *(int*) &d2_CurrentWindowId);
-			}
-			obj = items->obj;
-			v = (int) *(short*) (*(int*) &g_772500 + 0x50 + *(int*) ((int) obj + 0x18c) * 0x54) / 2;
-			items->cw18 = fcn_0046f740(x - v - 3, y + 1, *(int*) ((int) obj + 0x18c), *(int*) &d2_CurrentWindowId);
-			fcn_0046f740(left + 3, y + 3, items->cw1c, *(int*) &d2_CurrentWindowId);
-			if (items->cw20 != 0) {
-				fcn_0046f740(left + 3, (int) *(short*) (*(int*) &g_772500 + 0x1ebda) - 0x13 + y, items->cw20, *(int*) &d2_CurrentWindowId);
-			}
-			if (items->cw24 != 0) {
-				fcn_0046f740((int) *(short*) (*(int*) &g_772500 + 0x1ebd8) - 0x10 + (left), y + 3, items->cw24, *(int*) &d2_CurrentWindowId);
-			}
-			fcn_0046f740((int) *(short*) (*(int*) &g_772500 + 0x1ebd8) - 0x10 + (left), (int) *(short*) (*(int*) &g_772500 + 0x1ebda) - 0x13 + y, items->cw28, *(int*) &d2_CurrentWindowId);
-			obj = items->obj;
-			if (mode != 7) {
-				io_FormatTextBuffer(buf, 0x6ac964, (*(char*) ((int) obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) obj + 0xd), *(unsigned short*) obj);
-				fcn_005c9090(buf, x, items->y, 0xca, 0x56);
-				io_FormatTextBuffer(buf, 0x6ac95c, *(unsigned short*) items->obj);
+			items[idx].y = row * 0x80 + ybase;
+			if (n == 3) {
+				items[idx].x = col * 0xca;
+			} else if (n == 2) {
+				items[idx].x = col * 0xca + 0x65;
 			} else {
-				io_FormatTextBuffer(buf, 0x6ac964, (*(char*) ((int) obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) obj + 0xd), *(unsigned short*) obj);
-				fcn_005c9090(buf, x, items->y, 0xca, 0x56);
-				obj = items->obj;
-				v = (*(char*) ((int) obj + 9) ? 0x27b : 0x253) + (unsigned int) *(unsigned char*) ((int) obj + 0x169);
-				io_FormatTextBuffer(buf, 0x679060, v);
-			}
-			fcn_005c9090(buf, x, items->y + 0xf, 0xca, 0x56);
-			if (items->obj != (int*) owner && *(char*) ((int) items->obj + 2) != 6) {
-				items->win2 = fcn_004677e0(x - 0x23, (int) *(short*) (*(int*) &g_772500 + 0x1ebda) + 5 + y, 0x40, 0, 100, 0x75, 0x442, *(int*) &d2_CurrentWindowId);
-				if (!(*(char*) ((int) items->obj + 2) != 7)) {
-					fcn_00472380(items->win2, 0, 100, 0);
-				} else {
-					v = (int) fcn_0050f980(*(unsigned short*) owner,
-					    *(unsigned short*) items->obj, 1);
-					fcn_00472380(items->win2, 0, 100, v);
-				}
-				fcn_00472640(items->win2, 1);
-				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[items->win2].value_05c = 1;
-			}
-			if (owner != 0 && *(char*) (owner + 2) == 6 && *(int*) ((int) items->obj + 0x210) == *(int*) (owner + 4)) {
-				fcn_0046f740((int) *(short*) (*(int*) &g_772500 + 0x1ebd8) + (left), y, 0x6d3, *(int*) &d2_CurrentWindowId);
-			}
-			if (filter == 0 || fcn_005cf720(*(unsigned short*) &g_774970, *(unsigned short*) items->obj, filter, 0) != 0) {
-				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[items->win].value_05c = 1;
-				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[items->win].flags_1d0 = 3;
-				*(int*)&((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[items->win].associated_object = (int) items->obj;
+				items[idx].x = 0xca;
 			}
 		}
-		items++;
-		t--;
+	}
+	for (row = 0; row < itemCount; row++) {
+		item = &items[row];
+		x = item->x + 0x65;
+		y = item->y + 0x23;
+		left = x - (int) *(short*) (g_772500 + 0x1ebd8) / 2;
+		item->win = fcn_0046f740(left, y, 0x5da, d2_CurrentWindowId);
+		if (item->obj != 0) {
+			if (*(char*) ((int) item->obj + 2) == 6 || *(char*) ((int) item->obj + 2) == 7 || *(char*) ((int) item->obj + 2) == 5) {
+				fcn_0046f740(left - 0x20, y, *(int*) ((int) item->obj + 0x54), d2_CurrentWindowId);
+			}
+			item->cw18 = fcn_0046f740(x - (int) *(short*) (g_772500 + 0x50 + *(int*) ((int) item->obj + 0x18c) * 0x54) / 2 - 3, y + 1, *(int*) ((int) item->obj + 0x18c), d2_CurrentWindowId);
+			fcn_0046f740(left + 3, y + 3, item->cw1c, d2_CurrentWindowId);
+			if (item->cw20 != 0) {
+				fcn_0046f740(left + 3, (int) *(short*) (g_772500 + 0x1ebda) - 0x13 + y, item->cw20, d2_CurrentWindowId);
+			}
+			if (item->cw24 != 0) {
+				fcn_0046f740((int) *(short*) (g_772500 + 0x1ebd8) - 0x10 + (left), y + 3, item->cw24, d2_CurrentWindowId);
+			}
+			fcn_0046f740((int) *(short*) (g_772500 + 0x1ebd8) - 0x10 + (left), (int) *(short*) (g_772500 + 0x1ebda) - 0x13 + y, item->cw28, d2_CurrentWindowId);
+			if (mode == 7) {
+				io_FormatTextBuffer(buf, 0x6ac964, (*(char*) ((int) item->obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) item->obj + 0xd), *(unsigned short*) item->obj);
+				fcn_005c9090(buf, x, item->y, 0xca, 0x56);
+				io_FormatTextBuffer(buf, 0x679060, (*(char*) ((int) item->obj + 9) ? 0x27b : 0x253) + (unsigned int) *(unsigned char*) ((int) item->obj + 0x169));
+				fcn_005c9090(buf, x, item->y + 0xf, 0xca, 0x56);
+			} else {
+				io_FormatTextBuffer(buf, 0x6ac964, (*(char*) ((int) item->obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) item->obj + 0xd), *(unsigned short*) item->obj);
+				fcn_005c9090(buf, x, item->y, 0xca, 0x56);
+				io_FormatTextBuffer(buf, 0x6ac95c, *(unsigned short*) item->obj);
+				fcn_005c9090(buf, x, item->y + 0xf, 0xca, 0x56);
+			}
+			if (item->obj != (int*) owner && *(char*) ((int) item->obj + 2) != 6) {
+				item->win2 = fcn_004677e0(x - 0x23, (int) *(short*) (g_772500 + 0x1ebda) + 5 + y, 0x40, 0, 100, 0x75, 0x442, d2_CurrentWindowId);
+				if (*(char*) ((int) item->obj + 2) == 7) {
+					fcn_00472380(item->win2, 0, 100, 0, 1);
+				} else {
+					fcn_00472380(item->win2, 0, 100, (int) fcn_0050f980(*(unsigned short*) owner, *(unsigned short*) item->obj, 1));
+				}
+				fcn_00472640(item->win2, 1);
+				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[item->win2].value_05c = 1;
+			}
+			if (owner != 0 && *(char*) (owner + 2) == 6 && *(int*) ((int) item->obj + 0x210) == *(int*) (owner + 4)) {
+				fcn_0046f740((int) *(short*) (g_772500 + 0x1ebd8) + (left), y, 0x6d3, d2_CurrentWindowId);
+			}
+			if (filter == 0 || fcn_005cf720(*(unsigned short*) &g_774970, *(unsigned short*) item->obj, filter, 0) != 0) {
+				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[item->win].value_05c = 1;
+				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[item->win].flags_1d0 = 3;
+				*(int*)&((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[item->win].associated_object = (int) item->obj;
+			}
+		}
 	}
 	return 0;
 }

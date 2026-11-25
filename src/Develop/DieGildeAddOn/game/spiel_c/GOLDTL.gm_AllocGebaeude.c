@@ -5,13 +5,16 @@
  * Develop/DieGildeAddOn/game/spiel.c, which shares the field layout but not the
  * client's prototype-name selection. */
 
+#include "client_types.h"
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+extern pos14_7f4c00 gm_GameTime;
+
 extern char* lpGebaeudePROT;
 extern int gm_NextEntityId;
 extern char g_14a6558[];
 extern char* lpGebaeudeINST;
 extern int lpObjektePROT;
 extern char g_6b5c60;
-extern unsigned short g_7f4c0c;
 extern char s_699858[];
 extern char s_69983c[];
 extern char s_69982c[];
@@ -41,6 +44,23 @@ typedef struct {
 	unsigned short components[0x40];
 	unsigned char unknowna3[0x1aa];
 } BuildingProto5043d0;
+
+/* Building name table row: default name, then twelve instance names. */
+typedef struct {
+	char* name;
+	char* unknown04;
+	char* alias[12];
+} BuildingNames5043d0;
+/* SIZE 0x38 */
+
+/* Plot record allocated for type 0x1e. */
+typedef struct {
+	unsigned char unknown00[0xd];
+	unsigned char owner;
+	unsigned char unknown0e[6];
+	int value;
+} PlotRecord5043d0;
+/* SIZE 0x18 */
 #pragma pack(pop)
 
 
@@ -53,11 +73,11 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	char tmp[0x100];
 	char names[12][0x40];
 	unsigned int type;
-	char* list_end;
 	BuildingProto5043d0* rec; BuildingProto5043d0* prototypes;
 	char* geb;
 	unsigned short comp;
-	char* comp_rec;
+	char* obj;
+	OBJECT_PROTOTYPE* proto;
 	unsigned char comp_type;
 	char* q;
 	int i;
@@ -98,17 +118,21 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	geb[0x5c] = 0x64;
 	*(int*) (geb + 0x95) = -1;
 	if (owner != 0xffff) {
-		if (*(char*) (0x7f4ca2 + (int) owner * 0x21c) == 6) {
+		if (((ENTITY_RECORD*) g_7f4ca0)[owner].entity_state == 6) {
 			fcn_005b1b30(geb);
 		}
 	}
 	memset(geb + 0x99, 0, 0x10);
 	*(int*) (geb + 0xa5) = -1;
 	*(int*) (geb + 0x99) |= 1;
-	n = 0x30; q = geb + 0x65;
+	{
+	char* fillStart;
+	int fillBytes;
+
+	fillBytes = 0x30; fillStart = geb + 0x65;
 	__asm {
-		mov edi, q
-		mov ebx, n
+		mov edi, fillStart
+		mov ebx, fillBytes
 		xor eax, eax
 		lea ecx, [edi+edi*2]
 		and ecx, 3
@@ -123,15 +147,14 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 		add ecx, ebx
 		rep stosb
 	}
+	}
 	n = 0;
-	alias = (char**) (g_14a6558 + 8 + (int) type * 0x38);
+	alias = ((BuildingNames5043d0*) g_14a6558)[type].alias;
 	if (**alias != 0) {
-		strcpy(geb + 5, *(char**) (g_14a6558 + (int) type * 0x38));
-		list_end = names[0];
+		strcpy(geb + 5, ((BuildingNames5043d0*) g_14a6558)[type].name);
 		i = 0;
 	} else {
 		geb[5] = g_6b5c60;
-		list_end = names[0];
 		i = 0;
 	}
 	for (; i < 12; i++, alias++) {
@@ -140,7 +163,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 		if (**alias == 0) {
 			continue;
 		}
-		strcpy(tmp, *(char**) (g_14a6558 + 8 + (int) type * 0x38 + i * 4));
+		strcpy(tmp, ((BuildingNames5043d0*) g_14a6558)[type].alias[i]);
 		for (j = 0; j < 0x100; j++) {
 			if (lpGebaeudeINST[j * 0xa9] != 0 && strcmp(lpGebaeudeINST + j * 0xa9 + 5, tmp) == 0) {
 				break;
@@ -150,9 +173,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 			continue;
 		}
 		if (strlen(tmp) < 0x20) {
-			strcpy(list_end, tmp);
-			list_end += 0x40;
-			n++;
+			strcpy(names[n++], tmp);
 		} else {
 			fcn_0064d41a(msg, s_69983c, tmp);
 		}
@@ -161,15 +182,14 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	if (n != 0) {
 		strcpy(geb + 5, names[gm_RandomMod(n) & 0xffff]);
 	}
-	i = 0;
-	comp_rec = (char*) rec->components;
-	do {
-		comp = *(unsigned short*) comp_rec;
+	for (i = 0; i < 0x40; i++) {
+		comp = rec->components[i];
 		if (comp == 0) {
 			break;
 		}
 		if (comp != 0xffff) {
-			comp_type = *(unsigned char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(int) (comp & 0x7fff)]));
+			proto = &((OBJECT_PROTOTYPE *)lpObjektePROT)[comp & 0x7fff];
+			comp_type = proto->kind;
 			if (comp_type == 2 || comp_type == 6) {
 				room_mode = 1;
 			}
@@ -182,9 +202,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 				}
 			}
 		}
-		i++;
-		comp_rec += 2;
-	} while (i < 0x40);
+	}
 	q = fcn_00502cd0(*(int*) (geb + 0x5d), 1, 4, 2);
 	while (q != 0) {
 		if (*(unsigned short*) q != 0xfd) {
@@ -205,13 +223,9 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	case 5:
 	case 6:
 	case 7:
-		*(int*) (geb + 0x69) = *(int*) 0x7f4c00;
-		q = geb + 0x69;
-		*(int*) (q + 4) = *(int*) 0x7f4c04;
-		*(int*) (q + 8) = *(int*) 0x7f4c08;
-		*(unsigned short*) (q + 0xc) = g_7f4c0c;
+		*(pos14_7f4c00*) (geb + 0x69) = gm_GameTime;
 		if (owner != 0xffff) {
-			*(int*) (geb + 0x65) = *(int*) (0x7f4ca4 + (int) owner * 0x21c);
+			*(int*) (geb + 0x65) = ((ENTITY_RECORD*) g_7f4ca0)[owner].entity_id;
 		} else {
 			*(int*) (geb + 0x65) = -1;
 		}
@@ -219,12 +233,12 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	case 0x14:
 	case 0x15:
 	case 0x16:
-		comp_rec = gm_AllocObjekt(*(int*) (geb + 1), 0x1b5, 1);
-		if (comp_rec != 0) {
-			comp_rec[0x22] = 0;
-			comp_rec[0x1c] = (char) -1;
-			comp_rec[0x1d] = (char) -1;
-			*(int*) (comp_rec + 0x1e) = -1;
+		obj = gm_AllocObjekt(*(int*) (geb + 1), 0x1b5, 1);
+		if (obj != 0) {
+			obj[0x22] = 0;
+			obj[0x1c] = (char) -1;
+			obj[0x1d] = (char) -1;
+			*(int*) (obj + 0x1e) = -1;
 		}
 		break;
 	case 0x47:
@@ -232,12 +246,10 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 		break;
 	case 0x1e:
 		*(int*) (geb + 0x71) = (int) m_alloc(0x600, s_69982c);
-		i = 0;
-		do {
-			i += 0x18;
-			*(unsigned char*) (i + *(int*) (geb + 0x71) - 0xb) = 0xff;
-			*(int*) (i + *(int*) (geb + 0x71) - 4) = 0;
-		} while (i < 0x600);
+		for (i = 0; i < 0x40; i++) {
+			(*(PlotRecord5043d0**) (geb + 0x71))[i].owner = 0xff;
+			(*(PlotRecord5043d0**) (geb + 0x71))[i].value = 0;
+		}
 	case 0x1f:
 	case 0x20:
 		*(int*) (geb + 0x30) = 0x64;
@@ -272,9 +284,9 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	case 0x4b:
 	case 0x4c:
 	case 0x4d:
-		comp_rec = m_alloc(0x3c, s_699820);
-		*(int*) (geb + 0x65) = (int) comp_rec;
-		*(int*) comp_rec = -1;
+		obj = m_alloc(0x3c, s_699820);
+		*(int*) (geb + 0x65) = (int) obj;
+		*(int*) obj = -1;
 		break;
 	default:
 		break;

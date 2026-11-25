@@ -54,32 +54,25 @@ char __cdecl fcn_00411610(int shift, int ctrl, int alt, char key);
 void __cdecl d2_HandleTextInput(void)
 {
 	int saved;
-	unsigned int c;
-	Combo* w;
 
 	saved = g_14ce8c2;
-	c = g_14cf950;
-	if (c == 0) {
+	if (g_14cf950 == 0) {
 		return;
 	}
-	switch (c) {
+	switch (g_14cf950) {
 	case 14:
 		{
 			int len;
-			char* p;
 
-			w = (*(Combo**) &tp_d2_SelectedControl);
-			len = strlen(w->text);
+			len = strlen((*(Combo**) &tp_d2_SelectedControl)->text);
 			if (len > 0) {
-				p = (char*) w;
-				p[len + 0x2b] = 0;
+				((char*) (*(Combo**) &tp_d2_SelectedControl))[len + 0x2b] = 0;
 			}
 			g_14cf950 = 0;
 			goto common_tail;
 		}
 	case 28:
-		w = (*(Combo**) &tp_d2_SelectedControl);
-		((D2_CONTROL_TL*) g_1015ea0)[w->sel].value_03c = 0;
+		((D2_CONTROL_TL*) g_1015ea0)[(*(Combo**) &tp_d2_SelectedControl)->sel].value_03c = 0;
 		(*(Combo**) &tp_d2_SelectedControl) = 0;
 		g_7725e4 = 0;
 		if (g_67d8ec != -1) {
@@ -101,15 +94,13 @@ void __cdecl d2_HandleTextInput(void)
 	case 87:
 	case 88:
 common_tail:
-		w = (*(Combo**) &tp_d2_SelectedControl);
-		if (w == 0) {
+		if ((*(Combo**) &tp_d2_SelectedControl) == 0) {
 			return;
 		}
-		if (w->flags & 2) {
-			w->text_len = atoi(w->text);
-			w = (*(Combo**) &tp_d2_SelectedControl);
+		if ((*(Combo**) &tp_d2_SelectedControl)->flags & 2) {
+			(*(Combo**) &tp_d2_SelectedControl)->text_len = atoi((*(Combo**) &tp_d2_SelectedControl)->text);
 		}
-		g_100f898 = fcn_0046b520(w->text, w->text_px) + w->f4;
+		g_100f898 = fcn_0046b520((*(Combo**) &tp_d2_SelectedControl)->text, (*(Combo**) &tp_d2_SelectedControl)->text_px) + (*(Combo**) &tp_d2_SelectedControl)->f4;
 		if (g_67d8ec != -1) {
 			fcn_00469c40(g_100f898, g_100f89c - 7, g_67d8ec);
 		}
@@ -118,85 +109,51 @@ common_tail:
 		{
 		ComboList* list;
 		int i;
-		int idx;
-		int* cell;
-		int* p;
-		Combo* w2;
 
-		w = (*(Combo**) &tp_d2_SelectedControl);
-		list = (ComboList*) *(int*) (&((D2_CONTROL_TL*) g_1015ea0)[w->sel].parent);
+		list = (ComboList*) *(int*) (&((D2_CONTROL_TL*) g_1015ea0)[(*(Combo**) &tp_d2_SelectedControl)->sel].parent);
 		if (g_14cf736 == 0 && g_14cf72a == 0) {
-			i = g_100f1cc;
-			if (i >= list->count - 1) {
-				i = -1;
+			if (g_100f1cc >= list->count - 1) {
 				g_100f1cc = -1;
 			}
-			i++;
-			if (i < list->count) {
-				p = list->items + i;
-				for (;;) {
-					idx = *p;
-					cell = &((int*) (int) g_1015ea0)[idx * 189];
-					if (cell[8] == 0x41 && cell[0x12] == 0) {
-						goto found15;
-					}
-					i++;
-					p++;
-					if (i >= list->count) {
-						break;
-					}
+			for (i = g_100f1cc + 1; i < list->count; i++) {
+				if (((D2_CONTROL_TL*) g_1015ea0)[list->items[i]].kind == 0x41 &&
+				    ((D2_CONTROL_TL*) g_1015ea0)[list->items[i]].value_048 == 0) {
+					goto found15;
 				}
 			}
 		} else {
-			i = g_100f1cc;
-			if (i == 0) {
-				i = list->count;
-				g_100f1cc = i;
+			if (g_100f1cc == 0) {
+				g_100f1cc = list->count;
 			}
-			i--;
-			if (i >= 0) {
-				p = list->items + i;
-				for (;;) {
-					idx = *p;
-					cell = &((int*) (int) g_1015ea0)[idx * 189];
-					if (cell[8] == 0x41 && cell[0x12] == 0) {
-						goto found15;
-					}
-					i--;
-					p--;
-					if (i < 0) {
-						break;
-					}
+			for (i = g_100f1cc - 1; i >= 0; i--) {
+				if (((D2_CONTROL_TL*) g_1015ea0)[list->items[i]].kind == 0x41 &&
+				    ((D2_CONTROL_TL*) g_1015ea0)[list->items[i]].value_048 == 0) {
+					goto found15;
 				}
 			}
 		}
 		goto tail15;
 found15:
 		g_100f1cc = i;
-		w = (*(Combo**) &tp_d2_SelectedControl);
-		((D2_CONTROL_TL*) g_1015ea0)[w->sel].value_03c = 0;
-		idx = list->items[i];
-		w2 = (Combo*) *(int*) (&((D2_CONTROL_TL*) g_1015ea0)[idx].data);
-		(*(Combo**) &tp_d2_SelectedControl) = w2;
-		((D2_CONTROL_TL*) g_1015ea0)[w2->sel].value_03c = 1;
+		((D2_CONTROL_TL*) g_1015ea0)[(*(Combo**) &tp_d2_SelectedControl)->sel].value_03c = 0;
+		(*(Combo**) &tp_d2_SelectedControl) = (Combo*) *(int*) (&((D2_CONTROL_TL*) g_1015ea0)[list->items[i]].data);
+		((D2_CONTROL_TL*) g_1015ea0)[(*(Combo**) &tp_d2_SelectedControl)->sel].value_03c = 1;
 		g_100f1d4 = d2_MouseBottomBoundary - saved;
 		g_100f940 = (*(Combo**) &tp_d2_SelectedControl)->text_len;
 		g_100f950 = 0;
 tail15:
 		if (g_67d8ec != -1) {
 			d2_DestroyElement(g_67d8ec);
-			w = (*(Combo**) &tp_d2_SelectedControl);
 			g_67d8ec = -1;
 		}
-		if (w->flags & 1) {
-			g_100f898 = fcn_0046b520(w->text, w->text_px) + w->f4;
-			g_100f89c = w->f8;
-			if (g_67d8ec != -1) {
-				fcn_00469c40(g_100f898, g_100f89c - 7, g_67d8ec);
-			} else {
+		if ((*(Combo**) &tp_d2_SelectedControl)->flags & 1) {
+			g_100f898 = fcn_0046b520((*(Combo**) &tp_d2_SelectedControl)->text, (*(Combo**) &tp_d2_SelectedControl)->text_px) + (*(Combo**) &tp_d2_SelectedControl)->f4;
+			g_100f89c = (*(Combo**) &tp_d2_SelectedControl)->f8;
+			if (g_67d8ec == -1) {
 				g_67d8ec = fcn_00469c30((short) g_100f898, (short) (g_100f89c - 7), g_67d3b0 + 8);
+			} else {
+				fcn_00469c40(g_100f898, g_100f89c - 7, g_67d8ec);
 			}
-			w = (*(Combo**) &tp_d2_SelectedControl);
 		}
 		g_14cf950 = 0;
 		}
@@ -204,27 +161,22 @@ tail15:
 	default:
 		{
 		int len;
-		w = (*(Combo**) &tp_d2_SelectedControl);
-		if (w->flags & 2) {
-			if (c >= 2 && c <= 0xb && g_14cf736 == 0 && g_14cf72a == 0) {
-				_itoa(w->text_len, w->text, 10);
-				c = g_14cf950;
-				w = (*(Combo**) &tp_d2_SelectedControl);
+		if ((*(Combo**) &tp_d2_SelectedControl)->flags & 2) {
+			if (g_14cf950 >= 2 && g_14cf950 <= 0xb && g_14cf736 == 0 && g_14cf72a == 0) {
+				_itoa((*(Combo**) &tp_d2_SelectedControl)->text_len, (*(Combo**) &tp_d2_SelectedControl)->text, 10);
 			} else {
 				goto common_tail;
 			}
 		}
-		len = strlen(w->text);
-		if (len < ((w->flags & 1) ? w->max_len : (unsigned char) w->f24)) {
-			if (w->scroll == 0 || g_100f898 <= w->f4 + w->scroll) {
+		len = strlen((*(Combo**) &tp_d2_SelectedControl)->text);
+		if (len < (((*(Combo**) &tp_d2_SelectedControl)->flags & 1) ? (*(Combo**) &tp_d2_SelectedControl)->max_len : (unsigned char) (*(Combo**) &tp_d2_SelectedControl)->f24)) {
+			if ((*(Combo**) &tp_d2_SelectedControl)->scroll == 0 || g_100f898 <= (*(Combo**) &tp_d2_SelectedControl)->f4 + (*(Combo**) &tp_d2_SelectedControl)->scroll) {
 				if (g_14cf736 == 0 && g_14cf72a == 0) {
-					w->text[len] = fcn_00411610(0, 0, 0, c);
+					(*(Combo**) &tp_d2_SelectedControl)->text[len] = fcn_00411610(0, 0, 0, g_14cf950);
 				} else {
-					w->text[len] = fcn_00411610(1, 0, 0, c);
+					(*(Combo**) &tp_d2_SelectedControl)->text[len] = fcn_00411610(1, 0, 0, g_14cf950);
 				}
-				w = (*(Combo**) &tp_d2_SelectedControl);
-				w->text[len + 1] = 0;
-				w = (*(Combo**) &tp_d2_SelectedControl);
+				(*(Combo**) &tp_d2_SelectedControl)->text[len + 1] = 0;
 			}
 		}
 		g_14cf950 = 0;

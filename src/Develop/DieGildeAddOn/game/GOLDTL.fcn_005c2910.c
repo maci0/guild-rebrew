@@ -37,7 +37,7 @@ void __cdecl d2_ShowGebaeudeSaleDialog(char* e)
 	fcn_005373e0((void*) 0, 0x677c7);
 	do {
 		r = (int) gm_SearchTable67(id);
-		if (r == 0 || (e[0x5b] & 4)) {
+		if ((*(unsigned short*) (e + 0x5a) & 0x0400) || r == 0) {
 			g_774654 = 1;
 		}
 		if (g_14ce8e0 != 0) {

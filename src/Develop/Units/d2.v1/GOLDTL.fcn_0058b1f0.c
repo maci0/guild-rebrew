@@ -22,7 +22,7 @@ typedef struct DialogEntry {
 	int btn;                    /* 0x00 */
 	SlotItem* item;             /* 0x04 */
 	int id;                     /* 0x08 */
-	char kind;                  /* 0x0c */
+	unsigned char kind;         /* 0x0c */
 	char pad_0d[3];
 } DialogEntry;
 
@@ -67,14 +67,14 @@ void __cdecl fcn_0058b1f0(char* building, DialogState* st, unsigned int type)
 
 	item = (SlotItem*) FindSlotEntryFiltered(0, building, 0, 0, st->type);
 	if (item != 0) {
-		int y = 2;
+		register int y = 2;
 		de = st->entries;
 		do {
 			de->item = item;
 			de->id = item->id;
 			de->kind = fcn_004f1790(*(int*) (building + 0x65), (int*) item);
 			de->btn = fcn_0046f740(1, y, (item->flag == -1) ? g_665f58[st->type] : g_665f68[st->type], st->slot);
-			if (fcn_0057b9d0(building, item->id, (unsigned char) de->kind)) {
+			if (fcn_0057b9d0(building, item->id, de->kind)) {
 				fcn_0046f740(0xf, y + 7, 0x7de, st->slot);
 			}
 			*(int*) ((char*) g_1015ea0 + 0x5c + de->btn * 0x2f4) = 1;
@@ -95,7 +95,7 @@ void __cdecl fcn_0058b1f0(char* building, DialogState* st, unsigned int type)
 			de = &st->entries[i];
 			de->item = 0;
 			de->id = 0xff;
-			de->kind = -1;
+			de->kind = 0xff;
 			de->btn = -1;
 		}
 	}

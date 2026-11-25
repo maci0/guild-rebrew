@@ -148,11 +148,11 @@ void __cdecl fcn_005c3f10(char* ent)
 	v.h5c = -1;
 	v.h48 = -1;
 	v.h58 = -1;
-	v.rec = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)ent[0]];
-	v.id = *(int*) (ent + 1);
 	changed = 1;
+	v.rec = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)ent[0]];
 	v.other = 0;
 	v.hover = 0;
+	v.id = *(int*) (ent + 1);
 	if ((*(unsigned short*) (ent + 0x5a) & 0x400) != 0)
 		return;
 	if (*(unsigned short*) (ent + 0x25) == g_774970) {
@@ -174,7 +174,7 @@ void __cdecl fcn_005c3f10(char* ent)
 	    && *(unsigned short*) (ent + 0x25) != g_774970) {
 		v.other = he_StartHandlungSearch(1, 0, 0x1b);
 		while (v.other != 0
-		    && *(int*) (v.other + 0xac) != *(int*) (ent + 1))
+		    && *(int*) (ent + 1) != *(int*) (v.other + 0xac))
 			v.other = fcn_005462a0();
 	}
 	do {

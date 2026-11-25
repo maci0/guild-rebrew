@@ -56,8 +56,8 @@ unsigned char __cdecl fcn_00441720(int* a0, float* worldPos, unsigned int a2, un
 	hz = (pp[2] - (float) v3) / (float) s;
 	if (data != 0 && (*(unsigned char*) (data + (unsigned int) v4 / s + ((unsigned int) v3 / s * (int) width) / s) & 0x80) != 0) {
 		if (hz + hx > 1.0f) {
-			v9 = (v4 + s) & mask;
 			v6 = ((v3 + s) & mask) * width;
+			v9 = (v4 + s) & mask;
 			v13 = (float) ((unsigned char*) a0[4])[v9 + v6];
 			v11 = (float) ((unsigned char*) a0[4])[v6 + v4] - v13;
 			v12 = (float) ((unsigned char*) a0[4])[v3 * width + v9] - v13;

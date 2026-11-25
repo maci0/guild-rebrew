@@ -13,53 +13,41 @@ void __cdecl fcn_00469110(int a1, int a2);
 /* ADDRESS: GOLDTL 0x00533a60 */
 void __cdecl fcn_00533a60(int windowId, int a1, int* a2, int labelCount, ...)
 {
-	int maxw;
 	D2_WIN* winp;
-	char buf[0x800];
 	va_list ap;
+	char buf[32][64];
 	char* src;
-	char* slot;
+	int maxw;
 	int i;
 	int w;
-	int q;
 	int step;
 	int start;
-	int span;
 
 	winp = &((D2_WIN*) g_1015f40)[windowId];
 	maxw = 0;
-	if (labelCount > 0) {
-		int remaining; va_start(ap, labelCount);
-		slot = buf;
-		for (remaining = labelCount; remaining != 0; remaining--) {
-			src = va_arg(ap, char*);
-			strcpy(slot, src);
-			w = fcn_0046b520(src, *(int*) ((char*) winp + 0x28c)) + 0x20;
-			if (w > maxw) {
-				maxw = w;
-			}
-			slot += 0x40;
+	va_start(ap, labelCount);
+	for (i = 0; i < labelCount; i++) {
+		src = va_arg(ap, char*);
+		strcpy(buf[i], src);
+		w = fcn_0046b520(src, *(int*) ((char*) winp + 0x28c)) + 0x20;
+		if (w > maxw) {
+			maxw = w;
 		}
 	}
-
-	q = winp->width / (labelCount + 1);
-	if (maxw > q) {
+	va_end(ap);
+	start = winp->width / (labelCount + 1);
+	if (maxw > start) {
 		step = maxw + 8;
-		span = step * labelCount;
-		if (span > winp->width) {
-			span -= winp->width;
+		if (step * labelCount > winp->width) {
+			start = (step * labelCount - winp->width) / 2 + step / 2;
 		} else {
-			span = winp->width - span;
+			start = (winp->width - step * labelCount) / 2 + step / 2;
 		}
-		start = span / 2 + step / 2;
 	} else {
-		step = q;
-		start = q;
+		step = start;
 	}
-
-	slot = buf;
-	for (i = 0; i < labelCount; i++, slot += 0x40, start += step) {
-		w = fcn_00468df0(start - maxw / 2, a1, 0xbf, slot, windowId);
+	for (i = 0; i < labelCount; i++) {
+		w = fcn_00468df0(start + step * i - maxw / 2, a1, 0xbf, (int) buf[i], windowId);
 		a2[i] = w;
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[w].font)) = 0x53;
 		fcn_00469110(w, maxw);

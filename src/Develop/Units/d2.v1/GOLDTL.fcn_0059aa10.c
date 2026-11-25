@@ -47,8 +47,8 @@ int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 void __cdecl fcn_0050f900(void);
 void __cdecl fcn_0050ee80(char*, char*);
 float __cdecl eval_ObjektPreis2Credits(int, int);
-int __cdecl fcn_00526010(char*, int, int);
-int __cdecl fcn_00526070(char*, int, int, int);
+int __cdecl fcn_00526010(char*, int, char);
+int __cdecl fcn_00526070(char*, int, int, char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526920(char*, int, char*);
 char* __cdecl fcn_00507a10(char*);
@@ -68,7 +68,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 	char msg[0xf8];
 	char buf[0x100];
 	char name[0x80];
-	char text[0x70];
+	char text[0x80];
 	char* house;
 	void* q;
 	int h;
@@ -97,7 +97,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 			return;
 	}
 	h = d2_OpenDependencyDiagram(s_6aa330, a0, q);
-	if (h <= -1) {
+	if (h < 0) {
 		fcn_00526120(g_14a5398, 0);
 		return;
 	}
@@ -105,15 +105,15 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 	d2_SetForm(h, 4);
 	h = fcn_00472250(h, 4, io_AppendText(0x17e2));
 	fcn_00527f10(a0);
-	while (fcn_005373e0((void*) 0x59aa10, 0x657c7)) {
+	while (fcn_005373e0((void*) d2_RunTechTreeDialog, 0x657c7)) {
 		if (g_14ce8e0)
 			g_774654 = 1;
 		if (g_100f1dc != -1 && d2_CurrentElementId == h)
 			d2_ShowTechTreeEffects(a0);
-		if (g_100f1dc >= 0xdf && g_100f1dc <= 0x3bb && g_85ab60 > 0) {
+		if (g_100f1dc >= 0xdf && g_100f1dc <= 0x3bb) {
 			for (i = 0; i < g_85ab60; i++) {
 				p = &g_7f3f24[i * 0x34];
-				if (*(int*) p != -1 && *(int*) p == d2_CurrentElementId)
+				if (*(int*) p != -1 && d2_CurrentElementId == *(int*) p)
 					break;
 			}
 			if (i < g_85ab60) {
@@ -128,40 +128,34 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 					if (!item) {
 						*(unsigned char*) (msg + 0x36) = 1;
 						if (*(unsigned char*) ((char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[sel]) == 6) {
-							*(int*) (msg + 0x0c) = *(int*) (a0 + 1);
 							*(unsigned char*) (msg + 4) = 0x0c;
+							*(int*) (msg + 0x0c) = *(int*) (a0 + 1);
 							*(int*) (msg + 0x58) = *(int*) (a0 + 1);
 							*(int*) (msg + 0x60) = sel;
-							*(int*) (msg + 0x28) = gm_GameTime.a;
-							*(int*) (msg + 0x2c) = gm_GameTime.b;
-							*(int*) (msg + 0x30) = gm_GameTime.c;
+							*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 							*(int*) (msg + 8) = *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (a0 + 0x25)] + 4);
-							*(short*) (msg + 0x34) = gm_GameTime.d;
 							*(int*) (msg + 0x5c) = *(int*) (msg + 8);
 						} else {
 							*(int*) (msg + 0x0c) = *(int*) (a0 + 1);
-							*(int*) (msg + 0x30) = gm_GameTime.c;
 							*(unsigned char*) (msg + 4) = 2;
 							*(int*) (msg + 8) = *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (a0 + 0x25)] + 4);
-							*(int*) (msg + 0x28) = gm_GameTime.a;
-							*(int*) (msg + 0x2c) = gm_GameTime.b;
-							*(short*) (msg + 0x34) = gm_GameTime.d;
+							*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 							*(short*) (msg + 0x58) = (short) sel;
 							*(int*) (msg + 0x5c) = *(int*) ((char*) q + 2);
 						}
 						req = *(unsigned char*) (node + 0x40);
 						if (req == 0) {
+							ok = 0;
 							f = (float) (g_7747b4 * 0.25 + 0.5);
 							n = (int) eval_ObjektPreis2Credits(sel, 100);
 							amount = (int) (n * f);
-							ok = 0;
 							if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
-								if (fcn_00526010((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970], amount, g_773d75))
+								if (fcn_00526010((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970], amount, (char) g_773d75))
 									ok = 1;
 								io_FormatTextBuffer(buf, 0x1a, amount, a0, sel * 2 + 0x9a8);
 							} else {
 								p = fcn_00507a10(a0);
-								if (fcn_00526070(p, *(int*) (p + 0x14), amount, g_773d75))
+								if (fcn_00526070(p, *(int*) (p + 0x14), amount, (char) g_773d75))
 									ok = 1;
 								io_FormatTextBuffer(buf, 0x1c, amount, a0, sel * 2 + 0x9a8);
 							}
@@ -172,7 +166,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 								fcn_004c4eb0(s_6aa328);
 								if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
 									fcn_004c5150(-1, *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (a0 + 0x27)] + 4), (char) g_773d75, amount);
-									p = gm_GetEntityTableEntry(house);
+									p = gm_GetEntityTableEntry((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970]);
 									if (p)
 										*(int*) (p + 0x40) += amount;
 								} else {
@@ -218,8 +212,11 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 		goto tail;
 wait:
 		if (s != -1) {
-			while (fcn_004c4450(s) == 0)
+wait_loop:
+			if (fcn_004c4450(s) == 0) {
 				fcn_005373e0(0, 0x657c7);
+				goto wait_loop;
+			}
 		}
 tail:
 		fcn_0050ee80(a0, q);

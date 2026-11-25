@@ -68,25 +68,23 @@ int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
 	int i;
 	int j;
 	int id;
+	RENDER_QUAD* first;
 	RENDER_QUAD* rec;
 	BankData *data;
-	char* p;
+	RENDER_QUAD* p;
 	Sample s;
 
 	start = idx;
-	if (((Device*) g_772614)->vtbl->Lock((Device*) g_772614, 0, (d2_QueuedQuadCount - idx) * 0x18, &idx, 0x2000) < 0) {
+	if (((Device*) g_772614)->vtbl->Lock((Device*) g_772614, 0, d2_QueuedQuadCount * 0x18 - idx * 0x18, &idx, 0x2000) < 0) {
 		return 0;
 	}
 	data = (BankData*) idx;
-	rec = g_1552020 + start;
-	if (start < d2_QueuedQuadCount) {
-		i = start;
-		do {
-			*data = *(BankData*) rec;
-			data++;
-			rec++;
-			i++;
-		} while (i < d2_QueuedQuadCount);
+	first = &g_1552020[start];
+	rec = first;
+	for (i = start; i < d2_QueuedQuadCount; i++) {
+		*data = *(BankData*) rec;
+		rec++;
+		data++;
 	}
 	((Device*) g_772614)->vtbl->Unlock((Device*) g_772614);
 	fcn_0047c4e0();
@@ -110,25 +108,22 @@ int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
 				goto done;
 			}
 		}
-		rec = g_1552020 + start;
-		i = start;
-		while (i < d2_QueuedQuadCount) {
-			id = *(int*) ((char*) rec + 0xa8);
-			p = (char*) rec + 0xa8;
+		rec = first;
+		for (i = start; i < d2_QueuedQuadCount; i += count, rec += count) {
+			id = rec->tex;
+			p = rec;
 			count = 0;
 			j = i;
-			while (j < d2_QueuedQuadCount) {
-				p += 0xac;
-				count++;
-				j++;
-				if (id != *(int*) p) {
+			do {
+				if (j >= d2_QueuedQuadCount) {
 					break;
 				}
-			}
+				p++;
+				count++;
+				j++;
+			} while (id == p->tex);
 			g_6b5de0->vtbl->SelectBank(g_6b5de0, 0, id);
 			g_6b5de0->vtbl->SelectSample(g_6b5de0, 4, i * 6, count * 2);
-			i += count;
-			rec += count;
 		}
 		if (snd != 0) {
 			snd->vtbl->Release(snd);

@@ -134,19 +134,12 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	}
 	fcn_00477450();
 	fcn_0047c4a0();
-	for (i = 0; i < 0x5b20; i++) {
-		((int*) g_1015f40)[i] = 0;
-	}
+	memset(g_1015f40, 0, 0x16c80);
 	*(int*) g_1015ea0 = 0;
 	*(int*) g_772500 = 0;
 	*(int*) g_772540 = 0;
-	g_1040480 = 0;
-	g_1040484 = 0;
-	g_1040488 = 0;
-	for (i = 0; i < 0x20; i++) {
-		((int*) g_1015ec0)[i] = 0;
-	}
-	g_104048c = 0;
+	memset(&g_1040480, 0, 0x10);
+	memset(g_1015ec0, 0, 0x80);
 	for (i = 0; i < 0x30; i++) {
 		*(int*) (0x1038140 + i * 0x2bc) = i;
 	}
@@ -201,9 +194,9 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 				((int*) line)[i] = 0;
 			}
 			fgets(line, 0x60, g_772564);
-			p = strchr(line, '"');
-			if (p) {
-				q = p + 1;
+			q = strchr(line, '"');
+			if (q) {
+				q++;
 				*strchr(q, '"') = 0;
 				p = q;
 				do {
@@ -222,9 +215,9 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 				((int*) line)[i] = 0;
 			}
 			fgets(line, 0x60, g_772564);
-			p = strchr(line, '"');
-			if (p) {
-				q = p + 1;
+			q = strchr(line, '"');
+			if (q) {
+				q++;
 				*strchr(q, '"') = 0;
 				p = q;
 				do {
@@ -234,11 +227,11 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 				} while (c);
 				p = name;
 				q = g_7725ac + g_7725b0 * 0x30;
+				g_7725b0++;
 				do {
 					c = *p++;
 					*q++ = c;
 				} while (c);
-				g_7725b0++;
 			}
 		} while (!(*(unsigned char*) ((char*) g_772564 + 0xc) & 0x10));
 		fclose(g_772564);

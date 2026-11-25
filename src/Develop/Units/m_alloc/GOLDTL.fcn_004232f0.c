@@ -47,20 +47,20 @@ void __cdecl fcn_004232f0(void)
 		i = 0;
 		if (bank->count > 0) {
 			do {
-				if (bank->samples[i].ptr != 0) {
+				smp = &bank->samples[i];
+				if (smp->ptr != 0) {
 					idx = 0;
-					p = fcn_00422760((int) &bank->samples[i], &idx);
+					p = fcn_00422760((int) smp, &idx);
 					while (p != 0) {
 						fcn_004237f0(p, 0);
-						*(int*) (p + 4) = 0;
 						idx++;
+						*(int*) (p + 4) = 0;
 						p = fcn_00422760((int) &bank->samples[i], &idx);
 					}
-					smp = &bank->samples[i];
-					if (smp->kind == 1) {
-						MemUsed += -12 - *(int*) ((char*) smp->ptr + 4);
+					if (bank->samples[i].kind == 1) {
+						MemUsed += -12 - *(int*) ((char*) bank->samples[i].ptr + 4);
 					} else {
-						MemUsed += -12 - *(int*) ((char*) smp->ptr + 8);
+						MemUsed += -12 - *(int*) ((char*) bank->samples[i].ptr + 8);
 					}
 					m_FreeTracked((int) bank->samples[i].ptr);
 					bank->samples[i].ptr = 0;

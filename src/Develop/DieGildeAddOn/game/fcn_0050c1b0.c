@@ -34,22 +34,25 @@ int __cdecl fcn_0050c1b0(unsigned char* e, int id, char* out)
 {
 	unsigned char* row;
 	int slot;
-	int t;
+	int k;
+	ENTITY_RECORD* ent;
 	char* p;
 	int var;
 	int total;
+	int sum;
 	int found;
 	int i;
 	int v;
 
 	total = 0;
 	var = 0;
+	sum = 0;
 	memset(out, 0, 0x54);
 	row = (unsigned char*) ((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned int) *e]);
 	if (id != *(unsigned short*) (e + 0x27)) {
 		goto tail;
 	}
-	slot = (int)&((ENTITY_RECORD*)0x7f4ca0)[id];
+	slot = (int)&((ENTITY_RECORD*)g_7f4ca0)[id];
 	if (*row == 0x1e) {
 		if (fcn_004ec7d0(e) != 0) {
 			v = fcn_004ee160((char*) e);
@@ -58,14 +61,15 @@ int __cdecl fcn_0050c1b0(unsigned char* e, int id, char* out)
 		}
 		goto finalize;
 	}
-	for (t = 0x7f4ca0; t < 0x85a0a0; t += 0x21c) {
-		if (*(int*) (t + 0x16c) != (int) e) {
+	for (k = 0; k < 0x300; k++) {
+		ent = &((ENTITY_RECORD*) g_7f4ca0)[k];
+		if (ent->unk_16c != (char*) e) {
 			continue;
 		}
 		found = 0;
 		for (i = 0; i < 6; i++) {
-			if (row[i + 0x223] != 0 && row[i + 0x223] == *(unsigned char*) (t + 0x164) &&
-			    *(unsigned char*) (t + 2) != 0x14) {
+			if (row[i + 0x223] != 0 && row[i + 0x223] == ent->unk_164 &&
+			    ent->entity_state != 0x14) {
 				v = (int) (fcn_0050b8d0((unsigned char*) slot, *e, i, -1) *
 					   ((double) *(int*) (e + 0x3d) * 0.01));
 				*(int*) (out + 0x18 + i * 4) += v;
@@ -74,8 +78,8 @@ int __cdecl fcn_0050c1b0(unsigned char* e, int id, char* out)
 			}
 		}
 		for (i = 0; i < 2; i++) {
-			if (row[i + 0x22f] != 0 && row[i + 0x22f] == *(unsigned char*) (t + 0x165) &&
-			    *(unsigned char*) (t + 2) != 0x14) {
+			if (row[i + 0x22f] != 0 && row[i + 0x22f] == ent->unk_165[0] &&
+			    ent->entity_state != 0x14) {
 				v = (int) (fcn_0050b8d0((unsigned char*) slot, *e, -1, i) *
 					   ((double) *(int*) (e + 0x3d) * 0.01));
 				*(int*) (out + 0x10 + i * 4) += v;
@@ -83,7 +87,7 @@ int __cdecl fcn_0050c1b0(unsigned char* e, int id, char* out)
 				found = 1;
 			}
 		}
-		if (found == 0 && *(unsigned char*) (t + 2) != 0x14) {
+		if (found == 0 && ent->entity_state != 0x14) {
 			v = (int) (fcn_0050b8d0((unsigned char*) slot, *e, -1, 0) *
 				   ((double) *(int*) (e + 0x3d) * 0.01));
 			*(int*) (out + 0x10) += v;
@@ -93,6 +97,7 @@ int __cdecl fcn_0050c1b0(unsigned char* e, int id, char* out)
 finalize:
 	*(int*) (out + 0xc) = total;
 	*(int*) (out + 0x48) = *(int*) (e + 0x4d);
+	sum += total;
 	if (*row == 5) {
 		*(int*) (out + 0x28) = *(int*) (e + 0x55);
 		var = *(int*) (e + 0x55);
@@ -119,10 +124,10 @@ finalize:
 		var += v;
 	}
 tail:
-	*(int*) (out + 0x40) = total;
+	*(int*) (out + 0x40) = sum;
 	*(int*) (out + 0x44) = var;
-	*(int*) (out + 0x50) = var - total;
-	if (total == 0 && var == 0) {
+	*(int*) (out + 0x50) = var - sum;
+	if (sum == 0 && var == 0) {
 		return 0;
 	}
 	return 1;

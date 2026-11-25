@@ -4,6 +4,23 @@
 #include "client_types.h"
 
 typedef struct { unsigned char kind; unsigned char rest[0x24c]; } BuildingProto572ff0;
+typedef struct {
+	char pad0[4];
+	char kind;
+	char pad5[3];
+	int owner;
+	int f0c;
+	char pad10[0x18];
+	pos14_7f4c00 when;
+	char code;
+	char pad37[0x21];
+	int f58;
+	int f5c;
+	int f60;
+	char pad64[0x3c];
+	int fa0;
+	char pada4[0x54];
+} Msg572ff0;
 extern char g_7f4ca0[];
 
 extern pos14_7f4c00 gm_GameTime;
@@ -11,9 +28,6 @@ extern unsigned char g_773d75;
 extern char* gm_CityEntity;
 extern char* lpGebaeudePROT;
 extern char* lpObjektePROT;
-extern double g_664108;
-extern double g_664128;
-extern double g_664ef8;
 
 char* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
@@ -38,7 +52,7 @@ int __cdecl sprintf(char*, const char*, ...);
 /* ADDRESS: GOLDTL 0x00572ff0 */
 void __cdecl fcn_00572ff0(char* a)
 {
-	char msg[0xf8];
+	Msg572ff0 msg;
 	char buf[0x70];
 	char* pktA = 0;
 	char* pktB = 0;
@@ -126,9 +140,6 @@ void __cdecl fcn_00572ff0(char* a)
 	}
 	if (!found) {
 		e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
-		if (e2 == 0) {
-			e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x116);
-		}
 		if (e2 != 0) {
 			r = fcn_00502cd0(*(int*) (q + 0x14), 1, 5);
 			while (r != 0) {
@@ -136,6 +147,17 @@ void __cdecl fcn_00572ff0(char* a)
 				    *(int*) (q + 2), *(unsigned short*) r, *(int*) (r + 0xe),
 				    g_773d75, 0);
 				r = gm_NextEntityQueryMatch();
+			}
+		} else {
+			e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x116);
+			if (e2 != 0) {
+				r = fcn_00502cd0(*(int*) (q + 0x14), 1, 5);
+				while (r != 0) {
+					*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (e2 + 2),
+					    *(int*) (q + 2), *(unsigned short*) r, *(int*) (r + 0xe),
+					    g_773d75, 0);
+					r = gm_NextEntityQueryMatch();
+				}
 			}
 		}
 		if (*(int*) (a + 0xe8) != -1) {
@@ -188,7 +210,7 @@ void __cdecl fcn_00572ff0(char* a)
 			t = gm_GetMsgField(q, r2);
 			m = gm_eval_SlotVoll(e2, *(unsigned short*) r2, t);
 			d = (int) (fcn_0050bb50(*(unsigned short*) r2, g_773d75)
-			    * g_664128);
+			    * 0.9);
 			if (t < m) {
 				m = t;
 			}
@@ -199,7 +221,7 @@ void __cdecl fcn_00572ff0(char* a)
 			}
 			if ((t -= m) != 0) {
 				d = (int) (fcn_0050bb50(*(unsigned short*) r2,
-				    g_773d75) * g_664108);
+				    g_773d75) * 0.8);
 				*(int*) (a + 0xe8) = fcn_004c51f0(-1,
 				    *(int*) (q + 2), *(unsigned short*) r2, t,
 				    g_773d75, d);
@@ -251,7 +273,7 @@ i1next:
 			    * *(float*) (pktB + 0x49));
 		} else {
 			amt = (int) (fcn_0050bb50(*(unsigned short*) r2, g_773d75)
-			    * g_664ef8);
+			    * 1.1);
 		}
 		lim = pi[6];
 		t = fcn_0050dfd0(e2, *(unsigned short*) r2);
@@ -340,20 +362,20 @@ done:
 		fcn_00500bb0(a + 0x52, 1, 0x1e, 0);
 		return;
 	}
-	memset(msg, 0, sizeof(msg));
-	*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
-	msg[4] = 0x0f;
-	*(int*) (msg + 0xc) = -1;
-	msg[0x36] = 2;
-	*(int*) (msg + 8) = *(int*) (g_7f4ca0 + 4 + *(unsigned short*) (a + 8) * 0x21c);
-	*(int*) (msg + 0x58) = *(int*) (pktA + 2);
-	*(int*) (msg + 0x5c) = *(int*) (pktB + 1);
-	*(int*) (msg + 0x60) = *(int*) (a + 0xb0);
-	*(int*) (msg + 0xa0) = *(int*) (a + 4);
-	if (*(int*) (msg + 0x5c) != *(int*) (msg + 0x60)) {
-		*(int*) (a + 0xec) = fcn_004c5530(msg);
-		fcn_00500bb0(a + 0x52, 0, 10, 0);
+	memset(&msg, 0, sizeof(msg));
+	msg.when = gm_GameTime;
+	msg.kind = 0x0f;
+	msg.f0c = -1;
+	msg.code = 2;
+	msg.owner = *(int*) (g_7f4ca0 + 4 + *(unsigned short*) (a + 8) * 0x21c);
+	msg.f58 = *(int*) (pktA + 2);
+	msg.f5c = *(int*) (pktB + 1);
+	msg.f60 = *(int*) (a + 0xb0);
+	msg.fa0 = *(int*) (a + 4);
+	if (msg.f5c == msg.f60) {
+		fcn_00500bb0(a + 0x52, 0, 5, 0);
 		return;
 	}
-	fcn_00500bb0(a + 0x52, 0, 5, 0);
+	*(int*) (a + 0xec) = fcn_004c5530((char*) &msg);
+	fcn_00500bb0(a + 0x52, 0, 10, 0);
 }

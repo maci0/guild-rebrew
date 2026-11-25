@@ -35,88 +35,78 @@ float __cdecl fcn_004ff040(int);
 /* ADDRESS: GOLDTL 0x005c6a10 */
 unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int form)
 {
-	D2_TRAINING_ROW* slot;
 	unsigned short* item;
 	int* list;
-	int* p;
 	int i;
 	int j;
 	int k;
 	int h;
 	int v;
 	int built;
-	int row_offset;
-	int row_y;
-	int button_base;
 
 	built = 0;
 	d2_SetForm(dialog, form);
 	g_775334 = 0;
-	p = (int*) ((char*) g_7774a0 + 0x10);
-	for (button_base = 0, row_offset = 0, row_y = 0x28; row_y < 0xf28;
-	     row_y += 0x78, row_offset += 0x40, button_base += 8) {
-		slot = (D2_TRAINING_ROW*) ((char*) g_7774a0 + row_offset);
-		if (!slot->entity)
+	for (i = 0; i < 32; i++) {
+		if (!g_7774a0[i].entity)
 			continue;
 		g_775334++;
 		for (list = (int*) 0x7e4260; (int) list < 0x7e42e0; list++) {
-			if (*list == slot->entity)
+			if (*list == g_7774a0[i].entity)
 				break;
 		}
 		if ((int) list >= 0x7e42e0) {
-			slot->entity = 0;
-			if (slot->portrait_element != -1) {
-				d2_DestroyElement(slot->portrait_element);
-				slot->portrait_element = -1;
+			g_7774a0[i].entity = 0;
+			if (g_7774a0[i].portrait_element != -1) {
+				d2_DestroyElement(g_7774a0[i].portrait_element);
+				g_7774a0[i].portrait_element = -1;
 			}
-			if (slot->row_element != -1) {
-				d2_DestroyElement(slot->row_element);
-				slot->row_element = -1;
+			if (g_7774a0[i].row_element != -1) {
+				d2_DestroyElement(g_7774a0[i].row_element);
+				g_7774a0[i].row_element = -1;
 			}
-			if (slot->window != -1) {
-				d2_DestroyElement(slot->window);
-				slot->window = -1;
+			if (g_7774a0[i].window != -1) {
+				d2_DestroyElement(g_7774a0[i].window);
+				g_7774a0[i].window = -1;
 			}
 			continue;
 		}
-		d2_CurrentWindowId = slot->window;
+		d2_CurrentWindowId = g_7774a0[i].window;
 		for (j = 0; j < 6; j++) {
-			if (slot->item[j].objekt_id != 0
-			    && !fcn_00502cd0(*(int*) (slot->entity + 0x178), 1, 0, slot->item[j].objekt_id)) {
-				d2_DestroyElement(slot->item[j].button);
-				slot->item[j].button = -1;
-				slot->item[j].objekt_id = 0;
+			if (g_7774a0[i].item[j].objekt_id != 0
+			    && !fcn_00502cd0(*(int*) (g_7774a0[i].entity + 0x178), 1, 0, g_7774a0[i].item[j].objekt_id)) {
+				d2_DestroyElement(g_7774a0[i].item[j].button);
+				g_7774a0[i].item[j].button = -1;
+				g_7774a0[i].item[j].objekt_id = 0;
 			}
 		}
-		d2_CurrentWindowId = slot->window;
-		io_AppendText(0x6ac790, *(unsigned short*) slot->entity,
-			(int) (fcn_004ff040(slot->entity) * 100.0));
+		d2_CurrentWindowId = g_7774a0[i].window;
+		io_AppendText(0x6ac790, *(unsigned short*) g_7774a0[i].entity,
+			(int) (fcn_004ff040(g_7774a0[i].entity) * 100.0));
 		io_AppendText(0x16ac);
-		fcn_00534160(0x50, 0x16, *(unsigned char*) (slot->entity + 0x83), 0x4f1);
+		fcn_00534160(0x50, 0x16, *(unsigned char*) (g_7774a0[i].entity + 0x83), 0x4f1);
 		io_AppendText(0x16ad);
-		fcn_00534160(0x50, 0x25, *(unsigned char*) (slot->entity + 0x82), 0x4f1);
-		item = fcn_00502cd0(*(int*) (slot->entity + 0x178), 1, 5);
+		fcn_00534160(0x50, 0x25, *(unsigned char*) (g_7774a0[i].entity + 0x82), 0x4f1);
+		item = fcn_00502cd0(*(int*) (g_7774a0[i].entity + 0x178), 1, 5);
 		while (item) {
 			if ((char)((OBJECT_PROTOTYPE*)lpObjektePROT)[*item].kind != '\t') {
 				for (j = 0; j < 6; j++) {
-					if (slot->item[j].objekt_id == *item)
-						break;
+					if (g_7774a0[i].item[j].objekt_id == *item)
+						goto present;
 				}
-				if (j < 6)
-					goto present;
 				d2_SetForm(dialog, form);
 				for (j = 0; j < 6; j++) {
-					if (!slot->item[j].objekt_id)
-						break;
+					if (!g_7774a0[i].item[j].objekt_id)
+						goto found_item_slot;
 				}
-				if (j < 6) {
-					p[(button_base + j) * 2] = fcn_00466ee0(j * 0x36 + 0x50, row_y,
-						*item + 0xdf, 10, d2_CurrentWindowId);
-					p[(button_base + j) * 2 + 1] = *item;
-				}
-present:
-				v = fcn_00471f80(p[(button_base + j) * 2]);
-				fcn_00472380(p[(button_base + j) * 2], 0, *(int*) ((char*) item + 0xe), v);
+				goto present;
+			found_item_slot:
+				g_7774a0[i].item[j].button = fcn_00466ee0(j * 0x36 + 0x50, i * 0x78 + 0x28,
+					*item + 0xdf, 10, d2_CurrentWindowId);
+				g_7774a0[i].item[j].objekt_id = *item;
+			present:
+				v = fcn_00471f80(g_7774a0[i].item[j].button);
+				fcn_00472380(g_7774a0[i].item[j].button, 0, *(int*) ((char*) item + 0xe), v);
 			}
 			item = gm_NextEntityQueryMatch();
 		}
@@ -129,16 +119,14 @@ present:
 			continue;
 		for (i = 0; i < 32; i++) {
 			if (g_7774a0[i].entity == *list)
-				break;
+				goto next_list;
 		}
-		if (i < 32)
-			continue;
 		for (i = 0; i < 32; i++) {
 			if (!g_7774a0[i].entity)
-				break;
+				goto found_row_slot;
 		}
-		if (i >= 32)
-			continue;
+		continue;
+	found_row_slot:
 		d2_SetForm(dialog, form);
 		g_7774a0[i].entity = *list;
 		h = fcn_0046f740(0, i * 0x78, 0x74c, d2_CurrentWindowId);
@@ -151,6 +139,8 @@ present:
 		d2_SetElementFont(*(int*) (g_10161bc + h * 0x3cc), 0x54);
 		io_AppendText(0x16ab, *(unsigned short*) g_7774a0[i].entity,
 			*(unsigned char*) (g_7774a0[i].entity + 0x83));
+	next_list:
+		;
 	}
 	for (i = 0; i < 32; i++) {
 		if (!g_7774a0[i].entity)

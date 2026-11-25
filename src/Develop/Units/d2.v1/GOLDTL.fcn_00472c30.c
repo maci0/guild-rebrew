@@ -1,11 +1,11 @@
-void __cdecl d2_Plot(int, int, int, int, int);
+void __cdecl d2_Plot(int, int, unsigned char, unsigned char, unsigned char);
 
 
 /* Draws the line from (x0,y0) to (x1,y1) with the plot attributes a4, a5 and
  * a6. Axis-parallel segments become straight runs, the rest use the
  * Bresenham error accumulator. */
 /* ADDRESS: GOLDTL 0x00472c30 */
-void __cdecl fcn_00472c30(int x0, int y0, int x1, int y1, int a4, int a5, int a6)
+void __cdecl fcn_00472c30(int x0, int y0, int x1, int y1, unsigned char a4, unsigned char a5, unsigned char a6)
 {
 	int n;
 	int sx;
@@ -60,16 +60,16 @@ void __cdecl fcn_00472c30(int x0, int y0, int x1, int y1, int a4, int a5, int a6
 	}
 	d2_Plot(x0, y0, a4, a5, a6);
 	if (dx > dy) {
-		d2 = dy * 2;
 		e2 = (dy - dx) * 2;
+		d2 = dy * 2;
 		e = d2 - dx;
 		do {
 			x0 += sx;
-			if (e < 0) {
-				e += d2;
-			} else {
+			if (e >= 0) {
 				y0 += sy;
 				e += e2;
+			} else {
+				e += d2;
 			}
 			d2_Plot(x0, y0, a4, a5, a6);
 		} while (x0 != x1);
@@ -80,11 +80,11 @@ void __cdecl fcn_00472c30(int x0, int y0, int x1, int y1, int a4, int a5, int a6
 	e = d2 - dy;
 	do {
 		y0 += sy;
-		if (e < 0) {
-			e += d2;
-		} else {
+		if (e >= 0) {
 			x0 += sx;
 			e += e2;
+		} else {
+			e += d2;
 		}
 		d2_Plot(x0, y0, a4, a5, a6);
 	} while (y0 != y1);

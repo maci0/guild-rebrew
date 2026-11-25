@@ -82,12 +82,12 @@ void __cdecl fcn_0057e880(int a, int b, int c, int d)
 		}
 		if (c == 0) {
 			g_665f08->state = g_665f08->cfg->next;
-			g_665f08->want = g_665f08->state;
 		} else {
 			g_665f08->state = 0xb;
-			g_665f08->want = g_665f08->state;
 		}
-		goto stamp;
+		g_665f08->want = g_665f08->state;
+		g_665f08->since = g_6b7fac;
+		goto tick;
 	}
 	if (g_665f08->want != 4 && g_665f08->want != 9 && g_665f08->want != 0xa) {
 		return;
@@ -104,9 +104,6 @@ void __cdecl fcn_0057e880(int a, int b, int c, int d)
 				if (b != 0) {
 					g_665f08->arg = b;
 				}
-				g_665f08->state = g_665f08->want;
-				g_665f08->ticks++;
-				return;
 			}
 		} else if (c == 1 && g_665f08->cfg->key == a) {
 			g_665f08->want = 4;
@@ -148,15 +145,15 @@ void __cdecl fcn_0057e880(int a, int b, int c, int d)
 		}
 		g_665f08->state = 0xb;
 		g_665f08->want = 0xb;
+		g_665f08->since = g_6b7fac;
 	} else {
 		if (g_665f08->want != 4 || g_665f08->cfg->key != a || c != 0) {
 			goto tick;
 		}
 		g_665f08->state = 9;
 		g_665f08->want = 9;
+		g_665f08->since = g_6b7fac;
 	}
-stamp:
-	g_665f08->since = g_6b7fac;
 tick:
 	g_665f08->ticks++;
 }

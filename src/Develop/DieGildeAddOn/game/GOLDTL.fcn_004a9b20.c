@@ -42,6 +42,7 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 	int id;
 	int sel;
 	char* e;
+	int r;
 
 	memset(&c, 0, sizeof(c));
 	c.found = 0;
@@ -75,9 +76,17 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 			}
 		}
 		if (n1 != 0) {
-			if (n2 != 0 && gm_RandomMod(2) != 0) {
-				goto pick_second;
+			r = 0;
+			if (n2 != 0) {
+				r = gm_RandomMod(2);
 			}
+		} else {
+			if (n2 == 0) {
+				return 0;
+			}
+			r = 1;
+		}
+		if (r == 0) {
 			*(int*) c.text = 1;
 			id = ids1[gm_RandomMod(n1)];
 			sel = 3;
@@ -85,10 +94,6 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 				return 0;
 			}
 		} else {
-			if (n2 == 0) {
-				return 0;
-			}
-pick_second:
 			*(int*) c.text = 2;
 			id = ids2[gm_RandomMod(n2)];
 			sel = 4;
@@ -99,10 +104,7 @@ pick_second:
 		*a3 = 0x10;
 		*(int*) (a3 + 4) = id;
 		*(int*) (a3 + 8) = sel;
-	} else {
-		if (*a3 != 0x10) {
-			return 0;
-		}
+	} else if (*a3 == 0x10) {
 		id = *(int*) (a3 + 4);
 		*(int*) c.text = 1;
 		if (fcn_004fa5b0(id, actorEntity, (int) &c) & 2) {
@@ -114,45 +116,66 @@ pick_second:
 			}
 			*(int*) (a3 + 8) = 4;
 		}
+	} else {
+		return 0;
 	}
+	r = 0;
 	switch (id) {
 	case 0x12:
-		return fcn_004a8880(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8880(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x13:
 	case 0x14:
-		return fcn_004a8b70(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8b70(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x1c:
-		return fcn_004a8bf0(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8bf0(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x1d:
-		return fcn_004a8d10(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8d10(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x21:
-		return fcn_004a8d30(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8d30(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x24:
-		return fcn_004a8d40(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8d40(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x25:
-		return fcn_004a8da0(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8da0(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x27:
-		return fcn_004a8e40(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8e40(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x28:
-		return fcn_004a8ed0(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8ed0(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x29:
-		return fcn_004a9000(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a9000(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x2a:
-		return fcn_004a9040(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a9040(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x2b:
-		return fcn_004a9150(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a9150(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x2c:
-		return fcn_004a91a0(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a91a0(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x2d:
-		return fcn_004a9270(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a9270(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x31:
-		return fcn_004a96f0(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a96f0(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x32:
-		return fcn_004a9780(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a9780(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x35:
-		return fcn_004a9820(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a9820(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	case 0x37:
-		return fcn_004a99a0(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a99a0(a0, actorEntity, (int) &c, a3, a4);
+		break;
 	}
-	return 0;
+	return r;
 }
