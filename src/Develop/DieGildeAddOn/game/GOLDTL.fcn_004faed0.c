@@ -3,7 +3,7 @@
    per-kind totals from the kind table at 0x696178, and the weight sums from
    the cell table at 0x99ef90. */
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-extern char g_7f4ca0[];          /* record array, stride 0x21c */
+extern int g_7f4e0c[];          /* record array base + 0x16c, stride 0x21c */
 #include "game_data.h"
 typedef struct StatsProto { unsigned char kind; char pad1[0x246]; unsigned char field247, field248; char tail[4]; } StatsProto;
 extern unsigned short g_696178[]; /* per-kind counters, 4 words each */
@@ -69,7 +69,7 @@ void __cdecl fcn_004faed0(float* out)
 	weight_b = 0;
 	accum = 0.0f;
 	fcn_004fad10();
-	rec = g_7f4ca0 + 0x16c; do {
+	rec = (char*) g_7f4e0c; do {
 		if (*(short*) (rec - 0x16c) == -1) {
 			continue;
 		}

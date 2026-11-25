@@ -28,43 +28,41 @@ void __cdecl fcn_00563cc0(char* action)
 			return;
 		}
 		ent = (char*) fcn_00503fe0(1, 1, *(int*) (action + 0xac));
-		if (ent == 0) {
-			he_FreeAction(action);
-			return;
-		}
-		p = fcn_0050dc90(ent);
-		if (p != 0) {
-			if (*(unsigned char*) (p + 0x1b4) & 1) {
-				mode = 0x60b;
-			}
-		}
-		rec = (char*) (0x7f4ca0 + (unsigned short) (*(unsigned short*) (action + 8)) * 0x21c);
-		if (*(unsigned char*) (rec + 2) == 6) {
-			io_FormatTextBuffer(buf, 0x17e7, ent);
-			fcn_00545e80(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (action + 8)].entity_id, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (action + 8)].entity_id, buf, 0, mode,
-				*(int*) (ent + 1), -1, 0, 0x6a65e0);
-		}
-		if (*(unsigned char*) (rec + 2) == 5 || *(unsigned char*) (rec + 2) == 6) {
-			i = 0;
-			e = (char*) 0x7f4ca2;
-			do {
-				int c;
-
-				if ((*e == 6 || *e == 7) && i != *(unsigned short*) rec) {
-					c = (int) (*(unsigned char*) ent) * 14 + 0x49c;
-					io_FormatTextBuffer(buf, 0x1c32,
-						(int) (*(unsigned short*) (action + 8)),
-						(int) (*(unsigned short*) (action + 8)), c);
-					fcn_00545e80(*(int*) (e + 2), -1, buf, 0, 0x607,
-						*(int*) (ent + 1), -1, 0, 0x6a65cc);
+		if (ent != 0) {
+			p = fcn_0050dc90(ent);
+			if (p != 0) {
+				if (*(unsigned char*) (p + 0x1b4) & 1) {
+					mode = 0x60b;
 				}
-				e += 0x21c;
-				i++;
-			} while ((int) e < 0x85a0a2);
-		}
-		fcn_004c5fa0(*(int*) (ent + 1));
-		fcn_004c5420(*(int*) (ent + 1), 0x5a, 2, 0, 0x40);
+			}
+			rec = (char*) (0x7f4ca0 + (unsigned short) (*(unsigned short*) (action + 8)) * 0x21c);
+			if (*(unsigned char*) (rec + 2) == 6) {
+				io_FormatTextBuffer(buf, 0x17e7, ent);
+				fcn_00545e80(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (action + 8)].entity_id, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (action + 8)].entity_id, buf, 0, mode,
+					*(int*) (ent + 1), -1, 0, 0x6a65e0);
+			}
+			if (*(unsigned char*) (rec + 2) == 5 || *(unsigned char*) (rec + 2) == 6) {
+				i = 0;
+				e = (char*) 0x7f4ca2;
+				do {
+					int c;
 
+					if ((*e == 6 || *e == 7) && i != *(unsigned short*) rec) {
+						c = (int) (*(unsigned char*) ent) * 14 + 0x49c;
+						io_FormatTextBuffer(buf, 0x1c32,
+							(int) (*(unsigned short*) (action + 8)),
+							(int) (*(unsigned short*) (action + 8)), c);
+						fcn_00545e80(*(int*) (e + 2), -1, buf, 0, 0x607,
+							*(int*) (ent + 1), -1, 0, 0x6a65cc);
+					}
+					e += 0x21c;
+					i++;
+				} while ((int) e < 0x85a0a2);
+			}
+			fcn_004c5fa0(*(int*) (ent + 1));
+			fcn_004c5420(*(int*) (ent + 1), 0x5a, 2, 0, 0x40);
+		}
+		he_FreeAction(action);
 	} else {
 		char* ne;
 
@@ -72,7 +70,6 @@ void __cdecl fcn_00563cc0(char* action)
 		if (ne != 0) {
 			fcn_004c5420(*(int*) (ne + 1), 0x5a, 2, 0, 0x40);
 		}
-
+		he_FreeAction(action);
 	}
-	he_FreeAction(action);
 }

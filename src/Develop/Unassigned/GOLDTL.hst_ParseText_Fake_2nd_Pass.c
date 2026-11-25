@@ -24,8 +24,10 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 {
 	char buf[0x17d0];
 	char msg[0x400];
-	char slotname[0x100];
-	char label[0x100];
+	struct {
+		char slotname[0x100];
+		char label[0x100];
+	} work;
 	Slot* slot;
 	int in_label;
 	int dashes;
@@ -88,8 +90,8 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 				c = *s;
 				if (c == '_') {
 					{
-						int n = sizeof(label);
-						char* fp = label;
+						int n = sizeof(work.label);
+						char* fp = work.label;
 						__asm {
 							mov edi, fp
 							mov ebx, n
@@ -108,7 +110,7 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 							rep stosb
 						}
 					}
-					p = label;
+					p = work.label;
 					*p++ = *s;
 					in_label = 1;
 					dashes = 0;
@@ -127,7 +129,7 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 				*p++ = (char) c;
 				s++;
 				if (dashes > 2) {
-					sprintf(msg, g_680ae0, id - hst_HistoryTextBase - 1, label);
+					sprintf(msg, g_680ae0, id - hst_HistoryTextBase - 1, work.label);
 					return 0;
 				}
 				continue;
@@ -139,15 +141,15 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 			}
 			if (dashes == 2) {
 				if (isdigit(c) == 0) {
-					sprintf(msg, g_680ae0, id - hst_HistoryTextBase - 1, label);
+					sprintf(msg, g_680ae0, id - hst_HistoryTextBase - 1, work.label);
 					return 0;
 				}
 				while (isdigit(*s) && *s != 0) {
 					*p++ = *s++;
 				}
 				{
-					int n = sizeof(slotname);
-					char* fq = slotname;
+					int n = sizeof(work.slotname);
+					char* fq = work.slotname;
 					__asm {
 						mov edi, fq
 						mov ebx, n
@@ -167,10 +169,10 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 					}
 				}
 				*p = 0;
-				if (hst_ParseContext(label, slotname, slot) == 0) {
+				if (hst_ParseContext(work.label, work.slotname, slot) == 0) {
 					goto parse_fail;
 				}
-				q = slotname;
+				q = work.slotname;
 				while (*q != 0) {
 					*d++ = *q++;
 				}
@@ -183,13 +185,13 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 	}
 	if (in_label != 0 && dashes < 2) {
 syntax_error:
-		sprintf(msg, g_680ae0, id - hst_HistoryTextBase - 1, label);
+		sprintf(msg, g_680ae0, id - hst_HistoryTextBase - 1, work.label);
 		return 0;
 	}
 	if (in_label == 1 && dashes == 2) {
 		{
-			int n = sizeof(slotname);
-			char* fq = slotname;
+			int n = sizeof(work.slotname);
+			char* fq = work.slotname;
 			__asm {
 				mov edi, fq
 				mov ebx, n
@@ -209,10 +211,10 @@ syntax_error:
 			}
 		}
 		*p = 0;
-		if (hst_ParseContext(label, slotname, slot) == 0) {
+		if (hst_ParseContext(work.label, work.slotname, slot) == 0) {
 			goto parse_fail;
 		}
-		q = slotname;
+		q = work.slotname;
 		while (*q != 0) {
 			*d++ = *q++;
 		}

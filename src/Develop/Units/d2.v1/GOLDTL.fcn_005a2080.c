@@ -84,34 +84,34 @@ void __cdecl fcn_005a2080(int building, int table)
 			}
 			q++;
 		}
-		if (n != 4) {
-			if (n <= 3) {
-				if (state == 0) {
-					state = 3;
-					next = (int) gm_StartFilteredEntitySearch(1, 0, 0x37);
-					while (next != 0) {
-						next = (int) fcn_00502cd0(*(int*) (next + 0x5d), 2, 6, 0, 0x12d);
-						if (next != 0) {
-							i = 0;
-							p = (int*) (next + 0x1c);
-							do {
-								if (*p == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
-									state = 4;
-									break;
-								}
-								p++;
-								i++;
-							} while (i < 4);
-						}
-						next = (int) gm_FindNextFilteredEntity();
+		if (n == 4) {
+			if (state == 0) {
+				state = 2;
+			}
+		} else if (n < 4) {
+			if (state == 0) {
+				state = 3;
+				next = (int) gm_StartFilteredEntitySearch(1, 0, 0x37);
+				while (next != 0) {
+					next = (int) fcn_00502cd0(*(int*) (next + 0x5d), 2, 6, 0, 0x12d);
+					if (next != 0) {
+						i = 0;
+						p = (int*) (next + 0x1c);
+						do {
+							if (*p == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
+								state = 4;
+								break;
+							}
+							p++;
+							i++;
+						} while (i < 4);
 					}
-				}
-				for (i = n; i < 4; i++) {
-					sel[i][0] = 0;
+					next = (int) gm_FindNextFilteredEntity();
 				}
 			}
-		} else if (state == 0) {
-			state = 2;
+			for (i = n; i < 4; i++) {
+				sel[i][0] = 0;
+			}
 		}
 		if (changed) {
 			d2_SetForm(win, 1);
@@ -135,25 +135,16 @@ void __cdecl fcn_005a2080(int building, int table)
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText(g_6811b0);
 			btn = -1;
-			if (state != 2) {
-				if (state != 4) {
-					if (state != 3) {
-						if (state != 1) {
-							goto label_5a23ad;
-						}
-						i = 0x1890;
-					} else {
-						i = 0x188f;
-					}
-					btn = fcn_00472250(win, 2, io_AppendText((char*) i));
-				} else {
-					io_AppendText((char*) 0x1891);
-				}
-			} else {
+			if (state == 2) {
 				io_AppendText((char*) 0x1892);
+			} else if (state == 4) {
+				io_AppendText((char*) 0x1891);
+			} else if (state == 3) {
+				btn = fcn_00472250(win, 2, io_AppendText((char*) 0x188f));
+			} else if (state == 1) {
+				btn = fcn_00472250(win, 2, io_AppendText((char*) 0x1890));
 			}
 		}
-label_5a23ad:
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1 && d2_CurrentElementId == btn && state == 3) {
@@ -171,7 +162,11 @@ label_5a23ad:
 					fcn_005373e0(0, 0x20007);
 					n = fcn_004c4450(next);
 				}
-				io_FormatTextBuffer(buf, (n != 1) ? 0x189f : 0x189e, building);
+				if (n == 1) {
+					io_FormatTextBuffer(buf, 0x189e, building);
+				} else {
+					io_FormatTextBuffer(buf, 0x189f, building);
+				}
 			}
 			if (buf[0] != 0) {
 				fcn_00526120(buf, 0);

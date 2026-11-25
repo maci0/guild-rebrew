@@ -16,8 +16,7 @@ void __cdecl fcn_00428340(int, int, int, int);
 /* ADDRESS: GOLDTL 0x00515c60 */
 void __cdecl fcn_00515c60(unsigned char* a0, unsigned char* a1)
 {
-	int z;
-	char v6[4];
+	int zv[2];
 	char v7[48];
 	char path[260];
 	int v9;
@@ -26,7 +25,7 @@ void __cdecl fcn_00515c60(unsigned char* a0, unsigned char* a1)
 	int* p;
 	int r;
 
-	z = 0;
+	zv[0] = 0;
 	v9 = 0;
 	v8 = 0;
 	v3 = fcn_0050dc90(a0);
@@ -60,7 +59,7 @@ found:
 	else {
 		v3 = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) a1]);
 		if (!v3) {
-			v3 = z;
+			v3 = zv[0];
 fmt:
 			v3++;
 			fcn_0064d41a(path, (char*) 0x6a1f54, g_6790c8, v3, v3);
@@ -70,7 +69,7 @@ fmt:
 			fcn_0064d41a(path, (char*) 0x6a1f54, g_6790c8, v3, v3);
 		}
 	}
-	r = vfs_LookupPath(path, (int) g_6b7fdc, v6);
+	r = vfs_LookupPath(path, (int) g_6b7fdc, (char*) &zv[1]);
 	if (!r) {
 		return;
 	}

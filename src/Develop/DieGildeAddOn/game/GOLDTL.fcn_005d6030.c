@@ -12,8 +12,8 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl io_FormatTextBuffer(char*, int);
-int __cdecl fcn_005cd440(void*, char*, int, char*);
-
+int __cdecl fcn_005cd440(void*, char*, int, void*);
+int __cdecl fcn_005d5d70(unsigned char*);
 /* Two dialog outcomes: the shop path builds a 0xf8-byte request record from
  * the owner id and four random-range globals; the quest path fills a
  * five-dword descriptor and looks up the record for id 0x1d66. */
@@ -42,15 +42,15 @@ int __cdecl fcn_005d6030(char* actor, char* a1)
 		*(int*) (rec + 8) = *(int*) (actor + 4);
 		*(int*) (rec + 0xc) = *(int*) (actor + 4);
 		*(int*) (rec + 0x58) = *(int*) (actor + 4);
-		*(char*) (rec + 4) = 0x47;
 		*(int*) (rec + 0x28) = gm_GameTime;
 		*(int*) (rec + 0x30) = g_7f4c08;
 		*(int*) (rec + 0x2c) = g_7f4c04;
-		*(unsigned short*) (rec + 0x34) = g_7f4c0c;
+		*(unsigned short*) (rec + 0x60) = id;
+		*(char*) (rec + 4) = 0x47;
 		*(char*) (rec + 0x36) = 2;
+		*(unsigned short*) (rec + 0x34) = g_7f4c0c;
+		*(unsigned short*) (rec + 0x62) = owner;
 		*(int*) (rec + 0x5c) = *(int*) (found + 4);
-		*(unsigned short*) (rec + 0x60) = (unsigned short) id;
-		*(unsigned short*) (rec + 0x62) = (unsigned short) owner;
 		fcn_004c5530(rec);
 		fcn_004c6ae0(*(int*) (actor + 4), -2);
 		return 0x10;
@@ -61,7 +61,7 @@ int __cdecl fcn_005d6030(char* actor, char* a1)
 	init[3] = g_66601c;
 	init[4] = 6;
 	io_FormatTextBuffer(name, 0x1d66);
-	found = fcn_005cd440(init, name, 0, (char*) 0x5d5d70);
+	found = fcn_005cd440(init, name, 0, (void*) fcn_005d5d70);
 	if (found != 0 && (*(unsigned int*) (found + 0x1c8) & 0x400) != 0) {
 		ret = 0x81;
 	}

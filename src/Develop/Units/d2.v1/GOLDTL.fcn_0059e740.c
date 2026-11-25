@@ -88,9 +88,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 	if (fcn_00525fb0(targetBuilding) != 0) {
 		return;
 	}
-	ids[3] = 0;
-	ids[4] = 0;
-	ids[5] = 0;
+	memset(ids + 3, 0, 3 * sizeof(int));
 	entity = he_StartHandlungSearch(2, 0, 0x14, 3, *(int*) (targetBuilding + 1));
 	while (entity != 0) {
 		for (i = 0; i < 3; i++) {

@@ -1,5 +1,4 @@
 
-extern float g_66413c; /* 252.0f */
 
 typedef struct {
 	unsigned char mode;
@@ -89,7 +88,7 @@ int __cdecl fcn_00495a80(int a0, char* actorEntity, int a2, char* a3, char* a4)
 		if (slot < *(int*) (actorEntity + 0x194)) {
 			return 0;
 		}
-		if ((float) *(unsigned char*) (actorEntity + i + 0x80) == g_66413c) {
+		if ((float) *(unsigned char*) (actorEntity + i + 0x80) == 252.0f) {
 			return 0;
 		}
 		*(int*) (a3 + 0x10) = slot;
@@ -127,7 +126,7 @@ int __cdecl fcn_00495a80(int a0, char* actorEntity, int a2, char* a3, char* a4)
 		if (weight[i] > *(unsigned int*) (actorEntity + 0x194)) {
 			used[i] = 0;
 			left--;
-		} else if ((float) *(unsigned char*) (actorEntity + 0x80 + i) == g_66413c) {
+		} else if ((float) *(unsigned char*) (actorEntity + 0x80 + i) == 252.0f) {
 			used[i] = 0;
 			left--;
 		} else {

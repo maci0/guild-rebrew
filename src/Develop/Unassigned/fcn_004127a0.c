@@ -5,7 +5,6 @@ void __cdecl fcn_004127a0(int save)
 	int a;
 	int b;
 	int c;
-	int d;
 
 	if (save == 0) {
 		a = d2_MouseRightBoundary;
@@ -24,9 +23,8 @@ void __cdecl fcn_004127a0(int save)
 		a = *(int*) 0x6b5c64;
 		b = *(int*) 0x6b5c6c;
 		d2_MouseRightBoundary = a;
-		d = *(int*) 0x6b5c70;
 		d2_MouseBottomBoundary = b;
-		d2_MouseTopBoundary = d;
+		d2_MouseTopBoundary = *(int*) 0x6b5c70;
 		g_6b5c80 = c;
 	}
 }

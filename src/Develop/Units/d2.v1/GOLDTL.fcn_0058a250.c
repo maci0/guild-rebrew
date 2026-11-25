@@ -78,7 +78,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 	int id;
 	int i;
 	int n; int cost;
-	F8 f;
+	F8 f; char *linkedObject;
 
 	for (i = 0; i < 20; i++) {
 		q[i] = 0;
@@ -138,10 +138,11 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 					req.when = gm_GameTime;
 					req.target = *(int*) (a0 + 1);
 					req.f5c = *(int*) (a0 + 1);
+					linkedObject = *(char**) (targetEntity + 0x170);
 					req.f60 = *(int*) (targetEntity + 4);
 					req.f6c = v16;
-					if (*(int*) (targetEntity + 0x170) != 0) {
-						req.f58 = *(int*) (*(int*) (targetEntity + 0x170) + 1);
+					if (linkedObject != 0) {
+						req.f58 = *(int*) (linkedObject + 1);
 					} else if (*(int*) (targetEntity + 0x16c) != 0) {
 						req.f58 = *(int*) (*(int*) (targetEntity + 0x16c) + 1);
 					} else {

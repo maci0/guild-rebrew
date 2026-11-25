@@ -77,41 +77,7 @@ void __cdecl fcn_00452740(void *arg)
 					g_6b8718 = 0;
 
 				emitted = 0;
-				if (((unsigned char) g_6b8710 & 0x20) == 0) { int vert; float sum; sum = 0.0f;
-					v = (-(g_6b8718 != 0) & 0xfffff000) + 0x2000;
-					(*(int (__stdcall **) (int, int, int, int *, int))
-					 (*(int *) tp_d3_RenderVertexBuffer + 0x2c))((int) tp_d3_RenderVertexBuffer,
-												   g_6b8714 * g_6b8718,
-												   (cnt - k) * g_6b8714,
-												   &vert, v);
-					for (i = k; i < cnt; i++) {
-						if (*(int *) (*(int *) (obj + 0x2c) + i * 4)
-							== *(int*) (*(int*) (obj + 0x2c) + k * 4)) {
-							vobj = *(int *) (*(int *) (obj + 0x30) + i * 4);
-							*(int *) vert = *(int *) (vobj + 0x38);
-							*(int *) (vert + 4) = *(int *) (vobj + 0x3c);
-							*(int *) (vert + 8) = *(int *) (vobj + 0x40);
-							sum += *(float *) (vobj + 0x48);
-							if ((*(unsigned char *) (item + 0x5a) & 1) == 0)
-								*(int *) (vert + 0xc) = *(int *) (vobj + 0x4c);
-							else {
-								int a;
-
-								a = *(unsigned char *) (vobj + 0x4f);
-								*(int *) (vert + 0xc) =
-									((((*(unsigned char *) (vobj + 0x4e) * a) >> 8 | (a << 8)) << 8
-									  | ((*(unsigned char *) (vobj + 0x4d) * a) >> 8))
-									 << 8) | ((*(unsigned char *) (vobj + 0x4c) * a) >> 8);
-							}
-							vert += 0x10;
-							emitted++;
-							if (i > k) *(int*) (*(int*) (obj + 0x2c) + i * 4) = 0;
-						}
-					}
-					sum /= emitted;
-					(*(int (__stdcall **) (int, int, int)) ((int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0xc8))(
-						(int) g_6b5de0, 0x9a, *(int*) &sum);
-				} else { int vert;
+				if (((unsigned char) g_6b8710 & 0x20) != 0) { int vert;
 					v = (-(g_6b8718 != 0) & 0xfffff000) + 0x2000;
 					(*(int (__stdcall **) (int, int, int, int *, int))
 					 (*(int *) tp_d3_RenderVertexBuffer + 0x2c))((int) tp_d3_RenderVertexBuffer,
@@ -126,9 +92,7 @@ void __cdecl fcn_00452740(void *arg)
 							*(int *) (vert + 4) = *(int *) (vobj + 0x3c);
 							*(int *) (vert + 8) = *(int *) (vobj + 0x40);
 							*(int *) (vert + 0xc) = *(int *) (vobj + 0x48);
-							if ((*(unsigned char *) (item + 0x5a) & 1) == 0)
-								*(int *) (vert + 0x10) = *(int *) (vobj + 0x4c);
-							else {
+							if ((*(unsigned char *) (item + 0x5a) & 1) != 0) {
 								int a;
 
 								a = *(unsigned char *) (vobj + 0x4f);
@@ -136,11 +100,47 @@ void __cdecl fcn_00452740(void *arg)
 									((((*(unsigned char *) (vobj + 0x4e) * a) >> 8 | (a << 8)) << 8
 									  | ((*(unsigned char *) (vobj + 0x4d) * a) >> 8))
 									 << 8) | ((*(unsigned char *) (vobj + 0x4c) * a) >> 8);
+							} else {
+								*(int *) (vert + 0x10) = *(int *) (vobj + 0x4c);
 							}
 							vert += 0x14; emitted++;
 							if (i > k) *(int*) (*(int*) (obj + 0x2c) + i * 4) = 0;
 						}
 					}
+				} else { int vert; float sum; sum = 0.0f;
+					v = (-(g_6b8718 != 0) & 0xfffff000) + 0x2000;
+					(*(int (__stdcall **) (int, int, int, int *, int))
+					 (*(int *) tp_d3_RenderVertexBuffer + 0x2c))((int) tp_d3_RenderVertexBuffer,
+												   g_6b8714 * g_6b8718,
+												   (cnt - k) * g_6b8714,
+												   &vert, v);
+					for (i = k; i < cnt; i++) {
+						if (*(int *) (*(int *) (obj + 0x2c) + i * 4)
+							== *(int*) (*(int*) (obj + 0x2c) + k * 4)) {
+							vobj = *(int *) (*(int *) (obj + 0x30) + i * 4);
+							*(int *) vert = *(int *) (vobj + 0x38);
+							*(int *) (vert + 4) = *(int *) (vobj + 0x3c);
+							*(int *) (vert + 8) = *(int *) (vobj + 0x40);
+							sum += *(float *) (vobj + 0x48);
+							if ((*(unsigned char *) (item + 0x5a) & 1) != 0) {
+								int a;
+
+								a = *(unsigned char *) (vobj + 0x4f);
+								*(int *) (vert + 0xc) =
+									((((*(unsigned char *) (vobj + 0x4e) * a) >> 8 | (a << 8)) << 8
+									  | ((*(unsigned char *) (vobj + 0x4d) * a) >> 8))
+									 << 8) | ((*(unsigned char *) (vobj + 0x4c) * a) >> 8);
+							} else {
+								*(int *) (vert + 0xc) = *(int *) (vobj + 0x4c);
+							}
+							vert += 0x10;
+							emitted++;
+							if (i > k) *(int*) (*(int*) (obj + 0x2c) + i * 4) = 0;
+						}
+					}
+					sum /= emitted;
+					(*(int (__stdcall **) (int, int, int)) ((int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0xc8))(
+						(int) g_6b5de0, 0x9a, *(int*) &sum);
 				}
 				(*(int (__stdcall **) (int)) (*(int *) tp_d3_RenderVertexBuffer + 0x30))((int) tp_d3_RenderVertexBuffer);
 				(*(int (__stdcall **) (int, int, int, int)) ((int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0x118))(

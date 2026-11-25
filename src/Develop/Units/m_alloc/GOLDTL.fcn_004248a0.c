@@ -108,7 +108,7 @@ int __cdecl sbs_Compile(char* name)
 							count++;
 							i += 0x40;
 							node = *(char**) (node + 0x104);
-						} while (node != 0);
+						} while (node != 0 && result == 0);
 					}
 				}
 			}
@@ -155,7 +155,7 @@ int __cdecl sbs_Compile(char* name)
 										}
 										child = *(char**) (child + 0x104);
 										i += 0xc;
-									} while (child != 0);
+									} while (child != 0 && result == 0);
 								}
 							}
 							offset += sum + *(int*) p * 12;

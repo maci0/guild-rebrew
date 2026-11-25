@@ -1,14 +1,7 @@
 #include <stdio.h>
 
 extern char* d3_ActiveCamera;
-extern float g_6628a8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_6629b0;
-extern float g_662a70;
-extern double g_6629c8;
-extern double g_662a50;
-extern double g_662a58;
-extern double g_662a60;
 
 void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
 
@@ -31,6 +24,13 @@ typedef struct {
 } Rain415710;
 
 
+typedef struct {
+	float x;
+	float y;
+	float z;
+	float w;
+} Vec4_415710;
+
 /* Advances the camera anchor, then integrates the wind drift of every rain
    record (stride 0x28: x, y, z, u, v, then the two projected end points) and
    rebuilds the screen positions. Out-of-range records are logged and reset. */
@@ -40,29 +40,22 @@ void __cdecl d3_UpdateRain(Rain415710* self, float dt)
 	char* cam;
 	float* m;
 	float* s;
-	float in[3];
+	Vec4_415710 b;
+	Vec4_415710 in;
 	float out[16];
-	float transformX; double d0; double d1; double d2;
-	float transformY;
-	float transformZ;
-	float b0;
-	float b1;
-	float t0;
-	float t1;
-	float t2;
-	float u0;
-	float u1;
-	float u2;
+	float u[4];
+	float t[4];
+	float k;
+	float dz;
+	float w[4];
+	float transform[4];
+	float d0; float d1; float d2;
+	float wind_x; float wind_z;
 	float hw;
 	float hh;
 	float half;
 	float cx;
 	float cy;
-	float k;
-	float dz;
-	float wx;
-	float wy;
-	float wz;
 	float num;
 	float sv;
 	float f;
@@ -72,101 +65,112 @@ void __cdecl d3_UpdateRain(Rain415710* self, float dt)
 
 	cam = d3_ActiveCamera;
 	
-	in[0] = self->x - *(float*) (cam + 0x84);
-	in[1] = self->y - *(float*) (cam + 0x88);
-	in[2] = self->z - *(float*) (cam + 0x8c);
-	d3_BuildEulerRotationMatrix(in, out);
-	cam = d3_ActiveCamera; m = (float*) (cam + 0x18c);
-	b0 = (out[4] + out[0]) * 0.0f + out[8] * g_6629b0;
+	in.x = self->x - *(float*) (cam + 0x84);
+	in.y = self->y - *(float*) (cam + 0x88);
+	in.z = self->z - *(float*) (cam + 0x8c);
+	d3_BuildEulerRotationMatrix(&in.x, out);
+	b.x = (out[0] + out[4]) * 0.0f + out[8] * 2.5f;
 	self->x = *(float*) (d3_ActiveCamera + 0x84);
 	self->y = *(float*) (d3_ActiveCamera + 0x88);
 	self->z = *(float*) (d3_ActiveCamera + 0x8c);
-	b1 = (out[5] + out[1]) * 0.0f + out[9] * g_6629b0;
-	d0 = (double) self->px - *(float*) (cam + 0x4c);
-	d1 = (double) self->py - *(float*) (cam + 0x50);
-	d2 = (double) self->pz - *(float*) (cam + 0x54);
-	transformX = d2 * m[8] + d1 * m[4] + d0 * m[0]; transformX *= g_662a70;
-	transformY = d2 * m[9] + d1 * m[5] + d0 * m[1]; transformY *= g_662a70;
-	transformZ = (d2 * m[10] + d1 * m[6] + d0 * m[2]) * g_662a70;
-	self->px = *(float*) (cam + 0x4c);
-	self->py = *(float*) (cam + 0x50);
-	self->pz = *(float*) (cam + 0x54);
-	t0 = self->wind_x * m[0] + self->wind_z * m[8] + m[4] * 0.0f;
-	t1 = self->wind_x * m[1] + self->wind_z * m[9] + m[5] * 0.0f;
-	t2 = self->wind_x * m[2] + self->wind_z * m[10] + m[6] * 0.0f;
-	u0 = (m[0] + m[8]) * 0.0f - m[4] * g_662a6c;
-	u1 = (m[1] + m[9]) * 0.0f - m[5] * g_662a6c;
-	u2 = (m[2] + m[10]) * 0.0f - m[6] * g_662a6c;
+	b.y = (out[1] + out[5]) * 0.0f + out[9] * 2.5f;
+	cam = d3_ActiveCamera;
+	m = (float*) (cam + 0x18c);
+	d0 = self->px - *(float*) (cam + 0x4c);
+	d1 = self->py - *(float*) (cam + 0x50);
+	d2 = self->pz - *(float*) (cam + 0x54);
+	transform[0] = d2 * m[8] + d1 * m[4] + d0 * m[0];
+	transform[1] = d2 * m[9] + d1 * m[5] + d0 * m[1];
+	transform[2] = d2 * m[10] + d1 * m[6] + d0 * m[2];
+	transform[0] *= 0.0025f;
+	transform[1] *= 0.0025f;
+	transform[2] *= 0.0025f;
+	self->px = *(float*) (d3_ActiveCamera + 0x4c);
+	self->py = *(float*) (d3_ActiveCamera + 0x50);
+	self->pz = *(float*) (d3_ActiveCamera + 0x54);
+	wind_x = self->wind_x;
+	wind_z = self->wind_z;
+	m = (float*) (d3_ActiveCamera + 0x18c);
+	t[0] = wind_z * m[8] + wind_x * m[0] + m[4] * 0.0f;
+	t[1] = wind_z * m[9] + wind_x * m[1] + m[5] * 0.0f;
+	t[2] = wind_z * m[10] + wind_x * m[2] + m[6] * 0.0f;
+	u[0] = (m[8] + m[0]) * 0.0f - m[4] * 0.75f;
+	u[1] = (m[9] + m[1]) * 0.0f - m[5] * 0.75f;
+	u[2] = (m[10] + m[2]) * 0.0f - m[6] * 0.75f;
 	hw = (float) ((d3_ViewportRight - g_1042570) >> 1);
 	hh = (float) ((d3_ViewportBottom - g_1042574) >> 1);
 	half = (hw > hh) ? hw : hh;
 	cx = (float) g_1042570 + hw;
 	cy = (float) g_1042574 + hh;
-	if (self->count <= 0) {
-		return;
-	}
-	dz = transformZ + transformZ;
-	k = half * 0.33333334f;
 	s = self->segs;
-	for (i = 0; i < self->count; i++, s += 10) {
-		wx = t0 * s[4] + u0 * s[5];
-		s[0] = wx * dt + s[0] + transformX + b0;
-		if (s[0] < g_662a60 || g_662a58 <= s[0]) {
-			sprintf(msg[0], (char*) 0x6775e0, (long) i, (double) s[0]);
-			sprintf(msg[0], (char*) 0x6775b8, (double) self->wind_x, (double) self->wind_z);
-			s[0] = 0;
-		}
-		if (s[0] < g_662a50) {
-			do {
-				s[0] += g_662a48;
-			} while (s[0] < g_662a50);
-		}
-		if (g_6629c8 <= s[0]) {
-			do {
-				s[0] -= g_662a48;
-			} while (g_6629c8 <= s[0]);
-		}
-		wy = t1 * s[4] + u1 * s[5];
-		s[1] = wy * dt + transformY + b1 + s[1];
-		if (s[1] < g_662a60 || g_662a58 <= s[1]) {
-			sprintf(msg[1], (char*) 0x6775a4, (long) i, (double) s[1]);
-			sprintf(msg[1], (char*) 0x6775b8, (double) self->wind_x, (double) self->wind_z);
-			s[1] = 0;
-		}
-		if (s[1] < g_662a50) {
-			do {
-				s[1] += g_662a48;
-			} while (s[1] < g_662a50);
-		}
-		if (g_6629c8 <= s[1]) {
-			do {
-				s[1] -= g_662a48;
-			} while (g_6629c8 <= s[1]);
-		}
-		wz = t2 * s[4] + u2 * s[5];
-		s[2] = wz * dt + dz + s[2];
-		if (s[2] < g_662a60 || g_662a58 <= s[2]) {
-			sprintf(msg[2], (char*) 0x677590, (long) i, (double) s[2]);
-			sprintf(msg[2], (char*) 0x6775b8, (double) self->wind_x, (double) self->wind_z);
-			s[2] = 0;
-		}
-		if (s[2] < g_662a50) {
-			do {
-				s[2] += g_662a48;
-			} while (s[2] < g_662a50);
-		}
-		if (g_6629c8 <= s[2]) {
-			do {
-				s[2] -= g_662a48;
-			} while (g_6629c8 <= s[2]);
-		}
-		num = ((float) self->count * g_6628cc + k) * g_6628b0;
-		sv = s[3] * wz + s[2];
-		f = num / (s[2] + s[2] + g_6628b0);
-		f2 = num / (sv + sv + g_6628b0);
-		s[6] = f * s[0] + cx;
-		s[7] = cy - f * s[1];
-		s[8] = f2 * (s[3] * wx + s[0]) + cx;
-		s[9] = cy - f2 * (s[3] * wy + s[1]);
+	i = 0;
+	if (self->count > 0) {
+		dz = transform[2] + transform[2];
+		k = half * 0.33333334f;
+		do {
+			w[0] = u[0] * s[5] + t[0] * s[4];
+			s[0] = w[0] * dt + s[0] + transform[0] + b.x;
+			if (s[0] < -1000.0 || s[0] > 1000.0) {
+				sprintf(msg[0], "Drop %li: X is %f", (long) i, (double) s[0]);
+				sprintf(msg[0], "    Rain->WindX: %f    Rain->WindZ: %f", (double) self->wind_x, (double) self->wind_z);
+				s[0] = 0;
+			}
+			if (s[0] < -1.0) {
+				do {
+					s[0] += 2.0;
+				} while (s[0] < -1.0);
+			}
+			if (s[0] >= 1.0) {
+				do {
+					s[0] -= 2.0;
+				} while (s[0] >= 1.0);
+			}
+			w[1] = u[1] * s[5] + t[1] * s[4];
+			s[1] = (w[1] * dt + transform[1] + b.y) + s[1];
+			if (s[1] < -1000.0 || s[1] > 1000.0) {
+				sprintf(msg[1], "Drop %li: Y is %f", (long) i, (double) s[1]);
+				sprintf(msg[1], "    Rain->WindX: %f    Rain->WindZ: %f", (double) self->wind_x, (double) self->wind_z);
+				s[1] = 0;
+			}
+			if (s[1] < -1.0) {
+				do {
+					s[1] += 2.0;
+				} while (s[1] < -1.0);
+			}
+			if (s[1] >= 1.0) {
+				do {
+					s[1] -= 2.0;
+				} while (s[1] >= 1.0);
+			}
+			w[2] = u[2] * s[5] + t[2] * s[4];
+			s[2] = w[2] * dt + dz + s[2];
+			if (s[2] < -1000.0 || s[2] > 1000.0) {
+				sprintf(msg[2], "Drop %li: Z is %f", (long) i, (double) s[2]);
+				sprintf(msg[2], "    Rain->WindX: %f    Rain->WindZ: %f", (double) self->wind_x, (double) self->wind_z);
+				s[2] = 0;
+			}
+			if (s[2] < -1.0) {
+				do {
+					s[2] += 2.0;
+				} while (s[2] < -1.0);
+			}
+			if (s[2] >= 1.0) {
+				do {
+					s[2] -= 2.0;
+				} while (s[2] >= 1.0);
+			}
+			num = ((float) self->count * 0.5f + k) * 3.0f;
+			f = num / (s[2] + s[2] + 3.0f);
+			s[6] = f * s[0] + cx;
+			s[7] = cy - f * s[1];
+			w[0] = s[3] * w[0];
+			w[1] = s[3] * w[1];
+			sv = s[3] * w[2] + s[2];
+			f2 = num / (sv + sv + 3.0f);
+			s[8] = (w[0] + s[0]) * f2 + cx;
+			s[9] = cy - (w[1] + s[1]) * f2;
+			s += 10;
+			i++;
+		} while (i < self->count);
 	}
 }

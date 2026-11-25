@@ -1,9 +1,29 @@
 #include <string.h>
-extern int gm_GameTime, g_7f4c08; extern unsigned short g_7f4c0c;
+#include "client_types.h"
+extern pos14_7f4c00 gm_GameTime;
 extern int d2_CurrentWindowId, g_100f1dc, g_14ce8e0, g_774654, d2_CurrentElementId; extern char* g_1015ea0; extern unsigned short g_774970; extern unsigned char g_773d75;
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_664150;
+typedef struct { int mask; int b; } F8_589d00;
+typedef struct { int f0; int f4; int pad8[2]; int f10; int pad14[2]; int f1c[8]; int pad3c[5]; } Query_589d00;
+typedef struct {
+	char pad0[4];
+	unsigned char kind;
+	char pad5[3];
+	int owner;
+	int target;
+	char pad10[0x18];
+	pos14_7f4c00 when;
+	unsigned char code;
+	char pad37[0x21];
+	int f58;
+	int f5c;
+	int f60;
+	int f64;
+	int f68;
+	int f6c;
+	char pad70[0x88];
+} Msg_589d00;
 
 int __cdecl gm_WalkEntityChain(unsigned short);
 void* __cdecl fcn_005cd440(void*, int, int, int);
@@ -29,8 +49,8 @@ int __cdecl fcn_005898f0(void*);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_005100f0(int, int);
-int __cdecl fcn_004a5e60(unsigned short*, int, int, int, float, float, int*);
-int __cdecl fcn_004c5530(void*);
+int __cdecl fcn_004a5e60(unsigned short*, int, F8_589d00, int, float, int*);
+int __cdecl fcn_004c5530(Msg_589d00*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_00532ef0(void);
@@ -39,8 +59,8 @@ void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00589d00(int a0)
 {
 	char* selectedEntity;
-	char req[0xf8];
-	int q[20];
+	Msg_589d00 req;
+	Query_589d00 q;
 	int amt[3];
 	int dlg;
 	int no;
@@ -53,17 +73,15 @@ void __cdecl fcn_00589d00(int a0)
 	int sel;
 	int pick;
 	int id;
-	int i;
+	F8_589d00 f;
 
 	total = gm_WalkEntityChain(g_774970);
-	for (i = 0; i <= 19; i++)
-		q[i] = 0;
-	for (i = 7; i < 15; i++)
-		q[i] = -1;
-	q[1] = 0x400;
-	q[4] = 6;
-	q[0] = 1;
-	selectedEntity = (char*) fcn_005cd440(q, *(int*) 0x14b5354, 0, 0);
+	memset(&q, 0, sizeof(q));
+	memset(q.f1c, -1, sizeof(q.f1c));
+	q.f0 = 1;
+	q.f4 = 0x400;
+	q.f10 = 6;
+	selectedEntity = (char*) fcn_005cd440(&q, *(int*) 0x14b5354, 0, 0);
 	if (selectedEntity == 0)
 		return;
 	total += gm_WalkEntityChain(*(unsigned short*) selectedEntity);
@@ -72,7 +90,7 @@ void __cdecl fcn_00589d00(int a0)
 	amt[1] = (int) (1.5f * (float) n);
 	amt[2] = (int) ((float) n + (float) n);
 	ids[0] = (int) (0.01f * (float) total);
-	ids[1] = (int) (g_664150 * (float) total);
+	ids[1] = (int) (0.015f * (float) total);
 	ids[2] = (int) ((float) total * 0.02f);
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9514);
 	d2_SetOverlayAnimation(0, 0);
@@ -135,41 +153,37 @@ void __cdecl fcn_00589d00(int a0)
 					             (unsigned int) g_774970 *
 					                 0x21c),
 					    -amt[sel]);
-					memset(req, 0, 0xf8);
-					req[4] = 0x99;
-					req[0x36] = 2;
-					*(int*) (req + 0x64) = -1;
-					*(int*) (req + 0x68) = 2;
-					*(int*) (req + 0x6c) = sel;
-					*(int*) (req + 8) =
+					memset(&req, 0, sizeof(req));
+					req.kind = 0x99;
+					req.code = 2;
+					req.f64 = -1;
+					req.f68 = 2;
+					req.f6c = sel;
+					req.owner =
 					    *(int*) (0x7f4ca4 +
 					             (unsigned int) *(unsigned short*) (a0 + 0x27) *
 					                 0x21c);
-					*(int*) (req + 0xc) = *(int*) (a0 + 1);
-					*(int*) (req + 0x28) = gm_GameTime;
-					*(int*) (req + 0x2c) = *(int*) 0x7f4c04;
-					*(int*) (req + 0x30) = g_7f4c08;
-					*(short*) (req + 0x34) = g_7f4c0c;
-					*(int*) (req + 0x5c) = *(int*) (a0 + 1);
-					*(int*) (req + 0x60) = *(int*) (selectedEntity + 4);
-					if (*(int*) (selectedEntity + 0x170) != 0)
-						sel = *(int*) (*(int*) (selectedEntity + 0x170) + 1);
-					else if (*(int*) (selectedEntity + 0x16c) != 0) {
-						*(int*) (req + 0x58) =
-						    *(int*) (*(int*) (selectedEntity + 0x16c) + 1);
-						goto sent;
+					id = *(int*) (a0 + 1);
+					req.when = gm_GameTime;
+					req.target = id;
+					req.f5c = id;
+					req.f60 = *(int*) (selectedEntity + 4);
+					if (*(int*) (selectedEntity + 0x170) != 0) {
+						req.f58 = *(int*) (*(int*) (selectedEntity + 0x170) + 1);
+					} else if (*(int*) (selectedEntity + 0x16c) != 0) {
+						req.f58 = *(int*) (*(int*) (selectedEntity + 0x16c) + 1);
 					} else {
 						n = -1;
+						f.mask = 0x7b4c4a0;
+						f.b = 0;
 						fcn_004a5e60(
 						    (unsigned short*) (0x7f4ca0 +
 						                       (unsigned int) g_774970 *
 						                           0x21c),
-						    0, 0x7b4c4a0, 0, 0.0f, 100.0f, &n);
-						sel = n;
+						    0, f, 0, 100.0f, &n);
+						req.f58 = n;
 					}
-					*(int*) (req + 0x58) = sel;
-sent:
-					id = fcn_004c5530(req);
+					id = fcn_004c5530(&req);
 					if (id != -1) {
 						do {
 							if (fcn_004c4450(id) != 0)

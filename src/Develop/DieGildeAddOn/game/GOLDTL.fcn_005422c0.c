@@ -245,65 +245,59 @@ void __cdecl fcn_005422c0(unsigned int arg)
 							if (id2 == 0xffff) {
 								continue;
 							}
+							delta = 0;
 							tile2 = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[id2]);
 							r = (unsigned char*) *(int*) (tile2 + 0x184);
-							if (r != 0) {
-								r[0x8c] &= 0xfb;
-							}
-							else if (*(int*) (tile2 + 0x170) != 0) {
-								q = (unsigned char*) sim_StartEntityQueryByType(*(unsigned char**) (tile2 + 0x170));
-								if (q != 0 && *(int*) (q + 2) != -1) {
-									count++;
-									fcn_004fe470(*(int*) (tile2 + 4), *(int*) (*(int*) (tile2 + 0x170) + 1), *(int*) (q + 2), 0, 0);
+							if (r == 0) {
+								if (*(int*) (tile2 + 0x170) != 0) {
+									q = (unsigned char*) sim_StartEntityQueryByType(*(unsigned char**) (tile2 + 0x170));
+									if (q != 0 && *(int*) (q + 2) != -1) {
+										count++;
+										fcn_004fe470(*(int*) (tile2 + 4), *(int*) (*(int*) (tile2 + 0x170) + 1), *(int*) (q + 2), 0, 0);
+									}
+								}
+								else {
+									q = fcn_005049a0(p);
+									if (q != 0 && *(int*) (q + 2) != -1) {
+										count++;
+										fcn_004fe470(*(int*) (tile2 + 4), *(int*) (p + 1), *(int*) (q + 2), 0, 0);
+									}
 								}
 							}
 							else {
-								q = fcn_005049a0(p);
-								if (q != 0 && *(int*) (q + 2) != -1) {
-									count++;
-									fcn_004fe470(*(int*) (tile2 + 4), *(int*) (p + 1), *(int*) (q + 2), 0, 0);
-								}
+								r[0x8c] &= 0xfb;
 							}
 							if (*(unsigned char*) (tile2 + 2) != 0x14) {
 								fcn_004c51a0(*(int*) (tile2 + 4), *(int*) (tile + 4), g_773d75, v);
 							}
 							count++;
-							delta = 0;
-							if (*(int*) (p + 0x3d) < 100) {
-								if (fcn_0050f950(idx, *(unsigned short*) tile2) > -120) {
-									b1 = (100 - *(int*) (p + 0x3d)) / 3;
-									if (b1 < 1) {
-										b1 = 1;
-									}
-									delta = (char) -b1;
+							if (*(int*) (p + 0x3d) < 100 && fcn_0050f950(idx, *(unsigned short*) tile2) > -120) {
+								b1 = (100 - *(int*) (p + 0x3d)) / 3;
+								if (b1 < 1) {
+									b1 = 1;
 								}
+								delta = (char) -b1;
 							}
-							else if (*(int*) (p + 0x3d) > 100) {
-								if (fcn_0050f950(idx, *(unsigned short*) tile2) < 100) {
-									b1 = (*(int*) (p + 0x3d) - 100) / 3;
-									if (b1 < 1) {
-										b1 = 1;
-									}
-									delta = (char) b1;
+							else if (*(int*) (p + 0x3d) > 100 && fcn_0050f950(idx, *(unsigned short*) tile2) < 100) {
+								b1 = (*(int*) (p + 0x3d) - 100) / 3;
+								if (b1 < 1) {
+									b1 = 1;
 								}
+								delta = (char) b1;
 							}
-							if (*(int*) (p + 0x41) < 100) {
-								if (fcn_0050f950(idx, *(unsigned short*) tile2) > -120) {
-									b1 = (*(int*) (p + 0x41) - 100) / 3;
-									if (b1 < 1) {
-										b1 = 1;
-									}
-									delta = (char) (delta + b1);
+							if (*(int*) (p + 0x41) < 100 && fcn_0050f950(idx, *(unsigned short*) tile2) > -120) {
+								b1 = (*(int*) (p + 0x41) - 100) / 5;
+								if (b1 < 1) {
+									b1 = 1;
 								}
+								delta = (char) (delta + b1);
 							}
-							else if (*(int*) (p + 0x41) > 100) {
-								if (fcn_0050f950(idx, *(unsigned short*) tile2) < 100) {
-									b1 = (100 - *(int*) (p + 0x41)) / 3;
-									if (b1 < 1) {
-										b1 = 1;
-									}
-									delta = (char) (delta - b1);
+							else if (*(int*) (p + 0x41) > 100 && fcn_0050f950(idx, *(unsigned short*) tile2) < 100) {
+								b1 = (100 - *(int*) (p + 0x41)) / 5;
+								if (b1 < 1) {
+									b1 = 1;
 								}
+								delta = (char) (delta - b1);
 							}
 							if (delta != 0) {
 								count++;
@@ -318,10 +312,10 @@ void __cdecl fcn_005422c0(unsigned int arg)
 								if (-((int) (gm_RandomMod(0x4a) & 0xffff)) > b1) {
 									if (gm_RandomMod(100) > 0x32) {
 										memset((msg + 0x1f0), 0, 0xf8);
-										(msg + 0x1f0)[4] = 0x33;
-										*(int*) ((msg + 0x1f0) + 8) = *(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id;
 										*(int*) ((msg + 0x1f0) + 0xc) = *(int*) (p + 1);
+										*(int*) ((msg + 0x1f0) + 8) = *(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id;
 										*(pos14_7f4c00*) ((msg + 0x1f0) + 0x28) = gm_GameTime;
+										(msg + 0x1f0)[4] = 0x33;
 										(msg + 0x1f0)[0x36] = 1;
 										*(int*) ((msg + 0x1f0) + 0x58) = *(int*) (tile2 + 4);
 										fcn_00500bb0((pos14_7f4c00*) ((msg + 0x1f0) + 0x28), (gm_RandomMod(6) & 0xffff) + 4, 0, 0);
@@ -330,10 +324,10 @@ void __cdecl fcn_005422c0(unsigned int arg)
 									}
 									else {
 										memset((msg + 0xf8), 0, 0xf8);
-										(msg + 0xf8)[4] = 0x34;
 										*(int*) ((msg + 0xf8) + 8) = *(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id;
 										*(int*) ((msg + 0xf8) + 0xc) = *(int*) (p + 1);
 										*(pos14_7f4c00*) ((msg + 0xf8) + 0x28) = gm_GameTime;
+										(msg + 0xf8)[4] = 0x34;
 										(msg + 0xf8)[0x36] = 1;
 										*(int*) ((msg + 0xf8) + 0x58) = *(int*) (tile2 + 4);
 										fcn_00500bb0((pos14_7f4c00*) ((msg + 0xf8) + 0x28), (gm_RandomMod(6) & 0xffff) + 4, 0, 0);

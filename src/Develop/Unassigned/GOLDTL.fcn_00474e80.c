@@ -1,9 +1,11 @@
+#include "g_100f200.h"
 #include "client_data.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 extern int g_14cf900[]; extern short g_14cf902; extern char g_67d908[];
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "client_types.h"
 extern D2_RADIO_GROUP g_102cbc4[8];
+extern Slot100f200 g_100f200[];
 /* Refreshes the current selection/building view state. */
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -35,7 +37,7 @@ void __cdecl d2_ProcessMouseInput(void)
 	int found;
 	unsigned int* v1;
 	int* v5;
-	int* groupCursor;
+	Slot100f200* rect;
 
 	if (g_6772c4 != 0) {
 		d2_MouseX = *(short*) g_14cf900;
@@ -125,22 +127,22 @@ void __cdecl d2_ProcessMouseInput(void)
 	g_67d8d0 = -1;
 	g_67d8d4 = -1;
 	v7 = 0;
-	v5 = (int*) 0x100f204;
+	rect = g_100f200;
 	do {
-		if (d2_MouseX >= v5[-1] &&
-		    d2_MouseX <= v5[-1] + v5[1] &&
-		    d2_MouseY >= *v5 &&
-		    d2_MouseY <= *v5 + v5[2] &&
-		    v5[4] != 0) {
+		if (d2_MouseX >= rect->a &&
+		    d2_MouseX <= rect->a + rect->c &&
+		    d2_MouseY >= rect->b &&
+		    d2_MouseY <= rect->b + rect->d &&
+		    rect->used != 0) {
 			g_67d8d4 = v7;
 			if (g_14ce8d8 != 0) {
 				g_67d8d0 = v7;
 			}
 			break;
 		}
-		v5 += 6;
+		rect++;
 		v7 += 1;
-	} while ((int) v5 < 0x100f504);
+	} while (rect < g_100f200 + 32);
 	v8 = d2_HoveredWindow;
 	if (v8 != -1) {
 		v4 = (int) &g_1015f40[v8];

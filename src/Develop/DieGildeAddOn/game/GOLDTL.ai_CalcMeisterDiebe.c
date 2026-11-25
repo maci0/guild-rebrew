@@ -148,7 +148,7 @@ common:
 		fcn_004888a0((int) rec);
 	}
 	fcn_00488c00((int) rec);
-	if (g_7f4c04 < 7
+	if (g_7f4c04 <= 6
 	    || (*(int*) (rec + 4) + ((unsigned int) g_7f4c04 & 0xffff)) % 3 != 0) {
 		*(unsigned int*) (rec + 0x1b4) = *(unsigned int*) (rec + 0x1b4) & 0xffffffdf;
 		return;
@@ -178,7 +178,7 @@ common:
 		}
 	}
 	j = total >> 1;
-	if (total - j < j) {
+	if (j >= total - j) {
 		j = total - j;
 	}
 	if (match < j) {
@@ -209,140 +209,22 @@ common:
 		maxfactor = 0;
 		cy = 8;
 		cx = 8;
+		e = (unsigned char*) g_99ef80 + 2;
+L1723:
+		best = e;
+		j = 8;
+L1727:
 		{
-			unsigned char* p = (unsigned char*) g_99ef80 + 2;
-			unsigned char* q;
-			int a;
-			int b;
-			for (a = 0; a < 8; a++) {
-				q = p;
-				for (b = 8; b != 0; b--) {
-					float f = (float) *(unsigned short*) (q - 2) * 0.125f + (float) *(unsigned short*) q;
-					if (!(maxfactor > f)) {
-						maxfactor = f;
-					}
-					q = q + 0xc0;
-				}
-				p = p + 0x18;
+			float f = (float) *(unsigned short*) (best - 2) * 0.125f + (float) *(unsigned short*) best;
+			if (!(maxfactor > f)) {
+				maxfactor = f;
 			}
+			goto L1e81;
 		}
-		if (maxfactor == 0.0f) {
-			maxfactor = 1.0f;
-		}
-		best = 0;
-		i = 0x100;
-		e = lpGebaeudeINST;
-		for (;;) {
-			if (*e != 0) {
-				int cat = gm_GetBuildingTypeCategory(*e);
-				unsigned short hid = *(unsigned short*) (e + 0x27);
-				unsigned short hsel = *(unsigned short*) (*(int*) (rec + 0x16c) + 0x27);
-				if (hid != hsel && hid != 0xffff && (e[0x5a] & 1) == 0
-				    && cat != 3 && cat != 5 && cat != 0) {
-					ENTITY_RECORD* candidate = &((ENTITY_RECORD*) g_7f4ca0)[hid];
-					int q = (int) candidate->unk_16c;
-					if ((q == 0 || *(unsigned short*) (q + 0x27) != hsel)
-					    && candidate->entity_state < 8) {
-						int node = *(int*) (e + 0x61);
-						if (node == 0 || fcn_004fa6f0(node + 0x4c, &cx, &cy) == 0) {
-							factor = 0;
-						} else {
-							int off = (cy + cx * 8) * 0x18;
-							factor = 1.0f
-							         - ((float) *(unsigned short*) (g_99ef80 + off) * 0.125f
-							            + (float) *(unsigned short*) (g_99ef80 + off + 2))
-							           / maxfactor;
-						}
-						factor = (float) (gm_RandomMod(100) & 0xffff) * factor * 0.01;
-						if (best != 0) {
-							int a2 = gm_AccumulateTyped2((unsigned char*) ((unsigned int) hid * 0x21c + 0x7f4ca0));
-							float fa = (float) a2 * factor;
-							int b2 = gm_AccumulateTyped2((unsigned char*) ((unsigned int) (unsigned short) *(unsigned short*) (best + 0x27) * 0x21c + 0x7f4ca0));
-							if (!(fa > (float) b2 * best_score)) {
-								goto L1a0c;
-							}
-						}
-						best_score = factor;
-						best = e;
-					}
-				}
-			}
-L1a0c:
-			e = e + 0xa9;
-			if (--i == 0) {
-				break;
-			}
-		}
-		if (fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 1, 0, 0x65) == 0
-		    || best == 0
-		    || *(int*) (*(int*) (rec + 0x16c) + 0x65) != -1) {
-			goto L2267;
-		}
-		if (he_StartHandlungSearch(2, 0, 0x3c, 3, *(int*) (*(int*) (rec + 0x16c) + 1)) != 0) {
-			return;
-		}
-		owner = (char*) (rec + 0x30);
-		sprintf(text, "ai_CalcMeisterDiebe(): Meister %s entf\374hrt %s aus '%s'", owner,
-		          (char*) (best + 5), (char*) ((unsigned int) (unsigned short) *(unsigned short*) (best + 0x27) * 0x21c + 0x7f4cd0));
-		memset(&msg, 0, sizeof msg);
-		{
-			int h = *(int*) (rec + 0x16c);
-			msg.f4 = 0x3c;
-			msg.f8 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (h + 0x27) * 0x21c + 0x7f4ca4);
-			msg.fc = *(int*) (h + 1);
-			msg.f28 = gm_GameTime;
-			msg.f2c = *(int*) &g_7f4c04;
-			msg.f30 = g_7f4c08;
-			msg.f34 = *(unsigned short*) 0x7f4c0c;
-			msg.f36 = 1;
-			msg.f58 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (best + 0x27) * 0x21c + 0x7f4ca4);
-			msg.f5c = *(int*) (best + 1);
-			msg.f60 = *(int*) (h + 1);
-		}
-		n = MIN(match, gm_RandomMod(3) + 1);
-		i = 0;
-		if (n > 0) {
-			unsigned char* p = (unsigned char*) 0x7f4e05;
-			for (;;) {
-				if ((int) p >= 0x85a205) {
-					break;
-				}
-				if (*(unsigned short*) (p - 0x165) != 0xffff
-				    && *(int*) (p + 7) == *(int*) (rec + 0x16c)
-				    && *p != 0
-				    && *(int*) (p + 0x17) == 0
-				    && *(int*) (p + 0x1f) != 0
-				    && *(int*) (*(int*) (p + 0x1f) + 0x2c) == *(int*) (*(int*) (p + 7) + 1)) {
-					msg.f38[i] = *(int*) (p - 0x161);
-					i = i + 1;
-				}
-				p = p + 0x21c;
-				if (i >= n) {
-					break;
-				}
-			}
-		}
-		if (i < 8) {
-			for (; i < 8; i++) {
-				msg.f38[i] = -1;
-			}
-		}
-		if (msg.f38[0] != -1) {
-			fcn_004c5530(&msg);
-		}
-		*(int*) (rec + 0x1c0) = -1;
-		return;
 	}
-	if (sel == 0) {
-		goto L176c;
+	if (sel != 0) {
+		goto L1e67;
 	}
-	if (sel == 3) {
-		goto L1e70;
-	}
-	if (sel <= 1) {
-		return;
-	}
-	goto L2267;
 
 L176c:
 	owner = (char*) (rec + 0x30);
@@ -360,11 +242,10 @@ L176c:
 		cx = 8;
 		cy = 8;
 		{
-			unsigned char* p = (unsigned char*) g_99ef80 + 2;
+			unsigned char* p;
 			unsigned char* q;
-			int a;
 			int b;
-			for (a = 0; a < 8; a++) {
+			for (p = (unsigned char*) g_99ef80 + 2; (int) p < (int) (g_99ef80 + 0xc2); p = p + 0x18) {
 				q = p;
 				for (b = 8; b != 0; b--) {
 					float f = (float) *(unsigned short*) (q - 2) * 0.125f + (float) *(unsigned short*) q;
@@ -373,7 +254,6 @@ L176c:
 					}
 					q = q + 0xc0;
 				}
-				p = p + 0x18;
 			}
 		}
 		if (maxfactor == 0.0f) {
@@ -466,11 +346,67 @@ L1a0c2:
 			break;
 		}
 		if (*(int*) (found + 0xac) == *(int*) (best + 1)) {
-			goto Le3e;
+			goto Lc7e;
 		}
 		found = he_fn_Handlung();
 	}
-	goto Lb45;
+	owner = (char*) (rec + 0x30);
+	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s bricht bei '%s' ein", owner, (char*) (best + 5));
+	memset(&msg, 0, sizeof msg);
+	{
+		int h = *(int*) (rec + 0x16c);
+		msg.f4 = 0x3f;
+		msg.f8 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (h + 0x27) * 0x21c + 0x7f4ca4);
+		msg.fc = *(int*) (h + 1);
+		msg.f28 = gm_GameTime;
+		msg.f2c = *(int*) &g_7f4c04;
+		msg.f30 = g_7f4c08;
+		msg.f34 = *(unsigned short*) 0x7f4c0c;
+		msg.f36 = 1;
+		msg.f58 = *(int*) (best + 1);
+		msg.f5c = *(int*) (h + 1);
+	}
+	n = match;
+	if (n > 7) {
+		n = 8;
+	}
+	i = 0;
+	if (n > 0) {
+		unsigned char* p = (unsigned char*) 0x7f4e05;
+		for (;;) {
+			if ((int) p >= 0x85a205) {
+				break;
+			}
+			if (*(unsigned short*) (p - 0x165) != 0xffff
+			    && *(int*) (p + 7) == *(int*) (rec + 0x16c)
+			    && *p != 0
+			    && *(int*) (p + 0x17) == 0
+			    && *(int*) (p + 0x1f) != 0
+			    && *(int*) (*(int*) (p + 0x1f) + 0x2c) == *(int*) (*(int*) (p + 7) + 1)) {
+				msg.f38[i] = *(int*) (p - 0x161);
+				i = i + 1;
+			}
+			p = p + 0x21c;
+			if (i >= n) {
+				break;
+			}
+		}
+	}
+	if (i < 8) {
+		for (; i < 8; i++) {
+			msg.f38[i] = -1;
+		}
+	}
+	if (msg.f38[0] != -1) {
+		fcn_004c5530(&msg);
+	}
+	*(int*) (rec + 0x1c0) = -1;
+	return;
+
+Lc7e:
+	owner = (char*) (rec + 0x30);
+	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s hat aber noch eine Spionage bei '%s' nicht beendet", owner, (char*) (best + 5));
+	return;
 
 Lcae:
 	found = he_StartHandlungSearch(2, 0, 0x40, 3, *(int*) (*(int*) (rec + 0x16c) + 1));
@@ -543,13 +479,90 @@ Lcae:
 	fcn_004c5530(&msg);
 	return;
 
-Lb45:
+Le3e:
 	owner = (char*) (rec + 0x30);
-	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s bricht bei '%s' ein", owner, (char*) (best + 5));
+	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s hat schon eine Spionage bei '%s' laufen", owner, (char*) (best + 5));
+	return;
+
+L1e67:
+	if (sel != 3) {
+		goto L225e;
+	}
+L1e70:
+	ai_CalcAngriff((int) rec, (int) handle);
+	goto L2267;
+
+L1e81:
+	best = best + 0xc0;
+	if (--j != 0) {
+		goto L1727;
+	}
+	e = e + 0x18;
+	if ((int) e < (int) (g_99ef80 + 0xc2)) {
+		goto L1723;
+	}
+	if (maxfactor == 0.0f) {
+		maxfactor = 1.0f;
+	}
+	best = 0;
+	i = 0x100;
+	e = lpGebaeudeINST;
+	for (;;) {
+		if (*e != 0) {
+			int cat = gm_GetBuildingTypeCategory(*e);
+			unsigned short hid = *(unsigned short*) (e + 0x27);
+			unsigned short hsel = *(unsigned short*) (*(int*) (rec + 0x16c) + 0x27);
+			if (hid != hsel && hid != 0xffff && (e[0x5a] & 1) == 0
+			    && cat != 3 && cat != 5 && cat != 0) {
+				ENTITY_RECORD* candidate = &((ENTITY_RECORD*) g_7f4ca0)[hid];
+				int q = (int) candidate->unk_16c;
+				if ((q == 0 || *(unsigned short*) (q + 0x27) != hsel)
+				    && candidate->entity_state < 8) {
+					int node = *(int*) (e + 0x61);
+					if (node == 0 || fcn_004fa6f0(node + 0x4c, &cx, &cy) == 0) {
+						factor = 0;
+					} else {
+						int off = (cy + cx * 8) * 0x18;
+						factor = 1.0f
+						         - ((float) *(unsigned short*) (g_99ef80 + off) * 0.125f
+						            + (float) *(unsigned short*) (g_99ef80 + off + 2))
+						           / maxfactor;
+					}
+					factor = (float) (gm_RandomMod(100) & 0xffff) * factor * 0.01;
+					if (best != 0) {
+						int a2 = gm_AccumulateTyped2((unsigned char*) ((unsigned int) hid * 0x21c + 0x7f4ca0));
+						float fa = (float) a2 * factor;
+						int b2 = gm_AccumulateTyped2((unsigned char*) ((unsigned int) (unsigned short) *(unsigned short*) (best + 0x27) * 0x21c + 0x7f4ca0));
+						if (!(fa > (float) b2 * best_score)) {
+							goto L1a0c;
+						}
+					}
+					best_score = factor;
+					best = e;
+				}
+			}
+		}
+L1a0c:
+		e = e + 0xa9;
+		if (--i == 0) {
+			break;
+		}
+	}
+	if (fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 1, 0, 0x65) == 0
+	    || best == 0
+	    || *(int*) (*(int*) (rec + 0x16c) + 0x65) != -1) {
+		goto L2267;
+	}
+	if (he_StartHandlungSearch(2, 0, 0x3c, 3, *(int*) (*(int*) (rec + 0x16c) + 1)) != 0) {
+		return;
+	}
+	owner = (char*) (rec + 0x30);
+	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s entf\374hrt %s aus '%s'", owner,
+	          (char*) (best + 5), (char*) ((unsigned int) (unsigned short) *(unsigned short*) (best + 0x27) * 0x21c + 0x7f4cd0));
 	memset(&msg, 0, sizeof msg);
 	{
 		int h = *(int*) (rec + 0x16c);
-		msg.f4 = 0x3f;
+		msg.f4 = 0x3c;
 		msg.f8 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (h + 0x27) * 0x21c + 0x7f4ca4);
 		msg.fc = *(int*) (h + 1);
 		msg.f28 = gm_GameTime;
@@ -557,13 +570,11 @@ Lb45:
 		msg.f30 = g_7f4c08;
 		msg.f34 = *(unsigned short*) 0x7f4c0c;
 		msg.f36 = 1;
-		msg.f58 = *(int*) (best + 1);
-		msg.f5c = *(int*) (h + 1);
+		msg.f58 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (best + 0x27) * 0x21c + 0x7f4ca4);
+		msg.f5c = *(int*) (best + 1);
+		msg.f60 = *(int*) (h + 1);
 	}
-	n = match;
-	if (n > 7) {
-		n = 8;
-	}
+	n = MIN(match, gm_RandomMod(3) + 1);
 	i = 0;
 	if (n > 0) {
 		unsigned char* p = (unsigned char*) 0x7f4e05;
@@ -597,20 +608,10 @@ Lb45:
 	*(int*) (rec + 0x1c0) = -1;
 	return;
 
-Lc7e:
-	owner = (char*) (rec + 0x30);
-	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s hat aber noch eine Spionage bei '%s' nicht beendet", owner, (char*) (best + 5));
-	return;
-
-Le3e:
-	owner = (char*) (rec + 0x30);
-	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s hat schon eine Spionage bei '%s' laufen", owner, (char*) (best + 5));
-	return;
-
-L1e70:
-	ai_CalcAngriff((int) rec, (int) handle);
-	goto L2267;
-
+L225e:
+	if (sel <= 1) {
+		return;
+	}
 L2267:
 	owner = (char*) (rec + 0x30);
 	sprintf(text, "ai_CalcMeisterDiebe(): Meister %s m\366chte Taschen dieben", owner);

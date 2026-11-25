@@ -76,13 +76,10 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 	char* p;
 	char* e;
 	char* r;
-	GOODS_PLAN_ENTRY* segp;
 	int i;
 	int j;
 	int k;
-	int type;
 	int found;
-	int x;
 	unsigned short id;
 	unsigned char kind;
 
@@ -91,17 +88,17 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 	while (p != 0) {
 		if (*(int*) (p + 0xe)  > 1 && g_100b0ac < 0x20) {
 			g_100d0c0[g_100b0ac].goods_id = *(unsigned short*) p;
-			for (j = 0; j != 4; j++) {
+			for (j = 0; j < 4; j++) {
 				g_100d0c0[g_100b0ac].building_indices[j] = -1;
 			}
 			g_100d0c0[g_100b0ac].min_1 = 0;
 			g_100d0c0[g_100b0ac].min_2 = 0;
-			g_100d0c0[g_100b0ac].unk_48 = 0x21;
 			g_100d0c0[g_100b0ac].value = -1.0e10f;
 			g_100d0c0[g_100b0ac].amount = 0;
 			g_100d0c0[g_100b0ac].unk_3c = 0;
 			g_100d0c0[g_100b0ac].unk_40 = 0;
 			g_100d0c0[g_100b0ac].unk_44 = 0;
+			g_100d0c0[g_100b0ac].unk_48 = 0x21;
 			g_100d0c0[g_100b0ac].flags = 0;
 			g_100b0ac++;
 		}
@@ -109,122 +106,111 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 	}
 
 	ai_ResourceCount = 0;
-	for (k = 0; k < g_100b0ac; k++) {
-		for (j = 0; j != 4; j++) {
-			id = ((OBJECT_PROTOTYPE *)lpObjektePROT)[
-			                         g_100d0c0[k].goods_id].ingredient_ids[
-			                         j];
-			if (id == 0) {
-				continue;
-			}
-			if (ai_ResourceCount >= 1) {
-				for (i = 0; i < ai_ResourceCount; i++) {
-					if (g_100b0c0[i].goods_id == id) {
-						g_100d0c0[k].building_indices[j] = i;
+	for (i = 0; i < g_100b0ac; i++) {
+		for (j = 0; j < 4; j++) {
+			if (((OBJECT_PROTOTYPE *)lpObjektePROT)[g_100d0c0[i].goods_id].ingredient_ids[j] != 0) {
+				for (k = 0; k < ai_ResourceCount; k++) {
+					if (g_100b0c0[k].goods_id == ((OBJECT_PROTOTYPE *)lpObjektePROT)[g_100d0c0[i].goods_id].ingredient_ids[j]) {
+						g_100d0c0[i].building_indices[j] = k;
 						break;
 					}
 				}
-			}
-			if (g_100d0c0[k].building_indices[j] != -1) {
-				continue;
-			}
-			if (ai_ResourceCount >= 0x80) {
-				return;
-			}
-			segp = &g_100b0c0[ai_ResourceCount];
-			segp->goods_id = id;
-			segp->parent_index = -1;
-			segp->supplier = 0;
-			segp->unk_10 = 0;
-			segp->requested = 0;
-			segp->unk_18 = 0;
-			segp->price = -1.0e10f;
-			segp->allocated = 0;
-			g_100d0c0[k].building_indices[j] = ai_ResourceCount;
-			segp->stock = 0;
-			ai_ResourceCount++;
-			segp->state_30 = 0x21;
-			segp->flags = 0;
-		}
-	}
-
-	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
-	if (kind == 0xe || kind == 8 || kind == 0x20) {
-		if (ai_ResourceCount > 0) {
-			for (k = 0; k < ai_ResourceCount; k++) {
-				type = g_100b0c0[k].goods_id;
-				if (type == 0x1c7 || type == 0x1c4 ||
-				    type == 0x1c5 || type == 0x1c6 ||
-				    type == 0x2af || type == 0x2b0) {
-					g_100b0c0[k].flags |= 0x24;
-					for (i = 0; i < g_100b0ac; i++) {
-						if (g_100d0c0[i].goods_id == type) {
-							g_100d0c0[i].flags |= 0x24;
-							break;
-						}
+				if (g_100d0c0[i].building_indices[j] == -1) {
+					if (ai_ResourceCount >= 0x80) {
+						return;
 					}
-					if (i >= g_100b0ac) {
-						g_100d0c0[g_100b0ac].goods_id = type;
-						for (j = 0; j != 4; j++) {
-							g_100d0c0[g_100b0ac].building_indices[j] = -1;
-						}
-						g_100d0c0[g_100b0ac].min_1 = 0;
-						g_100d0c0[g_100b0ac].min_2 = 0;
-						g_100d0c0[g_100b0ac].value = -1.0e10f;
-						g_100d0c0[g_100b0ac].amount = 0;
-						g_100d0c0[g_100b0ac].unk_3c = 0;
-						g_100d0c0[g_100b0ac].unk_40 = 0;
-						g_100d0c0[g_100b0ac].unk_44 = 0;
-						g_100d0c0[g_100b0ac].unk_48 = 0x21;
-						g_100d0c0[g_100b0ac].flags = 0x24;
-						g_100b0ac = g_100b0ac + 1;
-					}
-				} else if (type == 0x1c1 || type == 0x1c2 ||
-				           type == 0x1c3) {
-					g_100b0c0[k].flags |= 0x204;
-					for (i = 0; i < g_100b0ac; i++) {
-						if (g_100d0c0[i].goods_id == type) {
-							g_100d0c0[i].flags |= 0x204;
-							break;
-						}
-					}
-					if (i >= g_100b0ac) {
-						g_100d0c0[g_100b0ac].goods_id = type;
-						for (j = 0; j != 4; j++) {
-							g_100d0c0[g_100b0ac].building_indices[j] = -1;
-						}
-						g_100d0c0[g_100b0ac].min_1 = 0;
-						g_100d0c0[g_100b0ac].min_2 = 0;
-						g_100d0c0[g_100b0ac].value = -1.0e10f;
-						g_100d0c0[g_100b0ac].amount = 0;
-						g_100d0c0[g_100b0ac].unk_3c = 0;
-						g_100d0c0[g_100b0ac].unk_40 = 0;
-						g_100d0c0[g_100b0ac].unk_44 = 0;
-						g_100d0c0[g_100b0ac].unk_48 = 0x21;
-						g_100d0c0[g_100b0ac].flags = 0x204;
-						g_100b0ac = g_100b0ac + 1;
-					}
+					g_100b0c0[ai_ResourceCount].goods_id = ((OBJECT_PROTOTYPE *)lpObjektePROT)[g_100d0c0[i].goods_id].ingredient_ids[j];
+					g_100b0c0[ai_ResourceCount].parent_index = -1;
+					g_100b0c0[ai_ResourceCount].supplier = 0;
+					g_100b0c0[ai_ResourceCount].unk_10 = 0;
+					g_100b0c0[ai_ResourceCount].requested = 0;
+					g_100b0c0[ai_ResourceCount].unk_18 = 0;
+					g_100b0c0[ai_ResourceCount].price = -1.0e10f;
+					g_100b0c0[ai_ResourceCount].allocated = 0;
+					g_100b0c0[ai_ResourceCount].stock = 0;
+					g_100b0c0[ai_ResourceCount].state_30 = 0x21;
+					g_100b0c0[ai_ResourceCount].flags = 0;
+					g_100d0c0[i].building_indices[j] = ai_ResourceCount;
+					ai_ResourceCount++;
 				}
 			}
 		}
 	}
 
 	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
-	if ((kind == 0x1d || kind == 0x1f) && ai_ResourceCount > 0) {
-		for (k = 0; k < ai_ResourceCount; k++) {
-			type = g_100b0c0[k].goods_id;
-			if (type == 0x225 || type == 0x226 || type == 0x227 ||
-			    type == 0x293 || type == 0x294 || type == 0x295) {
-				g_100b0c0[k].flags |= 0x404;
-				for (i = 0; i < g_100b0ac; i++) {
-					if (g_100d0c0[i].goods_id == type) {
-						g_100d0c0[i].flags |= 0x404;
+	if (kind == 0xe || kind == 8 || kind == 0x20) {
+		for (i = 0; i < ai_ResourceCount; i++) {
+			if (g_100b0c0[i].goods_id == 0x1c7 || g_100b0c0[i].goods_id == 0x1c4 ||
+			    g_100b0c0[i].goods_id == 0x1c5 || g_100b0c0[i].goods_id == 0x1c6 ||
+			    g_100b0c0[i].goods_id == 0x2af || g_100b0c0[i].goods_id == 0x2b0) {
+				g_100b0c0[i].flags |= 0x24;
+				for (k = 0; k < g_100b0ac; k++) {
+					if (g_100d0c0[k].goods_id == g_100b0c0[i].goods_id) {
+						g_100d0c0[k].flags |= 0x24;
 						break;
 					}
 				}
-				if (i >= g_100b0ac) {
-					g_100d0c0[g_100b0ac].goods_id = type;
-					for (j = 0; j != 4; j++) {
+				if (k >= g_100b0ac) {
+					g_100d0c0[g_100b0ac].goods_id = g_100b0c0[i].goods_id;
+					for (j = 0; j < 4; j++) {
+						g_100d0c0[g_100b0ac].building_indices[j] = -1;
+					}
+					g_100d0c0[g_100b0ac].min_1 = 0;
+					g_100d0c0[g_100b0ac].min_2 = 0;
+					g_100d0c0[g_100b0ac].value = -1.0e10f;
+					g_100d0c0[g_100b0ac].amount = 0;
+					g_100d0c0[g_100b0ac].unk_3c = 0;
+					g_100d0c0[g_100b0ac].unk_40 = 0;
+					g_100d0c0[g_100b0ac].unk_44 = 0;
+					g_100d0c0[g_100b0ac].unk_48 = 0x21;
+					g_100d0c0[g_100b0ac].flags = 0x24;
+					g_100b0ac = g_100b0ac + 1;
+				}
+			}
+			if (g_100b0c0[i].goods_id == 0x1c1 || g_100b0c0[i].goods_id == 0x1c2 ||
+			           g_100b0c0[i].goods_id == 0x1c3) {
+				g_100b0c0[i].flags |= 0x204;
+				for (k = 0; k < g_100b0ac; k++) {
+					if (g_100d0c0[k].goods_id == g_100b0c0[i].goods_id) {
+						g_100d0c0[k].flags |= 0x204;
+						break;
+					}
+				}
+				if (k >= g_100b0ac) {
+					g_100d0c0[g_100b0ac].goods_id = g_100b0c0[i].goods_id;
+					for (j = 0; j < 4; j++) {
+						g_100d0c0[g_100b0ac].building_indices[j] = -1;
+					}
+					g_100d0c0[g_100b0ac].min_1 = 0;
+					g_100d0c0[g_100b0ac].min_2 = 0;
+					g_100d0c0[g_100b0ac].value = -1.0e10f;
+					g_100d0c0[g_100b0ac].amount = 0;
+					g_100d0c0[g_100b0ac].unk_3c = 0;
+					g_100d0c0[g_100b0ac].unk_40 = 0;
+					g_100d0c0[g_100b0ac].unk_44 = 0;
+					g_100d0c0[g_100b0ac].unk_48 = 0x21;
+					g_100d0c0[g_100b0ac].flags = 0x204;
+					g_100b0ac = g_100b0ac + 1;
+				}
+			}
+		}
+	}
+
+	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
+	if (kind == 0x1d || kind == 0x1f) {
+		for (i = 0; i < ai_ResourceCount; i++) {
+			if (g_100b0c0[i].goods_id == 0x225 || g_100b0c0[i].goods_id == 0x226 || g_100b0c0[i].goods_id == 0x227 ||
+			    g_100b0c0[i].goods_id == 0x293 || g_100b0c0[i].goods_id == 0x294 || g_100b0c0[i].goods_id == 0x295) {
+				g_100b0c0[i].flags |= 0x404;
+				for (k = 0; k < g_100b0ac; k++) {
+					if (g_100d0c0[k].goods_id == g_100b0c0[i].goods_id) {
+						g_100d0c0[k].flags |= 0x404;
+						break;
+					}
+				}
+				if (k >= g_100b0ac) {
+					g_100d0c0[g_100b0ac].goods_id = g_100b0c0[i].goods_id;
+					for (j = 0; j < 4; j++) {
 						g_100d0c0[g_100b0ac].building_indices[j] = -1;
 					}
 					g_100d0c0[g_100b0ac].min_1 = 0;
@@ -242,15 +228,11 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		}
 	}
 
-	for (k = 0; k < ai_ResourceCount; k++) {
-		if (g_100b0ac > 0) {
-			for (i = 0; i < g_100b0ac; i++) {
-				if (g_100d0c0[i].goods_id == g_100b0c0[k].goods_id) {
-					break;
-				}
-			}
-			if (i < g_100b0ac) {
-				g_100b0c0[k].parent_index = i;
+	for (i = 0; i < ai_ResourceCount; i++) {
+		for (k = 0; k < g_100b0ac; k++) {
+			if (g_100b0c0[i].goods_id == g_100d0c0[k].goods_id) {
+				g_100b0c0[i].parent_index = k;
+				break;
 			}
 		}
 	}
@@ -266,18 +248,18 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		    gm_eval_SlotVoll(craft, g_100d0c0[i].goods_id, 0xf4240);
 	}
 
-	for (k = 0; k < ai_ResourceCount; k++) {
-		p = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, g_100b0c0[k].goods_id);
+	for (i = 0; i < ai_ResourceCount; i++) {
+		p = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, g_100b0c0[i].goods_id);
 		if (p == 0) {
-			g_100b0c0[k].stock = 0;
+			g_100b0c0[i].stock = 0;
 		} else {
-			g_100b0c0[k].stock = gm_GetMsgField(craft, p);
-			if (g_100b0c0[k].stock == 0) {
-				fcn_004c52d0(*(int*) (craft + 2), g_100b0c0[k].goods_id);
+			g_100b0c0[i].stock = gm_GetMsgField(craft, p);
+			if (g_100b0c0[i].stock == 0) {
+				fcn_004c52d0(*(int*) (craft + 2), g_100b0c0[i].goods_id);
 			}
 		}
-		g_100b0c0[k].capacity =
-		    gm_eval_SlotVoll(craft, g_100b0c0[k].goods_id, 0xf4240);
+		g_100b0c0[i].capacity =
+		    gm_eval_SlotVoll(craft, g_100b0c0[i].goods_id, 0xf4240);
 	}
 
 	for (e = he_StartHandlungSearch(2, 0, 0xb, 3,
@@ -315,18 +297,16 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 			}
 		}
 		for (j = 0; j < 3; j++) {
-			id = ((unsigned short*) (e + 0xd6))[j];
-			if (id == 0) {
-				continue;
-			}
-			for (i = 0; i < g_100b0ac; i++) {
-				if (id == g_100d0c0[i].goods_id) {
-					g_100d0c0[i].amount += ((int*) (e + 0xdc))[j];
+			if (((unsigned short*) (e + 0xd6))[j] != 0) {
+				for (i = 0; i < g_100b0ac; i++) {
+					if (((unsigned short*) (e + 0xd6))[j] == g_100d0c0[i].goods_id) {
+						g_100d0c0[i].amount += ((int*) (e + 0xdc))[j];
+					}
 				}
-			}
-			for (i = 0; i < ai_ResourceCount; i++) {
-				if (id == g_100b0c0[i].goods_id) {
-					g_100b0c0[i].allocated += ((int*) (e + 0xdc))[j];
+				for (i = 0; i < ai_ResourceCount; i++) {
+					if (((unsigned short*) (e + 0xd6))[j] == g_100b0c0[i].goods_id) {
+						g_100b0c0[i].allocated += ((int*) (e + 0xdc))[j];
+					}
 				}
 			}
 		}
@@ -338,16 +318,15 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		                     *(int*) (*(char**) (a + 0x16c) + 1));
 		     e != 0;
 		     e = he_fn_Handlung()) {
-			for (k = 0; k < ai_ResourceCount; k++) {
-				if (g_100b0c0[k].goods_id !=
+			for (i = 0; i < ai_ResourceCount; i++) {
+				if (g_100b0c0[i].goods_id !=
 				    (int) *(unsigned short*) (e + 0xae)) {
 					continue;
 				}
-				x = fcn_0050c710(*(char**) (a + 0x16c), 0xb, 1);
-				g_100b0c0[k].allocated =
-				    (int) (((float) x * 0.01f + 1.0f) *
+				g_100b0c0[i].allocated =
+				    (int) (((float) fcn_0050c710(*(char**) (a + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
 				               g_664124 +
-				           (float) g_100b0c0[k].allocated);
+				           (float) g_100b0c0[i].allocated);
 			}
 		}
 	}
@@ -358,16 +337,15 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		                     *(int*) (*(char**) (a + 0x16c) + 1));
 		     e != 0;
 		     e = he_fn_Handlung()) {
-			for (k = 0; k < ai_ResourceCount; k++) {
-				if (g_100b0c0[k].goods_id !=
+			for (i = 0; i < ai_ResourceCount; i++) {
+				if (g_100b0c0[i].goods_id !=
 				    (int) *(unsigned short*) (e + 0xae)) {
 					continue;
 				}
-				x = fcn_0050c710(*(char**) (a + 0x16c), 0xb, 1);
-				g_100b0c0[k].allocated =
-				    (int) (((float) x * 0.01f + 1.0f) *
+				g_100b0c0[i].allocated =
+				    (int) (((float) fcn_0050c710(*(char**) (a + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
 				               g_664124 +
-				           (float) g_100b0c0[k].allocated);
+				           (float) g_100b0c0[i].allocated);
 			}
 		}
 	}
@@ -378,16 +356,15 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		                     *(int*) (*(char**) (a + 0x16c) + 1));
 		     e != 0;
 		     e = he_fn_Handlung()) {
-			for (k = 0; k < ai_ResourceCount; k++) {
-				if (g_100b0c0[k].goods_id !=
+			for (i = 0; i < ai_ResourceCount; i++) {
+				if (g_100b0c0[i].goods_id !=
 				    (int) *(unsigned short*) (e + 0xac)) {
 					continue;
 				}
-				x = fcn_0050c710(*(char**) (a + 0x16c), 0xb, 1);
-				g_100b0c0[k].allocated =
-				    (int) (((float) x * 0.01f + 1.0f) *
+				g_100b0c0[i].allocated =
+				    (int) (((float) fcn_0050c710(*(char**) (a + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
 				               g_664124 +
-				           (float) g_100b0c0[k].allocated);
+				           (float) g_100b0c0[i].allocated);
 			}
 		}
 	}
@@ -406,13 +383,13 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		}
 	}
 
-	for (k = 0; k < ai_ResourceCount; k++) {
-		if (g_100b0c0[k].parent_index != -1) {
+	for (i = 0; i < ai_ResourceCount; i++) {
+		if (g_100b0c0[i].parent_index != -1) {
 			for (j = 0; j < g_100b0ac; j++) {
-				if (g_100b0c0[k].goods_id == g_100d0c0[j].goods_id) {
-					g_100b0c0[k].flags |= 0x40;
+				if (g_100b0c0[i].goods_id == g_100d0c0[j].goods_id) {
+					g_100b0c0[i].flags |= 0x40;
 					g_100d0c0[j].flags |= 0x40;
-					g_100b0c0[k].parent_index = j;
+					g_100b0c0[i].parent_index = j;
 				}
 			}
 		}

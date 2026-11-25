@@ -27,9 +27,7 @@ int __cdecl fcn_00455910(int a0, int a1, float* matrix)
 			if (*slot != 0) {
 				rec = *(int*) (*slot + 0x15c);
 				base = slot[-0x1a] * 0xc0 + rec;
-				if (!(*(float*) (base + 0x3c) > mn[0])) {
-					mn[0] = *(float*) (base + 0x3c);
-				}
+				mn[0] = (*(float*) (base + 0x3c) > mn[0]) ? mn[0] : *(float*) (base + 0x3c);
 				if (!(*(float*) (base + 0x40) > mn[1])) {
 					mn[1] = *(float*) (base + 0x40);
 				}

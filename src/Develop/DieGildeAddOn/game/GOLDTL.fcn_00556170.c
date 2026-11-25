@@ -9,8 +9,8 @@ void __cdecl he_FreeAction(char*);
 int __cdecl fcn_00500bb0(char*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 float __cdecl fcn_004fc460(char*);
-float __cdecl fcn_0042e450(void);
-int __cdecl fcn_0042e410(int);
+double __cdecl gm_RandomFloat01(void);
+int __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
@@ -98,11 +98,11 @@ anim7:
 			*(int*) (p + 0x84) = fcn_004c5620(7, p);
 			return;
 		}
-		f = fcn_0042e450();
+		f = gm_RandomFloat01();
 		if (f > *(float*) (p + 0xb0)) {
 			*(int*) (p + 0xb8) = -1;
 			*(int*) (p + 0xb8) = fcn_004c4fc0(0xff, -1, -1,
-				fcn_0042e410(0xc) + 0xf, -1, 0, 0, 2);
+				gm_RandomMod(0xc) + 0xf, -1, 0, 0, 2);
 			COPY_UI(p);
 			fcn_00500bb0(p + 0x52, 0, 0, 1);
 			*(int*) (p + 0x84) = fcn_004c5620(3, p);
@@ -128,7 +128,7 @@ anim7:
 		}
 		obj = fcn_004c4480(*(int*) (p + 0xb8));
 		v38 = 0;
-		v34 = fcn_0042e410(2) & 0xffff;
+		v34 = gm_RandomMod(2) & 0xffff;
 		if (obj == 0) {
 			fcn_00500bb0(p + 0x52, 1, 0, 0);
 			*(int*) (p + 0xb8) = -1;
@@ -137,7 +137,7 @@ anim7:
 		}
 		found = 0;
 		n = 0x100;
-		v = (unsigned short) fcn_0042e410(0x100);
+		v = (unsigned short) gm_RandomMod(0x100);
 		while (n != 0) {
 			ent = (char*) (lpGebaeudeINST + v * 0xa9);
 			type = *(unsigned char*) ent;
@@ -154,7 +154,7 @@ anim7:
 		}
 		if (found)
 			fcn_004c6000(*(int*) (obj + 4), *(int*) (ent + 1));
-		i = fcn_0042e410(0x32);
+		i = gm_RandomMod(0x32);
 		fcn_004c51a0(*(int*) (obj + 4), -1, g_773d75, ((i & 0xffff) + 0x33) * 0x20);
 		fcn_004c4510(obj, *(int*) (obj + 4));
 		cm_AppendPacketFieldDelta(1, 1, 2, &v38);
@@ -170,9 +170,9 @@ anim7:
 			COPY_UI(p);
 			goto inc_anim7;
 		}
-		f = fcn_0042e450();
+		f = gm_RandomFloat01();
 		if (f > *(float*) (p + 0xb0)) {
-			v = (unsigned short) fcn_0042e410(0x300);
+			v = (unsigned short) gm_RandomMod(0x300);
 			n = 0x300;
 			do {
 				key = v * 0x21c;
@@ -199,7 +199,7 @@ anim7:
 		*(int*) (p + 0x84) = fcn_004c5620(6, p);
 		return;
 	case 7:
-		v = (unsigned short) fcn_0042e410(0x300);
+		v = (unsigned short) gm_RandomMod(0x300);
 		n = 0x300;
 		do {
 			key = v * 0x21c;
@@ -211,7 +211,7 @@ anim7:
 			      *(int*) (key + 0x7f4e10) == 0))) {
 				found = 0;
 				i = 0x100;
-				idx = (unsigned short) fcn_0042e410(0x100);
+				idx = (unsigned short) gm_RandomMod(0x100);
 				while (i != 0) {
 					ent = (char*) (lpGebaeudeINST + idx * 0xa9);
 					type = *(unsigned char*) ent;

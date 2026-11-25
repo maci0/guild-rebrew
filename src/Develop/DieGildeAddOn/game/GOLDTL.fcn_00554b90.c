@@ -90,7 +90,7 @@ void __cdecl fcn_00554b90(char* e)
 				L.n++;
 			}
 		}
-		for (h = g_7f4ca0; h < g_7f4ca0 + 768; h++) {
+		for (h = g_7f4ca0; (int) h < (int) (g_7f4ca0 + 768); h++) {
 			if (h->level > 0 && h->busy == 0 && (h->type == 5 || h->type == 3 || h->type == 4)) {
 				v = gm_AccumulateTyped2(h);
 				if (v >= *(int*) (e + 0xb0)) {

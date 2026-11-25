@@ -33,8 +33,7 @@ HEAD_SET* __cdecl fcn_004fda30(unsigned int entityIndex)
 		return (HEAD_SET*) 0x6905b8;
 	}
 	v4 = (char*) (v3 + 0x7f4e94);
-	v8 = *(int*) (v3 + 0x7f4e2c);
-	if (*(char*) (v3 + 0x7f4e94) && v8 != -1) {
+	if (*(char*) (v3 + 0x7f4e94) && (v8 = *(int*) (v3 + 0x7f4e2c)) != -1) {
 		*(int*) 0x773d60 = (*(int*) 0x773d60 + 1) & 0x80000007;
 		if (*(int*) 0x773d60 <= -1) {
 			*(int*) 0x773d60 = (*(int*) 0x773d60 - 1 | 0xfffffff8) + 1;

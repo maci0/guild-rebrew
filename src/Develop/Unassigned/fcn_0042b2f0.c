@@ -32,9 +32,8 @@ char* __cdecl fcn_0042b2f0(char* base, int count, int mode)
 	}
 	if (*p == 0) {
 		if (c == 4) {
-			return base;
-		}
-		if (c == 8) {
+			p = base;
+		} else if (c == 8) {
 			p = sel;
 		}
 	}

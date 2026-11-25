@@ -17,7 +17,7 @@ int __cdecl fcn_00493be0(void* a0)
 	p = (char*) a0;
 	n = (int) (*(float*) (p + 4) - 1.0f);
 	f = *(float*) (p + 4);
-	frac = f - ceil(f);
+	frac = f - floor(f);
 	v = gm_LookupEntityRecordById(*(int*) (p + 0x18));
 	if (frac >= 0.5f) {
 		n++;

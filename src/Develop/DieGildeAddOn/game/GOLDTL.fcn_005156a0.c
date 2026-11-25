@@ -12,7 +12,7 @@ extern unsigned char g_773dd4;
 
 extern void* __cdecl fcn_00502cd0(int list, int a, int b, ...);
 extern void* __cdecl gm_NextEntityQueryMatch(void);
-extern int __cdecl fcn_005014d0(unsigned short handle);
+extern int __cdecl fcn_005014d0(int handle);
 extern int __cdecl gm_FindObjektPrototypeByName(char* key);
 extern int __cdecl fcn_00506380(int a, void* table, void* record, int mode);
 extern void __cdecl d3_SetSubtreeVisible(char* record, int mode);
@@ -26,51 +26,34 @@ extern void __cdecl SelectTextureSet(char* record, int target, char mode, int fl
 void __cdecl fcn_005156a0(char* record)
 {
 	char* list;
-	char* base;
-	char* entry;
+	unsigned char* entry;
+	unsigned char* proto;
 	char* slot;
-	char* item;
+	unsigned short* item;
 	char* table;
 	unsigned int id;
-	unsigned int statusFlags;
-	int idx;
-	unsigned char kind;
 	int k0;
 	unsigned int id2;
-	unsigned char k1;
-	int i;
-	int n;
-	int count;
-	int scaled;
-	int b;
-	int rc;
-	unsigned short v1;
-	unsigned short v2;
-	unsigned short v12;
+	char k1;
+	int idx;
 	float buf[4];
-	float value;
-	void* handle;
 
-	base = record;
 	slot = 0;
-	list = 0;
 	id = *(unsigned int*) (record + 0x48) & 0xffffff;
 	k0 = record[0x4b];
 	if (g_7f3b24 != 0)
 		list = (char*) *(int*) (g_7f3b24 + 0x14);
 	else
 		list = (char*) *(int*) (g_7f3ee0 + 0x5d);
-	if (k0 != 1)
-		goto tail;
-	idx = (int) (id * 0x41);
-	entry = (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id];
-	kind = *(unsigned char*) entry;
-	if (kind == 2)
-		goto label_59eb;
-	if (kind == 0x1d)
-		goto label_5a7a;
-	if (kind != 0x21 && kind != 6) {
-		slot = (char*) fcn_00502cd0((int) list, 1, 0, (int) id);
+	if (k0 == 1) {
+		entry = (unsigned char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[id];
+		if (*entry == 2)
+			goto label_59eb;
+		if (*entry == 0x1d)
+			goto label_5a7a;
+		if (*entry == 0x21 || *entry == 6)
+			goto label_59eb;
+		slot = (char*) fcn_00502cd0((int) list, 1, 0, id);
 		if (slot == 0)
 			goto label_59eb;
 		*(unsigned int*) (slot + 0x18) = 0;
@@ -79,60 +62,54 @@ void __cdecl fcn_005156a0(char* record)
 			id2 = *(unsigned int*) (table + 0x48) & 0xffffff;
 			k1 = table[0x4b];
 			if (k1 == 1) {
-				char* other;
-				other = (char*) fcn_00502cd0((int) list, 1, 0,
-					id2);
+				unsigned short* other;
+
+				other = (unsigned short*) fcn_00502cd0((int) list, 1, 0, id2);
 				if (other != 0) {
 					d3_SetSubtreeVisible(record, 1);
 					*(char**) (record + 0x204) = slot;
 					*(unsigned int*) (record + 0x224) = 0;
 					*(char**) (slot + 0x18) = record;
 					if (fcn_005014d0(*(unsigned short*) slot) != 0) {
-						item = (char*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) entry);
+						item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *entry);
 						while (item != 0) {
-							v1 = *(unsigned short*) item;
+							unsigned short v1;
+							unsigned short v2;
+
+							v1 = *item;
 							v2 = *(unsigned short*) slot;
 							if (v1 != v2) {
+								BUILDING_PROTOTYPE* row;
 								int best;
 								int second;
-								char* row;
-								row = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)
-									[*(unsigned char*) g_7f3ee0];
+								int count;
+								int i;
+
 								best = -1;
 								second = -1;
-								count = ((BUILDING_PROTOTYPE*)row)->component_count;
-								if (count != 0) {
-									char* p;
-									p = row + 0x23;
-									for (i = 0; i < count; i++) {
-										v12 = *(unsigned short*) p & 0x7fff;
-										if (v12 != 0) {
-											if (v1 != v12) {
-												if (v2 == v12)
-													second = i;
-											} else {
-												best = i;
-											}
-										}
-										p += 2;
+								row = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*(unsigned char*) g_7f3ee0];
+								count = row->component_count;
+								for (i = 0; i < count; i++) {
+									if ((row->components[i] & 0x7fff) != 0) {
+										if (v1 == (row->components[i] & 0x7fff))
+											best = i;
+										else if (v2 == (row->components[i] & 0x7fff))
+											second = i;
 									}
-									if (best != -1 && second < best)
-										d3_SetSubtreeVisible(record, 0);
 								}
+								if (best != -1 && best > second)
+									d3_SetSubtreeVisible(record, 0);
 							}
-							item = (char*) gm_NextEntityQueryMatch();
+							item = (unsigned short*) gm_NextEntityQueryMatch();
 						}
 					}
-
-					table = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) other]);
-
+					proto = (unsigned char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[*other];
 					if (fcn_005014d0(*(unsigned short*) slot) != 0) {
-						int* q;
-						q = (int*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) table);
-						while (q != 0) {
-							if (*(unsigned short*) other < *(unsigned short*) q)
+						item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *proto);
+						while (item != 0) {
+							if (*item > *other)
 								d3_SetSubtreeVisible(record, 0);
-							q = (int*) gm_NextEntityQueryMatch();
+							item = (unsigned short*) gm_NextEntityQueryMatch();
 						}
 					}
 				} else {
@@ -145,94 +122,96 @@ void __cdecl fcn_005156a0(char* record)
 				*(unsigned int*) (record + 0x224) = 0;
 				*(char**) (slot + 0x18) = record;
 				if (fcn_005014d0(*(unsigned short*) slot) != 0) {
-					item = (char*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) entry);
+					item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *entry);
 					while (item != 0) {
-						if (*(unsigned short*) slot < *(unsigned short*) item)
+						if (*item > *(unsigned short*) slot)
 							d3_SetSubtreeVisible(record, 0);
-						item = (char*) gm_NextEntityQueryMatch();
+						item = (unsigned short*) gm_NextEntityQueryMatch();
 					}
 				}
 			}
 		} else {
-			entry = (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id];
+			proto = (unsigned char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[id];
 			d3_SetSubtreeVisible(record, 1);
 			*(char**) (record + 0x204) = slot;
-			if (*entry != 0x1d)
+			if (*proto != 0x1d)
 				*(unsigned int*) (record + 0x224) = 0;
 			*(char**) (slot + 0x18) = record;
 			if (fcn_005014d0(*(unsigned short*) slot) != 0) {
-				item = (char*) fcn_00502cd0((int) list, 1, 4, *(unsigned char*) entry);
+				item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *proto);
 				while (item != 0) {
-					if (*(unsigned short*) slot < *(unsigned short*) item)
+					if (*item > *(unsigned short*) slot)
 						d3_SetSubtreeVisible(record, 0);
-					item = (char*) gm_NextEntityQueryMatch();
+					item = (unsigned short*) gm_NextEntityQueryMatch();
 				}
 			}
 		}
-	} else {
+		goto label_5aab;
 label_59eb:
-		if (entry[0] == 0x1d)
-			goto label_5a7a;
-		slot = (char*) fcn_00502cd0((int) *(void**) (g_7f3ee0 + 0x5d), 2, 6,
-			0, (int) id);
-		if (slot == 0)
-			goto label_5a7a;
-		d3_SetSubtreeVisible(record, 1);
-		*(char**) (record + 0x204) = slot;
-		if ((entry[0] == 6 || entry[0] == 2) && g_7746c8 != 0) {
-			statusFlags = fcn_00506380(g_774970, g_7f3ee0, slot, 0);
-			if ((statusFlags & 0x4000) != 0) {
-				*(unsigned int*) (record + 0x224) = 1;
+		if (*entry != 0x1d) {
+			slot = (char*) fcn_00502cd0((int) *(void**) (g_7f3ee0 + 0x5d), 2, 6, 0, id);
+			if (slot != 0) {
+				d3_SetSubtreeVisible(record, 1);
+				*(char**) (record + 0x204) = slot;
+				if ((*entry == 6 || *entry == 2) && g_7746c8 != 0) {
+					if (fcn_00506380(g_774970, g_7f3ee0, slot, 0) & 0x4000) {
+						*(unsigned int*) (record + 0x224) = 1;
+						*(char**) (slot + 0x18) = record;
+						goto label_5aab;
+					}
+				} else {
+					*(unsigned int*) (record + 0x224) = 0;
+				}
 				*(char**) (slot + 0x18) = record;
 				goto label_5aab;
 			}
-		} else {
-			*(unsigned int*) (record + 0x224) = 0;
 		}
-		*(char**) (slot + 0x18) = record;
-		goto label_5aab;
 label_5a7a:
-		if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].kind) != 0x1d && (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].kind) != 0x21
-			&& *(int*) (record + 0x218) != 1)
-			d3_SetSubtreeVisible(record, 0);
-	}
+		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[id].kind != 0x1d && ((OBJECT_PROTOTYPE*) lpObjektePROT)[id].kind != 0x21) {
+			*(unsigned int*) (record + 0x204) = 0;
+			if (*(int*) (record + 0x218) != 1)
+				d3_SetSubtreeVisible(record, 0);
+		}
 label_5aab:
-	if (slot != 0 && (*(unsigned char*) (slot + 0x13) & 0xa0) != 0) {
-		if (*(int*) (record + 0x1ec) != 0) {
-			rc = d3_ComputeObjectBoundingSphere(record, d3_ActiveCamera, buf, &value);
-			if (rc != 0) {
-				scaled = (int) (value * g_662a08);
-				handle = evt_LoadGfxScript((char*) 0x6a1f3c);
-				if (handle != 0)
-					fcn_00428340((char*) handle, 6, (int) buf[0], (int) buf[1],
-						(int) buf[2], (int) value, scaled, record);
+		if (slot != 0 && (*(unsigned char*) (slot + 0x13) & 0xa0) != 0) {
+			if (*(int*) (record + 0x1ec) != 0) {
+				float value;
+				int scaled;
+				char* handle;
+
+				if (d3_ComputeObjectBoundingSphere(record, d3_ActiveCamera, buf, &value)) {
+					scaled = (int) (value * g_662a08);
+					handle = (char*) evt_LoadGfxScript((char*) 0x6a1f3c);
+					if (handle != 0)
+						fcn_00428340(handle, 6, (int) buf[0], (int) buf[1],
+							(int) buf[2], (int) value, scaled, record);
+				}
+			}
+			*(unsigned char*) (slot + 0x13) &= 0x5f;
+		}
+	}
+	if (strncmp(record, (char*) 0x6a1f38, 3) == 0) {
+		idx = gm_FindObjektPrototypeByName(record + 6);
+		if (idx != -1) {
+			if (((OBJECT_PROTOTYPE*) lpObjektePROT)[idx].kind == 2) {
+				if (fcn_00502cd0(*(int*) (g_7f3ee0 + 0x5d), 1, 0, idx) != 0)
+					d3_SetSubtreeVisible(record, 0);
+				else
+					d3_SetSubtreeVisible(record, 1);
+			} else {
+				if (fcn_00502cd0((int) list, 1, 0, idx) != 0)
+					d3_SetSubtreeVisible(record, 0);
+				else
+					d3_SetSubtreeVisible(record, 1);
 			}
 		}
-		*(unsigned char*) (slot + 0x13) = *(unsigned char*) (slot + 0x13) & 0x5f;
-	}
-tail:
-	if (strncmp(record, (char*) 0x6a1f38, 3) != 0) {
-		if (strncmp(record, (char*) 0x68d6fc, 4) == 0
-			&& strncmp(record, (char*) 0x68d6f8, 3) == 0)
-			return;
-		if (*(int*) (record + 0x1cc) == 0) {
-			SelectTextureSet(record, *(int*) (record + 0x1ec) + 0xf4,
-				(char) g_773dd4, 1);
+	} else if (strncmp(record, (char*) 0x68d6fc, 4) == 0
+			|| strncmp(record, (char*) 0x68d6f8, 3) == 0) {
+		if (*(int*) (record + 0x1cc) != 0) {
+			SelectTextureSet(record, *(int*) (record + 0x1cc), (char) g_773dd4, 1);
 			return;
 		}
-		SelectTextureSet(record, *(int*) (record + 0x1cc), (char) g_773dd4, 1);
-		return;
+		SelectTextureSet(record, *(int*) (record + 0x1ec) + 0xf4,
+			(char) g_773dd4, 1);
 	}
-	idx = gm_FindObjektPrototypeByName(record + 6);
-	if (idx == -1)
-		return;
-	if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[idx].kind) != 2)
-		list = base;
-	else
-		list = *(char**) (g_7f3ee0 + 0x5d);
-	if (fcn_00502cd0((int) list, 1, 0, idx) != 0) {
-		d3_SetSubtreeVisible(record, 0);
-		return;
-	}
-	d3_SetSubtreeVisible(record, 1);
 }

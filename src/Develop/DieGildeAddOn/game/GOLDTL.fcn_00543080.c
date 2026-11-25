@@ -62,6 +62,8 @@ int __cdecl fcn_00535960();
 int __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
+#include "client_types.h"
+#include "Develop/DieGildeAddOn/game/entity_record.h"
 typedef struct ResetProto { unsigned char kind; unsigned char rest[0x24c]; } ResetProto;
 extern int g_6a3420; extern int g_774954; extern char g_774965; extern int g_14cbca0; extern int d2_SuppressOverlay; extern double g_662cc0;
 extern int g_1040480; extern int g_1040484; extern int g_1040488; extern int g_104048c; extern int d2_ScreenHeight; extern int g_1040494;
@@ -75,29 +77,27 @@ void __cdecl fcn_00543080(void)
 	int v5;
 	int v11;
 	char messageText[256];
-	char v7[48];
-	unsigned int* v8;
+	char v7[12];
 	char* v9;
-	int st[2];
+	Rec24_99f5a0 st;
+	BUILDING_PROTOTYPE* proto;
 
-	v1 = *(unsigned char*) &g_772d10;
 	v5 = -1;
+	v1 = *(unsigned char*) &g_772d10;
 	fcn_004fa750();
 	v11 = 0;
-	v8 = (unsigned int*) 0x7f4e68;
 	do {
-		fcn_004e7700(&v8[-0x72]);
-		v8[1] = v8[1] & 0x3d31ffc7;
-		*v8 = *v8 & 0xe0874703;
-		if (*(char*) ((int) v8 - 0x1c6) == 6) {
+		fcn_004e7700(&((ENTITY_RECORD*) g_7f4ca0)[v11]);
+		*(unsigned int*) &((ENTITY_RECORD*) g_7f4ca0)[v11].unk_198[0x30] &= 0xe0874703;
+		((ENTITY_RECORD*) g_7f4ca0)[v11].entity_flags &= 0x3d31ffc7;
+		if (((ENTITY_RECORD*) g_7f4ca0)[v11].entity_state == 6) {
 			v5 = v11;
 		}
-		v8 = &v8[0x87];
 		v11 += 1;
-	} while ((int) v8 < 0x85a268);
+	} while (v11 < 768);
 	*(short*) &g_774970 = (short) v5;
 	he_DispatchFlaggedEvents();
-	if (!(g_7747b0 & 4) && 7 <= (unsigned short) gm_RandomMod(10)) {
+	if (!(g_7747b0 & 4) && (unsigned short) gm_RandomMod(10) > 6) {
 		v11 = fcn_005435d0();
 		while (v11 != 1) {
 			d2_SuppressOverlay = 0;
@@ -139,17 +139,18 @@ void __cdecl fcn_00543080(void)
 	}
 	v3 = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 	while (v3) {
+		proto = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*v3];
 		if (*v3 == 0x1e) {
 			v5 = fcn_005155e0(v3);
-			v2 = d3_CurrentContextIndex;
 			if (v5 != -1) {
+				v2 = d3_CurrentContextIndex;
 				fcn_004432d0((int) *(char*) (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v3].category + (unsigned long)&g_7f3b00), 1);
 				fcn_0043aa30(3);
 				plt_UpdatePlantStages(*(unsigned int*) &v3[0x71]);
 				fcn_0043a9c0(3);
 				fcn_004432d0(v2, 1);
 			}
-		} else if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v3].category == 7) {
+		} else if (proto->category == 7) {
 			*(int*)(v3 + 0x69) = 0;
 		}
 		v3 = (unsigned char*) gm_FindNextFilteredEntity();
@@ -163,7 +164,7 @@ void __cdecl fcn_00543080(void)
 		Sleep(100);
 		v9 = (char*) 0x7f4ca8;
 		do {
-			if (*(short*) &v9[-8] != -1 && *v9) {
+			if (*(unsigned short*) &v9[-8] != 0xffff && *v9) {
 				fcn_005422c0(v5);
 			}
 			v9 = &v9[0x21c];
@@ -196,11 +197,11 @@ void __cdecl fcn_00543080(void)
 		fcn_00535960();
 		Sleep(100);
 		fcn_004fb390();
-		fcn_004fb630(st);
-		if (st[1] != -1) {
-			fcn_004fb7a0();
-		} else {
+		fcn_004fb630(&st);
+		if (st.head == -1) {
 			fcn_004fb650(1, 0x3f800000, 0x3f000000, (float)(10.0 - (double)(4 - g_7747b4) * g_662cc0));
+		} else {
+			fcn_004fb7a0();
 		}
 		fcn_00547770();
 		fcn_00535960();
@@ -240,14 +241,15 @@ void __cdecl fcn_00543080(void)
 			g_774954 = 1;
 		}
 		if (g_6a3420 && !g_774954) {
-			v2 = (*(int*) &g_77494c & 8) || g_14cbca0 == -1;
-			fcn_004b3aa0(v2);
+			if (!(*(int*) &g_77494c & 8) && g_14cbca0 != -1) {
+				fcn_004b3aa0(0);
+			} else {
+				fcn_004b3aa0(1);
+			}
 		}
 	}
-	if (!(*(int*) &g_77494c & 8) && g_14cbca0 != -1) {
-		*(char*) &g_772d10 = (char) v1;
-		return;
+	if ((*(int*) &g_77494c & 8) || g_14cbca0 == -1) {
+		fcn_005421f0();
 	}
-	fcn_005421f0();
 	*(char*) &g_772d10 = (char) v1;
 }

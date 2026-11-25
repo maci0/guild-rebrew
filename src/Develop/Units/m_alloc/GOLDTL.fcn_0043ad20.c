@@ -44,6 +44,13 @@ struct Mesh_43ad20 {
 
 extern void* g_6b5de0;
 #include "client_lighting.h"
+extern char g_6b8018, g_6b8060, g_6b8061;
+extern float g_104329c, g_10425fc, g_10432a0, g_662c94;
+extern int g_6b89c0, g_6b8050, g_1042a08, g_10432a8, g_1042a04, g_6b8034;
+extern void* g_6b8068;
+extern char* g_6b86ec;
+extern char g_1052bd0[1];
+extern unsigned char g_6b7ffe;
 #define DEV_43ad20 ((Dev_43ad20*) g_6b5de0)
 /* ADDRESS: GOLDTL 0x0043ad20 */
 void __cdecl fcn_0043ad20(char a0, int a1)
@@ -60,7 +67,7 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 		v3 = 0;
 		g_6b86d4 = 0;
 	}
-	if (*(char*) 0x6b8018 && !v3 && *(int*) 0x6b8014) {
+	if (g_6b8018 && !v3 && *(int*) 0x6b8014) {
 		v10 = 3;
 		g_6b86d4 = 1;
 		DEV_43ad20->vtbl->Clear(DEV_43ad20, 1, (void*) 0x1042570, 3, *(int*) 0x6b805c, 1.0f, 0);
@@ -70,43 +77,43 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 			fcn_00441050(*(int*) 0x6b8300);
 		}
 		*(int*) 0x1043028 = 0;
-		fcn_00450cb0(*(int*) 0x6b8014, (*(unsigned char*) 0x1052bd0 & 0x1c) != 0);
+		fcn_00450cb0(*(int*) 0x6b8014, ((unsigned char) g_1052bd0[0] & 0x1c) != 0);
 		if (a0) {
 			fcn_004509c0();
 		}
-		if (*(unsigned char*) 0x1052bd0 & 0x1c) {
+		if ((unsigned char) g_1052bd0[0] & 0x1c) {
 			fcn_00456e50();
 		}
 		if (*(int*) 0x6b8300) {
-			if (*(char*) 0x6b8060 && *(char*) 0x6b8061) {
+			if (g_6b8060 && g_6b8061) {
 				fogDistance = fcn_004424c0(*(int*) 0x6b8300, *(int*) 0x6b8014 + 0x4c, *(int*) 0x6b8014 + 0x18c);
-				if (fogDistance < *(float*) 0x104329c) {
-					d3_SetFogRange((1.0f - (*(float*) 0x104329c - fogDistance) / *(float*) 0x104329c) * *(float*) 0x10425fc, fogDistance);
+				if (fogDistance < g_104329c) {
+					d3_SetFogRange((1.0f - (g_104329c - fogDistance) / g_104329c) * g_10425fc, fogDistance);
 				} else {
-					d3_SetFogRange(*(float*) 0x10425fc, *(float*) 0x104329c);
+					d3_SetFogRange(g_10425fc, g_104329c);
 				}
 			}
 			DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x24, *(int*) 0x1042ce4);
 			DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x25, *(int*) 0x1042a14);
 		}
 		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x8b, -1);
-		fcn_00437160(*(char*) 0x6b8060, *(int*) 0x6b805c, 1);
-		if (*(int*) 0x6b89c0) {
-			fcn_00459530(*(int*) 0x6b89c0);
+		fcn_00437160(g_6b8060, *(int*) 0x6b805c, 1);
+		if (g_6b89c0) {
+			fcn_00459530(g_6b89c0);
 		}
 		if (*(int*) 0x6b8300) {
 			fcn_00441400(*(int*) 0x6b8300);
 		}
 		*(int*) 0x6b8054 = 0;
-		*(int*) 0x6b8050 = 0;
+		g_6b8050 = 0;
 		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x89, 1);
-		for (v3 = *(int*) 0x6b86ec; v3; v3 = *(int*) (v3 + 0x1f0)) {
+		for (v3 = (int) g_6b86ec; v3; v3 = *(int*) (v3 + 0x1f0)) {
 			fcn_004385e0(v3, 0);
 		}
 		if (*(int*) 0x1043028) {
 			fcn_00451df0(*(int*) 0x1043028);
 		}
-		for (outer = (int*) *(int*) 0x6b8068; outer; outer = (int*) outer[10]) {
+		for (outer = (int*) g_6b8068; outer; outer = (int*) outer[10]) {
 			DEV_43ad20->vtbl->SetTransform(DEV_43ad20, 0x100, (void*) outer[1]);
 			if (outer[6] >= 0) {
 				fcn_00450e90(outer[4], outer[5], *(int*) (*outer + 0x1cc) + 0x280, 0, 0);
@@ -127,28 +134,28 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 				drawNode = (int*) drawNode[9];
 			} while (drawNode);
 		}
-		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x16, (*(char*) 0x6b7ffe == 0) * 2 + 1);
+		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x16, (g_6b7ffe == 0) * 2 + 1);
 		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x89, 0);
-		if (*(unsigned char*) 0x1052bd0 & 0x1c) {
+		if ((unsigned char) g_1052bd0[0] & 0x1c) {
 			fcn_00458bf0(*(int*) 0x6b8014);
 		}
 		if (*(int*) 0x6b8300) {
 			fcn_00440f70(*(int*) 0x6b8300, a1);
 		}
 		m_pool_clear(0x6b8064);
-		*(int*) 0x6b8068 = 0;
+		g_6b8068 = 0;
 		d3_RenderSceneList();
 		fcn_00437270();
-		if (*(float*) 0x10432a0 == *(float*) 0x662c94) {
+		if (g_10432a0 == g_662c94) {
 			*(int*) 0x10432a0 = 0;
 		}
 		*(int*) 0x6b8044 = *(int*) 0x1052bac;
-		*(int*) 0x6b802c = *(int*) 0x1042a08;
+		*(int*) 0x6b802c = g_1042a08;
 		*(int*) 0x6b803c = *(int*) 0x1042a00;
-		*(int*) 0x6b8030 = *(int*) 0x10432a8;
+		*(int*) 0x6b8030 = g_10432a8;
 		g_6b86d4 -= 1;
-		*(int*) 0x6b8040 = *(int*) 0x1042a04;
-		*(int*) 0x6b8034 = 0;
+		*(int*) 0x6b8040 = g_1042a04;
+		g_6b8034 = 0;
 		*(int*) 0x6b8038 = *(int*) 0x1052bb0;
 	}
 }

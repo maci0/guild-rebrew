@@ -102,8 +102,8 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *loadState)
         loadState->block = 0;
         return -1;
     }
-    *(int *)blk = *(int *)hdr2;
     *(int *)((char *)blk + 8) = size;
+    *(int *)blk = *(int *)hdr2;
     *(void **)((char *)blk + 4) = (char *)blk + 0xc;
     if (fread((char *)blk + 0xc, size, 1, f) != 1)
     {
