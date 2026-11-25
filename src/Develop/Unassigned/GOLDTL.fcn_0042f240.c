@@ -15,24 +15,36 @@ char* __cdecl fcn_0042f240(unsigned int* a0, char* a1, char* a2, char* out)
 		if (a0 != 0) {
 			strcat(out, (char*) *a0);
 			link = (char**) (a1 + 0x110);
-			while (*link != 0 && (cur = *link) != a2) {
+			if (*link == 0)
+				goto done;
+			do {
+				cur = *link;
+				if (cur == a2)
+					goto done;
 				strcpy(buf, cur);
 				strcat(buf, out);
 				strcpy(out, buf);
 				link = (char**) (cur + 0x110);
-			}
+			} while (*link != 0);
+			return out;
 		} else {
 			out[strlen(out) - 1] = '\0';
 			link = (char**) (a1 + 0x110);
-			while (*link != 0 && (cur = *link) != a2) {
+			if (*link == 0)
+				goto done;
+			do {
+				cur = *link;
+				if (cur == a2)
+					goto done;
 				strcpy(buf, cur);
 				strcat(buf, out);
 				strcpy(out, buf);
 				link = (char**) (cur + 0x110);
-			}
+			} while (*link != 0);
+			return out;
 		}
-		return out;
 	}
 	strcpy(out, (char*) *a0);
+done:
 	return out;
 }

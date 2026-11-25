@@ -55,12 +55,13 @@ void __cdecl fcn_00515010(void)
 					}
 				}
 				if (j >= 0x100) {
-					if (strlen(line) >= 0x20) {
-						sprintf(msg, (char*) 0x69983c, line);
-					} else {
-						strcpy(p, line);
-						p += 0x40;
+					if (strlen(line) < 0x20) {
+						char* dest = p;
 						cnt++;
+						p += 0x40;
+						strcpy(dest, line);
+					} else {
+						sprintf(msg, (char*) 0x69983c, line);
 					}
 				}
 			}

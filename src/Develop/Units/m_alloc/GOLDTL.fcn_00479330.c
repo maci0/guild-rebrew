@@ -100,8 +100,8 @@ int* __cdecl fcn_00479330(int* src)
 			memcpy(out, work, *(unsigned short*) ((char*) src + 6) * 2);
 
 
-			*(int*) res += *(unsigned short*) ((char*) src + 6) * 2;
-			out += *(unsigned short*) ((char*) src + 6) * 2;
+			size = *(unsigned short*) ((char*) src + 6) * 2;
+			*(int*) res += size; out += size;
 			j++;
 		} while (j < *(unsigned short*) ((char*) src + 0xa));
 	}

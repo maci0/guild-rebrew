@@ -52,9 +52,9 @@ void __cdecl fcn_004fd0a0(void)
 		if (*(unsigned char*) (e + 8) <= 0) {
 			continue;
 		}
-		r = gm_WalkEntityChain(*(unsigned short*) e);
 		total = 0;
 		count = 0;
+		r = gm_WalkEntityChain(*(unsigned short*) e);
 		fcn_004c4510(e, *(int*) (e + 4));
 		for (i = 0; i < 3; i++) {
 			v = *(int*) (e + 0x1d8 + i * 4);
@@ -63,7 +63,7 @@ void __cdecl fcn_004fd0a0(void)
 			cm_AppendPacketFieldDelta(4, 1, (int) e + 0x1d4 + i * 4 - g_aed32c, &v);
 		}
 		count = (r + total) / (count + 1);
-		cm_AppendPacketFieldDelta(4, 1, (int) e + 0x1e0 - g_aed32c, &r);
+		cm_AppendPacketFieldDelta(4, 1, ((int) e - g_aed32c) + 0x1e0, &r);
 		*(double*) dmem = (double) count / (double) r;
 		if (!(*(double*) dmem < g_6629c8)) {
 			*(double*) dmem = 1.0;

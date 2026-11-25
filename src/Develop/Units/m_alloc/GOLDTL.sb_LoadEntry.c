@@ -29,6 +29,8 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *loadState)
     int count;
     int i;
     int sum;
+    unsigned int mem_first;
+    unsigned int mem_second;
 
     rc = 0;
     if (g_6b7d7c == 0)
@@ -72,7 +74,9 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *loadState)
             fclose(f);
             return -1;
         }
-        loadState->mem = g_6b7fac * 13;
+        mem_first = g_6b7fac;
+        mem_second = g_6b7fac;
+        loadState->mem = (mem_first * 2 + mem_second) * 4 + g_6b7fac;
         MemUsed += count + 0xc;
         loadState->block = blk;
         fclose(f);
@@ -116,7 +120,9 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *loadState)
         sum += *(int *)(*(char **)((char *)blk + 4) + i * 0xc + 4);
     }
     MemUsed += size + 0xc;
-    loadState->mem = g_6b7fac * 13;
+    mem_first = g_6b7fac;
+    mem_second = g_6b7fac;
+    loadState->mem = (mem_first * 2 + mem_second) * 4 + g_6b7fac;
     sprintf((char *)0x14cbae0, (char *)0x678e38, loadState->name, MemUsed);
     loadState->block = blk;
     fclose(f);

@@ -9,10 +9,6 @@ void __cdecl fcn_004fad10(void)
 {
 	int* v4;
 	int* v12;
-	int* v22;
-
-
-
 
 	unsigned char record[0x2d];
 	int v14;
@@ -47,7 +43,6 @@ void __cdecl fcn_004fad10(void)
 		} while (v8);
 	} while ((int) v4 < 0x99f58c);
 	v12 = (int*) 0x9a3800;
-	v22 = (int*) 0x9a3800;
 	do {
 		if (*(int*) ((char*) v12 + 0x25) != 0 && *v12 != -1) {
 			memcpy(record, v12, 0x2d);
@@ -56,7 +51,7 @@ void __cdecl fcn_004fad10(void)
 				v8 = *(int*) ((char*) building + 0x61);
 				if (v8 != 0) {
 					v3 = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) building].category;
-					if ((v3 < 0xb || v3 >= 0xe) && v3 != 0x10) {
+					if ((v3 < 0xb || v3 > 0xd) && v3 != 0x10) {
 						if (fcn_004fa6f0((char*) v8 + 0x4c, &v15, &v14) != 0) {
 							fcn_004f4830(record[0x1c], (char*) stats);
 							v8 = v14 + v15 * 8;
@@ -64,7 +59,7 @@ void __cdecl fcn_004fad10(void)
 							v21 = v20 * 0.5f;
 							*(float*) (v8 * 0x18 + 0x99ef8c) = v21 + *(float*) (v8 * 0x18 + 0x99ef8c);
 							v8 = v15 + 1 <= 8 ? v15 + 1 : 8;
-							v19 = v14 + 1 >= 9 ? 8 : v14 + 1;
+							v19 = v14 + 1 <= 8 ? v14 + 1 : 8;
 							v9 = (unsigned int) (v15 - 1 < 0) - 1 & (unsigned int) (v15 - 1);
 							if ((int) v9 <= v8) {
 								do {
@@ -83,13 +78,11 @@ void __cdecl fcn_004fad10(void)
 									v9 += 1;
 								} while ((int) v9 <= v8);
 							}
-							v12 = v22;
 						}
 					}
 				}
 			}
 		}
 		v12 = (int*) ((char*) v12 + 0x2d);
-		v22 = v12;
 	} while ((int) v12 < 0x9a9200);
 }

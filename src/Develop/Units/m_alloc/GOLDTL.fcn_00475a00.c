@@ -74,12 +74,16 @@ int __cdecl fcn_00475a00(char* name, Surface* s)
 			} while (++i < bi.height);
 			}
 			fcn_0064e1fd(f);
-			p = buf + 2;
-			for (i = 0; i < bi.width * bi.height; i++) {
-				t = p[-2];
-				p[-2] = p[0];
-				p[0] = t;
-				p += 3;
+			i = 0;
+			if (bi.width * bi.height > 0) {
+				p = buf + 2;
+				do {
+					t = p[-2];
+					p[-2] = p[0];
+					p[0] = t;
+					i++;
+					p += 3;
+				} while (i < bi.width * bi.height);
 			}
 			if (s->fmt == 0x15 || s->fmt == 0x16) {
 				for (y = 0; y < bi.height; y++) {

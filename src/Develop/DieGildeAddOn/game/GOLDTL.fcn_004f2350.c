@@ -30,6 +30,7 @@ int __cdecl fcn_004f2350(int e)
 	int i;
 	int n;
 	int kind;
+	int slot_index;
 
 	gm_ResolveEntityById((void**) &p, 0, 0, *(int*) (e + 8));
 	if (p == 0 || *(unsigned short*) (p + 0x27) == 0xffff
@@ -51,12 +52,13 @@ int __cdecl fcn_004f2350(int e)
 	if (q == 0) {
 		return -6;
 	}
-	slot = (char*) gv_GetSlotEntry((int) ent, *(int*) (e + 0xc), *(char*) (e + 0x10));
+	slot_index = *(int*) (e + 0xc);
+	slot = (char*) gv_GetSlotEntry((int) ent, slot_index, *(char*) (e + 0x10));
 	if (slot == 0 || *(short*) (slot + 8) != *(short*) (q + 0x50)) {
 		return -7;
 	}
 	base = *(int**) (slot + 0x10);
-	n = g_6652f8[*(int*) (e + 0xc)];
+	n = g_6652f8[slot_index];
 	best = base;
 	cur = base;
 	for (i = 0; i < n; i++, cur += 0x11) {

@@ -53,36 +53,43 @@ found:
 	if (a1 && *(int*) (*(int*) (v9 + 0x184) + 0x30) != *(int*) (a1 + 2)) {
 		return;
 	}
-	if (!gm_CheckEntityType(a0)) {
+	if (gm_CheckEntityType(a0)) {
+		v3 = (int) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*a0];
+		goto fmt;
+	}
+	else {
 		v3 = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) a1]);
 		if (!v3) {
 			v3 = z;
+fmt:
+			v3++;
+			fcn_0064d41a(path, (char*) 0x6a1f54, g_6790c8, v3, v3);
+		}
+		else {
+			v3++;
+			fcn_0064d41a(path, (char*) 0x6a1f54, g_6790c8, v3, v3);
 		}
 	}
-	else {
-		v3 = (int) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*a0];
-	}
-	v3++;
-	fcn_0064d41a(path, (char*) 0x6a1f54, g_6790c8, v3, v3);
 	r = vfs_LookupPath(path, (int) g_6b7fdc, v6);
 	if (!r) {
 		return;
 	}
 	fcn_0064d41a(v7, g_68b0d8, *(int*) (v8 + 4));
 	r = evt_LoadScript(path);
-	if (!r) {
-		g_699b10 = -1;
-		return;
-	}
-	v3 = *(int*) (*(int*) (v8 + 0x184) + 0x28);
-	if (v3 != -1) {
-		v3 = evt_FindScriptById(v3);
-		if (v3) {
-			evt_RequestScriptExit(v3);
+	if (r) {
+		v3 = *(int*) (*(int*) (v8 + 0x184) + 0x28);
+		if (v3 != -1) {
+			v3 = evt_FindScriptById(v3);
+			if (v3) {
+				evt_RequestScriptExit(v3);
+			}
 		}
+		fcn_00428340(r, 2, *(int*) (v8 + 0x184), 0x4c3800);
+		*(int*) (r + 0xc94) = *(int*) (v8 + 0x184);
+		*(int*) (*(int*) (v8 + 0x184) + 0x28) = *(int*) (r + 0x100);
+		g_699b10 = *(int*) (r + 0x100);
 	}
-	fcn_00428340(r, 2, *(int*) (v8 + 0x184), 0x4c3800);
-	*(int*) (r + 0xc94) = *(int*) (v8 + 0x184);
-	*(int*) (*(int*) (v8 + 0x184) + 0x28) = *(int*) (r + 0x100);
-	g_699b10 = *(int*) (r + 0x100);
+	else {
+		g_699b10 = -1;
+	}
 }

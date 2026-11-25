@@ -9,7 +9,7 @@ int __cdecl fcn_0047b340(int x, int y, int* surface, char* sprite, int factor)
 	unsigned int carry;
 	unsigned int n;
 	unsigned int i;
-	int height;
+	int height, clipped_height;
 	int width;
 	int divisor;
 	int row;
@@ -31,11 +31,11 @@ int __cdecl fcn_0047b340(int x, int y, int* surface, char* sprite, int factor)
 		return 0;
 	}
 	if (height / divisor + y > *(int*) 0x5fed60) {
-		height = (*(int*) 0x5fed60 - y) * divisor;
-	}
+		clipped_height = (*(int*) 0x5fed60 - y) * divisor;
+	} else { clipped_height = height; }
 	carry = 0;
 	if (y >= *(int*) 0x6f045c) {
-		for (row = 0; row < height; row++) {
+		for (row = 0; row < clipped_height; row++) {
 			emit = row % divisor == 0;
 			output = row_output;
 			for (i = 0; i < *line_count; i++) {
@@ -59,7 +59,7 @@ int __cdecl fcn_0047b340(int x, int y, int* surface, char* sprite, int factor)
 			run++;
 		}
 	} else {
-		for (row = 0; row < height; row++) {
+		for (row = 0; row < clipped_height; row++) {
 			emit = row % divisor == 0;
 			output = row_output;
 			for (i = 0; i < *line_count; i++) {

@@ -18,24 +18,27 @@ unsigned int __cdecl fcn_00430bd0(void* buffer, unsigned int size,
 
     result = (unsigned int) -1;
     if (!file)
-        return result;
+        goto done;
     flags = (unsigned char) file[0x13c];
     if (!(flags & 1) || (!*(void**) (file + 0x100) && !(flags & 0x20)))
-        return result;
+        goto done;
     bytes = size * count;
     memory = (flags >> 5) & 1;
     if (memory && !(flags & 8) && *(unsigned int*) (file + 0x104) < bytes)
         bytes = *(unsigned int*) (file + 0x104);
-    if (!bytes)
-        return 0;
+    if (!bytes) {
+        result = bytes;
+        goto done;
+    }
     if (!buffer)
-        return result;
+        goto done;
     if (memory) {
         if (flags & 8) {
             *(void**) (file + 0x10c) = buffer;
             *(unsigned int*) (file + 0x110) = bytes;
             fcn_004616e0((z_streamp) (file + 0x100), 2);
-            return bytes - *(unsigned int*) (file + 0x110);
+            result = bytes - *(unsigned int*) (file + 0x110);
+            goto done;
         }
         copySrc = *(void**) (file + 0x100);
         /* Reviewed original operand-homed copy core at 0x430c99..ba. */
@@ -56,10 +59,19 @@ unsigned int __cdecl fcn_00430bd0(void* buffer, unsigned int size,
             add ecx, ebx
             rep movsb
         }
+        result = bytes;
         *(char**) (file + 0x100) += bytes;
-        *(unsigned int*) (file + 0x104) -= bytes;
-        *(unsigned int*) (file + 0x108) += bytes;
-        return bytes;
+        {
+            unsigned int avail;
+            unsigned int consumed;
+            avail = *(unsigned int*) (file + 0x104);
+            consumed = *(unsigned int*) (file + 0x108);
+            avail -= bytes;
+            consumed += bytes;
+            *(unsigned int*) (file + 0x104) = avail;
+            *(unsigned int*) (file + 0x108) = consumed;
+        }
+        goto done;
     }
     if (flags & 0x10) {
         result = unzReadCurrentFile(*(unzFile*) (file + 0x100), buffer, bytes);
@@ -69,9 +81,13 @@ unsigned int __cdecl fcn_00430bd0(void* buffer, unsigned int size,
                 ((unsigned char*) buffer)[1] == *(int*) 0x5f9008)
                 sprintf(text, "vfs: gz-compressed file (\"%s\") in zip found!", file);
         }
-        return result;
+        goto done;
     }
-    if (flags & 8)
-        return gzread(*(gzFile*) (file + 0x100), buffer, bytes);
-    return fread(buffer, size, count, *(FILE**) (file + 0x100));
+    if (flags & 8) {
+        result = gzread(*(gzFile*) (file + 0x100), buffer, bytes);
+        goto done;
+    }
+    result = fread(buffer, size, count, *(FILE**) (file + 0x100));
+done:
+    return result;
 }

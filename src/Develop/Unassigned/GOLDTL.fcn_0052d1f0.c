@@ -1,8 +1,8 @@
+extern const float g_662d40[3];
 extern void __cdecl d3_TransformPoint(char*, char*, float*);
 extern void __cdecl d3_NormalizeVector(float*);
 #include <math.h>
 extern void __cdecl d3_AnimateObjectTransform(int, float*, float*, int, int);
-
 
 /* Emit one oriented effect for a node.  The anchor offset of the node is
  * resolved by d3_TransformPoint, shifted by 600 units of the anchor span plus the
@@ -42,7 +42,7 @@ void __cdecl fcn_0052d1f0(char* effectNode)
 	dir[1] = 0.0f;
 	dir[2] = base[2] - pos[2];
 	d3_NormalizeVector(dir);
-	dot = *(float*) 0x662d48 * dir[2] + *(float*) 0x662d44 * dir[1] + *(float*) 0x662d40 * dir[0];
+	dot = g_662d40[2] * dir[2] + g_662d40[1] * dir[1] + g_662d40[0] * dir[0];
 	angles[1] = (float) acos(dot < -1.0 || !(dot < 1.0) ? (dot < -1.0 ? -1.0 : 1.0) : dot);
 	if (dir[0] > 0.0f)
 		angles[1] = -angles[1];

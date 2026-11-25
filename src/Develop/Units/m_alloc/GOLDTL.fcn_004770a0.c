@@ -79,9 +79,9 @@ int __cdecl fcn_004770a0(int* src, int flags)
 			rh >>= 1;
 			n++;
 		} while (n < 0x18);
-		rh = 1 << (n - 1);
+		rh = (int) (1U << ((n - 1) & 31));
 		if (rh < height) {
-			rh *= 2;
+			rh = (int) ((unsigned int) rh * 2U);
 		}
 		n = 0;
 		do {
@@ -91,9 +91,9 @@ int __cdecl fcn_004770a0(int* src, int flags)
 			rw >>= 1;
 			n++;
 		} while (n < 0x18);
-		rw = 1 << (n - 1);
+		rw = (int) (1U << ((n - 1) & 31));
 		if (rw < width) {
-			rw *= 2;
+			rw = (int) ((unsigned int) rw * 2U);
 		}
 	}
 	if (g_67d91d != 0 || (flags & 0x10) != 0) {

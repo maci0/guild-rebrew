@@ -73,6 +73,7 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 	float g;
 	int i;
 	char set;
+	char* detail;
 
 	o = *(char**) (e + 0x1cc);
 	if (*(char**) (o + 0x318) != 0 && *(int*) (*(char**) (o + 0x318) + 0x264) != 0 && *(int*) (e + 0x1ec) != 0) {
@@ -87,14 +88,15 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 		fcn_005eb970(*(char**) (e + 0x1ec) + 0x15fc, *(char**) (e + 0x1ec) + 0x15fc, &t);
 		fcn_005eb970(*(char**) (e + 0x1ec) + 0x15fc, *(char**) (e + 0x1ec) + 0x15fc, d3_ActiveCamera + 0x18c);
 		if (!(fcn_00438270(e, o, *(char**) (e + 0x1ec) + 0x15fc) & 0x40)) {
+			detail = *(char**) (o + 0x318);
+			f += *(float*) (detail + 0x1dc);
 			g = *(float*) (*(char**) (e + 0x1ec) + 0x15f8);
-			f += *(float*) (*(char**) (o + 0x318) + 0x1dc);
 			if (*(int*) (e + 0x220) == 1) {
 				g = -g;
 			}
-			for (i = 0; i < *(int*) (*(char**) (o + 0x318) + 0x1e4); i++) {
-				mat = (*(unsigned char***) (o + 0x31c))[*(int*) (*(char**) (o + 0x318) + 0x1e4) + i];
-				if (mesh != *(Mesh_451f80**) (*(char**) (o + 0x318) + 0x268) && (mat[0x58] < 0xff || (mat[0x5a] & 1))) {
+			for (i = 0; i < *(int*) (detail + 0x1e4); detail = *(char**) (o + 0x318), i++) {
+				mat = (*(unsigned char***) (o + 0x31c))[*(int*) (detail + 0x1e4) + i];
+				if (mesh != *(Mesh_451f80**) (detail + 0x268) && (mat[0x58] < 0xff || (mat[0x5a] & 1))) {
 					node = (Node_451f80*) m_PoolAlloc(&g_6b8064, 0x2c, 0x10);
 					node->e = e;
 					node->world = *(char**) (e + 0x1ec) + 0x15fc;

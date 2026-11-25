@@ -86,13 +86,13 @@ void* __cdecl fcn_00457c10(void* vb, void* ib, GOLDTL_TileMap* map, int step,
 	}
 
 	fs = (float) step;
+	height_scale = map->height_scale;
 	sx = fs * map->cell_x;
 	sz = fs * map->cell_z;
 	uv->du = fs * uv->du;
 	uv->dv = fs * uv->dv;
 	row_x = (float) rect[0] * sx + map->base_x;
-	base_y = map->base_y + g_6628cc;
-	height_scale = map->height_scale;
+	base_y = map->base_y + 0.5f;
 	base_z = (float) rect[2] * sz + map->base_z;
 	u2 = uv->v;
 	y = rect[2];

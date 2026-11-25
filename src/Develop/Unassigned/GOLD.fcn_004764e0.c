@@ -24,10 +24,10 @@ void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int red, int green, int 
         }
         return;
     }
-    if (x < x1) { dx = x1 - x; sx = 1; }
-    else { dx = x - x1; sx = -1; }
-    if (y < y1) { dy = y1 - y; sy = 1; }
-    else { dy = y - y1; sy = -1; }
+    if (x < x1) { dx = x1; sx = 1; dx -= x; }
+    else { dx = x; sx = -1; dx -= x1; }
+    if (y < y1) { sy = 1; dy = y1; dy -= y; }
+    else { dy = y; sy = -1; dy -= y1; }
     fcn_00476210(x, y, red, green, blue);
     if (dx > dy) {
         diagonal = dy - dx;

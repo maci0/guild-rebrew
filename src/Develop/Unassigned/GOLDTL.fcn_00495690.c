@@ -22,13 +22,15 @@ int __cdecl fcn_00495690(int a0)
 		if (fn && ((int (__cdecl*) (void*, void*, void*)) fn) (b, b + 0x134, b + 0x14c)) {
 			fcn_004c47e0(b);
 			for (i = 0; i < 0x20; i += 8) {
-				t = (char*) (0x1008570 + (unsigned int) b[0x131] * 0x94 + i);
+				unsigned int offset = (unsigned int) b[0x131] * 0x94 + i;
+				t = (char*) (0x1008570 + offset);
 				if ((unsigned char) t[0] < 0xe)
 					fcn_004c4820((unsigned char) t[0], *(float*) (t + 4) * -0.5f);
 			}
 			for (i = 0; i < 0x20; i += 8) {
-				t = (char*) (0x1008590 + (unsigned int) b[0x132] * 0x94 + i);
-				if ((unsigned char) t[-0x20] < 0xe)
+				unsigned int offset = (unsigned int) b[0x132] * 0x94 + i;
+				t = (char*) (0x1008590 + offset);
+				if (*(unsigned char*) (0x1008570 + offset) < 0xe)
 					fcn_004c4820((unsigned char) t[0], *(float*) (t + 4) * -0.5f);
 			}
 			if (b[0x131] == b[0x132]) {

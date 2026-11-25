@@ -59,11 +59,10 @@ int __cdecl fcn_00539600(void)
 		f = vfs_Tfopen(path, (char*) 0x6750e8, (struct VFS_DIR*) g_6b7fdc);
 		if (f != 0) {
 			ls_LoadSavegameHeader(f, hdr);
-			c = hdr[0x31];
-			g_7747b0 |= 0x50;
+			g_6a375c = hdr[0x31];
 			memcpy(g_7e2000, g_6a3a1c, 10);
-			g_6a375c = c;
-			g_7e2520.mode = c;
+			g_7e2520.mode = g_6a375c;
+			g_7747b0 |= 0x50;
 			g_7e2520.size = 0x6a;
 			g_7e2520.a = 1;
 			g_7e2520.b = 4;
@@ -83,9 +82,9 @@ int __cdecl fcn_00539600(void)
 			memcpy(g_7e2520.rest + 0x20, hdr + 0x78, 0x20);
 			g_9baa70.info = g_7e2520;
 			memset(g_9bada0, 0, 0x30);
-			g_9badc4 = *(int*) (hdr + 0x6c) & 0xff;
 			g_9baadc = 0x7f;
 			g_9badc0 = *(int*) (hdr + 0x60) & 0xff;
+			g_9badc4 = *(int*) (hdr + 0x6c) & 0xff;
 			i = 0;
 			do {
 				c = hdr[0x40 + i];

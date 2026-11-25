@@ -1,5 +1,4 @@
 extern float g_6628a8;
-extern float g_662a34;
 
 void __cdecl d3_NormalizeVector(float* v);
 void __cdecl d3_MatrixToEulerAngles(float* m, float* e);
@@ -118,7 +117,7 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
         c[1] += m[i * 4 + 1];
         c[2] += m[i * 4 + 2];
     }
-    out[0] = c[0] * g_662a34;
-    out[1] = c[1] * g_662a34;
-    out[2] = c[2] * g_662a34;
+    out[0] = c[0] * 0.125f;
+    out[1] = c[1] * 0.125f;
+    out[2] = c[2] * 0.125f;
 }

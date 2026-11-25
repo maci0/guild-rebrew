@@ -45,10 +45,10 @@ void __cdecl fcn_00500e40(void)
 	run = 0;
 	count = 0;
 	i = 0;
-	bld = (unsigned char*) lpGebaeudePROT;
 	for (n = 0; n < 0x2dc; n++) {
 		((int*) 0x99e0a0)[n] = 0x58;
 	}
+	bld = (unsigned char*) lpGebaeudePROT;
 	((int*) 0x8f9480)[8] = 0x2f;
 	((int*) 0x8f9480)[7] = 0x32;
 	((int*) 0x8f9480)[6] = 0x29;
