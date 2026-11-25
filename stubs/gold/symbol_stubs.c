@@ -4444,10 +4444,7 @@ int __cdecl fcn_004e89e0(unsigned char* a, int b)
 	return 0;
 }
 
-int __cdecl amt_CollectOfficeSlotsByGroup(int k, int max, void* out)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_004e9180(char* a, int v)
 {

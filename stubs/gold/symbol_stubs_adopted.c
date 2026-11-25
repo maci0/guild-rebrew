@@ -11,9 +11,7 @@
 
 
 /* Function stubs */
-void __cdecl ReleaseVideoInterfaces(char* v)
-{
-}
+
 
 char* __cdecl ch_AttachMotion(char* obj, int kind)
 {

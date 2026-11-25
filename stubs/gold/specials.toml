@@ -473,3 +473,10 @@ impl = ""
 # Restored native Gold source owns this provider.
 [specials.fcn_0046cd90]
 impl = ""
+
+# Shared C bodies now provide these on Gold (twins bound 2026-11-25).
+[specials.amt_CollectOfficeSlotsByGroup]
+impl = ""
+
+[specials.ReleaseVideoInterfaces]
+impl = ""
