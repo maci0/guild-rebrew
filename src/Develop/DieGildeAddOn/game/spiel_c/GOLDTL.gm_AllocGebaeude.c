@@ -11,6 +11,7 @@ extern char g_14a6558[];
 extern char* lpGebaeudeINST;
 extern int lpObjektePROT;
 extern char g_6b5c60;
+extern unsigned short g_7f4c0c;
 extern char s_699858[];
 extern char s_69983c[];
 extern char s_69982c[];
@@ -208,7 +209,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 		q = geb + 0x69;
 		*(int*) (q + 4) = *(int*) 0x7f4c04;
 		*(int*) (q + 8) = *(int*) 0x7f4c08;
-		*(unsigned short*) (q + 0xc) = *(unsigned short*) 0x7f4c0c;
+		*(unsigned short*) (q + 0xc) = g_7f4c0c;
 		if (owner != 0xffff) {
 			*(int*) (geb + 0x65) = *(int*) (0x7f4ca4 + (int) owner * 0x21c);
 		} else {

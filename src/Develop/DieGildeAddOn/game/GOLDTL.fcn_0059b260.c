@@ -321,8 +321,8 @@ int __cdecl d2_ShowProductionDialog(char* building)
 				do {
 					i = *(int*) (p - 0x50);
 					v = *(unsigned short*) (g_item_def_table + i * 0x41 + k + 8);
-					prev = *(unsigned short*) (g_item_def_table + i * 0x41 + k);
 					*(int*) q = v;
+					prev = *(unsigned short*) (g_item_def_table + i * 0x41 + k);
 					*(int*) (q + 0x10) = prev;
 					if (v != 0) {
 						e = fcn_00502cd0(*(int*) (p2 + 0x14), 1, 0, v);
@@ -331,9 +331,13 @@ int __cdecl d2_ShowProductionDialog(char* building)
 						}
 						else {
 							prev = *(int*) p;
-							v = gm_GetMsgField(p2, e) / *(unsigned short*) (g_item_def_table + i * 0x41 + k);
+							v = gm_GetMsgField(p2, e);
+							i = *(int*) (p - 0x50);
+							v /= *(unsigned short*) (g_item_def_table + i * 0x41 + k);
 							if (prev >= v) {
-								v = gm_GetMsgField(p2, e) / *(unsigned short*) (g_item_def_table + i * 0x41 + k);
+								v = gm_GetMsgField(p2, e);
+								i = *(int*) (p - 0x50);
+								v /= *(unsigned short*) (g_item_def_table + i * 0x41 + k);
 							}
 							else {
 								v = prev;

@@ -1,4 +1,3 @@
-extern int g_102cbc8[];
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;

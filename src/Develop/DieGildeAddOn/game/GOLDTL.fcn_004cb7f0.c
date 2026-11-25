@@ -15,7 +15,6 @@ extern unsigned char g_773d75;
 extern unsigned int g_67a370;
 extern int g_774728;
 extern float g_6a2bec;
-extern double g_664ec0;
 extern float g_662d40[3];
 extern char g_67f0ac[];
 extern char g_7e1ae0[];
@@ -139,7 +138,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		}
 		d3_DestroyObject(*(int*)(upgradeBuilding + 0x61));
 		if (*(int*) (obj + 0x1ec) != 0 && d3_ComputeObjectBoundingSphere((char*) obj, (char*) d3_ActiveCamera, vec, &radius)) {
-			res = (int)(radius * g_664ec0);
+			res = (int)(radius * 1.8);
 			h = (int) evt_LoadGfxScript(0x68b228);
 			if (h != 0) {
 				fcn_00428340((char*) h, 6, (int)vec[0], (int)vec[1], (int)vec[2],

@@ -137,8 +137,8 @@ void __cdecl fcn_004ff490(char* entity)
 
 			mode = 0x12;
 			memset(pkt, 0, 0x114);
-			*(GAME_TIMESTAMP*) (pkt + 0x18) = t;
 			id = *(int*) (other + 4);
+			*(GAME_TIMESTAMP*) (pkt + 0x18) = t;
 			*(int*) (pkt + 0xc) = id;
 			*(int*) (pkt + 0x34) = id;
 			id = *(int*) (handle + 4);

@@ -38,7 +38,7 @@ struct act {
 
 extern pos14_7f4c00 gm_GameTime;
 
-extern float g_664150;
+
 extern int d2_CurrentElementId;
 #include "client_data.h"
 int __cdecl gm_WalkEntityChain(unsigned short);
@@ -86,7 +86,7 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 	act.count = gm_WalkEntityChain(*(unsigned short*) &g_774970);
 	f = (float) act.count;
 	act.amt[0] = (int) (f * 0.01f);
-	act.amt[1] = (int) (f * g_664150);
+	act.amt[1] = (int) (f * 0.015f);
 	act.amt[2] = (int) (f * 0.0199999996f);
 	dlg = fcn_00470820(0, 0, (char*) 0x6a9514);
 	d2_SetOverlayAnimation(0, 0);

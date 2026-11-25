@@ -145,7 +145,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			fcn_004c5360();
 			fcn_004c5420(*(int*) ((char*) obj + 4), 0x1cc, 4, 2, 0);
 			*(char*) ((char*) obj + 8) = 100;
-		} else if ((*(unsigned char*) 0x7747b0 & 8) != 0) {
+		} else if ((g_7747b0 & 8) != 0) {
 			*(char*) ((char*) obj + 8) = 0;
 			idxval = yslot;
 			g_774954 = 1;

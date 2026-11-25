@@ -7,9 +7,7 @@ extern int g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
  
-extern float g_6628cc;
 extern float g_662c30;
-extern float g_664178;
 extern float g_66417c;
 extern float g_6652e8[];
 extern int g_6652f8[];
@@ -89,7 +87,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 
 				for (i = 0; i < k; i++) {
 					if (((int*) entry[4])[i * 0x11] != -1) {
-						a = (gm_RandomFloat01() + 1.0f) * g_6628cc;
+						a = (gm_RandomFloat01() + 1.0f) * 0.5f;
 						value = (int) ((g_662c30 * *(unsigned char*) ((char*) entry + 0xc))
 							* g_6652e8[entry[0]] * a);
 						if (value > 0
@@ -106,7 +104,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 				n++;
 				continue;
 			}
-			a = (gm_RandomFloat01() + 1.0f) * g_6628cc;
+			a = (gm_RandomFloat01() + 1.0f) * 0.5f;
 			result = entry[0];
 			value = (int) ((g_662c30 * *(unsigned char*) ((char*) entry + 0xc))
 				* g_6652e8[result] * a);
@@ -120,7 +118,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 			if (home == 0)
 				continue;
 			if (slot != home && gm_GameTime % 4 == *(unsigned int*) (slot + 4) % 4
-			    && *(unsigned char*) ((char*) entry + 0xc) * g_662c30 < g_664178) {
+			    && *(unsigned char*) ((char*) entry + 0xc) * g_662c30 < 0.66f) {
 				handle = fcn_004c54c0(*(unsigned int*) (home + 4), *(unsigned int*) (slot + 4),
 					-5 - gm_RandomMod(0x10), 1);
 				n++;
