@@ -273,7 +273,7 @@ void __cdecl cut_RunAuction(int* arg)
 		    200);
 		d2_SetForm(dlg, 0);
 		io_AppendText((void*) 0x1aa4,
-		    (void*) (*(short*) (char*) bidders[besti]),
+		    (void*) (*(unsigned short*) (char*) bidders[besti]),
 		    (void*) price);
 		if (arg[3] == *(int*) (&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short)g_774970]
 		    .entity_id)) {

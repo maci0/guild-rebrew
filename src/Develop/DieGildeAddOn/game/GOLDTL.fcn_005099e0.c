@@ -78,17 +78,18 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 			it = (void *) 0x7f4ca4;
 			do {
 				if (*(int *) ((char *) it + 0x168) == (int) ent) {
-					if (*(void **) it != *(void **) ((char *) arg1 + 4)) {
+					int recipient = *(int *) it;
+					if (recipient != *(int *) ((char *) arg1 + 4)) {
 						memset(pkt, 0, 0xf8);
 						pkt[4] = 0x31;
 						*(int *) (pkt + 8) = *(int *) ((char *) gm_CityEntity + 4);
+						*(int *) (pkt + 0x2c) = g_7f4c04;
 						*(int *) (pkt + 0xc) = *(int *) ((char *) ent + 1);
 						*(int *) (pkt + 0x28) = gm_GameTime;
-						*(int *) (pkt + 0x2c) = g_7f4c04;
+						pkt[0x36] = 1;
 						*(int *) (pkt + 0x30) = g_7f4c08;
 						*(unsigned short *) (pkt + 0x34) = g_7f4c0c;
-						pkt[0x36] = 1;
-						*(int *) (pkt + 0x58) = *(int *) it;
+						*(int *) (pkt + 0x58) = recipient;
 						fcn_004c5530(pkt);
 					}
 				}

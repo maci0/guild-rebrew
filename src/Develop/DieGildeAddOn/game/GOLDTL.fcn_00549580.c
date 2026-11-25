@@ -56,7 +56,7 @@ void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
 	int t;
 
 	p = subject;
-	if (a4 <= g_6628a8) {
+	if (a4 <= 0.0f) {
 		fcn_00529160(0, 0, *(unsigned short*) p, 0);
 		t = *(int*) (p + 0x184);
 		if (t != 0) {

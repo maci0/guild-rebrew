@@ -1,3 +1,5 @@
+extern int g_6b25b0;
+extern int g_6b23a4;
 #include <stdio.h>
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -117,11 +119,11 @@ next_mark:
 				fcn_0064d530((char*) digits, p + 1, 2);
 				digits[2] = 0;
 				leader = 0;
-				if (*(int*) 0x6b25b0 > 1)
+				if (g_6b25b0 > 1)
 					flag = _isctype((signed char) digits[0], 4);
 				else
 					flag = *(unsigned char*)
-					    (*(unsigned char**) 0x6b23a4
+					    ((unsigned char*) g_6b23a4
 					     + (signed char) digits[0] * 2) & 4;
 				if (flag)
 					range[num++] = fcn_0064eeec((char*) digits);

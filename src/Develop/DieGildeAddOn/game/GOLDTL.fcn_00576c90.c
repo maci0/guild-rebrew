@@ -171,10 +171,8 @@ void __cdecl fcn_00576c90(char* e)
 			c = 0x5a0;
 			break;
 		}
-		n = c - n;
-		if (n <= 5) {
-			n = 5;
-		}
+		c -= n;
+		n = c > 5 ? c : 5;
 		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), n / 60, n % 60, 0);
 		fcn_004c57e0(*(int*) (e + 0xb8), 1);

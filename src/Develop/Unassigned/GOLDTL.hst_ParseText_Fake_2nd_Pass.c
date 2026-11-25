@@ -84,8 +84,8 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 	d = out;
 	if (*s != 0) {
 		do {
-			c = *s;
 			if (in_label == 0) {
+				c = *s;
 				if (c == '_') {
 					{
 						int n = sizeof(label);
@@ -118,6 +118,7 @@ int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 				s++;
 				continue;
 			}
+			c = *s;
 			if (c == ' ') {
 				goto syntax_error;
 			}

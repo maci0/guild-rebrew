@@ -107,11 +107,12 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 	counts[2] = 0;
 	h = he_StartHandlungSearch(2, 0, 0x8c, 3, *(unsigned int*) (gebaeude + 1));
 	while (h) {
+		unsigned int action = *(unsigned short*) (h + 0xac);
 		j = 0;
 		do {
-			if (*(unsigned short*) (h + 0xac) == *(unsigned int*) ((char*) ids + j)) {
+			if (action == *(unsigned int*) ((char*) ids + j)) {
 				q = (int*) (h + 0x8c);
-				for (i = 0; i < 4; i++) {
+				for (i = 4; i != 0; i--) {
 					if (*q != -1)
 						(*(int*) ((char*) counts + j))++;
 					q++;
@@ -163,11 +164,12 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 		counts[2] = 0;
 		h = he_StartHandlungSearch(2, 0, 0x8c, 3, *(unsigned int*) (gebaeude + 1));
 		while (h) {
+			unsigned int action = *(unsigned short*) (h + 0xac);
 			j = 0;
 			do {
-				if (*(unsigned short*) (h + 0xac) == *(unsigned int*) ((char*) ids + j)) {
+				if (action == *(unsigned int*) ((char*) ids + j)) {
 					q = (int*) (h + 0x8c);
-					for (i = 0; i < 4; i++) {
+					for (i = 4; i != 0; i--) {
 						if (*q != -1)
 							(*(int*) ((char*) counts + j))++;
 						q++;
@@ -219,7 +221,6 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 				j = 0;
 				p = (unsigned char*) 0x7f4ca4;
 				do {
-					i = j;
 					if (j > 3)
 						break;
 					if (p[0x184]) {
@@ -227,13 +228,11 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 						j++;
 					}
 					p += 0x21c;
-					i = j;
 				} while ((int) p < 0x85a0a4);
-				while (j < 4) {
-					req.list[j] = 0xffffffff;
-					j += 2;
+				for (i = j; i < 4; i += 2) {
+					req.list[i] = 0xffffffff;
 				}
-				if (i) {
+				if (j) {
 					h = fcn_004c5530(&req);
 					if (h != -1) {
 						while (!fcn_004c4450(h)) {

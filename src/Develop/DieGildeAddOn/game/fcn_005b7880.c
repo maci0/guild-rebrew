@@ -98,6 +98,7 @@ typedef struct {
 #define GUI(i) (((D2_CONTROL_TL*) g_1015ea0)[i])
 
 extern int lpGebaeudePROT;
+extern unsigned char g_773d75;
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 void* __cdecl fcn_00534c40(unsigned int, int, int, ...);
@@ -278,8 +279,8 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 			if (fcn_00526010(
 			        (void*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
 						]),
-			        fcn_0050b750(n, *(unsigned char*) 0x773d75),
-			        *(unsigned char*) 0x773d75)) {
+			        fcn_0050b750(n, g_773d75),
+			        g_773d75)) {
 				f.pIt = (int*) &f.rows[0].obj;
 				f.pg = f.cnt;
 				while (f.pg > 0) {
@@ -288,11 +289,10 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 						fcn_004c4eb0(0x6ac2bc);
 						fcn_004c5150(
 						    *(int*) (p + 4), -1,
-						    *(unsigned char*) 0x773d75,
+						    g_773d75,
 						    fcn_0050b750(
 						        perRow,
-						        *(unsigned char*)
-						            0x773d75));
+						        g_773d75));
 						fcn_004c54c0(
 						    *(int*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*)
 						                   0x774970
@@ -309,8 +309,8 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 			    -1,
 			    *(int*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
 						] + 4),
-			    *(unsigned char*) 0x773d75,
-			    fcn_0050b750(n, *(unsigned char*) 0x773d75));
+			    g_773d75,
+			    fcn_0050b750(n, g_773d75));
 		}
 	L7e3d:
 		n = f.cnt;

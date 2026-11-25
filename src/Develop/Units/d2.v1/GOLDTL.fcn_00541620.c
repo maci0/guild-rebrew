@@ -238,8 +238,8 @@ void __cdecl fcn_00541620(void)
 	if (*(char*) (k + 0x7f4e06) != 0 || *(char*) (k + 0x7f4e09) != 0) {
 		fcn_004fcda0(((unsigned short)g_774970), 0, v1d0);
 		k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
-		b = *(unsigned char*) (k + 0x7f4e06);
 		h1f0 = (-(*(char*) (k + 0x7f4ca9) != 0) & 0x28) + 0x253;
+		b = *(unsigned char*) (k + 0x7f4e06);
 		if (b != 0) {
 			io_AppendText(0x2049, (int) b + h1f0, v1d0[1]);
 		}

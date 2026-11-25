@@ -90,7 +90,7 @@ int __cdecl fcn_004a6210(char* actor, char* a1, int a2)
 	bounds[3] = 0.7853982f;
 	if (fcn_005ea4d0(origin, target, bounds, &angle, &other, &trajectory,
 		velocity, direction, normal) != 0) return 0;
-	state = (int) ((trajectory - bounds[0]) * g_662cf8 / (bounds[1] - bounds[0]));
+	state = (int) ((trajectory - bounds[0]) * 100.0f / (bounds[1] - bounds[0]));
 	spread = fcn_004f0eb0(col, state, row + 1);
 	if (spread > *(float*) (p + 2 + row)) return 0;
 	if (fcn_004f0ff0((int) actor, col, state, row + 1, &res.amount, &res.cost) == 0) return 0;

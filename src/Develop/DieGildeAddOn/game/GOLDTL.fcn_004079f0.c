@@ -69,13 +69,13 @@ void __cdecl ch_ExecuteTurn90(char* task)
 		return;
 	}
 	if (*(int*) (task + 0xc) == 0) {
-		angle = (float) *(int*) (task + 0x30) * *(float*) 0x662900;
+		angle = (float) *(int*) (task + 0x30) * 0.017453292f;
 		if (*(int*) (task + 0x34) != 0) {
 			fcn_00455140(*(char**) (owner + 0x34), g_662d40, dir.v);
 			angle = -fcn_00451380(g_662d40, dir.v) - angle;
 			if (angle > 3.1415927f) {
 				angle -= 6.2831855f;
-			} else if (angle < *(float*) 0x6628f8) {
+			} else if (angle < -3.1415927f) {
 				angle += 6.2831855f;
 			}
 		} else {
@@ -87,7 +87,7 @@ void __cdecl ch_ExecuteTurn90(char* task)
 			*(float*) (task + 0x20) = *(float*) (*(char**) (owner + 0x34) + 0x8c);
 		}
 		if (!(angle >= 0.2)) {
-			if (angle < *(double*) 0x6628e8) {
+			if (angle < -0.2) {
 				*(char**) (owner + 0x70) = ch_AttachAni(*(char**) (task + 0x14),
 									 "bewegung/dreh_90_rechts", 1);
 			}

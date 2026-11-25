@@ -20,6 +20,7 @@ extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_774654;
 extern int g_7746a0;
+extern char g_7e23e3;
 
 typedef struct {
 	float a;
@@ -214,7 +215,7 @@ slot_found:
 				    (Vec3 *) (d3_ActiveCamera + 0x120), 0x50, 8);
 				if (fcn_0053b1b0()) {
 					if (d2_ShowChooseProfessionDialog(0xc6) &&
-					    fcn_0053b6b0(*(unsigned char *) 0x7e23e3)) {
+					    fcn_0053b6b0((unsigned char) g_7e23e3)) {
 						g_774654 = 1;
 						ret = 1;
 					} else if (!ret) {

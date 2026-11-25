@@ -17,6 +17,7 @@ typedef struct {
 } Window;
 
 extern int g_774818;
+extern unsigned char g_77534c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6a3550[];
 #include "client_types.h"
@@ -185,8 +186,8 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 	GetPrivateProfileStringA("General", "Language", "german", (char*) 0x679888, 0x40, (char*) 0x7e22c0);
 	main_SetLanguageByName((char*) 0x679888);
 	*(int*) 0x77492c = GetPrivateProfileIntA("General", "show_intro", 0, (char*) 0x7e22c0);
-	*(unsigned char*) 0x77534c = (unsigned char) GetPrivateProfileIntA("Gfx", "cur_res", 0, (char*) 0x7e22c0);
-	i = *(unsigned char*) 0x77534c;
+	g_77534c = (unsigned char) GetPrivateProfileIntA("Gfx", "cur_res", 0, (char*) 0x7e22c0);
+	i = g_77534c;
 	q = (char*) 0x6acf68 + i * 8;
 	*(int*) 0x6acf80 = *(int*) q;
 	*(int*) 0x6acf84 = *(int*) (q + 4);

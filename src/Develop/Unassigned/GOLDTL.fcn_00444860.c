@@ -119,7 +119,7 @@ unsigned char __cdecl fcn_00444860(float x, float y, int obj, int index,
 		return 0;
 	if (fr.ia == fr.ib || fr.ia == fr.ic || fr.ib == fr.ic)
 		return 0;
-	for (id = 0; id == fr.ia || id == fr.ib || id == fr.ic; id++)
+	for (id = 0; id == fr.ib || id == fr.ia || id == fr.ic; id++)
 		;
 
 	ax = fr.ctx.pos[fr.ia][0];

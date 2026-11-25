@@ -239,9 +239,10 @@ common:
 				unsigned short hsel = *(unsigned short*) (*(int*) (rec + 0x16c) + 0x27);
 				if (hid != hsel && hid != 0xffff && (e[0x5a] & 1) == 0
 				    && cat != 3 && cat != 5 && cat != 0) {
-					int q = *(int*) ((unsigned int) hid * 0x21c + 0x7f4e0c);
+					ENTITY_RECORD* candidate = &((ENTITY_RECORD*) g_7f4ca0)[hid];
+					int q = (int) candidate->unk_16c;
 					if ((q == 0 || *(unsigned short*) (q + 0x27) != hsel)
-					    && *(unsigned char*) ((unsigned int) hid * 0x21c + 0x7f4ca2) < 8) {
+					    && candidate->entity_state < 8) {
 						int node = *(int*) (e + 0x61);
 						if (node == 0 || fcn_004fa6f0(node + 0x4c, &cx, &cy) == 0) {
 							factor = 0;
