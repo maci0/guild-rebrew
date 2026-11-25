@@ -19,20 +19,30 @@ shared source tree and reproduce the raw MSVC6 builds of `server.dll`,
 <a id="data-verification"></a>
 
 The existing server build matches its reference. The most recent release gate
-passed at the [1.16.0 checkpoint](docs/releases/1.16.0.md#validation). Both client
+passed at the [1.17.0 checkpoint](docs/releases/1.17.0.md#validation). Both client
 builds use placeholders and differ from their references. The charts show stored
 verdicts and measurements of existing builds. [Current measurements and open work](docs/TODO.md)
-
-![Code-byte accounting, C function matches and raw-file comparison for each target](docs/assets/reconstruction-status.svg)
 
 Code accounting includes libraries and padding. C function matches count object
 `EXACT`, linked `EXACT` and `RELOC` for game functions, excluding whole-function
 assembly.
 
 <details>
-<summary>Function map and data verification</summary>
+<summary>Reconstruction metrics: code accounting, C function matches and raw-file comparison</summary>
+
+![Code-byte accounting, C function matches and raw-file comparison for each target](docs/assets/reconstruction-status.svg)
+
+</details>
+
+<details>
+<summary>Function map: C matches, libraries, assembly and unfinished functions</summary>
 
 ![Address-ordered function map marking C matches, libraries, assembly and unfinished functions](docs/assets/function-map.svg)
+
+</details>
+
+<details>
+<summary>Data verification: initialized bytes, data records and exact placement</summary>
 
 ![Verified initialized data bytes, verified data records and exact placement](docs/assets/data-verification.svg)
 
