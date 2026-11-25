@@ -47,9 +47,12 @@ what the subscriptions billed.
 
 - **Success:** functions that reach `RELOC` or `EXACT` in a committed batch, over the 30 rows.
   Rises to `NEAR_MATCHING` and held-back keeps are reported beside it.
-- **Cost:** every turn's uncached input, output and cached input tokens, priced as above. Turn
-  records come from the agent host's per-turn usage log; Codex runs use Codex's own session logs,
-  because the host log records only a Codex agent's first turn.
+- **Cost:** uncached input, output and cached input tokens of the lane's whole session, priced as
+  above. Sources: Codex rollouts, Claude Code transcripts, OpenCode's session totals, and
+  Antigravity's conversation databases (`gen_metadata`, protobuf field 1.4, decoded without a
+  published schema; 7 of 9 turns the agent host recorded for lanes 80 and 81 equal runs of
+  generations exactly). The agent host's own per-turn log is not used: it drops interrupted turns.
+  Claude cache writes are priced as uncached input.
 - **Value:** API-equivalent dollars per `RELOC`/`EXACT`. Lower is better.
 
 ## Known limits
@@ -60,6 +63,48 @@ what the subscriptions billed.
 - Every row was tried before by earlier matching rounds, so all models work leftovers. Absolute
   rates are lower than on fresh rows; the comparison between models is what the round measures.
 - Usage limits can park a model before it finishes; its rate then covers fewer rows.
+
+## Ladder (provisional)
+
+Which model to try first on a function, and when to hand it on. Trying rungs in order of successes
+per dollar costs least per match when failures at one rung say little about the next; that
+independence is assumed, not measured. Snapshot of round 1 at 07:20 UTC on 2026-11-25, before
+batch r5b90; costs include work whose keeps were not committed yet.
+
+| Model | Rows tried | `RELOC`/`EXACT` | Dollars per row | Matches per dollar |
+| --- | ---: | ---: | ---: | ---: |
+| Claude Opus 5.5 | 24 | 4 | 0.98 | 0.17 |
+| Claude Sonnet 5.5 | 30 | 1 | 0.25 | 0.13 |
+| GPT 6.2 Sol | 30 | 1 | 0.40 | 0.08 |
+| Gemini 4 neon | 30 | 2 | 1.12 | 0.06 |
+| Gemini 4 argon | 20 | 1 | 1.08 | 0.05 |
+| Gemini 4 hydrogen | 30 | 1 | 0.89 | 0.04 |
+| GPT 6.1 Terra | 30 | 0 | 0.21 | 0 |
+| MiniMax M3.1 flash | 30 | 0 | 0.04 | 0 |
+| GPT 6 Luna, Claude Haiku 5.5, DeepSeek v4.1 flash | 90 | 0 | 0.02 | 0 |
+
+Rungs to test:
+
+1. **No model:** `rebrew cross-import` from a matched twin, flag sweeps and Rebrew's genetic search.
+2. **A model at about 2 cents per row.** None of the four cheapest matched one of 120 hard rows. At
+   that price a 1% success rate would already beat every row of the table, and 0 of 120 does not
+   rule out 2%.
+3. **A middle rung:** Sonnet, Sol or a Gemini model.
+4. **Opus**, for rows the others failed.
+
+Handover rules:
+
+- After two or three trials without a rise in aligned pairs, hand the row on with its trials and
+  notes. The next model reads them and repeats none.
+- A model does not retry a row it already failed.
+- A held-back keep (one that lowers a stored status) counts as a failure, and the row moves on.
+- Prices here are API-equivalent. Subscription limits also decide the rung: a model whose quota is
+  scarce is kept for rows that need it.
+
+Not settled: the order rests on one to four matches per model, all on rows earlier rounds had
+tried. Round 2 measures first attempts, drawn from the Gold functions that have no source yet
+(2,110 of 4,768 inventory entries on 2026-11-25). In earlier work Gemini 4 hydrogen's committed
+`RELOC`/`EXACT` results came mostly from first bodies: 18 of 27 started from `STUB` or no verdict.
 
 ## Results
 
