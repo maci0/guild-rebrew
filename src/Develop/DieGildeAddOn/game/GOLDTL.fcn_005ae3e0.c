@@ -16,7 +16,7 @@ void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl fcn_005c72f0(char*);
 void __cdecl fcn_005c79a0(char*);
 
-void __cdecl fcn_005ae3e0(char* e)
+void __cdecl d2_RunWachstubeMenu(char* e)
 {
 	int lager;
 	int transport;
@@ -28,7 +28,7 @@ void __cdecl fcn_005ae3e0(char* e)
 	ausruesten = 0;
 	regen = 0;
 	fcn_005338a0();
-	while (main_RunFrameLoop((void*) fcn_005ae3e0, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunWachstubeMenu, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			ausruesten = RegisterStatusText("contact_AUSRUESTEN", g_14ad118, 0xd);
 			regen = RegisterStatusText("contact_REGENERATION", g_14ad168, 0x17);

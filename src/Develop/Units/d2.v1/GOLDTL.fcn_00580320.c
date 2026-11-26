@@ -10,8 +10,8 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_00423460(int);
-void __cdecl fcn_004237f0(int, int);
-int __cdecl fcn_004c3030(int, int, int, int);
+void __cdecl sb_StopVoice(int, int);
+int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
 void __cdecl fcn_00580320(void)
 {
@@ -24,11 +24,11 @@ void __cdecl fcn_00580320(void)
 		if (*(int*) (g_665f08[6] + 0x18) != 0) {
 			if (g_665f08[5] != 0) {
 				if (fcn_00423460(g_665f08[5]) != 0) {
-					fcn_004237f0(g_665f08[5], 0);
+					sb_StopVoice(g_665f08[5], 0);
 				}
 				g_665f08[5] = 0;
 			}
-			g_665f08[5] = fcn_004c3030(-7, 0, *(int*) (g_665f08[6] + 0x18), -1);
+			g_665f08[5] = d3snd_PlaySoundEffect(-7, 0, *(int*) (g_665f08[6] + 0x18), -1);
 		}
 	}
 }

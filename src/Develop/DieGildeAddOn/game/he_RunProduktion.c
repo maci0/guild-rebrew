@@ -27,7 +27,7 @@ float __cdecl fcn_004ff040(void* objekt);
 float __cdecl ahm_CalcRecipeProductivityBonus(char* objekt, int ware);
 int __cdecl fcn_005c6270(char* objekt, int id);
 int __cdecl fcn_005c62c0(char* objekt, int id);
-int __cdecl fcn_005743b0(char* objekt);
+int __cdecl he_HasZigeunerAction0x9f(char* objekt);
 void __cdecl gm_CountBuildingWorkers(char* objekt);
 float __cdecl fcn_0050fdb0(int besitzer, int anzahl, int* ids);
 struct unit* __cdecl he_StartHandlungSearch(int anzahl, ...);
@@ -210,7 +210,7 @@ warten:
             }
             if (anzahl != 0) {
                 *(float*) (e + 0xd4) = summe / anzahl;
-                if (fcn_005743b0((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)])) {
+                if (he_HasZigeunerAction0x9f((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)])) {
                     *(float*) (e + 0xd4) *= 0.9f;
                 }
             }

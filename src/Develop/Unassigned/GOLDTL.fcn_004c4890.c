@@ -4,7 +4,7 @@
 
 void __cdecl fcn_004c5790(int, void*);
 
-void __cdecl fcn_004c4890(void)
+void __cdecl cm_RequestIncreaseGameSpeed(void)
 {
 	char buf[0x7c];
 

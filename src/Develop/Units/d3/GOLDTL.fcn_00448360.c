@@ -24,7 +24,7 @@ int __cdecl vfs_ReadByte(void* stream, void* dst);
 char* __cdecl vfs_ReadCString(void* stream, char* dst);
 int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
-void __cdecl fcn_00401280(void* stream, void* dst);
+void __cdecl vfs_ReadVec3(void* stream, void* dst);
 void __cdecl ReportClientMessage(const char* msg);
 void __cdecl d3_SetFog(float a, float b, int c);
 void __cdecl fcn_00438b40(char* object, int* vector);
@@ -93,12 +93,12 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 	if (version >= 0x3a6c000b) {
 		vfs_ReadCString(s, name);
 		fcn_004011d0(s, &discarded);
-		fcn_00401280(s, &vec);
+		vfs_ReadVec3(s, &vec);
 		g_67bbdc.x = vec.x;
 		g_67bbdc.y = vec.y;
 		g_67bbdc.z = vec.z;
 		if (version >= 0x3a6c00b5) {
-			fcn_00401280(s, &vec);
+			vfs_ReadVec3(s, &vec);
 			g_6b86c4.x = vec.x;
 			g_6b86c4.y = vec.y;
 			g_6b86c4.z = vec.z;
@@ -132,13 +132,13 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 			index = 0;
 			if (rows > 0) {
 				do {
-					fcn_00401280(s, &vec);
+					vfs_ReadVec3(s, &vec);
 					((D3_SCENE_SLOT*)g_1041d80)[index].a.x = vec.x;
 					((D3_SCENE_SLOT*)g_1041d80)[index].a.y = vec.y;
 					((D3_SCENE_SLOT*)g_1041d80)[index].a.z = vec.z;
 					if (version >= 0x3a6c00b3) {
 						if (version >= 0x3a6c00b5) {
-							fcn_00401280(s, &vec);
+							vfs_ReadVec3(s, &vec);
 							((D3_SCENE_SLOT*)g_1041d80)[index].b.x = vec.x;
 							((D3_SCENE_SLOT*)g_1041d80)[index].b.y = vec.y;
 							((D3_SCENE_SLOT*)g_1041d80)[index].b.z = vec.z;

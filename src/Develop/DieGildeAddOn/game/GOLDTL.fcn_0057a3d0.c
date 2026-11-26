@@ -30,7 +30,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 int __cdecl fcn_0050c830(pos14_7f4c00*, pos14_7f4c00*, char*);
 
-void __cdecl fcn_004c4670(int, int, short, unsigned char*);
+void __cdecl cm_AppendPacketFieldValue(int, int, short, unsigned char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl fcn_0050dc90(char*);
@@ -71,7 +71,7 @@ void __cdecl fcn_0057a3d0(char* e)
 				add = (unsigned char) (252.0f - *p);
 			}
 			cm_BeginPacketFieldDelta(who, *(int*) (who + 4));
-			fcn_004c4670(1, 1, (short) (who - g_aed32c + *(int*) (e + 0xb0) + 0x80), &add);
+			cm_AppendPacketFieldValue(1, 1, (short) (who - g_aed32c + *(int*) (e + 0xb0) + 0x80), &add);
 			fcn_004c5360();
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(pos14_7f4c00*) (e + 0x60) = gm_GameTime;

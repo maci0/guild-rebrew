@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern int __cdecl ReportClientMessage(char* text);
-int __cdecl fcn_00429e60(char* name);
+int __cdecl evt_FindCommand(char* name);
 
 /* ADDRESS: GOLD 0x0042b5b0 */
 int __cdecl fcn_0042b5b0(char* name, int handlerAddress, int handlerKind, int n, ...)
@@ -17,7 +17,7 @@ int __cdecl fcn_0042b5b0(char* name, int handlerAddress, int handlerKind, int n,
 		ReportClientMessage((char*) 0x5f8a84);
 		return 0;
 	}
-	if (fcn_00429e60(name) != 0) {
+	if (evt_FindCommand(name) != 0) {
 		ReportClientMessage((char*) 0x5f8a50);
 		return 0;
 	}

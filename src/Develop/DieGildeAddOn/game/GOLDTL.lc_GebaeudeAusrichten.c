@@ -90,8 +90,8 @@ char* __cdecl _strupr(char*);
 int __cdecl fcn_00597ff0(int, char*);
 int __cdecl d3_CollectUnusedSceneObjects(char*, void**);
 void* __cdecl fcn_005987c0(float*, void**);
-void __cdecl fcn_00598740(float*, char*);
-void __cdecl fcn_00598860(char*, float*);
+void __cdecl d3_ComputeObjectYawToTarget(float*, char*);
+void __cdecl d3_SetObjectGroundPosition(char*, float*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 void* __cdecl fcn_004488e0(char*, int, int);
 int __cdecl vfs_ResolvePath(char*, int, int, char*);
@@ -257,7 +257,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 			pNaechster = (char*) fcn_005987c0(f.fPos, (void**) f.pListe);
 			f.pPrev = pNaechster;
 			if (pNaechster != 0) {
-				fcn_00598740(f.fObjektPos, pNaechster);
+				d3_ComputeObjectYawToTarget(f.fObjektPos, pNaechster);
 				d3_SetObjectRotation(pAktuell, f.fObjektPos);
 				fcn_004143b0(pAktuell, f.iRot, 0);
 				fcn_00533a40((char*) 0x677c94);
@@ -300,7 +300,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		if (pTemp != 0) {
 			d3_AnimateCameraToObject(pTemp);
 			d3_TransformPoint(pTemp, (float*) (pTemp + 0x4c), f.fPos);
-			fcn_00598860(pAktuell, f.fPos);
+			d3_SetObjectGroundPosition(pAktuell, f.fPos);
 		}
 		else {
 			if (f.iFlag44 != 0) {
@@ -329,7 +329,7 @@ platzieren:
 			d3_TransformPoint(pNaechster, (float*) (pNaechster + 0x4c), f.fPos);
 			f.pPrev = pNaechster;
 			fcn_00438b40(pAktuell, f.fPos);
-			fcn_00598740(f.fAusrichtung, pNaechster);
+			d3_ComputeObjectYawToTarget(f.fAusrichtung, pNaechster);
 			d3_SetObjectRotation(pAktuell, f.fAusrichtung);
 		}
 		if (g_14ce8e0 != 0) {

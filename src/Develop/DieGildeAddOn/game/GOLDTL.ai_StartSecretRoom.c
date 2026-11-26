@@ -12,7 +12,7 @@ typedef struct Msg {
 char* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
-int __cdecl fcn_00577850(int id);
+int __cdecl he_HasActiveAction0x99(int id);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl ai_PrepareSecretRoomAction0(char* e, Msg* a, Msg* b);
 int __cdecl ai_SetupSecretRoomMode1(char* e, Msg* a, Msg* b);
@@ -49,7 +49,7 @@ int __cdecl ai_StartSecretRoom(int kind, char* e, int busy, Msg* out1, Msg* out2
 		}
 		return r;
 	}
-	if (fcn_00577850(*(int*) (t + 1)) != 0) {
+	if (he_HasActiveAction0x99(*(int*) (t + 1)) != 0) {
 		return 0;
 	}
 	switch (gm_RandomMod(4)) {

@@ -18,7 +18,7 @@ int __cdecl main_RunFrameLoop(void* fn, int msg);
 int __cdecl fcn_00471e30(int dlg);
 int __cdecl d2_GetControlValue(int h);
 int __cdecl d2_CheckActionBlocker(void* tbl, int player);
-int __cdecl fcn_004946f0(void* tbl, int a0, int player);
+int __cdecl gm_CalcBecircenFavor(void* tbl, int a0, int player);
 void __cdecl fcn_004c6ae0(int a, int b);
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
 
@@ -57,7 +57,7 @@ int __cdecl d2_ShowBecircenDialog(int entity)
                 player = d2_GetControlValue(wnd);
                 if (d2_CheckActionBlocker((void*) (0x7f4ca0 + 540 * *(u16*) 0x774970),
                                  player) != 0) {
-                    t = fcn_004946f0((void*) (0x7f4ca0 +
+                    t = gm_CalcBecircenFavor((void*) (0x7f4ca0 +
                                               540 * *(u16*) 0x774970),
                                      entity, player);
                     fcn_004c6ae0(*(int*) (0x7f4ca4 + 540 * *(u16*) 0x774970),

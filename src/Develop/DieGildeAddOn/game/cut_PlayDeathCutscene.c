@@ -5,7 +5,7 @@
 
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004e4e90(char* s);
-int __cdecl fcn_004c3100(char* s, int a);
+int __cdecl sb_LoadLocalizedSampleBank(char* s, int a);
 void __cdecl fcn_004e4730(char* s);
 void __cdecl fcn_004e4b60(char* s);
 void __cdecl fcn_00445f50(int a, int b, float f, int c);
@@ -14,7 +14,7 @@ int __cdecl fcn_004e44b0(char* s, void* p);
 int __cdecl cut_WaitForTimeoutOrInput(int a, int b, int c);
 void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
 void __cdecl main_RunFrameLoop(int a, int b);
-void __cdecl fcn_004234e0(int a, char* s, int b, int c, int d, int e, int f);
+void __cdecl sb_PlayVoice(int a, char* s, int b, int c, int d, int e, int f);
 int __cdecl fcn_005095d0(void* p, void* buf);
 void __cdecl io_FormatTextBuffer(char* buf, ...);
 int __cdecl d2_ShowMessageBox(void* buf, int n);
@@ -73,7 +73,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 		i++;
 	}
 	fcn_004e4e90((char*) 0x68bd14);
-	handle = fcn_004c3100((char*) 0x68d2d0, 1);
+	handle = sb_LoadLocalizedSampleBank((char*) 0x68d2d0, 1);
 	fcn_004e4730((char*) 0x68d2c8);
 	fcn_004e4b60((char*) 0x68d2b8);
 	fcn_00445f50(state, 0, 1.0f, 1);
@@ -106,7 +106,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			cut_WaitForTimeoutOrInput(0x2cec, 0, 0);
 		}
 	}
-	fcn_004234e0(0, (char*) 0x68d288, 1, 0x3f, 0x7f, 0, 0);
+	sb_PlayVoice(0, (char*) 0x68d288, 1, 0x3f, 0x7f, 0, 0);
 	*(int*) 0x7725c8 = 0;
 	r = fcn_005095d0(obj, &yslot);
 	if (r != 0) {

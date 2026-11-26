@@ -40,7 +40,7 @@ void __cdecl d2_ShowPersonalbuch(unsigned char*, char*);
 void __cdecl fcn_005ada30(unsigned char*);
 void __cdecl fcn_005cf560(unsigned char*);
 
-void __cdecl fcn_005ae1b0(unsigned char* arg)
+void __cdecl d2_RunRaeuberlagerMenu(unsigned char* building)
 {
 	int a;
 	int b;
@@ -60,7 +60,7 @@ void __cdecl fcn_005ae1b0(unsigned char* arg)
 	f = 0;
 	e = 0;
 	fcn_005338a0();
-	t = &((Shop*)lpGebaeudePROT)[arg[0]];
+	t = &((Shop*)lpGebaeudePROT)[building[0]];
 	if (t->x247 >= 2) {
 		r = fcn_00445600(0, 0xc0, 0, s_6ab260);
 		if (r != 0) {
@@ -73,7 +73,7 @@ void __cdecl fcn_005ae1b0(unsigned char* arg)
 			d3_SetSubtreeVisible(r, 0);
 		}
 	}
-	if (main_RunFrameLoop((void*) fcn_005ae1b0, 0x67fff) != 0) {
+	if (main_RunFrameLoop((void*) d2_RunRaeuberlagerMenu, 0x67fff) != 0) {
 		do {
 			if (g_7746d8 & 0x200) {
 				a = RegisterStatusText(s_6ab24c, g_14abaa4, 0x17);
@@ -90,27 +90,27 @@ void __cdecl fcn_005ae1b0(unsigned char* arg)
 			}
 			if (g_7746a0 != 0) {
 				if (g_7746a0 == a) {
-					fcn_005ad5a0(arg);
+					fcn_005ad5a0(building);
 				}
 				else if (g_7746a0 == b) {
-					fcn_005ad950(arg);
+					fcn_005ad950(building);
 				}
 				else if (g_7746a0 == c) {
-					fcn_005adfa0(arg);
+					fcn_005adfa0(building);
 				}
 				else if (g_7746a0 == d) {
-					fcn_005ae000(arg);
+					fcn_005ae000(building);
 				}
 				else if (g_7746a0 == f) {
-					d2_ShowPersonalbuch(arg, s_6aa34c);
+					d2_ShowPersonalbuch(building, s_6aa34c);
 				}
 				else if (g_7746a0 == e) {
-					fcn_005ada30(arg);
+					fcn_005ada30(building);
 				}
 				else if (g_7746a0 == g) {
-					fcn_005cf560(arg);
+					fcn_005cf560(building);
 				}
 			}
-		} while (main_RunFrameLoop((void*) fcn_005ae1b0, 0x67fff) != 0);
+		} while (main_RunFrameLoop((void*) d2_RunRaeuberlagerMenu, 0x67fff) != 0);
 	}
 }

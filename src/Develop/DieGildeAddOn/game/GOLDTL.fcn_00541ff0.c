@@ -41,7 +41,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 #include "client_packet_builder.h"
-void __cdecl fcn_004c4670(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl gm_GetOppositeStatIndex(int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -67,7 +67,7 @@ void __cdecl gm_UpdateEntityAgingAndTraining(int index)
 		if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].ptr_16c) != 0 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 5 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 1
 			|| (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 2 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 4) {
 			cm_BeginPacketFieldDelta((char*) e, e->id);
-			fcn_004c4670(4, 1, 0x174, &one);
+			cm_AppendPacketFieldValue(4, 1, 0x174, &one);
 			fcn_004c5360();
 		}
 		if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].stat_category) != 0) {
@@ -97,7 +97,7 @@ void __cdecl gm_UpdateEntityAgingAndTraining(int index)
 		e = ((Entity*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[index]);
 		flag = 1;
 		cm_BeginPacketFieldDelta((char*) e, e->id);
-		fcn_004c4670(4, 1, 0x174, &flag);
+		cm_AppendPacketFieldValue(4, 1, 0x174, &flag);
 		fcn_004c5360();
 	}
 }

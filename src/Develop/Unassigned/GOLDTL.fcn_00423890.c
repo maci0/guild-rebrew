@@ -4,7 +4,7 @@ extern int g_6b7d7c;
 
 int __cdecl fcn_0042a920(int, int);
 
-int __cdecl fcn_00423890(int* state, int value)
+int __cdecl sb_SetVoiceVolume(int* state, int value)
 {
 	int r;
 

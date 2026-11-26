@@ -4,7 +4,7 @@ extern Entry680bd0 g_680bd0[48];
 
 /* ADDRESS: GOLD 0x004b3ae0 */
 /* ADDRESS: GOLDTL 0x004b3c50 */
-char* __cdecl fcn_004b3c50(int key)
+char* __cdecl gm_LookupMissionSpec(int key)
 {
 	int i;
 	int entry;

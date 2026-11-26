@@ -11,7 +11,7 @@ extern float g_665368;
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c6ba0(int, int, int);
 
-int __cdecl fcn_005dcf40(unsigned char* e, int idx)
+int __cdecl gm_IncreaseEntitySkill(unsigned char* e, int idx)
 {
 	int cur;
 	unsigned char add;

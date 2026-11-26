@@ -2,7 +2,7 @@ extern char* g_entity_type_table;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00506a70(void*);
-void __cdecl fcn_005b2a00(void*, void*);
+void __cdecl he_NotifyStraftatExpired(void*, void*);
 void __cdecl gm_FreeObjectListRecursive(int);
 void __cdecl ch_DestroyCharacter(int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -67,7 +67,7 @@ void __cdecl gm_KillSpieler(int slotIndex, int removeMode)
 			v10 = (int*) ((char*) v10 + 0x2d);
 		} while ((int) v10 < 0x9a9216);
 		if (v15 != 0 && e != 0 && e != ent) {
-			fcn_005b2a00(e, ent);
+			he_NotifyStraftatExpired(e, ent);
 		}
 	}
 	gm_FreeObjectListRecursive((int) (ent + 0x178));

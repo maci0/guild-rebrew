@@ -31,7 +31,7 @@ extern char g_14cb3c0[];
 
 void __cdecl evt_ReadToken(int lex, struct tok_427280* t);
 int __cdecl evt_EvaluateExpression(int a);
-int __cdecl fcn_004263b0(char dir);
+int __cdecl evt_SkipBlock(char dir);
 int __cdecl evt_SeekSemicolon(void);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
@@ -79,7 +79,7 @@ int __cdecl evt_ParseIfHead(void)
 			if (num != 8)
 				return 0;
 			LEX_427280 = pos;
-			fcn_004263b0(type);
+			evt_SkipBlock(type);
 		} else {
 			if (evt_SeekSemicolon() == 0) {
 				evt_LogScriptError(evt_CurrentScript, LEX_427280, "Syntax error: ';' missing!");

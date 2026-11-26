@@ -6,7 +6,7 @@ extern int g_67a370;
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, int);
 void __cdecl d3_MatchObjectNameCallback(void);
 
-int __cdecl fcn_00412eb0(int a1, int flags)
+int __cdecl d3_FindSceneObjectByName(int a1, int flags)
 {
 	g_6b5cc4 = 0;
 	if (flags & 2) {

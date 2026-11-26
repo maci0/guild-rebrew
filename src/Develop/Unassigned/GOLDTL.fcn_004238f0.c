@@ -5,7 +5,7 @@ extern int g_6b7d7c;
 
 void __cdecl msx_SetSampleLoopCount(int, int);
 
-void __cdecl fcn_004238f0(int* p, int value)
+void __cdecl sb_SetVoiceLoopCount(int* p, int value)
 {
 	if (*(int*) ((char*)&g_6b7d7c) == 0) {
 		return;

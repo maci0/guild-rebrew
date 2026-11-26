@@ -27,7 +27,7 @@ void __cdecl fcn_005a0630(char*);
 void __cdecl d2_ShowWeinkellerDialog(char*);
 void __cdecl fcn_0059fe60(char*);
 
-void __cdecl fcn_005a07c0(char* e, int a2)
+void __cdecl d2_RunCharacterActionsHud(char* e, int mode)
 {
 	int handwerk;
 	int suicide;
@@ -37,7 +37,7 @@ void __cdecl fcn_005a07c0(char* e, int a2)
 	int meister;
 
 	fcn_005338a0();
-	while (main_RunFrameLoop((void*) fcn_005a07c0, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunCharacterActionsHud, 0x67fff) != 0) {
 		if (d2_IsTutorialActionAllowed(8) == 1) {
 			verhandeln = RegisterStatusText("contact_VERHANDELN", g_14ad318, 0xc);
 			handwerk = RegisterStatusText("contact_HANDWERKSKUNST", g_14ad2e0, 0xc);
@@ -57,9 +57,9 @@ void __cdecl fcn_005a07c0(char* e, int a2)
 		}
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == verhandeln) {
-				d2_RunTalenteDialog(e, a2, 0);
+				d2_RunTalenteDialog(e, mode, 0);
 			} else if (g_7746a0 == handwerk) {
-				d2_RunTalenteDialog(e, a2, 1);
+				d2_RunTalenteDialog(e, mode, 1);
 			} else if (g_7746a0 == beweis) {
 				fcn_005c0020(e);
 			} else if (g_7746a0 == spionage) {

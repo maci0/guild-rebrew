@@ -26,7 +26,7 @@ void __cdecl fcn_005167c0(unsigned char*, int);
 void __cdecl d3_SetupInteriorScene(unsigned char*, int);
 void __cdecl fcn_00597ec0(unsigned char*);
 
-void __cdecl fcn_0059a0e0(void)
+void __cdecl d3_UpdateBuildingInteriorState(void)
 {
 	int x;
 	unsigned char* e;

@@ -13,7 +13,7 @@ short* __cdecl fcn_00502cd0(int, int, int, int);
 short* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_00438b40(char*, char*);
 void __cdecl d3_SetObjectRotation(char*, char*);
-void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
+void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 
 void __cdecl gm_ChangeBuildingRoom(int n, short v)
 {
@@ -41,5 +41,5 @@ void __cdecl gm_ChangeBuildingRoom(int n, short v)
 	d3_SetObjectRotation(d3_ActiveCamera, ((char*)d3_CameraTargetRotation));
 	d3_CameraHorizontalIndex = 0;
 	d3_CameraVerticalStep = 0;
-	fcn_004234e0(g_7747c8, g_6a30d4, 1, 0x3f, 0x7f, 0, 0);
+	sb_PlayVoice(g_7747c8, g_6a30d4, 1, 0x3f, 0x7f, 0, 0);
 }

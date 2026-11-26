@@ -4,7 +4,7 @@
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-float __cdecl fcn_004187f0(float lo, float hi, float x)
+float __cdecl d3_Smoothstep(float lo, float hi, float x)
 {
 	float t;
 

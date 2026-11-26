@@ -25,7 +25,7 @@ void __cdecl fcn_005782f0(char*, int, int);
 void __cdecl fcn_005b2f60(char*);
 void __cdecl fcn_005b2fb0(char*);
 float __cdecl gm_GetEntitySkill(char*, int);
-void __cdecl fcn_005b3000(char*, char*, char*, int);
+void __cdecl he_NotifyHauchDesVerfalls(char*, char*, char*, int);
 void __cdecl he_ShowFriedhofMessage(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x00578a10 */
@@ -122,7 +122,7 @@ int __cdecl he_RunHauchDesVerfalls(char* event)
 		}
 		if (*(int*) (event + 0xbc) != 0) {
 			t = 1.0f - gm_GetEntitySkill(m, 1);
-			fcn_005b3000(tbl, m, n, t + gm_RandomFloat01() > g_6629c8 ? 0 : 1);
+			he_NotifyHauchDesVerfalls(tbl, m, n, t + gm_RandomFloat01() > g_6629c8 ? 0 : 1);
 			*(int*) (event + 0x70) = -1;
 			return;
 		}

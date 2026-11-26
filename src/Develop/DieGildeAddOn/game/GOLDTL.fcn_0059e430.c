@@ -17,7 +17,7 @@ void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl fcn_005cf560(char*);
 void __cdecl fcn_00597ec0(char*);
 
-void __cdecl fcn_0059e430(char* e)
+void __cdecl d2_RunTutorialSchmiedeHud(char* e)
 {
 	int lager;
 	int prod;
@@ -31,7 +31,7 @@ void __cdecl fcn_0059e430(char* e)
 	meister = 0;
 	personal = 0;
 	fcn_005338a0();
-	while (main_RunFrameLoop((void*) fcn_0059e430, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunTutorialSchmiedeHud, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			if (d2_IsTutorialActionAllowed(0x20) == 1) {
 				prod = RegisterStatusText("contact_PRODUKTION_SCHMIEDEN", g_14ad268, 0x13);

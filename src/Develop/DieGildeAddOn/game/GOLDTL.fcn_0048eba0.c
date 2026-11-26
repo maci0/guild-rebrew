@@ -38,7 +38,7 @@ extern char g_7f4ca4[];
 extern char* g_77261c;
 
 unsigned short __cdecl gm_RandomMod(int n);
-void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
+void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
@@ -76,7 +76,7 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 	slot[12].id = 0x2c0;
 	slot[13].id = 0x2be;
 	slot[14].id = 0x2b9;
-	fcn_004a51d0(e, 0xf, slot, &cnt);
+	gm_CheckEntityObjectSlots(e, 0xf, slot, &cnt);
 	if ((cnt.total != 6 || cnt.free != 0) && cnt.blocked != 0xf) {
 		if (cnt.total < 6) {
 			if (cnt.free == 0) {

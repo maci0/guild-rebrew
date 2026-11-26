@@ -22,7 +22,7 @@ typedef struct Area {
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 void __cdecl srv_SeedRandom(int);
-void __cdecl fcn_004b4650(char*, int);
+void __cdecl gm_IncrementMissionActionCount(char*, int);
 int __cdecl gs_AddBeweis(int, int);
 int __cdecl fcn_004f57e0(void);
 void __cdecl gm_AddNeighborhoodLawEffect(int, char, unsigned int*, unsigned int*);
@@ -31,7 +31,7 @@ int __cdecl gm_ResolveEntityById(char**, int, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
-void __cdecl fcn_005b2740(char*, char*);
+void __cdecl he_NotifyCrimeRecorded(char*, char*);
 
 
 /* Copies the crime description of a source record into the crime table,
@@ -60,7 +60,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 	if (idx != -1) {
 		ent = (Straftat*) gm_LookupEntityRecordById(*(int*) (src + 0x26));
 		if (ent != 0 && *(char*) ((char*) ent + 2) == 6) {
-			fcn_004b4650((char*) ent, 0x17);
+			gm_IncrementMissionActionCount((char*) ent, 0x17);
 		}
 		rec = &g_9a3800[idx];
 		memcpy(rec, src + 0x10, 0x2d);
@@ -108,7 +108,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 				px = (char*) gm_LookupEntityRecordById(*(int*) ((char*) ent + 0xc4));
 				if (px != 0) {
 					slot = *(unsigned short*) ((char*) ent + 8);
-					fcn_005b2740(px, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slot]));
+					he_NotifyCrimeRecorded(px, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slot]));
 				}
 			}
 		}

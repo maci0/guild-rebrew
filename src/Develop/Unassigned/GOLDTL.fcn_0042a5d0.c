@@ -8,7 +8,7 @@ extern int g_6b7f90;
 
 int __cdecl msx_FindSampleHandleIndex(int);
 
-int __cdecl fcn_0042a5d0(int a1, int a2, int a3, int a4)
+int __cdecl msx_SetSampleData(int a1, int a2, int a3, int a4)
 {
 	int r = 0;
 

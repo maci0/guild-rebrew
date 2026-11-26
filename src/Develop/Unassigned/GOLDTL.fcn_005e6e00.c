@@ -21,7 +21,7 @@ void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005e6ba0(void);
 int __cdecl fcn_004a6bb0(char *, void *);
 void __cdecl fcn_005e6dd0(void);
-unsigned short __cdecl fcn_004a6f50(void);
+unsigned short __cdecl gm_StepCardGameRound(void);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_005e6d10(int);
 int __cdecl fcn_00526120(char *, int);
@@ -52,7 +52,7 @@ int __cdecl fcn_005e6e00(void)
         fcn_005e6dd0();
         return 0;
     }
-    flags = fcn_004a6f50();
+    flags = gm_StepCardGameRound();
     g_100f1dc = -1;
     do {
         if (g_14ce8e0) g_774654 = 1;
@@ -83,14 +83,14 @@ int __cdecl fcn_005e6e00(void)
                 if (g_100f1dc != -1 && D(0x6ad56c) == D(0x67d370)) {
                     choice = d2_GetControlValue(D(0x6ad580));
                     D(0x77664c) = fcn_0050b750(choice, g_773d75);
-                    flags = fcn_004a6f50();
+                    flags = gm_StepCardGameRound();
                 }
             } else {
                 choice = *(int *)((char *)0x7765a4 + D(0x776650) * 0x34);
                 sprintf(text, (char *)D(0x14b5c5c), choice + 0x30, choice + 0x40);
                 io_AppendText(text);
                 io_FormatTextBuffer(text, 0x4251, D(0x776644)); io_AppendText(text);
-                if (g_100f1dc != -1 && D(0x6ad578) == D(0x67d370)) flags = fcn_004a6f50();
+                if (g_100f1dc != -1 && D(0x6ad578) == D(0x67d370)) flags = gm_StepCardGameRound();
             }
             break;
         case 2:
@@ -103,7 +103,7 @@ int __cdecl fcn_005e6e00(void)
             fcn_005e7b70(1, 3, (void *)0x7765e0);
             fcn_005e7b70(2, 3, (void *)0x776614);
             fcn_005e7b70(0, 3, (void *)0x7765ac);
-            flags = fcn_004a6f50();
+            flags = gm_StepCardGameRound();
             break;
         case 3:
             if (g_100f1dc != -1) {
@@ -112,7 +112,7 @@ int __cdecl fcn_005e6e00(void)
                         choice = d2_GetControlValue(D(0x6ad580));
                         D(0x77664c) = fcn_0050b750(choice, g_773d75);
                     }
-                    flags = fcn_004a6f50();
+                    flags = gm_StepCardGameRound();
                     fcn_005e7b70(0, 4, (void *)0x7765ac);
                     fcn_005e7b70(1, 4, (void *)0x7765e0);
                     fcn_005e7b70(2, 4, (void *)0x776614);
@@ -132,7 +132,7 @@ int __cdecl fcn_005e6e00(void)
                 fcn_005e7b70(2, 4, (void *)0x776614);
                 fcn_005e7b70(0, 4, (void *)0x7765ac);
             }
-            flags = fcn_004a6f50();
+            flags = gm_StepCardGameRound();
             break;
         case 5:
             if (g_100f1dc != -1) {
@@ -141,7 +141,7 @@ int __cdecl fcn_005e6e00(void)
                         choice = d2_GetControlValue(D(0x6ad580));
                         D(0x77664c) = fcn_0050b750(choice, g_773d75);
                     }
-                    flags = fcn_004a6f50();
+                    flags = gm_StepCardGameRound();
                     fcn_005e7b70(0, 4, (void *)0x7765ac);
                     fcn_005e7b70(1, 4, (void *)0x7765e0);
                     fcn_005e7b70(2, 4, (void *)0x776614);
@@ -180,13 +180,13 @@ int __cdecl fcn_005e6e00(void)
                     fcn_00472640(D(0x6ad574), 0);
                     if (D(D(0x1015ea0) + 0x38 + D(0x6ad588) * 0x2f4)) fcn_004a8750(0);
                     else if (D(D(0x1015ea0) + 0x38 + D(0x6ad58c) * 0x2f4)) fcn_004a8750(1);
-                    flags = fcn_004a6f50();
+                    flags = gm_StepCardGameRound();
                     fcn_005e7b70(0, 4, (void *)0x7765ac);
                     fcn_005e7b70(1, 4, (void *)0x7765e0);
                     fcn_005e7b70(2, 4, (void *)0x776614);
                 } else if (D(0x6ad578) == clk) {
                     fcn_00472640(D(0x6ad574), 0);
-                    flags = fcn_004a6f50();
+                    flags = gm_StepCardGameRound();
                     fcn_005e7b70(0, 4, (void *)0x7765ac);
                     fcn_005e7b70(1, 4, (void *)0x7765e0);
                     fcn_005e7b70(2, 4, (void *)0x776614);
@@ -210,7 +210,7 @@ int __cdecl fcn_005e6e00(void)
             if (D(0x776630) != -1) sprintf(text, (char *)D(0x14b5c90), D(0x77660c) + 0x30, D(0x77660c) + 0x40);
             else sprintf(text, (char *)D(0x14b5c94), D(0x77660c) + 0x30, D(0x77660c) + 0x40);
             io_AppendText(text);
-            if (g_100f1dc != -1 && D(0x6ad578) == D(0x67d370)) flags = fcn_004a6f50();
+            if (g_100f1dc != -1 && D(0x6ad578) == D(0x67d370)) flags = gm_StepCardGameRound();
             break;
         case 8:
             d2_SetForm(D(0x6ad568), 4);
@@ -222,7 +222,7 @@ int __cdecl fcn_005e6e00(void)
             fcn_005e7b70(1, 5, (void *)0x7765e0);
             fcn_005e7b70(2, 5, (void *)0x776614);
             fcn_005e7b70(0, 5, (void *)0x7765ac);
-            flags = fcn_004a6f50();
+            flags = gm_StepCardGameRound();
             break;
         case 9:
             if (g_100f1dc != -1) {
@@ -231,7 +231,7 @@ int __cdecl fcn_005e6e00(void)
                         choice = d2_GetControlValue(D(0x6ad580));
                         D(0x77664c) = fcn_0050b750(choice, g_773d75);
                     }
-                    flags = fcn_004a6f50();
+                    flags = gm_StepCardGameRound();
                     fcn_005e7b70(0, 5, (void *)0x7765ac);
                     fcn_005e7b70(1, 5, (void *)0x7765e0);
                     fcn_005e7b70(2, 5, (void *)0x776614);
@@ -239,7 +239,7 @@ int __cdecl fcn_005e6e00(void)
             }
             break;
         case 10:
-            fcn_004a6f50();
+            gm_StepCardGameRound();
             fcn_005e7b70(0, 5, (void *)0x7765ac); fcn_005e7b70(1, 5, (void *)0x7765e0); fcn_005e7b70(2, 5, (void *)0x776614);
             d2_SetForm(D(0x6ad568), 4);
             if (!W(0x776658)) {

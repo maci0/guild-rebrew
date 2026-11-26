@@ -9,7 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 
-void __cdecl fcn_0057bcb0(char* o)
+void __cdecl he_StartAction0x9d(char* o)
 {
 	char* x;
 	int id;

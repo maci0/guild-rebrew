@@ -7,7 +7,7 @@ extern int g_774954;
 extern char g_6a3440;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_004b3c50(int);
+int __cdecl gm_LookupMissionSpec(int);
 char* __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(char*);
 void __cdecl d2_SetForm(char*, int);
@@ -31,7 +31,7 @@ void __cdecl fcn_004b60e0(int flags)
 
 	r = 0;
 	tab = (unsigned short*) (0x7f4ca0 + (unsigned int) g_774970 * 0x21c);
-	tag = fcn_004b3c50(g_10069a0);
+	tag = gm_LookupMissionSpec(g_10069a0);
 	obj = fcn_00470820(0, 0, (char*) 0x681130);
 	d2_CenterDialogWindows(obj);
 	d2_SetForm(obj, 0);

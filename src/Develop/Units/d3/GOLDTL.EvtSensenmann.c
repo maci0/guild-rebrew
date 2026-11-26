@@ -44,7 +44,7 @@ void __cdecl fcn_004e3640(void);
 void __cdecl fcn_004e4e90(char* name);
 void __cdecl gm_AddTime(char* t, int a, int b, int c);
 int __cdecl fcn_005589d0(char* e);
-void __cdecl fcn_005b2880(void);
+void __cdecl he_BroadcastReaperEvent(void);
 int __cdecl fcn_00558680(char* e);
 int __cdecl fcn_00558b70(char* e);
 
@@ -158,7 +158,7 @@ void __cdecl EvtSensenmann(char* e)
 			*(int*) (e + 0x70) = 0;
 			return;
 		}
-		fcn_005b2880();
+		he_BroadcastReaperEvent();
 		*(int*) (e + 0x70) = -1;
 		return;
 	}

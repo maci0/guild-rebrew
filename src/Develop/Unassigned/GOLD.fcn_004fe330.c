@@ -2,8 +2,8 @@
 // fcn_004fe330 — (short)a[1] % 4.
 
 /* ADDRESS: GOLDTL 0x00500e00 */
-int __cdecl fcn_004fe330(char* a)
+int __cdecl gm_GetSeasonFromDate(char* date)
 {
-	return *(short*) (a + 2) % 4;
+	return *(short*) (date + 2) % 4;
 }
 

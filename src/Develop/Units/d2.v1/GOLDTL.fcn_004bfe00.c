@@ -12,7 +12,7 @@ extern char* g_772904;
 
 void *__cdecl fcn_004be2a0(void *);
 void *__cdecl fcn_004be1f0(void *);
-int __cdecl fcn_004be340(void *);
+int __cdecl rt_CountRoutePoints(void *);
 void __cdecl rt_FreeRoutePoints(void *);
 void __cdecl fcn_004be3d0(void *, void *, void *, void *);
 void __cdecl fcn_004be530(void);
@@ -146,7 +146,7 @@ int __cdecl fcn_004bfe00(char *obj)
 		fcn_004bfc10();
 		fcn_004be530();
 	}
-	n = fcn_004be340((void *) g_772908);
+	n = rt_CountRoutePoints((void *) g_772908);
 	if (n >= 2) {
 		fcn_004c6e20((int) obj, (void *) g_772908);
 	} else {

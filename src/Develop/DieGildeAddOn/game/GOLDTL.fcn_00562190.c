@@ -30,7 +30,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 
 int __cdecl fcn_004a5e60(House* h, int kind, __int64 f, int c, float r, int* out);
-int __cdecl fcn_004fa5b0(int k, House* h, Query* q);
+int __cdecl gm_CheckPrivilege(int k, House* h, Query* q);
 void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
 int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
@@ -89,7 +89,7 @@ void __cdecl he_InitSpionage(char* u)
 	h = &((House*)g_7f4ca0)[*(unsigned short*) (u + 8)];
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	*(pos14_7f4c00*) (u + 0xc8) = gm_GameTime;
-	if (fcn_004fa5b0(0x26, h, &q) == 2) {
+	if (gm_CheckPrivilege(0x26, h, &q) == 2) {
 		gm_AddTime((pos14_7f4c00*) (u + 0xc8), (*(int*) (u + 0xe8) + 4) * 24, 0, 0);
 	} else {
 		gm_AddTime((pos14_7f4c00*) (u + 0xc8), (*(int*) (u + 0xe8) + 3) * 24, 0, 0);

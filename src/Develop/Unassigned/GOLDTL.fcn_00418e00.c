@@ -15,7 +15,7 @@ struct snd_418e00 {
 
 extern char* tp_SoundSources;
 
-void __cdecl fcn_004237f0(char*, int);
+void __cdecl sb_StopVoice(char*, int);
 void __cdecl fcn_00426170(char*, int);
 void __cdecl d3_UpdateSoundSourceVolume(struct snd_418e00*);
 void __cdecl d3_UpdateSoundSourcePan(struct snd_418e00*);
@@ -45,7 +45,7 @@ void __cdecl d3snd_UpdateSoundSources(void)
 			if (((struct snd_418e00*)tp_SoundSources)[i].voice == 0) {
 				continue;
 			}
-			fcn_004237f0(((struct snd_418e00*)tp_SoundSources)[i].voice, 0);
+			sb_StopVoice(((struct snd_418e00*)tp_SoundSources)[i].voice, 0);
 			*(unsigned int*) (((struct snd_418e00*)tp_SoundSources)[i].voice + 0x14) |= 8;
 			if (((struct snd_418e00*)tp_SoundSources)[i].keep == 0) {
 				fcn_00426170(((struct snd_418e00*)tp_SoundSources)[i].voice, 0);

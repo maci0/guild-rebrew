@@ -4,7 +4,7 @@
 int __cdecl d3_CollectUnusedSceneObjects(int, int*);
 void __cdecl fcn_005983d0(int);
 
-void __cdecl fcn_00598510(void)
+void __cdecl d3_ReleaseUnusedSceneObjects(void)
 {
 	int ids[0x100];
 	int n;

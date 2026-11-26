@@ -3,7 +3,7 @@ void __cdecl vfs_WriteCString(int, char*);
 void __cdecl fcn_00401320(int, unsigned int);
 int __cdecl vfs_WriteArray(int, int, int, int);
 void __cdecl fcn_004011f0(int, unsigned char);
-void __cdecl fcn_004012e0(int, int*);
+void __cdecl vfs_WriteVec4(int, int*);
 void __cdecl vfs_WriteVec3(int, int*);
 
 /* ADDRESS: GOLD 0x0044a770 */
@@ -67,9 +67,9 @@ void __cdecl fcn_0044a770(int stream, char* model)
                 row = *(char**) (model + 0x19e0) + offset;
                 fcn_00401320(stream, *(unsigned int*) (row + 0x10));
                 row = *(char**) (model + 0x19e0) + offset;
-                fcn_004012e0(stream, (int*) (row + 0x18));
+                vfs_WriteVec4(stream, (int*) (row + 0x18));
                 row = *(char**) (model + 0x19e0) + offset;
-                fcn_004012e0(stream, (int*) (row + 0x28));
+                vfs_WriteVec4(stream, (int*) (row + 0x28));
                 row = *(char**) (model + 0x19e0) + offset;
                 fcn_00401320(stream, *(unsigned int*) (row + 0x154));
                 index++;

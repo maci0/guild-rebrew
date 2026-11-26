@@ -33,12 +33,12 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c91c0(int, int, int, int, int);
 int __cdecl fcn_004f4830(int, Stat5d9f*);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
-int __cdecl fcn_004fa5b0(int, unsigned short*, int*);
+int __cdecl gm_CheckPrivilege(int, unsigned short*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
-int __cdecl fcn_005d9ca0(unsigned short*, unsigned short*, int, int);
+int __cdecl gs_StartCourtTrial(unsigned short*, unsigned short*, int, int);
 
 /* ADDRESS: GOLDTL 0x005d9f70 */
 int __cdecl fcn_005d9f70(unsigned short* entity, unsigned short* other)
@@ -93,7 +93,7 @@ int __cdecl fcn_005d9f70(unsigned short* entity, unsigned short* other)
 	memset(q, 0, sizeof(q));
 	q[0] = 1;
 	d2_SetForm(dlg, 3);
-	if (fcn_004fa5b0(0x16, other, q) & 2) {
+	if (gm_CheckPrivilege(0x16, other, q) & 2) {
 		io_AppendText(0x174a);
 	} else {
 		sel = d2_GetWindowListItem(dlg, 3, io_AppendText(0x1745));
@@ -108,7 +108,7 @@ int __cdecl fcn_005d9f70(unsigned short* entity, unsigned short* other)
 		}
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == sel) {
-				fcn_005d9ca0(entity, other, n, 0);
+				gs_StartCourtTrial(entity, other, n, 0);
 				g_774654 = 3;
 			}
 		}

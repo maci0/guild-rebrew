@@ -43,7 +43,7 @@ typedef struct Rec18 {
 extern char g_7f4ca0[];
 
 int __cdecl gm_RandomMod(unsigned short n);
-void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
+void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Msg* out1, Msg* out2);
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
 int __cdecl fcn_004a5340(char* e, int a, int* b, float c, float r, unsigned short* out);
@@ -82,7 +82,7 @@ int __cdecl fcn_0049a0c0(int kind, char* e, int a2, Msg* out1, Msg* out2)
 	slot[9].id = 0x167;
 	slot[10].id = 0x229;
 	slot[11].id = 0x2b6;
-	fcn_004a51d0(e, 12, slot, &cnt);
+	gm_CheckEntityObjectSlots(e, 12, slot, &cnt);
 	total = cnt.total;
 	free = cnt.free;
 	if (total == 6 && free == 0) {

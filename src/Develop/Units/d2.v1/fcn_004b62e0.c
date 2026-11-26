@@ -35,7 +35,7 @@ typedef struct Req {
 extern char g_10069a0[];
 extern signed char g_6a3440;
 
-Spec* __cdecl fcn_004b3c50(int op);
+Spec* __cdecl gm_LookupMissionSpec(int op);
 void __cdecl fcn_004b5630(Spec* s, int flags);
 void __cdecl main_PlayOutroMovie(void);
 int __cdecl fcn_004b43f0(int n);
@@ -61,7 +61,7 @@ void __cdecl fcn_004b62e0(int flags)
 	ent = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 	for (i = 0; i < 128; i++) {
 		if (((Job*)g_10069a0)[i].op != 0 && ((Job*)g_10069a0)[i].id == ent->entity_id) {
-			s = fcn_004b3c50(((Job*)g_10069a0)[i].op);
+			s = gm_LookupMissionSpec(((Job*)g_10069a0)[i].op);
 			level = s->level + 1;
 			memset(&((Job*)g_10069a0)[i], 0, sizeof(Job));
 			break;

@@ -5,7 +5,7 @@ extern int g_7749f8[];
 
 int* __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_00580cf0(int);
-int __cdecl fcn_004c3100(char*, int);
+int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLD 0x00578760 */
@@ -58,7 +58,7 @@ int* __cdecl fcn_00580d50(void)
 	p[0x1a] = 0;
 	p[0x1b] = 0;
 	p[0x1c] = 0;
-	(*(int*)g_7749f8) = fcn_004c3100("TUTORIAL_INTRO_OUTRO.sbf", 0);
+	(*(int*)g_7749f8) = sb_LoadLocalizedSampleBank("TUTORIAL_INTRO_OUTRO.sbf", 0);
 	return p;
 }
 #pragma optimize("", on)

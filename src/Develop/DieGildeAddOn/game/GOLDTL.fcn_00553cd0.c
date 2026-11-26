@@ -25,7 +25,7 @@ void __cdecl fcn_00529160(char* e, int a, int id, char* rec);
 void __cdecl fcn_004c5c80(int owner);
 void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* tag);
 void __cdecl gm_AddTime(int* pos, int a, int b, int c);
-int __cdecl fcn_00508da0(char* e);
+int __cdecl gm_GetEntityMood(char* e);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CalculateGebaeudeValue(char* e, int n);
@@ -75,7 +75,7 @@ void __cdecl fcn_00553cd0(char* event)
 			*(int*) (event + 0x70) = 1;
 			return;
 		}
-		f = (g_662cf8 - (float) fcn_00508da0(e)) * 0.01f;
+		f = (g_662cf8 - (float) gm_GetEntityMood(e)) * 0.01f;
 		found = 0;
 		for (q = fcn_00502cd0(0, 2, 7, 4, 0x1d); q != 0; q = gm_NextEntityQueryMatch()) {
 			if (*(int*) (q + 0x1c) == *(int*) (e + 1)

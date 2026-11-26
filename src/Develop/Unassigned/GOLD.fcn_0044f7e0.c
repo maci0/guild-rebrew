@@ -8,7 +8,7 @@ typedef struct Bone {
 int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 char* __cdecl vfs_ReadCString(void* stream, char* text);
-void __cdecl fcn_00401280(void* stream, void* dst);
+void __cdecl vfs_ReadVec3(void* stream, void* dst);
 
 void __cdecl fcn_0044f7e0_GOLD(void* r, char* o)
 {
@@ -23,8 +23,8 @@ void __cdecl fcn_0044f7e0_GOLD(void* r, char* o)
 		vfs_ReadByte(r, &t0);
 		vfs_ReadCString(r, ((Bone*)(o + 0x38))[i].name);
 		vfs_ReadByte(r, &t1);
-		fcn_00401280(r, ((Bone*)(o + 0x38))[i].a);
+		vfs_ReadVec3(r, ((Bone*)(o + 0x38))[i].a);
 		vfs_ReadByte(r, &t2);
-		fcn_00401280(r, ((Bone*)(o + 0x38))[i].b);
+		vfs_ReadVec3(r, ((Bone*)(o + 0x38))[i].b);
 	}
 }

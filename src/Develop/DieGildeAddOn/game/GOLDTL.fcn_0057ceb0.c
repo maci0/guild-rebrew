@@ -17,7 +17,7 @@ extern unsigned char g_773d75;
 
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl gm_ResolveEntityById(void** out, void** a2, void** a3, int a4);
-void __cdecl fcn_004a51d0(char* e, int n, Slot57ceb0* slots, Counts57ceb0* cnt);
+void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot57ceb0* slots, Counts57ceb0* cnt);
 int __cdecl io_FormatTextBuffer(char* dst, int id, ...);
 int __cdecl fcn_004c51f0(int a1, int a2, short a3, int a4, char a5, int a6);
 void __cdecl fcn_004c51a0(int a1, int a2, char a3, int a4);
@@ -60,7 +60,7 @@ void __cdecl fcn_0057ceb0(char* entity)
 		p++;
 	}
 	if (n != 0) {
-		fcn_004a51d0(ownerRec, n, slots, &counts);
+		gm_CheckEntityObjectSlots(ownerRec, n, slots, &counts);
 		queued = 0;
 		p = (unsigned short*) (entity + 0xc8);
 		for (i = 0; i < n; i++) {

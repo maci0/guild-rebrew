@@ -25,11 +25,11 @@
 
 
 
-void __cdecl fcn_00411b10(void)
+void __cdecl io_ShutdownInput(void)
 {
 	g_14ce89c = 0;
-	fcn_004117f0(0);
-	fcn_004117c0(0);
+	io_AcquireMouse(0);
+	io_AcquireKeyboard(0);
 	if (g_14ce90c != 0) {
 		g_14ce90c->vtbl->Release(g_14ce90c);
 		g_14ce8a0 = 0;

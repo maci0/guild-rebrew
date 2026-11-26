@@ -23,7 +23,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00533a40(char*);
 
-void __cdecl fcn_00591da0(int index)
+void __cdecl d2_SaveBookmarkSlot(int index)
 {
 	char buf[0x100];
 	char* e;

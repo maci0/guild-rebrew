@@ -5,7 +5,7 @@ extern unsigned char g_6b7ff9;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern void *__cdecl m_alloc(unsigned int size, const char *tag);
 extern void __cdecl m_FreeTracked(void *p);
-extern int __cdecl fcn_00412eb0(int a0, int a1);
+extern int __cdecl d3_FindSceneObjectByName(int a0, int a1);
 extern void __cdecl fcn_00442c00(int a0, int a1);
 extern int __cdecl fcn_00442910(int a0, int a1, int a2, int a3);
 extern int __cdecl fcn_00471170(int a0, int a1, int a2);
@@ -13,7 +13,7 @@ extern void __cdecl fcn_004713b0(int a0, char *a1, char *a2);
 extern void __cdecl fcn_00471490(int a0);
 extern void __cdecl d2_SetGroupVisibility(int a0, int a1);
 extern void __cdecl fcn_00436f70(int a0);
-extern void __cdecl fcn_004234e0(int a0, char *a1, int a2, int a3, int a4, int a5, int a6);
+extern void __cdecl sb_PlayVoice(int a0, char *a1, int a2, int a3, int a4, int a5, int a6);
 
 /* ADDRESS: GOLDTL 0x00534c40 */
 int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
@@ -34,7 +34,7 @@ int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
     v3 = (int *)m_alloc(0x274, (char *)0x6a3180);
     if (v3 == 0)
         return 0;
-    v4 = fcn_00412eb0(a0, 1);
+    v4 = d3_FindSceneObjectByName(a0, 1);
     *v3 = v4;
     if (v4 == 0)
     {
@@ -107,6 +107,6 @@ finish:
         *(char *)((char *)v3 + 0x272) = (*(int *)&g_6b7ff9);
         fcn_00436f70(0);
     }
-    fcn_004234e0(g_7747c4, (char *)0x6a313c, 1, 0x3f, 0x7f, 0, 0);
+    sb_PlayVoice(g_7747c4, (char *)0x6a313c, 1, 0x3f, 0x7f, 0, 0);
     return v3;
 }

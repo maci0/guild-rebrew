@@ -18,7 +18,7 @@ struct Events {
 
 char* __cdecl FindVideoById(int id);
 
-long __cdecl fcn_0041f530(int id, long* p1, long* p2)
+long __cdecl PollVideoEvents(int id, long* p1, long* p2)
 {
 	char* o;
 	long code;

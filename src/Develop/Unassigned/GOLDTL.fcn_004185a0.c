@@ -15,7 +15,7 @@ int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, int b, void 
 void __cdecl fcn_004526d0(int* s, float* pos);
 void __cdecl fcn_00418210(void);
 
-int* __cdecl fcn_004185a0(int a1, float* pos, int n, int a4, int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7)
+int* __cdecl d3_SpawnRockDebrisEffect(int a1, float* pos, int n, int a4, int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7)
 {
 	Bytes4 effectFlags;
 	int* effectState;

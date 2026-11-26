@@ -1,9 +1,9 @@
 extern float fcn_00413d10(float *pos);
 extern int fcn_00500e20(int *p);
-extern int *fcn_004234e0(char *bank, char *name, int loop, int pan, int vol,
+extern int *sb_PlayVoice(char *bank, char *name, int loop, int pan, int vol,
     int a, int b);
-extern void fcn_00423890(int *voice, int vol);
-extern void fcn_004237f0(int *voice, int a2);
+extern void sb_SetVoiceVolume(int *voice, int vol);
+extern void sb_StopVoice(int *voice, int a2);
 extern void fcn_0064d41a();
 extern int fcn_0064d3f8(void);
 extern int ch_CountCharacters(int a, int b);
@@ -77,12 +77,12 @@ int __cdecl fcn_004c16c0(void)
 		if (g_772d4c != fcn_00500e20((int *) 0x7f4c00)) {
 			g_772d4c = fcn_00500e20((int *) 0x7f4c00);
 			if (g_772d48 != 0) {
-				fcn_004237f0(g_772d48, 0);
+				sb_StopVoice(g_772d48, 0);
 				*(int *) ((char *) g_772d48 + 0x18) = 0;
 				g_772d48 = 0;
 			}
 			if (g_772d44 != 0) {
-				fcn_004237f0(g_772d44, 0);
+				sb_StopVoice(g_772d44, 0);
 				*(int *) ((char *) g_772d44 + 0x18) = 0;
 				g_772d44 = 0;
 			}
@@ -100,14 +100,14 @@ int __cdecl fcn_004c16c0(void)
 				offset = g_772d4c * 100;
 				if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
 				    + *(float *) (offset + 0x681820)) {
-					fcn_004234e0(0, s_68a124,
+					sb_PlayVoice(0, s_68a124,
 					    fcn_0064d3f8() % *(int *) (g_772d4c * 100 + 0x681828) + 1,
 					    0x3f,
 					    (int) ((float) (*(float *) (offset + 0x681824)) * 127.0f),
 					    0, 0);
 				}
 				if (fcn_0064d3f8() % 10 > 6) {
-					fcn_004234e0(0, s_68a124,
+					sb_PlayVoice(0, s_68a124,
 					    fcn_0064d3f8() % *(int *) (g_772d4c * 100 + 0x681828) + 1,
 					    0x3f,
 					    (int) (*(float *) (g_772d4c * 100 + 0x681824) * 127.0f),
@@ -121,13 +121,13 @@ int __cdecl fcn_004c16c0(void)
 			if (v5 > 0x64 || g_772d4c == 3) {
 				if (g_772d44 != 0) {
 					fcn_0064d41a(&g_772b10, s_689f48, g_772d44);
-					fcn_004237f0(g_772d44, 0);
+					sb_StopVoice(g_772d44, 0);
 					g_772d44 = 0;
 					*(int *) ((char *) g_772d44 + 0x18) = 0; /* stores through the just-cleared pointer, as in the original */
 				}
 				if (g_772d48 != 0) {
 					fcn_0064d41a(&g_772b10, s_689ee8, g_772d48);
-					fcn_004237f0(g_772d48, 0);
+					sb_StopVoice(g_772d48, 0);
 					*(int *) ((char *) g_772d48 + 0x18) = 0;
 					g_772d48 = 0;
 				}
@@ -135,12 +135,12 @@ int __cdecl fcn_004c16c0(void)
 			else {
 				fcn_0064d41a(&g_772b10, s_689fac, g_772d48, g_772d44);
 				if (g_772d44 != 0) {
-					fcn_00423890(g_772d44,
+					sb_SetVoiceVolume(g_772d44,
 					    (int) (f * *(float *) (g_772d4c * 100 + 0x681838)
 						* 127.0f) >> 1);
 				}
 				if (g_772d48 != 0) {
-					fcn_00423890(g_772d48,
+					sb_SetVoiceVolume(g_772d48,
 					    (int) (f * *(float *) (g_772d4c * 100 + 0x681838)
 						* 127.0f) >> 1);
 				}
@@ -160,7 +160,7 @@ int __cdecl fcn_004c16c0(void)
 					i = 0;
 				}
 				fcn_0064d41a(&g_772b10, s_68a0d0, g_772d48, i);
-				g_772d48 = fcn_004234e0(0, s_68a0c4,
+				g_772d48 = sb_PlayVoice(0, s_68a0c4,
 				    fcn_0064d3f8() % *(int *) (g_772d4c * 100 + 0x68183c) + 2,
 				    0x3f,
 				    (int) (f * *(float *) (g_772d4c * 100 + 0x681838)
@@ -171,13 +171,13 @@ int __cdecl fcn_004c16c0(void)
 join:
 			if (g_772d4c == 1) {
 				if (g_772d44 == 0) {
-					g_772d44 = fcn_004234e0(0, s_68a0c4, 0, 0x3f,
+					g_772d44 = sb_PlayVoice(0, s_68a0c4, 0, 0x3f,
 					    (int) (*(float *) (g_772d4c * 100 + 0x681838) * f
 						* 127.0f) >> 1, 0, 0);
 					fcn_0064d41a(&g_772b10, s_68a070, g_772d44);
 				}
 				else {
-					fcn_00423890(g_772d44,
+					sb_SetVoiceVolume(g_772d44,
 					    (int) (*(float *) (g_772d4c * 100 + 0x681838) * f
 						* 127.0f) >> 1);
 					fcn_0064d41a(&g_772b10, s_68a03c, g_772d44);
@@ -185,7 +185,7 @@ join:
 			}
 			else if (g_772d44 != 0) {
 				fcn_0064d41a(&g_772b10, s_689ff0, g_772d44);
-				fcn_004237f0(g_772d44, 0);
+				sb_StopVoice(g_772d44, 0);
 				g_772d44 = 0;
 				*(int *) ((char *) g_772d44 + 0x18) = 0; /* stores through the just-cleared pointer, as in the original */
 			}
@@ -197,7 +197,7 @@ join:
 			offset = g_772d4c * 100;
 			if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
 			    + *(float *) (offset + 0x681820)) {
-				fcn_004234e0(0, s_689ee0, 1, 0x3f,
+				sb_PlayVoice(0, s_689ee0, 1, 0x3f,
 				    (int) (f * *(float *) (offset + 0x681874) * 127.0f),
 				    0, 0);
 			}
@@ -212,7 +212,7 @@ join:
 				if (fcn_0064d3f8() % 10 >= 5) {
 					p = s_689ec8;
 				}
-				fcn_004234e0(0, p, 1, 0x3f,
+				sb_PlayVoice(0, p, 1, 0x3f,
 				    (int) (f * *(float *) (g_772d4c * 100 + 0x681860)
 					* 127.0f), 0, 0);
 			}
@@ -224,7 +224,7 @@ join:
 			offset = g_772d4c * 100;
 			if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
 			    + *(float *) (offset + 0x681848)) {
-				fcn_004234e0(0, s_689ebc,
+				sb_PlayVoice(0, s_689ebc,
 				    fcn_0064d3f8() % *(int *) (g_772d4c * 100 + 0x681850) + 1,
 				    0x3f,
 				    (int) (f * *(float *) (offset + 0x68184c)
@@ -249,13 +249,13 @@ join:
 		}
 		if (g_772d44 != 0) {
 			fcn_0064d41a(&g_772b10, s_689e68, g_772d44);
-			fcn_004237f0(g_772d44, 0);
+			sb_StopVoice(g_772d44, 0);
 			*(int *) ((char *) g_772d44 + 0x18) = 0;
 			g_772d44 = 0;
 		}
 		if (g_772d48 != 0) {
 			fcn_0064d41a(&g_772b10, s_689e18, g_772d48);
-			fcn_004237f0(g_772d48, 0);
+			sb_StopVoice(g_772d48, 0);
 			*(int *) ((char *) g_772d48 + 0x18) = 0;
 			g_772d48 = 0;
 		}

@@ -22,7 +22,7 @@ int __cdecl fcn_004f4830(int idx, void* dst)
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl gm_FormatLawName(char* buf, int k);
-void __cdecl fcn_005b26e0(char* o, char* buf);
+void __cdecl he_NotifyLawChange(char* o, char* buf);
 
 /* ADDRESS: GOLD 0x004f27d0 */
 /* ADDRESS: GOLDTL 0x004f48e0 */
@@ -40,7 +40,7 @@ int __cdecl fcn_004f48e0(char* s)
 		o = gm_LookupEntityRecordById(*(int*) s);
 		if (o != 0) {
 			gm_FormatLawName(buf, *(unsigned char*) (s + 4));
-			fcn_005b26e0(o, buf);
+			he_NotifyLawChange(o, buf);
 		}
 	}
 	return 1;

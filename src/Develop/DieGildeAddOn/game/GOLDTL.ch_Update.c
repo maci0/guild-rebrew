@@ -13,7 +13,7 @@ extern char g_6756a0[];
 extern char g_67540c[];
 extern char g_67567c[];
 
-void __cdecl fcn_004058f0(char* m);
+void __cdecl ch_BackupGrid(char* m);
 void __cdecl ch_CheckAniMorph(char* e);
 void __cdecl d3_RemoveObjectAnimation(char* a, char* b);
 #include "Develop/DieGildeAddOn/game/ch_action.h"
@@ -46,11 +46,11 @@ int __cdecl ch_Update(void)
 	}
 	if (g_6b5c54 != (char*) g_67a370 || g_6b5c58 != (char*) g_67a370) {
 		if (*(char**) g_1043370 != 0 && g_6b5c54 != (char*) g_67a370) {
-			fcn_004058f0(*(char**) g_1043370);
+			ch_BackupGrid(*(char**) g_1043370);
 			g_6b5c54 = (char*) g_67a370;
 		}
 		if (g_67a370 != 0 && d3_CurrentContextIndex != 0 && *(char**) ((char*) g_67a370 + 0xb0) != 0 && g_6b5c58 != (char*) g_67a370) {
-			fcn_004058f0(*(char**) ((char*) g_67a370 + 0xb0));
+			ch_BackupGrid(*(char**) ((char*) g_67a370 + 0xb0));
 			g_6b5c58 = (char*) g_67a370;
 		}
 	}

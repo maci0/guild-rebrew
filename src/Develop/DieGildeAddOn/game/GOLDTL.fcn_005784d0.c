@@ -10,7 +10,7 @@ int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_005b2ee0(char*, char*, char*);
+void __cdecl he_NotifyHeimsuchung(char*, char*, char*);
 
 
 /* Runs the plague-heimsuchung action message through its states and updates
@@ -72,7 +72,7 @@ void __cdecl fcn_005784d0(char* obj)
 			h = (int) gm_LookupEntityRecordById(*(int*) (obj + 0xb0));
 			if (h != 0) {
 				gm_AddTime(obj + 0x52, 0x18, 0, 0);
-				fcn_005b2ee0(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (obj + 8)]),
+				he_NotifyHeimsuchung(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (obj + 8)]),
 					(char*) h, obj + 0x52);
 			}
 			*(int*) (obj + 0x84) = fcn_004c5620(3, obj);

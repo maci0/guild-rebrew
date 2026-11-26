@@ -5,7 +5,7 @@
 
 extern unsigned short g_14cf300[];
 
-int __cdecl fcn_00411590(void)
+int __cdecl io_BuildKeyTranslateTable(void)
 {
 	int i;
 	int k;

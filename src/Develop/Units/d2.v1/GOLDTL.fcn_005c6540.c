@@ -62,7 +62,7 @@ int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_005dbf10(Ent* e, Req* r);
+int __cdecl gm_UseSpecialObject(Ent* e, Req* r);
 
 int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 {
@@ -125,7 +125,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 		r.arg = -1;
 		r.dir = 0;
 		r.pad = 0;
-		fcn_005dbf10(((Ent *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), &r);
+		gm_UseSpecialObject(((Ent *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), &r);
 	}
 	return r.dir;
 }

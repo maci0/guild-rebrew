@@ -4,7 +4,7 @@
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004fa5b0(int, void*, void*);
+int __cdecl gm_CheckPrivilege(int, void*, void*);
 
 /* ADDRESS: GOLDTL 0x004aa550 */
 int __cdecl ai_DispatchPrivilege(unsigned short* a0, char* request, char* a2)
@@ -57,6 +57,6 @@ int __cdecl ai_DispatchPrivilege(unsigned short* a0, char* request, char* a2)
 	sprintf(text, format);
 	*(int*) (msg + 0x214) = *(int*) (a2 + 4);
 	sprintf(text2, (char*) 0x67fab0, a0 + 0x18, (int) *a0, text);
-	r = fcn_004fa5b0(*(int*) (request + 4), a0, msg);
+	r = gm_CheckPrivilege(*(int*) (request + 4), a0, msg);
 	return (r & 0x60) == 0;
 }

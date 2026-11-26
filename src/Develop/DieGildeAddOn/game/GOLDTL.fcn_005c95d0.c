@@ -26,7 +26,7 @@ int __cdecl io_AppendText(int, ...);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 void __cdecl fcn_0050c1b0(unsigned char*, int, int*);
-int __cdecl fcn_00508da0(unsigned char*);
+int __cdecl gm_GetEntityMood(unsigned char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -49,7 +49,7 @@ void __cdecl d2_ShowBuildingTurnSummary(unsigned char* a)
 	else {
 		io_AppendText((int) s_6a4304, a[0] * 14 + 0x48e);
 	}
-	io_AppendText(0xa3, fcn_00508da0(a));
+	io_AppendText(0xa3, gm_GetEntityMood(a));
 	if (st[0] != 0) {
 		io_AppendText(0xa4, st[0]);
 	}

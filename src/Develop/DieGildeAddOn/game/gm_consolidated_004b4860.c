@@ -13,7 +13,7 @@ void* __cdecl fcn_00502cd0(int, int, int, int, int);
 
 /* ADDRESS: GOLD 0x004b46f0 */
 /* ADDRESS: GOLDTL 0x004b4860 */
-int __cdecl fcn_004b4860(unsigned short* key, char* x)
+int __cdecl gm_HasMatureCategory2Building(unsigned short* key, char* x)
 {
 	unsigned char* e;
 

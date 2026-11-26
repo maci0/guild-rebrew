@@ -8,7 +8,7 @@ extern char g_14cf950;
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
-void __cdecl fcn_004116d0(void);
+void __cdecl io_ClearInputState(void);
 
 void __cdecl fcn_004cfa00(int id)
 {
@@ -27,5 +27,5 @@ void __cdecl fcn_004cfa00(int id)
 	r = evt_FindScriptById(id);
 	if (r != 0)
 		evt_RequestScriptExit(r);
-	fcn_004116d0();
+	io_ClearInputState();
 }

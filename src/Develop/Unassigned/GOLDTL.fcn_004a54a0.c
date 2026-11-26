@@ -24,32 +24,32 @@ extern unsigned int g_7728bc;
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, Query* q, int c);
 ENTITY_CANDIDATE* __cdecl fcn_004a34d0(void);
 
-int __cdecl fcn_004a54a0(unsigned short* e, int queryFlags, unsigned int n, char* src, float lo, float hi, unsigned short* out)
+int __cdecl gm_FindEntityCandidate(unsigned short* actor, int queryFlags, unsigned int excludedCount, char* excludedIds, float minScore, float maxScore, unsigned short* outId)
 {
-	Query q;
+	Query query;
 	unsigned int len;
 	int i;
-	ENTITY_CANDIDATE* t;
+	ENTITY_CANDIDATE* candidate;
 
-	memset(&q, 0, sizeof(q));
-	len = n * 2;
+	memset(&query, 0, sizeof(query));
+	len = excludedCount * 2;
 	if (len > 0x20) {
 		len = 0x20;
 	}
-	memcpy(q.name, src, len);
-	q.kind = 2;
-	if (((unsigned short*)g_77261c) != 0 && !(q.flags & 0x10000000)) {
-		q.x40 = 0;
-		q.flags = queryFlags;
-		if (fcn_005cf720(*e, *((unsigned short*)g_77261c), &q, 0) != 0) {
-			*out = *((unsigned short*)g_77261c);
+	memcpy(query.name, excludedIds, len);
+	query.kind = 2;
+	if (((unsigned short*)g_77261c) != 0 && !(query.flags & 0x10000000)) {
+		query.x40 = 0;
+		query.flags = queryFlags;
+		if (fcn_005cf720(*actor, *((unsigned short*)g_77261c), &query, 0) != 0) {
+			*outId = *((unsigned short*)g_77261c);
 			return 1;
 		}
 	}
-	q.x40 = 0;
-	for (i = (*(int*)&g_7728bc); t = fcn_004a34d0(), i != 0 && t->entity != 0; i--) {
-		if (!(t->score < lo) && !(t->score > hi) && fcn_005cf720(*e, *(unsigned short*)t->entity, &q, 0) != 0) {
-			*out = *(unsigned short*)t->entity;
+	query.x40 = 0;
+	for (i = (*(int*)&g_7728bc); candidate = fcn_004a34d0(), i != 0 && candidate->entity != 0; i--) {
+		if (!(candidate->score < minScore) && !(candidate->score > maxScore) && fcn_005cf720(*actor, *(unsigned short*)candidate->entity, &query, 0) != 0) {
+			*outId = *(unsigned short*)candidate->entity;
 			return 1;
 		}
 	}

@@ -12,7 +12,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_00529160(char*, char*, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_00579cf0(char* o)
+void __cdecl he_StartGrabpflege(char* o)
 {
 	unsigned short* x;
 	char* r;

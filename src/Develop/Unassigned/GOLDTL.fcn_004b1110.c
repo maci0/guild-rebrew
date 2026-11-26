@@ -14,19 +14,19 @@ extern char* gm_CityEntity;
 
 void __cdecl fcn_004c5530(void*);
 
-int __cdecl fcn_004b1110(void)
+int __cdecl hst_HandleAufruhr(void)
 {
-	char m[0xf8];
+	char msg[0xf8];
 
-	memset(m, 0, sizeof(m));
-	m[4] = 0x7d;
-	*(int*) (m + 8) = *(int*) (gm_CityEntity + 4);
-	*(int*) (m + 0xc) = -1;
-	m[0x36] = 1;
-	*(int*) (m + 0x58) = 0;
-	*(pos14_7f4c00*) (m + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
-	*(short*) (m + 0x2c) = 8;
-	*(int*) (m + 0x2e) = 0;
-	fcn_004c5530(m);
+	memset(msg, 0, sizeof(msg));
+	msg[4] = 0x7d;
+	*(int*) (msg + 8) = *(int*) (gm_CityEntity + 4);
+	*(int*) (msg + 0xc) = -1;
+	msg[0x36] = 1;
+	*(int*) (msg + 0x58) = 0;
+	*(pos14_7f4c00*) (msg + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
+	*(short*) (msg + 0x2c) = 8;
+	*(int*) (msg + 0x2e) = 0;
+	fcn_004c5530(msg);
 	return 1;
 }

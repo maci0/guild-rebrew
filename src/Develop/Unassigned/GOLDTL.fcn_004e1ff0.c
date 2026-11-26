@@ -6,7 +6,7 @@ extern char g_6b5c60[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_004e48b0(void);
-void __cdecl fcn_004237f0(int, int);
+void __cdecl sb_StopVoice(int, int);
 void __cdecl fcn_004230e0(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004e4610(int);
@@ -19,7 +19,7 @@ int __cdecl fcn_004e1ff0(int* x)
 {
 	fcn_004e48b0();
 	if (x[3] != 0)
-		fcn_004237f0(x[3], 0);
+		sb_StopVoice(x[3], 0);
 	x[3] = 0;
 	fcn_004230e0(x[2]);
 	if (x[1] != -1)

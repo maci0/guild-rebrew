@@ -56,7 +56,7 @@ int __cdecl d2_SetForm(int, int);
 int __cdecl ReportClientMessage(char*);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_00500d60(void*, void*);
-int __cdecl fcn_004fe330(void*, int);
+int __cdecl gm_GetSeasonFromDate(void*, int);
 int __cdecl _ltoa(long, char*, int);
 int __cdecl __isctype(int, int);
 
@@ -557,7 +557,7 @@ body:
 			break;
 		case 'D':
 			fcn_00500d60(st.dt, rec58);
-			res = fcn_004fe330(rec58, *(short*) (rec58 + 2));
+			res = gm_GetSeasonFromDate(rec58, *(short*) (rec58 + 2));
 			sprintf(tmp, g_6a2310, g_14a5450[res]);
 			memmove(buf + i - 2 + strlen(tmp), buf + i, strlen(buf) + 2 - i);
 			memcpy(buf + i - 1, tmp, strlen(tmp));

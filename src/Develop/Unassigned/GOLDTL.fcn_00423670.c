@@ -4,7 +4,7 @@ extern volatile int g_6b7fac;
 int __cdecl sb_FindSampleBank(int* a0);
 int __cdecl sb_LoadEntry(int a0, int* a1);
 int __cdecl fcn_0064d3f8(void);
-int __cdecl fcn_0042a5d0(int a0, int a1, int a2, int a3);
+int __cdecl msx_SetSampleData(int a0, int a1, int a2, int a3);
 void __cdecl fcn_0042a920(int a0, int a1);
 void __cdecl fcn_0042a9a0(int a0, int a1);
 void __cdecl msx_SetSampleLoopCount(int a0, int a1);
@@ -63,7 +63,7 @@ int __cdecl fcn_00423670(int* voice, int a1, int a2)
 		result = -1;
 		goto done;
 	}
-	if (fcn_0042a5d0(*voice, v, *(int*) (entry + 8), *(int*) (entry + 4)) == -1) {
+	if (msx_SetSampleData(*voice, v, *(int*) (entry + 8), *(int*) (entry + 4)) == -1) {
 		result = -1;
 		goto done;
 	}

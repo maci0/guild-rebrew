@@ -8,7 +8,7 @@ extern unsigned short g_6b5e08[256];
 extern unsigned short g_6b6b18[256];
 extern unsigned short g_6b6d20[256];
 
-int __cdecl fcn_0041ca10(int r, int g, int b);
+int __cdecl d3_FindNearestPaletteColor(int r, int g, int b);
 
 /* ADDRESS: GOLDTL 0x0041c470 */
 unsigned int __cdecl fcn_0041c470(unsigned char* input, char* output, int width, int height, int dither)
@@ -48,7 +48,7 @@ unsigned int __cdecl fcn_0041c470(unsigned char* input, char* output, int width,
 		}
 		for (; i < 32768; i++) {
 			if (g_6b6f20[5][i].count) {
-				map[i] = (unsigned char)fcn_0041ca10(
+				map[i] = (unsigned char)d3_FindNearestPaletteColor(
 				    (unsigned char)((i >> 7) & 128) | (unsigned char)((unsigned char)(i & 4) * 2) | ((unsigned char)(i >> 1) & 16) | ((unsigned char)(i >> 3) & 32) | ((unsigned char)(i >> 5) & 64),
 				    (unsigned char)((i >> 6) & 128) | (unsigned char)((i >> 4) & 64) | (unsigned char)((i >> 2) & 32) | (unsigned char)((unsigned char)(i & 2) << 2) | ((unsigned char)i & 16),
 				    (unsigned char)(((unsigned char)(i & 1) << 2 | (unsigned char)(i & 8)) * 2) | ((unsigned char)(i >> 1) & 32) | ((unsigned char)(i >> 3) & 64) | ((unsigned char)(i >> 5) & 128));
@@ -109,7 +109,7 @@ unsigned int __cdecl fcn_0041c470(unsigned char* input, char* output, int width,
 				bl = clamp_mid[input[2] + ((up[2] + 8) >> 4)];
 				key = (((r & 248) << 5) | (g & 248)) << 2 | (bl >> 3);
 				if (cache[key] < 0) {
-					cache[key] = (short)fcn_0041ca10(r, g, bl);
+					cache[key] = (short)d3_FindNearestPaletteColor(r, g, bl);
 				}
 				up += 3;
 				down -= 3;

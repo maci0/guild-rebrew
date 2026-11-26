@@ -36,7 +36,7 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, char);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, unsigned short, int*);
-void __cdecl fcn_004c4670(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_0050dc90(int);
 int __cdecl main_RunFrameLoop(int, int);
@@ -145,7 +145,7 @@ void __cdecl d2_OpenPlayerStats(void)
 						q = fcn_0050dc90(*(int*) i);
 						n = n - *(int*) (*(int*) i + 0x39);
 						cm_BeginPacketFieldDelta(q, *(int*) (q + 4));
-						fcn_004c4670(4, 1, (q - *(int*) &g_aed32c) + 0x1b8, &n);
+						cm_AppendPacketFieldValue(4, 1, (q - *(int*) &g_aed32c) + 0x1b8, &n);
 						fcn_004c5360();
 						*(int*) (i - 4) = d2_GetControlValue(*(int*) (i - 0x10));
 					}

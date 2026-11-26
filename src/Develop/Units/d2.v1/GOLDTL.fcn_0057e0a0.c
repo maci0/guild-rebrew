@@ -12,11 +12,11 @@ extern int g_774658;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_00423460(int);
-int __cdecl fcn_004237f0(int, int);
+int __cdecl sb_StopVoice(int, int);
 void __cdecl fcn_004707d0(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_004c3030(int, int, int, int);
+int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00533a40(int);
 void __cdecl fcn_00545c50(int);
@@ -250,11 +250,11 @@ label7:
 		if (*(int *)((int)g_665f08[6] + 0x28) != 0) {
 			if (g_665f08[5] != 0) {
 				if (fcn_00423460(g_665f08[5]) != 0) {
-					fcn_004237f0(g_665f08[5], 0);
+					sb_StopVoice(g_665f08[5], 0);
 				}
 				g_665f08[5] = 0;
 			}
-			g_665f08[5] = fcn_004c3030(-7, 0, *(int *)((int)g_665f08[6] + 0x28), -1);
+			g_665f08[5] = d3snd_PlaySoundEffect(-7, 0, *(int *)((int)g_665f08[6] + 0x28), -1);
 		}
 		g_665f08[0xb] = 1;
 		fcn_00580140();
@@ -282,11 +282,11 @@ label7:
 		if (*(int *)((int)g_665f08[6] + 0x28) != 0) {
 			if (g_665f08[5] != 0) {
 				if (fcn_00423460(g_665f08[5]) != 0) {
-					fcn_004237f0(g_665f08[5], 0);
+					sb_StopVoice(g_665f08[5], 0);
 				}
 				g_665f08[5] = 0;
 			}
-			g_665f08[5] = fcn_004c3030(-7, 0, *(int *)((int)g_665f08[6] + 0x28), -1);
+			g_665f08[5] = d3snd_PlaySoundEffect(-7, 0, *(int *)((int)g_665f08[6] + 0x28), -1);
 		}
 		g_665f08[0xb] = 1;
 		fcn_00580140();

@@ -12,13 +12,13 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_005cf560(int);
 void __cdecl d2_ShowPersonalbuch(int, char*);
 
-void __cdecl fcn_0059b0b0(int a)
+void __cdecl d2_RunWorkshopBookHud(int a)
 {
 	int x;
 	int y;
 
 	fcn_005338a0();
-	while (main_RunFrameLoop(fcn_0059b0b0, 0x67fff) != 0) {
+	while (main_RunFrameLoop(d2_RunWorkshopBookHud, 0x67fff) != 0) {
 		x = RegisterStatusText(g_6a9924, g_14a7d28, 0xc);
 		y = RegisterStatusText(g_6aa34c, g_14a7b50, 0xc);
 		if (g_7746a0 != 0) {

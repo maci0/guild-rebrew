@@ -7,7 +7,7 @@ extern char g_699adc[];
 extern char g_699af0[];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_packet_builder.h"
-void __cdecl fcn_004c4670(int a, int b, int off, char* v);
+void __cdecl cm_AppendPacketFieldValue(int a, int b, int off, char* v);
 void __cdecl fcn_004c5360(void);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int h, int a, char* text, int b, int c, char* snd);
@@ -29,7 +29,7 @@ void __cdecl gm_AdjustGebaeudeCondition(char* o, int delta)
 		d = 100 - o[0x5c];
 	}
 	cm_BeginPacketFieldDelta(o, *(int*) (o + 1));
-	fcn_004c4670(1, 1, 0x5c, &d);
+	cm_AppendPacketFieldValue(1, 1, 0x5c, &d);
 	fcn_004c5360();
 	if (*o != 0 && d + o[0x5c] <= 0) {
 		rec = (unsigned char*) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[(unsigned char) *o];

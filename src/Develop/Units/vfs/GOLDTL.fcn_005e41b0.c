@@ -46,7 +46,7 @@ void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* roo
 int __cdecl fcn_0051e490(void* stream, int flags);
 #include "Develop/Units/vfs/vfs.h"
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
-unsigned int __cdecl fcn_00401000(unsigned char*, unsigned int);
+unsigned int __cdecl vfs_CalcCrc32(unsigned char*, unsigned int);
 int __cdecl fcn_004c5790(int, void*);
 void __cdecl fcn_00535960(void);
 void __cdecl ls_SaveGame(char*, char*, int);
@@ -87,7 +87,7 @@ void __cdecl ls_SaveNetworkGame(char* name, char* title)
 		f = vfs_Tfopen(path, "rb", g_6b7fdc);
 		if (f != 0) {
 			ls_LoadSavegameHeader(f, hdr);
-			crc = fcn_00401000((unsigned char*) hdr, 0x78);
+			crc = vfs_CalcCrc32((unsigned char*) hdr, 0x78);
 			CloseVfsStream(f);
 		}
 		memset(&m, 0, sizeof(m));

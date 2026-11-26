@@ -25,7 +25,7 @@ typedef struct Counts {
 } Counts;
 
 unsigned short __cdecl gm_RandomMod(int n);
-void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
+void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 
 /* ADDRESS: GOLDTL 0x0049ab50 */
@@ -49,7 +49,7 @@ int __cdecl fcn_0049ab50(int kind, char* e, int busy, Msg* out1, Msg* out2)
 		} else {
 			return 0;
 		}
-		fcn_004a51d0(e, 1, &slot, &cnt);
+		gm_CheckEntityObjectSlots(e, 1, &slot, &cnt);
 		if ((cnt.total != 6 || cnt.free != 0) && cnt.blocked != 1) {
 			if (cnt.total < 6 && cnt.free == 0) {
 				a.type = 2;

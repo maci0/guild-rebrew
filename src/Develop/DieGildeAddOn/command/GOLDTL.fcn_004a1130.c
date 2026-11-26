@@ -28,7 +28,7 @@ int __cdecl fcn_00496810(void);
 int __cdecl ai_RunBestechung(void);
 int __cdecl fcn_00496dc0(void);
 int __cdecl fcn_00496e60(void);
-int __cdecl fcn_00497000(void);
+int __cdecl ai_RunAmtsbewerbung(void);
 int __cdecl fcn_00497030(void);
 int __cdecl fcn_004973a0(void);
 int __cdecl am_StartBuyObjektAP(void);
@@ -487,7 +487,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Amtsbewerbung");
 	d.score = fcn_00496dc0;
 	d.start = fcn_00496e60;
-	d.run = fcn_00497000;
+	d.run = ai_RunAmtsbewerbung;
 	d.flags = 0x1b;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;

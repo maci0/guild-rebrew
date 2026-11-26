@@ -42,7 +42,7 @@ float __cdecl fcn_004ad500(unsigned char* a1, unsigned short* a2, int a3, int a4
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
 int __cdecl amt_SendOfficeCommand(unsigned char a1, char* a2, char* a3, int a4, int a5);
 void __cdecl fcn_004c5530(char* msg);
-void __cdecl fcn_004ad4d0(int a1);
+void __cdecl amt_SendSpecialOfficeSlot(int a1);
 
 /* Rates every listed entity against the office record, then hands the highest
  * scoring owner to the office and notifies the other guild masters. */
@@ -91,7 +91,7 @@ void __cdecl fcn_004ad6a0(void)
 			}
 			fcn_004c5420(*(int*) (hits[i].p + 4), 0x1cc, 4, 0, mask);
 		}
-		fcn_004ad4d0(-1);
+		amt_SendSpecialOfficeSlot(-1);
 		return;
 	}
 	best = 0;
@@ -131,5 +131,5 @@ void __cdecl fcn_004ad6a0(void)
 		}
 	}
 end:
-	fcn_004ad4d0(-1);
+	amt_SendSpecialOfficeSlot(-1);
 }

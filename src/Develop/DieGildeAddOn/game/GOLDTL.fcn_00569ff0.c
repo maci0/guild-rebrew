@@ -25,7 +25,7 @@ void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c58b0(int, int);
 char* __cdecl fcn_004c4480(int);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_004c4670(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -225,7 +225,7 @@ void __cdecl fcn_00569ff0(char* e)
 			q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xbc));
 			if (q != 0) {
 				cm_BeginPacketFieldDelta(q, *(int*) (q + 1));
-				fcn_004c4670(4, 1, 0x65, &num);
+				cm_AppendPacketFieldValue(4, 1, 0x65, &num);
 				fcn_004c5360();
 			}
 		}
@@ -354,7 +354,7 @@ void __cdecl fcn_00569ff0(char* e)
 			strcat(b400, b100);
 			fcn_004c51a0(*(int*) (pc + 4), *(int*) (px + 4), (char) g_773d75, num);
 			cm_BeginPacketFieldDelta(pb, *(int*) (pb + 1));
-			fcn_004c4670(4, 1, 0x69, &flag);
+			cm_AppendPacketFieldValue(4, 1, 0x69, &flag);
 			fcn_004c5360();
 		} else {
 			pa = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));

@@ -11,7 +11,7 @@ void __cdecl fcn_00401260(int, int);
 #define stream_write fcn_00401260
 #endif
 
-void __cdecl fcn_004012e0(int stream, int* values)
+void __cdecl vfs_WriteVec4(int stream, int* values)
 {
 	stream_write(stream, values[0]);
 	stream_write(stream, values[1]);

@@ -4,7 +4,7 @@
 #include <string.h>
 #include <windows.h>
 
-int __cdecl fcn_004113d0(HKEY key, const char* name, char* out)
+int __cdecl io_ReadRegistryString(HKEY key, const char* name, char* out)
 {
 	DWORD size;
 	char buf[0x80];

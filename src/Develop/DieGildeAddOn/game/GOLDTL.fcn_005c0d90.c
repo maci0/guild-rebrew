@@ -22,7 +22,7 @@ extern short g_7f4c0c;
 extern char g_6ac494[];
 
 int __cdecl he_CountEntityActions(void*, unsigned short*, int*);
-int __cdecl fcn_00579640(unsigned short*, void*);
+int __cdecl he_HasNoActiveAction0x88(unsigned short*, void*);
 int __cdecl d2_CheckActionBlocker(void*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
@@ -61,7 +61,7 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 		fcn_00526120(text, 0);
 		return 0;
 	}
-	if (fcn_00579640(obj, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])) == 0) {
+	if (he_HasNoActiveAction0x88(obj, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])) == 0) {
 		io_FormatTextBuffer(text, 0x409f, *obj);
 		fcn_00526120(text, 0);
 		return 0;

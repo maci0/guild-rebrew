@@ -16,7 +16,7 @@ extern void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
 extern void __cdecl fcn_004c5530(int block);
 extern void* __cdecl gm_GetChainNodeAtIndex(int a, int b);
 extern void* __cdecl gm_SearchTable67(int value);
-extern int __cdecl fcn_004be340(int a);
+extern int __cdecl rt_CountRoutePoints(int a);
 extern void __cdecl cm_BeginPacketFieldDelta(void* record, unsigned int value);
 extern void __cdecl fcn_004c4700(int a, int b, int offset, void* value);
 extern unsigned int __cdecl fcn_004c53a0(void);
@@ -112,7 +112,7 @@ void __cdecl fcn_005705a0(int action, char* rec)
 			&& (fcn_00505340(entry) == 0
 				|| *(int*) (rec + 6) == *(int*) ((char*) *(void**) 0x7749f0 + 1))) {
 			int next_idx;
-			next = fcn_004be340(*(unsigned int*) (rec + 0x29));
+			next = rt_CountRoutePoints(*(unsigned int*) (rec + 0x29));
 			next_idx = *(int*) (rec + 0x2d) + 1;
 			if (next_idx >= next)
 				next_idx = 0;

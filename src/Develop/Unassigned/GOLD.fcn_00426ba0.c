@@ -3,7 +3,7 @@
 extern int g_0063319c;
 extern int* g_6b7d78;
 char* __cdecl fcn_00422760(int, int*);
-void __cdecl fcn_004237f0(void*, int);
+void __cdecl sb_StopVoice(void*, int);
 #define I32(p) (*(int*)(p))
 /* ADDRESS: GOLD 0x00426ba0 */
 int __cdecl fcn_00426ba0(char* target)
@@ -43,7 +43,7 @@ int __cdecl fcn_00426ba0(char* target)
                     cursor = 0;
                     voice = fcn_00422760((int)row, &cursor);
                     while (voice) {
-                        fcn_004237f0(voice, 0);
+                        sb_StopVoice(voice, 0);
                         I32(voice + 4) = 0;
                         cursor++;
                         voice = fcn_00422760(I32(bank + 0x138) + i * 0x40, &cursor);

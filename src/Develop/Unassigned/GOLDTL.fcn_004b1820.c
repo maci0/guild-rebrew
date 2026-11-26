@@ -15,7 +15,7 @@ extern char g_7f4ca4[];
 int __cdecl fcn_004ae170(int);
 void __cdecl fcn_004c5530(void*);
 
-int __cdecl fcn_004b1820(void)
+int __cdecl hst_CmdSoeldnerMarodieren(void)
 {
 	GAME_TIMESTAMP st;
 	char m[0xf8];

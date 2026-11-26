@@ -9,7 +9,7 @@ void __cdecl msx_FadeMasterVolumeIfTrackActive(float, int);
 
 
 /* ADDRESS: GOLDTL 0x004c2d50 */
-void __cdecl fcn_004c2d50(void)
+void __cdecl msx_RestoreMusicVolume(void)
 {
 	g_772d28 = 0;
 	(*(char*)&g_772d10) = (*(char*)&g_772d14);

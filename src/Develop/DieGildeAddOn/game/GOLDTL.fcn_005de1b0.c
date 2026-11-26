@@ -54,7 +54,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005de1b0(unsigned char* obj, int* arg)
+int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
 {
 	Unit* q;
 	Req req;

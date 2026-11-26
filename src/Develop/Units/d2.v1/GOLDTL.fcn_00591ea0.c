@@ -10,7 +10,7 @@ typedef struct DialogItem {
 } DialogItem;
 #include "client_data.h"
 #include "client_dialog_state.h"
-void __cdecl fcn_00591c80(void);
+void __cdecl d2_PruneBookmarkSlots(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
@@ -32,10 +32,10 @@ int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00591c30(char*);
-void __cdecl fcn_00591da0(int);
+void __cdecl d2_SaveBookmarkSlot(int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00472640(int, int);
-void __cdecl fcn_00591d00(void);
+void __cdecl d2_FocusBookmarkSlot(void);
 int __cdecl main_RunFrameLoop(int, int); void __cdecl fcn_00471e30(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -64,7 +64,7 @@ void __cdecl fcn_00591ea0(void)
 	sel = -1;
 	old_sel = -1;
 	last_win = -1;
-	fcn_00591c80();
+	d2_PruneBookmarkSlots();
 	win = fcn_00470820(0, 0, (char*) 0x6a9b54);
 	item = win;
 	d2_CenterDialogWindows(win);
@@ -141,7 +141,7 @@ void __cdecl fcn_00591ea0(void)
 				redraw = 1;
 			}
 			if (sel == clicks[0] && *(int*) (y + (unsigned long)&g_102cbc8) != -1) {
-				fcn_00591da0(*(int*) (y + (unsigned long)&g_102cbc8));
+				d2_SaveBookmarkSlot(*(int*) (y + (unsigned long)&g_102cbc8));
 				redraw = 1;
 			}
 		}
@@ -150,7 +150,7 @@ void __cdecl fcn_00591ea0(void)
 			*(int*) (*(int*) (y + (unsigned long)&g_102cbc8) * 0xc + 0x779d04) != -1;
 		fcn_00472640(clicks[1], i);
 		fcn_00472640(clicks[0], *(int*) (y + (unsigned long)&g_102cbc8) != -1);
-		fcn_00591d00();
+		d2_FocusBookmarkSlot();
 	} while (main_RunFrameLoop((int) fcn_00591ea0, 0x657c7));
 	d2_ClearRadioGroup(last_win);
 	fcn_00471e30(win);

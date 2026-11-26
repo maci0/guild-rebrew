@@ -12,7 +12,7 @@ int __cdecl vfs_ResolvePath(char* a, int b, int c, char* out);
 int __cdecl fcn_0050d200(int a, int b);
 char* __cdecl _strupr(char* s);
 void __cdecl fcn_005986f0(char* a, int b);
-void __cdecl fcn_00598740(float* out, int obj);
+void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj);
 void __cdecl fcn_004c5530(int a1);
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -34,7 +34,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl fcn_00597ff0(int, char*);
 int __cdecl d3_CollectUnusedSceneObjects(char*, int*);
-void __cdecl fcn_00598740(float* out, int obj);
+void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strupr(char*);
 
@@ -106,7 +106,7 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 	event[0x36] = 2;
 	*(int*) (event + 0x5c) = v4; *(int*) (event + 0x60) = fcn_0050d200(a0, v4);
 	fcn_005986f0(event + 0x80, v3);
-	fcn_00598740((float*) (event + 0x90), v3);
+	d3_ComputeObjectYawToTarget((float*) (event + 0x90), v3);
 	fcn_004c5530((int) event);
 	return 1;
 }

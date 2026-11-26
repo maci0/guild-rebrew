@@ -70,7 +70,7 @@ int __cdecl gm_CheckEntityStock(void*, int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl lc_GebaeudeAusrichten(int, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
-void __cdecl fcn_00598740(float*, int);
+void __cdecl d3_ComputeObjectYawToTarget(float*, int);
 char* __cdecl strncpy(char*, const char*, unsigned int);
 char* __cdecl strcpy(char*, const char*);
 int __cdecl fcn_004c5530(char*);
@@ -255,7 +255,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 				msg.f5c = i;
 				msg.f60 = fcn_0050d200((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), i);
 				d3_TransformPoint(obj, (float*) (obj + 0x4c), msg.pos);
-				fcn_00598740(msg.rot, (int) obj);
+				d3_ComputeObjectYawToTarget(msg.rot, (int) obj);
 				strncpy(msg.name, path, 0x3f);
 				fcn_004c5530((char*) &msg);
 				g_774654 = 1;

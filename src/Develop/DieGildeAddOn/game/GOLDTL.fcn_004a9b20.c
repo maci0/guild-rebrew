@@ -9,9 +9,9 @@ unsigned short __cdecl gm_RandomMod(int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004fa5b0(int, char*, int);
+int __cdecl gm_CheckPrivilege(int, char*, int);
 int __cdecl fcn_004a8880(char*, char*, int, char*, int);
-int __cdecl fcn_004a8b70(char*, char*, int, char*, int);
+int __cdecl ai_CheckLawActionPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction01cPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction01dPredicate(char*, char*, int, char*, int);
 int __cdecl fcn_004a8d40(char*, char*, int, char*, int);
@@ -60,7 +60,7 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 		*(int*) c.text = 1;
 		n1 = 0;
 		for (p = (int*) 0x67fa58; (int) p < (int) 0x67faa4; p++) {
-			if (fcn_004fa5b0(*p, actorEntity, (int) &c) & 2) {
+			if (gm_CheckPrivilege(*p, actorEntity, (int) &c) & 2) {
 				ids1[n1] = *p;
 				n1++;
 			}
@@ -69,7 +69,7 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 			*(int*) c.text = 2;
 			n2 = 0;
 			for (p = (int*) 0x67fa58; (int) p < (int) 0x67faa4; p++) {
-				if (fcn_004fa5b0(*p, actorEntity, (int) &c) & 2) {
+				if (gm_CheckPrivilege(*p, actorEntity, (int) &c) & 2) {
 					ids2[n2] = *p;
 					n2++;
 				}
@@ -90,14 +90,14 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 			*(int*) c.text = 1;
 			id = ids1[gm_RandomMod(n1)];
 			sel = 3;
-			if (!(fcn_004fa5b0(id, actorEntity, (int) &c) & 2)) {
+			if (!(gm_CheckPrivilege(id, actorEntity, (int) &c) & 2)) {
 				return 0;
 			}
 		} else {
 			*(int*) c.text = 2;
 			id = ids2[gm_RandomMod(n2)];
 			sel = 4;
-			if (!(fcn_004fa5b0(id, actorEntity, (int) &c) & 2)) {
+			if (!(gm_CheckPrivilege(id, actorEntity, (int) &c) & 2)) {
 				return 0;
 			}
 		}
@@ -107,11 +107,11 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 	} else if (*a3 == 0x10) {
 		id = *(int*) (a3 + 4);
 		*(int*) c.text = 1;
-		if (fcn_004fa5b0(id, actorEntity, (int) &c) & 2) {
+		if (gm_CheckPrivilege(id, actorEntity, (int) &c) & 2) {
 			*(int*) (a3 + 8) = 3;
 		} else {
 			*(int*) c.text = 2;
-			if (!(fcn_004fa5b0(id, actorEntity, (int) &c) & 2)) {
+			if (!(gm_CheckPrivilege(id, actorEntity, (int) &c) & 2)) {
 				return 0;
 			}
 			*(int*) (a3 + 8) = 4;
@@ -126,7 +126,7 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 		break;
 	case 0x13:
 	case 0x14:
-		r = fcn_004a8b70(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckLawActionPredicate(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x1c:
 		r = ai_CheckAction01cPredicate(a0, actorEntity, (int) &c, a3, a4);

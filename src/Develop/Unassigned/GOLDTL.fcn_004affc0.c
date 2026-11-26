@@ -14,7 +14,7 @@ extern char g_7f4ca4[];
 
 void __cdecl fcn_004c5530(void*);
 
-int __cdecl fcn_004affc0(void)
+int __cdecl hst_HandleBelagerungStart(void)
 {
 	char m[0xf8];
 	char* p;

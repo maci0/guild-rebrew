@@ -7,7 +7,7 @@ extern Slot_779d00 g_779d00[];
 char* __cdecl fcn_005049a0(char*);
 char* __cdecl gm_SetupEntityQuery(char*);
 
-void __cdecl fcn_005925e0(int idx, char* e)
+void __cdecl d2_SetBookmarkSlotEntity(int idx, char* e)
 {
 	char* r;
 

@@ -25,8 +25,8 @@ int __cdecl fcn_005800e0(void);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00423460(int);
-void __cdecl fcn_004237f0(int, int);
-int __cdecl fcn_004c3030(int, int, int, int);
+void __cdecl sb_StopVoice(int, int);
+int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
 int __cdecl fcn_00580140(void)
 {
@@ -53,11 +53,11 @@ int __cdecl fcn_00580140(void)
 	if (((struct fsm*)g_665f08)->page->voice != 0) {
 		if (((struct fsm*)g_665f08)->sound != 0) {
 			if (fcn_00423460(((struct fsm*)g_665f08)->sound) != 0) {
-				fcn_004237f0(((struct fsm*)g_665f08)->sound, 0);
+				sb_StopVoice(((struct fsm*)g_665f08)->sound, 0);
 			}
 			((struct fsm*)g_665f08)->sound = 0;
 		}
-		((struct fsm*)g_665f08)->sound = fcn_004c3030(-7, 0, ((struct fsm*)g_665f08)->page->voice, -1);
+		((struct fsm*)g_665f08)->sound = d3snd_PlaySoundEffect(-7, 0, ((struct fsm*)g_665f08)->page->voice, -1);
 	}
 	return 0;
 }

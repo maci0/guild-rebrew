@@ -13,7 +13,7 @@ void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl fcn_004c35f0(void);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_005759b0(char* u)
+void __cdecl he_StartAhmUnlockRecipe(char* u)
 {
 	char* h;
 	int* p;

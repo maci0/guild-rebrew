@@ -6,7 +6,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, int);
 
-void __cdecl fcn_005b2620(void* entity, void* recipient)
+void __cdecl he_NotifyFeudEscalated(void* entity, void* recipient)
 {
 	char buf[0x200];
 	char t;

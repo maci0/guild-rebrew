@@ -43,7 +43,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00427370(int);
 void __cdecl SetMasterVolume(int);
-int __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
+int __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 void __cdecl fcn_005e12d0(void);
 void __cdecl msx_ApplyAudioSettings(void);
 void __cdecl fcn_00471e30(int);
@@ -123,7 +123,7 @@ void __cdecl d2_ShowSoundOptions(void)
 			fcn_00427370((int) (music * master));
 			SetMasterVolume((int) (sfx * master));
 			if (d2_CurrentElementId == s1 && playing == 0) {
-				playing = fcn_004234e0(g_7747b8, s_6ad2e8, 1, 0x3f, 0x7f, 0, 0);
+				playing = sb_PlayVoice(g_7747b8, s_6ad2e8, 1, 0x3f, 0x7f, 0, 0);
 			}
 		}
 	}

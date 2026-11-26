@@ -63,13 +63,13 @@ int __cdecl fcn_004f0a30(char* a0, char* a1, unsigned int* a2,
 float __cdecl fcn_004f0eb0(int level, int percent, int count);
 int __cdecl fcn_005e8e80(Particle* o, Vec3* pos, Vec3* dir, float speed,
 	float b, float a);
-int __cdecl fcn_005e8fe0(float* p, float spread, float* dir, float lift,
+int __cdecl d3_PerturbParticleVelocity(float* p, float spread, float* dir, float lift,
 	float* up, float scale);
 int __cdecl fcn_004c4450(int i);
 int __cdecl main_RunFrameLoop(int a, int b);
 int __cdecl evt_LoadGfxScript(const char* name);
 int __cdecl fcn_00428340(int h, int a, int b, int c, int d, int e);
-int __cdecl fcn_004235b0(char* bank, const char* name, int prio, int loop,
+int __cdecl sb_PlayPrioritizedVoice(char* bank, const char* name, int prio, int loop,
 	int pan, int vol, int a);
 void __cdecl fcn_00589390(void);
 
@@ -129,7 +129,7 @@ int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 		pos0.x += emitter->pos.x; pos0.y += emitter->pos.y;
 		pos0.z += emitter->pos.z;
 		fcn_005e8e80(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
-		fcn_005e8fe0((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
+		d3_PerturbParticleVelocity((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
 		h = fcn_004f0a30(a1,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
@@ -148,9 +148,9 @@ int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 		pos0.z = dir2.z * (-5.0f) + pz;
 		fcn_005e8e80(&p1, &pos1, &emitter->dir1, speed, b, 7874.0f);
 		fcn_005e8e80(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
-		fcn_005e8fe0((float*) &p1, spread, &emitter->dir2, spread, &emitter->dir3,
+		d3_PerturbParticleVelocity((float*) &p1, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
-		fcn_005e8fe0((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
+		d3_PerturbParticleVelocity((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
 		h = fcn_004f0a30(a1,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
@@ -182,11 +182,11 @@ int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 		fcn_005e8e80(&p2, &pos2, &emitter->dir1, speed, b, 7874.0f);
 		fcn_005e8e80(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
 		fcn_005e8e80(&p1, &pos1, &emitter->dir1, speed, b, 7874.0f);
-		fcn_005e8fe0((float*) &p2, spread, &emitter->dir2, spread, &emitter->dir3,
+		d3_PerturbParticleVelocity((float*) &p2, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
-		fcn_005e8fe0((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
+		d3_PerturbParticleVelocity((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
-		fcn_005e8fe0((float*) &p1, spread, &emitter->dir2, spread, &emitter->dir3,
+		d3_PerturbParticleVelocity((float*) &p1, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
 		h = fcn_004f0a30(a1,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
@@ -216,16 +216,16 @@ int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 		fcn_00428340(h, 4, 5, dy, 40, emitter->frame2);
 		fcn_00428340(h2, 4, dx, dy, ey, emitter->frame2);
 		fcn_00428340(h3, 4, 0, ex, ez, emitter->frame2);
-		return fcn_004235b0(0, "Explosion", 1, 1, 0x3f, 0x7f, 0);
+		return sb_PlayPrioritizedVoice(0, "Explosion", 1, 1, 0x3f, 0x7f, 0);
 	}
 	if (sel == 2) {
 		h = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
 		h2 = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
 		fcn_00428340(h, 4, 5, 0, 40, emitter->frame1);
 		fcn_00428340(h2, 4, dx, dy, ey, emitter->frame1);
-		return fcn_004235b0(0, "Explosion", 2, 1, 0x3f, 0x7f, 0);
+		return sb_PlayPrioritizedVoice(0, "Explosion", 2, 1, 0x3f, 0x7f, 0);
 	}
 	h = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
 	fcn_00428340(h, 4, 0, 0, 50, emitter->frame0);
-	return fcn_004235b0(0, "Explosion", 3, 1, 0x3f, 0x7f, 0);
+	return sb_PlayPrioritizedVoice(0, "Explosion", 3, 1, 0x3f, 0x7f, 0);
 }

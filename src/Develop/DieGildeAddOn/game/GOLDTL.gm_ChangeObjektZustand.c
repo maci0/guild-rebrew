@@ -6,7 +6,7 @@ extern char g_699aa4[];
 unsigned char* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 #include "client_packet_builder.h"
-void __cdecl fcn_004c4670(int a, int b, int c, char* v);
+void __cdecl cm_AppendPacketFieldValue(int a, int b, int c, char* v);
 void __cdecl fcn_004c5360(void);
 
 void __cdecl gm_ChangeObjektZustand(int id, int delta)
@@ -25,6 +25,6 @@ void __cdecl gm_ChangeObjektZustand(int id, int delta)
 		v = 0;
 	}
 	cm_BeginPacketFieldDelta((char*) r, id);
-	fcn_004c4670(1, 1, 0x12, &v);
+	cm_AppendPacketFieldValue(1, 1, 0x12, &v);
 	fcn_004c5360();
 }

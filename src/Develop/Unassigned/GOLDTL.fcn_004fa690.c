@@ -14,7 +14,7 @@ extern GRAPH_SAMPLE g_99ec20[16];
 extern char g_99f5e0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_004fa690(void)
+void __cdecl gm_ResetCityStats(void)
 {
 	memset(&g_99f5a0, 0, 36);
 	memset(g_99f6a0, 0, 340);

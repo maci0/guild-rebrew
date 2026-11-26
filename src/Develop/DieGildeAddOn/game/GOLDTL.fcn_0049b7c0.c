@@ -29,7 +29,7 @@ typedef struct Counts {
 } Counts;
 
 unsigned short __cdecl gm_RandomMod(int n);
-void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
+void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 
 /* Each arm declares its own message pair (block scope) so the pair lands in
@@ -58,7 +58,7 @@ int __cdecl fcn_0049b7c0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 		slots[7].id = 0x2b4;
 		slots[8].id = 0x2b5;
 		slots[9].id = 0x2b3;
-		fcn_004a51d0(e, 10, slots, &cnt);
+		gm_CheckEntityObjectSlots(e, 10, slots, &cnt);
 		if ((cnt.total != 6 || cnt.free != 0) && cnt.blocked != 10) {
 			if (cnt.total < 6 && cnt.free == 0) {
 				Msg a;

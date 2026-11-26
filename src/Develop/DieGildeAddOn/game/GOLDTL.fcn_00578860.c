@@ -25,7 +25,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 
-void __cdecl fcn_00578860(char* e)
+void __cdecl he_StartHauchDesVerfalls(char* e)
 {
 	char buf[0x400];
 	char* p;

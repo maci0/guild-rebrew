@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-void __cdecl fcn_004ae080(char* src, char* out, int* consumed, int* rest)
+void __cdecl hst_SplitFormatPrefix(char* src, char* out, int* consumed, int* rest)
 {
 	int dashes;
 	char prev;

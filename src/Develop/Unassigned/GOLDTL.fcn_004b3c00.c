@@ -15,7 +15,7 @@ typedef struct {
 
 extern pos14_7f4c00 gm_GameTime;
 
-fcn_004b3c00_rec* __cdecl fcn_004b3bc0(int);
+fcn_004b3c00_rec* __cdecl gm_FindMissionByEntityId(int);
 
 
 /* ADDRESS: GOLDTL 0x004b3c00 */
@@ -23,7 +23,7 @@ fcn_004b3c00_rec* __cdecl fcn_004b3c00(int a)
 {
 	fcn_004b3c00_rec* p;
 
-	p = fcn_004b3bc0(a);
+	p = gm_FindMissionByEntityId(a);
 	if (p != 0) {
 		p->when = (*(pos14_7f4c00*)&gm_GameTime);
 		p->f18 = 0;

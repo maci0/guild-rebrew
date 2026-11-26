@@ -2,7 +2,7 @@
 
 extern Entry680bd0 g_680bd0[48];
 
-int __cdecl fcn_004b3cb0(int);
+int __cdecl gm_CountMissionEntriesByKey(int);
 int __cdecl fcn_004b3b80(int);
 
 
@@ -14,7 +14,7 @@ int __cdecl fcn_004b3db0(int key)
 	int i;
 	int seen;
 
-	n = fcn_004b3cb0(key);
+	n = gm_CountMissionEntriesByKey(key);
 	if (n > 0) {
 		pick = fcn_004b3b80(n);
 		for (i = 0, seen = 0; i < 48; i++) {

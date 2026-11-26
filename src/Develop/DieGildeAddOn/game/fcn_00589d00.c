@@ -52,7 +52,7 @@ void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004a5e60(unsigned short*, int, F8_589d00, int, float, int*);
 int __cdecl fcn_004c5530(Msg_589d00*);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_004c3030(int, int, char*, int);
+void __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl fcn_00532ef0(void);
 
 /* ADDRESS: GOLDTL 0x00589d00 */
@@ -191,7 +191,7 @@ void __cdecl fcn_00589d00(int a0)
 							main_RunFrameLoop(0, 0x20007);
 						} while (1);
 					}
-					fcn_004c3030(-7, 0, (char*) 0x6a9508, 0);
+					d3snd_PlaySoundEffect(-7, 0, (char*) 0x6a9508, 0);
 					g_774654 = 1;
 				}
 			} else if (pick == yes) {

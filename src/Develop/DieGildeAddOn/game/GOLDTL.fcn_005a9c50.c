@@ -33,7 +33,7 @@ void __cdecl fcn_005ce460(int);
 void __cdecl fcn_005a92c0(int);
 void __cdecl d2_ShowOfficeApplicationDialog(void);
 
-void __cdecl fcn_005a9c50(int arg)
+void __cdecl d2_RunRathausCouncilMenu(int building)
 {
 	int a;
 	int b;
@@ -42,7 +42,7 @@ void __cdecl fcn_005a9c50(int arg)
 	int e;
 
 	fcn_005338a0();
-	if (main_RunFrameLoop((void*) fcn_005a9c50, 0x67fff) != 0) {
+	if (main_RunFrameLoop((void*) d2_RunRathausCouncilMenu, 0x67fff) != 0) {
 		do {
 			if (d2_IsTutorialActionAllowed(0x1000) == 1) {
 				a = RegisterStatusText(s_6aaf40, g_14aa2f0, 0xc);
@@ -77,12 +77,12 @@ void __cdecl fcn_005a9c50(int arg)
 					fcn_005ce460(0x113);
 				}
 				else if (g_7746a0 == d) {
-					fcn_005a92c0(arg);
+					fcn_005a92c0(building);
 				}
 				else if (g_7746a0 == e) {
 					d2_ShowOfficeApplicationDialog();
 				}
 			}
-		} while (main_RunFrameLoop((void*) fcn_005a9c50, 0x67fff) != 0);
+		} while (main_RunFrameLoop((void*) d2_RunRathausCouncilMenu, 0x67fff) != 0);
 	}
 }

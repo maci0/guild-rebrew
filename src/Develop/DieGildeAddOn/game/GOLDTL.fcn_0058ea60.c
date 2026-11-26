@@ -33,9 +33,9 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-int __cdecl fcn_004c2db0(int, int);
+int __cdecl d3snd_SelectVoiceCode(int, int);
 char* __cdecl d2_RunSeance(char*, char*);
-void __cdecl fcn_004a51d0(ENTITY_RECORD*, int, struct offer*, struct level*);
+void __cdecl gm_CheckEntityObjectSlots(ENTITY_RECORD*, int, struct offer*, struct level*);
 float __cdecl fcn_004f4770(char*);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00470820(int, int, char*);
@@ -47,7 +47,7 @@ int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_005782f0(ENTITY_RECORD*, int);
 int __cdecl io_AppendText();
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_004c3030(int, int, char*, int);
+int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -67,7 +67,7 @@ void __cdecl d2_RunSeanceItemsDialog(char* e, char* res)
 	int v;
 
 	id = 0;
-	t = fcn_004c2db0(*(int*) (res + 0x14), *(int*) (res + 0x4c));
+	t = d3snd_SelectVoiceCode(*(int*) (res + 0x14), *(int*) (res + 0x4c));
 	m = d2_RunSeance(e, res);
 	memset(list, 0, sizeof(list));
 	list[0].id = 0x2b8;
@@ -85,7 +85,7 @@ void __cdecl d2_RunSeanceItemsDialog(char* e, char* res)
 	list[12].id = 0x2c0;
 	list[13].id = 0x2be;
 	list[14].id = 0x2b9;
-	fcn_004a51d0(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 0xf, list, &lv);
+	gm_CheckEntityObjectSlots(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 0xf, list, &lv);
 	if ((lv.n == 6 && lv.x == 0) || lv.total == 0xf) {
 		mode = 1;
 	} else {
@@ -111,15 +111,15 @@ void __cdecl d2_RunSeanceItemsDialog(char* e, char* res)
 		fcn_004c51f0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1, id, 1, g_773d75, 0);
 		fcn_005782f0(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2);
 		io_AppendText(0x40f2, 0x40cc, id * 2 + 0x9a8);
-		fcn_004c3030(t, 0, "GEIST_KOMMT", gm_RandomMod(8));
+		d3snd_PlaySoundEffect(t, 0, "GEIST_KOMMT", gm_RandomMod(8));
 	} else if (mode == 1) {
 		v = (gm_RandomMod(0x400) + 1000) << 5;
 		fcn_004c5150(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1, g_773d75, v);
 		io_AppendText(0x40f3, 0x40cc, v);
-		fcn_004c3030(t, 0, "GEIST_KOMMT", gm_RandomMod(8));
+		d3snd_PlaySoundEffect(t, 0, "GEIST_KOMMT", gm_RandomMod(8));
 	} else {
 		io_AppendText(0x40d3, 0x40cc);
-		fcn_004c3030(t, 0, "GEIST_KOMMT_NICHT", gm_RandomMod(8));
+		d3snd_PlaySoundEffect(t, 0, "GEIST_KOMMT_NICHT", gm_RandomMod(8));
 	}
 	do {
 		if (g_14ce8e0 != 0) {

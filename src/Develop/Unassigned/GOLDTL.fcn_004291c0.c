@@ -40,7 +40,7 @@ void __cdecl evt_ReturnFromFunction(void);
 void __cdecl fcn_00427570(void);
 void __cdecl fcn_00427580(void);
 void __cdecl fcn_00427590(void);
-void __cdecl fcn_004275a0(void);
+void __cdecl evt_TrySkipIfFalseBlock(void);
 void __cdecl evt_ExecuteCommand(int);
 void __cdecl evt_ParseVariableAssignment(int);
 void __cdecl evt_EnterFunction(char*, int);
@@ -88,7 +88,7 @@ int __cdecl evt_ExecuteStatements(char* g)
 				evt_ParseIfHead();
 				break;
 			case 4:
-				fcn_004275a0();
+				evt_TrySkipIfFalseBlock();
 				break;
 			case 5:
 				evt_IncludeScript();

@@ -4,7 +4,7 @@ void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void* __cdecl FindSlotEntryFiltered(int, char*, void*, void*, int);
 char __cdecl fcn_004f1790(int, int*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-int __cdecl fcn_0057b9d0(char*, int, int);
+int __cdecl he_HasActiveGrabpflege(char*, int, int);
 void __cdecl fcn_0046c310(int);
 
 extern void* g_1015ea0;
@@ -74,7 +74,7 @@ void __cdecl fcn_0058b1f0(char* building, DialogState* st, unsigned int type)
 			de->id = item->id;
 			de->kind = fcn_004f1790(*(int*) (building + 0x65), (int*) item);
 			de->btn = d2_AddElementToWindow(1, y, (item->flag == -1) ? g_665f58[st->type] : g_665f68[st->type], st->slot);
-			if (fcn_0057b9d0(building, item->id, de->kind)) {
+			if (he_HasActiveGrabpflege(building, item->id, de->kind)) {
 				d2_AddElementToWindow(0xf, y + 7, 0x7de, st->slot);
 			}
 			*(int*) ((char*) g_1015ea0 + 0x5c + de->btn * 0x2f4) = 1;

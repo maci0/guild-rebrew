@@ -48,7 +48,7 @@ extern unsigned char* g_7746c8;
 extern int g_14ad0cc;
 extern int g_14ad0d4;
 
-int __cdecl fcn_00508da0(unsigned char* s);
+int __cdecl gm_GetEntityMood(unsigned char* s);
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
@@ -69,7 +69,7 @@ void __cdecl fcn_0052df40(unsigned char* s)
 	unsigned char* t;
 	unsigned char r;
 
-	pct = fcn_00508da0(s);
+	pct = gm_GetEntityMood(s);
 	if (g_6a25b8 != -1) {
 		return;
 	}

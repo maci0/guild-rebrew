@@ -5,7 +5,7 @@
 
 void __cdecl msx_ReacquireWaveDriver(int, int, int);
 
-void __cdecl fcn_0042a460(int a1, int a2)
+void __cdecl msx_ReacquireAllWaveDrivers(int a1, int a2)
 {
 	int driverCursor;
 

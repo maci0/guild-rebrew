@@ -14,7 +14,7 @@ int __cdecl gm_CalculateGebaeudeValue(unsigned char*, int);
 void __cdecl gm_CollectGebaeudeUpgrades(unsigned char* e);
 char* __cdecl gm_SearchTable67(int id);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00508da0(unsigned char* e);
+int __cdecl gm_GetEntityMood(unsigned char* e);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int i, int flag);
@@ -67,7 +67,7 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 		last = fl;
 		if (redraw != 0) {
 			d2_SetForm(d, 1);
-			k = (int) (9 - fcn_00508da0(p) / 10 + 0.5);
+			k = (int) (9 - gm_GetEntityMood(p) / 10 + 0.5);
 			if (*(unsigned short*) (p + 0x27) != g_774970 && *(unsigned short*) (p + 0x25) != g_774970) {
 				io_AppendText(0x17a0, *(unsigned short*) (p + 0x25), p, k + 0x17b1, k + 0x17bb, r);
 				if (*tbl == 1) {

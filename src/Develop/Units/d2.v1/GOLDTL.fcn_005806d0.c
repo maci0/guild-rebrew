@@ -38,8 +38,8 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00423460(int);
-void __cdecl fcn_004237f0(int, int);
-int __cdecl fcn_004c3030(int, int, int, int);
+void __cdecl sb_StopVoice(int, int);
+int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
 int __cdecl fcn_005806d0(void)
 {
@@ -101,11 +101,11 @@ int __cdecl fcn_005806d0(void)
 		if (((struct tutor*)g_665f08)->lesson->steps[((struct tutor*)g_665f08)->index].sound != 0) {
 			if (((struct tutor*)g_665f08)->sound != 0) {
 				if (fcn_00423460(((struct tutor*)g_665f08)->sound) != 0) {
-					fcn_004237f0(((struct tutor*)g_665f08)->sound, 0);
+					sb_StopVoice(((struct tutor*)g_665f08)->sound, 0);
 				}
 				((struct tutor*)g_665f08)->sound = 0;
 			}
-			((struct tutor*)g_665f08)->sound = fcn_004c3030(-7, 0, ((struct tutor*)g_665f08)->lesson->steps[((struct tutor*)g_665f08)->index].sound, -1);
+			((struct tutor*)g_665f08)->sound = d3snd_PlaySoundEffect(-7, 0, ((struct tutor*)g_665f08)->lesson->steps[((struct tutor*)g_665f08)->index].sound, -1);
 		}
 		if (((struct tutor*)g_665f08)->lesson->done != 0) {
 			((struct tutor*)g_665f08)->lesson->done();

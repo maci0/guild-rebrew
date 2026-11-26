@@ -15,11 +15,11 @@ struct IUnk41e530 {
 	VT41e530* vt;
 };
 
-long __cdecl fcn_0041f530(int id, long* p1, long* p2);
+long __cdecl PollVideoEvents(int id, long* p1, long* p2);
 int __cdecl CloseVideo(int id);
 char* __cdecl FindVideoByWindow(void* hwnd);
 
-long __stdcall fcn_0041e530(void* hwnd, unsigned int msg, unsigned int wp, long lp)
+long __stdcall VideoWindowProc(void* hwnd, unsigned int msg, unsigned int wp, long lp)
 {
 	char* n;
 	int id;
@@ -46,7 +46,7 @@ long __stdcall fcn_0041e530(void* hwnd, unsigned int msg, unsigned int wp, long 
 		break;
 	case 0x9021:
 		id = lp;
-		if (fcn_0041f530(id, (long*) &wp, &lp) == 1) {
+		if (PollVideoEvents(id, (long*) &wp, &lp) == 1) {
 			CloseVideo(id);
 			DestroyWindow(hwnd);
 			return 0;

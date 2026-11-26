@@ -17,7 +17,7 @@ typedef struct Query {
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_004fa5b0(int k, char* e, Query* q);
+int __cdecl gm_CheckPrivilege(int k, char* e, Query* q);
 
 int __cdecl ai_ExecuteAmtAction(char* entity, char* cmd, char* params)
 {
@@ -82,5 +82,5 @@ int __cdecl ai_ExecuteAmtAction(char* entity, char* cmd, char* params)
 	default:
 		return 0;
 	}
-	return !(fcn_004fa5b0(k, entity, &query) & 0x60);
+	return !(gm_CheckPrivilege(k, entity, &query) & 0x60);
 }

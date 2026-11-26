@@ -9,7 +9,7 @@ typedef struct {
 
 extern int g_67a370;
 void __cdecl d3_VisitSceneObjects(int a, char* e, int mask, void (__cdecl* cb)(void), RGB_COLOR* c);
-void __cdecl fcn_00414c70(void);
+void __cdecl d3_SetObjectColorBytes(void);
 
 void __cdecl d3_SetSubtreeColor(char* e, unsigned char r, unsigned char g, unsigned char b)
 {
@@ -25,9 +25,9 @@ void __cdecl d3_SetSubtreeColor(char* e, unsigned char r, unsigned char g, unsig
 	if ((*(unsigned char*) (e + 0x214) & 1) == 0) {
 		saved = *(int*) (e + 0x1f4);
 		*(int*) (e + 0x1f4) = 0;
-		d3_VisitSceneObjects(g_67a370, e, 0x1ff, fcn_00414c70, &c);
+		d3_VisitSceneObjects(g_67a370, e, 0x1ff, d3_SetObjectColorBytes, &c);
 		*(int*) (e + 0x1f4) = saved;
 		return;
 	}
-	d3_VisitSceneObjects(g_67a370, e, 0x1ff, fcn_00414c70, &c);
+	d3_VisitSceneObjects(g_67a370, e, 0x1ff, d3_SetObjectColorBytes, &c);
 }

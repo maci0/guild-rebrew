@@ -18,22 +18,22 @@ extern int g_67a370;
 extern int g_14d1f40[];
 extern int g_1511f40[];
 
-void __cdecl fcn_004058f0(Grid* m)
+void __cdecl ch_BackupGrid(Grid* grid)
 {
 	int* dst;
 	int i;
 	int j;
 
-	if ((*(Grid**)g_1043370) == m) {
+	if ((*(Grid**)g_1043370) == grid) {
 		dst = g_14d1f40;
-	} else if (*(Grid**) (((char*)g_67a370) + 0xb0) == m) {
+	} else if (*(Grid**) (((char*)g_67a370) + 0xb0) == grid) {
 		dst = g_1511f40;
 	} else {
 		return;
 	}
-	for (i = 0; i < m->n; i++) {
-		for (j = 0; j < m->n; j++) {
-			dst[m->n * j + i] = m->cells[m->n * j + i].v;
+	for (i = 0; i < grid->n; i++) {
+		for (j = 0; j < grid->n; j++) {
+			dst[grid->n * j + i] = grid->cells[grid->n * j + i].v;
 		}
 	}
 }

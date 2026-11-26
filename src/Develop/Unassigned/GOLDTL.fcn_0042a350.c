@@ -4,7 +4,7 @@
 
 int __cdecl fcn_0042a2d0(int);
 
-int __cdecl fcn_0042a350(void)
+int __cdecl msx_CloseAllWaveDrivers(void)
 {
 	int r = 0;
 	int a;

@@ -29,7 +29,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 void* __cdecl gm_LookupEntityRecordById(int handle);
 void* __cdecl he_StartHandlungSearch(int a, int b, int c);
 void* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
+void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl ai_SelectBestMethod(int type, int id, int n, Msg* a, Msg* b);
 
 /* ADDRESS: GOLDTL 0x0049adb0 */
@@ -105,7 +105,7 @@ int __cdecl fcn_0049adb0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 	}
 	rec = e;
 build:
-	fcn_004a51d0(e, n, slots, &cnt);
+	gm_CheckEntityObjectSlots(e, n, slots, &cnt);
 	if (cnt.total == 6 && cnt.free == 0) {
 		return 0;
 	}

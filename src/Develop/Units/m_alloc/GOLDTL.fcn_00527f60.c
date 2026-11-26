@@ -69,7 +69,7 @@ void __cdecl fcn_005279f0(int);
 char* __cdecl d2_SelectFont(int);
 void __cdecl fcn_00500d60(int*, char*);
 int __cdecl fcn_0051e070(void);
-int __cdecl fcn_004fe330(char*, int);
+int __cdecl gm_GetSeasonFromDate(char*, int);
 void __cdecl d2_DrawDefaultFontText(int, int, int, char*, int);
 void* __cdecl d2_GetResourceData(int);
 int __cdecl fcn_0047cba0(int, int, int, void*, int);
@@ -267,7 +267,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 	if (fcn_0051e070() == 2) {
 		sprintf(fr.text, (char*) 0x6a2e5c,
 			*(int*) (0x14a5450
-				 + fcn_004fe330((char*) &fr.pos,
+				 + gm_GetSeasonFromDate((char*) &fr.pos,
 						*(short*) ((char*) &fr.pos + 2))
 					 * 4));
 		d2_DrawDefaultFontText(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x181,
@@ -275,7 +275,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 	} else {
 		sprintf(fr.text, (char*) 0x6a2e5c,
 			*(int*) (0x14a5450
-				 + fcn_004fe330((char*) &fr.pos,
+				 + gm_GetSeasonFromDate((char*) &fr.pos,
 						*(short*) ((char*) &fr.pos + 2))
 					 * 4));
 		d2_DrawDefaultFontText(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x195,

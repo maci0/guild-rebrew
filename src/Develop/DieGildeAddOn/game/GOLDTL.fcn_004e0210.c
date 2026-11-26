@@ -16,7 +16,7 @@ unsigned char* __cdecl fcn_004e6a70(int);
 int __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004de610(int);
-int __cdecl fcn_004c3030(int, int, char*, int);
+int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl cut_WaitTicks(int);
 char* __cdecl ch_CreateQueuedAction(char*, void*, int, int, int);
 void __cdecl fcn_004dff50(void);
@@ -44,7 +44,7 @@ void __cdecl fcn_004e0210(char* e, char* foe)
 			d2_SetForm(g_68bfc0, 0);
 			t = fcn_004de610(7);
 			io_AppendText(t + 0x10fa, *(unsigned short*) e);
-			fcn_004c3030(*(unsigned short*) e, 0, "_DUELL_INTRO_C2_AUSWAHL_SCHIESSEN", t);
+			d3snd_PlaySoundEffect(*(unsigned short*) e, 0, "_DUELL_INTRO_C2_AUSWAHL_SCHIESSEN", t);
 			cut_WaitTicks(2);
 			io_AppendText((int) "$N");
 			o = ch_CreateQueuedAction(*(char**) (e + 0x184), (void*) fcn_004dff50, 6, 0x2e, 1);
@@ -80,7 +80,7 @@ void __cdecl fcn_004e0210(char* e, char* foe)
 			io_AppendText(0x10e8, *(unsigned short*) e);
 			t = fcn_004de610(8);
 			io_AppendText(t + 0x10e9);
-			fcn_004c3030(*(unsigned short*) e, 0, "_DUELL_INTRO_C2_AUSWAHL_LAESTERN", t);
+			d3snd_PlaySoundEffect(*(unsigned short*) e, 0, "_DUELL_INTRO_C2_AUSWAHL_LAESTERN", t);
 			io_AppendText((int) "$N");
 			ch_QueuePlayAnimation(*(char**) (e + 0x184), "gestik/abfaellig", 1);
 			cut_WaitTicks(2);

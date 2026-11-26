@@ -20,7 +20,7 @@ int __cdecl fcn_00472830(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_004116d0(void);
+void __cdecl io_ClearInputState(void);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl main_RunFrameLoop(void* fn, int arg);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -122,7 +122,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 		if (!main_RunFrameLoop((void*) 0x4bec20, 0x657c7)) {
 			d2_ClearRadioGroup(k);
 			fcn_00471e30(g);
-			fcn_004116d0();
+			io_ClearInputState();
 			return selection;
 		}
 	}

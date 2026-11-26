@@ -16,7 +16,7 @@ void __cdecl ch_RunAnimationScript();
 char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl evt_LogScriptError(char*, int, const char*);
 
-void __cdecl fcn_0040d0f0();
+void __cdecl ch_RunQueuedAniScript();
 char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl evt_LogScriptError(char*, int, const char*);
 #include "Develop/Units/Error/error_message.h"
@@ -113,7 +113,7 @@ int __cdecl PlayCharacterAniScriptInt(char** ch, char** script, int* kind, unsig
 		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "PlayCharacterAniScriptInt(): invalid character");
 		return 1;
 	}
-	task = ch_CreateQueuedAction(*ch, fcn_0040d0f0, *level, 0x2e, *kind);
+	task = ch_CreateQueuedAction(*ch, ch_RunQueuedAniScript, *level, 0x2e, *kind);
 	if (task != 0) {
 		if (strlen(*script) >= 0x5f) {
 			ReportClientMessage("PlayCharacterAniScript(): script name too long");

@@ -9,7 +9,7 @@ void __cdecl fcn_00535960(void);
 int* __cdecl fcn_004ce180(void);
 int __cdecl fcn_004ce3e0(int);
 
-void __cdecl fcn_005934d0(void)
+void __cdecl d3_FlushLoadAndPreloadQueue(void)
 {
 	int h;
 	int r;

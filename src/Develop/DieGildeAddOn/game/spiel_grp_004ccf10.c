@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_005b2220(char*, char*, void*, int);
+void __cdecl he_NotifyPlotSlotPurchase(char*, char*, void*, int);
 typedef struct {
 	char pad[0x10];
 	int tag;
@@ -80,7 +80,7 @@ int __cdecl fcn_004ccf10(int cmd, char* result)
 		}
 		*(int*) ((char*) entity + 0x1c + i * 4) = -1;
 		if (g_774970 == *(unsigned short*) ((char*) site + 0x27))
-			fcn_005b2220(rec, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), site, *(int*) (cmd + 0x20));
+			he_NotifyPlotSlotPurchase(rec, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), site, *(int*) (cmd + 0x20));
 	}
 
 	if (result != (char*) 0x0) {

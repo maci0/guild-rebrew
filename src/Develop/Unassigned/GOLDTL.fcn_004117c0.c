@@ -1,8 +1,8 @@
 
 
-typedef int (__stdcall* fcn_004117c0_m)(int*);
+typedef int (__stdcall* INPUT_ACQUIRE_FN)(int*);
 
-int __cdecl fcn_004117c0(int a1)
+int __cdecl io_AcquireKeyboard(int acquire)
 {
 	int* obj;
 
@@ -14,12 +14,12 @@ int __cdecl fcn_004117c0(int a1)
 	if (obj == 0) {
 		return 0;
 	}
-	if (a1 != 0) {
-		if (((fcn_004117c0_m) ((int*) *obj)[7])(obj) < 0) {
+	if (acquire != 0) {
+		if (((INPUT_ACQUIRE_FN) ((int*) *obj)[7])(obj) < 0) {
 			return 0;
 		}
 	} else {
-		((fcn_004117c0_m) ((int*) *obj)[8])(obj);
+		((INPUT_ACQUIRE_FN) ((int*) *obj)[8])(obj);
 	}
 	return 1;
 }

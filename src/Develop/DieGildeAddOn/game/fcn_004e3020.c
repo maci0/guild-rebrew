@@ -17,7 +17,7 @@ extern unsigned char g_7747b0;
 extern char g_5438c0[];
 
 int __cdecl gm_LookupEntityRecordById(void* p);
-int __cdecl fcn_004c3100(char* s, int a);
+int __cdecl sb_LoadLocalizedSampleBank(char* s, int a);
 void __cdecl fcn_004e4e90(char* s);
 void __cdecl fcn_004e4730(char* s);
 void __cdecl fcn_00445f50(int a, int b, float f, int c);
@@ -75,7 +75,7 @@ void __cdecl fcn_004e3020(void* arg)
 		}
 		i++;
 	}
-	handle = fcn_004c3100((char*) 0x68d324, 1);
+	handle = sb_LoadLocalizedSampleBank((char*) 0x68d324, 1);
 	fcn_004e4e90((char*) 0x68bd2c);
 	fcn_004e4730((char*) 0x68d318);
 	fcn_00445f50(state, 0, 1.0f, 1);

@@ -22,10 +22,10 @@ typedef struct {
 } D3dRegCfg_44c940;
 // SIZE 0x58
 
-int __cdecl fcn_004112b0(const char* sub, int mode);
+int __cdecl io_OpenRegistryKey(const char* sub, int mode);
 int __cdecl fcn_00411350(int h, const char* name);
 int __cdecl fcn_00411390(int h, const char* name, int* out);
-int __cdecl fcn_004113d0(int h, const char* name, char* out);
+int __cdecl io_ReadRegistryString(int h, const char* name, char* out);
 int __cdecl fcn_00411490(int h, const char* name, float* out);
 void __cdecl fcn_00410430(int h);
 int __cdecl fcn_0065f220(const char* a, const char* b);
@@ -65,7 +65,7 @@ char __cdecl d3_ReadRegistryConfig(D3dRegCfg_44c940* cfg, const char* key, D3dRe
 			rep movsb
 		}
 	}
-	h = fcn_004112b0(key, 1);
+	h = io_OpenRegistryKey(key, 1);
 	if (h != -1) {
 		v = fcn_00411350(h, "d3_registry_version");
 		if (v != 3) {
@@ -86,7 +86,7 @@ char __cdecl d3_ReadRegistryConfig(D3dRegCfg_44c940* cfg, const char* key, D3dRe
 			fcn_00411390(h, "d3d_floortex_divider", &cfg->floortex_divider);
 			fcn_00411390(h, "d3d_z_buffer_depth", &cfg->z_buffer_depth);
 			fcn_00411390(h, "d3d_static_texture_fourcc", &cfg->static_tex_fourcc);
-			if (fcn_004113d0(h, "d3io_LODMode", mode) != 0) {
+			if (io_ReadRegistryString(h, "d3io_LODMode", mode) != 0) {
 				if (fcn_0065f220(mode, "d3io_LOD_SWITCH") == 0) {
 					d3_LODMode = 1;
 				} else if (fcn_0065f220(mode, "d3io_LOD_LOW") == 0) {

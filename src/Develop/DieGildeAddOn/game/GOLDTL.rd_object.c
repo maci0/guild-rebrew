@@ -5,7 +5,7 @@ int __cdecl vfs_ReadByte(void* stream, void* dst);
 char* __cdecl vfs_ReadCString(void* stream, char* dst);
 int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
-void __cdecl fcn_00401280(void* stream, void* dst);
+void __cdecl vfs_ReadVec3(void* stream, void* dst);
 void __cdecl ReportClientMessage(const char* msg);
 void __cdecl fcn_00438b40(char* object, void* vector);
 void __cdecl d3_SetObjectRotation(char* object, void* vector);
@@ -196,18 +196,18 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 			/* FALLTHROUGH */
 		case 2:
 		case 3:
-			fcn_00401280(stream, object + 0x4c);
-			fcn_00401280(stream, object + 0x84);
+			vfs_ReadVec3(stream, object + 0x4c);
+			vfs_ReadVec3(stream, object + 0x84);
 			vfs_ReadByte(stream, &b);
 			object[0x214] = (char) ((object[0x214] & ~0x40) | ((b << 6) & 0x40));
 			if (b != 0) {
-				fcn_00401280(stream, object + 0x5c);
-				fcn_00401280(stream, object + 0x90);
+				vfs_ReadVec3(stream, object + 0x5c);
+				vfs_ReadVec3(stream, object + 0x90);
 			}
 			if (version >= 0x3a6c00afu) {
 				for (i = 0, lights = object + 0xa8; i < 10; i++) {
-					fcn_00401280(stream, lights - 0x0c);
-					fcn_00401280(stream, lights);
+					vfs_ReadVec3(stream, lights - 0x0c);
+					vfs_ReadVec3(stream, lights);
 					lights += 0x18;
 				}
 			}
@@ -219,9 +219,9 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 				object[0x214] = (char) (object[0x214] | 0x40);
 			}
 			fcn_004011d0(stream, object + 0x68);
-			fcn_00401280(stream, object + 0x4c);
-			fcn_00401280(stream, object + 0x5c);
-			fcn_00401280(stream, object + 0x90);
+			vfs_ReadVec3(stream, object + 0x4c);
+			vfs_ReadVec3(stream, object + 0x5c);
+			vfs_ReadVec3(stream, object + 0x90);
 			break;
 		case 5:
 		case 6:
@@ -237,9 +237,9 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 				fcn_004011d0(stream, object + 0x90);
 				fcn_004011d0(stream, object + 0x94);
 				fcn_004011d0(stream, object + 0x98);
-				fcn_00401280(stream, object + 0x5c);
-				fcn_00401280(stream, object + 0x4c);
-				fcn_00401280(stream, object + 0x84);
+				vfs_ReadVec3(stream, object + 0x5c);
+				vfs_ReadVec3(stream, object + 0x4c);
+				vfs_ReadVec3(stream, object + 0x84);
 				if (version >= 0x3a6c00acu) {
 					fcn_004011d0(stream, RD_LIGHTS(object) + 0x198);
 					fcn_004011f0(stream, RD_LIGHTS(object) + 0x19c);
@@ -249,9 +249,9 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 					fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);
 					fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x24);
 					fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x2c);
-					fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38 + 0x18);
-					fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38);
-					fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38 + 0x0c);
+					vfs_ReadVec3(stream, RD_LIGHTS(object) + off * 0x38 + 0x18);
+					vfs_ReadVec3(stream, RD_LIGHTS(object) + off * 0x38);
+					vfs_ReadVec3(stream, RD_LIGHTS(object) + off * 0x38 + 0x0c);
 					if (version >= 0x3a6c00acu) {
 						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x30);
 						fcn_004011f0(stream, RD_LIGHTS(object) + off * 0x38 + 0x34);
@@ -277,8 +277,8 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 				*(int*) (object + 0x84) = 0;
 				*(int*) (object + 0x88) = 0;
 				*(int*) (object + 0x8c) = 0;
-				fcn_00401280(stream, object + 0x5c);
-				fcn_00401280(stream, object + 0x4c);
+				vfs_ReadVec3(stream, object + 0x5c);
+				vfs_ReadVec3(stream, object + 0x4c);
 				if (version >= 0x3a6c00a1u) {
 					count = fcn_00446ca0(version);
 					off = 0;
@@ -286,8 +286,8 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);
 						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x24);
 						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x2c);
-						fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38 + 0x18);
-						fcn_00401280(stream, RD_LIGHTS(object) + off * 0x38);
+						vfs_ReadVec3(stream, RD_LIGHTS(object) + off * 0x38 + 0x18);
+						vfs_ReadVec3(stream, RD_LIGHTS(object) + off * 0x38);
 						off++;
 					}
 					if (start < 7) {

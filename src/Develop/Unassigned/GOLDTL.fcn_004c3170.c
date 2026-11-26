@@ -6,7 +6,7 @@ extern int g_772e70;
 extern int g_772e74;
 extern int g_772e7c;
 
-int __cdecl fcn_004c3100(char*, int);
+int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 
 
 /* Loads the worker comment and greeting sound banks for the building type
@@ -67,17 +67,17 @@ void __cdecl fcn_004c3170(unsigned char* b)
 		}
 	}
 	if (cmd[0] != 0) {
-		g_772e6c = fcn_004c3100(cmd, 0);
+		g_772e6c = sb_LoadLocalizedSampleBank(cmd, 0);
 	}
 	if (click[0] != 0) {
-		g_772e70 = fcn_004c3100(click, 0);
+		g_772e70 = sb_LoadLocalizedSampleBank(click, 0);
 	}
 	if ((((BUILDING_PROTOTYPE*)t)->category) != 0x1d && (((BUILDING_PROTOTYPE*)t)->category) != 0x1e) {
-		g_772e74 = fcn_004c3100("ARBEITER_KOMMENTARE_KLICK_GERAEUSCHE.sbf", 0);
+		g_772e74 = sb_LoadLocalizedSampleBank("ARBEITER_KOMMENTARE_KLICK_GERAEUSCHE.sbf", 0);
 	} else {
 		g_772e74 = 0;
 	}
 	if (greet[0] != 0) {
-		g_772e7c = fcn_004c3100(greet, 0);
+		g_772e7c = sb_LoadLocalizedSampleBank(greet, 0);
 	}
 }

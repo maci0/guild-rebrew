@@ -10,16 +10,16 @@ int __cdecl fcn_00500e20(pos14_7f4c00*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_005b3120(char*, char*, int, int);
+void __cdecl he_NotifyAlchemistEssence(char*, char*, int, int);
 float __cdecl ahm_GetEssenceValue(char*, int);
 void __cdecl fcn_004ee6d0(char*, int, float);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_005764a0(char*, int);
+int __cdecl ahm_HasActiveLabFeature(char*, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 
-void __cdecl fcn_00576180(char* u)
+void __cdecl he_RunAhmBoostEssence(char* u)
 {
 	int k;
 	char* h;
@@ -41,14 +41,14 @@ void __cdecl fcn_00576180(char* u)
 				q = fcn_00502cd0(*(int*) (*(char**) (h + 0x16c) + 0x5d), 2, 6, 0, 0x24b);
 				o = gm_LookupEntityRecordById(*(int*) (u + 0xc));
 				if (o != 0) {
-					fcn_005b3120(o, h, q, *(int*) (u + 0xb0));
+					he_NotifyAlchemistEssence(o, h, q, *(int*) (u + 0xb0));
 				}
 				fcn_004ee6d0(h, *(int*) (u + 0xb0), f + *(float*) (u + 0xb4));
 				fcn_00529160(0, 0, *(unsigned short*) h, 0);
 				he_FreeAction(u);
 				return;
 			}
-			if (fcn_005764a0(*(char**) (h + 0x16c), 0x24b) != 0) {
+			if (ahm_HasActiveLabFeature(*(char**) (h + 0x16c), 0x24b) != 0) {
 				*(pos14_7f4c00*) (u + 0xc0) = gm_GameTime;
 				gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 0xf, 0);
 				return;

@@ -3,7 +3,7 @@
 
 extern unsigned short g_14cf300[];
 
-char __cdecl fcn_00411610(int shift, int ctrl, int alt, char key)
+char __cdecl io_TranslateKeyCode(int shift, int ctrl, int alt, char key)
 {
 	int k;
 	int i;

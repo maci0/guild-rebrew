@@ -42,16 +42,16 @@ void __cdecl fcn_00414ab0(float* a, float* b, char* ent);
 int __cdecl fcn_00418000(int a1, float* pos, int n, float a4, float a5,
                          float a6, float a7, float a8, float a9, float* a10,
                          int a11, int a12, int a13);
-int __cdecl fcn_004185a0(int a1, float* pos, int n, float a4, float a5,
+int __cdecl d3_SpawnRockDebrisEffect(int a1, float* pos, int n, float a4, float a5,
                          float a6, float a7, float a8, float a9, float a10,
                          float a11, int a12);
 int* __cdecl fcn_00417d00(int a1, float* pos, int n, float a4, float a5,
                           float a6, float a7, int a8);
 int __cdecl fcn_00422460(int a1, char* name);
-void __cdecl fcn_004193f0(int a1, int a2, int a3, float a4);
+void __cdecl d3snd_PlayObjectSound(int a1, int a2, int a3, float a4);
 int __cdecl gm_ResolveEntityById(char** out, int a, int b, int c);
 void __cdecl cm_BeginPacketFieldDelta(char* a1, int a2);
-void __cdecl fcn_004c4670(int a1, int a2, int a3, void* a4);
+void __cdecl cm_AppendPacketFieldValue(int a1, int a2, int a3, void* a4);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5530(char* msg);
 
@@ -210,7 +210,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 	fcn_00418000(0, &cx, 200, 25.0f, 70.0f,
 	             rr * *(float*) 0x6628bc, 900.0f, 100.0f, 70.0f, &xhi,
 	             0x5dc, 7, *(int*) &col);
-	fcn_004185a0(0, &cx, 100, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f, 4.0f,
+	d3_SpawnRockDebrisEffect(0, &cx, 100, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f, 4.0f,
 	                 7.0f, 8.0f, *(int*) &col);
 	if (count != 0) {
 		f1 = rr * *(float*) 0x6652c8;
@@ -224,7 +224,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 	fcn_00417d00(0, &cx, 0x96, f3, f2, f1, 80.0f, 200);
 	p = (char*) fcn_00422460(0, g_677640);
 	if (p != 0) {
-		fcn_004193f0((int) p, *(int*) (best + 0x61), 0x6b, 12200.0f);
+		d3snd_PlayObjectSound((int) p, *(int*) (best + 0x61), 0x6b, 12200.0f);
 	}
 	if (a0) {
 		for (i = 0; i < 3; i++) {
@@ -260,7 +260,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 			} else if (out.slot[i].type == 2) {
 				neg = (char) (int) -out.slot[i].strength;
 				cm_BeginPacketFieldDelta(p, *(int*) (p + 1));
-				fcn_004c4670(1, 1, 0x5c, &neg);
+				cm_AppendPacketFieldValue(1, 1, 0x5c, &neg);
 				fcn_004c5360();
 			}
 		}

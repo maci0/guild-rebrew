@@ -30,11 +30,11 @@ void __cdecl gm_HandleHausbau(char*);
 void __cdecl fcn_00575450(char*);
 void __cdecl fcn_00575460(char*);
 void __cdecl fcn_00575470(char*);
-void __cdecl fcn_005754e0(char*);
+void __cdecl he_RunMissionCheck(char*);
 void __cdecl fcn_005756f0(char*);
 void __cdecl fcn_00575700(char*);
 
-int __cdecl fcn_00575710(void)
+int __cdecl he_RegisterCoreActionHandlers(void)
 {
 	if (he_RegisterHandler(3, fcn_00571140, fcn_00571240) != 0) {
 		return 1;
@@ -70,7 +70,7 @@ int __cdecl fcn_00575710(void)
 	if (he_RegisterHandler(0xe, fcn_00575450, fcn_00575460) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(0x4c, fcn_00575470, fcn_005754e0) != 0) {
+	if (he_RegisterHandler(0x4c, fcn_00575470, he_RunMissionCheck) != 0) {
 		return 1;
 	}
 	return he_RegisterHandler(0x4d, fcn_005756f0, fcn_00575700) != 0;

@@ -1,4 +1,4 @@
-int __cdecl fcn_004b4730(unsigned short*, int, int);
+int __cdecl ai_FilterRankCandidateLimit(unsigned short*, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
@@ -10,7 +10,7 @@ int __cdecl gm_HasThreeType7Entities(unsigned short* owner_id, int arg_b, int ar
 	int count;
 	char* entity;
 
-	if (fcn_004b4730(owner_id, arg_b, arg_c) == 0)
+	if (ai_FilterRankCandidateLimit(owner_id, arg_b, arg_c) == 0)
 		return 0;
 	count = 0;
 	for (entity = gm_StartFilteredEntitySearch(2, 4, *owner_id, count, 7); entity != 0; entity = gm_FindNextFilteredEntity())

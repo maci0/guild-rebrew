@@ -14,14 +14,14 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowBlutracheDialog(int);
 int __cdecl fcn_005e6e00(void);
 
-void __cdecl fcn_005e6950(int a)
+void __cdecl d2_RunTheaterInteriorHud(int a)
 {
 	int x;
 	int y;
 
 	x = 0;
 	fcn_005338a0();
-	while (main_RunFrameLoop(fcn_005e6950, 0x67fff) != 0) {
+	while (main_RunFrameLoop(d2_RunTheaterInteriorHud, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			x = RegisterStatusText(g_6ad4ec, g_14b5aec, 0x16);
 		}

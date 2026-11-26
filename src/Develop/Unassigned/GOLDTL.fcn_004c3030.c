@@ -7,9 +7,9 @@ extern float g_664e80;
 
 int __cdecl fcn_004c2de0(int, int, int, int);
 void __cdecl fcn_00423670(int, int, int);
-void __cdecl fcn_00423890(int, int);
+void __cdecl sb_SetVoiceVolume(int, int);
 
-int __cdecl fcn_004c3030(int a, int b, int c, int d)
+int __cdecl d3snd_PlaySoundEffect(int a, int b, int c, int d)
 {
 	int h;
 
@@ -20,7 +20,7 @@ int __cdecl fcn_004c3030(int a, int b, int c, int d)
 	h = fcn_004c2de0(a, b, c, d);
 	if (h != 0) {
 		fcn_00423670(h, 0, 0);
-		fcn_00423890(h, (int) (g_681750 * g_664e80));
+		sb_SetVoiceVolume(h, (int) (g_681750 * g_664e80));
 	}
 	return h;
 }

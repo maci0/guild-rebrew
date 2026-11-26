@@ -76,7 +76,7 @@ int* __cdecl fcn_00459ae0(float, float, float);
 int __cdecl d3_CreateSkyLayer(int, int, int, Col, float, int, float, float);
 void __cdecl fcn_00459940(int, int, float);
 void __cdecl fcn_004597f0(int, int);
-void __cdecl fcn_005e8870(int, int, Vec24*, Vec24*);
+void __cdecl gm_InitWeatherWave(int, int, Vec24*, Vec24*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_0052a7d0(void);
 void __cdecl fcn_0052a960(GAME_TIMESTAMP*);
@@ -139,7 +139,7 @@ void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
 			angle += gm_RandomFloat01() * step;
 		}
 	}
-	fcn_005e8870(mode, gm_GameTime.a, (Vec24*) &g_7e43a8.c, (Vec24*) &g_7e43a8.d);
+	gm_InitWeatherWave(mode, gm_GameTime.a, (Vec24*) &g_7e43a8.c, (Vec24*) &g_7e43a8.d);
 	g_7e4468 = 0;
 	g_7e446c = 0;
 	g_7e4534 = -1;

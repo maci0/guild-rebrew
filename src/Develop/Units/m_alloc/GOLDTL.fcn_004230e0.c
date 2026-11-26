@@ -6,7 +6,7 @@ extern char g_678f70[]; /* Unloading Samplebank %s ... MemUsed before unloading 
 extern char g_678f28[]; /* Finished unloading Samplebank %s ... MemUsed after unloading %d bytes. */
 
 char* __cdecl fcn_00422760(int, int*);
-void __cdecl fcn_004237f0(char*, int);
+void __cdecl sb_StopVoice(char*, int);
 void __cdecl m_FreeTracked(void*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
@@ -61,7 +61,7 @@ found:
 				*(int*) &a0 = 0;
 				s = fcn_00422760(*(char**) (bank + 0x138) + i * 0x40, (int*) &a0);
 				while (s != 0) {
-					fcn_004237f0(s, 0);
+					sb_StopVoice(s, 0);
 					*(int*) (s + 4) = 0;
 					(*(int*) &a0)++;
 					s = fcn_00422760(*(char**) (bank + 0x138) + i * 0x40, (int*) &a0);

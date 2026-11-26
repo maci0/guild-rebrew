@@ -3,7 +3,7 @@
 
 float __cdecl fcn_004fc3a0(void*);
 
-int __cdecl fcn_004b4f00(void)
+int __cdecl gm_HasZeroLaw0x11To1cSum(void)
 {
 	char buf[0x30];
 

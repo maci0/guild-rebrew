@@ -1,5 +1,5 @@
 void __cdecl io_FormatTextBuffer(void* buffer, int format, ...);
-void __cdecl fcn_005d86a0(void* rec, void* ctx);
+void __cdecl gm_HandleFriedenStiften(void* rec, void* ctx);
 
 /* ADDRESS: GOLDTL 0x004f97f0 */
 int __cdecl fcn_004f97f0(char* rec, int* ctx)
@@ -18,7 +18,7 @@ int __cdecl fcn_004f97f0(char* rec, int* ctx)
 			return 9;
 		}
 		if (*ctx == 3) {
-			fcn_005d86a0(rec, ctx);
+			gm_HandleFriedenStiften(rec, ctx);
 		}
 		return 2;
 	}
@@ -30,7 +30,7 @@ int __cdecl fcn_004f97f0(char* rec, int* ctx)
 			return 1;
 		}
 		if (action == 4) {
-			fcn_005d86a0(rec, ctx);
+			gm_HandleFriedenStiften(rec, ctx);
 			return 10;
 		}
 		if (*(char*) (rec + 2) == 6) {

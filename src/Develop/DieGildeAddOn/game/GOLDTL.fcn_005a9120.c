@@ -12,12 +12,12 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowGildenkasseDialog(int);
 
-void __cdecl fcn_005a9120(int a)
+void __cdecl d2_RunStadtkasseMenu(int building)
 {
 	int x;
 
 	fcn_005338a0();
-	while (main_RunFrameLoop(fcn_005a9120, 0x67fff) != 0) {
+	while (main_RunFrameLoop(d2_RunStadtkasseMenu, 0x67fff) != 0) {
 		if (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])[0x166] != 0) {
 			x = RegisterStatusText(g_6aae28, g_14abb58, 0x16);
 		}
@@ -25,7 +25,7 @@ void __cdecl fcn_005a9120(int a)
 			x = 0;
 		}
 		if (g_7746a0 != 0 && g_7746a0 == x) {
-			d2_ShowGildenkasseDialog(a);
+			d2_ShowGildenkasseDialog(building);
 		}
 	}
 }

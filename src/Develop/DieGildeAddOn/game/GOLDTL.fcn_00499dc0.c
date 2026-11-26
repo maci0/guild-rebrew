@@ -31,7 +31,7 @@ extern int g_7f4e0c[];
 
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 void __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int a4);
-void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
+void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Pos* b, Pos* a);
 int __cdecl gm_RandomMod(unsigned short n);
 
@@ -76,7 +76,7 @@ int __cdecl fcn_00499dc0(int methodKindArg, char* e, int busy, Pos* out1, Pos* o
 				if (!((float) roll + (float) sum / (float) count < 6.0f)) {
 					memset(&slot, 0, sizeof(slot));
 					slot.id = 0x161;
-					fcn_004a51d0(e, 1, &slot, &cnt);
+					gm_CheckEntityObjectSlots(e, 1, &slot, &cnt);
 					if (!(cnt.total == 6 && cnt.free == 0) && cnt.blocked != 1) {
 						if (cnt.total < 6 && cnt.free == 0) {
 							a.valid = 2;

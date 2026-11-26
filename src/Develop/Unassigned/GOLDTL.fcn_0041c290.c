@@ -4,7 +4,7 @@ extern COLOR_OCTREE_NODE* g_6b6f20[6];
 extern OctRef* g_6b6f40;
 extern unsigned int g_6b6f38;
 
-void __cdecl fcn_0041c190();
+void __cdecl d3_SiftDownOctreeHeap();
 
 /* ADDRESS: GOLDTL 0x0041c290 */
 void __cdecl fcn_0041c290(unsigned int limit)
@@ -34,6 +34,6 @@ void __cdecl fcn_0041c290(unsigned int limit)
 		g_6b6f20[lvl1][i8].g += g_6b6f20[lvl][idx].g;
 		g_6b6f20[lvl1][i8].b += g_6b6f20[lvl][idx].b;
 		g_6b6f20[lvl1][i8].mask &= ~(1 << (idx & 7));
-		fcn_0041c190(1);
+		d3_SiftDownOctreeHeap(1);
 	} while (g_6b6f38 > limit);
 }

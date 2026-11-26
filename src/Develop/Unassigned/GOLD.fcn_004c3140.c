@@ -2,14 +2,14 @@
 // fcn_004c3140 — if([0x6f0b80]){ f(h,0); f(h,1); f(h); reset; }.
 
 void __cdecl SetSoundControlValue(int, unsigned int);
-int __cdecl fcn_00419370(int, int);
+int __cdecl d3snd_StopObjectVoice(int, int);
 int __cdecl fcn_004177b0(int);
 
 void __cdecl fcn_004c3140(void)
 {
 	if (*(int*) 0x6f0b80 != 0) {
 		SetSoundControlValue(*(int*) 0x6f0b80, 0);
-		fcn_00419370(*(int*) 0x6f0b80, 1);
+		d3snd_StopObjectVoice(*(int*) 0x6f0b80, 1);
 		fcn_004177b0(*(int*) 0x6f0b80);
 		*(int*) 0x6f0b80 = 0;
 	}

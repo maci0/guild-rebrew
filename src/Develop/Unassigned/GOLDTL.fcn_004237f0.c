@@ -5,7 +5,7 @@ extern int g_6b7d7c;
 extern volatile int g_6b7fac;
 int __cdecl fcn_0042a880(int);
 
-void __cdecl fcn_004237f0(int* p, int fade)
+void __cdecl sb_StopVoice(int* p, int fade)
 {
 	if (g_6b7d7c != 0 && p != 0) {
 		if (fade != 0) {

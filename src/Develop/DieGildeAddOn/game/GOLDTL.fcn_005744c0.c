@@ -9,7 +9,7 @@ typedef struct { unsigned char unknown00[0x243]; unsigned int period; unsigned c
 extern char* gm_CityEntity;
 char __cdecl d3_ComputeObjectBoundingSphere(int, int, void*, void*);
 int __cdecl fcn_00415300(int);
-int __cdecl fcn_004234e0(int, int, int, int, int, int, int);
+int __cdecl sb_PlayVoice(int, int, int, int, int, int, int);
 int __cdecl evt_FindScriptById(int);
 int __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(int, int, ...);
@@ -50,7 +50,7 @@ void __cdecl he_FreeAction(int);
 void __cdecl fcn_00573e10(int);
 int __cdecl fcn_00574150();
 int __cdecl fcn_005742e0(void*, void*, void*, void*, void*);
-void __cdecl fcn_00598510();
+void __cdecl d3_ReleaseUnusedSceneObjects();
 int __cdecl fcn_005985f0(void*, int);
 int __cdecl fcn_00508e40(int);
 int __cdecl fcn_0051af00(char*, int, ...);
@@ -404,7 +404,7 @@ LfailB:
 			if (v9 == 6 || v9 == 5 || v9 == 7) {
 				fcn_0052d9d0((void*) v15);
 			}
-			fcn_00598510();
+			d3_ReleaseUnusedSceneObjects();
 			if (*(int*) (*(int*) (v15 + 0x61) + 0x1ec)) {
 				if (d3_ComputeObjectBoundingSphere(*(int*) (v15 + 0x61), (int) d3_ActiveCamera, v17, &v21)) {
 					v31 = (int) (v21 * 1.8);
@@ -441,7 +441,7 @@ LfailB:
 							*(int*) (buildAction + 0x10), messageText, 0, 0x5f6, *(int*) (v15 + 1), -1, 0,
 							(char*) 0x6a7d8c);
 					}
-					fcn_004234e0((int) g_7747b8, 0x6a7d7c, 1, 0x3f, 0x7f, 0, 0);
+					sb_PlayVoice((int) g_7747b8, 0x6a7d7c, 1, 0x3f, 0x7f, 0, 0);
 				}
 				v9 = g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind;
 				if (v9 == 6 || v9 == 5) {

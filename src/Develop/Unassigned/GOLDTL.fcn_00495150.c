@@ -5,7 +5,7 @@ extern int g_100af80[];
 
 /* ADDRESS: GOLD 0x00495790 */
 /* ADDRESS: GOLDTL 0x00495150 */
-int __cdecl fcn_00495150(int value)
+int __cdecl ai_IsMethodActive(int value)
 {
 	int i;
 	int n;

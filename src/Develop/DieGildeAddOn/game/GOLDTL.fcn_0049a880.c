@@ -26,7 +26,7 @@ typedef struct Msg {
 	float f;
 } Msg;
 
-void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
+void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* a, Msg* b);
 int __cdecl gm_RandomMod(int n);
 
@@ -48,7 +48,7 @@ int __cdecl ai_StartEducationObject(int kind, char* e, int busy, Msg* out1, Msg*
 		slots[1].id = 0x16c;
 		slots[2].id = 0x297;
 		slots[3].id = 0x2b7;
-		fcn_004a51d0(e, 4, slots, &cnt);
+		gm_CheckEntityObjectSlots(e, 4, slots, &cnt);
 		if (!(cnt.total == 6 && cnt.free == 0) && cnt.blocked != 4) {
 			if (cnt.total >= 6 || cnt.free != 0) {
 				if (cnt.free != 0) {

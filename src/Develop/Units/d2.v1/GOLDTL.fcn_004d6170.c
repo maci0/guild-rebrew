@@ -39,7 +39,7 @@ void __cdecl fcn_0050d490(char*);
 void __cdecl fcn_004c51f0(int, int, int, int, int, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 char* __cdecl gm_NextEntityQueryMatch(void);
-void __cdecl fcn_004b4650(char*, int);
+void __cdecl gm_IncrementMissionActionCount(char*, int);
 void __cdecl fcn_004c5f60(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl d2_ShowMessageBox(char*, unsigned int);
@@ -296,7 +296,7 @@ sync:
 		if (choice == 1) {
 			kind = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *ent].category;
 			if (kind == 4 || kind == 0x10) {
-				fcn_004b4650(g_772e9c, 0x1c);
+				gm_IncrementMissionActionCount(g_772e9c, 0x1c);
 			}
 			fcn_004c5f60(*(int*) (ent + 1), *(int*) (g_772e9c + 4), *(int*) (g_772e9c + 4));
 			io_FormatTextBuffer(msg, 0x11a4, *(unsigned short*) g_772e9c, ent);

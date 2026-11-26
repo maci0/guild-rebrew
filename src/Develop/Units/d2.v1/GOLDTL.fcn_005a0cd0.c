@@ -1,7 +1,7 @@
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005a0a40(int);
+void __cdecl d2_RenderDialogIconsAndText(int);
 void __cdecl fcn_005a0ad0(int, unsigned char*);
 void __cdecl fcn_005a0be0(int, unsigned char*);
 extern volatile int g_6b7fac; extern unsigned short g_774970; extern char g_7f4ca4[];
@@ -27,7 +27,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int mode, int wi
 				}
 				if (last + step < g_6b7fac) {
 					d2_SetForm(windowId, formId);
-					fcn_005a0a40((int) buf);
+					d2_RenderDialogIconsAndText((int) buf);
 					step += step / 2;
 					last = g_6b7fac;
 				}

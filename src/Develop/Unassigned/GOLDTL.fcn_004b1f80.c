@@ -23,7 +23,7 @@ extern int g_67fcb0;
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_0042d670(char*);
 
-void __cdecl fcn_004b1f80(void)
+void __cdecl hst_ResetHistoryState(void)
 {
 	char buf[0x40];
 	int i;

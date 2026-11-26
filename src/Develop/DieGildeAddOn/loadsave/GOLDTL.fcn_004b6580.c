@@ -18,7 +18,7 @@ extern char g_10069a0[];
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
-int __cdecl fcn_004b6580(void* stream)
+int __cdecl ls_LoadMissionJobs(void* stream)
 {
 	int i;
 

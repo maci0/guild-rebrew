@@ -14,7 +14,7 @@ void __cdecl fcn_004011f0(void* a0, void* a1);
 void __cdecl vfs_ReadCString(void* a0, char* a1);
 void __cdecl vfs_ReadByte(void* a0, void* a1);
 void __cdecl fcn_004011d0(void* a0, void* a1);
-void __cdecl fcn_00401280(void* a0, void* a1);
+void __cdecl vfs_ReadVec3(void* a0, void* a1);
 void* __cdecl fcn_0045c5b0(void* a0, Col44f250 a1, unsigned int a2, unsigned int a3);
 void __cdecl CloseVfsStream(void* a0);
 
@@ -64,8 +64,8 @@ int __cdecl d3_LoadFastChunk(unsigned int a0, unsigned int a1, int a2, int a3, i
 			v28 = 0;
 			if (v11 + 8 > 0) {
 				do {
-					fcn_00401280(inputStream, (void*)(*(int*)(chunk + 0x40) + v28 * 0x18));
-					fcn_00401280(inputStream, (void*)(*(int*)(chunk + 0x40) + v28 * 0x18 + 0xc));
+					vfs_ReadVec3(inputStream, (void*)(*(int*)(chunk + 0x40) + v28 * 0x18));
+					vfs_ReadVec3(inputStream, (void*)(*(int*)(chunk + 0x40) + v28 * 0x18 + 0xc));
 					v28 += 1;
 				} while (v28 < *(int*)(chunk + 0x44) + 8);
 			}
@@ -80,15 +80,15 @@ int __cdecl d3_LoadFastChunk(unsigned int a0, unsigned int a1, int a2, int a3, i
 				fcn_004011f0(inputStream, (void*)(v10 + 0x18 + *(int*)(chunk + 0x48)));
 				fcn_004011f0(inputStream, (void*)(v10 + 0x1c + *(int*)(chunk + 0x48)));
 				fcn_004011f0(inputStream, (void*)(v10 + 0x20 + *(int*)(chunk + 0x48)));
-				fcn_00401280(inputStream, v14);
+				vfs_ReadVec3(inputStream, v14);
 				*(float*)(v10 + *(int*)(chunk + 0x48)) = v14[0];
 				*(float*)(v10 + 8 + *(int*)(chunk + 0x48)) = v14[1];
 				*(float*)(v10 + 0x10 + *(int*)(chunk + 0x48)) = v14[2];
-				fcn_00401280(inputStream, v14);
+				vfs_ReadVec3(inputStream, v14);
 				*(float*)(v10 + 4 + *(int*)(chunk + 0x48)) = v14[0];
 				*(float*)(v10 + 0xc + *(int*)(chunk + 0x48)) = v14[1];
 				*(float*)(v10 + 0x14 + *(int*)(chunk + 0x48)) = v14[2];
-				fcn_00401280(inputStream, (void*)(v10 + 0x2c + *(int*)(chunk + 0x48)));
+				vfs_ReadVec3(inputStream, (void*)(v10 + 0x2c + *(int*)(chunk + 0x48)));
 				*(unsigned int*)(v10 + 0x24 + *(int*)(chunk + 0x48)) = 0xffffffff;
 				if (*(int*)(chunk + 0x1e4) > 0xfe) {
 					fcn_004011f0(inputStream, (void*)(v10 + 0x28 + *(int*)(chunk + 0x48)));
@@ -195,8 +195,8 @@ int __cdecl d3_LoadFastChunk(unsigned int a0, unsigned int a1, int a2, int a3, i
 			v10 = (int)(chunk + 0xb4);
 			do {
 				vfs_ReadCString(inputStream, (char*)(v10 - 0x40));
-				fcn_00401280(inputStream, (void*)v10);
-				fcn_00401280(inputStream, (void*)(v10 + 0xc));
+				vfs_ReadVec3(inputStream, (void*)v10);
+				vfs_ReadVec3(inputStream, (void*)(v10 + 0xc));
 				v11 += 1;
 				v10 += 0x58;
 			} while (v11 < v25);

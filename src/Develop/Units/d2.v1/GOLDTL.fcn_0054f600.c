@@ -33,7 +33,7 @@ void __cdecl he_AcceptDuell(char*, char*, char*);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
-void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
+void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl gm_AddTime(char*, int, int, int);
@@ -85,7 +85,7 @@ void __cdecl fcn_0054f600(char* o)
 			fcn_00545670(o, 0, 0, "_DUELL_INTRO_EVENT_DUELLANTEN_HS_00", 0x5ec);
 			if (*(int*) (o + 0x74) != 0) {
 				if (g_774964 != 2) {
-					fcn_004234e0(g_7747b8, "NeueMessage_s_01", 1, 0x3f, 0x7f, 0, 0);
+					sb_PlayVoice(g_7747b8, "NeueMessage_s_01", 1, 0x3f, 0x7f, 0, 0);
 				}
 				d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 1);
 				io_AppendText(0x1d6c);

@@ -6,7 +6,7 @@
 int __cdecl fcn_00501190(int, int, int);
 int __cdecl init_AllocateGebaeudeSceneSlot(int);
 
-void __cdecl fcn_00512500(void)
+void __cdecl init_AllocateKind0bSceneSlot(void)
 {
 	int r;
 	r = fcn_00501190(1, 5, 0xb);

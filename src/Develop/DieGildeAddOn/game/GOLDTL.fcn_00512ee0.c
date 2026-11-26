@@ -104,7 +104,7 @@ void __cdecl fcn_00547130(void);
 void __cdecl he_EnsureCityBuilding0x2bActions(void);
 int __cdecl fcn_00597ff0(int, char *);
 int __cdecl d3_CollectUnusedSceneObjects(char *, char **);
-void __cdecl fcn_00598740(float *, int);
+void __cdecl d3_ComputeObjectYawToTarget(float *, int);
 
 /* ADDRESS: GOLDTL 0x00512ee0 */
 void __cdecl fcn_00512ee0(void)
@@ -194,7 +194,7 @@ void __cdecl fcn_00512ee0(void)
 					} while (j < res);
 				}
 				d3_TransformPoint((char *)list[j], (char *)(list[j] + 0x4c), path);
-				fcn_00598740(pos3, list[j]);
+				d3_ComputeObjectYawToTarget(pos3, list[j]);
 				h = cm_RequestCreateGeb(*(int *)(e + 4), kind, path, pos3);
 				if (h != -1) {
 					while (fcn_004c4450(h) == 0) {

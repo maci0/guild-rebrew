@@ -8,7 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl fcn_004c5620(int, char*);
 
-void __cdecl fcn_00576400(char* o)
+void __cdecl he_StartAhmAction0x98(char* o)
 {
 	pos14_7f4c00* p;
 

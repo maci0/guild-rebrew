@@ -53,6 +53,6 @@ extern INPUT_DEVICE* g_14ce90c;
 extern INPUT_SYSTEM* g_14cf954;
 extern INPUT_SYSTEM* g_14cf954;
 
-int __cdecl fcn_004117c0(int acquire);
-int __cdecl fcn_004117f0(int acquire);
+int __cdecl io_AcquireKeyboard(int acquire);
+int __cdecl io_AcquireMouse(int acquire);
 #endif

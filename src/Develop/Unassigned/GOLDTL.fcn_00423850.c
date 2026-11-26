@@ -4,7 +4,7 @@ extern int g_6b7d7c;
 
 int __cdecl fcn_0042a9a0(int, int);
 
-int __cdecl fcn_00423850(int* voice, int pan)
+int __cdecl sb_SetVoicePan(int* voice, int pan)
 {
 	int r;
 

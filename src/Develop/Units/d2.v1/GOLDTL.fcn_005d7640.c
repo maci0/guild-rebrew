@@ -26,7 +26,7 @@ extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_14ce8e0;
 
-int __cdecl fcn_005d75d0(ENTITY_RECORD*, ENTITY_RECORD*, ENTITY_RECORD*);
+int __cdecl amt_SendAndWaitOfficeCommand(ENTITY_RECORD*, ENTITY_RECORD*, ENTITY_RECORD*);
 void __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -38,7 +38,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_005d71f0();
+int __cdecl gm_HandleGegenspionage();
 
 int __cdecl fcn_005d7640(ENTITY_RECORD* ent, Cmd* cmd)
 {
@@ -93,7 +93,7 @@ int __cdecl fcn_005d7640(ENTITY_RECORD* ent, Cmd* cmd)
 		if (ent->unk_194 < 6 || left > 0) {
 			return 0x20;
 		}
-		return fcn_005d75d0(ent, pb, pa) ? 0x10 : 0x20;
+		return amt_SendAndWaitOfficeCommand(ent, pb, pa) ? 0x10 : 0x20;
 	}
 	if (left > 0) {
 		io_FormatTextBuffer(text, s_6a2f5c, 0x1dcb);
@@ -112,7 +112,7 @@ int __cdecl fcn_005d7640(ENTITY_RECORD* ent, Cmd* cmd)
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == yes) {
 				if (d2_CheckActionBlocker(ent, 6)) {
-					if (fcn_005d75d0(ent, pb, pa)) {
+					if (amt_SendAndWaitOfficeCommand(ent, pb, pa)) {
 						io_FormatTextBuffer(text, 0x1dca);
 					} else {
 						io_FormatTextBuffer(text, s_6a2f5c, 0x1dcb);
@@ -127,7 +127,7 @@ int __cdecl fcn_005d7640(ENTITY_RECORD* ent, Cmd* cmd)
 		if (g_14ce8e0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop(fcn_005d71f0, 0x657c7));
+	} while (main_RunFrameLoop(gm_HandleGegenspionage, 0x657c7));
 	fcn_00471e30(h);
 	return 1;
 }

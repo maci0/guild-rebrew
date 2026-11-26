@@ -4,7 +4,7 @@
 
 void __cdecl fcn_00429d30(void*);
 
-void __cdecl fcn_004298e0(void)
+void __cdecl evt_CloseAllScripts(void)
 {
 	int o;
 	char* p;

@@ -17,14 +17,14 @@ void __cdecl d2_OpenRathausGebInfo(void);
 void __cdecl fcn_005ce0f0(void);
 void __cdecl fcn_005cde30(void);
 
-void __cdecl fcn_005a91b0(void)
+void __cdecl d2_RunRathausMenu(void)
 {
 	int kauf;
 	int tages;
 	int amt;
 
 	fcn_005338a0();
-	while (main_RunFrameLoop((void*) fcn_005a91b0, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunRathausMenu, 0x67fff) != 0) {
 		if (d2_IsTutorialActionAllowed(0x200) == 1) {
 			kauf = RegisterStatusText("contact_GEB_KAUFEN", g_14ad250, 0x10);
 		} else {

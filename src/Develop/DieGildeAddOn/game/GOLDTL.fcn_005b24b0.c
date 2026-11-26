@@ -10,7 +10,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 int __cdecl gm_RandomMod(int);
 
-void __cdecl fcn_005b24b0(void* subject, void* recipient)
+void __cdecl he_NotifyFeudEnded(void* subject, void* recipient)
 {
 	char t;
 

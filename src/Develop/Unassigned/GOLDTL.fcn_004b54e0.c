@@ -13,7 +13,7 @@ extern char g_10069a0[];
 
 void __cdecl fcn_004b5530(int handle, int flags);
 
-void __cdecl fcn_004b54e0(int key)
+void __cdecl d2_ShowMissionForEntity(int key)
 {
 	int i;
 	int flags;

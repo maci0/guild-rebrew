@@ -11,7 +11,7 @@ int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_00438b40(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char* __cdecl fcn_00449690(char*, int, char*, char*);
-float __cdecl fcn_004187f0(float, float, float);
+float __cdecl d3_Smoothstep(float, float, float);
 void __cdecl fcn_00417560(char*);
 typedef struct SUNRAY_COLOR {
 	unsigned char a, b, c, d;
@@ -64,9 +64,9 @@ void __cdecl fcn_004172e0(char* object)
 		}
 		v = (float) fmod(a, 6.2831854820251465);
 		a = v > 3.1415927f ? 3.1415927f - (v - 3.1415927f) : v;
-		x = fcn_004187f0(1.0995574f, 3.1415927f, a);
+		x = d3_Smoothstep(1.0995574f, 3.1415927f, a);
 		a = (float) fmod(*(float*) (camera + 0x84), 6.2831854820251465);
-		result = fcn_004187f0(-1.1780972f, 0.0f, (float) fmod(a, 6.2831854820251465));
+		result = d3_Smoothstep(-1.1780972f, 0.0f, (float) fmod(a, 6.2831854820251465));
 	}
 	if (SonnenstrahlenAktiv == 1) {
 		a = (float) ((double) (unsigned int) g_6b7fac - SonnenstrahlenStartZeit) * 0.002f;

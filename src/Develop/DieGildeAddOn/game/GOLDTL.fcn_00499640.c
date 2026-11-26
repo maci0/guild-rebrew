@@ -8,7 +8,7 @@ extern int g_77261c;
 
 int __cdecl fcn_0050d320(char*, char);
 int __cdecl gm_WalkEntityChain(unsigned short);
-int __cdecl fcn_004fa5b0(int, char*, int*);
+int __cdecl gm_CheckPrivilege(int, char*, int*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl ai_SelectBestMethod(int, unsigned short, int, void*, void*);
 int __cdecl fcn_004f4830(int, void*);
@@ -52,7 +52,7 @@ int __cdecl fcn_00499640(int unused0, char* e, int a2, Msg499640* out1, Msg49964
 	memset(buf, 0, sizeof(buf));
 	buf[0] = 1;
 	vb = (int) ((float) gm_WalkEntityChain(*(unsigned short*) e) * g_66433c);
-	if ((fcn_004fa5b0(0x1b, e, buf) & 2) != 0) {
+	if ((gm_CheckPrivilege(0x1b, e, buf) & 2) != 0) {
 		vb /= 2;
 	}
 	if ((float) va * g_664160 < (float) vb) {

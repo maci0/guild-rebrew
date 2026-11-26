@@ -9,7 +9,7 @@ int  __cdecl fcn_0064d41a(char*, char*, int);
 void __cdecl io_FormatTextBuffer(void*, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
-void __cdecl fcn_005b2880(void)
+void __cdecl he_BroadcastReaperEvent(void)
 {
 	char buf[0x40];
 	int id;

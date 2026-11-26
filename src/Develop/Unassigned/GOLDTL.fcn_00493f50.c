@@ -4,7 +4,7 @@ extern Mult664260 g_664260[7];
 
 
 /* ADDRESS: GOLDTL 0x00493f50 */
-Mult664260* __cdecl fcn_00493f50(int key)
+Mult664260* __cdecl gm_LookupTortureRecord(int key)
 {
 	int i;
 

@@ -61,7 +61,7 @@ int __cdecl fcn_00445600(char*, int, char*, char*);
 char __cdecl fcn_0045bad0(int, int, int, int*, int*);
 void __cdecl fcn_00473690(int, int);
 void __cdecl ResetDisplayCounters(void);
-void __cdecl fcn_004c35b0(void);
+void __cdecl d3snd_PlaySelectedObjectClickSound(void);
 void __cdecl fcn_004c5b50(int, int, int, int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5f20(int, int, int);
@@ -113,7 +113,7 @@ void __cdecl fcn_00531620(void)
 		goto L684;
 	}
 	if (d3_SelectionBoxActive != 0) {
-		fcn_004c35b0();
+		d3snd_PlaySelectedObjectClickSound();
 		fcn_005345a0();
 		if (g_14ce8d4 != 0) {
 			goto L684;

@@ -2,7 +2,7 @@
 
 extern double g_6640f8;
 
-char* __cdecl fcn_00493f50(int);
+char* __cdecl gm_LookupTortureRecord(int);
 float __cdecl cut_RandFloat(void);
 int __cdecl cut_RandMod(int);
 
@@ -19,7 +19,7 @@ int __cdecl fcn_00493920(char* e)
 	char* rec;
 
 	*(int*) (e + 0x48) = 0;
-	rec = (char*) fcn_00493f50(*(int*) (e + 0x38));
+	rec = (char*) gm_LookupTortureRecord(*(int*) (e + 0x38));
 	limit = *(float*) (e + 0xc);
 	lim = limit * 0.33f;
 	i = 0;

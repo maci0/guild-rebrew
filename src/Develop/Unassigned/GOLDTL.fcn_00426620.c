@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00426620 */
-char* __cdecl fcn_00426620(char* s, int unused, char* end)
+char* __cdecl evt_FindLogicalOp(char* s, int unused, char* end)
 {
 	int i;
 	char* p;

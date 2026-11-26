@@ -31,7 +31,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 void __cdecl fcn_005100f0(int, int);
-void __cdecl fcn_005b21d0(ENTITY_RECORD*, ENTITY_RECORD*, unsigned char*);
+void __cdecl he_NotifyConfession(ENTITY_RECORD*, ENTITY_RECORD*, unsigned char*);
 void __cdecl fcn_004f5e20(int, int);
 int __cdecl fcn_00526120(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -87,7 +87,7 @@ void __cdecl d2_OpenBeichteDialog(unsigned char* e)
 					fcn_005100f0(me->entity_id, -v);
 					if (*(unsigned short*) (e + 0x27) != 0xffff && *(unsigned short*) (e + 0x27) != g_774970) {
 						fcn_005100f0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id, 1);
-						fcn_005b21d0(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)]), e);
+						he_NotifyConfession(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)]), e);
 					}
 					fcn_004f5e20(me->entity_id, v / 2);
 					fcn_00526120(g_14ab930, 0);

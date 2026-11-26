@@ -3,7 +3,7 @@
 
 extern char g_10069a0[];
 
-int __cdecl fcn_004b3c80(int key)
+int __cdecl gm_HasActiveMission(int key)
 {
 	int p;
 

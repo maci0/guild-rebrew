@@ -10,8 +10,8 @@ extern char g_14cf950;
 
 
 void __cdecl fcn_00591ea0(void);
-void __cdecl fcn_00591d00(void);
-void __cdecl fcn_00591da0(int);
+void __cdecl d2_FocusBookmarkSlot(void);
+void __cdecl d2_SaveBookmarkSlot(int);
 
 void __cdecl main_ProcessGameHotkeys(void)
 {
@@ -24,11 +24,11 @@ void __cdecl main_ProcessGameHotkeys(void)
 		if (c == 0x58) {
 			fcn_00591ea0();
 		}
-		fcn_00591d00();
+		d2_FocusBookmarkSlot();
 		i = 0;
 		for (e = ((char*)g_779d00); (int) e < (int) g_779d00 + 0x84; e += 12) {
 			if (*e == *(char*) ((char*)&g_14cf950) && *(char*) g_14cf72a != 0) {
-				fcn_00591da0(i);
+				d2_SaveBookmarkSlot(i);
 			}
 			i++;
 		}

@@ -16,7 +16,7 @@ extern char g_6ac494[];
 
 float __cdecl gm_RandomFloat01(void);
 int __cdecl d2_CheckActionBlocker(void*, int);
-int __cdecl fcn_00579640(void*, void*);
+int __cdecl he_HasNoActiveAction0x88(void*, void*);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
@@ -57,7 +57,7 @@ int __cdecl fcn_005c06e0(unsigned short* entityRecord)
 		goto none;
 	if (!d2_CheckActionBlocker(&g_7f4ca0[g_774970], 2))
 		return 0;
-	if (!fcn_00579640(entityRecord, &g_7f4ca0[g_774970])) {
+	if (!he_HasNoActiveAction0x88(entityRecord, &g_7f4ca0[g_774970])) {
 		io_FormatTextBuffer(text, 0x409f, *entityRecord);
 		fcn_00526120(text, 0);
 		return 0;

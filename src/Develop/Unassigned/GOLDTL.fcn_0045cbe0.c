@@ -13,7 +13,7 @@ typedef struct
 extern char* g_104049c;
 extern unsigned int g_662ea8[];
 
-unsigned int __cdecl fcn_00401000(void* buf, unsigned int n);
+unsigned int __cdecl vfs_CalcCrc32(void* buf, unsigned int n);
 int __cdecl d3_FindTextureVariant(int idx, int frame);
 
 /* ADDRESS: GOLDTL 0x0045cbe0 */
@@ -29,7 +29,7 @@ char __cdecl fcn_0045cbe0(char* o, unsigned int t)
 	m = *(char**) (o + 0x1cc);
 	if (m != 0 && *(int*) (m + 0x318) != 0 && *(int*) (m + 0x310) > 0) {
 		arr = *(fcn_0045cbe0_Anim***) (m + 0x31c);
-		h = fcn_00401000(&o, 4);
+		h = vfs_CalcCrc32(&o, 4);
 		n = *(int*) (*(char**) (*(char**) (o + 0x1cc) + 0x318) + 0x1e4);
 		for (i = 0; i < n; i++) {
 			e = arr[i];

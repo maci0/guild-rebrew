@@ -33,12 +33,12 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c91c0(int, int, int, int, int);
 int __cdecl fcn_004f4830(int, Stat5da5*);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
-int __cdecl fcn_004fa5b0(int, unsigned short*, int*);
+int __cdecl gm_CheckPrivilege(int, unsigned short*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
-int __cdecl fcn_005d9ca0(unsigned short*, unsigned short*, int, int);
+int __cdecl gs_StartCourtTrial(unsigned short*, unsigned short*, int, int);
 
 /* ADDRESS: GOLDTL 0x005da560 */
 int __cdecl fcn_005da560(unsigned short* viewer, unsigned short* subject)
@@ -96,7 +96,7 @@ int __cdecl fcn_005da560(unsigned short* viewer, unsigned short* subject)
 	q[0] = 1;
 	d2_SetForm(dlg, 3);
 	sel = d2_GetWindowListItem(dlg, 3, io_AppendText(0x1745));
-	if ((fcn_004fa5b0(0x16, subject, q) & 2) != 0 || flag == 0) {
+	if ((gm_CheckPrivilege(0x16, subject, q) & 2) != 0 || flag == 0) {
 		fcn_00472640(sel, 0);
 	}
 	g_100f1dc = -1;
@@ -106,7 +106,7 @@ int __cdecl fcn_005da560(unsigned short* viewer, unsigned short* subject)
 		}
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == sel) {
-				result = fcn_005d9ca0(viewer, subject, n, 1);
+				result = gs_StartCourtTrial(viewer, subject, n, 1);
 				g_774654 = 3;
 			}
 		}

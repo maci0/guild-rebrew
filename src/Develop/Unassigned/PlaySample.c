@@ -1,5 +1,5 @@
 void* __cdecl fcn_00422460(int, int);
-void __cdecl fcn_004238f0(void*, int);
+void __cdecl sb_SetVoiceLoopCount(void*, int);
 void __cdecl fcn_00423670(void*, int, int);
 
 /* ADDRESS: GOLDTL 0x00410f50 */
@@ -11,7 +11,7 @@ void* __cdecl PlaySample(int* sampleId, int* playbackControl)
 		return 0;
 	h = fcn_00422460(0, *sampleId);
 	if (h != 0) {
-		fcn_004238f0(h, *playbackControl);
+		sb_SetVoiceLoopCount(h, *playbackControl);
 		fcn_00423670(h, 0, 0);
 	} else {
 		fcn_00422460(0, *sampleId);

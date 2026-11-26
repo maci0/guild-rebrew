@@ -21,7 +21,7 @@ extern char g_6a33a4[];
 void __cdecl fcn_00415d70(int);
 void __cdecl fcn_00416a20(int);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
+int __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 #include "Develop/DieGildeAddOn/game/sonnenstrahlen.h"
 
 void __cdecl d3_UpdateLightningAndThunder(void)
@@ -36,7 +36,7 @@ void __cdecl d3_UpdateLightningAndThunder(void)
 		if (gm_RandomMod(300) == 0 || (g_7e4408[(unsigned short) (*(int*)&g_7f4c04)] == 3 && gm_RandomMod(100) == 0)) {
 			g_7e4468 = g_6b7fac;
 			g_7e446c = gm_RandomMod(8) + 8;
-			fcn_004234e0(g_7747c0, g_6a33a4, 1, 0x3f, (int) (g_664e80 * g_699b0c), 0, 0);
+			sb_PlayVoice(g_7747c0, g_6a33a4, 1, 0x3f, (int) (g_664e80 * g_699b0c), 0, 0);
 		}
 	}
 	if (d3_CurrentContextIndex == 0) {

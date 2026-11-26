@@ -7,7 +7,7 @@ extern unsigned int g_aed208;
 extern unsigned char g_aed224;
 extern char g_aed225[];
 
-int __cdecl fcn_004c4670(unsigned char type, unsigned char count, short id, void* data)
+int __cdecl cm_AppendPacketFieldValue(unsigned char type, unsigned char count, short id, void* data)
 {
 	unsigned int n;
 	char* p;

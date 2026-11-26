@@ -1,19 +1,19 @@
 
 
 
-int __cdecl fcn_00577940(int);
+int __cdecl gm_FindMatchingLawEntry(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 
-int __cdecl fcn_00577890(char* a, char* b, int c)
+int __cdecl gm_RecordAssassinEvidence(char* a, char* b, int c)
 {
 	int k;
 	float fa;
 	float fb;
 	int id;
 
-	k = fcn_00577940(c);
+	k = gm_FindMatchingLawEntry(c);
 	if (k >= 0) {
 		fa = gm_GetEntitySkill(a, 4);
 		fb = gm_GetEntitySkill(b, 4);

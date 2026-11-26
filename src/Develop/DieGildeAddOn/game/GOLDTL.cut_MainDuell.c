@@ -41,7 +41,7 @@ char __cdecl fcn_004463f0(unsigned int a, unsigned int b, float t);
 void __cdecl fcn_004cfe00(void);
 void __cdecl fcn_004e4e90(char* s);
 void* __cdecl sb_LoadSampleBank(char* name, int init);
-int __cdecl fcn_004c3100(char* name, int x);
+int __cdecl sb_LoadLocalizedSampleBank(char* name, int x);
 int __cdecl fcn_004e4470(char* name);
 int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5);
 void __cdecl ch_SetBodyAttachment(char* e, int mode, char* name);
@@ -55,7 +55,7 @@ char* __cdecl fcn_00445600(int o, int flags, int ptr, char* name);
 void __cdecl ch_QueueWalkToDummy(char* owner, char* text);
 char* __cdecl ch_CreateAction(char* e, int kind, int p);
 char* __cdecl ch_CreateQueuedAction(char* e, int a, int b, int c, int d);
-int __cdecl fcn_004c3030(int a, int b, int c, int d);
+int __cdecl d3snd_PlaySoundEffect(int a, int b, int c, int d);
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
 void __cdecl fcn_004e51d0(unsigned int* a0, int a1);
 int __cdecl fcn_004e6a70(int a1);
@@ -145,7 +145,7 @@ void __cdecl cut_MainDuell(char* a0)
         fcn_004e4e90((char*) 0x68bd14);
 
     snd = (int) sb_LoadSampleBank((char*) 0x68ce14, 0);
-    bank = fcn_004c3100((char*) 0x68ce08, 0);
+    bank = sb_LoadLocalizedSampleBank((char*) 0x68ce08, 0);
     event = fcn_004e4470((char*) 0x68cde8);
 
     e1 = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
@@ -189,7 +189,7 @@ void __cdecl cut_MainDuell(char* a0)
     io_AppendText(0x10dd);
     cut_WaitTicks(4);
     io_AppendText(0x6811b0);
-    fcn_004c3030(-7, 0, (int) 0x68cd18, -1);
+    d3snd_PlaySoundEffect(-7, 0, (int) 0x68cd18, -1);
 
     fcn_004e51d0((unsigned int*) a0, 0);
     e = (char*) fcn_004e6a70(sB.idx);
@@ -204,7 +204,7 @@ void __cdecl cut_MainDuell(char* a0)
         d2_SetForm(g_68bfc0, 0);
         io_AppendText(t + 0x10df);
         io_AppendText(0x68b300);
-        fcn_004c3030(sel0, bank, (int) 0x68cce4, t);
+        d3snd_PlaySoundEffect(sel0, bank, (int) 0x68cce4, t);
         p = ch_CreateQueuedAction((char*) sB.entity, 0x4dff50, 6, 0x2e, 1);
         *(int*) (p + 0x180) = (int) &sB;
         *(int*) (p + 0x17c) = (int) &sA;
@@ -223,7 +223,7 @@ void __cdecl cut_MainDuell(char* a0)
         t = fcn_004de610(6);
         d2_SetForm(g_68bfc0, 0);
         io_AppendText(t + 0x10df);
-        fcn_004c3030(sel0, bank, (int) 0x68cce4, t);
+        d3snd_PlaySoundEffect(sel0, bank, (int) 0x68cce4, t);
         p = ch_CreateQueuedAction((char*) sA.entity, 0x4dff50, 6, 0x2e, 1);
         *(int*) (p + 0x180) = (int) &sA;
         *(int*) (p + 0x17c) = (int) &sB;
@@ -254,7 +254,7 @@ void __cdecl cut_MainDuell(char* a0)
             t = cut_RandMod(9);
             d2_SetForm(g_68bfc0, 0);
             io_AppendText(t + 0x1113);
-            fcn_004c3030(-5, 0, (int) 0x68ccac, t);
+            d3snd_PlaySoundEffect(-5, 0, (int) 0x68ccac, t);
             cut_WaitTicks(5);
         }
         d2_SetForm(g_68bfc0, 0);
@@ -320,7 +320,7 @@ void __cdecl cut_MainDuell(char* a0)
     if (p != 0) {
         if (*(unsigned char*) (p + 0x166) != 0) {
             io_AppendText(0x1123 + *(unsigned char*) (p + 9), *(unsigned short*) p);
-            fcn_004c3030(-8, 0, (int) 0x68cc9c, *(unsigned char*) (p + 9) + 1);
+            d3snd_PlaySoundEffect(-8, 0, (int) 0x68cc9c, *(unsigned char*) (p + 9) + 1);
             if (srv_GetEntityOfficeSlot(p, outR, outS) != 0) {
                 if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + (g_774970 & 0xffff) * 0x21c)) {
                     amt_SendOfficeCommand(outS[0], 0, 0, 4, 0xff);
@@ -339,7 +339,7 @@ void __cdecl cut_MainDuell(char* a0)
         }
     } else {
         io_AppendText(0x1122, sB.id & 0xffff, sA.id & 0xffff);
-        fcn_004c3030(-8, 0, (int) 0x68cc9c, 0);
+        d3snd_PlaySoundEffect(-8, 0, (int) 0x68cc9c, 0);
     }
 
     cut_WaitTicks(5);

@@ -24,7 +24,7 @@ void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4);
 int __cdecl fcn_004f6470(int id, int* out, unsigned short k);
 void __cdecl gm_GenerateShuffledIndices(int n, int* out);
 void __cdecl fcn_004c58f0(int a1, int a2, int a3);
-int __cdecl fcn_004b4650(char* a1, int kind);
+int __cdecl gm_IncrementMissionActionCount(char* a1, int kind);
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
 void __cdecl fcn_004c6ae0(int a1, int a2);
 int __cdecl fcn_004c5620(int a1, char* e);
@@ -85,7 +85,7 @@ void __cdecl fcn_0054ee10(char* t)
 			fcn_004c58f0(ids[pick[i]], *(int*) (firstEntity + 4), 0);
 		}
 		if (firstEntity[2] == 6)
-			fcn_004b4650(firstEntity, 0xb);
+			gm_IncrementMissionActionCount(firstEntity, 0xb);
 	}
 	fcn_004c5420(*(int*) (firstEntity + 4), 0x1c8, 4, 0x100, 0);
 	fcn_004c5420(*(int*) (secondEntity + 4), 0x1c8, 4, 0x200, 0);

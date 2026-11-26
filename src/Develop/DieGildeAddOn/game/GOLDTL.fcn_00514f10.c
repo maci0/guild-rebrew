@@ -10,7 +10,7 @@ void __cdecl fcn_0052db70(char*);
 void __cdecl d3_VisitSceneObjects(char*, int, int, void*, void*);
 char __cdecl fcn_00514e80(char*);
 void __cdecl fcn_00514e30(void);
-void __cdecl fcn_00598510(void);
+void __cdecl d3_ReleaseUnusedSceneObjects(void);
 void __cdecl fcn_0045b290(int, int);
 
 void __cdecl fcn_00514f10(void)
@@ -27,6 +27,6 @@ void __cdecl fcn_00514f10(void)
 	}
 	d3_VisitSceneObjects(((char*)g_67a370), 0, 0x40, (void*) fcn_00514e80, 0);
 	fcn_00514e30();
-	fcn_00598510();
+	d3_ReleaseUnusedSceneObjects();
 	fcn_0045b290(*(int*) (((char*)g_67a370) + 0xb0), g_6b8300);
 }

@@ -31,7 +31,7 @@ void __cdecl he_FreeAction(char* t);
 void __cdecl fcn_00507130(int k, int* a, int* b);
 #include "client_packet_builder.h"
 int __cdecl gm_RandomMod(int n);
-void __cdecl fcn_004c4670(int, int, int, char*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c6470(int, int);
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -66,9 +66,9 @@ void __cdecl fcn_005516e0(char* t)
 		fcn_00507130(gm_MapEntityStatRange(*(unsigned char*) (t + 0xb0)), &a, &b);
 		cm_BeginPacketFieldDelta((char*) e, e->entity_id);
 		c = gm_RandomMod(0x10) + 0x10;
-		fcn_004c4670(1, 1, a + 0x80, &c);
+		cm_AppendPacketFieldValue(1, 1, a + 0x80, &c);
 		c = gm_RandomMod(0x10) + 0x10;
-		fcn_004c4670(1, 1, b + 0x80, &c);
+		cm_AppendPacketFieldValue(1, 1, b + 0x80, &c);
 		fcn_004c5360();
 		fcn_004c6470(e->entity_id, *(unsigned char*) (t + 0xb0));
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));

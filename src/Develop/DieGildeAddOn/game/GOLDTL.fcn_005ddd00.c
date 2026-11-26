@@ -24,7 +24,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
-int __cdecl fcn_005ddd00(char* e, char* request)
+int __cdecl gm_ObjCreateMutualRivalry(char* e, char* request)
 {
 	Req req;
 	char text[0x100];

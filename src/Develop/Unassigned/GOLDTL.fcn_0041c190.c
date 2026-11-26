@@ -6,7 +6,7 @@ extern COLOR_OCTREE_NODE* g_6b6f20[6];
 extern OctRef* g_6b6f40;
 extern unsigned int g_6b6f38;
 
-void __cdecl fcn_0041c190(unsigned int half, int unused)
+void __cdecl d3_SiftDownOctreeHeap(unsigned int half, int unused)
 {
 	unsigned char lvl;
 	unsigned int idx;

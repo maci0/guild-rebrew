@@ -16,7 +16,7 @@ char* __cdecl m_alloc(int, char*);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 void __cdecl m_FreeTracked(char*);
 void __cdecl fcn_004c4e40(int);
-int __cdecl fcn_004c4e70(char*);
+int __cdecl cm_SendLoadChunk(char*);
 void __cdecl main_PumpWindowMessages(void);
 void __cdecl fcn_00535960(void);
 
@@ -53,7 +53,7 @@ int __cdecl ls_SendGame(char* path)
 	p = buf;
 	sent = 0;
 	while (sent < total) {
-		if (fcn_004c4e70(p) != -1) {
+		if (cm_SendLoadChunk(p) != -1) {
 			p += 0x80;
 			sent += 0x80;
 			if (n++ % 16 == 0) {

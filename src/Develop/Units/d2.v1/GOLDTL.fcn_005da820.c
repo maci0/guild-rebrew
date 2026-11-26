@@ -30,7 +30,7 @@ extern int g_100f1dc;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004f63d0(int id, int* ids, short kind);
-int __cdecl fcn_005d9ca0(char* e, char* who, int n, int a4);
+int __cdecl gs_StartCourtTrial(char* e, char* who, int n, int a4);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -77,7 +77,7 @@ int __cdecl fcn_005da820(char* e, char* request)
 		if (b[0] == 0) {
 			return 0x60;
 		}
-		return fcn_005d9ca0(e, who, b[0], 1);
+		return gs_StartCourtTrial(e, who, b[0], 1);
 	}
 	dlg = fcn_00470820(0, 0, "privillegien\\Beweise_Sichten");
 	d2_CenterDialogWindows(dlg);

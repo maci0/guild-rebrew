@@ -54,7 +54,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl ch_SetLowPolyMode(unsigned char);
 void __cdecl d3_SetCameraHeightFraction(int);
 void __cdecl fcn_0043bbf0(unsigned char);
-void __cdecl fcn_00598510(void);
+void __cdecl d3_ReleaseUnusedSceneObjects(void);
 void __cdecl fcn_0043ace0(int);
 void __cdecl fcn_0041b820(float*, float*, float*);
 
@@ -119,7 +119,7 @@ void __cdecl d3_ApplyGraphicsOptions(void)
 	}
 	saved = d3_CurrentContextIndex;
 	d3_SelectSceneContext(0, 1);
-	fcn_00598510();
+	d3_ReleaseUnusedSceneObjects();
 	if ((*(unsigned char*)&g_776664) == 0) {
 		fcn_0043ace0(0);
 	} else {

@@ -18,9 +18,9 @@ void __cdecl d2_ShowLagerOptions(int, int);
 void __cdecl fcn_005cf560(int);
 void __cdecl d2_OpenBlutracheDialog(int);
 void __cdecl d2_ShowPersonalbuch(int, char*);
-void __cdecl fcn_0059a0e0(void);
+void __cdecl d3_UpdateBuildingInteriorState(void);
 
-void __cdecl fcn_005e69f0(int a)
+void __cdecl d2_RunZigeunerInteriorHud(int a)
 {
 	int zig;
 	int trans;
@@ -38,7 +38,7 @@ void __cdecl fcn_005e69f0(int a)
 	meister = 0;
 	betteln = 0;
 	fcn_005338a0();
-	while (main_RunFrameLoop(fcn_005e69f0, 0x67fff) != 0) {
+	while (main_RunFrameLoop(d2_RunZigeunerInteriorHud, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			zig = RegisterStatusText("contact_ZUTATEN_SUCHEN_ZIGEUNER", g_14b5b94, 0x16);
 			trans = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
@@ -70,6 +70,6 @@ void __cdecl fcn_005e69f0(int a)
 				d2_ShowPersonalbuch(a, "ob_PERSONALBUCH");
 			}
 		}
-		fcn_0059a0e0();
+		d3_UpdateBuildingInteriorState();
 	}
 }

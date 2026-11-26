@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_scene_transform.h"
 
-int __cdecl fcn_00407d90(char* self, char** out)
+int __cdecl ch_FindNearbyWalkers(char* self, char** out)
 {
 	int count;
 	char** p;

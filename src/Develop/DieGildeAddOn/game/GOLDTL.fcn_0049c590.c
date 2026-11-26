@@ -17,13 +17,13 @@ extern float g_1009b9c;
 int __cdecl gm_StartFilteredEntitySearch(int a0, int a1, int a2);
 int __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3, int a4);
 void __cdecl cm_BeginPacketFieldDelta(int a0, int a1);
-void __cdecl fcn_004c4670(int a0, int a1, int a2, char* a3);
+void __cdecl cm_AppendPacketFieldValue(int a0, int a1, int a2, char* a3);
 int __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c51a0(int a0, int a1, char a2, int a3);
 void __cdecl fcn_004f5e20(int a0, int a1);
-void __cdecl fcn_005b2150(int a0, char* a1, int a2, int a3, int a4);
+void __cdecl he_NotifyAblassPurchase(int a0, char* a1, int a2, int a3, int a4);
 void __cdecl fcn_005100f0(int a0, int a1);
-void __cdecl fcn_005b21d0(int a0, char* a1, int a2);
+void __cdecl he_NotifyConfession(int a0, char* a1, int a2);
 
 /* ADDRESS: GOLDTL 0x0049c590 */
 int __cdecl ai_RunAblassKaufen(int entityArg, char* purchaseReq, char* commandArg)
@@ -50,7 +50,7 @@ int __cdecl ai_RunAblassKaufen(int entityArg, char* purchaseReq, char* commandAr
 		n = *(int*) (purchaseReq + 0x10);
 		computedAmount = (int) (n / log10((double) n));
 		cm_BeginPacketFieldDelta(entityArg, *(int*) (entityArg + 4));
-		fcn_004c4670(4, 1, 0x1ac, purchaseReq + 0x10);
+		cm_AppendPacketFieldValue(4, 1, 0x1ac, purchaseReq + 0x10);
 		fcn_004c5360();
 		fcn_004c51a0(-1, *(int*) (entityArg + 4), g_773d75,
 		    *(int*) (purchaseReq + 0x10));
@@ -58,7 +58,7 @@ int __cdecl ai_RunAblassKaufen(int entityArg, char* purchaseReq, char* commandAr
 			+ 4),
 		    -1, g_773d75, computedAmount);
 		fcn_004f5e20(*(int*) (entityArg + 4), (int) *(float*) (purchaseReq + 0x14));
-		fcn_005b2150(entityArg,
+		he_NotifyAblassPurchase(entityArg,
 		    (char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)],
 		    rec, computedAmount, *(int*) (purchaseReq + 0x10));
 		g_1009b8c = g_1009b6c * *(float*) (purchaseReq + 0x14);
@@ -71,7 +71,7 @@ int __cdecl ai_RunAblassKaufen(int entityArg, char* purchaseReq, char* commandAr
 		fcn_005100f0(*(int*) (entityArg + 4), -*(int*) (purchaseReq + 0x10));
 		fcn_005100f0(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]
 			+ 4), 1);
-		fcn_005b21d0(entityArg,
+		he_NotifyConfession(entityArg,
 		    (char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)], rec);
 		return 0x26;
 	}

@@ -3,7 +3,7 @@
 
 int __cdecl fcn_00508eb0(unsigned short id, int a2);
 
-int __cdecl fcn_004946f0(unsigned short* a, unsigned short* b, int k)
+int __cdecl gm_CalcBecircenFavor(unsigned short* a, unsigned short* b, int k)
 {
 	int d;
 

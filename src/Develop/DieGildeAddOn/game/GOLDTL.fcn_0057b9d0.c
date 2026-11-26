@@ -4,7 +4,7 @@
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 
-int __cdecl fcn_0057b9d0(char* p, int a, int b)
+int __cdecl he_HasActiveGrabpflege(char* p, int a, int b)
 {
 	char* r;
 

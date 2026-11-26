@@ -28,7 +28,7 @@ extern Pair_99f800 g_99f800[0x800];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004c5870(int id, int v);
-void __cdecl fcn_005b2a00(char* o, char* p);
+void __cdecl he_NotifyStraftatExpired(char* o, char* p);
 
 int __cdecl fcn_004f5f30(int target, int count, int* ids)
 {
@@ -79,7 +79,7 @@ int __cdecl fcn_004f5f30(int target, int count, int* ids)
 	}
 	for (r = 0; r < m; r++) {
 		if (flag[r] != 0) {
-			fcn_005b2a00(who[r], p);
+			he_NotifyStraftatExpired(who[r], p);
 		}
 	}
 	return n;

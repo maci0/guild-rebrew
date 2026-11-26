@@ -12,14 +12,14 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_0059a0e0(void);
+void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl fcn_0059c000(char*);
 void __cdecl fcn_005c5b10(char*);
 void __cdecl fcn_005c79a0(char*);
 
-void __cdecl fcn_0059c800(char* e)
+void __cdecl d2_RunSchmiedeInteriorHud(char* e)
 {
 	int d;
 	int g;
@@ -36,7 +36,7 @@ void __cdecl fcn_0059c800(char* e)
 	g = 0;
 	fcn_0057e880(0x1b, e, 0, 0);
 	fcn_005338a0();
-	while (main_RunFrameLoop((void*) fcn_0059c800, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunSchmiedeInteriorHud, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			a = RegisterStatusText("contact_PRODUKTION_METALL", g_14ad0f8, 0x13);
 			b = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
@@ -49,7 +49,7 @@ void __cdecl fcn_0059c800(char* e)
 				g = RegisterStatusText("ob_ZIELSCHEIBE", g_14abc2c, 0x17);
 			}
 		}
-		fcn_0059a0e0();
+		d3_UpdateBuildingInteriorState();
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == b) {
 				d2_OpenTransportPanel(e);

@@ -38,7 +38,7 @@ unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00507380(int);
-void __cdecl fcn_005049c0(int);
+void __cdecl gm_HasGuildHall(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl fcn_00505d00(char*, int*);
@@ -222,7 +222,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 	off = idx;
 	v = fcn_00507380(*(unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[off].unk_164);
 	if (v >= 2 && v <= 5) {
-		fcn_005049c0(v);
+		gm_HasGuildHall(v);
 	}
 	p = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 	while (p != 0) {

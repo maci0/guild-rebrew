@@ -9,7 +9,7 @@ typedef struct
 } Body20;
 // SIZE 0x80
 
-void __cdecl fcn_004c4e70(Body20* data)
+void __cdecl cm_SendLoadChunk(Body20* data)
 {
 	char buf[0x9c];
 

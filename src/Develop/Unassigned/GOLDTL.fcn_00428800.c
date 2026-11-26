@@ -45,7 +45,7 @@ extern char* g_6b7eb8;
 extern char g_14cb440[];
 
 int __cdecl evt_EvaluateExpression(char* pEnd);
-char* __cdecl fcn_00426620(char* s, int unused, char* end);
+char* __cdecl evt_FindLogicalOp(char* s, int unused, char* end);
 void __cdecl evt_ReadToken(char* s, struct tok_428800* t);
 int __cdecl evt_ExecuteCommand(void* cmd);
 void __cdecl evt_LogScriptError(char* g, int pos, const char* msg);
@@ -82,12 +82,12 @@ int __cdecl evt_EvaluateExpression(char* pEnd)
 				break;
 			}
 			if (pEnd != 0) {
-				p = fcn_00426620(*(char**) (evt_CurrentScript + 0x118), 0x679680, pEnd);
+				p = evt_FindLogicalOp(*(char**) (evt_CurrentScript + 0x118), 0x679680, pEnd);
 				if (p != 0 && p < pEnd) {
 					value = n = evt_EvaluateExpression(p);
 				}
 			} else {
-				p = fcn_00426620(*(char**) (evt_CurrentScript + 0x118), 0x679680,
+				p = evt_FindLogicalOp(*(char**) (evt_CurrentScript + 0x118), 0x679680,
 						*(char**) (evt_CurrentScript + 0x11c) + *(int*) (evt_CurrentScript + 0x120));
 				if (p != 0) {
 					value = n = evt_EvaluateExpression(p);

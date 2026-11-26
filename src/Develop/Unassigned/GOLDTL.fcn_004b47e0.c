@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004b47e0 */
-int __cdecl fcn_004b47e0(unsigned char* stats, char* thr)
+int __cdecl gm_HasSkillThreshold(unsigned char* stats, char* thr)
 {
 	int i;
 	int n;

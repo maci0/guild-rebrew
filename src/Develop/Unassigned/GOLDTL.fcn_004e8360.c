@@ -18,7 +18,7 @@ typedef struct
 #include "client_data.h"
 extern char g_68da68[];
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_005b2280(void* a1, void* a2);
+void __cdecl he_NotifyOfficeAction(void* a1, void* a2);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x004e8360 */
 int __cdecl fcn_004e8360(char* requestData)
@@ -154,6 +154,6 @@ int __cdecl fcn_004e8360(char* requestData)
 		((Rec18*) amt_OfficeSlots)[i].f0c = 0;
 	if (setter != 0 && ent != 0 &&
 	    *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c) == *(int*) (ent + 4))
-		fcn_005b2280(setter, ent);
+		he_NotifyOfficeAction(setter, ent);
 	return 1;
 }

@@ -36,7 +36,7 @@ void __cdecl fcn_00526120(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005d86a0(unsigned char* e, unsigned char* ctx)
+int __cdecl gm_HandleFriedenStiften(unsigned char* e, unsigned char* ctx)
 {
 	int result;
 	int dlg;
@@ -129,7 +129,7 @@ int __cdecl fcn_005d86a0(unsigned char* e, unsigned char* ctx)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005d86a0, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) gm_HandleFriedenStiften, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return result;
 }

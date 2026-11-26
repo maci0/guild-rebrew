@@ -9,7 +9,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 
 
-char* __cdecl fcn_00577d00(char* who, char* self, int skip)
+char* __cdecl he_FindNearestAction0x18(char* who, char* self, int skip)
 {
 	char* best_e;
 	float best;

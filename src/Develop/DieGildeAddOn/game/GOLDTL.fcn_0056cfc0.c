@@ -44,7 +44,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 char *__cdecl fcn_00422460(int, char *);
 int __cdecl d3snd_AttachSoundSource(int, int, int, float);
 void __cdecl d3snd_PlaySource(int, int, int, int);
-void __cdecl fcn_004193f0(int, int, int, float);
+void __cdecl d3snd_PlayObjectSound(int, int, int, float);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl he_MessageBoxQuickjump(int, int, char *, unsigned char, int, int, int, char *, char *);
 int __cdecl gm_RandomMod(unsigned short);
@@ -100,7 +100,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 					} else if (*(char *)(a0 + 0xb4) == 0) {
 						r = fcn_00422460(0, g_6a6b38);
 						if (r != 0)
-							fcn_004193f0((int)r, *(int *)(e + 0x61), 0x6b, 2200.0f);
+							d3snd_PlayObjectSound((int)r, *(int *)(e + 0x61), 0x6b, 2200.0f);
 						if (*(unsigned short *)(e + 0x27) == g_774970) {
 							fcn_004c30a0(-8, 0, g_6a6b28, 0, 100);
 							if (*(char *)(a0 + 0x104)) {

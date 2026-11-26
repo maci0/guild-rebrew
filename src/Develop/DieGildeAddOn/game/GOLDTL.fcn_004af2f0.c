@@ -6,7 +6,7 @@ extern unsigned char g_773d75;
 
 void* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_004ae080(char*, char*, int*, int*);
+void __cdecl hst_SplitFormatPrefix(char*, char*, int*, int*);
 int __cdecl atoi(char*);
 int __cdecl fcn_0050b710(int, unsigned char);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -149,7 +149,7 @@ int __cdecl fcn_004ae2a0(int mode, int* pairs, int idx, char* text, void* out)
 		add ecx, ebx
 		rep stosb
 	}
-	fcn_004ae080(text, buf, &p, &n);
+	hst_SplitFormatPrefix(text, buf, &p, &n);
 	io_FormatTextBuffer(out, (int) buf, r->id);
 	return 1;
 }
@@ -208,7 +208,7 @@ int __cdecl fcn_004ae3c0(int mode, int* pairs, int idx, char* text, void* out)
 		add ecx, ebx
 		rep stosb
 	}
-	fcn_004ae080(text, buf, &p, &n);
+	hst_SplitFormatPrefix(text, buf, &p, &n);
 	io_FormatTextBuffer(out, (int) buf, r->id);
 	return 1;
 }
@@ -251,7 +251,7 @@ int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
 	{
 		int rest;
 
-		fcn_004ae080(text, buf, &p, &rest);
+		hst_SplitFormatPrefix(text, buf, &p, &rest);
 		if (rest != 1 || (sel = atoi(text + p)) < 0 || sel > 2) {
 			sel = 1;
 		}
@@ -356,7 +356,7 @@ int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
 	{
 		int rest;
 
-		fcn_004ae080(text, buf, &p, &rest);
+		hst_SplitFormatPrefix(text, buf, &p, &rest);
 		if (rest != 1 || (sel = atoi(text + p)) < 0 || sel > 2) {
 			sel = 1;
 		}
@@ -472,7 +472,7 @@ int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
 	{
 		int rest;
 
-		fcn_004ae080(text, buf, &p, &rest);
+		hst_SplitFormatPrefix(text, buf, &p, &rest);
 		if (rest != 1 || (sel = atoi(text + p)) < 0 || sel > 2) {
 			sel = 1;
 		}
@@ -591,7 +591,7 @@ int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
 	{
 		int rest;
 
-		fcn_004ae080(text, buf, &p, &rest);
+		hst_SplitFormatPrefix(text, buf, &p, &rest);
 		if (rest != 1 || (sel = atoi(text + p)) < 0 || sel > 2) {
 			sel = 1;
 		}
@@ -724,7 +724,7 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 		add ecx, ebx
 		rep stosb
 	}
-	fcn_004ae080(a4, buf, &n, (int*) &p);
+	hst_SplitFormatPrefix(a4, buf, &n, (int*) &p);
 	n = atoi(a4 + n);
 	io_FormatTextBuffer((void*) a5, (int) buf,
 	    fcn_0050b710((int) (((float) n * 0.01f) * (float) r),
@@ -771,7 +771,7 @@ int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
 	{
 		int rest;
 
-		fcn_004ae080(text, buf, &p, &rest);
+		hst_SplitFormatPrefix(text, buf, &p, &rest);
 		if (rest != 1 || (sel = atoi(text + p)) < 0 || sel > 2) {
 			sel = 1;
 		}
@@ -889,7 +889,7 @@ int __cdecl fcn_004afd70(int mode, int* pairs, int idx, char* text, void* out)
 	{
 		int rest;
 
-		fcn_004ae080(text, buf, &p, &rest);
+		hst_SplitFormatPrefix(text, buf, &p, &rest);
 	}
 	if (mode == 1) {
 		r = (Rec21c*) gm_LookupEntityRecordById(pairs[idx * 2 + 1]);

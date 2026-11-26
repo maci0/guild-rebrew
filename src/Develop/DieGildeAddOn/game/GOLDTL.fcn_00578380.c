@@ -24,7 +24,7 @@ void __cdecl he_FreeAction(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 
-void __cdecl fcn_00578380(char* u)
+void __cdecl he_StartAction0x88(char* u)
 {
 	char text[0x400];
 	char* o;

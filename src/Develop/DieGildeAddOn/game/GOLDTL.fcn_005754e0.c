@@ -39,7 +39,7 @@ int __cdecl gm_CheckMissionCondition(rec24*);
 int __cdecl fcn_004c5790(int, struct req*);
 int __cdecl fcn_004c4450(int);
 
-void __cdecl fcn_005754e0(char* u)
+void __cdecl he_RunMissionCheck(char* u)
 {
 	struct req q;
 	int i;

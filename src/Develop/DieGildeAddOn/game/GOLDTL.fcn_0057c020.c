@@ -29,7 +29,7 @@ void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 
-void __cdecl fcn_0057c020(ENTITY_RECORD* a, ENTITY_RECORD* b)
+void __cdecl he_ApplyZigeunerFavorPenalty(ENTITY_RECORD* a, ENTITY_RECORD* b)
 {
 	rec18 r;
 	char text1[0x400];

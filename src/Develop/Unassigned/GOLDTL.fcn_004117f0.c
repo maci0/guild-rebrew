@@ -2,7 +2,7 @@
 
 #include "client_input.h"
 
-int __cdecl fcn_004117f0(int enable)
+int __cdecl io_AcquireMouse(int enable)
 {
 	INPUT_DEVICE* obj;
 

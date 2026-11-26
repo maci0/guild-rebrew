@@ -25,7 +25,7 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, void* f);
 void __cdecl CloseVfsStream(void* f);
 void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
-int __cdecl fcn_0041bcd0(void* dst, void* src, int w, int h, int mode, int pitch, void* fmt);
+int __cdecl d3_QuantizeImageOctree(void* dst, void* src, int w, int h, int mode, int pitch, void* fmt);
 
 #pragma optimize("y", off)
 
@@ -265,7 +265,7 @@ close_stream:
 		if (pal2 == 0) {
 			pal2 = palbuf;
 		}
-		fcn_0041bcd0(pixels, buf, bih.biWidth, abs(bih.biHeight),
+		d3_QuantizeImageOctree(pixels, buf, bih.biWidth, abs(bih.biHeight),
 			     0x100, 1, pal);
 		if (pal2 != 0) {
 			for (i = 0; i < 0x100; i++) {

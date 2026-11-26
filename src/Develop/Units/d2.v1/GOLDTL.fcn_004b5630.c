@@ -9,9 +9,9 @@ extern void __cdecl d2_SetForm(void *obj, int a);
 extern int __cdecl io_AppendText(int id);
 extern int __cdecl d2_GetWindowListItem(void *obj, int a, int b);
 extern int __cdecl fcn_004273c0(void);
-extern void *__cdecl fcn_004c3030(int a, int b, const char *name, int c);
+extern void *__cdecl d3snd_PlaySoundEffect(int a, int b, const char *name, int c);
 extern int __cdecl fcn_00423460(void *node);
-extern void __cdecl fcn_004237f0(void *node, int a);
+extern void __cdecl sb_StopVoice(void *node, int a);
 extern void __cdecl main_RunFrameLoop(int a, int b);
 extern void __cdecl fcn_00471e30(void *obj);
 
@@ -35,13 +35,13 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	tab = d2_GetWindowListItem(obj, 2, io_AppendText(0x7d));
 	b = loopFlags | 0x80;
 	if (fcn_004273c0()) {
-		node = fcn_004c3030(-8, 0, (const char *) 0x68119c, 0);
+		node = d3snd_PlaySoundEffect(-8, 0, (const char *) 0x68119c, 0);
 		if (fcn_00423460(node)) {
 			do {
 				main_RunFrameLoop(0, b);
 				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
 					if (fcn_00423460(node)) {
-						fcn_004237f0(node, 1);
+						sb_StopVoice(node, 1);
 					}
 					break;
 				}
@@ -62,13 +62,13 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	io_AppendText(0x1b9c);
 	b = loopFlags | 0x80;
 	if (fcn_004273c0()) {
-		node = fcn_004c3030(-8, 0, (const char *) 0x68119c, 1);
+		node = d3snd_PlaySoundEffect(-8, 0, (const char *) 0x68119c, 1);
 		if (fcn_00423460(node)) {
 			do {
 				main_RunFrameLoop(0, b);
 				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
 					if (fcn_00423460(node)) {
-						fcn_004237f0(node, 1);
+						sb_StopVoice(node, 1);
 					}
 					break;
 				}
@@ -89,13 +89,13 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	io_AppendText(0x1b9d);
 	b = loopFlags | 0x80;
 	if (fcn_004273c0()) {
-		node = fcn_004c3030(-8, 0, (const char *) 0x68119c, 2);
+		node = d3snd_PlaySoundEffect(-8, 0, (const char *) 0x68119c, 2);
 		if (fcn_00423460(node)) {
 			do {
 				main_RunFrameLoop(0, b);
 				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
 					if (fcn_00423460(node)) {
-						fcn_004237f0(node, 1);
+						sb_StopVoice(node, 1);
 					}
 					break;
 				}
@@ -119,7 +119,7 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	b = loopFlags | 0x80;
 	if (fcn_004273c0()) {
 		sprintf(buf, (const char *) 0x681180, *(unsigned *) (a0 + 0x10));
-		node = fcn_004c3030(-7, 0, buf, -1);
+		node = d3snd_PlaySoundEffect(-7, 0, buf, -1);
 		if (fcn_00423460(node)) {
 			while (main_RunFrameLoop(0, b), g_100f1dc == -1 || d2_CurrentElementId != tab) {
 				if (!fcn_00423460(node)) {
@@ -128,7 +128,7 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 				}
 			}
 			if (fcn_00423460(node)) {
-				fcn_004237f0(node, 1);
+				sb_StopVoice(node, 1);
 			}
 		}
 	} else {

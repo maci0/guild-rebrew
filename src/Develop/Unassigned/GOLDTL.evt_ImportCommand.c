@@ -13,7 +13,7 @@ struct cmd_429ed0 {
 extern void* g_6b7e9c;
 
 #include "Develop/Units/Error/error_message.h"
-int __cdecl fcn_00429e60(const char*);
+int __cdecl evt_FindCommand(const char*);
 
 
 /* evt_ImportCommand: registers a script command with its argument types. */
@@ -29,7 +29,7 @@ int __cdecl evt_ImportCommand(const char* name, void* fn, int flags, int nargs, 
 		ReportClientMessage("evt_ImportCommand: Commandnamelength is invalid...");
 		return 0;
 	}
-	if (fcn_00429e60(name)) {
+	if (evt_FindCommand(name)) {
 		ReportClientMessage("evt_ImportCommand: Commandname already exists...");
 		return 0;
 	}

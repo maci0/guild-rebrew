@@ -3,11 +3,11 @@
 
 #include <windows.h>
 
-char __cdecl fcn_0041d500(unsigned int protect)
+char __cdecl check_memory_protection(unsigned int protect)
 {
 	MEMORY_BASIC_INFORMATION mbi;
 
-	VirtualQuery(fcn_0041d500, &mbi, 0x1c);
+	VirtualQuery(check_memory_protection, &mbi, 0x1c);
 
 	switch (protect & 0xFF) {
 	case 2:

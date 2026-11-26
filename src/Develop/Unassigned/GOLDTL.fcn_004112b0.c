@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <windows.h>
 
-int __cdecl fcn_004112b0(const char* sub, int mode)
+int __cdecl io_OpenRegistryKey(const char* sub, int mode)
 {
 	HKEY key;
 	DWORD disp;

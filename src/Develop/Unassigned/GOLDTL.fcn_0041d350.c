@@ -13,7 +13,7 @@ extern char g_677ca0[];
 extern char g_6b6f54;
 
 /* Client twin of the server's EmitCrashModuleLine (0x10002fc0). */
-unsigned char __cdecl fcn_0041d350(int* st)
+unsigned char __cdecl EmitCrashModuleLine(int* st)
 {
 	int* mod;
 	int* entry;

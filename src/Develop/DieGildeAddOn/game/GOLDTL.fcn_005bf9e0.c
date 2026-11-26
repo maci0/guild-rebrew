@@ -1,5 +1,5 @@
 int __cdecl gm_WalkEntityChain(unsigned short id);
-int __cdecl fcn_004fa5b0(int, int, void*);
+int __cdecl gm_CheckPrivilege(int, int, void*);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -7,7 +7,7 @@ void __cdecl fcn_00526120(char*, int);
 int __cdecl gm_CheckEntityStock(int, int, char);
 int __cdecl he_HasNoActiveEvent04b(unsigned short*, int);
 int __cdecl he_HasNoActiveAction0x2e(unsigned short*, int);
-int __cdecl fcn_00579640(unsigned short*, int);
+int __cdecl he_HasNoActiveAction0x88(unsigned short*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -49,7 +49,7 @@ int __cdecl fcn_005bf9e0(unsigned short* entity)
 	data[0] = 1;
 	r = gm_WalkEntityChain(*(unsigned short*) (timeout * 0x21c + (unsigned long)&g_7f4ca0));
 	timeout = (int) ((float) r * 0.0085f);
-	if (fcn_004fa5b0(0x1b, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0, data) & 2) {
+	if (gm_CheckPrivilege(0x1b, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0, data) & 2) {
 		timeout /= 2;
 	}
 	query = he_StartHandlungSearch(2, 2, *(unsigned short*) &g_774970, 0, 0x1a);
@@ -74,7 +74,7 @@ int __cdecl fcn_005bf9e0(unsigned short* entity)
 		fcn_00526120((char*) evt, 0);
 		return 0;
 	}
-	if (!fcn_00579640(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
+	if (!he_HasNoActiveAction0x88(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
 		io_FormatTextBuffer((char*) evt, 0x409f);
 		fcn_00526120((char*) evt, 0);
 		return 0;

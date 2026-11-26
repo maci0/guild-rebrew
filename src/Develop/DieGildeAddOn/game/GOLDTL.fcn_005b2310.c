@@ -6,7 +6,7 @@ extern char g_6b5c60[];
 void __cdecl io_FormatTextBuffer(void*, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
-void __cdecl fcn_005b2310(void* recipient)
+void __cdecl he_NotifyAction0x35Success(void* recipient)
 {
 	char t;
 

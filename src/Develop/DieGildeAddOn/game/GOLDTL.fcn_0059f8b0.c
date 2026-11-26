@@ -19,35 +19,35 @@ void __cdecl fcn_005c0a30(int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl d2_RunTalenteDialog(int, int, int);
 
-void __cdecl fcn_0059f8b0(int a1, int a2)
+void __cdecl d2_RunRhetoricActionsHud(int entity, int mode)
 {
 	int x;
 	int y;
 	int z;
 
 	fcn_005338a0();
-	while (main_RunFrameLoop(fcn_0059f8b0, 0x67fff) != 0) {
+	while (main_RunFrameLoop(d2_RunRhetoricActionsHud, 0x67fff) != 0) {
 		x = RegisterStatusText(g_6aa750, g_14ab07c, 0xc);
 		y = RegisterStatusText(g_6aa73c, g_14ab750, 0xc);
 		z = RegisterStatusText(g_6aa728, g_14aadd8, 0xc);
 		if (g_774800 != 0) {
 			if (g_14cf950 == 0x19) {
-				fcn_005c1090(a1);
+				fcn_005c1090(entity);
 			}
 			if (g_14cf950 == 0x20) {
-				fcn_005c0a30(a1);
+				fcn_005c0a30(entity);
 			}
 		}
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == x) {
-				fcn_005c0a30(a1);
+				fcn_005c0a30(entity);
 				fcn_00532ef0();
 			}
 			else if (g_7746a0 == y) {
-				fcn_005c1090(a1);
+				fcn_005c1090(entity);
 			}
 			else if (g_7746a0 == z) {
-				d2_RunTalenteDialog(a1, a2, 4);
+				d2_RunTalenteDialog(entity, mode, 4);
 			}
 		}
 	}

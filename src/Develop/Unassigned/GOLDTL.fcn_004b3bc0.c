@@ -3,7 +3,7 @@
 
 extern char g_10069a0[];
 
-char* __cdecl fcn_004b3bc0(int* query)
+char* __cdecl gm_FindMissionByEntityId(int* query)
 {
 	int i;
 

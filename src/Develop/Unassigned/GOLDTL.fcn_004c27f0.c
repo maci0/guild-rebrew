@@ -4,7 +4,7 @@ extern IdGroup g_688118[];
 
 /* ADDRESS: GOLD 0x004c1f90 */
 /* ADDRESS: GOLDTL 0x004c27f0 */
-int __cdecl fcn_004c27f0(void)
+int __cdecl msx_FindActiveGroup(void)
 {
 	int i;
 	int v;

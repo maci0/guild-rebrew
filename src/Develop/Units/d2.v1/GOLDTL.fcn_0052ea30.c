@@ -34,7 +34,7 @@ extern char g_6a2fec[];
 extern char g_6a2fe4[];
 extern char g_67d444[];
 
-int __cdecl fcn_00508da0(char* a);
+int __cdecl gm_GetEntityMood(char* a);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_AppendText(char* fmt, ...);
 void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
@@ -81,7 +81,7 @@ void __cdecl fcn_0052ea30(void)
 	if (g_7e2aa0 == 0 || d2_CurrentValueBar == -1 || g_6a25bc == -1) {
 		goto no_header;
 	}
-	pct = fcn_00508da0(g_7e2aa0);
+	pct = gm_GetEntityMood(g_7e2aa0);
 	d2_SetForm(g_6a25b8, 1);
 	io_AppendText(g_6811b0);
 	if (*g_7e2aa0 != 0x47) {

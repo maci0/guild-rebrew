@@ -10,7 +10,7 @@ typedef struct {
 
 extern void* g_6b7e9c;
 
-Var* __cdecl fcn_00429e60(const char* name)
+Var* __cdecl evt_FindCommand(const char* name)
 {
 	int i;
 	Var* p;

@@ -5,7 +5,7 @@
 float __cdecl gm_RandomFloat01(void);
 float __cdecl fcn_004ff210(unsigned short, int);
 
-int __cdecl fcn_005779e0(char* a, unsigned short* b, int c)
+int __cdecl gm_ApplyAssassinDamage(char* a, unsigned short* b, int c)
 {
 	float fa;
 	float fb;

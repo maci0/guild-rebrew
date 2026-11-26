@@ -10,7 +10,7 @@ void __cdecl fcn_004c54c0(int, int, int, int);
 
 /* ADDRESS: GOLD 0x004b04a0 */
 /* ADDRESS: GOLDTL 0x004b05e0 */
-int __cdecl fcn_004b05e0(int* record, int index, char* text)
+int __cdecl hst_HandleAnsehenBeiAmtstraegern(int* record, int index, char* text)
 {
 	char* e;
 	int n;

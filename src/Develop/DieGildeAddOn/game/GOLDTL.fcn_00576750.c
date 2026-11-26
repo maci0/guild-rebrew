@@ -10,7 +10,7 @@ unsigned short __cdecl gm_RandomMod(int range);
 float __cdecl gm_RandomFloat01(void);
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int offset, void* value);
-void __cdecl fcn_004c4670(int a, int b, int offset, void* value);
+void __cdecl cm_AppendPacketFieldValue(int a, int b, int offset, void* value);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004eea30(int city, int id, float value);
 void __cdecl fcn_005782f0(int a, unsigned short b);
@@ -104,7 +104,7 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 			byte = (char) (0xf8 - gm_RandomMod(3));
 		}
 		cm_BeginPacketFieldDelta(object, *(int*) (object + 1));
-		fcn_004c4670(1, 1, 0x5c, &byte);
+		cm_AppendPacketFieldValue(1, 1, 0x5c, &byte);
 		fcn_004c5360();
 		fcn_005b3270((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
 		    city, object);

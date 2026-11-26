@@ -30,7 +30,7 @@ extern int d2_CurrentElementId;
 
 int __cdecl gm_WalkEntityChain(unsigned short);
 char *__cdecl fcn_005cd440(int *, int, int, int);
-int __cdecl fcn_00577ab0(char *);
+int __cdecl he_HasNoActiveAction0x9b(char *);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl fcn_00526120(char *, int);
 int __cdecl fcn_00470820(int, int, char *);
@@ -50,7 +50,7 @@ int __cdecl fcn_004a5e60(Slot58a6 *p, int kind, F8 f, int c, float r, int *out);
 int __cdecl fcn_004c5530(char *);
 int __cdecl fcn_004c4450(int);
 int __cdecl main_RunFrameLoop(void *, int);
-int __cdecl fcn_004c3030(int, int, char *, int);
+int __cdecl d3snd_PlaySoundEffect(int, int, char *, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
@@ -77,7 +77,7 @@ void __cdecl fcn_0058a6b0(char *gebaeude)
     query[1] = 0x400;
     query[4] = 6;
     sel = fcn_005cd440(query, *(int *) 0x14b53d0, 0, 0);
-    if (fcn_00577ab0(sel) == 0) {
+    if (he_HasNoActiveAction0x9b(sel) == 0) {
         io_FormatTextBuffer(text, 0x4030, *(unsigned short *) sel);
         fcn_00526120(text, 0);
         return;
@@ -140,7 +140,7 @@ void __cdecl fcn_0058a6b0(char *gebaeude)
                     tmp = fcn_004c5530(msg);
                     while (tmp != -1 && fcn_004c4450(tmp) == 0)
                         main_RunFrameLoop(0, 0x20007);
-                    fcn_004c3030(-7, 0, "KOMMENTARE", -1);
+                    d3snd_PlaySoundEffect(-7, 0, "KOMMENTARE", -1);
                     g_774654 = 1;
                 }
             } else if (d2_CurrentElementId == h2) {

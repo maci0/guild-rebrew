@@ -56,7 +56,7 @@ int __cdecl fcn_004a5e60(unsigned short*, int, F8, int, float, int*);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
 int __cdecl main_RunFrameLoop(void*, int);
-int __cdecl fcn_004c3030(int, int, char*, int);
+int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
@@ -156,7 +156,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 					while (id != -1 && fcn_004c4450(id) == 0) {
 						main_RunFrameLoop(0, 0x20007);
 					}
-					fcn_004c3030(-7, 0, (char*) 0x6a9508, 0);
+					d3snd_PlaySoundEffect(-7, 0, (char*) 0x6a9508, 0);
 					g_774654 = 1;
 				}
 			} else if (d2_CurrentElementId == cancelButton) {

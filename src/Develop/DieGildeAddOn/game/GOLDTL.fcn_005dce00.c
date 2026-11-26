@@ -24,7 +24,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
 
-int __cdecl fcn_005dce00(char* cmd, char* arg)
+int __cdecl gm_ObjHalveWorkerLevel(char* cmd, char* arg)
 {
 	char val;
 	int desc[20];

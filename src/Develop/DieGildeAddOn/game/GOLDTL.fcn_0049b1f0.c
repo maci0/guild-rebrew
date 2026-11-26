@@ -34,7 +34,7 @@ extern char* g_77261c;
 extern char g_7f4ca4[];
 
 int __cdecl gm_RandomMod(int n);
-void __cdecl fcn_004a51d0(char* e, int n, Slot* slots, Counts* cnt);
+void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl fcn_004a5340(char* e, int a, unsigned int* colors, int c, float r, unsigned short* ids);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
@@ -76,7 +76,7 @@ int __cdecl fcn_0049b1f0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 	slot[9].id = 0x22d;
 	slot[10].id = 0x29a;
 	slot[11].id = 0x29c;
-	fcn_004a51d0(e, 12, slot, &cnt);
+	gm_CheckEntityObjectSlots(e, 12, slot, &cnt);
 	if (cnt.total == 6 && cnt.free == 0) {
 		return 0;
 	}

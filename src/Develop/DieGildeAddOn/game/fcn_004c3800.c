@@ -5,7 +5,7 @@ unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl gm_CollectBuildingStock(void *, void *, int);
 int __cdecl gm_CollectStockEntries(void *, void *, int);
-void __cdecl fcn_004c3030(int, int, int, int);
+void __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004c3800 */
 void __cdecl fcn_004c3800(void *arg)
@@ -36,22 +36,22 @@ void __cdecl fcn_004c3800(void *arg)
 
 	if (score == 0) {
 		if (flag)
-			fcn_004c3030(*(unsigned short *) obj, g_772e7c, (int) 0x68a994, 3);
+			d3snd_PlaySoundEffect(*(unsigned short *) obj, g_772e7c, (int) 0x68a994, 3);
 		else
-			fcn_004c3030(*(unsigned short *) obj, g_772e7c, (int) 0x68a994, r);
+			d3snd_PlaySoundEffect(*(unsigned short *) obj, g_772e7c, (int) 0x68a994, r);
 		return;
 	}
 	if (score == 1) {
 		if (flag)
-			fcn_004c3030(*(unsigned short *) obj, g_772e7c, (int) 0x68a984, 3);
+			d3snd_PlaySoundEffect(*(unsigned short *) obj, g_772e7c, (int) 0x68a984, 3);
 		else
-			fcn_004c3030(*(unsigned short *) obj, g_772e7c, (int) 0x68a984, r);
+			d3snd_PlaySoundEffect(*(unsigned short *) obj, g_772e7c, (int) 0x68a984, r);
 		return;
 	}
 	if (score < 2)
 		return;
 	if (flag)
-		fcn_004c3030(*(unsigned short *) obj, g_772e7c, (int) 0x68a978, 3);
+		d3snd_PlaySoundEffect(*(unsigned short *) obj, g_772e7c, (int) 0x68a978, 3);
 	else
-		fcn_004c3030(*(unsigned short *) obj, g_772e7c, (int) 0x68a978, r);
+		d3snd_PlaySoundEffect(*(unsigned short *) obj, g_772e7c, (int) 0x68a978, r);
 }

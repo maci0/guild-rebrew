@@ -8,7 +8,7 @@ extern int g_67a370;
 
 
 void __cdecl fcn_004cf180(void);
-void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
+void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 void __cdecl fcn_00536640(int);
 char __cdecl fcn_0045bad0(int, int, int, int*, int*);
 char __cdecl d3_GridPointToWorld(int, int, int, char*);
@@ -26,7 +26,7 @@ void __cdecl fcn_00536740(void)
 	if (g_14cf736 != 0) {
 		g_7725c4 = 0x21;
 		if (g_14ce8d8 != 0) {
-			fcn_004234e0(0, "schuss_s", 1, 0x3f, 0x7f, 0, 0);
+			sb_PlayVoice(0, "schuss_s", 1, 0x3f, 0x7f, 0, 0);
 			if ((*(int*)&g_7746b4) != 0) {
 				fcn_00536640((*(int*)&g_7746b4));
 			}

@@ -32,7 +32,7 @@ float __cdecl fcn_0050f980(unsigned int a, unsigned int b, unsigned int c);
 int __cdecl fcn_004e4b40(int a1, int a2, char* s, int a4, int a5);
 
 int __cdecl gm_CalcTrialTortureFee(int a, int b);
-int __cdecl fcn_004938c0(void* m);
+int __cdecl gm_CalcTrialTortureRounds(void* m);
 void __cdecl fcn_00493920(void* m);
 int __cdecl fcn_004c51a0(int a, int b, unsigned char c, int d);
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
@@ -42,7 +42,7 @@ void __cdecl fcn_004f6810(int a, int b);
 void __cdecl cut_FormatProzessPunishment(int a, int b, char* s);
 void __cdecl fcn_004f6850(int a, int b, int c, int d, int e);
 int* __cdecl gm_GetEntityTableEntry(int a);
-void __cdecl fcn_004b4650(int a, int b);
+void __cdecl gm_IncrementMissionActionCount(int a, int b);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e3640(void);
 void __cdecl fcn_004c09b0(void);
@@ -493,7 +493,7 @@ int __cdecl cut_RunProzess(int a0)
 			} else {
 				msg.pad[3] = 6;
 			}
-			msg.pad[4] = fcn_004938c0(&msg);
+			msg.pad[4] = gm_CalcTrialTortureRounds(&msg);
 			msg.pad[5] = 0;
 			sprintf(buf, "PROZESS_5_FOLTER2_%s.sbf", folterName[msg.pad[3]]);
 			msg.hnd[4] = fcn_004e4ae0("PROZESS_5_FOLTER2_GESTEHEN.sbf", 0);
@@ -731,7 +731,7 @@ int __cdecl cut_RunProzess(int a0)
 		}
 		st = *(int*) (g_9b0eb4 + i * 0x35c);
 		if ((unsigned int) st >= 4 && *(char*) (p34 + 2) == 6 && *(char*) (p38 + 0x166) != 0) {
-			fcn_004b4650((int) p34, 0x13);
+			gm_IncrementMissionActionCount((int) p34, 0x13);
 		}
 		fcn_004e4450(g_68bfc0, 1);
 		d2_SetForm(g_68bfc0, 0);

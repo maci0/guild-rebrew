@@ -2,7 +2,7 @@ extern char g_675170[];
 
 #include "GOLDTL.fcn_00402320_gconf.h"
 
-void __cdecl fcn_00402320(void)
+void __cdecl nt_CloseBroadcastSocket(void)
 {
 	int h;
 

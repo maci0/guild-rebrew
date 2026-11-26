@@ -7,17 +7,17 @@ extern char g_681110[];
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 
-char* __cdecl fcn_004b3c50(int);
+char* __cdecl gm_LookupMissionSpec(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-int __cdecl fcn_004c3030(int, int, char*, int);
+int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00423460(int);
-void __cdecl fcn_004237f0(int, int);
+void __cdecl sb_StopVoice(int, int);
 
 void __cdecl fcn_004b5530(int a1, int flags)
 {
@@ -26,7 +26,7 @@ void __cdecl fcn_004b5530(int a1, int flags)
 	int h;
 	int x;
 
-	r = fcn_004b3c50(a1);
+	r = gm_LookupMissionSpec(a1);
 	h = fcn_00470820(0, 0, g_681130);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
@@ -34,7 +34,7 @@ void __cdecl fcn_004b5530(int a1, int flags)
 	io_AppendText((int) g_68112c);
 	io_AppendText(0x7d);
 	fcn_0064d41a(buf, g_681110, *(int*) (r + 0xc));
-	x = fcn_004c3030(-7, 0, buf, -1);
+	x = d3snd_PlaySoundEffect(-7, 0, buf, -1);
 	while (main_RunFrameLoop(fcn_004b5530, flags) != 0) {
 		if (g_14ce8e0 != 0)
 			g_774654 = 1;
@@ -44,5 +44,5 @@ void __cdecl fcn_004b5530(int a1, int flags)
 	if (h != -1)
 		fcn_00471e30(h);
 	if (fcn_00423460(x) != 0)
-		fcn_004237f0(x, 0x19);
+		sb_StopVoice(x, 0x19);
 }

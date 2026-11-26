@@ -1,8 +1,8 @@
 
 
-int __cdecl fcn_00577940(int);
+int __cdecl gm_FindMatchingLawEntry(int);
 
 int __cdecl fcn_005779c0(int a)
 {
-	return fcn_00577940(a) >= 0;
+	return gm_FindMatchingLawEntry(a) >= 0;
 }

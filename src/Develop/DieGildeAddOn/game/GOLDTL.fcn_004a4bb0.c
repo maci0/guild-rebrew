@@ -11,7 +11,7 @@ typedef struct Query {
 
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_004fa5b0(int k, char* e, Query* q);
+int __cdecl gm_CheckPrivilege(int k, char* e, Query* q);
 int __cdecl fcn_00504f30(int k, int id);
 int __cdecl fcn_004a48e0(char* e, int k);
 
@@ -38,22 +38,22 @@ int __cdecl ai_PrepareBuildSite(char* action, char* e, char* mode, char* cmd, ch
 			}
 		}
 		if (k == 4) {
-			r = fcn_004fa5b0(1, e, &q);
+			r = gm_CheckPrivilege(1, e, &q);
 			if (r != 2 && r != 4) {
 				return 0;
 			}
 		} else if (k == 5) {
-			r = fcn_004fa5b0(5, e, &q);
+			r = gm_CheckPrivilege(5, e, &q);
 			if (r != 2 && r != 4) {
 				return 0;
 			}
 		} else if (k == 6) {
-			r = fcn_004fa5b0(9, e, &q);
+			r = gm_CheckPrivilege(9, e, &q);
 			if (r != 2 && r != 4) {
 				return 0;
 			}
 		} else if (k == 7) {
-			r = fcn_004fa5b0(0xc, e, &q);
+			r = gm_CheckPrivilege(0xc, e, &q);
 			if (r != 2 && r != 4) {
 				return 0;
 			}

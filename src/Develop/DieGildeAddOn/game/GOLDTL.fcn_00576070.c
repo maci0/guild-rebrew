@@ -13,7 +13,7 @@ void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl fcn_004c35f0(void);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00576070(char* u)
+void __cdecl he_StartAhmBoostEssence(char* u)
 {
 	char* h;
 

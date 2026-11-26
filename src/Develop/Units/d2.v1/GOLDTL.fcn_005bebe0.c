@@ -55,7 +55,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern s_1015f4c g_1015f4c[];
 
 char* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
-int __cdecl fcn_004fa5b0(int a1, char* a2, int a3);
+int __cdecl gm_CheckPrivilege(int a1, char* a2, int a3);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl fcn_00471e30(int h);
@@ -102,7 +102,7 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 	if (broadcastSlot >= 5) {
 		return;
 	}
-	miss = (fcn_004fa5b0(ids[broadcastSlot], (char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), (int) big) & 2) != 0 ? -1 : 0;
+	miss = (gm_CheckPrivilege(ids[broadcastSlot], (char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), (int) big) & 2) != 0 ? -1 : 0;
 	color = *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x80 + broadcastSlot);
 	if (color < 0x2a) {
 		color = 1;

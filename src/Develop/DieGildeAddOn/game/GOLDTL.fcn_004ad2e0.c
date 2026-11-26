@@ -7,7 +7,7 @@ typedef struct Hit4ad2e0 {
 	float f;
 } Hit4ad2e0;
 
-void __cdecl fcn_004ad4d0(int a1);
+void __cdecl amt_SendSpecialOfficeSlot(int a1);
 char* __cdecl amt_GetOfficeHolderRecord(int kind);
 float __cdecl fcn_004ad500(unsigned char* a1, unsigned short* a2, int a3, int a4);
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
@@ -43,7 +43,7 @@ void __cdecl fcn_004ad2e0(void)
 	excludedMask = *(int*) (idx * 4 + 0x664e24);
 	idx--;
 	v6 = *(int*) (idx * 4 + 0x664e34);
-	fcn_004ad4d0(idx);
+	amt_SendSpecialOfficeSlot(idx);
 	obj = amt_GetOfficeHolderRecord(v4);
 	if (obj == 0) {
 		return;

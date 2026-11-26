@@ -14,7 +14,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowProductionDialog(int);
 void __cdecl d2_RunProductionTradeDialog(int);
 
-void __cdecl fcn_0059c760(int a)
+void __cdecl d2_RunMineInteriorHud(int a)
 {
 	int x;
 	int y;
@@ -22,7 +22,7 @@ void __cdecl fcn_0059c760(int a)
 	x = 0;
 	y = 0;
 	fcn_005338a0();
-	while (main_RunFrameLoop(fcn_0059c760, 0x67fff) != 0) {
+	while (main_RunFrameLoop(d2_RunMineInteriorHud, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			x = RegisterStatusText(g_6aa39c, g_14ad230, 0x16);
 			y = RegisterStatusText(g_6aa38c, g_14ad208, 0xa);

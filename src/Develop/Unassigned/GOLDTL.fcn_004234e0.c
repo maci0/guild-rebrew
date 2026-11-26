@@ -11,7 +11,7 @@ Voice* __cdecl fcn_004229b0(void);
 char* __cdecl sb_FindSampleByName(char* bank, const char* name);
 int __cdecl fcn_00423670(Voice* v, int a, int b);
 
-Voice* __cdecl fcn_004234e0(char* bank, const char* name, int loop, int pan, int vol, int a, int b)
+Voice* __cdecl sb_PlayVoice(char* bank, const char* name, int loop, int pan, int vol, int a, int b)
 {
 	Voice* v;
 

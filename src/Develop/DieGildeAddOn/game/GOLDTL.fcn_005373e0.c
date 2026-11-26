@@ -100,7 +100,7 @@ extern void *memcpy(void *, const void *, unsigned int);
 
 extern void main_PumpWindowMessages();
 extern void fcn_412630();
-extern void fcn_004116d0();
+extern void io_ClearInputState();
 extern int cut_FindCutsceneById();
 extern void fcn_00533a40();
 extern void d2_ProcessMouseInput();
@@ -208,7 +208,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 	fcn_412630();
 	if (a0 != 0) {
 		if (*(int *) ((char *) g_7e35c0 + g_774650 * 8) != a0) {
-			fcn_004116d0();
+			io_ClearInputState();
 		}
 		if (g_774970 != 0xffff) {
 			if ((g_7f4ca0[(unsigned short) g_774970 * 540 + 2] == 6 ||

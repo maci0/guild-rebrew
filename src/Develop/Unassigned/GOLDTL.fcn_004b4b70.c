@@ -12,18 +12,18 @@ extern float g_6628a0;
 
 void __cdecl gm_SummarizeEntityOwnership(int, int, stat12*);
 
-int __cdecl fcn_004b4b70(int ownerRef)
+int __cdecl gm_HasThreeEntityHoldings(int ownerRef)
 {
-	stat12 s;
+	stat12 stats;
 
-	gm_SummarizeEntityOwnership(ownerRef, 0x15, &s);
-	if (s.n < 3 || s.f < g_6628a0)
+	gm_SummarizeEntityOwnership(ownerRef, 0x15, &stats);
+	if (stats.n < 3 || stats.f < g_6628a0)
 		return 0;
-	gm_SummarizeEntityOwnership(ownerRef, 0x14, &s);
-	if (s.n < 3 || s.f < g_6628a0)
+	gm_SummarizeEntityOwnership(ownerRef, 0x14, &stats);
+	if (stats.n < 3 || stats.f < g_6628a0)
 		return 0;
-	gm_SummarizeEntityOwnership(ownerRef, 0x12, &s);
-	if (s.n < 3 || s.f < g_6628a0)
+	gm_SummarizeEntityOwnership(ownerRef, 0x12, &stats);
+	if (stats.n < 3 || stats.f < g_6628a0)
 		return 0;
 	return 1;
 }

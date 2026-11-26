@@ -3,7 +3,7 @@
 
 typedef struct {
 	char b[0x21c];
-} Ent5aa3;
+} ZUNFT_UPGRADE_ENTITY_VIEW;
 // SIZE 0x21c
 
 extern char g_7f4ca0[];
@@ -12,27 +12,27 @@ extern int g_14aad38;
 extern int g_14aac9c;
 extern char g_7d4190[];
 
-int __cdecl amt_CanUpgradeBuildingTier2(Ent5aa3* e);
+int __cdecl amt_CanUpgradeBuildingTier2(ZUNFT_UPGRADE_ENTITY_VIEW* e);
 void __cdecl fcn_00526120(int, int);
-void __cdecl d2_CheckActionBlocker(Ent5aa3* e, int);
-void __cdecl fcn_005aa120(void);
+void __cdecl d2_CheckActionBlocker(ZUNFT_UPGRADE_ENTITY_VIEW* e, int);
+void __cdecl d2_RunZunftLevel2Dialog(void);
 void __cdecl fcn_005bdc30(int, char*, int, void (__cdecl*)(void), int);
 
 #pragma optimize("y", off)
-void __cdecl fcn_005aa390(void)
+void __cdecl d2_StartZunftLevel2Action(void)
 {
 	char buf[0x50];
 	char* fdest;
 	int flen;
 	int r;
 
-	r = amt_CanUpgradeBuildingTier2(&((Ent5aa3*)g_7f4ca0)[g_774970]);
+	r = amt_CanUpgradeBuildingTier2(&((ZUNFT_UPGRADE_ENTITY_VIEW*)g_7f4ca0)[g_774970]);
 	if (r != 1) {
 		if (r == -1) {
 			fcn_00526120(g_14aad38, 0);
 			return;
 		}
-		d2_CheckActionBlocker(&((Ent5aa3*)g_7f4ca0)[g_774970], 5);
+		d2_CheckActionBlocker(&((ZUNFT_UPGRADE_ENTITY_VIEW*)g_7f4ca0)[g_774970], 5);
 		return;
 	}
 	flen = 0x50;
@@ -60,6 +60,6 @@ void __cdecl fcn_005aa390(void)
 	*(char**) (buf + 8) = g_7d4190;
 	*(int*) (buf + 0xc) = 1;
 	*(int*) (buf + 0x4c) = 0x727;
-	fcn_005bdc30(1, buf, g_14aac9c, fcn_005aa120, 0);
+	fcn_005bdc30(1, buf, g_14aac9c, d2_RunZunftLevel2Dialog, 0);
 }
 #pragma optimize("", on)

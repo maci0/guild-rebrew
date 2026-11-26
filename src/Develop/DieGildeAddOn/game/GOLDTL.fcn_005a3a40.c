@@ -15,7 +15,7 @@ int __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_0057e880(int, int, int, int);
 void __cdecl fcn_005ba910(int, int);
 
-void __cdecl fcn_005a3a40(int buildingArg, int queryTypeId)
+void __cdecl d2_OpenMarktstandPanel(int buildingArg, int queryTypeId)
 {
 	(*(int*)&g_7e2aa0) = 0;
 	g_7746c0 = 0;

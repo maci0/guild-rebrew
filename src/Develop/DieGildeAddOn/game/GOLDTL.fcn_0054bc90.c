@@ -15,7 +15,7 @@ extern int __cdecl fcn_00545670(char*, int, int, char*, int);
 extern int __cdecl d2_SetForm(int, int);
 extern void __cdecl io_AppendText(int, ...);
 extern void __cdecl gm_AddTime(void*, int, int, int);
-extern int __cdecl fcn_004c3030(int, int, char*, int);
+extern int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x0054bc90 */
 void __cdecl fcn_0054bc90(char* action)
@@ -217,7 +217,7 @@ void __cdecl fcn_0054bc90(char* action)
 		*(pos14_7f4c00*) (action + 0x44) = gm_GameTime;
 		*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
 		gm_AddTime(action + 0x52, 0x18, 0, 0);
-		fcn_004c3030(-7, 0, (char*) 0x6a5a34, 0);
+		d3snd_PlaySoundEffect(-7, 0, (char*) 0x6a5a34, 0);
 		*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 		return;
 	}

@@ -7,7 +7,7 @@ void __cdecl fcn_00525ef0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00530510(void);
 void __cdecl fcn_005305a0(void);
-int __cdecl fcn_004234e0(int, void*, int, int, int, int, int);
+int __cdecl sb_PlayVoice(int, void*, int, int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_004c3170(char*);
 int __cdecl fcn_00510c90(int);
@@ -30,44 +30,44 @@ void __cdecl fcn_00516ed0(char*);
 void __cdecl fcn_004c34d0(void);
 void __cdecl fcn_00516f60(void);
 void __cdecl fcn_00597fd0(void*);
-void __cdecl fcn_005a07c0(int, void*);
-void __cdecl fcn_0059f6c0(int, void*);
+void __cdecl d2_RunCharacterActionsHud(int, void*);
+void __cdecl d2_RunSabotageActionsHud(int, void*);
 void __cdecl fcn_005a4030(int, void*);
-void __cdecl fcn_0059f8b0(int, void*);
-void __cdecl fcn_0059f9b0(int, void*);
+void __cdecl d2_RunRhetoricActionsHud(int, void*);
+void __cdecl d2_RunSocialActionsHud(int, void*);
 void __cdecl fcn_005a0250(int, void*);
 void __cdecl fcn_005a3820(int, void*);
-void __cdecl fcn_0059e430(int, void*);
-void __cdecl fcn_0059e5f0(int, void*);
+void __cdecl d2_RunTutorialSchmiedeHud(int, void*);
+void __cdecl d2_RunTischlereiInteriorHud(int, void*);
 void __cdecl d2_RunMixingProductionMenu(int, void*);
 void __cdecl fcn_0059f320(int, void*);
-void __cdecl fcn_0059f340(int, void*);
+void __cdecl d2_RunAlchemistCreatureHud(int, void*);
 void __cdecl d2_RunSteinmetzMenu(int, void*);
 void __cdecl fcn_005a7200(int, void*);
-void __cdecl fcn_005acc80(int, void*);
-void __cdecl fcn_005ace20(int, void*);
+void __cdecl d2_RunKircheMenu(int, void*);
+void __cdecl d2_RunKircheAltarMenu(int, void*);
 void __cdecl fcn_005acf90(int, void*);
 void __cdecl fcn_005ad260(int, void*);
 void __cdecl fcn_005ad360(int, void*);
-void __cdecl fcn_005ae1b0(int, void*);
+void __cdecl d2_RunRaeuberlagerMenu(int, void*);
 void __cdecl fcn_005ae3c0(int, void*);
-void __cdecl fcn_005ae3e0(int, void*);
-void __cdecl fcn_005ae600(int, void*);
+void __cdecl d2_RunWachstubeMenu(int, void*);
+void __cdecl d2_RunWachstubeRegenMenu(int, void*);
 void __cdecl fcn_005af140(int, void*);
-void __cdecl fcn_005ac250(int, void*);
+void __cdecl d2_RunBeichtstuhlMenu(int, void*);
 void __cdecl fcn_0059f190(int, void*);
 void __cdecl fcn_005a2db0(int, void*);
 void __cdecl d2_RunBrauenMenu(int, void*);
-void __cdecl fcn_005a91b0(int, void*);
-void __cdecl fcn_005a9c50(int, void*);
-void __cdecl fcn_005a9120(int, void*);
+void __cdecl d2_RunRathausMenu(int, void*);
+void __cdecl d2_RunRathausCouncilMenu(int, void*);
+void __cdecl d2_RunStadtkasseMenu(int, void*);
 void __cdecl fcn_005aad40(int, void*);
-void __cdecl fcn_005acb30(int, void*);
+void __cdecl d2_RunSchreibstubeMenu(int, void*);
 void __cdecl fcn_005aaed0(int, void*);
 void __cdecl d2_RunZunftMenu(int, void*);
-void __cdecl fcn_005b0010(int, void*);
-void __cdecl fcn_005afd20(int, void*);
-void __cdecl fcn_005afea0(int, void*);
+void __cdecl d2_RunWachhofRegenMenu(int, void*);
+void __cdecl d2_RunZollamtMenu(int, void*);
+void __cdecl d2_RunRazziaWacheMenu(int, void*);
 void __cdecl d2_RunAlchemistMenu(int, void*);
 void __cdecl d2_RunSchneiderMenu(int, void*);
 void __cdecl fcn_0058af00(int, void*);
@@ -109,9 +109,9 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
     if (p2 == 0)
         *(int*) &g_7746c4 = 0;
     if (*(u16*) (o + 0x27) == *(u16*) &g_774970)
-        fcn_004234e0(g_7747c8, (void*) 0x6aadc8, 1, 0x3f, 0x7f, 0, 0);
+        sb_PlayVoice(g_7747c8, (void*) 0x6aadc8, 1, 0x3f, 0x7f, 0, 0);
     else
-        fcn_004234e0(g_7747c8, (void*) 0x6aadac, 1, 0x3f, 0x7f, 0, 0);
+        sb_PlayVoice(g_7747c8, (void*) 0x6aadac, 1, 0x3f, 0x7f, 0, 0);
     strcpy(g_6752a8, "normal_s");
 
     fcn_00502cd0(*(int*) (o + 0x5d), 1, 0, (int) *(u16*) (o + 0x29));
@@ -188,19 +188,19 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
             fcn_0057e880(0x19, msg, 0, 0);
             switch (*(u16*) msg) {
     case 0x13:
-        fcn_005a07c0(*(int*)&g_7746c4, msg);
+        d2_RunCharacterActionsHud(*(int*)&g_7746c4, msg);
         break;
     case 0x14:
-        fcn_0059f6c0(*(int*)&g_7746c4, msg);
+        d2_RunSabotageActionsHud(*(int*)&g_7746c4, msg);
         break;
     case 0x16:
         fcn_005a4030(*(int*)&g_7746c4, msg);
         break;
     case 0x15:
-        fcn_0059f8b0(*(int*)&g_7746c4, msg);
+        d2_RunRhetoricActionsHud(*(int*)&g_7746c4, msg);
         break;
     case 0x17:
-        fcn_0059f9b0(*(int*)&g_7746c4, msg);
+        d2_RunSocialActionsHud(*(int*)&g_7746c4, msg);
         break;
     case 0x18:
         fcn_005a0250(*(int*)&g_7746c4, msg);
@@ -209,10 +209,10 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         fcn_005a3820(*(int*)&g_7746c4, msg);
         break;
     case 0x74:
-        fcn_0059e430(*(int*)&g_7746c4, msg);
+        d2_RunTutorialSchmiedeHud(*(int*)&g_7746c4, msg);
         break;
     case 0x85:
-        fcn_0059e5f0(*(int*)&g_7746c4, msg);
+        d2_RunTischlereiInteriorHud(*(int*)&g_7746c4, msg);
         break;
     case 0xcf:
         d2_RunMixingProductionMenu(*(int*)&g_7746c4, msg);
@@ -221,7 +221,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         fcn_0059f320(*(int*)&g_7746c4, msg);
         break;
     case 0xdd:
-        fcn_0059f340(*(int*)&g_7746c4, msg);
+        d2_RunAlchemistCreatureHud(*(int*)&g_7746c4, msg);
         break;
     case 0x9b:
         d2_RunSteinmetzMenu(*(int*)&g_7746c4, msg);
@@ -231,10 +231,10 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         break;
     case 0xe5:
     case 0xe6:
-        fcn_005acc80(*(int*)&g_7746c4, msg);
+        d2_RunKircheMenu(*(int*)&g_7746c4, msg);
         break;
     case 0xf0:
-        fcn_005ace20(*(int*)&g_7746c4, msg);
+        d2_RunKircheAltarMenu(*(int*)&g_7746c4, msg);
         break;
     case 0xb7:
         fcn_005acf90(*(int*)&g_7746c4, msg);
@@ -246,22 +246,22 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         fcn_005ad360(*(int*)&g_7746c4, msg);
         break;
     case 0x54:
-        fcn_005ae1b0(*(int*)&g_7746c4, msg);
+        d2_RunRaeuberlagerMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x4d:
         fcn_005ae3c0(*(int*)&g_7746c4, msg);
         break;
     case 0x5c:
-        fcn_005ae3e0(*(int*)&g_7746c4, msg);
+        d2_RunWachstubeMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x60:
-        fcn_005ae600(*(int*)&g_7746c4, msg);
+        d2_RunWachstubeRegenMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x65:
         fcn_005af140(*(int*)&g_7746c4, msg);
         break;
     case 0xf2:
-        fcn_005ac250(*(int*)&g_7746c4, msg);
+        d2_RunBeichtstuhlMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x118:
         fcn_0059f190(*(int*)&g_7746c4, msg);
@@ -273,19 +273,19 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         d2_RunBrauenMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x10e:
-        fcn_005a91b0(*(int*)&g_7746c4, msg);
+        d2_RunRathausMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x110:
-        fcn_005a9c50(*(int*)&g_7746c4, msg);
+        d2_RunRathausCouncilMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x114:
-        fcn_005a9120(*(int*)&g_7746c4, msg);
+        d2_RunStadtkasseMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x137:
         fcn_005aad40(*(int*)&g_7746c4, msg);
         break;
     case 0xf7:
-        fcn_005acb30(*(int*)&g_7746c4, msg);
+        d2_RunSchreibstubeMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x138:
         fcn_005aaed0(*(int*)&g_7746c4, msg);
@@ -294,13 +294,13 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         d2_RunZunftMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x145:
-        fcn_005b0010(*(int*)&g_7746c4, msg);
+        d2_RunWachhofRegenMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x146:
-        fcn_005afd20(*(int*)&g_7746c4, msg);
+        d2_RunZollamtMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x14c:
-        fcn_005afea0(*(int*)&g_7746c4, msg);
+        d2_RunRazziaWacheMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x24b:
         d2_RunAlchemistMenu(*(int*)&g_7746c4, msg);
@@ -366,5 +366,5 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
     *(int*) &d3_CameraTargetRotation = *(int*) &saved.rot[0];
     *(int*) &g_7e3a54 = *(int*) &saved.rot[1];
     *(int*) &g_7e3a58 = *(int*) &saved.rot[2];
-    return fcn_004234e0(g_7747c8, (void*) 0x6aad8c, 1, 0x3f, 0x7f, 0, 0);
+    return sb_PlayVoice(g_7747c8, (void*) 0x6aad8c, 1, 0x3f, 0x7f, 0, 0);
 }

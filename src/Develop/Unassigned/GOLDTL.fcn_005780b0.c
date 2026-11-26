@@ -3,13 +3,13 @@
 
 int __cdecl he_RegisterHandler(int, void (__cdecl*)(char*), void (__cdecl*)(char*));
 int __cdecl fcn_00530ab0(int, char*, int, int, int);
-void __cdecl fcn_00578380(void);
+void __cdecl he_StartAction0x88(void);
 void __cdecl fcn_005784d0(void);
-void __cdecl fcn_00578860(void);
+void __cdecl he_StartHauchDesVerfalls(void);
 void __cdecl he_RunHauchDesVerfalls(void);
 void __cdecl fcn_00579690(void);
 void __cdecl fcn_005797a0(void);
-void __cdecl fcn_00579cf0(void);
+void __cdecl he_StartGrabpflege(void);
 void __cdecl he_RunGrabpflege(void);
 void __cdecl fcn_00578e10(void);
 void __cdecl fcn_00578ed0(void);
@@ -19,26 +19,26 @@ void __cdecl fcn_0057a130(void);
 void __cdecl fcn_0057a180(void);
 void __cdecl fcn_0057a260(void);
 void __cdecl fcn_0057a3d0(void);
-void __cdecl fcn_0057a700(void);
-void __cdecl fcn_0057ad50(void);
+void __cdecl he_StartAction0x90(void);
+void __cdecl he_RunAction0x90(void);
 void __cdecl fcn_0057ae40(void);
 void __cdecl he_UpdateNecromancerFog(void);
-void __cdecl fcn_0057b330(void);
+void __cdecl he_StartAction0x93(void);
 void __cdecl fcn_0057b390(void);
 void __cdecl fcn_0057b770(char*);
-void __cdecl fcn_0057b7a0(char*);
+void __cdecl he_RunFriedhofStealAction(char*);
 void __cdecl fcn_0057b000(void);
 void __cdecl fcn_0057b1f0(void);
 
 int __cdecl fcn_005780b0(void)
 {
-	if (he_RegisterHandler(0x88, fcn_00578380, fcn_005784d0) || he_RegisterHandler(0x89, fcn_00578860, he_RunHauchDesVerfalls)
-	    || he_RegisterHandler(0x8c, fcn_00579690, fcn_005797a0) || he_RegisterHandler(0x8d, fcn_00579cf0, he_RunGrabpflege)
+	if (he_RegisterHandler(0x88, he_StartAction0x88, fcn_005784d0) || he_RegisterHandler(0x89, he_StartHauchDesVerfalls, he_RunHauchDesVerfalls)
+	    || he_RegisterHandler(0x8c, fcn_00579690, fcn_005797a0) || he_RegisterHandler(0x8d, he_StartGrabpflege, he_RunGrabpflege)
 	    || he_RegisterHandler(0x8a, fcn_00578e10, fcn_00578ed0) || he_RegisterHandler(0x8b, fcn_00579320, fcn_00579460)
-	    || he_RegisterHandler(0x8d, fcn_00579cf0, he_RunGrabpflege) || he_RegisterHandler(0x8e, fcn_0057a130, fcn_0057a180)
-	    || he_RegisterHandler(0x8f, fcn_0057a260, fcn_0057a3d0) || he_RegisterHandler(0x90, fcn_0057a700, fcn_0057ad50)
-	    || he_RegisterHandler(0x91, fcn_0057ae40, he_UpdateNecromancerFog) || he_RegisterHandler(0x93, fcn_0057b330, fcn_0057b390)
-	    || he_RegisterHandler(0x94, fcn_0057b770, fcn_0057b7a0) || he_RegisterHandler(0x92, fcn_0057b000, fcn_0057b1f0)) {
+	    || he_RegisterHandler(0x8d, he_StartGrabpflege, he_RunGrabpflege) || he_RegisterHandler(0x8e, fcn_0057a130, fcn_0057a180)
+	    || he_RegisterHandler(0x8f, fcn_0057a260, fcn_0057a3d0) || he_RegisterHandler(0x90, he_StartAction0x90, he_RunAction0x90)
+	    || he_RegisterHandler(0x91, fcn_0057ae40, he_UpdateNecromancerFog) || he_RegisterHandler(0x93, he_StartAction0x93, fcn_0057b390)
+	    || he_RegisterHandler(0x94, fcn_0057b770, he_RunFriedhofStealAction) || he_RegisterHandler(0x92, fcn_0057b000, fcn_0057b1f0)) {
 		return 1;
 	}
 	fcn_00530ab0(0x8d, "grabpflege", 1, 0x513, -1);

@@ -26,7 +26,7 @@ extern float g_6660f4;
 void __cdecl gm_CalcArtillerySpread(char* p, float* o1, float* o2);
 float __cdecl gm_GetCannonPowerScale(char* p);
 int __cdecl fcn_005e8e80(char* o, float* pos, float* dir, float speed, float b, float a);
-int __cdecl fcn_005e8fe0(float* p, float spread, float* dir, float lift, float* up, float scale);
+int __cdecl d3_PerturbParticleVelocity(float* p, float spread, float* dir, float lift, float* up, float scale);
 float __cdecl fcn_004f0eb0(int level, int percent, int count);
 int __cdecl fcn_004f0a30(char* a0, char* a1, float* a2, float* a3, float* a4, float a5, int a6, unsigned int a7);
 
@@ -92,7 +92,7 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 		pos.z += g_772858;
 		fcn_005e8e80(buf1, &pos.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
-		fcn_005e8fe0((float*) buf1, ss[0], (float*) 0x772870, ss[0],
+		d3_PerturbParticleVelocity((float*) buf1, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
 		fcn_004f0a30(a1, a0, (float*) buf1, 0, 0,
 			fcn_004f0eb0(g_77289c, g_772898, 1), p2, (unsigned int) p1);
@@ -121,9 +121,9 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 			bits, g_6660f4);
 		fcn_005e8e80(buf1, &pos2.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
-		fcn_005e8fe0((float*) buf2, ss[0], (float*) 0x772870, ss[0],
+		d3_PerturbParticleVelocity((float*) buf2, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
-		fcn_005e8fe0((float*) buf1, ss[0], (float*) 0x772870, ss[0],
+		d3_PerturbParticleVelocity((float*) buf1, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
 		fcn_004f0a30(a1, a0, (float*) buf2, (float*) buf1, 0,
 			fcn_004f0eb0(g_77289c, g_772898, 2), p2, (unsigned int) p1);
@@ -169,11 +169,11 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 			bits, g_6660f4);
 		fcn_005e8e80(buf2, &pos.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
-		fcn_005e8fe0((float*) buf3, ss[0], (float*) 0x772870, ss[0],
+		d3_PerturbParticleVelocity((float*) buf3, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
-		fcn_005e8fe0((float*) buf1, ss[0], (float*) 0x772870, ss[0],
+		d3_PerturbParticleVelocity((float*) buf1, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
-		fcn_005e8fe0((float*) buf2, ss[0], (float*) 0x772870, ss[0],
+		d3_PerturbParticleVelocity((float*) buf2, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
 		fcn_004f0a30(a1, a0, (float*) buf3, (float*) buf1, (float*) buf2,
 			fcn_004f0eb0(g_77289c, g_772898, 3), p2, (unsigned int) p1);

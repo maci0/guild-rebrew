@@ -7,7 +7,7 @@ extern unsigned short g_6b6b18[256];
 extern unsigned short g_6b5e08[256];
 extern unsigned short g_6b6d20[256];
 void* __cdecl malloc(unsigned int size);
-void __cdecl fcn_0041c190(unsigned int idx);
+void __cdecl d3_SiftDownOctreeHeap(unsigned int idx);
 
 /* ADDRESS: GOLDTL 0x0041bf90 */
 int __cdecl fcn_0041bf90(unsigned char* pixels, unsigned int count)
@@ -54,7 +54,7 @@ int __cdecl fcn_0041bf90(unsigned char* pixels, unsigned int count)
 	i = g_6b6f38;
 	if (g_6b6f38 > 0) {
 		do {
-			fcn_0041c190(i);
+			d3_SiftDownOctreeHeap(i);
 		} while (--i != 0);
 	}
 	return 1;

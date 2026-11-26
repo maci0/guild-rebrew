@@ -44,7 +44,7 @@ extern int g_14b5798;
 extern int g_14b579c;
 extern int g_14b556c;
 
-int __cdecl fcn_0057b9d0(char*, int, int);
+int __cdecl he_HasActiveGrabpflege(char*, int, int);
 void __cdecl fcn_005263d0(int, int, int);
 void __cdecl fcn_0052a0c0(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -75,7 +75,7 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 	ENTITY_RECORD* hh;
 
 	r = 0;
-	if (fcn_0057b9d0(who, *(int*) (request + 4), *(unsigned char*) (request + 8)) != 0) {
+	if (he_HasActiveGrabpflege(who, *(int*) (request + 4), *(unsigned char*) (request + 8)) != 0) {
 		fcn_005263d0(g_14b5798, g_14b579c, 0);
 		return 0;
 	}

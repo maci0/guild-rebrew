@@ -43,12 +43,12 @@ void __cdecl fcn_004c57e0(int, int);
 void __cdecl he_FreeAction(void *);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_00422460(int, char *);
-void __cdecl fcn_004193f0(int, int, int, int);
+void __cdecl d3snd_PlayObjectSound(int, int, int, int);
 void *__cdecl fcn_00445600(void *, int, int, char *);
 void __cdecl d3_TransformPoint(char *, char *, float *);
 void __cdecl fcn_004c5530(void *);
 void __cdecl fcn_00418000(int, float *, int, float, float, float, float, float, float, float *, int, int, int);
-void __cdecl fcn_004185a0(int, float *, int, float, float, float, float, float, float, float, float, int);
+void __cdecl d3_SpawnRockDebrisEffect(int, float *, int, float, float, float, float, float, float, float, float, int);
 void __cdecl fcn_00417d00(int, float *, int, float, float, float, float, int);
 int __cdecl gm_RandomMod(unsigned short);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -309,7 +309,7 @@ void __cdecl fcn_00561380(void *action)
 			if (*(unsigned char *)(p + 0xc2) == 0 && d3_CurrentContextIndex == 0) {
 				n = fcn_00422460(0, g_677640);
 				if (n != 0)
-					fcn_004193f0(n, *(int *)(r + 0x61), 0x6b, 0x463ea000);
+					d3snd_PlayObjectSound(n, *(int *)(r + 0x61), 0x6b, 0x463ea000);
 				v24 = 3.0f;
 			}
 			d3_SelectSceneContext(0, 1);
@@ -350,7 +350,7 @@ void __cdecl fcn_00561380(void *action)
 			color[0] = 0xc0;
 			fcn_00418000(v10, pos, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f, 140.0f, 35.0f,
 				pos + 4, 400, 6, *(int *)color);
-			fcn_004185a0(v10, pos, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f, 4.0f, 7.0f, 8.0f,
+			d3_SpawnRockDebrisEffect(v10, pos, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f, 4.0f, 7.0f, 8.0f,
 				*(int *)color);
 			fcn_00417d00(v10, pos, (int)(v24 * 40.0f), v24 * 140.0f, v24 * 100.0f,
 				20.0f, 60.0f, 0x50);

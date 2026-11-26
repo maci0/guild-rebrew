@@ -21,7 +21,7 @@ char* __cdecl fcn_005bdc30(int, Req*, char*, int, int);
 char* __cdecl gm_SearchTable67(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
-int __cdecl fcn_005df610(char* e, char* context)
+int __cdecl gm_ObjSetBuildingFlag0x1000(char* e, char* context)
 {
 	Req req;
 	char* entry;

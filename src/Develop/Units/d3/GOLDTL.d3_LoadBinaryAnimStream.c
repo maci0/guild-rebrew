@@ -8,7 +8,7 @@ int __cdecl fcn_0044d770(void*);
 int __cdecl fcn_004011f0(void*, void*);
 int __cdecl vfs_ReadByte(void*, void*);
 void __cdecl vfs_ReadCString(void*, char*);
-void __cdecl fcn_00401280(void*, void*);
+void __cdecl vfs_ReadVec3(void*, void*);
 void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl m_FreeTracked(void*);
 void __cdecl ReportClientMessage(const char*);
@@ -188,7 +188,7 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 						if (v22 > 0) {
 							v27 = v29 * 0xc;
 							do {
-								fcn_00401280(stream, v23);
+								vfs_ReadVec3(stream, v23);
 								if (animation != 0) {
 									if (v11 != 0) {
 										*(float*) (v27 + *(int*) (v11 * 0xc0
@@ -227,8 +227,8 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 							v3 = 0;
 							if (v24 > 0) {
 								do {
-									fcn_00401280(stream, v23);
-									fcn_00401280(stream, v25);
+									vfs_ReadVec3(stream, v23);
+									vfs_ReadVec3(stream, v25);
 									v3++;
 								} while (v3 < v24);
 							}
@@ -243,8 +243,8 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 					}
 				}
 				if (v3 == 0x31) {
-					fcn_00401280(stream, v23);
-					fcn_00401280(stream, v25);
+					vfs_ReadVec3(stream, v23);
+					vfs_ReadVec3(stream, v25);
 					if (animation != 0) {
 						*(float*) (v11 * 0xc0 + 0x20 + *(int*) (animation + 0x15c)) = v23[0];
 						*(float*) (v11 * 0xc0 + 0x24 + *(int*) (animation + 0x15c)) = v23[1];
@@ -264,12 +264,12 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 							v3 = fcn_0044d770(stream);
 						}
 						if (v3 == 0x39) {
-							fcn_00401280(stream, (void*) (*(int*) (animation + 0x15c)
+							vfs_ReadVec3(stream, (void*) (*(int*) (animation + 0x15c)
 								+ 0x54 + (v9 + v11 * 8) * 0x18));
 							v3 = fcn_0044d770(stream);
 						}
 						if (v3 == 0x3a) {
-							fcn_00401280(stream, (void*) (*(int*) (animation + 0x15c)
+							vfs_ReadVec3(stream, (void*) (*(int*) (animation + 0x15c)
 								+ (v9 + 4 + v11 * 8) * 0x18));
 							v3 = fcn_0044d770(stream);
 						}
@@ -279,8 +279,8 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 				}
 			}
 			if (v3 == 0x32) {
-				fcn_00401280(stream, v23);
-				fcn_00401280(stream, v25);
+				vfs_ReadVec3(stream, v23);
+				vfs_ReadVec3(stream, v25);
 				v3 = fcn_0044d770(stream);
 			}
 			if (v3 != 0x2f) {

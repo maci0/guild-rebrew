@@ -41,7 +41,7 @@ int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004a57a0(Ent*, int, int, unsigned short*, int, float, int*);
 void __cdecl fcn_004c5530(Msg*);
 
-int __cdecl fcn_005d9ca0(Ent* ent, Ent* other, int count, int flag)
+int __cdecl gs_StartCourtTrial(Ent* ent, Ent* other, int count, int flag)
 {
 	unsigned short ids[4];
 	int out;

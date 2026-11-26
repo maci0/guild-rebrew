@@ -15,7 +15,7 @@ int __cdecl fcn_00430aa0(void*);
 int __cdecl vfs_ReadByte(void*, void*);
 void __cdecl vfs_ReadCString(void*, char*);
 int __cdecl fcn_004011d0(void*, void*);
-void __cdecl fcn_00401280(void*, void*);
+void __cdecl vfs_ReadVec3(void*, void*);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl fcn_0043a6f0(float, float, int);
 void __cdecl fcn_00438b40(char*, int*);
@@ -82,13 +82,13 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 	if (version >= 0x3a6c000b) {
 		vfs_ReadCString(s, name);
 		fcn_004011d0(s, &discarded);
-		fcn_00401280(s, &vec);
+		vfs_ReadVec3(s, &vec);
 		*(float*) 0x5fcc74 = discarded;
 		g_67bbdc.x = vec.x;
 		g_67bbdc.y = vec.y;
 		g_67bbdc.z = vec.z;
 		if (version >= 0x3a6c00b5) {
-			fcn_00401280(s, &vec);
+			vfs_ReadVec3(s, &vec);
 			(*(float*) 0x633b1c) = vec.x;
 			(*(float*) 0x633b20) = vec.y;
 			(*(float*) 0x633b24) = vec.z;
@@ -122,13 +122,13 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 			index = 0;
 			if (rows > 0) {
 				do {
-					fcn_00401280(s, &vec);
+					vfs_ReadVec3(s, &vec);
 					*(float*) (g_1041d80 + index * 0x60) = vec.x;
 					*(float*) (g_1041d80 + index * 0x60 + 4) = vec.y;
 					*(float*) (g_1041d80 + index * 0x60 + 8) = vec.z;
 					if (version >= 0x3a6c00b3) {
 						if (version >= 0x3a6c00b5) {
-							fcn_00401280(s, &vec);
+							vfs_ReadVec3(s, &vec);
 							*(float*) (g_1041d80 + index * 0x60 + 0xc) = vec.x;
 							*(float*) (g_1041d80 + index * 0x60 + 0x10) = vec.y;
 							*(float*) (g_1041d80 + index * 0x60 + 0x14) = vec.z;

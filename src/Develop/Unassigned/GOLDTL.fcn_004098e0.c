@@ -17,7 +17,7 @@ extern char s_6752a8[]; /* "normal_s" */
 
 int __cdecl d3_GetContextIndex(int);
 char* __cdecl fcn_00422460(int, int);
-void __cdecl fcn_004193f0(char*, void*, unsigned char, float);
+void __cdecl d3snd_PlayObjectSound(char*, void*, unsigned char, float);
 
 /* ADDRESS: GOLDTL 0x004098e0 */
 void __cdecl ch_PlayFootstepSound(char* obj, int surface)
@@ -67,7 +67,7 @@ void __cdecl ch_PlayFootstepSound(char* obj, int surface)
 			r = fcn_00422460(g_6b5c2c, (int) s_6752a8);
 		}
 		if (r != 0) {
-			fcn_004193f0(r, *(void**) (e + 0x34), 0x28, 500.0f);
+			d3snd_PlayObjectSound(r, *(void**) (e + 0x34), 0x28, 500.0f);
 			g_6b5c30++;
 		}
 	}

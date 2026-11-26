@@ -33,10 +33,10 @@ void __cdecl fcn_004f4830(int size, Stat* st);
 unsigned short __cdecl gm_RandomMod(int a);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 void __cdecl gm_ResolveEntityById(int* out, int a, int b, int id);
-int __cdecl fcn_00579640(char* obj, char* e);
+int __cdecl he_HasNoActiveAction0x88(char* obj, char* e);
 int __cdecl gm_CalculateGebaeudeValue(int* p, int n);
 int __cdecl gm_WalkEntityChain(unsigned short id);
-int __cdecl fcn_004fa5b0(int a, char* e, void* buf);
+int __cdecl gm_CheckPrivilege(int a, char* e, void* buf);
 float __cdecl fcn_00507e70(char* a, char* b, int i);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl he_HasNoActiveEvent04b(char* obj, char* e);
@@ -110,12 +110,12 @@ int __cdecl fcn_00499090(int who, char* e, int arg, Msg* o1, Msg* o2)
 			gm_ResolveEntityById(&targetRec, 0, 0, id);
 			if (targetRec != 0) {
 				if (*(unsigned short*)(targetRec + 0x27) != 0xffff) {
-					if (fcn_00579640(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, e) != 0) {
+					if (he_HasNoActiveAction0x88(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, e) != 0) {
 						memset(buf, 0, 0x220);
 						buf[0] = 1;
 						v4 = (int)((float)gm_CalculateGebaeudeValue((int*)targetRec, 100) * 0.05f + (float)gm_WalkEntityChain(*(unsigned short*)e) * 0.02f);
 						owner = g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c;
-						if ((fcn_004fa5b0(0x1b, e, buf) & 2) != 0) {
+						if ((gm_CheckPrivilege(0x1b, e, buf) & 2) != 0) {
 							v4 = v4 / 2;
 						}
 						if (!((float)v8 * 0.44f < (float)v4)) {
@@ -137,7 +137,7 @@ int __cdecl fcn_00499090(int who, char* e, int arg, Msg* o1, Msg* o2)
 							if (he_HasNoActiveEvent04b(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, e) != 0) {
 								if (he_HasNoActiveAction0x2e(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, e) != 0) {
 									if (he_HasNoActiveAction0x62((int*)targetRec) != 0) {
-										if (fcn_00579640(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, e) != 0) {
+										if (he_HasNoActiveAction0x88(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, e) != 0) {
 											o1->kind = 4;
 											o1->a = *(int*)(targetRec + 1);
 											o1->d = v4;

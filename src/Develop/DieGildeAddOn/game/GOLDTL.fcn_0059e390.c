@@ -10,20 +10,20 @@ extern char g_6aa5e8[];
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_0059a0e0(void);
+void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl fcn_005ba900(int);
 void __cdecl fcn_005ba8f0(int);
 
-void __cdecl fcn_0059e390(int a)
+void __cdecl d2_RunKontorTradeHud(int a)
 {
 	int x;
 	int y;
 
 	fcn_005338a0();
-	while (main_RunFrameLoop(fcn_0059e390, 0x67fff) != 0) {
+	while (main_RunFrameLoop(d2_RunKontorTradeHud, 0x67fff) != 0) {
 		x = RegisterStatusText(g_6aa5f0, g_14ad188, 0x10);
 		y = RegisterStatusText(g_6aa5e8, g_14ad1a8, 0x10);
-		fcn_0059a0e0();
+		d3_UpdateBuildingInteriorState();
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == x) {
 				fcn_005ba900(a);

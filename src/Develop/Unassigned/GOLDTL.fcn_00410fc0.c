@@ -5,7 +5,7 @@ extern char* evt_CurrentScript;
 extern int g_6791c8;
 int __cdecl fcn_00422460(int a, int b);
 int __cdecl fcn_00423670(int o, int a, int b);
-void __cdecl fcn_004238f0(int o, int v);
+void __cdecl sb_SetVoiceLoopCount(int o, int v);
 #include "client_sound.h"
 
 int __cdecl PlaySample3D(int* a, int* b, int* c, int* d)
@@ -18,9 +18,9 @@ int __cdecl PlaySample3D(int* a, int* b, int* c, int* d)
 	o = fcn_00422460(0, *c);
 	if (o != 0) {
 		if (*d == 1) {
-			fcn_004193f0((char*)o, (void*)*a, 0x3c, (float) *b);
+			d3snd_PlayObjectSound((char*)o, (void*)*a, 0x3c, (float) *b);
 		} else {
-			fcn_004238f0(o, *d);
+			sb_SetVoiceLoopCount(o, *d);
 			fcn_00423670(o, 0, 0);
 		}
 	}

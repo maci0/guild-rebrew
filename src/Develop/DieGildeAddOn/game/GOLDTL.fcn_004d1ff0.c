@@ -6,7 +6,7 @@ void __cdecl fcn_00459710(int, int);
 int __cdecl sb_LoadSampleBank(char *, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004d5450(void *);
-int __cdecl fcn_004c3100(char *, int);
+int __cdecl sb_LoadLocalizedSampleBank(char *, int);
 int __cdecl fcn_0044c310(char *, char *);
 int __cdecl fcn_0045b700(int, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
@@ -152,25 +152,25 @@ void __cdecl fcn_004d1ff0(void *arg)
 		*(int *) 0x772f00 = fcn_004d5450((void *) first);
 	switch (*(int *) 0x772f00) {
 	case 2:
-		*(int *) 0x772ed4 = fcn_004c3100("ARBEITER_KOMMENTARE_KLICK_DIEBE.sbf", 0);
-		*(int *) 0x772edc = fcn_004c3100("K_C2C_ANGRIFF_DIEBE.sbf", 0);
-		*(int *) 0x772ee4 = fcn_004c3100("K_C2C_BEFEHL_ERHALTEN_DIEBE.sbf", 0);
-		*(int *) 0x772eec = fcn_004c3100("K_C2C_HOHN_DIEBE.sbf", 0);
-		*(int *) 0x772ef4 = fcn_004c3100("K_C2C_SCHMERZ_DIEBE.sbf", 0);
+		*(int *) 0x772ed4 = sb_LoadLocalizedSampleBank("ARBEITER_KOMMENTARE_KLICK_DIEBE.sbf", 0);
+		*(int *) 0x772edc = sb_LoadLocalizedSampleBank("K_C2C_ANGRIFF_DIEBE.sbf", 0);
+		*(int *) 0x772ee4 = sb_LoadLocalizedSampleBank("K_C2C_BEFEHL_ERHALTEN_DIEBE.sbf", 0);
+		*(int *) 0x772eec = sb_LoadLocalizedSampleBank("K_C2C_HOHN_DIEBE.sbf", 0);
+		*(int *) 0x772ef4 = sb_LoadLocalizedSampleBank("K_C2C_SCHMERZ_DIEBE.sbf", 0);
 		break;
 	case 1:
-		*(int *) 0x772ed4 = fcn_004c3100("ARBEITER_KOMMENTARE_KLICK_RAEUBER.sbf", 0);
-		*(int *) 0x772edc = fcn_004c3100("K_C2C_ANGRIFF_RAEUBER.sbf", 0);
-		*(int *) 0x772ee4 = fcn_004c3100("K_C2C_BEFEHL_ERHALTEN_RAEUBER.sbf", 0);
-		*(int *) 0x772eec = fcn_004c3100("K_C2C_HOHN_RAEUBER.sbf", 0);
-		*(int *) 0x772ef4 = fcn_004c3100("K_C2C_SCHMERZ_RAEUBER.sbf", 0);
+		*(int *) 0x772ed4 = sb_LoadLocalizedSampleBank("ARBEITER_KOMMENTARE_KLICK_RAEUBER.sbf", 0);
+		*(int *) 0x772edc = sb_LoadLocalizedSampleBank("K_C2C_ANGRIFF_RAEUBER.sbf", 0);
+		*(int *) 0x772ee4 = sb_LoadLocalizedSampleBank("K_C2C_BEFEHL_ERHALTEN_RAEUBER.sbf", 0);
+		*(int *) 0x772eec = sb_LoadLocalizedSampleBank("K_C2C_HOHN_RAEUBER.sbf", 0);
+		*(int *) 0x772ef4 = sb_LoadLocalizedSampleBank("K_C2C_SCHMERZ_RAEUBER.sbf", 0);
 		break;
 	case 0:
-		*(int *) 0x772ed4 = fcn_004c3100("ARBEITER_KOMMENTARE_KLICK_SOELDNER.sbf", 0);
-		*(int *) 0x772edc = fcn_004c3100("K_C2C_ANGRIFF_SOELDNER.sbf", 0);
-		*(int *) 0x772ee4 = fcn_004c3100("K_C2C_BEFEHL_ERHALTEN_SOELDNER.sbf", 0);
-		*(int *) 0x772eec = fcn_004c3100("K_C2C_HOHN_SOELDNER.sbf", 0);
-		*(int *) 0x772ef4 = fcn_004c3100("K_C2C_SCHMERZ_SOELDNER.sbf", 0);
+		*(int *) 0x772ed4 = sb_LoadLocalizedSampleBank("ARBEITER_KOMMENTARE_KLICK_SOELDNER.sbf", 0);
+		*(int *) 0x772edc = sb_LoadLocalizedSampleBank("K_C2C_ANGRIFF_SOELDNER.sbf", 0);
+		*(int *) 0x772ee4 = sb_LoadLocalizedSampleBank("K_C2C_BEFEHL_ERHALTEN_SOELDNER.sbf", 0);
+		*(int *) 0x772eec = sb_LoadLocalizedSampleBank("K_C2C_HOHN_SOELDNER.sbf", 0);
+		*(int *) 0x772ef4 = sb_LoadLocalizedSampleBank("K_C2C_SCHMERZ_SOELDNER.sbf", 0);
 		break;
 	default:
 		break;
@@ -185,23 +185,23 @@ void __cdecl fcn_004d1ff0(void *arg)
 		*(int *) 0x772ef0 = *(int *) 0x772eec;
 		*(int *) 0x772ef8 = *(int *) 0x772ef4;
 	} else if (*(int *) 0x772f04 == 2) {
-		*(int *) 0x772ed8 = fcn_004c3100("ARBEITER_KOMMENTARE_KLICK_DIEBE.sbf", 0);
-		*(int *) 0x772ee0 = fcn_004c3100("K_C2C_ANGRIFF_DIEBE.sbf", 0);
-		*(int *) 0x772ee8 = fcn_004c3100("K_C2C_BEFEHL_ERHALTEN_DIEBE.sbf", 0);
-		*(int *) 0x772ef0 = fcn_004c3100("K_C2C_HOHN_DIEBE.sbf", 0);
-		*(int *) 0x772ef8 = fcn_004c3100("K_C2C_SCHMERZ_DIEBE.sbf", 0);
+		*(int *) 0x772ed8 = sb_LoadLocalizedSampleBank("ARBEITER_KOMMENTARE_KLICK_DIEBE.sbf", 0);
+		*(int *) 0x772ee0 = sb_LoadLocalizedSampleBank("K_C2C_ANGRIFF_DIEBE.sbf", 0);
+		*(int *) 0x772ee8 = sb_LoadLocalizedSampleBank("K_C2C_BEFEHL_ERHALTEN_DIEBE.sbf", 0);
+		*(int *) 0x772ef0 = sb_LoadLocalizedSampleBank("K_C2C_HOHN_DIEBE.sbf", 0);
+		*(int *) 0x772ef8 = sb_LoadLocalizedSampleBank("K_C2C_SCHMERZ_DIEBE.sbf", 0);
 	} else if (*(int *) 0x772f04 == 1) {
-		*(int *) 0x772ed8 = fcn_004c3100("ARBEITER_KOMMENTARE_KLICK_RAEUBER.sbf", 0);
-		*(int *) 0x772ee0 = fcn_004c3100("K_C2C_ANGRIFF_RAEUBER.sbf", 0);
-		*(int *) 0x772ee8 = fcn_004c3100("K_C2C_BEFEHL_ERHALTEN_RAEUBER.sbf", 0);
-		*(int *) 0x772ef0 = fcn_004c3100("K_C2C_HOHN_RAEUBER.sbf", 0);
-		*(int *) 0x772ef8 = fcn_004c3100("K_C2C_SCHMERZ_RAEUBER.sbf", 0);
+		*(int *) 0x772ed8 = sb_LoadLocalizedSampleBank("ARBEITER_KOMMENTARE_KLICK_RAEUBER.sbf", 0);
+		*(int *) 0x772ee0 = sb_LoadLocalizedSampleBank("K_C2C_ANGRIFF_RAEUBER.sbf", 0);
+		*(int *) 0x772ee8 = sb_LoadLocalizedSampleBank("K_C2C_BEFEHL_ERHALTEN_RAEUBER.sbf", 0);
+		*(int *) 0x772ef0 = sb_LoadLocalizedSampleBank("K_C2C_HOHN_RAEUBER.sbf", 0);
+		*(int *) 0x772ef8 = sb_LoadLocalizedSampleBank("K_C2C_SCHMERZ_RAEUBER.sbf", 0);
 	} else if (*(int *) 0x772f04 == 0) {
-		*(int *) 0x772ed8 = fcn_004c3100("ARBEITER_KOMMENTARE_KLICK_SOELDNER.sbf", 0);
-		*(int *) 0x772ee0 = fcn_004c3100("K_C2C_ANGRIFF_SOELDNER.sbf", 0);
-		*(int *) 0x772ee8 = fcn_004c3100("K_C2C_BEFEHL_ERHALTEN_SOELDNER.sbf", 0);
-		*(int *) 0x772ef0 = fcn_004c3100("K_C2C_HOHN_SOELDNER.sbf", 0);
-		*(int *) 0x772ef8 = fcn_004c3100("K_C2C_SCHMERZ_SOELDNER.sbf", 0);
+		*(int *) 0x772ed8 = sb_LoadLocalizedSampleBank("ARBEITER_KOMMENTARE_KLICK_SOELDNER.sbf", 0);
+		*(int *) 0x772ee0 = sb_LoadLocalizedSampleBank("K_C2C_ANGRIFF_SOELDNER.sbf", 0);
+		*(int *) 0x772ee8 = sb_LoadLocalizedSampleBank("K_C2C_BEFEHL_ERHALTEN_SOELDNER.sbf", 0);
+		*(int *) 0x772ef0 = sb_LoadLocalizedSampleBank("K_C2C_HOHN_SOELDNER.sbf", 0);
+		*(int *) 0x772ef8 = sb_LoadLocalizedSampleBank("K_C2C_SCHMERZ_SOELDNER.sbf", 0);
 	}
 	*(int *) 0x772f0c = fcn_0044c310("ub_STIEFEL", "ub_STIEFEL");
 	if (cur == 0) {

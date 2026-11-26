@@ -25,7 +25,7 @@ void __cdecl fcn_00538060(void);
 #include "client_timer.h"
 void __cdecl fcn_0053f100(void);
 void __cdecl cm_InitCrimeRecords(void);
-void __cdecl fcn_004fa690(void);
+void __cdecl gm_ResetCityStats(void);
 int __cdecl fcn_0044c310(char*, char*);
 int __cdecl sb_LoadSampleBank(char*, int);
 void __cdecl msx_SetFadeDuration(int);
@@ -53,7 +53,7 @@ void __cdecl gm_InitGameSession(void)
 	fcn_0042df30(fcn_00538060, 1);
 	fcn_0053f100();
 	cm_InitCrimeRecords();
-	fcn_004fa690();
+	gm_ResetCityStats();
 	g_7749cc = fcn_0044c310("Buch", "Buch");
 	if (g_774934 != 0) {
 		g_7747bc = sb_LoadSampleBank("natur\\regen.sbf", 0);

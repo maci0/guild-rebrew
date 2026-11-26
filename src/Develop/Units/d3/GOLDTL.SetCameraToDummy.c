@@ -5,7 +5,7 @@
 
 extern char* evt_CurrentScript;
 #include "Develop/Units/d3/d3_camera.h"
-char* __cdecl fcn_00412eb0(char* name, int kind);
+char* __cdecl d3_FindSceneObjectByName(char* name, int kind);
 void __cdecl fcn_00438b40(char* h, char* pos);
 void __cdecl d3_SetObjectRotation(char* h, char* rot);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
@@ -17,7 +17,7 @@ int __cdecl SetCameraToDummy(char** name)
 	char buf[0x80];
 	char* o;
 
-	o = fcn_00412eb0(*name, 2);
+	o = d3_FindSceneObjectByName(*name, 2);
 	if (o != 0) {
 		fcn_00438b40(d3_ActiveCamera, o + 0x5c);
 		d3_SetObjectRotation(d3_ActiveCamera, o + 0x90);

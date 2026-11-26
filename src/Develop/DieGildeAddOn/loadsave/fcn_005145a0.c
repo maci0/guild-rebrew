@@ -37,12 +37,12 @@ int __cdecl gm_RandomMod(unsigned short a0);
 int __cdecl fcn_00469e30(int a0);
 int __cdecl fcn_0046ac30(void);
 void __cdecl fcn_004c5790(char id, char *args);
-int __cdecl fcn_004c5040(int a0, int a1, short a2, char a3, int a4,
+int __cdecl cm_SendAllocClientSpieler(int a0, int a1, short a2, char a3, int a4,
                          char a5, char a6, char *a7, char *a8);
 int __cdecl fcn_004c4450(int i);
 int __cdecl fcn_004c4480(int i);
 int __cdecl fcn_004b3d80(int a0, int a1, int a2);
-int __cdecl fcn_004b54e0(int a0);
+int __cdecl d2_ShowMissionForEntity(int a0);
 int __cdecl fcn_004c5150(int a0, int a1, char a2, int a3);
 void __cdecl fcn_004c4860(int a0);
 
@@ -100,7 +100,7 @@ int __cdecl fcn_005145a0(char *path)
         msg[0] = *(unsigned char *) &g_6a375c;
         fcn_004c5790(6, (char *) msg);
     }
-    session = fcn_004c5040(0xffff, 0xffff, *(unsigned char *) 0x7e23e2,
+    session = cm_SendAllocClientSpieler(0xffff, 0xffff, *(unsigned char *) 0x7e23e2,
                            *(unsigned char *) 0x7e23e3,
                            *(int *) 0x7e23e4 + 0x59a,
                            *(unsigned char *) 0x7e23e8,
@@ -109,7 +109,7 @@ int __cdecl fcn_005145a0(char *path)
     while (session == -1) {
         main_PumpWindowMessages();
         fcn_00535960();
-        session = fcn_004c5040(0xffff, 0xffff, *(unsigned char *) 0x7e23e2,
+        session = cm_SendAllocClientSpieler(0xffff, 0xffff, *(unsigned char *) 0x7e23e2,
                                *(unsigned char *) 0x7e23e3,
                                *(int *) 0x7e23e4 + 0x59a,
                                *(unsigned char *) 0x7e23e8,
@@ -173,7 +173,7 @@ int __cdecl fcn_005145a0(char *path)
         engine = d3_CurrentContextIndex;
         d3_SelectSceneContext(fcn_00413160(), 0);
         d3_LoadScene("scenes/*network.ed3", 0, 0);
-        fcn_004b54e0(*(int *) (handle + 4));
+        d2_ShowMissionForEntity(*(int *) (handle + 4));
         fcn_00442e30();
         d3_SelectSceneContext(engine, 0);
     }

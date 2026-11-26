@@ -19,7 +19,7 @@ typedef struct {
 extern char g_7f4ca0[];
 
 Rec21c* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004ae080(char*, char*, int*, int*);
+void __cdecl hst_SplitFormatPrefix(char*, char*, int*, int*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl atoi(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -86,7 +86,7 @@ int __cdecl fcn_004afb60(int mode, int* pairs, int idx, char* text, void* out)
 		int p;
 		int rest;
 
-		fcn_004ae080(text, buf, &p, &rest);
+		hst_SplitFormatPrefix(text, buf, &p, &rest);
 	}
 	if (mode == 1) {
 		r = gm_LookupEntityRecordById(pairs[idx * 2 + 1]);

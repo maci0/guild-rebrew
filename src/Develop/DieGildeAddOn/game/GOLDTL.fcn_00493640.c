@@ -19,7 +19,7 @@ typedef struct Unit {
 	float mood;
 } Unit;
 
-unsigned int __cdecl fcn_004938c0(Plan* p);
+unsigned int __cdecl gm_CalcTrialTortureRounds(Plan* p);
 Unit* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
@@ -43,7 +43,7 @@ int __cdecl fcn_00493640(Plan* p)
 	if (p->level >= 18.0f) {
 		return 1;
 	}
-	n = fcn_004938c0(p);
+	n = gm_CalcTrialTortureRounds(p);
 	a = gm_LookupEntityRecordById(p->a);
 	b = gm_LookupEntityRecordById(p->b);
 	c = gm_LookupEntityRecordById(p->c);

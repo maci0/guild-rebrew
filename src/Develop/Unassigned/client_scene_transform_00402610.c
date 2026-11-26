@@ -6,13 +6,13 @@ int __cdecl d3_GetContextIndex(char* p);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_0043aa30(int flags);
 int __cdecl fcn_0045b700(int a, int b, int c);
-void __cdecl fcn_004058f0(int r);
+void __cdecl ch_BackupGrid(int r);
 void __cdecl fcn_0043a9c0(int flags);
 int __cdecl d3_GetContextIndex(char* p);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_0043aa30(int flags);
 int __cdecl fcn_0045b700(int a, int b, int c);
-void __cdecl fcn_004058f0(int r);
+void __cdecl ch_BackupGrid(int r);
 void __cdecl fcn_0043a9c0(int flags);
 
 /* ADDRESS: GOLD 0x00402140 */
@@ -44,7 +44,7 @@ int __cdecl fcn_00402610(char* obj)
 		p = *(char**) (obj + 0x88);
 		r = *(int*) (p + 0xb0);
 		if (p != g_10432c0 && (*(char**)&g_67a370) == p && r != 0) {
-			fcn_004058f0(r);
+			ch_BackupGrid(r);
 		}
 		if (flags != 0) {
 			fcn_0043a9c0(flags);
@@ -79,7 +79,7 @@ int __cdecl fcn_004026f0(char* p)
 		r = fcn_0045b700(g_6b8300, *(int*) (p + 0xb4), 2);
 		*(int*) (p + 0xb0) = r;
 		if (p != g_10432c0 && (*(char**)&g_67a370) == p && r != 0) {
-			fcn_004058f0(r);
+			ch_BackupGrid(r);
 		}
 		if (flags != 0) {
 			fcn_0043a9c0(flags);

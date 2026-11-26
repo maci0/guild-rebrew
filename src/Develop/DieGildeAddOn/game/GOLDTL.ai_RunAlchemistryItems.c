@@ -13,7 +13,7 @@ extern unsigned char g_773d75;
 
 char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
 float* __cdecl fcn_005c61e0(int id);
-int __cdecl fcn_005dbf10(char* e, Req* r);
+int __cdecl gm_UseSpecialObject(char* e, Req* r);
 char* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 int __cdecl fcn_004c51f0(int a, int b, int c, int d, unsigned char k, int n);
 void __cdecl fcn_004c5420(int id, int a2, int a3, int a4, int a5);
@@ -64,7 +64,7 @@ int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
 		request.arg = *(int*) (q + 8);
 		request.dir = 0;
 		request.pad = 0;
-		if (fcn_005dbf10(e, &request) == 1) {
+		if (gm_UseSpecialObject(e, &request) == 1) {
 			if (request.dir == 1) {
 				g_100af34 = g_100af14 * d[3];
 				return 0x1c;

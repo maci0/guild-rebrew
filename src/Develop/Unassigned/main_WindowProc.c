@@ -12,11 +12,11 @@ extern volatile int g_6b7fc0;
 int __cdecl fcn_0041baa0(void);
 void __cdecl fcn_00418640(void);
 void __cdecl d3_CreateRenderVertexBuffers(void);
-void __cdecl fcn_004117c0(int);
-void __cdecl fcn_004117f0(int);
-void __cdecl fcn_0042a3d0(void);
+void __cdecl io_AcquireKeyboard(int);
+void __cdecl io_AcquireMouse(int);
+void __cdecl msx_ReleaseAllDrivers(void);
 void __cdecl msx_ReacquireWaveDriver(int, int, int);
-void __cdecl fcn_0042a460(int, int);
+void __cdecl msx_ReacquireAllWaveDrivers(int, int);
 void __cdecl fcn_0043b360(void);
 void __cdecl fcn_00473610(void);
 void __cdecl d3_AcquireBackBuffer(void);
@@ -87,9 +87,9 @@ LRESULT CALLBACK main_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 			d3_CreateRenderVertexBuffers();
 		resume:
 			g_6b7fc0 = 0;
-			fcn_0042a460((int) hWnd, WM_PRIVATE_7E7);
-			fcn_004117c0(1);
-			fcn_004117f0(1);
+			msx_ReacquireAllWaveDrivers((int) hWnd, WM_PRIVATE_7E7);
+			io_AcquireKeyboard(1);
+			io_AcquireMouse(1);
 		cleared:
 			g_77493c = 0;
 			return 0;
@@ -99,9 +99,9 @@ LRESULT CALLBACK main_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 		active = g_774944;
 		g_77493c = 1;
 		if (active) {
-			fcn_004117c0(0);
-			fcn_004117f0(0);
-			fcn_0042a3d0();
+			io_AcquireKeyboard(0);
+			io_AcquireMouse(0);
+			msx_ReleaseAllDrivers();
 			g_6b7fc0 = 1;
 		}
 		/* HWND_BOTTOM (1), not HWND_TOP: the reference pushes the live

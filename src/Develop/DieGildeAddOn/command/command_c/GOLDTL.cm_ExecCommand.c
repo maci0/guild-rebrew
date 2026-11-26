@@ -6,7 +6,7 @@ extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 
 int __cdecl sprintf(char*, const char*, ...);
 void __cdecl cm_RecycleCommandQueueNode(char*);
-int __cdecl fcn_004c41c0(char*);
+int __cdecl cm_IsQueuedCommandComplete(char*);
 void __cdecl cm_ReassembleQueuedCommand(char*);
 int __cdecl ahm_ProcessEntityChain(char*);
 void __cdecl fcn_005356b0(int);
@@ -69,7 +69,7 @@ int __cdecl cm_ExecCommand(void)
 			}
 			if (prev)
 				pass = 0;
-			if (*node != 7 && fcn_004c41c0(node) && pass) {
+			if (*node != 7 && cm_IsQueuedCommandComplete(node) && pass) {
 				if (node == cm_CommandQueueHead) {
 					cm_CommandQueueHead = next;
 				} else {

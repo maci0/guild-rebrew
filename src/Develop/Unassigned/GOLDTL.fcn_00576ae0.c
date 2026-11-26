@@ -7,12 +7,12 @@ void __cdecl fcn_00576c90(void);
 void __cdecl fcn_005776a0(void);
 void __cdecl fcn_00577720(void);
 void __cdecl fcn_00577730(void);
-void __cdecl fcn_00577790(void);
+void __cdecl he_RunAction0x9b(void);
 
 int __cdecl fcn_00576ae0(void)
 {
 	if (he_RegisterHandler(0x99, he_StartAssassinAction, fcn_00576c90) || he_RegisterHandler(0x9a, fcn_005776a0, fcn_00577720) ||
-	    he_RegisterHandler(0x9b, fcn_00577730, fcn_00577790)) {
+	    he_RegisterHandler(0x9b, fcn_00577730, he_RunAction0x9b)) {
 		return 1;
 	}
 	return 0;

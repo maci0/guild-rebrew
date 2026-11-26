@@ -16,16 +16,16 @@ void __cdecl fcn_0043a9c0(int);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_0058f700(void*);
 void __cdecl fcn_0058fdc0(void*);
-void __cdecl fcn_0059b050(void*);
-void __cdecl fcn_0059b0b0(void*);
-void __cdecl fcn_0059b140(void*);
-void __cdecl fcn_0059c760(void*);
-void __cdecl fcn_0059cd20(void*);
+void __cdecl d2_RunUpgradeTechTreeHud(void*);
+void __cdecl d2_RunWorkshopBookHud(void*);
+void __cdecl d2_RunWacheInteriorHud(void*);
+void __cdecl d2_RunMineInteriorHud(void*);
+void __cdecl d2_RunGildeInfoHud(void*);
 void __cdecl d2_RunFriedhofInteriorHud(void*);
 void __cdecl fcn_0058ff00(void*);
 void __cdecl fcn_005e6840(void*);
 void __cdecl fcn_005e68e0(void*);
-void __cdecl fcn_005e6950(void*);
+void __cdecl d2_RunTheaterInteriorHud(void*);
 
 /* Saves the current render/scene state, notifies the game of the incoming
  * message id, dispatches it to its handler and then restores the state. */
@@ -98,19 +98,19 @@ void __cdecl fcn_005a86a0(void* a0)
 		break;
 	case 0x2c:
 	case 0x109:
-		fcn_0059b050(*(void**) &g_7746c8);
+		d2_RunUpgradeTechTreeHud(*(void**) &g_7746c8);
 		break;
 	case 0x2d:
-		fcn_0059b0b0(*(void**) &g_7746c8);
+		d2_RunWorkshopBookHud(*(void**) &g_7746c8);
 		break;
 	case 0x33:
-		fcn_0059b140(*(void**) &g_7746c8);
+		d2_RunWacheInteriorHud(*(void**) &g_7746c8);
 		break;
 	case 0x37:
-		fcn_0059c760(*(void**) &g_7746c8);
+		d2_RunMineInteriorHud(*(void**) &g_7746c8);
 		break;
 	case 0x107:
-		fcn_0059cd20(*(void**) &g_7746c8);
+		d2_RunGildeInfoHud(*(void**) &g_7746c8);
 		break;
 	case 0x211:
 		d2_RunFriedhofInteriorHud(*(void**) &g_7746c8);
@@ -122,7 +122,7 @@ void __cdecl fcn_005a86a0(void* a0)
 		fcn_005e6840(*(void**) &g_7746c8);
 		break;
 	case 0x27f:
-		fcn_005e6950(*(void**) &g_7746c8);
+		d2_RunTheaterInteriorHud(*(void**) &g_7746c8);
 		break;
 	case 0x28a:
 		fcn_005e68e0(*(void**) &g_7746c8);

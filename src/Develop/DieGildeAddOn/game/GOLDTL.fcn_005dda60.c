@@ -23,7 +23,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 char* __cdecl fcn_005c6220(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005dda60(Ent* ent, int* arg)
+int __cdecl gm_ObjBefriendThreeRivals(Ent* ent, int* arg)
 {
 	Ent* picks[3];
 	int tmp;

@@ -30,7 +30,7 @@ int __cdecl fcn_004c51f0(int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00533a40(char*);
-void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
+void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x005ba0e0 */
 int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
@@ -125,7 +125,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 					if (unitPrice != g_6628a8 && a5 != dbl_1_0) {
 						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
 						fcn_00533a40(buf);
-						fcn_004234e0(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
+						sb_PlayVoice(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
 					}
 					d2_SetElementValue(stockSlot[4], 0, stockSlot[0xc],
 					                   d2_GetControlValue(stockSlot[4]) - count, 0);
@@ -189,7 +189,7 @@ next:
 					if (unitPrice != g_6628a8 && a5 != dbl_1_0) {
 						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
 						fcn_00533a40(buf);
-						fcn_004234e0(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
+						sb_PlayVoice(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
 					}
 					d2_SetElementValue(stockSlot[4], 0, stockSlot[0xc],
 					                   d2_GetControlValue(stockSlot[4]) - count, 0);

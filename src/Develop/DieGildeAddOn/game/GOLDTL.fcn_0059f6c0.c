@@ -43,7 +43,7 @@ void __cdecl fcn_005bf9e0(void);
 /* The first request's zero-fill is the original's hand-written block-fill
  * prelude; recorded C memset probes did not emit it (archived docs/codegen-walls.md
  * section 6b). */
-void __cdecl fcn_0059f6c0(int a0, int a1)
+void __cdecl d2_RunSabotageActionsHud(int entity, int mode)
 {
 	int a;
 	int b;
@@ -51,7 +51,7 @@ void __cdecl fcn_0059f6c0(int a0, int a1)
 	int d;
 
 	fcn_005338a0();
-	if (main_RunFrameLoop((void*) fcn_0059f6c0, 0x67fff) != 0) {
+	if (main_RunFrameLoop((void*) d2_RunSabotageActionsHud, 0x67fff) != 0) {
 		do {
 			a = RegisterStatusText(s_6aa714, g_14aaf18, 0x17);
 			b = RegisterStatusText(s_6aa700, g_14aaf38, 0xd);
@@ -107,12 +107,12 @@ void __cdecl fcn_0059f6c0(int a0, int a1)
 					fcn_00532ef0();
 				}
 				else if (g_7746a0 == c) {
-					d2_RunTalenteDialog(a0, a1, 2);
+					d2_RunTalenteDialog(entity, mode, 2);
 				}
 				else if (g_7746a0 == d) {
-					fcn_005c0670(a0);
+					fcn_005c0670(entity);
 				}
 			}
-		} while (main_RunFrameLoop((void*) fcn_0059f6c0, 0x67fff) != 0);
+		} while (main_RunFrameLoop((void*) d2_RunSabotageActionsHud, 0x67fff) != 0);
 	}
 }

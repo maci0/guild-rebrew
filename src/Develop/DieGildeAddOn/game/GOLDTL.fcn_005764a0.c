@@ -3,7 +3,7 @@
 
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 
-int __cdecl fcn_005764a0(char* e, unsigned short t)
+int __cdecl ahm_HasActiveLabFeature(char* e, unsigned short t)
 {
 	char* r;
 

@@ -40,7 +40,7 @@ void __cdecl fcn_004c5530(struct msg*);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_0057a700(char* u)
+void __cdecl he_StartAction0x90(char* u)
 {
 	struct msg m;
 	char* o;

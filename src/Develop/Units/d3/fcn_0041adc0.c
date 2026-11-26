@@ -13,12 +13,12 @@ typedef struct {
 	unsigned char d4[8];
 } Guid;
 
-int __cdecl fcn_004112b0(const char* sub, int mode);
+int __cdecl io_OpenRegistryKey(const char* sub, int mode);
 T41b1c0* __cdecl fcn_0041b1c0(int a1);
 int __cdecl fcn_0041a950(int a1, int a2);
-char* __cdecl fcn_0041b1e0(Guid* g, char* out);
+char* __cdecl d3_FormatGuid(Guid* g, char* out);
 char* __cdecl fcn_0041b250(int* v, char* buf);
-void __cdecl fcn_00411520(int a1, int a2, char* a3);
+void __cdecl io_WriteRegistryString(int a1, int a2, char* a3);
 void __cdecl fcn_00411340(int a);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 
@@ -93,15 +93,15 @@ int __stdcall fcn_0041adc0(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 		BringWindowToTop(hwnd);
 		return 1;
 	case 0x10:
-		h = fcn_004112b0((char*) 0x677804, 2);
+		h = io_OpenRegistryKey((char*) 0x677804, 2);
 		if (h != 0) {
 			r = (int) SendMessageA(*(HWND*) 0x6b5dd8, 0x147, 0, 0);
 			if (r >= 0) {
 				r = (int) SendMessageA(*(HWND*) 0x6b5dd8, 0x150, r, 0);
 				if (r != 0) {
-					r = (int) fcn_0041b1e0((Guid*) r, buf);
+					r = (int) d3_FormatGuid((Guid*) r, buf);
 					if (r != 0) {
-						fcn_00411520(h, (int) 0x6777fc, (char*) r);
+						io_WriteRegistryString(h, (int) 0x6777fc, (char*) r);
 					}
 				}
 			}
@@ -111,7 +111,7 @@ int __stdcall fcn_0041adc0(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 				if (r != 0) {
 					r = (int) fcn_0041b250((int*) r, buf);
 					if (r != 0) {
-						fcn_00411520(h, (int) 0x6777f4, (char*) r);
+						io_WriteRegistryString(h, (int) 0x6777f4, (char*) r);
 					}
 				}
 			}

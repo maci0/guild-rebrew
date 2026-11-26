@@ -12,7 +12,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 int* __cdecl fcn_004ac1e0(int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 #include "client_packet_builder.h"
-void __cdecl fcn_004c4670(int, int, short, char*);
+void __cdecl cm_AppendPacketFieldValue(int, int, short, char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c54c0(int, int, int, int);
 
@@ -47,7 +47,7 @@ void __cdecl fcn_004ac410(unsigned char* entity, int a2, int a3)
 		c = gm_RandomMod(8) + 8;
 		c = (char)(c < 252.0f - entity[*(unsigned short*) (p + 1) + 0x80] ? c : 252.0f - entity[*(unsigned short*) (p + 1) + 0x80]);
 		cm_BeginPacketFieldDelta((char*) entity, *(int*) (entity + 4));
-		fcn_004c4670(1, 1, *(unsigned short*) (p + 1) + 0x80, &c);
+		cm_AppendPacketFieldValue(1, 1, *(unsigned short*) (p + 1) + 0x80, &c);
 		fcn_004c5360();
 		return;
 	}

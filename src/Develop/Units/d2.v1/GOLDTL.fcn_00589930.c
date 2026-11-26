@@ -65,7 +65,7 @@ int __cdecl fcn_004a5e60(unsigned short*, int, int, int, float, float,
                         int*);
 int __cdecl fcn_004c5530(struct msg*);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_004c3030(int, int, char*, int);
+void __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl fcn_00532ef0(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00589930 */
@@ -165,7 +165,7 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 					while (i != -1 && !fcn_004c4450(i)) {
 						main_RunFrameLoop(0, 0x20007);
 					}
-					fcn_004c3030(-7, 0, (char*) 0x6a9508, 0);
+					d3snd_PlaySoundEffect(-7, 0, (char*) 0x6a9508, 0);
 					lst = act.item;
 					*(int*) 0x774654 = 1;
 				}

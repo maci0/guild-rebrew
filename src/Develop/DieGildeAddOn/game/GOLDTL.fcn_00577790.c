@@ -7,7 +7,7 @@ void  __cdecl he_FreeAction(void*);
 
 
 /* ADDRESS: GOLDTL 0x00577790 */
-void __cdecl fcn_00577790(void* action)
+void __cdecl he_RunAction0x9b(void* action)
 {
 	char buf[0x100];
 	void* p1;

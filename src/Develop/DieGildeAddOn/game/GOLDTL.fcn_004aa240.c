@@ -7,7 +7,7 @@ typedef struct
     int *ptr;
 } SAVE_REC;
 
-extern int __cdecl fcn_004fa5b0(int cmd, int obj, void *rec);
+extern int __cdecl gm_CheckPrivilege(int cmd, int obj, void *rec);
 extern int __cdecl gm_RandomMod(int limit);
 extern void *__cdecl he_StartHandlungSearch(int a, int b, int c);
 extern void *__cdecl he_fn_Handlung(void);
@@ -52,7 +52,7 @@ unsigned int __cdecl fcn_004aa240(int a0, int entity, int a2, char *request, int
         rec.type = 1;
         for (src = (int *)0x67faa4; (int)src < (int)0x67fab0; src++)
         {
-            if (fcn_004fa5b0(*src, entity, &rec) & 2)
+            if (gm_CheckPrivilege(*src, entity, &rec) & 2)
                 s.ids1[n++] = *src;
         }
         if (rec.ptr)
@@ -61,7 +61,7 @@ unsigned int __cdecl fcn_004aa240(int a0, int entity, int a2, char *request, int
             s.cc = 0;
             for (src = (int *)0x67faa4; (int)src < (int)0x67fab0; src++)
             {
-                if (fcn_004fa5b0(*src, entity, &rec) & 2)
+                if (gm_CheckPrivilege(*src, entity, &rec) & 2)
                     s.ids2[s.cc++] = *src;
             }
         }
@@ -71,7 +71,7 @@ unsigned int __cdecl fcn_004aa240(int a0, int entity, int a2, char *request, int
             r = (unsigned short)gm_RandomMod(n);
             id = (unsigned int)s.ids1[r];
             n = 3;
-            ok = fcn_004fa5b0((int)id, entity, &rec) & 2;
+            ok = gm_CheckPrivilege((int)id, entity, &rec) & 2;
         }
         else if (s.cc != 0)
         {
@@ -79,7 +79,7 @@ unsigned int __cdecl fcn_004aa240(int a0, int entity, int a2, char *request, int
             r = (unsigned short)gm_RandomMod(s.cc);
             id = (unsigned int)s.ids2[r];
             n = 4;
-            ok = fcn_004fa5b0((int)id, entity, &rec) & 2;
+            ok = gm_CheckPrivilege((int)id, entity, &rec) & 2;
         }
         else
             return 0;
@@ -95,12 +95,12 @@ unsigned int __cdecl fcn_004aa240(int a0, int entity, int a2, char *request, int
             return 0;
         id = (unsigned int)*(int *)(request + 4);
         rec.type = 1;
-        if (fcn_004fa5b0((int)id, entity, &rec) & 2)
+        if (gm_CheckPrivilege((int)id, entity, &rec) & 2)
             *(int *)(request + 8) = 3;
         else
         {
             rec.type = 2;
-            if (!(fcn_004fa5b0((int)id, entity, &rec) & 2))
+            if (!(gm_CheckPrivilege((int)id, entity, &rec) & 2))
                 return 0;
             *(int *)(request + 8) = 4;
         }

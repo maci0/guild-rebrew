@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004be340 */
-int __cdecl fcn_004be340(char* p)
+int __cdecl rt_CountRoutePoints(char* p)
 {
 	int n;
 

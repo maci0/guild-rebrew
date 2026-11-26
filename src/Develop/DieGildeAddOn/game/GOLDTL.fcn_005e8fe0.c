@@ -3,7 +3,7 @@
 
 float __cdecl gm_RandomFloat01(void);
 
-int __cdecl fcn_005e8fe0(float* p, float spread, float* dir, float lift, float* up, float scale)
+int __cdecl d3_PerturbParticleVelocity(float* p, float spread, float* dir, float lift, float* up, float scale)
 {
 	float b[3];
 	float a[3];

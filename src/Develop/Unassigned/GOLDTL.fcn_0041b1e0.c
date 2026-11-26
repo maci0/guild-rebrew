@@ -11,13 +11,13 @@ typedef struct {
 	unsigned char d4[8];
 } Guid;
 
-char* __cdecl fcn_0041b1e0(Guid* g, char* out)
+char* __cdecl d3_FormatGuid(Guid* guid, char* out)
 {
 	char* r;
 
 	r = 0;
-	if (g != 0 && out != 0) {
-		sprintf(out, "%08x-%04x-%04x-%02x%02x%02x%02x%02x%02x%02x%02x", g->d1, g->d2, g->d3, g->d4[0], g->d4[1], g->d4[2], g->d4[3], g->d4[4], g->d4[5], g->d4[6], g->d4[7]);
+	if (guid != 0 && out != 0) {
+		sprintf(out, "%08x-%04x-%04x-%02x%02x%02x%02x%02x%02x%02x%02x", guid->d1, guid->d2, guid->d3, guid->d4[0], guid->d4[1], guid->d4[2], guid->d4[3], guid->d4[4], guid->d4[5], guid->d4[6], guid->d4[7]);
 		r = out;
 	}
 	return r;

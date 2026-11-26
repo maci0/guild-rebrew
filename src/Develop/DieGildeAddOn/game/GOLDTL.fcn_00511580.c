@@ -26,7 +26,7 @@ void __cdecl fcn_0064d3f8(void);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_0050b750(int, char);
 
-void __cdecl fcn_004c4670(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl cm_BeginCommandSync(void);
 int __cdecl fcn_004c4fc0(int, int, int, short, int, char, int, int);
@@ -54,7 +54,7 @@ void __cdecl gm_InitCityOfficialsAndCitizens(void)
 		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type < 5) {
 			money = fcn_0050b750(gm_RandomMod(0x122) + 10, (*(char*)&g_773d75));
 			cm_BeginPacketFieldDelta((char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
-			fcn_004c4670(4, 1, 0x1ac, &money);
+			cm_AppendPacketFieldValue(4, 1, 0x1ac, &money);
 			fcn_004c5360();
 		}
 	}

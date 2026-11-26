@@ -30,7 +30,7 @@ void __cdecl fcn_0058fa20(int);
 void __cdecl d2_OpenTransportPanel(int);
 void __cdecl fcn_0058fa40(int);
 void __cdecl fcn_0058dbe0(int);
-void __cdecl fcn_0059a0e0(void);
+void __cdecl d3_UpdateBuildingInteriorState(void);
 
 void __cdecl d2_RunFriedhofActions(int arg)
 {
@@ -107,6 +107,6 @@ void __cdecl d2_RunFriedhofActions(int arg)
 				fcn_0058fba0(arg);
 			}
 		}
-		fcn_0059a0e0();
+		d3_UpdateBuildingInteriorState();
 	}
 }

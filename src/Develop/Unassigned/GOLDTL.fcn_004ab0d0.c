@@ -38,7 +38,7 @@ void __cdecl fcn_004c5530(MsgF8* m);
 void __cdecl fcn_005100f0(int id, int v);
 
 #pragma optimize("y", off)
-int __cdecl fcn_004ab0d0(char* a1, char* a2, char* a3)
+int __cdecl ai_DispatchDunkleEcke(char* actor, char* target, char* secondary)
 {
 	MsgF8 m;
 	int flen;
@@ -65,16 +65,16 @@ int __cdecl fcn_004ab0d0(char* a1, char* a2, char* a3)
 	}
 	m.type = 0x74;
 	m.mode = 2;
-	m.from = *(int*) (a1 + 4);
-	m.to = *(int*) (a2 + 4);
+	m.from = *(int*) (actor + 4);
+	m.to = *(int*) (target + 4);
 	m.stamp.a = (*(int*)&gm_GameTime);
 	m.stamp.b = (*(int*)&g_7f4c04);
 	m.stamp.c = g_7f4c08;
 	m.stamp.d = g_7f4c0c;
-	m.to2 = *(int*) (a2 + 4);
-	m.with = *(int*) (a3 + 4);
+	m.to2 = *(int*) (target + 4);
+	m.with = *(int*) (secondary + 4);
 	fcn_004c5530(&m);
-	fcn_005100f0(*(int*) (a1 + 4), -1);
+	fcn_005100f0(*(int*) (actor + 4), -1);
 	return 1;
 }
 #pragma optimize("", on)

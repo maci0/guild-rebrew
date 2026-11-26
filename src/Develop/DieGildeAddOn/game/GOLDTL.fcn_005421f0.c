@@ -26,7 +26,7 @@ extern char g_7f4ca0[];
 int __cdecl gm_CheckAndCollectEntityDebt(struct s_7f4ca0*, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 
-void __cdecl fcn_004c4670(int, int, int, char*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
 
 void __cdecl gm_ApplyHourlyEntityUpdates(void)
@@ -49,7 +49,7 @@ void __cdecl gm_ApplyHourlyEntityUpdates(void)
 			if (rec->b1b1 > 0) {
 				flag_val = -1;
 				cm_BeginPacketFieldDelta((char*) rec, rec->f4);
-				fcn_004c4670(1, 1, cursor - g_aed32c + 0x1af, &flag_val);
+				cm_AppendPacketFieldValue(1, 1, cursor - g_aed32c + 0x1af, &flag_val);
 				fcn_004c5360();
 			}
 		}

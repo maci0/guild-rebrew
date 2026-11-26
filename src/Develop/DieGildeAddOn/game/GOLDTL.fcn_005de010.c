@@ -26,7 +26,7 @@ void __cdecl fcn_004c6ba0(int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005de010(unsigned char* e, char* request)
+int __cdecl gm_ObjDrainRandomSkill(unsigned char* e, char* request)
 {
 	int ids[5];
 	Req req;

@@ -20,9 +20,9 @@ extern unsigned char* lpGebaeudePROT;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_004f2a10(int, unsigned char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_005b2e50(ENTITY_RECORD*, char*, unsigned char*, int);
+void __cdecl he_NotifyStorageTransfer(ENTITY_RECORD*, char*, unsigned char*, int);
 
-void __cdecl fcn_0057b160(char* u)
+void __cdecl he_RemoveAction0x92Favor(char* u)
 {
 	unsigned char* e;
 	char* h;
@@ -32,7 +32,7 @@ void __cdecl fcn_0057b160(char* u)
 		fcn_004f2a10(0, e, *(int*) (u + 0xb0), *(unsigned char*) (u + 0xb4));
 		h = gm_LookupEntityRecordById(*(int*) (u + 0xc));
 		if (h != 0) {
-			fcn_005b2e50(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)]), h, e, *(int*) (u + 0xb0));
+			he_NotifyStorageTransfer(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)]), h, e, *(int*) (u + 0xb0));
 		}
 	}
 }

@@ -45,7 +45,7 @@ void __cdecl fcn_0046f940(int a, int b);
 int __cdecl d2_CheckFundsAndNotify(int, int, int, int);
 int __cdecl lc_GebaeudeAusrichten(int, char*);
 void __cdecl d3_TransformPoint(int a, int b, void* c);
-void __cdecl fcn_00598740(void* a, int b);
+void __cdecl d3_ComputeObjectYawToTarget(void* a, int b);
 void __cdecl fcn_004c5530(void* a);
 void __cdecl fcn_0050bc10(int a, unsigned char b, char* c);
 void __cdecl fcn_0046ed00(int a, int b, int c);
@@ -155,7 +155,7 @@ void __cdecl fcn_00599b00(void)
 					msg.category = i;
 					msg.cost = fcn_0050d200((int)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), i);
 					d3_TransformPoint(ent, ent + 0x4c, msg.location);
-					fcn_00598740(msg.rotation, ent);
+					d3_ComputeObjectYawToTarget(msg.rotation, ent);
 					{
 						int k = 0;
 						do {

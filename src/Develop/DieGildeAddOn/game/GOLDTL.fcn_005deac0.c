@@ -26,7 +26,7 @@ float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c6b20(int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005deac0(char* e, char* action)
+int __cdecl gm_ObjApplyAction0x5b(char* e, char* action)
 {
 	Req req;
 	char text[0x200];

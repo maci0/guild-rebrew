@@ -13,13 +13,13 @@ extern char g_7f4ca4[];
 int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl gm_CalculateGebaeudeValue(void* obj, int n);
 int __cdecl gm_CheckEntityStock(void* slot, int value, unsigned char flag);
-int __cdecl fcn_004fa5b0(int cmd, void* slot, unsigned int* list);
+int __cdecl gm_CheckPrivilege(int cmd, void* slot, unsigned int* list);
 void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 void* __cdecl he_fn_Handlung(void);
 int __cdecl he_HasNoActiveEvent04b(void* a, void* b);
 int __cdecl he_HasNoActiveAction0x2e(void* a, void* b);
 int __cdecl he_HasNoActiveAction0x62(void* a);
-int __cdecl fcn_00579640(void* a, void* b);
+int __cdecl he_HasNoActiveAction0x88(void* a, void* b);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00526120(char* buf, int flag);
 int __cdecl fcn_00470820(int a, int b, char* name);
@@ -59,7 +59,7 @@ int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
 	slots[0] = 1;
 	value = (int) ((float) gm_WalkEntityChain(*(unsigned short*) (0x7f4ca0 + idx * 0x21c)) * *(float*) 0x6628ac
 		+ (float) gm_CalculateGebaeudeValue(record, 100) * *(float*) 0x662b10);
-	if (fcn_004fa5b0(0x1b, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), slots) & 2) {
+	if (gm_CheckPrivilege(0x1b, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), slots) & 2) {
 		value = value / 2;
 	}
 	if (gm_CheckEntityStock((void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), value, g_773d75) == 0) {
@@ -89,7 +89,7 @@ int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
 		fcn_00526120(ev, 0);
 		return 0;
 	}
-	if (fcn_00579640(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
+	if (he_HasNoActiveAction0x88(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
 		io_FormatTextBuffer(text, 0x409f, *(unsigned short*) obj);
 		fcn_00526120(text, 0);
 		return 0;

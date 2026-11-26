@@ -2,12 +2,12 @@
 
 
 void __cdecl gm_GenerateShuffledIndices(int, int*);
-void __cdecl fcn_005dcf40(unsigned char*, int);
+void __cdecl gm_IncreaseEntitySkill(unsigned char*, int);
 void __cdecl fcn_004c6330(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005dd980(unsigned char* e, int* ctx)
+int __cdecl gm_ObjBoostTwoSkills(unsigned char* e, int* ctx)
 {
 	int first;
 	int ids[5];
@@ -24,7 +24,7 @@ int __cdecl fcn_005dd980(unsigned char* e, int* ctx)
 	n = 0;
 	while (n < 2 && i < 5) {
 		if (e[ids[i] + 0x80] < 0xfc) {
-			fcn_005dcf40(e, ids[i]);
+			gm_IncreaseEntitySkill(e, ids[i]);
 			n++;
 			if (n == 1) {
 				first = ids[i];

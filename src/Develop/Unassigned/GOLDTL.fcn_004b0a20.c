@@ -1,7 +1,7 @@
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl atoi(char*);
 #include "client_packet_builder.h"
-void __cdecl fcn_004c4670(int, int, int, char*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
 
 
@@ -20,7 +20,7 @@ int __cdecl fcn_004b0a20(int* a1, int slot, char* arg)
 	if (e == 0)
 		return 0;
 	cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
-	fcn_004c4670(1, 1, 0x1b1, &c);
+	cm_AppendPacketFieldValue(1, 1, 0x1b1, &c);
 	fcn_004c5360();
 	return 1;
 }

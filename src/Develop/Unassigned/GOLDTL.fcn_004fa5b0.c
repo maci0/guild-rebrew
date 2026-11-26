@@ -4,7 +4,7 @@ extern char g_690478[];
 
 typedef int (__cdecl* fcn_004fa5b0_fn)(char*, int);
 
-int __cdecl fcn_004fa5b0(int index, char* a2, int a3)
+int __cdecl gm_CheckPrivilege(int index, char* a2, int a3)
 {
 	if (index >= 0x3a) {
 		return 0x40;

@@ -22,7 +22,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_004116d0(void);
+void __cdecl io_ClearInputState(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* Route one enhanced-building selection through the query engine: build the
  * window, walk the candidate query, spawn one icon record per hit, then keep
@@ -137,6 +137,6 @@ tail:
 		}
 	}
 	fcn_00471e30(win);
-	fcn_004116d0();
+	io_ClearInputState();
 	return ret;
 }

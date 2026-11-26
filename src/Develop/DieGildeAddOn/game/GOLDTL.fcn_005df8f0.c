@@ -25,7 +25,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 char* __cdecl fcn_005c6220(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005df8f0(char* e, char* action)
+int __cdecl gm_ObjSetEntityFlag0x400000(char* e, char* action)
 {
 	int out;
 	Req req;

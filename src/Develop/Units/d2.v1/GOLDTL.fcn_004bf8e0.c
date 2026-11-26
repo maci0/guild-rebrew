@@ -47,7 +47,7 @@ int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 void __cdecl fcn_004c53a0(void);
 int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_004116d0(void);
+void __cdecl io_ClearInputState(void);
 
 /* ADDRESS: GOLDTL 0x004bf8e0 */
 void __cdecl fcn_004bf8e0(char* p, int arg)
@@ -119,5 +119,5 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 		fcn_004c53a0();
 	}
 	fcn_00471e30(dlg);
-	fcn_004116d0();
+	io_ClearInputState();
 }

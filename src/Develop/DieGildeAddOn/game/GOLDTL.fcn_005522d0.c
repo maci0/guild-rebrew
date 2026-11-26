@@ -25,7 +25,7 @@ int __cdecl gm_IsEntityAtBuilding(char* a, char* b);
 void __cdecl he_FreeAction(void* ev);
 void __cdecl fcn_005498b0(char* a1, char* a2, char* a3, char* a4, int a5, float a6);
 void __cdecl fcn_00551f90(void* ev);
-void __cdecl fcn_005b2810(char* a1, char* a2);
+void __cdecl he_NotifyPlagueInfection(char* a1, char* a2);
 typedef struct { unsigned char kind; char unknown[0x24c]; } BUILDING_PROT_5522;
 /* ADDRESS: GOLDTL 0x005522d0 */
 void __cdecl he_RunPlagueEvent(char* ev)
@@ -204,7 +204,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 				gm_ApplyPlagueInfection(slot);
 			}
 			if (left) {
-				fcn_005b2810(slot, (char*) rec);
+				he_NotifyPlagueInfection(slot, (char*) rec);
 			}
 			for (n = 0; n < count; n++) {
 				if (scores[n] < g_6640b4) {

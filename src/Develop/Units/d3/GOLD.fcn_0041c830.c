@@ -79,10 +79,10 @@ extern const GUID IID_IDirectDraw4;
 extern const GUID IID_IDirect3D3;
 
 int __stdcall DirectDrawCreate(const GUID *guid, IDirectDraw **out, void *outer);
-int __cdecl fcn_004112b0(const char *sub, int mode);
-void __cdecl fcn_00411520(int key, int name, char *value);
+int __cdecl io_OpenRegistryKey(const char *sub, int mode);
+void __cdecl io_WriteRegistryString(int key, int name, char *value);
 void __cdecl fcn_00410430(int key);
-char *__cdecl fcn_0041b1e0(GUID *guid, char *out);
+char *__cdecl d3_FormatGuid(GUID *guid, char *out);
 int __stdcall fcn_0041c460(int a1, int a2, int a3, int a4, int a5, int a6);
 
 /* ADDRESS: GOLD 0x0041c830 */
@@ -224,28 +224,28 @@ BOOL __stdcall fcn_0041c830(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		char *value;
 		int data;
 
-		key = fcn_004112b0("dd_vesa", 2);
+		key = io_OpenRegistryKey("dd_vesa", 2);
 		if (key != 0) {
 			if (DialogArgument4 == 0) {
 				data = (int) SendMessageA(dd_DriverCombo, CB_GETCURSEL, 0, 0);
 				data = (int) SendMessageA(dd_DriverCombo, CB_GETITEMDATA, (WPARAM) data, 0);
 				if (data != 0) {
-					value = fcn_0041b1e0((GUID *) data, guidtext);
+					value = d3_FormatGuid((GUID *) data, guidtext);
 					if (value != 0)
-						fcn_00411520(key, (int) "dd_Guid", value);
+						io_WriteRegistryString(key, (int) "dd_Guid", value);
 				} else {
-					fcn_00411520(key, (int) "dd_Guid", "00000000-0000-0000-0000000000000000");
+					io_WriteRegistryString(key, (int) "dd_Guid", "00000000-0000-0000-0000000000000000");
 				}
 			}
 write_device:
 			data = (int) SendMessageA(dd_DeviceCombo, CB_GETCURSEL, 0, 0);
 			data = (int) SendMessageA(dd_DeviceCombo, CB_GETITEMDATA, (WPARAM) data, 0);
 			if (data != 0) {
-				value = fcn_0041b1e0((GUID *) data, guidtext);
+				value = d3_FormatGuid((GUID *) data, guidtext);
 				if (value != 0)
-					fcn_00411520(key, (int) "d3d_Guid", value);
+					io_WriteRegistryString(key, (int) "d3d_Guid", value);
 			} else {
-				fcn_00411520(key, (int) "d3d_Guid", "00000000-0000-0000-0000000000000000");
+				io_WriteRegistryString(key, (int) "d3d_Guid", "00000000-0000-0000-0000000000000000");
 			}
 close_key:
 			fcn_00410430(key);

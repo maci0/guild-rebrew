@@ -5,7 +5,7 @@ extern char g_7f4ca0[];
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_RemoveSpecialTableItems(void*);
 
-void __cdecl fcn_004c4670(int, int, int, char*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
 void* __cdecl gm_GetEquippedCombatGear(void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -37,7 +37,7 @@ char __cdecl fcn_004ce740(char* entity)
 		c = -c0;
 		gm_RemoveSpecialTableItems(entity);
 		cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
-		fcn_004c4670(1, 1, entity - g_aed32c + 0x1c5, &c);
+		cm_AppendPacketFieldValue(1, 1, entity - g_aed32c + 0x1c5, &c);
 		fcn_004c5360();
 		e = *(void**) (entity + 0x16c);
 		if (e != 0) {
@@ -58,7 +58,7 @@ char __cdecl fcn_004ce740(char* entity)
 		return 1;
 	}
 	cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
-	fcn_004c4670(1, 1, entity - g_aed32c + 0x1c5, &c);
+	cm_AppendPacketFieldValue(1, 1, entity - g_aed32c + 0x1c5, &c);
 	fcn_004c5360();
 	fcn_004c5420(*(int*) (entity + 4), 0x1c8, 4, 0, 0x20000000);
 	return 0;

@@ -50,7 +50,7 @@ void __cdecl fcn_005459a0(int);
 void __cdecl fcn_00476970(int);
 void __cdecl fcn_00469e30(int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
-void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
+void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 void __cdecl d2_UpdateScrollPerga(void);
 void __cdecl fcn_005355f0(void);
 int __cdecl gm_CheckAndCollectEntityDebt(char*, int);
@@ -309,7 +309,7 @@ void __cdecl fcn_00541620(void)
 	io_AppendText(0x7d);
 	fcn_0046e830(-1, -1, d2_CurrentWindowId, k, 0x767);
 	*(int*) (k * 0x3cc + 0x10161b4) = 0x18;
-	fcn_004234e0(0, "RollenKurz_s_01", 1, 0x3f, 0x7f, 0, 0);
+	sb_PlayVoice(0, "RollenKurz_s_01", 1, 0x3f, 0x7f, 0, 0);
 	i = main_RunFrameLoop((int) fcn_00541620, 0x24087);
 	while (i != 0) {
 		d2_UpdateScrollPerga();

@@ -29,8 +29,8 @@ void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
-int __cdecl fcn_004b3c80(int);
-void __cdecl fcn_004b54e0(int);
+int __cdecl gm_HasActiveMission(int);
+void __cdecl d2_ShowMissionForEntity(int);
 void __cdecl fcn_004c50e0(int, int);
 char *__cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_00505e30(unsigned short);
@@ -309,7 +309,7 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 				}
 			}
 		} else if (*(int *)(g_7f4ca0 + 540 * g_774970 + 4) == *(int *)((char *)person + 4) &&
-		    fcn_004b3c80(*(int *)((char *)person + 4)) != 0) {
+		    gm_HasActiveMission(*(int *)((char *)person + 4)) != 0) {
 			d2_SetForm(h, 4);
 			r3 = d2_GetWindowListItem(h, 4, io_AppendText(0x1f49));
 		}
@@ -350,7 +350,7 @@ label_2281:
 					fcn_00472640(r4, 0);
 				}
 			} else if (d2_CurrentElementId == r3) {
-				fcn_004b54e0(*(int *)((char *)person + 4));
+				d2_ShowMissionForEntity(*(int *)((char *)person + 4));
 			}
 			fcn_00471af0(h, 1);
 		}

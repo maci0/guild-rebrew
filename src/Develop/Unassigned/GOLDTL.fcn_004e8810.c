@@ -11,7 +11,7 @@ struct job_4e8810 {
 extern Rec18_68da68 amt_OfficeSlots[42];
 
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_005b2900(char*, char*, char*);
+void __cdecl amt_NotifyOfficeSwap(char*, char*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004e8810 */
@@ -54,7 +54,7 @@ int __cdecl amt_SwapOfficeOccupants(unsigned char* request)
 	w2 = gm_LookupEntityRecordById(p2->id);
 	if (w2 == 0)
 		return 0;
-	fcn_005b2900(e, w1, w2);
+	amt_NotifyOfficeSwap(e, w1, w2);
 	w1[0x166] = p2->slot;
 	w2[0x166] = p1->slot;
 	savedId = p1->id;

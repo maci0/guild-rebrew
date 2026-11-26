@@ -42,7 +42,7 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl fcn_004c4700(unsigned char type, unsigned char count, short id, char* data);
 void __cdecl fcn_004c53a0(void);
 void __cdecl fcn_004c5530(char* msg);
-void __cdecl fcn_004c4670(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5480(int a1, int a2, float a3);
 
@@ -76,7 +76,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 			return 0.0f;
 		}
 		cm_BeginPacketFieldDelta((char*) e, e->h);
-		fcn_004c4670(4, 1, 0x24, &delta);
+		cm_AppendPacketFieldValue(4, 1, 0x24, &delta);
 		fcn_004c5360();
 		return res;
 	}

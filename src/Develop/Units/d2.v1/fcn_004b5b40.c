@@ -6,7 +6,7 @@ extern char g_6a3440;
 extern int g_7728dc;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_004b3c50(int a);
+int __cdecl gm_LookupMissionSpec(int a);
 void __cdecl fcn_004b5630(int a, int b);
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_CenterDialogWindows(int a);
@@ -60,7 +60,7 @@ void __cdecl fcn_004b5b40(int mode)
 	arena_done = 0;
 	obj = 0;
 	slot = (char*) (0x7f4ca0 + (int) g_774970 * 0x21c);
-	h = fcn_004b3c50(g_10069a0[0]);
+	h = gm_LookupMissionSpec(g_10069a0[0]);
 	for (i = 0; i < 9; i++) {
 		g_10069a0[i] = 0;
 	}

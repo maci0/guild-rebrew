@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004bcc20 */
-char* __cdecl fcn_004bcc20(char* entries, int id)
+char* __cdecl plt_FindRecordByOwner(char* entries, int id)
 {
 	char* p;
 	int i;

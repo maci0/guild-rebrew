@@ -47,7 +47,7 @@ void __cdecl d2_DestroyElement(int id);
 int __cdecl fcn_0046b520(char* s, int font);
 void __cdecl fcn_00469c40(int x, int y, int slot);
 int __cdecl fcn_00469c30(int x, int y, int a3);
-char __cdecl fcn_00411610(int shift, int ctrl, int alt, char key);
+char __cdecl io_TranslateKeyCode(int shift, int ctrl, int alt, char key);
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00474300 */
@@ -172,9 +172,9 @@ tail15:
 		if (len < (((*(Combo**) &tp_d2_SelectedControl)->flags & 1) ? (*(Combo**) &tp_d2_SelectedControl)->max_len : (unsigned char) (*(Combo**) &tp_d2_SelectedControl)->f24)) {
 			if ((*(Combo**) &tp_d2_SelectedControl)->scroll == 0 || g_100f898 <= (*(Combo**) &tp_d2_SelectedControl)->f4 + (*(Combo**) &tp_d2_SelectedControl)->scroll) {
 				if (g_14cf736 == 0 && g_14cf72a == 0) {
-					(*(Combo**) &tp_d2_SelectedControl)->text[len] = fcn_00411610(0, 0, 0, g_14cf950);
+					(*(Combo**) &tp_d2_SelectedControl)->text[len] = io_TranslateKeyCode(0, 0, 0, g_14cf950);
 				} else {
-					(*(Combo**) &tp_d2_SelectedControl)->text[len] = fcn_00411610(1, 0, 0, g_14cf950);
+					(*(Combo**) &tp_d2_SelectedControl)->text[len] = io_TranslateKeyCode(1, 0, 0, g_14cf950);
 				}
 				(*(Combo**) &tp_d2_SelectedControl)->text[len + 1] = 0;
 			}

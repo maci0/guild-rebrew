@@ -25,14 +25,14 @@ void __cdecl fcn_004c34d0(void);
 void __cdecl fcn_00516ed0(int a0);
 void __cdecl fcn_0043a9c0(int a0);
 void __cdecl fcn_00516f60(void);
-void __cdecl fcn_0059c800(int a0);
-void __cdecl fcn_0059c9a0(int a0);
-void __cdecl fcn_004bd1a0(int a0);
-void __cdecl fcn_0059cb40(int a0);
-void __cdecl fcn_0059de00(int a0);
-void __cdecl fcn_0059e390(int a0);
+void __cdecl d2_RunSchmiedeInteriorHud(int a0);
+void __cdecl d2_RunHolzfaellerInteriorHud(int a0);
+void __cdecl d3_HideSubtreeEntries(int a0);
+void __cdecl d2_RunSteinbruchInteriorHud(int a0);
+void __cdecl d2_RunRaeuberInteriorHud(int a0);
+void __cdecl d2_RunKontorTradeHud(int a0);
 void __cdecl d2_RunFriedhofActions(int a0);
-void __cdecl fcn_005e69f0(int a0);
+void __cdecl d2_RunZigeunerInteriorHud(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774658, d3_CameraHorizontalIndex, d3_CameraVerticalStep, d2_SuppressOverlay, g_67530c, g_675310;
 /* ADDRESS: GOLDTL 0x005a80d0 */
@@ -151,20 +151,20 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	}
 	switch (*buildingPtr) {
 	case 0x1e:
-		fcn_0059c9a0(*(int*) &g_7746c8);
-		fcn_004bd1a0(*(int*) (buildingPtr + 0x71));
+		d2_RunHolzfaellerInteriorHud(*(int*) &g_7746c8);
+		d3_HideSubtreeEntries(*(int*) (buildingPtr + 0x71));
 		break;
 	case 0x1f:
-		fcn_0059cb40(*(int*) &g_7746c8);
+		d2_RunSteinbruchInteriorHud(*(int*) &g_7746c8);
 		break;
 	case 0x20:
-		fcn_0059c800(*(int*) &g_7746c8);
+		d2_RunSchmiedeInteriorHud(*(int*) &g_7746c8);
 		break;
 	case 0x27:
-		fcn_0059de00(*(int*) &g_7746c8);
+		d2_RunRaeuberInteriorHud(*(int*) &g_7746c8);
 		break;
 	case 0x47:
-		fcn_0059e390(*(int*) &g_7746c8);
+		d2_RunKontorTradeHud(*(int*) &g_7746c8);
 		break;
 	case 0x48:
 	case 0x49:
@@ -174,7 +174,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	case 0x4e:
 	case 0x4f:
 	case 0x50:
-		fcn_005e69f0(*(int*) &g_7746c8);
+		d2_RunZigeunerInteriorHud(*(int*) &g_7746c8);
 		break;
 	default:
 		fcn_0058f700(0);

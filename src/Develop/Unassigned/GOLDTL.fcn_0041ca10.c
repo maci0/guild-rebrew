@@ -6,7 +6,7 @@ extern unsigned int g_6b6f38;
 extern unsigned int* g_6b6d18;
 extern unsigned char g_6b6008[3][0x100];
 
-int __cdecl fcn_0041ca10(int r, int g, int b)
+int __cdecl d3_FindNearestPaletteColor(int r, int g, int b)
 {
 	unsigned int i;
 	unsigned int d;

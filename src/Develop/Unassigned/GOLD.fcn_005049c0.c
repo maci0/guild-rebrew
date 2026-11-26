@@ -4,7 +4,7 @@
 
 int __cdecl gm_GetGuildHall(int);
 
-int __cdecl fcn_005049c0(int a)
+int __cdecl gm_HasGuildHall(int guild)
 {
-	return gm_GetGuildHall(a) != 0;
+	return gm_GetGuildHall(guild) != 0;
 }

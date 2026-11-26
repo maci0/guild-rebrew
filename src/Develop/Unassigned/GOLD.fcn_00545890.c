@@ -6,11 +6,11 @@
 int __cdecl fcn_004bb6c0(void*);
 int __cdecl he_FreeAction(int);
 
-void __cdecl fcn_00545890(char* a)
+void __cdecl he_RunAction0x42EntityMsg(char* action)
 {
-	if (*(int*) (a + 0x70) != -2) {
-		fcn_004bb6c0(a + 0xac);
+	if (*(int*) (action + 0x70) != -2) {
+		fcn_004bb6c0(action + 0xac);
 	}
-	he_FreeAction((int) a);
+	he_FreeAction((int) action);
 }
 

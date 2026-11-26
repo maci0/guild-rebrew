@@ -4,7 +4,7 @@ extern short g_14ce8c0;
 extern int g_14cf900[];
 extern int g_14ce920[];
 
-void __cdecl fcn_004116d0(void)
+void __cdecl io_ClearInputState(void)
 {
 	((int*)&g_14ce8c0)[6] = 0;
 	g_14cf900[6] = 0;

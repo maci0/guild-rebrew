@@ -2,12 +2,12 @@
 
 
 void __cdecl gm_GenerateShuffledIndices(int, int*);
-void __cdecl fcn_005dcf40(unsigned char*, int);
+void __cdecl gm_IncreaseEntitySkill(unsigned char*, int);
 void __cdecl fcn_004c6330(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005dd4e0(unsigned char* e, int* a2)
+int __cdecl gm_ObjBoostOneSkill(unsigned char* e, int* action)
 {
 	int ids[5];
 	char text[0x800];
@@ -16,13 +16,13 @@ int __cdecl fcn_005dd4e0(unsigned char* e, int* a2)
 	int count;
 
 	last = 0;
-	a2[4] = 1;
+	action[4] = 1;
 	gm_GenerateShuffledIndices(5, ids);
 	i = 0;
 	count = 0;
 	while (count < 1 && i < 5) {
 		if (e[ids[i] + 0x80] < 0xfc) {
-			fcn_005dcf40(e, ids[i]);
+			gm_IncreaseEntitySkill(e, ids[i]);
 			last = ids[i];
 			count++;
 		}
@@ -30,7 +30,7 @@ int __cdecl fcn_005dd4e0(unsigned char* e, int* a2)
 	}
 	if (e[2] == 6) {
 		fcn_004c6330(*(int*) (e + 4));
-		io_FormatTextBuffer(text, 0xfe8, **(unsigned short**) a2 * 2 + 0xd71, last + 0x16b7);
+		io_FormatTextBuffer(text, 0xfe8, **(unsigned short**) action * 2 + 0xd71, last + 0x16b7);
 		fcn_005dbe90(text);
 	}
 	return 1;

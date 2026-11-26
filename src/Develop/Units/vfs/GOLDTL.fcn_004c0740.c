@@ -1,6 +1,6 @@
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_004be340(char*);
+int __cdecl rt_CountRoutePoints(char*);
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
 
 
@@ -14,7 +14,7 @@ int __cdecl fcn_004c0740(void* stream)
 	count = 0;
 	for (q = fcn_00502cd0(0, 2, 7, 4, 0x1d); q != 0; q = gm_NextEntityQueryMatch()) {
 		if (*(char**) (q + 0x29) != 0)
-			count += fcn_004be340(*(char**) (q + 0x29));
+			count += rt_CountRoutePoints(*(char**) (q + 0x29));
 	}
 	if (!(vfs_fwrite(&count, 4, 1, stream) > 0))
 		return 0;

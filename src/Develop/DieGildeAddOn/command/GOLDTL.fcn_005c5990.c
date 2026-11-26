@@ -36,7 +36,7 @@ extern char* g_14a555c;
 extern char* g_14a5558;
 extern int g_14a79c0[];
 
-char* __cdecl fcn_004bcc20(int, int);
+char* __cdecl plt_FindRecordByOwner(int, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl cm_ExProdObjekt(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -50,7 +50,7 @@ void __cdecl d2_HandleErnten(char* building, int plant_table)
 	if ((*(int*)&g_7746a4) == 0) {
 		return;
 	}
-	entry = fcn_004bcc20(plant_table, (*(int*)&g_7746a4));
+	entry = plt_FindRecordByOwner(plant_table, (*(int*)&g_7746a4));
 	if (g_7746f0 != 0) {
 		if (entry == 0) {
 			return;

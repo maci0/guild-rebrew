@@ -9,7 +9,7 @@ extern g_6623bc_f g_6623bc;
 int __cdecl fcn_0042b240(int);
 int __cdecl msx_FindSampleHandleIndex(int);
 
-int __cdecl fcn_0042a6a0(int handle)
+int __cdecl msx_ReleaseSampleHandle(int handle)
 {
 	int r = 0;
 	int i;

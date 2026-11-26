@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl io_FormatTextBuffer(char*, char*, int);
-int __cdecl fcn_005dafd0(int, int);
+int __cdecl gm_HandleVerhoer(int, int);
 
 /* ADDRESS: GOLDTL 0x004f9f70 */
 int __cdecl fcn_004f9f70(int a, int b)
@@ -27,7 +27,7 @@ int __cdecl fcn_004f9f70(int a, int b)
 			return 1;
 		}
 		if (*(int*) b == 3) {
-			r = fcn_005dafd0(a, b);
+			r = gm_HandleVerhoer(a, b);
 		}
 		return r | 2;
 	}
@@ -43,7 +43,7 @@ int __cdecl fcn_004f9f70(int a, int b)
 			return 1;
 		}
 		if (v == 4) {
-			r = fcn_005dafd0(a, b);
+			r = gm_HandleVerhoer(a, b);
 		} else if (*(char*) (a + 2) == 6) {
 			io_FormatTextBuffer((char*) (b + 0x14), "%s", 0x1e0d);
 		}

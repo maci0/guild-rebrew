@@ -8,7 +8,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00455140(int, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
 
-void __cdecl fcn_00598740(float* out, int obj)
+void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj)
 {
 	float v[3];
 	int save;

@@ -1,7 +1,7 @@
 int __cdecl io_FormatTextBuffer(void *buf, int len);
 int __cdecl fcn_005cad70(char *a0, char *a1);
 int __cdecl gm_LookupEntityRecordById(int value);
-int __cdecl fcn_005dcf40(unsigned char *e, int idx);
+int __cdecl gm_IncreaseEntitySkill(unsigned char *e, int idx);
 
 /* ADDRESS: GOLDTL 0x005dd130 */
 int __cdecl fcn_005dd130(char *entity, int *a1)
@@ -13,14 +13,14 @@ int __cdecl fcn_005dd130(char *entity, int *a1)
 		io_FormatTextBuffer(buf, 0x9d);
 		r = fcn_005cad70(entity, buf);
 		if (r != 0) {
-			fcn_005dcf40((unsigned char *) r, 4);
+			gm_IncreaseEntitySkill((unsigned char *) r, 4);
 			return 1;
 		}
 		return 0;
 	} else {
 		r = gm_LookupEntityRecordById(a1[1]);
 		if (r != 0) {
-			fcn_005dcf40((unsigned char *) r, 4);
+			gm_IncreaseEntitySkill((unsigned char *) r, 4);
 			return 1;
 		}
 		return 0;

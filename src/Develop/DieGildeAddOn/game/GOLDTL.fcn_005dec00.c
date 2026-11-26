@@ -23,7 +23,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 char* __cdecl fcn_005c6220(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005dec00(char* ent, int* arg)
+int __cdecl gm_ObjBefriendOppositeGender(char* ent, int* arg)
 {
 	int tmp;
 	int desc[20];

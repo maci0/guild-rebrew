@@ -2276,7 +2276,7 @@ LAB_1000e0e7:
 	extern char cm_LastObjectId[];
 	extern int __cdecl io_FormatTextBuffer();
 	extern void __cdecl fcn_00533a40();
-	extern int __cdecl fcn_004234e0();
+	extern int __cdecl sb_PlayVoice();
 
 	short* source_dynamic_entity;
 	short* source_owner_entity;
@@ -2566,7 +2566,7 @@ LAB_1000e0e7:
 				14 * (int)*(unsigned char*)source_existing_entity + 0x48e,
 				*(int*)(cmd + 0x23));
 			fcn_00533a40(log_buffer);
-			fcn_004234e0(0, "RollenKurz_s_01", 1, 0x3f, 0x7f, 0, 0);
+			sb_PlayVoice(0, "RollenKurz_s_01", 1, 0x3f, 0x7f, 0, 0);
 		}
 	}
 	if (result != (uchar*)0) {

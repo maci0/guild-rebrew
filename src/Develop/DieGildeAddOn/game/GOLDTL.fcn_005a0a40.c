@@ -8,7 +8,7 @@ int __cdecl io_AppendText(char*, ...);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl d2_AddElementToWindow(int, int, int, int);
 
-void __cdecl fcn_005a0a40(int a)
+void __cdecl d2_RenderDialogIconsAndText(int a)
 {
 	int i;
 	int x;

@@ -4,7 +4,7 @@
 #include "client_sound.h"
 
 int __cdecl fcn_00500e20(char*);
-int __cdecl fcn_004c27f0(void);
+int __cdecl msx_FindActiveGroup(void);
 int __cdecl fcn_004c2820(int);
 extern char g_772d58[];
 void* __cdecl msx_StartTrack(char*, int);
@@ -20,7 +20,7 @@ void __cdecl msx_SelectOutdoorTrack(void)
 	int roll;
 
 	season = fcn_00500e20((char*) 0x7f4c00);
-	slot = fcn_004c27f0();
+	slot = msx_FindActiveGroup();
 	if (slot >= 0) {
 		idx = slot * 0x114;
 		*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) - 0x1e);

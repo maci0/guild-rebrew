@@ -57,13 +57,13 @@ int __cdecl fcn_00441f10(int* world, int x, int y);
 float* __stdcall D3DXMatrixTranspose(float* matrix, const float* camera);
 void __cdecl d3_NormalizeVector(float* v);
 char* __cdecl fcn_00419640(int id, int* which);
-char* __cdecl fcn_004234e0(char* bank, char* name, int loop, int pan, int vol, int a, int b);
-void __cdecl fcn_004237f0(int* handle, int fade);
-void __cdecl fcn_00423850(int* handle, int value);
-int __cdecl fcn_00423890(int* handle, int value);
+char* __cdecl sb_PlayVoice(char* bank, char* name, int loop, int pan, int vol, int a, int b);
+void __cdecl sb_StopVoice(int* handle, int fade);
+void __cdecl sb_SetVoicePan(int* handle, int value);
+int __cdecl sb_SetVoiceVolume(int* handle, int value);
 void __cdecl fcn_00426170(char* handle, int on);
 void __cdecl d3snd_PlaySource(char* voice, int a2, int vol, int pan);
-void* __cdecl fcn_004193d0(char* voice);
+void* __cdecl d3snd_GetObjectVoiceStatus(char* voice);
 
 /* ADDRESS: GOLDTL 0x00419990 */
 void __cdecl d3snd_UpdateAmbientSources(void)
@@ -223,7 +223,7 @@ fill_one:
 					volume = (int) (((double) (unsigned int) int_67769c[id] -
 						(double) ((unsigned int) int_67769c[id] * steps * steps) / (flt_677684[id] * flt_677684[id])) *
 						(2000 - hint) * g_662a80);
-					fcn_004234e0(0, str_6776b8 + id * 25, 1, pan, volume, 0, 0);
+					sb_PlayVoice(0, str_6776b8 + id * 25, 1, pan, volume, 0, 0);
 					g_6b5dc8 = (unsigned int) g_6b7fac * 13;
 				} else if (elapsed > 120000) {
 					g_6b5dc8 = (unsigned int) g_6b7fac * 13;
@@ -239,26 +239,26 @@ fill_one:
 	switch (count) {
 	case 0:
 		if (g_6b5d54 != 0) {
-			fcn_004237f0((int*) g_6b5d54, 0);
+			sb_StopVoice((int*) g_6b5d54, 0);
 		}
 		if (g_6b5da8 != 0) {
-			fcn_004237f0((int*) g_6b5da8, 0);
+			sb_StopVoice((int*) g_6b5da8, 0);
 		}
 		return;
 	case 1:
 		voice = (Voice_419990*) fcn_00419640(entries[0].id, &state);
 		if (voice != 0) {
 			if (voice->handle != 0) {
-				fcn_00423890((int*) voice->handle, entries[0].volume);
-				fcn_00423850((int*) voice->handle, entries[0].pan);
+				sb_SetVoiceVolume((int*) voice->handle, entries[0].volume);
+				sb_SetVoicePan((int*) voice->handle, entries[0].pan);
 			}
-			if (fcn_004193d0((char*) voice) == 0) {
+			if (d3snd_GetObjectVoiceStatus((char*) voice) == 0) {
 				d3snd_PlaySource((char*) voice, 0, 0, 0);
 			}
 		}
 		id = ((Slot_419990*) &g_6b5d54)[state == 0].id;
 		if (id != 0) {
-			fcn_004237f0((int*) id, 0);
+			sb_StopVoice((int*) id, 0);
 		}
 	case 2:
 		state = -1;
@@ -266,10 +266,10 @@ fill_one:
 			voice = (Voice_419990*) fcn_00419640(entries[i].id, &state);
 			if (voice != 0) {
 				if (voice->handle != 0) {
-					fcn_00423890((int*) voice->handle, entries[i].volume);
-					fcn_00423850((int*) voice->handle, entries[i].pan);
+					sb_SetVoiceVolume((int*) voice->handle, entries[i].volume);
+					sb_SetVoicePan((int*) voice->handle, entries[i].pan);
 				}
-				if (fcn_004193d0((char*) voice) == 0) {
+				if (d3snd_GetObjectVoiceStatus((char*) voice) == 0) {
 					d3snd_PlaySource((char*) voice, 0, 0, 0);
 				}
 			}
@@ -279,12 +279,12 @@ fill_one:
 	return;
 stop:
 	if (g_6b5d54 != 0) {
-		fcn_004237f0((int*) g_6b5d54, 0);
+		sb_StopVoice((int*) g_6b5d54, 0);
 		fcn_00426170((char*) g_6b5d54, 0);
 		g_6b5d54 = 0;
 	}
 	if (g_6b5da8 != 0) {
-		fcn_004237f0((int*) g_6b5da8, 0);
+		sb_StopVoice((int*) g_6b5da8, 0);
 		fcn_00426170((char*) g_6b5da8, 0);
 		g_6b5da8 = 0;
 	}

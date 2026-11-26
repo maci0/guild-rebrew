@@ -9,7 +9,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00418bb0(void);
 void __cdecl d3_Shutdown(void);
 void __cdecl d3_ReleaseGraphicsInterfaces(void);
-void __cdecl fcn_00411b10(void);
+void __cdecl io_ShutdownInput(void);
 
 void __cdecl fcn_00538160(void)
 {
@@ -22,5 +22,5 @@ void __cdecl fcn_00538160(void)
 	fcn_00418bb0();
 	d3_Shutdown();
 	d3_ReleaseGraphicsInterfaces();
-	fcn_00411b10();
+	io_ShutdownInput();
 }

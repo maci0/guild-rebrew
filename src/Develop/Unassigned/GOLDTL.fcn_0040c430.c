@@ -2,10 +2,10 @@
 
 int __cdecl rand(void);
 
-int __cdecl fcn_0040c430(int* p)
+int __cdecl ecmd_Rnd(int* max_ptr)
 {
-	if (*p == 0) {
+	if (*max_ptr == 0) {
 		return 0;
 	}
-	return rand() % *p;
+	return rand() % *max_ptr;
 }

@@ -51,7 +51,7 @@ void __cdecl fcn_0055dab0(char *);
 void __cdecl fcn_0055e4a0(char *);
 void __cdecl he_TransportStadtStadt(char *);
 void __cdecl ReportClientMessage(char *);
-void __cdecl fcn_004234e0(int, char *, int, int, int, int, int);
+void __cdecl sb_PlayVoice(int, char *, int, int, int, int, int);
 void __cdecl fcn_0046f280(int);
 int __cdecl fcn_005a7400(char *, int, int);
 
@@ -186,7 +186,7 @@ void __cdecl he_RunTransport(char *e)
 			v = *(int *)(r + 1);
 			fcn_004c5790(4, &v);
 			if (g_7746c4 == r || g_7746c8 == r) {
-				fcn_004234e0(g_7747cc, g_6a63dc, 1, 0x3f, 0x7f, 0, 0);
+				sb_PlayVoice(g_7747cc, g_6a63dc, 1, 0x3f, 0x7f, 0, 0);
 			}
 			*(int *)(e + 0x84) = fcn_004c5620(3, e);
 			return;

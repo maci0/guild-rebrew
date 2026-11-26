@@ -14,7 +14,7 @@ void __cdecl gm_AddTime(char*, int, int, int);
 void __cdecl fcn_005091d0(int*, char*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
 char* __cdecl fcn_0064d530(char*, const char*, unsigned int);
-void __cdecl fcn_00402340(void*, int);
+void __cdecl nt_SendBroadcast(void*, int);
 int __cdecl fcn_0050b710(int, unsigned char);
 
 #pragma pack(push, 1)
@@ -57,7 +57,7 @@ void __cdecl fcn_00559200(char* o)
 		strcpy(h + 0x9e, "Verm\xf6gen");
 		strcpy(h + 0xb6, "Gewinnpunkte");
 		h[0xce] = (char) n;
-		fcn_00402340(h, *(unsigned short*) (h + 4));
+		nt_SendBroadcast(h, *(unsigned short*) (h + 4));
 		for (i = 0; i < n; i++) {
 			*(unsigned short*) (g + 0) = 1;
 			*(unsigned short*) (g + 2) = 2;
@@ -86,7 +86,7 @@ void __cdecl fcn_00559200(char* o)
 			io_FormatTextBuffer(text, "%s", (e[9] ? 0x27b : 0x253) + (unsigned char) e[0x169]);
 			fcn_0064d530(g + 0x95, text, 0x24);
 			g[0xb8] = 0;
-			fcn_00402340(g, *(unsigned short*) (g + 4));
+			nt_SendBroadcast(g, *(unsigned short*) (g + 4));
 		}
 		*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 		gm_AddTime(o + 0x52, 1, 0, 0);

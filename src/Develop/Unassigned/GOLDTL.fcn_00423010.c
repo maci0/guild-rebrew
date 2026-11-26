@@ -23,7 +23,7 @@ extern int g_6b7e90;
 extern int g_678dec;
 extern volatile int g_6b7fac;
 int __cdecl fcn_0042aaa0(int h);
-void __cdecl fcn_004237f0(Voice* v, int a);
+void __cdecl sb_StopVoice(Voice* v, int a);
 
 void __cdecl fcn_00423010(int fade)
 {
@@ -38,7 +38,7 @@ void __cdecl fcn_00423010(int fade)
 		for (i = 0; i < g_6b7e8c; i++) {
 			v = &((Voice*)g_6b7e88)[i];
 			if (v->sample != 0 && fcn_0042aaa0(v->h) == 4) {
-				fcn_004237f0(v, 0);
+				sb_StopVoice(v, 0);
 			}
 		}
 		return;

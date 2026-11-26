@@ -10,7 +10,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl amt_CanUpgradeBuildingTier2(char*);
-void __cdecl fcn_005aa390(int);
+void __cdecl d2_StartZunftLevel2Action(int);
 
 /* ADDRESS: GOLD 0x5a1a20 */
 void __cdecl fcn_005aad40(int a)
@@ -24,7 +24,7 @@ void __cdecl fcn_005aad40(int a)
 			x = RegisterStatusText(g_6aafac, g_14aac94, 0x16);
 		}
 		if (g_7746a0 != 0 && g_7746a0 == x) {
-			fcn_005aa390(a);
+			d2_StartZunftLevel2Action(a);
 		}
 	}
 }

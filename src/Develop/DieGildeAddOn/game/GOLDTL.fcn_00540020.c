@@ -140,7 +140,7 @@ void* __cdecl fcn_00503e80(void);
 int __cdecl fcn_00504bd0(int);
 int __cdecl fcn_0047d240(void*);
 unsigned short __cdecl fcn_0042e410(int);
-int __cdecl fcn_00508da0(void*);
+int __cdecl gm_GetEntityMood(void*);
 int __cdecl gm_CalculateGebaeudeValue(void*, int);
 int __cdecl fcn_0047dd60(void*);
 int __cdecl fcn_00567170(void*, int*, int*, int*);
@@ -470,7 +470,7 @@ void __cdecl fcn_00540020(void)
 					}
 				}
 				if (fcn_0047d240(SLOTPTR(i)) != 0 || *(unsigned char*) (SLOTPTR(i) + 2) == 1) {
-					if (fcn_00508da0(obj) < fcn_0042e410(0x5a)) {
+					if (gm_GetEntityMood(obj) < fcn_0042e410(0x5a)) {
 						int ent;
 
 						cand = gm_CalculateGebaeudeValue(obj, 0x64);

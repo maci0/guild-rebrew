@@ -45,7 +45,7 @@ void __cdecl d2_PositionWindow(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl io_AppendText(int, char*);
 void __cdecl nt_ConnectTcp(int, int);
-void __cdecl fcn_004c3d50(void);
+void __cdecl cm_ResetCommandQueue(void);
 void __cdecl fcn_00590650(void);
 void __cdecl fcn_00501040(char*);
 void __cdecl fcn_004efc50(void);
@@ -153,7 +153,7 @@ int __cdecl main_OpenEngine(void)
 	d2_PositionWindow(((Screen*)g_1038144)[screen].window, 1);
 	io_AppendText(0x73, g_7e25a0);
 	nt_ConnectTcp(0, 0);
-	fcn_004c3d50();
+	cm_ResetCommandQueue();
 	fcn_00590650();
 	sprintf(path, "%sdata\\", g_6a3550);
 	fcn_00501040(path);

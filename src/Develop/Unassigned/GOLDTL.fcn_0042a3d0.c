@@ -5,7 +5,7 @@
 
 int __cdecl msx_ReleaseDigitalHandle(int);
 
-int __cdecl fcn_0042a3d0(void)
+int __cdecl msx_ReleaseAllDrivers(void)
 {
 	int r = 0;
 	int a;

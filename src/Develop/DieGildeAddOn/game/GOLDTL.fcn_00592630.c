@@ -5,12 +5,12 @@ extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 extern char* g_773d78;
 
-void __cdecl fcn_005925e0(int, int);
+void __cdecl d2_SetBookmarkSlotEntity(int, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 
-void __cdecl fcn_00592630(void)
+void __cdecl d2_InitDefaultBookmarks(void)
 {
 	int i;
 	int n;
@@ -22,19 +22,19 @@ void __cdecl fcn_00592630(void)
 		}
 	}
 	n = 1;
-	fcn_005925e0(0, (*(int*)&g_773d78));
+	d2_SetBookmarkSlotEntity(0, (*(int*)&g_773d78));
 	e = gm_StartFilteredEntitySearch(1, 5, 0xf);
 	if (e != 0) {
 		n = 2;
-		fcn_005925e0(1, (int) e);
+		d2_SetBookmarkSlotEntity(1, (int) e);
 	}
 	if (*(int*) (g_7f4ca0 + i * 540 + 0x170) != 0) {
-		fcn_005925e0(n, *(int*) (g_7f4ca0 + i * 540 + 0x170));
+		d2_SetBookmarkSlotEntity(n, *(int*) (g_7f4ca0 + i * 540 + 0x170));
 	}
 	n = 3;
 	for (e = gm_StartFilteredEntitySearch(1, 4, i); e != 0; e = gm_FindNextFilteredEntity()) {
 		if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category)) != 2) {
-			fcn_005925e0(n++, (int) e);
+			d2_SetBookmarkSlotEntity(n++, (int) e);
 		}
 	}
 }

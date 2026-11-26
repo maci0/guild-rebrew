@@ -36,7 +36,7 @@ int __cdecl fcn_004c4450(int);
 int* __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c58b0(int, int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
-void __cdecl fcn_004c4670(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_0050b750(int, unsigned char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -219,7 +219,7 @@ label_1bc:
 			q = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xbc));
 			if (q != 0) {
 				cm_BeginPacketFieldDelta(q, *(int*) (q + 1));
-				fcn_004c4670(4, 1, 0x65, &ent);
+				cm_AppendPacketFieldValue(4, 1, 0x65, &ent);
 				fcn_004c5360();
 			}
 		}
@@ -290,7 +290,7 @@ label_1bc:
 		strcat(msg, str);
 		fcn_004c5150(*(int*) (ent + 4), *(int*) (row + 4), g_773d75, val);
 		cm_BeginPacketFieldDelta(rec1, *(int*) (rec1 + 1));
-		fcn_004c4670(4, 1, 0x69, &val);
+		cm_AppendPacketFieldValue(4, 1, 0x69, &val);
 		fcn_004c5360();
 		if (h != 0) {
 			if (i != 0) {

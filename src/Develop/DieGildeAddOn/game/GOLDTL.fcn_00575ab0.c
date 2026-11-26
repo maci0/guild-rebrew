@@ -14,11 +14,11 @@ void __cdecl fcn_005b3200(char*, char*, int, int);
 void __cdecl ahm_UnlockSlotRecipe(char*, int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_005764a0(char*, int);
+int __cdecl ahm_HasActiveLabFeature(char*, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 
-void __cdecl fcn_00575ab0(char* u)
+void __cdecl he_RunAhmUnlockRecipe(char* u)
 {
 	int k;
 	char* h;
@@ -45,7 +45,7 @@ void __cdecl fcn_00575ab0(char* u)
 				he_FreeAction(u);
 				return;
 			}
-			if (fcn_005764a0(*(char**) (h + 0x16c), 0x24b) != 0) {
+			if (ahm_HasActiveLabFeature(*(char**) (h + 0x16c), 0x24b) != 0) {
 				*(pos14_7f4c00*) (u + 0xbc) = gm_GameTime;
 				gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 0xf, 0);
 				return;

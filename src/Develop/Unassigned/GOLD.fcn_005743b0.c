@@ -5,8 +5,8 @@
 
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 
-int __cdecl fcn_005743b0(char* a)
+int __cdecl he_HasZigeunerAction0x9f(char* entity)
 {
-	return he_StartHandlungSearch(2, 0, 0x9f, 2, *(unsigned short*) a) != 0;
+	return he_StartHandlungSearch(2, 0, 0x9f, 2, *(unsigned short*) entity) != 0;
 }
 

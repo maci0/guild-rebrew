@@ -4,7 +4,7 @@ extern char g_6b5c60[];
 extern char g_6811b0[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004b4650(char*, int);
+void __cdecl gm_IncrementMissionActionCount(char*, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 char* __cdecl fcn_004fda30(int);
 int __cdecl fcn_004e4ae0(char*, int);
@@ -46,10 +46,10 @@ void __cdecl fcn_004e2090(int event)
 		return;
 	}
 	if (((char*) entity1)[2] == 6) {
-		fcn_004b4650((char*) entity1, 0x28);
+		gm_IncrementMissionActionCount((char*) entity1, 0x28);
 	}
 	if (((char*) entity2)[2] == 6) {
-		fcn_004b4650((char*) entity2, 0x28);
+		gm_IncrementMissionActionCount((char*) entity2, 0x28);
 	}
 	cut_EventLoopFlags = 0x702c6;
 	d2_SuppressOverlay = 1;

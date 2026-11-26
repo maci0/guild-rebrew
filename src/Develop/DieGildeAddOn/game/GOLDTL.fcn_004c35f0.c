@@ -3,8 +3,8 @@ extern int g_772e6c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 double __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_004c3100(char*, int);
-void __cdecl fcn_004c3030(int, int, char*, int);
+int __cdecl sb_LoadLocalizedSampleBank(char*, int);
+void __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* Aggregates the city records by vote state, averages a weighted random score
@@ -30,7 +30,7 @@ void __cdecl fcn_004c35f0(void)
 		return;
 	}
 	if (g_772e6c == 0) {
-		g_772e6c = fcn_004c3100((char*) 0x68a674, 0);
+		g_772e6c = sb_LoadLocalizedSampleBank((char*) 0x68a674, 0);
 	}
 	for (p = (int*) 0x7e4260; (int) p < 0x7e42e0; p++) {
 		if (*p == 0) {
@@ -67,15 +67,15 @@ void __cdecl fcn_004c35f0(void)
 			return;
 		}
 		if (average == 0) {
-			fcn_004c3030(loudId, g_772e6c, (char*) 0x68a968, -1);
+			d3snd_PlaySoundEffect(loudId, g_772e6c, (char*) 0x68a968, -1);
 			return;
 		}
 		if (average == 1) {
-			fcn_004c3030(loudId, g_772e6c, (char*) 0x68a958, -1);
+			d3snd_PlaySoundEffect(loudId, g_772e6c, (char*) 0x68a958, -1);
 			return;
 		}
 		if (average >= 2) {
-			fcn_004c3030(loudId, g_772e6c, (char*) 0x68a94c, -1);
+			d3snd_PlaySoundEffect(loudId, g_772e6c, (char*) 0x68a94c, -1);
 			return;
 		}
 		return;
@@ -83,19 +83,19 @@ void __cdecl fcn_004c35f0(void)
 	if (quietId == 0xffff) {
 no_representative:
 		quietId = -5;
-		fcn_004c3030(quietId, g_772e6c, (char*) 0x68a958, -1);
+		d3snd_PlaySoundEffect(quietId, g_772e6c, (char*) 0x68a958, -1);
 		return;
 	}
 	if (average == 0) {
-		fcn_004c3030(quietId, g_772e6c, (char*) 0x68a968, -1);
+		d3snd_PlaySoundEffect(quietId, g_772e6c, (char*) 0x68a968, -1);
 		return;
 	}
 	if (average == 1) {
-		fcn_004c3030(quietId, g_772e6c, (char*) 0x68a958, -1);
+		d3snd_PlaySoundEffect(quietId, g_772e6c, (char*) 0x68a958, -1);
 		return;
 	}
 	if (average >= 2) {
-		fcn_004c3030(quietId, g_772e6c, (char*) 0x68a94c, -1);
+		d3snd_PlaySoundEffect(quietId, g_772e6c, (char*) 0x68a94c, -1);
 		return;
 	}
 	return;

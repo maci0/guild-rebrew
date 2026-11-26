@@ -20,7 +20,7 @@ void __cdecl fcn_005ab810(char*, int);
 void __cdecl d2_OpenBeichteDialog(char*);
 void __cdecl fcn_005aaf60(char*);
 
-void __cdecl fcn_005acc80(char* e, int a2)
+void __cdecl d2_RunKircheMenu(char* e, int msg)
 {
 	int predigt;
 	int weih;
@@ -32,7 +32,7 @@ void __cdecl fcn_005acc80(char* e, int a2)
 	predigt = 0;
 	weih = 0;
 	fcn_005338a0();
-	while (main_RunFrameLoop((void*) fcn_005acc80, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunKircheMenu, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			predigt = RegisterStatusText("contact_PREDIGT", g_14ab954, 0x16);
 			weih = RegisterStatusText("ob_WEIHWASSERBECKEN", g_14ab8f4, 0x16);
@@ -51,7 +51,7 @@ void __cdecl fcn_005acc80(char* e, int a2)
 				if (g_7746a0 == predigt) {
 					fcn_005ac2d0(e);
 				} else if (g_7746a0 == weih) {
-					fcn_005ab810(e, a2);
+					fcn_005ab810(e, msg);
 				}
 			}
 			if (*(unsigned short*) (e + 0x27) != g_774970) {
@@ -62,7 +62,7 @@ void __cdecl fcn_005acc80(char* e, int a2)
 					fcn_005aaf60(e);
 				}
 				if (g_7746a0 == weih) {
-					fcn_005ab810(e, a2);
+					fcn_005ab810(e, msg);
 				}
 			}
 		} else if (g_14cf950 == 0x30 && g_774800 != 0) {

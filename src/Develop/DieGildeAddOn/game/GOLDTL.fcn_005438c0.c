@@ -95,7 +95,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00402220(int);
 void __cdecl nt_ConnectTcp(int, int);
-void __cdecl fcn_004c3d50(void);
+void __cdecl cm_ResetCommandQueue(void);
 int __cdecl fcn_005926f0(void);
 void __cdecl fcn_0053f4c0(void);
 void __cdecl d2_SetForm(int, int);
@@ -106,7 +106,7 @@ void __cdecl gm_CreateSetupFamily(void);
 void __cdecl fcn_0053fa80(void);
 void __cdecl fcn_0053f720(void);
 void __cdecl fcn_00538220(void);
-void __cdecl fcn_00512500(void);
+void __cdecl init_AllocateKind0bSceneSlot(void);
 void __cdecl gm_InitCityAndTradeState(unsigned char);
 void __cdecl init_LocalData(void);
 void __cdecl fcn_00515340(unsigned char);
@@ -156,7 +156,7 @@ void __cdecl m_FreeTracked(void*);
 void __cdecl ls_LoadSavePreview(char*);
 void __cdecl ls_SaveGame(char*, char*, int);
 void __cdecl fcn_005bd820(void);
-void __cdecl fcn_00592630(void);
+void __cdecl d2_InitDefaultBookmarks(void);
 void __cdecl fcn_00514f10(void);
 void __cdecl fcn_00514fc0(void);
 void __cdecl fcn_005e2510(void);
@@ -282,7 +282,7 @@ void __cdecl fcn_005438c0(int a0)
 			return;
 		}
 	}
-	fcn_004c3d50();
+	cm_ResetCommandQueue();
 	if (g_7747b0 & 0x44) {
 		d2_SuppressOverlay = 0;
 		if (fcn_005926f0() != 0) {
@@ -364,7 +364,7 @@ void __cdecl fcn_005438c0(int a0)
 		fcn_0052a890(gm_GameTime);
 		g_7e4314 = fcn_0052a310(gm_GameTime);
 	}
-	fcn_00512500();
+	init_AllocateKind0bSceneSlot();
 	if (g_7747b0 & 1) {
 		if (!(g_7747b0 & 4)) {
 			r3.x = 0;
@@ -402,7 +402,7 @@ void __cdecl fcn_005438c0(int a0)
 	if ((g_7747b0 & 1) && (!(g_7747b0 & 0x40))) {
 		fcn_00514f10();
 		fcn_00514fc0();
-		fcn_00592630();
+		d2_InitDefaultBookmarks();
 	}
 	fcn_005e2510();
 	fcn_00438da0((float) (g_6a376c - g_6a3764),

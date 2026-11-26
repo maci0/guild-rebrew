@@ -4,7 +4,7 @@
 int __cdecl fcn_004c4330(char*);
 char* __cdecl fcn_0064d530(char*, char*, int);
 
-int __cdecl fcn_004c5040(int a, int b, short c, char d, int e, char f, char g, char* s1, char* s2)
+int __cdecl cm_SendAllocClientSpieler(int a, int b, short c, char d, int e, char f, char g, char* s1, char* s2)
 {
 	char buf[0x9c];
 

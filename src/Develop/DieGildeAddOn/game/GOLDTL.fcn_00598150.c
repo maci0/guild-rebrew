@@ -7,7 +7,7 @@ extern char** g_779148;
 extern int g_67a370;
 
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, int);
-char __cdecl fcn_00598050(char* e, char* pfx);
+char __cdecl d3_CollectPrefixSceneObjects(char* e, char* pfx);
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
@@ -26,7 +26,7 @@ void __cdecl d3_CollectUnusedSceneObjects(int a1, char** list)
 
 	g_774a40 = 0;
 	g_779148 = list;
-	d3_VisitSceneObjects(g_67a370, 0, 0x180, (void*) fcn_00598050, a1);
+	d3_VisitSceneObjects(g_67a370, 0, 0x180, (void*) d3_CollectPrefixSceneObjects, a1);
 	for (i = 0; i < g_774a40; i++) {
 		e = g_779148[i];
 		if (e == 0) {

@@ -6,35 +6,35 @@ extern Card_1007ce0 g_1007ce0[24];
 
 /* ADDRESS: GOLD 0x004a76d0 */
 /* ADDRESS: GOLDTL 0x004a77f0 */
-int __cdecl fcn_004a77f0(int* h, int skipFirstTwo)
+int __cdecl gm_GetHighestCard(int* hand, int skipFirstTwo)
 {
-	int s;
+	int start;
 	int best;
 	int i;
 	int rank;
 	int suit;
 
-	s = skipFirstTwo ? 2 : 0;
-	best = h[s];
+	start = skipFirstTwo ? 2 : 0;
+	best = hand[start];
 	if (best < 0) {
 		return -1;
 	}
-	i = s + 1;
-	if (h[i] < 0) {
+	i = start + 1;
+	if (hand[i] < 0) {
 		return best;
 	}
 	rank = g_1007ce0[best].rank;
 	suit = g_1007ce0[best].suit;
 	for (; i < 5; i++) {
-		if (h[i] < 0) {
+		if (hand[i] < 0) {
 			break;
 		}
-		if (g_1007ce0[h[i]].rank > rank) {
-			best = h[i];
+		if (g_1007ce0[hand[i]].rank > rank) {
+			best = hand[i];
 			rank = g_1007ce0[best].rank;
 			suit = g_1007ce0[best].suit;
-		} else if (g_1007ce0[h[i]].rank == rank && g_1007ce0[h[i]].suit > suit) {
-			best = h[i];
+		} else if (g_1007ce0[hand[i]].rank == rank && g_1007ce0[hand[i]].suit > suit) {
+			best = hand[i];
 			suit = g_1007ce0[best].suit;
 		}
 	}

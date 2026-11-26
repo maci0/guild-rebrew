@@ -13,8 +13,8 @@ int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5);
 int __cdecl gm_RandomMod(int);
 float __cdecl gm_GetEntitySkill(char* entity, int idx);
 int __cdecl fcn_005c6270(char* a1, int a2);
-void __cdecl fcn_005b2350(void* a1, void* a2);
-void __cdecl fcn_005b2310(void* a1);
+void __cdecl he_NotifyAction0x35Blocked(void* a1, void* a2);
+void __cdecl he_NotifyAction0x35Success(void* a1);
 
 #include "client_types.h"
 
@@ -81,10 +81,10 @@ void __cdecl fcn_0054c240(u8* o)
     if (fcn_005c6270(r, 0x15c) != 0) {
         *(pos14_7f4c00*) d = gm_GameTime;
         *((u32*)(o + 0x84)) = (u32)fcn_004c5620(-1, o);
-        fcn_005b2350(r, (void*)(0x7f4ca0 + 540 * (u32)*(u16*)(o + 8)));
+        he_NotifyAction0x35Blocked(r, (void*)(0x7f4ca0 + 540 * (u32)*(u16*)(o + 8)));
         return;
     }
 
-    fcn_005b2310(r);
+    he_NotifyAction0x35Success(r);
     *((u32*)(o + 0x84)) = (u32)fcn_004c5620(0, o);
 }

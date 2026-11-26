@@ -15,7 +15,7 @@ void __cdecl fcn_00545410(void);
 void __cdecl fcn_00545420(void);
 int __cdecl he_RegisterEventHandlers(void);
 int __cdecl he_RegisterActionHandlers(void);
-int __cdecl fcn_00575710(void);
+int __cdecl he_RegisterCoreActionHandlers(void);
 int __cdecl fcn_005780b0(void);
 int __cdecl fcn_0056d4c0(void);
 int __cdecl fcn_00576ae0(void);
@@ -36,7 +36,7 @@ int __cdecl he_InitEventSystem(void)
 	if (he_RegisterActionHandlers() != 0) {
 		return 1;
 	}
-	if (fcn_00575710() != 0) {
+	if (he_RegisterCoreActionHandlers() != 0) {
 		return 1;
 	}
 	if (fcn_005780b0() != 0) {

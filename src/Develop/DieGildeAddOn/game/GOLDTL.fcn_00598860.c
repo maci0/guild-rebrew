@@ -5,7 +5,7 @@ void __cdecl fcn_00438b40(char*, float*);
 void __cdecl fcn_004143b0(char*, int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 
-void __cdecl fcn_00598860(char* obj, float* pos)
+void __cdecl d3_SetObjectGroundPosition(char* obj, float* pos)
 {
 	float v[4];
 

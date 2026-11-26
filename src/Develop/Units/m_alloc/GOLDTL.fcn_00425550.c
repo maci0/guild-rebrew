@@ -12,7 +12,7 @@ int __cdecl fcn_0064d3f8(void);
 int __cdecl msx_AllocateSampleHandle(int handle, void* out);
 void __cdecl fcn_0042a7c0(int handle);
 void __cdecl msx_StartSample(int handle);
-int __cdecl fcn_0042a5d0(int handle, char* flag, void* data, int size);
+int __cdecl msx_SetSampleData(int handle, char* flag, void* data, int size);
 int __cdecl fcn_00423920(char* path);
 int __cdecl fcn_00423b80(char* name);
 int __cdecl fcn_00424700(char* name);
@@ -71,7 +71,7 @@ int __cdecl fcn_00425550(char* name, char* ext)
 		} else {
 			found = ".mp3";
 		}
-		result = fcn_0042a5d0((int) g_6b7d80, found, g_6b7d84, size);
+		result = msx_SetSampleData((int) g_6b7d80, found, g_6b7d84, size);
 		if (result == 0) {
 			msx_StartSample((int) g_6b7d80);
 			fcn_0064e1fd(file);

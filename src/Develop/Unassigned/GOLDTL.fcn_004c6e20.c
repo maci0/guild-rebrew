@@ -1,6 +1,6 @@
 #include <string.h>
 
-int __cdecl fcn_004be340(char *p);
+int __cdecl rt_CountRoutePoints(char *p);
 int __cdecl fcn_004c4df0(unsigned short n, void *src);
 int __cdecl fcn_004c4330(void *buf);
 
@@ -16,7 +16,7 @@ void __cdecl fcn_004c6e20(char *record, char *head)
     char *src;
 
     p = head;
-    count = fcn_004be340(p);
+    count = rt_CountRoutePoints(p);
     buf[0] = 0x68;
     *(int *)(buf + 0x10) = *(int *)(record + 2);
     *(int *)(buf + 0x14) = count;

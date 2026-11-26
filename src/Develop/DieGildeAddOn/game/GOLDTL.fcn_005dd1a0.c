@@ -33,7 +33,7 @@ int __cdecl fcn_005c6270(unsigned char*, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
-int __cdecl fcn_005dd1a0(unsigned char* obj, int* arg)
+int __cdecl gm_ObjGrantAffinity25(unsigned char* obj, int* arg)
 {
 	Req req;
 	char text[0x100];

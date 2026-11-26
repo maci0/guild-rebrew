@@ -5,7 +5,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00471e30(int);
-void __cdecl fcn_004116d0(void);
+void __cdecl io_ClearInputState(void);
 int __cdecl main_RunFrameLoop(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* g_1015ea0;
@@ -98,6 +98,6 @@ int __cdecl fcn_004bea00(int ctx, RouteNode* list)
 		}
 	}
 	fcn_00471e30(menu);
-	fcn_004116d0();
+	io_ClearInputState();
 	return result;
 }

@@ -20,7 +20,7 @@ extern Tabs_7e43a8 g_7e43a8;
 int __cdecl fcn_005e8d00(void* stream);
 int __cdecl fcn_004ef770(void* stream, int version);
 
-int __cdecl fcn_005255b0(void* x)
+int __cdecl ls_LoadTabAndWeatherState(void* x)
 {
 	int i;
 

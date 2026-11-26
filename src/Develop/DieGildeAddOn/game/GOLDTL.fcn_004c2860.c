@@ -25,7 +25,7 @@ extern unsigned char* lpGebaeudePROT;
 extern pos14_7f4c00 gm_GameTime;
 extern IdGroup g_688118[];
 
-int __cdecl fcn_004c27f0(void);
+int __cdecl msx_FindActiveGroup(void);
 int __cdecl fcn_004c2820(int);
 int __cdecl fcn_00500e20(int*);
 void __cdecl fcn_004c2100(void);
@@ -94,7 +94,7 @@ void __cdecl fcn_004c2860(void)
 		if (tp_msx_CurrentTrack->active != 0 || tp_msx_CurrentTrack->b105 != 0) {
 			goto check;
 		}
-		slot = fcn_004c27f0();
+		slot = msx_FindActiveGroup();
 		if (slot >= 0) {
 			idx = slot * 0x114;
 			*(char*) (0x68822a + idx) = 0;
@@ -130,7 +130,7 @@ check:
 		return;
 	}
 restart:
-	slot = fcn_004c27f0();
+	slot = msx_FindActiveGroup();
 	g_772e58 = g_7746c4 != 0 ? g_7746c4 : g_7746c8;
 	g_772e5c = cc;
 	thr = g_688118[slot].score;

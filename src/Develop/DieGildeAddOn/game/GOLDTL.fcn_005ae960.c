@@ -33,24 +33,24 @@ void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00526120(int, int);
 void __cdecl d2_RunEntfuehrungDialog(void);
 
-void __cdecl fcn_005ae960(char* a)
+void __cdecl d2_StartEntfuehrungDialog(char* building)
 {
 	Req req;
 	char text[0x40];
 	char* p;
 	char* q;
 
-	if (fcn_00525fb0(a) != 0) {
+	if (fcn_00525fb0(building) != 0) {
 		return;
 	}
 	for (p = he_StartHandlungSearch(1, 0, 0x3c); p != 0; p = he_fn_Handlung()) {
-		if (*(int*) (p + 0xb4) == *(int*) (a + 1)) {
+		if (*(int*) (p + 0xb4) == *(int*) (building + 1)) {
 			fcn_00526120(g_14aba0c, 0);
 			return;
 		}
 	}
 	for (p = he_StartHandlungSearch(1, 0, 0x3d); p != 0; p = he_fn_Handlung()) {
-		if (*(int*) (p + 0xb0) == *(int*) (a + 1)) {
+		if (*(int*) (p + 0xb0) == *(int*) (building + 1)) {
 			q = gm_LookupEntityRecordById(*(int*) (p + 0xac));
 			if (q != 0 && (unsigned char) q[0x1b1] > 0) {
 				fcn_00526120(g_14aba0c, 0);
@@ -67,7 +67,7 @@ void __cdecl fcn_005ae960(char* a)
 	req.c = (*(int*)&g_666018);
 	req.d = g_66601c;
 	io_FormatTextBuffer(text, 0x19b8);
-	fcn_0052a0c0(a, 0);
+	fcn_0052a0c0(building, 0);
 	fcn_005cd440(&req, text, 0, (void*) d2_RunEntfuehrungDialog);
 	fcn_0052a2d0();
 	fcn_00532ef0();

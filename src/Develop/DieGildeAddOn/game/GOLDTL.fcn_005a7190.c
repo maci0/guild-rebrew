@@ -20,7 +20,7 @@ void __cdecl fcn_005cd440(Query*, char*, int, void*);
 void __cdecl fcn_005a6e90(void);
 void __cdecl fcn_00532ef0(void);
 
-void __cdecl fcn_005a7190(void)
+void __cdecl d2_SelectWealthOverviewTarget(void)
 {
 	Query q;
 	char buf[0x40];

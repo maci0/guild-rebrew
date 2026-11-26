@@ -13,7 +13,7 @@ void __cdecl fcn_00545d40(int, int, int, char*, int, int);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c4670(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c51a0(int, int, char, int);
 int __cdecl fcn_004c5da0(int, int, int, int, int, char*);
@@ -82,7 +82,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 				if (pkt != 0) {
 					entity = gm_GetEntityTableEntry((char*) v4);
 					cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
-					fcn_004c4670(4, 1, 0x69, (void*) (action + 0xb4));
+					cm_AppendPacketFieldValue(4, 1, 0x69, (void*) (action + 0xb4));
 					fcn_004c5360();
 					if (entity != 0)
 						*(int*) (entity + 0x20) += *(int*) (action + 0xb4);
@@ -125,7 +125,7 @@ done_case1:
 					fcn_004c5da0(*(int*) ((char*) v3 + 4), v[2], v[0], 0, 0,
 					    "L\xf6segeld");
 				cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
-				fcn_004c4670(4, 1, 0x69, (void*) (action + 0xb4));
+				cm_AppendPacketFieldValue(4, 1, 0x69, (void*) (action + 0xb4));
 				fcn_004c5360();
 				entity = gm_GetEntityTableEntry((char*) v4);
 				if (entity != 0)

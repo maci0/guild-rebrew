@@ -7,7 +7,7 @@ extern COLOR_OCTREE_NODE* g_6b6f20[6];
 extern int g_6b6308;
 extern unsigned char g_6b6008[3][0x100];
 
-void __cdecl fcn_0041c3b0(int n, int level)
+void __cdecl d3_AssignOctreePalette(int n, int level)
 {
 	int i;
 	unsigned int cnt;
@@ -18,7 +18,7 @@ void __cdecl fcn_0041c3b0(int n, int level)
 	if (g_6b6f20[level][n].mask != 0) {
 		for (i = 7; i >= 0; i--) {
 			if (g_6b6f20[level][n].mask & (1 << i)) {
-				fcn_0041c3b0(n * 8 + i, level + 1);
+				d3_AssignOctreePalette(n * 8 + i, level + 1);
 			}
 		}
 	}

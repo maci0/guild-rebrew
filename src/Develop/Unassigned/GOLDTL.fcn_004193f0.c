@@ -3,27 +3,27 @@
 void __cdecl fcn_00423670(char* obj, int a, int b);
 
 
-int __cdecl fcn_004193f0(char* obj, void* label, int mode, float amount)
+int __cdecl d3snd_PlayObjectSound(char* voice, void* object, int volume, float range)
 {
 	SOUND_SOURCE req;
 	double scaled;
 
-	if (obj == 0 || label == 0) {
+	if (voice == 0 || object == 0) {
 		return 0;
 	}
-	scaled = amount * g_662b40;
-	req.objekt = label;
+	scaled = range * g_662b40;
+	req.objekt = object;
 	req.playbackControl = 1;
-	req.voice = obj;
-	*(int*) (obj + 0xc) = 1;
-	*(int*) (obj + 0x14) = 0;
-	req.volume = mode;
+	req.voice = voice;
+	*(int*) (voice + 0xc) = 1;
+	*(int*) (voice + 0x14) = 0;
+	req.volume = volume;
 	req.range = (float)scaled;
 	d3_UpdateSoundSourcePan(&req);
 	d3_UpdateSoundSourceVolume(&req);
-	if (*(int*) (obj + 0x24) == 0) {
+	if (*(int*) (voice + 0x24) == 0) {
 		return 0;
 	}
-	fcn_00423670(obj, 0, 0);
+	fcn_00423670(voice, 0, 0);
 	return 1;
 }

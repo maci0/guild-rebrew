@@ -16,7 +16,7 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-int __cdecl fcn_004c2db0(int, int);
+int __cdecl d3snd_SelectVoiceCode(int, int);
 char* __cdecl d2_RunSeance(char*, char*);
 unsigned short* __cdecl fcn_004f65a0(ENTITY_RECORD*, int, int*, int*);
 float __cdecl fcn_004f4770(char*);
@@ -49,7 +49,7 @@ void __cdecl d2_RunSeanceDialog(char* e, char* res)
 	int cnt;
 	float f;
 
-	fcn_004c2db0(*(int*) (res + 0x14), *(int*) (res + 0x4c));
+	d3snd_SelectVoiceCode(*(int*) (res + 0x14), *(int*) (res + 0x4c));
 	m = d2_RunSeance(e, res);
 	p = fcn_004f65a0(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 4, list, &cnt);
 	b = p == 0;
@@ -64,7 +64,7 @@ void __cdecl d2_RunSeanceDialog(char* e, char* res)
 	fcn_005340f0(d2_CurrentWindowId);
 	g_100f1dc = -1;
 	d2_SetForm(h, 1);
-	t = fcn_004c2db0(*(int*) (res + 0x14), *(int*) (res + 0x4c));
+	t = d3snd_SelectVoiceCode(*(int*) (res + 0x14), *(int*) (res + 0x4c));
 	if (b == 0) {
 		for (i = 0; i < cnt; i++) {
 			fcn_004c58b0(list[i], ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);

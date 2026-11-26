@@ -28,12 +28,12 @@ void __cdecl fcn_00533880(void);
 void __cdecl fcn_00475220(void* p);
 void __cdecl fcn_00533a40(void* p);
 void __cdecl fcn_0042def0(void* p);
-void __cdecl fcn_004298e0(void);
+void __cdecl evt_CloseAllScripts(void);
 void __cdecl fcn_0044c440(int p);
 void __cdecl fcn_004c09b0(void);
-void __cdecl fcn_00418f50(void);
+void __cdecl d3snd_StopAllObjectSounds(void);
 void __cdecl fcn_004230e0(int p);
-void __cdecl fcn_004b1f80(void);
+void __cdecl hst_ResetHistoryState(void);
 void __cdecl fcn_004b3b60(void);
 void __cdecl he_FreeAllActions(void);
 void __cdecl d2_ClearActionPopupSlots(void);
@@ -52,7 +52,7 @@ void __cdecl fcn_00510930(void);
 void __cdecl fcn_005c80d0(void);
 void __cdecl fcn_004bbd50(void);
 void __cdecl fcn_004c3e30(void);
-void __cdecl fcn_00402320(void);
+void __cdecl nt_CloseBroadcastSocket(void);
 void __cdecl nt_CloseClientConnection(void);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 
@@ -70,13 +70,13 @@ void __cdecl fcn_0053fa80(void)
 	d2_SuppressOverlay = 1;
 	fcn_0042def0(&g_538060);
 	g_772f3c = 0;
-	fcn_004298e0();
+	evt_CloseAllScripts();
 	if (g_7749cc != 0) {
 		fcn_0044c440(g_7749cc);
 	}
 	if (g_774934 != 0) {
 		fcn_004c09b0();
-		fcn_00418f50();
+		d3snd_StopAllObjectSounds();
 		if (g_7747bc != 0) {
 			fcn_004230e0(g_7747bc);
 			g_7747bc = 0;
@@ -92,7 +92,7 @@ void __cdecl fcn_0053fa80(void)
 			g_6b5c2c = 0;
 		}
 	}
-	fcn_004b1f80();
+	hst_ResetHistoryState();
 	fcn_004b3b60();
 	he_FreeAllActions();
 	d2_ClearActionPopupSlots();
@@ -136,7 +136,7 @@ void __cdecl fcn_0053fa80(void)
 	fcn_005c80d0();
 	fcn_004bbd50();
 	fcn_004c3e30();
-	fcn_00402320();
+	nt_CloseBroadcastSocket();
 	nt_CloseClientConnection();
 	g_77497c = 0;
 	d2_SetOverlayAnimation(0, 0);

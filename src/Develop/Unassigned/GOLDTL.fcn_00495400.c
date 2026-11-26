@@ -30,7 +30,7 @@ typedef struct {
 
 extern char g_1008540[];
 
-int __cdecl fcn_00495150(int);
+int __cdecl ai_IsMethodActive(int);
 void __cdecl fcn_00495120(int);
 void __cdecl fcn_00495140(void);
 
@@ -62,7 +62,7 @@ int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Pos *out1, Pos *out2)
 	me = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
 	primarySecond.valid = 0;
 	secondarySecond.valid = 0;
-	if (fcn_00495150(who) != 0) {
+	if (ai_IsMethodActive(who) != 0) {
 		return 0;
 	}
 	if (me->unk_218 == 0) {
@@ -70,7 +70,7 @@ int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Pos *out1, Pos *out2)
 	}
 	for (i = 0; i < 73; i++) {
 		pl = &((AM_METHOD*)g_1008540)[i];
-		if (pl->type == 0 || pl->type == me->unk_132 || fcn_00495150(pl->type) != 0) {
+		if (pl->type == 0 || pl->type == me->unk_132 || ai_IsMethodActive(pl->type) != 0) {
 			continue;
 		}
 		fcn_00495120(pl->type);

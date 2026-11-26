@@ -5,7 +5,7 @@ extern char g_7f4ca4[];
 
 
 void* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004ae080(char*, char*, char**, int*);
+void __cdecl hst_SplitFormatPrefix(char*, char*, char**, int*);
 int __cdecl atoi(char*);
 int __cdecl fcn_004ae0f0(int);
 int __cdecl fcn_004ae260(int);
@@ -15,11 +15,11 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
  * addresses the 0x200 scratch buffer off ebp; section 13 of
  * archived docs/msvc6-c-shapes.md. */
 #pragma optimize("y", off)
-int __cdecl fcn_004afa10(int selectionMode, int a2, int a3, char* a4, int a5)
+int __cdecl hst_HandleRndNpcEinwohner(int selectionMode, int pairs, int idx, char* text, int out)
 {
 	char buf[0x200];
 	char* entityRecord = 0;
-	int v2 = 0;
+	int wantGender = 0;
 	int n = 0x200;
 	char* p = buf;
 	char* slotCursor;
@@ -51,11 +51,11 @@ int __cdecl fcn_004afa10(int selectionMode, int a2, int a3, char* a4, int a5)
 	{
 		int len;
 
-		fcn_004ae080(a4, buf, &p, &len);
+		hst_SplitFormatPrefix(text, buf, &p, &len);
 		if (len != 1) {
 			return 0;
 		}
-		parsedOption = atoi(a4 + (int) p);
+		parsedOption = atoi(text + (int) p);
 	}
 	if (parsedOption < 0 || parsedOption > 2) {
 		return 0;
@@ -64,10 +64,10 @@ int __cdecl fcn_004afa10(int selectionMode, int a2, int a3, char* a4, int a5)
 	if (parsedOption == 0) {
 		flag = 0;
 	} else {
-		v2 = (parsedOption != 1);
+		wantGender = (parsedOption != 1);
 	}
 	if (selectionMode == 1) {
-		entityRecord = (char*) gm_LookupEntityRecordById(*(int*) ((char*) a2 + a3 * 8 + 4));
+		entityRecord = (char*) gm_LookupEntityRecordById(*(int*) ((char*) pairs + idx * 8 + 4));
 		if (entityRecord == 0 || *(unsigned char*) (entityRecord + 8) <= 0) {
 			return 0;
 		}
@@ -77,7 +77,7 @@ int __cdecl fcn_004afa10(int selectionMode, int a2, int a3, char* a4, int a5)
 		while ((int) slotCursor < (int) (g_7f4ca4 + 0x65400)) {
 			if (fcn_004ae0f0(*(int*) slotCursor) != 0) {
 				entityRecord = slotCursor - 4;
-				if (flag == 0 || *(unsigned char*) (slotCursor + 5) == v2) {
+				if (flag == 0 || *(unsigned char*) (slotCursor + 5) == wantGender) {
 					if (fcn_004ae260(i) != 0) {
 						break;
 					}
@@ -92,8 +92,8 @@ int __cdecl fcn_004afa10(int selectionMode, int a2, int a3, char* a4, int a5)
 		}
 	}
 	if (selectionMode == 0) {
-		*(int*) ((char*) a2 + a3 * 8 + 4) = *(int*) ((char*) entityRecord + 4);
+		*(int*) ((char*) pairs + idx * 8 + 4) = *(int*) ((char*) entityRecord + 4);
 	}
-	io_FormatTextBuffer((void*) a5, (int) buf, *(unsigned short*) entityRecord);
+	io_FormatTextBuffer((void*) out, (int) buf, *(unsigned short*) entityRecord);
 	return 1;
 }

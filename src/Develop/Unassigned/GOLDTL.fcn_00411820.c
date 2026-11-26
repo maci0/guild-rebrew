@@ -65,10 +65,10 @@ extern char g_6772f8[];
 extern char g_6772d8[];
 
 HRESULT __stdcall DirectInput8Create(HINSTANCE hinst, DWORD version, const void* iid, void** out, void* outer);
-void __cdecl fcn_00411780(int a1, int a2, char* fmt, ...);
+void __cdecl io_FormatInputError(int a1, int a2, char* fmt, ...);
 
 
-int __cdecl fcn_00411590(void);
+int __cdecl io_BuildKeyTranslateTable(void);
 
 int __cdecl fcn_00411820(HWND hwnd, HINSTANCE hinst, int flags)
 {
@@ -81,30 +81,30 @@ int __cdecl fcn_00411820(HWND hwnd, HINSTANCE hinst, int flags)
 	hr = DirectInput8Create(hinst, 0x800, g_66cdb0, (void**) &g_14cf954, 0);
 	if (hr < 0) {
 		if (hr == 0x80070481) {
-			fcn_00411780(0, hr, g_67747c);
+			io_FormatInputError(0, hr, g_67747c);
 			return 0;
 		}
 		if (hr == 0x80070057) {
-			fcn_00411780(0, hr, g_67745c);
+			io_FormatInputError(0, hr, g_67745c);
 			return 0;
 		}
 		if (hr == 0x8007047e) {
-			fcn_00411780(0, hr, g_67743c);
+			io_FormatInputError(0, hr, g_67743c);
 			return 0;
 		}
 		if (hr == 0x8007000e) {
-			fcn_00411780(0, hr, g_67741c);
+			io_FormatInputError(0, hr, g_67741c);
 		}
 		return 0;
 	}
 	hr = g_14cf954->vtbl->CreateDevice(g_14cf954, g_66cc50, &g_14ce8a0, 0);
 	if (hr < 0) {
-		fcn_00411780(0, hr, g_677404);
+		io_FormatInputError(0, hr, g_677404);
 		return 0;
 	}
 	hr = g_14ce8a0->vtbl->SetDataFormat(g_14ce8a0, g_6711b4);
 	if (hr < 0) {
-		fcn_00411780(0, hr, g_6773e0);
+		io_FormatInputError(0, hr, g_6773e0);
 		return 0;
 	}
 	if (flags & 2) {
@@ -114,16 +114,16 @@ int __cdecl fcn_00411820(HWND hwnd, HINSTANCE hinst, int flags)
 	}
 	if (hr != 0) {
 		if (hr == 0x80070057) {
-			fcn_00411780(0, hr, g_6773b4);
+			io_FormatInputError(0, hr, g_6773b4);
 		} else if (hr == 0x80070015) {
-			fcn_00411780(0, hr, g_677380);
+			io_FormatInputError(0, hr, g_677380);
 		} else {
-			fcn_00411780(0, hr, g_677354);
+			io_FormatInputError(0, hr, g_677354);
 		}
 	}
 	hr = g_14ce8a0->vtbl->SetEventNotification(g_14ce8a0, 0);
 	if (hr != 0) {
-		fcn_00411780(0, hr, g_677334);
+		io_FormatInputError(0, hr, g_677334);
 		return 0;
 	}
 	dipdw.dwSize = sizeof(PropDword);
@@ -133,21 +133,21 @@ int __cdecl fcn_00411820(HWND hwnd, HINSTANCE hinst, int flags)
 	dipdw.dwData = 0x80;
 	hr = g_14ce8a0->vtbl->SetProperty(g_14ce8a0, (const void*) 1, &dipdw);
 	if (hr < 0) {
-		fcn_00411780(0, hr, g_677318);
+		io_FormatInputError(0, hr, g_677318);
 		return 0;
 	}
-	fcn_004117c0(1);
+	io_AcquireKeyboard(1);
 	*(short*) g_14ce920 = 200;
 	g_14ce922 = 200;
 	g_14ce924 = 0;
 	hr = g_14cf954->vtbl->CreateDevice(g_14cf954, g_66cc40, &g_14ce90c, 0);
 	if (hr < 0) {
-		fcn_00411780(0, hr, g_6772f8);
+		io_FormatInputError(0, hr, g_6772f8);
 		return 0;
 	}
 	hr = g_14ce90c->vtbl->SetDataFormat(g_14ce90c, g_670fac);
 	if (hr < 0) {
-		fcn_00411780(0, hr, g_6772d8);
+		io_FormatInputError(0, hr, g_6772d8);
 		return 0;
 	}
 	if (flags & 1) {
@@ -166,7 +166,7 @@ int __cdecl fcn_00411820(HWND hwnd, HINSTANCE hinst, int flags)
 	if (g_14ce90c->vtbl->SetProperty(g_14ce90c, (const void*) 1, &dipdw) < 0) {
 		return 0;
 	}
-	fcn_004117f0(1);
-	fcn_00411590();
+	io_AcquireMouse(1);
+	io_BuildKeyTranslateTable();
 	return 1;
 }

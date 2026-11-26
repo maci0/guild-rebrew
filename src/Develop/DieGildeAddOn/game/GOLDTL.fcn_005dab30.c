@@ -9,7 +9,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
-void __cdecl fcn_005dab30(unsigned short* who, char* e)
+void __cdecl amt_ApplyOfficeSupportEffect(unsigned short* who, char* e)
 {
 	int n;
 	OFFICE_SLOT list[6];

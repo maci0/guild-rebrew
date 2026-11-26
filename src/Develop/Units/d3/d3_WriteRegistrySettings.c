@@ -1,7 +1,7 @@
 #include <string.h>
-int __cdecl fcn_004112b0(int, int);
+int __cdecl io_OpenRegistryKey(int, int);
 void __cdecl fcn_00411500(int, char*, int);
-void __cdecl fcn_00411520(int, char*, char*);
+void __cdecl io_WriteRegistryString(int, char*, char*);
 void __cdecl fcn_00411550(int, char*, int);
 void __cdecl fcn_00411340(int);
 
@@ -14,7 +14,7 @@ void __cdecl d3_WriteRegistrySettings(int a1, int a2, int a3, int a4, int a5, in
 	char buf[0x100];
 	int sectionId;
 
-	sectionId = fcn_004112b0(sectionName, 2);
+	sectionId = io_OpenRegistryKey(sectionName, 2);
 	if (sectionId == -1) {
 		return;
 	}
@@ -44,7 +44,7 @@ void __cdecl d3_WriteRegistrySettings(int a1, int a2, int a3, int a4, int a5, in
 		lodText[0] = *(char*) 0x6b5c60;
 		break;
 	}
-	fcn_00411520(sectionId, (char*) 0x67b11c, lodText);
+	io_WriteRegistryString(sectionId, (char*) 0x67b11c, lodText);
 	fcn_00411550(sectionId, (char*) 0x67b10c, a16);
 	fcn_00411550(sectionId, (char*) 0x67b0f8, a17);
 	fcn_00411550(sectionId, (char*) 0x67b0e4, a18);

@@ -13,7 +13,7 @@ int __cdecl gm_FindRecordById(int);
 char __cdecl fcn_00506380(int, int, int, int);
 void __cdecl fcn_00591c30(Slot*);
 
-void __cdecl fcn_00591c80(void)
+void __cdecl d2_PruneBookmarkSlots(void)
 {
 	int i;
 	int x;

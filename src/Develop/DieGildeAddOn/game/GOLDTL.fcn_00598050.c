@@ -13,7 +13,7 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 #include "client_scene_transform.h"
 
-char __cdecl fcn_00598050(char* e, char* pfx)
+char __cdecl d3_CollectPrefixSceneObjects(char* e, char* pfx)
 {
 	float pa[4];
 	float pb[4];

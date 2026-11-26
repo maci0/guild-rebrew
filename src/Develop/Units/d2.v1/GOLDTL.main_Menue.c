@@ -52,7 +52,7 @@ int __cdecl fcn_0064d3f8(void);
 int __cdecl msx_StartTrack(char *, int);
 void __cdecl fcn_00473150(int);
 void __cdecl msx_SetFadeDuration(int);
-void __cdecl fcn_0042a070(void);
+void __cdecl evt_ResetCurrentContextId(void);
 int __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl d2_OpenFileSelector(int, int, char *, char *, char *, char *);
@@ -105,7 +105,7 @@ void __cdecl main_Menue(void)
 	main_PumpWindowMessages();
 	fcn_00412630();
 	*(unsigned char*) &g_14cf950 = 0;
-	fcn_0042a070();
+	evt_ResetCurrentContextId();
 	v4 = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, (char *)0x67d67c, 0, 1);
 	while ((*(unsigned char *)v4 & 4) == 0) {
 		main_RunFrameLoop(0, 0x24087);

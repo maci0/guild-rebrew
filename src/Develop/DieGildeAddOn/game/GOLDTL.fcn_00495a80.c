@@ -11,7 +11,7 @@ typedef struct {
 } Out495a80;
 
 int __cdecl ai_SelectBestMethod(int, int, int, Out495a80*, Out495a80*);
-int __cdecl fcn_004fa5b0(int, char*, int*);
+int __cdecl gm_CheckPrivilege(int, char*, int*);
 int __cdecl fcn_004f97a0(int); /* 0x4fbd20, metadata name is stale */
 int __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -68,7 +68,7 @@ int __cdecl fcn_00495a80(int a0, char* actorEntity, int a2, char* a3, char* a4)
 			buf[k] = 0;
 		}
 		buf[0] = 1;
-		r = fcn_004fa5b0(keep[i], actorEntity, buf);
+		r = gm_CheckPrivilege(keep[i], actorEntity, buf);
 		f = (r & 2) ? (-1.0f) : 0.0f;
 		if (*(unsigned char*) (actorEntity + i + 0x80) < 0x2a) {
 			slot = 1;
@@ -106,7 +106,7 @@ int __cdecl fcn_00495a80(int a0, char* actorEntity, int a2, char* a3, char* a4)
 		if (action.count[i] == 0) {
 			action.count[i] = 0xfc;
 		}
-		r = fcn_004fa5b0(keep[i], actorEntity, buf);
+		r = gm_CheckPrivilege(keep[i], actorEntity, buf);
 		f = (r & 2) ? (-1.0f) : 0.0f;
 		if (*(unsigned char*) (actorEntity + 0x80 + i) < 0x2a) {
 			weight[i] = 1;

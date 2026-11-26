@@ -27,7 +27,7 @@ typedef struct {
 Mod* __cdecl he_StartHandlungSearch(int, int, int, ...);
 Mod* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_005c6270(void*, int);
-int __cdecl fcn_00577ab0(Unit*);
+int __cdecl he_HasNoActiveAction0x9b(Unit*);
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
@@ -98,7 +98,7 @@ float __cdecl gm_GetEntitySkill(char* entity, int skill_index)
 		}
 	}
 	skill_value = MAX(MIN(skill_value, 1.0f), 0.0f);
-	if (fcn_00577ab0(entity_view) == 0) {
+	if (he_HasNoActiveAction0x9b(entity_view) == 0) {
 		if (fcn_005c6270(entity_view, 0x2c4) == 0) {
 			return skill_value * 0.5f;
 		}

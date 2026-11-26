@@ -16,7 +16,7 @@ void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl fcn_005cf560(char*);
 
-void __cdecl fcn_005acb30(char* e)
+void __cdecl d2_RunSchreibstubeMenu(char* e)
 {
 	int meister;
 	int lager;
@@ -30,7 +30,7 @@ void __cdecl fcn_005acb30(char* e)
 	personal = 0;
 	transport = 0;
 	fcn_005338a0();
-	while (main_RunFrameLoop((void*) fcn_005acb30, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunSchreibstubeMenu, 0x67fff) != 0) {
 		fcn_00597ec0(e);
 		if (g_7746d8 & 0x200) {
 			prod = RegisterStatusText("contact_PRODUKTION_SCHREIBEN", g_14ad1d8, 0x13);

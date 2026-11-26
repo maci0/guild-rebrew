@@ -39,7 +39,7 @@ void __cdecl fcn_00418d70(SOUND_SOURCE* source);
 void __cdecl d3_UpdateSoundSourcePan(SOUND_SOURCE* source);
 void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source);
 
-int __cdecl fcn_004193f0(char* obj, void* label, int mode, float amount);
+int __cdecl d3snd_PlayObjectSound(char* obj, void* label, int mode, float amount);
 
 void __cdecl PlayEntitySound(char* cmd);
 

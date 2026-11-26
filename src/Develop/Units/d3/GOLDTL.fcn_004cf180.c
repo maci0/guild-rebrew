@@ -7,12 +7,12 @@ extern float g_664ed4;           /* 170.0 */
 extern double g_6629c8;          /* 1.0 */
 
 int __cdecl fcn_004ce590(int a1);
-int* __cdecl fcn_004234e0(char* bank, const char* name, int loop, int pan,
+int* __cdecl sb_PlayVoice(char* bank, const char* name, int loop, int pan,
                           int vol, int a, int b);
 int __cdecl fcn_00418000(int a1, float* pos, int n, float a4, float a5,
                          float a6, float a7, float a8, float a9, float* a10,
                          int a11, int a12, int a13);
-int __cdecl fcn_004185a0(int a1, float* pos, int n, float a4, float a5,
+int __cdecl d3_SpawnRockDebrisEffect(int a1, float* pos, int n, float a4, float a5,
                          float a6, float a7, float a8, float a9, float a10,
                          float a11, int a12);
 int __cdecl fcn_00417d00(int a1, float* pos, int n, float a4, float a5,
@@ -55,7 +55,7 @@ int __cdecl fcn_004cf180(void)
                 v[5] = 0.0f;
                 v[6] = 38.0f;
                 v[7] = 0.0f;
-                fcn_004234e0(g_772ec4, "kampf/bauch_greifen", 1, 0x3f, 0x7f,
+                sb_PlayVoice(g_772ec4, "kampf/bauch_greifen", 1, 0x3f, 0x7f,
                              0, 0);
                 obj = *p;
                 v[0] = *(float*) (obj + 0x4c);
@@ -68,7 +68,7 @@ int __cdecl fcn_004cf180(void)
                 fcn_00418000(0, v, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f,
                              140.0f, 35.0f, &v[4], 0x190, 6,
                              *(int*) color);
-                fcn_004185a0(0, v, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f,
+                d3_SpawnRockDebrisEffect(0, v, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f,
                              4.0f, 7.0f, 8.0f, *(int*) color);
                 fcn_00417d00(0, v, 0x1e, 120.0f, 80.0f, 20.0f, 60.0f, 0x3c);
                 for (q = (int*) 0x7e4260; (int) q < 0x7e42e0; q++) {

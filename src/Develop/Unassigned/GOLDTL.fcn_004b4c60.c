@@ -1,6 +1,6 @@
 void __cdecl gm_SummarizeBuildingOwnership(int, void*);
 
-struct stat_4b4c60 {
+struct BUILDING_OWNERSHIP_SUMMARY {
 	int value;
 	int count;
 	float ratio;
@@ -9,9 +9,9 @@ struct stat_4b4c60 {
 
 
 /* ADDRESS: GOLDTL 0x004b4c60 */
-int __cdecl fcn_004b4c60(int a1, char* a2)
+int __cdecl gm_HasBuildingGroupMonopoly(int unused_id, char* thr)
 {
-	struct stat_4b4c60 s;
+	struct BUILDING_OWNERSHIP_SUMMARY s;
 	int sum;
 
 	gm_SummarizeBuildingOwnership(0x15, &s);
@@ -38,5 +38,5 @@ int __cdecl fcn_004b4c60(int a1, char* a2)
 	if (s.count > 0 && s.ratio < 1.0f)
 		return 0;
 	sum += s.value;
-	return sum >= *(int*) (a2 + 0x14);
+	return sum >= *(int*) (thr + 0x14);
 }

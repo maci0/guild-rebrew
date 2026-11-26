@@ -46,7 +46,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c91c0(int, int, int, int, int);
 int __cdecl fcn_004f4830(int, Stat5bfd*);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
-int __cdecl fcn_004fa5b0(int, unsigned short*, int*);
+int __cdecl gm_CheckPrivilege(int, unsigned short*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -94,7 +94,7 @@ void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 	memset(q, 0, sizeof(q));
 	q[0] = 1;
 	d2_SetForm(h, 3);
-	if (fcn_004fa5b0(0x16, e, q) & 2) {
+	if (gm_CheckPrivilege(0x16, e, q) & 2) {
 		io_AppendText(0x174a);
 	}
 	g_100f1dc = -1;

@@ -4,7 +4,7 @@ extern int g_6b5d54;
 extern int g_6b5da8;
 extern char str_6776b8[];
 
-int __cdecl fcn_004193d0(char*);
+int __cdecl d3snd_GetObjectVoiceStatus(char*);
 void __cdecl fcn_004225e0(int, int);
 int __cdecl fcn_00422460(int, char*);
 char* __cdecl fcn_0064d530(char*, char*, int);
@@ -19,7 +19,7 @@ unsigned int __cdecl fcn_00419640(int sampleIndex, int* cacheSlot)
 	which = *cacheSlot;
 	switch (which) {
 	case 1:
-		if (!fcn_004193d0((char*) 0x6b5d20)) {
+		if (!d3snd_GetObjectVoiceStatus((char*) 0x6b5d20)) {
 			if (g_6b5d54 != 0) {
 				fcn_004225e0(g_6b5d54, 0);
 			}
@@ -41,7 +41,7 @@ unsigned int __cdecl fcn_00419640(int sampleIndex, int* cacheSlot)
 		r = 0x6b5d20;
 		goto done;
 		break;	case 0:
-		if (fcn_004193d0((char*) 0x6b5d74)) {
+		if (d3snd_GetObjectVoiceStatus((char*) 0x6b5d74)) {
 			if (strcmp((char*) 0x6b5d74, (str_6776b8 + sampleIndex * 0x19)) != 0) {
 				goto done;
 			}
@@ -64,13 +64,13 @@ unsigned int __cdecl fcn_00419640(int sampleIndex, int* cacheSlot)
 		goto done;
 		break;
 	case -1:
-		if (fcn_004193d0((char*) 0x6b5d20)) {
+		if (d3snd_GetObjectVoiceStatus((char*) 0x6b5d20)) {
 			if (strcmp((char*) 0x6b5d20, (str_6776b8 + sampleIndex * 0x19)) == 0) {
 				*cacheSlot = 0;
 				r = 0x6b5d20;
 				return r;
 			}
-			if (!fcn_004193d0((char*) 0x6b5d74)) {
+			if (!d3snd_GetObjectVoiceStatus((char*) 0x6b5d74)) {
 				if (g_6b5da8 != 0) {
 					fcn_004225e0(g_6b5da8, 0);
 				}

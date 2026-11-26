@@ -3,7 +3,7 @@
 
 void __cdecl ai_FilterCandidateLimit(int, int, int);
 
-void __cdecl fcn_004b4730(char* a1, int a2, int* a3)
+void __cdecl ai_FilterRankCandidateLimit(char* entity, int holder, int* spec)
 {
-	ai_FilterCandidateLimit(a2, (unsigned char) a1[0xd] >= a3[5], a3[6]);
+	ai_FilterCandidateLimit(holder, (unsigned char) entity[0xd] >= spec[5], spec[6]);
 }

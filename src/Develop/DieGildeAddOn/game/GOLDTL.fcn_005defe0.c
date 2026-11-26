@@ -28,7 +28,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 char* __cdecl fcn_005c6220(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005defe0(char* ent, int* arg)
+int __cdecl gm_ObjTriggerRandomCrime(char* ent, int* arg)
 {
 	int ok;
 	int tmp;

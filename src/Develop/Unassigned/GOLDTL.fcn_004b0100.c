@@ -14,7 +14,7 @@ extern char* gm_CityEntity;
 
 void __cdecl fcn_004c5530(void*);
 
-int __cdecl fcn_004b0100(void)
+int __cdecl hst_CmdBrand(void)
 {
 	char m[0xf8];
 

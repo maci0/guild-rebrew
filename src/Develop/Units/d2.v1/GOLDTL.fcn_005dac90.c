@@ -21,7 +21,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_005dab30(char*, char*);
+void __cdecl amt_ApplyOfficeSupportEffect(char*, char*);
 void __cdecl fcn_00526120(int, int);
 unsigned short* __cdecl fcn_005cd440(Query*, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -55,7 +55,7 @@ int __cdecl fcn_005dac90(char* e, char* o)
 		if (p[0x166] == 0) {
 			return 0x60;
 		}
-		fcn_005dab30(e, p);
+		amt_ApplyOfficeSupportEffect(e, p);
 		return 0x10;
 	}
 	r = 2;
@@ -82,7 +82,7 @@ int __cdecl fcn_005dac90(char* e, char* o)
 	do {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				fcn_005dab30(e, (char*) h);
+				amt_ApplyOfficeSupportEffect(e, (char*) h);
 				r = 0x91;
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == cancel) {

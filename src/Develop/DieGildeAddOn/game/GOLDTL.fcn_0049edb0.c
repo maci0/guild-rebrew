@@ -27,7 +27,7 @@ void __cdecl fcn_004c4ef0(char* s);
 void __cdecl fcn_004c5150(int a, int b, char c, int n);
 void __cdecl fcn_004c5530(char* msg);
 
-void __cdecl fcn_004c4670(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 
 int __cdecl ai_RunKreditNehmen(char* actor, char* action, char* terms)
@@ -61,7 +61,7 @@ int __cdecl ai_RunKreditNehmen(char* actor, char* action, char* terms)
 			fcn_004c5530(msg);
 			if (p2 != 0) {
 				cm_BeginPacketFieldDelta(p2, *(int*) (p2 + 1));
-				fcn_004c4670(4, 1, p2 - g_aed32c + 0x39, &v);
+				cm_AppendPacketFieldValue(4, 1, p2 - g_aed32c + 0x39, &v);
 				fcn_004c5360();
 			}
 			fcn_004c4ef0(g_67eb48);

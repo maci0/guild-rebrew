@@ -1,8 +1,8 @@
 #include <string.h>
 
-int __cdecl fcn_004112b0(const char* sub, int mode);
+int __cdecl io_OpenRegistryKey(const char* sub, int mode);
 void __cdecl fcn_00411500(int, const char*, int);
-void __cdecl fcn_00411520(int, const char*, char*);
+void __cdecl io_WriteRegistryString(int, const char*, char*);
 void __cdecl fcn_00410430(int);
 
 
@@ -13,7 +13,7 @@ void __cdecl d3_SaveDisplayOptions(unsigned char flags, int fill, const char* ke
 	int h;
 	char mode[0x100];
 
-	h = fcn_004112b0(key, 2);
+	h = io_OpenRegistryKey(key, 2);
 	if (h == -1) {
 		return;
 	}
@@ -32,7 +32,7 @@ void __cdecl d3_SaveDisplayOptions(unsigned char flags, int fill, const char* ke
 		strcpy(mode, "");
 		break;
 	}
-	fcn_00411520(h, "d3d_fillmode", mode);
+	io_WriteRegistryString(h, "d3d_fillmode", mode);
 	fcn_00411500(h, "d3_mirrors", flags & 1);
 	fcn_00411500(h, "d3d_shadows", (flags >> 2) & 7);
 	fcn_00411500(h, "d3d_registry_version", 3);

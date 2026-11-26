@@ -16,7 +16,7 @@ void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl fcn_005cf560(char*);
 
-void __cdecl fcn_0059e5f0(char* e)
+void __cdecl d2_RunTischlereiInteriorHud(char* e)
 {
 	int prod;
 	int lager;
@@ -30,7 +30,7 @@ void __cdecl fcn_0059e5f0(char* e)
 	transport = 0;
 	personal = 0;
 	fcn_005338a0();
-	while (main_RunFrameLoop((void*) fcn_0059e5f0, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunTischlereiInteriorHud, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			prod = RegisterStatusText("contact_PRODUKTION_TISCHLER", g_14ad278, 0x13);
 		}

@@ -35,13 +35,13 @@ extern char g_6a89dc[];
 
 extern char g_6a8784[];
 extern int g_774a00;
-int __cdecl fcn_004c3100(char*, int);
+int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 int* __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_00580cf0(int*);
-void __cdecl fcn_0057ecf0(void);
+void __cdecl d2_IsTutorialStepAllowed(void);
 void __cdecl fcn_0057ed60(void);
 void __cdecl fcn_0057edf0(void);
-void __cdecl fcn_005768a0(void);
+void __cdecl d2_CheckTutorialStep0x1a(void);
 void __cdecl fcn_0057ee60(void);
 void __cdecl fcn_0057eea0(void);
 void __cdecl fcn_0057eee0(void);
@@ -99,7 +99,7 @@ int* __cdecl d2_CreateTutorialChapter2(void)
 	p[0x8] = 0;
 	p[0xb] = -1;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_0057ecf0;
+	p[0xf] = (int) d2_IsTutorialStepAllowed;
 	p[0xd] = 0;
 	p[0xe] = 0;
 	p[0x10] = 0;
@@ -149,7 +149,7 @@ int* __cdecl d2_CreateTutorialChapter2(void)
 	p[0xa] = (int) g_6a8968;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_0057ecf0;
+	p[0xf] = (int) d2_IsTutorialStepAllowed;
 	p[0xd] = 0;
 	p[0xe] = (int) fcn_0057f090;
 	p[0x10] = 1;
@@ -297,7 +297,7 @@ int* __cdecl d2_CreateTutorialChapter2(void)
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
 	p[0xd] = 0;
-	p[0xf] = (int) fcn_005768a0;
+	p[0xf] = (int) d2_CheckTutorialStep0x1a;
 	p[0xe] = (int) fcn_0057f1d0;
 	p[0x10] = 1;
 	p[0x11] = 0x2148;
@@ -496,7 +496,7 @@ int* __cdecl d2_CreateTutorialChapter2(void)
 	p[0x1a] = 0x5837;
 	p[0x1b] = 0x1e00;
 	p[0x1c] = 0;
-	g_774a00 = fcn_004c3100(g_6a8784, 0);
+	g_774a00 = sb_LoadLocalizedSampleBank(g_6a8784, 0);
 	return first;
 fail:
 	fcn_00580cf0(first);

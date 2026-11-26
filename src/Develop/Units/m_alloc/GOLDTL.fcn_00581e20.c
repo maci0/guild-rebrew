@@ -17,7 +17,7 @@ extern int g_1040494;
 
 void* __cdecl m_alloc(int, char*);
 void __cdecl fcn_00580cf0(int*);
-int __cdecl fcn_004c3100(char*, int);
+int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 
 #pragma optimize("y", off)
 
@@ -936,6 +936,6 @@ fail:
 	p[0x1a] = 0x5837;
 	p[0x1b] = 0x1f70;
 	p[0x1c] = 0x0;
-	*(int*) 0x774a04 = fcn_004c3100((char*) 0x6a8a00, 0x0);
+	*(int*) 0x774a04 = sb_LoadLocalizedSampleBank((char*) 0x6a8a00, 0x0);
 	return (TaskNode*) first;
 }

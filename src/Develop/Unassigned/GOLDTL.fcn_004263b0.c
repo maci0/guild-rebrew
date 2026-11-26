@@ -7,7 +7,7 @@ extern char* evt_CurrentScript;
 #define BASE (*(char**) (evt_CurrentScript + 0x11c))
 #define LEN (*(int*) (evt_CurrentScript + 0x120))
 
-int __cdecl fcn_004263b0(char dir)
+int __cdecl evt_SkipBlock(char dir)
 {
 	int depth;
 

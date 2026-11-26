@@ -524,6 +524,7 @@ done_walk:
 
 char* __cdecl GetDebugRecordByIndex(char* arg1, unsigned int arg2);
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 unsigned char __cdecl EmitCrashModuleLine(int* st)
 {
 	int* mod;
@@ -601,6 +602,7 @@ found:
 	}
 	return 1;
 }
+#endif
 
 /* The crash-log strings from 0x10027318 to 0x1002733c.  They follow
  * CrashDumpUnhandledExceptionFilter.c's two separator literals, which that
@@ -633,6 +635,7 @@ char* __cdecl GetDebugRecordByIndex(char* arg1, unsigned int arg2)
  * readable. Returns 1 if the protection includes read access. */
 
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 char __cdecl check_memory_protection(unsigned int protect)
 {
 	MEMORY_BASIC_INFORMATION mbi;
@@ -651,6 +654,7 @@ char __cdecl check_memory_protection(unsigned int protect)
 	}
 	return 0;
 }
+#endif
 
 /* Analyzes an x86 instruction at the given address to determine
  * its length and type. Used by the crash dump handler to decode

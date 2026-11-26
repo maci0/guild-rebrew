@@ -11,7 +11,7 @@ extern char* txt_TextEntries[];
 
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 int __cdecl atoi(const char* s);
-void __cdecl fcn_004b2020(int n);
+void __cdecl hst_ResetHistoryGroup(int n);
 
 /* ADDRESS: GOLDTL 0x004b24c0 */
 Slot* __cdecl hst_ParseCommandline_1st_Pass(int id)
@@ -103,7 +103,7 @@ Slot* __cdecl hst_ParseCommandline_1st_Pass(int id)
 	if (n > -1 && n < 4) {
 		slot = &((Slot*)g_1007bc0)[n];
 		if (set) {
-			fcn_004b2020(n);
+			hst_ResetHistoryGroup(n);
 		}
 		return slot;
 	}

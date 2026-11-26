@@ -3,7 +3,7 @@
 #include "client_types.h"
 void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl m_FreeTracked(void*);
-int __cdecl fcn_00412eb0(int, int);
+int __cdecl d3_FindSceneObjectByName(int, int);
 char __cdecl fcn_00442c00(char*, char);
 char* __cdecl fcn_00446e10(char*, float*, float*, char*);
 void __cdecl fcn_00453270(char*);
@@ -12,7 +12,7 @@ void __cdecl fcn_00474d80(int, void*, void*);
 void __cdecl fcn_00474e70(int);
 void __cdecl fcn_004754c0(int, int);
 void __cdecl fcn_00437060(int);
-SOUND_VOICE* __cdecl fcn_004234e0(char*, const char*, int, int, int, int, int);
+SOUND_VOICE* __cdecl sb_PlayVoice(char*, const char*, int, int, int, int, int);
 
 /* ADDRESS: GOLD 0x0052f390 */
 char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)
@@ -29,7 +29,7 @@ char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)
     if (book == 0) {
         return 0;
     }
-    object = (char*)fcn_00412eb0(model, 1);
+    object = (char*)d3_FindSceneObjectByName(model, 1);
     *(char**)book = object;
     if (object == 0) {
         m_FreeTracked(book);
@@ -76,6 +76,6 @@ char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)
             fcn_00437060(0);
         }
     }
-    fcn_004234e0(*(char**)0x6f240c, "Aufklappen_s", 1, 0x3f, 0x7f, 0, 0);
+    sb_PlayVoice(*(char**)0x6f240c, "Aufklappen_s", 1, 0x3f, 0x7f, 0, 0);
     return book;
 }

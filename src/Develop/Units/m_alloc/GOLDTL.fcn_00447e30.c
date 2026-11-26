@@ -58,7 +58,7 @@ int __cdecl vfs_ReadByte(char*, char*);
 int __cdecl fcn_004011f0(char*, int*);
 int __cdecl fcn_004011d0(char*, float*);
 int __cdecl ReadVfsFourDwords(char*, void*);
-int __cdecl fcn_00401280(char*, void*);
+int __cdecl vfs_ReadVec3(char*, void*);
 int __cdecl bio_rd_array_quick(char*, int, int*);
 void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
@@ -210,7 +210,7 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 		}
 		obj = fcn_0043fa10((char*) &desc);
 		if (version >= 0x3a6c000e) {
-			fcn_00401280(stream, tri);
+			vfs_ReadVec3(stream, tri);
 			if (obj != 0) {
 				*(int*) (obj + 0x50) = tri[0];
 				*(int*) (obj + 0x54) = tri[1];

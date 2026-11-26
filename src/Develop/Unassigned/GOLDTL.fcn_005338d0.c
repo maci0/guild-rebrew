@@ -17,7 +17,7 @@ extern s_7e46c0 g_7e46c0[32];
 extern char g_6a3110[];
 extern char g_6a30e4[];
 
-char* __cdecl fcn_00412eb0(char* name, int mode);
+char* __cdecl d3_FindSceneObjectByName(char* name, int mode);
 
 char* __cdecl RegisterStatusText(char* name, char* path, int arg)
 {
@@ -39,7 +39,7 @@ char* __cdecl RegisterStatusText(char* name, char* path, int arg)
 		sprintf(buf, g_6a3110, name);
 		return 0;
 	}
-	((Cache*)g_7e46c0)[i].obj = fcn_00412eb0(name, 2);
+	((Cache*)g_7e46c0)[i].obj = d3_FindSceneObjectByName(name, 2);
 	if (((Cache*)g_7e46c0)[i].obj == 0) {
 		sprintf(buf, g_6a30e4, name);
 		return 0;

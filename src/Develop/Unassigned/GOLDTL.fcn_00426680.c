@@ -22,8 +22,8 @@ int __cdecl evt_MatchTokenPrefix(char*, char*);
 void* __cdecl evt_FindSymbol(char*, char*);
 int __cdecl evt_ClassifyScriptType(char*);
 void* __cdecl evt_FindDefinition(char*, char*);
-void* __cdecl fcn_00429e60(char*);
-void* __cdecl fcn_00426240(char*, char*);
+void* __cdecl evt_FindCommand(char*);
+void* __cdecl evt_FindChildScript(char*, char*);
 
 
 /* Lexes the next token of the script text at s. */
@@ -150,12 +150,12 @@ void __cdecl evt_ReadToken(char* s, struct tok_426680* t)
 			t->u.sym = p;
 			return;
 		}
-		if ((p = fcn_00429e60(buf)) != 0) {
+		if ((p = evt_FindCommand(buf)) != 0) {
 			t->type = 4;
 			t->u.sym = p;
 			return;
 		}
-		if ((p = fcn_00426240(evt_CurrentScript, buf)) != 0) {
+		if ((p = evt_FindChildScript(evt_CurrentScript, buf)) != 0) {
 			t->type = 0xb;
 			t->u.sym = p;
 			return;

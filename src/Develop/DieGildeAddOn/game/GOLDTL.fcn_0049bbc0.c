@@ -12,7 +12,7 @@ extern float g_10099d0[8];
 
 unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
 float* __cdecl fcn_005c61e0(int id);
-int __cdecl fcn_005dbf10(char* e, Req* r);
+int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049bbc0 */
 int __cdecl fcn_0049bbc0(char* e, int* p, int* q)
@@ -30,7 +30,7 @@ int __cdecl fcn_0049bbc0(char* e, int* p, int* q)
 		r.s = s;
 		r.id = q[1];
 		r.arg = q[2];
-		if (fcn_005dbf10(e, &r) == 1) {
+		if (gm_UseSpecialObject(e, &r) == 1) {
 			if (r.dir == 1) {
 				g_10099d0[0] = g_1008574[q[4] * 37 + 0] * d[3];
 				g_10099d0[2] = g_1008574[q[4] * 37 + 2] * d[3];

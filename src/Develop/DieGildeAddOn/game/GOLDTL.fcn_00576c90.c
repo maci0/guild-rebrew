@@ -13,14 +13,14 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-int __cdecl fcn_005779e0(char*, char*, int);
-int __cdecl fcn_00577890(char*, char*, int);
+int __cdecl gm_ApplyAssassinDamage(char*, char*, int);
+int __cdecl gm_RecordAssassinEvidence(char*, char*, int);
 int __cdecl gm_GetElapsedMinutes(char*, char*);
 int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 void __cdecl fcn_004c57e0(int, int);
 void __cdecl fcn_004c5c80(int);
-int __cdecl fcn_00577af0(int, char*);
-char* __cdecl fcn_00577d00(char*, char*, int);
+int __cdecl he_TryTriggerAction0x9b(int, char*);
+char* __cdecl he_FindNearestAction0x18(char*, char*, int);
 int __cdecl fcn_00577e70(char*, char*, char*);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl fcn_004a5e60(unsigned short*, int, int, int, float, float, int*);
@@ -104,7 +104,7 @@ void __cdecl fcn_00576c90(char* e)
 		if (h != 0 && q != 0 && r != 0) {
 			switch (*(int*) (e + 0xbc)) {
 			case 1:
-				if (fcn_005779e0(h, q, *(int*) (e + 0xc0)) != 0) {
+				if (gm_ApplyAssassinDamage(h, q, *(int*) (e + 0xc0)) != 0) {
 					io_FormatTextBuffer(text, (char*) 0x4004, *(unsigned short*) q);
 					fcn_00545d40(*(int*) (h + 4), -1, text, 1, 0x5fa, (char*) 0x6a7e78);
 					io_FormatTextBuffer(text, (char*) 0x4006, *(int*) (e + 0xc0) + 0x4007);
@@ -117,7 +117,7 @@ void __cdecl fcn_00576c90(char* e)
 				}
 				break;
 			case 2:
-				if (fcn_00577890(h, q, *(int*) (e + 0xc0)) != 0) {
+				if (gm_RecordAssassinEvidence(h, q, *(int*) (e + 0xc0)) != 0) {
 					io_FormatTextBuffer(text, (char*) 0x4019, (char*) 0x400c, *(unsigned short*) q, *(unsigned short*) q);
 					fcn_00545d40(*(int*) (h + 4), -1, text, 1, 0x5fa, 0);
 				} else {
@@ -133,7 +133,7 @@ void __cdecl fcn_00576c90(char* e)
 				*(int*) (e + 0x84) = fcn_004c5620(4, e);
 				goto done;
 			case 4:
-				fcn_00577af0(*(int*) (r + 1), q);
+				he_TryTriggerAction0x9b(*(int*) (r + 1), q);
 				break;
 			}
 		}
@@ -190,7 +190,7 @@ void __cdecl fcn_00576c90(char* e)
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			goto minus_one;
 		}
-		r = fcn_00577d00(h, q, *(int*) (e + 0xc4));
+		r = he_FindNearestAction0x18(h, q, *(int*) (e + 0xc4));
 		if (r != 0) {
 			*(int*) (e + 0xac) = *(int*) (r + 0xb4);
 			*(int*) (e + 0xc4) = *(int*) (r + 4);

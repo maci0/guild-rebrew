@@ -16,14 +16,14 @@ typedef struct
 extern __int64 g_666018;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004946f0(char*, char*, int);
+int __cdecl gm_CalcBecircenFavor(char*, char*, int);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl fcn_005cd440(Query*, char*, int, void*);
 int __cdecl d2_ShowBecircenDialog(unsigned short*);
 
-int __cdecl fcn_005d70c0(char* e, char* o)
+int __cdecl gm_HandleBecircen(char* e, char* o)
 {
 	int r;
 	int n;
@@ -41,7 +41,7 @@ int __cdecl fcn_005d70c0(char* e, char* o)
 			return 0x60;
 		}
 		n = *(int*) (o + 4);
-		v = fcn_004946f0(e, p, n);
+		v = gm_CalcBecircenFavor(e, p, n);
 		fcn_004c6ae0(*(int*) (e + 4), -n);
 		fcn_004c54c0(*(int*) (e + 4), *(int*) (p + 4), v, 1);
 		return 0x10;

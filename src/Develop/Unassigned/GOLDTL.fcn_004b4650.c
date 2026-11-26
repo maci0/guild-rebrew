@@ -5,16 +5,16 @@ typedef struct {
 	int f0;
 	char pad4[0x18];
 	int f1c;
-} rec20;
+} GM_ACTION_REC;
 // SIZE 0x20
 
-rec20* __cdecl fcn_004b3bc0(int);
+GM_ACTION_REC* __cdecl gm_FindMissionByEntityId(int);
 
-int __cdecl fcn_004b4650(int a1, int kind)
+int __cdecl gm_IncrementMissionActionCount(int entity_id, int kind)
 {
-	rec20* p;
+	GM_ACTION_REC* p;
 
-	p = fcn_004b3bc0(a1);
+	p = gm_FindMissionByEntityId(entity_id);
 	if (p == 0)
 		return 0;
 	switch (kind) {

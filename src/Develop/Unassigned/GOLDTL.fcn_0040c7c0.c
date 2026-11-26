@@ -3,7 +3,7 @@ int __cdecl ecmd_Dummy();
 int __cdecl fcn_0040c400();
 int __cdecl PrintInt();
 int __cdecl fcn_0040c420();
-int __cdecl fcn_0040c430();
+int __cdecl ecmd_Rnd();
 int __cdecl GetTime();
 int __cdecl RunScript();
 int __cdecl fcn_0040c4c0();
@@ -26,7 +26,7 @@ void __cdecl evt_RegisterCoreCommands(void)
 	evt_ImportCommand("Print", fcn_0040c400, 5, 1, 6);
 	evt_ImportCommand("PrintInt", PrintInt, 5, 1, 1);
 	evt_ImportCommand("PrintFloat", fcn_0040c420, 5, 1, 7);
-	evt_ImportCommand("rnd", fcn_0040c430, 1, 1, 1);
+	evt_ImportCommand("rnd", ecmd_Rnd, 1, 1, 1);
 	evt_ImportCommand("GetTime", GetTime, 1, 0);
 	evt_ImportCommand("RunScript", RunScript, 1, 1, 6);
 	evt_ImportCommand("RunScriptInt", fcn_0040c4c0, 1, 2, 6, 1);

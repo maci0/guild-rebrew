@@ -8,12 +8,12 @@ int __cdecl fcn_00402610(char*);
 float __cdecl fcn_004cefb0(char*, unsigned int);
 unsigned short* __cdecl gm_FindEntityActiveItem(char*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
-void __cdecl fcn_004c4670(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl fcn_004cfc40(char*, int, int);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
-void* __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
+void* __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 int __cdecl fcn_004d4790(char*);
 int* __cdecl fcn_00417b50(int, int, int, int, int, int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
@@ -59,7 +59,7 @@ void __cdecl fcn_004d4950(int a0)
             int v11;
             v11 = -1;
             cm_BeginPacketFieldDelta((char*) v8, *(int*) (v8 + 2));
-            fcn_004c4670(4, 1, (v8 - (int)g_aed32c) + 0x20, &v11);
+            cm_AppendPacketFieldValue(4, 1, (v8 - (int)g_aed32c) + 0x20, &v11);
             fcn_004c5360();
         }
     }
@@ -77,7 +77,7 @@ void __cdecl fcn_004d4950(int a0)
                 fcn_004c30a0(*v4, *(int*) 0x772ef8, (char*) 0x68be54, -1, 500);
             }
         } else if (r > 5) {
-            fcn_004234e0((char*) 0, (char*) 0x68bde4, 1, 0x3f, 0x7f, 0, 0);
+            sb_PlayVoice((char*) 0, (char*) 0x68bde4, 1, 0x3f, 0x7f, 0, 0);
         }
     }
     if (!*(char*) ((char*) v4 + 8)) {
@@ -91,25 +91,25 @@ void __cdecl fcn_004d4950(int a0)
     }
     if (*v7 == 0x156 || *v7 == 0x158) {
         if (v22) {
-            fcn_004234e0(0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
+            sb_PlayVoice(0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
         } else {
-            fcn_004234e0(*(char**) 0x772ed0, (char*) 0x68be34, 1, 0x3f, 0x7f, 0, 0);
+            sb_PlayVoice(*(char**) 0x772ed0, (char*) 0x68be34, 1, 0x3f, 0x7f, 0, 0);
         }
     } else if (*v7 == 0x154 || *v7 == 0x16e || *v7 == 0x172) {
         if (v22) {
-            fcn_004234e0(0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
+            sb_PlayVoice(0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
         } else {
-            fcn_004234e0(*(char**) 0x772ec8, (char*) 0x68be34, 1, 0x3f, 0x7f, 0, 0);
+            sb_PlayVoice(*(char**) 0x772ec8, (char*) 0x68be34, 1, 0x3f, 0x7f, 0, 0);
         }
     } else if (*v7 == 0x15e) {
-        fcn_004234e0(*(char**) 0x772ecc, (char*) 0x68be48, 1, 0x3f, 0x7f, 0, 0);
+        sb_PlayVoice(*(char**) 0x772ecc, (char*) 0x68be48, 1, 0x3f, 0x7f, 0, 0);
     } else {
         if (*v7 == 0x160) {
             if (!v22) goto draw;
         } else if (*v7) {
             goto draw;
         }
-        fcn_004234e0(0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
+        sb_PlayVoice(0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
     }
 draw:
     if (fcn_004d4790((char*) v4)) {

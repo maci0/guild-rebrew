@@ -14,13 +14,13 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c4670(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005b2560(void*, void*);
-void* __cdecl fcn_005b2620(void*, void*);
-void __cdecl fcn_005b24b0(void*, void*);
+int __cdecl he_NotifyFeudDeclared(void*, void*);
+void* __cdecl he_NotifyFeudEscalated(void*, void*);
+void __cdecl he_NotifyFeudEnded(void*, void*);
 
 /* ADDRESS: GOLDTL 0x0047d2a0 */
 int __cdecl fcn_0047d2a0(char* e)
@@ -83,7 +83,7 @@ int __cdecl fcn_0047d2a0(char* e)
 		cm_AppendPacketFieldDelta(1, 1, 0x214, &g_90e0a0[best][*(unsigned short*) e]);
 		fcn_004c5360();
 		fcn_004c54c0(*(int*) (h + 4), *(int*) (e + 4), 0, 2);
-		fcn_005b2560(e, h);
+		he_NotifyFeudDeclared(e, h);
 		return 0;
 	}
 	other = (char*) gm_LookupEntityRecordById(*(int*) (e + 0x210));
@@ -109,7 +109,7 @@ int __cdecl fcn_0047d2a0(char* e)
 	}
 	b = (unsigned char) ((int) gm_RandomMod(2) + 1);
 	cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
-	fcn_004c4670(1, 1, 0x215, &b);
+	cm_AppendPacketFieldValue(1, 1, 0x215, &b);
 	if ((int) (unsigned char) e[0x215] + b > 3) {
 		cm_AppendPacketFieldDelta(1, 1, 0x218, e + 0x217);
 	}
@@ -117,7 +117,7 @@ int __cdecl fcn_0047d2a0(char* e)
 	if ((int) (unsigned char) e[0x215] + b <= 3) {
 		return 0;
 	}
-	fcn_005b2620(e, other);
+	he_NotifyFeudEscalated(e, other);
 	return (int) other;
 
 reset:
@@ -136,7 +136,7 @@ reset:
 	fcn_004c5360();
 	if (other != 0) {
 		fcn_004c54c0(*(int*) (e + 0x210), *(int*) (e + 4), 0x3c, 2);
-		fcn_005b24b0(e, other);
+		he_NotifyFeudEnded(e, other);
 	}
 	return 0;
 
@@ -144,7 +144,7 @@ pulse:
 	b = 1;
 	b2 = 1;
 	cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
-	fcn_004c4670(1, 1, 0x215, &b);
+	cm_AppendPacketFieldValue(1, 1, 0x215, &b);
 	cm_AppendPacketFieldDelta(1, 1, 0x218, &b2);
 	fcn_004c5360();
 	return 0;

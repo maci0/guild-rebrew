@@ -21,7 +21,7 @@ typedef struct {
 extern int g_6b5c94;
 extern int g_14ce920[];
 
-void __cdecl fcn_00411f90(void)
+void __cdecl io_SwapMouseButtons(void)
 {
 	T411f90 t;
 

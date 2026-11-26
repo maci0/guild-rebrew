@@ -36,7 +36,7 @@ void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
-void __cdecl fcn_00598860(int, void*);
+void __cdecl d3_SetObjectGroundPosition(int, void*);
 void __cdecl fcn_004550b0(int, int);
 void __cdecl d3_DestroyObject(int);
 char __cdecl d3_ComputeObjectBoundingSphere(char*, char*, float*, float*);
@@ -132,7 +132,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		angles[1] = fcn_00451380(g_662d40, direction);
 		fcn_00438b40((char*) obj, (int*) vec);
 		d3_SetObjectRotation((char*) obj, (int*) angles);
-		fcn_00598860(obj, vec);
+		d3_SetObjectGroundPosition(obj, vec);
 		if (g_773dd8 != 0) {
 			fcn_004550b0(*(int*)(upgradeBuilding + 0x61), g_773dd8);
 		}

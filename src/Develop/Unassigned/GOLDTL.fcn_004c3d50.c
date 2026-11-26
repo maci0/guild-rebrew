@@ -29,7 +29,7 @@ void __cdecl fcn_004c3f70(void);
 int __cdecl fcn_004c3fa0(void);
 void __cdecl nt_CloseClientConnection(void);
 
-void __cdecl fcn_004c3d50(void)
+void __cdecl cm_ResetCommandQueue(void)
 {
 	int i;
 

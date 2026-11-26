@@ -18,7 +18,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004f2810(char*, unsigned char*, int, int, short, int);
 void __cdecl fcn_005b2db0(struct s_7f4ca0*, char*, unsigned char*, int, int, int);
 
-void __cdecl fcn_0057b070(char* o)
+void __cdecl he_ApplyAction0x92Favor(char* o)
 {
 	unsigned char* e;
 	char* x;

@@ -30,7 +30,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_005dcf40(ENTITY_RECORD* e, int v);
+void __cdecl gm_IncreaseEntitySkill(ENTITY_RECORD* e, int v);
 
 void __cdecl fcn_00551a20(char* t)
 {
@@ -57,8 +57,8 @@ void __cdecl fcn_00551a20(char* t)
 			fcn_004c5620(-1, t);
 			return;
 		}
-		fcn_005dcf40(e, *(unsigned char*) (t + 0xb8));
-		fcn_005dcf40(e, *(unsigned char*) (t + 0xb9));
+		gm_IncreaseEntitySkill(e, *(unsigned char*) (t + 0xb8));
+		gm_IncreaseEntitySkill(e, *(unsigned char*) (t + 0xb9));
 		io_FormatTextBuffer(buf, 0x1a9e, e->entity_index);
 		*(int*) (t + 0x70) = (unsigned char) (++t[0xba]) >= 5;
 		*(short*) (t + 0x56) += 0x18;

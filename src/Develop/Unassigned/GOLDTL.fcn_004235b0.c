@@ -13,7 +13,7 @@ char* __cdecl sb_FindSampleBank(char* sample);
 void __cdecl sb_LoadEntry(char* bank, char* sample);
 int __cdecl fcn_00423670(Voice* v, int a, int b);
 
-Voice* __cdecl fcn_004235b0(char* bank, const char* name, int prio, int loop, int pan, int vol, int a)
+Voice* __cdecl sb_PlayPrioritizedVoice(char* bank, const char* name, int prio, int loop, int pan, int vol, int a)
 {
 	Voice* v;
 	char* s;

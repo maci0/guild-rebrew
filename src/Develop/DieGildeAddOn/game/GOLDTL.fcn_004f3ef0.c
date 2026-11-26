@@ -29,8 +29,8 @@ extern void __cdecl fcn_004c3ff0(void);
 extern void __cdecl fcn_004c4940(void);
 extern void __cdecl cm_ExecCommand(void);
 extern int __cdecl fcn_004c54c0(unsigned int a, unsigned int b, int value, int d);
-extern void __cdecl fcn_005b2d50(int slot, int record, int count, int total);
-extern void __cdecl fcn_005b2c60(int slot, int record);
+extern void __cdecl he_NotifyContractBatch(int slot, int record, int count, int total);
+extern void __cdecl he_NotifyContractDefault(int slot, int record);
 
 extern char g_7f4ca0[];
 extern int __cdecl fcn_004f1850();
@@ -168,8 +168,8 @@ next_entry:
 		fcn_004f2e80(entity, gm_RandomMod(2) + 1);
 	if (home != 0 && (*(char*) (home + 2) == 6 || *(char*) (home + 2) == 7)) {
 		if (count > 0)
-			fcn_005b2d50((int) home, (int) entity, count, total);
+			he_NotifyContractBatch((int) home, (int) entity, count, total);
 		if (hits != 0)
-			fcn_005b2c60((int) home, (int) entity);
+			he_NotifyContractDefault((int) home, (int) entity);
 	}
 }

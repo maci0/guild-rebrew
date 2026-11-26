@@ -8,7 +8,7 @@ int __cdecl vfs_ResolvePath(char* path, int a, int b, char* out);
 int __cdecl fcn_004488e0(char* path, int a, int b);
 void __cdecl fcn_00438b40(int h, void* p);
 void __cdecl d3_SetObjectRotation(int h, void* p);
-void __cdecl fcn_00598860(int h, void* p);
+void __cdecl d3_SetObjectGroundPosition(int h, void* p);
 void __cdecl fcn_00510820(int h, void* p, int n);
 void __cdecl fcn_00597ff0(int id, char* dst);
 int __cdecl lc_GetGebaeudeBauplatz(char* name, void* p);
@@ -84,7 +84,7 @@ load:
 	memset(shortname, 0, sizeof shortname);
 	fcn_00438b40(handle, &pos[0]);
 	d3_SetObjectRotation(handle, request + 0x29);
-	fcn_00598860(handle, pos);
+	d3_SetObjectGroundPosition(handle, pos);
 	fcn_00510820(handle, geb, 2);
 	fcn_00597ff0(*geb, tmp);
 	strcpy(shortname, tmp);

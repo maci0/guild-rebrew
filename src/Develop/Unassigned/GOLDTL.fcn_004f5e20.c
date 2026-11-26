@@ -23,7 +23,7 @@ extern char g_7f4ca0[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004c5870(int id, int v);
-void __cdecl fcn_005b2a00(char* o, char* p);
+void __cdecl he_NotifyStraftatExpired(char* o, char* p);
 
 int __cdecl fcn_004f5e20(int target, int max)
 {
@@ -63,7 +63,7 @@ int __cdecl fcn_004f5e20(int target, int max)
 	}
 	for (r = 0; r < m; r++) {
 		if (flag[r] != 0) {
-			fcn_005b2a00(who[r], p);
+			he_NotifyStraftatExpired(who[r], p);
 		}
 	}
 	return n;

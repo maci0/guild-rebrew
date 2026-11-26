@@ -6,7 +6,7 @@ extern g_6623b0_f g_6623b0;
 
 int __cdecl msx_FindWaveDriverIndex(int);
 
-int __cdecl fcn_0042a0e0(int* audio, int value)
+int __cdecl msx_SetMasterVolume(int* audio, int value)
 {
 	int result = 0;
 

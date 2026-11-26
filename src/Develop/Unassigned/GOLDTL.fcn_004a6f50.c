@@ -21,7 +21,7 @@ void __cdecl fcn_004a7900(void);
 void __cdecl fcn_004a8700(void);
 void __cdecl fcn_004a87b0(void);
 
-short __cdecl fcn_004a6f50(void)
+short __cdecl gm_StepCardGameRound(void)
 {
 	switch (((Seq*)g_1007cd4)->state) {
 	case 0:

@@ -15,11 +15,11 @@ void __cdecl fcn_005b3190(char*, char*, int, int);
 void __cdecl fcn_004eea30(char*, int, float);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_005764a0(char*, int);
+int __cdecl ahm_HasActiveLabFeature(char*, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 
-void __cdecl fcn_00575e10(char* u)
+void __cdecl he_RunAhmRefineRecipe(char* u)
 {
 	int k;
 	char* h;
@@ -37,7 +37,7 @@ void __cdecl fcn_00575e10(char* u)
 	if (*(int*) (u + 0x70) != -2) {
 		t = (unsigned short) gm_GameTime.b;
 		if (!(t >= g_696550[k]) && !(t < g_696540[k])) {
-			if (fcn_005764a0(*(char**) (h + 0x16c), 0x24b) != 0) {
+			if (ahm_HasActiveLabFeature(*(char**) (h + 0x16c), 0x24b) != 0) {
 				*(pos14_7f4c00*) (u + 0xc0) = gm_GameTime;
 				gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 0xf, 0);
 				return;

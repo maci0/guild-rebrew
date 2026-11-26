@@ -9,7 +9,7 @@ extern volatile int g_6b7fac;
 extern int __cdecl fcn_0042aaa0(int a0);
 extern void __cdecl fcn_0042a920(int a0, int a1);
 extern void __cdecl fcn_0042a880(int a0);
-extern void __cdecl fcn_004237f0(void *a0, int a1);
+extern void __cdecl sb_StopVoice(void *a0, int a1);
 extern void __cdecl fcn_00423670(void *a0, int a1, int a2);
 
 typedef struct
@@ -128,7 +128,7 @@ void __cdecl fcn_00422150(void)
                         fcn_0042a920(p->obj,
                             (int)((float)(unsigned int)dt / (unsigned int)g_678dec * (unsigned int)p->speed24));
                     else
-                        fcn_004237f0(p, 0);
+                        sb_StopVoice(p, 0);
                 }
                 i++;
             } while (i < g_6b7e8c);

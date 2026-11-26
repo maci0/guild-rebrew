@@ -14,7 +14,7 @@ int __cdecl gm_QueryEntitySum(int, unsigned char);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_0050d640(int, int, int, char*);
 float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
-int __cdecl fcn_004fa5b0(int, unsigned short*, unsigned int*);
+int __cdecl gm_CheckPrivilege(int, unsigned short*, unsigned int*);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 unsigned short __cdecl gm_RandomMod(int);
 
@@ -91,9 +91,9 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 			memset(v16, 0, 0x220);
 			ratio = 0.3f;
 			v16[0] = 1;
-			if (fcn_004fa5b0(0xf, a1, v16) & 2) {
+			if (gm_CheckPrivilege(0xf, a1, v16) & 2) {
 				ratio = 0.6f;
-			} else if (fcn_004fa5b0(0xb, a1, v16) & 2) {
+			} else if (gm_CheckPrivilege(0xb, a1, v16) & 2) {
 				/* Preserve the native 0x3ee66667 coefficient. */
 				ratio = 0.45000002f;
 			}

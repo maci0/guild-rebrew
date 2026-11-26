@@ -26,7 +26,7 @@ void __cdecl gm_AddTime(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_005b23e0(Rec54a6a0*, int, int);
+void __cdecl he_NotifyThemaPredigt(Rec54a6a0*, int, int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
@@ -86,7 +86,7 @@ void __cdecl fcn_0054a6a0(int a0)
 			v4 = gm_LookupEntityRecordById(*(int*) (v3 + 0x1e));
 			if (v4) {
 				pair.who = (char*) v4;
-				fcn_005b23e0(&g_7f4ca0[*(unsigned short*) (entity + 0x27)], v4, entity);
+				he_NotifyThemaPredigt(&g_7f4ca0[*(unsigned short*) (entity + 0x27)], v4, entity);
 			}
 			cm_BeginPacketFieldDelta(v3, *(int*) (v3 + 2));
 			cm_AppendPacketFieldDelta(1, 1, 0x22, (int*) &v8);

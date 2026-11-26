@@ -10,11 +10,11 @@ void __cdecl fcn_00532ef0(void);
 
 
 /* ADDRESS: GOLDTL 0x005c1090 */
-void __cdecl fcn_005c1090(int a1)
+void __cdecl fcn_005c1090(int enabled)
 {
 	char buf[0x90];
 
-	if (a1 == 0) {
+	if (enabled == 0) {
 		return;
 	}
 	memset(buf, 0, 0x50);

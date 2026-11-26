@@ -8,7 +8,7 @@ extern int g_100f1dc;
 extern char g_14cf950;
 
 int __cdecl fcn_00423460(int);
-void __cdecl fcn_004237f0(int, int);
+void __cdecl sb_StopVoice(int, int);
 
 int __cdecl fcn_00580290(void)
 {
@@ -28,7 +28,7 @@ int __cdecl fcn_00580290(void)
 			if (d2_CurrentElementId == g_665f08[8]) {
 				if (g_665f08[5] != 0) {
 					if (fcn_00423460(g_665f08[5]) != 0) {
-						fcn_004237f0(g_665f08[5], 0);
+						sb_StopVoice(g_665f08[5], 0);
 					}
 					g_665f08[5] = 0;
 				}
@@ -38,7 +38,7 @@ int __cdecl fcn_00580290(void)
 		else if (g_14cf950 == 0x1c) {
 			if (g_665f08[5] != 0) {
 				if (fcn_00423460(g_665f08[5]) != 0) {
-					fcn_004237f0(g_665f08[5], 0);
+					sb_StopVoice(g_665f08[5], 0);
 				}
 				g_665f08[5] = 0;
 			}

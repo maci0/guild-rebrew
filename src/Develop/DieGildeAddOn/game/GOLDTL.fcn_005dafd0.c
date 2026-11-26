@@ -48,7 +48,7 @@ void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
+int __cdecl gm_HandleVerhoer(unsigned char* e, unsigned char* action)
 {
 	int result;
 	int cancel;
@@ -68,7 +68,7 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 		if (*(int*) (e + 0x194) < 8) {
 			return 0x20;
 		}
-		o = gm_LookupEntityRecordById(*(int*) (a2 + 0x214));
+		o = gm_LookupEntityRecordById(*(int*) (action + 0x214));
 		if (o == 0) {
 			return 0x60;
 		}
@@ -133,7 +133,7 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005dafd0, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) gm_HandleVerhoer, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return result;
 }

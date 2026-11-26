@@ -84,7 +84,7 @@ int __cdecl fcn_00504f30(int a, int b);
 int __cdecl he_StartHandlungSearch(int a, int b, int c);
 int __cdecl fcn_005462a0(void);
 void* __cdecl gm_SearchTable67(int a);
-int __cdecl fcn_00508da0(char* ent);
+int __cdecl gm_GetEntityMood(char* ent);
 void __cdecl fcn_004727a0(int a, int b);
 int __cdecl fcn_00519190(int id, ...);
 void __cdecl io_FormatTextBuffer(char* out, int id, ...);
@@ -209,7 +209,7 @@ void __cdecl fcn_005c3f10(char* ent)
 			v.h48 = -1;
 			v.h58 = -1;
 			fcn_004727a0(dlg, 1);
-			v.len = fcn_00508da0(ent);
+			v.len = gm_GetEntityMood(ent);
 			if (*(unsigned short*) (ent + 0x27) == g_774970) {
 				if (*(unsigned short*) (ent + 0x25) == g_774970)
 					goto build_other;

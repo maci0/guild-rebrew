@@ -47,7 +47,7 @@ extern int __cdecl fcn_00593110(void);
 extern int __cdecl fcn_005931a0(void);
 extern int __cdecl fcn_00593200(void);
 extern int __cdecl fcn_00593360(void);
-extern int __cdecl fcn_005934d0(void);
+extern int __cdecl d3_FlushLoadAndPreloadQueue(void);
 extern int __cdecl fcn_00593550(void);
 extern int __cdecl fcn_005936f0(int, int);
 extern int __cdecl d2_ChooseProfession(int);
@@ -170,7 +170,7 @@ int __cdecl fcn_005926f0(void)
 	fcn_005931a0();
 	fcn_00593110();
 	fcn_00593200();
-	fcn_005934d0();
+	d3_FlushLoadAndPreloadQueue();
 	fcn_00593360();
 	fcn_00593550();
 	fcn_004727a0(g_6a9b9c, 1);

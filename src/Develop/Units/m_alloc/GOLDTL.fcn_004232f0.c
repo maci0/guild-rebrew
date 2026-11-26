@@ -24,7 +24,7 @@ struct Bank {
 
 void __cdecl m_FreeTracked(int);
 char* __cdecl fcn_00422760(int, int*);
-void __cdecl fcn_004237f0(void*, int);
+void __cdecl sb_StopVoice(void*, int);
 
 /* ADDRESS: GOLDTL 0x004232f0 */
 void __cdecl fcn_004232f0(void)
@@ -52,7 +52,7 @@ void __cdecl fcn_004232f0(void)
 					idx = 0;
 					p = fcn_00422760((int) smp, &idx);
 					while (p != 0) {
-						fcn_004237f0(p, 0);
+						sb_StopVoice(p, 0);
 						idx++;
 						*(int*) (p + 4) = 0;
 						p = fcn_00422760((int) &bank->samples[i], &idx);

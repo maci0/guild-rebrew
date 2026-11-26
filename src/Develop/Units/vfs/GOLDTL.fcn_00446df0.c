@@ -24,7 +24,7 @@ extern char g_1041d80[];
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 int __cdecl fcn_004011d0(void* stream, void* dst);
-void __cdecl fcn_00401280(void* stream, void* dst);
+void __cdecl vfs_ReadVec3(void* stream, void* dst);
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 int __cdecl fcn_00446ca0(int);
 void __cdecl d3_SetFog(float, float, int);
@@ -58,15 +58,15 @@ void __cdecl fcn_00446df0(const char* name, void* stream)
 	if ((ver & 0xffff0000) == 0x3a6c0000 && ver >= 0x3a6c00b9) {
 		n = fcn_00446ca0(ver);
 		fcn_004011d0(s, &f);
-		fcn_00401280(s, &g_67bbdc);
-		fcn_00401280(s, &g_6b86c4);
+		vfs_ReadVec3(s, &g_67bbdc);
+		vfs_ReadVec3(s, &g_6b86c4);
 		fcn_004011f0(s, &color);
 		fcn_004011d0(s, &f);
 		fcn_004011d0(s, &g);
 		d3_SetFog(f, g, color);
 		for (i = 0; i < n; i++) {
-			fcn_00401280(s, &((D3_SCENE_SLOT*)g_1041d80)[i].a);
-			fcn_00401280(s, &((D3_SCENE_SLOT*)g_1041d80)[i].b);
+			vfs_ReadVec3(s, &((D3_SCENE_SLOT*)g_1041d80)[i].a);
+			vfs_ReadVec3(s, &((D3_SCENE_SLOT*)g_1041d80)[i].b);
 			for (k = 0; k < 6; k++) {
 				fcn_004011f0(s, &col);
 				((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].color = col;

@@ -4,7 +4,7 @@ extern unsigned short* g_772f24;
 
 char* __cdecl gm_FindEntityActiveItem(char* o);
 
-void __cdecl fcn_004c4670(int a, int b, int c, int* d);
+void __cdecl cm_AppendPacketFieldValue(int a, int b, int c, int* d);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004cf450(char* pos, int a, int b);
 
@@ -21,7 +21,7 @@ void __cdecl fcn_004d4e30(char* e)
 			int v = -1;
 
 			cm_BeginPacketFieldDelta(q, *(int*) (q + 2));
-			fcn_004c4670(4, 1, q - g_aed32c + 0x20, &v);
+			cm_AppendPacketFieldValue(4, 1, q - g_aed32c + 0x20, &v);
 			fcn_004c5360();
 		}
 	}

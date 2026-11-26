@@ -21,7 +21,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
-void __cdecl fcn_004c4670(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 char* __cdecl fcn_0050dc90(unsigned char*);
 char* __cdecl fcn_005049a0(unsigned char*);
@@ -73,7 +73,7 @@ void __cdecl fcn_0055fd10(char* u)
 			if (*(unsigned char*) (h + 0x1c) < a) {
 				cm_BeginPacketFieldDelta(h, *(int*) (h + 2));
 				off = h - g_aed32c + 0x1c;
-				fcn_004c4670(1, 1, off, &v);
+				cm_AppendPacketFieldValue(1, 1, off, &v);
 				fcn_004c5360();
 			}
 		} else if (*(int*) (u + 0xb4) > 0) {
@@ -81,7 +81,7 @@ void __cdecl fcn_0055fd10(char* u)
 			if (*(unsigned char*) (h + 0x1d) < b) {
 				cm_BeginPacketFieldDelta(h, *(int*) (h + 2));
 				off = h - g_aed32c + 0x1d;
-				fcn_004c4670(1, 1, off, &v);
+				cm_AppendPacketFieldValue(1, 1, off, &v);
 				fcn_004c5360();
 			}
 		}

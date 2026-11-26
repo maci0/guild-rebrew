@@ -8,7 +8,7 @@ extern unsigned int g_6624a0[];
 
 /* ADDRESS: GOLD 0x00401000 */
 /* ADDRESS: GOLDTL 0x00401000 */
-unsigned int __cdecl fcn_00401000(unsigned char* buf, unsigned int n)
+unsigned int __cdecl vfs_CalcCrc32(unsigned char* buf, unsigned int n)
 {
 	unsigned int crc;
 

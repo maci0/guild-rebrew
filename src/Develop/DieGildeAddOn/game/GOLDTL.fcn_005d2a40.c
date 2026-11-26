@@ -4,7 +4,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_00505e30(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
-int __cdecl fcn_004fa5b0(int, char*, int);
+int __cdecl gm_CheckPrivilege(int, char*, int);
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -73,7 +73,7 @@ int __cdecl fcn_005d2a40(int sourceId, int targetId)
 	for (i = 0; i < 5; i++) {
 		f8 = f8 + (float) (unsigned char) q[0x80 + i] * (1.0f / 252.0f);
 	}
-	if (fcn_004fa5b0(0x10, p, (int) buf) & 2) {
+	if (gm_CheckPrivilege(0x10, p, (int) buf) & 2) {
 		f8 = f8 * 0.5f;
 	}
 	return (int) MIN(15.0f, MAX(f8, 2.0f));

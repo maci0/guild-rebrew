@@ -5,7 +5,7 @@
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
-int __cdecl fcn_004adba0(void* stream)
+int __cdecl ls_LoadHighOfficeTargets(void* stream)
 {
 	if (!ls_ReadVfsDataChecked(&g_7728c0, 4, 1, stream)) {
 		g_7728d0 = g_7728cc = g_7728c4 = g_7728c8 = g_7728c0 = -1;

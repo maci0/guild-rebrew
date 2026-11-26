@@ -7,7 +7,7 @@ extern char g_6b6208[];
 
 /* ADDRESS: GOLD 0x00420780 */
 /* ADDRESS: GOLDTL 0x0041bd80 */
-void __cdecl fcn_0041bd80(char* p)
+void __cdecl d3_CopyOctreePalette(char* p)
 {
 	int i;
 

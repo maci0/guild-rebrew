@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-char* __cdecl fcn_00426240(char* o, const char* name)
+char* __cdecl evt_FindChildScript(char* o, const char* name)
 {
 	int i;
 	char** p;

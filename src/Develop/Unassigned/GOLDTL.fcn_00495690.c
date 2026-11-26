@@ -5,7 +5,7 @@ extern char* g_77261c;
 
 void __cdecl fcn_004c47e0(void*);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
-void __cdecl fcn_004c4670(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c53e0(void);
 void __cdecl fcn_004c4820(int, float);
@@ -38,7 +38,7 @@ int __cdecl fcn_00495690(int a0)
 				if (g_77261c && *(int*) (g_77261c + 4) == b->unk_210) {
 					*(unsigned char*) &a0 = 2;
 					cm_BeginPacketFieldDelta(b, b->entity_id);
-					fcn_004c4670(1, 1, 0x215, &a0);
+					cm_AppendPacketFieldValue(1, 1, 0x215, &a0);
 					fcn_004c5360();
 				}
 			} else {
@@ -46,7 +46,7 @@ int __cdecl fcn_00495690(int a0)
 				if (g_77261c && *(int*) (g_77261c + 4) == b->unk_210) {
 					*(unsigned char*) &a0 = 1;
 					cm_BeginPacketFieldDelta(b, b->entity_id);
-					fcn_004c4670(1, 1, 0x215, &a0);
+					cm_AppendPacketFieldValue(1, 1, 0x215, &a0);
 					fcn_004c5360();
 				}
 			}
@@ -58,7 +58,7 @@ int __cdecl fcn_00495690(int a0)
 	if (g_77261c && *(int*) (g_77261c + 4) == b->unk_210) {
 		*(unsigned char*) &a0 = 3;
 		cm_BeginPacketFieldDelta(b, b->entity_id);
-		fcn_004c4670(1, 1, 0x215, &a0);
+		cm_AppendPacketFieldValue(1, 1, 0x215, &a0);
 		fcn_004c5360();
 	}
 	return 0;

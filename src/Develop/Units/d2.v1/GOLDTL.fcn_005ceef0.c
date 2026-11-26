@@ -40,7 +40,7 @@ void __cdecl fcn_00472380(int a, int b, int c, int d);
 void __cdecl fcn_00472640(int a, int b);
 void __cdecl cm_BeginPacketFieldDelta(void* p, unsigned int value);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, unsigned int* value);
-void __cdecl fcn_004c4670(int a, int b, int off, void* value);
+void __cdecl cm_AppendPacketFieldValue(int a, int b, int off, void* value);
 void __cdecl fcn_004c5360(void);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
 void __cdecl fcn_00471e30(int a);
@@ -268,7 +268,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 			fcn_004c5360();
 			v18[0] = v15 - *(int*) ((char*) a0 + 0x39);
 			cm_BeginPacketFieldDelta(a1, *(unsigned int*) ((char*) a1 + 4));
-			fcn_004c4670(4, 1,
+			cm_AppendPacketFieldValue(4, 1,
 				(int) ((char*) a1 + 0x1b8 - g_aed32c), &v18[0]);
 			fcn_004c5360();
 			fcn_00471e30(v28);

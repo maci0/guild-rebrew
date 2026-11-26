@@ -43,7 +43,7 @@ void __cdecl fcn_004712d0(int, char*, char*);
 void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl d3_ApplyObjectAnimation(Model*, char*, int);
 void __cdecl fcn_00534c20(Book*);
-void* __cdecl fcn_004234e0(char*, const char*, int, int, int, int, int);
+void* __cdecl sb_PlayVoice(char*, const char*, int, int, int, int, int);
 
 int __cdecl fcn_00535270(Book* b, signed char dir)
 {
@@ -106,6 +106,6 @@ int __cdecl fcn_00535270(Book* b, signed char dir)
 	}
 	b->page += dir;
 	fcn_00534c20(b);
-	fcn_004234e0(((char*)g_7747c4), "Umblaettern_s", 1, 0x3f, 0x7f, 0, 0);
+	sb_PlayVoice(((char*)g_7747c4), "Umblaettern_s", 1, 0x3f, 0x7f, 0, 0);
 	return 1;
 }

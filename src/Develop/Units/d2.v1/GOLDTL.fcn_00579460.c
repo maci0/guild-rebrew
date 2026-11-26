@@ -21,8 +21,8 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
-void __cdecl fcn_00579410(char*, struct house*);
-void __cdecl fcn_00579390(char*, struct house*);
+void __cdecl he_DeclineDeathPactPayment(char*, struct house*);
+void __cdecl he_AcceptDeathPactPayment(char*, struct house*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -64,7 +64,7 @@ void __cdecl fcn_00579460(char* u)
 		break;
 	case 1:
 		if (fcn_00500cb0(&gm_GameTime, u + 0x52) > 0) {
-			fcn_00579410(p, &((struct house*)g_7f4ca0)[g_774970]);
+			he_DeclineDeathPactPayment(p, &((struct house*)g_7f4ca0)[g_774970]);
 			fcn_00545780(u);
 			he_FreeAction(u);
 			break;
@@ -77,13 +77,13 @@ void __cdecl fcn_00579460(char* u)
 			return;
 		}
 		if (g_100f1dc == 2) {
-			fcn_00579390(p, &((struct house*)g_7f4ca0)[g_774970]);
+			he_AcceptDeathPactPayment(p, &((struct house*)g_7f4ca0)[g_774970]);
 			fcn_00545780(u);
 			he_FreeAction(u);
 			return;
 		}
 		if (g_100f1dc == 1) {
-			fcn_00579410(p, &((struct house*)g_7f4ca0)[g_774970]);
+			he_DeclineDeathPactPayment(p, &((struct house*)g_7f4ca0)[g_774970]);
 			fcn_00545780(u);
 			he_FreeAction(u);
 		}

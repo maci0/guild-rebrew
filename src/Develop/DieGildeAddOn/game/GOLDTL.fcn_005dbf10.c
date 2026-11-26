@@ -52,7 +52,7 @@ char* __cdecl fcn_005c6220(int, int*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005dbf10(Ent* ent, Cmd* cmd)
+int __cdecl gm_UseSpecialObject(Ent* ent, Cmd* cmd)
 {
 	char one;
 	int result;

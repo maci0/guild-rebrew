@@ -22,7 +22,7 @@ typedef struct GOLDTL_TileMap {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004137e0(GOLDTL_TileMap* m, int* lo, int* hi, int x0, int x1,
+int __cdecl d3_ScanMapRowMinMax(GOLDTL_TileMap* m, int* lo, int* hi, int x0, int x1,
 	int y);
 
 /* ADDRESS: GOLDTL 0x00413870 */
@@ -109,18 +109,18 @@ int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d,
 			/* one row: a single span from the leftmost to the rightmost x */
 			left = (float) ((ax < bx ? ax : bx) < cx ? (ax < bx ? ax : bx) : cx);
 			right = (float) ((ax > bx ? ax : bx) > cx ? (ax > bx ? ax : bx) : cx);
-			hit = fcn_004137e0(map, (int*) &d, (int*) &e, (int) left, (int) right, ay);
+			hit = d3_ScanMapRowMinMax(map, (int*) &d, (int*) &e, (int) left, (int) right, ay);
 		} else {
 			/* flat top: advance each edge toward the bottom vertex */
 			left = (float) ax;
 			right = (float) bx;
-			hit = fcn_004137e0(map, (int*) &d, (int*) &e, (int) left, (int) right, ay);
+			hit = d3_ScanMapRowMinMax(map, (int*) &d, (int*) &e, (int) left, (int) right, ay);
 			slope_a = (float) ((double) (cx - ax) / (double) (cy - ay));
 			slope_b = (float) ((double) (cx - bx) / (double) (cy - by));
 			left += slope_a;
 			right += slope_b;
 			for (y = ay + 1; y <= cy; y++) {
-				hit &= fcn_004137e0(map, (int*) &d, (int*) &e, (int) left, (int) right, y);
+				hit &= d3_ScanMapRowMinMax(map, (int*) &d, (int*) &e, (int) left, (int) right, y);
 				left += slope_a;
 				right += slope_b;
 			}
@@ -133,14 +133,14 @@ int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d,
 		slope_b = (float) ((double) (bx - ax) / (double) (by - ay));
 		hit = 1;
 		for (y = ay; y <= by; y++) {
-			hit &= fcn_004137e0(map, (int*) &d, (int*) &e, (int) left, (int) right, y);
+			hit &= d3_ScanMapRowMinMax(map, (int*) &d, (int*) &e, (int) left, (int) right, y);
 			left += slope_a;
 			right += slope_b;
 		}
 		slope_b = (float) ((double) (cx - bx) / (double) (cy - by));
 		right = (float) bx - slope_b;
 		for (; y <= cy; y++) {
-			hit &= fcn_004137e0(map, (int*) &d, (int*) &e, (int) left, (int) right, y);
+			hit &= d3_ScanMapRowMinMax(map, (int*) &d, (int*) &e, (int) left, (int) right, y);
 			left += slope_a;
 			right += slope_b;
 		}

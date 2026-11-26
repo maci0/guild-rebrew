@@ -6,7 +6,7 @@ extern short g_14ce924;
 extern short g_14ce8c2;
 extern int g_14ce8e8;
 extern int g_6b5c88;
-void __cdecl fcn_00411f90(void);
+void __cdecl io_SwapMouseButtons(void);
 void __cdecl fcn_00411b80(void);
 
 typedef struct {
@@ -83,13 +83,13 @@ void __cdecl fcn_00411fe0(void)
 				if (g_14ce8e8 == 0) {
 					g_14ce920[6] = 1;
 				}
-				fcn_00411f90();
+				io_SwapMouseButtons();
 				fcn_00411b80();
 			}
 			if (!(v & 0x80)) {
 				g_14ce920[3] = 1;
 				g_14ce920[4] = 0;
-				fcn_00411f90();
+				io_SwapMouseButtons();
 				fcn_00411b80();
 			}
 			break;
@@ -99,13 +99,13 @@ void __cdecl fcn_00411fe0(void)
 				g_14ce920[9] = 1;
 				g_14ce920[8] = 0;
 				g_14ce920[11] = 1;
-				fcn_00411f90();
+				io_SwapMouseButtons();
 				fcn_00411b80();
 			}
 			if (!(v & 0x80)) {
 				g_14ce920[8] = 1;
 				g_14ce920[9] = 0;
-				fcn_00411f90();
+				io_SwapMouseButtons();
 				fcn_00411b80();
 			}
 			break;
@@ -115,13 +115,13 @@ void __cdecl fcn_00411fe0(void)
 				g_14ce920[13] = 1;
 				g_14ce920[12] = 0;
 				g_14ce920[15] = 1;
-				fcn_00411f90();
+				io_SwapMouseButtons();
 				fcn_00411b80();
 			}
 			if (!(v & 0x80)) {
 				g_14ce920[12] = 1;
 				g_14ce920[13] = 0;
-				fcn_00411f90();
+				io_SwapMouseButtons();
 				fcn_00411b80();
 			}
 			break;

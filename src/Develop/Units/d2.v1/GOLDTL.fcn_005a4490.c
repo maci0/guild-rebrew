@@ -34,7 +34,7 @@ void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ChooseNewLoan(char*);
-void __cdecl fcn_005a4360(char*, char*);
+void __cdecl d2_AcceptLoanOffer(char*, char*);
 
 /* Inferred name and source home; the native registry selects this callback. */
 /* ADDRESS: GOLDTL 0x005a4490 */
@@ -163,7 +163,7 @@ void __cdecl d2_ShowLoanDialog(char* p)
 			if (d2_CurrentElementId != first || first == -1) {
 				if (d2_CurrentElementId == second && second != -1) {
 					fcn_00471af0(dialog, 0);
-					fcn_005a4360(p, rows[*(int*) (slot * 0x8c + 0x102cbc8)].line);
+					d2_AcceptLoanOffer(p, rows[*(int*) (slot * 0x8c + 0x102cbc8)].line);
 					refresh = 1;
 					fcn_00471af0(dialog, 1);
 				}

@@ -20,7 +20,7 @@ typedef struct node99 {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004c41c0(node99* n)
+int __cdecl cm_IsQueuedCommandComplete(node99* n)
 {
 	node99* p;
 	node99* q;

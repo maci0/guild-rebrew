@@ -30,7 +30,7 @@ void __cdecl fcn_004c5530(char*);
 char* __cdecl fcn_005c6220(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005df6b0(char* e, char* request)
+int __cdecl gm_ObjSendTargetMsg0xa3(char* e, char* request)
 {
 	int out;
 	Req req;

@@ -26,7 +26,7 @@ extern char* __cdecl fcn_00404dc0(char*, char*, int);
 extern void __cdecl vfs_ToSlashes(char*);
 extern char* __cdecl ch_AdjustHeightToGround(char*);
 extern void __cdecl fcn_00402aa0(char*);
-extern void __cdecl fcn_004193f0(char*, char*, int, float);
+extern void __cdecl d3snd_PlayObjectSound(char*, char*, int, float);
 extern char* __cdecl fcn_00422460(int, char*);
 extern float __cdecl d3_ComputeYawToTarget(char*, float*);
 extern void __cdecl fcn_00438d70(char*, int, int, int);
@@ -210,7 +210,7 @@ void __cdecl fcn_0040aa00(char* obj)
 				r = fcn_00422460(g_6b5c2c, buf);
 			}
 			if (r != 0) {
-				fcn_004193f0(r, *(char**) (inst + 0x34), 0x28, 500.0f);
+				d3snd_PlayObjectSound(r, *(char**) (inst + 0x34), 0x28, 500.0f);
 				g_6b5c30++;
 			}
 			*(unsigned char*) (obj + 0x100) = *p;

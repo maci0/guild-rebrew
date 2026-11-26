@@ -8,10 +8,10 @@ typedef struct {
 } D3dCfg_437710;
 // SIZE 0x8
 
-int __cdecl fcn_004112b0(const char* sub, int mode);
+int __cdecl io_OpenRegistryKey(const char* sub, int mode);
 int __cdecl fcn_00411350(int h, const char* name);
 int __cdecl fcn_00411390(int h, const char* name, int* out);
-int __cdecl fcn_004113d0(int h, const char* name, char* out);
+int __cdecl io_ReadRegistryString(int h, const char* name, char* out);
 void __cdecl fcn_00410430(int h);
 int __cdecl _strcmpi(const char* a, const char* b);
 
@@ -50,7 +50,7 @@ char __cdecl fcn_00437710(D3dCfg_437710* cfg, const char* key, D3dCfg_437710* de
 			rep movsb
 		}
 	}
-	h = fcn_004112b0(key, 1);
+	h = io_OpenRegistryKey(key, 1);
 	if (h != -1) {
 		v = fcn_00411350(h, "d3d_registry_version");
 		if (v != 3) {
@@ -59,7 +59,7 @@ char __cdecl fcn_00437710(D3dCfg_437710* cfg, const char* key, D3dCfg_437710* de
 			if (fcn_00411390(h, "d3d_beautiful", &v) != 0) {
 				cfg->beautiful = v;
 			}
-			if (fcn_004113d0(h, "d3d_fillmode", mode) != 0) {
+			if (io_ReadRegistryString(h, "d3d_fillmode", mode) != 0) {
 				if (_strcmpi(mode, "D3DFILL_POINT") == 0) {
 					cfg->fill = 1;
 				} else if (_strcmpi(mode, "D3DFILL_WIREFRAME") == 0) {

@@ -50,18 +50,18 @@ int __cdecl fcn_00524b50(void* stream);
 int __cdecl fcn_00524fc0(void* stream);
 int __cdecl ls_LoadHistoryState(void* stream);
 int __cdecl fcn_005252d0(void* stream);
-int __cdecl fcn_005255b0(void* stream);
+int __cdecl ls_LoadTabAndWeatherState(void* stream);
 unsigned int __cdecl gm_RebuildLoadedReferences(void);
 int __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_00514f10(void);
 void __cdecl fcn_00514fc0(void);
 int __cdecl ls_LoadCharacter(void* stream);
 char* __cdecl gm_LookupEntityRecordById(int handle);
-int __cdecl fcn_004b6580(void* stream);
-int __cdecl fcn_00592370(void* stream);
+int __cdecl ls_LoadMissionJobs(void* stream);
+int __cdecl ls_LoadSlot779d00(void* stream);
 int __cdecl fcn_005b1ff0(void* stream);
-int __cdecl fcn_004edec0(void* stream);
-int __cdecl fcn_004adba0(void* stream, int version);
+int __cdecl ls_LoadAlchemyDrawSlots(void* stream);
+int __cdecl ls_LoadHighOfficeTargets(void* stream, int version);
 int __cdecl fcn_004c0840(int stream);
 void __cdecl d3_RefreshBuildingPennants(void);
 void __cdecl fcn_00516f60(void);
@@ -192,7 +192,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 		gm_RebuildLoadedReferences();
 		return 0;
 	}
-	if (ls_SaveVersion >= 0x1002e && fcn_005255b0(stream) == 0) {
+	if (ls_SaveVersion >= 0x1002e && ls_LoadTabAndWeatherState(stream) == 0) {
 		goto fail;
 	}
 	if (gm_RebuildLoadedReferences() == 0) {
@@ -209,13 +209,13 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	}
 	gm_RichterKatholisch = gm_LookupEntityRecordById((int) gm_RichterKatholisch);
 	gm_RichterEvangelisch = gm_LookupEntityRecordById((int) gm_RichterEvangelisch);
-	if (fcn_004b6580(stream) == 0) {
+	if (ls_LoadMissionJobs(stream) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (ls_SaveVersion >= 0x10029 && fcn_00592370(stream) == 0) {
+	if (ls_SaveVersion >= 0x10029 && ls_LoadSlot779d00(stream) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;
@@ -227,13 +227,13 @@ int __cdecl ls_LoadSavegame(char* cpath)
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (ls_SaveVersion >= 0x10049 && fcn_004edec0(stream) == 0) {
+	if (ls_SaveVersion >= 0x10049 && ls_LoadAlchemyDrawSlots(stream) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (ls_SaveVersion >= 0x10052 && fcn_004adba0(stream, ls_SaveVersion) == 0) {
+	if (ls_SaveVersion >= 0x10052 && ls_LoadHighOfficeTargets(stream, ls_SaveVersion) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;

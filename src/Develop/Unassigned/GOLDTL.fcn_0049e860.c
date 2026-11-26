@@ -1,4 +1,4 @@
-int __cdecl fcn_004ab0d0(char* e, char* a, char* b);
+int __cdecl ai_DispatchDunkleEcke(char* e, char* a, char* b);
 int __cdecl fcn_004ab3e0(char* e, char* a, char* b);
 void __cdecl fcn_004c5420(int id, int a2, int a3, int a4, int a5);
 
@@ -10,7 +10,7 @@ void __cdecl fcn_004c5420(int id, int a2, int a3, int a4, int a5);
 int __cdecl ai_RunDunkleEcke(char* e, char* a, char* b)
 {
 	if (a[0] == 4 && b[0] == 1) {
-		if (fcn_004ab0d0(e, a, b)) {
+		if (ai_DispatchDunkleEcke(e, a, b)) {
 			return 0x32;
 		}
 	} else if (a[0] == 0x13 && b[0] == 4) {

@@ -9,7 +9,7 @@ extern char g_7f4ca4[];
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
-void __cdecl fcn_005b2900(void* first, void* second, void* third)
+void __cdecl amt_NotifyOfficeSwap(void* first, void* second, void* third)
 {
 	if (*(char*) ((char*) second + 2) == 6) {
 		io_FormatTextBuffer(g_774a80, 0x1dcc, *(unsigned short*) first, *(unsigned short*) third);

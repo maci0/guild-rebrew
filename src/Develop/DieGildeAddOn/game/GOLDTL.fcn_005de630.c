@@ -40,7 +40,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005de630(ENTITY_RECORD* obj, int* arg)
+int __cdecl gm_ObjDisruptTargetRivals(ENTITY_RECORD* obj, int* arg)
 {
 	ENTITY_RECORD* picks[3];
 	Req req;

@@ -4,7 +4,7 @@ extern char g_6772c8[];
 
 #include <windows.h>
 
-void __cdecl fcn_00411780(int a1, int a2, char* fmt, ...)
+void __cdecl io_FormatInputError(int unused, int hr, char* fmt, ...)
 {
 	char buf[0x400];
 	char* s;
@@ -13,5 +13,5 @@ void __cdecl fcn_00411780(int a1, int a2, char* fmt, ...)
 	va_start(va, fmt);
 	s = buf;
 	s += wsprintfA(s, fmt, va);
-	wsprintfA(s, g_6772c8, a2);
+	wsprintfA(s, g_6772c8, hr);
 }

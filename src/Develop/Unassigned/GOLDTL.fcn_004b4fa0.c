@@ -5,7 +5,7 @@
 
 double __cdecl fcn_004fc460(float*);
 
-int __cdecl fcn_004b4fa0(void)
+int __cdecl gm_CheckCityStatThresholds(void)
 {
 	float buf[10];
 

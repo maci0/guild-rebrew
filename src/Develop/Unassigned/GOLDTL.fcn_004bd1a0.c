@@ -3,21 +3,21 @@ typedef struct {
 	unsigned char state;
 	char padE[0x6];
 	void* obj;
-} fcn_004bd1a0_entry;
+} SUBTREE_SLOT_ENTRY;
 // SIZE 0x18
 
 void __cdecl d3_SetSubtreeVisible(void*, int);
 
 
 /* ADDRESS: GOLDTL 0x004bd1a0 */
-void __cdecl fcn_004bd1a0(fcn_004bd1a0_entry* tab)
+void __cdecl d3_HideSubtreeEntries(SUBTREE_SLOT_ENTRY* slots)
 {
 	int i;
 
-	if (tab != 0) {
+	if (slots != 0) {
 		for (i = 0; i < 64; i++) {
-			if (tab[i].state != 0xff && tab[i].obj != 0)
-				d3_SetSubtreeVisible(tab[i].obj, 0);
+			if (slots[i].state != 0xff && slots[i].obj != 0)
+				d3_SetSubtreeVisible(slots[i].obj, 0);
 		}
 	}
 }

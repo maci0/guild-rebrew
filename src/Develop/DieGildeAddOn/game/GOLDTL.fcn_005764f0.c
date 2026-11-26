@@ -17,7 +17,7 @@ int __cdecl fcn_004ecf00(char*, int*, int*, int);
 void __cdecl sub_00576750(char*, char*, char*, int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_005764f0(char* e)
+void __cdecl he_RunAhmAction0x98(char* e)
 {
 	int a;
 	int b;

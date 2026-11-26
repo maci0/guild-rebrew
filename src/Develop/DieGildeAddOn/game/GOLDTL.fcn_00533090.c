@@ -37,10 +37,10 @@ extern int g_7747c8;
 extern unsigned char** g_7749e4;
 extern char g_7749e8;
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_004116d0(void);
+void __cdecl io_ClearInputState(void);
 void __cdecl fcn_005de62f(void);
 void __cdecl fcn_00412830(unsigned char mask);
-void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
+void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 void __cdecl fcn_00433780(void*);
 void __cdecl fcn_00438b40(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
@@ -75,7 +75,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 	d = 0;
 	if (g_14ce8e0 && (*(int*) (g_774650 * 8 + 0x7e35c0) != 0x59a340 || g_7746f0
 	    || g_7e2a9c || g_7ea360 || g_7e2aa0)) {
-		fcn_004234e0(g_7747b8, "MausclickRechts_s_01", 1, 0x3f, 0x7f, 0, 0);
+		sb_PlayVoice(g_7747b8, "MausclickRechts_s_01", 1, 0x3f, 0x7f, 0, 0);
 	}
 	if (g_7749e4) {
 		if (g_14ce8e0 == 0 && g_14cf950 != 0x1c) {
@@ -107,7 +107,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 			    && d2_CurrentElementId == *(int*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[*ip])) {
 				*(int*) (*(int*) (i * 0xc + 0x77e8c0) + 0x70) = -1;
 				g_7749e8 = 0;
-				fcn_004116d0();
+				io_ClearInputState();
 				break;
 			}
 			ip += 3;
@@ -124,7 +124,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 		}
 		if (g_7746c4 != 0) {
 			if (g_7746b8 && g_7746f0 == 0 && g_7746f4 == 0) {
-				fcn_004234e0((char*) g_7747c8, "RaumWechseln_s", 1, 0x3f, 0x7f, 0, 0);
+				sb_PlayVoice((char*) g_7747c8, "RaumWechseln_s", 1, 0x3f, 0x7f, 0, 0);
 				*(unsigned short*) (g_7746c4 + 0x29) = *(unsigned short*) g_7746b8;
 				g_774654 = (g_774650 - g_774658) + 1;
 				fcn_00438b40(d3_ActiveCamera, g_7e3a40);

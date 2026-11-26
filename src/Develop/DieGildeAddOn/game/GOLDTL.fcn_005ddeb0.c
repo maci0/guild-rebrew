@@ -12,16 +12,16 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_005b2350(char*, char*);
+void __cdecl he_NotifyAction0x35Blocked(char*, char*);
 void __cdecl fcn_004c5620(int, char*);
 
-int __cdecl fcn_005ddeb0(char* e)
+int __cdecl gm_ObjTriggerAction0x35(char* e)
 {
 	char* p;
 
 	for (p = he_StartHandlungSearch(1, 0, 0x35); p != 0; p = he_fn_Handlung()) {
 		if (*(int*) (e + 4) == *(int*) (p + 0xbc)) {
-			fcn_005b2350(e, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (p + 8)]));
+			he_NotifyAction0x35Blocked(e, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (p + 8)]));
 			*(Stamp*) (p + 0x52) = (*(Stamp*)&gm_GameTime);
 			fcn_004c5620(-1, p);
 		}

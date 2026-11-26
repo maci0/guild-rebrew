@@ -22,7 +22,7 @@ extern int g_67d8d0;
 int __cdecl fcn_0046aee0(int x, int y);
 void __cdecl fcn_004748b0(void);
 void __cdecl fcn_00473b10(void);
-void __cdecl fcn_004234e0(int handle, char* text, int a, int b, int c, int d, int e);
+void __cdecl sb_PlayVoice(int handle, char* text, int a, int b, int c, int d, int e);
 void __cdecl fcn_00472380(int object, int selected);
 void __cdecl fcn_0046e790(int index);
 
@@ -85,11 +85,11 @@ void __cdecl d2_ProcessMouseInput(void)
 					*(int*) (v4 + 0x38) = *(int*) (v4 + 0x38) ^ 1;
 					((D2_CONTROL_TL*) ((int) g_1015ea0))[d2_CurrentElementId].value_03c =
 						((D2_CONTROL_TL*) ((int) g_1015ea0))[d2_CurrentElementId].value_038;
-					fcn_004234e0(g_772578, g_67d908, 1, 0x3f, 0x7f, 0, 0);
+					sb_PlayVoice(g_772578, g_67d908, 1, 0x3f, 0x7f, 0, 0);
 				} else if (g_100f890 != 1) {
-					fcn_004234e0(g_772578, g_67d908, 1, 0x3f, 0x7f, 0, 0);
+					sb_PlayVoice(g_772578, g_67d908, 1, 0x3f, 0x7f, 0, 0);
 				} else {
-					fcn_004234e0(g_772578, (char*) 0x67d8f0, 1, 0x3f, 0x7f, 0, 0);
+					sb_PlayVoice(g_772578, (char*) 0x67d8f0, 1, 0x3f, 0x7f, 0, 0);
 				}
 				v7 = d2_CurrentElementId;
 				found = 0;

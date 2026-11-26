@@ -16,7 +16,7 @@ struct info_577940 {
 
 void __cdecl fcn_004f4830(int, struct info_577940*);
 
-int __cdecl fcn_00577940(int x)
+int __cdecl gm_FindMatchingLawEntry(int x)
 {
 	struct info_577940 info;
 	int y;

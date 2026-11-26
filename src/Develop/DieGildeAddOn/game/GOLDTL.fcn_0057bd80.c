@@ -20,7 +20,7 @@ void __cdecl fcn_0057bed0(ENTITY_RECORD*, char*, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
-void __cdecl fcn_0057bd80(char* u)
+void __cdecl he_RunAction0x9d(char* u)
 {
 	char* h2;
 	ENTITY_RECORD* h;

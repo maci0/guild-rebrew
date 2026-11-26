@@ -1,7 +1,7 @@
 #include <math.h>
 #include <string.h>
 
-extern int __cdecl fcn_00407d90(void *, char *);
+extern int __cdecl ch_FindNearbyWalkers(void *, char *);
 extern int __cdecl ch_ReplanBlockedPath(void *, int, char *);
 extern void __cdecl ch_FinishAni(void *);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
@@ -41,7 +41,7 @@ unsigned int __cdecl ch_UpdateWalkOnPath(int a0, int a1)
     if (*(int *)0x67a370 != *(int *)(character + 0x88) &&
         *(int *)(character + 0x88) != 0x10432c0)
         goto Lafter;
-    v8 = fcn_00407d90(character, buffer);
+    v8 = ch_FindNearbyWalkers(character, buffer);
     if (!v8)
         goto Lafter;
     v8 = ch_ReplanBlockedPath(character, v8, buffer);

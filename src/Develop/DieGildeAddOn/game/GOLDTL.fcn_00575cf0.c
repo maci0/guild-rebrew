@@ -14,7 +14,7 @@ void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl fcn_004c35f0(void);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00575cf0(char* u)
+void __cdecl he_StartAhmRefineRecipe(char* u)
 {
 	char* h;
 	char* p;

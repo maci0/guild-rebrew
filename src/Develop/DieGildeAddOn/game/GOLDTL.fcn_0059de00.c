@@ -29,7 +29,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_0059a0e0(void);
+void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl fcn_005c5b10(char*);
 void __cdecl d2_OpenTransportPanel(char*);
@@ -41,7 +41,7 @@ void __cdecl fcn_0059d630(char*);
 void __cdecl d2_SelectBriberyTarget(char*);
 void __cdecl fcn_0059dc50(char*);
 
-void __cdecl fcn_0059de00(char* e)
+void __cdecl d2_RunRaeuberInteriorHud(char* e)
 {
 	int a;
 	int b;
@@ -69,7 +69,7 @@ void __cdecl fcn_0059de00(char* e)
 	l = 0;
 	m = 0;
 	fcn_005338a0();
-	if (main_RunFrameLoop((void*) fcn_0059de00, 0x67fff) != 0) {
+	if (main_RunFrameLoop((void*) d2_RunRaeuberInteriorHud, 0x67fff) != 0) {
 		do {
 			if (g_7746d8 & 0x200) {
 				a = RegisterStatusText(s_6aa5ac, g_14ad118, 0xd);
@@ -91,7 +91,7 @@ void __cdecl fcn_0059de00(char* e)
 				i = RegisterStatusText(s_6aa3d0, g_14ad0e8, 0xe);
 				j = RegisterStatusText(s_6aa508, g_14ad100, 0x15);
 			}
-			fcn_0059a0e0();
+			d3_UpdateBuildingInteriorState();
 			if (g_7746a0 != 0) {
 				if (g_7746a0 == h) {
 					d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
@@ -124,6 +124,6 @@ void __cdecl fcn_0059de00(char* e)
 					fcn_0059dc50(e);
 				}
 			}
-		} while (main_RunFrameLoop((void*) fcn_0059de00, 0x67fff) != 0);
+		} while (main_RunFrameLoop((void*) d2_RunRaeuberInteriorHud, 0x67fff) != 0);
 	}
 }

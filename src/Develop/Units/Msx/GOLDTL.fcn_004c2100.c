@@ -27,7 +27,7 @@ extern char s_68a14c[];
 extern char s_68a130[];
 
 int __cdecl fcn_00500e20(int*);
-int __cdecl fcn_004c27f0(void);
+int __cdecl msx_FindActiveGroup(void);
 int __cdecl fcn_004c2820(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short __cdecl gm_RandomMod(int);
@@ -59,7 +59,7 @@ void __cdecl fcn_004c2100(void)
 	j = 0;
 	kind = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category;
 	cls = fcn_00500e20((int*) &gm_GameTime);
-	i = fcn_004c27f0();
+	i = msx_FindActiveGroup();
 	if (i >= 0) {
 		g_688118[i].active = j;
 		if (g_688118[i].ids[0] != 0x2694) {

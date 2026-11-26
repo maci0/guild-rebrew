@@ -19,7 +19,7 @@ int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl cm_BeginPacketFieldDelta(void *, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *);
-void __cdecl fcn_004c4670(int, int, int, void *);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, void *);
 void __cdecl fcn_004c5360(void);
 unsigned int __cdecl fcn_004a55c0(void *, unsigned int, unsigned int *, float, float, unsigned short *);
 int __cdecl srv_GetEntityOfficeSlot(void *, void *, void *);
@@ -146,7 +146,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		if (picked == -1)
 			return;
 		cm_BeginPacketFieldDelta(best, best->entity_id);
-		fcn_004c4670(1, 1, picked + 0x80, &delta);
+		cm_AppendPacketFieldValue(1, 1, picked + 0x80, &delta);
 		fcn_004c5360();
 		io_FormatTextBuffer(t1, 0x1dfe, best->entity_index, best->entity_index, picked + 0x16b7);
 	} else if (mode == 5) {

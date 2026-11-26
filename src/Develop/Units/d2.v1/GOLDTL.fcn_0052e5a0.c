@@ -31,7 +31,7 @@ extern int d2_CurrentWindowId;
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 int __cdecl fcn_0052dee0(int x, int y, int z);
-int __cdecl fcn_00508da0(unsigned char* s);
+int __cdecl gm_GetEntityMood(unsigned char* s);
 void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
 void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
@@ -59,7 +59,7 @@ void __cdecl d2_OpenBuildingInfoPanel(void)
 	if (*(unsigned short*) (g_7746c8 + 0x27) != g_774970) {
 		return;
 	}
-	pct = fcn_00508da0(g_7746c8);
+	pct = gm_GetEntityMood(g_7746c8);
 	g_6a25b8 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2f40);
 	d2_SetForm(g_6a25b8, 0);
 	d2_SetForm(g_6a25b8, 1);

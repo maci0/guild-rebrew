@@ -7,8 +7,8 @@ extern int __cdecl fcn_004f45b0(char*);
 extern int __cdecl gm_WalkEntityChain(int);
 extern int __cdecl fcn_0050b710(int, unsigned char);
 extern int __cdecl gm_RandomMod(int);
-extern void __cdecl fcn_00579390(char*, char*);
-extern void __cdecl fcn_00579410(char*, char*);
+extern void __cdecl he_AcceptDeathPactPayment(char*, char*);
+extern void __cdecl he_DeclineDeathPactPayment(char*, char*);
 extern void __cdecl fcn_004c5530(char*);
 extern void __cdecl he_FreeAction(char*);
 extern void __cdecl gm_AddTime(char*, int, int, int);
@@ -130,9 +130,9 @@ found_one:
 						req.c = *(int*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca4);
 						req.d = ref;
 						if ((unsigned short) gm_RandomMod(2) != 0)
-							fcn_00579390((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
+							he_AcceptDeathPactPayment((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
 						else
-							fcn_00579410((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
+							he_DeclineDeathPactPayment((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
 					}
 				}
 				idx = ++*(int*) (event + 0xb0);

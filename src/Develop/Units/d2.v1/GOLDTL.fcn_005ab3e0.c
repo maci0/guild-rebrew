@@ -21,11 +21,11 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_CheckEntityStock(char*, int, int);
 int __cdecl cm_BeginPacketFieldDelta(char*, int);
-void __cdecl fcn_004c4670(int, int, int, int*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c5150(int, int, int, int);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_005b2150(char*, char*, char*, int, int);
+void __cdecl he_NotifyAblassPurchase(char*, char*, char*, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00471e30(int);
@@ -92,7 +92,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 			&& gm_CheckEntityStock((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], cost, g_773d75) != 0) {
 			rec = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 			cm_BeginPacketFieldDelta(rec, *(int*) (rec + 4));
-			fcn_004c4670(4, 1, 0x1ac, &cost);
+			cm_AppendPacketFieldValue(4, 1, 0x1ac, &cost);
 			fcn_004c5360();
 			fcn_004f5e20(*(int*) (rec + 4), count);
 			if (*(unsigned short*) (churchBuilding + 0x27) != 0xffff
@@ -101,7 +101,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 				fcn_004c5150(-1, *(int*) (rec + 4), g_773d75, cost);
 				sel = fcn_004c5150(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(churchBuilding + 0x27)] + 4),
 					-1, g_773d75, val);
-				fcn_005b2150(rec, (char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(churchBuilding + 0x27)], churchBuilding, val, cost);
+				he_NotifyAblassPurchase(rec, (char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(churchBuilding + 0x27)], churchBuilding, val, cost);
 			} else {
 				sel = fcn_004c5150(-1, *(int*) (rec + 4), g_773d75, cost);
 			}

@@ -8,7 +8,7 @@
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CalculateGebaeudeValue(void*, int);
-void __cdecl fcn_004ae080(char*, char*, int*, int*);
+void __cdecl hst_SplitFormatPrefix(char*, char*, int*, int*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 /* The reference builds a frame (push ebp; mov ebp,esp; sub esp,0x204) and
@@ -73,7 +73,7 @@ int __cdecl hst_HandleBestesWirtshaus(int mode, int tbl, int idx, char* token_te
 		add ecx, ebx
 		rep stosb
 	}
-	fcn_004ae080(token_text, buf, &tbl, &idx);
+	hst_SplitFormatPrefix(token_text, buf, &tbl, &idx);
 	io_FormatTextBuffer((void*) text_out, (int) buf, entity);
 	return 1;
 }

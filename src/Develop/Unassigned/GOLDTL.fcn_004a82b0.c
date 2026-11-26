@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004a8070(int, int*, int*, int*, int*);
-int __cdecl fcn_004a77f0(int*, int);
+int __cdecl gm_GetHighestCard(int*, int);
 
 /* ADDRESS: GOLDTL 0x004a82b0 */
 int __cdecl fcn_004a82b0(void)
@@ -35,8 +35,8 @@ int __cdecl fcn_004a82b0(void)
 		sel = 0;
 	} else if (res[0] == 0) {
 		if (res[1] == 0) {
-			x = fcn_004a77f0((int*) (tbl + 0x40), 0);
-			y = fcn_004a77f0((int*) (tbl + 0xc), 0);
+			x = gm_GetHighestCard((int*) (tbl + 0x40), 0);
+			y = gm_GetHighestCard((int*) (tbl + 0xc), 0);
 			sel = y <= x;
 		} else {
 			sel = 1;
@@ -78,8 +78,8 @@ int __cdecl fcn_004a82b0(void)
 				sel = a[0] <= a[1];
 				break;
 			case 4:
-				x = fcn_004a77f0((int*) (tbl + 0x40), 0);
-				y = fcn_004a77f0((int*) (tbl + 0xc), 0);
+				x = gm_GetHighestCard((int*) (tbl + 0x40), 0);
+				y = gm_GetHighestCard((int*) (tbl + 0xc), 0);
 				sel = y <= x;
 				break;
 			case 6:
@@ -94,8 +94,8 @@ int __cdecl fcn_004a82b0(void)
 		return sel;
 	}
 	if (res[sel] == 0 && res[2] == 0) {
-		x = fcn_004a77f0((int*) (tbl + sel * 0x34 + 0xc), 0);
-		y = fcn_004a77f0((int*) (tbl + 0x40), 0);
+		x = gm_GetHighestCard((int*) (tbl + sel * 0x34 + 0xc), 0);
+		y = gm_GetHighestCard((int*) (tbl + 0x40), 0);
 		if (x > y) {
 			return sel;
 		}
@@ -162,8 +162,8 @@ int __cdecl fcn_004a82b0(void)
 		*(int*) (tbl + 0xbc) = res[sel];
 		return sel;
 	case 4:
-		x = fcn_004a77f0((int*) (tbl + sel * 0x34 + 0xc), 0);
-		y = fcn_004a77f0((int*) (tbl + 0x74), 0);
+		x = gm_GetHighestCard((int*) (tbl + sel * 0x34 + 0xc), 0);
+		y = gm_GetHighestCard((int*) (tbl + 0x74), 0);
 		if (x <= y) {
 			sel = 2;
 		}

@@ -37,10 +37,10 @@ int __cdecl d2_ShowTxt(int, int, char*, int);
 void __cdecl d2_SetElementValue(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_004bf000(unsigned short*, int, int, int, int, int, int, int*);
-void __cdecl fcn_004bf150(int*);
+void __cdecl d2_DestroyElementTriple(int*);
 void __cdecl fcn_004bf1a0(char*);
 int __cdecl fcn_004bd9b0(char*);
-int __cdecl fcn_004be340(char*);
+int __cdecl rt_CountRoutePoints(char*);
 void __cdecl fcn_004be360(void);
 void __cdecl fcn_004be380(void);
 void __cdecl fcn_004be3d0(int*, char*, int, int);
@@ -141,7 +141,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 			g_774654 = 1;
 		}
 		if (g_772908 != 0 && selB != -1
-			&& fcn_004be340((char*) g_772908) <= 1) {
+			&& rt_CountRoutePoints((char*) g_772908) <= 1) {
 			fcn_00472640(selB, 0);
 		}
 		else {
@@ -204,7 +204,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 					}
 					*cur = k;
 					if (n != k) {
-						fcn_004bf150(node);
+						d2_DestroyElementTriple(node);
 					}
 				}
 				else {

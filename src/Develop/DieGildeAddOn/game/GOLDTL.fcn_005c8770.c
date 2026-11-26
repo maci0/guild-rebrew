@@ -24,7 +24,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 
 void __cdecl fcn_0050c1b0(unsigned char*, int, int*);
-int __cdecl fcn_00508da0(unsigned char*);
+int __cdecl gm_GetEntityMood(unsigned char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -42,7 +42,7 @@ void __cdecl d2_ShowBuildingStatsDetail(unsigned char* a)
 	d2_SetForm(dlg, 1);
 	gm_GetBuildingTypeCategory(a[0]);
 	fcn_0050c1b0(a, g_774970, st);
-	io_AppendText(0xa3, fcn_00508da0(a));
+	io_AppendText(0xa3, gm_GetEntityMood(a));
 	if (st[0] != 0) {
 		io_AppendText(0xa4, st[0]);
 	}

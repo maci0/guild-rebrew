@@ -12,7 +12,7 @@ char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_004fa5b0(int, int, int);
+int __cdecl gm_CheckPrivilege(int, int, int);
 int __cdecl ai_StartKreditNehmen(int, char*, int, char*, int);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
 int __cdecl fcn_0050d320(char*, char);
@@ -76,13 +76,13 @@ int __cdecl fcn_00497990(int a1, char* entityRec, int phaseFlag, char* decisionM
 	return 0;
 found:
 	A = (int) (fcn_0050d320(entityRec, g_773d75) * g_664178);
-	r = fcn_004fa5b0(1, (int) entityRec, (int) buf);
+	r = gm_CheckPrivilege(1, (int) entityRec, (int) buf);
 	q[0] = (r == 2 || r == 4);
-	r = fcn_004fa5b0(5, (int) entityRec, (int) buf);
+	r = gm_CheckPrivilege(5, (int) entityRec, (int) buf);
 	q[1] = (r == 2 || r == 4);
-	r = fcn_004fa5b0(9, (int) entityRec, (int) buf);
+	r = gm_CheckPrivilege(9, (int) entityRec, (int) buf);
 	q[2] = (r == 2 || r == 4);
-	r = fcn_004fa5b0(0xc, (int) entityRec, (int) buf);
+	r = gm_CheckPrivilege(0xc, (int) entityRec, (int) buf);
 	q[3] = (r == 2 || r == 4);
 	t = (unsigned char*) *(int*) (entityRec + 0x170);
 	if (t != 0) {

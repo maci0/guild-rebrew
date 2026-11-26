@@ -14,7 +14,7 @@ extern ALCHEMY_DRAW_SLOT g_772f90[3];
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 void __cdecl fcn_004ecaa0(int v);
 
-int __cdecl fcn_004edec0(void* file)
+int __cdecl ls_LoadAlchemyDrawSlots(void* file)
 {
 	int i;
 

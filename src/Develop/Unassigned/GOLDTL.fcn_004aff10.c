@@ -15,7 +15,7 @@ extern char* gm_CityEntity;
 int __cdecl atoi(char*);
 void __cdecl fcn_004c5530(void*);
 
-int __cdecl fcn_004aff10(int a1, int a2, char* arg)
+int __cdecl hst_HandleFest(int sel, int id, char* arg)
 {
 	char m[0xf8];
 

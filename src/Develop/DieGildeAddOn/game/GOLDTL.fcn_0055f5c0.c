@@ -27,17 +27,17 @@ void __cdecl he_FreeAction(char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
-void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
+void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 void __cdecl fcn_00545c50(int);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
-void __cdecl fcn_004237f0(void*, int);
+void __cdecl sb_StopVoice(void*, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl cut_FindCutsceneById(int);
 int __cdecl cut_RemoveParticipant(int, int);
 void __cdecl fcn_004c5a20(int, int);
 int __cdecl fcn_00503fe0(int, int, int);
 void __cdecl fcn_00526920(char*, int, char*);
-void __cdecl fcn_004116d0(void);
+void __cdecl io_ClearInputState(void);
 void __cdecl fcn_00545780(char*);
 
 /* ADDRESS: GOLDTL 0x0055f590 */
@@ -120,7 +120,7 @@ done:
         fcn_004727a0(*(int*) (*(int*) (e + 0x74) + 8), 0);
         fcn_00519190(0x679060, *(int*) (e + 0x7c));
         if (g_774964 != 2)
-            fcn_004234e0(g_7747b8, "NeueMessage_s_01", 1, 0x3f, 0x7f, 0, 0);
+            sb_PlayVoice(g_7747b8, "NeueMessage_s_01", 1, 0x3f, 0x7f, 0, 0);
         if (*(unsigned char*) (e + 0xf0) & 8)
             fcn_00545c50(*(int*) (e + 0x74));
         if (*(unsigned char*) (e + 0xf0) & 0x10) {
@@ -214,7 +214,7 @@ body1:
                     }
                 }
                 if ((flags & 0x10) && *(int*) (e + 0xec) != 0) {
-                    fcn_004237f0(*(void**) (e + 0xec), 0);
+                    sb_StopVoice(*(void**) (e + 0xec), 0);
                     *(int*) (e + 0xec) = 0;
                 }
                 if (flags & 0x40) {
@@ -224,7 +224,7 @@ body1:
             }
             if (g_14ce8d8 != 0) {
                 g_6b5c8c = 1;
-                fcn_004116d0();
+                io_ClearInputState();
             }
             fcn_00545780(e);
             he_FreeAction(e);
@@ -246,7 +246,7 @@ exit_a:
                 fcn_00526920(rec, *(int*) (e + 0xb4), e + 0xbc);
             }
             if ((*(unsigned char*) (e + 0xf0) & 0x10) && *(int*) (e + 0xec) != 0) {
-                fcn_004237f0(*(void**) (e + 0xec), 0);
+                sb_StopVoice(*(void**) (e + 0xec), 0);
                 *(int*) (e + 0xec) = 0;
             }
             if (*(unsigned char*) (e + 0xf0) & 0x40) {
@@ -255,7 +255,7 @@ exit_a:
             }
             if (g_14ce8d8 != 0) {
                 g_6b5c8c = 1;
-                fcn_004116d0();
+                io_ClearInputState();
             }
             goto exit_b;
         }
@@ -271,7 +271,7 @@ exit_b:
     case -2:
     case -1:
         if ((*(unsigned char*) (e + 0xf0) & 0x10) && *(int*) (e + 0xec) != 0) {
-            fcn_004237f0(*(void**) (e + 0xec), 0);
+            sb_StopVoice(*(void**) (e + 0xec), 0);
             *(int*) (e + 0xec) = 0;
         }
         goto exit_clear;

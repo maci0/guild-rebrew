@@ -29,7 +29,7 @@ char* __cdecl fcn_004c4480(int);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
-void __cdecl fcn_004c4670(int, int, int, void*);
+void __cdecl cm_AppendPacketFieldValue(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 void __cdecl fcn_004c6190(char*, char);
@@ -144,7 +144,7 @@ void __cdecl fcn_005017a0(int player)
 					if (o != 0 && (int) *(unsigned char*) (o + 0x1c) < count) {
 						count -= *(unsigned char*) (o + 0x1c);
 						cm_BeginPacketFieldDelta(o, *(int*) (o + 2));
-						fcn_004c4670(1, 1, o - g_aed32c + 0x1c, &count);
+						cm_AppendPacketFieldValue(1, 1, o - g_aed32c + 0x1c, &count);
 						fcn_004c5360();
 					}
 				}

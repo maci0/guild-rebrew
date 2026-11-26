@@ -31,7 +31,7 @@ extern int g_14ce8e0;
 extern int g_774654;
 extern int g_666018, g_66601c;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-int __cdecl fcn_004c3030(int, int, char*, int);
+int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl fcn_005263d0(int, int, int);
 char* __cdecl fcn_005cd440(int*, int, int, void*);
 void __cdecl fcn_00532ef0(void);
@@ -71,7 +71,7 @@ void __cdecl fcn_005e5a50(char* entity)
 	int val;
 
 	if (*(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_flags & 0x10) {
-		fcn_004c3030(-7, 0, (char*) 0x6ad46c, -1);
+		d3snd_PlaySoundEffect(-7, 0, (char*) 0x6ad46c, -1);
 		fcn_005263d0(*(int*) 0x14b5a24, *(int*) 0x14b5a28, 0);
 		return;
 	}
@@ -136,7 +136,7 @@ void __cdecl fcn_005e5a50(char* entity)
 					fcn_004c5530(&pkt);
 					io_FormatTextBuffer(text, 0x41da, 0x41c1);
 					fcn_0064d41a(buf, (char*) 0x6ad454, val);
-					fcn_004c3030(-7, 0, buf, -1);
+					d3snd_PlaySoundEffect(-7, 0, buf, -1);
 					fcn_00526120(text, 0);
 					g_774654 = 1;
 				}

@@ -3,9 +3,9 @@
 
 #include <stdio.h>
 
-void __cdecl fcn_004238f0(char* o, int v);
+void __cdecl sb_SetVoiceLoopCount(char* o, int v);
 int __cdecl fcn_00423670(char* o, int a, int b);
-void __cdecl fcn_00423550(char* o);
+void __cdecl sb_ResumeOrStartVoice(char* o);
 
 void __cdecl d3snd_PlaySource(char* r, int a2, int a3, int a4)
 {
@@ -21,13 +21,13 @@ void __cdecl d3snd_PlaySource(char* r, int a2, int a3, int a4)
 	}
 	*(int*) (*(char**) (r + 0x34) + 0xc) = a3;
 	*(int*) (r + 0x44) = a3;
-	fcn_004238f0(*(char**) (r + 0x34), a3);
+	sb_SetVoiceLoopCount(*(char**) (r + 0x34), a3);
 	*(int*) (r + 0x4c) = a4;
 	if (*(int*) (r + 0x50) == 0) {
 		fcn_00423670(*(char**) (r + 0x34), a2, a4);
 		*(int*) (r + 0x3c) = 0;
 		return;
 	}
-	fcn_00423550(*(char**) (r + 0x34));
+	sb_ResumeOrStartVoice(*(char**) (r + 0x34));
 	*(int*) (r + 0x3c) = 0;
 }

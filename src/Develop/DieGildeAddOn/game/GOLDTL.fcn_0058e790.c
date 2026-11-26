@@ -32,7 +32,7 @@ extern float g_6628d8;
 extern float g_6628a0;
 extern float g_6628bc;
 
-int __cdecl fcn_004c2db0(int, int);
+int __cdecl d3snd_SelectVoiceCode(int, int);
 char* __cdecl d2_RunSeance(char*, char*);
 float __cdecl fcn_004f4770(char*);
 float __cdecl gm_RandomFloat01(void);
@@ -66,7 +66,7 @@ void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 
 	amt = 0;
 	mode = 0;
-	t = fcn_004c2db0(*(int*) (res + 0x14), *(int*) (res + 0x4c));
+	t = d3snd_SelectVoiceCode(*(int*) (res + 0x14), *(int*) (res + 0x4c));
 	m = d2_RunSeance(e, res);
 	f = fcn_004f4770(e);
 	if (gm_RandomFloat01() + f - 0.4f < 1.0f) {

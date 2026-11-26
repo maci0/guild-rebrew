@@ -3,16 +3,16 @@
 
 void* __cdecl fcn_00423460(void*);
 
-void* __cdecl fcn_004193d0(char* p)
+void* __cdecl d3snd_GetObjectVoiceStatus(char* sound_obj)
 {
-	void* q;
+	void* voice;
 
-	if (p == 0) {
+	if (sound_obj == 0) {
 		return 0;
 	}
-	q = *(void**) (p + 0x34);
-	if (q == 0) {
+	voice = *(void**) (sound_obj + 0x34);
+	if (voice == 0) {
 		return 0;
 	}
-	return fcn_00423460(q);
+	return fcn_00423460(voice);
 }

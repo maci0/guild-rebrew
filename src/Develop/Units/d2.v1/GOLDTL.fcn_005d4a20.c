@@ -49,7 +49,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_004fa5b0(int, char*, Query*);
+int __cdecl gm_CheckPrivilege(int, char*, Query*);
 void __cdecl d2_ShowPrivilegMessage(char*, int, int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_00471e30(int);
@@ -132,7 +132,7 @@ void __cdecl d2_ShowPrivilegien(void)
 				q.kind = 2;
 			}
 			for (i = 0; i < 0x3a; i++) {
-				r = fcn_004fa5b0(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
+				r = gm_CheckPrivilege(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
 				if (r != state[i]) {
 					changed = 1;
 				}
@@ -170,7 +170,7 @@ void __cdecl d2_ShowPrivilegien(void)
 				q.kind = mode == 2 ? 1 : 2;
 				for (i = 0; i < 0x3a; i++) {
 					keys[i] = -1;
-					r = fcn_004fa5b0(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
+					r = gm_CheckPrivilege(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
 					state[i] = r;
 					if (r == mode) {
 						if (count) {
@@ -212,7 +212,7 @@ void __cdecl d2_ShowPrivilegien(void)
 					if (d2_CurrentElementId == keys[i]) {
 						fcn_00471af0((int) dlg, 0);
 						q.kind = mode == 2 ? 3 : 4;
-						r = fcn_004fa5b0(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
+						r = gm_CheckPrivilege(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
 						if (r & 0x80) {
 							changed = 1;
 							state[i] = r & 0xa;

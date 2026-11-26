@@ -9,7 +9,7 @@ typedef struct {
 	int sub;
 } Entry;
 
-char* __cdecl fcn_004010b0(void*);
+char* __cdecl vfs_ReadConfigLine(void*);
 int __cdecl fcn_0044cd20(char*, Entry*, int);
 
 
@@ -26,7 +26,7 @@ void __cdecl fcn_0044cdb0(void* s, Entry* tbl, int arg, int user)
 	if (tbl[0].fn != 0) {
 		((Handler) tbl[0].fn)(s, user);
 	}
-	p = fcn_004010b0(s);
+	p = vfs_ReadConfigLine(s);
 	while (p != 0) {
 		if (p[0] == '}') {
 			if (tbl[1].fn != 0) {
@@ -49,7 +49,7 @@ void __cdecl fcn_0044cdb0(void* s, Entry* tbl, int arg, int user)
 		} else if (line[strlen(line) - 1] == '{') {
 			depth = 1;
 			do {
-				p = fcn_004010b0(s);
+				p = vfs_ReadConfigLine(s);
 				switch (p[strlen(p) - 1]) {
 				case '{':
 					depth++;
@@ -60,6 +60,6 @@ void __cdecl fcn_0044cdb0(void* s, Entry* tbl, int arg, int user)
 				}
 			} while (depth > 0);
 		}
-		p = fcn_004010b0(s);
+		p = vfs_ReadConfigLine(s);
 	}
 }

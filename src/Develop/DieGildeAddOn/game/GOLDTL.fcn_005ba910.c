@@ -63,7 +63,7 @@ void __cdecl fcn_00532ef0(void);
 float __cdecl fcn_0050bb50(int, int);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl ob_TransportFromLager(int, int, int, int, int, float, int, int);
-void __cdecl fcn_004116d0(void);
+void __cdecl io_ClearInputState(void);
 int __cdecl fcn_00526120(int, int);
 int __cdecl gm_CheckInventoryCapacity(char*, int, int);
 int __cdecl gm_AddTime(int, int, int, int);
@@ -73,7 +73,7 @@ int __cdecl fcn_004c51f0(int, int, int, int, int, int);
 int __cdecl fcn_004c5ba0(int, int, int, int);
 int __cdecl fcn_004c5530(int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
-int __cdecl fcn_004234e0(int, int, int, int, int, int, int);
+int __cdecl sb_PlayVoice(int, int, int, int, int, int, int);
 int __cdecl gm_CheckEntityStock(int, int, int);
 int __cdecl fcn_00471e30(int);
 void __cdecl fcn_005c61c0(void);
@@ -1221,7 +1221,7 @@ l_5bc632:
 		}
 		fcn_00472380(*(int*) idx, 0, 0, 0);
 	}
-	fcn_004116d0();
+	io_ClearInputState();
 	goto l_5bc1d7;
 
 l_5bc700:
@@ -1329,7 +1329,7 @@ l_5bc8d0:
 		             (int) (*(float*) &f.v28 * *(float*) &f.v64
 		                    - *(float*) &f.v28));
 		fcn_00533a40((int) (f.v210 + 0x238));
-		fcn_004234e0(0, 0x68aed0, 1, 0x3f, 0x7f, 0, 0);
+		sb_PlayVoice(0, 0x68aed0, 1, 0x3f, 0x7f, 0, 0);
 	}
 	if (idx > 0) {
 		fcn_00472380(*(int*) f.v30, 0, 0x64, 0);
@@ -1365,7 +1365,7 @@ l_5bcacf:
 			fcn_00472380(*(int*) idx, 0, 0, 0);
 		}
 	}
-	fcn_004116d0();
+	io_ClearInputState();
 	goto l_5bcd16;
 
 l_5bcb2a:
@@ -1439,7 +1439,7 @@ l_5bcc9f:
 			fcn_00472380(*(int*) idx, 0, 0, 0);
 		}
 	}
-	fcn_004116d0();
+	io_ClearInputState();
 	goto l_5bcd16;
 
 l_5bcd16:

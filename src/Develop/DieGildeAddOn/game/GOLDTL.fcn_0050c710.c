@@ -4,7 +4,7 @@
 extern unsigned char* lpGebaeudePROT;
 
 void* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
-int __cdecl fcn_00508da0(unsigned char* e);
+int __cdecl gm_GetEntityMood(unsigned char* e);
 
 int __cdecl gm_GetBuildingTechEffect(unsigned char* e, int kind, int flag)
 {
@@ -22,7 +22,7 @@ int __cdecl gm_GetBuildingTechEffect(unsigned char* e, int kind, int flag)
 		}
 	}
 	if (flag) {
-		return (int) (sum * (fcn_00508da0(e) * 0.01) + 0.5);
+		return (int) (sum * (gm_GetEntityMood(e) * 0.01) + 0.5);
 	}
 	return sum;
 }

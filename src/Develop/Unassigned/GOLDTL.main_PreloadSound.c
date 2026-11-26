@@ -7,7 +7,7 @@
 
 extern int g_7e1d60[0x80];
 
-int __cdecl fcn_004c3100(char*, int);
+int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 int __cdecl sb_LoadSampleBank(char*, int);
 
 int __cdecl main_PreloadSound(char* path)
@@ -43,7 +43,7 @@ int __cdecl main_PreloadSound(char* path)
 				*e = 0;
 				if (_strnicmp(s, "sprache\\", 8) == 0) {
 					e = strchr(s, '\\');
-					*slot = fcn_004c3100(e + 1, 0);
+					*slot = sb_LoadLocalizedSampleBank(e + 1, 0);
 				} else {
 					*slot = sb_LoadSampleBank(s, 0);
 				}

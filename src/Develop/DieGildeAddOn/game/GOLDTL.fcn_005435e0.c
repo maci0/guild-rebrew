@@ -55,7 +55,7 @@ void __cdecl fcn_004b3b60(void);
 void __cdecl fcn_004b39f0(void);
 #endif
 void __cdecl cm_BeginCommandSync(void);
-int __cdecl fcn_004c5040(int, int, int, unsigned char, int, unsigned char, unsigned char, char*, char*);
+int __cdecl cm_SendAllocClientSpieler(int, int, int, unsigned char, int, unsigned char, unsigned char, char*, char*);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_00535960(void);
@@ -84,7 +84,7 @@ void __cdecl gm_CreateSetupFamily(void)
 		return;
 	}
 	cm_BeginCommandSync();
-	h = fcn_004c5040(-1, -1, 0x10, (*(Setup*)g_7e23e0).look, (*(Setup*)g_7e23e0).face, (*(Setup*)g_7e23e0).hair, (*(Setup*)g_7e23e0).body,
+	h = cm_SendAllocClientSpieler(-1, -1, 0x10, (*(Setup*)g_7e23e0).look, (*(Setup*)g_7e23e0).face, (*(Setup*)g_7e23e0).hair, (*(Setup*)g_7e23e0).body,
 		(*(Setup*)g_7e23e0).name, (*(Setup*)g_7e23e0).family);
 	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {

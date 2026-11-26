@@ -4195,6 +4195,7 @@ int __cdecl gm_GetKindStatRange(int kind)
 	return 0;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 /* Client-only (TL 0x5079f0, discarded): 1 when the guild has a guild hall. */
 int __cdecl gm_HasGuildHall(int guild)
 {
@@ -4202,6 +4203,7 @@ int __cdecl gm_HasGuildHall(int guild)
 
 	return gm_GetGuildHall(guild) != 0;
 }
+#endif
 
 void __cdecl gm_RingGuildHallBell(int guild)
 {
@@ -5970,10 +5972,12 @@ int __cdecl gm_ListProductsAfter(unsigned char* building, unsigned short* key, i
 	return n;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl gm_GetEntityMood(char* entity)
 {
 	return (signed char) entity[0x5c];
 }
+#endif
 
 int __cdecl gm_ListGuildHouses(char* player, void** out)
 {

@@ -5,8 +5,8 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl fcn_00545780(char* a);
 void __cdecl he_FreeAction(char* a);
 int __cdecl fcn_00545670(char* a, int b, int c, char* d, int e);
-void __cdecl fcn_0057b070(char* a);
-void __cdecl fcn_0057b160(char* a);
+void __cdecl he_ApplyAction0x92Favor(char* a);
+void __cdecl he_RemoveAction0x92Favor(char* a);
 void __cdecl d2_CenterDialogWindows(int id);
 void __cdecl d2_SetForm(int a, int b);
 void __cdecl fcn_004c30a0(int a, int b, char* c, int d, int e);
@@ -38,7 +38,7 @@ void __cdecl fcn_0057b1f0(char* a)
 		if (*(int*) 0x100f1dc == -1)
 			return;
 		if (*(int*) 0x100f1dc == 2) {
-			fcn_0057b070(a);
+			he_ApplyAction0x92Favor(a);
 			fcn_00545780(a);
 			he_FreeAction(a);
 			return;
@@ -46,7 +46,7 @@ void __cdecl fcn_0057b1f0(char* a)
 		if (*(int*) 0x100f1dc != 1)
 			return;
 	activate:
-		fcn_0057b160(a);
+		he_RemoveAction0x92Favor(a);
 		fcn_00545780(a);
 		he_FreeAction(a);
 		return;

@@ -29,7 +29,7 @@ struct msg {
 
 
 
-int __cdecl fcn_00577ab0(ENTITY_RECORD*);
+int __cdecl he_HasNoActiveAction0x9b(ENTITY_RECORD*);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
@@ -37,7 +37,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 void __cdecl fcn_004c5530(struct msg*);
 
-int __cdecl fcn_00577af0(int id, ENTITY_RECORD* me)
+int __cdecl he_TryTriggerAction0x9b(int id, ENTITY_RECORD* me)
 {
 	float a;
 	float b;
@@ -46,7 +46,7 @@ int __cdecl fcn_00577af0(int id, ENTITY_RECORD* me)
 	char* e;
 	ENTITY_RECORD* h;
 
-	if (fcn_00577ab0(me) != 0) {
+	if (he_HasNoActiveAction0x9b(me) != 0) {
 		e = gm_StartFilteredEntitySearch(1, 1, id);
 		if (e != 0) {
 			h = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];

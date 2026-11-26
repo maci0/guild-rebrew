@@ -12,7 +12,7 @@ extern float g_6628a0;
 
 void __cdecl gm_SummarizeEntityOwnership(int, int, stat12*);
 
-int __cdecl fcn_004b4ad0(int key)
+int __cdecl gm_HasEntityTypes13AndOptionalOwnership(int key)
 {
 	stat12 s;
 

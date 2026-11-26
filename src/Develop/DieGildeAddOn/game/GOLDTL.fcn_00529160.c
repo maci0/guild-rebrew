@@ -15,7 +15,7 @@ extern char s_6a2e78[];
 extern void __cdecl fcn_00529000(int, char*);
 extern void __cdecl fcn_00529060(int, char*);
 extern void __cdecl gm_CountBuildingWorkers(char*);
-extern int __cdecl fcn_005241f0(char*);
+extern int __cdecl he_CountActionActors(char*);
 extern void __cdecl he_FreeAction(char*);
 extern int __cdecl fcn_004c5620(char, char*);
 extern void __cdecl cm_BeginPacketFieldDelta(char*, int);
@@ -144,13 +144,13 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		case 141:
 		case 143:
 			gm_CountBuildingWorkers((char*) old);
-			if (fcn_005241f0((char*) old) <= 0) {
+			if (he_CountActionActors((char*) old) <= 0) {
 				*(pos14_7f4c00*) (old + 0x52) = gm_GameTime;
 				fcn_004c5620(-1, (char*) old);
 			}
 			break;
 		case 40:
-			if (fcn_005241f0((char*) old) <= 0) {
+			if (he_CountActionActors((char*) old) <= 0) {
 				fcn_004c5620(-1, (char*) old);
 			}
 			break;

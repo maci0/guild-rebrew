@@ -10,7 +10,7 @@ char* __cdecl strcat(char*, const char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
-void __cdecl fcn_005b3000(char* recipient, unsigned char* entity, unsigned short* id, int includeDetails)
+void __cdecl he_NotifyHauchDesVerfalls(char* recipient, unsigned char* entity, unsigned short* id, int includeDetails)
 {
 	io_FormatTextBuffer(g_774a80, 0x40ad, 0x40a3, *(unsigned short*) entity, *(int*) (entity + 0x16c), *id);
 	if (includeDetails != 0) {

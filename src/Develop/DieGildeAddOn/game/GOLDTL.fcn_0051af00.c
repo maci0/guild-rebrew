@@ -81,7 +81,7 @@ int __cdecl fcn_0064d740(char*, char*, int);
 int __cdecl io_CopyTrailingDigits(char*, int, char*);
 int __cdecl fcn_0051e070(void);
 void __cdecl fcn_00500d60(void*, void*);
-int __cdecl fcn_004fe330(char*, int);
+int __cdecl gm_GetSeasonFromDate(char*, int);
 int __cdecl fcn_0050bc10(int, int, char*);
 int __cdecl fcn_00517c00(int, int, int, char*);
 int __cdecl fcn_00657a73(int, char*, int);
@@ -558,7 +558,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cursor += 4;
 			res = *(int*) (cursor - 4);
 			fcn_00500d60(fmt_scratch + 0xc, (void*) res);
-			res = fcn_004fe330(fmt_scratch + 0xc, *(short*) (fmt_scratch + 0xe));
+			res = gm_GetSeasonFromDate(fmt_scratch + 0xc, *(short*) (fmt_scratch + 0xe));
 			sprintf(text.tmp, g_6a2310, g_14a5450[res]);
 			cp_src = text.tmp;
 			cp_n = (int) strlen(cp_src);

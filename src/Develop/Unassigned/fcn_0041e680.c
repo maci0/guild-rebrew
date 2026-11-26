@@ -32,7 +32,7 @@ extern int g_14cc5bc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6b5c60[];
 
-LRESULT CALLBACK fcn_0041e530(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK VideoWindowProc(HWND, UINT, WPARAM, LPARAM);
 char* __cdecl AllocVideoListNode(void);
 void __cdecl ReleaseVideoInterfaces(char*);
 void __cdecl FreeVideoListNode(char*);
@@ -67,7 +67,7 @@ int __cdecl fcn_0041e680(char* name, void* hwnd, void* inst, int x, int y, int w
 			memset((char*) &wc + 4, 0, 0x2c);
 			wc.cbSize = 0x30;
 
-			wc.lpfnWndProc = fcn_0041e530;
+			wc.lpfnWndProc = VideoWindowProc;
 
 
 			wc.hInstance = (HINSTANCE) inst;
